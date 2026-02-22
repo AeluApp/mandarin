@@ -1,0 +1,45 @@
+{
+    "title": "Cultural debate",
+    "title_zh": "文化辩论",
+    "hsk_level": 6,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "At a cultural salon, you're debating whether traditional Chinese culture should be preserved as-is or must adapt to modern life.",
+        "setup_zh": "在一个文化沙龙上，你和别人辩论中国传统文化应该原样保留还是必须适应现代生活。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我认为传统文化是我们的根，应该尽量保留。现代化的变革虽然重要，但不能以牺牲传统价值观为代价。你怎么看？",
+                "text_pinyin": "wǒ rènwéi chuántǒng wénhuà shì wǒmen de gēn, yīnggāi jǐnliàng bǎoliú. xiàndàihuà de biàngé suīrán zhòngyào, dàn bù néng yǐ xīshēng chuántǒng jiàzhíguān wéi dàijià. nǐ zěnme kàn?",
+                "text_en": "I believe traditional culture is our root and should be preserved as much as possible. Although modernization is important, it shouldn't come at the cost of sacrificing traditional values. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the argument about tradition vs. modernity.",
+                "options": [
+                    {"text_zh": "我理解您的观点，传统确实是我们文化的根基。但我认为保留和变革并不矛盾。传统文化需要在现代社会中找到新的表达方式，这样才能保持活力。关键是在传统和现代之间找到平衡，而不是简单地对立。", "text_pinyin": "wǒ lǐjiě nín de guāndiǎn, chuántǒng quèshí shì wǒmen wénhuà de gēnjī. dàn wǒ rènwéi bǎoliú hé biàngé bìng bù máodùn. chuántǒng wénhuà xūyào zài xiàndài shèhuì zhōng zhǎodào xīn de biǎodá fāngshì, zhèyàng cái néng bǎochí huólì. guānjiàn shì zài chuántǒng hé xiàndài zhījiān zhǎodào pínghéng, ér bú shì jiǎndān de duìlì.", "text_en": "I understand your viewpoint — tradition is indeed the foundation of our culture. But I think preservation and reform are not contradictory. Traditional culture needs to find new forms of expression in modern society to stay vital. The key is finding a balance between tradition and modernity, rather than simply opposing them.", "score": 1.0, "register": "semi-formal", "feedback": "Sophisticated — acknowledges the other side, then reframes the 矛盾 as a false dichotomy. Uses 传统, 变革, 矛盾, 价值观, 平衡 with precision."},
+                    {"text_zh": "传统文化当然重要，但是时代在变，我们不能一直活在过去。有些传统已经不适合现代社会了。", "text_pinyin": "chuántǒng wénhuà dāngrán zhòngyào, dànshì shídài zài biàn, wǒmen bù néng yīzhí huó zài guòqù. yǒuxiē chuántǒng yǐjīng bù shìhé xiàndài shèhuì le.", "text_en": "Traditional culture is of course important, but times are changing — we can't always live in the past. Some traditions no longer suit modern society.", "score": 0.6, "register": "semi-formal", "feedback": "Valid stance but somewhat blunt. A stronger argument would address the 矛盾 directly and propose how 传统 and 现代 can coexist, rather than dismissing tradition."},
+                    {"text_zh": "我觉得都有道理，很难说谁对谁错。", "text_pinyin": "wǒ juéde dōu yǒu dàolǐ, hěn nán shuō shuí duì shuí cuò.", "text_en": "I think both sides make sense, it's hard to say who's right or wrong.", "score": 0.3, "register": "casual", "feedback": "Avoids taking a position. In a debate, you're expected to engage with the 矛盾 and articulate your own 价值观 — even a nuanced middle ground requires specific reasoning."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得有道理，但是现实中这种平衡很难实现。你能举个具体的例子，说明传统和现代怎样共存吗？",
+                "text_pinyin": "nǐ shuō de yǒu dàolǐ, dànshì xiànshí zhōng zhè zhǒng pínghéng hěn nán shíxiàn. nǐ néng jǔ gè jùtǐ de lìzi, shuōmíng chuántǒng hé xiàndài zěnyàng gòngcún ma?",
+                "text_en": "You make a good point, but in reality this balance is hard to achieve. Can you give a specific example of how tradition and modernity can coexist?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give a concrete example of tradition and modernity coexisting.",
+                "options": [
+                    {"text_zh": "比如中医就是一个很好的例子。传统中医的价值观和理论体系得到了保留，但同时也在借助现代科学的方法进行验证和改进。这种变革并没有否定传统，而是让传统在现代社会中发挥了新的作用。这就是我说的平衡。", "text_pinyin": "bǐrú zhōngyī jiùshì yī gè hěn hǎo de lìzi. chuántǒng zhōngyī de jiàzhíguān hé lǐlùn tǐxì dédào le bǎoliú, dàn tóngshí yě zài jièzhù xiàndài kēxué de fāngfǎ jìnxíng yànzhèng hé gǎijìn. zhè zhǒng biàngé bìng méiyǒu fǒudìng chuántǒng, ér shì ràng chuántǒng zài xiàndài shèhuì zhōng fāhuī le xīn de zuòyòng. zhè jiùshì wǒ shuō de pínghéng.", "text_en": "Traditional Chinese medicine is a great example. The values and theoretical system of TCM have been preserved, while also being verified and improved through modern scientific methods. This kind of reform hasn't negated tradition — it's allowed tradition to play a new role in modern society. That's the balance I'm talking about.", "score": 1.0, "register": "semi-formal", "feedback": "Excellent concrete example — connects 传统, 现代, 变革, 价值观, and 平衡 through the TCM case. Demonstrates advanced argumentative ability."},
+                    {"text_zh": "很多传统节日现在还在过，虽然方式变了，但是意义还在。这就是传统和现代的结合吧。", "text_pinyin": "hěn duō chuántǒng jiérì xiànzài hái zài guò, suīrán fāngshì biàn le, dànshì yìyì hái zài. zhè jiùshì chuántǒng hé xiàndài de jiéhé ba.", "text_en": "Many traditional festivals are still celebrated — though the way has changed, the meaning remains. That's a combination of tradition and modernity.", "score": 0.6, "register": "semi-formal", "feedback": "Decent example but underdeveloped. Explain how specifically the 变革 happened while 传统 价值观 were 保留 — the argument needs more depth."},
+                    {"text_zh": "这个例子不太好举，现实中矛盾太多了。", "text_pinyin": "zhège lìzi bú tài hǎo jǔ, xiànshí zhōng máodùn tài duō le.", "text_en": "It's hard to give an example — there are too many contradictions in reality.", "score": 0.2, "register": "casual", "feedback": "Avoids the challenge. In debate, providing concrete examples strengthens your credibility. Even an imperfect example shows you can apply abstract concepts like 平衡 to reality."}
+                ]
+            }
+        ],
+        "cultural_note": "The tension between 传统 and 现代 is a defining theme in contemporary Chinese intellectual discourse. Most educated Chinese hold nuanced views that seek 平衡 rather than choosing one extreme — understanding this middle-ground thinking is key to participating in cultural discussions."
+    }
+}

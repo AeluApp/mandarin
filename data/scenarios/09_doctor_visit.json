@@ -1,0 +1,45 @@
+{
+    "title": "Doctor visit",
+    "title_zh": "看医生",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're not feeling well and visit a clinic.",
+        "setup_zh": "你不舒服，去诊所看医生。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，哪里不舒服？",
+                "text_pinyin": "nǐ hǎo, nǎlǐ bù shūfu?",
+                "text_en": "Hello, what's bothering you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your symptoms.",
+                "options": [
+                    {"text_zh": "我头疼，还有点儿发烧。", "text_pinyin": "wǒ tóuténg, hái yǒudiǎnr fāshāo.", "text_en": "I have a headache and a slight fever.", "score": 1.0, "register": "neutral", "feedback": "Clear symptom description — 头疼 and 发烧 are the key medical terms."},
+                    {"text_zh": "我嗓子疼，从昨天开始就不太舒服。", "text_pinyin": "wǒ sǎngzi téng, cóng zuótiān kāishǐ jiù bú tài shūfu.", "text_en": "My throat hurts, I haven't felt well since yesterday.", "score": 0.6, "register": "neutral", "feedback": "Specific symptom with timeline — good structure, but 头疼 and 发烧 are the key medical terms the doctor needs most."},
+                    {"text_zh": "我觉得可能是感冒了，有点不舒服。", "text_pinyin": "wǒ juéde kěnéng shì gǎnmào le, yǒudiǎn bù shūfu.", "text_en": "I think I might have a cold, feeling a bit off.", "score": 0.5, "register": "casual", "feedback": "Self-diagnosing is OK casually, but listing specific symptoms (头疼, 发烧, 嗓子疼) helps the doctor much more."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我先给你检查一下。",
+                "text_pinyin": "hǎo de, wǒ xiān gěi nǐ jiǎnchá yīxià.",
+                "text_en": "OK, let me examine you first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the result.",
+                "options": [
+                    {"text_zh": "检查结果怎么样？严重吗？", "text_pinyin": "jiǎnchá jiéguǒ zěnmeyàng? yánzhòng ma?", "text_en": "How are the results? Is it serious?", "score": 1.0, "register": "neutral", "feedback": "Perfect — direct and appropriate. 严重 shows you know the right word for 'serious'."},
+                    {"text_zh": "有没有什么大问题？需要吃药吗？", "text_pinyin": "yǒu méiyǒu shénme dà wèntí? xūyào chī yào ma?", "text_en": "Any big issues? Do I need medication?", "score": 0.6, "register": "neutral", "feedback": "Reasonable follow-up, but 检查结果怎么样 is more precise — ask about the results specifically."},
+                    {"text_zh": "应该没什么大事吧？", "text_pinyin": "yīnggāi méi shénme dàshì ba?", "text_en": "It shouldn't be anything serious, right?", "score": 0.4, "register": "casual", "feedback": "Seeking reassurance rather than information. Let the doctor give you the result with 检查结果怎么样."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese clinics, patients often describe symptoms directly (头疼, 发烧, 感冒) rather than asking the doctor to figure it out. Being specific helps and is expected."
+    }
+}

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mandarin"
+version = "0.1.0"
+description = "Personal Mandarin learning system — local-first, CLI-based, durable."
+requires-python = ">=3.9"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "flask>=3.0.0",
+    "flask-login>=0.6.3",
+    "flask-sock>=0.7.0",
+    "flask-wtf>=1.2.0",
+    "flask-limiter>=3.5.0",
+    "simple-websocket>=1.0.0",
+    "gunicorn>=22.0.0",
+    "gevent>=24.2.1",
+    "stripe>=7.0.0",
+    "sentry-sdk[flask]>=1.40.0",
+    "PyJWT>=2.8.0",
+    "pyotp>=2.9.0",
+]
+
+[project.optional-dependencies]
+audio = [
+    "sounddevice>=0.4.6",
+    "numpy>=1.24.0",
+]
+
+[project.scripts]
+mandarin = "mandarin.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mandarin*"]

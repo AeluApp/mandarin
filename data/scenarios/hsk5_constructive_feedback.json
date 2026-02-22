@@ -1,0 +1,60 @@
+{
+    "title": "Giving and receiving feedback",
+    "title_zh": "给予和接受反馈",
+    "hsk_level": 5,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're a senior team member and need to give feedback to a junior colleague whose presentation was below standard. The slides were disorganized, the data wasn't cited properly, and the delivery was too fast. You want to be constructive without discouraging them.",
+        "setup_zh": "你是团队的资深成员，需要给一位初级同事反馈——他的演示报告没达到标准。幻灯片缺乏条理，数据引用不规范，而且讲得太快了。你想提出建设性意见，但不打击他的积极性。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "王哥，您觉得我今天的演示报告做得怎么样？我自己觉得还行，但不太确定。",
+                "text_pinyin": "wáng gē, nín juéde wǒ jīntiān de yǎnshì bàogào zuò de zěnmeyàng? wǒ zìjǐ juéde hái xíng, dàn bú tài quèdìng.",
+                "text_en": "Wang-ge, how did you think my presentation went today? I thought it was OK, but I'm not sure."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Begin giving feedback -- start with something positive, then address the issues.",
+                "options": [
+                    {"text_zh": "小陈，首先要肯定的是你对这个话题做了不少研究，内容的深度是够的，能看出你花了时间准备。不过有几个方面如果调整一下，效果会好很多。我可以跟你具体说说吗？", "text_pinyin": "xiǎo chén, shǒuxiān yào kěndìng de shì nǐ duì zhège huàtí zuò le bùshǎo yánjiū, nèiróng de shēndù shì gòu de, néng kàn chū nǐ huā le shíjiān zhǔnbèi. búguò yǒu jǐ gè fāngmiàn rúguǒ tiáozhěng yīxià, xiàoguǒ huì hǎo hěn duō. wǒ kěyǐ gēn nǐ jùtǐ shuōshuō ma?", "text_en": "Xiao Chen, first I want to acknowledge that you did a lot of research on this topic -- the depth of content was sufficient, and I can see you put time into preparing. However, there are a few areas where adjustments would make a big difference. Can I go into specifics with you?", "score": 1.0, "register": "semi-formal", "feedback": "Classic feedback structure -- lead with genuine positives, signal that critical feedback is coming, and ask permission before diving in. This approach makes the recipient more receptive. 肯定, 深度, and 调整 are well-chosen."},
+                    {"text_zh": "还可以吧，不过有些地方需要改进。", "text_pinyin": "hái kěyǐ ba, búguò yǒuxiē dìfāng xūyào gǎijìn.", "text_en": "It was alright, but some things need improvement.", "score": 0.5, "register": "casual", "feedback": "Lukewarm and vague -- 还可以吧 sounds dismissive. Identifying what specifically was good before moving to improvements creates a more productive conversation."},
+                    {"text_zh": "说实话，问题不少。幻灯片太乱了，数据也没有出处。", "text_pinyin": "shuō shíhuà, wèntí bùshǎo. huàndēngpiàn tài luàn le, shùjù yě méiyǒu chūchù.", "text_en": "Honestly, there were quite a few problems. The slides were too messy, and the data had no sources.", "score": 0.3, "register": "blunt", "feedback": "Jumping straight to criticism without acknowledging effort is discouraging. Even valid feedback lands better when preceded by recognition of what they did well."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以，请说。我特别想知道怎么改进。",
+                "text_pinyin": "dāngrán kěyǐ, qǐng shuō. wǒ tèbié xiǎng zhīdào zěnme gǎijìn.",
+                "text_en": "Of course, please go ahead. I really want to know how to improve."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give specific feedback on the three main issues.",
+                "options": [
+                    {"text_zh": "好，我说三个方面。第一是幻灯片的结构。你的信息量很大，但逻辑线索不够清晰——听众很难跟上你从一个观点跳到另一个观点。建议每页幻灯片只讲一个核心要点，然后用过渡句把各个部分连接起来。第二是数据引用。你提到了好几组重要的数据，但没有标注来源。在专业场合，没有出处的数据会让人质疑可信度。以后每组数据都要注明出自哪份报告或者哪个数据库。第三是节奏。你讲得有点快，特别是后半段，可能是紧张了。下次可以在关键数据和结论的地方有意识地停顿一两秒，给听众消化的时间。", "text_pinyin": "hǎo, wǒ shuō sān gè fāngmiàn. dì yī shì huàndēngpiàn de jiégòu. nǐ de xìnxī liàng hěn dà, dàn luójì xiànsuǒ bú gòu qīngxī——tīngzhòng hěn nán gēn shàng nǐ cóng yī gè guāndiǎn tiào dào lìng yī gè guāndiǎn. jiànyì měi yè huàndēngpiàn zhǐ jiǎng yī gè héxīn yàodiǎn, ránhòu yòng guòdù jù bǎ gè gè bùfèn liánjiē qǐlái. dì èr shì shùjù yǐnyòng. nǐ tí dào le hǎo jǐ zǔ zhòngyào de shùjù, dàn méiyǒu biāozhù láiyuán. zài zhuānyè chǎnghé, méiyǒu chūchù de shùjù huì ràng rén zhìyí kěxìn dù. yǐhòu měi zǔ shùjù dōu yào zhùmíng chūzì nǎ fèn bàogào huòzhě nǎge shùjùkù. dì sān shì jiézòu. nǐ jiǎng de yǒudiǎn kuài, tèbié shì hòu bàn duàn, kěnéng shì jǐnzhāng le. xià cì kěyǐ zài guānjiàn shùjù hé jiélùn de dìfāng yǒu yìshí de tíngdùn yī liǎng miǎo, gěi tīngzhòng xiāohuà de shíjiān.", "text_en": "OK, three areas. First, slide structure. You had a lot of information, but the logical thread wasn't clear enough -- the audience had trouble following when you jumped from one point to another. I'd suggest each slide focus on just one core point, and use transition sentences to connect the sections. Second, data citations. You mentioned several important data sets but didn't mark the sources. In professional settings, unsourced data makes people question credibility. Going forward, annotate where each data set comes from -- which report or database. Third, pacing. You spoke a bit fast, especially in the second half, probably from nerves. Next time, try consciously pausing for a second or two at key data points and conclusions to give the audience time to absorb.", "score": 1.0, "register": "semi-formal", "feedback": "Structured, specific, and actionable -- each point identifies the problem, explains why it matters, and offers a concrete solution. Using 逻辑线索, 过渡句, 出处, 可信度, and 有意识地停顿 shows you can articulate professional feedback precisely."},
+                    {"text_zh": "幻灯片需要整理一下，数据要加上来源，讲的时候慢一点。", "text_pinyin": "huàndēngpiàn xūyào zhěnglǐ yīxià, shùjù yào jiā shang láiyuán, jiǎng de shíhou màn yīdiǎn.", "text_en": "The slides need organizing, data needs sources, and slow down when presenting.", "score": 0.5, "register": "casual", "feedback": "Identifies the three issues but gives no guidance on how to fix them. Effective feedback tells people not just what to change, but how and why."},
+                    {"text_zh": "主要就是幻灯片太乱了，需要重新做。其他的还行。", "text_pinyin": "zhǔyào jiùshì huàndēngpiàn tài luàn le, xūyào chóngxīn zuò. qítā de hái xíng.", "text_en": "Mainly the slides were too messy and need to be redone. The rest was OK.", "score": 0.3, "register": "casual", "feedback": "Only addresses one of three issues and dismisses the others. Incomplete feedback means the same problems will recur. If they asked for honest input, give it fully."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢您说得这么详细。我确实准备的时候没太注意结构的问题，总想着把所有内容都放上去。数据来源的事我以后一定注意。不过有一个问题——我不太确定什么样的过渡句比较自然。您能给我一个例子吗？",
+                "text_pinyin": "xièxie nín shuō de zhème xiángxì. wǒ quèshí zhǔnbèi de shíhou méi tài zhùyì jiégòu de wèntí, zǒng xiǎngzhe bǎ suǒyǒu nèiróng dōu fàng shàngqù. shùjù láiyuán de shì wǒ yǐhòu yīdìng zhùyì. búguò yǒu yī gè wèntí——wǒ bú tài quèdìng shénme yàng de guòdù jù bǐjiào zìrán. nín néng gěi wǒ yī gè lìzi ma?",
+                "text_en": "Thank you for being so detailed. I really didn't pay enough attention to structure during preparation -- I kept trying to fit everything in. I'll definitely be careful about data sources going forward. But one question -- I'm not sure what kind of transition sentences sound natural. Could you give me an example?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide an example and offer ongoing support.",
+                "options": [
+                    {"text_zh": "当然可以。比如你讲完市场数据以后要转到竞争分析，可以说'了解了市场的整体情况，接下来我们看看竞争格局'或者'以上是市场数据，下面我从竞争角度来分析'。这种句子让听众知道你要换话题了，不会觉得突然。你下次做报告之前，可以先把幻灯片发给我，我帮你看看结构和逻辑有没有问题。多练几次就会越来越自然的。", "text_pinyin": "dāngrán kěyǐ. bǐrú nǐ jiǎng wán shìchǎng shùjù yǐhòu yào zhuǎn dào jìngzhēng fēnxī, kěyǐ shuō 'liǎojiě le shìchǎng de zhěngtǐ qíngkuàng, jiēxiàlái wǒmen kànkan jìngzhēng géjú' huòzhě 'yǐshàng shì shìchǎng shùjù, xiàmiàn wǒ cóng jìngzhēng jiǎodù lái fēnxī'. zhè zhǒng jùzi ràng tīngzhòng zhīdào nǐ yào huàn huàtí le, bú huì juéde tūrán. nǐ xià cì zuò bàogào zhīqián, kěyǐ xiān bǎ huàndēngpiàn fā gěi wǒ, wǒ bāng nǐ kànkan jiégòu hé luójì yǒu méiyǒu wèntí. duō liàn jǐ cì jiù huì yuè lái yuè zìrán de.", "text_en": "Of course. For example, after presenting market data and transitioning to competitive analysis, you could say 'Now that we understand the overall market situation, let's look at the competitive landscape' or 'Above was the market data; now let me analyze from a competition perspective.' These sentences let the audience know you're changing topics so it doesn't feel abrupt. Before your next report, you can send me the slides first and I'll review the structure and logic. With more practice, it'll become more natural.", "score": 1.0, "register": "semi-formal", "feedback": "Goes above and beyond -- provides a concrete example in context, offers ongoing mentorship, and ends with encouragement. This kind of support builds both skills and confidence. 竞争格局, 整体情况, and offering to review future work shows genuine mentorship."},
+                    {"text_zh": "比如说'接下来我们看下一个部分'或者'然后是……'这样的话就行。网上有很多模板可以参考。", "text_pinyin": "bǐrú shuō 'jiēxiàlái wǒmen kàn xià yī gè bùfèn' huòzhě 'ránhòu shì……' zhèyàng de huà jiù xíng. wǎngshàng yǒu hěn duō múbǎn kěyǐ cānkǎo.", "text_en": "Something like 'next let's look at the next section' or 'and then...' would work. There are lots of templates online to reference.", "score": 0.5, "register": "casual", "feedback": "The examples are generic and don't demonstrate the kind of smooth transition you described. A specific, contextual example is more helpful than pointing to online templates."},
+                    {"text_zh": "这种东西你自己慢慢摸索就行了，做多了就会了。", "text_pinyin": "zhè zhǒng dōngxi nǐ zìjǐ mànmàn mōsuǒ jiù xíng le, zuò duō le jiù huì le.", "text_en": "You'll figure it out on your own with practice -- you'll get better with more experience.", "score": 0.3, "register": "casual", "feedback": "They specifically asked for an example because they couldn't figure it out alone. Declining to help when someone asks a specific question wastes the teaching moment."}
+                ]
+            }
+        ],
+        "cultural_note": "Giving feedback (反馈 fǎnkuì) in Chinese professional culture often follows an indirect approach. The 'sandwich' method -- positive, critical, positive -- is widely used, though in practice the key is leading with genuine acknowledgment before addressing problems. Using 如果调整一下 instead of 你做错了 softens the critique. Offering to help (下次发给我看看) builds a mentorship relationship (师徒关系) that is valued in Chinese workplaces. The address form 哥/姐 (gē/jiě) between colleagues indicates friendly seniority."
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "title": "Chatting about weather",
+    "title_zh": "聊天气",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "You're waiting in line at a coffee shop and a stranger starts chatting about the weather.",
+        "setup_zh": "你在咖啡店排队，一个人开始和你聊天气。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天天气真好啊！",
+                "text_pinyin": "jīntiān tiānqì zhēn hǎo a!",
+                "text_en": "The weather is really nice today!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree and say something about the weather.",
+                "options": [
+                    {"text_zh": "是啊，今天很暖和，很舒服。", "text_pinyin": "shì a, jīntiān hěn nuǎnhuo, hěn shūfu.", "text_en": "Yes, it's warm today, very comfortable.", "score": 1.0, "register": "casual", "feedback": "Natural small talk — 是啊 shows agreement, and you add detail."},
+                    {"text_zh": "对啊，比昨天好多了吧。", "text_pinyin": "duì a, bǐ zuótiān hǎo duō le ba.", "text_en": "Yeah, much better than yesterday, right?", "score": 0.8, "register": "casual", "feedback": "Good conversational move — making a comparison keeps the chat going."},
+                    {"text_zh": "嗯，天气还可以，不冷不热。", "text_pinyin": "ēn, tiānqì hái kěyǐ, bù lěng bú rè.", "text_en": "Mm, the weather's alright, not cold not hot.", "score": 0.5, "register": "casual", "feedback": "还可以 is lukewarm — when someone says 真好, matching their energy is friendlier."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "听说明天要下雨了。",
+                "text_pinyin": "tīngshuō míngtiān yào xià yǔ le.",
+                "text_en": "I heard it's going to rain tomorrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the rain tomorrow.",
+                "options": [
+                    {"text_zh": "真的吗？那我要带伞出门了。", "text_pinyin": "zhēn de ma? nà wǒ yào dài sǎn chūmén le.", "text_en": "Really? Then I'll need to bring an umbrella.", "score": 1.0, "register": "casual", "feedback": "Engaging — 真的吗 shows interest, and the umbrella comment keeps the conversation flowing."},
+                    {"text_zh": "下雨也没关系，我喜欢下雨天。", "text_pinyin": "xià yǔ yě méi guānxi, wǒ xǐhuan xià yǔ tiān.", "text_en": "Rain is fine too, I like rainy days.", "score": 0.7, "register": "casual", "feedback": "Shows personality — a perfectly valid and friendly response."},
+                    {"text_zh": "哦，是吗？希望不会太大。", "text_pinyin": "ó, shì ma? xīwàng bú huì tài dà.", "text_en": "Oh, really? Hope it won't be too heavy.", "score": 0.6, "register": "casual", "feedback": "Reasonable but a bit passive — adding a personal reaction makes it warmer."}
+                ]
+            }
+        ],
+        "cultural_note": "Weather is a safe small-talk topic in China, just like in the West. 听说 (tīngshuō, 'I heard') is a very common way to share information without claiming certainty — it's softer than stating facts directly and is used constantly in daily conversation."
+    }
+}

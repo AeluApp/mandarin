@@ -1,0 +1,299 @@
+{
+  "source": "HSK 3.0 Standards (GF 0025-2021)",
+  "source_url": "http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202103/t20210329_523304.html",
+  "levels": {
+    "1": {
+      "vocab_count": 506,
+      "grammar": [
+        "Subject + 是 + Object",
+        "Subject + 很 + Adjective",
+        "不 negation",
+        "没 negation",
+        "的 possession/modification",
+        "了 perfective & change-of-state",
+        "吗 yes/no question",
+        "呢 follow-up question",
+        "Measure words (个/本/杯)",
+        "在 location"
+      ],
+      "skills": [
+        "ordering food",
+        "asking directions",
+        "making introductions",
+        "casual vs formal greeting",
+        "tone pair discrimination"
+      ],
+      "listening": {
+        "description": "Understand simple daily phrases and short sentences",
+        "accuracy_target": 0.6
+      },
+      "reading": {
+        "description": "Read simple sentences with known characters",
+        "accuracy_target": 0.65
+      },
+      "speaking": {
+        "description": "Say basic greetings and introduce self",
+        "required_from_level": 3
+      },
+      "writing": {
+        "description": "Write basic characters (not assessed in system)"
+      }
+    },
+    "2": {
+      "vocab_count": 1256,
+      "grammar": [
+        "过 experience",
+        "正在 ongoing action",
+        "比 comparison",
+        "要/想 want/plan",
+        "可以/能 ability/permission",
+        "得 complement degree",
+        "从...到 from...to",
+        "Time + 的时候"
+      ],
+      "skills": [
+        "shopping and bargaining",
+        "making plans",
+        "phone conversations",
+        "politeness softening",
+        "respectful address forms",
+        "deflecting compliments",
+        "third tone sandhi"
+      ],
+      "listening": {
+        "description": "Understand short conversations on familiar topics",
+        "accuracy_target": 0.7
+      },
+      "reading": {
+        "description": "Read short paragraphs with mostly known vocabulary",
+        "accuracy_target": 0.7
+      },
+      "speaking": {
+        "description": "Participate in simple conversations about daily life",
+        "required_from_level": 3
+      },
+      "writing": {
+        "description": "Write short messages and notes (not assessed in system)"
+      }
+    },
+    "3": {
+      "vocab_count": 2209,
+      "grammar": [
+        "把 disposal",
+        "被 passive",
+        "是...的 emphasis",
+        "越来越 increasingly",
+        "又...又 both...and",
+        "Result complement (到/完/好)",
+        "Direction complement (来/去/上/下)",
+        "除了...以外"
+      ],
+      "skills": [
+        "expressing complaints",
+        "gift-giving language"
+      ],
+      "listening": {
+        "description": "Understand conversations at near-normal speed on everyday topics",
+        "accuracy_target": 0.75
+      },
+      "reading": {
+        "description": "Read newspaper articles and short essays with some dictionary use",
+        "accuracy_target": 0.75
+      },
+      "speaking": {
+        "description": "Express opinions and describe experiences in connected sentences",
+        "required_from_level": 3
+      },
+      "writing": {
+        "description": "Write short essays on familiar topics (not assessed in system)"
+      }
+    },
+    "4": {
+      "vocab_count": 3181,
+      "grammar": [
+        "虽然...但是 although...but",
+        "不但...而且 not only...but also",
+        "如果...就 if...then",
+        "因为...所以 because...therefore",
+        "连...都/也 even",
+        "一边...一边 while simultaneously",
+        "对...来说 for/regarding",
+        "既然...就 since...then"
+      ],
+      "skills": [
+        "job interviews",
+        "explaining reasons",
+        "news comprehension",
+        "formal requests"
+      ],
+      "listening": {
+        "description": "Understand extended discourse on concrete and some abstract topics",
+        "accuracy_target": 0.75
+      },
+      "reading": {
+        "description": "Read articles on general topics with good comprehension",
+        "accuracy_target": 0.8
+      },
+      "speaking": {
+        "description": "Discuss a range of topics with some fluency",
+        "required_from_level": 4
+      },
+      "writing": {
+        "description": "Write structured paragraphs with clear organization (not assessed in system)"
+      }
+    },
+    "5": {
+      "vocab_count": 4240,
+      "grammar": [
+        "即使...也 even if...also",
+        "不管...都 regardless",
+        "与其...不如 rather than...better to",
+        "之所以...是因为 the reason...is because",
+        "以...为 take...as"
+      ],
+      "skills": [
+        "academic discussion",
+        "business negotiation",
+        "public speaking"
+      ],
+      "listening": {
+        "description": "Understand lectures and media on most topics",
+        "accuracy_target": 0.8
+      },
+      "reading": {
+        "description": "Read academic and professional texts",
+        "accuracy_target": 0.8
+      },
+      "speaking": {
+        "description": "Present arguments and negotiate in professional settings",
+        "required_from_level": 5
+      },
+      "writing": {
+        "description": "Write formal reports and analytical texts (not assessed in system)"
+      }
+    },
+    "6": {
+      "vocab_count": 5363,
+      "grammar": [
+        "何况 let alone",
+        "以至于 so much that",
+        "固然...但 admittedly...but",
+        "就...而言 as far as...concerned"
+      ],
+      "skills": [
+        "formal debate",
+        "diplomatic language",
+        "humor and irony"
+      ],
+      "listening": {
+        "description": "Understand native speech in all contexts including nuance and humor",
+        "accuracy_target": 0.85
+      },
+      "reading": {
+        "description": "Read literature and specialized texts with near-native comprehension",
+        "accuracy_target": 0.85
+      },
+      "speaking": {
+        "description": "Communicate fluently and spontaneously in any situation",
+        "required_from_level": 6
+      },
+      "writing": {
+        "description": "Write complex texts with sophisticated style (not assessed in system)"
+      }
+    },
+    "7": {
+      "vocab_count": 7231,
+      "grammar": [
+        "不仅...反而 not only not...but instead",
+        "非但...反而 not only not...but on the contrary",
+        "无论如何 no matter what",
+        "至于 as for / regarding",
+        "从而 thereby / thus",
+        "以免 in order to avoid",
+        "尽管 despite / even though",
+        "况且 moreover / besides"
+      ],
+      "skills": [
+        "scholarly argumentation",
+        "rhetorical persuasion",
+        "technical explanation"
+      ],
+      "listening": {
+        "description": "Understand rapid native speech on specialized topics including implicit meaning",
+        "accuracy_target": 0.85
+      },
+      "reading": {
+        "description": "Read specialized academic and literary texts with full comprehension",
+        "accuracy_target": 0.9
+      },
+      "speaking": {
+        "description": "Present complex arguments with appropriate register and rhetorical structure",
+        "required_from_level": 7
+      },
+      "writing": {
+        "description": "Write research papers and formal analyses (not assessed in system)"
+      }
+    },
+    "8": {
+      "vocab_count": 9099,
+      "grammar": [
+        "倘若 if / supposing",
+        "纵然 even if / even though",
+        "鉴于 in view of / considering",
+        "有鉴于此 in light of this",
+        "不外乎 nothing more than",
+        "未免 rather / unavoidably"
+      ],
+      "skills": [
+        "literary analysis",
+        "cultural allusion comprehension",
+        "register switching"
+      ],
+      "listening": {
+        "description": "Understand all varieties of spoken Chinese including dialectal influence and archaic reference",
+        "accuracy_target": 0.9
+      },
+      "reading": {
+        "description": "Read classical-influenced texts, legal documents, and literary criticism",
+        "accuracy_target": 0.9
+      },
+      "speaking": {
+        "description": "Communicate with near-native precision including cultural allusion and stylistic nuance",
+        "required_from_level": 8
+      },
+      "writing": {
+        "description": "Write stylistically sophisticated texts across genres (not assessed in system)"
+      }
+    },
+    "9": {
+      "vocab_count": 10969,
+      "grammar": [
+        "岂非 isn't it / rhetorical question",
+        "莫非 could it be that",
+        "无非 nothing but / merely",
+        "诚然 admittedly / indeed",
+        "姑且 for the time being"
+      ],
+      "skills": [
+        "simultaneous interpretation register",
+        "classical Chinese recognition",
+        "cross-dialectal comprehension"
+      ],
+      "listening": {
+        "description": "Native-level comprehension across all registers, dialects, and historical periods",
+        "accuracy_target": 0.95
+      },
+      "reading": {
+        "description": "Read any Chinese text including classical Chinese, specialized jargon, and literary allusion",
+        "accuracy_target": 0.95
+      },
+      "speaking": {
+        "description": "Native-equivalent fluency with full command of register, allusion, and rhetorical devices",
+        "required_from_level": 9
+      },
+      "writing": {
+        "description": "Write at native-equivalent level across all genres and registers (not assessed in system)"
+      }
+    }
+  }
+}

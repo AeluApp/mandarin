@@ -1,0 +1,28 @@
+{
+  "name": "Mandarin",
+  "short_name": "Mandarin",
+  "description": "Patient Mandarin study. Honest data, no theatrics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2EBE0",
+  "theme_color": "#946070",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "/static/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

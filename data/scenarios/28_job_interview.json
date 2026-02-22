@@ -1,0 +1,45 @@
+{
+    "title": "Answering interview questions",
+    "title_zh": "面试回答",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're at a job interview for a marketing position at a Chinese company.",
+        "setup_zh": "你在一家中国公司面试市场营销的职位。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请先简单介绍一下你自己吧。",
+                "text_pinyin": "qǐng xiān jiǎndān jièshào yīxià nǐ zìjǐ ba.",
+                "text_en": "Please briefly introduce yourself first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give a brief self-introduction relevant to the job.",
+                "options": [
+                    {"text_zh": "你好，我叫杰森，我大学学的是市场营销，毕业后有三年工作经验。", "text_pinyin": "nǐ hǎo, wǒ jiào jiésēn, wǒ dàxué xué de shì shìchǎng yíngxiāo, bìyè hòu yǒu sān nián gōngzuò jīngyàn.", "text_en": "Hello, my name is Jason, I studied marketing in university, and I have three years of work experience after graduation.", "score": 1.0, "register": "neutral", "feedback": "Structured and relevant — name, education, experience. Hits the key points for a professional intro."},
+                    {"text_zh": "您好，我叫杰森，对市场营销很感兴趣，希望能在这里学到更多。", "text_pinyin": "nín hǎo, wǒ jiào jiésēn, duì shìchǎng yíngxiāo hěn gǎn xìngqù, xīwàng néng zài zhèlǐ xué dào gèng duō.", "text_en": "Hello, I'm Jason, I'm very interested in marketing and hope to learn more here.", "score": 0.7, "register": "neutral", "feedback": "Polite with 您 and shows enthusiasm, but lacks concrete experience — interviewers want specifics."},
+                    {"text_zh": "我是杰森，以前在一家广告公司工作过，做了不少项目。", "text_pinyin": "wǒ shì jiésēn, yǐqián zài yī jiā guǎnggào gōngsī gōngzuò guò, zuò le bù shǎo xiàngmù.", "text_en": "I'm Jason, I used to work at an advertising company, did quite a few projects.", "score": 0.6, "register": "casual", "feedback": "Has substance but skips the greeting — starting with 你好/您好 and structuring your answer shows professionalism."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很好。你觉得你最大的优点是什么？",
+                "text_pinyin": "hěn hǎo. nǐ juéde nǐ zuì dà de yōudiǎn shì shénme?",
+                "text_en": "Very good. What do you think is your greatest strength?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your greatest strength with an example.",
+                "options": [
+                    {"text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。", "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.", "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.", "score": 1.0, "register": "neutral", "feedback": "Concrete and believable — 认真 (diligent/serious) is highly valued in Chinese workplaces, and the example supports it."},
+                    {"text_zh": "我很喜欢学习新东西，适应能力也比较强。", "text_pinyin": "wǒ hěn xǐhuan xuéxí xīn dōngxi, shìyìng nénglì yě bǐjiào qiáng.", "text_en": "I really like learning new things, and my adaptability is fairly strong.", "score": 0.7, "register": "neutral", "feedback": "Good qualities but abstract — an example would make it more convincing."},
+                    {"text_zh": "我的团队合作能力不错，跟同事相处得很好。", "text_pinyin": "wǒ de tuánduì hézuò nénglì búcuò, gēn tóngshì xiāngchǔ de hěn hǎo.", "text_en": "My teamwork skills are good, I get along well with colleagues.", "score": 0.6, "register": "neutral", "feedback": "Relevant skill but vague — everyone claims teamwork. A specific example would stand out."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese job interviews, 认真 (rènzhēn, diligent/serious) and 踏实 (tāshi, down-to-earth/reliable) are among the most valued traits. Chinese interview culture tends to favor humility — using 比较 (bǐjiào, 'fairly/rather') softens self-praise. Saying 我最大的优点是... without hedging can sound arrogant."
+    }
+}

@@ -1,0 +1,192 @@
+{
+  "de": {
+    "label": "\u7684 / \u5730 / \u5f97",
+    "chars": [
+      {
+        "hanzi": "\u7684",
+        "pinyin": "de",
+        "role": "possessive/attributive marker",
+        "example": "\u6211\u7684\u4e66",
+        "example_en": "my book",
+        "rule": "Noun modifier + \u7684 + Noun"
+      },
+      {
+        "hanzi": "\u5730",
+        "pinyin": "de",
+        "role": "adverbial marker",
+        "example": "\u9ad8\u5174\u5730\u8bf4",
+        "example_en": "happily say",
+        "rule": "Adverb/adjective + \u5730 + Verb"
+      },
+      {
+        "hanzi": "\u5f97",
+        "pinyin": "de",
+        "role": "complement marker",
+        "example": "\u8dd1\u5f97\u5feb",
+        "example_en": "run fast",
+        "rule": "Verb + \u5f97 + complement (result/degree)"
+      }
+    ]
+  },
+  "ta": {
+    "label": "\u4ed6 / \u5979 / \u5b83",
+    "chars": [
+      {
+        "hanzi": "\u4ed6",
+        "pinyin": "t\u0101",
+        "role": "he (male person)",
+        "example": "\u4ed6\u662f\u8001\u5e08",
+        "example_en": "He is a teacher",
+        "rule": "\u4ebb(person) radical \u2014 default/male"
+      },
+      {
+        "hanzi": "\u5979",
+        "pinyin": "t\u0101",
+        "role": "she (female person)",
+        "example": "\u5979\u5f88\u6f02\u4eae",
+        "example_en": "She is pretty",
+        "rule": "\u5973 (woman) radical"
+      },
+      {
+        "hanzi": "\u5b83",
+        "pinyin": "t\u0101",
+        "role": "it (animal/thing)",
+        "example": "\u5b83\u662f\u4e00\u53ea\u732b",
+        "example_en": "It is a cat",
+        "rule": "\u5b80 (roof) radical \u2014 not a person"
+      }
+    ]
+  },
+  "zai": {
+    "label": "\u5728 / \u518d",
+    "chars": [
+      {
+        "hanzi": "\u5728",
+        "pinyin": "z\u00e0i",
+        "role": "at/in (location or ongoing)",
+        "example": "\u6211\u5728\u5bb6",
+        "example_en": "I'm at home",
+        "rule": "Location/state \u2014 where or when something IS"
+      },
+      {
+        "hanzi": "\u518d",
+        "pinyin": "z\u00e0i",
+        "role": "again / then (future repetition)",
+        "example": "\u518d\u89c1",
+        "example_en": "Goodbye (see you again)",
+        "rule": "Repetition/sequence \u2014 doing something AGAIN or NEXT"
+      }
+    ]
+  },
+  "zuo": {
+    "label": "\u505a / \u4f5c / \u5750 / \u5ea7",
+    "chars": [
+      {
+        "hanzi": "\u505a",
+        "pinyin": "zu\u00f2",
+        "role": "to do/make (concrete action)",
+        "example": "\u505a\u996d",
+        "example_en": "cook food",
+        "rule": "\u4ebb(person) \u2014 physical doing"
+      },
+      {
+        "hanzi": "\u4f5c",
+        "pinyin": "zu\u00f2",
+        "role": "to compose/create (abstract)",
+        "example": "\u4f5c\u6587",
+        "example_en": "write an essay",
+        "rule": "\u4ebb(person) \u2014 creative/intellectual work"
+      },
+      {
+        "hanzi": "\u5750",
+        "pinyin": "zu\u00f2",
+        "role": "to sit (verb)",
+        "example": "\u8bf7\u5750",
+        "example_en": "Please sit down",
+        "rule": "\u571f (earth) \u2014 the action of sitting"
+      },
+      {
+        "hanzi": "\u5ea7",
+        "pinyin": "zu\u00f2",
+        "role": "seat/measure word for buildings",
+        "example": "\u4e00\u5ea7\u5c71",
+        "example_en": "a mountain",
+        "rule": "\u5e7f (shelter) \u2014 the seat/place itself"
+      }
+    ]
+  },
+  "shi": {
+    "label": "\u662f / \u4e8b / \u5e02 / \u8bd5",
+    "chars": [
+      {
+        "hanzi": "\u662f",
+        "pinyin": "sh\u00ec",
+        "role": "to be (linking verb)",
+        "example": "\u4ed6\u662f\u5b66\u751f",
+        "example_en": "He is a student",
+        "rule": "Equative: A \u662f B"
+      },
+      {
+        "hanzi": "\u4e8b",
+        "pinyin": "sh\u00ec",
+        "role": "matter/thing/event",
+        "example": "\u4ec0\u4e48\u4e8b\uff1f",
+        "example_en": "What's the matter?",
+        "rule": "Abstract thing or event \u2014 \u4e8b\u60c5"
+      },
+      {
+        "hanzi": "\u5e02",
+        "pinyin": "sh\u00ec",
+        "role": "city/market",
+        "example": "\u57ce\u5e02",
+        "example_en": "city",
+        "rule": "\u5dfe (cloth) \u2014 marketplace"
+      },
+      {
+        "hanzi": "\u8bd5",
+        "pinyin": "sh\u00ec",
+        "role": "to try/test",
+        "example": "\u8bd5\u8bd5\u770b",
+        "example_en": "Give it a try",
+        "rule": "\u8ba0(speech) + \u5f0f \u2014 testing/attempting"
+      }
+    ]
+  },
+  "ji": {
+    "label": "\u51e0 / \u673a / \u9e21 / \u8bb0",
+    "chars": [
+      {
+        "hanzi": "\u51e0",
+        "pinyin": "j\u01d0",
+        "role": "how many / several",
+        "example": "\u51e0\u4e2a\u4eba\uff1f",
+        "example_en": "How many people?",
+        "rule": "Question word for small numbers"
+      },
+      {
+        "hanzi": "\u673a",
+        "pinyin": "j\u012b",
+        "role": "machine/opportunity",
+        "example": "\u624b\u673a",
+        "example_en": "mobile phone",
+        "rule": "\u6728 (wood) \u2014 device/mechanism"
+      },
+      {
+        "hanzi": "\u9e21",
+        "pinyin": "j\u012b",
+        "role": "chicken",
+        "example": "\u9e21\u86cb",
+        "example_en": "chicken egg",
+        "rule": "\u9e1f (bird) \u2014 the animal"
+      },
+      {
+        "hanzi": "\u8bb0",
+        "pinyin": "j\u00ec",
+        "role": "to remember/record",
+        "example": "\u8bb0\u4f4f",
+        "example_en": "remember",
+        "rule": "\u8ba0(speech) \u2014 verbal recording"
+      }
+    ]
+  }
+}

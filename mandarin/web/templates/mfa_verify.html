@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Factor Authentication — Mandarin</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-mark" aria-hidden="true">漫</div>
+        <div class="logo-text">Mandarin</div>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <ul class="flash-messages" role="alert" aria-live="assertive">
+        {% for category, message in messages %}
+        <li class="flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+
+      <p class="auth-mfa-prompt">Enter the code from your authenticator app, or use a backup code.</p>
+
+      <form class="auth-form" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="auth-field">
+          <label for="code">Authentication Code</label>
+          <input type="text" id="code" name="code" required autofocus autocomplete="one-time-code"
+                 inputmode="numeric" pattern="[a-zA-Z0-9]*" maxlength="8">
+        </div>
+        <button type="submit" class="auth-submit">Verify</button>
+      </form>
+
+      <div class="auth-links">
+        <p><a href="{{ url_for('auth.login') }}">Back to sign in</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

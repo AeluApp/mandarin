@@ -1,0 +1,158 @@
+[
+  {
+    "key": "first_steps",
+    "label": "You've started building a foundation in Mandarin.",
+    "requires": {"sessions": 1},
+    "phase": "foundation"
+  },
+  {
+    "key": "first_week",
+    "label": "You can recognize basic greetings and numbers.",
+    "requires": {"sessions": 3, "items_seen": 15},
+    "phase": "foundation"
+  },
+  {
+    "key": "early_vocab",
+    "label": "You can read and understand 50+ common words.",
+    "requires": {"items_seen": 50},
+    "phase": "foundation"
+  },
+  {
+    "key": "basic_intro",
+    "label": "You can introduce yourself in simple Chinese.",
+    "requires": {"hsk_stable": {"1": 25}},
+    "phase": "emerging"
+  },
+  {
+    "key": "order_food",
+    "label": "You can order food at a restaurant.",
+    "requires": {"hsk_stable": {"1": 40}, "lens_pct": {"food_social": 30}},
+    "phase": "emerging"
+  },
+  {
+    "key": "basic_directions",
+    "label": "You can ask for and follow simple directions.",
+    "requires": {"hsk_stable": {"1": 40}, "lens_pct": {"urban_texture": 30}},
+    "phase": "emerging"
+  },
+  {
+    "key": "numbers_money",
+    "label": "You can handle numbers, prices, and basic transactions.",
+    "requires": {"hsk_stable": {"1": 40}, "lens_pct": {"numbers_measure": 40}},
+    "phase": "emerging"
+  },
+  {
+    "key": "hsk1_solid",
+    "label": "You can navigate basic everyday exchanges in Chinese.",
+    "requires": {"hsk_stable": {"1": 70}},
+    "phase": "emerging"
+  },
+  {
+    "key": "daily_conversation",
+    "label": "You can have simple daily conversations.",
+    "requires": {"hsk_stable": {"1": 80, "2": 30}},
+    "phase": "growing"
+  },
+  {
+    "key": "make_plans",
+    "label": "You can make plans and discuss schedules.",
+    "requires": {"hsk_stable": {"2": 40}, "lens_pct": {"time_sequence": 40}},
+    "phase": "growing"
+  },
+  {
+    "key": "taxi_hotel",
+    "label": "You can handle taxis, hotels, and basic travel logistics.",
+    "requires": {"hsk_stable": {"2": 50}},
+    "phase": "growing"
+  },
+  {
+    "key": "hsk2_solid",
+    "label": "You can handle most routine social situations in Chinese.",
+    "requires": {"hsk_stable": {"1": 90, "2": 70}},
+    "phase": "growing"
+  },
+  {
+    "key": "express_opinions",
+    "label": "You can express opinions and explain your reasoning.",
+    "requires": {"hsk_stable": {"2": 80, "3": 30}},
+    "phase": "strengthening"
+  },
+  {
+    "key": "return_item",
+    "label": "You can handle complaints and resolve simple problems.",
+    "requires": {"hsk_stable": {"3": 40}},
+    "phase": "strengthening"
+  },
+  {
+    "key": "hsk3_solid",
+    "label": "You can navigate most everyday situations confidently.",
+    "requires": {"hsk_stable": {"1": 95, "2": 85, "3": 70}},
+    "phase": "strengthening"
+  },
+  {
+    "key": "discuss_opinions",
+    "label": "You can discuss opinions and abstract topics in Chinese.",
+    "requires": {"hsk_stable": {"3": 80, "4": 30}},
+    "phase": "intermediate"
+  },
+  {
+    "key": "handle_workplace",
+    "label": "You can handle basic workplace conversations.",
+    "requires": {"hsk_stable": {"4": 50}},
+    "phase": "intermediate"
+  },
+  {
+    "key": "hsk4_solid",
+    "label": "You can discuss most topics with sustained fluency.",
+    "requires": {"hsk_stable": {"3": 90, "4": 70}},
+    "phase": "intermediate"
+  },
+  {
+    "key": "academic_reading",
+    "label": "You can read academic articles with good comprehension.",
+    "requires": {"hsk_stable": {"4": 80, "5": 30}},
+    "phase": "advanced"
+  },
+  {
+    "key": "present_argue",
+    "label": "You can give presentations and argue positions in Chinese.",
+    "requires": {"hsk_stable": {"5": 50}},
+    "phase": "advanced"
+  },
+  {
+    "key": "hsk5_solid",
+    "label": "You can communicate effectively in professional settings.",
+    "requires": {"hsk_stable": {"4": 90, "5": 70}},
+    "phase": "advanced"
+  },
+  {
+    "key": "native_media",
+    "label": "You can understand native media including nuance and humor.",
+    "requires": {"hsk_stable": {"5": 85, "6": 40}},
+    "phase": "proficient"
+  },
+  {
+    "key": "hsk6_solid",
+    "label": "You can communicate fluently and spontaneously in any situation.",
+    "requires": {"hsk_stable": {"5": 90, "6": 70}},
+    "phase": "proficient"
+  },
+  {
+    "key": "advanced_discourse",
+    "label": "You can engage in advanced academic and professional discourse.",
+    "requires": {"hsk_stable": {"6": 85, "7": 40}},
+    "phase": "mastery"
+  },
+  {
+    "key": "cultural_fluency",
+    "label": "You can understand cultural allusion, sarcasm, and literary reference.",
+    "requires": {"hsk_stable": {"7": 70, "8": 30}},
+    "phase": "mastery"
+  },
+  {
+    "key": "near_native",
+    "label": "You have near-native comprehension across all domains.",
+    "requires": {"hsk_stable": {"8": 70, "9": 50}},
+    "phase": "mastery"
+  }
+]

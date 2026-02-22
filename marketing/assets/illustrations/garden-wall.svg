@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+  <!-- ground -->
+  <line x1="0" y1="54" x2="120" y2="54" stroke-width="0.5"/>
+  <!-- low wall -->
+  <line x1="10" y1="40" x2="110" y2="40" stroke-width="0.7"/>
+  <line x1="10" y1="40" x2="10" y2="54" stroke-width="0.5"/>
+  <line x1="110" y1="40" x2="110" y2="54" stroke-width="0.5"/>
+  <!-- branch extending over wall -->
+  <path d="M75 40 Q80 32 95 28 Q105 24 110 22" stroke-width="0.6"/>
+  <!-- fruit/flowers -->
+  <circle cx="88" cy="26" r="1.5" stroke-width="0.5"/>
+  <circle cx="98" cy="23" r="1.5" stroke-width="0.5"/>
+  <circle cx="80" cy="30" r="1.2" stroke-width="0.5"/>
+</svg>

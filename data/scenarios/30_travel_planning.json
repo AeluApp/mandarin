@@ -1,0 +1,45 @@
+{
+    "title": "Planning a trip with friends",
+    "title_zh": "和朋友计划旅行",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and two friends are planning a trip during the May holiday. You're meeting to decide on a destination.",
+        "setup_zh": "你和两个朋友在计划五一假期的旅行。你们在商量去哪里。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "五一放五天假，我们去哪里玩比较好？你有什么想法？",
+                "text_pinyin": "wǔyī fàng wǔ tiān jià, wǒmen qù nǎlǐ wán bǐjiào hǎo? nǐ yǒu shénme xiǎngfǎ?",
+                "text_en": "We have five days off for May Day. Where should we go? Do you have any ideas?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a destination and give your reasoning.",
+                "options": [
+                    {"text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。", "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.", "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.", "score": 1.0, "register": "casual", "feedback": "Well-reasoned suggestion — gives a destination and two practical reasons. Shows you've thought about it."},
+                    {"text_zh": "去海边怎么样？我们可以游泳和晒太阳。", "text_pinyin": "qù hǎibiān zěnmeyàng? wǒmen kěyǐ yóuyǒng hé shài tàiyáng.", "text_en": "How about the beach? We can swim and sunbathe.", "score": 0.7, "register": "casual", "feedback": "Fun suggestion but vague on location — which beach? China has a long coastline."},
+                    {"text_zh": "五一哪里都是人，不如在家附近玩玩算了。", "text_pinyin": "wǔyī nǎlǐ dōu shì rén, bùrú zài jiā fùjìn wánwan suàn le.", "text_en": "Everywhere is packed during May Day, why don't we just hang around near home.", "score": 0.5, "register": "casual", "feedback": "Realistic about crowds but deflating — your friends want to plan something exciting."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "云南是个好选择！但是机票会不会很贵？",
+                "text_pinyin": "yúnnán shì ge hǎo xuǎnzé! dànshì jīpiào huì bú huì hěn guì?",
+                "text_en": "Yunnan is a good choice! But won't the flights be expensive?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the cost concern and suggest a solution.",
+                "options": [
+                    {"text_zh": "我们可以坐高铁去，虽然时间长一点，但是便宜很多。", "text_pinyin": "wǒmen kěyǐ zuò gāotiě qù, suīrán shíjiān cháng yīdiǎn, dànshì piányi hěn duō.", "text_en": "We can take the high-speed train. It takes longer, but it's much cheaper.", "score": 1.0, "register": "casual", "feedback": "Practical alternative — 虽然...但是 shows you weighed the tradeoff. High-speed rail is a great option in China."},
+                    {"text_zh": "如果现在就订机票的话，应该还不会太贵。", "text_pinyin": "rúguǒ xiànzài jiù dìng jīpiào dehuà, yīnggāi hái bú huì tài guì.", "text_en": "If we book flights now, they shouldn't be too expensive yet.", "score": 0.7, "register": "casual", "feedback": "Valid point — early booking helps, though May Day flights tend to be pricey regardless."},
+                    {"text_zh": "我查一下机票价格，然后告诉你们。", "text_pinyin": "wǒ chá yīxià jīpiào jiàgé, ránhòu gàosu nǐmen.", "text_en": "Let me check flight prices and I'll let you know.", "score": 0.6, "register": "casual", "feedback": "Responsible, but doesn't address the concern in the moment — offering an alternative like trains keeps the planning moving."}
+                ]
+            }
+        ],
+        "cultural_note": "The May Day holiday (五一劳动节 Wǔyī Láodòng Jié) is one of China's 'Golden Week' holidays when hundreds of millions of people travel simultaneously. Popular destinations get extremely crowded (人山人海 rénshān rénhǎi, 'mountains of people, seas of people'). Savvy travelers book early or choose less mainstream destinations. 高铁 (gāotiě, high-speed rail) has transformed Chinese domestic travel."
+    }
+}

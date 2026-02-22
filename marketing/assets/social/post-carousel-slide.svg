@@ -1,0 +1,50 @@
+<!-- Post template: carousel-slide. Replace placeholder text before use. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect width="1080" height="1080" fill="#F2EBE0"/>
+
+  <!-- Faint watermark -->
+  <text x="540" y="580" text-anchor="middle"
+        font-family="'Noto Serif SC', 'Songti SC', serif"
+        font-size="480" fill="#2C2820" opacity="0.04">
+    明
+  </text>
+
+  <!-- Slide number — top left -->
+  <text x="80" y="100"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="20" fill="#2C2820" opacity="0.3" letter-spacing="2">
+    01
+  </text>
+
+  <!-- Main content area -->
+  <text x="540" y="380" text-anchor="middle"
+        font-family="'Noto Serif SC', 'Songti SC', serif"
+        font-size="72" fill="#946070" font-weight="600">
+    你好
+  </text>
+  <text x="540" y="450" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="24" fill="#2C2820" font-style="italic" opacity="0.7">
+    ni hao
+  </text>
+  <text x="540" y="540" text-anchor="middle"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="36" fill="#2C2820">
+    Hello
+  </text>
+  <text x="540" y="620" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.55">
+    Literally: "you good" — a statement, not a question.
+  </text>
+
+  <!-- Horizon divider near bottom -->
+  <line x1="240" y1="920" x2="840" y2="920" stroke="#2C2820" stroke-width="0.75" opacity="0.25"/>
+
+  <!-- Attribution -->
+  <text x="1020" y="1030" text-anchor="end"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.5" letter-spacing="1">
+    明 Ming
+  </text>
+</svg>

@@ -1,0 +1,45 @@
+{
+    "title": "Viewing an apartment",
+    "title_zh": "看房子",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're viewing an apartment with a landlord. The apartment is on the 6th floor with no elevator.",
+        "setup_zh": "你在跟房东看一套公寓。公寓在六楼，没有电梯。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这就是那套房子，两室一厅，家具都是新的。你觉得怎么样？",
+                "text_pinyin": "zhè jiù shì nà tào fángzi, liǎng shì yī tīng, jiājù dōu shì xīn de. nǐ juéde zěnmeyàng?",
+                "text_en": "This is the apartment, two bedrooms and a living room, all new furniture. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Comment on the apartment and ask about practical details.",
+                "options": [
+                    {"text_zh": "房子看起来不错，请问房租多少钱一个月？包不包水电费？", "text_pinyin": "fángzi kàn qǐlai búcuò, qǐngwèn fángzū duōshao qián yī ge yuè? bāo bù bāo shuǐdiànfèi?", "text_en": "The apartment looks nice. How much is the rent per month? Are utilities included?", "score": 1.0, "register": "neutral", "feedback": "Practical and thorough — asking about rent and utilities upfront saves time later."},
+                    {"text_zh": "挺好的，位置也方便，就是没有电梯有点不方便。", "text_pinyin": "tǐng hǎo de, wèizhì yě fāngbiàn, jiùshì méiyǒu diàntī yǒudiǎn bù fāngbiàn.", "text_en": "Pretty good, the location is convenient, just no elevator is a bit inconvenient.", "score": 0.7, "register": "neutral", "feedback": "Honest observation — mentioning the elevator concern gives you leverage in rent negotiations later."},
+                    {"text_zh": "看起来还行，我可以再想想再决定吗？", "text_pinyin": "kàn qǐlai hái xíng, wǒ kěyǐ zài xiǎngxiang zài juédìng ma?", "text_en": "It looks alright, can I think about it before deciding?", "score": 0.5, "register": "neutral", "feedback": "Lukewarm — 还行 signals you're not impressed. Ask specific questions to make an informed decision."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "房租三千五一个月，不包水电。你要是能签一年的话，可以便宜两百。",
+                "text_pinyin": "fángzū sān qiān wǔ yī ge yuè, bù bāo shuǐdiàn. nǐ yàoshi néng qiān yī nián dehuà, kěyǐ piányi liǎng bǎi.",
+                "text_en": "Rent is 3,500 per month, utilities not included. If you can sign for a year, I can knock 200 off."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Negotiate or ask about the lease terms.",
+                "options": [
+                    {"text_zh": "三千三可以吗？没有电梯，六楼搬东西确实不太方便。", "text_pinyin": "sān qiān sān kěyǐ ma? méiyǒu diàntī, liù lóu bān dōngxi quèshí bú tài fāngbiàn.", "text_en": "How about 3,300? No elevator, and moving things to the 6th floor is really inconvenient.", "score": 1.0, "register": "neutral", "feedback": "Reasonable counter-offer with a legitimate reason — this is how negotiation works in Chinese rental markets."},
+                    {"text_zh": "好的，那签一年三千三，我下周可以搬进来吗？", "text_pinyin": "hǎo de, nà qiān yī nián sān qiān sān, wǒ xià zhōu kěyǐ bān jìnlái ma?", "text_en": "OK, so one-year lease at 3,300, can I move in next week?", "score": 0.7, "register": "neutral", "feedback": "Accepts the discount and moves forward — practical, though you could try to negotiate further."},
+                    {"text_zh": "能不能再便宜一点？我看了好几套房子了。", "text_pinyin": "néng bù néng zài piányi yīdiǎn? wǒ kàn le hǎo jǐ tào fángzi le.", "text_en": "Can it be a bit cheaper? I've looked at quite a few apartments.", "score": 0.6, "register": "neutral", "feedback": "Mentions competition, which is a negotiation tactic, but without a specific number the landlord has nothing to work with."}
+                ]
+            }
+        ],
+        "cultural_note": "Rent negotiation (砍价 kǎnjià) is normal and expected in Chinese apartment hunting. Landlords often quote higher than their bottom price. Mentioning legitimate downsides (no elevator, old building) is an accepted negotiation strategy — it's not considered complaining. Lease terms (合同 hétong) typically require 押一付三 (one month deposit, three months rent upfront)."
+    }
+}

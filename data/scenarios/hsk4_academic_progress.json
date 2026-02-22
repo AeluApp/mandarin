@@ -1,0 +1,60 @@
+{
+    "title": "Talking to a teacher about grades",
+    "title_zh": "和老师谈成绩",
+    "hsk_level": 4,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "Your midterm exam results were disappointing. You go to your teacher's office hours to discuss your grades and ask for advice on how to improve.",
+        "setup_zh": "你的期中考试成绩不太理想。你去老师的办公时间讨论成绩，并请教如何提高。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来吧，小李。坐。你是想聊期中考试的事吧？",
+                "text_pinyin": "jìnlái ba, xiǎo lǐ. zuò. nǐ shì xiǎng liáo qīzhōng kǎoshì de shì ba?",
+                "text_en": "Come in, Xiao Li. Sit down. You want to talk about the midterm, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Bring up your exam results and express your concern.",
+                "options": [
+                    {"text_zh": "王老师，是的。这次期中考试我只考了六十八分，比我预期的低很多。我考试之前复习了，但结果还是不理想。我想请教一下，您觉得我主要是哪方面的问题？", "text_pinyin": "wáng lǎoshī, shì de. zhè cì qīzhōng kǎoshì wǒ zhǐ kǎo le liùshíbā fēn, bǐ wǒ yùqī de dī hěn duō. wǒ kǎoshì zhīqián fùxí le, dàn jiéguǒ háishi bù lǐxiǎng. wǒ xiǎng qǐngjiào yīxià, nín juéde wǒ zhǔyào shì nǎ fāngmiàn de wèntí?", "text_en": "Teacher Wang, yes. I only scored 68 on this midterm, much lower than I expected. I reviewed before the exam, but the results were still not ideal. I'd like to ask your advice -- what do you think my main issues are?", "score": 1.0, "register": "semi-formal", "feedback": "Mature approach -- states the specific score, acknowledges preparation, and asks for targeted feedback. Using 请教 shows respect for the teacher's expertise."},
+                    {"text_zh": "老师，我这次考得不好，不知道为什么。", "text_pinyin": "lǎoshī, wǒ zhè cì kǎo de bù hǎo, bù zhīdào wèishénme.", "text_en": "Teacher, I didn't do well this time, I don't know why.", "score": 0.5, "register": "neutral", "feedback": "Honest but passive. Showing self-awareness about what went wrong before asking demonstrates more maturity. What specifically surprised you?"},
+                    {"text_zh": "老师，这次考试是不是太难了？好多同学都没考好。", "text_pinyin": "lǎoshī, zhè cì kǎoshì shì bú shì tài nán le? hǎo duō tóngxué dōu méi kǎo hǎo.", "text_en": "Teacher, wasn't this exam too hard? A lot of classmates didn't do well either.", "score": 0.2, "register": "casual", "feedback": "Blaming the exam difficulty shifts responsibility away from yourself. A teacher will respond better if you focus on your own performance first."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我看了你的试卷。你的阅读理解做得不错，但语法和写作部分丢了很多分。特别是作文，结构不太清楚，用的句型也比较简单。你平时是怎么学习的？",
+                "text_pinyin": "wǒ kàn le nǐ de shìjuàn. nǐ de yuèdú lǐjiě zuò de búcuò, dàn yǔfǎ hé xiězuò bùfèn diū le hěn duō fēn. tèbié shì zuòwén, jiégòu bú tài qīngchǔ, yòng de jùxíng yě bǐjiào jiǎndān. nǐ píngshí shì zěnme xuéxí de?",
+                "text_en": "I looked at your exam paper. Your reading comprehension was decent, but you lost a lot of points on grammar and writing. Especially the essay -- the structure wasn't clear and the sentence patterns were quite simple. How do you usually study?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your study habits and ask for specific advice.",
+                "options": [
+                    {"text_zh": "说实话，我平时主要是看课本和做练习题，但很少自己写东西。我知道写作是我的弱项。老师，您能不能推荐一些提高写作的方法？比如我是不是应该多读一些范文，或者每周写一篇短文给您看？", "text_pinyin": "shuō shíhuà, wǒ píngshí zhǔyào shì kàn kèběn hé zuò liànxí tí, dàn hěn shǎo zìjǐ xiě dōngxi. wǒ zhīdào xiězuò shì wǒ de ruòxiàng. lǎoshī, nín néng bù néng tuījiàn yīxiē tígāo xiězuò de fāngfǎ? bǐrú wǒ shì bú shì yīnggāi duō dú yīxiē fànwén, huòzhě měi zhōu xiě yī piān duǎnwén gěi nín kàn?", "text_en": "To be honest, I mainly read the textbook and do exercises, but rarely write on my own. I know writing is my weakness. Teacher, could you recommend some ways to improve my writing? Like should I read more model essays, or write a short piece weekly for you to review?", "score": 1.0, "register": "semi-formal", "feedback": "Self-aware and proactive -- identifies the gap in your method, acknowledges the weakness, and proposes concrete next steps. Asking for feedback on weekly writing shows initiative."},
+                    {"text_zh": "我每天都看书，但写作确实练得不多。老师有什么建议吗？", "text_pinyin": "wǒ měitiān dōu kàn shū, dàn xiězuò quèshí liàn de bù duō. lǎoshī yǒu shénme jiànyì ma?", "text_en": "I read every day, but I don't practice writing much. Do you have any suggestions?", "score": 0.6, "register": "neutral", "feedback": "Acknowledges the problem but puts all the burden on the teacher. Proposing your own plan first shows more engagement."},
+                    {"text_zh": "我觉得我已经很努力了，可能就是考试的时候太紧张了。", "text_pinyin": "wǒ juéde wǒ yǐjīng hěn nǔlì le, kěnéng jiùshì kǎoshì de shíhou tài jǐnzhāng le.", "text_en": "I feel like I already worked very hard, maybe I was just too nervous during the exam.", "score": 0.3, "register": "casual", "feedback": "Deflects the teacher's specific feedback. The teacher pinpointed grammar and writing -- nervousness doesn't explain structural issues in your essay. Address the specific weaknesses."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这两个方法都很好。另外，我建议你每次写完以后，先自己检查一遍语法错误，再交给我。这样你能慢慢培养自己改错的能力。期末考试还有两个月，如果你坚持练习，进步应该会很明显的。",
+                "text_pinyin": "zhè liǎng gè fāngfǎ dōu hěn hǎo. lìngwài, wǒ jiànyì nǐ měi cì xiě wán yǐhòu, xiān zìjǐ jiǎnchá yī biàn yǔfǎ cuòwù, zài jiāo gěi wǒ. zhèyàng nǐ néng mànmàn péiyǎng zìjǐ gǎi cuò de nénglì. qīmò kǎoshì hái yǒu liǎng gè yuè, rúguǒ nǐ jiānchí liànxí, jìnbù yīnggāi huì hěn míngxiǎn de.",
+                "text_en": "Both methods are great. Also, I suggest that after each writing, you first check for grammar errors yourself, then submit it to me. This way you'll gradually develop your self-editing ability. The final exam is still two months away -- if you keep practicing, your improvement should be quite noticeable."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank the teacher and commit to a plan.",
+                "options": [
+                    {"text_zh": "谢谢王老师，我会按照您说的方法去做。从这周开始，我每周写一篇短文，先自己检查，再给您看。如果遇到不明白的语法问题，可以发邮件问您吗？", "text_pinyin": "xièxie wáng lǎoshī, wǒ huì ànzhào nín shuō de fāngfǎ qù zuò. cóng zhè zhōu kāishǐ, wǒ měi zhōu xiě yī piān duǎnwén, xiān zìjǐ jiǎnchá, zài gěi nín kàn. rúguǒ yù dào bù míngbai de yǔfǎ wèntí, kěyǐ fā yóujiàn wèn nín ma?", "text_en": "Thank you Teacher Wang. I'll follow the methods you suggested. Starting this week, I'll write one short piece per week, check it myself first, then show you. If I run into grammar questions I don't understand, may I email you?", "score": 1.0, "register": "semi-formal", "feedback": "Committed and organized -- sets a concrete start date, restates the plan, and asks about communication channels. This shows the teacher their time was well spent."},
+                    {"text_zh": "好的，谢谢老师。我会多练习写作的。", "text_pinyin": "hǎo de, xièxie lǎoshī. wǒ huì duō liànxí xiězuò de.", "text_en": "OK, thank you teacher. I'll practice writing more.", "score": 0.6, "register": "neutral", "feedback": "Grateful but vague. When will you start? How often? Specific commitments are more convincing than general promises."},
+                    {"text_zh": "我尽量吧。最近其他课也挺忙的。", "text_pinyin": "wǒ jǐnliàng ba. zuìjìn qítā kè yě tǐng máng de.", "text_en": "I'll try. I've been pretty busy with other classes lately.", "score": 0.3, "register": "casual", "feedback": "Hedging with 尽量 after the teacher invested time in you feels dismissive. If you sought advice, show you'll act on it."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese educational culture, visiting a teacher during office hours (答疑时间 dáyí shíjiān) to discuss grades shows initiative and is well-received. Using 请教 (qǐngjiào) to ask for guidance conveys respect. Teachers in China are addressed by surname + 老师 (lǎoshī), and the relationship carries a mentorship dimension. Showing that you take their advice seriously -- by committing to a specific plan -- is valued more than abstract promises."
+    }
+}

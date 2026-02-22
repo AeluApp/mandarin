@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Mandarin</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  <style nonce="{{ csp_nonce }}">
+    .admin-page { max-width: 800px; margin: 0 auto; padding: var(--space-6); }
+    .admin-header { margin-bottom: var(--space-6); }
+    .admin-header h1 { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); }
+    .admin-section { margin-bottom: var(--space-6); }
+    .admin-section h2 { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); }
+    .metric-card { background: var(--color-surface); padding: var(--space-4); border-radius: 8px; text-align: center; }
+    .metric-value { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-accent); }
+    .metric-label { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin-top: var(--space-1); }
+    .admin-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: var(--text-sm); }
+    .admin-table th, .admin-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-divider); }
+    .admin-table th { color: var(--color-text-dim); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--text-xs); }
+    .admin-back { display: inline-block; margin-bottom: var(--space-4); color: var(--color-accent); text-decoration: none; font-family: var(--font-body); }
+  </style>
+  {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+</head>
+<body>
+  <div class="admin-page">
+    <a href="/" class="admin-back">&larr; Back to app</a>
+    <div class="admin-header">
+      <h1>Admin Dashboard</h1>
+    </div>
+
+    <div class="admin-section">
+      <h2>Metrics</h2>
+      <div class="metrics-grid" id="metrics-grid">Loading...</div>
+    </div>
+
+    <div class="admin-section">
+      <h2>Users</h2>
+      <div id="users-table">Loading...</div>
+    </div>
+
+    <div class="admin-section">
+      <h2>Feedback</h2>
+      <div id="feedback-table">Loading...</div>
+    </div>
+  </div>
+
+  <script>
+    fetch("/api/admin/metrics").then(function(r) { return r.json(); }).then(function(d) {
+      var html = '';
+      html += '<div class="metric-card"><div class="metric-value">' + d.total_signups + '</div><div class="metric-label">Total Signups</div></div>';
+      html += '<div class="metric-card"><div class="metric-value">' + d.active_users_7d + '</div><div class="metric-label">Active (7d)</div></div>';
+      html += '<div class="metric-card"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
+      var tiers = d.tier_distribution || {};
+      for (var t in tiers) {
+        html += '<div class="metric-card"><div class="metric-value">' + tiers[t] + '</div><div class="metric-label">' + t + '</div></div>';
+      }
+      document.getElementById("metrics-grid").innerHTML = html;
+    });
+
+    fetch("/api/admin/users").then(function(r) { return r.json(); }).then(function(d) {
+      var html = '<table class="admin-table"><thead><tr><th>Email</th><th>Name</th><th>Tier</th><th>Joined</th><th>Last Session</th></tr></thead><tbody>';
+      (d.users || []).forEach(function(u) {
+        html += '<tr><td>' + u.email + '</td><td>' + (u.display_name || '') + '</td><td>' + u.tier + '</td><td>' + (u.created_at || '').substring(0, 10) + '</td><td>' + (u.last_session || 'Never').substring(0, 10) + '</td></tr>';
+      });
+      html += '</tbody></table>';
+      document.getElementById("users-table").innerHTML = html;
+    });
+
+    fetch("/api/admin/feedback").then(function(r) { return r.json(); }).then(function(d) {
+      if (!d.feedback || d.feedback.length === 0) {
+        document.getElementById("feedback-table").innerHTML = '<p style="color:var(--color-text-dim)">No feedback yet.</p>';
+        return;
+      }
+      var html = '<table class="admin-table"><thead><tr><th>Rating</th><th>Comment</th><th>Type</th><th>Date</th></tr></thead><tbody>';
+      d.feedback.forEach(function(f) {
+        html += '<tr><td>' + f.rating + '</td><td>' + (f.comment || '') + '</td><td>' + f.type + '</td><td>' + (f.created_at || '').substring(0, 10) + '</td></tr>';
+      });
+      html += '</tbody></table>';
+      document.getElementById("feedback-table").innerHTML = html;
+    });
+  </script>
+</body>
+</html>

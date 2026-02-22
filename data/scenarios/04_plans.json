@@ -1,0 +1,45 @@
+{
+    "title": "Making plans with a friend",
+    "title_zh": "跟朋友约时间",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "Your friend wants to meet up this weekend.",
+        "setup_zh": "你的朋友想这个周末见面。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "周末有空吗？我们去吃饭吧。",
+                "text_pinyin": "zhōumò yǒu kòng ma? wǒmen qù chīfàn ba.",
+                "text_en": "Are you free this weekend? Let's go eat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say you're free on Saturday.",
+                "options": [
+                    {"text_zh": "好啊！星期六可以。", "text_pinyin": "hǎo a! xīngqī liù kěyǐ.", "text_en": "Sure! Saturday works.", "score": 1.0, "register": "casual", "feedback": "Natural and enthusiastic. 好啊 shows you're into it."},
+                    {"text_zh": "星期六有空。", "text_pinyin": "xīngqī liù yǒu kòng.", "text_en": "I'm free Saturday.", "score": 0.8, "register": "neutral", "feedback": "Clear, but 好啊 adds warmth."},
+                    {"text_zh": "可以。", "text_pinyin": "kěyǐ.", "text_en": "OK.", "score": 0.5, "register": "minimal", "feedback": "A bit flat for a friend. Add some enthusiasm!"}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！几点？你想吃什么？",
+                "text_pinyin": "tài hǎo le! jǐ diǎn? nǐ xiǎng chī shénme?",
+                "text_en": "Great! What time? What do you want to eat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest noon and let them choose the food.",
+                "options": [
+                    {"text_zh": "十二点吧。你想吃什么都行。", "text_pinyin": "shí'èr diǎn ba. nǐ xiǎng chī shénme dōu xíng.", "text_en": "How about noon. Whatever you want is fine.", "score": 1.0, "register": "casual", "feedback": "Perfect — suggests a time and is flexible on food. 都行 = 'anything's fine'."},
+                    {"text_zh": "中午见。随便吧。", "text_pinyin": "zhōngwǔ jiàn. suíbiàn ba.", "text_en": "See you at noon. Whatever.", "score": 0.7, "register": "casual", "feedback": "Works, but 随便 ('whatever') can sound uninterested. 都行 is warmer."},
+                    {"text_zh": "十二点。", "text_pinyin": "shí'èr diǎn.", "text_en": "Twelve o'clock.", "score": 0.6, "register": "minimal", "feedback": "Answers the time but ignores the food question."}
+                ]
+            }
+        ],
+        "cultural_note": "都行 (dōu xíng, 'anything works') is friendlier than 随便 (suíbiàn, 'whatever'). Chinese culture values showing flexibility while still being engaged in the decision."
+    }
+}

@@ -1,0 +1,40 @@
+<!-- Post template: stat. Replace placeholder text before use. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect width="1080" height="1080" fill="#F2EBE0"/>
+
+  <!-- Large stat number -->
+  <text x="540" y="420" text-anchor="middle"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="180" fill="#946070" font-weight="700">
+    299
+  </text>
+
+  <!-- Stat label -->
+  <text x="540" y="500" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="30" fill="#2C2820" letter-spacing="1">
+    hand-curated vocabulary items
+  </text>
+
+  <!-- Horizon divider -->
+  <line x1="240" y1="580" x2="840" y2="580" stroke="#2C2820" stroke-width="0.75" opacity="0.25"/>
+
+  <!-- Context line -->
+  <text x="540" y="650" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.55">
+    Each with context notes, tone data, and usage examples.
+  </text>
+  <text x="540" y="686" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.55">
+    No filler. No fluff. Just what matters.
+  </text>
+
+  <!-- Attribution -->
+  <text x="1020" y="1030" text-anchor="end"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.5" letter-spacing="1">
+    明 Ming
+  </text>
+</svg>

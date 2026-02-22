@@ -1,0 +1,45 @@
+{
+    "title": "News discussion",
+    "title_zh": "讨论新闻",
+    "hsk_level": 4,
+    "register": "informal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're chatting with a friend about a news story you both saw online.",
+        "setup_zh": "你和朋友聊你们在网上看到的一条新闻。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看了今天那条新闻吗？那个报道说很多年轻人不想结婚了，你觉得是什么原因？",
+                "text_pinyin": "nǐ kàn le jīntiān nà tiáo xīnwén ma? nàge bàodào shuō hěn duō niánqīngrén bù xiǎng jiéhūn le, nǐ juéde shì shénme yuányīn?",
+                "text_en": "Did you see that news story today? The report says many young people don't want to get married anymore — what do you think the reason is?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your opinion on why young people don't want to marry.",
+                "options": [
+                    {"text_zh": "我觉得原因很多。经济压力是一方面，另外很多人的观点也变了，不觉得结婚是必须的。", "text_pinyin": "wǒ juéde yuányīn hěn duō. jīngjì yālì shì yī fāngmiàn, lìngwài hěn duō rén de guāndiǎn yě biàn le, bù juéde jiéhūn shì bìxū de.", "text_en": "I think there are many reasons. Economic pressure is one aspect, and also many people's views have changed — they don't feel marriage is necessary.", "score": 1.0, "register": "informal", "feedback": "Strong analysis — uses 原因, 观点 naturally and gives a structured two-part answer."},
+                    {"text_zh": "可能是因为现在生活压力太大了吧。", "text_pinyin": "kěnéng shì yīnwèi xiànzài shēnghuó yālì tài dà le ba.", "text_en": "Maybe it's because life pressure is too great nowadays.", "score": 0.6, "register": "informal", "feedback": "Reasonable but only one 原因. Try to 分析 from multiple angles to deepen the discussion."},
+                    {"text_zh": "我也不知道，可能他们不喜欢吧。", "text_pinyin": "wǒ yě bù zhīdào, kěnéng tāmen bù xǐhuān ba.", "text_en": "I don't know either, maybe they just don't like it.", "score": 0.3, "register": "casual", "feedback": "Too vague — a news discussion is a chance to practice expressing 观点. Try to give a specific 原因."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说得有道理。你觉得这种变化对社会有什么影响？",
+                "text_pinyin": "shuō de yǒu dàolǐ. nǐ juéde zhè zhǒng biànhuà duì shèhuì yǒu shénme yǐngxiǎng?",
+                "text_en": "That makes sense. What impact do you think this change has on society?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the societal impact.",
+                "options": [
+                    {"text_zh": "影响肯定很大。比如人口可能会减少，对经济也有影响。但是每个人有自己的选择，我们应该理解。", "text_pinyin": "yǐngxiǎng kěndìng hěn dà. bǐrú rénkǒu kěnéng huì jiǎnshǎo, duì jīngjì yě yǒu yǐngxiǎng. dànshì měi gè rén yǒu zìjǐ de xuǎnzé, wǒmen yīnggāi lǐjiě.", "text_en": "The impact is certainly significant. For example, the population may decrease, which also affects the economy. But everyone has their own choice, and we should be understanding.", "score": 1.0, "register": "informal", "feedback": "Excellent — uses 影响 in context, gives concrete examples, and shows balanced thinking."},
+                    {"text_zh": "我觉得影响不大，每个人都可以自己决定。", "text_pinyin": "wǒ juéde yǐngxiǎng bú dà, měi gè rén dōu kěyǐ zìjǐ juédìng.", "text_en": "I don't think the impact is big, everyone can decide for themselves.", "score": 0.6, "register": "informal", "feedback": "Valid perspective but could develop the 分析 further. What specific effects might there be?"},
+                    {"text_zh": "这个问题太复杂了，我说不清楚。", "text_pinyin": "zhège wèntí tài fùzá le, wǒ shuō bù qīngchǔ.", "text_en": "This question is too complicated, I can't explain it clearly.", "score": 0.3, "register": "casual", "feedback": "Avoiding the question misses a chance to practice 分析 skills. Even a simple 观点 is better than none."}
+                ]
+            }
+        ],
+        "cultural_note": "Chinese friends often discuss social trends and news quite openly. Expressing a clear 观点 (viewpoint) is valued in conversation, even in casual settings — hedging too much can seem disengaged."
+    }
+}

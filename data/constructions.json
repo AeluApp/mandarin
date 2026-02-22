@@ -1,0 +1,754 @@
+[
+  {
+    "name": "了_perfective",
+    "pattern_zh": "V + 了",
+    "description": "Perfective: marks completed action (我吃了饭). Sentence-final 了 marks change of state (下雨了 = it started raining). Two distinct grammatical functions.",
+    "hsk_level": 1,
+    "category": "aspect",
+    "hanzi_tags": ["了"]
+  },
+  {
+    "name": "过_experiential",
+    "pattern_zh": "V + 过",
+    "description": "Have ever done something",
+    "hsk_level": 2,
+    "category": "aspect",
+    "hanzi_tags": ["过"]
+  },
+  {
+    "name": "着_continuous",
+    "pattern_zh": "V + 着",
+    "description": "Ongoing state or action",
+    "hsk_level": 3,
+    "category": "aspect",
+    "hanzi_tags": ["着"]
+  },
+  {
+    "name": "正在_progressive",
+    "pattern_zh": "正在 + V",
+    "description": "In the process of doing",
+    "hsk_level": 3,
+    "category": "aspect",
+    "hanzi_tags": ["正在"]
+  },
+  {
+    "name": "的_attributive",
+    "pattern_zh": "Modifier + 的 + N",
+    "description": "Attributive/possessive marker",
+    "hsk_level": 1,
+    "category": "particle",
+    "hanzi_tags": ["的"]
+  },
+  {
+    "name": "得_complement",
+    "pattern_zh": "V + 得 + Complement",
+    "description": "Degree complement marker",
+    "hsk_level": 2,
+    "category": "particle",
+    "hanzi_tags": ["得"]
+  },
+  {
+    "name": "吗_yesno",
+    "pattern_zh": "Statement + 吗?",
+    "description": "Yes/no question particle",
+    "hsk_level": 1,
+    "category": "particle",
+    "hanzi_tags": ["吗"]
+  },
+  {
+    "name": "呢_followup",
+    "pattern_zh": "NP + 呢?",
+    "description": "Follow-up or topic question",
+    "hsk_level": 1,
+    "category": "particle",
+    "hanzi_tags": ["呢"]
+  },
+  {
+    "name": "吧_suggestion",
+    "pattern_zh": "Statement + 吧",
+    "description": "Suggestion or mild imperative",
+    "hsk_level": 2,
+    "category": "particle",
+    "hanzi_tags": ["吧"]
+  },
+  {
+    "name": "比_comparative",
+    "pattern_zh": "A + 比 + B + Adj",
+    "description": "Comparative construction",
+    "hsk_level": 2,
+    "category": "syntax",
+    "hanzi_tags": ["比"]
+  },
+  {
+    "name": "最_superlative",
+    "pattern_zh": "最 + Adj",
+    "description": "Superlative marker",
+    "hsk_level": 3,
+    "category": "syntax",
+    "hanzi_tags": ["最"]
+  },
+  {
+    "name": "会_ability",
+    "pattern_zh": "会 + V",
+    "description": "Learned ability or future likelihood",
+    "hsk_level": 1,
+    "category": "modal",
+    "hanzi_tags": ["会"]
+  },
+  {
+    "name": "能_can",
+    "pattern_zh": "能 + V",
+    "description": "Physical ability or permission",
+    "hsk_level": 1,
+    "category": "modal",
+    "hanzi_tags": ["能"]
+  },
+  {
+    "name": "可以_may",
+    "pattern_zh": "可以 + V",
+    "description": "Permission or possibility",
+    "hsk_level": 3,
+    "category": "modal",
+    "hanzi_tags": ["可以"]
+  },
+  {
+    "name": "想_want",
+    "pattern_zh": "想 + V",
+    "description": "Want to / intend to",
+    "hsk_level": 2,
+    "category": "modal",
+    "hanzi_tags": ["想"]
+  },
+  {
+    "name": "要_need",
+    "pattern_zh": "要 + V",
+    "description": "Need to / will",
+    "hsk_level": 3,
+    "category": "modal",
+    "hanzi_tags": ["要"]
+  },
+  {
+    "name": "都_universal",
+    "pattern_zh": "都 + V",
+    "description": "Universal quantifier — all/both",
+    "hsk_level": 1,
+    "category": "adverb",
+    "hanzi_tags": ["都"]
+  },
+  {
+    "name": "也_also",
+    "pattern_zh": "也 + V",
+    "description": "Also / too",
+    "hsk_level": 3,
+    "category": "adverb",
+    "hanzi_tags": ["也"]
+  },
+  {
+    "name": "很_intensifier",
+    "pattern_zh": "很 + Adj",
+    "description": "Intensifier or neutral linking",
+    "hsk_level": 1,
+    "category": "adverb",
+    "hanzi_tags": ["很"]
+  },
+  {
+    "name": "非常_very",
+    "pattern_zh": "非常 + Adj",
+    "description": "Very / extremely",
+    "hsk_level": 2,
+    "category": "adverb",
+    "hanzi_tags": ["非常"]
+  },
+  {
+    "name": "太_excessive",
+    "pattern_zh": "太 + Adj + 了",
+    "description": "Too / excessively",
+    "hsk_level": 1,
+    "category": "adverb",
+    "hanzi_tags": ["太"]
+  },
+  {
+    "name": "已经_already",
+    "pattern_zh": "已经 + V + 了",
+    "description": "Already done",
+    "hsk_level": 3,
+    "category": "adverb",
+    "hanzi_tags": ["已经"]
+  },
+  {
+    "name": "再_again",
+    "pattern_zh": "再 + V",
+    "description": "Again (future action)",
+    "hsk_level": 3,
+    "category": "adverb",
+    "hanzi_tags": ["再"]
+  },
+  {
+    "name": "虽然但是_although",
+    "pattern_zh": "虽然...但是...",
+    "description": "Although... but...",
+    "hsk_level": 3,
+    "category": "connective",
+    "hanzi_tags": ["虽然……但是……"]
+  },
+  {
+    "name": "因为所以_because",
+    "pattern_zh": "因为...所以...",
+    "description": "Because... therefore...",
+    "hsk_level": 3,
+    "category": "connective",
+    "hanzi_tags": ["因为……所以……"]
+  },
+  {
+    "name": "从_from",
+    "pattern_zh": "从 + Place/Time",
+    "description": "From (spatial or temporal)",
+    "hsk_level": 2,
+    "category": "preposition",
+    "hanzi_tags": ["从"]
+  },
+  {
+    "name": "在_locative",
+    "pattern_zh": "在 + Place + V",
+    "description": "At / in (location or progressive)",
+    "hsk_level": 1,
+    "category": "preposition",
+    "hanzi_tags": ["在"]
+  },
+  {
+    "name": "给_benefactive",
+    "pattern_zh": "给 + Recipient + V",
+    "description": "For / to (benefactive)",
+    "hsk_level": 2,
+    "category": "preposition",
+    "hanzi_tags": ["给"]
+  },
+  {
+    "name": "让_causative",
+    "pattern_zh": "让 + Person + V",
+    "description": "Let / make someone do",
+    "hsk_level": 3,
+    "category": "preposition",
+    "hanzi_tags": ["让"]
+  },
+  {
+    "name": "离_distance",
+    "pattern_zh": "A + 离 + B + Adj",
+    "description": "Distance from A to B",
+    "hsk_level": 3,
+    "category": "preposition",
+    "hanzi_tags": ["离"]
+  },
+  {
+    "name": "MW_个_general",
+    "pattern_zh": "Number + 个 + N",
+    "description": "General measure word",
+    "hsk_level": 1,
+    "category": "measure_word",
+    "hanzi_tags": ["个"]
+  },
+  {
+    "name": "MW_本_books",
+    "pattern_zh": "Number + 本 + N",
+    "description": "Measure word for books",
+    "hsk_level": 1,
+    "category": "measure_word",
+    "hanzi_tags": ["本"]
+  },
+  {
+    "name": "MW_件_items",
+    "pattern_zh": "Number + 件 + N",
+    "description": "Measure word for clothes/matters",
+    "hsk_level": 2,
+    "category": "measure_word",
+    "hanzi_tags": ["件"]
+  },
+  {
+    "name": "MW_次_times",
+    "pattern_zh": "Number + 次",
+    "description": "Measure word for occurrences",
+    "hsk_level": 2,
+    "category": "measure_word",
+    "hanzi_tags": ["次"]
+  },
+  {
+    "name": "V看见_resultative",
+    "pattern_zh": "V + 见/到/完/好",
+    "description": "Verb + result complement",
+    "hsk_level": 1,
+    "category": "resultative",
+    "hanzi_tags": ["看见"]
+  },
+  {
+    "name": "V完_completion",
+    "pattern_zh": "V + 完",
+    "description": "Verb + completion complement",
+    "hsk_level": 3,
+    "category": "resultative",
+    "hanzi_tags": ["完"]
+  },
+  {
+    "name": "把_disposal",
+    "pattern_zh": "把 + Obj + V + Result",
+    "description": "Disposal construction — act on specific object",
+    "hsk_level": 4,
+    "category": "syntax",
+    "hanzi_tags": ["把"]
+  },
+  {
+    "name": "被_passive",
+    "pattern_zh": "被 + (Agent) + V",
+    "description": "Passive voice marker",
+    "hsk_level": 4,
+    "category": "syntax",
+    "hanzi_tags": ["被"]
+  },
+  {
+    "name": "如果就_conditional",
+    "pattern_zh": "如果...就...",
+    "description": "If... then...",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["如果……就……"]
+  },
+  {
+    "name": "不但而且_addition",
+    "pattern_zh": "不但...而且...",
+    "description": "Not only... but also...",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["不但……而且……"]
+  },
+  {
+    "name": "连都_even",
+    "pattern_zh": "连...都/也...",
+    "description": "Even... (emphatic inclusion)",
+    "hsk_level": 4,
+    "category": "syntax",
+    "hanzi_tags": ["连"]
+  },
+  {
+    "name": "一边一边_simultaneous",
+    "pattern_zh": "一边...一边...",
+    "description": "While doing X, simultaneously doing Y",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["一边……一边……"]
+  },
+  {
+    "name": "对来说_regarding",
+    "pattern_zh": "对...来说",
+    "description": "As far as... is concerned",
+    "hsk_level": 4,
+    "category": "preposition",
+    "hanzi_tags": ["对"]
+  },
+  {
+    "name": "既然就_since",
+    "pattern_zh": "既然...就...",
+    "description": "Since... then...",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["既然"]
+  },
+  {
+    "name": "无论都_no_matter",
+    "pattern_zh": "无论...都...",
+    "description": "No matter... all... (universal concession)",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["无论……都……"]
+  },
+  {
+    "name": "由于_due_to",
+    "pattern_zh": "由于...",
+    "description": "Due to / owing to (formal cause)",
+    "hsk_level": 4,
+    "category": "connective",
+    "hanzi_tags": ["由于"]
+  },
+  {
+    "name": "即使也_even_if",
+    "pattern_zh": "即使...也...",
+    "description": "Even if... still...",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["即使"]
+  },
+  {
+    "name": "不管都_regardless",
+    "pattern_zh": "不管...都...",
+    "description": "Regardless of... all...",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["不管"]
+  },
+  {
+    "name": "与其不如_rather",
+    "pattern_zh": "与其...不如...",
+    "description": "Rather than... better to...",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["与其"]
+  },
+  {
+    "name": "之所以是因为_reason",
+    "pattern_zh": "之所以...是因为...",
+    "description": "The reason... is because...",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["之所以"]
+  },
+  {
+    "name": "甚至_even",
+    "pattern_zh": "甚至...",
+    "description": "Even / so much so that (scalar particle)",
+    "hsk_level": 5,
+    "category": "adverb",
+    "hanzi_tags": ["甚至"]
+  },
+  {
+    "name": "以为_take_as",
+    "pattern_zh": "以...为...",
+    "description": "Take X as Y / regard X as Y",
+    "hsk_level": 5,
+    "category": "syntax",
+    "hanzi_tags": ["以……为……"]
+  },
+  {
+    "name": "宁可也_would_rather",
+    "pattern_zh": "宁可...也...",
+    "description": "Would rather X than (sacrifice Y)",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["宁可"]
+  },
+  {
+    "name": "除非否则_unless",
+    "pattern_zh": "除非...否则...",
+    "description": "Unless... otherwise...",
+    "hsk_level": 5,
+    "category": "connective",
+    "hanzi_tags": ["除非……否则……"]
+  },
+  {
+    "name": "尽量_as_much_as",
+    "pattern_zh": "尽量 + V",
+    "description": "As much as possible / try one's best to",
+    "hsk_level": 5,
+    "category": "adverb",
+    "hanzi_tags": ["尽量"]
+  },
+  {
+    "name": "不得不_have_no_choice",
+    "pattern_zh": "不得不 + V",
+    "description": "Have no choice but to / cannot but",
+    "hsk_level": 5,
+    "category": "modal",
+    "hanzi_tags": ["不得不"]
+  },
+  {
+    "name": "何况_let_alone",
+    "pattern_zh": "何况...",
+    "description": "Let alone / much less",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["何况"]
+  },
+  {
+    "name": "以至于_so_much",
+    "pattern_zh": "以至于...",
+    "description": "So much so that...",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["以至于"]
+  },
+  {
+    "name": "固然但_admittedly",
+    "pattern_zh": "固然...但...",
+    "description": "Admittedly... but...",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["固然"]
+  },
+  {
+    "name": "就而言_as_for",
+    "pattern_zh": "就...而言",
+    "description": "As far as... is concerned",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["而言"]
+  },
+  {
+    "name": "何必_why_bother",
+    "pattern_zh": "何必...",
+    "description": "Why bother / there is no need to (rhetorical)",
+    "hsk_level": 6,
+    "category": "structure",
+    "hanzi_tags": ["何必"]
+  },
+  {
+    "name": "难免_hard_to_avoid",
+    "pattern_zh": "难免...",
+    "description": "Hard to avoid / inevitably",
+    "hsk_level": 6,
+    "category": "adverb",
+    "hanzi_tags": ["难免"]
+  },
+  {
+    "name": "总而言之_in_summary",
+    "pattern_zh": "总而言之...",
+    "description": "In summary / all in all",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["总而言之"]
+  },
+  {
+    "name": "不见得_not_necessarily",
+    "pattern_zh": "不见得...",
+    "description": "Not necessarily / may not be the case",
+    "hsk_level": 6,
+    "category": "structure",
+    "hanzi_tags": ["不见得"]
+  },
+  {
+    "name": "反之_conversely",
+    "pattern_zh": "反之...",
+    "description": "Conversely / on the contrary",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["反之"]
+  },
+  {
+    "name": "归根结底_fundamentally",
+    "pattern_zh": "归根结底...",
+    "description": "At the root / in the final analysis",
+    "hsk_level": 6,
+    "category": "connective",
+    "hanzi_tags": ["归根结底"]
+  },
+  {
+    "name": "不仅反而_contrary",
+    "pattern_zh": "不仅...反而...",
+    "description": "Not only not X, but instead Y",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["反而"]
+  },
+  {
+    "name": "非但反而_contrary_strong",
+    "pattern_zh": "非但...反而...",
+    "description": "Not only not X, but on the contrary Y",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["非但"]
+  },
+  {
+    "name": "无论如何_absolute",
+    "pattern_zh": "无论如何...",
+    "description": "No matter what",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["无论如何"]
+  },
+  {
+    "name": "至于_topic_shift",
+    "pattern_zh": "至于...",
+    "description": "As for / regarding (topic shift)",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["至于"]
+  },
+  {
+    "name": "从而_consequence",
+    "pattern_zh": "...从而...",
+    "description": "Thereby / thus (logical consequence)",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["从而"]
+  },
+  {
+    "name": "以免_preventive",
+    "pattern_zh": "...以免...",
+    "description": "In order to avoid",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["以免"]
+  },
+  {
+    "name": "尽管_concession",
+    "pattern_zh": "尽管...",
+    "description": "Despite / even though",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["尽管"]
+  },
+  {
+    "name": "况且_additive",
+    "pattern_zh": "况且...",
+    "description": "Moreover / besides",
+    "hsk_level": 7,
+    "category": "connective",
+    "hanzi_tags": ["况且"]
+  },
+  {
+    "name": "有鉴于此_conclusion",
+    "pattern_zh": "有鉴于此...",
+    "description": "In light of this (formal conclusion)",
+    "hsk_level": 8,
+    "category": "connective",
+    "hanzi_tags": ["有鉴于此"]
+  },
+  {
+    "name": "纵然_literary_concession",
+    "pattern_zh": "纵然...",
+    "description": "Even if / even though (literary)",
+    "hsk_level": 8,
+    "category": "connective",
+    "hanzi_tags": ["纵然"]
+  },
+  {
+    "name": "倘若_formal_if",
+    "pattern_zh": "倘若...",
+    "description": "If / supposing (formal)",
+    "hsk_level": 8,
+    "category": "connective",
+    "hanzi_tags": ["倘若"]
+  },
+  {
+    "name": "鉴于_considering",
+    "pattern_zh": "鉴于...",
+    "description": "In view of / considering",
+    "hsk_level": 8,
+    "category": "connective",
+    "hanzi_tags": ["鉴于"]
+  },
+  {
+    "name": "不外乎_limiting",
+    "pattern_zh": "不外乎...",
+    "description": "Nothing more than",
+    "hsk_level": 8,
+    "category": "structure",
+    "hanzi_tags": ["不外乎"]
+  },
+  {
+    "name": "未免_mild_critique",
+    "pattern_zh": "未免...",
+    "description": "Rather / unavoidably (mild criticism)",
+    "hsk_level": 8,
+    "category": "structure",
+    "hanzi_tags": ["未免"]
+  },
+  {
+    "name": "得以_enabled_to",
+    "pattern_zh": "得以 + V",
+    "description": "Be enabled to / manage to (formal)",
+    "hsk_level": 8,
+    "category": "modal",
+    "hanzi_tags": ["得以"]
+  },
+  {
+    "name": "势必_bound_to",
+    "pattern_zh": "势必...",
+    "description": "Be bound to / inevitably will",
+    "hsk_level": 8,
+    "category": "adverb",
+    "hanzi_tags": ["势必"]
+  },
+  {
+    "name": "充其量_at_most",
+    "pattern_zh": "充其量...",
+    "description": "At most / at best",
+    "hsk_level": 8,
+    "category": "structure",
+    "hanzi_tags": ["充其量"]
+  },
+  {
+    "name": "无可奈何_helpless",
+    "pattern_zh": "无可奈何...",
+    "description": "Have no alternative / be helpless",
+    "hsk_level": 8,
+    "category": "structure",
+    "hanzi_tags": ["无可奈何"]
+  },
+  {
+    "name": "岂非_rhetorical",
+    "pattern_zh": "岂非...?",
+    "description": "Isn't it? (rhetorical question)",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["岂非"]
+  },
+  {
+    "name": "莫非_speculative",
+    "pattern_zh": "莫非...?",
+    "description": "Could it be that?",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["莫非"]
+  },
+  {
+    "name": "无非_dismissive",
+    "pattern_zh": "无非...",
+    "description": "Nothing but / merely",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["无非"]
+  },
+  {
+    "name": "诚然_concessive",
+    "pattern_zh": "诚然...",
+    "description": "Admittedly / indeed",
+    "hsk_level": 9,
+    "category": "connective",
+    "hanzi_tags": ["诚然"]
+  },
+  {
+    "name": "姑且_provisional",
+    "pattern_zh": "姑且...",
+    "description": "For the time being",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["姑且"]
+  },
+  {
+    "name": "莫过于_nothing_surpasses",
+    "pattern_zh": "莫过于...",
+    "description": "Nothing surpasses / the greatest is",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["莫过于"]
+  },
+  {
+    "name": "以致_leading_to",
+    "pattern_zh": "以致...",
+    "description": "So that / with the result that (negative consequence)",
+    "hsk_level": 9,
+    "category": "connective",
+    "hanzi_tags": ["以致"]
+  },
+  {
+    "name": "不啻_tantamount",
+    "pattern_zh": "不啻...",
+    "description": "Tantamount to / no less than (literary)",
+    "hsk_level": 9,
+    "category": "structure",
+    "hanzi_tags": ["不啻"]
+  },
+  {
+    "name": "乃至_even_to",
+    "pattern_zh": "乃至...",
+    "description": "And even / going so far as",
+    "hsk_level": 9,
+    "category": "connective",
+    "hanzi_tags": ["乃至"]
+  },
+  {
+    "name": "断然_resolutely",
+    "pattern_zh": "断然 + V",
+    "description": "Resolutely / categorically (emphatic negation or assertion)",
+    "hsk_level": 9,
+    "category": "adverb",
+    "hanzi_tags": ["断然"]
+  }
+]

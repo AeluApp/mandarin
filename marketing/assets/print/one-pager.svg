@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 1100">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=Source+Serif+4:wght@400;600&amp;family=Noto+Serif+SC:wght@700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="1100" fill="#F2EBE0"/>
+
+  <!-- ===== HEADER ===== -->
+  <text x="60" y="80" font-family="'Noto Serif SC', serif" font-weight="700" font-size="56" fill="#946070">漫</text>
+  <text x="126" y="72" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="36" fill="#2A3650">Mandarin</text>
+  <text x="126" y="98" font-family="'Source Serif 4', serif" font-weight="400" font-size="16" fill="#5A6678">Patient Chinese study</text>
+
+  <!-- Header horizon line -->
+  <line x1="60" y1="130" x2="790" y2="130" stroke="#D8D0C4" stroke-width="1"/>
+
+  <!-- ===== SECTION 1: What is Mandarin? ===== -->
+  <text x="60" y="190" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">What is Mandarin?</text>
+
+  <!-- Accent line under heading -->
+  <line x1="60" y1="202" x2="160" y2="202" stroke="#946070" stroke-width="1"/>
+
+  <text x="60" y="244" font-family="'Source Serif 4', serif" font-weight="400" font-size="15" fill="#2A3650">Mandarin is a study companion built for serious learners who want</text>
+  <text x="60" y="266" font-family="'Source Serif 4', serif" font-weight="400" font-size="15" fill="#2A3650">clarity over gamification. Three things set it apart:</text>
+
+  <!-- Bullet 1 -->
+  <rect x="80" y="302" width="4" height="4" fill="#946070"/>
+  <text x="100" y="308" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Honest progress tracking with no streak anxiety.</text>
+  <text x="100" y="330" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Real mastery data. No theatrics, no guilt mechanics, no manufactured urgency.</text>
+
+  <!-- Bullet 2 -->
+  <rect x="80" y="362" width="4" height="4" fill="#946070"/>
+  <text x="100" y="368" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Hand-curated content by a real Mandarin learner.</text>
+  <text x="100" y="390" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Every item reviewed for accuracy, register, and real-world relevance.</text>
+
+  <!-- Bullet 3 -->
+  <rect x="80" y="422" width="4" height="4" fill="#946070"/>
+  <text x="100" y="428" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">12 drill types adapted to how Chinese actually works.</text>
+  <text x="100" y="450" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Tone pairs, measure words, register shifts, and more. Not a flashcard app.</text>
+
+  <!-- ===== SECTION 2: How it works ===== -->
+  <text x="60" y="524" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">How it works</text>
+
+  <!-- Accent line under heading -->
+  <line x1="60" y1="536" x2="145" y2="536" stroke="#946070" stroke-width="1"/>
+
+  <!-- Step 1 -->
+  <text x="80" y="580" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="#946070">1</text>
+  <text x="110" y="580" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Start with HSK 1 vocabulary and grammar.</text>
+  <text x="110" y="602" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Begin with the most practical characters, words, and structures.</text>
+
+  <!-- Step 2 -->
+  <text x="80" y="642" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="#946070">2</text>
+  <text x="110" y="642" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Practice through reading, listening, and recall drills.</text>
+  <text x="110" y="664" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Multiple modalities keep sessions varied and retention high.</text>
+
+  <!-- Step 3 -->
+  <text x="80" y="704" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="#946070">3</text>
+  <text x="110" y="704" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Track real mastery — not just streaks.</text>
+  <text x="110" y="726" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Diagnostics, forecasting, and honest metrics show where you actually stand.</text>
+
+  <!-- ===== SECTION 3: Pricing ===== -->
+  <line x1="60" y1="770" x2="790" y2="770" stroke="#D8D0C4" stroke-width="1"/>
+
+  <text x="60" y="818" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">Pricing</text>
+
+  <!-- Accent line under heading -->
+  <line x1="60" y1="830" x2="118" y2="830" stroke="#946070" stroke-width="1"/>
+
+  <!-- Free tier -->
+  <text x="80" y="876" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="22" fill="#2A3650">Free</text>
+  <text x="80" y="900" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">HSK 1-2 vocabulary and grammar. Full drill access. No time limits.</text>
+
+  <!-- Divider between tiers -->
+  <line x1="80" y1="920" x2="400" y2="920" stroke="#D8D0C4" stroke-width="1"/>
+
+  <!-- Pro tier -->
+  <text x="80" y="952" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="22" fill="#2A3650">Pro</text>
+  <text x="140" y="952" font-family="'Source Serif 4', serif" font-weight="400" font-size="18" fill="#946070">$12/month</text>
+  <text x="80" y="976" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">HSK 1-9. Reading, listening, media shelf. Diagnostics and forecasting.</text>
+
+  <!-- ===== FOOTER ===== -->
+  <line x1="60" y1="1030" x2="790" y2="1030" stroke="#D8D0C4" stroke-width="1"/>
+
+  <text x="60" y="1066" font-family="'Noto Serif SC', serif" font-weight="700" font-size="20" fill="#946070">漫</text>
+  <text x="88" y="1062" font-family="'Source Serif 4', serif" font-weight="400" font-size="13" fill="#5A6678">mandarin.app</text>
+</svg>

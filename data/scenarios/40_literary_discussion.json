@@ -1,0 +1,45 @@
+{
+    "title": "Literary discussion",
+    "title_zh": "文学讨论",
+    "hsk_level": 5,
+    "register": "informal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're chatting with a friend about a movie you both recently watched. You discuss the themes, characters, and what moved you.",
+        "setup_zh": "你和朋友聊最近一起看的一部电影，讨论主题、人物和感受。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "那部电影你看完觉得怎么样？我觉得主题挺深刻的，反映了很多现实问题。",
+                "text_pinyin": "nà bù diànyǐng nǐ kàn wán juéde zěnmeyàng? wǒ juéde zhǔtí tǐng shēnkè de, fǎnyìng le hěn duō xiànshí wèntí.",
+                "text_en": "What did you think of that movie? I thought the theme was quite profound — it reflected many real-life issues."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on the movie's theme and characters.",
+                "options": [
+                    {"text_zh": "我也觉得这部作品很深刻。情节设计得很好，特别是主要人物的变化让我很感动。它反映了普通人面对困难时的选择，主题很有意义。", "text_pinyin": "wǒ yě juéde zhè bù zuòpǐn hěn shēnkè. qíngjié shèjì de hěn hǎo, tèbié shì zhǔyào rénwù de biànhuà ràng wǒ hěn gǎndòng. tā fǎnyìng le pǔtōng rén miànduì kùnnán shí de xuǎnzé, zhǔtí hěn yǒu yìyì.", "text_en": "I also think this work is very profound. The plot is well-designed, especially how the main character's transformation moved me. It reflects ordinary people's choices when facing difficulties — the theme is very meaningful.", "score": 1.0, "register": "informal", "feedback": "Rich analysis — uses 作品, 情节, 人物, 感动, 反映, and 深刻 naturally. Shows genuine engagement with the work."},
+                    {"text_zh": "故事还不错，人物演得挺好的。就是有些地方有点慢。", "text_pinyin": "gùshì hái búcuò, rénwù yǎn de tǐng hǎo de. jiùshì yǒuxiē dìfāng yǒudiǎn màn.", "text_en": "The story was pretty good, the characters were well-acted. Just some parts were a bit slow.", "score": 0.6, "register": "casual", "feedback": "Surface-level review. Try to discuss the 主题 and what the 作品 反映 — go beyond just liking or disliking to deeper analysis."},
+                    {"text_zh": "还行吧，我觉得一般。", "text_pinyin": "hái xíng ba, wǒ juéde yībān.", "text_en": "It was okay, I thought it was average.", "score": 0.2, "register": "casual", "feedback": "Too brief for a literary discussion. Your friend offered a thoughtful take — engage with the 主题, 人物, or 情节 to continue the conversation."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，人物写得特别真实。你觉得最让你感动的是哪个情节？",
+                "text_pinyin": "duì, rénwù xiě de tèbié zhēnshí. nǐ juéde zuì ràng nǐ gǎndòng de shì nǎge qíngjié?",
+                "text_en": "Right, the characters are written very realistically. Which part of the plot moved you the most?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe which scene moved you and why.",
+                "options": [
+                    {"text_zh": "最让我感动的是结尾那个情节。主人公终于理解了父亲的选择，那个场景反映了两代人之间的矛盾和理解，非常深刻。", "text_pinyin": "zuì ràng wǒ gǎndòng de shì jiéwěi nàge qíngjié. zhǔréngōng zhōngyú lǐjiě le fùqīn de xuǎnzé, nàge chǎngjǐng fǎnyìng le liǎng dài rén zhījiān de máodùn hé lǐjiě, fēicháng shēnkè.", "text_en": "What moved me most was the ending scene. The protagonist finally understood his father's choice — that scene reflected the conflict and understanding between two generations, very profound.", "score": 1.0, "register": "informal", "feedback": "Specific and heartfelt — identifies a particular 情节, explains why it was 感动, and connects it to a broader 主题 of generational conflict."},
+                    {"text_zh": "我觉得中间那段挺感动的，但是具体的我记不太清了。", "text_pinyin": "wǒ juéde zhōngjiān nà duàn tǐng gǎndòng de, dànshì jùtǐ de wǒ jì bù tài qīng le.", "text_en": "I thought the middle part was quite moving, but I don't remember the specifics.", "score": 0.5, "register": "casual", "feedback": "Shows emotional response but lacks specifics. Try to recall a particular 情节 or 人物 moment to make your 感动 concrete."},
+                    {"text_zh": "整部电影都还好，没有特别感动的地方。", "text_pinyin": "zhěng bù diànyǐng dōu hái hǎo, méiyǒu tèbié gǎndòng de dìfāng.", "text_en": "The whole movie was fine, nothing particularly moving.", "score": 0.3, "register": "casual", "feedback": "Disconnects from the conversation. Even if nothing strongly moved you, picking one 情节 to discuss shows engagement and lets you practice literary vocabulary."}
+                ]
+            }
+        ],
+        "cultural_note": "Chinese literary and film discussion often focuses on what a work 反映 (reflects) about society. Describing emotional impact with words like 感动 and 深刻 is valued more than technical critique — it shows you engaged with the work's meaning."
+    }
+}

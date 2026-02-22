@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+  <!-- horizon -->
+  <line x1="0" y1="36" x2="120" y2="36" stroke-width="0.4"/>
+  <!-- table surface -->
+  <line x1="20" y1="48" x2="100" y2="48" stroke-width="0.5"/>
+  <!-- teacup -->
+  <circle cx="60" cy="44" r="4" stroke-width="0.6"/>
+  <!-- saucer line -->
+  <path d="M54 48 Q60 46 66 48" stroke-width="0.4"/>
+  <!-- steam wisps -->
+  <path d="M58 39 Q57 36 58 33" stroke-width="0.4"/>
+  <path d="M62 38 Q63 35 62 32" stroke-width="0.4"/>
+</svg>

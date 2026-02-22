@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+  <!-- desk surface -->
+  <line x1="15" y1="48" x2="105" y2="48" stroke-width="0.6"/>
+  <!-- lamp base -->
+  <line x1="40" y1="48" x2="40" y2="44" stroke-width="0.5"/>
+  <!-- lamp arm -->
+  <line x1="40" y1="44" x2="60" y2="24" stroke-width="0.6"/>
+  <!-- lamp shade -->
+  <polyline points="54,24 60,20 66,24" stroke-width="0.6"/>
+  <!-- light rays -->
+  <line x1="56" y1="26" x2="50" y2="38" stroke-width="0.3"/>
+  <line x1="60" y1="26" x2="60" y2="40" stroke-width="0.3"/>
+  <line x1="64" y1="26" x2="70" y2="38" stroke-width="0.3"/>
+  <!-- book suggestion on desk -->
+  <path d="M70 48 L70 44 L80 44 L80 48" stroke-width="0.4"/>
+</svg>

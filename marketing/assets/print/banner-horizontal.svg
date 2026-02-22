@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=Source+Serif+4:wght@400&amp;family=Noto+Serif+SC:wght@700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="300" fill="#F2EBE0"/>
+
+  <!-- Character — left -->
+  <text x="60" y="185" font-family="'Noto Serif SC', serif" font-weight="700" font-size="96" fill="#946070">漫</text>
+
+  <!-- App name — center-left -->
+  <text x="190" y="148" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="52" fill="#2A3650">Mandarin</text>
+  <text x="190" y="182" font-family="'Source Serif 4', serif" font-weight="400" font-size="18" fill="#5A6678">Patient Chinese study</text>
+
+  <!-- Horizon line motif — extending right -->
+  <line x1="540" y1="155" x2="1160" y2="155" stroke="#D8D0C4" stroke-width="1"/>
+
+  <!-- Bottom border -->
+  <line x1="0" y1="298" x2="1200" y2="298" stroke="#D8D0C4" stroke-width="1"/>
+</svg>

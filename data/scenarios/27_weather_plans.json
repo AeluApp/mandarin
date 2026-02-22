@@ -1,0 +1,45 @@
+{
+    "title": "Changing plans due to weather",
+    "title_zh": "因天气改变计划",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and a friend planned to go hiking, but it starts raining heavily.",
+        "setup_zh": "你和朋友计划去爬山，但是开始下大雨了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "雨下得这么大，我们还去爬山吗？",
+                "text_pinyin": "yǔ xià de zhème dà, wǒmen hái qù páshān ma?",
+                "text_en": "It's raining so hard, are we still going hiking?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest changing plans because of the rain.",
+                "options": [
+                    {"text_zh": "下这么大的雨，太危险了，我们换个活动吧。", "text_pinyin": "xià zhème dà de yǔ, tài wēixiǎn le, wǒmen huàn ge huódòng ba.", "text_en": "With rain this heavy, it's too dangerous, let's switch to a different activity.", "score": 1.0, "register": "casual", "feedback": "Practical and safety-conscious — explains the reasoning and proposes a pivot."},
+                    {"text_zh": "算了吧，改天再去爬山怎么样？", "text_pinyin": "suàn le ba, gǎitiān zài qù páshān zěnmeyàng?", "text_en": "Forget it, how about we go hiking another day?", "score": 0.7, "register": "casual", "feedback": "Reasonable postponement, though suggesting an alternative for today keeps the day fun."},
+                    {"text_zh": "要不我们等一下看看，也许雨会停。", "text_pinyin": "yào bù wǒmen děng yīxià kànkan, yěxǔ yǔ huì tíng.", "text_en": "How about we wait a bit, maybe the rain will stop.", "score": 0.6, "register": "casual", "feedback": "Optimistic but uncertain — if it's already heavy rain, a backup plan is more practical."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "也对。那你想做什么呢？",
+                "text_pinyin": "yě duì. nà nǐ xiǎng zuò shénme ne?",
+                "text_en": "Good point. So what do you want to do instead?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest an indoor activity.",
+                "options": [
+                    {"text_zh": "我们去看电影或者找个地方喝咖啡吧。", "text_pinyin": "wǒmen qù kàn diànyǐng huòzhě zhǎo ge dìfang hē kāfēi ba.", "text_en": "Let's go see a movie or find a place to get coffee.", "score": 1.0, "register": "casual", "feedback": "Offers two options — giving choices makes it easy for your friend to agree."},
+                    {"text_zh": "要不去我家玩游戏？也很有意思。", "text_pinyin": "yào bù qù wǒ jiā wán yóuxì? yě hěn yǒu yìsi.", "text_en": "How about playing games at my place? That's also fun.", "score": 0.8, "register": "casual", "feedback": "Casual and welcoming — inviting someone to your home shows closeness."},
+                    {"text_zh": "随便吧，你说去哪里我就去哪里。", "text_pinyin": "suíbiàn ba, nǐ shuō qù nǎlǐ wǒ jiù qù nǎlǐ.", "text_en": "Whatever, wherever you say, I'll go.", "score": 0.4, "register": "casual", "feedback": "随便 can sound like you don't care — since you suggested changing plans, follow through with an idea."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese, 随便 (suíbiàn, 'whatever/anything is fine') is one of the most frustrating responses in social planning — it puts all the burden on the other person. When someone asks 你想做什么, offering at least one concrete suggestion shows you value the shared time. 要不 (yào bù, 'how about') is a useful soft-suggestion opener."
+    }
+}

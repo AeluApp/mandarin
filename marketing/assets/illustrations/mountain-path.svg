@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+  <!-- horizon -->
+  <line x1="0" y1="38" x2="120" y2="38" stroke-width="0.4"/>
+  <!-- mountains -->
+  <polyline points="30,38 45,18 60,38" stroke-width="0.6"/>
+  <polyline points="55,38 72,22 88,38" stroke-width="0.6"/>
+  <polyline points="75,38 85,26 95,38" stroke-width="0.5"/>
+  <!-- converging path -->
+  <line x1="35" y1="58" x2="55" y2="38" stroke-width="0.6"/>
+  <line x1="85" y1="58" x2="65" y2="38" stroke-width="0.6"/>
+</svg>

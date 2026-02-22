@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin vs Anki for Chinese — SRS Without the Overhead | Mandarin</title>
+  <meta name="description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling. No deck-building required.">
+  <meta name="keywords" content="Anki alternative for Chinese, better than Anki Chinese, Anki vs dedicated Chinese app, Chinese SRS app, best spaced repetition for Chinese, Anki Chinese decks alternative">
+  <link rel="canonical" href="https://mandarinapp.com/vs-anki">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mandarin vs Anki for Chinese — The SRS That Builds Itself">
+  <meta property="og:description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/vs-anki">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mandarin vs Anki for Chinese — The SRS That Builds Itself">
+  <meta name="twitter:description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Mandarin vs Anki for Chinese — SRS Without the Overhead",
+    "description": "Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling.",
+    "url": "https://mandarinapp.com/vs-anki",
+    "keywords": "Anki alternative for Chinese, better than Anki Chinese, Anki vs dedicated Chinese app"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-2: 0.5rem; --space-3: 1rem; --space-4: 1.5rem; --space-5: 2rem; --space-6: 3rem; --space-8: 5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+        --color-accent: #B07888;
+        --color-secondary: #8AAA7A;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-base); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4); }
+
+    /* Nav */
+    nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-links { display: flex; gap: var(--space-4); list-style: none; }
+    .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-2); color: var(--color-text); }
+    .nav-toggle svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-base); border-bottom: 1px solid var(--color-border); padding: var(--space-3) var(--space-4); gap: var(--space-3); z-index: 100; }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+
+    /* Hero */
+    .hero { text-align: center; padding: var(--space-8) 0 var(--space-6); }
+    .hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-3); }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 600; line-height: 1.15; margin-bottom: var(--space-3); }
+    .hero-sub { font-size: 1.1rem; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-5); line-height: 1.65; }
+    @media (max-width: 600px) { .hero h1 { font-size: 2rem; } }
+
+    /* CTA */
+    .cta-group { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+    .cta-email { display: flex; gap: var(--space-2); width: 100%; max-width: 420px; }
+    .cta-email input { flex: 1; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; background: var(--color-surface); color: var(--color-text); }
+    .cta-email input::placeholder { color: var(--color-text-faint); }
+    .btn-primary { padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-base); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .btn-primary:hover { opacity: 0.85; }
+    .cta-note { font-size: 0.85rem; color: var(--color-text-faint); }
+    .cta-success { padding: var(--space-3) var(--space-4); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); border-radius: var(--radius); color: var(--color-accent); font-size: 0.95rem; display: none; }
+
+    section { padding: var(--space-8) 0; }
+
+    /* Comparison table */
+    .comparison { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    .comparison h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-5); }
+    .compare-table { width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse; font-size: 0.9rem; }
+    .compare-table th { font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; padding: var(--space-2) var(--space-3); text-align: left; border-bottom: 2px solid var(--color-border); }
+    .compare-table th:nth-child(2), .compare-table th:nth-child(3) { text-align: center; }
+    .compare-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); }
+    .compare-table td:nth-child(2), .compare-table td:nth-child(3) { text-align: center; }
+    .check { color: var(--color-secondary); font-weight: 600; }
+    .cross { color: var(--color-text-faint); }
+
+    /* Sections */
+    .section-alt { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    section h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-5); }
+    section h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-3); }
+
+    /* Audience sections */
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); max-width: 640px; margin: 0 auto; }
+    @media (max-width: 600px) { .audience-grid { grid-template-columns: 1fr; } }
+    .audience-box h3 { font-size: 1.15rem; margin-bottom: var(--space-3); color: var(--color-text); }
+    .audience-list { list-style: none; }
+    .audience-list li { padding: var(--space-2) 0 var(--space-2) var(--space-4); position: relative; font-size: 0.95rem; color: var(--color-text-faint); }
+    .audience-list li::before { content: "\2192"; position: absolute; left: 0; color: var(--color-accent); }
+
+    /* Feature grid */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); max-width: 640px; margin: 0 auto; }
+    @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-item { padding: var(--space-3) 0; }
+    .feature-item strong { display: block; margin-bottom: 0.3rem; color: var(--color-text); }
+    .feature-item span { font-size: 0.9rem; color: var(--color-text-faint); }
+
+    /* Honest section */
+    .honest p { text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3); }
+    .honest .quote { font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5; }
+
+    /* Final CTA */
+    .final-cta { text-align: center; background: var(--color-surface); border-top: 1px solid var(--color-border); }
+    .final-cta h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; margin-bottom: var(--space-3); }
+    .final-cta p { color: var(--color-text-faint); margin-bottom: var(--space-4); }
+
+    footer { padding: var(--space-5) 0; text-align: center; font-size: 0.85rem; color: var(--color-text-faint); }
+    footer a { color: var(--color-text-faint); text-decoration: underline; }
+
+    @keyframes drift-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-label, .hero h1, .hero-sub, .cta-group { animation: drift-up 0.6s ease-out both; }
+    .hero h1 { animation-delay: 0.1s; } .hero-sub { animation-delay: 0.2s; } .cta-group { animation-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .hero-label, .hero h1, .hero-sub, .cta-group { animation: none; opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-label">Anki Alternative for Chinese</div>
+      <h1>Anki is a powerful engine. Mandarin is the car built around it.</h1>
+      <p class="hero-sub">You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Mandarin gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps.</p>
+      <div class="cta-group">
+        <form class="cta-email" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Try Mandarin free</button>
+        </form>
+        <p class="cta-note">Free for HSK 1-2. No credit card required.</p>
+        <div class="cta-success">You're on the list. We'll let you know when it's ready.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="comparison">
+    <div class="container">
+      <h2>Anki vs. Mandarin for Chinese</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Anki</th>
+            <th>Mandarin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Spaced repetition</td><td class="check">FSRS</td><td class="check">Modified FSRS</td></tr>
+          <tr><td>Pre-built Chinese curriculum</td><td class="cross">No (DIY decks)</td><td class="check">HSK 1-6</td></tr>
+          <tr><td>Setup time required</td><td class="cross">Hours to days</td><td class="check">None</td></tr>
+          <tr><td>Drill types</td><td class="cross">Flashcards only</td><td class="check">27 types</td></tr>
+          <tr><td>Graded reading</td><td class="cross">No</td><td class="check">By HSK level</td></tr>
+          <tr><td>Read &rarr; drill pipeline</td><td class="cross">Manual card creation</td><td class="check">Automatic</td></tr>
+          <tr><td>Listening drills</td><td class="cross">Manual setup</td><td class="check">Built in, speed control</td></tr>
+          <tr><td>Speaking / tone grading</td><td class="cross">No</td><td class="check">Yes</td></tr>
+          <tr><td>Multi-skill diagnostics</td><td class="cross">No</td><td class="check">Per-skill tracking</td></tr>
+          <tr><td>Context notes per word</td><td class="cross">DIY</td><td class="check">Built in</td></tr>
+          <tr><td>Customizability</td><td class="check">Infinite</td><td class="cross">Opinionated</td></tr>
+          <tr><td>Multi-language / multi-subject</td><td class="check">Yes</td><td class="cross">Chinese only</td></tr>
+          <tr><td>Price</td><td class="check">Free</td><td>Free / $12/mo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>What Anki does well</h2>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-5);">Anki is a remarkable tool. If you are technically proficient and willing to invest setup time, it can serve you for years.</p>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <strong>Free and open source</strong>
+          <span>$0 on desktop, web, and Android. $25 one-time on iOS. The economics are unbeatable. No subscription, no lock-in.</span>
+        </div>
+        <div class="feature-item">
+          <strong>FSRS algorithm</strong>
+          <span>The canonical implementation of the state-of-the-art scheduling algorithm. Proven over millions of users and years of research.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Infinite customization</strong>
+          <span>Card templates, add-ons, plugins, media embedding. If you can imagine it, you can build it. No other SRS tool offers this flexibility.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Massive ecosystem</strong>
+          <span>Thousands of shared Chinese decks, community guides, add-on developers. A 15-year-old ecosystem that keeps growing.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <h2>Where Anki falls short for Chinese</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <strong>Setup overhead</strong>
+          <span>Finding a good Chinese deck requires research. Many shared decks have errors, bad audio, or poor example sentences. Making good cards takes longer than studying them.</span>
+        </div>
+        <div class="feature-item">
+          <strong>One drill type: flashcards</strong>
+          <span>Front/back cards test recognition. They do not test whether you can hear a word, produce it, use it in context, or distinguish its tone from a near-miss.</span>
+        </div>
+        <div class="feature-item">
+          <strong>No reading integration</strong>
+          <span>Anki cannot connect your reading to your reviews. Every word you encounter while reading Chinese must be manually turned into a card.</span>
+        </div>
+        <div class="feature-item">
+          <strong>No curriculum</strong>
+          <span>Anki does not tell you what to study next. You supply the content and the order. For Chinese, where HSK progression matters, this is a gap.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>What $12/month buys you over Anki</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <strong>No setup time</strong>
+          <span>Open the app, start a session. HSK-aligned content is curated, annotated, and ready. No decks to find, vet, or maintain.</span>
+        </div>
+        <div class="feature-item">
+          <strong>27 drill types instead of 1</strong>
+          <span>Cloze deletion, sentence construction, listening comprehension, tone pair discrimination, character recognition, speaking drills with tone grading, and more.</span>
+        </div>
+        <div class="feature-item">
+          <strong>The cleanup loop</strong>
+          <span>Read graded passages, tap words you do not know, and those words automatically enter your SRS queue. Anki cannot do this.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Tone grading</strong>
+          <span>Record yourself and get feedback on tone accuracy. Anki has no concept of pronunciation assessment.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Multi-skill diagnostics</strong>
+          <span>The system tracks listening, vocabulary, reading, and tones separately. It knows your listening lags behind your vocabulary and adjusts accordingly.</span>
+        </div>
+        <div class="feature-item">
+          <strong>A curriculum that decides for you</strong>
+          <span>Mandarin sequences content by HSK level, adjusts based on your performance data, and handles interleaving. You study. The system plans.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <h2>Who should use which</h2>
+      <div class="audience-grid">
+        <div class="audience-box">
+          <h3>Use Anki if you...</h3>
+          <ul class="audience-list">
+            <li>Enjoy building and customizing your own study system</li>
+            <li>Study multiple languages or subjects alongside Chinese</li>
+            <li>Have invested years in Chinese Anki decks you do not want to leave</li>
+            <li>Need specialized vocabulary we do not cover (medical, legal, dialect)</li>
+            <li>Cannot pay $12/month and have time to invest in setup</li>
+            <li>Want total control over every aspect of your SRS</li>
+          </ul>
+        </div>
+        <div class="audience-box">
+          <h3>Use Mandarin if you...</h3>
+          <ul class="audience-list">
+            <li>Want to study Chinese, not maintain a flashcard system</li>
+            <li>Want reading and drilling connected in one workflow</li>
+            <li>Want tone grading and listening drills built in</li>
+            <li>Want to know which skills are lagging, not just which cards are due</li>
+            <li>Are preparing for HSK and want aligned content</li>
+            <li>Value your study time more than your setup time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 style="margin-bottom: var(--space-3);">Honest take</h2>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Anki is free. Anki has the canonical FSRS implementation. Anki's ecosystem is vastly larger. If you are technically proficient and willing to invest setup time, Anki plus a good deck plus supplementary reading tools can replicate much of what Mandarin does, for free.</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Our advantage is integration and ease-of-use, not raw capability. Mandarin is for the learner who wants to sit down and practice Chinese without thinking about deck management, card templates, or plugin configuration.</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">If you enjoy the meta-game of optimizing Anki, you will probably stay with Anki. If you want to open an app and study, Mandarin is worth $12/month.</p>
+      <p style="font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5;">"Anki is free and powerful. Mandarin is $12/month and you never build a deck. Different tools for different preferences."</p>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <h2>Study Chinese, not Anki</h2>
+      <p>Free for HSK 1-2. Same rigor, none of the overhead.</p>
+      <div class="cta-group">
+        <form class="cta-email" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Try Mandarin free</button>
+        </form>
+        <p class="cta-note">No credit card. No deck-building. Just learning.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
+    </div>
+  </footer>
+
+  <script src="/marketing.js"></script>
+</body>
+</html>

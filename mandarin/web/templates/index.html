@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#946070" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1C2028" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Mandarin</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Critical Latin fonts — render-blocking (small, fast) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <!-- CJK fonts — loaded async (large, non-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400&display=swap"></noscript>
+  <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+</head>
+<body>
+  <a href="#drill-area" class="skip-link">Skip to content</a>
+  <div id="app" role="main">
+    <!-- Status bar — always visible -->
+    <div id="status-bar" role="status" aria-live="polite">
+      <span id="status-dot" class="dot-idle" aria-hidden="true"></span>
+      <span id="status-text">Ready</span>
+      <button id="sound-toggle" class="sound-toggle" aria-label="Toggle sound">Sound</button>
+    </div>
+
+    <!-- Header -->
+    <header role="banner">
+      <div class="logo-mark" aria-hidden="true">漫</div>
+      <div class="logo-text">Mandarin</div>
+      <div class="horizon" aria-hidden="true"></div>
+      <div class="session-info">
+        Session #{{ profile.total_sessions + 1 }} · {{ day_profile.name }}{% if streak_days > 1 %} · {{ streak_days }} consecutive days{% endif %}
+      </div>
+    </header>
+
+    <!-- Dashboard (visible before session starts) -->
+    <section id="dashboard" aria-label="Dashboard">
+      <div class="stats-row" role="list" aria-label="Quick stats">
+        <div class="stat" role="listitem">
+          <div class="stat-value">{{ item_count }}</div>
+          <div class="stat-label">Items</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="stat-value">{{ profile.total_sessions }}</div>
+          <div class="stat-label">Sessions</div>
+        </div>
+        {% if mastery %}
+        {% for level, m in mastery.items()|sort %}
+        <div class="stat" role="listitem">
+          <div class="stat-value">{{ m.pct|int }}%</div>
+          <div class="stat-label">HSK {{ level }}</div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      {% if accuracy_trend and accuracy_trend|length > 1 %}
+      <div class="stats-sparkline" aria-label="Recent accuracy trend">
+        <span class="sparkline-chars">{{ accuracy_sparkline }}</span>
+        <div class="sparkline-meta">{{ accuracy_trend|length }} sessions</div>
+      </div>
+      {% endif %}
+
+      <div class="actions">
+        <button id="btn-start" class="btn-primary" aria-label="Start full session">Begin</button>
+        <button id="btn-mini" class="btn-secondary" aria-label="Start mini session">Quick session <kbd>M</kbd></button>
+      </div>
+      <div class="actions actions-exposure">
+        <button id="btn-read" class="btn-secondary" aria-label="Open graded reader">Read</button>
+        <button id="btn-watch" class="btn-secondary" aria-label="Browse media shelf">Watch</button>
+        <button id="btn-listen" class="btn-secondary" aria-label="Start listening practice">Listen</button>
+      </div>
+
+      <!-- Onboarding checklist (hidden if all complete or dismissed) -->
+      <div id="onboarding-checklist" class="onboarding-checklist hidden" aria-label="Getting started checklist">
+        <div class="onboarding-header">
+          <h3>Getting Started</h3>
+          <button id="onboarding-dismiss" class="onboarding-dismiss" aria-label="Dismiss checklist">&times;</button>
+        </div>
+        <ul class="onboarding-items" id="onboarding-items">
+          <!-- Populated by JS -->
+        </ul>
+        <div id="onboarding-complete-msg" class="onboarding-complete hidden">You're set.</div>
+      </div>
+
+      <div class="horizon" aria-hidden="true"></div>
+
+      <!-- Mastery stage distribution -->
+      {% if mastery %}
+      <div class="mastery-bars" aria-label="Mastery distribution">
+        {% for level, m in mastery.items()|sort %}
+        {% set total = m.total or 1 %}
+        {% set not_seen = m.not_seen|default(0) %}
+        {% set unseen_pct = (not_seen / total * 100)|round(1) %}
+        <div class="mastery-bar-row"
+             data-hsk="{{ level }}"
+             data-total="{{ total }}"
+             data-durable="{{ m.durable|default(0) }}"
+             data-stable="{{ m.stable|default(0) }}"
+             data-stabilizing="{{ m.stabilizing|default(0) }}"
+             data-passed="{{ m.passed_once|default(0) }}"
+             data-seen="{{ m.seen_stage|default(0) }}"
+             data-unseen="{{ not_seen }}">
+          <span class="mastery-bar-label">HSK {{ level }}</span>
+          <div class="mastery-bar" role="meter" aria-label="HSK {{ level }} mastery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ m.pct|int }}">
+            {% if m.durable|default(0) > 0 %}
+            <div class="bar-seg bar-durable" style="width:{{ (m.durable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.durable }}: {{ m.durable }} ({{ (m.durable / total * 100)|round(1) }}%)"></div>
+            {% endif %}
+            {% if m.stable|default(0) > 0 %}
+            <div class="bar-seg bar-stable" style="width:{{ (m.stable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stable }}: {{ m.stable }} ({{ (m.stable / total * 100)|round(1) }}%)"></div>
+            {% endif %}
+            {% if m.stabilizing|default(0) > 0 %}
+            <div class="bar-seg bar-stabilizing" style="width:{{ (m.stabilizing / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stabilizing }}: {{ m.stabilizing }} ({{ (m.stabilizing / total * 100)|round(1) }}%)"></div>
+            {% endif %}
+            {% if m.passed_once|default(0) > 0 %}
+            <div class="bar-seg bar-passed" style="width:{{ (m.passed_once / total * 100)|round(1) }}%" aria-label="{{ stage_labels.passed_once }}: {{ m.passed_once }} ({{ (m.passed_once / total * 100)|round(1) }}%)"></div>
+            {% endif %}
+            {% if m.seen_stage|default(0) > 0 %}
+            <div class="bar-seg bar-seen" style="width:{{ (m.seen_stage / total * 100)|round(1) }}%" aria-label="{{ stage_labels.seen }}: {{ m.seen_stage }} ({{ (m.seen_stage / total * 100)|round(1) }}%)"></div>
+            {% endif %}
+            {% if not_seen > 0 %}
+            <div class="bar-seg bar-unseen" style="width:{{ unseen_pct }}%" aria-label="{{ stage_labels.not_seen }}: {{ not_seen }} ({{ unseen_pct }}%)"></div>
+            {% endif %}
+          </div>
+          <span class="mastery-bar-meta">{{ total - not_seen }} of {{ total }}</span>
+          <div class="mastery-bar-detail">{% set sep = joiner(" · ") %}{% if m.durable|default(0) > 0 %}{{ sep() }}{{ stage_labels.durable }}: {{ m.durable }} ({{ (m.durable / total * 100)|round(0)|int }}%){% endif %}{% if m.stable|default(0) > 0 %}{{ sep() }}{{ stage_labels.stable }}: {{ m.stable }} ({{ (m.stable / total * 100)|round(0)|int }}%){% endif %}{% if m.stabilizing|default(0) > 0 %}{{ sep() }}{{ stage_labels.stabilizing }}: {{ m.stabilizing }} ({{ (m.stabilizing / total * 100)|round(0)|int }}%){% endif %}{% if m.passed_once|default(0) > 0 %}{{ sep() }}{{ stage_labels.passed_once }}: {{ m.passed_once }} ({{ (m.passed_once / total * 100)|round(0)|int }}%){% endif %}{% if m.seen_stage|default(0) > 0 %}{{ sep() }}{{ stage_labels.seen }}: {{ m.seen_stage }} ({{ (m.seen_stage / total * 100)|round(0)|int }}%){% endif %}{% if not_seen > 0 %}{{ sep() }}{{ stage_labels.not_seen }}: {{ not_seen }} ({{ unseen_pct|round(0)|int }}%){% endif %}</div>
+        </div>
+        {% endfor %}
+        <div class="mastery-legend">
+          <span class="legend-item"><span class="legend-dot bar-durable" aria-hidden="true"></span>{{ stage_labels.durable }}</span>
+          <span class="legend-item"><span class="legend-dot bar-stable" aria-hidden="true"></span>{{ stage_labels.stable }}</span>
+          <span class="legend-item"><span class="legend-dot bar-stabilizing" aria-hidden="true"></span>{{ stage_labels.stabilizing }}</span>
+          <span class="legend-item"><span class="legend-dot bar-passed" aria-hidden="true"></span>{{ stage_labels.passed_once }}</span>
+          <span class="legend-item"><span class="legend-dot bar-seen" aria-hidden="true"></span>{{ stage_labels.seen }}</span>
+          <span class="legend-item"><span class="legend-dot bar-unseen" aria-hidden="true"></span>{{ stage_labels.not_seen }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if errors %}
+      <div class="error-summary" aria-label="Error patterns">
+        <h3>Recent error patterns</h3>
+        {% for etype, count in errors.items() %}
+        <span class="error-tag">{{ etype }}: {{ count }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="horizon" aria-hidden="true"></div>
+
+      <!-- Panels group -->
+      <div class="panels-group">
+
+      <!-- Forecast panel -->
+      <div id="forecast-panel" class="panel collapsible">
+        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="forecast-content" data-panel="forecast-panel"><span class="toggle-icon" aria-hidden="true">+</span> Forecast</h3>
+        <div class="panel-body panel-closed" id="forecast-content">
+          <div class="panel-skeleton" aria-label="Loading forecast">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retention panel -->
+      <div id="retention-panel" class="panel collapsible">
+        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="retention-content" data-panel="retention-panel"><span class="toggle-icon" aria-hidden="true">+</span> Memory</h3>
+        <div class="panel-body panel-closed" id="retention-content">
+          <div class="panel-skeleton" aria-label="Loading memory stats">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session history -->
+      <div id="sessions-panel" class="panel collapsible">
+        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="sessions-content" data-panel="sessions-panel"><span class="toggle-icon" aria-hidden="true">+</span> Recent Sessions</h3>
+        <div class="panel-body panel-closed" id="sessions-content">
+          <div class="panel-skeleton" aria-label="Loading sessions">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export panel -->
+      <div id="export-panel" class="panel collapsible">
+        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="export-content" data-panel="export-panel"><span class="toggle-icon" aria-hidden="true">+</span> Export</h3>
+        <div class="panel-body panel-closed" id="export-content">
+          <a href="/api/export/progress" class="export-link">Download progress (CSV)</a>
+          <a href="/api/export/sessions" class="export-link">Download sessions (CSV)</a>
+          <a href="/api/export/errors" class="export-link">Download errors (CSV)</a>
+        </div>
+      </div>
+
+      <!-- Referral panel -->
+      <div id="referral-panel" class="panel collapsible">
+        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="referral-content" data-panel="referral-panel"><span class="toggle-icon" aria-hidden="true">+</span> Invite a Friend</h3>
+        <div class="panel-body panel-closed" id="referral-content">
+          <div class="referral-section">
+            <p class="referral-description">Share Mandarin with friends learning Chinese. You'll both benefit.</p>
+            <div class="referral-link-row">
+              <input type="text" id="referral-link-input" class="referral-link-input" readonly aria-label="Your referral link">
+              <button id="referral-copy-btn" class="btn-secondary referral-copy-btn" aria-label="Copy referral link">Copy Link</button>
+            </div>
+            <div id="referral-copy-status" class="referral-copy-status hidden" aria-live="polite">Copied.</div>
+            <div id="referral-stats" class="referral-stats"></div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- end panels-group -->
+
+      <!-- Dashboard footer -->
+      <div class="dashboard-footer">
+        <button id="btn-give-feedback" class="dashboard-footer-link" aria-label="Give feedback">Give Feedback</button>
+        <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
+        <button id="btn-report-problem" class="dashboard-footer-link" aria-label="Report a problem">Report a Problem</button>
+        <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="/about" class="dashboard-footer-link" aria-label="Help and about">Help</a>
+      </div>
+    </section>
+
+    <!-- NPS / Feedback bar (shown after every 10th session or via footer link) -->
+    <div id="feedback-bar" class="feedback-bar hidden" aria-label="Feedback">
+      <div class="feedback-bar-inner">
+        <div id="feedback-prompt" class="feedback-prompt">
+          <span class="feedback-question">How likely are you to recommend Mandarin? </span>
+          <div class="feedback-ratings" id="feedback-ratings">
+            <!-- 1-10 buttons generated by JS -->
+          </div>
+        </div>
+        <div id="feedback-comment-area" class="feedback-comment-area hidden">
+          <label for="feedback-comment" class="feedback-comment-label">Any thoughts? (optional)</label>
+          <textarea id="feedback-comment" class="feedback-comment-input" rows="2" maxlength="1000"></textarea>
+          <button id="feedback-submit-btn" class="btn-primary feedback-submit-btn">Submit</button>
+        </div>
+        <div id="feedback-thanks" class="feedback-thanks hidden">Thank you.</div>
+        <button id="feedback-close" class="feedback-close" aria-label="Close feedback">&times;</button>
+      </div>
+    </div>
+
+    <!-- Session area (hidden until session starts) -->
+    <section id="session" class="hidden" aria-label="Active session">
+      <div id="session-header" class="session-header">
+        <span id="drill-type-label" class="drill-type-label" aria-live="polite"></span>
+        <span id="session-timer" class="session-timer" aria-label="Session elapsed time"></span>
+      </div>
+      <div id="drill-area" tabindex="-1" aria-live="polite" aria-relevant="additions">
+        <!-- Messages and drills appear here -->
+      </div>
+
+      <!-- Input area -->
+      <div id="input-area" class="hidden">
+        <div id="prompt-text" aria-live="assertive"></div>
+        <div class="input-row">
+          <label for="answer-input" class="sr-only">Your answer</label>
+          <input type="text" id="answer-input" autocomplete="off" autofocus aria-label="Your answer">
+          <button id="btn-submit" aria-label="Submit answer">&rarr;</button>
+        </div>
+        <div class="shortcuts" role="toolbar" aria-label="Quick actions">
+          <button class="btn-shortcut" data-quick="Q" aria-label="Done with session">done <kbd>Q</kbd></button>
+          <button class="btn-shortcut" data-quick="B" aria-label="Skip">skip <kbd>B</kbd></button>
+          <button class="btn-shortcut" data-quick="?" aria-label="50/50 hint">hint <kbd>?</kbd></button>
+          <button class="btn-shortcut" data-quick="N" aria-label="Unsure">unsure <kbd>N</kbd></button>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Session progress">
+        <div id="progress-fill"></div>
+      </div>
+      <div id="progress-label" aria-hidden="true"></div>
+    </section>
+
+    <!-- Session complete overlay -->
+    <section id="complete" class="hidden" aria-label="Session results">
+      <div id="complete-content"></div>
+      <button id="btn-back" class="btn-primary" aria-label="Return to dashboard">Back to Dashboard</button>
+    </section>
+
+    <!-- Reading view -->
+    <section id="reading" class="hidden" aria-label="Graded reader">
+      <div class="reading-header">
+        <button id="reading-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <div class="reading-controls">
+          <select id="reading-level" aria-label="HSK level filter">
+            <option value="">All levels</option>
+            <option value="1">HSK 1</option>
+            <option value="2">HSK 2</option>
+            <option value="3">HSK 3</option>
+            <option value="4">HSK 4</option>
+            <option value="5">HSK 5</option>
+          </select>
+          <label class="toggle-label"><input type="checkbox" id="reading-pinyin-toggle"> Pinyin</label>
+          <label class="toggle-label"><input type="checkbox" id="reading-translation-toggle"> Translation</label>
+        </div>
+      </div>
+      <div id="reading-list" class="reading-list">
+        <!-- Passage list populated by JS -->
+      </div>
+      <div id="reading-passage" class="reading-passage hidden">
+        <div id="reading-text" class="reading-text"></div>
+        <div id="reading-pinyin" class="reading-pinyin hidden"></div>
+        <div id="reading-translation" class="reading-translation hidden"></div>
+        <div id="reading-stats" class="reading-stats"></div>
+        <div class="reading-nav">
+          <button id="reading-prev" class="btn-secondary" disabled>&larr; Previous</button>
+          <button id="reading-next" class="btn-secondary">Next &rarr;</button>
+        </div>
+      </div>
+      <div id="reading-gloss" class="reading-gloss hidden" role="tooltip"></div>
+    </section>
+
+    <!-- Media view -->
+    <section id="media" class="hidden" aria-label="Media shelf">
+      <div class="media-header">
+        <button id="media-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <h2>Media Shelf</h2>
+      </div>
+      <div id="media-grid" class="media-grid">
+        <!-- Recommendation cards populated by JS -->
+      </div>
+      <div id="media-history-section" class="media-history-section">
+        <h3>Watch History</h3>
+        <div id="media-history-list"></div>
+      </div>
+    </section>
+
+    <!-- Media comprehension quiz -->
+    <section id="media-quiz" class="hidden" aria-label="Media comprehension quiz">
+      <div class="media-quiz-header">
+        <button id="media-quiz-back" class="btn-secondary btn-back-nav" aria-label="Back to media shelf">&larr; Back</button>
+        <h2 id="media-quiz-title"></h2>
+      </div>
+      <div id="media-quiz-vocab" class="media-quiz-vocab"></div>
+      <div id="media-quiz-questions" class="media-quiz-questions"></div>
+      <div id="media-quiz-result" class="media-quiz-result hidden"></div>
+      <div id="media-quiz-cultural" class="media-quiz-cultural hidden"></div>
+    </section>
+
+    <!-- Listening view -->
+    <section id="listening" class="hidden" aria-label="Listening practice">
+      <div class="listening-header">
+        <button id="listening-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <div class="listening-controls">
+          <select id="listening-level" aria-label="HSK level filter">
+            <option value="">All levels</option>
+            <option value="1">HSK 1</option>
+            <option value="2">HSK 2</option>
+            <option value="3">HSK 3</option>
+          </select>
+          <div class="speed-control">
+            <label for="listening-speed">Speed:</label>
+            <select id="listening-speed">
+              <option value="0.7">0.7x</option>
+              <option value="1.0" selected>1.0x</option>
+              <option value="1.2">1.2x</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="listening-content" class="listening-content">
+        <div id="listening-title" class="listening-title"></div>
+        <div class="listening-actions">
+          <button id="listening-play" class="btn-primary">Play</button>
+          <button id="listening-replay" class="btn-secondary hidden">Play Again</button>
+        </div>
+        <div id="listening-transcript" class="reading-passage hidden">
+          <div id="listening-text" class="reading-text"></div>
+        </div>
+        <button id="listening-reveal" class="btn-secondary hidden">Show Transcript</button>
+        <div id="listening-questions" class="listening-questions hidden"></div>
+        <button id="listening-new" class="btn-secondary">New Passage</button>
+      </div>
+      <div id="listening-gloss" class="reading-gloss hidden" role="tooltip"></div>
+    </section>
+  </div>
+
+  <!-- Global tooltip for mastery bars -->
+  <div id="mastery-tooltip" class="mastery-tooltip" aria-hidden="true"></div>
+
+  <script src="/static/app.js?v={{ static_hash('app.js') }}" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/sw.js').catch(function() {});
+    }
+  </script>
+</body>
+</html>

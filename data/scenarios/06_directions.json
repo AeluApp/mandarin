@@ -1,0 +1,39 @@
+{
+    "title": "Asking for directions",
+    "title_zh": "问路",
+    "hsk_level": 1,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You're lost and need to find the subway station.",
+        "setup_zh": "你迷路了，想找地铁站。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Ask a passerby where the subway station is.",
+                "options": [
+                    {"text_zh": "你好，请问地铁站在哪儿？", "text_pinyin": "nǐ hǎo, qǐngwèn dìtiě zhàn zài nǎr?", "text_en": "Hello, excuse me, where is the subway station?", "score": 1.0, "register": "neutral", "feedback": "Perfect — polite opener + clear question."},
+                    {"text_zh": "地铁站在哪里？", "text_pinyin": "dìtiě zhàn zài nǎlǐ?", "text_en": "Where is the subway station?", "score": 0.7, "register": "casual", "feedback": "Clear, but adding 你好 and 请问 is more polite to a stranger."},
+                    {"text_zh": "请问，地铁站怎么走？", "text_pinyin": "qǐngwèn, dìtiě zhàn zěnme zǒu?", "text_en": "Excuse me, how do I get to the subway station?", "score": 1.0, "register": "neutral", "feedback": "Also perfect — 怎么走 asks 'how do I get there' instead of 'where is it'."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一直走，到路口往左拐，就在右边。",
+                "text_pinyin": "yìzhí zǒu, dào lùkǒu wǎng zuǒ guǎi, jiù zài yòubiān.",
+                "text_en": "Go straight, turn left at the intersection, it's on the right."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them and confirm you understood.",
+                "options": [
+                    {"text_zh": "一直走，左拐，右边。谢谢你！", "text_pinyin": "yìzhí zǒu, zuǒ guǎi, yòubiān. xièxie nǐ!", "text_en": "Go straight, turn left, on the right. Thank you!", "score": 1.0, "register": "casual", "feedback": "Excellent — repeating the key directions shows you're listening."},
+                    {"text_zh": "谢谢！", "text_pinyin": "xièxie!", "text_en": "Thanks!", "score": 0.7, "register": "neutral", "feedback": "Polite, but repeating the directions helps confirm understanding."},
+                    {"text_zh": "好的，谢谢。远不远？", "text_pinyin": "hǎo de, xièxie. yuǎn bù yuǎn?", "text_en": "OK, thanks. Is it far?", "score": 0.9, "register": "neutral", "feedback": "Good follow-up — 远不远 asks 'is it far?'"}
+                ]
+            }
+        ],
+        "cultural_note": "请问 (qǐngwèn, 'may I ask') is essential when approaching strangers. Repeating directions back is natural and appreciated — it shows respect for the other person's time."
+    }
+}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Mandarin</title>
+  <meta name="description" content="Privacy Policy for Mandarin, the adaptive Chinese learning app. What we collect, what we don't, and how your data is handled. Written in plain language.">
+  <link rel="canonical" href="https://mandarinapp.com/privacy">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Privacy Policy — Mandarin">
+  <meta property="og:description" content="Privacy Policy for Mandarin. What we collect, what we don't, and why. Plain language.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/privacy">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy — Mandarin">
+  <meta name="twitter:description" content="Privacy Policy for Mandarin. What we collect, what we don't, and why.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* -- Legal content -- */
+    .legal {
+      padding: var(--space-8) 0;
+    }
+
+    .legal h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .legal .effective-date {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-6);
+    }
+
+    .legal h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .legal p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-3);
+      line-height: 1.75;
+    }
+
+    .legal ul {
+      list-style: none;
+      margin-bottom: var(--space-3);
+      padding-left: var(--space-4);
+    }
+
+    .legal ul li {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      line-height: 1.75;
+      padding: var(--space-1) 0;
+      position: relative;
+    }
+
+    .legal ul li::before {
+      content: "\2014";
+      position: absolute;
+      left: calc(-1 * var(--space-4));
+      color: var(--color-border);
+    }
+
+    .legal a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .legal strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      border-top: 1px solid var(--color-border);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .legal h1 { font-size: 1.8rem; }
+      .nav-links { gap: var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Privacy Content -->
+  <main class="legal">
+    <div class="container">
+
+      <h1>Privacy Policy</h1>
+      <p class="effective-date">Effective: February 1, 2026</p>
+
+      <p>This policy explains what data Mandarin collects, what it does not collect, and how your information is handled. It is written in plain language because privacy policies should be readable, not endurable.</p>
+
+      <h2>1. What We Collect</h2>
+
+      <p><strong>Account information:</strong> If you create an account, we collect your email address and a password (stored as a salted hash -- we cannot see your password). If you sign up for the paid tier, your name and billing information are collected by Stripe, our payment processor.</p>
+
+      <p><strong>Study progress:</strong> Your learning data -- drill scores, session history, reading activity, vocabulary progress, diagnostic results -- is stored locally on your device. This data powers the adaptive scheduling algorithm and your per-skill diagnostics.</p>
+
+      <p><strong>Payment information:</strong> If you subscribe to Full Access, payment is handled entirely by Stripe. We receive confirmation of your subscription status, but we never see or store your credit card number, CVC, or full billing details. Stripe's privacy policy governs how they handle your payment data.</p>
+
+      <p><strong>Contact form submissions:</strong> If you email us or use the contact form, we receive your email address and message content. Contact forms are processed through Formspree.</p>
+
+      <h2>2. What We Do NOT Collect</h2>
+
+      <p>This section matters as much as the one above.</p>
+      <ul>
+        <li>We do not sell your data to anyone. Not now, not ever.</li>
+        <li>We do not run third-party advertising networks or display ads.</li>
+        <li>We do not use tracking pixels from social media platforms.</li>
+        <li>We do not send your study data to any external AI service. The system uses zero AI tokens at runtime -- all processing is deterministic and happens locally or on our servers without external API calls.</li>
+        <li>We do not create advertising profiles based on your behavior.</li>
+        <li>We do not share your data with data brokers.</li>
+      </ul>
+
+      <h2>3. How Data Is Stored</h2>
+
+      <p><strong>Learning data:</strong> Your study progress, drill scores, and reading history are stored locally on your device using browser storage. This means your data stays with you and is available offline. It also means that if you clear your browser data, your study history may be lost (export functionality is available).</p>
+
+      <p><strong>Account data:</strong> If you create an account, your email and hashed password are stored on our servers. This data is used only for authentication and account management.</p>
+
+      <p><strong>Payment data:</strong> All payment information is stored and processed by Stripe. We do not store payment details on our servers. See <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe's privacy policy</a> for details on how they handle your payment information.</p>
+
+      <h2>4. Cookies</h2>
+
+      <p>Mandarin uses first-party cookies only. We do not use third-party tracking cookies.</p>
+      <ul>
+        <li><strong>Session cookie:</strong> Keeps you logged in while you use the app. Expires when you close your browser or after a set period.</li>
+        <li><strong>Referral tracking cookie:</strong> If you arrive via an affiliate link, a cookie records the referral source so the affiliate receives proper credit. This cookie expires after 90 days.</li>
+        <li><strong>Preferences cookie:</strong> Stores your display preferences (such as dark mode override, if applicable). Persistent, stored locally.</li>
+      </ul>
+      <p>You can disable cookies in your browser settings. The app will still function, but you may need to log in more frequently.</p>
+
+      <h2>5. Analytics</h2>
+
+      <p>We use Google Analytics 4 (GA4) for basic website analytics. This helps us understand how people find and use the site -- not to build profiles or target advertising.</p>
+      <p>What GA4 tracks for us:</p>
+      <ul>
+        <li>Page views and navigation patterns on the marketing site.</li>
+        <li>General geographic region (country level, not precise location).</li>
+        <li>Device type and browser (to ensure compatibility).</li>
+        <li>Referral sources (how you found us).</li>
+      </ul>
+      <p>What GA4 does not track for us:</p>
+      <ul>
+        <li>Your study sessions, drill scores, or learning data.</li>
+        <li>The content of graded reading passages you view.</li>
+        <li>Any personally identifiable information beyond what Google collects by default.</li>
+      </ul>
+      <p>GA4 data is used for aggregate analytics only. We use it to understand which pages people visit, where they come from, and whether the site works on their device. If you use a browser extension like uBlock Origin to block Google Analytics, the app will function normally.</p>
+
+      <h2>6. Third Parties</h2>
+
+      <p>We use three external services. That is the complete list.</p>
+      <ul>
+        <li><strong>Stripe</strong> -- processes payments for Full Access subscriptions. Stripe receives your payment information directly. <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe Privacy Policy</a>.</li>
+        <li><strong>Formspree</strong> -- processes contact form submissions. Formspree receives your email address and message content. <a href="https://formspree.io/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Formspree Privacy Policy</a>.</li>
+        <li><strong>Google Analytics 4</strong> -- provides website analytics as described above. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a>.</li>
+      </ul>
+      <p>We do not use any other third-party services that receive your data. No ad networks. No social login providers. No third-party analytics beyond GA4.</p>
+
+      <h2>7. Data Retention</h2>
+
+      <p><strong>Learning data:</strong> Stored locally on your device until you clear it or export/delete it. We do not have access to your local learning data.</p>
+      <p><strong>Account data:</strong> Retained until you delete your account. When you request account deletion, we delete your email, hashed password, and any server-side data within 30 days.</p>
+      <p><strong>Payment history:</strong> Stripe retains transaction records as required by financial regulations. We retain only your subscription status (active/inactive) and general payment history (dates and amounts) for customer service purposes.</p>
+      <p><strong>Contact form messages:</strong> Retained indefinitely for customer support reference unless you ask us to delete them.</p>
+
+      <h2>8. Your Rights</h2>
+
+      <p>You have the right to:</p>
+      <ul>
+        <li><strong>Access:</strong> See what data we have about you. Email us and we will send you everything within 30 days.</li>
+        <li><strong>Export:</strong> Export your learning data from the app at any time.</li>
+        <li><strong>Delete:</strong> Request deletion of your account and all associated data. Learning data stored locally on your device is under your control -- you can delete it by clearing browser storage.</li>
+        <li><strong>Correct:</strong> Update your email address or other account information at any time.</li>
+        <li><strong>Object:</strong> If you have concerns about how your data is being used, email us and we will address it.</li>
+      </ul>
+      <p>To exercise any of these rights, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>.</p>
+
+      <h2>9. Children's Privacy</h2>
+
+      <p>Mandarin is not designed for children under 13 and we do not knowingly collect data from children under 13. If you believe a child under 13 has created an account, please contact us and we will delete the account and associated data promptly.</p>
+
+      <h2>10. International Users</h2>
+
+      <p>Mandarin is operated from the United States. If you are using the service from outside the US, your account data (email, hashed password) may be stored on servers in the United States. Your learning data is stored locally on your device regardless of where you are located. By using the service, you consent to the transfer of account data to the United States.</p>
+
+      <h2>11. Changes to This Policy</h2>
+
+      <p>If we change this privacy policy, we will:</p>
+      <ul>
+        <li>Post the updated policy on this page with a new effective date.</li>
+        <li>Notify existing users by email at least 30 days before material changes take effect.</li>
+        <li>Never retroactively reduce your privacy protections without your consent.</li>
+      </ul>
+      <p>If a change meaningfully affects how your data is handled, we will ask for your explicit consent before applying it to data collected under the previous policy.</p>
+
+      <h2>12. Contact</h2>
+
+      <p>For privacy-related questions, concerns, or requests, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>. Every email gets read and we will respond within a few business days. If you have a data access or deletion request, we will fulfill it within 30 days.</p>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+    </div>
+  </footer>
+
+</body>
+</html>

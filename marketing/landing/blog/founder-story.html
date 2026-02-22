@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Mandarin Was Built: Lessons in Language Acquisition — Mandarin Blog</title>
+  <meta name="description" content="The story behind Mandarin: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta name="keywords" content="Chinese learning app, Mandarin learning app, spaced repetition Chinese, adaptive Chinese learning app, language acquisition, SRS for Mandarin, how Mandarin was built, data-driven Chinese learning, interleaved practice Chinese">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="How Mandarin Was Built: Lessons in Language Acquisition">
+  <meta property="og:description" content="The story behind Mandarin: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mandarinapp.com/blog/founder-story">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:author" content="Mandarin">
+  <meta property="article:published_time" content="2026-01-14">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Mandarin Was Built: Lessons in Language Acquisition">
+  <meta name="twitter:description" content="The story behind Mandarin: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Mandarin Was Built: Lessons in Language Acquisition",
+    "description": "The story behind Mandarin: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.",
+    "author": {
+      "@type": "Organization",
+      "name": "Mandarin"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mandarin",
+      "url": "https://mandarinapp.com"
+    },
+    "datePublished": "2026-01-14",
+    "dateModified": "2026-01-14",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://mandarinapp.com/blog/founder-story"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="alternate" type="application/rss+xml" title="Mandarin Blog" href="/blog/feed.xml">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-base); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+    nav .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 var(--space-4); display: flex; justify-content: space-between; align-items: center; }
+    nav .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    nav .nav-links { list-style: none; display: flex; gap: var(--space-4); }
+    nav .nav-links a { font-size: 0.95rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s ease; }
+    nav .nav-links a:hover { color: var(--color-accent); }
+    .article-header { max-width: 720px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-5); text-align: center; }
+    .article-header h1 { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 600; line-height: 1.2; margin-bottom: var(--space-3); }
+    .article-meta { font-size: 0.9rem; color: var(--color-text-faint); }
+    .article-meta span + span::before { content: "\00b7"; margin: 0 0.5em; }
+    article { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4) var(--space-8); }
+    article h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; margin: var(--space-6) 0 var(--space-3); }
+    article h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin: var(--space-5) 0 var(--space-2); }
+    article p { margin-bottom: var(--space-3); line-height: 1.75; }
+    article ul, article ol { margin-bottom: var(--space-3); padding-left: var(--space-4); }
+    article li { margin-bottom: var(--space-2); line-height: 1.65; }
+    article strong { font-weight: 600; }
+    article em { font-style: italic; }
+    article a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+    article a:hover { opacity: 0.8; }
+    .hanzi { font-family: var(--font-hanzi); font-size: 1.15em; color: var(--color-accent); }
+    .article-cta { max-width: 720px; margin: 0 auto var(--space-6); padding: var(--space-5) var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); text-align: center; }
+    .article-cta h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-2); }
+    .article-cta p { font-size: 0.95rem; color: var(--color-text-faint); margin-bottom: var(--space-4); }
+    .btn-primary { display: inline-block; padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-base); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s ease; text-decoration: none; }
+    .btn-primary:hover { opacity: 0.85; }
+    .newsletter { max-width: 720px; margin: 0 auto var(--space-8); padding: var(--space-5) var(--space-4); border-top: 1px solid var(--color-border); text-align: center; }
+    .newsletter h3 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; margin-bottom: var(--space-2); }
+    .newsletter p { font-size: 0.9rem; color: var(--color-text-faint); margin-bottom: var(--space-3); }
+    .newsletter-form { display: flex; gap: var(--space-2); max-width: 420px; margin: 0 auto; }
+    .newsletter-form input { flex: 1; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; background: var(--color-surface); color: var(--color-text); }
+    .newsletter-form input::placeholder { color: var(--color-text-faint); }
+    .newsletter-success { padding: var(--space-3) var(--space-4); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); border-radius: var(--radius); color: var(--color-accent); font-size: 0.95rem; display: none; }
+    footer { padding: var(--space-5) 0; text-align: center; font-size: 0.85rem; color: var(--color-text-faint); border-top: 1px solid var(--color-border); }
+    footer a { color: var(--color-text-faint); text-decoration: underline; }
+    @media (max-width: 600px) {
+      .article-header h1 { font-size: 1.8rem; }
+      nav .nav-links { gap: var(--space-3); }
+      nav .nav-links a { font-size: 0.85rem; }
+      .newsletter-form { flex-direction: column; }
+    }
+    @keyframes drift-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .article-header { animation: drift-up 0.6s ease-out both; }
+    @media (prefers-reduced-motion: reduce) { .article-header { animation: none; opacity: 1; } }
+    .share-bar { max-width: 720px; margin: 0 auto var(--space-5); padding: var(--space-4) var(--space-4) 0; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+    .share-bar span { font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-faint); }
+    .share-bar button { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text-faint); font-family: var(--font-body); font-size: 0.85rem; cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; line-height: 1; }
+    .share-bar button:hover { color: var(--color-accent); border-color: var(--color-accent); }
+    .share-bar button svg { width: 16px; height: 16px; fill: currentColor; }
+    .share-bar .share-copied { font-size: 0.8rem; color: var(--color-secondary); opacity: 0; transition: opacity 0.2s ease; }
+    .share-bar .share-copied.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <h1>How Mandarin Was Built: Lessons in Language Acquisition</h1>
+    <div class="article-meta">
+      <span>January 14, 2026</span>
+      <span>13 min read</span>
+    </div>
+  </header>
+
+  <article>
+    <p><em>Mandarin was born from a simple frustration: the tools available for learning Chinese did not work the way an adult learner's brain needs them to. What started as a personal project became a full adaptive learning system. Along the way, the research on memory and language acquisition reshaped every design decision &mdash; and plenty of mistakes were made.</em></p>
+
+    <h2>How this started</h2>
+
+    <p>About two years ago, the goal was to learn Mandarin. Not "learn a few phrases for a trip" &mdash; actually learn it. Read a newspaper. Have a conversation. Understand what was being said in Chinese dramas playing in the background.</p>
+
+    <p>Duolingo came first, because it always does. It was fine for about a week. The gamification kept the app opening, but after a few days it became clear the system was optimizing for streaks, not learning. Matching pictures to words, tapping the right answer in a multiple-choice lineup, and watching a green progress bar fill up felt productive &mdash; but when recall was tested without the app's scaffolding, everything was gone. The game mechanics were working exactly as designed. They just were not designed for retention.</p>
+
+    <p>Anki came next. Anki is powerful &mdash; genuinely powerful &mdash; but it asks you to build your own curriculum. You import decks, or make your own cards, and the spaced repetition engine handles the scheduling. The problem is that good Anki decks require good content design, and content design is a separate skill from language learning. More time went into formatting cards than studying them. Every decision &mdash; should there be pinyin? Audio? Example sentences? Both directions or just one? &mdash; was a rabbit hole.</p>
+
+    <p>HelloChinese and a few others came after that. They were better. The content was sequenced. The exercises made sense. But they still felt like textbooks with touchscreens. And none of them solved the problem that kept coming up: studying vocabulary in one app, then trying to read something real &mdash; a WeChat message, a news headline, a restaurant sign &mdash; and the gap between "studying Chinese" and "using Chinese" felt enormous.</p>
+
+    <p>Nothing connected what a learner was reading and hearing in the real world to what they were drilling in an app. That gap is where Mandarin started.</p>
+
+    <h2>What the research actually says</h2>
+
+    <p>Before a line of code was written, weeks went into reading cognitive science papers on memory and learning. Not from an academic perspective &mdash; from a builder's perspective. If a tool was going to be built, it should be grounded in an understanding of why existing tools worked or did not.</p>
+
+    <p>A few findings shaped everything:</p>
+
+    <p><strong>Spaced repetition works, but the intervals matter.</strong> This goes back to Hermann Ebbinghaus in the 1880s, who first mapped the forgetting curve &mdash; how quickly we forget new information without review. Pimsleur refined this into specific intervals for language learning. Modern algorithms like FSRS (Free Spaced Repetition Scheduler) take it further, adjusting intervals based on your personal forgetting patterns. The core insight is simple: review something just as you're about to forget it, and the memory strengthens. Review too early and you're wasting time. Review too late and you're re-learning from scratch.</p>
+
+    <p><strong>Interleaving beats blocked practice.</strong> This one was surprising. If you are learning vocabulary for food, clothing, and transportation, the instinct is to study all the food words, then all the clothing words, then transportation. That feels organized. It also does not work as well. Research by Rohrer and Taylor (2007) and others shows that mixing topics and drill types in a single session &mdash; even though it feels harder and messier &mdash; produces significantly better long-term retention. The difficulty is the point.</p>
+
+    <p><strong>Desirable difficulty is a real thing.</strong> Robert Bjork's work on this concept changed how the team thinks about practice design. Making something harder &mdash; within reason &mdash; makes the learning stick better. If a drill is easy, you are not growing. If it is impossible, you are just frustrated. The sweet spot is that slightly-too-hard zone where you have to work for it.</p>
+
+    <p><strong>The testing effect: retrieval beats review.</strong> Actively trying to recall something is more effective than passively re-reading it. This is why flashcards work better than highlighting a textbook. And it's why varied, active drills work better than flashcards alone.</p>
+
+    <h2>Why Mandarin has 27 drill types</h2>
+
+    <p>When people hear the app has 27 different drill types, they sometimes laugh. It sounds like over-engineering. But each one exists for a reason grounded in how memory works.</p>
+
+    <p>Not all practice is equal. Recognizing a character when you see it uses different neural pathways than producing it from memory. Hearing a tone and identifying it is different from producing the correct tone yourself. Reading a sentence with a missing word (cloze deletion) forces you to understand the grammar and context, not just the vocabulary.</p>
+
+    <p>Here is a sample of what that means:</p>
+
+    <p><strong>Tone pair drills</strong> force you to distinguish between similar sounds. The difference between <span class="hanzi">买</span> (<em>m&#462;i</em>, to buy, third tone) and <span class="hanzi">卖</span> (<em>m&agrave;i</em>, to sell, fourth tone) is a single tone &mdash; and if you get it wrong, you've said the opposite of what you meant. You don't build that discrimination by reading; you build it by listening and choosing, over and over, with pairs that are specifically designed to be confusing.</p>
+
+    <p><strong>Cloze deletion</strong> gives you a sentence with a blank: <span class="hanzi">我想___一杯咖啡</span> (I want to ___ a cup of coffee). You have to produce <span class="hanzi">喝</span> (<em>h&#275;</em>, drink) from context. This is harder than recognizing <span class="hanzi">喝</span> on a flashcard, and that's exactly why it works better.</p>
+
+    <p><strong>Audio-to-hanzi matching</strong> forces you to connect what you hear to what you read &mdash; bridging the listening-reading gap that trips up so many learners.</p>
+
+    <p><strong>Register-aware drills</strong> teach you the difference between formal and casual Chinese. Textbook Chinese and street Chinese diverge significantly, and most apps only teach you one.</p>
+
+    <p>The science of varied practice says that switching between these drill types in a single session &mdash; even though it feels disorienting &mdash; strengthens memory traces by forcing your brain to re-contextualize the same information in different ways. It's like training a muscle from multiple angles instead of doing the same exercise on repeat.</p>
+
+    <h2>The cleanup loop</h2>
+
+    <p>The feature the team is most proud of is not flashy. It is called the cleanup loop, and it works like this:</p>
+
+    <p>You read something in Chinese &mdash; a graded reader, a news snippet, whatever's at your level. When you hit a word you don't know, you tap it and get an inline gloss: pinyin, meaning, example. That unknown word automatically becomes a drill item. The next time you practice, it shows up in your spaced repetition queue, mixed in with your other items, across multiple drill types.</p>
+
+    <p>Read real Chinese. Look up what you don't know. Drill those specific words. Repeat.</p>
+
+    <p>This sounds simple, and it is. But it bridges the gap that frustrated learners with every other tool available. It connects the experience of reading Chinese to the discipline of drilling vocabulary, without requiring anyone to manually create cards or maintain a word list.</p>
+
+    <p>It is basically how a good tutor works. They notice what you struggle with, make a mental note, and circle back to it later. Except the app never forgets and never gets tired.</p>
+
+    <h2>What went wrong</h2>
+
+    <p>It would be nice to say there was a clear vision executed perfectly. There was not. Mistakes were made that cost months.</p>
+
+    <p><strong>An audio recording and tone grading system was built before anyone needed it.</strong> It was technically interesting &mdash; record yourself speaking, compare your tone contours to reference audio, get a score. But it was built early, when the core drilling and content were not mature enough. A cool engineering problem was being solved instead of the most important user problem. The lesson: build what is needed next, not what is interesting to build.</p>
+
+    <p><strong>The scheduling algorithm was over-engineered before there was data.</strong> Weeks went into tweaking spaced repetition parameters &mdash; optimal intervals, difficulty weights, interleaving ratios &mdash; before there was enough usage data to know if the tweaks were improvements. Optimization was happening in the dark. Eventually the right call was made: pick sensible defaults from the research literature and commit to tuning later with real data. That decision should have come sooner.</p>
+
+    <p><strong>Too long was spent on features and not enough on content quality.</strong> This is the trap every developer falls into when building an educational product. The features are in your wheelhouse. The content is the hard part. But users do not care how elegant the scheduling algorithm is if the example sentences are awkward or the difficulty progression is wrong. The content is the product. The features are just delivery infrastructure.</p>
+
+    <p><strong>Curriculum design was underestimated.</strong> Deciding which 300 words to teach first, which grammar points to introduce at each level, which example sentences best illustrate usage &mdash; these decisions have more impact on learning outcomes than any technical feature. More time should have been spent on curriculum and less on code in the first six months.</p>
+
+    <h2>What actually moves the needle</h2>
+
+    <p>After building this system and using it daily for over a year, and after watching how it tracks real learner progress, here is what actually matters:</p>
+
+    <p><strong>Consistency beats intensity.</strong> Fifteen minutes every day produces better results than two hours once a week. This isn't motivational advice &mdash; it's a direct consequence of how the forgetting curve works. Spaced repetition requires regular contact. A two-hour session can't compensate for six days of silence because by day three, you've already forgotten most of what you reviewed.</p>
+
+    <p><strong>Active recall beats passive review.</strong> Drilling &mdash; actively trying to produce or identify something &mdash; is more effective than re-reading notes or passively listening. This is the testing effect in action. It feels harder because it is harder, and that's why it works.</p>
+
+    <p><strong>Context beats isolation.</strong> Learning a character inside a sentence is more effective than learning it on a flashcard by itself. Sentences give you grammar, usage patterns, collocations, and register cues that isolated vocabulary can't. This is why cloze deletion and sentence-level drills are worth the extra complexity.</p>
+
+    <p><strong>Honest diagnostics beat encouragement.</strong> This is the one that feels counterintuitive. Most language apps lean heavily on positive reinforcement &mdash; confetti animations, streak celebrations, "Great job!" messages. That feels good in the moment, but it doesn't help you improve. Knowing that your listening comprehension is two levels behind your reading ability is uncomfortable but actionable. You can fix a specific weakness. You can't fix "keep up the great work!"</p>
+
+    <p>The app shows you exactly where you are: which tones you mix up, which grammar patterns you get wrong, where your listening lags your reading. The numbers are real and sometimes unflattering. That's the point.</p>
+
+    <h2>The "no AI at runtime" decision</h2>
+
+    <p>People are often surprised to learn the app uses zero AI tokens at runtime. No GPT calls, no Claude calls, no language model generating anything on the fly. Every drill, every score, every recommendation is deterministic &mdash; computed from your data using algorithms that run locally.</p>
+
+    <p>This was not an ideological choice. It was a practical one.</p>
+
+    <p><strong>Reliability.</strong> Language drills need to be instant. A 200ms API call to generate a response is fine for a chatbot; it is unacceptable for a flashcard drill where timing affects your flow state. And API calls fail. Servers go down. Rate limits hit. The app needed to work every time, immediately, with no dependencies on external services.</p>
+
+    <p><strong>Correctness.</strong> AI-generated example sentences sometimes contain errors &mdash; wrong tones, unnatural phrasing, hallucinated words. In a language learning context, an error in the training material is worse than no material at all, because you'll memorize the error. Every sentence, every audio clip, every drill in the app has been verified. That's not possible at scale with generated content.</p>
+
+    <p><strong>Privacy.</strong> Your learning data &mdash; what you get wrong, how often, which patterns you struggle with &mdash; is sensitive in a low-stakes but personal way. It stays on the system. It doesn't get sent to a third-party API for processing.</p>
+
+    <p><strong>Offline capability.</strong> The core drilling works without an internet connection. On a train, on a plane, in a part of China with spotty wifi &mdash; it works.</p>
+
+    <p>To be clear: this is not an anti-AI stance. AI was used extensively to help build the content &mdash; generating draft sentences, finding example contexts, identifying common learner errors. AI is an excellent tool for content creation. It is just not the right tool for real-time drill scoring and scheduling, where determinism and reliability matter more than flexibility.</p>
+
+    <h2>Where this is going</h2>
+
+    <p>The app is used daily by its creators and a growing community of learners. The graded reading library is growing. The drill types are being refined based on what the data shows is working. The curriculum is getting tighter. Every week, something that could be better is found and fixed.</p>
+
+    <p>If you are learning Chinese, we would genuinely like you to try it. Not for a growth metric &mdash; but because the tool gets better when more people use it and share what is missing.</p>
+
+    <p>HSK 1-2 content is free, no time limit. Full access to all levels, all drill types, all diagnostics is $12/month. No annual upsell, no "premium tier," no in-app purchases.</p>
+
+    <p>If you are curious: <a href="https://mandarinapp.com">mandarinapp.com</a></p>
+
+    <p>And if you just read this whole thing and have thoughts &mdash; about the approach, the research, the mistakes &mdash; reach out at <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>. Every email gets read.</p>
+  </article>
+
+  <div class="share-bar">
+    <span>Share this post</span>
+    <button onclick="window.open('https://x.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','noopener')" aria-label="Share on X">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </button>
+    <button onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank','noopener')" aria-label="Share on LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </button>
+    <button onclick="window.open('https://reddit.com/submit?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title),'_blank','noopener')" aria-label="Share on Reddit">
+      <svg viewBox="0 0 24 24"><path d="M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 01-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 01.042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 014.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 01.14-.197.35.35 0 01.238-.042l2.906.617a1.214 1.214 0 011.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 00-.231.094.33.33 0 000 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 000-.463.327.327 0 00-.462 0c-.545.533-1.684.73-2.512.73-.828 0-1.967-.184-2.512-.73a.326.326 0 00-.205-.094z"/></svg>
+    </button>
+    <button onclick="navigator.clipboard.writeText(location.href).then(function(){var el=document.querySelector('.share-copied');el.classList.add('visible');setTimeout(function(){el.classList.remove('visible')},2000)})" aria-label="Copy link">
+      <svg viewBox="0 0 24 24"><path d="M13.723 4.277a3.5 3.5 0 014.95 4.95l-3.5 3.5a3.5 3.5 0 01-4.95 0 .75.75 0 011.06-1.06 2 2 0 002.83 0l3.5-3.5a2 2 0 00-2.83-2.83l-1.75 1.75a.75.75 0 01-1.06-1.06l1.75-1.75zm-3.446 6.446a3.5 3.5 0 014.95 0 .75.75 0 01-1.06 1.06 2 2 0 00-2.83 0l-3.5 3.5a2 2 0 002.83 2.83l1.75-1.75a.75.75 0 011.06 1.06l-1.75 1.75a3.5 3.5 0 01-4.95-4.95l3.5-3.5z"/></svg>
+      Copy link
+    </button>
+    <span class="share-copied">Copied</span>
+  </div>
+
+  <div class="article-cta">
+    <h3>Try Mandarin free</h3>
+    <p>HSK 1-2 content, all core drill types, no credit card required.</p>
+    <a href="https://mandarinapp.com" class="btn-primary">Start learning</a>
+  </div>
+
+  <div class="newsletter">
+    <h3>Get new posts by email</h3>
+    <p>One or two emails a month on learning Mandarin. No spam.</p>
+    <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+    <div class="newsletter-success">Subscribed. Check your inbox.</div>
+  </div>
+
+  <footer>
+    <div>
+      <p><a href="/blog/">Blog</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = form.querySelector('input[type="email"]').value;
+      console.log('Newsletter signup:', email);
+      form.style.display = 'none';
+      var success = form.parentElement.querySelector('.newsletter-success');
+      if (success) success.style.display = 'block';
+    });
+  });
+  </script>
+
+</body>
+</html>

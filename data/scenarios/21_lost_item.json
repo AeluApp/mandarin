@@ -1,0 +1,45 @@
+{
+    "title": "Reporting a lost item",
+    "title_zh": "找丢失的东西",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You left your backpack at a café and go back to ask about it.",
+        "setup_zh": "你把背包忘在了咖啡店，回去问。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问有什么事吗？",
+                "text_pinyin": "nǐ hǎo, qǐngwèn yǒu shénme shì ma?",
+                "text_en": "Hello, can I help you with something?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain that you left your backpack here earlier.",
+                "options": [
+                    {"text_zh": "你好，我上午在这里喝咖啡，好像把背包忘在这儿了。", "text_pinyin": "nǐ hǎo, wǒ shàngwǔ zài zhèlǐ hē kāfēi, hǎoxiàng bǎ bēibāo wàng zài zhèr le.", "text_en": "Hi, I was having coffee here this morning and I think I left my backpack here.", "score": 1.0, "register": "neutral", "feedback": "Complete context — when, what you were doing, and what happened. 好像 appropriately hedges."},
+                    {"text_zh": "不好意思，你们有没有看到一个背包？", "text_pinyin": "bù hǎo yìsi, nǐmen yǒu méiyǒu kàn dào yī ge bēibāo?", "text_en": "Excuse me, have you seen a backpack?", "score": 0.7, "register": "neutral", "feedback": "Gets to the point, but saying when you were here narrows the search."},
+                    {"text_zh": "我的背包丢了，是不是在你们这里？", "text_pinyin": "wǒ de bēibāo diū le, shì bú shì zài nǐmen zhèlǐ?", "text_en": "My backpack is lost, is it here?", "score": 0.5, "register": "casual", "feedback": "A bit abrupt — starting with context (when you visited) helps staff locate it faster."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我帮你看一下。你的背包是什么颜色的？",
+                "text_pinyin": "wǒ bāng nǐ kàn yīxià. nǐ de bēibāo shì shénme yánsè de?",
+                "text_en": "Let me check for you. What color is your backpack?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your black backpack with a laptop inside.",
+                "options": [
+                    {"text_zh": "是黑色的，里面有一个笔记本电脑。", "text_pinyin": "shì hēisè de, lǐmiàn yǒu yī ge bǐjìběn diànnǎo.", "text_en": "It's black, with a laptop inside.", "score": 1.0, "register": "neutral", "feedback": "Clear description with distinguishing detail — color plus contents helps identify it."},
+                    {"text_zh": "黑色的背包，不太大，有两个口袋。", "text_pinyin": "hēisè de bēibāo, bú tài dà, yǒu liǎng ge kǒudài.", "text_en": "Black backpack, not too big, with two pockets.", "score": 0.8, "register": "neutral", "feedback": "Good physical description — size and pocket details are helpful identifiers."},
+                    {"text_zh": "黑色的，你能帮我找一下吗？", "text_pinyin": "hēisè de, nǐ néng bāng wǒ zhǎo yīxià ma?", "text_en": "Black. Can you help me look for it?", "score": 0.5, "register": "casual", "feedback": "Minimal description — they're already helping, so adding details is more useful than repeating the request."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese, 把 (bǎ) is used in the 把 construction to indicate an action done to a specific object — 把背包忘在这儿了 (left the backpack here). This grammar pattern is essential for describing what happened to something. Also, many Chinese cafés and restaurants keep a lost-and-found box (失物招领箱 shīwù zhāolǐng xiāng)."
+    }
+}

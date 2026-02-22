@@ -1,0 +1,60 @@
+{
+    "title": "Complaining about a product",
+    "title_zh": "产品投诉",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You bought a new electric kettle online two weeks ago. It stopped working after three days. You go to the customer service counter at the store to complain and seek a resolution.",
+        "setup_zh": "你两周前在网上买了一个新的电热水壶。用了三天就坏了。你去商店的客服柜台投诉，希望得到解决。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问有什么可以帮您的？",
+                "text_pinyin": "nín hǎo, qǐngwèn yǒu shénme kěyǐ bāng nín de?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the problem with the product you bought.",
+                "options": [
+                    {"text_zh": "你好，我两周前在你们这儿买了一个电热水壶，但是用了三天就不能加热了。我想退货或者换一个新的。这是我的收据。", "text_pinyin": "nǐ hǎo, wǒ liǎng zhōu qián zài nǐmen zhèr mǎi le yī gè diànrè shuǐhú, dànshì yòng le sān tiān jiù bù néng jiārè le. wǒ xiǎng tuìhuò huòzhě huàn yī gè xīn de. zhè shì wǒ de shōujù.", "text_en": "Hello, I bought an electric kettle here two weeks ago, but it stopped heating after three days. I'd like to return it or exchange it for a new one. Here's my receipt.", "score": 1.0, "register": "neutral", "feedback": "Clear and complete -- states the problem, the timeframe, and your desired resolution. Providing the receipt shows you came prepared."},
+                    {"text_zh": "我买的水壶坏了，才用了几天。你们能帮我看看吗？", "text_pinyin": "wǒ mǎi de shuǐhú huài le, cái yòng le jǐ tiān. nǐmen néng bāng wǒ kànkan ma?", "text_en": "The kettle I bought is broken, I only used it a few days. Can you take a look?", "score": 0.6, "register": "casual", "feedback": "Describes the issue but doesn't state what you want -- a refund or exchange. Being clear about your expectation helps move things along."},
+                    {"text_zh": "你们卖的东西质量太差了！这个水壶才用了三天就坏了，你们怎么做生意的？", "text_pinyin": "nǐmen mài de dōngxi zhìliàng tài chà le! zhège shuǐhú cái yòng le sān tiān jiù huài le, nǐmen zěnme zuò shēngyi de?", "text_en": "The quality of your products is terrible! This kettle broke after just three days -- how do you run a business?", "score": 0.3, "register": "blunt", "feedback": "Too aggressive -- attacking the store's reputation makes the staff defensive. State the problem calmly and focus on the solution you want."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很抱歉给您带来不便。我看一下您的收据……这个产品还在保修期内。我们可以帮您换一个新的，或者您也可以选择退款。您想怎么处理？",
+                "text_pinyin": "hěn bàoqiàn gěi nín dàilái bú biàn. wǒ kàn yīxià nín de shōujù……zhège chǎnpǐn hái zài bǎoxiū qī nèi. wǒmen kěyǐ bāng nín huàn yī gè xīn de, huòzhě nín yě kěyǐ xuǎnzé tuìkuǎn. nín xiǎng zěnme chǔlǐ?",
+                "text_en": "Sorry for the inconvenience. Let me check your receipt... This product is still under warranty. We can exchange it for a new one, or you can choose a refund. How would you like to handle it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide how you want the issue resolved.",
+                "options": [
+                    {"text_zh": "谢谢。我还是比较喜欢这个牌子的，麻烦帮我换一个新的吧。不过能不能帮我检查一下新的没有问题？", "text_pinyin": "xièxie. wǒ háishi bǐjiào xǐhuan zhège páizi de, máfan bāng wǒ huàn yī gè xīn de ba. búguò néng bù néng bāng wǒ jiǎnchá yīxià xīn de méiyǒu wèntí?", "text_en": "Thank you. I still like this brand, so please exchange it for a new one. But could you check the new one to make sure it works?", "score": 1.0, "register": "neutral", "feedback": "Polite and practical -- requesting an inspection shows you learned from the experience. Using 麻烦 softens the request nicely."},
+                    {"text_zh": "那就退款吧，我不太想再买同样的产品了。", "text_pinyin": "nà jiù tuìkuǎn ba, wǒ bú tài xiǎng zài mǎi tóngyàng de chǎnpǐn le.", "text_en": "Then I'll take the refund. I don't really want to buy the same product again.", "score": 0.7, "register": "neutral", "feedback": "Reasonable choice -- explains your reasoning clearly. This is a valid consumer decision."},
+                    {"text_zh": "换新的吧。", "text_pinyin": "huàn xīn de ba.", "text_en": "Exchange it.", "score": 0.4, "register": "blunt", "feedback": "Too brief -- adding 谢谢 or 麻烦 makes the interaction smoother. Customer service staff respond better to polite requests."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我马上帮您换。新的水壶我已经测试过了，没有问题。以后如果还有什么问题，您可以随时联系我们。",
+                "text_pinyin": "hǎo de, wǒ mǎshàng bāng nín huàn. xīn de shuǐhú wǒ yǐjīng cèshì guò le, méiyǒu wèntí. yǐhòu rúguǒ hái yǒu shénme wèntí, nín kěyǐ suíshí liánxì wǒmen.",
+                "text_en": "OK, I'll exchange it for you right away. I've already tested the new kettle, no problems. If you have any issues in the future, feel free to contact us anytime."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them and wrap up the conversation.",
+                "options": [
+                    {"text_zh": "太好了，非常感谢你的帮助。希望这次没问题了。再见！", "text_pinyin": "tài hǎo le, fēicháng gǎnxiè nǐ de bāngzhù. xīwàng zhè cì méi wèntí le. zàijiàn!", "text_en": "Great, thank you so much for your help. I hope this one's fine. Goodbye!", "score": 1.0, "register": "neutral", "feedback": "Warm and appreciative -- expressing thanks after a complaint resolution leaves a good impression."},
+                    {"text_zh": "好的，谢谢。", "text_pinyin": "hǎo de, xièxie.", "text_en": "OK, thanks.", "score": 0.6, "register": "casual", "feedback": "Functional but a bit flat after they helped you. A little more warmth goes a long way."},
+                    {"text_zh": "希望这次的质量能好一点。", "text_pinyin": "xīwàng zhè cì de zhìliàng néng hǎo yīdiǎn.", "text_en": "I hope the quality is better this time.", "score": 0.3, "register": "blunt", "feedback": "Leaves a negative tone at the end. The staff resolved your issue -- ending with doubt about quality is unnecessary and rude."}
+                ]
+            }
+        ],
+        "cultural_note": "In China, keeping calm during a complaint (投诉 tóusù) is far more effective than getting angry. Showing your receipt (收据 shōujù) and knowing your warranty period (保修期 bǎoxiū qī) puts you in a strong position. The phrase 麻烦你 (máfan nǐ) is a polite softener that makes requests feel less demanding."
+    }
+}

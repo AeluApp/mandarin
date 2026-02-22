@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin — Adaptive Chinese Learning for Serious Learners</title>
+  <meta name="description" content="Master Mandarin Chinese with adaptive SRS drills, graded reading, and listening practice. Every word you look up becomes practice. HSK 1-6 aligned. No AI fluff — just effective learning.">
+  <meta name="keywords" content="learn Chinese, Mandarin learning app, best app to learn Chinese, HSK study app, Chinese SRS app, spaced repetition Chinese, Chinese flashcard app, Chinese vocabulary app, graded Chinese reading, Chinese listening practice, adaptive Chinese learning app, best app to learn Mandarin">
+  <link rel="canonical" href="https://mandarinapp.com/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mandarin — Adaptive Chinese Learning for Serious Learners">
+  <meta property="og:description" content="Master Mandarin with adaptive drills that learn what you need. Read real Chinese, listen at your speed, and every word you look up becomes practice.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mandarin — Adaptive Chinese Learning for Serious Learners">
+  <meta name="twitter:description" content="Master Mandarin with adaptive drills that learn what you need. Every word you look up becomes practice.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mandarin",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "description": "Adaptive Chinese learning app with SRS drills, graded reading, and listening practice. HSK 1-6 aligned.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "HSK 1-2 Free"
+      },
+      {
+        "@type": "Offer",
+        "price": "12",
+        "priceCurrency": "USD",
+        "description": "Full Access Monthly"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    .container-wide {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    section {
+      padding: var(--space-8) 0;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-6);
+    }
+
+    .hero-hanzi {
+      font-family: var(--font-hanzi);
+      font-size: 3.5rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-3);
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-text-faint);
+      max-width: 520px;
+      margin: 0 auto var(--space-5);
+      line-height: 1.65;
+    }
+
+    /* ── CTA ── */
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .cta-email {
+      display: flex;
+      gap: var(--space-2);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .cta-email input {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+
+    .cta-email input::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    .btn-primary {
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-accent);
+      color: var(--color-base);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+    }
+
+    .cta-success {
+      padding: var(--space-3) var(--space-4);
+      background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+      border-radius: var(--radius);
+      color: var(--color-accent);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    /* ── Problem ── */
+    .problem {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .problem h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-4);
+    }
+
+    .problem-list {
+      list-style: none;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .problem-list li {
+      padding: var(--space-2) 0;
+      padding-left: var(--space-4);
+      position: relative;
+      color: var(--color-text-faint);
+    }
+
+    .problem-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--color-secondary);
+    }
+
+    /* ── Features ── */
+    .features h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      .hero-hanzi { font-size: 2.5rem; }
+    }
+
+    .feature-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .feature-hanzi {
+      font-family: var(--font-hanzi);
+      font-size: 1.8rem;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      line-height: 1.6;
+    }
+
+    /* ── How it works ── */
+    .how-it-works {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .how-it-works h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      line-height: 1;
+      min-width: 2rem;
+    }
+
+    .step h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      line-height: 1.55;
+    }
+
+    /* ── Differentiator ── */
+    .diff {
+      text-align: center;
+    }
+
+    .diff h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-4);
+    }
+
+    .diff-quote {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--color-secondary);
+      max-width: 480px;
+      margin: 0 auto var(--space-4);
+      line-height: 1.5;
+    }
+
+    .diff p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Pricing ── */
+    .pricing h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    .pricing-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--color-accent);
+      position: relative;
+    }
+
+    .pricing-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .pricing-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .pricing-price {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .pricing-price span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--color-text-faint);
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+    }
+
+    .pricing-features li {
+      padding: var(--space-1) 0;
+      padding-left: var(--space-3);
+      position: relative;
+    }
+
+    .pricing-features li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
+    /* ── Final CTA ── */
+    .final-cta {
+      text-align: center;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .final-cta p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-4);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    /* ── Subtle animation ── */
+    @keyframes drift-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-hanzi, .hero h1, .hero-sub, .cta-group {
+      animation: drift-up 0.6s ease-out both;
+    }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .cta-group { animation-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-hanzi, .hero h1, .hero-sub, .cta-group {
+        animation: none;
+        opacity: 1;
+      }
+    }
+
+    /* ── Nav ── */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/" aria-current="page">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-hanzi" aria-hidden="true">学而时习之</div>
+      <h1>Learn Chinese the way your brain actually works</h1>
+      <p class="hero-sub">Adaptive drills that focus on what you struggle with. Read real Chinese with instant glosses. Every word you look up becomes practice.</p>
+      <div class="cta-group">
+        <form class="cta-email" id="signup-form" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Get early access</button>
+        </form>
+        <p class="cta-note">Free to start. No credit card required.</p>
+        <div class="cta-success" id="signup-success">You're on the list. We'll let you know when it's ready.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="container">
+      <h2>Most Chinese apps teach you to tap, not to think</h2>
+      <ul class="problem-list">
+        <li>Duolingo teaches you to match pictures, not read a menu</li>
+        <li>Anki expects you to build your own curriculum from scratch</li>
+        <li>Generic SRS apps drill vocabulary in isolation, disconnected from real Chinese</li>
+        <li>AI-generated content is getting worse, not better — wrong tones, unnatural phrasing</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container-wide">
+      <h2>Built different</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-hanzi">适</div>
+          <h3>Adaptive drills</h3>
+          <p>27 drill types across reading, listening, speaking, and writing. The system tracks what you get wrong and adjusts. No wasted repetition.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-hanzi">读</div>
+          <h3>Graded reading</h3>
+          <p>Read real Chinese passages at your level. Tap any word for instant pinyin and translation. Every lookup feeds back into your drill queue.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-hanzi">听</div>
+          <h3>Listening practice</h3>
+          <p>Listen to passages at adjustable speed. Reveal the transcript when you're ready. Build comprehension, not just vocabulary.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-hanzi">考</div>
+          <h3>HSK aligned</h3>
+          <p>Content structured around HSK 1-6. Track your projected exam readiness. Know exactly where you stand and what to work on next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2>The cleanup loop</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Go live in Chinese</h3>
+            <p>Read a graded passage. Watch a show. Listen to a podcast. Encounter real language.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Look up what you don't know</h3>
+            <p>Every word you tap to check gets logged. The system sees exactly what you struggled with.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Drill your real gaps</h3>
+            <p>Your next session prioritizes the words you actually needed. Not a textbook list — your list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Differentiator -->
+  <section class="diff">
+    <div class="container">
+      <h2>No AI tokens. No subscriptions to OpenAI.</h2>
+      <div class="diff-quote">"The system uses zero AI tokens at runtime. Every drill, every score, every recommendation is deterministic."</div>
+      <p>Your learning data stays local. Responses are instant. No waiting for an API. No monthly AI costs passed to you. Just a fast, predictable system that works offline.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Simple pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Free</h3>
+          <div class="pricing-price">$0</div>
+          <ul class="pricing-features">
+            <li>HSK 1-2 vocabulary and drills</li>
+            <li>5 drill types</li>
+            <li>Basic progress tracking</li>
+            <li>Graded reading (beginner)</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-label">Full access</div>
+          <h3>Learner</h3>
+          <div class="pricing-price">$12 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>HSK 1-6 full curriculum</li>
+            <li>All 27 drill types</li>
+            <li>Adaptive scheduling</li>
+            <li>Graded reading (all levels)</li>
+            <li>Listening practice</li>
+            <li>Speaking drills with tone grading</li>
+            <li>Encounter-based cleanup loop</li>
+            <li>HSK projection and diagnostics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Start learning the way serious learners do</h2>
+      <p>Join the waitlist. Free for the first 50 users.</p>
+      <div class="cta-group">
+        <form class="cta-email" id="signup-form-bottom" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Get early access</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
+    </div>
+  </footer>
+
+  <script src="/marketing.js"></script>
+
+</body>
+</html>

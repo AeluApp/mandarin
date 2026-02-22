@@ -1,0 +1,45 @@
+{
+    "title": "Discussing exercise",
+    "title_zh": "聊运动",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You run into a colleague at the gym and start chatting about exercise.",
+        "setup_zh": "你在健身房遇到了同事，开始聊运动。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也来锻炼啊？你平时做什么运动？",
+                "text_pinyin": "nǐ yě lái duànliàn a? nǐ píngshí zuò shénme yùndòng?",
+                "text_en": "You're here to work out too? What exercise do you usually do?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your exercise routine.",
+                "options": [
+                    {"text_zh": "我一般跑步和游泳，一周三四次吧。", "text_pinyin": "wǒ yībān pǎobù hé yóuyǒng, yī zhōu sān sì cì ba.", "text_en": "I usually run and swim, about three or four times a week.", "score": 1.0, "register": "casual", "feedback": "Specific and conversational — mentions activities and frequency, which invites follow-up."},
+                    {"text_zh": "我最近开始跑步了，还在学呢。", "text_pinyin": "wǒ zuìjìn kāishǐ pǎobù le, hái zài xué ne.", "text_en": "I recently started running, still learning.", "score": 0.7, "register": "casual", "feedback": "Honest and humble — 还在学 shows a growth mindset. Good conversation starter."},
+                    {"text_zh": "不太多，偶尔来健身房运动一下。", "text_pinyin": "bú tài duō, ǒu'ěr lái jiànshēnfáng yùndòng yīxià.", "text_en": "Not much, I occasionally come to the gym to work out.", "score": 0.5, "register": "casual", "feedback": "Vague — your colleague is looking for specifics to build the conversation on."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不错啊！我最近想学打篮球，你有兴趣吗？",
+                "text_pinyin": "búcuò a! wǒ zuìjìn xiǎng xué dǎ lánqiú, nǐ yǒu xìngqù ma?",
+                "text_en": "Nice! I've been wanting to learn basketball recently, are you interested?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the basketball invitation.",
+                "options": [
+                    {"text_zh": "可以啊，我以前打过篮球，我们一起去吧。", "text_pinyin": "kěyǐ a, wǒ yǐqián dǎ guò lánqiú, wǒmen yīqǐ qù ba.", "text_en": "Sure, I've played basketball before, let's go together.", "score": 1.0, "register": "casual", "feedback": "Enthusiastic and helpful — mentioning experience signals you can help them learn."},
+                    {"text_zh": "听起来不错，不过我不太会打篮球。", "text_pinyin": "tīng qǐlai búcuò, búguò wǒ bú tài huì dǎ lánqiú.", "text_en": "Sounds good, but I'm not very good at basketball.", "score": 0.7, "register": "casual", "feedback": "Honest — and since they're also learning, it's fine to be beginners together."},
+                    {"text_zh": "我对篮球没什么兴趣，还是跑步好。", "text_pinyin": "wǒ duì lánqiú méi shénme xìngqù, háishi pǎobù hǎo.", "text_en": "I'm not really interested in basketball, running is better.", "score": 0.5, "register": "casual", "feedback": "Honest but dismissive — suggesting an alternative activity would soften the decline."}
+                ]
+            }
+        ],
+        "cultural_note": "Basketball (篮球 lánqiú) is hugely popular in China, especially among young men, partly due to the influence of Yao Ming and the NBA. Inviting someone to play sports together is a common way to build friendships in Chinese workplace culture — it's as much about bonding as about fitness."
+    }
+}

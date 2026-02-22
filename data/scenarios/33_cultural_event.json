@@ -1,0 +1,45 @@
+{
+    "title": "Attending a cultural event",
+    "title_zh": "参加文化活动",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "A Chinese friend takes you to a traditional tea ceremony. The tea master greets you.",
+        "setup_zh": "一个中国朋友带你去参加传统茶艺活动。茶艺师向你打招呼。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎来体验茶艺！请问你以前喝过中国茶吗？",
+                "text_pinyin": "huānyíng lái tǐyàn cháyì! qǐngwèn nǐ yǐqián hē guò zhōngguó chá ma?",
+                "text_en": "Welcome to experience the tea ceremony! Have you had Chinese tea before?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your experience with Chinese tea.",
+                "options": [
+                    {"text_zh": "谢谢！我喝过一些，但是不太了解茶艺，今天想好好学一学。", "text_pinyin": "xièxie! wǒ hē guò yīxiē, dànshì bú tài liǎojiě cháyì, jīntiān xiǎng hǎohǎo xué yī xué.", "text_en": "Thanks! I've had some, but I don't know much about tea ceremony. I'd like to learn properly today.", "score": 1.0, "register": "neutral", "feedback": "Humble and enthusiastic — acknowledges some experience while showing eagerness to learn. Very appropriate tone."},
+                    {"text_zh": "喝过，我很喜欢绿茶，其他的茶还没试过。", "text_pinyin": "hē guò, wǒ hěn xǐhuan lǜchá, qítā de chá hái méi shì guò.", "text_en": "Yes, I like green tea a lot, but I haven't tried other types.", "score": 0.7, "register": "casual", "feedback": "Specific and honest — mentioning green tea shows genuine interest, though expressing desire to learn more would fit the setting."},
+                    {"text_zh": "没有，这是我第一次来这种地方，很期待。", "text_pinyin": "méiyǒu, zhè shì wǒ dì yī cì lái zhè zhǒng dìfang, hěn qīdài.", "text_en": "No, this is my first time at a place like this, I'm looking forward to it.", "score": 0.6, "register": "casual", "feedback": "Honest but 这种地方 can sound slightly dismissive — 茶艺馆 or 这样的活动 sounds more respectful."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这是今天要泡的铁观音。你闻一下，香不香？",
+                "text_pinyin": "zhè shì jīntiān yào pào de tiěguānyīn. nǐ wén yīxià, xiāng bù xiāng?",
+                "text_en": "This is the Tie Guan Yin we'll be brewing today. Smell it — does it have a nice fragrance?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Comment on the tea's aroma and ask a question about it.",
+                "options": [
+                    {"text_zh": "好香啊！铁观音是什么类型的茶？每次泡多长时间？", "text_pinyin": "hǎo xiāng a! tiěguānyīn shì shénme lèixíng de chá? měi cì pào duō cháng shíjiān?", "text_en": "It smells wonderful! What type of tea is Tie Guan Yin? How long do you brew it each time?", "score": 1.0, "register": "neutral", "feedback": "Engaged and curious — complimenting the aroma and asking specific questions shows respect for the craft."},
+                    {"text_zh": "闻起来很香，跟我平时喝的茶不太一样。", "text_pinyin": "wén qǐlai hěn xiāng, gēn wǒ píngshí hē de chá bú tài yīyàng.", "text_en": "It smells really nice, different from the tea I usually drink.", "score": 0.7, "register": "casual", "feedback": "Good observation that opens discussion — the tea master can explain the difference."},
+                    {"text_zh": "嗯，很好闻，我觉得泡出来一定很好喝。", "text_pinyin": "ēn, hěn hǎo wén, wǒ juéde pào chūlái yīdìng hěn hǎo hē.", "text_en": "Mm, it smells great, I'm sure it'll taste wonderful when brewed.", "score": 0.5, "register": "casual", "feedback": "Positive but surface-level — asking a question about the tea shows deeper engagement with the experience."}
+                ]
+            }
+        ],
+        "cultural_note": "铁观音 (tiěguānyīn) is a premium oolong tea from Fujian province, one of China's most famous teas. In a tea ceremony, you should smell the dry leaves first (闻香 wén xiāng), then the brewed tea. The first pour is always discarded (洗茶 xǐ chá, 'washing the tea') — drinking it would be a faux pas. Tea is re-brewed multiple times, with each infusion revealing different flavors."
+    }
+}

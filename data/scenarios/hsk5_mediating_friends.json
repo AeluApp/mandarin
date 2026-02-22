@@ -1,0 +1,60 @@
+{
+    "title": "Mediating between friends",
+    "title_zh": "调解朋友之间的矛盾",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "Two of your close friends, Zhang Wei and Liu Fang, had a falling out. Zhang Wei borrowed money from Liu Fang three months ago and hasn't paid it back. Liu Fang is upset and feels disrespected. Zhang Wei says he forgot and thinks Liu Fang is overreacting. You're meeting with Liu Fang to hear her side first.",
+        "setup_zh": "你的两个好朋友张伟和刘芳闹矛盾了。张伟三个月前向刘芳借了钱，到现在还没还。刘芳很不高兴，觉得不受尊重。张伟说他忘了，觉得刘芳反应过度。你先约了刘芳了解情况。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道张伟那件事吧？三个月前我借给他五千块，说好两个月还。到现在不但没还，连提都不提。我主动问他，他居然说'哦忘了，最近手头紧'。这算什么态度？我不是在乎那点钱，我在乎的是他对这件事的态度。",
+                "text_pinyin": "nǐ zhīdào zhāng wěi nà jiàn shì ba? sān gè yuè qián wǒ jiè gěi tā wǔ qiān kuài, shuō hǎo liǎng gè yuè huán. dào xiànzài búdàn méi huán, lián tí dōu bù tí. wǒ zhǔdòng wèn tā, tā jūrán shuō 'ó wàng le, zuìjìn shǒutou jǐn'. zhè suàn shénme tàidù? wǒ bú shì zàihu nà diǎn qián, wǒ zàihu de shì tā duì zhè jiàn shì de tàidù.",
+                "text_en": "You know about the Zhang Wei situation, right? Three months ago I lent him 5,000, and we agreed he'd pay it back in two months. He still hasn't paid, and never even mentions it. When I brought it up, he actually said 'oh, forgot, been tight on cash lately.' What kind of attitude is that? It's not about the money -- it's about his attitude toward the whole thing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Acknowledge Liu Fang's feelings and begin to mediate.",
+                "options": [
+                    {"text_zh": "我理解你的感受。你觉得不被尊重是完全可以理解的——你帮了他的忙，他不但不主动还钱，被提醒了还一副无所谓的态度，换了谁都会不舒服。不过我想问一下，你们之间有没有因为这件事产生过误会？比如他可能真的经济上有困难，只是不好意思说？我不是替他找借口，只是想全面了解一下情况。", "text_pinyin": "wǒ lǐjiě nǐ de gǎnshòu. nǐ juéde bú bèi zūnzhòng shì wánquán kěyǐ lǐjiě de——nǐ bāng le tā de máng, tā búdàn bù zhǔdòng huán qián, bèi tíxǐng le hái yī fù wúsuǒwèi de tàidù, huàn le shéi dōu huì bù shūfu. búguò wǒ xiǎng wèn yīxià, nǐmen zhījiān yǒu méiyǒu yīnwèi zhè jiàn shì chǎnshēng guò wùhuì? bǐrú tā kěnéng zhēnde jīngjì shàng yǒu kùnnán, zhǐshì bùhǎoyìsi shuō? wǒ bú shì tì tā zhǎo jièkǒu, zhǐshì xiǎng quánmiàn liǎojiě yīxià qíngkuàng.", "text_en": "I understand how you feel. Feeling disrespected is completely understandable -- you helped him out, and he not only didn't repay you proactively, but when reminded he acted like it was no big deal. Anyone would be upset. But I want to ask, could there be a misunderstanding between you two? For example, maybe he's genuinely having financial difficulties and is too embarrassed to say? I'm not making excuses for him -- I just want to understand the full picture.", "score": 1.0, "register": "casual", "feedback": "Excellent mediation -- validates her feelings first, then gently introduces an alternative perspective without taking sides. The disclaimer 我不是替他找借口 is crucial for maintaining trust. 换了谁都会 and 全面了解 show empathetic and balanced communication."},
+                    {"text_zh": "你说得对，他确实做得不好。借钱不还又不说原因，太不够朋友了。", "text_pinyin": "nǐ shuō de duì, tā quèshí zuò de bù hǎo. jiè qián bù huán yòu bù shuō yuányīn, tài bú gòu péngyou le.", "text_en": "You're right, he really didn't handle it well. Borrowing money, not paying back, and not explaining -- that's not how a friend should act.", "score": 0.5, "register": "casual", "feedback": "Validates her but takes her side completely without investigating. A mediator needs to remain neutral and explore both perspectives. One-sided agreement may feel good now but won't resolve the conflict."},
+                    {"text_zh": "别生气了，五千块不算多，朋友之间何必计较呢？", "text_pinyin": "bié shēngqì le, wǔ qiān kuài bú suàn duō, péngyou zhījiān hébì jìjiào ne?", "text_en": "Don't be angry, 5,000 isn't that much -- why be so calculative between friends?", "score": 0.2, "register": "casual", "feedback": "Dismisses her feelings entirely. She explicitly said it's about respect, not money. Telling someone not to feel angry rarely works and can damage your relationship with her too."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "经济困难我能理解，但至少应该跟我说一声吧？哪怕说'我现在没办法还，能不能再等等'，我也不会这么生气。让我最不舒服的是他那种无所谓的态度，好像我借给他钱是理所当然的。",
+                "text_pinyin": "jīngjì kùnnán wǒ néng lǐjiě, dàn zhìshǎo yīnggāi gēn wǒ shuō yī shēng ba? nǎpà shuō 'wǒ xiànzài méi bànfǎ huán, néng bù néng zài děngděng', wǒ yě bú huì zhème shēngqì. ràng wǒ zuì bù shūfu de shì tā nà zhǒng wúsuǒwèi de tàidù, hǎoxiàng wǒ jiè gěi tā qián shì lǐsuǒdāngrán de.",
+                "text_en": "I can understand financial difficulties, but he should at least tell me, right? Even if he said 'I can't pay back right now, can you wait a bit longer,' I wouldn't be this angry. What bothers me most is his nonchalant attitude, as if me lending him money was a given."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Propose a way to resolve the situation.",
+                "options": [
+                    {"text_zh": "我完全理解。你生气的核心不是钱，而是态度——他没有表现出对你的尊重和感激。这样吧，我先去跟张伟聊聊，把你的感受如实转达给他，让他知道问题出在态度上而不是金额上。如果他能认识到自己的问题，主动跟你道歉并且制定一个还款计划，你愿不愿意给他一个改正的机会？毕竟你们是多年的朋友，我觉得这段友情值得修复。", "text_pinyin": "wǒ wánquán lǐjiě. nǐ shēngqì de héxīn bú shì qián, ér shì tàidù——tā méiyǒu biǎoxiàn chū duì nǐ de zūnzhòng hé gǎnjī. zhèyàng ba, wǒ xiān qù gēn zhāng wěi liáoliao, bǎ nǐ de gǎnshòu rúshí zhuǎndá gěi tā, ràng tā zhīdào wèntí chū zài tàidù shàng ér bú shì jīn'é shàng. rúguǒ tā néng rènshí dào zìjǐ de wèntí, zhǔdòng gēn nǐ dàoqiàn bìngqiě zhìdìng yī gè huánkuǎn jìhuà, nǐ yuàn bú yuànyì gěi tā yī gè gǎizhèng de jīhuì? bìjìng nǐmen shì duō nián de péngyou, wǒ juéde zhè duàn yǒuqíng zhídé xiūfù.", "text_en": "I completely understand. The core of your anger isn't money -- it's attitude. He didn't show you respect or gratitude. How about this: I'll talk to Zhang Wei first and relay your feelings honestly, letting him know the problem is about attitude, not the amount. If he can recognize his mistake, apologize to you proactively, and set up a repayment plan, would you be willing to give him a chance to make it right? After all, you've been friends for years -- I think this friendship is worth repairing.", "score": 1.0, "register": "casual", "feedback": "Skillful mediation -- accurately identifies the core issue (attitude, not money), proposes a concrete plan with conditions, and appeals to the value of the friendship. Asking if she's willing to give a chance empowers her rather than pressuring her."},
+                    {"text_zh": "要不你直接跟他好好谈一次？有时候当面说清楚比较好。", "text_pinyin": "yào bú nǐ zhíjiē gēn tā hǎohāo tán yī cì? yǒushíhou dāngmiàn shuō qīngchǔ bǐjiào hǎo.", "text_en": "Why don't you talk to him directly? Sometimes it's better to clear things up face to face.", "score": 0.5, "register": "casual", "feedback": "Not wrong, but she came to you because direct communication already failed. Offering to facilitate the conversation adds more value than sending her back to try again."},
+                    {"text_zh": "不行就别来往了。这种朋友不值得交。", "text_pinyin": "bùxíng jiù bié láiwǎng le. zhè zhǒng péngyou bù zhídé jiāo.", "text_en": "If it doesn't work out, just cut him off. This kind of friend isn't worth keeping.", "score": 0.2, "register": "casual", "feedback": "Extreme advice that escalates rather than resolves. A mediator should look for solutions, not encourage the nuclear option. Years of friendship shouldn't be discarded over one conflict."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果他能真心道歉，而且确实有还钱的诚意，我可以考虑。但他要是还跟上次一样一副无所谓的样子，那我真的不想再做朋友了。你去跟他谈的时候，不要帮我太多，就把我的意思说清楚就行。",
+                "text_pinyin": "rúguǒ tā néng zhēnxīn dàoqiàn, érqiě quèshí yǒu huán qián de chéngyì, wǒ kěyǐ kǎolǜ. dàn tā yàoshi hái gēn shàng cì yīyàng yī fù wúsuǒwèi de yàngzi, nà wǒ zhēnde bù xiǎng zài zuò péngyou le. nǐ qù gēn tā tán de shíhou, búyào bāng wǒ tài duō, jiù bǎ wǒ de yìsi shuō qīngchǔ jiù xíng.",
+                "text_en": "If he can sincerely apologize and genuinely shows willingness to repay, I can consider it. But if he acts nonchalant again like last time, I really don't want to be friends anymore. When you talk to him, don't overdo it on my behalf -- just make my position clear."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree to the terms and reassure her.",
+                "options": [
+                    {"text_zh": "放心，我会尊重你的意思。我只是客观地转达你的感受，不会多说也不会少说。不管结果怎样，你做了正确的选择——你愿意给这段友情一个机会，但也有自己的底线。我明天就去找张伟谈，谈完了给你打电话。", "text_pinyin": "fàngxīn, wǒ huì zūnzhòng nǐ de yìsi. wǒ zhǐshì kèguān de zhuǎndá nǐ de gǎnshòu, bú huì duō shuō yě bú huì shǎo shuō. bùguǎn jiéguǒ zěnyàng, nǐ zuò le zhèngquè de xuǎnzé——nǐ yuànyì gěi zhè duàn yǒuqíng yī gè jīhuì, dàn yě yǒu zìjǐ de dǐxiàn. wǒ míngtiān jiù qù zhǎo zhāng wěi tán, tán wán le gěi nǐ dǎ diànhuà.", "text_en": "Don't worry, I'll respect your wishes. I'll just objectively relay your feelings -- I won't add or subtract anything. Regardless of the outcome, you made the right choice -- you're willing to give this friendship a chance, but you also have your boundaries. I'll go talk to Zhang Wei tomorrow and call you after.", "score": 1.0, "register": "casual", "feedback": "Reassuring and respectful -- commits to neutrality, affirms her boundaries, and sets a clear next step with a timeline. 不会多说也不会少说 is a perfect promise for a mediator. Affirming her 底线 while acknowledging her openness shows emotional intelligence."},
+                    {"text_zh": "好，我去跟他说说。希望他能想明白。", "text_pinyin": "hǎo, wǒ qù gēn tā shuōshuō. xīwàng tā néng xiǎng míngbai.", "text_en": "OK, I'll talk to him. Hope he can figure it out.", "score": 0.6, "register": "casual", "feedback": "Willing but vague. Setting expectations about what you'll say and a timeline for following up would make her feel more confident in your mediation."},
+                    {"text_zh": "我尽量吧，但我也不能保证他会改。", "text_pinyin": "wǒ jǐnliàng ba, dàn wǒ yě bù néng bǎozhèng tā huì gǎi.", "text_en": "I'll try, but I can't guarantee he'll change.", "score": 0.4, "register": "casual", "feedback": "Hedging reduces her confidence in you. Of course you can't guarantee outcomes, but focusing on what you will do (relay honestly, talk tomorrow) is more helpful than disclaimers about what you can't control."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese social culture, money between friends (朋友之间的钱 péngyou zhījiān de qián) is a sensitive topic. The common saying 亲兄弟明算账 (qīn xiōngdì míng suàn zhàng, 'even close brothers should settle accounts clearly') reflects the importance of financial clarity even in close relationships. A mediator (调解人 tiáojiě rén) is expected to be neutral, empathetic, and solution-oriented. Using phrases like 我不是替他找借口 ('I'm not making excuses for him') maintains trust while exploring different perspectives."
+    }
+}

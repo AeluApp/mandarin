@@ -1,0 +1,45 @@
+{
+    "title": "Meeting a neighbor",
+    "title_zh": "认识邻居",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "You just moved into a new apartment. You meet your neighbor in the hallway.",
+        "setup_zh": "你刚搬到一个新公寓。你在走廊里遇到了邻居。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你是新搬来的吗？",
+                "text_pinyin": "nǐ hǎo! nǐ shì xīn bān lái de ma?",
+                "text_en": "Hello! Did you just move in?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself and confirm you just moved in.",
+                "options": [
+                    {"text_zh": "你好，我是新搬来的，我叫杰森。", "text_pinyin": "nǐ hǎo, wǒ shì xīn bān lái de, wǒ jiào jiésēn.", "text_en": "Hello, I just moved in, my name is Jason.", "score": 1.0, "register": "neutral", "feedback": "Great — friendly greeting with your name. Natural and complete."},
+                    {"text_zh": "对，我昨天刚搬来的。", "text_pinyin": "duì, wǒ zuótiān gāng bān lái de.", "text_en": "Yes, I just moved in yesterday.", "score": 0.7, "register": "casual", "feedback": "Confirms you moved in, but introducing your name makes it warmer."},
+                    {"text_zh": "嗯，是的，我住这里了。", "text_pinyin": "ēn, shì de, wǒ zhù zhèlǐ le.", "text_en": "Yeah, I live here now.", "score": 0.5, "register": "casual", "feedback": "Functional but a bit flat — adding your name opens the door to friendship."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎欢迎！有什么需要可以找我。",
+                "text_pinyin": "huānyíng huānyíng! yǒu shénme xūyào kěyǐ zhǎo wǒ.",
+                "text_en": "Welcome! If you need anything, just ask me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank your neighbor for the warm welcome.",
+                "options": [
+                    {"text_zh": "太好了，谢谢你！以后多多关照。", "text_pinyin": "tài hǎo le, xièxie nǐ! yǐhòu duōduō guānzhào.", "text_en": "That's great, thank you! Please look after me in the future.", "score": 1.0, "register": "neutral", "feedback": "多多关照 is a warm, humble expression that builds goodwill with neighbors."},
+                    {"text_zh": "谢谢你，你人真好啊。", "text_pinyin": "xièxie nǐ, nǐ rén zhēn hǎo a.", "text_en": "Thank you, you're really nice.", "score": 0.7, "register": "casual", "feedback": "Warm and genuine, though 多多关照 is more standard in this context."},
+                    {"text_zh": "好的好的，谢谢你了。", "text_pinyin": "hǎo de hǎo de, xièxie nǐ le.", "text_en": "OK OK, thanks.", "score": 0.5, "register": "casual", "feedback": "Polite enough but misses the chance to build a neighborly connection."}
+                ]
+            }
+        ],
+        "cultural_note": "多多关照 (duōduō guānzhào) literally means 'please take care of me'. It's a common Chinese expression when meeting neighbors or colleagues, signaling humility and a desire for a cooperative relationship. It doesn't literally ask for help — it's a social lubricant."
+    }
+}

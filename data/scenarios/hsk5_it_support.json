@@ -1,0 +1,60 @@
+{
+    "title": "Explaining a tech problem to IT",
+    "title_zh": "向IT部门报告技术问题",
+    "hsk_level": 5,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.65,
+    "tree": {
+        "setup": "Your company's internal system has been running very slowly for the past two days, and you've lost some important data from a report you were working on. You call IT support to report the issue and get help recovering the files.",
+        "setup_zh": "公司内部系统过去两天运行得非常慢，而且你正在做的一份报告的重要数据丢失了。你打电话给IT支持部门报告问题并请求帮助恢复文件。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，IT技术支持。请问您遇到了什么问题？",
+                "text_pinyin": "nín hǎo, IT jìshù zhīchí. qǐngwèn nín yù dào le shénme wèntí?",
+                "text_en": "Hello, IT technical support. What problem are you experiencing?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the technical problems you're experiencing.",
+                "options": [
+                    {"text_zh": "你好，我是市场部的王明。我遇到了两个问题。第一个是从前天开始，公司的内部系统运行速度特别慢，打开一个页面需要等三十秒以上，有时候还会自动掉线。第二个问题更紧急——我昨天在做一份季度报告，保存的时候系统突然崩溃了，重新登录以后发现文件的最新版本丢失了，只剩下上周的旧版本。这份报告后天就要交，所以恢复文件对我来说非常重要。", "text_pinyin": "nǐ hǎo, wǒ shì shìchǎng bù de wáng míng. wǒ yù dào le liǎng gè wèntí. dì yī gè shì cóng qiántiān kāishǐ, gōngsī de nèibù xìtǒng yùnxíng sùdù tèbié màn, dǎkāi yī gè yèmiàn xūyào děng sānshí miǎo yǐshàng, yǒushíhou hái huì zìdòng diàoxiàn. dì èr gè wèntí gèng jǐnjí——wǒ zuótiān zài zuò yī fèn jìdù bàogào, bǎocún de shíhou xìtǒng tūrán bēngkuì le, chóngxīn dēnglù yǐhòu fāxiàn wénjiàn de zuìxīn bǎnběn diūshī le, zhǐ shèngxia shàng zhōu de jiù bǎnběn. zhè fèn bàogào hòutiān jiù yào jiāo, suǒyǐ huīfù wénjiàn duì wǒ lái shuō fēicháng zhòngyào.", "text_en": "Hello, I'm Wang Ming from the marketing department. I have two issues. First, starting two days ago, the internal system has been running extremely slowly -- opening a page takes over 30 seconds, and sometimes it disconnects automatically. The second problem is more urgent -- yesterday while working on a quarterly report, the system suddenly crashed while saving, and after logging back in, the latest version of the file was lost. Only last week's old version remains. This report is due the day after tomorrow, so recovering the file is very important to me.", "score": 1.0, "register": "semi-formal", "feedback": "Model technical report -- identifies yourself and department, separates two distinct issues, provides specific details (30 seconds, crash during save), and explains the urgency with a deadline. 崩溃, 掉线, 版本, and 恢复 are precisely used."},
+                    {"text_zh": "系统特别慢，而且我的文件丢了。能帮我看看吗？", "text_pinyin": "xìtǒng tèbié màn, érqiě wǒ de wénjiàn diū le. néng bāng wǒ kànkan ma?", "text_en": "The system is really slow, and my file is gone. Can you take a look?", "score": 0.4, "register": "casual", "feedback": "Too vague for IT support. They need specifics: when did it start, what system, what file, what happened before the loss. The more detail you provide, the faster they can help."},
+                    {"text_zh": "你们的系统太差了，我的报告都没了！你们怎么维护的？", "text_pinyin": "nǐmen de xìtǒng tài chà le, wǒ de bàogào dōu méi le! nǐmen zěnme wéihù de?", "text_en": "Your system is terrible -- my report is gone! How do you even maintain this thing?", "score": 0.2, "register": "blunt", "feedback": "Blaming IT won't recover your files faster. Technical support needs facts -- what, when, and how -- not complaints. A calm, detailed report gets results."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "明白了，感谢您提供这么详细的信息。系统变慢的问题我们已经收到了其他部门的反馈，可能是服务器端的问题，正在排查。关于您的文件恢复，我有几个问题想确认一下：您的文件是保存在本地硬盘还是公司的云端服务器上？您记得文件最后一次成功保存是什么时候？",
+                "text_pinyin": "míngbai le, gǎnxiè nín tígōng zhème xiángxì de xìnxī. xìtǒng biàn màn de wèntí wǒmen yǐjīng shōudào le qítā bùmén de fǎnkuì, kěnéng shì fúwùqì duān de wèntí, zhèngzài páichá. guānyú nín de wénjiàn huīfù, wǒ yǒu jǐ gè wèntí xiǎng quèrèn yīxià: nín de wénjiàn shì bǎocún zài běndì yìngpán háishi gōngsī de yúnduān fúwùqì shàng? nín jìde wénjiàn zuìhòu yī cì chénggōng bǎocún shì shénme shíhou?",
+                "text_en": "Got it, thank you for such detailed information. We've received feedback about the slow system from other departments too -- it may be a server-side issue and we're investigating. Regarding your file recovery, I have a few questions: Is your file saved on the local hard drive or the company's cloud server? Do you remember when the file was last successfully saved?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer the IT support questions about your file.",
+                "options": [
+                    {"text_zh": "文件是保存在公司的云端服务器上的，不是本地硬盘。我记得最后一次成功保存是昨天下午两点左右，当时我已经完成了大部分数据分析。之后我又继续工作了大概两个小时，在下午四点左右尝试保存的时候系统崩溃了。所以丢失的是两点到四点之间的内容。对了，我还想确认一下，公司的云服务器是不是有自动备份功能？如果有的话，也许可以从备份里恢复。", "text_pinyin": "wénjiàn shì bǎocún zài gōngsī de yúnduān fúwùqì shàng de, bú shì běndì yìngpán. wǒ jìde zuìhòu yī cì chénggōng bǎocún shì zuótiān xiàwǔ liǎng diǎn zuǒyòu, dāngshí wǒ yǐjīng wánchéng le dà bùfèn shùjù fēnxī. zhīhòu wǒ yòu jìxù gōngzuò le dàgài liǎng gè xiǎoshí, zài xiàwǔ sì diǎn zuǒyòu chángshì bǎocún de shíhou xìtǒng bēngkuì le. suǒyǐ diūshī de shì liǎng diǎn dào sì diǎn zhījiān de nèiróng. duìle, wǒ hái xiǎng quèrèn yīxià, gōngsī de yún fúwùqì shì bú shì yǒu zìdòng bèifèn gōngnéng? rúguǒ yǒu dehuà, yěxǔ kěyǐ cóng bèifèn lǐ huīfù.", "text_en": "The file was saved on the company's cloud server, not the local hard drive. I remember the last successful save was around 2 PM yesterday -- I had already completed most of the data analysis by then. After that, I continued working for about two hours. When I tried to save around 4 PM, the system crashed. So the lost content is from between 2 and 4 PM. Oh, I also want to confirm -- does the company's cloud server have an auto-backup feature? If so, maybe we can recover from a backup.", "score": 1.0, "register": "semi-formal", "feedback": "Precise and proactive -- specifies storage location, exact times, scope of data loss, and even suggests a potential recovery method. Asking about 自动备份 shows you understand file systems and can collaborate with IT effectively."},
+                    {"text_zh": "应该是在云端吧。最后保存的时间我记不太清了，可能是昨天下午。", "text_pinyin": "yīnggāi shì zài yúnduān ba. zuìhòu bǎocún de shíjiān wǒ jì bú tài qīng le, kěnéng shì zuótiān xiàwǔ.", "text_en": "It should be on the cloud. I don't remember exactly when it was last saved, probably yesterday afternoon.", "score": 0.5, "register": "casual", "feedback": "Vague details slow down the recovery process. Check your file's last modified timestamp if possible. Exact times help IT narrow down which backup version to restore."},
+                    {"text_zh": "这些我搞不清楚，你们直接帮我找就好了。", "text_pinyin": "zhèxiē wǒ gǎo bù qīngchǔ, nǐmen zhíjiē bāng wǒ zhǎo jiù hǎo le.", "text_en": "I don't know these details -- just find my file for me.", "score": 0.2, "register": "blunt", "feedback": "IT can't recover files without knowing where they're stored and when they were lost. Cooperating with their questions dramatically speeds up the process."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好消息是我们的云服务器确实有自动备份，每小时备份一次。所以两点的版本应该在备份里。我现在就帮您查一下。不过两点到四点之间的内容可能无法完全恢复。关于系统慢的问题，我们预计今天晚上会做服务器维护，明天应该能恢复正常。",
+                "text_pinyin": "hǎo xiāoxi shì wǒmen de yún fúwùqì quèshí yǒu zìdòng bèifèn, měi xiǎoshí bèifèn yī cì. suǒyǐ liǎng diǎn de bǎnběn yīnggāi zài bèifèn lǐ. wǒ xiànzài jiù bāng nín chá yīxià. búguò liǎng diǎn dào sì diǎn zhījiān de nèiróng kěnéng wúfǎ wánquán huīfù. guānyú xìtǒng màn de wèntí, wǒmen yùjì jīntiān wǎnshang huì zuò fúwùqì wéihù, míngtiān yīnggāi néng huīfù zhèngcháng.",
+                "text_en": "Good news -- our cloud server does have automatic backups, once every hour. So the 2 PM version should be in the backup. I'll check for you right now. However, the content between 2 and 4 PM may not be fully recoverable. As for the slow system, we expect to do server maintenance tonight and it should be back to normal tomorrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the update and plan your next steps.",
+                "options": [
+                    {"text_zh": "太好了，能恢复到两点的版本我就很满意了，那两个小时的内容我可以重新做。麻烦您恢复以后发到我的工作邮箱，地址是wangming@company.com。另外，为了避免以后再出现类似的情况，您有什么建议吗？比如我是不是应该更频繁地手动保存，或者在本地也留一份备份？", "text_pinyin": "tài hǎo le, néng huīfù dào liǎng diǎn de bǎnběn wǒ jiù hěn mǎnyì le, nà liǎng gè xiǎoshí de nèiróng wǒ kěyǐ chóngxīn zuò. máfan nín huīfù yǐhòu fā dào wǒ de gōngzuò yóuxiāng, dìzhǐ shì wangming@company.com. lìngwài, wèile bìmiǎn yǐhòu zài chūxiàn lèisì de qíngkuàng, nín yǒu shénme jiànyì ma? bǐrú wǒ shì bú shì yīnggāi gèng pínfán de shǒudòng bǎocún, huòzhě zài běndì yě liú yī fèn bèifèn?", "text_en": "Great, recovering to the 2 PM version would be very satisfactory -- I can redo the two hours of content. Please send it to my work email after recovery: wangming@company.com. Also, to avoid similar situations in the future, do you have any suggestions? Like should I save manually more frequently, or keep a local backup as well?", "score": 1.0, "register": "semi-formal", "feedback": "Positive and forward-looking -- accepts the partial recovery gracefully, provides clear delivery instructions, and proactively asks about prevention. Asking for advice shows you want to learn from the experience rather than just fixing the immediate problem."},
+                    {"text_zh": "好的，那就先恢复两点的版本吧。谢谢你的帮助。", "text_pinyin": "hǎo de, nà jiù xiān huīfù liǎng diǎn de bǎnběn ba. xièxie nǐ de bāngzhù.", "text_en": "OK, let's recover the 2 PM version then. Thanks for your help.", "score": 0.7, "register": "neutral", "feedback": "Appropriate and grateful. Asking about prevention and confirming delivery method would make this even more complete."},
+                    {"text_zh": "才恢复到两点？那我两个小时的工作不是白做了？你们就不能恢复全部吗？", "text_pinyin": "cái huīfù dào liǎng diǎn? nà wǒ liǎng gè xiǎoshí de gōngzuò bú shì bái zuò le? nǐmen jiù bù néng huīfù quánbù ma?", "text_en": "Only recover to 2 PM? So my two hours of work were wasted? Can't you recover everything?", "score": 0.3, "register": "blunt", "feedback": "The IT person explained the backup frequency honestly. Demanding the impossible doesn't help. Accepting what's recoverable and moving forward is more productive."}
+                ]
+            }
+        ],
+        "cultural_note": "When reporting technical issues in a Chinese workplace, providing structured information -- who you are (department + name), what happened, when it started, and what you've already tried -- helps IT support respond efficiently. Key vocabulary includes 服务器 (fúwùqì, server), 崩溃 (bēngkuì, crash), 备份 (bèifèn, backup), 恢复 (huīfù, recover), and 版本 (bǎnběn, version). Taking a collaborative rather than blaming approach with IT is both more effective and more professional."
+    }
+}

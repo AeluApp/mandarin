@@ -1,0 +1,45 @@
+{
+    "title": "Restaurant ordering",
+    "title_zh": "在餐厅点菜",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You walk into a small restaurant for lunch.",
+        "setup_zh": "你走进一家小餐厅吃午饭。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问几位？",
+                "text_pinyin": "nín hǎo, qǐngwèn jǐ wèi?",
+                "text_en": "Hello, how many people?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them it's just you.",
+                "options": [
+                    {"text_zh": "一位。", "text_pinyin": "yī wèi.", "text_en": "One person.", "score": 1.0, "register": "neutral", "feedback": "Perfect — 位 is the polite measure word for people."},
+                    {"text_zh": "一个人。", "text_pinyin": "yī gè rén.", "text_en": "One person.", "score": 0.7, "register": "casual", "feedback": "Understood, but 位 is more polite than 个人 in restaurants."},
+                    {"text_zh": "我。", "text_pinyin": "wǒ.", "text_en": "Me.", "score": 0.4, "register": "blunt", "feedback": "Too brief — adding a measure word sounds more natural."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，请坐。您想吃什么？",
+                "text_pinyin": "hǎo de, qǐng zuò. nín xiǎng chī shénme?",
+                "text_en": "OK, please sit. What would you like to eat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order fried rice.",
+                "options": [
+                    {"text_zh": "我要一份炒饭，谢谢。", "text_pinyin": "wǒ yào yī fèn chǎofàn, xièxie.", "text_en": "I'd like one serving of fried rice, thank you.", "score": 1.0, "register": "neutral", "feedback": "Great — clear order with 份 as measure word and a thank you."},
+                    {"text_zh": "炒饭。", "text_pinyin": "chǎofàn.", "text_en": "Fried rice.", "score": 0.6, "register": "blunt", "feedback": "Works, but adding 我要 and 谢谢 is more natural."},
+                    {"text_zh": "给我炒饭。", "text_pinyin": "gěi wǒ chǎofàn.", "text_en": "Give me fried rice.", "score": 0.5, "register": "casual", "feedback": "给我 sounds a bit demanding. 我要 or 来一份 is softer."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese restaurants, 位 (wèi) is the polite measure word for guests, while 个 (gè) is informal. Using 请 (qǐng) and 谢谢 (xièxie) keeps things smooth."
+    }
+}

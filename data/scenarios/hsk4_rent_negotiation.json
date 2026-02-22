@@ -1,0 +1,60 @@
+{
+    "title": "Negotiating rent with landlord",
+    "title_zh": "跟房东谈房租",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "Your lease is about to expire. The landlord wants to raise the rent by 500 yuan per month. You want to negotiate a lower increase or keep the current price.",
+        "setup_zh": "你的租约快到期了。房东想把房租涨五百块钱一个月。你想谈一个比较低的涨幅，或者维持现在的价格。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小李，你的合同下个月就到期了。现在这一带的房租都涨了不少，我打算下个月开始每月加五百块。你看怎么样？",
+                "text_pinyin": "xiǎo lǐ, nǐ de hétong xià gè yuè jiù dào qī le. xiànzài zhè yīdài de fángzū dōu zhǎng le bùshǎo, wǒ dǎsuàn xià gè yuè kāishǐ měi yuè jiā wǔ bǎi kuài. nǐ kàn zěnmeyàng?",
+                "text_en": "Xiao Li, your lease expires next month. Rent in this area has gone up quite a bit -- I'm planning to add 500 yuan per month starting next month. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the landlord's proposed rent increase.",
+                "options": [
+                    {"text_zh": "张叔，我在这儿住了两年了，一直按时交房租，也没给您添过什么麻烦。一下子涨五百确实有点多。能不能少涨一点，比如涨两百？我还是很愿意继续住在这里的。", "text_pinyin": "zhāng shū, wǒ zài zhèr zhù le liǎng nián le, yīzhí ànshí jiāo fángzū, yě méi gěi nín tiān guò shénme máfan. yīxiàzi zhǎng wǔ bǎi quèshí yǒudiǎn duō. néng bù néng shǎo zhǎng yīdiǎn, bǐrú zhǎng liǎng bǎi? wǒ háishi hěn yuànyì jìxù zhù zài zhèlǐ de.", "text_en": "Uncle Zhang, I've lived here for two years, always paid rent on time, and never caused any trouble. Going up 500 all at once is really a lot. Could you raise it less, like 200? I'm happy to continue living here.", "score": 1.0, "register": "neutral", "feedback": "Strong negotiation -- establishes your track record as a good tenant, proposes a specific counter-offer, and expresses willingness to stay. Calling the landlord 张叔 shows respectful familiarity."},
+                    {"text_zh": "涨五百也太多了吧。周围的房子也没那么贵。", "text_pinyin": "zhǎng wǔ bǎi yě tài duō le ba. zhōuwéi de fángzi yě méi nàme guì.", "text_en": "500 is way too much. Other apartments around here aren't that expensive either.", "score": 0.5, "register": "casual", "feedback": "Challenges the price but doesn't make a counter-offer or give reasons to keep you. Without a specific number, the negotiation stalls."},
+                    {"text_zh": "那我可能要考虑搬走了。", "text_pinyin": "nà wǒ kěnéng yào kǎolǜ bān zǒu le.", "text_en": "Then I might have to consider moving out.", "score": 0.4, "register": "casual", "feedback": "Threatening to leave is a high-risk move. If the landlord calls your bluff, you lose your leverage. Better to negotiate before escalating."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两百确实太少了。你也知道现在物价涨了不少，水电费、物业费我都在付。这样吧，三百怎么样？算是给老租客一个优惠。",
+                "text_pinyin": "liǎng bǎi quèshí tài shǎo le. nǐ yě zhīdào xiànzài wùjià zhǎng le bùshǎo, shuǐdiàn fèi, wùyè fèi wǒ dōu zài fù. zhèyàng ba, sān bǎi zěnmeyàng? suàn shì gěi lǎo zūkè yī gè yōuhuì.",
+                "text_en": "200 is really too little. You know prices have gone up a lot -- I'm paying for water, electricity, and property management fees. How about this -- 300? Consider it a discount for a long-term tenant."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the landlord's counter-offer of 300 yuan increase.",
+                "options": [
+                    {"text_zh": "三百我可以接受，但我有个条件——能不能帮我把厨房那个旧的热水器换一个新的？用了好几年了，有时候水不太热。如果您能换的话，三百没问题，我们签两年的合同。", "text_pinyin": "sān bǎi wǒ kěyǐ jiēshòu, dàn wǒ yǒu gè tiáojiàn——néng bù néng bāng wǒ bǎ chúfáng nàge jiù de rèshuǐqì huàn yī gè xīn de? yòng le hǎo jǐ nián le, yǒushíhou shuǐ bú tài rè. rúguǒ nín néng huàn dehuà, sān bǎi méi wèntí, wǒmen qiān liǎng nián de hétong.", "text_en": "I can accept 300, but I have a condition -- could you replace the old water heater in the kitchen? It's been used for years and the water isn't always hot. If you can replace it, 300 is fine, and we'll sign a two-year lease.", "score": 1.0, "register": "neutral", "feedback": "Excellent negotiation -- accepts the middle ground but ties it to a tangible improvement. Offering a longer lease sweetens the deal for the landlord. Win-win thinking."},
+                    {"text_zh": "好吧，那就三百。什么时候签新合同？", "text_pinyin": "hǎo ba, nà jiù sān bǎi. shénme shíhou qiān xīn hétong?", "text_en": "Fine, 300 then. When do we sign the new lease?", "score": 0.7, "register": "neutral", "feedback": "Accepts the compromise cleanly. You could have tried to negotiate a repair or improvement in exchange, but this is a reasonable outcome."},
+                    {"text_zh": "还是觉得贵。能不能再少一点？", "text_pinyin": "háishi juéde guì. néng bù néng zài shǎo yīdiǎn?", "text_en": "Still feels expensive. Can you go lower?", "score": 0.4, "register": "casual", "feedback": "Pushing further without justification risks annoying the landlord. The compromise was already made -- either accept or add conditions to justify your position."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "热水器的事我可以考虑。如果签两年的话，我答应换一个新的。下周把新合同准备好，你过来签字就行了。",
+                "text_pinyin": "rèshuǐqì de shì wǒ kěyǐ kǎolǜ. rúguǒ qiān liǎng nián dehuà, wǒ dāying huàn yī gè xīn de. xià zhōu bǎ xīn hétong zhǔnbèi hǎo, nǐ guòlái qiānzì jiù xíng le.",
+                "text_en": "I can consider the water heater. If we sign for two years, I'll agree to replace it. I'll have the new lease ready next week -- just come by to sign."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the agreement and wrap up.",
+                "options": [
+                    {"text_zh": "太好了，谢谢张叔。那我下周过来签合同。麻烦您把涨租和换热水器的条件都写在合同里，这样双方都放心。", "text_pinyin": "tài hǎo le, xièxie zhāng shū. nà wǒ xià zhōu guòlái qiān hétong. máfan nín bǎ zhǎng zū hé huàn rèshuǐqì de tiáojiàn dōu xiě zài hétong lǐ, zhèyàng shuāngfāng dōu fàngxīn.", "text_en": "Great, thanks Uncle Zhang. I'll come sign the lease next week. Please include both the rent increase and the water heater replacement in the contract, so both sides are covered.", "score": 1.0, "register": "neutral", "feedback": "Smart -- insisting on written terms protects both parties. 双方都放心 is diplomatic and makes the request feel collaborative rather than distrustful."},
+                    {"text_zh": "好的，谢谢您。下周见。", "text_pinyin": "hǎo de, xièxie nín. xià zhōu jiàn.", "text_en": "OK, thank you. See you next week.", "score": 0.6, "register": "neutral", "feedback": "Polite but doesn't mention putting the water heater agreement in writing. Verbal agreements can lead to misunderstandings later."},
+                    {"text_zh": "行，那就这样吧。", "text_pinyin": "xíng, nà jiù zhèyàng ba.", "text_en": "Fine, let's leave it at that.", "score": 0.4, "register": "casual", "feedback": "Too casual for a business agreement. Always confirm key terms and ask for written documentation."}
+                ]
+            }
+        ],
+        "cultural_note": "Rent negotiation in China often involves personal relationships. Addressing the landlord as 叔 (shū, uncle) or 阿姨 (āyí, auntie) establishes warmth. Emphasizing your reliability as a tenant (按时交租 ànshí jiāo zū) is a strong argument. Getting all terms in the contract (合同 hétong) is important -- verbal promises are common but hard to enforce. The pattern 押一付三 (yājī fùsān, one month deposit plus three months rent) is standard."
+    }
+}

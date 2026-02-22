@@ -1,0 +1,45 @@
+{
+    "title": "Getting help with a phone",
+    "title_zh": "手机出问题了",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your phone keeps crashing. You go to a phone repair shop for help.",
+        "setup_zh": "你的手机老是死机。你去一家手机维修店找人帮忙。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，手机出什么问题了？",
+                "text_pinyin": "nǐ hǎo, shǒujī chū shénme wèntí le?",
+                "text_en": "Hello, what's wrong with your phone?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the problem with your phone.",
+                "options": [
+                    {"text_zh": "最近手机总是突然死机，而且重新开机以后很慢。", "text_pinyin": "zuìjìn shǒujī zǒngshì tūrán sǐjī, érqiě chóngxīn kāijī yǐhòu hěn màn.", "text_en": "Recently my phone keeps suddenly crashing, and it's very slow after restarting.", "score": 1.0, "register": "neutral", "feedback": "Detailed and clear — describes both the main problem and a related symptom, helping diagnosis."},
+                    {"text_zh": "手机不太好用了，经常出问题，你能看看吗？", "text_pinyin": "shǒujī bú tài hǎoyòng le, jīngcháng chū wèntí, nǐ néng kànkan ma?", "text_en": "The phone isn't working well, keeps having problems, can you take a look?", "score": 0.6, "register": "casual", "feedback": "Vague — 经常出问题 doesn't tell the technician what kind of problem. Be specific."},
+                    {"text_zh": "我的手机用了两年了，现在死机的次数越来越多。", "text_pinyin": "wǒ de shǒujī yòng le liǎng nián le, xiànzài sǐjī de cìshù yuè lái yuè duō.", "text_en": "I've had my phone for two years, and it's crashing more and more frequently.", "score": 0.8, "register": "neutral", "feedback": "Good context — mentioning the age of the phone and the increasing frequency helps the technician assess the issue."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "让我检查一下。你手机里存了很多东西吗？内存可能满了。",
+                "text_pinyin": "ràng wǒ jiǎnchá yīxià. nǐ shǒujī lǐ cún le hěn duō dōngxi ma? nèicún kěnéng mǎn le.",
+                "text_en": "Let me check. Do you have a lot of stuff saved on your phone? The memory might be full."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your phone's storage situation.",
+                "options": [
+                    {"text_zh": "可能是，我照片和视频比较多，可以帮我清理一下吗？", "text_pinyin": "kěnéng shì, wǒ zhàopiàn hé shìpín bǐjiào duō, kěyǐ bāng wǒ qīnglǐ yīxià ma?", "text_en": "Maybe, I have a lot of photos and videos. Can you help me clean it up?", "score": 1.0, "register": "neutral", "feedback": "Acknowledges the likely cause and makes a clear request — efficient communication."},
+                    {"text_zh": "我不太确定，你帮我看看还有多少内存吧。", "text_pinyin": "wǒ bú tài quèdìng, nǐ bāng wǒ kànkan hái yǒu duōshao nèicún ba.", "text_en": "I'm not sure, can you check how much memory is left?", "score": 0.7, "register": "neutral", "feedback": "Reasonable — admitting uncertainty and asking for a check is practical."},
+                    {"text_zh": "应该没有吧，我不经常拍照什么的。", "text_pinyin": "yīnggāi méiyǒu ba, wǒ bù jīngcháng pāizhào shénme de.", "text_en": "Probably not, I don't take photos much or anything like that.", "score": 0.6, "register": "casual", "feedback": "If storage isn't the issue, this helps rule it out — but let the technician verify rather than guessing."}
+                ]
+            }
+        ],
+        "cultural_note": "Small phone repair shops (手机维修店 shǒujī wéixiū diàn) are everywhere in Chinese cities, often near electronics markets. They can fix screens, replace batteries, and troubleshoot software on the spot for a fraction of official service center prices. 死机 (sǐjī, literally 'dead machine') is the standard term for a device crash or freeze."
+    }
+}

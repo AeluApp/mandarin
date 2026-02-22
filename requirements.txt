@@ -1,0 +1,24 @@
+# Pinned dependencies — generated for reproducible builds.
+# Update via: pip freeze | grep -iE "^(package1|package2|...)" > requirements.txt
+click==8.1.8
+Flask==3.1.2
+Flask-Limiter==3.11.0
+Flask-Login==0.6.3
+flask-sock==0.7.0
+Flask-WTF==1.2.2
+gevent==25.9.1
+greenlet==3.2.5
+gunicorn==23.0.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+PyJWT==2.11.0
+pyotp==2.9.0
+rich==13.9.4
+sentry-sdk==2.53.0
+simple-websocket==1.1.0
+stripe==14.3.0
+typer==0.21.1
+Werkzeug==3.1.5
+zope.event==6.0
+zope.interface==8.0.1

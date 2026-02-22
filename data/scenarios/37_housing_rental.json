@@ -1,0 +1,45 @@
+{
+    "title": "Housing rental",
+    "title_zh": "租房子",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're meeting a landlord to discuss renting an apartment. You need to ask about the terms and negotiate.",
+        "setup_zh": "你和房东见面，谈租房子的事情。你需要问清楚条件和价格。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这套房子一个月房租四千五，押一付三。你看看有什么问题吗？",
+                "text_pinyin": "zhè tào fángzi yī gè yuè fángzū sì qiān wǔ, yā yī fù sān. nǐ kànkan yǒu shénme wèntí ma?",
+                "text_en": "The monthly rent for this apartment is 4,500, with one month's deposit and three months' rent upfront. Do you have any questions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the rental conditions.",
+                "options": [
+                    {"text_zh": "房租包括水电费吗？合同签多长时间？另外这里交通方便吗？", "text_pinyin": "fángzū bāokuò shuǐdiànfèi ma? hétóng qiān duō cháng shíjiān? lìngwài zhèlǐ jiāotōng fāngbiàn ma?", "text_en": "Does the rent include utilities? How long is the contract? Also, is the transportation convenient here?", "score": 1.0, "register": "neutral", "feedback": "Covers three key practical questions — 合同 length, costs, and 交通方便. This is exactly what a savvy renter asks."},
+                    {"text_zh": "押金可以少一点吗？四千五有点贵。", "text_pinyin": "yājīn kěyǐ shǎo yīdiǎn ma? sì qiān wǔ yǒudiǎn guì.", "text_en": "Can the deposit be a bit less? 4,500 is a bit expensive.", "score": 0.6, "register": "neutral", "feedback": "Negotiating price is fine, but ask about 条件 first — you need to understand the 合同 terms before bargaining."},
+                    {"text_zh": "嗯，还行吧。我再想想。", "text_pinyin": "en, hái xíng ba. wǒ zài xiǎngxiang.", "text_en": "Hmm, it's okay. Let me think about it.", "score": 0.3, "register": "casual", "feedback": "Noncommittal and misses the chance to ask about key 条件 like 合同, 押金, and whether the area is 交通方便."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "水电费不包括，需要自己交。合同最少签一年。这里离地铁站走路十分钟，交通很方便。",
+                "text_pinyin": "shuǐdiànfèi bù bāokuò, xūyào zìjǐ jiāo. hétóng zuìshǎo qiān yī nián. zhèlǐ lí dìtiě zhàn zǒulù shí fēnzhōng, jiāotōng hěn fāngbiàn.",
+                "text_en": "Utilities are not included, you need to pay them yourself. The contract is for at least one year. It's a ten-minute walk to the subway station — transportation is very convenient."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Negotiate or confirm the deal.",
+                "options": [
+                    {"text_zh": "条件我都了解了。房租能不能便宜一点？如果可以的话，我想尽快签合同。", "text_pinyin": "tiáojiàn wǒ dōu liǎojiě le. fángzū néng bù néng piányi yīdiǎn? rúguǒ kěyǐ dehuà, wǒ xiǎng jǐnkuài qiān hétóng.", "text_en": "I understand all the conditions. Could the rent be a bit cheaper? If so, I'd like to sign the contract as soon as possible.", "score": 1.0, "register": "neutral", "feedback": "Smart negotiation — shows you understood the 条件, makes a reasonable ask, and signals commitment with 签合同."},
+                    {"text_zh": "好的，那我就租这个房子吧。什么时候可以签合同？", "text_pinyin": "hǎo de, nà wǒ jiù zū zhège fángzi ba. shénme shíhou kěyǐ qiān hétóng?", "text_en": "Okay, I'll rent this apartment then. When can we sign the contract?", "score": 0.7, "register": "neutral", "feedback": "Acceptable — you're moving forward with 签合同. But trying to negotiate on 房租 first is usually expected."},
+                    {"text_zh": "太贵了，我租不起。", "text_pinyin": "tài guì le, wǒ zū bù qǐ.", "text_en": "Too expensive, I can't afford it.", "score": 0.3, "register": "casual", "feedback": "Abrupt rejection without negotiating. Try 能不能便宜一点 — in Chinese rental culture, some back-and-forth on price is normal."}
+                ]
+            }
+        ],
+        "cultural_note": "In China, 押一付三 (one month deposit, three months rent upfront) is the most common rental payment structure. Negotiating rent is expected — landlords often set the initial price slightly high anticipating a counteroffer."
+    }
+}

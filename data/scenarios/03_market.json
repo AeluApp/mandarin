@@ -1,0 +1,45 @@
+{
+    "title": "Market haggling",
+    "title_zh": "在市场讨价还价",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You're at a street market looking at a scarf.",
+        "setup_zh": "你在一个市场看围巾。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个围巾很好看！五十块。",
+                "text_pinyin": "zhè ge wéijīn hěn hǎokàn! wǔshí kuài.",
+                "text_en": "This scarf is very pretty! Fifty yuan."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try to negotiate a lower price.",
+                "options": [
+                    {"text_zh": "太贵了。三十块可以吗？", "text_pinyin": "tài guì le. sānshí kuài kěyǐ ma?", "text_en": "Too expensive. How about thirty?", "score": 1.0, "register": "casual", "feedback": "Classic haggling — state it's too expensive, then offer."},
+                    {"text_zh": "便宜一点吧。", "text_pinyin": "piányi yīdiǎn ba.", "text_en": "A little cheaper, please.", "score": 0.8, "register": "casual", "feedback": "Good — asking for cheaper. Even better with a specific number."},
+                    {"text_zh": "不要。", "text_pinyin": "bú yào.", "text_en": "Don't want it.", "score": 0.3, "register": "blunt", "feedback": "That just walks away. Try negotiating first!"}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三十太少了。四十块吧。",
+                "text_pinyin": "sānshí tài shǎo le. sìshí kuài ba.",
+                "text_en": "Thirty is too little. How about forty?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the deal or counter again.",
+                "options": [
+                    {"text_zh": "好吧，四十块。", "text_pinyin": "hǎo ba, sìshí kuài.", "text_en": "OK, forty.", "score": 0.9, "register": "casual", "feedback": "Deal made. 好吧 shows you're accepting gracefully."},
+                    {"text_zh": "三十五，行不行？", "text_pinyin": "sānshí wǔ, xíng bù xíng?", "text_en": "Thirty-five, OK?", "score": 1.0, "register": "casual", "feedback": "Nice counter. 行不行 is a natural way to propose."},
+                    {"text_zh": "还是太贵了。", "text_pinyin": "háishi tài guì le.", "text_en": "Still too expensive.", "score": 0.5, "register": "casual", "feedback": "You can say this, but offering a number moves things forward."}
+                ]
+            }
+        ],
+        "cultural_note": "Haggling is expected at Chinese street markets. Start at about 50-60% of the asking price. 太贵了 (tài guì le) is your best friend. Fixed-price shops don't haggle."
+    }
+}

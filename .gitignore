@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLite databases (data dir has the real one)
+*.db
+!data/mandarin.db
+
+# Logs
+*.log
+
+# Tauri build artifacts
+src-tauri/target/
+
+# Environment files (secrets)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Node
+node_modules/

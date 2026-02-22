@@ -1,0 +1,132 @@
+[
+  {
+    "situation": "A colleague compliments your Chinese ability",
+    "situation_zh": "\u540c\u4e8b\u5938\u4f60\u4e2d\u6587\u8bf4\u5f97\u597d",
+    "options": [
+      {
+        "text": "\u54ea\u91cc\u54ea\u91cc\uff0c\u8fd8\u5dee\u5f97\u8fdc\u5462\u3002",
+        "score": 1.0,
+        "feedback": "Classic Chinese deflection \u2014 humble and culturally perfect."
+      },
+      {
+        "text": "\u8c22\u8c22\uff01\u6211\u8fd8\u5728\u5b66\u4e60\u3002",
+        "score": 0.7,
+        "feedback": "Acceptable \u2014 the \u8fd8\u5728\u5b66\u4e60 adds humility, but a direct \u8c22\u8c22 is Western-style."
+      },
+      {
+        "text": "\u662f\u7684\uff0c\u6211\u82b1\u4e86\u5f88\u591a\u65f6\u95f4\u5b66\u7684\u3002",
+        "score": 0.2,
+        "feedback": "Accepting compliments directly is uncomfortable in Chinese culture."
+      },
+      {
+        "text": "\u8fc7\u5956\u4e86\uff0c\u8fc7\u5956\u4e86\u3002",
+        "score": 0.9,
+        "feedback": "\u8fc7\u5956 (over-praised) \u2014 another classic deflection. Very natural."
+      }
+    ]
+  },
+  {
+    "situation": "Someone gives you a gift",
+    "situation_zh": "\u6709\u4eba\u9001\u4f60\u793c\u7269",
+    "options": [
+      {
+        "text": "\u8c22\u8c22\uff01\u6211\u6253\u5f00\u770b\u770b\u3002",
+        "score": 0.3,
+        "feedback": "Opening gifts immediately is Western \u2014 in China, open it later."
+      },
+      {
+        "text": "\u592a\u5ba2\u6c14\u4e86\uff0c\u4e0d\u7528\u8fd9\u6837\u3002",
+        "score": 1.0,
+        "feedback": "Ritual refusal then acceptance is the norm. \u592a\u5ba2\u6c14\u4e86 is perfect."
+      },
+      {
+        "text": "\u8c22\u8c22\uff0c\u4f60\u592a\u597d\u4e86\u3002",
+        "score": 0.6,
+        "feedback": "Warm but misses the expected \u63a8\u8f9e (ritual refusal) step."
+      },
+      {
+        "text": "\u54ce\u5440\uff0c\u4f60\u7834\u8d39\u4e86\u3002",
+        "score": 0.8,
+        "feedback": "\u7834\u8d39 (you spent money) \u2014 acknowledging their expense is polite."
+      }
+    ]
+  },
+  {
+    "situation": "A friend's parent asks your age",
+    "situation_zh": "\u670b\u53cb\u7684\u7236\u6bcd\u95ee\u4f60\u591a\u5927\u4e86",
+    "options": [
+      {
+        "text": "\u6211\u4e8c\u5341\u4e94\u5c81\u3002",
+        "score": 1.0,
+        "feedback": "Direct answer is expected \u2014 age isn't private in China."
+      },
+      {
+        "text": "\u8fd9\u662f\u79c1\u4eba\u95ee\u9898\u3002",
+        "score": 0.0,
+        "feedback": "Refusing to share age seems secretive and rude in Chinese culture."
+      },
+      {
+        "text": "\u60a8\u731c\u731c\u770b\uff1f",
+        "score": 0.3,
+        "feedback": "Playful deflection might work with peers, not with elders."
+      },
+      {
+        "text": "\u6211\u5c5e\u864e\u7684\u3002",
+        "score": 0.8,
+        "feedback": "Answering with zodiac animal is very Chinese \u2014 they can calculate your age."
+      }
+    ]
+  },
+  {
+    "situation": "You accidentally bump into someone",
+    "situation_zh": "\u4e0d\u5c0f\u5fc3\u649e\u5230\u4e86\u522b\u4eba",
+    "options": [
+      {
+        "text": "\u4e0d\u597d\u610f\u601d\u4e0d\u597d\u610f\u601d\uff01",
+        "score": 1.0,
+        "feedback": "Doubled \u4e0d\u597d\u610f\u601d shows sincerity \u2014 the go-to for minor incidents."
+      },
+      {
+        "text": "\u5bf9\u4e0d\u8d77\u3002",
+        "score": 0.7,
+        "feedback": "\u5bf9\u4e0d\u8d77 works but implies more guilt \u2014 \u4e0d\u597d\u610f\u601d is lighter."
+      },
+      {
+        "text": "\u6ca1\u4e8b\u5427\uff1f",
+        "score": 0.6,
+        "feedback": "Checking if they're OK is thoughtful but misses the apology."
+      },
+      {
+        "text": "\u5c0f\u5fc3\u4e00\u70b9\u3002",
+        "score": 0.0,
+        "feedback": "This tells THEM to be careful \u2014 blaming the victim. Don't."
+      }
+    ]
+  },
+  {
+    "situation": "Host keeps offering you more food, you're full",
+    "situation_zh": "\u4e3b\u4eba\u4e00\u76f4\u8ba9\u4f60\u591a\u5403\uff0c\u4f60\u5403\u9971\u4e86",
+    "options": [
+      {
+        "text": "\u4e0d\u7528\u4e86\uff0c\u6211\u771f\u7684\u5403\u9971\u4e86\u3002",
+        "score": 0.8,
+        "feedback": "Adding \u771f\u7684 (really) breaks through the ritual offering cycle."
+      },
+      {
+        "text": "\u591f\u4e86\u591f\u4e86\uff0c\u8c22\u8c22\u3002",
+        "score": 0.7,
+        "feedback": "Doubled \u591f\u4e86 is emphatic. Works, but could sound a bit blunt."
+      },
+      {
+        "text": "\u6211\u5403\u4e0d\u4e0b\u4e86\uff0c\u505a\u5f97\u592a\u597d\u5403\u4e86\u3002",
+        "score": 1.0,
+        "feedback": "\u5403\u4e0d\u4e0b + complimenting the food \u2014 peak politeness."
+      },
+      {
+        "text": "\u4e0d\u8981\u4e86\u3002",
+        "score": 0.3,
+        "feedback": "Too blunt \u2014 hosts will think you didn't enjoy the food."
+      }
+    ]
+  }
+]

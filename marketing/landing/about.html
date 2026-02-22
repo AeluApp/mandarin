@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Mandarin | Built by a Learner, for Learners</title>
+  <meta name="description" content="Mandarin was built by a learner who got frustrated by the gap between studying vocabulary and actually reading real Chinese. This is that story.">
+  <link rel="canonical" href="https://mandarinapp.com/about">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About — Mandarin | Built by a Learner, for Learners">
+  <meta property="og:description" content="Mandarin was built by a learner who wanted a study tool that turns every word you look up into real practice.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/about">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About — Mandarin | Built by a Learner, for Learners">
+  <meta name="twitter:description" content="Mandarin was built by a learner who wanted a study tool that actually works.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- Layout -- */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    .container-wide {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    section {
+      padding: var(--space-8) 0;
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--color-text);
+    }
+
+    /* -- Hero -- */
+    .hero {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-6);
+    }
+
+    .hero-hanzi {
+      font-family: var(--font-hanzi);
+      font-size: 3rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-3);
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-text-faint);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* -- Story -- */
+    .story {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .story h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-4);
+    }
+
+    .story p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      line-height: 1.75;
+      margin-bottom: var(--space-3);
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* -- Philosophy -- */
+    .philosophy h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .value-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+    }
+
+    .value-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+      color: var(--color-accent);
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      line-height: 1.6;
+    }
+
+    .value-card:last-child {
+      grid-column: 1 / -1;
+      max-width: 50%;
+      justify-self: center;
+    }
+
+    /* -- Different -- */
+    .different {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .different h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .diff-item {
+      padding-left: var(--space-4);
+      position: relative;
+    }
+
+    .diff-item::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .diff-item strong {
+      color: var(--color-text);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .diff-item span {
+      color: var(--color-text-faint);
+      font-size: 0.85rem;
+    }
+
+    /* -- Numbers -- */
+    .numbers h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      text-align: center;
+    }
+
+    .number-item .number-value {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .number-item .number-label {
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      margin-top: var(--space-1);
+      display: block;
+    }
+
+    /* -- Contact -- */
+    .contact {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .contact p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-2);
+    }
+
+    .contact a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .contact a:hover {
+      opacity: 0.85;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-hanzi { font-size: 2.2rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .value-card:last-child { max-width: 100%; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .numbers-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { gap: var(--space-3); }
+    }
+
+    /* -- Animation -- */
+    @keyframes drift-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-hanzi, .hero h1, .hero-sub {
+      animation: drift-up 0.6s ease-out both;
+    }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-hanzi, .hero h1, .hero-sub {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about" aria-current="page">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-hanzi" aria-hidden="true">造</div>
+      <h1>Built by a learner, for learners.</h1>
+      <p class="hero-sub">Mandarin exists because the tool we needed did not. So we opened a text editor and started building.</p>
+    </div>
+  </section>
+
+  <!-- The Story -->
+  <section class="story">
+    <div class="container">
+      <h2>The story</h2>
+      <p>Two years ago, the goal was to learn Mandarin. Not the phrasebook version -- the real thing. Read a newspaper. Follow a conversation. Understand what was being said in the Chinese dramas playing in the background.</p>
+      <p>It started where everyone starts. Duolingo. It was fine for a week. The green owl kept the app opening, the multiple-choice questions were easy enough to feel productive, and the streak counter gave a daily sense of accomplishment. Then came the attempt to read a menu in Chinese -- and not a single character could be identified. The progress bar had been measuring engagement with the app, not engagement with the language.</p>
+      <p>Next came Anki, the spaced repetition tool that serious language learners swear by. Anki is powerful. It is also, essentially, a blank engine. You have to build the car yourself. More time went into formatting flashcards -- should there be audio? Pinyin on the front or back? Both recognition and production directions? -- than into studying Chinese. The tool was excellent at scheduling reviews. It offered nothing for content, curriculum, listening, tones, or the dozen other skills that make up actual Chinese ability.</p>
+      <p>HelloChinese, Hack Chinese, textbook courses came after that. Each solved one piece. None solved the problem that kept coming up every single day: studying vocabulary in one place and trying to read Chinese in another, with an enormous gap between those two experiences. Nothing connected studying to encountering. The act of looking up a word during reading and the act of drilling vocabulary were separate activities, happening in separate tools, with no feedback loop between them.</p>
+      <p>That gap became the product. A text editor was opened and building began -- not a startup, not a side project, a tool that was actually needed. Python. SQLite. A spaced repetition scheduler adapted from FSRS, the open-source algorithm that represents the current state of memory science research. Drill types: not just flashcards, but tone pair discrimination, cloze deletion, audio-to-character matching, sentence construction, register-aware practice. Twenty-seven types in total, each targeting a specific cognitive skill, each grounded in research on how memory forms and retrieval strengthens.</p>
+      <p>And then the core feature, the one that solved the original problem: the cleanup loop. Read Chinese in the graded reader. Look up a word you do not know. That word automatically enters your drill queue, scheduled across multiple drill types. The thing you encountered during reading becomes the thing you practice during drilling. The loop closes. Reading and practice are no longer separate activities.</p>
+      <p>Today, Mandarin is a complete adaptive drilling and reading system, used daily by its creators and a growing community of learners. When something does not work, it gets noticed. When something improves, that gets noticed too. The distance between the builders and the users is zero.</p>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <div class="container-wide">
+      <h2>The philosophy</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>Honesty Over Comfort</h3>
+          <p>Metrics tell the truth, even when it is discouraging. When your listening is two levels behind your reading, the app shows both numbers clearly. No softening. No reframing. The data is what it is.</p>
+        </div>
+        <div class="value-card">
+          <h3>Respect for Time</h3>
+          <p>Every minute studying should produce real learning. Sessions are built from drills the algorithm has determined are highest-value for you right now. No padding. No review of material already mastered just to fill time.</p>
+        </div>
+        <div class="value-card">
+          <h3>Depth Over Breadth</h3>
+          <p>Mandarin does one language, deeply. Twenty-seven drill types, per-skill diagnostics, a graded reader with the cleanup loop, speaking drills with tone grading. Every feature exists because Chinese specifically demands it.</p>
+        </div>
+        <div class="value-card">
+          <h3>Earned Confidence</h3>
+          <p>Confidence comes from evidence, not encouragement. When your HSK projection moves forward, it is because your demonstrated performance changed -- not because the app decided to be generous.</p>
+        </div>
+        <div class="value-card">
+          <h3>Quiet Craft</h3>
+          <p>Build something beautiful and useful, without shouting about it. The warm stone aesthetic, the careful typography, the soft session-complete chime -- the craft is in what you do not notice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Makes This Different -->
+  <section class="different">
+    <div class="container">
+      <h2>What makes this different</h2>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <strong>The cleanup loop</strong>
+          <span>Every word you look up during reading becomes a drill. Reading and practice are one system, not two separate activities.</span>
+        </div>
+        <div class="diff-item">
+          <strong>27 drill types</strong>
+          <span>Recognition, production, listening, tones, cloze, register, sentence construction. The system picks the right type for each word.</span>
+        </div>
+        <div class="diff-item">
+          <strong>Zero AI at runtime</strong>
+          <span>Every drill, every score, every recommendation is deterministic. No hallucinations, no API dependency, no varying quality.</span>
+        </div>
+        <div class="diff-item">
+          <strong>Honest metrics</strong>
+          <span>Per-skill HSK tracking across vocabulary, listening, reading, and tones. No blended averages that hide imbalances.</span>
+        </div>
+        <div class="diff-item">
+          <strong>FSRS scheduling</strong>
+          <span>Modified spaced repetition with Bayesian confidence dampening. One lucky guess does not fool the system.</span>
+        </div>
+        <div class="diff-item">
+          <strong>Built by learners</strong>
+          <span>Every feature exists because a learner needed it. Not because a committee approved it.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Numbers -->
+  <section class="numbers">
+    <div class="container">
+      <h2>The numbers</h2>
+      <div class="numbers-grid">
+        <div class="number-item">
+          <span class="number-value">27</span>
+          <span class="number-label">drill types</span>
+        </div>
+        <div class="number-item">
+          <span class="number-value">HSK 1-6</span>
+          <span class="number-label">aligned curriculum</span>
+        </div>
+        <div class="number-item">
+          <span class="number-value">$0</span>
+          <span class="number-label">AI tokens per session</span>
+        </div>
+        <div class="number-item">
+          <span class="number-value">1</span>
+          <span class="number-label">developer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <p>Questions, feedback, or just want to talk about learning Chinese.</p>
+      <p><a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+    </div>
+  </footer>
+
+</body>
+</html>

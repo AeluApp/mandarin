@@ -1,0 +1,60 @@
+{
+    "title": "Debating environmental policy",
+    "title_zh": "讨论环保政策",
+    "hsk_level": 5,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+        "setup": "During a lunch break, you and a colleague get into a discussion about whether China's carbon neutrality goals are realistic and what trade-offs are involved between economic growth and environmental protection.",
+        "setup_zh": "午休时间，你和同事讨论中国的碳中和目标是否现实，以及经济增长和环境保护之间需要做出什么样的取舍。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你觉得中国能在2060年之前实现碳中和吗？我感觉这个目标太理想化了。现在这么多工厂、这么多人口，完全摆脱化石能源怎么可能？",
+                "text_pinyin": "nǐ juéde zhōngguó néng zài èr líng liù líng nián zhīqián shíxiàn tàn zhōnghé ma? wǒ gǎnjué zhège mùbiāo tài lǐxiǎng huà le. xiànzài zhème duō gōngchǎng, zhème duō rénkǒu, wánquán bǎituō huàshí néngyuán zěnme kěnéng?",
+                "text_en": "Do you think China can achieve carbon neutrality before 2060? I feel this goal is too idealistic. With so many factories and such a large population, how is it possible to completely break free from fossil fuels?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your perspective on the carbon neutrality goal.",
+                "options": [
+                    {"text_zh": "我觉得目标确实有挑战性，但不一定不切实际。你看现在中国在可再生能源方面的投资力度有多大——太阳能板和风力发电的产能已经是全球第一了。碳中和不是说完全不排放，而是通过技术手段实现排放和吸收的平衡。当然，从传统能源转型到清洁能源，过程肯定不会一帆风顺，需要政策支持和技术突破。", "text_pinyin": "wǒ juéde mùbiāo quèshí yǒu tiǎozhàn xìng, dàn bù yīdìng bú qiè shíjì. nǐ kàn xiànzài zhōngguó zài kě zàishēng néngyuán fāngmiàn de tóuzī lìdù yǒu duō dà——tàiyángnéng bǎn hé fēnglì fādiàn de chǎnnéng yǐjīng shì quánqiú dì yī le. tàn zhōnghé bú shì shuō wánquán bù páifàng, ér shì tōngguò jìshù shǒuduàn shíxiàn páifàng hé xīshōu de pínghéng. dāngrán, cóng chuántǒng néngyuán zhuǎnxíng dào qīngjié néngyuán, guòchéng kěndìng bú huì yīfān fēngshùn, xūyào zhèngcè zhīchí hé jìshù tūpò.", "text_en": "I think the goal is certainly challenging, but not necessarily unrealistic. Look at how much China is investing in renewable energy now -- solar panel and wind power capacity is already number one globally. Carbon neutrality doesn't mean zero emissions -- it means achieving a balance between emissions and absorption through technological means. Of course, the transition from traditional to clean energy won't be smooth sailing; it requires policy support and technological breakthroughs.", "score": 1.0, "register": "semi-formal", "feedback": "Nuanced and well-informed -- corrects the misconception about 碳中和 meaning zero emissions, cites concrete evidence, and acknowledges difficulties. Using 可再生能源, 排放和吸收的平衡, and 一帆风顺 shows strong command of the topic."},
+                    {"text_zh": "我觉得应该可以。中国的技术发展很快，新能源汽车都已经那么普及了。", "text_pinyin": "wǒ juéde yīnggāi kěyǐ. zhōngguó de jìshù fāzhǎn hěn kuài, xīn néngyuán qìchē dōu yǐjīng nàme pǔjí le.", "text_en": "I think it should be possible. China's technology is developing fast -- new energy vehicles are already so widespread.", "score": 0.5, "register": "casual", "feedback": "Optimistic but superficial. Your colleague raised a structural concern about factories and population -- addressing those directly with data and reasoning makes a stronger case."},
+                    {"text_zh": "说实话我不太了解碳中和，听起来挺复杂的。", "text_pinyin": "shuō shíhuà wǒ bú tài liǎojiě tàn zhōnghé, tīng qǐlái tǐng fùzá de.", "text_en": "Honestly I don't really understand carbon neutrality, it sounds pretty complicated.", "score": 0.2, "register": "casual", "feedback": "Disengages from the topic entirely. Even partial knowledge of 碳中和, 可再生能源, or 排放 would let you contribute meaningfully."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "话是这么说，但你有没有想过代价？很多传统行业被迫关停或者转型，大量工人失业。有些地方经济完全依赖煤炭产业，你让他们怎么办？环保重要还是老百姓的生计重要？",
+                "text_pinyin": "huà shì zhème shuō, dàn nǐ yǒu méiyǒu xiǎng guò dàijià? hěn duō chuántǒng hángyè bèi pò guāntíng huòzhě zhuǎnxíng, dàliàng gōngrén shīyè. yǒuxiē dìfāng jīngjì wánquán yīlài méitàn chǎnyè, nǐ ràng tāmen zěnme bàn? huánbǎo zhòngyào háishi lǎobǎixìng de shēngjì zhòngyào?",
+                "text_en": "That's easy to say, but have you thought about the cost? Many traditional industries are forced to shut down or transform, leading to massive unemployment. Some regions depend entirely on the coal industry -- what do you want them to do? Is environmental protection more important, or people's livelihoods?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the tension between environmental goals and economic impact on workers.",
+                "options": [
+                    {"text_zh": "这不是一个非此即彼的问题。环保和经济发展并不一定矛盾。关键在于转型的过程中，政府要提供足够的过渡期和配套措施——比如对失业工人进行职业培训、在煤炭地区扶持新兴产业、给受影响的企业提供技术升级的补贴。我承认目前有些地方做得不够好，但解决方案不是放弃环保目标，而是完善转型的具体路径。", "text_pinyin": "zhè bú shì yī gè fēicǐjíbǐ de wèntí. huánbǎo hé jīngjì fāzhǎn bìng bù yīdìng máodùn. guānjiàn zàiyú zhuǎnxíng de guòchéng zhōng, zhèngfǔ yào tígōng zúgòu de guòdù qī hé pèitào cuòshī——bǐrú duì shīyè gōngrén jìnxíng zhíyè péixùn, zài méitàn dìqū fúchí xīnxīng chǎnyè, gěi shòu yǐngxiǎng de qǐyè tígōng jìshù shēngjí de bǔtiē. wǒ chéngrèn mùqián yǒuxiē dìfāng zuò de bú gòu hǎo, dàn jiějué fāng'àn bú shì fàngqì huánbǎo mùbiāo, ér shì wánshàn zhuǎnxíng de jùtǐ lùjìng.", "text_en": "This isn't an either-or question. Environmental protection and economic development aren't necessarily contradictory. The key is that during the transition, the government needs to provide sufficient transition periods and supporting measures -- like vocational training for unemployed workers, fostering emerging industries in coal regions, and providing technology upgrade subsidies for affected businesses. I admit some places haven't done this well enough, but the solution isn't to abandon environmental goals, but to refine the specific path of transition.", "score": 1.0, "register": "semi-formal", "feedback": "Sophisticated reframing -- rejects the false dichotomy, proposes concrete policy measures, and concedes shortcomings while defending the overall direction. 非此即彼, 过渡期, 配套措施, 完善路径 are precisely the vocabulary needed for this kind of policy discussion."},
+                    {"text_zh": "确实，工人的生计也很重要。我觉得政府应该两边都兼顾，不能只顾环保不管人民的生活。", "text_pinyin": "quèshí, gōngrén de shēngjì yě hěn zhòngyào. wǒ juéde zhèngfǔ yīnggāi liǎng biān dōu jiāngù, bù néng zhǐ gù huánbǎo bùguǎn rénmín de shēnghuó.", "text_en": "True, workers' livelihoods are important too. I think the government should take care of both sides -- they can't just focus on environmental protection and ignore people's lives.", "score": 0.5, "register": "neutral", "feedback": "Balanced sentiment but lacks specifics. How should the government 兼顾? What measures would you propose? Abstract statements need concrete support in a debate."},
+                    {"text_zh": "环保当然更重要，要是地球都没了，经济有什么用？", "text_pinyin": "huánbǎo dāngrán gèng zhòngyào, yàoshi dìqiú dōu méi le, jīngjì yǒu shénme yòng?", "text_en": "Environmental protection is obviously more important -- if the Earth is gone, what's the point of the economy?", "score": 0.3, "register": "casual", "feedback": "Dismisses your colleague's valid concern. In a policy debate, absolutist positions without acknowledging trade-offs come across as naive. The people losing their livelihoods deserve a real answer."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说得也有道理。不过你觉得作为普通人，我们能做什么？总不能什么都等着政府来解决吧。",
+                "text_pinyin": "shuō de yě yǒu dàolǐ. búguò nǐ juéde zuòwéi pǔtōng rén, wǒmen néng zuò shénme? zǒng bù néng shénme dōu děngzhe zhèngfǔ lái jiějué ba.",
+                "text_en": "That makes sense. But what do you think we as ordinary people can do? We can't just wait for the government to solve everything, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest what individuals can do to contribute to environmental goals.",
+                "options": [
+                    {"text_zh": "个人的力量虽然有限，但聚沙成塔。最直接的是减少日常生活中的碳排放——比如选择公共交通、减少一次性用品的使用、合理控制空调温度。另外，作为消费者我们可以用购买力来支持环保企业，选择绿色产品。最重要的是培养环保意识，影响身边的人。一个人改变不了世界，但如果每个人都做一点点，效果是巨大的。", "text_pinyin": "gèrén de lìliàng suīrán yǒuxiàn, dàn jùshā chéng tǎ. zuì zhíjiē de shì jiǎnshǎo rìcháng shēnghuó zhōng de tàn páifàng——bǐrú xuǎnzé gōnggòng jiāotōng, jiǎnshǎo yīcìxìng yòngpǐn de shǐyòng, hélǐ kòngzhì kōngtiáo wēndù. lìngwài, zuòwéi xiāofèi zhě wǒmen kěyǐ yòng gòumǎi lì lái zhīchí huánbǎo qǐyè, xuǎnzé lǜsè chǎnpǐn. zuì zhòngyào de shì péiyǎng huánbǎo yìshí, yǐngxiǎng shēnbiān de rén. yī gè rén gǎibiàn bùliǎo shìjiè, dàn rúguǒ měi gè rén dōu zuò yīdiǎndiǎn, xiàoguǒ shì jùdà de.", "text_en": "Individual power is limited, but many grains of sand make a tower. The most direct thing is reducing daily carbon emissions -- like choosing public transportation, reducing single-use products, and reasonably controlling air conditioning temperature. Additionally, as consumers we can use our purchasing power to support environmentally-friendly companies and choose green products. Most importantly, cultivating environmental awareness and influencing those around us. One person can't change the world, but if everyone does a little bit, the effect is enormous.", "score": 1.0, "register": "semi-formal", "feedback": "Grounded and actionable -- starts with the idiom 聚沙成塔 to frame the philosophy, then lists concrete daily actions. Connecting individual behavior to collective impact shows sophisticated reasoning. 购买力, 一次性用品, and 环保意识 are well-deployed."},
+                    {"text_zh": "我们可以少开车、少浪费。虽然做不了什么大事，但小事也有用。", "text_pinyin": "wǒmen kěyǐ shǎo kāi chē, shǎo làngfèi. suīrán zuò bùliǎo shénme dà shì, dàn xiǎo shì yě yǒu yòng.", "text_en": "We can drive less and waste less. Even though we can't do anything big, small things help too.", "score": 0.6, "register": "casual", "feedback": "Correct direction but underdeveloped. Specifics about what kind of waste reduction, how to make different choices as consumers, or how to spread awareness would strengthen the response."},
+                    {"text_zh": "普通人能做的其实很有限。主要还是靠政府和企业。", "text_pinyin": "pǔtōng rén néng zuò de qíshí hěn yǒuxiàn. zhǔyào háishi kào zhèngfǔ hé qǐyè.", "text_en": "What ordinary people can do is actually very limited. It mainly depends on the government and businesses.", "score": 0.3, "register": "casual", "feedback": "Your colleague specifically asked what we can do -- deflecting back to government contradicts the premise. Offering even small, concrete actions shows engagement."}
+                ]
+            }
+        ],
+        "cultural_note": "Environmental policy (环保政策 huánbǎo zhèngcè) is a frequent topic among Chinese professionals. China's 'dual carbon' goals (双碳目标 shuāng tàn mùbiāo -- carbon peak by 2030, carbon neutrality by 2060) are widely discussed. The tension between economic development (经济发展) and environmental protection (环境保护) is a classic debate frame. Using 非此即彼 (either-or) to reject false dichotomies and 配套措施 (supporting measures) to propose solutions shows policy literacy."
+    }
+}

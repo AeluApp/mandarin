@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 200">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=Source+Serif+4:wght@400&amp;family=Noto+Serif+SC:wght@700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="350" height="200" fill="#F2EBE0"/>
+
+  <!-- Brand mark: character + name -->
+  <text x="32" y="72" font-family="'Noto Serif SC', serif" font-weight="700" font-size="48" fill="#946070">漫</text>
+  <text x="88" y="64" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">Mandarin</text>
+
+  <!-- Horizon line -->
+  <line x1="32" y1="120" x2="318" y2="120" stroke="#D8D0C4" stroke-width="1"/>
+
+  <!-- Tagline -->
+  <text x="32" y="148" font-family="'Source Serif 4', serif" font-weight="400" font-size="13" fill="#2A3650">Patient Chinese study</text>
+
+  <!-- URL -->
+  <text x="318" y="178" font-family="'Source Serif 4', serif" font-weight="400" font-size="11" fill="#5A6678" text-anchor="end">mandarin.app</text>
+</svg>

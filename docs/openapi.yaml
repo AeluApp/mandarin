@@ -1,0 +1,1872 @@
+openapi: 3.1.0
+info:
+  title: Mandarin API
+  version: 1.0.0
+  description: >
+    REST API for the Mandarin Learning System. Supports adaptive drill sessions
+    (via WebSocket), spaced-repetition progress tracking, graded reading, media
+    exposure, extensive listening, vocabulary encounter logging, xAPI/Caliper
+    learning-record export, Common Cartridge export, GDPR data portability and
+    erasure, JWT-based mobile auth, offline sync, Stripe payments, and push
+    notifications.
+
+servers:
+  - url: https://mandarin.app
+
+security:
+  - cookieAuth: []
+  - bearerAuth: []
+
+tags:
+  - name: Health
+    description: Liveness, readiness, and full health probes
+  - name: Auth
+    description: Cookie-based authentication (login, register, logout, password reset, MFA, email verification)
+  - name: Token
+    description: JWT access/refresh token lifecycle for mobile clients
+  - name: Session
+    description: Learner status, session history, forecast, diagnostics, and session explainability
+  - name: Mastery
+    description: Per-item mastery gate criteria
+  - name: Export
+    description: CSV and Common Cartridge data exports
+  - name: Reading
+    description: Graded reading passages and vocabulary lookup
+  - name: Media
+    description: Media shelf -- recommendations, watch history, comprehension quizzes
+  - name: Listening
+    description: Extensive listening passages
+  - name: Encounters
+    description: Vocabulary encounter summary (cleanup loop)
+  - name: Settings
+    description: User preference toggles (anonymous mode, marketing opt-out)
+  - name: Push
+    description: Push notification token registration
+  - name: Personalization
+    description: Learner interest domains and personalization state
+  - name: Onboarding
+    description: Onboarding milestone tracking
+  - name: GDPR
+    description: GDPR Article 17 (erasure) and Article 20 (portability)
+  - name: Sync
+    description: Offline queue push/pull for mobile clients
+  - name: Payment
+    description: Stripe checkout, billing portal, webhooks, subscription status
+  - name: xAPI
+    description: xAPI statement export
+  - name: Caliper
+    description: IMS Caliper 1.2 event export
+  - name: WebSocket
+    description: Real-time drill and mini-session channels
+
+paths:
+  # ── Health ──────────────────────────────────────────────────────────
+
+  /api/health:
+    get:
+      tags: [Health]
+      summary: Full health check (DB, schema, content stats)
+      operationId: health
+      security: []
+      responses:
+        "200":
+          description: System healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthFull"
+        "503":
+          description: System unhealthy (missing tables, DB error)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/health/live:
+    get:
+      tags: [Health]
+      summary: Liveness probe (process alive, no dependency check)
+      operationId: healthLive
+      security: []
+      responses:
+        "200":
+          description: Process alive
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  uptime_seconds:
+                    type: integer
+
+  /api/health/ready:
+    get:
+      tags: [Health]
+      summary: Readiness probe (DB writable, schema current)
+      operationId: healthReady
+      security: []
+      responses:
+        "200":
+          description: Ready to serve traffic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  latency_ms:
+                    type: number
+        "503":
+          description: Not ready (schema migration pending or DB error)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: not_ready
+                  reason:
+                    type: string
+                  latency_ms:
+                    type: number
+
+  # ── Auth (cookie-based) ─────────────────────────────────────────────
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in with email and password
+      operationId: login
+      security: []
+      description: >
+        Form-based login. On success sets a session cookie and redirects.
+        If MFA is enabled, redirects to /auth/mfa-verify instead.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        "302":
+          description: Redirect to dashboard (or MFA challenge)
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+        "200":
+          description: Login form re-rendered with error flash
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new account
+      operationId: register
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [email, password, confirm]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                confirm:
+                  type: string
+                  format: password
+                display_name:
+                  type: string
+                invite_code:
+                  type: string
+                  description: Required in production
+      responses:
+        "302":
+          description: Redirect to dashboard on success
+        "200":
+          description: Registration form re-rendered with error flash
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Log out and clear session
+      operationId: logout
+      responses:
+        "302":
+          description: Redirect to login page
+
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Request a password reset email
+      operationId: forgotPassword
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        "200":
+          description: Always returns success to prevent email enumeration
+
+  /auth/reset-password/{token}:
+    post:
+      tags: [Auth]
+      summary: Reset password using a token
+      operationId: resetPassword
+      security: []
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [password, confirm]
+              properties:
+                password:
+                  type: string
+                  format: password
+                confirm:
+                  type: string
+                  format: password
+      responses:
+        "302":
+          description: Redirect to login on success
+        "200":
+          description: Form re-rendered with error flash
+
+  /auth/verify-email:
+    get:
+      tags: [Auth]
+      summary: Verify email address via token link
+      operationId: verifyEmail
+      security: []
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "302":
+          description: Redirect to login with flash message
+
+  /auth/unsubscribe:
+    get:
+      tags: [Auth]
+      summary: One-click marketing email unsubscribe (HMAC-signed)
+      operationId: unsubscribe
+      security: []
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: uid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "302":
+          description: Redirect to login with confirmation flash
+
+  # ── Token (JWT) ─────────────────────────────────────────────────────
+
+  /api/auth/token:
+    post:
+      tags: [Token]
+      summary: Exchange credentials for JWT access + refresh tokens
+      operationId: obtainToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Tokens issued (or MFA required)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/TokenResponse"
+                  - $ref: "#/components/schemas/MfaRequired"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /api/auth/token/refresh:
+    post:
+      tags: [Token]
+      summary: Exchange refresh token for a new access token
+      operationId: refreshToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        "200":
+          description: New access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+                    description: Seconds until expiry
+        "401":
+          description: Invalid or expired refresh token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /api/auth/token/mfa:
+    post:
+      tags: [Token]
+      summary: Complete MFA challenge for JWT flow
+      operationId: mfaToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mfa_token, code]
+              properties:
+                mfa_token:
+                  type: string
+                  description: Short-lived MFA token from /api/auth/token
+                code:
+                  type: string
+                  description: TOTP code or backup code
+      responses:
+        "200":
+          description: Tokens issued after MFA verification
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "401":
+          description: Invalid MFA code or expired MFA token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /api/auth/token/revoke:
+    post:
+      tags: [Token]
+      summary: Revoke refresh token (logout for mobile)
+      operationId: revokeToken
+      responses:
+        "200":
+          description: Token revoked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  # ── Session / Progress / Diagnostics ────────────────────────────────
+
+  /api/status:
+    get:
+      tags: [Session]
+      summary: Current learner status
+      operationId: getStatus
+      responses:
+        "200":
+          description: Learner status with item counts, mastery by HSK, days since last session
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item_count:
+                    type: integer
+                  total_sessions:
+                    type: integer
+                  days_since_last:
+                    type: integer
+                    nullable: true
+                  items_due:
+                    type: integer
+                  mastery:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      description: Per-HSK-level mastery breakdown
+
+  /api/forecast:
+    get:
+      tags: [Session]
+      summary: Pace, milestones, and HSK projections
+      operationId: getForecast
+      responses:
+        "200":
+          description: Forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/progress:
+    get:
+      tags: [Session]
+      summary: Retention stats and mastery by HSK level
+      operationId: getProgress
+      responses:
+        "200":
+          description: Progress data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mastery:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  retention:
+                    type: object
+
+  /api/diagnostics:
+    get:
+      tags: [Session]
+      summary: Quick diagnostic assessment
+      operationId: getDiagnostics
+      responses:
+        "200":
+          description: Diagnostics result
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/sessions:
+    get:
+      tags: [Session]
+      summary: Last 20 sessions with 14-day study streak data
+      operationId: getSessions
+      responses:
+        "200":
+          description: Session list and streak data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/SessionSummary"
+                  study_streak_data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        sessions:
+                          type: integer
+
+  /api/session/explain:
+    get:
+      tags: [Session]
+      summary: Explain how the next session would be planned
+      operationId: explainSession
+      responses:
+        "200":
+          description: Session planning rationale
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  day_profile:
+                    type: object
+                  gap_days:
+                    type: integer
+                    nullable: true
+                  is_long_gap:
+                    type: boolean
+                  base_session_length:
+                    type: integer
+                  adaptive_session_length:
+                    type: number
+                  final_session_length:
+                    type: integer
+                  modality_weights:
+                    type: object
+                  new_item_budget:
+                    type: integer
+                  time_of_day_penalty:
+                    type: number
+                  bounce_levels:
+                    type: array
+                    items:
+                      type: integer
+                  interleave_weight:
+                    type: number
+                  focus_areas:
+                    type: array
+                    items:
+                      type: string
+
+  # ── Mastery ─────────────────────────────────────────────────────────
+
+  /api/mastery/{item_id}/criteria:
+    get:
+      tags: [Mastery]
+      summary: 4-gate mastery criteria for a content item
+      operationId: getMasteryCriteria
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Gate breakdown
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MasteryCriteria"
+        "404":
+          description: No progress data for this item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ── Export ──────────────────────────────────────────────────────────
+
+  /api/export/progress:
+    get:
+      tags: [Export]
+      summary: Download progress data as CSV
+      operationId: exportProgress
+      responses:
+        "200":
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+
+  /api/export/sessions:
+    get:
+      tags: [Export]
+      summary: Download session history as CSV
+      operationId: exportSessions
+      responses:
+        "200":
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  /api/export/errors:
+    get:
+      tags: [Export]
+      summary: Download error log as CSV
+      operationId: exportErrors
+      responses:
+        "200":
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  /api/export/common-cartridge:
+    get:
+      tags: [Export]
+      summary: Export vocabulary as IMS Common Cartridge ZIP
+      operationId: exportCommonCartridge
+      parameters:
+        - name: level
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: HSK level to export
+      responses:
+        "200":
+          description: Common Cartridge ZIP file
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+
+  # ── Reading ─────────────────────────────────────────────────────────
+
+  /api/reading/passages:
+    get:
+      tags: [Reading]
+      summary: List graded reading passages
+      operationId: getReadingPassages
+      parameters:
+        - name: hsk_level
+          in: query
+          schema:
+            type: integer
+          description: Filter by HSK level
+      responses:
+        "200":
+          description: Passage list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  passages:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PassageSummary"
+        "403":
+          description: Feature requires tier upgrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpgradeRequired"
+
+  /api/reading/passage/{id}:
+    get:
+      tags: [Reading]
+      summary: Get a single passage with full text and glosses
+      operationId: getReadingPassage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Full passage content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Passage"
+        "404":
+          description: Passage not found
+
+  /api/reading/lookup:
+    post:
+      tags: [Reading]
+      summary: Look up a word during reading (logs vocab encounter)
+      operationId: readingLookup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hanzi]
+              properties:
+                hanzi:
+                  type: string
+                  description: Chinese character(s) to look up
+                passage_id:
+                  type: string
+                  description: Source passage ID
+      responses:
+        "200":
+          description: Lookup result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hanzi:
+                    type: string
+                  pinyin:
+                    type: string
+                  english:
+                    type: string
+                  found:
+                    type: boolean
+                    description: Whether the word exists in the content database
+        "400":
+          description: Missing hanzi parameter
+
+  # ── Media ───────────────────────────────────────────────────────────
+
+  /api/media/recommendations:
+    get:
+      tags: [Media]
+      summary: Get media recommendations for current level
+      operationId: getMediaRecommendations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 6
+      responses:
+        "200":
+          description: Recommendations list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/MediaRecommendation"
+        "403":
+          description: Feature requires tier upgrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpgradeRequired"
+
+  /api/media/history:
+    get:
+      tags: [Media]
+      summary: Get watch history and stats
+      operationId: getMediaHistory
+      responses:
+        "200":
+          description: Watch history and aggregated stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  history:
+                    type: array
+                    items:
+                      type: object
+                  stats:
+                    type: object
+
+  /api/media/watched:
+    post:
+      tags: [Media]
+      summary: Record a media entry as watched
+      operationId: markMediaWatched
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [media_id]
+              properties:
+                media_id:
+                  type: string
+                score:
+                  type: number
+                  default: 0.0
+      responses:
+        "200":
+          description: Recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+        "400":
+          description: Missing media_id
+
+  /api/media/skip:
+    post:
+      tags: [Media]
+      summary: Record a media skip
+      operationId: skipMedia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [media_id]
+              properties:
+                media_id:
+                  type: string
+      responses:
+        "200":
+          description: Skip recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+        "400":
+          description: Missing media_id
+
+  /api/media/liked:
+    post:
+      tags: [Media]
+      summary: Record media liked/disliked preference
+      operationId: likeMedia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [media_id]
+              properties:
+                media_id:
+                  type: string
+                liked:
+                  type: boolean
+      responses:
+        "200":
+          description: Preference recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+        "400":
+          description: Missing media_id
+
+  /api/media/comprehension/{media_id}:
+    get:
+      tags: [Media]
+      summary: Get comprehension quiz for a media entry
+      operationId: getMediaComprehension
+      parameters:
+        - name: media_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Media entry with quiz questions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  title_zh:
+                    type: string
+                  hsk_level:
+                    type: integer
+                  vocab_preview:
+                    type: array
+                    items:
+                      type: object
+                  questions:
+                    type: array
+                    items:
+                      type: object
+                  cultural_note:
+                    type: string
+                  follow_up:
+                    type: string
+        "404":
+          description: Media entry not found
+
+  /api/media/comprehension/submit:
+    post:
+      tags: [Media]
+      summary: Submit comprehension quiz results
+      operationId: submitMediaComprehension
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [media_id]
+              properties:
+                media_id:
+                  type: string
+                score:
+                  type: number
+                total:
+                  type: integer
+                correct:
+                  type: integer
+      responses:
+        "200":
+          description: Quiz result recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  score:
+                    type: number
+        "400":
+          description: Missing media_id
+
+  # ── Listening ───────────────────────────────────────────────────────
+
+  /api/listening/passage:
+    get:
+      tags: [Listening]
+      summary: Get a random passage for listening practice (browser TTS)
+      operationId: getListeningPassage
+      parameters:
+        - name: hsk_level
+          in: query
+          schema:
+            type: integer
+          description: Filter by HSK level
+      responses:
+        "200":
+          description: Listening passage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListeningPassage"
+        "403":
+          description: Feature requires tier upgrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpgradeRequired"
+        "404":
+          description: No passages at this level
+
+  /api/listening/complete:
+    post:
+      tags: [Listening]
+      summary: Record listening completion and log word encounters
+      operationId: completeListening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passage_id:
+                  type: string
+                words_looked_up:
+                  type: array
+                  items:
+                    type: string
+                  description: Hanzi strings that were looked up during listening
+      responses:
+        "200":
+          description: Completion recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  encounters_logged:
+                    type: integer
+
+  # ── Encounters ──────────────────────────────────────────────────────
+
+  /api/encounters/summary:
+    get:
+      tags: [Encounters]
+      summary: Vocab encounter summary for dashboard (last 7 days)
+      operationId: getEncountersSummary
+      responses:
+        "200":
+          description: Encounter stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_lookups_7d:
+                    type: integer
+                  top_words:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        hanzi:
+                          type: string
+                        count:
+                          type: integer
+                  sources:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    description: Lookup counts keyed by source_type (reading, listening, etc.)
+
+  # ── Settings ────────────────────────────────────────────────────────
+
+  /api/settings/anonymous-mode:
+    get:
+      tags: [Settings]
+      summary: Get anonymous learning mode setting
+      operationId: getAnonymousMode
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  anonymous_mode:
+                    type: boolean
+    post:
+      tags: [Settings]
+      summary: Toggle anonymous learning mode
+      operationId: setAnonymousMode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  anonymous_mode:
+                    type: boolean
+        "403":
+          description: Feature not available for this user
+
+  /api/settings/marketing-opt-out:
+    get:
+      tags: [Settings]
+      summary: Get marketing email opt-out setting
+      operationId: getMarketingOptOut
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  marketing_opt_out:
+                    type: boolean
+    post:
+      tags: [Settings]
+      summary: Toggle marketing email opt-out
+      operationId: setMarketingOptOut
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                opted_out:
+                  type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  marketing_opt_out:
+                    type: boolean
+
+  # ── Push Notifications ──────────────────────────────────────────────
+
+  /api/push/register:
+    post:
+      tags: [Push]
+      summary: Register a push notification token
+      operationId: registerPush
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [platform, token]
+              properties:
+                platform:
+                  type: string
+                  enum: [ios, android]
+                token:
+                  type: string
+                  description: Device push token
+      responses:
+        "200":
+          description: Token registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+        "400":
+          description: Missing or invalid platform/token
+
+  /api/push/unregister:
+    post:
+      tags: [Push]
+      summary: Remove push notification token on logout
+      operationId: unregisterPush
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                platform:
+                  type: string
+                  enum: [ios, android]
+                  description: If omitted, removes all tokens for the user
+      responses:
+        "200":
+          description: Token removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  # ── Personalization ────────────────────────────────────────────────
+
+  /api/personalization:
+    get:
+      tags: [Personalization]
+      summary: Get interest domains and current preference
+      operationId: getPersonalization
+      responses:
+        "200":
+          description: Personalization state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  preferred_domains:
+                    type: string
+                    description: Comma-separated domain keys
+                  domains:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                        description:
+                          type: string
+                        active:
+                          type: boolean
+                        available:
+                          type: boolean
+                        sentence_count:
+                          type: integer
+
+  # ── Onboarding ──────────────────────────────────────────────────────
+
+  /api/onboarding/status:
+    get:
+      tags: [Onboarding]
+      summary: Get onboarding milestone completion status
+      operationId: getOnboardingStatus
+      responses:
+        "200":
+          description: Milestone flags
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_session:
+                    type: boolean
+                  first_week:
+                    type: boolean
+                  first_reading:
+                    type: boolean
+                  drill_variety:
+                    type: boolean
+                  first_streak:
+                    type: boolean
+                  all_complete:
+                    type: boolean
+
+  # ── xAPI ────────────────────────────────────────────────────────────
+
+  /api/xapi/statements:
+    get:
+      tags: [xAPI]
+      summary: Retrieve xAPI statements for the authenticated user
+      operationId: getXapiStatements
+      parameters:
+        - name: since
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Only return statements after this timestamp
+        - name: until
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Only return statements before this timestamp
+      responses:
+        "200":
+          description: xAPI statements
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statements:
+                    type: array
+                    items:
+                      type: object
+                      description: xAPI statement per spec
+
+  # ── Caliper ─────────────────────────────────────────────────────────
+
+  /api/caliper/events:
+    get:
+      tags: [Caliper]
+      summary: Retrieve IMS Caliper 1.2 events for the authenticated user
+      operationId: getCaliperEvents
+      parameters:
+        - name: since
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Only return events after this timestamp
+      responses:
+        "200":
+          description: Caliper events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      description: Caliper event envelope
+
+  # ── GDPR ────────────────────────────────────────────────────────────
+
+  /api/account/export:
+    get:
+      tags: [GDPR]
+      summary: Export all personal data (GDPR Article 20 portability)
+      operationId: exportAccountData
+      responses:
+        "200":
+          description: JSON archive of all user data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exported_at:
+                    type: string
+                    format: date-time
+                  user_id:
+                    type: integer
+                  user:
+                    type: object
+                    nullable: true
+                  learner_profile:
+                    type: object
+                    nullable: true
+                  progress:
+                    type: array
+                    items:
+                      type: object
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                  vocab_encounters:
+                    type: array
+                    items:
+                      type: object
+                  push_tokens:
+                    type: array
+                    items:
+                      type: object
+                  security_events:
+                    type: array
+                    items:
+                      type: object
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+
+  /api/account/delete:
+    post:
+      tags: [GDPR]
+      summary: Delete account and all personal data (GDPR Article 17 erasure)
+      operationId: deleteAccount
+      description: >
+        Immediately anonymizes the account and deletes all personal data
+        from user-scoped tables. Security audit logs are retained per
+        Art. 17(3)(e) legitimate interest.
+      responses:
+        "200":
+          description: Account deleted and anonymized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+                  message:
+                    type: string
+
+  # ── Sync ────────────────────────────────────────────────────────────
+
+  /api/sync/push:
+    post:
+      tags: [Sync]
+      summary: Push batched offline actions to the server
+      operationId: syncPush
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [actions]
+              properties:
+                actions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum: [drill_result, vocab_encounter, media_watched]
+                      data:
+                        type: object
+                      timestamp:
+                        type: string
+                        format: date-time
+      responses:
+        "200":
+          description: Sync result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  processed:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: integer
+                        error:
+                          type: string
+                  total:
+                    type: integer
+
+  /api/sync/pull:
+    get:
+      tags: [Sync]
+      summary: Pull new progress and sessions since a timestamp
+      operationId: syncPull
+      parameters:
+        - name: since
+          in: query
+          schema:
+            type: string
+            format: date-time
+            default: "1970-01-01T00:00:00"
+          description: Return data updated after this timestamp
+      responses:
+        "200":
+          description: Updated data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  progress:
+                    type: array
+                    items:
+                      type: object
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                  since:
+                    type: string
+
+  /api/sync/state:
+    get:
+      tags: [Sync]
+      summary: Get state hash for quick client-side comparison
+      operationId: syncState
+      responses:
+        "200":
+          description: State fingerprint
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hash:
+                    type: string
+                    description: SHA-256 prefix of user state
+                  last_updated:
+                    type: string
+                  item_count:
+                    type: integer
+
+  # ── Payment ─────────────────────────────────────────────────────────
+
+  /api/checkout:
+    post:
+      tags: [Payment]
+      summary: Create a Stripe Checkout session
+      operationId: createCheckout
+      responses:
+        "200":
+          description: Checkout URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+
+  /api/billing-portal:
+    post:
+      tags: [Payment]
+      summary: Create a Stripe Billing Portal session
+      operationId: createBillingPortal
+      responses:
+        "200":
+          description: Portal URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+        "400":
+          description: No active subscription found
+
+  /api/webhook/stripe:
+    post:
+      tags: [Payment]
+      summary: Stripe webhook endpoint (signature-verified)
+      operationId: stripeWebhook
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Webhook received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  received:
+                    type: boolean
+        "400":
+          description: Invalid signature
+
+  /api/subscription/status:
+    get:
+      tags: [Payment]
+      summary: Get current subscription tier and status
+      operationId: getSubscriptionStatus
+      responses:
+        "200":
+          description: Subscription details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tier:
+                    type: string
+                    example: free
+                  status:
+                    type: string
+                    example: active
+                  expires_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  has_stripe:
+                    type: boolean
+
+  # ── WebSocket ───────────────────────────────────────────────────────
+
+  /ws/session:
+    get:
+      tags: [WebSocket]
+      summary: WebSocket for full drill sessions
+      operationId: wsSession
+      description: >
+        Upgrade to WebSocket. Requires session cookie auth. Server sends drill
+        items as JSON frames; client responds with {"type": "answer", "value": "..."}
+        messages. Supports resume via resume_token protocol. Query param ?mic=0
+        disables microphone prompts.
+      parameters:
+        - name: mic
+          in: query
+          schema:
+            type: string
+            enum: ["0", "1"]
+            default: "1"
+          description: Set to 0 to disable microphone recording prompts
+      responses:
+        "101":
+          description: Switching Protocols (WebSocket upgrade)
+
+  /ws/mini:
+    get:
+      tags: [WebSocket]
+      summary: WebSocket for mini (quick review) sessions
+      operationId: wsMini
+      description: >
+        Same protocol as /ws/session but plans a shorter session using
+        the minimal planner.
+      parameters:
+        - name: mic
+          in: query
+          schema:
+            type: string
+            enum: ["0", "1"]
+            default: "1"
+      responses:
+        "101":
+          description: Switching Protocols (WebSocket upgrade)
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+      description: Flask session cookie set on login
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token from /api/auth/token
+
+  schemas:
+    StatusOk:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+          description: Machine-readable error code
+
+    UpgradeRequired:
+      type: object
+      properties:
+        error:
+          type: string
+          example: upgrade_required
+        feature:
+          type: string
+          description: Feature name that requires upgrade
+
+    HealthFull:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        schema_version:
+          type: integer
+        schema_current:
+          type: boolean
+        item_count:
+          type: integer
+        tables:
+          type: integer
+        uptime_seconds:
+          type: integer
+        latency_ms:
+          type: number
+
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+          description: Seconds until access token expires
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            email:
+              type: string
+            display_name:
+              type: string
+            subscription_tier:
+              type: string
+
+    MfaRequired:
+      type: object
+      properties:
+        mfa_required:
+          type: boolean
+          example: true
+        mfa_token:
+          type: string
+          description: Short-lived token to complete MFA (5 min expiry)
+
+    SessionSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        started_at:
+          type: string
+          format: date-time
+        session_type:
+          type: string
+        items_completed:
+          type: integer
+        items_correct:
+          type: integer
+        early_exit:
+          type: boolean
+        duration_seconds:
+          type: integer
+          nullable: true
+
+    MasteryCriteria:
+      type: object
+      properties:
+        item_id:
+          type: integer
+        mastery_stage:
+          type: string
+        difficulty:
+          type: number
+        gates:
+          type: object
+          properties:
+            streak:
+              $ref: "#/components/schemas/Gate"
+            attempts:
+              $ref: "#/components/schemas/Gate"
+            diversity:
+              $ref: "#/components/schemas/Gate"
+            days:
+              $ref: "#/components/schemas/Gate"
+        gates_met:
+          type: integer
+        summary:
+          type: string
+
+    Gate:
+      type: object
+      properties:
+        current:
+          type: integer
+        needed:
+          type: integer
+        met:
+          type: boolean
+
+    PassageSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        title_zh:
+          type: string
+        hsk_level:
+          type: integer
+
+    Passage:
+      type: object
+      description: Full reading passage with text, pinyin, translation, and glosses
+
+    MediaRecommendation:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        hsk_level:
+          type: integer
+        media_type:
+          type: string
+        cost:
+          type: string
+        content_lenses:
+          type: array
+          items:
+            type: string
+        segment:
+          type: object
+        where_to_find:
+          type: string
+        cultural_note:
+          type: string
+        times_watched:
+          type: integer
+        avg_score:
+          type: number
+          nullable: true
+        liked:
+          type: boolean
+          nullable: true
+        has_quiz:
+          type: boolean
+
+    ListeningPassage:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        title_zh:
+          type: string
+        hsk_level:
+          type: integer
+        text_zh:
+          type: string
+        text_pinyin:
+          type: string
+        text_en:
+          type: string
+        questions:
+          type: array
+          items:
+            type: object
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Authentication required

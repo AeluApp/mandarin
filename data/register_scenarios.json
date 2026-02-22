@@ -1,0 +1,182 @@
+[
+  {
+    "situation": "Your boss asks how your weekend was",
+    "situation_zh": "\u8001\u677f\u95ee\u4f60\u5468\u672b\u600e\u4e48\u6837",
+    "options": [
+      {
+        "text": "\u8fd8\u884c\u5427\uff0c\u6ca1\u5e72\u5565\u3002",
+        "register": "casual",
+        "score": 0.3,
+        "feedback": "Too casual for a boss \u2014 \u8fd8\u884c is fine among friends."
+      },
+      {
+        "text": "\u8fd8\u4e0d\u9519\uff0c\u8c22\u8c22\u5173\u5fc3\u3002",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "Perfect \u2014 polite but not stiff."
+      },
+      {
+        "text": "\u631a\u597d\u7684\uff01\u6211\u53bb\u722c\u5c71\u4e86\u3002",
+        "register": "neutral",
+        "score": 0.8,
+        "feedback": "Good \u2014 sharing a detail shows engagement."
+      },
+      {
+        "text": "\u6258\u60a8\u7684\u798f\uff0c\u8fc7\u5f97\u4e0d\u9519\u3002",
+        "register": "professional",
+        "score": 0.6,
+        "feedback": "A bit formal \u2014 \u6258\u60a8\u7684\u798f is more suited to older generation."
+      }
+    ]
+  },
+  {
+    "situation": "A friend introduces you to someone new",
+    "situation_zh": "\u670b\u53cb\u7ed9\u4f60\u4ecb\u7ecd\u65b0\u8ba4\u8bc6\u7684\u4eba",
+    "options": [
+      {
+        "text": "\u4f60\u597d\u4f60\u597d\uff01",
+        "register": "casual",
+        "score": 0.9,
+        "feedback": "Natural \u2014 the doubled \u4f60\u597d is warm and casual."
+      },
+      {
+        "text": "\u60a8\u597d\uff0c\u5f88\u9ad8\u5174\u8ba4\u8bc6\u60a8\u3002",
+        "register": "professional",
+        "score": 0.7,
+        "feedback": "A bit formal for a friend's friend, but not wrong."
+      },
+      {
+        "text": "\u55e8\uff01",
+        "register": "casual",
+        "score": 0.5,
+        "feedback": "Very casual \u2014 fine for young people, might seem flippant to others."
+      },
+      {
+        "text": "\u5e78\u4f1a\u5e78\u4f1a\u3002",
+        "register": "professional",
+        "score": 0.4,
+        "feedback": "Literary/formal \u2014 sounds like a business card exchange."
+      }
+    ]
+  },
+  {
+    "situation": "You need to decline a dinner invitation from a colleague",
+    "situation_zh": "\u540c\u4e8b\u8bf7\u4f60\u5403\u996d\uff0c\u4f60\u9700\u8981\u62d2\u7edd",
+    "options": [
+      {
+        "text": "\u4e0d\u53bb\u4e86\u3002",
+        "register": "casual",
+        "score": 0.2,
+        "feedback": "Too blunt \u2014 even friends would expect a reason."
+      },
+      {
+        "text": "\u8c22\u8c22\u4f60\uff0c\u4f46\u662f\u4eca\u5929\u6709\u70b9\u4e8b\uff0c\u4e0b\u6b21\u5427\u3002",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "Classic Chinese soft decline \u2014 reason + \u4e0b\u6b21 promise."
+      },
+      {
+        "text": "\u4e0d\u597d\u610f\u601d\uff0c\u6211\u4eca\u5929\u6709\u5b89\u6392\u4e86\uff0c\u6539\u5929\u4e00\u5b9a\u3002",
+        "register": "neutral",
+        "score": 0.9,
+        "feedback": "Excellent \u2014 \u6539\u5929\u4e00\u5b9a adds warmth to the decline."
+      },
+      {
+        "text": "\u6211\u4e0d\u60f3\u53bb\u3002",
+        "register": "casual",
+        "score": 0.1,
+        "feedback": "\u76f4\u63a5 (direct) in a way that damages the relationship."
+      }
+    ]
+  },
+  {
+    "situation": "Asking a stranger for directions on the street",
+    "situation_zh": "\u5728\u8857\u4e0a\u95ee\u964c\u751f\u4eba\u600e\u4e48\u8d70",
+    "options": [
+      {
+        "text": "\u5582\uff0cXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "register": "casual",
+        "score": 0.2,
+        "feedback": "\u5582 to a stranger is rude. Save it for phone calls."
+      },
+      {
+        "text": "\u8bf7\u95ee\uff0cXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "\u8bf7\u95ee is the magic word for approaching strangers politely."
+      },
+      {
+        "text": "\u4f60\u597d\uff0c\u9ebb\u70e6\u95ee\u4e00\u4e0b\uff0cXX\u8def\u5728\u54ea\uff1f",
+        "register": "neutral",
+        "score": 0.9,
+        "feedback": "\u9ebb\u70e6 adds extra politeness \u2014 good instinct."
+      },
+      {
+        "text": "\u52b3\u9a7e\uff0c\u8bf7\u95eeXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "register": "professional",
+        "score": 0.7,
+        "feedback": "\u52b3\u9a7e is old-fashioned polite \u2014 charming but a bit much for directions."
+      }
+    ]
+  },
+  {
+    "situation": "Thanking a waiter after a meal",
+    "situation_zh": "\u5403\u5b8c\u996d\u611f\u8c22\u670d\u52a1\u5458",
+    "options": [
+      {
+        "text": "\u8c22\u8c22\uff01",
+        "register": "neutral",
+        "score": 0.8,
+        "feedback": "Simple and effective. Most common choice."
+      },
+      {
+        "text": "\u9ebb\u70e6\u4f60\u4e86\uff0c\u8c22\u8c22\u3002",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "\u9ebb\u70e6\u4f60\u4e86 acknowledges their effort \u2014 a nice touch."
+      },
+      {
+        "text": "\u8f9b\u82e6\u4e86\u3002",
+        "register": "neutral",
+        "score": 0.6,
+        "feedback": "\u8f9b\u82e6\u4e86 works but is more common from boss to employee."
+      },
+      {
+        "text": "\u6ca1\u4e8b\u4e86\u3002",
+        "register": "casual",
+        "score": 0.3,
+        "feedback": "This means 'that's all' \u2014 not really a thank you."
+      }
+    ]
+  },
+  {
+    "situation": "Your teacher asks if you have questions",
+    "situation_zh": "\u8001\u5e08\u95ee\u4f60\u6709\u6ca1\u6709\u95ee\u9898",
+    "options": [
+      {
+        "text": "\u6ca1\u6709\u3002",
+        "register": "casual",
+        "score": 0.5,
+        "feedback": "Technically fine but feels curt to a teacher."
+      },
+      {
+        "text": "\u6ca1\u6709\uff0c\u8c22\u8c22\u8001\u5e08\u3002",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "Adding \u8c22\u8c22\u8001\u5e08 shows respect \u2014 the standard."
+      },
+      {
+        "text": "\u6682\u65f6\u6ca1\u6709\uff0c\u8c22\u8c22\u3002",
+        "register": "neutral",
+        "score": 0.9,
+        "feedback": "\u6682\u65f6 (for now) leaves the door open \u2014 thoughtful."
+      },
+      {
+        "text": "\u8001\u5e08\u8bb2\u5f97\u5f88\u6e05\u695a\uff0c\u8c22\u8c22\u3002",
+        "register": "professional",
+        "score": 0.8,
+        "feedback": "Complimenting the teaching is flattering \u2014 sincere or strategic, both work."
+      }
+    ]
+  }
+]

@@ -1,0 +1,45 @@
+{
+    "title": "Phone call - making appointment",
+    "title_zh": "打电话预约",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're calling a clinic to make a doctor's appointment.",
+        "setup_zh": "你打电话给诊所预约看医生。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，这里是和平诊所。",
+                "text_pinyin": "nǐ hǎo, zhèlǐ shì hépíng zhěnsuǒ.",
+                "text_en": "Hello, this is Heping Clinic."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say you want to make an appointment.",
+                "options": [
+                    {"text_zh": "你好，我想预约看医生。", "text_pinyin": "nǐ hǎo, wǒ xiǎng yùyuē kàn yīshēng.", "text_en": "Hello, I'd like to make an appointment to see a doctor.", "score": 1.0, "register": "neutral", "feedback": "Clear and natural. 预约 is the standard word for appointments."},
+                    {"text_zh": "我要看医生。", "text_pinyin": "wǒ yào kàn yīshēng.", "text_en": "I want to see a doctor.", "score": 0.6, "register": "casual", "feedback": "Understandable, but 预约 (make an appointment) is what they expect on the phone."},
+                    {"text_zh": "你好，请问可以预约吗？", "text_pinyin": "nǐ hǎo, qǐngwèn kěyǐ yùyuē ma?", "text_en": "Hello, may I make an appointment?", "score": 0.9, "register": "polite", "feedback": "Very polite way to ask. Slightly indirect but perfectly natural."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。您想什么时候来？明天下午有空。",
+                "text_pinyin": "hǎo de. nín xiǎng shénme shíhou lái? míngtiān xiàwǔ yǒu kòng.",
+                "text_en": "OK. When would you like to come? Tomorrow afternoon is available."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the tomorrow afternoon slot.",
+                "options": [
+                    {"text_zh": "好的，明天下午可以。几点？", "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?", "text_en": "OK, tomorrow afternoon works. What time?", "score": 1.0, "register": "neutral", "feedback": "Perfect — confirms and asks for specific time."},
+                    {"text_zh": "明天下午吧。谢谢。", "text_pinyin": "míngtiān xiàwǔ ba. xièxie.", "text_en": "Tomorrow afternoon then. Thanks.", "score": 0.9, "register": "neutral", "feedback": "Good. You might still need to ask for the exact time."},
+                    {"text_zh": "行。", "text_pinyin": "xíng.", "text_en": "OK.", "score": 0.5, "register": "minimal", "feedback": "Too brief for a phone call. They need more confirmation."}
+                ]
+            }
+        ],
+        "cultural_note": "Phone calls in Chinese tend to be efficient. 预约 (yùyuē) is used for all formal appointments. On the phone, speaking clearly and confirming details is especially important."
+    }
+}

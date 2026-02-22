@@ -1,0 +1,1390 @@
+[
+  {
+    "id": "st_1_001",
+    "hsk_level": 1,
+    "prompt_en": "Say that you are Chinese.",
+    "acceptable_answers": ["我是中国人。"],
+    "required_keywords": ["是", "中国人"],
+    "required_grammar": ["是"],
+    "key_word_hint": "是"
+  },
+  {
+    "id": "st_1_002",
+    "hsk_level": 1,
+    "prompt_en": "Ask someone what their name is.",
+    "acceptable_answers": ["你叫什么名字？", "你叫什么？"],
+    "required_keywords": ["叫", "什么"],
+    "required_grammar": ["叫"],
+    "key_word_hint": "叫什么"
+  },
+  {
+    "id": "st_1_003",
+    "hsk_level": 1,
+    "prompt_en": "Say that you want to drink water.",
+    "acceptable_answers": ["我想喝水。", "我要喝水。"],
+    "required_keywords": ["喝", "水"],
+    "required_grammar": ["想/要"],
+    "key_word_hint": "想喝"
+  },
+  {
+    "id": "st_1_004",
+    "hsk_level": 1,
+    "prompt_en": "Say that you have two cats.",
+    "acceptable_answers": ["我有两只猫。", "我有两个猫。"],
+    "required_keywords": ["有", "猫"],
+    "required_grammar": ["有"],
+    "key_word_hint": "有"
+  },
+  {
+    "id": "st_1_005",
+    "hsk_level": 1,
+    "prompt_en": "Say that this is your book.",
+    "acceptable_answers": ["这是我的书。"],
+    "required_keywords": ["这", "是", "我的", "书"],
+    "required_grammar": ["的"],
+    "key_word_hint": "我的"
+  },
+  {
+    "id": "st_1_006",
+    "hsk_level": 1,
+    "prompt_en": "Ask how much this costs.",
+    "acceptable_answers": ["这个多少钱？", "这多少钱？"],
+    "required_keywords": ["多少", "钱"],
+    "required_grammar": ["多少"],
+    "key_word_hint": "多少钱"
+  },
+  {
+    "id": "st_1_007",
+    "hsk_level": 1,
+    "prompt_en": "Say that you do not like coffee.",
+    "acceptable_answers": ["我不喜欢咖啡。", "我不喜欢喝咖啡。"],
+    "required_keywords": ["不", "喜欢", "咖啡"],
+    "required_grammar": ["不"],
+    "key_word_hint": "不喜欢"
+  },
+  {
+    "id": "st_1_008",
+    "hsk_level": 1,
+    "prompt_en": "Ask someone where they are.",
+    "acceptable_answers": ["你在哪儿？", "你在哪里？"],
+    "required_keywords": ["在", "哪"],
+    "required_grammar": ["在"],
+    "key_word_hint": "在哪儿"
+  },
+  {
+    "id": "st_1_009",
+    "hsk_level": 1,
+    "prompt_en": "Say that today is Monday.",
+    "acceptable_answers": ["今天是星期一。", "今天星期一。"],
+    "required_keywords": ["今天", "星期一"],
+    "required_grammar": ["是"],
+    "key_word_hint": "星期一"
+  },
+  {
+    "id": "st_1_010",
+    "hsk_level": 1,
+    "prompt_en": "Say that you are going home.",
+    "acceptable_answers": ["我回家。", "我要回家。"],
+    "required_keywords": ["回", "家"],
+    "required_grammar": ["回"],
+    "key_word_hint": "回家"
+  },
+  {
+    "id": "st_1_011",
+    "hsk_level": 1,
+    "prompt_en": "Say that he is a doctor.",
+    "acceptable_answers": ["他是医生。", "他是一个医生。"],
+    "required_keywords": ["他", "是", "医生"],
+    "required_grammar": ["是"],
+    "key_word_hint": "是"
+  },
+  {
+    "id": "st_1_012",
+    "hsk_level": 1,
+    "prompt_en": "Ask what time it is now.",
+    "acceptable_answers": ["现在几点？", "现在几点了？"],
+    "required_keywords": ["现在", "几点"],
+    "required_grammar": ["几"],
+    "key_word_hint": "几点"
+  },
+  {
+    "id": "st_1_013",
+    "hsk_level": 1,
+    "prompt_en": "Say that you can speak a little Chinese.",
+    "acceptable_answers": ["我会说一点中文。", "我会说一点儿中文。"],
+    "required_keywords": ["会", "说", "中文"],
+    "required_grammar": ["会"],
+    "key_word_hint": "会说"
+  },
+  {
+    "id": "st_1_014",
+    "hsk_level": 1,
+    "prompt_en": "Say that you are at school.",
+    "acceptable_answers": ["我在学校。"],
+    "required_keywords": ["在", "学校"],
+    "required_grammar": ["在"],
+    "key_word_hint": "在学校"
+  },
+  {
+    "id": "st_1_015",
+    "hsk_level": 1,
+    "prompt_en": "Ask someone if they are busy.",
+    "acceptable_answers": ["你忙吗？", "你忙不忙？"],
+    "required_keywords": ["忙"],
+    "required_grammar": ["吗"],
+    "key_word_hint": "忙吗"
+  },
+  {
+    "id": "st_1_016",
+    "hsk_level": 1,
+    "prompt_en": "Say that the food is very delicious.",
+    "acceptable_answers": ["菜很好吃。", "这个菜很好吃。"],
+    "required_keywords": ["很", "好吃"],
+    "required_grammar": ["很"],
+    "key_word_hint": "很好吃"
+  },
+  {
+    "id": "st_1_017",
+    "hsk_level": 1,
+    "prompt_en": "Say that you want to buy an apple.",
+    "acceptable_answers": ["我想买一个苹果。", "我要买苹果。"],
+    "required_keywords": ["买", "苹果"],
+    "required_grammar": ["想/要"],
+    "key_word_hint": "想买"
+  },
+
+  {
+    "id": "st_2_001",
+    "hsk_level": 2,
+    "prompt_en": "Say that you are watching TV at home.",
+    "acceptable_answers": ["我在家看电视。", "我在家里看电视呢。"],
+    "required_keywords": ["在", "家", "看", "电视"],
+    "required_grammar": ["在"],
+    "key_word_hint": "在家看"
+  },
+  {
+    "id": "st_2_002",
+    "hsk_level": 2,
+    "prompt_en": "Say that you go to school by bus every day.",
+    "acceptable_answers": ["我每天坐公共汽车去学校。", "我每天坐公交车上学。"],
+    "required_keywords": ["每天", "坐", "学校"],
+    "required_grammar": ["坐"],
+    "key_word_hint": "每天坐"
+  },
+  {
+    "id": "st_2_003",
+    "hsk_level": 2,
+    "prompt_en": "Say that the weather today is very good.",
+    "acceptable_answers": ["今天天气很好。", "今天的天气很好。"],
+    "required_keywords": ["今天", "天气", "好"],
+    "required_grammar": ["很"],
+    "key_word_hint": "天气很好"
+  },
+  {
+    "id": "st_2_004",
+    "hsk_level": 2,
+    "prompt_en": "Say that you have already finished your homework.",
+    "acceptable_answers": ["我做完作业了。", "我的作业做完了。"],
+    "required_keywords": ["作业", "做完", "了"],
+    "required_grammar": ["了"],
+    "key_word_hint": "做完了"
+  },
+  {
+    "id": "st_2_005",
+    "hsk_level": 2,
+    "prompt_en": "Ask someone if they have eaten yet.",
+    "acceptable_answers": ["你吃了吗？", "你吃饭了吗？"],
+    "required_keywords": ["吃", "了", "吗"],
+    "required_grammar": ["了", "吗"],
+    "key_word_hint": "吃了吗"
+  },
+  {
+    "id": "st_2_006",
+    "hsk_level": 2,
+    "prompt_en": "Say that your room is very clean.",
+    "acceptable_answers": ["我的房间很干净。", "我房间很干净。"],
+    "required_keywords": ["房间", "干净"],
+    "required_grammar": ["的", "很"],
+    "key_word_hint": "很干净"
+  },
+  {
+    "id": "st_2_007",
+    "hsk_level": 2,
+    "prompt_en": "Say that you walked from home to school.",
+    "acceptable_answers": ["我从家走到学校。", "我从家走到学校的。"],
+    "required_keywords": ["从", "家", "到", "学校"],
+    "required_grammar": ["从...到"],
+    "key_word_hint": "从...到"
+  },
+  {
+    "id": "st_2_008",
+    "hsk_level": 2,
+    "prompt_en": "Say that your older sister is taller than you.",
+    "acceptable_answers": ["我姐姐比我高。", "姐姐比我高。"],
+    "required_keywords": ["比", "高"],
+    "required_grammar": ["比"],
+    "key_word_hint": "比"
+  },
+  {
+    "id": "st_2_009",
+    "hsk_level": 2,
+    "prompt_en": "Say that you are learning to swim.",
+    "acceptable_answers": ["我在学游泳。", "我正在学游泳。"],
+    "required_keywords": ["学", "游泳"],
+    "required_grammar": ["在"],
+    "key_word_hint": "在学"
+  },
+  {
+    "id": "st_2_010",
+    "hsk_level": 2,
+    "prompt_en": "Say that there is a cat under the table.",
+    "acceptable_answers": ["桌子下面有一只猫。", "桌子下有一只猫。"],
+    "required_keywords": ["桌子", "下", "有", "猫"],
+    "required_grammar": ["有"],
+    "key_word_hint": "下面有"
+  },
+  {
+    "id": "st_2_011",
+    "hsk_level": 2,
+    "prompt_en": "Say that yesterday you went to see a movie.",
+    "acceptable_answers": ["昨天我去看电影了。", "我昨天去看了电影。"],
+    "required_keywords": ["昨天", "看", "电影"],
+    "required_grammar": ["了"],
+    "key_word_hint": "看电影了"
+  },
+  {
+    "id": "st_2_012",
+    "hsk_level": 2,
+    "prompt_en": "Say that you are too tired and want to rest.",
+    "acceptable_answers": ["我太累了，想休息。", "我太累了，我想休息一下。"],
+    "required_keywords": ["太", "累", "休息"],
+    "required_grammar": ["太...了"],
+    "key_word_hint": "太累了"
+  },
+  {
+    "id": "st_2_013",
+    "hsk_level": 2,
+    "prompt_en": "Say that you gave him a book.",
+    "acceptable_answers": ["我给他一本书。", "我给了他一本书。"],
+    "required_keywords": ["给", "他", "书"],
+    "required_grammar": ["给"],
+    "key_word_hint": "给他"
+  },
+  {
+    "id": "st_2_014",
+    "hsk_level": 2,
+    "prompt_en": "Say that it is raining outside, so bring an umbrella.",
+    "acceptable_answers": ["外面下雨了，带伞吧。", "外面在下雨，带把伞。"],
+    "required_keywords": ["下雨", "伞"],
+    "required_grammar": ["了"],
+    "key_word_hint": "下雨了"
+  },
+  {
+    "id": "st_2_015",
+    "hsk_level": 2,
+    "prompt_en": "Say that the red one is more expensive than the blue one.",
+    "acceptable_answers": ["红色的比蓝色的贵。", "红的比蓝的贵。"],
+    "required_keywords": ["比", "贵"],
+    "required_grammar": ["比"],
+    "key_word_hint": "比...贵"
+  },
+  {
+    "id": "st_2_016",
+    "hsk_level": 2,
+    "prompt_en": "Ask someone if they know how to cook.",
+    "acceptable_answers": ["你会做饭吗？", "你会不会做饭？"],
+    "required_keywords": ["会", "做饭"],
+    "required_grammar": ["会", "吗"],
+    "key_word_hint": "会做饭吗"
+  },
+  {
+    "id": "st_2_017",
+    "hsk_level": 2,
+    "prompt_en": "Say that you ran very fast.",
+    "acceptable_answers": ["我跑得很快。", "我跑得非常快。"],
+    "required_keywords": ["跑", "得", "快"],
+    "required_grammar": ["得"],
+    "key_word_hint": "跑得快"
+  },
+
+  {
+    "id": "st_3_001",
+    "hsk_level": 3,
+    "prompt_en": "Tell someone you have been to Beijing before.",
+    "acceptable_answers": ["我以前去过北京。", "我去过北京。"],
+    "required_keywords": ["去过", "北京"],
+    "required_grammar": ["过"],
+    "key_word_hint": "去过"
+  },
+  {
+    "id": "st_3_002",
+    "hsk_level": 3,
+    "prompt_en": "Say that it started raining.",
+    "acceptable_answers": ["下雨了。", "开始下雨了。"],
+    "required_keywords": ["下雨", "了"],
+    "required_grammar": ["了"],
+    "key_word_hint": "下雨了"
+  },
+  {
+    "id": "st_3_003",
+    "hsk_level": 3,
+    "prompt_en": "Describe someone who is currently sleeping.",
+    "acceptable_answers": ["他正在睡觉。", "他睡着了。", "他正睡着呢。"],
+    "required_keywords": ["睡"],
+    "required_grammar": ["着"],
+    "key_word_hint": "睡着"
+  },
+  {
+    "id": "st_3_004",
+    "hsk_level": 3,
+    "prompt_en": "Say that your older brother is taller than you.",
+    "acceptable_answers": ["我哥哥比我高。", "哥哥比我高。"],
+    "required_keywords": ["比", "高"],
+    "required_grammar": ["比"],
+    "key_word_hint": "比"
+  },
+  {
+    "id": "st_3_005",
+    "hsk_level": 3,
+    "prompt_en": "Explain that you were late because the traffic was bad.",
+    "acceptable_answers": ["因为堵车，所以我迟到了。", "因为路上堵车，所以我迟到了。"],
+    "required_keywords": ["因为", "所以", "迟到"],
+    "required_grammar": ["因为...所以"],
+    "key_word_hint": "因为...所以"
+  },
+  {
+    "id": "st_3_006",
+    "hsk_level": 3,
+    "prompt_en": "Say that although the test was difficult, you passed it.",
+    "acceptable_answers": ["虽然考试很难，但是我通过了。", "虽然考试难，但是我过了。"],
+    "required_keywords": ["虽然", "但是"],
+    "required_grammar": ["虽然...但是"],
+    "key_word_hint": "虽然...但是"
+  },
+  {
+    "id": "st_3_007",
+    "hsk_level": 3,
+    "prompt_en": "Say that the weather is getting colder and colder.",
+    "acceptable_answers": ["天气越来越冷了。", "天气越来越冷。"],
+    "required_keywords": ["越来越", "冷"],
+    "required_grammar": ["越来越"],
+    "key_word_hint": "越来越"
+  },
+  {
+    "id": "st_3_008",
+    "hsk_level": 3,
+    "prompt_en": "Tell someone you have already eaten lunch.",
+    "acceptable_answers": ["我已经吃过午饭了。", "我已经吃了午饭了。", "我吃过午饭了。"],
+    "required_keywords": ["已经", "午饭"],
+    "required_grammar": ["了", "已经"],
+    "key_word_hint": "已经...了"
+  },
+  {
+    "id": "st_3_009",
+    "hsk_level": 3,
+    "prompt_en": "Say that you are sitting and reading a book.",
+    "acceptable_answers": ["我坐着看书。", "我坐着看书呢。"],
+    "required_keywords": ["坐着", "看书"],
+    "required_grammar": ["着"],
+    "key_word_hint": "坐着"
+  },
+  {
+    "id": "st_3_010",
+    "hsk_level": 3,
+    "prompt_en": "Say that this dish is not as tasty as that one.",
+    "acceptable_answers": ["这个菜没有那个菜好吃。", "这个菜不如那个菜好吃。"],
+    "required_keywords": ["好吃"],
+    "required_grammar": ["比/没有"],
+    "key_word_hint": "没有...好吃"
+  },
+  {
+    "id": "st_3_011",
+    "hsk_level": 3,
+    "prompt_en": "Tell someone you forgot to bring your umbrella.",
+    "acceptable_answers": ["我忘了带伞了。", "我忘了带雨伞。"],
+    "required_keywords": ["忘了", "伞"],
+    "required_grammar": ["了"],
+    "key_word_hint": "忘了"
+  },
+  {
+    "id": "st_3_012",
+    "hsk_level": 3,
+    "prompt_en": "Say that you have lived in Shanghai for three years.",
+    "acceptable_answers": ["我在上海住了三年了。", "我在上海住了三年。"],
+    "required_keywords": ["上海", "住了", "三年"],
+    "required_grammar": ["了"],
+    "key_word_hint": "住了...年"
+  },
+  {
+    "id": "st_3_013",
+    "hsk_level": 3,
+    "prompt_en": "Explain that because you are sick, you cannot go to work.",
+    "acceptable_answers": ["因为我生病了，所以不能去上班。", "因为生病了，所以我不能上班。"],
+    "required_keywords": ["因为", "所以", "生病"],
+    "required_grammar": ["因为...所以"],
+    "key_word_hint": "因为...所以"
+  },
+  {
+    "id": "st_3_014",
+    "hsk_level": 3,
+    "prompt_en": "Say that your Chinese is getting better and better.",
+    "acceptable_answers": ["我的中文越来越好了。", "你的中文越来越好了。"],
+    "required_keywords": ["越来越", "中文"],
+    "required_grammar": ["越来越"],
+    "key_word_hint": "越来越好"
+  },
+  {
+    "id": "st_3_015",
+    "hsk_level": 3,
+    "prompt_en": "Say that although he is young, he is very capable.",
+    "acceptable_answers": ["虽然他很年轻，但是他很能干。", "虽然他年轻，但是很有能力。"],
+    "required_keywords": ["虽然", "但是", "年轻"],
+    "required_grammar": ["虽然...但是"],
+    "key_word_hint": "虽然...但是"
+  },
+  {
+    "id": "st_3_016",
+    "hsk_level": 3,
+    "prompt_en": "Tell someone the door is open.",
+    "acceptable_answers": ["门开着呢。", "门开着。"],
+    "required_keywords": ["门", "开着"],
+    "required_grammar": ["着"],
+    "key_word_hint": "开着"
+  },
+  {
+    "id": "st_3_017",
+    "hsk_level": 3,
+    "prompt_en": "Say that today is even hotter than yesterday.",
+    "acceptable_answers": ["今天比昨天还热。", "今天比昨天更热。"],
+    "required_keywords": ["比", "昨天", "热"],
+    "required_grammar": ["比...还/更"],
+    "key_word_hint": "比...还"
+  },
+  {
+    "id": "st_4_001",
+    "hsk_level": 4,
+    "prompt_en": "Say that he not only speaks Chinese but also speaks Japanese.",
+    "acceptable_answers": ["他不但会说中文，而且会说日语。", "他不但会说中文，而且还会说日语。"],
+    "required_keywords": ["不但", "而且", "中文", "日语"],
+    "required_grammar": ["不但...而且"],
+    "key_word_hint": "不但...而且"
+  },
+  {
+    "id": "st_4_002",
+    "hsk_level": 4,
+    "prompt_en": "Say that no matter how busy you are, you will exercise every day.",
+    "acceptable_answers": ["无论多忙，我都会每天锻炼。", "无论多么忙，我都每天锻炼。"],
+    "required_keywords": ["无论", "都", "锻炼"],
+    "required_grammar": ["无论...都"],
+    "key_word_hint": "无论...都"
+  },
+  {
+    "id": "st_4_003",
+    "hsk_level": 4,
+    "prompt_en": "Describe someone who is both smart and hardworking.",
+    "acceptable_answers": ["她既聪明又努力。", "他既聪明又勤奋。"],
+    "required_keywords": ["既", "又", "聪明"],
+    "required_grammar": ["既...又"],
+    "key_word_hint": "既...又"
+  },
+  {
+    "id": "st_4_004",
+    "hsk_level": 4,
+    "prompt_en": "Say that even a child can do this.",
+    "acceptable_answers": ["连小孩子都会做这个。", "连孩子都能做。"],
+    "required_keywords": ["连", "都"],
+    "required_grammar": ["连...都"],
+    "key_word_hint": "连...都"
+  },
+  {
+    "id": "st_4_005",
+    "hsk_level": 4,
+    "prompt_en": "Say that your phone was broken by your younger brother.",
+    "acceptable_answers": ["我的手机被弟弟弄坏了。", "我的手机被弟弟摔坏了。"],
+    "required_keywords": ["被", "手机", "坏了"],
+    "required_grammar": ["被"],
+    "key_word_hint": "被"
+  },
+  {
+    "id": "st_4_006",
+    "hsk_level": 4,
+    "prompt_en": "Say that no matter what he says, she will not believe him.",
+    "acceptable_answers": ["无论他说什么，她都不会相信。", "无论他怎么说，她都不相信他。"],
+    "required_keywords": ["无论", "都", "相信"],
+    "required_grammar": ["无论...都"],
+    "key_word_hint": "无论...都"
+  },
+  {
+    "id": "st_4_007",
+    "hsk_level": 4,
+    "prompt_en": "Say that this movie is not only funny but also meaningful.",
+    "acceptable_answers": ["这部电影不但有趣，而且很有意义。", "这部电影不但好笑，而且有意义。"],
+    "required_keywords": ["不但", "而且", "电影"],
+    "required_grammar": ["不但...而且"],
+    "key_word_hint": "不但...而且"
+  },
+  {
+    "id": "st_4_008",
+    "hsk_level": 4,
+    "prompt_en": "Say that he did not even eat breakfast.",
+    "acceptable_answers": ["他连早饭都没吃。", "他连早餐都没吃。"],
+    "required_keywords": ["连", "都", "早饭"],
+    "required_grammar": ["连...都"],
+    "key_word_hint": "连...都没"
+  },
+  {
+    "id": "st_4_009",
+    "hsk_level": 4,
+    "prompt_en": "Say that the homework was finished by the students.",
+    "acceptable_answers": ["作业被学生们做完了。", "作业被学生做完了。"],
+    "required_keywords": ["被", "作业", "做完"],
+    "required_grammar": ["被"],
+    "key_word_hint": "被...做完"
+  },
+  {
+    "id": "st_4_010",
+    "hsk_level": 4,
+    "prompt_en": "Say that this place is both quiet and beautiful.",
+    "acceptable_answers": ["这个地方既安静又漂亮。", "这里既安静又美丽。"],
+    "required_keywords": ["既", "又", "安静"],
+    "required_grammar": ["既...又"],
+    "key_word_hint": "既...又"
+  },
+  {
+    "id": "st_4_011",
+    "hsk_level": 4,
+    "prompt_en": "Say that regardless of the weather, the game will go on.",
+    "acceptable_answers": ["无论天气怎么样，比赛都会继续。", "无论天气如何，比赛都会进行。"],
+    "required_keywords": ["无论", "都", "比赛"],
+    "required_grammar": ["无论...都"],
+    "key_word_hint": "无论...都"
+  },
+  {
+    "id": "st_4_012",
+    "hsk_level": 4,
+    "prompt_en": "Say that the cake was eaten by the cat.",
+    "acceptable_answers": ["蛋糕被猫吃了。", "蛋糕被猫吃掉了。"],
+    "required_keywords": ["被", "蛋糕", "猫"],
+    "required_grammar": ["被"],
+    "key_word_hint": "被...吃了"
+  },
+  {
+    "id": "st_4_013",
+    "hsk_level": 4,
+    "prompt_en": "Say that he not only cooks well but also bakes well.",
+    "acceptable_answers": ["他不但做饭做得好，而且烘焙也很好。", "他不但会做菜，而且还会做蛋糕。"],
+    "required_keywords": ["不但", "而且"],
+    "required_grammar": ["不但...而且"],
+    "key_word_hint": "不但...而且"
+  },
+  {
+    "id": "st_4_014",
+    "hsk_level": 4,
+    "prompt_en": "Say that even his name you cannot remember.",
+    "acceptable_answers": ["连他的名字我都不记得了。", "我连他的名字都忘了。"],
+    "required_keywords": ["连", "都", "名字"],
+    "required_grammar": ["连...都"],
+    "key_word_hint": "连...都"
+  },
+  {
+    "id": "st_4_015",
+    "hsk_level": 4,
+    "prompt_en": "Describe someone who is both tall and strong.",
+    "acceptable_answers": ["他既高又壮。", "他既高大又强壮。"],
+    "required_keywords": ["既", "又"],
+    "required_grammar": ["既...又"],
+    "key_word_hint": "既...又"
+  },
+  {
+    "id": "st_4_016",
+    "hsk_level": 4,
+    "prompt_en": "Say that the window was broken by the wind.",
+    "acceptable_answers": ["窗户被风吹坏了。", "窗户被风吹破了。"],
+    "required_keywords": ["被", "窗户", "风"],
+    "required_grammar": ["被"],
+    "key_word_hint": "被...吹"
+  },
+  {
+    "id": "st_4_017",
+    "hsk_level": 4,
+    "prompt_en": "Say that no matter where you go, you will miss home.",
+    "acceptable_answers": ["无论去哪里，我都会想家。", "无论到哪儿，我都想家。"],
+    "required_keywords": ["无论", "都", "想家"],
+    "required_grammar": ["无论...都"],
+    "key_word_hint": "无论...都"
+  },
+  {
+    "id": "st_5_001",
+    "hsk_level": 5,
+    "prompt_en": "Say that even if it rains tomorrow, the event will still be held.",
+    "acceptable_answers": ["即使明天下雨，活动也会照常举行。", "即使明天下雨，也会举行活动。"],
+    "required_keywords": ["即使", "也", "下雨"],
+    "required_grammar": ["即使...也"],
+    "key_word_hint": "即使...也"
+  },
+  {
+    "id": "st_5_002",
+    "hsk_level": 5,
+    "prompt_en": "Say that unless he apologizes, you will not forgive him.",
+    "acceptable_answers": ["除非他道歉，否则我不会原谅他。", "除非他道歉，不然我不原谅他。"],
+    "required_keywords": ["除非", "否则", "道歉"],
+    "required_grammar": ["除非...否则"],
+    "key_word_hint": "除非...否则"
+  },
+  {
+    "id": "st_5_003",
+    "hsk_level": 5,
+    "prompt_en": "Say that she not only sings well, but also dances beautifully.",
+    "acceptable_answers": ["她不仅唱歌唱得好，还跳舞跳得很好。", "她不仅歌唱得好，舞也跳得好。"],
+    "required_keywords": ["不仅", "还"],
+    "required_grammar": ["不仅...还"],
+    "key_word_hint": "不仅...还"
+  },
+  {
+    "id": "st_5_004",
+    "hsk_level": 5,
+    "prompt_en": "Express surprise that he actually passed the exam.",
+    "acceptable_answers": ["他竟然通过了考试。", "没想到他竟然考过了。"],
+    "required_keywords": ["竟然", "考试"],
+    "required_grammar": ["竟然"],
+    "key_word_hint": "竟然"
+  },
+  {
+    "id": "st_5_005",
+    "hsk_level": 5,
+    "prompt_en": "Explain that the reason he succeeded is because he worked hard.",
+    "acceptable_answers": ["他之所以成功，是因为他很努力。", "他之所以能成功，是因为努力。"],
+    "required_keywords": ["之所以", "是因为", "成功"],
+    "required_grammar": ["之所以...是因为"],
+    "key_word_hint": "之所以...是因为"
+  },
+  {
+    "id": "st_5_006",
+    "hsk_level": 5,
+    "prompt_en": "Say that even if the price is high, you still want to buy it.",
+    "acceptable_answers": ["即使价格很高，我也想买。", "即使贵，我也要买。"],
+    "required_keywords": ["即使", "也", "买"],
+    "required_grammar": ["即使...也"],
+    "key_word_hint": "即使...也"
+  },
+  {
+    "id": "st_5_007",
+    "hsk_level": 5,
+    "prompt_en": "Say that unless you study hard, you will not pass.",
+    "acceptable_answers": ["除非你努力学习，否则不会通过。", "除非努力学习，否则考不过。"],
+    "required_keywords": ["除非", "否则", "学习"],
+    "required_grammar": ["除非...否则"],
+    "key_word_hint": "除非...否则"
+  },
+  {
+    "id": "st_5_008",
+    "hsk_level": 5,
+    "prompt_en": "Express surprise that she actually quit her job.",
+    "acceptable_answers": ["她竟然辞职了。", "她竟然把工作辞了。"],
+    "required_keywords": ["竟然", "辞职"],
+    "required_grammar": ["竟然"],
+    "key_word_hint": "竟然"
+  },
+  {
+    "id": "st_5_009",
+    "hsk_level": 5,
+    "prompt_en": "Say that he not only donated money, but also volunteered his time.",
+    "acceptable_answers": ["他不仅捐了钱，还做了志愿者。", "他不仅捐钱，还去当了志愿者。"],
+    "required_keywords": ["不仅", "还", "捐"],
+    "required_grammar": ["不仅...还"],
+    "key_word_hint": "不仅...还"
+  },
+  {
+    "id": "st_5_010",
+    "hsk_level": 5,
+    "prompt_en": "Explain that the reason she is tired is because she stayed up late.",
+    "acceptable_answers": ["她之所以很累，是因为熬夜了。", "她之所以累，是因为昨晚熬夜了。"],
+    "required_keywords": ["之所以", "是因为", "累"],
+    "required_grammar": ["之所以...是因为"],
+    "key_word_hint": "之所以...是因为"
+  },
+  {
+    "id": "st_5_011",
+    "hsk_level": 5,
+    "prompt_en": "Say that even if he does not agree, we must proceed.",
+    "acceptable_answers": ["即使他不同意，我们也必须继续。", "即使他不同意，也得做下去。"],
+    "required_keywords": ["即使", "也", "同意"],
+    "required_grammar": ["即使...也"],
+    "key_word_hint": "即使...也"
+  },
+  {
+    "id": "st_5_012",
+    "hsk_level": 5,
+    "prompt_en": "Say that this city not only has good food, but also has beautiful scenery.",
+    "acceptable_answers": ["这个城市不仅有好吃的，还有很美的风景。", "这座城市不仅美食多，风景还很美。"],
+    "required_keywords": ["不仅", "还", "城市"],
+    "required_grammar": ["不仅...还"],
+    "key_word_hint": "不仅...还"
+  },
+  {
+    "id": "st_5_013",
+    "hsk_level": 5,
+    "prompt_en": "Express surprise that the quiet student actually won first place.",
+    "acceptable_answers": ["那个安静的学生竟然得了第一名。", "那个安静的同学竟然拿了第一。"],
+    "required_keywords": ["竟然", "第一"],
+    "required_grammar": ["竟然"],
+    "key_word_hint": "竟然"
+  },
+  {
+    "id": "st_5_014",
+    "hsk_level": 5,
+    "prompt_en": "Explain that the reason traffic is bad is because there was an accident.",
+    "acceptable_answers": ["之所以堵车，是因为出了车祸。", "交通之所以不好，是因为发生了事故。"],
+    "required_keywords": ["之所以", "是因为"],
+    "required_grammar": ["之所以...是因为"],
+    "key_word_hint": "之所以...是因为"
+  },
+  {
+    "id": "st_5_015",
+    "hsk_level": 5,
+    "prompt_en": "Say that unless you have a ticket, you cannot enter.",
+    "acceptable_answers": ["除非你有票，否则不能进去。", "除非有票，否则进不去。"],
+    "required_keywords": ["除非", "否则", "票"],
+    "required_grammar": ["除非...否则"],
+    "key_word_hint": "除非...否则"
+  },
+  {
+    "id": "st_5_016",
+    "hsk_level": 5,
+    "prompt_en": "Say that even if you are not hungry, you should eat something.",
+    "acceptable_answers": ["即使不饿，也应该吃点东西。", "即使你不饿，也得吃点儿东西。"],
+    "required_keywords": ["即使", "也", "饿"],
+    "required_grammar": ["即使...也"],
+    "key_word_hint": "即使...也"
+  },
+  {
+    "id": "st_5_017",
+    "hsk_level": 5,
+    "prompt_en": "Explain that the reason the project failed is because the planning was poor.",
+    "acceptable_answers": ["项目之所以失败，是因为计划不好。", "这个项目之所以失败了，是因为缺乏规划。"],
+    "required_keywords": ["之所以", "是因为", "失败"],
+    "required_grammar": ["之所以...是因为"],
+    "key_word_hint": "之所以...是因为"
+  },
+  {
+    "id": "st_6_001",
+    "hsk_level": 6,
+    "prompt_en": "Say that he worked so hard that he damaged his health.",
+    "acceptable_answers": ["他工作太拼命了，以至于身体出了问题。", "他工作过度，以至于损害了健康。"],
+    "required_keywords": ["以至于", "工作"],
+    "required_grammar": ["以至于"],
+    "key_word_hint": "以至于"
+  },
+  {
+    "id": "st_6_002",
+    "hsk_level": 6,
+    "prompt_en": "Say that in order to achieve his dream, he spared no effort.",
+    "acceptable_answers": ["为了实现梦想，他不惜一切代价。", "他不惜付出一切来实现梦想。"],
+    "required_keywords": ["不惜", "梦想"],
+    "required_grammar": ["不惜"],
+    "key_word_hint": "不惜"
+  },
+  {
+    "id": "st_6_003",
+    "hsk_level": 6,
+    "prompt_en": "Say that adults find this difficult, let alone children.",
+    "acceptable_answers": ["大人都觉得难，何况孩子呢。", "大人都做不到，何况小孩子。"],
+    "required_keywords": ["何况", "大人", "孩子"],
+    "required_grammar": ["何况"],
+    "key_word_hint": "何况"
+  },
+  {
+    "id": "st_6_004",
+    "hsk_level": 6,
+    "prompt_en": "Say that after all, he has many years of experience.",
+    "acceptable_answers": ["毕竟他有多年的经验。", "他毕竟有很多年的经验了。"],
+    "required_keywords": ["毕竟", "经验"],
+    "required_grammar": ["毕竟"],
+    "key_word_hint": "毕竟"
+  },
+  {
+    "id": "st_6_005",
+    "hsk_level": 6,
+    "prompt_en": "Say that it is not just expensive, the quality is poor too.",
+    "acceptable_answers": ["岂止贵，质量也很差。", "岂止是贵，质量还差。"],
+    "required_keywords": ["岂止", "贵"],
+    "required_grammar": ["岂止"],
+    "key_word_hint": "岂止"
+  },
+  {
+    "id": "st_6_006",
+    "hsk_level": 6,
+    "prompt_en": "Say that the pollution was so severe that many people got sick.",
+    "acceptable_answers": ["污染太严重了，以至于很多人生病了。", "污染严重到以至于很多人都病了。"],
+    "required_keywords": ["以至于", "污染", "生病"],
+    "required_grammar": ["以至于"],
+    "key_word_hint": "以至于"
+  },
+  {
+    "id": "st_6_007",
+    "hsk_level": 6,
+    "prompt_en": "Say that she spared no expense on her child's education.",
+    "acceptable_answers": ["她不惜花很多钱在孩子的教育上。", "为了孩子的教育，她不惜花大量的钱。"],
+    "required_keywords": ["不惜", "教育"],
+    "required_grammar": ["不惜"],
+    "key_word_hint": "不惜"
+  },
+  {
+    "id": "st_6_008",
+    "hsk_level": 6,
+    "prompt_en": "Say that you cannot handle this job, let alone lead the whole team.",
+    "acceptable_answers": ["我连这份工作都做不好，何况带领整个团队。", "这个工作我都做不来，何况管理整个团队。"],
+    "required_keywords": ["何况", "团队"],
+    "required_grammar": ["何况"],
+    "key_word_hint": "何况"
+  },
+  {
+    "id": "st_6_009",
+    "hsk_level": 6,
+    "prompt_en": "Say that after all, this is his first time, so we should be patient.",
+    "acceptable_answers": ["毕竟这是他第一次，我们应该有耐心。", "毕竟是第一次嘛，我们要有耐心。"],
+    "required_keywords": ["毕竟", "第一次", "耐心"],
+    "required_grammar": ["毕竟"],
+    "key_word_hint": "毕竟"
+  },
+  {
+    "id": "st_6_010",
+    "hsk_level": 6,
+    "prompt_en": "Say it is not just rain, it is a full-blown storm.",
+    "acceptable_answers": ["岂止是下雨，简直是暴风雨。", "岂止下雨，这是暴风雨啊。"],
+    "required_keywords": ["岂止", "暴风雨"],
+    "required_grammar": ["岂止"],
+    "key_word_hint": "岂止"
+  },
+  {
+    "id": "st_6_011",
+    "hsk_level": 6,
+    "prompt_en": "Say that he was so obsessed with gaming that his grades dropped sharply.",
+    "acceptable_answers": ["他沉迷于游戏，以至于成绩大幅下降。", "他太沉迷游戏了，以至于成绩下滑了。"],
+    "required_keywords": ["以至于", "游戏", "成绩"],
+    "required_grammar": ["以至于"],
+    "key_word_hint": "以至于"
+  },
+  {
+    "id": "st_6_012",
+    "hsk_level": 6,
+    "prompt_en": "Say that after all, she is your mother, you should call her.",
+    "acceptable_answers": ["毕竟她是你妈妈，你应该给她打电话。", "她毕竟是你母亲，应该打个电话。"],
+    "required_keywords": ["毕竟", "妈妈"],
+    "required_grammar": ["毕竟"],
+    "key_word_hint": "毕竟"
+  },
+  {
+    "id": "st_6_013",
+    "hsk_level": 6,
+    "prompt_en": "Say that in order to win the contract, they spared no effort in their preparation.",
+    "acceptable_answers": ["为了赢得合同，他们不惜一切做准备。", "他们不惜一切努力来争取这个合同。"],
+    "required_keywords": ["不惜", "合同"],
+    "required_grammar": ["不惜"],
+    "key_word_hint": "不惜"
+  },
+  {
+    "id": "st_6_014",
+    "hsk_level": 6,
+    "prompt_en": "Say that even an expert cannot solve this, let alone a beginner.",
+    "acceptable_answers": ["专家都解决不了这个问题，何况初学者。", "连专家都解决不了，何况新手呢。"],
+    "required_keywords": ["何况", "专家"],
+    "required_grammar": ["何况"],
+    "key_word_hint": "何况"
+  },
+  {
+    "id": "st_6_015",
+    "hsk_level": 6,
+    "prompt_en": "Say that it is not just a mistake, it is a catastrophe.",
+    "acceptable_answers": ["岂止是错误，简直是灾难。", "这岂止是个错误，这是灾难。"],
+    "required_keywords": ["岂止", "错误", "灾难"],
+    "required_grammar": ["岂止"],
+    "key_word_hint": "岂止"
+  },
+  {
+    "id": "st_6_016",
+    "hsk_level": 6,
+    "prompt_en": "Say that the noise was so loud that nobody could sleep.",
+    "acceptable_answers": ["噪音太大了，以至于谁都睡不着。", "噪音大到以至于没有人能睡觉。"],
+    "required_keywords": ["以至于", "噪音", "睡"],
+    "required_grammar": ["以至于"],
+    "key_word_hint": "以至于"
+  },
+  {
+    "id": "st_6_017",
+    "hsk_level": 6,
+    "prompt_en": "Say that after all, Rome was not built in a day.",
+    "acceptable_answers": ["毕竟罗马不是一天建成的。", "毕竟冰冻三尺非一日之寒。"],
+    "required_keywords": ["毕竟"],
+    "required_grammar": ["毕竟"],
+    "key_word_hint": "毕竟"
+  },
+  {
+    "id": "st_7_001",
+    "hsk_level": 7,
+    "prompt_en": "Say in formal register that only through cooperation can mutual benefit be achieved.",
+    "acceptable_answers": ["唯有通过合作，方能实现互利共赢。", "只有合作，才能实现互利。"],
+    "required_keywords": ["合作", "互利"],
+    "required_grammar": ["唯有...方能"],
+    "key_word_hint": "唯有...方能"
+  },
+  {
+    "id": "st_7_002",
+    "hsk_level": 7,
+    "prompt_en": "State formally that this policy has been implemented since last year.",
+    "acceptable_answers": ["该政策自去年起已开始实施。", "此政策自去年以来一直在实施。"],
+    "required_keywords": ["政策", "实施"],
+    "required_grammar": ["自...起"],
+    "key_word_hint": "自...起"
+  },
+  {
+    "id": "st_7_003",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that the results far exceeded expectations.",
+    "acceptable_answers": ["结果远远超出了预期。", "成果远超预期。"],
+    "required_keywords": ["远远", "超出", "预期"],
+    "required_grammar": ["远远超出"],
+    "key_word_hint": "远远超出"
+  },
+  {
+    "id": "st_7_004",
+    "hsk_level": 7,
+    "prompt_en": "Say that he was so angry that he could barely contain himself.",
+    "acceptable_answers": ["他气得几乎无法自控。", "他愤怒得差点儿控制不住自己。"],
+    "required_keywords": ["气", "无法", "自控"],
+    "required_grammar": ["得 complement"],
+    "key_word_hint": "气得"
+  },
+  {
+    "id": "st_7_005",
+    "hsk_level": 7,
+    "prompt_en": "State that regardless of the outcome, this experience was valuable.",
+    "acceptable_answers": ["不管结果如何，这次经历都是宝贵的。", "无论结果怎样，这段经历弥足珍贵。"],
+    "required_keywords": ["结果", "经历", "宝贵"],
+    "required_grammar": ["不管...都"],
+    "key_word_hint": "弥足珍贵"
+  },
+  {
+    "id": "st_7_006",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that in light of the above reasons, we propose the following plan.",
+    "acceptable_answers": ["鉴于以上原因，我们提出以下方案。", "鉴于上述原因，我们提议如下方案。"],
+    "required_keywords": ["鉴于", "方案"],
+    "required_grammar": ["鉴于"],
+    "key_word_hint": "鉴于"
+  },
+  {
+    "id": "st_7_007",
+    "hsk_level": 7,
+    "prompt_en": "Say that his speech moved the audience to tears.",
+    "acceptable_answers": ["他的演讲把观众感动得流泪了。", "他的演讲感动得观众流下了眼泪。"],
+    "required_keywords": ["演讲", "感动", "泪"],
+    "required_grammar": ["得 complement", "把"],
+    "key_word_hint": "感动得"
+  },
+  {
+    "id": "st_7_008",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that this issue warrants further investigation.",
+    "acceptable_answers": ["此问题有待进一步调查。", "这个问题值得进一步研究。"],
+    "required_keywords": ["问题", "进一步"],
+    "required_grammar": ["有待"],
+    "key_word_hint": "有待"
+  },
+  {
+    "id": "st_7_009",
+    "hsk_level": 7,
+    "prompt_en": "State that as a matter of fact, the situation is more complicated than it appears.",
+    "acceptable_answers": ["事实上，情况比看起来更复杂。", "实际上，事情远比表面上更复杂。"],
+    "required_keywords": ["事实上", "复杂"],
+    "required_grammar": ["事实上"],
+    "key_word_hint": "事实上"
+  },
+  {
+    "id": "st_7_010",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that efforts should be made to avoid similar incidents.",
+    "acceptable_answers": ["应当尽力避免类似事件的发生。", "应该努力避免此类事件再次发生。"],
+    "required_keywords": ["避免", "类似", "事件"],
+    "required_grammar": ["应当"],
+    "key_word_hint": "应当"
+  },
+  {
+    "id": "st_7_011",
+    "hsk_level": 7,
+    "prompt_en": "Say that the meeting was so boring he almost fell asleep.",
+    "acceptable_answers": ["会议无聊得他差点儿睡着了。", "开会无聊得他几乎要睡着了。"],
+    "required_keywords": ["无聊", "差点儿", "睡着"],
+    "required_grammar": ["得 complement"],
+    "key_word_hint": "无聊得"
+  },
+  {
+    "id": "st_7_012",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that given the current circumstances, we must adjust our strategy.",
+    "acceptable_answers": ["鉴于目前的形势，我们必须调整策略。", "鉴于当前情况，我们须调整战略。"],
+    "required_keywords": ["鉴于", "调整", "策略"],
+    "required_grammar": ["鉴于"],
+    "key_word_hint": "鉴于"
+  },
+  {
+    "id": "st_7_013",
+    "hsk_level": 7,
+    "prompt_en": "State that only by reforming education can we cultivate true talent.",
+    "acceptable_answers": ["唯有改革教育，方能培养真正的人才。", "只有通过教育改革，才能培养出真正的人才。"],
+    "required_keywords": ["教育", "人才"],
+    "required_grammar": ["唯有...方能"],
+    "key_word_hint": "唯有...方能"
+  },
+  {
+    "id": "st_7_014",
+    "hsk_level": 7,
+    "prompt_en": "Say that the economy has been declining since the beginning of the year.",
+    "acceptable_answers": ["自年初以来，经济一直在下滑。", "经济自年初起持续下降。"],
+    "required_keywords": ["自", "经济", "下滑"],
+    "required_grammar": ["自...以来"],
+    "key_word_hint": "自...以来"
+  },
+  {
+    "id": "st_7_015",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that the data remains to be verified.",
+    "acceptable_answers": ["数据尚有待核实。", "这些数据有待进一步核实。"],
+    "required_keywords": ["数据", "有待", "核实"],
+    "required_grammar": ["有待"],
+    "key_word_hint": "有待核实"
+  },
+  {
+    "id": "st_7_016",
+    "hsk_level": 7,
+    "prompt_en": "State that she ran so fast that no one could catch up.",
+    "acceptable_answers": ["她跑得太快了，谁都追不上。", "她跑得快到没有人追得上。"],
+    "required_keywords": ["跑", "追不上"],
+    "required_grammar": ["得 complement"],
+    "key_word_hint": "跑得快"
+  },
+  {
+    "id": "st_7_017",
+    "hsk_level": 7,
+    "prompt_en": "Say formally that all parties concerned should fulfill their respective obligations.",
+    "acceptable_answers": ["各方应当履行各自的义务。", "有关各方应当履行其相应的义务。"],
+    "required_keywords": ["各方", "履行", "义务"],
+    "required_grammar": ["应当"],
+    "key_word_hint": "履行义务"
+  },
+  {
+    "id": "st_8_001",
+    "hsk_level": 8,
+    "prompt_en": "Write a formal statement that the committee has reached a consensus on the proposal.",
+    "acceptable_answers": ["委员会就该提案已达成共识。", "委员会对此提案已形成一致意见。"],
+    "required_keywords": ["委员会", "提案", "共识"],
+    "required_grammar": ["就...达成"],
+    "key_word_hint": "达成共识"
+  },
+  {
+    "id": "st_8_002",
+    "hsk_level": 8,
+    "prompt_en": "State formally that this document shall take effect upon the date of signing.",
+    "acceptable_answers": ["本文件自签署之日起生效。", "此文件于签署之日起开始生效。"],
+    "required_keywords": ["文件", "签署", "生效"],
+    "required_grammar": ["自...起"],
+    "key_word_hint": "自...之日起生效"
+  },
+  {
+    "id": "st_8_003",
+    "hsk_level": 8,
+    "prompt_en": "State that in an academic context, the hypothesis has yet to be substantiated by empirical evidence.",
+    "acceptable_answers": ["该假说尚未得到实证数据的证实。", "这一假设至今尚缺乏实证依据。"],
+    "required_keywords": ["假说", "实证"],
+    "required_grammar": ["尚未"],
+    "key_word_hint": "尚未得到证实"
+  },
+  {
+    "id": "st_8_004",
+    "hsk_level": 8,
+    "prompt_en": "Say formally that upon careful consideration, the board has decided to postpone the merger.",
+    "acceptable_answers": ["经过慎重考虑，董事会决定推迟合并。", "经慎重考量，董事会决定推迟此次并购。"],
+    "required_keywords": ["慎重", "董事会", "推迟"],
+    "required_grammar": ["经过...考虑"],
+    "key_word_hint": "经过慎重考虑"
+  },
+  {
+    "id": "st_8_005",
+    "hsk_level": 8,
+    "prompt_en": "State that the research findings are consistent with previous studies.",
+    "acceptable_answers": ["研究结果与先前的研究一致。", "本研究的发现与以往研究的结论相符。"],
+    "required_keywords": ["研究", "一致"],
+    "required_grammar": ["与...一致"],
+    "key_word_hint": "与...一致"
+  },
+  {
+    "id": "st_8_006",
+    "hsk_level": 8,
+    "prompt_en": "State formally that all provisions herein shall be interpreted in accordance with applicable laws.",
+    "acceptable_answers": ["本文所有条款均应依据适用法律进行解释。", "本协议各条款应按照相关法律予以解释。"],
+    "required_keywords": ["条款", "法律", "解释"],
+    "required_grammar": ["依据...进行"],
+    "key_word_hint": "依据...进行"
+  },
+  {
+    "id": "st_8_007",
+    "hsk_level": 8,
+    "prompt_en": "Write that the survey indicates a significant shift in public opinion.",
+    "acceptable_answers": ["调查显示公众舆论发生了显著变化。", "该调查表明公众意见出现了重大转变。"],
+    "required_keywords": ["调查", "显著", "变化"],
+    "required_grammar": ["显示/表明"],
+    "key_word_hint": "显著变化"
+  },
+  {
+    "id": "st_8_008",
+    "hsk_level": 8,
+    "prompt_en": "State formally that the two sides have agreed to establish a joint working group.",
+    "acceptable_answers": ["双方已同意成立联合工作组。", "两方已就成立联合工作小组达成一致。"],
+    "required_keywords": ["双方", "联合", "工作组"],
+    "required_grammar": ["就...达成"],
+    "key_word_hint": "联合工作组"
+  },
+  {
+    "id": "st_8_009",
+    "hsk_level": 8,
+    "prompt_en": "State in academic register that this phenomenon merits further scholarly inquiry.",
+    "acceptable_answers": ["该现象值得进一步的学术探讨。", "此现象有待学术界进一步深入研究。"],
+    "required_keywords": ["现象", "学术", "探讨"],
+    "required_grammar": ["值得/有待"],
+    "key_word_hint": "值得探讨"
+  },
+  {
+    "id": "st_8_010",
+    "hsk_level": 8,
+    "prompt_en": "State that the report concludes that urgent measures are needed to address climate change.",
+    "acceptable_answers": ["报告得出结论，需要采取紧急措施应对气候变化。", "该报告的结论是：必须采取紧急措施来应对气候变化。"],
+    "required_keywords": ["报告", "紧急", "措施", "气候变化"],
+    "required_grammar": ["得出结论"],
+    "key_word_hint": "采取措施"
+  },
+  {
+    "id": "st_8_011",
+    "hsk_level": 8,
+    "prompt_en": "Say in formal register that the amendment has been ratified by a two-thirds majority.",
+    "acceptable_answers": ["该修正案已获得三分之二多数的批准。", "此修正案已经由三分之二多数票通过。"],
+    "required_keywords": ["修正案", "三分之二", "批准"],
+    "required_grammar": ["已获得...批准"],
+    "key_word_hint": "修正案"
+  },
+  {
+    "id": "st_8_012",
+    "hsk_level": 8,
+    "prompt_en": "State that the company's annual revenue has grown by 15 percent year-on-year.",
+    "acceptable_answers": ["公司年收入同比增长了百分之十五。", "该公司的年度营收同比增长了15%。"],
+    "required_keywords": ["公司", "同比", "增长"],
+    "required_grammar": ["同比增长"],
+    "key_word_hint": "同比增长"
+  },
+  {
+    "id": "st_8_013",
+    "hsk_level": 8,
+    "prompt_en": "Write formally that the defendant is presumed innocent until proven guilty.",
+    "acceptable_answers": ["被告在被证明有罪之前应被推定为无罪。", "被告未经定罪前，应推定其无罪。"],
+    "required_keywords": ["被告", "推定", "无罪"],
+    "required_grammar": ["在...之前"],
+    "key_word_hint": "推定无罪"
+  },
+  {
+    "id": "st_8_014",
+    "hsk_level": 8,
+    "prompt_en": "State in academic register that the sample size was insufficient to draw definitive conclusions.",
+    "acceptable_answers": ["样本量不足以得出确定性结论。", "由于样本规模有限，无法得出确切的结论。"],
+    "required_keywords": ["样本", "结论"],
+    "required_grammar": ["不足以"],
+    "key_word_hint": "不足以"
+  },
+  {
+    "id": "st_8_015",
+    "hsk_level": 8,
+    "prompt_en": "State formally that the proposed regulations are subject to public consultation before enactment.",
+    "acceptable_answers": ["拟议的法规在颁布前须经公众咨询。", "该法规草案在实施前需要征求公众意见。"],
+    "required_keywords": ["法规", "公众", "咨询"],
+    "required_grammar": ["须经"],
+    "key_word_hint": "公众咨询"
+  },
+  {
+    "id": "st_8_016",
+    "hsk_level": 8,
+    "prompt_en": "Write in professional register that the quarterly performance indicators have met or exceeded all benchmarks.",
+    "acceptable_answers": ["季度绩效指标均已达到或超过各项基准。", "本季度各项绩效指标已全部达标或超标。"],
+    "required_keywords": ["季度", "绩效", "指标"],
+    "required_grammar": ["均已"],
+    "key_word_hint": "绩效指标"
+  },
+  {
+    "id": "st_8_017",
+    "hsk_level": 8,
+    "prompt_en": "State in academic register that further research is warranted to elucidate the underlying mechanisms.",
+    "acceptable_answers": ["有必要进一步研究以阐明其内在机制。", "需要开展进一步研究来揭示潜在的机理。"],
+    "required_keywords": ["研究", "阐明", "机制"],
+    "required_grammar": ["有必要"],
+    "key_word_hint": "阐明机制"
+  },
+  {
+    "id": "st_9_001",
+    "hsk_level": 9,
+    "prompt_en": "Write a formal diplomatic statement that both nations reaffirm their commitment to peaceful resolution of disputes.",
+    "acceptable_answers": ["两国重申致力于通过和平方式解决争端。", "双方再次确认以和平手段解决分歧的承诺。"],
+    "required_keywords": ["重申", "和平", "争端"],
+    "required_grammar": ["致力于"],
+    "key_word_hint": "重申致力于"
+  },
+  {
+    "id": "st_9_002",
+    "hsk_level": 9,
+    "prompt_en": "State in literary register that the passage of time renders all glory ephemeral.",
+    "acceptable_answers": ["岁月流逝，一切荣耀终将化为泡影。", "时光荏苒，所有辉煌终归虚无。"],
+    "required_keywords": ["岁月", "荣耀"],
+    "required_grammar": ["终将/终归"],
+    "key_word_hint": "岁月流逝"
+  },
+  {
+    "id": "st_9_003",
+    "hsk_level": 9,
+    "prompt_en": "Write an academic statement that the correlation between the two variables does not imply causation.",
+    "acceptable_answers": ["两个变量之间的相关性并不意味着因果关系。", "两变量间存在相关性，但并不代表存在因果关系。"],
+    "required_keywords": ["变量", "相关性", "因果关系"],
+    "required_grammar": ["并不意味着"],
+    "key_word_hint": "相关性与因果关系"
+  },
+  {
+    "id": "st_9_004",
+    "hsk_level": 9,
+    "prompt_en": "Write a formal statement that the summit aims to forge a framework for multilateral cooperation.",
+    "acceptable_answers": ["此次峰会旨在构建多边合作框架。", "本次峰会的目标是建立多边合作的框架。"],
+    "required_keywords": ["峰会", "多边", "合作", "框架"],
+    "required_grammar": ["旨在"],
+    "key_word_hint": "旨在构建"
+  },
+  {
+    "id": "st_9_005",
+    "hsk_level": 9,
+    "prompt_en": "State in philosophical register that true wisdom lies in recognizing the limits of one's knowledge.",
+    "acceptable_answers": ["真正的智慧在于认识到自身知识的局限性。", "大智在于知其所不知。"],
+    "required_keywords": ["智慧", "认识", "局限"],
+    "required_grammar": ["在于"],
+    "key_word_hint": "在于认识"
+  },
+  {
+    "id": "st_9_006",
+    "hsk_level": 9,
+    "prompt_en": "Write a formal legal statement that any breach of contract shall entitle the aggrieved party to seek damages.",
+    "acceptable_answers": ["任何违约行为均赋予受损方索赔的权利。", "如有违约，受损害方有权要求赔偿。"],
+    "required_keywords": ["违约", "赔偿", "权利"],
+    "required_grammar": ["均/有权"],
+    "key_word_hint": "违约...赔偿"
+  },
+  {
+    "id": "st_9_007",
+    "hsk_level": 9,
+    "prompt_en": "Write in academic register that the theoretical model proposed herein integrates findings from multiple disciplines.",
+    "acceptable_answers": ["本文提出的理论模型整合了多个学科的研究成果。", "此处所提出的理论模型融合了跨学科的研究发现。"],
+    "required_keywords": ["理论模型", "学科", "整合"],
+    "required_grammar": ["所提出的"],
+    "key_word_hint": "整合...研究成果"
+  },
+  {
+    "id": "st_9_008",
+    "hsk_level": 9,
+    "prompt_en": "State formally that the government pledges to uphold the rule of law and safeguard citizens' rights.",
+    "acceptable_answers": ["政府承诺维护法治、保障公民权利。", "政府郑重承诺将捍卫法治并保障公民的合法权益。"],
+    "required_keywords": ["政府", "法治", "公民", "权利"],
+    "required_grammar": ["承诺"],
+    "key_word_hint": "维护法治"
+  },
+  {
+    "id": "st_9_009",
+    "hsk_level": 9,
+    "prompt_en": "Write in literary register that beneath the calm surface, currents of change were already stirring.",
+    "acceptable_answers": ["看似风平浪静的表面之下，变革的暗流早已涌动。", "在平静的表象之下，变革的潮流已悄然涌动。"],
+    "required_keywords": ["表面", "变革", "涌动"],
+    "required_grammar": ["之下"],
+    "key_word_hint": "暗流涌动"
+  },
+  {
+    "id": "st_9_010",
+    "hsk_level": 9,
+    "prompt_en": "Write an academic conclusion that notwithstanding certain limitations, this study contributes meaningfully to the existing body of literature.",
+    "acceptable_answers": ["尽管存在一定的局限性，本研究仍对现有文献做出了有意义的贡献。", "虽有局限，但本研究对已有学术文献有着重要的补充意义。"],
+    "required_keywords": ["局限性", "研究", "贡献", "文献"],
+    "required_grammar": ["尽管...仍"],
+    "key_word_hint": "做出贡献"
+  },
+  {
+    "id": "st_9_011",
+    "hsk_level": 9,
+    "prompt_en": "State in diplomatic language that the parties express their deep concern over the escalating tensions in the region.",
+    "acceptable_answers": ["各方对该地区不断升级的紧张局势表示深切关注。", "各方就该区域局势的持续紧张深表关切。"],
+    "required_keywords": ["各方", "紧张局势", "关注"],
+    "required_grammar": ["表示/深表"],
+    "key_word_hint": "深切关注"
+  },
+  {
+    "id": "st_9_012",
+    "hsk_level": 9,
+    "prompt_en": "Write in formal register that the institution shall undertake a comprehensive review of its governance structure.",
+    "acceptable_answers": ["该机构将对其治理结构进行全面审查。", "本机构应就其治理架构开展全面评估。"],
+    "required_keywords": ["机构", "治理", "全面", "审查"],
+    "required_grammar": ["对...进行"],
+    "key_word_hint": "全面审查"
+  },
+  {
+    "id": "st_9_013",
+    "hsk_level": 9,
+    "prompt_en": "Write a philosophical statement that the pursuit of truth demands both intellectual humility and relentless inquiry.",
+    "acceptable_answers": ["追求真理既需要理性的谦逊，也需要不懈的探索。", "对真理的追求要求我们既保持理智上的谦虚，又坚持不懈地探究。"],
+    "required_keywords": ["真理", "谦逊", "探索"],
+    "required_grammar": ["既...也/又"],
+    "key_word_hint": "追求真理"
+  },
+  {
+    "id": "st_9_014",
+    "hsk_level": 9,
+    "prompt_en": "State in academic register that the methodological approach adopted in this study draws upon both qualitative and quantitative paradigms.",
+    "acceptable_answers": ["本研究所采用的方法论兼顾了定性与定量研究范式。", "本研究的方法论综合运用了定性和定量两种研究范式。"],
+    "required_keywords": ["方法论", "定性", "定量"],
+    "required_grammar": ["所采用的"],
+    "key_word_hint": "定性与定量"
+  },
+  {
+    "id": "st_9_015",
+    "hsk_level": 9,
+    "prompt_en": "Write in literary/poetic register that all rivers eventually find their way to the sea, just as all journeys lead us home.",
+    "acceptable_answers": ["百川终归大海，正如万途皆通归处。", "百川东到海，一切旅途终归故里。"],
+    "required_keywords": ["百川", "归"],
+    "required_grammar": ["正如/终归"],
+    "key_word_hint": "百川归海"
+  },
+  {
+    "id": "st_9_016",
+    "hsk_level": 9,
+    "prompt_en": "Write formally that the signatories hereby pledge to abide by the terms and conditions set forth in this agreement.",
+    "acceptable_answers": ["签署方在此承诺遵守本协议所规定的各项条款和条件。", "各签署方特此承诺严格遵守本协议所列各项条款。"],
+    "required_keywords": ["签署", "承诺", "遵守", "条款"],
+    "required_grammar": ["在此/特此"],
+    "key_word_hint": "遵守条款"
+  },
+  {
+    "id": "st_9_017",
+    "hsk_level": 9,
+    "prompt_en": "Write in formal policy register that sustainable development necessitates balancing economic growth with environmental stewardship.",
+    "acceptable_answers": ["可持续发展要求在经济增长与环境保护之间取得平衡。", "实现可持续发展须兼顾经济增长与生态环境的保护。"],
+    "required_keywords": ["可持续发展", "经济", "环境"],
+    "required_grammar": ["要求/须"],
+    "key_word_hint": "可持续发展"
+  },
+  {
+    "id": "st_9_018",
+    "hsk_level": 9,
+    "prompt_en": "Write in literary register that memory, like water, seeps into every crack and nourishes what lies dormant.",
+    "acceptable_answers": ["记忆如水，渗透每一道缝隙，滋养沉睡的万物。", "记忆宛如流水，渗入每处裂痕，润泽蛰伏之物。"],
+    "required_keywords": ["记忆", "渗", "滋养"],
+    "required_grammar": ["如/宛如"],
+    "key_word_hint": "记忆如水"
+  }
+]

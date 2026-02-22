@@ -1,0 +1,45 @@
+{
+    "title": "Introducing your family",
+    "title_zh": "介绍家人",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You're showing a Chinese friend photos on your phone and they ask about your family.",
+        "setup_zh": "你在给中国朋友看手机上的照片，他们问起你的家人。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这张照片上的人是谁啊？",
+                "text_pinyin": "zhè zhāng zhàopiàn shàng de rén shì shéi a?",
+                "text_en": "Who are the people in this photo?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your family members in the photo.",
+                "options": [
+                    {"text_zh": "这是我爸爸妈妈，还有我姐姐。", "text_pinyin": "zhè shì wǒ bàba māma, háiyǒu wǒ jiějie.", "text_en": "These are my mom and dad, and my older sister.", "score": 1.0, "register": "casual", "feedback": "Natural and complete — identifies each person clearly."},
+                    {"text_zh": "这是我的家人，我们家有四个人。", "text_pinyin": "zhè shì wǒ de jiārén, wǒmen jiā yǒu sì ge rén.", "text_en": "This is my family, there are four people in our family.", "score": 0.7, "register": "neutral", "feedback": "Gives the overview but doesn't identify who's who — they're looking at specific people."},
+                    {"text_zh": "左边是我爸爸，右边是妈妈。", "text_pinyin": "zuǒbiān shì wǒ bàba, yòubiān shì māma.", "text_en": "On the left is my dad, on the right is my mom.", "score": 0.6, "register": "casual", "feedback": "Good spatial detail but only mentions two people — what about the rest?"}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你姐姐看起来很年轻！她做什么工作？",
+                "text_pinyin": "nǐ jiějie kàn qǐlai hěn niánqīng! tā zuò shénme gōngzuò?",
+                "text_en": "Your sister looks very young! What does she do for work?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your sister's job.",
+                "options": [
+                    {"text_zh": "她是老师，在一个小学教书。", "text_pinyin": "tā shì lǎoshī, zài yī ge xiǎoxué jiāoshū.", "text_en": "She's a teacher, she teaches at a primary school.", "score": 1.0, "register": "casual", "feedback": "Specific and conversational — gives both the job and the workplace."},
+                    {"text_zh": "她在北京工作，是个医生。", "text_pinyin": "tā zài běijīng gōngzuò, shì ge yīshēng.", "text_en": "She works in Beijing, she's a doctor.", "score": 0.8, "register": "casual", "feedback": "Informative — mentions location and profession. Solid answer."},
+                    {"text_zh": "我姐姐现在还在上大学呢。", "text_pinyin": "wǒ jiějie xiànzài hái zài shàng dàxué ne.", "text_en": "My sister is still in university.", "score": 0.6, "register": "casual", "feedback": "Doesn't directly answer about work, but explains why — the 呢 softens it naturally."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese culture, asking about family members' ages, jobs, and marital status is common and not considered intrusive. Saying someone 看起来很年轻 (looks young) is always a compliment. Chinese kinship terms are very specific — 姐姐 (older sister) and 妹妹 (younger sister) are different words, unlike English."
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "title": "Planning a company event",
+    "title_zh": "策划公司团建活动",
+    "hsk_level": 5,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.65,
+    "tree": {
+        "setup": "You've been asked to plan the quarterly team building event for your department of 20 people. Your colleague is helping you brainstorm ideas. The budget is 10,000 yuan.",
+        "setup_zh": "你被安排策划部门的季度团建活动，一共二十个人。同事在帮你出主意。预算是一万块钱。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这次团建你有什么想法？上次去唱歌大家觉得没什么意思，好多人都在玩手机。这次能不能搞点不一样的？",
+                "text_pinyin": "zhè cì tuánjiàn nǐ yǒu shénme xiǎngfǎ? shàng cì qù chàng gē dàjiā juéde méi shénme yìsi, hǎo duō rén dōu zài wán shǒujī. zhè cì néng bù néng gǎo diǎn bù yīyàng de?",
+                "text_en": "Any ideas for this team building event? Last time we went to karaoke and everyone found it boring -- a lot of people were just playing on their phones. Can we do something different this time?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Propose an activity idea for the team building event.",
+                "options": [
+                    {"text_zh": "我想了几个方案。第一个是户外拓展训练，比如攀岩或者定向越野，这种活动需要大家配合，能增强团队意识。第二个是密室逃脱，挺有趣的，也能锻炼解决问题的能力。第三个是去农家乐搞一次户外烧烤加小型运动会。你觉得哪个比较合适？", "text_pinyin": "wǒ xiǎng le jǐ gè fāng'àn. dì yī gè shì hùwài tuòzhǎn xùnliàn, bǐrú pānyán huòzhě dìngxiàng yuèyě, zhè zhǒng huódòng xūyào dàjiā pèihé, néng zēngqiáng tuánduì yìshí. dì èr gè shì mìshì táotuō, tǐng yǒuqù de, yě néng duànliàn jiějué wèntí de nénglì. dì sān gè shì qù nóngjiālè gǎo yī cì hùwài shāokǎo jiā xiǎoxíng yùndònghuì. nǐ juéde nǎge bǐjiào héshì?", "text_en": "I've thought of a few options. First is outdoor team training, like rock climbing or orienteering -- these activities require cooperation and strengthen team spirit. Second is an escape room -- it's fun and also trains problem-solving skills. Third is going to a farmhouse for outdoor barbecue plus a mini sports day. Which one do you think fits best?", "score": 1.0, "register": "semi-formal", "feedback": "Well-prepared -- offers three distinct options with clear reasoning for each. Connecting activities to team benefits (团队意识, 解决问题的能力) shows strategic thinking. Using 拓展训练, 定向越野, and 密室逃脱 demonstrates relevant vocabulary."},
+                    {"text_zh": "要不去爬山？运动一下，大家也能聊聊天。", "text_pinyin": "yào bú qù pá shān? yùndòng yīxià, dàjiā yě néng liáoliao tiān.", "text_en": "How about hiking? Get some exercise, and people can chat.", "score": 0.6, "register": "casual", "feedback": "Decent suggestion, but a single option without considering the group's diverse preferences is risky. Some team members may not enjoy hiking. Offering alternatives shows better planning."},
+                    {"text_zh": "不知道啊，你有什么建议？反正别再去唱歌了。", "text_pinyin": "bù zhīdào a, nǐ yǒu shénme jiànyì? fǎnzhèng bié zài qù chàng gē le.", "text_en": "I don't know, any suggestions? Just not karaoke again.", "score": 0.3, "register": "casual", "feedback": "You were put in charge of planning -- saying you don't know undermines trust. Even rough ideas show effort. Take the initiative."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "密室逃脱听起来不错！不过二十个人的话，可能需要分好几组。另外，有些同事年纪大一些，会不会觉得这种活动太幼稚？而且预算只有一万块，够不够？",
+                "text_pinyin": "mìshì táotuō tīng qǐlái búcuò! búguò èrshí gè rén dehuà, kěnéng xūyào fēn hǎo jǐ zǔ. lìngwài, yǒuxiē tóngshì niánjì dà yīxiē, huì bú huì juéde zhè zhǒng huódòng tài yòuzhì? érqiě yùsuàn zhǐ yǒu yī wàn kuài, gòu bú gòu?",
+                "text_en": "Escape room sounds good! But with 20 people, we'd probably need several groups. Also, some colleagues are older -- would they find this kind of activity too childish? And we only have 10,000 yuan budget -- is that enough?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the logistics concerns about group size, age range, and budget.",
+                "options": [
+                    {"text_zh": "这些问题我也考虑到了。我们可以分成四组，每组五个人，同时开四个不同主题的密室。关于年龄的问题，其实密室逃脱主要考验的是推理和沟通能力，不需要体力，各个年龄段都能参与。预算方面，一般密室逃脱每人一百到一百五十块左右，二十个人大概三千块。剩下的钱可以安排结束以后一起吃顿饭。", "text_pinyin": "zhèxiē wèntí wǒ yě kǎolǜ dào le. wǒmen kěyǐ fēnchéng sì zǔ, měi zǔ wǔ gè rén, tóngshí kāi sì gè bùtóng zhǔtí de mìshì. guānyú niánlíng de wèntí, qíshí mìshì táotuō zhǔyào kǎoyàn de shì tuīlǐ hé gōutōng nénglì, bù xūyào tǐlì, gè gè niánlíng duàn dōu néng cānyù. yùsuàn fāngmiàn, yībān mìshì táotuō měi rén yī bǎi dào yī bǎi wǔshí kuài zuǒyòu, èrshí gè rén dàgài sān qiān kuài. shèngxia de qián kěyǐ ānpái jiéshù yǐhòu yīqǐ chī dùn fàn.", "text_en": "I've considered these issues too. We can split into four groups of five people each, running four different themed rooms simultaneously. About the age concern, escape rooms mainly test reasoning and communication skills, not physical ability, so all age groups can participate. Budget-wise, escape rooms generally cost 100-150 yuan per person, so about 3,000 for 20 people. The remaining money can cover a group dinner afterward.", "score": 1.0, "register": "semi-formal", "feedback": "Thorough logistics planning -- addresses all three concerns with specific numbers. The cost breakdown shows you did your research. Proposing a post-activity dinner is a smart use of remaining budget."},
+                    {"text_zh": "分组应该没问题，费用的话我回去查查看。年纪大的同事……应该也可以吧，大家试试看。", "text_pinyin": "fēnzǔ yīnggāi méi wèntí, fèiyòng dehuà wǒ huíqù chácha kàn. niánjì dà de tóngshì……yīnggāi yě kěyǐ ba, dàjiā shìshi kàn.", "text_en": "Grouping should be fine, I'll check the costs later. Older colleagues... should be OK too, everyone can try it.", "score": 0.5, "register": "casual", "feedback": "Acknowledges the issues but defers everything. As the planner, having rough cost estimates and a rationale for inclusivity ready shows preparation."},
+                    {"text_zh": "管那么多干嘛？去了就知道了。", "text_pinyin": "guǎn nàme duō gàn ma? qù le jiù zhīdào le.", "text_en": "Why overthink it? We'll find out when we get there.", "score": 0.2, "register": "casual", "feedback": "Dismissive of legitimate concerns. Planning a team event for 20 people requires anticipating logistics. Your colleague is helping you avoid problems -- appreciate the input."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有道理，看来你做了不少功课。那吃饭的话你打算怎么安排？有没有同事有什么忌口的？",
+                "text_pinyin": "yǒu dàolǐ, kàn lái nǐ zuò le bùshǎo gōngkè. nà chī fàn dehuà nǐ dǎsuàn zěnme ānpái? yǒu méiyǒu tóngshì yǒu shénme jìkǒu de?",
+                "text_en": "Makes sense -- looks like you've done your homework. How are you planning to arrange dinner? Do any colleagues have dietary restrictions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Plan the dinner and address dietary considerations.",
+                "options": [
+                    {"text_zh": "我打算订一个中餐厅的大包间，圆桌坐得下二十个人，方便大家一起聊天。预算七千左右，人均三百五应该能吃得很不错了。至于忌口的问题，我会提前在群里发个问卷调查，看看有没有人吃素、过敏或者不吃辣的，然后跟餐厅提前沟通好菜单。这样每个人都能吃得开心。", "text_pinyin": "wǒ dǎsuàn dìng yī gè zhōngcāntīng de dà bāojiān, yuánzhuō zuò de xià èrshí gè rén, fāngbiàn dàjiā yīqǐ liáo tiān. yùsuàn qī qiān zuǒyòu, rénjūn sān bǎi wǔ yīnggāi néng chī de hěn búcuò le. zhìyú jìkǒu de wèntí, wǒ huì tíqián zài qún lǐ fā gè wènjuàn diàochá, kànkan yǒu méiyǒu rén chīsù, guòmǐn huòzhě bù chī là de, ránhòu gēn cāntīng tíqián gōutōng hǎo càidān. zhèyàng měi gè rén dōu néng chī de kāixīn.", "text_en": "I'm planning to book a large private room at a Chinese restaurant -- a round table that seats 20 so everyone can chat together. Budget about 7,000 yuan, roughly 350 per person which should be quite a nice meal. For dietary restrictions, I'll send out a survey in the group chat beforehand to see if anyone is vegetarian, has allergies, or doesn't eat spicy food, then coordinate the menu with the restaurant in advance. That way everyone can enjoy the meal.", "score": 1.0, "register": "semi-formal", "feedback": "Meticulous planning -- specific venue type, per-person budget, proactive survey for dietary needs, and advance restaurant coordination. 包间, 圆桌, 问卷调查, and 忌口 are all precisely used."},
+                    {"text_zh": "找个附近的餐厅就行了，二十个人随便点一桌菜。忌口的话，到时候问一下就好了。", "text_pinyin": "zhǎo gè fùjìn de cāntīng jiù xíng le, èrshí gè rén suíbiàn diǎn yī zhuō cài. jìkǒu dehuà, dào shíhou wèn yīxià jiù hǎo le.", "text_en": "Just find a nearby restaurant -- order a table of dishes for 20 people. For dietary restrictions, we can just ask at the time.", "score": 0.5, "register": "casual", "feedback": "Too casual for a planned event. Booking in advance matters for 20 people. Asking about dietary restrictions on the spot means you can't adjust the menu in time."},
+                    {"text_zh": "吃饭的事等活动结束再说吧，先把密室逃脱定下来。", "text_pinyin": "chī fàn de shì děng huódòng jiéshù zài shuō ba, xiān bǎ mìshì táotuō dìng xiàlái.", "text_en": "Let's figure out dinner after the event -- let's book the escape room first.", "score": 0.3, "register": "casual", "feedback": "Poor planning -- dinner for 20 people during a busy period needs advance booking. Tackle both logistics in parallel rather than leaving one to the last minute."}
+                ]
+            }
+        ],
+        "cultural_note": "Team building (团建 tuánjiàn) is a major part of Chinese corporate culture. Common activities include outdoor training (拓展训练 tuòzhǎn xùnliàn), dinners, and recreational outings. Chinese work dinners typically use round tables (圆桌 yuánzhuō) in private rooms (包间 bāojiān) to encourage group conversation. Asking about 忌口 (jìkǒu, dietary restrictions) beforehand is considered thoughtful. The planner is expected to handle logistics proactively -- being asked to organize a team event is a sign of trust."
+    }
+}

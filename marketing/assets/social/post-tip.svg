@@ -1,0 +1,53 @@
+<!-- Post template: tip. Replace placeholder text before use. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect width="1080" height="1080" fill="#F2EBE0"/>
+
+  <!-- Label — top left -->
+  <text x="100" y="160"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="20" fill="#6A7A5A" letter-spacing="3" text-transform="uppercase">
+    LEARNING TIP
+  </text>
+
+  <!-- Thin accent line under label -->
+  <line x1="100" y1="178" x2="260" y2="178" stroke="#6A7A5A" stroke-width="0.75" opacity="0.5"/>
+
+  <!-- Main tip text — centered -->
+  <text x="540" y="430" text-anchor="middle"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="48" fill="#2C2820" font-weight="600">
+    Listen before you speak.
+  </text>
+  <text x="540" y="500" text-anchor="middle"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="48" fill="#2C2820" font-weight="600">
+    Speak before you read.
+  </text>
+  <text x="540" y="570" text-anchor="middle"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="48" fill="#2C2820" font-weight="600">
+    Read before you write.
+  </text>
+
+  <!-- Horizon divider -->
+  <line x1="240" y1="660" x2="840" y2="660" stroke="#2C2820" stroke-width="0.75" opacity="0.25"/>
+
+  <!-- Explanatory text -->
+  <text x="540" y="730" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="24" fill="#2C2820" opacity="0.6">
+    The natural order of language acquisition
+  </text>
+  <text x="540" y="766" text-anchor="middle"
+        font-family="'Source Serif 4', 'Source Serif Pro', 'Georgia', serif"
+        font-size="24" fill="#2C2820" opacity="0.6">
+    mirrors how children learn their first language.
+  </text>
+
+  <!-- Attribution -->
+  <text x="1020" y="1030" text-anchor="end"
+        font-family="'Cormorant Garabmond', 'Georgia', serif"
+        font-size="22" fill="#2C2820" opacity="0.5" letter-spacing="1">
+    明 Ming
+  </text>
+</svg>

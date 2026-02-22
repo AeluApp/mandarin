@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+  <!-- horizon -->
+  <line x1="0" y1="34" x2="120" y2="34" stroke-width="0.5"/>
+  <!-- gentle hill -->
+  <path d="M70 34 Q90 22 120 34" stroke-width="0.5"/>
+  <!-- boat -->
+  <path d="M40 42 Q50 46 60 42" stroke-width="0.7"/>
+  <line x1="40" y1="42" x2="42" y2="40" stroke-width="0.5"/>
+  <line x1="60" y1="42" x2="58" y2="40" stroke-width="0.5"/>
+  <!-- mast -->
+  <line x1="50" y1="42" x2="50" y2="34" stroke-width="0.4"/>
+  <!-- reflection -->
+  <path d="M44 48 Q50 50 56 48" stroke-width="0.3"/>
+</svg>

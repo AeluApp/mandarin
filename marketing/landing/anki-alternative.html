@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anki Alternative for Chinese — SRS That Builds Itself | Mandarin</title>
+  <meta name="description" content="Like Anki but with a curriculum. 27 drill types, graded reading, listening practice, and adaptive scheduling for Chinese. No deck-building required. Free to start.">
+  <meta name="keywords" content="Anki alternative Chinese, Chinese SRS app, spaced repetition Chinese, best flashcard app Chinese, Chinese vocabulary app, best spaced repetition app for Chinese, Anki Chinese, SRS for Mandarin, adaptive spaced repetition Chinese">
+  <link rel="canonical" href="https://mandarinapp.com/anki-alternative">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Anki Alternative Built for Chinese Learners">
+  <meta property="og:description" content="27 drill types, not just flashcards. Graded reading, listening, and SRS that adapts to your weak spots. No deck-building required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/anki-alternative">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Anki Alternative Built for Chinese Learners">
+  <meta name="twitter:description" content="27 drill types, not just flashcards. Graded reading, listening, and SRS that adapts to your weak spots. No deck-building required.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Anki Alternative for Chinese — SRS That Builds Itself",
+    "description": "Like Anki but with a curriculum. 27 drill types, graded reading, listening practice, and adaptive scheduling for Chinese.",
+    "url": "https://mandarinapp.com/anki-alternative",
+    "keywords": "Anki alternative Chinese, Chinese SRS app, spaced repetition Chinese, best flashcard app Chinese"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-2: 0.5rem; --space-3: 1rem; --space-4: 1.5rem; --space-5: 2rem; --space-6: 3rem; --space-8: 5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028; --color-surface: #242830; --color-text: #E4DDD0;
+        --color-text-faint: #8B8680; --color-border: #3A3530;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-base); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4); }
+
+    .hero { text-align: center; padding: var(--space-8) 0 var(--space-6); }
+    .hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-3); }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 600; line-height: 1.15; margin-bottom: var(--space-3); }
+    .hero-sub { font-size: 1.1rem; color: var(--color-text-faint); max-width: 520px; margin: 0 auto var(--space-5); line-height: 1.65; }
+    @media (max-width: 600px) { .hero h1 { font-size: 2rem; } }
+
+    .cta-group { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+    .cta-email { display: flex; gap: var(--space-2); width: 100%; max-width: 420px; }
+    .cta-email input { flex: 1; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; background: var(--color-surface); color: var(--color-text); }
+    .cta-email input::placeholder { color: var(--color-text-faint); }
+    .btn-primary { padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-base); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .btn-primary:hover { opacity: 0.85; }
+    .cta-note { font-size: 0.85rem; color: var(--color-text-faint); }
+    .cta-success { padding: var(--space-3) var(--space-4); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); border-radius: var(--radius); color: var(--color-accent); font-size: 0.95rem; display: none; }
+
+    section { padding: var(--space-8) 0; }
+
+    /* Comparison table */
+    .comparison { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    .comparison h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-5); }
+    .compare-table { width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse; font-size: 0.9rem; }
+    .compare-table th { font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; padding: var(--space-2) var(--space-3); text-align: left; border-bottom: 2px solid var(--color-border); }
+    .compare-table th:nth-child(2), .compare-table th:nth-child(3) { text-align: center; }
+    .compare-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); }
+    .compare-table td:nth-child(2), .compare-table td:nth-child(3) { text-align: center; }
+    .check { color: var(--color-accent); font-weight: 600; }
+    .cross { color: var(--color-text-faint); }
+
+    /* What you get */
+    .what-you-get h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-5); }
+    .benefit-list { max-width: 560px; margin: 0 auto; list-style: none; }
+    .benefit-list li { padding: var(--space-2) 0; padding-left: var(--space-4); position: relative; }
+    .benefit-list li::before { content: "\2192"; position: absolute; left: 0; color: var(--color-accent); }
+    .benefit-list li strong { color: var(--color-text); }
+    .benefit-list li span { color: var(--color-text-faint); }
+
+    /* Honest take */
+    .honest { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    .honest h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-3); }
+    .honest p { text-align: center; color: var(--color-text-faint); max-width: 520px; margin: 0 auto var(--space-3); }
+    .honest .quote { font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5; }
+
+    /* Pricing */
+    .pricing h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: var(--space-5); }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); max-width: 580px; margin: 0 auto; }
+    @media (max-width: 600px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .pricing-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-4); text-align: center; }
+    .pricing-card.featured { border-color: var(--color-accent); }
+    .pricing-card h3 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: var(--space-2); }
+    .pricing-price { font-family: var(--font-heading); font-size: 2rem; font-weight: 600; margin-bottom: var(--space-3); }
+    .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--color-text-faint); }
+    .pricing-features { list-style: none; text-align: left; font-size: 0.85rem; color: var(--color-text-faint); }
+    .pricing-features li { padding: 0.15rem 0 0.15rem var(--space-3); position: relative; }
+    .pricing-features li::before { content: "\2713"; position: absolute; left: 0; color: var(--color-accent); }
+
+    .final-cta { text-align: center; background: var(--color-surface); border-top: 1px solid var(--color-border); }
+    .final-cta h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; margin-bottom: var(--space-3); }
+    .final-cta p { color: var(--color-text-faint); margin-bottom: var(--space-4); }
+
+    footer { padding: var(--space-5) 0; text-align: center; font-size: 0.85rem; color: var(--color-text-faint); }
+    footer a { color: var(--color-text-faint); text-decoration: underline; }
+
+    @keyframes drift-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-label, .hero h1, .hero-sub, .cta-group { animation: drift-up 0.6s ease-out both; }
+    .hero h1 { animation-delay: 0.1s; } .hero-sub { animation-delay: 0.2s; } .cta-group { animation-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .hero-label, .hero h1, .hero-sub, .cta-group { animation: none; opacity: 1; } }
+
+    /* Nav */
+    nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-links { display: flex; gap: var(--space-4); list-style: none; }
+    .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-2); color: var(--color-text); }
+    .nav-toggle svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-base); border-bottom: 1px solid var(--color-border); padding: var(--space-3) var(--space-4); gap: var(--space-3); z-index: 100; }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-label">Anki Alternative for Chinese</div>
+      <h1>Chinese SRS that builds itself</h1>
+      <p class="hero-sub">You want spaced repetition for Chinese, not a second job building Anki decks. Mandarin gives you SRS with a curriculum, 27 drill types, and adaptive scheduling — ready to go from day one.</p>
+      <div class="cta-group">
+        <form class="cta-email" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Get early access</button>
+        </form>
+        <p class="cta-note">Free to start. No credit card required.</p>
+        <div class="cta-success">You're on the list. We'll let you know when it's ready.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="comparison">
+    <div class="container">
+      <h2>Anki vs. Mandarin</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Anki</th>
+            <th>Mandarin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Spaced repetition</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+          <tr><td>Chinese-specific curriculum</td><td class="cross">No (DIY)</td><td class="check">HSK 1-6</td></tr>
+          <tr><td>Deck building required</td><td class="cross">Yes</td><td class="check">No</td></tr>
+          <tr><td>Drill types</td><td class="cross">Flashcards only</td><td class="check">27 types</td></tr>
+          <tr><td>Listening drills</td><td class="cross">Manual setup</td><td class="check">Built in</td></tr>
+          <tr><td>Speaking/tone practice</td><td class="cross">No</td><td class="check">With grading</td></tr>
+          <tr><td>Graded reading</td><td class="cross">No</td><td class="check">By HSK level</td></tr>
+          <tr><td>Adaptive difficulty</td><td class="cross">Limited</td><td class="check">Per-skill</td></tr>
+          <tr><td>Word lookup → drill pipeline</td><td class="cross">No</td><td class="check">Automatic</td></tr>
+          <tr><td>Price</td><td class="check">Free</td><td>Free / $12/mo</td></tr>
+          <tr><td>Customizability</td><td class="check">Infinite</td><td class="cross">Opinionated</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="what-you-get">
+    <div class="container">
+      <h2>What you get instead of deck-building</h2>
+      <ul class="benefit-list">
+        <li><strong>A ready-to-go HSK curriculum</strong> — <span>299 items for HSK 1-3, expanding to HSK 6. No shared decks of questionable quality.</span></li>
+        <li><strong>27 drill types, not just front/back cards</strong> — <span>tone pairs, cloze deletion, listening comprehension, character recognition, sentence construction, and more.</span></li>
+        <li><strong>The cleanup loop</strong> — <span>read Chinese passages, tap words you don't know, and those exact words appear in your next drill session. Anki can't do this.</span></li>
+        <li><strong>Adaptive scheduling</strong> — <span>the system tracks which skills are weakest (listening? tones? reading?) and adjusts your session mix automatically.</span></li>
+        <li><strong>Context notes</strong> — <span>every word has handwritten usage notes, register information, and common collocations. Not auto-generated.</span></li>
+        <li><strong>Diagnostics</strong> — <span>HSK readiness projections, weak spot analysis, and progress tracking that goes beyond "cards reviewed."</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="honest">
+    <div class="container">
+      <h2>Honest take</h2>
+      <p>If you love building decks, tweaking card templates, and having total control over your SRS — Anki is still great. It's free, it's powerful, and it's battle-tested.</p>
+      <p>Mandarin is for the learner who wants to study Chinese, not build a study system. You open the app, start a session, and the system handles the rest.</p>
+      <p class="quote">"I want to learn Chinese, not become an Anki power user."</p>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="container">
+      <h2>Simple pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Free</h3>
+          <div class="pricing-price">$0</div>
+          <ul class="pricing-features">
+            <li>HSK 1-2 vocabulary and drills</li>
+            <li>5 drill types</li>
+            <li>Basic progress tracking</li>
+            <li>Beginner reading passages</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured">
+          <h3>Full Access</h3>
+          <div class="pricing-price">$12 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>HSK 1-6 full curriculum</li>
+            <li>All 27 drill types</li>
+            <li>Adaptive scheduling</li>
+            <li>All reading and listening</li>
+            <li>Speaking drills + tone grading</li>
+            <li>Cleanup loop</li>
+            <li>HSK diagnostics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <h2>Study Chinese, not Anki</h2>
+      <p>Join the waitlist. Free for the first 50 users.</p>
+      <div class="cta-group">
+        <form class="cta-email" action="#" method="post">
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Get early access</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
+    </div>
+  </footer>
+
+  <script src="/marketing.js"></script>
+</body>
+</html>

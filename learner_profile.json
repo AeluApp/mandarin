@@ -1,0 +1,50 @@
+{
+  "system_voice": {
+    "tone": "calm adult, data-grounded, no praise inflation",
+    "feedback": "direct forward (→), never alarm (✗). Factual, not motivational.",
+    "empty_states": "factual and actionable, no guilt or prodding",
+    "error_handling": "specific, actionable, never exposes internals",
+    "absence": "met with continuity, not commentary. 'Continuing.' not 'Welcome back!'",
+    "metrics": "every number defensible, compared to baseline not theoretical max"
+  },
+  "learner": {
+    "name": "Jason",
+    "traits": {
+      "interest_driven": true,
+      "low_tolerance_rote": true,
+      "high_tolerance_difficulty_when_intelligent": true,
+      "motivation_strongest_when_legible_future_oriented": true,
+      "skip_tolerant": true
+    },
+    "humor": {
+      "style": "dry, observant, humane, intellectual",
+      "never": "loud, meme-first"
+    },
+    "content_affinities": {
+      "high": [
+        "quiet_observational_intelligence",
+        "institutions_as_lived_systems",
+        "urban_texture_city_life",
+        "humane_mystery_deduction",
+        "identity_as_lived_experience",
+        "structural_comedy"
+      ],
+      "medium": [
+        "food_as_social_ritual",
+        "travel_as_systems",
+        "substantive_explainers"
+      ],
+      "low_but_required": [
+        "body_parts_physical_states",
+        "time_sequence_frequency",
+        "function_words_particles",
+        "pronouns_reference_shifting",
+        "politeness_softening",
+        "numbers_quantifiers_measure_words",
+        "high_frequency_polysemous_verbs",
+        "hanzi_recognition"
+      ]
+    },
+    "notes": "Low-affinity material must always be embedded in interesting contexts."
+  }
+}

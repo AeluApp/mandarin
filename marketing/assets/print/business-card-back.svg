@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 200">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&amp;family=Source+Serif+4:wght@400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="350" height="200" fill="#F2EBE0"/>
+
+  <!-- Centered character -->
+  <text x="175" y="105" font-family="'Noto Serif SC', serif" font-weight="700" font-size="80" fill="#946070" text-anchor="middle">漫</text>
+
+  <!-- Short horizon line -->
+  <line x1="151" y1="128" x2="199" y2="128" stroke="#D8D0C4" stroke-width="1"/>
+
+  <!-- URL -->
+  <text x="175" y="152" font-family="'Source Serif 4', serif" font-weight="400" font-size="11" fill="#5A6678" text-anchor="middle">mandarin.app</text>
+</svg>

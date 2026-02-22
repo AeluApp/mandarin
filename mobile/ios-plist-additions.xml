@@ -1,0 +1,10 @@
+<!-- Add these keys to ios/App/App/Info.plist after running `npx cap add ios` -->
+
+<key>NSMicrophoneUsageDescription</key>
+<string>Mandarin uses your microphone for speaking practice and tone assessment.</string>
+
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoadsInWebContent</key>
+  <true/>
+</dict>

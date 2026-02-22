@@ -1,0 +1,45 @@
+{
+    "title": "Asking and telling time",
+    "title_zh": "问时间",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "You're in a park and realize your phone is dead. You need to know the time.",
+        "setup_zh": "你在公园里，手机没电了。你需要知道现在几点。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，你看起来在找什么？",
+                "text_pinyin": "nǐ hǎo, nǐ kàn qǐlai zài zhǎo shénme?",
+                "text_en": "Hello, you look like you're looking for something?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your phone died and ask what time it is.",
+                "options": [
+                    {"text_zh": "你好，我手机没电了，请问现在几点？", "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?", "text_en": "Hi, my phone died, may I ask what time it is?", "score": 1.0, "register": "neutral", "feedback": "Clear and natural — explains why you're asking, which feels less abrupt."},
+                    {"text_zh": "不好意思，你知道现在几点吗？", "text_pinyin": "bù hǎo yìsi, nǐ zhīdào xiànzài jǐ diǎn ma?", "text_en": "Excuse me, do you know what time it is?", "score": 0.7, "register": "neutral", "feedback": "Polite with 不好意思, but doesn't explain the context — still perfectly fine."},
+                    {"text_zh": "没什么，就是想知道几点了。", "text_pinyin": "méi shénme, jiùshì xiǎng zhīdào jǐ diǎn le.", "text_en": "Nothing much, just want to know what time it is.", "score": 0.5, "register": "casual", "feedback": "A bit vague — directly asking 现在几点 is clearer and more efficient."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "现在两点半了。你是不是有事？",
+                "text_pinyin": "xiànzài liǎng diǎn bàn le. nǐ shì bú shì yǒu shì?",
+                "text_en": "It's 2:30. Do you have something to do?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them and say you need to go meet a friend.",
+                "options": [
+                    {"text_zh": "谢谢！三点要见朋友，我得走了。", "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.", "text_en": "Thanks! I'm meeting a friend at three, I have to go.", "score": 1.0, "register": "casual", "feedback": "得走了 is a natural, casual way to say you need to leave. Complete and friendly."},
+                    {"text_zh": "谢谢你，我还有半个小时呢。", "text_pinyin": "xièxie nǐ, wǒ hái yǒu bàn ge xiǎoshí ne.", "text_en": "Thank you, I still have half an hour.", "score": 0.7, "register": "casual", "feedback": "Shows you calculated the time — natural and relaxed."},
+                    {"text_zh": "哦，两点半了，我要快一点了。", "text_pinyin": "ó, liǎng diǎn bàn le, wǒ yào kuài yīdiǎn le.", "text_en": "Oh, it's 2:30 already, I need to hurry.", "score": 0.6, "register": "casual", "feedback": "Conveys urgency but doesn't thank them — a quick 谢谢 goes a long way."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese, 两 (liǎng) is used for 2 o'clock (两点), not 二 (èr). This is because 两 is used before measure words and in counting quantities, while 二 is for ordinal numbers and math. Getting this right marks you as a careful speaker."
+    }
+}

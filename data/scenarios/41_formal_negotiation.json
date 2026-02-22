@@ -1,0 +1,45 @@
+{
+    "title": "Formal negotiation",
+    "title_zh": "商务谈判",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You're negotiating terms with a supplier for a large order. The discussion centers on price, contract terms, and delivery timeline.",
+        "setup_zh": "你正在和供应商谈判一笔大订单的条款。讨论的重点是价格、合同条款和交货时间。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "关于这次合作，我们的报价已经发给贵方了。不知道贵方对条款有什么看法？我们希望尽快达成协议。",
+                "text_pinyin": "guānyú zhè cì hézuò, wǒmen de bàojià yǐjīng fā gěi guìfāng le. bù zhīdào guìfāng duì tiáokuǎn yǒu shénme kànfǎ? wǒmen xīwàng jǐnkuài dáchéng xiéyì.",
+                "text_en": "Regarding this collaboration, we've already sent our quote to your side. I wonder what your thoughts are on the terms? We hope to reach an agreement soon."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the supplier's terms and begin negotiating.",
+                "options": [
+                    {"text_zh": "感谢贵方的报价。我们仔细研究了条款，总体来说方向是一致的。不过在利润分配和交货时间方面，我们认为还有妥协的空间。我们的策略是优先保证质量，同时控制成本。", "text_pinyin": "gǎnxiè guìfāng de bàojià. wǒmen zǐxì yánjiū le tiáokuǎn, zǒngtǐ lái shuō fāngxiàng shì yīzhì de. búguò zài lìrùn fēnpèi hé jiāohuò shíjiān fāngmiàn, wǒmen rènwéi hái yǒu tuǒxié de kōngjiān. wǒmen de cèlüè shì yōuxiān bǎozhèng zhìliàng, tóngshí kòngzhì chéngběn.", "text_en": "Thank you for your quote. We've carefully studied the terms, and the overall direction is aligned. However, regarding profit distribution and delivery timeline, we believe there's room for compromise. Our strategy is to prioritize quality while controlling costs.", "score": 1.0, "register": "formal", "feedback": "Masterful — uses 条款, 妥协, 利润, 策略 precisely. Acknowledges common ground before raising differences, which is ideal negotiation form."},
+                    {"text_zh": "价格太高了，能不能降低一点？我们需要更多的利润空间。", "text_pinyin": "jiàgé tài gāo le, néng bù néng jiàngdī yīdiǎn? wǒmen xūyào gèng duō de lìrùn kōngjiān.", "text_en": "The price is too high, can you lower it? We need more profit margin.", "score": 0.5, "register": "neutral", "feedback": "Too direct for formal negotiation. In Chinese business culture, acknowledge the 条款 positively first, then propose 妥协 on specific points. Blunt price demands can damage the relationship."},
+                    {"text_zh": "我们再考虑考虑吧，现在还不能做决定。", "text_pinyin": "wǒmen zài kǎolǜ kǎolǜ ba, xiànzài hái bù néng zuò juédìng.", "text_en": "Let us think it over, we can't make a decision yet.", "score": 0.3, "register": "neutral", "feedback": "Stalls the negotiation without engaging. The other side wants to 达成协议 — at minimum, address the 条款 and signal which points need discussion."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我理解贵方的立场。在利润方面我们可以再商量，但是交货时间恐怕很难改变。请问贵方能接受什么样的条件？",
+                "text_pinyin": "wǒ lǐjiě guìfāng de lìchǎng. zài lìrùn fāngmiàn wǒmen kěyǐ zài shāngliáng, dànshì jiāohuò shíjiān kǒngpà hěn nán gǎibiàn. qǐngwèn guìfāng néng jiēshòu shénme yàng de tiáojiàn?",
+                "text_en": "I understand your position. We can discuss the profit aspect further, but the delivery timeline will be difficult to change. What conditions would your side find acceptable?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Propose specific compromise terms.",
+                "options": [
+                    {"text_zh": "如果交货时间不能调整，那我们希望在价格条款上做出相应的妥协。具体来说，如果贵方能降低百分之五的报价，我们可以接受目前的交货安排，并尽快签署合同。", "text_pinyin": "rúguǒ jiāohuò shíjiān bù néng tiáozhěng, nà wǒmen xīwàng zài jiàgé tiáokuǎn shàng zuòchū xiāngyìng de tuǒxié. jùtǐ lái shuō, rúguǒ guìfāng néng jiàngdī bǎifēnzhī wǔ de bàojià, wǒmen kěyǐ jiēshòu mùqián de jiāohuò ānpái, bìng jǐnkuài qiānshǔ hétóng.", "text_en": "If the delivery timeline can't be adjusted, then we'd like a corresponding compromise on price terms. Specifically, if your side can lower the quote by five percent, we can accept the current delivery arrangement and sign the contract promptly.", "score": 1.0, "register": "formal", "feedback": "Excellent negotiation — trades concession on delivery for price 妥协, gives a specific number, and signals readiness to 签署. Uses 条款, 妥协, 签署 at native level."},
+                    {"text_zh": "我们可以接受交货时间，但是价格方面希望能再优惠一些。具体的数字我们回去再算一下。", "text_pinyin": "wǒmen kěyǐ jiēshòu jiāohuò shíjiān, dànshì jiàgé fāngmiàn xīwàng néng zài yōuhuì yīxiē. jùtǐ de shùzì wǒmen huíqù zài suàn yīxià.", "text_en": "We can accept the delivery timeline, but we'd like a better price. We'll go back and calculate the specific figures.", "score": 0.6, "register": "formal", "feedback": "Shows willingness to 妥协 but delays specifics. In a negotiation, proposing a concrete number shows strength and moves toward 签署."},
+                    {"text_zh": "你们的条件太严格了，这样的话合作可能有困难。", "text_pinyin": "nǐmen de tiáojiàn tài yángé le, zhèyàng dehuà hézuò kěnéng yǒu kùnnán.", "text_en": "Your conditions are too strict, it may be difficult to cooperate this way.", "score": 0.2, "register": "neutral", "feedback": "Threatens to walk away without proposing alternatives. Good negotiators offer 妥协 paths, not ultimatums. Also, 你们 should be 贵方 in formal business contexts."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese business negotiations, maintaining 面子 (face) for both sides is critical. The most effective negotiators acknowledge common ground first (总体方向一致), then raise specific points of 妥协. Direct confrontation or blunt price demands can damage long-term relationships."
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "title": "Farewell dinner for a colleague",
+    "title_zh": "欢送晚宴",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "Your Chinese colleague is leaving the company. At the farewell dinner, they sit next to you.",
+        "setup_zh": "你的中国同事要离开公司了。在欢送晚宴上，他们坐在你旁边。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "时间过得真快，下个月我就要去上海了。真有点舍不得大家。",
+                "text_pinyin": "shíjiān guò de zhēn kuài, xià ge yuè wǒ jiù yào qù shànghǎi le. zhēn yǒudiǎn shěbude dàjiā.",
+                "text_en": "Time flies. Next month I'm heading to Shanghai. I'm really going to miss everyone."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express that you'll miss them and wish them well.",
+                "options": [
+                    {"text_zh": "我们也很舍不得你。祝你在上海一切顺利，有空常联系。", "text_pinyin": "wǒmen yě hěn shěbude nǐ. zhù nǐ zài shànghǎi yīqiè shùnlì, yǒu kòng cháng liánxì.", "text_en": "We'll miss you too. Wish you all the best in Shanghai, keep in touch when you can.", "score": 1.0, "register": "neutral", "feedback": "Warm and complete — 舍不得 mirrors their sentiment, and 有空常联系 is the classic farewell phrase that means it."},
+                    {"text_zh": "真的吗？太快了！上海是个好城市，你一定会喜欢的。", "text_pinyin": "zhēn de ma? tài kuài le! shànghǎi shì ge hǎo chéngshì, nǐ yīdìng huì xǐhuan de.", "text_en": "Really? So fast! Shanghai is a great city, you'll definitely love it.", "score": 0.7, "register": "casual", "feedback": "Positive and encouraging, but doesn't acknowledge the emotional weight of 舍不得 — matching their tone first is more empathetic."},
+                    {"text_zh": "舍不得你走啊，这几年一起工作很开心。", "text_pinyin": "shěbude nǐ zǒu a, zhè jǐ nián yīqǐ gōngzuò hěn kāixīn.", "text_en": "Hate to see you go. These past few years working together have been great.", "score": 0.8, "register": "casual", "feedback": "Emotionally genuine and looks back on shared experience — adding a wish for the future would make it complete."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你。你以后有机会来上海的话，一定要告诉我，我请你吃饭！",
+                "text_pinyin": "xièxie nǐ. nǐ yǐhòu yǒu jīhuì lái shànghǎi dehuà, yīdìng yào gàosu wǒ, wǒ qǐng nǐ chīfàn!",
+                "text_en": "Thank you. If you ever come to Shanghai, you must tell me, I'll treat you to a meal!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept their offer and make a toast.",
+                "options": [
+                    {"text_zh": "一定一定！来，我们干一杯，祝你前程似锦！", "text_pinyin": "yīdìng yīdìng! lái, wǒmen gān yī bēi, zhù nǐ qiánchéng sì jǐn!", "text_en": "Absolutely! Come, let's raise a glass, wishing you a brilliant future!", "score": 1.0, "register": "neutral", "feedback": "Confident and heartfelt — 前程似锦 is a beautiful farewell blessing meaning 'a future as splendid as brocade'."},
+                    {"text_zh": "好的，我去上海的时候一定找你。来，为你的新工作干杯！", "text_pinyin": "hǎo de, wǒ qù shànghǎi de shíhou yīdìng zhǎo nǐ. lái, wèi nǐ de xīn gōngzuò gānbēi!", "text_en": "OK, I'll definitely look you up when I go to Shanghai. Come, a toast to your new job!", "score": 0.8, "register": "casual", "feedback": "Warm and reciprocal — 干杯 for a specific reason is a solid toast."},
+                    {"text_zh": "谢谢你，我也会想念你的，多保重啊。", "text_pinyin": "xièxie nǐ, wǒ yě huì xiǎngniàn nǐ de, duō bǎozhòng a.", "text_en": "Thank you, I'll miss you too, take care of yourself.", "score": 0.6, "register": "neutral", "feedback": "Sincere but misses the toast moment — at a farewell dinner, raising your glass is expected."}
+                ]
+            }
+        ],
+        "cultural_note": "At Chinese farewell dinners (欢送会 huānsòng huì), toasting (干杯 gānbēi) is central to the event. When toasting someone senior or someone you respect, hold your glass lower than theirs. 前程似锦 (qiánchéng sì jǐn) and 一路顺风 (yīlù shùnfēng, smooth travels) are classic farewell blessings. 舍不得 (shěbude, reluctant to part with) is the emotional core of Chinese goodbyes — it acknowledges the relationship's value."
+    }
+}

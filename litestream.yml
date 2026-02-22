@@ -1,0 +1,9 @@
+dbs:
+  - path: /data/mandarin.db
+    replicas:
+      - type: s3
+        bucket: ${LITESTREAM_S3_BUCKET}
+        path: ${LITESTREAM_S3_PATH:-mandarin}
+        region: ${AWS_REGION:-us-east-1}
+        access-key-id: ${AWS_ACCESS_KEY_ID}
+        secret-access-key: ${AWS_SECRET_ACCESS_KEY}

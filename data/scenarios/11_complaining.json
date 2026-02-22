@@ -1,0 +1,45 @@
+{
+    "title": "Raising a complaint",
+    "title_zh": "提出投诉",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "Your hotel room has a problem. You go to the front desk.",
+        "setup_zh": "你的酒店房间有问题，你去前台。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，有什么可以帮您的？",
+                "text_pinyin": "nín hǎo, yǒu shénme kěyǐ bāng nín de?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the issue politely.",
+                "options": [
+                    {"text_zh": "不好意思，我房间的空调好像坏了，能不能帮我解决一下？", "text_pinyin": "bù hǎoyìsi, wǒ fángjiān de kōngtiáo hǎoxiàng huài le, néng bù néng bāng wǒ jiějué yīxià?", "text_en": "Excuse me, the AC in my room seems broken. Could you help me fix this?", "score": 1.0, "register": "neutral", "feedback": "Great — 不好意思 softens the complaint, 好像 hedges, and 解决 is the right word for resolving issues."},
+                    {"text_zh": "我房间的空调好像有点问题，你们可以来看看吗？", "text_pinyin": "wǒ fángjiān de kōngtiáo hǎoxiàng yǒudiǎn wèntí, nǐmen kěyǐ lái kànkan ma?", "text_en": "My room's AC seems to have a problem, can you come take a look?", "score": 0.6, "register": "neutral", "feedback": "Specific and polite, but 看看 is weaker than 解决 — you want resolution, not just a look. Adding 不好意思 would soften the opener."},
+                    {"text_zh": "不好意思，我想说一下，房间好像有个小问题。", "text_pinyin": "bù hǎoyìsi, wǒ xiǎng shuō yīxià, fángjiān hǎoxiàng yǒu gè xiǎo wèntí.", "text_en": "Excuse me, I'd like to mention — the room seems to have a small issue.", "score": 0.4, "register": "neutral", "feedback": "Has the 不好意思 softener but understates the severity (小问题) and doesn't name the actual problem or request action."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "非常抱歉！我马上让人去看看。如果修不好，我可以给您换一个房间。",
+                "text_pinyin": "fēicháng bàoqiàn! wǒ mǎshàng ràng rén qù kànkan. rúguǒ xiū bù hǎo, wǒ kěyǐ gěi nín huàn yī gè fángjiān.",
+                "text_en": "Very sorry! I'll send someone right away. If it can't be fixed, I can give you a different room."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the solution.",
+                "options": [
+                    {"text_zh": "好的，谢谢你。如果需要换房间的话，请提前告诉我。", "text_pinyin": "hǎo de, xièxie nǐ. rúguǒ xūyào huàn fángjiān de huà, qǐng tíqián gàosu wǒ.", "text_en": "OK, thanks. If I need to switch rooms, please let me know in advance.", "score": 1.0, "register": "neutral", "feedback": "Mature response — accepts the solution and sets a reasonable expectation with 提前告诉我."},
+                    {"text_zh": "好吧，那先看看能不能修好吧，修不好再说。", "text_pinyin": "hǎo ba, nà xiān kànkan néng bù néng xiū hǎo ba, xiū bù hǎo zài shuō.", "text_en": "Fine, let's see if it can be fixed first, we'll talk if not.", "score": 0.5, "register": "resigned", "feedback": "Acknowledges the plan but 好吧 and 再说 sound reluctant. 好的谢谢 + 请提前告诉我 is warmer and more proactive."},
+                    {"text_zh": "能不能直接给我换一个房间？我不想等了。", "text_pinyin": "néng bù néng zhíjiē gěi wǒ huàn yī gè fángjiān? wǒ bù xiǎng děng le.", "text_en": "Can you just switch me to a different room? I don't want to wait.", "score": 0.4, "register": "neutral", "feedback": "Jumping to a room switch before letting staff attempt the fix. In Chinese service, giving face (面子) means allowing the first solution attempt."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese service situations, 不好意思 is the standard softener for complaints. Direct confrontation is less effective than polite framing. 解决 (jiějué, resolve) is the key verb — it signals you want a solution, not a fight."
+    }
+}

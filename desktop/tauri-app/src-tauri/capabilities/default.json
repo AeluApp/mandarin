@@ -1,0 +1,19 @@
+{
+  "identifier": "default",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "mandarin-server",
+          "sidecar": true,
+          "args": true
+        }
+      ]
+    },
+    "shell:allow-spawn",
+    "shell:allow-kill"
+  ]
+}

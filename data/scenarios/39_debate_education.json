@@ -1,0 +1,45 @@
+{
+    "title": "Education debate",
+    "title_zh": "教育讨论",
+    "hsk_level": 5,
+    "register": "semi-formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're at a dinner discussion with acquaintances debating whether China's education system puts too much pressure on students.",
+        "setup_zh": "你在一次聚会上和朋友讨论中国的教育制度是否给学生太大的压力。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你觉得现在的教育制度有没有问题？很多家长说孩子压力太大了，需要改革。",
+                "text_pinyin": "nǐ juéde xiànzài de jiàoyù zhìdù yǒu méiyǒu wèntí? hěn duō jiāzhǎng shuō háizi yālì tài dà le, xūyào gǎigé.",
+                "text_en": "Do you think there are problems with the current education system? Many parents say children are under too much pressure and reform is needed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your view on the education system.",
+                "options": [
+                    {"text_zh": "我认为现在的教育观念确实需要改变。制度太注重考试成绩，忽视了学生的全面发展和素质教育。改革应该让孩子有更多自由发展的空间。", "text_pinyin": "wǒ rènwéi xiànzài de jiàoyù guānniàn quèshí xūyào gǎibiàn. zhìdù tài zhùzhòng kǎoshì chéngjì, hūshì le xuéshēng de quánmiàn fāzhǎn hé sùzhì jiàoyù. gǎigé yīnggāi ràng háizi yǒu gèng duō zìyóu fāzhǎn de kōngjiān.", "text_en": "I think current education concepts do need to change. The system focuses too much on exam scores and neglects students' well-rounded development and quality education. Reform should give children more room for free development.", "score": 1.0, "register": "semi-formal", "feedback": "Thorough — uses 观念, 制度, 改革, 全面, and 素质 naturally. Presents a clear argument with reasoning."},
+                    {"text_zh": "压力大是有的，但是竞争这么激烈，不努力就没有好的未来。", "text_pinyin": "yālì dà shì yǒu de, dànshì jìngzhēng zhème jīliè, bù nǔlì jiù méiyǒu hǎo de wèilái.", "text_en": "There is a lot of pressure, but competition is so fierce — without hard work, there's no good future.", "score": 0.6, "register": "semi-formal", "feedback": "A valid counterpoint using 压力 and 竞争. But consider also addressing whether the 制度 itself should change, not just individual effort."},
+                    {"text_zh": "我觉得还好吧，每个国家的教育都有问题。", "text_pinyin": "wǒ juéde hái hǎo ba, měi gè guójiā de jiàoyù dōu yǒu wèntí.", "text_en": "I think it's fine, every country's education has problems.", "score": 0.3, "register": "casual", "feedback": "Dismissive — in a debate, engage with the specific issues of 制度 and 改革 rather than deflecting with generalities."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有道理。但是素质教育说了很多年了，为什么改革这么难呢？",
+                "text_pinyin": "yǒu dàolǐ. dànshì sùzhì jiàoyù shuō le hěn duō nián le, wèishénme gǎigé zhème nán ne?",
+                "text_en": "That makes sense. But people have been talking about quality education for years — why is reform so difficult?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain why education reform is difficult.",
+                "options": [
+                    {"text_zh": "我觉得最大的问题是观念很难改变。家长、学校和社会都习惯了用成绩来衡量学生。要真正实现全面的素质教育，需要整个社会的观念都跟着改变。", "text_pinyin": "wǒ juéde zuì dà de wèntí shì guānniàn hěn nán gǎibiàn. jiāzhǎng, xuéxiào hé shèhuì dōu xíguàn le yòng chéngjì lái héngliáng xuéshēng. yào zhēnzhèng shíxiàn quánmiàn de sùzhì jiàoyù, xūyào zhěnggè shèhuì de guānniàn dōu gēnzhe gǎibiàn.", "text_en": "I think the biggest issue is that mindsets are hard to change. Parents, schools, and society are all used to measuring students by grades. To truly achieve comprehensive quality education, the entire society's values need to change along with it.", "score": 1.0, "register": "semi-formal", "feedback": "Insightful — identifies 观念 as the root obstacle and connects it to 全面 素质教育. Well-structured argument."},
+                    {"text_zh": "改革需要时间，不可能一下子就改好。慢慢来吧。", "text_pinyin": "gǎigé xūyào shíjiān, bù kěnéng yīxiàzi jiù gǎi hǎo. mànmàn lái ba.", "text_en": "Reform takes time, it can't be fixed all at once. Take it slowly.", "score": 0.5, "register": "casual", "feedback": "True but shallow. Try to analyze why specifically — is it 观念, 制度 structure, or something else? Deeper 分析 strengthens your argument."},
+                    {"text_zh": "这个问题太大了，我也说不好。", "text_pinyin": "zhège wèntí tài dà le, wǒ yě shuō bù hǎo.", "text_en": "This question is too big, I can't really say.", "score": 0.2, "register": "casual", "feedback": "Avoids the question entirely. Even a partial answer using 观念, 制度, or 压力 shows engagement with the topic."}
+                ]
+            }
+        ],
+        "cultural_note": "素质教育 (quality-oriented education) versus 应试教育 (exam-oriented education) is one of the most debated topics in Chinese society. Understanding this tension is essential for discussing education in Chinese contexts."
+    }
+}

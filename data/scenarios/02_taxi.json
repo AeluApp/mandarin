@@ -1,0 +1,45 @@
+{
+    "title": "Taxi directions",
+    "title_zh": "坐出租车",
+    "hsk_level": 1,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You need to take a taxi to the train station.",
+        "setup_zh": "你需要坐出租车去火车站。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，去哪儿？",
+                "text_pinyin": "nǐ hǎo, qù nǎr?",
+                "text_en": "Hello, where to?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the driver to go to the train station.",
+                "options": [
+                    {"text_zh": "请去火车站。", "text_pinyin": "qǐng qù huǒchē zhàn.", "text_en": "Please go to the train station.", "score": 1.0, "register": "neutral", "feedback": "Perfect — polite and clear."},
+                    {"text_zh": "火车站。", "text_pinyin": "huǒchē zhàn.", "text_en": "Train station.", "score": 0.7, "register": "casual", "feedback": "Understood, but adding 请去 is more polite."},
+                    {"text_zh": "你好，我想去火车站。", "text_pinyin": "nǐ hǎo, wǒ xiǎng qù huǒchē zhàn.", "text_en": "Hi, I'd like to go to the train station.", "score": 0.8, "register": "polite", "feedback": "Polite and clear, but in taxi contexts 请去 is more natural and concise. Brevity is valued in casual service situations."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。大概二十分钟。",
+                "text_pinyin": "hǎo de. dàgài èrshí fēnzhōng.",
+                "text_en": "OK. About twenty minutes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Acknowledge and thank them.",
+                "options": [
+                    {"text_zh": "好的，谢谢。", "text_pinyin": "hǎo de, xièxie.", "text_en": "OK, thanks.", "score": 1.0, "register": "neutral", "feedback": "Natural and polite."},
+                    {"text_zh": "谢谢师傅。", "text_pinyin": "xièxie shīfu.", "text_en": "Thanks, driver.", "score": 1.0, "register": "familiar", "feedback": "Excellent — 师傅 (shīfu) is the friendly term for a taxi driver."},
+                    {"text_zh": "嗯。", "text_pinyin": "ēn.", "text_en": "Mm.", "score": 0.4, "register": "minimal", "feedback": "A bit cold. A 谢谢 goes a long way."}
+                ]
+            }
+        ],
+        "cultural_note": "Taxi drivers in China are often called 师傅 (shīfu, 'master'), a respectful and friendly form of address. It works for any skilled worker."
+    }
+}

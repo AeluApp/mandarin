@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 500" width="1024" height="500">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&amp;family=Source+Sans+3:wght@300;400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background: warm stone -->
+  <rect width="1024" height="500" fill="#F2EBE0"/>
+
+  <!-- Thin horizon line -->
+  <line x1="80" y1="340" x2="944" y2="340" stroke="#946070" stroke-width="0.75" opacity="0.4"/>
+
+  <!-- Second subtle horizon line, slightly below -->
+  <line x1="120" y1="348" x2="904" y2="348" stroke="#946070" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Brand character: man (漫) — large, left side -->
+  <text
+    x="200"
+    y="300"
+    font-family="'Noto Serif SC', 'Songti SC', serif"
+    font-size="260"
+    font-weight="700"
+    fill="#946070"
+    opacity="0.85"
+    text-anchor="middle"
+    dominant-baseline="central"
+  >漫</text>
+
+  <!-- App name: Mandarin -->
+  <text
+    x="580"
+    y="215"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="80"
+    font-weight="700"
+    fill="#2A3650"
+    text-anchor="middle"
+    letter-spacing="2"
+  >Mandarin</text>
+
+  <!-- Tagline: Patient Chinese Study -->
+  <text
+    x="580"
+    y="270"
+    font-family="'Source Sans 3', 'Helvetica Neue', sans-serif"
+    font-size="24"
+    font-weight="300"
+    fill="#2A3650"
+    text-anchor="middle"
+    letter-spacing="3"
+    opacity="0.7"
+  >Patient Chinese Study</text>
+
+  <!-- Small decorative dot on the horizon line -->
+  <circle cx="512" cy="340" r="3" fill="#946070" opacity="0.5"/>
+
+</svg>

@@ -1,0 +1,45 @@
+{
+    "title": "Taking the bus",
+    "title_zh": "坐公交车",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You're at a bus stop and need to get to the train station. You ask someone waiting nearby.",
+        "setup_zh": "你在公交车站，想去火车站。你问旁边等车的人。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，你也在等车吗？",
+                "text_pinyin": "nǐ hǎo, nǐ yě zài děng chē ma?",
+                "text_en": "Hello, are you also waiting for the bus?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask which bus goes to the train station.",
+                "options": [
+                    {"text_zh": "你好，请问去火车站坐几路车？", "text_pinyin": "nǐ hǎo, qǐngwèn qù huǒchē zhàn zuò jǐ lù chē?", "text_en": "Hello, which bus number goes to the train station?", "score": 1.0, "register": "neutral", "feedback": "Perfect — 几路车 is exactly how you ask about bus numbers in Chinese."},
+                    {"text_zh": "对，我想去火车站，怎么走？", "text_pinyin": "duì, wǒ xiǎng qù huǒchē zhàn, zěnme zǒu?", "text_en": "Yes, I want to go to the train station, how do I get there?", "score": 0.7, "register": "casual", "feedback": "怎么走 works for walking directions — 坐几路车 is more specific for bus inquiries."},
+                    {"text_zh": "我不知道坐哪个车去火车站。", "text_pinyin": "wǒ bù zhīdào zuò nǎ ge chē qù huǒchē zhàn.", "text_en": "I don't know which bus goes to the train station.", "score": 0.5, "register": "casual", "feedback": "States your problem but doesn't ask a question — turning it into a question gets faster help."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "坐十路车，三站就到了。",
+                "text_pinyin": "zuò shí lù chē, sān zhàn jiù dào le.",
+                "text_en": "Take bus number 10, it's three stops away."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them and ask how long it takes.",
+                "options": [
+                    {"text_zh": "谢谢你！大概要多长时间？", "text_pinyin": "xièxie nǐ! dàgài yào duō cháng shíjiān?", "text_en": "Thank you! About how long does it take?", "score": 1.0, "register": "neutral", "feedback": "Natural follow-up — 大概 softens the question nicely."},
+                    {"text_zh": "好的，谢谢，车来了没有？", "text_pinyin": "hǎo de, xièxie, chē lái le méiyǒu?", "text_en": "OK thanks, has the bus come yet?", "score": 0.6, "register": "casual", "feedback": "Practical but slightly odd — you'd see the bus if it came. Asking about time is more useful."},
+                    {"text_zh": "太好了，谢谢你告诉我。", "text_pinyin": "tài hǎo le, xièxie nǐ gàosu wǒ.", "text_en": "Great, thanks for telling me.", "score": 0.7, "register": "neutral", "feedback": "Warm and grateful — a solid response even if you don't ask a follow-up."}
+                ]
+            }
+        ],
+        "cultural_note": "Chinese city buses are identified by number using 路 (lù) as a measure word — so bus 10 is 十路车. Most cities use prepaid cards (公交卡 gōngjiāo kǎ) or mobile payment. Cash is increasingly rare on Chinese buses."
+    }
+}

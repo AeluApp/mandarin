@@ -1,0 +1,60 @@
+{
+    "title": "Job performance review",
+    "title_zh": "工作绩效评估",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're in your annual performance review with your direct manager. Your work this year has been generally good, but you missed a project deadline last quarter. Your manager wants to discuss both your achievements and areas for improvement.",
+        "setup_zh": "你在和直属经理进行年度绩效评估。你今年的工作总体不错，但上个季度有一个项目延期了。经理想讨论你的成绩和需要改进的地方。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小王，先说说你今年的工作吧。总体来说，你在客户管理方面做得很出色，客户满意度提高了百分之十五。但是上个季度那个数据分析项目延期了两周，对整个团队的进度产生了影响。你自己怎么看？",
+                "text_pinyin": "xiǎo wáng, xiān shuōshuō nǐ jīnnián de gōngzuò ba. zǒngtǐ lái shuō, nǐ zài kèhù guǎnlǐ fāngmiàn zuò de hěn chūsè, kèhù mǎnyìdù tígāo le bǎifēnzhī shíwǔ. dànshì shàng gè jìdù nàge shùjù fēnxī xiàngmù yánqī le liǎng zhōu, duì zhěnggè tuánduì de jìndù chǎnshēng le yǐngxiǎng. nǐ zìjǐ zěnme kàn?",
+                "text_en": "Xiao Wang, let's start with your work this year. Overall, you've done an outstanding job in client management -- customer satisfaction improved by 15%. But last quarter's data analysis project was delayed by two weeks, which impacted the whole team's progress. How do you see it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Acknowledge both the positive feedback and the project delay. Take responsibility.",
+                "options": [
+                    {"text_zh": "谢谢您的肯定。客户管理方面，我今年确实花了很多精力去优化沟通流程，很高兴能看到满意度的提升。关于数据分析项目的延期，我承认那是我的责任。主要原因是我低估了数据清洗的工作量，没有及时向您汇报进度问题。这件事让我意识到项目管理和风险评估是我需要加强的能力。", "text_pinyin": "xièxie nín de kěndìng. kèhù guǎnlǐ fāngmiàn, wǒ jīnnián quèshí huā le hěn duō jīnglì qù yōuhuà gōutōng liúchéng, hěn gāoxìng néng kàn dào mǎnyìdù de tíshēng. guānyú shùjù fēnxī xiàngmù de yánqī, wǒ chéngrèn nà shì wǒ de zérèn. zhǔyào yuányīn shì wǒ dīgū le shùjù qīngxǐ de gōngzuòliàng, méiyǒu jíshí xiàng nín huìbào jìndù wèntí. zhè jiàn shì ràng wǒ yìshí dào xiàngmù guǎnlǐ hé fēngxiǎn pínggū shì wǒ xūyào jiāqiáng de nénglì.", "text_en": "Thank you for the recognition. In client management, I did put a lot of effort into optimizing communication processes this year, and I'm glad to see the satisfaction improvement. Regarding the data analysis project delay, I acknowledge that was my responsibility. The main reason was that I underestimated the workload for data cleaning and didn't report the progress issues to you in time. This experience made me realize that project management and risk assessment are capabilities I need to strengthen.", "score": 1.0, "register": "formal", "feedback": "Professional and mature -- accepts praise gracefully, takes full responsibility for the delay with specific reasons, and identifies the lesson learned. Using 低估, 汇报, 风险评估 shows workplace vocabulary command."},
+                    {"text_zh": "客户满意度的提升我很满意。至于那个项目延期，确实是因为数据量比预期大很多，以后我会注意的。", "text_pinyin": "kèhù mǎnyìdù de tíshēng wǒ hěn mǎnyì. zhìyú nàge xiàngmù yánqī, quèshí shì yīnwèi shùjùliàng bǐ yùqī dà hěn duō, yǐhòu wǒ huì zhùyì de.", "text_en": "I'm happy about the customer satisfaction improvement. As for the project delay, the data volume was much larger than expected -- I'll be more careful in the future.", "score": 0.5, "register": "neutral", "feedback": "Takes some responsibility but 以后我会注意 is vague. In a performance review, specifics matter -- what exactly will you do differently? Also, saying you're 满意 with your own work can sound self-congratulatory."},
+                    {"text_zh": "那个项目延期主要是因为需求一开始就没定义清楚，不完全是我的问题。", "text_pinyin": "nàge xiàngmù yánqī zhǔyào shì yīnwèi xūqiú yī kāishǐ jiù méi dìngyì qīngchǔ, bù wánquán shì wǒ de wèntí.", "text_en": "That project delay was mainly because the requirements weren't clearly defined from the start -- it wasn't entirely my fault.", "score": 0.3, "register": "neutral", "feedback": "Deflecting blame in a performance review is risky. Even if requirements were unclear, the professional move is to acknowledge what you could have done differently -- like flagging the ambiguity earlier."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "能这样反思很好。那你对明年有什么计划和目标？你希望在哪些方面有所发展？",
+                "text_pinyin": "néng zhèyàng fǎnsī hěn hǎo. nà nǐ duì míngnián yǒu shénme jìhuà hé mùbiāo? nǐ xīwàng zài nǎxiē fāngmiàn yǒu suǒ fāzhǎn?",
+                "text_en": "It's good that you can reflect like this. So what are your plans and goals for next year? What areas do you hope to develop in?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your goals for the coming year.",
+                "options": [
+                    {"text_zh": "明年我有三个主要目标。第一，继续提升客户管理的质量，争取把满意度再提高百分之五到十。第二，系统地学习项目管理的方法论，特别是时间管理和风险控制方面，希望公司能支持我参加相关的培训课程。第三，我希望能带领一个小团队独立完成一个项目，逐步培养自己的领导能力。", "text_pinyin": "míngnián wǒ yǒu sān gè zhǔyào mùbiāo. dì yī, jìxù tíshēng kèhù guǎnlǐ de zhìliàng, zhēngqǔ bǎ mǎnyìdù zài tígāo bǎifēnzhī wǔ dào shí. dì èr, xìtǒng de xuéxí xiàngmù guǎnlǐ de fāngfǎlùn, tèbié shì shíjiān guǎnlǐ hé fēngxiǎn kòngzhì fāngmiàn, xīwàng gōngsī néng zhīchí wǒ cānjiā xiāngguān de péixùn kèchéng. dì sān, wǒ xīwàng néng dàilǐng yī gè xiǎo tuánduì dúlì wánchéng yī gè xiàngmù, zhúbù péiyǎng zìjǐ de lǐngdǎo nénglì.", "text_en": "I have three main goals for next year. First, continue improving client management quality and aim to raise satisfaction another 5-10%. Second, systematically study project management methodology, especially time management and risk control -- I hope the company can support me attending relevant training courses. Third, I hope to lead a small team to independently complete a project, gradually developing my leadership abilities.", "score": 1.0, "register": "formal", "feedback": "Structured and ambitious -- three clear goals with measurable targets. Asking for company support for training shows initiative while being realistic. Expressing interest in leadership signals career growth."},
+                    {"text_zh": "我希望明年不再出现延期的情况，同时继续把客户管理做好。", "text_pinyin": "wǒ xīwàng míngnián bú zài chūxiàn yánqī de qíngkuàng, tóngshí jìxù bǎ kèhù guǎnlǐ zuò hǎo.", "text_en": "I hope there won't be any more delays next year, and I'll continue doing client management well.", "score": 0.5, "register": "neutral", "feedback": "Safe but unambitious. A performance review is your chance to articulate growth goals. Specific targets and development areas show the manager you're thinking ahead."},
+                    {"text_zh": "我还没想好，要看明年公司安排什么项目。", "text_pinyin": "wǒ hái méi xiǎng hǎo, yào kàn míngnián gōngsī ānpái shénme xiàngmù.", "text_en": "I haven't thought about it yet -- depends on what projects the company assigns next year.", "score": 0.2, "register": "casual", "feedback": "A performance review always ends with a forward-looking discussion. Coming unprepared signals lack of ambition. Even tentative goals show engagement with your career development."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这些目标很有规划性。培训的事我会跟人事部沟通。关于带团队的想法，我觉得可以先从下个季度的新项目开始，你来做项目负责人，带两三个人试试。",
+                "text_pinyin": "zhèxiē mùbiāo hěn yǒu guīhuà xìng. péixùn de shì wǒ huì gēn rénshì bù gōutōng. guānyú dài tuánduì de xiǎngfǎ, wǒ juéde kěyǐ xiān cóng xià gè jìdù de xīn xiàngmù kāishǐ, nǐ lái zuò xiàngmù fùzérén, dài liǎng sān gè rén shìshi.",
+                "text_en": "These goals are well-planned. I'll communicate with HR about the training. As for the team leadership idea, I think we can start with the new project next quarter -- you can be the project lead and try managing two or three people."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the opportunity offered by your manager.",
+                "options": [
+                    {"text_zh": "非常感谢李总的信任和支持。我一定会认真准备，提前做好项目计划和分工方案。如果过程中遇到困难，我会及时向您请教。我不会让您失望的。", "text_pinyin": "fēicháng gǎnxiè lǐ zǒng de xìnrèn hé zhīchí. wǒ yīdìng huì rènzhēn zhǔnbèi, tíqián zuò hǎo xiàngmù jìhuà hé fēngōng fāng'àn. rúguǒ guòchéng zhōng yù dào kùnnán, wǒ huì jíshí xiàng nín qǐngjiào. wǒ bú huì ràng nín shīwàng de.", "text_en": "Thank you very much for your trust and support, Manager Li. I'll prepare carefully and put together the project plan and task assignments in advance. If I encounter difficulties along the way, I'll consult you promptly. I won't let you down.", "score": 1.0, "register": "formal", "feedback": "Confident but not arrogant -- thanks the manager, commits to preparation, and keeps the communication channel open. 不会让您失望 is a strong but appropriate close."},
+                    {"text_zh": "太好了，我很期待。谢谢您给我这个机会。", "text_pinyin": "tài hǎo le, wǒ hěn qīdài. xièxie nín gěi wǒ zhège jīhuì.", "text_en": "That's great, I'm looking forward to it. Thank you for this opportunity.", "score": 0.7, "register": "formal", "feedback": "Positive and grateful. Adding a mention of how you'll prepare would show even more readiness."},
+                    {"text_zh": "好的，没问题。", "text_pinyin": "hǎo de, méi wèntí.", "text_en": "OK, no problem.", "score": 0.4, "register": "casual", "feedback": "Too casual for a significant career opportunity. Your manager just gave you a leadership chance -- respond with matching seriousness and enthusiasm."}
+                ]
+            }
+        ],
+        "cultural_note": "Performance reviews (绩效评估 jìxiào pínggū) in Chinese companies often follow a structured format: reviewing achievements, discussing shortcomings, and setting future goals. Taking responsibility (承担责任 chéngdān zérèn) for mistakes rather than deflecting is highly valued. Addressing your manager as 总 (zǒng, general manager) or their title shows respect. Asking for training (培训 péixùn) demonstrates initiative, and proposing measurable goals (可量化的目标) shows professionalism."
+    }
+}

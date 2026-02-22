@@ -1,0 +1,38 @@
+{
+  "productName": "Mandarin",
+  "identifier": "com.mandarin.desktop",
+  "version": "1.0.0",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "漫 Mandarin",
+        "width": 900,
+        "height": 700,
+        "minWidth": 400,
+        "minHeight": 500,
+        "decorations": true,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/icon.icns",
+      "icons/icon.png"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "12.0"
+    },
+    "externalBin": [
+      "binaries/mandarin-server"
+    ]
+  }
+}

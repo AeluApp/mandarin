@@ -1,0 +1,45 @@
+{
+    "title": "Job interview",
+    "title_zh": "求职面试",
+    "hsk_level": 4,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're interviewing for a position at a Chinese company. The interviewer asks about your background and strengths.",
+        "setup_zh": "你正在一家中国公司面试。面试官问你的背景和优点。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，欢迎来面试。请先简单介绍一下你自己，包括你的工作经验。",
+                "text_pinyin": "nǐ hǎo, huānyíng lái miànshì. qǐng xiān jiǎndān jièshào yīxià nǐ zìjǐ, bāokuò nǐ de gōngzuò jīngyàn.",
+                "text_en": "Hello, welcome to the interview. Please briefly introduce yourself, including your work experience."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself and your experience.",
+                "options": [
+                    {"text_zh": "您好，谢谢给我这次面试的机会。我有三年的工作经验，我的简历上写得比较详细。我觉得我的能力很适合这个职位。", "text_pinyin": "nín hǎo, xièxie gěi wǒ zhè cì miànshì de jīhuì. wǒ yǒu sān nián de gōngzuò jīngyàn, wǒ de jiǎnlì shàng xiě de bǐjiào xiángxì. wǒ juéde wǒ de nénglì hěn shìhé zhège zhíwèi.", "text_en": "Hello, thank you for giving me this interview opportunity. I have three years of work experience, which is described in detail on my resume. I believe my abilities are well suited to this position.", "score": 1.0, "register": "formal", "feedback": "Excellent — polite opening with 您好, expresses gratitude, references 简历 and 经验, and uses 适合 appropriately."},
+                    {"text_zh": "我以前做过类似的工作，经验还可以。", "text_pinyin": "wǒ yǐqián zuòguò lèisì de gōngzuò, jīngyàn hái kěyǐ.", "text_en": "I've done similar work before, my experience is okay.", "score": 0.5, "register": "neutral", "feedback": "Too vague and casual for a formal interview. Be specific about your 经验 and use 您 to show respect."},
+                    {"text_zh": "我刚毕业，没什么经验，但是我很想学习。", "text_pinyin": "wǒ gāng bìyè, méi shénme jīngyàn, dànshì wǒ hěn xiǎng xuéxí.", "text_en": "I just graduated, I don't have much experience, but I really want to learn.", "score": 0.3, "register": "neutral", "feedback": "Honest but undersells yourself. In Chinese interviews, even without much 经验, emphasize your 能力 and willingness concretely."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。你觉得你最大的优点和缺点分别是什么？",
+                "text_pinyin": "hǎo de. nǐ juéde nǐ zuì dà de yōudiǎn hé quēdiǎn fēnbié shì shénme?",
+                "text_en": "Okay. What do you think are your greatest strengths and weaknesses?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your strengths and weaknesses.",
+                "options": [
+                    {"text_zh": "我的优点是做事认真负责，善于和同事合作。我的缺点是有时候太注重细节，但我一直在努力改进。", "text_pinyin": "wǒ de yōudiǎn shì zuòshì rènzhēn fùzé, shànyú hé tóngshì hézuò. wǒ de quēdiǎn shì yǒu shíhou tài zhùzhòng xìjié, dàn wǒ yīzhí zài nǔlì gǎijìn.", "text_en": "My strength is being conscientious and responsible, and good at collaborating with colleagues. My weakness is sometimes paying too much attention to details, but I've been working to improve.", "score": 1.0, "register": "formal", "feedback": "Well-balanced answer — frames 缺点 modestly and shows self-awareness. This matches the humble tone expected in Chinese interviews."},
+                    {"text_zh": "我能力很强，什么都能做。缺点的话……我想不出来。", "text_pinyin": "wǒ nénglì hěn qiáng, shénme dōu néng zuò. quēdiǎn dehuà……wǒ xiǎng bù chūlái.", "text_en": "I'm very capable, I can do anything. As for weaknesses... I can't think of any.", "score": 0.2, "register": "casual", "feedback": "Too boastful — Chinese interview culture values 谦虚 (humility). Claiming no 缺点 comes across as lacking self-awareness."},
+                    {"text_zh": "我觉得我适合这个工作，我会努力的。", "text_pinyin": "wǒ juéde wǒ shìhé zhège gōngzuò, wǒ huì nǔlì de.", "text_en": "I think I'm suited for this job, I'll work hard.", "score": 0.5, "register": "neutral", "feedback": "Doesn't actually answer the 优点/缺点 question. Address both directly to show you understood the question."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese job interviews, humility (谦虚) is highly valued. Overstating your abilities can backfire — interviewers expect candidates to acknowledge weaknesses honestly while framing them constructively."
+    }
+}

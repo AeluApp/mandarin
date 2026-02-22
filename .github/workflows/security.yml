@@ -1,0 +1,62 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install -r requirements.txt cyclonedx-bom
+      - name: Generate SBOM
+        run: bash scripts/gen_sbom.sh sbom.json
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.json
+
+  bandit:
+    name: Bandit SAST
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Bandit
+        run: pip install bandit[toml]
+
+      - name: Run Bandit
+        run: bandit -r mandarin/ -c pyproject.toml --format json --output bandit-report.json || true
+
+      - name: Upload Bandit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit-report.json
+        if: always()
+
+      - name: Check for high-severity findings
+        run: |
+          python -c "
+          import json, sys
+          with open('bandit-report.json') as f:
+              data = json.load(f)
+          high = [r for r in data.get('results', []) if r.get('issue_severity') == 'HIGH']
+          if high:
+              for r in high:
+                  print(f\"HIGH: {r['filename']}:{r['line_number']} - {r['issue_text']}\")
+              sys.exit(1)
+          print('No HIGH severity findings.')
+          "

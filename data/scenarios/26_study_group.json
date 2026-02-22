@@ -1,0 +1,45 @@
+{
+    "title": "Study group coordination",
+    "title_zh": "学习小组",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "A classmate messages you about forming a study group for the exam next week.",
+        "setup_zh": "一个同学发消息给你，想组一个学习小组准备下周的考试。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下周就要考试了，我们一起复习好不好？",
+                "text_pinyin": "xià zhōu jiù yào kǎoshì le, wǒmen yīqǐ fùxí hǎo bù hǎo?",
+                "text_en": "The exam is next week, shall we review together?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree and suggest a time and place to study.",
+                "options": [
+                    {"text_zh": "好主意！我们明天下午在图书馆见吧？", "text_pinyin": "hǎo zhǔyi! wǒmen míngtiān xiàwǔ zài túshūguǎn jiàn ba?", "text_en": "Good idea! Shall we meet at the library tomorrow afternoon?", "score": 1.0, "register": "neutral", "feedback": "Agrees enthusiastically and offers a concrete plan — time and place make it actionable."},
+                    {"text_zh": "可以啊，你觉得在哪里复习比较好？", "text_pinyin": "kěyǐ a, nǐ juéde zài nǎlǐ fùxí bǐjiào hǎo?", "text_en": "Sure, where do you think is a good place to study?", "score": 0.7, "register": "neutral", "feedback": "Agrees and solicits input — collaborative but could be more decisive."},
+                    {"text_zh": "我也想复习，但是我时间不太多。", "text_pinyin": "wǒ yě xiǎng fùxí, dànshì wǒ shíjiān bú tài duō.", "text_en": "I want to review too, but I don't have much time.", "score": 0.5, "register": "neutral", "feedback": "Sounds hesitant — if you want to join, committing to a specific time works better than hedging."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "图书馆好。你觉得我们应该先复习哪个部分？",
+                "text_pinyin": "túshūguǎn hǎo. nǐ juéde wǒmen yīnggāi xiān fùxí nǎ ge bùfen?",
+                "text_en": "The library sounds good. Which part do you think we should review first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest starting with the part you find hardest.",
+                "options": [
+                    {"text_zh": "我觉得先复习语法吧，那个部分我不太懂。", "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.", "text_en": "I think we should start with grammar, I don't really understand that part.", "score": 1.0, "register": "neutral", "feedback": "Honest about weak areas — good study groups tackle difficult topics first."},
+                    {"text_zh": "先看看生词吧，生词多记一些比较好。", "text_pinyin": "xiān kànkan shēngcí ba, shēngcí duō jì yīxiē bǐjiào hǎo.", "text_en": "Let's look at vocabulary first, it's better to memorize more words.", "score": 0.7, "register": "neutral", "feedback": "Reasonable approach — vocabulary is always useful, though grammar is harder to study alone."},
+                    {"text_zh": "都行，你说吧，我听你安排就好。", "text_pinyin": "dōu xíng, nǐ shuō ba, wǒ tīng nǐ ānpái jiù hǎo.", "text_en": "Whatever works, you decide, I'll follow your arrangement.", "score": 0.5, "register": "neutral", "feedback": "Too passive — they asked for your input because group study works best when everyone contributes."}
+                ]
+            }
+        ],
+        "cultural_note": "Study groups (学习小组 xuéxí xiǎozǔ) are extremely common in Chinese education culture. There's a strong tradition of collaborative learning, and it's normal for classmates to feel a shared responsibility for each other's success. Saying 我不太懂 (I don't really understand) is not embarrassing in this context — it shows trust."
+    }
+}

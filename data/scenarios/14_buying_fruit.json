@@ -1,0 +1,45 @@
+{
+    "title": "Buying fruit at a stall",
+    "title_zh": "买水果",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+        "setup": "You're at a street fruit stall and want to buy some apples.",
+        "setup_zh": "你在一个街边水果摊，想买一些苹果。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，想买什么水果？",
+                "text_pinyin": "nǐ hǎo, xiǎng mǎi shénme shuǐguǒ?",
+                "text_en": "Hello, what fruit would you like to buy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for apples and how much they cost.",
+                "options": [
+                    {"text_zh": "苹果怎么卖？我想买一些。", "text_pinyin": "píngguǒ zěnme mài? wǒ xiǎng mǎi yīxiē.", "text_en": "How much are the apples? I'd like to buy some.", "score": 1.0, "register": "neutral", "feedback": "怎么卖 is the natural way to ask about price at a market stall."},
+                    {"text_zh": "我想买苹果，多少钱一斤？", "text_pinyin": "wǒ xiǎng mǎi píngguǒ, duōshao qián yī jīn?", "text_en": "I want to buy apples, how much per jin?", "score": 0.8, "register": "neutral", "feedback": "Also natural — asking per 斤 shows you know the unit. Both approaches work well."},
+                    {"text_zh": "这个苹果好不好吃啊？", "text_pinyin": "zhè ge píngguǒ hǎo bù hǎo chī a?", "text_en": "Are these apples tasty?", "score": 0.5, "register": "casual", "feedback": "A reasonable question but doesn't get to the purchase — ask price to move things along."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "苹果五块钱一斤，很甜的。",
+                "text_pinyin": "píngguǒ wǔ kuài qián yī jīn, hěn tián de.",
+                "text_en": "Apples are five yuan per jin, very sweet."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say you want to buy two jin of apples.",
+                "options": [
+                    {"text_zh": "好的，给我来两斤吧。", "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.", "text_en": "OK, give me two jin please.", "score": 1.0, "register": "casual", "feedback": "来两斤 is the natural market phrasing — sounds like a regular customer."},
+                    {"text_zh": "我要两斤苹果，谢谢你。", "text_pinyin": "wǒ yào liǎng jīn píngguǒ, xièxie nǐ.", "text_en": "I want two jin of apples, thank you.", "score": 0.7, "register": "neutral", "feedback": "Clear and polite, though 来两斤 is more natural at a stall than 我要."},
+                    {"text_zh": "两斤可以，能便宜一点吗？", "text_pinyin": "liǎng jīn kěyǐ, néng piányi yīdiǎn ma?", "text_en": "Two jin is fine, can it be a bit cheaper?", "score": 0.6, "register": "casual", "feedback": "Bargaining is common at stalls, but at 5 yuan per jin it's already cheap — might seem unnecessary."}
+                ]
+            }
+        ],
+        "cultural_note": "At Chinese fruit stalls, weight is measured in 斤 (jīn), which equals 500 grams (about 1.1 pounds). Saying 怎么卖 (zěnme mài, 'how do you sell it?') is the standard way to ask prices at markets — more natural than 多少钱 in this setting."
+    }
+}

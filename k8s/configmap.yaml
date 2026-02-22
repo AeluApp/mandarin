@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mandarin-config
+data:
+  IS_PRODUCTION: "true"
+  DATA_DIR: "/data"
+  DATABASE_PATH: "/data/mandarin.db"
+  PRIMARY_REGION: "ewr"
+  LOG_LEVEL: "info"
+  litestream.yml: |
+    dbs:
+      - path: /data/mandarin.db
+        replicas:
+          - type: s3
+            bucket: mandarin-backups
+            path: litestream/mandarin
+            region: us-east-1

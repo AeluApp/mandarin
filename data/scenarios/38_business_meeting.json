@@ -1,0 +1,45 @@
+{
+    "title": "Business meeting",
+    "title_zh": "商务会议",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're presenting a new project proposal at a company meeting. Your manager asks about the budget and expected results.",
+        "setup_zh": "你在公司会议上提出一个新项目方案。经理问你关于预算和预期效果的问题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好，请你介绍一下这个方案的具体内容，特别是预算和目标。",
+                "text_pinyin": "hǎo, qǐng nǐ jièshào yīxià zhège fāng'àn de jùtǐ nèiróng, tèbié shì yùsuàn hé mùbiāo.",
+                "text_en": "Okay, please introduce the specifics of this proposal, especially the budget and objectives."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your proposal's budget and goals.",
+                "options": [
+                    {"text_zh": "这个方案的目标是提高我们产品的市场竞争力。预算大约需要五十万，主要用于研发和推广。我们预计三个月内能看到明显的进展。", "text_pinyin": "zhège fāng'àn de mùbiāo shì tígāo wǒmen chǎnpǐn de shìchǎng jìngzhēnglì. yùsuàn dàyuē xūyào wǔshí wàn, zhǔyào yòngyú yánfā hé tuīguǎng. wǒmen yùjì sān gè yuè nèi néng kàn dào míngxiǎn de jìnzhǎn.", "text_en": "The goal of this proposal is to improve our product's market competitiveness. The budget requires approximately 500,000, mainly for R&D and promotion. We expect to see clear progress within three months.", "score": 1.0, "register": "formal", "feedback": "Comprehensive — covers 目标, 预算, and 进展 timeline. Uses 竞争力 and 方案 precisely."},
+                    {"text_zh": "预算还没有完全确定，但是目标是增加销售量。我们会尽快给出详细数据。", "text_pinyin": "yùsuàn hái méiyǒu wánquán quèdìng, dànshì mùbiāo shì zēngjiā xiāoshòuliàng. wǒmen huì jǐnkuài gěi chū xiángxì shùjù.", "text_en": "The budget hasn't been fully determined yet, but the goal is to increase sales volume. We'll provide detailed data as soon as possible.", "score": 0.5, "register": "formal", "feedback": "Vague on 预算 — in a formal meeting, having specific numbers ready is critical. The 目标 also needs more detail."},
+                    {"text_zh": "这个项目花不了多少钱，效果应该不错。", "text_pinyin": "zhège xiàngmù huā bù liǎo duōshǎo qián, xiàoguǒ yīnggāi búcuò.", "text_en": "This project won't cost much, and the results should be pretty good.", "score": 0.2, "register": "casual", "feedback": "Far too casual for a business 会议. A 方案 presentation needs specific 预算 figures, clear 目标, and a 进展 timeline."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "预算方面我们需要再讨论。不过你认为这个方案和竞争对手相比，我们的优势在哪里？",
+                "text_pinyin": "yùsuàn fāngmiàn wǒmen xūyào zài tǎolùn. búguò nǐ rènwéi zhège fāng'àn hé jìngzhēng duìshǒu xiāngbǐ, wǒmen de yōushì zài nǎlǐ?",
+                "text_en": "We need to discuss the budget further. But compared to our competitors, where do you think our advantage lies with this proposal?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your competitive advantage.",
+                "options": [
+                    {"text_zh": "我们的优势在于团队的合作效率很高，而且我们已经有了一定的市场基础。如果能抓住这次机会，我相信通过合作我们可以超过竞争对手。", "text_pinyin": "wǒmen de yōushì zàiyú tuánduì de hézuò xiàolǜ hěn gāo, érqiě wǒmen yǐjīng yǒu le yīdìng de shìchǎng jīchǔ. rúguǒ néng zhuāzhù zhè cì jīhuì, wǒ xiāngxìn tōngguò hézuò wǒmen kěyǐ chāoguò jìngzhēng duìshǒu.", "text_en": "Our advantage is that our team's collaboration efficiency is very high, and we already have a certain market foundation. If we can seize this opportunity, I believe through cooperation we can surpass our competitors.", "score": 1.0, "register": "formal", "feedback": "Strong — identifies specific advantages (效率, market base) and uses 合作 and 竞争 naturally in a strategic context."},
+                    {"text_zh": "我们的产品质量比较好，客户应该会喜欢。", "text_pinyin": "wǒmen de chǎnpǐn zhìliàng bǐjiào hǎo, kèhù yīnggāi huì xǐhuān.", "text_en": "Our product quality is relatively good, customers should like it.", "score": 0.5, "register": "neutral", "feedback": "Too general — 比较好 is weak in a formal setting. Specify what makes your 效率 or 合作 model superior to the 竞争 landscape."},
+                    {"text_zh": "我觉得我们应该没什么问题。", "text_pinyin": "wǒ juéde wǒmen yīnggāi méi shénme wèntí.", "text_en": "I think we shouldn't have any problems.", "score": 0.2, "register": "casual", "feedback": "Doesn't address the question at all. In a business 会议, you need to articulate specific competitive advantages with data or reasoning."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese business meetings, proposals should be presented with clear structure: 目标 (objectives), 预算 (budget), and 进展 (progress timeline). Being overly vague signals poor preparation, while being too assertive without data can undermine credibility."
+    }
+}

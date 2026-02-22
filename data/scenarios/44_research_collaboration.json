@@ -1,0 +1,45 @@
+{
+    "title": "Research collaboration",
+    "title_zh": "学术合作",
+    "hsk_level": 7,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.85,
+    "tree": {
+        "setup": "You are a visiting scholar at a Chinese university. You are meeting with Professor Chen to propose a joint research project on computational linguistics. You need to present your idea persuasively while respecting academic hierarchy.",
+        "setup_zh": "你是一所中国大学的访问学者。你正在与陈教授会面，提议一个关于计算语言学的联合研究项目。你需要有说服力地陈述你的想法，同时尊重学术等级。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎你来我们实验室。听说你在自然语言处理领域有一些独到的见解。我对跨学科的合作一向持开放态度，但也想先听听你的具体构想，看看我们的研究方向是否具有互补性。",
+                "text_pinyin": "huānyíng nǐ lái wǒmen shíyànshì. tīngshuō nǐ zài zìrán yǔyán chǔlǐ lǐngyù yǒu yīxiē dúdào de jiànjiě. wǒ duì kuà xuékē de hézuò yīxiàng chí kāifàng tàidù, dàn yě xiǎng xiān tīngtīng nǐ de jùtǐ gòuxiǎng, kànkàn wǒmen de yánjiū fāngxiàng shìfǒu jùyǒu hùbǔ xìng.",
+                "text_en": "Welcome to our lab. I've heard you have some unique insights in the field of natural language processing. I've always been open to interdisciplinary collaboration, but I'd like to first hear your specific vision and see whether our research directions are complementary."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your research proposal and explain how the collaboration would benefit both sides.",
+                "options": [
+                    {"text_zh": "陈教授，非常感谢您百忙之中抽出时间。我的构想是将贵团队在古汉语语料库方面的深厚积淀与我们在深度学习模型上的技术优势相结合，探索一套能够自动标注和解析文言文句法结构的系统。这一课题既具有学术前沿性，也能为数字人文领域提供切实可行的工具。如果您感兴趣，我可以进一步阐述技术路径和预期成果。", "text_pinyin": "chén jiàoshòu, fēicháng gǎnxiè nín bǎimáng zhī zhōng chōuchū shíjiān. wǒ de gòuxiǎng shì jiāng guì tuánduì zài gǔ hànyǔ yǔliàokù fāngmiàn de shēnhòu jīdiàn yǔ wǒmen zài shēndù xuéxí móxíng shàng de jìshù yōushì xiāng jiéhé, tànsuǒ yī tào nénggòu zìdòng biāozhù hé jiěxī wényánwén jùfǎ jiégòu de xìtǒng. zhè yī kètí jì jùyǒu xuéshù qiányán xìng, yě néng wèi shùzì rénwén lǐngyù tígōng qièshí kěxíng de gōngjù. rúguǒ nín gǎn xìngqù, wǒ kěyǐ jìnyībù chǎnshù jìshù lùjìng hé yùqī chéngguǒ.", "text_en": "Professor Chen, thank you so much for taking time out of your busy schedule. My vision is to combine your team's deep expertise in classical Chinese corpora with our technical strengths in deep learning models, to explore a system that can automatically annotate and parse the syntactic structures of classical Chinese. This topic is both academically cutting-edge and can provide practical tools for the digital humanities field. If you're interested, I can further elaborate on the technical pathway and expected outcomes.", "score": 1.0, "register": "formal", "feedback": "Excellent — uses 构想, 积淀, 前沿性, 切实可行 with scholarly precision. Acknowledges the professor's strengths first (贵团队的深厚积淀), frames mutual benefit, and offers to elaborate rather than presuming agreement. This respects academic hierarchy perfectly."},
+                    {"text_zh": "我想做一个自然语言处理的项目，用AI来分析古代文本。你们实验室有很多语料数据，我们可以一起做这个课题。", "text_pinyin": "wǒ xiǎng zuò yī gè zìrán yǔyán chǔlǐ de xiàngmù, yòng AI lái fēnxī gǔdài wénběn. nǐmen shíyànshì yǒu hěn duō yǔliào shùjù, wǒmen kěyǐ yīqǐ zuò zhège kètí.", "text_en": "I want to do an NLP project using AI to analyze ancient texts. Your lab has a lot of corpus data, so we can work on this topic together.", "score": 0.5, "register": "neutral", "feedback": "Too casual for an academic proposal to a senior professor. Uses 你们 instead of more respectful 贵团队. Lacks scholarly vocabulary — 构想, 积淀, 互补性 are expected at this level. Also frames it as what you want rather than mutual benefit."},
+                    {"text_zh": "我觉得AI很有前途，我们可以试试合作。具体做什么我还没完全想好，但是方向应该差不多。", "text_pinyin": "wǒ juéde AI hěn yǒu qiántú, wǒmen kěyǐ shìshì hézuò. jùtǐ zuò shénme wǒ hái méi wánquán xiǎnghǎo, dànshì fāngxiàng yīnggāi chàbùduō.", "text_en": "I think AI has a bright future, we can try collaborating. I haven't fully figured out the specifics, but the direction should be about right.", "score": 0.2, "register": "casual", "feedback": "Vague and unprepared — a professor who asked about your 具体构想 will lose confidence immediately. In Chinese academia, a proposal meeting requires a clearly articulated 课题 with defined 技术路径. Saying 还没想好 wastes the professor's time and damages credibility."}
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你提到的方向确实与我们近年来的研究重心有所契合。不过我有一个顾虑：跨机构合作在知识产权归属和经费分担方面往往比较复杂。你对这些问题有何考量？",
+                "text_pinyin": "nǐ tídào de fāngxiàng quèshí yǔ wǒmen jìnnián lái de yánjiū zhòngxīn yǒusuǒ qìhé. búguò wǒ yǒu yī gè gùlǜ: kuà jīgòu hézuò zài zhīshì chǎnquán guīshǔ hé jīngfèi fēndān fāngmiàn wǎngwǎng bǐjiào fùzá. nǐ duì zhèxiē wèntí yǒu hé kǎoliáng?",
+                "text_en": "The direction you mentioned does align with our recent research focus. However, I have a concern: cross-institutional collaboration is often complicated regarding intellectual property ownership and funding allocation. What are your thoughts on these issues?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the professor's concerns about IP and funding for the joint project.",
+                "options": [
+                    {"text_zh": "这确实是跨机构合作中不可回避的核心问题。我的初步设想是采取共同署名、成果共享的原则——凡涉及语料库标注的成果，以贵团队为第一完成单位；涉及算法模型的部分，则以我方为主。至于经费方面，我已初步了解到国家社科基金有一个数字人文的专项，我们可以联合申报。当然，这些细节都可以在正式签署合作协议之前充分协商。", "text_pinyin": "zhè quèshí shì kuà jīgòu hézuò zhōng bùkě huíbì de héxīn wèntí. wǒ de chūbù shèxiǎng shì cǎiqǔ gòngtóng shǔmíng, chéngguǒ gòngxiǎng de yuánzé — fán shèjí yǔliàokù biāozhù de chéngguǒ, yǐ guì tuánduì wéi dì yī wánchéng dānwèi; shèjí suànfǎ móxíng de bùfèn, zé yǐ wǒ fāng wéi zhǔ. zhìyú jīngfèi fāngmiàn, wǒ yǐ chūbù liǎojiě dào guójiā shèkē jījīn yǒu yī gè shùzì rénwén de zhuānxiàng, wǒmen kěyǐ liánhé shēnbào. dāngrán, zhèxiē xìjié dōu kěyǐ zài zhèngshì qiānshǔ hézuò xiéyì zhīqián chōngfèn xiéshāng.", "text_en": "This is indeed a core issue that cannot be avoided in cross-institutional collaboration. My preliminary idea is to adopt principles of joint authorship and shared outcomes — for results involving corpus annotation, your team would be the primary institution; for the algorithm model components, our side would take the lead. As for funding, I've done preliminary research and found that the National Social Science Fund has a special program for digital humanities, which we could jointly apply for. Of course, all these details can be fully negotiated before formally signing a cooperation agreement.", "score": 1.0, "register": "formal", "feedback": "Outstanding — addresses 知识产权归属 and 经费分担 with concrete proposals. Giving the professor's team first authorship on their domain shows respect for 学术贡献. Mentioning 国家社科基金 demonstrates preparation. The closing 充分协商 leaves room for the professor's input without appearing rigid."},
+                    {"text_zh": "知识产权的问题我们可以之后再谈。先把研究做起来，成果出来以后再分配也不迟。经费的话，我这边可以想想办法。", "text_pinyin": "zhīshì chǎnquán de wèntí wǒmen kěyǐ zhīhòu zài tán. xiān bǎ yánjiū zuò qǐlái, chéngguǒ chūlái yǐhòu zài fēnpèi yě bù chí. jīngfèi dehuà, wǒ zhèbiān kěyǐ xiǎngxiǎng bànfǎ.", "text_en": "We can discuss the IP issue later. Let's start the research first, and it won't be too late to allocate results afterwards. As for funding, I can figure something out on my end.", "score": 0.5, "register": "neutral", "feedback": "Avoids the professor's explicit concern. In Chinese academic culture, a senior scholar raising 知识产权 is signaling it must be addressed before proceeding. Deferring it suggests either naivety or evasiveness. Provide at least a 初步设想 to show you take the concern seriously."},
+                    {"text_zh": "这些行政上的事情比较麻烦，我不太擅长处理。能不能请您这边帮忙安排一下？", "text_pinyin": "zhèxiē xíngzhèng shàng de shìqíng bǐjiào máfan, wǒ bú tài shàncháng chǔlǐ. néng bù néng qǐng nín zhèbiān bāngmáng ānpái yīxià?", "text_en": "These administrative matters are quite troublesome, I'm not very good at handling them. Could you help arrange things on your end?", "score": 0.3, "register": "neutral", "feedback": "Abdicating responsibility for core collaboration terms is a serious misstep. A professor expects a collaborator, not someone who pushes 行政 burdens onto them. Intellectual property and funding are not trivial administrative details — they are foundational to any 合作协议."}
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese academia, proposing collaboration with a senior professor requires demonstrating thorough preparation (充分准备) and respect for hierarchy. Always acknowledge the other party's expertise first, frame proposals as mutually beneficial (互惠互利), and address practical concerns like IP and funding proactively. Using 贵团队 instead of 你们 signals appropriate deference in scholarly contexts."
+    }
+}

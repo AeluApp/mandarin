@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Mandarin | What's New</title>
+  <meta name="description" content="See what's new in Mandarin. Recent features, enhancements, fixes, and content updates for the adaptive Chinese learning app.">
+  <link rel="canonical" href="https://mandarinapp.com/changelog">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Changelog — Mandarin | What's New">
+  <meta property="og:description" content="Recent features, enhancements, and fixes for Mandarin, the adaptive Chinese learning app.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mandarinapp.com/changelog">
+  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Changelog — Mandarin | What's New">
+  <meta name="twitter:description" content="Recent features, enhancements, and fixes for Mandarin.">
+  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    section {
+      padding: var(--space-8) 0;
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--color-text);
+    }
+
+    /* -- Hero -- */
+    .hero {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-6);
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-text-faint);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* -- Changelog entries -- */
+    .changelog {
+      padding-top: 0;
+    }
+
+    .changelog-entry {
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-4) 0;
+    }
+
+    .changelog-entry:last-child {
+      border-bottom: none;
+    }
+
+    .changelog-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-2);
+    }
+
+    .changelog-date {
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      min-width: 5.5rem;
+    }
+
+    .changelog-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      line-height: 1.5;
+    }
+
+    .badge-feature {
+      background: color-mix(in srgb, var(--color-accent) 15%, var(--color-base));
+      color: var(--color-accent);
+    }
+
+    .badge-enhancement {
+      background: color-mix(in srgb, var(--color-secondary) 15%, var(--color-base));
+      color: var(--color-secondary);
+    }
+
+    .badge-fix {
+      background: color-mix(in srgb, var(--color-text-faint) 15%, var(--color-base));
+      color: var(--color-text-faint);
+    }
+
+    .badge-content {
+      background: color-mix(in srgb, var(--color-accent) 15%, var(--color-base));
+      color: var(--color-accent);
+    }
+
+    .changelog-entry h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .changelog-entry p {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      line-height: 1.6;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .nav-links { gap: var(--space-3); }
+      .changelog-meta { flex-wrap: wrap; gap: var(--space-2); }
+    }
+
+    /* -- Animation -- */
+    @keyframes drift-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero-sub {
+      animation: drift-up 0.6s ease-out both;
+    }
+    .hero-sub { animation-delay: 0.1s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero h1, .hero-sub {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand">Mandarin</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/partners">Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Changelog</h1>
+      <p class="hero-sub">What's new in Mandarin. Features, improvements, and fixes in reverse chronological order.</p>
+    </div>
+  </section>
+
+  <!-- Changelog -->
+  <section class="changelog">
+    <div class="container">
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-feature">New Feature</span>
+        </div>
+        <h3>Web interface launched</h3>
+        <p>Full web UI with Flask and WebSocket. The Civic Sanctuary aesthetic -- warm stone, dusty rose, sage -- with automatic dark mode via prefers-color-scheme. Web Audio API for session start and completion sounds. Desktop and mobile responsive.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-feature">New Feature</span>
+        </div>
+        <h3>Speaking drills with tone grading</h3>
+        <p>Record yourself saying a word or phrase and get instant feedback on tone accuracy. Uses macOS TTS for reference audio and grades your recording against the target tone pattern. Available in all sessions where tone practice is scheduled.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-feature">New Feature</span>
+        </div>
+        <h3>Context notes for all vocabulary</h3>
+        <p>Every vocabulary item now includes usage notes, collocations, register information, and common mistakes. 299 context notes across HSK 1-3, so you learn how a word is actually used -- not just what it means in a dictionary.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-enhancement">Enhancement</span>
+        </div>
+        <h3>Adaptive day profiles</h3>
+        <p>Sessions now adjust to your available time and energy. A 10-minute evening session focuses differently than a 30-minute weekend session. The system detects your patterns and optimizes drill selection accordingly.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-enhancement">Enhancement</span>
+        </div>
+        <h3>Interleaving enforcement</h3>
+        <p>Drill types are now mixed within sessions by default. Instead of blocked practice (all tone drills, then all cloze drills), the system interleaves types to produce stronger retention. Based on research showing interleaved practice outperforms blocked practice for long-term recall.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-content">Content</span>
+        </div>
+        <h3>HSK 7-9 support added</h3>
+        <p>The system now supports HSK 7-9 vocabulary and drill scheduling. Content seeding is underway. This prepares for the HSK 3.0 standard arriving in July 2026, including the new mandatory speaking component.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-content">Content</span>
+        </div>
+        <h3>8 dialogue scenarios</h3>
+        <p>Practice with realistic dialogue situations: ordering food, giving directions, making plans, and more. Functional conversation patterns you will actually use, not textbook conversations nobody has.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-enhancement">Enhancement</span>
+        </div>
+        <h3>HSK projection with multi-criteria confidence</h3>
+        <p>HSK readiness projections now factor in vocabulary, listening, reading, and tone accuracy independently. Instead of one optimistic date, you get a grounded estimate based on your demonstrated pace across all tracked skills, with confidence intervals.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-enhancement">Enhancement</span>
+        </div>
+        <h3>Streak counter and momentum indicator</h3>
+        <p>Daily study streak is now tracked and visible on the dashboard. The momentum indicator shows your consistency trend without guilt mechanics -- no notifications, no shame. Just data about your practice pattern.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-feature">New Feature</span>
+        </div>
+        <h3>Focus command</h3>
+        <p>A new CLI command that lets you target specific weak areas. Tell the system to focus on tones, listening, or a specific HSK level, and it adjusts your next sessions accordingly. All proposals are executable directly from the diagnostics view.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-content">Content</span>
+        </div>
+        <h3>134 auto-tagged vocabulary items</h3>
+        <p>Vocabulary items now carry automatic tags for register, frequency, and common confusion pairs. The system uses these tags to schedule register-aware and pragmatic drills, so you learn not just what words mean but when and how to use them.</p>
+      </article>
+
+      <article class="changelog-entry">
+        <div class="changelog-meta">
+          <time class="changelog-date" datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="changelog-badge badge-fix">Fix</span>
+        </div>
+        <h3>Scaffolded N flow narrowed to 2</h3>
+        <p>Fixed an issue where the scaffolding system for new items was introducing too many new words per session. Now narrowed to 2 new items at a time, which prevents overwhelm and aligns with research on working memory limits during acquisition.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+    </div>
+  </footer>
+
+</body>
+</html>

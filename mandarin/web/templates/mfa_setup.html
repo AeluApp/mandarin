@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Up Two-Factor Authentication — Mandarin</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-mark" aria-hidden="true">漫</div>
+        <div class="logo-text">Mandarin</div>
+      </div>
+
+      <p class="auth-mfa-prompt">Set up two-factor authentication via your Settings page in the app.</p>
+
+      <div class="auth-links">
+        <p><a href="{{ url_for('index') }}">Back to app</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
