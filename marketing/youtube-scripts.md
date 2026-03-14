@@ -226,7 +226,7 @@ The old test let you pass without saying a word. The new one won't.
 ### Long 1: "How I Built a Chinese Learning App as a Solo Developer" (8-10 min)
 - **Intro** (1 min): Origin story — learning Mandarin, frustrated with existing tools
 - **The problem** (2 min): What existing apps get wrong (gamification over learning, no reading/listening integration, no honest diagnostics)
-- **The solution** (3 min): The cleanup loop concept, demo of reading → lookup → drill flow, show the 27 drill types, adaptive scheduling explanation
+- **The solution** (3 min): The cleanup loop concept, demo of reading → lookup → drill flow, show the 44 drill types, adaptive scheduling explanation
 - **Tech choices** (2 min): Python, SQLite, Flask. Why boring tech. Zero AI at runtime.
 - **What I learned** (2 min): Content is the product, not features. Consistency beats intensity. Honest data changes behavior.
 - **Try it** (30 sec): Free for HSK 1-2. Link in description.

@@ -23,7 +23,7 @@ Product Hunt is the single highest-ROI launch event for indie dev tools. A top-5
 
 **3. Prepare assets**
 - **Tagline** (60 chars max): `Adaptive Chinese drills that learn what you struggle with`
-- **Description** (260 chars): `27 drill types that adapt to your weak spots. Read real Chinese with instant glosses — every word you look up becomes your next drill. HSK 1-6 aligned. Built by a learner, not a corporation.`
+- **Description** (260 chars): `44 drill types that adapt to your weak spots. Read real Chinese with instant glosses — every word you look up becomes your next drill. HSK 1-6 aligned. Built by a learner, not a corporation.`
 - **First comment** (you post this immediately after launch — see below)
 - **Gallery images** (1270x760px):
   1. Hero shot: app dashboard with a reading passage open
@@ -49,7 +49,7 @@ The core idea is the "cleanup loop":
 2. Tap any word you don't know
 3. Your next drill session focuses on those exact words
 
-The system has 27 drill types (not just flashcards), adapts to your weak spots, and tracks your readiness across listening, reading, speaking, and tone accuracy.
+The system has 44 drill types (not just flashcards), adapts to your weak spots, and tracks your readiness across listening, reading, speaking, and tone accuracy.
 
 Some things I'm proud of:
 - Zero AI tokens at runtime — everything is deterministic and instant
@@ -108,7 +108,7 @@ HN "Show HN" posts get seen by technical builders who respect craft. Your "solo 
 
 ### The Post
 
-**Title**: `Show HN: Aelu – An adaptive Chinese learning app with 27 drill types and zero AI`
+**Title**: `Show HN: Aelu – An adaptive Chinese learning app with 44 drill types and zero AI`
 
 **Body** (keep it short — HN readers click first, read second):
 ```
@@ -118,7 +118,7 @@ I'm learning Mandarin and built Aelu around a concept I call the "cleanup loop":
 2. Tap any word you don't know
 3. Your next drill session prioritizes those exact words
 
-The system has 27 drill types across reading, listening, speaking, and tone accuracy. It adapts to what you get wrong and adjusts session difficulty.
+The system has 44 drill types across reading, listening, speaking, and tone accuracy. It adapts to what you get wrong and adjusts session difficulty.
 
 Tech: Python, Flask, SQLite. No AI API calls at runtime — all scheduling and scoring is deterministic. The adaptive algorithm uses modified FSRS with bayesian confidence dampening and interleaving enforcement.
 

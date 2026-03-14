@@ -42,7 +42,7 @@ Last updated: 2026-02-17
 
 **What would make them switch:** An app that keeps the SRS rigor (we use FSRS, the same algorithm family) but removes the deck-management overhead, adds multiple drill types beyond flashcards, and provides skill-level diagnostics. They will not switch to anything that feels dumbed down. They need to see the algorithm is serious. "Modified FSRS with bayesian confidence dampening" is a selling point for this audience specifically.
 
-**Switching trigger:** They see the 27 drill types, recognize the FSRS lineage, and realize they can get Anki-quality scheduling without building their own curriculum.
+**Switching trigger:** They see the 44 drill types, recognize the FSRS lineage, and realize they can get Anki-quality scheduling without building their own curriculum.
 
 ### Tertiary: Heritage speakers filling gaps
 
@@ -74,7 +74,7 @@ Supporting statements:
 
 1. **The cleanup loop closes the study-to-reality gap.** When you read Chinese and tap a word you don't recognize, that word enters your drill queue automatically. You are never drilling random vocabulary — you are drilling the specific words you actually encountered and didn't know.
 
-2. **27 drill types train the skill you're weakest at, not just the skill that's easiest to test.** Recognition, production, listening discrimination, tone accuracy, cloze comprehension, register awareness, sentence construction. The system knows which skills lag and shifts your practice mix accordingly.
+2. **44 drill types train the skill you're weakest at, not just the skill that's easiest to test.** Recognition, production, listening discrimination, tone accuracy, cloze comprehension, register awareness, sentence construction. The system knows which skills lag and shifts your practice mix accordingly.
 
 3. **Honest diagnostics tell you where you actually stand.** Per-skill HSK projection, multi-criteria readiness assessment, and specific weakness identification. No green progress bars that make you feel good while hiding real gaps.
 
@@ -82,7 +82,7 @@ Supporting statements:
 
 ## Positioning Statement (classic format)
 
-For **self-study adults working through HSK levels**, who **are frustrated by the gap between studying vocabulary and actually using Chinese**, Aelu is an **adaptive drilling and reading system** that **turns real reading encounters into targeted, multi-skill practice**. Unlike **flashcard apps that only test recognition** or **gamified apps that optimize for engagement over retention**, Mandarin **closes the loop between what you read and what you drill, across 27 drill types, with honest diagnostics that show exactly where your skills stand**.
+For **self-study adults working through HSK levels**, who **are frustrated by the gap between studying vocabulary and actually using Chinese**, Aelu is an **adaptive drilling and reading system** that **turns real reading encounters into targeted, multi-skill practice**. Unlike **flashcard apps that only test recognition** or **gamified apps that optimize for engagement over retention**, Mandarin **closes the loop between what you read and what you drill, across 44 drill types, with honest diagnostics that show exactly where your skills stand**.
 
 ---
 
@@ -115,7 +115,7 @@ For **self-study adults working through HSK levels**, who **are frustrated by th
 
 **How it shows up in copy:**
 - "The system knows your tones are behind your vocabulary. Tomorrow's session adjusts."
-- "27 drill types, and the system picks the right one."
+- "44 drill types, and the system picks the right one."
 - Never use: "AI-powered", "smart algorithm" (too vague), "personalized journey"
 
 ### 3. The Closed Loop
@@ -163,7 +163,7 @@ This is the message that should appear, in some form, on the landing page hero, 
 
 | Message | Primary audience |
 |---------|-----------------|
-| **27 drill types train every skill, not just recognition.** Listening, speaking, tones, cloze, register, sentence construction — the system picks what you need. | Anki users, self-study adults |
+| **44 drill types train every skill, not just recognition.** Listening, speaking, tones, cloze, register, sentence construction — the system picks what you need. | Anki users, self-study adults |
 | **Honest diagnostics show you exactly where you stand** — per-skill HSK readiness, specific weaknesses, projected timelines. No flattery, no inflation. | HSK exam preppers, self-study adults |
 | **Built on proven memory science, not engagement hacks.** FSRS scheduling, interleaving, desirable difficulty, active recall — the cognitive science of retention, applied rigorously. | Anki users, research-oriented learners |
 | **Read Chinese, look up what you don't know, drill those exact words.** The cleanup loop connects real reading to real practice, automatically. | Self-study adults, heritage speakers |
@@ -173,7 +173,7 @@ This is the message that should appear, in some form, on the landing page hero, 
 These support the secondary messages and appear in feature pages, comparison tables, and detailed content:
 
 - Modified FSRS algorithm with bayesian confidence dampening
-- 27 drill types across 6 skill categories
+- 44 drill types across 6 skill categories
 - HSK 1-6 aligned content, HSK 7-9 in preparation
 - Graded reader with inline glosses
 - Listening practice with speed control and transcript reveal
@@ -207,7 +207,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 ### 140-character (tweet-length)
 
-"Aelu: read Chinese, look up what you don't know, drill those exact words. 27 drill types. Honest diagnostics. No gamification."
+"Aelu: read Chinese, look up what you don't know, drill those exact words. 44 drill types. Honest diagnostics. No gamification."
 
 ---
 
@@ -217,7 +217,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **What they do that we don't:** Anki offers unlimited customization — custom card templates, community-shared decks, plugins for every edge case. Hack Chinese has a massive HSK-aligned word list and clean UI for pure vocabulary drilling. Both let users build or import exactly the content they want.
 
-**What we do that they don't:** 27 drill types vs. 1 (flashcard). Graded reading with the cleanup loop. Per-skill diagnostics across vocabulary, listening, reading, and tones. Speaking drills with tone grading. Interleaving enforcement. No deck management required — the curriculum is built in.
+**What we do that they don't:** 44 drill types vs. 1 (flashcard). Graded reading with the cleanup loop. Per-skill diagnostics across vocabulary, listening, reading, and tones. Speaking drills with tone grading. Interleaving enforcement. No deck management required — the curriculum is built in.
 
 **When someone should use both:** A learner who has invested heavily in custom Anki decks (especially for specialized vocabulary beyond HSK 6) might keep Anki for that niche content while using Aelu for structured HSK progression, reading practice, and listening/speaking drills.
 
@@ -227,7 +227,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **What they do that we don't:** Duolingo has massive brand recognition, social features, and a free tier that covers a lot of content. HelloChinese has decent handwriting practice and a polished beginner experience. Both are excellent at getting complete beginners to start — the onboarding friction is near zero.
 
-**What we do that they don't:** 27 drill types vs. 3-6. Honest diagnostics instead of XP and streaks. Graded reading with cleanup loop. FSRS-based scheduling instead of basic intervals. Per-skill tracking. No engagement-hack mechanics (hearts, gems, leaderboards). Speaking drills with actual tone grading. Content designed for adults, not for the broadest possible audience.
+**What we do that they don't:** 44 drill types vs. 3-6. Honest diagnostics instead of XP and streaks. Graded reading with cleanup loop. FSRS-based scheduling instead of basic intervals. Per-skill tracking. No engagement-hack mechanics (hearts, gems, leaderboards). Speaking drills with actual tone grading. Content designed for adults, not for the broadest possible audience.
 
 **When someone should use both:** A beginner might start with HelloChinese for the first two weeks to get oriented with tones, pinyin, and basic stroke order, then switch to Aelu for serious structured study. There is no good reason to use Duolingo and Aelu simultaneously — they serve the same function at different quality levels.
 
@@ -237,7 +237,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **What they do that we don't:** Structured video lessons with teacher explanations. Grammar instruction with examples and context. Community forums and cohort-based pacing. Human-presented content with personality and narrative. Mandarin Blueprint in particular has a strong system for character decomposition and mnemonics.
 
-**What we do that they don't:** Adaptive SRS drilling that responds to individual performance. The cleanup loop. 27 drill types for active recall, not passive video watching. Per-skill diagnostics. Listening practice with speed control. Speaking drills. Offline access. The courses teach; we train. The distinction matters.
+**What we do that they don't:** Adaptive SRS drilling that responds to individual performance. The cleanup loop. 44 drill types for active recall, not passive video watching. Per-skill diagnostics. Listening practice with speed control. Speaking drills. Offline access. The courses teach; we train. The distinction matters.
 
 **When someone should use both:** This is a strong pairing. Use a course for instruction (understanding grammar, learning character logic, getting cultural context) and Aelu for practice (drilling, reading, listening, diagnostics). We are the gym; they are the coach.
 
@@ -247,7 +247,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **What they do that we don't:** Pleco is the gold standard Chinese dictionary — comprehensive definitions, example sentences, OCR lookup, handwriting input, and deep reference content. Written Chinese offers character decomposition and stroke order. These are lookup tools optimized for the moment you encounter an unknown word.
 
-**What we do that they don't:** Everything after the lookup. Pleco tells you what a word means right now. We tell you what it means, drill you on it later, track whether you've retained it, and integrate it into your practice across 27 drill types. Pleco is a dictionary. We are a training system.
+**What we do that they don't:** Everything after the lookup. Pleco tells you what a word means right now. We tell you what it means, drill you on it later, track whether you've retained it, and integrate it into your practice across 44 drill types. Pleco is a dictionary. We are a training system.
 
 **When someone should use both:** Pleco remains useful for looking up words outside the app — in real conversations, on signs, in WeChat messages. If a learner is reading Chinese outside of our graded reader, Pleco is the right lookup tool. Ideally, we will eventually offer a way to import Pleco lookup history into the drill queue, but that is future work.
 
@@ -267,7 +267,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **What they do that we don't:** Personalized instruction from a human expert. Real-time error correction. Conversation practice. Essay correction. Cultural explanation. The ability to ask "why?" and get a nuanced answer. Emotional support and accountability.
 
-**What we do that they don't:** Cost efficiency ($14.99/month vs. $15-40/hour for tutoring). Available 24/7, not limited to scheduled sessions. Spaced repetition scheduling that a human tutor cannot replicate manually. 27 drill types in a single session. Per-skill diagnostics. Consistent, tireless, perfectly-remembering practice.
+**What we do that they don't:** Cost efficiency ($14.99/month vs. $15-40/hour for tutoring). Available 24/7, not limited to scheduled sessions. Spaced repetition scheduling that a human tutor cannot replicate manually. 44 drill types in a single session. Per-skill diagnostics. Consistent, tireless, perfectly-remembering practice.
 
 **When someone should use both:** This is the ideal combination for serious learners. Use a tutor for instruction, conversation, and questions. Use Aelu for daily drilling, reading, and diagnostic tracking. The tutor provides the understanding; we provide the repetition that converts understanding into automatic recall.
 
@@ -281,7 +281,7 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 
 **Direct.** We say what we mean in as few words as possible. No hedging, no corporate softening, no "we believe that perhaps" constructions. "Your listening is behind your reading" — not "You might want to consider focusing a bit more on listening skills."
 
-**Grounded.** Every claim is backed by a specific product feature, a research finding, or a data point. We do not make vague promises. "27 drill types" is grounded. "Revolutionary learning experience" is not.
+**Grounded.** Every claim is backed by a specific product feature, a research finding, or a data point. We do not make vague promises. "44 drill types" is grounded. "Revolutionary learning experience" is not.
 
 **Calm.** We do not create urgency, anxiety, or FOMO. We do not yell in all caps. We do not use exclamation marks in feature descriptions. The tone is a knowledgeable peer explaining something clearly over coffee — not a salesperson, not a motivational speaker, not a professor.
 
@@ -341,14 +341,14 @@ Free for HSK 1-2 content, no time limit. Full access is fourteen ninety-nine a m
 | Duolingo Plus | $7/month | Ad removal, offline, unlimited hearts |
 | HelloChinese | $10/month | Full content access |
 | Hack Chinese | $15/month | Full SRS vocabulary |
-| Aelu | $14.99/month | 27 drill types, graded reader, listening, speaking, diagnostics |
+| Aelu | $14.99/month | 44 drill types, graded reader, listening, speaking, diagnostics |
 | iTalki tutor | $15-40/hour | One hour of human instruction |
 
-$14.99/month positions us alongside Hack Chinese and Skritter (which only do flashcards or handwriting). It signals seriousness and reflects the breadth of what we offer — 27 drill types, graded reading, listening, speaking, and diagnostics in one system.
+$14.99/month positions us alongside Hack Chinese and Skritter (which only do flashcards or handwriting). It signals seriousness and reflects the breadth of what we offer — 44 drill types, graded reading, listening, speaking, and diagnostics in one system.
 
 **Value framing:**
 - $14.99/month = $0.50/day. Less than a coffee. Less than a single bus fare.
-- $14.99/month = $0.56 per drill type. 27 drill types, each targeting a different cognitive skill.
+- $14.99/month = $0.56 per drill type. 44 drill types, each targeting a different cognitive skill.
 - $14.99/month vs. $30-120/month for weekly tutoring. We do not replace a tutor, but we handle 80% of what tutors spend session time on (vocabulary review, listening practice, tone drilling).
 - $14.99/month for unlimited daily sessions. No per-session fees. No credit system.
 
@@ -362,7 +362,7 @@ The free tier is HSK 1-2 content — not a time-limited trial but a permanent, f
 ### Price objection responses
 
 **"That's more than Duolingo."**
-Duolingo Plus removes ads and adds offline access. The free version of Duolingo is what most people use, and it tests roughly 3 exercise types — all recognition-based. We offer 27 drill types including production, listening, speaking, and tone discrimination, plus graded reading with the cleanup loop, plus per-skill diagnostics. If Duolingo's approach is working for you, stay with it. If you've hit a plateau and suspect you're optimizing for streaks rather than retention, we're built for that exact problem.
+Duolingo Plus removes ads and adds offline access. The free version of Duolingo is what most people use, and it tests roughly 3 exercise types — all recognition-based. We offer 44 drill types including production, listening, speaking, and tone discrimination, plus graded reading with the cleanup loop, plus per-skill diagnostics. If Duolingo's approach is working for you, stay with it. If you've hit a plateau and suspect you're optimizing for streaks rather than retention, we're built for that exact problem.
 
 **"Anki is free."**
 Anki is genuinely excellent and free. If you enjoy building and maintaining decks, and you only need flashcard-style drills, Anki is hard to beat. We use the same algorithm family (FSRS). What we add: 26 additional drill types beyond flashcards, a graded reader with the cleanup loop, listening and speaking practice, per-skill diagnostics, and a built-in HSK-aligned curriculum so you never have to build a deck. The $14.99/month pays for not being a curriculum designer on top of being a learner.
@@ -383,7 +383,7 @@ Aelu is the only Chinese learning app that:
 
 2. **Tracks HSK readiness across four skills independently** (vocabulary, listening, reading, tones) and shows you exactly where each skill stands — not a blended average that hides imbalances.
 
-3. **Offers 27 drill types in a single integrated system** — recognition, production, listening discrimination, tone pairs, cloze deletion, register awareness, sentence construction, audio-to-hanzi matching, and more — all scheduled by one adaptive algorithm.
+3. **Offers 44 drill types in a single integrated system** — recognition, production, listening discrimination, tone pairs, cloze deletion, register awareness, sentence construction, audio-to-hanzi matching, and more — all scheduled by one adaptive algorithm.
 
 4. **Uses zero AI tokens at runtime.** Every drill, score, and recommendation is deterministic. The app works offline, responds instantly, and never serves AI-generated content that could contain errors.
 
@@ -409,7 +409,7 @@ Points at the core frustration — most apps drill you on things you've already 
 Clear positioning: honest (not gamified), practice (not entertainment), serious (not casual). The word "honest" does heavy lifting — it implies the metrics are real, the diagnostics are unflattering, and we don't inflate progress.
 
 4. **"27 ways to drill what you're weakest at."**
-Leads with the 27 drill types, which is a concrete differentiator. "Weakest at" signals adaptive targeting. Slightly more feature-forward than ideal for a tagline.
+Leads with the 44 drill types, which is a concrete differentiator. "Weakest at" signals adaptive targeting. Slightly more feature-forward than ideal for a tagline.
 
 5. **"Read Chinese. Drill what you missed. Repeat."**
 Describes the cleanup loop as a process. Clean rhythm. Slightly procedural for a tagline but very clear.
@@ -437,7 +437,7 @@ Provocative. Implies competitors inflate progress (they do). Risks seeming negat
 
 **Landing page hero:** Primary tagline + one-sentence value prop + "Free for HSK 1-2. Full access $14.99/month." Three elements, nothing else above the fold except a start button.
 
-**Meta description / SEO:** Use the positioning statement, compressed: "Aelu turns your Chinese reading into targeted practice. 27 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2."
+**Meta description / SEO:** Use the positioning statement, compressed: "Aelu turns your Chinese reading into targeted practice. 44 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2."
 
 **App Store / directory listing:** Lead with the 10-second elevator pitch. Follow with three bullet points from the secondary messages. End with pricing.
 

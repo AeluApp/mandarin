@@ -224,7 +224,7 @@ A developer built a French learning startup and shut it down after 6 months.
 |---------|---------------------|-----------------|
 | Content volume is the moat | 10,000+ vocab items (HSK 1-9) vs TCB's 8,500+ lessons, Du Chinese's 3,000+ readings | Vocab coverage now competitive. Graded reading/lesson volume still a gap. Focus on content quality and the cleanup loop as differentiator. |
 | Subscription model is correct | $14.99/month, already planned | Confirmed. Do not offer lifetime pricing. |
-| Free tier must prove the method | HSK 1-2 free with all 27 drill types | Already generous. Confirmed. |
+| Free tier must prove the method | HSK 1-2 free with all 44 drill types | Already generous. Confirmed. |
 | Founder story = best marketing | "Built by a learner who needed it" | Already in positioning. Lean into it harder. |
 | B2B/institutional is underrated | No institutional offering yet | Consider post-launch. Not a launch blocker. |
 | 3-5 year timeline is normal | Currently in development | Calibrate personal expectations. Keep the day job. |

@@ -804,10 +804,11 @@
       adminFetch("/api/admin/sessions").then(function(d) {
         var el = document.getElementById("sessions-content");
         if (!d.sessions || d.sessions.length === 0) { el.innerHTML = '<p class="tab-empty">No sessions recorded.</p>'; return; }
-        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>User</th><th>Type</th><th>Items</th><th>Correct</th><th>Outcome</th><th>Duration</th></tr></thead><tbody>';
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>User</th><th>Type</th><th>Items</th><th>Accuracy</th><th>Outcome</th><th>Duration</th></tr></thead><tbody>';
         d.sessions.forEach(function(s) {
           var dur = s.duration ? Math.round(s.duration / 60) + 'm' : '—';
-          html += '<tr><td>' + shortDate(s.started_at) + '</td><td>' + esc(s.user_name || (s.user_id ? '#' + s.user_id : '—')) + '</td><td>' + esc(s.type) + '</td><td>' + (s.items_completed || 0) + '/' + (s.items_planned || 0) + '</td><td>' + (s.items_correct || 0) + '</td><td>' + esc(s.outcome || '—') + '</td><td>' + dur + '</td></tr>';
+          var acc = s.accuracy != null ? s.accuracy + '%' : '—';
+          html += '<tr><td>' + shortDate(s.started_at) + '</td><td>' + esc(s.user_name || (s.user_id ? '#' + s.user_id : '—')) + '</td><td>' + esc(s.type) + '</td><td>' + (s.items_completed || 0) + '/' + (s.items_planned || 0) + '</td><td>' + acc + '</td><td>' + esc(s.outcome || '—') + '</td><td>' + dur + '</td></tr>';
         });
         html += '</tbody></table></div>';
         el.innerHTML = html;

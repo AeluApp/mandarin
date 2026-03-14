@@ -16,7 +16,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 | # | Feature | Functional Benefit | Emotional Benefit | Example Copy |
 |---|---------|-------------------|-------------------|--------------|
-| 1 | 27 drill types (recognition, production, cloze, tone pair, sentence construction, etc.) | Tests multiple cognitive skills — not just "do you recognize this character?" but "can you hear it, produce it, use it in a sentence?" | Confidence that you actually know a word, not just recognize it on a flashcard | "27 drill types because knowing a word means more than recognizing it on a card." |
+| 1 | 44 drill types (recognition, production, cloze, tone pair, sentence construction, etc.) | Tests multiple cognitive skills — not just "do you recognize this character?" but "can you hear it, produce it, use it in a sentence?" | Confidence that you actually know a word, not just recognize it on a flashcard | "44 drill types because knowing a word means more than recognizing it on a card." |
 | 2 | Cleanup loop (reading feeds drills) | The words you look up during reading become your next drill session. No manual deck building. No guessing what to study next. | Relief — the system notices your real gaps so you don't have to | "Every word you look up becomes practice. Real gaps, real drills." |
 | 3 | Modified FSRS algorithm | Optimized review intervals based on your actual recall data, not fixed schedules. You review at the moment forgetting is most likely. | Trust that your time is being spent on the right words at the right time | "Your review schedule is calculated from your data, not a generic formula." |
 | 4 | Bayesian confidence dampening | New items don't get promoted too fast. The system needs multiple data points before it trusts your mastery of a word. | Safety — you won't be blindsided by "mastered" words you actually forgot | "The system waits until it's sure you know a word. One lucky guess doesn't count." |
@@ -30,7 +30,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 | 12 | Adaptive day profiles | Sessions adjust to your available time and energy. A 10-minute session focuses differently than a 30-minute one. | Flexibility — the system works with your life, not against it | "Short on time? The system adapts. Every session is useful, even the brief ones." |
 | 13 | Zero AI at runtime | All scheduling, scoring, and content delivery is deterministic. No API calls, no hallucinations, no varying quality. | Reliability — the system gives the same correct answer every time, not a probabilistic guess | "Deterministic, not probabilistic. Every answer is computed, not generated." |
 | 14 | Data stored locally / offline | Your study data lives on your device. The app works without an internet connection. No account required to start. | Privacy and independence — your learning data belongs to you | "Your data stays on your device. No account required. Works offline." |
-| 15 | Free tier (HSK 1-2) | Full functionality for HSK 1-2 content. Not a crippled trial — the same 27 drill types, the same adaptive scheduling. | No-risk exploration — try everything before deciding to pay | "Free isn't a trial. It's the full system for HSK 1-2." |
+| 15 | Free tier (HSK 1-2) | Full functionality for HSK 1-2 content. Not a crippled trial — the same 44 drill types, the same adaptive scheduling. | No-risk exploration — try everything before deciding to pay | "Free isn't a trial. It's the full system for HSK 1-2." |
 | 16 | $14.99/month pricing | One price, all features. No annual upsell, no "premium plus," no hidden tiers. | Simplicity and fairness — you know exactly what you're paying for | "$14.99/month. Everything included. Cancel anytime." |
 | 17 | Independent team | Built by learners who are studying Mandarin themselves. Every feature exists because the team needed it. | Authenticity — this isn't a product committee's best guess; it's a learner's actual solution | "Built by a learner who needed it to exist." |
 | 18 | Web app (no app store) | Works in any modern browser, desktop or mobile. No download, no updates, no storage space. | Immediacy — open a tab and start studying. Nothing to install. | "Open your browser. Start studying. Nothing to install." |
@@ -86,12 +86,12 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **Message that resonates:** The SRS you trust, without the overhead. Modified FSRS, Bayesian dampening, interleaving — with a curriculum that builds itself.
 
-**Proof point:** The cleanup loop eliminates deck building entirely. You read, you tap, the system builds your queue. Plus: 27 drill types instead of one flashcard template.
+**Proof point:** The cleanup loop eliminates deck building entirely. You read, you tap, the system builds your queue. Plus: 44 drill types instead of one flashcard template.
 
 **CTA that converts:** "Try the SRS that builds itself."
 
 **Example headline:** Like Anki, but you never build a deck again.
-**Example subhead:** Modified FSRS with Bayesian confidence dampening and interleaving enforcement. 27 drill types. Graded reading that feeds your review queue automatically.
+**Example subhead:** Modified FSRS with Bayesian confidence dampening and interleaving enforcement. 44 drill types. Graded reading that feeds your review queue automatically.
 
 **Example ad copy:** You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Aelu gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps. Same rigor. None of the overhead.
 
@@ -103,12 +103,12 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **Message that resonates:** Real Chinese, not simplified exercises. Graded reading, adjustable-speed listening, and drills that test what you actually need to know.
 
-**Proof point:** 27 drill types targeting different cognitive skills. The comparison is stark: Duolingo tests recognition in ~3 formats. Aelu tests recognition, production, auditory discrimination, sentence comprehension, and tone accuracy across 27 formats.
+**Proof point:** 44 drill types targeting different cognitive skills. The comparison is stark: Duolingo tests recognition in ~3 formats. Aelu tests recognition, production, auditory discrimination, sentence comprehension, and tone accuracy across 27 formats.
 
 **CTA that converts:** "Ready for what comes after the owl? Start free."
 
 **Example headline:** You graduated. Now learn Chinese.
-**Example subhead:** Graded reading with real Chinese text. Listening practice at adjustable speed. 27 drill types that test more than recognition. No XP required.
+**Example subhead:** Graded reading with real Chinese text. Listening practice at adjustable speed. 44 drill types that test more than recognition. No XP required.
 
 **Example ad copy:** Duolingo taught you basics. That's real. But if you still can't understand a Chinese podcast or read a short article, you've outgrown the format. Aelu picks up where gamified apps leave off. Real reading. Real listening. Real progress tracking. Free to start.
 
@@ -158,10 +158,10 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **CTA that converts:** "See the algorithm. Try the method."
 
-**Example headline:** SRS done right. 27 drill types. Bayesian confidence dampening. No black boxes.
+**Example headline:** SRS done right. 44 drill types. Bayesian confidence dampening. No black boxes.
 **Example subhead:** Modified FSRS with interleaving enforcement and a cleanup loop that turns reading exposure into SRS input. Deterministic. Measurable. Transparent.
 
-**Example ad copy:** If you know what FSRS is, you'll appreciate this: modified scheduling with Bayesian confidence dampening, interleaving enforcement across 27 drill types, and a cleanup loop that feeds graded reading into your review queue. All deterministic — zero AI at runtime. Free tier available.
+**Example ad copy:** If you know what FSRS is, you'll appreciate this: modified scheduling with Bayesian confidence dampening, interleaving enforcement across 44 drill types, and a cleanup loop that feeds graded reading into your review queue. All deterministic — zero AI at runtime. Free tier available.
 
 ---
 
@@ -176,7 +176,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **CTA that converts:** "Give your students a study partner that never forgets what they got wrong."
 
 **Example headline:** Your students forget 60% of new vocabulary within 48 hours. This fixes that.
-**Example subhead:** HSK-aligned adaptive review between your classes. 27 drill types. Multi-skill diagnostics you and your students can see. Free for HSK 1-2.
+**Example subhead:** HSK-aligned adaptive review between your classes. 44 drill types. Multi-skill diagnostics you and your students can see. Free for HSK 1-2.
 
 **Example ad copy:** You teach the lesson. Aelu handles the review. HSK-aligned drills adapt to each student's weak spots between classes. Vocabulary, listening, tones, and reading — tracked separately so students know what to work on. The free tier covers HSK 1-2 — your beginners can start today.
 
@@ -190,9 +190,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Duolingo Super is $7/month. Aelu is $14.99/month. The math is simple.
 
-**The honest answer:** Duolingo has ~3 drill formats and no graded reading. Aelu has 27 drill types, graded reading with a cleanup loop, adaptive listening, speaking drills, and HSK diagnostics. They serve different stages of learning. If Duolingo is working for you, keep using it.
+**The honest answer:** Duolingo has ~3 drill formats and no graded reading. Aelu has 44 drill types, graded reading with a cleanup loop, adaptive listening, speaking drills, and HSK diagnostics. They serve different stages of learning. If Duolingo is working for you, keep using it.
 
-**Copy version:** "Duolingo is great for getting started. Aelu is for what comes after. 27 drill types, graded reading, listening practice, and diagnostics for $8 more per month."
+**Copy version:** "Duolingo is great for getting started. Aelu is for what comes after. 44 drill types, graded reading, listening practice, and diagnostics for $8 more per month."
 
 ---
 
@@ -200,7 +200,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Anki is genuinely free (desktop). It's powerful. They're already invested in their workflow.
 
-**The honest answer:** Anki is an incredible tool. But it's a blank SRS engine — you supply the content, the curriculum, and the drill logic. Aelu gives you all of that pre-built: 27 drill types, graded reading that feeds your queue, HSK-aligned content, and multi-skill tracking. If you love building decks, Anki is perfect. If you want to just study, try this.
+**The honest answer:** Anki is an incredible tool. But it's a blank SRS engine — you supply the content, the curriculum, and the drill logic. Aelu gives you all of that pre-built: 44 drill types, graded reading that feeds your queue, HSK-aligned content, and multi-skill tracking. If you love building decks, Anki is perfect. If you want to just study, try this.
 
 **Copy version:** "Anki is free and powerful. Aelu is $14.99/month and you never build a deck. Different tools for different preferences."
 
@@ -240,13 +240,13 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Most SRS experiences are Anki — a blank engine that requires setup, deck management, and discipline with no variety.
 
-**The honest answer:** SRS with one drill type (flashcards) gets monotonous. That's a real problem. Aelu uses 27 drill types with interleaving — your brain doesn't get bored because the next question is always a different format. Sessions are 15 minutes, not open-ended. The cleanup loop means you're always drilling words you recently encountered, not stale cards from months ago.
+**The honest answer:** SRS with one drill type (flashcards) gets monotonous. That's a real problem. Aelu uses 44 drill types with interleaving — your brain doesn't get bored because the next question is always a different format. Sessions are 15 minutes, not open-ended. The cleanup loop means you're always drilling words you recently encountered, not stale cards from months ago.
 
-**Copy version:** "SRS with one flashcard format is boring. SRS with 27 drill types, interleaving, and a 15-minute cap is a different experience."
+**Copy version:** "SRS with one flashcard format is boring. SRS with 44 drill types, interleaving, and a 15-minute cap is a different experience."
 
 ---
 
-### 7. "27 drill types sounds overwhelming."
+### 7. "44 drill types sounds overwhelming."
 
 **Why they think this:** 27 is a big number. They imagine having to learn 27 different interfaces.
 
@@ -380,9 +380,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** The market is crowded. Claims blur together.
 
-**The honest answer:** Three things no other app combines: (1) the cleanup loop — reading and drilling are connected, not separate activities, (2) 27 drill types targeting different cognitive skills, not just flashcard recognition, (3) multi-skill diagnostics that track vocabulary, listening, reading, and tones separately. Most apps do one of these things partially. None connect all three.
+**The honest answer:** Three things no other app combines: (1) the cleanup loop — reading and drilling are connected, not separate activities, (2) 44 drill types targeting different cognitive skills, not just flashcard recognition, (3) multi-skill diagnostics that track vocabulary, listening, reading, and tones separately. Most apps do one of these things partially. None connect all three.
 
-**Copy version:** "Reading feeds your drills. 27 drill types test what flashcards can't. Diagnostics show you skills, not just scores. That's the difference."
+**Copy version:** "Reading feeds your drills. 44 drill types test what flashcards can't. Diagnostics show you skills, not just scores. That's the difference."
 
 ---
 
@@ -420,7 +420,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Pleco is the standard Chinese dictionary app. It has SRS, readers, and flashcards.
 
-**The honest answer:** Pleco is an incredible dictionary — probably the best Chinese dictionary app ever made. Use it for lookup. Aelu is better at structured learning: adaptive scheduling across 27 drill types, the cleanup loop, multi-skill diagnostics, and graded reading with integrated review. They complement each other well.
+**The honest answer:** Pleco is an incredible dictionary — probably the best Chinese dictionary app ever made. Use it for lookup. Aelu is better at structured learning: adaptive scheduling across 44 drill types, the cleanup loop, multi-skill diagnostics, and graded reading with integrated review. They complement each other well.
 
 **Copy version:** "Keep Pleco for lookup. Use Aelu for structured practice. They work well together."
 
@@ -458,7 +458,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 11. The SRS that reads your mistakes, not your streaks.
 12. Track four Chinese skills separately. Not just "your level."
 13. HSK projection tells you when. Diagnostics tell you what.
-14. 27 drill types because recognition is not fluency.
+14. 44 drill types because recognition is not fluency.
 15. Reading and drilling, connected. Not two separate apps.
 
 **Conversion (getting the click, the signup, the upgrade):**
@@ -468,7 +468,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 18. No credit card. No account required. Just start.
 19. Your first session takes 10 minutes. Your first insight takes one.
 20. $14.99/month. Everything included.
-21. Try all 27 drill types free.
+21. Try all 44 drill types free.
 
 **Retention (keeping current users engaged and progressing):**
 
@@ -488,7 +488,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 ### Subheadlines
 
 1. Adaptive drills that focus on your weakest skill. Graded reading that feeds your next session. Progress you can measure.
-2. Modified FSRS scheduling, 27 drill types, and a cleanup loop that turns reading into review.
+2. Modified FSRS scheduling, 44 drill types, and a cleanup loop that turns reading into review.
 3. No streaks, no hearts, no XP. Study because you want to, and stop when you're done.
 4. Read Chinese at your level. Tap any word. It becomes a drill tomorrow.
 5. Vocabulary, listening, reading, tones — tracked separately so you know where to focus.
@@ -545,7 +545,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 Drop these into any context where you need a one-liner.
 
 1. Every word you look up becomes practice. That's how serious learners study.
-2. 27 drill types, graded reading, and an adaptive system that knows where you're weak.
+2. 44 drill types, graded reading, and an adaptive system that knows where you're weak.
 3. Chinese learning for adults — no streaks, no cartoons, no wasted reps.
 4. The SRS that builds itself from your actual reading gaps.
 5. Track vocabulary, listening, reading, and tones separately. Know exactly where to focus.
@@ -625,7 +625,7 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 1. Landing Page Hero
 
 **Too cold:**
-"Aelu is a spaced repetition system for Chinese language acquisition with 27 drill modalities and deterministic scheduling."
+"Aelu is a spaced repetition system for Chinese language acquisition with 44 drill modalities and deterministic scheduling."
 
 **Just right:**
 "Learn Chinese in 15 minutes a day. Adaptive drills, graded reading, and honest diagnostics. Free for HSK 1-2."
@@ -677,10 +677,10 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 5. Social Media Post
 
 **Too cold:**
-"Aelu v2.3 is available. Contains 27 drill types and FSRS scheduling."
+"Aelu v2.3 is available. Contains 44 drill types and FSRS scheduling."
 
 **Just right:**
-"Your Chinese study app shouldn't need to bribe you with streaks. 27 drill types, graded reading, adaptive scheduling. No XP required. Free to start."
+"Your Chinese study app shouldn't need to bribe you with streaks. 44 drill types, graded reading, adaptive scheduling. No XP required. Free to start."
 
 **Too warm:**
 "Who else is LOVING their Chinese study journey?? Drop a emoji if you studied today! Remember, every day is a chance to be amazing!"
@@ -719,7 +719,7 @@ Every piece of copy should feel like a conversation between two adults who respe
 "Aelu is seeking affiliate partners. Commission: 20%. Cookie: 90 days. Reply to discuss."
 
 **Just right:**
-"Hi [name]. I built a Chinese learning app called Aelu — adaptive SRS with 27 drill types, graded reading, and a feature called the cleanup loop. I think it'd be relevant to your audience. I'd be happy to give you full access to try it. No obligation to promote. If it resonates, I have an affiliate program (20%, 90-day cookie, lifetime recurring). Let me know if you'd like to take a look."
+"Hi [name]. I built a Chinese learning app called Aelu — adaptive SRS with 44 drill types, graded reading, and a feature called the cleanup loop. I think it'd be relevant to your audience. I'd be happy to give you full access to try it. No obligation to promote. If it resonates, I have an affiliate program (20%, 90-day cookie, lifetime recurring). Let me know if you'd like to take a look."
 
 **Too warm:**
 "OMG I am SUCH a fan of your content! I built this little app and I just KNOW your audience would LOVE it! Can we collaborate?? I'm SO excited about this opportunity!"
@@ -760,7 +760,7 @@ Test the messages that affect the highest-leverage decisions first.
 
 **Priority 1: Landing page headline**
 Why: The headline determines whether someone reads further. Small changes yield disproportionate impact on conversion. Test the primary value proposition framing.
-- Test A: Feature-led ("27 drill types. Graded reading. Adaptive scheduling.")
+- Test A: Feature-led ("44 drill types. Graded reading. Adaptive scheduling.")
 - Test B: Outcome-led ("Learn Chinese in 15 minutes a day. Actually retain it.")
 - Test C: Problem-led ("Your Chinese app drills random vocabulary. This one drills your real gaps.")
 
@@ -774,12 +774,12 @@ Why: The free tier is the primary conversion mechanism. Test whether people resp
 Why: This appears everywhere — ads, social, email, partner materials. Getting it right has compounding returns.
 - Test A: Cleanup loop focused ("Every word you look up becomes practice")
 - Test B: Anti-gamification focused ("No streaks. No hearts. Just learning.")
-- Test C: Breadth focused ("27 drill types, graded reading, and diagnostics in one place")
+- Test C: Breadth focused ("44 drill types, graded reading, and diagnostics in one place")
 
 **Priority 4: Upgrade prompt messaging**
 Why: Free-to-paid conversion is the revenue bottleneck. Test what motivates the upgrade.
 - Test A: Content-focused ("HSK 3-6: 4,700 additional words")
-- Test B: Feature-focused ("Unlock speaking drills, advanced diagnostics, and all 27 drill types")
+- Test B: Feature-focused ("Unlock speaking drills, advanced diagnostics, and all 44 drill types")
 - Test C: Progress-focused ("Your HSK 1-2 foundation is solid. Here's the next step.")
 
 **Priority 5: Ad creative angle**

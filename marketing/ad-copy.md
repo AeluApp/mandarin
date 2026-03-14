@@ -7,7 +7,7 @@
 **Headline 1:** Learn Chinese with Adaptive SRS
 **Headline 2:** HSK 1-6 Aligned Curriculum
 **Headline 3:** Free to Start — No Credit Card
-**Description 1:** 27 drill types that adapt to your weak spots. Track your HSK readiness with real projections. Built by a learner, not a corporation.
+**Description 1:** 44 drill types that adapt to your weak spots. Track your HSK readiness with real projections. Built by a learner, not a corporation.
 **Description 2:** Stop drilling random vocab. Aelu tracks what you actually struggle with and builds your next session around it. HSK 1-6 coverage.
 **Display URL:** aeluapp.com/hsk
 
@@ -47,7 +47,7 @@ Free to start at aeluapp.com
 ### Ad 2: Anti-Duolingo (Feed format)
 **Primary text:** I spent two years on Duolingo Chinese and couldn't read a restaurant menu.
 
-So I built something different. 27 drill types. Graded reading with real Chinese text. Listening practice at adjustable speed. An adaptive system that learns what I need to work on.
+So I built something different. 44 drill types. Graded reading with real Chinese text. Listening practice at adjustable speed. An adaptive system that learns what I need to work on.
 
 No cartoon owl. No streak anxiety. Just effective learning.
 
@@ -101,7 +101,7 @@ So I built an app around what I'm calling the "cleanup loop":
 The idea is that instead of drilling a generic word list, you're drilling the specific words YOU struggled with in context.
 
 Other features:
-- 27 drill types (not just flashcards)
+- 44 drill types (not just flashcards)
 - HSK 1-6 aligned curriculum
 - Adaptive scheduling — focuses on your weak spots
 - Tone drills with grading
@@ -199,7 +199,7 @@ Those missed words go straight into your drill queue.
 You've been using Aelu for two weeks. If you're finding value in the adaptive drills and the cleanup loop, the full version unlocks:
 
 - HSK 3-6 curriculum (4,700+ additional words)
-- All 27 drill types (free tier has 5)
+- All 44 drill types (free tier has 5)
 - Speaking drills with tone grading
 - Advanced listening and reading passages
 - Full HSK projection and diagnostics

@@ -313,7 +313,7 @@ The character 文 (wen, writing/culture) simplified to its essential strokes —
 **Apple App Store / Google Play Store — 4,000 character limit:**
 
 ```
-Aelu turns your Chinese reading into targeted practice. 27 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2.
+Aelu turns your Chinese reading into targeted practice. 44 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2.
 
 Read a Chinese passage. Tap a word you don't know. That word enters your drill queue — not as a flashcard, but as practice across tone discrimination, cloze deletion, audio matching, sentence construction, and more. The cleanup loop connects reading to drilling automatically.
 
@@ -336,7 +336,7 @@ BUILT FOR ADULTS
 No XP. No hearts. No cartoon mascots. No streak-shame notifications. Warm, calm interface designed to feel like a library, not an arcade.
 
 Free: All HSK 1-2 content, no time limit.
-Full access: $14.99/month. 27 drill types, HSK 1-6 content, graded reader, listening practice, speaking drills, full diagnostics.
+Full access: $14.99/month. 44 drill types, HSK 1-6 content, graded reader, listening practice, speaking drills, full diagnostics.
 
 Built by learners who use the app daily for their own Mandarin study.
 ```

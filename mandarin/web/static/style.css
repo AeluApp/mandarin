@@ -300,7 +300,7 @@ body {
    The sky gradient is now a background-image layer on body (no pseudo-element). */
 
 #app {
-  max-width: clamp(360px, 100%, 1400px);
+  max-width: clamp(360px, 100%, 1600px);
   width: 100%;
   margin: 0 auto;
   padding: var(--space-5) var(--space-6);
@@ -632,6 +632,21 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 .stats-row::-webkit-scrollbar { height: 0; }
 .stats-row { scrollbar-width: none; }
 
+/* On desktop, let stat items grow to fill space instead of scrolling */
+@media (min-width: 1024px) {
+  .stats-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+    gap: var(--space-3) var(--space-4);
+  }
+  .stat {
+    flex: 1 1 0;
+    min-width: 100px;
+  }
+}
+
 .stat {
   text-align: center;
   background: transparent;
@@ -771,7 +786,7 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 #drill-area {
   flex: 1;
   padding: var(--space-5) 0;
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   width: 100%;
 }
@@ -1722,7 +1737,7 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   .panels-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0 var(--space-6);
+    gap: var(--space-4) var(--space-6);
   }
   /* Let the weekly summary span full width as the hero panel */
   .panels-group > .panel:first-child {
@@ -3527,6 +3542,14 @@ html[data-theme="dark"] .empty-state-illustration {
   margin: var(--space-3) 0;
 }
 
+@media (min-width: 1024px) {
+  .reading-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-4);
+  }
+}
+
 .reading-list-item {
   display: flex;
   justify-content: space-between;
@@ -3604,6 +3627,8 @@ html[data-theme="dark"] .empty-state-illustration {
 
 .reading-passage {
   animation: driftUp var(--duration-base) var(--ease-upward);
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 /* Focus insight — adaptive intelligence card shown at session start */
@@ -3834,6 +3859,12 @@ html[data-theme="dark"] .empty-state-illustration {
 @media (min-width: 480px) {
   .media-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .media-grid {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -4950,10 +4981,21 @@ html[data-theme="dark"] .empty-state::before {
   .stat-value { font-size: var(--text-lg); }
   .btn-option { min-height: 48px; }
 
-  /* Mobile input area anchored to bottom during session — needs background for readability */
+  /* Mobile: session fills viewport, drill area scrolls, input fixed at bottom */
+  #session {
+    height: calc(100vh - env(safe-area-inset-top, 0px));
+    height: calc(100dvh - env(safe-area-inset-top, 0px));
+    min-height: 0;  /* override default min-height: 60vh */
+  }
+
+  #session #drill-area {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;  /* allow flex shrink below content size */
+  }
+
   #input-area {
-    position: sticky;
-    bottom: 0;
+    flex-shrink: 0;
     padding-bottom: env(safe-area-inset-bottom, 0px);
     z-index: 10;
     background: var(--color-base);
@@ -5047,7 +5089,7 @@ html[data-theme="dark"] .empty-state::before {
 
 @media (min-width: 1024px) {
   #app {
-    max-width: 920px;
+    max-width: 1320px;
   }
   .stats-row {
     opacity: 1;
@@ -5105,7 +5147,7 @@ html[data-theme="dark"] .empty-state::before {
 
 @media (min-width: 1280px) {
   #app {
-    max-width: 960px;
+    max-width: 1440px;
   }
 }
 
@@ -5113,7 +5155,7 @@ html[data-theme="dark"] .empty-state::before {
 
 @media (min-width: 1440px) {
   #app {
-    max-width: 1020px;
+    max-width: 1560px;
   }
 }
 
@@ -7970,10 +8012,9 @@ html, body {
     min-width: auto;
   }
 
-  /* Input area: full-width, sticky at bottom */
+  /* Input area: full-width, anchored at bottom via flex (no sticky) */
   #input-area {
-    position: sticky;
-    bottom: 0;
+    flex-shrink: 0;
     margin-left: calc(-1 * var(--space-3));
     margin-right: calc(-1 * var(--space-3));
     padding: var(--space-3) var(--space-3);

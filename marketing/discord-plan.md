@@ -350,7 +350,7 @@ This is a study community for adults learning Mandarin Chinese. It was started b
 
 **About the App**
 
-Aelu is an adaptive drilling and reading system for Mandarin Chinese. 27 drill types, honest per-skill diagnostics, FSRS-based spaced repetition, and a graded reader where every word you look up becomes practice. Free for HSK 1-2 content, $14.99/month for full access. Learn more: [link]
+Aelu is an adaptive drilling and reading system for Mandarin Chinese. 44 drill types, honest per-skill diagnostics, FSRS-based spaced repetition, and a graded reader where every word you look up becomes practice. Free for HSK 1-2 content, $14.99/month for full access. Learn more: [link]
 
 This server is not a sales funnel. It is a study community. The app comes up naturally because the team uses it and builds it, but nobody here is required or expected to use it.
 

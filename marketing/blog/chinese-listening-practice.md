@@ -94,6 +94,6 @@ Consistency matters more than volume. Thirty minutes every day beats two hours o
 
 I built listening practice into [Aelu](https://aelu.app) specifically because I was frustrated with the gap between textbook audio (too slow, too clean) and native content (too fast, too much unknown vocabulary). The app offers listening exercises calibrated to your HSK level with adjustable playback speed — start at 0.7x and work up — plus transcript reveal on a per-sentence basis so you can do the listen-first-read-second workflow without extra tools.
 
-Words you miss in listening become drills automatically. That's the cleanup loop. It's part of the broader system — 27 drill types, adaptive SRS, graded reading — but for listening specifically, the speed control and transcript reveal are what I use most in my own practice.
+Words you miss in listening become drills automatically. That's the cleanup loop. It's part of the broader system — 44 drill types, adaptive SRS, graded reading — but for listening specifically, the speed control and transcript reveal are what I use most in my own practice.
 
 HSK 1-2 is free. The full system is $14.99/month.

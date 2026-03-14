@@ -203,6 +203,7 @@ def _handle_ws_session(ws, planner_fn, label):
             return
     bridge = WebBridge(ws)
     has_mic = request.args.get('mic', '1') != '0'
+    client_platform = _detect_client_platform()  # capture in request context before thread
     resume_token = bridge.session_uuid
     logger.info("[%s] %s WS connected user=%d (mic=%s)", bridge.session_uuid, label, user_id, has_mic,
                 extra={"user_id": user_id})
@@ -308,7 +309,7 @@ def _handle_ws_session(ws, planner_fn, label):
                 state = run_session(conn, plan, _web_show_fn, _web_input_fn,
                                     user_id=user_id, progress_fn=_progress,
                                     drill_meta_fn=_drill_meta,
-                                    client_platform=_detect_client_platform())
+                                    client_platform=client_platform)
 
                 # Collect extra summary data for the enriched done message
                 done_data = {

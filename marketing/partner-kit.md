@@ -28,12 +28,12 @@ Use whichever of these resonate with your audience:
 
 ### For general audiences:
 - "It's like Anki but with a curriculum. You don't build decks — you just study."
-- "27 drill types, not just flashcards. Reading, listening, speaking, and tone practice all in one place."
+- "44 drill types, not just flashcards. Reading, listening, speaking, and tone practice all in one place."
 - "Free for HSK 1-2. Full access is $14.99/month."
 
 ### For SRS-savvy audiences (Anki users, etc.):
 - "Modified FSRS algorithm with bayesian confidence dampening and interleaving enforcement."
-- "27 drill types targeting different cognitive skills — recognition, production, auditory discrimination, sentence-level comprehension."
+- "44 drill types targeting different cognitive skills — recognition, production, auditory discrimination, sentence-level comprehension."
 - "The cleanup loop turns reading exposure into SRS input. Every word you look up during graded reading feeds back into your drill queue."
 
 ### For HSK test preppers:
@@ -118,7 +118,7 @@ If a partner wants to record a walkthrough, suggest this structure (2-3 minutes)
 
 **0:00-0:15** — "I've been trying Aelu, a Chinese learning app built by a solo developer. Here's what makes it different."
 
-**0:15-0:45** — Start a drill session. Show 2-3 different drill types (e.g., vocabulary recognition → tone pair → cloze deletion). "It has 27 drill types, not just flashcards. The system picks what I need to work on."
+**0:15-0:45** — Start a drill session. Show 2-3 different drill types (e.g., vocabulary recognition → tone pair → cloze deletion). "It has 44 drill types, not just flashcards. The system picks what I need to work on."
 
 **0:45-1:15** — Open the graded reader. Read a passage. Tap a word to show the gloss. "Every word I tap gets logged. Watch what happens next time I start a session..." [Start new session, show the word appearing as a drill.] "That's the cleanup loop."
 
@@ -138,13 +138,13 @@ Partners can use or adapt these for their own channels:
 > I've been using @aeluapp for [X] weeks. The "cleanup loop" is genuinely clever — every word I look up during reading becomes a drill. It's like having a tutor who notices exactly what I don't know. [referral link]
 
 ### Instagram caption:
-> Found a Chinese learning app that actually respects my time. 27 drill types, graded reading, and adaptive scheduling that focuses on my weak spots. No streaks, no XP, no cartoon owl — just effective practice. Link in bio for 20% off.
+> Found a Chinese learning app that actually respects my time. 44 drill types, graded reading, and adaptive scheduling that focuses on my weak spots. No streaks, no XP, no cartoon owl — just effective practice. Link in bio for 20% off.
 
 ### YouTube video description blurb:
-> I've been using Aelu for my Chinese study. It's an adaptive SRS app with 27 drill types, graded reading, and a "cleanup loop" that turns every word you look up into a drill. Free for HSK 1-2, full access $14.99/month. Try it here: [referral link] (20% off first 3 months with code [CODE])
+> I've been using Aelu for my Chinese study. It's an adaptive SRS app with 44 drill types, graded reading, and a "cleanup loop" that turns every word you look up into a drill. Free for HSK 1-2, full access $14.99/month. Try it here: [referral link] (20% off first 3 months with code [CODE])
 
 ### Blog mention paragraph:
-> For SRS practice, I've been using Aelu (aeluapp.com). What sets it apart from Anki or other flashcard apps is the "cleanup loop" — you read graded Chinese passages at your HSK level, and every word you tap to look up gets added to your drill queue. The system has 27 drill types (not just flashcards), adaptive scheduling that targets your weakest skill, and HSK 1-6 alignment. It's free for HSK 1-2 content, with full access at $14.99/month. [I'm an affiliate — I earn a commission if you sign up through my link, but I only recommend tools I actually use.]
+> For SRS practice, I've been using Aelu (aeluapp.com). What sets it apart from Anki or other flashcard apps is the "cleanup loop" — you read graded Chinese passages at your HSK level, and every word you tap to look up gets added to your drill queue. The system has 44 drill types (not just flashcards), adaptive scheduling that targets your weakest skill, and HSK 1-6 alignment. It's free for HSK 1-2 content, with full access at $14.99/month. [I'm an affiliate — I earn a commission if you sign up through my link, but I only recommend tools I actually use.]
 
 ---
 

@@ -120,7 +120,7 @@ What's not: my tone accuracy plateaued. Need more listening at natural speed.
 No sugar-coating. The data is the data.
 
 **16.**
-I built 27 drill types for my Chinese learning app. Here's why:
+I built 44 drill types for my Chinese learning app. Here's why:
 
 A flashcard tests recognition. That's one skill.
 A cloze test forces sentence-level understanding. Different skill.
@@ -297,7 +297,7 @@ If you're building an HSK study plan, build for the new standard, not the old on
 
 4/ Flask for the web UI because it's the simplest thing that works. The entire web layer is ~500 lines.
 
-5/ The lesson: pick boring technology that lets you ship. I have 27 drill types, graded reading, listening practice, and diagnostics — because I spent time on features, not infrastructure.
+5/ The lesson: pick boring technology that lets you ship. I have 44 drill types, graded reading, listening practice, and diagnostics — because I spent time on features, not infrastructure.
 
 ### Thread 4: What I Got Wrong Building a Language App
 🧵 Mistakes I made building my Chinese learning app (so you don't repeat them):
@@ -418,7 +418,7 @@ I wanted a system that:
 → Tracks my progress honestly, without praise inflation
 → Respects my time — 15 minutes and done
 
-So I built it. 27 drill types. Graded reading. Adaptive scheduling. All running locally on SQLite with zero AI API calls.
+So I built it. 44 drill types. Graded reading. Adaptive scheduling. All running locally on SQLite with zero AI API calls.
 
 The most surprising lesson: building a language learning tool taught me more about how learning works than any course on pedagogy. The research on spaced repetition, interleaving, and desirable difficulty is fascinating — and most apps ignore it.
 

@@ -88,16 +88,16 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-body); color: var(--color-text); background: var(--color-base); line-height: 1.7; -webkit-font-smoothing: antialiased; }
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
-    nav .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 var(--space-4); display: flex; justify-content: space-between; align-items: center; }
+    nav .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-4); display: flex; justify-content: space-between; align-items: center; }
     nav .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
     nav .nav-links { list-style: none; display: flex; gap: var(--space-4); }
     nav .nav-links a { font-size: 0.95rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s ease; }
     nav .nav-links a:hover { color: var(--color-accent); }
-    .article-header { max-width: 720px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-5); text-align: center; }
+    .article-header { max-width: 1080px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-5); text-align: center; }
     .article-header h1 { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 600; line-height: 1.2; margin-bottom: var(--space-3); }
     .article-meta { font-size: 0.9rem; color: var(--color-text-faint); }
     .article-meta span + span::before { content: "\00b7"; margin: 0 0.5em; }
-    article { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4) var(--space-8); }
+    article { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-4) var(--space-8); }
     article h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; margin: var(--space-6) 0 var(--space-3); }
     article h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin: var(--space-5) 0 var(--space-2); }
     article p { margin-bottom: var(--space-3); line-height: 1.75; }
@@ -111,12 +111,12 @@
     article table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: 0.9rem; }
     article th, article td { padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); text-align: left; }
     article th { background: var(--color-surface); font-weight: 600; }
-    .article-cta { max-width: 720px; margin: 0 auto var(--space-6); padding: var(--space-5) var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); text-align: center; }
+    .article-cta { max-width: 1080px; margin: 0 auto var(--space-6); padding: var(--space-5) var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); text-align: center; }
     .article-cta h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-2); }
     .article-cta p { font-size: 0.95rem; color: var(--color-text-faint); margin-bottom: var(--space-4); }
     .btn-primary { display: inline-block; padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-base); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s ease; text-decoration: none; }
     .btn-primary:hover { opacity: 0.85; }
-    .newsletter { max-width: 720px; margin: 0 auto var(--space-8); padding: var(--space-5) var(--space-4); border-top: 1px solid var(--color-border); text-align: center; }
+    .newsletter { max-width: 1080px; margin: 0 auto var(--space-8); padding: var(--space-5) var(--space-4); border-top: 1px solid var(--color-border); text-align: center; }
     .newsletter h3 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; margin-bottom: var(--space-2); }
     .newsletter p { font-size: 0.9rem; color: var(--color-text-faint); margin-bottom: var(--space-3); }
     .newsletter-form { display: flex; gap: var(--space-2); max-width: 420px; margin: 0 auto; }
@@ -134,7 +134,7 @@
     @keyframes drift-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .article-header { animation: drift-up 0.6s ease-out both; }
     @media (prefers-reduced-motion: reduce) { .article-header { animation: none; opacity: 1; } }
-    .share-bar { max-width: 720px; margin: 0 auto var(--space-5); padding: var(--space-4) var(--space-4) 0; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+    .share-bar { max-width: 1080px; margin: 0 auto var(--space-5); padding: var(--space-4) var(--space-4) 0; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
     .share-bar span { font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-faint); }
     .share-bar button { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text-faint); font-family: var(--font-body); font-size: 0.85rem; cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; line-height: 1; }
     .share-bar button:hover { color: var(--color-accent); border-color: var(--color-accent); }
@@ -424,7 +424,7 @@
 
     <p><a href="https://aeluapp.com">Aelu</a> was built to combine all four methods &mdash; radical awareness, adaptive spaced repetition, graded reading with inline glosses, and the cleanup loop where words you look up automatically become drills.</p>
 
-    <p>It covers HSK 1 through 6 with 27 drill types, and the SRS algorithm adapts to how you actually perform, not a fixed schedule. HSK 1-2 content is free. Beyond that, it is $14.99/month.</p>
+    <p>It covers HSK 1 through 6 with 44 drill types, and the SRS algorithm adapts to how you actually perform, not a fixed schedule. HSK 1-2 content is free. Beyond that, it is $14.99/month.</p>
 
     <p>It was built because the tools that existed made learners choose between flashcards and reading, and there needed to be something that connected them.</p>
   </article>

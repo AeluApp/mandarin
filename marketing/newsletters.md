@@ -207,7 +207,7 @@ Hey —
 I've been building this app for a while now, and I want to be honest about what I got wrong. Not because failure stories are trendy — because these mistakes probably apply to how you study too.
 
 **Mistake 1: Features over content.**
-I built 27 drill types before I had great content to drill. Having a tone pair drill is useless if the word data doesn't include tone information. I should have spent 70% of my time on content quality and 30% on code. I did the opposite.
+I built 44 drill types before I had great content to drill. Having a tone pair drill is useless if the word data doesn't include tone information. I should have spent 70% of my time on content quality and 30% on code. I did the opposite.
 
 **Lesson for learners:** The quality of your study material matters more than the tool you use. A well-curated Anki deck beats a fancy app with bad data.
 

@@ -225,7 +225,7 @@ fbq('track', 'Purchase', { value: 12.00, currency: 'USD' });
 > Your Aelu account is waiting. Your first session takes 10 minutes and the system calibrates to your level. [Start now →]
 
 **Free user upgrade:**
-> You've been learning for [X] weeks. Ready for the full curriculum? HSK 3-6, all 27 drill types, speaking practice. $14.99/month.
+> You've been learning for [X] weeks. Ready for the full curriculum? HSK 3-6, all 44 drill types, speaking practice. $14.99/month.
 
 ---
 

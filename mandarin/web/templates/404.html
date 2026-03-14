@@ -8,16 +8,63 @@
   <link rel="icon" href="/static/favicon.ico?v=2" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&family=Noto+Serif+SC:wght@400;700&display=swap">
   <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .not-found-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+      padding: var(--space-6);
+    }
+    .not-found-hanzi {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+      font-size: 4rem;
+      color: var(--color-accent);
+      opacity: 0.6;
+      margin-bottom: var(--space-4);
+      line-height: 1;
+    }
+    .not-found-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--color-text);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-3);
+    }
+    .not-found-sub {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-6);
+      max-width: 360px;
+    }
+    .not-found-link {
+      display: inline-block;
+      color: var(--color-on-accent, #fff);
+      background: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      text-decoration: none;
+      padding: 10px 28px;
+      border-radius: 2px;
+      transition: opacity 0.15s;
+    }
+    .not-found-link:hover { opacity: 0.85; }
+  </style>
 </head>
 <body>
   <div id="app" role="main">
-    <section style="text-align:center;padding:var(--space-8) 0;">
-      <div class="illustration-stars"></div>
-      <h1 style="font-family:var(--font-heading);font-size:var(--text-xl);font-weight:400;color:var(--color-text-dim);letter-spacing:0.05em;margin-bottom:var(--space-4);">Nothing here.</h1>
-      <a href="/" style="color:var(--color-accent);font-size:var(--text-sm);text-decoration:none;">Return to the dashboard</a>
-    </section>
+    <div class="not-found-wrap">
+      <div class="not-found-hanzi">迷</div>
+      <h1 class="not-found-title">Page not found</h1>
+      <p class="not-found-sub">This page doesn't exist or may have moved.</p>
+      <a href="/" class="not-found-link">Back to dashboard</a>
+    </div>
   </div>
 </body>
 </html>

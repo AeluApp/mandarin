@@ -27,7 +27,7 @@ Last updated: 2026-02-17
 **Our response:**
 - Lead with the cleanup loop in all top-of-funnel content — it is the most differentiating concept
 - Landing page loads in under 2 seconds; hero is three elements only (tagline, one-sentence value prop, pricing)
-- Every piece of awareness content includes one specific, verifiable claim (27 drill types, FSRS algorithm, per-skill diagnostics)
+- Every piece of awareness content includes one specific, verifiable claim (44 drill types, FSRS algorithm, per-skill diagnostics)
 
 **Conversion benchmark:** 2-5% of awareness impressions click through to landing page (varies by channel: Reddit organic 3-7%, paid social 1-3%, SEO 4-8%)
 
@@ -394,7 +394,7 @@ This is not an arbitrary threshold. It is the behavioral milestone that predicts
 - 5+ sessions in 7 days indicates a power user but sets the bar too high. Requiring daily use in the first week would exclude evening-and-weekend studiers who are good long-term users.
 
 **2+ drill types (not just flashcards):**
-- Users who only experience vocabulary flashcards in their first week are seeing 1 of 27 drill types. They have not experienced the product's core differentiator.
+- Users who only experience vocabulary flashcards in their first week are seeing 1 of 44 drill types. They have not experienced the product's core differentiator.
 - Experiencing 2+ drill types (e.g., vocabulary recognition + tone discrimination, or cloze + listening) gives the user a taste of adaptive variety. They understand that the system is doing something different.
 - The system enforces drill type variety in sessions 2 and 3, so this criterion is met automatically for users who complete 3 sessions. It serves as a data validation check: if a user somehow completed 3 sessions with only 1 drill type, something is broken in the session builder.
 
@@ -476,7 +476,7 @@ This is not an arbitrary threshold. It is the behavioral milestone that predicts
 
 ### The natural trigger
 
-The free tier covers all HSK 1-2 content — approximately 300 words, foundational grammar, and the full system (27 drill types, diagnostics, graded reader at HSK 1-2 level). The paywall activates when the user approaches HSK 3 content.
+The free tier covers all HSK 1-2 content — approximately 300 words, foundational grammar, and the full system (44 drill types, diagnostics, graded reader at HSK 1-2 level). The paywall activates when the user approaches HSK 3 content.
 
 This trigger point is deliberate:
 
@@ -545,7 +545,7 @@ Language learning retention differs from typical SaaS retention because the prod
 
 3. **Appropriate difficulty.** Too easy and users feel they are wasting time. Too hard and they feel defeated. The adaptive system must keep difficulty in the productive struggle zone: challenging enough to require effort, achievable enough to maintain confidence.
 
-4. **Content freshness.** Users who only do vocabulary flashcards will tire of the format. The 27 drill types and graded reader provide variety, but the system must actively rotate drill types, not wait for users to discover them.
+4. **Content freshness.** Users who only do vocabulary flashcards will tire of the format. The 44 drill types and graded reader provide variety, but the system must actively rotate drill types, not wait for users to discover them.
 
 5. **Sunk cost awareness (healthy).** Users who can see that they have 400 words in active rotation, 50 passages read, and 12 weeks of progress data will think twice before switching apps. This is not lock-in through friction — it is honest data about effort invested.
 

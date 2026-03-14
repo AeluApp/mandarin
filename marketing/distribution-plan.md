@@ -130,7 +130,7 @@ We're an independent team learning Mandarin, and we built an app called Aelu
 around what I call the "cleanup loop" — you read graded Chinese passages,
 tap words you don't know, and those exact words become your next drill.
 
-It has 27 drill types, HSK 1-6 alignment, and adaptive scheduling.
+It has 44 drill types, HSK 1-6 alignment, and adaptive scheduling.
 No AI at runtime — everything is deterministic.
 
 I'd love to give you a free account. No expectation of coverage —

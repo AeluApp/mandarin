@@ -95,9 +95,9 @@ Columns: what to post, where to post it, source file, and whether it's ready to 
 | Mon | Publish blog post 5 (HSK levels real world) | Blog | blog/hsk-levels-real-world.md | P |
 | Tue | Post LinkedIn 2 (engagement vs. learning) | LinkedIn | social-media.md | P |
 | Wed | Submit to directories: AlternativeTo, BetaList, SaaSHub | Directories | distribution-plan.md | Manual |
-| Thu | Post tweet #16 (27 drill types — why) | Twitter/X | social-media.md | Y |
+| Thu | Post tweet #16 (44 drill types — why) | Twitter/X | social-media.md | Y |
 | Fri | Start retargeting ads ($5-10/day) | Meta Ads | tracking-plan.md | Manual |
-| Sat | Publish Short 13 (27 drill types montage) | YT Shorts/TikTok/Reels | youtube-scripts.md | P |
+| Sat | Publish Short 13 (44 drill types montage) | YT Shorts/TikTok/Reels | youtube-scripts.md | P |
 
 ### Week 9
 | Day | Action | Platform | Source File | Ready? |

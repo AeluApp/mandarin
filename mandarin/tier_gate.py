@@ -38,10 +38,12 @@ PREMIUM_FEATURES = {
 def get_user_tier(conn: sqlite3.Connection, user_id: int) -> str:
     """Return 'free', 'paid', or 'admin' for a user."""
     row = conn.execute(
-        "SELECT subscription_tier FROM user WHERE id = ?", (user_id,)
+        "SELECT subscription_tier, is_admin FROM user WHERE id = ?", (user_id,)
     ).fetchone()
     if not row:
         return "free"
+    if row["is_admin"]:
+        return "admin"
     return row["subscription_tier"] or "free"
 
 

@@ -101,13 +101,17 @@ def subscription_status():
         with db.connection() as conn:
             row = conn.execute(
                 """SELECT subscription_tier, subscription_status, subscription_expires_at,
-                          stripe_customer_id FROM user WHERE id = ?""",
+                          stripe_customer_id, is_admin FROM user WHERE id = ?""",
                 (current_user.id,)
             ).fetchone()
             if not row:
                 return jsonify({"error": "User not found"}), 404
+            # Admins always have full access regardless of subscription state
+            tier = row["subscription_tier"] or "free"
+            if row["is_admin"]:
+                tier = "full"
             return jsonify({
-                "tier": row["subscription_tier"] or "free",
+                "tier": tier,
                 "status": row["subscription_status"] or "active",
                 "expires_at": row["subscription_expires_at"],
                 "has_stripe": bool(row["stripe_customer_id"]),

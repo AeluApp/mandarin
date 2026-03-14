@@ -577,7 +577,7 @@ function showUpgradePrompt(feature, context) {
     +     '<div class="upgrade-plan-note">Billed monthly</div>'
     +   '</div>'
     + '</div>'
-    + '<button class="btn-primary upgrade-cta" data-plan="annual">Start free trial</button>'
+    + '<button class="btn-primary upgrade-cta" data-plan="annual">Get Full Access</button>'
     + '<button class="upgrade-dismiss">Maybe later</button>'
     + '<div class="upgrade-trust">30-day refund. Cancel anytime.</div>'
     + '</div>';
@@ -9700,7 +9700,7 @@ function showStreakRecoveryBanner(previousStreak, freezesAvailable) {
   banner.id = "streak-recovery-banner";
   banner.style.cssText = "padding:16px 20px;margin:0 0 16px;background:var(--color-surface);border-left:4px solid var(--color-secondary,#6A7A5A);font-family:var(--font-body);font-size:14px;line-height:1.5;";
 
-  var msg = '<strong>Welcome back.</strong> Your previous streak was <strong>' + previousStreak + ' days</strong>.';
+  var msg = '<strong>Welcome back.</strong> Your previous streak was <strong>' + previousStreak + ' day' + (previousStreak !== 1 ? 's' : '') + '</strong>.';
 
   if (freezesAvailable > 0) {
     msg += ' You have ' + freezesAvailable + ' streak freeze' + (freezesAvailable > 1 ? 's' : '') + ' available.';

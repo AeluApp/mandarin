@@ -669,7 +669,7 @@ I am going to skip the cheerleading and focus on what actually works:
 
 ### r/ChineseLanguage Launch Post
 
-**Title:** I built a Chinese learning app because I got tired of managing Anki decks -- 27 drill types, honest diagnostics, and a "cleanup loop" that drills what you actually don't know
+**Title:** I built a Chinese learning app because I got tired of managing Anki decks -- 44 drill types, honest diagnostics, and a "cleanup loop" that drills what you actually don't know
 
 **Body:**
 
@@ -748,7 +748,7 @@ This is not a novel concept -- good tutors do this naturally. They watch you str
 
 ### r/languagelearning Launch Post
 
-**Title:** I built a drilling and reading app for Mandarin Chinese -- here's what 27 drill types and per-skill diagnostics taught me about how I actually learn
+**Title:** I built a drilling and reading app for Mandarin Chinese -- here's what 44 drill types and per-skill diagnostics taught me about how I actually learn
 
 **Body:**
 
@@ -758,7 +758,7 @@ I have been building a Chinese learning app for myself while studying Mandarin, 
 
 When I tracked my performance across different exercise types, the gaps were dramatic. I could recognize a word on a flashcard at 90%+ accuracy, but my ability to identify it in audio was 60%, and my ability to produce the correct tones was 45%. Same word. Three completely different skills. Flashcards were training one pathway and leaving the others untouched.
 
-The app now has 27 drill types: recognition, production, listening discrimination, tone pairs, cloze deletion, sentence construction, audio-to-text matching, register awareness, and speaking with tone grading. Each one tests a different cognitive skill. The scheduling algorithm rotates through them based on which skill is weakest for each item.
+The app now has 44 drill types: recognition, production, listening discrimination, tone pairs, cloze deletion, sentence construction, audio-to-text matching, register awareness, and speaking with tone grading. Each one tests a different cognitive skill. The scheduling algorithm rotates through them based on which skill is weakest for each item.
 
 **Finding 2: Tracking skills independently changes how you study.**
 
@@ -774,7 +774,7 @@ This applies to any language. If you are reading French and look up a word, that
 
 **What the app is:**
 
-It is called Aelu. It is a drilling and reading system for Chinese, built on a modified FSRS algorithm (same family as Anki's scheduler), with 27 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $14.99/month for full access. Python + SQLite, runs locally, zero AI at runtime.
+It is called Aelu. It is a drilling and reading system for Chinese, built on a modified FSRS algorithm (same family as Anki's scheduler), with 44 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $14.99/month for full access. Python + SQLite, runs locally, zero AI at runtime.
 
 I am one person, I use it daily for my own study, and I am happy to discuss the methodology, the technical decisions, or the learning science behind any of it.
 
@@ -782,7 +782,7 @@ I am one person, I use it daily for my own study, and I am happy to discuss the 
 
 ### r/SideProject Launch Post
 
-**Title:** I built a Chinese learning app as a solo dev -- Python, SQLite, 27 drill types, and what I learned about content being harder than code
+**Title:** I built a Chinese learning app as a solo dev -- Python, SQLite, 44 drill types, and what I learned about content being harder than code
 
 **Body:**
 
@@ -800,7 +800,7 @@ The entire web layer is ~500 lines of Flask. The database schema has 15 tables. 
 
 **What it does:**
 
-27 drill types (tone pair discrimination, cloze deletion, audio matching, sentence construction, etc.), a graded reader where looked-up words automatically become drills (I call this the "cleanup loop"), and per-skill diagnostics that track vocabulary, listening, reading, and tones independently with HSK readiness projections.
+44 drill types (tone pair discrimination, cloze deletion, audio matching, sentence construction, etc.), a graded reader where looked-up words automatically become drills (I call this the "cleanup loop"), and per-skill diagnostics that track vocabulary, listening, reading, and tones independently with HSK readiness projections.
 
 **What I learned building it:**
 
@@ -826,7 +826,7 @@ Happy to answer questions about the technical decisions, the economics, or the l
 
 ### Show HN Post
 
-**Title:** Show HN: Aelu -- Chinese learning app with 27 drill types, FSRS scheduling, zero AI at runtime
+**Title:** Show HN: Aelu -- Chinese learning app with 44 drill types, FSRS scheduling, zero AI at runtime
 
 **Body:**
 
@@ -835,7 +835,7 @@ I built a Chinese learning system for my own Mandarin study. Python + SQLite + F
 Core features:
 
 - Modified FSRS algorithm (same family as Anki's scheduler) with bayesian confidence dampening to prevent false confidence from a few good sessions
-- 27 drill types: tone pair discrimination, cloze deletion, audio-to-character matching, sentence construction, register awareness, speaking drills with tone grading
+- 44 drill types: tone pair discrimination, cloze deletion, audio-to-character matching, sentence construction, register awareness, speaking drills with tone grading
 - "Cleanup loop": read graded Chinese passages, tap unknown words, those words enter your SRS queue across all drill types
 - Per-skill diagnostics tracking vocabulary, listening, reading, and tone accuracy independently, with HSK readiness projections
 - Interleaving enforcement: sessions mix drill types within a single session rather than blocking by type, based on research showing interleaved practice produces stronger retention
@@ -1485,7 +1485,7 @@ Depends on what you need. Here is my honest breakdown:
 - **Clean SRS without the deck management:** Hack Chinese. Paid but well-organized.
 - **Reading practice:** Du Chinese for graded reading.
 - **Dictionary:** Pleco. Everyone needs Pleco regardless of what else you use.
-- **Drilling + reading + diagnostics in one system:** I built one called Aelu -- 27 drill types, graded reader with a cleanup loop, per-skill HSK tracking. Free for HSK 1-2. I am biased because I built it, so take that accordingly.
+- **Drilling + reading + diagnostics in one system:** I built one called Aelu -- 44 drill types, graded reader with a cleanup loop, per-skill HSK tracking. Free for HSK 1-2. I am biased because I built it, so take that accordingly.
 
 The best app is the one you will actually use daily. Try a few and see which one sticks.
 
@@ -1497,7 +1497,7 @@ If you want maximum control and do not mind setup time, Anki is hard to beat. It
 
 If you want structured progression without managing anything, HelloChinese (beginner) or Hack Chinese (intermediate+) both provide curated content in a clean interface.
 
-If you feel like your vocabulary is growing but your actual Chinese skills are not keeping up, you might need more drill variety. Flashcard recognition is one skill out of many. Listening discrimination, tone pair practice, cloze deletion, and sentence construction each train a different cognitive pathway. I built an app called Aelu that offers 27 drill types for this reason -- but the broader point applies regardless of what tool you use: vary your practice types.
+If you feel like your vocabulary is growing but your actual Chinese skills are not keeping up, you might need more drill variety. Flashcard recognition is one skill out of many. Listening discrimination, tone pair practice, cloze deletion, and sentence construction each train a different cognitive pathway. I built an app called Aelu that offers 44 drill types for this reason -- but the broader point applies regardless of what tool you use: vary your practice types.
 
 **Variation 3 (Long, diagnostic-focused):**
 
@@ -1513,7 +1513,7 @@ Before picking an app, figure out what your actual problem is:
 
 "I do not know if I am HSK 3 or HSK 2" --> You need diagnostics. Most apps do not offer per-skill assessment.
 
-I built an app called Aelu that tries to address all of these (27 drill types, graded reader, listening practice, per-skill diagnostics). Free for HSK 1-2. But honestly, the right answer depends on your specific situation. Happy to give a more targeted recommendation if you share where you are and what is not working.
+I built an app called Aelu that tries to address all of these (44 drill types, graded reader, listening practice, per-skill diagnostics). Free for HSK 1-2. But honestly, the right answer depends on your specific situation. Happy to give a more targeted recommendation if you share where you are and what is not working.
 
 ---
 

@@ -223,7 +223,7 @@ def admin_users():
         with db.connection() as conn:
             rows = conn.execute(
                 """SELECT u.id, u.email, u.display_name, u.subscription_tier,
-                          u.created_at, u.last_login_at,
+                          u.is_admin, u.created_at, u.last_login_at,
                           (SELECT MAX(started_at) FROM session_log WHERE user_id = u.id) as last_session
                    FROM user u
                    ORDER BY u.created_at DESC
@@ -231,11 +231,12 @@ def admin_users():
             ).fetchall()
             users = []
             for r in rows:
+                tier = "admin" if r["is_admin"] else (r["subscription_tier"] or "free")
                 users.append({
                     "id": r["id"],
                     "email": r["email"],
                     "display_name": r["display_name"],
-                    "tier": r["subscription_tier"],
+                    "tier": tier,
                     "created_at": r["created_at"],
                     "last_login": r["last_login_at"],
                     "last_session": r["last_session"],
@@ -293,9 +294,10 @@ def admin_crashes():
                 " u.display_name as user_name"
                 " FROM crash_log c"
                 " LEFT JOIN user u ON c.user_id = u.id"
+                " WHERE c.request_path NOT IN ('/unhandled', '/unhandled/')"
             )
             if user_id:
-                query += " WHERE c.user_id = ?"
+                query += " AND c.user_id = ?"
                 params.append(user_id)
             query += " ORDER BY c.timestamp DESC LIMIT ? OFFSET ?"
             params.extend([per_page, offset])
@@ -394,6 +396,9 @@ def admin_sessions():
             rows = conn.execute(query, params).fetchall()
             entries = []
             for r in rows:
+                completed = r["items_completed"] or 0
+                correct = r["items_correct"] or 0
+                accuracy = round(correct / completed * 100, 1) if completed > 0 else None
                 entries.append({
                     "id": r["id"],
                     "user_id": r["user_id"],
@@ -405,6 +410,7 @@ def admin_sessions():
                     "items_planned": r["items_planned"],
                     "items_completed": r["items_completed"],
                     "items_correct": r["items_correct"],
+                    "accuracy": accuracy,
                     "outcome": r["session_outcome"],
                 })
             return jsonify({"sessions": entries, "page": page, "per_page": per_page})
@@ -1957,925 +1963,925 @@ def admin_completion_segments():
         logger.error("Admin completion segments error (%s): %s", type(e).__name__, e)
         return jsonify({"error": "Completion segments unavailable"}), 500
 
-    # ── Experiments ────────────────────────────────────────────────────
+# ── Experiments ────────────────────────────────────────────────────
 
-    @admin_bp.route("/api/admin/experiments")
-    @admin_required
-    @api_error_handler("AdminExperiments")
-    def admin_experiments():
-        """A/B experiment analysis — uses experiment module for proper user-level analysis."""
-        try:
-            from .. import experiments as exp_module
+@admin_bp.route("/api/admin/experiments")
+@admin_required
+@api_error_handler("AdminExperiments")
+def admin_experiments():
+    """A/B experiment analysis — uses experiment module for proper user-level analysis."""
+    try:
+        from .. import experiments as exp_module
 
-            with db.connection() as conn:
-                # Get all running and concluded experiments
-                all_experiments = exp_module.list_experiments(conn)
-                results = []
+        with db.connection() as conn:
+            # Get all running and concluded experiments
+            all_experiments = exp_module.list_experiments(conn)
+            results = []
 
-                for exp in all_experiments:
-                    exp_name = exp["name"]
-                    exp_results = exp_module.get_experiment_results(conn, exp_name)
-                    guardrails = exp_module.check_guardrails(conn, exp_name)
-                    seq_test = exp_module.sequential_test(conn, exp_name)
-
-                    variants_list = json.loads(exp["variants"])
-                    variant_data = exp_results.get("variants", {})
-
-                    # Build recommendation
-                    recommendation = seq_test.get("recommendation", "continue")
-                    if any(g.get("degraded") for g in guardrails.values()):
-                        recommendation = "alert_guardrail"
-
-                    results.append({
-                        "name": exp_name,
-                        "description": exp.get("description", ""),
-                        "status": exp.get("status", "draft"),
-                        "traffic_pct": exp.get("traffic_pct", 100),
-                        "min_sample_size": exp.get("min_sample_size", 100),
-                        "variants": variant_data,
-                        "variant_names": variants_list,
-                        "p_value": exp_results.get("p_value"),
-                        "effect_size": exp_results.get("effect_size"),
-                        "ci_95": exp_results.get("ci_95"),
-                        "significant": exp_results.get("significant", False),
-                        "min_sample_met": exp_results.get("min_sample_met", False),
-                        "guardrails": guardrails,
-                        "sequential": {
-                            "can_conclude": seq_test.get("can_conclude", False),
-                            "adjusted_alpha": seq_test.get("adjusted_alpha"),
-                            "information_fraction": seq_test.get("information_fraction", 0),
-                            "recommendation": recommendation,
-                        },
-                        "conclusion": json.loads(exp["conclusion"]) if exp.get("conclusion") else None,
-                    })
-
-                return jsonify({"experiments": results})
-        except (sqlite3.Error, KeyError, TypeError, ImportError) as e:
-            logger.error("Admin experiments error (%s): %s", type(e).__name__, e)
-            return jsonify({"error": "Experiments unavailable"}), 500
-
-    # ── Onboarding Funnel ──────────────────────────────────────────────
-
-    @admin_bp.route("/api/admin/onboarding-funnel")
-    @admin_required
-    @api_error_handler("AdminOnboardingFunnel")
-    def admin_onboarding_funnel():
-        """Onboarding funnel: registered → level set → goal set → placement → complete → first session."""
-        try:
-            with db.connection() as conn:
-                total_users = conn.execute("SELECT COUNT(*) as cnt FROM user WHERE is_active = 1").fetchone()["cnt"]
-
-                # Count users at each stage via lifecycle events
-                stages = []
-
-                stages.append({
-                    "stage": "Registered",
-                    "count": total_users,
-                })
-
-                for event_type, label in [
-                    ("level_set", "Level Set"),
-                    ("goal_set", "Goal Set"),
-                    ("placement_complete", "Placement Done"),
-                    ("onboarding_complete", "Onboarding Complete"),
-                    ("first_session", "First Session"),
-                ]:
-                    try:
-                        row = conn.execute(
-                            "SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event WHERE event_type = ?",
-                            (event_type,)
-                        ).fetchone()
-                        count = row["cnt"] if row else 0
-                    except sqlite3.OperationalError:
-                        count = 0
-                    stages.append({"stage": label, "count": count})
-
-                return jsonify({"stages": stages, "total_users": total_users})
-        except (sqlite3.Error, KeyError, TypeError) as e:
-            logger.error("Admin onboarding funnel error (%s): %s", type(e).__name__, e)
-            return jsonify({"error": "Onboarding funnel unavailable"}), 500
-
-    # ── Passage Difficulty Calibration ─────────────────────────────────
-
-    @admin_bp.route("/api/admin/content/passage-difficulty")
-    @admin_required
-    @api_error_handler("AdminPassageDifficulty")
-    def admin_passage_difficulty():
-        """Calculate readability metrics for reading passages and flag miscalibrated ones."""
-        try:
-            from ..media_ingest import calculate_passage_difficulty
-            import json as _json
-
-            with db.connection() as conn:
-                passages = conn.execute("""
-                    SELECT id, title, hsk_level, content_zh
-                    FROM reading_passage
-                    ORDER BY hsk_level, id
-                """).fetchall()
-
-                results = []
-                for p in passages:
-                    text = p["content_zh"] or ""
-                    metrics = calculate_passage_difficulty(text)
-                    labeled_level = p["hsk_level"] or 0
-                    estimated_level = metrics.get("estimated_hsk", 0)
-                    miscalibrated = abs(labeled_level - estimated_level) >= 2
-
-                    results.append({
-                        "id": p["id"],
-                        "title": p["title"],
-                        "labeled_hsk": labeled_level,
-                        "estimated_hsk": estimated_level,
-                        "char_count": metrics["char_count"],
-                        "unique_ratio": metrics["unique_ratio"],
-                        "avg_sentence_length": metrics["avg_sentence_length"],
-                        "hsk_coverage": metrics.get("hsk_coverage", {}),
-                        "miscalibrated": miscalibrated,
-                    })
-
-                return jsonify({
-                    "passages": results,
-                    "total": len(results),
-                    "miscalibrated_count": sum(1 for r in results if r["miscalibrated"]),
-                })
-        except ImportError:
-            return jsonify({"error": "media_ingest module not available"}), 500
-        except sqlite3.OperationalError:
-            return jsonify({"passages": [], "total": 0, "miscalibrated_count": 0})
-        except (sqlite3.Error, KeyError, TypeError) as e:
-            logger.error("Admin passage difficulty error (%s): %s", type(e).__name__, e)
-            return jsonify({"error": "Passage difficulty unavailable"}), 500
-
-    # ── Interview Volunteers (NPS promoters) ───────────────────────────
-
-    @admin_bp.route("/api/admin/interview-volunteers")
-    @admin_required
-    @api_error_handler("AdminInterviewVolunteers")
-    def admin_interview_volunteers():
-        """List users who volunteered for interviews via NPS promoter flow."""
-        try:
-            with db.connection() as conn:
-                rows = conn.execute("""
-                    SELECT le.user_id, u.email, u.display_name, le.created_at,
-                           json_extract(le.metadata, '$.score') as nps_score
-                    FROM lifecycle_event le
-                    LEFT JOIN user u ON u.id = CAST(le.user_id AS INTEGER)
-                    WHERE le.event_type = 'interview_volunteered'
-                    ORDER BY le.created_at DESC
-                    LIMIT 100
-                """).fetchall()
-
-                volunteers = [{
-                    "user_id": r["user_id"],
-                    "email": r["email"] or "unknown",
-                    "name": r["display_name"] or "",
-                    "volunteered_at": r["created_at"],
-                    "nps_score": r["nps_score"],
-                } for r in rows]
-
-                return jsonify({"volunteers": volunteers, "count": len(volunteers)})
-        except (sqlite3.Error, KeyError, TypeError) as e:
-            logger.error("Admin interview volunteers error (%s): %s", type(e).__name__, e)
-            return jsonify({"error": "Interview volunteers unavailable"}), 500
-
-    # ── Notifications ──────────────────────────────────────────────────
-
-    def _gather_admin_notifications(conn):
-        """Scan all systems for actionable alerts. Returns list of notification dicts."""
-        notifs = []
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-
-        # 1. Crashes in last 24h
-        try:
-            crash_count = conn.execute(
-                "SELECT COUNT(*) as cnt FROM crash_log WHERE created_at >= datetime('now', '-24 hours')"
-            ).fetchone()["cnt"]
-            if crash_count > 0:
-                notifs.append({
-                    "id": "crashes_24h",
-                    "title": f"{crash_count} crash{'es' if crash_count != 1 else ''} in last 24 hours",
-                    "detail": "Check the Issues tab for tracebacks.",
-                    "severity": "critical" if crash_count >= 5 else "warning",
-                    "tab": "Issues",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 2. Client errors in last 24h
-        try:
-            client_errors = conn.execute(
-                "SELECT COUNT(*) as cnt FROM client_error_log WHERE created_at >= datetime('now', '-24 hours')"
-            ).fetchone()["cnt"]
-            if client_errors >= 10:
-                notifs.append({
-                    "id": "client_errors_24h",
-                    "title": f"{client_errors} client errors in last 24 hours",
-                    "detail": "JavaScript errors reported by users. Check Issues tab.",
-                    "severity": "warning",
-                    "tab": "Issues",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 3. Churn risk — users at high risk
-        try:
-            high_risk = conn.execute("""
-                SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
-                WHERE event_type = 'churn_risk_detected'
-                  AND created_at >= datetime('now', '-7 days')
-                  AND json_extract(metadata, '$.risk_level') IN ('high', 'critical')
-            """).fetchone()["cnt"]
-            if high_risk > 0:
-                notifs.append({
-                    "id": "churn_risk",
-                    "title": f"{high_risk} user{'s' if high_risk != 1 else ''} at high churn risk",
-                    "detail": "Review retention data and consider intervention.",
-                    "severity": "warning",
-                    "tab": "Retention",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 4. NPS detractors (score 0-6) in last 7 days
-        try:
-            detractors = conn.execute("""
-                SELECT COUNT(*) as cnt FROM user_feedback
-                WHERE feedback_type = 'nps' AND rating <= 6
-                  AND created_at >= datetime('now', '-7 days')
-            """).fetchone()["cnt"]
-            if detractors > 0:
-                notifs.append({
-                    "id": "nps_detractors",
-                    "title": f"{detractors} NPS detractor{'s' if detractors != 1 else ''} this week",
-                    "detail": "Read their feedback in the Feedback section.",
-                    "severity": "warning" if detractors >= 3 else "info",
-                    "tab": "Overview",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 5. Interview volunteers waiting
-        try:
-            volunteers = conn.execute("""
-                SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
-                WHERE event_type = 'interview_volunteered'
-                  AND created_at >= datetime('now', '-14 days')
-            """).fetchone()["cnt"]
-            if volunteers > 0:
-                notifs.append({
-                    "id": "interview_volunteers",
-                    "title": f"{volunteers} interview volunteer{'s' if volunteers != 1 else ''} waiting",
-                    "detail": "Promoters who want to chat. Reach out within a week.",
-                    "severity": "info",
-                    "tab": "Overview",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 6. Security events in last 24h
-        try:
-            sec_events = conn.execute("""
-                SELECT COUNT(*) as cnt FROM security_audit_log
-                WHERE severity IN ('ERROR', 'CRITICAL')
-                  AND created_at >= datetime('now', '-24 hours')
-            """).fetchone()["cnt"]
-            if sec_events > 0:
-                notifs.append({
-                    "id": "security_events",
-                    "title": f"{sec_events} security event{'s' if sec_events != 1 else ''} in 24h",
-                    "detail": "Check Security tab for details.",
-                    "severity": "critical",
-                    "tab": "Security",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
-
-        # 7. SPC out-of-control (with 5-Why template)
-        try:
-            from ..quality.spc import compute_spc_chart
-            from ..quality.flow_metrics import generate_five_why_template
-            for chart_type in ["drill_accuracy", "response_time", "session_completion"]:
-                spc = compute_spc_chart(conn, chart_type)
-                if spc and spc.get("out_of_control"):
-                    violations = spc.get("violations", [])
-                    violation_str = ", ".join(str(v) for v in violations[:3]) if violations else "unknown"
-                    five_why = generate_five_why_template(chart_type, f"Violations: {violation_str}")
-                    notifs.append({
-                        "id": f"spc_{chart_type}",
-                        "title": f"SPC out-of-control: {chart_type.replace('_', ' ')}",
-                        "detail": f"Control chart violation detected. 5-Why analysis available at /api/admin/quality/five-why/{chart_type}",
-                        "severity": "warning",
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                        "five_why": five_why,
-                    })
-        except (ImportError, Exception):
-            pass
-
-        # 8. Experiments: check running experiments and guardrails
-        try:
-            from .. import experiments as exp_module
-            running = exp_module.list_experiments(conn, status="running")
-            for exp in running:
+            for exp in all_experiments:
                 exp_name = exp["name"]
+                exp_results = exp_module.get_experiment_results(conn, exp_name)
                 guardrails = exp_module.check_guardrails(conn, exp_name)
-                degraded = [m for m, g in guardrails.items() if g.get("degraded")]
-                seq = exp_module.sequential_test(conn, exp_name)
+                seq_test = exp_module.sequential_test(conn, exp_name)
 
-                if degraded:
-                    notifs.append({
-                        "id": f"experiment_guardrail_{exp_name}",
-                        "title": f"Guardrail alert: {exp_name}",
-                        "detail": f"Metrics degraded: {', '.join(degraded)}. Consider pausing.",
-                        "severity": "critical",
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                    })
-                elif seq.get("can_conclude"):
-                    notifs.append({
-                        "id": f"experiment_significant_{exp_name}",
-                        "title": f"Experiment ready to conclude: {exp_name}",
-                        "detail": f"p={seq.get('current_p')}, recommendation: {seq.get('recommendation')}",
-                        "severity": "info",
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                    })
-                else:
-                    notifs.append({
-                        "id": "experiment_active",
-                        "title": f"A/B experiment running: {exp_name}",
-                        "detail": f"Traffic: {exp.get('traffic_pct', 100)}%. Info fraction: {seq.get('information_fraction', 0):.0%}. Check Quality > Experiments.",
-                        "severity": "info",
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                    })
-        except (sqlite3.OperationalError, ImportError):
-            pass
+                variants_list = json.loads(exp["variants"])
+                variant_data = exp_results.get("variants", {})
 
-        # 9. Grade appeals pending
-        try:
-            appeals = conn.execute(
-                "SELECT COUNT(*) as cnt FROM grade_appeal WHERE status = 'pending'"
-            ).fetchone()["cnt"]
-            if appeals > 0:
-                notifs.append({
-                    "id": "grade_appeals",
-                    "title": f"{appeals} grade appeal{'s' if appeals != 1 else ''} pending review",
-                    "detail": "Students disputed their grades. Review in Content tab.",
-                    "severity": "warning" if appeals >= 3 else "info",
-                    "tab": "Content",
-                    "timestamp": now_str,
+                # Build recommendation
+                recommendation = seq_test.get("recommendation", "continue")
+                if any(g.get("degraded") for g in guardrails.values()):
+                    recommendation = "alert_guardrail"
+
+                results.append({
+                    "name": exp_name,
+                    "description": exp.get("description", ""),
+                    "status": exp.get("status", "draft"),
+                    "traffic_pct": exp.get("traffic_pct", 100),
+                    "min_sample_size": exp.get("min_sample_size", 100),
+                    "variants": variant_data,
+                    "variant_names": variants_list,
+                    "p_value": exp_results.get("p_value"),
+                    "effect_size": exp_results.get("effect_size"),
+                    "ci_95": exp_results.get("ci_95"),
+                    "significant": exp_results.get("significant", False),
+                    "min_sample_met": exp_results.get("min_sample_met", False),
+                    "guardrails": guardrails,
+                    "sequential": {
+                        "can_conclude": seq_test.get("can_conclude", False),
+                        "adjusted_alpha": seq_test.get("adjusted_alpha"),
+                        "information_fraction": seq_test.get("information_fraction", 0),
+                        "recommendation": recommendation,
+                    },
+                    "conclusion": json.loads(exp["conclusion"]) if exp.get("conclusion") else None,
                 })
-        except sqlite3.OperationalError:
-            pass
 
-        # 10. Slow API responses
-        try:
-            slow = conn.execute("""
-                SELECT COUNT(*) as cnt FROM request_timing
-                WHERE duration_ms > 2000
-                  AND recorded_at >= datetime('now', '-24 hours')
-            """).fetchone()["cnt"]
-            if slow >= 5:
-                notifs.append({
-                    "id": "slow_api",
-                    "title": f"{slow} slow API responses (>2s) in 24h",
-                    "detail": "Performance degradation detected.",
-                    "severity": "warning",
-                    "tab": "Quality",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
+            return jsonify({"experiments": results})
+    except (sqlite3.Error, KeyError, TypeError, ImportError) as e:
+        logger.error("Admin experiments error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Experiments unavailable"}), 500
 
-        # 11. Kanban WIP limit breach
-        try:
-            wip_count = conn.execute(
-                "SELECT COUNT(*) as cnt FROM work_item WHERE status = 'in_progress'"
-            ).fetchone()["cnt"]
-            if wip_count > 5:
-                notifs.append({
-                    "id": "wip_exceeded",
-                    "title": f"WIP limit exceeded: {wip_count} items in progress (limit: 5)",
-                    "detail": "Finish or park existing work before starting new items.",
-                    "severity": "warning",
-                    "tab": "Quality",
-                    "timestamp": now_str,
-                })
-        except sqlite3.OperationalError:
-            pass
+# ── Onboarding Funnel ──────────────────────────────────────────────
 
-        # 12. Kanban aging alerts with escalation tiers
-        # Standard items: >14d = warning, >21d = critical
-        # Expedite items: >2d = warning, >5d = critical
-        try:
-            aging_rows = conn.execute("""
-                SELECT id, title,
-                       CAST(julianday('now') - julianday(started_at) AS INTEGER) AS age_days,
-                       COALESCE(service_class, 'standard') AS service_class
-                FROM work_item
-                WHERE status IN ('in_progress', 'blocked')
-                  AND started_at IS NOT NULL
+@admin_bp.route("/api/admin/onboarding-funnel")
+@admin_required
+@api_error_handler("AdminOnboardingFunnel")
+def admin_onboarding_funnel():
+    """Onboarding funnel: registered → level set → goal set → placement → complete → first session."""
+    try:
+        with db.connection() as conn:
+            total_users = conn.execute("SELECT COUNT(*) as cnt FROM user WHERE is_active = 1").fetchone()["cnt"]
+
+            # Count users at each stage via lifecycle events
+            stages = []
+
+            stages.append({
+                "stage": "Registered",
+                "count": total_users,
+            })
+
+            for event_type, label in [
+                ("onboarding_level_set", "Level Set"),
+                ("onboarding_goal_set", "Goal Set"),
+                ("onboarding_complete", "Onboarding Complete"),
+                ("first_session_started", "First Session"),
+            ]:
+                try:
+                    row = conn.execute(
+                        "SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event WHERE event_type = ?",
+                        (event_type,)
+                    ).fetchone()
+                    count = row["cnt"] if row else 0
+                except sqlite3.OperationalError:
+                    count = 0
+                stages.append({"stage": label, "count": count})
+
+            return jsonify({"stages": stages, "total_users": total_users})
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.error("Admin onboarding funnel error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Onboarding funnel unavailable"}), 500
+
+# ── Passage Difficulty Calibration ─────────────────────────────────
+
+@admin_bp.route("/api/admin/content/passage-difficulty")
+@admin_required
+@api_error_handler("AdminPassageDifficulty")
+def admin_passage_difficulty():
+    """Calculate readability metrics for reading passages and flag miscalibrated ones."""
+    try:
+        from ..media_ingest import calculate_passage_difficulty
+        import json as _json
+
+        with db.connection() as conn:
+            passages = conn.execute("""
+                SELECT id, title, hsk_level, content_zh
+                FROM reading_passage
+                ORDER BY hsk_level, id
             """).fetchall()
-            for r in aging_rows:
-                age = r["age_days"]
-                sc = r["service_class"]
-                severity = None
-                if sc == "expedite":
-                    if age > 5:
-                        severity = "critical"
-                    elif age > 2:
-                        severity = "warning"
-                else:
-                    # standard, fixed_date, intangible
-                    if age > 21:
-                        severity = "critical"
-                    elif age > 14:
-                        severity = "warning"
-                if severity:
-                    notifs.append({
-                        "id": f"aging_work_item_{r['id']}",
-                        "title": f"Work item aging: \"{r['title']}\" ({age}d in progress, {sc})",
-                        "detail": f"Age: {age} days. Service class: {sc}. "
-                                  f"Consider breaking it down, parking it, or finishing it.",
-                        "severity": severity,
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                    })
-        except sqlite3.OperationalError:
-            pass
 
-        # 13. Spiral: Risk register staleness (no risk updated in 30 days)
-        try:
-            latest_risk = conn.execute("""
-                SELECT MAX(updated_at) AS last_updated FROM risk_item
-                WHERE status = 'active'
-            """).fetchone()
-            if latest_risk and latest_risk["last_updated"]:
-                from datetime import datetime as _dt, timedelta as _td
-                last = _dt.fromisoformat(latest_risk["last_updated"])
-                if (_dt.now(timezone.utc) - last.replace(tzinfo=timezone.utc)) > _td(days=30):
-                    notifs.append({
-                        "id": "risk_register_stale",
-                        "title": "Risk register stale: no updates in 30+ days",
-                        "detail": "Review and update risk items. Good practice: monthly risk review.",
-                        "severity": "warning",
-                        "tab": "Quality",
-                        "timestamp": now_str,
-                    })
-            else:
-                # No active risks at all — nudge to create some
+            results = []
+            for p in passages:
+                text = p["content_zh"] or ""
+                metrics = calculate_passage_difficulty(text)
+                labeled_level = p["hsk_level"] or 0
+                estimated_level = metrics.get("estimated_hsk", 0)
+                miscalibrated = abs(labeled_level - estimated_level) >= 2
+
+                results.append({
+                    "id": p["id"],
+                    "title": p["title"],
+                    "labeled_hsk": labeled_level,
+                    "estimated_hsk": estimated_level,
+                    "char_count": metrics["char_count"],
+                    "unique_ratio": metrics["unique_ratio"],
+                    "avg_sentence_length": metrics["avg_sentence_length"],
+                    "hsk_coverage": metrics.get("hsk_coverage", {}),
+                    "miscalibrated": miscalibrated,
+                })
+
+            return jsonify({
+                "passages": results,
+                "total": len(results),
+                "miscalibrated_count": sum(1 for r in results if r["miscalibrated"]),
+            })
+    except ImportError:
+        return jsonify({"error": "media_ingest module not available"}), 500
+    except sqlite3.OperationalError:
+        return jsonify({"passages": [], "total": 0, "miscalibrated_count": 0})
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.error("Admin passage difficulty error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Passage difficulty unavailable"}), 500
+
+# ── Interview Volunteers (NPS promoters) ───────────────────────────
+
+@admin_bp.route("/api/admin/interview-volunteers")
+@admin_required
+@api_error_handler("AdminInterviewVolunteers")
+def admin_interview_volunteers():
+    """List users who volunteered for interviews via NPS promoter flow."""
+    try:
+        with db.connection() as conn:
+            rows = conn.execute("""
+                SELECT le.user_id, u.email, u.display_name, le.created_at,
+                       json_extract(le.metadata, '$.score') as nps_score
+                FROM lifecycle_event le
+                LEFT JOIN user u ON u.id = CAST(le.user_id AS INTEGER)
+                WHERE le.event_type = 'interview_volunteered'
+                ORDER BY le.created_at DESC
+                LIMIT 100
+            """).fetchall()
+
+            volunteers = [{
+                "user_id": r["user_id"],
+                "email": r["email"] or "unknown",
+                "name": r["display_name"] or "",
+                "volunteered_at": r["created_at"],
+                "nps_score": r["nps_score"],
+            } for r in rows]
+
+            return jsonify({"volunteers": volunteers, "count": len(volunteers)})
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.error("Admin interview volunteers error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Interview volunteers unavailable"}), 500
+
+# ── Notifications ──────────────────────────────────────────────────
+
+def _gather_admin_notifications(conn):
+    """Scan all systems for actionable alerts. Returns list of notification dicts."""
+    notifs = []
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+    # 1. Crashes in last 24h
+    try:
+        crash_count = conn.execute(
+            "SELECT COUNT(*) as cnt FROM crash_log WHERE created_at >= datetime('now', '-24 hours')"
+        ).fetchone()["cnt"]
+        if crash_count > 0:
+            notifs.append({
+                "id": "crashes_24h",
+                "title": f"{crash_count} crash{'es' if crash_count != 1 else ''} in last 24 hours",
+                "detail": "Check the Issues tab for tracebacks.",
+                "severity": "critical" if crash_count >= 5 else "warning",
+                "tab": "Issues",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 2. Client errors in last 24h
+    try:
+        client_errors = conn.execute(
+            "SELECT COUNT(*) as cnt FROM client_error_log WHERE created_at >= datetime('now', '-24 hours')"
+        ).fetchone()["cnt"]
+        if client_errors >= 10:
+            notifs.append({
+                "id": "client_errors_24h",
+                "title": f"{client_errors} client errors in last 24 hours",
+                "detail": "JavaScript errors reported by users. Check Issues tab.",
+                "severity": "warning",
+                "tab": "Issues",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 3. Churn risk — users at high risk
+    try:
+        high_risk = conn.execute("""
+            SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
+            WHERE event_type = 'churn_risk_detected'
+              AND created_at >= datetime('now', '-7 days')
+              AND json_extract(metadata, '$.risk_level') IN ('high', 'critical')
+        """).fetchone()["cnt"]
+        if high_risk > 0:
+            notifs.append({
+                "id": "churn_risk",
+                "title": f"{high_risk} user{'s' if high_risk != 1 else ''} at high churn risk",
+                "detail": "Review retention data and consider intervention.",
+                "severity": "warning",
+                "tab": "Retention",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 4. NPS detractors (score 0-6) in last 7 days
+    try:
+        detractors = conn.execute("""
+            SELECT COUNT(*) as cnt FROM user_feedback
+            WHERE feedback_type = 'nps' AND rating <= 6
+              AND created_at >= datetime('now', '-7 days')
+        """).fetchone()["cnt"]
+        if detractors > 0:
+            notifs.append({
+                "id": "nps_detractors",
+                "title": f"{detractors} NPS detractor{'s' if detractors != 1 else ''} this week",
+                "detail": "Read their feedback in the Feedback section.",
+                "severity": "warning" if detractors >= 3 else "info",
+                "tab": "Overview",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 5. Interview volunteers waiting
+    try:
+        volunteers = conn.execute("""
+            SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
+            WHERE event_type = 'interview_volunteered'
+              AND created_at >= datetime('now', '-14 days')
+        """).fetchone()["cnt"]
+        if volunteers > 0:
+            notifs.append({
+                "id": "interview_volunteers",
+                "title": f"{volunteers} interview volunteer{'s' if volunteers != 1 else ''} waiting",
+                "detail": "Promoters who want to chat. Reach out within a week.",
+                "severity": "info",
+                "tab": "Overview",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 6. Security events in last 24h
+    try:
+        sec_events = conn.execute("""
+            SELECT COUNT(*) as cnt FROM security_audit_log
+            WHERE severity IN ('ERROR', 'CRITICAL')
+              AND created_at >= datetime('now', '-24 hours')
+        """).fetchone()["cnt"]
+        if sec_events > 0:
+            notifs.append({
+                "id": "security_events",
+                "title": f"{sec_events} security event{'s' if sec_events != 1 else ''} in 24h",
+                "detail": "Check Security tab for details.",
+                "severity": "critical",
+                "tab": "Security",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 7. SPC out-of-control (with 5-Why template)
+    try:
+        from ..quality.spc import compute_spc_chart
+        from ..quality.flow_metrics import generate_five_why_template
+        for chart_type in ["drill_accuracy", "response_time", "session_completion"]:
+            spc = compute_spc_chart(conn, chart_type)
+            if spc and spc.get("out_of_control"):
+                violations = spc.get("violations", [])
+                violation_str = ", ".join(str(v) for v in violations[:3]) if violations else "unknown"
+                five_why = generate_five_why_template(chart_type, f"Violations: {violation_str}")
                 notifs.append({
-                    "id": "risk_register_empty",
-                    "title": "Risk register empty: no active risks tracked",
-                    "detail": "Add technical, operational, and learning risks to the register.",
+                    "id": f"spc_{chart_type}",
+                    "title": f"SPC out-of-control: {chart_type.replace('_', ' ')}",
+                    "detail": f"Control chart violation detected. 5-Why analysis available at /api/admin/quality/five-why/{chart_type}",
+                    "severity": "warning",
+                    "tab": "Quality",
+                    "timestamp": now_str,
+                    "five_why": five_why,
+                })
+    except (ImportError, Exception):
+        pass
+
+    # 8. Experiments: check running experiments and guardrails
+    try:
+        from .. import experiments as exp_module
+        running = exp_module.list_experiments(conn, status="running")
+        for exp in running:
+            exp_name = exp["name"]
+            guardrails = exp_module.check_guardrails(conn, exp_name)
+            degraded = [m for m, g in guardrails.items() if g.get("degraded")]
+            seq = exp_module.sequential_test(conn, exp_name)
+
+            if degraded:
+                notifs.append({
+                    "id": f"experiment_guardrail_{exp_name}",
+                    "title": f"Guardrail alert: {exp_name}",
+                    "detail": f"Metrics degraded: {', '.join(degraded)}. Consider pausing.",
+                    "severity": "critical",
+                    "tab": "Quality",
+                    "timestamp": now_str,
+                })
+            elif seq.get("can_conclude"):
+                notifs.append({
+                    "id": f"experiment_significant_{exp_name}",
+                    "title": f"Experiment ready to conclude: {exp_name}",
+                    "detail": f"p={seq.get('current_p')}, recommendation: {seq.get('recommendation')}",
                     "severity": "info",
                     "tab": "Quality",
                     "timestamp": now_str,
                 })
-        except sqlite3.OperationalError:
-            pass
-
-        # 14. Spiral: High-risk items (score >= 15) without mitigation work items
-        try:
-            high_risks = conn.execute("""
-                SELECT id, title, probability, impact,
-                       (probability * impact) AS risk_score
-                FROM risk_item
-                WHERE status = 'active'
-                  AND (probability * impact) >= 15
-            """).fetchall()
-            for r in high_risks:
-                severity = "critical" if r["risk_score"] >= 20 else "warning"
+            else:
                 notifs.append({
-                    "id": f"high_risk_{r['id']}",
-                    "title": f"High risk (score {r['risk_score']}): {r['title']}",
-                    "detail": "Create a mitigation work item if not already tracked.",
+                    "id": "experiment_active",
+                    "title": f"A/B experiment running: {exp_name}",
+                    "detail": f"Traffic: {exp.get('traffic_pct', 100)}%. Info fraction: {seq.get('information_fraction', 0):.0%}. Check Quality > Experiments.",
+                    "severity": "info",
+                    "tab": "Quality",
+                    "timestamp": now_str,
+                })
+    except (sqlite3.OperationalError, ImportError):
+        pass
+
+    # 9. Grade appeals pending
+    try:
+        appeals = conn.execute(
+            "SELECT COUNT(*) as cnt FROM grade_appeal WHERE status = 'pending'"
+        ).fetchone()["cnt"]
+        if appeals > 0:
+            notifs.append({
+                "id": "grade_appeals",
+                "title": f"{appeals} grade appeal{'s' if appeals != 1 else ''} pending review",
+                "detail": "Students disputed their grades. Review in Content tab.",
+                "severity": "warning" if appeals >= 3 else "info",
+                "tab": "Content",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 10. Slow API responses
+    try:
+        slow = conn.execute("""
+            SELECT COUNT(*) as cnt FROM request_timing
+            WHERE duration_ms > 2000
+              AND recorded_at >= datetime('now', '-24 hours')
+        """).fetchone()["cnt"]
+        if slow >= 5:
+            notifs.append({
+                "id": "slow_api",
+                "title": f"{slow} slow API responses (>2s) in 24h",
+                "detail": "Performance degradation detected.",
+                "severity": "warning",
+                "tab": "Quality",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 11. Kanban WIP limit breach
+    try:
+        wip_count = conn.execute(
+            "SELECT COUNT(*) as cnt FROM work_item WHERE status = 'in_progress'"
+        ).fetchone()["cnt"]
+        if wip_count > 5:
+            notifs.append({
+                "id": "wip_exceeded",
+                "title": f"WIP limit exceeded: {wip_count} items in progress (limit: 5)",
+                "detail": "Finish or park existing work before starting new items.",
+                "severity": "warning",
+                "tab": "Quality",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 12. Kanban aging alerts with escalation tiers
+    # Standard items: >14d = warning, >21d = critical
+    # Expedite items: >2d = warning, >5d = critical
+    try:
+        aging_rows = conn.execute("""
+            SELECT id, title,
+                   CAST(julianday('now') - julianday(started_at) AS INTEGER) AS age_days,
+                   COALESCE(service_class, 'standard') AS service_class
+            FROM work_item
+            WHERE status IN ('in_progress', 'blocked')
+              AND started_at IS NOT NULL
+        """).fetchall()
+        for r in aging_rows:
+            age = r["age_days"]
+            sc = r["service_class"]
+            severity = None
+            if sc == "expedite":
+                if age > 5:
+                    severity = "critical"
+                elif age > 2:
+                    severity = "warning"
+            else:
+                # standard, fixed_date, intangible
+                if age > 21:
+                    severity = "critical"
+                elif age > 14:
+                    severity = "warning"
+            if severity:
+                notifs.append({
+                    "id": f"aging_work_item_{r['id']}",
+                    "title": f"Work item aging: \"{r['title']}\" ({age}d in progress, {sc})",
+                    "detail": f"Age: {age} days. Service class: {sc}. "
+                              f"Consider breaking it down, parking it, or finishing it.",
                     "severity": severity,
                     "tab": "Quality",
                     "timestamp": now_str,
                 })
-        except sqlite3.OperationalError:
-            pass
+    except sqlite3.OperationalError:
+        pass
 
-        # 15. Intelligence escalations (alert+ within 24h)
-        try:
-            escalations = conn.execute("""
-                SELECT dl.id, dl.finding_id, dl.escalation_level, dl.decision_class,
-                       dl.requires_approval, pf.dimension, pf.title, pf.severity
-                FROM pi_decision_log dl
-                JOIN pi_finding pf ON dl.finding_id = pf.id
-                WHERE dl.created_at >= datetime('now', '-24 hours')
-                  AND dl.escalation_level IN ('alert', 'escalate', 'emergency')
-                  AND dl.approved_at IS NULL
-                  AND dl.decision IS NULL
-            """).fetchall()
-            for esc in escalations:
-                sev = "critical" if esc["escalation_level"] == "emergency" else "warning"
+    # 13. Spiral: Risk register staleness (no risk updated in 30 days)
+    try:
+        latest_risk = conn.execute("""
+            SELECT MAX(updated_at) AS last_updated FROM risk_item
+            WHERE status = 'active'
+        """).fetchone()
+        if latest_risk and latest_risk["last_updated"]:
+            from datetime import datetime as _dt, timedelta as _td
+            last = _dt.fromisoformat(latest_risk["last_updated"])
+            if (_dt.now(timezone.utc) - last.replace(tzinfo=timezone.utc)) > _td(days=30):
                 notifs.append({
-                    "id": f"intelligence_escalation_{esc['id']}",
-                    "title": f"Intelligence {esc['escalation_level']}: {esc['title']}",
-                    "detail": f"Finding in {esc['dimension']} ({esc['severity']}) "
-                              f"requires {esc['decision_class']} decision.",
-                    "severity": sev,
-                    "tab": "Intelligence",
+                    "id": "risk_register_stale",
+                    "title": "Risk register stale: no updates in 30+ days",
+                    "detail": "Review and update risk items. Good practice: monthly risk review.",
+                    "severity": "warning",
+                    "tab": "Quality",
                     "timestamp": now_str,
                 })
-        except sqlite3.OperationalError:
-            pass
-
-        # Sort: critical first, then warning, then info
-        severity_order = {"critical": 0, "warning": 1, "info": 2}
-        notifs.sort(key=lambda n: severity_order.get(n["severity"], 3))
-
-        # Enrich with actionable Claude Code prompts
-        _add_action_prompts(notifs, conn)
-
-        return notifs
-
-    def _add_action_prompts(notifs, conn):
-        """Add action_prompt to notifications that can be addressed by Claude Code."""
-        # Map notification IDs to prompt generators
-        for n in notifs:
-            nid = n["id"]
-
-            if nid == "crashes_24h":
-                # Fetch recent crash tracebacks for context
-                try:
-                    crashes = conn.execute(
-                        "SELECT traceback, endpoint FROM crash_log WHERE created_at >= datetime('now', '-24 hours') ORDER BY created_at DESC LIMIT 5"
-                    ).fetchall()
-                    traces = "\n---\n".join(f"Endpoint: {c['endpoint']}\n{c['traceback']}" for c in crashes if c["traceback"])
-                except Exception:
-                    traces = "(unable to fetch)"
-                n["action_prompt"] = (
-                    f"There are {n['title']}. Here are the most recent tracebacks:\n\n"
-                    f"{traces}\n\n"
-                    f"Diagnose the root cause(s) and fix the code. Run tests after."
-                )
-
-            elif nid == "client_errors_24h":
-                try:
-                    errors = conn.execute(
-                        "SELECT message, url, user_agent FROM client_error_log WHERE created_at >= datetime('now', '-24 hours') ORDER BY created_at DESC LIMIT 10"
-                    ).fetchall()
-                    errs = "\n".join(f"- {e['message']} (at {e['url']})" for e in errors)
-                except Exception:
-                    errs = "(unable to fetch)"
-                n["action_prompt"] = (
-                    f"There are client-side errors occurring. Recent errors:\n\n{errs}\n\n"
-                    f"Check mandarin/web/static/app.js and related JS for the root cause. Fix and test."
-                )
-
-            elif nid == "churn_risk":
-                n["action_prompt"] = (
-                    "Users are at high churn risk. Analyze the churn signals:\n\n"
-                    "1. Read mandarin/churn_detection.py to understand the churn model\n"
-                    "2. Check what's driving churn (session frequency drop, accuracy decline, etc.)\n"
-                    "3. Review the re-engagement email sequence in mandarin/email.py send_churn_prevention()\n"
-                    "4. Check if the onboarding flow has drop-off points via /api/admin/onboarding-funnel\n"
-                    "5. Suggest and implement product changes to reduce churn risk"
-                )
-
-            elif nid == "nps_detractors":
-                try:
-                    feedback = conn.execute(
-                        "SELECT rating, comment FROM user_feedback WHERE feedback_type = 'nps' AND rating <= 6 AND created_at >= datetime('now', '-7 days') ORDER BY rating ASC LIMIT 10"
-                    ).fetchall()
-                    fb = "\n".join(f"- Score {f['rating']}: {f['comment'] or '(no comment)'}" for f in feedback)
-                except Exception:
-                    fb = "(unable to fetch)"
-                n["action_prompt"] = (
-                    f"NPS detractors this week. Their feedback:\n\n{fb}\n\n"
-                    "Analyze the feedback themes. For each actionable complaint:\n"
-                    "1. Identify the relevant code/feature\n"
-                    "2. Implement fixes or improvements\n"
-                    "3. If it's a positioning/messaging issue, update marketing copy in marketing/landing/ and mandarin/email.py"
-                )
-
-            elif nid == "security_events":
-                n["action_prompt"] = (
-                    "Security events detected in the last 24 hours. Steps:\n\n"
-                    "1. Read the security_audit_log for details\n"
-                    "2. Check mandarin/web/routes.py and middleware.py for the security layer\n"
-                    "3. Fix any vulnerabilities found\n"
-                    "4. Add regression tests in tests/test_security_regression.py\n"
-                    "5. Review OWASP top 10 against the codebase"
-                )
-
-            elif nid.startswith("spc_"):
-                chart_type = nid.replace("spc_", "")
-                n["action_prompt"] = (
-                    f"SPC control chart '{chart_type}' is out of control.\n\n"
-                    "1. Read mandarin/quality/spc.py to understand which Western Electric rule was violated\n"
-                    "2. Query the recent observations to identify the trend\n"
-                    "3. If drill_accuracy: check mandarin/drills/ for broken drill logic\n"
-                    "4. If response_time: profile slow endpoints, check DB queries\n"
-                    "5. If session_completion: check mandarin/scheduler.py for session length/difficulty issues\n"
-                    "6. Fix the root cause and verify the chart returns to control"
-                )
-
-            elif nid == "slow_api":
-                try:
-                    slow = conn.execute(
-                        "SELECT endpoint, duration_ms FROM request_timing WHERE duration_ms > 2000 AND recorded_at >= datetime('now', '-24 hours') ORDER BY duration_ms DESC LIMIT 10"
-                    ).fetchall()
-                    endpoints = "\n".join(f"- {s['endpoint']}: {s['duration_ms']}ms" for s in slow)
-                except Exception:
-                    endpoints = "(unable to fetch)"
-                n["action_prompt"] = (
-                    f"Slow API responses detected. Slowest endpoints:\n\n{endpoints}\n\n"
-                    "1. Profile the slow queries (add EXPLAIN QUERY PLAN)\n"
-                    "2. Add missing indexes to schema.sql if needed\n"
-                    "3. Check for N+1 queries in the route handlers\n"
-                    "4. Consider caching for read-heavy endpoints\n"
-                    "5. Run tests after any changes"
-                )
-
-            elif nid == "wip_exceeded":
-                n["action_prompt"] = (
-                    "WIP limit exceeded — too many work items in progress.\n\n"
-                    "1. List current in-progress work items via /api/admin/quality/work-items\n"
-                    "2. Identify items that are stalled or blocked\n"
-                    "3. Either complete, park, or descope stalled items\n"
-                    "4. Consider if any items should be broken into smaller tasks"
-                )
-
-            elif nid.startswith("aging_work_item_"):
-                n["action_prompt"] = (
-                    f"Work item has been in progress too long: {n['title']}\n\n"
-                    "1. Check if the item is blocked on external dependencies\n"
-                    "2. If the scope grew, break it into smaller items\n"
-                    "3. If it's a code task, try to complete it now\n"
-                    "4. If it's not code-addressable, park it with a note"
-                )
-
-            elif nid.startswith("high_risk_"):
-                n["action_prompt"] = (
-                    f"High risk detected: {n['title']}\n\n"
-                    "1. Review the risk details in the Quality tab\n"
-                    "2. If it's a technical risk, implement the mitigation strategy\n"
-                    "3. If it's a business risk, update marketing/positioning in marketing/landing/\n"
-                    "4. If it's an operational risk, add monitoring or automation\n"
-                    "5. Update the risk register with mitigation status"
-                )
-
-            elif nid == "experiment_active" or nid.startswith("experiment_"):
-                n["action_prompt"] = (
-                    "A/B experiment notification. Check Quality > Experiments for full details:\n\n"
-                    "1. Query /api/admin/experiments for current results, guardrails, and sequential test\n"
-                    "2. If recommendation is 'stop_winner', use experiments.conclude_experiment() with the winner\n"
-                    "3. If guardrails are degraded, pause the experiment immediately\n"
-                    "4. If recommendation is 'stop_futility', conclude with no winner\n"
-                    "5. After concluding, update the relevant code to hardcode the winning variant"
-                )
-
-            elif nid == "grade_appeals":
-                n["action_prompt"] = (
-                    "Grade appeals are pending review.\n\n"
-                    "1. Fetch appeals from the grade_appeal table\n"
-                    "2. For each appeal, check if the drill answer was genuinely correct\n"
-                    "3. If the grading logic was wrong, fix it in the relevant mandarin/drills/ module\n"
-                    "4. Update the appeal status\n"
-                    "5. If this is a systemic issue, add test cases"
-                )
-
-            elif nid == "risk_register_stale" or nid == "risk_register_empty":
-                n["action_prompt"] = (
-                    "The risk register needs attention.\n\n"
-                    "Scan the codebase and business context for risks:\n"
-                    "1. Technical: single points of failure, unhandled error paths, dependency risks\n"
-                    "2. Business: competitive gaps, churn drivers, pricing sensitivity\n"
-                    "3. Operational: monitoring gaps, backup/recovery, scaling limits\n"
-                    "4. Add each as a risk_item via /api/admin/quality/risks with probability and impact scores\n"
-                    "5. Create mitigation work items for anything scoring >= 15"
-                )
-
-    @admin_bp.route("/api/admin/notifications")
-    @admin_required
-    @api_error_handler("AdminNotifications")
-    def admin_notifications():
-        """Return all current admin notifications."""
-        try:
-            with db.connection() as conn:
-                notifs = _gather_admin_notifications(conn)
-                return jsonify({"notifications": notifs, "count": len(notifs)})
-        except (sqlite3.Error, KeyError, TypeError) as e:
-            logger.error("Admin notifications error (%s): %s", type(e).__name__, e)
-            return jsonify({"error": "Notifications unavailable"}), 500
-
-    @admin_bp.route("/api/admin/notifications/count")
-    @admin_required
-    @api_error_handler("AdminNotifCount")
-    def admin_notifications_count():
-        """Return just the notification count for the badge."""
-        try:
-            with db.connection() as conn:
-                notifs = _gather_admin_notifications(conn)
-                # Filter to only warning+ severity for badge count
-                important = [n for n in notifs if n["severity"] in ("critical", "warning")]
-                return jsonify({"count": len(important)})
-        except (sqlite3.Error, KeyError, TypeError) as e:
-            logger.error("Admin notif count error (%s): %s", type(e).__name__, e)
-            return jsonify({"count": 0})
-
-    @admin_bp.route("/api/admin/notifications/mark-read", methods=["POST"])
-    @admin_required
-    @api_error_handler("AdminNotifMarkRead")
-    def admin_notifications_mark_read():
-        """Mark all notifications as read (clears badge until new ones appear)."""
-        # Notifications are computed live from system state, not stored.
-        # "Mark read" is a no-op for now — badge auto-clears on tab visit.
-        return jsonify({"ok": True})
-
-    # ── Lean Six Sigma: Pareto Analysis ──────────────────────────────
-    @admin_bp.route("/api/admin/quality/pareto")
-    @admin_required
-    @api_error_handler("Pareto")
-    def admin_pareto():
-        """Error Pareto: rank error types by frequency, cumulative %, vital few."""
-        days = request.args.get("days", 30, type=int)
-        with db.connection() as conn:
-            from ..quality.flow_metrics import calculate_error_pareto
-            return jsonify(calculate_error_pareto(conn, days=days))
-
-    # ── Lean Six Sigma: CTQ Tree ─────────────────────────────────────
-    @admin_bp.route("/api/admin/quality/ctq")
-    @admin_required
-    @api_error_handler("CTQ")
-    def admin_ctq():
-        """Critical-to-Quality tree with live measurements."""
-        with db.connection() as conn:
-            from ..quality.flow_metrics import assess_ctq_metrics
-            return jsonify(assess_ctq_metrics(conn))
-
-    # ── Lean Six Sigma: Process Performance (Pp/Ppk) ─────────────────
-    @admin_bp.route("/api/admin/quality/performance")
-    @admin_required
-    @api_error_handler("Performance")
-    def admin_process_performance():
-        """Process performance indices Pp and Ppk."""
-        with db.connection() as conn:
-            from ..quality.capability import assess_accuracy_performance
-            return jsonify(assess_accuracy_performance(conn))
-
-    # ── Lean Six Sigma: 5-Why Template ───────────────────────────────
-    @admin_bp.route("/api/admin/quality/five-why/<chart_type>")
-    @admin_required
-    @api_error_handler("FiveWhy")
-    def admin_five_why(chart_type):
-        """Generate a 5-Why root cause analysis template for an SPC violation."""
-        from ..quality.flow_metrics import generate_five_why_template
-        detail = request.args.get("detail", "")
-        return jsonify(generate_five_why_template(chart_type, detail))
-
-    # ── Operations Research: Sensitivity Analysis ────────────────────
-    @admin_bp.route("/api/admin/quality/sensitivity")
-    @admin_required
-    @api_error_handler("Sensitivity")
-    def admin_sensitivity():
-        """Parameter sensitivity analysis for scheduling decisions."""
-        with db.connection() as conn:
-            from ..scheduler import sensitivity_analysis
-            return jsonify(sensitivity_analysis(conn))
-
-    # ── Operations Research: Decision Table ──────────────────────────
-    @admin_bp.route("/api/admin/quality/decision-table")
-    @admin_required
-    @api_error_handler("DecisionTable")
-    def admin_decision_table():
-        """Return the scheduling decision table (auditable rules)."""
-        from ..scheduler import SCHEDULING_DECISION_TABLE
-        return jsonify({"rules": SCHEDULING_DECISION_TABLE})
-
-    # ── Kanban: Aging Summary ────────────────────────────────────────
-    @admin_bp.route("/api/admin/quality/aging")
-    @admin_required
-    @api_error_handler("Aging")
-    def admin_aging():
-        """Item aging tiers: green/yellow/orange/red overdue counts."""
-        with db.connection() as conn:
-            from ..scheduler import get_aging_summary
-            return jsonify(get_aging_summary(conn))
-
-    # ── Kanban: Explicit Policies ────────────────────────────────────
-    @admin_bp.route("/api/admin/quality/policies")
-    @admin_required
-    @api_error_handler("Policies")
-    def admin_policies():
-        """Return Kanban explicit policies (DoD, entry/exit criteria, escalation)."""
-        from ..scheduler import KANBAN_POLICIES
-        return jsonify(KANBAN_POLICIES)
-
-    # ── Scrum: Sprint Management ─────────────────────────────────────
-    @admin_bp.route("/api/admin/sprint")
-    @admin_required
-    @api_error_handler("Sprint")
-    def admin_sprint():
-        """Get current sprint and velocity."""
-        with db.connection() as conn:
-            from ..quality.methodology import (
-                get_current_sprint, get_sprint_velocity, get_sprint_history
-            )
-            current = get_current_sprint(conn)
-            velocity = get_sprint_velocity(conn)
-            history = get_sprint_history(conn, limit=5)
-            return jsonify({
-                "current": current,
-                "velocity": velocity,
-                "history": history,
+        else:
+            # No active risks at all — nudge to create some
+            notifs.append({
+                "id": "risk_register_empty",
+                "title": "Risk register empty: no active risks tracked",
+                "detail": "Add technical, operational, and learning risks to the register.",
+                "severity": "info",
+                "tab": "Quality",
+                "timestamp": now_str,
             })
+    except sqlite3.OperationalError:
+        pass
 
-    @admin_bp.route("/api/admin/sprint/create", methods=["POST"])
-    @admin_required
-    @api_error_handler("SprintCreate")
-    def admin_sprint_create():
-        """Create a new sprint (auto-generates goal from queue state)."""
+    # 14. Spiral: High-risk items (score >= 15) without mitigation work items
+    try:
+        high_risks = conn.execute("""
+            SELECT id, title, probability, impact,
+                   (probability * impact) AS risk_score
+            FROM risk_item
+            WHERE status = 'active'
+              AND (probability * impact) >= 15
+        """).fetchall()
+        for r in high_risks:
+            severity = "critical" if r["risk_score"] >= 20 else "warning"
+            notifs.append({
+                "id": f"high_risk_{r['id']}",
+                "title": f"High risk (score {r['risk_score']}): {r['title']}",
+                "detail": "Create a mitigation work item if not already tracked.",
+                "severity": severity,
+                "tab": "Quality",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # 15. Intelligence escalations (alert+ within 24h)
+    try:
+        escalations = conn.execute("""
+            SELECT dl.id, dl.finding_id, dl.escalation_level, dl.decision_class,
+                   dl.requires_approval, pf.dimension, pf.title, pf.severity
+            FROM pi_decision_log dl
+            JOIN pi_finding pf ON dl.finding_id = pf.id
+            WHERE dl.created_at >= datetime('now', '-24 hours')
+              AND dl.escalation_level IN ('alert', 'escalate', 'emergency')
+              AND dl.approved_at IS NULL
+              AND dl.decision IS NULL
+        """).fetchall()
+        for esc in escalations:
+            sev = "critical" if esc["escalation_level"] == "emergency" else "warning"
+            notifs.append({
+                "id": f"intelligence_escalation_{esc['id']}",
+                "title": f"Intelligence {esc['escalation_level']}: {esc['title']}",
+                "detail": f"Finding in {esc['dimension']} ({esc['severity']}) "
+                          f"requires {esc['decision_class']} decision.",
+                "severity": sev,
+                "tab": "Intelligence",
+                "timestamp": now_str,
+            })
+    except sqlite3.OperationalError:
+        pass
+
+    # Sort: critical first, then warning, then info
+    severity_order = {"critical": 0, "warning": 1, "info": 2}
+    notifs.sort(key=lambda n: severity_order.get(n["severity"], 3))
+
+    # Enrich with actionable Claude Code prompts
+    _add_action_prompts(notifs, conn)
+
+    return notifs
+
+def _add_action_prompts(notifs, conn):
+    """Add action_prompt to notifications that can be addressed by Claude Code."""
+    # Map notification IDs to prompt generators
+    for n in notifs:
+        nid = n["id"]
+
+        if nid == "crashes_24h":
+            # Fetch recent crash tracebacks for context
+            try:
+                crashes = conn.execute(
+                    "SELECT traceback, endpoint FROM crash_log WHERE created_at >= datetime('now', '-24 hours') ORDER BY created_at DESC LIMIT 5"
+                ).fetchall()
+                traces = "\n---\n".join(f"Endpoint: {c['endpoint']}\n{c['traceback']}" for c in crashes if c["traceback"])
+            except Exception:
+                traces = "(unable to fetch)"
+            n["action_prompt"] = (
+                f"There are {n['title']}. Here are the most recent tracebacks:\n\n"
+                f"{traces}\n\n"
+                f"Diagnose the root cause(s) and fix the code. Run tests after."
+            )
+
+        elif nid == "client_errors_24h":
+            try:
+                errors = conn.execute(
+                    "SELECT message, url, user_agent FROM client_error_log WHERE created_at >= datetime('now', '-24 hours') ORDER BY created_at DESC LIMIT 10"
+                ).fetchall()
+                errs = "\n".join(f"- {e['message']} (at {e['url']})" for e in errors)
+            except Exception:
+                errs = "(unable to fetch)"
+            n["action_prompt"] = (
+                f"There are client-side errors occurring. Recent errors:\n\n{errs}\n\n"
+                f"Check mandarin/web/static/app.js and related JS for the root cause. Fix and test."
+            )
+
+        elif nid == "churn_risk":
+            n["action_prompt"] = (
+                "Users are at high churn risk. Analyze the churn signals:\n\n"
+                "1. Read mandarin/churn_detection.py to understand the churn model\n"
+                "2. Check what's driving churn (session frequency drop, accuracy decline, etc.)\n"
+                "3. Review the re-engagement email sequence in mandarin/email.py send_churn_prevention()\n"
+                "4. Check if the onboarding flow has drop-off points via /api/admin/onboarding-funnel\n"
+                "5. Suggest and implement product changes to reduce churn risk"
+            )
+
+        elif nid == "nps_detractors":
+            try:
+                feedback = conn.execute(
+                    "SELECT rating, comment FROM user_feedback WHERE feedback_type = 'nps' AND rating <= 6 AND created_at >= datetime('now', '-7 days') ORDER BY rating ASC LIMIT 10"
+                ).fetchall()
+                fb = "\n".join(f"- Score {f['rating']}: {f['comment'] or '(no comment)'}" for f in feedback)
+            except Exception:
+                fb = "(unable to fetch)"
+            n["action_prompt"] = (
+                f"NPS detractors this week. Their feedback:\n\n{fb}\n\n"
+                "Analyze the feedback themes. For each actionable complaint:\n"
+                "1. Identify the relevant code/feature\n"
+                "2. Implement fixes or improvements\n"
+                "3. If it's a positioning/messaging issue, update marketing copy in marketing/landing/ and mandarin/email.py"
+            )
+
+        elif nid == "security_events":
+            n["action_prompt"] = (
+                "Security events detected in the last 24 hours. Steps:\n\n"
+                "1. Read the security_audit_log for details\n"
+                "2. Check mandarin/web/routes.py and middleware.py for the security layer\n"
+                "3. Fix any vulnerabilities found\n"
+                "4. Add regression tests in tests/test_security_regression.py\n"
+                "5. Review OWASP top 10 against the codebase"
+            )
+
+        elif nid.startswith("spc_"):
+            chart_type = nid.replace("spc_", "")
+            n["action_prompt"] = (
+                f"SPC control chart '{chart_type}' is out of control.\n\n"
+                "1. Read mandarin/quality/spc.py to understand which Western Electric rule was violated\n"
+                "2. Query the recent observations to identify the trend\n"
+                "3. If drill_accuracy: check mandarin/drills/ for broken drill logic\n"
+                "4. If response_time: profile slow endpoints, check DB queries\n"
+                "5. If session_completion: check mandarin/scheduler.py for session length/difficulty issues\n"
+                "6. Fix the root cause and verify the chart returns to control"
+            )
+
+        elif nid == "slow_api":
+            try:
+                slow = conn.execute(
+                    "SELECT endpoint, duration_ms FROM request_timing WHERE duration_ms > 2000 AND recorded_at >= datetime('now', '-24 hours') ORDER BY duration_ms DESC LIMIT 10"
+                ).fetchall()
+                endpoints = "\n".join(f"- {s['endpoint']}: {s['duration_ms']}ms" for s in slow)
+            except Exception:
+                endpoints = "(unable to fetch)"
+            n["action_prompt"] = (
+                f"Slow API responses detected. Slowest endpoints:\n\n{endpoints}\n\n"
+                "1. Profile the slow queries (add EXPLAIN QUERY PLAN)\n"
+                "2. Add missing indexes to schema.sql if needed\n"
+                "3. Check for N+1 queries in the route handlers\n"
+                "4. Consider caching for read-heavy endpoints\n"
+                "5. Run tests after any changes"
+            )
+
+        elif nid == "wip_exceeded":
+            n["action_prompt"] = (
+                "WIP limit exceeded — too many work items in progress.\n\n"
+                "1. List current in-progress work items via /api/admin/quality/work-items\n"
+                "2. Identify items that are stalled or blocked\n"
+                "3. Either complete, park, or descope stalled items\n"
+                "4. Consider if any items should be broken into smaller tasks"
+            )
+
+        elif nid.startswith("aging_work_item_"):
+            n["action_prompt"] = (
+                f"Work item has been in progress too long: {n['title']}\n\n"
+                "1. Check if the item is blocked on external dependencies\n"
+                "2. If the scope grew, break it into smaller items\n"
+                "3. If it's a code task, try to complete it now\n"
+                "4. If it's not code-addressable, park it with a note"
+            )
+
+        elif nid.startswith("high_risk_"):
+            n["action_prompt"] = (
+                f"High risk detected: {n['title']}\n\n"
+                "1. Review the risk details in the Quality tab\n"
+                "2. If it's a technical risk, implement the mitigation strategy\n"
+                "3. If it's a business risk, update marketing/positioning in marketing/landing/\n"
+                "4. If it's an operational risk, add monitoring or automation\n"
+                "5. Update the risk register with mitigation status"
+            )
+
+        elif nid == "experiment_active" or nid.startswith("experiment_"):
+            n["action_prompt"] = (
+                "A/B experiment notification. Check Quality > Experiments for full details:\n\n"
+                "1. Query /api/admin/experiments for current results, guardrails, and sequential test\n"
+                "2. If recommendation is 'stop_winner', use experiments.conclude_experiment() with the winner\n"
+                "3. If guardrails are degraded, pause the experiment immediately\n"
+                "4. If recommendation is 'stop_futility', conclude with no winner\n"
+                "5. After concluding, update the relevant code to hardcode the winning variant"
+            )
+
+        elif nid == "grade_appeals":
+            n["action_prompt"] = (
+                "Grade appeals are pending review.\n\n"
+                "1. Fetch appeals from the grade_appeal table\n"
+                "2. For each appeal, check if the drill answer was genuinely correct\n"
+                "3. If the grading logic was wrong, fix it in the relevant mandarin/drills/ module\n"
+                "4. Update the appeal status\n"
+                "5. If this is a systemic issue, add test cases"
+            )
+
+        elif nid == "risk_register_stale" or nid == "risk_register_empty":
+            n["action_prompt"] = (
+                "The risk register needs attention.\n\n"
+                "Scan the codebase and business context for risks:\n"
+                "1. Technical: single points of failure, unhandled error paths, dependency risks\n"
+                "2. Business: competitive gaps, churn drivers, pricing sensitivity\n"
+                "3. Operational: monitoring gaps, backup/recovery, scaling limits\n"
+                "4. Add each as a risk_item via /api/admin/quality/risks with probability and impact scores\n"
+                "5. Create mitigation work items for anything scoring >= 15"
+            )
+
+@admin_bp.route("/api/admin/notifications")
+@admin_required
+@api_error_handler("AdminNotifications")
+def admin_notifications():
+    """Return all current admin notifications."""
+    try:
         with db.connection() as conn:
-            from ..quality.methodology import auto_create_sprint
-            sprint = auto_create_sprint(conn)
-            if sprint:
-                return jsonify({"sprint": sprint})
-            return jsonify({"error": "Sprint already active or creation failed"}), 400
+            notifs = _gather_admin_notifications(conn)
+            return jsonify({"notifications": notifs, "count": len(notifs)})
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.error("Admin notifications error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Notifications unavailable"}), 500
 
-    @admin_bp.route("/api/admin/sprint/complete", methods=["POST"])
-    @admin_required
-    @api_error_handler("SprintComplete")
-    def admin_sprint_complete():
-        """Complete the current sprint with review."""
+@admin_bp.route("/api/admin/notifications/count")
+@admin_required
+@api_error_handler("AdminNotifCount")
+def admin_notifications_count():
+    """Return just the notification count for the badge."""
+    try:
         with db.connection() as conn:
-            from ..quality.methodology import complete_sprint
-            retro = complete_sprint(conn)
-            if retro:
-                return jsonify({"retrospective": retro})
-            return jsonify({"error": "No active sprint to complete"}), 400
+            notifs = _gather_admin_notifications(conn)
+            # Filter to only warning+ severity for badge count
+            important = [n for n in notifs if n["severity"] in ("critical", "warning")]
+            return jsonify({"count": len(important)})
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.error("Admin notif count error (%s): %s", type(e).__name__, e)
+        return jsonify({"count": 0})
 
-    # ── Agile: WSJF Backlog ──────────────────────────────────────────
-    @admin_bp.route("/api/admin/quality/wsjf")
-    @admin_required
-    @api_error_handler("WSJF")
-    def admin_wsjf():
-        """Content backlog ranked by WSJF (Weighted Shortest Job First)."""
-        limit = request.args.get("limit", 50, type=int)
+@admin_bp.route("/api/admin/notifications/mark-read", methods=["POST"])
+@admin_required
+@api_error_handler("AdminNotifMarkRead")
+def admin_notifications_mark_read():
+    """Mark all notifications as read (clears badge until new ones appear)."""
+    # Notifications are computed live from system state, not stored.
+    # "Mark read" is a no-op for now — badge auto-clears on tab visit.
+    return jsonify({"ok": True})
+
+# ── Lean Six Sigma: Pareto Analysis ──────────────────────────────
+@admin_bp.route("/api/admin/quality/pareto")
+@admin_required
+@api_error_handler("Pareto")
+def admin_pareto():
+    """Error Pareto: rank error types by frequency, cumulative %, vital few."""
+    days = request.args.get("days", 30, type=int)
+    with db.connection() as conn:
+        from ..quality.flow_metrics import calculate_error_pareto
+        return jsonify(calculate_error_pareto(conn, days=days))
+
+# ── Lean Six Sigma: CTQ Tree ─────────────────────────────────────
+@admin_bp.route("/api/admin/quality/ctq")
+@admin_required
+@api_error_handler("CTQ")
+def admin_ctq():
+    """Critical-to-Quality tree with live measurements."""
+    with db.connection() as conn:
+        from ..quality.flow_metrics import assess_ctq_metrics
+        return jsonify(assess_ctq_metrics(conn))
+
+# ── Lean Six Sigma: Process Performance (Pp/Ppk) ─────────────────
+@admin_bp.route("/api/admin/quality/performance")
+@admin_required
+@api_error_handler("Performance")
+def admin_process_performance():
+    """Process performance indices Pp and Ppk."""
+    with db.connection() as conn:
+        from ..quality.capability import assess_accuracy_performance
+        return jsonify(assess_accuracy_performance(conn))
+
+# ── Lean Six Sigma: 5-Why Template ───────────────────────────────
+@admin_bp.route("/api/admin/quality/five-why/<chart_type>")
+@admin_required
+@api_error_handler("FiveWhy")
+def admin_five_why(chart_type):
+    """Generate a 5-Why root cause analysis template for an SPC violation."""
+    from ..quality.flow_metrics import generate_five_why_template
+    detail = request.args.get("detail", "")
+    return jsonify(generate_five_why_template(chart_type, detail))
+
+# ── Operations Research: Sensitivity Analysis ────────────────────
+@admin_bp.route("/api/admin/quality/sensitivity")
+@admin_required
+@api_error_handler("Sensitivity")
+def admin_sensitivity():
+    """Parameter sensitivity analysis for scheduling decisions."""
+    with db.connection() as conn:
+        from ..scheduler import sensitivity_analysis
+        return jsonify(sensitivity_analysis(conn))
+
+# ── Operations Research: Decision Table ──────────────────────────
+@admin_bp.route("/api/admin/quality/decision-table")
+@admin_required
+@api_error_handler("DecisionTable")
+def admin_decision_table():
+    """Return the scheduling decision table (auditable rules)."""
+    from ..scheduler import SCHEDULING_DECISION_TABLE
+    return jsonify({"rules": SCHEDULING_DECISION_TABLE})
+
+# ── Kanban: Aging Summary ────────────────────────────────────────
+@admin_bp.route("/api/admin/quality/aging")
+@admin_required
+@api_error_handler("Aging")
+def admin_aging():
+    """Item aging tiers: green/yellow/orange/red overdue counts."""
+    with db.connection() as conn:
+        from ..scheduler import get_aging_summary
+        return jsonify(get_aging_summary(conn))
+
+# ── Kanban: Explicit Policies ────────────────────────────────────
+@admin_bp.route("/api/admin/quality/policies")
+@admin_required
+@api_error_handler("Policies")
+def admin_policies():
+    """Return Kanban explicit policies (DoD, entry/exit criteria, escalation)."""
+    from ..scheduler import KANBAN_POLICIES
+    return jsonify(KANBAN_POLICIES)
+
+# ── Scrum: Sprint Management ─────────────────────────────────────
+@admin_bp.route("/api/admin/sprint")
+@admin_required
+@api_error_handler("Sprint")
+def admin_sprint():
+    """Get current sprint and velocity."""
+    with db.connection() as conn:
+        from ..quality.methodology import (
+            get_current_sprint, get_sprint_velocity, get_sprint_history
+        )
+        current = get_current_sprint(conn)
+        velocity = get_sprint_velocity(conn)
+        history = get_sprint_history(conn, limit=5)
+        return jsonify({
+            "current": current,
+            "velocity": velocity,
+            "history": history,
+        })
+
+@admin_bp.route("/api/admin/sprint/create", methods=["POST"])
+@admin_required
+@api_error_handler("SprintCreate")
+def admin_sprint_create():
+    """Create a new sprint (auto-generates goal from queue state)."""
+    with db.connection() as conn:
+        from ..quality.methodology import auto_create_sprint
+        sprint = auto_create_sprint(conn)
+        if sprint:
+            return jsonify({"sprint": sprint})
+        return jsonify({"error": "Sprint already active or creation failed"}), 400
+
+@admin_bp.route("/api/admin/sprint/complete", methods=["POST"])
+@admin_required
+@api_error_handler("SprintComplete")
+def admin_sprint_complete():
+    """Complete the current sprint with review."""
+    with db.connection() as conn:
+        from ..quality.methodology import complete_sprint
+        retro = complete_sprint(conn)
+        if retro:
+            return jsonify({"retrospective": retro})
+        return jsonify({"error": "No active sprint to complete"}), 400
+
+# ── Agile: WSJF Backlog ──────────────────────────────────────────
+@admin_bp.route("/api/admin/quality/wsjf")
+@admin_required
+@api_error_handler("WSJF")
+def admin_wsjf():
+    """Content backlog ranked by WSJF (Weighted Shortest Job First)."""
+    limit = request.args.get("limit", 50, type=int)
+    with db.connection() as conn:
+        from ..quality.methodology import rank_content_backlog
+        return jsonify({"items": rank_content_backlog(conn, limit=limit)})
+
+# ── Spiral: Risk Assessment ──────────────────────────────────────
+@admin_bp.route("/api/admin/quality/risk-review", methods=["POST"])
+@admin_required
+@api_error_handler("RiskReview")
+def admin_risk_review():
+    """Run an automated risk assessment."""
+    with db.connection() as conn:
+        from ..quality.methodology import run_risk_review
+        risks = run_risk_review(conn)
+        return jsonify({"risks": risks, "count": len(risks)})
+
+@admin_bp.route("/api/admin/quality/risk-summary")
+@admin_required
+@api_error_handler("RiskSummary")
+def admin_risk_summary():
+    """Risk event summary with categorization."""
+    days = request.args.get("days", 30, type=int)
+    with db.connection() as conn:
+        from ..quality.methodology import get_risk_summary
+        return jsonify(get_risk_summary(conn, days=days))
+
+@admin_bp.route("/api/admin/quality/risk-taxonomy")
+@admin_required
+@api_error_handler("RiskTaxonomy")
+def admin_risk_taxonomy():
+    """Return the risk taxonomy definition."""
+    from ..quality.methodology import get_risk_taxonomy
+    return jsonify(get_risk_taxonomy())
+
+# ── Product Intelligence Engine ──────────────────────────────────
+@admin_bp.route("/api/admin/product-intelligence")
+@admin_required
+@api_error_handler("ProductIntelligence")
+def admin_product_intelligence():
+    """Run product audit and return findings with dimension scores."""
+    try:
+        from ..product_intelligence import run_product_audit
         with db.connection() as conn:
-            from ..quality.methodology import rank_content_backlog
-            return jsonify({"items": rank_content_backlog(conn, limit=limit)})
+            result = run_product_audit(conn)
+            return jsonify(result)
+    except Exception as e:
+        logger.error("Product intelligence error: %s", e)
+        return jsonify({"error": "Product intelligence unavailable: " + str(e)}), 500
 
-    # ── Spiral: Risk Assessment ──────────────────────────────────────
-    @admin_bp.route("/api/admin/quality/risk-review", methods=["POST"])
-    @admin_required
-    @api_error_handler("RiskReview")
-    def admin_risk_review():
-        """Run an automated risk assessment."""
-        with db.connection() as conn:
-            from ..quality.methodology import run_risk_review
-            risks = run_risk_review(conn)
-            return jsonify({"risks": risks, "count": len(risks)})
-
-    @admin_bp.route("/api/admin/quality/risk-summary")
-    @admin_required
-    @api_error_handler("RiskSummary")
-    def admin_risk_summary():
-        """Risk event summary with categorization."""
-        days = request.args.get("days", 30, type=int)
-        with db.connection() as conn:
-            from ..quality.methodology import get_risk_summary
-            return jsonify(get_risk_summary(conn, days=days))
-
-    @admin_bp.route("/api/admin/quality/risk-taxonomy")
-    @admin_required
-    @api_error_handler("RiskTaxonomy")
-    def admin_risk_taxonomy():
-        """Return the risk taxonomy definition."""
-        from ..quality.methodology import get_risk_taxonomy
-        return jsonify(get_risk_taxonomy())
-
-    # ── Product Intelligence Engine ──────────────────────────────────
-    @admin_bp.route("/api/admin/product-intelligence")
-    @admin_required
-    @api_error_handler("ProductIntelligence")
-    def admin_product_intelligence():
-        """Run product audit and return findings with dimension scores."""
-        try:
-            from ..product_intelligence import run_product_audit
-            with db.connection() as conn:
-                result = run_product_audit(conn)
-                return jsonify(result)
-        except Exception as e:
-            logger.error("Product intelligence error: %s", e)
-            return jsonify({"error": "Product intelligence unavailable: " + str(e)}), 500
-
-    @admin_bp.route("/api/admin/product-intelligence/history")
-    @admin_required
-    @api_error_handler("ProductIntelligenceHistory")
-    def admin_product_intelligence_history():
-        """Return last 20 audit runs with scores."""
+@admin_bp.route("/api/admin/product-intelligence/history")
+@admin_required
+@api_error_handler("ProductIntelligenceHistory")
+def admin_product_intelligence_history():
+    """Return last 20 audit runs with scores."""
+    try:
         with db.connection() as conn:
             rows = conn.execute(
                 """SELECT id, run_at, overall_grade, overall_score,
@@ -2896,880 +2902,882 @@ def admin_completion_segments():
                     "high_count": r["high_count"],
                 })
             return jsonify({"history": history})
+    except sqlite3.OperationalError:
+        return jsonify({"history": []})
 
-    # ── Intelligence Engine V4 Endpoints ─────────────────────────────
-    @admin_bp.route("/api/admin/intelligence/findings")
-    @admin_required
-    @api_error_handler("IntelligenceFindings")
-    def admin_intelligence_findings():
-        """Open findings with lifecycle state, advisor opinions, escalation."""
+# ── Intelligence Engine V4 Endpoints ─────────────────────────────
+@admin_bp.route("/api/admin/intelligence/findings")
+@admin_required
+@api_error_handler("IntelligenceFindings")
+def admin_intelligence_findings():
+    """Open findings with lifecycle state, advisor opinions, escalation."""
+    with db.connection() as conn:
+        findings = conn.execute("""
+            SELECT pf.id, pf.dimension, pf.severity, pf.title, pf.analysis,
+                   pf.status, pf.hypothesis, pf.root_cause_tag,
+                   pf.linked_finding_id, pf.times_seen,
+                   pf.created_at, pf.updated_at,
+                   julianday('now') - julianday(pf.updated_at) as days_in_state
+            FROM pi_finding pf
+            WHERE pf.status NOT IN ('resolved', 'rejected')
+            ORDER BY
+                CASE pf.severity
+                    WHEN 'critical' THEN 0
+                    WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2
+                    WHEN 'low' THEN 3
+                END,
+                pf.updated_at DESC
+        """).fetchall()
+
+        result = []
+        for f in findings:
+            item = dict(f)
+            item["days_in_state"] = round(f["days_in_state"], 1) if f["days_in_state"] else 0
+            # Attach advisor opinions
+            opinions = conn.execute("""
+                SELECT advisor, priority_score, effort_estimate, rationale, tradeoff_notes
+                FROM pi_advisor_opinion
+                WHERE finding_id = ?
+                ORDER BY priority_score DESC
+            """, (f["id"],)).fetchall()
+            item["advisor_opinions"] = [dict(o) for o in opinions]
+            # Attach resolution if any
+            resolution = conn.execute("""
+                SELECT winning_advisor, resolution_rationale, tradeoff_summary
+                FROM pi_advisor_resolution
+                WHERE finding_id = ?
+                ORDER BY created_at DESC LIMIT 1
+            """, (f["id"],)).fetchall()
+            item["resolution"] = dict(resolution[0]) if resolution else None
+            result.append(item)
+
+        return jsonify({"findings": result})
+
+@admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/transition", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceTransition")
+def admin_intelligence_transition(finding_id):
+    """Advance finding state machine."""
+    from ..intelligence.finding_lifecycle import transition_finding
+    data = request.get_json(silent=True) or {}
+    status = data.get("status", "")
+    notes = data.get("notes", "")
+    with db.connection() as conn:
+        ok = transition_finding(conn, finding_id, status, notes)
+        result = {"success": ok}
+        if ok:
+            try:
+                from ..intelligence.prescription import _check_subordination
+                warning = _check_subordination(conn, finding_id)
+                if warning:
+                    result["subordination_warning"] = warning
+            except ImportError:
+                pass
+            try:
+                from ..intelligence.collaborator import log_interaction
+                itype = "finding_dismissed" if status == "rejected" else "finding_approved"
+                log_interaction(conn, itype, finding_id=finding_id,
+                                notes=f"transition to {status}")
+            except (ImportError, Exception):
+                pass
+            return jsonify(result)
+        return jsonify({"error": "Invalid transition"}), 400
+
+@admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/decide", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceDecide")
+def admin_intelligence_decide(finding_id):
+    """Record human decision on a finding."""
+    data = request.get_json(silent=True) or {}
+    decision = data.get("decision", "")
+    reason = data.get("reason", "")
+    override_expires = data.get("override_expires_at")
+    with db.connection() as conn:
+        try:
+            conn.execute("""
+                INSERT INTO pi_decision_log
+                    (finding_id, decision_class, escalation_level,
+                     presented_to, decision, decision_reason,
+                     override_expires_at)
+                VALUES (?, ?, ?, 'solo', ?, ?, ?)
+            """, (
+                finding_id,
+                data.get("decision_class", "judgment_call"),
+                data.get("escalation_level", "alert"),
+                decision, reason, override_expires,
+            ))
+            conn.commit()
+            result = {"success": True}
+            try:
+                from ..intelligence.prescription import _check_subordination
+                warning = _check_subordination(conn, finding_id)
+                if warning:
+                    result["subordination_warning"] = warning
+            except ImportError:
+                pass
+            try:
+                from ..intelligence.collaborator import log_interaction
+                itype = "finding_dismissed" if decision in ("reject", "defer") else "finding_approved"
+                log_interaction(conn, itype, finding_id=finding_id,
+                                notes=f"decision: {decision}, reason: {reason}")
+            except (ImportError, Exception):
+                pass
+            return jsonify(result)
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/outcome", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceOutcome")
+def admin_intelligence_outcome(finding_id):
+    """Record recommendation outcome."""
+    from ..intelligence.feedback_loops import record_recommendation_outcome
+    data = request.get_json(silent=True) or {}
+    with db.connection() as conn:
+        outcome_id = record_recommendation_outcome(
+            conn, finding_id,
+            data.get("action_type", "code_change"),
+            data.get("description", ""),
+            data.get("files_changed"),
+            data.get("metric_before"),
+        )
+        if outcome_id > 0:
+            return jsonify({"success": True, "outcome_id": outcome_id})
+        return jsonify({"error": "Failed to record outcome"}), 500
+
+@admin_bp.route("/api/admin/intelligence/sprint-plan")
+@admin_required
+@api_error_handler("IntelligenceSprintPlan")
+def admin_intelligence_sprint_plan():
+    """Current sprint plan from mediator."""
+    try:
+        from ..intelligence import run_product_audit
+        from ..intelligence.advisors import Mediator
         with db.connection() as conn:
-            findings = conn.execute("""
-                SELECT pf.id, pf.dimension, pf.severity, pf.title, pf.analysis,
-                       pf.status, pf.hypothesis, pf.root_cause_tag,
-                       pf.linked_finding_id, pf.times_seen,
-                       pf.created_at, pf.updated_at,
-                       julianday('now') - julianday(pf.updated_at) as days_in_state
-                FROM pi_finding pf
-                WHERE pf.status NOT IN ('resolved', 'rejected')
-                ORDER BY
-                    CASE pf.severity
-                        WHEN 'critical' THEN 0
-                        WHEN 'high' THEN 1
-                        WHEN 'medium' THEN 2
-                        WHEN 'low' THEN 3
-                    END,
-                    pf.updated_at DESC
+            audit = run_product_audit(conn)
+            return jsonify({"sprint_plan": audit.get("sprint_plan", {})})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/feedback-summary")
+@admin_required
+@api_error_handler("IntelligenceFeedback")
+def admin_intelligence_feedback():
+    """Feedback loop closure rates and threshold calibrations."""
+    try:
+        from ..intelligence.feedback_loops import get_loop_closure_summary
+        with db.connection() as conn:
+            summary = get_loop_closure_summary(conn)
+            # Add calibration details
+            calibrations = conn.execute("""
+                SELECT metric_name, threshold_value, calibrated_at,
+                       sample_size, false_positive_rate, prior_threshold, notes
+                FROM pi_threshold_calibration
+                ORDER BY calibrated_at DESC
             """).fetchall()
+            summary["calibrations"] = [dict(c) for c in calibrations]
+            return jsonify(summary)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-            result = []
-            for f in findings:
-                item = dict(f)
-                item["days_in_state"] = round(f["days_in_state"], 1) if f["days_in_state"] else 0
-                # Attach advisor opinions
-                opinions = conn.execute("""
-                    SELECT advisor, priority_score, effort_estimate, rationale, tradeoff_notes
-                    FROM pi_advisor_opinion
-                    WHERE finding_id = ?
-                    ORDER BY priority_score DESC
-                """, (f["id"],)).fetchall()
-                item["advisor_opinions"] = [dict(o) for o in opinions]
-                # Attach resolution if any
-                resolution = conn.execute("""
-                    SELECT winning_advisor, resolution_rationale, tradeoff_summary
-                    FROM pi_advisor_resolution
-                    WHERE finding_id = ?
-                    ORDER BY created_at DESC LIMIT 1
-                """, (f["id"],)).fetchall()
-                item["resolution"] = dict(resolution[0]) if resolution else None
-                result.append(item)
-
-            return jsonify({"findings": result})
-
-    @admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/transition", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceTransition")
-    def admin_intelligence_transition(finding_id):
-        """Advance finding state machine."""
-        from ..intelligence.finding_lifecycle import transition_finding
-        data = request.get_json(silent=True) or {}
-        status = data.get("status", "")
-        notes = data.get("notes", "")
+@admin_bp.route("/api/admin/intelligence/engine-meta")
+@admin_required
+@api_error_handler("IntelligenceEngineMeta")
+def admin_intelligence_engine_meta():
+    """Engine self-assessment: accuracy, FPR, avg resolution time."""
+    try:
+        from ..intelligence.finding_lifecycle import compute_engine_accuracy
         with db.connection() as conn:
-            ok = transition_finding(conn, finding_id, status, notes)
-            result = {"success": ok}
+            accuracy = compute_engine_accuracy(conn)
+            return jsonify(accuracy)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── Intelligence Engine A+ Endpoints ────────────────────────────
+
+@admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/approve", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceApprove")
+def admin_intelligence_approve(finding_id):
+    """Approve a finding that requires approval."""
+    with db.connection() as conn:
+        try:
+            conn.execute("""
+                UPDATE pi_decision_log
+                SET approved_at = datetime('now')
+                WHERE finding_id = ?
+                  AND approved_at IS NULL
+            """, (finding_id,))
+            conn.commit()
+            result = {"success": True}
+            try:
+                from ..intelligence.prescription import _check_subordination
+                warning = _check_subordination(conn, finding_id)
+                if warning:
+                    result["subordination_warning"] = warning
+            except ImportError:
+                pass
+            try:
+                from ..intelligence.collaborator import log_interaction
+                log_interaction(conn, "finding_approved", finding_id=finding_id)
+            except (ImportError, Exception):
+                pass
+            return jsonify(result)
+        except Exception as e_inner:
+            return jsonify({"error": str(e_inner)}), 500
+
+@admin_bp.route("/api/admin/intelligence/constraint")
+@admin_required
+@api_error_handler("IntelligenceConstraint")
+def admin_intelligence_constraint():
+    """Theory of Constraints: identify system bottleneck."""
+    try:
+        from ..intelligence import run_product_audit
+        with db.connection() as conn:
+            audit = run_product_audit(conn)
+            return jsonify(audit.get("constraint", {}))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/copq")
+@admin_required
+@api_error_handler("IntelligenceCOPQ")
+def admin_intelligence_copq():
+    """Six Sigma: Cost of Poor Quality estimation."""
+    try:
+        from ..intelligence.feedback_loops import estimate_copq
+        with db.connection() as conn:
+            return jsonify(estimate_copq(conn))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/false-negatives")
+@admin_required
+@api_error_handler("IntelligenceFalseNegatives")
+def admin_intelligence_false_negatives():
+    """Six Sigma: false negative signal detection."""
+    try:
+        from ..intelligence.finding_lifecycle import estimate_false_negatives
+        with db.connection() as conn:
+            return jsonify(estimate_false_negatives(conn))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/power-analysis/<int:experiment_id>")
+@admin_required
+@api_error_handler("IntelligencePowerAnalysis")
+def admin_intelligence_power_analysis(experiment_id):
+    """DoE: power analysis for a running experiment."""
+    try:
+        from ..intelligence.feedback_loops import compute_power_analysis
+        with db.connection() as conn:
+            return jsonify(compute_power_analysis(conn, experiment_id))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/dmaic/<dimension>")
+@admin_required
+@api_error_handler("IntelligenceDMAIC")
+def admin_intelligence_dmaic(dimension):
+    """Six Sigma: run DMAIC cycle for a dimension."""
+    try:
+        from ..intelligence._synthesis import run_dmaic_cycle
+        with db.connection() as conn:
+            return jsonify(run_dmaic_cycle(conn, dimension))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/cycle-times")
+@admin_required
+@api_error_handler("IntelligenceCycleTimes")
+def admin_intelligence_cycle_times():
+    """Lean: finding lifecycle cycle time analysis."""
+    try:
+        from ..intelligence._synthesis import compute_cycle_times
+        with db.connection() as conn:
+            return jsonify(compute_cycle_times(conn))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/queue-model")
+@admin_required
+@api_error_handler("IntelligenceQueueModel")
+def admin_intelligence_queue_model():
+    """Operations Research: session queue model (Little's Law)."""
+    try:
+        from ..intelligence.analyzers_domain import analyze_session_queue
+        with db.connection() as conn:
+            queue_findings = analyze_session_queue(conn)
+            return jsonify({
+                "findings": [{"title": f["title"], "severity": f["severity"],
+                              "analysis": f["analysis"]} for f in queue_findings],
+                "count": len(queue_findings),
+            })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/self-audit")
+@admin_required
+@api_error_handler("IntelligenceSelfAudit")
+def admin_intelligence_self_audit():
+    """Self-Correction Layer: engine self-audit report."""
+    try:
+        from ..intelligence.feedback_loops import generate_self_audit_report
+        lookback = request.args.get("lookback_days", 30, type=int)
+        with db.connection() as conn:
+            report = generate_self_audit_report(conn, lookback)
+            try:
+                from ..intelligence.collaborator import log_interaction
+                log_interaction(conn, "self_audit_viewed")
+            except (ImportError, Exception):
+                pass
+            return jsonify(report)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── Prescription Layer endpoints ──
+
+@admin_bp.route("/api/admin/intelligence/work-order/current")
+@admin_required
+@api_error_handler("IntelligenceWorkOrderCurrent")
+def admin_intelligence_work_order_current():
+    """Returns active WorkOrder or 404."""
+    try:
+        from ..intelligence.prescription import get_current_work_order
+        with db.connection() as conn:
+            wo = get_current_work_order(conn)
+            if wo:
+                try:
+                    from ..intelligence.collaborator import log_interaction, build_adaptive_presentation
+                    log_interaction(conn, "work_order_viewed",
+                                    work_order_id=wo.get("id"),
+                                    dimension=wo.get("constraint_dimension"))
+                    presentation = build_adaptive_presentation(conn, wo)
+                    wo["presentation"] = presentation
+                except (ImportError, Exception):
+                    pass
+                return jsonify(wo)
+            return jsonify({"error": "No active work order"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/work-order/<int:wo_id>/implement", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceWorkOrderImplement")
+def admin_intelligence_work_order_implement(wo_id):
+    """Marks work order as implemented, starts verification.
+
+    Body (optional): {parameter_name, old_value, new_value}
+    If structural change: {parameter_name: null, notes: "description"}
+    """
+    try:
+        from ..intelligence.prescription import mark_work_order_implemented
+        data = request.get_json(silent=True) or {}
+        with db.connection() as conn:
+            ok = mark_work_order_implemented(
+                conn, wo_id,
+                parameter_name=data.get("parameter_name"),
+                old_value=data.get("old_value"),
+                new_value=data.get("new_value"),
+                notes=data.get("notes"),
+            )
             if ok:
                 try:
-                    from ..intelligence.prescription import _check_subordination
-                    warning = _check_subordination(conn, finding_id)
-                    if warning:
-                        result["subordination_warning"] = warning
-                except ImportError:
-                    pass
-                try:
                     from ..intelligence.collaborator import log_interaction
-                    itype = "finding_dismissed" if status == "rejected" else "finding_approved"
-                    log_interaction(conn, itype, finding_id=finding_id,
-                                    notes=f"transition to {status}")
+                    log_interaction(conn, "work_order_implemented",
+                                    work_order_id=wo_id,
+                                    notes=data.get("notes"))
                 except (ImportError, Exception):
                     pass
-                return jsonify(result)
-            return jsonify({"error": "Invalid transition"}), 400
+                return jsonify({"success": True, "status": "verifying"})
+            return jsonify({"error": "Cannot implement this work order"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/decide", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceDecide")
-    def admin_intelligence_decide(finding_id):
-        """Record human decision on a finding."""
-        data = request.get_json(silent=True) or {}
-        decision = data.get("decision", "")
-        reason = data.get("reason", "")
-        override_expires = data.get("override_expires_at")
-        with db.connection() as conn:
+@admin_bp.route("/api/admin/intelligence/subordination/override", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceSubordinationOverride")
+def admin_intelligence_subordination_override():
+    """Log a subordination override to pi_decision_log."""
+    data = request.get_json(silent=True) or {}
+    finding_id = data.get("finding_id")
+    reason = data.get("reason", "")
+    if not finding_id:
+        return jsonify({"error": "finding_id required"}), 400
+    with db.connection() as conn:
+        try:
+            conn.execute("""
+                INSERT INTO pi_decision_log
+                    (finding_id, decision_class, escalation_level,
+                     presented_to, decision, decision_reason)
+                VALUES (?, 'subordination_override', 'alert', 'solo',
+                        'override_subordination', ?)
+            """, (finding_id, reason))
+            conn.commit()
             try:
-                conn.execute("""
-                    INSERT INTO pi_decision_log
-                        (finding_id, decision_class, escalation_level,
-                         presented_to, decision, decision_reason,
-                         override_expires_at)
-                    VALUES (?, ?, ?, 'solo', ?, ?, ?)
-                """, (
-                    finding_id,
-                    data.get("decision_class", "judgment_call"),
-                    data.get("escalation_level", "alert"),
-                    decision, reason, override_expires,
-                ))
-                conn.commit()
-                result = {"success": True}
-                try:
-                    from ..intelligence.prescription import _check_subordination
-                    warning = _check_subordination(conn, finding_id)
-                    if warning:
-                        result["subordination_warning"] = warning
-                except ImportError:
-                    pass
-                try:
-                    from ..intelligence.collaborator import log_interaction
-                    itype = "finding_dismissed" if decision in ("reject", "defer") else "finding_approved"
-                    log_interaction(conn, itype, finding_id=finding_id,
-                                    notes=f"decision: {decision}, reason: {reason}")
-                except (ImportError, Exception):
-                    pass
-                return jsonify(result)
-            except Exception as e:
-                return jsonify({"error": str(e)}), 500
+                from ..intelligence.collaborator import log_interaction
+                log_interaction(conn, "subordination_overridden",
+                                finding_id=finding_id, notes=reason)
+            except (ImportError, Exception):
+                pass
+            return jsonify({"success": True})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/outcome", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceOutcome")
-    def admin_intelligence_outcome(finding_id):
-        """Record recommendation outcome."""
-        from ..intelligence.feedback_loops import record_recommendation_outcome
-        data = request.get_json(silent=True) or {}
+@admin_bp.route("/api/admin/intelligence/work-order/history")
+@admin_required
+@api_error_handler("IntelligenceWorkOrderHistory")
+def admin_intelligence_work_order_history():
+    """Last 20 work orders with outcomes."""
+    try:
+        from ..intelligence.prescription import get_work_order_history
+        limit = request.args.get("limit", 20, type=int)
         with db.connection() as conn:
-            outcome_id = record_recommendation_outcome(
-                conn, finding_id,
-                data.get("action_type", "code_change"),
-                data.get("description", ""),
-                data.get("files_changed"),
-                data.get("metric_before"),
-            )
-            if outcome_id > 0:
-                return jsonify({"success": True, "outcome_id": outcome_id})
-            return jsonify({"error": "Failed to record outcome"}), 500
+            history = get_work_order_history(conn, limit)
+            return jsonify({"work_orders": history, "count": len(history)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/sprint-plan")
-    @admin_required
-    @api_error_handler("IntelligenceSprintPlan")
-    def admin_intelligence_sprint_plan():
-        """Current sprint plan from mediator."""
-        try:
-            from ..intelligence import run_product_audit
-            from ..intelligence.advisors import Mediator
-            with db.connection() as conn:
-                audit = run_product_audit(conn)
-                return jsonify({"sprint_plan": audit.get("sprint_plan", {})})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+# ── Parameter Graph endpoints ──
 
-    @admin_bp.route("/api/admin/intelligence/feedback-summary")
-    @admin_required
-    @api_error_handler("IntelligenceFeedback")
-    def admin_intelligence_feedback():
-        """Feedback loop closure rates and threshold calibrations."""
-        try:
-            from ..intelligence.feedback_loops import get_loop_closure_summary
-            with db.connection() as conn:
-                summary = get_loop_closure_summary(conn)
-                # Add calibration details
-                calibrations = conn.execute("""
-                    SELECT metric_name, threshold_value, calibrated_at,
-                           sample_size, false_positive_rate, prior_threshold, notes
-                    FROM pi_threshold_calibration
-                    ORDER BY calibrated_at DESC
-                """).fetchall()
-                summary["calibrations"] = [dict(c) for c in calibrations]
-                return jsonify(summary)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/engine-meta")
-    @admin_required
-    @api_error_handler("IntelligenceEngineMeta")
-    def admin_intelligence_engine_meta():
-        """Engine self-assessment: accuracy, FPR, avg resolution time."""
-        try:
-            from ..intelligence.finding_lifecycle import compute_engine_accuracy
-            with db.connection() as conn:
-                accuracy = compute_engine_accuracy(conn)
-                return jsonify(accuracy)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # ── Intelligence Engine A+ Endpoints ────────────────────────────
-
-    @admin_bp.route("/api/admin/intelligence/findings/<int:finding_id>/approve", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceApprove")
-    def admin_intelligence_approve(finding_id):
-        """Approve a finding that requires approval."""
+@admin_bp.route("/api/admin/intelligence/parameter-graph")
+@admin_required
+@api_error_handler("IntelligenceParameterGraph")
+def admin_intelligence_parameter_graph():
+    """Parameter influence graph: nodes (parameters) + edges (influence)."""
+    try:
+        from ..intelligence.parameter_registry import get_influence_graph
         with db.connection() as conn:
-            try:
-                conn.execute("""
-                    UPDATE pi_decision_log
-                    SET approved_at = datetime('now')
-                    WHERE finding_id = ?
-                      AND approved_at IS NULL
-                """, (finding_id,))
-                conn.commit()
-                result = {"success": True}
-                try:
-                    from ..intelligence.prescription import _check_subordination
-                    warning = _check_subordination(conn, finding_id)
-                    if warning:
-                        result["subordination_warning"] = warning
-                except ImportError:
-                    pass
-                try:
-                    from ..intelligence.collaborator import log_interaction
-                    log_interaction(conn, "finding_approved", finding_id=finding_id)
-                except (ImportError, Exception):
-                    pass
-                return jsonify(result)
-            except Exception as e_inner:
-                return jsonify({"error": str(e_inner)}), 500
+            graph = get_influence_graph(conn)
+            return jsonify(graph)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/constraint")
-    @admin_required
-    @api_error_handler("IntelligenceConstraint")
-    def admin_intelligence_constraint():
-        """Theory of Constraints: identify system bottleneck."""
-        try:
-            from ..intelligence import run_product_audit
-            with db.connection() as conn:
-                audit = run_product_audit(conn)
-                return jsonify(audit.get("constraint", {}))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/copq")
-    @admin_required
-    @api_error_handler("IntelligenceCOPQ")
-    def admin_intelligence_copq():
-        """Six Sigma: Cost of Poor Quality estimation."""
-        try:
-            from ..intelligence.feedback_loops import estimate_copq
-            with db.connection() as conn:
-                return jsonify(estimate_copq(conn))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/false-negatives")
-    @admin_required
-    @api_error_handler("IntelligenceFalseNegatives")
-    def admin_intelligence_false_negatives():
-        """Six Sigma: false negative signal detection."""
-        try:
-            from ..intelligence.finding_lifecycle import estimate_false_negatives
-            with db.connection() as conn:
-                return jsonify(estimate_false_negatives(conn))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/power-analysis/<int:experiment_id>")
-    @admin_required
-    @api_error_handler("IntelligencePowerAnalysis")
-    def admin_intelligence_power_analysis(experiment_id):
-        """DoE: power analysis for a running experiment."""
-        try:
-            from ..intelligence.feedback_loops import compute_power_analysis
-            with db.connection() as conn:
-                return jsonify(compute_power_analysis(conn, experiment_id))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/dmaic/<dimension>")
-    @admin_required
-    @api_error_handler("IntelligenceDMAIC")
-    def admin_intelligence_dmaic(dimension):
-        """Six Sigma: run DMAIC cycle for a dimension."""
-        try:
-            from ..intelligence._synthesis import run_dmaic_cycle
-            with db.connection() as conn:
-                return jsonify(run_dmaic_cycle(conn, dimension))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/cycle-times")
-    @admin_required
-    @api_error_handler("IntelligenceCycleTimes")
-    def admin_intelligence_cycle_times():
-        """Lean: finding lifecycle cycle time analysis."""
-        try:
-            from ..intelligence._synthesis import compute_cycle_times
-            with db.connection() as conn:
-                return jsonify(compute_cycle_times(conn))
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/queue-model")
-    @admin_required
-    @api_error_handler("IntelligenceQueueModel")
-    def admin_intelligence_queue_model():
-        """Operations Research: session queue model (Little's Law)."""
-        try:
-            from ..intelligence.analyzers_domain import analyze_session_queue
-            with db.connection() as conn:
-                queue_findings = analyze_session_queue(conn)
-                return jsonify({
-                    "findings": [{"title": f["title"], "severity": f["severity"],
-                                  "analysis": f["analysis"]} for f in queue_findings],
-                    "count": len(queue_findings),
-                })
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/self-audit")
-    @admin_required
-    @api_error_handler("IntelligenceSelfAudit")
-    def admin_intelligence_self_audit():
-        """Self-Correction Layer: engine self-audit report."""
-        try:
-            from ..intelligence.feedback_loops import generate_self_audit_report
-            lookback = request.args.get("lookback_days", 30, type=int)
-            with db.connection() as conn:
-                report = generate_self_audit_report(conn, lookback)
-                try:
-                    from ..intelligence.collaborator import log_interaction
-                    log_interaction(conn, "self_audit_viewed")
-                except (ImportError, Exception):
-                    pass
-                return jsonify(report)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # ── Prescription Layer endpoints ──
-
-    @admin_bp.route("/api/admin/intelligence/work-order/current")
-    @admin_required
-    @api_error_handler("IntelligenceWorkOrderCurrent")
-    def admin_intelligence_work_order_current():
-        """Returns active WorkOrder or 404."""
-        try:
-            from ..intelligence.prescription import get_current_work_order
-            with db.connection() as conn:
-                wo = get_current_work_order(conn)
-                if wo:
-                    try:
-                        from ..intelligence.collaborator import log_interaction, build_adaptive_presentation
-                        log_interaction(conn, "work_order_viewed",
-                                        work_order_id=wo.get("id"),
-                                        dimension=wo.get("constraint_dimension"))
-                        presentation = build_adaptive_presentation(conn, wo)
-                        wo["presentation"] = presentation
-                    except (ImportError, Exception):
-                        pass
-                    return jsonify(wo)
-                return jsonify({"error": "No active work order"}), 404
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/work-order/<int:wo_id>/implement", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceWorkOrderImplement")
-    def admin_intelligence_work_order_implement(wo_id):
-        """Marks work order as implemented, starts verification.
-
-        Body (optional): {parameter_name, old_value, new_value}
-        If structural change: {parameter_name: null, notes: "description"}
-        """
-        try:
-            from ..intelligence.prescription import mark_work_order_implemented
-            data = request.get_json(silent=True) or {}
-            with db.connection() as conn:
-                ok = mark_work_order_implemented(
-                    conn, wo_id,
-                    parameter_name=data.get("parameter_name"),
-                    old_value=data.get("old_value"),
-                    new_value=data.get("new_value"),
-                    notes=data.get("notes"),
-                )
-                if ok:
-                    try:
-                        from ..intelligence.collaborator import log_interaction
-                        log_interaction(conn, "work_order_implemented",
-                                        work_order_id=wo_id,
-                                        notes=data.get("notes"))
-                    except (ImportError, Exception):
-                        pass
-                    return jsonify({"success": True, "status": "verifying"})
-                return jsonify({"error": "Cannot implement this work order"}), 400
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/subordination/override", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceSubordinationOverride")
-    def admin_intelligence_subordination_override():
-        """Log a subordination override to pi_decision_log."""
-        data = request.get_json(silent=True) or {}
-        finding_id = data.get("finding_id")
-        reason = data.get("reason", "")
-        if not finding_id:
-            return jsonify({"error": "finding_id required"}), 400
+@admin_bp.route("/api/admin/intelligence/parameters")
+@admin_required
+@api_error_handler("IntelligenceParameters")
+def admin_intelligence_parameters():
+    """List all registered parameters."""
+    try:
+        from ..intelligence.parameter_registry import get_all_parameters
         with db.connection() as conn:
-            try:
-                conn.execute("""
-                    INSERT INTO pi_decision_log
-                        (finding_id, decision_class, escalation_level,
-                         presented_to, decision, decision_reason)
-                    VALUES (?, 'subordination_override', 'alert', 'solo',
-                            'override_subordination', ?)
-                """, (finding_id, reason))
-                conn.commit()
-                try:
-                    from ..intelligence.collaborator import log_interaction
-                    log_interaction(conn, "subordination_overridden",
-                                    finding_id=finding_id, notes=reason)
-                except (ImportError, Exception):
-                    pass
-                return jsonify({"success": True})
-            except Exception as e:
-                return jsonify({"error": str(e)}), 500
+            params = get_all_parameters(conn)
+            return jsonify({
+                "parameters": [dict(p) for p in (params or [])],
+                "count": len(params or []),
+            })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/work-order/history")
-    @admin_required
-    @api_error_handler("IntelligenceWorkOrderHistory")
-    def admin_intelligence_work_order_history():
-        """Last 20 work orders with outcomes."""
-        try:
-            from ..intelligence.prescription import get_work_order_history
-            limit = request.args.get("limit", 20, type=int)
-            with db.connection() as conn:
-                history = get_work_order_history(conn, limit)
-                return jsonify({"work_orders": history, "count": len(history)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/parameters/sync", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceParameterSync")
+def admin_intelligence_parameter_sync():
+    """Sync parameter registry and seed influence model."""
+    try:
+        from ..intelligence.parameter_registry import sync_parameter_registry, seed_influence_model
+        with db.connection() as conn:
+            synced = sync_parameter_registry(conn)
+            seeded = seed_influence_model(conn)
+            return jsonify({
+                "parameters_synced": synced,
+                "edges_seeded": seeded,
+            })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    # ── Parameter Graph endpoints ──
+# ── Collaborator Model endpoints ──
 
-    @admin_bp.route("/api/admin/intelligence/parameter-graph")
-    @admin_required
-    @api_error_handler("IntelligenceParameterGraph")
-    def admin_intelligence_parameter_graph():
-        """Parameter influence graph: nodes (parameters) + edges (influence)."""
-        try:
-            from ..intelligence.parameter_registry import get_influence_graph
-            with db.connection() as conn:
-                graph = get_influence_graph(conn)
-                return jsonify(graph)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/parameters")
-    @admin_required
-    @api_error_handler("IntelligenceParameters")
-    def admin_intelligence_parameters():
-        """List all registered parameters."""
-        try:
-            from ..intelligence.parameter_registry import get_all_parameters
-            with db.connection() as conn:
-                params = get_all_parameters(conn)
-                return jsonify({
-                    "parameters": [dict(p) for p in (params or [])],
-                    "count": len(params or []),
-                })
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/parameters/sync", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceParameterSync")
-    def admin_intelligence_parameter_sync():
-        """Sync parameter registry and seed influence model."""
-        try:
-            from ..intelligence.parameter_registry import sync_parameter_registry, seed_influence_model
-            with db.connection() as conn:
-                synced = sync_parameter_registry(conn)
-                seeded = seed_influence_model(conn)
-                return jsonify({
-                    "parameters_synced": synced,
-                    "edges_seeded": seeded,
-                })
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # ── Collaborator Model endpoints ──
-
-    @admin_bp.route("/api/admin/intelligence/collaborator-model")
-    @admin_required
-    @api_error_handler("IntelligenceCollaboratorModel")
-    def admin_intelligence_collaborator_model():
-        """Current collaborator model — timing, overrides, presentation prefs."""
-        try:
-            from ..intelligence.collaborator import get_collaborator_model, rebuild_collaborator_model
-            with db.connection() as conn:
+@admin_bp.route("/api/admin/intelligence/collaborator-model")
+@admin_required
+@api_error_handler("IntelligenceCollaboratorModel")
+def admin_intelligence_collaborator_model():
+    """Current collaborator model — timing, overrides, presentation prefs."""
+    try:
+        from ..intelligence.collaborator import get_collaborator_model, rebuild_collaborator_model
+        with db.connection() as conn:
+            model = get_collaborator_model(conn)
+            if not model:
+                rebuild_collaborator_model(conn)
                 model = get_collaborator_model(conn)
-                if not model:
-                    rebuild_collaborator_model(conn)
-                    model = get_collaborator_model(conn)
-                return jsonify(dict(model) if model else {"status": "no_data"})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            return jsonify(dict(model) if model else {"status": "no_data"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/collaborator-model/history")
-    @admin_required
-    @api_error_handler("IntelligenceCollaboratorModelHistory")
-    def admin_intelligence_collaborator_model_history():
-        """Collaborator model snapshots over time."""
-        try:
-            from ..intelligence.collaborator import get_collaborator_model_history
-            limit = request.args.get("limit", 20, type=int)
-            with db.connection() as conn:
-                history = get_collaborator_model_history(conn, limit)
-                return jsonify({"snapshots": [dict(h) for h in history], "count": len(history)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/collaborator-model/history")
+@admin_required
+@api_error_handler("IntelligenceCollaboratorModelHistory")
+def admin_intelligence_collaborator_model_history():
+    """Collaborator model snapshots over time."""
+    try:
+        from ..intelligence.collaborator import get_collaborator_model_history
+        limit = request.args.get("limit", 20, type=int)
+        with db.connection() as conn:
+            history = get_collaborator_model_history(conn, limit)
+            return jsonify({"snapshots": [dict(h) for h in history], "count": len(history)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/domain-trust")
-    @admin_required
-    @api_error_handler("IntelligenceDomainTrust")
-    def admin_intelligence_domain_trust():
-        """Bidirectional trust scores by dimension."""
-        try:
-            from ..intelligence.collaborator import get_domain_trust
-            with db.connection() as conn:
-                trust = get_domain_trust(conn)
-                return jsonify({"domains": [dict(t) for t in trust], "count": len(trust)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/domain-trust")
+@admin_required
+@api_error_handler("IntelligenceDomainTrust")
+def admin_intelligence_domain_trust():
+    """Bidirectional trust scores by dimension."""
+    try:
+        from ..intelligence.collaborator import get_domain_trust
+        with db.connection() as conn:
+            trust = get_domain_trust(conn)
+            return jsonify({"domains": [dict(t) for t in trust], "count": len(trust)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/collaborator-model/correct", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceCollaboratorCorrect")
-    def admin_intelligence_collaborator_correct():
-        """Record a correction to the collaborator model."""
-        try:
-            from ..intelligence.collaborator import record_correction
-            data = request.get_json(silent=True) or {}
-            correction_type = data.get("correction_type", "")
-            dimension = data.get("dimension")
-            notes = data.get("notes", "")
-            if not correction_type:
-                return jsonify({"error": "correction_type required"}), 400
-            with db.connection() as conn:
-                record_correction(conn, correction_type, dimension, notes)
+@admin_bp.route("/api/admin/intelligence/collaborator-model/correct", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceCollaboratorCorrect")
+def admin_intelligence_collaborator_correct():
+    """Record a correction to the collaborator model."""
+    try:
+        from ..intelligence.collaborator import record_correction
+        data = request.get_json(silent=True) or {}
+        correction_type = data.get("correction_type", "")
+        dimension = data.get("dimension")
+        notes = data.get("notes", "")
+        if not correction_type:
+            return jsonify({"error": "correction_type required"}), 400
+        with db.connection() as conn:
+            record_correction(conn, correction_type, dimension, notes)
+            return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/adaptations/disable-all", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceDisableAllAdaptations")
+def admin_intelligence_disable_all_adaptations():
+    """Kill switch: disable all collaborator model adaptations."""
+    try:
+        from ..intelligence.collaborator import disable_all_adaptations
+        with db.connection() as conn:
+            disable_all_adaptations(conn)
+            return jsonify({"success": True, "adaptations_enabled": False})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/adaptations/enable", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceEnableAdaptations")
+def admin_intelligence_enable_adaptations():
+    """Re-enable collaborator model adaptations."""
+    try:
+        from ..intelligence.collaborator import enable_adaptations
+        with db.connection() as conn:
+            enable_adaptations(conn)
+            return jsonify({"success": True, "adaptations_enabled": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── External Grounding endpoints ──
+
+@admin_bp.route("/api/admin/intelligence/knowledge-base")
+@admin_required
+@api_error_handler("IntelligenceKnowledgeBase")
+def admin_intelligence_knowledge_base():
+    """All active pedagogical knowledge entries."""
+    try:
+        from ..intelligence.external_grounding import get_knowledge_base
+        with db.connection() as conn:
+            entries = get_knowledge_base(conn)
+            return jsonify({"entries": entries, "count": len(entries)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/knowledge-base", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceKnowledgeBaseAdd")
+def admin_intelligence_knowledge_base_add():
+    """Add a new knowledge entry (human only)."""
+    try:
+        from ..intelligence.external_grounding import add_knowledge_entry
+        data = request.get_json(silent=True) or {}
+        required = ["domain", "finding_text", "source_author",
+                    "source_year", "source_title", "evidence_quality"]
+        missing = [f for f in required if not data.get(f)]
+        if missing:
+            return jsonify({"error": f"Missing required fields: {', '.join(missing)}"}), 400
+        with db.connection() as conn:
+            entry_id = add_knowledge_entry(conn, data)
+            if entry_id:
+                return jsonify({"success": True, "id": entry_id})
+            return jsonify({"error": "Failed to add entry"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/knowledge-conflicts")
+@admin_required
+@api_error_handler("IntelligenceKnowledgeConflicts")
+def admin_intelligence_knowledge_conflicts():
+    """Active and resolved knowledge conflicts."""
+    try:
+        from ..intelligence.external_grounding import get_knowledge_conflicts
+        include_resolved = request.args.get("include_resolved", "true").lower() == "true"
+        with db.connection() as conn:
+            conflicts = get_knowledge_conflicts(conn, include_resolved)
+            return jsonify({"conflicts": conflicts, "count": len(conflicts)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route("/api/admin/intelligence/knowledge-conflicts/<conflict_id>/resolve", methods=["POST"])
+@admin_required
+@api_error_handler("IntelligenceResolveConflict")
+def admin_intelligence_resolve_conflict(conflict_id):
+    """Human resolves a flagged knowledge conflict."""
+    try:
+        from ..intelligence.external_grounding import resolve_conflict
+        data = request.get_json(silent=True) or {}
+        resolution = data.get("resolution", "")
+        rationale = data.get("resolution_rationale", "")
+        if not resolution:
+            return jsonify({"error": "resolution required"}), 400
+        with db.connection() as conn:
+            ok = resolve_conflict(conn, conflict_id, resolution, rationale)
+            if ok:
                 return jsonify({"success": True})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            return jsonify({"error": "Failed to resolve conflict"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/adaptations/disable-all", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceDisableAllAdaptations")
-    def admin_intelligence_disable_all_adaptations():
-        """Kill switch: disable all collaborator model adaptations."""
-        try:
-            from ..intelligence.collaborator import disable_all_adaptations
-            with db.connection() as conn:
-                disable_all_adaptations(conn)
-                return jsonify({"success": True, "adaptations_enabled": False})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/benchmarks")
+@admin_required
+@api_error_handler("IntelligenceBenchmarks")
+def admin_intelligence_benchmarks():
+    """Benchmark registry with most recent comparisons."""
+    try:
+        from ..intelligence.external_grounding import get_benchmark_comparisons
+        with db.connection() as conn:
+            benchmarks = get_benchmark_comparisons(conn)
+            return jsonify({"benchmarks": benchmarks, "count": len(benchmarks)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/adaptations/enable", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceEnableAdaptations")
-    def admin_intelligence_enable_adaptations():
-        """Re-enable collaborator model adaptations."""
-        try:
-            from ..intelligence.collaborator import enable_adaptations
-            with db.connection() as conn:
-                enable_adaptations(conn)
-                return jsonify({"success": True, "adaptations_enabled": True})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/goal-coherence")
+@admin_required
+@api_error_handler("IntelligenceGoalCoherence")
+def admin_intelligence_goal_coherence():
+    """Most recent goal coherence check result."""
+    try:
+        from ..intelligence.external_grounding import get_latest_goal_coherence
+        with db.connection() as conn:
+            result = get_latest_goal_coherence(conn)
+            return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    # ── External Grounding endpoints ──
+# ── Product Experience endpoints ──
 
-    @admin_bp.route("/api/admin/intelligence/knowledge-base")
-    @admin_required
-    @api_error_handler("IntelligenceKnowledgeBase")
-    def admin_intelligence_knowledge_base():
-        """All active pedagogical knowledge entries."""
-        try:
-            from ..intelligence.external_grounding import get_knowledge_base
-            with db.connection() as conn:
-                entries = get_knowledge_base(conn)
-                return jsonify({"entries": entries, "count": len(entries)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/events/batch", methods=["POST"])
+def ingest_interaction_events():
+    """Accept batched interaction events from client. Never errors."""
+    try:
+        from ..intelligence.product_experience import ingest_events
+        data = request.get_json(force=True, silent=True) or {}
+        events = data.get("events", [])
+        with db.connection() as conn:
+            accepted = ingest_events(conn, events)
+            return jsonify({"accepted": accepted}), 200
+    except Exception:
+        return jsonify({"accepted": 0}), 200
 
-    @admin_bp.route("/api/admin/intelligence/knowledge-base", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceKnowledgeBaseAdd")
-    def admin_intelligence_knowledge_base_add():
-        """Add a new knowledge entry (human only)."""
-        try:
-            from ..intelligence.external_grounding import add_knowledge_entry
-            data = request.get_json(silent=True) or {}
-            required = ["domain", "finding_text", "source_author",
-                        "source_year", "source_title", "evidence_quality"]
-            missing = [f for f in required if not data.get(f)]
-            if missing:
-                return jsonify({"error": f"Missing required fields: {', '.join(missing)}"}), 400
-            with db.connection() as conn:
-                entry_id = add_knowledge_entry(conn, data)
-                if entry_id:
-                    return jsonify({"success": True, "id": entry_id})
-                return jsonify({"error": "Failed to add entry"}), 500
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/releases", methods=["POST"])
+@admin_required
+@api_error_handler("RegisterRelease")
+def admin_register_release():
+    """Register a new release with change categories."""
+    try:
+        from ..intelligence.product_experience import register_release
+        data = request.get_json(silent=True) or {}
+        version = data.get("app_version")
+        if not version:
+            return jsonify({"error": "app_version required"}), 400
+        with db.connection() as conn:
+            release_id = register_release(
+                conn, version,
+                release_notes=data.get("release_notes"),
+                changed_ux=data.get("changed_ux", False),
+                changed_srs=data.get("changed_srs", False),
+                changed_content=data.get("changed_content", False),
+                changed_auth=data.get("changed_auth", False),
+                changed_api=data.get("changed_api", False),
+            )
+            if release_id:
+                return jsonify({"success": True, "release_id": release_id}), 201
+            return jsonify({"error": "Failed to register release"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/knowledge-conflicts")
-    @admin_required
-    @api_error_handler("IntelligenceKnowledgeConflicts")
-    def admin_intelligence_knowledge_conflicts():
-        """Active and resolved knowledge conflicts."""
-        try:
-            from ..intelligence.external_grounding import get_knowledge_conflicts
-            include_resolved = request.args.get("include_resolved", "true").lower() == "true"
-            with db.connection() as conn:
-                conflicts = get_knowledge_conflicts(conn, include_resolved)
-                return jsonify({"conflicts": conflicts, "count": len(conflicts)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/releases")
+@admin_required
+@api_error_handler("ListReleases")
+def admin_list_releases():
+    """List releases with analysis status."""
+    try:
+        from ..intelligence.product_experience import get_releases
+        with db.connection() as conn:
+            releases = get_releases(conn)
+            return jsonify({"releases": releases, "count": len(releases)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/knowledge-conflicts/<conflict_id>/resolve", methods=["POST"])
-    @admin_required
-    @api_error_handler("IntelligenceResolveConflict")
-    def admin_intelligence_resolve_conflict(conflict_id):
-        """Human resolves a flagged knowledge conflict."""
-        try:
-            from ..intelligence.external_grounding import resolve_conflict
-            data = request.get_json(silent=True) or {}
-            resolution = data.get("resolution", "")
-            rationale = data.get("resolution_rationale", "")
-            if not resolution:
-                return jsonify({"error": "resolution required"}), 400
-            with db.connection() as conn:
-                ok = resolve_conflict(conn, conflict_id, resolution, rationale)
-                if ok:
-                    return jsonify({"success": True})
-                return jsonify({"error": "Failed to resolve conflict"}), 500
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/releases/<release_id>/analysis")
+@admin_required
+@api_error_handler("ReleaseAnalysis")
+def admin_release_analysis(release_id):
+    """Full regression analysis for a specific release."""
+    try:
+        from ..intelligence.product_experience import get_release_analysis
+        with db.connection() as conn:
+            analysis = get_release_analysis(conn, release_id)
+            if analysis:
+                return jsonify(analysis)
+            return jsonify({"error": "Release not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/benchmarks")
-    @admin_required
-    @api_error_handler("IntelligenceBenchmarks")
-    def admin_intelligence_benchmarks():
-        """Benchmark registry with most recent comparisons."""
-        try:
-            from ..intelligence.external_grounding import get_benchmark_comparisons
-            with db.connection() as conn:
-                benchmarks = get_benchmark_comparisons(conn)
-                return jsonify({"benchmarks": benchmarks, "count": len(benchmarks)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/ux-summary")
+@admin_required
+@api_error_handler("IntelligenceUXSummary")
+def admin_intelligence_ux_summary():
+    """Aggregated UX signal: feedback trends, rage clicks, errors."""
+    try:
+        from ..intelligence.product_experience import get_ux_summary
+        lookback = request.args.get("lookback_days", 14, type=int)
+        with db.connection() as conn:
+            summary = get_ux_summary(conn, lookback)
+            return jsonify(summary)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/intelligence/goal-coherence")
-    @admin_required
-    @api_error_handler("IntelligenceGoalCoherence")
-    def admin_intelligence_goal_coherence():
-        """Most recent goal coherence check result."""
-        try:
-            from ..intelligence.external_grounding import get_latest_goal_coherence
-            with db.connection() as conn:
-                result = get_latest_goal_coherence(conn)
-                return jsonify(result)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/screen-health")
+@admin_required
+@api_error_handler("IntelligenceScreenHealth")
+def admin_intelligence_screen_health():
+    """Per-screen friction score and health metrics."""
+    try:
+        from ..intelligence.product_experience import get_screen_health
+        lookback = request.args.get("lookback_days", 14, type=int)
+        with db.connection() as conn:
+            screens = get_screen_health(conn, lookback)
+            return jsonify({"screens": screens, "count": len(screens)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    # ── Product Experience endpoints ──
+# ── Methodology Coverage endpoints ──
 
-    @admin_bp.route("/api/events/batch", methods=["POST"])
-    def ingest_interaction_events():
-        """Accept batched interaction events from client. Never errors."""
-        try:
-            from ..intelligence.product_experience import ingest_events
-            data = request.get_json(force=True, silent=True) or {}
-            events = data.get("events", [])
-            with db.connection() as conn:
-                accepted = ingest_events(conn, events)
-                return jsonify({"accepted": accepted}), 200
-        except Exception:
-            return jsonify({"accepted": 0}), 200
+@admin_bp.route("/api/admin/intelligence/methodology")
+@admin_required
+@api_error_handler("IntelligenceMethodology")
+def admin_intelligence_methodology():
+    """All framework summary grades and trends."""
+    try:
+        from ..intelligence.methodology_coverage import grade_all_frameworks
+        with db.connection() as conn:
+            grades = grade_all_frameworks(conn)
+            return jsonify(grades)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/releases", methods=["POST"])
-    @admin_required
-    @api_error_handler("RegisterRelease")
-    def admin_register_release():
-        """Register a new release with change categories."""
-        try:
-            from ..intelligence.product_experience import register_release
-            data = request.get_json(silent=True) or {}
-            version = data.get("app_version")
-            if not version:
-                return jsonify({"error": "app_version required"}), 400
-            with db.connection() as conn:
-                release_id = register_release(
-                    conn, version,
-                    release_notes=data.get("release_notes"),
-                    changed_ux=data.get("changed_ux", False),
-                    changed_srs=data.get("changed_srs", False),
-                    changed_content=data.get("changed_content", False),
-                    changed_auth=data.get("changed_auth", False),
-                    changed_api=data.get("changed_api", False),
-                )
-                if release_id:
-                    return jsonify({"success": True, "release_id": release_id}), 201
-                return jsonify({"error": "Failed to register release"}), 500
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/methodology/<framework>")
+@admin_required
+@api_error_handler("IntelligenceMethodologyDetail")
+def admin_intelligence_methodology_detail(framework):
+    """Component-level grades for one framework."""
+    try:
+        from ..intelligence.methodology_coverage import grade_all_frameworks
+        with db.connection() as conn:
+            grades = grade_all_frameworks(conn)
+            fw = grades.get("frameworks", {}).get(framework)
+            if not fw:
+                return jsonify({"error": f"Framework '{framework}' not found"}), 404
+            return jsonify({"framework": framework, **fw})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/releases")
-    @admin_required
-    @api_error_handler("ListReleases")
-    def admin_list_releases():
-        """List releases with analysis status."""
-        try:
-            from ..intelligence.product_experience import get_releases
-            with db.connection() as conn:
-                releases = get_releases(conn)
-                return jsonify({"releases": releases, "count": len(releases)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route(
+    "/api/admin/intelligence/methodology/<framework>/<component>/override",
+    methods=["POST"],
+)
+@admin_required
+@api_error_handler("IntelligenceMethodologyOverride")
+def admin_intelligence_methodology_override(framework, component):
+    """Human grade override for a specific component."""
+    try:
+        import uuid as _uuid
+        data = request.get_json(silent=True) or {}
+        score = data.get("score")
+        reason = data.get("reason")
+        if score is None or reason is None:
+            return jsonify({"error": "score and reason required"}), 400
+        score = float(score)
+        if not (0 <= score <= 100):
+            return jsonify({"error": "score must be 0-100"}), 400
+        from ..intelligence.methodology_coverage import _score_to_grade
+        grade_label = _score_to_grade(score)
+        with db.connection() as conn:
+            conn.execute(
+                """INSERT INTO pi_framework_grades
+                   (id, framework, component_name, raw_score, weighted_score,
+                    grade_label, evidence, solo_dev_applicable,
+                    was_overridden, override_reason)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)""",
+                (str(_uuid.uuid4()), framework, component,
+                 score, score, grade_label, "[]", "yes", reason),
+            )
+            conn.commit()
+            return jsonify({
+                "status": "overridden",
+                "framework": framework,
+                "component": component,
+                "score": score,
+                "grade": grade_label,
+                "reason": reason,
+            })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    @admin_bp.route("/api/admin/releases/<release_id>/analysis")
-    @admin_required
-    @api_error_handler("ReleaseAnalysis")
-    def admin_release_analysis(release_id):
-        """Full regression analysis for a specific release."""
-        try:
-            from ..intelligence.product_experience import get_release_analysis
-            with db.connection() as conn:
-                analysis = get_release_analysis(conn, release_id)
-                if analysis:
-                    return jsonify(analysis)
-                return jsonify({"error": "Release not found"}), 404
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/ux-summary")
-    @admin_required
-    @api_error_handler("IntelligenceUXSummary")
-    def admin_intelligence_ux_summary():
-        """Aggregated UX signal: feedback trends, rage clicks, errors."""
-        try:
-            from ..intelligence.product_experience import get_ux_summary
-            lookback = request.args.get("lookback_days", 14, type=int)
-            with db.connection() as conn:
-                summary = get_ux_summary(conn, lookback)
-                return jsonify(summary)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/screen-health")
-    @admin_required
-    @api_error_handler("IntelligenceScreenHealth")
-    def admin_intelligence_screen_health():
-        """Per-screen friction score and health metrics."""
-        try:
-            from ..intelligence.product_experience import get_screen_health
-            lookback = request.args.get("lookback_days", 14, type=int)
-            with db.connection() as conn:
-                screens = get_screen_health(conn, lookback)
-                return jsonify({"screens": screens, "count": len(screens)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # ── Methodology Coverage endpoints ──
-
-    @admin_bp.route("/api/admin/intelligence/methodology")
-    @admin_required
-    @api_error_handler("IntelligenceMethodology")
-    def admin_intelligence_methodology():
-        """All framework summary grades and trends."""
-        try:
-            from ..intelligence.methodology_coverage import grade_all_frameworks
-            with db.connection() as conn:
-                grades = grade_all_frameworks(conn)
-                return jsonify(grades)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/methodology/<framework>")
-    @admin_required
-    @api_error_handler("IntelligenceMethodologyDetail")
-    def admin_intelligence_methodology_detail(framework):
-        """Component-level grades for one framework."""
-        try:
-            from ..intelligence.methodology_coverage import grade_all_frameworks
-            with db.connection() as conn:
-                grades = grade_all_frameworks(conn)
-                fw = grades.get("frameworks", {}).get(framework)
-                if not fw:
-                    return jsonify({"error": f"Framework '{framework}' not found"}), 404
-                return jsonify({"framework": framework, **fw})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route(
-        "/api/admin/intelligence/methodology/<framework>/<component>/override",
-        methods=["POST"],
-    )
-    @admin_required
-    @api_error_handler("IntelligenceMethodologyOverride")
-    def admin_intelligence_methodology_override(framework, component):
-        """Human grade override for a specific component."""
-        try:
-            import uuid as _uuid
-            data = request.get_json(silent=True) or {}
-            score = data.get("score")
-            reason = data.get("reason")
-            if score is None or reason is None:
-                return jsonify({"error": "score and reason required"}), 400
-            score = float(score)
-            if not (0 <= score <= 100):
-                return jsonify({"error": "score must be 0-100"}), 400
-            from ..intelligence.methodology_coverage import _score_to_grade
-            grade_label = _score_to_grade(score)
-            with db.connection() as conn:
-                conn.execute(
-                    """INSERT INTO pi_framework_grades
-                       (id, framework, component_name, raw_score, weighted_score,
-                        grade_label, evidence, solo_dev_applicable,
-                        was_overridden, override_reason)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)""",
-                    (str(_uuid.uuid4()), framework, component,
-                     score, score, grade_label, "[]", "yes", reason),
-                )
-                conn.commit()
-                return jsonify({
-                    "status": "overridden",
-                    "framework": framework,
-                    "component": component,
-                    "score": score,
-                    "grade": grade_label,
-                    "reason": reason,
-                })
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @admin_bp.route("/api/admin/intelligence/methodology/history")
-    @admin_required
-    @api_error_handler("IntelligenceMethodologyHistory")
-    def admin_intelligence_methodology_history():
-        """Last 12 audits of framework grades."""
-        try:
-            with db.connection() as conn:
-                rows = conn.execute(
-                    """SELECT framework, overall_score, overall_grade,
-                              applicable_component_count, na_component_count,
-                              gap_count, prior_grade, trend, summary_text, graded_at
-                       FROM pi_framework_summary_grades
-                       ORDER BY graded_at DESC
-                       LIMIT ?""",
-                    (12 * 9,),  # 12 audits × 9 frameworks
-                ).fetchall()
-                history = [
-                    {
-                        "framework": r["framework"],
-                        "score": r["overall_score"],
-                        "grade": r["overall_grade"],
-                        "applicable_count": r["applicable_component_count"],
-                        "na_count": r["na_component_count"],
-                        "gap_count": r["gap_count"],
-                        "prior_grade": r["prior_grade"],
-                        "trend": r["trend"],
-                        "summary": r["summary_text"],
-                        "graded_at": r["graded_at"],
-                    }
-                    for r in rows
-                ]
-                return jsonify({"history": history, "count": len(history)})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@admin_bp.route("/api/admin/intelligence/methodology/history")
+@admin_required
+@api_error_handler("IntelligenceMethodologyHistory")
+def admin_intelligence_methodology_history():
+    """Last 12 audits of framework grades."""
+    try:
+        with db.connection() as conn:
+            rows = conn.execute(
+                """SELECT framework, overall_score, overall_grade,
+                          applicable_component_count, na_component_count,
+                          gap_count, prior_grade, trend, summary_text, graded_at
+                   FROM pi_framework_summary_grades
+                   ORDER BY graded_at DESC
+                   LIMIT ?""",
+                (12 * 9,),  # 12 audits × 9 frameworks
+            ).fetchall()
+            history = [
+                {
+                    "framework": r["framework"],
+                    "score": r["overall_score"],
+                    "grade": r["overall_grade"],
+                    "applicable_count": r["applicable_component_count"],
+                    "na_count": r["na_component_count"],
+                    "gap_count": r["gap_count"],
+                    "prior_grade": r["prior_grade"],
+                    "trend": r["trend"],
+                    "summary": r["summary_text"],
+                    "graded_at": r["graded_at"],
+                }
+                for r in rows
+            ]
+            return jsonify({"history": history, "count": len(history)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # ── AI / Ollama endpoints ────────────────────────────────────────────────

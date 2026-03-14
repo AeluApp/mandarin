@@ -102,7 +102,7 @@ the end (not salesy — "I built a tool that does this" is enough).
 **Outline:**
 - The origin story (learning Mandarin, frustrated with existing tools)
 - What the research says about SRS, interleaving, and desirable difficulty
-- Why I built 27 drill types (the science of varied practice)
+- Why I built 44 drill types (the science of varied practice)
 - The cleanup loop concept and why it works
 - What I got wrong (features I built that didn't help)
 - What actually moves the needle for learners

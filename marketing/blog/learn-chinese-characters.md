@@ -142,6 +142,6 @@ The combination of decomposition and SRS hasn't been studied as extensively as e
 
 I've been building [Aelu](https://aelu.app) to combine all four methods — radical awareness, adaptive spaced repetition, graded reading with inline glosses, and the cleanup loop where words you look up automatically become drills.
 
-It covers HSK 1 through 6 with 27 drill types, and the SRS algorithm adapts to how you actually perform, not a fixed schedule. HSK 1-2 content is free. Beyond that, it's $14.99/month.
+It covers HSK 1 through 6 with 44 drill types, and the SRS algorithm adapts to how you actually perform, not a fixed schedule. HSK 1-2 content is free. Beyond that, it's $14.99/month.
 
 I built it because I needed it — the tools that existed made me choose between flashcards and reading, and I wanted something that connected them.

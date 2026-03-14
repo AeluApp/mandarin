@@ -30,7 +30,7 @@ A few findings shaped everything:
 
 **The testing effect: retrieval beats review.** Actively trying to recall something is more effective than passively re-reading it. This is why flashcards work better than highlighting a textbook. And it's why varied, active drills work better than flashcards alone.
 
-## Why I built 27 drill types
+## Why I built 44 drill types
 
 When I explain that the app has 27 different drill types, people sometimes laugh. It sounds like over-engineering. But each one exists for a reason grounded in how memory works.
 

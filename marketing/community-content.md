@@ -42,7 +42,7 @@ The honest answer: basic functional Chinese in 1 year, comfortable in 2-3 years,
 
 There's no single best — it depends on what skill you need most:
 
-**For vocabulary/SRS:** Hack Chinese or Anki if you like building your own decks. Both use proven spaced repetition. If you want something that goes beyond flashcards with 27+ drill types and adaptive multi-skill scheduling, I built an app called Aelu that does this — but I'm biased.
+**For vocabulary/SRS:** Hack Chinese or Anki if you like building your own decks. Both use proven spaced repetition. If you want something that goes beyond flashcards with 44+ drill types and adaptive multi-skill scheduling, I built an app called Aelu that does this — but I'm biased.
 
 **For absolute beginners:** HelloChinese has the best structured beginner course with a gentle learning curve.
 
@@ -483,7 +483,7 @@ I built a Chinese study app because nothing else worked the way I learn — AMA
 I'm Jason, a self-taught Mandarin learner and solo developer. I was frustrated with the gap between flashcard apps (great for vocabulary, nothing else) and gamified apps (fun but I wasn't retaining anything), so I built my own tool.
 
 Key decisions I made:
-- 27 drill types instead of just flashcards — reading, listening, speaking, tones, cloze, sentence construction
+- 44 drill types instead of just flashcards — reading, listening, speaking, tones, cloze, sentence construction
 - "Cleanup loop" — words you look up during graded reading feed directly into your drill queue
 - Zero AI at runtime — all scheduling and scoring is deterministic
 - Built in Python and SQLite, runs locally, data stays on your machine
@@ -849,7 +849,7 @@ Not because it's fast — because it's fast enough, and I can iterate quickly. T
 - No AI-powered conversation practice
 - No cloud sync (data lives on your machine)
 
-For my use case — an adaptive SRS system with 27 drill types — these tradeoffs are worth it. The result: zero marginal cost per user, no API dependencies, no cloud infrastructure. If my server goes down... actually, there is no server.
+For my use case — an adaptive SRS system with 44 drill types — these tradeoffs are worth it. The result: zero marginal cost per user, no API dependencies, no cloud infrastructure. If my server goes down... actually, there is no server.
 
 **Tech stack summary:**
 - Python 3.9.6 (Flask for web UI)
@@ -966,7 +966,7 @@ If you're building an SRS system of any kind, add confidence dampening. It's the
 
 ### BIP 6: 27 Drill Types
 
-**Title:** I have 27 drill types. Here's the cognitive science behind each category.
+**Title:** I have 44 drill types. Here's the cognitive science behind each category.
 
 Most language learning apps have 3-5 exercise types. My Chinese learning app has 27. Here's why, and the cognitive science justifying each category.
 
@@ -1126,7 +1126,7 @@ It is niche — deliberately. I built it for self-study adults working through H
 ### Question Responses
 
 **11. "How is this different from Anki?"**
-Three main things: (1) 27 drill types beyond flashcards — cloze, listening, speaking, tone pairs, sentence construction. Anki has one: flashcard. (2) Multi-skill diagnostics — the app tracks vocabulary, reading, listening, and tones separately and tells you which is lagging. Anki tracks cards due. (3) The cleanup loop — words you look up during graded reading feed into your drill queue automatically. No manual card creation.
+Three main things: (1) 44 drill types beyond flashcards — cloze, listening, speaking, tone pairs, sentence construction. Anki has one: flashcard. (2) Multi-skill diagnostics — the app tracks vocabulary, reading, listening, and tones separately and tells you which is lagging. Anki tracks cards due. (3) The cleanup loop — words you look up during graded reading feed into your drill queue automatically. No manual card creation.
 
 The tradeoff: you lose Anki's infinite customization and community deck ecosystem. If you love building and tweaking decks, Anki is better. If you want to open an app and immediately start multi-skill practice, Aelu is better.
 
@@ -1134,7 +1134,7 @@ The tradeoff: you lose Anki's infinite customization and community deck ecosyste
 It's a web app, so it works in any browser including mobile Safari and Chrome on Android. No app store download needed. The experience is good on mobile but not identical to a native app — no push notifications, slightly different touch interactions. Native mobile apps are on the roadmap but I don't have a timeline yet.
 
 **13. "Is there a free trial?"**
-The free tier IS the trial — it covers all HSK 1-2 content with all 27 drill types, no time limit, no credit card required. If you're at HSK 1-2, you might never need to pay. The paid tier ($14.99/month) unlocks HSK 3-6+ content, full diagnostics, and advanced features.
+The free tier IS the trial — it covers all HSK 1-2 content with all 44 drill types, no time limit, no credit card required. If you're at HSK 1-2, you might never need to pay. The paid tier ($14.99/month) unlocks HSK 3-6+ content, full diagnostics, and advanced features.
 
 **14. "What HSK levels does it cover?"**
 HSK 1-9. The system has 10,000+ vocabulary items across all nine levels. The deepest supplementary content (full context notes, dialogue scenarios, graded reading) is HSK 1-3. HSK 4-9 has vocabulary and drills with supplementary content still being expanded.

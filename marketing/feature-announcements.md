@@ -568,7 +568,7 @@ A flashcard tests recognition. A cloze deletion tests production. A listening ex
 
 The research backs this up -- it's called "interleaving" and "varied practice." The idea is that mixing practice types forces your brain to reconstruct the memory from different angles, which strengthens it.
 
-I built a system with 27 drill types across five categories (recognition, production, auditory, contextual, tonal) for my Chinese study. The scheduler picks the drill type based on which skill dimension is weakest for each word. The result: words practiced across 3+ drill types have roughly 35% higher 7-day retention than words practiced with only one type.
+I built a system with 44 drill types across five categories (recognition, production, auditory, contextual, tonal) for my Chinese study. The scheduler picks the drill type based on which skill dimension is weakest for each word. The result: words practiced across 3+ drill types have roughly 35% higher 7-day retention than words practiced with only one type.
 
 This principle isn't specific to Chinese. If you're studying any language and your only practice is flashcards, try adding even one other format -- cloze deletion, listening discrimination, or sentence construction. The variety itself is the intervention.
 
@@ -1005,7 +1005,7 @@ Aelu now includes 1,200 HSK 7-9 vocabulary items, each with:
 - Pinyin and definitions
 - HSK 3.0 level tags (7, 8, or 9)
 - Context notes for high-frequency items
-- Integration with all 27 drill types
+- Integration with all 44 drill types
 
 These items work exactly like the rest of the vocabulary system. They appear in your adaptive sessions, they participate in the cleanup loop when you encounter them in advanced reading passages, and they're factored into your HSK projection.
 
@@ -1042,7 +1042,7 @@ For more on the HSK 3.0 changes, see [HSK 3.0 overview](/resources/hsk-3) and [s
 
 Hey --
 
-HSK 7-9 content is live in Aelu. 1,200 advanced vocabulary items, tagged for the new HSK 3.0 standard, integrated with all 27 drill types and the adaptive scheduler.
+HSK 7-9 content is live in Aelu. 1,200 advanced vocabulary items, tagged for the new HSK 3.0 standard, integrated with all 44 drill types and the adaptive scheduler.
 
 [SCREENSHOT: HSK projection view showing projections through Level 9]
 
@@ -1067,7 +1067,7 @@ P.S. If you're at the HSK 7-9 level and find vocabulary that's missing or incorr
 **Tweet 1:**
 HSK 7-9 content is live in Aelu.
 
-1,200 advanced vocabulary items for the new HSK 3.0 upper levels. Pinyin, definitions, context notes, integrated with all 27 drill types.
+1,200 advanced vocabulary items for the new HSK 3.0 upper levels. Pinyin, definitions, context notes, integrated with all 44 drill types.
 
 The new HSK goes to Level 9. Now the app does too.
 
@@ -1164,7 +1164,7 @@ These rules apply to every piece of announcement content. Print this section and
 ### What to do
 
 - **Lead with the user benefit.** "You can now listen to graded passages at adjustable speed" not "I implemented a Web Audio API-based playback system with variable rate control."
-- **Be specific about what shipped.** "27 drill types" not "many drill types." "0.4-second load time" not "faster loading."
+- **Be specific about what shipped.** "44 drill types" not "many drill types." "0.4-second load time" not "faster loading."
 - **Acknowledge limitations honestly.** "This is v1 of listening practice. Speed control and transcript reveal work well. Sentence-by-sentence playback is coming." Users trust you more when you're honest about boundaries.
 - **Use the brand voice.** "We built this because..." not "We're excited to announce..." Aelu is the voice. Direct and personal.
 - **Include concrete examples.** A real word, a real passage, a real scenario. Abstract descriptions of features don't land.

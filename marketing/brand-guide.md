@@ -617,7 +617,7 @@ The full voice and tone guidelines live in `marketing/positioning.md`. This sect
 
 **Direct.** Short sentences. No hedging. "Your listening is behind your reading" -- not "You might want to consider focusing a bit more on listening skills."
 
-**Grounded.** Every claim backed by a specific feature, research finding, or data point. "27 drill types" is grounded. "Revolutionary learning experience" is not.
+**Grounded.** Every claim backed by a specific feature, research finding, or data point. "44 drill types" is grounded. "Revolutionary learning experience" is not.
 
 **Calm.** No urgency, no anxiety, no FOMO. No exclamation marks in product UI. The tone is a knowledgeable peer, not a salesperson.
 

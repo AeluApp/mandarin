@@ -204,7 +204,8 @@ def run_drill(drill_type: str, item: dict, conn, show_fn, input_fn,
               show_pinyin: bool = False,
               scaffold_level: str = "none",
               english_level: str = "full",
-              speaking_level: float = 1.0) -> DrillResult:
+              speaking_level: float = 1.0,
+              user_id: int = 1) -> DrillResult:
     """Dispatch to the appropriate drill runner."""
     _validate_drill_inputs(item, drill_type)
     runner = DRILL_RUNNERS.get(drill_type)
@@ -258,6 +259,9 @@ def run_drill(drill_type: str, item: dict, conn, show_fn, input_fn,
         elif drill_type == "tone":
             result = runner(item, conn, show_fn, wrapped_input, prominent=prominent,
                            audio_enabled=audio_enabled, english_level=el)
+        elif drill_type == "listening_passage":
+            result = runner(item, conn, show_fn, wrapped_input, prominent=prominent,
+                           audio_enabled=audio_enabled, user_id=user_id)
         else:
             result = runner(item, conn, show_fn, wrapped_input, prominent=prominent,
                            audio_enabled=audio_enabled)

@@ -33,7 +33,7 @@ Here's what to expect:
 
 **Your first session** takes about 10 minutes. The system assesses your starting level across vocabulary, listening, and tone recognition, then adapts from there. You don't need to configure anything.
 
-**What happens after that:** Every session targets what you're weakest at. The system picks from 27 drill types — recognition, production, listening, tone pairs, cloze, sentence construction — based on where your gaps are. You just answer the question in front of you.
+**What happens after that:** Every session targets what you're weakest at. The system picks from 44 drill types — recognition, production, listening, tone pairs, cloze, sentence construction — based on where your gaps are. You just answer the question in front of you.
 
 **One feature to know about:** The graded reader. When you read a Chinese passage and tap a word you don't know, that word enters your drill queue automatically. Reading and drilling are connected — not two separate activities.
 
@@ -303,7 +303,7 @@ Here's what HSK 3 looks like:
 - **More complex grammar** — complement structures, conditional sentences, comparison patterns
 - **Listening at natural speed** — passages assume you can follow conversational-pace audio
 
-The full Aelu system covers all of this: HSK 3-6 content, advanced diagnostics, HSK projection, context notes for every word, and all 27 drill types adapted to intermediate content.
+The full Aelu system covers all of this: HSK 3-6 content, advanced diagnostics, HSK projection, context notes for every word, and all 44 drill types adapted to intermediate content.
 
 When you're ready, full access is $14.99/month. Cancel anytime.
 
@@ -356,7 +356,7 @@ I want to be straightforward about what the paid tier includes and what it costs
 - HSK 3-6 content (4,700+ additional words, graded passages, dialogue scenarios)
 - Full multi-skill diagnostics with HSK projection
 - Context notes for every vocabulary item (usage, collocations, register, common mistakes)
-- All 27 drill types at all levels
+- All 44 drill types at all levels
 - Speaking drills with tone grading
 - Adaptive day profiles (sessions adjust to your available time)
 - Everything in the free tier, obviously
@@ -416,7 +416,7 @@ You've been studying consistently on the free tier, and you're close to outgrowi
 
 This offer is good for 7 days. After that, the standard price applies. I'm not going to pretend it's "the last chance ever" — it's just a one-time offer for new subscribers who've shown they're serious about studying.
 
-**What you get:** Everything. HSK 3-6, diagnostics, projection, context notes, speaking drills, all 27 drill types. Cancel anytime.
+**What you get:** Everything. HSK 3-6, diagnostics, projection, context notes, speaking drills, all 44 drill types. Cancel anytime.
 
 **If $14.99/month (or $12/month) isn't right for you:** The free tier is yours forever. HSK 1-2, full features, no expiration. No hard feelings.
 
@@ -724,7 +724,7 @@ Hey —
 Your cancellation has been processed. Here's what happens now:
 
 - **Your paid access continues through {{end_date}}** (the end of your current billing period). You won't be charged again.
-- **After {{end_date}}, your account reverts to the free tier.** All HSK 1-2 content, all 27 drill types at that level, full functionality. No expiration.
+- **After {{end_date}}, your account reverts to the free tier.** All HSK 1-2 content, all 44 drill types at that level, full functionality. No expiration.
 - **Your progress data stays on your device.** Nothing is deleted.
 
 One question, if you have a moment — it helps me improve:

@@ -37,7 +37,7 @@ Hi [Name],
 
 I've been watching your [channel/blog/podcast] while learning Aelu — [specific detail about their content that you genuinely found useful, e.g., "your breakdown of tone sandhi rules in the 不 video finally made the pattern click for me"].
 
-We built a Chinese learning app called Aelu. The core idea is what we call the "cleanup loop" — you read graded Chinese passages, tap words you don't know, and those exact words become your next drill session. It also has 27 drill types, adaptive scheduling, and HSK 1-6 alignment.
+We built a Chinese learning app called Aelu. The core idea is what we call the "cleanup loop" — you read graded Chinese passages, tap words you don't know, and those exact words become your next drill session. It also has 44 drill types, adaptive scheduling, and HSK 1-6 alignment.
 
 I'd love to give you a free lifetime account — no strings attached. If you try it and it's not worth mentioning to your audience, that's completely fine. But if you do find it useful, I have an affiliate program (30% recurring commission on referred paying users) that might be worth exploring.
 
@@ -89,7 +89,7 @@ Hi [Name/School],
 I've built a Chinese learning app called Aelu that I think could complement your courses well. It focuses on the practice side — adaptive drills, graded reading, and listening exercises — which is the part students often struggle to do between classes.
 
 A few things that might interest you:
-- HSK 1-6 aligned curriculum with 27 drill types
+- HSK 1-6 aligned curriculum with 44 drill types
 - Students' weak spots are automatically identified and targeted
 - Progress tracking across vocabulary, listening, reading, and tone accuracy
 - Graded reading where every looked-up word becomes a drill (the "cleanup loop")
@@ -149,7 +149,7 @@ We are an independent team learning Aelu who built a study app because nothing e
 - Why I use zero AI tokens at runtime — and why that's a deliberate choice
 
 **Quick stats:**
-- 27 drill types across reading, listening, speaking, and tones
+- 44 drill types across reading, listening, speaking, and tones
 - HSK 1-6 aligned
 - Built in Python + SQLite, runs locally
 - [X] months into learning Aelu myself

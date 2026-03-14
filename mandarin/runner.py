@@ -554,7 +554,8 @@ def run_session(conn, plan: SessionPlan,
                               prominent=prominent, audio_enabled=audio_enabled,
                               show_pinyin=show_pinyin, scaffold_level=scaffold_level,
                               english_level=english_level,
-                              speaking_level=speaking_level)
+                              speaking_level=speaking_level,
+                              user_id=user_id)
         except Exception as exc:
             _log_drill_error(drill.drill_type, drill.content_item_id, exc, context={
                 "item": item,
@@ -888,7 +889,8 @@ def run_session(conn, plan: SessionPlan,
             retry_start = time.monotonic()
             try:
                 result = run_drill(drill.drill_type, item, conn, show_fn, input_fn,
-                                  prominent=prominent, audio_enabled=audio_enabled)
+                                  prominent=prominent, audio_enabled=audio_enabled,
+                                  user_id=user_id)
             except Exception as exc:
                 _log_drill_error(drill.drill_type, drill.content_item_id, exc, context={
                     "item": item,

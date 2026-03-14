@@ -37,7 +37,7 @@ The Chinese learning app market splits roughly into six categories:
 | **Offline capability** | Yes (local data) | No | Yes (syncs via AnkiWeb) | Yes (paid, downloaded lessons) | Yes (downloaded courses) | Yes (downloaded content) | Yes (fully offline) | Yes (downloaded lessons) | No (web-based video) | No (video streaming) | Yes (mobile app) | Yes (downloaded lessons) | No |
 | **Platform** | Web (desktop + mobile browser) | Web | Desktop, web, iOS ($25), Android | iOS, Android, web | iOS, Android | iOS, Android, web | iOS, Android | iOS, Android, web | Web (Teachable + Traverse) | Web (Teachable) | Web, iOS, Android | iOS, Android | Web |
 | **Target audience** | Serious adult learners, HSK preppers | Vocabulary-focused learners | Power users, customizers | Casual beginners | Structured beginners to intermediate | Character writers | Everyone (as reference) | Reading-focused learners | Committed beginners (high investment) | Budget-conscious structured learners | Reading-focused intermediate+ | Structured beginners | Contextual learners, visual learners |
-| **Unique selling point** | Cleanup loop + 27 drill types + adaptive multi-skill | Curated HSK vocab + clean UI + oral mode | Free + infinitely customizable | Massive brand + gamification + mobile-native | Best beginner Chinese app + native video | Handwriting with stroke-level feedback | The Chinese dictionary + OCR + doc reader | Beautiful graded reading content | Hanzi Movie Method mnemonics | Affordable video courses by native speakers | Daily news-based graded reading | Grammar-first approach for Asian languages | Video-based contextual learning |
+| **Unique selling point** | Cleanup loop + 44 drill types + adaptive multi-skill | Curated HSK vocab + clean UI + oral mode | Free + infinitely customizable | Massive brand + gamification + mobile-native | Best beginner Chinese app + native video | Handwriting with stroke-level feedback | The Chinese dictionary + OCR + doc reader | Beautiful graded reading content | Hanzi Movie Method mnemonics | Affordable video courses by native speakers | Daily news-based graded reading | Grammar-first approach for Asian languages | Video-based contextual learning |
 
 ---
 
@@ -71,7 +71,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Simple and effective." "Better than Anki for Chinese because everything is pre-built." "The analytics keep me accountable."
 - Complaints: "Gets repetitive after a while -- just flashcards." "Wish it had reading or listening." "Expensive for what it is -- $12/month for flashcards."
 
-**How we're different:** We have 27 drill types vs. their 1. We have a graded reader with the cleanup loop. We have tone grading, listening drills with speed control, sentence construction, cloze deletion. They are a vocabulary tool; we are a multi-skill learning system.
+**How we're different:** We have 44 drill types vs. their 1. We have a graded reader with the cleanup loop. We have tone grading, listening drills with speed control, sentence construction, cloze deletion. They are a vocabulary tool; we are a multi-skill learning system.
 
 **When someone should use BOTH:** If someone wants Hack Chinese's clean vocabulary grinding alongside Mandarin's multi-skill drills. Hack Chinese for pure vocab speed; Aelu for integrating that vocab into reading, listening, and production.
 
@@ -109,7 +109,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Nothing beats Anki for long-term retention." "Free and I control everything." "FSRS changed the game." "I have 10,000 cards and it just works."
 - Complaints: "Took me a week to set it up properly." "Review pile gets overwhelming." "It's ugly." "I know words but can't read or listen." "Making good cards takes forever."
 
-**How we're different:** Aelu is what you get if you take Anki's SRS core, wrap it in a curriculum, add 27 drill types, include a graded reader with the cleanup loop, add listening and speaking drills, and remove the need to build anything yourself. You open Aelu and study. You open Anki and configure.
+**How we're different:** Aelu is what you get if you take Anki's SRS core, wrap it in a curriculum, add 44 drill types, include a graded reader with the cleanup loop, add listening and speaking drills, and remove the need to build anything yourself. You open Aelu and study. You open Anki and configure.
 
 **When someone should use BOTH:** Anki for supplementary vocabulary outside our HSK scope (specialized topics, university textbook words). Aelu for structured multi-skill practice.
 
@@ -147,7 +147,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "It got me started." "The streak keeps me coming back." "It's free and I like the owl."
 - Complaints: "I did Duolingo Chinese for a year and can barely order food." "The tone teaching is terrible." "Why does Chinese get worse features than Spanish?" "It's a game, not a language course."
 
-**How we're different:** We treat Chinese as a tonal language that requires tone-specific drilling, contextual reading, and listening practice -- none of which Duolingo does well. We have 27 drill types vs. their ~4. We have graded reading. We have tone grading. We do not gamify; we give honest metrics.
+**How we're different:** We treat Chinese as a tonal language that requires tone-specific drilling, contextual reading, and listening practice -- none of which Duolingo does well. We have 44 drill types vs. their ~4. We have graded reading. We have tone grading. We do not gamify; we give honest metrics.
 
 **When someone should use BOTH:** Duolingo for the first week to get basic exposure and build the daily habit. Aelu once they are ready to actually learn.
 
@@ -185,7 +185,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Best app for starting Chinese." "Way better than Duolingo for Chinese." "The speech recognition actually works." "I love the graded stories."
 - Complaints: "I outgrew it after 6 months." "The paywall snuck up on me." "Video speakers are sometimes hard to understand." "Review system feels random."
 
-**How we're different:** Our SRS is substantially more sophisticated (modified FSRS with bayesian confidence dampening vs. their basic interval scheduling). Our cleanup loop connects reading directly to drill scheduling -- theirs does not. We have 27 drill types vs. their ~8. Our diagnostics track per-skill readiness. We are designed for the full HSK 1-6+ journey; they taper off around HSK 4.
+**How we're different:** Our SRS is substantially more sophisticated (modified FSRS with bayesian confidence dampening vs. their basic interval scheduling). Our cleanup loop connects reading directly to drill scheduling -- theirs does not. We have 44 drill types vs. their ~8. Our diagnostics track per-skill readiness. We are designed for the full HSK 1-6+ journey; they taper off around HSK 4.
 
 **When someone should use BOTH:** HelloChinese for the first 1-3 months of absolute beginner study (their pinyin and basic character introduction is excellent), then Aelu for the structured HSK progression with deeper SRS.
 
@@ -299,7 +299,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Best reading app for Chinese, hands down." "The stories are interesting and well-graded." "Design is gorgeous." "Audio quality is excellent."
 - Complaints: "Too expensive." "Not enough new content." "I read the stories but don't retain the vocab." "No SRS is a real gap." "Short stories -- I want something longer."
 
-**How we're different:** Our graded reader has the cleanup loop -- every word you look up becomes a drill. Du Chinese shows you a word's meaning; we show you the meaning and then make you practice it until you know it. We also have 27 drill types, tone grading, listening drills, and multi-skill diagnostics.
+**How we're different:** Our graded reader has the cleanup loop -- every word you look up becomes a drill. Du Chinese shows you a word's meaning; we show you the meaning and then make you practice it until you know it. We also have 44 drill types, tone grading, listening drills, and multi-skill diagnostics.
 
 **When someone should use BOTH:** Du Chinese for its larger and more varied story library (cultural content, longer narratives). Aelu for turning reading gaps into active practice.
 
@@ -337,7 +337,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "The Hanzi Movie Method actually works." "I was reading characters within 5 weeks." "Best course for serious learners." "Community is supportive."
 - Complaints: "Way too expensive." "Traverse app is buggy." "Too slow in early phases." "Non-native teachers bother me." "Could take years to finish the full course."
 
-**How we're different:** We are a daily practice tool, not a video course. We cost $14.99/month, not $1,499. We are HSK-aligned. Our SRS is built-in and sophisticated, not bolted on via a third-party tool. We focus on active practice (27 drill types), not passive video consumption.
+**How we're different:** We are a daily practice tool, not a video course. We cost $14.99/month, not $1,499. We are HSK-aligned. Our SRS is built-in and sophisticated, not bolted on via a third-party tool. We focus on active practice (44 drill types), not passive video consumption.
 
 **When someone should use BOTH:** Mandarin Blueprint for the conceptual framework and mnemonic techniques. Aelu for daily practice, SRS review, and skill-specific drilling.
 
@@ -413,7 +413,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Best resource for reading practice." "Love the daily new articles." "HSK grading is accurate." "Great for intermediate learners who need reading material."
 - Complaints: "Gets boring -- it's all news." "Flashcards are an afterthought." "I look up the same words every article and nothing happens." "Wish it had more exercise types."
 
-**How we're different:** Our graded reader feeds into the cleanup loop -- looked-up words become drills. We also offer 27 drill types, tone grading, listening practice, and multi-skill diagnostics. They are a reading platform; we are a multi-skill learning system with reading integrated.
+**How we're different:** Our graded reader feeds into the cleanup loop -- looked-up words become drills. We also offer 44 drill types, tone grading, listening practice, and multi-skill diagnostics. They are a reading platform; we are a multi-skill learning system with reading integrated.
 
 **When someone should use BOTH:** TCB for the massive news-based reading library and cultural exposure. Aelu for turning reading gaps into active practice and building other skills.
 
@@ -451,7 +451,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Best grammar explanations in any language app." "Pinyin section is outstanding." "Better than Duolingo for Chinese by far." "Character writing is a nice addition."
 - Complaints: "I finished the Chinese course in 2 months and there's nothing else." "No SRS means I forget everything." "Drawing characters is glitchy." "Feels incomplete."
 
-**How we're different:** We have SRS (they do not). We cover HSK 1-6+ (they cover roughly 1-3). We have 27 drill types (they have ~6). We have a graded reader (they have none). We have tone grading (they do not). We continue to be useful at intermediate and advanced levels.
+**How we're different:** We have SRS (they do not). We cover HSK 1-6+ (they cover roughly 1-3). We have 44 drill types (they have ~6). We have a graded reader (they have none). We have tone grading (they do not). We continue to be useful at intermediate and advanced levels.
 
 **When someone should use BOTH:** LingoDeer for initial grammar instruction and pinyin foundation (their explanations are genuinely good). Aelu for ongoing daily practice with SRS.
 
@@ -489,7 +489,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Contextual learning with real videos is engaging." "Writing practice is well-designed." "Level assessment is accurate." "Great for supplementing other study."
 - Complaints: "Not enough content at higher levels." "Web-only is limiting." "Sometimes videos disappear." "Hard to use as a primary study tool."
 
-**How we're different:** We have a structured HSK curriculum; they have an adaptive tool. We have 27 drill types; they have ~4. We have tone grading and speaking drills; they do not. Our content does not depend on external video platforms.
+**How we're different:** We have a structured HSK curriculum; they have an adaptive tool. We have 44 drill types; they have ~4. We have tone grading and speaking drills; they do not. Our content does not depend on external video platforms.
 
 **When someone should use BOTH:** Dong Chinese for video-based immersion and contextual vocabulary exposure. Aelu for structured daily practice and SRS review.
 
@@ -507,7 +507,7 @@ The Chinese learning app market splits roughly into six categories:
 
 Both are SRS-based tools for serious Chinese learners at similar price points ($14.99/month vs. $12/month). Here is the honest comparison:
 
-**Choose Aelu if:** You want more than flashcards. Aelu has 27 drill types (reading, listening, speaking, cloze, sentence construction, tone pairs, etc.) vs. Hack Chinese's 1 (flashcard with oral mode). Aelu has a graded reader where looked-up words become drills. Aelu has tone grading. Aelu has multi-skill diagnostics that track vocabulary, listening, reading, and tones separately.
+**Choose Aelu if:** You want more than flashcards. Aelu has 44 drill types (reading, listening, speaking, cloze, sentence construction, tone pairs, etc.) vs. Hack Chinese's 1 (flashcard with oral mode). Aelu has a graded reader where looked-up words become drills. Aelu has tone grading. Aelu has multi-skill diagnostics that track vocabulary, listening, reading, and tones separately.
 
 **Choose Hack Chinese if:** You want the largest possible pre-built Chinese vocabulary database with clean UI and minimal friction. Hack Chinese has audio for 100,000+ words. Aelu has 10,000+ items across HSK 1-9. If your primary goal is raw vocabulary acquisition and you do not need reading, listening, or speaking practice integrated, Hack Chinese has broader coverage.
 
@@ -523,7 +523,7 @@ This is the hardest question we face because Anki is free and extremely capable.
 
 **The $14.99/month is buying you:**
 1. **No setup time.** Anki requires finding or building decks, configuring settings, adding media, and maintaining cards. Aelu works out of the box with curated, HSK-aligned content.
-2. **27 drill types instead of 1.** Anki shows you a card and you rate yourself. Aelu gives you cloze deletions, sentence construction, listening with speed control, tone pair drills, speaking exercises, and more. Different cognitive skills, different exercise types.
+2. **44 drill types instead of 1.** Anki shows you a card and you rate yourself. Aelu gives you cloze deletions, sentence construction, listening with speed control, tone pair drills, speaking exercises, and more. Different cognitive skills, different exercise types.
 3. **The cleanup loop.** Read graded passages, look up words, and those words automatically enter your SRS queue. Anki cannot do this. You would need to manually create a card for every word you encounter while reading.
 4. **Tone grading.** Aelu evaluates your pronunciation. Anki cannot.
 5. **Multi-skill diagnostics.** Aelu tells you your listening lags behind your vocabulary and adjusts. Anki tracks card-level recall but has no concept of language skills.
@@ -543,7 +543,7 @@ This is the hardest question we face because Anki is free and extremely capable.
 ### "Why Aelu over Duolingo?"
 
 **Easy wins for us:**
-- 27 drill types vs. ~4
+- 44 drill types vs. ~4
 - Actual tone instruction and grading vs. effectively none
 - Graded reader with cleanup loop vs. sentence-level translation exercises
 - Honest metrics vs. gamification theater
@@ -585,7 +585,7 @@ This is our closest competition for structured Chinese learners. Both offer stru
 
 ### "Why Aelu over Skritter?"
 
-This is not really a versus. Skritter does handwriting. We do not. We do reading, listening, speaking, SRS, and 27 drill types. They do not (beyond character-level).
+This is not really a versus. Skritter does handwriting. We do not. We do reading, listening, speaking, SRS, and 44 drill types. They do not (beyond character-level).
 
 **If someone can only pick one:** It depends entirely on whether they need to write Chinese by hand. If they are preparing for a written HSK exam or studying in a Chinese university, they need Skritter (or something like it). If they want to read, listen, speak, and pass the computerized HSK, they need Aelu.
 
@@ -667,7 +667,7 @@ This is not really a versus. Skritter does handwriting. We do not. We do reading
 
 ### If Hack Chinese adds reading features
 **Threat level:** High. They have the vocabulary database and SRS to make it work.
-**Response:** Emphasize our drill variety (27 types) and multi-skill diagnostics. Reading + flashcards is not the same as reading + 27 drill types + tone grading + listening + diagnostics. Accelerate our content pipeline to close the vocabulary gap.
+**Response:** Emphasize our drill variety (27 types) and multi-skill diagnostics. Reading + flashcards is not the same as reading + 44 drill types + tone grading + listening + diagnostics. Accelerate our content pipeline to close the vocabulary gap.
 
 ### If Duolingo improves their Chinese course
 **Threat level:** Medium. Duolingo improving Chinese would mostly affect the casual beginner market, which is not our core target. But it could reduce the pipeline of "people who outgrow Duolingo and look for something better."

@@ -296,19 +296,35 @@ def run_listening_dictation_drill(item: dict, conn, show_fn, input_fn,
 
 def run_listening_passage_drill(item: dict, conn, show_fn, input_fn,
                                 prominent: bool = True,
-                                audio_enabled: bool = False) -> DrillResult:
+                                audio_enabled: bool = False,
+                                user_id: int = 1) -> DrillResult:
     """Listening passage: listen to a multi-sentence passage, answer comprehension question.
 
     Plays TTS of a passage from reading_passages.json, then asks an MC
     comprehension question. HSK 3+. Tests sustained listening.
     """
-    hsk_level = item.get("hsk_level", 0)
+    item_hsk = item.get("hsk_level", 0)
+
+    # Cap passage level to user's effective HSK level so passages aren't
+    # overwhelming when the scheduler picks items above the user's comfort zone.
+    user_hsk = item_hsk
+    try:
+        from ..db import get_mastery_by_hsk
+        mastery = get_mastery_by_hsk(conn, user_id=user_id)
+        if mastery:
+            active = [k for k, v in mastery.items() if v.get("seen", 0) > 0]
+            if active:
+                user_hsk = max(active)
+    except Exception:
+        pass
+    hsk_level = min(item_hsk, user_hsk) if user_hsk > 0 else item_hsk
+
     passages = _load_reading_passages()
     if not passages:
         return run_listening_gist_drill(item, conn, show_fn, input_fn,
                                        prominent=prominent, audio_enabled=audio_enabled)
 
-    # Find passages at or below this HSK level
+    # Find passages at or below the capped HSK level
     matching = [p for p in passages if p.get("hsk_level", 0) == hsk_level
                 and p.get("questions")]
     if not matching:
