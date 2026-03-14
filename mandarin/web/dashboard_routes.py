@@ -192,7 +192,7 @@ def api_status():
 
         # Upgrade context for free-tier users (smart paywall)
         upgrade_context = None
-        if subscription_tier == "free":
+        if subscription_tier == "free" and not getattr(current_user, "is_admin", False):
             days_active_row = conn.execute(
                 """SELECT COUNT(DISTINCT date(started_at)) as cnt
                    FROM session_log

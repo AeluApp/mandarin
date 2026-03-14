@@ -1308,3 +1308,16 @@ CREATE TABLE IF NOT EXISTS classroom_assignment (
 );
 
 CREATE INDEX IF NOT EXISTS idx_classroom_assignment_class ON classroom_assignment(classroom_id);
+
+-- ────────────────────────────────
+-- WEBHOOK IDEMPOTENCY (V49+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS webhook_event (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id TEXT NOT NULL UNIQUE,
+    event_type TEXT NOT NULL,
+    processed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_webhook_event_id ON webhook_event(event_id);
+

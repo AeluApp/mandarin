@@ -16,6 +16,7 @@ Usage:
     python scripts/ingest_open_subtitles.py <directory> [--source "Movie Name"] [--dry-run]
     python scripts/ingest_open_subtitles.py subs/ --source "哪吒" --hsk-max 4
 """
+from __future__ import annotations
 
 import argparse
 import hashlib

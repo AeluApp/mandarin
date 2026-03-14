@@ -10,6 +10,7 @@ audio paths.
 Usage:
     python scripts/ingest_wikimedia_audio.py [--limit 300] [--dry-run] [--verbose]
 """
+from __future__ import annotations
 
 import argparse
 import hashlib

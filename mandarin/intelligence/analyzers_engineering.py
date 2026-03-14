@@ -9,6 +9,7 @@ def _analyze_engineering(conn) -> list[dict]:
     crashes_7d = _safe_scalar(conn, """
         SELECT COUNT(*) FROM crash_log
         WHERE timestamp >= datetime('now', '-7 days')
+          AND request_path NOT IN ('/unhandled', '/unhandled/')
     """)
     total_requests_7d = _safe_scalar(conn, """
         SELECT COUNT(*) FROM request_timing

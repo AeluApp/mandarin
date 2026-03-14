@@ -230,6 +230,7 @@ class StabilityAdvisor(_BaseAdvisor):
                 crashes = _safe_scalar(conn, """
                     SELECT COUNT(*) FROM crash_log
                     WHERE created_at >= datetime('now', '-7 days')
+                      AND request_path NOT IN ('/unhandled', '/unhandled/')
                 """)
                 return 1.0 + min((crashes or 0) / 50.0, 1.0)
             return 1.5

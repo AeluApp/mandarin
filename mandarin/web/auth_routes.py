@@ -177,7 +177,7 @@ def register():
         email = (request.form.get("email") or "").strip()
         password = request.form.get("password") or ""
         confirm = request.form.get("confirm") or ""
-        display_name = (request.form.get("display_name") or "").strip()
+        display_name = (request.form.get("display_name") or "").strip()[:255]
         invite_code = (request.form.get("invite_code") or "").strip()
 
         if not email or not password:

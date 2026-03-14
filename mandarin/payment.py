@@ -300,19 +300,45 @@ def handle_webhook(payload: bytes, sig_header: str, conn: sqlite3.Connection) ->
     Returns a dict with event type and processing result.
     Raises ValueError on signature verification failure.
     """
+    if not STRIPE_WEBHOOK_SECRET:
+        raise ValueError("STRIPE_WEBHOOK_SECRET not configured — cannot verify webhook")
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
     except stripe.error.SignatureVerificationError:
         raise ValueError("Invalid webhook signature")
 
     event_type = event["type"]
+    event_id = event.get("id", "")
     data = event["data"]["object"]
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
+    # Idempotency: skip already-processed events
+    if event_id:
+        try:
+            already = conn.execute(
+                "SELECT 1 FROM webhook_event WHERE event_id = ?", (event_id,)
+            ).fetchone()
+            if already:
+                logger.info("Webhook event %s already processed, skipping", event_id)
+                return {"event_type": event_type, "status": "duplicate", "event_id": event_id}
+            conn.execute(
+                "INSERT INTO webhook_event (event_id, event_type, processed_at) VALUES (?, ?, ?)",
+                (event_id, event_type, now),
+            )
+        except sqlite3.OperationalError:
+            # Table may not exist yet — proceed without idempotency
+            logger.warning("webhook_event table not found, skipping idempotency check")
+
     if event_type == "checkout.session.completed":
-        user_id = data.get("metadata", {}).get("user_id")
+        raw_user_id = data.get("metadata", {}).get("user_id")
         customer_id = data.get("customer")
         checkout_type = data.get("metadata", {}).get("checkout_type", "")
+        # Validate user_id is a valid integer
+        try:
+            user_id = str(int(raw_user_id)) if raw_user_id else None
+        except (ValueError, TypeError):
+            logger.error("Invalid user_id in webhook metadata: %r", raw_user_id)
+            return {"event_type": event_type, "status": "error", "reason": "invalid user_id"}
 
         if checkout_type == "classroom" and user_id:
             # Classroom checkout: set teacher tier

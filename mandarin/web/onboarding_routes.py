@@ -187,7 +187,7 @@ def placement_start():
                     "hsk_level": q["hsk_level"],
                     "options": q["options"],
                 })
-            return jsonify({"questions": client_questions, "_answers": [q["correct"] for q in questions]})
+            return jsonify({"questions": client_questions})
     except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
         logger.error("Placement start error (%s): %s", type(e).__name__, e)
         return jsonify({"error": "Could not start placement quiz"}), 500

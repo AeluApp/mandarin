@@ -3,6 +3,7 @@ guardrail metrics, and sequential testing (O'Brien-Fleming spending function).
 
 Replaces ad-hoc feature flag experiments with a structured registry.
 """
+from __future__ import annotations
 
 import hashlib
 import json

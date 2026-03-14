@@ -7,6 +7,7 @@ Provides:
 4. generate_quiz_questions() — create vocab_check + mc questions from subtitle context
 5. calculate_passage_difficulty() — readability metrics for reading passages
 """
+from __future__ import annotations
 
 import json
 import logging

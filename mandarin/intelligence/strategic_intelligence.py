@@ -8,6 +8,7 @@ C) The Competitor — structured comparative evaluation with harsh grading
 Strategic findings differ from operational findings: they lead with commercial
 implication, state priority (P0/P1/P2), and articulate trade-offs.
 """
+from __future__ import annotations
 
 import json
 import logging

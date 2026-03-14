@@ -6,6 +6,7 @@ Run in CI or pre-deploy:
 
 Exit code 0 if all required vars are set, 1 if any required are missing.
 """
+from __future__ import annotations
 
 import os
 import sys

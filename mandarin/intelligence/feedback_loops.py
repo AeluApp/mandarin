@@ -141,7 +141,7 @@ def _measure_current_metric(conn, dimension: str, metric_name: str):
     metric_queries = {
         "retention": "SELECT COUNT(DISTINCT user_id) * 100.0 / NULLIF((SELECT COUNT(*) FROM user WHERE created_at <= datetime('now', '-7 days')), 0) FROM session_log s JOIN user u ON s.user_id = u.id WHERE u.created_at <= datetime('now', '-7 days') AND s.started_at >= datetime(u.created_at, '+7 days')",
         "ux": "SELECT COUNT(*) * 100.0 / NULLIF((SELECT COUNT(*) FROM session_log), 0) FROM session_log WHERE items_completed > 0 AND items_completed >= items_planned * 0.8",
-        "engineering": "SELECT COUNT(*) FROM crash_log WHERE timestamp >= datetime('now', '-7 days')",
+        "engineering": "SELECT COUNT(*) FROM crash_log WHERE timestamp >= datetime('now', '-7 days') AND request_path NOT IN ('/unhandled', '/unhandled/')",
         "frustration": "SELECT COUNT(*) FROM client_event WHERE category = 'ux' AND event = 'rage_click' AND created_at >= datetime('now', '-7 days')",
         "profitability": "SELECT COUNT(CASE WHEN subscription_tier='paid' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0) FROM user",
         "onboarding": "SELECT COUNT(DISTINCT CASE WHEN s.id IS NOT NULL THEN u.id END) * 100.0 / NULLIF(COUNT(DISTINCT u.id), 0) FROM user u LEFT JOIN session_log s ON u.id = s.user_id WHERE u.created_at >= datetime('now', '-30 days')",
