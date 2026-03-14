@@ -1,0 +1,94 @@
+{
+    "title": "The Fitting Room Queue",
+    "title_zh": "试衣间的队",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_2_02_v0",
+    "tree": {
+        "setup": "A busy clothing store on a Saturday afternoon. You're holding two shirts and need a fitting room. The fitting room attendant, Auntie Zhong, controls access with the authority of a nightclub bouncer. She counts garments going in, counts garments coming out, and has an opinion about whether that shade of blue suits you.",
+        "setup_zh": "周六下午，繁忙的服装店。你拿着两件衬衫想试衣服。试衣间管理员钟阿姨像夜店保安一样控制进出。她数进去多少件，出来多少件，而且会告诉你那个蓝色到底适不适合你。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "几件？我看看。",
+                "text_pinyin": "jǐ jiàn? wǒ kànkan.",
+                "text_en": "How many pieces? Let me see."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you have and ask about sizes.",
+                "options": [
+                    {
+                        "text_zh": "两件衬衫。请问有没有中号的？",
+                        "text_pinyin": "liǎng jiàn chènshān. qǐngwèn yǒu méiyǒu zhōng hào de?",
+                        "text_en": "Two shirts. Do you have a medium?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Zhong takes the shirts, counts them (unnecessarily -- there are clearly two), and hands you a number tag.「中号在那边架子上。」中号 is 'medium size.' 件 is the measure word for upper-body clothing."
+                    },
+                    {
+                        "text_zh": "这件我不知道是什么号的。",
+                        "text_pinyin": "zhè jiàn wǒ bù zhīdào shì shénme hào de.",
+                        "text_en": "I don't know what size this one is.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Zhong flips to the tag with practiced speed.「这是大号。你穿什么号？」She can size you up by sight, but she asks anyway. It's protocol."
+                    },
+                    {
+                        "text_zh": "可以试吗？",
+                        "text_pinyin": "kěyǐ shì ma?",
+                        "text_en": "Can I try them on?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Zhong points at the fitting room.「可以，三号间。」可以试吗 is the basic 'can I try this on' -- short and effective."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "试好了吗？合适吗？",
+                "text_pinyin": "shì hǎo le ma? héshì ma?",
+                "text_en": "Done trying? Does it fit?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her how it fits.",
+                "options": [
+                    {
+                        "text_zh": "这件合适，但是那件有点大。有小一号的吗？",
+                        "text_pinyin": "zhè jiàn héshì, dànshì nà jiàn yǒudiǎn dà. yǒu xiǎo yí hào de ma?",
+                        "text_en": "This one fits, but that one is a bit big. Do you have one size smaller?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Zhong is already heading to the rack.「等一下。」She returns with a smaller size in twelve seconds flat. 小一号 means 'one size smaller' -- essential fitting room language."
+                    },
+                    {
+                        "text_zh": "都不太合适。谢谢！",
+                        "text_pinyin": "dōu bú tài héshì. xièxie!",
+                        "text_en": "Neither fits well. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Zhong counts the garments coming out (two, confirmed) and hangs them on the return rack with professional composure. 都不太合适 is a polite way to say nothing worked."
+                    },
+                    {
+                        "text_zh": "你觉得这个颜色好看吗？",
+                        "text_pinyin": "nǐ juéde zhè ge yánsè hǎokàn ma?",
+                        "text_en": "Do you think this color looks good?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Zhong tilts her head.「说实话？深色的比较好看。」She's honest. You asked. 你觉得 invites an opinion -- be ready for one."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，这件很适合你。去收银台吧！",
+                "text_pinyin": "hǎo le, zhè jiàn hěn shìhé nǐ. qù shōuyíntái ba!",
+                "text_en": "Great, this one really suits you. Head to the checkout!"
+            }
+        ],
+        "cultural_note": "Chinese clothing stores often have fitting room attendants who count garments in and out. Sizes often run differently -- always try before buying. Common sizes: 小号 (S), 中号 (M), 大号 (L), 加大号 (XL)."
+    }
+}

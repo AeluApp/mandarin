@@ -1,0 +1,87 @@
+{
+  "title": "Sending a Postcard",
+  "title_zh": "寄明信片",
+  "register": "casual",
+  "scenario_type": "daily_life",
+  "difficulty": 2,
+  "tree": {
+    "setup": "You're at a small stationery shop, choosing a postcard to send to a friend who moved to another city.",
+    "setup_zh": "你在一家小文具店里，挑一张明信片寄给搬去另一个城市的朋友。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你在找明信片啊？这些是我们最新的，有城市风景的、也有手绘的猫咪的。你要寄给谁？",
+        "text_pinyin": "Nǐ zài zhǎo míngxìnpiàn a? Zhèxiē shì wǒmen zuì xīn de, yǒu chéngshì fēngjǐng de, yě yǒu shǒuhuì de māomī de. Nǐ yào jì gěi shuí?",
+        "text_en": "Looking for postcards? These are our newest — we have city scenery and hand-drawn cat ones. Who are you sending it to?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her about your friend.",
+        "options": [
+          {
+            "text_zh": "寄给好朋友，她搬到上海了，想让她知道我想她。那张猫的好可爱，她喜欢猫。",
+            "text_pinyin": "Jì gěi hǎo péngyou, tā bān dào Shànghǎi le, xiǎng ràng tā zhīdào wǒ xiǎng tā. Nà zhāng māo de hǎo kě'ài, tā xǐhuan māo.",
+            "text_en": "For a good friend — she moved to Shanghai, I want her to know I miss her. That cat one is so cute, she loves cats.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "— chooses based on the friend's preferences."
+          },
+          {
+            "text_zh": "给朋友。那张城市风景的吧。",
+            "text_pinyin": "Gěi péngyou. Nà zhāng chéngshì fēngjǐng de ba.",
+            "text_en": "For a friend. I'll take the city scenery one.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Quick choice without personal thought."
+          },
+          {
+            "text_zh": "随便哪张都行。",
+            "text_pinyin": "Suíbiàn nǎ zhāng dōu xíng.",
+            "text_en": "Any one will do.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Careless when choosing for a friend."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "给搬走的朋友寄明信片，你真有心。现在大家都发微信了，很少有人手写东西了。收到明信片的人一定特别感动。",
+        "text_pinyin": "Gěi bān zǒu de péngyou jì míngxìnpiàn, nǐ zhēn yǒuxīn. Xiànzài dàjiā dōu fā Wēixìn le, hěn shǎo yǒu rén shǒuxiě dōngxi le. Shōu dào míngxìnpiàn de rén yīdìng tèbié gǎndòng.",
+        "text_en": "Sending a postcard to a friend who moved away — you're really thoughtful. Everyone uses WeChat now, few people handwrite anything anymore. The person who receives it will be so touched."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about handwriting vs. digital messages.",
+        "options": [
+          {
+            "text_zh": "手写的东西有温度，微信给不了。写明信片的时候，也在安静地想朋友。",
+            "text_pinyin": "Shǒuxiě de dōngxi yǒu wēndù, Wēixìn gěi bù liǎo. Xiě míngxìnpiàn de shíhou, yě zài ānjìng de xiǎng péngyou.",
+            "text_en": "Handwriting has a warmth WeChat can't give. Writing a postcard is its own quiet way of thinking of a friend.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "Reflection on the value of analog connection."
+          },
+          {
+            "text_zh": "是啊，手写比较有意义。",
+            "text_pinyin": "Shì a, shǒuxiě bǐjiào yǒu yìyì.",
+            "text_en": "Yeah, handwriting is more meaningful.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Agrees but doesn't develop the thought."
+          },
+          {
+            "text_zh": "微信也挺方便的。",
+            "text_pinyin": "Wēixìn yě tǐng fāngbiàn de.",
+            "text_en": "WeChat is pretty convenient too.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Contradicts the whole reason for being there."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "In an era of instant digital messaging, sending handwritten postcards has become a meaningful act of care in China. The shop owner's observation about the rarity of handwriting reflects a wider cultural nostalgia for slower, more intentional forms of communication."
+  },
+  "hsk_level": 3
+}

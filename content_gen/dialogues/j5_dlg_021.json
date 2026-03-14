@@ -1,0 +1,89 @@
+{
+    "title": "Running in the Morning",
+    "title_zh": "早晨跑步",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You meet your neighbor Sister Lin stretching by the lake path at dawn. She's been running here every morning for three years.",
+        "setup_zh": "清晨你在湖边的小路上遇到邻居林姐在拉伸。她已经在这里晨跑了三年。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早啊！难得看到你这么早出来。我每天早上五点半就到这儿了。刚开始跑的时候很难坚持，但现在如果哪天不跑，反而觉得少了点什么。",
+                "text_pinyin": "Zǎo a! Nándé kàn dào nǐ zhème zǎo chūlái. Wǒ měi tiān zǎoshang wǔ diǎn bàn jiù dào zhèr le. Gāng kāishǐ pǎo de shíhou hěn nán jiānchí, dàn xiànzài rúguǒ nǎ tiān bù pǎo, fǎn'ér juéde shǎo le diǎn shénme.",
+                "text_en": "Morning! It's rare to see you out this early. I'm here by five-thirty every morning. When I first started running it was hard to stick with, but now if I skip a day, something feels missing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about what keeps her going.",
+                "options": [
+                    {
+                        "text_zh": "三年，每天五点半——这不只是运动了，已经变成你生活的一部分。是什么让你一开始决定跑步的？",
+                        "text_pinyin": "Sān nián, měi tiān wǔ diǎn bàn — zhè bù zhǐ shì yùndòng le, yǐjīng biàn chéng nǐ shēnghuó de yī bùfen. Shì shénme ràng nǐ yī kāishǐ juédìng pǎobù de?",
+                        "text_en": "Three years, every day at five-thirty — that's not just exercise anymore, it's become part of your life. What made you decide to start running in the first place?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engaged and curious — recognizes the commitment and asks for the story behind it."
+                    },
+                    {
+                        "text_zh": "跑步伤膝盖，你要注意。",
+                        "text_pinyin": "Pǎobù shāng xīgài, nǐ yào zhùyì.",
+                        "text_en": "Running hurts your knees, be careful.",
+                        "score": 0.0,
+                        "feedback": "Unsolicited advice — undermines her established routine."
+                    },
+                    {
+                        "text_zh": "我更喜欢在健身房锻炼。",
+                        "text_pinyin": "Wǒ gèng xǐhuan zài jiànshēnfáng duànliàn.",
+                        "text_en": "I prefer working out at the gym.",
+                        "score": 0.0,
+                        "feedback": "Shifts focus to yourself."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三年前我压力特别大，每天晚上都睡不好。有一天清晨醒得特别早，就出来走了走。走着走着就开始跑了。跑完以后出了一身汗，脑子突然安静了。那种安静是什么药都给不了的。",
+                "text_pinyin": "Sān nián qián wǒ yālì tèbié dà, měi tiān wǎnshang dōu shuì bù hǎo. Yǒu yī tiān qīngchén xǐng de tèbié zǎo, jiù chūlái zǒu le zǒu. Zǒu zhe zǒu zhe jiù kāishǐ pǎo le. Pǎo wán yǐhòu chū le yī shēn hàn, nǎozi tūrán ānjìng le. Nà zhǒng ānjìng shì shénme yào dōu gěi bù liǎo de.",
+                "text_en": "Three years ago I was under a lot of pressure and couldn't sleep at night. One dawn I woke up very early and just went out for a walk. Gradually the walking turned into running. After running, covered in sweat, my mind suddenly went quiet. That kind of quiet is something no medicine can give you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her experience of finding peace through running.",
+                "options": [
+                    {
+                        "text_zh": "用身体的疲劳换头脑的安静——也许这才是跑步的意义。不为减肥，不为比赛，就是跟自己待一会儿。清晨的湖边只有你和呼吸声，这种时刻太珍贵了。",
+                        "text_pinyin": "Yòng shēntǐ de píláo huàn tóunǎo de ānjìng — yěxǔ zhè cái shì pǎobù de yìyì. Bú wèi jiǎnféi, bú wèi bǐsài, jiù shì gēn zìjǐ dāi yīhuìr. Qīngchén de hú biān zhǐ yǒu nǐ hé hūxī shēng, zhè zhǒng shíkè tài zhēnguì le.",
+                        "text_en": "Trading physical tiredness for mental quiet — maybe that's what running really means. Not for weight loss or competition, just spending time with yourself. At dawn by the lake, just you and your breathing — too precious.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "— redefines the purpose of exercise as inner peace."
+                    },
+                    {
+                        "text_zh": "你一般跑多少公里？配速怎么样？",
+                        "text_pinyin": "Nǐ yībān pǎo duōshǎo gōnglǐ? Pèisù zěnmeyàng?",
+                        "text_en": "How many kilometers do you usually run? What's your pace?",
+                        "score": 0.0,
+                        "feedback": "Quantifies a spiritual experience — misses the emotional point."
+                    },
+                    {
+                        "text_zh": "你应该去看医生，压力大可以吃药。",
+                        "text_pinyin": "Nǐ yīnggāi qù kàn yīshēng, yālì dà kěyǐ chī yào.",
+                        "text_en": "You should see a doctor — medication can help with stress.",
+                        "score": 0.0,
+                        "feedback": "Medicalizes what she's already found a solution for."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "跟自己待一会儿……对，就是这个。你今天也来跑一圈吧？不用快，慢慢来就好。你会发现，天亮以前的世界特别温柔。",
+                "text_pinyin": "Gēn zìjǐ dāi yīhuìr…… duì, jiù shì zhège. Nǐ jīntiān yě lái pǎo yī quān ba? Bú yòng kuài, mànman lái jiù hǎo. Nǐ huì fāxiàn, tiān liàng yǐqián de shìjiè tèbié wēnróu.",
+                "text_en": "Spending time with yourself... yes, exactly that. Why don't you run a lap today too? No need to be fast, just go slowly. You'll find the world before dawn is especially gentle."
+            }
+        ],
+        "cultural_note": "Morning exercise culture (晨练) is deeply rooted in Chinese life, from elderly tai chi practitioners to young urban runners. Lakeside and park paths are shared spaces where generations cross paths at dawn. The phrase「天亮以前的世界」(the world before dawn) carries poetic weight — early morning is seen as a liminal, peaceful time before the day's demands begin."
+    }
+}

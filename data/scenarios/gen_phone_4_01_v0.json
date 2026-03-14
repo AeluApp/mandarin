@@ -1,0 +1,160 @@
+{
+    "title": "The Art of the Voicemail",
+    "title_zh": "留言的艺术",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_4_01_v0",
+    "tree": {
+        "setup": "Your landlord, Mrs. Tang, has a policy: she never answers her phone before 10 AM or after 8 PM, a boundary she maintains with the iron discipline of someone who has seen too many 'urgent' calls about dripping faucets at midnight. You need to leave a voicemail about renewing your lease. The beep feels like a tiny stage.",
+        "setup_zh": "你的房东唐太太有个规矩：早上十点前和晚上八点后绝不接电话。这个原则她坚持得铁一般坚定，因为她见过太多半夜里关于水龙头滴水的「紧急」电话。你需要留言说续租的事。提示音响起，像一个小小的舞台。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，我现在不方便接电话。请在提示音后留言，我会尽快回复。嘀——",
+                "text_pinyin": "nín hǎo, wǒ xiànzài bù fāngbiàn jiē diànhuà. qǐng zài tíshì yīn hòu liúyán, wǒ huì jǐnkuài huífù. dī——",
+                "text_en": "Hello, I can't take your call right now. Please leave a message after the beep and I'll get back to you. Beep—"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Leave a voicemail about renewing your lease.",
+                "options": [
+                    {
+                        "text_zh": "唐太太，您好，我是302的租客。我想跟您说一下续租的事。我的合同下个月到期，我想再续一年。方便的时候请给我回个电话。谢谢！",
+                        "text_pinyin": "Táng tàitai, nín hǎo, wǒ shì sān líng èr de zūkè. wǒ xiǎng gēn nín shuō yíxià xù zū de shì. wǒ de hétong xià gè yuè dào qī, wǒ xiǎng zài xù yì nián. fāngbiàn de shíhòu qǐng gěi wǒ huí gè diànhuà. xièxie!",
+                        "text_en": "Mrs. Tang, hello — I'm the tenant in 302. I'd like to talk about renewing my lease. My contract expires next month and I'd like to renew for another year. Please call me back when convenient. Thanks!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Complete voicemail: who you are, what you need, when it matters, what you want her to do. Mrs. Tang will call you back at exactly 10:01 AM."
+                    },
+                    {
+                        "text_zh": "唐太太，我想续租，请给我回电话。",
+                        "text_pinyin": "Táng tàitai, wǒ xiǎng xù zū, qǐng gěi wǒ huí diànhuà.",
+                        "text_en": "Mrs. Tang, I want to renew my lease — please call me back.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gets the point across but thin on detail. She'll call back, but with questions."
+                    },
+                    {
+                        "text_zh": "你好……嗯……我想说一下那个事情……就是租房子的事……回电话吧。",
+                        "text_pinyin": "nǐ hǎo……ǹg……wǒ xiǎng shuō yíxià nàge shìqing……jiùshì zū fángzi de shì……huí diànhuà ba.",
+                        "text_en": "Hello... um... I wanted to talk about that thing... the apartment thing... call me back.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The voicemail equivalent of mumbling into a scarf. She'll listen to it twice and still call with questions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "（第二天唐太太回电话）小张，我听到你的留言了。你想续租一年对吗？",
+                "text_pinyin": "(dì èr tiān Táng tàitai huí diànhuà) Xiǎo Zhāng, wǒ tīng dào nǐ de liúyán le. nǐ xiǎng xù zū yì nián duì ma?",
+                "text_en": "(Next day, Mrs. Tang calls back) Xiao Zhang, I got your message. You want to renew for one year, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about the rent.",
+                "options": [
+                    {
+                        "text_zh": "对，我想续一年。请问租金会不会涨？",
+                        "text_pinyin": "duì, wǒ xiǎng xù yì nián. qǐngwèn zūjīn huì bú huì zhǎng?",
+                        "text_en": "Yes, I want to renew for a year. Will the rent go up?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The question everyone wants to ask and nobody wants answered. Mrs. Tang pauses — a pause that costs you approximately fifty yuan per second of silence."
+                    },
+                    {
+                        "text_zh": "对，续一年。",
+                        "text_pinyin": "duì, xù yì nián.",
+                        "text_en": "Yes, one year.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Confirmed. She'll bring up the rent herself — landlords always do."
+                    },
+                    {
+                        "text_zh": "嗯，如果价格合适的话。",
+                        "text_pinyin": "ǹg, rúguǒ jiàgé héshì de huà.",
+                        "text_en": "Mm, if the price is right.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A conditional renewal — Mrs. Tang's eyebrow rises on the other end of the line."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "今年物业费涨了一点，所以租金可能要加两百块。其他条件都不变。你觉得怎么样？",
+                "text_pinyin": "jīnnián wùyè fèi zhǎng le yìdiǎn, suǒyǐ zūjīn kěnéng yào jiā liǎngbǎi kuài. qítā tiáojiàn dōu bú biàn. nǐ juéde zěnmeyàng?",
+                "text_en": "Property fees went up a bit this year, so the rent may increase by 200 yuan. Everything else stays the same. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Negotiate or accept the increase.",
+                "options": [
+                    {
+                        "text_zh": "两百块我能接受。但是能不能帮我修一下厨房的水龙头？已经漏水好几个月了。",
+                        "text_pinyin": "liǎngbǎi kuài wǒ néng jiēshòu. dànshì néng bu néng bāng wǒ xiū yíxià chúfáng de shuǐlóngtóu? yǐjīng lòu shuǐ hǎo jǐ gè yuè le.",
+                        "text_en": "I can accept 200 more. But can you fix the kitchen faucet? It's been leaking for months.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Accepting the increase but leveraging a repair request — Mrs. Tang respects a tenant who negotiates with substance."
+                    },
+                    {
+                        "text_zh": "好的，没问题。",
+                        "text_pinyin": "hǎo de, méi wèntí.",
+                        "text_en": "OK, no problem.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Easy agreement. She's pleased, though you may have left a repair request on the table."
+                    },
+                    {
+                        "text_zh": "能不能不涨？我一直是好房客啊。",
+                        "text_pinyin": "néng bu néng bú zhǎng? wǒ yìzhí shì hǎo fángkè a.",
+                        "text_en": "Can it stay the same? I've always been a good tenant.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An appeal to virtue. Mrs. Tang is sympathetic but firm — property fees are not within her control."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "水龙头的事我知道了，我让人去修。那我们就说定了，下周签新合同。",
+                "text_pinyin": "shuǐlóngtóu de shì wǒ zhīdào le, wǒ ràng rén qù xiū. nà wǒmen jiù shuō dìng le, xià zhōu qiān xīn hétong.",
+                "text_en": "I'll have someone fix the faucet. So we have a deal — let's sign the new contract next week."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and thank her.",
+                "options": [
+                    {
+                        "text_zh": "太好了，谢谢唐太太！下周什么时候方便？我配合您的时间。",
+                        "text_pinyin": "tài hǎo le, xièxie Táng tàitai! xià zhōu shénme shíhòu fāngbiàn? wǒ pèihé nín de shíjiān.",
+                        "text_en": "Great, thank you Mrs. Tang! When next week works for you? I'll match your schedule.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Deferring to her schedule — the kind of flexibility Mrs. Tang rewards with prompt faucet repairs."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Deal done. She'll text you a time — probably at exactly 10:00 AM."
+                    },
+                    {
+                        "text_zh": "嗯，下周见。",
+                        "text_pinyin": "ǹg, xià zhōu jiàn.",
+                        "text_en": "Mm, see you next week.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Brief. The faucet will still get fixed, but probably not this week."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese lease renewals (续租, xù zū) are typically negotiated directly between landlord and tenant. Small rent increases tied to rising 物业费 (wùyè fèi, property management fees) are common and usually negotiable. Linking a rent increase to repair requests is standard practice."
+    }
+}

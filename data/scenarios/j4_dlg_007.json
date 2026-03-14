@@ -1,0 +1,117 @@
+{
+  "title": "Tea After the Snow",
+  "title_zh": "雪后的茶",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.45,
+  "tree": {
+    "setup": "It snowed last night. You're sitting in a small teahouse with a quiet middle-aged woman, Ms. He, who works as a librarian. The world outside the window is white and still.",
+    "setup_zh": "昨晚下了雪。你坐在一家小茶馆里，和一位安静的中年女性何女士一起喝茶。她是一名图书管理员。窗外的世界又白又静。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你看窗外，整个世界都安静下来了。雪有这个能力——把所有的声音都吸进去。每次下雪我都觉得，世界终于休息了一会儿。",
+        "text_pinyin": "Nǐ kàn chuāng wài, zhěnggè shìjiè dōu ānjìng xiàlái le. Xuě yǒu zhège nénglì — bǎ suǒyǒu de shēngyīn dōu xī jìnqù. Měi cì xià xuě wǒ dōu juéde, shìjiè zhōngyú xiūxi le yīhuìr.",
+        "text_en": "Look outside — the whole world has gone quiet. Snow has this ability — it absorbs all the sound. Every time it snows I feel like the world has finally rested for a moment."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her observation about snow.",
+        "options": [
+          {
+            "text_zh": "是啊，雪好像给整个城市盖了一条被子。平时那些吵闹的声音都不见了，只剩下安静。这种安静让人觉得时间慢了下来。",
+            "text_pinyin": "Shì a, xuě hǎoxiàng gěi zhěnggè chéngshì gài le yī tiáo bèizi. Píngshí nàxiē chǎonào de shēngyīn dōu bújiàn le, zhǐ shèng xià ānjìng. Zhè zhǒng ānjìng ràng rén juéde shíjiān màn le xiàlái.",
+            "text_en": "Yes, it's as if snow has tucked the whole city under a blanket. All the usual noise disappears, leaving only quiet. This kind of quiet makes you feel like time has slowed down.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Image — the blanket metaphor matches the iyashikei warmth."
+          },
+          {
+            "text_zh": "你觉得今天会不会再下雪？",
+            "text_pinyin": "Nǐ juéde jīntiān huì bú huì zài xià xuě?",
+            "text_en": "Do you think it will snow again today?",
+            "score": 0.0,
+            "feedback": "Weather forecast question that ignores the poetic observation."
+          },
+          {
+            "text_zh": "下雪天路上很危险，你要小心开车。",
+            "text_pinyin": "Xià xuě tiān lù shàng hěn wēixiǎn, nǐ yào xiǎoxīn kāi chē.",
+            "text_en": "Roads are dangerous in the snow, you should drive carefully.",
+            "score": 0.0,
+            "feedback": "Safety advice that kills the contemplative mood."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "时间慢了下来……我喜欢这个说法。在图书馆工作，我最喜欢的就是早上刚开门的时候。还没有人来，阳光照在书架上，整个空间都是安静的。那种感觉和下雪很像。",
+        "text_pinyin": "Shíjiān màn le xiàlái…… wǒ xǐhuān zhège shuōfǎ. Zài túshūguǎn gōngzuò, wǒ zuì xǐhuān de jiù shì zǎoshang gāng kāi mén de shíhou. Hái méiyǒu rén lái, yángguāng zhào zài shūjià shàng, zhěnggè kōngjiān dōu shì ānjìng de. Nà zhǒng gǎnjué hé xià xuě hěn xiàng.",
+        "text_en": "Time slowing down... I like that way of putting it. Working at the library, my favorite moment is when we first open in the morning. Nobody's come yet, sunlight falls on the bookshelves, the whole space is quiet. That feeling is a lot like snow."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about her library mornings.",
+        "options": [
+          {
+            "text_zh": "图书馆早上的阳光和书架，下雪后的安静——这些都是不花钱的美好。我觉得你很幸运，每天都能感受到这样的时刻。",
+            "text_pinyin": "Túshūguǎn zǎoshang de yángguāng hé shūjià, xià xuě hòu de ānjìng — zhèxiē dōu shì bù huā qián de měihǎo. Wǒ juéde nǐ hěn xìngyùn, měi tiān dōu néng gǎnshòu dào zhèyàng de shíkè.",
+            "text_en": "Morning sunlight on bookshelves, post-snow quietness — these are beautiful things that cost nothing. I think you're fortunate to experience moments like these every day.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Connects her two images and recognizes the privilege of noticing beauty."
+          },
+          {
+            "text_zh": "你们图书馆有多少本书？",
+            "text_pinyin": "Nǐmen túshūguǎn yǒu duōshǎo běn shū?",
+            "text_en": "How many books does your library have?",
+            "score": 0.0,
+            "feedback": "Inventory question that misses the atmosphere she's describing."
+          },
+          {
+            "text_zh": "图书馆的工资高不高？",
+            "text_pinyin": "Túshūguǎn de gōngzī gāo bù gāo?",
+            "text_en": "Is the salary good at the library?",
+            "score": 0.0,
+            "feedback": "Salary question during a moment of aesthetic appreciation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "幸运……也许吧。不过我觉得这不完全是运气。很多人也有这样的时刻，只是太忙了没注意到。美好的东西一直都在，只是我们有没有停下来看。",
+        "text_pinyin": "Xìngyùn…… yěxǔ ba. Búguò wǒ juéde zhè bù wánquán shì yùnqi. Hěn duō rén yě yǒu zhèyàng de shíkè, zhǐ shì tài máng le méi zhùyì dào. Měihǎo de dōngxi yīzhí dōu zài, zhǐ shì wǒmen yǒu méiyǒu tíng xiàlái kàn.",
+        "text_en": "Fortunate... maybe. But I don't think it's entirely luck. Many people have moments like these too, they're just too busy to notice. Beautiful things are always there — it's just whether we stop to look."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her philosophy of noticing.",
+        "options": [
+          {
+            "text_zh": "你说得对。也许我们不需要去很远的地方找美好的东西。就在每天的生活里——早上的阳光，窗外的雪，一杯热茶。关键是要愿意停下来。",
+            "text_pinyin": "Nǐ shuō de duì. Yěxǔ wǒmen bù xūyào qù hěn yuǎn de dìfāng zhǎo měihǎo de dōngxi. Jiù zài měi tiān de shēnghuó lǐ — zǎoshang de yángguāng, chuāng wài de xuě, yī bēi rè chá. Guānjiàn shì yào yuànyì tíng xiàlái.",
+            "text_en": "You're right. Maybe we don't need to go far to find beautiful things. They're right in daily life — morning sunlight, snow outside, a cup of hot tea. The key is being willing to stop.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Grounded and warm — brings the conversation back to the present moment."
+          },
+          {
+            "text_zh": "这个茶叶是什么牌子的？",
+            "text_pinyin": "Zhège cháyè shì shénme páizi de?",
+            "text_en": "What brand is this tea?",
+            "score": 0.0,
+            "feedback": "Consumer question during a philosophical moment."
+          },
+          {
+            "text_zh": "你平时周末做什么？",
+            "text_pinyin": "Nǐ píngshí zhōumò zuò shénme?",
+            "text_en": "What do you usually do on weekends?",
+            "score": 0.0,
+            "feedback": "Small talk that disrupts the contemplative thread."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The Chinese appreciation for snow (赏雪) has deep cultural roots, often associated with tea drinking, poetry, and quiet contemplation. The idea that beauty exists in ordinary daily moments (日常之美) resonates with classical Chinese aesthetics, where finding profound meaning in simple things — a cup of tea, a snowfall, morning light — is considered a mark of wisdom."
+  }
+}

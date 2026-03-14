@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Explain your phone died and ask what time it is.",
                 "options": [
-                    {"text_zh": "你好，我手机没电了，请问现在几点？", "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?", "text_en": "Hi, my phone died, may I ask what time it is?", "score": 1.0, "register": "neutral", "feedback": "Clear and natural — explains why you're asking, which feels less abrupt."},
-                    {"text_zh": "不好意思，你知道现在几点吗？", "text_pinyin": "bù hǎo yìsi, nǐ zhīdào xiànzài jǐ diǎn ma?", "text_en": "Excuse me, do you know what time it is?", "score": 0.7, "register": "neutral", "feedback": "Polite with 不好意思, but doesn't explain the context — still perfectly fine."},
-                    {"text_zh": "没什么，就是想知道几点了。", "text_pinyin": "méi shénme, jiùshì xiǎng zhīdào jǐ diǎn le.", "text_en": "Nothing much, just want to know what time it is.", "score": 0.5, "register": "casual", "feedback": "A bit vague — directly asking 现在几点 is clearer and more efficient."}
+                    {
+                        "text_zh": "好的，给我来两斤吧。",
+                        "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.",
+                        "text_en": "OK, give me two jin please.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain your phone died and ask what time it is, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我手机没电了，请问现在几点？",
+                        "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?",
+                        "text_en": "Hi, my phone died, may I ask what time it is?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and natural — explains why you're asking, which feels less abrupt."
+                    },
+                    {
+                        "text_zh": "这是我爸爸妈妈，还有我姐姐。",
+                        "text_pinyin": "zhè shì wǒ bàba māma, háiyǒu wǒ jiějie.",
+                        "text_en": "These are my mom and dad, and my older sister.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain your phone died and ask what time it is, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Thank them and say you need to go meet a friend.",
                 "options": [
-                    {"text_zh": "谢谢！三点要见朋友，我得走了。", "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.", "text_en": "Thanks! I'm meeting a friend at three, I have to go.", "score": 1.0, "register": "casual", "feedback": "得走了 is a natural, casual way to say you need to leave. Complete and friendly."},
-                    {"text_zh": "谢谢你，我还有半个小时呢。", "text_pinyin": "xièxie nǐ, wǒ hái yǒu bàn ge xiǎoshí ne.", "text_en": "Thank you, I still have half an hour.", "score": 0.7, "register": "casual", "feedback": "Shows you calculated the time — natural and relaxed."},
-                    {"text_zh": "哦，两点半了，我要快一点了。", "text_pinyin": "ó, liǎng diǎn bàn le, wǒ yào kuài yīdiǎn le.", "text_en": "Oh, it's 2:30 already, I need to hurry.", "score": 0.6, "register": "casual", "feedback": "Conveys urgency but doesn't thank them — a quick 谢谢 goes a long way."}
+                    {
+                        "text_zh": "你好，请问地铁站在哪儿？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn dìtiě zhàn zài nǎr?",
+                        "text_en": "Hello, excuse me, where is the subway station?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank them and say you need to go meet a friend, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "这个词是什么意思？我没学过。",
+                        "text_pinyin": "zhè ge cí shì shénme yìsi? wǒ méi xué guò.",
+                        "text_en": "What does this word mean? I haven't learned it before.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank them and say you need to go meet a friend, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢！三点要见朋友，我得走了。",
+                        "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.",
+                        "text_en": "Thanks! I'm meeting a friend at three, I have to go.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "得走了 is a natural, casual way to say you need to leave. Complete and friendly."
+                    }
                 ]
             }
         ],

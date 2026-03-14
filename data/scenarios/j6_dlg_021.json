@@ -1,0 +1,89 @@
+{
+    "title": "What School Didn't Teach",
+    "title_zh": "学校没教的事",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're talking with your former classmate Yilin, now a teacher herself, about what the education system gave you and what it left out.",
+        "setup_zh": "你和曾经的同学一琳聊天。她现在自己也当了老师，你们在聊教育体系给了你们什么，又缺少了什么。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我教了五年书以后才意识到，我们的教育体系非常擅长一件事：教你怎么得到正确答案。但它几乎没有教过你怎么提出正确的问题。我的学生很会考试，但面对没有标准答案的情境，很多人会慌。",
+                "text_pinyin": "Wǒ jiāo le wǔ nián shū yǐhòu cái yìshí dào, wǒmen de jiàoyù tǐxì fēicháng shàncháng yī jiàn shì: jiāo nǐ zěnme dédào zhèngquè dá'àn. Dàn tā jīhū méiyǒu jiāo guò nǐ zěnme tí chū zhèngquè de wèntí. Wǒ de xuéshēng hěn huì kǎoshì, dàn miànduì méiyǒu biāozhǔn dá'àn de qíngjìng, hěn duō rén huì huāng.",
+                "text_en": "After five years of teaching, I realized our education system is extremely good at one thing: teaching you how to get the right answer. But it's barely taught anyone how to ask the right question. My students are excellent at exams, but when faced with situations that have no standard answer, many of them panic."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with her critique of the education system.",
+                "options": [
+                    {
+                        "text_zh": "这也许就是考试驱动教育的核心矛盾——生产了大量能解决已知问题的人，却很少培养能识别未知问题的人。现实世界充满了后者。问一个好问题比给出一个对答案更难，也更有价值。",
+                        "text_pinyin": "Zhè yěxǔ jiù shì kǎoshì qūdòng jiàoyù de héxīn máodùn — shēngchǎn le dàliàng néng jiějué yǐzhī wèntí de rén, què hěn shǎo péiyǎng néng shìbié wèizhī wèntí de rén. Xiànshí shìjiè chōngmǎn le hòuzhě. Wèn yīge hǎo wèntí bǐ gěi chū yīge duì dá'àn gèng nán, yě gèng yǒu jiàzhí.",
+                        "text_en": "That's the core contradiction of exam-driven education — producing people who solve known problems, rarely cultivating those who identify unknown ones. The real world is full of the latter. Asking a good question is harder and more valuable than giving a right answer.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Analytically precise — identifies the structural limitation rather than blaming individuals."
+                    },
+                    {
+                        "text_zh": "中国学生的基础知识比外国学生扎实多了。",
+                        "text_pinyin": "Zhōngguó xuéshēng de jīchǔ zhīshi bǐ wàiguó xuéshēng zhāshi duō le.",
+                        "text_en": "Chinese students have much stronger foundational knowledge than foreign students.",
+                        "score": 0.0,
+                        "feedback": "Defensive comparison — doesn't engage with the critique."
+                    },
+                    {
+                        "text_zh": "现在不是在搞教育改革吗？应该会慢慢好的。",
+                        "text_pinyin": "Xiànzài bú shì zài gǎo jiàoyù gǎigé ma? Yīnggāi huì mànman hǎo de.",
+                        "text_en": "Aren't there education reforms happening? It should gradually improve.",
+                        "score": 0.0,
+                        "feedback": "Deflects to policy instead of engaging with the deeper philosophical point."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "已知问题和未知问题——你说到了关键。还有一个问题是情感教育的缺失。我们学了十几年数学和英语，但没有一门课教我们怎么处理愤怒、怎么表达脆弱、怎么跟不同意你的人好好说话。这些恰恰是成年以后最需要的能力。",
+                "text_pinyin": "Yǐzhī wèntí hé wèizhī wèntí — nǐ shuō dào le guānjiàn. Hái yǒu yīge wèntí shì qínggǎn jiàoyù de quēshī. Wǒmen xué le shí jǐ nián shùxué hé yīngyǔ, dàn méiyǒu yī mén kè jiāo wǒmen zěnme chǔlǐ fènnù, zěnme biǎodá cuìruò, zěnme gēn bù tóngyì nǐ de rén hǎohǎo shuōhuà. Zhèxiē qiàqià shì chéngnián yǐhòu zuì xūyào de nénglì.",
+                "text_en": "Known and unknown problems — you've hit the key point. There's another issue: the absence of emotional education. We studied math and English for over a decade, but not a single course taught us how to handle anger, how to express vulnerability, or how to have a conversation with someone who disagrees with you. These are precisely the skills most needed in adult life."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the gap in emotional education.",
+                "options": [
+                    {
+                        "text_zh": "完全同意。我们被教导要赢，但没人教怎么输；被教导要坚强，但没人教怎么示弱。结果很多人在情感上是文盲——知识丰富，但不会跟自己的感受相处。最重要的教育不是教你做事，是教做人。",
+                        "text_pinyin": "Wánquán tóngyì. Wǒmen bèi jiàodǎo yào yíng, dàn méi rén jiāo zěnme shū; bèi jiàodǎo yào jiānqiáng, dàn méi rén jiāo zěnme shìruò. Jiéguǒ hěn duō rén zài qínggǎn shàng shì wénmáng — zhīshi fēngfù, dàn bú huì gēn zìjǐ de gǎnshòu xiāngchǔ. Zuì zhòngyào de jiàoyù bú shì jiāo nǐ zuòshì, shì jiāo zuòrén.",
+                        "text_en": "Absolutely. Taught to win but nobody teaches losing; taught to be strong but nobody teaches vulnerability. Many are emotionally illiterate — rich in knowledge, unable to sit with feelings. The most important education isn't about doing, it's about being.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Parallel structure — 'taught to win but not to lose' crystallizes the gap beautifully."
+                    },
+                    {
+                        "text_zh": "这些应该是家长教的，不是学校的责任。",
+                        "text_pinyin": "Zhèxiē yīnggāi shì jiāzhǎng jiāo de, bú shì xuéxiào de zérèn.",
+                        "text_en": "These are things parents should teach, not the school's responsibility.",
+                        "score": 0.0,
+                        "feedback": "Passes the buck — many parents had the same gaps in their own education."
+                    },
+                    {
+                        "text_zh": "你可以在你的班上试着加入这些内容。",
+                        "text_pinyin": "Nǐ kěyǐ zài nǐ de bān shàng shì zhe jiārù zhèxiē nèiróng.",
+                        "text_en": "You could try adding this content in your own class.",
+                        "score": 0.0,
+                        "feedback": "Practical but sidesteps the broader conversation about systemic change."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "教你怎么做人……这也许是教育最原始的目的，只是在追求效率和排名的过程中被忘记了。我现在每周会花一节课的时间不讲课本，就和学生聊：你们最近在想什么？你们害怕什么？也许这改变不了制度，但至少我的教室可以是一个允许脆弱存在的地方。",
+                "text_pinyin": "Jiāo nǐ zěnme zuòrén…… zhè yěxǔ shì jiàoyù zuì yuánshǐ de mùdì, zhǐ shì zài zhuīqiú xiàolǜ hé páimíng de guòchéng zhōng bèi wàngjì le. Wǒ xiànzài měi zhōu huì huā yī jié kè de shíjiān bù jiǎng kèběn, jiù hé xuéshēng liáo: nǐmen zuìjìn zài xiǎng shénme? Nǐmen hàipà shénme? Yěxǔ zhè gǎibiàn bù liǎo zhìdù, dàn zhìshǎo wǒ de jiàoshì kěyǐ shì yīge yǔnxǔ cuìruò cúnzài de dìfang.",
+                "text_en": "Teaching how to be human... perhaps that's education's original purpose, just forgotten in the pursuit of efficiency and rankings. Now I spend one class period each week not teaching the textbook — just talking with students: what have you been thinking about? What are you afraid of? Maybe it can't change the system, but at least my classroom can be a place where vulnerability is allowed to exist."
+            }
+        ],
+        "cultural_note": "China's education system, centered around the gaokao (高考, national college entrance exam), has been both praised for producing strong foundational skills and criticized for suppressing creativity and emotional development. The concept of「情感教育」(qínggǎn jiàoyù, emotional education) is gaining attention among progressive Chinese educators. The phrase「做人」(zuòrén, being a person) carries deep philosophical weight in Chinese — it encompasses ethics, emotional intelligence, and social wisdom, and was historically considered education's primary purpose."
+    }
+}

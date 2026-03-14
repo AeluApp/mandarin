@@ -1,6 +1,6 @@
-# Messaging Guide — Mandarin
+# Messaging Guide — Aelu
 
-This is the operational playbook for anyone writing copy for Mandarin: landing pages, ads, emails, social media, partner communications. Every claim must be defensible. Every metric must be real. Every sentence should respect the reader's intelligence.
+This is the operational playbook for anyone writing copy for Aelu: landing pages, ads, emails, social media, partner communications. Every claim must be defensible. Every metric must be real. Every sentence should respect the reader's intelligence.
 
 **Brand voice:** Calm, adult, data-grounded, no praise inflation.
 **Aesthetic:** "Civic Sanctuary" — warm stone + teal + terracotta.
@@ -31,7 +31,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 | 13 | Zero AI at runtime | All scheduling, scoring, and content delivery is deterministic. No API calls, no hallucinations, no varying quality. | Reliability — the system gives the same correct answer every time, not a probabilistic guess | "Deterministic, not probabilistic. Every answer is computed, not generated." |
 | 14 | Data stored locally / offline | Your study data lives on your device. The app works without an internet connection. No account required to start. | Privacy and independence — your learning data belongs to you | "Your data stays on your device. No account required. Works offline." |
 | 15 | Free tier (HSK 1-2) | Full functionality for HSK 1-2 content. Not a crippled trial — the same 27 drill types, the same adaptive scheduling. | No-risk exploration — try everything before deciding to pay | "Free isn't a trial. It's the full system for HSK 1-2." |
-| 16 | $12/month pricing | One price, all features. No annual upsell, no "premium plus," no hidden tiers. | Simplicity and fairness — you know exactly what you're paying for | "$12/month. Everything included. Cancel anytime." |
+| 16 | $14.99/month pricing | One price, all features. No annual upsell, no "premium plus," no hidden tiers. | Simplicity and fairness — you know exactly what you're paying for | "$14.99/month. Everything included. Cancel anytime." |
 | 17 | Independent team | Built by learners who are studying Mandarin themselves. Every feature exists because the team needed it. | Authenticity — this isn't a product committee's best guess; it's a learner's actual solution | "Built by a learner who needed it to exist." |
 | 18 | Web app (no app store) | Works in any modern browser, desktop or mobile. No download, no updates, no storage space. | Immediacy — open a tab and start studying. Nothing to install. | "Open your browser. Start studying. Nothing to install." |
 | 19 | Dark mode / Civic Sanctuary aesthetic | Warm, readable design with proper dark mode. No bright blues, no cartoon UI. Designed for evening study sessions. | Calm — the app feels like a quiet library, not a video game | "Designed for focus. Warm tones, clean type, no visual noise." |
@@ -59,7 +59,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** Study Chinese in 15 minutes a night. Actually retain it.
 **Example subhead:** Adaptive drills that focus on your weakest skill. Graded reading that feeds your next session. Progress you can measure.
 
-**Example ad copy:** You have 15 minutes after dinner. Make them count. Mandarin adapts to your pace, your schedule, and your actual weak spots. Not a game. Not a grind. Just focused practice that works. Free to start.
+**Example ad copy:** You have 15 minutes after dinner. Make them count. Aelu adapts to your pace, your schedule, and your actual weak spots. Not a game. Not a grind. Just focused practice that works. Free to start.
 
 ---
 
@@ -76,7 +76,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** Know exactly where you stand for HSK.
 **Example subhead:** Vocabulary, listening, reading, and tone accuracy tracked separately. The system tells you what to work on and when you'll be ready.
 
-**Example ad copy:** HSK in 3 months? Stop guessing whether you're ready. Mandarin tracks your mastery across every tested skill and projects your readiness date. Drill the gaps, not the words you already know. Free for HSK 1-2. Full access $12/month.
+**Example ad copy:** HSK in 3 months? Stop guessing whether you're ready. Aelu tracks your mastery across every tested skill and projects your readiness date. Drill the gaps, not the words you already know. Free for HSK 1-2. Full access $14.99/month.
 
 ---
 
@@ -93,7 +93,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** Like Anki, but you never build a deck again.
 **Example subhead:** Modified FSRS with Bayesian confidence dampening and interleaving enforcement. 27 drill types. Graded reading that feeds your review queue automatically.
 
-**Example ad copy:** You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Mandarin gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps. Same rigor. None of the overhead.
+**Example ad copy:** You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Aelu gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps. Same rigor. None of the overhead.
 
 ---
 
@@ -103,14 +103,14 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **Message that resonates:** Real Chinese, not simplified exercises. Graded reading, adjustable-speed listening, and drills that test what you actually need to know.
 
-**Proof point:** 27 drill types targeting different cognitive skills. The comparison is stark: Duolingo tests recognition in ~3 formats. Mandarin tests recognition, production, auditory discrimination, sentence comprehension, and tone accuracy across 27 formats.
+**Proof point:** 27 drill types targeting different cognitive skills. The comparison is stark: Duolingo tests recognition in ~3 formats. Aelu tests recognition, production, auditory discrimination, sentence comprehension, and tone accuracy across 27 formats.
 
 **CTA that converts:** "Ready for what comes after the owl? Start free."
 
 **Example headline:** You graduated. Now learn Chinese.
 **Example subhead:** Graded reading with real Chinese text. Listening practice at adjustable speed. 27 drill types that test more than recognition. No XP required.
 
-**Example ad copy:** Duolingo taught you basics. That's real. But if you still can't understand a Chinese podcast or read a short article, you've outgrown the format. Mandarin picks up where gamified apps leave off. Real reading. Real listening. Real progress tracking. Free to start.
+**Example ad copy:** Duolingo taught you basics. That's real. But if you still can't understand a Chinese podcast or read a short article, you've outgrown the format. Aelu picks up where gamified apps leave off. Real reading. Real listening. Real progress tracking. Free to start.
 
 ---
 
@@ -127,7 +127,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** You speak Chinese. Now read it.
 **Example subhead:** Your listening and tones are already strong. The adaptive system focuses on character recognition, reading fluency, and the skills you're actually missing.
 
-**Example ad copy:** You grew up hearing Chinese. Maybe speaking it. But characters are a wall. Mandarin's adaptive system detects what you already know and focuses on what you don't. Your sessions will look different from a beginner's — because you're not one. Free to start.
+**Example ad copy:** You grew up hearing Chinese. Maybe speaking it. But characters are a wall. Aelu's adaptive system detects what you already know and focuses on what you don't. Your sessions will look different from a beginner's — because you're not one. Free to start.
 
 ---
 
@@ -144,7 +144,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** Read menus. Understand directions. Have real conversations.
 **Example subhead:** Practical Chinese at your level. Dialogue scenarios for daily life. Every word you need becomes a drill.
 
-**Example ad copy:** You don't need to pass HSK. You need to read the menu, understand the taxi driver, and have a real conversation with your neighbor. Mandarin teaches practical Chinese in context, and every word you look up becomes focused practice. Free to start. Works offline — no VPN needed.
+**Example ad copy:** You don't need to pass HSK. You need to read the menu, understand the taxi driver, and have a real conversation with your neighbor. Aelu teaches practical Chinese in context, and every word you look up becomes focused practice. Free to start. Works offline — no VPN needed.
 
 ---
 
@@ -178,7 +178,7 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 **Example headline:** Your students forget 60% of new vocabulary within 48 hours. This fixes that.
 **Example subhead:** HSK-aligned adaptive review between your classes. 27 drill types. Multi-skill diagnostics you and your students can see. Free for HSK 1-2.
 
-**Example ad copy:** You teach the lesson. Mandarin handles the review. HSK-aligned drills adapt to each student's weak spots between classes. Vocabulary, listening, tones, and reading — tracked separately so students know what to work on. The free tier covers HSK 1-2 — your beginners can start today.
+**Example ad copy:** You teach the lesson. Aelu handles the review. HSK-aligned drills adapt to each student's weak spots between classes. Vocabulary, listening, tones, and reading — tracked separately so students know what to work on. The free tier covers HSK 1-2 — your beginners can start today.
 
 ---
 
@@ -188,11 +188,11 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 ### 1. "That's more expensive than Duolingo."
 
-**Why they think this:** Duolingo Super is $7/month. Mandarin is $12/month. The math is simple.
+**Why they think this:** Duolingo Super is $7/month. Aelu is $14.99/month. The math is simple.
 
-**The honest answer:** Duolingo has ~3 drill formats and no graded reading. Mandarin has 27 drill types, graded reading with a cleanup loop, adaptive listening, speaking drills, and HSK diagnostics. They serve different stages of learning. If Duolingo is working for you, keep using it.
+**The honest answer:** Duolingo has ~3 drill formats and no graded reading. Aelu has 27 drill types, graded reading with a cleanup loop, adaptive listening, speaking drills, and HSK diagnostics. They serve different stages of learning. If Duolingo is working for you, keep using it.
 
-**Copy version:** "Duolingo is great for getting started. Mandarin is for what comes after. 27 drill types, graded reading, listening practice, and diagnostics for $5 more per month."
+**Copy version:** "Duolingo is great for getting started. Aelu is for what comes after. 27 drill types, graded reading, listening practice, and diagnostics for $8 more per month."
 
 ---
 
@@ -200,9 +200,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Anki is genuinely free (desktop). It's powerful. They're already invested in their workflow.
 
-**The honest answer:** Anki is an incredible tool. But it's a blank SRS engine — you supply the content, the curriculum, and the drill logic. Mandarin gives you all of that pre-built: 27 drill types, graded reading that feeds your queue, HSK-aligned content, and multi-skill tracking. If you love building decks, Anki is perfect. If you want to just study, try this.
+**The honest answer:** Anki is an incredible tool. But it's a blank SRS engine — you supply the content, the curriculum, and the drill logic. Aelu gives you all of that pre-built: 27 drill types, graded reading that feeds your queue, HSK-aligned content, and multi-skill tracking. If you love building decks, Anki is perfect. If you want to just study, try this.
 
-**Copy version:** "Anki is free and powerful. Mandarin is $12/month and you never build a deck. Different tools for different preferences."
+**Copy version:** "Anki is free and powerful. Aelu is $14.99/month and you never build a deck. Different tools for different preferences."
 
 ---
 
@@ -210,7 +210,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** There are free HSK word lists, YouTube channels, graded readers, and community Anki decks everywhere.
 
-**The honest answer:** You absolutely can. The question is whether you want to spend time assembling resources or spend time studying. Mandarin integrates SRS, graded reading, listening, speaking, and diagnostics in one place. The free tier lets you try all of it without paying.
+**The honest answer:** You absolutely can. The question is whether you want to spend time assembling resources or spend time studying. Aelu integrates SRS, graded reading, listening, speaking, and diagnostics in one place. The free tier lets you try all of it without paying.
 
 **Copy version:** "Free resources are everywhere. A system that connects them — reading to drills, drills to diagnostics, diagnostics to your next session — is what you're paying for."
 
@@ -220,7 +220,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** HelloChinese premium is ~$10/month. Comparable feature set on the surface.
 
-**The honest answer:** HelloChinese is a solid app. It has more polished onboarding and better character writing practice. Mandarin has more drill variety (27 vs ~6), the cleanup loop, Bayesian scheduling, and multi-skill diagnostics. Try both free tiers and see which approach fits how you learn.
+**The honest answer:** HelloChinese is a solid app. It has more polished onboarding and better character writing practice. Aelu has more drill variety (27 vs ~6), the cleanup loop, Bayesian scheduling, and multi-skill diagnostics. Try both free tiers and see which approach fits how you learn.
 
 **Copy version:** "HelloChinese is good. We think we're better at adaptive drilling and reading-to-review integration. But try both — the free tiers are real."
 
@@ -230,9 +230,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Teachers provide feedback, conversation practice, and cultural context that no app can replicate.
 
-**The honest answer:** They're right. A teacher is better for speaking practice, cultural nuance, and real-time correction. Mandarin doesn't replace a teacher — it handles the parts a teacher shouldn't have to: vocabulary drilling, review scheduling, tone discrimination practice, and reading exposure. Use both.
+**The honest answer:** They're right. A teacher is better for speaking practice, cultural nuance, and real-time correction. Aelu doesn't replace a teacher — it handles the parts a teacher shouldn't have to: vocabulary drilling, review scheduling, tone discrimination practice, and reading exposure. Use both.
 
-**Copy version:** "A teacher teaches. Mandarin drills. Use your teacher's time for conversation and culture — let the system handle review scheduling and gap identification."
+**Copy version:** "A teacher teaches. Aelu drills. Use your teacher's time for conversation and culture — let the system handle review scheduling and gap identification."
 
 ---
 
@@ -240,7 +240,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Most SRS experiences are Anki — a blank engine that requires setup, deck management, and discipline with no variety.
 
-**The honest answer:** SRS with one drill type (flashcards) gets monotonous. That's a real problem. Mandarin uses 27 drill types with interleaving — your brain doesn't get bored because the next question is always a different format. Sessions are 15 minutes, not open-ended. The cleanup loop means you're always drilling words you recently encountered, not stale cards from months ago.
+**The honest answer:** SRS with one drill type (flashcards) gets monotonous. That's a real problem. Aelu uses 27 drill types with interleaving — your brain doesn't get bored because the next question is always a different format. Sessions are 15 minutes, not open-ended. The cleanup loop means you're always drilling words you recently encountered, not stale cards from months ago.
 
 **Copy version:** "SRS with one flashcard format is boring. SRS with 27 drill types, interleaving, and a 15-minute cap is a different experience."
 
@@ -268,9 +268,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 ### 9. "I've never heard of this."
 
-**Why they think this:** Every other language app has millions in marketing. Mandarin has none.
+**Why they think this:** Every other language app has millions in marketing. Aelu has none.
 
-**The honest answer:** Mandarin is new and small. Built by a small team. No VC funding, no ad budget. It exists because it works for the people who built it. The free tier lets you judge the product, not the marketing.
+**The honest answer:** Aelu is new and small. Built by a small team. No VC funding, no ad budget. It exists because it works for the people who built it. The free tier lets you judge the product, not the marketing.
 
 **Copy version:** "You haven't heard of us because we spent the budget on the product, not on ads. Try the free tier and judge for yourself."
 
@@ -310,9 +310,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Their goal is speaking, not reading or test scores.
 
-**The honest answer:** Conversation requires vocabulary, listening comprehension, and tone accuracy — all of which Mandarin trains. The dialogue scenarios practice functional conversation patterns. The listening drills train comprehension at natural speed. The speaking drills grade your tones. But for free-form conversation practice with a human, you'll need a tutor or language partner. Mandarin builds the foundation that makes those conversations productive.
+**The honest answer:** Conversation requires vocabulary, listening comprehension, and tone accuracy — all of which Aelu trains. The dialogue scenarios practice functional conversation patterns. The listening drills train comprehension at natural speed. The speaking drills grade your tones. But for free-form conversation practice with a human, you'll need a tutor or language partner. Aelu builds the foundation that makes those conversations productive.
 
-**Copy version:** "Conversations require vocabulary, listening, and tones. Mandarin trains all three. Then go talk to someone — you'll be ready."
+**Copy version:** "Conversations require vocabulary, listening, and tones. Aelu trains all three. Then go talk to someone — you'll be ready."
 
 ---
 
@@ -350,7 +350,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Character writing is part of Chinese learning. They want to know if it's covered.
 
-**The honest answer:** Mandarin doesn't currently include handwriting/character tracing. The focus is on recognition, production, listening, and speaking. For handwriting practice, Skritter or pen-and-paper work well alongside Mandarin. This may be added in the future, but only if it can be done well.
+**The honest answer:** Aelu doesn't currently include handwriting/character tracing. The focus is on recognition, production, listening, and speaking. For handwriting practice, Skritter or pen-and-paper work well alongside Aelu. This may be added in the future, but only if it can be done well.
 
 **Copy version:** "Handwriting isn't in yet. We'd rather not include it than include it badly. For now, pair us with Skritter or pen and paper."
 
@@ -370,7 +370,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Apps can't replace human interaction.
 
-**The honest answer:** True. Mandarin has speaking drills with tone grading, which helps with pronunciation and tone accuracy. But free-form conversation with a native speaker is something no app fully replaces. Use Mandarin to build the vocabulary, listening, and tone foundation that makes conversation partners more productive.
+**The honest answer:** True. Aelu has speaking drills with tone grading, which helps with pronunciation and tone accuracy. But free-form conversation with a native speaker is something no app fully replaces. Use Aelu to build the vocabulary, listening, and tone foundation that makes conversation partners more productive.
 
 **Copy version:** "We train your tones and listening so your conversation practice with real people actually works."
 
@@ -420,9 +420,9 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Why they think this:** Pleco is the standard Chinese dictionary app. It has SRS, readers, and flashcards.
 
-**The honest answer:** Pleco is an incredible dictionary — probably the best Chinese dictionary app ever made. Use it for lookup. Mandarin is better at structured learning: adaptive scheduling across 27 drill types, the cleanup loop, multi-skill diagnostics, and graded reading with integrated review. They complement each other well.
+**The honest answer:** Pleco is an incredible dictionary — probably the best Chinese dictionary app ever made. Use it for lookup. Aelu is better at structured learning: adaptive scheduling across 27 drill types, the cleanup loop, multi-skill diagnostics, and graded reading with integrated review. They complement each other well.
 
-**Copy version:** "Keep Pleco for lookup. Use Mandarin for structured practice. They work well together."
+**Copy version:** "Keep Pleco for lookup. Use Aelu for structured practice. They work well together."
 
 ---
 
@@ -463,11 +463,11 @@ For each objection: what they say, why they think it, the honest answer, and how
 
 **Conversion (getting the click, the signup, the upgrade):**
 
-16. Free for HSK 1-2. Full access $12/month.
+16. Free for HSK 1-2. Full access $14.99/month.
 17. Start free. See where you stand in 10 minutes.
 18. No credit card. No account required. Just start.
 19. Your first session takes 10 minutes. Your first insight takes one.
-20. $12/month. Everything included.
+20. $14.99/month. Everything included.
 21. Try all 27 drill types free.
 
 **Retention (keeping current users engaged and progressing):**
@@ -525,12 +525,12 @@ For each objection: what they say, why they think it, the honest answer, and how
 8. See what changed this week
 
 **Social media:**
-9. Try it free at mandarinapp.com
-10. Free for HSK 1-2 at mandarinapp.com
+9. Try it free at aeluapp.com
+10. Free for HSK 1-2 at aeluapp.com
 11. Link in bio — free to start
 
 **In-app (upgrade):**
-12. Unlock HSK 3-6 — $12/month
+12. Unlock HSK 3-6 — $14.99/month
 13. Continue with full access
 14. See what the full system includes
 
@@ -561,11 +561,11 @@ Drop these into any context where you need a one-liner.
 
 Use these when you have testimonials. Fill in the blanks.
 
-1. "I was using [previous app] for [X] months and my listening wasn't improving. After [X] weeks on Mandarin, my diagnostics show [specific improvement]." — [Name], HSK [level]
+1. "I was using [previous app] for [X] months and my listening wasn't improving. After [X] weeks on Aelu, my diagnostics show [specific improvement]." — [Name], HSK [level]
 
 2. "The cleanup loop is the feature I didn't know I needed. I read a passage, look up [X] words, and the next day those exact words show up in my drills." — [Name]
 
-3. "I used to spend 20 minutes building Anki decks for every 15 minutes of studying. Now I just open Mandarin and study." — [Name]
+3. "I used to spend 20 minutes building Anki decks for every 15 minutes of studying. Now I just open Aelu and study." — [Name]
 
 4. "My teacher noticed my tone accuracy improved. I told her it was the tone pair drills." — [Name], studying for [X] months
 
@@ -581,7 +581,7 @@ Use these when you have testimonials. Fill in the blanks.
 
 10. "I recommended it to my HSK class. [X] students are now using the free tier alongside our textbook." — [Name], Chinese teacher
 
-11. "$12/month for all of this is underpriced. I was paying [X] for [previous tool] and getting less." — [Name]
+11. "$14.99/month for all of this is underpriced. I was paying [X] for [previous tool] and getting less." — [Name]
 
 ---
 
@@ -593,7 +593,7 @@ Use these when you have testimonials. Fill in the blanks.
 **Free tier CTA:** "Start free — HSK 1-2, full features, no credit card"
 **Free tier confirmation:** "You're in. Your first session is ready."
 
-**Upgrade prompt:** "You've reached the end of the free content. HSK 3-6 is available for $12/month — all features, cancel anytime."
+**Upgrade prompt:** "You've reached the end of the free content. HSK 3-6 is available for $14.99/month — all features, cancel anytime."
 **Upgrade secondary:** "Not ready to upgrade? Your HSK 1-2 progress is saved and waiting."
 
 **Session complete (good session):** "Session complete. 23 items drilled. 78% accuracy. Your tone pairs improved — your weakest area is now cloze comprehension."
@@ -625,7 +625,7 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 1. Landing Page Hero
 
 **Too cold:**
-"Mandarin is a spaced repetition system for Chinese language acquisition with 27 drill modalities and deterministic scheduling."
+"Aelu is a spaced repetition system for Chinese language acquisition with 27 drill modalities and deterministic scheduling."
 
 **Just right:**
 "Learn Chinese in 15 minutes a day. Adaptive drills, graded reading, and honest diagnostics. Free for HSK 1-2."
@@ -638,10 +638,10 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 2. Pricing Page
 
 **Too cold:**
-"Full access: $12.00/month. Free tier: HSK 1-2 content. No refunds."
+"Full access: $14.99/month. Free tier: HSK 1-2 content. No refunds."
 
 **Just right:**
-"$12/month. All features. All content through HSK 6. Cancel anytime. The free tier includes everything for HSK 1-2 — not a trial, the actual product."
+"$14.99/month. All features. All content through HSK 6. Cancel anytime. The free tier includes everything for HSK 1-2 — not a trial, the actual product."
 
 **Too warm:**
 "For less than the price of a coffee date, you get UNLIMITED access to everything! What are you waiting for?"
@@ -677,7 +677,7 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 5. Social Media Post
 
 **Too cold:**
-"Mandarin v2.3 is available. Contains 27 drill types and FSRS scheduling."
+"Aelu v2.3 is available. Contains 27 drill types and FSRS scheduling."
 
 **Just right:**
 "Your Chinese study app shouldn't need to bribe you with streaks. 27 drill types, graded reading, adaptive scheduling. No XP required. Free to start."
@@ -693,7 +693,7 @@ Every piece of copy should feel like a conversation between two adults who respe
 "Error 500: Internal server error. Contact support."
 
 **Just right:**
-"Something went wrong loading your session. Your data is safe. Try refreshing — if it happens again, email hello@mandarinapp.com and I'll fix it."
+"Something went wrong loading your session. Your data is safe. Try refreshing — if it happens again, email hello@aeluapp.com and I'll fix it."
 
 **Too warm:**
 "Oopsie! Looks like something broke! Don't worry, we're on it! In the meantime, why not take a well-deserved break? You've earned it!"
@@ -709,17 +709,17 @@ Every piece of copy should feel like a conversation between two adults who respe
 "You're in. Your first session will take about 10 minutes and assess your starting level. After that, the system adapts to you."
 
 **Too warm:**
-"WELCOME to the Mandarin family! We are SO glad you're here! Get ready for an incredible learning adventure that's going to blow your mind!"
+"WELCOME to the Aelu family! We are SO glad you're here! Get ready for an incredible learning adventure that's going to blow your mind!"
 
 ---
 
 ### 8. Partner Outreach
 
 **Too cold:**
-"Mandarin is seeking affiliate partners. Commission: 20%. Cookie: 90 days. Reply to discuss."
+"Aelu is seeking affiliate partners. Commission: 20%. Cookie: 90 days. Reply to discuss."
 
 **Just right:**
-"Hi [name]. I built a Chinese learning app called Mandarin — adaptive SRS with 27 drill types, graded reading, and a feature called the cleanup loop. I think it'd be relevant to your audience. I'd be happy to give you full access to try it. No obligation to promote. If it resonates, I have an affiliate program (20%, 90-day cookie, lifetime recurring). Let me know if you'd like to take a look."
+"Hi [name]. I built a Chinese learning app called Aelu — adaptive SRS with 27 drill types, graded reading, and a feature called the cleanup loop. I think it'd be relevant to your audience. I'd be happy to give you full access to try it. No obligation to promote. If it resonates, I have an affiliate program (20%, 90-day cookie, lifetime recurring). Let me know if you'd like to take a look."
 
 **Too warm:**
 "OMG I am SUCH a fan of your content! I built this little app and I just KNOW your audience would LOVE it! Can we collaborate?? I'm SO excited about this opportunity!"
@@ -742,13 +742,13 @@ Every piece of copy should feel like a conversation between two adults who respe
 ### 10. Upgrade Prompt
 
 **Too cold:**
-"Free tier limit reached. Upgrade: $12/month."
+"Free tier limit reached. Upgrade: $14.99/month."
 
 **Just right:**
-"You've completed the HSK 1-2 content. HSK 3-6 is available for $12/month — same system, more words, harder passages. Your existing progress carries over."
+"You've completed the HSK 1-2 content. HSK 3-6 is available for $14.99/month — same system, more words, harder passages. Your existing progress carries over."
 
 **Too warm:**
-"Congratulations on completing HSK 1-2!! You're doing INCREDIBLE! Ready to take your learning to the NEXT LEVEL? Upgrade now for just $12/month!"
+"Congratulations on completing HSK 1-2!! You're doing INCREDIBLE! Ready to take your learning to the NEXT LEVEL? Upgrade now for just $14.99/month!"
 
 ---
 
@@ -854,7 +854,7 @@ These phrases and patterns are off-limits. They contradict the brand voice.
 | "You're falling behind!" | Guilt-based motivation. Disrespectful. | "It's been 9 days. Expect some rust." |
 | "Unlock your potential!" | Vague, corporate, means nothing. | "Here's what the data says about your progress." |
 | "Join thousands of learners!" | We don't have thousands yet. Even if we did, social proof by headcount is weak. | "Free to try. Judge it yourself." |
-| "Limited time offer!" | Artificial urgency is a dark pattern. | "$12/month. Same price always." |
+| "Limited time offer!" | Artificial urgency is a dark pattern. | "$14.99/month. Same price always." |
 | "You won't believe..." | Clickbait. Disrespectful of the reader. | (Just state the fact.) |
 | "Fluent in 3 months!" | Irresponsible. Chinese takes years. | "Measurable progress in weeks. Fluency takes years. We're honest about that." |
 | "AI-powered learning!" | The system is explicitly not AI-powered at runtime. | "Deterministic scheduling. No AI at runtime." |

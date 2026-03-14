@@ -1,0 +1,160 @@
+{
+    "title": "The Power Outage Strategist",
+    "title_zh": "停电策略家",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_emergency_5_01_v0",
+    "tree": {
+        "setup": "8:47 PM, mid-sentence in a video call, and the apartment goes dark. Not just your apartment — the entire building, judging by the sudden chorus of surprised exclamations from multiple floors. The elevator has stopped between floors (someone is pressing the emergency button repeatedly), the hallway emergency lights cast everything in horror-movie orange, and your phone has 23% battery. Building Manager Tao answers on the second ring, because power outages are the one crisis he can solve faster than any other.",
+        "setup_zh": "晚上八点四十七分，视频通话说到一半，公寓陷入黑暗。不只是你的公寓——从多个楼层同时传来的惊呼声判断，是整栋楼。电梯停在了楼层之间（有人在反复按紧急按钮），走廊的应急灯把一切染成恐怖片的橙色，你的手机电量23%。物业经理陶师傅在第二声铃响时接了电话，因为停电是他能最快解决的一种危机。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "物业陶师傅，知道了知道了，整栋楼停电了。你是哪一户？",
+                "text_pinyin": "wùyè Táo shīfu, zhīdào le zhīdào le, zhěng dòng lóu tíng diàn le. nǐ shì nǎ yí hù?",
+                "text_en": "Building Manager Tao here — I know, I know, the whole building lost power. Which unit are you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report your situation.",
+                "options": [
+                    {
+                        "text_zh": "陶师傅，我是十二楼1203的住户。我这里刚才正在用电脑，突然就全黑了。我听到有人好像被困在电梯里了，一直在按紧急按钮。请问大概什么时候能恢复？",
+                        "text_pinyin": "Táo shīfu, wǒ shì shí'èr lóu yāo èr líng sān de zhùhù. wǒ zhèlǐ gāngcái zhèngzài yòng diànnǎo, tūrán jiù quán hēi le. wǒ tīng dào yǒu rén hǎoxiàng bèi kùn zài diàntī lǐ le, yìzhí zài àn jǐnjí ànniǔ. qǐngwèn dàgài shénme shíhòu néng huīfù?",
+                        "text_en": "Manager Tao, I'm in unit 1203 on the 12th floor. I was using my computer when everything went dark. I can hear someone seems to be trapped in the elevator — they keep pressing the emergency button. When will power be restored?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Your own situation plus reporting the elevator situation — Tao marks you as a reliable neighbor. He's already dispatching someone to the elevator."
+                    },
+                    {
+                        "text_zh": "1203。什么时候来电？",
+                        "text_pinyin": "yāo èr líng sān. shénme shíhòu lái diàn?",
+                        "text_en": "1203. When's the power coming back?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The universal question. He's working on it."
+                    },
+                    {
+                        "text_zh": "怎么又停电了！上个月也停过！",
+                        "text_pinyin": "zěnme yòu tíng diàn le! shàng gè yuè yě tíng guò!",
+                        "text_en": "Power out again?! It happened last month too!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Tao sighs — he remembers last month too. But complaints don't restore power; the electrician does."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "电梯的事我已经知道了，维修人员正在赶过去。这次停电是变压器的问题，不只是我们小区，附近几个小区也停了。供电局说大概两个小时能修好。你先注意安全，不要用蜡烛，用手机的手电筒就行。",
+                "text_pinyin": "diàntī de shì wǒ yǐjīng zhīdào le, wéixiū rényuán zhèngzài gǎn guòqù. zhè cì tíng diàn shì biànyāqì de wèntí, bù zhǐ shì wǒmen xiǎoqū, fùjìn jǐ gè xiǎoqū yě tíng le. gōngdiàn jú shuō dàgài liǎng gè xiǎoshí néng xiū hǎo. nǐ xiān zhùyì ānquán, búyào yòng làzhú, yòng shǒujī de shǒudiàntǒng jiù xíng.",
+                "text_en": "I already know about the elevator — maintenance is on their way. This outage is a transformer issue — not just our compound, nearby ones are affected too. The power bureau says about two hours to fix. Stay safe — don't use candles, just use your phone's flashlight."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the trapped elevator people and your fridge.",
+                "options": [
+                    {
+                        "text_zh": "两个小时，明白了。电梯里的人没事吧？还有，我冰箱里有不少食材，停电两个小时会不会坏？需不需要先处理一下？",
+                        "text_pinyin": "liǎng gè xiǎoshí, míngbai le. diàntī lǐ de rén méi shì ba? hái yǒu, wǒ bīngxiāng lǐ yǒu bù shǎo shícái, tíng diàn liǎng gè xiǎoshí huì bú huì huài? xū bù xūyào xiān chǔlǐ yíxià?",
+                        "text_en": "Two hours, understood. Are the people in the elevator OK? Also, I have a lot of food in my fridge — will two hours without power spoil it? Should I do anything?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Concern for the elevator passengers plus practical thinking about the fridge — Tao reassures: elevator crew is safe, and two hours won't spoil fridge contents if you keep the door closed."
+                    },
+                    {
+                        "text_zh": "两个小时啊……好吧。",
+                        "text_pinyin": "liǎng gè xiǎoshí a……hǎo ba.",
+                        "text_en": "Two hours... alright.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Resigned acceptance. Time to find some candles — wait, he said no candles."
+                    },
+                    {
+                        "text_zh": "两个小时太长了！能不能快点？",
+                        "text_pinyin": "liǎng gè xiǎoshí tài cháng le! néng bu néng kuài diǎn?",
+                        "text_en": "Two hours is too long! Can't it be faster?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Tao is sympathetic but realistic — the transformer is not his to repair."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "电梯里有两个人，已经联系到了，通风没问题，就是等救援。冰箱的话，两个小时不要紧，只要不开门就行。对了，如果你家里有老人或者小孩，注意不要让他们摸黑走动，容易摔倒。",
+                "text_pinyin": "diàntī lǐ yǒu liǎng gè rén, yǐjīng liánxì dào le, tōngfēng méi wèntí, jiùshì děng jiùyuán. bīngxiāng de huà, liǎng gè xiǎoshí bú yàojǐn, zhǐyào bù kāi mén jiù xíng. duì le, rúguǒ nǐ jiālǐ yǒu lǎorén huòzhě xiǎohái, zhùyì búyào ràng tāmen mōhēi zǒudòng, róngyì shuāi dǎo.",
+                "text_en": "Two people in the elevator — we've contacted them, ventilation is fine, just waiting for rescue. The fridge will be fine for two hours as long as you don't open the door. Oh — if you have elderly people or children at home, make sure they don't walk around in the dark. Easy to trip."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your situation and ask about compensation.",
+                "options": [
+                    {
+                        "text_zh": "我一个人住，没问题。陶师傅，这次停电如果造成电器损坏的话，物业或者供电局会负责赔偿吗？我正在用的电脑突然断电，不知道有没有坏。",
+                        "text_pinyin": "wǒ yí gè rén zhù, méi wèntí. Táo shīfu, zhè cì tíng diàn rúguǒ zàochéng diànqì sǔnhuài de huà, wùyè huòzhě gōngdiàn jú huì fùzé péicháng ma? wǒ zhèngzài yòng de diànnǎo tūrán duàn diàn, bù zhīdào yǒu méiyǒu huài.",
+                        "text_en": "I live alone, no worries. Manager Tao, if this outage damages any electronics, will the property management or power bureau cover compensation? My computer lost power suddenly — not sure if it's damaged.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A practical question about liability — Tao explains: document any damage, the power bureau is responsible for transformer-related outages, and property management will help you file a claim."
+                    },
+                    {
+                        "text_zh": "好的，我等着来电。",
+                        "text_pinyin": "hǎo de, wǒ děng zhe lái diàn.",
+                        "text_en": "OK, I'll wait for the power to come back.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Patient. The darkness and your phone's 23% battery are your companions for the next two hours."
+                    },
+                    {
+                        "text_zh": "这物业费白交了。",
+                        "text_pinyin": "zhè wùyè fèi bái jiāo le.",
+                        "text_en": "We pay property fees for nothing.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Tao absorbs the comment with the thick skin of a veteran building manager. The transformer is not in his job description, but he understands the frustration."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "电器损坏的话，你先拍照记录下来。等来电以后检查一下，如果真的坏了，可以找供电局索赔。我们物业可以帮你出证明。好了，我还要接其他住户的电话，有什么事随时联系我。",
+                "text_pinyin": "diànqì sǔnhuài de huà, nǐ xiān pāi zhào jìlù xiàlái. děng lái diàn yǐhòu jiǎnchá yíxià, rúguǒ zhēn de huài le, kěyǐ zhǎo gōngdiàn jú suǒpéi. wǒmen wùyè kěyǐ bāng nǐ chū zhèngmíng. hǎo le, wǒ hái yào jiē qítā zhùhù de diànhuà, yǒu shénme shì suíshí liánxì wǒ.",
+                "text_en": "If there's electronic damage, take photos to document it. Check after power returns — if anything's actually broken, you can file a claim with the power bureau. Our property office can provide verification. OK, I need to take other residents' calls — contact me anytime if needed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and let him go.",
+                "options": [
+                    {
+                        "text_zh": "好的，我会拍照记录的。陶师傅，辛苦了！这么多住户一个一个打电话过来，你今晚肯定忙坏了。加油！",
+                        "text_pinyin": "hǎo de, wǒ huì pāi zhào jìlù de. Táo shīfu, xīnkǔ le! zhème duō zhùhù yí gè yí gè dǎ diànhuà guòlái, nǐ jīn wǎn kěndìng máng huài le. jiāyóu!",
+                        "text_en": "OK, I'll document everything. Thanks for the hard work, Manager Tao! With so many residents calling one by one, you must be swamped tonight. Hang in there!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Acknowledging his workload with genuine empathy — Tao is already answering the next call, but he'll remember your kindness when you need something fixed."
+                    },
+                    {
+                        "text_zh": "好的，谢谢陶师傅。",
+                        "text_pinyin": "hǎo de, xièxie Táo shīfu.",
+                        "text_en": "OK, thanks Manager Tao.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hangs up. The next call is already ringing."
+                    },
+                    {
+                        "text_zh": "嗯，快点修好。",
+                        "text_pinyin": "ǹg, kuài diǎn xiū hǎo.",
+                        "text_en": "Mm, fix it quickly.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "He can't fix a transformer, but he appreciates the urgency. In the darkness, everyone is an optimist about timelines."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Power outages (停电, tíng diàn) in Chinese apartments are usually handled through the 物业 (wùyè, property management). The 供电局 (gōngdiàn jú, power bureau) is responsible for transformer and grid issues. Documenting damage with photos (拍照记录) is essential for insurance claims. Building managers often serve as the first point of contact for all building emergencies and are known for their responsiveness."
+    }
+}

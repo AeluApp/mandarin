@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Say you're free on Saturday.",
                 "options": [
-                    {"text_zh": "好啊！星期六可以。", "text_pinyin": "hǎo a! xīngqī liù kěyǐ.", "text_en": "Sure! Saturday works.", "score": 1.0, "register": "casual", "feedback": "Natural and enthusiastic. 好啊 shows you're into it."},
-                    {"text_zh": "星期六有空。", "text_pinyin": "xīngqī liù yǒu kòng.", "text_en": "I'm free Saturday.", "score": 0.8, "register": "neutral", "feedback": "Clear, but 好啊 adds warmth."},
-                    {"text_zh": "可以。", "text_pinyin": "kěyǐ.", "text_en": "OK.", "score": 0.5, "register": "minimal", "feedback": "A bit flat for a friend. Add some enthusiasm!"}
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural and enthusiastic. 好啊 shows you're into it."
+                    },
+                    {
+                        "text_zh": "晚上七点吧，我们六点半在电影院门口见？",
+                        "text_pinyin": "wǎnshang qī diǎn ba, wǒmen liù diǎn bàn zài diànyǐngyuàn ménkǒu jiàn?",
+                        "text_en": "Let's do 7 PM, meet at the cinema entrance at 6:30?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you're free on saturday, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我们做西红柿炒鸡蛋吧，我可以帮你切菜。",
+                        "text_pinyin": "wǒmen zuò xīhóngshì chǎo jīdàn ba, wǒ kěyǐ bāng nǐ qiē cài.",
+                        "text_en": "Let's make tomato scrambled eggs, I can help you cut vegetables.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you're free on saturday, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest noon and let them choose the food.",
                 "options": [
-                    {"text_zh": "十二点吧。你想吃什么都行。", "text_pinyin": "shí'èr diǎn ba. nǐ xiǎng chī shénme dōu xíng.", "text_en": "How about noon. Whatever you want is fine.", "score": 1.0, "register": "casual", "feedback": "Perfect — suggests a time and is flexible on food. 都行 = 'anything's fine'."},
-                    {"text_zh": "中午见。随便吧。", "text_pinyin": "zhōngwǔ jiàn. suíbiàn ba.", "text_en": "See you at noon. Whatever.", "score": 0.7, "register": "casual", "feedback": "Works, but 随便 ('whatever') can sound uninterested. 都行 is warmer."},
-                    {"text_zh": "十二点。", "text_pinyin": "shí'èr diǎn.", "text_en": "Twelve o'clock.", "score": 0.6, "register": "minimal", "feedback": "Answers the time but ignores the food question."}
+                    {
+                        "text_zh": "十二点吧。你想吃什么都行。",
+                        "text_pinyin": "shí'èr diǎn ba. nǐ xiǎng chī shénme dōu xíng.",
+                        "text_en": "How about noon. Whatever you want is fine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect — suggests a time and is flexible on food. 都行 = 'anything's fine'."
+                    },
+                    {
+                        "text_zh": "太贵了。三十块可以吗？",
+                        "text_pinyin": "tài guì le. sānshí kuài kěyǐ ma?",
+                        "text_en": "Too expensive. How about thirty?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest noon and let them choose the food, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好的，明天下午可以。几点？",
+                        "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?",
+                        "text_en": "OK, tomorrow afternoon works. What time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest noon and let them choose the food, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

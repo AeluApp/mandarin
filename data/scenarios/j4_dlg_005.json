@@ -1,0 +1,117 @@
+{
+  "title": "Morning Market",
+  "title_zh": "早市",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're walking through a morning market at dawn. An elderly vegetable seller, Grandma Sun, is arranging her fresh produce. The air smells of earth and green onions.",
+    "setup_zh": "你在清晨走过一个早市。一位卖菜的老奶奶孙奶奶正在摆她的新鲜蔬菜。空气中弥漫着泥土和葱的味道。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "小伙子，看看我的菜，今天早上刚从地里摘的。你看这个黄瓜，还带着露水呢。现在超市里的菜都是冷库里放了好几天的，哪有这么新鲜。",
+        "text_pinyin": "Xiǎohuǒzi, kàn kàn wǒ de cài, jīntiān zǎoshang gāng cóng dì lǐ zhāi de. Nǐ kàn zhège huángguā, hái dài zhe lùshuǐ ne. Xiànzài chāoshì lǐ de cài dōu shì lěngkù lǐ fàng le hǎo jǐ tiān de, nǎ yǒu zhème xīnxiān.",
+        "text_en": "Young man, take a look at my vegetables, picked from the field this very morning. See this cucumber — it still has dew on it. Supermarket vegetables sit in cold storage for days; nothing this fresh."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Grandma Sun about her vegetables.",
+        "options": [
+          {
+            "text_zh": "确实不一样，还能看到露水。小时候我奶奶也种菜，早上摘的西红柿，咬一口就有阳光的味道。那个味道在超市里买不到。",
+            "text_pinyin": "Quèshí bù yīyàng, hái néng kàn dào lùshuǐ. Xiǎo shíhou wǒ nǎinai yě zhòng cài, zǎoshang zhāi de xīhóngshì, yǎo yī kǒu jiù yǒu yángguāng de wèidào. Nàge wèidào zài chāoshì lǐ mǎi bú dào.",
+            "text_en": "It really is different — you can still see the dew. When I was little my grandma grew vegetables too. A tomato picked in the morning tasted like sunshine. You can't buy that taste in a supermarket.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Personal and sensory — connects her produce to childhood memories and taste."
+          },
+          {
+            "text_zh": "看起来不错，不过我一般都在超市买菜，比较方便，而且有包装，干净一些。",
+            "text_pinyin": "Kàn qǐlái búcuò, búguò wǒ yībān dōu zài chāoshì mǎi cài, bǐjiào fāngbiàn, érqiě yǒu bāozhuāng, gānjìng yīxiē.",
+            "text_en": "They look nice, but I usually buy vegetables at the supermarket — it's more convenient, and they're packaged, a bit cleaner.",
+            "score": 0.0,
+            "feedback": "Grandma Sun shakes her head gently: 'Packaged... you think plastic makes things cleaner than morning dew?'"
+          },
+          {
+            "text_zh": "你每天几点来摆摊？",
+            "text_pinyin": "Nǐ měi tiān jǐ diǎn lái bǎi tān?",
+            "text_en": "What time do you come to set up your stall every day?",
+            "score": 0.0,
+            "feedback": "Schedule question that bypasses the warmth of the conversation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "阳光的味道！你这个比喻好。现在很多年轻人都不来早市了，都在手机上买菜。方便是方便，但你摸不到菜，闻不到味道。买菜不只是买菜啊。",
+        "text_pinyin": "Yángguāng de wèidào! Nǐ zhège bǐyù hǎo. Xiànzài hěn duō niánqīng rén dōu bù lái zǎoshì le, dōu zài shǒujī shàng mǎi cài. Fāngbiàn shì fāngbiàn, dàn nǐ mō bú dào cài, wén bú dào wèidào. Mǎi cài bù zhǐ shì mǎi cài a.",
+        "text_en": "The taste of sunshine! What a nice metaphor. Nowadays many young people don't come to morning markets anymore — they buy vegetables on their phones. Convenient, sure, but you can't touch the vegetables, can't smell them. Buying vegetables isn't just about buying vegetables."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about what buying vegetables really means.",
+        "options": [
+          {
+            "text_zh": "您说得对，来早市不只是买菜，也是跟人说说话，闻闻这些味道，感受一下早晨的生活。这些事情手机做不到。",
+            "text_pinyin": "Nín shuō de duì, lái zǎoshì bù zhǐ shì mǎi cài, yě shì gēn rén shuō shuō huà, wén wen zhèxiē wèidào, gǎnshòu yīxià zǎochén de shēnghuó. Zhèxiē shìqíng shǒujī zuò bú dào.",
+            "text_en": "You're right. Coming to the morning market isn't just about buying vegetables — it's about talking to people, smelling these scents, feeling the morning come alive. A phone can't do those things.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Affirms the human dimension of market life — sensory, social, irreplaceable."
+          },
+          {
+            "text_zh": "手机买菜确实挺方便的，送到家门口。",
+            "text_pinyin": "Shǒujī mǎi cài quèshí tǐng fāngbiàn de, sòng dào jiā ménkǒu.",
+            "text_en": "Buying vegetables by phone is really convenient, delivered to your door.",
+            "score": 0.0,
+            "feedback": "Defends the thing she's lamenting, tone-deaf to her point."
+          },
+          {
+            "text_zh": "你种菜用什么肥料？",
+            "text_pinyin": "Nǐ zhòng cài yòng shénme féiliào?",
+            "text_en": "What fertilizer do you use to grow vegetables?",
+            "score": 0.0,
+            "feedback": "Technical farming question that misses the social observation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "就是啊。我在这个早市卖了二十年菜了，认识很多老顾客。他们来买菜的时候，我们聊聊天，说说家里的事。有时候菜没卖完，但心情很好。",
+        "text_pinyin": "Jiù shì a. Wǒ zài zhège zǎoshì mài le èrshí nián cài le, rènshi hěn duō lǎo gùkè. Tāmen lái mǎi cài de shíhou, wǒmen liáo liáo tiān, shuō shuō jiā lǐ de shì. Yǒu shíhou cài méi mài wán, dàn xīnqíng hěn hǎo.",
+        "text_en": "Exactly. I've been selling vegetables at this morning market for twenty years. I know so many regular customers. When they come to buy, we chat, talk about our families. Sometimes I don't sell everything, but I'm in a good mood."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her twenty years at the market.",
+        "options": [
+          {
+            "text_zh": "二十年，您已经不只是卖菜的人了，您是这个早市的一部分。那些老顾客来找您，也许买菜只是一个理由，真正想要的是跟您聊聊天。",
+            "text_pinyin": "Èrshí nián, nín yǐjīng bù zhǐ shì mài cài de rén le, nín shì zhège zǎoshì de yī bùfèn. Nàxiē lǎo gùkè lái zhǎo nín, yěxǔ mǎi cài zhǐ shì yīge lǐyóu, zhēnzhèng xiǎng yào de shì gēn nín liáo liáo tiān.",
+            "text_en": "Twenty years — you're not just a vegetable seller anymore, you're part of this morning market. Those regulars come to you, and maybe buying vegetables is just an excuse. What they really want is a chat with you.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Sees her as a community anchor — buying vegetables as pretext for connection."
+          },
+          {
+            "text_zh": "你以后打算退休吗？",
+            "text_pinyin": "Nǐ yǐhòu dǎsuàn tuìxiū ma?",
+            "text_en": "Do you plan to retire?",
+            "score": 0.0,
+            "feedback": "Jumps ahead instead of appreciating the present."
+          },
+          {
+            "text_zh": "我想买两斤西红柿。",
+            "text_pinyin": "Wǒ xiǎng mǎi liǎng jīn xīhóngshì.",
+            "text_en": "I'd like two jin of tomatoes.",
+            "score": 0.0,
+            "feedback": "Transactional response to an emotional share."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Morning markets (早市) are a vital part of Chinese urban and semi-urban life, typically running from dawn until mid-morning. They serve as community gathering spaces where buying food is intertwined with social connection. The rise of grocery delivery apps has diminished foot traffic, leading many vendors to reflect on what is lost when commerce becomes purely transactional."
+  }
+}

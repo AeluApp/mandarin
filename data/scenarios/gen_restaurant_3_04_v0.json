@@ -1,0 +1,124 @@
+{
+    "title": "The Reservation That Wasn't",
+    "title_zh": "消失的预订",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_3_04_v0",
+    "tree": {
+        "setup": "Friday night at a popular Cantonese restaurant. You made a reservation for 7 PM but the hostess, Xiao Lian, can't find it in the system. The waiting area is packed, the kitchen sounds are furious, and the smell of roast duck is making your stomach negotiate on its own behalf. Xiao Lian types with two fingers and squints at the screen with the intensity of someone defusing a situation.",
+        "setup_zh": "周五晚上一家热门粤菜馆。你预订了七点但前台小莲在系统里找不到。等候区挤满了人，厨房声音很大，烤鸭的香味让你的胃自己开始谈判了。小莲用两根手指打字，盯着屏幕，像在拆弹。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "先生/女士，不好意思，系统里没有您的预订记录。您是在哪里订的？什么名字？",
+                "text_pinyin": "xiānshēng/nǚshì, bù hǎoyìsi, xìtǒng lǐ méiyǒu nín de yùdìng jìlù. nín shì zài nǎlǐ dìng de? shénme míngzi?",
+                "text_en": "Sir/Ma'am, I'm sorry, there's no reservation record in the system. Where did you book? What name?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your reservation details.",
+                "options": [
+                    {
+                        "text_zh": "我昨天在大众点评上预订的，用的手机号一三八。预订确认我还截图了，给你看。",
+                        "text_pinyin": "wǒ zuótiān zài dàzhòng diǎnpíng shàng yùdìng de, yòng de shǒujī hào yāo sān bā. yùdìng quèrèn wǒ hái jiétú le, gěi nǐ kàn.",
+                        "text_en": "I booked yesterday on Dianping, using phone number 138. I even screenshotted the confirmation, let me show you.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Lian leans forward.「有截图太好了！让我看看……哦！是系统同步的问题。您订的是对的。」截图 is 'screenshot.' Having proof is everything. 大众点评 is China's Yelp+OpenTable."
+                    },
+                    {
+                        "text_zh": "我打电话订的。昨天下午，一个男的接的电话。",
+                        "text_pinyin": "wǒ dǎ diànhuà dìng de. zuótiān xiàwǔ, yí gè nán de jiē de diànhuà.",
+                        "text_en": "I called to book. Yesterday afternoon, a man answered the phone.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lian sighs.「那肯定是小杨接的。他有时候忘记录入系统。」一个男的 is 'a man.' Phone reservations without confirmation numbers are always risky."
+                    },
+                    {
+                        "text_zh": "我记得是这家餐厅。不会搞错了吧？",
+                        "text_pinyin": "wǒ jìde shì zhè jiā cāntīng. bú huì gǎo cuò le ba?",
+                        "text_en": "I'm pretty sure it was this restaurant. I couldn't have gotten it wrong, could I?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lian checks again.「这条街上有两家粤菜馆……您确定不是隔壁那家？」搞错 means 'made a mistake.' Always double-check the restaurant name and address."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到了，是系统的问题。但是您订的桌子已经被安排给别人了。我能帮您换一张桌子吗？现在只有靠厨房的位子了。",
+                "text_pinyin": "zhǎo dào le, shì xìtǒng de wèntí. dànshì nín dìng de zhuōzi yǐjīng bèi ānpái gěi biéren le. wǒ néng bāng nín huàn yì zhāng zhuōzi ma? xiànzài zhǐyǒu kào chúfáng de wèizi le.",
+                "text_en": "Found it, it was a system error. But your table has already been given to someone else. Can I give you a different table? Right now we only have seats near the kitchen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the table situation.",
+                "options": [
+                    {
+                        "text_zh": "靠厨房也行，只要不用再等了。不过这是你们的失误，能不能给我们送个小菜表示一下？",
+                        "text_pinyin": "kào chúfáng yě xíng, zhǐyào bú yòng zài děng le. búguò zhè shì nǐmen de shīwù, néng bu néng gěi wǒmen sòng gè xiǎo cài biǎoshì yíxià?",
+                        "text_en": "Near the kitchen is fine, as long as we don't have to wait more. But since this was your error, could you comp us a small dish as a gesture?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Lian nods immediately.「当然！我让厨房送一份虾饺。」失误 is 'error/mistake.' 送个小菜表示一下 is a polite way to request compensation without being aggressive. She respects the directness."
+                    },
+                    {
+                        "text_zh": "需要等多久才能有靠窗的位子？",
+                        "text_pinyin": "xūyào děng duōjiǔ cái néng yǒu kào chuāng de wèizi?",
+                        "text_en": "How long would I need to wait for a window seat?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「可能要四十分钟左右。周五晚上人很多。」多久 is 'how long.' 才能 adds the sense of 'before we can.' The wait might not be worth it when you're already hungry."
+                    },
+                    {
+                        "text_zh": "好吧，靠厨房就靠厨房吧。",
+                        "text_pinyin": "hǎo ba, kào chúfáng jiù kào chúfáng ba.",
+                        "text_en": "Fine, near the kitchen it is.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lian leads you there with an apologetic look. The table is warm from the kitchen but the food arrives faster than anyone else's.「菜会很快上的，离厨房近嘛。」Silver lining."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这是菜单。今天的特色菜是白切鸡和清蒸石斑鱼。虾饺等会儿就送来。真的很抱歉今天的情况。",
+                "text_pinyin": "zhè shì càidān. jīntiān de tèsè cài shì báiqiē jī hé qīngzhēng shíbānyú. xiājiǎo děnghuìr jiù sòng lái. zhēn de hěn bàoqiàn jīntiān de qíngkuàng.",
+                "text_en": "Here's the menu. Today's specials are white-cut chicken and steamed grouper. The shrimp dumplings will come shortly. I'm truly sorry about today's situation."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order your meal.",
+                "options": [
+                    {
+                        "text_zh": "没关系，已经解决了。我们要一个白切鸡和一份炒青菜。菜量大不大？两个人够吗？",
+                        "text_pinyin": "méi guānxi, yǐjīng jiějué le. wǒmen yào yí gè báiqiē jī hé yí fèn chǎo qīngcài. càiliàng dà bu dà? liǎng gè rén gòu ma?",
+                        "text_en": "It's OK, it's resolved. We'll have a white-cut chicken and stir-fried greens. Are the portions big? Enough for two?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「白切鸡是半只，两个人够了。再加一份汤就更完美了。」菜量 means 'portion size.' Asking about portions before ordering too much shows practical dining sense."
+                    },
+                    {
+                        "text_zh": "特色菜都来一份吧。再加一个汤。",
+                        "text_pinyin": "tèsè cài dōu lái yí fèn ba. zài jiā yí gè tāng.",
+                        "text_en": "One of each special. Plus a soup.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lian hesitates.「两个人的话……石斑鱼也很大。可能点多了。」都来一份 is 'one of everything' -- bold but possibly wasteful. In China, over-ordering is common but staff will warn you."
+                    },
+                    {
+                        "text_zh": "你推荐什么？我们第一次来，不太了解这里的菜。",
+                        "text_pinyin": "nǐ tuījiàn shénme? wǒmen dì yī cì lái, bú tài liǎojiě zhèlǐ de cài.",
+                        "text_en": "What do you recommend? It's our first time, we don't know the menu well.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lian perks up.「白切鸡一定要点，是我们的招牌菜。再来一份蒸排骨和一个例汤。」推荐 is 'recommend.' 招牌菜 is 'signature dish.' Letting staff guide you often gets the best food."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In China, reservations can be made through apps like 大众点评 (Dàzhòng Diǎnpíng, like Yelp) or by phone. Always screenshot confirmations (截图). Cantonese cuisine (粤菜) emphasizes fresh ingredients and light flavors. 白切鸡 (white-cut chicken) and dim sum items like 虾饺 (shrimp dumplings) are signature dishes."
+    }
+}

@@ -1,13 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="42" x2="120" y2="42" stroke-width="0.4"/>
-  <!-- winding path -->
-  <path d="M40 58 Q50 50 55 44 Q60 38 65 34 Q72 28 78 24" stroke-width="0.6"/>
-  <!-- lanterns -->
-  <rect x="47" y="46" width="2.5" height="3.5" stroke-width="0.5"/>
-  <circle cx="48.25" cy="44.5" r="0.6" stroke-width="0.4"/>
-  <rect x="59" y="36" width="2.5" height="3.5" stroke-width="0.5"/>
-  <circle cx="60.25" cy="34.5" r="0.6" stroke-width="0.4"/>
-  <rect x="71" y="27" width="2.5" height="3.5" stroke-width="0.5"/>
-  <circle cx="72.25" cy="25.5" r="0.6" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- garden walls — converging perspective -->
+  <path d="M10 82 L30 50 Q40 36 55 28" stroke="#2a2a2a" stroke-width="0.7"/>
+  <path d="M190 82 L170 50 Q160 36 145 28" stroke="#2a2a2a" stroke-width="0.7"/>
+  <!-- wall caps -->
+  <path d="M10 80 Q11 78 12 80" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <path d="M188 80 Q189 78 190 80" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <!-- stone path — perspective convergence -->
+  <path d="M60 94 Q80 88 100 86 Q120 88 140 94" stroke="#2a2a2a" stroke-width="0.6"/>
+  <path d="M70 88 Q85 82 100 80 Q115 82 130 88" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M78 82 Q90 76 100 74 Q110 76 122 82" stroke="#2a2a2a" stroke-width="0.45"/>
+  <path d="M84 76 Q92 70 100 68 Q108 70 116 76" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M88 70 Q94 64 100 62 Q106 64 112 70" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M92 64 Q96 58 100 56 Q104 58 108 64" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- stepping stones texture -->
+  <ellipse cx="90" cy="90" rx="6" ry="1.5" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <ellipse cx="110" cy="90" rx="5" ry="1.2" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <ellipse cx="100" cy="84" rx="5" ry="1" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <!-- lantern 1 — foreground left -->
+  <line x1="35" y1="40" x2="35" y2="70" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- lantern arm -->
+  <path d="M35 42 Q42 40 48 42" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- hanging cord -->
+  <line x1="48" y1="42" x2="48" y2="46" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- lantern body -->
+  <path d="M42 46 L44 46 Q48 46 50 48 L52 52 Q50 56 48 56 L44 56 Q42 56 42 54 L42 50 Q42 48 42 46" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.04"/>
+  <line x1="42" y1="46" x2="54" y2="46" stroke="#2a2a2a" stroke-width="0.4"/>
+  <line x1="43" y1="56" x2="53" y2="56" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- lantern glow -->
+  <circle cx="48" cy="51" r="8" stroke="#2a2a2a" stroke-width="0.1" opacity="0.08"/>
+  <!-- lantern 2 — mid right -->
+  <line x1="155" y1="38" x2="155" y2="62" stroke="#2a2a2a" stroke-width="0.45"/>
+  <path d="M155 40 Q148 38 142 40" stroke="#2a2a2a" stroke-width="0.35"/>
+  <line x1="142" y1="40" x2="142" y2="43" stroke="#2a2a2a" stroke-width="0.25"/>
+  <rect x="137" y="43" width="10" height="8" rx="1" stroke="#2a2a2a" stroke-width="0.45" fill="#2a2a2a" fill-opacity="0.04"/>
+  <circle cx="142" cy="47" r="6" stroke="#2a2a2a" stroke-width="0.1" opacity="0.08"/>
+  <!-- lantern 3 — far, small -->
+  <line x1="95" y1="32" x2="95" y2="44" stroke="#2a2a2a" stroke-width="0.3"/>
+  <path d="M95 33 Q100 32 104 34" stroke="#2a2a2a" stroke-width="0.25"/>
+  <line x1="104" y1="34" x2="104" y2="36" stroke="#2a2a2a" stroke-width="0.2"/>
+  <rect x="101" y="36" width="6" height="5" rx="0.5" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- foliage along walls -->
+  <path d="M18 72 Q22 66 26 68 Q28 64 32 66" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <path d="M172 72 Q176 66 180 68 Q182 64 186 66" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <!-- small tree near far wall -->
+  <line x1="120" y1="48" x2="120" y2="34" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <circle cx="120" cy="30" r="5" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.03" opacity="0.4"/>
+  <!-- distant arch at end of path -->
+  <path d="M92 28 Q100 18 108 28" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="92" y1="28" x2="92" y2="40" stroke="#2a2a2a" stroke-width="0.4"/>
+  <line x1="108" y1="28" x2="108" y2="40" stroke="#2a2a2a" stroke-width="0.4"/>
 </svg>

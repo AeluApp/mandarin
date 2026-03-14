@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "entries": [
+    {"type": "result", "sentence": "我听____了。", "answer": "到", "verb": "听", "meaning": "I heard it", "distractors": ["完", "见", "好"], "hsk_level": 2, "explanation": "到 = successfully achieved the action"},
+    {"type": "result", "sentence": "我看____了那本书。", "answer": "完", "verb": "看", "meaning": "I finished reading that book", "distractors": ["到", "见", "好"], "hsk_level": 2, "explanation": "完 = completed to the end"},
+    {"type": "result", "sentence": "你看____他了吗？", "answer": "见", "verb": "看", "meaning": "Did you see him?", "distractors": ["到", "完", "好"], "hsk_level": 2, "explanation": "见 = perceived with eyes"},
+    {"type": "result", "sentence": "请你写____。", "answer": "好", "verb": "写", "meaning": "Please finish writing it", "distractors": ["完", "到", "下"], "hsk_level": 3, "explanation": "好 = done properly, ready"},
+    {"type": "result", "sentence": "我记____了他的名字。", "answer": "住", "verb": "记", "meaning": "I remembered his name", "distractors": ["到", "好", "完"], "hsk_level": 3, "explanation": "住 = firmly held in place"},
+    {"type": "result", "sentence": "他做____了饭。", "answer": "好", "verb": "做", "meaning": "He finished cooking", "distractors": ["完", "到", "见"], "hsk_level": 2, "explanation": "好 = done properly, satisfactorily"},
+    {"type": "result", "sentence": "我找____了我的钥匙。", "answer": "到", "verb": "找", "meaning": "I found my keys", "distractors": ["见", "好", "完"], "hsk_level": 2, "explanation": "到 = successfully achieved the search"},
+    {"type": "result", "sentence": "你说____了，就是这样。", "answer": "对", "verb": "说", "meaning": "You said it right", "distractors": ["好", "到", "完"], "hsk_level": 3, "explanation": "对 = correctly"},
+    {"type": "result", "sentence": "他学____了中文。", "answer": "会", "verb": "学", "meaning": "He learned Chinese (acquired the skill)", "distractors": ["到", "好", "完"], "hsk_level": 2, "explanation": "会 = acquired ability through learning"},
+    {"type": "result", "sentence": "把门关____。", "answer": "上", "verb": "关", "meaning": "Close the door (shut it)", "distractors": ["好", "下", "住"], "hsk_level": 3, "explanation": "上 = into closed/attached position"},
+
+    {"type": "potential", "prompt": "看得见 means...", "answer": "can see", "distractors": ["finished seeing", "saw clearly", "want to see"], "hsk_level": 3, "explanation": "得 between V and complement = 'can' (potential positive)"},
+    {"type": "potential", "prompt": "听不懂 means...", "answer": "can't understand (by listening)", "distractors": ["didn't listen", "don't want to listen", "haven't listened"], "hsk_level": 3, "explanation": "不 between V and complement = 'can't' (potential negative)"},
+    {"type": "potential", "prompt": "做得完 means...", "answer": "can finish doing", "distractors": ["already finished", "doing well", "keep doing"], "hsk_level": 3, "explanation": "得 + complement = potential (can achieve result)"},
+    {"type": "potential", "prompt": "吃不下 means...", "answer": "can't eat any more (too full)", "distractors": ["won't eat", "ate it", "doesn't taste good"], "hsk_level": 4, "explanation": "不下 = can't take in (physical capacity)"},
+    {"type": "potential", "prompt": "买得起 means...", "answer": "can afford to buy", "distractors": ["already bought", "wants to buy", "bought a lot"], "hsk_level": 4, "explanation": "得起 = can afford / can manage (起 = 'up to it')"},
+    {"type": "potential", "prompt": "来不及 means...", "answer": "not enough time / too late", "distractors": ["can't come", "won't come", "hasn't come"], "hsk_level": 4, "explanation": "来不及 = can't make it in time (fixed expression)"},
+
+    {"type": "direction", "sentence": "他走____了。", "answer": "出去", "distractors": ["上来", "下去", "过来"], "hsk_level": 3, "explanation": "出去 = went out (away from speaker)"},
+    {"type": "direction", "sentence": "请进____。", "answer": "来", "distractors": ["去", "上", "下"], "hsk_level": 2, "explanation": "来 = toward speaker (inviting someone in)"},
+    {"type": "direction", "sentence": "他跑____了楼。", "answer": "上", "distractors": ["下", "出", "进"], "hsk_level": 3, "explanation": "上 = upward (ran upstairs)"},
+    {"type": "direction", "sentence": "把书拿____。", "answer": "出来", "distractors": ["进去", "上去", "下来"], "hsk_level": 3, "explanation": "出来 = take out toward speaker"},
+    {"type": "direction", "sentence": "我们爬____了山。", "answer": "上", "distractors": ["下", "进", "出"], "hsk_level": 3, "explanation": "上 = upward onto (climbed the mountain)"},
+
+    {"type": "degree", "sentence": "他高兴____跳了起来。", "answer": "得", "distractors": ["的", "地", "了"], "hsk_level": 3, "explanation": "V/Adj + 得 + description = degree complement"},
+    {"type": "degree", "sentence": "她说中文说____很好。", "answer": "得", "distractors": ["的", "地", "了"], "hsk_level": 3, "explanation": "V + 得 + evaluation = degree complement"},
+    {"type": "degree", "sentence": "他跑____很快。", "answer": "得", "distractors": ["的", "地", "了"], "hsk_level": 2, "explanation": "V + 得 + description = how the action is performed"},
+    {"type": "degree", "sentence": "这个菜做____太咸了。", "answer": "得", "distractors": ["的", "地", "了"], "hsk_level": 3, "explanation": "V + 得 + evaluation = degree complement describing result"},
+
+    {"type": "result", "sentence": "他喝____了三杯啤酒。", "answer": "完", "verb": "喝", "meaning": "He finished three beers", "distractors": ["好", "到", "下"], "hsk_level": 3, "explanation": "完 = finished, consumed entirely"},
+    {"type": "result", "sentence": "钱花____了。", "answer": "光", "verb": "花", "meaning": "The money is all spent", "distractors": ["完", "到", "好"], "hsk_level": 4, "explanation": "光 = completely used up, nothing left"},
+    {"type": "result", "sentence": "我想____了一个好办法。", "answer": "出", "verb": "想", "meaning": "I thought of a good idea", "distractors": ["到", "好", "完"], "hsk_level": 4, "explanation": "出 = produced/emerged (abstract result)"}
+  ]
+}

@@ -1,0 +1,94 @@
+{
+    "title": "The Scenic Shortcut",
+    "title_zh": "好看的近路",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_travel_1_02_v0",
+    "tree": {
+        "setup": "A tree-lined street with old buildings and laundry hanging from balconies. You're trying to find a park but your phone has no signal. An elderly man, Uncle Wu, is sitting on a folding stool outside a tea shop, watching the world go by. His cane leans against the wall. He's been sitting in this exact spot every afternoon for twenty years.",
+        "setup_zh": "一条两边有树的老街，阳台上晾着衣服。你想找公园，但手机没信号。吴叔叔坐在茶馆门口的折叠凳上看风景。他的拐杖靠在墙上。他每天下午都坐在这个位置，已经二十年了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "年轻人！你找什么地方？",
+                "text_pinyin": "niánqīngrén! nǐ zhǎo shénme dìfang?",
+                "text_en": "Young person! What place are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for directions to the park.",
+                "options": [
+                    {
+                        "text_zh": "请问，公园在哪里？",
+                        "text_pinyin": "qǐngwèn, gōngyuán zài nǎlǐ?",
+                        "text_en": "Excuse me, where is the park?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Wu's face brightens. He loves giving directions -- it's the highlight of his afternoon.「往前走五分钟。」请问 (qǐngwèn) before a question is polite and opens doors."
+                    },
+                    {
+                        "text_zh": "公园远不远？",
+                        "text_pinyin": "gōngyuán yuǎn bu yuǎn?",
+                        "text_en": "Is the park far?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Wu waves his hand dismissively.「不远不远！走路十分钟。」The A不A pattern (远不远) is a great way to ask yes-or-no questions."
+                    },
+                    {
+                        "text_zh": "我迷路了。",
+                        "text_pinyin": "wǒ mí lù le.",
+                        "text_en": "I'm lost.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Wu stands up with surprising energy. He's been waiting for someone to help all afternoon.「来，我告诉你。」迷路 (mí lù) means 'to get lost' -- useful when you need it, which will be often."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "往前走，到路口右拐，就看到了。",
+                "text_pinyin": "wǎng qián zǒu, dào lùkǒu yòu guǎi, jiù kàndào le.",
+                "text_en": "Walk forward, turn right at the intersection, and you'll see it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him for the directions.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您！",
+                        "text_pinyin": "xièxie nín!",
+                        "text_en": "Thank you! (polite)",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Wu waves you off with a gentle smile. Using 您 (nín) instead of 你 shows respect for elders -- he noticed, and he appreciates it."
+                    },
+                    {
+                        "text_zh": "谢谢！再见！",
+                        "text_pinyin": "xièxie! zàijiàn!",
+                        "text_en": "Thanks! Goodbye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Wu nods and settles back into his stool. He'll be here tomorrow if you get lost again. 再见 is 'goodbye' -- literally 'see you again.'"
+                    },
+                    {
+                        "text_zh": "好的！",
+                        "text_pinyin": "hǎo de!",
+                        "text_en": "OK!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Quick but missing the thank-you. Uncle Wu watches you go, mildly deflated. When someone gives you help, a 谢谢 makes it complete."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "慢走啊！公园很好看的！",
+                "text_pinyin": "màn zǒu a! gōngyuán hěn hǎokàn de!",
+                "text_en": "Take care! The park is beautiful!"
+            }
+        ],
+        "cultural_note": "Elderly people sitting outside their neighborhood shops are often the best source of local directions. Using 您 (nín) instead of 你 (nǐ) when addressing older people is a simple way to show respect. 慢走 (màn zǒu, 'walk slowly') is a warm farewell."
+    }
+}

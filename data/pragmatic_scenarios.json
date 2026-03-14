@@ -1,77 +1,77 @@
 [
   {
     "situation": "A colleague compliments your Chinese ability",
-    "situation_zh": "\u540c\u4e8b\u5938\u4f60\u4e2d\u6587\u8bf4\u5f97\u597d",
+    "situation_zh": "同事夸你中文说得好",
     "options": [
       {
-        "text": "\u54ea\u91cc\u54ea\u91cc\uff0c\u8fd8\u5dee\u5f97\u8fdc\u5462\u3002",
+        "text": "哪里哪里，还差得远呢。",
         "score": 1.0,
         "feedback": "Classic Chinese deflection \u2014 humble and culturally perfect."
       },
       {
-        "text": "\u8c22\u8c22\uff01\u6211\u8fd8\u5728\u5b66\u4e60\u3002",
+        "text": "谢谢！我还在学习。",
         "score": 0.7,
-        "feedback": "Acceptable \u2014 the \u8fd8\u5728\u5b66\u4e60 adds humility, but a direct \u8c22\u8c22 is Western-style."
+        "feedback": "Acceptable \u2014 the 还在学习 adds humility, but a direct 谢谢 is Western-style."
       },
       {
-        "text": "\u662f\u7684\uff0c\u6211\u82b1\u4e86\u5f88\u591a\u65f6\u95f4\u5b66\u7684\u3002",
+        "text": "是的，我花了很多时间学的。",
         "score": 0.2,
         "feedback": "Accepting compliments directly is uncomfortable in Chinese culture."
       },
       {
-        "text": "\u8fc7\u5956\u4e86\uff0c\u8fc7\u5956\u4e86\u3002",
+        "text": "过奖了，过奖了。",
         "score": 0.9,
-        "feedback": "\u8fc7\u5956 (over-praised) \u2014 another classic deflection. Very natural."
+        "feedback": "过奖 (over-praised) \u2014 another classic deflection. Very natural."
       }
     ]
   },
   {
     "situation": "Someone gives you a gift",
-    "situation_zh": "\u6709\u4eba\u9001\u4f60\u793c\u7269",
+    "situation_zh": "有人送你礼物",
     "options": [
       {
-        "text": "\u8c22\u8c22\uff01\u6211\u6253\u5f00\u770b\u770b\u3002",
+        "text": "谢谢！我打开看看。",
         "score": 0.3,
         "feedback": "Opening gifts immediately is Western \u2014 in China, open it later."
       },
       {
-        "text": "\u592a\u5ba2\u6c14\u4e86\uff0c\u4e0d\u7528\u8fd9\u6837\u3002",
+        "text": "太客气了，不用这样。",
         "score": 1.0,
-        "feedback": "Ritual refusal then acceptance is the norm. \u592a\u5ba2\u6c14\u4e86 is perfect."
+        "feedback": "Ritual refusal then acceptance is the norm. 太客气了 is perfect."
       },
       {
-        "text": "\u8c22\u8c22\uff0c\u4f60\u592a\u597d\u4e86\u3002",
+        "text": "谢谢，你太好了。",
         "score": 0.6,
-        "feedback": "Warm but misses the expected \u63a8\u8f9e (ritual refusal) step."
+        "feedback": "Warm but misses the expected 推辞 (ritual refusal) step."
       },
       {
-        "text": "\u54ce\u5440\uff0c\u4f60\u7834\u8d39\u4e86\u3002",
+        "text": "哎呀，你破费了。",
         "score": 0.8,
-        "feedback": "\u7834\u8d39 (you spent money) \u2014 acknowledging their expense is polite."
+        "feedback": "破费 (you spent money) \u2014 acknowledging their expense is polite."
       }
     ]
   },
   {
     "situation": "A friend's parent asks your age",
-    "situation_zh": "\u670b\u53cb\u7684\u7236\u6bcd\u95ee\u4f60\u591a\u5927\u4e86",
+    "situation_zh": "朋友的父母问你多大了",
     "options": [
       {
-        "text": "\u6211\u4e8c\u5341\u4e94\u5c81\u3002",
+        "text": "我二十五岁。",
         "score": 1.0,
         "feedback": "Direct answer is expected \u2014 age isn't private in China."
       },
       {
-        "text": "\u8fd9\u662f\u79c1\u4eba\u95ee\u9898\u3002",
+        "text": "这是私人问题。",
         "score": 0.0,
         "feedback": "Refusing to share age seems secretive and rude in Chinese culture."
       },
       {
-        "text": "\u60a8\u731c\u731c\u770b\uff1f",
+        "text": "您猜猜看？",
         "score": 0.3,
         "feedback": "Playful deflection might work with peers, not with elders."
       },
       {
-        "text": "\u6211\u5c5e\u864e\u7684\u3002",
+        "text": "我属虎的。",
         "score": 0.8,
         "feedback": "Answering with zodiac animal is very Chinese \u2014 they can calculate your age."
       }
@@ -79,25 +79,25 @@
   },
   {
     "situation": "You accidentally bump into someone",
-    "situation_zh": "\u4e0d\u5c0f\u5fc3\u649e\u5230\u4e86\u522b\u4eba",
+    "situation_zh": "不小心撞到了别人",
     "options": [
       {
-        "text": "\u4e0d\u597d\u610f\u601d\u4e0d\u597d\u610f\u601d\uff01",
+        "text": "不好意思不好意思！",
         "score": 1.0,
-        "feedback": "Doubled \u4e0d\u597d\u610f\u601d shows sincerity \u2014 the go-to for minor incidents."
+        "feedback": "Doubled 不好意思 shows sincerity \u2014 the go-to for minor incidents."
       },
       {
-        "text": "\u5bf9\u4e0d\u8d77\u3002",
+        "text": "对不起。",
         "score": 0.7,
-        "feedback": "\u5bf9\u4e0d\u8d77 works but implies more guilt \u2014 \u4e0d\u597d\u610f\u601d is lighter."
+        "feedback": "对不起 works but implies more guilt \u2014 不好意思 is lighter."
       },
       {
-        "text": "\u6ca1\u4e8b\u5427\uff1f",
+        "text": "没事吧？",
         "score": 0.6,
         "feedback": "Checking if they're OK is thoughtful but misses the apology."
       },
       {
-        "text": "\u5c0f\u5fc3\u4e00\u70b9\u3002",
+        "text": "小心一点。",
         "score": 0.0,
         "feedback": "This tells THEM to be careful \u2014 blaming the victim. Don't."
       }
@@ -105,27 +105,287 @@
   },
   {
     "situation": "Host keeps offering you more food, you're full",
-    "situation_zh": "\u4e3b\u4eba\u4e00\u76f4\u8ba9\u4f60\u591a\u5403\uff0c\u4f60\u5403\u9971\u4e86",
+    "situation_zh": "主人一直让你多吃，你吃饱了",
     "options": [
       {
-        "text": "\u4e0d\u7528\u4e86\uff0c\u6211\u771f\u7684\u5403\u9971\u4e86\u3002",
+        "text": "不用了，我真的吃饱了。",
         "score": 0.8,
-        "feedback": "Adding \u771f\u7684 (really) breaks through the ritual offering cycle."
+        "feedback": "Adding 真的 (really) breaks through the ritual offering cycle."
       },
       {
-        "text": "\u591f\u4e86\u591f\u4e86\uff0c\u8c22\u8c22\u3002",
+        "text": "够了够了，谢谢。",
         "score": 0.7,
-        "feedback": "Doubled \u591f\u4e86 is emphatic. Works, but could sound a bit blunt."
+        "feedback": "Doubled 够了 is emphatic. Works, but could sound a bit blunt."
       },
       {
-        "text": "\u6211\u5403\u4e0d\u4e0b\u4e86\uff0c\u505a\u5f97\u592a\u597d\u5403\u4e86\u3002",
+        "text": "我吃不下了，做得太好吃了。",
         "score": 1.0,
-        "feedback": "\u5403\u4e0d\u4e0b + complimenting the food \u2014 peak politeness."
+        "feedback": "吃不下 + complimenting the food \u2014 peak politeness."
       },
       {
-        "text": "\u4e0d\u8981\u4e86\u3002",
+        "text": "不要了。",
         "score": 0.3,
         "feedback": "Too blunt \u2014 hosts will think you didn't enjoy the food."
+      }
+    ]
+  },
+  {
+    "situation": "方阿姨 looks you up and down and says \u201c最近是不是胖了一点？\u201d (Have you put on weight recently?)",
+    "situation_zh": "方阿姨上下打量你，说\u201c最近是不是胖了一点？\u201d",
+    "options": [
+      {
+        "text": "哈哈，可能吧，最近吃得太好了。",
+        "score": 1.0,
+        "feedback": "Self-deprecating humor that accepts the comment without confrontation. Deflects with a light reason. This is the smoothest Chinese response to uncomfortable directness from elders."
+      },
+      {
+        "text": "没有吧，我觉得还好。",
+        "score": 0.6,
+        "feedback": "Mild denial. Not rude, but 方阿姨 will double down. You haven't defused anything."
+      },
+      {
+        "text": "阿姨，这样说不太礼貌吧。",
+        "score": 0.2,
+        "feedback": "Calling out an elder's manners directly is a confrontation most Chinese speakers would avoid. You'll win the point and lose the relationship."
+      },
+      {
+        "text": "是吗？那我得少吃点了，阿姨帮我监督。",
+        "score": 0.8,
+        "feedback": "Accepting + recruiting her as ally is clever. Turns her sharpness into involvement. A bit performative but socially effective."
+      }
+    ]
+  },
+  {
+    "situation": "老周 enthusiastically tells your mutual friend: \u201c没问题，他肯定愿意帮忙搬家！\u201d (No problem, he'll definitely help with the move!) \u2014 without asking you first.",
+    "situation_zh": "老周热心地跟朋友说\u201c没问题，他肯定愿意帮忙搬家！\u201d你还没答应过。",
+    "options": [
+      {
+        "text": "老周，你太热心了。那天我看看有没有时间吧。",
+        "score": 1.0,
+        "feedback": "Acknowledges his enthusiasm (face-saving) while creating an exit. 看看有没有时间 is the classic soft maybe-no. Textbook handling."
+      },
+      {
+        "text": "我没说过要帮忙啊。",
+        "score": 0.2,
+        "feedback": "Directly contradicting 老周 in front of others makes him lose face. Even if true, this burns the bridge."
+      },
+      {
+        "text": "好啊，没问题！",
+        "score": 0.5,
+        "feedback": "Going along avoids conflict but you just committed to something you didn't choose. 老周 will keep volunteering you."
+      },
+      {
+        "text": "哈哈老周，你比我还积极。我周末可能有事，我先确认一下。",
+        "score": 0.9,
+        "feedback": "Humor + vague schedule conflict + promise to confirm. Gives you time and space without anyone losing face."
+      }
+    ]
+  },
+  {
+    "situation": "秦经理 hands you a three-page form and says \u201c这是流程要求的，麻烦你填一下。\u201d (This is required by the process, please fill it out.) The form is for a request that should take one email.",
+    "situation_zh": "秦经理递给你一份三页的表格，说\u201c这是流程要求的，麻烦你填一下。\u201d其实一封邮件就能解决。",
+    "options": [
+      {
+        "text": "好的，秦经理。有不清楚的地方我再问您。",
+        "score": 1.0,
+        "feedback": "Accept the process, signal competence, leave door open for questions. 秦经理 respects compliance and will remember your cooperation."
+      },
+      {
+        "text": "这个有必要吗？发个邮件不就行了？",
+        "score": 0.2,
+        "feedback": "Questioning a manager's process in front of others challenges their authority. Even if you're right, you lose."
+      },
+      {
+        "text": "好的，我尽快填好。",
+        "score": 0.8,
+        "feedback": "Clean compliance. Slightly less optimal than opening a channel for questions, but perfectly appropriate."
+      },
+      {
+        "text": "秦经理，这个表格和上次的一样吗？我可以参考上次的填吗？",
+        "score": 0.7,
+        "feedback": "Shows initiative and familiarity with process. Good, but slightly implies you find it repetitive."
+      }
+    ]
+  },
+  {
+    "situation": "罗老师 clutches his chest and announces: \u201c大事不好了！\u201d (Disaster!) \u2014 then reveals the classroom projector bulb needs replacing.",
+    "situation_zh": "罗老师捂着胸口喊道\u201c大事不好了！\u201d原来是教室投影仪的灯泡要换了。",
+    "options": [
+      {
+        "text": "罗老师，别着急，我去找人来换。",
+        "score": 1.0,
+        "feedback": "Calm acknowledgment + immediate practical offer. You take his concern seriously without matching his drama. This is exactly how to handle 罗老师."
+      },
+      {
+        "text": "罗老师，没那么严重吧。",
+        "score": 0.3,
+        "feedback": "Dismissing his theatricality directly bruises his ego. 罗老师 thrives on dramatic stakes \u2014 telling him to calm down never works."
+      },
+      {
+        "text": "天哪！怎么办！",
+        "score": 0.4,
+        "feedback": "Matching his panic validates his drama but escalates the situation. You're now both panicking about a light bulb."
+      },
+      {
+        "text": "罗老师放心，这个好解决。我来处理。",
+        "score": 0.9,
+        "feedback": "放心 (relax) is gentle, and 我来处理 (I'll handle it) gives him a hero's exit. Very smooth."
+      }
+    ]
+  },
+  {
+    "situation": "老白 confidently tells you the subway station is to the left. You're fairly sure it's to the right.",
+    "situation_zh": "老白很有把握地说地铁站在左边，你比较确定是在右边。",
+    "options": [
+      {
+        "text": "是吗？我记得好像是右边，我们查一下地图？",
+        "score": 1.0,
+        "feedback": "Soft hedge (好像) + external authority (map) means nobody loses face. 老白's confidence stays intact while you get the right answer."
+      },
+      {
+        "text": "不对，是右边。",
+        "score": 0.2,
+        "feedback": "Flat contradiction. 老白 will dig in harder, and now it's a power struggle over a subway station."
+      },
+      {
+        "text": "好，走左边吧。",
+        "score": 0.3,
+        "feedback": "Avoiding conflict by going the wrong direction is harmony at the cost of getting lost. Not worth it."
+      },
+      {
+        "text": "老白，你去过那么多地方，不过我上次好像是从右边走的。要不咱们先查查？",
+        "score": 0.9,
+        "feedback": "Compliment his experience, then offer contradicting evidence softly. The 咱们先查查 frames it as collaboration, not correction."
+      }
+    ]
+  },
+  {
+    "situation": "You ask 小梅 whether the restaurant next door is good. She says: \u201c还行。\u201d (It's okay.) You need more information.",
+    "situation_zh": "你问小梅隔壁那家餐厅好不好吃，她只说了\u201c还行。\u201d你需要更多信息。",
+    "options": [
+      {
+        "text": "还行是好吃还是不好吃？",
+        "score": 0.4,
+        "feedback": "Pushing 小梅 to decode her own understatement feels like an interrogation. She said what she said."
+      },
+      {
+        "text": "你一般点什么菜？",
+        "score": 1.0,
+        "feedback": "Shifting from opinion to specifics. 小梅 won't give you adjectives, but she'll tell you what she orders. This is how you extract information from minimalists."
+      },
+      {
+        "text": "那我试试吧。",
+        "score": 0.6,
+        "feedback": "Accepting her non-answer and moving on. You still don't know anything, but at least you didn't push."
+      },
+      {
+        "text": "他们的什么菜比较有特色？",
+        "score": 0.8,
+        "feedback": "Good concrete question. 小梅 might answer this because it's factual, not opinion-based. Slightly less natural than asking what she personally orders."
+      }
+    ]
+  },
+  {
+    "situation": "方阿姨 and 老周 are arguing about where to have the group dinner. 方阿姨 wants the quiet Sichuan place; 老周 insists on the loud hotpot buffet. They both turn to you.",
+    "situation_zh": "方阿姨和老周在争论聚餐去哪儿。方阿姨要去安静的川菜馆，老周坚持去热闹的火锅自助。两个人都看着你。",
+    "options": [
+      {
+        "text": "两个都不错。要不这次川菜，下次火锅？",
+        "score": 1.0,
+        "feedback": "The classic Chinese compromise: acknowledge both, sequence them. Everyone gets something, nobody loses face. 方阿姨 wins this round, but 老周 gets a promise."
+      },
+      {
+        "text": "我觉得方阿姨说得对，安静一点好聊天。",
+        "score": 0.5,
+        "feedback": "Siding with 方阿姨 gives a reason, but 老周 will feel rejected. Taking sides openly in a group dynamic is risky."
+      },
+      {
+        "text": "你们决定就好，我都行。",
+        "score": 0.4,
+        "feedback": "我都行 sounds neutral but is actually useless. They asked for your input. Ducking makes you look like you don't care."
+      },
+      {
+        "text": "要不我们问问大家？看多数人想去哪儿。",
+        "score": 0.8,
+        "feedback": "Deferring to group vote removes you from the crossfire. Smart, but 方阿姨 might read it as you not having the courage to choose."
+      }
+    ]
+  },
+  {
+    "situation": "秦经理 tells you: \u201c按照规定，优秀员工可以提前半小时下班。你这个月表现不错。\u201d (Per policy, outstanding employees can leave 30 minutes early. You've done well this month.)",
+    "situation_zh": "秦经理说\u201c按照规定，优秀员工可以提前半小时下班。你这个月表现不错。\u201d",
+    "options": [
+      {
+        "text": "谢谢秦经理，我会继续努力的。",
+        "score": 1.0,
+        "feedback": "Receive the warmth, reflect it as motivation. You're acknowledging both the policy framing and the personal kindness underneath. Perfect register for a bureaucrat with a heart."
+      },
+      {
+        "text": "真的吗？太好了！那我今天就早走了。",
+        "score": 0.4,
+        "feedback": "Too eager. 秦经理 offered a privilege, not a holiday. Jumping on it immediately looks like you've been watching the clock."
+      },
+      {
+        "text": "不用了，秦经理，我把手头的事做完再走。",
+        "score": 0.8,
+        "feedback": "Ritual refusal of a benefit shows dedication. 秦经理 will appreciate it, though she might insist. Either way, you look good."
+      },
+      {
+        "text": "秦经理，这个规定我怎么没听说过？",
+        "score": 0.3,
+        "feedback": "Questioning the rule misses the point entirely. She's being kind to you through the language of policy. Don't audit her generosity."
+      }
+    ]
+  },
+  {
+    "situation": "You're rushing to catch a bus. 老白 stops you and asks: \u201c你说，人活着到底是为了什么？\u201d (What do you think \u2014 what are people really living for?)",
+    "situation_zh": "你赶着去坐公交车，老白拦住你问\u201c你说，人活着到底是为了什么？\u201d",
+    "options": [
+      {
+        "text": "老白，这个问题太大了，等我回来慢慢聊。我先赶车！",
+        "score": 1.0,
+        "feedback": "Respects the question's weight (太大了) while creating a clean exit. The promise to return flatters 老白 without committing to philosophy at a bus stop."
+      },
+      {
+        "text": "别想那么多了，走吧。",
+        "score": 0.3,
+        "feedback": "Dismissing 老白's question is dismissing 老白. He'll let you go but he'll remember the brush-off."
+      },
+      {
+        "text": "为了赶公交车吧！哈哈。回头聊！",
+        "score": 0.8,
+        "feedback": "Humor that links the existential to the immediate. 老白 might actually appreciate the irony. Quick and warm."
+      },
+      {
+        "text": "我觉得……就是为了开心吧。",
+        "score": 0.5,
+        "feedback": "Engaging with the question when you need to leave means you'll miss the bus AND give a shallow answer. 老白 deserves better, and so does your schedule."
+      }
+    ]
+  },
+  {
+    "situation": "罗老师 stands up at the end of class, gestures broadly, and declares: \u201c今天这篇作文，是我教书二十年来见过最有灵魂的！\u201d (This essay is the most soulful I've seen in twenty years of teaching!) He's talking about your 200-word homework.",
+    "situation_zh": "罗老师站起来，大手一挥说\u201c今天这篇作文，是我教书二十年来见过最有灵魂的！\u201d他说的是你两百字的作业。",
+    "options": [
+      {
+        "text": "罗老师过奖了，还有很多不足的地方。",
+        "score": 1.0,
+        "feedback": "Classic deflection that respects his praise without buying into the exaggeration. 过奖 is the right register for a teacher, and naming your own shortcomings shows humility."
+      },
+      {
+        "text": "谢谢罗老师的鼓励，我会继续努力。",
+        "score": 0.9,
+        "feedback": "Reframing his superlative as 鼓励 (encouragement) gently scales it down. 继续努力 is the eternal student pledge. Very safe, very good."
+      },
+      {
+        "text": "哈哈，罗老师，您太夸张了吧。",
+        "score": 0.5,
+        "feedback": "Calling out his theatricality directly. It's honest and he might even laugh, but telling a teacher he's exaggerating risks making him feel silly."
+      },
+      {
+        "text": "真的吗？那我太厉害了！",
+        "score": 0.2,
+        "feedback": "Accepting the over-the-top praise at face value makes you look either naive or arrogant. Neither is a good look in a Chinese classroom."
       }
     ]
   }

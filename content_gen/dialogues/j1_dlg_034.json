@@ -1,0 +1,87 @@
+{
+    "title": "Stars from the Balcony",
+    "title_zh": "阳台上看星星",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "Late at night, you step onto your balcony. Your neighbor is also on theirs, looking up at the sky.",
+        "setup_zh": "很晚了，你走到阳台上。你的邻居也在阳台上，看着天空。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天晚上的星星好多啊。你也看到了吗？",
+                "text_pinyin": "Jīntiān wǎnshang de xīngxing hǎo duō a. Nǐ yě kàn dào le ma?",
+                "text_en": "There are so many stars tonight. Can you see them too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your observation.",
+                "options": [
+                    {
+                        "text_zh": "看到了！好漂亮。平时看不到这么多。",
+                        "text_pinyin": "Kàn dào le! Hǎo piàoliang. Píngshí kàn bú dào zhème duō.",
+                        "text_en": "I see them! So beautiful. Usually you can't see this many.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to the rare starry night with wonder -- both of you noticed something special at the same time."
+                    },
+                    {
+                        "text_zh": "是啊，很漂亮。",
+                        "text_pinyin": "Shì a, hěn piàoliang.",
+                        "text_en": "Yes, very beautiful.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees but doesn't share the sense of rarity -- she pointed out how many there are tonight specifically."
+                    },
+                    {
+                        "text_zh": "你也没睡觉吗？",
+                        "text_pinyin": "Nǐ yě méi shuìjiào ma?",
+                        "text_en": "You can't sleep either?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She's excited about the stars and you assumed she's up because of insomnia -- reframes a beautiful moment as a problem."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊。我小时候在老家，每天晚上都能看到。在城市里很难看到。",
+                "text_pinyin": "Shì a. Wǒ xiǎo shíhou zài lǎojiā, měi tiān wǎnshang dōu néng kàn dào. Zài chéngshì lǐ hěn nán kàn dào.",
+                "text_en": "Yes. When I was a child in my hometown, I could see them every night. In the city it's hard to see them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to their memory.",
+                "options": [
+                    {
+                        "text_zh": "你的老家一定很美。今晚很特别。",
+                        "text_pinyin": "Nǐ de lǎojiā yīdìng hěn měi. Jīn wǎn hěn tèbié.",
+                        "text_en": "Your hometown must be beautiful. Tonight is special.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Honors her memory of home and brings the conversation back to this moment you're sharing together."
+                    },
+                    {
+                        "text_zh": "在城市里确实很难看到。",
+                        "text_pinyin": "Zài chéngshì lǐ quèshí hěn nán kàn dào.",
+                        "text_en": "It really is hard to see them in the city.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees with her point but doesn't respond to the personal memory she shared about her hometown."
+                    },
+                    {
+                        "text_zh": "你老家在哪里？",
+                        "text_pinyin": "Nǐ lǎojiā zài nǎlǐ?",
+                        "text_en": "Where's your hometown?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She shared a tender childhood memory about stars at home, and you asked for the location -- a factual question when she was being emotional."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Light pollution in Chinese cities makes starry nights rare. When the stars do appear, they stir nostalgia for rural hometowns (老家) where the sky was always clear. These balcony conversations between neighbors are fleeting but meaningful."
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "The Night Market Lanterns",
+  "title_zh": "夜市的灯笼",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're strolling through a small night market. A noodle seller waves at you from behind his steaming pot.",
+    "setup_zh": "你在一个小夜市散步。一个卖面条的大叔在冒着蒸汽的锅后面朝你招手。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "来一碗面条吧！天冷了，吃碗热面最舒服了。",
+        "text_pinyin": "Lái yī wǎn miàntiáo ba! Tiān lěng le, chī wǎn rè miàn zuì shūfu le.",
+        "text_en": "Come have a bowl of noodles! It's getting cold — a hot bowl of noodles is the most comfortable thing."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his friendly invitation.",
+        "options": [
+          {
+            "text_zh": "好啊！闻起来好香。在这里吃面条，看着灯笼，感觉很温暖。",
+            "text_pinyin": "Hǎo a! Wén qǐlái hǎo xiāng. Zài zhèlǐ chī miàntiáo, kàn zhe dēnglong, gǎnjué hěn wēnnuǎn.",
+            "text_en": "Sure! It smells wonderful. Eating noodles here, looking at the lanterns — it feels so warm.",
+            "score": 1.0,
+            "feedback": "Present and appreciative — embraces the night market atmosphere.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你的面条辣不辣？",
+            "text_pinyin": "Nǐ de miàntiáo là bú là?",
+            "text_en": "Are your noodles spicy?",
+            "score": 0.0,
+            "feedback": "A functional question that skips his warmth."
+          },
+          {
+            "text_zh": "好啊。你们的面条跟外面饭店的一样吗？",
+            "text_pinyin": "Hǎo a. Nǐmen de miàntiáo gēn wàimiàn fàndiàn de yīyàng ma?",
+            "text_en": "Sure. Are your noodles the same as at regular restaurants?",
+            "score": 0.0,
+            "feedback": "He stirs the pot a bit slower. He's been here twenty years — this isn't a chain restaurant."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我在这里卖面条卖了二十年了。以前夜市很大，现在小了很多。但是还是有人来，我就还在。",
+        "text_pinyin": "Wǒ zài zhèlǐ mài miàntiáo mài le èrshí nián le. Yǐqián yèshì hěn dà, xiànzài xiǎo le hěn duō. Dànshì háishi yǒu rén lái, wǒ jiù hái zài.",
+        "text_en": "I've been selling noodles here for twenty years. The night market used to be much bigger, but it's gotten smaller. As long as people come, I'm still here."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his quiet perseverance.",
+        "options": [
+          {
+            "text_zh": "二十年了，那这里一定有很多你的回忆。我觉得有你在，这个夜市就是温暖的。",
+            "text_pinyin": "Èrshí nián le, nà zhèlǐ yīdìng yǒu hěn duō nǐ de huíyì. Wǒ juéde yǒu nǐ zài, zhège yèshì jiù shì wēnnuǎn de.",
+            "text_en": "Twenty years — this place must be full of your memories. I think as long as you're here, this night market is warm.",
+            "score": 1.0,
+            "feedback": "Honors his decades of presence — he is the warmth of the market.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "为什么夜市变小了？",
+            "text_pinyin": "Wèishéme yèshì biàn xiǎo le?",
+            "text_en": "Why did the night market get smaller?",
+            "score": 0.0,
+            "feedback": "Investigates decline instead of honoring his staying."
+          },
+          {
+            "text_zh": "你想过换个工作吗？",
+            "text_pinyin": "Nǐ xiǎng guò huàn ge gōngzuò ma?",
+            "text_en": "Have you thought about changing jobs?",
+            "score": 0.0,
+            "feedback": "Suggests leaving when he's expressing commitment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Night markets (夜市) have been shrinking in many Chinese cities due to urban development, but loyal vendors remain. The phrase 还是有人来，我就还在 captures a quiet stubbornness and devotion that defines many small business owners who see their stalls as places of human connection, not just commerce."
+  }
+}

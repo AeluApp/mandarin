@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Explain you want to return a shirt because it's the wrong size.",
                 "options": [
-                    {"text_zh": "你好，我昨天买了这件衬衫，但是尺寸不对，我想退货。", "text_pinyin": "nǐ hǎo, wǒ zuótiān mǎi le zhè jiàn chènshān, dànshì chǐcùn bú duì, wǒ xiǎng tuìhuò.", "text_en": "Hi, I bought this shirt yesterday but the size is wrong, I'd like to return it.", "score": 1.0, "register": "neutral", "feedback": "Perfect — states when, what, why, and what you want. Complete and polite."},
-                    {"text_zh": "这个尺寸不对，可以退吗？", "text_pinyin": "zhè ge chǐcùn bú duì, kěyǐ tuì ma?", "text_en": "The size is wrong, can I return it?", "score": 0.8, "register": "casual", "feedback": "Gets the point across. Adding when you bought it helps."},
-                    {"text_zh": "我要退这个。", "text_pinyin": "wǒ yào tuì zhè ge.", "text_en": "I want to return this.", "score": 0.5, "register": "blunt", "feedback": "Too abrupt. Explaining the reason makes the interaction smoother."}
+                    {
+                        "text_zh": "我想换一些人民币，请问汇率是多少？",
+                        "text_pinyin": "wǒ xiǎng huàn yīxiē rénmínbì, qǐngwèn huìlǜ shì duōshao?",
+                        "text_en": "I'd like to exchange some RMB. What's the exchange rate?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain you want to return a shirt because it's the wrong size, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我昨天买了这件衬衫，但是尺寸不对，我想退货。",
+                        "text_pinyin": "nǐ hǎo, wǒ zuótiān mǎi le zhè jiàn chènshān, dànshì chǐcùn bú duì, wǒ xiǎng tuìhuò.",
+                        "text_en": "Hi, I bought this shirt yesterday but the size is wrong, I'd like to return it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — states when, what, why, and what you want. Complete and polite."
+                    },
+                    {
+                        "text_zh": "检查结果怎么样？严重吗？",
+                        "text_pinyin": "jiǎnchá jiéguǒ zěnmeyàng? yánzhòng ma?",
+                        "text_en": "How are the results? Is it serious?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain you want to return a shirt because it's the wrong size, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Say yes, you have the receipt.",
                 "options": [
-                    {"text_zh": "有的，在这里。", "text_pinyin": "yǒu de, zài zhèlǐ.", "text_en": "Yes, here it is.", "score": 1.0, "register": "neutral", "feedback": "Natural. 有的 is warmer than just 有."},
-                    {"text_zh": "有。给你。", "text_pinyin": "yǒu. gěi nǐ.", "text_en": "Yes. Here you go.", "score": 0.8, "register": "casual", "feedback": "Fine, but 在这里 or 给您 is more polished in a store."},
-                    {"text_zh": "嗯。", "text_pinyin": "ēn.", "text_en": "Mm.", "score": 0.4, "register": "minimal", "feedback": "They need to see it! Hand it over with words."}
+                    {
+                        "text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。",
+                        "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.",
+                        "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say yes, you have the receipt, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我想换一些人民币，请问汇率是多少？",
+                        "text_pinyin": "wǒ xiǎng huàn yīxiē rénmínbì, qǐngwèn huìlǜ shì duōshao?",
+                        "text_en": "I'd like to exchange some RMB. What's the exchange rate?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say yes, you have the receipt, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "有的，在这里。",
+                        "text_pinyin": "yǒu de, zài zhèlǐ.",
+                        "text_en": "Yes, here it is.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Natural. 有的 is warmer than just 有."
+                    }
                 ]
             },
             {
@@ -49,9 +87,28 @@
                 "speaker": "player",
                 "prompt_en": "Ask for an exchange to a larger size.",
                 "options": [
-                    {"text_zh": "可以换大一号的吗？", "text_pinyin": "kěyǐ huàn dà yī hào de ma?", "text_en": "Can I exchange for one size bigger?", "score": 1.0, "register": "neutral", "feedback": "Clear and natural. 大一号 means 'one size bigger'."},
-                    {"text_zh": "换大的吧。", "text_pinyin": "huàn dà de ba.", "text_en": "Exchange for a bigger one.", "score": 0.8, "register": "casual", "feedback": "Understood, but 大一号 is more precise."},
-                    {"text_zh": "我想退款。", "text_pinyin": "wǒ xiǎng tuìkuǎn.", "text_en": "I'd like a refund.", "score": 0.7, "register": "neutral", "feedback": "Grammatically fine, but you wanted to exchange, not refund!"}
+                    {
+                        "text_zh": "可以换大一号的吗？",
+                        "text_pinyin": "kěyǐ huàn dà yī hào de ma?",
+                        "text_en": "Can I exchange for one size bigger?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and natural. 大一号 means 'one size bigger'."
+                    },
+                    {
+                        "text_zh": "你好，我叫杰森，我大学学的是市场营销，毕业后有三年工作经验。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiào jiésēn, wǒ dàxué xué de shì shìchǎng yíngxiāo, bìyè hòu yǒu sān nián gōngzuò jīngyàn.",
+                        "text_en": "Hello, my name is Jason, I studied marketing in university, and I have three years of work experience after graduation.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask for an exchange to a larger size, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.",
+                        "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask for an exchange to a larger size, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

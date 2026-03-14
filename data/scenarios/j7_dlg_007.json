@@ -1,0 +1,151 @@
+{
+  "title": "The Courtyard's Last Ginkgo",
+  "title_zh": "院子里最后的银杏",
+  "hsk_level": 7,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.7,
+  "tree": {
+    "setup": "You're visiting a courtyard house (四合院) that's about to be converted into a boutique hotel. The last remaining resident, Grandma Wen, is sitting under a centuries-old ginkgo tree. She's been offered relocation money but hasn't left. The tree's golden leaves are falling around her.",
+    "setup_zh": "你正在参观一座即将被改造成精品酒店的四合院。最后一位留下来的居民温奶奶正坐在一棵百年银杏树下。她已经被提供了搬迁费，但没有搬走。金黄的银杏叶正纷纷飘落在她周围。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你是来看房子的？还是来看树的？大多数人来看房子，看完就走了。但这棵银杏比这院子里任何一面墙都老。我爷爷的爷爷种的——五代人了。他们说改造以后会保留这棵树，但我知道，一棵树如果周围的一切都变了，它虽然还站着，其实已经不是原来那棵树了。",
+        "text_pinyin": "Nǐ shì lái kàn fángzi de? Háishì lái kàn shù de? Dàduōshù rén lái kàn fángzi, kàn wán jiù zǒu le. Dàn zhè kē yínxìng bǐ zhè yuànzi lǐ rènhé yī miàn qiáng dōu lǎo. Wǒ yéye de yéye zhǒng de — wǔ dài rén le. Tāmen shuō gǎizào yǐhòu huì bǎoliú zhè kē shù, dàn wǒ zhīdào, yī kē shù rúguǒ zhōuwéi de yīqiè dōu biàn le, tā suīrán hái zhàn zhe, qíshí yǐjīng bú shì yuánlái nà kē shù le.",
+        "text_en": "Are you here to see the house? Or the tree? Most people come for the house, take a look and leave. But this ginkgo is older than any wall in this courtyard. My grandfather's grandfather planted it — five generations. They say they'll keep the tree after the renovation, but I know: if everything around a tree changes, even though it's still standing, it's no longer the same tree."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to her?",
+        "options": [
+          {
+            "text_zh": "如果院子变成了酒店大堂，这棵树就从「家里的树」变成了「装饰品」。物理上它没变，但它的意思完全变了。",
+            "text_pinyin": "Rúguǒ yuànzi biàn chéng le jiǔdiàn dàtáng, zhè kē shù jiù cóng 'jiā lǐ de shù' biàn chéng le 'zhuāngshìpǐn'. Wùlǐ shàng tā méi biàn, dàn tā de yìsi wánquán biàn le.",
+            "text_en": "If the courtyard becomes a hotel lobby, this tree goes from 'the family tree' to 'a decoration.' Physically it hasn't changed, but its meaning has completely shifted.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "温奶奶停顿了一下，轻声重复那个词：「装饰品。」她点点头，像是终于听到了一个说得出口的说法。"
+          },
+          {
+            "text_zh": "银杏树很值钱的，你可以要求他们多赔你一些。",
+            "text_pinyin": "Yínxìng shù hěn zhíqián de, nǐ kěyǐ yāoqiú tāmen duō péi nǐ yīxiē.",
+            "text_en": "Ginkgo trees are quite valuable — you could demand more compensation.",
+            "score": 0.0,
+            "feedback": "温奶奶抬起眼睛看了你一会儿，没有说话，又低头看树叶。"
+          },
+          {
+            "text_zh": "也许保留树是个好的开始，以后慢慢会更好的。",
+            "text_pinyin": "Yěxǔ bǎoliú shù shì ge hǎo de kāishǐ, yǐhòu mànmàn huì gèng hǎo de.",
+            "text_en": "Maybe keeping the tree is a good start — things might improve gradually.",
+            "score": 0.0,
+            "feedback": "温奶奶淡淡地笑了笑：「他们也是这么跟我说的。」"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "装饰品——就是这个词。以后游客会在树下拍照，发朋友圈说「好有文化氛围」，但他们不知道这棵树下面埋过我奶奶的胎盘——以前的人有这个习俗，把孩子的胎盘埋在家里的树下，意思是根在这里。",
+        "text_pinyin": "Zhuāngshìpǐn — jiù shì zhège cí. Yǐhòu yóukè huì zài shù xià pāizhào, fā péngyǒu quān shuō 'hǎo yǒu wénhuà fēnwéi', dàn tāmen bù zhīdào zhè kē shù xiàmiàn mái guò wǒ nǎinai de tāipán — yǐqián de rén yǒu zhège xísú, bǎ háizi de tāipán mái zài jiā lǐ de shù xià, yìsi shì gēn zài zhèlǐ.",
+        "text_en": "Decoration — that's exactly the word. In the future tourists will take photos under the tree, post on WeChat Moments saying 'such cultural atmosphere,' but they won't know that my grandmother's placenta is buried under this tree. People used to have that custom — burying a child's placenta under the family tree, meaning one's roots are here."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to her?",
+        "options": [
+          {
+            "text_zh": "游客看到的是一棵漂亮的老树，但您看到的是完全不同的东西。这种深度，改造之后是留不下来的。",
+            "text_pinyin": "Yóukè kàn dào de shì yī kē piàoliang de lǎo shù, dàn nín kàn dào de shì wánquán bùtóng de dōngxī. Zhè zhǒng shēndù, gǎizào zhīhòu shì liú bù xiàlái de.",
+            "text_en": "Tourists see a beautiful old tree. But what you see is something completely different. That depth can't survive the renovation.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "温奶奶把手放到树根上，轻轻摩挲了一下，没有说话。"
+          },
+          {
+            "text_zh": "现在还有人埋胎盘吗？这个习俗挺有意思的。",
+            "text_pinyin": "Xiànzài hái yǒu rén mái tāipán ma? Zhège xísú tǐng yǒu yìsi de.",
+            "text_en": "Do people still bury placentas now? That's quite an interesting custom.",
+            "score": 0.0,
+            "feedback": "温奶奶停下来，带着一点困惑看着你：「你觉得……有意思？」"
+          },
+          {
+            "text_zh": "您可以把这些故事记录下来，留给后代看。",
+            "text_pinyin": "Nín kěyǐ bǎ zhèxiē gùshì jìlù xiàlái, liú gěi hòudài kàn.",
+            "text_en": "You could write these stories down and leave them for future generations.",
+            "score": 0.0,
+            "feedback": "温奶奶苦笑了一下：「记录下来，然后呢？放在酒店的宣传册里？」"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你说到了关键——不可见的层次。我跟开发商谈过很多次，他们总是说「我们尊重历史」，但他们尊重的是历史的外壳，不是历史的内容。他们会保留灰砖、木梁、甚至门上的对联，但那只是表演。没有人住在里面，历史就是空的。",
+        "text_pinyin": "Nǐ shuō dào le guānjiàn — bùkě jiàn de céngcì. Wǒ gēn kāifāshāng tán guò hěn duō cì, tāmen zǒng shì shuō 'wǒmen zūnzhòng lìshǐ', dàn tāmen zūnzhòng de shì lìshǐ de wàiké, bú shì lìshǐ de nèiróng. Tāmen huì bǎoliú huī zhuān, mù liáng, shènzhì mén shàng de duìlián, dàn nà zhǐ shì biǎoyǎn. Méiyǒu rén zhù zài lǐmiàn, lìshǐ jiù shì kōng de.",
+        "text_en": "You've hit the key point — invisible layers. I've talked to the developer many times. They always say 'we respect history,' but what they respect is history's shell, not its content. They'll preserve the gray bricks, wooden beams, even the couplets on the door, but that's just performance. Without people living inside, history is empty."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to her?",
+        "options": [
+          {
+            "text_zh": "为了「保护」这个院子，第一步就是把住在里面的人赶走。这种「保护」，其实是一种更精致的破坏。",
+            "text_pinyin": "Wèile 'bǎohù' zhège yuànzi, dì yī bù jiù shì bǎ zhù zài lǐmiàn de rén gǎn zǒu. Zhè zhǒng 'bǎohù', qíshí shì yī zhǒng gèng jīngzhì de pòhuài.",
+            "text_en": "To 'protect' this courtyard, the first step is to drive out the people who live in it. That kind of 'protection' is really a more refined form of destruction.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "温奶奶靠着树干，闭上眼睛：「精致的破坏。说得太准了。」"
+          },
+          {
+            "text_zh": "但是老房子确实不安全啊，有些结构已经很危险了。",
+            "text_pinyin": "Dànshì lǎo fángzi quèshí bù ānquán a, yǒuxiē jiégòu yǐjīng hěn wēixiǎn le.",
+            "text_en": "But old houses really aren't safe — some structures are already quite dangerous.",
+            "score": 0.0,
+            "feedback": "温奶奶睁开眼，平静地说：「开发商也是这么说的。」"
+          },
+          {
+            "text_zh": "也许可以在酒店里设一个展览，专门介绍住过的家庭的历史。",
+            "text_pinyin": "Yěxǔ kěyǐ zài jiǔdiàn lǐ shè yīge zhǎnlǎn, zhuānmén jièshào zhù guò de jiātíng de lìshǐ.",
+            "text_en": "Maybe they could set up an exhibit inside the hotel specifically about the families who lived here.",
+            "score": 0.0,
+            "feedback": "温奶奶轻轻摇摇头：「展览。把我们变成展品。」"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "精致的破坏……说得太准了。好了，不说这些了。你来，我给你看一样东西。这棵树的树干上有个疤——是我小时候爬树摔下来，磕到树皮留下的。我的疤早就好了，但树的疤还在。有时候我觉得这棵树比我更忠实地记住了我的童年。",
+        "text_pinyin": "Jīngzhì de pòhuài…… shuō de tài zhǔn le. Hǎo le, bù shuō zhèxiē le. Nǐ lái, wǒ gěi nǐ kàn yī yàng dōngxī. Zhè kē shù de shùgàn shàng yǒu ge bā — shì wǒ xiǎo shíhòu pá shù shuāi xiàlái, kē dào shùpí liú xià de. Wǒ de bā zǎo jiù hǎo le, dàn shù de bā hái zài. Yǒu shíhòu wǒ juéde zhè kē shù bǐ wǒ gèng zhōngshí de jì zhù le wǒ de tóngnián.",
+        "text_en": "Refined destruction… that's exactly right. Alright, enough of that. Come, let me show you something. There's a scar on this tree trunk — from when I fell climbing as a child and hit the bark. My scar healed long ago, but the tree's scar is still there. Sometimes I feel this tree remembers my childhood more faithfully than I do."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to her?",
+        "options": [
+          {
+            "text_zh": "人会愈合，会忘记，但树把每一个印记都保住了。也许这就是为什么我们需要树、需要老地方——我们把自己的记忆寄放在周围，因为知道自己终究会忘。",
+            "text_pinyin": "Rén huì yùhé, huì wàngjì, dàn shù bǎ měi yīge yìnjì dōu bǎo zhù le. Yěxǔ zhè jiù shì wèishéme wǒmen xūyào shù, xūyào lǎo dìfang — wǒmen bǎ zìjǐ de jìyì jìfàng zài zhōuwéi, yīnwèi zhīdào zìjǐ zhōngjiū huì wàng.",
+            "text_en": "People heal and forget, but the tree keeps every mark. Maybe that's why we need trees, why we need old places — we deposit our memories in our surroundings, knowing we ourselves will eventually forget.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "温奶奶把手指放在那个疤上，轻声说：「是。它替我记着。」"
+          },
+          {
+            "text_zh": "小时候爬树很危险的，现在小孩都不爬了。",
+            "text_pinyin": "Xiǎo shíhòu pá shù hěn wēixiǎn de, xiànzài xiǎohái dōu bù pá le.",
+            "text_en": "Climbing trees as a kid was dangerous — children don't really do that anymore.",
+            "score": 0.0,
+            "feedback": "温奶奶收回手，有些茫然地点点头：「是，不爬了。」"
+          },
+          {
+            "text_zh": "银杏树的叶子秋天真好看，可以做书签。",
+            "text_pinyin": "Yínxìng shù de yèzi qiūtiān zhēn hǎokàn, kěyǐ zuò shūqiān.",
+            "text_en": "Ginkgo leaves are really beautiful in autumn — you could make bookmarks with them.",
+            "score": 0.0,
+            "feedback": "温奶奶低头看了看脚边的落叶，没有回应。"
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The practice of burying a newborn's placenta (胎盘) under a family tree was common in traditional Chinese culture, symbolizing that the child's roots (根) were anchored to the family home. The ginkgo tree (银杏) holds special significance in Chinese culture as one of the oldest living tree species — a 'living fossil' that can survive for over a thousand years. The conversion of siheyuan courtyard houses into boutique hotels represents one of the most visible tensions in Beijing's urban transformation."
+  }
+}

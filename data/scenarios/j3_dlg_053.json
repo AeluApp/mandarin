@@ -1,0 +1,81 @@
+{
+    "title": "Learning a New Word",
+    "title_zh": "学一个新词",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're reading a Chinese menu at a restaurant and encounter a word you don't know. The waiter notices your confusion and kindly helps.",
+        "setup_zh": "你在饭馆看中文菜单，遇到一个不认识的词。服务员注意到你的困惑，友好地帮忙。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Ask the waiter about the word.",
+                "options": [
+                    {
+                        "text_zh": "不好意思，请问这个菜是什么？「干锅」是什么意思？",
+                        "text_pinyin": "Bù hǎoyìsi, qǐngwèn zhège cài shì shénme? 'Gānguō' shì shénme yìsi?",
+                        "text_en": "Excuse me, what is this dish? What does 'dry pot' mean?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Polite and direct — the best way to learn."
+                    },
+                    {
+                        "text_zh": "这个菜多少钱？",
+                        "text_pinyin": "Zhège cài duōshǎo qián?",
+                        "text_en": "How much is this dish?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Asks price without understanding the dish."
+                    },
+                    {
+                        "text_zh": "算了，我点别的。",
+                        "text_pinyin": "Suàn le, wǒ diǎn bié de.",
+                        "text_en": "Never mind, I'll order something else.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Gives up learning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "干锅就是没有汤的炒菜，用高温炒出来的。我们的干锅土豆片特别受欢迎，又香又脆。你要不要试试？",
+                "text_pinyin": "Gānguō jiù shì méiyǒu tāng de chǎocài, yòng gāowēn chǎo chūlái de. Wǒmen de gānguō tǔdòu piàn tèbié shòu huānyíng, yòu xiāng yòu cuì. Nǐ yào bú yào shìshi?",
+                "text_en": "Dry pot is a stir-fry without broth — cooked at high heat. Our dry pot potato slices are very popular — fragrant and crispy. Want to try?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the explanation.",
+                "options": [
+                    {
+                        "text_zh": "原来是这样！来一份干锅土豆片吧。谢谢你，我又学了一个新词。",
+                        "text_pinyin": "Yuánlái shì zhèyàng! Lái yī fèn gānguō tǔdòu piàn ba. Xièxie nǐ, wǒ yòu xué le yī ge xīn cí.",
+                        "text_en": "Oh I see! I'll have the dry pot potato slices. Thanks — learned a new word.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Appreciative and celebrates learning in daily life."
+                    },
+                    {
+                        "text_zh": "好的，来一份。",
+                        "text_pinyin": "Hǎo de, lái yī fèn.",
+                        "text_en": "Okay, I'll have one.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Orders but doesn't acknowledge the learning."
+                    },
+                    {
+                        "text_zh": "不辣吧？我不吃辣。",
+                        "text_pinyin": "Bú là ba? Wǒ bù chī là.",
+                        "text_en": "It's not spicy, right? I don't eat spicy food.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but ignores the vocabulary moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Learning Chinese vocabulary through real-life situations — like reading menus — is one of the most natural and effective methods. Restaurant staff in China are usually patient and happy to explain dishes. 干锅 (dry pot) is a popular Hunan-Sichuan cooking style."
+    },
+    "hsk_level": 3
+}

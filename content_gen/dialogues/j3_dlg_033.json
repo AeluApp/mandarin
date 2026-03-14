@@ -1,0 +1,87 @@
+{
+  "title": "Choosing a Birthday Gift",
+  "title_zh": "选生日礼物",
+  "register": "casual",
+  "scenario_type": "daily_life",
+  "difficulty": 2,
+  "tree": {
+    "setup": "You and your friend Xiao Wei are in a small shop, looking for a birthday gift for your mutual friend Xiao Ting.",
+    "setup_zh": "你和朋友小伟在一家小店里，给你们的好朋友小婷挑生日礼物。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "小婷的生日就是下周了！你觉得送什么好？她好像最近喜欢画画。",
+        "text_pinyin": "Xiǎo Tíng de shēngrì jiù shì xià zhōu le! Nǐ juéde sòng shénme hǎo? Tā hǎoxiàng zuìjìn xǐhuan huàhuà.",
+        "text_en": "Xiao Ting's birthday is next week! What do you think we should get her? She's been into painting lately."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Suggest a gift.",
+        "options": [
+          {
+            "text_zh": "那我们送她一套水彩画笔吧？既实用又能让她开心。",
+            "text_pinyin": "Nà wǒmen sòng tā yī tào shuǐcǎi huàbǐ ba? Jì shíyòng yòu néng ràng tā kāixīn.",
+            "text_en": "How about a set of watercolor brushes? Both practical and something she'd enjoy.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "— connects the gift to her interests."
+          },
+          {
+            "text_zh": "送个红包最简单了。",
+            "text_pinyin": "Sòng ge hóngbāo zuì jiǎndān le.",
+            "text_en": "A red envelope is the simplest.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Easy but lacks personal thought."
+          },
+          {
+            "text_zh": "你决定吧，我不太会选礼物。",
+            "text_pinyin": "Nǐ juédìng ba, wǒ bú tài huì xuǎn lǐwù.",
+            "text_en": "You decide, I'm not good at choosing gifts.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Defers entirely."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "水彩画笔好主意！你看这套怎么样？颜色好多，而且质量看起来不错。我们再买一个漂亮的笔记本配着送？",
+        "text_pinyin": "Shuǐcǎi huàbǐ hǎo zhǔyi! Nǐ kàn zhè tào zěnmeyàng? Yánsè hǎo duō, érqiě zhìliàng kàn qǐlái búcuò. Wǒmen zài mǎi yī ge piàoliang de bǐjìběn pèi zhe sòng?",
+        "text_en": "Watercolor brushes, great idea! How about this set? Lots of colors, and the quality looks good. Should we also get a nice notebook to go with it?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the combination idea.",
+        "options": [
+          {
+            "text_zh": "完美！画笔加笔记本，她可以边画边写日记。我们再写一张卡片吧。",
+            "text_pinyin": "Wánměi! Huàbǐ jiā bǐjìběn, tā kěyǐ biān huà biān xiě rìjì. Wǒmen zài xiě yī zhāng kǎpiàn ba.",
+            "text_en": "Perfect! Brushes plus notebook — she can paint and journal at the same time. Let's also write a card.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "Adds personal touch with a handwritten card — thoughtful."
+          },
+          {
+            "text_zh": "好，就这些吧。",
+            "text_pinyin": "Hǎo, jiù zhèxiē ba.",
+            "text_en": "Okay, just these.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Wraps up but skips the personal element."
+          },
+          {
+            "text_zh": "会不会太多了？",
+            "text_pinyin": "Huì bú huì tài duō le?",
+            "text_en": "Isn't that too much?",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Worries about cost for a friend's birthday."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Choosing gifts that match a friend's hobbies shows genuine attention and care. In Chinese friendship culture, handwritten cards (贺卡) add a personal touch that money can't buy. Group gifting among friends is common and strengthens bonds."
+  },
+  "hsk_level": 3
+}

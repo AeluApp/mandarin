@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Share your opinion on why young people don't want to marry.",
                 "options": [
-                    {"text_zh": "我觉得原因很多。经济压力是一方面，另外很多人的观点也变了，不觉得结婚是必须的。", "text_pinyin": "wǒ juéde yuányīn hěn duō. jīngjì yālì shì yī fāngmiàn, lìngwài hěn duō rén de guāndiǎn yě biàn le, bù juéde jiéhūn shì bìxū de.", "text_en": "I think there are many reasons. Economic pressure is one aspect, and also many people's views have changed — they don't feel marriage is necessary.", "score": 1.0, "register": "informal", "feedback": "Strong analysis — uses 原因, 观点 naturally and gives a structured two-part answer."},
-                    {"text_zh": "可能是因为现在生活压力太大了吧。", "text_pinyin": "kěnéng shì yīnwèi xiànzài shēnghuó yālì tài dà le ba.", "text_en": "Maybe it's because life pressure is too great nowadays.", "score": 0.6, "register": "informal", "feedback": "Reasonable but only one 原因. Try to 分析 from multiple angles to deepen the discussion."},
-                    {"text_zh": "我也不知道，可能他们不喜欢吧。", "text_pinyin": "wǒ yě bù zhīdào, kěnéng tāmen bù xǐhuān ba.", "text_en": "I don't know either, maybe they just don't like it.", "score": 0.3, "register": "casual", "feedback": "Too vague — a news discussion is a chance to practice expressing 观点. Try to give a specific 原因."}
+                    {
+                        "text_zh": "我的优点是做事认真负责，善于和同事合作。我的缺点是有时候太注重细节，但我一直在努力改进。",
+                        "text_pinyin": "wǒ de yōudiǎn shì zuòshì rènzhēn fùzé, shànyú hé tóngshì hézuò. wǒ de quēdiǎn shì yǒu shíhou tài zhùzhòng xìjié, dàn wǒ yīzhí zài nǔlì gǎijìn.",
+                        "text_en": "My strength is being conscientious and responsible, and good at collaborating with colleagues. My weakness is sometimes paying too much attention to details, but I've been working to improve.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your opinion on why young people don't want to marry, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我觉得原因很多。经济压力是一方面，另外很多人的观点也变了，不觉得结婚是必须的。",
+                        "text_pinyin": "wǒ juéde yuányīn hěn duō. jīngjì yālì shì yī fāngmiàn, lìngwài hěn duō rén de guāndiǎn yě biàn le, bù juéde jiéhūn shì bìxū de.",
+                        "text_en": "I think there are many reasons. Economic pressure is one aspect, and also many people's views have changed — they don't feel marriage is necessary.",
+                        "score": 1.0,
+                        "register": "informal",
+                        "feedback": "Strong analysis — uses 原因, 观点 naturally and gives a structured two-part answer."
+                    },
+                    {
+                        "text_zh": "太好了，谢谢张叔。那我下周过来签合同。麻烦您把涨租和换热水器的条件都写在合同里，这样双方都放心。",
+                        "text_pinyin": "tài hǎo le, xièxie zhāng shū. nà wǒ xià zhōu guòlái qiān hétong. máfan nín bǎ zhǎng zū hé huàn rèshuǐqì de tiáojiàn dōu xiě zài hétong lǐ, zhèyàng shuāngfāng dōu fàngxīn.",
+                        "text_en": "Great, thanks Uncle Zhang. I'll come sign the lease next week. Please include both the rent increase and the water heater replacement in the contract, so both sides are covered.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your opinion on why young people don't want to marry, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Discuss the societal impact.",
                 "options": [
-                    {"text_zh": "影响肯定很大。比如人口可能会减少，对经济也有影响。但是每个人有自己的选择，我们应该理解。", "text_pinyin": "yǐngxiǎng kěndìng hěn dà. bǐrú rénkǒu kěnéng huì jiǎnshǎo, duì jīngjì yě yǒu yǐngxiǎng. dànshì měi gè rén yǒu zìjǐ de xuǎnzé, wǒmen yīnggāi lǐjiě.", "text_en": "The impact is certainly significant. For example, the population may decrease, which also affects the economy. But everyone has their own choice, and we should be understanding.", "score": 1.0, "register": "informal", "feedback": "Excellent — uses 影响 in context, gives concrete examples, and shows balanced thinking."},
-                    {"text_zh": "我觉得影响不大，每个人都可以自己决定。", "text_pinyin": "wǒ juéde yǐngxiǎng bú dà, měi gè rén dōu kěyǐ zìjǐ juédìng.", "text_en": "I don't think the impact is big, everyone can decide for themselves.", "score": 0.6, "register": "informal", "feedback": "Valid perspective but could develop the 分析 further. What specific effects might there be?"},
-                    {"text_zh": "这个问题太复杂了，我说不清楚。", "text_pinyin": "zhège wèntí tài fùzá le, wǒ shuō bù qīngchǔ.", "text_en": "This question is too complicated, I can't explain it clearly.", "score": 0.3, "register": "casual", "feedback": "Avoiding the question misses a chance to practice 分析 skills. Even a simple 观点 is better than none."}
+                    {
+                        "text_zh": "我觉得每人预算五千左右比较合理。为了省钱，我们可以坐火车去，虽然时间长一点，但能省不少机票钱。至于人多的问题，我们可以避开最热门的景点，去一些小众的地方。",
+                        "text_pinyin": "wǒ juéde měi rén yùsuàn wǔ qiān zuǒyòu bǐjiào hélǐ. wèile shěng qián, wǒmen kěyǐ zuò huǒchē qù, suīrán shíjiān cháng yīdiǎn, dàn néng shěng bùshǎo jīpiào qián. zhìyú rén duō de wèntí, wǒmen kěyǐ bìkāi zuì rèmén de jǐngdiǎn, qù yīxiē xiǎozhòng de dìfāng.",
+                        "text_en": "I think a budget of about 5,000 per person is reasonable. To save money, we could take the train -- it takes longer, but we'd save a lot on airfare. As for the crowds, we can avoid the most popular attractions and visit some lesser-known places.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to discuss the societal impact, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我最近头疼、嗓子疼，还有一点发烧，已经好几天了。我应该挂内科还是耳鼻喉科？今天下午还有号吗？",
+                        "text_pinyin": "nǐ hǎo, wǒ zuìjìn tóuténg, sǎngzi téng, hái yǒu yīdiǎn fāshāo, yǐjīng hǎo jǐ tiān le. wǒ yīnggāi guà nèikē háishi ěrbíhóu kē? jīntiān xiàwǔ hái yǒu hào ma?",
+                        "text_en": "Hello, I've had a headache, sore throat, and slight fever for several days now. Should I register for internal medicine or ENT? Are there still slots available this afternoon?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to discuss the societal impact, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "影响肯定很大。比如人口可能会减少，对经济也有影响。但是每个人有自己的选择，我们应该理解。",
+                        "text_pinyin": "yǐngxiǎng kěndìng hěn dà. bǐrú rénkǒu kěnéng huì jiǎnshǎo, duì jīngjì yě yǒu yǐngxiǎng. dànshì měi gè rén yǒu zìjǐ de xuǎnzé, wǒmen yīnggāi lǐjiě.",
+                        "text_en": "The impact is certainly significant. For example, the population may decrease, which also affects the economy. But everyone has their own choice, and we should be understanding.",
+                        "score": 1.0,
+                        "register": "informal",
+                        "feedback": "Excellent — uses 影响 in context, gives concrete examples, and shows balanced thinking."
+                    }
                 ]
             }
         ],

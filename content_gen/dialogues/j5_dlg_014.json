@@ -1,0 +1,89 @@
+{
+  "title": "A Weekend with Nothing Planned",
+  "title_zh": "什么都不做的周末",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "It's Friday afternoon. Your friend Yiyi calls to ask about weekend plans. For once, neither of you has anything scheduled.",
+    "setup_zh": "周五下午。朋友一一打电话问你周末有什么安排。这一次，你们两个都没有计划。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "周末你有什么计划？我这次什么都没安排。一开始还有点慌，后来想了想，什么都不做好像也挺好的。",
+        "text_pinyin": "Zhōumò nǐ yǒu shénme jìhuà? Wǒ zhè cì shénme dōu méi ānpái. Yī kāishǐ hái yǒudiǎn huāng, hòulái xiǎng le xiǎng, shénme dōu bú zuò hǎoxiàng yě tǐng hǎo de.",
+        "text_en": "Any plans for the weekend? I've got nothing scheduled this time. At first I felt a bit panicked, but then I thought about it — doing nothing might actually be nice."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the idea of an unplanned weekend.",
+        "options": [
+          {
+            "text_zh": "什么都不做的周末才是真正的休息。我们平时连周末都排得满满的，好像不做点什么就对不起这两天假。其实有时候最需要的就是空白。",
+            "text_pinyin": "Shénme dōu bú zuò de zhōumò cái shì zhēnzhèng de xiūxi. Wǒmen píngshí lián zhōumò dōu pái de mǎn mǎn de, hǎoxiàng bú zuò diǎn shénme jiù duìbuqǐ zhè liǎng tiān jiǎ. Qíshí yǒu shíhou zuì xūyào de jiù shì kòngbái.",
+            "text_en": "A weekend with nothing to do is real rest. We usually pack even our weekends full, as if we'd be wasting those two days off. But sometimes what we need most is blank space.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Resonant and honest — names the guilt around unproductivity and reclaims it."
+          },
+          {
+            "text_zh": "那我们去逛街吧！好久没去购物了。",
+            "text_pinyin": "Nà wǒmen qù guàng jiē ba! Hǎo jiǔ méi qù gòuwù le.",
+            "text_en": "Then let's go shopping! It's been a while.",
+            "score": 0.0,
+            "feedback": "Immediately fills the empty space she's trying to appreciate."
+          },
+          {
+            "text_zh": "你可以打扫一下家里，做做家务。",
+            "text_pinyin": "Nǐ kěyǐ dǎsǎo yíxià jiālǐ, zuòzuo jiāwù.",
+            "text_en": "You could clean the house and do some chores.",
+            "score": 0.0,
+            "feedback": "Turns rest into productivity — misses the point."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "空白！对，就是空白。我上次什么都不做是什么时候？好像已经想不起来了。我有点期待明天早上可以自然醒，不设闹钟，醒了就躺着看看窗外。",
+        "text_pinyin": "Kòngbái! Duì, jiù shì kòngbái. Wǒ shàng cì shénme dōu bú zuò shì shénme shíhou? Hǎoxiàng yǐjīng xiǎng bù qǐlái le. Wǒ yǒudiǎn qīdài míngtiān zǎoshang kěyǐ zìrán xǐng, bú shè nàozhōng, xǐng le jiù tǎng zhe kànkan chuāng wài.",
+        "text_en": "Blank space! Yes, exactly. When was the last time I did nothing? I can't even remember. I'm a little excited about waking up naturally tomorrow, no alarm, just lying there looking out the window."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Appreciate the simple pleasures she's describing.",
+        "options": [
+          {
+            "text_zh": "自然醒，看看窗外——这些听起来很简单，但其实是很奢侈的事。我们太习惯被安排了，反而忘了最简单的快乐。希望明天你的窗外有好看的天空。",
+            "text_pinyin": "Zìrán xǐng, kànkan chuāng wài — zhèxiē tīng qǐlái hěn jiǎndān, dàn qíshí shì hěn shēchǐ de shì. Wǒmen tài xíguàn bèi ānpái le, fǎn'ér wàng le zuì jiǎndān de kuàilè. Xīwàng míngtiān nǐ de chuāng wài yǒu hǎokàn de tiānkōng.",
+            "text_en": "Waking up naturally, looking out the window — these sound simple, but they're actually luxuries. We're so used to being scheduled that we've forgotten the simplest joys. I hope tomorrow your window has a beautiful sky.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Gentle and true — elevates small moments to their deserved importance."
+          },
+          {
+            "text_zh": "你不会无聊吗？我一个人待着就会无聊。",
+            "text_pinyin": "Nǐ bú huì wúliáo ma? Wǒ yīge rén dāi zhe jiù huì wúliáo.",
+            "text_en": "Won't you get bored? I get bored when I'm alone.",
+            "score": 0.0,
+            "feedback": "Projects anxiety about stillness — undermines her attempt to embrace quiet."
+          },
+          {
+            "text_zh": "天气预报说明天有雨。",
+            "text_pinyin": "Tiānqì yùbào shuō míngtiān yǒu yǔ.",
+            "text_en": "The forecast says rain tomorrow.",
+            "score": 0.0,
+            "feedback": "Mundane weather update during a moment of anticipation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "谢谢你。就算是下雨也没关系，听雨声也很好。周一见的时候我告诉你，我的「什么都不做」过得怎么样。",
+        "text_pinyin": "Xièxie nǐ. Jiùsuàn shì xià yǔ yě méi guānxi, tīng yǔ shēng yě hěn hǎo. Zhōuyī jiàn de shíhou wǒ gàosù nǐ, wǒ de 'shénme dōu bú zuò' guò de zěnmeyàng.",
+        "text_en": "Thank you. Even if it rains, that's fine — listening to rain is nice too. When we meet Monday, I'll tell you how my 'doing nothing' went."
+      }
+    ],
+    "cultural_note": "The anxiety of unstructured time reflects a broader cultural phenomenon in China, where productivity and busyness are often equated with worth. Young professionals frequently schedule every weekend with social obligations, hobbies, or side projects. The idea of deliberately doing nothing (发呆, fādāi) is gaining traction as a counterbalance, with some cities even hosting「发呆大赛」(staring into space competitions) to celebrate the art of doing nothing."
+  }
+}

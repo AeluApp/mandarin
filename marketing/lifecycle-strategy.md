@@ -1,4 +1,4 @@
-# Lifecycle Strategy — Mandarin
+# Lifecycle Strategy — Aelu
 
 Master lifecycle strategy governing how users move from first awareness through long-term retention. All tactics, benchmarks, and automation rules in this document. If a lifecycle decision contradicts something here, this document wins.
 
@@ -10,10 +10,10 @@ Last updated: 2026-02-17
 
 ### Stage 1: Awareness
 
-**User mindset:** "I need a better way to study Chinese." They are searching Reddit, watching YouTube comparisons, reading blog posts about HSK prep, or scrolling past a social media post. They do not know Mandarin exists yet.
+**User mindset:** "I need a better way to study Chinese." They are searching Reddit, watching YouTube comparisons, reading blog posts about HSK prep, or scrolling past a social media post. They do not know Aelu exists yet.
 
 **Key actions:**
-- Encounter Mandarin through content, community, or search
+- Encounter Aelu through content, community, or search
 - Click through to landing page or app store listing
 - Spend 15-90 seconds forming a first impression
 
@@ -71,7 +71,7 @@ Last updated: 2026-02-17
 **Timeline:** 1-5 days from first visit; average 2.3 visits before signup
 
 **Tactics:**
-1. Landing page comparison table: Mandarin vs. Anki vs. Duolingo vs. HelloChinese vs. Hack Chinese
+1. Landing page comparison table: Aelu vs. Anki vs. Duolingo vs. HelloChinese vs. Hack Chinese
 2. 90-second product demo video showing one cleanup loop cycle (read, tap, drill, read again)
 3. "Free for HSK 1-2" messaging in three locations on landing page (hero, mid-page, pricing section)
 4. FAQ section addressing top objections: "Is it better than Anki?", "What if I don't use it enough?", "Does it work offline?"
@@ -228,7 +228,7 @@ Last updated: 2026-02-17
 
 ### Stage 7: Free-to-Paid Conversion
 
-**User mindset:** "I've outgrown the free tier. HSK 3 content is locked. Is this worth $12/month?" They have demonstrated commitment through weeks of consistent study. The upgrade ask comes at peak demonstrated value, not at signup.
+**User mindset:** "I've outgrown the free tier. HSK 3 content is locked. Is this worth $14.99/month?" They have demonstrated commitment through weeks of consistent study. The upgrade ask comes at peak demonstrated value, not at signup.
 
 **Key actions:**
 - Reach 80%+ of HSK 2 vocabulary at 75%+ accuracy (the natural boundary trigger)
@@ -239,7 +239,7 @@ Last updated: 2026-02-17
 **Success metric:** Paid subscription started
 
 **Drop-off risks:**
-- User is not convinced $12/month is worth it relative to free alternatives
+- User is not convinced $14.99/month is worth it relative to free alternatives
 - User does not feel ready for HSK 3 content yet
 - Payment friction (too many steps, no preferred payment method)
 - User intended to upgrade but "later" becomes "never"
@@ -247,8 +247,8 @@ Last updated: 2026-02-17
 **Our response:**
 - Upgrade sequence (Sequence 3) triggers only when user hits the HSK 2/3 boundary — not before
 - Sequence shows what HSK 3 includes (600 new words, complex grammar, multi-paragraph reading)
-- Value framing: $0.40/day, less than 15 minutes of iTalki tutoring
-- 20% discount offer ($9.60/month for 3 months) as final email after 21 days if user has not converted
+- Value framing: $0.50/day, less than 15 minutes of iTalki tutoring
+- 20% discount offer ($12/month for 3 months) as final email after 21 days if user has not converted
 - One-step payment with Stripe. No annual upsell during checkout. No hidden tiers.
 
 **Conversion benchmark:** 5-12% of all free users convert to paid. 15-25% of activated free users convert. 20-35% of users who hit the HSK 2/3 boundary convert. See Free-to-Paid Conversion Strategy section for full detail.
@@ -266,7 +266,7 @@ Last updated: 2026-02-17
 
 ### Stage 8: Paid Retention
 
-**User mindset:** "This is my Chinese study system. It's worth the $12." They are an established paid user. Their concern shifts from "is this worth it?" to "am I making progress?" Retention depends on visible, honest progress.
+**User mindset:** "This is my Chinese study system. It's worth the $14.99." They are an established paid user. Their concern shifts from "is this worth it?" to "am I making progress?" Retention depends on visible, honest progress.
 
 **Key actions:**
 - Maintain 3+ sessions per week
@@ -493,7 +493,7 @@ This trigger point is deliberate:
 
 **2. Upgrade email sequence (Sequence 3)**
 - Impact: High. Five emails over 21 days, triggered by the HSK 2/3 boundary.
-- Sequence: Milestone celebration, feature preview (diagnostics), value framing ($0.40/day), objection handling (time commitment concern), discount offer (20% off for 3 months).
+- Sequence: Milestone celebration, feature preview (diagnostics), value framing ($0.50/day), objection handling (time commitment concern), discount offer (20% off for 3 months).
 - Expected contribution: 20-30% of conversions are influenced by at least one email in this sequence.
 
 **3. In-app diagnostics preview**
@@ -506,7 +506,7 @@ This trigger point is deliberate:
 - Expected contribution: 5-10% of conversions are driven by desire for more reading content.
 
 **5. Time-limited discount**
-- Impact: Medium, but only for price-sensitive users who have already hit the boundary. The 20% discount ($9.60/month for 3 months) in Sequence 3, Email 5 converts a specific segment: users who want to upgrade but need a psychological nudge.
+- Impact: Medium, but only for price-sensitive users who have already hit the boundary. The 20% discount ($12/month for 3 months) in Sequence 3, Email 5 converts a specific segment: users who want to upgrade but need a psychological nudge.
 - Constraints: Offer is available once per user. Valid for 7 days. Not repeated. Not available at other times.
 - Expected contribution: 5-10% of conversions use the discount.
 
@@ -631,31 +631,31 @@ LTV = ARPU x (1 / Monthly Churn Rate)
 ```
 
 Where:
-- **ARPU** (Average Revenue Per User per month) = $12.00 (single plan, no tiers)
+- **ARPU** (Average Revenue Per User per month) = $14.99 (single plan, no tiers)
 - **Monthly Churn Rate** = 1 - Monthly Retention Rate
 
 For a blended monthly churn rate of 15% (85% retention):
 ```
-LTV = $12 x (1 / 0.15) = $12 x 6.67 = $80
+LTV = $14.99 x (1 / 0.15) = $14.99 x 6.67 = $100
 ```
 
 For adjusted LTV including discounted first-period users (20% use the discount):
 ```
-Adjusted ARPU for month 1-3 = (0.80 x $12) + (0.20 x $9.60) = $9.60 + $1.92 = $11.52
-Adjusted LTV = approximately $77
+Adjusted ARPU for month 1-3 = (0.80 x $14.99) + (0.20 x $12) = $11.99 + $2.40 = $14.39
+Adjusted LTV = approximately $96
 ```
 
 ### Segmented LTV table
 
 | Segment | Monthly retention | Avg lifetime (months) | LTV | % of paid users |
 |---------|------------------:|----------------------:|----:|----------------:|
-| **Power User** (5+ sessions/week, uses reader + diagnostics) | 90% | 10.0 | $120 | 15-20% |
-| **Regular** (3-4 sessions/week, consistent routine) | 85% | 6.7 | $80 | 35-40% |
-| **Moderate** (2-3 sessions/week, some gaps) | 78% | 4.5 | $54 | 20-25% |
-| **Light** (1-2 sessions/week, irregular) | 68% | 3.1 | $37 | 10-15% |
-| **At-Risk** (<1 session/week after initial period) | 50% | 2.0 | $24 | 5-10% |
+| **Power User** (5+ sessions/week, uses reader + diagnostics) | 90% | 10.0 | $150 | 15-20% |
+| **Regular** (3-4 sessions/week, consistent routine) | 85% | 6.7 | $100 | 35-40% |
+| **Moderate** (2-3 sessions/week, some gaps) | 78% | 4.5 | $67 | 20-25% |
+| **Light** (1-2 sessions/week, irregular) | 68% | 3.1 | $46 | 10-15% |
+| **At-Risk** (<1 session/week after initial period) | 50% | 2.0 | $30 | 5-10% |
 
-**Blended LTV:** Weighted average across segments = approximately $72-82.
+**Blended LTV:** Weighted average across segments = approximately $90-102.
 
 ### LTV:CAC targets
 
@@ -674,7 +674,7 @@ Adjusted LTV = approximately $77
 **1. Increase paid retention (highest impact)**
 - Every 5 percentage points of monthly retention adds approximately $15-25 to LTV.
 - Tactics: progress visibility (diagnostics, monthly reports), churn prevention sequence, subscription pause option, content depth at HSK 4-6.
-- Moving retention from 85% to 90% increases blended LTV from ~$80 to ~$120. This is the single most valuable metric to improve.
+- Moving retention from 85% to 90% increases blended LTV from ~$100 to ~$150. This is the single most valuable metric to improve.
 
 **2. Increase activation rate**
 - Activated users convert to paid at 3-5x the rate of non-activated users. Increasing activation from 30% to 40% of signups has a multiplicative effect on total revenue.
@@ -1061,7 +1061,7 @@ win_back_eligible ──[90 days elapsed, no resubscription]──→ churned (n
 │  User receives email. Possible actions:                      │
 │  - Opens → tracked by email tool                            │
 │  - Clicks CTA → tracked by email tool + UTM → landing/app   │
-│  - Replies → goes to hello@mandarinapp.com                  │
+│  - Replies → goes to hello@aeluapp.com                  │
 │  - Unsubscribes → email tool handles, syncs to app DB       │
 │  - Ignores → no action; sequence continues on schedule      │
 │                                                              │

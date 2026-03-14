@@ -1,0 +1,117 @@
+{
+    "title": "Where Are You Really From?",
+    "title_zh": "你到底是哪里人？",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're at a dinner party in Guangzhou. A fellow guest, Lin Jie, grew up in Guangzhou but her parents are from Sichuan. After someone casually asks her '你是哪里人？', she turns to you with a knowing look. She's heard this question a thousand times and has complex feelings about it.",
+        "setup_zh": "你在广州参加一个晚餐聚会。另一位客人林洁在广州长大，但她父母是四川人。有人随口问她'你是哪里人？'之后，她带着一种心照不宣的表情转向你。她听过这个问题无数遍了，内心很复杂。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "每次被问'你是哪里人'，我都不知道该怎么回答。说广州吧，人家听我姓林、看我长相就说'你不像广东人'。说四川吧，我四川话都说不利索。你说这个问题到底在问什么？",
+                "text_pinyin": "Měi cì bèi wèn 'nǐ shì nǎlǐ rén', wǒ dōu bù zhīdào gāi zěnme huídá. Shuō Guǎngzhōu ba, rénjiā tīng wǒ xìng Lín, kàn wǒ zhǎngxiàng jiù shuō 'nǐ bú xiàng Guǎngdōng rén'. Shuō Sìchuān ba, wǒ Sìchuān huà dōu shuō bù lìsuǒ. Nǐ shuō zhège wèntí dàodǐ zài wèn shénme?",
+                "text_en": "Every time someone asks 'where are you from,' I don't know how to answer. If I say Guangzhou, people hear my surname Lin, look at my face, and say 'you don't seem Cantonese.' If I say Sichuan, I can't even speak Sichuanese fluently. What is this question really asking?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with her question about what '你是哪里人' really means.",
+                "options": [
+                    {
+                        "text_zh": "我觉得这个问题表面上问的是地理，其实问的是归属感。人们想找到一个标签把你放进去——方言、口味、性格，全套配齐。可是你的经历比任何一个标签都复杂，所以怎么回答都不准确。",
+                        "text_pinyin": "Wǒ juéde zhège wèntí biǎomiàn shàng wèn de shì dìlǐ, qíshí wèn de shì guīshǔ gǎn. Rénmen xiǎng zhǎodào yīge biāoqiān bǎ nǐ fàng jìnqù — fāngyán, kǒuwèi, xìnggé, quán tào pèi qí. Kěshì nǐ de jīnglì bǐ rènhé yīge biāoqiān dōu fùzá, suǒyǐ zěnme huídá dōu bù zhǔnquè.",
+                        "text_en": "On the surface it asks about geography, but it's asking about belonging. People want a label — dialect, food, personality, the whole package. But your experience is more complex than any single label, so no answer feels right.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perceptive analysis that names the real function of the question — identity categorization — and validates her discomfort."
+                    },
+                    {
+                        "text_zh": "广州的早茶你喜欢去哪家？",
+                        "text_pinyin": "Guǎngzhōu de zǎochá nǐ xǐhuān qù nǎ jiā?",
+                        "text_en": "Which place do you like for morning tea in Guangzhou?",
+                        "score": 0.0,
+                        "feedback": "She's opening up about identity and you ask about dim sum."
+                    },
+                    {
+                        "text_zh": "你在哪里上的大学？",
+                        "text_pinyin": "Nǐ zài nǎlǐ shàng de dàxué?",
+                        "text_en": "Where did you go to college?",
+                        "score": 0.0,
+                        "feedback": "Generic biographical question that misses the philosophical depth she's offering."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是这种感觉。最烦的是那种'哦，怪不得'的语气——好像你的一切行为都可以用籍贯来解释。我吃辣就是因为我爸妈是四川人？不能只是因为我喜欢吗？",
+                "text_pinyin": "Duì, jiù shì zhè zhǒng gǎnjué. Zuì fán de shì nà zhǒng 'ó, guàibùdé' de yǔqì — hǎoxiàng nǐ de yīqiè xíngwéi dōu kěyǐ yòng jíguàn lái jiěshì. Wǒ chī là jiù shì yīnwèi wǒ bàmā shì Sìchuān rén? Bù néng zhǐ shì yīnwèi wǒ xǐhuān ma?",
+                "text_en": "Right, that's exactly the feeling. The most annoying is that 'oh, no wonder' tone — as if all your behavior can be explained by where you're registered. I eat spicy food because my parents are from Sichuan? Can't it just be because I like it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her frustration about being reduced to regional stereotypes.",
+                "options": [
+                    {
+                        "text_zh": "这种'怪不得'思维真的很偷懒——把一个立体的人压缩成一个地名。而且它有一个隐含的假设：你的选择不是你自己做的，而是你的'基因'或'根'替你决定的。这其实是在否认你的主体性。",
+                        "text_pinyin": "Zhè zhǒng 'guàibùdé' sīwéi zhēn de hěn tōu lǎn — bǎ yīge lìtǐ de rén yāsuō chéng yīge dìmíng. Érqiě tā yǒu yīge yǐnhán de jiǎshè: nǐ de xuǎnzé bú shì nǐ zìjǐ zuò de, ér shì nǐ de 'jīyīn' huò 'gēn' tì nǐ juédìng de. Zhè qíshí shì zài fǒurèn nǐ de zhǔtǐ xìng.",
+                        "text_en": "That 'no wonder' thinking is intellectually lazy — compresses a three-dimensional person into a place name. It implies your choices aren't your own, they're determined by your 'genes.' It's denying your agency.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp critique that names the philosophical problem — the denial of individual agency through regional determinism."
+                    },
+                    {
+                        "text_zh": "你平时做什么工作？",
+                        "text_pinyin": "Nǐ píngshí zuò shénme gōngzuò?",
+                        "text_en": "What do you do for work?",
+                        "score": 0.0,
+                        "feedback": "Standard small talk that ignores the vulnerable conversation happening."
+                    },
+                    {
+                        "text_zh": "我听说广州最近房价降了，你怎么看？",
+                        "text_pinyin": "Wǒ tīngshuō Guǎngzhōu zuìjìn fángjià jiàng le, nǐ zěnme kàn?",
+                        "text_en": "I heard Guangzhou's housing prices have dropped recently, what do you think?",
+                        "score": 0.0,
+                        "feedback": "Pivoting to real estate during a conversation about identity and belonging."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "主体性——对，就是这个词。有时候我觉得中国的地域文化认同特别强，强到可以覆盖一个人的个体身份。你呢？你作为外国人在中国，人家问你是哪里人的时候，会不会有类似的感觉？",
+                "text_pinyin": "Zhǔtǐ xìng — duì, jiù shì zhège cí. Yǒu shíhou wǒ juéde Zhōngguó de dìyù wénhuà rèntóng tèbié qiáng, qiáng dào kěyǐ fùgài yīge rén de gètǐ shēnfèn. Nǐ ne? Nǐ zuòwéi wàiguó rén zài Zhōngguó, rénjiā wèn nǐ shì nǎlǐ rén de shíhou, huì bú huì yǒu lèisì de gǎnjué?",
+                "text_en": "Agency — yes, that's the word. Sometimes I feel like regional cultural identity in China is especially strong, so strong it can override a person's individual identity. What about you? As a foreigner in China, when people ask where you're from, do you ever feel something similar?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your own experience with the question of belonging.",
+                "options": [
+                    {
+                        "text_zh": "有过。不过反过来——在国外我是美国人，在美国被问'你的根在哪里'。好像每个人都必须有'原始版本'。也许有些人的身份就是拼凑出来的，不来自某个地方，而来自很多次选择的叠加。",
+                        "text_pinyin": "Yǒu guò. Búguò fǎn guòlái — zài guówài wǒ shì Měiguó rén, zài Měiguó bèi wèn 'nǐ de gēn zài nǎlǐ'. Hǎoxiàng měi ge rén dōu bìxū yǒu 'yuánshǐ bǎnběn'. Yěxǔ yǒuxiē rén de shēnfèn jiù shì pīncòu chūlái de, bù lái zì mǒu ge dìfang, ér lái zì hěn duō cì xuǎnzé de diéjiā.",
+                        "text_en": "I have. But reversed — abroad I'm American, in America I'm asked 'where are your roots.' As if everyone must have an 'original version.' Maybe some identities are assembled from many choices, not from one place.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest reciprocity — shares a parallel experience and offers a constructive reframing of identity as assembled rather than inherited."
+                    },
+                    {
+                        "text_zh": "你有没有去过国外？想不想出去旅游？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu qù guò guówài? Xiǎng bù xiǎng chūqù lǚyóu?",
+                        "text_en": "Have you ever been abroad? Do you want to travel?",
+                        "score": 0.0,
+                        "feedback": "Generic travel question when she's asked something deeply personal."
+                    },
+                    {
+                        "text_zh": "我觉得学中文挺难的，你觉得呢？",
+                        "text_pinyin": "Wǒ juéde xué Zhōngwén tǐng nán de, nǐ juéde ne?",
+                        "text_en": "I think learning Chinese is pretty hard, what do you think?",
+                        "score": 0.0,
+                        "feedback": "Self-referential language-learner comment that deflects from the real conversation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The question '你是哪里人？' (Where are you from?) functions differently in Chinese culture than in the West. It often refers to 籍贯 (ancestral origin/household registration), not where you grew up. This creates identity friction for millions of Chinese people who've migrated internally — second-generation migrants may feel they belong neither to their parents' hometown nor to the city where they were raised. The hukou (household registration) system reinforces this by tying social benefits to registered origin rather than current residence."
+    }
+}

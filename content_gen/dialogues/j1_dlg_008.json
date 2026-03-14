@@ -1,0 +1,87 @@
+{
+    "title": "The Weather Today",
+    "title_zh": "今天的天气",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're sitting on a bench outside your apartment building. Your neighbor, Grandma Zhang, comes out to enjoy the sunshine.",
+        "setup_zh": "你坐在小区的长椅上。你的邻居张奶奶出来晒太阳。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天天气真好！你也出来了？",
+                "text_pinyin": "Jīntiān tiānqì zhēn hǎo! Nǐ yě chūlái le?",
+                "text_en": "The weather is so nice today! You came outside too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the nice weather.",
+                "options": [
+                    {
+                        "text_zh": "是啊，今天很暖和。坐在外面很舒服。",
+                        "text_pinyin": "Shì a, jīntiān hěn nuǎnhuo. Zuò zài wàimiàn hěn shūfu.",
+                        "text_en": "Yes, it's so warm today. It's comfortable sitting outside.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Agrees with her about the weather and matches her relaxed mood -- perfect for a neighborly chat in the sun."
+                    },
+                    {
+                        "text_zh": "对，天气很好。",
+                        "text_pinyin": "Duì, tiānqì hěn hǎo.",
+                        "text_en": "Yes, the weather is nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees but doesn't add anything personal -- a bit flat for a warm moment with a neighbor."
+                    },
+                    {
+                        "text_zh": "您今天去买菜了吗？",
+                        "text_pinyin": "Nín jīntiān qù mǎi cài le ma?",
+                        "text_en": "Did you go grocery shopping today?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "A neighborly question, but she just commented on the beautiful weather -- jumping to errands skips the moment she's enjoying."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我每天早上都在这里坐一会儿。你平时忙不忙？",
+                "text_pinyin": "Wǒ měi tiān zǎoshang dōu zài zhèlǐ zuò yīhuìr. Nǐ píngshí máng bù máng?",
+                "text_en": "I sit here for a while every morning. Are you usually busy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your routine.",
+                "options": [
+                    {
+                        "text_zh": "我平时很忙。但是今天不忙，所以出来坐坐。",
+                        "text_pinyin": "Wǒ píngshí hěn máng. Dànshì jīntiān bù máng, suǒyǐ chūlái zuòzuo.",
+                        "text_en": "I'm usually busy. But today I'm free, so I came out to sit for a while.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Answers her question honestly and explains why today is different -- she'll understand that your presence here is special."
+                    },
+                    {
+                        "text_zh": "有时候忙，有时候不忙。",
+                        "text_pinyin": "Yǒu shíhou máng, yǒu shíhou bù máng.",
+                        "text_en": "Sometimes busy, sometimes not.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers vaguely -- she was inviting you to share about your life, and this doesn't give her much."
+                    },
+                    {
+                        "text_zh": "您每天都坐在这里吗？真好。",
+                        "text_pinyin": "Nín měi tiān dōu zuò zài zhèlǐ ma? Zhēn hǎo.",
+                        "text_en": "Do you sit here every day? That's nice.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She just told you she sits here every morning -- repeating it as a question shows you weren't listening."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese neighborhoods, the elderly often sit outside in the morning sun. These gentle exchanges between neighbors — about weather, daily life, nothing in particular — are the quiet threads that hold a community together."
+    }
+}

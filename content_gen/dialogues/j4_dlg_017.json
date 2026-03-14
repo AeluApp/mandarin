@@ -1,0 +1,117 @@
+{
+  "title": "The Bicycle Lane",
+  "title_zh": "自行车道",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're cycling slowly along a river path in the early morning. A retired factory worker, Uncle Jiang, is cycling beside you. The air is fresh and birds are singing.",
+    "setup_zh": "你在清晨沿着河边的小路慢慢骑自行车。一位退休工人蒋叔叔骑在你旁边。空气新鲜，鸟儿在唱歌。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也是早起骑车的人啊？我每天早上五点半就出来了。这个时候路上没什么人，风吹在脸上，整个人都清醒了。",
+        "text_pinyin": "Nǐ yě shì zǎo qǐ qí chē de rén a? Wǒ měi tiān zǎoshang wǔ diǎn bàn jiù chūlái le. Zhège shíhou lù shàng méi shénme rén, fēng chuī zài liǎn shàng, zhěnggè rén dōu qīngxǐng le.",
+        "text_en": "You're an early morning cyclist too? I come out at five-thirty every day. At this hour there's barely anyone on the road, the wind on your face, your whole body wakes up."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about early morning cycling.",
+        "options": [
+          {
+            "text_zh": "五点半，那你看到的是大多数人看不到的城市。这个时候的光线最美，空气最新鲜，好像整个世界刚刚醒来，还没有开始忙碌。",
+            "text_pinyin": "Wǔ diǎn bàn, nà nǐ kàn dào de shì dà duōshù rén kàn bú dào de chéngshì. Zhège shíhou de guāngxiàn zuì měi, kōngqì zuì xīnxiān, hǎoxiàng zhěnggè shìjiè gāng gāng xǐng lái, hái méiyǒu kāishǐ mánglù.",
+            "text_en": "Five-thirty — then you see a city most people never see. The light at this hour is the most beautiful, the air the freshest. It's like the whole world has just woken up and hasn't started being busy yet.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Appreciates the privilege of early mornings — sees what others miss."
+          },
+          {
+            "text_zh": "你骑的什么牌子的自行车？",
+            "text_pinyin": "Nǐ qí de shénme páizi de zìxíngchē?",
+            "text_en": "What brand of bicycle do you ride?",
+            "score": 0.0,
+            "feedback": "Equipment question that ignores the morning atmosphere."
+          },
+          {
+            "text_zh": "你不觉得太早了吗？我一般八点才起床。",
+            "text_pinyin": "Nǐ bù juéde tài zǎo le ma? Wǒ yībān bā diǎn cái qǐchuáng.",
+            "text_en": "Don't you think that's too early? I usually don't get up until eight.",
+            "score": 0.0,
+            "feedback": "Self-focused comparison that misses the beauty he's describing."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，还没有开始忙碌。我年轻的时候在工厂上班，每天都很忙，从来没有时间看看周围的风景。退休以后才发现，原来我住的地方这么美。",
+        "text_pinyin": "Duì, hái méiyǒu kāishǐ mánglù. Wǒ niánqīng de shíhou zài gōngchǎng shàngbān, měi tiān dōu hěn máng, cónglái méiyǒu shíjiān kàn kàn zhōuwéi de fēngjǐng. Tuìxiū yǐhòu cái fāxiàn, yuánlái wǒ zhù de dìfāng zhème měi.",
+        "text_en": "Right, before the busyness starts. When I was young I worked at the factory, always busy, never time to look at the scenery around me. Only after retiring did I discover how beautiful the place I live actually is."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about discovering beauty nearby.",
+        "options": [
+          {
+            "text_zh": "我们总是觉得美好的东西在远方，其实就在身边。只是忙的时候看不到。也许退休给了你一双新的眼睛，让你重新看见这个世界。",
+            "text_pinyin": "Wǒmen zǒng shì juéde měihǎo de dōngxi zài yuǎnfāng, qíshí jiù zài shēnbiān. Zhǐ shì máng de shíhou kàn bú dào. Yěxǔ tuìxiū gěi le nǐ yī shuāng xīn de yǎnjīng, ràng nǐ chóngxīn kànjiàn zhège shìjiè.",
+            "text_en": "We always think beautiful things are far away, but they're right beside us. We just can't see them when we're busy. Maybe retirement gave you new eyes to see the world again.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Reframe — retirement as gaining new vision, not losing purpose."
+          },
+          {
+            "text_zh": "你以前在工厂做什么工作？",
+            "text_pinyin": "Nǐ yǐqián zài gōngchǎng zuò shénme gōngzuò?",
+            "text_en": "What did you do at the factory?",
+            "score": 0.0,
+            "feedback": "Career question when he's talking about rediscovering life."
+          },
+          {
+            "text_zh": "这条路有多长？",
+            "text_pinyin": "Zhè tiáo lù yǒu duō cháng?",
+            "text_en": "How long is this path?",
+            "score": 0.0,
+            "feedback": "Distance question during a philosophical exchange."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "一双新的眼睛，说得好。我老伴说我退休以后变了一个人，以前从来不注意花什么时候开，现在每天告诉她今天哪棵树开花了。",
+        "text_pinyin": "Yī shuāng xīn de yǎnjīng, shuō de hǎo. Wǒ lǎobàn shuō wǒ tuìxiū yǐhòu biàn le yīge rén, yǐqián cónglái bù zhùyì huā shénme shíhou kāi, xiànzài měi tiān gàosù tā jīntiān nǎ kē shù kāi huā le.",
+        "text_en": "New eyes — well said. My wife says I've become a different person since retiring. I never used to notice when flowers bloomed; now I tell her every day which tree is flowering."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his transformation.",
+        "options": [
+          {
+            "text_zh": "每天告诉她哪棵树开花了——这是我今天听到的最温暖的事情。能注意到这些小事，才是真正的生活。",
+            "text_pinyin": "Měi tiān gàosù tā nǎ kē shù kāi huā le — zhè shì wǒ jīntiān tīng dào de zuì wēnnuǎn de shìqíng. Néng zhùyì dào zhèxiē xiǎo shì, cái shì zhēnzhèng de shēnghuó.",
+            "text_en": "Telling her which tree is flowering every day — that's the warmest thing I've heard today. Being able to notice these small things — that's truly living.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Genuine warmth — recognizes the beauty in his daily practice of attention."
+          },
+          {
+            "text_zh": "你太太也骑自行车吗？",
+            "text_pinyin": "Nǐ tàitai yě qí zìxíngchē ma?",
+            "text_en": "Does your wife ride a bicycle too?",
+            "score": 0.0,
+            "feedback": "Activity question that sidesteps the lovely image."
+          },
+          {
+            "text_zh": "退休以后时间多了，当然有空注意这些。上班的人哪有时间看花？还是太闲了吧。",
+            "text_pinyin": "Tuìxiū yǐhòu shíjiān duō le, dāngrán yǒu kòng zhùyì zhèxiē. Shàngbān de rén nǎ yǒu shíjiān kàn huā? Háishì tài xián le ba.",
+            "text_en": "After retirement you have plenty of time, of course you can notice these things. Working people can't afford to look at flowers. You're just less busy, that's all.",
+            "score": 0.0,
+            "feedback": "Uncle Jiang goes quiet for a moment, then says softly: 'I worked for forty years and never saw a single bloom. Was I living then, or am I living now?'"
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Early morning cycling and exercise is deeply embedded in Chinese culture. Parks and riverpaths fill with retirees before dawn for tai chi, walking, and cycling. The concept of 慢生活 (slow living) gained popularity as a counter-narrative to China's rapid modernization. The image of noticing which trees are blooming reflects a traditional Chinese aesthetic value — 知时 (knowing the seasons) — that connects daily awareness to the natural world."
+  }
+}

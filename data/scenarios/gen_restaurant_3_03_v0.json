@@ -1,0 +1,124 @@
+{
+    "title": "The Cold Noodle Critique",
+    "title_zh": "凉面品鉴",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_3_03_v0",
+    "tree": {
+        "setup": "A hole-in-the-wall noodle shop on a sweltering summer day. The owner, Auntie Wen, has been making cold noodles for thirty years. She treats each bowl like a work of art and takes personal offense when someone adds too much vinegar. Three oscillating fans blow from different directions. There are only six tables and the menu is written in chalk on the wall, partially smudged.",
+        "setup_zh": "酷暑天的一家小面馆。老板温阿姨做了三十年凉面。她把每碗面都当艺术品，有人加太多醋她会生气。三台风扇从不同方向吹着。只有六张桌子，菜单用粉笔写在墙上，有些字已经模糊了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "坐！今天热死了吧？来碗凉面。我们只做凉面，不做别的。",
+                "text_pinyin": "zuò! jīntiān rè sǐ le ba? lái wǎn liángmiàn. wǒmen zhǐ zuò liángmiàn, bú zuò bié de.",
+                "text_en": "Sit! Boiling hot today, right? Have a bowl of cold noodles. We only make cold noodles, nothing else."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order and ask about options.",
+                "options": [
+                    {
+                        "text_zh": "好！有几种口味？辣的和不辣的都有吗？",
+                        "text_pinyin": "hǎo! yǒu jǐ zhǒng kǒuwèi? là de hé bú là de dōu yǒu ma?",
+                        "text_en": "Great! How many flavors are there? Do you have both spicy and non-spicy?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「三种：麻辣、酸辣、还有清爽。清爽的不放辣。」Auntie Wen holds up three fingers with authority. 口味 is 'flavor.' 清爽 literally means 'refreshing' -- the mild option."
+                    },
+                    {
+                        "text_zh": "就来一碗吧。你推荐什么口味？",
+                        "text_pinyin": "jiù lái yì wǎn ba. nǐ tuījiàn shénme kǒuwèi?",
+                        "text_en": "I'll have a bowl. What flavor do you recommend?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Wen studies your face for exactly two seconds.「你是南方人吧？给你来酸辣的，不太辣但是很爽口。」推荐 is 'recommend.' She reads customers like a fortune teller reads palms."
+                    },
+                    {
+                        "text_zh": "有没有配菜？我想加点东西。",
+                        "text_pinyin": "yǒu méiyǒu pèicài? wǒ xiǎng jiā diǎn dōngxi.",
+                        "text_en": "Are there side dishes? I want to add some things.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Wen's eyebrow rises.「面里什么都有了：黄瓜丝、花生碎、豆芽。不用加。」配菜 is 'side dishes.' She's slightly offended you think her noodles need supplementation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来，你的面。先拌匀了再吃。底下的酱要拌上来。别急着加醋，先尝尝。",
+                "text_pinyin": "lái, nǐ de miàn. xiān bàn yún le zài chī. dǐxia de jiàng yào bàn shànglái. bié jízhe jiā cù, xiān chángchang.",
+                "text_en": "Here, your noodles. Mix them evenly first before eating. Bring the sauce from the bottom up. Don't rush to add vinegar, taste first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Taste and react.",
+                "options": [
+                    {
+                        "text_zh": "这个味道太好了！酸辣刚刚好。面也很有嚼劲。",
+                        "text_pinyin": "zhè ge wèidao tài hǎo le! suānlà gānggāng hǎo. miàn yě hěn yǒu jiáojìn.",
+                        "text_en": "This tastes amazing! The sour-spicy balance is perfect. The noodles have a great chew.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Wen nods with deep satisfaction.「这是三十年的功夫。面要冰水过三遍才有这个口感。」有嚼劲 is 'has a nice chew/texture' -- the highest compliment for noodles. 功夫 here means 'accumulated skill.'"
+                    },
+                    {
+                        "text_zh": "好吃！不过我可以再加一点辣椒吗？",
+                        "text_pinyin": "hǎochī! búguò wǒ kěyǐ zài jiā yìdiǎn làjiāo ma?",
+                        "text_en": "Delicious! But can I add a bit more chili?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Wen sighs.「行吧。辣椒在桌上。但别加太多，会盖住面的味道。」She watches you add chili with the expression of a painter watching someone draw on her canvas. 盖住 means 'to cover up/mask.'"
+                    },
+                    {
+                        "text_zh": "我觉得可以再加点醋。",
+                        "text_pinyin": "wǒ juéde kěyǐ zài jiā diǎn cù.",
+                        "text_en": "I think it could use a bit more vinegar.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Wen's expression freezes.「我刚才说了什么？先尝尝。你拌匀了吗？底下的酱拌上来了没有？」She told you to taste before adding vinegar. She's not angry, but she is disappointed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你是第一次来吧？以前怎么没见过你？住这附近吗？",
+                "text_pinyin": "nǐ shì dì yī cì lái ba? yǐqián zěnme méi jiàn guo nǐ? zhù zhè fùjìn ma?",
+                "text_en": "This is your first time, right? How come I've never seen you before? Do you live nearby?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat with Auntie Wen about how you found the shop.",
+                "options": [
+                    {
+                        "text_zh": "朋友推荐的。他说这是全城最好吃的凉面。我觉得他说得对。",
+                        "text_pinyin": "péngyou tuījiàn de. tā shuō zhè shì quán chéng zuì hǎochī de liángmiàn. wǒ juéde tā shuō de duì.",
+                        "text_en": "A friend recommended it. He said these are the best cold noodles in the city. I think he was right.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Wen's face softens completely.「谁介绍的？哪个朋友？」She wants to know who praised her, so she can give them extra toppings next time. 全城最好吃 is 'the best in the whole city.'"
+                    },
+                    {
+                        "text_zh": "在网上看到的评价，说你们的面是'隐藏的美食'。",
+                        "text_pinyin": "zài wǎng shàng kàn dào de píngjià, shuō nǐmen de miàn shì 'yǐncáng de měishí.'",
+                        "text_en": "I saw reviews online that said your noodles are a 'hidden gem.'",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「网上？谁给我写的？」Auntie Wen doesn't have a smartphone but looks pleased. 评价 is 'reviews.' 隐藏的美食 is 'hidden food gem.' Her regulars must have posted about her."
+                    },
+                    {
+                        "text_zh": "路过闻到香味就进来了。",
+                        "text_pinyin": "lùguò wén dào xiāngwèi jiù jìnlái le.",
+                        "text_en": "I was passing by and the smell drew me in.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Wen beams.「那就对了！好的面馆不用招牌，用鼻子就能找到。」路过 is 'passing by.' 香味 is 'fragrant smell.' She considers her aroma her best advertisement."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Cold noodles (凉面, liángmiàn) are a summer staple in China. Tiny hole-in-the-wall restaurants (苍蝇馆子, cāngyíng guǎnzi -- literally 'fly restaurants') often serve the best food. The owner's pride in their craft is common -- always taste before adding condiments. 有嚼劲 (yǒu jiáojìn) describes the ideal noodle texture."
+    }
+}

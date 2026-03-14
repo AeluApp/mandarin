@@ -14,6 +14,9 @@ from unittest.mock import patch, MagicMock
 from mandarin import audio
 from mandarin.drills.speaking import _make_replay_input
 
+# Pre-set voice to avoid subprocess.run during tests
+audio._chinese_voice = "Tingting"
+
 
 # ---- TestCancelAudio ----
 

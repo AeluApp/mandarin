@@ -1,0 +1,196 @@
+{
+    "title": "The Presentation Surgeon",
+    "title_zh": "演示外科医生",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_business_6_02_v0",
+    "tree": {
+        "setup": "Conference Room A on the eighteenth floor, where a long table of polished wood reflects the overhead lights like still water. You are presenting a quarterly marketing report to the management team. Vice President Sun sits at the head of the table with the stillness of someone who has heard four hundred presentations and remembers the exact slide where each one lost him. He takes notes in a leather-bound notebook using a system of symbols only he understands — a single vertical line means 'interesting,' two horizontal lines mean 'prove it,' and a small circle means 'we'll discuss this over lunch.'",
+        "setup_zh": "十八楼的A会议室，一张抛光长木桌在头顶灯光下反射出静水般的光泽。你正在向管理层做季度营销报告演示。孙副总裁坐在桌首，带着一种听过四百场演示的人才有的静止——他记得每场演示在哪一页幻灯片上失去了他的注意力。他在一本皮面笔记本上用只有他自己能看懂的符号系统做笔记——一竖表示「有意思」，两横表示「证明给我看」，一个小圆圈表示「午饭时候再聊」。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好，准备好了吗？开始吧。控制在二十分钟以内，留十分钟讨论。",
+                "text_pinyin": "hǎo, zhǔnbèi hǎo le ma? kāishǐ ba. kòngzhì zài èrshí fēnzhōng yǐnèi, liú shí fēnzhōng tǎolùn.",
+                "text_en": "OK, ready? Let's begin. Keep it under twenty minutes — ten minutes for discussion."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Open your presentation with a summary.",
+                "options": [
+                    {
+                        "text_zh": "谢谢孙总。今天我汇报三个方面：第一，上季度的整体营销数据；第二，各渠道的表现对比；第三，下季度的策略调整建议。先说结论：上季度营销投入产出比同比提升了百分之十五，但社交媒体渠道的获客成本上升了百分之二十，需要重点关注。",
+                        "text_pinyin": "xièxie Sūn zǒng. jīntiān wǒ huìbào sān gè fāngmiàn: dì yī, shàng jìdù de zhěngtǐ yíngxiāo shùjù; dì èr, gè qúdào de biǎoxiàn duìbǐ; dì sān, xià jìdù de cèlüè tiáozhěng jiànyì. xiān shuō jiélùn: shàng jìdù yíngxiāo tóurù chǎnchū bǐ tóngbǐ tíshēng le bǎi fēn zhī shíwǔ, dàn shèjiāo méitǐ qúdào de huò kè chéngběn shàngshēng le bǎi fēn zhī èrshí, xūyào zhòngdiǎn guānzhù.",
+                        "text_en": "Thank you VP Sun. Today I'll cover three areas: first, last quarter's overall marketing data; second, channel performance comparison; third, strategic adjustment recommendations for next quarter. The headline: marketing ROI improved 15% year-over-year, but social media customer acquisition costs rose 20% — a key concern.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Structure, conclusion-first, specific metrics — VP Sun draws a single vertical line in his notebook. Interesting."
+                    },
+                    {
+                        "text_zh": "好的。上季度的营销数据总体不错，我来一页一页给大家看。",
+                        "text_pinyin": "hǎo de. shàng jìdù de yíngxiāo shùjù zǒngtǐ búcuò, wǒ lái yí yè yí yè gěi dàjiā kàn.",
+                        "text_en": "OK. Last quarter's marketing data was generally good — let me walk through it slide by slide.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Slide-by-slide without a summary is a journey without a map. VP Sun prepares for a long twenty minutes."
+                    },
+                    {
+                        "text_zh": "嗯，我先放PPT。大家看一下第一页。",
+                        "text_pinyin": "ǹg, wǒ xiān fàng PPT. dàjiā kàn yíxià dì yī yè.",
+                        "text_en": "Um, let me put up the slides. Take a look at page one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Starting without context is starting without a compass. VP Sun's pen hovers — no symbol yet."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "（看了几页数据后）等一下。你说社交媒体获客成本上升了百分之二十。这个数字背后的原因是什么？是竞争加剧还是我们自己的策略问题？",
+                "text_pinyin": "(kàn le jǐ yè shùjù hòu) děng yíxià. nǐ shuō shèjiāo méitǐ huò kè chéngběn shàngshēng le bǎi fēn zhī èrshí. zhège shùzì bèihòu de yuányīn shì shénme? shì jìngzhēng jiājù háishì wǒmen zìjǐ de cèlüè wèntí?",
+                "text_en": "(After a few slides) Wait. You said social media acquisition costs rose 20%. What's behind that number? Increased competition, or our own strategy issue?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the cost increase with data.",
+                "options": [
+                    {
+                        "text_zh": "两方面都有。首先，行业整体的社交媒体广告竞价在上季度上涨了百分之十二，这是外部因素。但更重要的是，我们的内容策略有些过时——上季度我们继续沿用了去年的短视频模板，而平台算法已经调整了推荐机制。数据显示，使用新格式的竞品获得了更高的自然流量。这是我们需要调整的地方。",
+                        "text_pinyin": "liǎng fāngmiàn dōu yǒu. shǒuxiān, hángyè zhěngtǐ de shèjiāo méitǐ guǎnggào jìngjià zài shàng jìdù shàngzhǎng le bǎi fēn zhī shí'èr, zhè shì wàibù yīnsù. dàn gèng zhòngyào de shì, wǒmen de nèiróng cèlüè yǒuxiē guòshí——shàng jìdù wǒmen jìxù yányòng le qùnián de duǎn shìpín múbǎn, ér píngtái suànfǎ yǐjīng tiáozhěng le tuījiàn jīzhì. shùjù xiǎnshì, shǐyòng xīn géshì de jìngpǐn huòdé le gèng gāo de zìrán liúliàng. zhè shì wǒmen xūyào tiáozhěng de dìfāng.",
+                        "text_en": "Both factors. First, industry-wide social media ad bidding rose 12% last quarter — that's external. But more importantly, our content strategy was outdated — we kept using last year's short video templates while platforms had already adjusted their recommendation algorithms. Data shows competitors using new formats got higher organic traffic. That's where we need to adjust.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "External vs. internal attribution with specific data — VP Sun draws two vertical lines. Very interesting."
+                    },
+                    {
+                        "text_zh": "主要是市场竞争激烈了，大家都在投广告，成本就上去了。",
+                        "text_pinyin": "zhǔyào shì shìchǎng jìngzhēng jīliè le, dàjiā dōu zài tóu guǎnggào, chéngběn jiù shàngqù le.",
+                        "text_en": "Mainly because market competition intensified — everyone's advertising, driving up costs.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "External attribution only. VP Sun draws two horizontal lines — prove it."
+                    },
+                    {
+                        "text_zh": "这个……我需要再查一下具体原因。",
+                        "text_pinyin": "zhège……wǒ xūyào zài chá yíxià jùtǐ yuányīn.",
+                        "text_en": "That... I need to look into the specific reasons.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Not knowing in a presentation is recoverable; admitting it shows honesty. But VP Sun's notebook gains a small circle — lunch discussion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好。那你提到的策略调整建议具体是什么？下季度打算怎么解决这个内容策略过时的问题？预算需要调整吗？",
+                "text_pinyin": "hǎo. nà nǐ tí dào de cèlüè tiáozhěng jiànyì jùtǐ shì shénme? xià jìdù dǎsuàn zěnme jiějué zhège nèiróng cèlüè guòshí de wèntí? yùsuàn xūyào tiáozhěng ma?",
+                "text_en": "Good. So what are your specific strategic recommendations? How do you plan to fix the outdated content strategy next quarter? Does the budget need adjusting?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your strategic recommendations.",
+                "options": [
+                    {
+                        "text_zh": "我的建议分三步：第一，把百分之三十的社交媒体预算从付费广告转移到内容创作上，特别是短视频内容的升级；第二，和两到三个头部KOL建立长期合作关系，而不是做一次性投放；第三，增加A/B测试的频率，从每月一次提升到每周一次，这样能更快地适应平台算法的变化。预算总额不变，只是内部重新分配。",
+                        "text_pinyin": "wǒ de jiànyì fēn sān bù: dì yī, bǎ bǎi fēn zhī sānshí de shèjiāo méitǐ yùsuàn cóng fùfèi guǎnggào zhuǎnyí dào nèiróng chuàngzuò shàng, tèbié shì duǎn shìpín nèiróng de shēngjí; dì èr, hé liǎng dào sān gè tóubù KOL jiànlì chángqī hézuò guānxì, ér búshì zuò yícìxìng tóufàng; dì sān, zēngjiā A/B cèshì de pínlǜ, cóng měi yuè yí cì tíshēng dào měi zhōu yí cì, zhèyàng néng gèng kuài de shìyìng píngtái suànfǎ de biànhuà. yùsuàn zǒng'é bú biàn, zhǐ shì nèibù chóngxīn fēnpèi.",
+                        "text_en": "My recommendation is three-fold: first, shift 30% of social media budget from paid ads to content creation, especially upgrading short video content; second, establish long-term partnerships with 2-3 top KOLs instead of one-off placements; third, increase A/B testing frequency from monthly to weekly, to adapt faster to platform algorithm changes. Total budget unchanged — just internal reallocation.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Three concrete steps, budget-neutral, measurable — VP Sun draws three vertical lines. His personal record for a quarterly review."
+                    },
+                    {
+                        "text_zh": "我们计划调整内容策略，多做一些新格式的短视频，增加和KOL的合作。",
+                        "text_pinyin": "wǒmen jìhuà tiáozhěng nèiróng cèlüè, duō zuò yìxiē xīn géshì de duǎn shìpín, zēngjiā hé KOL de hézuò.",
+                        "text_en": "We plan to adjust content strategy — more new-format short videos and more KOL partnerships.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Right direction, but missing the numbers. VP Sun asks: how much, how many, how often?"
+                    },
+                    {
+                        "text_zh": "我觉得下季度应该增加预算。",
+                        "text_pinyin": "wǒ juéde xià jìdù yīnggāi zēngjiā yùsuàn.",
+                        "text_en": "I think we should increase the budget next quarter.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "More budget is the easiest answer and the hardest to approve. VP Sun's two horizontal lines appear — prove it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "预算不变、内部重新分配，这个思路我认可。不过有个风险：减少付费广告可能短期内影响曝光量。你考虑过这个过渡期的影响吗？",
+                "text_pinyin": "yùsuàn bú biàn, nèibù chóngxīn fēnpèi, zhège sīlù wǒ rènkě. búguò yǒu gè fēngxiǎn: jiǎnshǎo fùfèi guǎnggào kěnéng duǎnqī nèi yǐngxiǎng bàoguāng liàng. nǐ kǎolǜ guò zhège guòdù qī de yǐngxiǎng ma?",
+                "text_en": "Budget-neutral internal reallocation — I approve of the approach. But there's a risk: reducing paid ads might hurt short-term exposure. Have you considered the transition period impact?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the transition risk.",
+                "options": [
+                    {
+                        "text_zh": "考虑过。我的计划是分阶段执行：第一个月只转移百分之十五的预算，同时启动新内容的测试。如果新内容的自然流量表现达到预期，第二个月再转移剩下的百分之十五。这样即使出了问题，我们也有调整的空间。另外，我会设一个预警指标——如果周曝光量下降超过百分之十，我们就暂停调整重新评估。",
+                        "text_pinyin": "kǎolǜ guò. wǒ de jìhuà shì fēn jiēduàn zhíxíng: dì yī gè yuè zhǐ zhuǎnyí bǎi fēn zhī shíwǔ de yùsuàn, tóngshí qǐdòng xīn nèiróng de cèshì. rúguǒ xīn nèiróng de zìrán liúliàng biǎoxiàn dádào yùqī, dì èr gè yuè zài zhuǎnyí shèng xià de bǎi fēn zhī shíwǔ. zhèyàng jíshǐ chū le wèntí, wǒmen yě yǒu tiáozhěng de kōngjiān. lìngwài, wǒ huì shè yí gè yùjǐng zhǐbiāo——rúguǒ zhōu bàoguāng liàng xiàjiàng chāoguò bǎi fēn zhī shí, wǒmen jiù zàntíng tiáozhěng chóngxīn pínggū.",
+                        "text_en": "I have. The plan is phased: first month, only shift 15% of the budget while testing new content. If organic traffic meets expectations, shift the remaining 15% in month two. This way, if something goes wrong, we have room to adjust. I'll also set a warning threshold — if weekly exposure drops more than 10%, we pause and reassess.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Phased rollout with circuit breakers — VP Sun closes his notebook. His final symbol is a single check mark, which is not in his official system but which his team has learned to recognize."
+                    },
+                    {
+                        "text_zh": "我们会密切关注数据，如果有问题就及时调整。",
+                        "text_pinyin": "wǒmen huì mìqiè guānzhù shùjù, rúguǒ yǒu wèntí jiù jíshí tiáozhěng.",
+                        "text_en": "We'll monitor the data closely and adjust promptly if there are issues.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Reasonable but unspecific. He wants to know what 'promptly' means in days and percentage points."
+                    },
+                    {
+                        "text_zh": "短期的波动应该不会太大。",
+                        "text_pinyin": "duǎnqī de bōdòng yīnggāi búhuì tài dà.",
+                        "text_en": "Short-term fluctuations shouldn't be too significant.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "'Shouldn't be' is not a risk management strategy. VP Sun draws two horizontal lines."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "分阶段执行加上预警机制，这样的风控方案我接受。好，今天的汇报很有质量。把刚才讨论的调整方案整理成书面文件，下周一之前发给我和财务审核。辛苦了。",
+                "text_pinyin": "fēn jiēduàn zhíxíng jiā shàng yùjǐng jīzhì, zhèyàng de fēng kòng fāng'àn wǒ jiēshòu. hǎo, jīntiān de huìbào hěn yǒu zhìliàng. bǎ gāngcái tǎolùn de tiáozhěng fāng'àn zhěnglǐ chéng shūmiàn wénjiàn, xià zhōuyī zhīqián fā gěi wǒ hé cáiwù shěnhé. xīnkǔ le.",
+                "text_en": "Phased execution plus warning mechanism — I accept this risk management approach. Good, today's report was high quality. Write up the adjustment plan from our discussion and send it to me and Finance by next Monday. Well done."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the meeting professionally.",
+                "options": [
+                    {
+                        "text_zh": "谢谢孙总的反馈和指导。书面方案我周五之前发给您，留出时间让您周末看。如果方案需要财务那边提前沟通的话，我可以先和他们对接。",
+                        "text_pinyin": "xièxie Sūn zǒng de fǎnkuì hé zhǐdǎo. shūmiàn fāng'àn wǒ zhōuwǔ zhīqián fā gěi nín, liú chū shíjiān ràng nín zhōumò kàn. rúguǒ fāng'àn xūyào cáiwù nàbiān tíqián gōutōng de huà, wǒ kěyǐ xiān hé tāmen duìjiē.",
+                        "text_en": "Thank you VP Sun for the feedback and guidance. I'll send the written plan by Friday to give you time over the weekend. If Finance needs advance coordination, I can reach out to them first.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Early delivery, consideration for his schedule, and proactive cross-department coordination — VP Sun's check mark was well-earned."
+                    },
+                    {
+                        "text_zh": "好的，周一之前一定发给您。谢谢！",
+                        "text_pinyin": "hǎo de, zhōuyī zhīqián yídìng fā gěi nín. xièxie!",
+                        "text_en": "OK, I'll definitely send it before Monday. Thanks!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "On deadline, as promised. He nods."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Brief. The meeting ends, but the leather notebook holds its judgments in symbols."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese business presentations (汇报, huìbào) to senior management often follow a conclusion-first (结论先行) structure. VP Sun's expectation of written follow-up (书面文件) is standard practice. Using 孙总 (Sūn zǒng) as an address combines surname with abbreviated title — respectful and efficient."
+    }
+}

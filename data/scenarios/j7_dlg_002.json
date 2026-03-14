@@ -1,0 +1,185 @@
+{
+    "title": "The Night Market's Quiet Hour",
+    "title_zh": "夜市的安静时刻",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "It's nearly midnight at a Taipei night market. Most stalls have closed, but a middle-aged woman named Sister Lin is still tending her scallion pancake stand. You're her last customer. She seems contemplative tonight, watching the empty street where crowds were bustling just an hour ago.",
+        "setup_zh": "台北夜市快到午夜了。大多数摊位已经收摊，但一位中年女性——林姐——还在照看她的葱油饼摊。你是她最后一位客人。她今晚显得若有所思，望着一小时前还人潮涌动的空荡街道。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道吗，我最喜欢的其实不是人多的时候，是现在这个时间。灯还亮着，油烟的味道还没散，但人都走了。整条街突然变得很安静，像是在喘一口气。",
+                "text_pinyin": "Nǐ zhīdào ma, wǒ zuì xǐhuān de qíshí bú shì rén duō de shíhòu, shì xiànzài zhège shíjiān. Dēng hái liàng zhe, yóuyān de wèidào hái méi sàn, dàn rén dōu zǒu le. Zhěng tiáo jiē tūrán biàn de hěn ānjìng, xiàng shì zài chuǎn yī kǒu qì.",
+                "text_en": "You know, my favorite time isn't when it's crowded — it's right now. The lights are still on, the smell of cooking oil hasn't faded yet, but everyone's gone. The whole street suddenly goes quiet, like it's catching its breath."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Sister Lin's observation about this quiet moment.",
+                "options": [
+                    {
+                        "text_zh": "我能理解。白天的热闹是属于客人的，但这个安静的尾声才是属于你的。一个地方最真实的样子，往往是人群散去之后。",
+                        "text_pinyin": "Wǒ néng lǐjiě. Báitiān de rènào shì shǔyú kèrén de, dàn zhège ānjìng de wěishēng cái shì shǔyú nǐ de. Yīge dìfang zuì zhēnshí de yàngzi, wǎngwǎng shì rénqún sàn qù zhīhòu.",
+                        "text_en": "I can understand that. The bustle belongs to the customers, but this quiet epilogue belongs to you. The most authentic side of a place often shows itself after everyone's gone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She looks at you with a slight surprised smile, like you said something she's thought but never heard aloud. \"Yes,\" she says. \"Exactly that.\""
+                    },
+                    {
+                        "text_zh": "你应该早点收摊，这么晚对身体不好。",
+                        "text_pinyin": "Nǐ yīnggāi zǎo diǎn shōu tān, zhème wǎn duì shēntǐ bù hǎo.",
+                        "text_en": "You should close up earlier, staying this late is bad for your health.",
+                        "score": 0.0,
+                        "feedback": "She nods with a patient expression. \"My sister says the same thing,\" she says, and turns to wipe down the griddle."
+                    },
+                    {
+                        "text_zh": "这条街每天几点开始、几点结束？",
+                        "text_pinyin": "Zhè tiáo jiē měitiān jǐ diǎn kāishǐ, jǐ diǎn jiéshù?",
+                        "text_en": "What time does this street open and close every day?",
+                        "score": 0.0,
+                        "feedback": "She blinks, a little thrown by the turn. \"Around five until midnight, usually,\" she says, then falls quiet again."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我妈以前也摆摊，就在这同一个位置。她教我说，做吃的这一行，重要的不是手艺多高超，而是你愿不愿意在别人看不到的时候也认真。比如收摊前的最后一张饼，跟第一张要一样用心。",
+                "text_pinyin": "Wǒ mā yǐqián yě bǎi tān, jiù zài zhè tóngyī ge wèizhì. Tā jiāo wǒ shuō, zuò chī de zhè yī háng, zhòngyào de bú shì shǒuyì duō gāochāo, ér shì nǐ yuàn bú yuànyì zài biérén kàn bú dào de shíhòu yě rènzhēn. Bǐrú shōu tān qián de zuìhòu yī zhāng bǐng, gēn dì yī zhāng yào yīyàng yòngxīn.",
+                "text_en": "My mom used to run a stall too, in this exact same spot. She taught me that in the food business, what matters isn't how skilled you are, but whether you're willing to be conscientious even when no one's watching. Like the last pancake before closing — it should have the same care as the first one."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the philosophy her mother taught her about craft.",
+                "options": [
+                    {
+                        "text_zh": "这是很朴素但很深的职业伦理。不是为了被看见而认真，而是认真本身就是对食物和对自己的尊重。你妈妈的说法比「匠心」这种词更实在——就是一种日常的选择。",
+                        "text_pinyin": "Zhè shì hěn pǔsù dàn hěn shēn de zhíyè lúnlǐ. Bú shì wèile bèi kànjiàn ér rènzhēn, ér shì rènzhēn běnshēn jiù shì duì shíwù hé duì zìjǐ de zūnzhòng. Nǐ māma de shuōfǎ bǐ 'jiàngxīn' zhè zhǒng cí gèng shízài — jiù shì yī zhǒng rìcháng de xuǎnzé.",
+                        "text_en": "A plain but deep professional ethic. Not being careful to be seen, but careful as respect — for the food and yourself. Your mother's way of putting it is more grounded than 'artisan spirit' — a daily choice.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She stops wiping and goes still for a second. \"Daily choice — she would have liked that,\" she says softly, half to herself."
+                    },
+                    {
+                        "text_zh": "你妈妈一直在同一个位置摆摊？那这个位置是固定租给你家的吗？",
+                        "text_pinyin": "Nǐ māma yīzhí zài tóngyī ge wèizhì bǎi tān? Nà zhège wèizhì shì gùdìng zū gěi nǐ jiā de ma?",
+                        "text_en": "Your mom always ran this same spot? Is this location rented permanently to your family?",
+                        "score": 0.0,
+                        "feedback": "She looks a bit caught off guard. \"Something like that,\" she says vaguely, and moves on."
+                    },
+                    {
+                        "text_zh": "我觉得现在的葱油饼不如以前好吃了，可能是油的质量下降了。",
+                        "text_pinyin": "Wǒ juéde xiànzài de cōngyóubǐng bù rú yǐqián hǎochī le, kěnéng shì yóu de zhìliàng xiàjiàng le.",
+                        "text_en": "I think scallion pancakes aren't as good as they used to be, maybe the oil quality has dropped.",
+                        "score": 0.0,
+                        "feedback": "She glances at you, then at the griddle, then goes quiet. The mood shifts slightly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到点子上了。现在很多人把「匠心」当成营销用语，一说匠心就涨价。但对我妈来说，那就是做人的底线。她不会跟你解释为什么要这样做——她觉得不需要解释。后来我接手以后才慢慢明白，她那种不解释的态度本身就是一种教育。",
+                "text_pinyin": "Nǐ shuō dào diǎnzi shàng le. Xiànzài hěn duō rén bǎ 'jiàngxīn' dāng chéng yíngxiāo yòngyǔ, yī shuō jiàngxīn jiù zhǎngjià. Dàn duì wǒ mā lái shuō, nà jiù shì zuòrén de dǐxiàn. Tā bú huì gēn nǐ jiěshì wèishéme yào zhèyàng zuò — tā juéde bù xūyào jiěshì. Hòulái wǒ jiēshǒu yǐhòu cái mànmàn míngbái, tā nà zhǒng bù jiěshì de tàidù běnshēn jiù shì yī zhǒng jiàoyù.",
+                "text_en": "You hit the nail on the head. Nowadays people use 'artisan spirit' as a marketing term — mention artisan spirit and prices go up. But for my mom, it was just the baseline of being a decent person. She wouldn't explain to you why she did things that way — she didn't think it needed explaining. It was only after I took over that I gradually understood: her refusal to explain was itself a form of education."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to this idea of teaching through doing rather than explaining.",
+                "options": [
+                    {
+                        "text_zh": "「身教重于言教」。有时候把道理说出来反而变成教条。你妈妈用行动教你的东西，因为没被明确说出来，反而留给你空间自己去领悟。那种留白本身就是信任。",
+                        "text_pinyin": "'Shēnjiào zhòng yú yánjiào'. Yǒu shíhòu bǎ dàolǐ shuō chūlái fǎn'ér biàn chéng jiàotiáo. Nǐ māma yòng xíngdòng jiāo nǐ de dōngxī, yīnwèi méi bèi míngquè shuō chūlái, fǎn'ér liú gěi nǐ kōngjiān zìjǐ qù lǐngwù. Nà zhǒng liúbái běnshēn jiù shì xìnrèn.",
+                        "text_en": "'Teaching by example outweighs words.' When you state a principle, it can harden into dogma. What your mother taught through action left you room to understand it yourself. That blank space is trust.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She's quiet for a moment, her hands resting on the counter. \"Trust,\" she repeats, nodding once. \"That's a good way to put it.\""
+                    },
+                    {
+                        "text_zh": "那你为什么不去开一家正式的餐厅呢？比摆摊赚得多。",
+                        "text_pinyin": "Nà nǐ wèishéme bú qù kāi yī jiā zhèngshì de cāntīng ne? Bǐ bǎi tān zhuàn de duō.",
+                        "text_en": "Then why don't you open a proper restaurant? You'd make more money than running a stall.",
+                        "score": 0.0,
+                        "feedback": "She tilts her head. \"My mom didn't care about making more money,\" she says simply. \"Neither do I, really.\""
+                    },
+                    {
+                        "text_zh": "你的饼一直都是这个价格吗？最近没有涨价？",
+                        "text_pinyin": "Nǐ de bǐng yīzhí dōu shì zhège jiàgé ma? Zuìjìn méiyǒu zhǎngjià?",
+                        "text_en": "Has the pancake always been this price? No price increase recently?",
+                        "score": 0.0,
+                        "feedback": "She tells you the current price with a polite smile, and a small silence settles between you."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "信任——这个词用得好。她信任我会自己想明白。有时候我收摊的时候一个人站在这里，闻着那股油烟味，会突然很想她。不是因为难过，而是因为觉得她还在这里。这个摊位就像是我们之间的一根线。",
+                "text_pinyin": "Xìnrèn — zhège cí yòng de hǎo. Tā xìnrèn wǒ huì zìjǐ xiǎng míngbái. Yǒu shíhòu wǒ shōu tān de shíhòu yīge rén zhàn zài zhèlǐ, wén zhe nà gǔ yóuyān wèi, huì tūrán hěn xiǎng tā. Bú shì yīnwèi nánguò, ér shì yīnwèi juéde tā hái zài zhèlǐ. Zhège tānwèi jiù xiàng shì wǒmen zhī jiān de yī gēn xiàn.",
+                "text_en": "Trust — that's a good word for it. She trusted me to figure it out myself. Sometimes when I'm closing up, standing here alone, smelling the cooking oil, I suddenly miss her very much. Not because I'm sad, but because I feel she's still here. This stall is like a thread between us."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to how the stall keeps her connected to her mother.",
+                "options": [
+                    {
+                        "text_zh": "也许这就是为什么你不愿意换地方或者改行。每一次揉面、每一次煎饼，都是在重复她教给你的动作。那种重复不是机械的——是一种仪式，每天用身体记住一个人。",
+                        "text_pinyin": "Yěxǔ zhè jiù shì wèishéme nǐ bú yuànyì huàn dìfang huòzhě gǎiháng. Měi yī cì róu miàn, měi yī cì jiān bǐng, dōu shì zài chóngfù tā jiāo gěi nǐ de dòngzuò. Nà zhǒng chóngfù bú shì jīxiè de — shì yī zhǒng yíshì, měi tiān yòng shēntǐ jì zhù yīge rén.",
+                        "text_en": "Maybe that's why you don't want to move or change careers. Every time you knead dough, fry a pancake, you're repeating motions she taught you. That repetition isn't mechanical — it's ritual. Remembering someone with your body, every day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She looks down at her hands, and her expression goes somewhere private for a moment. \"Remembering with your body,\" she says quietly. \"Yes.\""
+                    },
+                    {
+                        "text_zh": "你有考虑过注册商标吗？现在品牌很重要。",
+                        "text_pinyin": "Nǐ yǒu kǎolǜ guò zhùcè shāngbiāo ma? Xiànzài pǐnpái hěn zhòngyào.",
+                        "text_en": "Have you considered registering a trademark? Branding is really important these days.",
+                        "score": 0.0,
+                        "feedback": "She blinks, and the warmth in her face retreats slightly. \"I'll think about it,\" she says politely."
+                    },
+                    {
+                        "text_zh": "你的摊位是租的吗？这里的摊位费贵不贵？",
+                        "text_pinyin": "Nǐ de tānwèi shì zū de ma? Zhèlǐ de tānwèi fèi guì bú guì?",
+                        "text_en": "Is your stall space rented? Are the fees here expensive?",
+                        "score": 0.0,
+                        "feedback": "She gives you a brief answer on the fees, then turns to straighten something on the counter."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "仪式……对，就是这个意思。好了，这是你的饼，最后一张。你慢慢吃。我去收拾了。谢谢你今晚陪我聊了这么久，这条街上难得有人愿意在这个时间停下来。",
+                "text_pinyin": "Yíshì…… duì, jiù shì zhège yìsi. Hǎo le, zhè shì nǐ de bǐng, zuìhòu yī zhāng. Nǐ mànmàn chī. Wǒ qù shōushí le. Xièxiè nǐ jīn wǎn péi wǒ liáo le zhème jiǔ, zhè tiáo jiē shàng nándé yǒu rén yuànyì zài zhège shíjiān tíng xiàlái.",
+                "text_en": "Ritual… yes, that's exactly what I mean. Alright, here's your pancake — the last one. Take your time eating. I'll go clean up. Thank you for chatting with me this long tonight. It's rare for someone to stop at this hour on this street."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say goodbye to Sister Lin at the end of the night.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你的饼，也谢谢今晚说的这些话。你妈妈如果看到你现在的样子，应该不需要多说什么了——你已经都懂了。明天见，林姐。",
+                        "text_pinyin": "Xièxiè nǐ de bǐng, yě xièxiè jīn wǎn shuō de zhèxiē huà. Nǐ māma rúguǒ kàn dào nǐ xiànzài de yàngzi, yīnggāi bù xūyào duō shuō shénme le — nǐ yǐjīng dōu dǒng le. Míngtiān jiàn, Lín jiě.",
+                        "text_en": "Thank you for the pancake, and for what you shared tonight. If your mother saw you now, she probably wouldn't need to say much — you already understand. See you tomorrow, Sister Lin.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She holds your gaze for a moment, then looks away and smiles to herself. \"Goodnight,\" she says softly. She doesn't say anything else."
+                    },
+                    {
+                        "text_zh": "能不能给我一张名片？我下次带朋友来。",
+                        "text_pinyin": "Néng bù néng gěi wǒ yī zhāng míngpiàn? Wǒ xià cì dài péngyǒu lái.",
+                        "text_en": "Can you give me a business card? I'll bring friends next time.",
+                        "score": 0.0,
+                        "feedback": "\"I don't have cards,\" she says pleasantly. \"But we're here every night.\""
+                    },
+                    {
+                        "text_zh": "你这里可以用手机支付吗？我没带现金。",
+                        "text_pinyin": "Nǐ zhèlǐ kěyǐ yòng shǒujī zhīfù ma? Wǒ méi dài xiànjīn.",
+                        "text_en": "Can I pay by phone here? I didn't bring cash.",
+                        "score": 0.0,
+                        "feedback": "She points to the QR code on the counter without missing a beat. The practical question breaks the spell of the evening."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Taiwan's night markets are not just commercial spaces — they are intergenerational institutions. Many stalls occupy the same spot for decades, with recipes and locations passed down within families. The quiet hour after closing is a private time that vendors rarely share with outsiders. The phrase 身教重于言教 (teaching by example outweighs teaching by words) reflects a deep Confucian value about how wisdom is transmitted through lived practice rather than instruction."
+    }
+}

@@ -1,0 +1,196 @@
+{
+    "title": "The Transfer Topographer",
+    "title_zh": "转账地形学家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_bank_6_01_v0",
+    "tree": {
+        "setup": "The wire transfer window at a Bank of China branch, separated from the general teller area by frosted glass panels that lend it the atmosphere of a confessional. Teller Xiao Wen has processed international wire transfers for nine years and speaks about SWIFT codes with the quiet confidence of someone who has memorized the routing numbers of forty-seven countries. Her desk has a single personal item: a small cactus named after a particularly difficult correspondent bank.",
+        "setup_zh": "中国银行的电汇窗口，磨砂玻璃将它与普通柜台区隔开，营造出一种告解室般的氛围。柜员小文处理国际电汇已经九年，谈起SWIFT代码时带着一种安静的自信——那是记住了四十七个国家的汇款路径号码的人才有的底气。她的桌上只有一件私人物品：一盆以某家特别难缠的代理行命名的仙人掌。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，这里是国际汇款窗口。请问要办理什么业务？",
+                "text_pinyin": "nín hǎo, zhèlǐ shì guójì huì kuǎn chuāngkǒu. qǐngwèn yào bànlǐ shénme yèwù?",
+                "text_en": "Hello, this is the international transfer window. How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you need to send money abroad.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想往美国汇一笔钱。大概五千美元，汇到我自己在美国的账户。我带了护照和银行卡，但是第一次在中国办跨境汇款，不太清楚流程。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng wǎng Měiguó huì yì bǐ qián. dàgài wǔqiān Měiyuán, huì dào wǒ zìjǐ zài Měiguó de zhànghù. wǒ dài le hùzhào hé yínháng kǎ, dànshì dì yī cì zài Zhōngguó bàn kuà jìng huì kuǎn, bú tài qīngchǔ liúchéng.",
+                        "text_en": "Hello, I'd like to wire money to the US. About $5,000, to my own American account. I have my passport and bank card, but it's my first time doing an international transfer in China — I'm not sure about the process.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Amount, destination, purpose, and honest admission of inexperience — Xiao Wen begins her favorite tutorial. She has given it 2,300 times and it improves each time."
+                    },
+                    {
+                        "text_zh": "我要往国外汇钱。",
+                        "text_pinyin": "wǒ yào wǎng guówài huì qián.",
+                        "text_en": "I need to send money abroad.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need details: where, how much, what currency. Her questions come in a systematic cascade."
+                    },
+                    {
+                        "text_zh": "国际转账怎么弄？",
+                        "text_pinyin": "guójì zhuǎn zhàng zěnme nòng?",
+                        "text_en": "How do international transfers work?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A broad question. She takes a breath and begins from first principles — she secretly enjoys these from-scratch explanations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，汇到自己的海外账户相对简单。我需要几样东西：您的护照、这边银行的借记卡、收款银行的名称和地址、收款人账号、还有收款银行的SWIFT代码。您有这些信息吗？",
+                "text_pinyin": "hǎo de, huì dào zìjǐ de hǎiwài zhànghù xiāngduì jiǎndān. wǒ xūyào jǐ yàng dōngxi: nín de hùzhào, zhè biān yínháng de jièjì kǎ, shōu kuǎn yínháng de míngchēng hé dìzhǐ, shōu kuǎn rén zhànghào, hái yǒu shōu kuǎn yínháng de SWIFT dàimǎ. nín yǒu zhèxiē xìnxī ma?",
+                "text_en": "OK, transferring to your own overseas account is relatively straightforward. I need: your passport, your debit card from this bank, the receiving bank's name and address, the account number, and the SWIFT code. Do you have all this?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide the information and ask about the SWIFT code.",
+                "options": [
+                    {
+                        "text_zh": "护照和银行卡在这里。收款银行是Chase Bank，账号我手机里有。不过SWIFT代码我不确定……是CHASUS33吗？我在网上查到的。",
+                        "text_pinyin": "hùzhào hé yínháng kǎ zài zhèlǐ. shōu kuǎn yínháng shì Chase Bank, zhànghào wǒ shǒujī lǐ yǒu. búguò SWIFT dàimǎ wǒ bú quèdìng……shì CHASUS sān sān ma? wǒ zài wǎng shàng chá dào de.",
+                        "text_en": "Passport and card are here. The receiving bank is Chase Bank — I have the account number on my phone. I'm not sure about the SWIFT code though... is it CHASUS33? I found it online.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Doing your homework but double-checking — Xiao Wen verifies it in her system. CHASUS33 is correct, and she nods with the satisfaction of confirmed accuracy."
+                    },
+                    {
+                        "text_zh": "这些都有，但是我不知道SWIFT代码。",
+                        "text_pinyin": "zhèxiē dōu yǒu, dànshì wǒ bù zhīdào SWIFT dàimǎ.",
+                        "text_en": "I have everything except the SWIFT code.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She can look it up — she has a database that her cactus guards with silent vigilance."
+                    },
+                    {
+                        "text_zh": "SWIFT代码是什么？我没听说过。",
+                        "text_pinyin": "SWIFT dàimǎ shì shénme? wǒ méi tīngshuō guò.",
+                        "text_en": "What's a SWIFT code? I've never heard of it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The cactus leans forward imperceptibly. Xiao Wen explains: it's the international ID code for banks, like a postal code for money."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "CHASUS33是对的，这是Chase的纽约总部代码。好，信息都齐了。现在需要填一张购汇申请表。因为您是用人民币购买美元再汇出去的，所以要在申请表上注明汇款用途。请问您的汇款用途是什么？",
+                "text_pinyin": "CHASUS sān sān shì duì de, zhè shì Chase de Niǔyuē zǒngbù dàimǎ. hǎo, xìnxī dōu qí le. xiànzài xūyào tián yì zhāng gòu huì shēnqǐng biǎo. yīnwèi nín shì yòng rénmínbì gòumǎi Měiyuán zài huì chūqù de, suǒyǐ yào zài shēnqǐng biǎo shàng zhùmíng huì kuǎn yòngtú. qǐngwèn nín de huì kuǎn yòngtú shì shénme?",
+                "text_en": "CHASUS33 is correct — that's Chase's New York headquarters code. Good, all info is here. Now I need you to fill out a foreign exchange application. Since you're converting RMB to USD, the form requires the purpose of transfer. What is the purpose?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the purpose of the transfer.",
+                "options": [
+                    {
+                        "text_zh": "这笔钱是我在中国工作的合法收入，我想转回美国用来还助学贷款。如果需要提供收入证明或者工资单，我可以让公司出具。",
+                        "text_pinyin": "zhè bǐ qián shì wǒ zài Zhōngguó gōngzuò de héfǎ shōurù, wǒ xiǎng zhuǎn huí Měiguó yòng lái huán zhùxué dàikuǎn. rúguǒ xūyào tígōng shōurù zhèngmíng huòzhě gōngzī dān, wǒ kěyǐ ràng gōngsī chūjù.",
+                        "text_en": "This is my legal income from working in China — I want to transfer it back to the US to repay student loans. If you need proof of income or pay stubs, my company can provide them.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Legal income, specific purpose, and proactive about documentation — Xiao Wen's compliance radar stays green. This is a model transfer."
+                    },
+                    {
+                        "text_zh": "个人储蓄，转回自己的账户。",
+                        "text_pinyin": "gèrén chúxù, zhuǎn huí zìjǐ de zhànghù.",
+                        "text_en": "Personal savings, transferring to my own account.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Acceptable, though she may need more detail for the form. She asks a gentle follow-up."
+                    },
+                    {
+                        "text_zh": "就是自己的钱，想汇回去。",
+                        "text_pinyin": "jiùshì zìjǐ de qián, xiǎng huì huíqù.",
+                        "text_en": "It's my own money — I just want to send it back.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Understandable frustration with bureaucracy, but the form needs a specific category. She'll help you choose the right one."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，用途我填「偿还境外贷款」。今天的汇率是一美元兑七点二四人民币，五千美元需要三万六千两百人民币，加上手续费八十块和电报费一百五十块。总共三万六千四百三十块。您确认吗？",
+                "text_pinyin": "hǎo de, yòngtú wǒ tián「chánghuán jìngwài dàikuǎn」. jīntiān de huìlǜ shì yì Měiyuán duì qī diǎn èr sì rénmínbì, wǔqiān Měiyuán xūyào sānwàn liùqiān liǎngbǎi rénmínbì, jiā shàng shǒuxù fèi bāshí kuài hé diànbào fèi yìbǎi wǔshí kuài. zǒnggòng sānwàn liùqiān sìbǎi sānshí kuài. nín quèrèn ma?",
+                "text_en": "OK, I'll put 'repayment of overseas loan' as the purpose. Today's rate is 1 USD to 7.24 RMB. $5,000 comes to 36,200 RMB, plus 80 yuan handling fee and 150 yuan cable fee. Total: 36,430 RMB. Do you confirm?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about the timeline.",
+                "options": [
+                    {
+                        "text_zh": "确认。请问这笔汇款大概多长时间到账？有没有可能中间出问题？万一被退回来怎么办？",
+                        "text_pinyin": "quèrèn. qǐngwèn zhè bǐ huì kuǎn dàgài duō cháng shíjiān dào zhàng? yǒu méiyǒu kěnéng zhōngjiān chū wèntí? wànyī bèi tuì huílái zěnme bàn?",
+                        "text_en": "Confirmed. How long will the transfer take to arrive? Is there a chance something goes wrong midway? What if it gets returned?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about failure modes — the sign of someone who has learned that money in transit is money in limbo. Xiao Wen's cactus seems to straighten in solidarity."
+                    },
+                    {
+                        "text_zh": "确认。多久能到？",
+                        "text_pinyin": "quèrèn. duō jiǔ néng dào?",
+                        "text_en": "Confirmed. How long?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The essential question. She gives the standard timeline."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She processes the transfer. You'll find out the timeline when the money arrives — or doesn't."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一般三到五个工作日到账。如果信息都正确的话不会出问题。万一被退回，原路退回您的账户，手续费不退。这是汇款回执单，上面有一个参考号码。如果需要查询到账情况，可以用这个号码打客服电话。",
+                "text_pinyin": "yìbān sān dào wǔ gè gōngzuò rì dào zhàng. rúguǒ xìnxī dōu zhèngquè de huà búhuì chū wèntí. wànyī bèi tuì huí, yuánlù tuì huí nín de zhànghù, shǒuxù fèi bú tuì. zhè shì huì kuǎn huízhí dān, shàngmiàn yǒu yí gè cānkǎo hàomǎ. rúguǒ xūyào cháxún dào zhàng qíngkuàng, kěyǐ yòng zhège hàomǎ dǎ kèfú diànhuà.",
+                "text_en": "Usually 3-5 business days. If all info is correct, there shouldn't be issues. If it's returned, it goes back to your account — fees aren't refunded. Here's your receipt with a reference number. Use it to call customer service for status updates."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢小文，你解释得太清楚了。以后每个月汇款我都来找你。对了，下次来能不能提前在网上填好申请表，这样会更快一些？",
+                        "text_pinyin": "fēicháng gǎnxiè Xiǎo Wén, nǐ jiěshì de tài qīngchǔ le. yǐhòu měi gè yuè huì kuǎn wǒ dōu lái zhǎo nǐ. duì le, xià cì lái néng bu néng tíqián zài wǎng shàng tián hǎo shēnqǐng biǎo, zhèyàng huì gèng kuài yìxiē?",
+                        "text_en": "Thank you so much Xiao Wen — your explanation was incredibly clear. I'll come to you every month for transfers. By the way, can I fill out the application online beforehand next time to speed things up?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Loyalty, gratitude, and process optimization — Xiao Wen smiles. The cactus has found a worthy client."
+                    },
+                    {
+                        "text_zh": "谢谢！回执单我收好了。",
+                        "text_pinyin": "xièxie! huízhí dān wǒ shōu hǎo le.",
+                        "text_en": "Thanks! I'll keep the receipt safe.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Keeping the receipt — an underrated act of financial wisdom. She nods approvingly."
+                    },
+                    {
+                        "text_zh": "好的，希望钱能顺利到。",
+                        "text_pinyin": "hǎo de, xīwàng qián néng shùnlì dào.",
+                        "text_en": "OK, hope the money arrives smoothly.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "It will. CHASUS33 and Xiao Wen's precision have never let each other down."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "International wire transfers from China require completing a 购汇申请表 (foreign exchange application) declaring the purpose of the transfer. Common categories include education, travel, salary remittance, and loan repayment. The $50,000 annual foreign exchange quota (购汇限额) is per person. SWIFT codes and cable fees (电报费) are standard charges."
+    }
+}

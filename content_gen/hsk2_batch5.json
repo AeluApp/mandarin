@@ -1,0 +1,802 @@
+[
+  {
+    "id": "j2_observe_029",
+    "title": "The Repairman's Hands",
+    "title_zh": "修东西的人的手",
+    "hsk_level": 2,
+    "text_zh": "楼下有一个修鞋的老人。他的手很大，上面有很多小的伤。我问他疼不疼，他笑了笑说：「每一个伤都是一双鞋的故事。」从那以后，我觉得他的手比我见过的所有手都好看。因为那些手让旧的东西又变成新的了。",
+    "text_pinyin": "Lóu xià yǒu yí gè xiū xié de lǎorén. Tā de shǒu hěn dà, shàngmiàn yǒu hěn duō xiǎo de shāng. Wǒ wèn tā téng bù téng, tā xiào le xiào shuō: 「Měi yí gè shāng dōu shì yì shuāng xié de gùshi.」 Cóng nà yǐhòu, wǒ juéde tā de shǒu bǐ wǒ jiàn guò de suǒyǒu shǒu dōu hǎokàn. Yīnwèi nàxiē shǒu ràng jiù de dōngxi yòu biàn chéng xīn de le.",
+    "text_en": "Downstairs there's an old man who repairs shoes. His hands are big, covered with small scars. I asked if they hurt. He smiled and said: 'Every scar is the story of a pair of shoes.' Since then, I think his hands are more beautiful than any I've seen. Because those hands make old things new again.",
+    "questions": [
+      {"type": "mc", "q_zh": "老人的手上有什么？", "q_en": "What is on the old man's hands?",
+       "options": [
+         {"text": "很多小的伤", "pinyin": "hěn duō xiǎo de shāng", "text_en": "many small scars", "correct": true},
+         {"text": "很多戒指", "pinyin": "hěn duō jièzhi", "text_en": "many rings", "correct": false},
+         {"text": "什么都没有", "pinyin": "shénme dōu méiyǒu", "text_en": "nothing", "correct": false},
+         {"text": "颜色", "pinyin": "yánsè", "text_en": "colors", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "老人说他的伤是什么？", "q_en": "What did the old man say about his scars?",
+       "options": [
+         {"text": "很疼", "pinyin": "hěn téng", "text_en": "very painful", "correct": false},
+         {"text": "每一个伤都是一双鞋的故事", "pinyin": "měi yí gè shāng dōu shì yì shuāng xié de gùshi", "text_en": "every scar is the story of a pair of shoes", "correct": true},
+         {"text": "是小时候的伤", "pinyin": "shì xiǎo shíhou de shāng", "text_en": "childhood scars", "correct": false},
+         {"text": "他不想说", "pinyin": "tā bù xiǎng shuō", "text_en": "he didn't want to say", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」为什么觉得老人的手好看？", "q_en": "Why does 'I' think the old man's hands are beautiful?",
+       "options": [
+         {"text": "因为手很大", "pinyin": "yīnwèi shǒu hěn dà", "text_en": "because they're big", "correct": false},
+         {"text": "因为手很白", "pinyin": "yīnwèi shǒu hěn bái", "text_en": "because they're fair", "correct": false},
+         {"text": "因为那些手让旧的东西又变新了", "pinyin": "yīnwèi nàxiē shǒu ràng jiù de dōngxi yòu biàn xīn le", "text_en": "because those hands make old things new", "correct": true},
+         {"text": "因为老人很友好", "pinyin": "yīnwèi lǎorén hěn yǒuhǎo", "text_en": "because the old man is friendly", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_observe_030",
+    "title": "The Last Customer",
+    "title_zh": "最后一个客人",
+    "hsk_level": 2,
+    "text_zh": "咖啡店要关门了，但是还有一个女人坐在角落里。她面前的咖啡已经冷了，可是她还在看窗外。服务员没有让她走，只是把灯关了一些。那个女人好像不是在等人，她只是需要一个安静的地方坐一会儿。",
+    "text_pinyin": "Kāfēi diàn yào guān mén le, dànshì hái yǒu yí gè nǚrén zuò zài jiǎoluò lǐ. Tā miànqián de kāfēi yǐjīng lěng le, kěshì tā hái zài kàn chuāng wài. Fúwùyuán méiyǒu ràng tā zǒu, zhǐshì bǎ dēng guān le yìxiē. Nàge nǚrén hǎoxiàng búshì zài děng rén, tā zhǐshì xūyào yí gè ānjìng de dìfang zuò yíhuìr.",
+    "text_en": "The coffee shop was about to close, but a woman still sat in the corner. The coffee in front of her had gone cold, yet she kept looking out the window. The server didn't ask her to leave, just dimmed some lights. The woman didn't seem to be waiting for anyone — she just needed a quiet place to sit for a while.",
+    "questions": [
+      {"type": "mc", "q_zh": "咖啡店快要怎么样了？", "q_en": "What was the coffee shop about to do?",
+       "options": [
+         {"text": "要关门了", "pinyin": "yào guān mén le", "text_en": "about to close", "correct": true},
+         {"text": "要开门了", "pinyin": "yào kāi mén le", "text_en": "about to open", "correct": false},
+         {"text": "要搬家了", "pinyin": "yào bān jiā le", "text_en": "about to move", "correct": false},
+         {"text": "要换人了", "pinyin": "yào huàn rén le", "text_en": "about to change staff", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "服务员做了什么？", "q_en": "What did the server do?",
+       "options": [
+         {"text": "让她走", "pinyin": "ràng tā zǒu", "text_en": "asked her to leave", "correct": false},
+         {"text": "给她换了新咖啡", "pinyin": "gěi tā huàn le xīn kāfēi", "text_en": "got her new coffee", "correct": false},
+         {"text": "把灯关了一些", "pinyin": "bǎ dēng guān le yìxiē", "text_en": "dimmed some lights", "correct": true},
+         {"text": "跟她说话", "pinyin": "gēn tā shuō huà", "text_en": "talked to her", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "那个女人在做什么？", "q_en": "What was the woman doing?",
+       "options": [
+         {"text": "等一个朋友", "pinyin": "děng yí gè péngyou", "text_en": "waiting for a friend", "correct": false},
+         {"text": "看书", "pinyin": "kàn shū", "text_en": "reading", "correct": false},
+         {"text": "需要一个安静的地方坐一会儿", "pinyin": "xūyào yí gè ānjìng de dìfang zuò yíhuìr", "text_en": "needed a quiet place to sit", "correct": true},
+         {"text": "喝咖啡", "pinyin": "hē kāfēi", "text_en": "drinking coffee", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_observe_031",
+    "title": "The Umbrella Exchange",
+    "title_zh": "换伞",
+    "hsk_level": 2,
+    "text_zh": "下雨了。地铁站外面，一个年轻人把自己的大伞给了一个老人，然后拿了老人的小伞。老人说：「你的伞比我的好。」年轻人说：「没关系，我走得快。」虽然只是很小的事，但是我看了以后心里很暖。",
+    "text_pinyin": "Xià yǔ le. Dìtiě zhàn wàimiàn, yí gè niánqīng rén bǎ zìjǐ de dà sǎn gěi le yí gè lǎorén, ránhòu ná le lǎorén de xiǎo sǎn. Lǎorén shuō: 「Nǐ de sǎn bǐ wǒ de hǎo.」 Niánqīng rén shuō: 「Méi guānxi, wǒ zǒu de kuài.」 Suīrán zhǐshì hěn xiǎo de shì, dànshì wǒ kàn le yǐhòu xīnlǐ hěn nuǎn.",
+    "text_en": "It was raining. Outside the subway station, a young person gave their big umbrella to an elderly person and took the old person's small one. The old person said: 'Your umbrella is better than mine.' The young person said: 'It's okay, I walk fast.' Although it was a small thing, watching it made my heart warm.",
+    "questions": [
+      {"type": "mc", "q_zh": "年轻人做了什么？", "q_en": "What did the young person do?",
+       "options": [
+         {"text": "把大伞给了老人", "pinyin": "bǎ dà sǎn gěi le lǎorén", "text_en": "gave the big umbrella to the old person", "correct": true},
+         {"text": "买了一把新伞", "pinyin": "mǎi le yì bǎ xīn sǎn", "text_en": "bought a new umbrella", "correct": false},
+         {"text": "跟老人一起走", "pinyin": "gēn lǎorén yìqǐ zǒu", "text_en": "walked with the old person", "correct": false},
+         {"text": "什么都没做", "pinyin": "shénme dōu méi zuò", "text_en": "did nothing", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "年轻人为什么说没关系？", "q_en": "Why did the young person say it's okay?",
+       "options": [
+         {"text": "因为雨不大", "pinyin": "yīnwèi yǔ bú dà", "text_en": "because the rain wasn't heavy", "correct": false},
+         {"text": "因为他走得快", "pinyin": "yīnwèi tā zǒu de kuài", "text_en": "because they walk fast", "correct": true},
+         {"text": "因为他不怕雨", "pinyin": "yīnwèi tā bú pà yǔ", "text_en": "because they're not afraid of rain", "correct": false},
+         {"text": "因为他家很近", "pinyin": "yīnwèi tā jiā hěn jìn", "text_en": "because their home is close", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」看了以后有什么感觉？", "q_en": "How did 'I' feel after watching?",
+       "options": [
+         {"text": "心里很暖", "pinyin": "xīnlǐ hěn nuǎn", "text_en": "heart felt warm", "correct": true},
+         {"text": "很难过", "pinyin": "hěn nánguò", "text_en": "very sad", "correct": false},
+         {"text": "没有感觉", "pinyin": "méiyǒu gǎnjué", "text_en": "no feeling", "correct": false},
+         {"text": "很生气", "pinyin": "hěn shēngqì", "text_en": "very angry", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j2_observe_032",
+    "title": "The Sleeping Passenger",
+    "title_zh": "睡着的乘客",
+    "hsk_level": 2,
+    "text_zh": "地铁上，坐在我旁边的人睡着了。他的头慢慢地靠到了我的肩膀上。我没有动。因为他看起来太累了，好像很久没有好好睡觉了。到站的时候，他醒了，看着我说了一声「对不起」。我说：「没事，你睡得好吗？」他笑了。",
+    "text_pinyin": "Dìtiě shàng, zuò zài wǒ pángbiān de rén shuìzháo le. Tā de tóu mànman de kào dào le wǒ de jiānbǎng shàng. Wǒ méiyǒu dòng. Yīnwèi tā kàn qǐlái tài lèi le, hǎoxiàng hěn jiǔ méiyǒu hǎohāo shuì jiào le. Dào zhàn de shíhou, tā xǐng le, kànzhe wǒ shuō le yì shēng「duìbuqǐ」. Wǒ shuō: 「Méi shì, nǐ shuì de hǎo ma?」 Tā xiào le.",
+    "text_en": "On the subway, the person next to me fell asleep. His head slowly leaned onto my shoulder. I didn't move. Because he looked so tired, like he hadn't slept well in a long time. When we reached the station, he woke up and said 'sorry.' I said: 'It's fine, did you sleep well?' He smiled.",
+    "questions": [
+      {"type": "mc", "q_zh": "那个人的头靠到了哪里？", "q_en": "Where did the person's head lean?",
+       "options": [
+         {"text": "窗户上", "pinyin": "chuānghu shàng", "text_en": "on the window", "correct": false},
+         {"text": "「我」的肩膀上", "pinyin": "wǒ de jiānbǎng shàng", "text_en": "on 'my' shoulder", "correct": true},
+         {"text": "椅子上", "pinyin": "yǐzi shàng", "text_en": "on the chair", "correct": false},
+         {"text": "自己的手上", "pinyin": "zìjǐ de shǒu shàng", "text_en": "on his own hand", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」为什么没有动？", "q_en": "Why didn't 'I' move?",
+       "options": [
+         {"text": "因为「我」也睡着了", "pinyin": "yīnwèi wǒ yě shuìzháo le", "text_en": "because 'I' also fell asleep", "correct": false},
+         {"text": "因为他看起来太累了", "pinyin": "yīnwèi tā kàn qǐlái tài lèi le", "text_en": "because he looked too tired", "correct": true},
+         {"text": "因为「我」不能动", "pinyin": "yīnwèi wǒ bù néng dòng", "text_en": "because 'I' couldn't move", "correct": false},
+         {"text": "因为快到站了", "pinyin": "yīnwèi kuài dào zhàn le", "text_en": "because the stop was coming", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "醒了以后，那个人说了什么？", "q_en": "What did the person say after waking up?",
+       "options": [
+         {"text": "谢谢", "pinyin": "xièxie", "text_en": "thank you", "correct": false},
+         {"text": "对不起", "pinyin": "duìbuqǐ", "text_en": "sorry", "correct": true},
+         {"text": "再见", "pinyin": "zàijiàn", "text_en": "goodbye", "correct": false},
+         {"text": "什么都没说", "pinyin": "shénme dōu méi shuō", "text_en": "said nothing", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j2_observe_033",
+    "title": "The Plant on the Windowsill",
+    "title_zh": "窗台上的花",
+    "hsk_level": 2,
+    "text_zh": "对面楼的一个窗户上，总是放着一盆花。春天的时候花开了，很好看。夏天太热了，花有点不好了。但是有人每天给它浇水。秋天花又好了。虽然我不知道那个人是谁，但是我觉得他一定很有耐心。",
+    "text_pinyin": "Duìmiàn lóu de yí gè chuānghu shàng, zǒngshì fàngzhe yì pén huā. Chūntiān de shíhou huā kāi le, hěn hǎokàn. Xiàtiān tài rè le, huā yǒudiǎn bù hǎo le. Dànshì yǒu rén měi tiān gěi tā jiāo shuǐ. Qiūtiān huā yòu hǎo le. Suīrán wǒ bù zhīdào nàge rén shì shéi, dànshì wǒ juéde tā yídìng hěn yǒu nàixīn.",
+    "text_en": "On a window of the building across from mine, there's always a pot of flowers. In spring the flowers bloomed beautifully. In summer it was too hot and the plant looked unwell. But someone watered it every day. In autumn the flowers recovered. Although I don't know who that person is, I think they must be very patient.",
+    "questions": [
+      {"type": "mc", "q_zh": "花在哪里？", "q_en": "Where is the plant?",
+       "options": [
+         {"text": "「我」的窗台上", "pinyin": "wǒ de chuāngtái shàng", "text_en": "on 'my' windowsill", "correct": false},
+         {"text": "对面楼的窗户上", "pinyin": "duìmiàn lóu de chuānghu shàng", "text_en": "on the window of the building across", "correct": true},
+         {"text": "公园里", "pinyin": "gōngyuán lǐ", "text_en": "in the park", "correct": false},
+         {"text": "路边", "pinyin": "lù biān", "text_en": "by the road", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "夏天的时候花怎么样了？", "q_en": "What happened to the plant in summer?",
+       "options": [
+         {"text": "花开了", "pinyin": "huā kāi le", "text_en": "flowers bloomed", "correct": false},
+         {"text": "花有点不好了", "pinyin": "huā yǒudiǎn bù hǎo le", "text_en": "the plant looked unwell", "correct": true},
+         {"text": "花死了", "pinyin": "huā sǐ le", "text_en": "the plant died", "correct": false},
+         {"text": "没有变化", "pinyin": "méiyǒu biànhuà", "text_en": "no change", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得那个人怎么样？", "q_en": "What does 'I' think of that person?",
+       "options": [
+         {"text": "很忙", "pinyin": "hěn máng", "text_en": "very busy", "correct": false},
+         {"text": "很有耐心", "pinyin": "hěn yǒu nàixīn", "text_en": "very patient", "correct": true},
+         {"text": "很无聊", "pinyin": "hěn wúliáo", "text_en": "very bored", "correct": false},
+         {"text": "很有钱", "pinyin": "hěn yǒu qián", "text_en": "very rich", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_observe_034",
+    "title": "The Dog Walker's Routine",
+    "title_zh": "遛狗的人",
+    "hsk_level": 2,
+    "text_zh": "每天早上六点半，一个男人带着他的狗从我家门前走过。狗很老了，走得很慢。但是那个男人从来不让狗走快。他总是慢慢地走，有时候还停下来等狗闻一闻路边的树。我觉得他比很多人都懂什么是陪伴。",
+    "text_pinyin": "Měi tiān zǎoshang liù diǎn bàn, yí gè nánrén dàizhe tā de gǒu cóng wǒ jiā mén qián zǒu guò. Gǒu hěn lǎo le, zǒu de hěn màn. Dànshì nàge nánrén cónglái bú ràng gǒu zǒu kuài. Tā zǒngshì mànman de zǒu, yǒu shíhou hái tíng xiàlái děng gǒu wén yì wén lù biān de shù. Wǒ juéde tā bǐ hěn duō rén dōu dǒng shénme shì péibàn.",
+    "text_en": "Every morning at six thirty, a man walks past my door with his dog. The dog is old and walks slowly. But the man never makes the dog walk faster. He always walks slowly, sometimes stopping to let the dog sniff the trees by the road. I think he understands companionship better than most people.",
+    "questions": [
+      {"type": "mc", "q_zh": "那条狗怎么样？", "q_en": "What is the dog like?",
+       "options": [
+         {"text": "很年轻", "pinyin": "hěn niánqīng", "text_en": "very young", "correct": false},
+         {"text": "很老，走得很慢", "pinyin": "hěn lǎo, zǒu de hěn màn", "text_en": "very old, walks slowly", "correct": true},
+         {"text": "很大，很快", "pinyin": "hěn dà, hěn kuài", "text_en": "big and fast", "correct": false},
+         {"text": "很小", "pinyin": "hěn xiǎo", "text_en": "very small", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "那个男人让狗走快吗？", "q_en": "Does the man make the dog walk fast?",
+       "options": [
+         {"text": "让", "pinyin": "ràng", "text_en": "yes", "correct": false},
+         {"text": "从来不让", "pinyin": "cónglái bú ràng", "text_en": "never", "correct": true},
+         {"text": "有时候让", "pinyin": "yǒu shíhou ràng", "text_en": "sometimes", "correct": false},
+         {"text": "早上让", "pinyin": "zǎoshang ràng", "text_en": "in the morning", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得那个男人懂什么？", "q_en": "What does 'I' think the man understands?",
+       "options": [
+         {"text": "怎么训练狗", "pinyin": "zěnme xùnliàn gǒu", "text_en": "how to train dogs", "correct": false},
+         {"text": "什么是陪伴", "pinyin": "shénme shì péibàn", "text_en": "what companionship is", "correct": true},
+         {"text": "怎么走路", "pinyin": "zěnme zǒu lù", "text_en": "how to walk", "correct": false},
+         {"text": "早起的好处", "pinyin": "zǎo qǐ de hǎochù", "text_en": "benefits of waking early", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_observe_035",
+    "title": "The Night Market's End",
+    "title_zh": "夜市收摊",
+    "hsk_level": 2,
+    "text_zh": "夜市快结束的时候，卖东西的人开始收摊了。一个卖水果的阿姨把剩下的水果装到箱子里。她旁边的人帮她搬了一个很重的箱子。他们好像不认识，但是别人有困难的时候，帮忙是很自然的事。夜市的灯一个一个地关了，街上又安静了。",
+    "text_pinyin": "Yèshì kuài jiéshù de shíhou, mài dōngxi de rén kāishǐ shōu tān le. Yí gè mài shuǐguǒ de āyí bǎ shèng xià de shuǐguǒ zhuāng dào xiāngzi lǐ. Tā pángbiān de rén bāng tā bān le yí gè hěn zhòng de xiāngzi. Tāmen hǎoxiàng bú rènshi, dànshì biéren yǒu kùnnan de shíhou, bāngmáng shì hěn zìrán de shì. Yèshì de dēng yí gè yí gè de guān le, jiē shàng yòu ānjìng le.",
+    "text_en": "When the night market was ending, vendors started packing up. A fruit-selling auntie put the remaining fruit into boxes. The person next to her helped carry a heavy box. They didn't seem to know each other, but when someone has difficulty, helping is the most natural thing. The night market lights went off one by one, and the street became quiet again.",
+    "questions": [
+      {"type": "mc", "q_zh": "夜市快结束的时候，人们做什么？", "q_en": "What did people do as the night market was ending?",
+       "options": [
+         {"text": "开始收摊", "pinyin": "kāishǐ shōu tān", "text_en": "started packing up", "correct": true},
+         {"text": "买更多东西", "pinyin": "mǎi gèng duō dōngxi", "text_en": "bought more things", "correct": false},
+         {"text": "唱歌", "pinyin": "chàng gē", "text_en": "sang songs", "correct": false},
+         {"text": "坐下来休息", "pinyin": "zuò xiàlái xiūxi", "text_en": "sat down to rest", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "旁边的人做了什么？", "q_en": "What did the person nearby do?",
+       "options": [
+         {"text": "买了水果", "pinyin": "mǎi le shuǐguǒ", "text_en": "bought fruit", "correct": false},
+         {"text": "帮她搬了一个重的箱子", "pinyin": "bāng tā bān le yí gè zhòng de xiāngzi", "text_en": "helped carry a heavy box", "correct": true},
+         {"text": "跟她说话", "pinyin": "gēn tā shuō huà", "text_en": "talked to her", "correct": false},
+         {"text": "走了", "pinyin": "zǒu le", "text_en": "left", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "他们认识吗？", "q_en": "Did they know each other?",
+       "options": [
+         {"text": "认识", "pinyin": "rènshi", "text_en": "yes", "correct": false},
+         {"text": "好像不认识", "pinyin": "hǎoxiàng bú rènshi", "text_en": "didn't seem to", "correct": true},
+         {"text": "是朋友", "pinyin": "shì péngyou", "text_en": "they were friends", "correct": false},
+         {"text": "是一家人", "pinyin": "shì yì jiā rén", "text_en": "they were family", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j2_identity_007",
+    "title": "The Name I Chose",
+    "title_zh": "我选的名字",
+    "hsk_level": 2,
+    "text_zh": "我有一个中文名字，是我自己选的。老师说可以用跟我英文名字发音像的字。我选了两个字，一个是「安」，一个是「宁」。因为我觉得安静的生活比什么都好。朋友们叫我「安宁」的时候，我觉得自己真的变成了另一个人。",
+    "text_pinyin": "Wǒ yǒu yí gè Zhōngwén míngzi, shì wǒ zìjǐ xuǎn de. Lǎoshī shuō kěyǐ yòng gēn wǒ Yīngwén míngzi fāyīn xiàng de zì. Wǒ xuǎn le liǎng gè zì, yí gè shì「ān」, yí gè shì「níng」. Yīnwèi wǒ juéde ānjìng de shēnghuó bǐ shénme dōu hǎo. Péngyoumen jiào wǒ「Ānníng」de shíhou, wǒ juéde zìjǐ zhēn de biàn chéng le lìng yí gè rén.",
+    "text_en": "I have a Chinese name that I chose myself. The teacher said I could use characters that sound like my English name. I chose two characters: 'an' and 'ning.' Because I think a quiet life is better than anything. When friends call me 'Anning,' I feel like I've truly become another person.",
+    "questions": [
+      {"type": "mc", "q_zh": "中文名字是谁选的？", "q_en": "Who chose the Chinese name?",
+       "options": [
+         {"text": "老师", "pinyin": "lǎoshī", "text_en": "the teacher", "correct": false},
+         {"text": "自己", "pinyin": "zìjǐ", "text_en": "themselves", "correct": true},
+         {"text": "父母", "pinyin": "fùmǔ", "text_en": "parents", "correct": false},
+         {"text": "朋友", "pinyin": "péngyou", "text_en": "friend", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "为什么选了「安宁」这个名字？", "q_en": "Why was the name 'Anning' chosen?",
+       "options": [
+         {"text": "因为觉得安静的生活比什么都好", "pinyin": "yīnwèi juéde ānjìng de shēnghuó bǐ shénme dōu hǎo", "text_en": "because a quiet life is best", "correct": true},
+         {"text": "因为老师说的", "pinyin": "yīnwèi lǎoshī shuō de", "text_en": "because the teacher said so", "correct": false},
+         {"text": "因为很好听", "pinyin": "yīnwèi hěn hǎotīng", "text_en": "because it sounds nice", "correct": false},
+         {"text": "因为写起来容易", "pinyin": "yīnwèi xiě qǐlái róngyì", "text_en": "because it's easy to write", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "朋友叫他中文名字的时候，他有什么感觉？", "q_en": "How does he feel when friends call him by the Chinese name?",
+       "options": [
+         {"text": "不喜欢", "pinyin": "bù xǐhuan", "text_en": "doesn't like it", "correct": false},
+         {"text": "觉得自己变成了另一个人", "pinyin": "juéde zìjǐ biàn chéng le lìng yí gè rén", "text_en": "feels like becoming another person", "correct": true},
+         {"text": "没什么感觉", "pinyin": "méi shénme gǎnjué", "text_en": "no particular feeling", "correct": false},
+         {"text": "觉得很好笑", "pinyin": "juéde hěn hǎoxiào", "text_en": "finds it funny", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_identity_008",
+    "title": "The Language in Between",
+    "title_zh": "两种语言之间",
+    "hsk_level": 2,
+    "text_zh": "说中文的时候，我觉得自己比较安静。说英文的时候，我说话比较快，也比较多。妈妈问我：「你用中文想东西还是用英文？」我想了想说：「有时候两个都用。」她笑了，说：「那你的脑子一定很忙。」",
+    "text_pinyin": "Shuō Zhōngwén de shíhou, wǒ juéde zìjǐ bǐjiào ānjìng. Shuō Yīngwén de shíhou, wǒ shuō huà bǐjiào kuài, yě bǐjiào duō. Māma wèn wǒ: 「Nǐ yòng Zhōngwén xiǎng dōngxi háishi yòng Yīngwén?」 Wǒ xiǎng le xiǎng shuō: 「Yǒu shíhou liǎng gè dōu yòng.」 Tā xiào le, shuō: 「Nà nǐ de nǎozi yídìng hěn máng.」",
+    "text_en": "When I speak Chinese, I feel quieter. When I speak English, I talk faster and more. Mom asked me: 'Do you think in Chinese or English?' I thought about it and said: 'Sometimes both.' She laughed and said: 'Then your brain must be very busy.'",
+    "questions": [
+      {"type": "mc", "q_zh": "说中文的时候，「我」觉得自己怎么样？", "q_en": "How does 'I' feel when speaking Chinese?",
+       "options": [
+         {"text": "比较安静", "pinyin": "bǐjiào ānjìng", "text_en": "quieter", "correct": true},
+         {"text": "很紧张", "pinyin": "hěn jǐnzhāng", "text_en": "nervous", "correct": false},
+         {"text": "说话很多", "pinyin": "shuō huà hěn duō", "text_en": "talks a lot", "correct": false},
+         {"text": "很高兴", "pinyin": "hěn gāoxìng", "text_en": "very happy", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」用什么语言想东西？", "q_en": "What language does 'I' think in?",
+       "options": [
+         {"text": "只用中文", "pinyin": "zhǐ yòng Zhōngwén", "text_en": "only Chinese", "correct": false},
+         {"text": "只用英文", "pinyin": "zhǐ yòng Yīngwén", "text_en": "only English", "correct": false},
+         {"text": "有时候两个都用", "pinyin": "yǒu shíhou liǎng gè dōu yòng", "text_en": "sometimes both", "correct": true},
+         {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "doesn't know", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "妈妈说了什么？", "q_en": "What did mom say?",
+       "options": [
+         {"text": "你应该只用中文", "pinyin": "nǐ yīnggāi zhǐ yòng Zhōngwén", "text_en": "you should only use Chinese", "correct": false},
+         {"text": "你的脑子一定很忙", "pinyin": "nǐ de nǎozi yídìng hěn máng", "text_en": "your brain must be very busy", "correct": true},
+         {"text": "那很好", "pinyin": "nà hěn hǎo", "text_en": "that's great", "correct": false},
+         {"text": "我不明白", "pinyin": "wǒ bù míngbai", "text_en": "I don't understand", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j2_identity_009",
+    "title": "The Old Photograph",
+    "title_zh": "旧照片",
+    "hsk_level": 2,
+    "text_zh": "搬家的时候，我找到了一张旧照片。照片里是十年前的我，站在学校门前。那时候我还不高，笑得很开心。我看了很久，想从那个笑里找到现在的自己。虽然长大了，但是有些东西没有变。比如，我还是喜欢一个人安安静静地看天。",
+    "text_pinyin": "Bān jiā de shíhou, wǒ zhǎo dào le yì zhāng jiù zhàopiàn. Zhàopiàn lǐ shì shí nián qián de wǒ, zhàn zài xuéxiào mén qián. Nà shíhou wǒ hái bù gāo, xiào de hěn kāixīn. Wǒ kàn le hěn jiǔ, xiǎng cóng nàge xiào lǐ zhǎo dào xiànzài de zìjǐ. Suīrán zhǎng dà le, dànshì yǒuxiē dōngxi méiyǒu biàn. Bǐrú, wǒ háishi xǐhuan yí gè rén ān'ānjìngjìng de kàn tiān.",
+    "text_en": "While moving, I found an old photograph. In it was me from ten years ago, standing in front of the school. Back then I wasn't tall yet, smiling happily. I looked at it for a long time, trying to find my present self in that smile. Although I've grown up, some things haven't changed. For example, I still like to quietly watch the sky alone.",
+    "questions": [
+      {"type": "mc", "q_zh": "照片是什么时候的？", "q_en": "When was the photo from?",
+       "options": [
+         {"text": "十年前", "pinyin": "shí nián qián", "text_en": "ten years ago", "correct": true},
+         {"text": "去年", "pinyin": "qùnián", "text_en": "last year", "correct": false},
+         {"text": "上个月", "pinyin": "shàng gè yuè", "text_en": "last month", "correct": false},
+         {"text": "二十年前", "pinyin": "èrshí nián qián", "text_en": "twenty years ago", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」在照片里做什么？", "q_en": "What was 'I' doing in the photo?",
+       "options": [
+         {"text": "站在学校门前，笑得很开心", "pinyin": "zhàn zài xuéxiào mén qián, xiào de hěn kāixīn", "text_en": "standing in front of school, smiling happily", "correct": true},
+         {"text": "坐在教室里", "pinyin": "zuò zài jiàoshì lǐ", "text_en": "sitting in class", "correct": false},
+         {"text": "跟朋友在一起", "pinyin": "gēn péngyou zài yìqǐ", "text_en": "with friends", "correct": false},
+         {"text": "在家里", "pinyin": "zài jiā lǐ", "text_en": "at home", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "什么东西没有变？", "q_en": "What hasn't changed?",
+       "options": [
+         {"text": "身高", "pinyin": "shēngāo", "text_en": "height", "correct": false},
+         {"text": "喜欢一个人安静地看天", "pinyin": "xǐhuan yí gè rén ānjìng de kàn tiān", "text_en": "likes to quietly watch the sky alone", "correct": true},
+         {"text": "学校", "pinyin": "xuéxiào", "text_en": "school", "correct": false},
+         {"text": "家的地方", "pinyin": "jiā de dìfang", "text_en": "where home is", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_identity_010",
+    "title": "The Accent",
+    "title_zh": "口音",
+    "hsk_level": 2,
+    "text_zh": "有人跟我说：「你说中文有口音。」我以前觉得这不好。但是后来一个中国朋友对我说：「口音就是你从哪里来的证明。别想让它消失。」从那以后，我不再觉得口音是一个问题了。因为它是我的一部分，从我的家乡一直跟着我到这里。",
+    "text_pinyin": "Yǒu rén gēn wǒ shuō: 「Nǐ shuō Zhōngwén yǒu kǒuyīn.」 Wǒ yǐqián juéde zhè bù hǎo. Dànshì hòulái yí gè Zhōngguó péngyou duì wǒ shuō: 「Kǒuyīn jiùshì nǐ cóng nǎli lái de zhèngmíng. Bié xiǎng ràng tā xiāoshī.」 Cóng nà yǐhòu, wǒ bú zài juéde kǒuyīn shì yí gè wèntí le. Yīnwèi tā shì wǒ de yí bùfen, cóng wǒ de jiāxiāng yìzhí gēnzhe wǒ dào zhèlǐ.",
+    "text_en": "Someone told me: 'You speak Chinese with an accent.' I used to think that was bad. But later a Chinese friend said to me: 'An accent is proof of where you come from. Don't try to make it disappear.' Since then, I no longer think an accent is a problem. Because it's part of me, following me from my hometown all the way here.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」以前觉得口音怎么样？", "q_en": "How did 'I' used to feel about the accent?",
+       "options": [
+         {"text": "觉得不好", "pinyin": "juéde bù hǎo", "text_en": "thought it was bad", "correct": true},
+         {"text": "觉得很好", "pinyin": "juéde hěn hǎo", "text_en": "thought it was good", "correct": false},
+         {"text": "没有感觉", "pinyin": "méiyǒu gǎnjué", "text_en": "no feeling", "correct": false},
+         {"text": "觉得很好笑", "pinyin": "juéde hěn hǎoxiào", "text_en": "found it funny", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "中国朋友说口音是什么？", "q_en": "What did the Chinese friend say an accent is?",
+       "options": [
+         {"text": "一个问题", "pinyin": "yí gè wèntí", "text_en": "a problem", "correct": false},
+         {"text": "从哪里来的证明", "pinyin": "cóng nǎli lái de zhèngmíng", "text_en": "proof of where you come from", "correct": true},
+         {"text": "不好的习惯", "pinyin": "bù hǎo de xíguàn", "text_en": "a bad habit", "correct": false},
+         {"text": "应该改的东西", "pinyin": "yīnggāi gǎi de dōngxi", "text_en": "something to fix", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "现在「我」怎么看口音？", "q_en": "How does 'I' view the accent now?",
+       "options": [
+         {"text": "还是觉得不好", "pinyin": "háishi juéde bù hǎo", "text_en": "still thinks it's bad", "correct": false},
+         {"text": "觉得是自己的一部分", "pinyin": "juéde shì zìjǐ de yí bùfen", "text_en": "thinks it's part of themselves", "correct": true},
+         {"text": "想让它消失", "pinyin": "xiǎng ràng tā xiāoshī", "text_en": "wants it to disappear", "correct": false},
+         {"text": "不想说中文了", "pinyin": "bù xiǎng shuō Zhōngwén le", "text_en": "doesn't want to speak Chinese anymore", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_mystery_011",
+    "title": "The Missing Spoon",
+    "title_zh": "不见了的勺子",
+    "hsk_level": 2,
+    "text_zh": "办公室的厨房里有五个勺子。星期一变成了四个。没有人说拿了。星期三又变成了三个。我很好奇，所以每天早上都去看。星期五的时候，勺子又变成五个了。但是有两个是新的。因为有人发现勺子少了，买了新的放回去。",
+    "text_pinyin": "Bàngōngshì de chúfáng lǐ yǒu wǔ gè sháozi. Xīngqīyī biàn chéng le sì gè. Méiyǒu rén shuō ná le. Xīngqīsān yòu biàn chéng le sān gè. Wǒ hěn hàoqí, suǒyǐ měi tiān zǎoshang dōu qù kàn. Xīngqīwǔ de shíhou, sháozi yòu biàn chéng wǔ gè le. Dànshì yǒu liǎng gè shì xīn de. Yīnwèi yǒu rén fāxiàn sháozi shǎo le, mǎi le xīn de fàng huíqù.",
+    "text_en": "The office kitchen had five spoons. On Monday it became four. No one said they took one. Wednesday it became three. I was curious, so I checked every morning. By Friday, there were five again. But two were new. Someone noticed the spoons were disappearing and bought new ones to put back.",
+    "questions": [
+      {"type": "mc", "q_zh": "星期三的时候有几个勺子？", "q_en": "How many spoons were there on Wednesday?",
+       "options": [
+         {"text": "五个", "pinyin": "wǔ gè", "text_en": "five", "correct": false},
+         {"text": "四个", "pinyin": "sì gè", "text_en": "four", "correct": false},
+         {"text": "三个", "pinyin": "sān gè", "text_en": "three", "correct": true},
+         {"text": "两个", "pinyin": "liǎng gè", "text_en": "two", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」为什么每天早上去看？", "q_en": "Why did 'I' check every morning?",
+       "options": [
+         {"text": "因为要用勺子", "pinyin": "yīnwèi yào yòng sháozi", "text_en": "needed a spoon", "correct": false},
+         {"text": "因为很好奇", "pinyin": "yīnwèi hěn hàoqí", "text_en": "because of curiosity", "correct": true},
+         {"text": "因为老板让他看", "pinyin": "yīnwèi lǎobǎn ràng tā kàn", "text_en": "boss told them to", "correct": false},
+         {"text": "因为要打扫", "pinyin": "yīnwèi yào dǎsǎo", "text_en": "needed to clean", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "星期五多出来的勺子是怎么回事？", "q_en": "What happened with the extra spoons on Friday?",
+       "options": [
+         {"text": "旧的找到了", "pinyin": "jiù de zhǎo dào le", "text_en": "old ones were found", "correct": false},
+         {"text": "有人买了新的放回去", "pinyin": "yǒu rén mǎi le xīn de fàng huíqù", "text_en": "someone bought new ones", "correct": true},
+         {"text": "是别的办公室的", "pinyin": "shì biéde bàngōngshì de", "text_en": "from another office", "correct": false},
+         {"text": "是老板买的", "pinyin": "shì lǎobǎn mǎi de", "text_en": "the boss bought them", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_mystery_012",
+    "title": "The Note Under the Door",
+    "title_zh": "门下面的纸条",
+    "hsk_level": 2,
+    "text_zh": "每个星期二，我的门下面都会出现一张小纸条。上面写着一句话，比如「今天会是好的一天」或者「别忘了喝水」。我问了邻居，他们都说不是自己写的。有一天，纸条上写着：「你笑的时候，整个楼都亮了。」我还是不知道是谁，但是我每个星期二都很期待。",
+    "text_pinyin": "Měi gè Xīngqī'èr, wǒ de mén xiàmiàn dōu huì chūxiàn yì zhāng xiǎo zhǐtiáo. Shàngmiàn xiězhe yí jù huà, bǐrú「jīntiān huì shì hǎo de yì tiān」huòzhě「bié wàng le hē shuǐ」. Wǒ wèn le línjū, tāmen dōu shuō búshì zìjǐ xiě de. Yǒu yì tiān, zhǐtiáo shàng xiězhe:「Nǐ xiào de shíhou, zhěng gè lóu dōu liàng le.」 Wǒ háishi bù zhīdào shì shéi, dànshì wǒ měi gè Xīngqī'èr dōu hěn qīdài.",
+    "text_en": "Every Tuesday, a small note appears under my door. On it is one sentence, like 'today will be a good day' or 'don't forget to drink water.' I asked my neighbors and they all said they didn't write it. One day the note said: 'When you smile, the whole building lights up.' I still don't know who it is, but every Tuesday I look forward to it.",
+    "questions": [
+      {"type": "mc", "q_zh": "纸条什么时候出现？", "q_en": "When do the notes appear?",
+       "options": [
+         {"text": "每天", "pinyin": "měi tiān", "text_en": "every day", "correct": false},
+         {"text": "每个星期二", "pinyin": "měi gè Xīngqī'èr", "text_en": "every Tuesday", "correct": true},
+         {"text": "每个月", "pinyin": "měi gè yuè", "text_en": "every month", "correct": false},
+         {"text": "没有规律", "pinyin": "méiyǒu guīlǜ", "text_en": "no pattern", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "邻居说了什么？", "q_en": "What did the neighbors say?",
+       "options": [
+         {"text": "是他们写的", "pinyin": "shì tāmen xiě de", "text_en": "they wrote them", "correct": false},
+         {"text": "都说不是自己写的", "pinyin": "dōu shuō búshì zìjǐ xiě de", "text_en": "all said they didn't write them", "correct": true},
+         {"text": "不想说", "pinyin": "bù xiǎng shuō", "text_en": "didn't want to say", "correct": false},
+         {"text": "他们也收到了", "pinyin": "tāmen yě shōu dào le", "text_en": "they received them too", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」对纸条是什么感觉？", "q_en": "How does 'I' feel about the notes?",
+       "options": [
+         {"text": "害怕", "pinyin": "hàipà", "text_en": "scared", "correct": false},
+         {"text": "生气", "pinyin": "shēngqì", "text_en": "angry", "correct": false},
+         {"text": "很期待", "pinyin": "hěn qīdài", "text_en": "looks forward to them", "correct": true},
+         {"text": "没感觉", "pinyin": "méi gǎnjué", "text_en": "no feeling", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_mystery_013",
+    "title": "The Wrong Coffee",
+    "title_zh": "拿错的咖啡",
+    "hsk_level": 2,
+    "text_zh": "今天在咖啡店，我拿了一杯咖啡。喝了一口，味道不对。我看了看杯子上的名字——不是我的。但是上面写着：「给今天累了的人，加了一点糖。」我想，是不是咖啡店的人故意写的？还是真的有人把自己的咖啡给了别人？不管怎样，那杯咖啡比我点的好喝。",
+    "text_pinyin": "Jīntiān zài kāfēi diàn, wǒ ná le yì bēi kāfēi. Hē le yì kǒu, wèidào bú duì. Wǒ kàn le kàn bēizi shàng de míngzi——búshì wǒ de. Dànshì shàngmiàn xiězhe:「Gěi jīntiān lèi le de rén, jiā le yìdiǎn táng.」 Wǒ xiǎng, shì bu shì kāfēi diàn de rén gùyì xiě de? Háishi zhēn de yǒu rén bǎ zìjǐ de kāfēi gěi le biéren? Bùguǎn zěnyàng, nà bēi kāfēi bǐ wǒ diǎn de hǎohē.",
+    "text_en": "Today at the coffee shop, I picked up a cup of coffee. After one sip, the taste was wrong. I looked at the name on the cup — it wasn't mine. But it said: 'For someone tired today, added a little sugar.' I wondered, did the barista write it on purpose? Or did someone really give their coffee away? Either way, that coffee tasted better than what I ordered.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」为什么觉得不对？", "q_en": "Why did 'I' think something was wrong?",
+       "options": [
+         {"text": "咖啡太冷了", "pinyin": "kāfēi tài lěng le", "text_en": "coffee was too cold", "correct": false},
+         {"text": "味道不对", "pinyin": "wèidào bú duì", "text_en": "the taste was wrong", "correct": true},
+         {"text": "杯子坏了", "pinyin": "bēizi huài le", "text_en": "the cup was broken", "correct": false},
+         {"text": "没有咖啡", "pinyin": "méiyǒu kāfēi", "text_en": "there was no coffee", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "杯子上写了什么？", "q_en": "What was written on the cup?",
+       "options": [
+         {"text": "「我」的名字", "pinyin": "wǒ de míngzi", "text_en": "'my' name", "correct": false},
+         {"text": "给今天累了的人，加了一点糖", "pinyin": "gěi jīntiān lèi le de rén, jiā le yìdiǎn táng", "text_en": "for someone tired today, added sugar", "correct": true},
+         {"text": "咖啡的价格", "pinyin": "kāfēi de jiàgé", "text_en": "the coffee's price", "correct": false},
+         {"text": "电话号码", "pinyin": "diànhuà hàomǎ", "text_en": "a phone number", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "那杯咖啡跟「我」点的比怎么样？", "q_en": "How did that coffee compare to what 'I' ordered?",
+       "options": [
+         {"text": "不好喝", "pinyin": "bù hǎohē", "text_en": "didn't taste good", "correct": false},
+         {"text": "一样", "pinyin": "yíyàng", "text_en": "the same", "correct": false},
+         {"text": "比「我」点的好喝", "pinyin": "bǐ wǒ diǎn de hǎohē", "text_en": "tasted better than what 'I' ordered", "correct": true},
+         {"text": "太甜了", "pinyin": "tài tián le", "text_en": "too sweet", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_mystery_014",
+    "title": "The Garden That Appears at Night",
+    "title_zh": "晚上才出现的花园",
+    "hsk_level": 2,
+    "text_zh": "我家旁边有一个小花园。白天看起来很普通。但是晚上，花园里的灯亮了，花的颜色变得很不一样。有一天晚上，我看到一个人在花园里安安静静地种花。我问他为什么晚上种。他说：「因为晚上安静，花也比较放松。」我不知道这是不是真的，但是从那以后，我觉得晚上的花园比白天好看多了。",
+    "text_pinyin": "Wǒ jiā pángbiān yǒu yí gè xiǎo huāyuán. Báitiān kàn qǐlái hěn pǔtōng. Dànshì wǎnshang, huāyuán lǐ de dēng liàng le, huā de yánsè biàn de hěn bù yíyàng. Yǒu yì tiān wǎnshang, wǒ kàn dào yí gè rén zài huāyuán lǐ ān'ānjìngjìng de zhòng huā. Wǒ wèn tā wèishénme wǎnshang zhòng. Tā shuō:「Yīnwèi wǎnshang ānjìng, huā yě bǐjiào fàngsōng.」 Wǒ bù zhīdào zhè shì bu shì zhēn de, dànshì cóng nà yǐhòu, wǒ juéde wǎnshang de huāyuán bǐ báitiān hǎokàn duō le.",
+    "text_en": "Next to my home there's a small garden. During the day it looks ordinary. But at night, the garden lights come on and the flower colors become very different. One evening I saw someone quietly planting flowers. I asked why they plant at night. They said: 'Because it's quiet at night, and the flowers are more relaxed too.' I don't know if that's true, but since then, the garden at night seems much more beautiful than during the day.",
+    "questions": [
+      {"type": "mc", "q_zh": "花园白天怎么样？", "q_en": "What is the garden like during the day?",
+       "options": [
+         {"text": "很好看", "pinyin": "hěn hǎokàn", "text_en": "very beautiful", "correct": false},
+         {"text": "很普通", "pinyin": "hěn pǔtōng", "text_en": "ordinary", "correct": true},
+         {"text": "没有花", "pinyin": "méiyǒu huā", "text_en": "no flowers", "correct": false},
+         {"text": "很大", "pinyin": "hěn dà", "text_en": "very large", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "那个人为什么晚上种花？", "q_en": "Why does the person plant at night?",
+       "options": [
+         {"text": "因为白天没时间", "pinyin": "yīnwèi báitiān méi shíjiān", "text_en": "no time during the day", "correct": false},
+         {"text": "因为晚上安静，花比较放松", "pinyin": "yīnwèi wǎnshang ānjìng, huā bǐjiào fàngsōng", "text_en": "because it's quiet and flowers relax", "correct": true},
+         {"text": "因为晚上不热", "pinyin": "yīnwèi wǎnshang bú rè", "text_en": "because it's not hot", "correct": false},
+         {"text": "因为不想让别人看到", "pinyin": "yīnwèi bù xiǎng ràng biéren kàn dào", "text_en": "doesn't want to be seen", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」现在觉得花园什么时候更好看？", "q_en": "When does 'I' now think the garden is more beautiful?",
+       "options": [
+         {"text": "白天", "pinyin": "báitiān", "text_en": "daytime", "correct": false},
+         {"text": "晚上", "pinyin": "wǎnshang", "text_en": "nighttime", "correct": true},
+         {"text": "早上", "pinyin": "zǎoshang", "text_en": "morning", "correct": false},
+         {"text": "都一样", "pinyin": "dōu yíyàng", "text_en": "the same", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j2_mystery_015",
+    "title": "The Library Book",
+    "title_zh": "图书馆的书",
+    "hsk_level": 2,
+    "text_zh": "我从图书馆借了一本书。打开的时候，里面有一张纸条，上面写着：「如果你也喜欢这本书，请在第三十页留一个记号。」我翻到第三十页——已经有五个小记号了。我也画了一个。虽然我们不认识，但是因为一本书，我们好像成了朋友。",
+    "text_pinyin": "Wǒ cóng túshūguǎn jiè le yì běn shū. Dǎkāi de shíhou, lǐmiàn yǒu yì zhāng zhǐtiáo, shàngmiàn xiězhe:「Rúguǒ nǐ yě xǐhuan zhè běn shū, qǐng zài dì sānshí yè liú yí gè jìhao.」 Wǒ fān dào dì sānshí yè——yǐjīng yǒu wǔ gè xiǎo jìhao le. Wǒ yě huà le yí gè. Suīrán wǒmen bú rènshi, dànshì yīnwèi yì běn shū, wǒmen hǎoxiàng chéng le péngyou.",
+    "text_en": "I borrowed a book from the library. When I opened it, there was a note inside: 'If you also like this book, please leave a mark on page thirty.' I turned to page thirty — there were already five small marks. I drew one too. Although we don't know each other, because of one book, it's like we've become friends.",
+    "questions": [
+      {"type": "mc", "q_zh": "纸条上写了什么？", "q_en": "What did the note say?",
+       "options": [
+         {"text": "请把书还回来", "pinyin": "qǐng bǎ shū huán huílái", "text_en": "please return the book", "correct": false},
+         {"text": "如果喜欢，请在第三十页留记号", "pinyin": "rúguǒ xǐhuan, qǐng zài dì sānshí yè liú jìhao", "text_en": "if you like it, leave a mark on page 30", "correct": true},
+         {"text": "这是我的书", "pinyin": "zhè shì wǒ de shū", "text_en": "this is my book", "correct": false},
+         {"text": "请给我打电话", "pinyin": "qǐng gěi wǒ dǎ diànhuà", "text_en": "please call me", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "第三十页上已经有几个记号了？", "q_en": "How many marks were already on page 30?",
+       "options": [
+         {"text": "三个", "pinyin": "sān gè", "text_en": "three", "correct": false},
+         {"text": "五个", "pinyin": "wǔ gè", "text_en": "five", "correct": true},
+         {"text": "一个", "pinyin": "yí gè", "text_en": "one", "correct": false},
+         {"text": "十个", "pinyin": "shí gè", "text_en": "ten", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得因为这本书怎么样了？", "q_en": "What does 'I' feel happened because of this book?",
+       "options": [
+         {"text": "认识了新朋友", "pinyin": "rènshi le xīn péngyou", "text_en": "met new friends", "correct": false},
+         {"text": "跟不认识的人好像成了朋友", "pinyin": "gēn bú rènshi de rén hǎoxiàng chéng le péngyou", "text_en": "became friends with strangers through the book", "correct": true},
+         {"text": "学到了新东西", "pinyin": "xué dào le xīn dōngxi", "text_en": "learned new things", "correct": false},
+         {"text": "想买这本书", "pinyin": "xiǎng mǎi zhè běn shū", "text_en": "wants to buy this book", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_travel_003",
+    "title": "The Slow Train",
+    "title_zh": "慢火车",
+    "hsk_level": 2,
+    "text_zh": "从这个城市到那个城市，坐高铁只要两个小时。但是我选了慢火车，要六个小时。因为慢火车会在很多小站停。每一个小站都有不一样的风景。有的站旁边是田，有的站旁边是河。我觉得旅行不是从一个地方到另一个地方，而是看路上的风景。",
+    "text_pinyin": "Cóng zhège chéngshì dào nàge chéngshì, zuò gāotiě zhǐ yào liǎng gè xiǎoshí. Dànshì wǒ xuǎn le màn huǒchē, yào liù gè xiǎoshí. Yīnwèi màn huǒchē huì zài hěn duō xiǎo zhàn tíng. Měi yí gè xiǎo zhàn dōu yǒu bù yíyàng de fēngjǐng. Yǒu de zhàn pángbiān shì tián, yǒu de zhàn pángbiān shì hé. Wǒ juéde lǚxíng búshì cóng yí gè dìfang dào lìng yí gè dìfang, érshì kàn lù shàng de fēngjǐng.",
+    "text_en": "From this city to that city, the high-speed train takes only two hours. But I chose the slow train — six hours. Because the slow train stops at many small stations. Each station has different scenery. Some stations have fields nearby, others rivers. I think travel isn't going from one place to another, but seeing the scenery along the way.",
+    "questions": [
+      {"type": "mc", "q_zh": "坐高铁要多长时间？", "q_en": "How long does the high-speed train take?",
+       "options": [
+         {"text": "六个小时", "pinyin": "liù gè xiǎoshí", "text_en": "six hours", "correct": false},
+         {"text": "两个小时", "pinyin": "liǎng gè xiǎoshí", "text_en": "two hours", "correct": true},
+         {"text": "四个小时", "pinyin": "sì gè xiǎoshí", "text_en": "four hours", "correct": false},
+         {"text": "一个小时", "pinyin": "yí gè xiǎoshí", "text_en": "one hour", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」为什么选了慢火车？", "q_en": "Why did 'I' choose the slow train?",
+       "options": [
+         {"text": "因为便宜", "pinyin": "yīnwèi piányi", "text_en": "because it's cheap", "correct": false},
+         {"text": "因为慢火车在很多小站停，风景不一样", "pinyin": "yīnwèi màn huǒchē zài hěn duō xiǎo zhàn tíng, fēngjǐng bù yíyàng", "text_en": "because it stops at many stations with different views", "correct": true},
+         {"text": "因为没有高铁票了", "pinyin": "yīnwèi méiyǒu gāotiě piào le", "text_en": "no high-speed tickets left", "correct": false},
+         {"text": "因为怕坐高铁", "pinyin": "yīnwèi pà zuò gāotiě", "text_en": "afraid of high-speed train", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得旅行是什么？", "q_en": "What does 'I' think travel is?",
+       "options": [
+         {"text": "快到一个地方", "pinyin": "kuài dào yí gè dìfang", "text_en": "getting somewhere fast", "correct": false},
+         {"text": "看路上的风景", "pinyin": "kàn lù shàng de fēngjǐng", "text_en": "seeing the scenery along the way", "correct": true},
+         {"text": "去很远的地方", "pinyin": "qù hěn yuǎn de dìfang", "text_en": "going far away", "correct": false},
+         {"text": "坐火车", "pinyin": "zuò huǒchē", "text_en": "riding trains", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_travel_004",
+    "title": "The Wrong Bus",
+    "title_zh": "坐错了车",
+    "hsk_level": 2,
+    "text_zh": "我坐错了公共汽车，到了一个不认识的地方。我有一点紧张，但是没有马上回去。我在那个地方走了走，找到了一个很小的公园。公园里只有几棵树和一张椅子。我坐在那里休息了一会儿。虽然坐错了车，但是我发现了一个安静的好地方。",
+    "text_pinyin": "Wǒ zuò cuò le gōnggòng qìchē, dào le yí gè bú rènshi de dìfang. Wǒ yǒu yìdiǎn jǐnzhāng, dànshì méiyǒu mǎshàng huíqù. Wǒ zài nàge dìfang zǒu le zǒu, zhǎo dào le yí gè hěn xiǎo de gōngyuán. Gōngyuán lǐ zhǐ yǒu jǐ kē shù hé yì zhāng yǐzi. Wǒ zuò zài nàli xiūxi le yíhuìr. Suīrán zuò cuò le chē, dànshì wǒ fāxiàn le yí gè ānjìng de hǎo dìfang.",
+    "text_en": "I took the wrong bus and arrived at a place I didn't know. I was a little nervous, but didn't go back right away. I walked around and found a very small park. The park had only a few trees and one bench. I sat there and rested a while. Although I took the wrong bus, I discovered a nice quiet spot.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」到了什么样的地方？", "q_en": "What kind of place did 'I' end up at?",
+       "options": [
+         {"text": "一个认识的地方", "pinyin": "yí gè rènshi de dìfang", "text_en": "a familiar place", "correct": false},
+         {"text": "一个不认识的地方", "pinyin": "yí gè bú rènshi de dìfang", "text_en": "an unfamiliar place", "correct": true},
+         {"text": "朋友家", "pinyin": "péngyou jiā", "text_en": "friend's home", "correct": false},
+         {"text": "公司", "pinyin": "gōngsī", "text_en": "the office", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」找到了什么？", "q_en": "What did 'I' find?",
+       "options": [
+         {"text": "一个商店", "pinyin": "yí gè shāngdiàn", "text_en": "a shop", "correct": false},
+         {"text": "一个很小的公园", "pinyin": "yí gè hěn xiǎo de gōngyuán", "text_en": "a very small park", "correct": true},
+         {"text": "一个饭馆", "pinyin": "yí gè fànguǎn", "text_en": "a restaurant", "correct": false},
+         {"text": "回家的路", "pinyin": "huí jiā de lù", "text_en": "the way home", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "虽然坐错了车，结果怎么样？", "q_en": "What was the result despite taking the wrong bus?",
+       "options": [
+         {"text": "回不了家了", "pinyin": "huí bu liǎo jiā le", "text_en": "couldn't get home", "correct": false},
+         {"text": "发现了一个安静的好地方", "pinyin": "fāxiàn le yí gè ānjìng de hǎo dìfang", "text_en": "discovered a nice quiet spot", "correct": true},
+         {"text": "迟到了", "pinyin": "chí dào le", "text_en": "was late", "correct": false},
+         {"text": "很不高兴", "pinyin": "hěn bù gāoxìng", "text_en": "very unhappy", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_travel_005",
+    "title": "The Hotel Window",
+    "title_zh": "旅馆的窗户",
+    "hsk_level": 2,
+    "text_zh": "旅馆的窗户打开以后，我看到了一条很老的街。街上没什么人，只有几家小店。一个老人坐在门前喝茶。从旅馆到这里的路很远，我很累。但是看到这个安安静静的地方，我觉得来对了。有时候旅行最好的部分，是到了以后从窗户看出去的那一刻。",
+    "text_pinyin": "Lǚguǎn de chuānghu dǎkāi yǐhòu, wǒ kàn dào le yì tiáo hěn lǎo de jiē. Jiē shàng méi shénme rén, zhǐ yǒu jǐ jiā xiǎo diàn. Yí gè lǎorén zuò zài mén qián hē chá. Cóng lǚguǎn dào zhèlǐ de lù hěn yuǎn, wǒ hěn lèi. Dànshì kàn dào zhège ān'ānjìngjìng de dìfang, wǒ juéde lái duì le. Yǒu shíhou lǚxíng zuì hǎo de bùfen, shì dào le yǐhòu cóng chuānghu kàn chūqù de nà yí kè.",
+    "text_en": "After opening the hotel window, I saw a very old street. Few people on the street, just a few small shops. An old man sat in front of his door drinking tea. The journey here was long and I was tired. But seeing this peaceful place, I felt I'd come to the right spot. Sometimes the best part of travel is that moment when you look out the window after arriving.",
+    "questions": [
+      {"type": "mc", "q_zh": "窗户外面是什么？", "q_en": "What was outside the window?",
+       "options": [
+         {"text": "一条很老的街", "pinyin": "yì tiáo hěn lǎo de jiē", "text_en": "a very old street", "correct": true},
+         {"text": "一个公园", "pinyin": "yí gè gōngyuán", "text_en": "a park", "correct": false},
+         {"text": "一个商场", "pinyin": "yí gè shāngchǎng", "text_en": "a mall", "correct": false},
+         {"text": "一条河", "pinyin": "yì tiáo hé", "text_en": "a river", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得来这里怎么样？", "q_en": "How does 'I' feel about coming here?",
+       "options": [
+         {"text": "来错了", "pinyin": "lái cuò le", "text_en": "came to the wrong place", "correct": false},
+         {"text": "来对了", "pinyin": "lái duì le", "text_en": "came to the right place", "correct": true},
+         {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "doesn't know", "correct": false},
+         {"text": "想回去", "pinyin": "xiǎng huíqù", "text_en": "wants to go back", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得旅行最好的部分是什么？", "q_en": "What does 'I' think is the best part of travel?",
+       "options": [
+         {"text": "坐火车", "pinyin": "zuò huǒchē", "text_en": "riding the train", "correct": false},
+         {"text": "吃当地的东西", "pinyin": "chī dāngdì de dōngxi", "text_en": "eating local food", "correct": false},
+         {"text": "到了以后从窗户看出去的那一刻", "pinyin": "dào le yǐhòu cóng chuānghu kàn chūqù de nà yí kè", "text_en": "the moment of looking out the window after arriving", "correct": true},
+         {"text": "认识新朋友", "pinyin": "rènshi xīn péngyou", "text_en": "meeting new friends", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j2_explain_003",
+    "title": "Why Bookstores Have Cafes",
+    "title_zh": "书店为什么有咖啡",
+    "hsk_level": 2,
+    "text_zh": "现在很多书店里面都有咖啡店。因为很多人不只是想买书，他们还想有一个地方可以安安静静地坐一会儿。买一杯咖啡，看一本书，不用走，不用说话。所以书店加了咖啡以后，来的人比以前多了。有时候一个安静的地方比什么都重要。",
+    "text_pinyin": "Xiànzài hěn duō shūdiàn lǐmiàn dōu yǒu kāfēi diàn. Yīnwèi hěn duō rén bù zhǐshì xiǎng mǎi shū, tāmen hái xiǎng yǒu yí gè dìfang kěyǐ ān'ānjìngjìng de zuò yíhuìr. Mǎi yì bēi kāfēi, kàn yì běn shū, bú yòng zǒu, bú yòng shuō huà. Suǒyǐ shūdiàn jiā le kāfēi yǐhòu, lái de rén bǐ yǐqián duō le. Yǒu shíhou yí gè ānjìng de dìfang bǐ shénme dōu zhòngyào.",
+    "text_en": "Now many bookstores have coffee shops inside. Because many people don't just want to buy books — they want a place to sit quietly for a while. Buy a cup of coffee, read a book, no need to go anywhere, no need to talk. So after bookstores added coffee, more people come than before. Sometimes a quiet place is more important than anything.",
+    "questions": [
+      {"type": "mc", "q_zh": "为什么书店加了咖啡？", "q_en": "Why did bookstores add coffee?",
+       "options": [
+         {"text": "因为咖啡好喝", "pinyin": "yīnwèi kāfēi hǎohē", "text_en": "because coffee tastes good", "correct": false},
+         {"text": "因为人们想有地方安静地坐一会儿", "pinyin": "yīnwèi rénmen xiǎng yǒu dìfang ānjìng de zuò yíhuìr", "text_en": "people want a quiet place to sit", "correct": true},
+         {"text": "因为书不好卖了", "pinyin": "yīnwèi shū bù hǎo mài le", "text_en": "because books don't sell well", "correct": false},
+         {"text": "因为老板喜欢咖啡", "pinyin": "yīnwèi lǎobǎn xǐhuan kāfēi", "text_en": "because the owner likes coffee", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "加了咖啡以后，来的人怎么样？", "q_en": "After adding coffee, what happened to the visitors?",
+       "options": [
+         {"text": "比以前少了", "pinyin": "bǐ yǐqián shǎo le", "text_en": "fewer than before", "correct": false},
+         {"text": "比以前多了", "pinyin": "bǐ yǐqián duō le", "text_en": "more than before", "correct": true},
+         {"text": "一样多", "pinyin": "yíyàng duō", "text_en": "the same", "correct": false},
+         {"text": "没有人来", "pinyin": "méiyǒu rén lái", "text_en": "no one comes", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "文章说什么比什么都重要？", "q_en": "What does the passage say is more important than anything?",
+       "options": [
+         {"text": "好的咖啡", "pinyin": "hǎo de kāfēi", "text_en": "good coffee", "correct": false},
+         {"text": "一个安静的地方", "pinyin": "yí gè ānjìng de dìfang", "text_en": "a quiet place", "correct": true},
+         {"text": "一本好书", "pinyin": "yì běn hǎo shū", "text_en": "a good book", "correct": false},
+         {"text": "很多朋友", "pinyin": "hěn duō péngyou", "text_en": "many friends", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_explain_004",
+    "title": "Why Rain Sounds Are Comforting",
+    "title_zh": "为什么雨声让人放松",
+    "hsk_level": 2,
+    "text_zh": "很多人说下雨的时候睡得好。这是因为雨声是一种很均匀的声音——不大不小，不快不慢。它让你的脑子不用去想别的事情。所以有的人在手机上听雨声睡觉。但是我觉得真的雨比手机上的好。因为真的雨还有风的味道。",
+    "text_pinyin": "Hěn duō rén shuō xià yǔ de shíhou shuì de hǎo. Zhè shì yīnwèi yǔ shēng shì yì zhǒng hěn jūnyún de shēngyīn——bú dà bù xiǎo, bú kuài bú màn. Tā ràng nǐ de nǎozi bú yòng qù xiǎng biéde shìqing. Suǒyǐ yǒu de rén zài shǒujī shàng tīng yǔ shēng shuì jiào. Dànshì wǒ juéde zhēn de yǔ bǐ shǒujī shàng de hǎo. Yīnwèi zhēn de yǔ hái yǒu fēng de wèidào.",
+    "text_en": "Many people say they sleep better when it rains. That's because rain is an even sound — not too loud, not too soft, not too fast, not too slow. It lets your brain stop thinking about other things. So some people listen to rain sounds on their phone to sleep. But I think real rain is better than on the phone. Because real rain also has the smell of wind.",
+    "questions": [
+      {"type": "mc", "q_zh": "为什么雨声让人睡得好？", "q_en": "Why does rain help people sleep?",
+       "options": [
+         {"text": "因为雨声很大", "pinyin": "yīnwèi yǔ shēng hěn dà", "text_en": "rain is loud", "correct": false},
+         {"text": "因为雨声很均匀，让脑子不想别的", "pinyin": "yīnwèi yǔ shēng hěn jūnyún, ràng nǎozi bù xiǎng biéde", "text_en": "rain is even and stops the brain from thinking", "correct": true},
+         {"text": "因为下雨的时候冷", "pinyin": "yīnwèi xià yǔ de shíhou lěng", "text_en": "because it's cold when raining", "correct": false},
+         {"text": "因为下雨的时候安静", "pinyin": "yīnwèi xià yǔ de shíhou ānjìng", "text_en": "because it's quiet when raining", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "有的人怎么听雨声？", "q_en": "How do some people listen to rain sounds?",
+       "options": [
+         {"text": "打开窗户", "pinyin": "dǎkāi chuānghu", "text_en": "open the window", "correct": false},
+         {"text": "在手机上听", "pinyin": "zài shǒujī shàng tīng", "text_en": "listen on their phone", "correct": true},
+         {"text": "出去走走", "pinyin": "chūqù zǒuzou", "text_en": "go for a walk", "correct": false},
+         {"text": "在电视上听", "pinyin": "zài diànshì shàng tīng", "text_en": "listen on TV", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」为什么觉得真的雨比较好？", "q_en": "Why does 'I' think real rain is better?",
+       "options": [
+         {"text": "因为声音比较大", "pinyin": "yīnwèi shēngyīn bǐjiào dà", "text_en": "louder", "correct": false},
+         {"text": "因为真的雨还有风的味道", "pinyin": "yīnwèi zhēn de yǔ hái yǒu fēng de wèidào", "text_en": "real rain has the smell of wind too", "correct": true},
+         {"text": "因为不用手机", "pinyin": "yīnwèi bú yòng shǒujī", "text_en": "no need for a phone", "correct": false},
+         {"text": "因为可以出去玩", "pinyin": "yīnwèi kěyǐ chūqù wán", "text_en": "can go out and play", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_explain_005",
+    "title": "Why Old Neighborhoods Feel Different",
+    "title_zh": "老小区为什么感觉不一样",
+    "hsk_level": 2,
+    "text_zh": "新小区的楼很高，很漂亮，但是邻居之间不怎么说话。老小区不一样。楼不高，但是楼下总是有人在聊天。老太太在晒太阳，小孩在玩。因为住的时间长了，大家都认识。所以老小区虽然旧了一点，但是比新的暖。",
+    "text_pinyin": "Xīn xiǎoqū de lóu hěn gāo, hěn piàoliang, dànshì línjū zhījiān bù zěnme shuō huà. Lǎo xiǎoqū bù yíyàng. Lóu bù gāo, dànshì lóu xià zǒngshì yǒu rén zài liáotiān. Lǎo tàitai zài shài tàiyáng, xiǎohái zài wán. Yīnwèi zhù de shíjiān cháng le, dàjiā dōu rènshi. Suǒyǐ lǎo xiǎoqū suīrán jiù le yìdiǎn, dànshì bǐ xīn de nuǎn.",
+    "text_en": "New housing complexes have tall, pretty buildings, but neighbors don't talk much. Old neighborhoods are different. Buildings aren't tall, but downstairs people are always chatting. Old ladies sunbathe, kids play. Because everyone has lived there a long time, they all know each other. So old neighborhoods may be a bit worn, but they're warmer than new ones.",
+    "questions": [
+      {"type": "mc", "q_zh": "新小区的邻居怎么样？", "q_en": "What are neighbors like in new complexes?",
+       "options": [
+         {"text": "经常说话", "pinyin": "jīngcháng shuō huà", "text_en": "often talk", "correct": false},
+         {"text": "不怎么说话", "pinyin": "bù zěnme shuō huà", "text_en": "don't talk much", "correct": true},
+         {"text": "每天一起吃饭", "pinyin": "měi tiān yìqǐ chī fàn", "text_en": "eat together daily", "correct": false},
+         {"text": "是好朋友", "pinyin": "shì hǎo péngyou", "text_en": "are good friends", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "老小区楼下有什么？", "q_en": "What's downstairs in old neighborhoods?",
+       "options": [
+         {"text": "什么都没有", "pinyin": "shénme dōu méiyǒu", "text_en": "nothing", "correct": false},
+         {"text": "总是有人在聊天", "pinyin": "zǒngshì yǒu rén zài liáotiān", "text_en": "people always chatting", "correct": true},
+         {"text": "很多车", "pinyin": "hěn duō chē", "text_en": "many cars", "correct": false},
+         {"text": "很多商店", "pinyin": "hěn duō shāngdiàn", "text_en": "many shops", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "文章觉得老小区比新小区怎么样？", "q_en": "How does the passage compare old and new neighborhoods?",
+       "options": [
+         {"text": "更漂亮", "pinyin": "gèng piàoliang", "text_en": "more beautiful", "correct": false},
+         {"text": "更暖", "pinyin": "gèng nuǎn", "text_en": "warmer", "correct": true},
+         {"text": "更安静", "pinyin": "gèng ānjìng", "text_en": "quieter", "correct": false},
+         {"text": "更大", "pinyin": "gèng dà", "text_en": "bigger", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_comedy_011",
+    "title": "The Group Chat Name",
+    "title_zh": "群聊的名字",
+    "hsk_level": 2,
+    "text_zh": "我们宿舍四个人有一个群聊。名字换了很多次。第一次叫「好朋友」。后来有人改成了「减肥群」，但是没有人减肥。又有人改成了「学习群」，但是我们只在里面点外卖。现在的名字是「别问，问就是在学习」。我觉得这个名字最真实。",
+    "text_pinyin": "Wǒmen sùshè sì gè rén yǒu yí gè qúnliáo. Míngzi huàn le hěn duō cì. Dì yí cì jiào「hǎo péngyou」. Hòulái yǒu rén gǎi chéng le「jiǎnféi qún」, dànshì méiyǒu rén jiǎnféi. Yòu yǒu rén gǎi chéng le「xuéxí qún」, dànshì wǒmen zhǐ zài lǐmiàn diǎn wàimài. Xiànzài de míngzi shì「bié wèn, wèn jiùshì zài xuéxí」. Wǒ juéde zhège míngzi zuì zhēnshí.",
+    "text_en": "The four of us in the dorm have a group chat. The name has changed many times. First it was 'Good Friends.' Then someone changed it to 'Weight Loss Group,' but no one lost weight. Then someone changed it to 'Study Group,' but we only used it to order takeout. Now it's called 'Don't Ask, If You Ask We're Studying.' I think this name is the most honest.",
+    "questions": [
+      {"type": "mc", "q_zh": "群聊里有几个人？", "q_en": "How many people are in the group chat?",
+       "options": [
+         {"text": "三个", "pinyin": "sān gè", "text_en": "three", "correct": false},
+         {"text": "四个", "pinyin": "sì gè", "text_en": "four", "correct": true},
+         {"text": "五个", "pinyin": "wǔ gè", "text_en": "five", "correct": false},
+         {"text": "两个", "pinyin": "liǎng gè", "text_en": "two", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「学习群」里他们做什么？", "q_en": "What did they do in the 'Study Group'?",
+       "options": [
+         {"text": "学习", "pinyin": "xuéxí", "text_en": "study", "correct": false},
+         {"text": "点外卖", "pinyin": "diǎn wàimài", "text_en": "order takeout", "correct": true},
+         {"text": "减肥", "pinyin": "jiǎnféi", "text_en": "lose weight", "correct": false},
+         {"text": "聊天", "pinyin": "liáotiān", "text_en": "chat", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得哪个名字最真实？", "q_en": "Which name does 'I' think is most honest?",
+       "options": [
+         {"text": "好朋友", "pinyin": "hǎo péngyou", "text_en": "Good Friends", "correct": false},
+         {"text": "减肥群", "pinyin": "jiǎnféi qún", "text_en": "Weight Loss Group", "correct": false},
+         {"text": "学习群", "pinyin": "xuéxí qún", "text_en": "Study Group", "correct": false},
+         {"text": "别问，问就是在学习", "pinyin": "bié wèn, wèn jiùshì zài xuéxí", "text_en": "Don't Ask, We're Studying", "correct": true}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_comedy_012",
+    "title": "The Office Plant Manager",
+    "title_zh": "办公室的植物管理员",
+    "hsk_level": 2,
+    "text_zh": "办公室里有几盆花，没有人管。后来老板说：「谁愿意管花？每个月多给一百块。」所有人都举手了。最后小李赢了，因为他说他在家里养了三十盆花。但是第一个星期，他就浇太多水，花快要死了。我们开玩笑说：「那三十盆花是假的吧？」",
+    "text_pinyin": "Bàngōngshì lǐ yǒu jǐ pén huā, méiyǒu rén guǎn. Hòulái lǎobǎn shuō:「Shéi yuànyì guǎn huā? Měi gè yuè duō gěi yì bǎi kuài.」 Suǒyǒu rén dōu jǔ shǒu le. Zuìhòu Xiǎo Lǐ yíng le, yīnwèi tā shuō tā zài jiā lǐ yǎng le sānshí pén huā. Dànshì dì yí gè xīngqī, tā jiù jiāo tài duō shuǐ, huā kuài yào sǐ le. Wǒmen kāi wánxiào shuō:「Nà sānshí pén huā shì jiǎ de ba?」",
+    "text_en": "The office had a few plants that no one took care of. Then the boss said: 'Who wants to manage the plants? Extra 100 yuan per month.' Everyone raised their hands. Xiao Li won because he said he had thirty plants at home. But in the first week, he overwatered them and they almost died. We joked: 'Were those thirty plants fake?'",
+    "questions": [
+      {"type": "mc", "q_zh": "老板说管花每个月多给多少钱？", "q_en": "How much extra per month did the boss offer?",
+       "options": [
+         {"text": "五十块", "pinyin": "wǔshí kuài", "text_en": "50 yuan", "correct": false},
+         {"text": "一百块", "pinyin": "yì bǎi kuài", "text_en": "100 yuan", "correct": true},
+         {"text": "两百块", "pinyin": "liǎng bǎi kuài", "text_en": "200 yuan", "correct": false},
+         {"text": "没有钱", "pinyin": "méiyǒu qián", "text_en": "no money", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "小李第一个星期做了什么？", "q_en": "What did Xiao Li do in the first week?",
+       "options": [
+         {"text": "忘了浇水", "pinyin": "wàng le jiāo shuǐ", "text_en": "forgot to water", "correct": false},
+         {"text": "浇太多水", "pinyin": "jiāo tài duō shuǐ", "text_en": "overwatered", "correct": true},
+         {"text": "把花放到外面", "pinyin": "bǎ huā fàng dào wàimiàn", "text_en": "put plants outside", "correct": false},
+         {"text": "买了新花", "pinyin": "mǎi le xīn huā", "text_en": "bought new plants", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "同事们开了什么玩笑？", "q_en": "What did the colleagues joke about?",
+       "options": [
+         {"text": "小李不会工作", "pinyin": "Xiǎo Lǐ bú huì gōngzuò", "text_en": "Xiao Li can't work", "correct": false},
+         {"text": "小李家的三十盆花是假的", "pinyin": "Xiǎo Lǐ jiā de sānshí pén huā shì jiǎ de", "text_en": "his 30 plants at home were fake", "correct": true},
+         {"text": "老板应该自己管花", "pinyin": "lǎobǎn yīnggāi zìjǐ guǎn huā", "text_en": "the boss should do it", "correct": false},
+         {"text": "花太贵了", "pinyin": "huā tài guì le", "text_en": "plants are too expensive", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j2_comedy_013",
+    "title": "The Reply-All Disaster",
+    "title_zh": "回复所有人",
+    "hsk_level": 2,
+    "text_zh": "同事小王给全公司发了一封邮件，说：「明天开会，请大家准时到。」我想回复小王说「好的」。但是我不小心点了「回复所有人」。五分钟以后，又有十个人回复了所有人，都是「好的」。然后有人回复所有人说：「别再回复所有人了！」他也回复了所有人。",
+    "text_pinyin": "Tóngshì Xiǎo Wáng gěi quán gōngsī fā le yì fēng yóujiàn, shuō:「Míngtiān kāi huì, qǐng dàjiā zhǔnshí dào.」 Wǒ xiǎng huífù Xiǎo Wáng shuō「hǎo de」. Dànshì wǒ bù xiǎoxīn diǎn le「huífù suǒyǒu rén」. Wǔ fēnzhōng yǐhòu, yòu yǒu shí gè rén huífù le suǒyǒu rén, dōu shì「hǎo de」. Ránhòu yǒu rén huífù suǒyǒu rén shuō:「Bié zài huífù suǒyǒu rén le!」 Tā yě huífù le suǒyǒu rén.",
+    "text_en": "Colleague Xiao Wang sent an email to the whole company: 'Meeting tomorrow, please be on time.' I wanted to reply to Xiao Wang saying 'okay.' But I accidentally hit 'reply all.' Five minutes later, ten more people replied all with 'okay.' Then someone replied all saying: 'Stop replying all!' They also replied all.",
+    "questions": [
+      {"type": "mc", "q_zh": "小王的邮件说了什么？", "q_en": "What did Xiao Wang's email say?",
+       "options": [
+         {"text": "明天放假", "pinyin": "míngtiān fàngjià", "text_en": "day off tomorrow", "correct": false},
+         {"text": "明天开会，请准时到", "pinyin": "míngtiān kāi huì, qǐng zhǔnshí dào", "text_en": "meeting tomorrow, be on time", "correct": true},
+         {"text": "今天不用上班", "pinyin": "jīntiān bú yòng shàng bān", "text_en": "no work today", "correct": false},
+         {"text": "中午一起吃饭", "pinyin": "zhōngwǔ yìqǐ chī fàn", "text_en": "lunch together", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」做错了什么？", "q_en": "What did 'I' do wrong?",
+       "options": [
+         {"text": "忘了回复", "pinyin": "wàng le huífù", "text_en": "forgot to reply", "correct": false},
+         {"text": "不小心点了回复所有人", "pinyin": "bù xiǎoxīn diǎn le huífù suǒyǒu rén", "text_en": "accidentally hit reply all", "correct": true},
+         {"text": "回复了错误的内容", "pinyin": "huífù le cuòwù de nèiróng", "text_en": "replied with wrong content", "correct": false},
+         {"text": "没有去开会", "pinyin": "méiyǒu qù kāi huì", "text_en": "didn't go to the meeting", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "说「别再回复所有人了」的人做了什么？", "q_en": "What did the person who said 'stop replying all' do?",
+       "options": [
+         {"text": "只回复了小王", "pinyin": "zhǐ huífù le Xiǎo Wáng", "text_en": "only replied to Xiao Wang", "correct": false},
+         {"text": "也回复了所有人", "pinyin": "yě huífù le suǒyǒu rén", "text_en": "also replied all", "correct": true},
+         {"text": "没有回复", "pinyin": "méiyǒu huífù", "text_en": "didn't reply", "correct": false},
+         {"text": "删了邮件", "pinyin": "shān le yóujiàn", "text_en": "deleted the email", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  }
+]

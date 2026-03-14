@@ -1,0 +1,94 @@
+{
+    "title": "Umbrella Season",
+    "title_zh": "雨伞季节",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_shopping_1_02_v0",
+    "tree": {
+        "setup": "It's raining. You've ducked into a small shop that sells a bit of everything -- batteries, socks, phone cases, and a bucket of cheap umbrellas by the door. The shopkeeper, Auntie Ma, is knitting behind the counter. She doesn't look up.",
+        "setup_zh": "下雨了。你躲进一家什么都卖的小店——电池、袜子、手机壳，门口还有一桶便宜雨伞。店主马阿姨在柜台后面织毛衣，没有抬头。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "要什么？",
+                "text_pinyin": "yào shénme?",
+                "text_en": "What do you need?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask to buy an umbrella.",
+                "options": [
+                    {
+                        "text_zh": "我要买一把雨伞。",
+                        "text_pinyin": "wǒ yào mǎi yì bǎ yǔsǎn.",
+                        "text_en": "I'd like to buy an umbrella.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Ma points at the bucket by the door without looking up from her knitting. 把 (bǎ) is the measure word for umbrellas and anything with a handle."
+                    },
+                    {
+                        "text_zh": "下雨了！",
+                        "text_pinyin": "xià yǔ le!",
+                        "text_en": "It's raining!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Ma glances at the window, then back at you, with an expression that says she is aware. 下雨 is correct and useful, but she's waiting for you to tell her what you need."
+                    },
+                    {
+                        "text_zh": "有没有雨伞？",
+                        "text_pinyin": "yǒu méiyǒu yǔsǎn?",
+                        "text_en": "Do you have umbrellas?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She gestures at the bucket of twenty umbrellas without breaking her knitting rhythm. 有没有 is a reliable way to ask if something is available."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十五块。你要什么颜色？",
+                "text_pinyin": "shíwǔ kuài. nǐ yào shénme yánsè?",
+                "text_en": "Fifteen yuan. What color do you want?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a color.",
+                "options": [
+                    {
+                        "text_zh": "蓝色的，谢谢。",
+                        "text_pinyin": "lán sè de, xièxie.",
+                        "text_en": "Blue, please.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Ma extracts a blue umbrella from the bucket with one hand, still knitting with the other. A talent. Color + 色 + 的 is the pattern for specifying colors."
+                    },
+                    {
+                        "text_zh": "都可以。",
+                        "text_pinyin": "dōu kěyǐ.",
+                        "text_en": "Any is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Ma selects one for you -- pink with cartoon cats. She did not ask your opinion on the cats. 都可以 means you accept whatever comes."
+                    },
+                    {
+                        "text_zh": "便宜一点吧？",
+                        "text_pinyin": "piányi yìdiǎn ba?",
+                        "text_en": "A little cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Ma finally looks up from her knitting. Fifteen yuan. In the rain. She holds your gaze until you reach for your wallet. Some prices are not negotiable."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好。别淋雨了，走吧。",
+                "text_pinyin": "hǎo. bié lín yǔ le, zǒu ba.",
+                "text_en": "OK. Don't get rained on. Off you go."
+            }
+        ],
+        "cultural_note": "Small convenience shops (小卖部, xiǎomàibù) are everywhere in Chinese cities. They sell daily necessities at fixed, low prices. Umbrella sales spike during sudden rainstorms -- shopkeepers near bus stops know exactly when to stock up."
+    }
+}

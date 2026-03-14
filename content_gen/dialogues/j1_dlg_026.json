@@ -1,0 +1,87 @@
+{
+    "title": "The Neighbor's Dog",
+    "title_zh": "邻居的狗",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're coming home and see your neighbor walking a small dog in the courtyard.",
+        "setup_zh": "你回家的时候看到邻居在院子里遛一只小狗。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你回来了！你看，我家新买了一只小狗。",
+                "text_pinyin": "Nǐ huílái le! Nǐ kàn, wǒ jiā xīn mǎi le yī zhī xiǎo gǒu.",
+                "text_en": "You're back! Look, we got a new puppy."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to the new puppy.",
+                "options": [
+                    {
+                        "text_zh": "好可爱啊！它叫什么名字？",
+                        "text_pinyin": "Hǎo kě'ài a! Tā jiào shénme míngzi?",
+                        "text_en": "So cute! What's its name?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Matches her excitement about the new puppy and asks the most natural follow-up question."
+                    },
+                    {
+                        "text_zh": "好小啊！",
+                        "text_pinyin": "Hǎo xiǎo a!",
+                        "text_en": "So small!",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Reacts to the puppy but doesn't ask anything -- she's eager to tell you more, give her an opening."
+                    },
+                    {
+                        "text_zh": "你以前有狗吗？",
+                        "text_pinyin": "Nǐ yǐqián yǒu gǒu ma?",
+                        "text_en": "Did you have a dog before?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She's excited about the new puppy right in front of you, and you're asking about past dogs -- stay in the moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "它叫「豆豆」。才两个月大。你想摸摸它吗？",
+                "text_pinyin": "Tā jiào「Dòudou」. Cái liǎng ge yuè dà. Nǐ xiǎng mō mo tā ma?",
+                "text_en": "Its name is Doudou. Only two months old. Do you want to pet it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the offer to pet the puppy.",
+                "options": [
+                    {
+                        "text_zh": "好啊！「豆豆」，你好！真的好小。",
+                        "text_pinyin": "Hǎo a!「Dòudou」, nǐ hǎo! Zhēn de hǎo xiǎo.",
+                        "text_en": "Sure! Hello, Doudou! Really so small.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Uses the puppy's name and talks to it directly -- she told you it's only two months old and you can see how tiny it is."
+                    },
+                    {
+                        "text_zh": "好啊！两个月，还是小宝宝。",
+                        "text_pinyin": "Hǎo a! Liǎng ge yuè, háishì xiǎo bǎobao.",
+                        "text_en": "Sure! Two months, still a baby.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Accepts the offer and comments, but doesn't engage with the name or talk to the puppy -- less playful."
+                    },
+                    {
+                        "text_zh": "它会咬人吗？",
+                        "text_pinyin": "Tā huì yǎo rén ma?",
+                        "text_en": "Does it bite?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She just told you it's two months old and offered to let you pet it -- asking if it bites kills the tender moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese neighborhood courtyards (院子) are communal spaces where neighbors naturally interact. Pets, especially small dogs, are popular conversation starters. Cute names like 豆豆 (Doudou, 'little bean') are very common."
+    }
+}

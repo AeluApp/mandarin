@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="currentColor">
+  <!-- horizon -->
+  <line x1="0" y1="48" x2="120" y2="48" stroke-width="0.5"/>
+  <!-- hills -->
+  <path d="M0 48 Q20 36 40 48" stroke-width="0.6"/>
+  <path d="M50 48 Q75 32 100 48" stroke-width="0.6"/>
+  <!-- rising sun -->
+  <circle cx="60" cy="40" r="5" stroke-width="0.5"/>
+  <!-- boat -->
+  <path d="M25 50 Q30 53 35 50" stroke-width="0.6"/>
+  <line x1="30" y1="50" x2="30" y2="46" stroke-width="0.4"/>
+</svg>

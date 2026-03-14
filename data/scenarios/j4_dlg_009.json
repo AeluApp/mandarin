@@ -1,0 +1,117 @@
+{
+  "title": "The Park Bench",
+  "title_zh": "公园长椅",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're sitting on a park bench in the late afternoon. A retired calligrapher, Mr. Xu, sits down beside you. He's carrying a brush and a bottle of water, and begins writing characters on the ground.",
+    "setup_zh": "你在下午坐在公园的长椅上。一位退休的书法家徐先生坐到你旁边。他带着一支毛笔和一瓶水，开始在地上写字。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你不介意吧？我每天下午都来这里用水写字。写完了就干了，干了就没了。有人说这是浪费时间，但我觉得这就是最好的练习。",
+        "text_pinyin": "Nǐ bù jièyì ba? Wǒ měi tiān xiàwǔ dōu lái zhèlǐ yòng shuǐ xiě zì. Xiě wán le jiù gān le, gān le jiù méi le. Yǒu rén shuō zhè shì làngfèi shíjiān, dàn wǒ juéde zhè jiù shì zuì hǎo de liànxí.",
+        "text_en": "You don't mind, do you? I come here every afternoon to write characters with water. Once written they dry, once dry they're gone. Some people say it's a waste of time, but I think it's the best kind of practice."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his water calligraphy.",
+        "options": [
+          {
+            "text_zh": "写了就没了？那要是写了一个特别好的字呢，也没了？",
+            "text_pinyin": "Xiě le jiù méi le? Nà yàoshi xiě le yí gè tèbié hǎo de zì ne, yě méi le?",
+            "text_en": "Written and then gone? But what if you write a really good one — that's gone too?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He stops mid-stroke and looks at you. 'That's the hardest part to get used to. But also the best part.'"
+          },
+          {
+            "text_zh": "我小时候也学过书法，后来就没练了。",
+            "text_pinyin": "Wǒ xiǎo shíhou yě xué guò shūfǎ, hòulái jiù méi liàn le.",
+            "text_en": "I studied calligraphy as a kid too, but I stopped practicing.",
+            "score": 0.0,
+            "feedback": "He nods politely. 'A lot of people stopped.' He goes back to writing. He was talking about the water, not the history."
+          },
+          {
+            "text_zh": "水干得快吗？天热的时候是不是写不完就没了？",
+            "text_pinyin": "Shuǐ gān de kuài ma? Tiān rè de shíhou shì bú shì xiě bù wán jiù méi le?",
+            "text_en": "Does the water dry fast? On hot days does it vanish before you finish?",
+            "score": 0.0,
+            "feedback": "He answers — '夏天确实干得快' — but you can tell he wanted to talk about something less practical."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，特别好的也没了。年轻的时候我总想写出完美的字，写了一幅不满意就很生气。后来我想通了——字好不好其实不重要，写的那几分钟，心是安静的。",
+        "text_pinyin": "Duì, tèbié hǎo de yě méi le. Niánqīng de shíhou wǒ zǒng xiǎng xiě chū wánměi de zì, xiě le yī fú bù mǎnyì jiù hěn shēngqì. Hòulái wǒ xiǎng tōng le — zì hǎo bù hǎo qíshí bú zhòngyào, xiě de nà jǐ fēnzhōng, xīn shì ānjìng de.",
+        "text_en": "Right, even the good ones vanish. When I was young I always wanted to write perfect characters — I'd get angry if a piece wasn't good enough. Eventually I figured it out: whether the character is good doesn't really matter. Those few minutes of writing — the heart is quiet."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to what he said about letting go of perfection.",
+        "options": [
+          {
+            "text_zh": "我也想这样。但是工作上不行，什么都要有结果。也许这就是你来公园写字的原因——这里不需要结果。",
+            "text_pinyin": "Wǒ yě xiǎng zhèyàng. Dànshì gōngzuò shàng bùxíng, shénme dōu yào yǒu jiéguǒ. Yěxǔ zhè jiùshì nǐ lái gōngyuán xiě zì de yuányīn — zhèlǐ bù xūyào jiéguǒ.",
+            "text_en": "I wish I could be like that. But at work everything needs a result. Maybe that's why you come to the park to write — here, no result is needed.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He puts the brush down for a moment. 'You already understand. You just need a place that lets you forget about results for a while.'"
+          },
+          {
+            "text_zh": "你以前做什么工作？",
+            "text_pinyin": "Nǐ yǐqián zuò shénme gōngzuò?",
+            "text_en": "What did you do for work before?",
+            "score": 0.0,
+            "feedback": "He answers — he was a middle school teacher — but the moment about letting go has passed."
+          },
+          {
+            "text_zh": "我觉得写得好不好还是很重要的吧。",
+            "text_pinyin": "Wǒ juéde xiě de hǎo bù hǎo háishi hěn zhòngyào de ba.",
+            "text_en": "I think whether you write well still matters though.",
+            "score": 0.0,
+            "feedback": "He looks at you a beat too long. 'You sound like the old me.' He picks up the brush and writes another character. It dries before you can decide if it was good."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，不需要结果的地方。来，你想试试吗？不用怕写不好。写完了，风一吹就没了。",
+        "text_pinyin": "Duì, bù xūyào jiéguǒ de dìfāng. Lái, nǐ xiǎng shì shì ma? Bú yòng pà xiě bù hǎo. Xiě wán le, fēng yī chuī jiù méi le.",
+        "text_en": "Right, a place where no result is needed. Come, want to try? Don't be afraid of writing badly. Once it's done, the wind blows and it's gone."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "He's offering you the brush.",
+        "options": [
+          {
+            "text_zh": "好。我写一个「水」字吧，用水写「水」，挺有意思的。",
+            "text_pinyin": "Hǎo. Wǒ xiě yí gè 'shuǐ' zì ba, yòng shuǐ xiě 'shuǐ', tǐng yǒu yìsi de.",
+            "text_en": "Sure. I'll write the character for 'water' — writing 'water' with water, that's kind of funny.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He laughs — a real laugh, not a polite one. 'That's good. Nobody's thought of that before.'"
+          },
+          {
+            "text_zh": "不了，我的字太丑了，你看了会难过的。",
+            "text_pinyin": "Bù le, wǒ de zì tài chǒu le, nǐ kàn le huì nánguò de.",
+            "text_en": "No thanks, my writing is so ugly it would make you sad.",
+            "score": 0.0,
+            "feedback": "He shakes his head. 'It'll be gone in two minutes. Who's going to be sad?' But he doesn't push."
+          },
+          {
+            "text_zh": "我手上有点脏，下次吧。",
+            "text_pinyin": "Wǒ shǒu shàng yǒu diǎn zāng, xià cì ba.",
+            "text_en": "My hands are a bit dirty, maybe next time.",
+            "score": 0.0,
+            "feedback": "He glances at the water bottle. 'You're writing with water on pavement.' But he lets it go. '那下次见。'"
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Water calligraphy (地书, dìshū) is a beloved practice in Chinese parks, where retirees write characters on pavement with large brushes dipped in water. The ephemeral nature of the practice — characters that vanish as they dry — embodies Buddhist and Daoist ideas about impermanence and non-attachment. It's also a social activity, often drawing small crowds of appreciative onlookers."
+  }
+}

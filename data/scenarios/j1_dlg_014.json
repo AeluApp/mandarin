@@ -1,0 +1,87 @@
+{
+    "title": "Learning to Cook",
+    "title_zh": "学做饭",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "Your friend's mother is teaching you to make dumplings in her kitchen. The kitchen smells wonderful.",
+        "setup_zh": "朋友的妈妈在厨房教你包饺子。厨房里很香。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来，我教你。先拿一张皮，然后放一点儿馅。",
+                "text_pinyin": "Lái, wǒ jiāo nǐ. Xiān ná yī zhāng pí, ránhòu fàng yīdiǎnr xiàn.",
+                "text_en": "Come, I'll teach you. First take a wrapper, then put a little filling in."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond while trying to follow her instructions.",
+                "options": [
+                    {
+                        "text_zh": "好的！这样吗？我放多少馅？",
+                        "text_pinyin": "Hǎo de! Zhèyàng ma? Wǒ fàng duōshǎo xiàn?",
+                        "text_en": "Okay! Like this? How much filling should I put?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Follows her instructions and asks the right next question -- shows you're engaged and learning."
+                    },
+                    {
+                        "text_zh": "好的，我试试。",
+                        "text_pinyin": "Hǎo de, wǒ shìshi.",
+                        "text_en": "Okay, I'll try.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Willing but doesn't ask for clarification -- she gave detailed steps and a question would show more engagement."
+                    },
+                    {
+                        "text_zh": "包饺子难不难？",
+                        "text_pinyin": "Bāo jiǎozi nán bu nán?",
+                        "text_en": "Is making dumplings hard?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She just showed you how to do it step by step -- asking if it's hard instead of trying feels hesitant."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不要太多，也不要太少。你做得很好！第一次包饺子就这么好，很厉害。",
+                "text_pinyin": "Bú yào tài duō, yě bú yào tài shǎo. Nǐ zuò de hěn hǎo! Dì yī cì bāo jiǎozi jiù zhème hǎo, hěn lìhai.",
+                "text_en": "Not too much, not too little. You're doing great! For your first time making dumplings, this is really impressive."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her for teaching you.",
+                "options": [
+                    {
+                        "text_zh": "谢谢阿姨！包饺子很有意思。我很开心。",
+                        "text_pinyin": "Xièxie āyí! Bāo jiǎozi hěn yǒu yìsi. Wǒ hěn kāixīn.",
+                        "text_en": "Thank you, Auntie! Making dumplings is really fun. I'm so happy.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Thanks her with the respectful 阿姨, calls it fun, and shares your joy -- she praised your first attempt and you received it warmly."
+                    },
+                    {
+                        "text_zh": "谢谢！我还想学别的。",
+                        "text_pinyin": "Xièxie! Wǒ hái xiǎng xué bié de.",
+                        "text_en": "Thanks! I want to learn other things too.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grateful and eager, but jumps ahead without savoring her compliment about your first dumplings."
+                    },
+                    {
+                        "text_zh": "真的吗？我觉得不太好看。",
+                        "text_pinyin": "Zhēn de ma? Wǒ juéde bú tài hǎokàn.",
+                        "text_en": "Really? I don't think they look very good.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She just praised your first attempt and you rejected the compliment -- in this kitchen she's the teacher, accept her encouragement."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Making dumplings together is one of the most communal activities in Chinese family life. When a friend's parent teaches you, it's an act of inclusion — you're being welcomed into the family rhythm. Calling her 阿姨 (auntie) is the respectful and warm address."
+    }
+}

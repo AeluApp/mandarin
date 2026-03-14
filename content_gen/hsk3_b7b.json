@@ -1,0 +1,258 @@
+[
+  {
+    "id": "j3_observe_047",
+    "title": "The Bench at the Bus Stop",
+    "title_zh": "公交车站的长椅",
+    "hsk_level": 3,
+    "text_zh": "我家附近的公交车站有一把旧长椅。每天早上，一个老爷爷坐在那里看报纸。他不是在等公交车，因为车来了他也不上去。有一次下雨，我在旁边等车，他把伞给了我一半。我问他为什么每天来这里坐。他说：「退休以后，在家里太安静了。坐在这里，看人来人往，觉得自己还在生活里面。」我听了觉得有点难过，但是他笑着说：「你别担心。我很喜欢这样。每天看到不同的人，觉得这个城市还是热闹的。」后来我每天路过的时候，都会跟他打招呼。他也总是对我笑一笑。一把长椅、一份报纸，就是他跟这个世界保持联系的方式。",
+    "text_pinyin": "Wǒ jiā fùjìn de gōngjiāo chē zhàn yǒu yì bǎ jiù cháng yǐ. Měi tiān zǎoshang, yí gè lǎo yéye zuò zài nàlǐ kàn bàozhǐ. Tā búshì zài děng gōngjiāo chē, yīnwèi chē lái le tā yě bú shàng qù. Yǒu yí cì xià yǔ, wǒ zài pángbiān děng chē, tā bǎ sǎn gěi le wǒ yí bàn. Wǒ wèn tā wèishénme měi tiān lái zhèlǐ zuò. Tā shuō:「Tuìxiū yǐhòu, zài jiā lǐ tài ānjìng le. Zuò zài zhèlǐ, kàn rén lái rén wǎng, juéde zìjǐ hái zài shēnghuó lǐmiàn.」Wǒ tīng le juéde yǒudiǎn nánguò, dànshì tā xiàozhe shuō:「Nǐ bié dānxīn. Wǒ hěn xǐhuan zhèyàng. Měi tiān kàn dào bùtóng de rén, juéde zhège chéngshì háishi rènao de.」Hòulái wǒ měi tiān lù guò de shíhou, dōu huì gēn tā dǎ zhāohu. Tā yě zǒngshì duì wǒ xiào yí xiào. Yì bǎ cháng yǐ, yí fèn bàozhǐ, jiùshì tā gēn zhège shìjiè bǎochí liánxì de fāngshì.",
+    "text_en": "There's an old bench at the bus stop near my home. Every morning, an elderly man sits there reading the newspaper. He's not waiting for the bus — when one comes, he doesn't get on. Once when it rained, I was waiting nearby and he shared his umbrella with me. I asked why he comes here every day. He said: 'After retiring, home is too quiet. Sitting here, watching people come and go, I feel I'm still part of life.' I felt a little sad, but he smiled: 'Don't worry. I enjoy this. Seeing different people every day, the city still feels lively.' After that, I'd greet him whenever I passed by. He'd always smile back. One bench, one newspaper — that's how he stays connected to the world.",
+    "questions": [
+      {"type": "mc", "q_zh": "老爷爷为什么每天坐在公交车站？", "q_en": "Why does the old man sit at the bus stop every day?",
+       "options": [
+         {"text": "等公交车", "pinyin": "děng gōngjiāo chē", "text_en": "waiting for the bus", "correct": false},
+         {"text": "看人来人往，觉得自己还在生活里面", "pinyin": "kàn rén lái rén wǎng, juéde zìjǐ hái zài shēnghuó lǐmiàn", "text_en": "watching people come and go, feeling part of life", "correct": true},
+         {"text": "跟朋友见面", "pinyin": "gēn péngyou jiàn miàn", "text_en": "meeting friends", "correct": false},
+         {"text": "卖报纸", "pinyin": "mài bàozhǐ", "text_en": "selling newspapers", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "下雨的时候老爷爷做了什么？", "q_en": "What did the old man do when it rained?",
+       "options": [
+         {"text": "回家了", "pinyin": "huí jiā le", "text_en": "went home", "correct": false},
+         {"text": "把伞给了「我」一半", "pinyin": "bǎ sǎn gěi le wǒ yí bàn", "text_en": "shared his umbrella", "correct": true},
+         {"text": "上了公交车", "pinyin": "shàng le gōngjiāo chē", "text_en": "got on the bus", "correct": false},
+         {"text": "去了咖啡馆", "pinyin": "qù le kāfēi guǎn", "text_en": "went to a cafe", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "老爷爷用什么方式跟世界保持联系？", "q_en": "How does the old man stay connected to the world?",
+       "options": [
+         {"text": "打电话给朋友", "pinyin": "dǎ diànhuà gěi péngyou", "text_en": "calling friends", "correct": false},
+         {"text": "上网", "pinyin": "shàng wǎng", "text_en": "going online", "correct": false},
+         {"text": "一把长椅、一份报纸", "pinyin": "yì bǎ cháng yǐ, yí fèn bàozhǐ", "text_en": "a bench and a newspaper", "correct": true},
+         {"text": "去公园散步", "pinyin": "qù gōngyuán sàn bù", "text_en": "walking in the park", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_comedy_011",
+    "title": "The Wrong Floor",
+    "title_zh": "走错楼层",
+    "hsk_level": 3,
+    "text_zh": "昨天下班回家，我太累了，走进电梯以后按错了楼层。我住十二楼，但是按了十楼。电梯门开了，我走出来，用钥匙开门——门打不开。我又试了一次，还是打不开。我正在想是不是锁坏了，门突然从里面开了。一个不认识的男人看着我，问：「你找谁？」我这才发现自己走错了楼层。我一边说对不起一边跑回电梯。回到家以后，我跟室友说了这件事。室友笑了半天，说：「上个星期我也做过一样的事情！但是比你更糟糕——我把鞋脱了放在人家门口。」我们两个笑得肚子疼。原来每个累了的人都会做傻事。",
+    "text_pinyin": "Zuótiān xiàbān huí jiā, wǒ tài lèi le, zǒu jìn diàntī yǐhòu àn cuò le lóucéng. Wǒ zhù shí'èr lóu, dànshì àn le shí lóu. Diàntī mén kāi le, wǒ zǒu chūlái, yòng yàoshi kāi mén——mén dǎ bù kāi. Wǒ yòu shì le yí cì, háishi dǎ bù kāi. Wǒ zhèngzài xiǎng shì bu shì suǒ huài le, mén tūrán cóng lǐmiàn kāi le. Yí gè bú rènshi de nánrén kànzhe wǒ, wèn:「Nǐ zhǎo shéi?」Wǒ zhè cái fāxiàn zìjǐ zǒu cuò le lóucéng. Wǒ yìbiān shuō duìbuqǐ yìbiān pǎo huí diàntī. Huí dào jiā yǐhòu, wǒ gēn shìyǒu shuō le zhè jiàn shì. Shìyǒu xiào le bàntiān, shuō:「Shàng gè xīngqī wǒ yě zuò guò yíyàng de shìqing! Dànshì bǐ nǐ gèng zāogāo——wǒ bǎ xié tuō le fàng zài rénjiā mén kǒu.」Wǒmen liǎng gè xiào de dùzi téng. Yuánlái měi gè lèi le de rén dōu huì zuò shǎ shì.",
+    "text_en": "Yesterday after work I was so tired that I pressed the wrong floor in the elevator. I live on the twelfth floor but pressed ten. The door opened, I walked out, and tried my key — the door wouldn't open. I tried again, still nothing. Just as I was wondering if the lock was broken, the door suddenly opened from inside. A stranger stared at me: 'Who are you looking for?' Only then did I realize I was on the wrong floor. I apologized while running back to the elevator. At home, I told my roommate. They laughed and said: 'I did the same thing last week! But worse — I took off my shoes and left them at someone else's door.' We both laughed until our stomachs hurt. Turns out everyone does silly things when they're tired.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」为什么打不开门？", "q_en": "Why couldn't 'I' open the door?",
+       "options": [
+         {"text": "锁坏了", "pinyin": "suǒ huài le", "text_en": "the lock was broken", "correct": false},
+         {"text": "走错了楼层", "pinyin": "zǒu cuò le lóucéng", "text_en": "went to the wrong floor", "correct": true},
+         {"text": "忘了带钥匙", "pinyin": "wàng le dài yàoshi", "text_en": "forgot the key", "correct": false},
+         {"text": "门是从里面锁的", "pinyin": "mén shì cóng lǐmiàn suǒ de", "text_en": "locked from inside", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "室友做过什么类似的事情？", "q_en": "What similar thing did the roommate do?",
+       "options": [
+         {"text": "也按错了电梯", "pinyin": "yě àn cuò le diàntī", "text_en": "also pressed wrong floor", "correct": false},
+         {"text": "把鞋脱了放在别人门口", "pinyin": "bǎ xié tuō le fàng zài biéren mén kǒu", "text_en": "took off shoes at someone else's door", "correct": true},
+         {"text": "走进了别人的房间", "pinyin": "zǒu jìn le biéren de fángjiān", "text_en": "walked into someone's room", "correct": false},
+         {"text": "敲了半天门", "pinyin": "qiāo le bàntiān mén", "text_en": "knocked for a long time", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "这个故事告诉我们什么？", "q_en": "What does this story tell us?",
+       "options": [
+         {"text": "电梯不安全", "pinyin": "diàntī bù ānquán", "text_en": "elevators aren't safe", "correct": false},
+         {"text": "应该记住自己的楼层", "pinyin": "yīnggāi jìzhù zìjǐ de lóucéng", "text_en": "should remember your floor", "correct": false},
+         {"text": "每个累了的人都会做傻事", "pinyin": "měi gè lèi le de rén dōu huì zuò shǎ shì", "text_en": "everyone does silly things when tired", "correct": true},
+         {"text": "不要住太高的楼", "pinyin": "búyào zhù tài gāo de lóu", "text_en": "don't live on high floors", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_identity_009",
+    "title": "The Name I Chose",
+    "title_zh": "我选的名字",
+    "hsk_level": 3,
+    "text_zh": "我的中文名字是老师帮我取的，叫「文静」。但是我一点也不文静——我说话很大声，笑的时候比谁都响。有一段时间，我觉得这个名字不适合我，想换一个。我跟中国朋友说，他们问我想叫什么。我想了很久，发现自己想不出更好的名字。后来有一天，一个中国同事跟我说：「你知道吗？我觉得你越来越像你的名字了。不是安静那种文静，是你自己的那种——有力量的安静。你不说话的时候，眼睛里有很多想法。」我听了以后，突然觉得这个名字比我以前理解的更好。名字不一定要跟你一样，它也可以是你慢慢变成的样子。",
+    "text_pinyin": "Wǒ de Zhōngwén míngzi shì lǎoshī bāng wǒ qǔ de, jiào「Wénjìng」. Dànshì wǒ yìdiǎn yě bú wénjìng——wǒ shuō huà hěn dà shēng, xiào de shíhou bǐ shéi dōu xiǎng. Yǒu yí duàn shíjiān, wǒ juéde zhège míngzi bú shìhé wǒ, xiǎng huàn yí gè. Wǒ gēn Zhōngguó péngyou shuō, tāmen wèn wǒ xiǎng jiào shénme. Wǒ xiǎng le hěn jiǔ, fāxiàn zìjǐ xiǎng bù chū gèng hǎo de míngzi. Hòulái yǒu yì tiān, yí gè Zhōngguó tóngshì gēn wǒ shuō:「Nǐ zhīdào ma? Wǒ juéde nǐ yuè lái yuè xiàng nǐ de míngzi le. Búshì ānjìng nà zhǒng wénjìng, shì nǐ zìjǐ de nà zhǒng——yǒu lìliang de ānjìng. Nǐ bù shuō huà de shíhou, yǎnjing lǐ yǒu hěn duō xiǎngfǎ.」Wǒ tīng le yǐhòu, tūrán juéde zhège míngzi bǐ wǒ yǐqián lǐjiě de gèng hǎo. Míngzi bù yídìng yào gēn nǐ yíyàng, tā yě kěyǐ shì nǐ mànman biàn chéng de yàngzi.",
+    "text_en": "My Chinese name was chosen by my teacher: 'Wenjing' — quiet and gentle. But I'm not quiet at all — I speak loudly, and my laugh is louder than anyone's. For a while, I felt the name didn't suit me and wanted to change it. I told my Chinese friends, who asked what I'd prefer. After thinking for a long time, I couldn't come up with anything better. Then one day, a Chinese colleague said: 'You know what? I think you're becoming more like your name. Not the quiet type of wenjing, but your own kind — a quiet with strength. When you're not speaking, your eyes are full of thoughts.' After hearing that, I suddenly felt the name was better than I'd understood. A name doesn't have to match who you are — it can also be who you're slowly becoming.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」为什么想换名字？", "q_en": "Why did 'I' want to change the name?",
+       "options": [
+         {"text": "名字太难写", "pinyin": "míngzi tài nán xiě", "text_en": "too hard to write", "correct": false},
+         {"text": "觉得不适合自己", "pinyin": "juéde bú shìhé zìjǐ", "text_en": "felt it didn't suit them", "correct": true},
+         {"text": "别人发音不对", "pinyin": "biéren fāyīn bú duì", "text_en": "others mispronounced it", "correct": false},
+         {"text": "老师取的不好", "pinyin": "lǎoshī qǔ de bù hǎo", "text_en": "teacher chose poorly", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "同事觉得「我」是哪种文静？", "q_en": "What kind of 'wenjing' did the colleague think 'I' was?",
+       "options": [
+         {"text": "很安静的那种", "pinyin": "hěn ānjìng de nà zhǒng", "text_en": "the quiet type", "correct": false},
+         {"text": "有力量的安静", "pinyin": "yǒu lìliang de ānjìng", "text_en": "a quiet with strength", "correct": true},
+         {"text": "害羞的那种", "pinyin": "hàixiū de nà zhǒng", "text_en": "the shy type", "correct": false},
+         {"text": "不爱说话的那种", "pinyin": "bú ài shuō huà de nà zhǒng", "text_en": "the type that doesn't talk", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "最后「我」怎么理解自己的名字？", "q_en": "How did 'I' finally understand the name?",
+       "options": [
+         {"text": "还是想换", "pinyin": "háishi xiǎng huàn", "text_en": "still wanted to change it", "correct": false},
+         {"text": "名字可以是你慢慢变成的样子", "pinyin": "míngzi kěyǐ shì nǐ mànman biàn chéng de yàngzi", "text_en": "a name can be who you slowly become", "correct": true},
+         {"text": "名字不重要", "pinyin": "míngzi bú zhòngyào", "text_en": "names don't matter", "correct": false},
+         {"text": "老师取的名字都不好", "pinyin": "lǎoshī qǔ de míngzi dōu bù hǎo", "text_en": "teacher-given names are bad", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j3_travel_004",
+    "title": "The Slow Train",
+    "title_zh": "慢车",
+    "hsk_level": 3,
+    "text_zh": "坐高铁从上海到南京只要一个多小时，但是我这次选了慢车——四个小时。朋友觉得我很奇怪，问我为什么不坐高铁。我说：「我不赶时间。坐慢车可以看到更多的风景。」慢车经过很多小站，每个站都停两三分钟。我看到了水田、小村庄、在田里工作的农民。有一个站叫什么名字我忘了，但是站台上有一棵很大的树，树下面坐着几个老人在聊天。那个画面让我觉得时间变慢了。高铁太快了，快到你看不清窗外的东西。但是慢车让你一边坐车一边慢慢地看这个世界。到了南京以后，朋友说：「你迟到了两个小时。」我说：「但是我多看了两个小时的中国。」",
+    "text_pinyin": "Zuò gāotiě cóng Shànghǎi dào Nánjīng zhǐ yào yí gè duō xiǎoshí, dànshì wǒ zhè cì xuǎn le màn chē——sì gè xiǎoshí. Péngyou juéde wǒ hěn qíguài, wèn wǒ wèishénme bú zuò gāotiě. Wǒ shuō:「Wǒ bù gǎn shíjiān. Zuò màn chē kěyǐ kàn dào gèng duō de fēngjǐng.」Màn chē jīngguò hěn duō xiǎo zhàn, měi gè zhàn dōu tíng liǎng sān fēnzhōng. Wǒ kàn dào le shuǐtián, xiǎo cūnzhuāng, zài tián lǐ gōngzuò de nóngmín. Yǒu yí gè zhàn jiào shénme míngzi wǒ wàng le, dànshì zhàntái shàng yǒu yì kē hěn dà de shù, shù xiàmiàn zuòzhe jǐ gè lǎorén zài liáo tiān. Nàge huàmiàn ràng wǒ juéde shíjiān biàn màn le. Gāotiě tài kuài le, kuài dào nǐ kàn bù qīng chuāng wài de dōngxi. Dànshì màn chē ràng nǐ yìbiān zuò chē yìbiān mànman de kàn zhège shìjiè. Dào le Nánjīng yǐhòu, péngyou shuō:「Nǐ chídào le liǎng gè xiǎoshí.」Wǒ shuō:「Dànshì wǒ duō kàn le liǎng gè xiǎoshí de Zhōngguó.」",
+    "text_en": "The bullet train from Shanghai to Nanjing takes just over an hour, but this time I chose the slow train — four hours. My friend thought I was strange: why not take the bullet train? I said: 'I'm not in a hurry. The slow train lets you see more scenery.' It stops at many small stations, two or three minutes each. I saw rice paddies, small villages, farmers working in fields. One station — I forget its name — had a big tree on the platform with elderly people sitting beneath it chatting. That image made time feel slower. The bullet train is too fast — so fast you can't see what's outside the window clearly. But the slow train lets you ride while slowly watching the world. When I arrived in Nanjing, my friend said: 'You're two hours late.' I said: 'But I saw two more hours of China.'",
+    "questions": [
+      {"type": "mc", "q_zh": "慢车从上海到南京要多长时间？", "q_en": "How long does the slow train take from Shanghai to Nanjing?",
+       "options": [
+         {"text": "一个多小时", "pinyin": "yí gè duō xiǎoshí", "text_en": "a bit over one hour", "correct": false},
+         {"text": "四个小时", "pinyin": "sì gè xiǎoshí", "text_en": "four hours", "correct": true},
+         {"text": "两个小时", "pinyin": "liǎng gè xiǎoshí", "text_en": "two hours", "correct": false},
+         {"text": "六个小时", "pinyin": "liù gè xiǎoshí", "text_en": "six hours", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」在慢车上看到了什么？", "q_en": "What did 'I' see from the slow train?",
+       "options": [
+         {"text": "大城市", "pinyin": "dà chéngshì", "text_en": "big cities", "correct": false},
+         {"text": "水田、小村庄、农民", "pinyin": "shuǐtián, xiǎo cūnzhuāng, nóngmín", "text_en": "rice paddies, villages, farmers", "correct": true},
+         {"text": "高速公路", "pinyin": "gāosù gōnglù", "text_en": "highways", "correct": false},
+         {"text": "什么都看不到", "pinyin": "shénme dōu kàn bú dào", "text_en": "couldn't see anything", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」对迟到两个小时怎么说的？", "q_en": "What did 'I' say about being two hours late?",
+       "options": [
+         {"text": "下次坐高铁", "pinyin": "xià cì zuò gāotiě", "text_en": "will take bullet train next time", "correct": false},
+         {"text": "对不起", "pinyin": "duìbuqǐ", "text_en": "sorry", "correct": false},
+         {"text": "多看了两个小时的中国", "pinyin": "duō kàn le liǎng gè xiǎoshí de Zhōngguó", "text_en": "saw two more hours of China", "correct": true},
+         {"text": "慢车票比较便宜", "pinyin": "màn chē piào bǐjiào piányi", "text_en": "slow train tickets are cheaper", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_travel_005",
+    "title": "The Hostel Kitchen",
+    "title_zh": "青年旅馆的厨房",
+    "hsk_level": 3,
+    "text_zh": "在成都旅行的时候，我住在一家青年旅馆。房间很小，但是厨房很大，是大家一起用的。每天晚上，厨房里都很热闹。有人做饭，有人洗碗，有人坐在旁边喝啤酒。我刚到的那天晚上，一个韩国女孩正在做泡菜汤。她看我在旁边看，就问我要不要尝一口。我说谢谢。那个汤非常好喝——又辣又暖和。后来我们一边吃一边聊天。她告诉我，她已经一个人旅行了三个月。我问她不觉得孤单吗。她说：「刚开始的时候觉得。但是每到一个地方，厨房里总能遇到新朋友。你看，今天就遇到你了。」那天晚上，厨房里有五个国家的人，用不太标准的中文聊天。那是我在成都最开心的一个晚上。",
+    "text_pinyin": "Zài Chéngdū lǚxíng de shíhou, wǒ zhù zài yì jiā qīngnián lǚguǎn. Fángjiān hěn xiǎo, dànshì chúfáng hěn dà, shì dàjiā yìqǐ yòng de. Měi tiān wǎnshang, chúfáng lǐ dōu hěn rènao. Yǒu rén zuò fàn, yǒu rén xǐ wǎn, yǒu rén zuò zài pángbiān hē píjiǔ. Wǒ gāng dào de nà tiān wǎnshang, yí gè Hánguó nǚhái zhèngzài zuò pàocài tāng. Tā kàn wǒ zài pángbiān kàn, jiù wèn wǒ yào bu yào cháng yì kǒu. Wǒ shuō xièxie. Nàge tāng fēicháng hǎo hē——yòu là yòu nuǎnhuo. Hòulái wǒmen yìbiān chī yìbiān liáo tiān. Tā gàosu wǒ, tā yǐjīng yí gè rén lǚxíng le sān gè yuè. Wǒ wèn tā bù juéde gūdān ma. Tā shuō:「Gāng kāishǐ de shíhou juéde. Dànshì měi dào yí gè dìfang, chúfáng lǐ zǒng néng yù dào xīn péngyou. Nǐ kàn, jīntiān jiù yù dào nǐ le.」Nà tiān wǎnshang, chúfáng lǐ yǒu wǔ gè guójiā de rén, yòng bú tài biāozhǔn de Zhōngwén liáo tiān. Nà shì wǒ zài Chéngdū zuì kāixīn de yí gè wǎnshang.",
+    "text_en": "While traveling in Chengdu, I stayed at a youth hostel. The room was tiny, but the shared kitchen was big. Every evening, the kitchen was lively — some people cooking, some washing dishes, some drinking beer nearby. The night I arrived, a Korean girl was making kimchi soup. She noticed me watching and asked if I'd like a taste. I said thanks. The soup was wonderful — spicy and warm. We ended up eating and chatting together. She told me she'd been traveling alone for three months. I asked if she felt lonely. She said: 'At first, yes. But every place I go, I always meet new friends in the kitchen. Look — today I met you.' That night, people from five countries chatted in the kitchen in not-quite-standard Chinese. It was my happiest evening in Chengdu.",
+    "questions": [
+      {"type": "mc", "q_zh": "青年旅馆的厨房有什么特点？", "q_en": "What was special about the hostel kitchen?",
+       "options": [
+         {"text": "很小", "pinyin": "hěn xiǎo", "text_en": "very small", "correct": false},
+         {"text": "大家一起用，很热闹", "pinyin": "dàjiā yìqǐ yòng, hěn rènao", "text_en": "shared and lively", "correct": true},
+         {"text": "不能做饭", "pinyin": "bù néng zuò fàn", "text_en": "can't cook", "correct": false},
+         {"text": "只有中国人用", "pinyin": "zhǐyǒu Zhōngguó rén yòng", "text_en": "only Chinese people use it", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "韩国女孩旅行了多长时间？", "q_en": "How long had the Korean girl been traveling?",
+       "options": [
+         {"text": "一个星期", "pinyin": "yí gè xīngqī", "text_en": "one week", "correct": false},
+         {"text": "一个月", "pinyin": "yí gè yuè", "text_en": "one month", "correct": false},
+         {"text": "三个月", "pinyin": "sān gè yuè", "text_en": "three months", "correct": true},
+         {"text": "一年", "pinyin": "yì nián", "text_en": "one year", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "那天晚上厨房里有几个国家的人？", "q_en": "How many countries were represented in the kitchen that night?",
+       "options": [
+         {"text": "两个", "pinyin": "liǎng gè", "text_en": "two", "correct": false},
+         {"text": "三个", "pinyin": "sān gè", "text_en": "three", "correct": false},
+         {"text": "五个", "pinyin": "wǔ gè", "text_en": "five", "correct": true},
+         {"text": "十个", "pinyin": "shí gè", "text_en": "ten", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_food_010",
+    "title": "The Grandmother's Dumplings",
+    "title_zh": "奶奶的饺子",
+    "hsk_level": 3,
+    "text_zh": "我的中国朋友请我去她奶奶家吃饺子。奶奶住在老城区的一个小房子里，客厅的桌子上已经放好了面粉和肉馅。奶奶一边包饺子一边跟我说话。她的普通话不太标准，但是我能听懂大部分。她问我从哪里来，家里有几个人，喜不喜欢吃辣的。她包饺子特别快——我包一个的时间，她已经包了五个。她笑着说：「包了四十年了，当然快。」吃饭的时候，奶奶一直往我碗里夹饺子。我说够了够了，她说：「年轻人要多吃。」那天的饺子是我吃过的最好吃的——不是因为味道比餐厅的好，而是因为每一个饺子里面都有奶奶的心意。回去的路上，朋友说：「奶奶说你像她以前的邻居家的孩子。」",
+    "text_pinyin": "Wǒ de Zhōngguó péngyou qǐng wǒ qù tā nǎinai jiā chī jiǎozi. Nǎinai zhù zài lǎo chéngqū de yí gè xiǎo fángzi lǐ, kètīng de zhuōzi shàng yǐjīng fàng hǎo le miànfěn hé ròu xiàn. Nǎinai yìbiān bāo jiǎozi yìbiān gēn wǒ shuō huà. Tā de pǔtōnghuà bú tài biāozhǔn, dànshì wǒ néng tīng dǒng dàbùfen. Tā wèn wǒ cóng nǎlǐ lái, jiā lǐ yǒu jǐ gè rén, xǐ bù xǐhuan chī là de. Tā bāo jiǎozi tèbié kuài——wǒ bāo yí gè de shíjiān, tā yǐjīng bāo le wǔ gè. Tā xiàozhe shuō:「Bāo le sìshí nián le, dāngrán kuài.」Chī fàn de shíhou, nǎinai yìzhí wǎng wǒ wǎn lǐ jiā jiǎozi. Wǒ shuō gòu le gòu le, tā shuō:「Niánqīng rén yào duō chī.」Nà tiān de jiǎozi shì wǒ chī guò de zuì hǎochī de——búshì yīnwèi wèidào bǐ cāntīng de hǎo, ér shì yīnwèi měi yí gè jiǎozi lǐmiàn dōu yǒu nǎinai de xīnyì. Huí qù de lù shàng, péngyou shuō:「Nǎinai shuō nǐ xiàng tā yǐqián de línjū jiā de háizi.」",
+    "text_en": "My Chinese friend invited me to her grandmother's home for dumplings. Grandma lives in a small house in the old city district. The living room table was already set with flour and meat filling. She wrapped dumplings while chatting with me. Her Mandarin wasn't standard, but I understood most of it. She asked where I'm from, how many people are in my family, whether I like spicy food. She wrapped incredibly fast — in the time I made one, she'd made five. She laughed: 'Forty years of practice, of course I'm fast.' During the meal, grandma kept putting dumplings in my bowl. I said that's enough, she said: 'Young people should eat more.' Those were the best dumplings I've ever had — not because they tasted better than a restaurant's, but because every dumpling was filled with grandma's care. On the way back, my friend said: 'Grandma said you remind her of the neighbor's child from years ago.'",
+    "questions": [
+      {"type": "mc", "q_zh": "奶奶为什么包饺子特别快？", "q_en": "Why is grandma so fast at wrapping dumplings?",
+       "options": [
+         {"text": "她用了机器", "pinyin": "tā yòng le jīqì", "text_en": "she used a machine", "correct": false},
+         {"text": "包了四十年了", "pinyin": "bāo le sìshí nián le", "text_en": "forty years of practice", "correct": true},
+         {"text": "饺子很小", "pinyin": "jiǎozi hěn xiǎo", "text_en": "the dumplings are small", "correct": false},
+         {"text": "有人帮她", "pinyin": "yǒu rén bāng tā", "text_en": "someone helped her", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得饺子好吃的原因是什么？", "q_en": "Why did 'I' think the dumplings were delicious?",
+       "options": [
+         {"text": "味道比餐厅好", "pinyin": "wèidào bǐ cāntīng hǎo", "text_en": "tasted better than restaurant", "correct": false},
+         {"text": "每个饺子里有奶奶的心意", "pinyin": "měi gè jiǎozi lǐ yǒu nǎinai de xīnyì", "text_en": "filled with grandma's care", "correct": true},
+         {"text": "加了特别的调料", "pinyin": "jiā le tèbié de tiáoliào", "text_en": "special seasoning", "correct": false},
+         {"text": "因为很饿", "pinyin": "yīnwèi hěn è", "text_en": "because very hungry", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "吃饭的时候奶奶做了什么？", "q_en": "What did grandma do during the meal?",
+       "options": [
+         {"text": "自己不吃", "pinyin": "zìjǐ bù chī", "text_en": "didn't eat herself", "correct": false},
+         {"text": "一直往「我」碗里夹饺子", "pinyin": "yìzhí wǎng wǒ wǎn lǐ jiā jiǎozi", "text_en": "kept putting dumplings in my bowl", "correct": true},
+         {"text": "看电视", "pinyin": "kàn diànshì", "text_en": "watched TV", "correct": false},
+         {"text": "说了很多故事", "pinyin": "shuō le hěn duō gùshi", "text_en": "told many stories", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_mystery_009",
+    "title": "The Library Note",
+    "title_zh": "图书馆的纸条",
+    "hsk_level": 3,
+    "text_zh": "我经常去学校图书馆看书。有一天，我在一本旧书里发现了一张纸条。上面用铅笔写着：「如果你也喜欢这本书，你可以在最后一页写一个字。」我翻到最后一页，上面已经有四个字：静、暖、光、风。每个字的笔迹都不一样，看起来是不同的人在不同的时间写的。我想了想，拿起笔写了一个「缘」字——因为这么多人看了同一本书，本身就是一种缘分。过了两个星期，我又去看了那本书。最后一页又多了一个字：「善」。我不知道是谁写的，但是觉得那个人一定很温柔。一本书把不认识的人连在了一起，每个人留下一个字，就像在安静地对话。",
+    "text_pinyin": "Wǒ jīngcháng qù xuéxiào túshūguǎn kàn shū. Yǒu yì tiān, wǒ zài yì běn jiù shū lǐ fāxiàn le yì zhāng zhǐtiáo. Shàngmiàn yòng qiānbǐ xiězhe:「Rúguǒ nǐ yě xǐhuan zhè běn shū, nǐ kěyǐ zài zuìhòu yí yè xiě yí gè zì.」Wǒ fān dào zuìhòu yí yè, shàngmiàn yǐjīng yǒu sì gè zì: jìng, nuǎn, guāng, fēng. Měi gè zì de bǐjì dōu bù yíyàng, kàn qǐlái shì bùtóng de rén zài bùtóng de shíjiān xiě de. Wǒ xiǎng le xiǎng, ná qǐ bǐ xiě le yí gè「yuán」zì——yīnwèi zhème duō rén kàn le tóng yì běn shū, běnshēn jiùshì yì zhǒng yuánfèn. Guò le liǎng gè xīngqī, wǒ yòu qù kàn le nà běn shū. Zuìhòu yí yè yòu duō le yí gè zì:「shàn」. Wǒ bù zhīdào shì shéi xiě de, dànshì juéde nàge rén yídìng hěn wēnróu. Yì běn shū bǎ bú rènshi de rén lián zài le yìqǐ, měi gè rén liú xià yí gè zì, jiù xiàng zài ānjìng de duìhuà.",
+    "text_en": "I often go to the school library to read. One day, I found a note in an old book. In pencil it said: 'If you also like this book, you can write one character on the last page.' I turned to the last page — there were already four characters: quiet, warm, light, wind. Each was in different handwriting, written by different people at different times. I thought for a moment, then wrote the character 'yuan' — fate — because so many people reading the same book is itself a kind of destiny. Two weeks later, I checked the book again. The last page had one more character: 'kind.' I don't know who wrote it, but they must be a gentle person. One book connecting strangers, each leaving a single character — like a quiet conversation.",
+    "questions": [
+      {"type": "mc", "q_zh": "纸条上写了什么？", "q_en": "What did the note say?",
+       "options": [
+         {"text": "这本书不好看", "pinyin": "zhè běn shū bù hǎokàn", "text_en": "this book isn't good", "correct": false},
+         {"text": "喜欢这本书就在最后一页写一个字", "pinyin": "xǐhuan zhè běn shū jiù zài zuìhòu yí yè xiě yí gè zì", "text_en": "write a character on the last page if you like the book", "correct": true},
+         {"text": "请把书还给图书馆", "pinyin": "qǐng bǎ shū huán gěi túshūguǎn", "text_en": "please return the book", "correct": false},
+         {"text": "我在这本书里藏了东西", "pinyin": "wǒ zài zhè běn shū lǐ cáng le dōngxi", "text_en": "I hid something in this book", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」写了哪个字？", "q_en": "Which character did 'I' write?",
+       "options": [
+         {"text": "爱", "pinyin": "ài", "text_en": "love", "correct": false},
+         {"text": "缘", "pinyin": "yuán", "text_en": "fate/destiny", "correct": true},
+         {"text": "善", "pinyin": "shàn", "text_en": "kindness", "correct": false},
+         {"text": "静", "pinyin": "jìng", "text_en": "quiet", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "两个星期以后，最后一页多了什么字？", "q_en": "What character appeared two weeks later?",
+       "options": [
+         {"text": "风", "pinyin": "fēng", "text_en": "wind", "correct": false},
+         {"text": "暖", "pinyin": "nuǎn", "text_en": "warm", "correct": false},
+         {"text": "善", "pinyin": "shàn", "text_en": "kindness", "correct": true},
+         {"text": "美", "pinyin": "měi", "text_en": "beauty", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_inst_011",
+    "title": "The Night Shift Convenience Store",
+    "title_zh": "夜班的便利店",
+    "hsk_level": 3,
+    "text_zh": "我家楼下有一家二十四小时的便利店。白天的时候，里面很忙，客人来来去去。但是晚上十一点以后，便利店变得很安静。夜班的店员是一个年轻的男生，总是戴着耳机。有一次半夜，我去买水，只有我一个客人。他帮我结账的时候，我看到他面前放着一本打开的书。我问他在看什么书。他说：「准备考试的书。白天上课，晚上在这里上班。客人少的时候就看书。」我说那一定很辛苦。他笑着说：「还好。半夜的便利店特别安静，比图书馆还安静。有时候一个小时都没有客人来，可以看很多页。」从那以后，我每次去便利店，都会跟他聊几句。他的考试后来通过了。他跟我说：「谢谢你每次来的时候跟我说话。夜班最难的不是累，是一个人太久了。」",
+    "text_pinyin": "Wǒ jiā lóu xià yǒu yì jiā èrshísì xiǎoshí de biànlì diàn. Báitiān de shíhou, lǐmiàn hěn máng, kèrén lái lái qù qù. Dànshì wǎnshang shíyī diǎn yǐhòu, biànlì diàn biàn de hěn ānjìng. Yèbān de diànyuán shì yí gè niánqīng de nánshēng, zǒngshì dàizhe ěrjī. Yǒu yí cì bànyè, wǒ qù mǎi shuǐ, zhǐyǒu wǒ yí gè kèrén. Tā bāng wǒ jiézhàng de shíhou, wǒ kàn dào tā miànqián fàngzhe yì běn dǎkāi de shū. Wǒ wèn tā zài kàn shénme shū. Tā shuō:「Zhǔnbèi kǎoshì de shū. Báitiān shàng kè, wǎnshang zài zhèlǐ shàng bān. Kèrén shǎo de shíhou jiù kàn shū.」Wǒ shuō nà yídìng hěn xīnkǔ. Tā xiàozhe shuō:「Hái hǎo. Bànyè de biànlì diàn tèbié ānjìng, bǐ túshūguǎn hái ānjìng. Yǒu shíhou yí gè xiǎoshí dōu méiyǒu kèrén lái, kěyǐ kàn hěn duō yè.」Cóng nà yǐhòu, wǒ měi cì qù biànlì diàn, dōu huì gēn tā liáo jǐ jù. Tā de kǎoshì hòulái tōngguò le. Tā gēn wǒ shuō:「Xièxie nǐ měi cì lái de shíhou gēn wǒ shuō huà. Yèbān zuì nán de búshì lèi, shì yí gè rén tài jiǔ le.」",
+    "text_en": "There's a 24-hour convenience store below my building. During the day it's busy with customers. But after eleven at night, it becomes very quiet. The night shift clerk is a young man who always wears earphones. Once at midnight I went to buy water — I was the only customer. While he rang me up, I noticed an open book in front of him. I asked what he was reading. He said: 'Exam prep books. I go to class during the day and work here at night. When there are few customers, I study.' I said that must be tough. He smiled: 'It's okay. The midnight convenience store is especially quiet — quieter than the library. Sometimes no customer comes for a whole hour, and I can read many pages.' After that, I'd chat with him every time I went. He later passed his exam. He told me: 'Thanks for talking to me whenever you came. The hardest thing about night shifts isn't being tired — it's being alone too long.'",
+    "questions": [
+      {"type": "mc", "q_zh": "夜班的店员白天做什么？", "q_en": "What does the night shift clerk do during the day?",
+       "options": [
+         {"text": "睡觉", "pinyin": "shuì jiào", "text_en": "sleep", "correct": false},
+         {"text": "上课", "pinyin": "shàng kè", "text_en": "go to class", "correct": true},
+         {"text": "在另一个地方上班", "pinyin": "zài lìng yí gè dìfang shàng bān", "text_en": "work elsewhere", "correct": false},
+         {"text": "看书", "pinyin": "kàn shū", "text_en": "read books", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "他觉得半夜的便利店怎么样？", "q_en": "How does he feel about the midnight convenience store?",
+       "options": [
+         {"text": "太忙了", "pinyin": "tài máng le", "text_en": "too busy", "correct": false},
+         {"text": "比图书馆还安静，可以看书", "pinyin": "bǐ túshūguǎn hái ānjìng, kěyǐ kàn shū", "text_en": "quieter than the library, can study", "correct": true},
+         {"text": "很无聊", "pinyin": "hěn wúliáo", "text_en": "very boring", "correct": false},
+         {"text": "客人太多了", "pinyin": "kèrén tài duō le", "text_en": "too many customers", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "他说夜班最难的是什么？", "q_en": "What did he say was hardest about night shifts?",
+       "options": [
+         {"text": "太累了", "pinyin": "tài lèi le", "text_en": "too tired", "correct": false},
+         {"text": "工资太低", "pinyin": "gōngzī tài dī", "text_en": "pay too low", "correct": false},
+         {"text": "一个人太久了", "pinyin": "yí gè rén tài jiǔ le", "text_en": "being alone too long", "correct": true},
+         {"text": "没时间看书", "pinyin": "méi shíjiān kàn shū", "text_en": "no time to read", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  }
+]

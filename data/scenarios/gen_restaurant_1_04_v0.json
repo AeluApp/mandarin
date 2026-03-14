@@ -1,0 +1,94 @@
+{
+    "title": "Breakfast at the Baozi Stand",
+    "title_zh": "包子铺的早餐",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_restaurant_1_04_v0",
+    "tree": {
+        "setup": "Six-thirty in the morning. A street-side baozi stand with bamboo steamers stacked four high, each one breathing out little puffs of steam. Auntie Fang works with terrifying efficiency -- she can make change, fill a bag, and shout an order simultaneously. There's already a line of commuters.",
+        "setup_zh": "早上六点半。路边的包子铺，竹蒸笼叠了四层，每层都冒着热气。方阿姨干活又快又准——她能同时找钱、装袋、喊号。上班的人已经排队了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "要什么？快点啊！",
+                "text_pinyin": "yào shénme? kuài diǎn a!",
+                "text_en": "What do you want? Hurry up!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order some baozi quickly.",
+                "options": [
+                    {
+                        "text_zh": "两个肉包子。",
+                        "text_pinyin": "liǎng gè ròu bāozi.",
+                        "text_en": "Two meat baozi.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Fang's tongs move like lightning. Two perfect buns land in a paper bag before you finish blinking. Short, clear orders are exactly what she wants during rush hour."
+                    },
+                    {
+                        "text_zh": "你好，请问有什么包子？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn yǒu shénme bāozi?",
+                        "text_en": "Hello, what kinds of baozi do you have?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Polite, but the line behind you grows restless. Auntie Fang speed-lists:「肉的、菜的、豆沙的！」At a morning stall, keep it quick."
+                    },
+                    {
+                        "text_zh": "我……想一下。",
+                        "text_pinyin": "wǒ... xiǎng yíxià.",
+                        "text_en": "I... let me think.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The man behind you sighs audibly. Auntie Fang gives you exactly three seconds of patience before serving the next person. Know your order before you reach the front!"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "要不要豆浆？",
+                "text_pinyin": "yào bú yào dòujiāng?",
+                "text_en": "Do you want soy milk?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on soy milk.",
+                "options": [
+                    {
+                        "text_zh": "要，一杯。",
+                        "text_pinyin": "yào, yì bēi.",
+                        "text_en": "Yes, one cup.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Fang ladles hot soy milk into a paper cup with zero spillage. Baozi and 豆浆 is one of China's great breakfast combinations. 杯 (bēi) is the measure word for cups."
+                    },
+                    {
+                        "text_zh": "不要，谢谢。",
+                        "text_pinyin": "bú yào, xièxie.",
+                        "text_en": "No, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Fang nods without judgment. She's already moved on to the next customer. Efficiency is her love language."
+                    },
+                    {
+                        "text_zh": "豆浆多少钱？",
+                        "text_pinyin": "dòujiāng duōshao qián?",
+                        "text_en": "How much is the soy milk?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「两块！」Auntie Fang answers without looking up. At street stalls, prices are usually so low that asking feels almost ceremonial."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一共六块。明天见！",
+                "text_pinyin": "yígòng liù kuài. míngtiān jiàn!",
+                "text_en": "Six yuan total. See you tomorrow!"
+            }
+        ],
+        "cultural_note": "包子 (bāozi) with 豆浆 (dòujiāng, soy milk) is a classic Chinese breakfast. Street stalls open before dawn and close by mid-morning. The pace is fast -- regulars order in three words or fewer."
+    }
+}

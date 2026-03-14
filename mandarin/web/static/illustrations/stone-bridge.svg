@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="currentColor">
+  <!-- hills in background -->
+  <path d="M0 40 Q30 28 60 40" stroke-width="0.4"/>
+  <path d="M60 40 Q90 30 120 40" stroke-width="0.4"/>
+  <!-- bridge arch -->
+  <path d="M30 48 Q60 30 90 48" stroke-width="0.75"/>
+  <!-- bridge deck -->
+  <line x1="28" y1="48" x2="92" y2="48" stroke-width="0.6"/>
+  <!-- water dashes -->
+  <line x1="48" y1="53" x2="54" y2="53" stroke-width="0.4"/>
+  <line x1="64" y1="55" x2="70" y2="55" stroke-width="0.4"/>
+</svg>

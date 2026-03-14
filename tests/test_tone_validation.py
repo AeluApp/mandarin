@@ -247,6 +247,15 @@ def test_pinyin_to_tones_empty():
     assert pinyin_to_tones("") == []
 
 
-def test_pinyin_to_tones_no_tones():
+def test_pinyin_to_tones_neutral():
     from mandarin.tone_grading import pinyin_to_tones
-    assert pinyin_to_tones("de") == []
+    # Neutral tone syllable returns tone 0
+    assert pinyin_to_tones("de") == [0]
+
+
+def test_pinyin_to_tones_with_neutral():
+    from mandarin.tone_grading import pinyin_to_tones
+    # 不客气 bú kèqi — qi is neutral
+    assert pinyin_to_tones("bú kèqi") == [2, 4, 0]
+    # 谢谢 xièxie — second xie is neutral
+    assert pinyin_to_tones("xièxie") == [4, 0]

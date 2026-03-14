@@ -1,0 +1,89 @@
+{
+    "title": "After the Storm",
+    "title_zh": "暴风雨以后",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your friend Xiaoyan has been through a difficult breakup. You meet her at a café three months later. She looks different — calmer, but with a quiet sadness still in her eyes.",
+        "setup_zh": "朋友小燕经历了一次痛苦的分手。三个月后你在咖啡馆遇到她。她看起来不一样了——更平静了，但眼睛里还有一种安静的悲伤。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你不用小心翼翼的，我没有那么脆弱了。这三个月我想了很多，也哭了很多。现在不能说完全好了，但至少能正常地吃饭、睡觉、上班了。愈合这件事好像没有终点，只有慢慢变好的过程。",
+                "text_pinyin": "Nǐ bú yòng xiǎoxīn yìyì de, wǒ méiyǒu nàme cuìruò le. Zhè sān ge yuè wǒ xiǎng le hěn duō, yě kū le hěn duō. Xiànzài bù néng shuō wánquán hǎo le, dàn zhìshǎo néng zhèngcháng de chīfàn, shuìjiào, shàng bān le. Yùhé zhè jiàn shì hǎoxiàng méiyǒu zhōngdiǎn, zhǐ yǒu mànman biàn hǎo de guòchéng.",
+                "text_en": "You don't have to tiptoe around me — I'm not that fragile anymore. These three months I've thought a lot and cried a lot. I can't say I'm completely okay, but at least I can eat, sleep, and work normally again. Healing doesn't seem to have an endpoint, just a process of slowly getting better."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her honest assessment of healing.",
+                "options": [
+                    {
+                        "text_zh": "能说出「还没有完全好」本身就是一种进步。很多人会假装没事，但你没有。你允许自己慢慢来，这才是真正的勇敢。不用给自己设一个「好了」的期限。",
+                        "text_pinyin": "Néng shuō chū 'hái méiyǒu wánquán hǎo' běnshēn jiù shì yī zhǒng jìnbù. Hěn duō rén huì jiǎzhuāng méi shì, dàn nǐ méiyǒu. Nǐ yǔnxǔ zìjǐ mànman lái, zhè cái shì zhēnzhèng de yǒnggǎn. Bú yòng gěi zìjǐ shè yīge 'hǎo le' de qīxiàn.",
+                        "text_en": "Being able to say 'not completely okay yet' is itself progress. Many people pretend they're fine, but you didn't. Allowing yourself to take it slowly — that's real courage. You don't need to set a deadline for 'being okay.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Validating and wise — redefines courage as honesty rather than toughness."
+                    },
+                    {
+                        "text_zh": "时间会治好一切的，别想太多。",
+                        "text_pinyin": "Shíjiān huì zhì hǎo yīqiè de, bié xiǎng tài duō.",
+                        "text_en": "Time heals everything, don't overthink it.",
+                        "score": 0.0,
+                        "feedback": "Cliché — dismisses her careful processing."
+                    },
+                    {
+                        "text_zh": "你有没有考虑再找一个？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu kǎolǜ zài zhǎo yīge?",
+                        "text_en": "Have you thought about finding someone new?",
+                        "score": 0.0,
+                        "feedback": "Tone-deaf — rushes past healing toward replacement."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不用给自己设期限……你说得对。我一直在逼自己快点好起来，好像不难过了才算正常。但也许难过也是正常的一部分。",
+                "text_pinyin": "Bú yòng gěi zìjǐ shè qīxiàn…… nǐ shuō de duì. Wǒ yīzhí zài bī zìjǐ kuài diǎn hǎo qǐlái, hǎoxiàng bù nánguò le cái suàn zhèngcháng. Dàn yěxǔ nánguò yě shì zhèngcháng de yī bùfen.",
+                "text_en": "No deadline for healing... you're right. I've been pushing myself to get better quickly, as if not being sad is what counts as normal. But maybe sadness is a normal part too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer a gentle perspective on sadness as part of healing.",
+                "options": [
+                    {
+                        "text_zh": "难过说明你真正爱过。如果没有感觉就不会有痛，但也不会有那些美好的记忆。伤口会慢慢结疤，但疤痕不是缺陷，是你经历过的证明。你比你以为的更坚强。",
+                        "text_pinyin": "Nánguò shuōmíng nǐ zhēnzhèng ài guò. Rúguǒ méiyǒu gǎnjué jiù bú huì yǒu tòng, dàn yě bú huì yǒu nàxiē měihǎo de jìyì. Shāngkǒu huì mànman jiē bā, dàn bāhén bú shì quēxiàn, shì nǐ jīnglì guò de zhèngmíng. Nǐ bǐ nǐ yǐwéi de gèng jiānqiáng.",
+                        "text_en": "Sadness means you truly loved. Without feeling there'd be no pain, but there'd be no beautiful memories either. Wounds slowly scar, but scars aren't flaws — they're proof of what you've lived through. You're stronger than you think.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compassionate and affirming — reframes scars as evidence of a life fully lived."
+                    },
+                    {
+                        "text_zh": "你要不要去旅游散散心？",
+                        "text_pinyin": "Nǐ yào bú yào qù lǚyóu sànsàn xīn?",
+                        "text_en": "Do you want to go traveling to take your mind off things?",
+                        "score": 0.0,
+                        "feedback": "Offers escape rather than engagement with her process."
+                    },
+                    {
+                        "text_zh": "他也不值得你这么难过。",
+                        "text_pinyin": "Tā yě bù zhíde nǐ zhème nánguò.",
+                        "text_en": "He wasn't worth being this sad over.",
+                        "score": 0.0,
+                        "feedback": "Invalidating — judges her feelings instead of honoring them."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "疤痕是经历过的证明……谢谢你。你知道吗，这三个月你是第一个不叫我「振作起来」的人。有时候最好的安慰不是说「没关系」，而是说「你可以慢慢来」。",
+                "text_pinyin": "Bāhén shì jīnglì guò de zhèngmíng…… xièxie nǐ. Nǐ zhīdào ma, zhè sān ge yuè nǐ shì dì yīge bú jiào wǒ 'zhènzuò qǐlái' de rén. Yǒu shíhou zuì hǎo de ānwèi bú shì shuō 'méi guānxi', ér shì shuō 'nǐ kěyǐ mànman lái'.",
+                "text_en": "Scars are proof of experience... thank you. You know, in these three months you're the first person who didn't tell me to 'get over it.' Sometimes the best comfort isn't saying 'it's okay,' but saying 'you can take your time.'"
+            }
+        ],
+        "cultural_note": "In Chinese culture, the phrase「振作起来」(zhènzuò qǐlái, pull yourself together) is commonly used to comfort someone, but it can inadvertently pressure people to suppress their emotions. The growing mental health awareness in China has led to a shift toward gentler approaches to emotional support. The metaphor of scars (疤痕) as markers of experience rather than damage reflects a more nuanced understanding of emotional recovery."
+    }
+}

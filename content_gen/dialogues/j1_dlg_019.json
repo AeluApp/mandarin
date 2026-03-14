@@ -1,0 +1,87 @@
+{
+    "title": "Watching the Sunset",
+    "title_zh": "看日落",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're on the roof of your apartment building. Your roommate comes up to watch the sunset with you.",
+        "setup_zh": "你在公寓楼的屋顶上。你的室友上来和你一起看日落。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哇，好漂亮！你经常来这里吗？",
+                "text_pinyin": "Wā, hǎo piàoliang! Nǐ jīngcháng lái zhèlǐ ma?",
+                "text_en": "Wow, so beautiful! Do you come here often?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your rooftop habit.",
+                "options": [
+                    {
+                        "text_zh": "是的，我每天晚上都来看看。这里很安静。",
+                        "text_pinyin": "Shì de, wǒ měi tiān wǎnshang dōu lái kànkan. Zhèlǐ hěn ānjìng.",
+                        "text_en": "Yes, I come every evening to look. It's very quiet here.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shares a quiet personal habit and explains why -- matches the peaceful rooftop moment."
+                    },
+                    {
+                        "text_zh": "有时候来。今天的日落很漂亮。",
+                        "text_pinyin": "Yǒu shíhou lái. Jīntiān de rìluò hěn piàoliang.",
+                        "text_en": "Sometimes. Today's sunset is beautiful.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers and adds a nice observation, but doesn't share as much of yourself as the moment invites."
+                    },
+                    {
+                        "text_zh": "你怎么上来的？",
+                        "text_pinyin": "Nǐ zěnme shànglái de?",
+                        "text_en": "How did you get up here?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She's marveling at the sunset and you're asking about logistics -- breaks the beauty of the moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "真的好安静。我平时太忙了，都没有时间看天。",
+                "text_pinyin": "Zhēn de hǎo ānjìng. Wǒ píngshí tài máng le, dōu méiyǒu shíjiān kàn tiān.",
+                "text_en": "It really is quiet. I'm usually so busy, I never have time to look at the sky."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Encourage them to slow down.",
+                "options": [
+                    {
+                        "text_zh": "你以后可以常来。有时候停一停也好。",
+                        "text_pinyin": "Nǐ yǐhòu kěyǐ cháng lái. Yǒu shíhou tíng yī tíng yě hǎo.",
+                        "text_en": "You can come often from now on. Sometimes it's good to stop for a moment.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to her confession about being too busy -- a gentle invitation to slow down, shared from your own experience."
+                    },
+                    {
+                        "text_zh": "是啊，大家都很忙。",
+                        "text_pinyin": "Shì a, dàjiā dōu hěn máng.",
+                        "text_en": "Yeah, everyone's busy.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Sympathizes but doesn't offer anything -- she opened up about missing the sky and you gave a generic response."
+                    },
+                    {
+                        "text_zh": "你平时几点下班？",
+                        "text_pinyin": "Nǐ píngshí jǐ diǎn xiàbān?",
+                        "text_en": "What time do you usually get off work?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She just said she's too busy to look at the sky, and you asked about her work schedule -- that's the opposite of slowing down."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rooftop moments in Chinese cities are rare and precious. In a culture that values hard work, the ability to simply stop and watch the sky is a quiet rebellion. These pauses are where healing begins."
+    }
+}

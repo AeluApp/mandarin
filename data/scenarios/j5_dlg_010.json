@@ -1,0 +1,89 @@
+{
+  "title": "The Dumpling Gathering",
+  "title_zh": "包饺子的日子",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're helping your friend Xiaoli make dumplings at her apartment. It's the Winter Solstice, and she's continuing a family tradition even though she lives far from home.",
+    "setup_zh": "冬至这天，你在朋友小丽的公寓里帮她包饺子。虽然她住在离家很远的地方，但还是坚持这个家庭传统。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "我妈每年冬至都会包饺子。全家人围在一起，一边包一边聊天，那是我小时候最温暖的记忆。今年虽然只有我们两个人，但我还是想包。",
+        "text_pinyin": "Wǒ mā měi nián dōngzhì dōu huì bāo jiǎozi. Quánjiā rén wéi zài yīqǐ, yībiān bāo yībiān liáotiān, nà shì wǒ xiǎo shíhou zuì wēnnuǎn de jìyì. Jīn nián suīrán zhǐ yǒu wǒmen liǎng ge rén, dàn wǒ háishì xiǎng bāo.",
+        "text_en": "My mom makes dumplings every Winter Solstice. The whole family gathers together, chatting while wrapping. It's my warmest childhood memory. Even though it's just us two this year, I still want to make them."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Xiaoli about keeping traditions alive.",
+        "options": [
+          {
+            "text_zh": "两个人包也很好。传统不在于人多人少，而在于你愿不愿意继续做。你妈妈知道你今天在包饺子的话，一定会很高兴。",
+            "text_pinyin": "Liǎng ge rén bāo yě hěn hǎo. Chuántǒng bú zàiyú rén duō rén shǎo, ér zàiyú nǐ yuàn bú yuànyì jìxù zuò. Nǐ māma zhīdào nǐ jīntiān zài bāo jiǎozi dehuà, yídìng huì hěn gāoxìng.",
+            "text_en": "Making them with just two people is good too. Tradition isn't about how many people are there, but whether you're willing to keep doing it. If your mom knew you were making dumplings today, she'd be really happy.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Warm and reassuring — validates her effort to maintain the tradition."
+          },
+          {
+            "text_zh": "直接买速冻饺子不是更方便吗？",
+            "text_pinyin": "Zhíjiē mǎi sùdòng jiǎozi bú shì gèng fāngbiàn ma?",
+            "text_en": "Wouldn't it be easier to just buy frozen dumplings?",
+            "score": 0.0,
+            "feedback": "She's not making dumplings for convenience."
+          },
+          {
+            "text_zh": "你妈妈包的什么馅儿的？",
+            "text_pinyin": "Nǐ māma bāo de shénme xiànr de?",
+            "text_en": "What filling does your mom use?",
+            "score": 0.0,
+            "feedback": "Not terrible but diverts from the emotional weight of the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我给她发了张照片，她回了一个笑脸，然后又发了一条语音说：「馅儿要多放点姜，别忘了。」每次都是这句话。有些东西虽然重复，但听到就觉得安心。",
+        "text_pinyin": "Wǒ gěi tā fā le zhāng zhàopiàn, tā huí le yīge xiàoliǎn, ránhòu yòu fā le yī tiáo yǔyīn shuō: 'Xiànr yào duō fàng diǎn jiāng, bié wàng le.' Měi cì dōu shì zhè jù huà. Yǒuxiē dōngxi suīrán chóngfù, dàn tīng dào jiù juéde ānxīn.",
+        "text_en": "I sent her a photo. She replied with a smiley face, then sent a voice message: 'Don't forget to add more ginger to the filling.' It's the same thing every time. Some things are repetitive, but hearing them brings comfort."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Reflect on the comfort of familiar words.",
+        "options": [
+          {
+            "text_zh": "这种重复才是爱的方式。她不是在教你做饭，是在告诉你她还在关心你。不管你在哪里，她心里都留着你的位置。",
+            "text_pinyin": "Zhè zhǒng chóngfù cái shì ài de fāngshì. Tā bú shì zài jiāo nǐ zuòfàn, shì zài gàosù nǐ tā hái zài guānxīn nǐ. Bùguǎn nǐ zài nǎlǐ, tā xīn lǐ dōu liú zhe nǐ de wèizhì.",
+            "text_en": "That kind of repetition is how love works. She's not teaching you to cook — she's telling you she still cares. No matter where you are, she keeps a place for you in her heart.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Insight — decodes the emotional language hidden in everyday reminders."
+          },
+          {
+            "text_zh": "你应该过年回家看看她。",
+            "text_pinyin": "Nǐ yīnggāi guò nián huí jiā kànkan tā.",
+            "text_en": "You should go home for New Year's to see her.",
+            "score": 0.0,
+            "feedback": "Reasonable but generic — misses the beauty of what she's sharing right now."
+          },
+          {
+            "text_zh": "姜放多了不好吃吧？",
+            "text_pinyin": "Jiāng fàng duō le bù hǎochī ba?",
+            "text_en": "Wouldn't too much ginger taste bad?",
+            "score": 0.0,
+            "feedback": "Takes the advice literally instead of understanding its emotional meaning."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "留着我的位置……嗯。你说到我心里去了。来，我们一起包吧。我教你我妈妈的手法，以后你也可以把这个传统传下去。",
+        "text_pinyin": "Liú zhe wǒ de wèizhì…… en. Nǐ shuō dào wǒ xīn lǐ qù le. Lái, wǒmen yīqǐ bāo ba. Wǒ jiāo nǐ wǒ māma de shǒufǎ, yǐhòu nǐ yě kěyǐ bǎ zhège chuántǒng chuán xià qù.",
+        "text_en": "Keeps a place for me... yes. You said exactly what I feel. Come, let's wrap them together. I'll teach you my mom's technique — someday you can pass this tradition on too."
+      }
+    ],
+    "cultural_note": "Making dumplings (包饺子) during the Winter Solstice (冬至) is a tradition rooted in northern Chinese culture. The communal act of wrapping dumplings — everyone gathered around the table, hands covered in flour — is as important as eating them. For Chinese people living far from home, recreating these rituals becomes a way of staying connected to family and identity."
+  }
+}

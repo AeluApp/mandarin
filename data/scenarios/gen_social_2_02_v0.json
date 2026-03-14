@@ -1,0 +1,94 @@
+{
+    "title": "The Housewarming Guest",
+    "title_zh": "暖房客人",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_2_02_v0",
+    "tree": {
+        "setup": "Your colleague Xiao Guo has just moved into a new apartment and invited friends over for a housewarming gathering. His living room still has boxes in the corner and the WiFi password is taped to the fridge. He's made too much food because his mother told him it's better to have leftovers than for a guest to go hungry.",
+        "setup_zh": "同事小郭刚搬进新公寓，请朋友们来暖房。客厅角落还有几个箱子，WiFi密码贴在冰箱上。他做了太多菜，因为他妈妈说有剩菜比让客人饿着强。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来了来了！快进来！鞋子放门口就行。",
+                "text_pinyin": "lái le lái le! kuài jìnlái! xiézi fàng ménkǒu jiù xíng.",
+                "text_en": "You're here! Come in! Just leave your shoes at the door."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Greet him and comment on the apartment.",
+                "options": [
+                    {
+                        "text_zh": "恭喜恭喜！你的新家很好看！",
+                        "text_pinyin": "gōngxǐ gōngxǐ! nǐ de xīn jiā hěn hǎokàn!",
+                        "text_en": "Congratulations! Your new place looks great!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Guo beams and immediately gives you the full tour, including the balcony view and the 'future bookshelf' corner that currently holds boxes. 恭喜 is the go-to congratulations for life milestones."
+                    },
+                    {
+                        "text_zh": "给你带了水果和红酒。",
+                        "text_pinyin": "gěi nǐ dài le shuǐguǒ hé hóngjiǔ.",
+                        "text_en": "I brought you fruit and red wine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Guo takes the gifts with both hands.「太客气了！不用带东西的！」He says this while already opening the wine. 带了 means 'brought.'"
+                    },
+                    {
+                        "text_zh": "你自己一个人搬的？太辛苦了吧。",
+                        "text_pinyin": "nǐ zìjǐ yí gè rén bān de? tài xīnkǔ le ba.",
+                        "text_en": "You moved by yourself? That must have been exhausting.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Guo laughs.「请了搬家公司，但是收拾东西花了两天！」自己一个人 means 'by yourself' -- showing concern for effort is always appreciated."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来，吃点东西。我做了很多菜，别客气！",
+                "text_pinyin": "lái, chī diǎn dōngxi. wǒ zuò le hěn duō cài, bié kèqi!",
+                "text_en": "Come, eat something. I made lots of food, don't be polite!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his hospitality.",
+                "options": [
+                    {
+                        "text_zh": "看起来都很好吃！你做饭很厉害。",
+                        "text_pinyin": "kànqǐlái dōu hěn hǎochī! nǐ zuò fàn hěn lìhai.",
+                        "text_en": "Everything looks delicious! You're an amazing cook.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Guo turns red with pleasure.「哪里哪里，随便做做。」看起来 means 'it looks like.' 哪里哪里 is the classic modest deflection of a compliment."
+                    },
+                    {
+                        "text_zh": "太多了吧！吃不完怎么办？",
+                        "text_pinyin": "tài duō le ba! chī bu wán zěnme bàn?",
+                        "text_en": "This is too much! What if we can't finish it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Guo waves his hand.「剩的你们都打包带走！」吃不完 is 'can't finish eating' -- the potential complement in action."
+                    },
+                    {
+                        "text_zh": "谢谢！我可以用WiFi吗？密码是什么？",
+                        "text_pinyin": "xièxie! wǒ kěyǐ yòng WiFi ma? mìmǎ shì shénme?",
+                        "text_en": "Thanks! Can I use the WiFi? What's the password?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Guo points at the fridge.「密码在冰箱上。」He's slightly hurt you asked about WiFi before trying his food, but he'll survive."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "以后常来！这里就是你们的第二个家。",
+                "text_pinyin": "yǐhòu cháng lái! zhèlǐ jiùshì nǐmen de dì èr gè jiā.",
+                "text_en": "Come often! This is your second home."
+            }
+        ],
+        "cultural_note": "Housewarming gatherings (暖房, nuǎn fáng) often involve cooking at home rather than dining out. Guests typically bring fruit, wine, or small gifts. The host will insist you eat more (多吃点!) and deflect any compliments with 哪里哪里."
+    }
+}

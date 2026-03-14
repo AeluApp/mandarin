@@ -1,0 +1,152 @@
+{
+    "title": "The Architecture of Forgetting",
+    "title_zh": "遗忘的建筑",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You sit in a crumbling courtyard house in Beijing with its last resident, Mr. Guo, eighty-seven years old. The city has been demolishing hutong neighborhoods for decades. His is one of the last. He sits in a chair his grandfather built, under a persimmon tree his father planted.",
+        "setup_zh": "你坐在北京一座破旧的四合院里，和它最后的住户八十七岁的郭先生在一起。这座城市已经拆了几十年的胡同。他的是最后几座之一。他坐在祖父做的椅子上，在父亲种的柿子树下。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "明年这里就没了。开发商已经签了协议。这棵柿子树——我父亲一九四一年种的——明年春天就会被推土机推掉。这把椅子我可以带走。但院子带不走。墙带不走。这棵树带不走。你知道一棵树被推倒的时候会发出什么声音吗？不是「哗」——是「嗯」。一声很低的、很短的「嗯」。好像它在说最后一个字。八十五年的一棵树，最后只来得及说一个字。但让我最难过的不是这些。让我最难过的是：当这个院子消失以后，世界上就不会有任何人记得这里的空间是什么样的了——阳光在下午三点打在东墙上的角度、雨水从哪个角落的瓦片上滴下来的声音、风穿过院子的路径。这些空间记忆会永远消失。",
+                "text_pinyin": "Míngnián zhèlǐ jiù méi le. Kāifāshāng yǐjīng qiān le xiéyì. Zhè kē shìzi shù — wǒ fùqīn yī jiǔ sì yī nián zhòng de — míngnián chūntiān jiù huì bèi tuītǔjī tuī diào. Zhè bǎ yǐzi wǒ kěyǐ dài zǒu. Dàn yuànzi dài bù zǒu. Qiáng dài bù zǒu. Zhè kē shù dài bù zǒu. Nǐ zhīdào yī kē shù bèi tuī dǎo de shíhou huì fāchū shénme shēngyīn ma? Bú shì 'huā' — shì 'ēn'. Yī shēng hěn dī de, hěn duǎn de 'ēn'. Hǎoxiàng tā zài shuō zuìhòu yī ge zì. Bāshíwǔ nián de yī kē shù, zuìhòu zhǐ lái de jí shuō yī ge zì. Dàn ràng wǒ zuì nánguò de bú shì zhèxiē. Ràng wǒ zuì nánguò de shì: dāng zhège yuànzi xiāoshī yǐhòu, shìjiè shàng jiù bú huì yǒu rènhé rén jì de zhèlǐ de kōngjiān shì shénme yàng de le — yángguāng zài xiàwǔ sān diǎn dǎ zài dōng qiáng shàng de jiǎodù, yǔshuǐ cóng nǎge jiǎoluò de wǎpiàn shàng dī xiàlái de shēngyīn, fēng chuān guò yuànzi de lùjìng. Zhèxiē kōngjiān jìyì huì yǒngyuǎn xiāoshī.",
+                "text_en": "Next year this will be gone. The developer has signed the agreement. This persimmon tree — my father planted it in 1941 — next spring a bulldozer will push it over. This chair I can take with me. But the courtyard can't be taken. The walls can't be taken. This tree can't be taken. Do what sound a tree makes when it's toppled?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the permanent loss of spatial memory.",
+                "options": [
+                    {
+                        "text_zh": "空间记忆的消失——失去阳光在墙上的角度、雨从瓦上滴落的声音——我们的语言里没有接住这种悲伤的词。也许因为我们不承认空间是活的。您住了八十七年的院子不是容器——它有自己的光线节奏、风的路径。推掉它不是拆建筑——是杀死一个有八十五年记忆的生命体。",
+                        "text_pinyin": "Kōngjiān jìyì de xiāoshī — wǒmen yǒu cí miáoshù shīqù yī ge rén, yī yàng dōngxi, dàn shīqù yī ge kōngjiān — shīqù yángguāng zài mǒu miàn qiáng shàng de jiǎodù, yǔ cóng mǒu piàn wǎ shàng dī luò de shēngyīn — wǒmen de yǔyán lǐ méiyǒu jiē zhù zhè zhǒng bēishāng de cí. Yěxǔ yīnwèi wǒmen bù chéngrèn kōngjiān shì huó de. Dàn nín zhù le bāshíqī nián de yuànzi bú shì róngqì — tā yǒu zìjǐ de guāngxiàn jiézòu, shēngyīn dìtú, fēng de lùjìng. Tuī diào tā bú shì chāichú yī ge jiànzhù — shì shā sǐ yī ge yǒu bāshíwǔ nián jìyì de shēngmìngtǐ.",
+                        "text_en": "The vanishing of spatial memory — we have words for losing a person, a thing, but losing a space — losing the angle of sunlight on a wall, the sound of rain dripping from a specific tile — our language has no words for that grief. Maybe because we don't acknowledge that space is alive. But your courtyard of eighty-seven years isn't a container — it has its own rhythm of light, map of sounds, path of wind. Demolishing it isn't removing a building — it's killing a living thing with eighty-five years of memory.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Space as living being, not container — demolition as death of a memory-bearing organism."
+                    },
+                    {
+                        "text_zh": "您可以用手机把院子每个角落都拍下来，做成一个视频留作纪念。现在技术很方便的。",
+                        "text_pinyin": "Nín kěyǐ yòng shǒujī bǎ yuànzi měi ge jiǎoluò dōu pāi xiàlái, zuò chéng yī ge shìpín liú zuò jìniàn. Xiànzài jìshù hěn fāngbiàn de.",
+                        "text_en": "You could film every corner of the courtyard with your phone and make a video as a memento. Technology makes it easy now.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "郭先生安静了一会儿。「你觉得一段视频能装下下午三点阳光打在东墙上的温度吗？」他没有等你回答。"
+                    },
+                    {
+                        "text_zh": "您可以拍照片记录下来。",
+                        "text_pinyin": "Nín kěyǐ pāi zhàopiàn jìlù xiàlái.",
+                        "text_en": "You could take photos to document it.",
+                        "score": 0.0,
+                        "feedback": "Suggests a technological fix for an existential loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "杀死一个生命体——你用了我一直想用但不敢用的词。但你说得对——这就是它的感觉。但我还要告诉你更让我不安的事：这条胡同以前有六十多户人家。他们都搬走了。搬走以后，他们的孩子在新的小区长大——那些孩子不知道胡同是什么。他们不知道院子里可以种树、可以养鸟、邻居可以隔着墙说话。他们不知道下雨的时候雨水会沿着屋檐滴成一道帘子。这些不只是「记忆」——这是一种生活方式的消失。当一种空间消失的时候，和它一起消失的是所有只能在那种空间里发生的行为、关系和感受。胡同消失了，站在门口跟邻居聊天这个行为也消失了。因为高楼里没有门口。",
+                "text_pinyin": "Shā sǐ yī ge shēngmìngtǐ — nǐ yòng le wǒ yīzhí xiǎng yòng dàn bù gǎn yòng de cí. Dàn nǐ shuō de duì — zhè jiù shì tā de gǎnjué. Dàn wǒ hái yào gàosu nǐ gèng ràng wǒ bù'ān de shì: zhè tiáo hútòng yǐqián yǒu liùshí duō hù rénjiā. Tāmen dōu bān zǒu le. Bān zǒu yǐhòu, tāmen de háizi zài xīn de xiǎoqū zhǎng dà — nàxiē háizi bù zhīdào hútòng shì shénme. Tāmen bù zhīdào yuànzi lǐ kěyǐ zhòng shù, kěyǐ yǎng niǎo, línjū kěyǐ gé zhe qiáng shuōhuà. Tāmen bù zhīdào xià yǔ de shíhou yǔshuǐ huì yán zhe wūyán dī chéng yī dào liánzi. Zhèxiē bù zhǐ shì 'jìyì' — zhè shì yī zhǒng shēnghuó fāngshì de xiāoshī. Dāng yī zhǒng kōngjiān xiāoshī de shíhou, hé tā yīqǐ xiāoshī de shì suǒyǒu zhǐ néng zài nà zhǒng kōngjiān lǐ fāshēng de xíngwéi, guānxi hé gǎnshòu. Hútòng xiāoshī le, zhàn zài ménkǒu gēn línjū liáotiān zhège xíngwéi yě xiāoshī le. Yīnwèi gāolóu lǐ méiyǒu ménkǒu.",
+                "text_en": "Killing a living thing — you used the word I've always wanted to use but didn't dare. You're right — that's exactly how it feels. But let me tell you something more unsettling: this hutong once had over sixty households. They all moved away. After moving, their children grew up in new apartment complexes — those children don't know what a hutong is."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to space shaping behavior — when the hutong vanishes, the behaviors it enabled vanish too.",
+                "options": [
+                    {
+                        "text_zh": "空间塑造行为——有些行为不是人「选择」的，是空间「邀请」的。胡同门口邀请你站着聊天，尺度刚好。高楼走廊邀请你低头走过，设计就是让你经过不停留。失去的不只是建筑——是被空间邀请出来的人际关系。隔墙聊天的亲密、院子里晒太阳的安静——只能在那种空间里生长。",
+                        "text_pinyin": "Kōngjiān sùzào xíngwéi — yǒuxiē xíngwéi bú shì yóu rén 'xuǎnzé' de, shì yóu kōngjiān 'yāoqǐng' de. Hútòng de ménkǒu yāoqǐng nǐ zhàn zhe liáotiān, yīnwèi chǐdù gānghǎo. Gāolóu de zǒuláng yāoqǐng nǐ dītóu zǒu guò, yīnwèi shèjì jiù shì ràng nǐ jīngguò ér bú shì tíngliú. Wǒmen shīqù de bù zhǐ shì jiànzhù xíngshì — shì yī zhěng tào bèi kōngjiān yāoqǐng chūlái de rénjì guānxi. Gé zhe qiáng liáotiān de qīnmì gǎn, yuànzi lǐ yīqǐ shài tàiyáng de ānjìng — zhèxiē guānxi zhǐ néng zài nà zhǒng kōngjiān lǐ shēngzhǎng. Bǎ kōngjiān huàn le, guānxi jiù zhǎng bù chūlái le.",
+                        "text_en": "Space shapes behavior — some behaviors aren't 'chosen' by people, they're 'invited' by space. A hutong doorway invites you to stand and chat because the scale is just right. A high-rise corridor invites you to walk past with head down because it's designed for passing, not staying. What we've lost isn't just an architectural form — it's an entire set of human relationships invited into existence by space. The intimacy of chatting through walls, the quiet of sunbathing together in a courtyard — these relationships can only grow in that kind of space. Change the space, and the relationships can't take root.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Space as invitation — relationships are grown by architecture, not just chosen by people."
+                    },
+                    {
+                        "text_zh": "政府有保护胡同的计划吗？",
+                        "text_pinyin": "Zhèngfǔ yǒu bǎohù hútòng de jìhuà ma?",
+                        "text_en": "Does the government have plans to protect hutongs?",
+                        "score": 0.0,
+                        "feedback": "Asks about policy during a meditation on spatial epistemology."
+                    },
+                    {
+                        "text_zh": "新的小区也有社区活动啊。",
+                        "text_pinyin": "Xīn de xiǎoqū yě yǒu shèqū huódòng a.",
+                        "text_en": "New apartment complexes have community activities too.",
+                        "score": 0.0,
+                        "feedback": "Offers a substitute that misses the point about organic versus organized community."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "空间邀请了关系——你看得比很多建筑师都透。但最后我想说一件最个人的事。我坐在这把椅子上，在这棵柿子树下，已经坐了——我算算——大概七十年了。七十年的每个秋天，柿子会从树上掉下来，砸在地上——「啪」。小时候我等这个声音等得很开心——因为柿子可以吃。后来我等这个声音变成了一种习惯。再后来我等这个声音变成了一种安慰——在所有东西都在变化的时候，柿子还是每年秋天掉下来。明年秋天这棵树就不在了。那声「啪」会从世界上消失。不是说世界上没有别的柿子树了——是这棵树的柿子掉在这个院子的这块地上发出的那个特定的「啪」——那个声音只属于这里。属于我。明年秋天它就不在了——我也不知道我还在不在。",
+                "text_pinyin": "Kōngjiān yāoqǐng le guānxi — nǐ kàn de bǐ hěn duō jiànzhùshī dōu tòu. Dàn zuìhòu wǒ xiǎng shuō yī jiàn zuì gèrén de shì. Wǒ zuò zài zhè bǎ yǐzi shàng, zài zhè kē shìzi shù xià, yǐjīng zuò le — wǒ suàn suàn — dàgài qīshí nián le. Qīshí nián de měi ge qiūtiān, shìzi huì cóng shù shàng diào xiàlái, zá zài dì shàng — 'pā'. Xiǎo shíhou wǒ děng zhège shēngyīn děng de hěn kāixīn — yīnwèi shìzi kěyǐ chī. Hòulái wǒ děng zhège shēngyīn biàn chéng le yī zhǒng xíguàn. Zài hòulái wǒ děng zhège shēngyīn biàn chéng le yī zhǒng ānwèi — zài suǒyǒu dōngxi dōu zài biànhuà de shíhou, shìzi hái shì měi nián qiūtiān diào xiàlái. Míngnián qiūtiān zhè kē shù jiù bú zài le. Nà shēng 'pā' huì cóng shìjiè shàng xiāoshī. Bú shì shuō shìjiè shàng méiyǒu bié de shìzi shù le — shì zhè kē shù de shìzi diào zài zhège yuànzi de zhè kuài dì shàng fāchū de nàge tèdìng de 'pā' — nàge shēngyīn zhǐ shǔyú zhèlǐ. Shǔyú wǒ. Míngnián qiūtiān tā jiù bú zài le — wǒ yě bù zhīdào wǒ hái zài bú zài.",
+                "text_en": "Space invited relationships — you see more clearly than many architects. But let me say one last, most personal thing. I've sat in this chair, under this persimmon tree, for — let me think — about seventy years. Every autumn for seventy years, persimmons fall from the tree and hit the ground — 'pa.' As a child I waited for that sound with excitement — because persimmons could be eaten."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the particular 'pa' that belongs only to this place and this person.",
+                "options": [
+                    {
+                        "text_zh": "那个「啪」——从期待到习惯到安慰。声音没变，变的是您和它的关系。小时候是甜的：食物和快乐。中年是稳的：世界还在运转。现在是痛的：即将失去。同一个「啪」装了三种情感。也许「家」不是地址不是墙——是一组只属于你的声音和七十年积累的意义。树不在了，您的耳朵也许还是会「听到」。",
+                        "text_pinyin": "Nàge tèdìng de 'pā' — cóng qīdài dào xíguàn dào ānwèi. Shēngyīn méi biàn, biàn de shì nín hé tā zhī jiān de guānxi. Xiǎo shíhou tā shì tián de: dàibiǎo shíwù hé kuàilè. Zhōngnián tā shì wěn de: dàibiǎo shìjiè hái zài zhèngcháng yùnzhuǎn. Xiànzài tā shì tòng de: dàibiǎo jíjiāng shīqù. Tóng yī ge 'pā' zhuāng le sān zhǒng wánquán bùtóng de qínggǎn. Yěxǔ zhè jiù shì 'jiā' — bú shì dìzhǐ, bú shì qiáng. Jiā shì yī zǔ zhǐ shǔyú nǐ de shēngyīn hé tāmen qīshí nián jīlěi de yìyì. Jíshǐ shù bú zài le, měi nián qiūtiān nín de ěrduo yěxǔ hái shì huì 'tīng dào'. Yīnwèi nàge shēngyīn yǐjīng bù zhǐ cúnzài yú kōngqì zhōng — tā cúnzài yú nín de qīshí nián lǐ.",
+                        "text_en": "That particular 'pa' — from anticipation to habit to comfort. The sound didn't change; your relationship to it did. As a child it was sweet: food and joy. In middle age it was steady: the world still working. Now it's painful: impending loss. One 'pa' holding three entirely different emotions. Maybe that's what 'home' is — not an address, not a wall. Home is a set of sounds that belong only to you and their seventy years of accumulated meaning. Even when the tree is gone, every autumn your ears may still 'hear' it. Because that sound no longer exists only in air — it exists in your seventy years.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Home as accumulated meaning in sound — the 'pa' lives in seventy years, not in air."
+                    },
+                    {
+                        "text_zh": "您搬到新家以后能种一棵新的柿子树吗？",
+                        "text_pinyin": "Nín bān dào xīn jiā yǐhòu néng zhòng yī kē xīn de shìzi shù ma?",
+                        "text_en": "Can you plant a new persimmon tree at your new home?",
+                        "score": 0.0,
+                        "feedback": "Suggests replacement when the point is irreplaceability."
+                    },
+                    {
+                        "text_zh": "您可以录下来这个声音。",
+                        "text_pinyin": "Nín kěyǐ lù xiàlái zhège shēngyīn.",
+                        "text_en": "You could record the sound.",
+                        "score": 0.0,
+                        "feedback": "Offers a technological preservation for an existential loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "存在于我的七十年里——是的。也许你说得对。也许那个「啪」已经不需要树了——它已经住在我的耳朵里了。但你知道吗……说了这么多关于失去和消失的话，我突然意识到一件事：今天你来了。你坐在我的院子里。你听到了柿子树下面的风声——就是现在这个风声。你看到了下午的阳光打在东墙上的样子——就是现在这个样子。这些空间记忆——我以为会永远消失的——你带走了一份。不完整的一份，但是一份。一个人来到一个地方，认真地看了、听了、感受了——这个地方就在那个人心里活了下来。也许这就是为什么我今天愿意跟你说这些话。不是为了保存——是为了让这个院子再多活在一个人的心里。",
+                "text_pinyin": "Cúnzài yú wǒ de qīshí nián lǐ — shì de. Yěxǔ nǐ shuō de duì. Yěxǔ nàge 'pā' yǐjīng bù xūyào shù le — tā yǐjīng zhù zài wǒ de ěrduo lǐ le. Dàn nǐ zhīdào ma…… shuō le zhème duō guānyú shīqù hé xiāoshī de huà, wǒ tūrán yìshí dào yī jiàn shì: jīntiān nǐ lái le. Nǐ zuò zài wǒ de yuànzi lǐ. Nǐ tīng dào le shìzi shù xiàmiàn de fēng shēng — jiù shì xiànzài zhège fēng shēng. Nǐ kàn dào le xiàwǔ de yángguāng dǎ zài dōng qiáng shàng de yàngzi — jiù shì xiànzài zhège yàngzi. Zhèxiē kōngjiān jìyì — wǒ yǐwéi huì yǒngyuǎn xiāoshī de — nǐ dài zǒu le yī fèn. Bù wánzhěng de yī fèn, dànshì yī fèn. Yī ge rén lái dào yī ge dìfang, rènzhēn de kàn le, tīng le, gǎnshòu le — zhège dìfang jiù zài nàge rén xīnlǐ huó le xiàlái. Yěxǔ zhè jiù shì wèishéme wǒ jīntiān yuànyì gēn nǐ shuō zhèxiē huà. Bú shì wèi le bǎocún — shì wèi le ràng zhège yuànzi zài duō huó zài yī ge rén de xīnlǐ.",
+                "text_en": "Existing in my seventy years — yes. Maybe you're right. Maybe that 'pa' no longer needs the tree — it already lives in my ears. But … having said so much about loss and vanishing, I suddenly realize something: today you came. You sat in my courtyard. You heard the wind beneath the persimmon tree — this wind right now."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the courtyard living on in one more heart.",
+                "options": [
+                    {
+                        "text_zh": "让这个院子再多活在一个人的心里——不是拍照——而是坐在这里认真地呼吸，让风声、光线、柿子树的影子进入我的感官。我带走的拷贝不完整。但也许这就是记忆——永远不完整，但是活的。照片是完整的拷贝，但它是死的。我心里的这个院子会和我一起继续呼吸。谢谢您，郭先生。",
+                        "text_pinyin": "Ràng zhège yuànzi zài duō huó zài yī ge rén de xīnlǐ — bú shì pāi zhào, bú shì lùyīn — ér shì zuò zài zhèlǐ, rènzhēn de hūxī, ràng fēng shēng, guāngxiàn, shìzi shù de yǐngzi jìnrù wǒ de gǎnguān. Wǒ dài zǒu le yī fèn bù wánzhěng de kǎobèi. Dàn yěxǔ zhè jiù shì jìyì de běnzhì — yǒngyuǎn bù wánzhěng, dàn tā shì huó de. Zhàopiàn shì wánzhěng de kǎobèi, dàn tā shì sǐ de. Wǒ xīnlǐ de zhège yuànzi suīrán móhu — dàn tā shì huó de, huì hé wǒ yīqǐ jìxù hūxī. Jīntiān wǒ tīng dào le fēng, kàn dào le guāng. Xièxie nín, Guō xiānshēng.",
+                        "text_en": "Letting this courtyard live in one more heart — not photos, not recordings — but sitting here, breathing deliberately, letting the wind, the light, the persimmon tree's shadow enter my senses. I'm taking away an incomplete copy. But maybe that's the nature of memory — always incomplete, but alive. A photo is a complete copy, but dead. This courtyard in my heart is blurry — but alive, and will keep breathing with me. Today I heard the wind, saw the light. Thank you, Mr. Guo.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Incomplete but alive versus complete but dead — embodied memory as the truest preservation."
+                    },
+                    {
+                        "text_zh": "有记者采访过您吗？",
+                        "text_pinyin": "Yǒu jìzhě cǎifǎng guò nín ma?",
+                        "text_en": "Have any journalists interviewed you?",
+                        "score": 0.0,
+                        "feedback": "Asks about media coverage during the emotional conclusion."
+                    },
+                    {
+                        "text_zh": "您搬到哪里去住？",
+                        "text_pinyin": "Nín bān dào nǎlǐ qù zhù?",
+                        "text_en": "Where will you move to?",
+                        "score": 0.0,
+                        "feedback": "A logistics question at the moment of farewell."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Beijing's hutong (胡同) neighborhoods date back to the Yuan Dynasty (13th century). Since the 1990s, rapid urbanization has demolished over half of Beijing's traditional courtyard houses (四合院, sìhéyuàn). The courtyard house embodies Confucian family structure: rooms arranged around a central open space, generations living together, daily life organized by the architecture itself. The loss of hutongs represents not merely an architectural change but the disappearance of an entire relational ecology — what urban theorists call 'spatial affordance.' The persimmon tree (柿子树) is common in northern Chinese courtyards, symbolizing good fortune (柿 shì sounds like 事 shì, 'matters/affairs')."
+    }
+}

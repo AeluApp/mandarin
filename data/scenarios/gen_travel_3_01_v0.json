@@ -1,0 +1,124 @@
+{
+    "title": "The Ticket Window Marathon",
+    "title_zh": "售票窗口马拉松",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_3_01_v0",
+    "tree": {
+        "setup": "The train station ticket hall. You need to change your high-speed train ticket to an earlier departure because your meeting was moved up. The ticket counter agent, Xiao Guo, has processed 200 tickets today and speaks with the efficiency of someone who values every second. Behind you, the line stretches to the door. The electronic board above shows trains departing in rapid succession.",
+        "setup_zh": "火车站售票大厅。你需要把高铁票改到早一班，因为会议提前了。售票员小郭今天已经处理了两百张票，说话的效率像是珍惜每一秒的人。你身后的队伍排到了门口。上方的电子屏显示列车接连出发。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，办什么业务？",
+                "text_pinyin": "nín hǎo, bàn shénme yèwù?",
+                "text_en": "Hello, what do you need?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you need to change your ticket.",
+                "options": [
+                    {
+                        "text_zh": "我想把下午三点去上海的票改到中午十二点那趟。这是我的身份证和原来的票。",
+                        "text_pinyin": "wǒ xiǎng bǎ xiàwǔ sān diǎn qù shànghǎi de piào gǎi dào zhōngwǔ shíèr diǎn nà tàng. zhè shì wǒ de shēnfènzhèng hé yuánlái de piào.",
+                        "text_en": "I'd like to change my 3 PM Shanghai ticket to the noon departure. Here's my ID and original ticket.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Guo takes both without looking up.「十二点的G7002次，二等座还有。改签费不收。」Having your ID and ticket ready saves time. 改签 is 'change/reschedule a ticket.' 趟 is the measure word for train trips."
+                    },
+                    {
+                        "text_zh": "我要改签。去上海的票。",
+                        "text_pinyin": "wǒ yào gǎiqiān. qù shànghǎi de piào.",
+                        "text_en": "I need to reschedule. The Shanghai ticket.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「身份证和票给我看看。要改到什么时间？」Xiao Guo needs specifics. 改签 is correct but she needs the when and which train."
+                    },
+                    {
+                        "text_zh": "今天去上海的票还能换吗？我的航班……不对，高铁票。",
+                        "text_pinyin": "jīntiān qù shànghǎi de piào hái néng huàn ma? wǒ de hángbān... búduì, gāotiě piào.",
+                        "text_en": "Can I still exchange today's Shanghai ticket? My flight... no wait, train ticket.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Guo waits patiently.「没关系。换票和改签不一样——您是想改时间还是退票重买？」Confusing vocabulary makes the process longer. 换 vs 改签 vs 退票 are different operations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十二点的还有二等座。但是靠窗的没了，只有过道的。一等座也还有。要改成哪种？价格差一百二。",
+                "text_pinyin": "shíèr diǎn de hái yǒu èr děng zuò. dànshì kào chuāng de méi le, zhǐyǒu guòdào de. yī děng zuò yě hái yǒu. yào gǎi chéng nǎ zhǒng? jiàgé chā yìbǎi èr.",
+                "text_en": "The noon train still has second class. But window seats are gone, only aisle. First class is also available. Which do you want? Price difference is 120."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your seat and class.",
+                "options": [
+                    {
+                        "text_zh": "二等座过道就行了。不用升一等座。全程多长时间？",
+                        "text_pinyin": "èr děng zuò guòdào jiù xíng le. bú yòng shēng yī děng zuò. quán chéng duō cháng shíjiān?",
+                        "text_en": "Second class aisle is fine. No need to upgrade. How long is the whole trip?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「四个半小时。中间停三站。」Xiao Guo processes the change. 过道 is 'aisle seat.' 全程 is 'the whole journey.' Quick decisions keep the line moving."
+                    },
+                    {
+                        "text_zh": "一等座和二等座除了价格还有什么区别？座位更大吗？",
+                        "text_pinyin": "yī děng zuò hé èr děng zuò chúle jiàgé háiyǒu shénme qūbié? zuòwèi gèng dà ma?",
+                        "text_en": "Besides price, what's the difference between first and second class? Are the seats bigger?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「座位宽一点，一排四个座位，二等座一排五个。安静一些。」除了...还有 is 'besides...also.' The line behind you shifts impatiently."
+                    },
+                    {
+                        "text_zh": "十二点半的有没有靠窗的？晚半个小时也可以。",
+                        "text_pinyin": "shíèr diǎn bàn de yǒu méiyǒu kào chuāng de? wǎn bàn ge xiǎoshí yě kěyǐ.",
+                        "text_en": "Does the 12:30 one have window seats? Half an hour later is also OK.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Guo checks.「十二点半的G7008次，靠窗还有两个。要改到这趟吗？」Flexibility with timing can get you a better seat. 靠窗 is 'window seat.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "改好了。新票：G7002次，十二点发车，5车12D座。到上海虹桥站。别走错站了，上海有两个高铁站。",
+                "text_pinyin": "gǎi hǎo le. xīn piào: G qī líng líng èr cì, shíèr diǎn fāchē, wǔ chē shíèr D zuò. dào shànghǎi hóngqiáo zhàn. bié zǒu cuò zhàn le, shànghǎi yǒu liǎng ge gāotiě zhàn.",
+                "text_en": "Done. New ticket: G7002, departing at noon, car 5 seat 12D. Arriving at Shanghai Hongqiao Station. Don't go to the wrong station -- Shanghai has two high-speed rail stations."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the details and thank her.",
+                "options": [
+                    {
+                        "text_zh": "谢谢提醒！虹桥站，记住了。从这个站到虹桥站大概几个小时到？",
+                        "text_pinyin": "xièxie tíxǐng! hóngqiáo zhàn, jìzhù le. cóng zhè ge zhàn dào hóngqiáo zhàn dàgài jǐ ge xiǎoshí dào?",
+                        "text_en": "Thanks for the reminder! Hongqiao Station, got it. About how many hours from this station to Hongqiao?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「四小时二十分钟。提前二十分钟检票。」提醒 is 'reminder.' 检票 is 'ticket check/gate opens.' Confirming arrival time helps you plan the other end."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！改签需要付手续费吗？",
+                        "text_pinyin": "hǎo de, xièxie! gǎiqiān xūyào fù shǒuxùfèi ma?",
+                        "text_en": "OK, thanks! Is there a change fee?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「开车前的免费改签不收费。但只能改一次。」手续费 is 'handling fee.' Free changes before departure is a great policy -- but only once."
+                    },
+                    {
+                        "text_zh": "太好了。辛苦你了，今天排队的人好多。",
+                        "text_pinyin": "tài hǎo le. xīnkǔ nǐ le, jīntiān pái duì de rén hǎo duō.",
+                        "text_en": "Great. You've worked hard, there are so many people queuing today.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Guo allows herself a brief smile.「谢谢。祝您旅途愉快。」辛苦了 acknowledges her workload. 排队 is 'queuing.' A small kindness in a sea of transactions."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese train ticket changes (改签, gǎiqiān) can be done at station counters or on the 12306 app. Free changes are allowed once before departure. 二等座 (second class) and 一等座 (first class) are the main options. Major cities often have multiple stations (e.g., Shanghai has 虹桥站 and 上海站) -- always confirm which one."
+    }
+}

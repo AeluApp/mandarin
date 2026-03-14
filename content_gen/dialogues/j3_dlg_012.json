@@ -1,0 +1,123 @@
+{
+    "title": "Planning a Simple Meal",
+    "title_zh": "商量做什么菜",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your roommate Xiao Mei and you are standing in the kitchen after work, trying to figure out what to cook for dinner with whatever you have.",
+        "setup_zh": "下班后，你和室友小美站在厨房里，想用家里有的东西商量做什么晚饭。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "冰箱里有鸡蛋、西红柿、还有一点面条。你觉得做什么好？",
+                "text_pinyin": "Bīngxiāng lǐ yǒu jīdàn, xīhóngshì, hái yǒu yīdiǎn miàntiáo. Nǐ juéde zuò shénme hǎo?",
+                "text_en": "There are eggs, tomatoes, and some noodles in the fridge. What do you think we should make?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest what to cook.",
+                "options": [
+                    {
+                        "text_zh": "我们可以做西红柿鸡蛋面！又简单又好吃。你切西红柿，我来煮面，好不好？",
+                        "text_pinyin": "Wǒmen kěyǐ zuò xīhóngshì jīdàn miàn! Yòu jiǎndān yòu hǎochī. Nǐ qiē xīhóngshì, wǒ lái zhǔ miàn, hǎo bù hǎo?",
+                        "text_en": "We could make tomato egg noodles! Simple and delicious. You cut the tomatoes, I'll cook the noodles — sound good?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Practical, cooperative, and uses all the ingredients — perfect teamwork."
+                    },
+                    {
+                        "text_zh": "随便吧，你做什么我都行。",
+                        "text_pinyin": "Suíbiàn ba, nǐ zuò shénme wǒ dōu xíng.",
+                        "text_en": "Whatever, I'm fine with anything you make.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Easy-going but puts all the work on her."
+                    },
+                    {
+                        "text_zh": "我们叫外卖吧，做饭太麻烦了。",
+                        "text_pinyin": "Wǒmen jiào wàimài ba, zuòfàn tài máfan le.",
+                        "text_en": "Let's order delivery — cooking is too much trouble.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Dismisses the idea of cooking together."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好主意！西红柿鸡蛋面是我小时候最喜欢吃的。我妈妈以前每次做都会放一点糖，特别好吃。我们也放一点吧？",
+                "text_pinyin": "Hǎo zhǔyi! Xīhóngshì jīdàn miàn shì wǒ xiǎo shíhou zuì xǐhuan chī de. Wǒ māma yǐqián měi cì zuò dōu huì fàng yīdiǎn táng, tèbié hǎochī. Wǒmen yě fàng yīdiǎn ba?",
+                "text_en": "Good idea! Tomato egg noodles were my favorite as a kid. My mom always added a bit of sugar — it made it extra delicious. Should we add some too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her childhood memory and the sugar suggestion.",
+                "options": [
+                    {
+                        "text_zh": "当然！你妈妈的做法一定很好。我家以前是放一点醋的，我们两个方法都试试？",
+                        "text_pinyin": "Dāngrán! Nǐ māma de zuòfǎ yīdìng hěn hǎo. Wǒ jiā yǐqián shì fàng yīdiǎn cù de, wǒmen liǎng ge fāngfǎ dōu shìshi?",
+                        "text_en": "Of course! Your mom's way must be great. My family used to add a bit of vinegar — should we try both methods?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Sharing family cooking traditions is a beautiful way to bond."
+                    },
+                    {
+                        "text_zh": "好，放糖。",
+                        "text_pinyin": "Hǎo, fàng táng.",
+                        "text_en": "Sure, add sugar.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agreeable but doesn't share anything back."
+                    },
+                    {
+                        "text_zh": "放糖？那不是太甜了吗？",
+                        "text_pinyin": "Fàng táng? Nà bú shì tài tián le ma?",
+                        "text_en": "Sugar? Wouldn't that be too sweet?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Questions her family recipe — could be sensitive."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "放醋也好吃！那一半放糖，一半放醋。哈哈，我们自己发明了新做法。对了，要不要再煎一个鸡蛋？",
+                "text_pinyin": "Fàng cù yě hǎochī! Nà yībàn fàng táng, yībàn fàng cù. Hāhā, wǒmen zìjǐ fāmíng le xīn zuòfǎ. Duìle, yào bú yào zài jiān yī ge jīdàn?",
+                "text_en": "Vinegar works too! Half with sugar, half with vinegar. Haha, we've invented a new recipe. By the way, should we fry an egg too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about adding a fried egg.",
+                "options": [
+                    {
+                        "text_zh": "好啊！面上放一个煎蛋，看起来就很幸福。今天晚上我们吃得不错嘛。",
+                        "text_pinyin": "Hǎo a! Miàn shàng fàng yī ge jiāndàn, kàn qǐlái jiù hěn xìngfú. Jīntiān wǎnshang wǒmen chī de búcuò ma.",
+                        "text_en": "Sure! A fried egg on top of noodles — that looks like happiness. We're eating well tonight.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Cheerful and appreciative of a simple meal — captures the warm moment."
+                    },
+                    {
+                        "text_zh": "可以。",
+                        "text_pinyin": "Kěyǐ.",
+                        "text_en": "Sure.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Fine but doesn't add to the fun."
+                    },
+                    {
+                        "text_zh": "不用了，够了。",
+                        "text_pinyin": "Bú yòng le, gòu le.",
+                        "text_en": "No need, it's enough.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Practical but dampens the fun energy."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tomato egg noodles (西红柿鸡蛋面) is one of the most beloved home-cooked meals in China — simple, cheap, and full of nostalgia. The debate about whether to add sugar or vinegar is a real north-south cultural divide. Cooking together as roommates or family is a daily act of connection."
+    },
+    "hsk_level": 3
+}

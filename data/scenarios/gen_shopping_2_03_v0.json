@@ -1,0 +1,94 @@
+{
+    "title": "The Phone Case Philosopher",
+    "title_zh": "手机壳哲学家",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_2_03_v0",
+    "tree": {
+        "setup": "An electronics accessories stall in a busy underground market. The vendor, Xiao Luo, has hundreds of phone cases organized by color, design, and what he calls 'personality type.' He believes your phone case says more about you than your resume. He's been matching people with cases for six years and takes it very seriously.",
+        "setup_zh": "繁忙地下商场的电子配件摊。小贩小罗有几百个手机壳，按颜色、图案和他所说的「性格类型」分类。他相信手机壳比简历更能说明一个人。他匹配人和手机壳已经六年了，非常认真。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来看看！你的手机是什么牌子的？",
+                "text_pinyin": "lái kànkan! nǐ de shǒujī shì shénme páizi de?",
+                "text_en": "Come look! What brand is your phone?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him your phone brand and what you're looking for.",
+                "options": [
+                    {
+                        "text_zh": "华为的。我想买一个简单一点的壳。",
+                        "text_pinyin": "huáwéi de. wǒ xiǎng mǎi yí gè jiǎndān yìdiǎn de ké.",
+                        "text_en": "Huawei. I want a simpler case.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Luo nods thoughtfully.「简单的……你是那种喜欢安静的人吧？」He reaches for a matte black case. He has already analyzed your personality. 简单一点的 means 'a simpler one.'"
+                    },
+                    {
+                        "text_zh": "有没有好看又便宜的？",
+                        "text_pinyin": "yǒu méiyǒu hǎokàn yòu piányi de?",
+                        "text_en": "Do you have any that are nice-looking and cheap?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Luo pulls out a tray of cases priced at 15-25 yuan.「这些都好看！你喜欢什么颜色？」又...又 connects two qualities: good-looking AND cheap."
+                    },
+                    {
+                        "text_zh": "这个和那个有什么不同？",
+                        "text_pinyin": "zhè ge hé nà ge yǒu shénme bùtóng?",
+                        "text_en": "What's the difference between this one and that one?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Luo launches into a detailed comparison involving material quality, drop protection, and 'emotional resonance.' He was waiting for this question. 有什么不同 asks 'what's the difference.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个怎么样？二十块。质量很好，而且很配你。",
+                "text_pinyin": "zhè ge zěnmeyàng? èrshí kuài. zhìliàng hěn hǎo, érqiě hěn pèi nǐ.",
+                "text_en": "How about this one? Twenty yuan. Good quality, and it suits you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to buy it.",
+                "options": [
+                    {
+                        "text_zh": "好的，我要这个。",
+                        "text_pinyin": "hǎo de, wǒ yào zhè ge.",
+                        "text_en": "OK, I'll take this one.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Luo wraps it with satisfaction.「选得好！这个壳很耐用。」He feels he has made another successful personality match."
+                    },
+                    {
+                        "text_zh": "便宜一点行吗？十五块？",
+                        "text_pinyin": "piányi yìdiǎn xíng ma? shíwǔ kuài?",
+                        "text_en": "Can it be cheaper? Fifteen?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Luo sighs and meets you in the middle.「十八。最低了。」Bargaining in markets is normal. 便宜一点行吗 is the classic opener."
+                    },
+                    {
+                        "text_zh": "我再看看别的。",
+                        "text_pinyin": "wǒ zài kànkan bié de.",
+                        "text_en": "I'll look at other options.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Luo looks briefly heartbroken, then recovers. He's a professional.「没关系，随便看！」再看看 means 'look around more' -- a gentle way to keep browsing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！用坏了来找我换。我一直在这里。",
+                "text_pinyin": "hǎo! yòng huài le lái zhǎo wǒ huàn. wǒ yìzhí zài zhèlǐ.",
+                "text_en": "Good! If it breaks come back and I'll replace it. I'm always here."
+            }
+        ],
+        "cultural_note": "Underground markets (地下商场) near subway stations sell accessories, clothing, and electronics at negotiable prices. Bargaining is expected -- start at 60-70% of the asking price. Vendors who specialize build loyal customer bases."
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "title": "The Rooftop Garden",
+    "title_zh": "楼顶的花园",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "Your upstairs neighbor, Uncle Chen, has invited you to see his rooftop garden. He grows vegetables and flowers in recycled containers. The sunset paints the sky orange.",
+        "setup_zh": "楼上的邻居陈叔叔邀请你去看他的楼顶花园。他用回收的容器种蔬菜和花。夕阳把天空染成了橙色。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "很多人不知道我在这里种了一个花园。我用旧桶、旧箱子，什么都可以种。你看这些西红柿，再过两个星期就可以吃了。",
+                "text_pinyin": "Hěn duō rén bù zhīdào wǒ zài zhèlǐ zhòng le yīge huāyuán. Wǒ yòng jiù tǒng, jiù xiāngzi, shénme dōu kěyǐ zhòng. Nǐ kàn zhèxiē xīhóngshì, zài guò liǎng ge xīngqī jiù kěyǐ chī le.",
+                "text_en": "Most people don't know I've grown a garden up here. I use old buckets, old boxes — you can grow things in anything. Look at these tomatoes, two more weeks and they'll be ready to eat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the rooftop garden.",
+                "options": [
+                    {
+                        "text_zh": "在城市的楼顶种菜，这个想法很好。在这么高的地方，离天空很近，离地面很远，好像有了一个秘密的世界。",
+                        "text_pinyin": "Zài chéngshì de lóudǐng zhòng cài, zhège xiǎngfǎ hěn hǎo. Zài zhème gāo de dìfāng, lí tiānkōng hěn jìn, lí dìmiàn hěn yuǎn, hǎoxiàng yǒu le yīge mìmì de shìjiè.",
+                        "text_en": "Growing vegetables on a city rooftop — what a wonderful idea. Up this high, close to the sky and far from the ground, it's like having a secret world.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Captures the magic of the space — sees it as more than gardening."
+                    },
+                    {
+                        "text_zh": "物业允许你在楼顶种东西吗？",
+                        "text_pinyin": "Wùyè yǔnxǔ nǐ zài lóudǐng zhòng dōngxi ma?",
+                        "text_en": "Does the property management allow you to grow things on the roof?",
+                        "score": 0.0,
+                        "feedback": "Regulatory concern that deflates the wonder."
+                    },
+                    {
+                        "text_zh": "楼顶上蚊子多不多？",
+                        "text_pinyin": "Lóudǐng shàng wénzi duō bù duō?",
+                        "text_en": "Are there a lot of mosquitoes on the roof?",
+                        "score": 0.0,
+                        "feedback": "Pest question during a moment of beauty."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "秘密的世界，说得好。我退休以后不知道做什么，每天在家看电视，觉得自己没用了。后来我想，我小时候在农村长大，最会做的事就是种东西。所以我就在楼顶开始种了。",
+                "text_pinyin": "Mìmì de shìjiè, shuō de hǎo. Wǒ tuìxiū yǐhòu bù zhīdào zuò shénme, měi tiān zài jiā kàn diànshì, juéde zìjǐ méi yòng le. Hòulái wǒ xiǎng, wǒ xiǎo shíhou zài nóngcūn zhǎng dà, zuì huì zuò de shì jiù shì zhòng dōngxi. Suǒyǐ wǒ jiù zài lóudǐng kāishǐ zhòng le.",
+                "text_en": "A secret world — well said. After I retired I didn't know what to do. Watching TV at home every day, feeling useless. Then I thought, I grew up in the countryside, and what I know best is growing things. So I started growing on the rooftop."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his story of finding purpose after retirement.",
+                "options": [
+                    {
+                        "text_zh": "用他的工具继续做他教你的事——这是最好的纪念。他不在了，但手艺还活着。每修好一块表，就是他的影响在继续。",
+                        "text_pinyin": "Yòng tā de gōngjù jìxù zuò tā jiāo nǐ de shì — zhè shì zuì hǎo de jìniàn. Tā bú zài le, dàn shǒuyì hái huó zhe. Měi xiū hǎo yī kuài biǎo, jiù shì tā de yǐngxiǎng zài jìxù.",
+                        "text_en": "Using his tools to keep doing what he taught you — that's the best memorial. He's gone, but the craft lives on. Every watch you fix is his influence continuing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Validates his struggle and reframes his garden as a form of meaningful living."
+                    },
+                    {
+                        "text_zh": "你种的菜够自己吃吗？",
+                        "text_pinyin": "Nǐ zhòng de cài gòu zìjǐ chī ma?",
+                        "text_en": "Is what you grow enough for yourself?",
+                        "score": 0.0,
+                        "feedback": "Practical yield question that misses the emotional story."
+                    },
+                    {
+                        "text_zh": "退休金够花吗？",
+                        "text_pinyin": "Tuìxiū jīn gòu huā ma?",
+                        "text_en": "Is the pension enough?",
+                        "score": 0.0,
+                        "feedback": "Financial question during a conversation about purpose."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "用另一种方式活着……我喜欢这个说法。你知道吗，每天早上我第一件事就是上来看看它们。浇浇水，拔拔草。看着一颗种子慢慢长大，你会觉得时间是有意义的。",
+                "text_pinyin": "Yòng lìng yī zhǒng fāngshì huó zhe…… wǒ xǐhuān zhège shuōfǎ. Nǐ zhīdào ma, měi tiān zǎoshang wǒ dì yī jiàn shì jiù shì shàng lái kàn kàn tāmen. Jiāo jiāo shuǐ, bá bá cǎo. Kàn zhe yī kē zhǒngzi mànman zhǎng dà, nǐ huì juéde shíjiān shì yǒu yìyì de.",
+                "text_en": "Living in a different way... I like that. You know, every morning the first thing I do is come up to check on them. Water a little, pull some weeds. Watching a seed slowly grow — it makes you feel that time has meaning."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his morning ritual.",
+                "options": [
+                    {
+                        "text_zh": "看着种子慢慢长大，这就是最好的生活节奏吧。不用急，不用赶，每天做一点，慢慢来。谢谢你带我上来看，这个花园让我心情好了很多。",
+                        "text_pinyin": "Kàn zhe zhǒngzi mànman zhǎng dà, zhè jiù shì zuì hǎo de shēnghuó jiézòu ba. Bú yòng jí, bú yòng gǎn, měi tiān zuò yīdiǎn, mànman lái. Xièxie nǐ dài wǒ shàng lái kàn, zhège huāyuán ràng wǒ xīnqíng hǎo le hěn duō.",
+                        "text_en": "Watching seeds grow slowly — that's the best pace of life. No rushing, no hurrying, doing a little each day, taking it slow. Thank you for bringing me up here. This garden has made me feel much better.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and grateful — embraces the pace and expresses genuine appreciation."
+                    },
+                    {
+                        "text_zh": "你冬天怎么办？天气太冷了种不了吧？",
+                        "text_pinyin": "Nǐ dōngtiān zěnme bàn? Tiānqì tài lěng le zhòng bù liǎo ba?",
+                        "text_en": "What do you do in winter? Too cold to grow anything, right?",
+                        "score": 0.0,
+                        "feedback": "Seasonal logistics instead of savoring the moment."
+                    },
+                    {
+                        "text_zh": "我也想种菜，但是没时间。",
+                        "text_pinyin": "Wǒ yě xiǎng zhòng cài, dànshì méi shíjiān.",
+                        "text_en": "I want to grow vegetables too, but I don't have time.",
+                        "score": 0.0,
+                        "feedback": "Self-focused response that misses the invitation to appreciate."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rooftop gardening in Chinese cities has become increasingly popular, especially among retirees who grew up in rural areas. For many, it reconnects them with the agricultural rhythms of their childhood. The practice addresses both the practical desire for fresh food and the emotional need for purpose after retirement, a significant issue in China's rapidly aging society."
+    }
+}

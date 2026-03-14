@@ -1,0 +1,151 @@
+{
+    "title": "The Forgotten Dialect",
+    "title_zh": "遗忘的方言",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+        "setup": "You're in a rural county seat in Guizhou, sitting in a tea house with a retired linguist, Professor Meng, who has spent her career documenting endangered Miao dialects. She has a worn notebook filled with phonetic transcriptions. The village where she recorded the last fluent speaker has recently been demolished for a reservoir.",
+        "setup_zh": "你在贵州一个偏远的县城，和退休的语言学家孟教授坐在一家茶馆里。她一辈子都在记录濒危的苗族方言。她有一本磨损的笔记本，里面全是语音转录。她最后录下那位说流利方言的老人所在的村庄，最近为了修水库被拆了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "那个村子不在了。但更让我心痛的不是村子——是声音。去年冬天，方明贵老人走了，他是巴拉河上游土语最后一个完全使用者。他走的时候，那种土语就死了。不是濒危、不是衰落——是死了。世界上再也不会有人用那种方式说话了。你知道一种语言死亡是什么感觉吗？不是图书馆着火，是一整座图书馆从来没有被建过。",
+                "text_pinyin": "Nàge cūnzi bú zài le. Dàn gèng ràng wǒ xīntòng de bú shì cūnzi — shì shēngyīn. Qùnián dōngtiān, Fāng Míngguì lǎorén zǒu le, tā shì Bālā hé shàngyóu tǔyǔ zuìhòu yī ge wánquán shǐyòngzhě. Tā zǒu de shíhou, nà zhǒng tǔyǔ jiù sǐ le. Bú shì bīnwēi, bú shì shuāiluò — shì sǐ le. Shìjiè shàng zài yě bú huì yǒu rén yòng nà zhǒng fāngshì shuōhuà le. Nǐ zhīdào yī zhǒng yǔyán sǐwáng shì shénme gǎnjué ma? Bú shì túshūguǎn zháo huǒ, shì yī zhěng zuò túshūguǎn cónglái méiyǒu bèi jiàn guò.",
+                "text_en": "That village is gone. But what hurts more isn't the village — it's the sound. Last winter, Elder Fang Minggui passed away, the last full user of the upper Bala River vernacular. When he died, that vernacular died. Not endangered — dead. No one will ever speak that way again. A language dying isn't a library burning — it's an entire library that was never built."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the image of a library that was never built.",
+                "options": [
+                    {
+                        "text_zh": "「从来没有被建过」比「着火」更让人绝望——着火至少有过遗址，有过哀悼的对象。这里连那个都没有。那种土语里的认知方式，就这样消失了。",
+                        "text_pinyin": "'Cónglái méiyǒu bèi jiàn guò' bǐ 'zháo huǒ' gèng ràng rén juéwàng — zháo huǒ zhìshǎo yǒu guò yízhǐ, yǒu guò āidào de duìxiàng. Zhèlǐ lián nàge dōu méiyǒu. Nà zhǒng tǔyǔ lǐ de rènzhī fāngshì, jiù zhèyàng xiāoshī le.",
+                        "text_en": "'Never built' is more devastating than 'burned down' — a fire at least leaves ruins, something to mourn. Here there isn't even that. The ways of knowing inside that dialect just — vanished.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Professor Meng puts her hand on the notebook and looks out the window for a moment. Then she nods, slowly. 'You said it better than I usually do.'"
+                    },
+                    {
+                        "text_zh": "您的录音资料保存得怎么样？至少那些还在。",
+                        "text_pinyin": "Nín de lùyīn zīliào bǎocún de zěnmeyàng? Zhìshǎo nàxiē hái zài.",
+                        "text_en": "How are your recordings being preserved? At least those still exist.",
+                        "score": 0.0,
+                        "feedback": "Professor Meng gives you a look that's more patient than irritated. 'Yes, they do,' she says. 'That's the question I keep asking myself.'"
+                    },
+                    {
+                        "text_zh": "中国有多少种方言正在消失？",
+                        "text_pinyin": "Zhōngguó yǒu duōshǎo zhǒng fāngyán zhèngzài xiāoshī?",
+                        "text_en": "How many dialects are disappearing in China right now?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng glances at you. 'Hundreds,' she says, and waits to see if you want to go somewhere with that, or if you're just collecting facts."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "「看世界的眼睛」——你说得比我好。方明贵老人有一个词，普通话里没有对应的。他用一个词来形容「黄昏时候河水变成金色、同时你闻到对岸有人在煮饭」——整个场景、视觉、嗅觉、时间感，都在一个词里。我试过翻译，但无论怎么翻，都只剩下意思，没有了那种「完整」。翻译不是传递，是降维。",
+                "text_pinyin": "'Kàn shìjiè de yǎnjing' — nǐ shuō de bǐ wǒ hǎo. Fāng Míngguì lǎorén yǒu yī ge cí, pǔtōnghuà lǐ méiyǒu duìyìng de. Tā yòng yī ge cí lái xíngróng 'huánghūn shíhou hé shuǐ biàn chéng jīnsè, tóngshí nǐ wén dào duì'àn yǒu rén zài zhǔ fàn' — zhěnggè chǎngjǐng, shìjué, xiùjué, shíjiān gǎn, dōu zài yī ge cí lǐ. Wǒ shì guò fānyì, dàn wúlùn zěnme fān, dōu zhǐ shèng xià yìsi, méiyǒu le nà zhǒng 'wánzhěng'. Fānyì bú shì chuándì, shì jiàng wéi.",
+                "text_en": "'Eyes for seeing the world' — you said it better than I could. Elder Fang had a word with no Mandarin equivalent: one word for 'the river turning gold at dusk while you smell cooking on the opposite bank' — sight, smell, time, all in one word. I tried to translate it, but only meaning remained, not 'wholeness.' Translation isn't transmission — it's dimensional reduction."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the untranslatable word and what it means that translation is 'dimensional reduction.'",
+                "options": [
+                    {
+                        "text_zh": "那个词不是在「描述」那个场景——它就是那个场景，压缩成了一个声音。一旦你把它拆成视觉、嗅觉、时间，完整性就碎了。失去的不是一个词，是一种整体感知的方式。",
+                        "text_pinyin": "Nàge cí bú shì zài 'miáoshù' nàge chǎngjǐng — tā jiù shì nàge chǎngjǐng, yāsuō chéng le yī ge shēngyīn. Yīdàn nǐ bǎ tā chāi chéng shìjué, xiùjué, shíjiān, wánzhěngxìng jiù suì le. Shīqù de bú shì yī ge cí, shì yī zhǒng zhěngtǐ gǎnzhī de fāngshì.",
+                        "text_en": "That word isn't 'describing' the scene — it is the scene, compressed into a single sound. The moment you break it into sight, smell, and time, the wholeness shatters.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Professor Meng opens her notebook and writes something down. She doesn't explain why — she just does it, which means you said something worth keeping."
+                    },
+                    {
+                        "text_zh": "也许人工智能可以帮助保存这些语言？",
+                        "text_pinyin": "Yěxǔ réngōng zhìnéng kěyǐ bāngzhù bǎocún zhèxiē yǔyán?",
+                        "text_en": "Maybe artificial intelligence could help preserve these languages?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng's expression doesn't change. 'Possibly,' she says, evenly. You can tell she's heard this before and found it beside the point."
+                    },
+                    {
+                        "text_zh": "苗族有自己的文字系统吗？",
+                        "text_pinyin": "Miáozú yǒu zìjǐ de wénzì xìtǒng ma?",
+                        "text_en": "Does the Miao language have its own writing system?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng nods and begins explaining — competently, patiently. But something in her settles, like she's shifted back into lecture mode when you were almost somewhere else."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你比大多数人都理解得深。但我最矛盾的是——我记录下来的东西有用吗？我有他几百小时的录音，我有语法分析，我有词典草稿。但是没有社区了，没有人用这种语言吵架、开玩笑、哄孩子睡觉了。一种语言如果只存在于录音带里，它是活的还是死的？博物馆里的蝴蝶标本是蝴蝶吗？",
+                "text_pinyin": "Nǐ bǐ dàduōshù rén dōu lǐjiě de shēn. Dàn wǒ zuì máodùn de shì — wǒ jìlù xiàlái de dōngxi yǒu yòng ma? Wǒ yǒu tā jǐ bǎi xiǎoshí de lùyīn, wǒ yǒu yǔfǎ fēnxī, wǒ yǒu cídiǎn cǎogǎo. Dànshì méiyǒu shèqū le, méiyǒu rén yòng zhè zhǒng yǔyán chǎojià, kāi wánxiào, hǒng háizi shuìjiào le. Yī zhǒng yǔyán rúguǒ zhǐ cúnzài yú lùyīndài lǐ, tā shì huó de háishi sǐ de? Bówùguǎn lǐ de húdié biāoběn shì húdié ma?",
+                "text_en": "You understand more deeply than most. But my biggest contradiction is — are my recordings useful? I have hundreds of hours of his audio, grammar analyses, dictionary drafts. But there's no community anymore, no one arguing, joking, or lulling children to sleep in this language. If a language only exists on tape, is it alive or dead? Is a butterfly specimen in a museum still a butterfly?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the question of whether a recorded language is alive or dead.",
+                "options": [
+                    {
+                        "text_zh": "标本不是蝴蝶——但它是蝴蝶存在过的证明。也许五十年后，有人听到那段录音，突然理解了一种他从来没想过的看世界的方式，他的世界就变大了一点。那一刻，那种土语在他心里活了。",
+                        "text_pinyin": "Biāoběn bú shì húdié — dàn tā shì húdié cúnzài guò de zhèngmíng. Yěxǔ wǔshí nián hòu, yǒu rén tīng dào nà duàn lùyīn, tūrán lǐjiě le yī zhǒng tā cónglái méi xiǎng guò de kàn shìjiè de fāngshì, tā de shìjiè jiù biàn dà le yīdiǎn. Nà yī kè, nà zhǒng tǔyǔ zài tā xīnlǐ huó le.",
+                        "text_en": "A specimen isn't a butterfly — but it's proof butterflies existed. Maybe fifty years from now, someone hears that recording and understands a way of seeing they'd never imagined. In that moment, that dialect is alive in them.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Professor Meng sets her teacup down. She doesn't look out the window this time — she looks at you directly. 'I needed to hear that,' she says. 'Thank you.'"
+                    },
+                    {
+                        "text_zh": "也许可以教给新一代的苗族人？",
+                        "text_pinyin": "Yěxǔ kěyǐ jiāo gěi xīn yī dài de Miáozú rén?",
+                        "text_en": "Maybe you could teach it to a new generation of Miao people?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng folds her hands on the table. 'The communities dispersed years ago,' she says, quietly. Not unkind — but it's clear you haven't fully followed where she's been leading."
+                    },
+                    {
+                        "text_zh": "您后悔花了一辈子做这件事吗？",
+                        "text_pinyin": "Nín hòuhuǐ huā le yībèizi zuò zhè jiàn shì ma?",
+                        "text_en": "Do you regret spending your whole life on this?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng looks slightly taken aback. 'No,' she says — immediately, firmly. But the abruptness of the question seems to have put distance between you."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在某个人心里重新变成蝴蝶……谢谢你。我需要听到这句话。有时候我觉得自己像是一个人在黑暗里搬运东西，不知道搬到哪里去，不知道有没有人会打开那些箱子。但你说得对——可能性比确定性更值得守护。只要那些录音在，门就没有完全关上。",
+                "text_pinyin": "Zài mǒu ge rén xīnlǐ chóngxīn biàn chéng húdié…… xièxie nǐ. Wǒ xūyào tīng dào zhè jù huà. Yǒu shíhou wǒ juéde zìjǐ xiàng shì yī ge rén zài hēi'àn lǐ bānyùn dōngxi, bù zhīdào bān dào nǎlǐ qù, bù zhīdào yǒu méiyǒu rén huì dǎkāi nàxiē xiāngzi. Dàn nǐ shuō de duì — kěnéngxìng bǐ quèdìngxìng gèng zhíde shǒuhù. Zhǐyào nàxiē lùyīn zài, mén jiù méiyǒu wánquán guān shàng.",
+                "text_en": "Becomes a butterfly again in someone's mind… thank you. I needed to hear that. Sometimes I feel like I'm carrying things alone in the dark, not knowing where to take them, not knowing if anyone will ever open those boxes. But you're right — possibility is more worth guarding than certainty. As long as those recordings exist, the door hasn't fully closed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her image of carrying things in the dark.",
+                "options": [
+                    {
+                        "text_zh": "方老人把声音留给了您，您把声音留给了录音，录音把声音留给了未来。这条链条只要不断，那种看世界的眼睛就有可能再次睁开。您不是在黑暗里搬运——是在黑暗里种灯。",
+                        "text_pinyin": "Fāng lǎorén bǎ shēngyīn liú gěi le nín, nín bǎ shēngyīn liú gěi le lùyīn, lùyīn bǎ shēngyīn liú gěi le wèilái. Zhè tiáo liàntiáo zhǐyào bú duàn, nà zhǒng kàn shìjiè de yǎnjing jiù yǒu kěnéng zàicì zhēng kāi. Nín bú shì zài hēi'àn lǐ bānyùn — shì zài hēi'àn lǐ zhǒng dēng.",
+                        "text_en": "Elder Fang gave his sounds to you. You gave them to recordings. The recordings give them to the future. As long as that chain holds, those eyes might open again.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Professor Meng is quiet for a long moment. Then she picks up her pen and writes something on the inside cover of the notebook — not a transcription this time. Something for herself."
+                    },
+                    {
+                        "text_zh": "您的录音有没有上传到数字存档平台？",
+                        "text_pinyin": "Nín de lùyīn yǒu méiyǒu shàngchuán dào shùzì cúndàng píngtái?",
+                        "text_en": "Have you uploaded your recordings to a digital archive platform?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng blinks — slightly startled by the gear shift. 'Part of them,' she says. 'It's a slow process.' She sounds like she's talking to a different kind of person now."
+                    },
+                    {
+                        "text_zh": "中国政府对方言保护有什么具体政策吗？",
+                        "text_pinyin": "Zhōngguó zhèngfǔ duì fāngyán bǎohù yǒu shénme jùtǐ zhèngcè ma?",
+                        "text_en": "Does the Chinese government have any concrete policies for dialect preservation?",
+                        "score": 0.0,
+                        "feedback": "Professor Meng gives a careful, practiced answer. You can tell she's been asked this at conferences. The intimacy of the last few minutes quietly dissolves."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China is home to hundreds of endangered languages and dialects beyond Mandarin. The Miao (苗族) language family alone contains dozens of mutually unintelligible varieties, many undocumented. When the last speaker of a variety dies, an entire cognitive architecture — ways of categorizing nature, expressing relationships, perceiving time — disappears irreversibly. Field linguists working in China's minority regions often race against time with minimal funding, documenting what they can before silence falls."
+    }
+}

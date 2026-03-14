@@ -9,6 +9,7 @@ import threading
 
 from .base import (
     DrillResult, format_hanzi, format_hanzi_inline,
+    format_answer_feedback,
     _skip_result, _handle_confidence, _run_mc_input,
     cause_to_error_type, classify_error_cause, elaborate_error,
 )
@@ -79,36 +80,46 @@ def generate_detail_question(english: str) -> str:
 # ── Listening drills ──────────────────────────────
 
 def run_listening_gist_drill(item: dict, conn, show_fn, input_fn,
-                            prominent: bool = True, audio_enabled: bool = False) -> DrillResult:
+                            prominent: bool = True, audio_enabled: bool = False,
+                            english_level: str = "full") -> DrillResult:
     """Listening gist: listen to audio or read pinyin, pick the meaning."""
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen:")
         speak_and_wait(item["hanzi"])
-        show_fn(f"  (playing audio...)\n")
+        show_fn(f"\n  Listen:")
         show_fn(f"  What does this mean?\n")
     else:
         show_fn(f"\n  Listen (read the pinyin):")
         show_fn(f"  \"{item['pinyin']}\"\n")
         show_fn(f"  What does this mean?\n")
 
-    options, tier = generate_mc_options(conn, item, field="english", n_options=4)
+    # Listening drills always use pinyin options — forces Chinese processing
+    # rather than English-to-English matching
+    field = "pinyin"
+    correct_answer = item["pinyin"]
+
+    options, tier = generate_mc_options(conn, item, field=field, n_options=4)
+    # Show English hint above options so learner knows what to listen for
+    if english_level == "full":
+        show_fn(f"  ({item.get('english', '')})\n")
     for i, opt in enumerate(options, 1):
         show_fn(f"  {i}. {opt}")
 
-    result = _run_mc_input(item, options, item["english"], "listening", "listening_gist", show_fn, input_fn)
+    result = _run_mc_input(item, options, correct_answer, "listening", "listening_gist", show_fn, input_fn,
+                           english_level=english_level)
     if isinstance(result, DrillResult):
         return result
     user_picked = result
 
-    correct = user_picked == item["english"]
+    correct = user_picked == correct_answer
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
-        feedback = f"  \u2192 {item['pinyin']} = {item['english']}  ({format_hanzi_inline(item['hanzi'])})"
+        feedback = format_answer_feedback(item, english_level)
         # Error-cause analysis
-        cause = classify_error_cause(user_picked, item["english"], "listening_gist", item)
-        elaboration = elaborate_error(cause, user_picked, item["english"], item, "listening_gist")
+        cause = classify_error_cause(user_picked, correct_answer, "listening_gist", item)
+        elaboration = elaborate_error(cause, user_picked, correct_answer, item, "listening_gist")
         if elaboration:
             feedback += f"\n{elaboration}"
         # Add character-by-character pinyin breakdown for multi-char items
@@ -123,21 +134,21 @@ def run_listening_gist_drill(item: dict, conn, show_fn, input_fn,
 
     return DrillResult(
         content_item_id=item["id"], modality="listening", drill_type="listening_gist",
-        correct=correct, user_answer=user_picked, expected_answer=item["english"],
-        error_type=error_type, feedback=feedback,
+        correct=correct, user_answer=user_picked, expected_answer=correct_answer,
+        error_type=error_type, error_cause=cause, feedback=feedback,
         distractor_tier=tier,
     )
 
 
 def run_listening_detail_drill(item: dict, conn, show_fn, input_fn,
                                 prominent: bool = True,
-                                audio_enabled: bool = False) -> DrillResult:
+                                audio_enabled: bool = False,
+                                english_level: str = "full") -> DrillResult:
     """Listening detail: hear a sentence, pick specific detail (who/what/when/how many)."""
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen carefully:")
         speak_and_wait(item["hanzi"])
-        show_fn(f"  (playing audio...)\n")
+        show_fn(f"\n  Listen carefully:")
     else:
         show_fn(f"\n  Listen (read the pinyin):")
         show_fn(f"  \"{item['pinyin']}\"\n")
@@ -145,31 +156,37 @@ def run_listening_detail_drill(item: dict, conn, show_fn, input_fn,
     question = generate_detail_question(item["english"])
     show_fn(f"  {question}\n")
 
-    options, tier = generate_mc_options(conn, item, field="english", n_options=4)
+    # Listening drills always use pinyin options — forces Chinese processing
+    field = "pinyin"
+    correct_answer = item["pinyin"]
+
+    options, tier = generate_mc_options(conn, item, field=field, n_options=4)
     for i, opt in enumerate(options, 1):
         show_fn(f"  {i}. {opt}")
 
-    result = _run_mc_input(item, options, item["english"], "listening", "listening_detail", show_fn, input_fn)
+    result = _run_mc_input(item, options, correct_answer, "listening", "listening_detail", show_fn, input_fn,
+                           english_level=english_level)
     if isinstance(result, DrillResult):
         return result
     user_picked = result
 
-    correct = user_picked == item["english"]
+    correct = user_picked == correct_answer
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
-        feedback = f"  \u2192 {item['pinyin']} = {item['english']}  ({format_hanzi_inline(item['hanzi'])})"
+        feedback = format_answer_feedback(item, english_level)
         # Error-cause analysis
-        cause = classify_error_cause(user_picked, item["english"], "listening_detail", item)
-        elaboration = elaborate_error(cause, user_picked, item["english"], item, "listening_detail")
+        cause = classify_error_cause(user_picked, correct_answer, "listening_detail", item)
+        elaboration = elaborate_error(cause, user_picked, correct_answer, item, "listening_detail")
         if elaboration:
             feedback += f"\n{elaboration}"
         error_type = cause_to_error_type(cause, "vocab")
 
     return DrillResult(
         content_item_id=item["id"], modality="listening", drill_type="listening_detail",
-        correct=correct, user_answer=user_picked, expected_answer=item["english"],
-        error_type=error_type, feedback=feedback,
+        correct=correct, user_answer=user_picked, expected_answer=correct_answer,
+        error_type=error_type, error_cause=cause, feedback=feedback,
         distractor_tier=tier,
     )
 
@@ -180,8 +197,8 @@ def run_listening_tone_drill(item: dict, conn, show_fn, input_fn,
     """Listening tone: hear a word, pick the correct toned pinyin from 4 options."""
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen, then identify the tones:")
         speak_and_wait(item["hanzi"])
+        show_fn(f"\n  Listen, then identify the tones:")
     else:
         show_fn(f"\n  Identify the tones:")
 
@@ -201,6 +218,7 @@ def run_listening_tone_drill(item: dict, conn, show_fn, input_fn,
     correct = user_picked == correct_pinyin
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
         feedback = f"  \u2192 {format_hanzi_inline(item['hanzi'])} = {correct_pinyin}"
         # Error-cause analysis for tone discrimination
@@ -213,7 +231,7 @@ def run_listening_tone_drill(item: dict, conn, show_fn, input_fn,
     return DrillResult(
         content_item_id=item["id"], modality="listening", drill_type="listening_tone",
         correct=correct, user_answer=user_picked, expected_answer=correct_pinyin,
-        error_type=error_type, feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
     )
 
 
@@ -223,9 +241,8 @@ def run_listening_dictation_drill(item: dict, conn, show_fn, input_fn,
     """Listening dictation: hear a word, type the hanzi."""
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen and type the characters:")
         speak_and_wait(item["hanzi"])
-        show_fn(f"  (playing audio...)\n")
+        show_fn(f"\n  Listen and type the characters:")
     else:
         show_fn(f"\n  Write the characters for:")
         show_fn(f"  \"{item['pinyin']}\"\n")
@@ -243,6 +260,7 @@ def run_listening_dictation_drill(item: dict, conn, show_fn, input_fn,
     correct = answer == expected
 
     feedback = ""
+    cause = None
     if not correct:
         # Character-by-character comparison
         comparison = []
@@ -270,7 +288,7 @@ def run_listening_dictation_drill(item: dict, conn, show_fn, input_fn,
     return DrillResult(
         content_item_id=item["id"], modality="listening", drill_type="listening_dictation",
         correct=correct, user_answer=answer, expected_answer=expected,
-        error_type=None if correct else "vocab", feedback=feedback,
+        error_type=None if correct else "vocab", error_cause=cause, feedback=feedback,
     )
 
 
@@ -309,7 +327,9 @@ def run_listening_passage_drill(item: dict, conn, show_fn, input_fn,
     # Pick a random comprehension question
     questions = passage.get("questions", [])
     q = random.choice(questions)
-    q_text = q.get("q_en", q.get("q_zh", ""))
+    # Prefer Chinese question when available to keep Chinese on screen
+    q_text = q.get("q_zh") or q.get("q_en", "")
+    q_text_en = q.get("q_en", "")
     correct_answer = q.get("answer", "")
 
     if not text_zh or not q_text or not correct_answer:
@@ -319,19 +339,23 @@ def run_listening_passage_drill(item: dict, conn, show_fn, input_fn,
     # Play or show the passage
     if audio_enabled:
         from ..audio import speak_and_wait
+        speak_and_wait(text_zh)
         show_fn(f"\n  Listen to the passage:")
         if title:
             show_fn(f"  [dim]{title}[/dim]")
-        speak_and_wait(text_zh)
-        show_fn(f"  (playing audio...)\n")
+        # Show hanzi text so Chinese is on screen
+        show_fn(f"  {format_hanzi_inline(text_zh)}")
     else:
         show_fn(f"\n  Read the passage (pinyin):")
         if title:
             show_fn(f"  [dim]{title}[/dim]")
         show_fn(f"  \"{text_pinyin}\"\n")
 
-    # Show the question
-    show_fn(f"  {q_text}\n")
+    # Show the question (prefer Chinese, fall back to English)
+    show_fn(f"  {q_text}")
+    if q_text_en and q_text != q_text_en:
+        show_fn(f"  [dim]({q_text_en})[/dim]")
+    show_fn("")
 
     # Generate MC options: correct + 3 distractors from other questions' answers
     options = [correct_answer]
@@ -366,15 +390,23 @@ def run_listening_passage_drill(item: dict, conn, show_fn, input_fn,
 
     correct = user_picked == correct_answer
     feedback = ""
+    error_type = None
+    cause = None
     if not correct:
-        feedback = f"  → {correct_answer}"
+        feedback = f"  Your answer: {user_picked}\n  → Correct: {correct_answer}"
         # Show the relevant sentence from the passage
-        feedback += f"\n  [dim]Passage: {format_hanzi_inline(text_zh[:60])}{'...' if len(text_zh) > 60 else ''}[/dim]"
+        feedback += f"\n  [dim]Passage: {format_hanzi_inline(text_zh[:80])}{'...' if len(text_zh) > 80 else ''}[/dim]"
+        # Error cause analysis
+        cause = classify_error_cause(user_picked, correct_answer, "listening_passage", item)
+        elaboration = elaborate_error(cause, user_picked, correct_answer, item, "listening_passage")
+        if elaboration:
+            feedback += f"\n{elaboration}"
+        error_type = cause_to_error_type(cause, "vocab")
 
     return DrillResult(
         content_item_id=item["id"], modality="listening", drill_type="listening_passage",
         correct=correct, user_answer=user_picked, expected_answer=correct_answer,
-        error_type=None if correct else "vocab", feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
     )
 
 
@@ -422,9 +454,8 @@ def run_dictation_sentence_drill(item: dict, conn, show_fn, input_fn,
     # Play or show the sentence
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen and type the full sentence:")
         speak_and_wait(hanzi)
-        show_fn(f"  (playing audio...)")
+        show_fn(f"\n  Listen and type the full sentence:")
     else:
         show_fn(f"\n  Write this sentence in Chinese:")
         show_fn(f"  \"{pinyin}\"")
@@ -484,6 +515,262 @@ def run_dictation_sentence_drill(item: dict, conn, show_fn, input_fn,
     return DrillResult(
         content_item_id=item_id, modality="ime", drill_type="dictation_sentence",
         correct=correct, user_answer=answer, expected_answer=hanzi,
+        error_type=None if correct else "vocab", feedback=feedback,
+        score=combined,
+    )
+
+
+# ── Minimal pair tone drill ──────────────────────────────
+
+def _find_minimal_pairs(conn, item: dict, n: int = 1) -> list:
+    """Find minimal tone pairs for a given item.
+
+    Looks for content items with same pinyin base but different tones.
+    Returns list of (item_hanzi, item_pinyin, pair_hanzi, pair_pinyin) tuples.
+    """
+    pinyin = item.get("pinyin", "").strip()
+    hanzi = item.get("hanzi", "").strip()
+    if not pinyin or not hanzi:
+        return []
+
+    # Strip tone numbers/marks to get base pinyin
+    import re
+    base = re.sub(r'[1-4\u0304\u0301\u030C\u0300]', '', pinyin.lower()).strip()
+    if not base:
+        return []
+
+    # Search for items with similar pinyin but different tones
+    rows = conn.execute("""
+        SELECT hanzi, pinyin FROM content_item
+        WHERE hanzi != ? AND pinyin != ?
+        AND review_status = 'approved'
+        AND LOWER(REPLACE(REPLACE(REPLACE(REPLACE(pinyin, '1', ''), '2', ''), '3', ''), '4', ''))
+            LIKE ?
+        ORDER BY RANDOM() LIMIT ?
+    """, (hanzi, pinyin, f"%{base}%", n * 3)).fetchall()
+
+    pairs = []
+    for row in rows:
+        p_hanzi = row["hanzi"]
+        p_pinyin = row["pinyin"]
+        p_base = re.sub(r'[1-4\u0304\u0301\u030C\u0300]', '', p_pinyin.lower()).strip()
+        if p_base == base and p_pinyin.lower() != pinyin.lower():
+            pairs.append((hanzi, pinyin, p_hanzi, p_pinyin))
+            if len(pairs) >= n:
+                break
+
+    return pairs
+
+
+def run_minimal_pair_drill(item: dict, conn, show_fn, input_fn,
+                           prominent: bool = True,
+                           audio_enabled: bool = False) -> DrillResult:
+    """Minimal pair tone drill: hear two words, identify if tones are same or different.
+
+    If different, bonus question: which tone was each?
+    Tests fine-grained tone discrimination.
+    """
+    hanzi = item.get("hanzi", "").strip()
+    pinyin = item.get("pinyin", "").strip()
+    item_id = item.get("id", 0)
+
+    # Find a minimal pair
+    pairs = _find_minimal_pairs(conn, item, n=1)
+
+    if not pairs:
+        # No minimal pair found — create a same-tone scenario
+        is_same = True
+        word_a = hanzi
+        pinyin_a = pinyin
+        word_b = hanzi  # Same word
+        pinyin_b = pinyin
+    else:
+        _, _, pair_hanzi, pair_pinyin = pairs[0]
+        # Randomly decide whether to present same or different
+        if random.random() < 0.4:
+            # Same tone pair (play the same word twice)
+            is_same = True
+            word_a = hanzi
+            pinyin_a = pinyin
+            word_b = hanzi
+            pinyin_b = pinyin
+        else:
+            # Different tone pair
+            is_same = False
+            if random.random() < 0.5:
+                word_a, pinyin_a = hanzi, pinyin
+                word_b, pinyin_b = pair_hanzi, pair_pinyin
+            else:
+                word_a, pinyin_a = pair_hanzi, pair_pinyin
+                word_b, pinyin_b = hanzi, pinyin
+
+    # Play or show the two words
+    show_fn("\n  Minimal Pair: Listen to two words.")
+
+    if audio_enabled:
+        from ..audio import speak_and_wait
+        import time as _time
+        show_fn("  Word 1:")
+        speak_and_wait(word_a)
+        _time.sleep(0.5)
+        show_fn("  Word 2:")
+        speak_and_wait(word_b)
+    else:
+        show_fn(f"  Word 1: {pinyin_a}")
+        show_fn(f"  Word 2: {pinyin_b}")
+
+    show_fn("\n  Are the tones the same or different?\n")
+    options = ["Same tones", "Different tones"]
+    for i, opt in enumerate(options, 1):
+        show_fn(f"  {i}. {opt}")
+
+    correct_answer = "Same tones" if is_same else "Different tones"
+
+    result = _run_mc_input(item, options, correct_answer, "listening",
+                           "minimal_pair", show_fn, input_fn)
+    if isinstance(result, DrillResult):
+        return result
+    user_picked = result
+
+    correct = user_picked == correct_answer
+    feedback = ""
+    error_type = None
+
+    if not correct:
+        if is_same:
+            feedback = f"  → Both were: {format_hanzi_inline(word_a)} ({pinyin_a})"
+        else:
+            feedback = (f"  → Word 1: {format_hanzi_inline(word_a)} ({pinyin_a})\n"
+                       f"  → Word 2: {format_hanzi_inline(word_b)} ({pinyin_b})")
+        error_type = "tone"
+    else:
+        if not is_same:
+            feedback = (f"  Word 1: {format_hanzi_inline(word_a)} ({pinyin_a})\n"
+                       f"  Word 2: {format_hanzi_inline(word_b)} ({pinyin_b})")
+
+    return DrillResult(
+        content_item_id=item_id, modality="listening", drill_type="minimal_pair",
+        correct=correct, user_answer=user_picked, expected_answer=correct_answer,
+        error_type=error_type, feedback=feedback,
+    )
+
+
+# ── Passage sentence dictation drill ──────────────────────────────
+
+def run_passage_sentence_dictation(item: dict, conn, show_fn, input_fn,
+                                   prominent: bool = True,
+                                   audio_enabled: bool = False) -> DrillResult:
+    """Passage sentence dictation: pick a sentence from a reading passage, play audio, type hanzi.
+
+    Bridges listening and reading modalities. Uses passages at the learner's HSK level.
+    Character-by-character grading with partial credit.
+    """
+    hsk_level = item.get("hsk_level", 0)
+    passages = _load_reading_passages()
+
+    if not passages:
+        return run_listening_dictation_drill(item, conn, show_fn, input_fn,
+                                            prominent=prominent, audio_enabled=audio_enabled)
+
+    # Find passages at this HSK level
+    matching = [p for p in passages if p.get("hsk_level", 0) == hsk_level]
+    if not matching:
+        matching = [p for p in passages if p.get("hsk_level", 0) <= max(hsk_level, 2)]
+    if not matching:
+        return run_listening_dictation_drill(item, conn, show_fn, input_fn,
+                                            prominent=prominent, audio_enabled=audio_enabled)
+
+    passage = random.choice(matching)
+    text_zh = passage.get("text_zh", "")
+
+    # Split into sentences
+    sentences = re.split(r'([。！？])', text_zh)
+    full_sentences = []
+    for i in range(0, len(sentences) - 1, 2):
+        sent = sentences[i] + sentences[i + 1]
+        if sent.strip() and len(sent.strip()) >= 2:
+            full_sentences.append(sent.strip())
+    if len(sentences) % 2 == 1 and sentences[-1].strip() and len(sentences[-1].strip()) >= 2:
+        full_sentences.append(sentences[-1].strip())
+
+    if not full_sentences:
+        return run_listening_dictation_drill(item, conn, show_fn, input_fn,
+                                            prominent=prominent, audio_enabled=audio_enabled)
+
+    target_sentence = random.choice(full_sentences)
+
+    # Play or show
+    title = passage.get("title", "")
+    if title:
+        show_fn(f"  [dim]From: {title}[/dim]")
+
+    if audio_enabled:
+        from ..audio import speak_and_wait
+        speak_and_wait(target_sentence)
+        show_fn("\n  Listen and type the sentence:")
+    else:
+        # Show pinyin approximation — use passage pinyin if available
+        show_fn("\n  Type this sentence in Chinese:")
+        show_fn(f"  (from a passage at HSK {hsk_level})")
+
+    answer = input_fn("  sentence> ").strip()
+    item_id = item.get("id", 0)
+
+    if answer.upper() in ("Q", "B"):
+        return _skip_result(item, "listening", "passage_dictation", answer)
+
+    conf_result = _handle_confidence(answer, item, "listening", "passage_dictation",
+                                     target_sentence, show_fn)
+    if conf_result:
+        return conf_result
+
+    # Grade: combine char overlap + edit distance
+    expected_norm = target_sentence.replace(" ", "")
+    # Remove punctuation for comparison
+    expected_clean = re.sub(r'[。！？，、；：\u201c\u201d\u2018\u2019（）\s]', '', expected_norm)
+    answer_clean = re.sub(r'[。！？，、；：\u201c\u201d\u2018\u2019（）\s]', '', answer)
+
+    if answer_clean == expected_clean:
+        return DrillResult(
+            content_item_id=item_id, modality="listening",
+            drill_type="passage_dictation",
+            correct=True, user_answer=answer, expected_answer=target_sentence,
+            score=1.0,
+        )
+
+    overlap = char_overlap_score(expected_clean, answer_clean)
+    edit_score = _edit_distance_score(expected_clean, answer_clean)
+    combined = 0.5 * overlap + 0.5 * edit_score
+
+    correct = combined >= 0.7
+    feedback = ""
+
+    if combined >= 0.7:
+        feedback = f"  (close — exact: {format_hanzi_inline(target_sentence)})"
+    else:
+        # Character-by-character comparison
+        comparison = []
+        for i, exp_ch in enumerate(expected_clean):
+            if i < len(answer_clean):
+                usr_ch = answer_clean[i]
+                if usr_ch == exp_ch:
+                    comparison.append(f"[green]{exp_ch}[/green]")
+                else:
+                    comparison.append(f"[red]{usr_ch}→{exp_ch}[/red]")
+        if len(answer_clean) < len(expected_clean):
+            for ch in expected_clean[len(answer_clean):]:
+                comparison.append(f"[red]_{ch}[/red]")
+        elif len(answer_clean) > len(expected_clean):
+            comparison.append(f"  [dim](extra: {answer_clean[len(expected_clean):]})[/dim]")
+
+        feedback = f"  → {format_hanzi_inline(target_sentence)}"
+        if comparison:
+            feedback += f"\n  {''.join(comparison)}"
+
+    return DrillResult(
+        content_item_id=item_id, modality="listening",
+        drill_type="passage_dictation",
+        correct=correct, user_answer=answer, expected_answer=target_sentence,
         error_type=None if correct else "vocab", feedback=feedback,
         score=combined,
     )

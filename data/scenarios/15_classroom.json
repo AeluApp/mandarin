@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell the teacher you didn't understand and ask them to say it again.",
                 "options": [
-                    {"text_zh": "老师，我没听懂，请您再说一次。", "text_pinyin": "lǎoshī, wǒ méi tīng dǒng, qǐng nín zài shuō yī cì.", "text_en": "Teacher, I didn't understand, please say it once more.", "score": 1.0, "register": "neutral", "feedback": "Respectful and clear — uses 您 and 请, appropriate for addressing a teacher."},
-                    {"text_zh": "老师，可以再说一次吗？", "text_pinyin": "lǎoshī, kěyǐ zài shuō yī cì ma?", "text_en": "Teacher, can you say it again?", "score": 0.7, "register": "neutral", "feedback": "Polite request, but stating 没听懂 first gives the teacher useful context."},
-                    {"text_zh": "对不起，我不太明白这个。", "text_pinyin": "duìbuqǐ, wǒ bú tài míngbai zhè ge.", "text_en": "Sorry, I don't really understand this.", "score": 0.6, "register": "neutral", "feedback": "Honest and polite, but doesn't ask them to repeat — the teacher might not know what to do next."}
+                    {
+                        "text_zh": "你好，我手机没电了，请问现在几点？",
+                        "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?",
+                        "text_en": "Hi, my phone died, may I ask what time it is?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell the teacher you didn't understand and ask them to say it again, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "她是老师，在一个小学教书。",
+                        "text_pinyin": "tā shì lǎoshī, zài yī ge xiǎoxué jiāoshū.",
+                        "text_en": "She's a teacher, she teaches at a primary school.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell the teacher you didn't understand and ask them to say it again, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "老师，我没听懂，请您再说一次。",
+                        "text_pinyin": "lǎoshī, wǒ méi tīng dǒng, qǐng nín zài shuō yī cì.",
+                        "text_en": "Teacher, I didn't understand, please say it once more.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Respectful and clear — uses 您 and 请, appropriate for addressing a teacher."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Point out the specific word you don't know.",
                 "options": [
-                    {"text_zh": "这个词是什么意思？我没学过。", "text_pinyin": "zhè ge cí shì shénme yìsi? wǒ méi xué guò.", "text_en": "What does this word mean? I haven't learned it before.", "score": 1.0, "register": "neutral", "feedback": "Specific and honest — saying 没学过 lets the teacher gauge your level."},
-                    {"text_zh": "我不知道这个词的意思。", "text_pinyin": "wǒ bù zhīdào zhè ge cí de yìsi.", "text_en": "I don't know the meaning of this word.", "score": 0.7, "register": "neutral", "feedback": "Clear statement, but phrasing it as a question invites the teacher to explain."},
-                    {"text_zh": "请问老师，这个怎么读呢？", "text_pinyin": "qǐngwèn lǎoshī, zhè ge zěnme dú ne?", "text_en": "Excuse me teacher, how do you read this?", "score": 0.6, "register": "neutral", "feedback": "Asks about pronunciation rather than meaning — a different question, but still useful."}
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to point out the specific word you don't know, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "这个词是什么意思？我没学过。",
+                        "text_pinyin": "zhè ge cí shì shénme yìsi? wǒ méi xué guò.",
+                        "text_en": "What does this word mean? I haven't learned it before.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Specific and honest — saying 没学过 lets the teacher gauge your level."
+                    },
+                    {
+                        "text_zh": "你好，请问地铁站在哪儿？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn dìtiě zhàn zài nǎr?",
+                        "text_en": "Hello, excuse me, where is the subway station?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to point out the specific word you don't know, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

@@ -1,0 +1,117 @@
+{
+  "title": "The Bookshop Around the Corner",
+  "title_zh": "转角的书店",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "You discover a small second-hand bookshop in a quiet alley. The owner is reading behind the counter.",
+    "setup_zh": "你在一条安静的小巷里发现了一家二手书店。老板在柜台后面看书。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "欢迎！随便看看。你喜欢看什么样的书？",
+        "text_pinyin": "Huānyíng! Suíbiàn kànkan. Nǐ xǐhuan kàn shénme yàng de shū?",
+        "text_en": "Welcome! Feel free to browse. What kind of books do you like?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him what kind of books interest you.",
+        "options": [
+          {
+            "text_zh": "我喜欢看故事书。有没有比较简单的中文小说？",
+            "text_pinyin": "Wǒ xǐhuan kàn gùshi shū. Yǒu méiyǒu bǐjiào jiǎndān de Zhōngwén xiǎoshuō?",
+            "text_en": "I like storybooks. Do you have any relatively simple Chinese novels?",
+            "score": 1.0,
+            "feedback": "Honest about your level — opens a helpful conversation.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我只是随便看看。",
+            "text_pinyin": "Wǒ zhǐshì suíbiàn kànkan.",
+            "text_en": "I'm just browsing.",
+            "score": 0.0,
+            "feedback": "He invited you to browse — but also asked what you like. This dodges his question."
+          },
+          {
+            "text_zh": "你们有英文书吗？",
+            "text_pinyin": "Nǐmen yǒu Yīngwén shū ma?",
+            "text_en": "Do you have English books?",
+            "score": 0.0,
+            "feedback": "On-topic, but misses the chance to practice — he's asking about your Chinese reading interests."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "有的。这本不错，是一个很温暖的故事。很多外国朋友都喜欢。",
+        "text_pinyin": "Yǒu de. Zhè běn búcuò, shì yī ge hěn wēnnuǎn de gùshi. Hěn duō wàiguó péngyou dōu xǐhuan.",
+        "text_en": "Yes. This one is nice — it's a warm story. Many foreign friends like it."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his recommendation.",
+        "options": [
+          {
+            "text_zh": "看起来很有意思。多少钱一本？",
+            "text_pinyin": "Kàn qǐlái hěn yǒu yìsi. Duōshao qián yī běn?",
+            "text_en": "It looks interesting. How much per copy?",
+            "score": 1.0,
+            "feedback": "Engaged — shows genuine interest.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不想买东西。",
+            "text_pinyin": "Wǒ bù xiǎng mǎi dōngxi.",
+            "text_en": "I don't want to buy anything.",
+            "score": 0.0,
+            "feedback": "Dismissive when he's being helpful."
+          },
+          {
+            "text_zh": "这本书看起来很旧了。有没有新的？",
+            "text_pinyin": "Zhè běn shū kàn qǐlái hěn jiù le. Yǒu méiyǒu xīn de?",
+            "text_en": "This book looks really old. Do you have a new one?",
+            "score": 0.0,
+            "feedback": "He pauses — it's a second-hand bookshop. That's the whole point."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "这本只要十块钱。二手书便宜。你要是喜欢，下次来我帮你找更多。",
+        "text_pinyin": "Zhè běn zhǐ yào shí kuài qián. Èrshǒu shū piányi. Nǐ yàoshi xǐhuan, xià cì lái wǒ bāng nǐ zhǎo gèng duō.",
+        "text_en": "This one is only ten yuan. Second-hand books are cheap. If you like it, next time I'll find more for you."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Accept his kind offer.",
+        "options": [
+          {
+            "text_zh": "太好了！我一定会再来。谢谢你推荐。",
+            "text_pinyin": "Tài hǎo le! Wǒ yīdìng huì zài lái. Xièxie nǐ tuījiàn.",
+            "text_en": "Great! I'll definitely come back. Thanks for the recommendation.",
+            "score": 1.0,
+            "feedback": "Warm and grateful — builds a connection.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "好吧。我再想想。",
+            "text_pinyin": "Hǎo ba. Wǒ zài xiǎngxiang.",
+            "text_en": "Okay. Let me think about it.",
+            "score": 0.0,
+            "feedback": "Noncommittal — he just offered you a great deal and future help."
+          },
+          {
+            "text_zh": "十块钱有点贵。能不能便宜一点？",
+            "text_pinyin": "Shí kuài qián yǒudiǎn guì. Néng bù néng piányi yīdiǎn?",
+            "text_en": "Ten yuan is a bit expensive. Can you make it cheaper?",
+            "score": 0.0,
+            "feedback": "Ten yuan for a book is already very cheap — haggling here misses the warmth of his offer."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Second-hand bookshops (二手书店) are quiet havens in Chinese cities. Owners often curate personal collections and love recommending books. The low prices make reading accessible, and returning customers become friends."
+  }
+}

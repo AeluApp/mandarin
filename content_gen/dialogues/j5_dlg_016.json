@@ -1,0 +1,89 @@
+{
+  "title": "The Song That Stays",
+  "title_zh": "留在心里的歌",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You and your friend Xiaolu are listening to music on a park bench with one earbud each. A song comes on that makes her go quiet.",
+    "setup_zh": "你和朋友小璐坐在公园的长椅上，一人一只耳机听歌。一首歌响起来，她突然安静了。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这首歌……是我高中的时候每天放学路上听的。那时候觉得歌词写的就是我的心情。现在再听，好像又变成了另一种感觉。",
+        "text_pinyin": "Zhè shǒu gē…… shì wǒ gāozhōng de shíhou měi tiān fàngxué lù shang tīng de. Nà shíhou juéde gēcí xiě de jiù shì wǒ de xīnqíng. Xiànzài zài tīng, hǎoxiàng yòu biàn chéng le lìng yī zhǒng gǎnjué.",
+        "text_en": "This song... I used to listen to it every day walking home from school in high school. Back then I felt like the lyrics described exactly how I felt. Listening now, it seems to have become something different."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Ask about how the song feels different now.",
+        "options": [
+          {
+            "text_zh": "同一首歌，不同的年纪听会有不同的感受。也许不是歌变了，是你变了。你现在听的时候在想什么？",
+            "text_pinyin": "Tóng yī shǒu gē, bùtóng de niánjì tīng huì yǒu bùtóng de gǎnshòu. Yěxǔ bú shì gē biàn le, shì nǐ biàn le. Nǐ xiànzài tīng de shíhou zài xiǎng shénme?",
+            "text_en": "The same song hits differently at different ages. Maybe it's not the song that changed, but you. What are you thinking about when you listen to it now?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Perceptive and gentle — opens space for her to reflect."
+          },
+          {
+            "text_zh": "这是谁唱的？我想加到我的歌单里。",
+            "text_pinyin": "Zhè shì shéi chàng de? Wǒ xiǎng jiā dào wǒ de gēdān lǐ.",
+            "text_en": "Who sings this? I want to add it to my playlist.",
+            "score": 0.0,
+            "feedback": "Practical question that skips over her emotional moment."
+          },
+          {
+            "text_zh": "你高中的时候成绩好吗？",
+            "text_pinyin": "Nǐ gāozhōng de shíhou chéngjì hǎo ma?",
+            "text_en": "Were your grades good in high school?",
+            "score": 0.0,
+            "feedback": "Irrelevant tangent."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我在想那时候的自己。十七岁，什么都不确定，但什么都敢期待。现在确定的事多了，反而没有那种期待了。听这首歌就像在跟过去的自己说话。",
+        "text_pinyin": "Wǒ zài xiǎng nà shíhou de zìjǐ. Shíqī suì, shénme dōu bú quèdìng, dàn shénme dōu gǎn qīdài. Xiànzài quèdìng de shì duō le, fǎn'ér méiyǒu nà zhǒng qīdài le. Tīng zhè shǒu gē jiù xiàng zài gēn guòqù de zìjǐ shuōhuà.",
+        "text_en": "I'm thinking about who I was then. Seventeen, nothing certain, but willing to hope for everything. Now there's more certainty, but less expectation. Listening to this song feels like talking to my past self."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share a thought about music and memory.",
+        "options": [
+          {
+            "text_zh": "音乐就是这样，它能保存那些文字说不清的感觉。你十七岁的自己听到了你现在的心情，也许她会觉得长大以后的你比她想象的更勇敢。",
+            "text_pinyin": "Yīnyuè jiù shì zhèyàng, tā néng bǎocún nàxiē wénzì shuō bù qīng de gǎnjué. Nǐ shíqī suì de zìjǐ tīng dào le nǐ xiànzài de xīnqíng, yěxǔ tā huì juéde zhǎng dà yǐhòu de nǐ bǐ tā xiǎngxiàng de gèng yǒnggǎn.",
+            "text_en": "That's what music does — it preserves feelings that words can't capture. If your seventeen-year-old self could hear your heart now, maybe she'd think the grown-up you is braver than she imagined.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "And affirming — bridges past and present through the shared thread of music."
+          },
+          {
+            "text_zh": "你现在还听流行歌曲吗？我比较喜欢古典音乐。",
+            "text_pinyin": "Nǐ xiànzài hái tīng liúxíng gēqǔ ma? Wǒ bǐjiào xǐhuan gǔdiǎn yīnyuè.",
+            "text_en": "Do you still listen to pop music? I prefer classical.",
+            "score": 0.0,
+            "feedback": "Pivots to genre preferences during a vulnerable moment."
+          },
+          {
+            "text_zh": "不要想太多了，就是一首歌而已。",
+            "text_pinyin": "Bú yào xiǎng tài duō le, jiù shì yī shǒu gē éryǐ.",
+            "text_en": "Don't overthink it, it's just a song.",
+            "score": 0.0,
+            "feedback": "Dismissive — shuts down a meaningful reflection."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "更勇敢……谢谢你。我觉得长大不是失去了期待，而是期待变得不一样了。来，下一首换你选，让我听一首属于你的歌。",
+        "text_pinyin": "Gèng yǒnggǎn…… xièxie nǐ. Wǒ juéde zhǎng dà bú shì shīqù le qīdài, ér shì qīdài biàn de bù yíyàng le. Lái, xià yī shǒu huàn nǐ xuǎn, ràng wǒ tīng yī shǒu shǔyú nǐ de gē.",
+        "text_en": "Braver... thank you. I think growing up isn't losing hope — it's that hope changes shape. Come on, you pick the next song. Let me hear one that belongs to you."
+      }
+    ],
+    "cultural_note": "Sharing earbuds (一人一只耳机) to listen to music together is a common intimate gesture among young Chinese friends and couples. Chinese pop music from different eras carries strong generational markers, and revisiting old songs often triggers powerful nostalgia. The phrase「跟过去的自己说话」(talking to your past self) reflects a popular theme in Chinese social media culture, where people reflect on their younger selves with a mix of tenderness and wistfulness."
+  }
+}

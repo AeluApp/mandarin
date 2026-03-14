@@ -1,14 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="36" x2="120" y2="36" stroke-width="0.4"/>
-  <!-- surface -->
-  <line x1="20" y1="48" x2="100" y2="48" stroke-width="0.5"/>
-  <!-- ink stone (rounded rectangle) -->
-  <rect x="42" y="40" width="22" height="8" rx="3" ry="3" stroke-width="0.65"/>
-  <!-- grinding stick resting on stone -->
-  <line x1="46" y1="39" x2="68" y2="36" stroke-width="0.6"/>
-  <!-- ink drops -->
-  <circle cx="70" cy="46" r="0.6" stroke-width="0.4"/>
-  <circle cx="73" cy="47.5" r="0.4" stroke-width="0.4"/>
-  <circle cx="38" cy="47" r="0.5" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- table surface -->
+  <path d="M15 80 L185 80" stroke="#2a2a2a" stroke-width="0.6"/>
+  <rect x="15" y="80" width="170" height="2" stroke="none" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- ink stone — large, detailed, rectangular with rounded corners -->
+  <rect x="40" y="50" width="80" height="32" rx="6" ry="4" stroke="#2a2a2a" stroke-width="0.8" fill="#2a2a2a" fill-opacity="0.05"/>
+  <!-- stone top surface edge -->
+  <path d="M46 52 Q80 48 114 52" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <!-- ink well — deep pool at one end -->
+  <ellipse cx="65" cy="62" rx="14" ry="8" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.1"/>
+  <!-- ink surface shimmer -->
+  <ellipse cx="63" cy="60" rx="6" ry="3" stroke="#2a2a2a" stroke-width="0.2" opacity="0.2"/>
+  <!-- grinding slope — textured surface -->
+  <path d="M84 56 L112 56 L112 76 L84 76" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <!-- grinding texture lines -->
+  <line x1="88" y1="58" x2="88" y2="74" stroke="#2a2a2a" stroke-width="0.15" opacity="0.15"/>
+  <line x1="94" y1="58" x2="94" y2="74" stroke="#2a2a2a" stroke-width="0.15" opacity="0.15"/>
+  <line x1="100" y1="58" x2="100" y2="74" stroke="#2a2a2a" stroke-width="0.15" opacity="0.15"/>
+  <line x1="106" y1="58" x2="106" y2="74" stroke="#2a2a2a" stroke-width="0.15" opacity="0.15"/>
+  <!-- ink stick — resting on grinding surface -->
+  <rect x="90" y="60" width="8" height="16" rx="1" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.08"/>
+  <!-- ink stick top decoration (embossed character suggestion) -->
+  <path d="M92 63 L96 63 M94 62 L94 65" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <!-- carved dragon decoration on stone edge -->
+  <path d="M42 60 Q38 58 40 54 Q42 52 44 54 Q42 56 42 60" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <!-- water droplets -->
+  <circle cx="130" cy="72" r="1.2" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.06"/>
+  <circle cx="136" cy="76" r="0.8" stroke="#2a2a2a" stroke-width="0.25" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- small water dropper vessel -->
+  <path d="M140 80 Q140 70 144 66 Q148 64 152 66 Q156 70 156 80" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="148" cy="66" rx="4" ry="1.5" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- spout -->
+  <path d="M156 72 Q160 70 162 72" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- cloth underneath -->
+  <path d="M34 80 Q38 78 42 80" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M116 80 Q120 78 124 80" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <!-- brush holder in background -->
+  <path d="M168 80 L170 46 Q172 42 176 42 Q180 42 182 46 L184 80" stroke="#2a2a2a" stroke-width="0.5" opacity="0.4"/>
+  <!-- brushes in holder -->
+  <line x1="173" y1="42" x2="172" y2="28" stroke="#2a2a2a" stroke-width="0.4" opacity="0.35"/>
+  <line x1="176" y1="42" x2="176" y2="24" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <line x1="179" y1="42" x2="180" y2="30" stroke="#2a2a2a" stroke-width="0.35" opacity="0.3"/>
 </svg>

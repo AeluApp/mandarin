@@ -1,0 +1,87 @@
+{
+    "title": "Ordering Tea",
+    "title_zh": "点茶",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You walk into a small, quiet tea shop. Soft music is playing. The server smiles at you.",
+        "setup_zh": "你走进一家安静的小茶馆。里面放着轻音乐。服务员对你微笑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎！请坐。你想喝什么茶？我们有绿茶和红茶。",
+                "text_pinyin": "Huānyíng! Qǐng zuò. Nǐ xiǎng hē shénme chá? Wǒmen yǒu lǜchá hé hóngchá.",
+                "text_en": "Welcome! Please sit down. What tea would you like? We have green tea and black tea."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order your tea.",
+                "options": [
+                    {
+                        "text_zh": "我想喝绿茶，谢谢。",
+                        "text_pinyin": "Wǒ xiǎng hē lǜchá, xièxie.",
+                        "text_en": "I'd like green tea, thank you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Picks from the options she offered and adds a thank you -- smooth and natural."
+                    },
+                    {
+                        "text_zh": "什么茶好喝？",
+                        "text_pinyin": "Shénme chá hǎo hē?",
+                        "text_en": "Which tea is good?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Shows interest but she already offered two choices -- asking 'which is good' makes it seem like you weren't listening."
+                    },
+                    {
+                        "text_zh": "你们有咖啡吗？",
+                        "text_pinyin": "Nǐmen yǒu kāfēi ma?",
+                        "text_en": "Do you have coffee?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "You're in a tea shop and she just offered green and black tea -- asking for coffee ignores the whole setting."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。你一个人来的吗？",
+                "text_pinyin": "Hǎo de. Nǐ yī ge rén lái de ma?",
+                "text_en": "Okay. Did you come alone?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer her question about whether you came alone.",
+                "options": [
+                    {
+                        "text_zh": "是的，我一个人。我喜欢安静的地方。",
+                        "text_pinyin": "Shì de, wǒ yī ge rén. Wǒ xǐhuan ānjìng de dìfang.",
+                        "text_en": "Yes, I'm alone. I like quiet places.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers honestly and connects it to the peaceful tea shop atmosphere she created."
+                    },
+                    {
+                        "text_zh": "对，就我一个人。",
+                        "text_pinyin": "Duì, jiù wǒ yī ge rén.",
+                        "text_en": "Yes, just me.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers the question but a little flat -- doesn't add any warmth to the exchange."
+                    },
+                    {
+                        "text_zh": "这里有几张桌子？",
+                        "text_pinyin": "Zhèlǐ yǒu jǐ zhāng zhuōzi?",
+                        "text_en": "How many tables are there here?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A question about the shop, but she asked whether you came alone -- counting tables feels odd in this quiet moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tea shops in China are places of quiet refuge. Sitting alone with a pot of tea is not considered lonely — it's a respected form of self-care. The gentle inquiry 你一个人来的吗 is not prying; it's hospitality."
+    }
+}

@@ -1,0 +1,123 @@
+{
+    "title": "Helping with Directions",
+    "title_zh": "帮人问路",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're walking through your neighborhood when an older gentleman stops you. He's looking a bit lost, holding a piece of paper with an address.",
+        "setup_zh": "你在小区里散步时，一位老先生拦住了你。他看起来有点迷路，手里拿着一张写着地址的纸条。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "不好意思，小伙子，请问一下，中心路的邮局怎么走？我找了半天了。",
+                "text_pinyin": "Bù hǎoyìsi, xiǎohuǒzi, qǐngwèn yīxià, Zhōngxīn Lù de yóujú zěnme zǒu? Wǒ zhǎo le bàntiān le.",
+                "text_en": "Excuse me, young person, could you tell me how to get to the post office on Zhongxin Road? I've been looking for a while."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give him directions or offer to help.",
+                "options": [
+                    {
+                        "text_zh": "邮局啊，离这里不远。你往前走，到第二个路口往左拐，再走五分钟就到了。",
+                        "text_pinyin": "Yóujú a, lí zhèlǐ bù yuǎn. Nǐ wǎng qián zǒu, dào dì èr ge lùkǒu wǎng zuǒ guǎi, zài zǒu wǔ fēnzhōng jiù dào le.",
+                        "text_en": "The post office? It's not far. Go straight, turn left at the second intersection, then walk five more minutes and you're there.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Clear and helpful — gives specific directions with landmarks."
+                    },
+                    {
+                        "text_zh": "我不太确定，你可以用手机地图查一下。",
+                        "text_pinyin": "Wǒ bú tài quèdìng, nǐ kěyǐ yòng shǒujī dìtú chá yīxià.",
+                        "text_en": "I'm not sure — you could check on your phone's map.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Not very helpful — an older person asking for directions may not use phone maps easily."
+                    },
+                    {
+                        "text_zh": "我也是新来的，不太认识路。对不起啊。",
+                        "text_pinyin": "Wǒ yě shì xīn lái de, bú tài rènshi lù. Duìbuqǐ a.",
+                        "text_en": "I'm also new here, I don't know the roads well. Sorry.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest, but could still offer to help in another way."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "往左拐？好的。谢谢你啊。那路口有没有什么标志？我眼神不太好。",
+                "text_pinyin": "Wǎng zuǒ guǎi? Hǎo de. Xièxie nǐ a. Nà lùkǒu yǒu méiyǒu shénme biāozhì? Wǒ yǎnshén bú tài hǎo.",
+                "text_en": "Turn left? Okay, thank you. Is there any landmark at the intersection? My eyesight isn't great."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Help him identify the intersection.",
+                "options": [
+                    {
+                        "text_zh": "那个路口有一个红色的水果店，很好认。您要是找不到，我可以带您过去。",
+                        "text_pinyin": "Nàge lùkǒu yǒu yī ge hóngsè de shuǐguǒ diàn, hěn hǎo rèn. Nín yàoshi zhǎo bú dào, wǒ kěyǐ dài nín guòqù.",
+                        "text_en": "There's a red fruit shop at that intersection — easy to spot. If you can't find it, I can walk you there.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Detailed and thoughtful — offers a landmark and backup help."
+                    },
+                    {
+                        "text_zh": "路口就在前面，你走走就看到了。",
+                        "text_pinyin": "Lùkǒu jiù zài qiánmiàn, nǐ zǒuzǒu jiù kàndào le.",
+                        "text_en": "The intersection is up ahead — just walk and you'll see it.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Vague — he said his eyesight is poor, so more detail would help."
+                    },
+                    {
+                        "text_zh": "我不记得了。",
+                        "text_pinyin": "Wǒ bú jìde le.",
+                        "text_en": "I don't remember.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Unhelpful — you just gave him specific directions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "红色的水果店，好，我记住了。你真热心，谢谢你！现在的年轻人很少这么有耐心了。",
+                "text_pinyin": "Hóngsè de shuǐguǒ diàn, hǎo, wǒ jì zhù le. Nǐ zhēn rèxīn, xièxie nǐ! Xiànzài de niánqīng rén hěn shǎo zhème yǒu nàixīn le.",
+                "text_en": "Red fruit shop, got it. You're really warm-hearted, thank you! Young people nowadays are rarely this patient."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his compliment.",
+                "options": [
+                    {
+                        "text_zh": "没什么，应该的。您慢慢走，路上小心。",
+                        "text_pinyin": "Méi shénme, yīnggāi de. Nín mànmàn zǒu, lù shàng xiǎoxīn.",
+                        "text_en": "It's nothing, it's what I should do. Take your time, be careful on the road.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Humble and caring — a perfect gentle farewell."
+                    },
+                    {
+                        "text_zh": "谢谢，再见。",
+                        "text_pinyin": "Xièxie, zàijiàn.",
+                        "text_en": "Thanks, bye.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but a bit too quick."
+                    },
+                    {
+                        "text_zh": "那当然了！",
+                        "text_pinyin": "Nà dāngrán le!",
+                        "text_en": "Of course!",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Comes across as boastful rather than humble."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Helping strangers with directions is a valued social behavior in China. The phrase 「应该的」 (it's what I should do) is a humble way to accept thanks, reflecting the cultural value of modesty. The older generation often comments on young people's manners — receiving such praise gracefully is important."
+    },
+    "hsk_level": 3
+}

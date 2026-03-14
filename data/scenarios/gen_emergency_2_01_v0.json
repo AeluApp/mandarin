@@ -1,0 +1,94 @@
+{
+    "title": "The Leaking Ceiling",
+    "title_zh": "天花板漏水了",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_2_01_v0",
+    "tree": {
+        "setup": "Your apartment, late evening. A dark spot is growing on the ceiling and water is dripping into a bowl you placed on the floor. You need to call the building management. The property manager, Uncle Fan, answers his phone at all hours and speaks with the weary competence of a man who has fixed everything from broken pipes to stuck elevators.",
+        "setup_zh": "你的公寓，深夜。天花板上的黑点越来越大，水滴进你放在地上的碗里。你需要打电话给物业。物业管理员老范什么时候都接电话，说话带着修过一切的疲惫和干练——从水管到电梯。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂？你好，物业。什么事？",
+                "text_pinyin": "wéi? nǐ hǎo, wùyè. shénme shì?",
+                "text_en": "Hello? Property management. What's the matter?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report the leak.",
+                "options": [
+                    {
+                        "text_zh": "你好，我家天花板漏水了，水在往下滴。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiā tiānhuābǎn lòu shuǐ le, shuǐ zài wǎng xià dī.",
+                        "text_en": "Hello, my ceiling is leaking, water is dripping down.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Fan's voice shifts into problem-solving mode.「几楼几号？」Clear description of the problem -- location + what's happening. 漏水 means 'leaking water.'"
+                    },
+                    {
+                        "text_zh": "有个问题，我的房间里有水！",
+                        "text_pinyin": "yǒu ge wèntí, wǒ de fángjiān lǐ yǒu shuǐ!",
+                        "text_en": "There's a problem, there's water in my room!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Fan asks where the water is coming from. Knowing the source helps him know which tool to bring. 有个问题 is a good opener for reporting issues."
+                    },
+                    {
+                        "text_zh": "怎么办？水很多！",
+                        "text_pinyin": "zěnme bàn? shuǐ hěn duō!",
+                        "text_en": "What do I do? There's a lot of water!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Fan stays calm.「先拿个桶接着。我马上来。」He's used to panicking tenants. 怎么办 is the crisis phrase, but try to include details."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你住几楼几号？我马上过去看看。",
+                "text_pinyin": "nǐ zhù jǐ lóu jǐ hào? wǒ mǎshàng guòqù kànkan.",
+                "text_en": "What floor and apartment number? I'll come right away."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give your address.",
+                "options": [
+                    {
+                        "text_zh": "三楼三零五号。谢谢你这么晚还来！",
+                        "text_pinyin": "sān lóu sān líng wǔ hào. xièxie nǐ zhème wǎn hái lái!",
+                        "text_en": "Floor 3, apartment 305. Thanks for coming this late!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Fan grunts a modest acknowledgment. Late calls are part of the job. He's already grabbing his toolbox. 这么晚 means 'this late' -- showing appreciation for off-hours help is always good."
+                    },
+                    {
+                        "text_zh": "三零五。快来！",
+                        "text_pinyin": "sān líng wǔ. kuài lái!",
+                        "text_en": "305. Come quick!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Fan is already on his way. He doesn't take offense at the urgency -- he's heard worse. But a 请 or 谢谢 goes a long way."
+                    },
+                    {
+                        "text_zh": "你知道我住哪里吗？",
+                        "text_pinyin": "nǐ zhīdào wǒ zhù nǎlǐ ma?",
+                        "text_en": "Do you know where I live?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Fan manages 400 apartments. He does not memorize them by voice. Just give him the number. 住哪里 is 'where do you live.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，十分钟就到。先用桶接着水！",
+                "text_pinyin": "hǎo de, shí fēnzhōng jiù dào. xiān yòng tǒng jiēzhe shuǐ!",
+                "text_en": "OK, I'll be there in ten minutes. Catch the water with a bucket for now!"
+            }
+        ],
+        "cultural_note": "Chinese apartment buildings have property management (物业, wùyè) that handles maintenance. They can usually be reached by phone at any hour for emergencies. Building relationships with your 物业 makes life much easier."
+    }
+}

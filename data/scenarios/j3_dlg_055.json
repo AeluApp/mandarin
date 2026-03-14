@@ -1,0 +1,87 @@
+{
+    "title": "Last Day of Summer",
+    "title_zh": "夏天的最后一天",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "It's the last warm day before autumn arrives. You and your friend Xiao Yun are sitting on the grass, eating watermelon and watching the sunset.",
+        "setup_zh": "秋天来之前最后一个温暖的日子。你和朋友小云坐在草地上，吃着西瓜，看着日落。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "明天就秋天了。我觉得每个夏天结束的时候都有一点不舍得。你呢？你会想念夏天吗？",
+                "text_pinyin": "Míngtiān jiù qiūtiān le. Wǒ juéde měi ge xiàtiān jiéshù de shíhou dōu yǒu yīdiǎn bù shěde. Nǐ ne? Nǐ huì xiǎngniàn xiàtiān ma?",
+                "text_en": "Autumn starts tomorrow. I always feel a little reluctant when each summer ends. What about you? Will you miss summer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feelings about summer ending.",
+                "options": [
+                    {
+                        "text_zh": "会的。夏天有西瓜、有长长的白天、有萤火虫。不过秋天也很美，每个季节都有它好的地方。",
+                        "text_pinyin": "Huì de. Xiàtiān yǒu xīguā, yǒu cháng cháng de báitiān, yǒu yínghuǒchóng. Búguò qiūtiān yě hěn měi, měi ge jìjié dōu yǒu tā hǎo de dìfang.",
+                        "text_en": "I will. Summer has watermelon, long days, and fireflies. But autumn is beautiful too — every season has its good parts.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Nostalgic but balanced — finds beauty in every season."
+                    },
+                    {
+                        "text_zh": "还好吧，夏天太热了。",
+                        "text_pinyin": "Hái hǎo ba, xiàtiān tài rè le.",
+                        "text_en": "Not really, summer was too hot.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but misses the reflective moment."
+                    },
+                    {
+                        "text_zh": "没什么特别的。",
+                        "text_pinyin": "Méi shénme tèbié de.",
+                        "text_en": "Nothing special about it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Misses the emotional goodbye."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对。而且现在这个时刻就很好——西瓜、日落、好朋友。不管什么季节，有这些就够了。",
+                "text_pinyin": "Nǐ shuō de duì. Érqiě xiànzài zhège shíkè jiù hěn hǎo — xīguā, rìluò, hǎo péngyou. Bùguǎn shénme jìjié, yǒu zhèxiē jiù gòu le.",
+                "text_en": "You're right. And this moment right now is perfect — watermelon, sunset, a good friend. No matter what season, having these is enough."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to this perfect moment.",
+                "options": [
+                    {
+                        "text_zh": "对，最好的东西都很简单——好天气、好朋友、一块西瓜。明年还来。",
+                        "text_pinyin": "Duì, zuì hǎo de dōngxi dōu hěn jiǎndān — hǎo tiānqì, hǎo péngyou, yī kuài xīguā. Míngnián hái lái.",
+                        "text_en": "Yeah, the best things are simple — good weather, a good friend, a piece of watermelon. We'll come back next year.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Beautiful, gentle, and forward-looking — the perfect farewell to summer."
+                    },
+                    {
+                        "text_zh": "嗯，挺好的。",
+                        "text_pinyin": "En, tǐng hǎo de.",
+                        "text_en": "Yeah, it's nice.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agrees but doesn't match the depth."
+                    },
+                    {
+                        "text_zh": "西瓜吃完了。",
+                        "text_pinyin": "Xīguā chī wán le.",
+                        "text_en": "The watermelon's all gone.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Misses the emotional moment entirely."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Eating watermelon (吃西瓜) is the quintessential summer activity in China — a symbol of the season itself. The bittersweet feeling of the last warm day connects to the Chinese poetic concept of 「惜」 (cherishing what passes). Simple pleasures shared with friends are the deepest form of contentment."
+    },
+    "hsk_level": 3
+}

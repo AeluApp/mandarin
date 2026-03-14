@@ -1,0 +1,89 @@
+{
+    "title": "Seeds in the Window Box",
+    "title_zh": "窗台上的种子",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your upstairs neighbor Aunt Wang has started growing herbs and vegetables on her small balcony. She invites you up to see her little garden.",
+        "setup_zh": "楼上的王阿姨在小阳台上开始种香草和蔬菜。她邀请你上去看看她的小花园。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看，这是我上个月种的小葱，已经长出来了。还有这盆薄荷，闻一闻，是不是很香？在这么小的阳台上，我种出了一个小世界。",
+                "text_pinyin": "Nǐ kàn, zhè shì wǒ shàng ge yuè zhòng de xiǎocōng, yǐjīng zhǎng chūlái le. Háiyǒu zhè pén bòhe, wén yī wén, shì bu shì hěn xiāng? Zài zhème xiǎo de yángtái shàng, wǒ zhòng chū le yīge xiǎo shìjiè.",
+                "text_en": "Look, these are the scallions I planted last month — they've already come up. And this pot of mint, smell it — isn't it fragrant? On this tiny balcony, I've grown a little world."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Appreciate Aunt Wang's balcony garden.",
+                "options": [
+                    {
+                        "text_zh": "真的很漂亮！在这么小的地方种出这些，一定花了很多心思。我觉得种东西最美的地方不是收获，而是每天看着它们长大的过程。",
+                        "text_pinyin": "Zhēn de hěn piàoliang! Zài zhème xiǎo de dìfang zhòng chū zhèxiē, yídìng huā le hěn duō xīnsi. Wǒ juéde zhòng dōngxi zuì měi de dìfang bú shì shōuhuò, ér shì měi tiān kàn zhe tāmen zhǎng dà de guòchéng.",
+                        "text_en": "It's really beautiful! Growing all this in such a small space must have taken a lot of thought. I think the most beautiful part of growing things isn't the harvest, but watching them grow day by day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and observant — values the process over the product."
+                    },
+                    {
+                        "text_zh": "超市买菜不是更方便吗？",
+                        "text_pinyin": "Chāoshì mǎi cài bú shì gèng fāngbiàn ma?",
+                        "text_en": "Isn't it more convenient to buy vegetables at the supermarket?",
+                        "score": 0.0,
+                        "feedback": "She's not gardening for convenience."
+                    },
+                    {
+                        "text_zh": "阳台上种菜会不会招虫子？",
+                        "text_pinyin": "Yángtái shàng zhòng cài huì bú huì zhāo chóngzi?",
+                        "text_en": "Won't growing vegetables on the balcony attract bugs?",
+                        "score": 0.0,
+                        "feedback": "Practical concern that dampens her enthusiasm."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对，每天看着它们长大确实是最开心的事。退休以后我一直不知道做什么，直到有一天在花市看到一包种子。我想，试试吧。没想到一种就停不下来了。",
+                "text_pinyin": "Nǐ shuō de duì, měi tiān kàn zhe tāmen zhǎng dà quèshí shì zuì kāixīn de shì. Tuìxiū yǐhòu wǒ yīzhí bù zhīdào zuò shénme, zhídào yǒu yī tiān zài huāshì kàn dào yī bāo zhǒngzǐ. Wǒ xiǎng, shìshì ba. Méi xiǎng dào yī zhòng jiù tíng bú xiàlái le.",
+                "text_en": "You're right, watching them grow every day is truly the happiest thing. After retiring I didn't know what to do, until one day I saw a packet of seeds at the flower market. I thought, why not try? I never expected that once I started, I couldn't stop."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on how small beginnings can transform life.",
+                "options": [
+                    {
+                        "text_zh": "有时候最大的改变就从一粒种子开始。不需要一片大田，一个小花盆就够了。人生也一样——从手边的小事开始，慢慢就会长出意想不到的东西。",
+                        "text_pinyin": "Yǒu shíhou zuì dà de gǎibiàn jiù cóng yī lì zhǒngzǐ kāishǐ. Bù xūyào yī piàn dà tián, yīge xiǎo huāpén jiù gòu le. Rénshēng yě yíyàng — cóng shǒubiān de xiǎo shì kāishǐ, mànman jiù huì zhǎng chū yìxiǎng bú dào de dōngxi.",
+                        "text_en": "Sometimes the biggest changes start from a single seed. You don't need a vast field — a small pot is enough. Life is the same — start from the small things at hand, and something unexpected will grow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Metaphor — extends the garden into a life philosophy."
+                    },
+                    {
+                        "text_zh": "你种的菜够吃吗？",
+                        "text_pinyin": "Nǐ zhòng de cài gòu chī ma?",
+                        "text_en": "Do you grow enough vegetables to eat?",
+                        "score": 0.0,
+                        "feedback": "Quantifies something that's about meaning, not yield."
+                    },
+                    {
+                        "text_zh": "你有没有考虑过种花？花比菜好看。",
+                        "text_pinyin": "Nǐ yǒu méiyǒu kǎolǜ guò zhòng huā? Huā bǐ cài hǎokàn.",
+                        "text_en": "Have you considered growing flowers? Flowers look better than vegetables.",
+                        "score": 0.0,
+                        "feedback": "Judgment about aesthetics — dismisses her choice."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "从手边能做的小事开始……嗯，就像种一粒种子一样。来，我送你一盆薄荷苗，你也在你的窗台上种一个小世界吧。",
+                "text_pinyin": "Cóng shǒubiān néng zuò de xiǎo shì kāishǐ…… en, jiù xiàng zhòng yī lì zhǒngzǐ yíyàng. Lái, wǒ sòng nǐ yī pén bòhe miáo, nǐ yě zài nǐ de chuāngtái shàng zhòng yīge xiǎo shìjiè ba.",
+                "text_en": "Start from the small things within reach... yes, like planting a seed. Here, let me give you a pot of mint — you can grow your own little world on your windowsill too."
+            }
+        ],
+        "cultural_note": "Balcony gardening (阳台种菜) has become increasingly popular in Chinese cities, especially among retirees and young people seeking connection to nature in high-rise apartments. Flower markets (花市) are vibrant community spaces in many Chinese cities. The act of gifting a plant cutting or seedling to a neighbor carries warmth and symbolizes sharing — a quiet act of community building."
+    }
+}

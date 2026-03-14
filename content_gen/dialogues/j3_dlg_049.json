@@ -1,0 +1,81 @@
+{
+    "title": "Grandpa's Kite",
+    "title_zh": "爷爷的风筝",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "In the park, you see an elderly man flying a beautiful handmade kite. His granddaughter is clapping excitedly beside him.",
+        "setup_zh": "在公园里，你看到一位老人在放一只漂亮的手工风筝。他的孙女在旁边高兴地拍手。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Approach and compliment the kite.",
+                "options": [
+                    {
+                        "text_zh": "您好！您的风筝真漂亮，是自己做的吗？飞得好高啊！",
+                        "text_pinyin": "Nín hǎo! Nín de fēngzheng zhēn piàoliang, shì zìjǐ zuò de ma? Fēi de hǎo gāo a!",
+                        "text_en": "Hello! Your kite is beautiful — did you make it yourself? It's flying so high!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Genuine admiration and curiosity."
+                    },
+                    {
+                        "text_zh": "风筝不错。",
+                        "text_pinyin": "Fēngzheng búcuò.",
+                        "text_en": "Nice kite.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief."
+                    },
+                    {
+                        "text_zh": "今天风很大。",
+                        "text_pinyin": "Jīntiān fēng hěn dà.",
+                        "text_en": "It's windy today.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Doesn't engage with the kite."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是我自己做的！我做了四十多年风筝了。这只是燕子形的，用竹子和纸做的。以前这个公园每到春天都有很多人放风筝，现在少了。你要不要试试？",
+                "text_pinyin": "Shì wǒ zìjǐ zuò de! Wǒ zuò le sìshí duō nián fēngzheng le. Zhè zhī shì yànzi xíng de, yòng zhúzi hé zhǐ zuò de. Yǐqián zhège gōngyuán měi dào chūntiān dōu yǒu hěn duō rén fàng fēngzheng, xiànzài shǎo le. Nǐ yào bú yào shìshi?",
+                "text_en": "I made it myself! I've been making kites for over forty years. This one is swallow-shaped, made of bamboo and paper. This park used to be full of kite-flyers every spring — fewer now. Want to give it a try?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his offer to try.",
+                "options": [
+                    {
+                        "text_zh": "我很想试！四十年的手艺，真了不起。这种传统技术应该让更多年轻人知道。",
+                        "text_pinyin": "Wǒ hěn xiǎng shì! Sìshí nián de shǒuyì, zhēn liǎobuqǐ. Zhè zhǒng chuántǒng jìshù yīnggāi ràng gèng duō niánqīng rén zhīdào.",
+                        "text_en": "I'd love to try! Forty years of craft — that's amazing. This kind of traditional skill should be known by more young people.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Respects tradition and acknowledges the craft."
+                    },
+                    {
+                        "text_zh": "好啊，让我试试。",
+                        "text_pinyin": "Hǎo a, ràng wǒ shìshi.",
+                        "text_en": "Sure, let me try.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Willing but doesn't acknowledge his skill."
+                    },
+                    {
+                        "text_zh": "我不会放风筝。",
+                        "text_pinyin": "Wǒ bú huì fàng fēngzheng.",
+                        "text_en": "I don't know how to fly a kite.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Self-limiting — that's why he's offering to teach."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Kite-making (风筝) is an ancient Chinese folk art. Handmade kites using bamboo and paper represent a tradition that is fading in the modern era. Spring kite-flying in parks remains a cherished activity, and elderly craftsmen who keep the tradition alive are treasured."
+    },
+    "hsk_level": 3
+}

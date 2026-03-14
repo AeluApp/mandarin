@@ -1,0 +1,117 @@
+{
+    "title": "Inviting a Friend for Hot Pot",
+    "title_zh": "约朋友吃火锅",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "It's getting cold outside. You call your friend Xiao He to suggest having hot pot together this weekend.",
+        "setup_zh": "天气越来越冷了。你打电话给朋友小何，想约他周末一起吃火锅。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Invite Xiao He for hot pot.",
+                "options": [
+                    {
+                        "text_zh": "小何，天冷了，我们周末一起去吃火锅吧！好久没吃了，特别想吃。",
+                        "text_pinyin": "Xiǎo Hé, tiān lěng le, wǒmen zhōumò yīqǐ qù chī huǒguō ba! Hǎojiǔ méi chī le, tèbié xiǎng chī.",
+                        "text_en": "Xiao He, it's getting cold — let's go have hot pot together this weekend! Haven't had it in ages, really craving it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural and enthusiastic — connects the weather to the food perfectly."
+                    },
+                    {
+                        "text_zh": "周末有空吗？想吃火锅。",
+                        "text_pinyin": "Zhōumò yǒu kòng ma? Xiǎng chī huǒguō.",
+                        "text_en": "Free this weekend? Want to eat hot pot.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gets to the point but not very warm."
+                    },
+                    {
+                        "text_zh": "我们应该出去吃饭。",
+                        "text_pinyin": "Wǒmen yīnggāi chūqù chīfàn.",
+                        "text_en": "We should go out to eat.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Vague — no specific plan."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "火锅！太好了！我也好久没吃了。你想吃辣的还是不辣的？上次那家四川火锅很好吃，要不要再去那里？",
+                "text_pinyin": "Huǒguō! Tài hǎo le! Wǒ yě hǎojiǔ méi chī le. Nǐ xiǎng chī là de háishi bú là de? Shàng cì nà jiā Sìchuān huǒguō hěn hǎochī, yào bú yào zài qù nàlǐ?",
+                "text_en": "Hot pot! Awesome! I haven't had it in ages either. Do you want spicy or non-spicy? That Sichuan hot pot place from last time was great — should we go back there?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the hot pot plan.",
+                "options": [
+                    {
+                        "text_zh": "好啊，就去那家！我们点鸳鸯锅吧，一半辣一半不辣，这样两种都能吃到。",
+                        "text_pinyin": "Hǎo a, jiù qù nà jiā! Wǒmen diǎn yuānyāng guō ba, yībàn là yībàn bú là, zhèyàng liǎng zhǒng dōu néng chī dào.",
+                        "text_en": "Sure, let's go there! We could get the split pot — half spicy, half mild — so we get both.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical and considerate — the split pot is a classic compromise."
+                    },
+                    {
+                        "text_zh": "我不能吃辣，你选吧。",
+                        "text_pinyin": "Wǒ bù néng chī là, nǐ xuǎn ba.",
+                        "text_en": "I can't eat spicy — you choose.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "States preference but defers entirely to him."
+                    },
+                    {
+                        "text_zh": "随便吧。",
+                        "text_pinyin": "Suíbiàn ba.",
+                        "text_en": "Whatever.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "You invited him — you should participate in planning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "鸳鸯锅好主意！那我们还叫小李和小张吧？人多吃火锅更开心。我来订位子，你约人，好不好？",
+                "text_pinyin": "Yuānyāng guō hǎo zhǔyi! Nà wǒmen hái jiào Xiǎo Lǐ hé Xiǎo Zhāng ba? Rén duō chī huǒguō gèng kāixīn. Wǒ lái dìng wèizi, nǐ yuē rén, hǎo bù hǎo?",
+                "text_en": "Split pot, good idea! Should we invite Xiao Li and Xiao Zhang too? More people makes hot pot more fun. I'll book the table, you invite the others — sound good?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the group plan.",
+                "options": [
+                    {
+                        "text_zh": "没问题！我现在就给他们发消息。我们周六晚上六点怎么样？",
+                        "text_pinyin": "Méi wèntí! Wǒ xiànzài jiù gěi tāmen fā xiāoxi. Wǒmen zhōuliù wǎnshang liù diǎn zěnmeyàng?",
+                        "text_en": "No problem! I'll message them now. How about Saturday evening at six?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Takes action immediately and proposes a specific time — good organizer."
+                    },
+                    {
+                        "text_zh": "好的，你安排吧。",
+                        "text_pinyin": "Hǎo de, nǐ ānpái ba.",
+                        "text_en": "Okay, you arrange it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Leaves all the work to him when you should share."
+                    },
+                    {
+                        "text_zh": "人太多了吧？",
+                        "text_pinyin": "Rén tài duō le ba?",
+                        "text_en": "Isn't that too many people?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Hot pot is better with more people — this seems reluctant."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Hot pot (火锅) is one of China's most social dining experiences — it's meant to be shared with friends and family around a communal pot. The 鸳鸯锅 (split pot) with half spicy and half mild is a popular compromise. Making plans for hot pot is a common way to gather friends during cold weather."
+    },
+    "hsk_level": 3
+}

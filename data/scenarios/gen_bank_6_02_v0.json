@@ -1,0 +1,196 @@
+{
+    "title": "The Lost Card Archaeologist",
+    "title_zh": "挂失考古学家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_bank_6_02_v0",
+    "tree": {
+        "setup": "The customer service area of ICBC, where beige partitions create a maze of numbered waiting areas. You've lost your bank card — or rather, your bank card has lost you, having last been seen somewhere between a hotpot restaurant and a taxi. The service representative, Ms. He, approaches card loss reports with the forensic thoroughness of a detective reconstructing a crime scene. She has a laminated flowchart pinned to her partition wall titled「挂失全流程」— the Complete Loss Report Process — and she follows it with devotional precision.",
+        "setup_zh": "工商银行的客户服务区，米色隔板构成了一个编号等候区的迷宫。你的银行卡丢了——或者更准确地说，你的银行卡把你弄丢了，最后一次出现是在一家火锅店和一辆出租车之间的某个地方。服务代表何女士以侦探重建犯罪现场般的取证彻底性处理银行卡挂失报告。她的隔板墙上钉着一张过塑的流程图，标题是「挂失全流程」——她以虔诚的精确度遵循着每一步。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问需要办理什么业务？",
+                "text_pinyin": "nín hǎo, qǐngwèn xūyào bànlǐ shénme yèwù?",
+                "text_en": "Hello, what service do you need?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report your lost card.",
+                "options": [
+                    {
+                        "text_zh": "何女士，你好。我的借记卡丢了，昨天晚上发现的。我已经在手机银行上做了临时挂失，但是我想来柜台正式办理挂失和补卡。卡里大概还有两万多块。",
+                        "text_pinyin": "Hé nǚshì, nǐ hǎo. wǒ de jièjì kǎ diū le, zuótiān wǎnshang fāxiàn de. wǒ yǐjīng zài shǒujī yínháng shàng zuò le línshí guàshī, dànshì wǒ xiǎng lái guìtái zhèngshì bànlǐ guàshī hé bǔ kǎ. kǎ lǐ dàgài hái yǒu liǎng wàn duō kuài.",
+                        "text_en": "Ms. He, hello. I lost my debit card — discovered it last night. I've already done a temporary freeze through mobile banking, but I'd like to formally report the loss and get a replacement card. There's about 20,000 yuan in the account.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Temporary freeze already done, timeline clear, balance noted — Ms. He's flowchart is halfway checked off before she even starts. This is her ideal client."
+                    },
+                    {
+                        "text_zh": "我银行卡丢了，需要挂失。",
+                        "text_pinyin": "wǒ yínháng kǎ diū le, xūyào guàshī.",
+                        "text_en": "I lost my bank card — I need to report it.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She begins the process. The flowchart glows with purpose."
+                    },
+                    {
+                        "text_zh": "我的卡不见了。钱还安全吗？",
+                        "text_pinyin": "wǒ de kǎ bújiàn le. qián hái ānquán ma?",
+                        "text_en": "My card is missing. Is my money safe?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The first question of every card-loss report. She reassures you while reaching for the flowchart."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "您已经做了临时挂失，非常好，账户目前是安全的。临时挂失有效期是五天，所以您今天来正式办理是对的。请出示您的身份证件。请问您记得卡号的后四位吗？",
+                "text_pinyin": "nín yǐjīng zuò le línshí guàshī, fēicháng hǎo, zhànghù mùqián shì ānquán de. línshí guàshī yǒuxiào qī shì wǔ tiān, suǒyǐ nín jīntiān lái zhèngshì bànlǐ shì duì de. qǐng chūshì nín de shēnfèn zhèngjiàn. qǐngwèn nín jìde kǎ hào de hòu sì wèi ma?",
+                "text_en": "You've already done a temporary freeze — excellent, the account is currently safe. Temporary freeze is valid for five days, so you're right to come in today. Please show your ID. Do you remember the last four digits of your card?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your ID and card details.",
+                "options": [
+                    {
+                        "text_zh": "这是我的护照。卡号后四位是8376。我还有之前办卡时的回执单，上面有完整卡号。另外，我查了一下手机银行，最后一笔消费是昨天下午五点在一家火锅店，之后没有异常交易。",
+                        "text_pinyin": "zhè shì wǒ de hùzhào. kǎ hào hòu sì wèi shì bā sān qī liù. wǒ hái yǒu zhīqián bàn kǎ shí de huízhí dān, shàngmiàn yǒu wánzhěng kǎ hào. lìngwài, wǒ chá le yíxià shǒujī yínháng, zuìhòu yì bǐ xiāofèi shì zuótiān xiàwǔ wǔ diǎn zài yì jiā huǒguō diàn, zhīhòu méiyǒu yìcháng jiāoyì.",
+                        "text_en": "Here's my passport. Last four digits are 8376. I also have the receipt from when I opened the account — it has the full card number. I checked mobile banking too — last transaction was at a hotpot restaurant at 5 PM yesterday, no unusual activity since.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Full card number backup, transaction timeline, and no anomalies — Ms. He's flowchart hums with satisfaction. This is forensic-level preparedness."
+                    },
+                    {
+                        "text_zh": "护照在这里。后四位我记得是8376。",
+                        "text_pinyin": "hùzhào zài zhèlǐ. hòu sì wèi wǒ jìde shì bā sān qī liù.",
+                        "text_en": "Passport's here. Last four digits are 8376, I think.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She'll verify against the system. Close enough to proceed."
+                    },
+                    {
+                        "text_zh": "护照给你。卡号我完全不记得了。",
+                        "text_pinyin": "hùzhào gěi nǐ. kǎ hào wǒ wánquán bú jìde le.",
+                        "text_en": "Here's my passport. I don't remember the card number at all.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She can look it up by passport — the system is thorough even when clients aren't."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "信息确认了，没有异常交易，这就放心了。现在正式办理挂失。挂失以后原来的卡就永久作废了。补办新卡的话，卡号会变。您绑定了微信支付和支付宝吗？补卡以后需要重新绑定。",
+                "text_pinyin": "xìnxī quèrèn le, méiyǒu yìcháng jiāoyì, zhè jiù fàngxīn le. xiànzài zhèngshì bànlǐ guàshī. guàshī yǐhòu yuánlái de kǎ jiù yǒngjiǔ zuòfèi le. bǔ bàn xīn kǎ de huà, kǎ hào huì biàn. nín bǎngdìng le Wēixìn zhīfù hé Zhīfùbǎo ma? bǔ kǎ yǐhòu xūyào chóngxīn bǎngdìng.",
+                "text_en": "Information confirmed — no unusual transactions, that's reassuring. Processing the formal loss report now. The original card will be permanently voided. The replacement card will have a new number. Have you linked WeChat Pay and Alipay? You'll need to re-link them after getting the new card."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the replacement process and timeline.",
+                "options": [
+                    {
+                        "text_zh": "微信和支付宝都绑定了，补卡以后我会重新绑定。请问新卡多久能拿到？在等新卡的这段时间，我能通过手机银行正常转账吗？",
+                        "text_pinyin": "Wēixìn hé Zhīfùbǎo dōu bǎngdìng le, bǔ kǎ yǐhòu wǒ huì chóngxīn bǎngdìng. qǐngwèn xīn kǎ duō jiǔ néng ná dào? zài děng xīn kǎ de zhè duàn shíjiān, wǒ néng tōngguò shǒujī yínháng zhèngcháng zhuǎn zhàng ma?",
+                        "text_en": "Both are linked — I'll re-bind them. How long until the new card arrives? While I wait, can I still do transfers through mobile banking?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical interim questions — Ms. He appreciates clients who think about the gap between old card and new card."
+                    },
+                    {
+                        "text_zh": "新卡什么时候能拿到？",
+                        "text_pinyin": "xīn kǎ shénme shíhòu néng ná dào?",
+                        "text_en": "When can I get the new card?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The key question. She checks the production schedule."
+                    },
+                    {
+                        "text_zh": "这几天没有卡怎么办？我需要用钱啊。",
+                        "text_pinyin": "zhè jǐ tiān méiyǒu kǎ zěnme bàn? wǒ xūyào yòng qián a.",
+                        "text_en": "What do I do without a card these days? I need money!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She has solutions for the interim — mobile banking, counter withdrawals with ID. The flowchart covers contingencies."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "新卡一般七个工作日出来。在这段时间里，手机银行的转账功能正常可用。如果需要取现金，可以带护照来柜台办理无卡取款。补卡手续费二十块。您现在需要设置新卡的密码，还是等拿到新卡再设？",
+                "text_pinyin": "xīn kǎ yìbān qī gè gōngzuò rì chūlái. zài zhè duàn shíjiān lǐ, shǒujī yínháng de zhuǎn zhàng gōngnéng zhèngcháng kěyòng. rúguǒ xūyào qǔ xiànjīn, kěyǐ dài hùzhào lái guìtái bànlǐ wú kǎ qǔ kuǎn. bǔ kǎ shǒuxù fèi èrshí kuài. nín xiànzài xūyào shèzhì xīn kǎ de mìmǎ, háishì děng ná dào xīn kǎ zài shè?",
+                "text_en": "New card takes about 7 business days. During this time, mobile banking transfers work normally. For cash withdrawals, bring your passport for counter service. Replacement fee is 20 yuan. Do you want to set the new card's PIN now, or when you pick it up?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on the PIN and ask about fraud protection.",
+                "options": [
+                    {
+                        "text_zh": "现在设密码吧，省得再跑一趟。对了，我想了解一下，如果以后发现丢失的那张卡在挂失之前被人用了，银行有什么保障措施吗？",
+                        "text_pinyin": "xiànzài shè mìmǎ ba, shěng de zài pǎo yí tàng. duì le, wǒ xiǎng liǎojiě yíxià, rúguǒ yǐhòu fāxiàn diūshī de nà zhāng kǎ zài guàshī zhīqián bèi rén yòng le, yínháng yǒu shénme bǎozhàng cuòshī ma?",
+                        "text_en": "Let me set it now to save a trip. By the way, if I discover the lost card was used before the freeze, does the bank have any protection measures?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about fraud liability — Ms. He pulls out a separate document. Insurance against unauthorized use is her second-favorite topic after flowcharts."
+                    },
+                    {
+                        "text_zh": "现在设吧。密码好了。",
+                        "text_pinyin": "xiànzài shè ba. mìmǎ hǎo le.",
+                        "text_en": "Set it now. PIN is done.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. She processes it and moves to the final steps."
+                    },
+                    {
+                        "text_zh": "等拿到卡再说吧。",
+                        "text_pinyin": "děng ná dào kǎ zài shuō ba.",
+                        "text_en": "I'll do it when I pick up the card.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She makes a note in the file. You'll set it during pickup — an extra step, but your choice."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果有未经授权的交易，您可以申请争议处理。银行会调查取证，一般六十天内给出结果。建议您保留手机银行上所有的交易记录截图。好了，挂失和补卡手续都办完了。七个工作日后凭护照来领新卡。这是您的业务回执。",
+                "text_pinyin": "rúguǒ yǒu wèi jīng shòuquán de jiāoyì, nín kěyǐ shēnqǐng zhēngyì chǔlǐ. yínháng huì diàochá qǔzhèng, yìbān liùshí tiān nèi gěi chū jiéguǒ. jiànyì nín bǎoliú shǒujī yínháng shàng suǒyǒu de jiāoyì jìlù jiétú. hǎo le, guàshī hé bǔ kǎ shǒuxù dōu bàn wán le. qī gè gōngzuò rì hòu píng hùzhào lái lǐng xīn kǎ. zhè shì nín de yèwù huízhí.",
+                "text_en": "For unauthorized transactions, you can file a dispute. The bank investigates and typically responds within 60 days. I'd recommend saving screenshots of all transaction records from mobile banking. OK, loss report and replacement are both processed. Come pick up the new card in 7 business days with your passport. Here's your receipt."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm the pickup.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢何女士。整个流程您解释得特别清楚，我心里踏实多了。七个工作日以后我来取卡。请问取卡的时候需要取号排队吗，还是直接找您？",
+                        "text_pinyin": "fēicháng gǎnxiè Hé nǚshì. zhěnggè liúchéng nín jiěshì de tèbié qīngchǔ, wǒ xīnlǐ tāshi duō le. qī gè gōngzuò rì yǐhòu wǒ lái qǔ kǎ. qǐngwèn qǔ kǎ de shíhòu xūyào qǔ hào páiduì ma, háishì zhíjiē zhǎo nín?",
+                        "text_en": "Thank you so much Ms. He. You explained the whole process very clearly — I feel much more at ease. I'll come for the card in 7 business days. Do I need to take a number when picking up, or can I come directly to you?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about the pickup process in advance — Ms. He marks your file with a small star. Her flowchart has been followed to perfection."
+                    },
+                    {
+                        "text_zh": "谢谢！七天后见。",
+                        "text_pinyin": "xièxie! qī tiān hòu jiàn.",
+                        "text_en": "Thanks! See you in seven days.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She smiles. The flowchart rests, its duty fulfilled until the next lost card arrives."
+                    },
+                    {
+                        "text_zh": "好的，回执我收好了。",
+                        "text_pinyin": "hǎo de, huízhí wǒ shōu hǎo le.",
+                        "text_en": "OK, I'll keep the receipt.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Keeping the receipt is the minimum. The flowchart's final checkbox is ticked."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese bank card loss reporting (挂失, guàshī) has two stages: temporary (临时挂失, done by phone or app, valid 5 days) and formal (正式挂失, done at the counter). Replacement cards get new numbers, requiring re-linking of WeChat Pay (微信支付) and Alipay (支付宝). Always keep photos of important card details as backup."
+    }
+}

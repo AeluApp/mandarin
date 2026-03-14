@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Ask which bus goes to the train station.",
                 "options": [
-                    {"text_zh": "你好，请问去火车站坐几路车？", "text_pinyin": "nǐ hǎo, qǐngwèn qù huǒchē zhàn zuò jǐ lù chē?", "text_en": "Hello, which bus number goes to the train station?", "score": 1.0, "register": "neutral", "feedback": "Perfect — 几路车 is exactly how you ask about bus numbers in Chinese."},
-                    {"text_zh": "对，我想去火车站，怎么走？", "text_pinyin": "duì, wǒ xiǎng qù huǒchē zhàn, zěnme zǒu?", "text_en": "Yes, I want to go to the train station, how do I get there?", "score": 0.7, "register": "casual", "feedback": "怎么走 works for walking directions — 坐几路车 is more specific for bus inquiries."},
-                    {"text_zh": "我不知道坐哪个车去火车站。", "text_pinyin": "wǒ bù zhīdào zuò nǎ ge chē qù huǒchē zhàn.", "text_en": "I don't know which bus goes to the train station.", "score": 0.5, "register": "casual", "feedback": "States your problem but doesn't ask a question — turning it into a question gets faster help."}
+                    {
+                        "text_zh": "你好，请问去火车站坐几路车？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn qù huǒchē zhàn zuò jǐ lù chē?",
+                        "text_en": "Hello, which bus number goes to the train station?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — 几路车 is exactly how you ask about bus numbers in Chinese."
+                    },
+                    {
+                        "text_zh": "请去火车站。",
+                        "text_pinyin": "qǐng qù huǒchē zhàn.",
+                        "text_en": "Please go to the train station.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask which bus goes to the train station, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "真的吗？那我要带伞出门了。",
+                        "text_pinyin": "zhēn de ma? nà wǒ yào dài sǎn chūmén le.",
+                        "text_en": "Really? Then I'll need to bring an umbrella.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask which bus goes to the train station, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Thank them and ask how long it takes.",
                 "options": [
-                    {"text_zh": "谢谢你！大概要多长时间？", "text_pinyin": "xièxie nǐ! dàgài yào duō cháng shíjiān?", "text_en": "Thank you! About how long does it take?", "score": 1.0, "register": "neutral", "feedback": "Natural follow-up — 大概 softens the question nicely."},
-                    {"text_zh": "好的，谢谢，车来了没有？", "text_pinyin": "hǎo de, xièxie, chē lái le méiyǒu?", "text_en": "OK thanks, has the bus come yet?", "score": 0.6, "register": "casual", "feedback": "Practical but slightly odd — you'd see the bus if it came. Asking about time is more useful."},
-                    {"text_zh": "太好了，谢谢你告诉我。", "text_pinyin": "tài hǎo le, xièxie nǐ gàosu wǒ.", "text_en": "Great, thanks for telling me.", "score": 0.7, "register": "neutral", "feedback": "Warm and grateful — a solid response even if you don't ask a follow-up."}
+                    {
+                        "text_zh": "你好，我手机没电了，请问现在几点？",
+                        "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?",
+                        "text_en": "Hi, my phone died, may I ask what time it is?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank them and ask how long it takes, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢你！大概要多长时间？",
+                        "text_pinyin": "xièxie nǐ! dàgài yào duō cháng shíjiān?",
+                        "text_en": "Thank you! About how long does it take?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Natural follow-up — 大概 softens the question nicely."
+                    },
+                    {
+                        "text_zh": "这是我爸爸妈妈，还有我姐姐。",
+                        "text_pinyin": "zhè shì wǒ bàba māma, háiyǒu wǒ jiějie.",
+                        "text_en": "These are my mom and dad, and my older sister.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank them and ask how long it takes, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

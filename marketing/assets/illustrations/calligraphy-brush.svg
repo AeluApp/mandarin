@@ -1,14 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- surface -->
-  <line x1="20" y1="48" x2="100" y2="48" stroke-width="0.5"/>
-  <!-- brush shaft (angled) -->
-  <line x1="45" y1="46" x2="72" y2="22" stroke-width="0.7"/>
-  <!-- brush tip taper -->
-  <path d="M45 46 Q43 48 44 50" stroke-width="0.5"/>
-  <path d="M45 46 Q47 48 46 50" stroke-width="0.5"/>
-  <!-- ink mark on surface -->
-  <path d="M38 48 Q42 46 48 48" stroke-width="0.6"/>
-  <!-- ink dots -->
-  <circle cx="36" cy="49" r="0.5" stroke-width="0.4"/>
-  <circle cx="50" cy="49.5" r="0.4" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- desk/table surface -->
+  <path d="M10 78 L190 78" stroke="#2a2a2a" stroke-width="0.8"/>
+  <rect x="10" y="78" width="180" height="2" stroke="none" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- rice paper sheet — slightly angled -->
+  <path d="M55 78 L60 38 L160 42 L155 78" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.02"/>
+  <!-- paper weight on top edge -->
+  <path d="M85 40 L130 42" stroke="#2a2a2a" stroke-width="1" opacity="0.6"/>
+  <!-- Chinese character being written (partial 学 xué) -->
+  <path d="M95 52 Q100 48 105 52" stroke="#2a2a2a" stroke-width="0.8" opacity="0.6"/>
+  <path d="M92 56 L108 56" stroke="#2a2a2a" stroke-width="0.7" opacity="0.6"/>
+  <path d="M100 48 L100 68" stroke="#2a2a2a" stroke-width="0.7" opacity="0.5"/>
+  <path d="M94 62 Q100 58 106 62" stroke="#2a2a2a" stroke-width="0.6" opacity="0.5"/>
+  <path d="M96 66 Q94 72 92 74" stroke="#2a2a2a" stroke-width="0.5" opacity="0.4"/>
+  <path d="M104 66 Q106 72 108 74" stroke="#2a2a2a" stroke-width="0.5" opacity="0.4"/>
+  <!-- brush — angled, resting on brush rest -->
+  <path d="M130 76 L158 28" stroke="#2a2a2a" stroke-width="1.2"/>
+  <!-- brush handle bamboo segments -->
+  <ellipse cx="138" cy="62" rx="0.8" ry="1.2" stroke="#2a2a2a" stroke-width="0.4" transform="rotate(-62 138 62)"/>
+  <ellipse cx="146" cy="48" rx="0.8" ry="1.2" stroke="#2a2a2a" stroke-width="0.4" transform="rotate(-62 146 48)"/>
+  <!-- brush tip — tapered, with ink -->
+  <path d="M130 76 Q128 80 126 84" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M130 76 Q132 80 130 84" stroke="#2a2a2a" stroke-width="0.6"/>
+  <path d="M126 84 Q128 86 130 84" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.15"/>
+  <!-- brush rest (simple mountain shape) -->
+  <path d="M120 78 L125 72 L130 78" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M126 78 L130 74 L134 78" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- ink stone — left side -->
+  <path d="M20 78 L22 62 Q26 58 36 58 Q42 58 46 62 L48 78" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- ink well (darker area) -->
+  <ellipse cx="34" cy="64" rx="8" ry="3" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.08"/>
+  <!-- grinding surface texture -->
+  <ellipse cx="34" cy="70" rx="6" ry="2" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <!-- ink stick beside stone -->
+  <rect x="50" y="70" width="4" height="10" rx="0.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- ink droplet trail -->
+  <circle cx="128" cy="78" r="0.6" fill="#2a2a2a" fill-opacity="0.15"/>
+  <circle cx="124" cy="78" r="0.4" fill="#2a2a2a" fill-opacity="0.1"/>
+  <!-- water dish -->
+  <ellipse cx="170" cy="76" rx="8" ry="2.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="170" cy="74" rx="6" ry="1.5" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.04"/>
 </svg>

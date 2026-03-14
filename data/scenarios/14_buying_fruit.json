@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Ask for apples and how much they cost.",
                 "options": [
-                    {"text_zh": "苹果怎么卖？我想买一些。", "text_pinyin": "píngguǒ zěnme mài? wǒ xiǎng mǎi yīxiē.", "text_en": "How much are the apples? I'd like to buy some.", "score": 1.0, "register": "neutral", "feedback": "怎么卖 is the natural way to ask about price at a market stall."},
-                    {"text_zh": "我想买苹果，多少钱一斤？", "text_pinyin": "wǒ xiǎng mǎi píngguǒ, duōshao qián yī jīn?", "text_en": "I want to buy apples, how much per jin?", "score": 0.8, "register": "neutral", "feedback": "Also natural — asking per 斤 shows you know the unit. Both approaches work well."},
-                    {"text_zh": "这个苹果好不好吃啊？", "text_pinyin": "zhè ge píngguǒ hǎo bù hǎo chī a?", "text_en": "Are these apples tasty?", "score": 0.5, "register": "casual", "feedback": "A reasonable question but doesn't get to the purchase — ask price to move things along."}
+                    {
+                        "text_zh": "苹果怎么卖？我想买一些。",
+                        "text_pinyin": "píngguǒ zěnme mài? wǒ xiǎng mǎi yīxiē.",
+                        "text_en": "How much are the apples? I'd like to buy some.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "怎么卖 is the natural way to ask about price at a market stall."
+                    },
+                    {
+                        "text_zh": "谢谢！三点要见朋友，我得走了。",
+                        "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.",
+                        "text_en": "Thanks! I'm meeting a friend at three, I have to go.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask for apples and how much they cost, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "老师，我没听懂，请您再说一次。",
+                        "text_pinyin": "lǎoshī, wǒ méi tīng dǒng, qǐng nín zài shuō yī cì.",
+                        "text_en": "Teacher, I didn't understand, please say it once more.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask for apples and how much they cost, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Say you want to buy two jin of apples.",
                 "options": [
-                    {"text_zh": "好的，给我来两斤吧。", "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.", "text_en": "OK, give me two jin please.", "score": 1.0, "register": "casual", "feedback": "来两斤 is the natural market phrasing — sounds like a regular customer."},
-                    {"text_zh": "我要两斤苹果，谢谢你。", "text_pinyin": "wǒ yào liǎng jīn píngguǒ, xièxie nǐ.", "text_en": "I want two jin of apples, thank you.", "score": 0.7, "register": "neutral", "feedback": "Clear and polite, though 来两斤 is more natural at a stall than 我要."},
-                    {"text_zh": "两斤可以，能便宜一点吗？", "text_pinyin": "liǎng jīn kěyǐ, néng piányi yīdiǎn ma?", "text_en": "Two jin is fine, can it be a bit cheaper?", "score": 0.6, "register": "casual", "feedback": "Bargaining is common at stalls, but at 5 yuan per jin it's already cheap — might seem unnecessary."}
+                    {
+                        "text_zh": "是啊，今天很暖和，很舒服。",
+                        "text_pinyin": "shì a, jīntiān hěn nuǎnhuo, hěn shūfu.",
+                        "text_en": "Yes, it's warm today, very comfortable.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you want to buy two jin of apples, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢你！大概要多长时间？",
+                        "text_pinyin": "xièxie nǐ! dàgài yào duō cháng shíjiān?",
+                        "text_en": "Thank you! About how long does it take?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you want to buy two jin of apples, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好的，给我来两斤吧。",
+                        "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.",
+                        "text_en": "OK, give me two jin please.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "来两斤 is the natural market phrasing — sounds like a regular customer."
+                    }
                 ]
             }
         ],

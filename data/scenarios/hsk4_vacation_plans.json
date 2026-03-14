@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Suggest a destination and explain why.",
                 "options": [
-                    {"text_zh": "我觉得可以去云南。那边风景特别美，而且吃住都不算太贵。我们可以先去大理，然后再去丽江。你觉得怎么样？", "text_pinyin": "wǒ juéde kěyǐ qù yúnnán. nà biān fēngjǐng tèbié měi, érqiě chī zhù dōu bú suàn tài guì. wǒmen kěyǐ xiān qù dàlǐ, ránhòu zài qù lìjiāng. nǐ juéde zěnmeyàng?", "text_en": "I think we could go to Yunnan. The scenery is especially beautiful, and food and lodging aren't too expensive. We could go to Dali first, then Lijiang. What do you think?", "score": 1.0, "register": "casual", "feedback": "Specific and well-reasoned -- naming actual places (大理, 丽江) with a logical itinerary shows planning ability. Asking for their opinion keeps it collaborative."},
-                    {"text_zh": "去海边怎么样？比如厦门或者三亚，可以游泳和吃海鲜。", "text_pinyin": "qù hǎibiān zěnmeyàng? bǐrú xiàmén huòzhě sānyà, kěyǐ yóuyǒng hé chī hǎixiān.", "text_en": "How about the beach? Like Xiamen or Sanya -- we could swim and eat seafood.", "score": 0.7, "register": "casual", "feedback": "Good suggestion with specific options. But 三亚 during National Day is quite expensive and crowded -- consider mentioning that trade-off."},
-                    {"text_zh": "随便吧，你决定就好。我哪儿都行。", "text_pinyin": "suíbiàn ba, nǐ juédìng jiù hǎo. wǒ nǎr dōu xíng.", "text_en": "Whatever, you decide. I'm fine with anywhere.", "score": 0.3, "register": "casual", "feedback": "Too passive -- your friend is looking for input and collaboration. Suggesting even one idea shows you're engaged in the planning."}
+                    {
+                        "text_zh": "我觉得可以去云南。那边风景特别美，而且吃住都不算太贵。我们可以先去大理，然后再去丽江。你觉得怎么样？",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán. nà biān fēngjǐng tèbié měi, érqiě chī zhù dōu bú suàn tài guì. wǒmen kěyǐ xiān qù dàlǐ, ránhòu zài qù lìjiāng. nǐ juéde zěnmeyàng?",
+                        "text_en": "I think we could go to Yunnan. The scenery is especially beautiful, and food and lodging aren't too expensive. We could go to Dali first, then Lijiang. What do you think?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific and well-reasoned -- naming actual places (大理, 丽江) with a logical itinerary shows planning ability. Asking for their opinion keeps it collaborative."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Discuss budget and how to deal with crowds.",
                 "options": [
-                    {"text_zh": "我觉得每人预算五千左右比较合理。为了省钱，我们可以坐火车去，虽然时间长一点，但能省不少机票钱。至于人多的问题，我们可以避开最热门的景点，去一些小众的地方。", "text_pinyin": "wǒ juéde měi rén yùsuàn wǔ qiān zuǒyòu bǐjiào hélǐ. wèile shěng qián, wǒmen kěyǐ zuò huǒchē qù, suīrán shíjiān cháng yīdiǎn, dàn néng shěng bùshǎo jīpiào qián. zhìyú rén duō de wèntí, wǒmen kěyǐ bìkāi zuì rèmén de jǐngdiǎn, qù yīxiē xiǎozhòng de dìfāng.", "text_en": "I think a budget of about 5,000 per person is reasonable. To save money, we could take the train -- it takes longer, but we'd save a lot on airfare. As for the crowds, we can avoid the most popular attractions and visit some lesser-known places.", "score": 1.0, "register": "casual", "feedback": "Practical and detailed -- addresses both concerns (budget and crowds) with concrete solutions. Using 小众 shows awareness of travel culture."},
-                    {"text_zh": "预算嘛，越少越好。我们可以住青年旅舍，吃路边摊。", "text_pinyin": "yùsuàn ma, yuè shǎo yuè hǎo. wǒmen kěyǐ zhù qīngnián lǚshè, chī lùbiān tān.", "text_en": "Budget, the less the better. We can stay in hostels and eat street food.", "score": 0.6, "register": "casual", "feedback": "Budget-conscious ideas, but 越少越好 is vague. Giving a specific number helps both of you plan realistically."},
-                    {"text_zh": "别担心钱的事，到时候再说。先把地方定下来吧。", "text_pinyin": "bié dānxīn qián de shì, dào shíhou zài shuō. xiān bǎ dìfāng dìng xiàlái ba.", "text_en": "Don't worry about money, we'll figure it out later. Let's decide the place first.", "score": 0.4, "register": "casual", "feedback": "Avoids the budget question -- but during holidays, prices change fast. Agreeing on a budget early prevents misunderstandings later."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    },
+                    {
+                        "text_zh": "我觉得每人预算五千左右比较合理。为了省钱，我们可以坐火车去，虽然时间长一点，但能省不少机票钱。至于人多的问题，我们可以避开最热门的景点，去一些小众的地方。",
+                        "text_pinyin": "wǒ juéde měi rén yùsuàn wǔ qiān zuǒyòu bǐjiào hélǐ. wèile shěng qián, wǒmen kěyǐ zuò huǒchē qù, suīrán shíjiān cháng yīdiǎn, dàn néng shěng bùshǎo jīpiào qián. zhìyú rén duō de wèntí, wǒmen kěyǐ bìkāi zuì rèmén de jǐngdiǎn, qù yīxiē xiǎozhòng de dìfāng.",
+                        "text_en": "I think a budget of about 5,000 per person is reasonable. To save money, we could take the train -- it takes longer, but we'd save a lot on airfare. As for the crowds, we can avoid the most popular attractions and visit some lesser-known places.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical and detailed -- addresses both concerns (budget and crowds) with concrete solutions. Using 小众 shows awareness of travel culture."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Suggest a plan for booking arrangements.",
                 "options": [
-                    {"text_zh": "越早越好。这周末我们一起上网查一下火车票和住宿的价格，比较一下几家民宿，然后马上预订。对了，还要提前查好当地的天气情况。", "text_pinyin": "yuè zǎo yuè hǎo. zhè zhōumò wǒmen yīqǐ shàngwǎng chá yīxià huǒchē piào hé zhùsù de jiàgé, bǐjiào yīxià jǐ jiā mínsù, ránhòu mǎshàng yùdìng. duìle, hái yào tíqián chá hǎo dāngdì de tiānqì qíngkuàng.", "text_en": "The sooner the better. This weekend let's look up train tickets and accommodation prices online together, compare a few guesthouses, and book right away. Oh, and we should check the local weather in advance too.", "score": 1.0, "register": "casual", "feedback": "Organized and proactive -- specific timeline (this weekend), concrete steps (compare, book, check weather). Shows good travel planning habits."},
-                    {"text_zh": "那我们这周就开始订吧，不然来不及了。", "text_pinyin": "nà wǒmen zhè zhōu jiù kāishǐ dìng ba, bùrán láibùjí le.", "text_en": "Let's start booking this week then, otherwise it'll be too late.", "score": 0.7, "register": "casual", "feedback": "Shows urgency, which is appropriate. But more specific steps (who looks up what, when to meet to decide) would help."},
-                    {"text_zh": "你帮我订吧，我最近比较忙。", "text_pinyin": "nǐ bāng wǒ dìng ba, wǒ zuìjìn bǐjiào máng.", "text_en": "You book it for me, I'm pretty busy lately.", "score": 0.3, "register": "casual", "feedback": "Pushing all the work to your friend is inconsiderate. Travel planning should be shared -- at minimum, offer to handle one part of it."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    },
+                    {
+                        "text_zh": "越早越好。这周末我们一起上网查一下火车票和住宿的价格，比较一下几家民宿，然后马上预订。对了，还要提前查好当地的天气情况。",
+                        "text_pinyin": "yuè zǎo yuè hǎo. zhè zhōumò wǒmen yīqǐ shàngwǎng chá yīxià huǒchē piào hé zhùsù de jiàgé, bǐjiào yīxià jǐ jiā mínsù, ránhòu mǎshàng yùdìng. duìle, hái yào tíqián chá hǎo dāngdì de tiānqì qíngkuàng.",
+                        "text_en": "The sooner the better. This weekend let's look up train tickets and accommodation prices online together, compare a few guesthouses, and book right away. Oh, and we should check the local weather in advance too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Organized and proactive -- specific timeline (this weekend), concrete steps (compare, book, check weather). Shows good travel planning habits."
+                    }
                 ]
             }
         ],

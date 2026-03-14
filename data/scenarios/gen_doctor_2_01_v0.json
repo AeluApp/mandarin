@@ -1,0 +1,94 @@
+{
+    "title": "The Prescription Pickup",
+    "title_zh": "取药",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_2_01_v0",
+    "tree": {
+        "setup": "The hospital pharmacy window, a long counter with a glass partition. Pharmacist Xiao Liang works with the calm efficiency of someone who has filled ten thousand prescriptions. She knows every medicine by its box color and can find them without looking at the shelf labels. Today she's training a new assistant who keeps putting things back in the wrong place.",
+        "setup_zh": "医院药房窗口，长长的柜台有玻璃隔板。药剂师小梁工作又快又稳，像是开过一万张处方的人。她认识每种药的包装颜色，不看标签就能找到。今天她在教新助手，新来的总把药放错地方。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请把处方给我看一下。",
+                "text_pinyin": "qǐng bǎ chǔfāng gěi wǒ kàn yíxià.",
+                "text_en": "Please let me see the prescription."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your prescription.",
+                "options": [
+                    {
+                        "text_zh": "给你。医生开了三种药。",
+                        "text_pinyin": "gěi nǐ. yīshēng kāi le sān zhǒng yào.",
+                        "text_en": "Here you go. The doctor prescribed three kinds of medicine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Liang scans the prescription and is already reaching for boxes before finishing reading it.「对，三种。」种 (zhǒng) is the measure word for types or kinds."
+                    },
+                    {
+                        "text_zh": "这是处方。",
+                        "text_pinyin": "zhè shì chǔfāng.",
+                        "text_en": "This is the prescription.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Liang takes it and reads quickly. Behind her, the new assistant is holding a box of cold medicine upside down. She does not notice. Yet."
+                    },
+                    {
+                        "text_zh": "处方在哪里？我找一下……",
+                        "text_pinyin": "chǔfāng zài nǎlǐ? wǒ zhǎo yíxià...",
+                        "text_en": "Where's the prescription? Let me look...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Liang waits patiently while you search your pockets. She has seen this exact performance hundreds of times. Check the inside jacket pocket -- it's always there."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。这是你的药。这个白色的饭前吃，这个蓝色的饭后吃。",
+                "text_pinyin": "hǎo de. zhè shì nǐ de yào. zhè ge báisè de fàn qián chī, zhè ge lán sè de fàn hòu chī.",
+                "text_en": "OK. Here's your medicine. The white one before meals, the blue one after meals."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm you understand the instructions.",
+                "options": [
+                    {
+                        "text_zh": "白色的饭前，蓝色的饭后。明白了。",
+                        "text_pinyin": "báisè de fàn qián, lán sè de fàn hòu. míngbai le.",
+                        "text_en": "White before meals, blue after. Got it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Liang nods with satisfaction. Repeating instructions back is exactly what she hopes patients will do. 明白了 means 'I understand' -- more active than 知道了."
+                    },
+                    {
+                        "text_zh": "一天吃几次？",
+                        "text_pinyin": "yì tiān chī jǐ cì?",
+                        "text_en": "How many times a day?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「一天三次。」Xiao Liang writes it on the box in marker. She does this for everyone -- she's learned not to trust memory. 几次 asks 'how many times.'"
+                    },
+                    {
+                        "text_zh": "这个药苦不苦？",
+                        "text_pinyin": "zhè ge yào kǔ bu kǔ?",
+                        "text_en": "Is this medicine bitter?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Liang pauses. She has tasted none of these medicines and has no intention of starting.「吃的时候多喝水就好了。」The A不A question form (苦不苦) is natural for asking about properties."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一共四十五块。吃了不舒服就回来。",
+                "text_pinyin": "yígòng sìshíwǔ kuài. chī le bù shūfu jiù huílái.",
+                "text_en": "Forty-five yuan total. Come back if you feel unwell after taking them."
+            }
+        ],
+        "cultural_note": "Chinese hospital pharmacies (药房) are usually inside the hospital. Medicine is often cheaper at hospital pharmacies than at private drugstores. 饭前 (fàn qián, before meals) and 饭后 (fàn hòu, after meals) are the two most important timing instructions."
+    }
+}

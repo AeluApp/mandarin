@@ -1,0 +1,83 @@
+{
+  "title": "A Letter from Home",
+  "title_zh": "家里的信",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "At the post office, the clerk notices you received a letter from abroad. She chats with you while you sign.",
+    "setup_zh": "在邮局，工作人员发现你收到了一封国外的信。她一边让你签名一边跟你聊。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "国外来的信！现在很少有人寄信了。是家人寄的吧？",
+        "text_pinyin": "Guówài lái de xìn! Xiànzài hěn shǎo yǒu rén jì xìn le. Shì jiārén jì de ba?",
+        "text_en": "A letter from abroad! Very few people send letters anymore. From family, right?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her about the letter.",
+        "options": [
+          {
+            "text_zh": "是我妈妈寄的。她不太会用手机，喜欢写信。",
+            "text_pinyin": "Shì wǒ māma jì de. Tā bú tài huì yòng shǒujī, xǐhuan xiě xìn.",
+            "text_en": "It's from my mom. She's not great with phones — she likes writing letters.",
+            "score": 1.0,
+            "feedback": "Warm and personal — shares a sweet detail.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不知道是谁寄的。",
+            "text_pinyin": "Wǒ bù zhīdào shì shéi jì de.",
+            "text_en": "I don't know who sent it.",
+            "score": 0.0,
+            "feedback": "You can see who it's from on the envelope."
+          },
+          {
+            "text_zh": "寄信很贵吗？",
+            "text_pinyin": "Jì xìn hěn guì ma?",
+            "text_en": "Is it expensive to send a letter?",
+            "score": 0.0,
+            "feedback": "She asked who sent it."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你妈妈真好。我妈妈以前也喜欢给我写信。收到信的感觉和收到消息不一样。",
+        "text_pinyin": "Nǐ māma zhēn hǎo. Wǒ māma yǐqián yě xǐhuan gěi wǒ xiě xìn. Shōu dào xìn de gǎnjué hé shōu dào xiāoxi bù yīyàng.",
+        "text_en": "Your mom is so sweet. My mom used to write me letters too. Getting a letter feels different from getting a message."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Agree and share your feelings.",
+        "options": [
+          {
+            "text_zh": "对，信是慢的，但是更有温度。拿在手里感觉不一样。",
+            "text_pinyin": "Duì, xìn shì màn de, dànshì gèng yǒu wēndù. Ná zài shǒu lǐ gǎnjué bù yīyàng.",
+            "text_en": "Yes, letters are slow, but they have more warmth. Holding them in your hand feels different.",
+            "score": 1.0,
+            "feedback": "And genuine — captures the magic of handwritten letters.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "对，信比较慢。现在发消息更快更方便。",
+            "text_pinyin": "Duì, xìn bǐjiào màn. Xiànzài fā xiāoxi gèng kuài gèng fāngbiàn.",
+            "text_en": "Yeah, letters are slow. Sending messages now is faster and more convenient.",
+            "score": 0.0,
+            "feedback": "She pauses, letter still in her hand. You agreed with the fact but missed the feeling."
+          },
+          {
+            "text_zh": "你们邮局几点关门？",
+            "text_pinyin": "Nǐmen yóujú jǐ diǎn guānmén?",
+            "text_en": "What time does the post office close?",
+            "score": 0.0,
+            "feedback": "She's sharing a personal memory."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Handwritten letters carry emotional weight that digital messages cannot replicate. In China, where WeChat dominates communication, receiving a physical letter is increasingly rare and precious. Post office clerks often notice and appreciate these moments."
+  }
+}

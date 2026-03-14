@@ -1,0 +1,87 @@
+{
+    "title": "Morning at the Corner Shop",
+    "title_zh": "早上的小店",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You stop at a small neighborhood shop on your morning walk. The shopkeeper, Auntie Wang, greets you warmly. The shop smells like fresh baozi.",
+        "setup_zh": "你早上散步时走进一家小店。店主王阿姨热情地跟你打招呼。店里有新鲜包子的香味。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早上好！你今天想买什么？",
+                "text_pinyin": "Zǎoshang hǎo! Nǐ jīntiān xiǎng mǎi shénme?",
+                "text_en": "Good morning! What would you like to buy today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you want to buy.",
+                "options": [
+                    {
+                        "text_zh": "我想买两个包子。",
+                        "text_pinyin": "Wǒ xiǎng mǎi liǎng ge bāozi.",
+                        "text_en": "I'd like to buy two baozi.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Answers exactly what she asked -- clear and natural for a morning shop visit."
+                    },
+                    {
+                        "text_zh": "包子多少钱？",
+                        "text_pinyin": "Bāozi duōshǎo qián?",
+                        "text_en": "How much are the baozi?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "On-topic and practical, but she was expecting you to say what you want, not haggle first."
+                    },
+                    {
+                        "text_zh": "你今天开门很早啊。",
+                        "text_pinyin": "Nǐ jīntiān kāi mén hěn zǎo a.",
+                        "text_en": "You opened very early today.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Acknowledges the shop but ignores her question -- she asked what you want to buy, not about her schedule."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！两个包子，一共四块钱。你要喝水吗？",
+                "text_pinyin": "Hǎo de! Liǎng ge bāozi, yīgòng sì kuài qián. Nǐ yào hē shuǐ ma?",
+                "text_en": "Okay! Two baozi, four yuan total. Would you like some water?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her offer of water.",
+                "options": [
+                    {
+                        "text_zh": "好的，我要一瓶水。谢谢！",
+                        "text_pinyin": "Hǎo de, wǒ yào yī píng shuǐ. Xièxie!",
+                        "text_en": "Sure, I'll have a bottle of water. Thanks!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to her offer of water directly -- polite and keeps the transaction moving."
+                    },
+                    {
+                        "text_zh": "不用了，谢谢。",
+                        "text_pinyin": "Bú yòng le, xièxie.",
+                        "text_en": "No thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Politely declines, which is fine, but misses a chance to continue the warm exchange."
+                    },
+                    {
+                        "text_zh": "你们的包子是什么馅的？",
+                        "text_pinyin": "Nǐmen de bāozi shì shénme xiàn de?",
+                        "text_en": "What filling are your baozi?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "About the shop's food, but she already moved on to offering water -- asking about filling now is out of step."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small neighborhood shops (小店) are the heartbeat of Chinese daily life. Shopkeepers often know their regulars by name and greet them warmly each morning. Buying breakfast from these shops — baozi, soy milk, fried dough — is a gentle daily ritual."
+    }
+}

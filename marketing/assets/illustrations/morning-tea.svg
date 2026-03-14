@@ -1,13 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="36" x2="120" y2="36" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- window frame in background -->
+  <rect x="50" y="4" width="100" height="50" stroke="#2a2a2a" stroke-width="0.5" opacity="0.3"/>
+  <!-- window mullions -->
+  <line x1="100" y1="4" x2="100" y2="54" stroke="#2a2a2a" stroke-width="0.3" opacity="0.25"/>
+  <line x1="50" y1="29" x2="150" y2="29" stroke="#2a2a2a" stroke-width="0.3" opacity="0.25"/>
+  <!-- light through window — soft gradient suggestion -->
+  <rect x="52" y="6" width="46" height="22" stroke="none" fill="#2a2a2a" fill-opacity="0.015"/>
+  <rect x="102" y="6" width="46" height="22" stroke="none" fill="#2a2a2a" fill-opacity="0.015"/>
   <!-- table surface -->
-  <line x1="20" y1="48" x2="100" y2="48" stroke-width="0.5"/>
-  <!-- teacup -->
-  <circle cx="60" cy="44" r="4" stroke-width="0.6"/>
-  <!-- saucer line -->
-  <path d="M54 48 Q60 46 66 48" stroke-width="0.4"/>
-  <!-- steam wisps -->
-  <path d="M58 39 Q57 36 58 33" stroke-width="0.4"/>
-  <path d="M62 38 Q63 35 62 32" stroke-width="0.4"/>
+  <path d="M10 78 L190 78" stroke="#2a2a2a" stroke-width="0.8"/>
+  <rect x="10" y="78" width="180" height="2" stroke="none" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- table legs -->
+  <line x1="22" y1="80" x2="20" y2="98" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="178" y1="80" x2="180" y2="98" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- bamboo tray/saucer -->
+  <ellipse cx="100" cy="78" rx="28" ry="4" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- gaiwan (lidded teacup) — base -->
+  <path d="M86 78 Q86 66 92 62 Q96 60 100 60 Q104 60 108 62 Q114 66 114 78" stroke="#2a2a2a" stroke-width="0.7"/>
+  <!-- gaiwan saucer detail -->
+  <path d="M82 78 Q100 74 118 78" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- gaiwan lid -->
+  <path d="M88 62 Q100 56 112 62" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- lid knob -->
+  <ellipse cx="100" cy="57" rx="3" ry="1.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- steam curls — elegant, calligraphic -->
+  <path d="M96 54 Q94 46 96 40 Q98 34 95 28" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <path d="M100 52 Q102 44 100 38 Q98 30 100 24" stroke="#2a2a2a" stroke-width="0.4" opacity="0.35"/>
+  <path d="M104 54 Q106 46 104 40 Q102 34 105 26" stroke="#2a2a2a" stroke-width="0.35" opacity="0.3"/>
+  <path d="M98 56 Q96 50 98 44" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <!-- small tea cups beside gaiwan -->
+  <path d="M48 78 Q48 72 52 70 Q56 72 56 78" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M140 78 Q140 72 144 70 Q148 72 148 78" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- tea in small cups -->
+  <ellipse cx="52" cy="72" rx="3.5" ry="0.8" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.06"/>
+  <ellipse cx="144" cy="72" rx="3.5" ry="0.8" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.06"/>
+  <!-- small tea wisp -->
+  <path d="M52 70 Q51 66 52 62" stroke="#2a2a2a" stroke-width="0.2" opacity="0.2"/>
+  <!-- tea leaves container -->
+  <path d="M160 78 L160 68 Q162 66 166 66 Q170 66 172 68 L172 78" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="166" cy="66" rx="6" ry="2" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- cloth/napkin folded on table -->
+  <path d="M28 78 L30 72 L44 72 L46 78" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <path d="M30 72 Q37 70 44 72" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
 </svg>

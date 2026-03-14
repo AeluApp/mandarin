@@ -1,0 +1,117 @@
+{
+  "title": "Rain on the Old Bridge",
+  "title_zh": "老桥上的雨",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.45,
+  "tree": {
+    "setup": "You're standing under an awning near an old stone bridge in a small town. A retired teacher, Uncle Wang, is watching the rain with you. The streets are quiet.",
+    "setup_zh": "你站在一座小镇老石桥旁的雨棚下。一位退休老师王叔叔正和你一起看雨。街上很安静。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这种雨，小时候我们叫它「牛毛雨」。细细的，不急。现在的年轻人都打伞跑，没人停下来看了。",
+        "text_pinyin": "Zhè zhǒng yǔ, xiǎo shíhou wǒmen jiào tā 'niúmáo yǔ'. Xì xì de, bù jí. Xiànzài de niánqīng rén dōu dǎ sǎn pǎo, méi rén tíng xiàlái kàn le.",
+        "text_en": "This kind of rain, when I was little we called it 'ox-hair rain.' Fine and gentle. Nowadays young people all run with umbrellas, nobody stops to watch anymore."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Uncle Wang about the rain.",
+        "options": [
+          {
+            "text_zh": "牛毛雨，这个名字真好听。我也觉得这种雨不用躲，站在这里听一听，心里很安静。",
+            "text_pinyin": "Niúmáo yǔ, zhège míngzì zhēn hǎotīng. Wǒ yě juéde zhè zhǒng yǔ bú yòng duǒ, zhàn zài zhèlǐ tīng yī tīng, xīn lǐ hěn ānjìng.",
+            "text_en": "'Ox-hair rain,' what a beautiful name. I also feel you don't need to hide from this kind of rain. Just standing here listening makes the heart quiet.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Gentle and attentive — appreciates the name and matches the reflective mood."
+          },
+          {
+            "text_zh": "明天天气怎么样？我想出去买东西。",
+            "text_pinyin": "Míngtiān tiānqì zěnmeyàng? Wǒ xiǎng chūqù mǎi dōngxi.",
+            "text_en": "What's the weather like tomorrow? I want to go shopping.",
+            "score": 0.0,
+            "feedback": "Pivots to logistics instead of savoring the moment."
+          },
+          {
+            "text_zh": "你退休以后每天做什么运动？",
+            "text_pinyin": "Nǐ tuìxiū yǐhòu měi tiān zuò shénme yùndòng?",
+            "text_en": "What exercise do you do every day since retiring?",
+            "score": 0.0,
+            "feedback": "Ignores the poetic observation about rain."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊。以前放学的时候，我们故意不打伞，在雨里慢慢走回家。鞋子湿了没关系，开心就好。",
+        "text_pinyin": "Shì a. Yǐqián fàngxué de shíhou, wǒmen gùyì bù dǎ sǎn, zài yǔ lǐ mànman zǒu huí jiā. Xiézi shī le méi guānxi, kāixīn jiù hǎo.",
+        "text_en": "Yeah. After school back then, we'd deliberately not use umbrellas and walk home slowly in the rain. Wet shoes didn't matter, as long as we were happy."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share a similar memory or feeling.",
+        "options": [
+          {
+            "text_zh": "我小时候也喜欢在雨里玩。现在长大了，好像忘了那种感觉。也许我们不是怕淋雨，是怕浪费时间。",
+            "text_pinyin": "Wǒ xiǎo shíhou yě xǐhuān zài yǔ lǐ wán. Xiànzài zhǎng dà le, hǎoxiàng wàng le nà zhǒng gǎnjué. Yěxǔ wǒmen bú shì pà lín yǔ, shì pà làngfèi shíjiān.",
+            "text_en": "I liked playing in the rain when I was little too. Now that I've grown up, I seem to have forgotten that feeling. Maybe we're not afraid of getting wet — we're afraid of wasting time.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Reflective and honest — connects childhood joy to adult anxieties about productivity."
+          },
+          {
+            "text_zh": "你家离这里远不远？",
+            "text_pinyin": "Nǐ jiā lí zhèlǐ yuǎn bù yuǎn?",
+            "text_en": "Is your home far from here?",
+            "score": 0.0,
+            "feedback": "Mundane question that breaks the reflective atmosphere."
+          },
+          {
+            "text_zh": "下雨天路很滑，你要小心。",
+            "text_pinyin": "Xià yǔ tiān lù hěn huá, nǐ yào xiǎoxīn.",
+            "text_en": "The road is slippery on rainy days, you should be careful.",
+            "score": 0.0,
+            "feedback": "Practical advice that misses the emotional thread."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "怕浪费时间……你说得对。什么时候开始，淋雨变成了浪费时间呢？",
+        "text_pinyin": "Pà làngfèi shíjiān…… nǐ shuō de duì. Shénme shíhou kāishǐ, lín yǔ biàn chéng le làngfèi shíjiān ne?",
+        "text_en": "Afraid of wasting time... you're right. When did getting rained on become a waste of time?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his question.",
+        "options": [
+          {
+            "text_zh": "大概是从我们开始用「有没有用」来衡量每件事的时候吧。淋雨没有用，所以我们不淋了。但有些事情的意义不在于有没有用。",
+            "text_pinyin": "Dàgài shì cóng wǒmen kāishǐ yòng 'yǒu méiyǒu yòng' lái héngliáng měi jiàn shì de shíhou ba. Lín yǔ méiyǒu yòng, suǒyǐ wǒmen bù lín le. Dàn yǒuxiē shìqíng de yìyì bú zàiyú yǒu méiyǒu yòng.",
+            "text_en": "Probably from the moment we started measuring everything by 'is it useful or not.' Getting rained on isn't useful, so we stopped. But the meaning of some things isn't about usefulness.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Observation about how utilitarian thinking erodes simple pleasures."
+          },
+          {
+            "text_zh": "我觉得是因为大家都太忙了，没时间休息。",
+            "text_pinyin": "Wǒ juéde shì yīnwèi dàjiā dōu tài máng le, méi shíjiān xiūxi.",
+            "text_en": "I think it's because everyone is too busy, no time to rest.",
+            "score": 0.0,
+            "feedback": "Surface-level answer that doesn't engage with the deeper question."
+          },
+          {
+            "text_zh": "你知道这附近有没有好吃的面馆？",
+            "text_pinyin": "Nǐ zhīdào zhè fùjìn yǒu méiyǒu hǎochī de miànguǎn?",
+            "text_en": "Do you know if there's a good noodle shop nearby?",
+            "score": 0.0,
+            "feedback": "Food question during a philosophical moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The term 牛毛雨 (niúmáo yǔ, ox-hair rain) is a traditional Chinese expression for very fine, misty rain. In Chinese culture, rain is often associated with nostalgia and reflection. The idea that modern life has made people too busy to appreciate small natural pleasures reflects a common sentiment among older generations."
+  }
+}

@@ -1,0 +1,160 @@
+{
+    "title": "The Directional Poet",
+    "title_zh": "指路诗人",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_5_02_v0",
+    "tree": {
+        "setup": "A T-intersection near a university district, the afternoon sun casting long shadows across a street lined with plane trees. You need to find the Xinhua Bookstore, which your phone insists is \"nearby\" — a word that has lost all meaning in this city. Auntie Hua, a woman selling roasted sweet potatoes from a cart, has stationed herself at this intersection for eleven years and knows every building within a fifteen-minute radius by both its official name and its neighborhood nickname.",
+        "setup_zh": "大学区附近的一个丁字路口，午后的阳光在两旁种满梧桐树的街道上投下长长的影子。你需要找到新华书店，你的手机坚持说它「在附近」——这个词在这座城市里已经失去了所有意义。卖烤红薯的华阿姨在这个路口摆了十一年的摊，十五分钟步行范围内的每栋建筑她都知道，不仅知道官方名字，还知道街坊们给它起的外号。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小伙子，要不要来个红薯？刚出炉的！",
+                "text_pinyin": "xiǎohuǒzi, yào búyào lái gè hóngshǔ? gāng chū lú de!",
+                "text_en": "Hey young man, want a sweet potato? Fresh out of the oven!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Politely decline and ask for directions.",
+                "options": [
+                    {
+                        "text_zh": "阿姨好！先不买了，谢谢。我想请问一下，新华书店怎么走？我的手机导航好像不太准。",
+                        "text_pinyin": "āyí hǎo! xiān bú mǎi le, xièxie. wǒ xiǎng qǐngwèn yíxià, Xīnhuá Shūdiàn zěnme zǒu? wǒ de shǒujī dǎoháng hǎoxiàng bú tài zhǔn.",
+                        "text_en": "Hi Auntie! Not now, thanks. Could you tell me how to get to Xinhua Bookstore? My phone's GPS doesn't seem very accurate.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Polite greeting, gentle decline, and admitting GPS defeat — Auntie Hua respects a person who trusts local knowledge over technology."
+                    },
+                    {
+                        "text_zh": "新华书店在哪里？",
+                        "text_pinyin": "Xīnhuá Shūdiàn zài nǎlǐ?",
+                        "text_en": "Where's Xinhua Bookstore?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. She points with her tongs, then realizes you need more detail."
+                    },
+                    {
+                        "text_zh": "我迷路了。",
+                        "text_pinyin": "wǒ mí lù le.",
+                        "text_en": "I'm lost.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An honest confession. She puts down her tongs — this will require her full attention."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "新华书店啊！那个简单。你从这里往前走，到第一个红绿灯左转。然后一直走大概五分钟，右边会看到一个邮局，书店就在邮局隔壁。",
+                "text_pinyin": "Xīnhuá Shūdiàn a! nàge jiǎndān. nǐ cóng zhèlǐ wǎng qián zǒu, dào dì yí gè hónglǜdēng zuǒ zhuǎn. ránhòu yìzhí zǒu dàgài wǔ fēnzhōng, yòubiān huì kàn dào yí gè yóujú, shūdiàn jiù zài yóujú gébì.",
+                "text_en": "Xinhua Bookstore! That's easy. Go straight from here, turn left at the first traffic light. Then walk about five minutes — you'll see a post office on the right. The bookstore is right next to it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the directions.",
+                "options": [
+                    {
+                        "text_zh": "好的，往前走到红绿灯左转，然后一直走五分钟，在邮局旁边对吗？",
+                        "text_pinyin": "hǎo de, wǎng qián zǒu dào hónglǜdēng zuǒ zhuǎn, ránhòu yìzhí zǒu wǔ fēnzhōng, zài yóujú pángbiān duì ma?",
+                        "text_en": "OK, go straight to the traffic light, turn left, walk five minutes, next to the post office — right?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating directions back is the mark of someone who has been lost before and learned from it. Auntie Hua nods with authority."
+                    },
+                    {
+                        "text_zh": "左转，然后一直走？",
+                        "text_pinyin": "zuǒ zhuǎn, ránhòu yìzhí zǒu?",
+                        "text_en": "Turn left, then go straight?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Partial confirmation. She adds the post office detail again — it's the key landmark."
+                    },
+                    {
+                        "text_zh": "远不远？",
+                        "text_pinyin": "yuǎn bù yuǎn?",
+                        "text_en": "Is it far?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She already said five minutes, but she understands — five minutes can mean different things to different legs."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对对对！不过要注意，那个路口有两个红绿灯，你要走第一个，不是第二个。第二个红绿灯转过去是菜市场，不是书店。去错了的人多了！",
+                "text_pinyin": "duì duì duì! búguò yào zhùyì, nàge lùkǒu yǒu liǎng gè hónglǜdēng, nǐ yào zǒu dì yí gè, búshì dì èr gè. dì èr gè hónglǜdēng zhuǎn guòqù shì cài shìchǎng, búshì shūdiàn. qù cuò le de rén duō le!",
+                "text_en": "Right right right! But be careful — that intersection has two traffic lights. Take the FIRST one, not the second. The second leads to the wet market, not the bookstore. Lots of people get that wrong!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and ask one more thing.",
+                "options": [
+                    {
+                        "text_zh": "第一个红绿灯，不是第二个，我记住了。对了阿姨，书店几点关门？我怕赶不上。",
+                        "text_pinyin": "dì yí gè hónglǜdēng, búshì dì èr gè, wǒ jì zhù le. duì le āyí, shūdiàn jǐ diǎn guān mén? wǒ pà gǎn bú shàng.",
+                        "text_en": "First traffic light, not the second — got it. By the way Auntie, what time does the bookstore close? I'm worried I won't make it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Confirming the critical detail and thinking ahead — Auntie Hua appreciates a thorough navigator."
+                    },
+                    {
+                        "text_zh": "好的好的，谢谢阿姨！",
+                        "text_pinyin": "hǎo de hǎo de, xièxie āyí!",
+                        "text_en": "OK OK, thanks Auntie!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gratitude received. She turns back to her sweet potatoes."
+                    },
+                    {
+                        "text_zh": "这条路好复杂啊。",
+                        "text_pinyin": "zhè tiáo lù hǎo fùzá a.",
+                        "text_en": "This road is so complicated.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She laughs.「习惯了就好了！」You get used to it. She's been watching people get lost here for eleven years."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "书店晚上九点才关。你来得及！回来的时候要是找不到路，再来问我。我一般摆到天黑。走吧走吧，别耽误了！",
+                "text_pinyin": "shūdiàn wǎnshang jiǔ diǎn cái guān. nǐ lái de jí! huílái de shíhòu yàoshi zhǎo bú dào lù, zài lái wèn wǒ. wǒ yìbān bǎi dào tiān hēi. zǒu ba zǒu ba, bié dānwu le!",
+                "text_en": "Bookstore doesn't close until 9 PM. You've got time! If you can't find your way back, come ask me again. I'm usually here until dark. Go on, don't dawdle!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her warmly and maybe buy a sweet potato after all.",
+                "options": [
+                    {
+                        "text_zh": "太好了！阿姨你人真好。那我回来的时候买个红薯，给你一个理由等我回来！",
+                        "text_pinyin": "tài hǎo le! āyí nǐ rén zhēn hǎo. nà wǒ huílái de shíhòu mǎi gè hóngshǔ, gěi nǐ yí gè lǐyóu děng wǒ huílái!",
+                        "text_en": "Great! Auntie, you're so kind. I'll buy a sweet potato on my way back — that gives you a reason to wait for me!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Promising a return purchase — Auntie Hua laughs and waves you off. She'll have the best one saved for you."
+                    },
+                    {
+                        "text_zh": "谢谢阿姨！回来的时候我再买红薯。",
+                        "text_pinyin": "xièxie āyí! huílái de shíhòu wǒ zài mǎi hóngshǔ.",
+                        "text_en": "Thanks Auntie! I'll buy a sweet potato on my way back.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A promise is a promise at the sweet potato cart. She nods approvingly."
+                    },
+                    {
+                        "text_zh": "好，我走了！",
+                        "text_pinyin": "hǎo, wǒ zǒu le!",
+                        "text_en": "OK, I'm off!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She watches you head toward the first traffic light. Not the second. She's watching."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In China, asking strangers for directions is common and generally welcomed, especially from older residents (阿姨/叔叔) who know the neighborhood intimately. Landmarks like post offices (邮局), banks, and schools are standard reference points. GPS can be unreliable in dense urban areas due to offset maps."
+    }
+}

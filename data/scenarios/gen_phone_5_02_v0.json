@@ -1,0 +1,160 @@
+{
+    "title": "The Customer Service Odyssey",
+    "title_zh": "客服历险记",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_5_02_v0",
+    "tree": {
+        "setup": "Your internet has been down for three days. Three days of using your phone's data like it's 2012. Three days of loading web pages that look like they're being transmitted by carrier pigeon. The internet service provider's customer service line has been your nemesis — automated menus, hold music that sounds like an elevator trapped in a time loop, and transfers to departments that transfer you back. Today, you've finally reached a human being: Customer Service Representative Chen, who sounds like she might actually be able to solve your problem.",
+        "setup_zh": "你的网断了三天。三天用手机流量上网，像回到了2012年。三天加载网页的速度像是靠信鸽传输。网络运营商的客服热线一直是你的噩梦——自动语音菜单、听起来像电梯困在时间循环里的等待音乐、以及把你转来转去的各个部门。今天，你终于接通了一个真人：客服代表小陈，听起来她也许真的能解决你的问题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，天网宽带客服中心，工号1847，请问有什么可以帮您？",
+                "text_pinyin": "nín hǎo, Tiānwǎng kuāndài kèfú zhōngxīn, gōnghào yāo bā sì qī, qǐngwèn yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, Tianwang Broadband customer service center, employee number 1847. How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your internet problem.",
+                "options": [
+                    {
+                        "text_zh": "你好，我家的宽带已经断了三天了。我之前打过两次客服电话，工单号是20260305-0782。第一次说是区域故障，第二次说已经修好了，但实际上还是不能上网。路由器的灯一直在闪红灯。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiā de kuāndài yǐjīng duàn le sān tiān le. wǒ zhīqián dǎ guò liǎng cì kèfú diànhuà, gōngdān hào shì èr líng èr liù líng sān líng wǔ-líng qī bā èr. dì yī cì shuō shì qūyù gùzhàng, dì èr cì shuō yǐjīng xiū hǎo le, dàn shíjì shàng háishi bù néng shàngwǎng. lùyóuqì de dēng yìzhí zài shǎn hóng dēng.",
+                        "text_en": "Hello, my broadband has been down for three days. I've called customer service twice before — work order number 20260305-0782. First time they said it was an area fault, second time they said it was fixed, but I still can't get online. The router light keeps flashing red.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Work order number, call history, and current symptom — Representative Chen can pull up your case immediately. A customer with documentation is a gift."
+                    },
+                    {
+                        "text_zh": "网断了三天了，之前打过电话但没修好。",
+                        "text_pinyin": "wǎng duàn le sān tiān le, zhīqián dǎ guò diànhuà dàn méi xiū hǎo.",
+                        "text_en": "Internet's been down three days — called before but it wasn't fixed.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need your account number and details, but the frustration is noted."
+                    },
+                    {
+                        "text_zh": "你们的网怎么老是断？！",
+                        "text_pinyin": "nǐmen de wǎng zěnme lǎo shì duàn?!",
+                        "text_en": "Why does your internet keep going out?!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Representative Chen absorbs the frustration with the practiced patience of someone who has heard this exact sentence approximately eight thousand times."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我看到您的工单了。记录显示上次技术人员远程检测说线路已恢复，但我看到您的路由器确实还没有连上。我先远程检测一下您的线路状态。请问路由器电源灯和网络灯分别是什么颜色？",
+                "text_pinyin": "wǒ kàn dào nín de gōngdān le. jìlù xiǎnshì shàng cì jìshù rényuán yuǎnchéng jiǎncè shuō xiànlù yǐ huīfù, dàn wǒ kàn dào nín de lùyóuqì quèshí hái méiyǒu lián shàng. wǒ xiān yuǎnchéng jiǎncè yíxià nín de xiànlù zhuàngtài. qǐngwèn lùyóuqì diànyuán dēng hé wǎngluò dēng fēnbié shì shénme yánsè?",
+                "text_en": "I can see your work order. Records show the last technician's remote check said the line was restored, but I can see your router still isn't connecting. Let me run a remote diagnostic on your line. What color are the power and network lights on your router?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the router lights.",
+                "options": [
+                    {
+                        "text_zh": "电源灯是绿色的，一直亮着。但是网络灯在闪红灯，大概每两秒闪一次。WiFi灯也是红的。我试过重启路由器好几次了，每次重启以后还是一样。",
+                        "text_pinyin": "diànyuán dēng shì lǜsè de, yìzhí liàng zhe. dànshì wǎngluò dēng zài shǎn hóng dēng, dàgài měi liǎng miǎo shǎn yí cì. WiFi dēng yě shì hóng de. wǒ shì guò chóngqǐ lùyóuqì hǎo jǐ cì le, měi cì chóngqǐ yǐhòu háishi yíyàng.",
+                        "text_en": "Power light is green and steady. But the network light is flashing red — about every two seconds. WiFi light is also red. I've tried restarting the router several times — same thing after each restart.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Precise observation of each indicator plus troubleshooting already attempted — Representative Chen can rule out the obvious causes immediately."
+                    },
+                    {
+                        "text_zh": "红灯在闪。我重启过了，没用。",
+                        "text_pinyin": "hóng dēng zài shǎn. wǒ chóngqǐ guò le, méi yòng.",
+                        "text_en": "Red light is flashing. I've restarted — no use.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Key info in minimum words. She'll ask which specific light."
+                    },
+                    {
+                        "text_zh": "我不知道，灯太小了看不清。",
+                        "text_pinyin": "wǒ bù zhīdào, dēng tài xiǎo le kàn bù qīng.",
+                        "text_en": "I don't know — the lights are too small to see clearly.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She suggests using your phone's camera to zoom in. Modern problems, modern solutions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "网络灯闪红说明是光信号没有到达路由器，问题应该出在外线。这种情况需要派技术人员上门检查。最早明天上午可以安排，你方便吗？上午九点到十二点之间。",
+                "text_pinyin": "wǎngluò dēng shǎn hóng shuōmíng shì guāng xìnhào méiyǒu dàodá lùyóuqì, wèntí yīnggāi chū zài wàixiàn. zhè zhǒng qíngkuàng xūyào pài jìshù rényuán shàngmén jiǎnchá. zuì zǎo míngtiān shàngwǔ kěyǐ ānpái, nǐ fāngbiàn ma? shàngwǔ jiǔ diǎn dào shí'èr diǎn zhī jiān.",
+                "text_en": "A flashing red network light means the optical signal isn't reaching the router — the problem is in the external line. This requires an on-site technician. The earliest available is tomorrow morning — does that work? Between 9 AM and noon."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Schedule the technician visit and ask about compensation.",
+                "options": [
+                    {
+                        "text_zh": "明天上午可以，我在家等。不过我想问一下：网已经断了三天了，而且之前的维修没有解决问题。按照合同，连续故障超过三天的话，是不是可以申请费用减免或者延长服务期？",
+                        "text_pinyin": "míngtiān shàngwǔ kěyǐ, wǒ zài jiā děng. búguò wǒ xiǎng wèn yíxià: wǎng yǐjīng duàn le sān tiān le, érqiě zhīqián de wéixiū méiyǒu jiějué wèntí. ànzhào hétong, liánxù gùzhàng chāoguò sān tiān de huà, shì búshì kěyǐ shēnqǐng fèiyòng jiǎnmiǎn huòzhě yáncháng fúwù qī?",
+                        "text_en": "Tomorrow morning works — I'll be home. But I'd like to ask: the internet has been down for three days, and the previous repair didn't solve it. According to the contract, can I apply for a fee reduction or service extension for outages exceeding three days?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Citing the contract — Representative Chen checks the policy and confirms: three days of outage qualifies for a proportional credit on your next bill. She processes it immediately."
+                    },
+                    {
+                        "text_zh": "明天上午行。一定要修好啊。",
+                        "text_pinyin": "míngtiān shàngwǔ xíng. yídìng yào xiū hǎo a.",
+                        "text_en": "Tomorrow morning works. Make sure it gets fixed this time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She assures you: the on-site check will be thorough."
+                    },
+                    {
+                        "text_zh": "明天？不能今天来吗？",
+                        "text_pinyin": "míngtiān? bù néng jīntiān lái ma?",
+                        "text_en": "Tomorrow? Can't someone come today?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She checks — today's slots are full. Tomorrow morning is the earliest window."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "您说得对，三天以上的连续故障可以申请费用减免。我已经帮您提交了，这个月的账单会自动扣减三天的费用。另外，明天技术人员到了以后会给您一个预估修复时间。如果还有问题，可以直接联系我，我的工号是1847。",
+                "text_pinyin": "nín shuō de duì, sān tiān yǐshàng de liánxù gùzhàng kěyǐ shēnqǐng fèiyòng jiǎnmiǎn. wǒ yǐjīng bāng nín tíjiāo le, zhège yuè de zhàngdān huì zìdòng kòu jiǎn sān tiān de fèiyòng. lìngwài, míngtiān jìshù rényuán dào le yǐhòu huì gěi nín yí gè yùgū xiūfù shíjiān. rúguǒ hái yǒu wèntí, kěyǐ zhíjiē liánxì wǒ, wǒ de gōnghào shì yāo bā sì qī.",
+                "text_en": "You're right — outages over three days qualify for a fee reduction. I've submitted it — this month's bill will automatically deduct three days' charges. Also, the technician will give you an estimated repair time when they arrive. If there are further issues, contact me directly — my employee number is 1847."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm the appointment.",
+                "options": [
+                    {
+                        "text_zh": "谢谢小陈，你处理得很专业。我记下你的工号1847了。明天上午九点到十二点我在家等技术人员。希望这次能彻底解决！",
+                        "text_pinyin": "xièxie Xiǎo Chén, nǐ chǔlǐ de hěn zhuānyè. wǒ jì xia nǐ de gōnghào yāo bā sì qī le. míngtiān shàngwǔ jiǔ diǎn dào shí'èr diǎn wǒ zài jiā děng jìshù rényuán. xīwàng zhè cì néng chèdǐ jiějué!",
+                        "text_en": "Thank you, Xiao Chen — you've been very professional. I've noted your employee number 1847. I'll be home tomorrow morning 9-12 for the technician. Hope it's resolved for good this time!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Noting the employee number and confirming the window — Representative Chen appreciates being recognized for doing her job well. In the world of customer service, that's rarer than it should be."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。明天见。",
+                        "text_pinyin": "hǎo de, xièxie. míngtiān jiàn.",
+                        "text_en": "OK, thanks. See you tomorrow.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She won't be there in person, but the sentiment is appreciated."
+                    },
+                    {
+                        "text_zh": "终于有人管了。",
+                        "text_pinyin": "zhōngyú yǒu rén guǎn le.",
+                        "text_en": "Finally someone's dealing with it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A backhanded compliment. Representative Chen takes it in stride — she's used to being the one good call after two bad ones."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese ISP customer service uses employee numbers (工号, gōnghào) for accountability — noting this number helps with follow-up calls. Work orders (工单, gōngdān) track ongoing issues. Service level agreements typically guarantee compensation (费用减免) for extended outages. On-site technicians (上门服务) are usually dispatched within 24-48 hours for hardware issues that can't be resolved remotely."
+    }
+}

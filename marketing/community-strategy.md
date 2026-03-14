@@ -1,4 +1,4 @@
-# Community Strategy — Mandarin
+# Community Strategy — Aelu
 
 This is the master community strategy document. All community engagement, platform participation, and relationship building should follow the principles and specific guidance laid out here. When in doubt, defer to this document over ad-hoc decisions.
 
@@ -446,7 +446,7 @@ The own Discord server should be the primary community investment during this ph
 **Reddit evolution:**
 - By this phase, you should be a recognized contributor. Consider writing longer, more ambitious posts:
   - "6 months of tracking my Mandarin skills across 4 dimensions — here's what the data shows"
-  - "A comparison of every SRS approach I've tried for Chinese (Anki, Hack Chinese, Mandarin, manual spreadsheet)"
+  - "A comparison of every SRS approach I've tried for Chinese (Anki, Hack Chinese, Aelu, manual spreadsheet)"
   - "The HSK 3.0 transition: what I've learned preparing for the new standard"
 
 **Milestone:** Discord server reaches 100+ members. At least 20 weekly active members. 3+ study challenge participants per week. Community members answering each other's questions without the team prompting them.
@@ -498,7 +498,7 @@ Example: Someone asks "Is there an app that lets me drill the specific words I k
 **3. Is someone asking for app recommendations?**
 If yes: mention your app alongside other tools, honestly. State what it does well and what it does not do. Never position it as the only option.
 
-Example: Someone asks "What's the best app for HSK 3 prep?" Answer: "Depends on what you need. For pure vocabulary drilling, Hack Chinese is solid. For structured lessons, Chinese Zero to Hero is great. If you want multi-skill practice with diagnostics (vocabulary, listening, tones, reading tracked separately), I built Mandarin for exactly this — it's free for HSK 1-2 and $12/month for HSK 3+. For dictionary lookup, Pleco is indispensable no matter what other tools you use."
+Example: Someone asks "What's the best app for HSK 3 prep?" Answer: "Depends on what you need. For pure vocabulary drilling, Hack Chinese is solid. For structured lessons, Chinese Zero to Hero is great. If you want multi-skill practice with diagnostics (vocabulary, listening, tones, reading tracked separately), I built Aelu for exactly this — it's free for HSK 1-2 and $14.99/month for HSK 3+. For dictionary lookup, Pleco is indispensable no matter what other tools you use."
 
 **4. Is someone complaining about a competitor?**
 Response: empathize with the frustration. Do not trash the competitor. Do not use the opening to pitch your app unless directly asked.
@@ -561,7 +561,7 @@ Example: Someone posts "Hack Chinese is amazing for vocabulary." Response: "Hack
 | Signups attributed to community channels | UTM parameter tracking on signup page | Track volume and conversion rate |
 | Discord member count | Server member count | Phase 3 target: 100. Phase 4 target: 200+ |
 | Discord weekly active members | Members who post at least once per week | 20% of total membership |
-| Organic mentions in communities you do not control | Reddit search, Google Alerts for "Mandarin app," social listening | Any organic mention is a positive signal |
+| Organic mentions in communities you do not control | Reddit search, Google Alerts for "Aelu app," social listening | Any organic mention is a positive signal |
 | Quora answer views | Quora analytics for your answers | Top 3 answers should each have 1,000+ views within 3 months |
 
 ### Health Metrics (Review Monthly)
@@ -718,7 +718,7 @@ Best for: Reddit (r/languagelearning, r/ChineseLanguage), Twitter/X, Hacker News
 
 **Response (within 24 hours):**
 
-> Thanks for the honest feedback. [Acknowledge the specific issue they raised — do not generalize or deflect.] You're right that [specific thing] isn't working well. I'm working on [specific fix or improvement, with a rough timeline if you have one]. If you want to share more detail, I'm at hello@mandarin.app — I read everything.
+> Thanks for the honest feedback. [Acknowledge the specific issue they raised — do not generalize or deflect.] You're right that [specific thing] isn't working well. I'm working on [specific fix or improvement, with a rough timeline if you have one]. If you want to share more detail, I'm at hello@aelu.app — I read everything.
 
 **Rules:**
 - Never argue with the reviewer's experience. Their experience is their experience.
@@ -763,7 +763,7 @@ Best for: Reddit (r/languagelearning, r/ChineseLanguage), Twitter/X, Hacker News
 
 **Response:**
 
-> We're the Mandarin team. We built Mandarin. We've been posting here for [X weeks/months]. We're not hiding that we're the developers — it's in our profile. We try to keep 90% of our posts about Chinese learning in general, with the app mentioned only when it's directly relevant. If it's feeling too promotional, we genuinely want to know — tell us specifically which posts felt off and we'll adjust. We'd rather be useful here than be seen as marketers.
+> We're the Aelu team. We built Aelu. We've been posting here for [X weeks/months]. We're not hiding that we're the developers — it's in our profile. We try to keep 90% of our posts about Chinese learning in general, with the app mentioned only when it's directly relevant. If it's feeling too promotional, we genuinely want to know — tell us specifically which posts felt off and we'll adjust. We'd rather be useful here than be seen as marketers.
 
 **Rules:**
 - Full transparency. Never get defensive.
@@ -799,13 +799,13 @@ Best for: Reddit (r/languagelearning, r/ChineseLanguage), Twitter/X, Hacker News
 
 ### Free Resources to Create and Share in Communities
 
-These resources serve a dual purpose: they provide genuine value to Chinese learners (building goodwill and authority), and they create natural touch points where people encounter the Mandarin brand and expertise. They should be genuinely useful as standalone resources — no signup required, no paywall, no email gate.
+These resources serve a dual purpose: they provide genuine value to Chinese learners (building goodwill and authority), and they create natural touch points where people encounter the Aelu brand and expertise. They should be genuinely useful as standalone resources — no signup required, no paywall, no email gate.
 
 **1. HSK Vocabulary Frequency List (PDF)**
 
 Content: The most frequently encountered words at each HSK level, organized by frequency rather than textbook order. Include pinyin, English definition, and example sentence for each word. Mark which words appear across multiple HSK levels.
 
-Format: Clean PDF, A4 printable. Include the Mandarin brand and the app URL in a small footer — not as a CTA, just as attribution.
+Format: Clean PDF, A4 printable. Include the Aelu brand and the app URL in a small footer — not as a CTA, just as attribution.
 
 Distribution: Share on Reddit when people ask "what should I study first for HSK [X]?" Post in Discord. Add to Facebook group files if allowed. Link from Quora answers.
 
@@ -853,7 +853,7 @@ Distribution: Link from Quora and Reddit when people ask "What's the best Chines
 
 - Every resource must be genuinely useful on its own. If someone never visits the app after using the resource, it should still have been worth their time.
 - No signup required. No email gate. No "enter your email to download." This is relationship-building, not lead generation. The conversion happens later, organically, when they look up who made this helpful thing.
-- Attribution is a small footer or byline — "Created by the team at mandarin.app" — not a CTA or banner.
+- Attribution is a small footer or byline — "Created by the team at aelu.app" — not a CTA or banner.
 - Update resources when they become outdated. A stale HSK guide with old information damages credibility.
 - Share freely and encourage redistribution. If a teacher wants to print the tone pair sheet for their class, that is ideal.
 
@@ -1016,7 +1016,7 @@ Example (with app mention — only when directly relevant):
 >
 > I track four dimensions: vocabulary recognition, listening comprehension, tone accuracy, and reading fluency. It's changed how I allocate study time — I spend way more on listening now because the data showed it was my weakest area.
 >
-> I built a tool (Mandarin) that does this tracking automatically if you're interested, but you could also do it manually with a spreadsheet and weekly self-assessment. The important thing is tracking the dimensions, not which tool you use.
+> I built a tool (Aelu) that does this tracking automatically if you're interested, but you could also do it manually with a spreadsheet and weekly self-assessment. The important thing is tracking the dimensions, not which tool you use.
 
 ### Reddit Value Post Template
 
@@ -1049,7 +1049,7 @@ you?" — 1 sentence]
 [Specific recommendations — tools, resources, techniques — be generous and
 tool-agnostic]
 
-[If relevant: "I built a tool called Mandarin that addresses [specific thing
+[If relevant: "I built a tool called Aelu that addresses [specific thing
 mentioned in the question]. It's free for HSK 1-2. But there are other options
 too — [mention 2-3 alternatives]."]
 ```
@@ -1059,7 +1059,7 @@ too — [mention 2-3 alternatives]."]
 ```
 Welcome to the Mandarin Chinese Learning Community.
 
-This is a space for people learning Chinese — whether you use the Mandarin app or
+This is a space for people learning Chinese — whether you use the Aelu app or
 not. The only rules: be helpful, be honest, and respect that everyone is at a
 different level.
 
@@ -1073,7 +1073,7 @@ Channels:
 #building-in-public — what I'm working on
 #resources — tools, links, and recommendations
 
-We're the Mandarin team — we built the app and we're also learning Mandarin ourselves. Our tones are
+We're the Aelu team — we built the app and we're also learning Mandarin ourselves. Our tones are
 still a work in progress. Feel free to ask me anything.
 ```
 
@@ -1102,7 +1102,7 @@ Community strategy is partly about platforms and partly about people. Over time,
 
 ## Summary: The Community Strategy in One Page
 
-**Who we are in communities:** The Mandarin team, an independent team learning Mandarin, who built a tool for their own study and are sharing it with others. Learners first, builders second.
+**Who we are in communities:** The Aelu team, an independent team learning Mandarin, who built a tool for their own study and are sharing it with others. Learners first, builders second.
 
 **What we do:** Give value. Answer questions. Share study tips and resources. Help people learn Chinese. Mention the app only when it is genuinely relevant and helpful.
 

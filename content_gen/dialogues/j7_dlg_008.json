@@ -1,0 +1,151 @@
+{
+  "title": "The Umbrella Repair Man",
+  "title_zh": "修伞的老人",
+  "hsk_level": 7,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.7,
+  "tree": {
+    "setup": "On a rainy side street near an old residential quarter, you find an elderly man, Uncle Luo, sitting under a canvas awning repairing umbrellas. His tools are spread out on a folding table. Business is slow — most people just buy new cheap umbrellas. He's carefully mending a child's umbrella with a duck-shaped handle.",
+    "setup_zh": "在老居民区附近一条下雨的小街上，你发现一位老人——罗叔叔——坐在帆布雨棚下修伞。他的工具摆放在一张折叠桌上。生意很清淡——大多数人只是买新的便宜伞。他正在仔细修补一把鸭子把手的儿童伞。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这把伞是一个小女孩的妈妈拿来的。伞骨断了两根，布也有个洞。买一把新的比修还便宜。但小女孩的妈妈说，这是孩子的外婆送的，外婆去年走了。所以这把伞不能扔。",
+        "text_pinyin": "Zhè bǎ sǎn shì yīge xiǎo nǚhái de māma ná lái de. Sǎn gǔ duàn le liǎng gēn, bù yě yǒu ge dòng. Mǎi yī bǎ xīn de bǐ xiū hái piányi. Dàn xiǎo nǚhái de māma shuō, zhè shì háizi de wàipó sòng de, wàipó qùnián zǒu le. Suǒyǐ zhè bǎ sǎn bù néng rēng.",
+        "text_en": "This umbrella was brought by a little girl's mother. Two ribs are broken and the fabric has a hole. Buying a new one would be cheaper than repairing it. But the mother said it was a gift from the girl's grandmother, who passed away last year. So this umbrella can't be thrown away."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to him?",
+        "options": [
+          {
+            "text_zh": "修理保留的不是功能，而是关系。一把新伞能挡雨，但它挡不住对外婆的记忆。您修的其实是那条线。",
+            "text_pinyin": "Xiūlǐ bǎoliú de bú shì gōngnéng, ér shì guānxì. Yī bǎ xīn sǎn néng dǎng yǔ, dàn tā dǎng bú zhù duì wàipó de jìyì. Nín xiū de qíshí shì nà tiáo xiàn.",
+            "text_en": "Repair preserves not function, but relationship. A new umbrella can block rain, but it can't hold the memory of grandmother. What you're actually mending is that thread.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "罗叔叔放下钳子，抬起头：「那条线——说得好。就是那条线。」"
+          },
+          {
+            "text_zh": "现在的伞质量太差了，以前的伞能用好多年。",
+            "text_pinyin": "Xiànzài de sǎn zhìliàng tài chà le, yǐqián de sǎn néng yòng hǎo duō nián.",
+            "text_en": "Umbrellas nowadays are such poor quality — umbrellas used to last many years.",
+            "score": 0.0,
+            "feedback": "罗叔叔点了点头，礼貌地回应：「是，现在的料不行。」他继续低头修伞。"
+          },
+          {
+            "text_zh": "她没有给孩子买一把一样的鸭子伞？",
+            "text_pinyin": "Tā méiyǒu gěi háizi mǎi yī bǎ yīyàng de yāzi sǎn?",
+            "text_en": "Did she look for another duck umbrella just like it?",
+            "score": 0.0,
+            "feedback": "罗叔叔抬起头，想了一下：「买一把一样的……不一样的。」"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是这么回事。其实来找我修东西的人，十个里有八个不是因为东西贵、舍不得扔，而是因为东西有故事、不忍心扔。我修过一个老兵的军用水壶、一个老太太的缝纫机、一个大学生的破书包——他说那是他爸爸用过的。每一件东西背后都有一段不想放手的感情。",
+        "text_pinyin": "Shì zhème huí shì. Qíshí lái zhǎo wǒ xiū dōngxī de rén, shí ge lǐ yǒu bā ge bú shì yīnwèi dōngxī guì, shěbude rēng, ér shì yīnwèi dōngxī yǒu gùshì, bù rěnxīn rēng. Wǒ xiū guò yīge lǎobīng de jūnyòng shuǐhú, yīge lǎo tàitai de féngrènjī, yīge dàxuéshēng de pò shūbāo — tā shuō nà shì tā bàba yòng guò de. Měi yī jiàn dōngxī bèihòu dōu yǒu yī duàn bù xiǎng fàngshǒu de gǎnqíng.",
+        "text_en": "That's how it is. Actually, of the people who come to me for repairs, eight out of ten aren't because the thing is expensive and they can't bear to throw it away, but because it has a story and they can't bear to let go. I've repaired a veteran's military canteen, an old woman's sewing machine, a college student's worn backpack — he said it was his father's. Behind every object is a feeling someone isn't ready to release."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to him?",
+        "options": [
+          {
+            "text_zh": "表面上您是在修东西，实际上是在帮人续延一段关系。来的人可能不知道怎么说自己的难过，但他们知道可以带一件破旧的东西来。",
+            "text_pinyin": "Biǎomiàn shàng nín shì zài xiū dōngxī, shíjì shàng shì zài bāng rén xùyán yī duàn guānxì. Lái de rén kěnéng bù zhīdào zěnme shuō zìjǐ de nánguò, dàn tāmen zhīdào kěyǐ dài yī jiàn pòjiù de dōngxī lái.",
+            "text_en": "On the surface you're fixing things, but really you're helping people extend a relationship. They may not know how to say what they're feeling, but they know they can bring a broken thing.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "罗叔叔把鸭子伞放下，看着它：「是这么回事。我一直没想到这个说法。」"
+          },
+          {
+            "text_zh": "断舍离不是很流行吗？有时候该扔还是得扔。",
+            "text_pinyin": "Duàn shě lí bú shì hěn liúxíng ma? Yǒu shíhòu gāi rēng háishì děi rēng.",
+            "text_en": "Isn't the decluttering trend popular? Sometimes you do just have to let things go.",
+            "score": 0.0,
+            "feedback": "罗叔叔停了一下，温和地说：「那个女孩，才几岁。」"
+          },
+          {
+            "text_zh": "您有没有收徒弟？这个手艺不能失传。",
+            "text_pinyin": "Nín yǒu méiyǒu shōu túdì? Zhège shǒuyì bù néng shīchuán.",
+            "text_en": "Do you have any apprentices? This craft mustn't be lost.",
+            "score": 0.0,
+            "feedback": "罗叔叔苦笑：「手艺好学，学了有什么用？」他重新拿起钳子。"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "桥梁……你说得太好了。有时候修完东西，客人会在旁边坐一会儿，跟我讲那个物件的故事。我觉得他们需要的不只是修好东西，还需要有人听他们说。这个城市跑得太快了，没人有时间听别人讲一把旧伞的故事。",
+        "text_pinyin": "Qiáoliáng…… nǐ shuō de tài hǎo le. Yǒu shíhòu xiū wán dōngxī, kèrén huì zài pángbiān zuò yīhuǐr, gēn wǒ jiǎng nàge wùjiàn de gùshì. Wǒ juéde tāmen xūyào de bù zhǐ shì xiū hǎo dōngxī, hái xūyào yǒu rén tīng tāmen shuō. Zhège chéngshì pǎo de tài kuài le, méi rén yǒu shíjiān tīng biérén jiǎng yī bǎ jiù sǎn de gùshì.",
+        "text_en": "Bridge… that's beautifully put. Sometimes after I finish a repair, the customer sits beside me for a while and tells me the story behind the object. I think what they need isn't just the repair, but someone to listen. This city moves too fast — nobody has time to hear someone tell the story of an old umbrella."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to him?",
+        "options": [
+          {
+            "text_zh": "人们不需要预约，不需要解释自己为什么难过，只需要带一件破旧的东西来。物件是钥匙，倾听才是门。",
+            "text_pinyin": "Rénmen bù xūyào yùyuē, bù xūyào jiěshì zìjǐ wèishéme nánguò, zhǐ xūyào dài yī jiàn pòjiù de dōngxī lái. Wùjiàn shì yàoshi, qīngtīng cái shì mén.",
+            "text_en": "People don't need an appointment, don't need to explain why they're sad. They just bring a broken thing. The object is the key — listening is the door.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "罗叔叔抬起头，把那句话在嘴里默念了一遍：「物件是钥匙，倾听才是门。我要记下来。」"
+          },
+          {
+            "text_zh": "您可以开个账号讲这些故事，肯定有人爱看。",
+            "text_pinyin": "Nín kěyǐ kāi ge zhànghào jiǎng zhèxiē gùshì, kěndìng yǒu rén ài kàn.",
+            "text_en": "You could start an account sharing these stories — people would definitely follow it.",
+            "score": 0.0,
+            "feedback": "罗叔叔想了想：「把他们的事发到网上……他们跟我说，是因为我不会到处讲。」"
+          },
+          {
+            "text_zh": "现在心理咨询挺贵的，你算是免费的吧。",
+            "text_pinyin": "Xiànzài xīnlǐ zīxún tǐng guì de, nǐ suàn shì miǎnfèi de ba.",
+            "text_en": "Therapy is quite expensive now — you're basically offering it for free.",
+            "score": 0.0,
+            "feedback": "罗叔叔皱了皱眉：「咨询……不一样的。」他没再接话。"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "物件是钥匙，倾听才是门——你这句话我要记下来。好了，这把小伞修好了。你看，看不出来修过吧？这就是我的原则——修完之后不能留下明显的痕迹，要让东西看起来好像从来没坏过。因为对那个小女孩来说，这把伞代表的是外婆完整的爱。",
+        "text_pinyin": "Wùjiàn shì yàoshi, qīngtīng cái shì mén — nǐ zhè jù huà wǒ yào jì xiàlái. Hǎo le, zhè bǎ xiǎo sǎn xiū hǎo le. Nǐ kàn, kàn bù chūlái xiū guò ba? Zhè jiù shì wǒ de yuánzé — xiū wán zhīhòu bù néng liú xià míngxiǎn de hénjì, yào ràng dōngxī kàn qǐlái hǎoxiàng cónglái méi huài guò. Yīnwèi duì nàge xiǎo nǚhái lái shuō, zhè bǎ sǎn dàibiǎo de shì wàipó wánzhěng de ài.",
+        "text_en": "The object is the key, listening is the door — I need to remember that phrase. Alright, this little umbrella is repaired. See — you can't tell it was fixed, right? That's my principle: after repair, there should be no obvious trace. The thing should look like it was never broken. Because for that little girl, this umbrella represents her grandmother's whole love."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "What do you say to him?",
+        "options": [
+          {
+            "text_zh": "日本有个词叫「金继ぎ」，刻意让修补的痕迹可见。那是一种美学。但您的方式是相反的——让伤痕消失。对那个女孩来说，可能保护比面对更重要。",
+            "text_pinyin": "Rìběn yǒu ge cí jiào 'jīnjì', kèyì ràng xiūbǔ de hénjì kějiàn. Nà shì yī zhǒng měixué. Dàn nín de fāngshì shì xiāngfǎn de — ràng shānghén xiāoshī. Duì nàge nǚhái lái shuō, kěnéng bǎohù bǐ miànduì gèng zhòngyào.",
+            "text_en": "In Japan there's kintsugi — deliberately making the mending visible. That's one aesthetic. But yours is the opposite — making the damage disappear. For that girl, protection might matter more than facing it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "罗叔叔把伞翻来翻去，若有所思：「金继ぎ……两种方式，都是尊重。」他轻轻点头。"
+          },
+          {
+            "text_zh": "这把伞的布料是什么材质的？防水性能还好吗？",
+            "text_pinyin": "Zhè bǎ sǎn de bùliào shì shénme cáizhì de? Fángshuǐ xìngnéng hái hǎo ma?",
+            "text_en": "What material is this umbrella's fabric? Is the waterproofing still good?",
+            "score": 0.0,
+            "feedback": "罗叔叔抬起头，停顿了一下：「还行。」然后把伞叠起来包好。"
+          },
+          {
+            "text_zh": "您每天能修几把？这个生意够维持生活吗？",
+            "text_pinyin": "Nín měi tiān néng xiū jǐ bǎ? Zhège shēngyi gòu wéichí shēnghuó ma?",
+            "text_en": "How many can you repair in a day? Is this business enough to live on?",
+            "score": 0.0,
+            "feedback": "罗叔叔笑了笑，算是回答：「够用。」把话题带走了。"
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The repair economy was once central to daily life in China — traveling cobblers, knife sharpeners, pot menders, and umbrella repairers were fixtures of every neighborhood. As disposable consumer goods became cheap and abundant, these trades nearly vanished. The few remaining repair people often find their role has shifted: they serve less as functional tradespeople and more as custodians of emotional attachment, helping people maintain connections to the past through physical objects."
+  }
+}

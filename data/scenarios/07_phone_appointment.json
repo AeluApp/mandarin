@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Say you want to make an appointment.",
                 "options": [
-                    {"text_zh": "你好，我想预约看医生。", "text_pinyin": "nǐ hǎo, wǒ xiǎng yùyuē kàn yīshēng.", "text_en": "Hello, I'd like to make an appointment to see a doctor.", "score": 1.0, "register": "neutral", "feedback": "Clear and natural. 预约 is the standard word for appointments."},
-                    {"text_zh": "我要看医生。", "text_pinyin": "wǒ yào kàn yīshēng.", "text_en": "I want to see a doctor.", "score": 0.6, "register": "casual", "feedback": "Understandable, but 预约 (make an appointment) is what they expect on the phone."},
-                    {"text_zh": "你好，请问可以预约吗？", "text_pinyin": "nǐ hǎo, qǐngwèn kěyǐ yùyuē ma?", "text_en": "Hello, may I make an appointment?", "score": 0.9, "register": "polite", "feedback": "Very polite way to ask. Slightly indirect but perfectly natural."}
+                    {
+                        "text_zh": "你好，我想预约看医生。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng yùyuē kàn yīshēng.",
+                        "text_en": "Hello, I'd like to make an appointment to see a doctor.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and natural. 预约 is the standard word for appointments."
+                    },
+                    {
+                        "text_zh": "我一般跑步和游泳，一周三四次吧。",
+                        "text_pinyin": "wǒ yībān pǎobù hé yóuyǒng, yī zhōu sān sì cì ba.",
+                        "text_en": "I usually run and swim, about three or four times a week.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you want to make an appointment, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you want to make an appointment, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Accept the tomorrow afternoon slot.",
                 "options": [
-                    {"text_zh": "好的，明天下午可以。几点？", "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?", "text_en": "OK, tomorrow afternoon works. What time?", "score": 1.0, "register": "neutral", "feedback": "Perfect — confirms and asks for specific time."},
-                    {"text_zh": "明天下午吧。谢谢。", "text_pinyin": "míngtiān xiàwǔ ba. xièxie.", "text_en": "Tomorrow afternoon then. Thanks.", "score": 0.9, "register": "neutral", "feedback": "Good. You might still need to ask for the exact time."},
-                    {"text_zh": "行。", "text_pinyin": "xíng.", "text_en": "OK.", "score": 0.5, "register": "minimal", "feedback": "Too brief for a phone call. They need more confirmation."}
+                    {
+                        "text_zh": "我觉得先复习语法吧，那个部分我不太懂。",
+                        "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.",
+                        "text_en": "I think we should start with grammar, I don't really understand that part.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to accept the tomorrow afternoon slot, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好的，明天下午可以。几点？",
+                        "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?",
+                        "text_en": "OK, tomorrow afternoon works. What time?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — confirms and asks for specific time."
+                    },
+                    {
+                        "text_zh": "下这么大的雨，太危险了，我们换个活动吧。",
+                        "text_pinyin": "xià zhème dà de yǔ, tài wēixiǎn le, wǒmen huàn ge huódòng ba.",
+                        "text_en": "With rain this heavy, it's too dangerous, let's switch to a different activity.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to accept the tomorrow afternoon slot, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

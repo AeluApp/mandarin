@@ -1,0 +1,196 @@
+{
+    "title": "The Diagnostic Cartographer",
+    "title_zh": "诊断制图师",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_doctor_6_00_v0",
+    "tree": {
+        "setup": "The internal medicine department of a major hospital, where Dr. Xu sits in a consultation room that smells faintly of hand sanitizer and jasmine tea — the latter from a thermos she has kept refilled for twelve years of afternoon clinic hours. She practices medicine the way a cartographer charts territory: methodically, comprehensively, and with an awareness that every symptom is a landmark pointing toward something larger. Her consultation desk has a small anatomical model of the human torso that she uses for patient education, its organs removable and labeled in both Chinese and Latin — a bilingual body.",
+        "setup_zh": "一家大型医院的内科门诊，徐医生坐在一间淡淡飘着洗手液和茉莉花茶味的诊室里——后者来自一个她在十二年的下午门诊中不断续满的保温杯。她行医的方式如同制图师测绘领土：系统、全面，并且意识到每一个症状都是指向更大图景的地标。她的诊桌上有一个小型人体躯干解剖模型，用于患者教育，器官可以拆卸，标签用中文和拉丁文双语书写——一具双语的身体。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。哪里不舒服？什么时候开始的？",
+                "text_pinyin": "qǐng zuò. nǎlǐ bù shūfu? shénme shíhòu kāishǐ de?",
+                "text_en": "Please sit. What's bothering you? When did it start?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your symptoms in detail.",
+                "options": [
+                    {
+                        "text_zh": "徐医生好。最近一周左右，我经常感觉头晕，特别是从坐着突然站起来的时候。同时食欲也不太好，吃东西没什么味道。昨天还出现了一次心跳加速的情况，大概持续了两三分钟。我没有发烧，但是总觉得疲劳。",
+                        "text_pinyin": "Xú yīshēng hǎo. zuìjìn yì zhōu zuǒyòu, wǒ jīngcháng gǎnjué tóuyūn, tèbié shì cóng zuò zhe tūrán zhàn qǐlái de shíhòu. tóngshí shíyù yě bú tài hǎo, chī dōngxi méi shénme wèidào. zuótiān hái chūxiàn le yí cì xīntiào jiā sù de qíngkuàng, dàgài chíxù le liǎng sān fēnzhōng. wǒ méiyǒu fāshāo, dànshì zǒng juéde píláo.",
+                        "text_en": "Dr. Xu, hello. For about a week, I've been frequently dizzy, especially when standing up suddenly from sitting. My appetite is poor too — food has no taste. Yesterday I had an episode of rapid heartbeat lasting 2-3 minutes. No fever, but constant fatigue.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Timeline, triggers, associated symptoms, and negatives — Dr. Xu's cartographic instincts are rewarded. She reaches for her stethoscope while her mental map begins forming."
+                    },
+                    {
+                        "text_zh": "我最近头很晕，没什么力气。",
+                        "text_pinyin": "wǒ zuìjìn tóu hěn yūn, méi shénme lìqi.",
+                        "text_en": "I've been very dizzy lately, and I have no energy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Two symptoms to start with. She'll map the rest through questions."
+                    },
+                    {
+                        "text_zh": "我感觉不太好。",
+                        "text_pinyin": "wǒ gǎnjué bú tài hǎo.",
+                        "text_en": "I don't feel well.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The broadest possible description. Dr. Xu's jasmine tea will need to last — this consultation will take careful extraction."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "头晕加上心跳加速，加上疲劳，可能跟血压或者血液有关系。我先量一下你的血压。（量完）嗯，九十二的六十，偏低。你最近有没有节食或者饮食不规律？睡眠怎么样？",
+                "text_pinyin": "tóuyūn jiā shàng xīntiào jiā sù, jiā shàng píláo, kěnéng gēn xuèyā huòzhě xuèyè yǒu guānxi. wǒ xiān liáng yíxià nǐ de xuèyā. (liáng wán) ǹg, jiǔshí'èr de liùshí, piān dī. nǐ zuìjìn yǒu méiyǒu jiéshí huòzhě yǐnshí bù guīlǜ? shuìmián zěnmeyàng?",
+                "text_en": "Dizziness plus rapid heartbeat plus fatigue — could be blood pressure or blood-related. Let me check your BP. (After measuring) Hmm, 92 over 60 — low. Have you been dieting or eating irregularly? How's your sleep?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer about your diet and sleep.",
+                "options": [
+                    {
+                        "text_zh": "说实话，最近工作压力大，经常不吃早饭，午饭也是随便对付。晚上睡觉的话，一般都要到一两点才睡，早上七点就得起来。睡眠质量也不好，经常半夜醒。另外，上个月体检的时候说我有轻度贫血。",
+                        "text_pinyin": "shuō shíhuà, zuìjìn gōngzuò yālì dà, jīngcháng bù chī zǎofàn, wǔfàn yě shì suíbiàn duìfu. wǎnshang shuì jiào de huà, yìbān dōu yào dào yī liǎng diǎn cái shuì, zǎoshang qī diǎn jiù děi qǐlái. shuìmián zhìliàng yě bù hǎo, jīngcháng bànyè xǐng. lìngwài, shàng gè yuè tǐjiǎn de shíhòu shuō wǒ yǒu qīngdù pínxuè.",
+                        "text_en": "Honestly, work pressure has been high — I often skip breakfast and just grab something random for lunch. I usually don't sleep until 1-2 AM and have to be up at 7. Sleep quality is poor — I often wake up in the middle of the night. Also, my physical last month showed mild anemia.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Full lifestyle picture plus relevant medical history — Dr. Xu's map is filling in rapidly. The anemia is a critical landmark she would have asked about next."
+                    },
+                    {
+                        "text_zh": "最近吃得少，睡得也晚。",
+                        "text_pinyin": "zuìjìn chī de shǎo, shuì de yě wǎn.",
+                        "text_en": "I've been eating less and sleeping late.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Two key pieces. She'll quantify them — 'less' and 'late' need numbers."
+                    },
+                    {
+                        "text_zh": "还好吧，跟平时差不多。",
+                        "text_pinyin": "hái hǎo ba, gēn píngshí chā bù duō.",
+                        "text_en": "It's OK — about the same as usual.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Xu has learned that 'about the same' often means 'consistently unhealthy.' She probes deeper."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "贫血加上低血压，再加上饮食不规律和睡眠不足，这些因素加在一起就能解释你的症状了。我建议做几项血液检查：血常规、铁蛋白、维生素B12和叶酸水平。你之前的贫血有没有查过具体是什么类型的？",
+                "text_pinyin": "pínxuè jiā shàng dī xuèyā, zài jiā shàng yǐnshí bù guīlǜ hé shuìmián bùzú, zhèxiē yīnsù jiā zài yìqǐ jiù néng jiěshì nǐ de zhèngzhuàng le. wǒ jiànyì zuò jǐ xiàng xuèyè jiǎnchá: xuè chángguī, tiě dànbái, wéishēngsù B shí'èr hé yèsuān shuǐpíng. nǐ zhīqián de pínxuè yǒu méiyǒu chá guò jùtǐ shì shénme lèixíng de?",
+                "text_en": "Anemia plus low blood pressure, combined with irregular eating and insufficient sleep — together these explain your symptoms. I recommend blood tests: complete blood count, ferritin, vitamin B12, and folate levels. Was your previous anemia typed specifically?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer about the anemia type and ask about the tests.",
+                "options": [
+                    {
+                        "text_zh": "上次体检报告上写的是缺铁性贫血，血红蛋白是105，正常下限是120。具体的铁蛋白没有查。请问这些血液检查需要空腹吗？大概多久能拿到结果？",
+                        "text_pinyin": "shàng cì tǐjiǎn bàogào shàng xiě de shì quē tiě xìng pínxuè, xuèhóng dànbái shì yìbǎi líng wǔ, zhèngcháng xiàxiàn shì yìbǎi èrshí. jùtǐ de tiě dànbái méiyǒu chá. qǐngwèn zhèxiē xuèyè jiǎnchá xūyào kōngfù ma? dàgài duō jiǔ néng ná dào jiéguǒ?",
+                        "text_en": "The report said iron-deficiency anemia — hemoglobin was 105, normal lower limit is 120. Ferritin wasn't tested. Do these blood tests require fasting? How long for results?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Specific numbers from the previous test and practical follow-up questions — Dr. Xu removes a small organ from the anatomical model to illustrate the iron absorption process. She's in teaching mode."
+                    },
+                    {
+                        "text_zh": "好像是缺铁的那种。检查需要预约吗？",
+                        "text_pinyin": "hǎoxiàng shì quē tiě de nà zhǒng. jiǎnchá xūyào yùyuē ma?",
+                        "text_en": "I think it was the iron-deficiency kind. Do I need an appointment for the tests?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Approximate but useful. She directs you to the lab."
+                    },
+                    {
+                        "text_zh": "我不记得了。那个报告我没带。",
+                        "text_pinyin": "wǒ bú jìde le. nàge bàogào wǒ méi dài.",
+                        "text_en": "I don't remember. I didn't bring the report.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She notes it and orders the full panel. Having previous reports saves time and money — she mentions this gently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "需要空腹，所以最好明天早上来抽血，之前八小时不要吃东西。结果一般第二天下午能出来，在手机APP上可以看。在等结果的这几天里，先从生活方式入手调整：早餐一定要吃，多吃含铁丰富的食物，比如菠菜、红肉、动物肝脏。睡眠方面，尽量十一点之前上床。",
+                "text_pinyin": "xūyào kōngfù, suǒyǐ zuìhǎo míngtiān zǎoshang lái chōu xuè, zhīqián bā xiǎoshí búyào chī dōngxi. jiéguǒ yìbān dì èr tiān xiàwǔ néng chūlái, zài shǒujī APP shàng kěyǐ kàn. zài děng jiéguǒ de zhè jǐ tiān lǐ, xiān cóng shēnghuó fāngshì rùshǒu tiáozhěng: zǎocān yídìng yào chī, duō chī hán tiě fēngfù de shíwù, bǐrú bōcài, hóng ròu, dòngwù gānzàng. shuìmián fāngmiàn, jǐnliàng shíyī diǎn zhīqián shàng chuáng.",
+                "text_en": "Fasting is required — come for blood draw tomorrow morning, no food for 8 hours before. Results are usually available the next afternoon on the hospital app. While waiting, start with lifestyle adjustments: always eat breakfast, increase iron-rich foods like spinach, red meat, and liver. For sleep, try to be in bed by 11 PM."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about medication and follow-up.",
+                "options": [
+                    {
+                        "text_zh": "好的，明天早上空腹去抽血。在等结果之前，需要先吃一些铁剂或者补血的药吗？还有，检查结果出来以后需要再挂号来看您吗？还是在线上就可以咨询？",
+                        "text_pinyin": "hǎo de, míngtiān zǎoshang kōngfù qù chōu xuè. zài děng jiéguǒ zhīqián, xūyào xiān chī yìxiē tiě jì huòzhě bǔ xuè de yào ma? hái yǒu, jiǎnchá jiéguǒ chūlái yǐhòu xūyào zài guà hào lái kàn nín ma? háishì zài xiànshàng jiù kěyǐ zīxún?",
+                        "text_en": "OK, I'll go for fasting blood draw tomorrow morning. Before results come back, should I start taking iron supplements or blood-building medicine? Also, after results are out, do I need to book another appointment to see you, or can I consult online?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Proactive about interim treatment and follow-up logistics — Dr. Xu writes a preliminary recommendation while noting your consultation efficiency."
+                    },
+                    {
+                        "text_zh": "好的。要不要先吃点药？",
+                        "text_pinyin": "hǎo de. yào búyào xiān chī diǎn yào?",
+                        "text_en": "OK. Should I take any medicine first?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A natural question. She explains the difference between supplements and prescription iron."
+                    },
+                    {
+                        "text_zh": "明白了。我明天来抽血。",
+                        "text_pinyin": "míngbai le. wǒ míngtiān lái chōu xuè.",
+                        "text_en": "Understood. I'll come for blood draw tomorrow.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She hopes you'll remember the dietary advice too — the blood draw is only one piece of the map."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你可以先吃一些非处方的铁剂，药房就有，注意饭后吃以免胃不舒服，配着维生素C一起吃吸收更好。结果出来以后，如果指标没有大问题，可以通过医院APP线上咨询我。如果需要进一步检查，再来门诊。处方我先开一个调理的方案。注意：如果在等结果期间头晕加重或者出现晕倒的情况，请直接来急诊。",
+                "text_pinyin": "nǐ kěyǐ xiān chī yìxiē fēi chǔfāng de tiě jì, yàofáng jiù yǒu, zhùyì fàn hòu chī yǐmiǎn wèi bù shūfu, pèi zhe wéishēngsù C yìqǐ chī xīshōu gèng hǎo. jiéguǒ chūlái yǐhòu, rúguǒ zhǐbiāo méiyǒu dà wèntí, kěyǐ tōngguò yīyuàn APP xiànshàng zīxún wǒ. rúguǒ xūyào jìnyíbù jiǎnchá, zài lái ménzhěn. chǔfāng wǒ xiān kāi yí gè tiáolǐ de fāng'àn. zhùyì: rúguǒ zài děng jiéguǒ qījiān tóuyūn jiāzhòng huòzhě chūxiàn yūn dǎo de qíngkuàng, qǐng zhíjiē lái jízhěn.",
+                "text_en": "You can start with OTC iron supplements — the pharmacy has them. Take after meals to avoid stomach upset, and pair with vitamin C for better absorption. After results are in, if indicators aren't concerning, you can consult me online via the hospital app. If further tests are needed, come to clinic. I'll write a preliminary prescription. Note: if dizziness worsens or you faint while waiting for results, come to the ER directly."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank Dr. Xu and confirm the plan.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢徐医生，您解释得特别详细。我总结一下：明天早上空腹抽血，今天开始调整饮食和作息，先吃非处方铁剂配维生素C，结果出来后线上联系您。如果头晕加重就来急诊。我都记住了。",
+                        "text_pinyin": "fēicháng gǎnxiè Xú yīshēng, nín jiěshì de tèbié xiángxì. wǒ zǒngjié yíxià: míngtiān zǎoshang kōngfù chōu xuè, jīntiān kāishǐ tiáozhěng yǐnshí hé zuòxī, xiān chī fēi chǔfāng tiě jì pèi wéishēngsù C, jiéguǒ chūlái hòu xiànshàng liánxì nín. rúguǒ tóuyūn jiāzhòng jiù lái jízhěn. wǒ dōu jì zhù le.",
+                        "text_en": "Thank you so much Dr. Xu — your explanation was very thorough. Let me summarize: fasting blood draw tomorrow morning, start adjusting diet and sleep today, take OTC iron with vitamin C, contact you online after results, come to ER if dizziness worsens. All noted.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Summarizing the medical plan back to the doctor — Dr. Xu's cartographic heart swells. This patient will navigate their health with a proper map."
+                    },
+                    {
+                        "text_zh": "谢谢徐医生！我明天来抽血。",
+                        "text_pinyin": "xièxie Xú yīshēng! wǒ míngtiān lái chōu xuè.",
+                        "text_en": "Thanks Dr. Xu! I'll come for the blood draw tomorrow.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She hopes the diet and sleep advice sticks too. The jasmine tea has cooled — another afternoon clinic hour well spent."
+                    },
+                    {
+                        "text_zh": "好的，知道了。",
+                        "text_pinyin": "hǎo de, zhīdào le.",
+                        "text_en": "OK, got it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Brief. She hands you the prescription and hopes the map she's drawn will guide you. The anatomical model stands ready for the next patient."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospitals use a registration system (挂号, guà hào) where patients book specific departments. Blood tests (抽血, chōu xuè) typically require fasting (空腹, kōngfù) and results are available on the hospital's mobile app. Online follow-up consultations (线上复诊) are increasingly common, reducing the need for repeat visits."
+    }
+}

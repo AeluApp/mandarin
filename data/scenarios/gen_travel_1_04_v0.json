@@ -1,0 +1,94 @@
+{
+    "title": "The Airport Water Bottle",
+    "title_zh": "机场的水",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_travel_1_04_v0",
+    "tree": {
+        "setup": "The airport departure lounge, bright and echoey. You've passed through security and realized you have no water. A small convenience shop glows nearby. The shopkeeper, Xiao Chen, is arranging bottles of water by brand with the intensity of a chess player. Each row is exactly even.",
+        "setup_zh": "机场候机大厅，明亮又有回音。过了安检以后你发现没有水了。旁边有一个小便利店。店员小陈正在按品牌排列矿泉水瓶，专注得像在下棋。每一排都整整齐齐。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！买水吗？",
+                "text_pinyin": "nǐ hǎo! mǎi shuǐ ma?",
+                "text_en": "Hello! Buying water?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Buy some water.",
+                "options": [
+                    {
+                        "text_zh": "要一瓶水，谢谢。",
+                        "text_pinyin": "yào yì píng shuǐ, xièxie.",
+                        "text_en": "One bottle of water, please.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Chen selects a bottle from the front row -- the one with the most aesthetically pleasing label placement, naturally. 瓶 (píng) is the measure word for bottles."
+                    },
+                    {
+                        "text_zh": "水多少钱？",
+                        "text_pinyin": "shuǐ duōshao qián?",
+                        "text_en": "How much is water?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「八块。」Airport prices. Xiao Chen shrugs apologetically -- he doesn't set the prices, he just arranges the bottles. 多少钱 is your constant companion."
+                    },
+                    {
+                        "text_zh": "有没有便宜的水？",
+                        "text_pinyin": "yǒu méiyǒu piányi de shuǐ?",
+                        "text_en": "Do you have cheap water?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Chen gestures at the two sizes. Small or big. There is no 'cheap' in an airport -- only 'less expensive.' He understands the question though. 便宜 means 'cheap' or 'inexpensive.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "还要别的吗？",
+                "text_pinyin": "hái yào bié de ma?",
+                "text_en": "Need anything else?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide if you need anything else.",
+                "options": [
+                    {
+                        "text_zh": "不要了，谢谢。",
+                        "text_pinyin": "bú yào le, xièxie.",
+                        "text_en": "That's all, thanks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Chen rings you up and immediately turns back to his bottle arrangement. One has shifted during the transaction. This cannot stand."
+                    },
+                    {
+                        "text_zh": "有没有吃的？",
+                        "text_pinyin": "yǒu méiyǒu chī de?",
+                        "text_en": "Do you have food?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Chen points at a small shelf of individually wrapped snacks, arranged -- of course -- by color. 吃的 turns the verb 'eat' into a noun: 'something to eat.'"
+                    },
+                    {
+                        "text_zh": "我的飞机几点？",
+                        "text_pinyin": "wǒ de fēijī jǐ diǎn?",
+                        "text_en": "What time is my flight?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Chen blinks. He sells water. He does not know your flight schedule. But he gently points at the departure board across the hall."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。祝你旅途愉快！",
+                "text_pinyin": "hǎo de. zhù nǐ lǚtú yúkuài!",
+                "text_en": "OK. Have a pleasant journey!"
+            }
+        ],
+        "cultural_note": "Airport prices in China (机场价格) are higher than outside -- especially for water and snacks. Many travelers bring empty bottles and refill at free hot water stations (热水, rè shuǐ). 祝你旅途愉快 is a formal travel blessing."
+    }
+}

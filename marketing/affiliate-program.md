@@ -4,8 +4,8 @@
 
 ## Program Overview
 
-**Name:** Mandarin Partner Program
-**Commission:** 30% recurring for the lifetime of referred customers
+**Name:** Aelu Partner Program
+**Commission:** 25% recurring, capped at 24 months per referred user (pilot rate — see escalation criteria)
 **Cookie duration:** 90 days
 **Payout threshold:** $50 minimum
 **Payment method:** PayPal or Stripe Connect
@@ -16,23 +16,56 @@
 ## Commission Structure
 
 ### Standard Tier (all partners)
-- **30% recurring commission** on all payments from referred users
-- At $12/month, that's **$3.60/month per referred paying user**
-- Recurring means: as long as the user stays subscribed, the partner earns
-- 10 referred paying users = **$36/month passive income** for the partner
+- **25% recurring commission** on all payments from referred users, **for up to 24 months** per referred user
+- At $14.99/month, that's **$3.75/month per referred paying user**
+- After 24 months, the commission for that user ends — the partner has earned up to **$90 per user** over 2 years
+- 10 referred paying users = **$37.50/month passive income** for the partner (during the commission window)
 
-### Why 30% Recurring
+### Why 25% Recurring with a 24-Month Cap
 
-- **Industry standard for SaaS affiliates is 20-30%.** 30% is on the generous end, which matters when you're unknown and need partners to take a chance on you.
-- **Recurring beats one-time.** A one-time $10 bounty sounds better initially, but $3.60/month × 12 months = $43.20. Partners who understand recurring commissions prefer this.
-- **Your margins support it.** At $12/month with ~$0.50 in infrastructure costs, paying $3.60 in commission still leaves you $7.90/user/month. That's a healthy margin.
-- **It aligns incentives.** Partners are motivated to send quality traffic (users who stick around) because their commission depends on retention, not just signups.
+- **Industry standard for SaaS affiliates is 20-30%.** 25% is competitive enough to attract partners while protecting long-term margins. Most SaaS affiliate programs cap recurring commissions at 12-24 months — lifetime is the outlier, not the norm.
+- **Recurring beats one-time.** A one-time $10 bounty sounds fine initially, but $3.75/month x 24 months = $90. Partners who understand recurring commissions prefer this.
+- **The cap protects margins on loyal users.** A user who stays 5 years generates $900 in revenue. Without a cap, $270 goes to a partner who may have stopped promoting 4 years ago. With a 24-month cap, the partner earns $90 — still generous — and the remaining $630+ in margin fuels product development.
+- **It aligns incentives.** Partners are motivated to send quality traffic (users who stick around) because their commission depends on retention, not just signups. The 24-month window is long enough that this incentive fully applies.
+- **Your margins stay healthy.** At $14.99/month with ~$0.50 infrastructure + $0.45 payment processing, paying $3.75 in commission leaves $10.29/user/month. After 24 months: $14.04/user/month.
+
+### Data-Driven Escalation to 30%
+
+The 25% rate is a **pilot rate** for the first 6 months of the program. After 6 months, review these metrics:
+- Referred user 30-day retention: target >40%
+- Referred user free-to-paid conversion: target >8%
+- Average partner engagement: target >20% of partners making 1+ referral/month
+
+If all three metrics hit targets, escalate to **30% recurring (still capped at 24 months)**. This gives you data before locking in a more generous rate. Announce the increase to existing partners — it applies to all new referrals going forward.
 
 ### Upgrade Tier (top partners, manual invitation only)
-- **40% recurring** for partners who refer 50+ paying users
+- **35% recurring** (capped at 24 months) for partners who refer 50+ paying users
 - **Custom landing page** co-branded with their name/brand
 - **Early access** to new features for their audience
 - **Direct line** to you for feature requests from their community
+- **Priority support** for their referred users (faster response times)
+
+### Teacher Partner Track
+
+Teachers are the highest-leverage partners: they have direct, recurring access to new cohorts of Chinese learners every semester. They deserve a dedicated track.
+
+**Teacher Partner Commission:**
+- **35% recurring** on classroom subscriptions (per-student and semester), capped at 24 months
+- At $8/student/month: **$2.80/student/month** to the teacher
+- 30 students = **$84/month** — meaningful supplemental income for a Chinese teacher
+- New cohorts each semester create a self-renewing pipeline
+
+**Additional Teacher Benefits:**
+- 5 free student accounts (3 months each) to trial with their class before committing
+- Input on curriculum priorities — teachers shape what gets built next
+- "Recommended by [Teacher Name]" badge on their profile
+- Invitation to annual Teacher Advisory call (feedback session with the developer)
+
+**Why Teachers Get 35% From Day One:**
+- Highest conversion rate of any partner type (students are told to use it)
+- Lowest churn (semester-long commitment, class accountability)
+- Self-renewing (new cohort every semester without re-promoting)
+- The 35% on classroom pricing ($8/student) still yields $5.20/student/month margin — healthy for a B2B channel
 
 ---
 
@@ -40,11 +73,11 @@
 
 ### How Tracking Works
 
-1. Partner shares their unique link: `mandarinapp.com/?ref=PARTNER_CODE`
+1. Partner shares their unique link: `aeluapp.com/?ref=PARTNER_CODE`
 2. Visitor clicks link → first-party cookie set with `ref=PARTNER_CODE`, expires in 90 days
 3. If visitor signs up (free), the partner code is stored in the user record
 4. If user upgrades to paid within 90 days of clicking the link, the partner gets commission
-5. Commission continues for as long as the user remains a paying subscriber
+5. Commission continues for up to 24 months from the user's first payment date
 
 ### Attribution Rules
 - **First-click attribution**: the first partner link clicked gets credit (not the last)
@@ -67,29 +100,49 @@ CREATE TABLE affiliate_commission (
     partner_code TEXT NOT NULL,
     user_id INTEGER NOT NULL,
     amount REAL NOT NULL,
+    commission_rate REAL NOT NULL DEFAULT 0.25,
     payment_date TEXT NOT NULL,
+    first_payment_date TEXT,  -- tracks when 24-month window started
     paid_out INTEGER DEFAULT 0,
     payout_date TEXT,
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
+CREATE INDEX idx_commission_partner ON affiliate_commission(partner_code);
+CREATE INDEX idx_commission_user ON affiliate_commission(user_id);
+```
+
+Commission calculation logic:
+```python
+# Before recording a commission, check 24-month cap
+first_payment = get_first_payment_date(partner_code, user_id)
+if first_payment and (now - first_payment).days > 730:  # 24 months
+    # Commission window expired for this user — no commission recorded
+    return
+commission = payment_amount * commission_rate  # 0.25 standard, 0.35 upgrade/teacher
 ```
 
 ---
 
-## Partner Discount Codes
+## Partner Discount Codes (Opt-In)
 
-Each partner gets a unique discount code their audience can use:
+Partners may **optionally** request a discount code for their audience. This is not standard — some partners prefer to recommend the product on its merits alone, and we respect that.
 
-- **Standard discount: 20% off first 3 months**
-- Code format: `PARTNER20` (e.g., `OLLEH20` for Olle from Hacking Chinese)
-- This reduces price from $12 to $9.60/month for months 1-3
-- Partner still earns 30% of the discounted amount ($2.88/month for months 1-3, then $3.60/month ongoing)
+**If a partner requests a discount code:**
+- **15% off first 3 months**
+- Code format: `PARTNER15` (e.g., `OLLEH15` for Olle from Hacking Chinese)
+- This reduces price from $14.99 to $12.74/month for months 1-3
+- Partner earns 25% of the discounted amount ($3.19/month for months 1-3, then $3.75/month ongoing)
 
-### Why 20% Off (Not More)
+### Why Opt-In, Not Standard
 
-- **20% is meaningful but not desperate.** 50% off signals low confidence in the product.
+- **The partner's endorsement is the real value.** If a genuine recommendation isn't enough to convert, a discount won't fix the underlying mismatch. Making it opt-in lets partners decide whether their audience needs a sweetener.
+- **Discounts anchor users to a lower price.** The jump from $12.74 to $14.99 at month 4 creates a friction point that increases churn. Partners who understand retention prefer clean pricing.
+- **It reduces both revenue and partner commission simultaneously.** Everyone earns less during the discount window. Partners who skip the discount earn more per user from day one.
+
+### Why 15% (Not 20% or More)
+
+- **15% is enough to feel meaningful ($2.25/month savings) without signaling desperation.** 20%+ off a $14.99 product suggests you don't believe the price is justified.
 - **3 months is long enough** for users to build a habit and see results. After 3 months at full price, they stay because the app works — not because of a discount.
-- **The partner's endorsement is the real value.** The discount is a sweetener, not the pitch.
 
 ---
 
@@ -108,13 +161,16 @@ Each partner gets a unique discount code their audience can use:
 - Include referral link in description/show notes
 - Optional: dedicated review video/post
 
-### Type 2: Teacher / Tutor
+### Type 2: Teacher / Tutor (→ Teacher Partner Track)
+**See the Teacher Partner Track above for dedicated commission rates (35% on classroom pricing).**
+
 **What they get:**
 - Free lifetime full-access account
 - 5 free accounts for their students (3 months each)
-- Unique referral link + discount code
+- Unique referral link + optional discount code
 - "Recommended by [Teacher Name]" badge for their profile
 - Input on curriculum priorities (we want to build what teachers need)
+- Invitation to annual Teacher Advisory call
 
 **What they do:**
 - Recommend the app to their students as supplemental practice
@@ -129,7 +185,7 @@ Each partner gets a unique discount code their audience can use:
 
 **What they do:**
 - Link to us from their app/site where relevant
-- Optional: in-app recommendation ("for SRS practice, try Mandarin")
+- Optional: in-app recommendation ("for SRS practice, try Aelu")
 
 ### Type 4: Course Creator / Online School
 **What they get:**
@@ -202,31 +258,34 @@ Send the welcome email from partner-outreach.md with:
 Draft these into a proper legal document before launch. Key provisions:
 
 1. **No misleading claims.** Partners may not claim the app does things it doesn't. No "guarantees fluency" or "pass HSK in 2 weeks."
-2. **No paid advertising on branded terms.** Partners may not bid on "Mandarin app" or similar branded keywords in paid ads.
+2. **No paid advertising on branded terms.** Partners may not bid on "Aelu" or similar branded keywords in paid ads.
 3. **No spam.** No unsolicited bulk email, no fake reviews, no review manipulation.
 4. **Disclosure required.** Partners must disclose the affiliate relationship per FTC guidelines. "I earn a commission if you sign up through my link" is sufficient.
 5. **We can terminate.** Either party can end the relationship with 30 days notice. Earned commissions are still paid out.
-6. **Commission rate can change.** With 60 days notice. Existing referred users keep their original rate.
+6. **Commission rate can change.** With 60 days notice. Existing referred users keep their original rate. Rate increases (e.g., 25% → 30% escalation) apply to new referrals only by default, but may be retroactively applied to all active referrals as a goodwill gesture.
 7. **Cookie window can change.** With 30 days notice.
+8. **Commission cap is per referred user.** Each referred user generates commissions for up to 24 months from their first payment. This window is fixed at partner onboarding and does not change retroactively.
 
 ---
 
 ## Metrics to Track
 
-| Metric | Target | Red Flag |
-|--------|--------|----------|
-| Partner signup → first referral | Within 60 days | No referral after 90 days (dormant partner) |
-| Click → signup conversion | 10-20% | < 5% (partner audience mismatch) |
-| Signup → paid conversion | 5-12% | < 3% (same as organic baseline) |
-| Referred user retention (30-day) | 40-60% | < 30% (low quality traffic) |
-| Average commission per partner/month | $10-50 | — |
-| Active partners (1+ referral/month) | 20-30% of total partners | < 10% (program not compelling) |
+| Metric | Target | Red Flag | Escalation Trigger |
+|--------|--------|----------|--------------------|
+| Partner signup → first referral | Within 60 days | No referral after 90 days (dormant partner) | — |
+| Click → signup conversion | 10-20% | < 5% (partner audience mismatch) | — |
+| Signup → paid conversion | 5-12% | < 3% (same as organic baseline) | >8% triggers rate escalation review |
+| Referred user retention (30-day) | 40-60% | < 30% (low quality traffic) | >40% triggers rate escalation review |
+| Average commission per partner/month | $10-40 | — | — |
+| Active partners (1+ referral/month) | 20-30% of total partners | < 10% (program not compelling) | >20% triggers rate escalation review |
+| Commission cap utilization | Track how many users hit 24-month cap | — | If <5% hit cap in year 1, cap is working as intended |
 
-### When to Promote a Partner to Upgrade Tier
+### When to Promote a Partner to Upgrade Tier (35%)
 - 50+ paying referrals
 - Consistent monthly referrals for 3+ months
 - High retention on their referred users (>50% 30-day retention)
 - Proactive engagement (gives feedback, creates content regularly)
+- Note: upgrade to 35% still subject to 24-month cap per referred user
 
 ---
 
@@ -235,8 +294,10 @@ Draft these into a proper legal document before launch. Key provisions:
 | Phase | When | What |
 |-------|------|------|
 | Design | Pre-launch | This document (done) |
-| Build tracking | With multi-user auth | Referral link tracking, cookie, commission table |
-| Soft launch | Launch week | Invite 5-10 partners manually |
+| Build tracking | With multi-user auth | Referral link tracking, cookie, commission table with 24-month cap |
+| Soft launch | Launch week | Invite 5-10 partners manually at 25% pilot rate |
 | Application page | Launch + 2 weeks | Public affiliate signup page |
+| Teacher outreach | Launch + 4 weeks | Dedicated outreach to Chinese teachers (35% teacher track) |
 | First payouts | Launch + 3 months | First $50+ balances hit payout |
-| Scale | Launch + 6 months | Actively recruit, upgrade top partners |
+| Rate review | Launch + 6 months | Review escalation metrics; if targets met, increase to 30% |
+| Scale | Launch + 6 months | Actively recruit, upgrade top partners to 35% tier |

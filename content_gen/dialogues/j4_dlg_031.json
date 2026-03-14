@@ -1,0 +1,117 @@
+{
+    "title": "The Rain Garden",
+    "title_zh": "雨中的花园",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're sheltering from a sudden rain in a small temple garden. A retired teacher is there, watching the rain fall on lotus leaves in the pond.",
+        "setup_zh": "你在一座小庙的花园里躲雨。一位退休的老师也在那里，看着雨落在池塘里的荷叶上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别着急走，下雨天的花园是最美的。你听——雨打在荷叶上的声音，每一滴都不一样。我年轻的时候太忙了，从来没有时间停下来听这些。",
+                "text_pinyin": "Bié zháojí zǒu, xià yǔ tiān de huāyuán shì zuì měi de. Nǐ tīng — yǔ dǎ zài héyè shàng de shēngyīn, měi yī dī dōu bù yīyàng. Wǒ niánqīng de shíhou tài máng le, cónglái méiyǒu shíjiān tíng xiàlái tīng zhèxiē.",
+                "text_en": "Don't rush off — a garden in the rain is most beautiful. Listen — the sound of rain on lotus leaves, each drop different. When I was young I was too busy, never had time to stop and listen to these things."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his invitation to listen to the rain.",
+                "options": [
+                    {
+                        "text_zh": "您说得对，这个声音真的很特别。我平时下雨的时候都在想怎么不被淋湿，从来没有想过要去听雨的声音。今天是第一次。",
+                        "text_pinyin": "Nín shuō de duì, zhège shēngyīn zhēn de hěn tèbié. Wǒ píngshí xià yǔ de shíhou dōu zài xiǎng zěnme bú bèi lín shī, cónglái méiyǒu xiǎng guò yào qù tīng yǔ de shēngyīn. Jīntiān shì dì yī cì.",
+                        "text_en": "You're right, that sound is really special. Usually when it rains I'm just thinking about not getting wet — I've never thought about listening to the rain. Today is the first time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest about being too preoccupied to notice beauty — a genuine shift."
+                    },
+                    {
+                        "text_zh": "雨什么时候能停？",
+                        "text_pinyin": "Yǔ shénme shíhou néng tíng?",
+                        "text_en": "When will the rain stop?",
+                        "score": 0.0,
+                        "feedback": "Wants the rain to end instead of listening to it."
+                    },
+                    {
+                        "text_zh": "这个寺庙有多少年历史了？",
+                        "text_pinyin": "Zhège sìmiào yǒu duōshǎo nián lìshǐ le?",
+                        "text_en": "How old is this temple?",
+                        "score": 0.0,
+                        "feedback": "A tourist question during a contemplative moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第一次就很好。我以前教语文，教了三十年。课本里有很多关于自然的诗，但我那时候只是在教字和意思，没有真正地去感受。退休以后才发现，诗人写的那些东西，一直就在身边。",
+                "text_pinyin": "Dì yī cì jiù hěn hǎo. Wǒ yǐqián jiāo yǔwén, jiāo le sānshí nián. Kèběn lǐ yǒu hěn duō guānyú zìrán de shī, dàn wǒ nà shíhou zhǐ shì zài jiāo zì hé yìsi, méiyǒu zhēnzhèng de qù gǎnshòu. Tuìxiū yǐhòu cái fāxiàn, shīrén xiě de nàxiē dōngxi, yīzhí jiù zài shēnbiān.",
+                "text_en": "First time is already good. I used to teach Chinese literature for thirty years. Textbooks had so many poems about nature, but back then I was just teaching characters and meanings, never truly feeling them. Only after retirement did I discover that what the poets wrote was always right here around us."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his realization about literature and experience.",
+                "options": [
+                    {
+                        "text_zh": "也许有些东西需要先活过才能真正读懂。您教了三十年的诗，但可能现在才真正成了诗里的人。这不是遗憾，是另一种收获。",
+                        "text_pinyin": "Yěxǔ yǒuxiē dōngxi xūyào xiān huó guò cáinéng zhēnzhèng dú dǒng. Nín jiāo le sānshí nián de shī, dàn kěnéng xiànzài cái zhēnzhèng chéng le shī lǐ de rén. Zhè bú shì yíhàn, shì lìng yī zhǒng shōuhuò.",
+                        "text_en": "Some things need to be lived before they can be understood. You taught poetry for thirty years, but maybe only now have you become the person inside the poems. That's not regret — it's harvest.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes his delay as fulfillment — understanding comes through living."
+                    },
+                    {
+                        "text_zh": "那您以前的学生理解那些诗吗？",
+                        "text_pinyin": "Nà nín yǐqián de xuéshēng lǐjiě nàxiē shī ma?",
+                        "text_en": "Did your students understand those poems?",
+                        "score": 0.0,
+                        "feedback": "Redirects to students instead of his personal revelation."
+                    },
+                    {
+                        "text_zh": "退休以后您都做什么？",
+                        "text_pinyin": "Tuìxiū yǐhòu nín dōu zuò shénme?",
+                        "text_en": "What do you do after retirement?",
+                        "score": 0.0,
+                        "feedback": "A schedule question during a philosophical exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "另一种收获——这个说法我喜欢。你知道吗，其实现在我有时候会给自己朗读那些诗，在花园里，在雨天。不是为了教谁，就是为了自己。这才发现，诗原来是给自己读的。",
+                "text_pinyin": "Lìng yī zhǒng shōuhuò — zhège shuōfǎ wǒ xǐhuan. Nǐ zhīdào ma, qíshí xiànzài wǒ yǒu shíhou huì gěi zìjǐ lǎngdú nàxiē shī, zài huāyuán lǐ, zài yǔ tiān. Bú shì wèile jiāo shéi, jiù shì wèile zìjǐ. Zhè cái fāxiàn, shī yuánlái shì gěi zìjǐ dú de.",
+                "text_en": "Another kind of harvest — I like that phrase. You know, now sometimes I read those poems aloud to myself, in the garden, on rainy days. Not to teach anyone, just for myself. That's when I discovered: poems were always meant to be read for oneself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his discovery of reading for himself.",
+                "options": [
+                    {
+                        "text_zh": "在雨天的花园里给自己朗读——这本身就已经是一首诗了。我觉得您的学生如果知道您现在这样，一定会觉得，这才是最好的语文课。",
+                        "text_pinyin": "Zài yǔ tiān de huāyuán lǐ gěi zìjǐ lǎngdú — zhè běnshēn jiù yǐjīng shì yī shǒu shī le. Wǒ juéde nín de xuéshēng rúguǒ zhīdào nín xiànzài zhèyàng, yīdìng huì juéde, zhè cái shì zuì hǎo de yǔwén kè.",
+                        "text_en": "Reading aloud to yourself in a rainy garden — that itself is already a poem. I think if your students knew you were like this now, they'd say this is the best Chinese literature class of all.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "His life has become the poem he used to teach — the highest form of understanding."
+                    },
+                    {
+                        "text_zh": "您可以录下来放到网上，很多人会喜欢听的。",
+                        "text_pinyin": "Nín kěyǐ lù xiàlái fàng dào wǎng shàng, hěn duō rén huì xǐhuan tīng de.",
+                        "text_en": "You could record them and post them online — lots of people would enjoy listening.",
+                        "score": 0.0,
+                        "feedback": "Turns a private ritual into content creation."
+                    },
+                    {
+                        "text_zh": "您最喜欢哪首诗？",
+                        "text_pinyin": "Nín zuì xǐhuan nǎ shǒu shī?",
+                        "text_en": "Which poem is your favorite?",
+                        "score": 0.0,
+                        "feedback": "Requests a title when the conversation has gone beyond specific poems."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rain on lotus leaves (雨打荷叶) is one of the most celebrated natural sounds in Chinese aesthetics, appearing in countless poems. The concept of 听雨 (listening to rain) is itself a genre of contemplation. The retired teacher's journey from teaching poems to living them mirrors a common Chinese wisdom: understanding (懂) is not the same as knowing (知道)."
+    }
+}

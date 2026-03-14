@@ -1,0 +1,160 @@
+{
+    "title": "The Allergy Ambassador",
+    "title_zh": "过敏大使",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_4_02_v0",
+    "tree": {
+        "setup": "A bustling Sichuan restaurant at lunchtime. The aroma of chili oil hangs in the air like a benevolent fog. You have a peanut allergy — a fact that requires careful navigation in a cuisine that uses peanuts the way other cuisines use salt. The waitress, Sister Mei, has seen every dietary request imaginable and treats each one with absolute seriousness.",
+        "setup_zh": "午餐时间热闹的川菜馆。辣椒油的香气像一层慈祥的薄雾悬在空中。你对花生过敏——在一个使用花生就像别的菜系使用盐一样频繁的料理面前，这需要谨慎应对。服务员梅姐见过所有能想象到的饮食要求，对每一个都绝对认真。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！几位？有没有忌口的？",
+                "text_pinyin": "huānyíng guānglín! jǐ wèi? yǒu méiyǒu jìkǒu de?",
+                "text_en": "Welcome! How many? Any dietary restrictions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your peanut allergy.",
+                "options": [
+                    {
+                        "text_zh": "一位。我对花生过敏，比较严重。请问哪些菜没有花生？",
+                        "text_pinyin": "yí wèi. wǒ duì huāshēng guòmǐn, bǐjiào yánzhòng. qǐngwèn nǎxiē cài méiyǒu huāshēng?",
+                        "text_en": "Just one. I'm allergic to peanuts — it's quite serious. Which dishes don't have peanuts?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear, specific, with severity noted. Sister Mei immediately shifts to her allergy protocol, which is surprisingly thorough."
+                    },
+                    {
+                        "text_zh": "我不能吃花生。",
+                        "text_pinyin": "wǒ bù néng chī huāshēng.",
+                        "text_en": "I can't eat peanuts.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She understands and will guide you through the menu."
+                    },
+                    {
+                        "text_zh": "我有一点过敏。",
+                        "text_pinyin": "wǒ yǒu yìdiǎn guòmǐn.",
+                        "text_en": "I'm a little allergic.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "一点 downplays it — Sister Mei will ask follow-ups to understand the severity, because she takes no chances."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "花生过敏，知道了！我们的宫保鸡丁和凉拌菜里都有花生，不要点那些。麻婆豆腐、回锅肉和水煮鱼都没有花生。我去跟厨房说一下。",
+                "text_pinyin": "huāshēng guòmǐn, zhīdào le! wǒmen de gōngbǎo jīdīng hé liángbàn cài lǐ dōu yǒu huāshēng, búyào diǎn nàxiē. mápó dòufu, huíguōròu hé shuǐzhǔ yú dōu méiyǒu huāshēng. wǒ qù gēn chúfáng shuō yíxià.",
+                "text_en": "Peanut allergy, got it! Our kung pao chicken and cold dishes all have peanuts — don't order those. Mapo tofu, twice-cooked pork, and boiled fish don't. I'll tell the kitchen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order from the safe options.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你这么仔细！那我要一份麻婆豆腐和一份回锅肉，再来一碗米饭。",
+                        "text_pinyin": "xièxie nǐ zhème zǐxì! nà wǒ yào yí fèn mápó dòufu hé yí fèn huíguōròu, zài lái yì wǎn mǐfàn.",
+                        "text_en": "Thanks for being so thorough! I'll have the mapo tofu and twice-cooked pork, plus a bowl of rice.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thanking her attention to detail and ordering confidently — Sister Mei nods and writes with her characteristic double-underline for allergy orders."
+                    },
+                    {
+                        "text_zh": "麻婆豆腐吧。",
+                        "text_pinyin": "mápó dòufu ba.",
+                        "text_en": "Mapo tofu then.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A safe choice. She'll ask if you want rice, because no one should eat mapo tofu alone."
+                    },
+                    {
+                        "text_zh": "就这些能吃吗？选择好少啊。",
+                        "text_pinyin": "jiù zhèxiē néng chī ma? xuǎnzé hǎo shǎo a.",
+                        "text_en": "Only these? So few choices.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Sister Mei lists three more options from memory. Her mental database of allergen-free dishes is more reliable than the printed menu."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！辣度要什么级别的？微辣、中辣还是特辣？",
+                "text_pinyin": "hǎo de! là dù yào shénme jíbié de? wēi là, zhōng là háishì tè là?",
+                "text_en": "Great! What spice level? Mild, medium, or extra spicy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your spice level.",
+                "options": [
+                    {
+                        "text_zh": "中辣吧。我能吃辣，但是不要太夸张的那种。",
+                        "text_pinyin": "zhōng là ba. wǒ néng chī là, dànshì búyào tài kuāzhāng de nà zhǒng.",
+                        "text_en": "Medium. I can handle spicy, just not the dramatic kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sister Mei laughs.「不夸张的辣」— she'll make sure the kitchen hears that exact phrase."
+                    },
+                    {
+                        "text_zh": "微辣。",
+                        "text_pinyin": "wēi là.",
+                        "text_en": "Mild.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Playing it safe. The kitchen will calibrate accordingly."
+                    },
+                    {
+                        "text_zh": "特辣！",
+                        "text_pinyin": "tè là!",
+                        "text_en": "Extra spicy!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Sister Mei pauses, evaluating whether you truly understand what 特辣 means in a Sichuan restaurant. She respects your courage, if not your judgment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "菜来了！我确认过了，完全没有花生。慢用！",
+                "text_pinyin": "cài lái le! wǒ quèrèn guò le, wánquán méiyǒu huāshēng. màn yòng!",
+                "text_en": "Food's here! I've confirmed — absolutely no peanuts. Enjoy!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her.",
+                "options": [
+                    {
+                        "text_zh": "太谢谢你了，梅姐！你让我吃得很放心。下次还来这家！",
+                        "text_pinyin": "tài xièxie nǐ le, Méi jiě! nǐ ràng wǒ chī de hěn fàngxīn. xià cì hái lái zhè jiā!",
+                        "text_en": "Thank you so much, Sister Mei! You've put my mind completely at ease. I'll definitely come back!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "放心 is the highest compliment for allergy management. Sister Mei has earned a loyal customer."
+                    },
+                    {
+                        "text_zh": "谢谢！",
+                        "text_pinyin": "xièxie!",
+                        "text_en": "Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She smiles and moves to the next table with the efficiency of someone running a small empire."
+                    },
+                    {
+                        "text_zh": "看起来不错。",
+                        "text_pinyin": "kàn qǐlái búcuò.",
+                        "text_en": "Looks good.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She nods. The food will speak for itself — and it does."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The word 忌口 (jìkǒu) means dietary restrictions or food taboos. Chinese restaurants are increasingly aware of allergies (过敏, guòmǐn), especially in cities. It's wise to clearly state the severity — 严重过敏 (yánzhòng guòmǐn) means severe allergy."
+    }
+}

@@ -30,7 +30,7 @@ class WebBridge:
     Messages sent to the browser are JSON:
       {"type": "show", "text": "...", "html": "..."}
       {"type": "prompt", "text": "...", "id": "p-1"}
-      {"type": "record_request", "duration": 3.0, "id": "r-1"}
+      {"type": "record_request", "max_duration": 30.0, "id": "r-1", "allow_skip": true}
       {"type": "done", "summary": {...}}
 
     Messages received from the browser:
@@ -49,6 +49,8 @@ class WebBridge:
         self._disconnected = False
         self._reconnect_event = threading.Event()
         self._last_prompt = None   # (prompt_text, prompt_id) for re-send on resume
+        self._prompt_sent_at = None  # monotonic time when last prompt was sent
+        self._roundtrip_times = []   # WS roundtrip durations in ms
         logger.info("[%s] WebBridge created", self.session_uuid)
 
     def show_fn(self, text: str, end="\n"):
@@ -79,6 +81,8 @@ class WebBridge:
         self._prompt_counter += 1
         pid = f"p-{self._prompt_counter}"
         self._last_prompt = (prompt, pid)
+        import time as _time
+        self._prompt_sent_at = _time.monotonic()
         msg = json.dumps({"type": "prompt", "text": prompt, "id": pid})
         try:
             with self._lock:
@@ -149,6 +153,11 @@ class WebBridge:
 
     def receive_answer(self, value: str):
         """Called when the browser sends an answer."""
+        if self._prompt_sent_at is not None:
+            import time as _time
+            rt_ms = (_time.monotonic() - self._prompt_sent_at) * 1000.0
+            self._roundtrip_times.append(rt_ms)
+            self._prompt_sent_at = None
         self._answer_queue.put(value)
 
     def receive_audio_data(self, data, transcript=None):
@@ -174,7 +183,7 @@ class WebBridge:
             return (None, None)
         self._prompt_counter += 1
         rid = f"r-{self._prompt_counter}"
-        msg = json.dumps({"type": "record_request", "duration": duration, "id": rid})
+        msg = json.dumps({"type": "record_request", "max_duration": duration, "id": rid, "allow_skip": True})
         try:
             with self._lock:
                 if not self._disconnected:
@@ -183,8 +192,8 @@ class WebBridge:
             logger.debug("[%s] request_recording: connection lost", self.session_uuid)
             return (None, None)
 
-        # Wait for audio data — allow extra time for mic permission prompt
-        timeout = duration + 30
+        # Wait for audio data — generous timeout for user interaction + mic permission
+        timeout = max(duration + 30, 120)
         try:
             data_tuple = self._audio_queue.get(timeout=timeout)
         except queue.Empty:
@@ -261,6 +270,10 @@ class WebBridge:
         """Signal session complete."""
         if self._closed:
             return
+        if self._roundtrip_times:
+            summary["avg_ws_roundtrip_ms"] = round(
+                sum(self._roundtrip_times) / len(self._roundtrip_times), 1
+            )
         msg = json.dumps({"type": "done", "summary": summary})
         try:
             with self._lock:
@@ -281,9 +294,43 @@ class WebBridge:
             logger.debug("[%s] send_error: connection lost", self.session_uuid)
             self._closed = True
 
+    def send_progress(self, session_id: int, drill_index: int, drill_total: int,
+                       correct: int, completed: int, session_type: str = "standard"):
+        """Send session progress checkpoint to the browser after each drill."""
+        self._send({
+            "type": "progress",
+            "session_id": session_id,
+            "drill_index": drill_index,
+            "drill_total": drill_total,
+            "correct": correct,
+            "completed": completed,
+            "session_type": session_type,
+        })
+
     def send_audio_state(self, state: str):
         """Send audio state to the browser: 'playing', 'ready', or 'error'."""
         self._send({"type": "audio_state", "state": state})
+
+    def send_drill_meta(self, content_item_id: int, modality: str,
+                        correct: bool, hanzi: str = "",
+                        error_type: str = "",
+                        requirement_ref: dict = None,
+                        error_explanation: str = ""):
+        """Send drill result metadata to the browser for override support."""
+        payload = {
+            "type": "drill_meta",
+            "content_item_id": content_item_id,
+            "modality": modality,
+            "correct": correct,
+            "hanzi": hanzi,
+        }
+        if error_type:
+            payload["error_type"] = error_type
+        if requirement_ref:
+            payload["requirement_ref"] = requirement_ref
+        if error_explanation:
+            payload["error_explanation"] = error_explanation
+        self._send(payload)
 
 
 # ── Rich markup → HTML conversion ──────────────────────────────

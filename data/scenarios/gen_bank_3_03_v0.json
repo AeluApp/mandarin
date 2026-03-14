@@ -1,0 +1,94 @@
+{
+    "title": "The Exchange Rate Scholar",
+    "title_zh": "汇率学者",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "The foreign exchange counter at a Bank of China branch. You're exchanging a larger sum before traveling. The teller, Lao Xie, has worked the exchange counter for twenty years. He tracks exchange rates the way some people track weather -- daily, ritually, with opinions. He believes the yuan will strengthen by summer and is happy to share his analysis with anyone who'll listen.",
+        "setup_zh": "中国银行的外汇柜台。你出国前要换一笔较大的外币。柜员老谢在外汇柜台工作了二十年。他追踪汇率就像有些人追踪天气——每天、仪式化、有观点。他认为人民币夏天会升值，很乐意跟任何愿意听的人分享他的分析。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好。换外币吗？今天汇率不错，比昨天好一点。",
+                "text_pinyin": "nín hǎo. huàn wàibì ma? jīntiān huìlǜ búcuò, bǐ zuótiān hǎo yìdiǎn.",
+                "text_en": "Hello. Exchanging foreign currency? Today's rate is decent, a bit better than yesterday."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what you need to exchange.",
+                "options": [
+                    {
+                        "text_zh": "我要换五千美元。下周去美国出差。",
+                        "text_pinyin": "wǒ yào huàn wǔqiān měiyuán. xià zhōu qù měiguó chūchāi.",
+                        "text_en": "I need to exchange 5000 USD. I'm going to the US on a business trip next week.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Xie whistles softly.「五千。今天换还是等两天？我觉得后天汇率可能更好一点。」He can't help himself -- he has opinions. 出差 means 'business trip.'"
+                    },
+                    {
+                        "text_zh": "今天的汇率是多少？我想比较一下再决定。",
+                        "text_pinyin": "jīntiān de huìlǜ shì duōshao? wǒ xiǎng bǐjiào yíxià zài juédìng.",
+                        "text_en": "What's today's rate? I want to compare before deciding.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Xie points at the board.「一美元换七块零八。昨天是七块一。」比较一下再决定 means 'compare then decide' -- a wise financial habit."
+                    },
+                    {
+                        "text_zh": "换多少合适？我去两个星期。",
+                        "text_pinyin": "huàn duōshao héshì? wǒ qù liǎng gè xīngqī.",
+                        "text_en": "How much should I exchange? I'm going for two weeks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Xie considers this seriously.「看您在哪个城市。纽约贵一点，可能需要五千到八千。」换多少合适 asks for an appropriate amount."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "五千美元，按今天汇率，您需要付三万五千四百元人民币。要带现金还是直接从卡里扣？",
+                "text_pinyin": "wǔqiān měiyuán, àn jīntiān huìlǜ, nín xūyào fù sānwàn wǔqiān sìbǎi yuán rénmínbì. yào dài xiànjīn háishì zhíjiē cóng kǎ lǐ kòu?",
+                "text_en": "5000 USD at today's rate, you'll need 35,400 RMB. Do you want to pay cash or deduct from your card?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose payment method and ask a practical question.",
+                "options": [
+                    {
+                        "text_zh": "从卡里扣吧。请问可以换一部分大面额、一部分小面额的吗？",
+                        "text_pinyin": "cóng kǎ lǐ kòu ba. qǐngwèn kěyǐ huàn yí bùfen dà miàn'é, yí bùfen xiǎo miàn'é de ma?",
+                        "text_en": "Deduct from the card. Can I get some in large bills and some in small bills?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Xie nods approvingly -- he respects someone who thinks about denomination.「当然可以。一般大额的方便带，小额的方便花。」面额 means 'denomination.'"
+                    },
+                    {
+                        "text_zh": "从卡里扣。在美国可以再换回来吗？",
+                        "text_pinyin": "cóng kǎ lǐ kòu. zài měiguó kěyǐ zài huàn huílái ma?",
+                        "text_en": "From the card. Can I exchange it back in the US?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Xie tilts his head.「理论上可以，但是汇率可能不一样。建议用不完的带回来换。」换回来 means 'exchange back.'"
+                    },
+                    {
+                        "text_zh": "你觉得这个星期换好还是下个星期换好？",
+                        "text_pinyin": "nǐ juéde zhè ge xīngqī huàn hǎo háishì xià ge xīngqī huàn hǎo?",
+                        "text_en": "Do you think it's better to exchange this week or next week?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Xie's eyes gleam. You've opened Pandora's box.「按照目前的走势……」He launches into a five-minute analysis that would be at home on a financial news channel. He was born for this question."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，您的美元。请当面数清楚。祝您出差顺利！",
+                "text_pinyin": "hǎo le, nín de měiyuán. qǐng dāngmiàn shǔ qīngchu. zhù nín chūchāi shùnlì!",
+                "text_en": "Here's your USD. Please count it here. Wishing you a successful trip!"
+            }
+        ],
+        "cultural_note": "China has annual foreign exchange limits for individuals (equivalent to $50,000 USD). Exchanging large sums requires your passport and purpose declaration. 当面数清楚 (dāngmiàn shǔ qīngchu) -- always count money at the counter."
+    },
+    "id": "gen_bank_3_03_v0"
+}

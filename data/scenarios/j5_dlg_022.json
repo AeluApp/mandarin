@@ -1,0 +1,89 @@
+{
+    "title": "Heavy News, Light Hearts",
+    "title_zh": "沉重的新闻，平静的心",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaoxia are having tea after seeing a news story about a natural disaster in another province. The mood is heavy.",
+        "setup_zh": "你和朋友小夏看到一条关于外省自然灾害的新闻后在喝茶。气氛有些沉重。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看到那个新闻了吗？那个村子被洪水冲了，好多人失去了家。视频里有个老人站在废墟前面，什么话都没说，就是站在那里。那个画面我一直忘不了。",
+                "text_pinyin": "Nǐ kàn dào nàge xīnwén le ma? Nàge cūnzi bèi hóngshuǐ chōng le, hǎo duō rén shīqù le jiā. Shìpín lǐ yǒu ge lǎorén zhàn zài fèixū qiánmiàn, shénme huà dōu méi shuō, jiù shì zhàn zài nàlǐ. Nàge huàmiàn wǒ yīzhí wàng bù liǎo.",
+                "text_en": "Did you see that news? A village was hit by flooding, so many people lost their homes. In the video there's an elderly person standing in front of the ruins, not saying a word, just standing there. I can't get that image out of my head."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the heavy news.",
+                "options": [
+                    {
+                        "text_zh": "有时候最沉重的画面反而是最安静的。那个老人什么都没说，但你能感受到他失去的一切。我觉得看到这些新闻的时候，让自己心疼一下也是一种尊重。",
+                        "text_pinyin": "Yǒu shíhou zuì chénzhòng de huàmiàn fǎn'ér shì zuì ānjìng de. Nàge lǎorén shénme dōu méi shuō, dàn nǐ néng gǎnshòu dào tā shīqù de yīqiè. Wǒ juéde kàn dào zhèxiē xīnwén de shíhou, ràng zìjǐ xīnténg yíxià yě shì yī zhǒng zūnzhòng.",
+                        "text_en": "Sometimes the heaviest images are the quietest. The old man said nothing, but you could feel everything he lost. I think when we see news like this, allowing ourselves to feel the pain is itself a form of respect.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compassionate and thoughtful — honors both the suffering and the act of witnessing."
+                    },
+                    {
+                        "text_zh": "这种新闻看多了就习惯了。",
+                        "text_pinyin": "Zhè zhǒng xīnwén kàn duō le jiù xíguàn le.",
+                        "text_en": "You get used to news like this after seeing it enough.",
+                        "score": 0.0,
+                        "feedback": "Desensitized response — normalizes indifference."
+                    },
+                    {
+                        "text_zh": "天灾没办法避免，只能靠政府了。",
+                        "text_pinyin": "Tiānzāi méi bànfǎ bìmiǎn, zhǐ néng kào zhèngfǔ le.",
+                        "text_en": "Natural disasters can't be avoided, we can only rely on the government.",
+                        "score": 0.0,
+                        "feedback": "Deflects to systems — doesn't engage with the emotional weight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "让自己心疼一下……你说得对。我有时候会觉得自己关心这些没有用，毕竟我也帮不了什么。但看到那些画面无动于衷，好像也不对。",
+                "text_pinyin": "Ràng zìjǐ xīnténg yíxià…… nǐ shuō de duì. Wǒ yǒu shíhou huì juéde zìjǐ guānxīn zhèxiē méiyǒu yòng, bìjìng wǒ yě bāng bù liǎo shénme. Dàn kàn dào nàxiē huàmiàn wúdòng yú zhōng, hǎoxiàng yě bú duì.",
+                "text_en": "Allowing yourself to feel the pain... you're right. Sometimes I feel like my caring is useless since I can't really help. But being unmoved by those images doesn't feel right either."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on the value of caring even when you can't help directly.",
+                "options": [
+                    {
+                        "text_zh": "关心不一定有用才有价值。你会心疼，说明你还没麻木。在信息这么多的时代，保持这种感受力本身就很珍贵。做不了大事，做小事也行——记住他们就够了。",
+                        "text_pinyin": "Guānxīn bú yídìng yǒuyòng cái yǒu jiàzhí. Nǐ huì xīnténg, shuōmíng nǐ hái méi mámù. Zài xìnxī zhème duō de shídài, bǎochí zhè zhǒng gǎnshòu lì běnshēn jiù hěn zhēnguì. Zuò bù liǎo dà shì, zuò xiǎo shì yě xíng — jìzhù tāmen jiù gòu le.",
+                        "text_en": "Caring doesn't need to be useful to have value. That you feel the pain means you haven't gone numb. In an age of so much information, keeping that sensitivity is precious. Can't do big things? Small things work too — just remembering them is enough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Layered and gentle — validates compassion as meaningful regardless of its practical impact."
+                    },
+                    {
+                        "text_zh": "你可以去当志愿者啊。",
+                        "text_pinyin": "Nǐ kěyǐ qù dāng zhìyuànzhě a.",
+                        "text_en": "You could go volunteer.",
+                        "score": 0.0,
+                        "feedback": "Jumps to action — misses that she's processing her feelings first."
+                    },
+                    {
+                        "text_zh": "别想了，我们改天再聊。吃饭去吧。",
+                        "text_pinyin": "Bié xiǎng le, wǒmen gǎi tiān zài liáo. Chīfàn qù ba.",
+                        "text_en": "Stop thinking about it, let's talk another day. Let's go eat.",
+                        "score": 0.0,
+                        "feedback": "Avoidant — pushes away a conversation that matters."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "记住他们……嗯。也许这就够了。谢谢你没有让我觉得关心这些是多余的。",
+                "text_pinyin": "Jìzhù tāmen…… en. Yěxǔ zhè jiù gòu le. Xièxie nǐ méiyǒu ràng wǒ juéde guānxīn zhèxiē shì duōyú de.",
+                "text_en": "Remember them... yes. Maybe that's enough. Thank you for not making me feel like caring about this is unnecessary."
+            }
+        ],
+        "cultural_note": "Chinese social media amplifies both awareness of and fatigue from tragic news. The tension between compassion and helplessness (「我也帮不了什么」) is a common feeling. Charitable donation platforms like 腾讯公益 (Tencent Charity) have made micro-donations accessible, but the emotional processing of tragedy — allowing yourself to feel without being overwhelmed — remains a personal challenge in the information age."
+    }
+}

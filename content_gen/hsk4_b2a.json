@@ -1,0 +1,322 @@
+[
+  {
+    "id": "j4_observe_009",
+    "title": "The Window Cleaner",
+    "title_zh": "擦窗户的人",
+    "hsk_level": 4,
+    "text_zh": "我办公室在十二楼，每个月都有人来擦外面的窗户。擦窗户的工人被一根绳子吊在半空中，从上往下慢慢地擦。每次他出现在我的窗户外面，都会把我吓一跳。他看起来一点都不害怕，有时候还会朝里面的人微笑。他把每一块玻璃都擦得特别干净，连角落里的灰尘都不放过。擦完以后，阳光照进来变得更亮了，整个办公室的心情好像都变好了。有一次我打开窗户跟他说话，他说他已经做这个工作十年了。我问他怕不怕高，他说：「刚开始怕，后来就不怕了。往下看的时候，城市其实很美。你们天天在里面，反而看不到。」",
+    "text_pinyin": "Wǒ bàngōngshì zài shí'èr lóu, měi gè yuè dōu yǒu rén lái cā wàimiàn de chuānghu. Cā chuānghu de gōngrén bèi yì gēn shéngzi diào zài bàn kōng zhōng, cóng shàng wǎng xià mànmàn de cā. Měi cì tā chūxiàn zài wǒ de chuānghu wàimiàn, dōu huì bǎ wǒ xià yí tiào. Tā kàn qǐlái yìdiǎn dōu bú hàipà, yǒu shíhou hái huì cháo lǐmiàn de rén wēixiào. Tā bǎ měi yí kuài bōli dōu cā de tèbié gānjìng, lián jiǎoluò lǐ de huīchén dōu bú fàngguò. Cā wán yǐhòu, yángguāng zhào jìnlái biàn de gèng liàng le, zhěnggè bàngōngshì de xīnqíng hǎoxiàng dōu biàn hǎo le. Yǒu yí cì wǒ dǎkāi chuānghu gēn tā shuō huà, tā shuō tā yǐjīng zuò zhège gōngzuò shí nián le. Wǒ wèn tā pà bu pà gāo, tā shuō: 「Gāng kāishǐ pà, hòulái jiù bú pà le. Wǎng xià kàn de shíhou, chéngshì qíshí hěn měi. Nǐmen tiāntiān zài lǐmiàn, fǎn'ér kàn bu dào.」",
+    "text_en": "My office is on the twelfth floor, and every month someone comes to clean the outside of the windows. The window cleaner hangs in midair from a rope, slowly wiping from top to bottom. Every time he appears outside my window, I get a fright. He doesn't look scared at all — sometimes he even smiles at the people inside. He cleans every piece of glass spotlessly, not missing even the dust in the corners. After he's done, the sunlight that comes in is brighter, and the whole office's mood seems to lift. Once I opened the window to talk to him. He said he's been doing this job for ten years. I asked if he's afraid of heights. He said: 'Scared at first, then not anymore. When you look down, the city is actually beautiful. You're inside it every day, so you can't see it.'",
+    "questions": [
+      {"type": "mc", "q_zh": "擦窗户的工人怎么工作？", "q_en": "How does the window cleaner work?",
+       "options": [
+         {"text": "站在梯子上", "pinyin": "zhàn zài tīzi shàng", "text_en": "standing on a ladder", "correct": false},
+         {"text": "被绳子吊在半空中", "pinyin": "bèi shéngzi diào zài bàn kōng zhōng", "text_en": "hung in midair by a rope", "correct": true},
+         {"text": "从里面擦", "pinyin": "cóng lǐmiàn cā", "text_en": "cleaning from inside", "correct": false},
+         {"text": "用机器擦", "pinyin": "yòng jīqì cā", "text_en": "using a machine", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "工人说城市怎么样？", "q_en": "What does the worker say about the city?",
+       "options": [
+         {"text": "太大了", "pinyin": "tài dà le", "text_en": "too big", "correct": false},
+         {"text": "很吵", "pinyin": "hěn chǎo", "text_en": "very noisy", "correct": false},
+         {"text": "从上面往下看其实很美", "pinyin": "cóng shàngmiàn wǎng xià kàn qíshí hěn měi", "text_en": "actually beautiful when seen from above", "correct": true},
+         {"text": "没有绿色", "pinyin": "méiyǒu lǜsè", "text_en": "no greenery", "correct": false}
+       ], "difficulty": 0.5},
+      {"type": "mc", "q_zh": "擦完窗户以后，办公室有什么变化？", "q_en": "What changes in the office after the windows are cleaned?",
+       "options": [
+         {"text": "更安静了", "pinyin": "gèng ānjìng le", "text_en": "quieter", "correct": false},
+         {"text": "阳光更亮了，心情也变好了", "pinyin": "yángguāng gèng liàng le, xīnqíng yě biàn hǎo le", "text_en": "sunlight brighter, mood improved", "correct": true},
+         {"text": "温度变低了", "pinyin": "wēndù biàn dī le", "text_en": "temperature dropped", "correct": false},
+         {"text": "没有什么变化", "pinyin": "méiyǒu shénme biànhuà", "text_en": "no change", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_observe_010",
+    "title": "The Old Man's Radio",
+    "title_zh": "老人的收音机",
+    "hsk_level": 4,
+    "text_zh": "隔壁的张爷爷每天早上都听收音机。声音不大，但是因为墙壁比较薄，我总是能听到。六点是新闻，七点是京剧，八点是天气预报。他的生活好像完全跟着收音机的节目表在走。我搬来这里三年了，从来没有听到他换过台。有时候我出门上班的时候，会在楼道里碰到他。他穿着一件旧毛衣，手里拿着一个搪瓷杯子，里面泡着浓浓的茶。他总是朝我点点头，不太说话。有一天收音机突然没有声音了，我有一点担心，就去敲了他的门。原来是收音机坏了。我帮他修好以后，他很高兴地说：「没有它的声音，屋子里太安静了，我不习惯。」那一刻我才明白，对他来说，收音机不只是收音机，是陪伴。",
+    "text_pinyin": "Gébì de Zhāng yéye měi tiān zǎoshang dōu tīng shōuyīnjī. Shēngyīn bú dà, dànshì yīnwèi qiángbì bǐjiào báo, wǒ zǒng shì néng tīng dào. Liù diǎn shì xīnwén, qī diǎn shì jīngjù, bā diǎn shì tiānqì yùbào. Tā de shēnghuó hǎoxiàng wánquán gēnzhe shōuyīnjī de jiémùbiǎo zài zǒu. Wǒ bān lái zhèlǐ sān nián le, cónglái méiyǒu tīng dào tā huàn guò tái. Yǒu shíhou wǒ chūmén shàngbān de shíhou, huì zài lóudào lǐ pèng dào tā. Tā chuānzhe yí jiàn jiù máoyī, shǒu lǐ názhe yí gè tángcí bēizi, lǐmiàn pàozhe nóngnóng de chá. Tā zǒng shì cháo wǒ diǎndiǎn tóu, bú tài shuō huà. Yǒu yì tiān shōuyīnjī tūrán méiyǒu shēngyīn le, wǒ yǒu yìdiǎn dānxīn, jiù qù qiāo le tā de mén. Yuánlái shì shōuyīnjī huài le. Wǒ bāng tā xiū hǎo yǐhòu, tā hěn gāoxìng de shuō: 「Méiyǒu tā de shēngyīn, wūzi lǐ tài ānjìng le, wǒ bù xíguàn.」 Nà yí kè wǒ cái míngbai, duì tā lái shuō, shōuyīnjī bù zhǐ shì shōuyīnjī, shì péibàn.",
+    "text_en": "Old Mr. Zhang next door listens to the radio every morning. The volume isn't loud, but because the walls are thin, I can always hear it. Six o'clock is news, seven is Beijing opera, eight is the weather forecast. His life seems to follow the radio schedule entirely. I've lived here three years and never heard him change the station. Sometimes when I leave for work, I run into him in the hallway. He wears an old sweater, holding an enamel cup filled with strong tea. He always nods at me, doesn't say much. One day the radio suddenly went silent. I was a bit worried, so I knocked on his door. Turns out the radio had broken. After I helped fix it, he said happily: 'Without its sound, the room is too quiet — I'm not used to it.' In that moment I understood: for him, the radio isn't just a radio. It's companionship.",
+    "questions": [
+      {"type": "mc", "q_zh": "张爷爷每天六点听什么？", "q_en": "What does Grandpa Zhang listen to at six?",
+       "options": [
+         {"text": "京剧", "pinyin": "jīngjù", "text_en": "Beijing opera", "correct": false},
+         {"text": "新闻", "pinyin": "xīnwén", "text_en": "news", "correct": true},
+         {"text": "天气预报", "pinyin": "tiānqì yùbào", "text_en": "weather forecast", "correct": false},
+         {"text": "音乐", "pinyin": "yīnyuè", "text_en": "music", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "「我」为什么去敲张爷爷的门？", "q_en": "Why did 'I' knock on Grandpa Zhang's door?",
+       "options": [
+         {"text": "想去聊天", "pinyin": "xiǎng qù liáotiān", "text_en": "wanted to chat", "correct": false},
+         {"text": "收音机声音太大了", "pinyin": "shōuyīnjī shēngyīn tài dà le", "text_en": "the radio was too loud", "correct": false},
+         {"text": "收音机突然没声音了，有点担心", "pinyin": "shōuyīnjī tūrán méi shēngyīn le, yǒudiǎn dānxīn", "text_en": "radio went silent, was a bit worried", "correct": true},
+         {"text": "想借东西", "pinyin": "xiǎng jiè dōngxi", "text_en": "wanted to borrow something", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "对张爷爷来说，收音机是什么？", "q_en": "What is the radio to Grandpa Zhang?",
+       "options": [
+         {"text": "一个爱好", "pinyin": "yí gè àihào", "text_en": "a hobby", "correct": false},
+         {"text": "了解新闻的工具", "pinyin": "liǎojiě xīnwén de gōngjù", "text_en": "a tool for news", "correct": false},
+         {"text": "陪伴", "pinyin": "péibàn", "text_en": "companionship", "correct": true},
+         {"text": "习惯", "pinyin": "xíguàn", "text_en": "a habit", "correct": false}
+       ], "difficulty": 0.5}
+    ]
+  },
+  {
+    "id": "j4_observe_011",
+    "title": "The Stray Cat Colony",
+    "title_zh": "流浪猫的角落",
+    "hsk_level": 4,
+    "text_zh": "我们小区的垃圾房旁边住着一群流浪猫。它们白天躲在各种角落里睡觉，到了晚上才出来活动。小区里有几个人会定时去喂它们，其中一个是三楼的王阿姨。她每天晚上七点准时下楼，把猫粮倒在几个纸盘子里。猫们已经认识她了，只要听到她的脚步声，就会从各个方向跑过来。王阿姨给每只猫都起了名字，还会跟它们说话。邻居们对流浪猫的态度不太一样：有的人觉得它们很可爱，有的人觉得它们把小区弄脏了。但是王阿姨说：「它们也是住在这里的，只是没有人给它们发门卡而已。」这句话被邻居们传来传去，后来反对的声音就越来越少了。",
+    "text_pinyin": "Wǒmen xiǎoqū de lājī fáng pángbiān zhùzhe yì qún liúlàng māo. Tāmen báitiān duǒ zài gè zhǒng jiǎoluò lǐ shuìjiào, dào le wǎnshang cái chūlái huódòng. Xiǎoqū lǐ yǒu jǐ gè rén huì dìngshí qù wèi tāmen, qízhōng yí gè shì sān lóu de Wáng āyí. Tā měi tiān wǎnshang qī diǎn zhǔnshí xià lóu, bǎ māoliáng dào zài jǐ gè zhǐ pánzi lǐ. Māomen yǐjīng rènshi tā le, zhǐyào tīng dào tā de jiǎobù shēng, jiù huì cóng gè gè fāngxiàng pǎo guòlái. Wáng āyí gěi měi zhī māo dōu qǐ le míngzi, hái huì gēn tāmen shuō huà. Línjūmen duì liúlàng māo de tàidù bú tài yíyàng: yǒude rén juéde tāmen hěn kě'ài, yǒude rén juéde tāmen bǎ xiǎoqū nòng zāng le. Dànshì Wáng āyí shuō: 「Tāmen yě shì zhù zài zhèlǐ de, zhǐ shì méiyǒu rén gěi tāmen fā ménkǎ éryǐ.」 Zhè jù huà bèi línjūmen chuán lái chuán qù, hòulái fǎnduì de shēngyīn jiù yuè lái yuè shǎo le.",
+    "text_en": "A group of stray cats lives near the garbage room in our compound. During the day they hide and sleep in various corners; they only come out to move around at night. A few people in the compound feed them on a regular schedule. One of them is Auntie Wang from the third floor. Every evening at seven sharp, she goes downstairs and pours cat food onto paper plates. The cats already know her — as soon as they hear her footsteps, they come running from all directions. Auntie Wang has named every cat and even talks to them. Neighbors have different attitudes toward the strays: some think they're cute, others think they make the compound dirty. But Auntie Wang says: 'They live here too — it's just that nobody gave them an access card.' That line got passed around among the neighbors, and after that, the complaints grew fewer and fewer.",
+    "questions": [
+      {"type": "mc", "q_zh": "王阿姨什么时候去喂猫？", "q_en": "When does Auntie Wang feed the cats?",
+       "options": [
+         {"text": "每天早上七点", "pinyin": "měi tiān zǎoshang qī diǎn", "text_en": "every morning at seven", "correct": false},
+         {"text": "每天晚上七点", "pinyin": "měi tiān wǎnshang qī diǎn", "text_en": "every evening at seven", "correct": true},
+         {"text": "周末的下午", "pinyin": "zhōumò de xiàwǔ", "text_en": "weekend afternoons", "correct": false},
+         {"text": "中午十二点", "pinyin": "zhōngwǔ shí'èr diǎn", "text_en": "noon", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "王阿姨说流浪猫跟其他住户的区别是什么？", "q_en": "What does Auntie Wang say is the difference between stray cats and other residents?",
+       "options": [
+         {"text": "猫不会说话", "pinyin": "māo bú huì shuō huà", "text_en": "cats can't talk", "correct": false},
+         {"text": "猫没有被发门卡", "pinyin": "māo méiyǒu bèi fā ménkǎ", "text_en": "cats weren't given access cards", "correct": true},
+         {"text": "猫不交物业费", "pinyin": "māo bù jiāo wùyè fèi", "text_en": "cats don't pay property fees", "correct": false},
+         {"text": "猫白天睡觉", "pinyin": "māo báitiān shuìjiào", "text_en": "cats sleep during the day", "correct": false}
+       ], "difficulty": 0.5},
+      {"type": "mc", "q_zh": "王阿姨说完那句话以后怎么样了？", "q_en": "What happened after Auntie Wang said that line?",
+       "options": [
+         {"text": "邻居们更反对了", "pinyin": "línjūmen gèng fǎnduì le", "text_en": "neighbors opposed more", "correct": false},
+         {"text": "反对的声音越来越少了", "pinyin": "fǎnduì de shēngyīn yuè lái yuè shǎo le", "text_en": "complaints grew fewer", "correct": true},
+         {"text": "大家都开始喂猫了", "pinyin": "dàjiā dōu kāishǐ wèi māo le", "text_en": "everyone started feeding cats", "correct": false},
+         {"text": "没有什么变化", "pinyin": "méiyǒu shénme biànhuà", "text_en": "no change", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_urban_004",
+    "title": "The Night Market Closes",
+    "title_zh": "夜市收摊",
+    "hsk_level": 4,
+    "text_zh": "晚上十一点，夜市开始收摊了。卖烧烤的老板把火熄灭了，把烤架搬上小货车。卖衣服的阿姨把没卖完的衣服一件一件叠好，放进大袋子里。地上到处都是一次性筷子和塑料袋，但是不用担心——一会儿清洁工就会来。这个时候的夜市跟三个小时前完全不一样：从热热闹闹变成了空空荡荡。最后离开的总是那个卖豆腐脑的大爷，他要把大锅里剩下的豆腐脑倒掉，然后把锅洗干净。他做完这些的时候，其他摊位都已经走了。他把三轮车慢慢骑走的时候，整条街就只剩下路灯的光了。我有时候加班到很晚回来，刚好能看到收摊的最后几分钟。这也是城市的一种表情，只有少数人看得到。",
+    "text_pinyin": "Wǎnshang shíyī diǎn, yèshì kāishǐ shōu tān le. Mài shāokǎo de lǎobǎn bǎ huǒ xīmiè le, bǎ kǎojià bān shàng xiǎo huòchē. Mài yīfu de āyí bǎ méi mài wán de yīfu yí jiàn yí jiàn dié hǎo, fàng jìn dà dàizi lǐ. Dì shàng dàochù dōu shì yícìxìng kuàizi hé sùliào dài, dànshì búyòng dānxīn——yíhuìr qīngjié gōng jiù huì lái. Zhège shíhou de yèshì gēn sān gè xiǎoshí qián wánquán bù yíyàng: cóng rèrè-nàonào biàn chéng le kōngkōng-dàngdàng. Zuìhòu líkāi de zǒng shì nàge mài dòufunǎo de dàyé, tā yào bǎ dà guō lǐ shèng xià de dòufunǎo dào diào, ránhòu bǎ guō xǐ gānjìng. Tā zuò wán zhèxiē de shíhou, qítā tānwèi dōu yǐjīng zǒu le. Tā bǎ sānlúnchē mànmàn qí zǒu de shíhou, zhěng tiáo jiē jiù zhǐ shèng xià lùdēng de guāng le. Wǒ yǒu shíhou jiābān dào hěn wǎn huílái, gānghǎo néng kàn dào shōu tān de zuìhòu jǐ fēnzhōng. Zhè yě shì chéngshì de yì zhǒng biǎoqíng, zhǐ yǒu shǎoshù rén kàn de dào.",
+    "text_en": "At eleven at night, the night market begins packing up. The barbecue boss extinguishes the fire and loads the grill onto his small truck. The clothing vendor folds each unsold garment one by one and puts them into big bags. The ground is littered with disposable chopsticks and plastic bags, but no need to worry — the cleaners will come soon. The night market at this hour is completely different from three hours ago: from bustling to utterly empty. The last to leave is always the old man who sells tofu pudding. He has to pour out what's left in his big pot and then wash it clean. By the time he finishes, all the other stalls have already gone. When he slowly pedals his tricycle away, the whole street is left with nothing but the light of the streetlamps. Sometimes when I work overtime and come home late, I catch the last few minutes of the closing. This too is an expression of the city — one that only a few people get to see.",
+    "questions": [
+      {"type": "mc", "q_zh": "谁是最后离开夜市的？", "q_en": "Who is always the last to leave the night market?",
+       "options": [
+         {"text": "卖烧烤的老板", "pinyin": "mài shāokǎo de lǎobǎn", "text_en": "the barbecue boss", "correct": false},
+         {"text": "卖衣服的阿姨", "pinyin": "mài yīfu de āyí", "text_en": "the clothing vendor", "correct": false},
+         {"text": "卖豆腐脑的大爷", "pinyin": "mài dòufunǎo de dàyé", "text_en": "the tofu pudding seller", "correct": true},
+         {"text": "清洁工", "pinyin": "qīngjié gōng", "text_en": "the cleaner", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "夜市收摊以后变成什么样了？", "q_en": "What does the night market look like after closing?",
+       "options": [
+         {"text": "还是很热闹", "pinyin": "háishi hěn rènao", "text_en": "still bustling", "correct": false},
+         {"text": "从热热闹闹变成空空荡荡", "pinyin": "cóng rèrè-nàonào biàn chéng kōngkōng-dàngdàng", "text_en": "from bustling to empty", "correct": true},
+         {"text": "比白天更热闹", "pinyin": "bǐ báitiān gèng rènao", "text_en": "busier than daytime", "correct": false},
+         {"text": "很脏很乱", "pinyin": "hěn zāng hěn luàn", "text_en": "dirty and messy", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "「我」觉得夜市收摊是什么？", "q_en": "What does 'I' think closing time is?",
+       "options": [
+         {"text": "一件很无聊的事", "pinyin": "yí jiàn hěn wúliáo de shì", "text_en": "a boring thing", "correct": false},
+         {"text": "城市的一种表情", "pinyin": "chéngshì de yì zhǒng biǎoqíng", "text_en": "an expression of the city", "correct": true},
+         {"text": "不好看的场景", "pinyin": "bù hǎokàn de chǎngjǐng", "text_en": "an ugly scene", "correct": false},
+         {"text": "一个问题", "pinyin": "yí gè wèntí", "text_en": "a problem", "correct": false}
+       ], "difficulty": 0.5}
+    ]
+  },
+  {
+    "id": "j4_observe_012",
+    "title": "The Umbrella by the Door",
+    "title_zh": "门口的伞",
+    "hsk_level": 4,
+    "text_zh": "我家门口的伞架上放着七把伞，但是只有三把是我的。另外四把是被邻居们忘在这里的。有一把是上个月隔壁的李先生来借盐的时候忘的。有一把是快递员送包裹的时候放在门口的，大概被雨淋怕了。还有两把不知道是谁的，已经在那里放了好几个月了。我想把它们还给主人，但是不知道应该还给谁。我试过在电梯里贴了一张纸条：「门口有几把伞，不知道是不是你的？」结果没有人来拿。也许那些伞的主人已经把它们忘了，也许他们已经买了新的。不管怎样，那些伞就这样留在了我家门口，像几个安安静静的客人，不打扰我，也不离开。",
+    "text_pinyin": "Wǒ jiā ménkǒu de sǎnjià shàng fàngzhe qī bǎ sǎn, dànshì zhǐ yǒu sān bǎ shì wǒ de. Lìngwài sì bǎ shì bèi línjūmen wàng zài zhèlǐ de. Yǒu yì bǎ shì shàng gè yuè gébì de Lǐ xiānsheng lái jiè yán de shíhou wàng de. Yǒu yì bǎ shì kuàidìyuán sòng bāoguǒ de shíhou fàng zài ménkǒu de, dàgài bèi yǔ lín pà le. Hái yǒu liǎng bǎ bù zhīdào shì shéi de, yǐjīng zài nàlǐ fàng le hǎo jǐ gè yuè le. Wǒ xiǎng bǎ tāmen huán gěi zhǔrén, dànshì bù zhīdào yīnggāi huán gěi shéi. Wǒ shì guò zài diàntī lǐ tiē le yì zhāng zhǐtiáo: 「Ménkǒu yǒu jǐ bǎ sǎn, bù zhīdào shì bu shì nǐ de?」 Jiéguǒ méiyǒu rén lái ná. Yěxǔ nàxiē sǎn de zhǔrén yǐjīng bǎ tāmen wàng le, yěxǔ tāmen yǐjīng mǎi le xīn de. Bùguǎn zěnyàng, nàxiē sǎn jiù zhèyàng liú zài le wǒ jiā ménkǒu, xiàng jǐ gè ān'ānjìngjìng de kèrén, bù dǎrǎo wǒ, yě bù líkāi.",
+    "text_en": "On the umbrella stand by my door there are seven umbrellas, but only three are mine. The other four were left here by neighbors. One was forgotten by Mr. Li next door when he came to borrow salt last month. One was left at my door by a delivery person while dropping off a package — probably scared of the rain. Two more belong to who-knows-whom and have been there for several months. I wanted to return them to their owners but didn't know whom to give them to. I tried posting a note in the elevator: 'There are some umbrellas by my door — are any of them yours?' Nobody came to claim them. Perhaps those umbrellas' owners have already forgotten them, or perhaps they've already bought new ones. Either way, the umbrellas have stayed by my door, like a few quiet guests who neither disturb me nor leave.",
+    "questions": [
+      {"type": "mc", "q_zh": "七把伞里有几把是「我」的？", "q_en": "How many of the seven umbrellas belong to 'me'?",
+       "options": [
+         {"text": "四把", "pinyin": "sì bǎ", "text_en": "four", "correct": false},
+         {"text": "两把", "pinyin": "liǎng bǎ", "text_en": "two", "correct": false},
+         {"text": "三把", "pinyin": "sān bǎ", "text_en": "three", "correct": true},
+         {"text": "五把", "pinyin": "wǔ bǎ", "text_en": "five", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "「我」怎么试着找伞的主人？", "q_en": "How did 'I' try to find the umbrellas' owners?",
+       "options": [
+         {"text": "挨家挨户地问", "pinyin": "āijiā-āihù de wèn", "text_en": "asked door to door", "correct": false},
+         {"text": "在电梯里贴了纸条", "pinyin": "zài diàntī lǐ tiē le zhǐtiáo", "text_en": "posted a note in the elevator", "correct": true},
+         {"text": "在网上发消息", "pinyin": "zài wǎng shàng fā xiāoxi", "text_en": "posted online", "correct": false},
+         {"text": "跟物业说了", "pinyin": "gēn wùyè shuō le", "text_en": "told property management", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "「我」觉得那些伞像什么？", "q_en": "What does 'I' think the umbrellas are like?",
+       "options": [
+         {"text": "像一堆垃圾", "pinyin": "xiàng yì duī lājī", "text_en": "like a pile of trash", "correct": false},
+         {"text": "像几个安安静静的客人", "pinyin": "xiàng jǐ gè ān'ānjìngjìng de kèrén", "text_en": "like a few quiet guests", "correct": true},
+         {"text": "像几个迷路的孩子", "pinyin": "xiàng jǐ gè mí lù de háizi", "text_en": "like lost children", "correct": false},
+         {"text": "像装饰品", "pinyin": "xiàng zhuāngshìpǐn", "text_en": "like decorations", "correct": false}
+       ], "difficulty": 0.5}
+    ]
+  },
+  {
+    "id": "j4_inst_003",
+    "title": "The Post Office Counter",
+    "title_zh": "邮局的窗口",
+    "hsk_level": 4,
+    "text_zh": "我家附近有一个很老的邮局，里面只有两个窗口。左边的窗口负责寄包裹，右边的负责汇款和其他业务。现在大家都用快递和手机转账了，来邮局的人很少。但是每个星期三下午，总有几个老人来寄信。他们把信封上的地址写得很认真，一笔一画的。有一个老人每次都寄两封信，一封寄给在美国的儿子，一封寄给在上海的女儿。柜台后面的工作人员说，其实那个老人的儿女都跟他说了很多次「用微信就好了」，但是老人觉得只有收到手写的信，才能感受到他的心意。邮局虽然安静得有些冷清，但是它被这些老人的坚持温暖着。只要还有人寄信，邮局就不会关门。",
+    "text_pinyin": "Wǒ jiā fùjìn yǒu yí gè hěn lǎo de yóujú, lǐmiàn zhǐ yǒu liǎng gè chuāngkǒu. Zuǒbiān de chuāngkǒu fùzé jì bāoguǒ, yòubiān de fùzé huìkuǎn hé qítā yèwù. Xiànzài dàjiā dōu yòng kuàidì hé shǒujī zhuǎnzhàng le, lái yóujú de rén hěn shǎo. Dànshì měi gè xīngqīsān xiàwǔ, zǒng yǒu jǐ gè lǎorén lái jì xìn. Tāmen bǎ xìnfēng shàng de dìzhǐ xiě de hěn rènzhēn, yì bǐ yí huà de. Yǒu yí gè lǎorén měi cì dōu jì liǎng fēng xìn, yì fēng jì gěi zài Měiguó de érzi, yì fēng jì gěi zài Shànghǎi de nǚ'ér. Guìtái hòumiàn de gōngzuò rényuán shuō, qíshí nàge lǎorén de érnǚ dōu gēn tā shuō le hěn duō cì「yòng Wēixìn jiù hǎo le」, dànshì lǎorén juéde zhǐ yǒu shōu dào shǒuxiě de xìn, cái néng gǎnshòu dào tā de xīnyì. Yóujú suīrán ānjìng de yǒuxiē lěngqīng, dànshì tā bèi zhèxiē lǎorén de jiānchí wēnnuǎnzhe. Zhǐyào hái yǒu rén jì xìn, yóujú jiù bú huì guān mén.",
+    "text_en": "Near my home there's a very old post office with only two counters. The left one handles packages; the right one handles money transfers and other services. Now that everyone uses delivery services and mobile payments, few people come to the post office. But every Wednesday afternoon, a few elderly people come to mail letters. They write the addresses on their envelopes very carefully, stroke by stroke. One old man always mails two letters: one to his son in America, one to his daughter in Shanghai. The staff behind the counter says his children have told him many times 'just use WeChat,' but the old man feels that only a handwritten letter can convey his feelings. Although the post office is quiet to the point of desolation, it's warmed by these old people's persistence. As long as someone still mails letters, the post office won't close.",
+    "questions": [
+      {"type": "mc", "q_zh": "为什么来邮局的人很少了？", "q_en": "Why do few people come to the post office now?",
+       "options": [
+         {"text": "因为邮局搬家了", "pinyin": "yīnwèi yóujú bān jiā le", "text_en": "the post office moved", "correct": false},
+         {"text": "因为大家都用快递和手机转账了", "pinyin": "yīnwèi dàjiā dōu yòng kuàidì hé shǒujī zhuǎnzhàng le", "text_en": "everyone uses delivery and mobile payments", "correct": true},
+         {"text": "因为邮局的服务不好", "pinyin": "yīnwèi yóujú de fúwù bù hǎo", "text_en": "the post office has bad service", "correct": false},
+         {"text": "因为邮局太远了", "pinyin": "yīnwèi yóujú tài yuǎn le", "text_en": "the post office is too far", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "老人为什么不用微信？", "q_en": "Why doesn't the old man use WeChat?",
+       "options": [
+         {"text": "他不会用手机", "pinyin": "tā bú huì yòng shǒujī", "text_en": "he can't use a phone", "correct": false},
+         {"text": "他觉得手写的信才能表达心意", "pinyin": "tā juéde shǒuxiě de xìn cái néng biǎodá xīnyì", "text_en": "he feels only handwritten letters convey feelings", "correct": true},
+         {"text": "微信太贵了", "pinyin": "Wēixìn tài guì le", "text_en": "WeChat is too expensive", "correct": false},
+         {"text": "他的儿女没有微信", "pinyin": "tā de érnǚ méiyǒu Wēixìn", "text_en": "his children don't have WeChat", "correct": false}
+       ], "difficulty": 0.5},
+      {"type": "mc", "q_zh": "邮局什么时候不会关门？", "q_en": "When won't the post office close?",
+       "options": [
+         {"text": "只要还有人寄信", "pinyin": "zhǐyào hái yǒu rén jì xìn", "text_en": "as long as someone still mails letters", "correct": true},
+         {"text": "只要政府给钱", "pinyin": "zhǐyào zhèngfǔ gěi qián", "text_en": "as long as the government funds it", "correct": false},
+         {"text": "只要工作人员还在", "pinyin": "zhǐyào gōngzuò rényuán hái zài", "text_en": "as long as staff remain", "correct": false},
+         {"text": "永远不会关门", "pinyin": "yǒngyuǎn bú huì guān mén", "text_en": "it will never close", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_mystery_003",
+    "title": "The Piano at Midnight",
+    "title_zh": "午夜的钢琴声",
+    "hsk_level": 4,
+    "text_zh": "最近一个月，每到半夜十二点，我都能听到从楼上传来的钢琴声。弹的是同一首曲子，弹得不太好，有几个地方总是弹错。这让我很好奇——谁会在半夜练琴呢？我问了物业，他们说五楼住着一个年轻人，刚搬来不久。我本来想去跟他说半夜弹琴太吵了，但是有一天晚上我仔细听了那首曲子，发现好像是一首婚礼上常用的歌。从那以后，我开始注意到他弹得越来越好了，错的地方越来越少。又过了两个星期，钢琴声突然停了。我再也没有听到过。一个月后的一个周末，我在电梯里碰到了五楼的年轻人，他穿着西装，手里捧着一束花。他旁边站着一个穿白裙子的女生，笑得很开心。",
+    "text_pinyin": "Zuìjìn yí gè yuè, měi dào bànyè shí'èr diǎn, wǒ dōu néng tīng dào cóng lóu shàng chuán lái de gāngqín shēng. Tán de shì tóng yì shǒu qǔzi, tán de bú tài hǎo, yǒu jǐ gè dìfang zǒng shì tán cuò. Zhè ràng wǒ hěn hàoqí——shéi huì zài bànyè liàn qín ne? Wǒ wèn le wùyè, tāmen shuō wǔ lóu zhùzhe yí gè niánqīngrén, gāng bān lái bùjiǔ. Wǒ běnlái xiǎng qù gēn tā shuō bànyè tán qín tài chǎo le, dànshì yǒu yì tiān wǎnshang wǒ zǐxì tīng le nà shǒu qǔzi, fāxiàn hǎoxiàng shì yì shǒu hūnlǐ shàng cháng yòng de gē. Cóng nà yǐhòu, wǒ kāishǐ zhùyì dào tā tán de yuè lái yuè hǎo le, cuò de dìfang yuè lái yuè shǎo. Yòu guò le liǎng gè xīngqī, gāngqín shēng tūrán tíng le. Wǒ zài yě méiyǒu tīng dào guò. Yí gè yuè hòu de yí gè zhōumò, wǒ zài diàntī lǐ pèng dào le wǔ lóu de niánqīngrén, tā chuānzhe xīzhuāng, shǒu lǐ pěngzhe yí shù huā. Tā pángbiān zhànzhe yí gè chuān bái qúnzi de nǚshēng, xiào de hěn kāixīn.",
+    "text_en": "For the past month, every night at midnight I could hear piano music coming from upstairs. It was always the same piece, played not very well, with certain passages always going wrong. This made me curious — who would practice piano at midnight? I asked property management, and they said a young man had recently moved into the fifth floor. I originally wanted to go tell him playing piano at midnight was too noisy, but one night I listened carefully to the piece and realized it seemed to be a song commonly played at weddings. After that, I noticed he was getting better and better, with fewer and fewer mistakes. Two more weeks passed, and the piano suddenly stopped. I never heard it again. A month later, on a weekend, I ran into the young man from the fifth floor in the elevator. He was wearing a suit, holding a bouquet of flowers. Beside him stood a girl in a white dress, smiling radiantly.",
+    "questions": [
+      {"type": "mc", "q_zh": "年轻人弹的是什么样的曲子？", "q_en": "What kind of song was the young man playing?",
+       "options": [
+         {"text": "一首流行歌", "pinyin": "yì shǒu liúxíng gē", "text_en": "a pop song", "correct": false},
+         {"text": "一首婚礼上常用的歌", "pinyin": "yì shǒu hūnlǐ shàng cháng yòng de gē", "text_en": "a song commonly used at weddings", "correct": true},
+         {"text": "一首儿歌", "pinyin": "yì shǒu érgē", "text_en": "a children's song", "correct": false},
+         {"text": "一首古典音乐", "pinyin": "yì shǒu gǔdiǎn yīnyuè", "text_en": "a classical piece", "correct": false}
+       ], "difficulty": 0.5},
+      {"type": "mc", "q_zh": "钢琴声为什么突然停了？", "q_en": "Why did the piano music suddenly stop?",
+       "options": [
+         {"text": "因为邻居投诉了", "pinyin": "yīnwèi línjū tóusù le", "text_en": "neighbors complained", "correct": false},
+         {"text": "因为他已经学会了那首曲子", "pinyin": "yīnwèi tā yǐjīng xué huì le nà shǒu qǔzi", "text_en": "he had already learned the piece", "correct": true},
+         {"text": "因为钢琴坏了", "pinyin": "yīnwèi gāngqín huài le", "text_en": "the piano broke", "correct": false},
+         {"text": "因为他搬走了", "pinyin": "yīnwèi tā bān zǒu le", "text_en": "he moved away", "correct": false}
+       ], "difficulty": 0.5},
+      {"type": "mc", "q_zh": "「我」最后在电梯里看到了什么？", "q_en": "What did 'I' finally see in the elevator?",
+       "options": [
+         {"text": "年轻人一个人拿着花", "pinyin": "niánqīngrén yí gè rén názhe huā", "text_en": "the young man alone with flowers", "correct": false},
+         {"text": "年轻人穿着西装，旁边是穿白裙子的女生", "pinyin": "niánqīngrén chuānzhe xīzhuāng, pángbiān shì chuān bái qúnzi de nǚshēng", "text_en": "the young man in a suit, with a girl in white beside him", "correct": true},
+         {"text": "年轻人在搬钢琴", "pinyin": "niánqīngrén zài bān gāngqín", "text_en": "the young man moving a piano", "correct": false},
+         {"text": "年轻人在搬家", "pinyin": "niánqīngrén zài bān jiā", "text_en": "the young man moving out", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_comedy_002",
+    "title": "The Voice Message Mishap",
+    "title_zh": "语音消息发错了",
+    "hsk_level": 4,
+    "text_zh": "今天发生了一件特别尴尬的事。我本来想给好朋友发一条语音消息，抱怨我的新同事做事太慢了。结果我把语音消息发给了那个新同事。我发完以后才看到聊天界面上写着他的名字，整个人都呆住了。我赶紧把那条消息撤回了，但是已经过了两分钟了——微信只能在两分钟以内撤回。也就是说，他已经看到了。我坐在座位上不敢抬头，心想完了完了。过了一会儿，他走过来递给我一杯咖啡，笑着说：「我知道我做事比较慢，但是我做得很仔细。以后有什么意见可以直接跟我说，不用发语音。」我的脸一下子红了，但是从那以后，我们反而成了很好的朋友。",
+    "text_pinyin": "Jīntiān fāshēng le yí jiàn tèbié gāngà de shì. Wǒ běnlái xiǎng gěi hǎo péngyou fā yì tiáo yǔyīn xiāoxi, bàoyuàn wǒ de xīn tóngshì zuò shì tài màn le. Jiéguǒ wǒ bǎ yǔyīn xiāoxi fā gěi le nàge xīn tóngshì. Wǒ fā wán yǐhòu cái kàn dào liáotiān jièmiàn shàng xiězhe tā de míngzi, zhěnggè rén dōu dāi zhù le. Wǒ gǎnjǐn bǎ nà tiáo xiāoxi chèhuí le, dànshì yǐjīng guò le liǎng fēnzhōng le——Wēixìn zhǐ néng zài liǎng fēnzhōng yǐnèi chèhuí. Yě jiù shì shuō, tā yǐjīng kàn dào le. Wǒ zuò zài zuòwèi shàng bù gǎn tái tóu, xīn xiǎng wán le wán le. Guò le yíhuìr, tā zǒu guòlái dì gěi wǒ yì bēi kāfēi, xiàozhe shuō: 「Wǒ zhīdào wǒ zuò shì bǐjiào màn, dànshì wǒ zuò de hěn zǐxì. Yǐhòu yǒu shénme yìjiàn kěyǐ zhíjiē gēn wǒ shuō, búyòng fā yǔyīn.」 Wǒ de liǎn yíxiàzi hóng le, dànshì cóng nà yǐhòu, wǒmen fǎn'ér chéng le hěn hǎo de péngyou.",
+    "text_en": "Something especially embarrassing happened today. I meant to send a voice message to my good friend, complaining that my new colleague works too slowly. But I sent the voice message to that new colleague instead. I didn't notice until after I'd sent it — I saw his name on the chat screen and froze completely. I quickly tried to recall the message, but two minutes had already passed — WeChat only lets you recall within two minutes. In other words, he'd already seen it. I sat at my desk not daring to look up, thinking: it's over, it's over. After a while, he walked over and handed me a cup of coffee, smiling: 'I know I work slowly, but I work carefully. In the future, if you have any feedback, just tell me directly — no need for voice messages.' My face turned red instantly, but after that, we actually became good friends.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」本来想把语音消息发给谁？", "q_en": "Who did 'I' intend to send the voice message to?",
+       "options": [
+         {"text": "老板", "pinyin": "lǎobǎn", "text_en": "the boss", "correct": false},
+         {"text": "好朋友", "pinyin": "hǎo péngyou", "text_en": "a good friend", "correct": true},
+         {"text": "妈妈", "pinyin": "māma", "text_en": "mom", "correct": false},
+         {"text": "新同事", "pinyin": "xīn tóngshì", "text_en": "the new colleague", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "为什么消息撤回不了？", "q_en": "Why couldn't the message be recalled?",
+       "options": [
+         {"text": "因为手机坏了", "pinyin": "yīnwèi shǒujī huài le", "text_en": "the phone broke", "correct": false},
+         {"text": "因为已经超过两分钟了", "pinyin": "yīnwèi yǐjīng chāoguò liǎng fēnzhōng le", "text_en": "more than two minutes had passed", "correct": true},
+         {"text": "因为微信不能撤回语音", "pinyin": "yīnwèi Wēixìn bù néng chèhuí yǔyīn", "text_en": "WeChat can't recall voice messages", "correct": false},
+         {"text": "因为对方已经回复了", "pinyin": "yīnwèi duìfāng yǐjīng huífù le", "text_en": "the other person had replied", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "新同事怎么回应的？", "q_en": "How did the new colleague respond?",
+       "options": [
+         {"text": "很生气地走了", "pinyin": "hěn shēngqì de zǒu le", "text_en": "left angrily", "correct": false},
+         {"text": "假装没听到", "pinyin": "jiǎzhuāng méi tīng dào", "text_en": "pretended not to hear", "correct": false},
+         {"text": "递了一杯咖啡，笑着说以后可以直接跟他说", "pinyin": "dì le yì bēi kāfēi, xiàozhe shuō yǐhòu kěyǐ zhíjiē gēn tā shuō", "text_en": "handed over coffee, said to tell him directly next time", "correct": true},
+         {"text": "去跟老板告状了", "pinyin": "qù gēn lǎobǎn gào zhuàng le", "text_en": "went to complain to the boss", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_explain_001",
+    "title": "Why Old Buildings Have Courtyards",
+    "title_zh": "老房子为什么有院子",
+    "hsk_level": 4,
+    "text_zh": "在中国的很多老城区，传统的房子都有一个院子。这不只是为了好看，而是有很多实用的原因。首先，院子可以让阳光照进屋子里，这样房间就不会太暗。其次，夏天的时候院子能让风流通，比没有院子的房子凉快很多。另外，院子还是邻居们交流的地方——大家可以在院子里聊天、下棋、晾衣服。不但老人喜欢在院子里活动，小孩子也喜欢在院子里玩。可以说，院子不只是一个空间，它是一家人的「户外客厅」。现在的新楼房大部分都没有院子了，住在高楼里的人只能在阳台上养几盆花。虽然生活方便了很多，但是有些老人说，没有院子的房子少了一种「人情味」。",
+    "text_pinyin": "Zài Zhōngguó de hěn duō lǎo chéngqū, chuántǒng de fángzi dōu yǒu yí gè yuànzi. Zhè bù zhǐ shì wèile hǎokàn, érshì yǒu hěn duō shíyòng de yuányīn. Shǒuxiān, yuànzi kěyǐ ràng yángguāng zhào jìn wūzi lǐ, zhèyàng fángjiān jiù bú huì tài àn. Qícì, xiàtiān de shíhou yuànzi néng ràng fēng liútōng, bǐ méiyǒu yuànzi de fángzi liángkuai hěn duō. Lìngwài, yuànzi hái shì línjūmen jiāoliú de dìfang——dàjiā kěyǐ zài yuànzi lǐ liáotiān, xià qí, liàng yīfu. Búdàn lǎorén xǐhuan zài yuànzi lǐ huódòng, xiǎo háizi yě xǐhuan zài yuànzi lǐ wán. Kěyǐ shuō, yuànzi bù zhǐ shì yí gè kōngjiān, tā shì yì jiā rén de「hùwài kètīng」. Xiànzài de xīn lóufáng dà bùfen dōu méiyǒu yuànzi le, zhù zài gāolóu lǐ de rén zhǐ néng zài yángtái shàng yǎng jǐ pén huā. Suīrán shēnghuó fāngbiàn le hěn duō, dànshì yǒuxiē lǎorén shuō, méiyǒu yuànzi de fángzi shǎo le yì zhǒng「rénqíngwèi」.",
+    "text_en": "In many old districts in China, traditional houses all have a courtyard. This isn't just for aesthetics — there are many practical reasons. First, a courtyard lets sunlight into the rooms, so they won't be too dark. Second, in summer the courtyard allows air to circulate, making it much cooler than houses without one. Additionally, the courtyard is a place for neighbors to socialize — people can chat, play chess, and hang laundry there. Not only do the elderly like being active in the courtyard, children like playing there too. You could say a courtyard isn't just a space — it's a family's 'outdoor living room.' Most new apartment buildings don't have courtyards anymore; people living in high-rises can only grow a few potted flowers on their balconies. Although life has become much more convenient, some elderly people say that a house without a courtyard lacks a certain 'human warmth.'",
+    "questions": [
+      {"type": "mc", "q_zh": "院子在夏天有什么好处？", "q_en": "What benefit does a courtyard have in summer?",
+       "options": [
+         {"text": "可以种菜", "pinyin": "kěyǐ zhòng cài", "text_en": "you can grow vegetables", "correct": false},
+         {"text": "能让风流通，比较凉快", "pinyin": "néng ràng fēng liútōng, bǐjiào liángkuai", "text_en": "allows air to circulate, cooler", "correct": true},
+         {"text": "可以游泳", "pinyin": "kěyǐ yóuyǒng", "text_en": "you can swim", "correct": false},
+         {"text": "可以停车", "pinyin": "kěyǐ tíng chē", "text_en": "you can park cars", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "文章说院子像什么？", "q_en": "What does the article compare a courtyard to?",
+       "options": [
+         {"text": "一个花园", "pinyin": "yí gè huāyuán", "text_en": "a garden", "correct": false},
+         {"text": "一个户外客厅", "pinyin": "yí gè hùwài kètīng", "text_en": "an outdoor living room", "correct": true},
+         {"text": "一个操场", "pinyin": "yí gè cāochǎng", "text_en": "a playground", "correct": false},
+         {"text": "一个市场", "pinyin": "yí gè shìchǎng", "text_en": "a market", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "老人说没有院子的房子少了什么？", "q_en": "What do elderly people say houses without courtyards lack?",
+       "options": [
+         {"text": "阳光", "pinyin": "yángguāng", "text_en": "sunlight", "correct": false},
+         {"text": "空间", "pinyin": "kōngjiān", "text_en": "space", "correct": false},
+         {"text": "人情味", "pinyin": "rénqíngwèi", "text_en": "human warmth", "correct": true},
+         {"text": "安全感", "pinyin": "ānquángǎn", "text_en": "sense of security", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j4_identity_003",
+    "title": "The Left-Handed Girl",
+    "title_zh": "用左手的女生",
+    "hsk_level": 4,
+    "text_zh": "从小到大，我一直用左手写字。小时候老师总是让我换成右手，说这样写字才「正常」。妈妈也曾经把筷子放到我的右手里，但是我怎么都用不习惯。后来妈妈放弃了，说：「算了，只要你自己觉得方便就好。」长大以后我才知道，世界上大概百分之十的人是左撇子。在学校里，左撇子的人用剪刀、写字都比别人不方便一些，因为大部分工具是为右手设计的。但是我从来不觉得这是一个问题。相反，我觉得这是我的一个特点。有时候新认识的人看到我用左手吃饭，会很惊讶地说：「你是左撇子啊！」好像发现了一个小秘密一样。我笑着说：「对啊，这是我跟世界不一样的地方。」",
+    "text_pinyin": "Cóng xiǎo dào dà, wǒ yìzhí yòng zuǒ shǒu xiě zì. Xiǎo shíhou lǎoshī zǒng shì ràng wǒ huàn chéng yòu shǒu, shuō zhèyàng xiě zì cái「zhèngcháng」. Māma yě céngjīng bǎ kuàizi fàng dào wǒ de yòu shǒu lǐ, dànshì wǒ zěnme dōu yòng bu xíguàn. Hòulái māma fàngqì le, shuō: 「Suàn le, zhǐyào nǐ zìjǐ juéde fāngbiàn jiù hǎo.」 Zhǎng dà yǐhòu wǒ cái zhīdào, shìjiè shàng dàgài bǎi fēn zhī shí de rén shì zuǒpiězi. Zài xuéxiào lǐ, zuǒpiězi de rén yòng jiǎndāo, xiě zì dōu bǐ biéren bú fāngbiàn yìxiē, yīnwèi dà bùfen gōngjù shì wèi yòu shǒu shèjì de. Dànshì wǒ cónglái bù juéde zhè shì yí gè wèntí. Xiāngfǎn, wǒ juéde zhè shì wǒ de yí gè tèdiǎn. Yǒu shíhou xīn rènshi de rén kàn dào wǒ yòng zuǒ shǒu chī fàn, huì hěn jīngyà de shuō: 「Nǐ shì zuǒpiězi a!」 Hǎoxiàng fāxiàn le yí gè xiǎo mìmì yíyàng. Wǒ xiàozhe shuō: 「Duì a, zhè shì wǒ gēn shìjiè bù yíyàng de dìfang.」",
+    "text_en": "For as long as I can remember, I've always written with my left hand. When I was little, teachers always told me to switch to my right hand, saying that was the 'normal' way to write. My mom also once put chopsticks in my right hand, but I could never get used to it. Eventually she gave up and said: 'Never mind, as long as you find it comfortable.' Only after growing up did I learn that about ten percent of people in the world are left-handed. At school, left-handed people find scissors and writing a bit less convenient, since most tools are designed for the right hand. But I never feel this is a problem. On the contrary, I think it's one of my characteristics. Sometimes when newly acquainted people see me eating with my left hand, they say in surprise: 'You're left-handed!' — as if they've discovered a little secret. I smile and say: 'Yes, it's the way I'm different from the world.'",
+    "questions": [
+      {"type": "mc", "q_zh": "小时候老师让她做什么？", "q_en": "What did the teacher tell her to do as a child?",
+       "options": [
+         {"text": "练习写字", "pinyin": "liànxí xiě zì", "text_en": "practice writing", "correct": false},
+         {"text": "换成右手写字", "pinyin": "huàn chéng yòu shǒu xiě zì", "text_en": "switch to writing with the right hand", "correct": true},
+         {"text": "多用左手", "pinyin": "duō yòng zuǒ shǒu", "text_en": "use the left hand more", "correct": false},
+         {"text": "两只手都练", "pinyin": "liǎng zhī shǒu dōu liàn", "text_en": "practice with both hands", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "世界上大概多少人是左撇子？", "q_en": "About what percentage of people in the world are left-handed?",
+       "options": [
+         {"text": "百分之五", "pinyin": "bǎi fēn zhī wǔ", "text_en": "five percent", "correct": false},
+         {"text": "百分之十", "pinyin": "bǎi fēn zhī shí", "text_en": "ten percent", "correct": true},
+         {"text": "百分之二十", "pinyin": "bǎi fēn zhī èrshí", "text_en": "twenty percent", "correct": false},
+         {"text": "百分之三十", "pinyin": "bǎi fēn zhī sānshí", "text_en": "thirty percent", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "她觉得用左手是什么？", "q_en": "What does she think about being left-handed?",
+       "options": [
+         {"text": "一个问题", "pinyin": "yí gè wèntí", "text_en": "a problem", "correct": false},
+         {"text": "很不方便", "pinyin": "hěn bú fāngbiàn", "text_en": "very inconvenient", "correct": false},
+         {"text": "自己的一个特点", "pinyin": "zìjǐ de yí gè tèdiǎn", "text_en": "one of her characteristics", "correct": true},
+         {"text": "很正常的事", "pinyin": "hěn zhèngcháng de shì", "text_en": "a very normal thing", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  }
+]

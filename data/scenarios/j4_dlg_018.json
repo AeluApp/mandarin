@@ -1,0 +1,83 @@
+{
+    "title": "The Laundry Line",
+    "title_zh": "晾衣绳",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You're in a quiet old neighborhood. A woman, Auntie Zheng, is hanging laundry on a line between two trees. Sunlight filters through the damp clothes, making soft shadows on the ground.",
+        "setup_zh": "你在一个安静的老小区里。郑阿姨正在两棵树之间的晾衣绳上晾衣服。阳光透过湿衣服，在地上投下柔和的影子。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "现在的年轻人都用烘干机，谁还在外面晾衣服啊。但我就是喜欢把衣服晾在太阳下面，收下来的时候有阳光的味道。",
+                "text_pinyin": "Xiànzài de niánqīng rén dōu yòng hōnggān jī, shéi hái zài wàimiàn liàng yīfu a. Dàn wǒ jiù shì xǐhuān bǎ yīfu liàng zài tàiyáng xiàmiàn, shōu xiàlái de shíhou yǒu yángguāng de wèidào.",
+                "text_en": "Young people all use dryers now — who still hangs laundry outside? But I just like putting clothes out in the sun. When you take them in, they smell like sunshine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about sun-dried laundry.",
+                "options": [
+                    {
+                        "text_zh": "阳光的味道，烘干机做不出来。有些东西是机器代替不了的。我小时候最喜欢的就是把脸埋进刚晒好的被子里，那种暖暖的感觉。",
+                        "text_pinyin": "Yángguāng de wèidào, hōnggān jī zuò bù chūlái. Yǒuxiē dōngxi shì jīqì dàitì bù liǎo de. Wǒ xiǎo shíhou zuì xǐhuān de jiù shì bǎ liǎn mái jìn gāng shài hǎo de bèizi lǐ, nà zhǒng nuǎnnuǎn de gǎnjué.",
+                        "text_en": "The smell of sunshine — a dryer can't make that. Some things machines just can't replace. When I was little, my favorite thing was burying my face in a freshly sun-dried quilt, that warm feeling.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sensory and nostalgic — connects to childhood through smell and warmth."
+                    },
+                    {
+                        "text_zh": "用烘干机不是更方便吗？",
+                        "text_pinyin": "Yòng hōnggān jī bú shì gèng fāngbiàn ma?",
+                        "text_en": "Isn't using a dryer more convenient?",
+                        "score": 0.0,
+                        "feedback": "Argues for the thing she's explicitly choosing against."
+                    },
+                    {
+                        "text_zh": "下午会不会下雨？衣服别淋湿了。",
+                        "text_pinyin": "Xiàwǔ huì bú huì xià yǔ? Yīfu bié lín shī le.",
+                        "text_en": "Will it rain this afternoon? Don't let the clothes get wet.",
+                        "score": 0.0,
+                        "feedback": "Weather concern that interrupts her appreciation of simple pleasures."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是那种感觉！我女儿老说我太老了，跟不上时代。但我觉得有些习惯不需要改。不是所有旧的东西都是不好的。",
+                "text_pinyin": "Duì, jiù shì nà zhǒng gǎnjué! Wǒ nǚ'ér lǎo shuō wǒ tài lǎo le, gēn bú shàng shídài. Dàn wǒ juéde yǒuxiē xíguàn bù xūyào gǎi. Bú shì suǒyǒu jiù de dōngxi dōu shì bù hǎo de.",
+                "text_en": "Yes, that's exactly it! My daughter always says I'm too old, can't keep up with the times. But I think some habits don't need changing. Not everything old is bad."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her daughter's criticism.",
+                "options": [
+                    {
+                        "text_zh": "阳光的味道，烘干机做不出来。有些东西机器代替不了。小时候我最喜欢把脸埋进刚晒好的被子里，暖暖的。",
+                        "text_pinyin": "Yángguāng de wèidào, hōnggān jī zuò bù chūlái. Yǒuxiē dōngxi jīqì dàitì bù liǎo. Xiǎo shíhou wǒ zuì xǐhuan bǎ liǎn mái jìn gāng shài hǎo de bèizi lǐ, nuǎn nuǎn de.",
+                        "text_en": "The smell of sunshine — a dryer can't make that. Some things machines just can't replace. As a kid I loved burying my face in a freshly sun-dried quilt, so warm.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes 'old-fashioned' as intentional — validates her choice."
+                    },
+                    {
+                        "text_zh": "你女儿在哪里工作？",
+                        "text_pinyin": "Nǐ nǚ'ér zài nǎlǐ gōngzuò?",
+                        "text_en": "Where does your daughter work?",
+                        "score": 0.0,
+                        "feedback": "Career question unrelated to the conversation about old habits."
+                    },
+                    {
+                        "text_zh": "你也可以学学用手机，其实不难。",
+                        "text_pinyin": "Nǐ yě kěyǐ xué xué yòng shǒujī, qíshí bù nán.",
+                        "text_en": "You could learn to use a phone too, it's not hard.",
+                        "score": 0.0,
+                        "feedback": "Tech advice that sides with the daughter's criticism."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Hanging laundry (晾衣服) outdoors is a quintessential daily scene in Chinese neighborhoods, especially in older residential areas. The practice is both practical (taking advantage of natural sunlight) and sensory (the smell of sun-dried fabric is universally loved). Intergenerational tension between 'keeping up with the times' and preserving old habits is a common theme in Chinese family dynamics."
+    }
+}

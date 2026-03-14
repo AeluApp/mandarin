@@ -1,0 +1,117 @@
+{
+    "title": "The Bridge Inspector's Secret",
+    "title_zh": "桥梁检测员的秘密",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're hiking near a river in Guizhou province and meet a bridge inspector named Luo Ping. She's checking a 300-year-old stone bridge and mentions that this bridge has survived without maintenance because of a design principle that modern engineers have forgotten.",
+        "setup_zh": "你在贵州省一条河边徒步，遇到了一位叫罗萍的桥梁检测员。她正在检查一座三百年历史的石桥，提到这座桥不用维护就能存活，因为它用了现代工程师已经遗忘的设计原理。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这座桥三百年了，没人修过，但你看——每块石头之间没有水泥，靠的是石头自身的重量互相挤压。洪水来的时候，水从缝隙里流过去，桥反而不容易被冲垮。",
+                "text_pinyin": "Zhè zuò qiáo sānbǎi nián le, méi rén xiū guò, dàn nǐ kàn — měi kuài shítou zhī jiān méiyǒu shuǐní, kào de shì shítou zìshēn de zhòngliàng hùxiāng jǐyā. Hóngshuǐ lái de shíhou, shuǐ cóng fèngxì lǐ liú guòqù, qiáo fǎnér bù róngyì bèi chōng kuǎ.",
+                "text_en": "This bridge is three hundred years old, never repaired, but look — there's no cement between the stones. They hold together through the weight of the stones pressing against each other. When floodwaters come, water flows through the gaps, and the bridge is actually harder to wash away."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the counterintuitive design principle.",
+                "options": [
+                    {
+                        "text_zh": "这太反直觉了——缝隙不是弱点，反而是生存策略。现代桥梁追求密封和刚性，但刚性意味着一旦超过临界点就会断裂。这座桥的设计思路刚好相反：允许移动，允许渗透，反而获得了柔韧性。",
+                        "text_pinyin": "Zhè tài fǎn zhíjué le — fèngxì bú shì ruòdiǎn, fǎnér shì shēngcún cèlüè. Xiàndài qiáoliáng zhuīqiú mìfēng hé gāngxìng, dàn gāngxìng yìwèi zhe yīdàn chāoguò línjièdiǎn jiù huì duànliè. Zhè zuò qiáo de shèjì sīlù gānghǎo xiāngfǎn: yǔnxǔ yídòng, yǔnxǔ shèntòu, fǎnér huòdé le róurèn xìng.",
+                        "text_en": "So counterintuitive — the gaps aren't weaknesses, they're survival strategy. Modern bridges pursue rigidity, but rigidity means once you exceed the critical point, it fractures. This bridge's philosophy is opposite: allow movement, gain flexibility.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grasps the engineering inversion and articulates it clearly."
+                    },
+                    {
+                        "text_zh": "这附近有没有餐馆？走了很久了。",
+                        "text_pinyin": "Zhè fùjìn yǒu méiyǒu cānguǎn? Zǒu le hěn jiǔ le.",
+                        "text_en": "Are there any restaurants nearby? I've been walking a long time.",
+                        "score": 0.0,
+                        "feedback": "Hunger complaint during a fascinating engineering lesson."
+                    },
+                    {
+                        "text_zh": "贵州经常发洪水吗？",
+                        "text_pinyin": "Guìzhōu jīngcháng fā hóngshuǐ ma?",
+                        "text_en": "Does Guizhou often have floods?",
+                        "score": 0.0,
+                        "feedback": "Generic geography question that misses the design insight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你理解得很快。其实这个原理在很多古代建筑里都有——故宫的木结构也是这样，榫卯连接允许微小的移动，所以地震来的时候整体结构能'呼吸'。我们现在叫它'弹性设计'，但古人早就在用了。",
+                "text_pinyin": "Nǐ lǐjiě de hěn kuài. Qíshí zhège yuánlǐ zài hěn duō gǔdài jiànzhù lǐ dōu yǒu — Gùgōng de mù jiégòu yě shì zhèyàng, sǔnmǎo liánjiē yǔnxǔ wēixiǎo de yídòng, suǒyǐ dìzhèn lái de shíhou zhěngtǐ jiégòu néng 'hūxī'. Wǒmen xiànzài jiào tā 'tánxìng shèjì', dàn gǔrén zǎo jiù zài yòng le.",
+                "text_en": "You understand quickly. This principle appears in many ancient buildings — the Forbidden City's wooden structure works the same way. Mortise-and-tenon joints allow micro-movements, so when an earthquake hits, the whole structure can 'breathe.' We now call it 'resilient design,' but the ancients were already using it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Connect the engineering principle to a broader idea.",
+                "options": [
+                    {
+                        "text_zh": "也许两者不是对立的。疲倦累积到一定程度就变成疏远。刚开始可能只是'今天太累了听不进去'，但每次都这样，慢慢就变成了习惯性的缺席。身体在场，心已经走了——很多关系终结的前兆。",
+                        "text_pinyin": "Yěxǔ liǎng zhě bú shì duìlì de. Píjuàn lěijī dào yīdìng chéngdù jiù biàn chéng shūyuǎn. Gāng kāishǐ kěnéng zhǐ shì 'jīntiān tài lèi le tīng bù jìnqù', dàn měi cì dōu zhèyàng, mànmàn jiù biàn chéng le xíguàn xìng de quēxí. Shēntǐ zàichǎng, xīn yǐjīng zǒu le — hěn duō guānxì zhōngjié de qiánzhào.",
+                        "text_en": "Maybe they're not opposites. Fatigue accumulated becomes estrangement. At first just 'too tired today to listen,' but repeated, it becomes habitual absence. Body present, heart gone — precursor to many relationships ending.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Excellent abstraction — connects ancient engineering to a general principle about rigidity and resilience."
+                    },
+                    {
+                        "text_zh": "你检测这座桥需要多长时间？",
+                        "text_pinyin": "Nǐ jiǎncè zhè zuò qiáo xūyào duō cháng shíjiān?",
+                        "text_en": "How long does it take you to inspect this bridge?",
+                        "score": 0.0,
+                        "feedback": "Logistical question that misses the conceptual discussion."
+                    },
+                    {
+                        "text_zh": "我想拍张照片，你觉得从哪个角度好？",
+                        "text_pinyin": "Wǒ xiǎng pāi zhāng zhàopiàn, nǐ juéde cóng nǎge jiǎodù hǎo?",
+                        "text_en": "I want to take a photo, which angle do you think is best?",
+                        "score": 0.0,
+                        "feedback": "Photography tangent during a deep conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没错。我经常跟同行说——我们做桥梁检测的，不应该只看裂缝在哪里，更应该看这座桥是怎么跟环境共处的。一座好桥不是抵抗自然的，是跟自然谈判的。三百年的桥在这里，旁边那座二十年的混凝土桥已经裂了。",
+                "text_pinyin": "Méi cuò. Wǒ jīngcháng gēn tóngháng shuō — wǒmen zuò qiáoliáng jiǎncè de, bù yīnggāi zhǐ kàn lièfèng zài nǎlǐ, gèng yīnggāi kàn zhè zuò qiáo shì zěnme gēn huánjìng gòngchǔ de. Yī zuò hǎo qiáo bú shì dǐkàng zìrán de, shì gēn zìrán tánpàn de. Sānbǎi nián de qiáo zài zhèlǐ, pángbiān nà zuò èrshí nián de hùnníngtǔ qiáo yǐjīng liè le.",
+                "text_en": "Exactly. I often tell my colleagues — those of us in bridge inspection shouldn't just look for where the cracks are. We should look at how the bridge coexists with its environment. A good bridge doesn't resist nature; it negotiates with nature. This 300-year-old bridge is standing here, while the 20-year-old concrete bridge next to it is already cracking."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the poetry of her engineering philosophy.",
+                "options": [
+                    {
+                        "text_zh": "'跟自然谈判'——这个说法太好了。其实这也是一种谦逊的工程观：承认我们不可能控制一切，最好的策略不是对抗而是适应。看来三百年前的工匠比我们更懂这个道理。",
+                        "text_pinyin": "'Gēn zìrán tánpàn' — zhège shuōfǎ tài hǎo le. Qíshí zhè yě shì yī zhǒng qiānxùn de gōngchéng guān: chéngrèn wǒmen bù kěnéng kòngzhì yīqiè, zuì hǎo de cèlüè bú shì duìkàng ér shì shìyìng. Kàn lái sānbǎi nián qián de gōngjiang bǐ wǒmen gèng dǒng zhège dàolǐ.",
+                        "text_en": "'Negotiating with nature' — beautiful. A humble engineering philosophy: accepting we can't control everything, the best strategy is adaptation, not resistance. The craftsmen 300 years ago understood this better than we do.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Echoes her language, draws out the philosophical implication, and acknowledges ancestral wisdom without romanticizing it."
+                    },
+                    {
+                        "text_zh": "你做这个工作收入怎么样？",
+                        "text_pinyin": "Nǐ zuò zhège gōngzuò shōurù zěnmeyàng?",
+                        "text_en": "How's the pay for this kind of work?",
+                        "score": 0.0,
+                        "feedback": "Salary question during a philosophical moment."
+                    },
+                    {
+                        "text_zh": "贵州的天气真不错。",
+                        "text_pinyin": "Guìzhōu de tiānqì zhēn búcuò.",
+                        "text_en": "Guizhou's weather is really nice.",
+                        "score": 0.0,
+                        "feedback": "Weather comment that deflates the conversation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China has thousands of ancient stone bridges, many built using dry-stone (无水泥) techniques passed down through generations. The principle of flexible joints appears throughout traditional Chinese architecture — from the mortise-and-tenon (榫卯) joinery of the Forbidden City to the 'floating' foundations of ancient pagodas. Modern Chinese engineering has increasingly revisited these principles, especially after studies showed that buildings with rigid concrete frames performed worse in the 2008 Sichuan earthquake than some older flexible-frame structures."
+    }
+}

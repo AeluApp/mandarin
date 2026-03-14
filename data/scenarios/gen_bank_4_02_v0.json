@@ -1,0 +1,196 @@
+{
+    "title": "The Lost Card Vigil",
+    "title_zh": "银行卡失踪记",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_4_02_v0",
+    "tree": {
+        "setup": "Rain streaks the windows of the bank branch on Maple Street. You've just realized your bank card is missing — it could be in the taxi, in your coat pocket, or possibly being used by someone to buy an alarming quantity of instant noodles. Behind the counter, Ms. Zhou adjusts her glasses with the calm of someone who has guided hundreds of panicked customers through this exact moment.",
+        "setup_zh": "雨水顺着枫树街银行支行的窗户往下流。你刚发现银行卡不见了——可能在出租车上，可能在外套口袋里，也可能正被某人用来购买数量惊人的方便面。柜台后面，周女士扶了扶眼镜，带着引导过无数慌张客户度过这种时刻的从容。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，看您好像很着急，怎么了？",
+                "text_pinyin": "nín hǎo, kàn nín hǎoxiàng hěn zháojí, zěnme le?",
+                "text_en": "Hello — you seem quite anxious. What's wrong?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain that you've lost your bank card.",
+                "options": [
+                    {
+                        "text_zh": "你好，我的银行卡丢了，我想挂失。",
+                        "text_pinyin": "nǐ hǎo, wǒ de yínháng kǎ diū le, wǒ xiǎng guà shī.",
+                        "text_en": "Hello, I've lost my bank card and I'd like to report it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — 挂失 (guà shī) is exactly the right term. Ms. Zhou's shoulders relax; she's dealing with someone who knows the vocabulary."
+                    },
+                    {
+                        "text_zh": "我找不到我的卡了！怎么办？",
+                        "text_pinyin": "wǒ zhǎo bú dào wǒ de kǎ le! zěnme bàn?",
+                        "text_en": "I can't find my card! What do I do?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The urgency comes through. Ms. Zhou will guide you to the right procedure from here."
+                    },
+                    {
+                        "text_zh": "我的卡……不知道在哪里……",
+                        "text_pinyin": "wǒ de kǎ……bù zhīdào zài nǎlǐ……",
+                        "text_en": "My card... I don't know where it is...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Zhou hands you a small cup of water. Hydration first, paperwork second — that's her philosophy."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "别着急，我们先把卡冻结，这样别人就用不了了。请把您的身份证给我。",
+                "text_pinyin": "bié zháojí, wǒmen xiān bǎ kǎ dòngjié, zhèyàng biéren jiù yòng bù liǎo le. qǐng bǎ nín de shēnfènzhèng gěi wǒ.",
+                "text_en": "Don't worry — let's freeze the card first so no one else can use it. Please give me your ID."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your ID and ask how long the process takes.",
+                "options": [
+                    {
+                        "text_zh": "给你，这是我的身份证。冻结大概要多长时间？",
+                        "text_pinyin": "gěi nǐ, zhè shì wǒ de shēnfènzhèng. dòngjié dàgài yào duō cháng shíjiān?",
+                        "text_en": "Here, this is my ID. How long does the freeze take?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical question. Ms. Zhou appreciates customers who think ahead while she types."
+                    },
+                    {
+                        "text_zh": "好的，身份证在这里。",
+                        "text_pinyin": "hǎo de, shēnfènzhèng zài zhèlǐ.",
+                        "text_en": "OK, here's my ID.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. She takes it and begins typing with the speed of someone who could do this blindfolded."
+                    },
+                    {
+                        "text_zh": "等一下，我先找找身份证……希望身份证没有也丢了。",
+                        "text_pinyin": "děng yíxià, wǒ xiān zhǎozhǎo shēnfènzhèng……xīwàng shēnfènzhèng méiyǒu yě diū le.",
+                        "text_en": "Wait, let me find my ID... I hope I haven't lost that too.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Zhou maintains her composure, though her left eyebrow rises approximately one millimeter."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "冻结马上就能办好。您记得最后一次用卡是什么时候吗？",
+                "text_pinyin": "dòngjié mǎshàng jiù néng bàn hǎo. nín jìde zuìhòu yí cì yòng kǎ shì shénme shíhòu ma?",
+                "text_en": "The freeze can be done immediately. Do you remember when you last used the card?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her when you last used the card.",
+                "options": [
+                    {
+                        "text_zh": "我记得昨天下午在超市用过，之后就没用了。",
+                        "text_pinyin": "wǒ jìde zuótiān xiàwǔ zài chāoshì yòng guò, zhīhòu jiù méi yòng le.",
+                        "text_en": "I remember using it yesterday afternoon at the supermarket. Haven't used it since.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear timeline. Ms. Zhou nods — this will help them check for any unusual activity."
+                    },
+                    {
+                        "text_zh": "好像是前天吧。",
+                        "text_pinyin": "hǎoxiàng shì qiántiān ba.",
+                        "text_en": "I think it was the day before yesterday.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Approximate but helpful. She can work with that."
+                    },
+                    {
+                        "text_zh": "我不太记得了。",
+                        "text_pinyin": "wǒ bú tài jìde le.",
+                        "text_en": "I don't really remember.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Zhou writes「不确定」on the form with the penmanship of someone who has made peace with ambiguity."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，卡已经冻结了。您想现在补办一张新卡吗？大概一个星期能拿到。",
+                "text_pinyin": "hǎo de, kǎ yǐjīng dòngjié le. nín xiǎng xiànzài bǔ bàn yì zhāng xīn kǎ ma? dàgài yí gè xīngqī néng ná dào.",
+                "text_en": "OK, the card is frozen. Would you like to apply for a replacement now? It takes about a week."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to get a replacement card.",
+                "options": [
+                    {
+                        "text_zh": "好的，请帮我补办一张。一个星期后来取就可以吗？",
+                        "text_pinyin": "hǎo de, qǐng bāng wǒ bǔ bàn yì zhāng. yí gè xīngqī hòu lái qǔ jiù kěyǐ ma?",
+                        "text_en": "Yes, please help me get a replacement. I just come pick it up in a week?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "补办 (bǔ bàn) — excellent vocabulary for 'replacement.' Ms. Zhou is already printing the form."
+                    },
+                    {
+                        "text_zh": "好，我要补办。",
+                        "text_pinyin": "hǎo, wǒ yào bǔ bàn.",
+                        "text_en": "Yes, I want a replacement.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Short and clear. She begins the paperwork."
+                    },
+                    {
+                        "text_zh": "我再想想吧。也许卡还能找到。",
+                        "text_pinyin": "wǒ zài xiǎngxiǎng ba. yěxǔ kǎ hái néng zhǎo dào.",
+                        "text_en": "Let me think about it. Maybe the card will turn up.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The optimism of someone who checks between couch cushions. Ms. Zhou files this under「等等再说。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，都办好了。新卡一个星期后可以来拿。带上身份证就行。还有什么需要帮忙的吗？",
+                "text_pinyin": "hǎo de, dōu bàn hǎo le. xīn kǎ yí gè xīngqī hòu kěyǐ lái ná. dài shàng shēnfènzhèng jiù xíng. hái yǒu shénme xūyào bāngmáng de ma?",
+                "text_en": "All done. You can pick up the new card in a week. Just bring your ID. Anything else I can help with?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "没有了，谢谢你！你帮了我大忙。",
+                        "text_pinyin": "méiyǒu le, xièxie nǐ! nǐ bāng le wǒ dà máng.",
+                        "text_en": "That's all, thank you! You've been a huge help.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Ms. Zhou adjusts her glasses one final time, satisfied. Another crisis resolved before lunch."
+                    },
+                    {
+                        "text_zh": "谢谢，再见！",
+                        "text_pinyin": "xièxie, zàijiàn!",
+                        "text_en": "Thanks, goodbye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite and brief. She's already calling the next number."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "hǎo.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Zhou watches you leave and murmurs to her colleague:「又一个丢卡的。」Another lost card, another Tuesday."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "挂失 (guà shī) means to report a loss officially. Chinese banks can freeze cards immediately but replacement cards typically take 5-7 business days. Always carry your 身份证 — you'll need it for virtually any bank transaction."
+    }
+}

@@ -1,0 +1,89 @@
+{
+  "title": "The Last Light",
+  "title_zh": "最后的光",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You and your friend Xiaoting are watching the sunset from a hilltop at the edge of the city. The sky is painted in gold and pink.",
+    "setup_zh": "你和朋友小婷在城市边缘的小山顶上看日落。天空被染成了金色和粉色。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你知道我为什么喜欢看日落吗？因为它每天都不一样。同样的太阳、同样的地方，但颜色永远不重复。就像每一天的结束都是独一无二的。",
+        "text_pinyin": "Nǐ zhīdào wǒ wèi shénme xǐhuan kàn rìluò ma? Yīnwèi tā měi tiān dōu bù yíyàng. Tóngyàng de tàiyáng, tóngyàng de dìfang, dàn yánsè yǒngyuǎn bù chóngfù. Jiù xiàng měi yī tiān de jiéshù dōu shì dúyī wú'èr de.",
+        "text_en": "Do you know why I like watching sunsets? Because they're different every day. Same sun, same spot, but the colors never repeat. Just like the ending of each day is one of a kind."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what sunsets make you think about.",
+        "options": [
+          {
+            "text_zh": "永远不重复……也许这就是它最美的地方。你看到的这一刻，过了就没有了。日落提醒我们，有些美只存在于当下。如果不停下来看，就真的错过了。",
+            "text_pinyin": "Yǒngyuǎn bù chóngfù…… yěxǔ zhè jiù shì tā zuì měi de dìfang. Nǐ kàn dào de zhè yī kè, guò le jiù méiyǒu le. Rìluò tíxǐng wǒmen, yǒuxiē měi zhǐ cúnzài yú dāngxià. Rúguǒ bù tíng xiàlái kàn, jiù zhēn de cuòguò le.",
+            "text_en": "Never repeating... maybe that's what makes it most beautiful. This moment you're seeing will be gone after it passes. Sunsets remind us that some beauty only exists in the present. If you don't stop to look, you truly miss it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "And present — captures the fleeting nature of beauty."
+          },
+          {
+            "text_zh": "我觉得日出比日落更好看。",
+            "text_pinyin": "Wǒ juéde rìchū bǐ rìluò gèng hǎokàn.",
+            "text_en": "I think sunrise is more beautiful than sunset.",
+            "score": 0.0,
+            "feedback": "Comparative — breaks the contemplative mood by debating preferences."
+          },
+          {
+            "text_zh": "你拍照了吗？发给我。",
+            "text_pinyin": "Nǐ pāi zhào le ma? Fā gěi wǒ.",
+            "text_en": "Did you take a photo? Send it to me.",
+            "score": 0.0,
+            "feedback": "Commodifies the moment — a photo can't capture what she's describing."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "有些美只存在于当下……对。我有时候会想，如果我今天没有来这里，这个日落就没有人看到。不是说它不存在了，而是没有人为它停下脚步。美需要有人去看见。",
+        "text_pinyin": "Yǒuxiē měi zhǐ cúnzài yú dāngxià…… duì. Wǒ yǒu shíhou huì xiǎng, rúguǒ wǒ jīntiān méiyǒu lái zhèlǐ, zhège rìluò jiù méiyǒu rén kàn dào. Bú shì shuō tā bù cúnzài le, ér shì méiyǒu rén wèi tā tíng xià jiǎobù. Měi xūyào yǒu rén qù kànjiàn.",
+        "text_en": "Some beauty only exists in the present... right. Sometimes I think, if I hadn't come here today, nobody would have seen this sunset. Not that it wouldn't exist, but no one would have stopped for it. Beauty needs someone to see it."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Reflect on beauty needing a witness.",
+        "options": [
+          {
+            "text_zh": "也许这就是为什么我们需要彼此。不只是为了陪伴，也是为了一起看见。一个人看日落是美的，两个人看日落是幸福的。谢谢你今天叫我来。",
+            "text_pinyin": "Yěxǔ zhè jiù shì wèi shénme wǒmen xūyào bǐcǐ. Bù zhǐ shì wèile péibàn, yě shì wèile yīqǐ kànjiàn. Yīge rén kàn rìluò shì měi de, liǎng ge rén kàn rìluò shì xìngfú de. Xièxie nǐ jīntiān jiào wǒ lái.",
+            "text_en": "Maybe that's why we need each other. Not just for company, but to see together. Watching a sunset alone is beautiful; watching it together is happiness. Thank you for inviting me today.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Warm and complete — connects the beauty of nature to the beauty of friendship."
+          },
+          {
+            "text_zh": "天要黑了，我们走吧，路不好走。",
+            "text_pinyin": "Tiān yào hēi le, wǒmen zǒu ba, lù bù hǎo zǒu.",
+            "text_en": "It's getting dark, let's go, the path is hard to walk.",
+            "score": 0.0,
+            "feedback": "Practical but breaks the spell of the moment."
+          },
+          {
+            "text_zh": "明天还会有日落的，不用太感慨。",
+            "text_pinyin": "Míngtiān hái huì yǒu rìluò de, bú yòng tài gǎnkǎi.",
+            "text_en": "There'll be another sunset tomorrow, no need to get so emotional.",
+            "score": 0.0,
+            "feedback": "Dismissive — contradicts her point about each sunset being unique."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "一起看见……嗯。你看，最后一点光正在消失。别急着走，再等一等——最美的颜色往往出现在太阳完全落下以后。",
+        "text_pinyin": "Yīqǐ kànjiàn…… en. Nǐ kàn, zuìhòu yīdiǎn guāng zhèng zài xiāoshī. Bié jí zhe zǒu, zài děng yī děng — zuì měi de yánsè wǎngwǎng chūxiàn zài tàiyáng wánquán luò xià yǐhòu.",
+        "text_en": "Seeing together... yes. Look, the last bit of light is disappearing. Don't rush to leave, wait a little more — the most beautiful colors often appear after the sun has fully set."
+      }
+    ],
+    "cultural_note": "In Chinese poetry, sunset (日落/夕阳) carries a melancholic beauty, famously captured in Li Shangyin's verse「夕阳无限好，只是近黄昏」(the setting sun is infinitely beautiful, but it's already near dusk). The afterglow (晚霞) — the colors that emerge after the sun drops below the horizon — is considered the most stunning part of sunset. The tradition of watching sunsets together holds romantic and philosophical significance."
+  }
+}

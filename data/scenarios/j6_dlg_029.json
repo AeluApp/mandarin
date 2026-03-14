@@ -1,0 +1,89 @@
+{
+    "title": "The Screen Between Us",
+    "title_zh": "我们之间的屏幕",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and your friend Liang are at dinner. He puts his phone face-down on the table — something he's been trying to do more often.",
+        "setup_zh": "你和朋友亮在吃晚饭。他把手机屏幕朝下放在桌上——这是他最近在尝试的一个习惯。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我做了一个实验——记录自己每天看手机的时间。结果是六个小时。六个小时。我醒着的时间大概十六个小时，也就是说有三分之一我是在看一块屏幕。最可怕的不是数字本身，而是那六个小时里我几乎不记得自己看了什么。",
+                "text_pinyin": "Wǒ zuò le yīge shíyàn — jìlù zìjǐ měi tiān kàn shǒujī de shíjiān. Jiéguǒ shì liù ge xiǎoshí. Liù ge xiǎoshí. Wǒ xǐng zhe de shíjiān dàgài shíliù ge xiǎoshí, yě jiù shì shuō yǒu sān fēn zhī yī wǒ shì zài kàn yī kuài píngmù. Zuì kěpà de bú shì shùzì běnshēn, ér shì nà liù ge xiǎoshí lǐ wǒ jīhū bú jìde zìjǐ kàn le shénme.",
+                "text_en": "I ran an experiment — tracking my daily screen time. Result: six hours. Six hours. I'm awake about sixteen hours, which means one-third of my waking life is spent looking at a screen. The scariest part isn't the number itself, but that I can barely remember what I looked at during those six hours."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with the implications of forgotten screen time.",
+                "options": [
+                    {
+                        "text_zh": "六个小时不留下记忆——那些时间不是被'使用'了，而是被'消耗'了。真正的使用会留下痕迹：一本好书，一次好对话。但刷手机像精神热量消耗——你以为在摄入信息，其实只在消耗注意力。",
+                        "text_pinyin": "Liù ge xiǎoshí bù liú xià jìyì — nàxiē shíjiān bú shì bèi 'shǐyòng' le, ér shì bèi 'xiāohào' le. Zhēnzhèng de shǐyòng huì liú xià hénjì: yī běn hǎo shū, yī cì hǎo duìhuà. Dàn shuā shǒujī xiàng jīngshén rèliàng xiāohào — nǐ yǐwéi zài shèrù xìnxī, qíshí zhǐ zài xiāohào zhùyì lì.",
+                        "text_en": "Six hours leaving no memory — those hours weren't 'used,' they were 'consumed.' Real use leaves traces: a good book, a good conversation. Scrolling is mental calorie burn — you think you're taking in information, but you're just burning attention.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp metaphor — 'consuming' vs 'using' time crystallizes the problem."
+                    },
+                    {
+                        "text_zh": "六个小时还好吧，很多人更多。",
+                        "text_pinyin": "Liù ge xiǎoshí hái hǎo ba, hěn duō rén gèng duō.",
+                        "text_en": "Six hours isn't that bad, many people use more.",
+                        "score": 0.0,
+                        "feedback": "Normalizes the problem by comparing downward."
+                    },
+                    {
+                        "text_zh": "你可以设一个使用限制啊。",
+                        "text_pinyin": "Nǐ kěyǐ shè yīge shǐyòng xiànzhì a.",
+                        "text_en": "You can set a usage limit.",
+                        "score": 0.0,
+                        "feedback": "Technical fix that misses the deeper reflection he's pursuing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "消耗注意力……太准了。而且你注意到了吗？手机不只偷走了我们的时间，还偷走了我们的「间隙」。以前排队的时候会发呆、等车的时候会看路人、无聊的时候会想事情。这些间隙是创造力的温床。现在所有的间隙都被屏幕填满了。我们再也没有机会无聊了。",
+                "text_pinyin": "Xiāohào zhùyì lì…… tài zhǔn le. Érqiě nǐ zhùyì dào le ma? Shǒujī bù zhǐ tōu zǒu le wǒmen de shíjiān, hái tōu zǒu le wǒmen de 'jiànxì'. Yǐqián páiduì de shíhou huì fādāi, děng chē de shíhou huì kàn lùrén, wúliáo de shíhou huì xiǎng shìqíng. Zhèxiē jiànxì shì chuàngzào lì de wēnchuáng. Xiànzài suǒyǒu de jiànxì dōu bèi píngmù tiánmǎn le. Wǒmen zài yě méiyǒu jīhuì wúliáo le.",
+                "text_en": "Consuming attention... spot on. And have you noticed? Phones don't just steal our time — they steal our 'gaps.' Waiting in line you used to daydream; waiting for the bus you'd watch passersby; when bored you'd think. Those gaps were the seedbed of creativity. Now all gaps are filled by screens. We never have the chance to be bored anymore."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on the lost art of boredom.",
+                "options": [
+                    {
+                        "text_zh": "无聊是创造力的前奏——你说得完全对。所有伟大的想法都诞生在'无事可做'的时刻。我们害怕无聊，用手机填满每一秒。但也许我们失去的不只是时间，而是与自己内心对话的机会。",
+                        "text_pinyin": "Wúliáo shì chuàngzào lì de qiánzòu — nǐ shuō de wánquán duì. Suǒyǒu wěidà de xiǎngfǎ dōu dànshēng zài 'wú shì kě zuò' de shíkè. Wǒmen hàipà wúliáo, yòng shǒujī tiánmǎn měi yī miǎo. Dàn yěxǔ wǒmen shīqù de bù zhǐ shì shíjiān, ér shì yǔ zìjǐ nèixīn duìhuà de jīhuì.",
+                        "text_en": "Boredom as the prelude to creativity — you're right. All great ideas are born in 'nothing to do' moments. We fear boredom, filling every second with phones. But maybe what we've lost isn't just time, but the chance to dialogue with ourselves.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Builds on his insight beautifully — connects boredom to inner life and creativity."
+                    },
+                    {
+                        "text_zh": "我觉得手机也有好处啊，可以学很多东西。",
+                        "text_pinyin": "Wǒ juéde shǒujī yě yǒu hǎochù a, kěyǐ xué hěn duō dōngxi.",
+                        "text_en": "I think phones have benefits too — you can learn a lot.",
+                        "score": 0.0,
+                        "feedback": "Deflects with a 'both sides' argument instead of engaging with his specific point."
+                    },
+                    {
+                        "text_zh": "你把手机戒了吧，用功能机。",
+                        "text_pinyin": "Nǐ bǎ shǒujī jiè le ba, yòng gōngnéng jī.",
+                        "text_en": "Just quit smartphones and use a basic phone.",
+                        "score": 0.0,
+                        "feedback": "Extreme solution that misses the nuance of his reflection."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "与自己内心对话的机会……嗯。也许今晚我们就从这顿饭开始。手机朝下放着，眼睛看着对面的人。这顿饭的每一分钟我都会记得，因为我没有在消耗，我在使用。",
+                "text_pinyin": "Yǔ zìjǐ nèixīn duìhuà de jīhuì…… en. Yěxǔ jīn wǎn wǒmen jiù cóng zhè dùn fàn kāishǐ. Shǒujī cháo xià fàng zhe, yǎnjīng kàn zhe duìmiàn de rén. Zhè dùn fàn de měi yī fēnzhōng wǒ dōu huì jìde, yīnwèi wǒ méiyǒu zài xiāohào, wǒ zài shǐyòng.",
+                "text_en": "The chance to dialogue with yourself... yes. Maybe tonight we start with this dinner. Phone face-down, eyes on the person across the table. I'll remember every minute of this meal, because I'm not consuming — I'm using."
+            }
+        ],
+        "cultural_note": "China has one of the world's highest smartphone usage rates, with the average person spending over 5 hours daily on mobile devices. The term「刷手机」(shuā shǒujī, scrolling) has become a recognized behavioral pattern. Chinese psychologists and cultural commentators increasingly discuss「注意力经济」(attention economy) and its effects on mental health. The practice of placing phones face-down (手机朝下) has become a symbolic gesture of presence in some Chinese social circles."
+    }
+}

@@ -1,7 +1,8 @@
 # Pinned dependencies — generated for reproducible builds.
 # Update via: pip freeze | grep -iE "^(package1|package2|...)" > requirements.txt
+edge-tts>=7.0.0,<8.0
 click==8.1.8
-Flask==3.1.2
+Flask==3.1.3
 Flask-Limiter==3.11.0
 Flask-Login==0.6.3
 flask-sock==0.7.0
@@ -14,11 +15,30 @@ Jinja2==3.1.6
 MarkupSafe==3.0.3
 PyJWT==2.11.0
 pyotp==2.9.0
+qrcode==8.2
 rich==13.9.4
 sentry-sdk==2.53.0
 simple-websocket==1.1.0
 stripe==14.3.0
 typer==0.21.1
-Werkzeug==3.1.5
+Werkzeug==3.1.6
 zope.event==6.0
+pip-audit>=2.7.0,<3.0
+librosa>=0.10.0,<1.0
+yt-dlp>=2024.1.0
+jieba>=0.42.1
+httpx>=0.27.0,<1.0
+scikit-learn>=1.4.0,<2.0
+lightgbm>=4.0.0,<5.0
+sentence-transformers>=2.2.0,<4.0
+joblib>=1.3.0,<2.0
 zope.interface==8.0.1
+instructor>=1.0.0,<2.0
+beautifulsoup4>=4.12.0,<5.0
+faiss-cpu>=1.7.4,<2.0
+faster-whisper>=1.0.0,<2.0
+pypinyin>=0.50.0,<1.0
+mcp>=1.0.0,<2.0
+python-telegram-bot>=21.0,<22.0
+discord.py>=2.3.0,<3.0
+pipecat-ai>=0.0.40,<1.0

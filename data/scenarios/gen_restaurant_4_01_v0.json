@@ -1,0 +1,124 @@
+{
+    "title": "The Bill Battle",
+    "title_zh": "买单之战",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_4_01_v0",
+    "tree": {
+        "setup": "A hotpot restaurant filled with steam and laughter. You've just finished dinner with your Chinese colleague Xiao Liu, who invited you. The bill arrives, and now the ancient ritual begins: the fight over who pays. The waiter, Mr. Yang, has seen this exact scene play out approximately four thousand times and holds the bill at a neutral distance between both parties like a referee.",
+        "setup_zh": "火锅店里弥漫着蒸汽和笑声。你和中国同事小刘刚吃完晚饭，是他请的你。账单来了，古老的仪式开始了：谁来付账的争夺战。服务员杨先生已经见过这种场面大约四千次了，把账单举在两个人中间，像裁判一样保持中立。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别别别，今天是我请你，你别动！我来付！",
+                "text_pinyin": "bié bié bié, jīntiān shì wǒ qǐng nǐ, nǐ bié dòng! wǒ lái fù!",
+                "text_en": "No no no, I invited you today — don't move! I'll pay!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Fight for the bill (but not too hard — he invited you).",
+                "options": [
+                    {
+                        "text_zh": "不行不行，你每次都请我，这次让我来吧。至少让我付一半。",
+                        "text_pinyin": "bù xíng bù xíng, nǐ měi cì dōu qǐng wǒ, zhè cì ràng wǒ lái ba. zhìshǎo ràng wǒ fù yíbàn.",
+                        "text_en": "No way — you always treat me. Let me pay this time. At least let me pay half.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The perfect intensity: genuine but deferential. You offer to split, knowing he'll refuse. This is the dance."
+                    },
+                    {
+                        "text_zh": "那我下次请你吧。",
+                        "text_pinyin": "nà wǒ xià cì qǐng nǐ ba.",
+                        "text_en": "Then I'll treat next time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The graceful concession. He accepts this with a satisfied nod — the social contract is maintained."
+                    },
+                    {
+                        "text_zh": "好吧，谢谢你。",
+                        "text_pinyin": "hǎo ba, xièxie nǐ.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Accepting too quickly — Mr. Yang raises an eyebrow. In the bill-fighting arena, this is a first-round forfeit."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不用不用！你是客人。下次你请我喝咖啡就行了。服务员！买单！",
+                "text_pinyin": "búyòng búyòng! nǐ shì kèren. xià cì nǐ qǐng wǒ hē kāfēi jiù xíng le. fúwùyuán! mǎidān!",
+                "text_en": "No need! You're the guest. Next time just treat me to coffee. Waiter! The check!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept gracefully and promise to reciprocate.",
+                "options": [
+                    {
+                        "text_zh": "那好吧，谢谢你！下次不光咖啡，我请你吃大餐。说好了啊！",
+                        "text_pinyin": "nà hǎo ba, xièxie nǐ! xià cì bùguāng kāfēi, wǒ qǐng nǐ chī dà cān. shuō hǎo le a!",
+                        "text_en": "OK then, thank you! Next time not just coffee — I'll treat you to a proper meal. Deal!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Upping the ante from coffee to a full meal — this is how Chinese friendships escalate. Xiao Liu grins."
+                    },
+                    {
+                        "text_zh": "好的，下次一定我请。",
+                        "text_pinyin": "hǎo de, xià cì yídìng wǒ qǐng.",
+                        "text_en": "OK, next time it's definitely my treat.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A firm promise. He'll remember it — and remind you."
+                    },
+                    {
+                        "text_zh": "谢谢。",
+                        "text_pinyin": "xièxie.",
+                        "text_en": "Thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Yang hands the bill to Xiao Liu, who pays with the satisfaction of a man who has won a noble contest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "（看账单）不贵不贵，才三百多。你那个酸菜鱼点得好，特别好吃。",
+                "text_pinyin": "(kàn zhàngdān) bú guì bú guì, cái sānbǎi duō. nǐ nàge suāncài yú diǎn de hǎo, tèbié hǎochī.",
+                "text_en": "(Looking at the bill) Not expensive, only 300-something. That sauerkraut fish you ordered was great."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Compliment the meal and make plans.",
+                "options": [
+                    {
+                        "text_zh": "是啊，这家火锅真的很不错！下次我们可以试试他们的麻辣锅底。",
+                        "text_pinyin": "shì a, zhè jiā huǒguō zhēnde hěn búcuò! xià cì wǒmen kěyǐ shìshi tāmen de málà guōdǐ.",
+                        "text_en": "Yeah, this hotpot place is really good! Next time we can try their mala soup base.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Future plans are the real currency of friendship. The meal is over but the relationship is simmering."
+                    },
+                    {
+                        "text_zh": "味道很好。",
+                        "text_pinyin": "wèidào hěn hǎo.",
+                        "text_en": "The food was great.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Sincere but brief. He picks up his coat."
+                    },
+                    {
+                        "text_zh": "三百多不便宜啊。",
+                        "text_pinyin": "sānbǎi duō bù piányi a.",
+                        "text_en": "300-something isn't cheap though.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Commenting on the cost of someone else's treat — Mr. Yang winces imperceptibly behind the counter."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "抢着买单 (qiǎng zhe mǎidān, fighting over the bill) is a deeply embedded Chinese social ritual. The person who invited should pay, but guests are expected to make at least one or two attempts to pay or split. Accepting too quickly is considered slightly rude."
+    }
+}

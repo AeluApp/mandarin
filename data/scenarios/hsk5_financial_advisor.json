@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Describe your investment goals and risk tolerance.",
                 "options": [
-                    {"text_zh": "谢谢。我的投资期限大概是五年，目标是让资产稳步增值，跑赢通胀就可以了。我的风险承受能力属于中等——不想把钱全放在银行定期里几乎没有收益，但也不愿意冒太大的风险。如果市场短期波动在百分之十到十五以内，我还能接受。您能根据这个情况给我推荐几种方案吗？", "text_pinyin": "xièxie. wǒ de tóuzī qīxiàn dàgài shì wǔ nián, mùbiāo shì ràng zīchǎn wěnbù zēngzhí, pǎo yíng tōngzhàng jiù kěyǐ le. wǒ de fēngxiǎn chéngshòu nénglì shǔyú zhōngděng——bù xiǎng bǎ qián quán fàng zài yínháng dìngqī lǐ jīhū méiyǒu shōuyì, dàn yě bù yuànyì mào tài dà de fēngxiǎn. rúguǒ shìchǎng duǎnqī bōdòng zài bǎifēnzhī shí dào shíwǔ yǐnèi, wǒ hái néng jiēshòu. nín néng gēnjù zhège qíngkuàng gěi wǒ tuījiàn jǐ zhǒng fāng'àn ma?", "text_en": "Thank you. My investment horizon is about 5 years, and my goal is steady asset growth -- beating inflation would be sufficient. My risk tolerance is moderate -- I don't want to leave everything in fixed-term bank deposits with almost no returns, but I'm not willing to take excessive risks either. If short-term market fluctuations are within 10-15%, I can accept that. Could you recommend a few options based on this?", "score": 1.0, "register": "formal", "feedback": "Clear and specific -- defines timeline, goal (跑赢通胀), risk tolerance with a concrete number, and what you want to avoid. Financial advisors can work precisely with this level of detail. 稳步增值, 风险承受能力, and 波动 are well-used."},
-                    {"text_zh": "我想赚点钱，但不想亏本。有没有那种稳赚不赔的投资？", "text_pinyin": "wǒ xiǎng zhuàn diǎn qián, dàn bù xiǎng kuī běn. yǒu méiyǒu nà zhǒng wěn zhuàn bù péi de tóuzī?", "text_en": "I want to make some money but don't want to lose any. Is there an investment that's guaranteed to profit?", "score": 0.4, "register": "casual", "feedback": "Unrealistic expectations -- no investment is guaranteed to profit without risk. An advisor needs specific parameters (timeline, risk tolerance, target return) to help you. 稳赚不赔 is a red flag in finance."},
-                    {"text_zh": "我也不太懂，您觉得什么好就推荐什么吧。", "text_pinyin": "wǒ yě bú tài dǒng, nín juéde shénme hǎo jiù tuījiàn shénme ba.", "text_en": "I don't really understand this stuff -- just recommend whatever you think is good.", "score": 0.2, "register": "casual", "feedback": "Blindly trusting any advisor is risky. Understanding your own goals and asking informed questions protects your interests. Do some basic research before a financial consultation."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "谢谢。我的投资期限大概是五年，目标是让资产稳步增值，跑赢通胀就可以了。我的风险承受能力属于中等——不想把钱全放在银行定期里几乎没有收益，但也不愿意冒太大的风险。如果市场短期波动在百分之十到十五以内，我还能接受。您能根据这个情况给我推荐几种方案吗？",
+                        "text_pinyin": "xièxie. wǒ de tóuzī qīxiàn dàgài shì wǔ nián, mùbiāo shì ràng zīchǎn wěnbù zēngzhí, pǎo yíng tōngzhàng jiù kěyǐ le. wǒ de fēngxiǎn chéngshòu nénglì shǔyú zhōngděng——bù xiǎng bǎ qián quán fàng zài yínháng dìngqī lǐ jīhū méiyǒu shōuyì, dàn yě bù yuànyì mào tài dà de fēngxiǎn. rúguǒ shìchǎng duǎnqī bōdòng zài bǎifēnzhī shí dào shíwǔ yǐnèi, wǒ hái néng jiēshòu. nín néng gēnjù zhège qíngkuàng gěi wǒ tuījiàn jǐ zhǒng fāng'àn ma?",
+                        "text_en": "Thank you. My investment horizon is about 5 years, and my goal is steady asset growth -- beating inflation would be sufficient. My risk tolerance is moderate -- I don't want to leave everything in fixed-term bank deposits with almost no returns, but I'm not willing to take excessive risks either. If short-term market fluctuations are within 10-15%, I can accept that. Could you recommend a few options based on this?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Clear and specific -- defines timeline, goal (跑赢通胀), risk tolerance with a concrete number, and what you want to avoid. Financial advisors can work precisely with this level of detail. 稳步增值, 风险承受能力, and 波动 are well-used."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Respond to the advisor's recommendation and ask follow-up questions.",
                 "options": [
-                    {"text_zh": "整体思路我很认同，分散投资确实比较稳妥。但我有几个问题：第一，指数基金您推荐沪深300还是中证500？两者的风险和收益差别大吗？第二，如果市场出现大幅下跌，您建议我加仓还是持有不动？第三，这些基金的管理费和赎回费分别是多少？我想综合考虑一下成本。", "text_pinyin": "zhěngtǐ sīlù wǒ hěn rèntóng, fēnsàn tóuzī quèshí bǐjiào wěntuǒ. dàn wǒ yǒu jǐ gè wèntí: dì yī, zhǐshù jījīn nín tuījiàn hùshēn sān bǎi háishi zhōngzhèng wǔ bǎi? liǎng zhě de fēngxiǎn hé shōuyì chābié dà ma? dì èr, rúguǒ shìchǎng chūxiàn dàfú xiàdiē, nín jiànyì wǒ jiā cāng háishi chí yǒu bú dòng? dì sān, zhèxiē jījīn de guǎnlǐ fèi hé shúhuí fèi fēnbié shì duōshao? wǒ xiǎng zōnghé kǎolǜ yīxià chéngběn.", "text_en": "I agree with the overall approach -- diversification is indeed more stable. But I have a few questions: First, for the index fund, would you recommend the CSI 300 or CSI 500? Is the risk-return difference significant between them? Second, if the market drops significantly, do you advise increasing my position or holding steady? Third, what are the management fees and redemption fees for these funds? I want to factor in the overall cost.", "score": 1.0, "register": "formal", "feedback": "Engaged and informed -- asks three specific, relevant questions that show financial literacy. Mentioning 沪深300 vs 中证500, 加仓 vs 持有, and fee structures demonstrates you've done research. This level of questioning also keeps the advisor honest."},
-                    {"text_zh": "听起来不错，就按您说的来吧。什么时候可以开始操作？", "text_pinyin": "tīng qǐlái búcuò, jiù àn nín shuō de lái ba. shénme shíhou kěyǐ kāishǐ cāozuò?", "text_en": "Sounds good, let's go with your plan. When can we start?", "score": 0.5, "register": "formal", "feedback": "Too quick to agree without understanding the details. Always ask about specific fund choices, fees, and exit strategies before committing. Your money, your due diligence."},
-                    {"text_zh": "基金这些我不太明白。能不能有更简单的方式？", "text_pinyin": "jījīn zhèxiē wǒ bú tài míngbai. néng bù néng yǒu gèng jiǎndān de fāngshì?", "text_en": "I don't really understand funds. Is there a simpler way?", "score": 0.3, "register": "casual", "feedback": "If you don't understand the product, ask the advisor to explain rather than asking for something simpler. Understanding what you invest in is the first rule of financial management."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "整体思路我很认同，分散投资确实比较稳妥。但我有几个问题：第一，指数基金您推荐沪深300还是中证500？两者的风险和收益差别大吗？第二，如果市场出现大幅下跌，您建议我加仓还是持有不动？第三，这些基金的管理费和赎回费分别是多少？我想综合考虑一下成本。",
+                        "text_pinyin": "zhěngtǐ sīlù wǒ hěn rèntóng, fēnsàn tóuzī quèshí bǐjiào wěntuǒ. dàn wǒ yǒu jǐ gè wèntí: dì yī, zhǐshù jījīn nín tuījiàn hùshēn sān bǎi háishi zhōngzhèng wǔ bǎi? liǎng zhě de fēngxiǎn hé shōuyì chābié dà ma? dì èr, rúguǒ shìchǎng chūxiàn dàfú xiàdiē, nín jiànyì wǒ jiā cāng háishi chí yǒu bú dòng? dì sān, zhèxiē jījīn de guǎnlǐ fèi hé shúhuí fèi fēnbié shì duōshao? wǒ xiǎng zōnghé kǎolǜ yīxià chéngběn.",
+                        "text_en": "I agree with the overall approach -- diversification is indeed more stable. But I have a few questions: First, for the index fund, would you recommend the CSI 300 or CSI 500? Is the risk-return difference significant between them? Second, if the market drops significantly, do you advise increasing my position or holding steady? Third, what are the management fees and redemption fees for these funds? I want to factor in the overall cost.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Engaged and informed -- asks three specific, relevant questions that show financial literacy. Mentioning 沪深300 vs 中证500, 加仓 vs 持有, and fee structures demonstrates you've done research. This level of questioning also keeps the advisor honest."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Make your decision and confirm the plan.",
                 "options": [
-                    {"text_zh": "明白了，定期定额投资这个方法我很感兴趣，可以降低择时的风险。那我们就这样安排吧：八万放债券基金，八万通过定投的方式买入沪深300，四万放货币基金。我先签相关的协议，然后从下个月开始执行。不过我希望每个季度能跟您沟通一次，看看需不需要调整配置。", "text_pinyin": "míngbai le, dìngqī dìng'é tóuzī zhège fāngfǎ wǒ hěn gǎn xìngqù, kěyǐ jiàngdī zéshí de fēngxiǎn. nà wǒmen jiù zhèyàng ānpái ba: bā wàn fàng zhàiquàn jījīn, bā wàn tōngguò dìngtóu de fāngshì mǎirù hùshēn sān bǎi, sì wàn fàng huòbì jījīn. wǒ xiān qiān xiāngguān de xiéyì, ránhòu cóng xià gè yuè kāishǐ zhíxíng. búguò wǒ xīwàng měi gè jìdù néng gēn nín gōutōng yī cì, kànkan xū bù xūyào tiáozhěng pèizhì.", "text_en": "I see. I'm very interested in the dollar-cost averaging approach -- it reduces timing risk. Let's arrange it this way: 80,000 in bond funds, 80,000 into the CSI 300 through regular investment, and 40,000 in money market funds. I'll sign the relevant agreements first, then start executing from next month. However, I'd like to review with you quarterly to see if the allocation needs adjustment.", "score": 1.0, "register": "formal", "feedback": "Decisive and thorough -- restates the specific allocation with exact numbers, sets a start date, and builds in a review mechanism. Requesting quarterly reviews shows ongoing engagement with your portfolio. 择时, 定投, and 配置 demonstrate financial vocabulary command."},
-                    {"text_zh": "好的，那就按您推荐的来。麻烦您帮我办手续。", "text_pinyin": "hǎo de, nà jiù àn nín tuījiàn de lái. máfan nín bāng wǒ bàn shǒuxù.", "text_en": "OK, let's go with your recommendation. Please help me with the paperwork.", "score": 0.6, "register": "formal", "feedback": "Functional but passive. Restating your understanding of the plan in your own words confirms you actually understand it. Also, setting up a review schedule shows you'll manage your investment actively."},
-                    {"text_zh": "我再想想吧，回去跟家里人商量一下再决定。", "text_pinyin": "wǒ zài xiǎngxiǎng ba, huíqù gēn jiālǐ rén shāngliang yīxià zài juédìng.", "text_en": "Let me think about it some more, I'll discuss with my family before deciding.", "score": 0.5, "register": "neutral", "feedback": "Consulting family is reasonable for a major financial decision. But if this is a common stalling tactic, the advisor may not prioritize your account. If you need time, set a specific follow-up date."}
+                    {
+                        "text_zh": "明白了，定期定额投资这个方法我很感兴趣，可以降低择时的风险。那我们就这样安排吧：八万放债券基金，八万通过定投的方式买入沪深300，四万放货币基金。我先签相关的协议，然后从下个月开始执行。不过我希望每个季度能跟您沟通一次，看看需不需要调整配置。",
+                        "text_pinyin": "míngbai le, dìngqī dìng'é tóuzī zhège fāngfǎ wǒ hěn gǎn xìngqù, kěyǐ jiàngdī zéshí de fēngxiǎn. nà wǒmen jiù zhèyàng ānpái ba: bā wàn fàng zhàiquàn jījīn, bā wàn tōngguò dìngtóu de fāngshì mǎirù hùshēn sān bǎi, sì wàn fàng huòbì jījīn. wǒ xiān qiān xiāngguān de xiéyì, ránhòu cóng xià gè yuè kāishǐ zhíxíng. búguò wǒ xīwàng měi gè jìdù néng gēn nín gōutōng yī cì, kànkan xū bù xūyào tiáozhěng pèizhì.",
+                        "text_en": "I see. I'm very interested in the dollar-cost averaging approach -- it reduces timing risk. Let's arrange it this way: 80,000 in bond funds, 80,000 into the CSI 300 through regular investment, and 40,000 in money market funds. I'll sign the relevant agreements first, then start executing from next month. However, I'd like to review with you quarterly to see if the allocation needs adjustment.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Decisive and thorough -- restates the specific allocation with exact numbers, sets a start date, and builds in a review mechanism. Requesting quarterly reviews shows ongoing engagement with your portfolio. 择时, 定投, and 配置 demonstrate financial vocabulary command."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             }
         ],

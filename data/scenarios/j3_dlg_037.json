@@ -1,0 +1,87 @@
+{
+    "title": "Visiting a Friend's New Apartment",
+    "title_zh": "参观朋友的新家",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your friend Xiao Tang just moved into a new apartment and invites you over to see it.",
+        "setup_zh": "你的朋友小唐刚搬了新家，邀请你去看看。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎欢迎！来，进来看看！虽然不大，但我觉得很温馨。你觉得怎么样？",
+                "text_pinyin": "Huānyíng huānyíng! Lái, jìnlái kànkan! Suīrán bú dà, dàn wǒ juéde hěn wēnxīn. Nǐ juéde zěnmeyàng?",
+                "text_en": "Welcome, welcome! Come in, have a look! It's not big, but I think it's cozy. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Compliment the new apartment.",
+                "options": [
+                    {
+                        "text_zh": "虽然小，但布置得很好看！窗边的植物让房间很有生活气息。",
+                        "text_pinyin": "Suīrán xiǎo, dàn bùzhì de hěn hǎokàn! Chuāng biān de zhíwù ràng fángjiān hěn yǒu shēnghuó qìxi.",
+                        "text_en": "It's small but beautifully arranged! The plants by the window give the room such a lively feeling.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific compliment that shows genuine attention."
+                    },
+                    {
+                        "text_zh": "不错啊。",
+                        "text_pinyin": "Búcuò a.",
+                        "text_en": "Not bad.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief for someone excited to show you their home."
+                    },
+                    {
+                        "text_zh": "有点小吧？",
+                        "text_pinyin": "Yǒudiǎn xiǎo ba?",
+                        "text_en": "A bit small, isn't it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She already acknowledged it's small — no need to repeat."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢！那些植物我搬家的时候特意从旧家带过来的。对了，你坐！我给你倒杯茶。搬过来以后你是第一个来的朋友。",
+                "text_pinyin": "Xièxie! Nàxiē zhíwù wǒ bānjiā de shíhou tèyì cóng jiù jiā dài guòlái de. Duìle, nǐ zuò! Wǒ gěi nǐ dào bēi chá. Bān guòlái yǐhòu nǐ shì dì yī ge lái de péngyou.",
+                "text_en": "Thanks! I specially brought those plants from my old place when I moved. Come, sit! I'll pour you some tea. You're the first friend to visit since I moved in."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to being her first visitor.",
+                "options": [
+                    {
+                        "text_zh": "那我很荣幸！我带了个小花盆，配你窗边的植物。祝你在新家开心！",
+                        "text_pinyin": "Nà wǒ hěn róngxìng! Wǒ dài le ge xiǎo huāpén, pèi nǐ chuāng biān de zhíwù. Zhù nǐ zài xīn jiā kāixīn!",
+                        "text_en": "I'm honored! I brought a little flower pot to go with your window plants. Wishing you happiness in your new home!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gift and warm wishes — perfect housewarming."
+                    },
+                    {
+                        "text_zh": "谢谢你请我来。",
+                        "text_pinyin": "Xièxie nǐ qǐng wǒ lái.",
+                        "text_en": "Thanks for inviting me.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but misses the gifting opportunity."
+                    },
+                    {
+                        "text_zh": "你什么时候请大家来吃饭啊？",
+                        "text_pinyin": "Nǐ shénme shíhou qǐng dàjiā lái chīfàn a?",
+                        "text_en": "When are you going to have everyone over for dinner?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Asks for more instead of appreciating the moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Visiting a friend's new home (暖房 or 搬家做客) is an important social event. Bringing a small gift — especially something for the home — is expected and appreciated. Being the first visitor holds special significance in building the home's new social identity."
+    },
+    "hsk_level": 3
+}

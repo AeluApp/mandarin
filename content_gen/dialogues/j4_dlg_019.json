@@ -1,0 +1,83 @@
+{
+    "title": "The Night Market Lamp",
+    "title_zh": "夜市的灯",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're walking through a quiet night market that's winding down. Most stalls have closed. A lantern maker, Master Gao, is still sitting by his display of paper lanterns, their warm light glowing softly.",
+        "setup_zh": "你走过一个正在收摊的安静夜市。大多数摊位已经关了。一位灯笼师傅高师傅还坐在他的纸灯笼旁边，灯笼的暖光柔柔地亮着。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "不急，我不急着走。每天晚上这些灯笼亮着的时候，是我最开心的时候。你看这些光，每一个都是我自己做的。机器做的灯笼也好看，但光不一样。",
+                "text_pinyin": "Bù jí, wǒ bù jí zhe zǒu. Měi tiān wǎnshang zhèxiē dēnglóng liàng zhe de shíhou, shì wǒ zuì kāixīn de shíhou. Nǐ kàn zhèxiē guāng, měi yīge dōu shì wǒ zìjǐ zuò de. Jīqì zuò de dēnglóng yě hǎokàn, dàn guāng bù yīyàng.",
+                "text_en": "No rush, I'm not in a hurry. Every evening when these lanterns are lit, that's my happiest moment. Look at this light — each one is handmade by me. Machine-made lanterns look fine too, but the light is different."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the handmade lanterns.",
+                "options": [
+                    {
+                        "text_zh": "确实不一样。手工做的灯笼，光是暖的、柔的、不均匀的——就像一个有温度的东西。机器做的太完美了，反而少了那种温暖。",
+                        "text_pinyin": "Quèshí bù yīyàng. Shǒugōng zuò de dēnglóng, guāng shì nuǎn de, róu de, bù jūnyún de — jiù xiàng yīge yǒu wēndù de dōngxi. Jīqì zuò de tài wánměi le, fǎn'ér shǎo le nà zhǒng wēnnuǎn.",
+                        "text_en": "It really is different. Handmade lanterns give light that's warm, soft, uneven — like something with warmth in it. Machine-made ones are too perfect, which actually takes away that warmth.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sees beauty in imperfection — the uneven light as a sign of humanity."
+                    },
+                    {
+                        "text_zh": "不过现在有LED灯了，比纸灯笼亮多了，而且不怕风也不怕雨，用起来更方便。",
+                        "text_pinyin": "Búguò xiànzài yǒu LED dēng le, bǐ zhǐ dēnglóng liàng duō le, érqiě bú pà fēng yě bú pà yǔ, yòng qǐlái gèng fāngbiàn.",
+                        "text_en": "But we have LED lights now — much brighter than paper lanterns, and they're not afraid of wind or rain. Much more practical.",
+                        "score": 0.0,
+                        "feedback": "Master Gao looks at his lanterns and says quietly: 'Brighter, yes. But no one has ever stood still to look at an LED.'"
+                    },
+                    {
+                        "text_zh": "你在这里摆摊多久了？",
+                        "text_pinyin": "Nǐ zài zhèlǐ bǎi tān duō jiǔ le?",
+                        "text_en": "How long have you had a stall here?",
+                        "score": 0.0,
+                        "feedback": "Duration question instead of engaging with the lanterns."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你看得很仔细。我做灯笼做了三十多年了。小时候跟我爸爸学的。他说，做灯笼不是做东西，是做光。你要想着，晚上有个人走在路上，看到了你的灯，心里就暖了一点。",
+                "text_pinyin": "Nǐ kàn de hěn zǐxì. Wǒ zuò dēnglóng zuò le sānshí duō nián le. Xiǎo shíhou gēn wǒ bàba xué de. Tā shuō, zuò dēnglóng bú shì zuò dōngxi, shì zuò guāng. Nǐ yào xiǎng zhe, wǎnshang yǒu ge rén zǒu zài lù shàng, kàn dào le nǐ de dēng, xīn lǐ jiù nuǎn le yīdiǎn.",
+                "text_en": "You observe carefully. I've been making lanterns for over thirty years. Learned from my father when I was little. He said, making lanterns isn't making things — it's making light. Think about it: at night someone walks down the road, sees your lantern, and their heart warms just a little."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his father's philosophy.",
+                "options": [
+                    {
+                        "text_zh": "不是做东西，是做光——你爸爸很有智慧。每个灯笼都是给陌生人的温暖，你不认识他们，但你的光陪他们走了一段路。",
+                        "text_pinyin": "Bú shì zuò dōngxi, shì zuò guāng — nǐ bàba hěn yǒu zhìhuì. Měi ge dēnglóng dōu shì gěi mòshēng rén de wēnnuǎn, nǐ bú rènshi tāmen, dàn nǐ de guāng péi tāmen zǒu le yī duàn lù.",
+                        "text_en": "Not making things, making light — your father was wise. Every lantern is warmth for strangers. You don't know them, but your light walks with them for a stretch.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Elevates the craft to philosophy — light as anonymous companionship."
+                    },
+                    {
+                        "text_zh": "你爸爸还在做灯笼吗？",
+                        "text_pinyin": "Nǐ bàba hái zài zuò dēnglóng ma?",
+                        "text_en": "Does your father still make lanterns?",
+                        "score": 0.0,
+                        "feedback": "Potentially painful question that shifts from the wisdom."
+                    },
+                    {
+                        "text_zh": "你能教我做灯笼吗？",
+                        "text_pinyin": "Nǐ néng jiāo wǒ zuò dēnglóng ma?",
+                        "text_en": "Can you teach me to make lanterns?",
+                        "score": 0.0,
+                        "feedback": "Request that jumps past the contemplative moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Paper lanterns (灯笼) hold deep cultural significance in China, symbolizing hope, warmth, and celebration. Traditional lantern-making is a disappearing craft, with fewer artisans passing down the skill. The philosophy of '做光' (making light) reflects a broader Chinese value of contributing beauty to the community without seeking recognition — a quiet form of service."
+    }
+}

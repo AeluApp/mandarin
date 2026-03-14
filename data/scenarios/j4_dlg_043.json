@@ -1,0 +1,83 @@
+{
+    "title": "The Midnight Bookshelf",
+    "title_zh": "午夜的书架",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You discover a 24-hour bookshop that stays open all night. At 1 AM, the night clerk is reading behind the counter. You're the only customer.",
+        "setup_zh": "你发现了一家24小时营业的书店。凌晨一点，值夜班的店员在柜台后面看书。你是唯一的顾客。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎。晚上来书店的人不多，但总有一些。大多是睡不着的人，或者不想回家的人。书店就是这样——不管你几点来，灯都亮着。",
+                "text_pinyin": "Huānyíng. Wǎnshang lái shūdiàn de rén bù duō, dàn zǒng yǒu yīxiē. Dàduō shì shuì bù zháo de rén, huòzhě bù xiǎng huí jiā de rén. Shūdiàn jiù shì zhèyàng — bùguǎn nǐ jǐ diǎn lái, dēng dōu liàng zhe.",
+                "text_en": "Welcome. Not many come to the bookshop at night, but there are always some. Mostly people who can't sleep, or people who don't want to go home. That's what a bookshop is — no matter what time you come, the lights are on."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of a bookshop that's always lit.",
+                "options": [
+                    {
+                        "text_zh": "灯都亮着——这让我觉得很安心。凌晨一点的城市大部分都暗了，但是这里还亮着。好像在说「不管多晚，你都可以来」。",
+                        "text_pinyin": "Dēng dōu liàng zhe — zhè ràng wǒ juéde hěn ānxīn. Língchén yī diǎn de chéngshì dà bùfen dōu àn le, dànshì zhèlǐ hái liàng zhe. Hǎoxiàng zài shuō 'bùguǎn duō wǎn, nǐ dōu kěyǐ lái'.",
+                        "text_en": "The lights are always on — that makes me feel at ease. At 1 AM most of the city is dark, but this place is still lit. It's like it's saying, 'No matter how late, you can come.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The bookshop as a beacon in the dark city — unconditional welcome."
+                    },
+                    {
+                        "text_zh": "晚上值班不累吗？",
+                        "text_pinyin": "Wǎnshang zhí bān bú lèi ma?",
+                        "text_en": "Isn't the night shift tiring?",
+                        "score": 0.0,
+                        "feedback": "Labor question during a poetic moment."
+                    },
+                    {
+                        "text_zh": "你们卖咖啡吗？",
+                        "text_pinyin": "Nǐmen mài kāfēi ma?",
+                        "text_en": "Do you sell coffee?",
+                        "score": 0.0,
+                        "feedback": "A menu question in a bookshop of the soul."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是这个意思。有些人来了也不买书，就坐在角落里看一会儿，然后走了。我从来不赶他们。有时候一个人需要的不是一本书，而是一个亮着灯的地方可以待一会儿。",
+                "text_pinyin": "Duì, jiù shì zhège yìsi. Yǒuxiē rén lái le yě bù mǎi shū, jiù zuò zài jiǎoluò lǐ kàn yīhuìr, ránhòu zǒu le. Wǒ cónglái bù gǎn tāmen. Yǒu shíhou yī ge rén xūyào de bú shì yī běn shū, ér shì yī ge liàng zhe dēng de dìfang kěyǐ dāi yīhuìr.",
+                "text_en": "Exactly. Some people come and don't even buy a book — just sit in a corner for a while, then leave. I never ask them to go. Sometimes what a person needs isn't a book, but a lit place to sit for a while."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the bookshop as a sanctuary.",
+                "options": [
+                    {
+                        "text_zh": "一个亮着灯的地方——比任何书都重要。凌晨大多数地方都关了，这里还开着。您不只是卖书，是在给人一个可以安心待着的地方。",
+                        "text_pinyin": "Yī ge liàng zhe dēng de dìfang — bǐ rènhé shū dōu zhòngyào. Língchén dàduōshù dìfang dōu guān le, zhèlǐ hái kāi zhe. Nín bù zhǐ shì mài shū, shì zài gěi rén yī ge kěyǐ ānxīn dāi zhe de dìfang.",
+                        "text_en": "A lit place — more important than any book. Most places close in the early hours, but this one stays open. You're not selling books — you're giving people a place to feel at peace.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The shop's real product isn't books — it's sanctuary."
+                    },
+                    {
+                        "text_zh": "但是他们不买书的话，你们怎么赚钱？",
+                        "text_pinyin": "Dànshì tāmen bù mǎi shū dehuà, nǐmen zěnme zhuàn qián?",
+                        "text_en": "But if they don't buy books, how do you make money?",
+                        "score": 0.0,
+                        "feedback": "Business model question during a moment about human shelter."
+                    },
+                    {
+                        "text_zh": "你在看什么书？",
+                        "text_pinyin": "Nǐ zài kàn shénme shū?",
+                        "text_en": "What book are you reading?",
+                        "score": 0.0,
+                        "feedback": "Redirects to his personal reading during a deeper exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "24-hour bookshops (24小时书店) have become cultural landmarks in Chinese cities like Beijing and Hangzhou. They explicitly welcome anyone, even those who never buy. The concept of a place that 灯都亮着 (keeps the lights on) regardless of commercial return reflects a belief that some spaces exist for human need, not profit."
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "title": "Before the World Wakes Up",
+    "title_zh": "世界醒来之前",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You run into your colleague Xiaotian at the coffee machine early in the morning. The office is still empty.",
+        "setup_zh": "一大早你在咖啡机前遇到了同事小天。办公室还没有人。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也这么早？我每天都提前一个小时来。不是为了加班，是因为这一个小时是我一天里最安静的时候。没有人打扰，邮件还没开始轰炸，我可以安安静静地喝杯咖啡，想想今天要做什么。",
+                "text_pinyin": "Nǐ yě zhème zǎo? Wǒ měi tiān dōu tíqián yīge xiǎoshí lái. Bú shì wèile jiābān, shì yīnwèi zhè yīge xiǎoshí shì wǒ yī tiān lǐ zuì ānjìng de shíhou. Méiyǒu rén dǎrǎo, yóujiàn hái méi kāishǐ hōngzhà, wǒ kěyǐ ānān jìngjìng de hē bēi kāfēi, xiǎngxiǎng jīntiān yào zuò shénme.",
+                "text_en": "You're here this early too? I come an hour early every day. Not for overtime — because this hour is the quietest part of my day. Nobody interrupts, emails haven't started bombarding, I can have a peaceful coffee and think about what I need to do today."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on finding quiet time.",
+                "options": [
+                    {
+                        "text_zh": "提前一个小时来换一份安静——这个交换很值得。一天开始之前跟自己待一会儿，整个人都不一样。你有没有觉得这一个小时比后面八个小时还重要？",
+                        "text_pinyin": "Tíqián yīge xiǎoshí lái huàn yī fèn ānjìng — zhège jiāohuàn hěn zhíde. Yī tiān kāishǐ zhīqián gēn zìjǐ dāi yīhuìr, zhěnggè rén dōu bù yíyàng. Nǐ yǒu méiyǒu juéde zhè yīge xiǎoshí bǐ hòumiàn bā ge xiǎoshí hái zhòngyào?",
+                        "text_en": "Coming an hour early in exchange for quiet — that trade is worth it. Having time with yourself before the day starts changes everything. Don't you think this one hour matters more than the eight that follow?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "— reframes early arrival as a deliberate choice rather than overwork."
+                    },
+                    {
+                        "text_zh": "你可以在家喝咖啡啊，不用这么早来。",
+                        "text_pinyin": "Nǐ kěyǐ zài jiā hē kāfēi a, bú yòng zhème zǎo lái.",
+                        "text_en": "You could drink coffee at home, no need to come in this early.",
+                        "score": 0.0,
+                        "feedback": "The office quiet is the point, not the coffee."
+                    },
+                    {
+                        "text_zh": "你不困吗？我如果这么早起肯定很困。",
+                        "text_pinyin": "Nǐ bú kùn ma? Wǒ rúguǒ zhème zǎo qǐ kěndìng hěn kùn.",
+                        "text_en": "Aren't you sleepy? I'd definitely be exhausted getting up this early.",
+                        "score": 0.0,
+                        "feedback": "Self-focused — centers on your own habits rather than engaging with his."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "比后面八个小时还重要……真的是这样。我有一个小本子，每天早上到了以后会写三件我感谢的事。不是什么大事，可能只是昨天吃了一顿好饭，或者路上看到一朵花。写完以后心情就会好很多。",
+                "text_pinyin": "Bǐ hòumiàn bā ge xiǎoshí hái zhòngyào…… zhēn de shì zhèyàng. Wǒ yǒu yīge xiǎo běnzi, měi tiān zǎoshang dào le yǐhòu huì xiě sān jiàn wǒ gǎnxiè de shì. Bú shì shénme dà shì, kěnéng zhǐ shì zuótiān chī le yī dùn hǎo fàn, huòzhě lù shang kàn dào yī duǒ huā. Xiě wán yǐhòu xīnqíng jiù huì hǎo hěn duō.",
+                "text_en": "More important than the eight that follow... it really is. I have a small notebook — every morning after I arrive, I write three things I'm grateful for. Nothing big, maybe just a good meal yesterday, or a flower I saw on the way. After writing, my mood improves a lot."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his gratitude practice.",
+                "options": [
+                    {
+                        "text_zh": "每天写三件感谢的事，听着简单，但坚持下来不容易。感恩不是因为日子特别好，而是学会在平凡中发现值得珍惜的东西。一朵花、一顿饭，都是生活在跟你说话。",
+                        "text_pinyin": "Měi tiān xiě sān jiàn gǎnxiè de shì, tīng zhe jiǎndān, dàn jiānchí xiàlái bù róngyì. Gǎn'ēn bú shì yīnwèi rìzi tèbié hǎo, ér shì xuéhuì zài píngfán zhōng fāxiàn zhíde zhēnxī de dōngxi. Yī duǒ huā, yī dùn fàn, dōu shì shēnghuó zài gēn nǐ shuōhuà.",
+                        "text_en": "Writing three grateful things daily sounds simple but isn't easy to keep up. Gratitude isn't because life is great — it's learning to find what's worth cherishing in ordinary days. A flower, a meal — life talking to you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Eloquent and affirming — deepens his practice into philosophy."
+                    },
+                    {
+                        "text_zh": "你试过用手机APP记吗？比本子方便。",
+                        "text_pinyin": "Nǐ shì guò yòng shǒujī APP jì ma? Bǐ běnzi fāngbiàn.",
+                        "text_en": "Have you tried using a phone app? It's more convenient than a notebook.",
+                        "score": 0.0,
+                        "feedback": "Focuses on the tool rather than the meaning."
+                    },
+                    {
+                        "text_zh": "我觉得我每天都差不多，没什么特别值得感谢的。",
+                        "text_pinyin": "Wǒ juéde wǒ měi tiān dōu chàbuduō, méi shénme tèbié zhíde gǎnxiè de.",
+                        "text_en": "I feel like every day is the same, nothing especially worth being grateful for.",
+                        "score": 0.0,
+                        "feedback": "Cynical response — undermines his positive practice."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "生活在跟你说话……我要把这句话写在今天的本子里。谢谢你，今天的第一杯咖啡遇到你，这也是一件值得感谢的事。",
+                "text_pinyin": "Shēnghuó zài gēn nǐ shuōhuà…… wǒ yào bǎ zhè jù huà xiě zài jīntiān de běnzi lǐ. Xièxie nǐ, jīntiān de dì yī bēi kāfēi yù dào nǐ, zhè yě shì yī jiàn zhíde gǎnxiè de shì.",
+                "text_en": "Life speaking to you... I'm going to write that in today's notebook. Thank you — running into you over my first coffee today is also something worth being grateful for."
+            }
+        ],
+        "cultural_note": "The concept of gratitude journaling has gained popularity in China alongside the broader wellness and mindfulness movement. The practice resonates with traditional Chinese values of contentment (知足, zhīzú) — knowing when you have enough. The idea of arriving early not to work but to find peace reflects a quiet resistance to「996」culture, reclaiming space within the system rather than fighting it directly."
+    }
+}

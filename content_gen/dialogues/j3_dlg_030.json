@@ -1,0 +1,123 @@
+{
+    "title": "Watching the Sunset",
+    "title_zh": "看日落",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "After work, you walk to a small hill near your neighborhood. Your neighbor, Xiao Xu, is already sitting there, watching the sunset. She waves you over.",
+        "setup_zh": "下班后，你走到小区附近的小山坡上。你的邻居小许已经坐在那里看日落了。她向你招手。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来，坐这里！今天的日落特别漂亮，你看那边的云变成橘色了。",
+                "text_pinyin": "Lái, zuò zhèlǐ! Jīntiān de rìluò tèbié piàoliang, nǐ kàn nàbiān de yún biàn chéng jú sè le.",
+                "text_en": "Come, sit here! Today's sunset is especially beautiful — look, those clouds have turned orange."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the sunset.",
+                "options": [
+                    {
+                        "text_zh": "哇，真美！我平时工作太忙，很少停下来看日落。谢谢你叫我过来。",
+                        "text_pinyin": "Wā, zhēn měi! Wǒ píngshí gōngzuò tài máng, hěn shǎo tíng xiàlái kàn rìluò. Xièxie nǐ jiào wǒ guòlái.",
+                        "text_en": "Wow, it's beautiful! I'm usually so busy with work, I rarely stop to watch sunsets. Thanks for calling me over.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Honest and appreciative — connects busyness with the need to pause."
+                    },
+                    {
+                        "text_zh": "嗯，不错。",
+                        "text_pinyin": "En, búcuò.",
+                        "text_en": "Mm, nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief for such a beautiful moment."
+                    },
+                    {
+                        "text_zh": "我只是路过。",
+                        "text_pinyin": "Wǒ zhǐ shì lùguò.",
+                        "text_en": "I was just passing by.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Dismissive of her kind invitation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我也是最近才开始来这里的。之前压力很大，朋友建议我每天花十分钟看看天空。没想到真的有效果，心情好多了。",
+                "text_pinyin": "Wǒ yě shì zuìjìn cái kāishǐ lái zhèlǐ de. Zhīqián yālì hěn dà, péngyou jiànyì wǒ měi tiān huā shí fēnzhōng kànkan tiānkōng. Méi xiǎng dào zhēn de yǒu xiàoguǒ, xīnqíng hǎo duō le.",
+                "text_en": "I only started coming here recently too. I was under a lot of stress, and a friend suggested I spend ten minutes every day just looking at the sky. Didn't expect it to actually work — my mood improved a lot."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her experience.",
+                "options": [
+                    {
+                        "text_zh": "十分钟看天空，这个方法好简单但是好有用。有时候我们只需要安静地看一看，就够了。",
+                        "text_pinyin": "Shí fēnzhōng kàn tiānkōng, zhège fāngfǎ hǎo jiǎndān dànshì hǎo yǒuyòng. Yǒu shíhou wǒmen zhǐ xūyào ānjìng de kàn yi kàn, jiù gòu le.",
+                        "text_en": "Ten minutes of sky-watching — such a simple method but so effective. Sometimes we just need to quietly look around, and that's enough.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Reflective and affirming — validates her experience."
+                    },
+                    {
+                        "text_zh": "压力大的话可以去运动。",
+                        "text_pinyin": "Yālì dà dehuà kěyǐ qù yùndòng.",
+                        "text_en": "If you're stressed, you could exercise.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Unsolicited advice when she's sharing something personal."
+                    },
+                    {
+                        "text_zh": "你现在还有压力吗？",
+                        "text_pinyin": "Nǐ xiànzài hái yǒu yālì ma?",
+                        "text_en": "Are you still stressed?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Concerned but prying."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "就是！不需要做什么特别的事情。好了，太阳下去了，天开始暗了。明天同一个时间，你要不要再来？",
+                "text_pinyin": "Jiù shì! Bù xūyào zuò shénme tèbié de shìqing. Hǎo le, tàiyáng xià qù le, tiān kāishǐ àn le. Míngtiān tóng yī ge shíjiān, nǐ yào bú yào zài lái?",
+                "text_en": "Exactly! You don't need to do anything special. Well, the sun's gone down, it's getting dark. Same time tomorrow — want to come again?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation for tomorrow.",
+                "options": [
+                    {
+                        "text_zh": "好啊！那就做个约定——每天下班以后，一起来看十分钟的日落。",
+                        "text_pinyin": "Hǎo a! Nà jiù zuò ge yuēdìng — měi tiān xiàbān yǐhòu, yīqǐ lái kàn shí fēnzhōng de rìluò.",
+                        "text_en": "Sure! Let's make it a deal — after work every day, we come watch the sunset for ten minutes together.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Turns a moment into a beautiful daily ritual."
+                    },
+                    {
+                        "text_zh": "看情况吧。",
+                        "text_pinyin": "Kàn qíngkuàng ba.",
+                        "text_en": "Depends on the situation.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Non-committal."
+                    },
+                    {
+                        "text_zh": "明天可能没时间。",
+                        "text_pinyin": "Míngtiān kěnéng méi shíjiān.",
+                        "text_en": "Might not have time tomorrow.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Breaks the gentle connection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Taking time to watch the sky is becoming an intentional wellness practice in Chinese cities, where the pace of life can be overwhelming. Small neighborhood hills and rooftops serve as quiet retreats. Making a daily appointment with nature reflects a growing cultural shift toward mindfulness."
+    },
+    "hsk_level": 3
+}

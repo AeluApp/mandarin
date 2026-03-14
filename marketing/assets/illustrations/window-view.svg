@@ -1,12 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- window frame -->
-  <rect x="25" y="8" width="70" height="44" stroke-width="0.75"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- wall -->
+  <rect x="0" y="0" width="200" height="100" stroke="none" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- window frame — traditional Chinese lattice style -->
+  <rect x="30" y="8" width="140" height="76" stroke="#2a2a2a" stroke-width="1.2"/>
+  <!-- inner frame -->
+  <rect x="34" y="12" width="132" height="68" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- clear the wall fill inside window -->
+  <rect x="35" y="13" width="130" height="66" stroke="none" fill="white"/>
+  <!-- lattice pattern — top section -->
+  <line x1="100" y1="12" x2="100" y2="38" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="67" y1="12" x2="67" y2="38" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="133" y1="12" x2="133" y2="38" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="34" y1="25" x2="166" y2="25" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="34" y1="38" x2="166" y2="38" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- lower window: open — shows landscape -->
+  <!-- distant mountains through window -->
+  <path d="M40 52 Q55 38 70 46 Q85 30 100 42 Q115 28 130 40 Q145 32 160 46" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.03" opacity="0.6"/>
+  <!-- mist layer -->
+  <path d="M36 56 Q65 52 100 56 Q135 52 164 56" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <!-- closer hills -->
+  <path d="M36 62 Q55 52 75 58 Q95 48 115 56 Q135 50 155 58 Q160 56 164 60" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.04" opacity="0.5"/>
+  <!-- tree visible through window -->
+  <line x1="80" y1="72" x2="80" y2="54" stroke="#2a2a2a" stroke-width="0.5" opacity="0.5"/>
+  <circle cx="80" cy="50" r="6" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.03" opacity="0.4"/>
+  <circle cx="76" cy="54" r="4" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.03" opacity="0.4"/>
+  <!-- bird through window -->
+  <path d="M120 44 Q122 42 124 44" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
   <!-- window sill -->
-  <line x1="22" y1="52" x2="98" y2="52" stroke-width="0.6"/>
-  <!-- horizon inside window -->
-  <line x1="25" y1="38" x2="95" y2="38" stroke-width="0.4"/>
-  <!-- distant mountain inside window -->
-  <polyline points="45,38 60,20 75,38" stroke-width="0.5"/>
-  <!-- smaller peak -->
-  <polyline points="65,38 76,26 87,38" stroke-width="0.4"/>
+  <rect x="28" y="84" width="144" height="4" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- small vase on windowsill -->
+  <path d="M60 84 Q60 76 64 74 Q68 76 68 84" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- flower stem from vase -->
+  <path d="M64 74 Q62 66 64 60" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M64 62 Q60 58 62 54" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- small flower -->
+  <circle cx="62" cy="54" r="2" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- leaf -->
+  <path d="M64 68 Q68 64 66 60" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- teacup on sill -->
+  <path d="M130 84 Q130 78 134 76 Q138 78 138 84" stroke="#2a2a2a" stroke-width="0.45"/>
+  <path d="M132 78 Q134 76 136 78" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
 </svg>

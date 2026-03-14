@@ -1,0 +1,94 @@
+{
+    "title": "Xiao Wei's Birthday",
+    "title_zh": "小伟的生日",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_social_1_01_v0",
+    "tree": {
+        "setup": "Your classmate Xiao Wei has invited you to his birthday dinner at a hotpot restaurant. He's turning 22 and is inexplicably nervous about it. He's arranged the table with military precision -- chopsticks parallel, dipping sauces in a perfect arc. His friends are starting to arrive.",
+        "setup_zh": "同学小伟请你去火锅店吃生日饭。他要22岁了，不知道为什么很紧张。他把桌上的东西摆得整整齐齐——筷子平行，蘸料排成弧形。朋友们陆续到了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你来了！太好了！请坐！",
+                "text_pinyin": "nǐ lái le! tài hǎo le! qǐng zuò!",
+                "text_en": "You're here! Great! Please sit!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Wish him happy birthday.",
+                "options": [
+                    {
+                        "text_zh": "生日快乐！",
+                        "text_pinyin": "shēngrì kuàilè!",
+                        "text_en": "Happy birthday!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Wei grins and adjusts a chopstick that was half a millimeter off-center. He's touched. 生日快乐 is exactly what's needed here -- simple, warm, universal."
+                    },
+                    {
+                        "text_zh": "谢谢你请我！",
+                        "text_pinyin": "xièxie nǐ qǐng wǒ!",
+                        "text_en": "Thanks for inviting me!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite and appropriate. Xiao Wei waves it away modestly, but he's clearly keeping a mental guest list of who thanked him. 请 means both 'to invite' and 'please.'"
+                    },
+                    {
+                        "text_zh": "你几岁了？",
+                        "text_pinyin": "nǐ jǐ suì le?",
+                        "text_en": "How old are you?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Wei blinks. He literally just told you. Also, 几岁 is typically used for children -- try 多大 for adults. But the grammar is solid."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你想吃什么？我们点菜吧！",
+                "text_pinyin": "nǐ xiǎng chī shénme? wǒmen diǎn cài ba!",
+                "text_en": "What do you want to eat? Let's order!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest something for the table.",
+                "options": [
+                    {
+                        "text_zh": "我想吃牛肉。",
+                        "text_pinyin": "wǒ xiǎng chī niúròu.",
+                        "text_en": "I'd like beef.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Wei writes it down on a napkin with the formality of a secretary taking minutes. He's running a tight ship. Naming specific foods with 想吃 is clear and natural."
+                    },
+                    {
+                        "text_zh": "都可以，你说了算！",
+                        "text_pinyin": "dōu kěyǐ, nǐ shuō le suàn!",
+                        "text_en": "Anything's fine, you decide!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Wei looks relieved. He's already planned the entire menu and was hoping nobody would deviate from it. 你说了算 means 'you have the final say.'"
+                    },
+                    {
+                        "text_zh": "我不饿。",
+                        "text_pinyin": "wǒ bú è.",
+                        "text_en": "I'm not hungry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Wei looks at you, then at the enormous pot of boiling broth, then back at you. You are at a birthday hotpot dinner. Eating is not optional."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！大家一起吃！",
+                "text_pinyin": "tài hǎo le! dàjiā yìqǐ chī!",
+                "text_en": "Great! Let's all eat together!"
+            }
+        ],
+        "cultural_note": "In China, the birthday person often hosts and pays for the meal (请客, qǐngkè). Guests are not expected to bring gifts, though a small present is always appreciated. Hotpot (火锅) is a popular choice for celebrations because it's communal and fun."
+    }
+}

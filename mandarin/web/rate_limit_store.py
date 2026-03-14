@@ -99,7 +99,8 @@ class SQLiteStorage(Storage):
             conn = self._get_conn()
             conn.execute("SELECT 1 FROM rate_limit LIMIT 1")
             return True
-        except Exception:
+        except Exception as e:
+            logger.warning("Rate limit storage check failed: %s", e)
             return False
 
     def reset(self) -> int:

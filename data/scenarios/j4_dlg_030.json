@@ -1,0 +1,83 @@
+{
+    "title": "The Old Tailor",
+    "title_zh": "老裁缝",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You've brought a jacket to be mended at a tiny tailor shop. The tailor, Grandma Feng, examines the tear carefully through thick glasses. Her shop is cluttered with fabric and thread.",
+        "setup_zh": "你带了一件外套去一家小小的裁缝店修补。裁缝冯奶奶透过厚厚的眼镜仔细看着破口。她的小店里堆满了布料和线。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这件衣服料子还很好，不应该扔。现在的年轻人，衣服破了一点就扔了，多可惜。以前我们一件衣服要穿很多年，补了又补。",
+                "text_pinyin": "Zhè jiàn yīfu liàozi hái hěn hǎo, bù yīnggāi rēng. Xiànzài de niánqīng rén, yīfu pò le yīdiǎn jiù rēng le, duō kěxī. Yǐqián wǒmen yī jiàn yīfu yào chuān hěn duō nián, bǔ le yòu bǔ.",
+                "text_en": "The fabric on this jacket is still good — it shouldn't be thrown away. Young people today, they toss clothes with the slightest tear. What a waste. We used to wear one piece of clothing for years, patching it again and again."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about mending vs. discarding.",
+                "options": [
+                    {
+                        "text_zh": "我也觉得可惜。其实修补过的衣服有一种特别的美——它说明这件衣服被珍惜过，被用心对待过。新衣服没有这种故事。",
+                        "text_pinyin": "Wǒ yě juéde kěxī. Qíshí xiūbǔ guò de yīfu yǒu yī zhǒng tèbié de měi — tā shuōmíng zhè jiàn yīfu bèi zhēnxī guò, bèi yòngxīn duìdài guò. Xīn yīfu méiyǒu zhè zhǒng gùshì.",
+                        "text_en": "I think it's a waste too. Actually, mended clothes have a special beauty — they show the clothing was cherished and cared for. New clothes don't have that kind of story.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Finds beauty in repair — values care over novelty."
+                    },
+                    {
+                        "text_zh": "不过现在衣服那么便宜，修补花的时间可能比重新买一件还多。从效率来说，买新的确实更合理。",
+                        "text_pinyin": "Búguò xiànzài yīfu nàme piányi, xiūbǔ huā de shíjiān kěnéng bǐ chóngxīn mǎi yī jiàn hái duō. Cóng xiàolǜ lái shuō, mǎi xīn de quèshí gèng hélǐ.",
+                        "text_en": "But clothes are so cheap now — the time spent mending might be more than buying a new one. Efficiency-wise, buying new really is more reasonable.",
+                        "score": 0.0,
+                        "feedback": "Grandma Feng threads her needle without looking up: 'Efficiency. Is that what you say about everything you love?'"
+                    },
+                    {
+                        "text_zh": "现在买新的也不贵啊。",
+                        "text_pinyin": "Xiànzài mǎi xīn de yě bú guì a.",
+                        "text_en": "Buying new isn't expensive nowadays.",
+                        "score": 0.0,
+                        "feedback": "Contradicts her philosophy of valuing what you have."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有故事的衣服，说得好。我做了五十年裁缝了。以前结婚的时候，新娘的衣服都是找我做的。一针一针缝上去，每一针都有心意。现在什么都是机器做的，快是快了，但心意没了。",
+                "text_pinyin": "Yǒu gùshì de yīfu, shuō de hǎo. Wǒ zuò le wǔshí nián cáiféng le. Yǐqián jiéhūn de shíhou, xīnniáng de yīfu dōu shì zhǎo wǒ zuò de. Yī zhēn yī zhēn féng shàngqù, měi yī zhēn dōu yǒu xīnyì. Xiànzài shénme dōu shì jīqì zuò de, kuài shì kuài le, dàn xīnyì méi le.",
+                "text_en": "Clothes with stories — well said. I've been a tailor for fifty years. In the old days, brides would come to me for their wedding clothes. Sewn stitch by stitch, every stitch with care. Now everything is machine-made. Fast, sure, but the heart is gone."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about handmade vs. machine-made.",
+                "options": [
+                    {
+                        "text_zh": "机器快，但缝不进心意。您的每一针都是给那个人的，不是给「谁都行」的。这种手艺不只是技术，是一种在乎的方式。",
+                        "text_pinyin": "Jīqì kuài, dàn féng bú jìn xīnyì. Nín de měi yī zhēn dōu shì gěi nàge rén de, bú shì gěi 'shuí dōu xíng' de. Zhè zhǒng shǒuyì bù zhǐ shì jìshù, shì yī zhǒng zàihu de fāngshì.",
+                        "text_en": "Machines are fast, but they can't sew in care. Every stitch of yours is for that person, not for 'whoever.' This kind of craft isn't just skill — it's a way of caring.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honors the personal nature of her craft — individuality as care."
+                    },
+                    {
+                        "text_zh": "你有没有收徒弟？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu shōu túdì?",
+                        "text_en": "Have you taken any apprentices?",
+                        "score": 0.0,
+                        "feedback": "Succession question during a craft philosophy moment."
+                    },
+                    {
+                        "text_zh": "你做的婚纱什么风格？",
+                        "text_pinyin": "Nǐ zuò de hūnshā shénme fēnggé?",
+                        "text_en": "What style wedding dresses do you make?",
+                        "score": 0.0,
+                        "feedback": "Style question that misses the deeper point about care."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Traditional tailoring (裁缝) was once central to Chinese family life, with tailors making everything from everyday clothes to wedding garments. The concept of 心意 (xīnyì, heartfelt care/intention) in handmade goods reflects a belief that the maker's feelings are woven into the work. The rise of fast fashion has made traditional tailoring increasingly rare, though a counter-movement valuing slow, handmade clothing is emerging in Chinese cities."
+    }
+}

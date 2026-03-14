@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Explain the problem with the product you bought.",
                 "options": [
-                    {"text_zh": "你好，我两周前在你们这儿买了一个电热水壶，但是用了三天就不能加热了。我想退货或者换一个新的。这是我的收据。", "text_pinyin": "nǐ hǎo, wǒ liǎng zhōu qián zài nǐmen zhèr mǎi le yī gè diànrè shuǐhú, dànshì yòng le sān tiān jiù bù néng jiārè le. wǒ xiǎng tuìhuò huòzhě huàn yī gè xīn de. zhè shì wǒ de shōujù.", "text_en": "Hello, I bought an electric kettle here two weeks ago, but it stopped heating after three days. I'd like to return it or exchange it for a new one. Here's my receipt.", "score": 1.0, "register": "neutral", "feedback": "Clear and complete -- states the problem, the timeframe, and your desired resolution. Providing the receipt shows you came prepared."},
-                    {"text_zh": "我买的水壶坏了，才用了几天。你们能帮我看看吗？", "text_pinyin": "wǒ mǎi de shuǐhú huài le, cái yòng le jǐ tiān. nǐmen néng bāng wǒ kànkan ma?", "text_en": "The kettle I bought is broken, I only used it a few days. Can you take a look?", "score": 0.6, "register": "casual", "feedback": "Describes the issue but doesn't state what you want -- a refund or exchange. Being clear about your expectation helps move things along."},
-                    {"text_zh": "你们卖的东西质量太差了！这个水壶才用了三天就坏了，你们怎么做生意的？", "text_pinyin": "nǐmen mài de dōngxi zhìliàng tài chà le! zhège shuǐhú cái yòng le sān tiān jiù huài le, nǐmen zěnme zuò shēngyi de?", "text_en": "The quality of your products is terrible! This kettle broke after just three days -- how do you run a business?", "score": 0.3, "register": "blunt", "feedback": "Too aggressive -- attacking the store's reputation makes the staff defensive. State the problem calmly and focus on the solution you want."}
+                    {
+                        "text_zh": "你好，我两周前在你们这儿买了一个电热水壶，但是用了三天就不能加热了。我想退货或者换一个新的。这是我的收据。",
+                        "text_pinyin": "nǐ hǎo, wǒ liǎng zhōu qián zài nǐmen zhèr mǎi le yī gè diànrè shuǐhú, dànshì yòng le sān tiān jiù bù néng jiārè le. wǒ xiǎng tuìhuò huòzhě huàn yī gè xīn de. zhè shì wǒ de shōujù.",
+                        "text_en": "Hello, I bought an electric kettle here two weeks ago, but it stopped heating after three days. I'd like to return it or exchange it for a new one. Here's my receipt.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and complete -- states the problem, the timeframe, and your desired resolution. Providing the receipt shows you came prepared."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Decide how you want the issue resolved.",
                 "options": [
-                    {"text_zh": "谢谢。我还是比较喜欢这个牌子的，麻烦帮我换一个新的吧。不过能不能帮我检查一下新的没有问题？", "text_pinyin": "xièxie. wǒ háishi bǐjiào xǐhuan zhège páizi de, máfan bāng wǒ huàn yī gè xīn de ba. búguò néng bù néng bāng wǒ jiǎnchá yīxià xīn de méiyǒu wèntí?", "text_en": "Thank you. I still like this brand, so please exchange it for a new one. But could you check the new one to make sure it works?", "score": 1.0, "register": "neutral", "feedback": "Polite and practical -- requesting an inspection shows you learned from the experience. Using 麻烦 softens the request nicely."},
-                    {"text_zh": "那就退款吧，我不太想再买同样的产品了。", "text_pinyin": "nà jiù tuìkuǎn ba, wǒ bú tài xiǎng zài mǎi tóngyàng de chǎnpǐn le.", "text_en": "Then I'll take the refund. I don't really want to buy the same product again.", "score": 0.7, "register": "neutral", "feedback": "Reasonable choice -- explains your reasoning clearly. This is a valid consumer decision."},
-                    {"text_zh": "换新的吧。", "text_pinyin": "huàn xīn de ba.", "text_en": "Exchange it.", "score": 0.4, "register": "blunt", "feedback": "Too brief -- adding 谢谢 or 麻烦 makes the interaction smoother. Customer service staff respond better to polite requests."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    },
+                    {
+                        "text_zh": "谢谢。我还是比较喜欢这个牌子的，麻烦帮我换一个新的吧。不过能不能帮我检查一下新的没有问题？",
+                        "text_pinyin": "xièxie. wǒ háishi bǐjiào xǐhuan zhège páizi de, máfan bāng wǒ huàn yī gè xīn de ba. búguò néng bù néng bāng wǒ jiǎnchá yīxià xīn de méiyǒu wèntí?",
+                        "text_en": "Thank you. I still like this brand, so please exchange it for a new one. But could you check the new one to make sure it works?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Polite and practical -- requesting an inspection shows you learned from the experience. Using 麻烦 softens the request nicely."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Thank them and wrap up the conversation.",
                 "options": [
-                    {"text_zh": "太好了，非常感谢你的帮助。希望这次没问题了。再见！", "text_pinyin": "tài hǎo le, fēicháng gǎnxiè nǐ de bāngzhù. xīwàng zhè cì méi wèntí le. zàijiàn!", "text_en": "Great, thank you so much for your help. I hope this one's fine. Goodbye!", "score": 1.0, "register": "neutral", "feedback": "Warm and appreciative -- expressing thanks after a complaint resolution leaves a good impression."},
-                    {"text_zh": "好的，谢谢。", "text_pinyin": "hǎo de, xièxie.", "text_en": "OK, thanks.", "score": 0.6, "register": "casual", "feedback": "Functional but a bit flat after they helped you. A little more warmth goes a long way."},
-                    {"text_zh": "希望这次的质量能好一点。", "text_pinyin": "xīwàng zhè cì de zhìliàng néng hǎo yīdiǎn.", "text_en": "I hope the quality is better this time.", "score": 0.3, "register": "blunt", "feedback": "Leaves a negative tone at the end. The staff resolved your issue -- ending with doubt about quality is unnecessary and rude."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "太好了，非常感谢你的帮助。希望这次没问题了。再见！",
+                        "text_pinyin": "tài hǎo le, fēicháng gǎnxiè nǐ de bāngzhù. xīwàng zhè cì méi wèntí le. zàijiàn!",
+                        "text_en": "Great, thank you so much for your help. I hope this one's fine. Goodbye!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Warm and appreciative -- expressing thanks after a complaint resolution leaves a good impression."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             }
         ],

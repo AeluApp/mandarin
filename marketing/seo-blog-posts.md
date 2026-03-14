@@ -90,7 +90,7 @@ the end (not salesy — "I built a tool that does this" is enough).
 - HSK 7-9: Native-adjacent (academic writing, literary criticism, interpreting)
 - Reality check: HSK level ≠ speaking ability (the four skills diverge)
 - How to figure out YOUR real level (not what the test says)
-- Soft CTA: "The diagnostics in Mandarin show you where you are across all four skills"
+- Soft CTA: "The diagnostics in Aelu show you where you are across all four skills"
 
 ---
 

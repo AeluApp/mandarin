@@ -43,7 +43,7 @@
 2. **Content volume is the moat.** 8,500+ graded lessons, 15-person content team producing daily. You can't fake this with AI — or at least, users can tell when you do.
 3. **Daily fresh content drives retention.** News-based lessons give users a reason to open the app every day. Static vocab lists don't.
 
-**Honest gap for us:** We have 299 seed items. TCB has 8,500+ lessons. Content volume is our single biggest competitive disadvantage, and it's not closeable with engineering.
+**Honest gap for us:** We have 10,000+ vocabulary items across HSK 1-9, but TCB has 8,500+ graded *lessons* (not just vocabulary). Lesson/reading content volume remains our single biggest competitive disadvantage, and it's not closeable with engineering.
 
 **Source:** [TCB story](https://www.thechairmansbao.com/blog/tcb-story-chinese-reading-app/)
 
@@ -222,13 +222,13 @@ A developer built a French learning startup and shut it down after 6 months.
 
 | Pattern | Our Current Position | Action Required |
 |---------|---------------------|-----------------|
-| Content volume is the moat | 299 items vs TCB's 8,500+, Du Chinese's 3,000+ | Acknowledged weakness. Not closeable with engineering. Focus on content quality and the cleanup loop as differentiator. |
-| Subscription model is correct | $12/month, already planned | Confirmed. Do not offer lifetime pricing. |
+| Content volume is the moat | 10,000+ vocab items (HSK 1-9) vs TCB's 8,500+ lessons, Du Chinese's 3,000+ readings | Vocab coverage now competitive. Graded reading/lesson volume still a gap. Focus on content quality and the cleanup loop as differentiator. |
+| Subscription model is correct | $14.99/month, already planned | Confirmed. Do not offer lifetime pricing. |
 | Free tier must prove the method | HSK 1-2 free with all 27 drill types | Already generous. Confirmed. |
 | Founder story = best marketing | "Built by a learner who needed it" | Already in positioning. Lean into it harder. |
 | B2B/institutional is underrated | No institutional offering yet | Consider post-launch. Not a launch blocker. |
 | 3-5 year timeline is normal | Currently in development | Calibrate personal expectations. Keep the day job. |
 | Design system is an asset | Civic Sanctuary is comprehensive | Skritter's lack of one became a bottleneck. Ours is a genuine advantage. |
 | AI content backlash is growing | Zero AI at runtime, hand-curated content | Market tailwind. Emphasize in all messaging. |
-| Handcrafted content is a selling point | 299 items, 299 context notes, all human-written | Explicitly market this. HanziHero does. We should too. |
+| Handcrafted content is a selling point | 10,000+ items (HSK 1-9), context notes, all human-written | Explicitly market this. HanziHero does. We should too. |
 | Partnerships > building everything | No integrations yet | Consider Pleco/Du Chinese partnerships post-launch. |

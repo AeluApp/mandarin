@@ -1,0 +1,117 @@
+{
+    "title": "Work-Life Balance",
+    "title_zh": "工作与生活的平衡",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're sitting with your colleague Xiaoyu at a quiet noodle shop after work. She's been staying late at the office every day and looks exhausted.",
+        "setup_zh": "下班后你和同事小雨坐在一家安静的面馆里。她最近每天加班，看起来很疲惫。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我已经连续加了两个星期的班了。每天回家都快十点了，感觉生活只剩下工作。",
+                "text_pinyin": "Wǒ yǐjīng liánxù jiā le liǎng ge xīngqī de bān le. Měi tiān huí jiā dōu kuài shí diǎn le, gǎnjué shēnghuó zhǐ shèng xià gōngzuò.",
+                "text_en": "I've been working overtime for two straight weeks. I don't get home until nearly ten every night. It feels like life is nothing but work."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Xiaoyu's exhaustion.",
+                "options": [
+                    {
+                        "text_zh": "两个星期？那太辛苦了。你有没有试过跟领导说一下？长期这样下去对身体不好。",
+                        "text_pinyin": "Liǎng ge xīngqī? Nà tài xīnkǔ le. Nǐ yǒu méiyǒu shì guò gēn lǐngdǎo shuō yíxià? Chángqī zhèyàng xià qù duì shēntǐ bù hǎo.",
+                        "text_en": "Two weeks? That's really tough. Have you tried talking to your manager about it? It's not good for your health to keep going like this.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Empathetic and practical — shows concern and gently suggests action."
+                    },
+                    {
+                        "text_zh": "加班费多不多？",
+                        "text_pinyin": "Jiābān fèi duō bù duō?",
+                        "text_en": "Is the overtime pay good?",
+                        "score": 0.0,
+                        "feedback": "This reduces her exhaustion to a financial question."
+                    },
+                    {
+                        "text_zh": "我最近在追一部新的电视剧，特别好看。",
+                        "text_pinyin": "Wǒ zuìjìn zài zhuī yī bù xīn de diànshìjù, tèbié hǎokàn.",
+                        "text_en": "I've been watching a new TV series recently, it's really good.",
+                        "score": 0.0,
+                        "feedback": "Ignores her distress entirely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说过了，但领导说项目快结束了，再坚持一下。每次都是「再坚持一下」。我都不记得上次周末做自己喜欢的事是什么时候了。",
+                "text_pinyin": "Shuō guò le, dàn lǐngdǎo shuō xiàngmù kuài jiéshù le, zài jiānchí yíxià. Měi cì dōu shì 'zài jiānchí yíxià'. Wǒ dōu bú jìde shàng cì zhōumò zuò zìjǐ xǐhuan de shì shì shénme shíhou le.",
+                "text_en": "I've tried, but the manager says the project is almost done, just hang in there a bit more. It's always 'just hang in there.' I can't even remember the last time I did something I enjoyed on a weekend."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on finding balance.",
+                "options": [
+                    {
+                        "text_zh": "我觉得平衡不是把工作和生活分成两半，而是在忙的时候也能留一点空间给自己。哪怕只是睡前看十分钟书，或者早上多走一段路。",
+                        "text_pinyin": "Wǒ juéde pínghéng bú shì bǎ gōngzuò hé shēnghuó fēn chéng liǎng bàn, ér shì zài máng de shíhou yě néng liú yīdiǎn kōngjiān gěi zìjǐ. Nǎpà zhǐ shì shuì qián kàn shí fēnzhōng shū, huòzhě zǎoshang duō zǒu yí duàn lù.",
+                        "text_en": "Balance isn't splitting work and life in two — it's keeping a small space for yourself even when busy. Even reading ten minutes before bed, or taking a longer walk in the morning.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And realistic — reframes balance as small daily choices rather than grand gestures."
+                    },
+                    {
+                        "text_zh": "你应该辞职，换一个轻松的工作。",
+                        "text_pinyin": "Nǐ yīnggāi cízhí, huàn yīge qīngsōng de gōngzuò.",
+                        "text_en": "You should quit and find an easier job.",
+                        "score": 0.0,
+                        "feedback": "Too abrupt — dismisses the complexity of her situation."
+                    },
+                    {
+                        "text_zh": "你中午吃了什么？这家面馆的牛肉面不错。",
+                        "text_pinyin": "Nǐ zhōngwǔ chī le shénme? Zhè jiā miànguǎn de niúròu miàn búcuò.",
+                        "text_en": "What did you have for lunch? The beef noodles here are good.",
+                        "score": 0.0,
+                        "feedback": "Pivots away from the emotional conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "留一点空间给自己……你说得对。也许我可以先从小的改变开始。谢谢你愿意听我说这些。",
+                "text_pinyin": "Liú yīdiǎn kōngjiān gěi zìjǐ…… nǐ shuō de duì. Yěxǔ wǒ kěyǐ xiān cóng xiǎo de gǎibiàn kāishǐ. Xièxie nǐ yuànyì tīng wǒ shuō zhèxiē.",
+                "text_en": "Keep a small space for yourself... you're right. Maybe I can start with small changes first. Thank you for being willing to listen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer a kind closing thought.",
+                "options": [
+                    {
+                        "text_zh": "不用谢。其实我们都在学怎么照顾自己。下次累了就叫我出来吃面，至少别一个人扛着。",
+                        "text_pinyin": "Bú yòng xiè. Qíshí wǒmen dōu zài xué zěnme zhàogù zìjǐ. Xià cì lèi le jiù jiào wǒ chūlái chī miàn, zhìshǎo bié yīge rén káng zhe.",
+                        "text_en": "No need to thank me. We're all learning how to take care of ourselves. Next time you're tired, just call me to come out for noodles. At least don't carry it all alone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and genuine — normalizes struggle and offers ongoing support."
+                    },
+                    {
+                        "text_zh": "没事。我先走了，明天见。",
+                        "text_pinyin": "Méi shì. Wǒ xiān zǒu le, míngtiān jiàn.",
+                        "text_en": "It's fine. I'll head out first, see you tomorrow.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — abrupt exit after a vulnerable conversation."
+                    },
+                    {
+                        "text_zh": "你要不要再来一碗面？",
+                        "text_pinyin": "Nǐ yào bú yào zài lái yī wǎn miàn?",
+                        "text_en": "Do you want another bowl of noodles?",
+                        "score": 0.0,
+                        "feedback": "Deflects from the emotional moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The phrase「再坚持一下」(just hang in there a bit more) is commonly heard in Chinese workplaces. China's intense work culture, including the controversial '996' schedule (9am to 9pm, 6 days a week), has sparked growing discussion about work-life balance, especially among younger generations who increasingly question whether career success is worth sacrificing personal well-being."
+    }
+}

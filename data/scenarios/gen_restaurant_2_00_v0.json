@@ -1,0 +1,88 @@
+{
+    "title": "The Delivery App Dilemma",
+    "title_zh": "外卖纠结",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_2_00_v0",
+    "tree": {
+        "setup": "Your apartment, raining outside. You're ordering delivery through an app. The delivery driver, Xiao Ma, calls you because the app address is confusing. He's riding an electric scooter in the rain with three other deliveries, but his voice is patient. Behind him, you can hear traffic and rain on his helmet.",
+        "setup_zh": "你的公寓，外面下雨。你在用手机点外卖。外卖骑手小马打来电话，因为App上的地址让他困惑。他骑着电动车在雨里，还有三个单要送，但声音很耐心。你能听到背景里的车声和雨打头盔的声音。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂，你好，我是外卖骑手。你的地址是哪个楼？",
+                "text_pinyin": "wéi, nǐ hǎo, wǒ shì wàimài qíshǒu. nǐ de dìzhǐ shì nǎ ge lóu?",
+                "text_en": "Hello, I'm the delivery driver. Which building is your address?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Help him find your building.",
+                "options": [
+                    {
+                        "text_zh": "三号楼，在小区门口左边。",
+                        "text_pinyin": "sān hào lóu, zài xiǎoqū ménkǒu zuǒbiān.",
+                        "text_en": "Building 3, on the left side of the entrance.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ma spots it.「看到了！五分钟就到。」Clear directions with landmarks -- exactly what delivery drivers need. 小区 (xiǎoqū) is 'residential compound.'"
+                    },
+                    {
+                        "text_zh": "你到小区了吗？我下去接你。",
+                        "text_pinyin": "nǐ dào xiǎoqū le ma? wǒ xiàqù jiē nǐ.",
+                        "text_en": "Are you at the compound? I'll come down to meet you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ma sounds relieved.「太好了！我在门口等你。」Going downstairs to meet the driver is considerate, especially in rain. 接 means 'to meet/receive.'"
+                    },
+                    {
+                        "text_zh": "我发了定位给你，你看到了吗？",
+                        "text_pinyin": "wǒ fā le dìngwèi gěi nǐ, nǐ kàndào le ma?",
+                        "text_en": "I sent you my location, did you see it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ma checks his phone while stopped at a light.「看到了，我过来了。」发定位 (fā dìngwèi, 'send location') is the modern way to guide deliveries."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "到了到了！你的外卖。下雨天慢了一点，不好意思。",
+                "text_pinyin": "dào le dào le! nǐ de wàimài. xià yǔ tiān màn le yìdiǎn, bù hǎoyìsi.",
+                "text_en": "I'm here! Your delivery. Sorry it's a bit slow because of the rain."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank the delivery driver.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！下雨天辛苦了。",
+                        "text_pinyin": "xièxie nǐ! xià yǔ tiān xīnkǔ le.",
+                        "text_en": "Thank you! It must be hard in the rain.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ma grins beneath his wet helmet.「没事没事！」辛苦了 (xīnkǔ le) is one of the warmest things you can say to someone who's been working hard -- it means 'you've worked hard.'"
+                    },
+                    {
+                        "text_zh": "谢谢！没关系的。",
+                        "text_pinyin": "xièxie! méi guānxi de.",
+                        "text_en": "Thanks! No worries.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ma waves and is already heading to his next delivery. His scooter disappears into the rain."
+                    },
+                    {
+                        "text_zh": "饭还热吗？",
+                        "text_pinyin": "fàn hái rè ma?",
+                        "text_en": "Is the food still hot?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ma taps the insulated bag.「保温袋呢，放心！」He's a professional. The food is always hot. Asking still feels a tiny bit ungrateful in the rain, though."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Food delivery (外卖, wàimài) is a massive part of Chinese daily life. Drivers (骑手, qíshǒu) work in all weather. Saying 辛苦了 and giving 5-star ratings helps. Many people go downstairs to meet drivers rather than making them navigate apartment buildings."
+    }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Breach Notification Policy — Aelu</title>
+  <meta name="description" content="Aelu's data breach notification policy. How we detect, respond to, and communicate security incidents.">
+  <link rel="canonical" href="https://aeluapp.com/breach-notification">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4); }
+    nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-brand-icon { width: 32px; height: 32px; border-radius: 7px; mix-blend-mode: multiply; }
+    @media (prefers-color-scheme: dark) { .nav-brand-icon { mix-blend-mode: normal; filter: invert(1) hue-rotate(180deg); } }
+    .nav-links { display: flex; gap: var(--space-4); list-style: none; }
+    .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; }
+    .nav-links a:hover { color: var(--color-text); }
+    .legal { padding: var(--space-8) 0; }
+    .legal h1 { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 600; margin-bottom: var(--space-2); }
+    .legal .effective-date { font-size: 0.9rem; color: var(--color-text-faint); margin-bottom: var(--space-6); }
+    .legal h2 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 600; margin-top: var(--space-6); margin-bottom: var(--space-3); }
+    .legal p { font-size: 0.95rem; color: var(--color-text-faint); margin-bottom: var(--space-3); line-height: 1.75; }
+    .legal ul { list-style: none; margin-bottom: var(--space-3); padding-left: var(--space-4); }
+    .legal ul li { font-size: 0.95rem; color: var(--color-text-faint); line-height: 1.75; padding: 2px 0; position: relative; }
+    .legal ul li::before { content: "\2014"; position: absolute; left: calc(-1 * var(--space-4)); color: var(--color-border); }
+    .legal a { color: var(--color-accent); text-decoration: underline; }
+    .legal strong { color: var(--color-text); font-weight: 600; }
+    footer { padding: var(--space-5) 0; text-align: center; font-size: 0.85rem; color: var(--color-text-faint); border-top: 1px solid var(--color-border); }
+    footer a { color: var(--color-text-faint); text-decoration: underline; }
+    footer a:hover { color: var(--color-text); }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="legal">
+    <div class="container">
+
+      <h1>Data Breach Notification Policy</h1>
+      <p class="effective-date">Effective: March 2026</p>
+
+      <p>This policy describes how Aelu detects, responds to, and communicates security incidents that may affect your personal data. We take the security of your information seriously and commit to transparency if something goes wrong.</p>
+
+      <h2>1. What Constitutes a Breach</h2>
+      <p>A data breach is any incident where personal data is accessed, disclosed, altered, or destroyed without authorization. This includes:</p>
+      <ul>
+        <li>Unauthorized access to user accounts or the database</li>
+        <li>Accidental exposure of personal data (email addresses, hashed passwords, study data)</li>
+        <li>Loss or theft of data through a vulnerability in our systems</li>
+        <li>Compromise of third-party services that process data on our behalf (Stripe, Resend)</li>
+      </ul>
+
+      <h2>2. Detection and Assessment</h2>
+      <p>We monitor for potential breaches through:</p>
+      <ul>
+        <li>Security audit logging of all authentication events</li>
+        <li>Automated alerts for unusual access patterns</li>
+        <li>Sentry error monitoring for application-level anomalies</li>
+        <li>Regular review of access logs and system health</li>
+      </ul>
+      <p>When a potential breach is detected, we assess: what data was affected, how many users are impacted, the severity and likelihood of harm, and whether the breach is ongoing or contained.</p>
+
+      <h2>3. Notification Timeline</h2>
+      <p><strong>Within 72 hours</strong> of confirming a breach that poses a risk to your rights or freedoms, we will:</p>
+      <ul>
+        <li>Send an email to every affected user describing what happened, what data was involved, and what we are doing about it</li>
+        <li>Post a notice on the Aelu website and, if warranted, in the app itself</li>
+        <li>Notify any relevant supervisory authorities as required by applicable law (GDPR Article 33, state breach notification laws)</li>
+      </ul>
+      <p>If the breach is limited in scope and poses minimal risk (e.g., an internal logging error that exposed no data externally), we will document it internally and disclose it in our next transparency update.</p>
+
+      <h2>4. What We Will Tell You</h2>
+      <p>Our breach notifications will include:</p>
+      <ul>
+        <li>A clear description of what happened, in plain language</li>
+        <li>What types of personal data were involved</li>
+        <li>What we have done to contain and remediate the breach</li>
+        <li>What you should do (e.g., change your password, monitor accounts)</li>
+        <li>How to contact us with questions</li>
+      </ul>
+
+      <h2>5. Remediation</h2>
+      <p>Depending on the nature of the breach, we may:</p>
+      <ul>
+        <li>Force-reset passwords for affected accounts</li>
+        <li>Invalidate active sessions</li>
+        <li>Patch the vulnerability that caused the breach</li>
+        <li>Engage external security expertise for forensic analysis</li>
+        <li>Offer credit monitoring if financial data was exposed (note: Aelu does not store payment card data — Stripe handles this)</li>
+      </ul>
+
+      <h2>6. Record Keeping</h2>
+      <p>We maintain an internal log of all security incidents, including those that do not meet the threshold for user notification. This log includes the nature of the breach, data affected, timeline of detection and response, and remediation steps taken.</p>
+
+      <h2>7. Contact</h2>
+      <p>If you believe you have discovered a security vulnerability or suspect a breach, please contact us immediately at <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. We take all reports seriously and will respond within 24 hours.</p>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="/">Home</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
+    </div>
+  </footer>
+
+</body>
+</html>

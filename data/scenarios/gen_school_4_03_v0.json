@@ -1,0 +1,124 @@
+{
+    "title": "The Exam Strategist",
+    "title_zh": "考试战略家",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_4_03_v0",
+    "tree": {
+        "setup": "The dormitory common room, 11 PM, three days before finals. Your roommate Xiao Zhao has surrounded himself with textbooks, energy drinks, and a whiteboard covered in diagrams that look like they might be either study notes or modern art. He has developed a theory that exam success is 30% knowledge and 70% strategy, and he wants to share it with you.",
+        "setup_zh": "宿舍公共休息室，晚上十一点，期末考试前三天。你的室友小赵把自己围在课本、功能饮料和一块写满了图表的白板中间——那些图表看起来不知道是学习笔记还是现代艺术。他发展出一个理论：考试成功百分之三十靠知识，百分之七十靠策略。他要跟你分享。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来来来，我跟你说。你知道为什么上次考试我考了九十分吗？",
+                "text_pinyin": "lái lái lái, wǒ gēn nǐ shuō. nǐ zhīdào wèishéme shàng cì kǎoshì wǒ kǎo le jiǔshí fēn ma?",
+                "text_en": "Come come come, let me tell you. Do you know why I scored 90 on the last exam?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his question.",
+                "options": [
+                    {
+                        "text_zh": "因为你复习得很认真？还是你又发现了什么秘诀？",
+                        "text_pinyin": "yīnwèi nǐ fùxí de hěn rènzhēn? háishì nǐ yòu fāxiàn le shénme mìjué?",
+                        "text_en": "Because you studied hard? Or did you discover another secret?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Feeding his enthusiasm while staying grounded — the ideal roommate response. Xiao Zhao leans forward."
+                    },
+                    {
+                        "text_zh": "为什么？",
+                        "text_pinyin": "wèishéme?",
+                        "text_en": "Why?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The question he wanted. He taps the whiteboard."
+                    },
+                    {
+                        "text_zh": "运气好？",
+                        "text_pinyin": "yùnqi hǎo?",
+                        "text_en": "Good luck?",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Xiao Zhao looks wounded. His whiteboard did not come here to be insulted."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不是运气！关键是先看历年考试的题型。我发现选择题占百分之四十，问答题占百分之三十。你只要重点复习常考的知识点就行了。",
+                "text_pinyin": "búshì yùnqi! guānjiàn shì xiān kàn lìnián kǎoshì de tíxíng. wǒ fāxiàn xuǎnzé tí zhàn bǎi fēn zhī sìshí, wèndá tí zhàn bǎi fēn zhī sānshí. nǐ zhǐyào zhòngdiǎn fùxí cháng kǎo de zhīshi diǎn jiù xíng le.",
+                "text_en": "Not luck! The key is to look at past exams first. I found that multiple choice is 40%, short answer is 30%. Just focus on the most frequently tested topics."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to his strategy and share your approach.",
+                "options": [
+                    {
+                        "text_zh": "有道理。但是我觉得光看题型不够，还是要把基础打好。我们可以互相考对方。",
+                        "text_pinyin": "yǒu dàolǐ. dànshì wǒ juéde guāng kàn tíxíng búgòu, háishì yào bǎ jīchǔ dǎ hǎo. wǒmen kěyǐ hùxiāng kǎo duìfāng.",
+                        "text_en": "Makes sense. But I think just looking at question types isn't enough — you need solid fundamentals too. We could quiz each other.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Adding to his plan rather than dismissing it — Xiao Zhao nods vigorously and adds「互考」to the whiteboard in three colors."
+                    },
+                    {
+                        "text_zh": "那你帮我划一下重点吧。",
+                        "text_pinyin": "nà nǐ bāng wǒ huà yíxià zhòngdiǎn ba.",
+                        "text_en": "Then help me highlight the key points.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He was going to do this anyway. His highlighter collection rivals a stationery store."
+                    },
+                    {
+                        "text_zh": "来不及了，三天怎么够？",
+                        "text_pinyin": "lái bù jí le, sān tiān zěnme gòu?",
+                        "text_en": "It's too late — three days isn't enough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Zhao puts a hand on your shoulder.「三天够了。上次我两天就复习完了。」Two days was enough last time."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对！互相考是最好的方法。那我们今晚先把第一章到第三章过一遍，明天再看后面的。你先去泡杯咖啡。",
+                "text_pinyin": "duì! hùxiāng kǎo shì zuì hǎo de fāngfǎ. nà wǒmen jīn wǎn xiān bǎ dì yī zhāng dào dì sān zhāng guò yí biàn, míngtiān zài kàn hòumiàn de. nǐ xiān qù pào bēi kāfēi.",
+                "text_en": "Right! Quizzing each other is the best method. Let's go through chapters 1-3 tonight, then the rest tomorrow. Go make some coffee first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree and set boundaries for tonight.",
+                "options": [
+                    {
+                        "text_zh": "好，但是最晚到一点。明天还要早起。我去泡咖啡，你先出题。",
+                        "text_pinyin": "hǎo, dànshì zuì wǎn dào yì diǎn. míngtiān hái yào zǎo qǐ. wǒ qù pào kāfēi, nǐ xiān chū tí.",
+                        "text_en": "OK, but 1 AM at the latest. We still need to get up early tomorrow. I'll make coffee — you start writing questions.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Setting a deadline within the study session — Xiao Zhao respects this. He starts writing questions with the energy of someone who has already had three coffees."
+                    },
+                    {
+                        "text_zh": "好吧，开始吧。",
+                        "text_pinyin": "hǎo ba, kāishǐ ba.",
+                        "text_en": "OK, let's start.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hands you the first chapter and a highlighter. The night begins."
+                    },
+                    {
+                        "text_zh": "我好困……",
+                        "text_pinyin": "wǒ hǎo kùn……",
+                        "text_en": "I'm so sleepy...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Zhao hands you a can of energy drink. Sleep is a post-exam luxury."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university exam culture involves intensive last-minute studying (临时抱佛脚, línshí bào fójiǎo — 'hugging Buddha's feet at the last moment'). Past exam papers (历年考题) are highly valued study resources. The dormitory (宿舍) is the social hub of student life."
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "title": "At the Fruit Stand",
+    "title_zh": "水果摊",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You stop at a street fruit stand. The colors are bright — red apples, yellow bananas. The vendor is arranging fruit.",
+        "setup_zh": "你在路边的水果摊前停下来。颜色很鲜艳——红苹果，黄香蕉。摊主在摆水果。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来看看！今天的苹果很好。你要买水果吗？",
+                "text_pinyin": "Lái kànkan! Jīntiān de píngguǒ hěn hǎo. Nǐ yào mǎi shuǐguǒ ma?",
+                "text_en": "Come take a look! Today's apples are great. Would you like to buy some fruit?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask how much the apples cost.",
+                "options": [
+                    {
+                        "text_zh": "苹果多少钱一斤？",
+                        "text_pinyin": "Píngguǒ duōshǎo qián yī jīn?",
+                        "text_en": "How much are the apples per jin?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to his recommendation of today's apples -- practical and uses the correct measure word 斤."
+                    },
+                    {
+                        "text_zh": "看起来很好。我看看。",
+                        "text_pinyin": "Kàn qǐlái hěn hǎo. Wǒ kànkan.",
+                        "text_en": "They look good. Let me have a look.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Shows interest but doesn't commit or ask a question -- keeps the vendor waiting."
+                    },
+                    {
+                        "text_zh": "你每天都在这里吗？",
+                        "text_pinyin": "Nǐ měi tiān dōu zài zhèlǐ ma?",
+                        "text_en": "Are you here every day?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "A question about his schedule when he just told you about today's fresh apples -- answer the sales pitch first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "五块钱一斤。你要几斤？",
+                "text_pinyin": "Wǔ kuài qián yī jīn. Nǐ yào jǐ jīn?",
+                "text_en": "Five yuan per jin. How many jin would you like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the vendor how much you want.",
+                "options": [
+                    {
+                        "text_zh": "我要两斤，谢谢。",
+                        "text_pinyin": "Wǒ yào liǎng jīn, xièxie.",
+                        "text_en": "I'll take two jin, thanks.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Answers his question directly with a clear amount -- the transaction flows naturally."
+                    },
+                    {
+                        "text_zh": "两斤吧。还有别的水果吗？",
+                        "text_pinyin": "Liǎng jīn ba. Hái yǒu bié de shuǐguǒ ma?",
+                        "text_en": "Two jin. Do you have other fruit?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers but immediately asks about other fruit -- he specifically asked about apples and you're already looking elsewhere."
+                    },
+                    {
+                        "text_zh": "五块有点贵吧？",
+                        "text_pinyin": "Wǔ kuài yǒudiǎn guì ba?",
+                        "text_en": "Five yuan is a bit expensive, isn't it?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Haggling is normal at markets, but he asked how many you want and you responded by questioning his price -- answer first, then negotiate."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Street fruit stands are everywhere in Chinese cities. Fruit is sold by the 斤 (jīn, about 500 grams). The vibrant colors and the vendors calling out to passersby are part of the lively texture of everyday street life."
+    }
+}

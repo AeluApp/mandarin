@@ -1,0 +1,89 @@
+{
+  "title": "Changing Careers",
+  "title_zh": "换一条路",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're having tea with your neighbor Lao Li, who recently left his engineering job to open a small bakery. He seems both nervous and alive in a way you haven't seen before.",
+    "setup_zh": "你正在和邻居老李喝茶。他最近辞掉了工程师的工作，开了一家小面包店。他看起来既紧张又充满活力，和以前很不一样。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "说实话，递辞职信那天我的手都在抖。干了十二年的工程师，突然要从头开始做面包，家里人都觉得我疯了。",
+        "text_pinyin": "Shuō shíhuà, dì cízhí xìn nà tiān wǒ de shǒu dōu zài dǒu. Gàn le shí'èr nián de gōngchéngshī, tūrán yào cóng tóu kāishǐ zuò miànbāo, jiālǐ rén dōu juéde wǒ fēng le.",
+        "text_en": "To be honest, my hands were shaking the day I handed in my resignation. After twelve years as an engineer, suddenly starting over making bread — my family thought I was crazy."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Lao Li's courage in changing careers.",
+        "options": [
+          {
+            "text_zh": "能做出这个决定本身就不容易。十二年不是一个小数字，放下需要很大的勇气。是什么让你最终决定要换的？",
+            "text_pinyin": "Néng zuò chū zhège juédìng běnshēn jiù bù róngyì. Shí'èr nián bú shì yīge xiǎo shùzì, fàng xià xūyào hěn dà de yǒngqì. Shì shénme ràng nǐ zuìzhōng juédìng yào huàn de?",
+            "text_en": "Making that decision itself isn't easy. Twelve years is no small number, and letting go takes real courage. What finally made you decide to switch?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Affirming and curious — validates the difficulty while inviting him to share more."
+          },
+          {
+            "text_zh": "面包店赚钱吗？",
+            "text_pinyin": "Miànbāo diàn zhuàn qián ma?",
+            "text_en": "Does the bakery make money?",
+            "score": 0.0,
+            "feedback": "This reduces a life-changing decision to profitability."
+          },
+          {
+            "text_zh": "你以前做什么工程？",
+            "text_pinyin": "Nǐ yǐqián zuò shénme gōngchéng?",
+            "text_en": "What kind of engineering did you do before?",
+            "score": 0.0,
+            "feedback": "Looks backward instead of engaging with the emotional present."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "有一天晚上加班到十一点，回家路上经过一家面包店，闻到刚出炉的面包香。我站在那里闻了好久，突然想：我什么时候对自己的工作也有过这种感觉？答案是从来没有。",
+        "text_pinyin": "Yǒu yī tiān wǎnshang jiābān dào shíyī diǎn, huí jiā lù shang jīngguò yī jiā miànbāo diàn, wén dào gāng chūlú de miànbāo xiāng. Wǒ zhàn zài nàlǐ wén le hǎo jiǔ, tūrán xiǎng: wǒ shénme shíhou duì zìjǐ de gōngzuò yě yǒu guò zhè zhǒng gǎnjué? Dá'àn shì cónglái méiyǒu.",
+        "text_en": "One night I worked overtime until eleven. On the way home I passed a bakery and smelled freshly baked bread. I stood there smelling it for a long time, and suddenly thought: when have I ever felt this way about my own work? The answer was never."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your thoughts on following what moves you.",
+        "options": [
+          {
+            "text_zh": "那个瞬间你找到了答案。很多人一辈子都在做「应该做」的事，从来没问过自己真正想做什么。你至少迈出了那一步。",
+            "text_pinyin": "Nàge shùnjiān nǐ zhǎo dào le dá'àn. Hěn duō rén yíbèizi dōu zài zuò 'yīnggāi zuò' de shì, cónglái méi wèn guò zìjǐ zhēnzhèng xiǎng zuò shénme. Nǐ zhìshǎo mài chū le nà yī bù.",
+            "text_en": "In that moment you found your answer. Many people spend their whole lives doing what they 'should' do, never asking what they truly want. At least you took that step.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Encouraging without being hollow — acknowledges the universal struggle and honors his choice."
+          },
+          {
+            "text_zh": "但是做面包很辛苦，要很早起床。",
+            "text_pinyin": "Dànshì zuò miànbāo hěn xīnkǔ, yào hěn zǎo qǐchuáng.",
+            "text_en": "But making bread is hard work, you have to get up very early.",
+            "score": 0.0,
+            "feedback": "Deflating — points out difficulties when he's sharing a moment of meaning."
+          },
+          {
+            "text_zh": "你的面包店在哪条街？我下次去看看。",
+            "text_pinyin": "Nǐ de miànbāo diàn zài nǎ tiáo jiē? Wǒ xià cì qù kànkan.",
+            "text_en": "Which street is your bakery on? I'll visit next time.",
+            "score": 0.0,
+            "feedback": "Not wrong, but misses the emotional depth of what he's sharing."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "谢谢你这么说。现在每天凌晨四点起来揉面，确实累。但闻到面包出炉的时候，我觉得一切都值得。也许这就是他们说的「热爱」吧。",
+        "text_pinyin": "Xièxie nǐ zhème shuō. Xiànzài měi tiān língchén sì diǎn qǐlái róu miàn, quèshí lèi. Dàn wén dào miànbāo chūlú de shíhou, wǒ juéde yīqiè dōu zhíde. Yěxǔ zhè jiù shì tāmen shuō de 'rè'ài' ba.",
+        "text_en": "Thank you for saying that. Now I get up at four every morning to knead dough — it is tiring. But when I smell the bread coming out of the oven, I feel it's all worth it. Maybe this is what people call 'passion.'"
+      }
+    ],
+    "cultural_note": "In Chinese culture, career changes later in life often face significant family pressure, as stable professional jobs (especially in engineering or government) are highly valued. The concept of following one's passion (热爱) is gaining ground among younger and middle-aged Chinese, though it still conflicts with traditional expectations of financial security and family duty."
+  }
+}

@@ -1,0 +1,124 @@
+{
+    "title": "The Rental Car Adventure",
+    "title_zh": "租车历险记",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_3_04_v0",
+    "tree": {
+        "setup": "A car rental office near the highway entrance in a small city. You want to rent a car for three days to explore the surrounding countryside. The rental agent, Xiao Qin, is meticulous about paperwork and photographs every scratch on every car before handing over the keys. She has a magnifying glass in her desk drawer that she uses for this purpose. On the wall behind her is a map with her personal driving route recommendations marked in pink highlighter.",
+        "setup_zh": "小城市高速入口附近的租车点。你想租三天车去探索周围的乡村。租车员小秦对文书工作一丝不苟，交钥匙前会拍每辆车上的每一道划痕。她抽屉里有一个放大镜专门干这个。她身后的墙上有一张地图，用粉色荧光笔标着她个人推荐的驾车路线。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好！租车吗？请问您有驾照吗？中国的还是国际的？",
+                "text_pinyin": "nín hǎo! zū chē ma? qǐngwèn nín yǒu jiàzhào ma? zhōngguó de háishi guójì de?",
+                "text_en": "Hello! Renting a car? Do you have a driver's license? Chinese or international?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show your license and explain your rental needs.",
+                "options": [
+                    {
+                        "text_zh": "有，中国驾照。我想租三天，从明天开始。自动挡的小型车就可以。",
+                        "text_pinyin": "yǒu, zhōngguó jiàzhào. wǒ xiǎng zū sān tiān, cóng míngtiān kāishǐ. zìdòngdǎng de xiǎoxíng chē jiù kěyǐ.",
+                        "text_en": "Yes, Chinese license. I want to rent for three days, starting tomorrow. A small automatic will do.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Qin checks the license and nods.「有两款可以选：一款是本田飞度，一天一百五。另一款是丰田卡罗拉，一天两百。」驾照 is 'driver's license.' 自动挡 is 'automatic transmission.' 小型车 is 'compact car.' Specifying transmission saves time."
+                    },
+                    {
+                        "text_zh": "有驾照。你们最便宜的车多少钱一天？",
+                        "text_pinyin": "yǒu jiàzhào. nǐmen zuì piányi de chē duōshao qián yì tiān?",
+                        "text_en": "I have a license. How much is your cheapest car per day?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「最便宜的是一辆手动挡的大众，一天九十。但是你能开手动挡吗？」手动挡 is 'manual transmission.' The cheapest option isn't always the most practical."
+                    },
+                    {
+                        "text_zh": "有国际驾照。在中国可以用吗？",
+                        "text_pinyin": "yǒu guójì jiàzhào. zài zhōngguó kěyǐ yòng ma?",
+                        "text_en": "I have an international license. Can I use it in China?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Qin shakes her head.「中国不认国际驾照。需要中国驾照或者临时驾驶许可。」国际驾照 is 'international driver's license.' 临时驾驶许可 is 'temporary driving permit.' This is a critical detail."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，飞度三天的话四百五十块。保险另外算——基本险五十块一天，全险八十块一天。建议买全险，农村的路不太好。",
+                "text_pinyin": "hǎo de, fēidù sān tiān de huà sìbǎi wǔshí kuài. bǎoxiǎn lìngwài suàn — jīběn xiǎn wǔshí kuài yì tiān, quán xiǎn bāshí kuài yì tiān. jiànyì mǎi quán xiǎn, nóngcūn de lù bú tài hǎo.",
+                "text_en": "OK, the Fit for three days is 450. Insurance is separate -- basic is 50/day, full coverage is 80/day. I recommend full coverage, the rural roads aren't great."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on insurance and ask about returning the car.",
+                "options": [
+                    {
+                        "text_zh": "全险吧，安全第一。总共是四百五加二百四的保险，六百九对吧？还车的时候需要加满油吗？",
+                        "text_pinyin": "quán xiǎn ba, ānquán dì yī. zǒnggòng shì sìbǎi wǔ jiā èrbǎi sì de bǎoxiǎn, liùbǎi jiǔ duì ba? huán chē de shíhou xūyào jiā mǎn yóu ma?",
+                        "text_en": "Full coverage, safety first. Total is 450 plus 240 insurance, 690 right? Do I need to fill the tank when returning?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「对，六百九十。还车的时候油量要跟取车时一样。我会拍照记录油表。」加满油 is 'fill the tank.' 油表 is 'fuel gauge.' Doing the math aloud and asking about return conditions shows thoroughness."
+                    },
+                    {
+                        "text_zh": "基本险就够了吧？全险太贵了。",
+                        "text_pinyin": "jīběn xiǎn jiù gòu le ba? quán xiǎn tài guì le.",
+                        "text_en": "Basic insurance should be enough, right? Full is too expensive.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「如果只走高速和国道的话基本险可以。但你说要去乡村——那边有石子路和没铺好的路。」基本险 is 'basic insurance.' Xiao Qin is genuinely trying to protect you, not upsell."
+                    },
+                    {
+                        "text_zh": "好。可以异地还车吗？我可能从另一个城市还。",
+                        "text_pinyin": "hǎo. kěyǐ yìdì huán chē ma? wǒ kěnéng cóng lìng yí gè chéngshì huán.",
+                        "text_en": "OK. Can I return the car in a different city? I might return it from another city.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「可以，但是异地还车要加三百块手续费。」异地还车 is 'return in a different location.' 手续费 is 'service fee.' Good to ask upfront."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "最后一步——我们一起检查车的外观。每个划痕我都会拍照记录。还车的时候如果有新的划痕，需要赔偿。来，我们先看看。",
+                "text_pinyin": "zuìhòu yí bù — wǒmen yìqǐ jiǎnchá chē de wàiguān. měi ge huáhén wǒ dōu huì pāi zhào jìlù. huán chē de shíhou rúguǒ yǒu xīn de huáhén, xūyào péicháng. lái, wǒmen xiān kànkan.",
+                "text_en": "Last step -- let's inspect the car's exterior together. I'll photograph every scratch. If there are new scratches when you return, you'll need to pay compensation. Let's take a look."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Participate in the inspection.",
+                "options": [
+                    {
+                        "text_zh": "好的。这里有一道比较明显的划痕，你拍到了吗？我也用手机拍一份留底。",
+                        "text_pinyin": "hǎo de. zhèlǐ yǒu yí dào bǐjiào míngxiǎn de huáhén, nǐ pāi dào le ma? wǒ yě yòng shǒujī pāi yí fèn liú dǐ.",
+                        "text_en": "OK. There's a fairly obvious scratch here, did you get it? I'll also take a photo on my phone for my own records.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Qin nods with deep respect.「聪明！很多人不拍自己的照片，还车的时候说不清楚。」划痕 is 'scratch.' 留底 is 'keep a copy.' Taking your own photos protects you in disputes."
+                    },
+                    {
+                        "text_zh": "看起来还好。你拍完了我就可以走了吗？",
+                        "text_pinyin": "kàn qǐlai hái hǎo. nǐ pāi wán le wǒ jiù kěyǐ zǒu le ma?",
+                        "text_en": "Looks fine. Can I go once you're done photographing?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「还要签一份确认单。三分钟就好。」确认单 is 'confirmation form.' Xiao Qin is thorough for a reason -- it protects both parties."
+                    },
+                    {
+                        "text_zh": "我对车不太懂。除了外观还需要检查什么？轮胎？灯？",
+                        "text_pinyin": "wǒ duì chē bú tài dǒng. chúle wàiguān hái xūyào jiǎnchá shénme? lúntāi? dēng?",
+                        "text_en": "I don't know much about cars. Besides the exterior, what else should I check? Tires? Lights?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「好问题！我们会检查灯光和备胎。你上路前也看一下油量和水温表。」轮胎 is 'tires.' 备胎 is 'spare tire.' 水温表 is 'temperature gauge.' Asking shows responsible driving attitude."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Renting cars in China requires a Chinese driver's license (中国驾照) -- international licenses are not accepted. Major rental companies include 神州租车 and 一嗨租车. Always photograph existing damage (划痕) at pickup. 全险 (quán xiǎn, full coverage) is recommended for rural roads. Return with the same fuel level or face surcharges."
+    }
+}

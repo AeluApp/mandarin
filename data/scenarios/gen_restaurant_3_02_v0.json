@@ -1,0 +1,124 @@
+{
+    "title": "The Allergy Translator",
+    "title_zh": "过敏翻译官",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_3_02_v0",
+    "tree": {
+        "setup": "A busy hotpot restaurant. You have a peanut allergy and need to make sure nothing on the table will cause problems. Your server, Xiao Cao, takes food allergies with the gravity of a bomb disposal expert. She pulls out a laminated ingredient chart from her apron pocket -- she made it herself after a customer had a reaction two years ago.",
+        "setup_zh": "一家很忙的火锅店。你对花生过敏，需要确认桌上的东西没问题。你的服务员小曹像拆弹专家一样认真对待食物过敏。她从围裙口袋里掏出一张塑封的配料表——两年前有顾客过敏反应之后她自己做的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！请问几位？有没有忌口或者过敏的？",
+                "text_pinyin": "huānyíng guānglín! qǐngwèn jǐ wèi? yǒu méiyǒu jìkǒu huòzhě guòmǐn de?",
+                "text_en": "Welcome! How many people? Any dietary restrictions or allergies?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your peanut allergy.",
+                "options": [
+                    {
+                        "text_zh": "两位。我对花生过敏，比较严重。请问你们的锅底和酱料里有花生成分吗？",
+                        "text_pinyin": "liǎng wèi. wǒ duì huāshēng guòmǐn, bǐjiào yánzhòng. qǐngwèn nǐmen de guōdǐ hé jiàngliào lǐ yǒu huāshēng chéngfèn ma?",
+                        "text_en": "Two people. I'm allergic to peanuts, quite seriously. Do your soup bases or dipping sauces contain peanut ingredients?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Cao's expression turns serious.「我帮您确认一下。」She pulls out her chart.「番茄锅底没有花生。麻辣锅底也没有，但是麻酱里有。我给您换芝麻酱。」过敏 is 'allergy.' 成分 is 'ingredients.' Thorough question."
+                    },
+                    {
+                        "text_zh": "我不能吃花生。哪些菜是安全的？",
+                        "text_pinyin": "wǒ bù néng chī huāshēng. nǎxiē cài shì ānquán de?",
+                        "text_en": "I can't eat peanuts. Which dishes are safe?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「大部分涮菜都没问题。我帮您看看酱料。」Xiao Cao flips through her chart. 哪些 means 'which ones.' 安全 is 'safe.' Direct but doesn't specify severity."
+                    },
+                    {
+                        "text_zh": "花生过敏。应该没问题吧？火锅里一般没有花生。",
+                        "text_pinyin": "huāshēng guòmǐn. yīnggāi méi wèntí ba? huǒguō lǐ yìbān méiyǒu huāshēng.",
+                        "text_en": "Peanut allergy. Should be fine though, right? Hotpot usually doesn't have peanuts.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Cao shakes her head firmly.「不一定！有些锅底用花生油，蘸料也可能有。我必须帮您查清楚。」一般 means 'usually' but allergies need certainty, not assumptions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我查好了。番茄锅底和清汤锅底都安全。酱料的话，香油蒜泥和醋都没问题，但是不要碰花生酱和沙茶酱。",
+                "text_pinyin": "wǒ chá hǎo le. fānqié guōdǐ hé qīngtāng guōdǐ dōu ānquán. jiàngliào de huà, xiāngyóu suànní hé cù dōu méi wèntí, dànshì búyào pèng huāshēngjiàng hé shāchá jiàng.",
+                "text_en": "I've checked. The tomato and clear broth bases are both safe. For sauces, sesame oil with garlic and vinegar are fine, but don't touch the peanut sauce or shacha sauce."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and order your soup base.",
+                "options": [
+                    {
+                        "text_zh": "太谢谢你了！那我们要一个番茄锅底。可以帮我在酱料台上标一下哪些有花生吗？",
+                        "text_pinyin": "tài xièxie nǐ le! nà wǒmen yào yí gè fānqié guōdǐ. kěyǐ bāng wǒ zài jiàngliào tái shàng biāo yíxià nǎxiē yǒu huāshēng ma?",
+                        "text_en": "Thank you so much! We'll have a tomato base then. Could you mark which sauces at the sauce station have peanuts?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「当然可以！我用标签贴上。」Xiao Cao pulls out colored stickers. She has thought of everything. 标一下 means 'mark/label.' The sauce bar (酱料台) is self-serve at most hotpot places."
+                    },
+                    {
+                        "text_zh": "好的，那就番茄锅底。鸳鸯锅可以吗？一半番茄一半清汤？",
+                        "text_pinyin": "hǎo de, nà jiù fānqié guōdǐ. yuānyāng guō kěyǐ ma? yíbàn fānqié yíbàn qīngtāng?",
+                        "text_en": "OK, tomato base then. Can we do a half-and-half pot? Half tomato, half clear broth?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「可以！鸳鸯锅加十块钱。两边都安全的。」鸳鸯锅 is the iconic split hotpot -- named after mandarin ducks who mate for life. 一半...一半 is 'half...half.'"
+                    },
+                    {
+                        "text_zh": "知道了。那我们可以点菜了。",
+                        "text_pinyin": "zhīdào le. nà wǒmen kěyǐ diǎn cài le.",
+                        "text_en": "Got it. Then we can order our dishes.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Cao nods but adds,「点菜的时候如果不确定什么成分，随时问我。」She's not letting her guard down. 点菜 is 'order dishes.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，你们点的牛肉丸我要确认一下。有些丸子里面会加花生粉。我去厨房问一下。",
+                "text_pinyin": "duì le, nǐmen diǎn de niúròu wán wǒ yào quèrèn yíxià. yǒuxiē wánzi lǐmiàn huì jiā huāshēng fěn. wǒ qù chúfáng wèn yíxià.",
+                "text_en": "Oh right, the beef balls you ordered -- I need to double-check. Some meatballs have peanut flour mixed in. Let me go ask the kitchen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond while she checks.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你这么细心！如果有花生粉的话，换成别的丸子也行。",
+                        "text_pinyin": "xièxie nǐ zhème xìxīn! rúguǒ yǒu huāshēng fěn de huà, huàn chéng bié de wánzi yě xíng.",
+                        "text_en": "Thank you for being so careful! If they have peanut flour, switching to different meatballs is fine.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Cao comes back smiling.「查过了，我们的牛肉丸没有花生粉！鱼丸有，已经帮你划掉了。」细心 means 'careful/attentive.' 换成 is 'switch to.' She caught a problem you didn't even order."
+                    },
+                    {
+                        "text_zh": "那先别上牛肉丸，等你确认了再说。",
+                        "text_pinyin": "nà xiān bié shàng niúròu wán, děng nǐ quèrèn le zài shuō.",
+                        "text_en": "Then hold the beef balls for now, let's wait until you confirm.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「好的，其他的先上。」先别...等确认了再... is a useful pattern: 'don't do X yet, wait until Y is confirmed.' Cautious approach."
+                    },
+                    {
+                        "text_zh": "丸子里面也会有花生吗？我完全不知道。",
+                        "text_pinyin": "wánzi lǐmiàn yě huì yǒu huāshēng ma? wǒ wánquán bù zhīdào.",
+                        "text_en": "Meatballs can have peanuts too? I had no idea.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「有些加花生粉增加口感。所以过敏的人一定要问清楚。」完全不知道 is 'had absolutely no idea.' This is exactly why Xiao Cao checks -- hidden allergens are the dangerous ones."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Food allergies (食物过敏, shíwù guòmǐn) are taken increasingly seriously in China, though awareness varies. At hotpot restaurants, the self-serve sauce bar (酱料台) and soup bases (锅底) both need checking. 忌口 (jìkǒu) covers all dietary restrictions -- allergies, religious requirements, or personal preferences."
+    }
+}

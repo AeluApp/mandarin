@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Configuration — Android
+
+  OWASP M3 (Insecure Communication):
+  - Block all cleartext (HTTP) traffic in production.
+  - Allow localhost for debug builds only.
+
+  NIST SC-8 (Transmission Confidentiality):
+  - Enforce TLS for all network communication.
+
+  CIS Mobile 6.1 (Network Communication):
+  - Certificate pinning via pin-set.
+  - Expiration date triggers re-pinning review.
+-->
+<network-security-config>
+    <!-- Block cleartext traffic globally. -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Production API domain — certificate pinning. -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">aeluapp.com</domain>
+        <pin-set expiration="2027-01-01">
+            <!--
+              SHA-256 SPKI hashes of the server certificate chain.
+              Generate with:
+                openssl s_client -servername aeluapp.com -connect aeluapp.com:443 </dev/null 2>/dev/null | \
+                openssl x509 -pubkey -noout | openssl pkey -pubin -outform DER | \
+                openssl dgst -sha256 -binary | openssl enc -base64
+
+              Replace these with actual production cert hashes before release.
+            -->
+            <pin digest="SHA-256">CONFIGURE_BEFORE_RELEASE=</pin>
+            <!-- Backup pin (for cert rotation). -->
+            <pin digest="SHA-256">CONFIGURE_BEFORE_RELEASE_BACKUP=</pin>
+        </pin-set>
+    </domain-config>
+
+    <!-- Debug: allow cleartext to localhost for development. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>

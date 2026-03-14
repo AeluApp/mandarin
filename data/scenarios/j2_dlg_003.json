@@ -1,0 +1,84 @@
+{
+  "title": "The Dumpling Lesson",
+  "title_zh": "包饺子",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "Your landlady invites you to help make dumplings for the weekend. You sit together at the kitchen table.",
+    "setup_zh": "房东阿姨邀请你周末一起包饺子。你们坐在厨房桌子旁。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你包过饺子吗？不难的，我教你。",
+        "text_pinyin": "Nǐ bāo guò jiǎozi ma? Bù nán de, wǒ jiāo nǐ.",
+        "text_en": "Have you ever made dumplings? It's not hard — I'll teach you."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her about your experience with dumplings.",
+        "options": [
+          {
+            "text_zh": "没包过，但是我很想学！看起来很有意思。",
+            "text_pinyin": "Méi bāo guò, dànshì wǒ hěn xiǎng xué! Kàn qǐlái hěn yǒu yìsi.",
+            "text_en": "Never made them, but I really want to learn! It looks fun.",
+            "score": 1.0,
+            "feedback": "She claps her hands once. \"好！就知道你愿意学。来来来，坐这边。\"",
+            "register": "casual"
+          },
+          {
+            "text_zh": "包过，不过我包的不好看。",
+            "text_pinyin": "Bāo guò, búguò wǒ bāo de bù hǎokàn.",
+            "text_en": "I have, but mine don't look very good.",
+            "score": 0.5,
+            "feedback": "She waves her hand like that doesn't matter. \"好看不好看没关系，好吃就行！\"",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不太会做饭。",
+            "text_pinyin": "Wǒ bú tài huì zuò fàn.",
+            "text_en": "I'm not very good at cooking.",
+            "score": 0.0,
+            "feedback": "She looks a little deflated, then pushes the dough toward you anyway. \"没关系，饺子不算做饭。你就帮我捏就行。\""
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你看，先把馅放在皮上，然后这样捏。你试试。",
+        "text_pinyin": "Nǐ kàn, xiān bǎ xiàn fàng zài pí shàng, ránhòu zhèyàng niē. Nǐ shìshi.",
+        "text_en": "See, first put the filling on the wrapper, then pinch like this. You try."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "You try making one. It doesn't look great. Say something.",
+        "options": [
+          {
+            "text_zh": "我的饺子不太好看，但是很好玩！",
+            "text_pinyin": "Wǒ de jiǎozi bú tài hǎokàn, dànshì hěn hǎowán!",
+            "text_en": "My dumpling doesn't look great, but it's really fun!",
+            "score": 1.0,
+            "feedback": "She laughs and picks it up to inspect it. \"哈！这个长得奇怪——不过没关系，煮熟了一样吃！\"",
+            "register": "casual"
+          },
+          {
+            "text_zh": "好难啊，我不行。",
+            "text_pinyin": "Hǎo nán a, wǒ bù xíng.",
+            "text_en": "This is too hard, I can't do it.",
+            "score": 0.0,
+            "feedback": "She frowns and puts her hands over yours to guide them. \"怎么不行？再试一次。看我怎么捏的。\""
+          },
+          {
+            "text_zh": "你包的比我好看多了。我应该看个视频学。",
+            "text_pinyin": "Nǐ bāo de bǐ wǒ hǎokàn duō le. Wǒ yīnggāi kàn ge shìpín xué.",
+            "text_en": "Yours look way better than mine. I should watch a video to learn.",
+            "score": 0.0,
+            "feedback": "She waves her hand, a little hurt. \"什么视频？我在这儿教你呢！跟我学就行了。\""
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Making dumplings (包饺子) together is one of the most intimate domestic activities in Chinese life. It's often how neighbors and landlords bond with tenants. The imperfect shapes of a beginner's dumplings always bring laughter and warmth."
+  }
+}

@@ -1,18 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="50" x2="120" y2="50" stroke-width="0.4"/>
-  <!-- origami crane -->
-  <!-- body center diamond -->
-  <polyline points="50,28 60,22 70,28 60,34 50,28" stroke-width="0.6"/>
-  <!-- left wing -->
-  <line x1="50" y1="28" x2="32" y2="18" stroke-width="0.6"/>
-  <line x1="32" y1="18" x2="50" y2="24" stroke-width="0.5"/>
-  <!-- right wing -->
-  <line x1="70" y1="28" x2="88" y2="18" stroke-width="0.6"/>
-  <line x1="88" y1="18" x2="70" y2="24" stroke-width="0.5"/>
-  <!-- tail -->
-  <line x1="60" y1="34" x2="52" y2="42" stroke-width="0.5"/>
-  <!-- head/neck -->
-  <line x1="60" y1="22" x2="64" y2="14" stroke-width="0.5"/>
-  <line x1="64" y1="14" x2="67" y2="16" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- crane body — folded diamond shape with real paper folds -->
+  <path d="M100 42 L120 54 L100 66 L80 54 Z" stroke="#2a2a2a" stroke-width="0.8" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- center fold line -->
+  <line x1="100" y1="42" x2="100" y2="66" stroke="#2a2a2a" stroke-width="0.4" opacity="0.4"/>
+  <!-- left wing — extended, with paper fold details -->
+  <path d="M80 54 L38 30 L54 44" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M80 54 L42 36" stroke="#2a2a2a" stroke-width="0.4" opacity="0.3"/>
+  <!-- left wing tip fold -->
+  <path d="M38 30 L28 24 L36 34" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- left wing inner fold -->
+  <path d="M54 44 L44 38 L58 48" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <!-- right wing — extended -->
+  <path d="M120 54 L162 30 L146 44" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M120 54 L158 36" stroke="#2a2a2a" stroke-width="0.4" opacity="0.3"/>
+  <!-- right wing tip fold -->
+  <path d="M162 30 L172 24 L164 34" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- right wing inner fold -->
+  <path d="M146 44 L156 38 L142 48" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <!-- tail — two layers showing paper fold -->
+  <path d="M100 66 L84 82 L92 72" stroke="#2a2a2a" stroke-width="0.7"/>
+  <path d="M100 66 L90 78" stroke="#2a2a2a" stroke-width="0.35" opacity="0.3"/>
+  <!-- neck -->
+  <path d="M100 42 L112 26" stroke="#2a2a2a" stroke-width="0.7"/>
+  <path d="M100 42 L108 30" stroke="#2a2a2a" stroke-width="0.4" opacity="0.3"/>
+  <!-- head — crisp fold -->
+  <path d="M112 26 L120 20 L116 28" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- beak -->
+  <path d="M120 20 L126 18" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- shadow beneath — very subtle -->
+  <ellipse cx="100" cy="88" rx="30" ry="3" stroke="none" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- floating cloud wisps around crane -->
+  <path d="M20 40 Q30 36 40 40" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <path d="M22 42 Q28 40 34 42" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <path d="M160 46 Q170 42 180 46" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <path d="M164 48 Q172 44 178 48" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <path d="M60 18 Q68 14 76 18" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <path d="M140 72 Q148 68 156 72" stroke="#2a2a2a" stroke-width="0.2" opacity="0.12"/>
 </svg>

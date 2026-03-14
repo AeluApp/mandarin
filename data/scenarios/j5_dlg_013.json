@@ -1,0 +1,89 @@
+{
+    "title": "A Quiet Moment of Support",
+    "title_zh": "安静的支持",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You notice your colleague Xiaogang sitting alone in the break room, staring at his phone. He's been unusually quiet all week and missed the team dinner last night.",
+        "setup_zh": "你注意到同事小刚一个人坐在休息室，盯着手机发呆。他这一整个星期都异常沉默，昨晚的团队聚餐也没参加。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "啊，是你。我没事，就是坐一会儿。最近事情有点多，脑子总是转不过来。",
+                "text_pinyin": "A, shì nǐ. Wǒ méi shì, jiù shì zuò yīhuìr. Zuìjìn shìqíng yǒudiǎn duō, nǎozi zǒng shì zhuǎn bú guòlái.",
+                "text_en": "Oh, it's you. I'm fine, just sitting for a bit. There's been a lot going on lately, my mind can't keep up."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Gently check in with Xiaogang.",
+                "options": [
+                    {
+                        "text_zh": "不用跟我说没事。我不是来问工作的，就是看你最近不太像平时的你。如果想聊就聊，不想聊我陪你坐一会儿也行。",
+                        "text_pinyin": "Bú yòng gēn wǒ shuō méi shì. Wǒ bú shì lái wèn gōngzuò de, jiù shì kàn nǐ zuìjìn bú tài xiàng píngshí de nǐ. Rúguǒ xiǎng liáo jiù liáo, bù xiǎng liáo wǒ péi nǐ zuò yīhuìr yě xíng.",
+                        "text_en": "You don't have to tell me you're fine. I'm not here to ask about work — I noticed you haven't seemed like yourself. If you want to talk, we can. If not, I'll sit with you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect balance of care and space — offers presence without pressure."
+                    },
+                    {
+                        "text_zh": "昨天的聚餐你怎么没来？大家都在问你。",
+                        "text_pinyin": "Zuótiān de jùcān nǐ zěnme méi lái? Dàjiā dōu zài wèn nǐ.",
+                        "text_en": "How come you didn't come to last night's dinner? Everyone was asking about you.",
+                        "score": 0.0,
+                        "feedback": "Adds pressure — implies he owes the group an explanation."
+                    },
+                    {
+                        "text_zh": "你是不是工作压力太大了？要不要跟领导说说？",
+                        "text_pinyin": "Nǐ shì bu shì gōngzuò yālì tài dà le? Yào bú yào gēn lǐngdǎo shuōshuō?",
+                        "text_en": "Are you under too much work pressure? Want to talk to the manager?",
+                        "score": 0.0,
+                        "feedback": "Jumps to solutions before understanding the problem — may feel intrusive."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢……其实不完全是工作的事。我爸最近身体不太好，但他不让我回家，说没什么大事。我在这边什么都做不了，心里很不安。",
+                "text_pinyin": "Xièxie…… qíshí bù wánquán shì gōngzuò de shì. Wǒ bà zuìjìn shēntǐ bú tài hǎo, dàn tā bú ràng wǒ huí jiā, shuō méi shénme dà shì. Wǒ zài zhè biān shénme dōu zuò bù liǎo, xīn lǐ hěn bù'ān.",
+                "text_en": "Thanks... it's not entirely about work. My dad hasn't been feeling well lately, but he won't let me come home — says it's nothing serious. I can't do anything from here, and I feel so uneasy."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Support him through his worry about his father.",
+                "options": [
+                    {
+                        "text_zh": "远在外面担心家里人，这种感觉最难受。你爸不让你回去可能是不想让你担心，也可能是不想影响你的工作。但你的感受是真实的，不安就是不安，不用假装没事。",
+                        "text_pinyin": "Yuǎn zài wàimiàn dānxīn jiālǐ rén, zhè zhǒng gǎnjué zuì nánshòu. Nǐ bà bú ràng nǐ huí qù kěnéng shì bù xiǎng ràng nǐ dānxīn, yě kěnéng shì bù xiǎng yǐngxiǎng nǐ de gōngzuò. Dàn nǐ de gǎnshòu shì zhēnshí de, bù'ān jiù shì bù'ān, bú yòng jiǎzhuāng méi shì.",
+                        "text_en": "Worrying about family from far away — that's one of the hardest feelings. Your dad probably doesn't want you to worry. But your feelings are real. Unease is unease — you don't have to pretend.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deeply empathetic — names the feeling, validates it, and gives him permission to not be okay."
+                    },
+                    {
+                        "text_zh": "你可以请几天假回去看看。",
+                        "text_pinyin": "Nǐ kěyǐ qǐng jǐ tiān jiǎ huí qù kànkan.",
+                        "text_en": "You could take a few days off and go back to see him.",
+                        "score": 0.0,
+                        "feedback": "Jumps to logistics — not what he needs in this moment."
+                    },
+                    {
+                        "text_zh": "你爸多大年纪了？有没有去医院检查？",
+                        "text_pinyin": "Nǐ bà duō dà niánjì le? Yǒu méiyǒu qù yīyuàn jiǎnchá?",
+                        "text_en": "How old is your dad? Has he been to the hospital?",
+                        "score": 0.0,
+                        "feedback": "Turns empathy into an interrogation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你。能跟人说出来，感觉轻了一点。你不用帮我解决什么，有人愿意听就已经很好了。",
+                "text_pinyin": "Xièxie nǐ. Néng gēn rén shuō chūlái, gǎnjué qīng le yīdiǎn. Nǐ bú yòng bāng wǒ jiějué shénme, yǒu rén yuànyì tīng jiù yǐjīng hěn hǎo le.",
+                "text_en": "Thank you. Being able to say it out loud makes it feel a bit lighter. You don't need to solve anything for me — having someone willing to listen is already enough."
+            }
+        ],
+        "cultural_note": "In Chinese culture, the phrase「没事」(méi shì, it's nothing) is often used reflexively even when something is clearly wrong — it's a way of not burdening others. Chinese parents, especially fathers, often downplay health concerns to avoid worrying their children who work in distant cities. The guilt of being far from aging parents is one of the most common emotional struggles for China's migrant workforce."
+    }
+}

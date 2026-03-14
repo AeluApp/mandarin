@@ -1,0 +1,83 @@
+{
+  "title": "The Flower Seller",
+  "title_zh": "卖花的人",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You pass a small flower stall near the subway exit. The seller, a middle-aged woman, is arranging sunflowers in a bucket.",
+    "setup_zh": "你在地铁出口旁边经过一个小花摊。卖花的阿姨正在把向日葵放进桶里。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "看看花吧！今天的向日葵特别好看。买一束回家，家里就会很亮。",
+        "text_pinyin": "Kànkan huā ba! Jīntiān de xiàngrìkuí tèbié hǎokàn. Mǎi yī shù huí jiā, jiālǐ jiù huì hěn liàng.",
+        "text_en": "Come look at the flowers! Today's sunflowers are especially beautiful. Buy a bunch and your home will light right up."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her enthusiasm about the flowers.",
+        "options": [
+          {
+            "text_zh": "真的很好看！它们的颜色好像太阳一样。给我一束吧。",
+            "text_pinyin": "Zhēn de hěn hǎokàn! Tāmen de yánsè hǎoxiàng tàiyáng yīyàng. Gěi wǒ yī shù ba.",
+            "text_en": "They really are beautiful! Their color is just like the sun. I'll take a bunch.",
+            "score": 1.0,
+            "feedback": "Warm and present — lets the flowers brighten the moment.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "好看是好看，不过花放几天就死了，有点浪费。",
+            "text_pinyin": "Hǎokàn shì hǎokàn, búguò huā fàng jǐ tiān jiù sǐ le, yǒudiǎn làngfèi.",
+            "text_en": "They are pretty, but flowers die in a few days — seems like a waste.",
+            "score": 0.0,
+            "feedback": "She stops arranging and looks at you. The sunflowers are right there, bright as ever."
+          },
+          {
+            "text_zh": "我家没有花瓶。",
+            "text_pinyin": "Wǒ jiā méiyǒu huāpíng.",
+            "text_en": "I don't have a vase at home.",
+            "score": 0.0,
+            "feedback": "A practical objection that kills the gentle moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是吧？我每天看着这些花，心情都很好。有花的日子和没有花的日子，是不一样的。",
+        "text_pinyin": "Shì ba? Wǒ měi tiān kàn zhe zhèxiē huā, xīnqíng dōu hěn hǎo. Yǒu huā de rìzi hé méiyǒu huā de rìzi, shì bù yīyàng de.",
+        "text_en": "Right? Looking at these flowers every day puts me in a good mood. Days with flowers and days without — they're different."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her philosophy about flowers and daily life.",
+        "options": [
+          {
+            "text_zh": "你说得对。一束花就能让一个普通的日子变得特别。谢谢你每天在这里卖花。",
+            "text_pinyin": "Nǐ shuō de duì. Yī shù huā jiù néng ràng yī ge pǔtōng de rìzi biàn de tèbié. Xièxie nǐ měi tiān zài zhèlǐ mài huā.",
+            "text_en": "You're right. A bunch of flowers can make an ordinary day special. Thank you for being here selling flowers every day.",
+            "score": 1.0,
+            "feedback": "Affirms her quiet role in beautifying ordinary life.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "向日葵能放几天？",
+            "text_pinyin": "Xiàngrìkuí néng fàng jǐ tiān?",
+            "text_en": "How many days do sunflowers last?",
+            "score": 0.0,
+            "feedback": "A practical question that ignores her poetic observation."
+          },
+          {
+            "text_zh": "卖花赚钱吗？",
+            "text_pinyin": "Mài huā zhuàn qián ma?",
+            "text_en": "Do you make money selling flowers?",
+            "score": 0.0,
+            "feedback": "Intrusive question about her income."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Small flower stalls near subway exits and street corners are common in Chinese cities. Many sellers develop a personal philosophy about flowers and daily life. The idea that 有花的日子 (days with flowers) are qualitatively different reflects a widespread Chinese appreciation for bringing natural beauty into urban living."
+  }
+}

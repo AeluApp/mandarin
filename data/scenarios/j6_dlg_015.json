@@ -1,0 +1,117 @@
+{
+    "title": "The Hospital Waiting Room",
+    "title_zh": "医院候诊室",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're in a hospital waiting room in Wuhan for a routine checkup. The person next to you, a middle-aged journalist named Chen Wei, starts talking about how hospitals are a microcosm of Chinese society — the hierarchy, the queue-jumping, the informal economy of favors.",
+        "setup_zh": "你在武汉一家医院的候诊室做常规体检。旁边的人是一位叫陈伟的中年记者，开始聊起医院是中国社会的缩影——等级制度、插队、人情经济。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你注意到了吗？挂号处有三种队伍——普通号、专家号、还有一种'没有队伍的队伍'。那几个人直接进了诊室，不排队。他们不是走后门，他们走的是'关系门'。",
+                "text_pinyin": "Nǐ zhùyì dào le ma? Guàhào chù yǒu sān zhǒng duìwǔ — pǔtōng hào, zhuānjiā hào, hái yǒu yī zhǒng 'méiyǒu duìwǔ de duìwǔ'. Nà jǐ ge rén zhíjiē jìn le zhěnshì, bù páiduì. Tāmen bú shì zǒu hòumén, tāmen zǒu de shì 'guānxì mén'.",
+                "text_en": "Have you noticed? There are three types of queues at registration — regular, specialist, and a 'queue without a queue.' Those few people went straight into the consultation room, no waiting. They didn't use the back door; they used the 'relationship door.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with Chen Wei's observation about the informal hierarchy.",
+                "options": [
+                    {
+                        "text_zh": "这在很多公共服务里都存在——表面上的平等和实际上的特权通道并行。有意思的是，大家都知道这种现象存在，但很少有人公开反对。因为每个人都希望有一天自己也能走那扇门。",
+                        "text_pinyin": "Zhè zài hěn duō gōnggòng fúwù lǐ dōu cúnzài — biǎomiàn shàng de píngděng hé shíjì shàng de tèquán tōngdào bìngxíng. Yǒu yìsi de shì, dàjiā dōu zhīdào zhè zhǒng xiànxiàng cúnzài, dàn hěn shǎo yǒu rén gōngkāi fǎnduì. Yīnwèi měi ge rén dōu xīwàng yǒu yītiān zìjǐ yě néng zǒu nà shàn mén.",
+                        "text_en": "This exists in many public services — surface equality and actual privilege running in parallel. Everyone knows, but few oppose it. Because everyone hopes one day they'll be the one walking through that door.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Names the paradox — the system persists because even its victims aspire to benefit from it."
+                    },
+                    {
+                        "text_zh": "你在等什么科？",
+                        "text_pinyin": "Nǐ zài děng shénme kē?",
+                        "text_en": "Which department are you waiting for?",
+                        "score": 0.0,
+                        "feedback": "Medical logistics instead of engaging with the social observation."
+                    },
+                    {
+                        "text_zh": "你觉得这家医院的医生水平怎么样？",
+                        "text_pinyin": "Nǐ juéde zhè jiā yīyuàn de yīshēng shuǐpíng zěnmeyàng?",
+                        "text_en": "How do you rate the doctors here?",
+                        "score": 0.0,
+                        "feedback": "Hospital review that misses the sociological discussion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到点子上了。这就是为什么改革这么难——受害者和受益者是同一群人，只是在不同时刻。今天排队的人，明天可能就是打电话找关系的人。系统的稳定性恰恰来自于每个人既是批评者又是潜在的参与者。",
+                "text_pinyin": "Nǐ shuō dào diǎnzi shàng le. Zhè jiù shì wèishénme gǎigé zhème nán — shòuhài zhě hé shòuyì zhě shì tóng yī qún rén, zhǐ shì zài bùtóng shíkè. Jīntiān páiduì de rén, míngtiān kěnéng jiù shì dǎ diànhuà zhǎo guānxì de rén. Xìtǒng de wěndìng xìng qiàqià lái zì yú měi ge rén jì shì pīpíng zhě yòu shì qiánzài de cānyù zhě.",
+                "text_en": "You've hit it. That's why reform is so hard — victims and beneficiaries are the same group of people, just at different moments. The person queuing today might be the one making calls to use connections tomorrow. The system's stability comes precisely from everyone being both a critic and a potential participant."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his structural analysis of why the system resists reform.",
+                "options": [
+                    {
+                        "text_zh": "这在很多公共服务里都存在——表面上的平等和实际上的特权通道并行。有意思的是，大家都知道，但很少公开反对。因为每个人都希望有一天自己也能走那扇门。",
+                        "text_pinyin": "Zhè zài hěn duō gōnggòng fúwù lǐ dōu cúnzài — biǎomiàn shàng de píngděng hé shíjì shàng de tèquán tōngdào bìngxíng. Yǒu yìsi de shì, dàjiā dōu zhīdào, dàn hěn shǎo gōngkāi fǎnduì. Yīnwèi měi ge rén dōu xīwàng yǒu yītiān zìjǐ yě néng zǒu nà shàn mén.",
+                        "text_en": "This exists across many public services — surface equality and actual privilege channels running in parallel. Everyone knows, but few openly oppose it. Because everyone hopes one day they'll walk through that door too.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Deepens the analysis to game theory — explains how individual rational calculation sustains collective irrationality."
+                    },
+                    {
+                        "text_zh": "你做了多少年记者了？",
+                        "text_pinyin": "Nǐ zuò le duōshǎo nián jìzhě le?",
+                        "text_en": "How many years have you been a journalist?",
+                        "score": 0.0,
+                        "feedback": "Career question during a penetrating social analysis."
+                    },
+                    {
+                        "text_zh": "武汉的医院多不多？",
+                        "text_pinyin": "Wǔhàn de yīyuàn duō bù duō?",
+                        "text_en": "Are there many hospitals in Wuhan?",
+                        "score": 0.0,
+                        "feedback": "City infrastructure question that ignores the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你分析得比很多学者都清楚。我采访过一个院长，他私下跟我说：'最难改的不是制度，是人心。每个人嘴上说要公平，心里想的是例外。'这句话我写进了报道，结果编辑给删了——说太敏感了。",
+                "text_pinyin": "Nǐ fēnxī de bǐ hěn duō xuézhě dōu qīngchǔ. Wǒ cǎifǎng guò yīge yuànzhǎng, tā sīxià gēn wǒ shuō: 'Zuì nán gǎi de bú shì zhìdù, shì rénxīn. Měi ge rén zuǐ shàng shuō yào gōngpíng, xīn lǐ xiǎng de shì lìwài.' Zhè jù huà wǒ xiě jìn le bàodào, jiéguǒ biānjí gěi shān le — shuō tài mǐngǎn le.",
+                "text_en": "You analyze better than many scholars. I once interviewed a hospital director who told me privately: 'The hardest thing to reform isn't the system, it's the human heart. Everyone talks about fairness, but what they're thinking about is exceptions.' I wrote that quote into my report. The editor deleted it — said it was too sensitive."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the censored quote and what it reveals.",
+                "options": [
+                    {
+                        "text_zh": "这恰恰证明了他说的是真话——不敏感，编辑不会删。审查的逻辑有时候是最好的真相探测器：越是被删的，越触及核心。那位院长说出了大家都知道但没人敢公开承认的现实。",
+                        "text_pinyin": "Zhè qiàqià zhèngmíng le tā shuō de shì zhēnhuà — bù mǐngǎn, biānjí bú huì shān. Shěnchá de luójí yǒu shíhou shì zuì hǎo de zhēnxiàng tàncè qì: yuè shì bèi shān de, yuè chùjí héxīn. Nà wèi yuànzhǎng shuō chū le dàjiā dōu zhīdào dàn méi rén gǎn gōngkāi chéngrèn de xiànshí.",
+                        "text_en": "That proves he's telling the truth — if it weren't sensitive, the editor wouldn't delete it. Censorship logic is the best truth detector: the more something gets deleted, the more it touches the core. That director voiced what everyone knows but nobody dares admit.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Turns censorship into evidence — uses the deletion itself as proof of the statement's accuracy."
+                    },
+                    {
+                        "text_zh": "你的报道发在哪里？我想读一下。",
+                        "text_pinyin": "Nǐ de bàodào fā zài nǎlǐ? Wǒ xiǎng dú yīxià.",
+                        "text_en": "Where was your report published? I'd like to read it.",
+                        "score": 0.0,
+                        "feedback": "Publication logistics when the conversation is about truth and censorship."
+                    },
+                    {
+                        "text_zh": "当记者收入稳定吗？",
+                        "text_pinyin": "Dāng jìzhě shōurù wěndìng ma?",
+                        "text_en": "Is being a journalist a stable income?",
+                        "score": 0.0,
+                        "feedback": "Salary question during a discussion about institutional truth-telling."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospitals are often described as a '社会缩影' (microcosm of society) because they concentrate issues of class, access, and informal power into a single visible space. The practice of using connections (找关系) to bypass queues is widespread and widely understood. The hospital director's quote about '嘴上说公平，心里想例外' (talking about fairness while thinking about exceptions) captures a core tension in Chinese social discourse — the gap between public moral positions and private strategic behavior. Media censorship of such observations is common precisely because they name a truth that threatens the official narrative of equitable public services."
+    }
+}

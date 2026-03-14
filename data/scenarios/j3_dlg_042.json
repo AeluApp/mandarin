@@ -1,0 +1,87 @@
+{
+    "title": "A Broken Bike",
+    "title_zh": "自行车坏了",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your bike gets a flat tire near the community gate. The security guard, Uncle Guo, notices and comes to help.",
+        "setup_zh": "你的自行车在小区门口爆胎了。保安郭叔叔看到了，走过来帮忙。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "车胎爆了啊？别着急，巷子口有一个修车的师傅，很便宜也很快。我先帮你把车推过去。",
+                "text_pinyin": "Chē tāi bào le a? Bié zháojí, xiàngzi kǒu yǒu yī ge xiū chē de shīfu, hěn piányi yě hěn kuài. Wǒ xiān bāng nǐ bǎ chē tuī guòqù.",
+                "text_en": "Flat tire? Don't worry — there's a bike repairman at the alley entrance, cheap and fast. Let me help you push the bike over."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his help.",
+                "options": [
+                    {
+                        "text_zh": "谢谢郭叔叔！还好有你在，不然我都不知道附近有修车的。太感谢了！",
+                        "text_pinyin": "Xièxie Guō shūshu! Háihǎo yǒu nǐ zài, bùrán wǒ dōu bù zhīdào fùjìn yǒu xiū chē de. Tài gǎnxiè le!",
+                        "text_en": "Thank you, Uncle Guo! Lucky you're here — otherwise I wouldn't even know there's a repairman nearby. Really grateful!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuinely grateful and acknowledges his local knowledge."
+                    },
+                    {
+                        "text_zh": "谢谢，我自己能推过去。",
+                        "text_pinyin": "Xièxie, wǒ zìjǐ néng tuī guòqù.",
+                        "text_en": "Thanks, I can push it there myself.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Refuses help when he's already offering."
+                    },
+                    {
+                        "text_zh": "唉，真倒霉。",
+                        "text_pinyin": "Āi, zhēn dǎoméi.",
+                        "text_en": "Sigh, so unlucky.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Focuses on bad luck instead of the help offered."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "客气什么！我天天在这里，这种事见多了。以后有什么事尽管来找我。这个小区的事我都清楚。",
+                "text_pinyin": "Kèqi shénme! Wǒ tiāntiān zài zhèlǐ, zhè zhǒng shì jiàn duō le. Yǐhòu yǒu shénme shì jǐnguǎn lái zhǎo wǒ. Zhège xiǎoqū de shì wǒ dōu qīngchǔ.",
+                "text_en": "No need for formality! I'm here every day — I've seen it all. If you ever need anything, just come find me. I know everything about this neighborhood."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond warmly.",
+                "options": [
+                    {
+                        "text_zh": "郭叔叔，您是我们小区的宝藏！改天我给您带点茶叶，感谢您一直照顾大家。",
+                        "text_pinyin": "Guō shūshu, nín shì wǒmen xiǎoqū de bǎozàng! Gǎi tiān wǒ gěi nín dài diǎn cháyè, gǎnxiè nín yīzhí zhàogù dàjiā.",
+                        "text_en": "Uncle Guo, you're a treasure of our neighborhood! I'll bring you some tea leaves another day — thank you for always taking care of everyone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and plans a reciprocal gesture — perfect."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but brief."
+                    },
+                    {
+                        "text_zh": "好吧。",
+                        "text_pinyin": "Hǎo ba.",
+                        "text_en": "Alright.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Barely acknowledges his kindness."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Security guards (保安) are unsung heroes of Chinese community life. They know every resident, every repair shop, and every hidden shortcut. Calling someone a 「宝藏」 (treasure) is a warm modern compliment. Offering tea leaves as thanks is a classic gesture of gratitude."
+    },
+    "hsk_level": 3
+}

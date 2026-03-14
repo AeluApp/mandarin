@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them about your family members in the photo.",
                 "options": [
-                    {"text_zh": "这是我爸爸妈妈，还有我姐姐。", "text_pinyin": "zhè shì wǒ bàba māma, háiyǒu wǒ jiějie.", "text_en": "These are my mom and dad, and my older sister.", "score": 1.0, "register": "casual", "feedback": "Natural and complete — identifies each person clearly."},
-                    {"text_zh": "这是我的家人，我们家有四个人。", "text_pinyin": "zhè shì wǒ de jiārén, wǒmen jiā yǒu sì ge rén.", "text_en": "This is my family, there are four people in our family.", "score": 0.7, "register": "neutral", "feedback": "Gives the overview but doesn't identify who's who — they're looking at specific people."},
-                    {"text_zh": "左边是我爸爸，右边是妈妈。", "text_pinyin": "zuǒbiān shì wǒ bàba, yòubiān shì māma.", "text_en": "On the left is my dad, on the right is my mom.", "score": 0.6, "register": "casual", "feedback": "Good spatial detail but only mentions two people — what about the rest?"}
+                    {
+                        "text_zh": "这是我爸爸妈妈，还有我姐姐。",
+                        "text_pinyin": "zhè shì wǒ bàba māma, háiyǒu wǒ jiějie.",
+                        "text_en": "These are my mom and dad, and my older sister.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural and complete — identifies each person clearly."
+                    },
+                    {
+                        "text_zh": "是啊，今天很暖和，很舒服。",
+                        "text_pinyin": "shì a, jīntiān hěn nuǎnhuo, hěn shūfu.",
+                        "text_en": "Yes, it's warm today, very comfortable.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your family members in the photo, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "一位。",
+                        "text_pinyin": "yī wèi.",
+                        "text_en": "One person.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your family members in the photo, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them about your sister's job.",
                 "options": [
-                    {"text_zh": "她是老师，在一个小学教书。", "text_pinyin": "tā shì lǎoshī, zài yī ge xiǎoxué jiāoshū.", "text_en": "She's a teacher, she teaches at a primary school.", "score": 1.0, "register": "casual", "feedback": "Specific and conversational — gives both the job and the workplace."},
-                    {"text_zh": "她在北京工作，是个医生。", "text_pinyin": "tā zài běijīng gōngzuò, shì ge yīshēng.", "text_en": "She works in Beijing, she's a doctor.", "score": 0.8, "register": "casual", "feedback": "Informative — mentions location and profession. Solid answer."},
-                    {"text_zh": "我姐姐现在还在上大学呢。", "text_pinyin": "wǒ jiějie xiànzài hái zài shàng dàxué ne.", "text_en": "My sister is still in university.", "score": 0.6, "register": "casual", "feedback": "Doesn't directly answer about work, but explains why — the 呢 softens it naturally."}
+                    {
+                        "text_zh": "你好，我手机没电了，请问现在几点？",
+                        "text_pinyin": "nǐ hǎo, wǒ shǒujī méi diàn le, qǐngwèn xiànzài jǐ diǎn?",
+                        "text_en": "Hi, my phone died, may I ask what time it is?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your sister's job, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "她是老师，在一个小学教书。",
+                        "text_pinyin": "tā shì lǎoshī, zài yī ge xiǎoxué jiāoshū.",
+                        "text_en": "She's a teacher, she teaches at a primary school.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific and conversational — gives both the job and the workplace."
+                    },
+                    {
+                        "text_zh": "一直走，左拐，右边。谢谢你！",
+                        "text_pinyin": "yìzhí zǒu, zuǒ guǎi, yòubiān. xièxie nǐ!",
+                        "text_en": "Go straight, turn left, on the right. Thank you!",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your sister's job, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

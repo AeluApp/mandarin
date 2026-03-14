@@ -1,0 +1,83 @@
+{
+  "title": "The Sunset Bench",
+  "title_zh": "看日落的长椅",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're sitting on a hill overlooking the city as the sun sets. An elderly painter, Lao Yao, is sketching the skyline with colored pencils. His drawings are simple but warm.",
+    "setup_zh": "你坐在一座小山上看着日落。一位年迈的画家老姚正在用彩色铅笔画城市的天际线。他的画简单但温暖。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "我每天都来这里画日落。你知道吗，每天的日落都不一样。今天的天空有一点紫色，昨天是橙色的。大多数人觉得日落就是日落，但如果你仔细看，每一天都是独一无二的。",
+        "text_pinyin": "Wǒ měi tiān dōu lái zhèlǐ huà rìluò. Nǐ zhīdào ma, měi tiān de rìluò dōu bù yīyàng. Jīntiān de tiānkōng yǒu yīdiǎn zǐsè, zuótiān shì chéngsè de. Dà duōshù rén juéde rìluò jiù shì rìluò, dàn rúguǒ nǐ zǐxì kàn, měi yī tiān dōu shì dúyīwú'èr de.",
+        "text_en": "I come here every day to paint the sunset. You know, every sunset is different. Today's sky has a bit of purple; yesterday was orange. Most people think a sunset is just a sunset, but if you look carefully, every day is unique."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about the uniqueness of each sunset.",
+        "options": [
+          {
+            "text_zh": "每天都来画日落，画了多少幅了？每一幅都是那一天唯一的记录。就算没人看到那天的天空，你把它留住了。",
+            "text_pinyin": "Měi tiān dōu lái huà rìluò, huà le duōshǎo fú le? Měi yī fú dōu shì nà yī tiān wéiyī de jìlù. Jiùsuàn méi rén kàn dào nà tiān de tiānkōng, nǐ bǎ tā liú zhù le.",
+            "text_en": "Coming every day to paint sunsets — how many paintings is that by now? Each one is the only record of that day. Even if nobody else saw that sky, you preserved it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Sees the paintings as unique daily records — values his quiet dedication."
+          },
+          {
+            "text_zh": "你用什么牌子的铅笔？",
+            "text_pinyin": "Nǐ yòng shénme páizi de qiānbǐ?",
+            "text_en": "What brand of pencils do you use?",
+            "score": 0.0,
+            "feedback": "Equipment question during a moment of artistic reflection."
+          },
+          {
+            "text_zh": "你的画卖不卖？",
+            "text_pinyin": "Nǐ de huà mài bú mài?",
+            "text_en": "Do you sell your paintings?",
+            "score": 0.0,
+            "feedback": "Commercial question that commodifies a personal practice."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "已经画了一千多幅了。我老伴走了以后，这是我每天最重要的事。她以前最喜欢看日落。我现在帮她看，然后画下来。好像她还在我身边一样。",
+        "text_pinyin": "Yǐjīng huà le yī qiān duō fú le. Wǒ lǎobàn zǒu le yǐhòu, zhè shì wǒ měi tiān zuì zhòngyào de shì. Tā yǐqián zuì xǐhuān kàn rìluò. Wǒ xiànzài bāng tā kàn, ránhòu huà xiàlái. Hǎoxiàng tā hái zài wǒ shēnbiān yīyàng.",
+        "text_en": "Over a thousand by now. After my wife passed, this became the most important thing I do each day. She loved watching sunsets. Now I watch for her, then paint it. As if she's still beside me."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his way of remembering his wife.",
+        "options": [
+          {
+            "text_zh": "帮她看日落……这是我听过的最深的爱。一千多幅画，就是一千多个傍晚，你都在陪着她。她一定能感受到。",
+            "text_pinyin": "Bāng tā kàn rìluò…… zhè shì wǒ tīng guò de zuì shēn de ài. Yī qiān duō fú huà, jiù shì yī qiān duō ge bàngwǎn, nǐ dōu zài péi zhe tā. Tā yīdìng néng gǎnshòu dào.",
+            "text_en": "Watching sunsets for her... that's the deepest love I've ever heard of. Over a thousand paintings means over a thousand evenings you've been keeping her company. She must be able to feel it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Deeply moved and respectful — honors his devotion without sentimentality."
+          },
+          {
+            "text_zh": "你有没有想过办一个画展？",
+            "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò bàn yīge huàzhǎn?",
+            "text_en": "Have you thought about holding an exhibition?",
+            "score": 0.0,
+            "feedback": "Career suggestion during a deeply personal revelation."
+          },
+          {
+            "text_zh": "你太太是什么时候走的？",
+            "text_pinyin": "Nǐ tàitai shì shénme shíhou zǒu de?",
+            "text_en": "When did your wife pass away?",
+            "score": 0.0,
+            "feedback": "Date question that probes pain instead of honoring the tribute."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The practice of continuing daily rituals in memory of a deceased spouse is deeply rooted in Chinese culture. The concept of 陪伴 (péibàn, companionship) extends beyond physical presence — many Chinese believe that maintaining shared habits keeps the connection alive. Painting sunsets for a departed wife embodies the idea that love doesn't end with death but transforms into quiet daily devotion."
+  }
+}

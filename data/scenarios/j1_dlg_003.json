@@ -1,0 +1,87 @@
+{
+    "title": "Rain at the Bus Stop",
+    "title_zh": "公交车站的雨",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "It starts raining while you wait at the bus stop. An elderly man shares his umbrella with you.",
+        "setup_zh": "你在公交车站等车的时候下雨了。一位老人和你分享他的伞。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下雨了！你没有伞吗？来，我们一起用。",
+                "text_pinyin": "Xià yǔ le! Nǐ méiyǒu sǎn ma? Lái, wǒmen yīqǐ yòng.",
+                "text_en": "It's raining! You don't have an umbrella? Come, let's share mine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him for sharing his umbrella.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您！您太好了。",
+                        "text_pinyin": "Xièxie nín! Nín tài hǎo le.",
+                        "text_en": "Thank you! You're so kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grateful and uses 您 to show respect -- the right response when an elder offers kindness in the rain."
+                    },
+                    {
+                        "text_zh": "谢谢！雨好大。",
+                        "text_pinyin": "Xièxie! Yǔ hǎo dà.",
+                        "text_en": "Thanks! The rain is really heavy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Thanks him but states the obvious about the rain instead of acknowledging his generosity directly."
+                    },
+                    {
+                        "text_zh": "我忘了带伞。你的伞很大。",
+                        "text_pinyin": "Wǒ wàng le dài sǎn. Nǐ de sǎn hěn dà.",
+                        "text_en": "I forgot my umbrella. Your umbrella is big.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Comments on the umbrella itself instead of thanking him for sharing it -- misses the human gesture behind the offer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没关系。你坐哪路车？",
+                "text_pinyin": "Méi guānxi. Nǐ zuò nǎ lù chē?",
+                "text_en": "No problem. Which bus are you taking?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him which bus you're waiting for.",
+                "options": [
+                    {
+                        "text_zh": "我坐三路车。您呢？",
+                        "text_pinyin": "Wǒ zuò sān lù chē. Nín ne?",
+                        "text_en": "I'm taking the number 3 bus. How about you?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers his question and asks back -- keeps the friendly conversation going under the shared umbrella."
+                    },
+                    {
+                        "text_zh": "三路车。车怎么还没来？",
+                        "text_pinyin": "Sān lù chē. Chē zěnme hái méi lái?",
+                        "text_en": "Number 3. Why hasn't the bus come yet?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but immediately complains about the wait -- shifts the mood from grateful to impatient."
+                    },
+                    {
+                        "text_zh": "这个车站有几路车？",
+                        "text_pinyin": "Zhège chēzhàn yǒu jǐ lù chē?",
+                        "text_en": "How many bus lines stop here?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A practical question about the stop, but he asked which bus you're taking -- answer his question first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing an umbrella with a stranger at a bus stop is a quiet act of kindness common in China. These small moments of mutual care between strangers are part of the everyday warmth of Chinese community life."
+    }
+}

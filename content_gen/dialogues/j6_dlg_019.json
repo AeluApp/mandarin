@@ -1,0 +1,89 @@
+{
+    "title": "Neither Here Nor There",
+    "title_zh": "既不属于这里，也不属于那里",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're having dinner with your friend Zhihao, who grew up in a small town, studied in Beijing, and now works in Shanghai. He's been thinking about where he truly belongs.",
+        "setup_zh": "你和朋友志浩在吃晚饭。他在小镇长大，在北京读书，现在在上海工作。他一直在想自己真正属于哪里。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "过年回老家，亲戚们说我变了，说我「城里人了」。但在上海，我永远是外地人。我发现自己在任何一个地方都不完全属于。回去的时候我是外来的，在这里我也是外来的。你说这算什么？",
+                "text_pinyin": "Guò nián huí lǎojiā, qīnqimen shuō wǒ biàn le, shuō wǒ 'chénglǐ rén le'. Dàn zài Shànghǎi, wǒ yǒngyuǎn shì wàidì rén. Wǒ fāxiàn zìjǐ zài rènhé yīge dìfang dōu bù wánquán shǔyú. Huí qù de shíhou wǒ shì wàilái de, zài zhèlǐ wǒ yě shì wàilái de. Nǐ shuō zhè suàn shénme?",
+                "text_en": "When I go home for New Year, relatives say I've changed — 'you're a city person now.' But in Shanghai, I'm forever an outsider. I've realized I don't fully belong anywhere. When I go back, I'm the outsider. Here, I'm also the outsider. What do you call that?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with his identity crisis.",
+                "options": [
+                    {
+                        "text_zh": "也许这不是你的问题，是时代的特征。你经历了两个世界，吸收了两套价值观。不完全属于哪一边，但两边都是你的一部分。也许不属于任何地方本身就是一种归属——你属于你自己的经历。",
+                        "text_pinyin": "Yěxǔ zhè bú shì nǐ de wèntí, shì shídài de tèzhēng. Nǐ jīnglì le liǎng ge shìjiè, xīshōu le liǎng tào jiàzhíguān. Bù wánquán shǔyú nǎ yī biān, dàn liǎng biān dōu shì nǐ de yī bùfen. Yěxǔ bù shǔyú rènhé dìfang běnshēn jiù shì yī zhǒng guīshǔ — nǐ shǔyú nǐ zìjǐ de jīnglì.",
+                        "text_en": "Maybe this isn't your problem, it's a feature of the era. You've lived in two worlds, absorbed two value systems. Not fully belonging to either, but both are part of you. Maybe not belonging anywhere is itself belonging — you belong to your own experience.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes displacement as a unique form of identity — sophisticated and comforting."
+                    },
+                    {
+                        "text_zh": "你在哪里交社保，就算哪里的人呗。",
+                        "text_pinyin": "Nǐ zài nǎlǐ jiāo shèbǎo, jiù suàn nǎlǐ de rén bei.",
+                        "text_en": "Wherever you pay social security, that's where you're from.",
+                        "score": 0.0,
+                        "feedback": "This reduces identity to bureaucracy — misses the existential depth."
+                    },
+                    {
+                        "text_zh": "很多人都是这样的，你不用太纠结。",
+                        "text_pinyin": "Hěn duō rén dōu shì zhèyàng de, nǐ bú yòng tài jiūjié.",
+                        "text_en": "Lots of people are like this, don't overthink it.",
+                        "score": 0.0,
+                        "feedback": "Minimizes a real struggle by normalizing without engaging."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "属于自己的经历……这个说法让我想到了一个比喻。也许我不是一棵树——树必须扎根在一个地方。也许我更像一条河——经过很多地方，每个地方都留下了一些东西，也带走了一些东西。",
+                "text_pinyin": "Shǔyú zìjǐ de jīnglì…… zhège shuōfǎ ràng wǒ xiǎng dào le yīge bǐyù. Yěxǔ wǒ bú shì yī kē shù — shù bìxū zhāgēn zài yīge dìfang. Yěxǔ wǒ gèng xiàng yī tiáo hé — jīngguò hěn duō dìfang, měi ge dìfang dōu liú xià le yīxiē dōngxi, yě dài zǒu le yīxiē dōngxi.",
+                "text_en": "Belonging to your own experience... that phrasing makes me think of a metaphor. Maybe I'm not a tree — trees must root in one place. Maybe I'm more like a river — passing through many places, leaving something behind at each, and carrying something away."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Extend the river metaphor.",
+                "options": [
+                    {
+                        "text_zh": "河的力量在于它不停留。带着上游的泥土流过平原，最终汇入大海。你身上有小镇的真诚，北京的思辨，上海的韧性。这些不是矛盾，而是你这条河的地层——每经过一个地方，你就更丰富一层。",
+                        "text_pinyin": "Hé de lìliang zàiyú tā bù tíngliú. Dài zhe shàngyóu de nítǔ liú guò píngyuán, zuìzhōng huì rù dàhǎi. Nǐ shēn shàng yǒu xiǎo zhèn de zhēnchéng, Běijīng de sībiàn, Shànghǎi de rènxìng. Zhèxiē bú shì máodùn, ér shì nǐ zhè tiáo hé de dìcéng — měi jīngguò yīge dìfang, nǐ jiù gèng fēngfù yī céng.",
+                        "text_en": "A river's strength is that it doesn't stay. Carrying upstream soil across plains, flowing into the sea. You carry your small town's sincerity, Beijing's critical thinking, Shanghai's resilience. Not contradictions but your river's geological layers — richer with every place.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Masterful extension — turns his metaphor into affirmation of his complex identity."
+                    },
+                    {
+                        "text_zh": "你想得太深了，其实在哪里生活都差不多。",
+                        "text_pinyin": "Nǐ xiǎng de tài shēn le, qíshí zài nǎlǐ shēnghuó dōu chàbuduō.",
+                        "text_en": "You're thinking too deeply, life is about the same everywhere.",
+                        "score": 0.0,
+                        "feedback": "Flattening — denies the significance of place and displacement."
+                    },
+                    {
+                        "text_zh": "你可以落户上海啊，买个房就有归属感了。",
+                        "text_pinyin": "Nǐ kěyǐ luòhù Shànghǎi a, mǎi ge fáng jiù yǒu guīshǔ gǎn le.",
+                        "text_en": "You could get Shanghai hukou and buy an apartment — that'll give you a sense of belonging.",
+                        "score": 0.0,
+                        "feedback": "Material solution to an existential question — completely misses the depth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每经过一个地方就更丰富了一层……谢谢你。也许我不需要回答「我属于哪里」这个问题。也许更好的问题是：我经过的每一个地方，给了我什么？我带着这些继续往前流就好了。",
+                "text_pinyin": "Měi jīngguò yīge dìfang jiù gèng fēngfù le yī céng…… xièxie nǐ. Yěxǔ wǒ bù xūyào huídá 'wǒ shǔyú nǎlǐ' zhège wèntí. Yěxǔ gèng hǎo de wèntí shì: wǒ jīngguò de měi yīge dìfang, gěi le wǒ shénme? Wǒ dài zhe zhèxiē jìxù wǎng qián liú jiù hǎo le.",
+                "text_en": "Richer with every place passed through... thank you. Maybe I don't need to answer 'where do I belong.' Maybe the better question is: what has each place I've passed through given me? I'll carry all of it and keep flowing forward."
+            }
+        ],
+        "cultural_note": "China's hukou (户籍) system creates a legal distinction between local residents and migrants, reinforcing a sense of not belonging for the hundreds of millions who live and work away from their registered hometown. The phrase「外地人」(wàidì rén, outsider/non-local) carries real social weight in cities like Shanghai and Beijing. The tension between hometown identity and urban adaptation is one of the defining psychological experiences of China's massive internal migration."
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "The Old Photograph",
+  "title_zh": "老照片",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You visit a flea market and find a vendor selling old photographs. He picks one up and tells you about it.",
+    "setup_zh": "你去了一个跳蚤市场，看到一位摊主在卖老照片。他拿起一张跟你说。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你看这张照片，是八十年代的。那时候这条街完全不一样。",
+        "text_pinyin": "Nǐ kàn zhè zhāng zhàopiàn, shì bāshí niándài de. Nà shíhou zhè tiáo jiē wánquán bù yīyàng.",
+        "text_en": "Look at this photo — it's from the 1980s. This street looked completely different back then."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Show interest in the photo.",
+        "options": [
+          {
+            "text_zh": "真的吗？看起来很不一样。那时候这里有什么？",
+            "text_pinyin": "Zhēn de ma? Kàn qǐlái hěn bù yīyàng. Nà shíhou zhèlǐ yǒu shénme?",
+            "text_en": "Really? It looks so different. What was here back then?",
+            "score": 1.0,
+            "feedback": "Curious and engaged — invites a story.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "照片的颜色不太好了，太旧了。",
+            "text_pinyin": "Zhàopiàn de yánsè bú tài hǎo le, tài jiù le.",
+            "text_en": "The colors in the photo have faded — it's too old.",
+            "score": 0.0,
+            "feedback": "He looks down at the photo, then back at you. That's the whole beauty of it."
+          },
+          {
+            "text_zh": "我不喜欢老东西。",
+            "text_pinyin": "Wǒ bù xǐhuan lǎo dōngxi.",
+            "text_en": "I don't like old things.",
+            "score": 0.0,
+            "feedback": "Rude at a vintage market."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "那时候都是小平房，门口有大树。到了晚上大家就搬椅子出来聊天。现在都是高楼了。",
+        "text_pinyin": "Nà shíhou dōu shì xiǎo píngfáng, ménkǒu yǒu dà shù. Dào le wǎnshang dàjiā jiù bān yǐzi chūlái liáotiān. Xiànzài dōu shì gāolóu le.",
+        "text_en": "Back then it was all small houses with big trees out front. In the evenings, everyone brought chairs out to chat. Now it's all high-rises."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his memory.",
+        "options": [
+          {
+            "text_zh": "听起来那时候邻居之间更亲近。我想看看更多的老照片。",
+            "text_pinyin": "Tīng qǐlái nà shíhou línjū zhī jiān gèng qīnjìn. Wǒ xiǎng kànkan gèng duō de lǎo zhàopiàn.",
+            "text_en": "It sounds like neighbors were closer back then. I'd like to see more old photos.",
+            "score": 1.0,
+            "feedback": "— perceives the loss and wants to learn more.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "现在的房子更大更方便，应该比以前好吧。",
+            "text_pinyin": "Xiànzài de fángzi gèng dà gèng fāngbiàn, yīnggāi bǐ yǐqián hǎo ba.",
+            "text_en": "Houses now are bigger and more convenient — that's probably better than before, right?",
+            "score": 0.0,
+            "feedback": "He sets the photo down gently. You answered the surface, not the feeling underneath."
+          },
+          {
+            "text_zh": "我要走了。",
+            "text_pinyin": "Wǒ yào zǒu le.",
+            "text_en": "I need to go.",
+            "score": 0.0,
+            "feedback": "Leaves abruptly during his story."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "China's rapid urbanization transformed neighborhoods within a generation. Old photographs at flea markets preserve memories of a slower pace — small houses, shared courtyards, and evening conversations under trees. These images carry deep nostalgia."
+  }
+}

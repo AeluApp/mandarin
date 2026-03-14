@@ -1,0 +1,83 @@
+{
+  "title": "The Broken Elevator",
+  "title_zh": "电梯坏了",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "The elevator in your apartment building is broken. You meet your neighbor on the stairs, both of you climbing with groceries.",
+    "setup_zh": "你住的楼的电梯坏了。你在楼梯上遇到邻居，你们都提着菜。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "电梯又坏了！我住十二楼，每次都累死了。你住几楼？",
+        "text_pinyin": "Diàntī yòu huài le! Wǒ zhù shí'èr lóu, měi cì dōu lèi sǐ le. Nǐ zhù jǐ lóu?",
+        "text_en": "The elevator's broken again! I live on the twelfth floor — I'm exhausted every time. What floor do you live on?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her your floor and commiserate.",
+        "options": [
+          {
+            "text_zh": "我住八楼。也够累的了。你提的东西好多。",
+            "text_pinyin": "Wǒ zhù bā lóu. Yě gòu lèi de le. Nǐ tí de dōngxi hǎo duō.",
+            "text_en": "I'm on the eighth floor. That's tiring enough. You've got a lot of stuff.",
+            "score": 1.0,
+            "feedback": "Empathetic — acknowledges shared struggle.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我喜欢爬楼梯。",
+            "text_pinyin": "Wǒ xǐhuan pá lóutī.",
+            "text_en": "I like climbing stairs.",
+            "score": 0.0,
+            "feedback": "Dismisses her complaint in an annoying way."
+          },
+          {
+            "text_zh": "你买了什么菜？",
+            "text_pinyin": "Nǐ mǎi le shénme cài?",
+            "text_en": "What vegetables did you buy?",
+            "score": 0.0,
+            "feedback": "She's talking about the broken elevator problem."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "没办法，只能慢慢爬。你要不要我帮你拿一个袋子？",
+        "text_pinyin": "Méi bànfǎ, zhǐ néng mànmàn pá. Nǐ yào bú yào wǒ bāng nǐ ná yī ge dàizi?",
+        "text_en": "Nothing we can do — just climb slowly. Want me to carry one of your bags?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her kind offer.",
+        "options": [
+          {
+            "text_zh": "不用不用，我还好。我们一起慢慢走吧。",
+            "text_pinyin": "Bú yòng bú yòng, wǒ hái hǎo. Wǒmen yīqǐ mànmàn zǒu ba.",
+            "text_en": "No no, I'm fine. Let's walk up slowly together.",
+            "score": 1.0,
+            "feedback": "Considerate — declines but suggests togetherness.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你应该搬到低楼层。",
+            "text_pinyin": "Nǐ yīnggāi bān dào dī lóucéng.",
+            "text_en": "You should move to a lower floor.",
+            "score": 0.0,
+            "feedback": "Unhelpful advice when she just offered to help you."
+          },
+          {
+            "text_zh": "电梯什么时候修好？",
+            "text_pinyin": "Diàntī shénme shíhou xiū hǎo?",
+            "text_en": "When will the elevator be fixed?",
+            "score": 0.0,
+            "feedback": "She can't answer that, and she just offered to help you."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Broken elevators in Chinese apartment buildings create unexpected neighborly moments. The shared inconvenience bonds people — carrying groceries up many flights together turns strangers into friends. 没办法 (nothing we can do) is a resigned but warm acceptance."
+  }
+}

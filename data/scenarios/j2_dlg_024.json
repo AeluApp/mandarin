@@ -1,0 +1,83 @@
+{
+  "title": "The Park Bench",
+  "title_zh": "公园的长椅",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're sitting on a bench in the park reading. An elderly man sits down next to you with a thermos of tea.",
+    "setup_zh": "你坐在公园的长椅上看书。一位老人拿着保温杯坐在你旁边。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "年轻人，你在看什么书？现在很少看到有人在公园看书了。",
+        "text_pinyin": "Niánqīng rén, nǐ zài kàn shénme shū? Xiànzài hěn shǎo kàn dào yǒu rén zài gōngyuán kàn shū le.",
+        "text_en": "Young person, what are you reading? It's rare to see someone reading in the park these days."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him about your book and why you like reading here.",
+        "options": [
+          {
+            "text_zh": "我在看一本中文书。在公园看书很舒服，有风，有树，很安静。",
+            "text_pinyin": "Wǒ zài kàn yī běn Zhōngwén shū. Zài gōngyuán kàn shū hěn shūfu, yǒu fēng, yǒu shù, hěn ānjìng.",
+            "text_en": "I'm reading a Chinese book. Reading in the park is so comfortable — there's wind, trees, and quiet.",
+            "score": 1.0,
+            "feedback": "Simple and peaceful — captures why the park is a good place to read.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这本书是我朋友给我的。",
+            "text_pinyin": "Zhè běn shū shì wǒ péngyou gěi wǒ de.",
+            "text_en": "This book was given to me by a friend.",
+            "score": 0.0,
+            "feedback": "Doesn't answer what the book is or why you're reading here."
+          },
+          {
+            "text_zh": "因为家里太热了。",
+            "text_pinyin": "Yīnwèi jiālǐ tài rè le.",
+            "text_en": "Because it's too hot at home.",
+            "score": 0.0,
+            "feedback": "A practical complaint rather than genuine connection."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊，公园是个好地方。我每天都来这里坐坐，喝喝茶，看看大家。这样的日子很好。",
+        "text_pinyin": "Shì a, gōngyuán shì ge hǎo dìfang. Wǒ měi tiān dōu lái zhèlǐ zuòzuo, hēhe chá, kànkan dàjiā. Zhèyàng de rìzi hěn hǎo.",
+        "text_en": "Yes, the park is a good place. I come here every day to sit, drink tea, and watch people. Days like this are good."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his contentment with simple things.",
+        "options": [
+          {
+            "text_zh": "我觉得你说得对。有时候最简单的事情是最好的——喝茶，看书，听鸟叫。",
+            "text_pinyin": "Wǒ juéde nǐ shuō de duì. Yǒu shíhou zuì jiǎndān de shìqing shì zuì hǎo de — hē chá, kàn shū, tīng niǎo jiào.",
+            "text_en": "I think you're right. Sometimes the simplest things are the best — drinking tea, reading, listening to birds.",
+            "score": 1.0,
+            "feedback": "Meets him in the stillness — affirms that simple pleasures are enough.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你不觉得无聊吗？",
+            "text_pinyin": "Nǐ bù juéde wúliáo ma?",
+            "text_en": "Don't you get bored?",
+            "score": 0.0,
+            "feedback": "Projects restlessness onto his peaceful routine."
+          },
+          {
+            "text_zh": "这个公园很大吗？",
+            "text_pinyin": "Zhège gōngyuán hěn dà ma?",
+            "text_en": "Is this park big?",
+            "score": 0.0,
+            "feedback": "A factual question that misses the emotional moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Chinese parks serve as communal living rooms, especially for retirees. Carrying a thermos (保温杯) of tea is standard for older men who spend mornings in the park. The phrase 这样的日子很好 captures a philosophy of contentment with the ordinary that runs deep in Chinese daily life."
+  }
+}

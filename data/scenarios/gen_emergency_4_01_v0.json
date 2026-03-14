@@ -1,0 +1,160 @@
+{
+    "title": "The Burst Pipe Chronicle",
+    "title_zh": "水管历险记",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_4_01_v0",
+    "tree": {
+        "setup": "Sunday morning. You wake to find water seeping under your bathroom door with the quiet determination of a river reclaiming its territory. A pipe has burst somewhere in the wall. The property management office is staffed by Mr. Guo, a man who speaks about plumbing the way poets speak about the sea — with deep feeling and an alarming number of technical terms.",
+        "setup_zh": "星期天早晨。你醒来发现水正以河流收复领土般的坚定从浴室门下渗出来。墙里的水管不知道在哪里破了。物业管理处值班的是郭师傅，一个谈起水管就像诗人谈大海一样的人——充满深情，还有大量令人眩晕的专业术语。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "物业管理处，您好。有什么问题？",
+                "text_pinyin": "wùyè guǎnlǐ chù, nín hǎo. yǒu shénme wèntí?",
+                "text_en": "Property management, hello. What's the problem?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report the burst pipe urgently.",
+                "options": [
+                    {
+                        "text_zh": "你好，我是五号楼302的住户。我家水管破了，浴室全是水。请你们快点派人来修。",
+                        "text_pinyin": "nǐ hǎo, wǒ shì wǔ hào lóu sān líng èr de zhùhù. wǒ jiā shuǐguǎn pò le, yùshì quán shì shuǐ. qǐng nǐmen kuài diǎn pài rén lái xiū.",
+                        "text_en": "Hello, I'm the resident of Building 5, unit 302. A pipe burst in my home — the bathroom is flooded. Please send someone to fix it quickly.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Address, problem, urgency — all covered in one breath. Mr. Guo is already reaching for his toolbox."
+                    },
+                    {
+                        "text_zh": "我家漏水了，很严重！",
+                        "text_pinyin": "wǒ jiā lòu shuǐ le, hěn yánzhòng!",
+                        "text_en": "My home is leaking — it's serious!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The severity is clear. He'll need your unit number, which he'll ask for next."
+                    },
+                    {
+                        "text_zh": "水管有点问题。",
+                        "text_pinyin": "shuǐguǎn yǒudiǎn wèntí.",
+                        "text_en": "There's a small issue with the pipes.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "有点 undersells the situation considerably. Mr. Guo will discover the truth soon enough."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "五号楼302，收到。你先把总阀门关掉，一般在厨房水槽下面或者卫生间进门的地方。",
+                "text_pinyin": "wǔ hào lóu sān líng èr, shōu dào. nǐ xiān bǎ zǒng fámén guān diào, yìbān zài chúfáng shuǐcáo xiàmian huòzhě wèishēngjiān jìn mén de dìfāng.",
+                "text_en": "Building 5, 302, noted. First, turn off the main valve — it's usually under the kitchen sink or near the bathroom entrance."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the valve.",
+                "options": [
+                    {
+                        "text_zh": "好的，我去找阀门。在厨房水槽下面找到了！关好了。",
+                        "text_pinyin": "hǎo de, wǒ qù zhǎo fámén. zài chúfáng shuǐcáo xiàmian zhǎo dào le! guān hǎo le.",
+                        "text_en": "OK, I'll look for the valve. Found it under the kitchen sink! It's off now.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Quick action. Mr. Guo's voice softens with approval — a tenant who can find the valve is worth their weight in copper piping."
+                    },
+                    {
+                        "text_zh": "阀门在哪里？我找不到。",
+                        "text_pinyin": "fámén zài nǎlǐ? wǒ zhǎo bú dào.",
+                        "text_en": "Where's the valve? I can't find it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll guide you through it — check behind the toilet, under the sink, near the water heater."
+                    },
+                    {
+                        "text_zh": "什么阀门？",
+                        "text_pinyin": "shénme fámén?",
+                        "text_en": "What valve?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Guo takes a deep breath. This will be a teaching moment. He has many of those."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很好。我二十分钟之内到。你先用毛巾把地上的水擦一下，不然可能会漏到楼下去。",
+                "text_pinyin": "hěn hǎo. wǒ èrshí fēnzhōng zhī nèi dào. nǐ xiān yòng máojīn bǎ dì shàng de shuǐ cā yíxià, bùrán kěnéng huì lòu dào lóu xià qù.",
+                "text_en": "Good. I'll be there within twenty minutes. Try to mop up the water with towels, or it might leak to the floor below."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Acknowledge and ask if you should notify the neighbor below.",
+                "options": [
+                    {
+                        "text_zh": "好的，我现在就擦。要不要先通知楼下的邻居？",
+                        "text_pinyin": "hǎo de, wǒ xiànzài jiù cā. yào búyào xiān tōngzhī lóu xià de línjū?",
+                        "text_en": "OK, I'll mop now. Should I notify the neighbor downstairs?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thinking of the neighbors — Mr. Guo is genuinely impressed. Considerate tenants are rarer than good pipes."
+                    },
+                    {
+                        "text_zh": "好的，我尽量擦。",
+                        "text_pinyin": "hǎo de, wǒ jǐnliàng cā.",
+                        "text_en": "OK, I'll try to mop up.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hears the determination in your voice. Twenty minutes never felt so long."
+                    },
+                    {
+                        "text_zh": "水太多了，毛巾不够用。",
+                        "text_pinyin": "shuǐ tài duō le, máojīn búgòu yòng.",
+                        "text_en": "There's too much water — I don't have enough towels.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Guo suggests bedsheets as backup. Plumbing emergencies are not the time for textile preferences."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，最好告诉楼下一声。我马上就到。",
+                "text_pinyin": "duì, zuìhǎo gàosu lóu xià yì shēng. wǒ mǎshàng jiù dào.",
+                "text_en": "Yes, best to let them know. I'm on my way."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him before hanging up.",
+                "options": [
+                    {
+                        "text_zh": "太谢谢你了，郭师傅！周末还麻烦你，真不好意思。",
+                        "text_pinyin": "tài xièxie nǐ le, Guō shīfu! zhōumò hái máfan nǐ, zhēn bù hǎoyìsi.",
+                        "text_en": "Thank you so much, Mr. Guo! Sorry to trouble you on a weekend.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging the weekend intrusion — Mr. Guo waves it off.「水管不分周末，」he says. Pipes don't observe weekends."
+                    },
+                    {
+                        "text_zh": "谢谢，快点来！",
+                        "text_pinyin": "xièxie, kuài diǎn lái!",
+                        "text_en": "Thanks, come quickly!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Urgent but grateful. He's already out the door."
+                    },
+                    {
+                        "text_zh": "嗯。",
+                        "text_pinyin": "ǹg.",
+                        "text_en": "Mm.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Guo doesn't take it personally. His relationship is with the pipes, not the tenants."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Most Chinese apartment compounds have a 物业管理处 (wùyè guǎnlǐ chù, property management office) that handles maintenance, security, and repairs. Knowing where your 总阀门 (zǒng fámén, main water valve) is can save your apartment — and your downstairs neighbor's ceiling."
+    }
+}

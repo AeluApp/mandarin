@@ -1,0 +1,124 @@
+{
+    "title": "The Alley Without a Name",
+    "title_zh": "没有名字的巷子",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_3_02_v0",
+    "tree": {
+        "setup": "A maze of old alleys in a historic town. Your phone died ten minutes ago and you're thoroughly lost. The alleys all look the same -- stone walls, red lanterns, and cats who watch you with disinterest. An elderly man, Uncle Qiu, is sitting on a bamboo stool outside his door, playing chess against himself. He has lived here for sixty years and has opinions about tourists, navigation apps, and the superiority of asking real people.",
+        "setup_zh": "古镇里迷宫般的老巷子。你的手机十分钟前没电了，你已经彻底迷路了。巷子看起来都一样——石墙、红灯笼和漠不关心地看着你的猫。一位老人邱叔坐在门口的竹凳上，自己跟自己下棋。他在这里住了六十年，对游客、导航App和问真人的优越性有自己的看法。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "又一个迷路的。手机没电了吧？过来坐。你要去哪里？",
+                "text_pinyin": "yòu yí gè mí lù de. shǒujī méi diàn le ba? guòlái zuò. nǐ yào qù nǎlǐ?",
+                "text_en": "Another lost one. Phone died, right? Come sit. Where are you trying to go?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain where you need to go.",
+                "options": [
+                    {
+                        "text_zh": "我想回主街。从那里可以找到我住的客栈。叫'清风客栈'，您知道吗？",
+                        "text_pinyin": "wǒ xiǎng huí zhǔjiē. cóng nàlǐ kěyǐ zhǎo dào wǒ zhù de kèzhàn. jiào 'qīngfēng kèzhàn', nín zhīdào ma?",
+                        "text_en": "I want to get back to the main street. From there I can find my guesthouse. It's called 'Clear Wind Inn,' do you know it?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Qiu nods slowly.「清风客栈？老王家开的。从这里走不远。」Giving a specific destination and landmark name helps immensely. 客栈 is 'inn/guesthouse.' 主街 is 'main street.'"
+                    },
+                    {
+                        "text_zh": "我迷路了。这里是哪里？附近有没有大一点的路？",
+                        "text_pinyin": "wǒ mí lù le. zhèlǐ shì nǎlǐ? fùjìn yǒu méiyǒu dà yìdiǎn de lù?",
+                        "text_en": "I'm lost. Where is this? Are there any bigger roads nearby?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「这里叫后巷。你从哪个方向来的？」Uncle Qiu needs to calibrate. 后巷 is 'back alley.' Without a specific destination, directions are harder to give."
+                    },
+                    {
+                        "text_zh": "您好！请问有没有地方可以给手机充电？",
+                        "text_pinyin": "nín hǎo! qǐngwèn yǒu méiyǒu dìfang kěyǐ gěi shǒujī chōng diàn?",
+                        "text_en": "Hello! Is there somewhere I can charge my phone?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Uncle Qiu waves toward his door.「进来充吧。」He has a single outlet by the entrance. 充电 is 'charge.' Solving the phone problem first is practical but Uncle Qiu can navigate you faster than any app."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "清风客栈我知道。但是你不能按导航走，导航不认识这些小巷子。听我说：从这里往前走，看到一口井右转。然后一直走到一棵大榕树，左转就是主街了。",
+                "text_pinyin": "qīngfēng kèzhàn wǒ zhīdào. dànshì nǐ bù néng àn dǎoháng zǒu, dǎoháng bú rènshi zhèxiē xiǎo xiàngzi. tīng wǒ shuō: cóng zhèlǐ wǎng qián zǒu, kàn dào yì kǒu jǐng yòu zhuǎn. ránhòu yìzhí zǒu dào yì kē dà róngshu, zuǒ zhuǎn jiùshì zhǔjiē le.",
+                "text_en": "I know Clear Wind Inn. But you can't follow GPS, GPS doesn't know these little alleys. Listen: from here go forward, when you see a well turn right. Then walk straight until you reach a big banyan tree, turn left and you're on the main street."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the directions.",
+                "options": [
+                    {
+                        "text_zh": "好，我重复一下：往前走，看到井右转，到大树左转。对吗？大概走几分钟？",
+                        "text_pinyin": "hǎo, wǒ chóngfù yíxià: wǎng qián zǒu, kàn dào jǐng yòu zhuǎn, dào dà shù zuǒ zhuǎn. duì ma? dàgài zǒu jǐ fēnzhōng?",
+                        "text_en": "OK, let me repeat: go forward, see the well turn right, big tree turn left. Correct? About how many minutes' walk?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Qiu nods approvingly.「对。五六分钟。」He's pleased you repeated back. 重复 is 'repeat.' Using landmarks instead of street names is how locals navigate old towns."
+                    },
+                    {
+                        "text_zh": "井？什么样的井？这里还有井吗？",
+                        "text_pinyin": "jǐng? shénme yàng de jǐng? zhèlǐ hái yǒu jǐng ma?",
+                        "text_en": "A well? What kind of well? There are still wells here?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「石头的，上面有盖子。以前全镇喝水都靠它。」Uncle Qiu looks faintly nostalgic. 井 is 'well.' 盖子 is 'cover.' The old infrastructure becomes your navigation."
+                    },
+                    {
+                        "text_zh": "能不能帮我画一个简单的地图？我怕走到一半忘了。",
+                        "text_pinyin": "néng bu néng bāng wǒ huà yí gè jiǎndān de dìtú? wǒ pà zǒu dào yíbàn wàng le.",
+                        "text_en": "Could you draw me a simple map? I'm afraid I'll forget halfway.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Qiu picks up a twig and draws in the dust.「看——这是我们，这是井，这是树。」简单 is 'simple.' 一半 is 'halfway.' A dust map is more reliable than you'd think."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "年轻人，下次来之前先把地图截个图。手机没电了就什么都完了。以前的人哪有导航？全靠嘴巴问路。",
+                "text_pinyin": "niánqīngrén, xià cì lái zhīqián xiān bǎ dìtú jié gè tú. shǒujī méi diàn le jiù shénme dōu wán le. yǐqián de rén nǎ yǒu dǎoháng? quán kào zuǐba wèn lù.",
+                "text_en": "Young person, next time screenshot the map before you come. Once the phone dies, you're done for. People in the old days had no GPS -- they relied entirely on asking for directions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his advice before leaving.",
+                "options": [
+                    {
+                        "text_zh": "您说得对。其实问路比看手机有意思多了。谢谢您，邱叔！下棋赢了吗？",
+                        "text_pinyin": "nín shuō de duì. qíshí wèn lù bǐ kàn shǒujī yǒu yìsi duō le. xièxie nín, qiū shū! xià qí yíng le ma?",
+                        "text_en": "You're right. Actually, asking for directions is much more interesting than looking at a phone. Thank you, Uncle Qiu! Did you win the chess game?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Qiu chuckles.「自己跟自己下，当然赢了。」有意思多了 is 'much more interesting.' Asking about his chess game shows you noticed what he was doing. He waves you off warmly."
+                    },
+                    {
+                        "text_zh": "谢谢您！这个古镇真的很美。您住在这里这么久，一定有很多故事吧。",
+                        "text_pinyin": "xièxie nín! zhè ge gǔzhèn zhēn de hěn měi. nín zhù zài zhèlǐ zhème jiǔ, yídìng yǒu hěn duō gùshi ba.",
+                        "text_en": "Thank you! This old town is really beautiful. You've lived here so long, you must have many stories.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Uncle Qiu's eyes soften.「故事？太多了。下次你再来，我慢慢跟你说。」古镇 is 'ancient town.' Inviting someone's stories is the highest form of respect for elders."
+                    },
+                    {
+                        "text_zh": "记住了，下次截图。谢谢您，我赶紧走了！",
+                        "text_pinyin": "jìzhù le, xià cì jiétú. xièxie nín, wǒ gǎnjǐn zǒu le!",
+                        "text_en": "Got it, screenshot next time. Thanks, I'd better hurry!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「慢慢走！别急！」Uncle Qiu calls after you. 赶紧 is 'hurry up.' He watches you go, then returns to his chess game. One more tourist saved."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Ancient towns (古镇, gǔzhèn) in China often have alleys too narrow for cars and too winding for GPS. Local landmarks -- wells (井), trees (树), temples (庙) -- are more reliable than street names. Asking for directions (问路, wèn lù) from elderly residents is both practical and a cultural experience. Always screenshot your map (截图) before your phone dies."
+    }
+}

@@ -1,0 +1,185 @@
+{
+    "title": "Rain on the Covered Bridge",
+    "title_zh": "廊桥听雨",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You've taken shelter from a sudden rainstorm under a covered wooden bridge in a small town in Zhejiang province. An elderly retired calligrapher, Teacher Shen, is already there, watching the rain. He has a thermos of tea and seems content to wait. The rain drums steadily on the old wooden roof.",
+        "setup_zh": "你在浙江一座小镇的廊桥下躲避突如其来的暴雨。一位退休的老书法家沈老师已经在那里了，正在看雨。他带着一个保温壶的茶，似乎乐于等待。雨水稳稳地敲打着古老的木屋顶。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别着急，这种雨来得快，走得也快。正好歇一会儿。你知道吗，以前的人造廊桥不只是为了过河，也是为了这种时刻——给路人一个停下来的理由。现在大家都赶路，没人愿意停了。",
+                "text_pinyin": "Bié zhāojí, zhè zhǒng yǔ lái de kuài, zǒu de yě kuài. Zhènghǎo xiē yīhuǐr. Nǐ zhīdào ma, yǐqián de rén zào lángqiáo bù zhǐ shì wèile guò hé, yě shì wèile zhè zhǒng shíkè — gěi lùrén yīge tíng xiàlái de lǐyóu. Xiànzài dàjiā dōu gǎn lù, méi rén yuànyì tíng le.",
+                "text_en": "Don't worry, this kind of rain comes fast and goes fast. Good chance to rest a bit. Did you know, people in the past built covered bridges not just for crossing rivers, but for moments like this — giving travelers a reason to stop. Nowadays everyone's rushing, no one wants to stop anymore."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to what Teacher Shen said about covered bridges as places for pausing.",
+                "options": [
+                    {
+                        "text_zh": "我从来没从这个角度想过。廊桥不只是「通过」，也是「停留」。下雨是老天给你的暂停键，廊桥是人给你的接住这个暂停的空间。",
+                        "text_pinyin": "Wǒ cónglái méi cóng zhège jiǎodù xiǎng guò. Lángqiáo bù zhǐ shì 'tōngguò', yě shì 'tíngliú'. Xià yǔ shì lǎotiān gěi nǐ de zàntíng jiàn, lángqiáo shì rén gěi nǐ de jiē zhù zhège zàntíng de kōngjiān.",
+                        "text_en": "I've never thought of it that way. A covered bridge isn't just for passing through — it's also for staying. Rain is nature's pause button, and the bridge is the human-made space that catches that pause.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He nods slowly, eyes still on the rain. \"Pause button,\" he says. \"Good. That's exactly it.\""
+                    },
+                    {
+                        "text_zh": "这座桥有多少年历史了？是文物保护单位吗？",
+                        "text_pinyin": "Zhè zuò qiáo yǒu duōshǎo nián lìshǐ le? Shì wénwù bǎohù dānwèi ma?",
+                        "text_en": "How old is this bridge? Is it a protected heritage site?",
+                        "score": 0.0,
+                        "feedback": "He answers briefly — several hundred years, yes, listed — then settles back into watching the rain, leaving you to the silence."
+                    },
+                    {
+                        "text_zh": "我看天气预报说今天不会下雨的，不太准。",
+                        "text_pinyin": "Wǒ kàn tiānqì yùbào shuō jīntiān bú huì xià yǔ de, bú tài zhǔn.",
+                        "text_en": "The weather forecast said it wouldn't rain today, it's not very accurate.",
+                        "score": 0.0,
+                        "feedback": "He smiles slightly. \"The bridge doesn't care about forecasts,\" he says, and leaves it at that."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "「暂停键」——这个比喻好。我退休以后最大的变化就是学会了跟「没事做」和平共处。以前每天都排得满满的，退休第一年反而很焦虑，觉得自己没用了。后来慢慢接受了「无用」也是一种状态，不比「有用」低一等。",
+                "text_pinyin": "'Zàntíng jiàn' — zhège bǐyù hǎo. Wǒ tuìxiū yǐhòu zuìdà de biànhuà jiù shì xuéhuì le gēn 'méi shì zuò' hépíng gòngchǔ. Yǐqián měi tiān dōu pái de mǎnmǎn de, tuìxiū dì yī nián fǎn'ér hěn jiāolǜ, juéde zìjǐ méi yòng le. Hòulái mànmàn jiēshòu le 'wúyòng' yě shì yī zhǒng zhuàngtài, bù bǐ 'yǒuyòng' dī yī děng.",
+                "text_en": "'Pause button' — good metaphor. The biggest change after I retired was learning to coexist peacefully with 'having nothing to do.' Before, every day was packed full; the first year of retirement I was actually anxious, feeling useless. Eventually I came to accept that 'uselessness' is also a state of being, not inferior to 'usefulness.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his journey from anxiety about uselessness to acceptance.",
+                "options": [
+                    {
+                        "text_zh": "这触及了一个根本的问题——我们把自我价值绑定在了「有产出」上面。庄子说「无用之用」，但那需要先放下「有用才值得存在」这个念头，才能真正做到。听起来那一年挺难熬的。",
+                        "text_pinyin": "Zhè chùjí le yīge gēnběn de wèntí — wǒmen bǎ zìwǒ jiàzhí bǎngdìng zài le 'yǒu chǎnchū' shàngmiàn. Zhuāngzǐ shuō 'wúyòng zhī yòng', dàn nà xūyào xiān fàngxià 'yǒuyòng cái zhídé cúnzài' zhège niàntou, cái néng zhēnzhèng zuòdào. Tīng qǐlái nà yī nián tǐng nán áo de.",
+                        "text_en": "That touches something fundamental — tying worth to being productive. Zhuangzi talked about 'the usefulness of uselessness,' but you have to drop the idea that usefulness justifies existence first. That first year sounds rough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He chuckles softly. \"Rough is right. My wife thought I was becoming difficult.\" He pours a little more tea into his cup."
+                    },
+                    {
+                        "text_zh": "退休以后可以学点新东西啊，比如摄影或者旅游。",
+                        "text_pinyin": "Tuìxiū yǐhòu kěyǐ xué diǎn xīn dōngxī a, bǐrú shèyǐng huòzhě lǚyóu.",
+                        "text_en": "After retirement you could learn something new, like photography or travel.",
+                        "score": 0.0,
+                        "feedback": "He nods politely. \"I suppose so,\" he says, in the tone of someone who has heard this suggestion many times."
+                    },
+                    {
+                        "text_zh": "你以前教书的学校在哪里？学生多吗？",
+                        "text_pinyin": "Nǐ yǐqián jiāoshū de xuéxiào zài nǎlǐ? Xuéshēng duō ma?",
+                        "text_en": "Where was the school you used to teach at? Many students?",
+                        "score": 0.0,
+                        "feedback": "He answers briefly, then looks back at the rain. He seemed to want to talk about something else."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "庄子……是的。我教了一辈子书法，总是在追求「写好」。退休以后反而开始享受写「坏」的自由。有时候故意让笔锋歪一下，发现反而更有意思。年轻的时候追求控制，老了才知道放松也是一种力量。",
+                "text_pinyin": "Zhuāngzǐ…… shì de. Wǒ jiāo le yī bèizi shūfǎ, zǒng shì zài zhuīqiú 'xiě hǎo'. Tuìxiū yǐhòu fǎn'ér kāishǐ xiǎngshòu xiě 'huài' de zìyóu. Yǒu shíhòu gùyì ràng bǐfēng wāi yīxià, fāxiàn fǎn'ér gèng yǒu yìsi. Niánqīng de shíhòu zhuīqiú kòngzhì, lǎo le cái zhīdào fàngsōng yě shì yī zhǒng lìliàng.",
+                "text_en": "Zhuangzi… yes. I taught calligraphy my whole life, always pursuing 'writing well.' After retirement I actually started enjoying the freedom of writing 'badly.' Sometimes I deliberately let the brush tip go crooked, and find it's actually more interesting. When young I chased control; only in old age did I learn that looseness is also a kind of power."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his idea that deliberate imperfection is its own skill.",
+                "options": [
+                    {
+                        "text_zh": "这让我想到侘寂——不完美本身可以是美。但你说的更进一步：不是被动地接受不完美，而是主动地选择它。那种选择只有先掌握规则的人才做得到。",
+                        "text_pinyin": "Zhè ràng wǒ xiǎng dào chà jì — bù wánměi běnshēn kěyǐ shì měi. Dàn nǐ shuō de gèng jìn yī bù: bú shì bèidòng de jiēshòu bù wánměi, ér shì zhǔdòng de xuǎnzé tā. Nà zhǒng xuǎnzé zhǐ yǒu xiān zhǎngwò guīzé de rén cái zuòdedào.",
+                        "text_en": "That reminds me of wabi-sabi — imperfection itself can be beautiful. But what you're describing goes further: it's not passively accepting imperfection, but actively choosing it. And only someone who's mastered the rules first can really make that choice.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He raises his cup slightly, like a small toast. \"Exactly. A student who writes badly is just writing badly. What I'm doing is different.\""
+                    },
+                    {
+                        "text_zh": "写坏了那还叫书法吗？书法不是应该追求完美吗？",
+                        "text_pinyin": "Xiě huài le nà hái jiào shūfǎ ma? Shūfǎ bú shì yīnggāi zhuīqiú wánměi ma?",
+                        "text_en": "If you write badly, can you still call it calligraphy? Isn't calligraphy supposed to pursue perfection?",
+                        "score": 0.0,
+                        "feedback": "He looks at you with mild amusement. \"That's exactly what my students used to say,\" he says."
+                    },
+                    {
+                        "text_zh": "你的书法作品卖吗？我想买一幅。",
+                        "text_pinyin": "Nǐ de shūfǎ zuòpǐn mài ma? Wǒ xiǎng mǎi yī fú.",
+                        "text_en": "Do you sell your calligraphy? I'd like to buy a piece.",
+                        "score": 0.0,
+                        "feedback": "He waves a hand. \"I write for myself now. That's the whole point,\" he says, not unfriendly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得好——先掌握规则，再打破规则。这不是叛逆，是回归。就像这场雨，它不遵守任何节拍，但你听着不觉得乱，反而觉得自然。也许自然界本来就没有「对」和「错」，只有「刚好在这里」。",
+                "text_pinyin": "Nǐ shuō de hǎo — xiān zhǎngwò guīzé, zài dǎpò guīzé. Zhè bú shì pànnì, shì huíguī. Jiù xiàng zhè chǎng yǔ, tā bù zūnshǒu rènhé jiépāi, dàn nǐ tīng zhe bù juéde luàn, fǎn'ér juéde zìrán. Yěxǔ zìránjiè běnlái jiù méiyǒu 'duì' hé 'cuò', zhǐ yǒu 'gānghǎo zài zhèlǐ'.",
+                "text_en": "Well said — first master the rules, then break them. It's not rebellion, it's return. Like this rain — it follows no beat, but when you listen it doesn't feel chaotic, it feels natural. Perhaps nature never had 'right' and 'wrong,' only 'happens to be here.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his idea of \"happens to be here\" — nature without right or wrong.",
+                "options": [
+                    {
+                        "text_zh": "「刚好在这里」——我觉得这也形容了我们现在的情况。两个陌生人因为一场雨停在同一座廊桥上，没有计划，但这半小时比很多刻意安排的对话更有意思。最好的相遇可能就是这样——无心插柳。",
+                        "text_pinyin": "'Gānghǎo zài zhèlǐ' — wǒ juéde zhè yě xíngróng le wǒmen xiànzài de qíngkuàng. Liǎng ge mòshēngrén yīnwèi yī chǎng yǔ tíng zài tóngyī zuò lángqiáo shàng, méiyǒu jìhuà, dàn zhè bàn xiǎoshí bǐ hěn duō kèyì ānpái de duìhuà gèng yǒu yìsi. Zuìhǎo de xiāngyù kěnéng jiù shì zhèyàng — wúxīn chā liǔ.",
+                        "text_en": "'Happens to be here' — that describes us now. Two strangers stopped at the same bridge by rain, no plan, but this half hour has been more interesting than many arranged conversations.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He looks sideways at you, then smiles — a real one. \"Willows that plant themselves,\" he repeats. \"Good. Sit down properly, the tea's not finished.\""
+                    },
+                    {
+                        "text_zh": "雨好像小了，我可以走了。谢谢啊。",
+                        "text_pinyin": "Yǔ hǎoxiàng xiǎo le, wǒ kěyǐ zǒu le. Xièxiè a.",
+                        "text_en": "The rain seems lighter, I can go now. Thanks.",
+                        "score": 0.0,
+                        "feedback": "He nods. \"Safe travels,\" he says — and his expression is that of someone whose conversation just got cut short."
+                    },
+                    {
+                        "text_zh": "你觉得明天还会下雨吗？我后天要去杭州。",
+                        "text_pinyin": "Nǐ juéde míngtiān hái huì xià yǔ ma? Wǒ hòutiān yào qù Hángzhōu.",
+                        "text_en": "Do you think it'll rain again tomorrow? I'm going to Hangzhou the day after.",
+                        "score": 0.0,
+                        "feedback": "He blinks and checks the sky. \"Hard to say,\" he says pleasantly, and the previous thread drifts away."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "无心插柳……嗯，说得好。你看，雨已经小了。再过几分钟就可以走了。不过不急——茶还没喝完呢。来，我给你倒一杯。",
+                "text_pinyin": "Wúxīn chā liǔ…… ēn, shuō de hǎo. Nǐ kàn, yǔ yǐjīng xiǎo le. Zài guò jǐ fēnzhōng jiù kěyǐ zǒu le. Búguò bú jí — chá hái méi hē wán ne. Lái, wǒ gěi nǐ dào yī bēi.",
+                "text_en": "Willows planted without intention… well said. Look, the rain has eased. A few more minutes and you can go. But no rush — the tea isn't finished yet. Come, let me pour you a cup."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the tea and say goodbye to Teacher Shen.",
+                "options": [
+                    {
+                        "text_zh": "好，不急。谢谢您的茶，也谢谢这场雨。要是今天没下雨，我大概会匆匆走过去，注意不到桥上有这么好的风景——不是山水，是您。",
+                        "text_pinyin": "Hǎo, bú jí. Xièxiè nín de chá, yě xièxiè zhè chǎng yǔ. Yàoshi jīntiān méi xià yǔ, wǒ dàgài huì cōngcōng zǒu guò qù, zhùyì bú dào qiáo shàng yǒu zhème hǎo de fēngjǐng — bú shì shānshuǐ, shì nín.",
+                        "text_en": "Alright, no rush. Thank you for the tea — and for the rain. If it hadn't rained, I'd have hurried right across without noticing the best view on this bridge. Not the mountains. You.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He laughs — a short, genuine one — and hands you the cup. \"Drink it while it's warm,\" he says. He looks pleased."
+                    },
+                    {
+                        "text_zh": "不用了，我赶时间，下次吧。",
+                        "text_pinyin": "Bú yòng le, wǒ gǎn shíjiān, xià cì ba.",
+                        "text_en": "No need, I'm in a hurry, next time.",
+                        "score": 0.0,
+                        "feedback": "He nods and tucks the cup back. \"Next time,\" he says, and watches you go — the quiet irony of the whole conversation trailing behind you."
+                    },
+                    {
+                        "text_zh": "这是什么茶？龙井吗？",
+                        "text_pinyin": "Zhè shì shénme chá? Lóngjǐng ma?",
+                        "text_en": "What kind of tea is this? Longjing?",
+                        "score": 0.0,
+                        "feedback": "He tells you the tea name with a smile, but the warm closing note of the conversation slips away into tea trivia."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Covered bridges (廊桥 lángqiáo) in southern China served as communal gathering spaces for centuries — travelers rested, merchants traded, and neighbors socialized under their roofs. The Taishun covered bridges in Zhejiang are UNESCO-recognized. The philosophical thread of this conversation draws on Daoist concepts of wuwei (non-action) and Zhuangzi's 'usefulness of the useless tree,' reflecting a tradition that values being over doing."
+    }
+}

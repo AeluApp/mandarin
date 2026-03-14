@@ -1,0 +1,87 @@
+{
+    "title": "A Warm Bowl of Wonton Soup",
+    "title_zh": "一碗热馄饨",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "On a cold evening, you stop at a small wonton shop. The grandmother behind the counter has been making wontons here for decades.",
+        "setup_zh": "寒冷的傍晚，你走进一家小馄饨店。柜台后面的老奶奶已经在这里做了几十年馄饨了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "外面冷吧？快坐下，一碗热馄饨暖暖肚子。要大碗还是小碗？",
+                "text_pinyin": "Wàimiàn lěng ba? Kuài zuò xià, yī wǎn rè húntun nuǎnnuan dùzi. Yào dà wǎn háishi xiǎo wǎn?",
+                "text_en": "Cold outside, isn't it? Sit down quick — a bowl of hot wontons will warm your belly. Large or small bowl?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order and chat.",
+                "options": [
+                    {
+                        "text_zh": "大碗！闻到味道就觉得暖了。奶奶，这家店开了多久了？",
+                        "text_pinyin": "Dà wǎn! Wén dào wèidào jiù juéde nuǎn le. Nǎinai, zhè jiā diàn kāi le duōjiǔ le?",
+                        "text_en": "Large! Just the smell makes me feel warm. Grandma, how long has this shop been open?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and curious about her story."
+                    },
+                    {
+                        "text_zh": "小碗。",
+                        "text_pinyin": "Xiǎo wǎn.",
+                        "text_en": "Small bowl.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple order."
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "Duōshǎo qián?",
+                        "text_en": "How much?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Price first in a cozy scene."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三十五年了！我从二十多岁就开始包馄饨了。现在手艺都在手上了，闭着眼睛都能包。你尝尝看好不好吃。",
+                "text_pinyin": "Sānshíwǔ nián le! Wǒ cóng èrshí duō suì jiù kāishǐ bāo húntun le. Xiànzài shǒuyì dōu zài shǒu shàng le, bì zhe yǎnjing dōu néng bāo. Nǐ chángchang kàn hǎo bù hǎochī.",
+                "text_en": "Thirty-five years! I started making wontons in my twenties. Now the skill is in my hands — I could wrap them with my eyes closed. Try them and see if they're good."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond after tasting.",
+                "options": [
+                    {
+                        "text_zh": "太好吃了！皮薄馅多，汤也特别鲜。三十五年的味道，难怪这么好吃。我以后一定常来。",
+                        "text_pinyin": "Tài hǎochī le! Pí báo xiàn duō, tāng yě tèbié xiān. Sānshíwǔ nián de wèidào, nánguài zhème hǎochī. Wǒ yǐhòu yīdìng cháng lái.",
+                        "text_en": "Delicious! Thin skin, generous filling, and the broth is so savory. Thirty-five years of flavor — no wonder it's so good. I'll definitely be back.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific praise that connects her dedication to the taste."
+                    },
+                    {
+                        "text_zh": "不错。",
+                        "text_pinyin": "Búcuò.",
+                        "text_en": "Not bad.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Understated for such dedication."
+                    },
+                    {
+                        "text_zh": "能不能加点醋？",
+                        "text_pinyin": "Néng bù néng jiā diǎn cù?",
+                        "text_en": "Can I add some vinegar?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but misses acknowledging her craft."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small family-run wonton shops are treasures of Chinese neighborhood culture. The phrase 「手艺都在手上了」 (the skill is in the hands) speaks to muscle memory built over decades. These shops often become gathering places for regular customers seeking warmth and comfort."
+    },
+    "hsk_level": 3
+}

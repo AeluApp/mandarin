@@ -1,0 +1,87 @@
+{
+    "title": "Cleaning Up After a Storm",
+    "title_zh": "暴风雨后",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "After a summer thunderstorm, the neighborhood is covered with fallen branches and puddles. Neighbors come out to help clean up. You join them.",
+        "setup_zh": "夏天的暴风雨过后，小区里到处都是落下的树枝和水坑。邻居们出来帮忙清理，你也加入了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎，昨晚那场暴风雨真大！你看院子里都是树枝。来，帮忙一起清理吧。",
+                "text_pinyin": "Āi, zuówǎn nà chǎng bàofēngyǔ zhēn dà! Nǐ kàn yuànzi lǐ dōu shì shùzhī. Lái, bāngmáng yīqǐ qīnglǐ ba.",
+                "text_en": "Wow, last night's storm was intense! Look at all the branches in the courtyard. Come, help clean up."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Join the clean-up.",
+                "options": [
+                    {
+                        "text_zh": "我来了！大家一起动手，很快就能弄干净。我先把那边的大树枝搬走。",
+                        "text_pinyin": "Wǒ lái le! Dàjiā yīqǐ dòngshǒu, hěn kuài jiù néng nòng gānjìng. Wǒ xiān bǎ nàbiān de dà shùzhī bān zǒu.",
+                        "text_en": "I'm here! With everyone working together, it'll be clean in no time. I'll move those big branches first.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Takes initiative and shows community spirit."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "Hǎo de.",
+                        "text_en": "Okay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agrees but no energy."
+                    },
+                    {
+                        "text_zh": "物业不管吗？",
+                        "text_pinyin": "Wùyè bù guǎn ma?",
+                        "text_en": "Isn't this the property management's job?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Deflects community responsibility."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你真积极！我们每次大雨以后都会出来一起清理。看，阳光出来了，很快就干了。暴风雨过后的空气特别新鲜，你闻到了吗？",
+                "text_pinyin": "Nǐ zhēn jījí! Wǒmen měi cì dà yǔ yǐhòu dōu huì chūlái yīqǐ qīnglǐ. Kàn, yángguāng chūlái le, hěn kuài jiù gān le. Bàofēngyǔ yǐhòu de kōngqì tèbié xīnxiān, nǐ wén dào le ma?",
+                "text_en": "You're so proactive! We always come out to clean after big rains. Look — the sun is out, it'll dry up quickly. The air after a storm is especially fresh — can you smell it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the fresh air.",
+                "options": [
+                    {
+                        "text_zh": "确实！空气好清新。暴风雨虽然麻烦，但之后的空气和阳光让人觉得一切都变新了。",
+                        "text_pinyin": "Quèshí! Kōngqì hǎo qīngxīn. Bàofēngyǔ suīrán máfan, dàn zhīhòu de kōngqì hé yángguāng ràng rén juéde yīqiè dōu biàn xīn le.",
+                        "text_en": "Definitely! The air is so fresh. Storms are a hassle, but the air and sunshine afterward make everything feel renewed.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Finds beauty after difficulty — positive perspective."
+                    },
+                    {
+                        "text_zh": "嗯，闻到了。",
+                        "text_pinyin": "En, wén dào le.",
+                        "text_en": "Yeah, I smell it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief."
+                    },
+                    {
+                        "text_zh": "希望别再下暴雨了。",
+                        "text_pinyin": "Xīwàng bié zài xià bàoyǔ le.",
+                        "text_en": "Hope it doesn't storm again.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Negative when the mood is hopeful."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Community clean-ups after storms bring neighbors together and strengthen social bonds. The observation that air smells freshest after rain connects to the Chinese poetic tradition of finding beauty in nature's rhythms. Working together for the common good (共同努力) is a valued community ethic."
+    },
+    "hsk_level": 3
+}

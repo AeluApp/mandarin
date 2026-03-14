@@ -8,6 +8,47 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+          pip install pytest pytest-cov
+
+      - name: Run tests with coverage
+        run: pytest tests/ -q --tb=short --cov=mandarin --cov-report=term-missing --cov-report=json --cov-fail-under=55
+
+      - name: Verify risk-weighted coverage floors
+        run: python scripts/coverage_floors.py
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run ruff check
+        run: ruff check mandarin/ --config pyproject.toml
+
+  quality-gates:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -22,5 +63,46 @@ jobs:
           pip install -e .
           pip install pytest
 
-      - name: Run tests
-        run: pytest tests/ -q --tb=short
+      - name: Run quality regression tests
+        run: pytest tests/test_quality_fixes.py -v --tb=short
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run deterministic audit (13 checks)
+        run: python scripts/audit_check.py
+
+  doc-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check doc drift (shell)
+        run: |
+          # Table count
+          ACTUAL_TABLES=$(grep -c "CREATE TABLE" schema.sql)
+          DOC_TABLES=$(grep -oP '\d+ tables' BUILD_STATE.md | head -1 | grep -oP '\d+')
+          if [ "$ACTUAL_TABLES" != "$DOC_TABLES" ]; then
+            echo "FAIL: BUILD_STATE.md says $DOC_TABLES tables but schema.sql has $ACTUAL_TABLES"
+            exit 1
+          fi
+          # Test file count
+          ACTUAL_TESTS=$(ls tests/test_*.py | wc -l | tr -d ' ')
+          DOC_SUITES=$(grep -oP '\d+ suites' BUILD_STATE.md | head -1 | grep -oP '\d+')
+          if [ "$ACTUAL_TESTS" != "$DOC_SUITES" ]; then
+            echo "FAIL: BUILD_STATE.md says $DOC_SUITES suites but found $ACTUAL_TESTS test files"
+            exit 1
+          fi
+          echo "OK: $ACTUAL_TABLES tables, $ACTUAL_TESTS test files — docs match"
+      - name: Check doc drift (schema version + tables)
+        run: python scripts/check_doc_drift.py

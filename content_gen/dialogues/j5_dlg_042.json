@@ -1,0 +1,89 @@
+{
+    "title": "The Lines on Her Hands",
+    "title_zh": "手上的纹路",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're sitting with your mother at the kitchen table. She's peeling an apple for you, and you notice her hands have more lines and spots than you remember.",
+        "setup_zh": "你和妈妈坐在厨房桌前。她在给你削苹果，你注意到她的手上比你记忆中多了很多纹路和斑点。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看什么呢？削个苹果有什么好看的。来，吃吧。我小时候我妈也是这样给我削的，一圈一圈，皮不断。现在我的手没有她那么稳了。",
+                "text_pinyin": "Nǐ kàn shénme ne? Xuē ge píngguǒ yǒu shénme hǎokàn de. Lái, chī ba. Wǒ xiǎo shíhou wǒ mā yě shì zhèyàng gěi wǒ xuē de, yī quān yī quān, pí bú duàn. Xiànzài wǒ de shǒu méiyǒu tā nàme wěn le.",
+                "text_en": "What are you looking at? What's so interesting about peeling an apple? Here, eat. When I was little, my mother peeled them for me the same way — round and round, the skin unbroken. My hands aren't as steady as hers anymore."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to your mother's comment about her hands.",
+                "options": [
+                    {
+                        "text_zh": "我在看你的手。小时候觉得你的手什么都能做——做饭、缝衣服、牵着我过马路。现在你的手上多了很多纹路，但每一条都是为我们操劳的痕迹。",
+                        "text_pinyin": "Wǒ zài kàn nǐ de shǒu. Xiǎo shíhou juéde nǐ de shǒu shénme dōu néng zuò — zuòfàn, féng yīfu, qiān zhe wǒ guò mǎlù. Xiànzài nǐ de shǒu shàng duō le hěn duō wénlù, dàn měi yī tiáo dōu shì wèi wǒmen cāoláo de hénjì.",
+                        "text_en": "I'm looking at your hands. When I was little, I thought they could do everything — cook, sew, hold mine crossing the road. Now there are more lines, but each is a mark of your work for us.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Tender and specific — sees her hands as a map of love and labor."
+                    },
+                    {
+                        "text_zh": "你应该多用护手霜。",
+                        "text_pinyin": "Nǐ yīnggāi duō yòng hùshǒu shuāng.",
+                        "text_en": "You should use more hand cream.",
+                        "score": 0.0,
+                        "feedback": "Practical but misses the emotional depth of the moment."
+                    },
+                    {
+                        "text_zh": "苹果真甜，在哪儿买的？",
+                        "text_pinyin": "Píngguǒ zhēn tián, zài nǎr mǎi de?",
+                        "text_en": "The apple is really sweet, where did you buy it?",
+                        "score": 0.0,
+                        "feedback": "Sidesteps a rare intimate moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看你说的。我老了嘛，手自然就这样了。不过你说得对，这双手确实没闲过。从你出生到现在，一直在忙。但只要你们过得好，忙一点也值得。",
+                "text_pinyin": "Kàn nǐ shuō de. Wǒ lǎo le ma, shǒu zìrán jiù zhèyàng le. Búguò nǐ shuō de duì, zhè shuāng shǒu quèshí méi xián guò. Cóng nǐ chūshēng dào xiànzài, yīzhí zài máng. Dàn zhǐyào nǐmen guò de hǎo, máng yīdiǎn yě zhíde.",
+                "text_en": "Listen to you. I'm getting old, of course my hands look like this. But you're right, these hands have never been idle. From the day you were born until now, always busy. But as long as you're all doing well, being busy is worth it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express what you've never said about her aging.",
+                "options": [
+                    {
+                        "text_zh": "妈，我有时候害怕你变老。不是因为你不漂亮了，是因为我突然意识到时间一直在走，而我陪你的时间越来越少了。以后我会多回来的。",
+                        "text_pinyin": "Mā, wǒ yǒu shíhou hàipà nǐ biàn lǎo. Bú shì yīnwèi nǐ bú piàoliang le, shì yīnwèi wǒ tūrán yìshí dào shíjiān yīzhí zài zǒu, ér wǒ péi nǐ de shíjiān yuè lái yuè shǎo le. Yǐhòu wǒ huì duō huí lái de.",
+                        "text_en": "Mom, sometimes I'm afraid of you getting older. Not because you're less beautiful, but because I suddenly realize time keeps moving, and the time I spend with you is less and less. I'll come back more often.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Raw and honest — names the fear of loss that most children feel but rarely express."
+                    },
+                    {
+                        "text_zh": "你要多注意身体，按时吃饭。",
+                        "text_pinyin": "Nǐ yào duō zhùyì shēntǐ, ànshí chīfàn.",
+                        "text_en": "Take care of your health, eat your meals on time.",
+                        "score": 0.0,
+                        "feedback": "Role-reversed caring that avoids the emotional core."
+                    },
+                    {
+                        "text_zh": "你不老，看起来还很年轻。",
+                        "text_pinyin": "Nǐ bù lǎo, kàn qǐlái hái hěn niánqīng.",
+                        "text_en": "You're not old, you still look very young.",
+                        "score": 0.0,
+                        "feedback": "Flattering but dishonest — deflects instead of meeting her honestly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "傻孩子，说什么害怕。妈在呢。来，再吃一块苹果。只要你还肯让我削苹果，我就不算老。",
+                "text_pinyin": "Shǎ háizi, shuō shénme hàipà. Mā zài ne. Lái, zài chī yī kuài píngguǒ. Zhǐyào nǐ hái kěn ràng wǒ xuē píngguǒ, wǒ jiù bú suàn lǎo.",
+                "text_en": "Silly child, what's there to be afraid of. Mom's right here. Come on, eat another piece of apple. As long as you still let me peel apples for you, I'm not old."
+            }
+        ],
+        "cultural_note": "In Chinese culture, peeling fruit for someone is one of the most common daily expressions of love — parents peel fruit for children well into adulthood. The image of a mother's hands changing over time carries deep emotional resonance. The phrase「只要你们过得好」(as long as you're all doing well) encapsulates the selfless parental love (父母之爱) that is central to Chinese family values."
+    }
+}

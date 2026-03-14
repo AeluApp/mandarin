@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond to the invitation.",
                 "options": [
-                    {"text_zh": "好啊！除了星期天下午，我都有空。你觉得去哪儿合适？", "text_pinyin": "hǎo a! chúle xīngqītiān xiàwǔ, wǒ dōu yǒu kòng. nǐ juéde qù nǎr héshì?", "text_en": "Great! I'm free except Sunday afternoon. Where do you think is good?", "score": 1.0, "register": "casual", "feedback": "Perfect — 除了...都 narrows your availability, and 合适 asks for their opinion naturally."},
-                    {"text_zh": "好啊，周末应该有空。去哪里好呢？", "text_pinyin": "hǎo a, zhōumò yīnggāi yǒu kòng. qù nǎlǐ hǎo ne?", "text_en": "Sure, I should be free this weekend. Where should we go?", "score": 0.6, "register": "casual", "feedback": "Enthusiastic but vague — 应该有空 is less useful than narrowing with 除了...都. Asking 去哪里 is fine but offering 合适 invites their opinion more naturally."},
-                    {"text_zh": "这个周末我还没想好，你先安排吧。", "text_pinyin": "zhège zhōumò wǒ hái méi xiǎnghǎo, nǐ xiān ānpái ba.", "text_en": "I haven't decided yet this weekend, you plan it.", "score": 0.4, "register": "noncommittal", "feedback": "Deflects the planning entirely. Friends expect engagement — share your availability and contribute with 除了...都."}
+                    {
+                        "text_zh": "好啊！除了星期天下午，我都有空。你觉得去哪儿合适？",
+                        "text_pinyin": "hǎo a! chúle xīngqītiān xiàwǔ, wǒ dōu yǒu kòng. nǐ juéde qù nǎr héshì?",
+                        "text_en": "Great! I'm free except Sunday afternoon. Where do you think is good?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect — 除了...都 narrows your availability, and 合适 asks for their opinion naturally."
+                    },
+                    {
+                        "text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。",
+                        "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.",
+                        "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the invitation, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "有的，在这里。",
+                        "text_pinyin": "yǒu de, zài zhèlǐ.",
+                        "text_en": "Yes, here it is.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the invitation, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Confirm the plan.",
                 "options": [
-                    {"text_zh": "认识！好的，那我们约星期六上午怎么样？我来定时间。", "text_pinyin": "rènshi! hǎo de, nà wǒmen yuē xīngqīliù shàngwǔ zěnmeyàng? wǒ lái dìng shíjiān.", "text_en": "Yes! OK, how about Saturday morning? I'll set the time.", "score": 1.0, "register": "casual", "feedback": "Natural — 约 for making plans, 我来定 shows initiative without being bossy."},
-                    {"text_zh": "行，听你们安排就好，我都可以。", "text_pinyin": "xíng, tīng nǐmen ānpái jiù hǎo, wǒ dōu kěyǐ.", "text_en": "Sure, I'll go along with whatever you plan, I'm flexible.", "score": 0.6, "register": "casual", "feedback": "Agreeable but entirely passive — suggesting a time with 约 and taking initiative with 我来定 shows real investment in the plan."},
-                    {"text_zh": "我不太想去那个咖啡馆，没什么兴趣。", "text_pinyin": "wǒ bù tài xiǎng qù nàge kāfēiguǎn, méi shénme xìngqù.", "text_en": "I don't really want to go to that café, not very interested.", "score": 0.3, "register": "reluctant", "feedback": "Rejecting without suggesting an alternative feels awkward. If declining, offer another idea with 要不我们去..."}
+                    {
+                        "text_zh": "认识！好的，那我们约星期六上午怎么样？我来定时间。",
+                        "text_pinyin": "rènshi! hǎo de, nà wǒmen yuē xīngqīliù shàngwǔ zěnmeyàng? wǒ lái dìng shíjiān.",
+                        "text_en": "Yes! OK, how about Saturday morning? I'll set the time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural — 约 for making plans, 我来定 shows initiative without being bossy."
+                    },
+                    {
+                        "text_zh": "可以换大一号的吗？",
+                        "text_pinyin": "kěyǐ huàn dà yī hào de ma?",
+                        "text_en": "Can I exchange for one size bigger?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to confirm the plan, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "给您。请问大概需要多长时间？",
+                        "text_pinyin": "gěi nín. qǐngwèn dàgài xūyào duō cháng shíjiān?",
+                        "text_en": "Here you go. About how long will it take?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to confirm the plan, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

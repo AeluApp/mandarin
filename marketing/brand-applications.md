@@ -1,4 +1,4 @@
-# Brand Applications — Mandarin
+# Brand Applications — Aelu
 
 This document specifies how to apply the brand consistently across every touchpoint. Reference BRAND.md for the underlying identity system and positioning.md for voice and messaging. This document covers practical application — dimensions, colors, fonts, spacing — so that anyone can create on-brand assets without guessing.
 
@@ -35,7 +35,7 @@ Use these exact values. Do not approximate.
 | --font-body | Source Serif 4, Noto Serif SC, Georgia, serif | Body copy, UI text, descriptions |
 | --font-hanzi | Noto Serif SC, PingFang SC, Hiragino Sans GB, serif | Chinese characters (standalone, featured) |
 
-Note: The app uses Source Serif 4 for body text, not Source Sans 3. All external assets should match the production typefaces. If Source Serif 4 is unavailable in a design tool, Georgia is the approved fallback. Never use a sans-serif font for body text in Mandarin brand materials.
+Note: The app uses Source Serif 4 for body text, not Source Sans 3. All external assets should match the production typefaces. If Source Serif 4 is unavailable in a design tool, Georgia is the approved fallback. Never use a sans-serif font for body text in Aelu brand materials.
 
 ---
 
@@ -43,22 +43,22 @@ Note: The app uses Source Serif 4 for body text, not Source Sans 3. All external
 
 ### Profile Images
 
-All profile images use the same core design: the wordmark "Mandarin" set in Cormorant Garamond on the base color background.
+All profile images use the same core design: the wordmark "Aelu" set in Cormorant Garamond on the base color background.
 
 | Platform | Dimensions | Content | Notes |
 |----------|-----------|---------|-------|
-| Twitter/X | 400x400px | Wordmark "Mandarin" centered | Cormorant Garamond 48pt, color #2A3650, bg #F2EBE0 |
+| Twitter/X | 400x400px | Wordmark "Aelu" centered | Cormorant Garamond 48pt, color #2A3650, bg #F2EBE0 |
 | LinkedIn | 400x400px | Same as Twitter | Identical file |
-| Instagram | 320x320px | Wordmark "Mandarin" centered | Cormorant Garamond 40pt (slightly larger relative to canvas for legibility at small sizes) |
-| Discord | 512x512px | Wordmark "Mandarin" centered | Cormorant Garamond 56pt |
-| YouTube | 800x800px | Wordmark "Mandarin" centered | Cormorant Garamond 80pt |
+| Instagram | 320x320px | Wordmark "Aelu" centered | Cormorant Garamond 40pt (slightly larger relative to canvas for legibility at small sizes) |
+| Discord | 512x512px | Wordmark "Aelu" centered | Cormorant Garamond 56pt |
+| YouTube | 800x800px | Wordmark "Aelu" centered | Cormorant Garamond 80pt |
 | Favicon | 32x32px + 16x16px | The mark character 漫 | Noto Serif SC Bold, color #946070, bg #F2EBE0. Must be legible at 16px — test at actual size before committing |
 
 **Profile image specifications:**
 
 - Background: solid #F2EBE0 (no texture, no gradient — profile images are too small for subtlety)
 - Text: #2A3650 (--color-text light)
-- Vertical alignment: center the text optically, not mathematically — the descender on "d" in "Mandarin" pulls the visual center down, so shift the text block up ~2% of canvas height
+- Vertical alignment: center the text optically, not mathematically — the descender on "l" in "Aelu" can affect the visual center, so shift the text block up ~2% of canvas height
 - No border, no circle crop styling (platforms handle this)
 - Export as PNG with transparency off
 
@@ -85,13 +85,13 @@ All banners use the same visual concept adapted to each platform's dimensions: w
 2. A single 1px horizontal line in #D8D0C4 (--color-divider) spanning the center 60% of the canvas width, vertically centered. This is the horizon-line motif.
 3. Tagline "Every word you look up becomes practice." set in Cormorant Garamond, 24-36pt depending on canvas size, color #2A3650, centered above the horizon line with 16px gap.
 4. A short (48px wide) horizontal accent bar in #946070 (--color-accent) positioned 12px below the horizon line, centered. This is the brand's visual signature — it echoes the horizon-line dividers in the app.
-5. No wordmark on the banner (the profile image already says "Mandarin" and sits next to the banner on every platform).
+5. No wordmark on the banner (the profile image already says "Aelu" and sits next to the banner on every platform).
 
 **Platform-specific adjustments:**
 - Twitter/X: Tagline at 28pt. Horizon line at vertical center of safe area (y=160px from top).
 - LinkedIn: Tagline at 24pt. Everything shifted up 40px from true center to account for the profile card overlap.
 - YouTube: Tagline at 36pt (large canvas). All elements within the 1546x423 mobile safe area. Test at mobile crop before publishing.
-- Discord: Tagline at 24pt. Can optionally include "mandarinapp.com" in Source Serif 4 12pt, color #8890A0, bottom-right corner with 16px margin.
+- Discord: Tagline at 24pt. Can optionally include "aeluapp.com" in Source Serif 4 12pt, color #8890A0, bottom-right corner with 16px margin.
 
 **What NOT to include in banners:**
 - No screenshots or app UI
@@ -115,7 +115,7 @@ Purpose: Vocabulary teaching, word of the day, interesting character breakdowns.
 - Pinyin: Source Serif 4, 28pt, color #5A6678 (--color-text-dim). Centered, 16px below the character. Tone marks, never tone numbers.
 - English meaning: Source Serif 4, 22pt, color #8890A0 (--color-text-faint). Centered, 12px below pinyin.
 - Horizon line: 1px, #D8D0C4, 48px wide, centered, 24px below the English text.
-- Wordmark "Mandarin": Cormorant Garamond, 14pt, color #8890A0, bottom-right corner, 24px margin from edges.
+- Wordmark "Aelu": Cormorant Garamond, 14pt, color #8890A0, bottom-right corner, 24px margin from edges.
 
 Example content for 学 (xue):
 ```
@@ -123,7 +123,7 @@ Example content for 学 (xue):
 xue
 to study; to learn
 ─
-                                          Mandarin
+                                          Aelu
 ```
 
 **Layout 2 — Study tip**
@@ -179,9 +179,9 @@ Purpose: Observations from the learning experience, quotes from research, user c
 
 **Final slide — CTA:**
 - Background: #F2EBE0
-- "Mandarin" in Cormorant Garamond 36pt, color #2A3650, centered.
+- "Aelu" in Cormorant Garamond 36pt, color #2A3650, centered.
 - Tagline below in Source Serif 4 18pt, color #5A6678.
-- "Free for HSK 1-2. mandarinapp.com" in Source Serif 4 16pt, color #8890A0, centered below tagline.
+- "Free for HSK 1-2. aeluapp.com" in Source Serif 4 16pt, color #8890A0, centered below tagline.
 - Horizon line (48px, #D8D0C4) between wordmark and tagline.
 
 #### Story / Reel Template (Instagram, TikTok)
@@ -216,8 +216,8 @@ Email clients cannot reliably load web fonts. All email typography must use syst
 - Link color: #946070 (--color-accent). Underlined on hover only.
 - Padding: 24px left/right, 32px top/bottom
 - No header image. The email should feel like a personal letter, not a newsletter. Start with text.
-- From name: "Mandarin" for all communications. Consistent, brand-centric, no personal attribution needed.
-- Footer: "Mandarin" wordmark in Georgia 14pt, color #8890A0. Below that: unsubscribe link, mailing address (required by CAN-SPAM). No social media icons.
+- From name: "Aelu" for all communications. Consistent, brand-centric, no personal attribution needed.
+- Footer: "Aelu" wordmark in Georgia 14pt, color #8890A0. Below that: unsubscribe link, mailing address (required by CAN-SPAM). No social media icons.
 
 **Section patterns:**
 
@@ -313,7 +313,7 @@ The character 文 (wen, writing/culture) simplified to its essential strokes —
 **Apple App Store / Google Play Store — 4,000 character limit:**
 
 ```
-Mandarin turns your Chinese reading into targeted practice. 27 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2.
+Aelu turns your Chinese reading into targeted practice. 27 drill types, honest HSK diagnostics, adaptive scheduling. Free for HSK 1-2.
 
 Read a Chinese passage. Tap a word you don't know. That word enters your drill queue — not as a flashcard, but as practice across tone discrimination, cloze deletion, audio matching, sentence construction, and more. The cleanup loop connects reading to drilling automatically.
 
@@ -336,21 +336,21 @@ BUILT FOR ADULTS
 No XP. No hearts. No cartoon mascots. No streak-shame notifications. Warm, calm interface designed to feel like a library, not an arcade.
 
 Free: All HSK 1-2 content, no time limit.
-Full access: $12/month. 27 drill types, HSK 1-6 content, graded reader, listening practice, speaking drills, full diagnostics.
+Full access: $14.99/month. 27 drill types, HSK 1-6 content, graded reader, listening practice, speaking drills, full diagnostics.
 
 Built by learners who use the app daily for their own Mandarin study.
 ```
 
 Character count: ~1,580 (well within the 4,000 limit, leaving room for localized additions).
 
-**First line ("Mandarin turns your Chinese reading...") is critical** — this is what users see before tapping "...more" on both iOS and Android. It must communicate the core value proposition in one sentence.
+**First line ("Aelu turns your Chinese reading...") is critical** — this is what users see before tapping "...more" on both iOS and Android. It must communicate the core value proposition in one sentence.
 
 ### Feature Graphic (Google Play)
 
 1024x500px.
 
 - Background: #F2EBE0 (solid, no texture)
-- Left side (40% of width): "Mandarin" in Cormorant Garamond 48pt, color #2A3650, left-aligned, vertically centered. Below it: "Every word you look up becomes practice." in Source Serif 4 18pt (Georgia fallback), color #5A6678.
+- Left side (40% of width): "Aelu" in Cormorant Garamond 48pt, color #2A3650, left-aligned, vertically centered. Below it: "Every word you look up becomes practice." in Source Serif 4 18pt (Georgia fallback), color #5A6678.
 - Right side (60% of width): A single device mockup showing the drill screen with a large Chinese character visible. Device frame in warm tones. Positioned so the device extends slightly below the bottom edge of the graphic (cropped, not floating).
 - Horizon line: 1px, #D8D0C4, spanning from left text to right device, vertically centered.
 - No other decorative elements.
@@ -367,10 +367,10 @@ Standard 16:9 (1920x1080px). Export as PDF for sharing, Keynote/Google Slides fo
 
 **Title Slide:**
 - Background: #F2EBE0
-- "Mandarin" in Cormorant Garamond, 72pt, color #2A3650, centered horizontally, positioned at 40% from top
+- "Aelu" in Cormorant Garamond, 72pt, color #2A3650, centered horizontally, positioned at 40% from top
 - Horizon line: 1px, #D8D0C4, 48px wide, centered, 24px below the wordmark
 - Tagline: "Every word you look up becomes practice." in Source Serif 4, 24pt, color #5A6678, centered, 16px below horizon line
-- No subtitle, no date, no "presented by." If context requires attribution, add "Mandarin" in Source Serif 4 14pt, color #8890A0, bottom-center, 40px from bottom edge.
+- No subtitle, no date, no "presented by." If context requires attribution, add "Aelu" in Source Serif 4 14pt, color #8890A0, bottom-center, 40px from bottom edge.
 
 **Content Slide:**
 - Background: #F2EBE0
@@ -404,7 +404,7 @@ Standard 16:9 (1920x1080px). Export as PDF for sharing, Keynote/Google Slides fo
 
 **Closing Slide:**
 - Background: #F2EBE0
-- "Mandarin" in Cormorant Garamond, 48pt, color #2A3650, centered, positioned at 35% from top
+- "Aelu" in Cormorant Garamond, 48pt, color #2A3650, centered, positioned at 35% from top
 - Horizon line: 48px, #D8D0C4, centered, 20px below wordmark
 - URL: Source Serif 4, 20pt, color #946070, centered, 24px below horizon
 - Email: Source Serif 4, 18pt, color #5A6678, centered, 12px below URL
@@ -428,13 +428,13 @@ Standard 16:9 (1920x1080px). Export as PDF for sharing, Keynote/Google Slides fo
 Standard: 3.5 x 2 inches (89 x 51 mm). Bleed: 0.125 inches per side.
 
 **Front:**
-- "Mandarin" in Cormorant Garamond, 18pt, color #2A3650, centered both horizontally and vertically
+- "Aelu" in Cormorant Garamond, 18pt, color #2A3650, centered both horizontally and vertically
 - Horizon line: 1px, #D8D0C4, 24px wide, centered, 8px below the wordmark
 - Nothing else on the front
 
 **Back:**
-- mandarinapp.com — Source Serif 4, 11pt, color #2A3650, left-aligned, 24px from left edge, 20px from top
-- hello@mandarinapp.com — Source Serif 4, 10pt, color #5A6678, left-aligned, same margin, 6px below URL
+- aeluapp.com — Source Serif 4, 11pt, color #2A3650, left-aligned, 24px from left edge, 20px from top
+- hello@aeluapp.com — Source Serif 4, 10pt, color #5A6678, left-aligned, same margin, 6px below URL
 - "Patient Mandarin study." — Source Serif 4 Italic, 9pt, color #8890A0, left-aligned, same margin, bottom of card with 20px bottom margin
 
 **Stock and printing:**
@@ -450,12 +450,12 @@ Standard: 3.5 x 2 inches (89 x 51 mm). Bleed: 0.125 inches per side.
 **Design:**
 - Background: #F2EBE0 (warm linen)
 - Center: the character 学 (xue, to study) in Noto Serif SC Bold, 48pt equivalent, color #946070
-- Below the character: "Mandarin" in Cormorant Garamond, 10pt, color #5A6678
+- Below the character: "Aelu" in Cormorant Garamond, 10pt, color #5A6678
 - Matte laminate finish (not glossy — matches the uncoated aesthetic)
 
 **Alternative sticker option:**
 - Same dimensions
-- "Mandarin" wordmark in Cormorant Garamond, 14pt, centered, color #2A3650
+- "Aelu" wordmark in Cormorant Garamond, 14pt, centered, color #2A3650
 - Horizon line below: 24px, #D8D0C4
 - No Chinese character (for contexts where the character might confuse non-Chinese-reading audiences)
 
@@ -500,15 +500,15 @@ Duration: 3-5 seconds each.
 
 **Intro card:**
 1. Frame starts as solid #F2EBE0
-2. "Mandarin" wordmark fades in with upward drift (translateY 8px to 0, duration 0.5s, ease-out). Cormorant Garamond 48pt, color #2A3650. Centered.
+2. "Aelu" wordmark fades in with upward drift (translateY 8px to 0, duration 0.5s, ease-out). Cormorant Garamond 48pt, color #2A3650. Centered.
 3. 0.5s pause.
 4. Tagline fades in below (same animation, 0.3s duration). Source Serif 4 20pt, color #5A6678.
 5. Hold for 1.5s, then cut to content.
 
 **Outro card:**
 1. Content fades to solid #F2EBE0 (0.3s crossfade)
-2. "Mandarin" wordmark appears (same animation as intro, or simply present without animation)
-3. URL below: "mandarinapp.com" in Source Serif 4, 18pt, color #946070
+2. "Aelu" wordmark appears (same animation as intro, or simply present without animation)
+3. URL below: "aeluapp.com" in Source Serif 4, 18pt, color #946070
 4. "Free for HSK 1-2." in Source Serif 4, 16pt, color #8890A0, below the URL
 5. Hold for 3s.
 
@@ -520,7 +520,7 @@ Duration: 3-5 seconds each.
 
 ### Blog Posts
 
-Blog posts on the Mandarin website or any publishing platform (Substack, Medium, personal site).
+Blog posts on the Aelu website or any publishing platform (Substack, Medium, personal site).
 
 **Layout:**
 - Max width: 700px, centered

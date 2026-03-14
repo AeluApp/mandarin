@@ -1,0 +1,196 @@
+{
+    "title": "The Wire Transfer Artist",
+    "title_zh": "汇款艺术家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_4_01_v0",
+    "tree": {
+        "setup": "A quiet Tuesday morning at a bank branch near the old bookshop district. Teller Lin Jie has memorized the routing numbers for every major bank in the country the way some people memorize poetry. She considers wire transfers a minor art form.",
+        "setup_zh": "旧书店区附近的银行支行，安静的周二早晨。柜员林洁把全国每家主要银行的行号都记得滚瓜烂熟，就像有些人背诗一样。她觉得汇款是一种小小的艺术。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早上好！请问您需要办什么业务？",
+                "text_pinyin": "zǎoshang hǎo! qǐngwèn nín xūyào bàn shénme yèwù?",
+                "text_en": "Good morning! What can I help you with?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her you need to send money to a friend.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想给朋友汇一笔钱。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng gěi péngyǒu huì yì bǐ qián.",
+                        "text_en": "Hello, I'd like to wire some money to a friend.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Nice use of 汇 — the proper verb for wire transfers. Lin Jie is already reaching for her forms."
+                    },
+                    {
+                        "text_zh": "我要转账。",
+                        "text_pinyin": "wǒ yào zhuǎn zhàng.",
+                        "text_en": "I need to transfer money.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "转账 works fine for transfers. She'll ask for details next."
+                    },
+                    {
+                        "text_zh": "我想给朋友一些钱，怎么办？",
+                        "text_pinyin": "wǒ xiǎng gěi péngyǒu yìxiē qián, zěnme bàn?",
+                        "text_en": "I want to give my friend some money — how do I do that?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A bit vague — she'll need to narrow down whether you mean cash, transfer, or WeChat Pay. But she's patient."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。请问您朋友的银行是哪家？您有他的账号吗？",
+                "text_pinyin": "hǎo de. qǐngwèn nín péngyǒu de yínháng shì nǎ jiā? nín yǒu tā de zhànghào ma?",
+                "text_en": "OK. Which bank does your friend use? Do you have their account number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide the bank name and say you have the account number.",
+                "options": [
+                    {
+                        "text_zh": "他在工商银行开的户。账号我有，在手机里存着呢。",
+                        "text_pinyin": "tā zài Gōngshāng Yínháng kāi de hù. zhànghào wǒ yǒu, zài shǒujī lǐ cún zhe ne.",
+                        "text_en": "He has an account at ICBC. I have the account number saved on my phone.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lin Jie nods approvingly — prepared customers are her favorite kind of customers."
+                    },
+                    {
+                        "text_zh": "我有账号。他的银行好像是建设银行。",
+                        "text_pinyin": "wǒ yǒu zhànghào. tā de yínháng hǎoxiàng shì Jiànshè Yínháng.",
+                        "text_en": "I have the account number. His bank seems to be China Construction Bank.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "好像 suggests a bit of uncertainty, but having the account number is what matters."
+                    },
+                    {
+                        "text_zh": "我不确定他用哪家银行。我可以打电话问他吗？",
+                        "text_pinyin": "wǒ bú quèdìng tā yòng nǎ jiā yínháng. wǒ kěyǐ dǎ diànhuà wèn tā ma?",
+                        "text_en": "I'm not sure which bank he uses. Can I call and ask him?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Of course you can — Lin Jie gestures toward the lobby chairs with a gentle「请便。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "工商银行，没问题。您要汇多少钱？跨行转账可能需要一点手续费。",
+                "text_pinyin": "Gōngshāng Yínháng, méi wèntí. nín yào huì duōshǎo qián? kuà háng zhuǎn zhàng kěnéng xūyào yìdiǎn shǒuxù fèi.",
+                "text_en": "ICBC, no problem. How much do you want to transfer? Cross-bank transfers may have a small handling fee."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "State the amount and ask about the fee.",
+                "options": [
+                    {
+                        "text_zh": "我要汇两千块。手续费大概多少？",
+                        "text_pinyin": "wǒ yào huì liǎngqiān kuài. shǒuxù fèi dàgài duōshǎo?",
+                        "text_en": "I want to transfer two thousand yuan. About how much is the fee?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Smart to ask about the fee upfront. Lin Jie respects a customer who reads the fine print."
+                    },
+                    {
+                        "text_zh": "三千块。有手续费没关系。",
+                        "text_pinyin": "sānqiān kuài. yǒu shǒuxù fèi méi guānxi.",
+                        "text_en": "Three thousand yuan. The fee is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Decisive. She processes it efficiently, though she seems almost disappointed you didn't ask for details."
+                    },
+                    {
+                        "text_zh": "手续费贵不贵？如果太贵的话我用微信转。",
+                        "text_pinyin": "shǒuxù fèi guì bú guì? rúguǒ tài guì de huà wǒ yòng Wēixìn zhuǎn.",
+                        "text_en": "Is the fee expensive? If it's too much I'll use WeChat.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lin Jie's expression barely shifts, but you sense a flicker of wounded pride — the suggestion that WeChat could replace her artistry."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两千块的话，手续费只要两块钱。请您确认一下账号和金额，然后在这里签个字。",
+                "text_pinyin": "liǎngqiān kuài de huà, shǒuxù fèi zhǐ yào liǎng kuài qián. qǐng nín quèrèn yíxià zhànghào hé jīn'é, ránhòu zài zhèlǐ qiān gè zì.",
+                "text_en": "For two thousand, the fee is just two yuan. Please confirm the account number and amount, then sign here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the details and sign.",
+                "options": [
+                    {
+                        "text_zh": "好的，我看了，账号和金额都对。我签在这里吗？",
+                        "text_pinyin": "hǎo de, wǒ kàn le, zhànghào hé jīn'é dōu duì. wǒ qiān zài zhèlǐ ma?",
+                        "text_en": "OK, I've checked — the account number and amount are correct. Sign here?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thorough verification before signing — Lin Jie gives you the smallest nod of professional admiration."
+                    },
+                    {
+                        "text_zh": "没问题，我签字。",
+                        "text_pinyin": "méi wèntí, wǒ qiān zì.",
+                        "text_en": "No problem, I'll sign.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick and agreeable. The pen glides, the form is complete."
+                    },
+                    {
+                        "text_zh": "签在哪里？这个表格好复杂。",
+                        "text_pinyin": "qiān zài nǎlǐ? zhège biǎogé hǎo fùzá.",
+                        "text_en": "Where do I sign? This form is so complicated.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lin Jie points to the line with practiced precision. She's heard this complaint roughly four thousand times."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，汇款已经办好了。大概两个小时到账。这是您的回执单，请收好。",
+                "text_pinyin": "hǎo le, huìkuǎn yǐjīng bàn hǎo le. dàgài liǎng gè xiǎoshí dào zhàng. zhè shì nín de huízhí dān, qǐng shōu hǎo.",
+                "text_en": "Done — the transfer has been processed. It should arrive in about two hours. Here's your receipt."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her for her help.",
+                "options": [
+                    {
+                        "text_zh": "太感谢了！你办事又快又清楚。",
+                        "text_pinyin": "tài gǎnxiè le! nǐ bànshì yòu kuài yòu qīngchǔ.",
+                        "text_en": "Thank you so much! You're both fast and clear.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lin Jie allows herself the smallest smile. She places your receipt on the counter like someone framing a small painting."
+                    },
+                    {
+                        "text_zh": "谢谢你！",
+                        "text_pinyin": "xièxie nǐ!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple and sincere. She wishes you a good day."
+                    },
+                    {
+                        "text_zh": "好的，再见。",
+                        "text_pinyin": "hǎo de, zàijiàn.",
+                        "text_en": "OK, bye.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Functional but chilly. Lin Jie's stamp pad seems to close a little more firmly than necessary."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Despite the rise of mobile payments like WeChat Pay and Alipay, bank wire transfers (汇款, huìkuǎn) remain important for larger sums. Cross-bank fees (跨行手续费) are usually minimal but worth asking about."
+    }
+}

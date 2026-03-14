@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell the driver to go to the train station.",
                 "options": [
-                    {"text_zh": "请去火车站。", "text_pinyin": "qǐng qù huǒchē zhàn.", "text_en": "Please go to the train station.", "score": 1.0, "register": "neutral", "feedback": "Perfect — polite and clear."},
-                    {"text_zh": "火车站。", "text_pinyin": "huǒchē zhàn.", "text_en": "Train station.", "score": 0.7, "register": "casual", "feedback": "Understood, but adding 请去 is more polite."},
-                    {"text_zh": "你好，我想去火车站。", "text_pinyin": "nǐ hǎo, wǒ xiǎng qù huǒchē zhàn.", "text_en": "Hi, I'd like to go to the train station.", "score": 0.8, "register": "polite", "feedback": "Polite and clear, but in taxi contexts 请去 is more natural and concise. Brevity is valued in casual service situations."}
+                    {
+                        "text_zh": "请去火车站。",
+                        "text_pinyin": "qǐng qù huǒchē zhàn.",
+                        "text_en": "Please go to the train station.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — polite and clear."
+                    },
+                    {
+                        "text_zh": "谢谢！三点要见朋友，我得走了。",
+                        "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.",
+                        "text_en": "Thanks! I'm meeting a friend at three, I have to go.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell the driver to go to the train station, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，请问地铁站在哪儿？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn dìtiě zhàn zài nǎr?",
+                        "text_en": "Hello, excuse me, where is the subway station?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell the driver to go to the train station, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Acknowledge and thank them.",
                 "options": [
-                    {"text_zh": "好的，谢谢。", "text_pinyin": "hǎo de, xièxie.", "text_en": "OK, thanks.", "score": 1.0, "register": "neutral", "feedback": "Natural and polite."},
-                    {"text_zh": "谢谢师傅。", "text_pinyin": "xièxie shīfu.", "text_en": "Thanks, driver.", "score": 1.0, "register": "familiar", "feedback": "Excellent — 师傅 (shīfu) is the friendly term for a taxi driver."},
-                    {"text_zh": "嗯。", "text_pinyin": "ēn.", "text_en": "Mm.", "score": 0.4, "register": "minimal", "feedback": "A bit cold. A 谢谢 goes a long way."}
+                    {
+                        "text_zh": "我要一份炒饭，谢谢。",
+                        "text_pinyin": "wǒ yào yī fèn chǎofàn, xièxie.",
+                        "text_en": "I'd like one serving of fried rice, thank you.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to acknowledge and thank them, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "一位。",
+                        "text_pinyin": "yī wèi.",
+                        "text_en": "One person.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to acknowledge and thank them, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Natural and polite."
+                    }
                 ]
             }
         ],

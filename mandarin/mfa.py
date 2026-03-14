@@ -8,10 +8,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import secrets
 import string
 
 import pyotp
+
+logger = logging.getLogger(__name__)
 
 
 def generate_totp_secret() -> str:
@@ -22,13 +25,16 @@ def generate_totp_secret() -> str:
 def get_provisioning_uri(secret: str, email: str) -> str:
     """Return an otpauth:// URI for QR code generation."""
     totp = pyotp.TOTP(secret)
-    return totp.provisioning_uri(name=email, issuer_name="Mandarin")
+    return totp.provisioning_uri(name=email, issuer_name="Aelu")
 
 
 def verify_totp(secret: str, code: str) -> bool:
     """Verify a TOTP code with 1-step window for clock skew."""
     totp = pyotp.TOTP(secret)
-    return totp.verify(code, valid_window=1)
+    result = totp.verify(code, valid_window=1)
+    if not result:
+        logger.info("TOTP verification failed (possible clock skew or wrong code)")
+    return result
 
 
 def generate_backup_codes(n: int = 8) -> list[str]:
@@ -57,5 +63,7 @@ def verify_backup_code(hashed_json: str, code: str) -> tuple[bool, str]:
 
     if code_hash in hashes:
         hashes.remove(code_hash)
+        logger.info("Backup code redeemed (%d remaining)", len(hashes))
         return True, json.dumps(hashes)
+    logger.info("Backup code verification failed (invalid or already used)")
     return False, hashed_json

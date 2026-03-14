@@ -1,0 +1,124 @@
+{
+    "title": "The Hotel Concierge Sommelier",
+    "title_zh": "酒店礼宾部的早餐学者",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_4_00_v0",
+    "tree": {
+        "setup": "The lobby of a mid-range hotel in Hangzhou, where the concierge, Mr. Ye, has PhD-level knowledge of local breakfast options. He can rank every congee shop within a three-kilometer radius by texture, and has strong opinions about the proper temperature of soy milk. You're checking in and he's already mentally planning your morning.",
+        "setup_zh": "杭州一家中档酒店的大堂，礼宾员叶先生对当地早餐选项拥有博士级的知识。他能按口感给三公里范围内的每家粥店打分，对豆浆的适当温度有坚定的看法。你正在办理入住，他已经在心里规划你的早晨了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！您好，请问您有预订吗？",
+                "text_pinyin": "huānyíng guānglín! nín hǎo, qǐngwèn nín yǒu yùdìng ma?",
+                "text_en": "Welcome! Hello, do you have a reservation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check in with your reservation.",
+                "options": [
+                    {
+                        "text_zh": "你好，我在网上订了一间房。预订人姓张，住两个晚上。",
+                        "text_pinyin": "nǐ hǎo, wǒ zài wǎng shàng dìng le yì jiān fáng. yùdìng rén xìng Zhāng, zhù liǎng gè wǎnshang.",
+                        "text_en": "Hello, I booked a room online. Reservation under Zhang, two nights.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Name, booking method, and duration — Mr. Ye finds it in three keystrokes. His approval is subtle but real."
+                    },
+                    {
+                        "text_zh": "有预订。姓张。",
+                        "text_pinyin": "yǒu yùdìng. xìng Zhāng.",
+                        "text_en": "Yes, reservation. Surname Zhang.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He finds it. Efficient."
+                    },
+                    {
+                        "text_zh": "我订了房间，但是我忘了订单号了。",
+                        "text_pinyin": "wǒ dìng le fángjiān, dànshì wǒ wàng le dìngdān hào le.",
+                        "text_en": "I booked a room, but I forgot the booking number.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Ye is unfazed. He can search by name, phone, or the look of polite confusion on your face."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到了，张先生。标准双人房，两晚。请给我看一下您的身份证。对了，我们的早餐是七点到九点半，但是我个人建议您去楼下那条巷子里的老粥店。",
+                "text_pinyin": "zhǎo dào le, Zhāng xiānshēng. biāozhǔn shuāngrén fáng, liǎng wǎn. qǐng gěi wǒ kàn yíxià nín de shēnfènzhèng. duìle, wǒmen de zǎocān shì qī diǎn dào jiǔ diǎn bàn, dànshì wǒ gèrén jiànyì nín qù lóu xià nà tiáo xiàngzi lǐ de lǎo zhōu diàn.",
+                "text_en": "Found it, Mr. Zhang. Standard double room, two nights. Please let me see your ID. By the way, our breakfast is 7 to 9:30, but I personally recommend the old congee shop in the alley downstairs."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the congee shop and hotel facilities.",
+                "options": [
+                    {
+                        "text_zh": "老粥店？听起来不错！什么粥比较推荐？还有请问酒店有洗衣服务吗？",
+                        "text_pinyin": "lǎo zhōu diàn? tīng qǐlái búcuò! shénme zhōu bǐjiào tuījiàn? hái yǒu qǐngwèn jiǔdiàn yǒu xǐ yī fúwù ma?",
+                        "text_en": "Old congee shop? Sounds great! Which congee do you recommend? Also, does the hotel have laundry service?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Engaging with his passion AND asking practical questions — Mr. Ye could talk about congee for an hour, but he'll answer about laundry first."
+                    },
+                    {
+                        "text_zh": "谢谢推荐。WiFi密码是什么？",
+                        "text_pinyin": "xièxie tuījiàn. WiFi mìmǎ shì shénme?",
+                        "text_en": "Thanks for the recommendation. What's the WiFi password?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical. He writes it on a card while mentally filing away that you skipped the congee question."
+                    },
+                    {
+                        "text_zh": "我就吃酒店的早餐吧。",
+                        "text_pinyin": "wǒ jiù chī jiǔdiàn de zǎocān ba.",
+                        "text_en": "I'll just eat the hotel breakfast.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Ye's face barely changes, but his congee recommendation dies a small, quiet death."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "他们的皮蛋瘦肉粥是一绝。洗衣服务有的，价目表在房间里。这是您的房卡，八楼812房间。电梯在右边。需要帮您拿行李吗？",
+                "text_pinyin": "tāmen de pídàn shòuròu zhōu shì yì jué. xǐ yī fúwù yǒu de, jiàmù biǎo zài fángjiān lǐ. zhè shì nín de fáng kǎ, bā lóu bā yāo èr fángjiān. diàntī zài yòubian. xūyào bāng nín ná xíngli ma?",
+                "text_en": "Their preserved egg and lean pork congee is exceptional. Laundry service is available — price list is in the room. Here's your key card, room 812, eighth floor. Elevator's on the right. Need help with luggage?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond and ask about local sightseeing.",
+                "options": [
+                    {
+                        "text_zh": "不用了，我自己来。对了，从这里去西湖怎么去最方便？",
+                        "text_pinyin": "búyòng le, wǒ zìjǐ lái. duìle, cóng zhèlǐ qù Xī Hú zěnme qù zuì fāngbiàn?",
+                        "text_en": "No need, I'll manage. By the way, what's the easiest way to get to West Lake from here?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Mr. Ye has been waiting for this question his entire shift. He produces a hand-drawn map that includes not just West Lake, but the three best photo spots at sunset."
+                    },
+                    {
+                        "text_zh": "不用，谢谢。",
+                        "text_pinyin": "búyòng, xièxie.",
+                        "text_en": "No thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods and watches you wheel your suitcase to the elevator."
+                    },
+                    {
+                        "text_zh": "行李太重了，帮我拿吧。",
+                        "text_pinyin": "xíngli tài zhòng le, bāng wǒ ná ba.",
+                        "text_en": "Luggage is too heavy — help me please.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He lifts it with one hand. Concierges have hidden reserves of strength, developed from years of carrying tourists' overpacked suitcases."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hotels require ID (身份证 or passport) at check-in. 房卡 (fáng kǎ) is the key card. Many concierges have genuinely excellent local knowledge — asking for personal recommendations (个人推荐) rather than just tourist highlights often yields the best experiences."
+    }
+}

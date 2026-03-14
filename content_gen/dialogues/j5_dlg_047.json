@@ -1,0 +1,89 @@
+{
+    "title": "What Today Gave Me",
+    "title_zh": "今天给了我什么",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaoming are walking home after a long but uneventful day. The evening air is cool and the streets are quiet.",
+        "setup_zh": "你和朋友小明在漫长但平淡的一天后走路回家。傍晚的空气凉爽，街道很安静。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天什么特别的事都没发生。开了两个会，写了几封邮件，吃了一碗不好不坏的面。但不知道为什么，走在回家的路上，我觉得今天其实还不错。",
+                "text_pinyin": "Jīntiān shénme tèbié de shì dōu méi fāshēng. Kāi le liǎng ge huì, xiě le jǐ fēng yóujiàn, chī le yī wǎn bù hǎo bù huài de miàn. Dàn bù zhīdào wèi shénme, zǒu zài huí jiā de lù shang, wǒ juéde jīntiān qíshí hái búcuò.",
+                "text_en": "Nothing special happened today. Had two meetings, wrote a few emails, ate a bowl of so-so noodles. But I don't know why, walking home now, I feel like today was actually not bad."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explore why an ordinary day can feel good.",
+                "options": [
+                    {
+                        "text_zh": "也许正因为没什么特别的事，你才有空间感受普通的日子。不是每天都要有大事发生。有时候一天结束时觉得平安、舒服，就已经是好日子了。",
+                        "text_pinyin": "Yěxǔ zhèng yīnwèi méi shénme tèbié de shì, nǐ cái yǒu kōngjiān gǎnshòu pǔtōng de rìzi. Bú shì měi tiān dōu yào yǒu dà shì fāshēng. Yǒu shíhou yī tiān jiéshù shí juéde píng'ān, shūfu, jiù yǐjīng shì hǎo rìzi le.",
+                        "text_en": "Maybe it's precisely because nothing special happened that you had space to feel an ordinary day. Not every day needs big events. Sometimes ending the day feeling safe and comfortable is already a good day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Quietly profound — redefines what makes a day good."
+                    },
+                    {
+                        "text_zh": "你今天那碗面在哪儿吃的？好吃吗？",
+                        "text_pinyin": "Nǐ jīntiān nà wǎn miàn zài nǎr chī de? Hǎochī ma?",
+                        "text_en": "Where did you eat that bowl of noodles? Was it good?",
+                        "score": 0.0,
+                        "feedback": "Fixates on detail rather than engaging with the feeling."
+                    },
+                    {
+                        "text_zh": "没什么特别的不就是普通的一天吗？有什么好高兴的？",
+                        "text_pinyin": "Méi shénme tèbié de bú jiù shì pǔtōng de yī tiān ma? Yǒu shénme hǎo gāoxìng de?",
+                        "text_en": "Nothing special just means it was an ordinary day. What's there to be happy about?",
+                        "score": 0.0,
+                        "feedback": "Cynical — dismisses the quiet contentment he's found."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "平安和舒服就是一个好日子……以前的我肯定不会这么想。以前总觉得一天没有成就什么就是浪费了。现在慢慢觉得，安安稳稳地过完一天，本身就是一种成就。",
+                "text_pinyin": "Píng'ān hé shūfu jiù shì yīge hǎo rìzi…… yǐqián de wǒ kěndìng bú huì zhème xiǎng. Yǐqián zǒng juéde yī tiān méiyǒu chéngjiù shénme jiù shì làngfèi le. Xiànzài mànman juéde, ān'ān wěn wěn de guò wán yī tiān, běnshēn jiù shì yī zhǒng chéngjiù.",
+                "text_en": "Safe and comfortable is a good day... the old me definitely wouldn't have thought this way. I used to feel like a day without accomplishment was wasted. Now I'm slowly realizing that getting through a day peacefully is itself an achievement."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the day with a gentle thought.",
+                "options": [
+                    {
+                        "text_zh": "也许这就是成长——不再需要每天都有烟花，而是学会欣赏安静的夜晚。今天没有什么特别的事，但我们走在一起回家，聊着这些，这本身就挺好的。",
+                        "text_pinyin": "Yěxǔ zhè jiù shì chéngzhǎng — bú zài xūyào měi tiān dōu yǒu yānhuā, ér shì xuéhuì xīnshǎng ānjìng de yèwǎn. Jīntiān méiyǒu shénme tèbié de shì, dàn wǒmen zǒu zài yīqǐ huí jiā, liáo zhe zhèxiē, zhè běnshēn jiù tǐng hǎo de.",
+                        "text_en": "Maybe this is growth — no longer needing fireworks every day, but learning to appreciate quiet evenings. Nothing special happened today, but we're walking home together talking about these things. That itself is pretty good.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect closing — names growth as quiet acceptance and honors the moment."
+                    },
+                    {
+                        "text_zh": "明天应该会更好的。",
+                        "text_pinyin": "Míngtiān yīnggāi huì gèng hǎo de.",
+                        "text_en": "Tomorrow should be better.",
+                        "score": 0.0,
+                        "feedback": "Implies today wasn't good enough — contradicts what he just realized."
+                    },
+                    {
+                        "text_zh": "到家了，明天见。",
+                        "text_pinyin": "Dào jiā le, míngtiān jiàn.",
+                        "text_en": "We're home, see you tomorrow.",
+                        "score": 0.0,
+                        "feedback": "Abrupt — exits a warm moment without reciprocating."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "走在一起回家就挺好的……嗯。到了。今天谢谢你陪我走了这段路。明天见，希望明天也是一个平安的日子。",
+                "text_pinyin": "Zǒu zài yīqǐ huí jiā jiù tǐng hǎo de…… en. Dào le. Jīntiān xièxie nǐ péi wǒ zǒu le zhè duàn lù. Míngtiān jiàn, xīwàng míngtiān yě shì yīge píng'ān de rìzi.",
+                "text_en": "Walking home together is pretty good... yes. We're here. Thank you for walking this stretch with me today. See you tomorrow — I hope tomorrow is also a peaceful day."
+            }
+        ],
+        "cultural_note": "The Chinese greeting「平安」(píng'ān, peace and safety) is one of the most deeply valued wishes in Chinese culture — not excitement or success, but simply safety and well-being. The idea that a quiet, uneventful day is itself valuable represents a maturation that many Chinese people describe experiencing as they move beyond the competitive pressures of youth into a more contemplative phase of life."
+    }
+}

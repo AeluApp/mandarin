@@ -1,0 +1,196 @@
+{
+    "title": "The Reservation Perfectionist",
+    "title_zh": "完美主义订房者",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_5_00_v0",
+    "tree": {
+        "setup": "A hotel booking counter in a mid-sized city, the lobby smelling of jasmine air freshener and fresh floor wax. Behind the counter sits Xiao Qin, a front desk agent who treats every reservation like a small architectural project — room orientation, floor height, distance from the elevator, proximity to the ice machine. She has a laminated floor plan she's clearly proud of, with hand-drawn annotations in four colors of ink.",
+        "setup_zh": "一个中等城市的酒店前台，大堂弥漫着茉莉花空气清新剂和新打地板蜡的味道。前台坐着小秦，一位把每次订房都当成小型建筑项目来对待的接待员——房间朝向、楼层高度、离电梯的距离、离制冰机的远近。她有一张过塑的楼层平面图，上面有四种颜色墨水的手写标注，她显然为此感到骄傲。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！请问您有预订吗？",
+                "text_pinyin": "huānyíng guānglín! qǐngwèn nín yǒu yùdìng ma?",
+                "text_en": "Welcome! Do you have a reservation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you want to book a room.",
+                "options": [
+                    {
+                        "text_zh": "你好，我没有预订。我想订一间安静的房间，住三个晚上。最好是高楼层的，朝南的。",
+                        "text_pinyin": "nǐ hǎo, wǒ méiyǒu yùdìng. wǒ xiǎng dìng yì jiān ānjìng de fángjiān, zhù sān gè wǎnshang. zuìhǎo shì gāo lóucéng de, cháo nán de.",
+                        "text_en": "Hello, I don't have a reservation. I'd like to book a quiet room for three nights. Preferably high floor, south-facing.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Qin's eyes light up — a guest who cares about orientation. She reaches for the laminated floor plan like a general reaching for a battle map."
+                    },
+                    {
+                        "text_zh": "我想订一个房间，住三天。",
+                        "text_pinyin": "wǒ xiǎng dìng yí gè fángjiān, zhù sān tiān.",
+                        "text_en": "I'd like to book a room for three days.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need to know your preferences. The floor plan is already in her hand."
+                    },
+                    {
+                        "text_zh": "有房间吗？",
+                        "text_pinyin": "yǒu fángjiān ma?",
+                        "text_en": "Do you have rooms?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She has forty-seven rooms available, each with its own personality. She'll need you to narrow it down."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "高楼层朝南的……让我看看。十二楼有一间大床房，窗户正对着公园。不过离电梯稍微远一点，走路大概三十秒。您介意吗？",
+                "text_pinyin": "gāo lóucéng cháo nán de……ràng wǒ kànkan. shí'èr lóu yǒu yì jiān dà chuáng fáng, chuānghù zhèng duì zhe gōngyuán. búguò lí diàntī shāowēi yuǎn yìdiǎn, zǒu lù dàgài sānshí miǎo. nín jièyì ma?",
+                "text_en": "High floor, south-facing... let me check. There's a king room on the 12th floor, window facing the park. It's a bit far from the elevator though — about thirty seconds' walk. Do you mind?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the room suggestion and ask about the price.",
+                "options": [
+                    {
+                        "text_zh": "离电梯远一点反而更安静，挺好的。请问这个房间多少钱一晚？包含早餐吗？",
+                        "text_pinyin": "lí diàntī yuǎn yìdiǎn fǎn'ér gèng ānjìng, tǐng hǎo de. qǐngwèn zhège fángjiān duōshǎo qián yì wǎn? bāohán zǎocān ma?",
+                        "text_en": "Being far from the elevator is actually quieter — sounds good. How much per night? Does it include breakfast?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Turning a limitation into a feature — Xiao Qin nods approvingly. You understand the geometry of hotel comfort."
+                    },
+                    {
+                        "text_zh": "可以。多少钱？",
+                        "text_pinyin": "kěyǐ. duōshǎo qián?",
+                        "text_en": "Fine. How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. She pulls up the rate card."
+                    },
+                    {
+                        "text_zh": "有没有离电梯近一点的？",
+                        "text_pinyin": "yǒu méiyǒu lí diàntī jìn yìdiǎn de?",
+                        "text_en": "Is there one closer to the elevator?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She consults the floor plan again. Closer to the elevator means closer to the ice machine, which means closer to the midnight ice-seekers."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三百八一晚，含早餐。住三晚的话可以给您打九折，总共一千零二十六。需要看一下房间吗？",
+                "text_pinyin": "sānbǎi bā yì wǎn, hán zǎocān. zhù sān wǎn de huà kěyǐ gěi nín dǎ jiǔ zhé, zǒnggòng yìqiān líng èrshíliù. xūyào kàn yíxià fángjiān ma?",
+                "text_en": "380 per night, breakfast included. For three nights I can give you a 10% discount — 1,026 total. Want to see the room?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to see the room or book directly.",
+                "options": [
+                    {
+                        "text_zh": "价格可以接受。不用看了，我直接办入住吧。请问退房时间是几点？",
+                        "text_pinyin": "jiàgé kěyǐ jiēshòu. búyòng kàn le, wǒ zhíjiē bàn rùzhù ba. qǐngwèn tuì fáng shíjiān shì jǐ diǎn?",
+                        "text_en": "The price works. No need to see it — I'll check in now. What's checkout time?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Decisive. She begins the check-in process with the satisfaction of someone whose floor plan has once again proven its worth."
+                    },
+                    {
+                        "text_zh": "好的，我订了。",
+                        "text_pinyin": "hǎo de, wǒ dìng le.",
+                        "text_en": "OK, I'll take it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Booked. She reaches for the registration form."
+                    },
+                    {
+                        "text_zh": "能不能再便宜一点？",
+                        "text_pinyin": "néng bu néng zài piányi yìdiǎn?",
+                        "text_en": "Can it be a bit cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She pauses. The nine-fold discount is already the house maximum. Her floor plan doesn't have a column for haggling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "退房时间是中午十二点。如果需要延迟退房，最晚可以到下午两点，不加钱。请把您的身份证或者护照给我。",
+                "text_pinyin": "tuì fáng shíjiān shì zhōngwǔ shí'èr diǎn. rúguǒ xūyào yánchí tuì fáng, zuìwǎn kěyǐ dào xiàwǔ liǎng diǎn, bù jiā qián. qǐng bǎ nín de shēnfènzhèng huòzhě hùzhào gěi wǒ.",
+                "text_en": "Checkout is noon. Late checkout until 2 PM is free if you need it. Please give me your ID or passport."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your passport and ask about hotel amenities.",
+                "options": [
+                    {
+                        "text_zh": "这是我的护照。请问酒店有健身房吗？WiFi密码是什么？",
+                        "text_pinyin": "zhè shì wǒ de hùzhào. qǐngwèn jiǔdiàn yǒu jiànshēnfáng ma? WiFi mìmǎ shì shénme?",
+                        "text_en": "Here's my passport. Does the hotel have a gym? What's the WiFi password?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical questions that show you plan to actually live here for three days, not just sleep. She writes the WiFi password on a card with the same precision she uses for floor plans."
+                    },
+                    {
+                        "text_zh": "给你护照。WiFi密码是多少？",
+                        "text_pinyin": "gěi nǐ hùzhào. WiFi mìmǎ shì duōshǎo?",
+                        "text_en": "Here's my passport. What's the WiFi password?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The essential question of modern travel. She hands you a card."
+                    },
+                    {
+                        "text_zh": "在这里。",
+                        "text_pinyin": "zài zhèlǐ.",
+                        "text_en": "Here.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She takes it, processes it, and hands you a key card. You'll discover the amenities on your own."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有健身房，在二楼，早上六点到晚上十点开放。WiFi密码在房卡套上。这是您的房卡，十二楼一二一五房。电梯在左手边。祝您住得愉快！",
+                "text_pinyin": "yǒu jiànshēnfáng, zài èr lóu, zǎoshang liù diǎn dào wǎnshang shí diǎn kāifàng. WiFi mìmǎ zài fángkǎ tào shàng. zhè shì nín de fángkǎ, shí'èr lóu yāo èr yāo wǔ fáng. diàntī zài zuǒshǒu biān. zhù nín zhù de yúkuài!",
+                "text_en": "Yes, gym on the 2nd floor, open 6 AM to 10 PM. WiFi password is on the key card sleeve. Here's your key — room 1215, 12th floor. Elevator is on the left. Enjoy your stay!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and head to your room.",
+                "options": [
+                    {
+                        "text_zh": "太好了，谢谢小秦！你介绍得特别详细，我很放心。",
+                        "text_pinyin": "tài hǎo le, xièxie Xiǎo Qín! nǐ jièshào de tèbié xiángxì, wǒ hěn fàngxīn.",
+                        "text_en": "Great, thanks Xiao Qin! Your explanation was very thorough — I feel reassured.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Complimenting her thoroughness — the highest praise you can give Xiao Qin. She'll remember your name for the next three days."
+                    },
+                    {
+                        "text_zh": "谢谢！",
+                        "text_pinyin": "xièxie!",
+                        "text_en": "Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She smiles professionally. The floor plan goes back into its drawer, satisfied."
+                    },
+                    {
+                        "text_zh": "嗯，知道了。",
+                        "text_pinyin": "ǹg, zhīdào le.",
+                        "text_en": "Mm, got it.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She watches you head toward the elevator. Thirty seconds to your door. She timed it."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hotel check-in requires valid ID (身份证 for locals, 护照 for foreigners). Discounts (打折, dǎ zhé) are common for multi-night stays — 九折 (jiǔ zhé) means 90% of the price (10% off). Late checkout (延迟退房, yánchí tuì fáng) is often available for free if you ask."
+    }
+}

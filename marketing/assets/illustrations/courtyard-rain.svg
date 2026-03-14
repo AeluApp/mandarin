@@ -1,17 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- roofline -->
-  <polyline points="10,12 60,8 110,12" stroke-width="0.7"/>
-  <!-- ground -->
-  <line x1="0" y1="54" x2="120" y2="54" stroke-width="0.5"/>
-  <!-- rain -->
-  <line x1="25" y1="18" x2="25" y2="23" stroke-width="0.4"/>
-  <line x1="40" y1="22" x2="40" y2="27" stroke-width="0.4"/>
-  <line x1="55" y1="16" x2="55" y2="21" stroke-width="0.4"/>
-  <line x1="70" y1="20" x2="70" y2="25" stroke-width="0.4"/>
-  <line x1="85" y1="24" x2="85" y2="29" stroke-width="0.4"/>
-  <line x1="35" y1="32" x2="35" y2="37" stroke-width="0.4"/>
-  <line x1="60" y1="30" x2="60" y2="35" stroke-width="0.4"/>
-  <line x1="80" y1="34" x2="80" y2="39" stroke-width="0.4"/>
-  <line x1="48" y1="40" x2="48" y2="45" stroke-width="0.4"/>
-  <line x1="72" y1="42" x2="72" y2="47" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- left eave -->
+  <path d="M0 22 Q20 18 40 20 Q50 16 55 22" stroke="#2a2a2a" stroke-width="1"/>
+  <path d="M55 22 L55 28 Q50 24 40 26 Q20 24 0 28" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.06"/>
+  <!-- eave detail: upturned corner -->
+  <path d="M0 22 Q-2 20 0 18" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- right eave -->
+  <path d="M145 22 Q160 16 180 20 Q190 18 200 22" stroke="#2a2a2a" stroke-width="1"/>
+  <path d="M145 22 L145 28 Q160 24 180 26 Q190 24 200 28" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.06"/>
+  <path d="M200 22 Q202 20 200 18" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- pillars -->
+  <line x1="52" y1="28" x2="52" y2="82" stroke="#2a2a2a" stroke-width="0.8"/>
+  <line x1="148" y1="28" x2="148" y2="82" stroke="#2a2a2a" stroke-width="0.8"/>
+  <!-- courtyard floor -->
+  <rect x="40" y="82" width="120" height="2" stroke="none" fill="#2a2a2a" fill-opacity="0.05"/>
+  <line x1="30" y1="84" x2="170" y2="84" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- floor tiles -->
+  <line x1="70" y1="84" x2="70" y2="92" stroke="#2a2a2a" stroke-width="0.2" opacity="0.3"/>
+  <line x1="100" y1="84" x2="100" y2="92" stroke="#2a2a2a" stroke-width="0.2" opacity="0.3"/>
+  <line x1="130" y1="84" x2="130" y2="92" stroke="#2a2a2a" stroke-width="0.2" opacity="0.3"/>
+  <line x1="40" y1="90" x2="160" y2="90" stroke="#2a2a2a" stroke-width="0.2" opacity="0.2"/>
+  <!-- rain — varied lengths, angles, density -->
+  <!-- heavy rain in open courtyard -->
+  <line x1="65" y1="8" x2="63" y2="22" stroke="#2a2a2a" stroke-width="0.35" opacity="0.5"/>
+  <line x1="78" y1="4" x2="76" y2="20" stroke="#2a2a2a" stroke-width="0.4" opacity="0.45"/>
+  <line x1="92" y1="6" x2="90" y2="24" stroke="#2a2a2a" stroke-width="0.35" opacity="0.5"/>
+  <line x1="108" y1="3" x2="106" y2="18" stroke="#2a2a2a" stroke-width="0.4" opacity="0.45"/>
+  <line x1="122" y1="8" x2="120" y2="22" stroke="#2a2a2a" stroke-width="0.35" opacity="0.5"/>
+  <line x1="135" y1="5" x2="133" y2="20" stroke="#2a2a2a" stroke-width="0.35" opacity="0.45"/>
+  <!-- mid rain -->
+  <line x1="70" y1="30" x2="68" y2="48" stroke="#2a2a2a" stroke-width="0.4" opacity="0.4"/>
+  <line x1="85" y1="26" x2="83" y2="44" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <line x1="100" y1="28" x2="98" y2="50" stroke="#2a2a2a" stroke-width="0.4" opacity="0.45"/>
+  <line x1="115" y1="32" x2="113" y2="50" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <line x1="128" y1="26" x2="126" y2="46" stroke="#2a2a2a" stroke-width="0.35" opacity="0.4"/>
+  <!-- lower rain -->
+  <line x1="74" y1="50" x2="72" y2="70" stroke="#2a2a2a" stroke-width="0.4" opacity="0.35"/>
+  <line x1="90" y1="52" x2="88" y2="72" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <line x1="105" y1="48" x2="103" y2="68" stroke="#2a2a2a" stroke-width="0.4" opacity="0.35"/>
+  <line x1="118" y1="54" x2="116" y2="72" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <!-- near-ground rain -->
+  <line x1="80" y1="68" x2="78" y2="82" stroke="#2a2a2a" stroke-width="0.35" opacity="0.3"/>
+  <line x1="95" y1="72" x2="93" y2="82" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <line x1="110" y1="70" x2="108" y2="82" stroke="#2a2a2a" stroke-width="0.35" opacity="0.3"/>
+  <!-- splash circles on floor -->
+  <ellipse cx="82" cy="84" rx="3" ry="0.8" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <ellipse cx="98" cy="84" rx="2.5" ry="0.6" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <ellipse cx="115" cy="84" rx="3" ry="0.8" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <ellipse cx="72" cy="85" rx="2" ry="0.5" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <!-- puddle on ground -->
+  <ellipse cx="100" cy="88" rx="18" ry="2" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.03" opacity="0.4"/>
+  <!-- ripple in puddle -->
+  <ellipse cx="96" cy="88" rx="3" ry="0.6" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <ellipse cx="106" cy="87.5" rx="2" ry="0.5" stroke="#2a2a2a" stroke-width="0.2" opacity="0.25"/>
+  <!-- water dripping from eave edge -->
+  <line x1="55" y1="28" x2="55" y2="34" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <line x1="145" y1="28" x2="145" y2="34" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <!-- small potted plant under eave -->
+  <path d="M36 82 L38 72 L44 72 L46 82" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M40 72 Q41 64 42 68 Q43 62 44 66" stroke="#2a2a2a" stroke-width="0.4"/>
 </svg>

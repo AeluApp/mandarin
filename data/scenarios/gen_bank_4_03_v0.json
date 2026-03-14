@@ -1,0 +1,160 @@
+{
+    "title": "The Currency Exchange Connoisseur",
+    "title_zh": "外币鉴赏家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_4_03_v0",
+    "tree": {
+        "setup": "The foreign exchange window at the Bank of China downtown branch. Mr. Fang has been working this counter for fifteen years and can identify thirty-seven currencies by touch alone. He keeps a small laminated card of today's rates propped against his monitor, updated with the devotion of someone tending a garden.",
+        "setup_zh": "中国银行市中心支行的外汇窗口。方先生在这个柜台工作了十五年，光靠手感就能分辨三十七种货币。他在显示器旁立着一张过塑的今日汇率卡，每天更新，就像打理花园一样用心。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好！请问您要换什么外币？",
+                "text_pinyin": "nín hǎo! qǐngwèn nín yào huàn shénme wàibì?",
+                "text_en": "Hello! What foreign currency would you like to exchange?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him you want to exchange US dollars for Chinese yuan.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想把美元换成人民币。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng bǎ měiyuán huàn chéng rénmínbì.",
+                        "text_en": "Hello, I'd like to exchange US dollars for RMB.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "把...换成 — textbook structure for currency exchange. Mr. Fang reaches for his rate card with visible enthusiasm."
+                    },
+                    {
+                        "text_zh": "我有美元，想换人民币。",
+                        "text_pinyin": "wǒ yǒu měiyuán, xiǎng huàn rénmínbì.",
+                        "text_en": "I have US dollars and want to exchange for RMB.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gets the point across. He nods and checks today's rate."
+                    },
+                    {
+                        "text_zh": "我需要中国的钱。",
+                        "text_pinyin": "wǒ xūyào Zhōngguó de qián.",
+                        "text_en": "I need Chinese money.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Fang suppresses a gentle wince — the word he's hoping for is 人民币, but he'll get you there."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。今天的汇率是一美元换七块二。您要换多少？",
+                "text_pinyin": "hǎo de. jīntiān de huìlǜ shì yì měiyuán huàn qī kuài èr. nín yào huàn duōshǎo?",
+                "text_en": "OK. Today's rate is 7.2 yuan per dollar. How much would you like to exchange?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him how much you want to exchange.",
+                "options": [
+                    {
+                        "text_zh": "我想换三百美元。那大概是两千一百多人民币，对吗？",
+                        "text_pinyin": "wǒ xiǎng huàn sānbǎi měiyuán. nà dàgài shì liǎngqiān yìbǎi duō rénmínbì, duì ma?",
+                        "text_en": "I'd like to exchange 300 dollars. That's about 2,100 yuan, right?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Mental math at the counter — Mr. Fang is impressed. He confirms the figure with a crisp nod."
+                    },
+                    {
+                        "text_zh": "换五百美元。",
+                        "text_pinyin": "huàn wǔbǎi měiyuán.",
+                        "text_en": "Exchange 500 dollars.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. He starts counting before you finish the sentence."
+                    },
+                    {
+                        "text_zh": "不太多，换一百块够吗？",
+                        "text_pinyin": "bú tài duō, huàn yìbǎi kuài gòu ma?",
+                        "text_en": "Not too much — is 100 enough?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A bit ambiguous — 100 dollars or 100 yuan? Mr. Fang pauses to clarify, because precision is his religion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没错，三百美元换两千一百六十块人民币。请把美元给我，我数一下。",
+                "text_pinyin": "méi cuò, sānbǎi měiyuán huàn liǎngqiān yìbǎi liùshí kuài rénmínbì. qǐng bǎ měiyuán gěi wǒ, wǒ shǔ yíxià.",
+                "text_en": "Correct — 300 dollars exchanges to 2,160 yuan. Please give me the dollars and I'll count them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over the money and ask about the receipt.",
+                "options": [
+                    {
+                        "text_zh": "好的，给你。请问有收据吗？",
+                        "text_pinyin": "hǎo de, gěi nǐ. qǐngwèn yǒu shōujù ma?",
+                        "text_en": "Here you go. Will there be a receipt?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Always ask for a receipt with currency exchange — Mr. Fang produces one with the flourish of a magician pulling a rabbit from a hat."
+                    },
+                    {
+                        "text_zh": "给你，三百块。",
+                        "text_pinyin": "gěi nǐ, sānbǎi kuài.",
+                        "text_en": "Here, 300 dollars.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Straightforward. He counts each bill with practiced fingers."
+                    },
+                    {
+                        "text_zh": "数好了吗？没有假的吧？",
+                        "text_pinyin": "shǔ hǎo le ma? méiyǒu jiǎ de ba?",
+                        "text_en": "Did you count them? None are fake, right?",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Fang pauses mid-count. His fifteen years of professional pride condensed into a single, dignified exhale."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这是您的两千一百六十块人民币，还有收据。请您数一下。",
+                "text_pinyin": "zhè shì nín de liǎngqiān yìbǎi liùshí kuài rénmínbì, hái yǒu shōujù. qǐng nín shǔ yíxià.",
+                "text_en": "Here's your 2,160 yuan, plus the receipt. Please count it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Count the money and thank him.",
+                "options": [
+                    {
+                        "text_zh": "数好了，没问题。谢谢你，方先生！",
+                        "text_pinyin": "shǔ hǎo le, méi wèntí. xièxie nǐ, Fāng xiānshēng!",
+                        "text_en": "All counted, no problem. Thank you, Mr. Fang!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Counting the money is standard practice and shows good habits. Using his name earns a warm nod."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick and polite. He straightens his rate card for the next customer."
+                    },
+                    {
+                        "text_zh": "嗯，再见。",
+                        "text_pinyin": "ǹg, zàijiàn.",
+                        "text_en": "Mm, bye.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Fang watches you leave with the expression of a chef whose meal went uneaten."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Currency exchange in China is handled primarily at Bank of China (中国银行) branches. You'll need your passport, and the exchange rate (汇率, huìlǜ) fluctuates daily. Always count your money at the counter — it's expected and considered good practice, not rude."
+    }
+}

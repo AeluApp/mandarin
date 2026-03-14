@@ -1,0 +1,160 @@
+{
+    "title": "The Midnight Hospital Navigator",
+    "title_zh": "午夜急诊导航员",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_emergency_5_00_v0",
+    "tree": {
+        "setup": "2:14 AM at the emergency department entrance, where fluorescent lights hum their eternal vigil. Your friend slipped on wet stairs and can't put weight on their ankle — it's swelling rapidly and turning a color that nature probably didn't intend. The triage nurse, Xiao Qian, moves with the calm efficiency of someone who has seen everything from midnight kitchen accidents to dawn-patrol skateboard injuries. She has a small thermos of ginger tea on her station that she never seems to finish.",
+        "setup_zh": "凌晨两点十四分，急诊科入口处，荧光灯嗡嗡地值着它永恒的夜班。你的朋友在湿滑的楼梯上摔了一跤，脚踝不能着地——迅速肿胀，变成了一种大自然大概没有设想过的颜色。分诊护士小钱以一种看过一切的人特有的冷静效率行动着——从午夜厨房事故到黎明滑板伤都见过。她的工作台上有一小瓶姜茶，似乎永远喝不完。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "急诊挂号在这里。请问是谁不舒服？怎么受伤的？",
+                "text_pinyin": "jízhěn guàhào zài zhèlǐ. qǐngwèn shì shuí bù shūfu? zěnme shòushāng de?",
+                "text_en": "Emergency registration is here. Who's the patient? How were they injured?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your friend's injury.",
+                "options": [
+                    {
+                        "text_zh": "你好，是我朋友。大概半个小时前在楼梯上滑倒了，右脚踝着地的时候扭了一下。现在脚踝肿得很厉害，不能走路，碰一下就很疼。我们怀疑可能骨折了。",
+                        "text_pinyin": "nǐ hǎo, shì wǒ péngyou. dàgài bàn gè xiǎoshí qián zài lóutī shàng huá dǎo le, yòu jiǎohuái zhuódì de shíhòu niǔ le yíxià. xiànzài jiǎohuái zhǒng de hěn lìhai, bù néng zǒulù, pèng yíxià jiù hěn téng. wǒmen huáiyí kěnéng gǔzhé le.",
+                        "text_en": "Hello, it's my friend. About half an hour ago they slipped on the stairs — twisted their right ankle when they landed. The ankle is very swollen now, can't walk, and it's very painful to touch. We suspect it might be fractured.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Time of injury, mechanism, location, symptoms, and a reasonable assessment — Xiao Qian is already flagging ortho."
+                    },
+                    {
+                        "text_zh": "我朋友摔了，脚踝可能骨折了。",
+                        "text_pinyin": "wǒ péngyou shuāi le, jiǎohuái kěnéng gǔzhé le.",
+                        "text_en": "My friend fell — the ankle might be fractured.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Enough to triage. She'll examine and ask for details."
+                    },
+                    {
+                        "text_zh": "快来看看！我朋友的脚！",
+                        "text_pinyin": "kuài lái kàn kan! wǒ péngyou de jiǎo!",
+                        "text_en": "Come look! My friend's foot!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Xiao Qian looks up from her ginger tea with unruffled calm. She's seen worse at 2 AM."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，先让她坐在轮椅上，不要再走了。我量一下血压和体温。请问她有没有药物过敏？之前有没有受过类似的伤？",
+                "text_pinyin": "hǎo de, xiān ràng tā zuò zài lúnyǐ shàng, búyào zài zǒu le. wǒ liáng yíxià xuèyā hé tǐwēn. qǐngwèn tā yǒu méiyǒu yàowù guòmǐn? zhīqián yǒu méiyǒu shòu guò lèisì de shāng?",
+                "text_en": "OK, let her sit in the wheelchair first — no more walking. I'll check blood pressure and temperature. Does she have any drug allergies? Has she had similar injuries before?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide medical history.",
+                "options": [
+                    {
+                        "text_zh": "好的，她坐好了。她对磺胺类药物过敏。之前没有骨折过，但是左脚踝在两年前扭伤过一次。她有医保卡，我帮她带了。",
+                        "text_pinyin": "hǎo de, tā zuò hǎo le. tā duì huáng'àn lèi yàowù guòmǐn. zhīqián méiyǒu gǔzhé guò, dànshì zuǒ jiǎohuái zài liǎng nián qián niǔshāng guò yí cì. tā yǒu yībǎo kǎ, wǒ bāng tā dài le.",
+                        "text_en": "OK, she's settled. She's allergic to sulfonamides. No previous fractures, but she sprained her left ankle two years ago. She has her medical insurance card — I brought it for her.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Allergy, injury history, and insurance — all the information a triage nurse needs at 2 AM. Xiao Qian writes「磺胺过敏」in red."
+                    },
+                    {
+                        "text_zh": "她没有什么过敏的，也没有受过类似的伤。",
+                        "text_pinyin": "tā méiyǒu shénme guòmǐn de, yě méiyǒu shòu guò lèisì de shāng.",
+                        "text_en": "She's not allergic to anything and hasn't had similar injuries.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean history. She moves on to the next step."
+                    },
+                    {
+                        "text_zh": "我不太清楚她的情况，我帮她问一下。",
+                        "text_pinyin": "wǒ bú tài qīngchǔ tā de qíngkuàng, wǒ bāng tā wèn yíxià.",
+                        "text_en": "I'm not sure about her details — let me ask her.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She waits. It's 2 AM — nobody is in a rush, except possibly the ankle."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "磺胺过敏记下来了。血压正常。我先给她挂一个骨科急诊号。需要拍X光片确认有没有骨折。你带她去二楼骨科诊室，告诉那边的医生你们已经在我这里登记了。",
+                "text_pinyin": "huáng'àn guòmǐn jì xiàlái le. xuèyā zhèngcháng. wǒ xiān gěi tā guà yí gè gǔkē jízhěn hào. xūyào pāi X guāng piàn quèrèn yǒu méiyǒu gǔzhé. nǐ dài tā qù èr lóu gǔkē zhěnshì, gàosu nàbiān de yīshēng nǐmen yǐjīng zài wǒ zhèlǐ dēngjì le.",
+                "text_en": "Sulfonamide allergy noted. Blood pressure normal. I'll register her for an ortho emergency consultation. She'll need an X-ray to check for fracture. Take her to the orthopedics room on the second floor and tell the doctor you've already registered here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the X-ray process and costs.",
+                "options": [
+                    {
+                        "text_zh": "好的，二楼骨科。请问X光片是在骨科拍还是要去放射科？费用大概多少？她的医保能报销急诊费用吗？",
+                        "text_pinyin": "hǎo de, èr lóu gǔkē. qǐngwèn X guāng piàn shì zài gǔkē pāi háishi yào qù fàngshè kē? fèiyòng dàgài duōshǎo? tā de yībǎo néng bàoxiāo jízhěn fèiyòng ma?",
+                        "text_en": "OK, orthopedics on the second floor. Is the X-ray done in ortho or in the radiology department? How much does it cost? Can her insurance reimburse emergency expenses?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Logistics, cost, and insurance in one question — Xiao Qian answers each efficiently: radiology is on the same floor, X-ray is about 150 yuan, and emergency visits are covered by medical insurance."
+                    },
+                    {
+                        "text_zh": "好的，马上去。谢谢。",
+                        "text_pinyin": "hǎo de, mǎshàng qù. xièxie.",
+                        "text_en": "OK, going right now. Thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Action-oriented. She points you to the elevator."
+                    },
+                    {
+                        "text_zh": "二楼怎么走？",
+                        "text_pinyin": "èr lóu zěnme zǒu?",
+                        "text_en": "How do I get to the second floor?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She points — elevator on the left, stairs on the right (though stairs might be an ironic choice given the circumstances)."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "X光在二楼放射科拍，跟骨科在同一层。骨科医生会开检查单，你拿着去放射科。急诊费用医保可以报销大部分。你们先上去吧，有问题随时来找我。",
+                "text_pinyin": "X guāng zài èr lóu fàngshè kē pāi, gēn gǔkē zài tóng yì céng. gǔkē yīshēng huì kāi jiǎnchá dān, nǐ ná zhe qù fàngshè kē. jízhěn fèiyòng yībǎo kěyǐ bàoxiāo dà bùfen. nǐmen xiān shàngqù ba, yǒu wèntí suíshí lái zhǎo wǒ.",
+                "text_en": "X-ray is in radiology on the second floor, same level as ortho. The ortho doctor will write a referral — take it to radiology. Insurance covers most emergency costs. Go on up — come find me if you have questions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and head upstairs.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢小钱！这么晚了还这么耐心。我们先上去了。对了，如果需要住院观察的话，手续也是在你这里办吗？",
+                        "text_pinyin": "fēicháng gǎnxiè Xiǎo Qián! zhème wǎn le hái zhème nàixīn. wǒmen xiān shàngqù le. duì le, rúguǒ xūyào zhùyuàn guānchá de huà, shǒuxù yě shì zài nǐ zhèlǐ bàn ma?",
+                        "text_en": "Thank you so much, Xiao Qian! So patient even at this hour. We'll head up. Oh — if she needs to be admitted for observation, is that also handled here?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thinking ahead about admission — Xiao Qian confirms: admission paperwork is handled at her station. But let's wait for the X-ray first."
+                    },
+                    {
+                        "text_zh": "谢谢，我们上去了。",
+                        "text_pinyin": "xièxie, wǒmen shàngqù le.",
+                        "text_en": "Thanks, we're going up.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She nods and returns to her ginger tea. The next patient is already coming through the door."
+                    },
+                    {
+                        "text_zh": "希望不用等太久。",
+                        "text_pinyin": "xīwàng bú yòng děng tài jiǔ.",
+                        "text_en": "Hope we don't have to wait too long.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Qian smiles kindly. At 2 AM, the wait is usually short. That's the one advantage of being injured at this hour."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospital emergency departments (急诊科, jízhěn kē) require registration (挂号, guàhào) even for urgent cases. Triage nurses (分诊护士) assess severity and direct patients to the appropriate department. X-ray referrals (检查单, jiǎnchá dān) are issued by the treating doctor and taken to the radiology department. Medical insurance (医保, yībǎo) covers most emergency expenses, though some items may require co-payment."
+    }
+}

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "j3_mystery_001",
+    "title": "The Missing Library Book",
+    "title_zh": "图书馆丢了的书",
+    "hsk_level": 3,
+    "text_zh": "图书馆的王阿姨发现有一本书不见了。那本书已经很旧了，除了一个老人以外，没有别人借过。王阿姨把借书的记录一页一页地看了一遍。她发现那个老人上个月来还书的时候，把两本书放在了桌子上，但是只有一本被扫了码。王阿姨越想越觉得奇怪——那个老人每次来都很小心。她去问前台的小李，小李说：「那天我帮他扫码的时候，有人来问路，我一边回答一边扫的，可能漏了一本。」书找到了，就在还书的架子后面，被别的书挡住了。",
+    "text_pinyin": "Túshūguǎn de Wáng āyí fāxiàn yǒu yì běn shū bújiàn le. Nà běn shū yǐjīng hěn jiù le, chúle yí gè lǎorén yǐwài, méiyǒu biéren jiè guò. Wáng āyí bǎ jiè shū de jìlù yí yè yí yè de kàn le yí biàn. Tā fāxiàn nàge lǎorén shàng gè yuè lái huán shū de shíhou, bǎ liǎng běn shū fàng zài le zhuōzi shàng, dànshì zhǐyǒu yì běn bèi sǎo le mǎ. Wáng āyí yuè xiǎng yuè juéde qíguài——nàge lǎorén měi cì lái dōu hěn xiǎoxīn. Tā qù wèn qiántái de Xiǎo Lǐ, Xiǎo Lǐ shuō:「Nà tiān wǒ bāng tā sǎo mǎ de shíhou, yǒu rén lái wèn lù, wǒ yìbiān huídá yìbiān sǎo de, kěnéng lòu le yì běn.」Shū zhǎo dào le, jiù zài huán shū de jiàzi hòumiàn, bèi biéde shū dǎng zhù le.",
+    "text_en": "Librarian Auntie Wang noticed a book was missing. It was an old book — no one had borrowed it except one elderly man. She went through the lending records page by page. She found that when the old man returned books last month, he placed two on the desk, but only one was scanned. The more she thought about it, the stranger it seemed — that old man was always careful. She asked Xiao Li at the front desk. Xiao Li said: 'That day when I was scanning for him, someone came to ask for directions. I was answering and scanning at the same time — I probably missed one.' The book was found behind the return shelf, hidden by other books.",
+    "questions": [
+      {"type": "mc", "q_zh": "那本书除了谁以外没有人借过？", "q_en": "Who was the only person who had borrowed the book?",
+       "options": [
+         {"text": "一个老人", "pinyin": "yí gè lǎorén", "text_en": "an old man", "correct": true},
+         {"text": "小李", "pinyin": "Xiǎo Lǐ", "text_en": "Xiao Li", "correct": false},
+         {"text": "王阿姨", "pinyin": "Wáng āyí", "text_en": "Auntie Wang", "correct": false},
+         {"text": "一个学生", "pinyin": "yí gè xuéshēng", "text_en": "a student", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "书为什么没有被扫码？", "q_en": "Why wasn't the book scanned?",
+       "options": [
+         {"text": "机器坏了", "pinyin": "jīqì huài le", "text_en": "the machine broke", "correct": false},
+         {"text": "老人忘了还", "pinyin": "lǎorén wàng le huán", "text_en": "the old man forgot to return it", "correct": false},
+         {"text": "小李一边回答问路的人一边扫，漏了一本", "pinyin": "Xiǎo Lǐ yìbiān huídá wèn lù de rén yìbiān sǎo, lòu le yì běn", "text_en": "Xiao Li was answering someone's question while scanning and missed one", "correct": true},
+         {"text": "书太旧了，扫不了", "pinyin": "shū tài jiù le, sǎo bù liǎo", "text_en": "the book was too old to scan", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "书最后在哪里找到了？", "q_en": "Where was the book finally found?",
+       "options": [
+         {"text": "在老人家里", "pinyin": "zài lǎorén jiā lǐ", "text_en": "at the old man's home", "correct": false},
+         {"text": "在还书的架子后面", "pinyin": "zài huán shū de jiàzi hòumiàn", "text_en": "behind the return shelf", "correct": true},
+         {"text": "在前台的桌子上", "pinyin": "zài qiántái de zhuōzi shàng", "text_en": "on the front desk", "correct": false},
+         {"text": "在小李的包里", "pinyin": "zài Xiǎo Lǐ de bāo lǐ", "text_en": "in Xiao Li's bag", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_mystery_002",
+    "title": "Who Watered the Flowers?",
+    "title_zh": "谁浇了花？",
+    "hsk_level": 3,
+    "text_zh": "楼下花园里的花越来越好看了，但是没有人知道是谁在浇花。物业的人说不是他们。住在一楼的张奶奶说她每天早上五点就醒了，但是从来没有看到有人浇花。我决定自己找一找。我发现花旁边的地比较湿，但只有早上才湿。我又发现花的旁边有一根很细的管子，管子从二楼的窗户那里接下来的。我去敲了二楼的门。开门的是一个害羞的小女孩。她说：「我把洗菜的水留下来，每天早上从窗户倒下去。妈妈说不能浪费水。」",
+    "text_pinyin": "Lóu xià huāyuán lǐ de huā yuè lái yuè hǎokàn le, dànshì méiyǒu rén zhīdào shì shéi zài jiāo huā. Wùyè de rén shuō búshì tāmen. Zhù zài yī lóu de Zhāng nǎinai shuō tā měi tiān zǎoshang wǔ diǎn jiù xǐng le, dànshì cónglái méiyǒu kàn dào yǒu rén jiāo huā. Wǒ juédìng zìjǐ zhǎo yì zhǎo. Wǒ fāxiàn huā pángbiān de dì bǐjiào shī, dàn zhǐyǒu zǎoshang cái shī. Wǒ yòu fāxiàn huā de pángbiān yǒu yì gēn hěn xì de guǎnzi, guǎnzi cóng èr lóu de chuānghu nàlǐ jiē xiàlái de. Wǒ qù qiāo le èr lóu de mén. Kāi mén de shì yí gè hàixiū de xiǎo nǚhái. Tā shuō:「Wǒ bǎ xǐ cài de shuǐ liú xiàlái, měi tiān zǎoshang cóng chuānghu dào xiàqu. Māma shuō bù néng làngfèi shuǐ.」",
+    "text_en": "The flowers in the garden downstairs were getting prettier and prettier, but nobody knew who was watering them. The property management said it wasn't them. Grandma Zhang on the first floor said she woke at five every morning but never saw anyone watering. I decided to investigate. I noticed the ground near the flowers was rather wet, but only in the morning. I also found a thin tube running down from a second-floor window. I knocked on the second-floor door. A shy little girl answered. She said: 'I save the water from washing vegetables and pour it down from the window every morning. Mom says we shouldn't waste water.'",
+    "questions": [
+      {"type": "mc", "q_zh": "花园里的花怎么样了？", "q_en": "What happened to the flowers in the garden?",
+       "options": [
+         {"text": "越来越不好看了", "pinyin": "yuè lái yuè bù hǎokàn le", "text_en": "getting uglier", "correct": false},
+         {"text": "越来越好看了", "pinyin": "yuè lái yuè hǎokàn le", "text_en": "getting prettier", "correct": true},
+         {"text": "都死了", "pinyin": "dōu sǐ le", "text_en": "all died", "correct": false},
+         {"text": "被人摘了", "pinyin": "bèi rén zhāi le", "text_en": "picked by someone", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」发现了什么线索？", "q_en": "What clue did 'I' find?",
+       "options": [
+         {"text": "花旁边有脚印", "pinyin": "huā pángbiān yǒu jiǎoyìn", "text_en": "footprints near the flowers", "correct": false},
+         {"text": "有人在浇花的照片", "pinyin": "yǒu rén zài jiāo huā de zhàopiàn", "text_en": "a photo of someone watering", "correct": false},
+         {"text": "一根从二楼窗户接下来的细管子", "pinyin": "yì gēn cóng èr lóu chuānghu jiē xiàlái de xì guǎnzi", "text_en": "a thin tube running from a second-floor window", "correct": true},
+         {"text": "一个浇花的壶", "pinyin": "yí gè jiāo huā de hú", "text_en": "a watering can", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "小女孩用什么水浇花？", "q_en": "What water did the little girl use?",
+       "options": [
+         {"text": "自来水", "pinyin": "zìláishuǐ", "text_en": "tap water", "correct": false},
+         {"text": "洗菜的水", "pinyin": "xǐ cài de shuǐ", "text_en": "vegetable-washing water", "correct": true},
+         {"text": "雨水", "pinyin": "yǔshuǐ", "text_en": "rainwater", "correct": false},
+         {"text": "喝剩的水", "pinyin": "hē shèng de shuǐ", "text_en": "leftover drinking water", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_mystery_003",
+    "title": "The Extra Cup",
+    "title_zh": "多出来的杯子",
+    "hsk_level": 3,
+    "text_zh": "办公室里每天下午都会多出来一个干净的杯子，放在茶水间的桌子上。同事们觉得很奇怪。小王说：「可能是清洁阿姨放的。」但是清洁阿姨说不是她。我比较好奇，所以下午两点的时候，我没有去开会，一个人坐在茶水间旁边看。三点左右，我看到隔壁公司的一个女生走了进来。她把自己带的杯子洗干净，放在桌子上，然后又走了。第二天我问她为什么。她不好意思地说：「我每天来借你们的热水喝，觉得应该留一个干净的杯子，算是谢谢你们。」",
+    "text_pinyin": "Bàngōngshì lǐ měi tiān xiàwǔ dōu huì duō chūlái yí gè gānjìng de bēizi, fàng zài cháshuǐjiān de zhuōzi shàng. Tóngshìmen juéde hěn qíguài. Xiǎo Wáng shuō:「Kěnéng shì qīngjié āyí fàng de.」Dànshì qīngjié āyí shuō búshì tā. Wǒ bǐjiào hàoqí, suǒyǐ xiàwǔ liǎng diǎn de shíhou, wǒ méiyǒu qù kāi huì, yí gè rén zuò zài cháshuǐjiān pángbiān kàn. Sān diǎn zuǒyòu, wǒ kàn dào gébì gōngsī de yí gè nǚshēng zǒu le jìnlái. Tā bǎ zìjǐ dài de bēizi xǐ gānjìng, fàng zài zhuōzi shàng, ránhòu yòu zǒu le. Dì-èr tiān wǒ wèn tā wèishénme. Tā bù hǎoyìsi de shuō:「Wǒ měi tiān lái jiè nǐmen de rè shuǐ hē, juéde yīnggāi liú yí gè gānjìng de bēizi, suànshì xièxie nǐmen.」",
+    "text_en": "Every afternoon, an extra clean cup appeared on the break room table. Colleagues found it strange. Xiao Wang said: 'Maybe the cleaning lady left it.' But the cleaning lady said it wasn't her. I was rather curious, so at two in the afternoon I skipped the meeting and sat near the break room watching. Around three, I saw a woman from the company next door walk in. She washed a cup she'd brought, left it on the table, then left. The next day I asked her why. She said shyly: 'I come every day to use your hot water. I felt I should leave a clean cup as a thank-you.'",
+    "questions": [
+      {"type": "mc", "q_zh": "杯子每天什么时候出现？", "q_en": "When did the cup appear each day?",
+       "options": [
+         {"text": "早上", "pinyin": "zǎoshang", "text_en": "morning", "correct": false},
+         {"text": "下午", "pinyin": "xiàwǔ", "text_en": "afternoon", "correct": true},
+         {"text": "晚上", "pinyin": "wǎnshang", "text_en": "evening", "correct": false},
+         {"text": "中午", "pinyin": "zhōngwǔ", "text_en": "noon", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」怎么发现真相的？", "q_en": "How did 'I' discover the truth?",
+       "options": [
+         {"text": "看了监控", "pinyin": "kàn le jiānkòng", "text_en": "watched security cameras", "correct": false},
+         {"text": "问了清洁阿姨", "pinyin": "wèn le qīngjié āyí", "text_en": "asked the cleaning lady", "correct": false},
+         {"text": "没去开会，在茶水间旁边看", "pinyin": "méi qù kāi huì, zài cháshuǐjiān pángbiān kàn", "text_en": "skipped the meeting and watched near the break room", "correct": true},
+         {"text": "在杯子上写了字", "pinyin": "zài bēizi shàng xiě le zì", "text_en": "wrote on the cup", "correct": false}
+       ], "difficulty": 0.4},
+      {"type": "mc", "q_zh": "那个女生为什么留杯子？", "q_en": "Why did the woman leave cups?",
+       "options": [
+         {"text": "她不想要那些杯子了", "pinyin": "tā bù xiǎng yào nàxiē bēizi le", "text_en": "she didn't want them anymore", "correct": false},
+         {"text": "她觉得茶水间的杯子不够", "pinyin": "tā juéde cháshuǐjiān de bēizi bú gòu", "text_en": "she thought there weren't enough cups", "correct": false},
+         {"text": "她每天来借热水，留杯子算是谢谢", "pinyin": "tā měi tiān lái jiè rè shuǐ, liú bēizi suànshì xièxie", "text_en": "she borrowed hot water daily and left cups as thanks", "correct": true},
+         {"text": "清洁阿姨让她放的", "pinyin": "qīngjié āyí ràng tā fàng de", "text_en": "the cleaning lady asked her to", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_identity_001",
+    "title": "Two Names",
+    "title_zh": "两个名字",
+    "hsk_level": 3,
+    "text_zh": "我有两个名字。在公司，大家叫我「David」。在家里，爸妈叫我「大卫」。小时候我觉得有两个名字很酷，但是越长越大，越来越不知道哪个才是真正的自己。有一次，一个外国同事问我：「你更喜欢别人叫你什么？」我想了很久，说：「都可以。」但是回家以后，妈妈叫了一声「大卫」，我忽然觉得很温暖。也许名字不重要，重要的是叫你名字的那个人，把多少感情放在了里面。比较起来，「大卫」这个名字听起来更像家。",
+    "text_pinyin": "Wǒ yǒu liǎng gè míngzi. Zài gōngsī, dàjiā jiào wǒ「David」. Zài jiā lǐ, bà mā jiào wǒ「Dàwèi」. Xiǎo shíhou wǒ juéde yǒu liǎng gè míngzi hěn kù, dànshì yuè zhǎng yuè dà, yuè lái yuè bù zhīdào nǎge cái shì zhēnzhèng de zìjǐ. Yǒu yí cì, yí gè wàiguó tóngshì wèn wǒ:「Nǐ gèng xǐhuan biéren jiào nǐ shénme?」Wǒ xiǎng le hěn jiǔ, shuō:「Dōu kěyǐ.」Dànshì huí jiā yǐhòu, māma jiào le yì shēng「Dàwèi」, wǒ hūrán juéde hěn wēnnuǎn. Yěxǔ míngzi bú zhòngyào, zhòngyào de shì jiào nǐ míngzi de nàge rén, bǎ duōshao gǎnqíng fàng zài le lǐmiàn. Bǐjiào qǐlái,「Dàwèi」zhège míngzi tīng qǐlái gèng xiàng jiā.",
+    "text_en": "I have two names. At the office, everyone calls me 'David.' At home, my parents call me 'Dawei.' As a kid I thought having two names was cool, but the older I got, the less I knew which one was really me. Once, a foreign colleague asked: 'What do you prefer people call you?' I thought for a long time and said: 'Either is fine.' But when I got home and Mom called out 'Dawei,' I suddenly felt warm. Maybe the name doesn't matter — what matters is how much feeling the person calling it puts into it. Comparatively, 'Dawei' sounds more like home.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」在公司叫什么名字？", "q_en": "What is 'I' called at work?",
+       "options": [
+         {"text": "大卫", "pinyin": "Dàwèi", "text_en": "Dawei", "correct": false},
+         {"text": "David", "pinyin": "David", "text_en": "David", "correct": true},
+         {"text": "小卫", "pinyin": "Xiǎo Wèi", "text_en": "Xiao Wei", "correct": false},
+         {"text": "王卫", "pinyin": "Wáng Wèi", "text_en": "Wang Wei", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」长大以后觉得怎么样？", "q_en": "How did 'I' feel growing up?",
+       "options": [
+         {"text": "越来越喜欢有两个名字", "pinyin": "yuè lái yuè xǐhuan yǒu liǎng gè míngzi", "text_en": "liked having two names more and more", "correct": false},
+         {"text": "越来越不知道哪个是真正的自己", "pinyin": "yuè lái yuè bù zhīdào nǎge shì zhēnzhèng de zìjǐ", "text_en": "less and less sure which was the real self", "correct": true},
+         {"text": "想换一个新名字", "pinyin": "xiǎng huàn yí gè xīn míngzi", "text_en": "wanted a new name", "correct": false},
+         {"text": "不想用中文名字了", "pinyin": "bù xiǎng yòng Zhōngwén míngzi le", "text_en": "didn't want to use the Chinese name", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」最后觉得什么最重要？", "q_en": "What did 'I' ultimately think was most important?",
+       "options": [
+         {"text": "名字好不好听", "pinyin": "míngzi hǎo bù hǎo tīng", "text_en": "whether the name sounds nice", "correct": false},
+         {"text": "叫名字的人放了多少感情", "pinyin": "jiào míngzi de rén fàng le duōshao gǎnqíng", "text_en": "how much feeling the caller puts in", "correct": true},
+         {"text": "用中文名还是英文名", "pinyin": "yòng Zhōngwén míng háishì Yīngwén míng", "text_en": "whether to use Chinese or English", "correct": false},
+         {"text": "同事怎么看", "pinyin": "tóngshì zěnme kàn", "text_en": "what colleagues think", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j3_identity_002",
+    "title": "The Left-Handed Girl",
+    "title_zh": "用左手的女孩",
+    "hsk_level": 3,
+    "text_zh": "我从小就用左手写字。小时候，老师让我把笔换到右手，说这样比较正常。我试了，但是右手写的字又丑又慢。妈妈对老师说：「除了用左手以外，她什么都跟别人一样。」后来我长大了，发现用左手的人其实不少。我们切菜、写字、拿筷子都用左手，虽然有时候不太方便——比如说，剪刀是给右手设计的，被我用起来总是不太顺。但是我越来越觉得，这就是我。不需要被改变，也不需要跟别人一样。",
+    "text_pinyin": "Wǒ cóng xiǎo jiù yòng zuǒ shǒu xiě zì. Xiǎo shíhou, lǎoshī ràng wǒ bǎ bǐ huàn dào yòu shǒu, shuō zhèyàng bǐjiào zhèngcháng. Wǒ shì le, dànshì yòu shǒu xiě de zì yòu chǒu yòu màn. Māma duì lǎoshī shuō:「Chúle yòng zuǒ shǒu yǐwài, tā shénme dōu gēn biéren yíyàng.」Hòulái wǒ zhǎng dà le, fāxiàn yòng zuǒ shǒu de rén qíshí bù shǎo. Wǒmen qiē cài, xiě zì, ná kuàizi dōu yòng zuǒ shǒu, suīrán yǒu shíhou bú tài fāngbiàn——bǐrú shuō, jiǎndāo shì gěi yòu shǒu shèjì de, bèi wǒ yòng qǐlái zǒng shì bú tài shùn. Dànshì wǒ yuè lái yuè juéde, zhè jiùshì wǒ. Bù xūyào bèi gǎibiàn, yě bù xūyào gēn biéren yíyàng.",
+    "text_en": "I've written with my left hand since I was small. When I was young, the teacher told me to switch the pen to my right hand, saying that was more normal. I tried, but my right-hand writing was ugly and slow. Mom told the teacher: 'Besides using her left hand, she's the same as everyone else.' As I grew up, I found there are actually quite a few left-handed people. We chop vegetables, write, and hold chopsticks with our left hand — though sometimes it's inconvenient. For example, scissors are designed for right hands and never feel quite right when I use them. But I feel more and more that this is simply who I am. I don't need to be changed, and I don't need to be the same as everyone else.",
+    "questions": [
+      {"type": "mc", "q_zh": "老师让「我」做什么？", "q_en": "What did the teacher ask 'I' to do?",
+       "options": [
+         {"text": "不要写字了", "pinyin": "bú yào xiě zì le", "text_en": "stop writing", "correct": false},
+         {"text": "把笔换到右手", "pinyin": "bǎ bǐ huàn dào yòu shǒu", "text_en": "switch the pen to the right hand", "correct": true},
+         {"text": "多练习写字", "pinyin": "duō liànxí xiě zì", "text_en": "practice writing more", "correct": false},
+         {"text": "用电脑写作业", "pinyin": "yòng diànnǎo xiě zuòyè", "text_en": "do homework on computer", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "妈妈怎么说的？", "q_en": "What did Mom say?",
+       "options": [
+         {"text": "她同意老师的话", "pinyin": "tā tóngyì lǎoshī de huà", "text_en": "she agreed with the teacher", "correct": false},
+         {"text": "除了用左手以外，她什么都跟别人一样", "pinyin": "chúle yòng zuǒ shǒu yǐwài, tā shénme dōu gēn biéren yíyàng", "text_en": "besides using her left hand, she's the same as everyone", "correct": true},
+         {"text": "她会慢慢改过来的", "pinyin": "tā huì mànman gǎi guòlái de", "text_en": "she'll change gradually", "correct": false},
+         {"text": "用左手比右手好", "pinyin": "yòng zuǒ shǒu bǐ yòu shǒu hǎo", "text_en": "left hand is better than right", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "什么东西用起来不太方便？", "q_en": "What is inconvenient to use?",
+       "options": [
+         {"text": "筷子", "pinyin": "kuàizi", "text_en": "chopsticks", "correct": false},
+         {"text": "笔", "pinyin": "bǐ", "text_en": "pens", "correct": false},
+         {"text": "剪刀", "pinyin": "jiǎndāo", "text_en": "scissors", "correct": true},
+         {"text": "刀子", "pinyin": "dāozi", "text_en": "knives", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_identity_003",
+    "title": "The Accent",
+    "title_zh": "口音",
+    "hsk_level": 3,
+    "text_zh": "我在北京工作了五年，普通话说得越来越好。但是每次打电话回家，一听到爸爸的声音，我的口音就会变回来。同事们第一次听到我打电话的样子，都很惊讶：「你平时说话不是这样的啊！」我笑了笑，不知道怎么解释。其实我比较喜欢我的方言，因为那是我小时候学会的第一种语言。有人说方言不好听，但是对我来说，方言就像妈妈做的菜——也许卖相不好，但是味道是最对的。我不想把它改掉，那是我来的地方。",
+    "text_pinyin": "Wǒ zài Běijīng gōngzuò le wǔ nián, pǔtōnghuà shuō de yuè lái yuè hǎo. Dànshì měi cì dǎ diànhuà huí jiā, yì tīng dào bàba de shēngyīn, wǒ de kǒuyīn jiù huì biàn huílái. Tóngshìmen dì-yī cì tīng dào wǒ dǎ diànhuà de yàngzi, dōu hěn jīngyà:「Nǐ píngshí shuō huà búshì zhèyàng de a!」Wǒ xiào le xiào, bù zhīdào zěnme jiěshì. Qíshí wǒ bǐjiào xǐhuan wǒ de fāngyán, yīnwèi nà shì wǒ xiǎo shíhou xuéhuì de dì-yī zhǒng yǔyán. Yǒu rén shuō fāngyán bù hǎo tīng, dànshì duì wǒ lái shuō, fāngyán jiù xiàng māma zuò de cài——yěxǔ màixiàng bù hǎo, dànshì wèidào shì zuì duì de. Wǒ bù xiǎng bǎ tā gǎi diào, nà shì wǒ lái de dìfang.",
+    "text_en": "I've worked in Beijing for five years and my Mandarin has gotten better and better. But every time I call home and hear Dad's voice, my accent switches back. The first time my colleagues heard me on the phone, they were surprised: 'You don't usually talk like that!' I smiled, not knowing how to explain. Actually I rather like my dialect — it was the first language I learned as a child. Some people say dialects don't sound nice, but to me, dialect is like Mom's cooking — maybe it doesn't look fancy, but the taste is exactly right. I don't want to change it. It's where I come from.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」什么时候口音会变回来？", "q_en": "When does 'my' accent switch back?",
+       "options": [
+         {"text": "跟同事说话的时候", "pinyin": "gēn tóngshì shuō huà de shíhou", "text_en": "when talking to colleagues", "correct": false},
+         {"text": "打电话回家的时候", "pinyin": "dǎ diànhuà huí jiā de shíhou", "text_en": "when calling home", "correct": true},
+         {"text": "喝了酒以后", "pinyin": "hē le jiǔ yǐhòu", "text_en": "after drinking", "correct": false},
+         {"text": "很累的时候", "pinyin": "hěn lèi de shíhou", "text_en": "when very tired", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」把方言比作什么？", "q_en": "What does 'I' compare dialect to?",
+       "options": [
+         {"text": "一首老歌", "pinyin": "yì shǒu lǎo gē", "text_en": "an old song", "correct": false},
+         {"text": "小时候的照片", "pinyin": "xiǎo shíhou de zhàopiàn", "text_en": "childhood photos", "correct": false},
+         {"text": "妈妈做的菜", "pinyin": "māma zuò de cài", "text_en": "Mom's cooking", "correct": true},
+         {"text": "家乡的天气", "pinyin": "jiāxiāng de tiānqì", "text_en": "hometown weather", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」想不想改掉自己的方言？", "q_en": "Does 'I' want to change the dialect?",
+       "options": [
+         {"text": "想，因为不好听", "pinyin": "xiǎng, yīnwèi bù hǎo tīng", "text_en": "yes, because it sounds bad", "correct": false},
+         {"text": "不想，那是来的地方", "pinyin": "bù xiǎng, nà shì lái de dìfang", "text_en": "no, it's where I come from", "correct": true},
+         {"text": "想，因为同事觉得奇怪", "pinyin": "xiǎng, yīnwèi tóngshì juéde qíguài", "text_en": "yes, because colleagues find it odd", "correct": false},
+         {"text": "无所谓", "pinyin": "wúsuǒwèi", "text_en": "doesn't care", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_comedy_001",
+    "title": "The Wrong Floor",
+    "title_zh": "走错了楼层",
+    "hsk_level": 3,
+    "text_zh": "今天我加班到很晚，回到小区已经快十二点了。我太累了，走进电梯以后按了六楼——但是我住七楼。门开了，我把钥匙拿出来，走到门口，开不了。我试了三次，越试越着急。我想：锁是不是被人换了？我正要打电话给物业，忽然看到门口的鞋。那不是我的鞋！我这才发现自己走错了楼层。我赶快跑上了七楼。谢天谢地，没有人开门。第二天早上，六楼的邻居问我：「昨天晚上是不是有人在开我家的门？」我比较不好意思地说：「可能是风吧。」",
+    "text_pinyin": "Jīntiān wǒ jiābān dào hěn wǎn, huí dào xiǎoqū yǐjīng kuài shí'èr diǎn le. Wǒ tài lèi le, zǒu jìn diàntī yǐhòu àn le liù lóu——dànshì wǒ zhù qī lóu. Mén kāi le, wǒ bǎ yàoshi ná chūlái, zǒu dào ménkǒu, kāi bù liǎo. Wǒ shì le sān cì, yuè shì yuè zhāojí. Wǒ xiǎng: suǒ shì bú shì bèi rén huàn le? Wǒ zhèng yào dǎ diànhuà gěi wùyè, hūrán kàn dào ménkǒu de xié. Nà búshì wǒ de xié! Wǒ zhè cái fāxiàn zìjǐ zǒu cuò le lóucéng. Wǒ gǎnkuài pǎo shàng le qī lóu. Xiè tiān xiè dì, méiyǒu rén kāi mén. Dì-èr tiān zǎoshang, liù lóu de línjū wèn wǒ:「Zuótiān wǎnshang shì bú shì yǒu rén zài kāi wǒ jiā de mén?」Wǒ bǐjiào bù hǎoyìsi de shuō:「Kěnéng shì fēng ba.」",
+    "text_en": "I worked overtime late today and got back to the complex near midnight. I was so tired that I pressed 6 in the elevator — but I live on the 7th floor. The door opened, I took out my key, walked to the door, and couldn't open it. I tried three times, getting more anxious with each try. I thought: did someone change the lock? I was about to call property management when I suddenly noticed the shoes at the door. Those weren't my shoes! Only then did I realize I was on the wrong floor. I hurried up to the 7th floor. Thank goodness nobody opened the door. The next morning, my 6th-floor neighbor asked: 'Was someone trying to open my door last night?' Rather embarrassed, I said: 'Probably the wind.'",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」为什么开不了门？", "q_en": "Why couldn't 'I' open the door?",
+       "options": [
+         {"text": "钥匙丢了", "pinyin": "yàoshi diū le", "text_en": "lost the key", "correct": false},
+         {"text": "锁坏了", "pinyin": "suǒ huài le", "text_en": "the lock was broken", "correct": false},
+         {"text": "走错了楼层", "pinyin": "zǒu cuò le lóucéng", "text_en": "went to the wrong floor", "correct": true},
+         {"text": "门被反锁了", "pinyin": "mén bèi fǎn suǒ le", "text_en": "the door was bolted from inside", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」怎么发现走错了？", "q_en": "How did 'I' realize the mistake?",
+       "options": [
+         {"text": "看到了楼层号", "pinyin": "kàn dào le lóucéng hào", "text_en": "saw the floor number", "correct": false},
+         {"text": "邻居开了门", "pinyin": "línjū kāi le mén", "text_en": "the neighbor opened the door", "correct": false},
+         {"text": "看到门口的鞋不是自己的", "pinyin": "kàn dào ménkǒu de xié búshì zìjǐ de", "text_en": "saw the shoes at the door weren't mine", "correct": true},
+         {"text": "物业打电话来了", "pinyin": "wùyè dǎ diànhuà lái le", "text_en": "property management called", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」跟邻居说了什么？", "q_en": "What did 'I' tell the neighbor?",
+       "options": [
+         {"text": "说了真话", "pinyin": "shuō le zhēn huà", "text_en": "told the truth", "correct": false},
+         {"text": "说可能是风", "pinyin": "shuō kěnéng shì fēng", "text_en": "said it was probably the wind", "correct": true},
+         {"text": "说不知道", "pinyin": "shuō bù zhīdào", "text_en": "said didn't know", "correct": false},
+         {"text": "没有回答", "pinyin": "méiyǒu huídá", "text_en": "didn't answer", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_comedy_002",
+    "title": "The Voice Message",
+    "title_zh": "语音消息",
+    "hsk_level": 3,
+    "text_zh": "我妈妈刚学会用手机发语音消息。但是她有一个习惯——每次说完以后，都会加一句「好了，就这样」，然后按停。问题是，她经常不小心又按了一下，把「好了，就这样」录了两遍。所以我每天收到的语音都是：「今天天气不错，你多穿一件。好了，就这样。好了，就这样。」我姐姐说：「你应该教妈妈怎么用。」但是我觉得比较好笑，不想改。有一天妈妈给我发了一条很长的语音，最后说：「这次我只说一遍——好了，就这样。就这样。就……」她又说了三遍。",
+    "text_pinyin": "Wǒ māma gāng xuéhuì yòng shǒujī fā yǔyīn xiāoxi. Dànshì tā yǒu yí gè xíguàn——měi cì shuō wán yǐhòu, dōu huì jiā yí jù「hǎo le, jiù zhèyàng」, ránhòu àn tíng. Wèntí shì, tā jīngcháng bù xiǎoxīn yòu àn le yí xià, bǎ「hǎo le, jiù zhèyàng」lù le liǎng biàn. Suǒyǐ wǒ měi tiān shōu dào de yǔyīn dōu shì:「Jīntiān tiānqì búcuò, nǐ duō chuān yí jiàn. Hǎo le, jiù zhèyàng. Hǎo le, jiù zhèyàng.」Wǒ jiějie shuō:「Nǐ yīnggāi jiāo māma zěnme yòng.」Dànshì wǒ juéde bǐjiào hǎoxiào, bù xiǎng gǎi. Yǒu yì tiān māma gěi wǒ fā le yì tiáo hěn cháng de yǔyīn, zuìhòu shuō:「Zhè cì wǒ zhǐ shuō yí biàn——hǎo le, jiù zhèyàng. Jiù zhèyàng. Jiù……」Tā yòu shuō le sān biàn.",
+    "text_en": "My mom just learned to send voice messages on her phone. But she has a habit — after every message, she adds 'Okay, that's it,' then hits stop. The problem is, she often accidentally presses again and records 'Okay, that's it' twice. So every voice message I get is: 'Nice weather today, wear an extra layer. Okay, that's it. Okay, that's it.' My sister said: 'You should teach Mom how to use it.' But I thought it was rather funny and didn't want to change it. One day Mom sent me a long voice message, ending with: 'This time I'll only say it once — okay, that's it. That's it. That's...' She said it three more times.",
+    "questions": [
+      {"type": "mc", "q_zh": "妈妈的语音消息有什么问题？", "q_en": "What's the problem with Mom's voice messages?",
+       "options": [
+         {"text": "声音太小了", "pinyin": "shēngyīn tài xiǎo le", "text_en": "too quiet", "correct": false},
+         {"text": "总是「好了，就这样」说两遍", "pinyin": "zǒng shì「hǎo le, jiù zhèyàng」shuō liǎng biàn", "text_en": "always says 'okay, that's it' twice", "correct": true},
+         {"text": "说的话听不清楚", "pinyin": "shuō de huà tīng bù qīngchu", "text_en": "speech is unclear", "correct": false},
+         {"text": "发给了错的人", "pinyin": "fā gěi le cuò de rén", "text_en": "sent to the wrong person", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "姐姐觉得应该怎么做？", "q_en": "What did the sister think should be done?",
+       "options": [
+         {"text": "帮妈妈买新手机", "pinyin": "bāng māma mǎi xīn shǒujī", "text_en": "buy Mom a new phone", "correct": false},
+         {"text": "教妈妈怎么用", "pinyin": "jiāo māma zěnme yòng", "text_en": "teach Mom how to use it", "correct": true},
+         {"text": "让妈妈发文字", "pinyin": "ràng māma fā wénzì", "text_en": "have Mom send text instead", "correct": false},
+         {"text": "不要听语音了", "pinyin": "bú yào tīng yǔyīn le", "text_en": "stop listening to voice messages", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "最后妈妈说了几遍「就这样」？", "q_en": "How many times did Mom say 'that's it' at the end?",
+       "options": [
+         {"text": "一遍", "pinyin": "yí biàn", "text_en": "once", "correct": false},
+         {"text": "两遍", "pinyin": "liǎng biàn", "text_en": "twice", "correct": false},
+         {"text": "三遍", "pinyin": "sān biàn", "text_en": "three times", "correct": true},
+         {"text": "四遍", "pinyin": "sì biàn", "text_en": "four times", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_comedy_003",
+    "title": "The Group Photo",
+    "title_zh": "集体照",
+    "hsk_level": 3,
+    "text_zh": "公司要拍集体照，大家站了三排。摄影师说：「高的站后面，矮的站前面。」这本来很简单，但是我们部门的小张和小李差不多高，两个人都不想站前面。小张说：「我比你高一点。」小李说：「你穿了高跟鞋，把鞋脱了我们再比。」摄影师等了十分钟，越来越着急。最后经理走过来说：「你们两个都站中间，问题不就解决了吗？」大家都笑了。照片拍出来以后，小张发现自己闭了眼睛，要求再拍一张。小李小声说：「比身高的时候那么认真，拍照的时候怎么不认真？」",
+    "text_pinyin": "Gōngsī yào pāi jítǐ zhào, dàjiā zhàn le sān pái. Shèyǐngshī shuō:「Gāo de zhàn hòumiàn, ǎi de zhàn qiánmiàn.」Zhè běnlái hěn jiǎndān, dànshì wǒmen bùmén de Xiǎo Zhāng hé Xiǎo Lǐ chàbuduō gāo, liǎng gè rén dōu bù xiǎng zhàn qiánmiàn. Xiǎo Zhāng shuō:「Wǒ bǐ nǐ gāo yìdiǎn.」Xiǎo Lǐ shuō:「Nǐ chuān le gāogēn xié, bǎ xié tuō le wǒmen zài bǐ.」Shèyǐngshī děng le shí fēnzhōng, yuè lái yuè zhāojí. Zuìhòu jīnglǐ zǒu guòlái shuō:「Nǐmen liǎng gè dōu zhàn zhōngjiān, wèntí bú jiù jiějué le ma?」Dàjiā dōu xiào le. Zhàopiàn pāi chūlái yǐhòu, Xiǎo Zhāng fāxiàn zìjǐ bì le yǎnjīng, yāoqiú zài pāi yì zhāng. Xiǎo Lǐ xiǎo shēng shuō:「Bǐ shēngāo de shíhou nàme rènzhēn, pāi zhào de shíhou zěnme bú rènzhēn?」",
+    "text_en": "The company needed a group photo, so everyone stood in three rows. The photographer said: 'Tall ones in the back, short ones in the front.' This should have been simple, but Xiao Zhang and Xiao Li from our department were about the same height, and neither wanted to stand in front. Xiao Zhang said: 'I'm a little taller than you.' Xiao Li said: 'You're wearing heels — take them off and then let's compare.' The photographer waited ten minutes, getting more and more impatient. Finally the manager came over and said: 'You two both stand in the middle — problem solved, right?' Everyone laughed. When the photo came out, Xiao Zhang found she had closed her eyes and asked to retake it. Xiao Li whispered: 'So serious about comparing height, but not serious when taking the photo?'",
+    "questions": [
+      {"type": "mc", "q_zh": "小张和小李为什么争？", "q_en": "Why did Xiao Zhang and Xiao Li argue?",
+       "options": [
+         {"text": "两个人都不想站前面", "pinyin": "liǎng gè rén dōu bù xiǎng zhàn qiánmiàn", "text_en": "neither wanted to stand in front", "correct": true},
+         {"text": "两个人都想站中间", "pinyin": "liǎng gè rén dōu xiǎng zhàn zhōngjiān", "text_en": "both wanted to stand in the middle", "correct": false},
+         {"text": "他们不想拍照", "pinyin": "tāmen bù xiǎng pāi zhào", "text_en": "they didn't want to take the photo", "correct": false},
+         {"text": "他们不喜欢对方", "pinyin": "tāmen bù xǐhuan duìfāng", "text_en": "they didn't like each other", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "经理怎么解决的？", "q_en": "How did the manager solve it?",
+       "options": [
+         {"text": "让他们量身高", "pinyin": "ràng tāmen liáng shēngāo", "text_en": "had them measure height", "correct": false},
+         {"text": "让他们都站中间", "pinyin": "ràng tāmen dōu zhàn zhōngjiān", "text_en": "had them both stand in the middle", "correct": true},
+         {"text": "让他们都站后面", "pinyin": "ràng tāmen dōu zhàn hòumiàn", "text_en": "had them both stand in back", "correct": false},
+         {"text": "让他们不要拍了", "pinyin": "ràng tāmen bú yào pāi le", "text_en": "told them not to be in the photo", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "照片有什么问题？", "q_en": "What was wrong with the photo?",
+       "options": [
+         {"text": "小李闭了眼睛", "pinyin": "Xiǎo Lǐ bì le yǎnjīng", "text_en": "Xiao Li closed her eyes", "correct": false},
+         {"text": "小张闭了眼睛", "pinyin": "Xiǎo Zhāng bì le yǎnjīng", "text_en": "Xiao Zhang closed her eyes", "correct": true},
+         {"text": "照片太暗了", "pinyin": "zhàopiàn tài àn le", "text_en": "too dark", "correct": false},
+         {"text": "有人没有站好", "pinyin": "yǒu rén méiyǒu zhàn hǎo", "text_en": "someone wasn't positioned well", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_urban_006",
+    "title": "The Last Bus",
+    "title_zh": "最后一班公交车",
+    "hsk_level": 3,
+    "text_zh": "每天晚上十一点半，最后一班公交车从我家门口经过。司机是一个四十多岁的女人，她每次到站都会多等一分钟。有人问她为什么，她说：「赶最后一班车的人，一定是今天过得不太容易的人。多等一分钟，也许就能让他们不用打车回家。」我有一次加班到很晚，跑到车站的时候，车已经关了门。但是司机从后视镜里看到我了，又把门打开了。我上车以后，她笑着说：「赶上了。」那天晚上，那辆公交车比较空，窗外的路灯一盏一盏地过去，我觉得这座城市没有那么冷。",
+    "text_pinyin": "Měi tiān wǎnshang shíyī diǎn bàn, zuìhòu yì bān gōngjiāo chē cóng wǒ jiā ménkǒu jīngguò. Sījī shì yí gè sìshí duō suì de nǚrén, tā měi cì dào zhàn dōu huì duō děng yì fēnzhōng. Yǒu rén wèn tā wèishénme, tā shuō:「Gǎn zuìhòu yì bān chē de rén, yídìng shì jīntiān guò de bú tài róngyì de rén. Duō děng yì fēnzhōng, yěxǔ jiù néng ràng tāmen bú yòng dǎchē huí jiā.」Wǒ yǒu yí cì jiābān dào hěn wǎn, pǎo dào chēzhàn de shíhou, chē yǐjīng guān le mén. Dànshì sījī cóng hòushìjìng lǐ kàn dào wǒ le, yòu bǎ mén dǎkāi le. Wǒ shàng chē yǐhòu, tā xiàozhe shuō:「Gǎn shàng le.」Nà tiān wǎnshang, nà liàng gōngjiāo chē bǐjiào kōng, chuāng wài de lùdēng yì zhǎn yì zhǎn de guòqu, wǒ juéde zhè zuò chéngshì méiyǒu nàme lěng.",
+    "text_en": "Every night at eleven-thirty, the last bus passes by my door. The driver is a woman in her forties who always waits an extra minute at each stop. Someone asked her why. She said: 'People catching the last bus must have had a hard day. Waiting one more minute might save them from needing a taxi home.' One night I worked late and ran to the stop, but the doors had already closed. The driver saw me in the rearview mirror and opened the doors again. After I got on, she smiled and said: 'You made it.' That night the bus was rather empty. The streetlights passed one by one outside the window, and I felt this city wasn't so cold after all.",
+    "questions": [
+      {"type": "mc", "q_zh": "司机为什么每次多等一分钟？", "q_en": "Why does the driver wait an extra minute?",
+       "options": [
+         {"text": "公司要求的", "pinyin": "gōngsī yāoqiú de", "text_en": "company requirement", "correct": false},
+         {"text": "她觉得赶最后一班车的人今天不容易", "pinyin": "tā juéde gǎn zuìhòu yì bān chē de rén jīntiān bù róngyì", "text_en": "she thinks last-bus riders had a hard day", "correct": true},
+         {"text": "路上没有人", "pinyin": "lù shàng méiyǒu rén", "text_en": "no one on the road", "correct": false},
+         {"text": "她不想太早回家", "pinyin": "tā bù xiǎng tài zǎo huí jiā", "text_en": "she doesn't want to go home early", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」跑到车站的时候，车怎么了？", "q_en": "What happened when 'I' arrived at the stop?",
+       "options": [
+         {"text": "车已经走了", "pinyin": "chē yǐjīng zǒu le", "text_en": "bus had left", "correct": false},
+         {"text": "车已经关了门", "pinyin": "chē yǐjīng guān le mén", "text_en": "bus doors were already closed", "correct": true},
+         {"text": "车还没有来", "pinyin": "chē hái méiyǒu lái", "text_en": "bus hadn't arrived yet", "correct": false},
+         {"text": "车坏了", "pinyin": "chē huài le", "text_en": "bus was broken", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」坐在公交车上有什么感觉？", "q_en": "How did 'I' feel on the bus?",
+       "options": [
+         {"text": "觉得很累", "pinyin": "juéde hěn lèi", "text_en": "very tired", "correct": false},
+         {"text": "觉得城市没有那么冷", "pinyin": "juéde chéngshì méiyǒu nàme lěng", "text_en": "the city didn't feel so cold", "correct": true},
+         {"text": "觉得公交车太慢了", "pinyin": "juéde gōngjiāo chē tài màn le", "text_en": "the bus was too slow", "correct": false},
+         {"text": "觉得想打车", "pinyin": "juéde xiǎng dǎchē", "text_en": "wanted to take a taxi", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  }
+]

@@ -1,0 +1,83 @@
+{
+  "title": "The Dumpling Wrapper",
+  "title_zh": "擀饺子皮的手",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're invited to make dumplings with your Chinese friend's grandmother. She rolls the wrappers with astonishing speed while chatting.",
+    "setup_zh": "你被邀请和朋友的奶奶一起包饺子。她一边聊天一边飞快地擀饺子皮。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "来，你试试擀。不要怕，手放轻一点，慢慢来。我擀了六十年了，一开始也擀不好。我婆婆当年教我的时候说「饺子皮不怕丑，就怕没耐心」。",
+        "text_pinyin": "Lái, nǐ shìshi gǎn. Bú yào pà, shǒu fàng qīng yīdiǎn, mànman lái. Wǒ gǎn le liùshí nián le, yī kāishǐ yě gǎn bù hǎo. Wǒ pópo dāngnián jiāo wǒ de shíhou shuō 'jiǎozi pí bú pà chǒu, jiù pà méi nàixīn'.",
+        "text_en": "Come, try rolling. Don't be afraid — lighter hands, go slowly. I've been rolling for sixty years; I couldn't do it well at first either. My mother-in-law taught me and said, 'Dumpling wrappers don't mind being ugly — they only mind impatience.'"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her encouragement and her mother-in-law's saying.",
+        "options": [
+          {
+            "text_zh": "「不怕丑，就怕没耐心」——这个说法太好了。不只是饺子皮，好像什么事情都是这样。做得不完美没关系，最重要的是愿意慢慢学。",
+            "text_pinyin": "'Bú pà chǒu, jiù pà méi nàixīn' — zhège shuōfǎ tài hǎo le. Bù zhǐ shì jiǎozi pí, hǎoxiàng shénme shìqing dōu shì zhèyàng. Zuò de bù wánměi méi guānxi, zuì zhòngyào de shì yuànyì mànman xué.",
+            "text_en": "'Not afraid of ugly, only afraid of impatience' — what a great saying. Not just for dumpling wrappers — it seems true for everything. It's okay to be imperfect, the important thing is willingness to learn slowly.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Extracts universal wisdom from a kitchen saying — patience over perfection."
+          },
+          {
+            "text_zh": "我擀的好丑啊。",
+            "text_pinyin": "Wǒ gǎn de hǎo chǒu a.",
+            "text_en": "Mine are so ugly.",
+            "score": 0.0,
+            "feedback": "Self-deprecation instead of engaging her wisdom."
+          },
+          {
+            "text_zh": "用饺子机不是更快吗？",
+            "text_pinyin": "Yòng jiǎozi jī bú shì gèng kuài ma?",
+            "text_en": "Wouldn't a dumpling machine be faster?",
+            "score": 0.0,
+            "feedback": "Suggests a machine to a sixty-year veteran."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "哈哈，是的。我婆婆教了我很多，不只是包饺子。她说做人也一样——「不怕慢，就怕站」。只要你一直在学，一直在做，什么都能学会。你看，你擀的这个已经比刚才好多了。",
+        "text_pinyin": "Hāhā, shì de. Wǒ pópo jiāo le wǒ hěn duō, bù zhǐ shì bāo jiǎozi. Tā shuō zuòrén yě yīyàng — 'bú pà màn, jiù pà zhàn'. Zhǐyào nǐ yīzhí zài xué, yīzhí zài zuò, shénme dōu néng xué huì. Nǐ kàn, nǐ gǎn de zhège yǐjīng bǐ gāngcái hǎo duō le.",
+        "text_en": "Ha, yes. My mother-in-law taught me many things, not just dumpling-making. She said being a person is the same — 'Not afraid of slow, only afraid of standing still.' As long as you keep learning, keep doing, you can learn anything. Look, this one you rolled is already much better than before."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her encouragement and the wisdom passed through generations.",
+        "options": [
+          {
+            "text_zh": "您婆婆的话从她传到您，今天又从您传到了我。包饺子不只是做饭——是一家人坐在一起，把爱和智慧像馅一样包进去，一代传一代。",
+            "text_pinyin": "Nín pópo de huà cóng tā chuán dào nín, jīntiān yòu cóng nín chuán dào le wǒ. Bāo jiǎozi bù zhǐ shì zuòfàn — shì yī jiā rén zuò zài yīqǐ, bǎ ài hé zhìhuì xiàng xiàn yīyàng bāo jìnqù, yī dài chuán yī dài.",
+            "text_en": "Your mother-in-law's words passed from her to you, and today from you to me. Making dumplings isn't just cooking — it's family sitting together, wrapping love and wisdom inside like filling, generation after generation.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Dumplings as vessels of wisdom — each generation wraps in their care."
+          },
+          {
+            "text_zh": "什么馅的最好吃？",
+            "text_pinyin": "Shénme xiàn de zuì hǎochī?",
+            "text_en": "What filling tastes best?",
+            "score": 0.0,
+            "feedback": "A food preference question during an intergenerational moment."
+          },
+          {
+            "text_zh": "您婆婆还在吗？",
+            "text_pinyin": "Nín pópo hái zài ma?",
+            "text_en": "Is your mother-in-law still alive?",
+            "score": 0.0,
+            "feedback": "Could touch on grief, and misses the emotional flow."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Making dumplings (包饺子) is one of China's most important family rituals, especially during Spring Festival. The round table, the shared labor, the passing of technique from mother-in-law to daughter-in-law — all carry deep emotional significance. The proverb 不怕慢就怕站 (not afraid of slow, only afraid of stopping) is kitchen wisdom that doubles as life philosophy."
+  }
+}

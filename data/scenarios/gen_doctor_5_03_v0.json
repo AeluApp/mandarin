@@ -1,0 +1,196 @@
+{
+    "title": "The Neighborhood Herbalist",
+    "title_zh": "街角的中药师",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_doctor_5_03_v0",
+    "tree": {
+        "setup": "A traditional Chinese medicine pharmacy tucked between a bubble tea shop and a phone repair stall — the contrast between ancient and modern could not be more complete. Inside, the air is thick with the scent of dried herbs, and wooden drawers line the walls from floor to ceiling, each one labeled with characters that look like they predate the building itself. Pharmacist Wei has been dispensing herbal remedies for thirty years and has the serene confidence of someone who believes that most modern ailments have ancient solutions.",
+        "setup_zh": "一家夹在奶茶店和手机维修店之间的中药房——古今对比再鲜明不过。里面的空气中弥漫着干草药的香气，从地板到天花板排满了木制抽屉，每个上面标着看起来比建筑本身还古老的汉字。魏药师配了三十年的中药，带着一种笃定的从容，相信大多数现代疾病都有古老的解决方案。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来进来。看你的脸色，最近没休息好吧？要买什么药？",
+                "text_pinyin": "jìnlái jìnlái. kàn nǐ de liǎnsè, zuìjìn méi xiūxi hǎo ba? yào mǎi shénme yào?",
+                "text_en": "Come in, come in. Judging by your complexion, you haven't been resting well? What medicine are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain what you need.",
+                "options": [
+                    {
+                        "text_zh": "魏药师，您好。是的，最近失眠比较严重，而且总觉得没力气。朋友推荐我来这里看看，说中药可能会有帮助。不过说实话，我之前没怎么接触过中药。",
+                        "text_pinyin": "Wèi yàoshī, nín hǎo. shì de, zuìjìn shīmián bǐjiào yánzhòng, érqiě zǒng juéde méi lìqi. péngyou tuījiàn wǒ lái zhèlǐ kàn kan, shuō zhōngyào kěnéng huì yǒu bāngzhù. búguò shuō shíhuà, wǒ zhīqián méi zěnme jiēchù guò zhōngyào.",
+                        "text_en": "Pharmacist Wei, hello. Yes, I've been having serious insomnia and always feel tired. A friend recommended I come here — said Chinese medicine might help. Though honestly, I don't have much experience with traditional medicine.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Symptoms, referral source, and honest about being a newcomer — Pharmacist Wei's eyes crinkle. Teaching someone about herbal medicine is his second-favorite thing. (The first is preparing the herbs.)"
+                    },
+                    {
+                        "text_zh": "我睡不好觉，有没有什么中药？",
+                        "text_pinyin": "wǒ shuì bù hǎo jiào, yǒu méiyǒu shénme zhōngyào?",
+                        "text_en": "I can't sleep well — do you have any Chinese medicine for that?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear enough. He'll ask more about your condition before recommending anything."
+                    },
+                    {
+                        "text_zh": "随便看看。",
+                        "text_pinyin": "suíbiàn kàn kan.",
+                        "text_en": "Just browsing.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Wei chuckles. People don't browse a Chinese pharmacy the way they browse a bookstore — but he's patient."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "失眠和乏力啊。中医讲究辨证论治，不是头疼就吃头疼药那么简单。让我先问你几个问题。你平时怕冷还是怕热？口渴不渴？做梦多不多？",
+                "text_pinyin": "shīmián hé fálì a. zhōngyī jiǎngjiū biànzhèng lùnzhì, búshì tóu téng jiù chī tóu téng yào nàme jiǎndān. ràng wǒ xiān wèn nǐ jǐ gè wèntí. nǐ píngshí pà lěng háishi pà rè? kǒu kě bù kě? zuò mèng duō bù duō?",
+                "text_en": "Insomnia and fatigue. Chinese medicine focuses on syndrome differentiation — it's not as simple as taking headache pills for a headache. Let me ask you some questions. Do you tend to feel cold or hot? Are you thirsty? Do you dream a lot?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer his diagnostic questions.",
+                "options": [
+                    {
+                        "text_zh": "我比较怕冷，冬天手脚总是凉的。口倒是不太渴，但是做梦很多，每天晚上都做梦，醒来以后很累。还有就是食欲一般，不太想吃东西。",
+                        "text_pinyin": "wǒ bǐjiào pà lěng, dōngtiān shǒujiǎo zǒngshì liáng de. kǒu dào shì bú tài kě, dànshì zuò mèng hěn duō, měi tiān wǎnshàng dōu zuò mèng, xǐng lái yǐhòu hěn lèi. hái yǒu jiùshì shíyù yìbān, bú tài xiǎng chī dōngxi.",
+                        "text_en": "I tend to feel cold — my hands and feet are always cold in winter. I'm not very thirsty, but I dream a lot — every night, and I feel exhausted when I wake up. Also my appetite is poor — I don't really want to eat.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Detailed responses to each question — Pharmacist Wei nods slowly. The pattern is forming: cold hands, excessive dreaming, poor appetite. He's already thinking about which drawers to open."
+                    },
+                    {
+                        "text_zh": "怕冷，做梦多。",
+                        "text_pinyin": "pà lěng, zuò mèng duō.",
+                        "text_en": "Feel cold, dream a lot.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Two data points. He'll need more — but it's a start."
+                    },
+                    {
+                        "text_zh": "我也不太清楚。好像都有一点？",
+                        "text_pinyin": "wǒ yě bú tài qīngchǔ. hǎoxiàng dōu yǒu yìdiǎn?",
+                        "text_en": "I'm not really sure. Maybe a bit of everything?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Wei smiles patiently. Self-observation is a skill. He'll help you develop it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "怕冷、多梦、食欲不好——这是典型的气血不足。我给你配一个养血安神的方子，主要用当归、酸枣仁、龙眼肉这几味药。不含任何刺激性的成分。",
+                "text_pinyin": "pà lěng, duō mèng, shíyù bù hǎo——zhè shì diǎnxíng de qìxuè bùzú. wǒ gěi nǐ pèi yí gè yǎng xuè ān shén de fāngzi, zhǔyào yòng dāngguī, suānzǎorén, lóngyǎnròu zhè jǐ wèi yào. bù hán rènhé cìjī xìng de chéngfèn.",
+                "text_en": "Cold sensitivity, excessive dreaming, poor appetite — this is typical qi and blood deficiency. I'll prepare a formula to nourish the blood and calm the spirit, mainly using angelica root, sour jujube seed, and longan flesh. No stimulating ingredients."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about how to take it and any interactions.",
+                "options": [
+                    {
+                        "text_zh": "谢谢魏药师。这个方子是煎汤喝还是有其他吃法？另外，我现在还在吃西药，一种维生素B。中药和西药能一起吃吗？",
+                        "text_pinyin": "xièxie Wèi yàoshī. zhège fāngzi shì jiān tāng hē háishi yǒu qítā chīfǎ? lìngwài, wǒ xiànzài hái zài chī xīyào, yì zhǒng wéishēngsù B. zhōngyào hé xīyào néng yìqǐ chī ma?",
+                        "text_en": "Thank you, Pharmacist Wei. Is this formula taken as a decoction, or are there other options? Also, I'm currently taking Western medicine — Vitamin B. Can I take Chinese and Western medicine together?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The interaction question is critical — Pharmacist Wei explains: leave at least two hours between them. He respects patients who think about drug interactions."
+                    },
+                    {
+                        "text_zh": "怎么吃？要煮吗？",
+                        "text_pinyin": "zěnme chī? yào zhǔ ma?",
+                        "text_en": "How do I take it? Do I need to cook it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The essential question. He explains the decoction process."
+                    },
+                    {
+                        "text_zh": "苦不苦？",
+                        "text_pinyin": "kǔ bù kǔ?",
+                        "text_en": "Is it bitter?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Wei's thirty years of experience have taught him one universal truth: yes, it's bitter. But「良药苦口」— good medicine tastes bitter."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个方子需要煎。每天一副，加三碗水煎成一碗，分早晚两次喝。如果你不方便煎的话，我们也可以代煎，真空包装好你拿回去。中药和西药最好隔两个小时吃。先吃七天的量，看看效果。",
+                "text_pinyin": "zhège fāngzi xūyào jiān. měi tiān yí fù, jiā sān wǎn shuǐ jiān chéng yì wǎn, fēn zǎo wǎn liǎng cì hē. rúguǒ nǐ bù fāngbiàn jiān de huà, wǒmen yě kěyǐ dài jiān, zhēnkōng bāozhuāng hǎo nǐ ná huíqù. zhōngyào hé xīyào zuìhǎo gé liǎng gè xiǎoshí chī. xiān chī qī tiān de liàng, kàn kan xiàoguǒ.",
+                "text_en": "This formula needs to be decocted. One dose per day — add three bowls of water and boil down to one. Drink in two portions, morning and evening. If you can't decoct it yourself, we can do it for you — vacuum-sealed for you to take home. Keep Chinese and Western medicine two hours apart. Start with a seven-day supply and see how it goes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose decoction method and ask about cost.",
+                "options": [
+                    {
+                        "text_zh": "那请你们帮我代煎吧，我家里没有煎药的工具。七天的量加上代煎费，一共多少钱？七天以后如果有效果的话，是继续吃同样的药还是要调整？",
+                        "text_pinyin": "nà qǐng nǐmen bāng wǒ dài jiān ba, wǒ jiālǐ méiyǒu jiān yào de gōngjù. qī tiān de liàng jiā shàng dài jiān fèi, yígòng duōshǎo qián? qī tiān yǐhòu rúguǒ yǒu xiàoguǒ de huà, shì jìxù chī tóngyàng de yào háishi yào tiáozhěng?",
+                        "text_en": "Please do the decoction for me — I don't have the equipment at home. How much for a seven-day supply plus the decoction fee? And if it works after seven days, do I continue the same formula or does it need adjusting?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical choice plus a forward-thinking question — Pharmacist Wei explains: the formula may be adjusted based on how you respond. Chinese medicine is iterative, like tuning an instrument."
+                    },
+                    {
+                        "text_zh": "代煎吧。多少钱？",
+                        "text_pinyin": "dài jiān ba. duōshǎo qián?",
+                        "text_en": "Do the decoction for me. How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He calculates: seven days of herbs plus decoction service."
+                    },
+                    {
+                        "text_zh": "我自己煎吧，省钱。怎么煎？",
+                        "text_pinyin": "wǒ zìjǐ jiān ba, shěng qián. zěnme jiān?",
+                        "text_en": "I'll do it myself to save money. How do I do it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Wei respects the frugality. He gives detailed decoction instructions — including which herbs to add first and which ones last."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "七天药材加代煎，一共两百一十块。如果有效果的话要回来让我看看舌苔和脉象再调整。这是中药的特点——不是一成不变的。明天下午四点以后可以来取。",
+                "text_pinyin": "qī tiān yàocái jiā dài jiān, yígòng liǎngbǎi yīshí kuài. rúguǒ yǒu xiàoguǒ de huà yào huílái ràng wǒ kàn kan shétāi hé mài xiàng zài tiáozhěng. zhè shì zhōngyào de tèdiǎn——búshì yìchéngbúbiàn de. míngtiān xiàwǔ sì diǎn yǐhòu kěyǐ lái qǔ.",
+                "text_en": "Seven days of herbs plus decoction: 210 yuan total. If it works, come back so I can check your tongue coating and pulse before adjusting. That's the nature of Chinese medicine — it's not fixed. You can pick it up tomorrow after 4 PM."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank him.",
+                "options": [
+                    {
+                        "text_zh": "两百一十块，好的。明天四点以后来取。魏药师，谢谢你的耐心解释。说实话，我以前对中药有点怀疑，但是听你这么一说，觉得值得试一试。",
+                        "text_pinyin": "liǎngbǎi yīshí kuài, hǎo de. míngtiān sì diǎn yǐhòu lái qǔ. Wèi yàoshī, xièxie nǐ de nàixīn jiěshì. shuō shíhuà, wǒ yǐqián duì zhōngyào yǒudiǎn huáiyí, dànshì tīng nǐ zhème yì shuō, juéde zhíde shì yí shì.",
+                        "text_en": "210 yuan, OK. I'll pick it up tomorrow after four. Pharmacist Wei, thank you for your patient explanations. Honestly, I was a bit skeptical about Chinese medicine before, but hearing you explain it, I think it's worth trying.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Honest about the skepticism and open to trying — Pharmacist Wei waves his hand modestly. Thirty years of trust is built one prescription at a time."
+                    },
+                    {
+                        "text_zh": "好的，明天来取。谢谢！",
+                        "text_pinyin": "hǎo de, míngtiān lái qǔ. xièxie!",
+                        "text_en": "OK, I'll pick it up tomorrow. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He wraps up the transaction and starts pulling herbs from the wooden drawers."
+                    },
+                    {
+                        "text_zh": "这个真的有用吗？",
+                        "text_pinyin": "zhège zhēn de yǒu yòng ma?",
+                        "text_en": "Does this really work?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Wei smiles. Thirty years and three thousand formulas say yes — but he understands the question. He suggests giving it seven days."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Traditional Chinese medicine pharmacies (中药房, zhōngyào fáng) diagnose through observation, questioning, and pulse-reading. 辨证论治 (biànzhèng lùnzhì, syndrome differentiation) means treatment is personalized based on the patient's overall pattern. 代煎 (dài jiān, pre-decoction service) makes herbal medicine convenient for modern life. Common sleep-related herbs include 酸枣仁 (suānzǎorén, sour jujube seed) and 龙眼肉 (lóngyǎnròu, longan flesh)."
+    }
+}

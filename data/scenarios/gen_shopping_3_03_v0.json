@@ -1,0 +1,124 @@
+{
+    "title": "The Skincare Detective",
+    "title_zh": "护肤品侦探",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_3_03_v0",
+    "tree": {
+        "setup": "A beauty and skincare store in an underground shopping mall. The consultant, Xiao Ling, approaches with the focused energy of someone who has diagnosed ten skin types before lunch. She carries a magnifying mirror and has an encyclopedic knowledge of ingredients. You just want sunscreen but she sees this as an opportunity for a complete skincare intervention.",
+        "setup_zh": "地下商场的美妆护肤品店。顾问小灵带着午饭前已经诊断了十种肤质的专注精力走过来。她随身携带放大镜，对成分有百科全书般的了解。你只想买防晒霜，但她看到了全面护肤干预的机会。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好！需要什么？哎，您的皮肤有点干。最近是不是没怎么保湿？",
+                "text_pinyin": "nín hǎo! xūyào shénme? āi, nín de pífū yǒudiǎn gān. zuìjìn shì bu shì méi zěnme bǎoshī?",
+                "text_en": "Hello! What do you need? Oh, your skin is a bit dry. Have you not been moisturizing recently?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you need.",
+                "options": [
+                    {
+                        "text_zh": "我想买防晒霜。SPF高一点的，适合日常用的。",
+                        "text_pinyin": "wǒ xiǎng mǎi fángshàishuāng. SPF gāo yìdiǎn de, shìhé rìcháng yòng de.",
+                        "text_en": "I want to buy sunscreen. Something with higher SPF, suitable for daily use.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Ling nods.「日常用的话SPF30到50就够了。您的肤质偏干，我推荐这款保湿型的防晒。」防晒霜 is 'sunscreen.' 日常 is 'daily.' She immediately matches product to skin type."
+                    },
+                    {
+                        "text_zh": "随便看看。有什么推荐吗？",
+                        "text_pinyin": "suíbiàn kànkan. yǒu shénme tuījiàn ma?",
+                        "text_en": "Just browsing. Any recommendations?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ling's eyes widen. A blank canvas.「那我先帮您测一下肤质吧！」She produces the magnifying mirror. You have now committed to a full consultation."
+                    },
+                    {
+                        "text_zh": "防晒霜。最便宜的就行。",
+                        "text_pinyin": "fángshàishuāng. zuì piányi de jiù xíng.",
+                        "text_en": "Sunscreen. The cheapest will do.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ling winces.「便宜的防晒效果不好，而且容易闷痘。我建议至少选中等价位的。」闷痘 is 'cause breakouts.' 中等价位 is 'mid-range price.' She can't in good conscience sell you the cheapest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这两款都不错。这个是化学防晒，质地轻薄，不泛白。那个是物理防晒，更温和，但是会有一点白。你比较在意哪个？",
+                "text_pinyin": "zhè liǎng kuǎn dōu búcuò. zhè ge shì huàxué fángshài, zhìdì qīng báo, bú fàn bái. nà ge shì wùlǐ fángshài, gèng wēnhé, dànshì huì yǒu yìdiǎn bái. nǐ bǐjiào zàiyì nǎ ge?",
+                "text_en": "Both of these are good. This one is chemical sunscreen, light texture, no white cast. That one is physical sunscreen, gentler, but leaves a slight white cast. Which matters more to you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose between the two options.",
+                "options": [
+                    {
+                        "text_zh": "我皮肤比较敏感，还是选温和的吧。泛白一点没关系。可以试一下吗？",
+                        "text_pinyin": "wǒ pífū bǐjiào mǐngǎn, háishi xuǎn wēnhé de ba. fàn bái yìdiǎn méi guānxi. kěyǐ shì yíxià ma?",
+                        "text_en": "My skin is sensitive, I'll go with the gentle one. A little white cast is fine. Can I try it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ling squeezes a dot onto the back of your hand.「看，抹开就好了。等两分钟白色就会消失。」敏感 is 'sensitive.' 泛白 is 'white cast.' 抹开 is 'spread it out.' Knowing your skin type guides the right choice."
+                    },
+                    {
+                        "text_zh": "不泛白的那个吧。我不想看起来像个鬼。",
+                        "text_pinyin": "bú fàn bái de nà ge ba. wǒ bù xiǎng kàn qǐlai xiàng ge guǐ.",
+                        "text_en": "The one without white cast. I don't want to look like a ghost.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ling laughs.「不会那么夸张的！但是化学防晒也很好。」夸张 is 'exaggerated.' 看起来像 is 'look like.' Your humor landed."
+                    },
+                    {
+                        "text_zh": "两个有什么价格区别？",
+                        "text_pinyin": "liǎng ge yǒu shénme jiàgé qūbié?",
+                        "text_en": "What's the price difference between the two?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「物理的一百五，化学的一百二。差三十块。」价格区别 is 'price difference.' Not a huge gap -- let function guide the choice rather than price."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，您平时用洗面奶吗？如果只涂防晒不卸妆的话，毛孔容易堵。我推荐搭配一个温和的洁面乳。",
+                "text_pinyin": "duì le, nín píngshí yòng xǐmiànnǎi ma? rúguǒ zhǐ tú fángshài bú xiè zhuāng de huà, máokǒng róngyì dǔ. wǒ tuījiàn dāpèi yí gè wēnhé de jiémiàn rǔ.",
+                "text_en": "By the way, do you use face wash? If you only apply sunscreen but don't cleanse it off, pores get clogged easily. I recommend pairing it with a gentle cleanser."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her upsell attempt.",
+                "options": [
+                    {
+                        "text_zh": "有道理。但是今天我预算有限，先买防晒霜就好。下次再来看洁面乳。",
+                        "text_pinyin": "yǒu dàoli. dànshì jīntiān wǒ yùsuàn yǒuxiàn, xiān mǎi fángshàishuāng jiù hǎo. xià cì zài lái kàn jiémiàn rǔ.",
+                        "text_en": "Good point. But my budget is limited today, I'll just get the sunscreen. I'll come back for cleanser next time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「好的，那防晒霜帮您包起来。」Xiao Ling respects the budget boundary. 预算有限 is 'limited budget.' 有道理 is 'that makes sense' -- acknowledging her point while setting limits."
+                    },
+                    {
+                        "text_zh": "洗面奶我在用。不过你说的卸妆是什么意思？防晒也要卸妆吗？",
+                        "text_pinyin": "xǐmiànnǎi wǒ zài yòng. búguò nǐ shuō de xiè zhuāng shì shénme yìsi? fángshài yě yào xiè zhuāng ma?",
+                        "text_en": "I use face wash. But what do you mean by 'cleanse off'? Sunscreen needs to be cleansed too?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「防晒霜也算化妆品，普通洗面奶洗不干净。需要先用卸妆水再用洗面奶。」卸妆 is 'remove makeup/cleanse.' This is actually important skincare knowledge."
+                    },
+                    {
+                        "text_zh": "好吧，洁面乳也拿一个。一共多少钱？有没有套装优惠？",
+                        "text_pinyin": "hǎo ba, jiémiàn rǔ yě ná yí gè. yígòng duōshao qián? yǒu méiyǒu tàozhuāng yōuhuì?",
+                        "text_en": "Fine, I'll take a cleanser too. How much total? Is there a set discount?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「买套装的话打九折！比单买便宜二十多块。」Xiao Ling's face lights up. 套装 is 'set/bundle.' 优惠 is 'discount/deal.' She successfully upsold you, but the bundle price is fair."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese skincare culture (护肤, hùfū) is serious business. 防晒霜 (fángshàishuāng, sunscreen) is considered essential year-round. Stores in underground malls (地下商场) often have aggressive but knowledgeable consultants. 套装优惠 (tàozhuāng yōuhuì, bundle deals) are common. 预算有限 (yùsuàn yǒuxiàn) is a polite way to set spending limits."
+    }
+}

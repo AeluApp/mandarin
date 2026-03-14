@@ -1,0 +1,124 @@
+{
+    "title": "The Weekend Negotiator",
+    "title_zh": "周末谈判专家",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_5_04_v0",
+    "tree": {
+        "setup": "Friday evening, 6:47 PM. Your phone lights up with messages from three friends simultaneously, each proposing a different plan for Saturday: Xiao Wang wants to hike, Xiao Chen wants to check out a new art exhibition, and Ah Jun wants to do absolutely nothing at a café. The challenge is not choosing one plan — it's merging three incompatible visions into a single day without anyone feeling their idea was rejected.",
+        "setup_zh": "周五晚上六点四十七分。你的手机同时亮起三个朋友的消息，每个人提出不同的周六计划：小王想去爬山，小陈想看一个新的艺术展，阿军想在咖啡馆里什么都不做。挑战不是选择一个方案——而是把三个互不兼容的愿景融合成一天的安排，同时不让任何人觉得自己的想法被否定了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "明天爬山啊！我查了天气预报，晴天，二十度。西山的桃花应该开了。谁去？",
+                "text_pinyin": "míngtiān pá shān a! wǒ chá le tiānqì yùbào, qíngtiān, èrshí dù. Xīshān de táohuā yīnggāi kāi le. shuí qù?",
+                "text_en": "Let's hike tomorrow! I checked the weather — sunny, 20 degrees. The peach blossoms at West Mountain should be blooming. Who's in?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond while considering everyone's preferences.",
+                "options": [
+                    {
+                        "text_zh": "等一下，小陈说想去看艺术展，阿军想去咖啡馆。我有个想法：早上去西山看桃花——不用爬太高，走一圈就行。下午回来的时候顺路去小陈说的那个艺术展。然后晚上去阿军推荐的那个新开的咖啡馆坐坐。一天三个地方，谁都不委屈。怎么样？",
+                        "text_pinyin": "děng yíxià, Xiǎo Chén shuō xiǎng qù kàn yìshù zhǎn, Ā Jūn xiǎng qù kāfēi guǎn. wǒ yǒu gè xiǎngfǎ: zǎoshàng qù Xīshān kàn táohuā——bú yòng pá tài gāo, zǒu yí quān jiù xíng. xiàwǔ huílái de shíhòu shùnlù qù Xiǎo Chén shuō de nàge yìshù zhǎn. ránhòu wǎnshàng qù Ā Jūn tuījiàn de nàge xīn kāi de kāfēi guǎn zuò zuò. yì tiān sān gè dìfāng, shuí dōu bú wěiqu. zěnmeyàng?",
+                        "text_en": "Wait — Xiao Chen wants the art exhibition, Ah Jun wants the café. Here's an idea: morning at West Mountain for peach blossoms — doesn't have to be a full hike, just a stroll. Afternoon on the way back, stop at Xiao Chen's art exhibition. Evening at Ah Jun's new café recommendation. Three places in one day, nobody misses out. Sound good?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The diplomatic merger — morning nature, afternoon culture, evening relaxation. All three friends feel heard, and the day has a natural flow. This is weekend diplomacy at its finest."
+                    },
+                    {
+                        "text_zh": "我觉得爬山吧，天气好难得。",
+                        "text_pinyin": "wǒ juéde pá shān ba, tiānqì hǎo nándé.",
+                        "text_en": "I say hiking — nice weather is rare.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Choosing one option outright — Xiao Chen and Ah Jun's suggestions go unaddressed."
+                    },
+                    {
+                        "text_zh": "你们自己定吧，我都行。",
+                        "text_pinyin": "nǐmen zìjǐ dìng ba, wǒ dōu xíng.",
+                        "text_en": "You all decide — I'm fine with anything.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Abstaining from the negotiation. Without a mediator, three incompatible plans stay incompatible."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一天三个活动？这个安排也太满了吧。不过西山看桃花确实是限时的，错过就要等明年了。好吧，早上几点出发？",
+                "text_pinyin": "yì tiān sān gè huódòng? zhège ānpái yě tài mǎn le ba. búguò Xīshān kàn táohuā quèshí shì xiànshí de, cuòguò jiù yào děng míngnián le. hǎo ba, zǎoshàng jǐ diǎn chūfā?",
+                "text_en": "Three activities in one day? That's a packed schedule. But the peach blossoms are time-limited — miss them and you wait another year. OK, what time do we leave in the morning?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Set the schedule.",
+                "options": [
+                    {
+                        "text_zh": "八点半在地铁站集合，九点到西山，走个一两个小时。十一点下山，找个地方吃午饭。下午两点去看艺术展，看到四点左右。晚上五点半到咖啡馆。时间安排不算太赶，中间都有缓冲。大家同意的话我建个群发位置。",
+                        "text_pinyin": "bā diǎn bàn zài dìtiě zhàn jíhé, jiǔ diǎn dào Xīshān, zǒu gè yì liǎng gè xiǎoshí. shíyī diǎn xiàshān, zhǎo gè dìfāng chī wǔfàn. xiàwǔ liǎng diǎn qù kàn yìshù zhǎn, kàn dào sì diǎn zuǒyòu. wǎnshàng wǔ diǎn bàn dào kāfēi guǎn. shíjiān ānpái bú suàn tài gǎn, zhōngjiān dōu yǒu huǎnchōng. dàjiā tóngyì de huà wǒ jiàn gè qún fā wèizhi.",
+                        "text_en": "Meet at the subway at 8:30, reach West Mountain by 9, stroll for one to two hours. Down the mountain by 11, find lunch somewhere. Art exhibition at 2 PM until about 4. Café at 5:30. Schedule isn't too tight — there's buffer time between each. If everyone agrees, I'll create a group chat and share locations.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A timed itinerary with buffer zones and a practical group-chat proposal — weekend planning elevated to project management. Everyone agrees."
+                    },
+                    {
+                        "text_zh": "早上八点出发吧，越早越好。",
+                        "text_pinyin": "zǎoshàng bā diǎn chūfā ba, yuè zǎo yuè hǎo.",
+                        "text_en": "Leave at 8 AM — the earlier the better.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Ah Jun, who wanted to do nothing, quietly sighs at the word「八点.」"
+                    },
+                    {
+                        "text_zh": "看心情吧，不一定都去。",
+                        "text_pinyin": "kàn xīnqíng ba, bù yídìng dōu qù.",
+                        "text_en": "Let's play it by ear — maybe we won't do all of them.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An open-ended plan is no plan at all. Without times, the day will dissolve into indecision by 10 AM."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个时间表不错！我把它发到群里了。阿军说五点半的咖啡馆正好，不算太早。小陈说艺术展周六下午不用排队。就这么定了！明天见。",
+                "text_pinyin": "zhège shíjiān biǎo búcuò! wǒ bǎ tā fā dào qún lǐ le. Ā Jūn shuō wǔ diǎn bàn de kāfēi guǎn zhènghǎo, bú suàn tài zǎo. Xiǎo Chén shuō yìshù zhǎn zhōu liù xiàwǔ bú yòng pái duì. jiù zhème dìng le! míngtiān jiàn.",
+                "text_en": "This timetable is great! I've shared it in the group. Ah Jun says 5:30 café is perfect, not too early. Xiao Chen says the art exhibition won't have lines Saturday afternoon. It's settled! See you tomorrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and say goodnight.",
+                "options": [
+                    {
+                        "text_zh": "完美！大家记得穿舒服的鞋——爬山加逛展会走不少路。我明天带一个保温壶泡茶，山上喝。晚安，明天见！别睡过头啊，说的就是你，阿军。",
+                        "text_pinyin": "wánměi! dàjiā jìde chuān shūfu de xié——pá shān jiā guàng zhǎn huì zǒu bù shǎo lù. wǒ míngtiān dài yí gè bǎowēn hú pào chá, shānshàng hē. wǎn'ān, míngtiān jiàn! bié shuì guòtóu a, shuō de jiùshì nǐ, Ā Jūn.",
+                        "text_en": "Perfect! Everyone remember comfortable shoes — hiking plus exhibition is a lot of walking. I'll bring a thermos of tea for the mountain. Good night, see you tomorrow! Don't oversleep — I'm looking at you, Ah Jun.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical advice, a thoughtful thermos offer, and a personalized jab at Ah Jun — the group chat fills with laughing emojis. Tomorrow is going to be a good day."
+                    },
+                    {
+                        "text_zh": "好，明天见！",
+                        "text_pinyin": "hǎo, míngtiān jiàn!",
+                        "text_en": "OK, see you tomorrow!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean closing. The plan is set."
+                    },
+                    {
+                        "text_zh": "希望不下雨。",
+                        "text_pinyin": "xīwàng bú xià yǔ.",
+                        "text_en": "Hope it doesn't rain.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Wang already checked — sunny, 20 degrees. Pessimism at bedtime rarely helps."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese friend groups often negotiate weekend plans (周末计划) in real-time via WeChat group chats. Combining multiple activities into one day is common — Chinese cities have excellent public transit that makes multi-stop days practical. 桃花 (táohuā, peach blossoms) viewing is a seasonal activity in spring. Creating dedicated group chats for specific plans with shared locations (发位置) is standard logistics."
+    }
+}

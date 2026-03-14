@@ -1,0 +1,89 @@
+{
+    "title": "Voices in the Commute",
+    "title_zh": "通勤路上的声音",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaochen are waiting for the subway. She takes out her earbuds and wants to share something she heard on a podcast this morning.",
+        "setup_zh": "你和朋友小陈在等地铁。她摘下耳机，想跟你分享今天早上在播客里听到的一段话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天早上听了一个播客，主持人说了一句话我一直在想：「我们花了太多时间让别人满意，却忘了问自己满不满意。」你觉得是这样吗？",
+                "text_pinyin": "Jīntiān zǎoshang tīng le yīge bōkè, zhǔchírén shuō le yī jù huà wǒ yīzhí zài xiǎng: 'Wǒmen huā le tài duō shíjiān ràng biéren mǎnyì, què wàng le wèn zìjǐ mǎn bù mǎnyì.' Nǐ juéde shì zhèyàng ma?",
+                "text_en": "I listened to a podcast this morning, and the host said something I can't stop thinking about: 'We spend too much time making others happy, and forget to ask if we're happy ourselves.' Do you think that's true?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your reaction to the quote.",
+                "options": [
+                    {
+                        "text_zh": "确实很多人是这样。从小就被教着要懂事、要考虑别人的感受，时间长了连自己想要什么都不清楚了。关键不是不关心别人，而是别忘了自己也需要被关心。",
+                        "text_pinyin": "Quèshí hěn duō rén shì zhèyàng. Cóng xiǎo jiù bèi jiāo zhe yào dǒngshì, yào kǎolǜ biéren de gǎnshòu, shíjiān cháng le lián zìjǐ xiǎng yào shénme dōu bù qīngchǔ le. Guānjiàn bú shì bù guānxīn biéren, ér shì bié wàng le zìjǐ yě xūyào bèi guānxīn.",
+                        "text_en": "A lot of people are like that. We're taught from childhood to be sensible and consider others, and over time you lose track of what you want. The point isn't to stop caring about others, but to not forget you need caring too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Nuanced and thoughtful — avoids the trap of simple agreement and adds depth."
+                    },
+                    {
+                        "text_zh": "你听什么播客？推荐一下。",
+                        "text_pinyin": "Nǐ tīng shénme bōkè? Tuījiàn yíxià.",
+                        "text_en": "What podcast do you listen to? Recommend it.",
+                        "score": 0.0,
+                        "feedback": "Skips the meaningful discussion to ask about the platform."
+                    },
+                    {
+                        "text_zh": "我不太听播客，我觉得太长了。",
+                        "text_pinyin": "Wǒ bú tài tīng bōkè, wǒ juéde tài cháng le.",
+                        "text_en": "I don't really listen to podcasts, I think they're too long.",
+                        "score": 0.0,
+                        "feedback": "Dismisses the medium instead of engaging with the idea."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不要忘了自己也需要被关心……你说得好。我最近就在学这个。以前同事让我帮忙，我从来不拒绝，哪怕自己已经忙不过来了。现在我在练习说「不」，虽然每次说完都觉得不好意思。",
+                "text_pinyin": "Bú yào wàng le zìjǐ yě xūyào bèi guānxīn…… nǐ shuō de hǎo. Wǒ zuìjìn jiù zài xué zhège. Yǐqián tóngshì ràng wǒ bāngmáng, wǒ cónglái bù jùjué, nǎpà zìjǐ yǐjīng máng bú guòlái le. Xiànzài wǒ zài liànxí shuō 'bù', suīrán měi cì shuō wán dōu juéde bù hǎoyìsi.",
+                "text_en": "Don't forget you need caring too... well said. I've been learning this lately. Before, whenever a colleague asked for help, I never refused, even when I was already overwhelmed. Now I'm practicing saying 'no,' though I feel awkward every time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Encourage her practice of setting boundaries.",
+                "options": [
+                    {
+                        "text_zh": "说「不」不是自私，是自我保护。你已经迈出了最难的那一步。慢慢来，不用一下子做到完美。照顾好自己也是对别人负责，耗尽的人帮不了任何人。",
+                        "text_pinyin": "Shuō \"bù\" bú shì zìsī, shì zìwǒ bǎohù. Nǐ yǐjīng mài chū le zuì nán de nà yī bù. Mànman lái, bú yòng yíxiàzi zuòdào wánměi. Zhàogù hǎo zìjǐ yě shì duì biéren fùzé, hào jìn de rén bāng bù liǎo rènhé rén.",
+                        "text_en": "Saying \"no\" isn't selfish — it's self-protection. You've already taken the hardest step. Take it slow, no need to be perfect right away. Taking care of yourself is being responsible to others too — a depleted person can't help anyone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirming and logical — reframes boundary-setting as responsible rather than selfish."
+                    },
+                    {
+                        "text_zh": "你不好意思说不的话，可以发微信拒绝，这样就不用面对面了。",
+                        "text_pinyin": "Nǐ bù hǎoyìsi shuō bù dehuà, kěyǐ fā Wēixìn jùjué, zhèyàng jiù bú yòng miàn duì miàn le.",
+                        "text_en": "If you feel awkward saying no in person, you could refuse by WeChat so you don't have to face them.",
+                        "score": 0.0,
+                        "feedback": "Avoidance technique — doesn't address the root issue."
+                    },
+                    {
+                        "text_zh": "同事之间互相帮忙很正常啊，不要太计较。",
+                        "text_pinyin": "Tóngshì zhī jiān hùxiāng bāngmáng hěn zhèngcháng a, bú yào tài jìjiào.",
+                        "text_en": "Helping colleagues out is normal, don't be too calculating.",
+                        "score": 0.0,
+                        "feedback": "Undermining — invalidates her effort to set healthy boundaries."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一个耗尽的人帮不了任何人……这句话我要记住。谢谢你，每次跟你聊天都比听播客还有用。",
+                "text_pinyin": "Yīge hào jìn de rén bāng bù liǎo rènhé rén…… zhè jù huà wǒ yào jìzhù. Xièxie nǐ, měi cì gēn nǐ liáotiān dōu bǐ tīng bōkè hái yǒuyòng.",
+                "text_en": "A depleted person can't help anyone... I need to remember that. Thank you — every conversation with you is more useful than any podcast."
+            }
+        ],
+        "cultural_note": "Podcasts (播客) have grown rapidly in China, especially among urban professionals seeking thoughtful content during commutes. The concept of「懂事」(dǒngshì, being sensible/considerate) is deeply ingrained in Chinese upbringing — children are praised for putting others' needs first. This cultural expectation makes boundary-setting particularly challenging, as saying 'no' can feel like a breach of social harmony (和谐, héxié)."
+    }
+}

@@ -8,6 +8,23 @@ from datetime import datetime, timezone
 logger = logging.getLogger(__name__)
 
 
+# Drill types that require feature flag checks
+FLAGGED_DRILLS = {
+    "radical_decomposition": "drill_radical_decomposition",
+    "confusable_pairs": "drill_confusable_pairs",
+    "measure_word": "drill_measure_word",
+    "sentence_building": "drill_sentence_building",
+}
+
+
+def is_drill_enabled(conn: sqlite3.Connection, drill_type: str, user_id: int = None) -> bool:
+    """Check if a drill type is enabled. Unflagged drills are always enabled."""
+    flag = FLAGGED_DRILLS.get(drill_type)
+    if flag is None:
+        return True  # Not gated
+    return is_enabled(conn, flag, user_id)
+
+
 def is_enabled(conn: sqlite3.Connection, flag_name: str, user_id: int = None) -> bool:
     """Check if a feature flag is enabled.
 
@@ -39,7 +56,9 @@ def is_enabled(conn: sqlite3.Connection, flag_name: str, user_id: int = None) ->
     # Deterministic rollout: hash(flag + user_id) mod 100 < pct
     key = f"{flag_name}:{user_id}"
     bucket = int(hashlib.sha256(key.encode()).hexdigest()[:8], 16) % 100
-    return bucket < pct
+    result = bucket < pct
+    logger.debug("Feature flag %r user=%s: pct=%d bucket=%d → %s", flag_name, user_id, pct, bucket, result)
+    return result
 
 
 def set_flag(conn: sqlite3.Connection, flag_name: str, enabled: bool,

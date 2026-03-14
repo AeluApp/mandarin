@@ -1,0 +1,123 @@
+{
+    "title": "The Permit Window",
+    "title_zh": "办证窗口",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're at a government service center trying to get a document notarized. You've already been sent to three different windows. The clerk at Window 7, Xiao Liu, has just told you that you need the original household registration booklet, not the copy that Window 3 said was fine.",
+        "setup_zh": "你在政务服务中心办理文件公证。你已经被指到三个不同的窗口了。7号窗口的小刘刚告诉你需要户口本原件，而不是3号窗口说可以用的复印件。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问办什么业务？……哦，公证。你带了户口本原件吗？复印件不行，必须是原件。……3号窗口说可以？那你去3号窗口办啊。他们要是能办，就不会把你送到我这儿来了，对吧？",
+                "text_pinyin": "Nǐ hǎo, qǐngwèn bàn shénme yèwù? ... Ó, gōngzhèng. Nǐ dài le hùkǒuběn yuánjiàn ma? Fùyìnjiàn bù xíng, bìxū shì yuánjiàn. ... Sān hào chuāngkǒu shuō kěyǐ? Nà nǐ qù sān hào chuāngkǒu bàn a. Tāmen yàoshi néng bàn, jiù bú huì bǎ nǐ sòng dào wǒ zhèr lái le, duì ba?",
+                "text_en": "Hello, what business are you here for? ... Oh, notarization. Did you bring the original household registration booklet? Copies won't do, must be the original. ... Window 3 said copies are fine? Then go to Window 3. If they could handle it, they wouldn't have sent you here, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Point out the circular logic without losing your composure entirely.",
+                "options": [
+                    {
+                        "text_zh": "等一下，让我理清一下。3号窗口说他们办不了，让我来7号。7号说材料不对，让我去3号。如果我现在回3号，他们会不会又把我送到7号来？我们是在办公证还是在玩一个很无聊的游戏？",
+                        "text_pinyin": "Děng yīxià, ràng wǒ lǐqīng yīxià. Sān hào chuāngkǒu shuō tāmen bàn bù liǎo, ràng wǒ lái qī hào. Qī hào shuō cáiliào bú duì, ràng wǒ qù sān hào. Rúguǒ wǒ xiànzài huí sān hào, tāmen huì bú huì yòu bǎ wǒ sòng dào qī hào lái? Wǒmen shì zài bàn gōngzhèng háishì zài wán yīge hěn wúliáo de yóuxì?",
+                        "text_en": "Window 3 says they can't do it, sends me to 7. Window 7 says wrong materials, sends me to 3. If I go back now, will they send me to 7 again?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Names the loop out loud. She can hear how absurd it sounds when someone says it back to her."
+                    },
+                    {
+                        "text_zh": "我理解每个窗口有不同的规定。那我应该先去哪里拿到原件的证明，然后再回来找你？",
+                        "text_pinyin": "Wǒ lǐjiě měi ge chuāngkǒu yǒu bùtóng de guīdìng. Nà wǒ yīnggāi xiān qù nǎlǐ ná dào yuánjiàn de zhèngmíng, ránhòu zài huílái zhǎo nǐ?",
+                        "text_en": "I understand each window has different rules. So where should I go first to get the original verified, then come back to you?",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "You're trying to solve the maze by following its rules. She just told you the rules point in a circle."
+                    },
+                    {
+                        "text_zh": "好的，没关系，那我回家拿原件吧。大概需要多久能办完？",
+                        "text_pinyin": "Hǎo de, méi guānxi, nà wǒ huí jiā ná yuánjiàn ba. Dàgài xūyào duō jiǔ néng bàn wán?",
+                        "text_en": "Okay, no problem, I'll go home and get the original. About how long will the whole process take?",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "You've accepted the premise and are already planning your next trip. She hasn't even confirmed that the original will be enough."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "游戏？我们这是正规流程。你看啊——3号管初审，我们管复核。初审的标准跟复核的标准不一样，这不是很正常吗？你去医院，挂号和看病也不是一个窗口吧？",
+                "text_pinyin": "Yóuxì? Wǒmen zhè shì zhèngguī liúchéng. Nǐ kàn a — sān hào guǎn chūshěn, wǒmen guǎn fùhé. Chūshěn de biāozhǔn gēn fùhé de biāozhǔn bù yīyàng, zhè bú shì hěn zhèngcháng ma? Nǐ qù yīyuàn, guàhào hé kànbìng yě bú shì yīge chuāngkǒu ba?",
+                "text_en": "Game? This is proper procedure. Look — Window 3 handles preliminary review, we handle secondary review. The standards for preliminary and secondary review are different. Isn't that normal? When you go to the hospital, registration and seeing the doctor aren't at the same window either, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She's used a surprisingly good analogy. Engage with it.",
+                "options": [
+                    {
+                        "text_zh": "对，但医院挂号的时候会告诉你要带什么。不会挂完号到了诊室，医生说'你挂的科不对，回去重新挂'，然后挂号处说'你得先看完医生才能改科室'。你们这个就是这样的。",
+                        "text_pinyin": "Duì, dàn yīyuàn guàhào de shíhou huì gàosù nǐ yào dài shénme. Bú huì guà wán hào dào le zhěnshì, yīshēng shuō 'nǐ guà de kē bú duì, huíqù chóngxīn guà', ránhòu guàhào chù shuō 'nǐ děi xiān kàn wán yīshēng cái néng gǎi kēshì'. Nǐmen zhège jiù shì zhèyàng de.",
+                        "text_en": "But at the hospital they tell you what to bring when you register. They don't let you walk to the exam room, then say 'wrong department, re-register,' and registration says 'see the doctor first.' That's what you're doing here.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uses her own analogy to show the circularity. Hard to argue with your own metaphor turned against you."
+                    },
+                    {
+                        "text_zh": "你说得有道理，流程确实是分步骤的。那我现在具体需要做什么？",
+                        "text_pinyin": "Nǐ shuō de yǒu dàolǐ, liúchéng quèshí shì fēn bùzhòu de. Nà wǒ xiànzài jùtǐ xūyào zuò shénme?",
+                        "text_en": "You make a good point, procedures do have steps. So what exactly do I need to do now?",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "She compared a broken system to a functioning one and you accepted the comparison. Now you're back to following instructions that lead in a circle."
+                    },
+                    {
+                        "text_zh": "我觉得你们应该把初审和复核的要求统一，这样办事人就不会跑来跑去了。",
+                        "text_pinyin": "Wǒ juéde nǐmen yīnggāi bǎ chūshěn hé fùhé de yāoqiú tǒngyī, zhèyàng bànshì rén jiù bú huì pǎo lái pǎo qù le.",
+                        "text_en": "I think you should unify the preliminary and secondary review requirements, so people don't have to run back and forth.",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "You've proposed a structural reform to a window clerk. She nods politely, but the suggestion will reach exactly nobody with the power to change it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "……好吧，你这个医院的比喻倒是把我说住了。行，我帮你查一下，看能不能在系统里直接调你的户口信息。本来不该我做这个，但你都跑了三趟了。不过你得在这儿签一个'材料补交承诺书'——对，就是承诺你会补交你已经交过但我们不认的材料。",
+                "text_pinyin": "... Hǎo ba, nǐ zhège yīyuàn de bǐyù dǎoshì bǎ wǒ shuō zhù le. Xíng, wǒ bāng nǐ chá yīxià, kàn néng bù néng zài xìtǒng lǐ zhíjiē diào nǐ de hùkǒu xìnxī. Běnlái bù gāi wǒ zuò zhège, dàn nǐ dōu pǎo le sān tàng le. Búguò nǐ děi zài zhèr qiān yīge 'cáiliào bǔjiāo chéngnuòshū' — duì, jiù shì chéngnuò nǐ huì bǔjiāo nǐ yǐjīng jiāo guò dàn wǒmen bù rèn de cáiliào.",
+                "text_en": "... Fine, your hospital metaphor got me. Okay, let me check if I can pull your household registration info directly from the system. This isn't really my job, but you've made three trips already. Though you'll need to sign a 'supplementary materials pledge form' — yes, that's a pledge to re-submit materials you already submitted but that we don't accept."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She's actually helping, but the solution is almost as absurd as the problem.",
+                "options": [
+                    {
+                        "text_zh": "我签。我签任何东西。你要我承诺补交我交过的东西，我承诺。你要我承诺以后不抱怨，我也承诺。在这个大厅里待了四个小时之后，我的底线已经不存在了。",
+                        "text_pinyin": "Wǒ qiān. Wǒ qiān rènhé dōngxi. Nǐ yào wǒ chéngnuò bǔjiāo wǒ jiāo guò de dōngxi, wǒ chéngnuò. Nǐ yào wǒ chéngnuò yǐhòu bù bàoyuàn, wǒ yě chéngnuò. Zài zhège dàtīng lǐ dāi le sì ge xiǎoshí zhīhòu, wǒ de dǐxiàn yǐjīng bù cúnzài le.",
+                        "text_en": "I'll sign. I'll sign anything. Re-submit what I already submitted? I pledge. Pledge not to complain? I pledge that too. After four hours in this hall, my standards no longer exist.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Total surrender delivered with the exhausted clarity of someone who has been defeated by paperwork. She's trying not to laugh."
+                    },
+                    {
+                        "text_zh": "谢谢你帮我想办法，小刘。像你这样的工作人员真的不多。",
+                        "text_pinyin": "Xièxie nǐ bāng wǒ xiǎng bànfǎ, Xiǎo Liú. Xiàng nǐ zhèyàng de gōngzuò rényuán zhēn de bù duō.",
+                        "text_en": "Thank you for finding a way to help, Xiao Liu. There aren't many staff members like you.",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "Genuine gratitude, but you've just been asked to sign a form promising to re-submit documents you already submitted. The absurdity sailed right past you."
+                    },
+                    {
+                        "text_zh": "这个承诺书有法律效力吗？我要不要先看一下内容？",
+                        "text_pinyin": "Zhège chéngnuòshū yǒu fǎlǜ xiàolì ma? Wǒ yào bú yào xiān kàn yīxià nèiróng?",
+                        "text_en": "Does this pledge form have legal standing? Should I read the contents first?",
+                        "score": 0.0,
+                        "register": "neutral",
+                        "feedback": "Treating a form about re-submitting already-submitted materials as a serious legal document. The bureaucracy has won. You're thinking inside the box it built around you."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese government service centers (政务服务中心) have modernized significantly, but the experience of being shuttled between windows (窗口) with inconsistent requirements remains a common frustration. The phrase '上面的规定' (regulations from above) simultaneously acknowledges absurdity while absolving the clerk. The 'supplementary materials pledge form' is only slightly exaggerated — Chinese bureaucracy genuinely features forms about forms, reviews of reviews, and confirmations that you will confirm."
+    }
+}

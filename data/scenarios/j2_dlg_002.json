@@ -1,0 +1,83 @@
+{
+  "title": "Morning Tai Chi in the Park",
+  "title_zh": "公园里的早操",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "You're jogging in the park and notice a group of elderly people doing tai chi. One of them waves you over.",
+    "setup_zh": "你在公园跑步，看到一群老人在打太极拳。其中一位向你招手。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "年轻人，过来一起练练！太极拳对身体很好。",
+        "text_pinyin": "Niánqīng rén, guòlái yīqǐ liàn lian! Tàijí quán duì shēntǐ hěn hǎo.",
+        "text_en": "Young person, come practice with us! Tai chi is very good for the body."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the invitation.",
+        "options": [
+          {
+            "text_zh": "好啊！但是我没学过，可以教我吗？",
+            "text_pinyin": "Hǎo a! Dànshì wǒ méi xué guò, kěyǐ jiāo wǒ ma?",
+            "text_en": "Sure! But I've never learned — can you teach me?",
+            "score": 1.0,
+            "feedback": "Open and enthusiastic — willing to try something new.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我跑步比较快。",
+            "text_pinyin": "Wǒ pǎobù bǐjiào kuài.",
+            "text_en": "I run pretty fast.",
+            "score": 0.0,
+            "feedback": "He's inviting you to do tai chi, not run."
+          },
+          {
+            "text_zh": "这个公园有厕所吗？",
+            "text_pinyin": "Zhège gōngyuán yǒu cèsuǒ ma?",
+            "text_en": "Is there a restroom in this park?",
+            "score": 0.0,
+            "feedback": "Ignores his kind invitation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "当然可以！你跟着我做就行了。慢慢来，不着急。",
+        "text_pinyin": "Dāngrán kěyǐ! Nǐ gēnzhe wǒ zuò jiù xíng le. Mànmàn lái, bù zháojí.",
+        "text_en": "Of course! Just follow me. Take it slow, no rush."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Try and share how it feels.",
+        "options": [
+          {
+            "text_zh": "感觉很放松。难怪你们每天都来。",
+            "text_pinyin": "Gǎnjué hěn fàngsōng. Nánguài nǐmen měi tiān dōu lái.",
+            "text_en": "It feels very relaxing. No wonder you all come every day.",
+            "score": 1.0,
+            "feedback": "Genuine observation — connects to their daily practice.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我觉得跑步更好。",
+            "text_pinyin": "Wǒ juéde pǎobù gèng hǎo.",
+            "text_en": "I think running is better.",
+            "score": 0.0,
+            "feedback": "Dismisses what they're sharing with you."
+          },
+          {
+            "text_zh": "动作太慢了，我觉得没什么用。",
+            "text_pinyin": "Dòngzuò tài màn le, wǒ juéde méi shénme yòng.",
+            "text_en": "The movements are too slow — I don't think it's very useful.",
+            "score": 0.0,
+            "feedback": "He looks at you quietly, then back at the sky. The others keep moving without a word."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Morning tai chi (太极拳) groups in parks are a beloved Chinese tradition. The elderly practitioners often welcome newcomers warmly. The phrase 慢慢来 (take it slow) reflects a core philosophy of patience in Chinese wellness culture."
+  }
+}

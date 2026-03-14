@@ -1,0 +1,83 @@
+{
+  "title": "The Bicycle Bell",
+  "title_zh": "自行车铃",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're walking along the canal path when a friendly older woman on a bicycle slows down beside you.",
+    "setup_zh": "你沿着河边小路走的时候，一位骑自行车的阿姨在你旁边慢了下来。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你好！你也喜欢在这里散步吗？这条路很漂亮，对不对？",
+        "text_pinyin": "Nǐ hǎo! Nǐ yě xǐhuan zài zhèlǐ sànbù ma? Zhè tiáo lù hěn piàoliang, duì bú duì?",
+        "text_en": "Hello! Do you like walking here too? This path is beautiful, isn't it?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what you like about this path.",
+        "options": [
+          {
+            "text_zh": "是的，我很喜欢这里。河边的树很好看，走着走着心情就好了。",
+            "text_pinyin": "Shì de, wǒ hěn xǐhuan zhèlǐ. Hé biān de shù hěn hǎokàn, zǒu zhe zǒu zhe xīnqíng jiù hǎo le.",
+            "text_en": "Yes, I love it here. The trees by the river are beautiful — walking here just lifts my mood.",
+            "score": 1.0,
+            "feedback": "Natural and heartfelt — walking as a gentle remedy.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我只是路过。",
+            "text_pinyin": "Wǒ zhǐ shì lùguò.",
+            "text_en": "I'm just passing through.",
+            "score": 0.0,
+            "feedback": "Shuts down the friendly conversation."
+          },
+          {
+            "text_zh": "你的自行车很好看。",
+            "text_pinyin": "Nǐ de zìxíngchē hěn hǎokàn.",
+            "text_en": "Your bicycle is nice.",
+            "score": 0.0,
+            "feedback": "Comments on her bike instead of the scenery she mentioned."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对！我每天下午都骑车来这里。风吹在脸上，听到水的声音，比什么都好。",
+        "text_pinyin": "Duì! Wǒ měi tiān xiàwǔ dōu qí chē lái zhèlǐ. Fēng chuī zài liǎn shàng, tīng dào shuǐ de shēngyīn, bǐ shénme dōu hǎo.",
+        "text_en": "Right! I ride here every afternoon. Wind on my face, the sound of water — better than anything."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her love of the outdoors.",
+        "options": [
+          {
+            "text_zh": "风和水的声音——这就够了，对吗？我觉得最好的东西都是不要钱的。",
+            "text_pinyin": "Fēng hé shuǐ de shēngyīn — zhè jiù gòu le, duì ma? Wǒ juéde zuì hǎo de dōngxi dōu shì bú yào qián de.",
+            "text_en": "Wind and the sound of water — that's enough, right? I think the best things are free.",
+            "score": 1.0,
+            "feedback": "Captures the iyashikei spirit — the best things cost nothing.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你不怕晒黑吗？",
+            "text_pinyin": "Nǐ bú pà shài hēi ma?",
+            "text_en": "Aren't you afraid of getting tan?",
+            "score": 0.0,
+            "feedback": "Introduces a worry into a joyful moment."
+          },
+          {
+            "text_zh": "骑车比走路快。",
+            "text_pinyin": "Qí chē bǐ zǒu lù kuài.",
+            "text_en": "Biking is faster than walking.",
+            "score": 0.0,
+            "feedback": "Speed isn't the point of her ride."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Cycling along rivers and canals remains a beloved daily ritual in many Chinese cities. The phrase 比什么都好 (better than anything) is a common way to express that simple sensory experiences — wind, water, sunlight — surpass material comforts."
+  }
+}

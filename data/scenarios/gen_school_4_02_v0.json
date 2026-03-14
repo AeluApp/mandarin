@@ -1,0 +1,124 @@
+{
+    "title": "The Library Guardian",
+    "title_zh": "图书馆守护者",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_4_02_v0",
+    "tree": {
+        "setup": "The university library on a Tuesday afternoon, sunlight falling across wooden tables that have absorbed decades of desperate studying. Librarian Mr. Song moves through the stacks with the silent efficiency of a cat, and speaks about the Dewey Decimal System the way others speak about their children — with deep, unwavering affection.",
+        "setup_zh": "周二下午的大学图书馆，阳光落在几十年来吸收了无数绝望复习的木桌上。图书管理员宋老师像猫一样无声而高效地穿行于书架之间，谈起杜威十进分类法时就像别人谈自己的孩子——深情而坚定。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "同学，需要帮忙吗？你在找什么书？",
+                "text_pinyin": "tóngxué, xūyào bāngmáng ma? nǐ zài zhǎo shénme shū?",
+                "text_en": "Student, need help? What book are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for help finding a book.",
+                "options": [
+                    {
+                        "text_zh": "宋老师，我在找一本关于唐朝历史的书，老师推荐的，但是我在书架上找不到。",
+                        "text_pinyin": "Sòng lǎoshī, wǒ zài zhǎo yì běn guānyú Tángcháo lìshǐ de shū, lǎoshī tuījiàn de, dànshì wǒ zài shūjià shàng zhǎo bú dào.",
+                        "text_en": "Mr. Song, I'm looking for a book about Tang Dynasty history that my teacher recommended, but I can't find it on the shelves.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Topic and context — Mr. Song's mental catalog is already cross-referencing. He knows exactly where it should be."
+                    },
+                    {
+                        "text_zh": "我找不到我要的书。",
+                        "text_pinyin": "wǒ zhǎo bú dào wǒ yào de shū.",
+                        "text_en": "I can't find the book I need.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll ask for the title or subject. Patience is his first and last tool."
+                    },
+                    {
+                        "text_zh": "你们的书怎么找啊？",
+                        "text_pinyin": "nǐmen de shū zěnme zhǎo a?",
+                        "text_en": "How do you find books here?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Song's eyes twinkle. This is an invitation to explain the catalog system, and he needs no encouragement."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "唐朝历史……你知道书名吗？或者作者？我帮你在系统里查一下。",
+                "text_pinyin": "Tángcháo lìshǐ……nǐ zhīdào shū míng ma? huòzhě zuòzhě? wǒ bāng nǐ zài xìtǒng lǐ chá yíxià.",
+                "text_en": "Tang Dynasty history... do you know the title? Or the author? I'll look it up in the system."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide what information you know.",
+                "options": [
+                    {
+                        "text_zh": "书名好像叫《唐代社会研究》，作者姓陈。",
+                        "text_pinyin": "shū míng hǎoxiàng jiào《Tángdài Shèhuì Yánjiū》, zuòzhě xìng Chén.",
+                        "text_en": "The title is something like 'Tang Dynasty Social Research,' author's surname is Chen.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Title plus author surname — Mr. Song types two keystrokes and finds it.「在三楼东区，K242.3。」Third floor, east wing."
+                    },
+                    {
+                        "text_zh": "我不记得书名了，但是关于唐朝的。",
+                        "text_pinyin": "wǒ bú jìde shū míng le, dànshì guānyú Tángcháo de.",
+                        "text_en": "I don't remember the title, but it's about the Tang Dynasty.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll search by subject and show you a list. The system was built for exactly this kind of vagueness."
+                    },
+                    {
+                        "text_zh": "老师说过，但是我忘了。",
+                        "text_pinyin": "lǎoshī shuō guò, dànshì wǒ wàng le.",
+                        "text_en": "My teacher mentioned it, but I forgot.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Song asks which class you're in. He's memorized the reading lists for every department — a skill that terrifies new faculty."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到了！在三楼东区，但是显示已经被借走了。你可以预约，等别人还了以后我们通知你。或者我可以推荐一本类似的。",
+                "text_pinyin": "zhǎo dào le! zài sān lóu dōngqū, dànshì xiǎnshì yǐjīng bèi jiè zǒu le. nǐ kěyǐ yùyuē, děng biéren huán le yǐhòu wǒmen tōngzhī nǐ. huòzhě wǒ kěyǐ tuījiàn yì běn lèisì de.",
+                "text_en": "Found it! Third floor east, but it shows as checked out. You can reserve it and we'll notify you when it's returned. Or I can recommend a similar one."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide what to do.",
+                "options": [
+                    {
+                        "text_zh": "我先预约那本，然后看看你推荐的书。两本都有用。",
+                        "text_pinyin": "wǒ xiān yùyuē nà běn, ránhòu kànkan nǐ tuījiàn de shū. liǎng běn dōu yǒu yòng.",
+                        "text_en": "I'll reserve that one first, then check out the one you recommend. Both will be useful.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Both options — Mr. Song's heart swells. A student who wants two books is a student after his own heart."
+                    },
+                    {
+                        "text_zh": "那我预约吧。大概几天能还？",
+                        "text_pinyin": "nà wǒ yùyuē ba. dàgài jǐ tiān néng huán?",
+                        "text_en": "I'll reserve it then. How long until it's returned?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He checks — the loan expires in four days. He'll send you a text."
+                    },
+                    {
+                        "text_zh": "算了，我上网找电子版吧。",
+                        "text_pinyin": "suàn le, wǒ shàng wǎng zhǎo diànzǐ bǎn ba.",
+                        "text_en": "Forget it — I'll find a digital version online.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Song suppresses a sigh. The physical book has notes in the margin from three generations of students, but he understands."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university libraries use a classification system based on the 中国图书馆分类法 (Zhōngguó Túshūguǎn Fēnlèi Fǎ). Borrowing periods are typically 30 days with renewal options. The librarian (图书管理员) is addressed as 老师 as a sign of respect."
+    }
+}

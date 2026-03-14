@@ -2,11 +2,11 @@
 
 ## Status: MOBILE-READY (V2 + Phases A-F)
 
-**Date:** 2026-02-21
+**Date:** 2026-02-28
 **Content library:** HSK 1-9 canonical word lists (10,000+ items via `add-hsk`), context notes, 134 auto-tagged, 30 dialogue scenarios
 **Grammar/skills:** 26 grammar points (HSK 1-3), 14 language skills seeded
-**Schema:** V17 (17 tables, 6-stage mastery lifecycle + push_token)
-**Tests:** 77 tests across 4 suites (mastery stages, report/forecast, retention, UI)
+**Schema:** V42 (56 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure)
+**Tests:** 1531 tests across 73 suites
 **Mobile:** Capacitor shell staged, JWT auth, offline sync, native plugin bridge
 
 ### Mobile Readiness (2026-02-21)
@@ -24,7 +24,7 @@
 |---|---|
 | `mandarin/web/api_errors.py` | Structured error codes + `api_error()` builder |
 | `mandarin/jwt_auth.py` | JWT access tokens (HS256) + hashed refresh tokens |
-| `mandarin/web/token_routes.py` | `POST /api/auth/token`, `/refresh`, `/revoke` |
+| `mandarin/web/token_routes.py` | `POST /api/auth/token`, `/token/mfa`, `/refresh`, `/revoke` |
 | `mandarin/web/sync_routes.py` | `POST /api/sync/push`, `GET /sync/pull`, `/sync/state` |
 | `mandarin/web/static/capacitor-bridge.js` | Native plugin wrappers (no-op in browser) |
 | `mandarin/web/static/offline-queue.js` | IndexedDB queue with auto-flush |
@@ -53,7 +53,7 @@
 
 #### Modified files
 - `mandarin/settings.py` — JWT_SECRET, JWT_ACCESS_EXPIRY_HOURS, JWT_REFRESH_EXPIRY_DAYS
-- `mandarin/db/core.py` — SCHEMA_VERSION=17, migration v16→v17
+- `mandarin/db/core.py` — SCHEMA_VERSION=26 (was 17 at Phase F)
 - `mandarin/web/__init__.py` — V1PrefixMiddleware, JWT request_loader, blueprint registration
 - `mandarin/web/routes.py` — public prefixes, CORS Authorization header, push endpoints
 - `mandarin/web/static/app.js` — Capacitor bridge init, haptics, JWT WS token, touch gestures, offline indicator
@@ -98,21 +98,21 @@
 ### 5. Listening Design
 | Requirement | Status | Location |
 |---|---|---|
-| Listening gist drill (text V0) | DONE | `drills.py:run_listening_gist_drill()` |
+| Listening gist drill (text V0) | DONE | `drills/listening.py` |
 | Audio playback (V1+) | DEFERRED | Schema ready (audio columns), runtime not yet |
 
 ### 6. Linguistic Intuition
 | Requirement | Status | Location |
 |---|---|---|
-| Intuition drill type | DONE | `drills.py:run_intuition_drill()` |
+| Intuition drill type | DONE | `drills/production.py` |
 | intuition_attempts/correct tracking | DONE | `progress` table columns |
-| Register expansion gated by intuition | DONE | `scheduler.py:_check_register_gate()` |
+| Register expansion gated by intuition | DONE | `scheduler.py` |
 
 ### 7. Error-Shape Tracking
 | Requirement | Status | Location |
 |---|---|---|
 | Error classification (14 types) | DONE | `schema.sql` CHECK constraint |
-| Error types: tone, segment, ime_confusable | DONE | `drills.py:_classify_ime_error()` |
+| Error types: tone, segment, ime_confusable | DONE | `drills/mc.py` |
 | Error types: grammar, vocab, other | DONE | drill return values |
 | Error types: register_mismatch, particle_misuse | DONE | schema, available for use |
 | Error types: function_word_omission, temporal_sequencing | DONE | schema, available for use |
@@ -124,10 +124,10 @@
 ### 8. IME Rules
 | Requirement | Status | Location |
 |---|---|---|
-| Accepts tone marks (mā) | DONE | `drills.py:_pinyin_match()` |
-| Accepts tone numbers (ma1) | DONE | `drills.py:_pinyin_match()` |
+| Accepts tone marks (mā) | DONE | `drills/pinyin.py` |
+| Accepts tone numbers (ma1) | DONE | `drills/pinyin.py` |
 | Accepts plain pinyin (mama) | DONE | marked as no_tone match |
-| Error classification for IME | DONE | `drills.py:_classify_ime_error()` |
+| Error classification for IME | DONE | `drills/mc.py` |
 
 ### 9. Diagnostics
 | Requirement | Status | Location |
@@ -194,16 +194,16 @@
 | 3 confidence states: full, ?, N | DONE | All 8 drill types + `_handle_confidence()` |
 | ? = 50/50 partial credit | DONE | `db.py:record_attempt()` confidence="half" |
 | N = still_unknown, no penalty | DONE | `db.py:record_attempt()` confidence="unknown" |
-| Sticky hanzi hints on miss | DONE | `drills.py:get_hanzi_hint()` with 4 rotation types |
-| Smart MC distractors | DONE | `drills.py:generate_mc_options()` — mastered_strong exclusion, length invariants |
-| Drill input validation | DONE | `drills.py:_validate_drill_inputs()` |
+| Sticky hanzi hints on miss | DONE | `drills/hints.py` with 4 rotation types |
+| Smart MC distractors | DONE | `drills/mc.py` — mastered_strong exclusion, length invariants |
+| Drill input validation | DONE | `drills/base.py` |
 
 ### 16. Hanzi Display
 | Requirement | Status | Location |
 |---|---|---|
-| Prominent hanzi (spaced, bold) | DONE | `drills.py:format_hanzi()` |
+| Prominent hanzi (spaced, bold) | DONE | `drills/base.py` |
 | Gated on avg level < 6.0 | DONE | `runner.py` computes prominent flag |
-| Inline hanzi in feedback | DONE | `drills.py:format_hanzi_inline()` |
+| Inline hanzi in feedback | DONE | `drills/base.py` |
 
 ### 17. Scaling Ladder
 | Requirement | Status | Location |
@@ -256,8 +256,8 @@
 | Requirement | Status | Location |
 |---|---|---|
 | seen → passed_once → stabilizing → stable → durable → decayed | DONE | `db/progress.py:record_attempt()` |
-| Schema V7+: stable_since_date, successes_while_stable | DONE | `db/core.py` migration |
-| Backfill: weak→seen/passed_once, improving→stabilizing | DONE | `db/core.py` V7 migration |
+| Schema V7+: stable_since_date, successes_while_stable | DONE | `db/core.py` migration (V7) |
+| Backfill: weak→seen/passed_once, improving→stabilizing | DONE | `db/core.py` migration (V7) |
 | Promotion: streak/days/drill_types/attempts criteria | DONE | `db/progress.py` |
 | Demotion: stable/durable→decayed (streak_incorrect≥2) | DONE | `db/progress.py` |
 | Recovery: decayed→stabilizing (streak_correct≥3) | DONE | `db/progress.py` |
@@ -278,7 +278,7 @@
 
 ---
 
-## Schema (17 tables, V17)
+## Schema (43 tables, V28)
 
 | Table | Purpose |
 |---|---|
@@ -301,6 +301,20 @@
 | vocab_encounter | Reading/listening lookup tracking for cleanup loop |
 | push_token | Mobile push notification tokens (per-user, per-platform) |
 | invite_code | Registration invite codes |
+| probe_log | Diagnostic probe results per scenario |
+| media_watch | Media exposure tracking (watched, liked, scores) |
+| affiliate_partner | Affiliate/referral partner registry |
+| referral_tracking | Referral visit + signup tracking |
+| affiliate_commission | Affiliate commission records |
+| discount_code | Promotional discount codes |
+| lifecycle_event | Subscription lifecycle event log |
+| security_audit_log | Security event audit trail |
+| data_deletion_request | GDPR deletion request tracking |
+| speaker_calibration | TTS voice calibration data |
+| crash_log | Server-side unhandled exception log |
+| client_error_log | Client-side JS error reports |
+| mfa_challenge | Short-lived MFA challenge tokens (DB-backed, multi-worker safe) |
+| grade_appeal | Grade appeal workflow for disputed drill results |
 
 ---
 
@@ -364,12 +378,12 @@ mandarin/
 ├── jwt_auth.py          # JWT access + refresh token management
 ├── db/                  # Database package
 │   ├── __init__.py      # Re-exports (get_connection, init_db, etc.)
-│   ├── core.py          # Schema, migrations (V17), connection management
+│   ├── core.py          # Schema, migrations (V24), connection management
 │   ├── content.py       # Content item queries, context notes
 │   ├── progress.py      # SRS engine, 6-stage mastery, retention model integration
 │   └── session.py       # Session lifecycle
 ├── scheduler.py         # Gap-aware, day-profile, error-informed session planning
-├── drills.py            # 12 drill types + confidence states + hints + smart distractors
+├── drills/              # 12 drill types + confidence states + hints + smart distractors
 ├── conversation.py      # Dialogue drill engine
 ├── scenario_loader.py   # Scenario JSON import/query
 ├── grammar_seed.py      # 26 grammar points + 14 skills seed data
@@ -398,13 +412,9 @@ mandarin/
     └── templates/index.html
 mobile/                  # Capacitor shell (iOS/Android)
 run                      # Bash launcher (./run, ./run menu, ./run app, ./run help)
-schema.sql               # Full schema (17 tables, V17)
+schema.sql               # Full schema (43 tables, V28)
 learner_profile.json     # Persona configuration
-tests/
-├── test_mastery_stages.py    # 13 tests — 6-stage lifecycle, migration, safety
-├── test_report_forecast.py   # 15 tests — report + forecast structure
-├── test_retention.py         # 30 tests — half-life retention model
-└── test_ui.py                # 19 tests — UI surfaces, web components
+tests/                       # 1343 tests across 59 suites
 data/
 ├── mandarin.db          # SQLite database
 ├── hsk/                 # HSK 4-9 vocabulary JSON
@@ -468,7 +478,7 @@ data/
 - [x] Stage-aware core stability (mastery_stage IN stable/durable)
 - [x] Honest UI labels: no "learned"/"mastered" below stable
 - [x] 6-stage breakdown in status, menu, runner, reports
-- [x] 77 tests across 4 suites — all passing
+- [x] 1343 tests across 59 suites — all passing
 
 ---
 

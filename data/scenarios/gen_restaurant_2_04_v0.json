@@ -1,0 +1,94 @@
+{
+    "title": "Reserving the Corner Table",
+    "title_zh": "预订角落的桌子",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_2_04_v0",
+    "tree": {
+        "setup": "You're calling a restaurant to reserve a table for tomorrow's dinner with friends. The hostess, Xiao Yun, answers with the warmth of someone who genuinely enjoys seating arrangements. She has a mental map of every table and knows which ones get the evening light, which ones are quieter, and which ones are near the kitchen (not recommended).",
+        "setup_zh": "你给餐厅打电话，为明天和朋友的晚饭订位子。领位小云接了电话，声音温暖，像是真心喜欢安排座位的人。她脑子里有每张桌子的地图，知道哪些能看到晚霞，哪些安静，哪些靠厨房（不推荐）。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，老地方餐厅。请问几位，什么时候？",
+                "text_pinyin": "nín hǎo, lǎo dìfang cāntīng. qǐngwèn jǐ wèi, shénme shíhou?",
+                "text_en": "Hello, Old Place Restaurant. How many guests, and when?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make your reservation.",
+                "options": [
+                    {
+                        "text_zh": "四个人，明天晚上六点半。",
+                        "text_pinyin": "sì gè rén, míngtiān wǎnshang liù diǎn bàn.",
+                        "text_en": "Four people, tomorrow at 6:30 PM.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Yun checks her book.「好的，有位子。您想坐哪里？里面安静一点，外面可以看风景。」Giving number + time in one sentence is efficient booking."
+                    },
+                    {
+                        "text_zh": "明天晚上有位子吗？",
+                        "text_pinyin": "míngtiān wǎnshang yǒu wèizi ma?",
+                        "text_en": "Do you have tables tomorrow evening?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Yun asks how many people.「几位呢？」She needs details before she can answer. 有位子吗 is the standard availability question."
+                    },
+                    {
+                        "text_zh": "你们的菜好吃吗？",
+                        "text_pinyin": "nǐmen de cài hǎochī ma?",
+                        "text_en": "Is your food good?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yun pauses. She works here. She is contractually obligated to say yes.「当然好吃！」But she'd rather discuss the reservation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。请问贵姓？我给您留靠窗的桌子。",
+                "text_pinyin": "hǎo de. qǐngwèn guì xìng? wǒ gěi nín liú kào chuāng de zhuōzi.",
+                "text_en": "OK. May I have your name? I'll save a window table for you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give your name and confirm.",
+                "options": [
+                    {
+                        "text_zh": "我姓王。靠窗的太好了，谢谢！",
+                        "text_pinyin": "wǒ xìng wáng. kào chuāng de tài hǎo le, xièxie!",
+                        "text_en": "My surname is Wang. A window table is perfect, thanks!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Yun writes it down with a star beside the reservation -- window table, well-mannered guest.「王先生/女士，明天见！」贵姓 is the polite way to ask someone's surname; 我姓 is how you answer."
+                    },
+                    {
+                        "text_zh": "好的。有包间吗？",
+                        "text_pinyin": "hǎo de. yǒu bāojiān ma?",
+                        "text_en": "OK. Do you have a private room?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Yun checks.「有的，但是四个人的话包间要另外加两百。」包间 (bāojiān) is a private dining room -- common in Chinese restaurants for special occasions."
+                    },
+                    {
+                        "text_zh": "不用靠窗，安静就好。",
+                        "text_pinyin": "bú yòng kào chuāng, ānjìng jiù hǎo.",
+                        "text_en": "Don't need a window, just somewhere quiet.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yun respects this immediately -- she knows the quiet corner table personally.「那给您留里面的角落，很安静。」不用 means 'no need.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，订好了！明天六点半，四位，王先生。不见不散！",
+                "text_pinyin": "hǎo de, dìng hǎo le! míngtiān liù diǎn bàn, sì wèi, wáng xiānsheng. bú jiàn bú sàn!",
+                "text_en": "OK, reserved! Tomorrow 6:30, four guests, Mr. Wang. See you there!"
+            }
+        ],
+        "cultural_note": "不见不散 (bú jiàn bú sàn) literally means 'won't leave until we meet' -- it's a warm, colloquial way to confirm plans. Chinese restaurants often have private rooms (包间) that can be reserved for groups, sometimes with a minimum order amount."
+    }
+}

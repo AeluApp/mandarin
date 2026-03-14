@@ -1,0 +1,83 @@
+{
+    "title": "The Postman's Last Route",
+    "title_zh": "邮递员的最后一条路",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You meet a postman resting on a bench in a village. He tells you he's retiring next month after delivering mail here for twenty-five years.",
+        "setup_zh": "你在村子里遇到一位坐在长椅上休息的邮递员。他告诉你下个月就要退休了，在这里送信已经二十五年了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "二十五年了，这条路上每一家我都认识。谁家有几口人，谁家的狗叫什么名字，我都知道。下个月退休以后，我最不习惯的大概就是不用走这条路了。",
+                "text_pinyin": "Èrshíwǔ nián le, zhè tiáo lù shàng měi yī jiā wǒ dōu rènshi. Shéi jiā yǒu jǐ kǒu rén, shéi jiā de gǒu jiào shénme míngzi, wǒ dōu zhīdào. Xià ge yuè tuìxiū yǐhòu, wǒ zuì bù xíguàn de dàgài jiù shì bú yòng zǒu zhè tiáo lù le.",
+                "text_en": "Twenty-five years — I know every family on this road. How many people in each house, what their dogs are named, I know it all. After I retire next month, the hardest thing will probably be not walking this road anymore."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his deep connection with the route.",
+                "options": [
+                    {
+                        "text_zh": "二十五年——这条路不只是邮路了，是您生活的一部分。每天走同一条路，但看到的是不同的季节、不同的故事。这种连接很珍贵。",
+                        "text_pinyin": "Èrshíwǔ nián — zhè tiáo lù bù zhǐ shì yóulù le, shì nín shēnghuó de yī bùfen. Měi tiān zǒu tóng yī tiáo lù, dàn kàn dào de shì bùtóng de jìjié, bùtóng de gùshi. Zhè zhǒng liánjiē hěn zhēnguì.",
+                        "text_en": "Twenty-five years — this road is more than a mail route, it's part of your life. Same road every day, but different seasons, different stories. That connection is precious.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The route as life itself — same path, ever-changing story."
+                    },
+                    {
+                        "text_zh": "现在还有人写信吗？",
+                        "text_pinyin": "Xiànzài hái yǒu rén xiě xìn ma?",
+                        "text_en": "Do people still write letters?",
+                        "score": 0.0,
+                        "feedback": "Questions the relevance of his profession."
+                    },
+                    {
+                        "text_zh": "退休以后您打算做什么？",
+                        "text_pinyin": "Tuìxiū yǐhòu nín dǎsuàn zuò shénme?",
+                        "text_en": "What are you planning to do after retirement?",
+                        "score": 0.0,
+                        "feedback": "Jumps past his present feelings to future plans."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对，不同的季节、不同的故事。春天的时候路边开花，夏天有人在门口乘凉，秋天满地落叶，冬天早上有霜。走了二十五年，这条路四季的样子我都记得。有时候觉得，我不是在送信，是在陪这条路过四季。",
+                "text_pinyin": "Nǐ shuō de duì, bùtóng de jìjié, bùtóng de gùshi. Chūntiān de shíhou lù biān kāi huā, xiàtiān yǒu rén zài ménkǒu chéngliáng, qiūtiān mǎn dì luòyè, dōngtiān zǎoshang yǒu shuāng. Zǒu le èrshíwǔ nián, zhè tiáo lù sìjì de yàngzi wǒ dōu jìde. Yǒu shíhou juéde, wǒ bú shì zài sòng xìn, shì zài péi zhè tiáo lù guò sìjì.",
+                "text_en": "You're right, different seasons, different stories. Spring with roadside flowers, summer with people cooling off in doorways, autumn with fallen leaves everywhere, winter with morning frost. Twenty-five years, I remember this road in every season. Sometimes I feel I wasn't delivering mail — I was keeping this road company through the seasons."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the image of accompanying the road through seasons.",
+                "options": [
+                    {
+                        "text_zh": "陪这条路过四季——太美了。路也会想念您的。二十五年来每天有人走过来带着信也带着关心。您不只是邮递员，您是这条路上的风景。",
+                        "text_pinyin": "Péi zhè tiáo lù guò sìjì — tài měi le. Lù yě huì xiǎngniàn nín de. Èrshíwǔ nián lái měi tiān yǒu rén zǒu guòlái dài zhe xìn yě dài zhe guānxīn. Nín bù zhǐ shì yóudìyuán, nín shì zhè tiáo lù shàng de fēngjǐng.",
+                        "text_en": "Keeping the road company through seasons — beautiful. The road will miss you too. Twenty-five years of someone walking by with letters and care. You're not just a postman — you're part of this road's scenery.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The postman as scenery — he belongs to the road as much as the trees do."
+                    },
+                    {
+                        "text_zh": "退休以后还可以来散步啊。",
+                        "text_pinyin": "Tuìxiū yǐhòu hái kěyǐ lái sànbù a.",
+                        "text_en": "You can still come walk here after retirement.",
+                        "score": 0.0,
+                        "feedback": "A practical suggestion during a reflective farewell."
+                    },
+                    {
+                        "text_zh": "新的邮递员会是谁？",
+                        "text_pinyin": "Xīn de yóudìyuán huì shì shéi?",
+                        "text_en": "Who will be the new postman?",
+                        "score": 0.0,
+                        "feedback": "Replacement logistics during an emotional moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rural postmen (乡村邮递员) in China have been celebrated as unsung connectors of communities. Walking the same route daily for decades, they become living archives of local life. The image of 陪路过四季 (keeping the road company through seasons) reflects a Chinese sensibility that daily rituals are not monotony but companionship with the world."
+    }
+}

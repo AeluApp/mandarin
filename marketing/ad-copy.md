@@ -8,39 +8,39 @@
 **Headline 2:** HSK 1-6 Aligned Curriculum
 **Headline 3:** Free to Start — No Credit Card
 **Description 1:** 27 drill types that adapt to your weak spots. Track your HSK readiness with real projections. Built by a learner, not a corporation.
-**Description 2:** Stop drilling random vocab. Mandarin tracks what you actually struggle with and builds your next session around it. HSK 1-6 coverage.
-**Display URL:** mandarinapp.com/hsk
+**Description 2:** Stop drilling random vocab. Aelu tracks what you actually struggle with and builds your next session around it. HSK 1-6 coverage.
+**Display URL:** aeluapp.com/hsk
 
 ### Campaign 2: Anki Alternative
 **Keywords:** anki alternative chinese, chinese flashcard app, srs chinese app, best spaced repetition chinese
 **Headline 1:** Tired of Building Anki Decks?
 **Headline 2:** Chinese SRS That Builds Itself
 **Headline 3:** 27 Drill Types, Not Just Flashcards
-**Description 1:** Mandarin goes beyond flashcards — reading, listening, speaking, and tone drills that adapt to your level. No deck-building required.
+**Description 1:** Aelu goes beyond flashcards — reading, listening, speaking, and tone drills that adapt to your level. No deck-building required.
 **Description 2:** Like Anki but with a curriculum. Graded reading, listening practice, and drills that target your actual gaps. Free tier available.
-**Display URL:** mandarinapp.com/srs
+**Display URL:** aeluapp.com/srs
 
 ### Campaign 3: Serious Learner
 **Keywords:** best app learn mandarin, chinese learning app advanced, learn chinese seriously, mandarin app for adults
 **Headline 1:** Chinese Learning for Adults
 **Headline 2:** No Cartoons. No Streaks. Real Progress.
 **Headline 3:** Read Real Chinese from Day One
-**Description 1:** Mandarin is built for serious learners. Graded reading with instant glosses, adaptive drills, and HSK projections. Not gamified — effective.
+**Description 1:** Aelu is built for serious learners. Graded reading with instant glosses, adaptive drills, and HSK projections. Not gamified — effective.
 **Description 2:** Every word you look up during reading becomes a drill. The cleanup loop turns real exposure into focused practice. Free to try.
-**Display URL:** mandarinapp.com
+**Display URL:** aeluapp.com
 
 ---
 
 ## Meta (Facebook/Instagram) Ads
 
 ### Ad 1: The Cleanup Loop (Story/Reel format)
-**Primary text:** Most Chinese apps drill random vocabulary. Mandarin drills the words you actually struggled with.
+**Primary text:** Most Chinese apps drill random vocabulary. Aelu drills the words you actually struggled with.
 
 Read a passage. Tap the words you don't know. Your next session focuses on exactly those words.
 
 It's called the cleanup loop. And it's how serious learners actually improve.
 
-Free to start at mandarinapp.com
+Free to start at aeluapp.com
 **Headline:** Learn Chinese the way your brain works
 **CTA:** Sign Up
 
@@ -60,14 +60,14 @@ Free to start.
 
 You don't need more flashcards. You need targeted practice on your actual weak spots.
 
-Mandarin tracks your mastery across all HSK levels and tells you exactly where you stand. Tone drills. Listening comprehension. Character recognition. All in one place.
+Aelu tracks your mastery across all HSK levels and tells you exactly where you stand. Tone drills. Listening comprehension. Character recognition. All in one place.
 
-Free for HSK 1-2. Full access $12/month.
+Free for HSK 1-2. Full access $14.99/month.
 **Headline:** Know exactly where you stand for HSK
 **CTA:** Sign Up
 
 ### Ad 4: The Builder Story (Feed format)
-**Primary text:** I'm learning Mandarin and I built my own app to do it.
+**Primary text:** I'm learning Chinese and I built my own app to do it.
 
 Not because existing apps are bad — but because none of them worked the way I actually learn. I wanted:
 
@@ -78,7 +78,7 @@ Not because existing apps are bad — but because none of them worked the way I 
 
 So I built it. And now I'm sharing it.
 
-Free to start at mandarinapp.com
+Free to start at aeluapp.com
 **Headline:** Built by a learner, for learners
 **CTA:** Sign Up
 
@@ -90,7 +90,7 @@ Free to start at mandarinapp.com
 **Title:** I built a Chinese learning app focused on the "cleanup loop" — read real Chinese, and every word you look up becomes a drill
 
 **Body:**
-Hey everyone. I've been learning Mandarin for [X months] and got frustrated with the gap between studying flashcards and actually reading/listening to Chinese.
+Hey everyone. I've been learning Chinese for [X months] and got frustrated with the gap between studying flashcards and actually reading/listening to Chinese.
 
 So I built an app around what I'm calling the "cleanup loop":
 
@@ -107,7 +107,7 @@ Other features:
 - Tone drills with grading
 - No AI content generation — all content is human-reviewed
 
-It's free for HSK 1-2 content. Full access is $12/month.
+It's free for HSK 1-2 content. Full access is $14.99/month.
 
 Would love feedback from other learners. What would make this more useful to you?
 
@@ -150,7 +150,7 @@ What dimensions do you track for HSK prep?
 ### Email 1: Welcome (Immediate)
 **Subject:** You're in. Here's how to start.
 **Body:**
-Welcome to Mandarin.
+Welcome to Aelu.
 
 Here's the fastest way to get value:
 
@@ -158,7 +158,7 @@ Here's the fastest way to get value:
 2. After your first session, check your HSK readiness projection
 3. Try the graded reader — tap any word you don't know
 
-Every word you look up during reading becomes a drill in your next session. That's the cleanup loop, and it's the core of how Mandarin works.
+Every word you look up during reading becomes a drill in your next session. That's the cleanup loop, and it's the core of how Aelu works.
 
 Your first session takes about 10 minutes.
 
@@ -167,7 +167,7 @@ Your first session takes about 10 minutes.
 ### Email 2: Day 3 — The Cleanup Loop
 **Subject:** The one feature that changes how you study
 **Body:**
-Most Chinese apps drill you on a fixed word list. Mandarin drills you on the words you actually struggle with.
+Most Chinese apps drill you on a fixed word list. Aelu drills you on the words you actually struggle with.
 
 Here's how:
 - Open the Reader and pick a passage at your level
@@ -196,7 +196,7 @@ Those missed words go straight into your drill queue.
 ### Email 4: Day 14 — Upgrade Nudge (only if on free tier)
 **Subject:** Ready for HSK 3?
 **Body:**
-You've been using Mandarin for two weeks. If you're finding value in the adaptive drills and the cleanup loop, the full version unlocks:
+You've been using Aelu for two weeks. If you're finding value in the adaptive drills and the cleanup loop, the full version unlocks:
 
 - HSK 3-6 curriculum (4,700+ additional words)
 - All 27 drill types (free tier has 5)
@@ -204,7 +204,7 @@ You've been using Mandarin for two weeks. If you're finding value in the adaptiv
 - Advanced listening and reading passages
 - Full HSK projection and diagnostics
 
-$12/month. Cancel anytime.
+$14.99/month. Cancel anytime.
 
 [Upgrade →]
 

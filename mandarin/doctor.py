@@ -147,12 +147,12 @@ def run_checks() -> list:
         results.append(_check("Scenarios", False, "directory missing"))
 
     # ── Context notes ──
-    notes_dir = DATA_DIR / "context_notes"
-    if notes_dir.is_dir():
-        note_count = len(list(notes_dir.glob("*.json")))
-        results.append(_check("Context notes", note_count > 0, f"{note_count} files"))
-    else:
-        results.append(_check("Context notes", False, "directory missing"))
+    try:
+        from .context_notes import CONTEXT_NOTES
+        note_count = len(CONTEXT_NOTES)
+        results.append(_check("Context notes", note_count > 0, f"{note_count} entries"))
+    except (ImportError, AttributeError):
+        results.append(_check("Context notes", False, "module not found"))
 
     # ── Database ──
     if DB_PATH.exists():
@@ -161,11 +161,8 @@ def run_checks() -> list:
             with _db.connection() as conn:
                 # Schema version
                 try:
-                    row = conn.execute(
-                        "SELECT value FROM system_meta WHERE key = 'schema_version'"
-                    ).fetchone()
-                    version = int(row["value"]) if row else 0
-                    from .db.core import SCHEMA_VERSION
+                    from .db.core import _get_schema_version, SCHEMA_VERSION
+                    version = _get_schema_version(conn)
                     ok = version >= SCHEMA_VERSION
                     results.append(_check(
                         "Schema version",
@@ -220,7 +217,7 @@ def run_checks() -> list:
 def print_report(results: list):
     """Print a formatted doctor report."""
     print()
-    print("  Mandarin Learning System — Health Check")
+    print("  Aelu — Health Check")
     print("  " + "─" * 42)
     print()
 

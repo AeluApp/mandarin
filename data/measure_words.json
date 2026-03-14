@@ -1,100 +1,796 @@
-[
-  {"classifier": "个", "pinyin": "gè", "meaning": "general/default", "category": "general", "hsk_level": 1, "examples": [{"hanzi": "一个人", "english": "one person"}, {"hanzi": "一个苹果", "english": "one apple"}, {"hanzi": "一个问题", "english": "one question"}]},
-  {"classifier": "本", "pinyin": "běn", "meaning": "volume/book", "category": "objects", "hsk_level": 1, "examples": [{"hanzi": "一本书", "english": "one book"}, {"hanzi": "三本杂志", "english": "three magazines"}]},
-  {"classifier": "口", "pinyin": "kǒu", "meaning": "mouthful/family member", "category": "people", "hsk_level": 2, "examples": [{"hanzi": "一口水", "english": "a mouthful of water"}, {"hanzi": "三口人", "english": "three family members"}]},
-  {"classifier": "块", "pinyin": "kuài", "meaning": "piece/lump/yuan", "category": "portions", "hsk_level": 1, "examples": [{"hanzi": "一块钱", "english": "one yuan"}, {"hanzi": "两块蛋糕", "english": "two pieces of cake"}]},
-  {"classifier": "杯", "pinyin": "bēi", "meaning": "cup/glass", "category": "portions", "hsk_level": 1, "examples": [{"hanzi": "一杯水", "english": "a glass of water"}, {"hanzi": "两杯咖啡", "english": "two cups of coffee"}]},
-  {"classifier": "些", "pinyin": "xiē", "meaning": "some/several", "category": "general", "hsk_level": 1, "examples": [{"hanzi": "一些人", "english": "some people"}, {"hanzi": "一些东西", "english": "some things"}]},
-  {"classifier": "只", "pinyin": "zhī", "meaning": "animal/one of a pair", "category": "animals", "hsk_level": 2, "examples": [{"hanzi": "一只猫", "english": "one cat"}, {"hanzi": "一只手", "english": "one hand"}]},
-  {"classifier": "张", "pinyin": "zhāng", "meaning": "flat object/sheet", "category": "flat_objects", "hsk_level": 2, "examples": [{"hanzi": "一张纸", "english": "a sheet of paper"}, {"hanzi": "一张桌子", "english": "a table"}, {"hanzi": "一张票", "english": "a ticket"}]},
-  {"classifier": "件", "pinyin": "jiàn", "meaning": "item/piece of clothing/matter", "category": "clothing", "hsk_level": 2, "examples": [{"hanzi": "一件衣服", "english": "one piece of clothing"}, {"hanzi": "一件事", "english": "one matter"}]},
-  {"classifier": "条", "pinyin": "tiáo", "meaning": "long, thin object/strip", "category": "long_objects", "hsk_level": 2, "examples": [{"hanzi": "一条鱼", "english": "one fish"}, {"hanzi": "一条路", "english": "a road"}, {"hanzi": "一条裤子", "english": "a pair of trousers"}]},
-  {"classifier": "位", "pinyin": "wèi", "meaning": "person (polite)", "category": "people", "hsk_level": 2, "examples": [{"hanzi": "一位老师", "english": "one teacher (polite)"}, {"hanzi": "三位客人", "english": "three guests (polite)"}]},
-  {"classifier": "双", "pinyin": "shuāng", "meaning": "pair", "category": "paired_items", "hsk_level": 3, "examples": [{"hanzi": "一双鞋", "english": "a pair of shoes"}, {"hanzi": "一双筷子", "english": "a pair of chopsticks"}]},
-  {"classifier": "辆", "pinyin": "liàng", "meaning": "wheeled vehicle", "category": "vehicles", "hsk_level": 2, "examples": [{"hanzi": "一辆车", "english": "one car"}, {"hanzi": "两辆自行车", "english": "two bicycles"}]},
-  {"classifier": "把", "pinyin": "bǎ", "meaning": "handled object/handful", "category": "objects", "hsk_level": 3, "examples": [{"hanzi": "一把椅子", "english": "one chair"}, {"hanzi": "一把伞", "english": "one umbrella"}, {"hanzi": "一把刀", "english": "one knife"}]},
-  {"classifier": "瓶", "pinyin": "píng", "meaning": "bottle", "category": "portions", "hsk_level": 2, "examples": [{"hanzi": "一瓶水", "english": "a bottle of water"}, {"hanzi": "两瓶啤酒", "english": "two bottles of beer"}]},
-  {"classifier": "层", "pinyin": "céng", "meaning": "floor/layer", "category": "buildings", "hsk_level": 3, "examples": [{"hanzi": "三层楼", "english": "three floors"}, {"hanzi": "一层意思", "english": "a layer of meaning"}]},
-  {"classifier": "次", "pinyin": "cì", "meaning": "time/occurrence", "category": "events", "hsk_level": 2, "examples": [{"hanzi": "一次机会", "english": "one opportunity"}, {"hanzi": "三次考试", "english": "three exams"}]},
-  {"classifier": "遍", "pinyin": "biàn", "meaning": "time (from beginning to end)", "category": "events", "hsk_level": 3, "examples": [{"hanzi": "看一遍", "english": "read through once"}, {"hanzi": "说两遍", "english": "say twice through"}]},
-  {"classifier": "顿", "pinyin": "dùn", "meaning": "meal/bout", "category": "events", "hsk_level": 3, "examples": [{"hanzi": "一顿饭", "english": "one meal"}, {"hanzi": "三顿饭", "english": "three meals"}]},
-  {"classifier": "种", "pinyin": "zhǒng", "meaning": "type/kind", "category": "abstract", "hsk_level": 2, "examples": [{"hanzi": "一种方法", "english": "one kind of method"}, {"hanzi": "两种颜色", "english": "two kinds of colors"}]},
-  {"classifier": "套", "pinyin": "tào", "meaning": "set/suite", "category": "objects", "hsk_level": 4, "examples": [{"hanzi": "一套房子", "english": "one apartment/suite"}, {"hanzi": "一套衣服", "english": "one set of clothes"}]},
-  {"classifier": "场", "pinyin": "chǎng", "meaning": "event/show/session", "category": "events", "hsk_level": 3, "examples": [{"hanzi": "一场电影", "english": "one movie showing"}, {"hanzi": "一场雨", "english": "one rain shower"}, {"hanzi": "一场比赛", "english": "one match/game"}]},
-  {"classifier": "份", "pinyin": "fèn", "meaning": "portion/copy/share", "category": "portions", "hsk_level": 3, "examples": [{"hanzi": "一份报纸", "english": "one copy of newspaper"}, {"hanzi": "一份工作", "english": "one job"}, {"hanzi": "一份礼物", "english": "one gift"}]},
-  {"classifier": "节", "pinyin": "jié", "meaning": "section/class period", "category": "events", "hsk_level": 3, "examples": [{"hanzi": "一节课", "english": "one class period"}, {"hanzi": "两节车厢", "english": "two train cars"}]},
-  {"classifier": "篇", "pinyin": "piān", "meaning": "article/essay", "category": "flat_objects", "hsk_level": 4, "examples": [{"hanzi": "一篇文章", "english": "one article"}, {"hanzi": "两篇论文", "english": "two papers"}]},
-  {"classifier": "段", "pinyin": "duàn", "meaning": "section/passage/period", "category": "abstract", "hsk_level": 4, "examples": [{"hanzi": "一段时间", "english": "a period of time"}, {"hanzi": "一段路", "english": "a stretch of road"}]},
-  {"classifier": "首", "pinyin": "shǒu", "meaning": "poem/song", "category": "abstract", "hsk_level": 4, "examples": [{"hanzi": "一首歌", "english": "one song"}, {"hanzi": "一首诗", "english": "one poem"}]},
-  {"classifier": "封", "pinyin": "fēng", "meaning": "letter/envelope", "category": "flat_objects", "hsk_level": 4, "examples": [{"hanzi": "一封信", "english": "one letter"}, {"hanzi": "两封邮件", "english": "two emails"}]},
-  {"classifier": "台", "pinyin": "tái", "meaning": "machine/platform", "category": "objects", "hsk_level": 3, "examples": [{"hanzi": "一台电脑", "english": "one computer"}, {"hanzi": "一台电视", "english": "one TV set"}]},
-  {"classifier": "座", "pinyin": "zuò", "meaning": "large fixed structure", "category": "buildings", "hsk_level": 3, "examples": [{"hanzi": "一座山", "english": "one mountain"}, {"hanzi": "一座桥", "english": "one bridge"}, {"hanzi": "一座城市", "english": "one city"}]},
-  {"classifier": "栋", "pinyin": "dòng", "meaning": "building", "category": "buildings", "hsk_level": 5, "examples": [{"hanzi": "一栋楼", "english": "one building"}, {"hanzi": "两栋别墅", "english": "two villas"}]},
-  {"classifier": "间", "pinyin": "jiān", "meaning": "room", "category": "buildings", "hsk_level": 3, "examples": [{"hanzi": "一间房间", "english": "one room"}, {"hanzi": "两间教室", "english": "two classrooms"}]},
-  {"classifier": "家", "pinyin": "jiā", "meaning": "family/business establishment", "category": "buildings", "hsk_level": 2, "examples": [{"hanzi": "一家公司", "english": "one company"}, {"hanzi": "一家饭店", "english": "one restaurant"}]},
-  {"classifier": "所", "pinyin": "suǒ", "meaning": "institution/building", "category": "buildings", "hsk_level": 4, "examples": [{"hanzi": "一所学校", "english": "one school"}, {"hanzi": "一所医院", "english": "one hospital"}]},
-  {"classifier": "棵", "pinyin": "kē", "meaning": "tree/plant", "category": "objects", "hsk_level": 3, "examples": [{"hanzi": "一棵树", "english": "one tree"}, {"hanzi": "两棵草", "english": "two blades of grass"}]},
-  {"classifier": "朵", "pinyin": "duǒ", "meaning": "flower/cloud", "category": "objects", "hsk_level": 3, "examples": [{"hanzi": "一朵花", "english": "one flower"}, {"hanzi": "一朵云", "english": "one cloud"}]},
-  {"classifier": "颗", "pinyin": "kē", "meaning": "small round object", "category": "objects", "hsk_level": 4, "examples": [{"hanzi": "一颗星星", "english": "one star"}, {"hanzi": "一颗心", "english": "one heart"}, {"hanzi": "一颗牙", "english": "one tooth"}]},
-  {"classifier": "粒", "pinyin": "lì", "meaning": "grain/tiny particle", "category": "objects", "hsk_level": 5, "examples": [{"hanzi": "一粒米", "english": "one grain of rice"}, {"hanzi": "一粒沙", "english": "one grain of sand"}]},
-  {"classifier": "滴", "pinyin": "dī", "meaning": "drop (liquid)", "category": "portions", "hsk_level": 5, "examples": [{"hanzi": "一滴水", "english": "one drop of water"}, {"hanzi": "一滴眼泪", "english": "one teardrop"}]},
-  {"classifier": "根", "pinyin": "gēn", "meaning": "long thin object/stick", "category": "long_objects", "hsk_level": 4, "examples": [{"hanzi": "一根筷子", "english": "one chopstick"}, {"hanzi": "一根绳子", "english": "one rope"}]},
-  {"classifier": "支", "pinyin": "zhī", "meaning": "pen/stick-shaped/branch", "category": "long_objects", "hsk_level": 4, "examples": [{"hanzi": "一支笔", "english": "one pen"}, {"hanzi": "一支蜡烛", "english": "one candle"}]},
-  {"classifier": "枝", "pinyin": "zhī", "meaning": "branch/flower stem", "category": "long_objects", "hsk_level": 5, "examples": [{"hanzi": "一枝花", "english": "one flower (on stem)"}, {"hanzi": "一枝梅花", "english": "one plum blossom branch"}]},
-  {"classifier": "副", "pinyin": "fù", "meaning": "pair/set (accessories)", "category": "paired_items", "hsk_level": 4, "examples": [{"hanzi": "一副眼镜", "english": "one pair of glasses"}, {"hanzi": "一副手套", "english": "one pair of gloves"}]},
-  {"classifier": "对", "pinyin": "duì", "meaning": "couple/pair", "category": "paired_items", "hsk_level": 4, "examples": [{"hanzi": "一对夫妻", "english": "one married couple"}, {"hanzi": "一对耳环", "english": "one pair of earrings"}]},
-  {"classifier": "群", "pinyin": "qún", "meaning": "group/flock/herd", "category": "animals", "hsk_level": 4, "examples": [{"hanzi": "一群人", "english": "a group of people"}, {"hanzi": "一群鸟", "english": "a flock of birds"}]},
-  {"classifier": "头", "pinyin": "tóu", "meaning": "large animal", "category": "animals", "hsk_level": 4, "examples": [{"hanzi": "一头牛", "english": "one cow"}, {"hanzi": "一头猪", "english": "one pig"}]},
-  {"classifier": "匹", "pinyin": "pǐ", "meaning": "horse/bolt of cloth", "category": "animals", "hsk_level": 5, "examples": [{"hanzi": "一匹马", "english": "one horse"}, {"hanzi": "一匹布", "english": "one bolt of cloth"}]},
-  {"classifier": "批", "pinyin": "pī", "meaning": "batch/group", "category": "abstract", "hsk_level": 5, "examples": [{"hanzi": "一批货", "english": "a batch of goods"}, {"hanzi": "一批学生", "english": "a group of students"}]},
-  {"classifier": "幅", "pinyin": "fú", "meaning": "painting/picture/width of cloth", "category": "flat_objects", "hsk_level": 5, "examples": [{"hanzi": "一幅画", "english": "one painting"}, {"hanzi": "一幅地图", "english": "one map"}]},
-  {"classifier": "部", "pinyin": "bù", "meaning": "film/work/vehicle (formal)", "category": "objects", "hsk_level": 4, "examples": [{"hanzi": "一部电影", "english": "one film"}, {"hanzi": "一部手机", "english": "one mobile phone"}, {"hanzi": "一部小说", "english": "one novel"}]},
-  {"classifier": "架", "pinyin": "jià", "meaning": "aircraft/machine with frame", "category": "vehicles", "hsk_level": 5, "examples": [{"hanzi": "一架飞机", "english": "one airplane"}, {"hanzi": "一架钢琴", "english": "one piano"}]},
-  {"classifier": "艘", "pinyin": "sōu", "meaning": "ship/vessel", "category": "vehicles", "hsk_level": 5, "examples": [{"hanzi": "一艘船", "english": "one ship"}, {"hanzi": "一艘军舰", "english": "one warship"}]},
-  {"classifier": "列", "pinyin": "liè", "meaning": "train/row", "category": "vehicles", "hsk_level": 5, "examples": [{"hanzi": "一列火车", "english": "one train"}, {"hanzi": "一列队伍", "english": "one column/row"}]},
-  {"classifier": "面", "pinyin": "miàn", "meaning": "flat surface/side", "category": "flat_objects", "hsk_level": 4, "examples": [{"hanzi": "一面镜子", "english": "one mirror"}, {"hanzi": "一面旗", "english": "one flag"}, {"hanzi": "一面墙", "english": "one wall"}]},
-  {"classifier": "扇", "pinyin": "shàn", "meaning": "door/window/fan", "category": "flat_objects", "hsk_level": 5, "examples": [{"hanzi": "一扇门", "english": "one door"}, {"hanzi": "一扇窗户", "english": "one window"}]},
-  {"classifier": "堵", "pinyin": "dǔ", "meaning": "wall/section of wall", "category": "buildings", "hsk_level": 6, "examples": [{"hanzi": "一堵墙", "english": "one wall"}]},
-  {"classifier": "顶", "pinyin": "dǐng", "meaning": "hat/tent/top", "category": "clothing", "hsk_level": 5, "examples": [{"hanzi": "一顶帽子", "english": "one hat"}, {"hanzi": "一顶帐篷", "english": "one tent"}]},
-  {"classifier": "项", "pinyin": "xiàng", "meaning": "item/task/necklace", "category": "abstract", "hsk_level": 5, "examples": [{"hanzi": "一项任务", "english": "one task"}, {"hanzi": "一项决定", "english": "one decision"}, {"hanzi": "一项项链", "english": "one necklace"}]},
-  {"classifier": "门", "pinyin": "mén", "meaning": "course/subject/skill", "category": "abstract", "hsk_level": 4, "examples": [{"hanzi": "一门课", "english": "one course"}, {"hanzi": "一门语言", "english": "one language"}]},
-  {"classifier": "番", "pinyin": "fān", "meaning": "kind/time (effort)", "category": "events", "hsk_level": 5, "examples": [{"hanzi": "一番话", "english": "a round of words/speech"}, {"hanzi": "一番努力", "english": "a bout of effort"}]},
-  {"classifier": "笔", "pinyin": "bǐ", "meaning": "sum of money/stroke", "category": "abstract", "hsk_level": 5, "examples": [{"hanzi": "一笔钱", "english": "a sum of money"}, {"hanzi": "一笔交易", "english": "one transaction"}]},
-  {"classifier": "则", "pinyin": "zé", "meaning": "piece of news/rule", "category": "abstract", "hsk_level": 6, "examples": [{"hanzi": "一则新闻", "english": "one piece of news"}, {"hanzi": "一则故事", "english": "one story"}]},
-  {"classifier": "碗", "pinyin": "wǎn", "meaning": "bowl", "category": "portions", "hsk_level": 3, "examples": [{"hanzi": "一碗饭", "english": "one bowl of rice"}, {"hanzi": "一碗面", "english": "one bowl of noodles"}]},
-  {"classifier": "盘", "pinyin": "pán", "meaning": "plate/dish/game", "category": "portions", "hsk_level": 4, "examples": [{"hanzi": "一盘菜", "english": "one plate of food"}, {"hanzi": "一盘棋", "english": "one game of chess"}]},
-  {"classifier": "壶", "pinyin": "hú", "meaning": "pot (tea/wine)", "category": "portions", "hsk_level": 5, "examples": [{"hanzi": "一壶茶", "english": "one pot of tea"}, {"hanzi": "一壶酒", "english": "one pot of wine"}]},
+{
+  "classifiers": [
+    {
+      "classifier": "个", "pinyin": "gè", "meaning": "general/default", "category": "general", "hsk_level": 1,
+      "examples": [{"hanzi": "一个人", "english": "one person"}, {"hanzi": "一个苹果", "english": "one apple"}, {"hanzi": "一个问题", "english": "one question"}],
+      "nouns": [
+        {"hanzi": "人", "english": "person"}, {"hanzi": "苹果", "english": "apple"}, {"hanzi": "问题", "english": "question"},
+        {"hanzi": "地方", "english": "place"}, {"hanzi": "孩子", "english": "child"}, {"hanzi": "朋友", "english": "friend"},
+        {"hanzi": "小时", "english": "hour"}, {"hanzi": "月", "english": "month"}, {"hanzi": "星期", "english": "week"}
+      ],
+      "semantic_rule": "The universal fallback — use for anything without a dedicated classifier, especially abstract things and people in casual speech.",
+      "sentences": [
+        {"zh": "给我一个苹果。", "en": "Give me an apple."},
+        {"zh": "他是一个好人。", "en": "He is a good person."},
+        {"zh": "我有一个问题想问你。", "en": "I have a question I'd like to ask you."}
+      ]
+    },
+    {
+      "classifier": "本", "pinyin": "běn", "meaning": "volume/book", "category": "objects", "hsk_level": 1,
+      "examples": [{"hanzi": "一本书", "english": "one book"}, {"hanzi": "三本杂志", "english": "three magazines"}],
+      "nouns": [
+        {"hanzi": "书", "english": "book"}, {"hanzi": "杂志", "english": "magazine"}, {"hanzi": "词典", "english": "dictionary"},
+        {"hanzi": "小说", "english": "novel"}, {"hanzi": "笔记本", "english": "notebook"}, {"hanzi": "日记", "english": "diary"}
+      ],
+      "semantic_rule": "Bound volumes — anything with a spine and pages you can flip through.",
+      "sentences": [
+        {"zh": "这本书很有意思。", "en": "This book is very interesting."},
+        {"zh": "我买了两本杂志。", "en": "I bought two magazines."},
+        {"zh": "桌子上有三本词典。", "en": "There are three dictionaries on the table."}
+      ]
+    },
+    {
+      "classifier": "口", "pinyin": "kǒu", "meaning": "mouthful/family member", "category": "people", "hsk_level": 2,
+      "examples": [{"hanzi": "一口水", "english": "a mouthful of water"}, {"hanzi": "三口人", "english": "three family members"}],
+      "nouns": [
+        {"hanzi": "人", "english": "person (family)"}, {"hanzi": "水", "english": "water (mouthful)"},
+        {"hanzi": "气", "english": "breath"}, {"hanzi": "饭", "english": "food (bite)"}, {"hanzi": "井", "english": "well"},
+        {"hanzi": "锅", "english": "pot/wok"}
+      ],
+      "semantic_rule": "Mouths — family members counted by mouths to feed, or mouthfuls of food/drink/air.",
+      "sentences": [
+        {"zh": "我家有四口人。", "en": "There are four people in my family."},
+        {"zh": "喝一口水吧。", "en": "Have a sip of water."}
+      ]
+    },
+    {
+      "classifier": "块", "pinyin": "kuài", "meaning": "piece/lump/yuan", "category": "portions", "hsk_level": 1,
+      "examples": [{"hanzi": "一块钱", "english": "one yuan"}, {"hanzi": "两块蛋糕", "english": "two pieces of cake"}],
+      "nouns": [
+        {"hanzi": "钱", "english": "money (yuan)"}, {"hanzi": "蛋糕", "english": "cake"}, {"hanzi": "巧克力", "english": "chocolate"},
+        {"hanzi": "肉", "english": "meat"}, {"hanzi": "石头", "english": "stone"}, {"hanzi": "地", "english": "land (plot)"}
+      ],
+      "semantic_rule": "Chunks and lumps — solid pieces you could hold in your hand, plus the colloquial word for yuan.",
+      "sentences": [
+        {"zh": "这块蛋糕很好吃。", "en": "This piece of cake is delicious."},
+        {"zh": "一共多少块钱？", "en": "How much is it in total?"},
+        {"zh": "给我一块巧克力。", "en": "Give me a piece of chocolate."}
+      ]
+    },
+    {
+      "classifier": "杯", "pinyin": "bēi", "meaning": "cup/glass", "category": "portions", "hsk_level": 1,
+      "examples": [{"hanzi": "一杯水", "english": "a glass of water"}, {"hanzi": "两杯咖啡", "english": "two cups of coffee"}],
+      "nouns": [
+        {"hanzi": "水", "english": "water"}, {"hanzi": "咖啡", "english": "coffee"}, {"hanzi": "茶", "english": "tea"},
+        {"hanzi": "牛奶", "english": "milk"}, {"hanzi": "果汁", "english": "juice"}, {"hanzi": "酒", "english": "wine/liquor"}
+      ],
+      "semantic_rule": "Cups and glasses — any drinkable liquid measured by the cup or glass.",
+      "sentences": [
+        {"zh": "请给我一杯茶。", "en": "Please give me a cup of tea."},
+        {"zh": "他每天喝三杯咖啡。", "en": "He drinks three cups of coffee every day."}
+      ]
+    },
+    {
+      "classifier": "些", "pinyin": "xiē", "meaning": "some/several", "category": "general", "hsk_level": 1,
+      "examples": [{"hanzi": "一些人", "english": "some people"}, {"hanzi": "一些东西", "english": "some things"}],
+      "nouns": [
+        {"hanzi": "人", "english": "people"}, {"hanzi": "东西", "english": "things"}, {"hanzi": "水果", "english": "fruit"},
+        {"hanzi": "问题", "english": "questions"}, {"hanzi": "钱", "english": "money"}
+      ],
+      "semantic_rule": "An indefinite quantity — 'some' of anything. Only pairs with 一 (never 两些, 三些).",
+      "sentences": [
+        {"zh": "我想买一些水果。", "en": "I want to buy some fruit."},
+        {"zh": "还有一些问题没解决。", "en": "There are still some unresolved questions."}
+      ]
+    },
+    {
+      "classifier": "只", "pinyin": "zhī", "meaning": "animal/one of a pair", "category": "animals", "hsk_level": 2,
+      "examples": [{"hanzi": "一只猫", "english": "one cat"}, {"hanzi": "一只手", "english": "one hand"}],
+      "nouns": [
+        {"hanzi": "猫", "english": "cat"}, {"hanzi": "狗", "english": "dog"}, {"hanzi": "鸟", "english": "bird"},
+        {"hanzi": "鸡", "english": "chicken"}, {"hanzi": "手", "english": "hand"}, {"hanzi": "耳朵", "english": "ear"},
+        {"hanzi": "兔子", "english": "rabbit"}, {"hanzi": "蝴蝶", "english": "butterfly"}
+      ],
+      "semantic_rule": "Small-to-medium animals and single items from a natural pair (one hand, one ear). Not for large livestock.",
+      "sentences": [
+        {"zh": "她养了两只猫。", "en": "She keeps two cats."},
+        {"zh": "树上有一只鸟。", "en": "There is a bird in the tree."},
+        {"zh": "他伸出一只手。", "en": "He stretched out one hand."}
+      ]
+    },
+    {
+      "classifier": "张", "pinyin": "zhāng", "meaning": "flat object/sheet", "category": "flat_objects", "hsk_level": 2,
+      "examples": [{"hanzi": "一张纸", "english": "a sheet of paper"}, {"hanzi": "一张桌子", "english": "a table"}, {"hanzi": "一张票", "english": "a ticket"}],
+      "nouns": [
+        {"hanzi": "纸", "english": "paper"}, {"hanzi": "桌子", "english": "table"}, {"hanzi": "票", "english": "ticket"},
+        {"hanzi": "照片", "english": "photo"}, {"hanzi": "床", "english": "bed"}, {"hanzi": "嘴", "english": "mouth"},
+        {"hanzi": "脸", "english": "face"}, {"hanzi": "地图", "english": "map"}
+      ],
+      "semantic_rule": "Flat surfaces you could spread out or lay things on — paper, tables, beds, faces, mouths (flat when open).",
+      "sentences": [
+        {"zh": "请给我一张纸。", "en": "Please give me a sheet of paper."},
+        {"zh": "这张桌子太小了。", "en": "This table is too small."},
+        {"zh": "我买了两张电影票。", "en": "I bought two movie tickets."}
+      ]
+    },
+    {
+      "classifier": "件", "pinyin": "jiàn", "meaning": "item/piece of clothing/matter", "category": "clothing", "hsk_level": 2,
+      "examples": [{"hanzi": "一件衣服", "english": "one piece of clothing"}, {"hanzi": "一件事", "english": "one matter"}],
+      "nouns": [
+        {"hanzi": "衣服", "english": "clothing"}, {"hanzi": "事", "english": "matter"}, {"hanzi": "事情", "english": "affair"},
+        {"hanzi": "行李", "english": "luggage"}, {"hanzi": "礼物", "english": "gift"}, {"hanzi": "外套", "english": "coat"},
+        {"hanzi": "衬衫", "english": "shirt"}
+      ],
+      "semantic_rule": "Individual items — upper-body garments (not pants), luggage pieces, matters/affairs, and countable things in general.",
+      "sentences": [
+        {"zh": "我买了一件新衣服。", "en": "I bought a new piece of clothing."},
+        {"zh": "这件事很重要。", "en": "This matter is very important."},
+        {"zh": "他有两件行李。", "en": "He has two pieces of luggage."}
+      ]
+    },
+    {
+      "classifier": "条", "pinyin": "tiáo", "meaning": "long, thin object/strip", "category": "long_objects", "hsk_level": 2,
+      "examples": [{"hanzi": "一条鱼", "english": "one fish"}, {"hanzi": "一条路", "english": "a road"}, {"hanzi": "一条裤子", "english": "a pair of trousers"}],
+      "nouns": [
+        {"hanzi": "鱼", "english": "fish"}, {"hanzi": "路", "english": "road"}, {"hanzi": "裤子", "english": "trousers"},
+        {"hanzi": "河", "english": "river"}, {"hanzi": "蛇", "english": "snake"}, {"hanzi": "绳子", "english": "rope"},
+        {"hanzi": "消息", "english": "message"}, {"hanzi": "毛巾", "english": "towel"}
+      ],
+      "semantic_rule": "Long flexible things you could bend, loop, or drape — rivers, fish, roads, snakes, trousers, ropes, towels.",
+      "sentences": [
+        {"zh": "这条路很长。", "en": "This road is very long."},
+        {"zh": "他钓了一条大鱼。", "en": "He caught a big fish."},
+        {"zh": "我收到一条消息。", "en": "I received a message."}
+      ]
+    },
+    {
+      "classifier": "位", "pinyin": "wèi", "meaning": "person (polite)", "category": "people", "hsk_level": 2,
+      "examples": [{"hanzi": "一位老师", "english": "one teacher (polite)"}, {"hanzi": "三位客人", "english": "three guests (polite)"}],
+      "nouns": [
+        {"hanzi": "老师", "english": "teacher"}, {"hanzi": "客人", "english": "guest"}, {"hanzi": "医生", "english": "doctor"},
+        {"hanzi": "先生", "english": "sir/Mr."}, {"hanzi": "女士", "english": "madam/Ms."}, {"hanzi": "同学", "english": "classmate"}
+      ],
+      "semantic_rule": "Polite/respectful counter for people — teachers, guests, professionals. More formal than 个.",
+      "sentences": [
+        {"zh": "这位是王老师。", "en": "This is Teacher Wang."},
+        {"zh": "今天来了三位客人。", "en": "Three guests came today."}
+      ]
+    },
+    {
+      "classifier": "双", "pinyin": "shuāng", "meaning": "pair", "category": "paired_items", "hsk_level": 3,
+      "examples": [{"hanzi": "一双鞋", "english": "a pair of shoes"}, {"hanzi": "一双筷子", "english": "a pair of chopsticks"}],
+      "nouns": [
+        {"hanzi": "鞋", "english": "shoes"}, {"hanzi": "筷子", "english": "chopsticks"}, {"hanzi": "袜子", "english": "socks"},
+        {"hanzi": "手", "english": "hands (pair)"}, {"hanzi": "眼睛", "english": "eyes (pair)"}
+      ],
+      "semantic_rule": "Matching pairs you wear or use together — shoes, socks, chopsticks, hands, eyes.",
+      "sentences": [
+        {"zh": "我买了一双新鞋。", "en": "I bought a new pair of shoes."},
+        {"zh": "给我一双筷子。", "en": "Give me a pair of chopsticks."}
+      ]
+    },
+    {
+      "classifier": "辆", "pinyin": "liàng", "meaning": "wheeled vehicle", "category": "vehicles", "hsk_level": 2,
+      "examples": [{"hanzi": "一辆车", "english": "one car"}, {"hanzi": "两辆自行车", "english": "two bicycles"}],
+      "nouns": [
+        {"hanzi": "车", "english": "car"}, {"hanzi": "自行车", "english": "bicycle"}, {"hanzi": "公共汽车", "english": "bus"},
+        {"hanzi": "出租车", "english": "taxi"}, {"hanzi": "卡车", "english": "truck"}, {"hanzi": "摩托车", "english": "motorcycle"}
+      ],
+      "semantic_rule": "Wheeled land vehicles — cars, buses, bicycles, trucks. Not trains (列), planes (架), or boats (艘).",
+      "sentences": [
+        {"zh": "他买了一辆新车。", "en": "He bought a new car."},
+        {"zh": "路上有很多辆公共汽车。", "en": "There are many buses on the road."}
+      ]
+    },
+    {
+      "classifier": "把", "pinyin": "bǎ", "meaning": "handled object/handful", "category": "objects", "hsk_level": 3,
+      "examples": [{"hanzi": "一把椅子", "english": "one chair"}, {"hanzi": "一把伞", "english": "one umbrella"}, {"hanzi": "一把刀", "english": "one knife"}],
+      "nouns": [
+        {"hanzi": "椅子", "english": "chair"}, {"hanzi": "伞", "english": "umbrella"}, {"hanzi": "刀", "english": "knife"},
+        {"hanzi": "钥匙", "english": "key"}, {"hanzi": "扇子", "english": "fan"}, {"hanzi": "锁", "english": "lock"},
+        {"hanzi": "米", "english": "rice (handful)"}
+      ],
+      "semantic_rule": "Things with handles you grip (chair, umbrella, knife, key), or a handful/fistful of loose material.",
+      "sentences": [
+        {"zh": "请拿一把椅子来。", "en": "Please bring a chair."},
+        {"zh": "他带了一把伞。", "en": "He brought an umbrella."},
+        {"zh": "桌上有一把钥匙。", "en": "There is a key on the table."}
+      ]
+    },
+    {
+      "classifier": "瓶", "pinyin": "píng", "meaning": "bottle", "category": "portions", "hsk_level": 2,
+      "examples": [{"hanzi": "一瓶水", "english": "a bottle of water"}, {"hanzi": "两瓶啤酒", "english": "two bottles of beer"}],
+      "nouns": [
+        {"hanzi": "水", "english": "water"}, {"hanzi": "啤酒", "english": "beer"}, {"hanzi": "可乐", "english": "cola"},
+        {"hanzi": "牛奶", "english": "milk"}, {"hanzi": "酱油", "english": "soy sauce"}
+      ],
+      "semantic_rule": "Bottled liquids — named by the container. Anything sold or stored in a bottle.",
+      "sentences": [
+        {"zh": "给我一瓶水。", "en": "Give me a bottle of water."},
+        {"zh": "他喝了两瓶啤酒。", "en": "He drank two bottles of beer."}
+      ]
+    },
+    {
+      "classifier": "层", "pinyin": "céng", "meaning": "floor/layer", "category": "buildings", "hsk_level": 3,
+      "examples": [{"hanzi": "三层楼", "english": "three floors"}, {"hanzi": "一层意思", "english": "a layer of meaning"}],
+      "nouns": [
+        {"hanzi": "楼", "english": "floor/story"}, {"hanzi": "意思", "english": "meaning (layer of)"},
+        {"hanzi": "皮", "english": "skin/layer"}, {"hanzi": "雾", "english": "fog"}, {"hanzi": "灰", "english": "dust (layer)"}
+      ],
+      "semantic_rule": "Horizontal layers or floors — building stories, layers of meaning, coats of paint, blankets of fog.",
+      "sentences": [
+        {"zh": "我住在三层。", "en": "I live on the third floor."},
+        {"zh": "这句话有好几层意思。", "en": "This sentence has several layers of meaning."}
+      ]
+    },
+    {
+      "classifier": "次", "pinyin": "cì", "meaning": "time/occurrence", "category": "events", "hsk_level": 2,
+      "examples": [{"hanzi": "一次机会", "english": "one opportunity"}, {"hanzi": "三次考试", "english": "three exams"}],
+      "nouns": [
+        {"hanzi": "机会", "english": "opportunity"}, {"hanzi": "考试", "english": "exam"}, {"hanzi": "旅行", "english": "trip"},
+        {"hanzi": "经历", "english": "experience"}, {"hanzi": "会议", "english": "meeting"}
+      ],
+      "semantic_rule": "Any occurrence or instance — the most general counter for 'times' something happens.",
+      "sentences": [
+        {"zh": "这是我第一次来中国。", "en": "This is my first time coming to China."},
+        {"zh": "他考了三次考试。", "en": "He took the exam three times."}
+      ]
+    },
+    {
+      "classifier": "遍", "pinyin": "biàn", "meaning": "time (from beginning to end)", "category": "events", "hsk_level": 3,
+      "examples": [{"hanzi": "看一遍", "english": "read through once"}, {"hanzi": "说两遍", "english": "say twice through"}],
+      "nouns": [
+        {"hanzi": "课文", "english": "lesson text"}, {"hanzi": "电影", "english": "movie"}, {"hanzi": "歌", "english": "song"},
+        {"hanzi": "故事", "english": "story"}, {"hanzi": "文章", "english": "article"}
+      ],
+      "semantic_rule": "A complete run-through from start to finish — reading a whole book, watching a full movie, reciting a complete text.",
+      "sentences": [
+        {"zh": "请再说一遍。", "en": "Please say it again (all the way through)."},
+        {"zh": "这部电影我看了两遍。", "en": "I watched this movie twice through."}
+      ]
+    },
+    {
+      "classifier": "顿", "pinyin": "dùn", "meaning": "meal/bout", "category": "events", "hsk_level": 3,
+      "examples": [{"hanzi": "一顿饭", "english": "one meal"}, {"hanzi": "三顿饭", "english": "three meals"}],
+      "nouns": [
+        {"hanzi": "饭", "english": "meal"}, {"hanzi": "早饭", "english": "breakfast"}, {"hanzi": "午饭", "english": "lunch"},
+        {"hanzi": "晚饭", "english": "dinner"}, {"hanzi": "打", "english": "beating"}
+      ],
+      "semantic_rule": "Meals and bouts — eating sessions (breakfast, lunch, dinner) or rounds of scolding/beating.",
+      "sentences": [
+        {"zh": "我们一天吃三顿饭。", "en": "We eat three meals a day."},
+        {"zh": "昨晚吃了一顿大餐。", "en": "We had a big meal last night."}
+      ]
+    },
+    {
+      "classifier": "种", "pinyin": "zhǒng", "meaning": "type/kind", "category": "abstract", "hsk_level": 2,
+      "examples": [{"hanzi": "一种方法", "english": "one kind of method"}, {"hanzi": "两种颜色", "english": "two kinds of colors"}],
+      "nouns": [
+        {"hanzi": "方法", "english": "method"}, {"hanzi": "颜色", "english": "color"}, {"hanzi": "动物", "english": "animal"},
+        {"hanzi": "感觉", "english": "feeling"}, {"hanzi": "语言", "english": "language"}, {"hanzi": "水果", "english": "fruit"}
+      ],
+      "semantic_rule": "Types, kinds, or categories — classifies by species or variety, not individual items.",
+      "sentences": [
+        {"zh": "这种方法很好。", "en": "This kind of method is very good."},
+        {"zh": "你喜欢哪种水果？", "en": "What kind of fruit do you like?"}
+      ]
+    },
+    {
+      "classifier": "套", "pinyin": "tào", "meaning": "set/suite", "category": "objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一套房子", "english": "one apartment/suite"}, {"hanzi": "一套衣服", "english": "one set of clothes"}],
+      "nouns": [
+        {"hanzi": "房子", "english": "apartment"}, {"hanzi": "衣服", "english": "clothes (set)"}, {"hanzi": "方案", "english": "plan"},
+        {"hanzi": "邮票", "english": "stamps (set)"}, {"hanzi": "餐具", "english": "tableware (set)"}
+      ],
+      "semantic_rule": "Complete sets or suites — a matched collection of items that belong together.",
+      "sentences": [
+        {"zh": "他买了一套新房子。", "en": "He bought a new apartment."},
+        {"zh": "这是一套很好的方案。", "en": "This is a very good plan."}
+      ]
+    },
+    {
+      "classifier": "场", "pinyin": "chǎng", "meaning": "event/show/session", "category": "events", "hsk_level": 3,
+      "examples": [{"hanzi": "一场电影", "english": "one movie showing"}, {"hanzi": "一场雨", "english": "one rain shower"}, {"hanzi": "一场比赛", "english": "one match/game"}],
+      "nouns": [
+        {"hanzi": "电影", "english": "movie"}, {"hanzi": "雨", "english": "rain"}, {"hanzi": "比赛", "english": "match"},
+        {"hanzi": "梦", "english": "dream"}, {"hanzi": "战争", "english": "war"}, {"hanzi": "音乐会", "english": "concert"}
+      ],
+      "semantic_rule": "Events with duration and atmosphere — performances, weather events, games, dreams, disasters.",
+      "sentences": [
+        {"zh": "下了一场大雨。", "en": "There was a heavy rain."},
+        {"zh": "昨天看了一场比赛。", "en": "I watched a match yesterday."}
+      ]
+    },
+    {
+      "classifier": "份", "pinyin": "fèn", "meaning": "portion/copy/share", "category": "portions", "hsk_level": 3,
+      "examples": [{"hanzi": "一份报纸", "english": "one copy of newspaper"}, {"hanzi": "一份工作", "english": "one job"}, {"hanzi": "一份礼物", "english": "one gift"}],
+      "nouns": [
+        {"hanzi": "报纸", "english": "newspaper"}, {"hanzi": "工作", "english": "job"}, {"hanzi": "礼物", "english": "gift"},
+        {"hanzi": "合同", "english": "contract"}, {"hanzi": "菜", "english": "dish (serving)"}, {"hanzi": "材料", "english": "materials"}
+      ],
+      "semantic_rule": "Portions, copies, or shares — one serving of food, one copy of a document, one share of responsibility.",
+      "sentences": [
+        {"zh": "请给我一份报纸。", "en": "Please give me a copy of the newspaper."},
+        {"zh": "她找到了一份好工作。", "en": "She found a good job."}
+      ]
+    },
+    {
+      "classifier": "节", "pinyin": "jié", "meaning": "section/class period", "category": "events", "hsk_level": 3,
+      "examples": [{"hanzi": "一节课", "english": "one class period"}, {"hanzi": "两节车厢", "english": "two train cars"}],
+      "nouns": [
+        {"hanzi": "课", "english": "class"}, {"hanzi": "车厢", "english": "train car"}, {"hanzi": "电池", "english": "battery"},
+        {"hanzi": "竹子", "english": "bamboo (segment)"}, {"hanzi": "藕", "english": "lotus root (section)"}
+      ],
+      "semantic_rule": "Segments or sections — class periods, train carriages, batteries, bamboo sections.",
+      "sentences": [
+        {"zh": "今天有四节课。", "en": "There are four class periods today."},
+        {"zh": "这列火车有十节车厢。", "en": "This train has ten carriages."}
+      ]
+    },
+    {
+      "classifier": "篇", "pinyin": "piān", "meaning": "article/essay", "category": "flat_objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一篇文章", "english": "one article"}, {"hanzi": "两篇论文", "english": "two papers"}],
+      "nouns": [
+        {"hanzi": "文章", "english": "article"}, {"hanzi": "论文", "english": "paper/thesis"}, {"hanzi": "日记", "english": "diary entry"},
+        {"hanzi": "报告", "english": "report"}, {"hanzi": "作文", "english": "composition"}
+      ],
+      "semantic_rule": "Written compositions — articles, essays, papers, stories as complete written works.",
+      "sentences": [
+        {"zh": "他写了一篇很好的文章。", "en": "He wrote a very good article."},
+        {"zh": "老师让我们写一篇作文。", "en": "The teacher asked us to write a composition."}
+      ]
+    },
+    {
+      "classifier": "段", "pinyin": "duàn", "meaning": "section/passage/period", "category": "abstract", "hsk_level": 4,
+      "examples": [{"hanzi": "一段时间", "english": "a period of time"}, {"hanzi": "一段路", "english": "a stretch of road"}],
+      "nouns": [
+        {"hanzi": "时间", "english": "time"}, {"hanzi": "路", "english": "road (stretch)"}, {"hanzi": "话", "english": "speech (passage)"},
+        {"hanzi": "历史", "english": "history (period)"}, {"hanzi": "经历", "english": "experience (period)"}
+      ],
+      "semantic_rule": "Stretches or passages — a span of time, a stretch of road, a passage of text, a period of experience.",
+      "sentences": [
+        {"zh": "这段时间我很忙。", "en": "I've been very busy during this period."},
+        {"zh": "这段路不好走。", "en": "This stretch of road is hard to walk."}
+      ]
+    },
+    {
+      "classifier": "首", "pinyin": "shǒu", "meaning": "poem/song", "category": "abstract", "hsk_level": 4,
+      "examples": [{"hanzi": "一首歌", "english": "one song"}, {"hanzi": "一首诗", "english": "one poem"}],
+      "nouns": [
+        {"hanzi": "歌", "english": "song"}, {"hanzi": "诗", "english": "poem"}, {"hanzi": "曲子", "english": "tune"},
+        {"hanzi": "歌曲", "english": "song (formal)"}, {"hanzi": "乐曲", "english": "musical composition"}
+      ],
+      "semantic_rule": "Songs and poems — lyrical or poetic compositions meant to be heard or recited.",
+      "sentences": [
+        {"zh": "她唱了一首歌。", "en": "She sang a song."},
+        {"zh": "这首诗很有名。", "en": "This poem is very famous."}
+      ]
+    },
+    {
+      "classifier": "封", "pinyin": "fēng", "meaning": "letter/envelope", "category": "flat_objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一封信", "english": "one letter"}, {"hanzi": "两封邮件", "english": "two emails"}],
+      "nouns": [
+        {"hanzi": "信", "english": "letter"}, {"hanzi": "邮件", "english": "email"}, {"hanzi": "电报", "english": "telegram"},
+        {"hanzi": "请柬", "english": "invitation"}, {"hanzi": "通知", "english": "notice"}
+      ],
+      "semantic_rule": "Sealed correspondence — letters, emails, telegrams. Originally: things sealed in an envelope.",
+      "sentences": [
+        {"zh": "我收到了一封信。", "en": "I received a letter."},
+        {"zh": "她写了一封长邮件。", "en": "She wrote a long email."}
+      ]
+    },
+    {
+      "classifier": "台", "pinyin": "tái", "meaning": "machine/platform", "category": "objects", "hsk_level": 3,
+      "examples": [{"hanzi": "一台电脑", "english": "one computer"}, {"hanzi": "一台电视", "english": "one TV set"}],
+      "nouns": [
+        {"hanzi": "电脑", "english": "computer"}, {"hanzi": "电视", "english": "TV"}, {"hanzi": "洗衣机", "english": "washing machine"},
+        {"hanzi": "空调", "english": "air conditioner"}, {"hanzi": "冰箱", "english": "refrigerator"}
+      ],
+      "semantic_rule": "Machines and equipment — electronic devices, appliances, and mechanical apparatus that sit on a platform or stand.",
+      "sentences": [
+        {"zh": "我买了一台新电脑。", "en": "I bought a new computer."},
+        {"zh": "房间里有一台空调。", "en": "There is an air conditioner in the room."}
+      ]
+    },
+    {
+      "classifier": "座", "pinyin": "zuò", "meaning": "large fixed structure", "category": "buildings", "hsk_level": 3,
+      "examples": [{"hanzi": "一座山", "english": "one mountain"}, {"hanzi": "一座桥", "english": "one bridge"}, {"hanzi": "一座城市", "english": "one city"}],
+      "nouns": [
+        {"hanzi": "山", "english": "mountain"}, {"hanzi": "桥", "english": "bridge"}, {"hanzi": "城市", "english": "city"},
+        {"hanzi": "大楼", "english": "tall building"}, {"hanzi": "寺庙", "english": "temple"}, {"hanzi": "雕像", "english": "statue"}
+      ],
+      "semantic_rule": "Large immovable structures — mountains, bridges, buildings, cities, temples. Things that sit firmly in place.",
+      "sentences": [
+        {"zh": "这座山很高。", "en": "This mountain is very tall."},
+        {"zh": "那座桥有一百年的历史。", "en": "That bridge has a hundred years of history."}
+      ]
+    },
+    {
+      "classifier": "栋", "pinyin": "dòng", "meaning": "building", "category": "buildings", "hsk_level": 5,
+      "examples": [{"hanzi": "一栋楼", "english": "one building"}, {"hanzi": "两栋别墅", "english": "two villas"}],
+      "semantic_rule": "Standalone buildings — residential blocks, villas, office towers. More specific than 座 (only buildings, not mountains or bridges)."
+    },
+    {
+      "classifier": "间", "pinyin": "jiān", "meaning": "room", "category": "buildings", "hsk_level": 3,
+      "examples": [{"hanzi": "一间房间", "english": "one room"}, {"hanzi": "两间教室", "english": "two classrooms"}],
+      "nouns": [
+        {"hanzi": "房间", "english": "room"}, {"hanzi": "教室", "english": "classroom"}, {"hanzi": "卧室", "english": "bedroom"},
+        {"hanzi": "办公室", "english": "office"}, {"hanzi": "厨房", "english": "kitchen"}
+      ],
+      "semantic_rule": "Rooms — enclosed spaces within a building. Bedrooms, classrooms, offices, kitchens.",
+      "sentences": [
+        {"zh": "我订了一间房间。", "en": "I booked a room."},
+        {"zh": "学校有很多间教室。", "en": "The school has many classrooms."}
+      ]
+    },
+    {
+      "classifier": "家", "pinyin": "jiā", "meaning": "family/business establishment", "category": "buildings", "hsk_level": 2,
+      "examples": [{"hanzi": "一家公司", "english": "one company"}, {"hanzi": "一家饭店", "english": "one restaurant"}],
+      "nouns": [
+        {"hanzi": "公司", "english": "company"}, {"hanzi": "饭店", "english": "restaurant"}, {"hanzi": "商店", "english": "shop"},
+        {"hanzi": "医院", "english": "hospital"}, {"hanzi": "银行", "english": "bank"}, {"hanzi": "超市", "english": "supermarket"}
+      ],
+      "semantic_rule": "Businesses and establishments — companies, restaurants, shops, banks. Places run as a 'household' enterprise.",
+      "sentences": [
+        {"zh": "附近有一家超市。", "en": "There is a supermarket nearby."},
+        {"zh": "他开了一家公司。", "en": "He started a company."}
+      ]
+    },
+    {
+      "classifier": "所", "pinyin": "suǒ", "meaning": "institution/building", "category": "buildings", "hsk_level": 4,
+      "examples": [{"hanzi": "一所学校", "english": "one school"}, {"hanzi": "一所医院", "english": "one hospital"}],
+      "nouns": [
+        {"hanzi": "学校", "english": "school"}, {"hanzi": "医院", "english": "hospital"}, {"hanzi": "大学", "english": "university"},
+        {"hanzi": "研究所", "english": "research institute"}, {"hanzi": "幼儿园", "english": "kindergarten"}
+      ],
+      "semantic_rule": "Institutions — schools, hospitals, research institutes. Formal establishments with a public or institutional function.",
+      "sentences": [
+        {"zh": "这是一所很好的大学。", "en": "This is a very good university."},
+        {"zh": "附近有一所医院。", "en": "There is a hospital nearby."}
+      ]
+    },
+    {
+      "classifier": "棵", "pinyin": "kē", "meaning": "tree/plant", "category": "objects", "hsk_level": 3,
+      "examples": [{"hanzi": "一棵树", "english": "one tree"}, {"hanzi": "两棵草", "english": "two blades of grass"}],
+      "nouns": [
+        {"hanzi": "树", "english": "tree"}, {"hanzi": "草", "english": "grass/plant"}, {"hanzi": "白菜", "english": "cabbage"},
+        {"hanzi": "苗", "english": "seedling"}, {"hanzi": "松树", "english": "pine tree"}
+      ],
+      "semantic_rule": "Plants rooted in the ground — trees, seedlings, heads of cabbage. Living things growing upright from the earth.",
+      "sentences": [
+        {"zh": "院子里有一棵大树。", "en": "There is a big tree in the yard."},
+        {"zh": "我种了两棵白菜。", "en": "I planted two cabbages."}
+      ]
+    },
+    {
+      "classifier": "朵", "pinyin": "duǒ", "meaning": "flower/cloud", "category": "objects", "hsk_level": 3,
+      "examples": [{"hanzi": "一朵花", "english": "one flower"}, {"hanzi": "一朵云", "english": "one cloud"}],
+      "nouns": [
+        {"hanzi": "花", "english": "flower"}, {"hanzi": "云", "english": "cloud"}, {"hanzi": "玫瑰", "english": "rose"},
+        {"hanzi": "蘑菇", "english": "mushroom"}, {"hanzi": "白云", "english": "white cloud"}
+      ],
+      "semantic_rule": "Flowers and flower-shaped things — blossoms, clouds, mushrooms. Things that billow or bloom outward.",
+      "sentences": [
+        {"zh": "她送给我一朵玫瑰花。", "en": "She gave me a rose."},
+        {"zh": "天上有一朵白云。", "en": "There is a white cloud in the sky."}
+      ]
+    },
+    {
+      "classifier": "颗", "pinyin": "kē", "meaning": "small round object", "category": "objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一颗星星", "english": "one star"}, {"hanzi": "一颗心", "english": "one heart"}, {"hanzi": "一颗牙", "english": "one tooth"}],
+      "nouns": [
+        {"hanzi": "星星", "english": "star"}, {"hanzi": "心", "english": "heart"}, {"hanzi": "牙", "english": "tooth"},
+        {"hanzi": "糖", "english": "candy"}, {"hanzi": "子弹", "english": "bullet"}, {"hanzi": "珍珠", "english": "pearl"}
+      ],
+      "semantic_rule": "Small roundish objects — stars, hearts, teeth, candy, pearls, bullets. Bigger than a grain (粒), smaller than a ball.",
+      "sentences": [
+        {"zh": "天上有很多颗星星。", "en": "There are many stars in the sky."},
+        {"zh": "他掉了一颗牙。", "en": "He lost a tooth."}
+      ]
+    },
+    {
+      "classifier": "粒", "pinyin": "lì", "meaning": "grain/tiny particle", "category": "objects", "hsk_level": 5,
+      "examples": [{"hanzi": "一粒米", "english": "one grain of rice"}, {"hanzi": "一粒沙", "english": "one grain of sand"}],
+      "semantic_rule": "Tiny grains and particles — rice grains, sand grains, seeds, pills. Smaller than 颗."
+    },
+    {
+      "classifier": "滴", "pinyin": "dī", "meaning": "drop (liquid)", "category": "portions", "hsk_level": 5,
+      "examples": [{"hanzi": "一滴水", "english": "one drop of water"}, {"hanzi": "一滴眼泪", "english": "one teardrop"}],
+      "semantic_rule": "Liquid drops — water drops, teardrops, drops of blood. The smallest natural unit of liquid."
+    },
+    {
+      "classifier": "根", "pinyin": "gēn", "meaning": "long thin object/stick", "category": "long_objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一根筷子", "english": "one chopstick"}, {"hanzi": "一根绳子", "english": "one rope"}],
+      "nouns": [
+        {"hanzi": "筷子", "english": "chopstick"}, {"hanzi": "绳子", "english": "rope"}, {"hanzi": "头发", "english": "hair"},
+        {"hanzi": "骨头", "english": "bone"}, {"hanzi": "香蕉", "english": "banana"}, {"hanzi": "针", "english": "needle"}
+      ],
+      "semantic_rule": "Long rigid or semi-rigid sticks — chopsticks, bones, needles, hairs, bananas. Straighter and stiffer than 条.",
+      "sentences": [
+        {"zh": "地上有一根头发。", "en": "There is a hair on the floor."},
+        {"zh": "给我一根筷子。", "en": "Give me a chopstick."}
+      ]
+    },
+    {
+      "classifier": "支", "pinyin": "zhī", "meaning": "pen/stick-shaped/branch", "category": "long_objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一支笔", "english": "one pen"}, {"hanzi": "一支蜡烛", "english": "one candle"}],
+      "nouns": [
+        {"hanzi": "笔", "english": "pen"}, {"hanzi": "蜡烛", "english": "candle"}, {"hanzi": "枪", "english": "gun"},
+        {"hanzi": "烟", "english": "cigarette"}, {"hanzi": "歌", "english": "song"}, {"hanzi": "军队", "english": "army (unit)"}
+      ],
+      "semantic_rule": "Manufactured stick-shaped objects — pens, candles, cigarettes, guns. Also songs and military units.",
+      "sentences": [
+        {"zh": "借我一支笔。", "en": "Lend me a pen."},
+        {"zh": "桌上点了一支蜡烛。", "en": "A candle was lit on the table."}
+      ]
+    },
+    {
+      "classifier": "枝", "pinyin": "zhī", "meaning": "branch/flower stem", "category": "long_objects", "hsk_level": 5,
+      "examples": [{"hanzi": "一枝花", "english": "one flower (on stem)"}, {"hanzi": "一枝梅花", "english": "one plum blossom branch"}],
+      "semantic_rule": "Natural branches and stems — flower stems, tree branches. Living plant material still on the branch (literary)."
+    },
+    {
+      "classifier": "副", "pinyin": "fù", "meaning": "pair/set (accessories)", "category": "paired_items", "hsk_level": 4,
+      "examples": [{"hanzi": "一副眼镜", "english": "one pair of glasses"}, {"hanzi": "一副手套", "english": "one pair of gloves"}],
+      "nouns": [
+        {"hanzi": "眼镜", "english": "glasses"}, {"hanzi": "手套", "english": "gloves"}, {"hanzi": "耳机", "english": "headphones"},
+        {"hanzi": "对联", "english": "couplet"}, {"hanzi": "表情", "english": "expression (face)"}
+      ],
+      "semantic_rule": "Equipment worn as a set — glasses, gloves, headphones. Also facial expressions and couplets.",
+      "sentences": [
+        {"zh": "他戴了一副眼镜。", "en": "He wears a pair of glasses."},
+        {"zh": "她买了一副手套。", "en": "She bought a pair of gloves."}
+      ]
+    },
+    {
+      "classifier": "对", "pinyin": "duì", "meaning": "couple/pair", "category": "paired_items", "hsk_level": 4,
+      "examples": [{"hanzi": "一对夫妻", "english": "one married couple"}, {"hanzi": "一对耳环", "english": "one pair of earrings"}],
+      "nouns": [
+        {"hanzi": "夫妻", "english": "married couple"}, {"hanzi": "耳环", "english": "earrings"}, {"hanzi": "恋人", "english": "lovers"},
+        {"hanzi": "翅膀", "english": "wings"}, {"hanzi": "双胞胎", "english": "twins"}
+      ],
+      "semantic_rule": "Matched couples or paired items — romantic pairs, earrings, twins, wings. Emphasizes the relationship between the two.",
+      "sentences": [
+        {"zh": "他们是一对夫妻。", "en": "They are a married couple."},
+        {"zh": "她买了一对耳环。", "en": "She bought a pair of earrings."}
+      ]
+    },
+    {
+      "classifier": "群", "pinyin": "qún", "meaning": "group/flock/herd", "category": "animals", "hsk_level": 4,
+      "examples": [{"hanzi": "一群人", "english": "a group of people"}, {"hanzi": "一群鸟", "english": "a flock of birds"}],
+      "nouns": [
+        {"hanzi": "人", "english": "people (group)"}, {"hanzi": "鸟", "english": "birds"}, {"hanzi": "羊", "english": "sheep"},
+        {"hanzi": "孩子", "english": "children (group)"}, {"hanzi": "蜜蜂", "english": "bees"}
+      ],
+      "semantic_rule": "Groups, flocks, herds — any cluster of animals or people gathered together.",
+      "sentences": [
+        {"zh": "一群孩子在玩。", "en": "A group of children are playing."},
+        {"zh": "天上飞过一群鸟。", "en": "A flock of birds flew across the sky."}
+      ]
+    },
+    {
+      "classifier": "头", "pinyin": "tóu", "meaning": "large animal", "category": "animals", "hsk_level": 4,
+      "examples": [{"hanzi": "一头牛", "english": "one cow"}, {"hanzi": "一头猪", "english": "one pig"}],
+      "nouns": [
+        {"hanzi": "牛", "english": "cow"}, {"hanzi": "猪", "english": "pig"}, {"hanzi": "驴", "english": "donkey"},
+        {"hanzi": "大象", "english": "elephant"}, {"hanzi": "骡子", "english": "mule"}
+      ],
+      "semantic_rule": "Large livestock and big animals — cows, pigs, elephants. Animals big enough to be counted 'by the head.'",
+      "sentences": [
+        {"zh": "农场里有十头牛。", "en": "There are ten cows on the farm."},
+        {"zh": "他养了两头猪。", "en": "He raises two pigs."}
+      ]
+    },
+    {
+      "classifier": "匹", "pinyin": "pǐ", "meaning": "horse/bolt of cloth", "category": "animals", "hsk_level": 5,
+      "examples": [{"hanzi": "一匹马", "english": "one horse"}, {"hanzi": "一匹布", "english": "one bolt of cloth"}],
+      "semantic_rule": "Horses and bolts of cloth — historically linked because cloth and horses were both units of trade/tax."
+    },
+    {
+      "classifier": "批", "pinyin": "pī", "meaning": "batch/group", "category": "abstract", "hsk_level": 5,
+      "examples": [{"hanzi": "一批货", "english": "a batch of goods"}, {"hanzi": "一批学生", "english": "a group of students"}],
+      "semantic_rule": "Batches and cohorts — goods shipped together, groups of people processed together. Implies a collective lot."
+    },
+    {
+      "classifier": "幅", "pinyin": "fú", "meaning": "painting/picture/width of cloth", "category": "flat_objects", "hsk_level": 5,
+      "examples": [{"hanzi": "一幅画", "english": "one painting"}, {"hanzi": "一幅地图", "english": "one map"}],
+      "semantic_rule": "Hung or displayed flat artwork — paintings, maps, scrolls, banners. Things meant to be viewed on a wall."
+    },
+    {
+      "classifier": "部", "pinyin": "bù", "meaning": "film/work/vehicle (formal)", "category": "objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一部电影", "english": "one film"}, {"hanzi": "一部手机", "english": "one mobile phone"}, {"hanzi": "一部小说", "english": "one novel"}],
+      "nouns": [
+        {"hanzi": "电影", "english": "film"}, {"hanzi": "手机", "english": "mobile phone"}, {"hanzi": "小说", "english": "novel"},
+        {"hanzi": "电视剧", "english": "TV series"}, {"hanzi": "机器", "english": "machine"}, {"hanzi": "法律", "english": "law"}
+      ],
+      "semantic_rule": "Major works and complex machines — films, novels, TV series, vehicles, laws. Substantial creations with many parts.",
+      "sentences": [
+        {"zh": "这部电影很好看。", "en": "This movie is very good."},
+        {"zh": "我换了一部新手机。", "en": "I switched to a new phone."}
+      ]
+    },
+    {
+      "classifier": "架", "pinyin": "jià", "meaning": "aircraft/machine with frame", "category": "vehicles", "hsk_level": 5,
+      "examples": [{"hanzi": "一架飞机", "english": "one airplane"}, {"hanzi": "一架钢琴", "english": "one piano"}],
+      "semantic_rule": "Framed machines — aircraft, pianos, cameras. Things with a structural frame or skeleton."
+    },
+    {
+      "classifier": "艘", "pinyin": "sōu", "meaning": "ship/vessel", "category": "vehicles", "hsk_level": 5,
+      "examples": [{"hanzi": "一艘船", "english": "one ship"}, {"hanzi": "一艘军舰", "english": "one warship"}],
+      "semantic_rule": "Watercraft — ships, boats, submarines. Anything that sails or floats on water."
+    },
+    {
+      "classifier": "列", "pinyin": "liè", "meaning": "train/row", "category": "vehicles", "hsk_level": 5,
+      "examples": [{"hanzi": "一列火车", "english": "one train"}, {"hanzi": "一列队伍", "english": "one column/row"}],
+      "semantic_rule": "Trains and columns — things that move or stand in a long line/row."
+    },
+    {
+      "classifier": "面", "pinyin": "miàn", "meaning": "flat surface/side", "category": "flat_objects", "hsk_level": 4,
+      "examples": [{"hanzi": "一面镜子", "english": "one mirror"}, {"hanzi": "一面旗", "english": "one flag"}, {"hanzi": "一面墙", "english": "one wall"}],
+      "nouns": [
+        {"hanzi": "镜子", "english": "mirror"}, {"hanzi": "旗", "english": "flag"}, {"hanzi": "墙", "english": "wall"},
+        {"hanzi": "鼓", "english": "drum"}, {"hanzi": "锣", "english": "gong"}
+      ],
+      "semantic_rule": "Flat surfaces or sides — mirrors, flags, walls, drums. Things with a prominent flat face.",
+      "sentences": [
+        {"zh": "墙上挂了一面镜子。", "en": "A mirror hangs on the wall."},
+        {"zh": "广场上有一面红旗。", "en": "There is a red flag on the square."}
+      ]
+    },
+    {
+      "classifier": "扇", "pinyin": "shàn", "meaning": "door/window/fan", "category": "flat_objects", "hsk_level": 5,
+      "examples": [{"hanzi": "一扇门", "english": "one door"}, {"hanzi": "一扇窗户", "english": "one window"}],
+      "semantic_rule": "Doors, windows, and fan-shaped panels — flat things that swing open or fan out."
+    },
+    {
+      "classifier": "堵", "pinyin": "dǔ", "meaning": "wall/section of wall", "category": "buildings", "hsk_level": 6,
+      "examples": [{"hanzi": "一堵墙", "english": "one wall"}],
+      "semantic_rule": "Walls — specifically freestanding walls or sections of wall that block or enclose."
+    },
+    {
+      "classifier": "顶", "pinyin": "dǐng", "meaning": "hat/tent/top", "category": "clothing", "hsk_level": 5,
+      "examples": [{"hanzi": "一顶帽子", "english": "one hat"}, {"hanzi": "一顶帐篷", "english": "one tent"}],
+      "semantic_rule": "Things that go on top — hats, tents, mosquito nets. Items that cap or cover from above."
+    },
+    {
+      "classifier": "项", "pinyin": "xiàng", "meaning": "item/task/necklace", "category": "abstract", "hsk_level": 5,
+      "examples": [{"hanzi": "一项任务", "english": "one task"}, {"hanzi": "一项决定", "english": "one decision"}, {"hanzi": "一项规定", "english": "one regulation"}],
+      "semantic_rule": "Formal items or tasks — regulations, decisions, projects, awards. Bureaucratic or official individual entries."
+    },
+    {
+      "classifier": "门", "pinyin": "mén", "meaning": "course/subject/skill", "category": "abstract", "hsk_level": 4,
+      "examples": [{"hanzi": "一门课", "english": "one course"}, {"hanzi": "一门语言", "english": "one language"}],
+      "nouns": [
+        {"hanzi": "课", "english": "course"}, {"hanzi": "语言", "english": "language"}, {"hanzi": "学问", "english": "field of study"},
+        {"hanzi": "技术", "english": "technique"}, {"hanzi": "手艺", "english": "craft"}
+      ],
+      "semantic_rule": "Disciplines and skills — courses, languages, crafts. A 'door' to a field of knowledge or expertise.",
+      "sentences": [
+        {"zh": "这学期我选了五门课。", "en": "I chose five courses this semester."},
+        {"zh": "他会三门语言。", "en": "He speaks three languages."}
+      ]
+    },
+    {
+      "classifier": "番", "pinyin": "fān", "meaning": "kind/time (effort)", "category": "events", "hsk_level": 5,
+      "examples": [{"hanzi": "一番话", "english": "a round of words/speech"}, {"hanzi": "一番努力", "english": "a bout of effort"}],
+      "semantic_rule": "Sustained effort or deliberation — a round of discussion, a bout of hard work. Implies thoroughness and commitment."
+    },
+    {
+      "classifier": "笔", "pinyin": "bǐ", "meaning": "sum of money/stroke", "category": "abstract", "hsk_level": 5,
+      "examples": [{"hanzi": "一笔钱", "english": "a sum of money"}, {"hanzi": "一笔交易", "english": "one transaction"}],
+      "semantic_rule": "Financial sums and written strokes — money amounts, transactions, debts, calligraphy strokes."
+    },
+    {
+      "classifier": "则", "pinyin": "zé", "meaning": "piece of news/rule", "category": "abstract", "hsk_level": 6,
+      "examples": [{"hanzi": "一则新闻", "english": "one piece of news"}, {"hanzi": "一则故事", "english": "one story"}],
+      "semantic_rule": "News items, rules, or short anecdotes — brief written or spoken pieces with a point."
+    },
+    {
+      "classifier": "碗", "pinyin": "wǎn", "meaning": "bowl", "category": "portions", "hsk_level": 3,
+      "examples": [{"hanzi": "一碗饭", "english": "one bowl of rice"}, {"hanzi": "一碗面", "english": "one bowl of noodles"}],
+      "nouns": [
+        {"hanzi": "饭", "english": "rice"}, {"hanzi": "面", "english": "noodles"}, {"hanzi": "汤", "english": "soup"},
+        {"hanzi": "粥", "english": "porridge"}, {"hanzi": "豆腐", "english": "tofu"}
+      ],
+      "semantic_rule": "Bowl-fuls — rice, noodles, soup, porridge. Food served and eaten from a bowl.",
+      "sentences": [
+        {"zh": "来一碗面。", "en": "I'll have a bowl of noodles."},
+        {"zh": "她喝了两碗汤。", "en": "She drank two bowls of soup."}
+      ]
+    },
+    {
+      "classifier": "盘", "pinyin": "pán", "meaning": "plate/dish/game", "category": "portions", "hsk_level": 4,
+      "examples": [{"hanzi": "一盘菜", "english": "one plate of food"}, {"hanzi": "一盘棋", "english": "one game of chess"}],
+      "nouns": [
+        {"hanzi": "菜", "english": "dish"}, {"hanzi": "棋", "english": "chess"}, {"hanzi": "水果", "english": "fruit (plate of)"},
+        {"hanzi": "饺子", "english": "dumplings"}, {"hanzi": "沙拉", "english": "salad"}
+      ],
+      "semantic_rule": "Plates and games — food served on a plate/platter, or board games played on a flat surface.",
+      "sentences": [
+        {"zh": "再来一盘饺子。", "en": "Another plate of dumplings, please."},
+        {"zh": "我们下一盘棋吧。", "en": "Let's play a game of chess."}
+      ]
+    },
+    {
+      "classifier": "壶", "pinyin": "hú", "meaning": "pot (tea/wine)", "category": "portions", "hsk_level": 5,
+      "examples": [{"hanzi": "一壶茶", "english": "one pot of tea"}, {"hanzi": "一壶酒", "english": "one pot of wine"}],
+      "semantic_rule": "Pot-fuls — tea, wine, hot water. Liquids brewed or served from a pot with a spout."
+    },
 
-  {"classifier": "缕", "pinyin": "lǚ", "meaning": "wisp/thread/strand", "category": "long_objects", "hsk_level": 7, "examples": [{"hanzi": "一缕阳光", "english": "a ray of sunlight"}, {"hanzi": "一缕炊烟", "english": "a wisp of cooking smoke"}, {"hanzi": "一缕头发", "english": "a strand of hair"}]},
-  {"classifier": "抹", "pinyin": "mǒ", "meaning": "smear/streak/touch", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一抹微笑", "english": "a hint of a smile"}, {"hanzi": "一抹红霞", "english": "a streak of red clouds"}, {"hanzi": "一抹亮色", "english": "a touch of bright color"}]},
-  {"classifier": "阕", "pinyin": "què", "meaning": "stanza of a ci poem", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "上阕", "english": "the first stanza"}, {"hanzi": "一阕词", "english": "a ci poem/stanza"}]},
-  {"classifier": "尊", "pinyin": "zūn", "meaning": "statue/cannon (honorific)", "category": "objects", "hsk_level": 7, "examples": [{"hanzi": "一尊佛像", "english": "one Buddha statue"}, {"hanzi": "一尊大炮", "english": "one cannon"}]},
-  {"classifier": "帧", "pinyin": "zhēn", "meaning": "frame (image/video)", "category": "flat_objects", "hsk_level": 7, "examples": [{"hanzi": "一帧画面", "english": "one frame of video"}, {"hanzi": "每秒六十帧", "english": "sixty frames per second"}]},
-  {"classifier": "桩", "pinyin": "zhuāng", "meaning": "matter/affair/stake", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一桩事", "english": "one matter/affair"}, {"hanzi": "一桩案件", "english": "one case (legal)"}, {"hanzi": "一桩买卖", "english": "one business deal"}]},
-  {"classifier": "剂", "pinyin": "jì", "meaning": "dose (medicine)", "category": "portions", "hsk_level": 7, "examples": [{"hanzi": "一剂药", "english": "one dose of medicine"}, {"hanzi": "一剂疫苗", "english": "one dose of vaccine"}]},
-  {"classifier": "方", "pinyin": "fāng", "meaning": "cubic meter/prescription", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一方土", "english": "one cubic meter of earth"}, {"hanzi": "一方印章", "english": "one seal/stamp"}]},
-  {"classifier": "捧", "pinyin": "pěng", "meaning": "double handful", "category": "portions", "hsk_level": 7, "examples": [{"hanzi": "一捧花", "english": "a handful of flowers"}, {"hanzi": "一捧沙子", "english": "a double handful of sand"}]},
-  {"classifier": "味", "pinyin": "wèi", "meaning": "ingredient (traditional medicine)", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一味药材", "english": "one medicinal ingredient"}, {"hanzi": "三味中药", "english": "three Chinese medicinal ingredients"}]},
+    {"classifier": "缕", "pinyin": "lǚ", "meaning": "wisp/thread/strand", "category": "long_objects", "hsk_level": 7, "examples": [{"hanzi": "一缕阳光", "english": "a ray of sunlight"}, {"hanzi": "一缕炊烟", "english": "a wisp of cooking smoke"}, {"hanzi": "一缕头发", "english": "a strand of hair"}], "semantic_rule": "Wisps and strands — thin traces of light, smoke, hair. Delicate and barely visible threads."},
+    {"classifier": "抹", "pinyin": "mǒ", "meaning": "smear/streak/touch", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一抹微笑", "english": "a hint of a smile"}, {"hanzi": "一抹红霞", "english": "a streak of red clouds"}, {"hanzi": "一抹亮色", "english": "a touch of bright color"}], "semantic_rule": "Faint traces of color or expression — a hint, streak, or touch of something visual."},
+    {"classifier": "阕", "pinyin": "què", "meaning": "stanza of a ci poem", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "上阕", "english": "the first stanza"}, {"hanzi": "一阕词", "english": "a ci poem/stanza"}], "semantic_rule": "Stanzas of ci poetry — the upper or lower half of a classical lyric poem."},
+    {"classifier": "尊", "pinyin": "zūn", "meaning": "statue/cannon (honorific)", "category": "objects", "hsk_level": 7, "examples": [{"hanzi": "一尊佛像", "english": "one Buddha statue"}, {"hanzi": "一尊大炮", "english": "one cannon"}], "semantic_rule": "Revered objects — statues, cannons. Things commanding respect or awe, counted with an honorific."},
+    {"classifier": "帧", "pinyin": "zhēn", "meaning": "frame (image/video)", "category": "flat_objects", "hsk_level": 7, "examples": [{"hanzi": "一帧画面", "english": "one frame of video"}, {"hanzi": "每秒六十帧", "english": "sixty frames per second"}], "semantic_rule": "Image frames — individual still images in a video or animation sequence."},
+    {"classifier": "桩", "pinyin": "zhuāng", "meaning": "matter/affair/stake", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一桩事", "english": "one matter/affair"}, {"hanzi": "一桩案件", "english": "one case (legal)"}, {"hanzi": "一桩买卖", "english": "one business deal"}], "semantic_rule": "Weighty affairs — legal cases, business deals, significant events. More formal/serious than 件."},
+    {"classifier": "剂", "pinyin": "jì", "meaning": "dose (medicine)", "category": "portions", "hsk_level": 7, "examples": [{"hanzi": "一剂药", "english": "one dose of medicine"}, {"hanzi": "一剂疫苗", "english": "one dose of vaccine"}], "semantic_rule": "Medical doses — measured amounts of medicine, vaccine, or chemical preparation."},
+    {"classifier": "方", "pinyin": "fāng", "meaning": "cubic meter/prescription", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一方土", "english": "one cubic meter of earth"}, {"hanzi": "一方印章", "english": "one seal/stamp"}], "semantic_rule": "Square/cubic measures and seals — cubic meters of material, official stamps, prescriptions."},
+    {"classifier": "捧", "pinyin": "pěng", "meaning": "double handful", "category": "portions", "hsk_level": 7, "examples": [{"hanzi": "一捧花", "english": "a handful of flowers"}, {"hanzi": "一捧沙子", "english": "a double handful of sand"}], "semantic_rule": "Double handfuls — what you can hold in two cupped hands together."},
+    {"classifier": "味", "pinyin": "wèi", "meaning": "ingredient (traditional medicine)", "category": "abstract", "hsk_level": 7, "examples": [{"hanzi": "一味药材", "english": "one medicinal ingredient"}, {"hanzi": "三味中药", "english": "three Chinese medicinal ingredients"}], "semantic_rule": "Medicinal ingredients — individual herbs or components in a traditional Chinese medicine prescription."},
 
-  {"classifier": "宗", "pinyin": "zōng", "meaning": "case/batch/sum (legal/financial)", "category": "abstract", "hsk_level": 8, "examples": [{"hanzi": "一宗案件", "english": "one legal case"}, {"hanzi": "一宗交易", "english": "one transaction"}, {"hanzi": "一宗土地", "english": "one parcel of land"}]},
-  {"classifier": "纸", "pinyin": "zhǐ", "meaning": "prescription/official document", "category": "flat_objects", "hsk_level": 8, "examples": [{"hanzi": "一纸公文", "english": "one official document"}, {"hanzi": "一纸诉状", "english": "one legal complaint/petition"}]},
-  {"classifier": "席", "pinyin": "xí", "meaning": "banquet/speech/seat", "category": "events", "hsk_level": 8, "examples": [{"hanzi": "一席话", "english": "a round of remarks/a speech"}, {"hanzi": "一席宴会", "english": "one banquet"}]},
-  {"classifier": "服", "pinyin": "fú", "meaning": "dose (decoction/oral medicine)", "category": "portions", "hsk_level": 8, "examples": [{"hanzi": "一服药", "english": "one dose of herbal decoction"}, {"hanzi": "三服中药", "english": "three doses of Chinese medicine"}]},
-  {"classifier": "厢", "pinyin": "xiāng", "meaning": "carriage/compartment", "category": "vehicles", "hsk_level": 8, "examples": [{"hanzi": "一厢车", "english": "one train car"}, {"hanzi": "两厢厢式货车", "english": "two cargo van compartments"}]},
-  {"classifier": "爿", "pinyin": "pán", "meaning": "shop/store (dialectal/literary)", "category": "buildings", "hsk_level": 8, "examples": [{"hanzi": "一爿小店", "english": "one small shop"}, {"hanzi": "一爿杂货铺", "english": "one general store"}]},
-  {"classifier": "泓", "pinyin": "hóng", "meaning": "pool/body of clear water (literary)", "category": "abstract", "hsk_level": 8, "examples": [{"hanzi": "一泓清水", "english": "a pool of clear water"}, {"hanzi": "一泓碧波", "english": "a stretch of emerald water"}]},
-  {"classifier": "掬", "pinyin": "jū", "meaning": "cupped handful (literary)", "category": "portions", "hsk_level": 8, "examples": [{"hanzi": "一掬清泪", "english": "a handful of tears (literary)"}, {"hanzi": "一掬土", "english": "a cupped handful of earth"}]},
-  {"classifier": "孔", "pinyin": "kǒng", "meaning": "opening/hole/cave", "category": "objects", "hsk_level": 8, "examples": [{"hanzi": "一孔窑洞", "english": "one cave dwelling"}, {"hanzi": "两孔桥洞", "english": "two bridge arches"}]},
-  {"classifier": "通", "pinyin": "tōng", "meaning": "phone call/letter/drumbeat series", "category": "events", "hsk_level": 8, "examples": [{"hanzi": "一通电话", "english": "one phone call"}, {"hanzi": "一通鼓", "english": "a round of drumming"}]},
+    {"classifier": "宗", "pinyin": "zōng", "meaning": "case/batch/sum (legal/financial)", "category": "abstract", "hsk_level": 8, "examples": [{"hanzi": "一宗案件", "english": "one legal case"}, {"hanzi": "一宗交易", "english": "one transaction"}, {"hanzi": "一宗土地", "english": "one parcel of land"}], "semantic_rule": "Legal/financial cases — lawsuits, property transactions, formal proceedings."},
+    {"classifier": "纸", "pinyin": "zhǐ", "meaning": "prescription/official document", "category": "flat_objects", "hsk_level": 8, "examples": [{"hanzi": "一纸公文", "english": "one official document"}, {"hanzi": "一纸诉状", "english": "one legal complaint/petition"}], "semantic_rule": "Official written documents — legal complaints, government decrees, formal pronouncements."},
+    {"classifier": "席", "pinyin": "xí", "meaning": "banquet/speech/seat", "category": "events", "hsk_level": 8, "examples": [{"hanzi": "一席话", "english": "a round of remarks/a speech"}, {"hanzi": "一席宴会", "english": "one banquet"}], "semantic_rule": "Banquets and formal speeches — events centered on sitting together (席 = mat/seat)."},
+    {"classifier": "服", "pinyin": "fú", "meaning": "dose (decoction/oral medicine)", "category": "portions", "hsk_level": 8, "examples": [{"hanzi": "一服药", "english": "one dose of herbal decoction"}, {"hanzi": "三服中药", "english": "three doses of Chinese medicine"}], "semantic_rule": "Doses of traditional herbal medicine — specifically brewed decoctions taken orally."},
+    {"classifier": "厢", "pinyin": "xiāng", "meaning": "carriage/compartment", "category": "vehicles", "hsk_level": 8, "examples": [{"hanzi": "一厢车", "english": "one train car"}, {"hanzi": "两厢厢式货车", "english": "two cargo van compartments"}], "semantic_rule": "Compartments and carriages — enclosed sections of vehicles, especially train cars."},
+    {"classifier": "爿", "pinyin": "pán", "meaning": "shop/store (dialectal/literary)", "category": "buildings", "hsk_level": 8, "examples": [{"hanzi": "一爿小店", "english": "one small shop"}, {"hanzi": "一爿杂货铺", "english": "one general store"}], "semantic_rule": "Small shops — dialectal/literary counter for storefronts and small businesses."},
+    {"classifier": "泓", "pinyin": "hóng", "meaning": "pool/body of clear water (literary)", "category": "abstract", "hsk_level": 8, "examples": [{"hanzi": "一泓清水", "english": "a pool of clear water"}, {"hanzi": "一泓碧波", "english": "a stretch of emerald water"}], "semantic_rule": "Pools of clear water — literary classifier for serene, undisturbed bodies of water."},
+    {"classifier": "掬", "pinyin": "jū", "meaning": "cupped handful (literary)", "category": "portions", "hsk_level": 8, "examples": [{"hanzi": "一掬清泪", "english": "a handful of tears (literary)"}, {"hanzi": "一掬土", "english": "a cupped handful of earth"}], "semantic_rule": "Cupped handfuls — literary variant of 捧, often in poetic or classical contexts."},
+    {"classifier": "孔", "pinyin": "kǒng", "meaning": "opening/hole/cave", "category": "objects", "hsk_level": 8, "examples": [{"hanzi": "一孔窑洞", "english": "one cave dwelling"}, {"hanzi": "两孔桥洞", "english": "two bridge arches"}], "semantic_rule": "Openings and holes — cave dwellings, bridge arches, kiln openings."},
+    {"classifier": "通", "pinyin": "tōng", "meaning": "phone call/letter/drumbeat series", "category": "events", "hsk_level": 8, "examples": [{"hanzi": "一通电话", "english": "one phone call"}, {"hanzi": "一通鼓", "english": "a round of drumming"}], "semantic_rule": "Completed communications — phone calls, sustained drumming, a burst of cannon fire."},
 
-  {"classifier": "瓣", "pinyin": "bàn", "meaning": "petal/segment/clove", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一瓣花", "english": "one flower petal"}, {"hanzi": "一瓣蒜", "english": "one clove of garlic"}, {"hanzi": "几瓣橘子", "english": "a few orange segments"}]},
-  {"classifier": "骑", "pinyin": "qí", "meaning": "mounted soldier/cavalry unit (classical)", "category": "people", "hsk_level": 9, "examples": [{"hanzi": "一骑红尘", "english": "a lone rider in the dust (poetic)"}, {"hanzi": "千骑", "english": "a thousand cavalry"}]},
-  {"classifier": "眼", "pinyin": "yǎn", "meaning": "well/spring/glance", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一眼井", "english": "one well"}, {"hanzi": "一眼泉水", "english": "one spring"}]},
-  {"classifier": "茬", "pinyin": "chá", "meaning": "crop cycle/batch/round", "category": "events", "hsk_level": 9, "examples": [{"hanzi": "一茬庄稼", "english": "one crop cycle"}, {"hanzi": "一茬又一茬", "english": "batch after batch"}]},
-  {"classifier": "豁", "pinyin": "huō", "meaning": "gap/opening/notch", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一豁口子", "english": "one gap/breach"}, {"hanzi": "墙上有一豁", "english": "there is a gap in the wall"}]},
-  {"classifier": "箧", "pinyin": "qiè", "meaning": "chest/small box (literary)", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一箧书", "english": "a chest of books"}, {"hanzi": "一箧珠宝", "english": "a casket of jewels"}]},
-  {"classifier": "垛", "pinyin": "duò", "meaning": "stack/pile (neat)", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一垛砖", "english": "one stack of bricks"}, {"hanzi": "一垛柴", "english": "one stack of firewood"}]},
-  {"classifier": "札", "pinyin": "zhá", "meaning": "letter/document (classical)", "category": "flat_objects", "hsk_level": 9, "examples": [{"hanzi": "一札书信", "english": "one letter/epistle"}, {"hanzi": "手札", "english": "personal notes/correspondence"}]},
-  {"classifier": "钵", "pinyin": "bō", "meaning": "alms bowl/large bowl (Buddhist)", "category": "portions", "hsk_level": 9, "examples": [{"hanzi": "一钵饭", "english": "one bowl of rice (monk's bowl)"}, {"hanzi": "衣钵", "english": "mantle and alms bowl (legacy)"}]},
-  {"classifier": "觞", "pinyin": "shāng", "meaning": "goblet/wine cup (classical)", "category": "portions", "hsk_level": 9, "examples": [{"hanzi": "一觞酒", "english": "one cup of wine (classical)"}, {"hanzi": "举觞", "english": "to raise one's goblet"}]}
-]
+    {"classifier": "瓣", "pinyin": "bàn", "meaning": "petal/segment/clove", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一瓣花", "english": "one flower petal"}, {"hanzi": "一瓣蒜", "english": "one clove of garlic"}, {"hanzi": "几瓣橘子", "english": "a few orange segments"}], "semantic_rule": "Natural segments — petals, garlic cloves, orange segments. Pieces that separate along natural seams."},
+    {"classifier": "骑", "pinyin": "qí", "meaning": "mounted soldier/cavalry unit (classical)", "category": "people", "hsk_level": 9, "examples": [{"hanzi": "一骑红尘", "english": "a lone rider in the dust (poetic)"}, {"hanzi": "千骑", "english": "a thousand cavalry"}], "semantic_rule": "Mounted riders — classical/poetic counter for horse-and-rider as a single unit."},
+    {"classifier": "眼", "pinyin": "yǎn", "meaning": "well/spring/glance", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一眼井", "english": "one well"}, {"hanzi": "一眼泉水", "english": "one spring"}], "semantic_rule": "Wells and springs — water sources that are like 'eyes' in the earth."},
+    {"classifier": "茬", "pinyin": "chá", "meaning": "crop cycle/batch/round", "category": "events", "hsk_level": 9, "examples": [{"hanzi": "一茬庄稼", "english": "one crop cycle"}, {"hanzi": "一茬又一茬", "english": "batch after batch"}], "semantic_rule": "Crop cycles and successive batches — harvests, cohorts, rounds that come one after another."},
+    {"classifier": "豁", "pinyin": "huō", "meaning": "gap/opening/notch", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一豁口子", "english": "one gap/breach"}, {"hanzi": "墙上有一豁", "english": "there is a gap in the wall"}], "semantic_rule": "Gaps and notches — breaks, breaches, or openings in a surface."},
+    {"classifier": "箧", "pinyin": "qiè", "meaning": "chest/small box (literary)", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一箧书", "english": "a chest of books"}, {"hanzi": "一箧珠宝", "english": "a casket of jewels"}], "semantic_rule": "Small chests and caskets — literary classifier for ornate containers of valuables."},
+    {"classifier": "垛", "pinyin": "duò", "meaning": "stack/pile (neat)", "category": "objects", "hsk_level": 9, "examples": [{"hanzi": "一垛砖", "english": "one stack of bricks"}, {"hanzi": "一垛柴", "english": "one stack of firewood"}], "semantic_rule": "Neat stacks and piles — orderly heaps of bricks, firewood, hay."},
+    {"classifier": "札", "pinyin": "zhá", "meaning": "letter/document (classical)", "category": "flat_objects", "hsk_level": 9, "examples": [{"hanzi": "一札书信", "english": "one letter/epistle"}, {"hanzi": "手札", "english": "personal notes/correspondence"}], "semantic_rule": "Classical letters and notes — formal written correspondence, personal notebooks."},
+    {"classifier": "钵", "pinyin": "bō", "meaning": "alms bowl/large bowl (Buddhist)", "category": "portions", "hsk_level": 9, "examples": [{"hanzi": "一钵饭", "english": "one bowl of rice (monk's bowl)"}, {"hanzi": "衣钵", "english": "mantle and alms bowl (legacy)"}], "semantic_rule": "Buddhist alms bowls — round deep bowls used by monks, also metaphor for inherited legacy."},
+    {"classifier": "觞", "pinyin": "shāng", "meaning": "goblet/wine cup (classical)", "category": "portions", "hsk_level": 9, "examples": [{"hanzi": "一觞酒", "english": "one cup of wine (classical)"}, {"hanzi": "举觞", "english": "to raise one's goblet"}], "semantic_rule": "Classical wine cups — goblets used in ancient banquets and ceremonial toasts."}
+  ],
+
+  "confusable_groups": {
+    "long_things": {
+      "classifiers": ["条", "根", "支", "枝"],
+      "discrimination_tip": "条 bends (rope, fish, road). 根 is rigid (chopstick, bone). 支 manufactured stick (pen, candle). 枝 natural branch (flower stem)."
+    },
+    "animals": {
+      "classifiers": ["只", "头", "匹"],
+      "discrimination_tip": "只 small-medium (cat, bird). 头 large livestock (cow, pig). 匹 horses."
+    },
+    "people": {
+      "classifiers": ["个", "位", "口"],
+      "discrimination_tip": "个 neutral/casual. 位 polite/formal (teacher, guest). 口 family members or mouthfuls."
+    },
+    "pairs": {
+      "classifiers": ["双", "对", "副"],
+      "discrimination_tip": "双 matching pair you wear (shoes, chopsticks). 对 couples/matched set. 副 equipment (glasses, gloves)."
+    },
+    "containers": {
+      "classifiers": ["杯", "瓶", "碗", "壶", "盘"],
+      "discrimination_tip": "Named by container shape: 杯 cup, 瓶 bottle, 碗 bowl, 壶 pot with spout, 盘 plate."
+    },
+    "flat_things": {
+      "classifiers": ["张", "篇", "封", "幅"],
+      "discrimination_tip": "张 general flat (paper, table). 篇 written work. 封 sealed (letter). 幅 hung art."
+    },
+    "events": {
+      "classifiers": ["次", "遍", "顿", "场", "番"],
+      "discrimination_tip": "次 any occurrence. 遍 start-to-finish. 顿 meals. 场 events with duration. 番 sustained effort."
+    },
+    "buildings": {
+      "classifiers": ["座", "栋", "间", "家", "所"],
+      "discrimination_tip": "座 large fixed (mountain, bridge). 栋 standalone building. 间 room. 家 business. 所 institution."
+    },
+    "small_round": {
+      "classifiers": ["颗", "粒", "滴"],
+      "discrimination_tip": "颗 small round (star, tooth). 粒 tiny grain (rice, sand). 滴 liquid drops."
+    },
+    "vehicles": {
+      "classifiers": ["辆", "架", "艘", "列"],
+      "discrimination_tip": "辆 wheeled. 架 aircraft/framed machine. 艘 ships. 列 trains."
+    }
+  }
+}

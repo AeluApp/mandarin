@@ -11,14 +11,15 @@ logger = logging.getLogger(__name__)
 from .drills import DrillResult
 
 
-def _show_best_option(options: list, chosen: dict, show_fn):
+def _show_best_option(options: list, chosen: dict, show_fn,
+                      support_level: str = "full_support"):
     """Show the best-scoring option if it differs from what was chosen."""
     best = max(options, key=lambda o: o.get("score", 0))
     if best != chosen:
-        best_parts = [best['text_zh']]
-        if best.get("text_pinyin"):
+        best_parts = [best.get('text_zh', '')]
+        if support_level != "hanzi_only" and best.get("text_pinyin"):
             best_parts.append(f"({best['text_pinyin']})")
-        if best.get("text_en"):
+        if support_level == "full_support" and best.get("text_en"):
             best_parts.append(f"— {best['text_en']}")
         show_fn(f"  Better: {' '.join(best_parts)}")
 
@@ -63,7 +64,9 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
         show_fn(f"  {setup_zh}")
 
     if support_level == "hanzi_only":
-        show_fn("  (Support reduced for this scenario)")
+        show_fn("  (Hanzi only for this scenario)")
+    elif support_level == "pinyin_support":
+        show_fn("  (English removed for this scenario)")
     if support_level != "full_support":
         show_fn("  [dim](quick check after each choice)[/dim]")
     show_fn("")
@@ -75,14 +78,15 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
         speaker = turn.get("speaker", "npc")
 
         if speaker == "npc":
-            # NPC line — just display it
+            # NPC line — display based on support level
             text_zh = turn.get("text_zh", "")
             text_pinyin = turn.get("text_pinyin", "")
             text_en = turn.get("text_en", "")
-            show_fn(f"  NPC: {text_zh}")
-            if text_pinyin:
+            speaker_name = turn.get("speaker_name", "NPC")
+            show_fn(f"  {speaker_name}: {text_zh}")
+            if support_level != "hanzi_only" and text_pinyin:
                 show_fn(f"       ({text_pinyin})")
-            if text_en:
+            if support_level == "full_support" and text_en:
                 show_fn(f"       \"{text_en}\"")
             show_fn("")
 
@@ -106,18 +110,25 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
             for display_num, orig_idx in enumerate(display_order, 1):
                 opt = options[orig_idx]
                 if support_level == "full_support":
-                    # Show hanzi + pinyin + english
+                    # Max-two-of-three: hanzi + pinyin, or hanzi + english
                     pinyin = opt.get("text_pinyin", "")
                     en = opt.get("text_en", "")
-                    parts = [opt['text_zh']]
+                    parts = [opt.get('text_zh', '')]
                     if pinyin:
                         parts.append(f"({pinyin})")
-                    if en:
+                    elif en:
                         parts.append(f"— {en}")
+                    show_fn(f"  {display_num}. {' '.join(parts)}")
+                elif support_level == "pinyin_support":
+                    # hanzi + pinyin only (no english)
+                    pinyin = opt.get("text_pinyin", "")
+                    parts = [opt.get('text_zh', '')]
+                    if pinyin:
+                        parts.append(f"({pinyin})")
                     show_fn(f"  {display_num}. {' '.join(parts)}")
                 else:
                     # hanzi_only — just show the Chinese text
-                    show_fn(f"  {display_num}. {opt['text_zh']}")
+                    show_fn(f"  {display_num}. {opt.get('text_zh', '')}")
 
             # Input loop with invalid-input re-prompting (max 2 retries)
             # and pinyin assist toggle
@@ -139,7 +150,7 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
                     for display_num, orig_idx in enumerate(display_order, 1):
                         opt = options[orig_idx]
                         pinyin = opt.get("text_pinyin", "")
-                        show_fn(f"  {display_num}. {opt['text_zh']}  ({pinyin})")
+                        show_fn(f"  {display_num}. {opt.get('text_zh', '')}  ({pinyin})")
                     continue
 
                 try:
@@ -153,11 +164,11 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
                     if attempt < 2:
                         show_fn(f"  (enter 1-{len(options)})")
                     else:
-                        chosen = min(options, key=lambda o: o.get("score", 0))
-                        show_fn(f"  (invalid — selecting lowest-scored option)")
+                        chosen = max(options, key=lambda o: o.get("score", 0))
+                        show_fn(f"  (invalid — selecting best option)")
 
             if chosen is None:
-                chosen = min(options, key=lambda o: o.get("score", 0))
+                chosen = max(options, key=lambda o: o.get("score", 0))
 
             turn_score = chosen.get("score", 0.0)
             turn_scores.append(turn_score)
@@ -165,13 +176,15 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
             register = chosen.get("register", "")
             feedback = chosen.get("feedback", "")
 
-            # Post-answer reveal — always show full info
+            # Post-answer reveal — max two of three (hanzi + pinyin + english)
             pinyin = chosen.get("text_pinyin", "")
             en = chosen.get("text_en", "")
-            reveal_parts = [chosen['text_zh']]
+            reveal_parts = [chosen.get('text_zh', '')]
             if pinyin:
+                # Hanzi + pinyin → omit English (max-2 rule)
                 reveal_parts.append(f"({pinyin})")
-            if en:
+            elif en:
+                # No pinyin available → show hanzi + English
                 reveal_parts.append(f"— {en}")
             reveal_str = " ".join(reveal_parts)
 
@@ -181,11 +194,11 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
             elif turn_score >= 0.5:
                 show_fn(f"  Your answer: {reveal_str}")
                 show_fn(f"  ~ {feedback}")
-                _show_best_option(options, chosen, show_fn)
+                _show_best_option(options, chosen, show_fn, support_level)
             else:
                 show_fn(f"  Your answer: {reveal_str}")
                 show_fn(f"  → {feedback}")
-                _show_best_option(options, chosen, show_fn)
+                _show_best_option(options, chosen, show_fn, support_level)
 
             if register:
                 show_fn(f"    (register: {register})")
@@ -237,7 +250,8 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
     # Summary
     correct = avg_score >= 0.7
     pct = int(avg_score * 100)
-    show_fn(f"  Dialogue score: {pct}%")
+    marker = "\u2713" if correct else "\u2717"
+    show_fn(f"  {marker} Dialogue score: {pct}%")
 
     # Build feedback metadata
     probe_results = [x[1] for x in all_feedback if x[0] == "probe"]

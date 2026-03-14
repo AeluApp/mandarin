@@ -1,8 +1,8 @@
-# Reddit Playbook -- Mandarin
+# Reddit Playbook -- Aelu
 
 Last updated: 2026-02-17
 
-This is the complete Reddit strategy for Mandarin. Every post and comment is ready to copy-paste. Someone should be able to execute this entire strategy without writing original content for the first 12 weeks.
+This is the complete Reddit strategy for Aelu. Every post and comment is ready to copy-paste. Someone should be able to execute this entire strategy without writing original content for the first 12 weeks.
 
 ---
 
@@ -675,7 +675,7 @@ I am going to skip the cheerleading and focus on what actually works:
 
 I have been studying Mandarin for [X] months. I started with Anki decks + Pleco + HelloChinese + ChinesePod, and the friction of switching between four tools eventually bothered me enough that I started building my own system.
 
-The result is an app called Mandarin. I want to share what it does and does not do, honestly, because this community has been helpful to me and I want to return the favor with transparency rather than marketing.
+The result is an app called Aelu. I want to share what it does and does not do, honestly, because this community has been helpful to me and I want to return the favor with transparency rather than marketing.
 
 **What it does:**
 
@@ -694,7 +694,7 @@ The diagnostics are the part I am most proud of. The app tracks vocabulary, list
 
 **What it costs:**
 
-Free for all HSK 1-2 content, no time limit. Full access (HSK 3-9) is $12/month. I am a solo developer using the app daily for my own study.
+Free for all HSK 1-2 content, no time limit. Full access (HSK 3-9) is $14.99/month. I am a solo developer using the app daily for my own study.
 
 **Tech for those who care:** Python, SQLite, Flask. Everything runs locally. Your data stays on your machine. Works offline.
 
@@ -710,13 +710,13 @@ To preempt the obvious question: "How is this different from Anki?"
 
 Anki is genuinely excellent and free. If you enjoy building and maintaining decks, and flashcard-style recognition is your primary study method, Anki is hard to beat. We use the same algorithm family (FSRS).
 
-What Mandarin adds:
+What Aelu adds:
 - 26 drill types beyond flashcards (listening, speaking, tones, cloze, sentence construction, register awareness)
 - A graded reader where looked-up words automatically become drills
 - Per-skill diagnostics (vocabulary, listening, reading, and tones tracked independently with HSK readiness projections)
 - No deck management -- the curriculum is built in and adapts to your performance
 
-The $12/month pays for not being a curriculum designer on top of being a learner. But if you have a working Anki setup and it is getting results, there is no reason to switch.
+The $14.99/month pays for not being a curriculum designer on top of being a learner. But if you have a working Anki setup and it is getting results, there is no reason to switch.
 
 **Comment 2 (post after 10-15 minutes):**
 
@@ -774,7 +774,7 @@ This applies to any language. If you are reading French and look up a word, that
 
 **What the app is:**
 
-It is called Mandarin. It is a drilling and reading system for Chinese, built on a modified FSRS algorithm (same family as Anki's scheduler), with 27 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $12/month for full access. Python + SQLite, runs locally, zero AI at runtime.
+It is called Aelu. It is a drilling and reading system for Chinese, built on a modified FSRS algorithm (same family as Anki's scheduler), with 27 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $14.99/month for full access. Python + SQLite, runs locally, zero AI at runtime.
 
 I am one person, I use it daily for my own study, and I am happy to discuss the methodology, the technical decisions, or the learning science behind any of it.
 
@@ -804,7 +804,7 @@ The entire web layer is ~500 lines of Flask. The database schema has 15 tables. 
 
 **What I learned building it:**
 
-1. **Content is 10x harder than code.** 299 vocabulary items, each needing pinyin, translation, HSK level, context notes, usage examples, common collocations, and register information. This took longer than building the entire drill engine.
+1. **Content is 10x harder than code.** 10,000+ vocabulary items across HSK 1-9, each needing pinyin, translation, HSK level, context notes, usage examples, common collocations, and register information. The initial 299 items for HSK 1-3 took longer than building the entire drill engine — scaling to full HSK 1-9 coverage was a massive undertaking.
 
 2. **Start with 3 parameters, not 8.** I over-engineered the scheduling algorithm with 8 tunable parameters. Should have started with 3 and added complexity when the simple version failed.
 
@@ -816,7 +816,7 @@ The entire web layer is ~500 lines of Flask. The database schema has 15 tables. 
 
 **Business model:**
 
-Free for HSK 1-2 content (no time limit). Full access is $12/month. Solo developer, no VC, no employees. Infrastructure cost: ~$50/month.
+Free for HSK 1-2 content (no time limit). Full access is $14.99/month. Solo developer, no VC, no employees. Infrastructure cost: ~$50/month.
 
 Happy to answer questions about the technical decisions, the economics, or the learning methodology.
 
@@ -826,7 +826,7 @@ Happy to answer questions about the technical decisions, the economics, or the l
 
 ### Show HN Post
 
-**Title:** Show HN: Mandarin -- Chinese learning app with 27 drill types, FSRS scheduling, zero AI at runtime
+**Title:** Show HN: Aelu -- Chinese learning app with 27 drill types, FSRS scheduling, zero AI at runtime
 
 **Body:**
 
@@ -850,7 +850,7 @@ Technical decisions worth discussing:
 
 4. macOS TTS for audio instead of pre-recorded files or an API. Trade-off: lower quality than professional recordings, but zero per-use cost and works offline.
 
-Free for HSK 1-2 content (300 words, 26 grammar points, 8 dialogue scenarios). Full access $12/month. Built by one person, for one person, now shared.
+Free for HSK 1-2 content (300 words, 26 grammar points, 8 dialogue scenarios). Full access $14.99/month. Built by one person, for one person, now shared.
 
 [Link]
 
@@ -898,7 +898,7 @@ The 14-point difference is meaningful. Context matters for retention. The words 
 
 **The takeaway:** If you are studying Chinese and feel like you are working hard but not progressing, you might have a measurement problem, not a study problem. Track your skills separately. You might discover, like I did, that one lagging skill is dragging everything else down.
 
-I built these diagnostics into an app called Mandarin (free for HSK 1-2, link in profile). But even without the app, tracking your listening accuracy separately from your reading accuracy -- just with a notebook and honest self-assessment -- can change how you allocate study time.
+I built these diagnostics into an app called Aelu (free for HSK 1-2, link in profile). But even without the app, tracking your listening accuracy separately from your reading accuracy -- just with a notebook and honest self-assessment -- can change how you allocate study time.
 
 ---
 
@@ -916,9 +916,9 @@ The hard part is content.
 
 Every word in the system needs: simplified characters, traditional characters, pinyin (with tone marks and tone numbers), English translation (multiple meanings when applicable), HSK level classification, part of speech, example sentences (at least 2), context notes explaining usage nuances, common collocations, register information (formal, informal, written, spoken), and audio.
 
-For 299 seed items, this took longer than building the entire drill engine, the scheduling algorithm, the web UI, the CLI, and the diagnostics combined.
+For the initial 299 seed items (HSK 1-3), this took longer than building the entire drill engine, the scheduling algorithm, the web UI, the CLI, and the diagnostics combined.
 
-And 299 items is just HSK 1-3. Full HSK coverage through level 9 requires 11,000+ words. At the rate I created the first 299, that is... a lot of hours.
+The system now has 10,000+ items covering HSK 1-9. Scaling from those first 299 to nearly 11,000 was... a lot of hours.
 
 **Why this matters beyond my app:**
 
@@ -928,7 +928,7 @@ If you are building any educational product, content quality is the bottleneck. 
 
 Context notes. I expected them to be a nice-to-have. They turned out to be essential. The difference between knowing that 了 means "completed action" and understanding that 了 functions differently at the end of a sentence (change of state) vs. after a verb (completed action) is the difference between flashcard knowledge and usable Chinese. Every word has nuances that a simple definition misses.
 
-For the curious: the app is Mandarin, it is free for HSK 1-2, and the content is the part I am most proud of -- because it is also the part that was hardest to get right.
+For the curious: the app is Aelu, it is free for HSK 1-2, and the content is the part I am most proud of -- because it is also the part that was hardest to get right.
 
 ---
 
@@ -1485,7 +1485,7 @@ Depends on what you need. Here is my honest breakdown:
 - **Clean SRS without the deck management:** Hack Chinese. Paid but well-organized.
 - **Reading practice:** Du Chinese for graded reading.
 - **Dictionary:** Pleco. Everyone needs Pleco regardless of what else you use.
-- **Drilling + reading + diagnostics in one system:** I built one called Mandarin -- 27 drill types, graded reader with a cleanup loop, per-skill HSK tracking. Free for HSK 1-2. I am biased because I built it, so take that accordingly.
+- **Drilling + reading + diagnostics in one system:** I built one called Aelu -- 27 drill types, graded reader with a cleanup loop, per-skill HSK tracking. Free for HSK 1-2. I am biased because I built it, so take that accordingly.
 
 The best app is the one you will actually use daily. Try a few and see which one sticks.
 
@@ -1497,7 +1497,7 @@ If you want maximum control and do not mind setup time, Anki is hard to beat. It
 
 If you want structured progression without managing anything, HelloChinese (beginner) or Hack Chinese (intermediate+) both provide curated content in a clean interface.
 
-If you feel like your vocabulary is growing but your actual Chinese skills are not keeping up, you might need more drill variety. Flashcard recognition is one skill out of many. Listening discrimination, tone pair practice, cloze deletion, and sentence construction each train a different cognitive pathway. I built an app called Mandarin that offers 27 drill types for this reason -- but the broader point applies regardless of what tool you use: vary your practice types.
+If you feel like your vocabulary is growing but your actual Chinese skills are not keeping up, you might need more drill variety. Flashcard recognition is one skill out of many. Listening discrimination, tone pair practice, cloze deletion, and sentence construction each train a different cognitive pathway. I built an app called Aelu that offers 27 drill types for this reason -- but the broader point applies regardless of what tool you use: vary your practice types.
 
 **Variation 3 (Long, diagnostic-focused):**
 
@@ -1513,7 +1513,7 @@ Before picking an app, figure out what your actual problem is:
 
 "I do not know if I am HSK 3 or HSK 2" --> You need diagnostics. Most apps do not offer per-skill assessment.
 
-I built an app called Mandarin that tries to address all of these (27 drill types, graded reader, listening practice, per-skill diagnostics). Free for HSK 1-2. But honestly, the right answer depends on your specific situation. Happy to give a more targeted recommendation if you share where you are and what is not working.
+I built an app called Aelu that tries to address all of these (27 drill types, graded reader, listening practice, per-skill diagnostics). Free for HSK 1-2. But honestly, the right answer depends on your specific situation. Happy to give a more targeted recommendation if you share where you are and what is not working.
 
 ---
 
@@ -1547,7 +1547,7 @@ Fair comparison. [Agree specifically where they are right.]
 
 [Competitor] is genuinely good at [specific strength they mentioned]. If [that specific thing] is the most important factor for you, [competitor] is probably the better choice.
 
-Where Mandarin differs is [specific differentiator relevant to the comparison -- e.g., "the drill type variety," "the cleanup loop connecting reading to drilling," "the per-skill diagnostics"]. Whether that difference matters depends on what you are optimizing for.
+Where Aelu differs is [specific differentiator relevant to the comparison -- e.g., "the drill type variety," "the cleanup loop connecting reading to drilling," "the per-skill diagnostics"]. Whether that difference matters depends on what you are optimizing for.
 
 No single tool does everything well. I have used [competitor] myself and [genuine positive observation about it].
 
@@ -1561,7 +1561,7 @@ No single tool does everything well. I have used [competitor] myself and [genuin
 
 [Then, at the end:]
 
-One more thing -- I built a learning app called Mandarin that [specific feature that addresses their exact question, in one sentence]. It is one option among several for this, but it handles [their specific problem] in a way I have not seen elsewhere. Free for HSK 1-2 if you want to try it. But the advice above applies regardless of what tool you use.
+One more thing -- I built a learning app called Aelu that [specific feature that addresses their exact question, in one sentence]. It is one option among several for this, but it handles [their specific problem] in a way I have not seen elsewhere. Free for HSK 1-2 if you want to try it. But the advice above applies regardless of what tool you use.
 
 ---
 
@@ -1647,10 +1647,10 @@ The primary audience for Chinese learning subreddits is split across three timez
 ### UTM tag format:
 
 ```
-https://mandarin.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_chineselanguage
-https://mandarin.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_languagelearning
-https://mandarin.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_sideproject
-https://mandarin.app/?utm_source=hn&utm_medium=organic&utm_campaign=show_hn
+https://aelu.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_chineselanguage
+https://aelu.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_languagelearning
+https://aelu.app/?utm_source=reddit&utm_medium=organic&utm_campaign=r_sideproject
+https://aelu.app/?utm_source=hn&utm_medium=organic&utm_campaign=show_hn
 ```
 
 ### Quarterly review:

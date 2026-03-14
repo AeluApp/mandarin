@@ -1,0 +1,83 @@
+{
+  "title": "Feeding Stray Cats",
+  "title_zh": "喂流浪猫",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "After dinner, you see a neighbor putting out food for stray cats in the courtyard. You stop to watch.",
+    "setup_zh": "吃完晚饭后，你看到邻居在院子里给流浪猫放吃的。你停下来看。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也喜欢猫吧？这些猫每天晚上都来。它们认识我了。",
+        "text_pinyin": "Nǐ yě xǐhuan māo ba? Zhèxiē māo měi tiān wǎnshang dōu lái. Tāmen rènshi wǒ le.",
+        "text_en": "You like cats too, right? These cats come every night. They know me now."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your feelings about the cats.",
+        "options": [
+          {
+            "text_zh": "它们看起来很信任你。你喂了多长时间了？",
+            "text_pinyin": "Tāmen kàn qǐlái hěn xìnrèn nǐ. Nǐ wèi le duō cháng shíjiān le?",
+            "text_en": "They seem to trust you a lot. How long have you been feeding them?",
+            "score": 1.0,
+            "feedback": "Observant and warm — notices the bond.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "流浪猫很脏。",
+            "text_pinyin": "Liúlàng māo hěn zāng.",
+            "text_en": "Stray cats are dirty.",
+            "score": 0.0,
+            "feedback": "Insensitive to someone who cares for them."
+          },
+          {
+            "text_zh": "你家有空调吗？",
+            "text_pinyin": "Nǐ jiā yǒu kōngtiáo ma?",
+            "text_en": "Does your place have AC?",
+            "score": 0.0,
+            "feedback": "She's talking about the cats."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "快两年了。刚开始它们很怕人，现在看到我就跑过来。那只灰色的最亲人。",
+        "text_pinyin": "Kuài liǎng nián le. Gāng kāishǐ tāmen hěn pà rén, xiànzài kàn dào wǒ jiù pǎo guòlái. Nà zhī huīsè de zuì qīn rén.",
+        "text_en": "Almost two years. At first they were scared of people — now they run to me. The grey one is the friendliest."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her story.",
+        "options": [
+          {
+            "text_zh": "两年了！你真有耐心。我可以帮你一起喂吗？",
+            "text_pinyin": "Liǎng nián le! Nǐ zhēn yǒu nàixīn. Wǒ kěyǐ bāng nǐ yīqǐ wèi ma?",
+            "text_en": "Two years! You're so patient. Can I help you feed them?",
+            "score": 1.0,
+            "feedback": "Admiring and willing to join — builds community.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不想养猫。",
+            "text_pinyin": "Wǒ bù xiǎng yǎng māo.",
+            "text_en": "I don't want to keep a cat.",
+            "score": 0.0,
+            "feedback": "She's not asking you to adopt one."
+          },
+          {
+            "text_zh": "明天我要上班。",
+            "text_pinyin": "Míngtiān wǒ yào shàngbān.",
+            "text_en": "I have work tomorrow.",
+            "score": 0.0,
+            "feedback": "Sounds like you want to leave."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Community cat feeders (喂流浪猫的人) are unsung heroes of Chinese neighborhoods. Their patience transforms fearful strays into friendly companions. This quiet care reflects the iyashikei spirit — small acts of kindness that heal."
+  }
+}

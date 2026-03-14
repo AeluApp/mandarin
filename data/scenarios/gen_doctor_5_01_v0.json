@@ -1,0 +1,196 @@
+{
+    "title": "The Prescription Archaeologist",
+    "title_zh": "处方考古学家",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_doctor_5_01_v0",
+    "tree": {
+        "setup": "The hospital pharmacy, where Pharmacist Luo stands behind a counter lined with white boxes organized with a precision that borders on devotion. She reads prescriptions the way calligraphers read brushstrokes — finding meaning in every curve and pressure of the doctor's handwriting. The line behind you is five people deep, but she takes exactly the time each patient needs, no more and no less.",
+        "setup_zh": "医院药房，药剂师罗站在一排整齐的白色药盒后面，那种排列精准得近乎虔诚。她看处方就像书法家看笔画——在医生每一个弯曲和用力中找到含义。你身后排着五个人，但她给每个病人的时间恰好是需要的那么多，不多也不少。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下一位。请把处方给我看一下。",
+                "text_pinyin": "xià yí wèi. qǐng bǎ chǔfāng gěi wǒ kàn yíxià.",
+                "text_en": "Next. Please let me see your prescription."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your prescription and ask about the medication.",
+                "options": [
+                    {
+                        "text_zh": "给您，这是姚医生开的处方。她给我开了两种药，但是我看不太清楚药名。能不能帮我确认一下每种药怎么吃？",
+                        "text_pinyin": "gěi nín, zhè shì Yáo yīshēng kāi de chǔfāng. tā gěi wǒ kāi le liǎng zhǒng yào, dànshì wǒ kàn bú tài qīngchǔ yào míng. néng bu néng bāng wǒ quèrèn yíxià měi zhǒng yào zěnme chī?",
+                        "text_en": "Here — this is Dr. Yao's prescription. She prescribed two medications, but I can't quite read the names. Could you help me confirm how to take each one?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Admitting you can't read the handwriting is not a weakness — it's universal. Pharmacist Luo decodes it instantly, the way a musician sight-reads a score."
+                    },
+                    {
+                        "text_zh": "处方在这里。这些药怎么吃？",
+                        "text_pinyin": "chǔfāng zài zhèlǐ. zhèxiē yào zěnme chī?",
+                        "text_en": "Here's the prescription. How do I take these?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct and practical. She reads it at a glance."
+                    },
+                    {
+                        "text_zh": "医生开的药，帮我拿。",
+                        "text_pinyin": "yīshēng kāi de yào, bāng wǒ ná.",
+                        "text_en": "The doctor prescribed medicine — get it for me.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Pharmacist Luo's efficiency is not affected by tone, but a「请」would make the exchange warmer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我看一下。第一种是布洛芬缓释胶囊，用来缓解头痛。第二种是维生素B族片，帮助改善睡眠和神经功能。两种药的用法不一样，我给你详细说明。",
+                "text_pinyin": "hǎo de, wǒ kàn yíxià. dì yī zhǒng shì bùluòfēn huǎnshì jiāonáng, yòng lái huǎnjiě tóutòng. dì èr zhǒng shì wéishēngsù B zú piàn, bāngzhù gǎishàn shuìmián hé shénjīng gōngnéng. liǎng zhǒng yào de yòngfǎ bù yíyàng, wǒ gěi nǐ xiángxì shuōmíng.",
+                "text_en": "OK, let me look. The first is ibuprofen sustained-release capsules, for headache relief. The second is Vitamin B complex tablets, to help with sleep and nerve function. The two medications are taken differently — I'll explain in detail."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Listen and ask about the dosage.",
+                "options": [
+                    {
+                        "text_zh": "好的，请说。布洛芬我知道一些，但是这种缓释胶囊跟普通的有什么区别？一天吃几次？",
+                        "text_pinyin": "hǎo de, qǐng shuō. bùluòfēn wǒ zhīdào yìxiē, dànshì zhè zhǒng huǎnshì jiāonáng gēn pǔtōng de yǒu shénme qūbié? yì tiān chī jǐ cì?",
+                        "text_en": "Please go ahead. I know a bit about ibuprofen, but what's the difference between sustained-release capsules and regular ones? How many times a day?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Distinguishing sustained-release from regular — Pharmacist Luo's expression brightens slightly. This is a patient who reads labels."
+                    },
+                    {
+                        "text_zh": "好的，告诉我怎么吃就行。",
+                        "text_pinyin": "hǎo de, gàosu wǒ zěnme chī jiù xíng.",
+                        "text_en": "OK, just tell me how to take them.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Straightforward. She provides the instructions efficiently."
+                    },
+                    {
+                        "text_zh": "这两种药一起吃吗？",
+                        "text_pinyin": "zhè liǎng zhǒng yào yìqǐ chī ma?",
+                        "text_en": "Do I take both at the same time?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She clarifies: no, different times. She'll explain the schedule carefully."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "缓释胶囊的药效释放得比较慢，所以一天只需要吃两次，每次一粒，早饭和晚饭后吃。注意要整粒吞下去，不能嚼碎。维生素B族片每天三次，每次两片，饭后吃。",
+                "text_pinyin": "huǎnshì jiāonáng de yàoxiào shìfàng de bǐjiào màn, suǒyǐ yì tiān zhǐ xūyào chī liǎng cì, měi cì yì lì, zǎofàn hé wǎnfàn hòu chī. zhùyì yào zhěng lì tūn xiàqù, bù néng jiáo suì. wéishēngsù B zú piàn měi tiān sān cì, měi cì liǎng piàn, fàn hòu chī.",
+                "text_en": "Sustained-release capsules release the medicine slowly, so you only need two per day — one after breakfast, one after dinner. Important: swallow them whole, don't chew. Vitamin B complex: three times daily, two tablets each time, after meals."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the instructions and ask about side effects.",
+                "options": [
+                    {
+                        "text_zh": "明白了，布洛芬早晚各一粒，整粒吞。维生素B一天三次，每次两片。请问布洛芬有什么副作用吗？我胃不太好，吃这个药会不会伤胃？",
+                        "text_pinyin": "míngbai le, bùluòfēn zǎo wǎn gè yì lì, zhěng lì tūn. wéishēngsù B yì tiān sān cì, měi cì liǎng piàn. qǐngwèn bùluòfēn yǒu shénme fùzuòyòng ma? wǒ wèi bú tài hǎo, chī zhège yào huì bú huì shāng wèi?",
+                        "text_en": "Understood — ibuprofen one capsule morning and evening, swallowed whole. Vitamin B three times a day, two tablets each. Does ibuprofen have side effects? My stomach isn't great — could this medication hurt my stomach?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the dosage and asking about contraindications — Pharmacist Luo nods approvingly. The stomach question is relevant and important."
+                    },
+                    {
+                        "text_zh": "好的，记住了。有副作用吗？",
+                        "text_pinyin": "hǎo de, jì zhù le. yǒu fùzuòyòng ma?",
+                        "text_en": "OK, got it. Any side effects?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Good question, briefly stated. She lists the common ones."
+                    },
+                    {
+                        "text_zh": "这么复杂……能不能写下来？",
+                        "text_pinyin": "zhème fùzá……néng bu néng xiě xiàlái?",
+                        "text_en": "So complicated... can you write it down?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Luo smiles — she always writes it on the box. The instructions were going there regardless."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "问得好。布洛芬确实可能刺激胃，所以一定要在饭后吃，不能空腹。如果吃了以后胃不舒服，可以回来换一种药。另外，吃药期间不能喝酒。",
+                "text_pinyin": "wèn de hǎo. bùluòfēn quèshí kěnéng cìjī wèi, suǒyǐ yídìng yào zài fàn hòu chī, bù néng kōngfù. rúguǒ chī le yǐhòu wèi bù shūfu, kěyǐ huílái huàn yì zhǒng yào. lìngwài, chī yào qījiān bù néng hē jiǔ.",
+                "text_en": "Good question. Ibuprofen can indeed irritate the stomach, so you must take it after meals, never on an empty stomach. If your stomach feels uncomfortable after taking it, come back and we'll switch medications. Also, no alcohol while on this medication."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Acknowledge and ask about the course duration.",
+                "options": [
+                    {
+                        "text_zh": "好的，饭后吃，不喝酒。这些药要吃多久？是吃到不疼了就可以停，还是要按疗程吃完？",
+                        "text_pinyin": "hǎo de, fàn hòu chī, bù hē jiǔ. zhèxiē yào yào chī duō jiǔ? shì chī dào bú téng le jiù kěyǐ tíng, háishi yào àn liáochéng chī wán?",
+                        "text_en": "OK, after meals, no alcohol. How long do I take these? Can I stop when the pain's gone, or should I complete the full course?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The course-completion question shows medical literacy. Pharmacist Luo explains: ibuprofen as needed, but the Vitamin B should be taken for the full two weeks."
+                    },
+                    {
+                        "text_zh": "吃多长时间？",
+                        "text_pinyin": "chī duō cháng shíjiān?",
+                        "text_en": "How long do I take them?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Essential question. She provides the timeline."
+                    },
+                    {
+                        "text_zh": "好的好的，我知道了。",
+                        "text_pinyin": "hǎo de hǎo de, wǒ zhīdào le.",
+                        "text_en": "OK OK, I get it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Luo senses the impatience but writes the full instructions on the box anyway. Five people are still waiting."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "布洛芬按需服用，疼的时候吃，不疼可以不吃，但不要连续吃超过一周。维生素B按疗程吃完，一共两周的量。好了，药在这里。一共四十八块。",
+                "text_pinyin": "bùluòfēn àn xū fúyòng, téng de shíhòu chī, bú téng kěyǐ bù chī, dàn búyào liánxù chī chāoguò yì zhōu. wéishēngsù B àn liáochéng chī wán, yígòng liǎng zhōu de liàng. hǎo le, yào zài zhèlǐ. yígòng sìshíbā kuài.",
+                "text_en": "Take ibuprofen as needed — when it hurts, take it; when it doesn't, you can skip it. But don't take it continuously for more than a week. Complete the full Vitamin B course — two weeks' supply. Here's the medication. 48 yuan total."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank her.",
+                "options": [
+                    {
+                        "text_zh": "好的，四十八块，微信支付可以吗？罗药师，谢谢你解释得这么清楚。我会按照说明吃的。",
+                        "text_pinyin": "hǎo de, sìshíbā kuài, Wēixìn zhīfù kěyǐ ma? Luó yàoshī, xièxie nǐ jiěshì de zhème qīngchǔ. wǒ huì ànzhào shuōmíng chī de.",
+                        "text_en": "OK, 48 yuan — can I pay with WeChat? Thank you for explaining so clearly, Pharmacist Luo. I'll follow the instructions.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Payment method confirmed, gratitude expressed, compliance promised — the full package. She hands you the bag with the boxes already labeled in her careful handwriting."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She calls the next patient.「下一位。」The pharmacy continues its steady rhythm."
+                    },
+                    {
+                        "text_zh": "四十八块？挺便宜的。",
+                        "text_pinyin": "sìshíbā kuài? tǐng piányi de.",
+                        "text_en": "48 yuan? That's pretty cheap.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Luo does not comment on pricing philosophy. The medications are what they cost."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospital pharmacies (药房, yàofáng) dispense medications directly — you don't take prescriptions to an outside pharmacy. Pharmacists (药剂师/药师, yàojìshī/yàoshī) provide detailed usage instructions and often write them directly on the medication boxes. WeChat Pay and Alipay are accepted virtually everywhere, including hospital pharmacies. Drug prices in Chinese hospitals are regulated and generally affordable."
+    }
+}

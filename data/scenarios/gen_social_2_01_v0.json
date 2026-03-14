@@ -1,0 +1,94 @@
+{
+    "title": "The Surprise Party Problem",
+    "title_zh": "惊喜派对的问题",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_2_01_v0",
+    "tree": {
+        "setup": "A WeChat group chat has been buzzing all day: your friend Xiao Ling's birthday is on Saturday and Xiao Mei is organizing a surprise party. The problem is that Xiao Ling just texted you asking what everyone is doing Saturday. Xiao Mei calls you to coordinate.",
+        "setup_zh": "微信群聊了一天：朋友小玲周六生日，小美在组织惊喜派对。问题是小玲刚给你发消息，问大家周六在干嘛。小美给你打电话来协调。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小玲问你周六的事了吗？千万别说！",
+                "text_pinyin": "xiǎo líng wèn nǐ zhōuliù de shì le ma? qiānwàn bié shuō!",
+                "text_en": "Did Xiao Ling ask you about Saturday? Don't tell her!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell Xiao Mei about the situation.",
+                "options": [
+                    {
+                        "text_zh": "她刚问我了。我说我还不知道周六做什么。",
+                        "text_pinyin": "tā gāng wèn wǒ le. wǒ shuō wǒ hái bù zhīdào zhōuliù zuò shénme.",
+                        "text_en": "She just asked me. I said I don't know what I'm doing Saturday yet.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Mei exhales with relief.「太好了！聪明！」刚 means 'just now.' You successfully avoided revealing the surprise. Well played."
+                    },
+                    {
+                        "text_zh": "问了。我不知道说什么好。",
+                        "text_pinyin": "wèn le. wǒ bù zhīdào shuō shénme hǎo.",
+                        "text_en": "She asked. I don't know what to say.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei coaches you:「就说你周六可能要加班。」不知道说什么好 is 'I don't know what's best to say' -- honest and relatable."
+                    },
+                    {
+                        "text_zh": "我差点告诉她了！",
+                        "text_pinyin": "wǒ chàdiǎn gàosu tā le!",
+                        "text_en": "I almost told her!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Mei gasps.「差点？！你没说吧？？」差点 means 'almost' -- one of those words that causes heart attacks in party planning contexts."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好。你周六六点来我家帮忙布置，行不行？带点水果来。",
+                "text_pinyin": "hǎo. nǐ zhōuliù liù diǎn lái wǒ jiā bāngmáng bùzhì, xíng bu xíng? dài diǎn shuǐguǒ lái.",
+                "text_en": "OK. Can you come to my place at 6 on Saturday to help decorate? Bring some fruit."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your participation.",
+                "options": [
+                    {
+                        "text_zh": "没问题！我带西瓜来。",
+                        "text_pinyin": "méi wèntí! wǒ dài xīguā lái.",
+                        "text_en": "No problem! I'll bring watermelon.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Mei cheers.「西瓜好！别忘了保密！」带...来 means 'bring.' Offering a specific fruit shows initiative."
+                    },
+                    {
+                        "text_zh": "可以。还有谁来？",
+                        "text_pinyin": "kěyǐ. hái yǒu shéi lái?",
+                        "text_en": "Sure. Who else is coming?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei lists names with the confidence of a general reviewing troops.「小伟、小杨、还有小芳。」还有谁 is 'who else.'"
+                    },
+                    {
+                        "text_zh": "六点太早了。我可能会晚一点到。",
+                        "text_pinyin": "liù diǎn tài zǎo le. wǒ kěnéng huì wǎn yìdiǎn dào.",
+                        "text_en": "6 is too early. I might arrive a bit late.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Mei's voice tightens.「小玲七点到！六点以前必须布置好！」可能会 means 'might' -- useful but unwelcome when there's a deadline."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！这次一定要给小玲一个大惊喜！",
+                "text_pinyin": "tài hǎo le! zhè cì yídìng yào gěi xiǎo líng yí gè dà jīngxǐ!",
+                "text_en": "Great! We have to give Xiao Ling a big surprise this time!"
+            }
+        ],
+        "cultural_note": "Surprise parties (惊喜派对) are popular among young Chinese friends. Coordination happens via WeChat groups. The birthday person traditionally treats friends to dinner (请客), but for surprise parties, friends organize and split the cost."
+    }
+}

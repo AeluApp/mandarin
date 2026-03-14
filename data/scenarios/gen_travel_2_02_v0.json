@@ -1,0 +1,88 @@
+{
+    "title": "The Lost Tourist",
+    "title_zh": "迷路的游客",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_2_02_v0",
+    "tree": {
+        "setup": "A busy intersection near a scenic area. Your phone's map app has led you in a circle. A woman selling roasted sweet potatoes from a cart, Auntie Luo, watches you walk past her for the third time. Her cart smells incredible. She's decided to intervene.",
+        "setup_zh": "景区附近的十字路口。手机地图带你转了一圈。卖烤红薯的罗阿姨从推车后面看你第三次走过她面前。她的红薯闻起来太香了。她决定出手帮忙。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小伙子/姑娘！你是不是迷路了？你走了三圈了！",
+                "text_pinyin": "xiǎohuǒzi/gūniang! nǐ shì bu shì mí lù le? nǐ zǒu le sān quān le!",
+                "text_en": "Hey! Are you lost? You've walked past three times!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Admit you're lost and ask for help.",
+                "options": [
+                    {
+                        "text_zh": "是的，我在找西湖。手机地图不太好用。",
+                        "text_pinyin": "shì de, wǒ zài zhǎo xī hú. shǒujī dìtú bú tài hǎo yòng.",
+                        "text_en": "Yes, I'm looking for West Lake. The phone map isn't working well.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Luo laughs.「手机不如我！往那边走，过两个红绿灯就到了。」不太好用 means 'doesn't work well.' Local knowledge beats GPS every time."
+                    },
+                    {
+                        "text_zh": "不好意思。请问怎么去这个地方？",
+                        "text_pinyin": "bù hǎoyìsi. qǐngwèn zěnme qù zhè ge dìfang?",
+                        "text_en": "Sorry. How do I get to this place?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "You show her your phone. Auntie Luo squints at the screen and points decisively.「哦，那个地方啊！从这里走十分钟。」怎么去 is the essential 'how to get to' question."
+                    },
+                    {
+                        "text_zh": "我没有迷路……好吧，我迷路了。",
+                        "text_pinyin": "wǒ méiyǒu mí lù... hǎo ba, wǒ mí lù le.",
+                        "text_en": "I'm not lost... OK, I'm lost.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Luo chuckles.「没关系！我在这里卖了十年红薯，每条路都认识。」Admitting defeat with 好吧 is honest and human."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "从这里一直走，到第二个红绿灯右拐，然后再走五分钟就到了。来，吃个红薯再走！",
+                "text_pinyin": "cóng zhèlǐ yìzhí zǒu, dào dì èr gè hónglǜdēng yòu guǎi, ránhòu zài zǒu wǔ fēnzhōng jiù dào le. lái, chī ge hóngshǔ zài zǒu!",
+                "text_en": "Go straight from here, turn right at the second traffic light, then walk five more minutes. Here, eat a sweet potato before you go!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and respond.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您！红薯多少钱？",
+                        "text_pinyin": "xièxie nín! hóngshǔ duōshao qián?",
+                        "text_en": "Thank you! How much for a sweet potato?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「五块！热的！」She picks the biggest one and wraps it in newspaper. The smell alone is worth the detour. Buying from someone who helped you is good karma."
+                    },
+                    {
+                        "text_zh": "太谢谢你了！第二个红绿灯，右拐，对吧？",
+                        "text_pinyin": "tài xièxie nǐ le! dì èr gè hónglǜdēng, yòu guǎi, duì ba?",
+                        "text_en": "Thank you so much! Second traffic light, turn right, correct?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Luo nods firmly.「对对对！走吧！」Repeating directions back shows you're paying attention. 对吧 asks for confirmation."
+                    },
+                    {
+                        "text_zh": "谢谢！我赶时间，下次吃红薯！",
+                        "text_pinyin": "xièxie! wǒ gǎn shíjiān, xià cì chī hóngshǔ!",
+                        "text_en": "Thanks! I'm in a hurry, sweet potato next time!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Luo waves you off.「别再绕圈了啊！」赶时间 means 'in a hurry.' She'll remember you if you come back."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Roasted sweet potato carts (烤红薯, kǎo hóngshǔ) are a beloved street-side presence in Chinese cities, especially in autumn and winter. Street vendors often double as local guides -- they know every shortcut and landmark."
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "title": "The River That Returned",
+    "title_zh": "回来的河",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're walking with an environmental journalist, Sister Ye, along a river that was once heavily polluted but has been partially restored. Fish have returned for the first time in twenty years.",
+        "setup_zh": "你和环保记者叶姐沿着一条曾经严重污染但部分恢复了的河流散步。鱼二十年来第一次回来了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看到水里那条鱼了吗？二十年前这条河是黑色的，工厂的废水直接排进来。现在鱼回来了。但很多人不知道的是，生态修复不是「修好了」就结束了——它需要持续的维护。自然有自愈的能力，但前提是我们停止伤害。",
+                "text_pinyin": "Nǐ kàn dào shuǐ lǐ nà tiáo yú le ma? Èrshí nián qián zhè tiáo hé shì hēisè de, gōngchǎng de fèishuǐ zhíjiē pái jìnlái. Xiànzài yú huí lái le. Dàn hěn duō rén bù zhīdào de shì, shēngtài xiūfù bú shì 'xiū hǎo le' jiù jiéshù le — tā xūyào chíxù de wéihù. Zìrán yǒu zìyù de nénglì, dàn qiántí shì wǒmen tíngzhǐ shānghài.",
+                "text_en": "See that fish in the water? Twenty years ago this river was black — factory waste was dumped directly into it. Now the fish are back. But what most people don't know is that ecological restoration doesn't end when it's 'fixed' — it requires continuous maintenance. Nature has the ability to heal itself, but only if we stop the harm."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her observation about ecological recovery.",
+                "options": [
+                    {
+                        "text_zh": "'停止伤害'比'修复'更难。因为它意味着改变生产方式和消费习惯。鱼回来是好消息，也是提醒：自然的恢复力有限。不从根本上改变与自然的关系，今天回来的鱼明天还会消失。",
+                        "text_pinyin": "'Tíngzhǐ shānghài' bǐ 'xiūfù' gèng nán. Yīnwèi tā yìwèi zhe gǎibiàn shēngchǎn fāngshì hé xiāofèi xíguàn. Yú huí lái shì hǎo xiāoxi, yě shì tíxǐng: zìrán de huīfù lì yǒuxiàn. Bù cóng gēnběn shàng gǎibiàn yǔ zìrán de guānxi, jīntiān huí lái de yú míngtiān hái huì xiāoshī.",
+                        "text_en": "'Stopping harm' is harder than restoring. It means changing modes of production and consumption. Fish returning is good news but also a reminder: nature's resilience is limited. Without fundamentally changing our relationship with nature, today's fish will vanish again tomorrow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Structural thinking — connects individual ecological recovery to systemic change."
+                    },
+                    {
+                        "text_zh": "现在环保法律越来越严了，应该会好的。",
+                        "text_pinyin": "Xiànzài huánbǎo fǎlǜ yuè lái yuè yán le, yīnggāi huì hǎo de.",
+                        "text_en": "Environmental laws are getting stricter now, it should improve.",
+                        "score": 0.0,
+                        "feedback": "Delegates responsibility to policy without engaging with the deeper relationship question."
+                    },
+                    {
+                        "text_zh": "这条鱼能吃吗？",
+                        "text_pinyin": "Zhè tiáo yú néng chī ma?",
+                        "text_en": "Can you eat this fish?",
+                        "score": 0.0,
+                        "feedback": "Consumptive reflex — exactly the mindset she's critiquing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "改变与自然的关系……这才是根本。我采访过很多环保项目，最成功的不是技术最先进的，而是让当地人真正参与进来的。当一个渔民开始自发保护鱼群的时候，说明他不再把鱼看作资源，而是看作邻居。关系变了，行为才会变。",
+                "text_pinyin": "Gǎibiàn yǔ zìrán de guānxì…… zhè cái shì gēnběn. Wǒ cǎifǎng guò hěn duō huánbǎo xiàngmù, zuì chénggōng de bú shì jìshù zuì xiānjìn de, ér shì ràng dāngdì rén zhēnzhèng cānyù jìnlái de. Dāng yīge yúmín kāishǐ zìfā bǎohù yúqún de shíhou, shuōmíng tā bú zài bǎ yú kàn zuò zīyuán, ér shì kàn zuò línjū. Guānxì biàn le, xíngwéi cái huì biàn.",
+                "text_en": "Changing the relationship with nature... that's the root. I've reported on many environmental projects. The most successful ones aren't the most technologically advanced, but those that truly involve local people. When a fisherman starts voluntarily protecting fish stocks, it means he no longer sees fish as a resource but as a neighbor. When the relationship changes, behavior changes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on seeing nature as neighbor rather than resource.",
+                "options": [
+                    {
+                        "text_zh": "把鱼看作邻居——这是一种古老的世界观：人不是自然之外的存在，而是自然的一部分。我们用'征服自然'太久了，也许该换成'回到自然'。这条河教我们的不只是环保，更是谦逊。",
+                        "text_pinyin": "Bǎ yú kàn zuò línjū — zhè shì yī zhǒng gǔlǎo de shìjièguān: rén bú shì zìrán zhī wài de cúnzài, ér shì zìrán de yī bùfen. Wǒmen yòng 'zhēngfú zìrán' tài jiǔ le, yěxǔ gāi huàn chéng 'huí dào zìrán'. Zhè tiáo hé jiāo wǒmen de bù zhǐ shì huánbǎo, gèng shì qiānxùn.",
+                        "text_en": "Seeing fish as neighbors — that's an ancient worldview: humans aren't outside nature, but part of it. We've used 'conquering nature' too long; maybe it's time for 'returning to nature.' This river teaches us not just environmental protection, but humility.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Philosophically grounded — connects modern environmentalism to ancient wisdom."
+                    },
+                    {
+                        "text_zh": "个人的力量太小了，还是要靠政府和企业。",
+                        "text_pinyin": "Gèrén de lìliang tài xiǎo le, háishì yào kào zhèngfǔ hé qǐyè.",
+                        "text_en": "Individual efforts are too small — it still depends on government and corporations.",
+                        "score": 0.0,
+                        "feedback": "Surrenders agency — contradicts her point about local participation."
+                    },
+                    {
+                        "text_zh": "你做了这么多年环保报道，不觉得累吗？",
+                        "text_pinyin": "Nǐ zuò le zhème duō nián huánbǎo bàodào, bù juéde lèi ma?",
+                        "text_en": "After so many years of environmental reporting, don't you feel tired?",
+                        "score": 0.0,
+                        "feedback": "Shifts from substance to personal fatigue."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谦逊……对。也许这条河恢复了以后，最大的收获不是鱼回来了，而是住在河边的人学会了谦逊。学会了不把自己当作这条河的主人，而是当作它的邻居。你看，那条鱼又跳起来了——它不知道二十年前这里发生了什么。但我们知道。知道了就有责任记住。",
+                "text_pinyin": "Qiānxùn…… duì. Yěxǔ zhè tiáo hé huīfù le yǐhòu, zuì dà de shōuhuò bú shì yú huí lái le, ér shì zhù zài hé biān de rén xuéhuì le qiānxùn. Xuéhuì le bù bǎ zìjǐ dàng zuò zhè tiáo hé de zhǔrén, ér shì dàng zuò tā de línjū. Nǐ kàn, nà tiáo yú yòu tiào qǐlái le — tā bù zhīdào èrshí nián qián zhèlǐ fāshēng le shénme. Dàn wǒmen zhīdào. Zhīdào le jiù yǒu zérèn jìzhù.",
+                "text_en": "Humility... yes. Perhaps after this river recovered, the greatest gain isn't that the fish returned, but that the people living by the river learned humility. Learned not to see themselves as the river's owner, but as its neighbor. Look, that fish jumped again — it doesn't know what happened here twenty years ago. But we know. And knowing brings the responsibility to remember."
+            }
+        ],
+        "cultural_note": "China's environmental restoration efforts represent one of the largest ecological rehabilitation programs in history. Rivers like the Yangtze have seen fishing bans (长江禁渔) to allow ecosystems to recover. Traditional Chinese philosophy, particularly Daoist concepts of「天人合一」(tiān rén hé yī, unity of heaven and humanity), offers philosophical foundations for environmental ethics that are being rediscovered alongside modern environmentalism."
+    }
+}

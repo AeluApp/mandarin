@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chinese Learning for Adults — No Cartoons, No Streaks | Mandarin</title>
+  <title>Chinese Learning for Adults — No Cartoons, No Streaks | Aelu</title>
   <meta name="description" content="A Chinese learning app for adults who want real progress. Graded reading, adaptive drills, listening practice, and HSK diagnostics. No gamification — just effective learning.">
   <meta name="keywords" content="learn Chinese seriously, Chinese learning app adults, best app learn Mandarin, Chinese app no gamification, serious Chinese study, best way to learn Chinese, self-study Chinese plan, Chinese learning routine, data-driven Chinese learning, Duolingo Chinese alternative, HelloChinese alternative">
-  <link rel="canonical" href="https://mandarinapp.com/serious-learner">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/serious-learner">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Chinese Learning for Adults — No Cartoons. No Streaks. Real Progress.">
   <meta property="og:description" content="Graded reading, adaptive drills, listening practice. Built for adults who want to actually learn Chinese, not play a game.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/serious-learner">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/serious-learner">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chinese Learning for Adults — No Cartoons. No Streaks. Real Progress.">
   <meta name="twitter:description" content="Graded reading, adaptive drills, listening practice. Built for adults who want to actually learn Chinese, not play a game.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -31,7 +31,7 @@
     "@type": "WebPage",
     "name": "Chinese Learning for Adults — No Cartoons, No Streaks",
     "description": "A Chinese learning app for adults who want real progress. Graded reading, adaptive drills, listening practice, and HSK diagnostics.",
-    "url": "https://mandarinapp.com/serious-learner",
+    "url": "https://aeluapp.com/serious-learner",
     "keywords": "learn Chinese seriously, Chinese learning app adults, best app learn Mandarin, serious Chinese study"
   }
   </script>
@@ -144,7 +144,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -156,6 +159,30 @@
       .nav-links.nav-open { display: flex; }
       nav .container { position: relative; }
     }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
@@ -163,7 +190,7 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -172,7 +199,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -198,7 +226,7 @@
       <h2>You're not a child. Your study tools shouldn't be, either.</h2>
       <div class="manifesto-text">
         <p>Most language apps are designed to maximize engagement metrics, not learning outcomes. They give you XP for tapping the right picture. They punish you for missing a day. They celebrate streaks, not comprehension.</p>
-        <p><strong>Mandarin is different.</strong> It's built around a single question: what does this person need to practice right now? Not what keeps them tapping. Not what makes a satisfying sound. What actually closes the gap between where they are and where they want to be.</p>
+        <p><strong>Aelu is different.</strong> It's built around a single question: what does this person need to practice right now? Not what keeps them tapping. Not what makes a satisfying sound. What actually closes the gap between where they are and where they want to be.</p>
         <p>The interface is calm. The data is honest. Every metric is defensible. No praise inflation.</p>
       </div>
     </div>
@@ -206,7 +234,7 @@
 
   <section class="experience">
     <div class="container">
-      <h2>A day of studying with Mandarin</h2>
+      <h2>A day of studying with Aelu</h2>
       <div class="day-in-life">
         <div class="day-block">
           <div class="day-time">Morning — 15 minutes</div>
@@ -234,7 +262,7 @@
       <ul class="anti-list">
         <li>Streaks, hearts, lives, gems, XP, or leaderboards</li>
         <li>Notifications nagging you to "keep your streak alive"</li>
-        <li>AI-generated content with wrong tones and unnatural phrasing</li>
+        <li>Auto-generated content with wrong tones and unnatural phrasing</li>
         <li>Cartoon characters congratulating you for tapping a picture</li>
         <li>Lessons disguised as games that teach you to recognize images, not read Chinese</li>
         <li>"You're doing great!" when you're not</li>
@@ -261,7 +289,7 @@
   <section class="builder">
     <div class="container">
       <h2>Built by a learner</h2>
-      <p>Mandarin was built by someone learning Chinese who got frustrated that nothing else worked the way an adult actually learns. SRS without deck-building. Reading without leaving the app. Diagnostics that do not lie about progress.</p>
+      <p>Aelu was built by someone learning Chinese who got frustrated that nothing else worked the way an adult actually learns. SRS without deck-building. Reading without leaving the app. Diagnostics that do not lie about progress.</p>
       <p>This is not a corporation's product. It is one learner's answer to "what would the perfect Chinese study tool look like?" -- used daily, still being improved, and ready for you to try.</p>
       <p class="sig">Built by a learner, for learners.</p>
     </div>
@@ -276,16 +304,16 @@
           <div class="pricing-price">$0</div>
           <ul class="pricing-features">
             <li>HSK 1-2 vocabulary and drills</li>
-            <li>5 drill types</li>
+            <li>All 27 drill types</li>
             <li>Basic progress tracking</li>
             <li>Beginner reading passages</li>
           </ul>
         </div>
         <div class="pricing-card featured">
           <h3>Full Access</h3>
-          <div class="pricing-price">$12 <span>/month</span></div>
+          <div class="pricing-price">$14.99 <span>/month</span></div>
           <ul class="pricing-features">
-            <li>HSK 1-6 full curriculum</li>
+            <li>HSK 1-9 full curriculum</li>
             <li>All 27 drill types</li>
             <li>Adaptive scheduling</li>
             <li>All reading and listening</li>
@@ -313,7 +341,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

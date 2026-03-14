@@ -1,0 +1,93 @@
+{
+    "title": "The Meeting That Could Have Been an Email",
+    "title_zh": "本来可以是一封邮件的会议",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and your friend Xiaoli collapse into chairs at a coffee shop after surviving a particularly pointless three-hour meeting.",
+        "setup_zh": "你和朋友小丽从一个特别没有意义的三小时会议出来后，瘫在了咖啡馆的椅子上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "三个小时。三个小时的会议，真正有用的内容大概只有十五分钟。剩下的时间都在重复已经知道的信息、确认不需要确认的决定、以及轮流表态表忠心。这不是在工作，这是在表演工作。",
+                "text_pinyin": "Sān ge xiǎoshí. Sān ge xiǎoshí de huìyì, zhēnzhèng yǒuyòng de nèiróng dàgài zhǐ yǒu shíwǔ fēnzhōng. Shèng xià de shíjiān dōu zài chóngfù yǐjīng zhīdào de xìnxī, quèrèn bù xūyào quèrèn de juédìng, yǐjí lúnliú biǎotài biǎo zhōngxīn. Zhè bú shì zài gōngzuò, zhè shì zài biǎoyǎn gōngzuò.",
+                "text_en": "Three hours. Three hours of meeting, maybe fifteen minutes of actually useful content. The rest was repeating known information, confirming decisions that didn't need confirming, and taking turns performing loyalty through statements. This isn't working — it's performing work."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with her critique of meeting culture.",
+                "options": [
+                    {
+                        "text_zh": "'表演工作'太精准了。很多组织里，可见性比产出更重要。安静高效地完成任务，没人注意；但在会议上滔滔不绝，大家觉得你'积极'。这种文化奖励的不是结果，而是姿态。",
+                        "text_pinyin": "'Biǎoyǎn gōngzuò' tài jīngzhǔn le. Hěn duō zǔzhī lǐ, kějiàn xìng bǐ chǎnchū gèng zhòngyào. Ānjìng gāoxiào de wánchéng rènwù, méi rén zhùyì; dàn zài huìyì shàng tāotāo bùjué, dàjiā juéde nǐ 'jījí'. Zhè zhǒng wénhuà jiǎnglì de bú shì jiéguǒ, ér shì zītài.",
+                        "text_en": "'Performing work' — devastatingly precise. In many organizations, visibility matters more than output. Quietly and efficiently finish tasks, nobody notices; talk at length in meetings, everyone thinks you're 'proactive.' This culture rewards posture, not results.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Systemic analysis — identifies the visibility-over-output dynamic driving meeting culture."
+                    },
+                    {
+                        "text_zh": "但你想想，那些表态的人也没办法吧，领导在场，谁敢不说两句？",
+                        "text_pinyin": "Dàn nǐ xiǎngxiang, nàxiē biǎotài de rén yě méi bànfǎ ba, lǐngdǎo zài chǎng, shéi gǎn bù shuō liǎng jù?",
+                        "text_en": "But think about it, those people making statements don't have a choice either, right? With the boss there, who dares not say a few words?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She just identified the system. You've redirected sympathy toward the performers instead of examining why the performance exists."
+                    },
+                    {
+                        "text_zh": "三个小时也不算特别长吧，上次我们那个季度总结开了五个小时。",
+                        "text_pinyin": "Sān ge xiǎoshí yě bú suàn tèbié cháng ba, shàng cì wǒmen nàge jìdù zǒngjié kāi le wǔ ge xiǎoshí.",
+                        "text_en": "Three hours isn't that long, is it? Last time our quarterly review went five hours.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's critiquing the structure of meetings. You've turned it into a competition for who endures more."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "奖励姿态而不是结果……对。这就是为什么加班文化在中国这么根深蒂固。很多人加班不是因为工作没做完，而是因为早走会「不好看」。存在感比效率更重要。这种系统性的低效不是个人能改变的，它已经嵌入了整个评价体系。",
+                "text_pinyin": "Jiǎnglì zītài ér bú shì jiéguǒ…… duì. Zhè jiù shì wèi shénme jiābān wénhuà zài Zhōngguó zhème gēn shēn dì gù. Hěn duō rén jiābān bú shì yīnwèi gōngzuò méi zuò wán, ér shì yīnwèi zǎo zǒu huì 'bù hǎokàn'. Cúnzài gǎn bǐ xiàolǜ gèng zhòngyào. Zhè zhǒng xìtǒng xìng de dī xiào bú shì gèrén néng gǎibiàn de, tā yǐjīng qiàn rù le zhěnggè píngjià tǐxì.",
+                "text_en": "Rewarding posture over results... exactly. That's why overtime culture is so deeply rooted in China. Many people work late not because work isn't done, but because leaving early 'looks bad.' Presence matters more than efficiency. This systemic inefficiency isn't something individuals can change — it's embedded in the entire evaluation system."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss how to resist performative work culture.",
+                "options": [
+                    {
+                        "text_zh": "也许抵抗不是当面说'这可以是邮件'——而是在自己能控制的范围内重新定义好的工作。用结果说话，保护自己的时间，拒绝无意义的表演。改变不了系统，但别让它把你变成它的一部分。",
+                        "text_pinyin": "Yěxǔ dǐkàng bú shì dāngmiàn shuō 'zhè kěyǐ shì yóujiàn' — ér shì zài zìjǐ néng kòngzhì de fànwéi nèi chóngxīn dìngyì hǎo de gōngzuò. Yòng jiéguǒ shuōhuà, bǎohù zìjǐ de shíjiān, jùjué wú yìyì de biǎoyǎn. Gǎibiàn bù liǎo xìtǒng, dàn bié ràng tā bǎ nǐ biàn chéng tā de yī bùfen.",
+                        "text_en": "Maybe resistance isn't saying 'this could be an email' — but redefining good work within your control. Let results speak, protect your time, refuse meaningless performance. You can't change the system, but don't let it make you part of it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Pragmatic and empowering — offers resistance within constraints rather than futile confrontation."
+                    },
+                    {
+                        "text_zh": "我觉得关键是提高自己的效率，把能控制的部分做好。会议的事，改变不了就别想了。",
+                        "text_pinyin": "Wǒ juéde guānjiàn shì tígāo zìjǐ de xiàolǜ, bǎ néng kòngzhì de bùfen zuò hǎo. Huìyì de shì, gǎibiàn bù liǎo jiù bié xiǎng le.",
+                        "text_en": "I think the key is to improve your own efficiency and handle what you can control. As for meetings, if you can't change them, don't dwell on it.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's talking about resisting a culture. You've offered personal optimization advice that leaves the culture untouched."
+                    },
+                    {
+                        "text_zh": "其实领导也不容易，他们也有上面的压力，开会可能也是被逼的。",
+                        "text_pinyin": "Qíshí lǐngdǎo yě bù róngyì, tāmen yě yǒu shàngmiàn de yālì, kāi huì kěnéng yě shì bèi bī de.",
+                        "text_en": "Actually leadership has it tough too, they also have pressure from above, the meetings might be forced on them as well.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's building toward agency. You've spread the helplessness upward through the hierarchy until nobody is responsible."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不让系统把你变成它的一部分……我需要这句话。来，为了今天那三个小时，我请你喝咖啡。至少这十五分钟的对话，比那三个小时的会议有价值一万倍。",
+                "text_pinyin": "Bú ràng xìtǒng bǎ nǐ biàn chéng tā de yī bùfen…… wǒ xūyào zhè jù huà. Lái, wèile jīntiān nà sān ge xiǎoshí, wǒ qǐng nǐ hē kāfēi. Zhìshǎo zhè shíwǔ fēnzhōng de duìhuà, bǐ nà sān ge xiǎoshí de huìyì yǒu jiàzhí yī wàn bèi.",
+                "text_en": "Not letting the system make you part of it... I need that line. Come, for those three hours today, coffee's on me. At least this fifteen-minute conversation is ten thousand times more valuable than that three-hour meeting."
+            }
+        ],
+        "cultural_note": "Chinese workplace culture has been widely criticized for「形式主义」(xíngshì zhǔyì, formalism) — prioritizing the appearance of work over substance. The phrase「表演工作」(performing work) has become viral on Chinese social media. Long meetings, performative overtime (加班文化), and「内卷」(involution/rat race) are all manifestations of a system that rewards visibility over output. Young workers increasingly push back through「躺平」(lying flat) or seeking companies with more results-oriented cultures."
+    }
+}

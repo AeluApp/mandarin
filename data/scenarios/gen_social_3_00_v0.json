@@ -1,0 +1,160 @@
+{
+    "title": "The Friend of a Friend Dinner",
+    "title_zh": "朋友的朋友",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_3_00_v0",
+    "tree": {
+        "setup": "A hot pot restaurant. Your friend Xiao Lin has brought along her college roommate, Xiao Jia, whom you've never met. Xiao Jia is a graphic designer who collects vintage cameras and speaks with quiet confidence. The hotpot is bubbling. Xiao Lin keeps trying to find things you two have in common, like a social matchmaker who won't rest until the conversation flows naturally.",
+        "setup_zh": "一家火锅店。你的朋友小琳带了她的大学室友小佳，你们从来没见过。小佳是平面设计师，收集老相机，说话安静但自信。火锅咕噜咕噜地煮着。小琳一直试图找到你们的共同点，像一个社交红娘，不到对话自然流动不罢休。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！小琳经常提到你。她说你在学中文？学了多久了？",
+                "text_pinyin": "nǐ hǎo! xiǎo lín jīngcháng tídào nǐ. tā shuō nǐ zài xué zhōngwén? xué le duōjiǔ le?",
+                "text_en": "Hi! Xiao Lin mentions you a lot. She says you're studying Chinese? How long have you been studying?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself and make small talk.",
+                "options": [
+                    {
+                        "text_zh": "你好小佳！学了快两年了。小琳也经常说起你。听说你是设计师？",
+                        "text_pinyin": "nǐ hǎo xiǎo jiā! xué le kuài liǎng nián le. xiǎo lín yě jīngcháng shuō qǐ nǐ. tīngshuō nǐ shì shèjìshī?",
+                        "text_en": "Hi Xiao Jia! Almost two years now. Xiao Lin talks about you a lot too. I heard you're a designer?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Jia smiles.「对，平面设计。主要做品牌视觉。」Returning the compliment (she also talks about you) creates reciprocity. 听说 is 'I heard' -- shows you've been briefed. 设计师 is 'designer.'"
+                    },
+                    {
+                        "text_zh": "两年左右。进步很慢，但是很有意思。你好！",
+                        "text_pinyin": "liǎng nián zuǒyòu. jìnbù hěn màn, dànshì hěn yǒu yìsi. nǐ hǎo!",
+                        "text_en": "About two years. Progress is slow but it's interesting. Hi!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「两年就能说成这样已经很厉害了！」Xiao Jia is genuinely impressed. 进步很慢 is 'progress is slow' -- humble but don't undersell yourself."
+                    },
+                    {
+                        "text_zh": "你好！是的，在学中文。不过我的中文还不太好，你说慢一点可以吗？",
+                        "text_pinyin": "nǐ hǎo! shì de, zài xué zhōngwén. búguò wǒ de zhōngwén hái bú tài hǎo, nǐ shuō màn yìdiǎn kěyǐ ma?",
+                        "text_en": "Hi! Yes, studying Chinese. But my Chinese isn't very good yet, could you speak a bit slower?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「当然！我说快了你就告诉我。」Xiao Jia switches to a more measured pace. 说慢一点 is a perfectly OK request when meeting new people."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，我做设计的。最近在帮一家咖啡店做品牌。你平时喝咖啡还是喝茶？",
+                "text_pinyin": "duì, wǒ zuò shèjì de. zuìjìn zài bāng yì jiā kāfēidiàn zuò pǐnpái. nǐ píngshí hē kāfēi háishi hē chá?",
+                "text_en": "Yes, I do design. Recently I'm helping a coffee shop with branding. Do you usually drink coffee or tea?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Continue the conversation naturally.",
+                "options": [
+                    {
+                        "text_zh": "都喝，但是咖啡多一点。给咖啡店做品牌听起来很有意思。你一般怎么开始设计？",
+                        "text_pinyin": "dōu hē, dànshì kāfēi duō yìdiǎn. gěi kāfēidiàn zuò pǐnpái tīng qǐlai hěn yǒu yìsi. nǐ yìbān zěnme kāishǐ shèjì?",
+                        "text_en": "Both, but more coffee. Doing branding for a coffee shop sounds interesting. How do you usually start a design?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Jia lights up.「先了解老板想要什么感觉，然后去店里坐一天，感受氛围。」Asking someone about their process shows genuine interest. 品牌 is 'brand.' 氛围 is 'atmosphere.'"
+                    },
+                    {
+                        "text_zh": "咖啡。你知道附近哪家咖啡好喝吗？",
+                        "text_pinyin": "kāfēi. nǐ zhīdào fùjìn nǎ jiā kāfēi hǎo hē ma?",
+                        "text_en": "Coffee. Do you know any good coffee places nearby?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「当然知道！我做过设计的那家就在附近，改天带你去。」Connecting through shared interests. 哪家...好喝 is 'which place has good...' Xiao Lin looks satisfied -- her matchmaking is working."
+                    },
+                    {
+                        "text_zh": "茶。中国茶的种类太多了，我都分不清。",
+                        "text_pinyin": "chá. zhōngguó chá de zhǒnglèi tài duō le, wǒ dōu fēn bu qīng.",
+                        "text_en": "Tea. There are so many types of Chinese tea, I can't tell them apart.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「哈哈，我也是！只知道绿茶和红茶的区别。」Xiao Jia admits she's not a tea expert either. 种类 is 'types/varieties.' 分不清 is 'can't tell apart.' Shared confusion bonds people."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "小琳说你喜欢摄影？我也是！不过我喜欢用胶片相机。你呢？",
+                "text_pinyin": "xiǎo lín shuō nǐ xǐhuan shèyǐng? wǒ yě shì! búguò wǒ xǐhuan yòng jiāopiàn xiàngjī. nǐ ne?",
+                "text_en": "Xiao Lin says you like photography? Me too! Though I like using film cameras. How about you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Bond over the shared interest.",
+                "options": [
+                    {
+                        "text_zh": "我主要用手机拍。胶片相机我没用过，但是很想试试。你收集了几台？",
+                        "text_pinyin": "wǒ zhǔyào yòng shǒujī pāi. jiāopiàn xiàngjī wǒ méi yòng guo, dànshì hěn xiǎng shìshi. nǐ shōují le jǐ tái?",
+                        "text_en": "I mostly shoot with my phone. I've never used a film camera, but I'd love to try. How many have you collected?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Jia reaches into her bag.「我现在身上有一台！」She pulls out a compact silver camera with the tenderness of someone holding a kitten. 收集 is 'collect.' 几台 uses the measure word 台 for cameras."
+                    },
+                    {
+                        "text_zh": "真的吗？我也喜欢摄影！最近在学构图。你有什么建议吗？",
+                        "text_pinyin": "zhēn de ma? wǒ yě xǐhuan shèyǐng! zuìjìn zài xué gòutú. nǐ yǒu shénme jiànyì ma?",
+                        "text_en": "Really? I love photography too! I've been studying composition recently. Do you have any advice?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「构图最重要的是减法——把不需要的东西去掉。」Xiao Jia gives advice with a designer's precision. 构图 is 'composition.' 减法 is 'subtraction' -- remove what doesn't belong."
+                    },
+                    {
+                        "text_zh": "摄影还行吧。我拍得不太好。",
+                        "text_pinyin": "shèyǐng hái xíng ba. wǒ pāi de bú tài hǎo.",
+                        "text_en": "Photography is OK I guess. I'm not very good at it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「拍得好不好不重要，喜欢拍才重要。」Xiao Jia shrugs. Xiao Lin nudges you under the table -- show more enthusiasm. 还行 is too lukewarm when someone is trying to connect."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "下次我们三个一起去拍照吧！小琳说她知道一个特别好看的老巷子。来，先吃火锅。你喜欢吃什么？毛肚还是肥牛？",
+                "text_pinyin": "xià cì wǒmen sān ge yìqǐ qù pāi zhào ba! xiǎo lín shuō tā zhīdào yí gè tèbié hǎokàn de lǎo xiàngzi. lái, xiān chī huǒguō. nǐ xǐhuan chī shénme? máodǔ háishi féiniú?",
+                "text_en": "Next time the three of us should go take photos together! Xiao Lin says she knows a really photogenic old alley. Come on, let's eat first. What do you like? Tripe or fatty beef?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the invitation and order food.",
+                "options": [
+                    {
+                        "text_zh": "好啊！我很想去。肥牛吧，毛肚我还没试过。你们推荐什么涮的？",
+                        "text_pinyin": "hǎo a! wǒ hěn xiǎng qù. féiniú ba, máodǔ wǒ hái méi shì guo. nǐmen tuījiàn shénme shuàn de?",
+                        "text_en": "Sure! I'd love to go. Fatty beef for me, I haven't tried tripe yet. What do you recommend for the hotpot?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Jia and Xiao Lin exchange a look.「毛肚你必须试试！七上八下——涮七秒就好了。」涮 means 'to swish/dip in hotpot.' 七上八下 is the technique -- dip seven times up and down. A new friendship is cooking."
+                    },
+                    {
+                        "text_zh": "肥牛！拍照的事到时候加我微信，我们建个小群。",
+                        "text_pinyin": "féiniú! pāi zhào de shì dào shíhou jiā wǒ wēixìn, wǒmen jiàn gè xiǎo qún.",
+                        "text_en": "Fatty beef! For the photo outing, add me on WeChat when the time comes, we'll make a group.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「我现在就加你！」Xiao Jia pulls out her phone. 加微信 is 'add on WeChat' -- the natural next step in Chinese friendships. 建个小群 is 'create a small group chat.' You're now officially connected."
+                    },
+                    {
+                        "text_zh": "都可以。你们点吧，我吃什么都行。",
+                        "text_pinyin": "dōu kěyǐ. nǐmen diǎn ba, wǒ chī shénme dōu xíng.",
+                        "text_en": "Either is fine. You guys order, I eat anything.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lin sighs quietly. 什么都行 makes conversation harder -- expressing preferences gives others something to work with. Xiao Jia orders for the table politely."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Meeting friends of friends is a central part of Chinese social life. 加微信 (jiā wēixìn, adding on WeChat) is the modern handshake. At hotpot, 涮 (shuàn) is the technique of dipping food briefly. 毛肚 (máodǔ, tripe) has a specific timing: 七上八下 (qī shàng bā xià, seven up eight down) for perfect texture."
+    }
+}

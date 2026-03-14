@@ -2,7 +2,7 @@
 
 This is the complete playbook for preventing churn and handling cancellations. Every email, flow, and offer described here follows the brand voice defined in `positioning.md`: direct, grounded, calm, respectful. No guilt. No dark patterns. No manipulative urgency.
 
-Price: Free (HSK 1-2), $12/month full access. Independent team.
+Price: Free (HSK 1-2), $14.99/month full access. Independent team.
 
 Last updated: 2026-02-17
 
@@ -70,7 +70,7 @@ Body:
 >
 > Your next session has tone pair drills queued. Ten minutes would make a measurable difference.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — New Content Notice (sent when relevant graded reading matches their level)**
 
@@ -84,7 +84,7 @@ Body:
 >
 > The passage takes about 6 minutes. Any words you look up will enter your drill queue automatically.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — Progress Snapshot (monthly, for active users)**
 
@@ -103,7 +103,7 @@ Body:
 >
 > Your biggest improvement this month: reading accuracy, up 8 points. Your biggest gap: reading is lagging behind your vocabulary — the graded reader will close that faster than drilling alone.
 >
-> — Mandarin
+> — Aelu
 
 ---
 
@@ -125,7 +125,7 @@ Body:
 >
 > A 10-minute session would cover the most time-sensitive items.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — The Plateau Diagnosis (triggered by accuracy stagnation)**
 
@@ -143,7 +143,7 @@ Body:
 >
 > If you want to try it, your next session is ready. 15 minutes, listening-heavy.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — The Session Reshape (triggered by duration drop)**
 
@@ -159,7 +159,7 @@ Body:
 >
 > If your available time has genuinely changed, you can adjust your daily session target in settings. The algorithm adapts to whatever you give it.
 >
-> — Mandarin
+> — Aelu
 
 ---
 
@@ -187,7 +187,7 @@ Body:
 >
 > Whatever you choose is the right call for you right now.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — The Post-Complaint Follow-Up (triggered by support complaint)**
 
@@ -205,11 +205,11 @@ Body:
 >
 > If anything else is frustrating, tell me directly. I read every email and I'm the only one building this — your feedback changes the product faster than you'd expect.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — The Honest Assessment (triggered by multiple declining signals)**
 
-Subject: Your Mandarin progress — an honest look
+Subject: Your Aelu progress — an honest look
 
 Body:
 
@@ -225,7 +225,7 @@ Body:
 >
 > If you want to talk through what's not working, reply to this email. I'll respond personally.
 >
-> — Mandarin
+> — Aelu
 
 ---
 
@@ -249,7 +249,7 @@ Body:
 >
 > Whatever you decide, thank you for giving the app a real try.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — The 14-Day Gap (triggered by 14+ days of inactivity)**
 
@@ -259,7 +259,7 @@ Body:
 
 > Hi [Name],
 >
-> It's been two weeks since your last session. Your subscription is still active at $12/month, and I don't want you paying for something you're not using.
+> It's been two weeks since your last session. Your subscription is still active at $14.99/month, and I don't want you paying for something you're not using.
 >
 > Your options:
 >
@@ -269,7 +269,7 @@ Body:
 >
 > I'd rather you pause than cancel, and I'd rather you cancel than pay for something unused. No wrong answer here.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — The Final Outreach (7 days after Email 2, if no response and no activity)**
 
@@ -283,9 +283,9 @@ Body:
 >
 > If you want to pause or cancel, you can do either from your account settings anytime. If you come back on your own, your data will be waiting.
 >
-> If you ever want to talk about what didn't work, I'm at hello@mandarin.app. I read everything.
+> If you ever want to talk about what didn't work, I'm at hello@aelu.app. I read everything.
 >
-> — Mandarin
+> — Aelu
 
 ---
 
@@ -326,7 +326,7 @@ Based on the reason selected in Step 1, show one targeted offer. If the user dec
 | Reason | Save Offer | Headline | Body Copy |
 |--------|-----------|----------|-----------|
 | Not using enough | Pause (1-3 months, free) | Pause instead? | "If the issue is timing, not the product, you can pause for 1, 2, or 3 months. No charge during the pause. Your data and progress stay exactly where they are. Pick back up whenever you're ready." **[Pause for 1 month] [Pause for 2 months] [Pause for 3 months] [No thanks, cancel]** |
-| Too expensive | 50% off for 2 months ($6/month) | Would $6/month work? | "I can offer $6/month for the next two months. After that it returns to $12/month. If $6 still doesn't work, that's fine — HSK 1-2 content remains free forever." **[Accept $6/month for 2 months] [No thanks, cancel]** |
+| Too expensive | 50% off for 2 months ($7.50/month) | Would $7.50/month work? | "I can offer $7.50/month for the next two months. After that it returns to $14.99/month. If $7.50 still doesn't work, that's fine — HSK 1-2 content remains free forever." **[Accept $7.50/month for 2 months] [No thanks, cancel]** |
 | Found better tool | Competitive intel question, no counter-offer | Which tool are you switching to? | "No hard feelings — using the right tool matters more than using this one. If you're willing to share which app or resource you're switching to, it helps me understand where I'm falling short. Totally optional." **[Text field] [Submit and cancel] [Skip and cancel]** |
 | Content gap | Roadmap + feedback request | What's missing? | "We're a small team and the content roadmap is directly shaped by user feedback. If you can share what topics, levels, or drill types you wish existed, there's a real chance we'll build them. We can notify you if we add what you need." **[Text field] [Submit and cancel] [Skip and cancel] [Check box: Email me if this content is added]** |
 | Taking a break | Pause (1-3 months, free) | Pause instead? | "If you're coming back eventually, a pause keeps your progress intact at no cost. Your SRS intervals freeze — when you return, you pick up where you left off instead of starting recovery drills." **[Pause for 1 month] [Pause for 2 months] [Pause for 3 months] [No thanks, cancel]** |
@@ -347,9 +347,9 @@ Based on the reason selected in Step 1, show one targeted offer. If the user dec
 >
 > If you change your mind before [billing period end date], you can reactivate from Account Settings with no interruption.
 >
-> Thank you for using Mandarin. I hope the time you spent here moved your Chinese forward.
+> Thank you for using Aelu. I hope the time you spent here moved your Chinese forward.
 >
-> — Mandarin
+> — Aelu
 
 **Single button:** Return to app
 
@@ -383,7 +383,7 @@ For a small team with no re-acquisition ad budget, pause is the single highest-l
 - SRS intervals freeze. Items do not accumulate overdue reviews during the pause.
 - All data preserved: drill history, diagnostics, graded reader progress, context notes.
 - Free tier access (HSK 1-2) remains available during pause if the user wants to do light practice.
-- Auto-reactivation resumes billing at $12/month on the scheduled date.
+- Auto-reactivation resumes billing at $14.99/month on the scheduled date.
 - User can cancel during pause at any time (from account settings).
 - User can extend or shorten pause at any time (from account settings).
 - User can end pause early and resume immediately (from account settings).
@@ -403,17 +403,17 @@ Body:
 > - **No charges** until your pause ends on [reactivation date].
 > - **Your data is frozen.** SRS intervals, drill history, diagnostics, reading progress — all preserved exactly as they are.
 > - **HSK 1-2 content is still available** if you want to do light practice during the pause.
-> - **Billing resumes automatically** on [reactivation date] at $12/month. I'll send you a reminder 7 days before.
+> - **Billing resumes automatically** on [reactivation date] at $14.99/month. I'll send you a reminder 7 days before.
 >
 > You can cancel, extend, shorten, or end your pause anytime from Account Settings.
 >
 > See you when you're ready.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — Mid-Pause Check-In (sent at the halfway point of the pause)**
 
-Subject: Quick check-in from Mandarin
+Subject: Quick check-in from Aelu
 
 Body:
 
@@ -427,7 +427,7 @@ Body:
 >
 > Either way, your progress isn't going anywhere.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — 7-Day Reactivation Notice (sent 7 days before pause ends)**
 
@@ -437,7 +437,7 @@ Body:
 
 > Hi [Name],
 >
-> Your pause ends on [reactivation date]. On that date, billing resumes at $12/month and your full access restarts.
+> Your pause ends on [reactivation date]. On that date, billing resumes at $14.99/month and your full access restarts.
 >
 > What to expect when you come back:
 >
@@ -451,7 +451,7 @@ Body:
 >
 > Both options are available right now, no questions asked.
 >
-> — Mandarin
+> — Aelu
 
 ---
 
@@ -501,15 +501,15 @@ Body:
 
 ### 4. The Price Sensitive
 
-**Profile:** Engaged with the product (regular sessions, decent accuracy) but the $12/month is a real line item in their budget. They may be a student, early career, or in a country where $12 USD is a larger relative cost.
+**Profile:** Engaged with the product (regular sessions, decent accuracy) but the $14.99/month is a real line item in their budget. They may be a student, early career, or in a country where $14.99 USD is a larger relative cost.
 
 **Root cause:** The value is there but the price-to-budget ratio is high. They like the app but are constantly evaluating whether it's worth it this month.
 
 **Signal:** Regular usage but visits to the cancel page, particularly around billing dates. May also show up as a support email asking about discounts or student pricing.
 
-**Intervention:** Acknowledge that $12/month is real money. Do not say "it's less than a coffee a day" — they already know that and it doesn't help. Instead, make the value concrete and specific to their data.
+**Intervention:** Acknowledge that $14.99/month is real money. Do not say "it's less than a coffee a day" — they already know that and it doesn't help. Instead, make the value concrete and specific to their data.
 
-**Specific offer:** The 50% discount ($6/month for 2 months) if they reach the cancellation flow. For proactive retention: a billing-date email that shows their specific progress since their last payment — "$12 bought you 47 drill sessions, 312 items reviewed, and a 6-point improvement in listening accuracy this month." Let them decide if that's worth it. If it isn't, let them go.
+**Specific offer:** The 50% discount ($7.50/month for 2 months) if they reach the cancellation flow. For proactive retention: a billing-date email that shows their specific progress since their last payment — "$14.99 bought you 47 drill sessions, 312 items reviewed, and a 6-point improvement in listening accuracy this month." Let them decide if that's worth it. If it isn't, let them go.
 
 ---
 
@@ -521,7 +521,7 @@ Body:
 
 **Signal:** Often sudden — cancellation with the "found a better tool" reason after steady usage. Sometimes preceded by a decline in usage of our specific features (e.g., they stopped doing listening drills because they found a dedicated listening app).
 
-**Intervention:** No counter-offer. Do not try to match or badmouth the competitor. Ask which tool they're switching to (competitive intel) and wish them well. If they're switching to a complement (iTalki for tutoring, HelloTalk for conversation), mention that pairing works well and they could keep Mandarin for drilling.
+**Intervention:** No counter-offer. Do not try to match or badmouth the competitor. Ask which tool they're switching to (competitive intel) and wish them well. If they're switching to a complement (iTalki for tutoring, HelloTalk for conversation), mention that pairing works well and they could keep Aelu for drilling.
 
 **Specific offer:** None. Respect the decision. Collect the competitive intelligence. If a pattern emerges (five users switching to the same app for the same reason), that's a product signal, not a retention problem.
 
@@ -553,17 +553,17 @@ Body:
 
 The math is simple:
 
-- A user paying $12/month who cancels generates $0/month.
-- A user paying $6/month (50% off for 2 months) who stays generates $12 over 2 months.
-- If even 30% of discount-offered users accept, that's $3.60 in expected revenue per save attempt vs. $0 from letting them go.
-- After the 2-month discount period, many users re-anchor at $12/month because the habit has been re-established. Industry data suggests 50-70% of discount-retained users stay at full price afterward.
+- A user paying $14.99/month who cancels generates $0/month.
+- A user paying $7.50/month (50% off for 2 months) who stays generates $15 over 2 months.
+- If even 30% of discount-offered users accept, that's $4.50 in expected revenue per save attempt vs. $0 from letting them go.
+- After the 2-month discount period, many users re-anchor at $14.99/month because the habit has been re-established. Industry data suggests 50-70% of discount-retained users stay at full price afterward.
 
 **Break-even analysis:** If the save offer converts at 20%+ acceptance rate, it is profitable. Below 20%, the administrative overhead and brand-dilution cost outweigh the revenue. Track this monthly.
 
 ### What to NEVER Offer
 
 - **Free months.** A free month communicates that the product isn't worth paying for. It also creates a perverse incentive: cancel, get free month, cancel again. Pause serves the "I need a break" use case without devaluing the product.
-- **Permanent discounts.** No "loyalty pricing" that locks someone in at $6/month forever. The product is worth $12/month or it isn't. A temporary discount bridges a rough patch. A permanent discount is a pricing mistake.
+- **Permanent discounts.** No "loyalty pricing" that locks someone in at $7.50/month forever. The product is worth $14.99/month or it isn't. A temporary discount bridges a rough patch. A permanent discount is a pricing mistake.
 - **Escalating offers.** Never show a second, better offer after the user declines the first. "We offered you 50% off and you said no, so here's 75% off" teaches users that refusing the first offer is the optimal strategy. One offer, one chance, done.
 
 ---
@@ -595,7 +595,7 @@ Body:
 
 > Hi [Name],
 >
-> Your $12 payment for Mandarin failed on [date]. This usually means an expired card, insufficient funds, or a bank hold — nothing on your end to worry about.
+> Your $14.99 payment for Aelu failed on [date]. This usually means an expired card, insufficient funds, or a bank hold — nothing on your end to worry about.
 >
 > We'll retry automatically in 2 days. If you want to update your payment method now:
 >
@@ -603,7 +603,7 @@ Body:
 >
 > Your access is unaffected in the meantime.
 >
-> — Mandarin
+> — Aelu
 
 **Email 2 — Second Retry Failed (Day 3)**
 
@@ -621,7 +621,7 @@ Body:
 >
 > Your full access continues while we sort this out. If there's an issue I can help with, reply to this email.
 >
-> — Mandarin
+> — Aelu
 
 **Email 3 — Final Warning (Day 5)**
 
@@ -639,7 +639,7 @@ Body:
 >
 > If you update your card after the downgrade, full access restores instantly. Nothing is lost either way.
 >
-> — Mandarin
+> — Aelu
 
 ### Card Expiration Proactive Email
 
@@ -659,7 +659,7 @@ Sent 30 days before a stored card's expiration date. This one email prevents a s
 >
 > Takes 30 seconds. Prevents any interruption to your access.
 >
-> — Mandarin
+> — Aelu
 
 ---
 

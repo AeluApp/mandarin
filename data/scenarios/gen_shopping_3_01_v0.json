@@ -1,0 +1,124 @@
+{
+    "title": "The Diplomatic Return",
+    "title_zh": "优雅退货",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_3_01_v0",
+    "tree": {
+        "setup": "The customer service desk at a department store. You bought a jacket two days ago and it's already pilling. The return counter specialist, Xiao Gu, has seen every excuse in the book but also every legitimate complaint. She examines merchandise with a jeweler's eye and keeps a spray bottle of unknown purpose behind the counter. The jacket in question cost 680 yuan.",
+        "setup_zh": "百货商店的客服台。你两天前买了一件外套，已经开始起球了。退货台专员小顾见过各种借口，也见过各种合理投诉。她用珠宝商的眼光检查商品，柜台后面放着一瓶用途不明的喷雾。这件外套六百八十元。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问有什么问题？带小票了吗？",
+                "text_pinyin": "nín hǎo, qǐngwèn yǒu shénme wèntí? dài xiǎopiào le ma?",
+                "text_en": "Hello, what's the issue? Do you have the receipt?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the problem with the jacket.",
+                "options": [
+                    {
+                        "text_zh": "我前天在这里买了这件外套。才穿了一天就起球了。这是小票。我想退货或者换一件。",
+                        "text_pinyin": "wǒ qiántiān zài zhèlǐ mǎi le zhè jiàn wàitào. cái chuān le yì tiān jiù qǐ qiú le. zhè shì xiǎopiào. wǒ xiǎng tuìhuò huòzhě huàn yí jiàn.",
+                        "text_en": "I bought this jacket here the day before yesterday. It started pilling after just one day of wear. Here's the receipt. I'd like a refund or exchange.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Gu takes the jacket and examines it under her desk lamp.「确实起球了。前天买的，在七天退换期内。」起球 is 'pilling.' 退换期 is 'return/exchange period.' Having the receipt and stating the timeline clearly is ideal."
+                    },
+                    {
+                        "text_zh": "这件外套质量有问题。穿了一天就坏了。我要退钱。",
+                        "text_pinyin": "zhè jiàn wàitào zhìliàng yǒu wèntí. chuān le yì tiān jiù huài le. wǒ yào tuì qián.",
+                        "text_en": "This jacket has a quality problem. It broke after one day. I want my money back.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「请先让我检查一下。」Xiao Gu stays calm.「起球不算'坏了'，但是一天就起球确实不正常。」质量 is 'quality.' 不正常 is 'not normal.' Being less aggressive gets better cooperation."
+                    },
+                    {
+                        "text_zh": "我不太满意这件外套。起球了。可以退吗？",
+                        "text_pinyin": "wǒ bú tài mǎnyì zhè jiàn wàitào. qǐ qiú le. kěyǐ tuì ma?",
+                        "text_en": "I'm not very satisfied with this jacket. It's pilling. Can I return it?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「小票带了吗？什么时候买的？」Xiao Gu needs the basics. 不太满意 is 'not very satisfied' -- polite but a bit vague about the actual defect."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我检查了一下。确实有质量问题，不是正常磨损。您可以选择退款或者换同款。不过同款只剩深蓝色了，您买的黑色没货了。",
+                "text_pinyin": "wǒ jiǎnchá le yíxià. quèshí yǒu zhìliàng wèntí, bú shì zhèngcháng mósǔn. nín kěyǐ xuǎnzé tuìkuǎn huòzhě huàn tóng kuǎn. búguò tóng kuǎn zhǐ shèng shēnlán sè le, nín mǎi de hēisè méi huò le.",
+                "text_en": "I've inspected it. There is indeed a quality issue, not normal wear and tear. You can choose a refund or exchange for the same style. However, only dark blue is left -- the black you bought is out of stock."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose how to resolve it.",
+                "options": [
+                    {
+                        "text_zh": "那就退款吧。退到原来的支付方式可以吗？大概几天到账？",
+                        "text_pinyin": "nà jiù tuìkuǎn ba. tuì dào yuánlái de zhīfù fāngshì kěyǐ ma? dàgài jǐ tiān dào zhàng?",
+                        "text_en": "Then I'll take the refund. Can it go back to the original payment method? About how many days until it arrives?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「退到原支付方式，三到五个工作日到账。」Xiao Gu processes it efficiently. 支付方式 is 'payment method.' 到账 is 'arrive in account.' 工作日 is 'business days.' Asking about the timeline is smart."
+                    },
+                    {
+                        "text_zh": "深蓝色我看看。颜色可以的话我就换。",
+                        "text_pinyin": "shēnlán sè wǒ kànkan. yánsè kěyǐ de huà wǒ jiù huàn.",
+                        "text_en": "Let me see the dark blue. If the color works I'll exchange.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Gu pulls out the blue one. It's actually a deeper, richer color.「很多人觉得深蓝色比黑色好看。」看看 is 'take a look.' You might end up with a better jacket."
+                    },
+                    {
+                        "text_zh": "可不可以不换同款？我看了看别的品牌，有一件差不多价格的想试试。",
+                        "text_pinyin": "kě bu kěyǐ bú huàn tóng kuǎn? wǒ kàn le kàn bié de pǐnpái, yǒu yí jiàn chàbuduō jiàgé de xiǎng shìshi.",
+                        "text_en": "Can I exchange for a different style? I saw another brand at a similar price I'd like to try.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「跨品牌换的话比较麻烦。我建议先退款，然后重新买。这样比较清楚。」同款 is 'same style.' 跨品牌 is 'across brands.' The process is cleaner as two separate transactions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "退款手续办好了。这是退货单，请您签字。以后买衣服的话，建议您先看一下面料标签。纯棉的不容易起球。",
+                "text_pinyin": "tuìkuǎn shǒuxù bàn hǎo le. zhè shì tuìhuò dān, qǐng nín qiānzì. yǐhòu mǎi yīfu de huà, jiànyì nín xiān kàn yíxià miànliào biāoqiān. chúnmián de bù róngyì qǐ qiú.",
+                "text_en": "The refund has been processed. Here's the return form, please sign. In the future when buying clothes, I suggest checking the fabric label first. Pure cotton doesn't pill easily."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and respond to her advice.",
+                "options": [
+                    {
+                        "text_zh": "谢谢提醒！以后我会注意面料的。你处理得很专业。",
+                        "text_pinyin": "xièxie tíxǐng! yǐhòu wǒ huì zhùyì miànliào de. nǐ chǔlǐ de hěn zhuānyè.",
+                        "text_en": "Thanks for the tip! I'll pay attention to fabrics in the future. You handled this very professionally.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Gu permits herself a small smile.「谢谢。」面料 is 'fabric.' 专业 is 'professional.' Acknowledging good service during a complaint is gracious."
+                    },
+                    {
+                        "text_zh": "好的。纯棉不起球，记住了。谢谢你！",
+                        "text_pinyin": "hǎo de. chúnmián bù qǐ qiú, jìzhù le. xièxie nǐ!",
+                        "text_en": "OK. Pure cotton doesn't pill, got it. Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Gu nods. 纯棉 is 'pure cotton.' 记住了 is 'I'll remember that.' She watches you leave, already reaching for the next customer's problem."
+                    },
+                    {
+                        "text_zh": "说实话，这种质量的衣服不应该卖六百多。你们应该反馈给品牌。",
+                        "text_pinyin": "shuō shíhuà, zhè zhǒng zhìliàng de yīfu bù yīnggāi mài liùbǎi duō. nǐmen yīnggāi fǎnkuì gěi pǐnpái.",
+                        "text_en": "Honestly, clothes of this quality shouldn't be sold for over 600. You should give feedback to the brand.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「我会记录的。您的意见我们很重视。」Xiao Gu writes a note. 反馈 is 'feedback.' 重视 is 'take seriously.' Whether it reaches the brand is another question, but the feedback is documented."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Most Chinese stores have a 七天无理由退换 (seven-day no-questions return) policy. Keep your 小票 (xiǎopiào, receipt) -- returns are difficult without it. 起球 (qǐ qiú, pilling) is a common clothing complaint. Refunds usually go back through the original payment method (支付方式) within 3-5 business days."
+    }
+}

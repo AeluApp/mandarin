@@ -1,0 +1,87 @@
+{
+    "title": "Listening to Rain at Home",
+    "title_zh": "在家听雨",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "It's a rainy Sunday afternoon. You and your roommate Xiao Lan are at home, listening to the rain against the window.",
+        "setup_zh": "下雨的周日下午，你和室友小兰在家，听着窗外的雨声。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你听，雨声好好听。我觉得下雨天待在家里是最幸福的事。你想做什么？",
+                "text_pinyin": "Nǐ tīng, yǔ shēng hǎo hǎotīng. Wǒ juéde xià yǔ tiān dāi zài jiālǐ shì zuì xìngfú de shì. Nǐ xiǎng zuò shénme?",
+                "text_en": "Listen — the rain sounds so nice. I think staying home on a rainy day is the happiest thing. What do you want to do?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a cozy activity.",
+                "options": [
+                    {
+                        "text_zh": "我们泡一壶茶，看一部老电影吧。这种天气最适合慢慢享受。",
+                        "text_pinyin": "Wǒmen pào yī hú chá, kàn yī bù lǎo diànyǐng ba. Zhè zhǒng tiānqì zuì shìhé mànmàn xiǎngshòu.",
+                        "text_en": "Let's brew a pot of tea and watch an old movie. This kind of weather is perfect for taking it slow.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Matches the cozy mood perfectly."
+                    },
+                    {
+                        "text_zh": "看手机吧。",
+                        "text_pinyin": "Kàn shǒujī ba.",
+                        "text_en": "Let's just look at our phones.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Misses the special atmosphere."
+                    },
+                    {
+                        "text_zh": "我想睡觉。",
+                        "text_pinyin": "Wǒ xiǎng shuìjiào.",
+                        "text_en": "I want to sleep.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Understandable but doesn't engage."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好主意！我来泡茶，你选电影。下雨天、热茶、老电影——完美的周末。",
+                "text_pinyin": "Hǎo zhǔyi! Wǒ lái pào chá, nǐ xuǎn diànyǐng. Xià yǔ tiān, rè chá, lǎo diànyǐng — wánměi de zhōumò.",
+                "text_en": "Good idea! I'll brew the tea, you pick the movie. Rainy day, hot tea, old movie — the perfect weekend."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the perfect moment.",
+                "options": [
+                    {
+                        "text_zh": "生活不需要多复杂，这样简单的下午就很好了。谢谢你，小兰。",
+                        "text_pinyin": "Shēnghuó bù xūyào duō fùzá, zhèyàng jiǎndān de xiàwǔ jiù hěn hǎo le. Xièxie nǐ, Xiǎo Lán.",
+                        "text_en": "Life doesn't need to be complicated — a simple afternoon like this is enough. Thanks, Xiao Lan.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Reflective and grateful — captures the spirit of the moment."
+                    },
+                    {
+                        "text_zh": "嗯，不错。",
+                        "text_pinyin": "En, búcuò.",
+                        "text_en": "Mm, nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Flat."
+                    },
+                    {
+                        "text_zh": "明天又要上班了。",
+                        "text_pinyin": "Míngtiān yòu yào shàngbān le.",
+                        "text_en": "Back to work tomorrow.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Breaks the peaceful mood."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Listening to rain (听雨) has a long poetic tradition in Chinese culture. Rainy days at home with tea and quiet activities represent an ideal of 「小确幸」 (small but certain happiness). Appreciating simple moments is a valued life skill."
+    },
+    "hsk_level": 3
+}

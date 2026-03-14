@@ -1,0 +1,268 @@
+{
+    "title": "The Account Opening Ceremony",
+    "title_zh": "开户仪式",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_bank_6_00_v0",
+    "tree": {
+        "setup": "The international services floor of China Construction Bank, where the carpet is thick enough to absorb both sound and anxiety. Manager Zhong sits behind a mahogany desk with a brass nameplate that has been polished so frequently the letters have developed a patina of institutional pride. She handles foreign account openings with the meticulous attention of someone who believes paperwork is a form of civic duty — every signature witnessed, every carbon copy aligned, every regulation cited from memory. Behind her, a wall clock ticks with the precision of compound interest.",
+        "setup_zh": "中国建设银行的国际业务楼层，地毯厚得足以吸收声音和焦虑。钟经理坐在一张红木办公桌后，黄铜铭牌被擦拭得如此频繁，字母已经形成了一层制度自豪感的包浆。她以一种认为文书工作是公民义务的细致态度处理外国人开户——每个签名都要见证，每张复写纸都要对齐，每条法规都凭记忆引用。她身后，一台挂钟以复利的精确度滴答作响。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，欢迎来到建设银行国际业务部。请问您需要办理什么业务？",
+                "text_pinyin": "nín hǎo, huānyíng lái dào Jiànshè Yínháng guójì yèwù bù. qǐngwèn nín xūyào bànlǐ shénme yèwù?",
+                "text_en": "Hello, welcome to China Construction Bank's international services. What can I help you with?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain that you want to open an account as a foreigner.",
+                "options": [
+                    {
+                        "text_zh": "钟经理，您好。我是在中国工作的外国人，想在贵行开一个储蓄账户。我已经办好了工作签证和居留许可，相关材料都带了。",
+                        "text_pinyin": "Zhōng jīnglǐ, nín hǎo. wǒ shì zài Zhōngguó gōngzuò de wàiguó rén, xiǎng zài guì háng kāi yí gè chúxù zhànghù. wǒ yǐjīng bàn hǎo le gōngzuò qiānzhèng hé jūliú xǔkě, xiāngguān cáiliào dōu dài le.",
+                        "text_en": "Manager Zhong, hello. I'm a foreigner working in China and I'd like to open a savings account at your bank. I've already arranged my work visa and residence permit — I brought all the relevant documents.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Prepared, specific, and using 贵行 — the formal term for 'your bank.' Manager Zhong's posture straightens with the satisfaction of encountering a client who respects process."
+                    },
+                    {
+                        "text_zh": "我想开一个银行账户。我是外国人。",
+                        "text_pinyin": "wǒ xiǎng kāi yí gè yínháng zhànghù. wǒ shì wàiguó rén.",
+                        "text_en": "I want to open a bank account. I'm a foreigner.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clear intent. She'll guide you through the requirements — her checklist is already in hand."
+                    },
+                    {
+                        "text_zh": "请问外国人能在这里开户吗？",
+                        "text_pinyin": "qǐngwèn wàiguó rén néng zài zhèlǐ kāi hù ma?",
+                        "text_en": "Can foreigners open accounts here?",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "They can. Manager Zhong begins what she considers the most important conversation in banking: the requirements briefing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "非常好，您准备得很充分。外国人开户需要以下材料：护照原件、有效签证或居留许可、在中国的住址证明，以及一个中国的手机号码。请问您都具备吗？",
+                "text_pinyin": "fēicháng hǎo, nín zhǔnbèi de hěn chōngfèn. wàiguó rén kāi hù xūyào yǐxià cáiliào: hùzhào yuánjiàn, yǒuxiào qiānzhèng huò jūliú xǔkě, zài Zhōngguó de zhùzhǐ zhèngmíng, yǐjí yí gè Zhōngguó de shǒujī hàomǎ. qǐngwèn nín dōu jùbèi ma?",
+                "text_en": "Very good, you've come well-prepared. Foreign account opening requires: original passport, valid visa or residence permit, proof of Chinese address, and a Chinese phone number. Do you have all of these?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your documents and ask about the address proof.",
+                "options": [
+                    {
+                        "text_zh": "护照、签证和手机号都有。住址证明的话，我有租房合同，但不是公证过的。请问这样可以吗？还是需要其他形式的证明？",
+                        "text_pinyin": "hùzhào, qiānzhèng hé shǒujī hào dōu yǒu. zhùzhǐ zhèngmíng de huà, wǒ yǒu zū fáng hétong, dàn búshì gōngzhèng guò de. qǐngwèn zhèyàng kěyǐ ma? háishì xūyào qítā xíngshì de zhèngmíng?",
+                        "text_en": "I have the passport, visa, and phone number. For address proof, I have a rental contract but it's not notarized. Is that acceptable, or do I need another form of proof?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Anticipating the notarization question — Manager Zhong nods. Most rental contracts work, but she appreciates clients who understand the distinction."
+                    },
+                    {
+                        "text_zh": "都有。这是我的材料。",
+                        "text_pinyin": "dōu yǒu. zhè shì wǒ de cáiliào.",
+                        "text_en": "I have everything. Here are my documents.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She begins reviewing them with the focus of an archivist examining primary sources."
+                    },
+                    {
+                        "text_zh": "住址证明是什么？我不太明白。",
+                        "text_pinyin": "zhùzhǐ zhèngmíng shì shénme? wǒ bú tài míngbai.",
+                        "text_en": "What's address proof? I don't quite understand.",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "She explains patiently: a lease, utility bill, or police registration slip. Her regulatory knowledge is encyclopedic."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "租房合同可以用，不需要公证。我来复印一下您的材料。请问您希望开通网上银行和手机银行吗？另外，您需要申请借记卡还是只开账户？",
+                "text_pinyin": "zū fáng hétong kěyǐ yòng, bù xūyào gōngzhèng. wǒ lái fùyìn yíxià nín de cáiliào. qǐngwèn nín xīwàng kāitōng wǎngshàng yínháng hé shǒujī yínháng ma? lìngwài, nín xūyào shēnqǐng jièjì kǎ háishì zhǐ kāi zhànghù?",
+                "text_en": "The rental contract works — no notarization needed. Let me photocopy your documents. Would you like to set up online banking and mobile banking? Also, do you need a debit card, or just the account?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your banking services.",
+                "options": [
+                    {
+                        "text_zh": "网银和手机银行都开通吧，方便转账和查余额。借记卡也需要。请问借记卡有年费吗？还有，日常转账的限额是多少？",
+                        "text_pinyin": "wǎng yín hé shǒujī yínháng dōu kāitōng ba, fāngbiàn zhuǎn zhàng hé chá yú'é. jièjì kǎ yě xūyào. qǐngwèn jièjì kǎ yǒu nián fèi ma? hái yǒu, rìcháng zhuǎn zhàng de xiàn'é shì duōshǎo?",
+                        "text_en": "I'll set up both online and mobile banking — convenient for transfers and balance checks. I need a debit card too. Is there an annual fee? And what's the daily transfer limit?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Comprehensive service selection with informed follow-up questions — Manager Zhong pulls out a fee schedule with the reverence others reserve for wine lists."
+                    },
+                    {
+                        "text_zh": "都要吧。需要多少钱？",
+                        "text_pinyin": "dōu yào ba. xūyào duōshǎo qián?",
+                        "text_en": "I'll take everything. How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Full service. She'll explain the fees as she processes."
+                    },
+                    {
+                        "text_zh": "我不太需要网银。先办卡就行了。",
+                        "text_pinyin": "wǒ bú tài xūyào wǎng yín. xiān bàn kǎ jiù xíng le.",
+                        "text_en": "I don't really need online banking. Just the card for now.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Zhong respects minimalism, though she gently notes that mobile banking makes life considerably easier for foreign residents."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "借记卡年费十块，存款超过三百的话免年费。日常转账限额是五万，可以在手机银行里调整。现在请您设置一个六位数的取款密码，还有一个网银登录密码。取款密码请不要用生日。",
+                "text_pinyin": "jièjì kǎ nián fèi shí kuài, cúnkuǎn chāoguò sānbǎi de huà miǎn nián fèi. rìcháng zhuǎn zhàng xiàn'é shì wǔ wàn, kěyǐ zài shǒujī yínháng lǐ tiáozhěng. xiànzài qǐng nín shèzhì yí gè liù wèi shù de qǔkuǎn mìmǎ, hái yǒu yí gè wǎng yín dēnglù mìmǎ. qǔkuǎn mìmǎ qǐng búyào yòng shēngrì.",
+                "text_en": "Debit card annual fee is 10 yuan — waived if balance exceeds 300. Daily transfer limit is 50,000, adjustable in mobile banking. Now please set a 6-digit withdrawal PIN and an online banking password. Don't use your birthday for the PIN."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Set your PINs and ask about international transfers.",
+                "options": [
+                    {
+                        "text_zh": "好的，密码设好了。还有一个问题：我每个月需要往国外汇款，贵行支持跨境转账吗？手续费大概是多少？",
+                        "text_pinyin": "hǎo de, mìmǎ shè hǎo le. hái yǒu yí gè wèntí: wǒ měi gè yuè xūyào wǎng guówài huì kuǎn, guì háng zhīchí kuà jìng zhuǎn zhàng ma? shǒuxù fèi dàgài shì duōshǎo?",
+                        "text_en": "OK, PINs are set. One more question: I need to send money abroad monthly. Does your bank support international transfers? What are the fees?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Forward-thinking about regular international transfers — Manager Zhong opens a separate brochure. Cross-border banking is her specialty within a specialty."
+                    },
+                    {
+                        "text_zh": "好了。还需要做什么？",
+                        "text_pinyin": "hǎo le. hái xūyào zuò shénme?",
+                        "text_en": "Done. What else is needed?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She's almost finished. A few more signatures and you'll have a functioning account."
+                    },
+                    {
+                        "text_zh": "密码设好了。我能走了吗？",
+                        "text_pinyin": "mìmǎ shè hǎo le. wǒ néng zǒu le ma?",
+                        "text_en": "PINs are set. Can I go?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Almost. Manager Zhong has three more forms. Banking, like civilization, requires patience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "支持跨境汇款，但每人每年有五万美元的购汇限额。手续费根据金额不同，一般是汇款金额的千分之一，最低五十块。需要到柜台办理，暂时还不能在手机上操作。",
+                "text_pinyin": "zhīchí kuà jìng huì kuǎn, dàn měi rén měi nián yǒu wǔ wàn Měiyuán de gòu huì xiàn'é. shǒuxù fèi gēnjù jīn'é bùtóng, yìbān shì huì kuǎn jīn'é de qiān fēn zhī yī, zuìdī wǔshí kuài. xūyào dào guìtái bànlǐ, zànshí hái bù néng zài shǒujī shàng cāozuò.",
+                "text_en": "We support international transfers, but there's a $50,000 USD annual foreign exchange limit per person. Fees are typically 0.1% of the amount, minimum 50 yuan. Must be done at the counter — not available on mobile yet."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Clarify the annual limit and ask about the process.",
+                "options": [
+                    {
+                        "text_zh": "明白了，五万美元的年度限额。那每次来柜台汇款需要带什么证件？需要提前预约吗？还是直接来就可以？",
+                        "text_pinyin": "míngbai le, wǔ wàn Měiyuán de niándù xiàn'é. nà měi cì lái guìtái huì kuǎn xūyào dài shénme zhèngjiàn? xūyào tíqián yùyuē ma? háishì zhíjiē lái jiù kěyǐ?",
+                        "text_en": "Understood, $50,000 annual limit. What documents do I need each time I come to transfer? Do I need to make an appointment, or can I just walk in?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Process-oriented questions that save future trips — Manager Zhong writes you a checklist in her precise handwriting."
+                    },
+                    {
+                        "text_zh": "好的，我知道了。",
+                        "text_pinyin": "hǎo de, wǒ zhīdào le.",
+                        "text_en": "OK, I understand.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She notes it in your file for future reference."
+                    },
+                    {
+                        "text_zh": "五万够了。那就这样吧。",
+                        "text_pinyin": "wǔ wàn gòu le. nà jiù zhèyàng ba.",
+                        "text_en": "50,000 is enough. Let's leave it at that.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Sufficient for most needs. She finishes the final form."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每次汇款带护照和银行卡就行，不需要预约。好了，您的账户已经开通了。这是您的银行卡和回执单。手机银行的APP叫「建行生活」，您可以自己下载注册。还有什么问题吗？",
+                "text_pinyin": "měi cì huì kuǎn dài hùzhào hé yínháng kǎ jiù xíng, bù xūyào yùyuē. hǎo le, nín de zhànghù yǐjīng kāitōng le. zhè shì nín de yínháng kǎ hé huízhí dān. shǒujī yínháng de APP jiào「Jiànháng Shēnghuó」, nín kěyǐ zìjǐ xiàzài zhùcè. hái yǒu shénme wèntí ma?",
+                "text_en": "Just bring your passport and card each time — no appointment needed. OK, your account is now open. Here's your bank card and receipt. The mobile app is called 'CCB Life' — you can download and register yourself. Any other questions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and ask one final question.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢钟经理，您解释得特别清楚。最后一个问题：如果以后我离开中国，销户需要什么手续？我想提前了解一下。",
+                        "text_pinyin": "fēicháng gǎnxiè Zhōng jīnglǐ, nín jiěshì de tèbié qīngchǔ. zuìhòu yí gè wèntí: rúguǒ yǐhòu wǒ líkāi Zhōngguó, xiāo hù xūyào shénme shǒuxù? wǒ xiǎng tíqián liǎojiě yíxià.",
+                        "text_en": "Thank you so much Manager Zhong — your explanations were very clear. One last question: if I leave China someday, what's the process for closing the account? I'd like to know in advance.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Planning for departure before you've even deposited — Manager Zhong's respect deepens. A client who thinks in complete lifecycles is rare."
+                    },
+                    {
+                        "text_zh": "谢谢您！我这就去下载APP。",
+                        "text_pinyin": "xièxie nín! wǒ zhè jiù qù xiàzài APP.",
+                        "text_en": "Thank you! I'll download the app right away.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Proactive about digital setup. She hands you the card with both hands — a gesture of professional respect."
+                    },
+                    {
+                        "text_zh": "好了，谢谢。",
+                        "text_pinyin": "hǎo le, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She hands you the card and receipt. The wall clock marks the completion of another account — precisely on schedule."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "销户的话，余额清零以后带护照来就可以办理。非常感谢您选择建设银行。如果以后有任何问题，可以随时来找我。祝您在中国生活愉快。",
+                "text_pinyin": "xiāo hù de huà, yú'é qīng líng yǐhòu dài hùzhào lái jiù kěyǐ bànlǐ. fēicháng gǎnxiè nín xuǎnzé Jiànshè Yínháng. rúguǒ yǐhòu yǒu rènhé wèntí, kěyǐ suíshí lái zhǎo wǒ. zhù nín zài Zhōngguó shēnghuó yúkuài.",
+                "text_en": "For account closure, just clear the balance and bring your passport. Thank you for choosing CCB. If you have any questions in the future, feel free to come see me. Enjoy your life in China."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express gratitude and leave.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您的耐心和专业。我会推荐朋友也来贵行办理。再见！",
+                        "text_pinyin": "xièxie nín de nàixīn hé zhuānyè. wǒ huì tuījiàn péngyou yě lái guì háng bànlǐ. zàijiàn!",
+                        "text_en": "Thank you for your patience and professionalism. I'll recommend friends to your bank. Goodbye!",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "The promise of referrals — the highest compliment in Chinese banking culture. Manager Zhong's brass nameplate gleams a little brighter."
+                    },
+                    {
+                        "text_zh": "谢谢钟经理！再见。",
+                        "text_pinyin": "xièxie Zhōng jīnglǐ! zàijiàn.",
+                        "text_en": "Thank you Manager Zhong! Goodbye.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "A proper farewell. She straightens her nameplate and prepares for the next client."
+                    },
+                    {
+                        "text_zh": "好的，走了。",
+                        "text_pinyin": "hǎo de, zǒu le.",
+                        "text_en": "OK, I'm off.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She watches you leave, then files your paperwork with the precision of someone archiving history."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Opening a bank account in China as a foreigner requires a passport, valid visa, Chinese phone number, and address proof. The annual foreign exchange limit (购汇限额) of $50,000 USD applies per person per year. Major banks (建设银行, 工商银行, 中国银行, 农业银行) all offer similar international services. Using 贵行 (guì háng) is the formal way to say 'your bank.'"
+    }
+}

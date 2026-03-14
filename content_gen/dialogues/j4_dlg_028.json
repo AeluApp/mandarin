@@ -1,0 +1,83 @@
+{
+    "title": "The Corner Store",
+    "title_zh": "街角小店",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You duck into a tiny corner store to buy water. The owner, Uncle Qin, has run this shop for decades. The shelves are old but everything is neatly arranged. A small radio plays soft music.",
+        "setup_zh": "你走进一家小小的街角小店买水。老板秦叔叔开了这家店几十年了。货架很旧但东西摆得很整齐。一台小收音机在放轻音乐。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来坐坐，不用急着走。现在这种小店越来越少了，大家都去便利店和超市了。但我觉得，小店和便利店最大的区别不是东西，是人。你进便利店，没人跟你说话。",
+                "text_pinyin": "Jìnlái zuò zuò, bú yòng jí zhe zǒu. Xiànzài zhè zhǒng xiǎo diàn yuè lái yuè shǎo le, dàjiā dōu qù biànlì diàn hé chāoshì le. Dàn wǒ juéde, xiǎo diàn hé biànlì diàn zuì dà de qūbié bú shì dōngxi, shì rén. Nǐ jìn biànlì diàn, méi rén gēn nǐ shuōhuà.",
+                "text_en": "Come in and sit, no rush. These little shops are getting rarer — everyone goes to convenience stores and supermarkets. But I think the biggest difference between a corner shop and a convenience store isn't the goods, it's the people. You walk into a convenience store and nobody talks to you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the difference between small shops and chain stores.",
+                "options": [
+                    {
+                        "text_zh": "嗯，是啊。在便利店，你只是一个「顾客」。在你的店里，你是一个人，有名字，有故事。这种区别看起来很小，但其实很重要。",
+                        "text_pinyin": "Nǐ shuō de duì. Zài biànlì diàn, nǐ zhǐ shì yīge 'gùkè'. Zài nǐ de diàn lǐ, nǐ shì yīge rén, yǒu míngzì, yǒu gùshì. Zhè zhǒng qūbié kàn qǐlái hěn xiǎo, dàn qíshí hěn zhòngyào.",
+                        "text_en": "You're right. In a convenience store, you're just a 'customer.' In your shop, you're a person — with a name and a story. That difference seems small, but it's actually very important.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Names the distinction precisely — personhood vs. consumer identity."
+                    },
+                    {
+                        "text_zh": "你这里有充电线卖吗？",
+                        "text_pinyin": "Nǐ zhèlǐ yǒu chōngdiàn xiàn mài ma?",
+                        "text_en": "Do you sell charging cables?",
+                        "score": 0.0,
+                        "feedback": "Product question that proves his point about transactional behavior."
+                    },
+                    {
+                        "text_zh": "便利店确实挺方便的。",
+                        "text_pinyin": "Biànlì diàn quèshí tǐng fāngbiàn de.",
+                        "text_en": "Convenience stores are really convenient though.",
+                        "score": 0.0,
+                        "feedback": "Defends the alternative he's critiquing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对。我认识这条街上大部分的人。张大爷每天来买一包烟，我知道他女儿下个月结婚。隔壁的小姑娘考上了大学，她来买水的时候我祝贺了她。这些事情超市做不到。",
+                "text_pinyin": "Duì. Wǒ rènshi zhè tiáo jiē shàng dà bùfèn de rén. Zhāng dàye měi tiān lái mǎi yī bāo yān, wǒ zhīdào tā nǚ'ér xià ge yuè jiéhūn. Gébì de xiǎo gūniáng kǎo shàng le dàxué, tā lái mǎi shuǐ de shíhou wǒ zhùhè le tā. Zhèxiē shìqíng chāoshì zuò bú dào.",
+                "text_en": "Right. I know most people on this street. Uncle Zhang comes to buy a pack of cigarettes every day — I know his daughter's getting married next month. The girl next door got into university; when she came to buy water I congratulated her. A supermarket can't do these things."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his role in the community.",
+                "options": [
+                    {
+                        "text_zh": "您不只是开店，您是这条街的记忆。谁家有什么事您都知道。这种店关了，少的不是买东西的地方，是让人觉得被看见的地方。",
+                        "text_pinyin": "Nín bù zhǐ shì kāi diàn, nín shì zhè tiáo jiē de jìyì. Shuí jiā yǒu shénme shì nín dōu zhīdào. Zhè zhǒng diàn guān le, shǎo de bú shì mǎi dōngxi de dìfāng, shì ràng rén juéde bèi kàn jiàn de dìfāng.",
+                        "text_en": "You're not just running a shop — you're this street's memory. You know what's happening in every family. If shops like this close, what's lost isn't a place to buy things, it's a place where people feel seen.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Elevates the corner store to a community institution — being seen as essential."
+                    },
+                    {
+                        "text_zh": "你这里的水比超市贵吗？",
+                        "text_pinyin": "Nǐ zhèlǐ de shuǐ bǐ chāoshì guì ma?",
+                        "text_en": "Is water more expensive here than at a supermarket?",
+                        "score": 0.0,
+                        "feedback": "Price comparison when he's describing community bonds."
+                    },
+                    {
+                        "text_zh": "你每天几点开门？",
+                        "text_pinyin": "Nǐ měi tiān jǐ diǎn kāi mén?",
+                        "text_en": "What time do you open every day?",
+                        "score": 0.0,
+                        "feedback": "Hours question during a meaningful exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small neighborhood shops (小卖部 or 杂货店) have been a cornerstone of Chinese community life for generations. The shopkeeper often functions as an informal neighborhood hub — knowing everyone's business, celebrating their milestones, and providing a daily touchpoint. The rapid expansion of chain convenience stores and e-commerce threatens these human-scale commercial relationships."
+    }
+}

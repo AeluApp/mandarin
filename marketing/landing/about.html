@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Mandarin | Built by a Learner, for Learners</title>
-  <meta name="description" content="Mandarin was built by a learner who got frustrated by the gap between studying vocabulary and actually reading real Chinese. This is that story.">
-  <link rel="canonical" href="https://mandarinapp.com/about">
+  <title>About — Aelu | Built by a Learner, for Learners</title>
+  <meta name="description" content="Aelu was built by a learner who got frustrated by the gap between studying vocabulary and actually reading real Chinese. This is that story.">
+  <link rel="canonical" href="https://aeluapp.com/about">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="About — Mandarin | Built by a Learner, for Learners">
-  <meta property="og:description" content="Mandarin was built by a learner who wanted a study tool that turns every word you look up into real practice.">
+  <meta property="og:title" content="About — Aelu | Built by a Learner, for Learners">
+  <meta property="og:description" content="Aelu was built by a learner who wanted a study tool that turns every word you look up into real practice.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/about">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/about">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About — Mandarin | Built by a Learner, for Learners">
-  <meta name="twitter:description" content="Mandarin was built by a learner who wanted a study tool that actually works.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="About — Aelu | Built by a Learner, for Learners">
+  <meta name="twitter:description" content="Aelu was built by a learner who wanted a study tool that actually works.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +37,7 @@
       --color-secondary: #6A7A5A;
       --color-border: #D8D0C4;
       --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
       --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
       --radius: 0;
       --space-1: 0.25rem;
@@ -103,6 +104,9 @@
       font-weight: 600;
       color: var(--color-text);
       text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .nav-links {
@@ -251,11 +255,15 @@
     }
 
     .diff-item::before {
-      content: "\2713";
+      content: "";
       position: absolute;
       left: 0;
-      color: var(--color-accent);
-      font-weight: 600;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: 0.5;
     }
 
     .diff-item strong {
@@ -381,6 +389,85 @@
         opacity: 1;
       }
     }
+
+    /* -- Section illustrations -- */
+    .section-illustration {
+      display: block;
+      max-width: 460px;
+      width: 70%;
+      height: auto;
+      margin: 0 auto;
+      padding: var(--space-4) 0;
+      opacity: 0.5;
+      mix-blend-mode: multiply;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .section-illustration {
+        filter: invert(1) hue-rotate(180deg);
+        mix-blend-mode: screen;
+        opacity: 0.4;
+      }
+    }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
   </style>
 </head>
 <body>
@@ -388,13 +475,17 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about" aria-current="page">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -404,7 +495,7 @@
     <div class="container">
       <div class="hero-hanzi" aria-hidden="true">造</div>
       <h1>Built by a learner, for learners.</h1>
-      <p class="hero-sub">Mandarin exists because the tool we needed did not. So we opened a text editor and started building.</p>
+      <p class="hero-sub">Aelu exists because the tool we needed did not. So we opened a text editor and started building.</p>
     </div>
   </section>
 
@@ -418,9 +509,11 @@
       <p>HelloChinese, Hack Chinese, textbook courses came after that. Each solved one piece. None solved the problem that kept coming up every single day: studying vocabulary in one place and trying to read Chinese in another, with an enormous gap between those two experiences. Nothing connected studying to encountering. The act of looking up a word during reading and the act of drilling vocabulary were separate activities, happening in separate tools, with no feedback loop between them.</p>
       <p>That gap became the product. A text editor was opened and building began -- not a startup, not a side project, a tool that was actually needed. Python. SQLite. A spaced repetition scheduler adapted from FSRS, the open-source algorithm that represents the current state of memory science research. Drill types: not just flashcards, but tone pair discrimination, cloze deletion, audio-to-character matching, sentence construction, register-aware practice. Twenty-seven types in total, each targeting a specific cognitive skill, each grounded in research on how memory forms and retrieval strengthens.</p>
       <p>And then the core feature, the one that solved the original problem: the cleanup loop. Read Chinese in the graded reader. Look up a word you do not know. That word automatically enters your drill queue, scheduled across multiple drill types. The thing you encountered during reading becomes the thing you practice during drilling. The loop closes. Reading and practice are no longer separate activities.</p>
-      <p>Today, Mandarin is a complete adaptive drilling and reading system, used daily by its creators and a growing community of learners. When something does not work, it gets noticed. When something improves, that gets noticed too. The distance between the builders and the users is zero.</p>
+      <p>Today, Aelu is a complete adaptive drilling and reading system, used daily by its creators and a growing community of learners. When something does not work, it gets noticed. When something improves, that gets noticed too. The distance between the builders and the users is zero.</p>
     </div>
   </section>
+
+  <img src="/illustrations/reading-lamp.png" alt="" class="section-illustration">
 
   <!-- Philosophy -->
   <section class="philosophy">
@@ -437,7 +530,7 @@
         </div>
         <div class="value-card">
           <h3>Depth Over Breadth</h3>
-          <p>Mandarin does one language, deeply. Twenty-seven drill types, per-skill diagnostics, a graded reader with the cleanup loop, speaking drills with tone grading. Every feature exists because Chinese specifically demands it.</p>
+          <p>Aelu does one language, deeply. Twenty-seven drill types, per-skill diagnostics, a graded reader with the cleanup loop, speaking drills with tone grading. Every feature exists because Chinese specifically demands it.</p>
         </div>
         <div class="value-card">
           <h3>Earned Confidence</h3>
@@ -450,6 +543,8 @@
       </div>
     </div>
   </section>
+
+  <img src="/illustrations/stone-bridge.png" alt="" class="section-illustration">
 
   <!-- What Makes This Different -->
   <section class="different">
@@ -465,8 +560,8 @@
           <span>Recognition, production, listening, tones, cloze, register, sentence construction. The system picks the right type for each word.</span>
         </div>
         <div class="diff-item">
-          <strong>Zero AI at runtime</strong>
-          <span>Every drill, every score, every recommendation is deterministic. No hallucinations, no API dependency, no varying quality.</span>
+          <strong>Deterministic and instant</strong>
+          <span>Every drill, every score, every recommendation is computed by explicit algorithms. No variable quality, no external dependency.</span>
         </div>
         <div class="diff-item">
           <strong>Honest metrics</strong>
@@ -494,12 +589,12 @@
           <span class="number-label">drill types</span>
         </div>
         <div class="number-item">
-          <span class="number-value">HSK 1-6</span>
+          <span class="number-value">HSK 1-9</span>
           <span class="number-label">aligned curriculum</span>
         </div>
         <div class="number-item">
-          <span class="number-value">$0</span>
-          <span class="number-label">AI tokens per session</span>
+          <span class="number-value">10,000+</span>
+          <span class="number-label">vocabulary items</span>
         </div>
         <div class="number-item">
           <span class="number-value">1</span>
@@ -509,21 +604,39 @@
     </div>
   </section>
 
+  <img src="/illustrations/mountain-path.png" alt="" class="section-illustration">
+
+  <!-- Credits & Attribution -->
+  <section class="credits">
+    <div class="container">
+      <h2>Acknowledgments</h2>
+      <p>Aelu is built on the work of open-source communities and public educational standards. We are grateful to the following:</p>
+      <ul>
+        <li><strong>HSK Vocabulary:</strong> <a href="https://github.com/drkameleon/complete-hsk-vocabulary" rel="noopener">drkameleon/complete-hsk-vocabulary</a> (CC BY)</li>
+        <li><strong>HSK 3.0 Standards:</strong> Ministry of Education, People's Republic of China (GF 0025-2021)</li>
+        <li><strong>Dictionary Data:</strong> <a href="https://cc-cedict.org/" rel="noopener">CC-CEDICT</a> (CC BY-SA 3.0)</li>
+        <li><strong>Fonts:</strong> <a href="https://fonts.google.com/" rel="noopener">Google Fonts</a> &mdash; Cormorant Garamond, Source Serif 4, Noto Serif SC, Noto Sans SC (SIL Open Font License 1.1)</li>
+      </ul>
+      <p>Some educational content is generated using open-source language models running locally, then validated and reviewed before reaching learners.</p>
+      <p>Full dependency and license details: <a href="https://github.com/aeluapp/aelu/blob/main/THIRD_PARTY_LICENSES.md" rel="noopener">THIRD_PARTY_LICENSES.md</a></p>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section class="contact">
     <div class="container">
       <h2>Get in touch</h2>
       <p>Questions, feedback, or just want to talk about learning Chinese.</p>
-      <p><a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a></p>
+      <p><a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a></p>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
-      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
     </div>
   </footer>
 

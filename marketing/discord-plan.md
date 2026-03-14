@@ -1,4 +1,4 @@
-# Discord Strategy — Mandarin
+# Discord Strategy — Aelu
 
 Last updated: 2026-02-17
 
@@ -12,15 +12,15 @@ This document covers the complete Discord strategy: building our own server, eng
 
 **Ranked options:**
 
-1. **Mandarin Study Hall** — Immediately communicates purpose. "Study Hall" signals a calm, focused environment where adults come to work, not play. Matches the Civic Sanctuary aesthetic. No one confuses it with a social hangout or gaming server.
+1. **Aelu Study Hall** — Immediately communicates purpose. "Study Hall" signals a calm, focused environment where adults come to work, not play. Matches the Civic Sanctuary aesthetic. No one confuses it with a social hangout or gaming server.
 
-2. **Mandarin Practice Room** — "Practice Room" carries the same connotation as a music practice room: serious, personal, skill-building. Slightly less distinctive than Study Hall but equally clear.
+2. **Aelu Practice Room** — "Practice Room" carries the same connotation as a music practice room: serious, personal, skill-building. Slightly less distinctive than Study Hall but equally clear.
 
-3. **Mandarin Drills** — Direct product tie-in. Unambiguous about what happens here. Risks sounding clinical to people unfamiliar with the app's terminology.
+3. **Aelu Drills** — Direct product tie-in. Unambiguous about what happens here. Risks sounding clinical to people unfamiliar with the app's terminology.
 
 4. **The Cleanup Loop** — Insider reference that resonates with existing users and creates curiosity for newcomers. Downside: means nothing until someone explains it. Better suited as a channel name than a server name.
 
-**Recommendation:** Mandarin Study Hall.
+**Recommendation:** Aelu Study Hall.
 
 **Icon design description:**
 
@@ -28,11 +28,11 @@ A square icon with a warm stone background (#E8DFD0) featuring a single Chinese 
 
 **Banner description:**
 
-A wide horizontal banner (960x540px) with a warm stone gradient background transitioning from light (#F0E8DD) on the left to slightly deeper (#E0D4C4) on the right. On the left third, the text "Mandarin Study Hall" in Cormorant Garamond, terracotta color (#C96B4F). Below it, in Source Sans 3 regular, smaller: "Honest practice. Real progress." On the right side, a subtle arrangement of faded Chinese characters (various HSK levels) in a lighter shade of the stone color, creating a texture without distraction. No illustrations, no mascots, no screenshots. The feel should be: the foyer of a well-lit library.
+A wide horizontal banner (960x540px) with a warm stone gradient background transitioning from light (#F0E8DD) on the left to slightly deeper (#E0D4C4) on the right. On the left third, the text "Aelu Study Hall" in Cormorant Garamond, terracotta color (#C96B4F). Below it, in Source Sans 3 regular, smaller: "Honest practice. Real progress." On the right side, a subtle arrangement of faded Chinese characters (various HSK levels) in a lighter shade of the stone color, creating a texture without distraction. No illustrations, no mascots, no screenshots. The feel should be: the foyer of a well-lit library.
 
 **Server description (for Discord Discovery):**
 
-"A study community for adults learning Mandarin Chinese. Daily vocabulary, weekly challenges, HSK prep discussion, and honest progress tracking. Built around the Mandarin app — but open to anyone serious about learning. No gamification, no streak anxiety, no gatekeeping."
+"A study community for adults learning Mandarin Chinese. Daily vocabulary, weekly challenges, HSK prep discussion, and honest progress tracking. Built around the Aelu app — but open to anyone serious about learning. No gamification, no streak anxiety, no gatekeeping."
 
 ---
 
@@ -48,7 +48,7 @@ A wide horizontal banner (960x540px) with a warm stone gradient background trans
 **#introductions**
 - Purpose: New members introduce themselves. Keeps the welcome channel clean while giving everyone a low-stakes first post.
 - Who posts: Anyone.
-- Example content: "Hey, I'm Maria. HSK 2, based in Toronto. Studying about 30 minutes a day after work. My listening is way behind my reading and I'm trying to fix that. Using Anki + the Mandarin app."
+- Example content: "Hey, I'm Maria. HSK 2, based in Toronto. Studying about 30 minutes a day after work. My listening is way behind my reading and I'm trying to fix that. Using Anki + the Aelu app."
 
 **#roles**
 - Purpose: Self-assign roles via reaction roles (Carl-bot). Contains one pinned message with reaction emoji mapped to roles.
@@ -94,7 +94,7 @@ A wide horizontal banner (960x540px) with a warm stone gradient background trans
 #### Category: The App
 
 **#feedback**
-- Purpose: Feature requests, bug reports, and suggestions for the Mandarin app. the team reads everything here.
+- Purpose: Feature requests, bug reports, and suggestions for the Aelu app. the team reads everything here.
 - Who posts: Anyone who uses the app.
 - Example content: "Feature request: would be great to see a history of my weakest items over time, not just the current snapshot. Want to know if my tone accuracy is trending up."
 
@@ -302,7 +302,7 @@ Rather than relying on a third-party vocabulary bot that may not support Chinese
 
 **Cost:** Free (it is a webhook, not a bot subscription).
 
-**Why not World Word Daily or a generic bot:** Most vocabulary bots support common European languages well but have limited or no Chinese support, especially for pinyin formatting, tone marks, and HSK alignment. A custom webhook gives full control over formatting and content selection, and the vocabulary can be drawn directly from the app's 299-item seed list.
+**Why not World Word Daily or a generic bot:** Most vocabulary bots support common European languages well but have limited or no Chinese support, especially for pinyin formatting, tone marks, and HSK alignment. A custom webhook gives full control over formatting and content selection, and the vocabulary can be drawn directly from the app's 10,000+ item library (HSK 1-9).
 
 ---
 
@@ -312,9 +312,9 @@ The following is the complete welcome message, pinned in #welcome. New members a
 
 ---
 
-**Welcome to Mandarin Study Hall.**
+**Welcome to Aelu Study Hall.**
 
-This is a study community for adults learning Mandarin Chinese. It was started by the team behind the Mandarin app. The server is open to anyone serious about learning — you do not need to use the app to be here.
+This is a study community for adults learning Mandarin Chinese. It was started by the team behind the Aelu app. The server is open to anyone serious about learning — you do not need to use the app to be here.
 
 **Getting Started**
 
@@ -350,7 +350,7 @@ This is a study community for adults learning Mandarin Chinese. It was started b
 
 **About the App**
 
-Mandarin is an adaptive drilling and reading system for Mandarin Chinese. 27 drill types, honest per-skill diagnostics, FSRS-based spaced repetition, and a graded reader where every word you look up becomes practice. Free for HSK 1-2 content, $12/month for full access. Learn more: [link]
+Aelu is an adaptive drilling and reading system for Mandarin Chinese. 27 drill types, honest per-skill diagnostics, FSRS-based spaced repetition, and a graded reader where every word you look up becomes practice. Free for HSK 1-2 content, $14.99/month for full access. Learn more: [link]
 
 This server is not a sales funnel. It is a study community. The app comes up naturally because the team uses it and builds it, but nobody here is required or expected to use it.
 
@@ -406,7 +406,7 @@ This server is not a sales funnel. It is a study community. The app comes up nat
 
 **Weekly summary:** Every Sunday, the team posts a recap of the 7 words from that week in a single message. Members who used all 7 in sentences get a shout-out (not a prize — just recognition).
 
-**Word selection:** Drawn from the app's 299-item seed list (HSK 1-3), cycling through in rough HSK order. After Day 299, the cycle restarts with new example sentences, or moves to HSK 4+ if the community has leveled up.
+**Word selection:** Drawn from the app's 10,000+ item library, starting with HSK 1-3 and cycling through in rough HSK order. As the community levels up, the daily words progress into higher HSK tiers.
 
 ---
 
@@ -450,7 +450,7 @@ No prizes. No penalties. Just accountability.
 
 #### Monthly Events
 
-**AMA with the Mandarin Team (last Friday of each month, 7:00 PM ET, 45 min, voice channel)**
+**AMA with the Aelu Team (last Friday of each month, 7:00 PM ET, 45 min, voice channel)**
 - the team answers questions about the app roadmap, his own learning progress, building-in-public decisions, and Chinese learning strategy.
 - Questions collected in advance via a thread in #feedback (posted 3 days before the AMA).
 - Voice channel, but the team types answers for key points so they are searchable later.
@@ -627,7 +627,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hey everyone. We're the team behind Mandarin — we've been studying Mandarin for [X months/years], currently around HSK 3. We're also building a Mandarin learning app, which is both our project and our daily study tool. Mostly here to learn from people who are further along, answer questions when we can, and talk about the mechanics of how we actually get better at this language. Happy to be here."
+"Hey everyone. We're the team behind Aelu — we've been studying Mandarin for [X months/years], currently around HSK 3. We're also building a Mandarin learning app, which is both our project and our daily study tool. Mostly here to learn from people who are further along, answer questions when we can, and talk about the mechanics of how we actually get better at this language. Happy to be here."
 
 ---
 
@@ -643,7 +643,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Learning Mandarin, currently around HSK 3 level. My listening and speaking are behind my reading, so I'm here mainly for voice practice. Based in [timezone]. Native English speaker — happy to help with English questions too. Looking forward to practicing with everyone."
+"Hi, we're the Aelu team. Learning Mandarin, currently around HSK 3 level. My listening and speaking are behind my reading, so I'm here mainly for voice practice. Based in [timezone]. Native English speaker — happy to help with English questions too. Looking forward to practicing with everyone."
 
 ---
 
@@ -654,12 +654,12 @@ The following servers are listed in priority order. For each, the team should jo
 - **Focus:** Immersion-based language learning using the Migaku browser extension and tools. Chinese is one of several supported languages with dedicated channels.
 - **Activity level:** Moderate to high. Chinese channels are less active than Japanese channels but still have regular discussion.
 - **Self-promotion rules:** Self-promotion of competing tools is likely unwelcome. Resource sharing is acceptable if framed as helpful.
-- **Engagement strategy:** The Migaku community values immersion and input-based learning. the team should engage on the topic of reading comprehension and the gap between passive input and active recall — a topic where the Mandarin app's approach (the cleanup loop) is highly relevant without being promotional. Discuss how reading feeds into drilling. Share observations about retention from reading vs. from flashcards. This audience respects data and methodology.
+- **Engagement strategy:** The Migaku community values immersion and input-based learning. the team should engage on the topic of reading comprehension and the gap between passive input and active recall — a topic where the Aelu app's approach (the cleanup loop) is highly relevant without being promotional. Discuss how reading feeds into drilling. Share observations about retention from reading vs. from flashcards. This audience respects data and methodology.
 - **Priority:** 3
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Studying Mandarin, currently HSK 3-ish. I'm interested in the intersection of immersion and structured review — specifically how reading Chinese content can feed back into active recall practice. Also building a Mandarin learning tool on the side. Here to learn from the community and share what I'm finding in my own study."
+"Hi, we're the Aelu team. Studying Mandarin, currently HSK 3-ish. I'm interested in the intersection of immersion and structured review — specifically how reading Chinese content can feed back into active recall practice. Also building a Chinese learning tool on the side. Here to learn from the community and share what I'm finding in my own study."
 
 ---
 
@@ -675,7 +675,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hey, we're the Mandarin team. Working through Mandarin at around HSK 3. I do a mix of immersion and structured drilling — interested in how they complement each other. Specifically trying to figure out how to measure whether my input is actually converting to usable skill, beyond just counting hours. Looking forward to the discussions here."
+"Hey, we're the Aelu team. Working through Mandarin at around HSK 3. I do a mix of immersion and structured drilling — interested in how they complement each other. Specifically trying to figure out how to measure whether my input is actually converting to usable skill, beyond just counting hours. Looking forward to the discussions here."
 
 ---
 
@@ -691,7 +691,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Primary language right now is Mandarin Chinese, currently HSK 3. I'm interested in the methodology side of language learning — spaced repetition scheduling, interleaving, how to measure actual skill gaps vs. perceived progress. Also building a Mandarin study tool, which gives me a weird dual perspective of being both the student and the system designer. Happy to discuss methods with anyone."
+"Hi, we're the Aelu team. Primary language right now is Mandarin Chinese, currently HSK 3. I'm interested in the methodology side of language learning — spaced repetition scheduling, interleaving, how to measure actual skill gaps vs. perceived progress. Also building a Chinese study tool, which gives me a weird dual perspective of being both the student and the system designer. Happy to discuss methods with anyone."
 
 ---
 
@@ -707,7 +707,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Learning Mandarin, around HSK 3. Here for the Chinese learning channels — happy to share study tips and learn from more advanced speakers. Based in [timezone], studying most evenings."
+"Hi, we're the Aelu team. Learning Mandarin, around HSK 3. Here for the Chinese learning channels — happy to share study tips and learn from more advanced speakers. Based in [timezone], studying most evenings."
 
 ---
 
@@ -718,12 +718,12 @@ The following servers are listed in priority order. For each, the team should jo
 - **Focus:** Community around the Chinese Zero to Hero video course platform. Students at various levels discussing course content, grammar questions, and study progress.
 - **Activity level:** Low to moderate. Small but engaged community.
 - **Self-promotion rules:** Likely tolerant of tool discussion since the community is small and collegial. Direct advertising of a competing product would be inappropriate; framing as a complementary tool is acceptable.
-- **Engagement strategy:** Chinese Zero to Hero is explicitly listed as a complementary tool in the positioning document ("we are the gym; they are the coach"). the team should engage as a fellow learner who uses CZ2H courses and supplements with his own drilling tool. This is a natural partnership opportunity — students who watch the course videos but struggle to retain what they learned are exactly the Mandarin app's target user. Mention the app only when someone describes the exact problem it solves.
+- **Engagement strategy:** Chinese Zero to Hero is explicitly listed as a complementary tool in the positioning document ("we are the gym; they are the coach"). the team should engage as a fellow learner who uses CZ2H courses and supplements with his own drilling tool. This is a natural partnership opportunity — students who watch the course videos but struggle to retain what they learned are exactly the Aelu app's target user. Mention the app only when someone describes the exact problem it solves.
 - **Priority:** 3
 
 **Team introduction:**
 
-"Hey, we're the Mandarin team. Using CZ2H for structured grammar and instruction, supplementing with my own drilling practice. Currently around HSK 3. I've found the combination of video instruction plus targeted drilling works well for me — the courses explain the patterns, and then I drill them until they stick. Happy to discuss what's working and what isn't."
+"Hey, we're the Aelu team. Using CZ2H for structured grammar and instruction, supplementing with my own drilling practice. Currently around HSK 3. I've found the combination of video instruction plus targeted drilling works well for me — the courses explain the patterns, and then I drill them until they stick. Happy to discuss what's working and what isn't."
 
 ---
 
@@ -739,7 +739,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Been listening to the podcast and decided to join the community. We're learning Mandarin — around HSK 3 — and also building a study tool as a small team, which means we spend a lot of time thinking about why certain practice methods work and others don't. Looking forward to being part of the conversations here."
+"Hi, we're the Aelu team. Been listening to the podcast and decided to join the community. We're learning Mandarin — around HSK 3 — and also building a study tool as a small team, which means we spend a lot of time thinking about why certain practice methods work and others don't. Looking forward to being part of the conversations here."
 
 ---
 
@@ -755,7 +755,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Studying Mandarin Chinese, around HSK 3. Looking for speaking practice — my reading is ahead of my speaking and I need to close that gap. Happy to help with English in return."
+"Hi, we're the Aelu team. Studying Mandarin Chinese, around HSK 3. Looking for speaking practice — my reading is ahead of my speaking and I need to close that gap. Happy to help with English in return."
 
 ---
 
@@ -771,7 +771,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Self-studying Mandarin, around HSK 3. Joined for the voice practice events — trying to get more speaking reps in. Based in [timezone]."
+"Hi, we're the Aelu team. Self-studying Mandarin, around HSK 3. Joined for the voice practice events — trying to get more speaking reps in. Based in [timezone]."
 
 ---
 
@@ -787,7 +787,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Primarily studying Mandarin Chinese right now — HSK 3 level. Interested in the science of language learning, especially spaced repetition and how to measure actual progress vs. perceived progress. Happy to join Chinese practice sessions and general methodology discussions."
+"Hi, we're the Aelu team. Primarily studying Mandarin Chinese right now — HSK 3 level. Interested in the science of language learning, especially spaced repetition and how to measure actual progress vs. perceived progress. Happy to join Chinese practice sessions and general methodology discussions."
 
 ---
 
@@ -803,7 +803,7 @@ The following servers are listed in priority order. For each, the team should jo
 
 **Team introduction:**
 
-"Hi, we're the Mandarin team. Learning Mandarin (HSK 3). Native English speaker. Looking for casual language exchange — happy to help with English."
+"Hi, we're the Aelu team. Learning Mandarin (HSK 3). Native English speaker. Looking for casual language exchange — happy to help with English."
 
 ---
 
@@ -1143,7 +1143,7 @@ Track on the first of each month.
 |--------|---------------|----------------|----------------|
 | Member retention (30-day return rate) | Members who were active in both current and previous month / members active in previous month | N/A (first month) | >60% |
 | Top contributors | Rank members by message count + helpfulness (qualitative) | Identify top 5 | Identify potential moderators |
-| App signups from Discord | Create a unique invite link (mandarin.app/?ref=discord) or UTM parameter. Track in analytics. | 3-5 | 5-10 |
+| App signups from Discord | Create a unique invite link (aelu.app/?ref=discord) or UTM parameter. Track in analytics. | 3-5 | 5-10 |
 | Sentiment | Qualitative: read through the week's conversations. Are they positive? Constructive? Are people helping each other? | Positive | Positive + self-sustaining |
 | Voice channel usage | Number of unique members who joined a voice channel that month | 3-5 | 8-15 |
 | Office Hours attendance | Count of attendees per session | 2-4 | 5-10 |
@@ -1185,7 +1185,7 @@ Track on the first of each month.
 
 - **Discord Server Insights:** Built into Discord for servers with Community features enabled. Provides member count, message volume, and retention data. Enable Community in Server Settings.
 - **Spreadsheet:** Simple Google Sheet or CSV tracking weekly and monthly numbers. the team fills it in every Sunday.
-- **UTM link:** Create `mandarin.app/?ref=discord` for any app links shared in the server. Track conversions in the app's analytics.
+- **UTM link:** Create `aelu.app/?ref=discord` for any app links shared in the server. Track conversions in the app's analytics.
 - **Manual observation:** No substitute for actually reading the conversations. 5 minutes every evening scanning channels gives qualitative signal that no dashboard captures.
 
 ---

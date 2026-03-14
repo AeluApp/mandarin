@@ -1,0 +1,196 @@
+{
+    "title": "The Passport Pilgrim Returns",
+    "title_zh": "护照朝圣者归来",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_emergency_6_02_v0",
+    "tree": {
+        "setup": "The consular affairs section of an embassy, where the waiting room has the hushed atmosphere of a library devoted to the single subject of paperwork. Vice Consul Ms. Dai sits behind bulletproof glass that cannot diminish her warmth — she has processed emergency passport replacements for nine years and approaches each case as both a bureaucratic procedure and a small human crisis. Her window has a potted orchid that she tends between appointments, a reminder that beautiful things can grow in bureaucratic environments.",
+        "setup_zh": "大使馆的领事事务部，候诊室有着一种图书馆般的安静氛围——一座只研究文书工作这一课题的图书馆。戴副领事坐在防弹玻璃后面，但玻璃无法减弱她的温暖——她处理紧急护照补办已有九年，把每一个案例都视为既是行政程序又是一个小小的人生危机。她的窗口有一盆兰花，她在预约间隙照料它，提醒着美好的事物也能在行政环境中生长。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问您是来办理什么业务的？请把您的预约号或者相关材料给我看看。",
+                "text_pinyin": "nín hǎo, qǐngwèn nín shì lái bànlǐ shénme yèwù de? qǐng bǎ nín de yùyuē hào huòzhě xiāngguān cáiliào gěi wǒ kànkan.",
+                "text_en": "Hello, what service are you here for? Please show me your appointment number or relevant documents."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your situation with the lost passport.",
+                "options": [
+                    {
+                        "text_zh": "戴副领事，您好。我的护照在出租车里遗失了。我已经在当地派出所报了案，这是报案单。我需要申请一本临时旅行证件，因为我的签证下周到期，必须在到期之前出境。这是我的身份证明材料和护照照片的备份。",
+                        "text_pinyin": "Dài fù lǐngshì, nín hǎo. wǒ de hùzhào zài chūzū chē lǐ yíshī le. wǒ yǐjīng zài dāngdì pàichūsuǒ bào le àn, zhè shì bào àn dān. wǒ xūyào shēnqǐng yì běn línshí lǚxíng zhèngjiàn, yīnwèi wǒ de qiānzhèng xià zhōu dào qī, bìxū zài dào qī zhīqián chū jìng. zhè shì wǒ de shēnfèn zhèngmíng cáiliào hé hùzhào zhàopiàn de bèifèn.",
+                        "text_en": "Vice Consul Dai, hello. I lost my passport in a taxi. I've filed a police report at the local station — here's the report. I need to apply for a temporary travel document because my visa expires next week, and I must leave the country before then. Here are my identity documents and backup passport photos.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Police report, timeline urgency, and prepared documentation — Ms. Dai's orchid practically blooms with approval. This is the rare visitor who has done their homework."
+                    },
+                    {
+                        "text_zh": "我的护照丢了。我需要补办。",
+                        "text_pinyin": "wǒ de hùzhào diū le. wǒ xūyào bǔ bàn.",
+                        "text_en": "I lost my passport. I need a replacement.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She'll need all the details. Her questions come with diplomatic precision."
+                    },
+                    {
+                        "text_zh": "我有紧急情况。我的护照不见了，签证快到期了。",
+                        "text_pinyin": "wǒ yǒu jǐnjí qíngkuàng. wǒ de hùzhào bújiàn le, qiānzhèng kuài dào qī le.",
+                        "text_en": "I have an emergency. My passport is missing and my visa is about to expire.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The urgency is clear. She shifts into expedited processing mode."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "您的准备很充分，谢谢。签证下周到期的话确实需要尽快办理。您有两个选项：第一是申请临时旅行证，处理时间最快两个工作日，只能用于回国；第二是申请正式护照补办，需要四到六周。考虑到您的时间，我建议先办临时旅行证。您需要填写一份领事证件申请表。",
+                "text_pinyin": "nín de zhǔnbèi hěn chōngfèn, xièxie. qiānzhèng xià zhōu dào qī de huà quèshí xūyào jǐnkuài bànlǐ. nín yǒu liǎng gè xuǎnxiàng: dì yī shì shēnqǐng línshí lǚxíng zhèng, chǔlǐ shíjiān zuìkuài liǎng gè gōngzuò rì, zhǐ néng yòng yú huí guó; dì èr shì shēnqǐng zhèngshì hùzhào bǔ bàn, xūyào sì dào liù zhōu. kǎolǜ dào nín de shíjiān, wǒ jiànyì xiān bàn línshí lǚxíng zhèng. nín xūyào tiánxiě yí fèn lǐngshì zhèngjiàn shēnqǐng biǎo.",
+                "text_en": "Your preparation is thorough — thank you. With the visa expiring next week, we need to move quickly. You have two options: first, a temporary travel document — fastest processing is two business days, valid only for returning home; second, a full passport replacement, which takes 4-6 weeks. Given your timeline, I recommend the temporary travel document. You'll need to fill out a consular document application form."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose the temporary document and ask about requirements.",
+                "options": [
+                    {
+                        "text_zh": "那就先办临时旅行证。请问除了申请表以外，还需要什么材料？费用是多少？另外，拿到临时旅行证以后，我还需要去中国的出入境管理部门办什么手续吗？比如需要注销原来的签证吗？",
+                        "text_pinyin": "nà jiù xiān bàn línshí lǚxíng zhèng. qǐngwèn chúle shēnqǐng biǎo yǐwài, hái xūyào shénme cáiliào? fèiyòng shì duōshǎo? lìngwài, ná dào línshí lǚxíng zhèng yǐhòu, wǒ hái xūyào qù Zhōngguó de chūrùjìng guǎnlǐ bùmén bàn shénme shǒuxù ma? bǐrú xūyào zhùxiāo yuánlái de qiānzhèng ma?",
+                        "text_en": "Let's go with the temporary document. Besides the application form, what materials do I need? How much does it cost? Also, after I get the temporary document, do I need to visit Chinese immigration for any procedures? For example, do I need to cancel the original visa?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Thinking about the Chinese side of the process — Ms. Dai is impressed. Most people forget they need to deal with both their embassy and Chinese exit procedures."
+                    },
+                    {
+                        "text_zh": "临时旅行证。需要什么？",
+                        "text_pinyin": "línshí lǚxíng zhèng. xūyào shénme?",
+                        "text_en": "Temporary travel document. What do I need?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She lists the requirements systematically."
+                    },
+                    {
+                        "text_zh": "最快的那个。赶紧办吧。",
+                        "text_pinyin": "zuìkuài de nàge. gǎnjǐn bàn ba.",
+                        "text_en": "The fastest one. Let's hurry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She understands the urgency but the process has steps that cannot be skipped. The orchid watches patiently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "需要的材料：申请表、两张近期护照照片、警方报案单原件、身份证明文件——驾照或者出生证明都可以、还有机票预订确认。费用是三十美元。拿到旅行证以后，确实需要去中国出入境管理局办理一个出境手续——因为您原来的签证随护照一起丢了，需要在旅行证上补一个出境许可。那个一般当天就能办好。",
+                "text_pinyin": "xūyào de cáiliào: shēnqǐng biǎo, liǎng zhāng jìnqī hùzhào zhàopiàn, jǐngfāng bào àn dān yuánjiàn, shēnfèn zhèngmíng wénjiàn——jiàzhào huòzhě chūshēng zhèngmíng dōu kěyǐ, hái yǒu jīpiào yùdìng quèrèn. fèiyòng shì sānshí Měiyuán. ná dào lǚxíng zhèng yǐhòu, quèshí xūyào qù Zhōngguó chūrùjìng guǎnlǐjú bànlǐ yí gè chūjìng shǒuxù——yīnwèi nín yuánlái de qiānzhèng suí hùzhào yìqǐ diū le, xūyào zài lǚxíng zhèng shàng bǔ yí gè chūjìng xǔkě. nàge yìbān dāngtiān jiù néng bàn hǎo.",
+                "text_en": "Required materials: application form, two recent passport photos, original police report, identity document — driver's license or birth certificate works, and flight booking confirmation. Fee is $30. After receiving the travel document, you do need to visit China's immigration bureau for exit procedures — since your visa was lost with the passport, you'll need an exit permit added to the travel document. That's usually same-day."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the timeline and confirm the plan.",
+                "options": [
+                    {
+                        "text_zh": "好的，材料我基本都有，机票我今天回去就订。请问如果我今天提交申请，最快什么时候能拿到旅行证？我想确认一下整个流程的时间线：提交申请、拿到旅行证、去出入境管理局办出境许可、然后出境。我需要安排在签证到期之前完成所有步骤。",
+                        "text_pinyin": "hǎo de, cáiliào wǒ jīběn dōu yǒu, jīpiào wǒ jīntiān huíqù jiù dìng. qǐngwèn rúguǒ wǒ jīntiān tíjiāo shēnqǐng, zuìkuài shénme shíhòu néng ná dào lǚxíng zhèng? wǒ xiǎng quèrèn yíxià zhěnggè liúchéng de shíjiān xiàn: tíjiāo shēnqǐng, ná dào lǚxíng zhèng, qù chūrùjìng guǎnlǐjú bàn chūjìng xǔkě, ránhòu chūjìng. wǒ xūyào ānpái zài qiānzhèng dào qī zhīqián wánchéng suǒyǒu bùzhòu.",
+                        "text_en": "OK, I have most materials — I'll book the flight today. If I submit today, when is the earliest I can get the travel document? I want to confirm the full timeline: submit application, receive document, visit immigration for exit permit, then depart. I need to complete everything before my visa expires.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Full process timeline mapping — Ms. Dai appreciates a visitor who thinks in sequential steps. She draws out the timeline on a notepad."
+                    },
+                    {
+                        "text_zh": "最快几天能拿到？",
+                        "text_pinyin": "zuìkuài jǐ tiān néng ná dào?",
+                        "text_en": "How many days at the fastest?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She gives the timeline. Two business days for the document, plus one for immigration."
+                    },
+                    {
+                        "text_zh": "来得及吗？我真的很着急。",
+                        "text_pinyin": "lái de jí ma? wǒ zhēn de hěn zháojí.",
+                        "text_en": "Will there be enough time? I'm really anxious.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She reassures you — with today's submission, the timeline is tight but feasible. The orchid sways gently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果今天提交全部材料，后天也就是周三可以取旅行证。然后周四去出入境管理局，当天办好。周五就可以出境。签证下周一到期的话，时间是够的，但是不能有任何延误。建议您今天就把机票订好，订周五或者周末的。表格我现在给您，您可以在这里填。",
+                "text_pinyin": "rúguǒ jīntiān tíjiāo quánbù cáiliào, hòutiān yě jiùshì zhōusān kěyǐ qǔ lǚxíng zhèng. ránhòu zhōusì qù chūrùjìng guǎnlǐjú, dāngtiān bàn hǎo. zhōuwǔ jiù kěyǐ chūjìng. qiānzhèng xià zhōuyī dào qī de huà, shíjiān shì gòu de, dànshì bù néng yǒu rènhé yánwù. jiànyì nín jīntiān jiù bǎ jīpiào dìng hǎo, dìng zhōuwǔ huòzhě zhōumò de. biǎogé wǒ xiànzài gěi nín, nín kěyǐ zài zhèlǐ tián.",
+                "text_en": "If you submit everything today, the travel document will be ready Wednesday — the day after tomorrow. Then visit immigration Thursday, same-day processing. You can depart Friday. With visa expiring next Monday, the timing works, but there's zero room for delay. I suggest booking Friday or weekend flights today. Here's the form — you can fill it out here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan and ask one final question.",
+                "options": [
+                    {
+                        "text_zh": "好的，周三取旅行证，周四办出境许可，周五出境。时间紧但是够了。最后一个问题：回国以后，补办正式护照的流程是什么？需要从大使馆这边转什么材料吗？还是回国以后直接去当地的出入境管理部门就行？",
+                        "text_pinyin": "hǎo de, zhōusān qǔ lǚxíng zhèng, zhōusì bàn chūjìng xǔkě, zhōuwǔ chūjìng. shíjiān jǐn dànshì gòu le. zuìhòu yí gè wèntí: huí guó yǐhòu, bǔ bàn zhèngshì hùzhào de liúchéng shì shénme? xūyào cóng dàshǐguǎn zhè biān zhuǎn shénme cáiliào ma? háishì huí guó yǐhòu zhíjiē qù dāngdì de chūrùjìng guǎnlǐ bùmén jiù xíng?",
+                        "text_en": "OK — travel document Wednesday, exit permit Thursday, depart Friday. Tight but feasible. One last question: after returning home, what's the process for getting a full passport replacement? Do I need any materials transferred from the embassy, or can I go directly to my local passport office?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Planning beyond the immediate crisis — Ms. Dai provides a brief roadmap for the full replacement. The orchid's quiet persistence feels like an appropriate metaphor for your situation."
+                    },
+                    {
+                        "text_zh": "明白了。周三来取。谢谢戴副领事！",
+                        "text_pinyin": "míngbai le. zhōusān lái qǔ. xièxie Dài fù lǐngshì!",
+                        "text_en": "Understood. I'll come Wednesday. Thank you Vice Consul Dai!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clear and grateful. She hands you the form and a pen."
+                    },
+                    {
+                        "text_zh": "好的。表给我。",
+                        "text_pinyin": "hǎo de. biǎo gěi wǒ.",
+                        "text_en": "OK. Give me the form.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She passes the form under the glass. Behind her, the orchid continues its quiet ministry of growth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "回国以后带着临时旅行证、报案单和这里的申请回执，直接去当地的出入境管理部门就可以办正式护照。一般十个工作日。好了，表格填好以后交到二号窗口，今天的手续就完成了。祝您一切顺利。记住：周三早上九点以后来取。",
+                "text_pinyin": "huí guó yǐhòu dài zhe línshí lǚxíng zhèng, bào àn dān hé zhèlǐ de shēnqǐng huízhí, zhíjiē qù dāngdì de chūrùjìng guǎnlǐ bùmén jiù kěyǐ bàn zhèngshì hùzhào. yìbān shí gè gōngzuò rì. hǎo le, biǎogé tián hǎo yǐhòu jiāo dào èr hào chuāngkǒu, jīntiān de shǒuxù jiù wánchéng le. zhù nín yíqiè shùnlì. jì zhù: zhōusān zǎoshang jiǔ diǎn yǐhòu lái qǔ.",
+                "text_en": "After returning home, bring the travel document, police report, and application receipt from here to your local passport office for a full replacement. Usually 10 business days. OK, submit the completed form at window 2 and today's procedures are done. Wishing you smooth travels. Remember: pick up after 9 AM Wednesday."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and leave.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢戴副领事，您的专业和耐心让我在这个紧张的情况下安心了很多。整个流程我都清楚了：今天提交、周三取证、周四办出境、周五回国、然后补办正式护照。真的非常感谢！",
+                        "text_pinyin": "fēicháng gǎnxiè Dài fù lǐngshì, nín de zhuānyè hé nàixīn ràng wǒ zài zhège jǐnzhāng de qíngkuàng xià ānxīn le hěn duō. zhěnggè liúchéng wǒ dōu qīngchǔ le: jīntiān tíjiāo, zhōusān qǔ zhèng, zhōusì bàn chūjìng, zhōuwǔ huí guó, ránhòu bǔ bàn zhèngshì hùzhào. zhēn de fēicháng gǎnxiè!",
+                        "text_en": "Thank you so much Vice Consul Dai — your professionalism and patience have really put my mind at ease in this stressful situation. I'm clear on the full process: submit today, pick up Wednesday, exit permit Thursday, return home Friday, then apply for full replacement. I'm truly grateful!",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Summarizing the full process back with genuine gratitude — Ms. Dai smiles behind the bulletproof glass. The orchid has gained a leaf since this morning."
+                    },
+                    {
+                        "text_zh": "谢谢！周三见。",
+                        "text_pinyin": "xièxie! zhōusān jiàn.",
+                        "text_en": "Thanks! See you Wednesday.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "She nods. Wednesday it is."
+                    },
+                    {
+                        "text_zh": "好的。希望一切顺利。",
+                        "text_pinyin": "hǎo de. xīwàng yíqiè shùnlì.",
+                        "text_en": "OK. Hope everything goes smoothly.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "It will, if you follow the timeline. Ms. Dai turns to tend the orchid before the next appointment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Lost passport procedures in China involve two parallel tracks: your country's embassy (大使馆) for a replacement document, and China's Exit-Entry Administration (出入境管理局) for exit procedures. A police report (报案单) is required for both. Temporary travel documents (临时旅行证) are only valid for returning to your home country. Always keep digital copies of your passport."
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "title": "Voices at the Market",
+    "title_zh": "菜市场的声音",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaoqian are walking through a weekend farmer's market. The sounds of vendors calling out prices and neighbors chatting fill the air.",
+        "setup_zh": "你和朋友小倩走在周末的农贸市场里。小贩叫卖的声音和邻居聊天的声音充满了空气。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我特别喜欢来菜市场。你听，每个摊位都在喊价，但仔细听的话，里面还有人在聊家常、谈天气。超市很安静，但菜市场有一种活着的感觉。",
+                "text_pinyin": "Wǒ tèbié xǐhuan lái càishìchǎng. Nǐ tīng, měi ge tānwèi dōu zài hǎn jià, dàn zǐxì tīng dehuà, lǐmiàn hái yǒu rén zài liáo jiācháng, tán tiānqì. Chāoshì hěn ānjìng, dàn càishìchǎng yǒu yī zhǒng huó zhe de gǎnjué.",
+                "text_en": "I especially love coming to the farmers' market. Listen — every stall is calling out prices, but if you listen carefully, people are chatting about family, talking about weather. Supermarkets are quiet, but markets have a feeling of being alive."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her love of the market atmosphere.",
+                "options": [
+                    {
+                        "text_zh": "活着的感觉——你说得太好了。菜市场是城市最真实的地方。没有包装，没有灯光设计，就是人和人最直接的交流。买一把菜聊几句话，比任何社交软件都真实。",
+                        "text_pinyin": "Huó zhe de gǎnjué — nǐ shuō de tài hǎo le. Càishìchǎng shì chéngshì zuì zhēnshí de dìfang. Méiyǒu bāozhuāng, méiyǒu dēngguāng shèjì, jiù shì rén hé rén zuì zhíjiē de jiāoliú. Mǎi yī bǎ cài liáo jǐ jù huà, bǐ rènhé shèjiāo ruǎnjiàn dōu zhēnshí.",
+                        "text_en": "A feeling of being alive — perfectly put. The farmers' market is a city's most authentic place. No packaging, no designed lighting, just the most direct exchange between people. Buying greens and chatting a few words is more real than any social media.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirming and eloquent — celebrates the market's unpolished humanity."
+                    },
+                    {
+                        "text_zh": "但是菜市场的菜没有超市的干净。",
+                        "text_pinyin": "Dànshì càishìchǎng de cài méiyǒu chāoshì de gānjìng.",
+                        "text_en": "But market vegetables aren't as clean as supermarket ones.",
+                        "score": 0.0,
+                        "feedback": "Compares on the wrong dimension."
+                    },
+                    {
+                        "text_zh": "现在网上买菜更方便，不用出门。",
+                        "text_pinyin": "Xiànzài wǎng shàng mǎi cài gèng fāngbiàn, bú yòng chūmén.",
+                        "text_en": "Buying groceries online is more convenient now, no need to go out.",
+                        "score": 0.0,
+                        "feedback": "She comes for the experience, not convenience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你看那个卖豆腐的大姐，她认识每一个常来的客人。刚才她问一个阿姨的孙子考试考得怎么样。这种关系在超市里是不可能有的。",
+                "text_pinyin": "Nǐ kàn nàge mài dòufu de dàjiě, tā rènshi měi yīge cháng lái de kèren. Gāngcái tā wèn yīge āyí de sūnzi kǎoshì kǎo de zěnmeyàng. Zhè zhǒng guānxì zài chāoshì lǐ shì bù kěnéng yǒu de.",
+                "text_en": "Look at the tofu seller over there — she knows every regular customer. Just now she asked one auntie how her grandson did on his exams. That kind of relationship can't exist in a supermarket."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on why these small connections matter.",
+                "options": [
+                    {
+                        "text_zh": "这就是社区的温度。卖豆腐的大姐记住了谁家孙子在考试，说明她不只是在卖豆腐，是在关心邻居。我们都需要被真实的人记住，而不是在网上被点赞。",
+                        "text_pinyin": "Zhè jiù shì shèqū de wēndù. Mài dòufu de dàjiě jìzhù le shéi jiā sūnzi zài kǎoshì, shuōmíng tā bù zhǐ shì zài mài dòufu, shì zài guānxīn línjū. Wǒmen dōu xūyào bèi zhēnshí de rén jìzhù, ér bú shì zài wǎng shàng bèi diǎnzàn.",
+                        "text_en": "That's community warmth. The tofu seller remembering whose grandson has exams shows she's not just selling tofu — she's caring about neighbors. We all need to be remembered by real people, not just liked online.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Moving and sharp — contrasts digital and real-world connection beautifully."
+                    },
+                    {
+                        "text_zh": "她的豆腐好吃吗？我们要不要买一块？",
+                        "text_pinyin": "Tā de dòufu hǎochī ma? Wǒmen yào bú yào mǎi yī kuài?",
+                        "text_en": "Is her tofu good? Should we buy some?",
+                        "score": 0.0,
+                        "feedback": "Shifts to the transactional — misses the human observation."
+                    },
+                    {
+                        "text_zh": "她可能只是为了让客人多买东西吧。",
+                        "text_pinyin": "Tā kěnéng zhǐ shì wèile ràng kèren duō mǎi dōngxi ba.",
+                        "text_en": "She's probably just doing it to get customers to buy more.",
+                        "score": 0.0,
+                        "feedback": "Cynical — assumes commercial motive for genuine warmth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "被一个真实的人记住……嗯。走吧，我们去买点菜。我要跟那个大姐聊聊天，让她也记住我们。",
+                "text_pinyin": "Bèi yīge zhēnshí de rén jìzhù…… en. Zǒu ba, wǒmen qù mǎi diǎn cài. Wǒ yào gēn nàge dàjiě liáo liáo tiān, ràng tā yě jìzhù wǒmen.",
+                "text_en": "Being remembered by a real person... yes. Come on, let's go buy some vegetables. I want to chat with that seller and get her to remember us too."
+            }
+        ],
+        "cultural_note": "Chinese wet markets and farmers' markets (菜市场) are considered by many to be the heart of neighborhood life. The relationship between regular vendors and customers goes beyond commerce — vendors often remember family details, offer cooking advice, and throw in extra produce for loyal customers. In contrast to the sterile efficiency of supermarkets and online grocery delivery, the market represents a communal space that is increasingly valued as cities modernize."
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "title": "The Pharmacy Poet",
+    "title_zh": "药店诗人",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_2_03_v0",
+    "tree": {
+        "setup": "A corner pharmacy with green cross signage and the faint smell of traditional herbs mixing with modern packaging. The pharmacist, Uncle Wen, gives each medicine a personality description when he recommends it. Cold medicine is 'dependable and quick,' stomach pills are 'gentle but thorough,' and throat lozenges are 'the quiet heroes.' His customers find this charming or bewildering, depending on the day.",
+        "setup_zh": "街角药店，绿色十字灯牌，空气中弥漫着中药和现代包装混合的味道。药剂师文叔叔推荐药的时候会给每种药一个性格描述。感冒药「可靠而迅速」，胃药「温柔但彻底」，润喉片是「安静的英雄」。顾客觉得他可爱或者困惑，看心情。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！哪里不舒服啊？",
+                "text_pinyin": "nǐ hǎo! nǎlǐ bù shūfu a?",
+                "text_en": "Hello! What's bothering you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what's wrong.",
+                "options": [
+                    {
+                        "text_zh": "我有点咳嗽，想买咳嗽药。",
+                        "text_pinyin": "wǒ yǒudiǎn késou, xiǎng mǎi késou yào.",
+                        "text_en": "I have a slight cough and want to buy cough medicine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Wen's eyes light up. He reaches for a box and holds it up:「这个啊，性格稳重，做事不急不慢，但是很有效！」He is talking about cough syrup. 有点 + symptom is very natural."
+                    },
+                    {
+                        "text_zh": "我嗓子不舒服。",
+                        "text_pinyin": "wǒ sǎngzi bù shūfu.",
+                        "text_en": "My throat is uncomfortable.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Wen nods thoughtfully and produces a bag of throat lozenges.「这些小家伙很低调，但是特别管用。」He pats the bag affectionately."
+                    },
+                    {
+                        "text_zh": "你们有什么好的药？",
+                        "text_pinyin": "nǐmen yǒu shénme hǎo de yào?",
+                        "text_en": "What good medicine do you have?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Wen gestures at the entire store with both arms. They are ALL good, in his view. Each has its own strengths. He could talk for hours. You should probably be more specific."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这种药很好用。一天吃两次，一次两片。",
+                "text_pinyin": "zhè zhǒng yào hěn hǎo yòng. yì tiān chī liǎng cì, yí cì liǎng piàn.",
+                "text_en": "This medicine works well. Take it twice a day, two tablets each time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the medicine or pay.",
+                "options": [
+                    {
+                        "text_zh": "好的，多少钱？",
+                        "text_pinyin": "hǎo de, duōshao qián?",
+                        "text_en": "OK, how much?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「二十八块。」Uncle Wen rings it up and slips a complimentary throat lozenge into the bag.「送你一个小英雄。」多少钱 -- still your most reliable friend in shops."
+                    },
+                    {
+                        "text_zh": "有没有中药的？",
+                        "text_pinyin": "yǒu méiyǒu zhōngyào de?",
+                        "text_en": "Do you have a traditional Chinese medicine version?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Wen reaches behind the counter with reverence.「中药是老前辈。慢一点，但是很温和。」He's been waiting for someone to ask. 中药 is traditional Chinese medicine."
+                    },
+                    {
+                        "text_zh": "吃了会不会想睡觉？",
+                        "text_pinyin": "chī le huì bu huì xiǎng shuìjiào?",
+                        "text_en": "Will it make me sleepy?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Wen checks the label.「这个不会。它是那种安安静静做事的。」会不会 is the A不A form of 会 -- great for asking about possibilities."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了！吃了药要多喝水。早点好起来！",
+                "text_pinyin": "hǎo le! chī le yào yào duō hē shuǐ. zǎodiǎn hǎo qǐlái!",
+                "text_en": "All done! Drink lots of water with the medicine. Get better soon!"
+            }
+        ],
+        "cultural_note": "Chinese pharmacies (药店) sell both Western medicine (西药) and traditional Chinese medicine (中药). Pharmacists often offer advice without a prescription for common ailments. 多喝水 (drink more water) remains the most universal medical advice in China."
+    }
+}

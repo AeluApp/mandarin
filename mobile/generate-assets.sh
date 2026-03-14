@@ -36,23 +36,17 @@ done
 ANDROID_DIR="$RESOURCES/android"
 mkdir -p "$ANDROID_DIR"
 
-declare -A ANDROID_SIZES=(
-  [mdpi]=48
-  [hdpi]=72
-  [xhdpi]=96
-  [xxhdpi]=144
-  [xxxhdpi]=192
-)
-
-for density in "${!ANDROID_SIZES[@]}"; do
-  size=${ANDROID_SIZES[$density]}
+for pair in "mdpi:48" "hdpi:72" "xhdpi:96" "xxhdpi:144" "xxxhdpi:192"; do
+  density="${pair%%:*}"
+  size="${pair##*:}"
   echo "  icon ${density} (${size}x${size})"
   sips -z "$size" "$size" "$RESOURCES/icon.png" --out "$ANDROID_DIR/icon-${density}.png" >/dev/null 2>&1
 done
 
 # Adaptive icon foreground (108dp with 18dp padding = 72dp visible)
-for density in "${!ANDROID_SIZES[@]}"; do
-  size=${ANDROID_SIZES[$density]}
+for pair in "mdpi:48" "hdpi:72" "xhdpi:96" "xxhdpi:144" "xxxhdpi:192"; do
+  density="${pair%%:*}"
+  size="${pair##*:}"
   fg_size=$((size * 108 / 48))
   echo "  foreground ${density} (${fg_size}x${fg_size})"
   sips -z "$fg_size" "$fg_size" "$RESOURCES/icon.png" --out "$ANDROID_DIR/ic_launcher_foreground-${density}.png" >/dev/null 2>&1

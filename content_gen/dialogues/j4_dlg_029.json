@@ -1,0 +1,83 @@
+{
+    "title": "The Rainy Window",
+    "title_zh": "雨中的窗",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're sitting in a friend's apartment during a heavy rainstorm. Your friend, Xiao Wen, has turned off all the lights. You're both watching the rain through the window in the dark.",
+        "setup_zh": "暴雨天，你坐在朋友的公寓里。你的朋友小文关了所有的灯。你们在黑暗中一起看着窗外的雨。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我最喜欢大雨天关灯看雨。你有没有注意到，每颗雨滴打在玻璃上的声音都不一样？有的重，有的轻，有的快，有的慢。像一个谁都不认识的乐队在演奏。",
+                "text_pinyin": "Wǒ zuì xǐhuān dà yǔ tiān guān dēng kàn yǔ. Nǐ yǒu méiyǒu zhùyì dào, měi kē yǔdī dǎ zài bōli shàng de shēngyīn dōu bù yīyàng? Yǒude zhòng, yǒude qīng, yǒude kuài, yǒude màn. Xiàng yīge shéi dōu bú rènshi de yuèduì zài yǎnzòu.",
+                "text_en": "I love turning off the lights and watching rain on heavy rain days. Have you noticed that every raindrop hitting the glass sounds different? Some heavy, some light, some fast, some slow. Like an unknown band performing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the rain sounds.",
+                "options": [
+                    {
+                        "text_zh": "刚刚好的厚度——需要很多经验才能找到吧。不管做茶壶还是做人，都要知道什么时候该坚强，什么时候该柔软。",
+                        "text_pinyin": "Gāng gāng hǎo de hòudù — xūyào hěn duō jīngyàn cái néng zhǎo dào ba. Bùguǎn zuò cháhú háishì zuòrén, dōu yào zhīdào shénme shíhou gāi jiānqiáng, shénme shíhou gāi róuruǎn.",
+                        "text_en": "Just-right thickness — must take a lot of experience. Whether making teapots or being a person, you need to know when to be strong and when to be soft.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Builds on the metaphor beautifully — improvisation and heightened senses."
+                    },
+                    {
+                        "text_zh": "你不开灯不觉得害怕吗？",
+                        "text_pinyin": "Nǐ bù kāi dēng bù juéde hàipà ma?",
+                        "text_en": "Aren't you scared with the lights off?",
+                        "score": 0.0,
+                        "feedback": "Fear question that misses the comfort of the practice."
+                    },
+                    {
+                        "text_zh": "这场雨下了多久了？",
+                        "text_pinyin": "Zhè chǎng yǔ xià le duō jiǔ le?",
+                        "text_en": "How long has this rain been going?",
+                        "score": 0.0,
+                        "feedback": "Duration question during an immersive experience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对。你知道我为什么喜欢关灯吗？因为关了灯以后，手机屏幕的光就不吸引你了。你只能看窗外，听雨声。黑暗反而让你专心。现在我们太多光了，到处都是屏幕。",
+                "text_pinyin": "Duì. Nǐ zhīdào wǒ wèishénme xǐhuān guān dēng ma? Yīnwèi guān le dēng yǐhòu, shǒujī píngmù de guāng jiù bù xīyǐn nǐ le. Nǐ zhǐ néng kàn chuāng wài, tīng yǔ shēng. Hēi'àn fǎn'ér ràng nǐ zhuānxīn. Xiànzài wǒmen tài duō guāng le, dàochù dōu shì píngmù.",
+                "text_en": "Right. You know why I like turning off the lights? Because without lights, the phone screen stops attracting you. You can only look outside and listen to the rain. Darkness actually helps you focus. Nowadays we have too much light — screens everywhere."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about darkness and attention.",
+                "options": [
+                    {
+                        "text_zh": "泥巴能感觉到你的心情——听起来很神奇，但我信。很多事你越放松越做得好。也许最好的东西都是在心里安静时做出来的。",
+                        "text_pinyin": "Níba néng gǎnjué dào nǐ de xīnqíng — tīng qǐlái hěn shénqí, dàn wǒ xìn. Hěn duō shì nǐ yuè fàngsōng yuè zuò de hǎo. Yěxǔ zuì hǎo de dōngxi dōu shì zài xīn lǐ ānjìng shí zuò chūlái de.",
+                        "text_en": "The clay can feel your mood — sounds magical, but I believe it. Many things work better the more relaxed you are. Maybe the best things are made when the heart is quiet.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the observation to information overload — subtraction as clarity."
+                    },
+                    {
+                        "text_zh": "你平时用手机多吗？",
+                        "text_pinyin": "Nǐ píngshí yòng shǒujī duō ma?",
+                        "text_en": "Do you use your phone a lot?",
+                        "score": 0.0,
+                        "feedback": "Phone usage question during a meditation on attention."
+                    },
+                    {
+                        "text_zh": "明天还会下雨吗？",
+                        "text_pinyin": "Míngtiān hái huì xià yǔ ma?",
+                        "text_en": "Will it rain tomorrow too?",
+                        "score": 0.0,
+                        "feedback": "Forecast question that pulls away from the present moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The practice of 听雨 (tīng yǔ, listening to rain) has deep roots in Chinese literary culture, appearing in countless classical poems. The deliberate act of turning off lights and screens to be present with natural phenomena represents a modern adaptation of this ancient practice. In a society increasingly dominated by screens and artificial light, these moments of intentional darkness are becoming valued as a form of digital detox."
+    }
+}

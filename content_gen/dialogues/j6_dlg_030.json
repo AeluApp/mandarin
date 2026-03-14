@@ -1,0 +1,89 @@
+{
+    "title": "The Last Dialect Speaker",
+    "title_zh": "最后一个说方言的人",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You meet a linguist, Dr. Zhou, who is documenting endangered dialects in southwestern China. She tells you about a village where only three elderly people still speak the local language.",
+        "setup_zh": "你遇到了一位语言学家周博士，她正在记录中国西南地区濒危方言。她告诉你一个只有三位老人还在说当地语言的村庄。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "那个村子的语言没有文字。所有的知识——草药、天气预测、祭祀仪式——都存在于语言里。当最后一个说这种语言的人去世的时候，消失的不只是一种语言，而是一整套理解世界的方式。每一种语言都是人类认知的一个独特角度。",
+                "text_pinyin": "Nàge cūnzi de yǔyán méiyǒu wénzì. Suǒyǒu de zhīshi — cǎoyào, tiānqì yùcè, jìsì yíshì — dōu cúnzài yú yǔyán lǐ. Dāng zuìhòu yīge shuō zhè zhǒng yǔyán de rén qùshì de shíhou, xiāoshī de bù zhǐ shì yī zhǒng yǔyán, ér shì yī zhěng tào lǐjiě shìjiè de fāngshì. Měi yī zhǒng yǔyán dōu shì rénlèi rènzhī de yīge dútè jiǎodù.",
+                "text_en": "That village's language has no writing system. All knowledge — herbal medicine, weather prediction, ritual ceremonies — exists only within the language. When the last speaker dies, what disappears isn't just a language, but an entire way of understanding the world. Every language is a unique angle of human cognition."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the loss of linguistic diversity.",
+                "options": [
+                    {
+                        "text_zh": "一整套理解世界的方式——这就是语言消亡最痛的地方。我们把语言当交流工具，但它远不止于此。每种语言都嵌入了几百年的观察和智慧。草药的名字可能就包含药性和采摘时节。",
+                        "text_pinyin": "Yī zhěng tào lǐjiě shìjiè de fāngshì — zhè jiù shì yǔyán xiāowáng zuì tòng de dìfang. Wǒmen bǎ yǔyán dāng jiāoliú gōngjù, dàn tā yuǎn bùzhǐ yú cǐ. Měi zhǒng yǔyán dōu qiàn rù le jǐ bǎi nián de guānchá hé zhìhuì. Cǎoyào de míngzi kěnéng jiù bāohán yàoxìng hé cǎizhāi shíjié.",
+                        "text_en": "An entire way of understanding the world — that's what makes language death painful. We treat language as a communication tool, but it's far more. Every language embeds centuries of observation and wisdom. A herb's name alone might encode its properties and harvest season.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Shows deep understanding of language as knowledge repository, not just communication tool."
+                    },
+                    {
+                        "text_zh": "大家都说普通话不是更方便吗？",
+                        "text_pinyin": "Dàjiā dōu shuō Pǔtōnghuà bú shì gèng fāngbiàn ma?",
+                        "text_en": "Isn't it more convenient if everyone speaks Mandarin?",
+                        "score": 0.0,
+                        "feedback": "Prioritizes convenience over cognitive diversity — the argument she's dismantling."
+                    },
+                    {
+                        "text_zh": "你可以把它录下来保存。",
+                        "text_pinyin": "Nǐ kěyǐ bǎ tā lù xiàlái bǎocún.",
+                        "text_en": "You can record and preserve it.",
+                        "score": 0.0,
+                        "feedback": "Preservation is part of her work but doesn't engage with the philosophical dimension."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到了关键——语言是嵌入式的知识。我在录音的时候经常发现，有些概念在普通话里根本没有对应的词。比如那个村子的语言里有一个词，大概意思是「雨停了但空气还湿润着的那种安静」。这种精确的感受描述一旦消失，我们感知世界的维度就少了一个。",
+                "text_pinyin": "Nǐ shuō dào le guānjiàn — yǔyán shì qiàn rù shì de zhīshi. Wǒ zài lùyīn de shíhou jīngcháng fāxiàn, yǒuxiē gàiniàn zài Pǔtōnghuà lǐ gēnběn méiyǒu duìyìng de cí. Bǐrú nàge cūnzi de yǔyán lǐ yǒu yīge cí, dàgài yìsi shì 'yǔ tíng le dàn kōngqì hái shīrùn zhe de nà zhǒng ānjìng'. Zhè zhǒng jīngquè de gǎnshòu miáoshù yīdàn xiāoshī, wǒmen gǎnzhī shìjiè de wéidù jiù shǎo le yīge.",
+                "text_en": "You've hit the key point — language is embedded knowledge. While recording, I often find concepts that have no equivalent word in Mandarin. For example, this village's language has a word that roughly means 'the particular quiet when rain has stopped but the air is still moist.' Once such precise descriptions of feeling disappear, we lose a dimension of perceiving the world."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on what is lost when a word has no translation.",
+                "options": [
+                    {
+                        "text_zh": "一个词的消亡就是一种感知能力的消亡。维特根斯坦说过'语言的界限就是世界的界限'。每失去一种语言，人类的世界就小了一圈。你保存的不是声音，而是人类理解现实的可能性。",
+                        "text_pinyin": "Yīge cí de xiāowáng jiù shì yī zhǒng gǎnzhī nénglì de xiāowáng. Wéitègēnsītǎn shuō guò 'yǔyán de jièxiàn jiù shì shìjiè de jièxiàn'. Měi shīqù yī zhǒng yǔyán, rénlèi de shìjiè jiù xiǎo le yī quān. Nǐ bǎocún de bú shì shēngyīn, ér shì rénlèi lǐjiě xiànshí de kěnéng xìng.",
+                        "text_en": "A word's extinction is the extinction of a perceptual ability. Wittgenstein said 'the limits of language are the limits of the world.' Each language lost shrinks the human world. What you're preserving isn't sound — it's humanity's possibility of understanding reality.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Philosophically rich — connects language death to the shrinking of human possibility."
+                    },
+                    {
+                        "text_zh": "全球化趋势下语言统一是不可避免的。",
+                        "text_pinyin": "Quánqiúhuà qūshì xià yǔyán tǒngyī shì bù kě bìmiǎn de.",
+                        "text_en": "Under globalization, language unification is inevitable.",
+                        "score": 0.0,
+                        "feedback": "Fatalistic — treats cultural loss as acceptable collateral of progress."
+                    },
+                    {
+                        "text_zh": "你研究这个能申请到科研经费吗？",
+                        "text_pinyin": "Nǐ yánjiū zhège néng shēnqǐng dào kēyán jīngfèi ma?",
+                        "text_en": "Can you get research funding for this?",
+                        "score": 0.0,
+                        "feedback": "This reduces urgent cultural preservation to funding logistics."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "嘴里装着一个无法复制的宇宙……这句话我要记住。下个月我要回去做最后一次完整的录音。也许那三位老人不会永远在，但至少他们的声音、他们的词、他们描述雨后安静的那种方式，会留下来。",
+                "text_pinyin": "Zuǐ lǐ zhuāng zhe yīge wúfǎ fùzhì de yǔzhòu…… zhè jù huà wǒ yào jìzhù. Xià ge yuè wǒ yào huí qù zuò zuìhòu yī cì wánzhěng de lùyīn. Yěxǔ nà sān wèi lǎorén bú huì yǒngyuǎn zài, dàn zhìshǎo tāmen de shēngyīn, tāmen de cí, tāmen miáoshù yǔ hòu ānjìng de nà zhǒng fāngshì, huì liú xiàlái.",
+                "text_en": "Mouths containing an irreplicable universe... I'll remember that phrase. Next month I'm going back for one final complete recording. Maybe those three elders won't be here forever, but at least their voices, their words, their way of describing post-rain quiet will remain."
+            }
+        ],
+        "cultural_note": "China has over 130 languages and countless dialects, many critically endangered. UNESCO estimates that a language dies approximately every two weeks globally. China's push for Mandarin (普通话) standardization, while economically beneficial, has accelerated dialect loss. Linguists and anthropologists increasingly frame this as a cognitive diversity crisis — each language encodes unique environmental knowledge, social structures, and ways of perceiving reality that are irreplaceable once lost."
+    }
+}

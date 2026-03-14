@@ -1,0 +1,196 @@
+{
+    "title": "The Appliance Sommelier",
+    "title_zh": "家电品鉴师",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_shopping_6_03_v0",
+    "tree": {
+        "setup": "The home appliance section of an electronics store, where rows of air purifiers hum at different frequencies like a mechanical choir. Sales associate Xiao Tao has been in the air purifier department for four years, long enough to develop personal opinions about each brand's 'personality.' She keeps a laminated comparison chart in her apron pocket that she has updated seventeen times. You need a purifier for your apartment, and you have opinions about noise levels, because your upstairs neighbor already provides enough ambient sound.",
+        "setup_zh": "电器商场的家电区，一排排空气净化器以不同的频率嗡嗡作响，像一支机械合唱团。销售员小陶在空气净化器部门干了四年，久到对每个品牌的「性格」都有了自己的看法。她围裙口袋里有一张塑封的对比表，已经更新了十七次。你需要一台净化器，而且你对噪音水平有要求——因为你楼上的邻居已经提供了足够多的环境音。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！看空气净化器是吗？有没有特别关注的品牌？",
+                "text_pinyin": "huānyíng guānglín! kàn kōngqì jìnghuàqì shì ma? yǒu méiyǒu tèbié guānzhù de pǐnpái?",
+                "text_en": "Welcome! Looking at air purifiers? Any particular brand you're interested in?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her your requirements — room size, noise concerns, budget.",
+                "options": [
+                    {
+                        "text_zh": "对，我想买一台空气净化器。我的房间大概三十平米，预算两千到三千之间。最重要的是噪音要小，因为我在家工作，不能太吵。",
+                        "text_pinyin": "duì, wǒ xiǎng mǎi yì tái kōngqì jìnghuàqì. wǒ de fángjiān dàgài sānshí píngmǐ, yùsuàn liǎng qiān dào sān qiān zhījiān. zuì zhòngyào de shì zàoyīn yào xiǎo, yīnwèi wǒ zài jiā gōngzuò, bù néng tài chǎo.",
+                        "text_en": "Yes, I want to buy an air purifier. My room is about 30 square meters, budget 2000-3000 yuan. Most importantly, it needs to be quiet — I work from home and can't have too much noise.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Room size, budget range, priority criterion — Xiao Tao's hand is already in her apron pocket, retrieving the laminated chart. You've just spoken her language."
+                    },
+                    {
+                        "text_zh": "我想买一台安静的净化器，不知道买哪个好。",
+                        "text_pinyin": "wǒ xiǎng mǎi yì tái ānjìng de jìnghuàqì, bù zhīdào mǎi nǎge hǎo.",
+                        "text_en": "I want a quiet purifier — not sure which one to get.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need room size and budget, but 'quiet' is a good starting filter. Her chart has a noise column highlighted in green."
+                    },
+                    {
+                        "text_zh": "随便看看，哪个好？",
+                        "text_pinyin": "suíbiàn kàn kàn, nǎge hǎo?",
+                        "text_en": "Just browsing — which one's good?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Tao's smile tightens slightly. 「好」without parameters is like asking a librarian for 'a book.' She has follow-up questions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三十平米，预算三千以内，低噪音。那我给你推荐两款：这款A品牌的，CADR值是四百，夜间模式只有二十六分贝。旁边这款B品牌的，CADR值是三百五十，但是噪音更低，夜间模式只有二十分贝。价格差五百。",
+                "text_pinyin": "sānshí píngmǐ, yùsuàn sān qiān yǐnèi, dī zàoyīn. nà wǒ gěi nǐ tuījiàn liǎng kuǎn: zhè kuǎn A pǐnpái de, CADR zhí shì sìbǎi, yèjiān móshì zhǐ yǒu èrshíliù fēnbèi. pángbiān zhè kuǎn B pǐnpái de, CADR zhí shì sānbǎi wǔshí, dànshì zàoyīn gèng dī, yèjiān móshì zhǐ yǒu èrshí fēnbèi. jiàgé chā wǔbǎi.",
+                "text_en": "30 sqm, under 3000, low noise. I'd recommend these two: Brand A has a CADR of 400, night mode at only 26 decibels. Brand B next to it has a CADR of 350, but even quieter — night mode at only 20 decibels. 500 yuan price difference."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the tradeoffs between the two models.",
+                "options": [
+                    {
+                        "text_zh": "CADR差五十，实际使用中差别大吗？比如说，A的净化速度会明显快吗？还有滤芯的更换周期和费用，两款有什么区别？",
+                        "text_pinyin": "CADR chā wǔshí, shíjì shǐyòng zhōng chābié dà ma? bǐrú shuō, A de jìnghuà sùdù huì míngxiǎn kuài ma? háiyǒu lǜxīn de gēnghuàn zhōuqī hé fèiyòng, liǎng kuǎn yǒu shénme qūbié?",
+                        "text_en": "The CADR difference is 50 — is that noticeable in practice? Like, would A purify noticeably faster? And what about filter replacement cycles and costs for both?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about real-world difference AND ongoing costs — Xiao Tao flips her chart to the back page, where the total cost of ownership calculations live. You've found her favorite page."
+                    },
+                    {
+                        "text_zh": "哪个更安静？我主要看噪音。",
+                        "text_pinyin": "nǎge gèng ānjìng? wǒ zhǔyào kàn zàoyīn.",
+                        "text_en": "Which is quieter? Noise is my main concern.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear priority. She points to Brand B. Twenty decibels is quieter than a whisper — quieter, in fact, than most people's breathing."
+                    },
+                    {
+                        "text_zh": "便宜的那个就行。",
+                        "text_pinyin": "piányi de nàge jiù xíng.",
+                        "text_en": "The cheaper one will do.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Tao pauses. Price is a valid criterion, but she has spent four years learning the difference between 'adequate' and 'right.' She has opinions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三十平米的房间，CADR三百五就够了，差别不大。但是滤芯差别比较大：A的滤芯一年换一次，每个一百八；B的滤芯半年换一次，每个九十。算下来长期成本差不多。不过B的滤芯更容易买到。你要不要打开两台，感受一下噪音的区别？",
+                "text_pinyin": "sānshí píngmǐ de fángjiān, CADR sānbǎi wǔ jiù gòu le, chābié búdà. dànshì lǜxīn chābié bǐjiào dà: A de lǜxīn yì nián huàn yí cì, měi gè yìbǎi bā; B de lǜxīn bàn nián huàn yí cì, měi gè jiǔshí. suàn xiàlái chángqī chéngběn chàbuduō. búguò B de lǜxīn gèng róngyì mǎi dào. nǐ yào búyào dǎkāi liǎng tái, gǎnshòu yíxià zàoyīn de qūbié?",
+                "text_en": "For a 30 sqm room, CADR 350 is sufficient — not much difference. But filters differ significantly: A's lasts a year at 180 yuan each; B's is every six months at 90 each. Long-term costs are similar. But B's filters are easier to find. Want me to turn both on so you can hear the noise difference?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the demonstration and react to the noise comparison.",
+                "options": [
+                    {
+                        "text_zh": "好的，请打开。……B确实安静很多，几乎听不到。A的声音虽然也不大，但是有一点嗡嗡的低频噪音。如果开一整天的话，B应该舒服得多。",
+                        "text_pinyin": "hǎo de, qǐng dǎkāi. ……B quèshí ānjìng hěn duō, jīhū tīng bú dào. A de shēngyīn suīrán yě búdà, dànshì yǒu yìdiǎn wēngwēng de dīpín zàoyīn. rúguǒ kāi yì zhěng tiān de huà, B yīnggāi shūfu de duō.",
+                        "text_en": "Sure, turn them on. ... B is definitely much quieter — I can barely hear it. A is also not loud, but there's a slight low-frequency hum. For all-day use, B would be much more comfortable.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Distinguishing low-frequency hum from general noise — Xiao Tao looks at you with the respect one reserves for a fellow connoisseur. Not many customers can articulate the difference between 20 and 26 decibels."
+                    },
+                    {
+                        "text_zh": "B比较安静，我喜欢B。",
+                        "text_pinyin": "B bǐjiào ānjìng, wǒ xǐhuan B.",
+                        "text_en": "B is quieter — I prefer B.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Decision made by ear. Xiao Tao nods — the ear is the final arbiter in her department."
+                    },
+                    {
+                        "text_zh": "都差不多吧。",
+                        "text_pinyin": "dōu chàbuduō ba.",
+                        "text_en": "They're about the same.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Tao blinks. Six decibels is the difference between a library and a conversation. But she doesn't argue — she lets the chart do the talking."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你的耳朵很灵。那低频噪音是A的风扇设计导致的。B用的是直流无刷电机，所以几乎没有低频。你打算买B吗？现在有活动，买净化器送一套滤芯。",
+                "text_pinyin": "nǐ de ěrduo hěn líng. nà dīpín zàoyīn shì A de fēngshàn shèjì dǎozhì de. B yòng de shì zhíliú wúshuā diànjī, suǒyǐ jīhū méiyǒu dīpín. nǐ dǎsuàn mǎi B ma? xiànzài yǒu huódòng, mǎi jìnghuàqì sòng yí tào lǜxīn.",
+                "text_en": "You've got sharp ears. That low-frequency hum is from A's fan design. B uses a brushless DC motor, so almost no low-frequency noise. Planning to get B? There's a promotion now — buy a purifier, get a free set of filters."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide and ask about delivery and warranty.",
+                "options": [
+                    {
+                        "text_zh": "那就B吧。送一套滤芯很划算。请问可以送货上门吗？还有保修是几年的？",
+                        "text_pinyin": "nà jiù B ba. sòng yí tào lǜxīn hěn huásuàn. qǐngwèn kěyǐ sòng huò shàng mén ma? háiyǒu bǎoxiū shì jǐ nián de?",
+                        "text_en": "I'll go with B then. A free set of filters is a great deal. Can you deliver? And how long is the warranty?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Delivery and warranty in one breath — Xiao Tao pulls out her order pad. 「三年保修，免费送货安装，」she says. Three years, free delivery and installation. The chart is back in the apron. Mission accomplished."
+                    },
+                    {
+                        "text_zh": "买B。能送到家吗？",
+                        "text_pinyin": "mǎi B. néng sòng dào jiā ma?",
+                        "text_en": "I'll buy B. Can you deliver it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She can. Tomorrow afternoon, if you're free. Xiao Tao's delivery schedule is as precise as her comparison chart."
+                    },
+                    {
+                        "text_zh": "我再想想吧。",
+                        "text_pinyin": "wǒ zài xiǎng xiǎng ba.",
+                        "text_en": "Let me think about it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Tao hands you a business card with the model numbers written on the back. 「活动到月底，」she says. The promotion ends at month's end. The chart will be here when you return — version eighteen, perhaps."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三年整机保修，电机保修五年。免费送货安装，明天下午可以送。你方便几点？",
+                "text_pinyin": "sān nián zhěngjī bǎoxiū, diànjī bǎoxiū wǔ nián. miǎnfèi sòng huò ānzhuāng, míngtiān xiàwǔ kěyǐ sòng. nǐ fāngbiàn jǐ diǎn?",
+                "text_en": "Three-year full warranty, five years on the motor. Free delivery and installation — can deliver tomorrow afternoon. What time works for you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm delivery time and finalize the purchase.",
+                "options": [
+                    {
+                        "text_zh": "明天下午两点到四点之间可以。安装的时候师傅能不能顺便教我怎么换滤芯？我第一次用这种净化器。麻烦你帮我开一下发票。",
+                        "text_pinyin": "míngtiān xiàwǔ liǎng diǎn dào sì diǎn zhījiān kěyǐ. ānzhuāng de shíhòu shīfu néng bu néng shùnbiàn jiāo wǒ zěnme huàn lǜxīn? wǒ dì yī cì yòng zhè zhǒng jìnghuàqì. máfan nǐ bāng wǒ kāi yíxià fāpiào.",
+                        "text_en": "Tomorrow between 2 and 4 PM works. During installation, can the technician show me how to change the filter? It's my first time using this type. And please issue me an invoice.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Time window, practical request, invoice — Xiao Tao writes it all down. Asking for a filter-change tutorial means one fewer call to customer service. She appreciates self-sufficient customers the way gardeners appreciate self-watering plants."
+                    },
+                    {
+                        "text_zh": "明天下午都可以。谢谢小陶！",
+                        "text_pinyin": "míngtiān xiàwǔ dōu kěyǐ. xièxie Xiǎo Táo!",
+                        "text_en": "Any time tomorrow afternoon works. Thanks, Xiao Tao!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Flexible and friendly. She'll call thirty minutes before arrival — that's her standard, non-negotiable courtesy."
+                    },
+                    {
+                        "text_zh": "行，明天送吧。",
+                        "text_pinyin": "xíng, míngtiān sòng ba.",
+                        "text_en": "Fine, deliver it tomorrow.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She'll need a time window and an address. The conversation isn't quite over, though you've mentally left the store."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese electronics stores often have deeply knowledgeable sales staff who specialize in specific product categories. CADR (洁净空气输出比率) is the standard metric for purifier performance. Promotional bundles (买赠活动) are common, and asking for a 发票 (fāpiào, official tax invoice) is standard practice for warranty claims and business expense reporting."
+    }
+}

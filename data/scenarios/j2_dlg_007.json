@@ -1,0 +1,83 @@
+{
+  "title": "The Bicycle Repair Shop",
+  "title_zh": "修自行车",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "Your bicycle has a flat tire. You find a small repair shop run by an old man under a tree.",
+    "setup_zh": "你的自行车轮胎没气了。你找到了一个老爷爷在树下开的修车铺。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "自行车坏了？让我看看。哦，是轮胎没气了，小问题。",
+        "text_pinyin": "Zìxíngchē huài le? Ràng wǒ kànkan. Ó, shì lúntāi méi qì le, xiǎo wèntí.",
+        "text_en": "Bike broken? Let me see. Oh, the tire is flat — small problem."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Ask about the repair.",
+        "options": [
+          {
+            "text_zh": "太好了！修好要多长时间？",
+            "text_pinyin": "Tài hǎo le! Xiū hǎo yào duō cháng shíjiān?",
+            "text_en": "Great! How long will it take to fix?",
+            "score": 1.0,
+            "feedback": "Practical and relieved — gets to the point.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我想买一辆新的。",
+            "text_pinyin": "Wǒ xiǎng mǎi yī liàng xīn de.",
+            "text_en": "I want to buy a new one.",
+            "score": 0.0,
+            "feedback": "He just said it's a small problem."
+          },
+          {
+            "text_zh": "你在这里多少年了？",
+            "text_pinyin": "Nǐ zài zhèlǐ duōshao nián le?",
+            "text_en": "How many years have you been here?",
+            "score": 0.0,
+            "feedback": "Your bike needs fixing first."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "十分钟就好。你坐这儿等一会儿。你是骑车上班吗？",
+        "text_pinyin": "Shí fēnzhōng jiù hǎo. Nǐ zuò zhèr děng yīhuǐr. Nǐ shì qí chē shàngbān ma?",
+        "text_en": "Ten minutes. Sit here and wait. Do you bike to work?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Chat while he fixes your bike.",
+        "options": [
+          {
+            "text_zh": "对，每天骑车去。又方便又可以锻炼身体。",
+            "text_pinyin": "Duì, měi tiān qí chē qù. Yòu fāngbiàn yòu kěyǐ duànliàn shēntǐ.",
+            "text_en": "Yes, I bike every day. It's convenient and good exercise.",
+            "score": 1.0,
+            "feedback": "Friendly conversation — shares your routine naturally.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不想等。",
+            "text_pinyin": "Wǒ bù xiǎng děng.",
+            "text_en": "I don't want to wait.",
+            "score": 0.0,
+            "feedback": "Impatient when he said only ten minutes."
+          },
+          {
+            "text_zh": "你有孩子吗？",
+            "text_pinyin": "Nǐ yǒu háizi ma?",
+            "text_en": "Do you have children?",
+            "score": 0.0,
+            "feedback": "He asked about your commute."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Roadside bicycle repair shops (修车铺) are a disappearing but beloved part of Chinese urban life. Often run by elderly men under trees or awnings, they fix any bike cheaply and quickly. The chat while waiting is part of the experience."
+  }
+}

@@ -1,0 +1,196 @@
+{
+    "title": "The Presentation Alchemist",
+    "title_zh": "演示炼金术",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_business_5_02_v0",
+    "tree": {
+        "setup": "The meeting room smells of fresh coffee and mild anxiety. You're presenting a quarterly report to a client delegation led by General Manager Peng, a man who reads spreadsheets the way other people read novels — for pleasure, with occasional gasps of surprise. His assistant has already distributed printed copies of your slides with margins wide enough for his famously detailed annotations.",
+        "setup_zh": "会议室里弥漫着新煮咖啡和淡淡焦虑的气味。你要向以彭总经理为首的客户代表团做季度报告。彭总看电子表格就像别人看小说一样——当作消遣，偶尔还会发出惊叹。他的助理已经分发了你幻灯片的打印版，页边距留得很宽，方便他做出了名的详细批注。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "都准备好了吧？我们可以开始了。彭总，请。",
+                "text_pinyin": "dōu zhǔnbèi hǎo le ba? wǒmen kěyǐ kāishǐ le. Péng zǒng, qǐng.",
+                "text_en": "All ready? Let's begin. General Manager Peng, please go ahead."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Open your presentation.",
+                "options": [
+                    {
+                        "text_zh": "各位下午好，感谢大家百忙之中参加今天的会议。我是项目负责人，今天向各位汇报第三季度的业务进展和下一阶段的计划。请看第一页。",
+                        "text_pinyin": "gèwèi xiàwǔ hǎo, gǎnxiè dàjiā bǎimáng zhī zhōng cānjiā jīntiān de huìyì. wǒ shì xiàngmù fùzé rén, jīntiān xiàng gèwèi huìbào dì sān jìdù de yèwù jìnzhǎn hé xià yí jiēduàn de jìhuà. qǐng kàn dì yī yè.",
+                        "text_en": "Good afternoon everyone, thank you for taking time from your busy schedules to attend today's meeting. I'm the project lead, and today I'll report on Q3 business progress and plans for the next phase. Please see page one.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "百忙之中 — the classic business opening. General Manager Peng is already uncapping his annotation pen."
+                    },
+                    {
+                        "text_zh": "大家好，我们今天看一下第三季度的数据。",
+                        "text_pinyin": "dàjiā hǎo, wǒmen jīntiān kàn yíxià dì sān jìdù de shùjù.",
+                        "text_en": "Hello everyone, let's look at the Q3 data today.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Functional but missing the formality this audience expects. Peng's pen hovers."
+                    },
+                    {
+                        "text_zh": "好，那我就直接开始了。",
+                        "text_pinyin": "hǎo, nà wǒ jiù zhíjiē kāishǐ le.",
+                        "text_en": "OK, I'll just jump right in.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Too casual for a client presentation. General Manager Peng's pen cap goes back on — not a good sign."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "请继续。我注意到第三页的销售额数据，同比增长了百分之十二。这个增长主要来自哪些方面？",
+                "text_pinyin": "qǐng jìxù. wǒ zhùyì dào dì sān yè de xiāoshòu'é shùjù, tóngbǐ zēngzhǎng le bǎifēnzhī shí'èr. zhège zēngzhǎng zhǔyào lái zì nǎxiē fāngmiàn?",
+                "text_en": "Please continue. I notice the sales figures on page three — a 12% year-over-year increase. Where did this growth mainly come from?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the growth drivers.",
+                "options": [
+                    {
+                        "text_zh": "这百分之十二的增长主要来自两个方面。第一是线上渠道的销售额比去年同期增长了百分之二十五，这得益于我们在社交媒体上的推广策略。第二是华东地区的新客户开发比较顺利，贡献了大约百分之三十的新增收入。",
+                        "text_pinyin": "zhè bǎifēnzhī shí'èr de zēngzhǎng zhǔyào lái zì liǎng gè fāngmiàn. dì yī shì xiànshàng qúdào de xiāoshòu'é bǐ qùnián tóngqī zēngzhǎng le bǎifēnzhī èrshíwǔ, zhè déyì yú wǒmen zài shèjiāo méitǐ shàng de tuīguǎng cèlüè. dì èr shì Huádōng dìqū de xīn kèhù kāifā bǐjiào shùnlì, gòngxiàn le dàyuē bǎifēnzhī sānshí de xīnzēng shōurù.",
+                        "text_en": "The 12% growth came mainly from two areas. First, online channel sales grew 25% year-over-year, thanks to our social media marketing strategy. Second, new client development in East China went well, contributing about 30% of new revenue.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Structured with specific numbers — General Manager Peng writes two annotations simultaneously, which his assistant recognizes as a sign of genuine interest."
+                    },
+                    {
+                        "text_zh": "主要是线上销售做得比较好。",
+                        "text_pinyin": "zhǔyào shì xiànshàng xiāoshòu zuò de bǐjiào hǎo.",
+                        "text_en": "Mainly online sales did well.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Directionally correct but lacking the specificity that Peng's annotation margins are waiting for."
+                    },
+                    {
+                        "text_zh": "各方面都有增长。",
+                        "text_pinyin": "gè fāngmiàn dōu yǒu zēngzhǎng.",
+                        "text_en": "There was growth across the board.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Peng circles the number 12 on his printout and writes a question mark. He's not the type to let vagueness pass."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "线上渠道的增长确实很可观。不过我有一个担忧：客户投诉率在第三季度也上升了。你们怎么看这个问题？",
+                "text_pinyin": "xiànshàng qúdào de zēngzhǎng quèshí hěn kěguān. búguò wǒ yǒu yí gè dānyōu: kèhù tóusù lǜ zài dì sān jìdù yě shàngshēng le. nǐmen zěnme kàn zhège wèntí?",
+                "text_en": "The online channel growth is impressive. But I have a concern: customer complaint rates also rose in Q3. What's your view on this?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address the complaint rate increase.",
+                "options": [
+                    {
+                        "text_zh": "您观察得很仔细。投诉率上升主要是因为物流配送环节。我们第三季度换了一家物流合作方，过渡期出了一些问题。目前已经解决了百分之八十，预计下个月能完全恢复正常。我们也在考虑增加一家备选物流公司。",
+                        "text_pinyin": "nín guānchá de hěn zǐxì. tóusù lǜ shàngshēng zhǔyào shì yīnwèi wùliú pèisòng huánjié. wǒmen dì sān jìdù huàn le yì jiā wùliú hézuò fāng, guòdù qī chū le yìxiē wèntí. mùqián yǐjīng jiějué le bǎifēnzhī bāshí, yùjì xià gè yuè néng wánquán huīfù zhèngcháng. wǒmen yě zài kǎolǜ zēngjiā yì jiā bèixuǎn wùliú gōngsī.",
+                        "text_en": "You have a keen eye. The complaint rate increase was mainly due to logistics and delivery. We switched logistics partners in Q3 and had some transitional issues. Eighty percent is now resolved, and we expect full normalization next month. We're also considering adding a backup logistics company.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Acknowledging the problem, explaining the cause, showing progress, and proposing prevention — Peng's annotations shift from question marks to checkmarks."
+                    },
+                    {
+                        "text_zh": "是的，投诉增加了一些，我们正在处理。",
+                        "text_pinyin": "shì de, tóusù zēngjiā le yìxiē, wǒmen zhèngzài chǔlǐ.",
+                        "text_en": "Yes, complaints increased a bit — we're working on it.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Acknowledged but thin on specifics. Peng will ask follow-ups."
+                    },
+                    {
+                        "text_zh": "投诉率上升是暂时的，不用太担心。",
+                        "text_pinyin": "tóusù lǜ shàngshēng shì zànshí de, bú yòng tài dānxīn.",
+                        "text_en": "The complaint rate increase is temporary — nothing to worry about.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Telling General Manager Peng not to worry about data is like telling a sommelier not to worry about the wine. The pen pauses ominously."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，备选物流公司是个好主意。那下个季度有什么具体计划？尤其是在保持增长的同时控制成本方面。",
+                "text_pinyin": "hǎo de, bèixuǎn wùliú gōngsī shì gè hǎo zhǔyi. nà xià gè jìdù yǒu shénme jùtǐ jìhuà? yóuqí shì zài bǎochí zēngzhǎng de tóngshí kòngzhì chéngběn fāngmiàn.",
+                "text_en": "Good — the backup logistics company is a good idea. What are the specific plans for next quarter? Especially regarding maintaining growth while controlling costs."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your Q4 plans.",
+                "options": [
+                    {
+                        "text_zh": "下季度我们有三个重点。第一，继续加大线上推广投入，但会更精准地投放广告，预计能把获客成本降低百分之十五。第二，完成物流体系的优化。第三，计划在华南地区开拓新市场。详细的预算方案在最后两页。",
+                        "text_pinyin": "xià jìdù wǒmen yǒu sān gè zhòngdiǎn. dì yī, jìxù jiā dà xiànshàng tuīguǎng tóurù, dàn huì gèng jīngzhǔn de tóufàng guǎnggào, yùjì néng bǎ huòkè chéngběn jiàngdī bǎifēnzhī shíwǔ. dì èr, wánchéng wùliú tǐxì de yōuhuà. dì sān, jìhuà zài Huánán dìqū kāituò xīn shìchǎng. xiángxì de yùsuàn fāng'àn zài zuìhòu liǎng yè.",
+                        "text_en": "We have three priorities for next quarter. First, increase online marketing investment but target ads more precisely — we estimate a 15% reduction in customer acquisition cost. Second, complete the logistics optimization. Third, expand into the South China market. The detailed budget is on the last two pages.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Three priorities, each with a metric or milestone — General Manager Peng turns to the last two pages with the enthusiasm of someone opening a present."
+                    },
+                    {
+                        "text_zh": "我们计划继续扩大市场，同时优化成本。具体方案还在制定中。",
+                        "text_pinyin": "wǒmen jìhuà jìxù kuòdà shìchǎng, tóngshí yōuhuà chéngběn. jùtǐ fāng'àn hái zài zhìdìng zhōng.",
+                        "text_en": "We plan to continue market expansion while optimizing costs. The specific plan is still being developed.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Directionally sound but「还在制定中」is not what Peng came to hear."
+                    },
+                    {
+                        "text_zh": "下季度应该会更好。",
+                        "text_pinyin": "xià jìdù yīnggāi huì gèng hǎo.",
+                        "text_en": "Next quarter should be better.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "General Manager Peng closes his annotation pen. This is not because he's satisfied."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很全面。预算方案我会仔细看的。总的来说，第三季度的成绩不错，希望下季度能看到投诉率的下降。今天的汇报很有价值，谢谢。",
+                "text_pinyin": "hěn quánmiàn. yùsuàn fāng'àn wǒ huì zǐxì kàn de. zǒng de lái shuō, dì sān jìdù de chéngjì búcuò, xīwàng xià jìdù néng kàn dào tóusù lǜ de xiàjiàng. jīntiān de huìbào hěn yǒu jiàzhí, xièxie.",
+                "text_en": "Very thorough. I'll review the budget plan carefully. Overall, Q3 results are solid — I hope to see the complaint rate drop next quarter. Today's report was valuable. Thank you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the presentation.",
+                "options": [
+                    {
+                        "text_zh": "谢谢彭总的宝贵意见。如果后续有任何问题，随时可以联系我们团队。我会把今天讨论的要点整理成一份会议纪要，明天发给各位。",
+                        "text_pinyin": "xièxie Péng zǒng de bǎoguì yìjiàn. rúguǒ hòuxù yǒu rènhé wèntí, suíshí kěyǐ liánxì wǒmen tuánduì. wǒ huì bǎ jīntiān tǎolùn de yàodiǎn zhěnglǐ chéng yí fèn huìyì jìyào, míngtiān fā gěi gèwèi.",
+                        "text_en": "Thank you for your valuable feedback, General Manager Peng. If you have any follow-up questions, feel free to contact our team anytime. I'll compile today's discussion points into meeting minutes and send them to everyone tomorrow.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Offering meeting minutes unprompted — the kind of follow-through that makes Peng's annotations feel like a conversation rather than a critique."
+                    },
+                    {
+                        "text_zh": "谢谢各位。辛苦了。",
+                        "text_pinyin": "xièxie gèwèi. xīnkǔ le.",
+                        "text_en": "Thank you, everyone. Good work.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "A clean closing. Peng nods and takes his annotated pages with him — they'll reappear at the next meeting."
+                    },
+                    {
+                        "text_zh": "好，那就这样吧。",
+                        "text_pinyin": "hǎo, nà jiù zhèyàng ba.",
+                        "text_en": "OK, that's it then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An ending that fizzles rather than lands. Peng's assistant starts collecting the printouts."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese business presentations, addressing senior clients as [surname]+总 (zǒng, short for 总经理/总裁) shows appropriate respect. 百忙之中 (bǎimáng zhī zhōng, 'in the midst of your busy schedule') is a standard polite opening. Offering 会议纪要 (huìyì jìyào, meeting minutes) as follow-up demonstrates professionalism that Chinese business culture values highly."
+    }
+}

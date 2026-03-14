@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Agree and say something about the weather.",
                 "options": [
-                    {"text_zh": "是啊，今天很暖和，很舒服。", "text_pinyin": "shì a, jīntiān hěn nuǎnhuo, hěn shūfu.", "text_en": "Yes, it's warm today, very comfortable.", "score": 1.0, "register": "casual", "feedback": "Natural small talk — 是啊 shows agreement, and you add detail."},
-                    {"text_zh": "对啊，比昨天好多了吧。", "text_pinyin": "duì a, bǐ zuótiān hǎo duō le ba.", "text_en": "Yeah, much better than yesterday, right?", "score": 0.8, "register": "casual", "feedback": "Good conversational move — making a comparison keeps the chat going."},
-                    {"text_zh": "嗯，天气还可以，不冷不热。", "text_pinyin": "ēn, tiānqì hái kěyǐ, bù lěng bú rè.", "text_en": "Mm, the weather's alright, not cold not hot.", "score": 0.5, "register": "casual", "feedback": "还可以 is lukewarm — when someone says 真好, matching their energy is friendlier."}
+                    {
+                        "text_zh": "是啊，今天很暖和，很舒服。",
+                        "text_pinyin": "shì a, jīntiān hěn nuǎnhuo, hěn shūfu.",
+                        "text_en": "Yes, it's warm today, very comfortable.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural small talk — 是啊 shows agreement, and you add detail."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to agree and say something about the weather, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "苹果怎么卖？我想买一些。",
+                        "text_pinyin": "píngguǒ zěnme mài? wǒ xiǎng mǎi yīxiē.",
+                        "text_en": "How much are the apples? I'd like to buy some.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to agree and say something about the weather, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond about the rain tomorrow.",
                 "options": [
-                    {"text_zh": "真的吗？那我要带伞出门了。", "text_pinyin": "zhēn de ma? nà wǒ yào dài sǎn chūmén le.", "text_en": "Really? Then I'll need to bring an umbrella.", "score": 1.0, "register": "casual", "feedback": "Engaging — 真的吗 shows interest, and the umbrella comment keeps the conversation flowing."},
-                    {"text_zh": "下雨也没关系，我喜欢下雨天。", "text_pinyin": "xià yǔ yě méi guānxi, wǒ xǐhuan xià yǔ tiān.", "text_en": "Rain is fine too, I like rainy days.", "score": 0.7, "register": "casual", "feedback": "Shows personality — a perfectly valid and friendly response."},
-                    {"text_zh": "哦，是吗？希望不会太大。", "text_pinyin": "ó, shì ma? xīwàng bú huì tài dà.", "text_en": "Oh, really? Hope it won't be too heavy.", "score": 0.6, "register": "casual", "feedback": "Reasonable but a bit passive — adding a personal reaction makes it warmer."}
+                    {
+                        "text_zh": "好的，给我来两斤吧。",
+                        "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.",
+                        "text_en": "OK, give me two jin please.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond about the rain tomorrow, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "真的吗？那我要带伞出门了。",
+                        "text_pinyin": "zhēn de ma? nà wǒ yào dài sǎn chūmén le.",
+                        "text_en": "Really? Then I'll need to bring an umbrella.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engaging — 真的吗 shows interest, and the umbrella comment keeps the conversation flowing."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond about the rain tomorrow, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

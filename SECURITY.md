@@ -1,7 +1,7 @@
 # Security Policy
 
-**Platform:** Mandarin Learning System
-**Version:** V2 (Schema V19)
+**Platform:** Aelu Learning System
+**Version:** V2 (Schema V42)
 **Last reviewed:** 2026-02-22
 **Owner:** Jason Gerson
 **Classification:** Internal / Compliance Reference
@@ -10,7 +10,7 @@
 
 ## 1. Security Architecture Overview
 
-The Mandarin Learning System is a Flask-based web application for spaced-repetition Mandarin Chinese learning, deployed on Fly.io with a Capacitor-based mobile shell for iOS/Android.
+The Aelu Learning System is a Flask-based web application for spaced-repetition Mandarin Chinese learning, deployed on Fly.io with a Capacitor-based mobile shell for iOS/Android.
 
 **Architecture summary:**
 
@@ -183,7 +183,7 @@ The Mandarin Learning System is a Flask-based web application for spaced-repetit
 | 2.5 | Allowlist authorized software | Dockerfile `pip install --no-cache-dir .` installs only declared dependencies | Implemented |
 | **3 — Data Protection** | | | |
 | 3.1 | Establish and maintain a data management process | Data classification in Section 6; SQLite schema version-controlled | Implemented |
-| 3.2 | Establish and maintain a data inventory | schema.sql documents all tables and columns; 19 tables (including `security_audit_log` and `data_deletion_request`) with foreign key relationships | Implemented |
+| 3.2 | Establish and maintain a data inventory | schema.sql documents all tables and columns; 56 tables (including `security_audit_log`, `data_deletion_request`, `crash_log`, `client_error_log`) with foreign key relationships | Implemented |
 | 3.3 | Configure data access control lists | User data scoped by `user_id` FK; admin routes require `is_admin` flag | Implemented |
 | 3.4 | Enforce data retention | GDPR account deletion with anonymization and full data purge; JSON/CSV export for data portability; no automated time-based retention policy | Partial |
 | 3.6 | Encrypt data on end-user devices | Capacitor mobile app uses platform keychain for JWT storage; web uses HttpOnly cookies | Partial |
@@ -537,7 +537,7 @@ Events are wired into `auth.py` (login, registration, password reset, lockout), 
 
 ### Contact
 
-- **Security contact:** security@mandarinapp.com
+- **Security contact:** security@aeluapp.com
 - **Responsible disclosure:** See Section 12
 
 ---
@@ -634,9 +634,9 @@ All health endpoints return `latency_ms` for SLI measurement. SLO/SLI definition
 
 ### Reporting a Vulnerability
 
-If you discover a security vulnerability in the Mandarin Learning System, please report it responsibly:
+If you discover a security vulnerability in the Aelu Learning System, please report it responsibly:
 
-**Email:** security@mandarinapp.com
+**Email:** security@aeluapp.com
 
 **What to include:**
 - Description of the vulnerability

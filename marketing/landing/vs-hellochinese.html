@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mandarin vs HelloChinese — Deeper SRS, Broader Progression | Mandarin</title>
-  <meta name="description" content="HelloChinese is the best beginner Chinese app. Mandarin is what comes after: modified FSRS, 27 drill types, cleanup loop, HSK 1-6 depth, and multi-skill diagnostics. Free to try.">
+  <title>Aelu vs HelloChinese — Deeper SRS, Broader Progression | Aelu</title>
+  <meta name="description" content="HelloChinese is the best beginner Chinese app. Aelu is what comes after: modified FSRS, 27 drill types, cleanup loop, HSK 1-9 depth, and multi-skill diagnostics. Free to try.">
   <meta name="keywords" content="HelloChinese alternative, HelloChinese vs, best Chinese learning app, Chinese app for intermediate, HelloChinese review, best app learn Mandarin, Chinese SRS app">
-  <link rel="canonical" href="https://mandarinapp.com/vs-hellochinese">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/vs-hellochinese">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Mandarin vs HelloChinese — From Beginner App to Learning System">
-  <meta property="og:description" content="HelloChinese is an excellent starting point. Mandarin is built for the full HSK 1-6 journey with deeper SRS, 27 drill types, and the cleanup loop.">
+  <meta property="og:title" content="Aelu vs HelloChinese — From Beginner App to Learning System">
+  <meta property="og:description" content="HelloChinese is an excellent starting point. Aelu is built for the full HSK 1-9 journey with deeper SRS, 27 drill types, and the cleanup loop.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/vs-hellochinese">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/vs-hellochinese">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mandarin vs HelloChinese — From Beginner App to Learning System">
-  <meta name="twitter:description" content="HelloChinese is an excellent starting point. Mandarin is built for the full HSK 1-6 journey with deeper SRS, 27 drill types, and the cleanup loop.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Aelu vs HelloChinese — From Beginner App to Learning System">
+  <meta name="twitter:description" content="HelloChinese is an excellent starting point. Aelu is built for the full HSK 1-9 journey with deeper SRS, 27 drill types, and the cleanup loop.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Mandarin vs HelloChinese — Deeper SRS, Broader Progression",
-    "description": "HelloChinese is the best beginner Chinese app. Mandarin is what comes after: modified FSRS, 27 drill types, cleanup loop, HSK 1-6 depth, and multi-skill diagnostics.",
-    "url": "https://mandarinapp.com/vs-hellochinese",
+    "name": "Aelu vs HelloChinese — Deeper SRS, Broader Progression",
+    "description": "HelloChinese is the best beginner Chinese app. Aelu is what comes after: modified FSRS, 27 drill types, cleanup loop, HSK 1-9 depth, and multi-skill diagnostics.",
+    "url": "https://aeluapp.com/vs-hellochinese",
     "keywords": "HelloChinese alternative, HelloChinese vs, best Chinese learning app"
   }
   </script>
@@ -73,7 +73,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -148,13 +151,38 @@
     .hero-label, .hero h1, .hero-sub, .cta-group { animation: drift-up 0.6s ease-out both; }
     .hero h1 { animation-delay: 0.1s; } .hero-sub { animation-delay: 0.2s; } .cta-group { animation-delay: 0.3s; }
     @media (prefers-reduced-motion: reduce) { .hero-label, .hero h1, .hero-sub, .cta-group { animation: none; opacity: 1; } }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -163,7 +191,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -171,12 +200,12 @@
   <section class="hero">
     <div class="container">
       <div class="hero-label">HelloChinese Alternative</div>
-      <h1>HelloChinese starts you off. Mandarin takes you further.</h1>
-      <p class="hero-sub">HelloChinese is the best beginner Chinese app. When you outgrow it -- when basic SRS is not enough, when you need real diagnostics, when your reading gaps should feed your drills -- Mandarin is the next step.</p>
+      <h1>HelloChinese starts you off. Aelu takes you further.</h1>
+      <p class="hero-sub">HelloChinese is the best beginner Chinese app. When you outgrow it -- when basic SRS is not enough, when you need real diagnostics, when your reading gaps should feed your drills -- Aelu is the next step.</p>
       <div class="cta-group">
         <form class="cta-email" action="#" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Try Mandarin free</button>
+          <button type="submit" class="btn-primary">Try Aelu free</button>
         </form>
         <p class="cta-note">Free for HSK 1-2. No credit card required.</p>
         <div class="cta-success">You're on the list. We'll let you know when it's ready.</div>
@@ -186,13 +215,13 @@
 
   <section class="comparison">
     <div class="container">
-      <h2>HelloChinese vs. Mandarin</h2>
+      <h2>HelloChinese vs. Aelu</h2>
       <table class="compare-table">
         <thead>
           <tr>
             <th>Feature</th>
             <th>HelloChinese</th>
-            <th>Mandarin</th>
+            <th>Aelu</th>
           </tr>
         </thead>
         <tbody>
@@ -201,7 +230,7 @@
           <tr><td>Cleanup loop (read &rarr; drill)</td><td class="cross">No</td><td class="check">Automatic</td></tr>
           <tr><td>Multi-skill diagnostics</td><td class="cross">No</td><td class="check">Per-skill tracking</td></tr>
           <tr><td>HSK projection</td><td class="cross">No</td><td class="check">Data-driven forecast</td></tr>
-          <tr><td>HSK depth</td><td>Tapers after HSK 4</td><td class="check">HSK 1-6 (7-9 planned)</td></tr>
+          <tr><td>HSK depth</td><td>Tapers after HSK 4</td><td class="check">HSK 1-9</td></tr>
           <tr><td>Bayesian confidence dampening</td><td class="cross">No</td><td class="check">Yes</td></tr>
           <tr><td>Interleaving enforcement</td><td class="cross">No</td><td class="check">Yes</td></tr>
           <tr><td>Gamification</td><td class="check">Hearts, rewards</td><td class="cross">None</td></tr>
@@ -210,7 +239,7 @@
           <tr><td>Speech recognition</td><td class="check">Built in</td><td class="check">Tone grading</td></tr>
           <tr><td>Handwriting practice</td><td class="check">Stroke order</td><td class="cross">No</td></tr>
           <tr><td>Native mobile app</td><td class="check">iOS, Android</td><td class="cross">Web app</td></tr>
-          <tr><td>Price</td><td>Free / ~$6-12/mo</td><td>Free / $12/mo</td></tr>
+          <tr><td>Price</td><td>Free / ~$6-12/mo</td><td>Free / $14.99/mo</td></tr>
         </tbody>
       </table>
     </div>
@@ -267,7 +296,7 @@
 
   <section>
     <div class="container">
-      <h2>What Mandarin offers for the long journey</h2>
+      <h2>What Aelu offers for the long journey</h2>
       <div class="feature-grid">
         <div class="feature-item">
           <strong>Modified FSRS with Bayesian dampening</strong>
@@ -282,7 +311,7 @@
           <span>Read Chinese passages. Tap words you do not know. Those words appear in your next drill session. Reading and drilling are one connected workflow, not two separate features.</span>
         </div>
         <div class="feature-item">
-          <strong>HSK 1-6 with 7-9 in preparation</strong>
+          <strong>Full HSK 1-9 curriculum</strong>
           <span>The system is built for the full journey, not just the beginner phase. Content and drills scale to advanced levels.</span>
         </div>
         <div class="feature-item">
@@ -312,7 +341,7 @@
           </ul>
         </div>
         <div class="audience-box">
-          <h3>Use Mandarin if you...</h3>
+          <h3>Use Aelu if you...</h3>
           <ul class="audience-list">
             <li>Have outgrown HelloChinese and need deeper content</li>
             <li>Want sophisticated SRS scheduling, not basic intervals</li>
@@ -330,7 +359,7 @@
     <div class="container">
       <h2 style="margin-bottom: var(--space-3);">Honest take</h2>
       <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">For HSK 1-2 beginners on a phone, HelloChinese is probably the better starting point today. Their beginner onboarding is smoother, their mobile app is more polished, and their content library at the beginner level is larger.</p>
-      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">For HSK 3+ learners who want sophisticated scheduling, multi-skill diagnostics, and the cleanup loop -- where reading gaps directly feed drill sessions -- Mandarin offers more. The two apps solve different problems at different stages of the journey.</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">For HSK 3+ learners who want sophisticated scheduling, multi-skill diagnostics, and the cleanup loop -- where reading gaps directly feed drill sessions -- Aelu offers more. The two apps solve different problems at different stages of the journey.</p>
       <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">This is not a case where one tool is strictly better. It is a question of where you are in your Chinese learning and what you need next.</p>
       <p style="font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5;">"I outgrew HelloChinese after 6 months." -- the moment when a beginner app reaches its ceiling.</p>
     </div>
@@ -343,7 +372,7 @@
       <div class="cta-group">
         <form class="cta-email" action="#" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Try Mandarin free</button>
+          <button type="submit" class="btn-primary">Try Aelu free</button>
         </form>
         <p class="cta-note">No credit card. No gamification. Just learning.</p>
       </div>
@@ -352,7 +381,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

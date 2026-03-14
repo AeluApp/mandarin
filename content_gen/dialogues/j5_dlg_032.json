@@ -1,0 +1,89 @@
+{
+    "title": "Sitting With the Rain",
+    "title_zh": "陪雨坐一会儿",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "A sudden rain traps you and a stranger under the same awning near a river. She's holding a closed book and smiling at the rain.",
+        "setup_zh": "一场突然的雨把你和一个陌生人困在了河边的同一个雨棚下。她手里拿着一本合上的书，对着雨微笑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你不着急走吗？很多人一下雨就跑。我反而喜欢这种时候——被迫停下来，什么都做不了，只能等。你有没有觉得，被迫等待其实是一种解放？",
+                "text_pinyin": "Nǐ bù zháojí zǒu ma? Hěn duō rén yī xià yǔ jiù pǎo. Wǒ fǎn'ér xǐhuan zhè zhǒng shíhou — bèi pò tíng xiàlái, shénme dōu zuò bù liǎo, zhǐ néng děng. Nǐ yǒu méiyǒu juéde, bèi pò děngdài qíshí shì yī zhǒng jiěfàng?",
+                "text_en": "You're not in a hurry to go? Most people run when it rains. I actually like these moments — forced to stop, unable to do anything, just wait. Don't you think being forced to wait is actually a kind of liberation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the stranger's perspective on rain.",
+                "options": [
+                    {
+                        "text_zh": "是啊。平时我们不会给自己「什么都不做」的许可。但是雨帮我们做了这个决定——不是我们选择停下来，是天让我们停下来。这种被动反而让人放松。",
+                        "text_pinyin": "Nǐ shuō de duì. Píngshí wǒmen bú huì gěi zìjǐ 'shénme dōu bú zuò' de xǔkě. Dànshì yǔ bāng wǒmen zuò le zhège juédìng — bú shì wǒmen xuǎnzé tíng xiàlái, shì tiān ràng wǒmen tíng xiàlái. Zhè zhǒng bèidòng fǎn'ér ràng rén fàngsōng.",
+                        "text_en": "You're right. Usually we don't give ourselves permission to do nothing. But rain makes that decision for us — we didn't choose to stop, the sky made us stop. That passivity is actually relaxing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "— picks up her philosophical thread and extends it naturally."
+                    },
+                    {
+                        "text_zh": "你没有带伞吗？",
+                        "text_pinyin": "Nǐ méiyǒu dài sǎn ma?",
+                        "text_en": "Didn't you bring an umbrella?",
+                        "score": 0.0,
+                        "feedback": "Practical but flat — misses the contemplative opening she's offering."
+                    },
+                    {
+                        "text_zh": "雨应该很快就停了吧。",
+                        "text_pinyin": "Yǔ yīnggāi hěn kuài jiù tíng le ba.",
+                        "text_en": "The rain should stop soon.",
+                        "score": 0.0,
+                        "feedback": "Impatient — contradicts the spirit of enjoying the pause."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "天让我们停下来……说得好。你看河面上的雨点，每一滴落下来都画一个圆，然后就消失了。好像什么都没留下，但水面一直在动。也许很多事情就是这样——看不到结果，但影响一直在。",
+                "text_pinyin": "Tiān ràng wǒmen tíng xiàlái…… shuō de hǎo. Nǐ kàn hé miàn shàng de yǔdiǎn, měi yī dī luò xiàlái dōu huà yīge yuán, ránhòu jiù xiāoshī le. Hǎoxiàng shénme dōu méi liú xià, dàn shuǐ miàn yīzhí zài dòng. Yěxǔ hěn duō shìqíng jiù shì zhèyàng — kàn bú dào jiéguǒ, dàn yǐngxiǎng yīzhí zài.",
+                "text_en": "The sky made us stop... well said. Look at the raindrops on the river. Each one draws a circle when it falls, then disappears. It seems like nothing was left behind, but the surface keeps moving. Maybe many things are like that — you can't see the result, but the ripples continue."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on her observation about ripples.",
+                "options": [
+                    {
+                        "text_zh": "这让我想到人与人的相遇。今天我们在这儿聊几句，明天可能就忘了。但说过的话会在心里留下痕迹，像水面的波纹。我们永远不知道自己给别人留下了什么。",
+                        "text_pinyin": "Zhè ràng wǒ xiǎng dào rén yǔ rén de xiāngyù. Jīntiān wǒmen zài zhèr liáo jǐ jù, míngtiān kěnéng jiù wàng le. Dàn shuō guò de huà huì zài xīn lǐ liú xià hénjì, xiàng shuǐ miàn de bōwén. Wǒmen yǒngyuǎn bù zhīdào zìjǐ gěi biéren liú xià le shénme.",
+                        "text_en": "That makes me think of encounters between people. We chat here today, maybe forget by tomorrow. But words leave traces in our hearts, like ripples on water. We never know what we leave behind in others.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "— connects the natural observation to human connection, perfect for a brief encounter."
+                    },
+                    {
+                        "text_zh": "你经常一个人来河边吗？",
+                        "text_pinyin": "Nǐ jīngcháng yīge rén lái hé biān ma?",
+                        "text_en": "Do you come to the river alone often?",
+                        "score": 0.0,
+                        "feedback": "Shifts to personal details instead of continuing the philosophical thread."
+                    },
+                    {
+                        "text_zh": "雨小一点了，我先走了。",
+                        "text_pinyin": "Yǔ xiǎo yīdiǎn le, wǒ xiān zǒu le.",
+                        "text_en": "The rain is lighter now, I'll head out.",
+                        "score": 0.0,
+                        "feedback": "Abrupt — exits a rare meaningful encounter too quickly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们永远不知道自己给别人留下了什么……嗯，说得真好。看，雨停了。谢谢你陪我等了这场雨。也许下次下雨的时候，我会想起今天这段对话。",
+                "text_pinyin": "Wǒmen yǒngyuǎn bù zhīdào zìjǐ gěi biéren liú xià le shénme…… en, shuō de zhēn hǎo. Kàn, yǔ tíng le. Xièxie nǐ péi wǒ děng le zhè chǎng yǔ. Yěxǔ xià cì xià yǔ de shíhou, wǒ huì xiǎng qǐ jīntiān zhè duàn duìhuà.",
+                "text_en": "We never know what we leave behind... yes, beautifully said. Look, the rain stopped. Thank you for waiting out this rain with me. Maybe next time it rains, I'll remember today's conversation."
+            }
+        ],
+        "cultural_note": "Rain holds deep poetic significance in Chinese culture. Classical poets like Li Shangyin and Du Fu used rain as a metaphor for emotion, longing, and the passage of time. The image of strangers meeting during rain — sharing an awning, exchanging a few words — resonates with the concept of「一期一会」(borrowed from Japanese, but shared in Chinese aesthetic sensibility), the idea that each encounter is unique and unrepeatable."
+    }
+}

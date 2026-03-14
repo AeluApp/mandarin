@@ -1,0 +1,124 @@
+{
+    "title": "The Patient Professor",
+    "title_zh": "耐心的教授",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_4_00_v0",
+    "tree": {
+        "setup": "Office hours in a small university office stacked with books and papers. Professor Ye teaches Chinese literature and has a habit of relating every student problem to a classical poem. She keeps a thermos of chrysanthemum tea that never seems to empty, and she believes that no question is too small if the student asking it is sincere.",
+        "setup_zh": "大学办公室的答疑时间，小小的办公室里堆满了书和论文。叶教授教中国文学，习惯把每个学生的问题都和一首古诗联系起来。她有一个永远喝不完的菊花茶保温杯，并且坚信只要学生是真心在问，就没有太小的问题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来吧，请坐。你是来问作业的事吧？",
+                "text_pinyin": "jìnlái ba, qǐng zuò. nǐ shì lái wèn zuòyè de shì ba?",
+                "text_en": "Come in, sit down. You're here about the assignment?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your difficulty with the assignment.",
+                "options": [
+                    {
+                        "text_zh": "叶老师，您好。是的，这次的作文题目我不太理解。题目说「写一篇关于家乡的文章」，但我不确定应该写什么方面。",
+                        "text_pinyin": "Yè lǎoshī, nín hǎo. shì de, zhè cì de zuòwén tímù wǒ bú tài lǐjiě. tímù shuō「xiě yì piān guānyú jiāxiāng de wénzhāng」, dàn wǒ bú quèdìng yīnggāi xiě shénme fāngmiàn.",
+                        "text_en": "Professor Ye, hello. Yes — I don't quite understand this essay topic. It says 'write about your hometown,' but I'm not sure what aspect to focus on.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A specific, honest question. Professor Ye sets down her tea — this is exactly the kind of conversation she lives for."
+                    },
+                    {
+                        "text_zh": "这个作业好难。",
+                        "text_pinyin": "zhège zuòyè hǎo nán.",
+                        "text_en": "This assignment is hard.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She nods sympathetically and asks what part specifically is giving you trouble."
+                    },
+                    {
+                        "text_zh": "我不会写。",
+                        "text_pinyin": "wǒ bú huì xiě.",
+                        "text_en": "I don't know how to write it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Ye reaches for her thermos. This conversation will take time, and she has exactly enough tea."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好问题。家乡可以写很多方面——风景、食物、人，或者你对家乡的感觉。你最想念家乡的什么？",
+                "text_pinyin": "hǎo wèntí. jiāxiāng kěyǐ xiě hěn duō fāngmiàn — fēngjǐng, shíwù, rén, huòzhě nǐ duì jiāxiāng de gǎnjué. nǐ zuì xiǎngniàn jiāxiāng de shénme?",
+                "text_en": "Good question. There are many angles — scenery, food, people, or your feelings about home. What do you miss most?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share what you miss about home.",
+                "options": [
+                    {
+                        "text_zh": "我最想念的是我奶奶做的面条。每次放假回家她都会做给我吃。",
+                        "text_pinyin": "wǒ zuì xiǎngniàn de shì wǒ nǎinai zuò de miàntiáo. měi cì fàngjià huí jiā tā dōu huì zuò gěi wǒ chī.",
+                        "text_en": "What I miss most is my grandmother's noodles. Every time I go home for break, she makes them for me.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Professor Ye's eyes light up.「从一碗面条写出整个家乡的温暖，」she murmurs. 'An entire hometown's warmth in one bowl of noodles.'"
+                    },
+                    {
+                        "text_zh": "食物吧。家里的菜比这里好吃。",
+                        "text_pinyin": "shíwù ba. jiā lǐ de cài bǐ zhèlǐ hǎochī.",
+                        "text_en": "Food, I guess. Home cooking is better than here.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A start. She'll help you dig deeper — the best essays are always hiding under the obvious."
+                    },
+                    {
+                        "text_zh": "我不知道。都还好。",
+                        "text_pinyin": "wǒ bù zhīdào. dōu hái hǎo.",
+                        "text_en": "I don't know. Everything's fine.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Ye smiles knowingly.「写作有时候就是发现你以为你不想念的东西。」Writing is sometimes discovering what you didn't know you missed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！那你可以从奶奶的面条开始写——味道、做法、你们一起吃的时候聊什么。好的文章从小事开始。你的作文截止日期是下周五，时间还够。",
+                "text_pinyin": "tài hǎo le! nà nǐ kěyǐ cóng nǎinai de miàntiáo kāishǐ xiě — wèidào, zuòfǎ, nǐmen yìqǐ chī de shíhòu liáo shénme. hǎo de wénzhāng cóng xiǎo shì kāishǐ. nǐ de zuòwén jiézhǐ rìqī shì xià zhōuwǔ, shíjiān hái gòu.",
+                "text_en": "Wonderful! Start with your grandmother's noodles — the taste, how she makes them, what you talk about while eating. Good essays start small. Your deadline is next Friday, so you have time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm you understand.",
+                "options": [
+                    {
+                        "text_zh": "谢谢叶老师！我现在有思路了。我先写一个大纲，有问题再来找您。",
+                        "text_pinyin": "xièxie Yè lǎoshī! wǒ xiànzài yǒu sīlù le. wǒ xiān xiě yí gè dàgāng, yǒu wèntí zài lái zhǎo nín.",
+                        "text_en": "Thank you, Professor Ye! I have ideas now. I'll write an outline first and come back if I have questions.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Outline first, questions later — Professor Ye nods. The chrysanthemum tea steams approvingly."
+                    },
+                    {
+                        "text_zh": "好的，谢谢老师。",
+                        "text_pinyin": "hǎo de, xièxie lǎoshī.",
+                        "text_en": "OK, thanks, professor.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She watches you leave and adds a note to check on your progress next week."
+                    },
+                    {
+                        "text_zh": "我试试吧。",
+                        "text_pinyin": "wǒ shìshi ba.",
+                        "text_en": "I'll try.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Ye calls after you:「别怕写不好。先写完再说。」Don't be afraid of writing badly. Just finish writing first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese students address professors as 老师 (lǎoshī), not by title and surname. Office hours (答疑时间, dáyí shíjiān) are less structured than in Western universities — students often just show up. The teacher-student relationship carries deep mutual respect."
+    }
+}

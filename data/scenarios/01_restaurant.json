@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them it's just you.",
                 "options": [
-                    {"text_zh": "一位。", "text_pinyin": "yī wèi.", "text_en": "One person.", "score": 1.0, "register": "neutral", "feedback": "Perfect — 位 is the polite measure word for people."},
-                    {"text_zh": "一个人。", "text_pinyin": "yī gè rén.", "text_en": "One person.", "score": 0.7, "register": "casual", "feedback": "Understood, but 位 is more polite than 个人 in restaurants."},
-                    {"text_zh": "我。", "text_pinyin": "wǒ.", "text_en": "Me.", "score": 0.4, "register": "blunt", "feedback": "Too brief — adding a measure word sounds more natural."}
+                    {
+                        "text_zh": "一位。",
+                        "text_pinyin": "yī wèi.",
+                        "text_en": "One person.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — 位 is the polite measure word for people."
+                    },
+                    {
+                        "text_zh": "一直走，左拐，右边。谢谢你！",
+                        "text_pinyin": "yìzhí zǒu, zuǒ guǎi, yòubiān. xièxie nǐ!",
+                        "text_en": "Go straight, turn left, on the right. Thank you!",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them it's just you, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "请去火车站。",
+                        "text_pinyin": "qǐng qù huǒchē zhàn.",
+                        "text_en": "Please go to the train station.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them it's just you, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Order fried rice.",
                 "options": [
-                    {"text_zh": "我要一份炒饭，谢谢。", "text_pinyin": "wǒ yào yī fèn chǎofàn, xièxie.", "text_en": "I'd like one serving of fried rice, thank you.", "score": 1.0, "register": "neutral", "feedback": "Great — clear order with 份 as measure word and a thank you."},
-                    {"text_zh": "炒饭。", "text_pinyin": "chǎofàn.", "text_en": "Fried rice.", "score": 0.6, "register": "blunt", "feedback": "Works, but adding 我要 and 谢谢 is more natural."},
-                    {"text_zh": "给我炒饭。", "text_pinyin": "gěi wǒ chǎofàn.", "text_en": "Give me fried rice.", "score": 0.5, "register": "casual", "feedback": "给我 sounds a bit demanding. 我要 or 来一份 is softer."}
+                    {
+                        "text_zh": "好的，给我来两斤吧。",
+                        "text_pinyin": "hǎo de, gěi wǒ lái liǎng jīn ba.",
+                        "text_en": "OK, give me two jin please.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to order fried rice, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢！三点要见朋友，我得走了。",
+                        "text_pinyin": "xièxie! sān diǎn yào jiàn péngyou, wǒ děi zǒu le.",
+                        "text_en": "Thanks! I'm meeting a friend at three, I have to go.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to order fried rice, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我要一份炒饭，谢谢。",
+                        "text_pinyin": "wǒ yào yī fèn chǎofàn, xièxie.",
+                        "text_en": "I'd like one serving of fried rice, thank you.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Great — clear order with 份 as measure word and a thank you."
+                    }
                 ]
             }
         ],

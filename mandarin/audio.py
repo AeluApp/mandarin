@@ -1,51 +1,212 @@
 """Audio playback and TTS for Mandarin learning.
 
-Uses macOS built-in `say -v Tingting` for Chinese TTS — zero external
-dependencies, zero audio files needed, fully offline.
+Primary backend: edge-tts (Microsoft neural voices — cross-platform, free,
+no API key).  Produces MP3 natively.
 
-Silent no-op on non-macOS platforms.
+Fallback chain:
+  1. edge-tts (all platforms, neural quality)
+  2. macOS Swift helper / `say` command (local playback on macOS)
+  3. Browser speechSynthesis (web UI fallback in JavaScript)
 
-Web mode: generate_audio_file() creates AIFF files served via Flask.
+Web mode: generate_audio_file() creates MP3/WAV files served via Flask.
 """
 
+import asyncio
+import hashlib
 import logging
 import os
 import platform
 import subprocess
 import tempfile
 import threading
+from pathlib import Path
 from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Directory for temporary audio files served to the web UI
-_AUDIO_CACHE_DIR = os.path.join(tempfile.gettempdir(), "mandarin_audio")
-os.makedirs(_AUDIO_CACHE_DIR, exist_ok=True)
+# ── Edge-TTS voices ──────────────────────────────────────────────────
+EDGE_VOICES = {
+    "female": "zh-CN-XiaoxiaoNeural",
+    "male": "zh-CN-YunxiNeural",
+    "female_young": "zh-CN-XiaoyiNeural",
+    "male_narrator": "zh-CN-YunjianNeural",
+    "male_news": "zh-CN-YunyangNeural",
+}
+_preferred_voice = "female"
 
-# Thread-local web audio callback — when set, audio is generated as files
-# and sent to the browser instead of playing through Mac speakers.
+# ── Paths ────────────────────────────────────────────────────────────
+_TTS_HELPER = str(Path(__file__).resolve().parent.parent / "tools" / "tts")
+_tts_helper_available: Optional[bool] = None
+
+# Persistent cache (pre-generated audio survives restarts)
+_PERSISTENT_AUDIO_DIR = str(Path(__file__).resolve().parent.parent / "data" / "audio_cache")
+os.makedirs(_PERSISTENT_AUDIO_DIR, exist_ok=True)
+
+# Temp cache (on-demand generation)
+_TEMP_AUDIO_DIR = os.path.join(tempfile.gettempdir(), "mandarin_audio")
+os.makedirs(_TEMP_AUDIO_DIR, exist_ok=True)
+
+# ── Edge-TTS async event loop (background thread) ───────────────────
+_edge_loop = None
+_edge_thread = None
+_edge_lock = threading.Lock()
+_edge_available: Optional[bool] = None
+
+
+def _ensure_edge_loop():
+    """Start background thread with async event loop for edge-tts."""
+    global _edge_loop, _edge_thread
+    with _edge_lock:
+        if _edge_loop is not None and _edge_loop.is_running():
+            return
+        _edge_loop = asyncio.new_event_loop()
+
+        def _run():
+            asyncio.set_event_loop(_edge_loop)
+            _edge_loop.run_forever()
+
+        _edge_thread = threading.Thread(target=_run, daemon=True, name="edge-tts")
+        _edge_thread.start()
+
+
+def _is_edge_available() -> bool:
+    """Check if edge-tts is importable."""
+    global _edge_available
+    if _edge_available is None:
+        try:
+            import edge_tts as _et  # noqa: F401
+            _edge_available = True
+            logger.info("edge-tts available (neural TTS)")
+        except ImportError:
+            _edge_available = False
+            logger.info("edge-tts not available — falling back to macOS TTS")
+    return _edge_available
+
+
+def set_preferred_voice(voice_key: str):
+    """Set preferred voice (female, male, female_young, male_narrator, male_news)."""
+    global _preferred_voice
+    if voice_key in EDGE_VOICES:
+        _preferred_voice = voice_key
+
+
+def get_preferred_voice() -> str:
+    """Return current preferred voice key."""
+    return _preferred_voice
+
+
+# ── macOS TTS detection ──────────────────────────────────────────────
+
+def _has_tts_helper() -> bool:
+    global _tts_helper_available
+    if _tts_helper_available is None:
+        _tts_helper_available = os.path.isfile(_TTS_HELPER) and os.access(_TTS_HELPER, os.X_OK)
+        if _tts_helper_available:
+            logger.info("TTS helper available: %s", _TTS_HELPER)
+    return _tts_helper_available
+
+
+_chinese_voice = None
+
+
+def _detect_best_chinese_voice() -> Optional[str]:
+    if platform.system() != "Darwin":
+        return None
+    try:
+        result = subprocess.run(
+            ["say", "-v", "?"],
+            capture_output=True, text=True, timeout=5
+        )
+        zh_cn_voices = []
+        for line in result.stdout.splitlines():
+            if "zh_CN" in line:
+                name = line.split()[0]
+                is_premium = "(Premium)" in line or "(Enhanced)" in line
+                zh_cn_voices.append((name, is_premium))
+        if not zh_cn_voices:
+            return None
+        for name, premium in zh_cn_voices:
+            if premium:
+                return name
+        for name, _ in zh_cn_voices:
+            if name == "Tingting":
+                return name
+        return zh_cn_voices[0][0]
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return None
+
+
+def get_chinese_voice() -> str:
+    global _chinese_voice
+    if _chinese_voice is None:
+        _chinese_voice = _detect_best_chinese_voice() or "Tingting"
+    return _chinese_voice
+
+
+def is_audio_available() -> bool:
+    """Check if audio is available — edge-tts works on all platforms."""
+    if _is_edge_available():
+        return True
+    if platform.system() != "Darwin":
+        return False
+    return get_chinese_voice() is not None
+
+
+# ── Rate handling ────────────────────────────────────────────────────
+
+_default_rate = 100
+
+
+def set_default_rate(rate: int):
+    global _default_rate
+    _default_rate = rate
+
+
+def get_tts_rate(text: str, listening_level: float = 1.0) -> int:
+    """Return adaptive TTS rate based on text length and learner level."""
+    if listening_level < 3.0:
+        base = int(90 + (listening_level - 1.0) * 10)
+    elif listening_level < 6.0:
+        base = int(110 + (listening_level - 3.0) * 10)
+    else:
+        base = int(140 + min(listening_level - 6.0, 3.0) * 10)
+    if len(text.strip()) <= 2:
+        base = max(base - 20, 80)
+    return base
+
+
+def _wpm_to_edge_rate(wpm: int) -> str:
+    """Convert WPM (80-170) to edge-tts rate string like '+0%' or '-20%'."""
+    # 120 WPM = natural (0%), 80 = -30%, 170 = +30%
+    pct = int((wpm - 120) * (30 / 50))
+    pct = max(-50, min(50, pct))
+    return f"{pct:+d}%"
+
+
+def _wpm_to_avspeech_rate(wpm: int) -> float:
+    return max(0.25, min(0.6, 0.30 + (wpm - 80) * 0.003))
+
+
+# ── Web audio callback ──────────────────────────────────────────────
+
 _web_audio = threading.local()
 
 
 def set_web_audio_callback(callback):
-    """Set a callback for web audio mode: callback(filename) sends to browser."""
     _web_audio.callback = callback
 
 
 def clear_web_audio_callback():
-    """Clear the web audio callback (return to local playback)."""
     _web_audio.callback = None
 
-# Module-level process handle — tracks the currently playing TTS process
+
+# ── Process management ───────────────────────────────────────────────
+
 _current_process = None
 _process_lock = threading.Lock()
 
 
 def cancel_audio():
-    """Kill any currently playing TTS process.
-
-    Safe to call at any time — no-op if nothing is playing.
-    """
     global _current_process
     with _process_lock:
         if _current_process is None:
@@ -54,41 +215,162 @@ def cancel_audio():
             _current_process.kill()
             _current_process.wait(timeout=2)
         except (OSError, subprocess.TimeoutExpired):
-            pass
+            logger.debug("cancel_audio: kill/wait failed", exc_info=True)
         finally:
             _current_process = None
 
 
-def is_audio_available() -> bool:
-    """Check if audio playback is available on this platform."""
-    if platform.system() != "Darwin":
-        return False
-    # Check if Tingting voice is installed
+# ── Core generation ──────────────────────────────────────────────────
+
+def _cache_key(text: str, rate: int, voice: str = "") -> str:
+    """Deterministic hash for audio cache."""
+    raw = f"{text}:{rate}:{voice}"
+    return hashlib.sha256(raw.encode()).hexdigest()[:12]
+
+
+def _find_cached(key: str) -> Optional[str]:
+    """Check persistent and temp cache for existing audio file."""
+    for ext in (".mp3", ".wav"):
+        fname = key + ext
+        # Check persistent cache first
+        persistent = os.path.join(_PERSISTENT_AUDIO_DIR, fname)
+        if os.path.exists(persistent) and os.path.getsize(persistent) > 0:
+            return fname
+        # Check temp cache
+        temp = os.path.join(_TEMP_AUDIO_DIR, fname)
+        if os.path.exists(temp) and os.path.getsize(temp) > 0:
+            return fname
+    return None
+
+
+def _generate_edge_tts(text: str, rate: int, voice_key: str = "") -> Optional[str]:
+    """Generate MP3 via edge-tts. Returns filename or None."""
+    if not _is_edge_available():
+        return None
+
+    import edge_tts
+
+    vk = voice_key or _preferred_voice
+    voice_name = EDGE_VOICES.get(vk, EDGE_VOICES["female"])
+    rate_str = _wpm_to_edge_rate(rate)
+
+    key = _cache_key(text, rate, vk)
+    fname = f"{key}.mp3"
+    out_path = os.path.join(_TEMP_AUDIO_DIR, fname)
+
+    if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+        return fname
+
+    # Also check persistent cache
+    persistent_path = os.path.join(_PERSISTENT_AUDIO_DIR, fname)
+    if os.path.exists(persistent_path) and os.path.getsize(persistent_path) > 0:
+        return fname
+
     try:
-        result = subprocess.run(
-            ["say", "-v", "?"],
-            capture_output=True, text=True, timeout=5
+        _ensure_edge_loop()
+        comm = edge_tts.Communicate(text, voice_name, rate=rate_str)
+        future = asyncio.run_coroutine_threadsafe(comm.save(out_path), _edge_loop)
+        future.result(timeout=30)
+
+        if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+            return fname
+        return None
+    except Exception as e:
+        logger.warning("edge-tts generation failed: %s", e)
+        return None
+
+
+def _generate_macos_tts(text: str, rate: int) -> Optional[str]:
+    """Generate WAV via macOS say + afconvert. Returns filename or None."""
+    if platform.system() != "Darwin":
+        return None
+
+    key = _cache_key(text, rate, "macos")
+    aiff_fname = f"{key}.aiff"
+    wav_fname = f"{key}.wav"
+    aiff_path = os.path.join(_TEMP_AUDIO_DIR, aiff_fname)
+    wav_path = os.path.join(_TEMP_AUDIO_DIR, wav_fname)
+
+    if os.path.exists(wav_path) and os.path.getsize(wav_path) > 0:
+        return wav_fname
+
+    try:
+        proc = subprocess.run(
+            ["say", "-v", get_chinese_voice(), "-r", str(rate), "-o", aiff_path, text],
+            capture_output=True, timeout=15,
         )
-        available = "Tingting" in result.stdout
-        if available:
-            logger.debug("macOS TTS available (Tingting voice detected)")
-        else:
-            logger.debug("macOS TTS: Tingting voice not found")
-        return available
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        logger.debug("macOS TTS: 'say' command not available")
-        return False
+        if proc.returncode != 0 or not os.path.exists(aiff_path):
+            return None
+
+        conv = subprocess.run(
+            ["afconvert", "-f", "WAVE", "-d", "LEI16@22050",
+             aiff_path, wav_path],
+            capture_output=True, timeout=15,
+        )
+        if conv.returncode != 0 or not os.path.exists(wav_path):
+            return None
+
+        try:
+            os.remove(aiff_path)
+        except OSError:
+            pass
+        return wav_fname
+    except (FileNotFoundError, subprocess.TimeoutExpired) as e:
+        logger.warning("macOS TTS failed: %s", e)
+        return None
 
 
-def speak_chinese(text: str, rate: int = 160):
-    """Play Chinese text via macOS TTS (non-blocking).
+def generate_audio_file(text: str, rate: int = None, voice: str = "") -> Optional[str]:
+    """Generate an audio file for Chinese text.
 
-    Cancels any previous audio before starting new playback.
-    Returns immediately — audio plays in background.
-    In web mode, generates a file and sends the URL to the browser.
+    Tries edge-tts first (MP3, neural quality, cross-platform),
+    falls back to macOS say (WAV).
+
+    Returns filename for serving via Flask, or None on failure.
+    Files are cached by content hash.
     """
+    if rate is None:
+        rate = _default_rate
+        if len(text.strip()) <= 2:
+            rate = max(rate - 20, 80)
+
+    vk = voice or _preferred_voice
+
+    # Check cache first (both persistent and temp)
+    key = _cache_key(text, rate, vk)
+    cached = _find_cached(key)
+    if cached:
+        return cached
+
+    # Also check legacy cache key (no voice param) for backwards compat
+    legacy_key = _cache_key(text, rate, "")
+    legacy_cached = _find_cached(legacy_key)
+    if legacy_cached:
+        return legacy_cached
+
+    # Try edge-tts first
+    result = _generate_edge_tts(text, rate, vk)
+    if result:
+        return result
+
+    # Fall back to macOS
+    return _generate_macos_tts(text, rate)
+
+
+# ── Public playback functions ────────────────────────────────────────
+
+def speak_chinese(text: str, rate: int = None):
+    """Play Chinese text (non-blocking).
+
+    Web mode: generates file and sends URL to browser.
+    CLI mode on macOS: plays through speakers.
+    """
+    if rate is None:
+        rate = _default_rate
+        if len(text.strip()) <= 2:
+            rate = max(rate - 20, 80)
+
     global _current_process
-    # Web mode: generate file and send to browser
     callback = getattr(_web_audio, "callback", None)
     if callback:
         fname = generate_audio_file(text, rate)
@@ -103,10 +385,17 @@ def speak_chinese(text: str, rate: int = 160):
         return
     cancel_audio()
     try:
-        proc = subprocess.Popen(
-            ["say", "-v", "Tingting", "-r", str(rate), text],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
+        if _has_tts_helper():
+            av_rate = _wpm_to_avspeech_rate(rate)
+            proc = subprocess.Popen(
+                [_TTS_HELPER, text, "--rate", str(av_rate)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+        else:
+            proc = subprocess.Popen(
+                ["say", "-v", get_chinese_voice(), "-r", str(rate), text],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
         with _process_lock:
             _current_process = proc
     except FileNotFoundError:
@@ -114,15 +403,18 @@ def speak_chinese(text: str, rate: int = 160):
             _current_process = None
 
 
-def speak_and_wait(text: str, rate: int = 160):
-    """Play Chinese text via macOS TTS (blocking — waits for finish).
+def speak_and_wait(text: str, rate: int = None):
+    """Play Chinese text (blocking — waits for finish).
 
-    Cancels any previous audio before starting new playback.
     Timeout scales with text length: base 15s + 1s per character.
-    In web mode, generates a file and sends the URL to the browser.
+    Web mode: generates file and sends URL, then pauses briefly.
     """
+    if rate is None:
+        rate = _default_rate
+        if len(text.strip()) <= 2:
+            rate = max(rate - 20, 80)
+
     global _current_process
-    # Web mode: generate file and send to browser
     callback = getattr(_web_audio, "callback", None)
     if callback:
         fname = generate_audio_file(text, rate)
@@ -131,6 +423,8 @@ def speak_and_wait(text: str, rate: int = 160):
                 callback(fname)
             except (TypeError, OSError, ConnectionError) as e:
                 logger.debug("web audio callback failed: %s", e)
+        import time
+        time.sleep(0.8)
         return
 
     if platform.system() != "Darwin":
@@ -138,10 +432,17 @@ def speak_and_wait(text: str, rate: int = 160):
     cancel_audio()
     timeout = max(15, 15 + len(text))
     try:
-        proc = subprocess.Popen(
-            ["say", "-v", "Tingting", "-r", str(rate), text],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
+        if _has_tts_helper():
+            av_rate = _wpm_to_avspeech_rate(rate)
+            proc = subprocess.Popen(
+                [_TTS_HELPER, text, "--rate", str(av_rate)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+        else:
+            proc = subprocess.Popen(
+                ["say", "-v", get_chinese_voice(), "-r", str(rate), text],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
         with _process_lock:
             _current_process = proc
         proc.wait(timeout=timeout)
@@ -157,38 +458,11 @@ def speak_and_wait(text: str, rate: int = 160):
             _current_process = None
 
 
-def generate_audio_file(text: str, rate: int = 160) -> Optional[str]:
-    """Generate an AIFF audio file from Chinese text via macOS TTS.
-
-    Returns the filename (not full path) for serving via Flask, or None on
-    failure.  Files are cached by text content hash so repeated calls for
-    the same text are instant.
-    """
-    if platform.system() != "Darwin":
-        return None
-
-    import hashlib
-    key = hashlib.sha256(f"{text}:{rate}".encode()).hexdigest()[:12]
-    fname = f"{key}.aiff"
-    fpath = os.path.join(_AUDIO_CACHE_DIR, fname)
-
-    if os.path.exists(fpath) and os.path.getsize(fpath) > 0:
-        return fname  # Already cached
-
-    try:
-        proc = subprocess.run(
-            ["say", "-v", "Tingting", "-r", str(rate), "-o", fpath, text],
-            capture_output=True, timeout=15,
-        )
-        if proc.returncode == 0 and os.path.exists(fpath):
-            return fname
-        logger.warning("say -o failed: rc=%d", proc.returncode)
-        return None
-    except (FileNotFoundError, subprocess.TimeoutExpired) as e:
-        logger.warning("generate_audio_file failed: %s", e)
-        return None
-
-
 def get_audio_cache_dir() -> str:
-    """Return the path to the audio cache directory."""
-    return _AUDIO_CACHE_DIR
+    """Return the path to the temp audio cache directory."""
+    return _TEMP_AUDIO_DIR
+
+
+def get_persistent_audio_dir() -> str:
+    """Return the path to the persistent audio cache directory."""
+    return _PERSISTENT_AUDIO_DIR

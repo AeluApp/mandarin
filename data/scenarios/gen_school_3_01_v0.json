@@ -1,0 +1,124 @@
+{
+    "title": "The Study Room Diplomat",
+    "title_zh": "自习室外交家",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_3_01_v0",
+    "tree": {
+        "setup": "The university library study room. Finals are next week and every table is a fortress of textbooks, energy drinks, and desperation. Your classmate Xiao Yao is trying to organize a study group for the Chinese history exam. She has color-coded study materials, a shared online document, and strong opinions about who pulls their weight in group study.",
+        "setup_zh": "大学图书馆自习室。下周就是期末考试，每张桌子都是课本、功能饮料和绝望的堡垒。你的同学小瑶正在组织中国历史考试的学习小组。她有颜色编码的学习资料、共享在线文档，和谁在小组学习中出力、谁在划水的严格评价。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你来了！我刚把复习大纲发到群里了。你看了吗？我分成了五个部分，每个人负责一个。",
+                "text_pinyin": "nǐ lái le! wǒ gāng bǎ fùxí dàgāng fā dào qún lǐ le. nǐ kàn le ma? wǒ fēn chéng le wǔ ge bùfen, měi ge rén fùzé yí gè.",
+                "text_en": "You're here! I just sent the review outline to the group chat. Did you see it? I split it into five parts, one person responsible for each."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the study plan.",
+                "options": [
+                    {
+                        "text_zh": "看了。我可以负责明朝和清朝那部分。那两个朝代我比较熟。",
+                        "text_pinyin": "kàn le. wǒ kěyǐ fùzé míng cháo hé qīng cháo nà bùfen. nà liǎng ge cháodài wǒ bǐjiào shú.",
+                        "text_en": "I saw it. I can take the Ming and Qing dynasties section. I'm more familiar with those two.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yao checks you off her list with visible satisfaction.「太好了！你把重点整理成笔记，周三之前发到群里。」负责 is 'to be responsible for.' 比较熟 means 'relatively familiar with.' Volunteering for your strength is smart."
+                    },
+                    {
+                        "text_zh": "看了，但是五个部分分给几个人啊？我们小组不是只有四个人吗？",
+                        "text_pinyin": "kàn le, dànshì wǔ ge bùfen fēn gěi jǐ ge rén a? wǒmen xiǎozǔ bú shì zhǐyǒu sì ge rén ma?",
+                        "text_en": "I saw it, but five parts for how many people? Doesn't our group only have four people?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「小李说他也要参加。你没看群消息吗？」Xiao Yao looks slightly exasperated. 分给 is 'distribute to.' Keep up with the group chat or fall behind."
+                    },
+                    {
+                        "text_zh": "不好意思，还没看。刚才在写另一门课的论文。哪个部分还没人选？",
+                        "text_pinyin": "bù hǎoyìsi, hái méi kàn. gāngcái zài xiě lìng yì mén kè de lùnwén. nǎ ge bùfen hái méi rén xuǎn?",
+                        "text_en": "Sorry, haven't seen it yet. I was writing a paper for another class. Which parts haven't been chosen?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yao sighs.「唐宋和近代史还没人选。你挑一个吧。」另一门课 is 'another class.' 论文 is 'paper/essay.' At least you showed up."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好。还有一件事——上次小组讨论小李没来，这次如果他再缺席，我觉得我们应该跟他谈谈。你觉得呢？",
+                "text_pinyin": "hǎo. hái yǒu yí jiàn shì — shàng cì xiǎozǔ tǎolùn xiǎo lǐ méi lái, zhè cì rúguǒ tā zài quēxí, wǒ juéde wǒmen yīnggāi gēn tā tántan. nǐ juéde ne?",
+                "text_en": "OK. One more thing -- Xiao Li didn't show up to the last group discussion. If he misses again this time, I think we should talk to him. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give your opinion on the Xiao Li situation.",
+                "options": [
+                    {
+                        "text_zh": "同意。不过先问问他是不是有什么困难。也许他那段时间有别的事情。",
+                        "text_pinyin": "tóngyì. búguò xiān wènwen tā shì bu shì yǒu shénme kùnnan. yěxǔ tā nà duàn shíjiān yǒu bié de shìqing.",
+                        "text_en": "I agree. But let's first ask if he's having any difficulties. Maybe he had other things going on.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yao pauses, then nods.「你说得对，我不应该直接下结论。我先私下问他。」困难 is 'difficulties.' 下结论 means 'jump to conclusions.' Diplomatic and fair."
+                    },
+                    {
+                        "text_zh": "如果他不参加讨论，那他不应该用我们整理的资料。公平一点。",
+                        "text_pinyin": "rúguǒ tā bù cānjiā tǎolùn, nà tā bù yīnggāi yòng wǒmen zhěnglǐ de zīliào. gōngpíng yìdiǎn.",
+                        "text_en": "If he doesn't participate in discussions, then he shouldn't use our compiled materials. Let's be fair.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yao looks conflicted.「道理是这样，但是大家毕竟是同学……」参加 is 'participate.' 公平 is 'fair.' 整理 is 'compile/organize.' It's a valid point but harsh."
+                    },
+                    {
+                        "text_zh": "算了吧，他不来就不来。我们自己学好就行了。",
+                        "text_pinyin": "suàn le ba, tā bù lái jiù bù lái. wǒmen zìjǐ xué hǎo jiù xíng le.",
+                        "text_en": "Forget it, if he doesn't come, he doesn't come. Let's just focus on our own studying.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「但是他负责的那部分谁来做？」Xiao Yao has a practical objection. 算了 is 'forget it.' The group still needs someone to cover his section."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "行，我先微信他。对了，周三晚上在这个自习室碰面，七点到十点。你能来吗？记得把你负责的笔记带上。",
+                "text_pinyin": "xíng, wǒ xiān wēixìn tā. duì le, zhōusān wǎnshang zài zhè ge zìxíshì pèngmiàn, qī diǎn dào shí diǎn. nǐ néng lái ma? jìde bǎ nǐ fùzé de bǐjì dài shàng.",
+                "text_en": "OK, I'll WeChat him first. By the way, Wednesday evening in this study room, 7 to 10 PM. Can you make it? Remember to bring the notes you're responsible for."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "没问题，周三七点。我争取提前把笔记整理好，这样大家可以提前看。",
+                        "text_pinyin": "méi wèntí, zhōusān qī diǎn. wǒ zhēngqǔ tíqián bǎ bǐjì zhěnglǐ hǎo, zhèyàng dàjiā kěyǐ tíqián kàn.",
+                        "text_en": "No problem, Wednesday at 7. I'll try to get the notes organized early so everyone can look at them beforehand.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yao beams.「如果每个人都像你这样就好了。」争取 means 'strive to/try to.' 提前 is 'in advance.' Going above and beyond the minimum earns respect in group work."
+                    },
+                    {
+                        "text_zh": "可以。需要我带什么吗？咖啡？零食？",
+                        "text_pinyin": "kěyǐ. xūyào wǒ dài shénme ma? kāfēi? língshí?",
+                        "text_en": "Sure. Need me to bring anything? Coffee? Snacks?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「你带笔记就行！不过……咖啡确实需要。」Xiao Yao admits caffeine is essential for a three-hour study session. Group study fuel is a shared responsibility."
+                    },
+                    {
+                        "text_zh": "七点到十点？三个小时够不够？考试范围挺大的。",
+                        "text_pinyin": "qī diǎn dào shí diǎn? sān ge xiǎoshí gòu bu gòu? kǎoshì fànwéi tǐng dà de.",
+                        "text_en": "7 to 10? Is three hours enough? The exam scope is pretty broad.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「如果不够我们周四再约一次。不过效率高的话三个小时应该可以。」考试范围 is 'exam scope.' 效率 is 'efficiency.' Xiao Yao always has a backup plan."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Study groups (学习小组, xuéxí xiǎozǔ) are central to Chinese university life, especially before finals (期末考试, qīmò kǎoshì). Materials are shared through WeChat groups (微信群). 划水 (huá shuǐ, literally 'paddling water') is slang for not contributing. 争取 (zhēngqǔ) shows effort and is valued culturally."
+    }
+}

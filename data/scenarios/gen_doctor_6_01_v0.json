@@ -1,0 +1,160 @@
+{
+    "title": "The Prescription Interpreter",
+    "title_zh": "处方翻译家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_doctor_6_01_v0",
+    "tree": {
+        "setup": "The pharmacy counter of a hospital, where rows of white-labeled medicine boxes stretch behind glass like a library of remedies. Pharmacist Zhou has worked this counter for eighteen years and reads prescriptions the way a sommelier reads a wine list — noting dosages, contraindications, and drug interactions with an expertise that borders on art. She wears reading glasses on a beaded chain and has a habit of explaining medications using food analogies that patients remember for years. 'Think of this antibiotic like garlic,' she once told a patient. 'It kills the bad things, but it's hard on the stomach if you take it empty.'",
+        "setup_zh": "医院的药房柜台，白色标签的药盒在玻璃后面排成行，像一座药物图书馆。周药剂师在这个柜台工作了十八年，看处方的方式如同侍酒师看酒单——注意剂量、禁忌和药物相互作用，专业程度近乎艺术。她戴着一副串珠链子的老花镜，有一个习惯：用食物比喻来解释药物，病人们往往记住好几年。「把这个抗生素想成大蒜，」她曾经告诉一个病人，「它杀坏东西，但空腹吃对胃不好。」",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下一位。处方给我看看。",
+                "text_pinyin": "xià yí wèi. chǔfāng gěi wǒ kànkan.",
+                "text_en": "Next. Let me see the prescription."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over the prescription and ask about the medications.",
+                "options": [
+                    {
+                        "text_zh": "您好，这是医生开的处方。一共三种药，但是我看不太懂上面的名字。能不能帮我解释一下每种药是做什么的？还有怎么吃、什么时候吃？",
+                        "text_pinyin": "nín hǎo, zhè shì yīshēng kāi de chǔfāng. yígòng sān zhǒng yào, dànshì wǒ kàn bú tài dǒng shàngmian de míngzi. néng bu néng bāng wǒ jiěshì yíxià měi zhǒng yào shì zuò shénme de? hái yǒu zěnme chī, shénme shíhòu chī?",
+                        "text_en": "Hello, here's the prescription from the doctor. Three medications, but I can't quite read the names. Could you explain what each one does? And how and when to take them?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking for the full explanation — Pharmacist Zhou pushes her reading glasses up and begins her favorite part of the job: translation from medical to human."
+                    },
+                    {
+                        "text_zh": "处方在这里。这些药怎么吃？",
+                        "text_pinyin": "chǔfāng zài zhèlǐ. zhèxiē yào zěnme chī?",
+                        "text_en": "Prescription's here. How do I take these?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll explain the dosages. The 'what' and 'why' she'll add if you seem interested."
+                    },
+                    {
+                        "text_zh": "帮我拿药。",
+                        "text_pinyin": "bāng wǒ ná yào.",
+                        "text_en": "Get me the medicines.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She fills the prescription, but Pharmacist Zhou believes understanding your medicine is as important as taking it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，我给你说说。第一种是硫酸亚铁片，补铁的。你可以把它想象成往一个快空了的水库里加水——你的身体缺铁，这个药就是补充铁元素。每天两次，饭后吃。第二种是维生素C片，帮助铁的吸收，可以和铁片一起吃。第三种是甲钴胺片，补维生素B12的。每天一次，任何时候都可以。",
+                "text_pinyin": "hǎo, wǒ gěi nǐ shuōshuo. dì yī zhǒng shì liúsuān yà tiě piàn, bǔ tiě de. nǐ kěyǐ bǎ tā xiǎngxiàng chéng wǎng yí gè kuài kōng le de shuǐkù lǐ jiā shuǐ——nǐ de shēntǐ quē tiě, zhège yào jiùshì bǔchōng tiě yuánsù. měi tiān liǎng cì, fàn hòu chī. dì èr zhǒng shì wéishēngsù C piàn, bāngzhù tiě de xīshōu, kěyǐ hé tiě piàn yìqǐ chī. dì sān zhǒng shì jiǎ gǔ àn piàn, bǔ wéishēngsù B shí'èr de. měi tiān yí cì, rènhé shíhòu dōu kěyǐ.",
+                "text_en": "OK, let me explain. First is ferrous sulfate — an iron supplement. Think of it like filling a nearly empty reservoir — your body lacks iron, and this replenishes it. Twice daily, after meals. Second is vitamin C — helps iron absorption, take it with the iron. Third is mecobalamin — vitamin B12 supplement. Once daily, any time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about side effects and interactions.",
+                "options": [
+                    {
+                        "text_zh": "明白了，铁片配维生素C，饭后吃。请问铁片有什么副作用吗？我之前吃过一种铁剂，胃特别不舒服。还有，我平时在吃一种降压药，叫氨氯地平，这些药会不会有冲突？",
+                        "text_pinyin": "míngbai le, tiě piàn pèi wéishēngsù C, fàn hòu chī. qǐngwèn tiě piàn yǒu shénme fùzuòyòng ma? wǒ zhīqián chī guò yì zhǒng tiě jì, wèi tèbié bù shūfu. hái yǒu, wǒ píngshí zài chī yì zhǒng jiàng yā yào, jiào ānlǜ dì píng, zhèxiē yào huì búhuì yǒu chōngtū?",
+                        "text_en": "Understood — iron with vitamin C, after meals. Does the iron have side effects? I took an iron supplement before and had bad stomach trouble. Also, I take a blood pressure medicine called amlodipine — will there be any interactions?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Previous adverse reaction plus current medication disclosure — Pharmacist Zhou adjusts her glasses with the focus of someone handling critical information. This is exactly what she needs to know."
+                    },
+                    {
+                        "text_zh": "有没有副作用？",
+                        "text_pinyin": "yǒu méiyǒu fùzuòyòng?",
+                        "text_en": "Any side effects?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She lists the common ones. But she doesn't know about your other medications — tell her."
+                    },
+                    {
+                        "text_zh": "好的，我知道了。帮我打包吧。",
+                        "text_pinyin": "hǎo de, wǒ zhīdào le. bāng wǒ dǎbāo ba.",
+                        "text_en": "OK, I understand. Pack them up for me.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She packs the medicines, but she'd prefer you asked about interactions first. Pharmacists live in the space between what doctors prescribe and what patients already take."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很重要的信息。铁片常见的副作用是便秘和胃部不适。既然你之前胃不舒服，我建议你从半片开始吃，让胃慢慢适应，一周以后再加到一片。氨氯地平和这些药没有直接冲突，但是铁片会影响某些药物的吸收，所以降压药和铁片至少隔开两个小时吃。",
+                "text_pinyin": "hěn zhòngyào de xìnxī. tiě piàn chángjiàn de fùzuòyòng shì biànmì hé wèi bù bù shì. jìrán nǐ zhīqián wèi bù shūfu, wǒ jiànyì nǐ cóng bàn piàn kāishǐ chī, ràng wèi mànman shìyìng, yì zhōu yǐhòu zài jiā dào yí piàn. ānlǜ dì píng hé zhèxiē yào méiyǒu zhíjiē chōngtū, dànshì tiě piàn huì yǐngxiǎng mǒu xiē yàowù de xīshōu, suǒyǐ jiàng yā yào hé tiě piàn zhìshǎo gé kāi liǎng gè xiǎoshí chī.",
+                "text_en": "Very important information. Common iron side effects are constipation and stomach discomfort. Since you had stomach trouble before, start with half a tablet, let your stomach adjust, then increase to a full tablet after a week. Amlodipine doesn't directly conflict with these, but iron affects absorption of some drugs — so take your blood pressure medicine at least two hours apart from the iron."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the timing and ask about the course duration.",
+                "options": [
+                    {
+                        "text_zh": "我确认一下：早上吃降压药，午饭后吃铁片和维生素C，晚饭后再吃一次铁片和维生素C。B12任何时候都行。铁片先吃半片，一周后加到整片。请问这些药要吃多久？需要定期复查什么指标吗？",
+                        "text_pinyin": "wǒ quèrèn yíxià: zǎoshang chī jiàng yā yào, wǔfàn hòu chī tiě piàn hé wéishēngsù C, wǎnfàn hòu zài chī yí cì tiě piàn hé wéishēngsù C. B shí'èr rènhé shíhòu dōu xíng. tiě piàn xiān chī bàn piàn, yì zhōu hòu jiā dào zhěng piàn. qǐngwèn zhèxiē yào yào chī duō jiǔ? xūyào dìngqī fùchá shénme zhǐbiāo ma?",
+                        "text_en": "Let me confirm: blood pressure medicine in the morning, iron and vitamin C after lunch, iron and vitamin C again after dinner. B12 anytime. Start with half iron, full after one week. How long do I take these? Do I need regular follow-up tests?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A complete medication schedule confirmed back, plus forward-looking questions — Pharmacist Zhou's reading glasses practically glow with approval."
+                    },
+                    {
+                        "text_zh": "好的，降压药和铁片隔开两个小时。吃多久？",
+                        "text_pinyin": "hǎo de, jiàng yā yào hé tiě piàn gé kāi liǎng gè xiǎoshí. chī duō jiǔ?",
+                        "text_en": "OK, two hours between blood pressure and iron meds. How long do I take them?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Key instruction remembered. She gives the course duration."
+                    },
+                    {
+                        "text_zh": "这么多药，好复杂。",
+                        "text_pinyin": "zhème duō yào, hǎo fùzá.",
+                        "text_en": "So many medicines — it's so complicated.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She writes the schedule on a separate card in large characters. She's done this for patients before — complexity is her department."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "铁剂一般吃三到六个月，要看复查结果。一个月后去查血常规和铁蛋白，如果指标正常了就可以减量。维生素B12也是吃到复查确认正常以后再停。注意：如果吃了以后便秘严重或者大便发黑，这是铁剂的正常反应，不用担心。但如果出现严重的胃痛或者过敏反应，比如皮疹，要立刻停药来看医生。",
+                "text_pinyin": "tiě jì yìbān chī sān dào liù gè yuè, yào kàn fùchá jiéguǒ. yí gè yuè hòu qù chá xuè chángguī hé tiě dànbái, rúguǒ zhǐbiāo zhèngcháng le jiù kěyǐ jiǎn liàng. wéishēngsù B shí'èr yě shì chī dào fùchá quèrèn zhèngcháng yǐhòu zài tíng. zhùyì: rúguǒ chī le yǐhòu biànmì yánzhòng huòzhě dàbiàn fā hēi, zhè shì tiě jì de zhèngcháng fǎnyìng, búyòng dānxīn. dàn rúguǒ chūxiàn yánzhòng de wèi tòng huòzhě guòmǐn fǎnyìng, bǐrú pízhěn, yào lìkè tíng yào lái kàn yīshēng.",
+                "text_en": "Iron supplements typically run 3-6 months, depending on follow-up results. Check CBC and ferritin after one month — if levels normalize, you can reduce. B12 continues until follow-up confirms normal levels. Note: constipation or dark stool from iron is normal — don't worry. But severe stomach pain or allergic reactions like rash — stop immediately and see the doctor."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm you understand.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢周药剂师，您解释得特别清楚，用水库的比喻我一下子就明白了。大便发黑不用担心，严重胃痛或者皮疹要停药。一个月后复查。我都记下来了。",
+                        "text_pinyin": "fēicháng gǎnxiè Zhōu yàojìshī, nín jiěshì de tèbié qīngchǔ, yòng shuǐkù de bǐyù wǒ yíxiàzi jiù míngbai le. dàbiàn fā hēi búyòng dānxīn, yánzhòng wèi tòng huòzhě pízhěn yào tíng yào. yí gè yuè hòu fùchá. wǒ dōu jì xiàlái le.",
+                        "text_en": "Thank you so much Pharmacist Zhou — your explanations were so clear. The reservoir analogy made it click instantly. Dark stool is normal, stop for severe pain or rash. Follow-up in one month. All noted.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Remembering the analogy — the highest compliment a patient can pay Pharmacist Zhou. Her beaded chain sways as she hands you the medication bag with both hands."
+                    },
+                    {
+                        "text_zh": "谢谢！一个月后复查。",
+                        "text_pinyin": "xièxie! yí gè yuè hòu fùchá.",
+                        "text_en": "Thanks! Follow-up in one month.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She hands you the bag. Somewhere in the future, you'll remember the reservoir."
+                    },
+                    {
+                        "text_zh": "好的。多少钱？",
+                        "text_pinyin": "hǎo de. duōshǎo qián?",
+                        "text_en": "OK. How much?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She rings it up. The pharmacy, like the library it resembles, holds knowledge worth more than its price tag."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospital pharmacies (药房) are staffed by trained pharmacists (药剂师) who explain prescriptions and check for interactions. Prescriptions (处方, chǔfāng) from hospital doctors are filled at the hospital pharmacy, not external ones. OTC supplements (非处方药) can be bought at any pharmacy. Follow-up blood tests (复查, fùchá) are standard for monitoring treatment effectiveness."
+    }
+}

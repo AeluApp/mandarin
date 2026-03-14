@@ -1,0 +1,124 @@
+{
+    "title": "The Departure Board Puzzle",
+    "title_zh": "航班信息屏之谜",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_3_03_v0",
+    "tree": {
+        "setup": "An airport departure hall at 6 AM. Your flight has been delayed but the information on the departure board and the app don't match. The board says 'delayed,' the app says 'on time,' and your boarding pass says a gate that doesn't seem to exist. A fellow passenger, Lao Bai, a frequent flier who carries his own neck pillow and noise-canceling headphones, is calmly eating a sandwich and watching the chaos unfold.",
+        "setup_zh": "早上六点的机场出发大厅。你的航班延误了，但航班信息屏和App上的信息不一致。屏幕写着'延误'，App显示'正常'，登机牌上的登机口好像不存在。一位常飞的乘客白大哥自带颈枕和降噪耳机，正在平静地吃三明治看混乱发生。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "第一次遇到这种情况吧？别看App了，App更新慢。看那个信息屏，最准。",
+                "text_pinyin": "dì yī cì yù dào zhè zhǒng qíngkuàng ba? bié kàn App le, App gēngxīn màn. kàn nà ge xìnxī píng, zuì zhǔn.",
+                "text_en": "First time dealing with this? Stop checking the app, it updates slowly. Look at that info board, it's the most accurate."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the situation and what to do.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！信息屏上写'延误'但没说延到几点。我应该去柜台问吗？",
+                        "text_pinyin": "xièxie! xìnxī píng shàng xiě 'yánwù' dàn méi shuō yán dào jǐ diǎn. wǒ yīnggāi qù guìtái wèn ma?",
+                        "text_en": "Thanks! The board says 'delayed' but doesn't say until when. Should I go ask at the counter?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Bai shakes his head.「柜台现在排长队了。等一下信息屏会更新。一般延误半小时到一小时就会显示新时间。」延误 is 'delay.' 柜台 is 'counter.' 显示 is 'display.' Patience over panic."
+                    },
+                    {
+                        "text_zh": "延误多久了？你也是坐这个航班吗？",
+                        "text_pinyin": "yánwù duōjiǔ le? nǐ yě shì zuò zhè ge hángbān ma?",
+                        "text_en": "How long has it been delayed? Are you on this flight too?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「不是，我坐下一班的。但是我经常延误，太有经验了。」多久了 is 'how long already.' Lao Bai's delay experience is a transferable skill."
+                    },
+                    {
+                        "text_zh": "怎么办？我下午有一个很重要的会议。赶不上怎么办？",
+                        "text_pinyin": "zěnme bàn? wǒ xiàwǔ yǒu yí gè hěn zhòngyào de huìyì. gǎn bu shàng zěnme bàn?",
+                        "text_en": "What should I do? I have a very important meeting this afternoon. What if I can't make it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「先别急。等新时间出来再看。如果延误太久可以免费改签到别的航班。」赶不上 is 'can't make it in time.' 免费改签 is 'free rebooking.' Having a backup plan reduces stress."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看，信息屏更新了。延误两个小时，新的起飞时间是八点半。登机口也换了，从A12换到B3。",
+                "text_pinyin": "kàn, xìnxī píng gēngxīn le. yánwù liǎng ge xiǎoshí, xīn de qǐfēi shíjiān shì bā diǎn bàn. dēngjīkǒu yě huàn le, cóng A shíèr huàn dào B sān.",
+                "text_en": "Look, the board updated. Two-hour delay, new departure at 8:30. Gate changed too, from A12 to B3."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Process the new information and plan your next move.",
+                "options": [
+                    {
+                        "text_zh": "两个小时……那我到了之后还来得及开会。B3登机口在哪个方向？需要坐摆渡车吗？",
+                        "text_pinyin": "liǎng ge xiǎoshí... nà wǒ dào le zhīhòu hái lái de jí kāi huì. B sān dēngjīkǒu zài nǎ ge fāngxiàng? xūyào zuò bǎidùchē ma?",
+                        "text_en": "Two hours... then I'll still make it to the meeting after landing. Which direction is gate B3? Do I need to take a shuttle bus?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「B区在那边，走路十分钟。不用摆渡车。」Lao Bai points.「但是别太早过去，那边没有好的咖啡。」来得及 is 'have enough time.' 摆渡车 is 'shuttle bus.' Practical and calm."
+                    },
+                    {
+                        "text_zh": "两个小时太久了。可以改签到别的航班吗？有没有更早的？",
+                        "text_pinyin": "liǎng ge xiǎoshí tài jiǔ le. kěyǐ gǎiqiān dào bié de hángbān ma? yǒu méiyǒu gèng zǎo de?",
+                        "text_en": "Two hours is too long. Can I switch to another flight? Are there earlier ones?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「去柜台问。延误超过两小时的话航空公司应该免费帮你改签。但是早班航班可能也满了。」改签到 is 'switch to.' 超过 is 'exceed.' Worth trying but manage expectations."
+                    },
+                    {
+                        "text_zh": "那就等吧。附近有没有咖啡厅？我去买杯咖啡。",
+                        "text_pinyin": "nà jiù děng ba. fùjìn yǒu méiyǒu kāfēitīng? wǒ qù mǎi bēi kāfēi.",
+                        "text_en": "Then I'll wait. Is there a cafe nearby? I'll go get a coffee.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Bai points left.「那边有一家星巴克。不过机场的咖啡贵。」Airport survival rule: always know where the coffee is. 附近 is 'nearby.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "给你一个建议——下载航旅纵横App，比航空公司的App准。还有，以后坐早班飞机的话，提前查一下前一天晚上那架飞机有没有延误。如果昨晚就延误了，今天一早肯定也会延。",
+                "text_pinyin": "gěi nǐ yí gè jiànyì — xiàzài hánglǚ zònghéng App, bǐ hángkōng gōngsī de App zhǔn. háiyǒu, yǐhòu zuò zǎobān fēijī de huà, tíqián chá yíxià qián yì tiān wǎnshang nà jià fēijī yǒu méiyǒu yánwù. rúguǒ zuówǎn jiù yánwù le, jīntiān yì zǎo kěndìng yě huì yán.",
+                "text_en": "Here's a tip -- download the Hanglv Zongheng app, more accurate than airline apps. Also, when taking early morning flights, check if the same plane was delayed the night before. If it was delayed last night, it'll definitely be delayed this morning too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him for the pro tips.",
+                "options": [
+                    {
+                        "text_zh": "这个经验太实用了！我现在就下载。谢谢白大哥，你简直是机场生存专家。",
+                        "text_pinyin": "zhè ge jīngyàn tài shíyòng le! wǒ xiànzài jiù xiàzài. xièxie bái dà gē, nǐ jiǎnzhí shì jīchǎng shēngcún zhuānjiā.",
+                        "text_en": "That's such practical experience! I'll download it right now. Thanks Lao Bai, you're basically an airport survival expert.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Bai adjusts his neck pillow with pride.「飞了十年了。延误、取消、行李丢失——什么都遇到过。」实用 is 'practical.' 简直 is 'simply/practically.' 生存专家 is 'survival expert.' He earned that title."
+                    },
+                    {
+                        "text_zh": "原来可以这样判断。你经常坐飞机吗？",
+                        "text_pinyin": "yuánlái kěyǐ zhèyàng pànduàn. nǐ jīngcháng zuò fēijī ma?",
+                        "text_en": "So you can tell that way. Do you fly often?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「每个月至少两次。都是出差。」判断 is 'judge/determine.' Lao Bai's frequent-flier wisdom comes from thousands of hours in departure lounges."
+                    },
+                    {
+                        "text_zh": "谢谢！希望以后不会再遇到延误了。",
+                        "text_pinyin": "xièxie! xīwàng yǐhòu bú huì zài yù dào yánwù le.",
+                        "text_en": "Thanks! I hope I won't encounter delays again.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Bai laughs.「不可能。在中国坐飞机，延误是正常的，准时才是意外。」希望 is 'hope.' 正常 is 'normal.' 意外 is 'unexpected.' A realistic outlook on Chinese air travel."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Flight delays (延误, yánwù) are common in China, especially during summer thunderstorm season. 航旅纵横 (Hánglǚ Zònghéng) is a popular independent flight tracking app, often more accurate than airline apps. For delays over 2 hours, airlines must offer free rebooking (免费改签). Pro tip: check if the same aircraft was delayed the night before (前一天晚上) -- delays compound."
+    }
+}

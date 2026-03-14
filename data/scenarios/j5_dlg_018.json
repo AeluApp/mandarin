@@ -1,0 +1,89 @@
+{
+    "title": "Learning to Rest",
+    "title_zh": "学会休息",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You run into your friend Xiaofang at a pharmacy. She's buying sleep supplements and looks tired.",
+        "setup_zh": "你在药店遇到朋友小芳。她在买助眠保健品，看起来很疲惫。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别笑我，我已经连续一个月睡不好了。不是睡不着，是躺在床上以后脑子停不下来。想明天的会议，想上周犯的错，想下个月的计划……越想越清醒。",
+                "text_pinyin": "Bié xiào wǒ, wǒ yǐjīng liánxù yīge yuè shuì bù hǎo le. Bú shì shuì bù zháo, shì tǎng zài chuáng shàng yǐhòu nǎozi tíng bú xiàlái. Xiǎng míngtiān de huìyì, xiǎng shàng zhōu fàn de cuò, xiǎng xià ge yuè de jìhuà…… yuè xiǎng yuè qīngxǐng.",
+                "text_en": "Don't laugh at me — I haven't slept well for a month straight. It's not that I can't fall asleep, it's that my mind won't stop after I lie down. Tomorrow's meeting, last week's mistake, next month's plans... the more I think, the more awake I get."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond with understanding to her sleep struggles.",
+                "options": [
+                    {
+                        "text_zh": "我不会笑你。很多人都有这个问题，只是不说出来。脑子停不下来说明你白天一直在紧绷，到了晚上身体放松了，但心还没有放下来。",
+                        "text_pinyin": "Wǒ bú huì xiào nǐ. Hěn duō rén dōu yǒu zhège wèntí, zhǐ shì bù shuō chūlái. Nǎozi tíng bú xiàlái shuōmíng nǐ báitiān yīzhí zài jǐnbēng, dào le wǎnshang shēntǐ fàngsōng le, dàn xīn hái méiyǒu fàng xiàlái.",
+                        "text_en": "I won't laugh. Many people have this problem, they just don't talk about it. Your mind not stopping means you've been tense all day — at night your body relaxes, but your heart hasn't let go yet.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Empathetic and insightful — normalizes her experience and names the root cause."
+                    },
+                    {
+                        "text_zh": "你试过喝牛奶吗？睡前喝一杯热牛奶很有效。",
+                        "text_pinyin": "Nǐ shì guò hē niúnǎi ma? Shuì qián hē yī bēi rè niúnǎi hěn yǒuxiào.",
+                        "text_en": "Have you tried drinking milk? A cup of warm milk before bed is really effective.",
+                        "score": 0.0,
+                        "feedback": "Generic advice — skips the emotional content."
+                    },
+                    {
+                        "text_zh": "你应该少看手机，蓝光对睡眠不好。",
+                        "text_pinyin": "Nǐ yīnggāi shǎo kàn shǒujī, lánguāng duì shuìmián bù hǎo.",
+                        "text_en": "You should use your phone less — blue light is bad for sleep.",
+                        "score": 0.0,
+                        "feedback": "Lecturing — she knows the usual advice; she needs understanding."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "心还没有放下来……对，就是这种感觉。我好像已经不会休息了。就算躺着，心里也在工作。有时候我觉得累不是因为做得太多，而是因为一直没有真正停下来过。",
+                "text_pinyin": "Xīn hái méiyǒu fàng xiàlái…… duì, jiù shì zhè zhǒng gǎnjué. Wǒ hǎoxiàng yǐjīng bú huì xiūxi le. Jiùsuàn tǎng zhe, xīn lǐ yě zài gōngzuò. Yǒu shíhou wǒ juéde lèi bú shì yīnwèi zuò de tài duō, ér shì yīnwèi yīzhí méiyǒu zhēnzhèng tíng xiàlái guò.",
+                "text_en": "The heart hasn't let go... yes, exactly. I think I've forgotten how to rest. Even lying down, my mind is still working. Sometimes I feel tired not because I do too much, but because I've never truly stopped."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share a thought about what real rest means.",
+                "options": [
+                    {
+                        "text_zh": "也许真正的休息不是什么都不做，而是允许自己不用什么都想清楚。你不需要在睡觉之前把所有问题都解决。明天的事明天再说，今晚只需要呼吸就好。",
+                        "text_pinyin": "Yěxǔ zhēnzhèng de xiūxi bú shì shénme dōu bú zuò, ér shì yǔnxǔ zìjǐ bú yòng shénme dōu xiǎng qīngchǔ. Nǐ bù xūyào zài shuìjiào zhīqián bǎ suǒyǒu wèntí dōu jiějué. Míngtiān de shì míngtiān zài shuō, jīn wǎn zhǐ xūyào hūxī jiù hǎo.",
+                        "text_en": "Maybe real rest isn't doing nothing, but allowing yourself not to figure everything out. You don't need to solve all problems before bed. Tomorrow's matters can wait for tomorrow. Tonight, you just need to breathe.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Calming and practical — redefines rest as permission rather than technique."
+                    },
+                    {
+                        "text_zh": "要不你去看医生吧，可能需要吃药。",
+                        "text_pinyin": "Yào bù nǐ qù kàn yīshēng ba, kěnéng xūyào chī yào.",
+                        "text_en": "Maybe you should see a doctor, you might need medication.",
+                        "score": 0.0,
+                        "feedback": "Jumps to medicalization — not what she needs in this conversation."
+                    },
+                    {
+                        "text_zh": "我每天睡得很好，一躺下就睡着了。",
+                        "text_pinyin": "Wǒ měi tiān shuì de hěn hǎo, yī tǎng xià jiù shuì zháo le.",
+                        "text_en": "I sleep great every day, I fall asleep as soon as I lie down.",
+                        "score": 0.0,
+                        "feedback": "Insensitive — makes it about yourself when she's struggling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "今晚只需要呼吸就好……嗯，我试试。谢谢你，你说的比这些保健品有用多了。",
+                "text_pinyin": "Jīn wǎn zhǐ xūyào hūxī jiù hǎo…… en, wǒ shìshì. Xièxie nǐ, nǐ shuō de bǐ zhèxiē bǎojiàn pǐn yǒuyòng duō le.",
+                "text_en": "Tonight, just breathe... okay, I'll try. Thank you — what you said is more useful than any of these supplements."
+            }
+        ],
+        "cultural_note": "Sleep problems are increasingly common among young Chinese professionals, driven by work pressure and constant digital connectivity. The phrase「内卷」(nèijuǎn, involution/rat race) captures the sense of endless competition that makes people unable to stop working even mentally. Sleep supplements (助眠保健品) have become a booming market in China, but many people recognize that the root issue is psychological rather than physical."
+    }
+}

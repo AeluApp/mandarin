@@ -13,6 +13,7 @@ from datetime import date
 from typing import List, Optional
 
 from . import db
+from .ui_labels import MODALITY_LABELS
 from .config import (
     TOD_MIN_SESSIONS, TOD_LOW_ACCURACY_THRESHOLD, TOD_LOW_ACCURACY_PENALTY,
     MISSING_MODALITY_NEED, MAX_DATA_MIX, MIX_MIN_ATTEMPTS, MIX_RAMP_RANGE,
@@ -152,7 +153,7 @@ def get_adaptive_day_profile(conn: sqlite3.Connection, user_id: int = 1) -> dict
         return {"name": "Gentle",
                 "length_mult": 0.7, "new_mult": 0.3, "mode": "gentle"}
     elif early_exit_rate > ADAPTIVE_EXIT_RATE or completion_rate < ADAPTIVE_LOW_COMPLETION:
-        return {"name": "Light",
+        return {"name": "Lighter day",
                 "length_mult": 0.8, "new_mult": 0.5, "mode": "consolidation"}
     elif accuracy > ADAPTIVE_HIGH_ACCURACY and completion_rate > ADAPTIVE_HIGH_COMPLETION:
         return {"name": "Strong day",
@@ -309,11 +310,13 @@ class DrillItem:
 # ── Error-informed drill preferences ──────────────────────────────
 
 ERROR_DRILL_PREFERENCE = {
-    "tone":           ["tone", "hanzi_to_pinyin", "english_to_pinyin"],
+    "tone":           ["tone", "hanzi_to_pinyin", "english_to_pinyin", "tone_sandhi"],
     "segment":        ["ime_type"],
     "ime_confusable": ["ime_type", "hanzi_to_pinyin"],
-    "vocab":          ["mc", "reverse_mc"],
-    "grammar":        ["intuition"],
+    "vocab":          ["mc", "reverse_mc", "collocation", "radical", "chengyu"],
+    "grammar":        ["intuition", "complement", "ba_bei", "error_correction"],
+    "measure_word":   ["measure_word", "measure_word_cloze", "measure_word_disc"],
+    "number":         ["number_system"],
     "other":          ["mc"],
 }
 
@@ -328,6 +331,8 @@ class SessionPlan:
     days_since_last: Optional[int] = None
     gap_message: Optional[str] = None
     day_label: Optional[str] = None  # Day-of-week profile name
+    focus_insights: List[str] = field(default_factory=list)  # Why the system chose this plan
+    experiment_variant: Optional[str] = None  # A/B experiment variant assigned for this session
 
 
 # ── Gap messages (humane, not shaming) ──────────────
@@ -447,7 +452,7 @@ def _adjust_weights_for_errors(conn: sqlite3.Connection, base_weights: dict[str,
         return data_weights
 
     error_modality_map = {
-        "tone": "speaking",
+        "tone": "reading",
         "segment": "ime",
         "ime_confusable": "ime",
         "vocab": "reading",
@@ -600,17 +605,76 @@ def _pick_mapping_groups(n: int = 3, exclude_groups: set[str] | None = None,
 
 # ── Drill type variety ──────────────────────────────
 
+def _bandit_drill_selection(conn: sqlite3.Connection, item: dict,
+                            mastery_stage: str, user_id: int = 1,
+                            eligible_types: list[str] | None = None) -> str | None:
+    """Thompson Sampling bandit: pick drill type with highest sampled learning gain.
+
+    For each (drill_type, mastery_stage), tracks successes (correct after review)
+    vs failures from review_event data.  Computes Beta posterior, samples, picks
+    drill type with highest sample.
+
+    Returns None when < 30 observations per arm (falls back to heuristic).
+    """
+    if not eligible_types or len(eligible_types) < 2:
+        return None  # Need at least 2 arms to make a choice
+
+    MIN_OBS_PER_ARM = 30
+
+    try:
+        rows = conn.execute(
+            """
+            SELECT drill_type,
+                   SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END) AS successes,
+                   SUM(CASE WHEN correct = 0 THEN 1 ELSE 0 END) AS failures
+            FROM review_event
+            WHERE user_id = ?
+              AND drill_type IN ({})
+            GROUP BY drill_type
+            """.format(",".join("?" for _ in eligible_types)),
+            [user_id] + list(eligible_types),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return None
+
+    arm_stats = {}
+    for r in rows:
+        dt = r["drill_type"]
+        s = (r["successes"] or 0)
+        f = (r["failures"] or 0)
+        if s + f >= MIN_OBS_PER_ARM:
+            arm_stats[dt] = (s, f)
+
+    # Need at least 2 arms with enough data
+    if len(arm_stats) < 2:
+        return None
+
+    # Thompson Sampling: sample from Beta(successes + 1, failures + 1)
+    best_type = None
+    best_sample = -1.0
+    for dt, (s, f) in arm_stats.items():
+        sample = random.betavariate(s + 1, f + 1)
+        if sample > best_sample:
+            best_sample = sample
+            best_type = dt
+
+    return best_type
+
+
 def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[str]],
-                     allowed_types: set[str] | None = None, mastery_stage: str = "seen") -> str:
+                     allowed_types: set[str] | None = None, mastery_stage: str = "seen",
+                     conn: sqlite3.Connection | None = None,
+                     user_id: int = 1) -> str:
     """Pick a drill type for a given modality, adding variety.
 
     If allowed_types is provided, prefer types in that set.
     Avoids repeating the same drill type too many times in a row.
     Uses mastery_stage for transfer scaffolding: recognition first,
     then production, then context/transfer drills.
+    Feature-flagged drill types are filtered out when conn is provided.
     """
     drill_options = {
-        "reading": ["mc", "reverse_mc", "tone", "intuition", "english_to_pinyin", "hanzi_to_pinyin", "pinyin_to_hanzi", "transfer", "measure_word", "word_order", "sentence_build", "particle_disc", "homophone", "translation", "cloze_context", "synonym_disc"],
+        "reading": ["mc", "reverse_mc", "tone", "intuition", "english_to_pinyin", "hanzi_to_pinyin", "pinyin_to_hanzi", "transfer", "measure_word", "measure_word_cloze", "measure_word_production", "measure_word_disc", "word_order", "sentence_build", "particle_disc", "homophone", "translation", "cloze_context", "synonym_disc", "number_system", "tone_sandhi", "complement", "ba_bei", "collocation", "radical", "error_correction", "chengyu"],
         "ime": ["ime_type", "dictation_sentence"],
         "listening": ["listening_gist", "listening_detail", "listening_tone", "listening_dictation", "listening_passage"],
         "speaking": ["speaking", "mc"],  # speaking drill preferred; mc fallback
@@ -618,18 +682,26 @@ def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[
 
     options = drill_options.get(modality, ["mc"])
 
+    # Filter out feature-flagged drill types that are disabled
+    if conn is not None:
+        from .feature_flags import is_drill_enabled
+        filtered = [o for o in options if is_drill_enabled(conn, o)]
+        if filtered:
+            options = filtered
+
     # Transfer scaffolding: bias drill type by mastery stage
     # Recognition first -> production -> context/transfer
     if mastery_stage in ("seen", "passed_once") and modality == "reading":
         # Prefer recognition drills for early-stage items
-        recognition = [t for t in options if t in ("mc", "reverse_mc", "tone", "measure_word")]
+        recognition = [t for t in options if t in ("mc", "reverse_mc", "tone", "measure_word", "measure_word_disc", "number_system", "radical", "error_correction", "chengyu")]
         if recognition:
             options = recognition
     elif mastery_stage in ("stabilizing", "stable", "durable") and modality == "reading":
         # Prefer production/transfer drills for established items
         production = [t for t in options if t in ("transfer", "word_order", "sentence_build",
                       "translation", "english_to_pinyin", "hanzi_to_pinyin", "particle_disc",
-                      "synonym_disc", "cloze_context")]
+                      "synonym_disc", "cloze_context", "measure_word_cloze", "measure_word_production",
+                      "tone_sandhi", "complement", "ba_bei", "collocation")]
         if production:
             options = production
 
@@ -642,6 +714,15 @@ def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[
 
     if len(options) == 1:
         return options[0]
+
+    # Thompson Sampling bandit: try learned drill selection first
+    if conn is not None and len(options) >= 2:
+        bandit_pick = _bandit_drill_selection(
+            conn, item, mastery_stage, user_id=user_id, eligible_types=options
+        )
+        if bandit_pick and bandit_pick not in variety_tracker.get(modality, [])[-2:]:
+            variety_tracker.setdefault(modality, []).append(bandit_pick)
+            return bandit_pick
 
     # Prefer types not recently used
     recent = variety_tracker.get(modality, [])
@@ -720,14 +801,20 @@ def _get_lens_weights(conn: sqlite3.Connection, user_id: int = 1) -> dict[str, f
     if not profile:
         return {}
     lens_map = {
-        "quiet_observation": profile.get("lens_quiet_observation") or 0.5,
-        "institutions": profile.get("lens_institutions") or 0.5,
-        "urban_texture": profile.get("lens_urban_texture") or 0.5,
-        "humane_mystery": profile.get("lens_humane_mystery") or 0.5,
-        "identity": profile.get("lens_identity") or 0.5,
-        "comedy": profile.get("lens_comedy") or 0.5,
-        "food_social": profile.get("lens_food") or 0.5,
-        "travel": profile.get("lens_travel") or 0.5,
+        "lens_quiet_observation": profile.get("lens_quiet_observation") or 0.5,
+        "lens_institutions": profile.get("lens_institutions") or 0.5,
+        "lens_urban_texture": profile.get("lens_urban_texture") or 0.5,
+        "lens_humane_mystery": profile.get("lens_humane_mystery") or 0.5,
+        "lens_identity": profile.get("lens_identity") or 0.5,
+        "lens_comedy": profile.get("lens_comedy") or 0.5,
+        "lens_food": profile.get("lens_food") or 0.5,
+        "lens_travel": profile.get("lens_travel") or 0.5,
+        "lens_explainers": profile.get("lens_explainers") or 0.5,
+        "lens_wit": profile.get("lens_wit") or 0.5,
+        "lens_ensemble_comedy": profile.get("lens_ensemble_comedy") or 0.5,
+        "lens_sharp_observation": profile.get("lens_sharp_observation") or 0.5,
+        "lens_satire": profile.get("lens_satire") or 0.5,
+        "lens_moral_texture": profile.get("lens_moral_texture") or 0.5,
     }
     return lens_map
 
@@ -746,6 +833,7 @@ def _get_core_injection_items(conn: sqlite3.Connection, seen_ids: set[int], limi
             SELECT COUNT(*) as total,
                    SUM(CASE WHEN times_shown > 0 THEN 1 ELSE 0 END) as seen
             FROM content_item WHERE content_lens = ? AND status = 'drill_ready'
+              AND review_status = 'approved'
         """, (lens,)).fetchone()
 
         total = row["total"] or 0
@@ -757,14 +845,15 @@ def _get_core_injection_items(conn: sqlite3.Connection, seen_ids: set[int], limi
                 unseen = conn.execute(f"""
                     SELECT * FROM content_item
                     WHERE content_lens = ? AND times_shown = 0
-                      AND status = 'drill_ready' AND id NOT IN ({placeholders})
+                      AND status = 'drill_ready' AND review_status = 'approved'
+                      AND id NOT IN ({placeholders})
                     ORDER BY RANDOM() LIMIT ?
                 """, (lens, *seen_ids, limit)).fetchall()
             else:
                 unseen = conn.execute("""
                     SELECT * FROM content_item
                     WHERE content_lens = ? AND times_shown = 0
-                      AND status = 'drill_ready'
+                      AND status = 'drill_ready' AND review_status = 'approved'
                     ORDER BY RANDOM() LIMIT ?
                 """, (lens, limit)).fetchall()
             items.extend([dict(r) for r in unseen])
@@ -803,11 +892,11 @@ def _new_item_budget(conn: sqlite3.Connection, user_id: int = 1) -> int:
     else: NEW_BUDGET_DEFAULT (standard)
     """
     mastery = db.get_mastery_by_hsk(conn, user_id=user_id)
-    if not mastery:
+    if not mastery or not mastery.keys():
         return NEW_BUDGET_DEFAULT
 
     max_level = max(mastery.keys())
-    pct = mastery[max_level]["pct"]
+    pct = (mastery[max_level] or {}).get("pct", 0)
     if pct < NEW_BUDGET_LOW_MASTERY:
         return 1
     elif pct < NEW_BUDGET_MED_MASTERY:
@@ -821,12 +910,13 @@ def _get_hsk_prerequisite_cap(conn: sqlite3.Connection, user_id: int = 1) -> int
     Gate: HSK N+1 items only available if HSK N mastery >= 80%.
     """
     mastery = db.get_mastery_by_hsk(conn, user_id=user_id)
-    if not mastery:
+    if not mastery or not mastery.keys():
         return 1  # Start with HSK 1
 
     max_allowed = 1
     for level in sorted(mastery.keys()):
-        if mastery[level]["pct"] >= 80:
+        pct = (mastery[level] or {}).get("pct", 0)
+        if pct >= 80:
             max_allowed = level + 1
         else:
             break
@@ -986,11 +1076,30 @@ def _plan_session_params(conn: sqlite3.Connection, target_items: int | None, use
         target_items = profile.get("preferred_session_length") or 12
 
     target_items = _adaptive_session_length(conn, target_items, user_id=user_id)
+
+    # A/B test: session length experiment — apply variant BEFORE day_profile multiplier
+    experiment_variant = None
+    try:
+        from . import experiments
+        variant = experiments.get_variant(conn, "session_length", user_id)
+        if variant:
+            experiment_variant = variant
+            if variant == "12_items":
+                target_items = 12
+            # "control" variant: keep adaptive target_items as-is
+            experiments.log_exposure(conn, "session_length", user_id, context="session_planning")
+    except Exception:
+        pass
+
     day_profile = get_day_profile(conn, user_id=user_id)
     target_items = max(MIN_SESSION_ITEMS, round(target_items * day_profile["length_mult"]))
 
     days_gap = db.get_days_since_last_session(conn, user_id=user_id)
     is_long_gap = days_gap is not None and days_gap >= LONG_GAP_DAYS
+
+    # Cap reactivation sessions at 12 items (doctrine: 10-15 items on re-entry)
+    if is_long_gap:
+        target_items = min(target_items, 12)
 
     base_weights = GAP_WEIGHTS if is_long_gap else DEFAULT_WEIGHTS
     weights = _adjust_weights_for_errors(conn, base_weights, user_id=user_id) if not is_long_gap else base_weights
@@ -1034,9 +1143,17 @@ def _plan_session_params(conn: sqlite3.Connection, target_items: int | None, use
     max_new = max(MIN_NEW_ITEMS, round(target_items * MAX_NEW_ITEM_RATIO))
     new_budget = min(new_budget, max_new)
 
+    # Kanban WIP enforcement: block new items if learning WIP exceeds limit
+    wip_exceeded = False
+    if not is_long_gap:
+        new_budget, wip_exceeded = _enforce_wip_limit(conn, new_budget, user_id=user_id)
+
     bounce_levels = _get_hsk_bounce_levels(conn, user_id=user_id) if not is_long_gap else set()
 
-    return {
+    profile = db.get_profile(conn, user_id=user_id)
+    total_sessions = profile.get("total_sessions") or 0
+
+    plan = {
         "target_items": target_items,
         "day_profile": day_profile,
         "days_gap": days_gap,
@@ -1047,7 +1164,172 @@ def _plan_session_params(conn: sqlite3.Connection, target_items: int | None, use
         "chosen_groups": chosen_groups,
         "new_budget": new_budget,
         "bounce_levels": bounce_levels,
+        "total_sessions": total_sessions,
+        "experiment_variant": experiment_variant,
+        "wip_exceeded": wip_exceeded,
     }
+
+    # Apply metrics-to-scheduler feedback loop (skip for long-gap reactivation sessions)
+    if not is_long_gap:
+        try:
+            plan = _apply_metrics_feedback(conn, user_id, plan)
+        except Exception as e:
+            logger.debug("metrics feedback skipped: %s", e)
+
+    return plan
+
+
+def _get_metrics_snapshot(conn: sqlite3.Connection, user_id: int = 1) -> dict:
+    """Compute a lightweight metrics snapshot for scheduler feedback.
+
+    Returns dict with:
+        retention_7d: float (0.0-1.0) — 7-day vocabulary retention rate
+        modality_coverage: dict[str, float] — fraction of sessions covering each modality
+        accuracy_trend: str — "improving", "stable", or "declining"
+    """
+    import json
+
+    snapshot = {
+        "retention_7d": None,
+        "modality_coverage": {},
+        "accuracy_trend": "stable",
+    }
+
+    # 7-day retention: fraction of items reviewed in last 7 days that are at 85%+ accuracy
+    try:
+        total_row = conn.execute("""
+            SELECT COUNT(*) AS total FROM progress
+            WHERE total_attempts >= 3
+              AND last_review_date >= date('now', '-7 days')
+              AND user_id = ?
+        """, (user_id,)).fetchone()
+        retained_row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM progress
+            WHERE total_attempts >= 3
+              AND (total_correct * 1.0 / total_attempts) >= 0.85
+              AND last_review_date >= date('now', '-7 days')
+              AND user_id = ?
+        """, (user_id,)).fetchone()
+        total = (total_row["total"] or 0) if total_row else 0
+        retained = (retained_row["cnt"] or 0) if retained_row else 0
+        snapshot["retention_7d"] = (retained / total) if total > 0 else None
+    except Exception:
+        pass
+
+    # Modality coverage: for each modality, fraction of last 7 days' sessions that used it
+    try:
+        rows = conn.execute("""
+            SELECT modality_counts FROM session_log
+            WHERE started_at >= datetime('now', '-7 days')
+              AND items_completed > 0
+              AND modality_counts IS NOT NULL
+              AND user_id = ?
+        """, (user_id,)).fetchall()
+        total_sessions = len(rows)
+        if total_sessions > 0:
+            modality_counts = {"reading": 0, "listening": 0, "speaking": 0, "ime": 0}
+            for r in rows:
+                try:
+                    mc = json.loads(r["modality_counts"])
+                    for mod in modality_counts:
+                        if mc.get(mod, 0) > 0:
+                            modality_counts[mod] += 1
+                except (json.JSONDecodeError, TypeError):
+                    pass
+            snapshot["modality_coverage"] = {
+                mod: cnt / total_sessions for mod, cnt in modality_counts.items()
+            }
+    except Exception:
+        pass
+
+    # Accuracy trend: compare this week vs last week
+    try:
+        tw = conn.execute("""
+            SELECT SUM(items_completed) AS items, SUM(items_correct) AS correct
+            FROM session_log
+            WHERE started_at >= datetime('now', '-7 days')
+              AND items_completed > 0
+              AND user_id = ?
+        """, (user_id,)).fetchone()
+        lw = conn.execute("""
+            SELECT SUM(items_completed) AS items, SUM(items_correct) AS correct
+            FROM session_log
+            WHERE started_at >= datetime('now', '-14 days')
+              AND started_at < datetime('now', '-7 days')
+              AND items_completed > 0
+              AND user_id = ?
+        """, (user_id,)).fetchone()
+        tw_items = (tw["items"] or 0) if tw else 0
+        tw_correct = (tw["correct"] or 0) if tw else 0
+        lw_items = (lw["items"] or 0) if lw else 0
+        lw_correct = (lw["correct"] or 0) if lw else 0
+        tw_acc = tw_correct / tw_items if tw_items > 0 else None
+        lw_acc = lw_correct / lw_items if lw_items > 0 else None
+        if tw_acc is not None and lw_acc is not None:
+            delta = tw_acc - lw_acc
+            if delta < -0.05:
+                snapshot["accuracy_trend"] = "declining"
+            elif delta > 0.05:
+                snapshot["accuracy_trend"] = "improving"
+            else:
+                snapshot["accuracy_trend"] = "stable"
+    except Exception:
+        pass
+
+    return snapshot
+
+
+def _apply_metrics_feedback(conn: sqlite3.Connection, user_id: int, plan: dict) -> dict:
+    """Adjust session plan based on computed metrics snapshot.
+
+    Rules:
+    - If 7-day retention rate < 60%, reduce new_item_budget by 50%
+    - If modality coverage < 50% for any modality, boost that modality's weight by 1.5x
+    - If accuracy trend is "declining", reduce session length by 20%
+
+    Modifies plan dict in-place and returns it.
+    """
+    snapshot = _get_metrics_snapshot(conn, user_id)
+    adjustments = []
+
+    # Rule 1: Low retention → cut new items
+    retention = snapshot.get("retention_7d")
+    if retention is not None and retention < 0.60:
+        old_budget = plan["new_budget"]
+        plan["new_budget"] = max(0, round(old_budget * 0.5))
+        adjustments.append(f"retention {retention:.0%} < 60%: new_budget {old_budget} -> {plan['new_budget']}")
+
+    # Rule 2: Low modality coverage → boost underrepresented modality weights
+    coverage = snapshot.get("modality_coverage", {})
+    weights = plan.get("weights", {})
+    boosted = False
+    for mod, cov in coverage.items():
+        if cov < 0.50 and mod in weights:
+            weights[mod] = weights[mod] * 1.5
+            boosted = True
+            adjustments.append(f"{mod} coverage {cov:.0%} < 50%: weight boosted 1.5x")
+    if boosted:
+        # Renormalize weights
+        total_w = sum(weights.values())
+        if total_w > 0:
+            plan["weights"] = {m: round(w / total_w, 3) for m, w in weights.items()}
+        # Recompute distribution with adjusted weights
+        plan["distribution"] = _pick_modality_distribution(plan["target_items"], plan["weights"])
+
+    # Rule 3: Declining accuracy → reduce session length
+    if snapshot.get("accuracy_trend") == "declining":
+        old_target = plan["target_items"]
+        plan["target_items"] = max(MIN_SESSION_ITEMS, round(old_target * 0.8))
+        adjustments.append(f"accuracy declining: target_items {old_target} -> {plan['target_items']}")
+        # Recompute distribution with reduced target
+        plan["distribution"] = _pick_modality_distribution(plan["target_items"], plan["weights"])
+
+    if adjustments:
+        logger.info("metrics feedback adjustments for user %d: %s", user_id, "; ".join(adjustments))
+
+    plan["_metrics_snapshot"] = snapshot
+    plan["_metrics_adjustments"] = adjustments
+    return plan
 
 
 def _plan_error_focus_items(conn: sqlite3.Connection, seen_ids: set, user_id: int) -> list:
@@ -1080,40 +1362,661 @@ def _plan_error_focus_items(conn: sqlite3.Connection, seen_ids: set, user_id: in
     return drills
 
 
+def _plan_contrastive_drills(conn, seen_ids, user_id=1):
+    """Schedule up to 2 contrastive drills for high-interference pairs.
+
+    Picks unresolved high-strength pairs where both items have progress rows
+    (i.e. the learner has seen both items before).
+    """
+    drills = []
+    try:
+        rows = conn.execute("""
+            SELECT ip.item_id_a, ip.item_id_b
+            FROM interference_pairs ip
+            JOIN progress pa ON pa.content_item_id = ip.item_id_a AND pa.user_id = ?
+            JOIN progress pb ON pb.content_item_id = ip.item_id_b AND pb.user_id = ?
+            JOIN content_item ca ON ca.id = ip.item_id_a
+            JOIN content_item cb ON cb.id = ip.item_id_b
+            WHERE ip.interference_strength = 'high'
+              AND ip.item_id_a NOT IN ({seen})
+              AND ip.item_id_b NOT IN ({seen})
+            ORDER BY RANDOM()
+            LIMIT 4
+        """.format(seen=",".join(str(s) for s in seen_ids) if seen_ids else "0"),
+            (user_id, user_id)).fetchall()
+    except Exception:
+        return drills
+
+    for row in rows:
+        if len(drills) >= 2:
+            break
+        id_a, id_b = row["item_id_a"], row["item_id_b"]
+        if id_a in seen_ids or id_b in seen_ids:
+            continue
+        # Look up item A's data for the DrillItem
+        item_a = conn.execute(
+            "SELECT id, hanzi, pinyin, english FROM content_item WHERE id = ?",
+            (id_a,)
+        ).fetchone()
+        if not item_a:
+            continue
+        seen_ids.add(id_a)
+        seen_ids.add(id_b)
+        drills.append(DrillItem(
+            content_item_id=id_a,
+            hanzi=item_a["hanzi"],
+            pinyin=item_a["pinyin"],
+            english=item_a["english"],
+            modality="reading",
+            drill_type="contrastive",
+            metadata={"contrastive_partner_id": id_b},
+        ))
+    return drills
+
+
+def _apply_cross_session_interference_penalty(conn, due_items):
+    """Soft-deprioritize items whose interference partner was drilled in the last session.
+
+    Moves recently-conflicted items toward the end of the list rather than
+    hard-blocking them, giving the learner spacing between confusable pairs.
+    """
+    if not due_items:
+        return
+    item_ids = [i["id"] for i in due_items]
+    if not item_ids:
+        return
+    placeholders = ",".join("?" * len(item_ids))
+    try:
+        recent_partners = conn.execute(f"""
+            SELECT ip.item_id_a, ip.item_id_b
+            FROM interference_pairs ip
+            WHERE ip.interference_strength = 'high'
+              AND (ip.item_id_a IN ({placeholders}) OR ip.item_id_b IN ({placeholders}))
+              AND (ip.last_item_a_drilled >= datetime('now', '-1 day')
+                   OR ip.last_item_b_drilled >= datetime('now', '-1 day'))
+        """, item_ids + item_ids).fetchall()
+    except sqlite3.OperationalError:
+        return
+
+    if not recent_partners:
+        return
+
+    # Build set of items that should be deprioritized
+    item_set = set(item_ids)
+    penalized = set()
+    for row in recent_partners:
+        a, b = row["item_id_a"], row["item_id_b"]
+        # If partner A was drilled recently, penalize B (and vice versa)
+        if a in item_set:
+            penalized.add(a)
+        if b in item_set:
+            penalized.add(b)
+
+    if penalized:
+        # Stable sort: penalized items move to end, preserving relative order
+        due_items.sort(key=lambda x: 1 if x["id"] in penalized else 0)
+
+
+def _plan_grammar_boost_items(conn: sqlite3.Connection, seen_ids: set,
+                               target_items: int, drills: list, user_id: int) -> None:
+    """Boost scheduling weight for items linked to recently-studied grammar points.
+
+    When a user studies a grammar point, the linked vocabulary items get
+    priority in the next few sessions, reinforcing both grammar understanding
+    and vocabulary mastery simultaneously.
+    """
+    try:
+        boost_limit = max(2, target_items // 6)  # Up to ~16% of session
+        # Find content items linked to grammar points studied in last 3 days
+        grammar_items = conn.execute("""
+            SELECT DISTINCT ci.id, ci.hanzi, ci.pinyin, ci.english, ci.hsk_level,
+                   gp.name as grammar_name,
+                   COALESCE(p.mastery_stage, 'unseen') as stage
+            FROM grammar_progress gpr
+            JOIN content_grammar cg ON cg.grammar_point_id = gpr.grammar_point_id
+            JOIN content_item ci ON ci.id = cg.content_item_id
+            JOIN grammar_point gp ON gp.id = gpr.grammar_point_id
+            LEFT JOIN progress p ON p.content_item_id = ci.id
+                AND p.modality = 'reading' AND p.user_id = ?
+            WHERE gpr.user_id = ?
+              AND gpr.studied_at >= datetime('now', '-3 days')
+              AND ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
+            ORDER BY gpr.studied_at DESC
+            LIMIT ?
+        """, (user_id, user_id, boost_limit * 2)).fetchall()
+
+        added = 0
+        for gi in grammar_items:
+            if gi["id"] in seen_ids or added >= boost_limit:
+                break
+            if len(drills) >= target_items:
+                break
+            seen_ids.add(gi["id"])
+            # Drill type based on mastery stage
+            stage = gi["stage"]
+            if stage in ("unseen", "seen"):
+                drill_type = "mc"
+            elif stage == "passed_once":
+                drill_type = "reverse_mc"
+            else:
+                drill_type = "cloze_context"
+            drills.append(DrillItem(
+                content_item_id=gi["id"],
+                hanzi=gi["hanzi"],
+                pinyin=gi["pinyin"],
+                english=gi["english"],
+                modality="reading",
+                drill_type=drill_type,
+                metadata={"grammar_boost": True,
+                          "grammar_name": gi["grammar_name"]},
+            ))
+            added += 1
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.debug("grammar boost skipped: %s", e)
+
+
 def _plan_encounter_boost_items(conn: sqlite3.Connection, seen_ids: set,
                                  target_items: int, drills: list, user_id: int) -> None:
-    """Inject priority review items from recent reading/listening lookups."""
+    """Inject priority review items from recent reading/listening lookups.
+
+    Scales with session length (up to 25% of target), uses a 14-day window,
+    and varies drill types based on item mastery stage.
+    """
     try:
+        boost_limit = max(4, target_items // 4)  # Up to 25% of session
         encounter_items = conn.execute("""
             SELECT DISTINCT ve.content_item_id, ci.hanzi, ci.pinyin, ci.english,
-                   ci.hsk_level, COUNT(*) as lookup_count
+                   ci.hsk_level, COUNT(*) as lookup_count,
+                   COALESCE(p.mastery_stage, 'unseen') as stage,
+                   COALESCE(p.total_attempts, 0) as attempts
             FROM vocab_encounter ve
             JOIN content_item ci ON ve.content_item_id = ci.id
+            LEFT JOIN progress p ON p.content_item_id = ci.id
+                AND p.modality = 'reading' AND p.user_id = ?
             WHERE ve.looked_up = 1
-              AND ve.created_at >= datetime('now', '-7 days')
+              AND ve.created_at >= datetime('now', '-14 days')
               AND ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
               AND ve.user_id = ?
             GROUP BY ve.content_item_id
             ORDER BY lookup_count DESC
-            LIMIT 4
-        """, (user_id,)).fetchall()
+            LIMIT ?
+        """, (user_id, user_id, boost_limit)).fetchall()
         for ei in encounter_items:
             if ei["content_item_id"] in seen_ids:
                 continue
             if len(drills) >= target_items:
                 break
             seen_ids.add(ei["content_item_id"])
+            # Vary drill type by mastery stage
+            stage = ei["stage"]
+            if stage in ("unseen", "seen"):
+                drill_type = "mc"  # Recognition for new items
+            elif stage == "passed_once":
+                drill_type = "reverse_mc"  # Reverse recognition
+            else:
+                drill_type = "ime_type"  # Production for familiar items
             drills.append(DrillItem(
                 content_item_id=ei["content_item_id"],
                 hanzi=ei["hanzi"],
                 pinyin=ei["pinyin"],
                 english=ei["english"],
                 modality="reading",
-                drill_type="mc",
+                drill_type=drill_type,
                 metadata={"encounter_boost": True, "lookup_count": ei["lookup_count"]},
             ))
+
+        # Log activation event: encounter→drill loop completed
+        boosted = [d for d in drills if d.metadata.get("encounter_boost")]
+        if boosted:
+            try:
+                from .marketing_hooks import log_lifecycle_event
+                # Check if this is the user's first magic moment
+                first = conn.execute(
+                    """SELECT 1 FROM lifecycle_event
+                       WHERE event_type = 'first_encounter_drilled'
+                       AND user_id = ? LIMIT 1""",
+                    (str(user_id),),
+                ).fetchone()
+                if not first:
+                    log_lifecycle_event(
+                        "first_encounter_drilled",
+                        user_id=str(user_id),
+                        conn=conn,
+                        items=[d.hanzi for d in boosted[:5]],
+                    )
+                log_lifecycle_event(
+                    "encounter_drilled",
+                    user_id=str(user_id),
+                    conn=conn,
+                    count=len(boosted),
+                )
+            except Exception:
+                pass  # Don't break session planning for telemetry
     except (sqlite3.Error, KeyError, TypeError) as e:
         logger.debug("encounter boost skipped: %s", e)
+
+
+def _plan_reading_struggle_boost(conn: sqlite3.Connection, seen_ids: set,
+                                  target_items: int, drills: list, user_id: int) -> None:
+    """Boost items encountered in passages where comprehension was low.
+
+    If a user scored < 60% on reading comprehension questions in the last 7 days,
+    the words they encountered in those passages need reinforcement through drills.
+    """
+    try:
+        boost_limit = max(2, target_items // 6)  # Up to ~16% of session
+        struggle_items = conn.execute("""
+            SELECT DISTINCT ve.content_item_id, ci.hanzi, ci.pinyin, ci.english,
+                   ci.hsk_level,
+                   COALESCE(p.mastery_stage, 'unseen') as stage,
+                   rp.questions_correct, rp.questions_total
+            FROM reading_progress rp
+            JOIN vocab_encounter ve ON ve.source_type = 'reading'
+                AND ve.source_id = rp.passage_id AND ve.user_id = ?
+            JOIN content_item ci ON ci.id = ve.content_item_id
+            LEFT JOIN progress p ON p.content_item_id = ci.id
+                AND p.modality = 'reading' AND p.user_id = ?
+            WHERE rp.user_id = ?
+              AND rp.completed_at >= datetime('now', '-7 days')
+              AND rp.questions_total > 0
+              AND CAST(rp.questions_correct AS REAL) / rp.questions_total < 0.6
+              AND ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
+            ORDER BY rp.completed_at DESC
+            LIMIT ?
+        """, (user_id, user_id, user_id, boost_limit * 3)).fetchall()
+
+        added = 0
+        for si in struggle_items:
+            if si["content_item_id"] in seen_ids or added >= boost_limit:
+                break
+            if len(drills) >= target_items:
+                break
+            seen_ids.add(si["content_item_id"])
+            stage = si["stage"]
+            if stage in ("unseen", "seen"):
+                drill_type = "mc"
+            elif stage == "passed_once":
+                drill_type = "reverse_mc"
+            else:
+                drill_type = "cloze_context"
+            drills.append(DrillItem(
+                content_item_id=si["content_item_id"],
+                hanzi=si["hanzi"],
+                pinyin=si["pinyin"],
+                english=si["english"],
+                modality="reading",
+                drill_type=drill_type,
+                metadata={"reading_struggle_boost": True},
+            ))
+            added += 1
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.debug("reading struggle boost skipped: %s", e)
+
+
+# ── Operations Research: Formal Objective Function ──────────────────────
+#
+# The composite score ranks items for selection by combining four factors:
+#   1. Retention urgency:  How overdue is this item? (higher = more urgent)
+#   2. Difficulty match:   How close is the item difficulty to the learner's sweet spot?
+#   3. Variety penalty:    Have we recently drilled this item/type? (penalize repeats)
+#   4. Error weight:       Items with recent errors get priority
+#
+# Weights are tuned so that urgency dominates but variety prevents staleness.
+
+OBJECTIVE_WEIGHTS = {
+    "retention_urgency": 0.40,
+    "difficulty_match": 0.20,
+    "variety_bonus": 0.15,
+    "error_weight": 0.25,
+}
+
+
+def _compute_item_priority(item: dict, recent_ids: set, recent_drill_types: list,
+                           target_difficulty: float = 0.6) -> float:
+    """Compute composite priority score for a single item using formal objective function.
+
+    Returns a float in [0, 1] where higher = should be scheduled sooner.
+    """
+    w = OBJECTIVE_WEIGHTS
+
+    # 1. Retention urgency: days overdue / (interval * 2)
+    interval = max(item.get("current_interval") or 1.0, 0.1)
+    days_since = item.get("days_since_review") or 0
+    urgency = min(1.0, days_since / (interval * 2))
+
+    # 2. Difficulty match: use ML prediction if available, else static difficulty
+    diff = item.get("difficulty") or 0.5
+    ml_predicted_acc = item.get("_ml_predicted_accuracy")
+    if ml_predicted_acc is not None:
+        # ML model: score highest when predicted accuracy is in 70-85% zone
+        if 0.70 <= ml_predicted_acc <= 0.85:
+            match_score = 1.0
+        else:
+            distance = min(abs(ml_predicted_acc - 0.70), abs(ml_predicted_acc - 0.85))
+            match_score = max(0.0, 1.0 - distance * 4)
+    else:
+        match_score = max(0.0, 1.0 - abs(diff - target_difficulty) * 2.5)
+
+    # 3. Variety: penalize items already seen in this session
+    variety = 0.0 if item.get("id") in recent_ids else 1.0
+    drill_type = item.get("_candidate_drill_type", "mc")
+    if drill_type in recent_drill_types[-3:]:
+        variety *= 0.5
+
+    # 4. Error weight: items with errors or low streak get boost
+    error_count = item.get("error_count") or 0
+    streak = item.get("streak_correct") or 0
+    error_score = min(1.0, error_count * 0.2) if error_count > 0 else 0.0
+    if streak == 0 and (item.get("total_attempts") or 0) > 0:
+        error_score = max(error_score, 0.3)
+
+    score = (w["retention_urgency"] * urgency +
+             w["difficulty_match"] * match_score +
+             w["variety_bonus"] * variety +
+             w["error_weight"] * error_score)
+
+    return round(score, 4)
+
+
+def _annotate_ml_predictions(conn: sqlite3.Connection, items: list,
+                              user_id: int = 1, session_id=None,
+                              position: int = 0) -> None:
+    """Annotate items with ML difficulty predictions (in-place, best effort).
+
+    Sets _ml_predicted_accuracy on each item dict. Skips silently if model
+    unavailable or prediction fails.
+    """
+    try:
+        from .ml.difficulty_model import predict_difficulty, load_model, MODEL_PATH
+        if load_model(MODEL_PATH) is None:
+            return
+        for item in items:
+            try:
+                pred = predict_difficulty(
+                    conn, item_id=item.get("id"), user_id=user_id,
+                    session_id=session_id, position_in_session=position,
+                    modality=item.get("_candidate_modality", "reading"),
+                )
+                if pred.get("model_available"):
+                    item["_ml_predicted_accuracy"] = pred["predicted_accuracy"]
+            except Exception:
+                pass
+    except (ImportError, Exception):
+        pass
+
+
+def rank_items_by_objective(items: list, recent_ids: set,
+                            recent_drill_types: list,
+                            target_difficulty: float = 0.6) -> list:
+    """Rank candidate items by the formal objective function (descending priority)."""
+    scored = []
+    for item in items:
+        score = _compute_item_priority(item, recent_ids, recent_drill_types,
+                                       target_difficulty)
+        scored.append((score, item))
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [item for _, item in scored]
+
+
+# ── Operations Research: Decision Table ──────────────────────────────
+
+SCHEDULING_DECISION_TABLE = [
+    {
+        "rule": "long_gap_reactivation",
+        "description": "User returning after extended absence",
+        "conditions": {"days_gap": ">= 7"},
+        "actions": {"new_items": 0, "max_difficulty": 0.5, "session_type": "catchup",
+                     "priority": "familiar_first"},
+    },
+    {
+        "rule": "high_wip_block",
+        "description": "Too many items in learning state — consolidate before adding new",
+        "conditions": {"wip_count": "> wip_limit"},
+        "actions": {"new_items": 0, "priority": "overdue_first"},
+    },
+    {
+        "rule": "bounce_detected",
+        "description": "Error rate at an HSK level exceeds threshold",
+        "conditions": {"bounce_levels": "non-empty"},
+        "actions": {"new_items_at_level": "reduce_50%", "priority": "error_focus"},
+    },
+    {
+        "rule": "consolidation_day",
+        "description": "Day profile indicates lighter session",
+        "conditions": {"day_mode": "in (consolidation, gentle)"},
+        "actions": {"new_items_mult": 0.5, "max_difficulty": 0.6, "length_mult": 0.8},
+    },
+    {
+        "rule": "stretch_day",
+        "description": "Day profile indicates strong performance window",
+        "conditions": {"day_mode": "== stretch"},
+        "actions": {"new_items_mult": 1.5, "length_mult": 1.3, "hsk_cap": "+1"},
+    },
+    {
+        "rule": "standard_session",
+        "description": "Normal scheduling — balanced new and review",
+        "conditions": {"default": True},
+        "actions": {"new_items": "budget", "priority": "objective_function"},
+    },
+]
+
+
+def evaluate_decision_table(params: dict) -> dict:
+    """Evaluate the scheduling decision table against current session params.
+
+    Returns the merged actions from all matching rules.
+    """
+    matched_rules = []
+    merged_actions = {}
+
+    is_long_gap = params.get("is_long_gap", False)
+    bounce_levels = params.get("bounce_levels", set())
+    day_mode = params.get("day_profile", {}).get("mode", "standard")
+    wip_count = params.get("wip_count", 0)
+    wip_limit = params.get("wip_limit", 999)
+
+    for rule in SCHEDULING_DECISION_TABLE:
+        conditions = rule["conditions"]
+        match = False
+
+        if "days_gap" in conditions and is_long_gap:
+            match = True
+        elif "wip_count" in conditions and wip_count > wip_limit:
+            match = True
+        elif "bounce_levels" in conditions and bounce_levels:
+            match = True
+        elif "day_mode" in conditions:
+            if day_mode in ("consolidation", "gentle") and "consolidation" in conditions["day_mode"]:
+                match = True
+            elif day_mode == "stretch" and "stretch" in conditions["day_mode"]:
+                match = True
+        elif "default" in conditions:
+            match = True
+
+        if match:
+            matched_rules.append(rule["rule"])
+            merged_actions.update(rule["actions"])
+
+    return {"matched_rules": matched_rules, "actions": merged_actions}
+
+
+def sensitivity_analysis(conn: sqlite3.Connection, user_id: int = 1) -> dict:
+    """Test how session outcomes change when key parameters vary +/-20%.
+
+    Identifies which parameters have the most impact on session quality.
+    """
+    from .config import MAX_NEW_ITEM_RATIO, NEW_BUDGET_DEFAULT
+
+    profile = db.get_profile(conn, user_id=user_id)
+    base_target = profile.get("preferred_session_length") or 12
+
+    results = {}
+
+    for param_name, base_val in [
+        ("target_items", base_target),
+        ("new_item_ratio", MAX_NEW_ITEM_RATIO),
+        ("new_budget", NEW_BUDGET_DEFAULT),
+    ]:
+        low_val = max(1, round(base_val * 0.8)) if isinstance(base_val, int) else round(base_val * 0.8, 3)
+        high_val = round(base_val * 1.2) if isinstance(base_val, int) else round(base_val * 1.2, 3)
+
+        if param_name == "target_items":
+            low_effect = {"total_drills": low_val, "est_duration_s": low_val * SECONDS_PER_DRILL}
+            high_effect = {"total_drills": high_val, "est_duration_s": high_val * SECONDS_PER_DRILL}
+        elif param_name == "new_item_ratio":
+            low_new = max(1, round(base_target * low_val))
+            high_new = round(base_target * high_val)
+            low_effect = {"max_new_items": low_new, "review_items": base_target - low_new}
+            high_effect = {"max_new_items": high_new, "review_items": base_target - high_new}
+        else:
+            low_effect = {"new_budget": low_val}
+            high_effect = {"new_budget": high_val}
+
+        impact = abs(high_val - low_val) / max(base_val, 0.001)
+        sensitivity = "high" if impact > 0.3 else ("medium" if impact > 0.15 else "low")
+
+        results[param_name] = {
+            "base_value": base_val, "low_value": low_val, "high_value": high_val,
+            "low_effect": low_effect, "high_effect": high_effect,
+            "sensitivity": sensitivity,
+        }
+
+    return results
+
+
+# ── Kanban: WIP Enforcement ──────────────────────────────────────────
+
+LEARNING_WIP_LIMIT = 30
+
+# Register with parameter graph
+try:
+    from .intelligence.parameter_registry import _PARAMETER_REGISTRY_PENDING
+    _PARAMETER_REGISTRY_PENDING.append({
+        "parameter_name": "LEARNING_WIP_LIMIT", "file_path": "mandarin/scheduler.py",
+        "current_value": LEARNING_WIP_LIMIT, "current_value_str": str(LEARNING_WIP_LIMIT),
+        "value_type": "int", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["retention"]', "min_valid": 10, "max_valid": 200,
+        "soft_min": 20, "soft_max": 60, "change_direction": "either",
+        "notes": "Kanban WIP limit for items in active learning",
+    })
+except ImportError:
+    pass
+
+
+def _get_learning_wip(conn: sqlite3.Connection, user_id: int = 1) -> int:
+    """Count items currently in active learning (short interval, recently reviewed)."""
+    try:
+        row = conn.execute("""
+            SELECT COUNT(*) as cnt FROM progress
+            WHERE user_id = ?
+              AND current_interval < 7
+              AND last_review_date >= date('now', '-14 days')
+              AND mastery_stage NOT IN ('durable', 'stable')
+        """, (user_id,)).fetchone()
+        return (row["cnt"] or 0) if row else 0
+    except Exception:
+        return 0
+
+
+def _enforce_wip_limit(conn: sqlite3.Connection, new_budget: int,
+                       user_id: int = 1) -> tuple[int, bool]:
+    """Enforce Kanban WIP limit on new item introduction.
+
+    Returns (adjusted_new_budget, wip_exceeded).
+    """
+    wip = _get_learning_wip(conn, user_id)
+    if wip >= LEARNING_WIP_LIMIT:
+        logger.info("WIP limit enforced: %d items in learning (limit: %d), blocking new items",
+                    wip, LEARNING_WIP_LIMIT)
+        return 0, True
+    if wip > LEARNING_WIP_LIMIT * 0.8:
+        reduction = (wip - LEARNING_WIP_LIMIT * 0.8) / (LEARNING_WIP_LIMIT * 0.2)
+        adjusted = max(0, round(new_budget * (1 - reduction)))
+        return adjusted, False
+    return new_budget, False
+
+
+# ── Kanban: Aging Escalation Tiers ──────────────────────────────────
+
+AGING_TIERS = {
+    "green": {"min_days": 0, "max_days": 0, "label": "On time", "priority_mult": 1.0},
+    "yellow": {"min_days": 1, "max_days": 2, "label": "Slightly overdue", "priority_mult": 1.3},
+    "orange": {"min_days": 3, "max_days": 7, "label": "Overdue", "priority_mult": 1.6},
+    "red": {"min_days": 8, "max_days": 999, "label": "Critical overdue", "priority_mult": 2.0},
+}
+
+
+def _get_aging_tier(days_overdue: int) -> str:
+    """Classify an item's overdue status into an aging tier."""
+    if days_overdue <= 0:
+        return "green"
+    elif days_overdue <= 2:
+        return "yellow"
+    elif days_overdue <= 7:
+        return "orange"
+    else:
+        return "red"
+
+
+def get_aging_summary(conn: sqlite3.Connection, user_id: int = 1) -> dict:
+    """Summarize item aging tiers for the admin dashboard."""
+    try:
+        rows = conn.execute("""
+            SELECT content_item_id,
+                   CAST(julianday('now') - julianday(
+                       datetime(last_review_date, '+' || CAST(ROUND(current_interval) AS TEXT) || ' days')
+                   ) AS INTEGER) AS days_overdue
+            FROM progress
+            WHERE user_id = ?
+              AND last_review_date IS NOT NULL
+              AND current_interval IS NOT NULL
+        """, (user_id,)).fetchall()
+    except Exception:
+        return {"green": 0, "yellow": 0, "orange": 0, "red": 0, "total": 0}
+
+    counts = {"green": 0, "yellow": 0, "orange": 0, "red": 0}
+    for r in rows:
+        days = r["days_overdue"] or 0
+        tier = _get_aging_tier(days)
+        counts[tier] += 1
+
+    counts["total"] = sum(counts.values())
+    return counts
+
+
+# ── Kanban: Explicit Policies ────────────────────────────────────────
+
+KANBAN_POLICIES = {
+    "definition_of_done": {
+        "mc": "Correct answer selected within 15 seconds",
+        "reverse_mc": "Correct answer selected within 15 seconds",
+        "ime_type": "Correct hanzi typed within 30 seconds",
+        "tone": "Correct tone mark identified",
+        "listening_gist": "Main meaning captured correctly",
+        "speaking": "Tone accuracy >= 60% on graded recording",
+        "dialogue": "Completed all turns with appropriate responses",
+    },
+    "entry_criteria": {
+        "hsk1": "No prerequisite",
+        "hsk2": "HSK 1 mastery >= 80%",
+        "hsk3": "HSK 2 mastery >= 80%",
+        "hsk4": "HSK 3 mastery >= 80%",
+    },
+    "exit_criteria": {
+        "mastery_stage_durable": "5+ consecutive correct, interval >= 21 days",
+        "mastery_stage_stable": "3+ consecutive correct, interval >= 7 days",
+        "hsk_level_complete": "90% of items at durable stage",
+    },
+    "escalation_rules": {
+        "error_focus_trigger": "3+ errors on same item within 5 sessions",
+        "error_focus_resolve": "3 consecutive correct answers",
+        "hsk_bounce": f"Error rate > {BOUNCE_ERROR_RATE*100}% at a level with >= {BOUNCE_MIN_ERRORS} errors",
+    },
+    "wip_limit": LEARNING_WIP_LIMIT,
+}
 
 
 def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
@@ -1147,11 +2050,32 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
             due_items.sort(key=lambda x: x.get("streak_correct") or 0, reverse=True)
         elif is_stretch:
             due_items.sort(key=lambda x: x.get("streak_correct") or 0)
+        else:
+            # Normal session: use ML difficulty predictions as soft preference
+            _annotate_ml_predictions(conn, due_items, user_id=user_id)
+            due_items.sort(
+                key=lambda x: abs((x.get("_ml_predicted_accuracy") or 0.75) - 0.775),
+            )
 
         if is_consolidation:
             due_items = [i for i in due_items if (i.get("difficulty") or 0.5) <= 0.6] or due_items
 
         items_added = 0
+        # Interference-aware filtering (within-session + cross-session)
+        try:
+            from .ai.memory_model import apply_interference_separation
+            session_item_ids = [d.content_item_id for d in drills]
+            # Within-session: hard block high-interference pairs
+            if session_item_ids:
+                candidate_ids = [i["id"] for i in due_items]
+                filtered_set = set(apply_interference_separation(
+                    conn, user_id, candidate_ids, session_item_ids))
+                due_items = [i for i in due_items if i["id"] in filtered_set]
+            # Cross-session: soft deprioritize items whose partner was drilled recently
+            _apply_cross_session_interference_penalty(conn, due_items)
+        except Exception:
+            pass  # Interference data may not exist yet
+
         for item in due_items:
             if items_added >= count:
                 break
@@ -1166,12 +2090,15 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                 mastery_stage = item.get("mastery_stage") or "seen"
                 drill_type = _pick_drill_type(modality, item, variety_tracker,
                                               allowed_types=allowed_types,
-                                              mastery_stage=mastery_stage)
+                                              mastery_stage=mastery_stage,
+                                              conn=conn)
             if not _item_is_drillable(item, drill_type):
                 continue
 
             mastery_stage = item.get("mastery_stage") or "seen"
-            scaffold_level = SCAFFOLD_LEVELS.get(mastery_stage, "none")
+            levels = SCAFFOLD_LEVELS.get(mastery_stage, {"pinyin": "none", "english": "full"})
+            scaffold_level = levels["pinyin"]
+            english_level = levels["english"]
 
             seen_ids.add(item["id"])
             drill = DrillItem(
@@ -1183,6 +2110,7 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                 drill_type=drill_type,
                 metadata={
                     "scaffold_level": scaffold_level,
+                    "english_level": english_level,
                     "hsk_level": item.get("hsk_level", 0),
                 },
             )
@@ -1212,7 +2140,8 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
 
                 drill_type = _pick_drill_type(modality, item, variety_tracker,
                                               allowed_types=allowed_types,
-                                              mastery_stage="seen")
+                                              mastery_stage="seen",
+                                              conn=conn)
                 if not _item_is_drillable(item, drill_type):
                     continue
 
@@ -1342,6 +2271,81 @@ def _plan_injections(conn: sqlite3.Connection, drills: list, seen_ids: set, user
         logger.debug("media comprehension injection skipped: %s", e)
 
 
+def _build_focus_insights(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> List[str]:
+    """Build human-readable insights explaining why the session is composed this way.
+
+    Returns up to 3 short insight strings showing the adaptive intelligence at work.
+    """
+    insights = []
+
+    # 1. Error focus items (highest priority — most actionable)
+    error_drills = [d for d in drills if d.is_error_focus]
+    if error_drills:
+        error_types = {}
+        for d in error_drills:
+            et = d.metadata.get("error_type", "other")
+            error_types[et] = error_types.get(et, 0) + 1
+        type_parts = []
+        for et, cnt in sorted(error_types.items(), key=lambda x: -x[1]):
+            label = {"tone": "tone", "segment": "segmentation", "ime_confusable": "typing",
+                     "vocab": "vocabulary", "grammar": "grammar"}.get(et, et)
+            type_parts.append(f"{cnt} {label}")
+        insights.append(f"Targeting {len(error_drills)} items you keep missing ({', '.join(type_parts)})")
+
+    # 2. Encounter boost items (shows cross-feature learning)
+    encounter_drills = [d for d in drills if d.metadata.get("encounter_boost")]
+    if encounter_drills:
+        insights.append(f"Reinforcing {len(encounter_drills)} words you looked up while reading")
+
+    # 3. Tone accuracy boost (shows adaptive weighting)
+    try:
+        from .tone_grading import get_tone_accuracy
+        tone_acc = get_tone_accuracy(conn, days=14, user_id=user_id)
+        if (tone_acc["total_recordings"] >= 5
+                and tone_acc["overall_accuracy"] < 0.65):
+            pct = round(tone_acc["overall_accuracy"] * 100)
+            insights.append(f"Extra speaking practice — tone accuracy at {pct}%")
+    except (ImportError, KeyError, TypeError):
+        pass
+
+    # 4. Day profile mode (shows schedule awareness)
+    day_profile = params.get("day_profile", {})
+    mode = day_profile.get("mode", "normal")
+    if mode == "consolidation":
+        insights.append("Consolidation day — shorter session, familiar items")
+    elif mode == "gentle":
+        insights.append("Light day — review-focused, no new items")
+    elif mode == "stretch":
+        insights.append("Stretch day — extra items and new material")
+
+    # 5. Bounce levels (shows level awareness)
+    bounce_levels = params.get("bounce_levels", set())
+    if bounce_levels:
+        levels_str = ", ".join(str(l) for l in sorted(bounce_levels))
+        insights.append(f"HSK {levels_str} accuracy dipping — adding reinforcement")
+
+    # 6. New items (shows pacing awareness)
+    new_count = sum(1 for d in drills if d.is_new)
+    if new_count > 0 and not any("new" in i.lower() for i in insights):
+        insights.append(f"Introducing {new_count} new item{'s' if new_count != 1 else ''}")
+
+    # 7. Long gap (already shown via gap_message, but add context)
+    if params.get("is_long_gap"):
+        days = params.get("days_gap", 0)
+        insights.append(f"Welcome back — starting with familiar items to rebuild confidence")
+
+    # 8. WIP limit (Kanban enforcement transparency)
+    if params.get("wip_exceeded"):
+        insights.append("Consolidating — many items in active learning, no new items this session")
+
+    # 9. Cold start transparency — tell the learner when personalization hasn't started
+    total_sessions = params.get("total_sessions", 0)
+    if total_sessions < 10 and not insights:
+        insights.append("Standard intervals for now — personalization begins after ~10 sessions")
+
+    return insights[:1]  # One insight per session (doctrine: max one personalized suggestion)
+
+
 def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> SessionPlan:
     """Finalize drills: interleave, build micro-plan, tier-gate, create SessionPlan."""
     drills = _interleave(drills)
@@ -1357,14 +2361,10 @@ def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, us
             modality_summary[d.modality] = modality_summary.get(d.modality, 0) + 1
 
     parts = []
-    if modality_summary.get("ime"):
-        parts.append(f"{modality_summary['ime']} IME")
-    if modality_summary.get("reading"):
-        parts.append(f"{modality_summary['reading']} reading")
-    if modality_summary.get("listening"):
-        parts.append(f"{modality_summary['listening']} listening")
-    if modality_summary.get("speaking"):
-        parts.append(f"{modality_summary['speaking']} speaking")
+    for mod_key in ("ime", "reading", "listening", "speaking"):
+        if modality_summary.get(mod_key):
+            label = MODALITY_LABELS.get(mod_key, mod_key).lower()
+            parts.append(f"{modality_summary[mod_key]} {label}")
     if conv_count:
         parts.append(f"{conv_count} dialogue")
     if media_count:
@@ -1383,6 +2383,13 @@ def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, us
     day_profile = params["day_profile"]
     chosen_groups = params["chosen_groups"]
 
+    # Build focus insights before tier-gating (uses full drill list)
+    try:
+        focus_insights = _build_focus_insights(drills, params, conn, user_id)
+    except Exception as e:
+        logger.debug("focus insights skipped: %s", e)
+        focus_insights = []
+
     plan = SessionPlan(
         session_type="standard",
         drills=drills,
@@ -1391,9 +2398,25 @@ def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, us
         days_since_last=days_gap,
         gap_message=get_gap_message(days_gap) if days_gap else None,
         day_label=day_profile["name"],
+        focus_insights=focus_insights,
+        experiment_variant=params.get("experiment_variant"),
     )
     plan._mapping_groups_used = ",".join(chosen_groups)
     return _validate_plan(plan)
+
+
+def _scaffold_first_session(drills: list) -> list:
+    """Reorder drills for a user's very first session: recognition-first.
+
+    Moves easy recognition drills (MC, reverse MC, tone discrimination,
+    listening gist, measure word) to the front so the user builds confidence
+    before encountering production drills (typing, speaking, free-text).
+    """
+    RECOGNITION_TYPES = {"mc", "reverse_mc", "tone", "listening_gist", "measure_word", "measure_word_disc", "number_system", "radical", "chengyu"}
+    recognition = [d for d in drills if d.drill_type in RECOGNITION_TYPES]
+    production = [d for d in drills if d.drill_type not in RECOGNITION_TYPES]
+    # Put recognition first, then production
+    return recognition + production
 
 
 def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = None, user_id: int = 1) -> SessionPlan:
@@ -1406,13 +2429,17 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
     drills = []
     seen_ids = set()
 
-    # Error focus + encounter boost (skipped during long gaps)
+    # Error focus + contrastive + encounter boost + grammar boost (skipped during long gaps)
     if not is_long_gap:
         error_drills = _plan_error_focus_items(conn, seen_ids, user_id)
         drills.extend(error_drills)
+        contrastive_drills = _plan_contrastive_drills(conn, seen_ids, user_id)
+        drills.extend(contrastive_drills)
         params["target_items"] = max(MIN_SESSION_ITEMS,
-                                     params["target_items"] - len(error_drills))
+                                     params["target_items"] - len(error_drills) - len(contrastive_drills))
         _plan_encounter_boost_items(conn, seen_ids, params["target_items"], drills, user_id)
+        _plan_reading_struggle_boost(conn, seen_ids, params["target_items"], drills, user_id)
+        _plan_grammar_boost_items(conn, seen_ids, params["target_items"], drills, user_id)
 
     # Fill modality drills (due items + new items)
     params["new_budget"] = _plan_modality_drills(conn, params, drills, seen_ids, user_id)
@@ -1420,6 +2447,11 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
     # Inject supplementary drills (core lexicon, scenarios, personalization, media)
     if not is_long_gap:
         _plan_injections(conn, drills, seen_ids, user_id)
+
+    # First-session scaffolding: recognition drills first for brand-new users
+    profile = db.get_profile(conn, user_id=user_id)
+    if (profile.get("total_sessions") or 0) == 0:
+        drills = _scaffold_first_session(drills)
 
     return _build_session_plan(drills, params, conn, user_id)
 
@@ -1521,6 +2553,7 @@ def plan_catchup_session(conn: sqlite3.Connection, user_id: int = 1) -> SessionP
         JOIN progress p ON ci.id = p.content_item_id
         WHERE p.total_attempts >= 2 AND p.total_correct < p.total_attempts
           AND p.user_id = ?
+          AND ci.review_status = 'approved'
         ORDER BY accuracy ASC
         LIMIT 15
     """, (user_id,)).fetchall()
@@ -1534,7 +2567,8 @@ def plan_catchup_session(conn: sqlite3.Connection, user_id: int = 1) -> SessionP
         modality = "ime" if random.random() < 0.4 else "reading"
         mastery_stage = item.get("mastery_stage") or "seen"
         drill_type = _pick_drill_type(modality, item, variety_tracker,
-                                      mastery_stage=mastery_stage)
+                                      mastery_stage=mastery_stage,
+                                      conn=conn)
         if not _item_is_drillable(item, drill_type):
             continue
         seen_ids.add(item["id"])
@@ -1584,6 +2618,7 @@ def plan_speaking_session(conn: sqlite3.Connection, user_id: int = 1) -> Session
     items = conn.execute("""
         SELECT ci.* FROM content_item ci
         WHERE ci.status = 'drill_ready'
+          AND ci.review_status = 'approved'
           AND ci.pinyin IS NOT NULL AND ci.pinyin != ''
         ORDER BY RANDOM()
         LIMIT 8
@@ -1616,29 +2651,50 @@ _VALID_DRILL_TYPES = set(DRILL_REGISTRY.keys()) | {"dialogue", "media_comprehens
 
 
 def _validate_plan(plan: SessionPlan) -> SessionPlan:
-    """Assert invariants on a completed session plan. Returns the plan unchanged.
+    """Validate invariants on a completed session plan. Returns the plan unchanged.
 
-    Raises AssertionError if invariants are violated — these indicate bugs
-    in the scheduler, not user error.
+    Logs warnings and filters out invalid drills rather than crashing.
     """
-    # All drills have valid modalities
+    # Filter out drills with invalid modalities or drill types
+    valid_drills = []
     for d in plan.drills:
-        assert d.modality in _VALID_MODALITIES, \
-            f"invalid modality {d.modality!r} in drill for {d.hanzi}"
-        assert d.drill_type in _VALID_DRILL_TYPES, \
-            f"invalid drill_type {d.drill_type!r} in drill for {d.hanzi}"
+        if d.modality not in _VALID_MODALITIES:
+            logger.error("_validate_plan: dropping drill with invalid modality %r for %s",
+                         d.modality, d.hanzi)
+            continue
+        if d.drill_type not in _VALID_DRILL_TYPES:
+            logger.error("_validate_plan: dropping drill with invalid drill_type %r for %s",
+                         d.drill_type, d.hanzi)
+            continue
+        valid_drills.append(d)
+    plan.drills = valid_drills
 
-    # No duplicate content_item_ids (excluding dialogues, personalized items which use id=0,
+    # Deduplicate content_item_ids (excluding dialogues, personalized items which use id=0,
     # and listen-produce pairs which intentionally reuse the source item's id)
     real_ids = [d.content_item_id for d in plan.drills
                 if d.drill_type != "dialogue" and d.content_item_id != 0
                 and not d.metadata.get("listen_produce_pair")]
-    assert len(real_ids) == len(set(real_ids)), \
-        f"duplicate item_ids in plan: {[x for x in real_ids if real_ids.count(x) > 1]}"
+    if len(real_ids) != len(set(real_ids)):
+        dupes = {x for x in real_ids if real_ids.count(x) > 1}
+        logger.warning("_validate_plan: duplicate item_ids in plan: %s — deduplicating", dupes)
+        seen_ids = set()
+        deduped = []
+        for d in plan.drills:
+            key = d.content_item_id
+            if (d.drill_type == "dialogue" or key == 0
+                    or d.metadata.get("listen_produce_pair")
+                    or key not in dupes or key not in seen_ids):
+                deduped.append(d)
+                if key in dupes:
+                    seen_ids.add(key)
+        plan.drills = deduped
 
-    # Session type is known
-    assert plan.session_type in ("standard", "minimal", "catchup", "speaking"), \
-        f"unknown session_type: {plan.session_type!r}"
+    # Session type validation
+    valid_types = ("standard", "minimal", "catchup", "speaking")
+    if plan.session_type not in valid_types:
+        logger.error("_validate_plan: unknown session_type %r, defaulting to 'standard'",
+                     plan.session_type)
+        plan.session_type = "standard"
 
     return plan
 

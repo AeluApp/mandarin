@@ -1,0 +1,123 @@
+{
+    "title": "Small Talk at a Café",
+    "title_zh": "咖啡馆里的闲聊",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're sitting in a quiet café reading a book. The barista, a young guy named Ah Ming, comes over to refill your water and starts chatting.",
+        "setup_zh": "你坐在一家安静的咖啡馆里看书。咖啡师阿明过来给你加水，顺便聊了起来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看的什么书啊？看你看了好久了，一定很好看。",
+                "text_pinyin": "Nǐ kàn de shénme shū a? Kàn nǐ kàn le hǎojiǔ le, yīdìng hěn hǎokàn.",
+                "text_en": "What book are you reading? You've been at it for a while — it must be good."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him about your book.",
+                "options": [
+                    {
+                        "text_zh": "是一本关于旅行的书，写的是一个人在西藏的故事。你喜欢看书吗？",
+                        "text_pinyin": "Shì yī běn guānyú lǚxíng de shū, xiě de shì yī ge rén zài Xīzàng de gùshi. Nǐ xǐhuan kàn shū ma?",
+                        "text_en": "It's a travel book — about someone's journey in Tibet. Do you like reading?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Shares the book and returns the question — natural conversation flow."
+                    },
+                    {
+                        "text_zh": "一本小说。",
+                        "text_pinyin": "Yī běn xiǎoshuō.",
+                        "text_en": "A novel.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but doesn't invite further conversation."
+                    },
+                    {
+                        "text_zh": "没什么，随便看看。",
+                        "text_pinyin": "Méi shénme, suíbiàn kànkan.",
+                        "text_en": "Nothing special, just reading casually.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dismissive — he's being friendly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "西藏！我一直想去但是还没去过。我平时也喜欢看书，不过最近太忙了，只能在休息的时候看一点。你经常来这里看书吗？",
+                "text_pinyin": "Xīzàng! Wǒ yīzhí xiǎng qù dànshì hái méi qù guò. Wǒ píngshí yě xǐhuan kàn shū, búguò zuìjìn tài máng le, zhǐ néng zài xiūxi de shíhou kàn yīdiǎn. Nǐ jīngcháng lái zhèlǐ kàn shū ma?",
+                "text_en": "Tibet! I've always wanted to go but haven't yet. I like reading too, but I've been so busy lately I can only read during breaks. Do you come here often to read?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your café habit.",
+                "options": [
+                    {
+                        "text_zh": "嗯，差不多每个周末都来。这里很安静，而且咖啡很好喝。是你做的吗？",
+                        "text_pinyin": "En, chàbuduō měi ge zhōumò dōu lái. Zhèlǐ hěn ānjìng, érqiě kāfēi hěn hǎohē. Shì nǐ zuò de ma?",
+                        "text_en": "Yeah, almost every weekend. It's quiet here, and the coffee is great. Did you make it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compliments the café and the barista — builds rapport."
+                    },
+                    {
+                        "text_zh": "偶尔来。",
+                        "text_pinyin": "Ǒu'ěr lái.",
+                        "text_en": "Occasionally.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief — doesn't sustain the conversation."
+                    },
+                    {
+                        "text_zh": "我觉得这里有点吵。",
+                        "text_pinyin": "Wǒ juéde zhèlǐ yǒudiǎn chǎo.",
+                        "text_en": "I think it's a bit noisy here.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Negative comment to the person who works here."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是我做的！谢谢你喜欢。我学了两年了。对了，我们下周有一个读书会，每个人带一本自己喜欢的书来分享。你有兴趣吗？",
+                "text_pinyin": "Shì wǒ zuò de! Xièxie nǐ xǐhuan. Wǒ xué le liǎng nián le. Duìle, wǒmen xià zhōu yǒu yī ge dúshūhuì, měi ge rén dài yī běn zìjǐ xǐhuan de shū lái fēnxiǎng. Nǐ yǒu xìngqù ma?",
+                "text_en": "I made it! Thanks for liking it. I've been learning for two years. By the way, we have a book club next week — everyone brings a book they like to share. Are you interested?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the book club invitation.",
+                "options": [
+                    {
+                        "text_zh": "听起来很有意思！什么时间？我想参加。",
+                        "text_pinyin": "Tīng qǐlái hěn yǒu yìsi! Shénme shíjiān? Wǒ xiǎng cānjiā.",
+                        "text_en": "Sounds interesting! What time? I'd like to join.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Open and enthusiastic — a great way to make new connections."
+                    },
+                    {
+                        "text_zh": "我再想想吧。",
+                        "text_pinyin": "Wǒ zài xiǎngxiang ba.",
+                        "text_en": "Let me think about it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Non-committal but not rude."
+                    },
+                    {
+                        "text_zh": "我不喜欢跟很多人在一起。",
+                        "text_pinyin": "Wǒ bù xǐhuan gēn hěn duō rén zài yīqǐ.",
+                        "text_en": "I don't like being around a lot of people.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Honest but shuts down a kind invitation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Café culture is growing in Chinese cities, especially among young people. Many cafés host book clubs, art workshops, and other community events. The phrase 「读书会」 reflects the tradition of shared learning and discussion."
+    },
+    "hsk_level": 3
+}

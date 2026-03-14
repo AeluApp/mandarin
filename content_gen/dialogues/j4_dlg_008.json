@@ -1,0 +1,83 @@
+{
+    "title": "The Noodle Shop",
+    "title_zh": "面馆",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You're eating at a tiny noodle shop run by a husband and wife. The wife, Auntie Fang, notices you eating alone and starts chatting. The shop has only six tables.",
+        "setup_zh": "你在一家夫妻开的小面馆吃饭。老板娘方阿姨注意到你一个人吃饭，开始跟你聊天。店里只有六张桌子。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "一个人吃啊？没关系，一个人吃也挺好的。你知道吗，来我们店的人，很多都是一个人。有的人不是没有朋友，就是想安安静静吃一碗面。",
+                "text_pinyin": "Yīge rén chī a? Méi guānxi, yīge rén chī yě tǐng hǎo de. Nǐ zhīdào ma, lái wǒmen diàn de rén, hěn duō dōu shì yīge rén. Yǒude rén bú shì méiyǒu péngyǒu, jiù shì xiǎng ān'ānjìngjìng chī yī wǎn miàn.",
+                "text_en": "Eating alone? That's fine, eating alone can be nice. You know, many people who come to our shop are alone. It's not that they don't have friends — they just want to quietly eat a bowl of noodles."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about eating alone.",
+                "options": [
+                    {
+                        "text_zh": "我也觉得一个人吃饭有一个人的好处。不用聊天，不用考虑别人想吃什么，就专心感受每一口的味道。这碗面真的很好吃。",
+                        "text_pinyin": "Wǒ yě juéde yīge rén chīfàn yǒu yīge rén de hǎochù. Bú yòng liáo tiān, bú yòng kǎolǜ biérén xiǎng chī shénme, jiù zhuānxīn gǎnshòu měi yī kǒu de wèidào. Zhè wǎn miàn zhēn de hěn hǎochī.",
+                        "text_en": "I think eating alone has its own advantages too. No need to chat, no need to consider what others want to eat — just focusing on the taste of every bite. This bowl of noodles is really delicious.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirms solitary dining as positive — ends with genuine appreciation for the food."
+                    },
+                    {
+                        "text_zh": "你们这个面是什么面？",
+                        "text_pinyin": "Nǐmen zhège miàn shì shénme miàn?",
+                        "text_en": "What kind of noodles are these?",
+                        "score": 0.0,
+                        "feedback": "Menu question that skips past her thoughtful observation."
+                    },
+                    {
+                        "text_zh": "附近还有别的饭馆吗？",
+                        "text_pinyin": "Fùjìn hái yǒu bié de fànguǎn ma?",
+                        "text_en": "Are there other restaurants nearby?",
+                        "score": 0.0,
+                        "feedback": "Asking about competitors to the person cooking your food."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你。这个面的做法是我婆婆教我的。她说好的面不需要太多东西，汤底要慢慢熬，面要手工做。简单的东西做好了，就是最好的。",
+                "text_pinyin": "Xièxie nǐ. Zhège miàn de zuòfǎ shì wǒ pópo jiāo wǒ de. Tā shuō hǎo de miàn bù xūyào tài duō dōngxi, tāng dǐ yào mànman áo, miàn yào shǒugōng zuò. Jiǎndān de dōngxi zuò hǎo le, jiù shì zuì hǎo de.",
+                "text_en": "Thank you. My mother-in-law taught me how to make these noodles. She said good noodles don't need too many ingredients — the broth should be simmered slowly, the noodles made by hand. Simple things done well — that's the best."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her cooking philosophy.",
+                "options": [
+                    {
+                        "text_zh": "「简单的东西做好了就是最好的」——不只是说做面吧，也是一种生活的道理。不用追求太复杂的东西，把小事认真做好就够了。",
+                        "text_pinyin": "'Jiǎndān de dōngxi zuò hǎo le jiù shì zuì hǎo de' — bù zhǐ shì shuō zuò miàn ba, yě shì yī zhǒng shēnghuó de dàolǐ. Bú yòng zhuīqiú tài fùzá de dōngxi, bǎ xiǎo shì rènzhēn zuò hǎo jiù gòu le.",
+                        "text_en": "'Simple things done well is the best' — not just about noodles, right? It's a life philosophy. No need for complexity; doing small things well is enough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the cooking wisdom into life philosophy — appreciates depth in simplicity."
+                    },
+                    {
+                        "text_zh": "你婆婆还在吗？",
+                        "text_pinyin": "Nǐ pópo hái zài ma?",
+                        "text_en": "Is your mother-in-law still alive?",
+                        "score": 0.0,
+                        "feedback": "Potentially painful question that shifts away from the positive message."
+                    },
+                    {
+                        "text_zh": "你们每天能卖多少碗面？",
+                        "text_pinyin": "Nǐmen měi tiān néng mài duōshǎo wǎn miàn?",
+                        "text_en": "How many bowls of noodles do you sell each day?",
+                        "score": 0.0,
+                        "feedback": "Business metrics during a moment of shared wisdom."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small family-run noodle shops (面馆) are a cornerstone of Chinese food culture. Many recipes are passed down through generations, often from mother-in-law to daughter-in-law. The philosophy of 简单做好 (doing simple things well) reflects a broader Chinese cultural value that mastery lies not in complexity but in the patient perfection of fundamentals."
+    }
+}

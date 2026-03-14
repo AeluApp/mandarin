@@ -1,0 +1,83 @@
+{
+  "title": "A Rainy Day at the Temple",
+  "title_zh": "雨天的寺庙",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You duck into a small Buddhist temple to escape the rain. A monk is sweeping the courtyard slowly, unbothered by the rain.",
+    "setup_zh": "你躲进一座小寺庙避雨。一位僧人在院子里慢慢扫地，一点也不介意下雨。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "进来避雨吧。不着急，雨很快就停了。要不要喝杯茶？",
+        "text_pinyin": "Jìnlái bì yǔ ba. Bù zháojí, yǔ hěn kuài jiù tíng le. Yào bú yào hē bēi chá?",
+        "text_en": "Come in out of the rain. No rush — it'll stop soon. Would you like a cup of tea?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Accept his offer.",
+        "options": [
+          {
+            "text_zh": "好的，谢谢您。这里好安静，我很喜欢。",
+            "text_pinyin": "Hǎo de, xièxie nín. Zhèlǐ hǎo ānjìng, wǒ hěn xǐhuan.",
+            "text_en": "Yes, thank you. It's so peaceful here — I really like it.",
+            "score": 1.0,
+            "feedback": "Gracious and reflective — appreciates the calm.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "雨什么时候停？",
+            "text_pinyin": "Yǔ shénme shíhou tíng?",
+            "text_en": "When will the rain stop?",
+            "score": 0.0,
+            "feedback": "He just said no rush, and this sounds impatient."
+          },
+          {
+            "text_zh": "附近有地铁站吗？",
+            "text_pinyin": "Fùjìn yǒu dìtiě zhàn ma?",
+            "text_en": "Is there a subway station nearby?",
+            "score": 0.0,
+            "feedback": "You just arrived and he's offering tea."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "雨天来寺庙的人不多。你平时喜欢去什么样的地方？",
+        "text_pinyin": "Yǔ tiān lái sìmiào de rén bù duō. Nǐ píngshí xǐhuan qù shénme yàng de dìfang?",
+        "text_en": "Not many people visit temples on rainy days. What kind of places do you usually like to go?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what kind of places you enjoy.",
+        "options": [
+          {
+            "text_zh": "我喜欢安静的地方。书店、公园……像这里一样的。",
+            "text_pinyin": "Wǒ xǐhuan ānjìng de dìfang. Shūdiàn, gōngyuán…… xiàng zhèlǐ yīyàng de.",
+            "text_en": "I like quiet places. Bookshops, parks... places like this.",
+            "score": 1.0,
+            "feedback": "Honest and resonant — fits the temple atmosphere.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我喜欢人多热闹的地方，比如商场。",
+            "text_pinyin": "Wǒ xǐhuan rén duō rènao de dìfang, bǐrú shāngchǎng.",
+            "text_en": "I like busy, lively places — like shopping malls.",
+            "score": 0.0,
+            "feedback": "He nods politely, but the temple falls very quiet for a moment."
+          },
+          {
+            "text_zh": "我没有时间。",
+            "text_pinyin": "Wǒ méiyǒu shíjiān.",
+            "text_en": "I don't have time.",
+            "score": 0.0,
+            "feedback": "You literally just sat down for tea."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Buddhist temples welcome anyone seeking shelter or quiet. Monks often offer tea and conversation without any religious expectation. Rain amplifies the meditative quality of these spaces — the sound of rain on old tiles is its own kind of music."
+  }
+}

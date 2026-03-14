@@ -1,0 +1,89 @@
+{
+    "title": "Why Everyone Is Tired",
+    "title_zh": "为什么所有人都累了",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and a cultural commentator friend, Xiaowei, are discussing the phenomenon of widespread exhaustion among young Chinese professionals — the 'lying flat' and 'let it rot' trends.",
+        "setup_zh": "你和做文化评论的朋友小为在讨论中国年轻人普遍的疲惫现象——「躺平」和「摆烂」的文化趋势。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "「躺平」不是懒惰，而是一种消极抵抗。当你发现无论多努力都无法改变结构性的不公，最理性的反应就是退出竞争。它不是放弃，而是拒绝按照一套不合理的规则继续玩下去。",
+                "text_pinyin": "'Tǎng píng' bú shì lǎnduò, ér shì yī zhǒng xiāojí dǐkàng. Dāng nǐ fāxiàn wúlùn duō nǔlì dōu wúfǎ gǎibiàn jiégòuxìng de bùgōng, zuì lǐxìng de fǎnyìng jiù shì tuìchū jìngzhēng. Tā bú shì fàngqì, ér shì jùjué ànzhào yī tào bù hélǐ de guīzé jìxù wán xià qù.",
+                "text_en": "'Lying flat' isn't laziness — it's passive resistance. When you discover that no matter how hard you try, you can't change structural injustice, the most rational response is to exit the competition. It's not giving up — it's refusing to keep playing by an unreasonable set of rules."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with her analysis of 'lying flat.'",
+                "options": [
+                    {
+                        "text_zh": "确实。但当大量年轻人同时选择退出，这本身就是一种信号。不是个人问题，而是系统问题的症状。如果一个社会让最有活力的群体感到无力，需要反思的不是年轻人，而是这个系统。",
+                        "text_pinyin": "Nǐ shuō de duì. Dàn dāng dàliàng niánqīng rén tóngshí xuǎnzé tuìchū, zhè běnshēn jiù shì yī zhǒng xìnhào. Bú shì gèrén wèntí, ér shì xìtǒng wèntí de zhèngzhuàng. Rúguǒ yīge shèhuì ràng zuì yǒu huólì de qúntǐ gǎndào wúlì, xūyào fǎnsī de bú shì niánqīng rén, ér shì zhège xìtǒng.",
+                        "text_en": "You're right. But when large numbers of young people simultaneously choose to exit, that itself is a signal. Not individual — systemic. If a society makes its most energetic group feel powerless, what needs reflection isn't the youth, but the system.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Structural thinking — elevates the discussion from cultural description to systemic analysis."
+                    },
+                    {
+                        "text_zh": "年轻人就是不够努力，以前的人更辛苦。",
+                        "text_pinyin": "Niánqīng rén jiù shì bú gòu nǔlì, yǐqián de rén gèng xīnkǔ.",
+                        "text_en": "Young people just aren't working hard enough — previous generations had it tougher.",
+                        "score": 0.0,
+                        "feedback": "Generational blame — ignores the structural analysis she's offering."
+                    },
+                    {
+                        "text_zh": "躺平也挺好的，不用那么累。",
+                        "text_pinyin": "Tǎng píng yě tǐng hǎo de, bú yòng nàme lèi.",
+                        "text_en": "Lying flat is fine, at least you're not tired.",
+                        "score": 0.0,
+                        "feedback": "Oversimplifies — treats a complex sociological phenomenon as a lifestyle choice."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你提到了关键词——「系统」。但问题在于，系统的调整需要时间，而人的生命有限。你不可能让一代人等系统改好了再开始活。所以很多人选择了第三条路：既不完全躺平，也不全力内卷，而是找到一个自己能接受的平衡点。不追求最好的，但追求足够好的。",
+                "text_pinyin": "Nǐ tí dào le guānjiàn cí — 'xìtǒng'. Dàn wèntí zàiyú, xìtǒng de tiáozhěng xūyào shíjiān, ér rén de shēngmìng yǒuxiàn. Nǐ bù kěnéng ràng yīdài rén děng xìtǒng gǎi hǎo le zài kāishǐ huó. Suǒyǐ hěn duō rén xuǎnzé le dì sān tiáo lù: jì bù wánquán tǎng píng, yě bù quánlì nèijuǎn, ér shì zhǎo dào yīge zìjǐ néng jiēshòu de pínghéng diǎn. Bù zhuīqiú zuì hǎo de, dàn zhuīqiú zúgòu hǎo de.",
+                "text_en": "You've identified the key word — 'system.' But the problem is, systemic adjustment takes time, while human lives are finite. You can't ask a generation to wait until the system improves before they start living. So many people have chosen a third path: neither fully lying flat nor going all-in on the rat race, but finding a balance point they can accept. Not pursuing the best, but pursuing good enough."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the 'third path' concept.",
+                "options": [
+                    {
+                        "text_zh": "'足够好'也许才是最务实的智慧。完美主义是内卷的燃料——总觉得不够好，永远停不下来。如果一代人能重新定义'成功'，不用房车职位衡量，而用内心平静来衡量，这本身就是一种变革。",
+                        "text_pinyin": "'Zúgòu hǎo' yěxǔ cái shì zuì wùshí de zhìhuì. Wánměi zhǔyì shì nèijuǎn de ránliào — zǒng juéde bú gòu hǎo, yǒngyuǎn tíng bú xiàlái. Rúguǒ yīdài rén néng chóngxīn dìngyì 'chénggōng', bú yòng fángchē zhíwèi héngliáng, ér yòng nèixīn píngjìng lái héngliáng, zhè běnshēn jiù shì yī zhǒng biàngé.",
+                        "text_en": "'Good enough' is the most pragmatic wisdom. Perfectionism fuels the rat race — always feeling insufficient, never stopping. If a generation redefines 'success' — measuring by inner peace instead of houses and titles — that itself is revolution.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Conclusion — positions the cultural shift as a quiet revolution of values."
+                    },
+                    {
+                        "text_zh": "但是不努力怎么买房？现实是残酷的。",
+                        "text_pinyin": "Dànshì bù nǔlì zěnme mǎi fáng? Xiànshí shì cánkù de.",
+                        "text_en": "But how can you buy a house without working hard? Reality is harsh.",
+                        "score": 0.0,
+                        "feedback": "She's questioning whether homeownership should be the measure of success."
+                    },
+                    {
+                        "text_zh": "我觉得每个时代都有自己的问题，没什么特别的。",
+                        "text_pinyin": "Wǒ juéde měi ge shídài dōu yǒu zìjǐ de wèntí, méi shénme tèbié de.",
+                        "text_en": "Every era has its own problems, nothing special about this one.",
+                        "score": 0.0,
+                        "feedback": "Dismissive relativism — refuses to engage with the specific dynamics she's analyzing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "通过重新定义来变革……我同意。历史上很多真正持久的社会变化不是通过对抗实现的，而是通过一代人默默改变了他们的价值排序。也许正在发生的不是衰退，而是转向。只是我们身在其中，还看不清它的方向。",
+                "text_pinyin": "Tōngguò chóngxīn dìngyì lái biàngé…… wǒ tóngyì. Lìshǐ shàng hěn duō zhēnzhèng chíjiǔ de shèhuì biànhuà bú shì tōngguò duìkàng shíxiàn de, ér shì tōngguò yīdài rén mòmò gǎibiàn le tāmen de jiàzhí páixù. Yěxǔ zhèng zài fāshēng de bú shì shuāituì, ér shì zhuǎnxiàng. Zhǐ shì wǒmen shēn zài qí zhōng, hái kàn bù qīng tā de fāngxiàng.",
+                "text_en": "Revolution through redefinition... I agree. Many of history's most lasting social changes weren't achieved through confrontation, but through a generation quietly reshuffling their value priorities. Perhaps what's happening isn't decline, but a turn. It's just that being inside it, we can't yet see where it's heading."
+            }
+        ],
+        "cultural_note": "「躺平」(tǎng píng, lying flat) emerged in 2021 as a viral Chinese internet term describing young people's rejection of overwork culture. 「内卷」(nèijuǎn, involution) describes hyper-competition with diminishing returns. Together, these concepts represent a generational renegotiation of the social contract. While older generations see this as laziness, cultural analysts increasingly view it as a rational response to structural conditions — housing unaffordability, credential inflation, and the exhaustion of the growth model that once promised upward mobility for all."
+    }
+}

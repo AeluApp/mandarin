@@ -1,0 +1,160 @@
+{
+    "title": "The Reservation Strategist",
+    "title_zh": "订位战略家",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_restaurant_6_04_v0",
+    "tree": {
+        "setup": "Your office, afternoon. You're calling to book a private dining room for an important dinner — your partner's parents are visiting from another city, and this will be the first time you meet them. The stakes feel inversely proportional to the restaurant's available time slots. The hostess, Ms. Cheng, manages reservations at a high-end restaurant with the strategic precision of a general deploying limited resources. She has thirteen private rooms, each with different capacities, views, and atmospheres. She matches diners to rooms the way a curator matches art to gallery walls.",
+        "setup_zh": "你的办公室，下午。你正在打电话预订一间包间，为一次重要的晚餐——你伴侣的父母要从外地来，这将是你们第一次见面。赌注大小与餐厅可用的时间段成反比。接待员程女士以将军部署有限资源般的战略精确度管理着一家高档餐厅的预订。她有十三间包间，每间的容量、景观和氛围各不相同。她将食客与包间匹配的方式如同策展人将艺术品与展厅匹配。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，翠园酒家。请问需要什么服务？",
+                "text_pinyin": "nín hǎo, Cuì Yuán Jiǔjiā. qǐngwèn xūyào shénme fúwù?",
+                "text_en": "Hello, Cuiyuan Restaurant. How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Book a private room for an important dinner.",
+                "options": [
+                    {
+                        "text_zh": "程女士好，我想预订这周六晚上的包间，六位用餐。这是一次比较重要的家庭聚会——第一次见对象的父母。所以环境和菜品质量我都比较在意。请问周六晚上六点到六点半之间有包间吗？最好是安静一点的，不要太靠近厨房。",
+                        "text_pinyin": "Chéng nǚshì hǎo, wǒ xiǎng yùdìng zhè zhōuliù wǎnshang de bāojiān, liù wèi yòng cān. zhè shì yí cì bǐjiào zhòngyào de jiātíng jùhuì——dì yī cì jiàn duìxiàng de fùmǔ. suǒyǐ huánjìng hé càipǐn zhìliàng wǒ dōu bǐjiào zàiyì. qǐngwèn zhōuliù wǎnshang liù diǎn dào liù diǎn bàn zhījiān yǒu bāojiān ma? zuìhǎo shì ānjìng yìdiǎn de, búyào tài kàojìn chúfáng.",
+                        "text_en": "Ms. Cheng, I'd like to book a private room for this Saturday evening, six people. It's an important family gathering — first time meeting my partner's parents. So I care about both the atmosphere and food quality. Do you have a private room between 6:00-6:30 PM Saturday? Preferably quiet, not too close to the kitchen.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Occasion, party size, time, atmosphere preference — Ms. Cheng's curatorial instincts activate. Meeting the parents is her specialty occasion."
+                    },
+                    {
+                        "text_zh": "我要订周六晚上的包间，六个人。",
+                        "text_pinyin": "wǒ yào dìng zhōuliù wǎnshang de bāojiān, liù gè rén.",
+                        "text_en": "I need a Saturday night private room, six people.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She has options. She'll ask about the occasion to match the right room."
+                    },
+                    {
+                        "text_zh": "周六晚上有位子吗？",
+                        "text_pinyin": "zhōuliù wǎnshang yǒu wèizi ma?",
+                        "text_en": "Do you have seats Saturday night?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Seats yes, but she needs to know if you want the main hall or a private room. The distinction matters."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第一次见对象的父母——这很重要，我理解。周六六点的包间我看一下……有两间可选：竹园包间，六人座，窗户朝花园，非常安静；还有明月包间，八人座但布局宽敞，适合六人，有一面落地窗。竹园八百八十的最低消费，明月一千两百。两间距离厨房都很远。您倾向哪一间？",
+                "text_pinyin": "dì yī cì jiàn duìxiàng de fùmǔ——zhè hěn zhòngyào, wǒ lǐjiě. zhōuliù liù diǎn de bāojiān wǒ kàn yíxià……yǒu liǎng jiān kě xuǎn: Zhú Yuán bāojiān, liù rén zuò, chuānghù cháo huāyuán, fēicháng ānjìng; hái yǒu Míngyuè bāojiān, bā rén zuò dàn bùjú kuānchǎng, shìhé liù rén, yǒu yí miàn luòdì chuāng. Zhú Yuán bābǎi bāshí de zuìdī xiāofèi, Míngyuè yìqiān liǎngbǎi. liǎng jiān jùlí chúfáng dōu hěn yuǎn. nín qīngxiàng nǎ yì jiān?",
+                "text_en": "Meeting the parents for the first time — that's important, I understand. Saturday at 6 PM private rooms... two options: Bamboo Garden room, six seats, window facing the garden, very quiet; or Moon View room, eight seats but spacious layout, comfortable for six, with a floor-to-ceiling window. Bamboo Garden has an 880-yuan minimum, Moon View is 1,200. Both are far from the kitchen. Which do you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a room and ask about the menu.",
+                "options": [
+                    {
+                        "text_zh": "竹园包间听起来更合适——六个人刚好，花园景也加分。八百八的最低消费六个人来说很合理。请问你们有没有预设的套餐可以推荐？我对方的父母是江浙人，口味偏清淡。如果能有一些融合粤菜和淮扬菜风格的菜品就更好了。",
+                        "text_pinyin": "Zhú Yuán bāojiān tīng qǐlái gèng héshì——liù gè rén gānghǎo, huāyuán jǐng yě jiā fēn. bābǎi bā de zuìdī xiāofèi liù gè rén lái shuō hěn hélǐ. qǐngwèn nǐmen yǒu méiyǒu yù shè de tàocān kěyǐ tuījiàn? wǒ duìfāng de fùmǔ shì Jiāng Zhè rén, kǒuwèi piān qīngdàn. rúguǒ néng yǒu yìxiē rónghé Yuècài hé Huáiyáng cài fēnggé de càipǐn jiù gèng hǎo le.",
+                        "text_en": "Bamboo Garden sounds better — six people is perfect, and the garden view is a bonus. 880 minimum for six is very reasonable. Do you have set menus you'd recommend? My partner's parents are from Jiangsu-Zhejiang, so they prefer lighter flavors. If you have dishes that blend Cantonese and Huaiyang styles, even better.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Room selected with reasoning, budget awareness, and regional flavor insight — Ms. Cheng is already mentally composing a custom menu. Knowing the parents' regional palate is sommelier-level preparation."
+                    },
+                    {
+                        "text_zh": "竹园吧。有什么推荐的菜吗？",
+                        "text_pinyin": "Zhú Yuán ba. yǒu shénme tuījiàn de cài ma?",
+                        "text_en": "Bamboo Garden. Any dish recommendations?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll suggest their most popular options."
+                    },
+                    {
+                        "text_zh": "便宜的那个。随便吃什么都行。",
+                        "text_pinyin": "piányi de nàge. suíbiàn chī shénme dōu xíng.",
+                        "text_en": "The cheaper one. Whatever food is fine.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Meeting the parents with 'whatever' energy — Ms. Cheng gently suggests putting more thought into the menu."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "江浙口味偏清淡，这个信息很有用。我推荐我们的「团圆套餐」，一千二百八十块六人份：开胃有白灼虾和凉拌黄瓜；主菜有清蒸石斑鱼——很符合清淡口味——叉烧拼盘、蒜蓉炒时蔬；汤是佛跳墙；主食是虾饺和叉烧包的点心拼盘；最后有芒果班戟作甜点。如果需要调整某道菜，也可以替换。",
+                "text_pinyin": "Jiāng Zhè kǒuwèi piān qīngdàn, zhège xìnxī hěn yǒuyòng. wǒ tuījiàn wǒmen de「tuányuán tàocān」, yìqiān liǎngbǎi bāshí kuài liù rén fèn: kāi wèi yǒu bái zhuó xiā hé liángbàn huángguā; zhǔ cài yǒu qīng zhēng shíbān yú——hěn fúhé qīngdàn kǒuwèi——chāshāo pīnpán, suànróng chǎo shí shū; tāng shì Fó tiào qiáng; zhǔshí shì xiā jiǎo hé chāshāo bāo de diǎnxīn pīnpán; zuìhòu yǒu mángguǒ bān jī zuò tiándiǎn. rúguǒ xūyào tiáozhěng mǒu dào cài, yě kěyǐ tìhuàn.",
+                "text_en": "Jiangsu-Zhejiang preference for lighter flavors — very useful. I recommend our 'Reunion Set Menu,' 1,280 for six: appetizers are blanched shrimp and cucumber salad; mains are steamed grouper — perfect for light palates — char siu platter, garlic stir-fried seasonal vegetables; soup is Buddha Jumps Over the Wall; dim sum platter of shrimp dumplings and char siu bao; and mango crepe for dessert. Substitutions are possible."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Customize the menu and ask about drinks.",
+                "options": [
+                    {
+                        "text_zh": "套餐整体很不错。有一个调整：佛跳墙太浓了，能不能换成一个清淡的汤？比如冬瓜排骨汤或者菌菇汤？另外，长辈喝白酒的话你们有什么推荐？我自己不太懂酒，想要一个体面但不夸张的选择。如果不喝酒的话，你们有什么好的茶吗？",
+                        "text_pinyin": "tàocān zhěngtǐ hěn búcuò. yǒu yí gè tiáozhěng: Fó tiào qiáng tài nóng le, néng bu néng huàn chéng yí gè qīngdàn de tāng? bǐrú dōngguā páigǔ tāng huòzhě jūn gū tāng? lìngwài, zhǎngbèi hē báijiǔ de huà nǐmen yǒu shénme tuījiàn? wǒ zìjǐ bú tài dǒng jiǔ, xiǎng yào yí gè tǐmiàn dàn bú kuāzhāng de xuǎnzé. rúguǒ bù hē jiǔ de huà, nǐmen yǒu shénme hǎo de chá ma?",
+                        "text_en": "The set menu looks great overall. One adjustment: Buddha Jumps Over the Wall is too rich — can we swap it for a lighter soup? Like winter melon pork rib soup or mushroom soup? Also, if the elders drink baijiu, what do you recommend? I'm not a liquor expert — I want something presentable but not excessive. And if they don't drink, do you have good tea?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Menu customization for the guests' palate, wine advice for the occasion, and tea as backup — Ms. Cheng recognizes the thoroughness of someone who understands that meeting the parents is 30% food and 70% atmosphere."
+                    },
+                    {
+                        "text_zh": "套餐可以。你们有什么酒推荐？",
+                        "text_pinyin": "tàocān kěyǐ. nǐmen yǒu shénme jiǔ tuījiàn?",
+                        "text_en": "Menu works. What drinks do you recommend?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She offers options across categories."
+                    },
+                    {
+                        "text_zh": "就这个套餐吧。不改了。",
+                        "text_pinyin": "jiù zhège tàocān ba. bù gǎi le.",
+                        "text_en": "This menu is fine. No changes.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Accepted as-is. She makes the reservation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "冬瓜排骨汤没问题，很适合。白酒的话，如果是家庭聚会，我推荐一瓶五粮液普五，四百多块，体面得体。如果想轻松一些，绍兴花雕酒也可以，温着喝很有仪式感。茶的话，我们有明前龙井和铁观音。好了，我确认一下：周六晚六点，竹园包间，六位，团圆套餐改冬瓜排骨汤。您留一个手机号码，我发确认短信给您。",
+                "text_pinyin": "dōngguā páigǔ tāng méi wèntí, hěn shìhé. báijiǔ de huà, rúguǒ shì jiātíng jùhuì, wǒ tuījiàn yì píng Wǔliángyè pǔ wǔ, sìbǎi duō kuài, tǐmiàn détǐ. rúguǒ xiǎng qīngsōng yìxiē, Shàoxīng huādiāo jiǔ yě kěyǐ, wēn zhe hē hěn yǒu yíshì gǎn. chá de huà, wǒmen yǒu míngqián Lóngjǐng hé Tiěguānyīn. hǎo le, wǒ quèrèn yíxià: zhōuliù wǎn liù diǎn, Zhú Yuán bāojiān, liù wèi, tuányuán tàocān gǎi dōngguā páigǔ tāng. nín liú yí gè shǒujī hàomǎ, wǒ fā quèrèn duǎnxìn gěi nín.",
+                "text_en": "Winter melon soup, no problem — great fit. For baijiu, for a family gathering I'd recommend Wuliangye Pu Wu, around 400 yuan — dignified and appropriate. For something lighter, Shaoxing huadiao wine served warm has a nice ceremonial feel. Tea options: pre-Qingming Longjing and Tieguanyin. OK, let me confirm: Saturday at 6 PM, Bamboo Garden room, six guests, Reunion set menu with winter melon soup substitution. Leave me a phone number and I'll text confirmation."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your number and finalize.",
+                "options": [
+                    {
+                        "text_zh": "手机号是138-xxxx-xxxx。花雕酒温着喝听起来很好，就要那个吧。茶的话准备龙井。程女士，非常感谢您的专业建议——从包间到菜品到酒水，每一个细节都替我想到了。希望周六的晚餐能给对方父母留下好印象。",
+                        "text_pinyin": "shǒujī hào shì yāo sān bā xxxx xxxx. huādiāo jiǔ wēn zhe hē tīng qǐlái hěn hǎo, jiù yào nàge ba. chá de huà zhǔnbèi Lóngjǐng. Chéng nǚshì, fēicháng gǎnxiè nín de zhuānyè jiànyì——cóng bāojiān dào càipǐn dào jiǔ shuǐ, měi yí gè xìjié dōu tì wǒ xiǎng dào le. xīwàng zhōuliù de wǎncān néng gěi duìfāng fùmǔ liú xià hǎo yìnxiàng.",
+                        "text_en": "Phone is 138-xxxx-xxxx. Warm huadiao wine sounds wonderful — let's go with that. Longjing for tea. Ms. Cheng, thank you for your professional guidance — from the room to the menu to the drinks, you've thought of every detail. I hope Saturday's dinner makes a good impression on the parents.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Complete order with genuine gratitude — Ms. Cheng will make sure the Bamboo Garden room has fresh flowers on Saturday. Some reservations are just reservations. This one is an event."
+                    },
+                    {
+                        "text_zh": "号码是138-xxxx-xxxx。谢谢！周六见。",
+                        "text_pinyin": "hàomǎ shì yāo sān bā xxxx xxxx. xièxie! zhōuliù jiàn.",
+                        "text_en": "Number is 138-xxxx-xxxx. Thanks! See you Saturday.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Confirmed. The Bamboo Garden awaits."
+                    },
+                    {
+                        "text_zh": "好了，号码发短信告诉你。",
+                        "text_pinyin": "hǎo le, hàomǎ fā duǎnxìn gàosu nǐ.",
+                        "text_en": "OK, I'll text you the number.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She needs it now to complete the booking. Details first, then dinner."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Meeting your partner's parents (见家长, jiàn jiāzhǎng) is a significant milestone in Chinese relationships. Restaurant choice, atmosphere, and menu selection signal respect and thoughtfulness. Private rooms (包间, bāojiān) with minimum spending requirements (最低消费, zuìdī xiāofèi) are standard at upscale restaurants. Shaoxing huadiao wine (花雕酒) served warm is traditional for formal family dinners."
+    }
+}

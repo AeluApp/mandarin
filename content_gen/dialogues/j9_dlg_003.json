@@ -1,0 +1,151 @@
+{
+    "title": "The Language of Soil",
+    "title_zh": "泥土的语言",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You meet an elderly farmer, Uncle Luo, at the edge of his terraced rice paddies in Yunnan. He is kneeling in the mud, pressing his palm flat against the earth. The morning mist has not yet burned off.",
+        "setup_zh": "你在云南的梯田边遇到了一位老农民，罗叔。他跪在泥里，把手掌平贴在地面上。晨雾还没有散去。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你摸一下这个泥。不是用手指——用手掌。感觉到了吗？温度。这块泥比旁边那块暖一点。暖的地方水流过了——水流过的地方根会去找。我种了六十年地，最重要的一件事是：泥土会说话，但大多数人不听。不是不愿意听——是不知道怎么听。听泥土不是用耳朵——是用手掌、用脚底、用鼻子。今天早上这块泥的气味告诉我：昨晚的雨够了。不用再浇了。但如果我没有蹲下来闻，我就不知道。我就会多浇一次——多浇的那一次，可能会淹死刚发芽的苗。",
+                "text_pinyin": "Nǐ mō yīxià zhège ní. Bú shì yòng shǒuzhǐ — yòng shǒuzhǎng. Gǎnjué dào le ma? Wēndù. Zhè kuài ní bǐ pángbiān nà kuài nuǎn yīdiǎn. Nuǎn de dìfang shuǐ liú guò le — shuǐ liú guò de dìfang gēn huì qù zhǎo. Wǒ zhòng le liùshí nián dì, zuì zhòngyào de yī jiàn shì shì: nítǔ huì shuōhuà, dàn dàduōshù rén bù tīng. Bú shì bú yuànyì tīng — shì bù zhīdào zěnme tīng. Tīng nítǔ bú shì yòng ěrduo — shì yòng shǒuzhǎng, yòng jiǎodǐ, yòng bízi. Jīntiān zǎoshang zhè kuài ní de qìwèi gàosu wǒ: zuówǎn de yǔ gòu le. Bú yòng zài jiāo le. Dàn rúguǒ wǒ méiyǒu dūn xiàlái wén, wǒ jiù bù zhīdào. Wǒ jiù huì duō jiāo yī cì — duō jiāo de nà yī cì, kěnéng huì yān sǐ gāng fāyá de miáo.",
+                "text_en": "Touch this soil. Not with your fingers — with your palm. Feel it? Temperature. This patch is slightly warmer than the one beside it. Where it's warm, water has flowed — where water flowed, roots will seek. I've farmed for sixty years, and soil speaks, but most people don't listen. Not because they're unwilling — because they don't know how."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to soil as a language that requires a different kind of listening.",
+                "options": [
+                    {
+                        "text_zh": "用手掌和鼻子来「听」——大多数人听不到，不是泥土太安静，是我们只被训练用一种方式接收信息。六十年蹲在泥里，您的手掌变成了翻译器——把温度翻译成「水来过了」，把气味翻译成「雨够了」。这不是测量，是关系——您和泥土之间六十年的共同语言。",
+                        "text_pinyin": "Yòng shǒuzhǎng hé bízi lái 'tīng' — dàduōshù rén tīng bú dào, bú shì nítǔ tài ānjìng, shì wǒmen zhǐ bèi xùnliàn yòng yī zhǒng fāngshì jiēshōu xìnxī. Liùshí nián dūn zài ní lǐ, nín de shǒuzhǎng biàn chéng le fānyìqì — bǎ wēndù fānyì chéng 'shuǐ lái guò le', bǎ qìwèi fānyì chéng 'yǔ gòu le'. Zhè bú shì cèliáng, shì guānxi — nín hé nítǔ zhī jiān liùshí nián de gòngtóng yǔyán.",
+                        "text_en": "'Listening' with palms and nose — most people can't hear it, not because soil is too quiet, but because we're trained to receive information only one way. Sixty years squatting in mud, your palms became a translator — converting temperature into 'water passed through,' scent into 'enough rain.' This isn't measurement — it's a relationship. Sixty years of shared language between you and the earth.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The palm as translator — listening beyond sound requires sixty years of shared language."
+                    },
+                    {
+                        "text_zh": "现在有很多土壤传感器可以测这些。",
+                        "text_pinyin": "Xiànzài yǒu hěn duō tǔrǎng chuángǎnqì kěyǐ cè zhèxiē.",
+                        "text_en": "There are soil sensors now that can measure all this.",
+                        "score": 0.0,
+                        "feedback": "Offers a technological replacement for an embodied relationship."
+                    },
+                    {
+                        "text_zh": "您种的是什么品种的稻子？",
+                        "text_pinyin": "Nín zhòng de shì shénme pǐnzhǒng de dàozi?",
+                        "text_en": "What variety of rice do you grow?",
+                        "score": 0.0,
+                        "feedback": "Asks about crop varieties during a meditation on listening."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "六十年的共同语言——你说得对。但这种语言有一个特点：它不能传授。我可以告诉你「泥暖了说明水来过」，你可以记住这个知识。但你的手掌感受到的那个温度差——零点几度——你自己的手掌需要多少年才能分辨出来？这不是信息的问题，是感官的问题。你的手掌需要在泥土里泡够了时间，它才会变得足够敏感。就像学一门语言——你可以背单词、背语法，但要「听」懂一门语言，你需要泡在里面。泥土的语言也是这样。你不能学它——你只能泡在里面，直到有一天你的手掌自己开始听。",
+                "text_pinyin": "Liùshí nián de gòngtóng yǔyán — nǐ shuō de duì. Dàn zhè zhǒng yǔyán yǒu yī ge tèdiǎn: tā bù néng chuánshòu. Wǒ kěyǐ gàosu nǐ 'ní nuǎn le shuōmíng shuǐ lái guò', nǐ kěyǐ jì zhù zhège zhīshi. Dàn nǐ de shǒuzhǎng gǎnshòu dào de nàge wēndù chā — líng diǎn jǐ dù — nǐ zìjǐ de shǒuzhǎng xūyào duōshǎo nián cái néng fēnbiàn chūlái? Zhè bú shì xìnxī de wèntí, shì gǎnguān de wèntí. Nǐ de shǒuzhǎng xūyào zài nítǔ lǐ pào gòu le shíjiān, tā cái huì biàn de zúgòu mǐngǎn. Jiù xiàng xué yī mén yǔyán — nǐ kěyǐ bèi dāncí, bèi yǔfǎ, dàn yào 'tīng' dǒng yī mén yǔyán, nǐ xūyào pào zài lǐmiàn. Nítǔ de yǔyán yě shì zhèyàng. Nǐ bù néng xué tā — nǐ zhǐ néng pào zài lǐmiàn, zhídào yǒu yī tiān nǐ de shǒuzhǎng zìjǐ kāishǐ tīng.",
+                "text_en": "Sixty years of shared language — you're right. But this language has a characteristic: it can't be taught. I can tell you 'warm soil means water passed through,' and you can remember this knowledge. But that temperature difference your palm felt — a fraction of a degree — how many years would your own palm need to distinguish it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to knowledge that can only be soaked in, never taught.",
+                "options": [
+                    {
+                        "text_zh": "不能学，只能泡——两种知识。一种是可传递的信息：事实、规则，五分钟教完。另一种是身体慢慢吸收的感知：「说不出来但知道」的直觉，需要在泥土里泡六十年。真正让您成为好农民的是第二种。没有考试、没有捷径，唯一的入口是身体在场的时间。",
+                        "text_pinyin": "Bù néng xué, zhǐ néng pào — liǎng zhǒng zhīshi. Yī zhǒng shì kě chuándì de xìnxī: shìshí, guīzé, wǔ fēnzhōng jiāo wán. Lìng yī zhǒng shì shēntǐ mànman xīshōu de gǎnzhī: 'shuō bù chūlái dàn zhīdào' de zhíjué, xūyào zài nítǔ lǐ pào liùshí nián. Zhēnzhèng ràng nín chéngwéi hǎo nóngmín de shì dì èr zhǒng. Méiyǒu kǎoshì, méiyǒu jiéjìng, wéiyī de rùkǒu shì shēntǐ zàichǎng de shíjiān.",
+                        "text_en": "Can't be learned, only soaked in — two kinds of knowledge. One is transferable information: facts, rules, taught in five minutes. The other is perception the body slowly absorbs: intuition you 'can't articulate but know,' requiring sixty years in the soil. What truly made you a good farmer is the second kind. No exams, no shortcuts — the only entrance is time with the body present.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Two kinds of knowledge — transferable information versus embodied perception that only time can teach."
+                    },
+                    {
+                        "text_zh": "年轻人愿意学种地吗？",
+                        "text_pinyin": "Niánqīngrén yuànyì xué zhòng dì ma?",
+                        "text_en": "Are young people willing to learn farming?",
+                        "score": 0.0,
+                        "feedback": "Asks about generational succession during a meditation on embodied knowledge."
+                    },
+                    {
+                        "text_zh": "有机农业是不是也需要这种经验？",
+                        "text_pinyin": "Yǒujī nóngyè shì bú shì yě xūyào zhè zhǒng jīngyàn?",
+                        "text_en": "Does organic farming also need this kind of experience?",
+                        "score": 0.0,
+                        "feedback": "Categorizes farming methods instead of engaging the epistemological insight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "身体在场的时间——你理解了。但我要告诉你更深的一层：泥土不只是在说「水来了」「雨够了」这种实用信息。如果你泡得够久，你会开始感觉到一些更难用语言表达的东西。比如——今天早上，我蹲在这里的时候，泥土告诉我的不只是温度和湿度。它告诉我一种——怎么说呢——满足感。不是「我」满足，是泥土满足。昨晚的雨刚好够，今天早上的温度刚好暖，苗刚好在该发芽的时候发芽了。一切都刚好。泥土在说的是：「现在，一切都好。」你可能觉得这是我的想象。也许是。但六十年以后，你的想象和泥土的语言之间的界限会变得非常模糊。也许根本就没有界限。",
+                "text_pinyin": "Shēntǐ zàichǎng de shíjiān — nǐ lǐjiě le. Dàn wǒ yào gàosu nǐ gèng shēn de yī céng: nítǔ bù zhǐ shì zài shuō 'shuǐ lái le' 'yǔ gòu le' zhè zhǒng shíyòng xìnxī. Rúguǒ nǐ pào de gòu jiǔ, nǐ huì kāishǐ gǎnjué dào yīxiē gèng nán yòng yǔyán biǎodá de dōngxi. Bǐrú — jīntiān zǎoshang, wǒ dūn zài zhèlǐ de shíhou, nítǔ gàosu wǒ de bù zhǐ shì wēndù hé shīdù. Tā gàosu wǒ yī zhǒng — zěnme shuō ne — mǎnzú gǎn. Bú shì 'wǒ' mǎnzú, shì nítǔ mǎnzú. Zuówǎn de yǔ gānghǎo gòu, jīntiān zǎoshang de wēndù gānghǎo nuǎn, miáo gānghǎo zài gāi fāyá de shíhou fāyá le. Yīqiè dōu gānghǎo. Nítǔ zài shuō de shì: 'xiànzài, yīqiè dōu hǎo.' Nǐ kěnéng juéde zhè shì wǒ de xiǎngxiàng. Yěxǔ shì. Dàn liùshí nián yǐhòu, nǐ de xiǎngxiàng hé nítǔ de yǔyán zhī jiān de jièxiàn huì biàn de fēicháng móhu. Yěxǔ gēnběn jiù méiyǒu jièxiàn.",
+                "text_en": "Time when the body is present — you understand. But let me tell you a deeper layer: soil doesn't only communicate practical information like 'water came' or 'rain was enough.' If you soak long enough, you begin sensing things harder to express in language. For instance — this morning, when I squatted here, the soil told me more than temperature and moisture."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the dissolving boundary between imagination and the soil's voice.",
+                "options": [
+                    {
+                        "text_zh": "也许根本没有界限——不是神秘主义，是亲密的极致。两个人相处几十年也会分不清某个念头是谁的。您和泥土也到了这个阶段。当您感觉泥土「满足」，不是投射——是身体经过六十年校准，已经能直接感受生态系统的平衡。这是被时间锻造出来的知觉。",
+                        "text_pinyin": "Yěxǔ gēnběn méiyǒu jièxiàn — bú shì shénmì zhǔyì, shì qīnmì de jízhì. Liǎng ge rén xiāngchǔ jǐ shí nián yě huì fēn bù qīng mǒu ge niàntou shì shéi de. Nín hé nítǔ yě dào le zhège jiēduàn. Dāng nín gǎnjué nítǔ 'mǎnzú', bú shì tóushè — shì shēntǐ jīngguò liùshí nián xiàozhǔn, yǐjīng néng zhíjiē gǎnshòu shēngtài xìtǒng de pínghéng. Zhè shì bèi shíjiān duànzào chūlái de zhījué.",
+                        "text_en": "Perhaps there truly is no boundary — not mysticism, but intimacy at its extreme. Two people together for decades can't tell whose thought is whose. Your relationship with soil has reached that stage. When you feel the soil is 'satisfied,' it's not projection — it's your body, calibrated by sixty years, directly sensing an ecosystem's balance. This is perception forged by time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Intimacy at its extreme — sixty years dissolves the boundary between perceiver and perceived."
+                    },
+                    {
+                        "text_zh": "您觉得气候变化对种地影响大吗？",
+                        "text_pinyin": "Nín juéde qìhòu biànhuà duì zhòng dì yǐngxiǎng dà ma?",
+                        "text_en": "Do you think climate change greatly affects farming?",
+                        "score": 0.0,
+                        "feedback": "Introduces a macro issue during an intimate moment of shared perception."
+                    },
+                    {
+                        "text_zh": "这些梯田是什么时候建的？",
+                        "text_pinyin": "Zhèxiē tītián shì shénme shíhou jiàn de?",
+                        "text_en": "When were these terraces built?",
+                        "score": 0.0,
+                        "feedback": "A historical question during a meditation on embodied knowledge."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "超越语言的知觉……你说得比我能说的更清楚。我最后告诉你一件事。我的手——你看——指甲缝里永远有泥。洗不掉了。不是洗不干净——是皮肤的纹路已经和泥混在一起了。有时候我分不清哪里是我的皮肤、哪里是泥。我年轻的时候觉得这是脏。现在我觉得——这是六十年对话的证据。我的手不再完全是我的了。它有一半属于这块地。等我走了以后，这块地会记住我的手——就像砚台记住磨它的手一样。我的手掌磨过的泥、翻过的土——那些痕迹会留在这里。地不会忘记种过它的人。",
+                "text_pinyin": "Chāoyuè yǔyán de zhījué…… nǐ shuō de bǐ wǒ néng shuō de gèng qīngchǔ. Wǒ zuìhòu gàosu nǐ yī jiàn shì. Wǒ de shǒu — nǐ kàn — zhǐjiǎ fèng lǐ yǒngyuǎn yǒu ní. Xǐ bù diào le. Bú shì xǐ bù gānjìng — shì pífū de wénlù yǐjīng hé ní hùn zài yīqǐ le. Yǒu shíhou wǒ fēn bù qīng nǎlǐ shì wǒ de pífū, nǎlǐ shì ní. Wǒ niánqīng de shíhou juéde zhè shì zāng. Xiànzài wǒ juéde — zhè shì liùshí nián duìhuà de zhèngjù. Wǒ de shǒu bú zài wánquán shì wǒ de le. Tā yǒu yībàn shǔyú zhè kuài dì. Děng wǒ zǒu le yǐhòu, zhè kuài dì huì jì zhù wǒ de shǒu — jiù xiàng yàntái jì zhù mó tā de shǒu yīyàng. Wǒ de shǒuzhǎng mó guò de ní, fān guò de tǔ — nàxiē hénjì huì liú zài zhèlǐ. Dì bú huì wàngjì zhòng guò tā de rén.",
+                "text_en": "Perception beyond language… you articulate it more clearly than I can. One last thing. My hands — look — there's always soil in the nail beds. Can't wash it out anymore. Not because it won't come clean — because the lines of my skin have blended with the soil. Sometimes I can't tell where my skin ends and the soil begins. When I was young, I thought this was dirty."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the farmer's hands becoming part of the land.",
+                "options": [
+                    {
+                        "text_zh": "手不再完全是您的——一半属于这块地。不是修辞，是六十年物质交换的事实：皮肤细胞留在泥里，矿物质渗进您的皮肤。不是「我拥有这块地」——是你们互相成为了对方的一部分。您的手本身就是证据——它既是手，又是地。",
+                        "text_pinyin": "Shǒu bú zài wánquán shì nín de — yībàn shǔyú zhè kuài dì. Bú shì xiūcí, shì liùshí nián wùzhì jiāohuàn de shìshí: pífū xìbāo liú zài ní lǐ, kuàngwùzhì shèn jìn nín de pífū. Bú shì 'wǒ yōngyǒu zhè kuài dì' — shì nǐmen hùxiāng chéngwéi le duìfāng de yī bùfen. Nín de shǒu běnshēn jiù shì zhèngjù — tā jì shì shǒu, yòu shì dì.",
+                        "text_en": "Your hand is no longer entirely yours — half belongs to this land. Not rhetoric — it's the fact of sixty years of material exchange: skin cells left in mud, minerals seeped into skin. Not 'I own this land' — you've become part of each other. Your hand itself is the evidence — it is both hand and earth.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mutual becoming at the molecular level — the conversation happened within an inseparable whole."
+                    },
+                    {
+                        "text_zh": "您的孩子也种地吗？",
+                        "text_pinyin": "Nín de háizi yě zhòng dì ma?",
+                        "text_en": "Do your children farm too?",
+                        "score": 0.0,
+                        "feedback": "Asks about succession during a meditation on human-earth symbiosis."
+                    },
+                    {
+                        "text_zh": "这块地有多大？",
+                        "text_pinyin": "Zhè kuài dì yǒu duō dà?",
+                        "text_en": "How large is this plot?",
+                        "score": 0.0,
+                        "feedback": "A practical measurement question at the emotional climax."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Yunnan's terraced rice paddies (梯田), particularly those of the Hani people in Honghe, represent over 1,300 years of intimate human-landscape relationship. Traditional Chinese farming philosophy sees the farmer not as owner or exploiter of land but as participant in a mutual relationship (天人合一, the unity of heaven and humanity). The concept of embodied, non-transferable agricultural knowledge connects to the Chinese epistemological distinction between 知识 (zhīshi, explicit knowledge) and 体悟 (tǐwù, bodily realization) — understanding that can only come through lived physical experience."
+    }
+}

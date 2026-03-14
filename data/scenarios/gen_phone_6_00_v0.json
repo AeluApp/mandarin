@@ -1,0 +1,196 @@
+{
+    "title": "The Appointment Architect",
+    "title_zh": "预约建筑师",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_phone_6_00_v0",
+    "tree": {
+        "setup": "Your living room, late morning. You need to schedule a visa interview at the local government affairs center — a place that operates on an appointment system so precise it would make an airline scheduler weep with envy. The booking hotline connects you to Operator Xiao Yang, whose voice carries the measured cadence of someone who has navigated 12,000 callers through the scheduling system and knows every available slot the way a chess player knows the board.",
+        "setup_zh": "你的客厅，上午十点多。你需要在当地政务服务中心预约一次签证面谈——这个地方运行着一套精确得足以让航空调度员嫉妒落泪的预约系统。预约热线接通了话务员小杨，她的声音带着一种经过测量的节奏——那是引导过一万两千名来电者穿越预约系统的人才有的从容，她了解每一个可用时段的方式就像棋手了解棋盘。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，这里是政务服务中心预约热线。请问您需要预约什么业务？",
+                "text_pinyin": "nín hǎo, zhèlǐ shì zhèngwù fúwù zhōngxīn yùyuē rèxiàn. qǐngwèn nín xūyào yùyuē shénme yèwù?",
+                "text_en": "Hello, this is the government affairs center appointment hotline. What service do you need to book?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain what you need to schedule.",
+                "options": [
+                    {
+                        "text_zh": "你好，我是外国人，需要预约办理居留许可延期。我目前的居留许可下个月十五号到期，所以最好能在下周之前办好预约。请问最近有什么可选的时间段？",
+                        "text_pinyin": "nǐ hǎo, wǒ shì wàiguó rén, xūyào yùyuē bànlǐ jūliú xǔkě yánqī. wǒ mùqián de jūliú xǔkě xià gè yuè shíwǔ hào dào qī, suǒyǐ zuìhǎo néng zài xià zhōu zhīqián bàn hǎo yùyuē. qǐngwèn zuìjìn yǒu shénme kě xuǎn de shíjiān duàn?",
+                        "text_en": "Hello, I'm a foreigner and need to book a residence permit renewal. My current permit expires on the 15th of next month, so I'd like to get an appointment before next week. What time slots are available?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Service type, deadline, and time preference — Operator Xiao Yang's chessboard is already narrowing to the relevant squares."
+                    },
+                    {
+                        "text_zh": "我要预约签证方面的业务。",
+                        "text_pinyin": "wǒ yào yùyuē qiānzhèng fāngmiàn de yèwù.",
+                        "text_en": "I need to book a visa-related service.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll narrow it down: new visa, renewal, extension, or permit? The categories matter."
+                    },
+                    {
+                        "text_zh": "我想约个时间去你们那里办事。",
+                        "text_pinyin": "wǒ xiǎng yuē gè shíjiān qù nǐmen nàlǐ bàn shì.",
+                        "text_en": "I'd like to schedule a time to come to your office.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She needs specifics. The center handles forty-seven types of services, and each has its own queue."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "居留许可延期，好的。我先确认一下：您是工作类居留许可还是学习类？不同类型的业务在不同的窗口办理，可选的时间也不一样。",
+                "text_pinyin": "jūliú xǔkě yánqī, hǎo de. wǒ xiān quèrèn yíxià: nín shì gōngzuò lèi jūliú xǔkě háishì xuéxí lèi? bùtóng lèixíng de yèwù zài bùtóng de chuāngkǒu bànlǐ, kě xuǎn de shíjiān yě bù yíyàng.",
+                "text_en": "Residence permit renewal, OK. Let me confirm: is it a work-type or study-type permit? Different types are processed at different windows, with different available slots."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Specify the permit type and ask about the process.",
+                "options": [
+                    {
+                        "text_zh": "是工作类的。请问办理延期需要准备哪些材料？我不想到了现场才发现缺什么东西。另外，整个办理流程大概需要多长时间？需要本人到场还是可以委托别人代办？",
+                        "text_pinyin": "shì gōngzuò lèi de. qǐngwèn bànlǐ yánqī xūyào zhǔnbèi nǎxiē cáiliào? wǒ bù xiǎng dào le xiànchǎng cái fāxiàn quē shénme dōngxi. lìngwài, zhěnggè bànlǐ liúchéng dàgài xūyào duō cháng shíjiān? xūyào běnrén dào chǎng háishì kěyǐ wěituō biéren dài bàn?",
+                        "text_en": "Work type. What materials do I need for the renewal? I don't want to arrive and find I'm missing something. Also, how long does the whole process take? Do I need to go in person, or can someone else handle it for me?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Three forward-thinking questions in one breath — Operator Xiao Yang pulls up the requirements list with the precision of someone who recites it in her sleep."
+                    },
+                    {
+                        "text_zh": "工作类的。需要什么材料？",
+                        "text_pinyin": "gōngzuò lèi de. xūyào shénme cáiliào?",
+                        "text_en": "Work type. What materials do I need?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She lists them systematically."
+                    },
+                    {
+                        "text_zh": "工作的。",
+                        "text_pinyin": "gōngzuò de.",
+                        "text_en": "Work.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Noted. She'll provide the rest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "工作类居留许可延期需要以下材料：护照原件、当前居留许可页的复印件、公司出具的延期申请函、有效的外国人工作许可证、近期两寸白底照片两张、住宿登记证明。必须本人到场，因为需要采集指纹。办理时间大概三十分钟。好，我看一下工作类窗口的可预约时间……这周三下午两点有一个，或者下周一上午十点。",
+                "text_pinyin": "gōngzuò lèi jūliú xǔkě yánqī xūyào yǐxià cáiliào: hùzhào yuánjiàn, dāngqián jūliú xǔkě yè de fùyìnjiàn, gōngsī chūjù de yánqī shēnqǐng hán, yǒuxiào de wàiguó rén gōngzuò xǔkě zhèng, jìnqī liǎng cùn bái dǐ zhàopiàn liǎng zhāng, zhùsù dēngjì zhèngmíng. bìxū běnrén dào chǎng, yīnwèi xūyào cǎijí zhǐwén. bànlǐ shíjiān dàgài sānshí fēnzhōng. hǎo, wǒ kàn yíxià gōngzuò lèi chuāngkǒu de kě yùyuē shíjiān……zhè zhōusān xiàwǔ liǎng diǎn yǒu yí gè, huòzhě xià zhōuyī shàngwǔ shí diǎn.",
+                "text_en": "Work-type residence permit renewal requires: original passport, photocopy of current permit page, company extension application letter, valid foreigner's work permit, two recent 2-inch photos with white background, accommodation registration. You must appear in person for fingerprinting. Processing takes about 30 minutes. Let me check the work-type window availability... Wednesday afternoon at 2 PM this week, or Monday morning at 10 next week."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a time slot and confirm the details.",
+                "options": [
+                    {
+                        "text_zh": "这周三下午两点可以。我确认一下材料清单：护照原件、居留许可复印件、公司申请函、工作许可证、两张照片、住宿登记。请问住宿登记是去派出所办的那个吗？我去年搬过家，不确定登记的地址是不是最新的。",
+                        "text_pinyin": "zhè zhōusān xiàwǔ liǎng diǎn kěyǐ. wǒ quèrèn yíxià cáiliào qīngdān: hùzhào yuánjiàn, jūliú xǔkě fùyìnjiàn, gōngsī shēnqǐng hán, gōngzuò xǔkě zhèng, liǎng zhāng zhàopiàn, zhùsù dēngjì. qǐngwèn zhùsù dēngjì shì qù pàichūsuǒ bàn de nàge ma? wǒ qùnián bān guò jiā, bú quèdìng dēngjì de dìzhǐ shìbúshì zuìxīn de.",
+                        "text_en": "Wednesday at 2 PM works. Let me confirm the materials list: original passport, permit page copy, company letter, work permit, two photos, accommodation registration. Is the accommodation registration the one from the police station? I moved last year and I'm not sure if the registered address is current.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Catching a potential document discrepancy before the appointment — Xiao Yang confirms that yes, you need an updated registration if you've moved. This saves a wasted trip."
+                    },
+                    {
+                        "text_zh": "周三两点。好的。",
+                        "text_pinyin": "zhōusān liǎng diǎn. hǎo de.",
+                        "text_en": "Wednesday 2 PM. OK.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Booked. She'll send a confirmation."
+                    },
+                    {
+                        "text_zh": "有没有更早的？我不想等到周三。",
+                        "text_pinyin": "yǒu méiyǒu gèng zǎo de? wǒ bù xiǎng děng dào zhōusān.",
+                        "text_en": "Is there anything earlier? I don't want to wait until Wednesday.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Wednesday IS the earliest. The chessboard has spoken."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是派出所办的境外人员临时住宿登记表。如果您搬过家，必须重新办理。这个很重要——地址不一致的话，窗口会直接退回材料。建议您明天就去派出所更新一下。好了，周三下午两点的预约我帮您登记了。您的姓名和护照号码？",
+                "text_pinyin": "duì, jiùshì pàichūsuǒ bàn de jìngwài rényuán línshí zhùsù dēngjì biǎo. rúguǒ nín bān guò jiā, bìxū chóngxīn bànlǐ. zhège hěn zhòngyào——dìzhǐ bù yízhì de huà, chuāngkǒu huì zhíjiē tuì huí cáiliào. jiànyì nín míngtiān jiù qù pàichūsuǒ gēngxīn yíxià. hǎo le, zhōusān xiàwǔ liǎng diǎn de yùyuē wǒ bāng nín dēngjì le. nín de xìngmíng hé hùzhào hàomǎ?",
+                "text_en": "Yes, the temporary accommodation registration for foreign residents from the police station. If you've moved, you must re-register. This is important — if the address doesn't match, the window will reject your materials. I suggest updating at the police station tomorrow. OK, I've registered the Wednesday 2 PM appointment. Your name and passport number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your details and ask a final question.",
+                "options": [
+                    {
+                        "text_zh": "我叫 David Chen，护照号码是 US123456789。谢谢你提醒我更新住宿登记，我明天就去。最后一个问题：如果周三有事去不了，可以改预约吗？取消和改期有没有限制？",
+                        "text_pinyin": "wǒ jiào David Chen, hùzhào hàomǎ shì US yāo èr sān sì wǔ liù qī bā jiǔ. xièxie nǐ tíxǐng wǒ gēngxīn zhùsù dēngjì, wǒ míngtiān jiù qù. zuìhòu yí gè wèntí: rúguǒ zhōusān yǒu shì qù bù liǎo, kěyǐ gǎi yùyuē ma? qǔxiāo hé gǎi qī yǒu méiyǒu xiànzhì?",
+                        "text_en": "I'm David Chen, passport number US123456789. Thanks for reminding me about the accommodation registration — I'll go tomorrow. Last question: if something comes up Wednesday and I can't make it, can I reschedule? Any limitations on canceling or changing?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Contingency planning for the appointment itself — Xiao Yang appreciates a caller who thinks ahead. Her chessboard has many moves available."
+                    },
+                    {
+                        "text_zh": "David Chen, US123456789。谢谢！",
+                        "text_pinyin": "David Chen, US yāo èr sān sì wǔ liù qī bā jiǔ. xièxie!",
+                        "text_en": "David Chen, US123456789. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Registered. She'll send the confirmation by text."
+                    },
+                    {
+                        "text_zh": "David. 号码我一会儿发短信给你。",
+                        "text_pinyin": "David. hàomǎ wǒ yíhuìr fā duǎnxìn gěi nǐ.",
+                        "text_en": "David. I'll text you the number later.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She needs it now to complete the booking. The system is particular about sequence."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "登记好了。改期或者取消必须提前二十四小时，可以打这个热线或者在网上操作。如果没有提前取消也没有到场的话，下次预约要等两周。确认短信会发到您的手机上。周三下午一点五十到就可以了，带齐所有材料。祝您办理顺利！",
+                "text_pinyin": "dēngjì hǎo le. gǎi qī huòzhě qǔxiāo bìxū tíqián èrshísì xiǎoshí, kěyǐ dǎ zhège rèxiàn huòzhě zài wǎng shàng cāozuò. rúguǒ méiyǒu tíqián qǔxiāo yě méiyǒu dào chǎng de huà, xià cì yùyuē yào děng liǎng zhōu. quèrèn duǎnxìn huì fā dào nín de shǒujī shàng. zhōusān xiàwǔ yì diǎn wǔshí dào jiù kěyǐ le, dài qí suǒyǒu cáiliào. zhù nín bànlǐ shùnlì!",
+                "text_en": "Registered. Rescheduling or canceling must be done 24 hours in advance — call this hotline or do it online. If you don't cancel and don't show up, the next appointment has a two-week wait. A confirmation text will be sent to your phone. Arrive by 1:50 PM Wednesday with all materials. Good luck with your application!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm everything.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢小杨！你帮我省了很多时间，尤其是提醒我更新住宿登记——不然周三肯定白跑一趟。我总结一下：明天去派出所更新登记，周三下午一点五十到政务中心，带齐材料。如果有变化提前二十四小时取消。都清楚了！",
+                        "text_pinyin": "fēicháng gǎnxiè Xiǎo Yáng! nǐ bāng wǒ shěng le hěn duō shíjiān, yóuqí shì tíxǐng wǒ gēngxīn zhùsù dēngjì——bùrán zhōusān kěndìng bái pǎo yí tàng. wǒ zǒngjié yíxià: míngtiān qù pàichūsuǒ gēngxīn dēngjì, zhōusān xiàwǔ yì diǎn wǔshí dào zhèngwù zhōngxīn, dài qí cáiliào. rúguǒ yǒu biànhuà tíqián èrshísì xiǎoshí qǔxiāo. dōu qīngchǔ le!",
+                        "text_en": "Thank you so much Xiao Yang! You saved me a lot of time, especially the reminder about updating the accommodation registration — otherwise Wednesday would have been a wasted trip. Let me summarize: tomorrow update registration at police station, Wednesday arrive at 1:50 PM with all materials, cancel 24 hours ahead if needed. All clear!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Full summary with gratitude for the saved trip — Xiao Yang ends the call satisfied. Another caller navigated safely through the scheduling board."
+                    },
+                    {
+                        "text_zh": "谢谢小杨！周三见。",
+                        "text_pinyin": "xièxie Xiǎo Yáng! zhōusān jiàn.",
+                        "text_en": "Thanks Xiao Yang! See you Wednesday.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She won't be there Wednesday — she's the voice on the phone, not the face at the window. But the sentiment is appreciated."
+                    },
+                    {
+                        "text_zh": "好的，再见。",
+                        "text_pinyin": "hǎo de, zàijiàn.",
+                        "text_en": "OK, bye.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She disconnects. The confirmation text arrives before her headset settles."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese government affairs centers (政务服务中心) operate on strict appointment systems. Foreign residents must register their accommodation (住宿登记) at the local police station within 24 hours of moving. Residence permit renewal (居留许可延期) should be initiated at least 30 days before expiration. The no-show penalty (白跑, bái pǎo — wasted trip) is a real consequence of incomplete documentation."
+    }
+}

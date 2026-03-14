@@ -1,0 +1,83 @@
+{
+  "title": "The Street Sweeper",
+  "title_zh": "扫地的人",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "Early morning, you see the same street sweeper you pass every day. Today she has a small radio playing music softly.",
+    "setup_zh": "一大早，你看到每天都看到的那个扫地阿姨。今天她有一个小收音机，轻轻地放着音乐。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "早啊！又是你最早出门。你每天都起得这么早吗？",
+        "text_pinyin": "Zǎo a! Yòu shì nǐ zuì zǎo chūmén. Nǐ měi tiān dōu qǐ de zhème zǎo ma?",
+        "text_en": "Morning! You're the earliest one out again. Do you always get up this early?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Greet her and acknowledge her daily routine.",
+        "options": [
+          {
+            "text_zh": "早上好！我喜欢早上的空气。不过你比我更早——每天谢谢你把路扫得这么干净。",
+            "text_pinyin": "Zǎoshang hǎo! Wǒ xǐhuan zǎoshang de kōngqì. Búguò nǐ bǐ wǒ gèng zǎo — měi tiān xièxie nǐ bǎ lù sǎo de zhème gānjìng.",
+            "text_en": "Good morning! I like the morning air. But you're even earlier — thank you for keeping the road so clean every day.",
+            "score": 1.0,
+            "feedback": "Sees her work and thanks her — simple but meaningful.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我要去上班。",
+            "text_pinyin": "Wǒ yào qù shàng bān.",
+            "text_en": "I'm going to work.",
+            "score": 0.0,
+            "feedback": "A flat statement that doesn't engage her warmth."
+          },
+          {
+            "text_zh": "你的收音机声音太大了。",
+            "text_pinyin": "Nǐ de shōuyīnjī shēngyīn tài dà le.",
+            "text_en": "Your radio is too loud.",
+            "score": 0.0,
+            "feedback": "A complaint that spoils a gentle scene."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "不客气。我喜欢早上的时候，街上没什么人，很安静。一边扫地一边听歌，时间过得很快。",
+        "text_pinyin": "Bú kèqi. Wǒ xǐhuan zǎoshang de shíhou, jiē shàng méi shénme rén, hěn ānjìng. Yībiān sǎo dì yībiān tīng gē, shíjiān guò de hěn kuài.",
+        "text_en": "You're welcome. I like the mornings when there's nobody on the street — so quiet. Sweeping while listening to songs, time passes quickly."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to how she finds peace in her work.",
+        "options": [
+          {
+            "text_zh": "一边扫地一边听歌，听起来很安静很美好。我觉得你是每天第一个让这条街变漂亮的人。",
+            "text_pinyin": "Yībiān sǎo dì yībiān tīng gē, tīng qǐlái hěn ānjìng hěn měihǎo. Wǒ juéde nǐ shì měi tiān dì yī ge ràng zhè tiáo jiē biàn piàoliang de rén.",
+            "text_en": "Sweeping while listening to songs — that sounds peaceful and beautiful. I think you're the first person to make this street beautiful every day.",
+            "score": 1.0,
+            "feedback": "Elevates her work into something beautiful — she's the street's first artist.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你不觉得这个工作很辛苦吗？",
+            "text_pinyin": "Nǐ bù juéde zhège gōngzuò hěn xīnkǔ ma?",
+            "text_en": "Don't you think this job is hard?",
+            "score": 0.0,
+            "feedback": "Projects difficulty onto her contentment."
+          },
+          {
+            "text_zh": "你听什么歌？",
+            "text_pinyin": "Nǐ tīng shénme gē?",
+            "text_en": "What songs do you listen to?",
+            "score": 0.0,
+            "feedback": "A detail question that doesn't match the mood."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Street sweepers (环卫工人) are among the earliest risers in Chinese cities, often starting before dawn. Though their work is underappreciated, many develop a deep relationship with the streets they tend. The small radio playing music in the quiet dawn is a common sight — their private soundtrack to invisible labor."
+  }
+}

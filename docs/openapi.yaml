@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
-  title: Mandarin API
+  title: Aelu API
   version: 1.0.0
   description: >
-    REST API for the Mandarin Learning System. Supports adaptive drill sessions
+    REST API for the Aelu learning system. Supports adaptive drill sessions
     (via WebSocket), spaced-repetition progress tracking, graded reading, media
     exposure, extensive listening, vocabulary encounter logging, xAPI/Caliper
     learning-record export, Common Cartridge export, GDPR data portability and
@@ -11,7 +11,7 @@ info:
     notifications.
 
 servers:
-  - url: https://mandarin.app
+  - url: https://aelu.app
 
 security:
   - cookieAuth: []
@@ -58,6 +58,30 @@ tags:
     description: IMS Caliper 1.2 event export
   - name: WebSocket
     description: Real-time drill and mini-session channels
+  - name: Admin
+    description: Admin dashboard metrics, user management, quality, and risk (requires admin + MFA)
+  - name: TTS
+    description: Text-to-speech audio generation and voice preferences
+  - name: Grammar
+    description: Grammar points, lessons, practice, and mastery tracking
+  - name: Classroom
+    description: Teacher classroom management, student tracking, assignments
+  - name: Conversation
+    description: Conversation drill scenarios and responses
+  - name: Content
+    description: Content gap analysis and reading generation
+  - name: MFA
+    description: TOTP multi-factor authentication setup and management
+  - name: Streak
+    description: Streak freeze management
+  - name: Dictionary
+    description: Dictionary lookup and history
+  - name: Tutor
+    description: Tutor session corrections, flags, and stats
+  - name: Marketing
+    description: Referrals, discounts, NPS, and feedback
+  - name: Telemetry
+    description: Client-side error reports and analytics events
 
 paths:
   # ── Health ──────────────────────────────────────────────────────────
@@ -1634,6 +1658,2603 @@ paths:
       responses:
         "101":
           description: Switching Protocols (WebSocket upgrade)
+
+  # ── Telemetry ─────────────────────────────────────────────────────
+
+  /api/error-report:
+    post:
+      tags: [Telemetry]
+      summary: Accept a client-side error report (JS errors, user reports)
+      operationId: errorReport
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error_type:
+                  type: string
+                message:
+                  type: string
+                source:
+                  type: string
+                line:
+                  type: integer
+                col:
+                  type: integer
+                stack:
+                  type: string
+                page_url:
+                  type: string
+                snapshot:
+                  type: object
+      responses:
+        "204":
+          description: Report accepted
+
+  /api/client-events:
+    post:
+      tags: [Telemetry]
+      summary: Accept batched client-side analytics events
+      operationId: clientEvents
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                install_id:
+                  type: string
+                events:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      cat:
+                        type: string
+                      evt:
+                        type: string
+                      id:
+                        type: string
+                        description: Unique event ID for dedup
+                      d:
+                        type: object
+                        description: Event detail payload
+      responses:
+        "204":
+          description: Events accepted
+        "429":
+          description: Rate limit exceeded for this install
+
+  /api/stats/public:
+    get:
+      tags: [Health]
+      summary: Public learner count (rounded to nearest 10)
+      operationId: statsPublic
+      security: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  learner_count:
+                    type: integer
+
+  /api/sw-status:
+    get:
+      tags: [Health]
+      summary: Service worker kill-switch status
+      operationId: swStatus
+      security: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+                  build_id:
+                    type: string
+
+  # ── TTS / Audio ──────────────────────────────────────────────────
+
+  /api/tts:
+    get:
+      tags: [TTS]
+      summary: Generate TTS audio and return file directly
+      operationId: ttsGet
+      parameters:
+        - name: text
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: rate
+          in: query
+          schema:
+            type: integer
+        - name: voice
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Audio file
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Invalid text
+        "503":
+          description: TTS unavailable
+    post:
+      tags: [TTS]
+      summary: Generate TTS audio and return URL
+      operationId: ttsPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                rate:
+                  type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+        "400":
+          description: Invalid text
+        "503":
+          description: TTS unavailable
+
+  /api/audio/{filename}:
+    get:
+      tags: [TTS]
+      summary: Serve a generated TTS audio file
+      operationId: serveAudio
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Audio file (MP3, WAV, or AIFF)
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: File not found
+
+  /api/settings/voice:
+    get:
+      tags: [TTS]
+      summary: Get current preferred TTS voice
+      operationId: getVoice
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voice:
+                    type: string
+    post:
+      tags: [TTS]
+      summary: Set preferred TTS voice
+      operationId: setVoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [voice]
+              properties:
+                voice:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voice:
+                    type: string
+        "400":
+          description: Invalid voice name
+
+  # ── Auth (additional) ────────────────────────────────────────────
+
+  /auth/account/change-password:
+    post:
+      tags: [Auth]
+      summary: Change password while logged in
+      operationId: changePassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [old_password, new_password]
+              properties:
+                old_password:
+                  type: string
+                new_password:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changed:
+                    type: boolean
+        "400":
+          description: Missing fields or invalid password
+        "403":
+          description: Current password incorrect
+
+  # ── MFA ──────────────────────────────────────────────────────────
+
+  /api/mfa/status:
+    get:
+      tags: [MFA]
+      summary: Get MFA enablement status
+      operationId: mfaStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totp_enabled:
+                    type: boolean
+
+  /api/mfa/setup:
+    post:
+      tags: [MFA]
+      summary: Begin TOTP MFA setup (returns secret and QR URI)
+      operationId: mfaSetup
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  secret:
+                    type: string
+                  provisioning_uri:
+                    type: string
+                  backup_codes:
+                    type: array
+                    items:
+                      type: string
+
+  /api/mfa/verify-setup:
+    post:
+      tags: [MFA]
+      summary: Verify TOTP code to complete MFA setup
+      operationId: mfaVerifySetup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+        "400":
+          description: Invalid code
+
+  /api/mfa/disable:
+    post:
+      tags: [MFA]
+      summary: Disable TOTP MFA (requires password verification)
+      operationId: mfaDisable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  disabled:
+                    type: boolean
+        "403":
+          description: Invalid password
+
+  # ── Streak ───────────────────────────────────────────────────────
+
+  /api/streak/use-freeze:
+    post:
+      tags: [Streak]
+      summary: Use a streak freeze to preserve streak
+      operationId: useStreakFreeze
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  used:
+                    type: boolean
+                  freezes_remaining:
+                    type: integer
+        "400":
+          description: No freezes available or streak not broken
+
+  # ── Session (additional) ─────────────────────────────────────────
+
+  /api/session-items:
+    get:
+      tags: [Session]
+      summary: List all content items for review
+      operationId: getSessionItems
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/session-preview:
+    get:
+      tags: [Session]
+      summary: Preview what the next session would contain
+      operationId: getSessionPreview
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/session/checkpoint/{session_id}:
+    get:
+      tags: [Session]
+      summary: Get checkpoint data for a specific session
+      operationId: getSessionCheckpoint
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Session not found
+
+  /api/growth:
+    get:
+      tags: [Session]
+      summary: Growth metrics for the authenticated learner
+      operationId: getGrowth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/mark-correct:
+    post:
+      tags: [Session]
+      summary: Mark a drill result as correct (self-report override)
+      operationId: markCorrect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/dashboard/retention_curve:
+    get:
+      tags: [Session]
+      summary: Retention curve data for the learner dashboard
+      operationId: getRetentionCurve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Settings (additional) ────────────────────────────────────────
+
+  /api/settings:
+    get:
+      tags: [Settings]
+      summary: Get all user settings in one call
+      operationId: getAllSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/session-length:
+    get:
+      tags: [Settings]
+      summary: Get preferred session length
+      operationId: getSessionLength
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Settings]
+      summary: Set preferred session length
+      operationId: setSessionLength
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/audio:
+    get:
+      tags: [Settings]
+      summary: Get audio playback preferences
+      operationId: getAudioSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Settings]
+      summary: Set audio playback preferences
+      operationId: setAudioSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/daily-goal:
+    get:
+      tags: [Settings]
+      summary: Get daily session goal
+      operationId: getDailyGoal
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Settings]
+      summary: Set daily session goal
+      operationId: setDailyGoal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/streak-reminders:
+    get:
+      tags: [Settings]
+      summary: Get streak reminder preferences
+      operationId: getStreakReminders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Settings]
+      summary: Set streak reminder preferences
+      operationId: setStreakReminders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/display-prefs:
+    get:
+      tags: [Settings]
+      summary: Get display preferences (pinyin visibility, font size, etc.)
+      operationId: getDisplayPrefs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Settings]
+      summary: Set display preferences
+      operationId: setDisplayPrefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/settings/methodology:
+    get:
+      tags: [Settings]
+      summary: Get methodology configuration (SRS parameters, drill types)
+      operationId: getMethodology
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/push/vapid-key:
+    get:
+      tags: [Push]
+      summary: Get VAPID public key for web push subscription
+      operationId: getVapidKey
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vapid_key:
+                    type: string
+
+  # ── Onboarding (additional) ──────────────────────────────────────
+
+  /api/onboarding/wizard:
+    get:
+      tags: [Onboarding]
+      summary: Get onboarding wizard state and steps
+      operationId: getOnboardingWizard
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/onboarding/level:
+    post:
+      tags: [Onboarding]
+      summary: Set initial HSK level during onboarding
+      operationId: setOnboardingLevel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                level:
+                  type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/onboarding/goal:
+    post:
+      tags: [Onboarding]
+      summary: Set learning goal during onboarding
+      operationId: setOnboardingGoal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                goal:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/onboarding/complete:
+    post:
+      tags: [Onboarding]
+      summary: Mark onboarding as complete
+      operationId: completeOnboarding
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/onboarding/placement/start:
+    get:
+      tags: [Onboarding]
+      summary: Start placement test during onboarding
+      operationId: startPlacement
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/onboarding/placement/submit:
+    post:
+      tags: [Onboarding]
+      summary: Submit placement test answers
+      operationId: submitPlacement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Grammar ──────────────────────────────────────────────────────
+
+  /api/grammar/levels:
+    get:
+      tags: [Grammar]
+      summary: List available grammar levels
+      operationId: getGrammarLevels
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/points:
+    get:
+      tags: [Grammar]
+      summary: List all grammar points with mastery status
+      operationId: getGrammarPoints
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/point/{point_id}:
+    get:
+      tags: [Grammar]
+      summary: Get detail for a single grammar point
+      operationId: getGrammarPoint
+      parameters:
+        - name: point_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Grammar point not found
+
+  /api/grammar/lesson/{hsk_level}:
+    get:
+      tags: [Grammar]
+      summary: Get grammar lesson for an HSK level
+      operationId: getGrammarLesson
+      parameters:
+        - name: hsk_level
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/progress:
+    post:
+      tags: [Grammar]
+      summary: Record grammar practice progress
+      operationId: recordGrammarProgress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/grammar/practice:
+    post:
+      tags: [Grammar]
+      summary: Generate grammar practice drills
+      operationId: grammarPractice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/mastery:
+    get:
+      tags: [Grammar]
+      summary: Get grammar mastery summary across all points
+      operationId: getGrammarMastery
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/errors:
+    get:
+      tags: [Grammar]
+      summary: Get grammar error patterns for the learner
+      operationId: getGrammarErrors
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/explanation/{grammar_point_id}:
+    get:
+      tags: [Grammar]
+      summary: Get a detailed explanation for a grammar point
+      operationId: getGrammarExplanation
+      parameters:
+        - name: grammar_point_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/ask:
+    post:
+      tags: [Grammar]
+      summary: Ask a grammar question (deterministic lookup)
+      operationId: askGrammar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/point/{point_id}/teach:
+    get:
+      tags: [Grammar]
+      summary: Get teaching content for a grammar point
+      operationId: teachGrammarPoint
+      parameters:
+        - name: point_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/grammar/explain-mistake:
+    post:
+      tags: [Grammar]
+      summary: Explain a grammar mistake from a drill result
+      operationId: explainGrammarMistake
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Conversation ─────────────────────────────────────────────────
+
+  /api/conversation/scenarios:
+    get:
+      tags: [Conversation]
+      summary: List available conversation scenarios
+      operationId: getConversationScenarios
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scenarios:
+                    type: array
+                    items:
+                      type: object
+
+  /api/conversation/start:
+    post:
+      tags: [Conversation]
+      summary: Start a conversation drill session
+      operationId: startConversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scenario_id:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/conversation/respond:
+    post:
+      tags: [Conversation]
+      summary: Send a response in a conversation drill
+      operationId: conversationRespond
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session_id:
+                  type: string
+                response:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/conversation/continue:
+    post:
+      tags: [Conversation]
+      summary: Continue to the next turn in a conversation drill
+      operationId: conversationContinue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/conversation/transcribe:
+    post:
+      tags: [Conversation]
+      summary: Transcribe audio for conversation drill
+      operationId: conversationTranscribe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Content ──────────────────────────────────────────────────────
+
+  /api/content/gaps:
+    get:
+      tags: [Content]
+      summary: Get content gap analysis (system-wide)
+      operationId: getContentGaps
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/content/gaps/user:
+    get:
+      tags: [Content]
+      summary: Get content gaps for the authenticated user
+      operationId: getUserContentGaps
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/content/analyze:
+    post:
+      tags: [Content]
+      summary: Analyze user-submitted Chinese text for vocabulary and HSK level
+      operationId: analyzeContent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                  description: Chinese text to analyze
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/content/import:
+    post:
+      tags: [Content]
+      summary: Import user-submitted text as study material
+      operationId: importContent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/reading/generate:
+    post:
+      tags: [Content]
+      summary: Generate a reading passage at a given level
+      operationId: generateReading
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/reading/comprehension:
+    post:
+      tags: [Content]
+      summary: Submit reading comprehension answers
+      operationId: submitReadingComprehension
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Dictionary ───────────────────────────────────────────────────
+
+  /api/dictionary/lookup:
+    get:
+      tags: [Dictionary]
+      summary: Look up a Chinese word in the dictionary
+      operationId: dictionaryLookup
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Chinese characters or pinyin to look up
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/dictionary/history:
+    get:
+      tags: [Dictionary]
+      summary: Get dictionary lookup history for the user
+      operationId: dictionaryHistory
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Exposure (additional) ────────────────────────────────────────
+
+  /api/reading/complete:
+    post:
+      tags: [Reading]
+      summary: Mark a reading passage as complete
+      operationId: completeReading
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passage_id:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/reading/progress:
+    post:
+      tags: [Reading]
+      summary: Record reading progress (scroll position, time spent)
+      operationId: recordReadingProgress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/reading/stats:
+    get:
+      tags: [Reading]
+      summary: Get reading statistics for the user
+      operationId: getReadingStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/reading/daily:
+    get:
+      tags: [Reading]
+      summary: Get daily reading recommendation
+      operationId: getDailyReading
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/reading/comments:
+    get:
+      tags: [Reading]
+      summary: Get community reading comments
+      operationId: getReadingComments
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/reading/comment:
+    post:
+      tags: [Reading]
+      summary: Post a comment on a reading passage
+      operationId: postReadingComment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/media/stats:
+    get:
+      tags: [Media]
+      summary: Get media consumption stats
+      operationId: getMediaStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/listening/stats:
+    get:
+      tags: [Listening]
+      summary: Get listening practice statistics
+      operationId: getListeningStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/exposure/recommended:
+    get:
+      tags: [Reading]
+      summary: Get recommended exposure content across all types
+      operationId: getRecommendedExposure
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/community/study-buddies:
+    get:
+      tags: [Reading]
+      summary: Get study buddy recommendations based on level
+      operationId: getStudyBuddies
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Payment (additional) ─────────────────────────────────────────
+
+  /api/checkout/classroom:
+    post:
+      tags: [Payment]
+      summary: Create a Stripe Checkout for classroom pricing
+      operationId: createClassroomCheckout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                student_count:
+                  type: integer
+                billing:
+                  type: string
+                  enum: [per_student, semester]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+        "400":
+          description: Invalid billing type or student count
+
+  # ── Marketing ────────────────────────────────────────────────────
+
+  /api/feedback:
+    post:
+      tags: [Marketing]
+      summary: Submit user feedback (rating and comment)
+      operationId: submitFeedback
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                comment:
+                  type: string
+                feedback_type:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/referral/track:
+    get:
+      tags: [Marketing]
+      summary: Track a referral click (partner attribution)
+      operationId: trackReferral
+      security: []
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/referral/signup:
+    post:
+      tags: [Marketing]
+      summary: Register a referral signup
+      operationId: referralSignup
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/referral/link:
+    get:
+      tags: [Marketing]
+      summary: Get the user's referral link
+      operationId: getReferralLink
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/referral/stats:
+    get:
+      tags: [Marketing]
+      summary: Get referral statistics for the user
+      operationId: getReferralStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/account/referral:
+    get:
+      tags: [Marketing]
+      summary: Get referral account info
+      operationId: getAccountReferral
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/discount/validate:
+    get:
+      tags: [Marketing]
+      summary: Validate a discount code
+      operationId: validateDiscount
+      security: []
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/discount/apply:
+    post:
+      tags: [Marketing]
+      summary: Apply a discount code to checkout
+      operationId: applyDiscount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/subscription/cancel:
+    post:
+      tags: [Payment]
+      summary: Cancel subscription
+      operationId: cancelSubscription
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/subscription/pause:
+    post:
+      tags: [Payment]
+      summary: Pause subscription
+      operationId: pauseSubscription
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/subscription/resume:
+    post:
+      tags: [Payment]
+      summary: Resume a paused subscription
+      operationId: resumeSubscription
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/nps/check:
+    get:
+      tags: [Marketing]
+      summary: Check if user should be prompted for NPS survey
+      operationId: npsCheck
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/nps/prompted:
+    post:
+      tags: [Marketing]
+      summary: Record NPS survey response
+      operationId: npsPrompted
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/nps/interview-opt-in:
+    post:
+      tags: [Marketing]
+      summary: Opt in for a user interview
+      operationId: npsInterviewOptIn
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/experiment/landing-variant:
+    get:
+      tags: [Marketing]
+      summary: Get A/B test variant for the landing page
+      operationId: getLandingVariant
+      security: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Classroom ────────────────────────────────────────────────────
+
+  /api/classroom/create:
+    post:
+      tags: [Classroom]
+      summary: Create a new classroom
+      operationId: createClassroom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+        "400":
+          description: Missing name
+
+  /api/classroom/list:
+    get:
+      tags: [Classroom]
+      summary: List classrooms (teacher's or student's)
+      operationId: listClassrooms
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/join:
+    post:
+      tags: [Classroom]
+      summary: Join a classroom with an invite code
+      operationId: joinClassroom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [invite_code]
+              properties:
+                invite_code:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "400":
+          description: Invalid invite code
+
+  /api/classroom/{classroom_id}/students:
+    get:
+      tags: [Classroom]
+      summary: List students in a classroom
+      operationId: getClassroomStudents
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/student/{student_id}:
+    get:
+      tags: [Classroom]
+      summary: Get detailed data for a specific student
+      operationId: getClassroomStudent
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Student not found
+
+  /api/classroom/{classroom_id}/analytics:
+    get:
+      tags: [Classroom]
+      summary: Classroom-level analytics (engagement, accuracy, progress)
+      operationId: getClassroomAnalytics
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/invite/bulk:
+    post:
+      tags: [Classroom]
+      summary: Send bulk invite emails to students
+      operationId: bulkInviteClassroom
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emails:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/notifications:
+    get:
+      tags: [Classroom]
+      summary: Get teacher notifications
+      operationId: getClassroomNotifications
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/notifications/count:
+    get:
+      tags: [Classroom]
+      summary: Get unread notification count
+      operationId: getClassroomNotificationCount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/archive:
+    post:
+      tags: [Classroom]
+      summary: Archive a classroom
+      operationId: archiveClassroom
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/classroom/assignment:
+    post:
+      tags: [Classroom]
+      summary: Create an assignment for a classroom
+      operationId: createAssignment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/assignments:
+    get:
+      tags: [Classroom]
+      summary: List assignments for a classroom
+      operationId: getAssignments
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/export:
+    get:
+      tags: [Classroom]
+      summary: Export classroom data (CSV or JSON)
+      operationId: exportClassroom
+      responses:
+        "200":
+          description: Classroom export data
+
+  /api/classroom/leaderboard:
+    get:
+      tags: [Classroom]
+      summary: Get classroom leaderboard
+      operationId: getLeaderboard
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/intelligence:
+    get:
+      tags: [Classroom]
+      summary: Get classroom intelligence summary
+      operationId: getClassroomIntelligence
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/students/risk:
+    get:
+      tags: [Classroom]
+      summary: Get at-risk students in a classroom
+      operationId: getStudentsAtRisk
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/{classroom_id}/student/{student_id}/engagement:
+    get:
+      tags: [Classroom]
+      summary: Get detailed engagement data for a student
+      operationId: getStudentEngagement
+      parameters:
+        - name: classroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/intervention:
+    post:
+      tags: [Classroom]
+      summary: Record a teacher intervention for a student
+      operationId: createIntervention
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/interventions:
+    get:
+      tags: [Classroom]
+      summary: Get intervention history
+      operationId: getInterventions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/classroom/snapshots/generate:
+    post:
+      tags: [Classroom]
+      summary: Generate learning snapshots for classroom students
+      operationId: generateSnapshots
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Tutor ────────────────────────────────────────────────────────
+
+  /api/tutor/sessions:
+    get:
+      tags: [Tutor]
+      summary: List tutoring sessions
+      operationId: getTutorSessions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Tutor]
+      summary: Create a new tutoring session
+      operationId: createTutorSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/tutor/sessions/{session_id}/corrections:
+    post:
+      tags: [Tutor]
+      summary: Submit corrections for a tutoring session
+      operationId: submitTutorCorrections
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/tutor/sessions/{session_id}/flags:
+    post:
+      tags: [Tutor]
+      summary: Flag items in a tutoring session for review
+      operationId: flagTutorItems
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/tutor/sessions/{session_id}/process:
+    post:
+      tags: [Tutor]
+      summary: Process tutor feedback and update progress
+      operationId: processTutorFeedback
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/tutor/stats:
+    get:
+      tags: [Tutor]
+      summary: Get tutoring statistics
+      operationId: getTutorStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Admin ────────────────────────────────────────────────────────
+
+  /api/admin/metrics:
+    get:
+      tags: [Admin]
+      summary: Key business metrics (signups, active users, retention, activation)
+      operationId: adminMetrics
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "403":
+          description: Admin access denied or MFA not enabled
+
+  /api/admin/users:
+    get:
+      tags: [Admin]
+      summary: User list with last activity
+      operationId: adminUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+
+  /api/admin/feedback:
+    get:
+      tags: [Admin]
+      summary: View user feedback entries
+      operationId: adminFeedback
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/crashes:
+    get:
+      tags: [Admin]
+      summary: Server crash log entries (paginated)
+      operationId: adminCrashes
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/client-errors:
+    get:
+      tags: [Admin]
+      summary: Client-side error log entries (paginated)
+      operationId: adminClientErrors
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/sessions:
+    get:
+      tags: [Admin]
+      summary: Session log with user info (paginated)
+      operationId: adminSessions
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/security-events:
+    get:
+      tags: [Admin]
+      summary: Security audit log entries (paginated)
+      operationId: adminSecurityEvents
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/security-scans:
+    get:
+      tags: [Admin]
+      summary: Security scan history
+      operationId: adminSecurityScans
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/security-scans/trigger:
+    post:
+      tags: [Admin]
+      summary: Manually trigger a full security scan
+      operationId: adminTriggerSecurityScan
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  results:
+                    type: object
+
+  /api/admin/security-scans/{scan_id}:
+    get:
+      tags: [Admin]
+      summary: Full detail for a single security scan with findings
+      operationId: adminSecurityScanDetail
+      parameters:
+        - name: scan_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Scan not found
+
+  /api/admin/quality/dpmo:
+    get:
+      tags: [Admin]
+      summary: DPMO and sigma level metrics
+      operationId: adminQualityDpmo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/spc:
+    get:
+      tags: [Admin]
+      summary: SPC control chart data
+      operationId: adminQualitySpc
+      parameters:
+        - name: chart
+          in: query
+          schema:
+            type: string
+            default: drill_accuracy
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/capability:
+    get:
+      tags: [Admin]
+      summary: Process capability metrics
+      operationId: adminQualityCapability
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/retention-analysis:
+    get:
+      tags: [Admin]
+      summary: Survival analysis for learner retention (Kaplan-Meier, churn risk)
+      operationId: adminQualityRetention
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/flow:
+    get:
+      tags: [Admin]
+      summary: Kanban flow metrics and cumulative flow diagram data
+      operationId: adminQualityFlow
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/monte-carlo:
+    get:
+      tags: [Admin]
+      summary: Monte Carlo simulation results (user growth, server load)
+      operationId: adminQualityMonteCarlo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/quality/dmaic:
+    get:
+      tags: [Admin]
+      summary: DMAIC improvement project log
+      operationId: adminDmaicLog
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/revenue:
+    get:
+      tags: [Admin]
+      summary: Revenue metrics (MRR, ARR, churn, LTV, channel breakdown, net revenue)
+      operationId: adminRevenue
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/retention-cohorts:
+    get:
+      tags: [Admin]
+      summary: Weekly signup cohorts with W1-W12 retention percentages
+      operationId: adminRetentionCohorts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/engagement:
+    get:
+      tags: [Admin]
+      summary: Engagement analytics (daily sessions, error types, crash types)
+      operationId: adminEngagement
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/partners:
+    get:
+      tags: [Admin]
+      summary: Partner attribution (signups, activations, commissions by partner)
+      operationId: adminPartners
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/risks:
+    get:
+      tags: [Admin]
+      summary: List all active risks in the risk register
+      operationId: adminRisks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Admin]
+      summary: Add a new risk to the register
+      operationId: adminCreateRisk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, category]
+              properties:
+                title:
+                  type: string
+                category:
+                  type: string
+                description:
+                  type: string
+                probability:
+                  type: integer
+                impact:
+                  type: integer
+                mitigation:
+                  type: string
+                contingency:
+                  type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/risks/{risk_id}:
+    put:
+      tags: [Admin]
+      summary: Update an existing risk
+      operationId: adminUpdateRisk
+      parameters:
+        - name: risk_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOk"
+
+  /api/admin/risks/{risk_id}/create-mitigation:
+    post:
+      tags: [Admin]
+      summary: Create a work item to mitigate a specific risk
+      operationId: adminCreateRiskMitigation
+      parameters:
+        - name: risk_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  work_item_id:
+                    type: integer
+                  status:
+                    type: string
+
+  /api/admin/work-items:
+    get:
+      tags: [Admin]
+      summary: List work items for Kanban board
+      operationId: adminWorkItems
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags: [Admin]
+      summary: Create a new work item
+      operationId: adminCreateWorkItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                item_type:
+                  type: string
+                status:
+                  type: string
+                service_class:
+                  type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/work-items/{item_id}:
+    put:
+      tags: [Admin]
+      summary: Update work item status (auto-sets timestamps, enforces WIP limits)
+      operationId: adminUpdateWorkItem
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [backlog, ready, in_progress, review, done]
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  wip_warning:
+                    type: string
+                    nullable: true
+
+  /api/admin/thread-health:
+    get:
+      tags: [Admin]
+      summary: Background thread health (scheduler locks, thread states)
+      operationId: adminThreadHealth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/telemetry-health:
+    get:
+      tags: [Admin]
+      summary: Telemetry health (event volume, top categories, dedup stats)
+      operationId: adminTelemetryHealth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/students:
+    get:
+      tags: [Admin]
+      summary: Student list with progress data (for admin/teacher view)
+      operationId: adminStudents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/admin/student/{student_id}:
+    get:
+      tags: [Admin]
+      summary: Detailed student data with progress, sessions, and intervention history
+      operationId: adminStudentDetail
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Student not found
 
 components:
   securitySchemes:

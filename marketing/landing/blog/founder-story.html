@@ -3,48 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How Mandarin Was Built: Lessons in Language Acquisition — Mandarin Blog</title>
-  <meta name="description" content="The story behind Mandarin: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
-  <meta name="keywords" content="Chinese learning app, Mandarin learning app, spaced repetition Chinese, adaptive Chinese learning app, language acquisition, SRS for Mandarin, how Mandarin was built, data-driven Chinese learning, interleaved practice Chinese">
+  <title>How Aelu Was Built: Lessons in Language Acquisition — Aelu Blog</title>
+  <meta name="description" content="The story behind Aelu: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta name="keywords" content="Chinese learning app, Mandarin learning app, spaced repetition Chinese, adaptive Chinese learning app, language acquisition, SRS for Mandarin, how Aelu was built, data-driven Chinese learning, interleaved practice Chinese">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="How Mandarin Was Built: Lessons in Language Acquisition">
-  <meta property="og:description" content="The story behind Mandarin: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta property="og:title" content="How Aelu Was Built: Lessons in Language Acquisition">
+  <meta property="og:description" content="The story behind Aelu: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://mandarinapp.com/blog/founder-story">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/blog/founder-story">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="article:author" content="Mandarin">
+  <meta property="article:author" content="Aelu">
   <meta property="article:published_time" content="2026-01-14">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How Mandarin Was Built: Lessons in Language Acquisition">
-  <meta name="twitter:description" content="The story behind Mandarin: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="How Aelu Was Built: Lessons in Language Acquisition">
+  <meta name="twitter:description" content="The story behind Aelu: why it was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "How Mandarin Was Built: Lessons in Language Acquisition",
-    "description": "The story behind Mandarin: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.",
+    "headline": "How Aelu Was Built: Lessons in Language Acquisition",
+    "description": "The story behind Aelu: why the app was built from scratch, what the research says about memory and language acquisition, and every mistake made along the way.",
     "author": {
       "@type": "Organization",
-      "name": "Mandarin"
+      "name": "Aelu"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Mandarin",
-      "url": "https://mandarinapp.com"
+      "name": "Aelu",
+      "url": "https://aeluapp.com"
     },
     "datePublished": "2026-01-14",
     "dateModified": "2026-01-14",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://mandarinapp.com/blog/founder-story"
+      "@id": "https://aeluapp.com/blog/founder-story"
     }
   }
   </script>
@@ -53,7 +54,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="alternate" type="application/rss+xml" title="Mandarin Blog" href="/blog/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Aelu Blog" href="/blog/feed.xml">
   <style>
     :root {
       --color-base: #F2EBE0;
@@ -137,24 +138,89 @@
     .share-bar button svg { width: 16px; height: 16px; fill: currentColor; }
     .share-bar .share-copied { font-size: 0.8rem; color: var(--color-secondary); opacity: 0; transition: opacity 0.2s ease; }
     .share-bar .share-copied.visible { opacity: 1; }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">Mandarin</a>
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/blog" aria-current="page">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
 
   <header class="article-header">
-    <h1>How Mandarin Was Built: Lessons in Language Acquisition</h1>
+    <h1>How Aelu Was Built: Lessons in Language Acquisition</h1>
     <div class="article-meta">
       <span>January 14, 2026</span>
       <span>13 min read</span>
@@ -162,7 +228,7 @@
   </header>
 
   <article>
-    <p><em>Mandarin was born from a simple frustration: the tools available for learning Chinese did not work the way an adult learner's brain needs them to. What started as a personal project became a full adaptive learning system. Along the way, the research on memory and language acquisition reshaped every design decision &mdash; and plenty of mistakes were made.</em></p>
+    <p><em>Aelu was born from a simple frustration: the tools available for learning Chinese did not work the way an adult learner's brain needs them to. What started as a personal project became a full adaptive learning system. Along the way, the research on memory and language acquisition reshaped every design decision &mdash; and plenty of mistakes were made.</em></p>
 
     <h2>How this started</h2>
 
@@ -174,7 +240,7 @@
 
     <p>HelloChinese and a few others came after that. They were better. The content was sequenced. The exercises made sense. But they still felt like textbooks with touchscreens. And none of them solved the problem that kept coming up: studying vocabulary in one app, then trying to read something real &mdash; a WeChat message, a news headline, a restaurant sign &mdash; and the gap between "studying Chinese" and "using Chinese" felt enormous.</p>
 
-    <p>Nothing connected what a learner was reading and hearing in the real world to what they were drilling in an app. That gap is where Mandarin started.</p>
+    <p>Nothing connected what a learner was reading and hearing in the real world to what they were drilling in an app. That gap is where Aelu started.</p>
 
     <h2>What the research actually says</h2>
 
@@ -190,7 +256,7 @@
 
     <p><strong>The testing effect: retrieval beats review.</strong> Actively trying to recall something is more effective than passively re-reading it. This is why flashcards work better than highlighting a textbook. And it's why varied, active drills work better than flashcards alone.</p>
 
-    <h2>Why Mandarin has 27 drill types</h2>
+    <h2>Why Aelu has 27 drill types</h2>
 
     <p>When people hear the app has 27 different drill types, they sometimes laugh. It sounds like over-engineering. But each one exists for a reason grounded in how memory works.</p>
 
@@ -246,21 +312,17 @@
 
     <p>The app shows you exactly where you are: which tones you mix up, which grammar patterns you get wrong, where your listening lags your reading. The numbers are real and sometimes unflattering. That's the point.</p>
 
-    <h2>The "no AI at runtime" decision</h2>
+    <h2>Why deterministic?</h2>
 
-    <p>People are often surprised to learn the app uses zero AI tokens at runtime. No GPT calls, no Claude calls, no language model generating anything on the fly. Every drill, every score, every recommendation is deterministic &mdash; computed from your data using algorithms that run locally.</p>
+    <p>Every drill, every score, every recommendation in the app is deterministic &mdash; computed from your data using explicit algorithms. This was not an ideological choice. It was a practical one.</p>
 
-    <p>This was not an ideological choice. It was a practical one.</p>
+    <p><strong>Reliability.</strong> Language drills need to be instant. The app needed to work every time, immediately, with no dependencies on external services.</p>
 
-    <p><strong>Reliability.</strong> Language drills need to be instant. A 200ms API call to generate a response is fine for a chatbot; it is unacceptable for a flashcard drill where timing affects your flow state. And API calls fail. Servers go down. Rate limits hit. The app needed to work every time, immediately, with no dependencies on external services.</p>
+    <p><strong>Correctness.</strong> Auto-generated example sentences sometimes contain errors &mdash; wrong tones, unnatural phrasing, hallucinated words. In a language learning context, an error in the training material is worse than no material at all, because you'll memorize the error. Every sentence, every audio clip, every drill in the app has been verified.</p>
 
-    <p><strong>Correctness.</strong> AI-generated example sentences sometimes contain errors &mdash; wrong tones, unnatural phrasing, hallucinated words. In a language learning context, an error in the training material is worse than no material at all, because you'll memorize the error. Every sentence, every audio clip, every drill in the app has been verified. That's not possible at scale with generated content.</p>
-
-    <p><strong>Privacy.</strong> Your learning data &mdash; what you get wrong, how often, which patterns you struggle with &mdash; is sensitive in a low-stakes but personal way. It stays on the system. It doesn't get sent to a third-party API for processing.</p>
+    <p><strong>Privacy.</strong> Your learning data &mdash; what you get wrong, how often, which patterns you struggle with &mdash; is sensitive in a low-stakes but personal way. It stays on the system. It doesn't get sent to third parties for processing.</p>
 
     <p><strong>Offline capability.</strong> The core drilling works without an internet connection. On a train, on a plane, in a part of China with spotty wifi &mdash; it works.</p>
-
-    <p>To be clear: this is not an anti-AI stance. AI was used extensively to help build the content &mdash; generating draft sentences, finding example contexts, identifying common learner errors. AI is an excellent tool for content creation. It is just not the right tool for real-time drill scoring and scheduling, where determinism and reliability matter more than flexibility.</p>
 
     <h2>Where this is going</h2>
 
@@ -268,11 +330,11 @@
 
     <p>If you are learning Chinese, we would genuinely like you to try it. Not for a growth metric &mdash; but because the tool gets better when more people use it and share what is missing.</p>
 
-    <p>HSK 1-2 content is free, no time limit. Full access to all levels, all drill types, all diagnostics is $12/month. No annual upsell, no "premium tier," no in-app purchases.</p>
+    <p>HSK 1-2 content is free, no time limit. Full access to all levels, all drill types, all diagnostics is $14.99/month. No annual upsell, no "premium tier," no in-app purchases.</p>
 
-    <p>If you are curious: <a href="https://mandarinapp.com">mandarinapp.com</a></p>
+    <p>If you are curious: <a href="https://aeluapp.com">aeluapp.com</a></p>
 
-    <p>And if you just read this whole thing and have thoughts &mdash; about the approach, the research, the mistakes &mdash; reach out at <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>. Every email gets read.</p>
+    <p>And if you just read this whole thing and have thoughts &mdash; about the approach, the research, the mistakes &mdash; reach out at <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. Every email gets read.</p>
   </article>
 
   <div class="share-bar">
@@ -294,14 +356,14 @@
   </div>
 
   <div class="article-cta">
-    <h3>Try Mandarin free</h3>
+    <h3>Try Aelu free</h3>
     <p>HSK 1-2 content, all core drill types, no credit card required.</p>
-    <a href="https://mandarinapp.com" class="btn-primary">Start learning</a>
+    <a href="https://aeluapp.com" class="btn-primary">Start learning</a>
   </div>
 
   <div class="newsletter">
     <h3>Get new posts by email</h3>
-    <p>One or two emails a month on learning Mandarin. No spam.</p>
+    <p>One or two emails a month on learning Chinese. No spam.</p>
     <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
       <button type="submit" class="btn-primary">Subscribe</button>

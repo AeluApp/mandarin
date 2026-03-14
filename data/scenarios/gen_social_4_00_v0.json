@@ -1,0 +1,124 @@
+{
+    "title": "The Introduction Waltz",
+    "title_zh": "介绍华尔兹",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_4_00_v0",
+    "tree": {
+        "setup": "A cozy hot pot restaurant, steam rising from the bubbling broth. Your friend Xiao Zhang has brought along his college roommate, Ah Wei, whom you've never met. Ah Wei turns out to be a pastry chef who speaks about baking temperatures with the reverence that most people reserve for discussing religion or football.",
+        "setup_zh": "一家温馨的火锅店，蒸汽从咕嘟咕嘟的汤锅里升起。你的朋友小张带来了他的大学室友阿伟，你从没见过。阿伟原来是个糕点师，说起烘焙温度时的虔诚，大多数人只有在讨论宗教或足球时才会有。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！我是阿伟，小张的大学室友。听他说了你很多事情，终于见面了！",
+                "text_pinyin": "nǐ hǎo! wǒ shì Ā Wěi, Xiǎo Zhāng de dàxué shìyǒu. tīng tā shuō le nǐ hěn duō shìqing, zhōngyú jiànmiàn le!",
+                "text_en": "Hi! I'm Ah Wei, Xiao Zhang's college roommate. He's told me a lot about you — nice to finally meet!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself and make him feel welcome.",
+                "options": [
+                    {
+                        "text_zh": "你好阿伟！我也听小张提过你。他说你做蛋糕特别厉害，是真的吗？",
+                        "text_pinyin": "nǐ hǎo Ā Wěi! wǒ yě tīng Xiǎo Zhāng tí guò nǐ. tā shuō nǐ zuò dàngāo tèbié lìhai, shì zhēn de ma?",
+                        "text_en": "Hi Ah Wei! Xiao Zhang's mentioned you too. He says you're amazing at making cakes — is it true?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Referencing something specific about him creates instant connection. Ah Wei's eyes light up like an oven preheating."
+                    },
+                    {
+                        "text_zh": "你好！很高兴认识你。",
+                        "text_pinyin": "nǐ hǎo! hěn gāoxìng rènshi nǐ.",
+                        "text_en": "Hello! Nice to meet you.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "The standard polite greeting. Warm but generic — he'll build from here."
+                    },
+                    {
+                        "text_zh": "嗯，你好。",
+                        "text_pinyin": "ǹg, nǐ hǎo.",
+                        "text_en": "Mm, hi.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The minimal greeting. Ah Wei's enthusiasm dims slightly, like an oven door left open."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，做蛋糕是真的！我在一家法式甜品店工作。你喜欢吃甜的吗？",
+                "text_pinyin": "hāhā, zuò dàngāo shì zhēn de! wǒ zài yì jiā Fǎshì tiánpǐn diàn gōngzuò. nǐ xǐhuān chī tián de ma?",
+                "text_en": "Haha, the cake thing is true! I work at a French pastry shop. Do you like sweets?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat about food preferences.",
+                "options": [
+                    {
+                        "text_zh": "喜欢啊！但我最喜欢的还是不太甜的那种，比如抹茶口味的。你们店有吗？",
+                        "text_pinyin": "xǐhuān a! dàn wǒ zuì xǐhuān de háishì bú tài tián de nà zhǒng, bǐrú mǒchá kǒuwèi de. nǐmen diàn yǒu ma?",
+                        "text_en": "I do! But I like the less-sweet ones best, like matcha flavored. Does your shop have those?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific preference plus genuine curiosity — Ah Wei launches into a five-minute description of his matcha mille-feuille with the passion of a poet."
+                    },
+                    {
+                        "text_zh": "还好，偶尔吃一点。",
+                        "text_pinyin": "hái hǎo, ǒu'ěr chī yìdiǎn.",
+                        "text_en": "It's OK — I have some occasionally.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Moderate interest. He adjusts his enthusiasm accordingly."
+                    },
+                    {
+                        "text_zh": "不太喜欢甜的。",
+                        "text_pinyin": "bú tài xǐhuān tián de.",
+                        "text_en": "Not really into sweets.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ah Wei pauses briefly, then recovers:「那你一定要试试我做的法棍面包。」He pivots to bread — a pastry chef always has a backup."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有！我们的抹茶千层蛋糕是招牌。下次你来店里，我请你吃。算认识新朋友的见面礼！",
+                "text_pinyin": "yǒu! wǒmen de mǒchá qiāncéng dàngāo shì zhāopái. xià cì nǐ lái diàn lǐ, wǒ qǐng nǐ chī. suàn rènshi xīn péngyǒu de jiànmiàn lǐ!",
+                "text_en": "Yes! Our matcha mille-feuille is the signature item. Next time you come by the shop, it's on me. Consider it a meeting-new-friends gift!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept graciously.",
+                "options": [
+                    {
+                        "text_zh": "太好了！那我一定去。到时候也给你带个小礼物。小张，你交了一个好朋友啊！",
+                        "text_pinyin": "tài hǎo le! nà wǒ yídìng qù. dào shíhòu yě gěi nǐ dài gè xiǎo lǐwù. Xiǎo Zhāng, nǐ jiāo le yí gè hǎo péngyǒu a!",
+                        "text_en": "That's great — I'll definitely come! I'll bring a small gift too. Xiao Zhang, you've made a good friend!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepting, reciprocating, and including Xiao Zhang — the social triangle is complete. The hot pot steam seems to glow a little warmer."
+                    },
+                    {
+                        "text_zh": "谢谢！我一定去试试。",
+                        "text_pinyin": "xièxie! wǒ yídìng qù shìshi.",
+                        "text_en": "Thanks! I'll definitely come try it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A promise made over hot pot is a promise kept. Ah Wei beams."
+                    },
+                    {
+                        "text_zh": "好啊。",
+                        "text_pinyin": "hǎo a.",
+                        "text_en": "Sure.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Brief, but the hot pot is speaking for everyone now. Sometimes food does the socializing."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "When meeting a friend's friend in China, asking about their work or interests shows genuine engagement. Offering a 见面礼 (jiànmiàn lǐ, meeting gift) is a warm gesture. The phrase 久仰 (jiǔyǎng, 'I've heard a lot about you') is more formal; casually, 听说过你 works."
+    }
+}

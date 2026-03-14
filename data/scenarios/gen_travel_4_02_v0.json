@@ -1,0 +1,124 @@
+{
+    "title": "The Direction Poet",
+    "title_zh": "指路诗人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_4_02_v0",
+    "tree": {
+        "setup": "A tree-lined street in the old part of the city, where the lane numbers seem to follow a logic known only to the city planner who designed them in 1952. You're looking for a small museum that your guidebook promises is 'easy to find.' It is not. An old man sitting on a bench with a thermos of tea — Uncle Duan — knows every alley in this neighborhood the way a librarian knows every shelf.",
+        "setup_zh": "城市旧区一条林荫道，巷子的编号似乎只有1952年设计它们的城市规划师才懂其中的逻辑。你在找一个小博物馆，旅游指南说「很容易找到」。并不是。一位坐在长椅上拿着保温杯喝茶的老人——段大爷——了解这个街区的每条巷子，就像图书管理员了解每个书架。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小伙子，你看起来迷路了。找什么地方？",
+                "text_pinyin": "xiǎohuǒzi, nǐ kàn qǐlái mílù le. zhǎo shénme dìfāng?",
+                "text_en": "Young man, you look lost. What are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for directions to the museum.",
+                "options": [
+                    {
+                        "text_zh": "大爷您好！我在找民俗博物馆，但是找不到。我的地图上说在这附近，您知道怎么走吗？",
+                        "text_pinyin": "dàyé nín hǎo! wǒ zài zhǎo Mínsú Bówùguǎn, dànshì zhǎo bú dào. wǒ de dìtú shàng shuō zài zhè fùjìn, nín zhīdào zěnme zǒu ma?",
+                        "text_en": "Hello, sir! I'm looking for the Folk Museum, but I can't find it. My map says it's nearby — do you know the way?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Polite address (大爷) and a specific destination — Uncle Duan sets down his thermos with the gravity of a man about to impart sacred knowledge."
+                    },
+                    {
+                        "text_zh": "请问民俗博物馆在哪里？",
+                        "text_pinyin": "qǐngwèn Mínsú Bówùguǎn zài nǎlǐ?",
+                        "text_en": "Excuse me, where is the Folk Museum?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Standard direction-asking format. He knows exactly where it is."
+                    },
+                    {
+                        "text_zh": "这里有个博物馆吗？",
+                        "text_pinyin": "zhèlǐ yǒu gè bówùguǎn ma?",
+                        "text_en": "Is there a museum around here?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Duan asks which museum. There are three within walking distance, and he knows the opening hours of each."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "民俗博物馆啊！就在前面。你从这里一直往前走，到第二个路口左拐，然后走到头就看到了。门口有两棵大柳树，很好认。",
+                "text_pinyin": "Mínsú Bówùguǎn a! jiù zài qiánmian. nǐ cóng zhèlǐ yìzhí wǎng qián zǒu, dào dì èr gè lùkǒu zuǒ guǎi, ránhòu zǒu dào tóu jiù kàn dào le. ménkǒu yǒu liǎng kē dà liǔshù, hěn hǎo rèn.",
+                "text_en": "The Folk Museum! Just up ahead. Walk straight from here, turn left at the second intersection, then walk to the end and you'll see it. Two big willow trees at the entrance — easy to spot."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the directions.",
+                "options": [
+                    {
+                        "text_zh": "一直走，第二个路口左拐，走到头。门口有柳树。我记住了。大概要走多久？",
+                        "text_pinyin": "yìzhí zǒu, dì èr gè lùkǒu zuǒ guǎi, zǒu dào tóu. ménkǒu yǒu liǔshù. wǒ jì zhù le. dàgài yào zǒu duō jiǔ?",
+                        "text_en": "Straight, left at the second intersection, walk to the end. Willow trees at the entrance. Got it. About how long a walk?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the directions back — Uncle Duan nods with the satisfaction of a teacher whose student pays attention."
+                    },
+                    {
+                        "text_zh": "第二个路口左拐，对吗？",
+                        "text_pinyin": "dì èr gè lùkǒu zuǒ guǎi, duì ma?",
+                        "text_en": "Left at the second intersection, right?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Confirming the key turn. He nods."
+                    },
+                    {
+                        "text_zh": "能不能打车去？",
+                        "text_pinyin": "néng bu néng dǎ chē qù?",
+                        "text_en": "Can I take a taxi?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Duan looks faintly insulted. It's a seven-minute walk. But he provides the option anyway."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "走路大概七八分钟吧。对了，博物馆周一休息，今天周几来着？哈哈，今天周三，没问题。去吧！",
+                "text_pinyin": "zǒu lù dàgài qī bā fēnzhōng ba. duìle, bówùguǎn zhōuyī xiūxi, jīntiān zhōu jǐ lái zhe? hāhā, jīntiān zhōusān, méi wèntí. qù ba!",
+                "text_en": "About seven or eight minutes walking. Oh, the museum is closed on Mondays — what day is it again? Haha, Wednesday — no problem. Off you go!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him warmly.",
+                "options": [
+                    {
+                        "text_zh": "太感谢了，段大爷！您比我的地图好用多了。",
+                        "text_pinyin": "tài gǎnxiè le, Duàn dàyé! nín bǐ wǒ de dìtú hǎoyòng duō le.",
+                        "text_en": "Thank you so much, Uncle Duan! You're way more useful than my map.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Comparing him favorably to technology — Uncle Duan chuckles into his thermos. This is the highest compliment a human GPS can receive."
+                    },
+                    {
+                        "text_zh": "谢谢您！",
+                        "text_pinyin": "xièxie nín!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "He waves you off and returns to his tea, another lost soul guided home."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Uncle Duan watches you walk away and mutters:「年轻人，连谢谢都说不完整。」But he smiles anyway."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Asking locals for directions in China is very common and usually welcomed, especially by older residents who know their neighborhood intimately. Address elderly men as 大爷 (dàyé) and women as 大妈 (dàmā) or 阿姨 (āyí). Many museums (博物馆) close on Mondays."
+    }
+}

@@ -166,7 +166,7 @@ def _milestone_met(milestone: dict, stats: dict) -> bool:
     if "hsk_stable" in reqs:
         for hsk_level, min_pct in reqs["hsk_stable"].items():
             level_data = stats["mastery"].get(hsk_level, {})
-            if level_data.get("pct", 0) < min_pct:
+            if level_data.get("mastered_pct", level_data.get("pct", 0)) < min_pct:
                 return False
 
     if "lens_pct" in reqs:

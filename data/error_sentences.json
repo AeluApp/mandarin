@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "entries": [
+    {"wrong": "我很喜欢吃了中国菜。", "correct": "我很喜欢吃中国菜。", "error_span": "吃了", "error_type_detail": "aspect", "explanation": "Habitual actions don't take 了", "hsk_level": 3, "distractors": ["很", "中国", "菜"]},
+    {"wrong": "他比我很高。", "correct": "他比我高。", "error_span": "很", "error_type_detail": "comparative", "explanation": "Don't use 很 with 比 comparisons", "hsk_level": 2, "distractors": ["他", "比", "高"]},
+    {"wrong": "我去了过中国。", "correct": "我去过中国。", "error_span": "了过", "error_type_detail": "aspect", "explanation": "Use 过 alone for experience; don't combine 了过", "hsk_level": 2, "distractors": ["我", "中国", "去"]},
+    {"wrong": "她每天在跑步。", "correct": "她每天跑步。", "error_span": "在", "error_type_detail": "progressive", "explanation": "每天 indicates habitual action; 在 marks ongoing action right now", "hsk_level": 2, "distractors": ["她", "每天", "跑步"]},
+    {"wrong": "我的朋友有很多。", "correct": "我有很多朋友。", "error_span": "我的朋友有很多", "error_type_detail": "word_order", "explanation": "有 takes the object after it: 我有很多朋友", "hsk_level": 2, "distractors": ["我的", "很多", "朋友"]},
+    {"wrong": "昨天我不去学校。", "correct": "昨天我没去学校。", "error_span": "不", "error_type_detail": "negation", "explanation": "Past actions use 没, not 不. 不 is for habitual/future negation", "hsk_level": 2, "distractors": ["昨天", "去", "学校"]},
+    {"wrong": "他给了我一个很好建议。", "correct": "他给了我一个很好的建议。", "error_span": "很好建议", "error_type_detail": "de_particle", "explanation": "Adjective + 的 + noun: 很好的建议", "hsk_level": 2, "distractors": ["给了", "一个", "建议"]},
+    {"wrong": "我想明天去买东西。", "correct": "我想明天去买东西。", "error_span": null, "error_type_detail": "correct", "explanation": "This sentence is correct — time word after 想 is fine", "hsk_level": 2, "distractors": ["想", "明天", "买"]},
+    {"wrong": "这个比那个更最好。", "correct": "这个比那个更好。", "error_span": "更最好", "error_type_detail": "superlative", "explanation": "Don't combine 更 (more) with 最 (most); use one or the other", "hsk_level": 3, "distractors": ["这个", "那个", "比"]},
+    {"wrong": "虽然他很忙，他还是来了。", "correct": "虽然他很忙，但是他还是来了。", "error_span": "，他", "error_type_detail": "conjunction", "explanation": "虽然...但是 is a pair; 但是 (or 但/可是) is required in the second clause", "hsk_level": 3, "distractors": ["虽然", "很忙", "还是"]},
+    {"wrong": "我在家里吃饭了昨天。", "correct": "我昨天在家里吃饭了。", "error_span": "了昨天", "error_type_detail": "word_order", "explanation": "Time words (昨天) go before the verb phrase, not after 了", "hsk_level": 2, "distractors": ["在", "家里", "吃饭"]},
+    {"wrong": "他把书看了完。", "correct": "他把书看完了。", "error_span": "看了完", "error_type_detail": "complement", "explanation": "Result complement (完) comes right after verb, 了 follows: 看完了", "hsk_level": 4, "distractors": ["他", "把", "书"]},
+    {"wrong": "我学习中文两年了。", "correct": "我学了两年中文了。", "error_span": "学习中文两年", "error_type_detail": "duration", "explanation": "Duration goes between verb and object: V + duration + object", "hsk_level": 3, "distractors": ["我", "中文", "了"]},
+    {"wrong": "他跑步跑得快很。", "correct": "他跑步跑得很快。", "error_span": "快很", "error_type_detail": "degree_complement", "explanation": "In degree complements, 很 precedes the adjective: 得很快", "hsk_level": 3, "distractors": ["他", "跑步", "跑得"]},
+    {"wrong": "我不喜欢也不想去。", "correct": "我也不喜欢，也不想去。", "error_span": "不喜欢也", "error_type_detail": "adverb_position", "explanation": "也 goes before the negation: 也不喜欢", "hsk_level": 3, "distractors": ["我", "不想", "去"]},
+    {"wrong": "因为下雨，我没去公园。所以", "correct": "因为下雨，所以我没去公园。", "error_span": "公园。所以", "error_type_detail": "conjunction", "explanation": "因为...所以 pair: 所以 starts the second clause", "hsk_level": 3, "distractors": ["因为", "下雨", "公园"]},
+    {"wrong": "他把牛奶喝。", "correct": "他把牛奶喝了。", "error_span": "喝。", "error_type_detail": "ba_complement", "explanation": "把 sentences need a complement or 了 after the verb; bare verb is incomplete", "hsk_level": 4, "distractors": ["他", "把", "牛奶"]},
+    {"wrong": "这本书我被看完了。", "correct": "这本书被我看完了。", "error_span": "我被", "error_type_detail": "passive", "explanation": "被 comes before the agent: 被我看完了", "hsk_level": 4, "distractors": ["这本书", "看完", "了"]},
+    {"wrong": "老师让学生们不要大声说话了。", "correct": "老师让学生们不要大声说话了。", "error_span": null, "error_type_detail": "correct", "explanation": "This sentence is correct — 让 + person + 不要 is valid", "hsk_level": 4, "distractors": ["让", "大声", "说话"]},
+    {"wrong": "除了他以外，我们都不去过那里。", "correct": "除了他以外，我们都没去过那里。", "error_span": "不去过", "error_type_detail": "negation", "explanation": "Negate 过 (experience) with 没, not 不", "hsk_level": 4, "distractors": ["除了", "以外", "那里"]},
+    {"wrong": "我一边唱歌一边跳舞了。", "correct": "我一边唱歌一边跳舞。", "error_span": "跳舞了", "error_type_detail": "aspect", "explanation": "一边...一边 describes simultaneous actions; 了 is not needed here", "hsk_level": 3, "distractors": ["一边", "唱歌", "跳舞"]},
+    {"wrong": "你能不能告诉我哪里是银行？", "correct": "你能不能告诉我银行在哪里？", "error_span": "哪里是银行", "error_type_detail": "question_word", "explanation": "Indirect question keeps statement order: 银行在哪里", "hsk_level": 3, "distractors": ["你", "告诉", "银行"]},
+    {"wrong": "我每天六点就起来床。", "correct": "我每天六点就起床。", "error_span": "起来床", "error_type_detail": "separable_verb", "explanation": "起床 is a word; you can't insert 来 in the middle of it here", "hsk_level": 2, "distractors": ["每天", "六点", "就"]},
+    {"wrong": "他说得很流利中文。", "correct": "他中文说得很流利。", "error_span": "流利中文", "error_type_detail": "degree_complement", "explanation": "Object goes before verb in V得 constructions: 中文说得很流利", "hsk_level": 3, "distractors": ["他", "说得", "很"]},
+    {"wrong": "她的头发长长的。", "correct": "她的头发长长的。", "error_span": null, "error_type_detail": "correct", "explanation": "This sentence is correct — 长长的 is valid adjective reduplication", "hsk_level": 3, "distractors": ["她的", "头发", "的"]}
+  ]
+}

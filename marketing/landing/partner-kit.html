@@ -3,35 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partner Kit — Mandarin</title>
-  <meta name="description" content="Brand assets, pre-written copy, talking points, and affiliate link info for Mandarin partners. Everything you need to promote adaptive Mandarin study.">
-  <meta name="keywords" content="Mandarin partner kit, affiliate resources, brand assets, Chinese learning app promotion">
-  <link rel="canonical" href="https://mandarinapp.com/partner-kit">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Partner Kit — Aelu</title>
+  <meta name="description" content="Brand assets, pre-written copy, talking points, and affiliate link info for Aelu partners. Everything you need to promote adaptive Mandarin study.">
+  <meta name="keywords" content="Aelu partner kit, affiliate resources, brand assets, Chinese learning app promotion">
+  <link rel="canonical" href="https://aeluapp.com/partner-kit">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Partner Kit — Mandarin">
-  <meta property="og:description" content="Brand assets, pre-written copy, talking points, and affiliate link info. Everything you need to promote Mandarin.">
+  <meta property="og:title" content="Partner Kit — Aelu">
+  <meta property="og:description" content="Brand assets, pre-written copy, talking points, and affiliate link info. Everything you need to promote Aelu.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/partner-kit">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/partner-kit">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Partner Kit — Mandarin">
-  <meta name="twitter:description" content="Brand assets, pre-written copy, talking points, and affiliate link info. Everything you need to promote Mandarin.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Partner Kit — Aelu">
+  <meta name="twitter:description" content="Brand assets, pre-written copy, talking points, and affiliate link info. Everything you need to promote Aelu.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Partner Kit — Mandarin",
-    "description": "Brand assets, pre-written copy, talking points, and affiliate link info for Mandarin partners.",
-    "url": "https://mandarinapp.com/partner-kit"
+    "name": "Partner Kit — Aelu",
+    "description": "Brand assets, pre-written copy, talking points, and affiliate link info for Aelu partners.",
+    "url": "https://aeluapp.com/partner-kit"
   }
   </script>
 
@@ -72,7 +73,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -164,6 +168,30 @@
     .hero h1, .hero-sub { animation: drift-up 0.6s ease-out both; }
     .hero-sub { animation-delay: 0.1s; }
     @media (prefers-reduced-motion: reduce) { .hero h1, .hero-sub { animation: none; opacity: 1; } }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
@@ -171,7 +199,7 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -180,7 +208,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/affiliates">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -189,7 +218,7 @@
   <section class="hero">
     <div class="container">
       <h1>Partner Kit</h1>
-      <p class="hero-sub">Everything you need to promote Mandarin. Grab assets, copy, and links below.</p>
+      <p class="hero-sub">Everything you need to promote Aelu. Grab assets, copy, and links below.</p>
     </div>
   </section>
 
@@ -200,7 +229,7 @@
 
       <div class="logo-display">
         <span class="logo-mark">漫</span>
-        <span class="logo-wordmark">Mandarin</span>
+        <span class="logo-wordmark">Aelu</span>
       </div>
 
       <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin-bottom: var(--space-3); text-align: center;">Color palette</h3>
@@ -246,7 +275,7 @@
       <div class="type-samples">
         <div class="type-sample">
           <div class="type-sample-name">Cormorant Garamond — headings</div>
-          <div class="type-sample-heading">Patient Mandarin study</div>
+          <div class="type-sample-heading">Patient Mandarin Chinese study</div>
         </div>
         <div class="type-sample">
           <div class="type-sample-name">Source Serif 4 — body</div>
@@ -258,7 +287,7 @@
         </div>
       </div>
 
-      <p class="brand-note">For custom assets or higher-resolution files, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a></p>
+      <p class="brand-note">For custom assets or higher-resolution files, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a></p>
     </div>
   </section>
 
@@ -276,13 +305,13 @@
       <div class="copy-block" id="copy-medium">
         <div class="copy-block-label">Medium (2-3 sentences)</div>
         <button class="copy-btn" data-target="copy-medium-text" aria-label="Copy medium description">Copy</button>
-        <div class="copy-block-text" id="copy-medium-text">Mandarin is an adaptive Chinese learning app with 27 drill types, honest HSK diagnostics, and a graded reader that turns every word you look up into targeted practice. No XP, no streaks, no cartoon mascots. Built for adults who want real data about where they stand.</div>
+        <div class="copy-block-text" id="copy-medium-text">Aelu is an adaptive Chinese learning app with 27 drill types, honest HSK diagnostics, and a graded reader that turns every word you look up into targeted practice. No XP, no streaks, no cartoon mascots. Built for adults who want real data about where they stand.</div>
       </div>
 
       <div class="copy-block" id="copy-long">
         <div class="copy-block-label">Long (paragraph)</div>
         <button class="copy-btn" data-target="copy-long-text" aria-label="Copy long description">Copy</button>
-        <div class="copy-block-text" id="copy-long-text">Mandarin tracks your vocabulary, listening, reading, and tone accuracy independently against HSK benchmarks, then adapts your practice session accordingly. The FSRS-based scheduling engine picks from 27 drill types across recognition, production, listening, and speaking modalities. A built-in graded reader lets you read Chinese passages at your level, and every word you tap feeds back into your drill queue automatically. There are no blended averages, no inflated progress bars, and no AI tokens used at runtime -- everything is deterministic and instant. HSK 1-2 content is free with no time limit. Full access is $12/month with no annual upsell, covering HSK 1-6 content, all drill types, and complete diagnostics.</div>
+        <div class="copy-block-text" id="copy-long-text">Aelu tracks your vocabulary, listening, reading, and tone accuracy independently against HSK benchmarks, then adapts your practice session accordingly. The FSRS-based scheduling engine picks from 27 drill types across recognition, production, listening, and speaking modalities. A built-in graded reader lets you read Chinese passages at your level, and every word you tap feeds back into your drill queue automatically. There are no blended averages, no inflated progress bars -- everything is deterministic and instant. HSK 1-2 content is free with no time limit. Full access is $14.99/month with no annual upsell, covering HSK 1-9 content, all drill types, and complete diagnostics.</div>
       </div>
     </div>
   </section>
@@ -295,9 +324,9 @@
         <li><strong>27 drill types across 4 modalities</strong> — <span>recognition, production, listening, speaking</span></li>
         <li><strong>FSRS-based adaptive scheduling</strong> — <span>review timing and drill selection adapt to demonstrated performance</span></li>
         <li><strong>Graded reader with cleanup loop</strong> — <span>every word you look up becomes targeted practice</span></li>
-        <li><strong>HSK 1-6 content</strong> — <span>HSK 1-2 free with no time limit</span></li>
-        <li><strong>$12/month, no annual upsell</strong> — <span>one price, all features</span></li>
-        <li><strong>Zero AI tokens at runtime</strong> — <span>deterministic, instant, works offline</span></li>
+        <li><strong>HSK 1-9 content</strong> — <span>HSK 1-2 free with no time limit</span></li>
+        <li><strong>$14.99/month, no annual upsell</strong> — <span>one price, all features</span></li>
+        <li><strong>Works offline</strong> — <span>deterministic, instant, no external dependencies</span></li>
         <li><strong>Built by an independent team</strong> — <span>no VC funding, no growth hacks, no dark patterns</span></li>
       </ul>
     </div>
@@ -310,7 +339,7 @@
       <div class="info-grid">
         <div class="info-item">
           <h3>Get your link</h3>
-          <p>Email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a> with your name and platform. You will receive a unique referral URL and discount code.</p>
+          <p>Email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a> with your name and platform. You will receive a unique referral URL and discount code.</p>
         </div>
         <div class="info-item">
           <h3>Commission</h3>
@@ -325,7 +354,7 @@
           <p>Read the complete <a href="/affiliates">affiliate program terms</a> for payout schedule, restrictions, and policies.</p>
         </div>
       </div>
-      <p class="info-note">Questions about the partner program? Email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a></p>
+      <p class="info-note">Questions about the partner program? Email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a></p>
     </div>
   </section>
 
@@ -350,7 +379,7 @@
           <span>Session complete (landscape)<br>720 x 405</span>
         </div>
       </div>
-      <p class="screenshots-note">Screenshots coming soon. Email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a> for current screens.</p>
+      <p class="screenshots-note">Screenshots coming soon. Email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a> for current screens.</p>
     </div>
   </section>
 

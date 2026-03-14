@@ -1,0 +1,83 @@
+{
+    "title": "The Window Garden",
+    "title_zh": "窗台花园",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "Your upstairs neighbor has transformed her tiny windowsill into a lush garden with herbs and small flowers. You stop to admire it from below.",
+        "setup_zh": "楼上的邻居把她的小窗台变成了一个种满香草和小花的花园。你在楼下停下来欣赏。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你在看我的花园呢？都是些小东西——薄荷、罗勒、还有一盆小雏菊。地方虽然小，但是我觉得，只要用心，哪里都可以是花园。",
+                "text_pinyin": "Nǐ zài kàn wǒ de huāyuán ne? Dōu shì xiē xiǎo dōngxi — bòhe, luólè, hái yǒu yī pén xiǎo chújú. Dìfang suīrán xiǎo, dànshì wǒ juéde, zhǐyào yòngxīn, nǎlǐ dōu kěyǐ shì huāyuán.",
+                "text_en": "You're looking at my garden? Just small things — mint, basil, and a pot of daisies. The space is tiny, but I think as long as you put your heart in, anywhere can be a garden."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her windowsill garden philosophy.",
+                "options": [
+                    {
+                        "text_zh": "从下面看真的很美。只有一个窗台，但是被您照顾得像一个真正的花园。我觉得「用心」才是最重要的——空间大不大不重要。",
+                        "text_pinyin": "Cóng xiàmian kàn zhēn de hěn měi. Zhǐyǒu yī ge chuāngtái, dànshì bèi nín zhàogù de xiàng yī ge zhēnzhèng de huāyuán. Wǒ juéde 'yòngxīn' cái shì zuì zhòngyào de — kōngjiān dà bú dà bù zhòngyào.",
+                        "text_en": "It looks really beautiful from below. Just a windowsill, but you've cared for it like a real garden. I think 'putting your heart in' is what matters most — the size of the space doesn't.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Care over space — the heart makes the garden, not the acreage."
+                    },
+                    {
+                        "text_zh": "薄荷可以泡水喝。",
+                        "text_pinyin": "Bòhe kěyǐ pào shuǐ hē.",
+                        "text_en": "You can steep mint in water.",
+                        "score": 0.0,
+                        "feedback": "A usage tip instead of appreciating her philosophy."
+                    },
+                    {
+                        "text_zh": "您不觉得窗台太小了吗？",
+                        "text_pinyin": "Nín bù juéde chuāngtái tài xiǎo le ma?",
+                        "text_en": "Don't you think the windowsill is too small?",
+                        "score": 0.0,
+                        "feedback": "Questions the very thing she's transcended."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你。我以前住农村的时候有一个大院子。搬到城市以后，只有这个窗台了。刚开始觉得很失落，但是后来想通了——大花园和小花园给人的快乐是一样的。只要有一棵植物在生长，你就会觉得生活是有希望的。",
+                "text_pinyin": "Xièxie nǐ. Wǒ yǐqián zhù nóngcūn de shíhou yǒu yī ge dà yuànzi. Bān dào chéngshì yǐhòu, zhǐyǒu zhège chuāngtái le. Gāng kāishǐ juéde hěn shīluò, dànshì hòulái xiǎng tōng le — dà huāyuán hé xiǎo huāyuán gěi rén de kuàilè shì yīyàng de. Zhǐyào yǒu yī kē zhíwù zài shēngzhǎng, nǐ jiù huì juéde shēnghuó shì yǒu xīwàng de.",
+                "text_en": "Thank you. I used to have a big courtyard when I lived in the countryside. After moving to the city, all I had was this windowsill. At first I felt lost, but then I figured it out — big gardens and small gardens give the same joy. As long as one plant is growing, you feel life has hope."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her insight about growth and hope.",
+                "options": [
+                    {
+                        "text_zh": "只要有一棵植物在生长——这让我很感动。不管空间多小，有生命在生长就有希望。您的窗台花园从楼下也能感受到那种生命力。",
+                        "text_pinyin": "Zhǐyào yǒu yī kē zhíwù zài shēngzhǎng — zhè ràng wǒ hěn gǎndòng. Bùguǎn kōngjiān duō xiǎo, yǒu shēngmìng zài shēngzhǎng jiù yǒu xīwàng. Nín de chuāngtái huāyuán cóng lóu xià yě néng gǎnshòu dào nà zhǒng shēngmìnglì.",
+                        "text_en": "As long as one plant is growing — that moves me. No matter how small the space, if life is growing, there's hope. Your windowsill garden radiates that vitality even from down below.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Growth as hope, visible from the street — her garden gives to everyone."
+                    },
+                    {
+                        "text_zh": "您为什么搬到城市？",
+                        "text_pinyin": "Nín wèishéme bān dào chéngshì?",
+                        "text_en": "Why did you move to the city?",
+                        "score": 0.0,
+                        "feedback": "Asks about the move when she's already made peace with it."
+                    },
+                    {
+                        "text_zh": "您有没有想过在阳台上种菜？",
+                        "text_pinyin": "Nín yǒu méiyǒu xiǎng guò zài yángtái shàng zhòng cài?",
+                        "text_en": "Have you thought about growing vegetables on the balcony?",
+                        "score": 0.0,
+                        "feedback": "Suggests upgrading when her point is about sufficiency."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Many urban Chinese residents, especially those from rural backgrounds, maintain windowsill or balcony gardens as a connection to their former life on the land. The phrase 想通了 (figured it out / came to terms with it) describes a mental shift from loss to acceptance, a valued emotional milestone in Chinese culture."
+    }
+}

@@ -1,0 +1,123 @@
+{
+    "title": "Meeting a Neighbor's Cat",
+    "title_zh": "邻居家的猫",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You open your apartment door and find a small orange cat sitting in the hallway. Your upstairs neighbor, Xiao Liu, comes running down the stairs looking worried.",
+        "setup_zh": "你打开家门，发现走廊里坐着一只小橘猫。楼上的邻居小刘跑下楼来，看起来很着急。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "啊，橘子在这里！它又跑出来了。对不起，它没有打扰你吧？",
+                "text_pinyin": "A, Júzi zài zhèlǐ! Tā yòu pǎo chūlái le. Duìbuqǐ, tā méiyǒu dǎrǎo nǐ ba?",
+                "text_en": "Oh, Juzi is here! It ran out again. Sorry, it didn't bother you, did it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the cat.",
+                "options": [
+                    {
+                        "text_zh": "没有没有，它特别可爱！我刚才还在想它是谁家的。它叫橘子啊？名字真好听。",
+                        "text_pinyin": "Méiyǒu méiyǒu, tā tèbié kě'ài! Wǒ gāngcái hái zài xiǎng tā shì shuí jiā de. Tā jiào Júzi a? Míngzi zhēn hǎotīng.",
+                        "text_en": "Not at all, it's so cute! I was just wondering whose cat it was. Its name is Juzi? What a nice name.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Warm and reassuring — puts the neighbor at ease and shows interest."
+                    },
+                    {
+                        "text_zh": "没事。",
+                        "text_pinyin": "Méi shì.",
+                        "text_en": "It's fine.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Reassuring but doesn't build the conversation."
+                    },
+                    {
+                        "text_zh": "你应该把门关好，别让猫跑出来。",
+                        "text_pinyin": "Nǐ yīnggāi bǎ mén guān hǎo, bié ràng māo pǎo chūlái.",
+                        "text_en": "You should keep your door shut so the cat doesn't get out.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Critical — she's already worried, no need to lecture."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你不介意！它就是喜欢到处跑。我养了它一年了，它特别喜欢跟人玩。你喜欢猫吗？",
+                "text_pinyin": "Xièxie nǐ bù jièyì! Tā jiù shì xǐhuan dàochù pǎo. Wǒ yǎng le tā yī nián le, tā tèbié xǐhuan gēn rén wán. Nǐ xǐhuan māo ma?",
+                "text_en": "Thanks for not minding! It just loves running around. I've had it for a year — it really likes playing with people. Do you like cats?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share whether you like cats.",
+                "options": [
+                    {
+                        "text_zh": "喜欢！我小时候家里也养过猫。我可以摸摸它吗？",
+                        "text_pinyin": "Xǐhuan! Wǒ xiǎo shíhou jiālǐ yě yǎng guò māo. Wǒ kěyǐ mōmo tā ma?",
+                        "text_en": "I love them! We had a cat when I was little too. Can I pet it?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and polite — asks before touching the cat."
+                    },
+                    {
+                        "text_zh": "还行吧，我没养过。",
+                        "text_pinyin": "Hái xíng ba, wǒ méi yǎng guò.",
+                        "text_en": "They're okay, I've never had one.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Neutral — doesn't engage much."
+                    },
+                    {
+                        "text_zh": "我更喜欢狗。",
+                        "text_pinyin": "Wǒ gèng xǐhuan gǒu.",
+                        "text_en": "I prefer dogs.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest but slightly dismissive in this context."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以！你看，它已经在蹭你的腿了，说明它喜欢你。以后你想它了，随时可以上来看它。我家在五楼，五零二。",
+                "text_pinyin": "Dāngrán kěyǐ! Nǐ kàn, tā yǐjīng zài cèng nǐ de tuǐ le, shuōmíng tā xǐhuan nǐ. Yǐhòu nǐ xiǎng tā le, suíshí kěyǐ shànglái kàn tā. Wǒ jiā zài wǔ lóu, wǔ líng èr.",
+                "text_en": "Of course! Look, it's already rubbing against your leg — that means it likes you. In the future, whenever you miss it, feel free to come up and visit. I'm on the 5th floor, 502."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation.",
+                "options": [
+                    {
+                        "text_zh": "太好了！我一定会去看橘子的。对了，我叫……很高兴认识你和橘子。",
+                        "text_pinyin": "Tài hǎo le! Wǒ yīdìng huì qù kàn Júzi de. Duìle, wǒ jiào…… hěn gāoxìng rènshi nǐ hé Júzi.",
+                        "text_en": "Great! I'll definitely come visit Juzi. By the way, my name is... Nice to meet you and Juzi.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Warm introduction — a pet brings two neighbors together."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but brief."
+                    },
+                    {
+                        "text_zh": "我可能没时间。",
+                        "text_pinyin": "Wǒ kěnéng méi shíjiān.",
+                        "text_en": "I might not have time.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Dismisses a kind neighbor's invitation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Pets, especially cats, are increasingly popular in Chinese cities. Orange cats (橘猫) are beloved for their friendly personalities. Pets often serve as conversation starters between neighbors who might otherwise not interact. Sharing apartment numbers is a sign of neighborly trust."
+    },
+    "hsk_level": 3
+}

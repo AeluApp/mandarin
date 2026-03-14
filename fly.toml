@@ -6,13 +6,18 @@ primary_region = "ewr"
 [env]
   IS_PRODUCTION = "true"
   PORT = "8080"
+  DATA_DIR = "/data"
+
+# Required secrets (set via `fly secrets set`):
+#   SECRET_KEY, JWT_SECRET, STRIPE_SECRET_KEY, RESEND_API_KEY,
+#   LITESTREAM_S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
 
 [http_service]
   internal_port = 8080
   force_https = true
   auto_stop_machines = "stop"
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
   processes = ["app"]
 
   [[http_service.checks]]

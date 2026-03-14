@@ -1,0 +1,89 @@
+{
+    "title": "The Speed of Everything",
+    "title_zh": "一切都在加速",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're sitting with a sociology professor, Dr. Fang, at a university tea room. She's been studying how Chinese society has transformed in the past thirty years.",
+        "setup_zh": "你和社会学教授方老师坐在大学的茶室里。她一直在研究过去三十年中国社会的变迁。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "西方用了两百年完成的工业化、城市化和信息化，中国用了三十年。这意味着我们的父辈、我们自己和我们的下一代，几乎生活在三个完全不同的世界里。这种断裂的速度是前所未有的。",
+                "text_pinyin": "Xīfāng yòng le liǎng bǎi nián wánchéng de gōngyèhuà, chéngshìhuà hé xìnxīhuà, Zhōngguó yòng le sānshí nián. Zhè yìwèi zhe wǒmen de fùbèi, wǒmen zìjǐ hé wǒmen de xià yīdài, jīhū shēnghuó zài sān ge wánquán bùtóng de shìjiè lǐ. Zhè zhǒng duànliè de sùdù shì qiánsuǒwèiyǒu de.",
+                "text_en": "The industrialization, urbanization, and informatization that the West took two hundred years to complete, China accomplished in thirty. This means our parents' generation, our own, and the next generation are living in what are essentially three entirely different worlds. The speed of this rupture is unprecedented."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with Dr. Fang's observation about compressed change.",
+                "options": [
+                    {
+                        "text_zh": "三代人，三个世界——这解释了为什么代际理解那么困难。不是哪一代不够好，而是变化太快，每一代形成价值观的环境完全不同。我们用着相同的语言，但指向的经验完全是两回事。",
+                        "text_pinyin": "Sān dài rén, sān ge shìjiè — zhè jiěshì le wèi shénme dàijì lǐjiě nàme kùnnan. Bú shì nǎ yīdài bú gòu hǎo, ér shì biànhuà tài kuài, měi yīdài xíngchéng jiàzhíguān de huánjìng wánquán bùtóng. Wǒmen yòng zhe xiāngtóng de yǔyán, dàn zhǐxiàng de jīngyàn wánquán shì liǎng huí shì.",
+                        "text_en": "Three generations, three worlds — that explains why intergenerational understanding is so hard. Not that any generation is inadequate, but change was too fast, each generation's value-forming environment completely different. Same language, entirely separate experiences.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Analytically sharp — connects the macro observation to the interpersonal level."
+                    },
+                    {
+                        "text_zh": "变化快是好事啊，说明中国发展得快。",
+                        "text_pinyin": "Biànhuà kuài shì hǎo shì a, shuōmíng Zhōngguó fāzhǎn de kuài.",
+                        "text_en": "Rapid change is a good thing — it shows China is developing fast.",
+                        "score": 0.0,
+                        "feedback": "One-dimensional — ignores the human cost she's analyzing."
+                    },
+                    {
+                        "text_zh": "您做这个研究多久了？",
+                        "text_pinyin": "Nín zuò zhège yánjiū duō jiǔ le?",
+                        "text_en": "How long have you been doing this research?",
+                        "score": 0.0,
+                        "feedback": "Shifts from the substantive discussion to personal background."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "相同的语言，不同的经验——你概括得很精准。我研究中发现最触动我的一点是：在急剧变化的社会里，人们普遍失去了一种「连续性」的感觉。你的过去和你的现在之间没有一条平滑的线索，像是被切断了。",
+                "text_pinyin": "Xiāngtóng de yǔyán, bùtóng de jīngyàn — nǐ gàikuò de hěn jīngzhǔn. Wǒ yánjiū zhōng fāxiàn zuì chùdòng wǒ de yīdiǎn shì: zài jíjù biànhuà de shèhuì lǐ, rénmen pǔbiàn shīqù le yī zhǒng 'liánxùxìng' de gǎnjué. Nǐ de guòqù hé nǐ de xiànzài zhī jiān méiyǒu yī tiáo pínghuá de xiànsuǒ, xiàng shì bèi qiēduàn le.",
+                "text_en": "Same language, different experiences — precisely summarized. The most striking finding in my research is this: in a rapidly changing society, people universally lose a sense of 'continuity.' There's no smooth thread between your past and your present — it feels severed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explore the idea of lost continuity.",
+                "options": [
+                    {
+                        "text_zh": "这种断裂感也许就是很多人说的'找不到自己'。你在一个环境里成长，形成了认知，但等你长大那个环境已经不在了。既不属于过去，也不完全适应现在。连续性被压缩，认同就碎片化了。",
+                        "text_pinyin": "Zhè zhǒng duànliè gǎn yěxǔ jiù shì hěn duō rén shuō de 'zhǎo bú dào zìjǐ'. Nǐ zài yīge huánjìng lǐ chéngzhǎng, xíngchéng le rènzhī, dàn děng nǐ zhǎng dà nàge huánjìng yǐjīng bú zài le. Jì bù shǔyú guòqù, yě bù wánquán shìyìng xiànzài. Liánxùxìng bèi yāsuō, rèntóng jiù suìpiànhuà le.",
+                        "text_en": "That rupture is what people mean by 'can't find themselves.' You grow up in one environment, form a worldview, but by adulthood it's gone. Belonging neither to the past nor the present. Continuity compressed, identity fragmented.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sophisticated analysis — links macro social change to individual psychological experience."
+                    },
+                    {
+                        "text_zh": "我觉得适应能力强是中国人的优点。",
+                        "text_pinyin": "Wǒ juéde shìyìng nénglì qiáng shì Zhōngguó rén de yōudiǎn.",
+                        "text_en": "I think strong adaptability is a Chinese strength.",
+                        "score": 0.0,
+                        "feedback": "Deflects the critical analysis with national pride."
+                    },
+                    {
+                        "text_zh": "现在年轻人不是都挺好的吗？比以前生活条件好多了。",
+                        "text_pinyin": "Xiànzài niánqīng rén bú shì dōu tǐng hǎo de ma? Bǐ yǐqián shēnghuó tiáojiàn hǎo duō le.",
+                        "text_en": "Aren't young people doing fine now? Living conditions are much better than before.",
+                        "score": 0.0,
+                        "feedback": "Material improvement doesn't address the existential dislocation she's describing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "碎片化的认同——这正是我论文的核心论点。但我也不想让你觉得这只是一个学术概念。它是真实的痛。我的每一个学生都在经历这种撕裂：父母希望他们稳定，社会要求他们竞争，内心渴望他们能做自己。三个方向同时在拉扯。",
+                "text_pinyin": "Suìpiànhuà de rèntóng — zhè zhèng shì wǒ lùnwén de héxīn lùndiǎn. Dàn wǒ yě bù xiǎng ràng nǐ juéde zhè zhǐ shì yīge xuéshù gàiniàn. Tā shì zhēnshí de tòng. Wǒ de měi yīge xuéshēng dōu zài jīnglì zhè zhǒng sīliè: fùmǔ xīwàng tāmen wěndìng, shèhuì yāoqiú tāmen jìngzhēng, nèixīn kěwàng tāmen néng zuò zìjǐ. Sān ge fāngxiàng tóngshí zài lāchě.",
+                "text_en": "Fragmented identity — that's exactly the core argument of my paper. But I don't want you to think this is merely an academic concept. It's real pain. Every one of my students experiences this tearing: parents want stability, society demands competition, and their inner selves long to be authentic. Three directions pulling simultaneously."
+            }
+        ],
+        "cultural_note": "China's「压缩式现代化」(compressed modernization) — achieving in decades what other nations took centuries — has created unique sociological phenomena. The concept of「断裂社会」(fractured society) proposed by Chinese sociologist Sun Liping describes how rapid change severs social bonds and shared narratives. Young Chinese often describe feeling caught between traditional filial expectations, competitive market demands, and personal aspirations — a tension with no historical precedent."
+    }
+}

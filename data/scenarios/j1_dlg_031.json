@@ -1,0 +1,87 @@
+{
+    "title": "A Photo of Home",
+    "title_zh": "家的照片",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "Your classmate sees you looking at a photo on your phone during break. It's a photo from your hometown.",
+        "setup_zh": "课间休息时，你的同学看到你在看手机上的照片。那是你家乡的照片。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你在看什么？那是哪里？好漂亮！",
+                "text_pinyin": "Nǐ zài kàn shénme? Nà shì nǎlǐ? Hǎo piàoliang!",
+                "text_en": "What are you looking at? Where is that? So pretty!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about the photo.",
+                "options": [
+                    {
+                        "text_zh": "这是我的家。那里有很多树，很安静。",
+                        "text_pinyin": "Zhè shì wǒ de jiā. Nàlǐ yǒu hěn duō shù, hěn ānjìng.",
+                        "text_en": "This is my home. There are many trees there, it's very quiet.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Opens up about your hometown -- she said it looks pretty and you describe what makes it special."
+                    },
+                    {
+                        "text_zh": "这是我的家。",
+                        "text_pinyin": "Zhè shì wǒ de jiā.",
+                        "text_en": "This is my home.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but doesn't describe it -- she said it's pretty and asked three excited questions. Give her more."
+                    },
+                    {
+                        "text_zh": "你也想看吗？",
+                        "text_pinyin": "Nǐ yě xiǎng kàn ma?",
+                        "text_en": "Do you want to see?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She already saw it and said it's pretty -- offering to show what she's already looking at makes no sense."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好想去看看。你想家吗？",
+                "text_pinyin": "Hǎo xiǎng qù kànkan. Nǐ xiǎng jiā ma?",
+                "text_en": "I'd love to visit. Do you miss home?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feelings about home.",
+                "options": [
+                    {
+                        "text_zh": "有时候想。但是我在这里也很开心。",
+                        "text_pinyin": "Yǒu shíhou xiǎng. Dànshì wǒ zài zhèlǐ yě hěn kāixīn.",
+                        "text_en": "Sometimes. But I'm also happy here.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers her question about missing home with emotional honesty -- acknowledges both feelings without heaviness."
+                    },
+                    {
+                        "text_zh": "有时候想家。",
+                        "text_pinyin": "Yǒu shíhou xiǎng jiā.",
+                        "text_en": "Sometimes I miss home.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest but only part of the picture -- she asked a sensitive question and a fuller answer would match her care."
+                    },
+                    {
+                        "text_zh": "你去过美国吗？",
+                        "text_pinyin": "Nǐ qù guò Měiguó ma?",
+                        "text_en": "Have you been to America?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She asked if you miss home and you turned it into a travel question -- dodges the emotional moment she created."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Homesickness (想家) is a deeply understood feeling in Chinese culture, where many people live far from their hometowns for work or study. Sharing photos from home is a way to keep connections alive."
+    }
+}

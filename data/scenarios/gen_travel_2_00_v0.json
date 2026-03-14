@@ -1,0 +1,94 @@
+{
+    "title": "The Hotel With Character",
+    "title_zh": "有个性的酒店",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_2_00_v0",
+    "tree": {
+        "setup": "A boutique hotel in an old neighborhood. The lobby has exposed brick and a vintage clock that's seven minutes fast, which the owner, Lao Qian, considers 'motivational.' He personally greets every guest and remembers their preferences from previous stays. The check-in desk has a small vase of fresh flowers that he changes every morning.",
+        "setup_zh": "老城区的一家精品酒店。大堂有裸露的砖墙和一个快七分钟的老钟，老板老钱觉得这「有激励作用」。他亲自迎接每位客人，记得老客人的喜好。前台有一小瓶鲜花，他每天早上换。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！您预订了房间吗？",
+                "text_pinyin": "huānyíng guānglín! nín yùdìng le fángjiān ma?",
+                "text_en": "Welcome! Have you reserved a room?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check in to the hotel.",
+                "options": [
+                    {
+                        "text_zh": "是的，我预订了两个晚上。我姓王。",
+                        "text_pinyin": "shì de, wǒ yùdìng le liǎng gè wǎnshang. wǒ xìng wáng.",
+                        "text_en": "Yes, I reserved for two nights. My surname is Wang.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Qian finds your reservation instantly.「王先生/女士！给您安排了三楼的安静房间。」预订 is the formal word for 'reservation.'"
+                    },
+                    {
+                        "text_zh": "没有预订。还有空房间吗？",
+                        "text_pinyin": "méiyǒu yùdìng. hái yǒu kòng fángjiān ma?",
+                        "text_en": "No reservation. Do you have any rooms available?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Qian checks his book.「有一间朝南的，很亮。」空房间 is 'available room.' Walk-ins are fine at smaller hotels."
+                    },
+                    {
+                        "text_zh": "一个晚上多少钱？",
+                        "text_pinyin": "yí gè wǎnshang duōshao qián?",
+                        "text_en": "How much per night?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Qian quotes the price.「标准间三百八，大床房四百二。含早餐。」多少钱 + time unit is how you ask about rates."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这是房卡。您的房间在三楼，三零六号。早餐七点到九点。",
+                "text_pinyin": "zhè shì fángkǎ. nín de fángjiān zài sān lóu, sān líng liù hào. zǎocān qī diǎn dào jiǔ diǎn.",
+                "text_en": "Here's your room key. Your room is on the third floor, 306. Breakfast is 7 to 9."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about hotel facilities.",
+                "options": [
+                    {
+                        "text_zh": "请问WiFi密码是多少？",
+                        "text_pinyin": "qǐngwèn WiFi mìmǎ shì duōshao?",
+                        "text_en": "What's the WiFi password?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Qian points to a card on the desk with the password written in beautiful calligraphy.「也写在房间桌子上了。」The essential question at every hotel."
+                    },
+                    {
+                        "text_zh": "附近有什么好吃的餐厅吗？",
+                        "text_pinyin": "fùjìn yǒu shénme hǎochī de cāntīng ma?",
+                        "text_en": "Are there any good restaurants nearby?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Qian's eyes light up. He pulls out a hand-drawn map with his personal restaurant recommendations circled in red.「这家面馆是我最喜欢的。」附近 means 'nearby' -- key for exploring."
+                    },
+                    {
+                        "text_zh": "几点退房？",
+                        "text_pinyin": "jǐ diǎn tuì fáng?",
+                        "text_en": "What time is checkout?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「中午十二点。但是如果需要，可以延到下午两点。」退房 is 'checkout.' Lao Qian is flexible -- another perk of small hotels."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有什么需要随时叫我。祝您住得愉快！",
+                "text_pinyin": "yǒu shénme xūyào suíshí jiào wǒ. zhù nín zhù de yúkuài!",
+                "text_en": "Call me anytime you need anything. Enjoy your stay!"
+            }
+        ],
+        "cultural_note": "Chinese hotels range from large chains (连锁酒店) to charming boutiques (精品酒店). Smaller owner-run hotels often provide warmer service and local tips. 含早餐 (hán zǎocān) means 'breakfast included.'"
+    }
+}

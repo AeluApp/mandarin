@@ -1,0 +1,196 @@
+{
+    "title": "The Frozen Account Thaw",
+    "title_zh": "解冻账户",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_bank_5_02_v0",
+    "tree": {
+        "setup": "The bank's VIP window, reserved for problems too complicated for the regular counters. Your card was frozen after three failed PIN attempts — not because you forgot it, but because the ATM's keypad had a sticky 7 that registered as 4. Manager Shen sits across from you with the patience of someone who has unfrozen six accounts before lunch. A small cactus on her desk wears a tiny knitted hat.",
+        "setup_zh": "银行的贵宾窗口，专门处理普通柜台解决不了的复杂问题。你的卡因为三次密码输入错误被冻结了——不是因为你忘了密码，而是因为ATM的键盘上7键粘住了，按出来是4。沈经理坐在你对面，带着一种午饭前已经解冻了六个账户的耐心。她桌上的小仙人掌戴着一顶小小的针织帽。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问遇到什么问题了？",
+                "text_pinyin": "nín hǎo, qǐngwèn yù dào shénme wèntí le?",
+                "text_en": "Hello, what seems to be the problem?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain that your card was frozen.",
+                "options": [
+                    {
+                        "text_zh": "沈经理，您好。我的银行卡被冻结了。昨天在ATM取钱的时候，键盘好像有问题，我输了三次密码都显示错误，然后卡就被锁了。",
+                        "text_pinyin": "Shěn jīnglǐ, nín hǎo. wǒ de yínháng kǎ bèi dòngjié le. zuótiān zài ATM qǔ qián de shíhòu, jiànpán hǎoxiàng yǒu wèntí, wǒ shū le sān cì mìmǎ dōu xiǎnshì cuòwù, ránhòu kǎ jiù bèi suǒ le.",
+                        "text_en": "Manager Shen, hello. My bank card has been frozen. Yesterday when I was withdrawing from the ATM, the keypad seemed faulty — I entered my PIN three times and it kept showing errors, then the card got locked.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A clear timeline with a plausible explanation. Manager Shen nods — she's heard the sticky-keypad story before, and it's always true."
+                    },
+                    {
+                        "text_zh": "我的卡被冻结了，不能用了。我需要解冻。",
+                        "text_pinyin": "wǒ de kǎ bèi dòngjié le, bù néng yòng le. wǒ xūyào jiědòng.",
+                        "text_en": "My card is frozen and won't work. I need it unfrozen.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct and functional. She'll need more details, but at least the request is clear."
+                    },
+                    {
+                        "text_zh": "卡不能用了，怎么回事？",
+                        "text_pinyin": "kǎ bù néng yòng le, zěnme huí shì?",
+                        "text_en": "My card doesn't work — what's going on?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She's the one who should be asking the questions, but she takes it in stride."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我明白了。这种情况挺常见的，有些ATM的键盘确实不太灵敏。我帮您查一下账户状态。请出示一下您的身份证。",
+                "text_pinyin": "wǒ míngbai le. zhè zhǒng qíngkuàng tǐng chángjiàn de, yǒuxiē ATM de jiànpán quèshí bú tài língmǐn. wǒ bāng nín chá yíxià zhànghù zhuàngtài. qǐng chūshì yíxià nín de shēnfènzhèng.",
+                "text_en": "I understand. This is quite common — some ATM keypads aren't very responsive. Let me check your account status. Please show me your ID."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your ID and ask about the process.",
+                "options": [
+                    {
+                        "text_zh": "这是我的护照。请问解冻需要多长时间？我明天需要用这张卡交房租。",
+                        "text_pinyin": "zhè shì wǒ de hùzhào. qǐngwèn jiědòng xūyào duō cháng shíjiān? wǒ míngtiān xūyào yòng zhè zhāng kǎ jiāo fángzū.",
+                        "text_en": "Here's my passport. How long does the unfreezing take? I need this card to pay rent tomorrow.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Providing context for urgency without being demanding — Manager Shen appreciates tenants who plan ahead, even when the plan has been disrupted by a sticky keypad."
+                    },
+                    {
+                        "text_zh": "给你，我的护照。能快点处理吗？",
+                        "text_pinyin": "gěi nǐ, wǒ de hùzhào. néng kuài diǎn chǔlǐ ma?",
+                        "text_en": "Here, my passport. Can you process it quickly?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The urgency registers, though a「请」would smooth the edges."
+                    },
+                    {
+                        "text_zh": "护照在这里。这个事情很麻烦吗？",
+                        "text_pinyin": "hùzhào zài zhèlǐ. zhège shìqing hěn máfan ma?",
+                        "text_en": "Passport's here. Is this going to be complicated?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Shen gives the cactus a look.「不麻烦，」she says, which in banking means it will take exactly as long as it takes."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "解冻本身很快，十分钟左右就能办好。不过您的密码需要重新设置。另外，我建议您以后避免使用那台ATM，我们已经接到好几个类似的投诉了。",
+                "text_pinyin": "jiědòng běnshēn hěn kuài, shí fēnzhōng zuǒyòu jiù néng bàn hǎo. búguò nín de mìmǎ xūyào chóngxīn shèzhì. lìngwài, wǒ jiànyì nín yǐhòu bìmiǎn shǐyòng nà tái ATM, wǒmen yǐjīng jiē dào hǎo jǐ gè lèisì de tóusù le.",
+                "text_en": "The unfreezing itself is quick — about ten minutes. But you'll need to reset your PIN. Also, I suggest avoiding that ATM in the future — we've received several similar complaints."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the PIN reset and ATM issue.",
+                "options": [
+                    {
+                        "text_zh": "好的，十分钟没问题。那个ATM确实应该修一下。重新设置密码是在这里办还是要去别的窗口？",
+                        "text_pinyin": "hǎo de, shí fēnzhōng méi wèntí. nàge ATM quèshí yīnggāi xiū yíxià. chóngxīn shèzhì mìmǎ shì zài zhèlǐ bàn háishi yào qù bié de chuāngkǒu?",
+                        "text_en": "OK, ten minutes is fine. That ATM really should be fixed. Do I reset my PIN here or at another window?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical follow-up that shows you understand the process has steps. Manager Shen confirms: right here, same window."
+                    },
+                    {
+                        "text_zh": "好，那就重新设一个密码吧。",
+                        "text_pinyin": "hǎo, nà jiù chóngxīn shè yí gè mìmǎ ba.",
+                        "text_en": "OK, let's reset the PIN then.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreeable. She starts the process without further prompting."
+                    },
+                    {
+                        "text_zh": "那个ATM坏了你们为什么不修？",
+                        "text_pinyin": "nàge ATM huài le nǐmen wèishénme bù xiū?",
+                        "text_en": "Why haven't you fixed that broken ATM?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A fair question directed at the wrong person. Manager Shen handles accounts, not hardware — but she notes your frustration."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "就在这里办。请您在这个密码键盘上输入新密码，六位数字。注意遮挡一下。设好以后再确认一次。",
+                "text_pinyin": "jiù zài zhèlǐ bàn. qǐng nín zài zhège mìmǎ jiànpán shàng shūrù xīn mìmǎ, liù wèi shùzì. zhùyì zhēdǎng yíxià. shè hǎo yǐhòu zài quèrèn yí cì.",
+                "text_en": "Right here. Please enter your new PIN on this keypad — six digits. Cover it while you type. Then confirm it once more."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Set your new PIN and confirm.",
+                "options": [
+                    {
+                        "text_zh": "好的，新密码设好了，也确认了。这次的键盘倒是挺好用的。",
+                        "text_pinyin": "hǎo de, xīn mìmǎ shè hǎo le, yě quèrèn le. zhè cì de jiànpán dào shì tǐng hǎo yòng de.",
+                        "text_en": "OK, new PIN is set and confirmed. This keypad works much better, at least.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A little humor about the keypad — Manager Shen allows herself a small smile. The cactus remains impassive."
+                    },
+                    {
+                        "text_zh": "输好了。",
+                        "text_pinyin": "shū hǎo le.",
+                        "text_en": "Done.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. She checks the screen and nods."
+                    },
+                    {
+                        "text_zh": "等一下，我还在想用什么数字。",
+                        "text_pinyin": "děng yíxià, wǒ hái zài xiǎng yòng shénme shùzì.",
+                        "text_en": "Wait, I'm still thinking about what numbers to use.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Shen waits with practiced patience. The cactus has all day."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，您的账户已经解冻了，新密码也生效了。这是回执单，请您签字。以后如果再遇到ATM问题，可以直接打我们的客服热线，不用跑到银行来。",
+                "text_pinyin": "hǎo de, nín de zhànghù yǐjīng jiědòng le, xīn mìmǎ yě shēngxiào le. zhè shì huízhí dān, qǐng nín qiānzì. yǐhòu rúguǒ zài yù dào ATM wèntí, kěyǐ zhíjiē dǎ wǒmen de kèfú rèxiàn, bú yòng pǎo dào yínháng lái.",
+                "text_en": "Your account is now unfrozen and your new PIN is active. Here's the receipt — please sign. In the future, if you have ATM issues, you can call our customer service hotline directly instead of coming in."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Sign and thank her. Ask about the hotline.",
+                "options": [
+                    {
+                        "text_zh": "太好了，签好了。客服热线的号码是多少？我存到手机里，下次就不用麻烦您了。非常感谢沈经理！",
+                        "text_pinyin": "tài hǎo le, qiān hǎo le. kèfú rèxiàn de hàomǎ shì duōshǎo? wǒ cún dào shǒujī lǐ, xià cì jiù bú yòng máfan nín le. fēicháng gǎnxiè Shěn jīnglǐ!",
+                        "text_en": "Great, signed. What's the hotline number? I'll save it to my phone so I won't have to trouble you next time. Thank you so much, Manager Shen!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Proactive and appreciative — the kind of customer Manager Shen will remember fondly when she waters her cactus."
+                    },
+                    {
+                        "text_zh": "谢谢！以后我注意，不用那个ATM了。",
+                        "text_pinyin": "xièxie! yǐhòu wǒ zhùyì, bú yòng nàge ATM le.",
+                        "text_en": "Thanks! I'll be careful and avoid that ATM.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lesson learned. Manager Shen files the complaint and hopes maintenance reads it this time."
+                    },
+                    {
+                        "text_zh": "终于好了。下次希望不用再来。",
+                        "text_pinyin": "zhōngyú hǎo le. xià cì xīwàng bú yòng zài lái.",
+                        "text_en": "Finally done. Hope I don't have to come back.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Shen agrees, though for slightly different reasons."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese bank cards use a 6-digit PIN (密码, mìmǎ), not 4 digits. After three failed attempts, the card is automatically frozen (冻结, dòngjié) and must be unfrozen in person with valid ID. ATM complaints are common and banks take them seriously — the sticky-keypad problem is genuinely widespread."
+    }
+}

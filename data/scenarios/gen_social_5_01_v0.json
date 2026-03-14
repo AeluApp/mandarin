@@ -1,0 +1,160 @@
+{
+    "title": "The Birthday Logistics Director",
+    "title_zh": "生日后勤总监",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_5_01_v0",
+    "tree": {
+        "setup": "Your group chat is buzzing: Xiao Fei, the friend who remembers everyone's birthday but never wants her own celebrated, turns thirty next Saturday. The challenge is organizing a surprise party without her finding out — which is difficult because Xiao Fei is observant enough to notice when a text message takes three seconds longer to type than usual. Ah Qiang, the self-appointed party planner, is coordinating via a secret group chat titled「装修讨论」(home renovation discussion) to avoid suspicion.",
+        "setup_zh": "你的群聊在震动：小飞——那个记得每个人生日却从不让别人庆祝自己生日的朋友——下周六满三十岁。挑战是在她不知道的情况下组织一个惊喜派对——这很难，因为小飞的观察力强到能注意到一条短信多打了三秒钟。自封为派对策划师的阿强正在通过一个名为「装修讨论」的秘密群聊进行协调，以避免被怀疑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "大家注意！这个群只讨论小飞的生日惊喜，千万别发错群！场地我在看了，人均预算控制在两百以内。你们觉得在哪里办比较好？",
+                "text_pinyin": "dàjiā zhùyì! zhège qún zhǐ tǎolùn Xiǎo Fēi de shēngrì jīngxǐ, qiānwàn bié fā cuò qún! chǎngdì wǒ zài kàn le, rénjūn yùsuàn kòngzhì zài liǎngbǎi yǐnèi. nǐmen juéde zài nǎlǐ bàn bǐjiào hǎo?",
+                "text_en": "Everyone pay attention! This chat is ONLY for Xiao Fei's birthday surprise — DO NOT send to the wrong chat! I'm looking at venues, budget under 200 per person. Where do you think we should do it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a venue.",
+                "options": [
+                    {
+                        "text_zh": "我觉得可以订一个私人影院包间——小飞最喜欢看电影了。先看一场她想看的电影，然后在包间里吃蛋糕。我查了一下，附近有一家私人影院，四个小时的包间大概八百块，八个人分下来人均一百。剩下的预算买蛋糕和布置。",
+                        "text_pinyin": "wǒ juéde kěyǐ dìng yí gè sīrén yǐngyuàn bāojiān——Xiǎo Fēi zuì xǐhuān kàn diànyǐng le. xiān kàn yì chǎng tā xiǎng kàn de diànyǐng, ránhòu zài bāojiān lǐ chī dàngāo. wǒ chá le yíxià, fùjìn yǒu yì jiā sīrén yǐngyuàn, sì gè xiǎoshí de bāojiān dàgài bābǎi kuài, bā gè rén fēn xiàlái rénjūn yìbǎi. shèng xia de yùsuàn mǎi dàngāo hé bùzhì.",
+                        "text_en": "I think we could book a private cinema room — Xiao Fei loves movies. Watch a movie she's been wanting to see, then have cake in the room. I checked — there's a private cinema nearby, four hours for about 800 yuan. Split among eight people that's 100 each. Remaining budget for cake and decorations.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A venue that fits Xiao Fei's interests plus a detailed budget breakdown — Ah Qiang sends three thumbs-up emojis."
+                    },
+                    {
+                        "text_zh": "去KTV吧，便宜又热闹。",
+                        "text_pinyin": "qù KTV ba, piányi yòu rènao.",
+                        "text_en": "Let's go to KTV — cheap and fun.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Classic choice, but someone remembers: Xiao Fei doesn't sing. She's the friend who sits in the corner rating everyone else's pitch."
+                    },
+                    {
+                        "text_zh": "随便在哪里都行吧，重要的是人到齐。",
+                        "text_pinyin": "suíbiàn zài nǎlǐ dōu xíng ba, zhòngyào de shì rén dào qí.",
+                        "text_en": "Anywhere is fine — what matters is everyone shows up.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Philosophically correct but logistically unhelpful. Ah Qiang needs specifics, not wisdom."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "私人影院的主意太好了！我现在就去订。那怎么把小飞骗过去不让她起疑心？谁负责把她带到？",
+                "text_pinyin": "sīrén yǐngyuàn de zhǔyi tài hǎo le! wǒ xiànzài jiù qù dìng. nà zěnme bǎ Xiǎo Fēi piàn guòqù bú ràng tā qǐ yíxīn? shuí fùzé bǎ tā dài dào?",
+                "text_en": "Private cinema is a great idea! I'll book it now. So how do we lure Xiao Fei without making her suspicious? Who brings her?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Devise a plan to bring Xiao Fei.",
+                "options": [
+                    {
+                        "text_zh": "我来负责。我就说我有两张电影票快过期了，问她周六下午有没有空一起去看。她肯定不会拒绝免费电影。到了以后直接带她去包间。大家提前半小时到，藏好。注意手机都调静音，不然她一听到群消息的声音就会起疑心。",
+                        "text_pinyin": "wǒ lái fùzé. wǒ jiù shuō wǒ yǒu liǎng zhāng diànyǐng piào kuài guòqī le, wèn tā zhōu liù xiàwǔ yǒu méiyǒu kòng yìqǐ qù kàn. tā kěndìng bú huì jùjué miǎnfèi diànyǐng. dào le yǐhòu zhíjiē dài tā qù bāojiān. dàjiā tíqián bàn xiǎoshí dào, cáng hǎo. zhùyì shǒujī dōu tiáo jìngyīn, bùrán tā yì tīng dào qún xiāoxi de shēngyīn jiù huì qǐ yíxīn.",
+                        "text_en": "I'll handle it. I'll say I have two movie tickets about to expire and ask if she's free Saturday afternoon. She'd never refuse free movies. Once there, I'll bring her to the room. Everyone arrive half an hour early and hide. Set phones to silent — if she hears the group chat notification, she'll get suspicious.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A believable cover story, logistics, and even the phone-silence detail — this plan has the operational security of a surprise birthday heist."
+                    },
+                    {
+                        "text_zh": "直接约她出来吧，到时候给她惊喜。",
+                        "text_pinyin": "zhíjiē yuē tā chūlái ba, dàoshíhòu gěi tā jīngxǐ.",
+                        "text_en": "Just invite her out — surprise her when she gets there.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple but risky. Xiao Fei might ask why, and she's hard to fool."
+                    },
+                    {
+                        "text_zh": "谁关系好谁去叫她呗。",
+                        "text_pinyin": "shuí guānxi hǎo shuí qù jiào tā bei.",
+                        "text_en": "Whoever's closest to her should bring her.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Deflecting responsibility in a group chat — Ah Qiang marks this as「待定」(to be determined)."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "完美！电影票的借口很自然。那蛋糕谁订？我建议订一个不太甜的——小飞不爱吃太甜的。还有礼物的事，大家凑钱买一个还是各自准备？",
+                "text_pinyin": "wánměi! diànyǐng piào de jièkǒu hěn zìrán. nà dàngāo shuí dìng? wǒ jiànyì dìng yí gè bú tài tián de——Xiǎo Fēi bú ài chī tài tián de. hái yǒu lǐwù de shì, dàjiā còu qián mǎi yí gè háishi gèzì zhǔnbèi?",
+                "text_en": "Perfect! The movie ticket excuse is natural. Who orders the cake? I suggest not too sweet — Xiao Fei doesn't like overly sweet things. And for the gift — do we pool money for one or each bring our own?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Handle the cake and gift decisions.",
+                "options": [
+                    {
+                        "text_zh": "蛋糕我来订，我知道一家做提拉米苏蛋糕的，不太甜，小飞上次吃过很喜欢。礼物的话我觉得凑钱买一个大的更有意义。她之前一直想要一个降噪耳机，大家每人出一百五，应该能买一个不错的。怎么样？",
+                        "text_pinyin": "dàngāo wǒ lái dìng, wǒ zhīdào yì jiā zuò tílamǐsū dàngāo de, bú tài tián, Xiǎo Fēi shàng cì chī guò hěn xǐhuān. lǐwù de huà wǒ juéde còu qián mǎi yí gè dà de gèng yǒu yìyì. tā zhīqián yìzhí xiǎng yào yí gè jiàngzào ěrjī, dàjiā měi rén chū yìbǎi wǔ, yīnggāi néng mǎi yí gè búcuò de. zěnmeyàng?",
+                        "text_en": "I'll order the cake — I know a tiramisu cake shop that's not too sweet. Xiao Fei loved it last time. For the gift, I think pooling for one big present is more meaningful. She's been wanting noise-cancelling headphones — 150 each from everyone should get a good pair. Sound good?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Remembering her cake preference and a specific wish-list item — this is the kind of friend who makes surprise parties succeed. Ah Qiang starts collecting the money."
+                    },
+                    {
+                        "text_zh": "蛋糕阿强你订吧，你不是最会选吗？礼物各自准备。",
+                        "text_pinyin": "dàngāo Ā Qiáng nǐ dìng ba, nǐ búshì zuì huì xuǎn ma? lǐwù gèzì zhǔnbèi.",
+                        "text_en": "Ah Qiang, you order the cake — you're the best at choosing. Gifts individually.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Delegating cake and keeping gifts individual — both work. Ah Qiang accepts the cake mission."
+                    },
+                    {
+                        "text_zh": "蛋糕随便买一个就行了。礼物我还没想好。",
+                        "text_pinyin": "dàngāo suíbiàn mǎi yí gè jiù xíng le. lǐwù wǒ hái méi xiǎng hǎo.",
+                        "text_en": "Any cake is fine. I haven't thought about a gift yet.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「随便」for a surprise party cake is how you end up with a generic cake that says HAPPY BIRTHDAY in Comic Sans frosting."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "降噪耳机这个主意太棒了！钱我来收，大家转给我。OK，总结一下：周六下午两点大家到私人影院集合，你负责三点带小飞过来。蛋糕你订提拉米苏的。我负责布置包间和收礼物的钱。还有什么遗漏的吗？",
+                "text_pinyin": "jiàngzào ěrjī zhège zhǔyi tài bàng le! qián wǒ lái shōu, dàjiā zhuǎn gěi wǒ. OK, zǒngjié yíxià: zhōu liù xiàwǔ liǎng diǎn dàjiā dào sīrén yǐngyuàn jíhé, nǐ fùzé sān diǎn dài Xiǎo Fēi guòlái. dàngāo nǐ dìng tílamǐsū de. wǒ fùzé bùzhì bāojiān hé shōu lǐwù de qián. hái yǒu shénme yílòu de ma?",
+                "text_en": "Noise-cancelling headphones is a great idea! I'll collect the money — everyone transfer to me. OK, summary: Saturday at 2 PM everyone meets at the private cinema. You bring Xiao Fei at 3. You order the tiramisu cake. I handle room decoration and gift money. Anything we're missing?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check for anything missing.",
+                "options": [
+                    {
+                        "text_zh": "还有一个重要的事：谁来拍照和录视频？小飞进来看到大家的表情肯定很精彩，一定要录下来。还有，到时候大家喊「生日快乐」要整齐一点，上次给老王过生日的时候参差不齐的，像念经一样。",
+                        "text_pinyin": "hái yǒu yí gè zhòngyào de shì: shuí lái pāi zhào hé lù shìpín? Xiǎo Fēi jìnlái kàn dào dàjiā de biǎoqíng kěndìng hěn jīngcǎi, yídìng yào lù xiàlái. hái yǒu, dàoshíhòu dàjiā hǎn「shēngrì kuàilè」yào zhěngqí yìdiǎn, shàng cì gěi Lǎo Wáng guò shēngrì de shíhòu cēncī bù qí de, xiàng niànjīng yíyàng.",
+                        "text_en": "One more important thing: who's recording photos and video? Xiao Fei's expression when she walks in will be priceless — we have to capture it. Also, when everyone yells 'happy birthday,' let's be in sync this time. Last time for Lao Wang's birthday it was a mess — sounded like monks chanting.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Documentation and rehearsal — the two things that separate a good surprise from a great one. The monks-chanting comparison earns three laughing emojis in the chat."
+                    },
+                    {
+                        "text_zh": "应该差不多了。到时候见。",
+                        "text_pinyin": "yīnggāi chàbuduō le. dàoshíhòu jiàn.",
+                        "text_en": "Should be about it. See you there.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Plan is solid. Ah Qiang pins the summary message."
+                    },
+                    {
+                        "text_zh": "别忘了发错群啊！",
+                        "text_pinyin": "bié wàng le fā cuò qún a!",
+                        "text_en": "Don't forget — don't send to the wrong chat!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A critical reminder that has come approximately two messages too late — someone already almost sent a message to the main group."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Surprise birthday parties (惊喜生日会) are popular among young urban Chinese. Secret group chats with fake names (like 装修讨论) are a common coordination strategy. 凑钱 (còu qián, pooling money) for a shared gift is standard among friend groups. 私人影院 (sīrén yǐngyuàn, private cinema) rooms are a popular party venue in Chinese cities, offering both movie-watching and private gathering space."
+    }
+}

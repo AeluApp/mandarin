@@ -1,0 +1,124 @@
+{
+    "title": "The Takeout Negotiator",
+    "title_zh": "外卖谈判家",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_restaurant_6_00_v0",
+    "tree": {
+        "setup": "Your apartment, 7:30 PM. You ordered dinner through a delivery app forty-five minutes ago and received... something. The kung pao chicken is actually sweet and sour pork. The rice is cold. The soup is someone else's entirely — it has a name written on it that is not yours. You call the restaurant, and the owner, Boss Ma, answers with the weariness of a man who has fielded three wrong-order calls today and personally blames the delivery platform's interface, which he describes as 'designed by someone who has never eaten food.'",
+        "setup_zh": "你的公寓，晚上七点半。你四十五分钟前在外卖APP上点了晚餐，收到了……某种东西。宫保鸡丁其实是糖醋排骨。米饭是冷的。汤完全是别人的——上面写着一个不是你的名字。你打电话给餐厅，老板马老板接了电话，带着一个今天已经接了三通错单电话的人的疲惫，他本人将此归咎于外卖平台的界面——他形容那个界面是「从来没吃过饭的人设计的」。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，马记川菜。又是外卖的问题吧？说吧，什么情况。",
+                "text_pinyin": "nǐ hǎo, Mǎ Jì Chuāncài. yòu shì wàimài de wèntí ba? shuō ba, shénme qíngkuàng.",
+                "text_en": "Hello, Ma's Sichuan Restaurant. Another delivery issue? Go ahead, what happened."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the order problem clearly and calmly.",
+                "options": [
+                    {
+                        "text_zh": "马老板好，我半小时前点了外卖，订单号是3847。我点的是宫保鸡丁套餐，但是收到的是糖醋排骨。米饭送到的时候已经凉了。最离谱的是汤——汤上面写的名字不是我的，应该是送错了。我理解今天可能很忙，但这个确实需要处理一下。",
+                        "text_pinyin": "Mǎ lǎobǎn hǎo, wǒ bàn xiǎoshí qián diǎn le wàimài, dìngdān hào shì sān bā sì qī. wǒ diǎn de shì gōngbǎo jīdīng tàocān, dànshì shōu dào de shì tángcù páigǔ. mǐfàn sòng dào de shíhòu yǐjīng liáng le. zuì lípǔ de shì tāng——tāng shàngmian xiě de míngzi búshì wǒ de, yīnggāi shì sòng cuò le. wǒ lǐjiě jīntiān kěnéng hěn máng, dàn zhège quèshí xūyào chǔlǐ yíxià.",
+                        "text_en": "Hello Boss Ma. I ordered delivery half an hour ago, order number 3847. I ordered the kung pao chicken set but received sweet and sour pork. The rice was cold when it arrived. And the most absurd part — the soup has someone else's name on it, so it was clearly delivered to the wrong person. I understand it's probably been busy, but this does need to be resolved.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Order number, specific discrepancies, and measured tone — Boss Ma puts down his spatula. A calm complaint is a solvable complaint."
+                    },
+                    {
+                        "text_zh": "你们送错餐了。我点的是宫保鸡丁，收到的是糖醋排骨。",
+                        "text_pinyin": "nǐmen sòng cuò cān le. wǒ diǎn de shì gōngbǎo jīdīng, shōu dào de shì tángcù páigǔ.",
+                        "text_en": "You sent the wrong food. I ordered kung pao chicken but got sweet and sour pork.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear and direct. He'll check the order."
+                    },
+                    {
+                        "text_zh": "你们外卖怎么搞的？什么都是错的！",
+                        "text_pinyin": "nǐmen wàimài zěnme gǎo de? shénme dōu shì cuò de!",
+                        "text_en": "What's going on with your delivery? Everything is wrong!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Boss Ma has heard worse today. He takes a breath and shifts into problem-solving mode."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "3847号……我查一下。（翻纸）嗯，这边确实出了问题，可能是打包的时候和隔壁桌的订单搞混了。我跟你说实话，今天外卖平台搞活动，订单量是平时的三倍，厨房忙得不可开交。但这是我们的责任，不是你的问题。你说吧，你想怎么处理？",
+                "text_pinyin": "sān bā sì qī hào……wǒ chá yíxià. (fān zhǐ) ǹg, zhè biān quèshí chū le wèntí, kěnéng shì dǎbāo de shíhòu hé gébì zhuō de dìngdān gǎo hùn le. wǒ gēn nǐ shuō shíhuà, jīntiān wàimài píngtái gǎo huódòng, dìngdān liàng shì píngshí de sān bèi, chúfáng máng de bùkě kāijiāo. dàn zhè shì wǒmen de zérèn, búshì nǐ de wèntí. nǐ shuō ba, nǐ xiǎng zěnme chǔlǐ?",
+                "text_en": "Number 3847... let me check. (Flipping papers) Yeah, there was definitely a mix-up — probably got swapped with the next table's order during packing. I'll be honest: the delivery platform is running a promotion today, orders are triple the normal volume, kitchen's been chaotic. But that's our responsibility, not your problem. Tell me, how would you like this resolved?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Propose a fair resolution.",
+                "options": [
+                    {
+                        "text_zh": "我理解平台活动带来的压力。我有两个想法：第一，如果你们能重新做一份正确的宫保鸡丁套餐送过来，我可以把糖醋排骨留着不用退——算是多点了一个菜。第二，如果重新送太麻烦的话，给我这次订单退一半的钱也可以。你看哪个方案方便？",
+                        "text_pinyin": "wǒ lǐjiě píngtái huódòng dài lái de yālì. wǒ yǒu liǎng gè xiǎngfǎ: dì yī, rúguǒ nǐmen néng chóngxīn zuò yí fèn zhèngquè de gōngbǎo jīdīng tàocān sòng guòlái, wǒ kěyǐ bǎ tángcù páigǔ liú zhe búyòng tuì——suàn shì duō diǎn le yí gè cài. dì èr, rúguǒ chóngxīn sòng tài máfan de huà, gěi wǒ zhè cì dìngdān tuì yíbàn de qián yě kěyǐ. nǐ kàn nǎge fāng'àn fāngbiàn?",
+                        "text_en": "I understand the pressure from the promotion. Two ideas: first, if you can remake and redeliver the correct kung pao chicken set, I'll keep the sweet and sour pork — consider it an extra dish. Second, if redelivery is too much trouble, refunding half the order works too. Whichever is easier for you.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Two options, both reasonable, with flexibility — Boss Ma exhales with relief. A customer who negotiates fairly is rarer than a mistake-free delivery day."
+                    },
+                    {
+                        "text_zh": "能不能重新送一份正确的过来？",
+                        "text_pinyin": "néng bu néng chóngxīn sòng yí fèn zhèngquè de guòlái?",
+                        "text_en": "Can you resend the correct order?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Straightforward request. He'll check if the kitchen can handle another delivery."
+                    },
+                    {
+                        "text_zh": "全额退款吧。",
+                        "text_pinyin": "quán'é tuì kuǎn ba.",
+                        "text_en": "Full refund please.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Boss Ma pauses. Full refund for received food is a harder conversation, but he's had this one before."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你这个人真讲道理。那就第一个方案吧——我现在让厨房做一份新的宫保鸡丁，热米饭加上汤，大概三十分钟送到。糖醋排骨你留着吃，不用付钱。另外我再送你一份我们的招牌麻婆豆腐，算是赔个不是。下次点餐的话，你直接打这个电话给我点，我不走平台，给你打八折。",
+                "text_pinyin": "nǐ zhège rén zhēn jiǎng dàolǐ. nà jiù dì yī gè fāng'àn ba——wǒ xiànzài ràng chúfáng zuò yí fèn xīn de gōngbǎo jīdīng, rè mǐfàn jiā shàng tāng, dàgài sānshí fēnzhōng sòng dào. tángcù páigǔ nǐ liú zhe chī, búyòng fù qián. lìngwài wǒ zài sòng nǐ yí fèn wǒmen de zhāopái mápó dòufu, suàn shì péi gè búshì. xià cì diǎn cān de huà, nǐ zhíjiē dǎ zhège diànhuà gěi wǒ diǎn, wǒ bù zǒu píngtái, gěi nǐ dǎ bā zhé.",
+                "text_en": "You're really reasonable. Let's go with option one — I'll have the kitchen make a fresh kung pao chicken, hot rice, and soup, delivered in about 30 minutes. Keep the sweet and sour pork, no charge. Plus I'll throw in our signature mapo tofu as an apology. Next time you order, call me directly — I won't go through the platform, and I'll give you 20% off."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept gratefully and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "马老板太客气了，还送麻婆豆腐！你的态度让我以后肯定会继续点你们家的。直接打电话点还省平台抽成，对你也划算。今天忙成这样还能这么认真地处理问题，说明你是真心做生意的人。三十分钟后见！",
+                        "text_pinyin": "Mǎ lǎobǎn tài kèqi le, hái sòng mápó dòufu! nǐ de tàidù ràng wǒ yǐhòu kěndìng huì jìxù diǎn nǐmen jiā de. zhíjiē dǎ diànhuà diǎn hái shěng píngtái chōu chéng, duì nǐ yě huásuàn. jīntiān máng chéng zhèyàng hái néng zhème rènzhēn de chǔlǐ wèntí, shuōmíng nǐ shì zhēnxīn zuò shēngyì de rén. sānshí fēnzhōng hòu jiàn!",
+                        "text_en": "Boss Ma, you're too kind — and throwing in the mapo tofu! Your attitude guarantees I'll keep ordering from your place. Calling directly saves the platform commission too, so it works for you as well. Handling problems this carefully on such a busy day shows you're genuinely dedicated to your business. See you in thirty minutes!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Acknowledging his generosity, noting the mutual benefit, and affirming his business ethics — Boss Ma hangs up with the rare satisfaction of turning a complaint into a loyal customer."
+                    },
+                    {
+                        "text_zh": "太好了！谢谢马老板。以后我直接打电话点。",
+                        "text_pinyin": "tài hǎo le! xièxie Mǎ lǎobǎn. yǐhòu wǒ zhíjiē dǎ diànhuà diǎn.",
+                        "text_en": "Great! Thanks Boss Ma. I'll call directly next time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A new regular customer is born. The kitchen rallies."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He returns to the kitchen. The next thirty minutes will produce the most carefully packed order of the evening."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese food delivery platforms (外卖平台, like Meituan and Ele.me) charge restaurants 15-25% commission, so direct ordering (直接点餐) benefits both restaurant and customer. Platform promotions (活动) dramatically increase order volume and error rates. 打折 (dǎ zhé) discounts and complimentary dishes (送菜) are common ways restaurants handle complaints and build loyalty."
+    }
+}

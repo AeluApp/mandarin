@@ -1,0 +1,151 @@
+{
+    "title": "The Thread That Connects",
+    "title_zh": "连接的线",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You sit in a small tailor's shop in Quanzhou with Mrs. Lin, seventy-three years old, who has been mending clothes for fifty years. She is repairing a child's coat with a needle and thread. The thread is red. Outside, a light rain falls on the old maritime quarter.",
+        "setup_zh": "你坐在泉州一家小裁缝铺里，和七十三岁的林婶在一起。她缝补衣服已经五十年了。她正在用针线修补一件小孩的外套。线是红色的。外面，细雨落在老海港区上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这件衣服的主人是一个五岁的小男孩。他妈妈说他每天都要穿这件外套——别的不肯穿。穿了两年，袖口磨破了，肘部有个洞。他妈妈想给他买一件新的，但他哭了。他说「我要这件」。所以他妈妈带来给我补。你看——我用红线补。为什么用红线？因为对一个五岁的孩子来说，补丁不应该是一个需要藏起来的东西——补丁应该是好看的。如果补丁比原来的布还好看，那这个洞就不是一个坏消息了——它是一个让衣服变得更特别的机会。我这辈子补过上万件衣服。最重要的一课就是：每一个洞都是一次让某样东西变得比原来更好的机会。",
+                "text_pinyin": "Zhè jiàn yīfu de zhǔrén shì yī ge wǔ suì de xiǎo nánhái. Tā māma shuō tā měi tiān dōu yào chuān zhè jiàn wàitào — bié de bù kěn chuān. Chuān le liǎng nián, xiùkǒu mó pò le, zhǒu bù yǒu ge dòng. Tā māma xiǎng gěi tā mǎi yī jiàn xīn de, dàn tā kū le. Tā shuō 'wǒ yào zhè jiàn'. Suǒyǐ tā māma dài lái gěi wǒ bǔ. Nǐ kàn — wǒ yòng hóng xiàn bǔ. Wèishéme yòng hóng xiàn? Yīnwèi duì yī ge wǔ suì de háizi lái shuō, bǔdīng bù yīnggāi shì yī ge xūyào cáng qǐlái de dōngxi — bǔdīng yīnggāi shì hǎokàn de. Rúguǒ bǔdīng bǐ yuánlái de bù hái hǎokàn, nà zhège dòng jiù bú shì yī ge huài xiāoxi le — tā shì yī ge ràng yīfu biàn de gèng tèbié de jīhuì. Wǒ zhè bèizi bǔ guò shàng wàn jiàn yīfu. Zuì zhòngyào de yī kè jiù shì: měi yī ge dòng dōu shì yī cì ràng mǒu yàng dōngxi biàn de bǐ yuánlái gèng hǎo de jīhuì.",
+                "text_en": "The owner of this coat is a five-year-old boy. His mother says he insists on wearing this coat every day — refuses any other. After two years the cuffs are frayed, there's a hole at the elbow. His mother wanted to buy a new one, but he cried. He said, 'I want this one.' So she brought it to me. Look — I'm using red thread. Why red?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to every hole as a chance to make something better.",
+                "options": [
+                    {
+                        "text_zh": "每一个洞都是一次机会——红色的补丁不是修复损坏，是利用损坏创造新的美。那个男孩的衣服补好了不是变旧——是变得更独特。它有了故事：这里曾经有一个洞，现在有一朵红色的花。修补和替换的根本区别——替换说「换新的」；修补说「让伤痕变成新的美」。",
+                        "text_pinyin": "Měi yī ge dòng dōu shì yī cì jīhuì — nín bǎ dòng kàn zuò yī zhǒng kōngjiān, yī ge hái méiyǒu bèi tiánchōng de kěnéngxìng. Hóngsè de bǔdīng bú shì zài xiūfù sǔnhuài — shì zài lìyòng sǔnhuài chuàngzào xīn de měi. Nàge nánhái de yīfu bǔ hǎo le bú shì biàn jiù le — shì biàn de gèng dútè le. Tā yǒu le yī ge gùshì: zhèlǐ céngjīng yǒu yī ge dòng, xiànzài zhèlǐ yǒu yī duǒ hóngsè de huā. Yěxǔ zhè jiù shì xiūbǔ hé tìhuàn de gēnběn qūbié — tìhuàn shuō 'huàn yī ge xīn de'; xiūbǔ shuō 'ràng wǒmen bǎ shānghén biàn chéng yī zhǒng xīn de měi'.",
+                        "text_en": "Every hole is a chance — you see a hole as space, an unfilled possibility. The red patch isn't repairing damage — it's using damage to create new beauty. That boy's coat, once mended, didn't get older — it got more unique. It gained a story: here there was once a hole, now here there's a red flower. Maybe that's the fundamental difference between mending and replacing — replacing says 'get a new one'; mending says 'let's turn this scar into a new kind of beauty.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Holes as unfilled possibility — mending turns scars into stories."
+                    },
+                    {
+                        "text_zh": "现在还有人找您补衣服吗？",
+                        "text_pinyin": "Xiànzài hái yǒu rén zhǎo nín bǔ yīfu ma?",
+                        "text_en": "Do people still come to you for mending?",
+                        "score": 0.0,
+                        "feedback": "Asks about business during a meditation on the philosophy of repair."
+                    },
+                    {
+                        "text_zh": "这种缝法叫什么？",
+                        "text_pinyin": "Zhè zhǒng féng fǎ jiào shénme?",
+                        "text_en": "What's this sewing technique called?",
+                        "score": 0.0,
+                        "feedback": "A technical question during a philosophical exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "修补和替换的区别——你说得很到位。但我要告诉你一件事：修补衣服的时候，最重要的不是技术——是理解这件衣服和它的主人之间的关系。那个男孩为什么不肯穿别的外套？因为这件外套不只是一件衣服——它是他的安全感。也许他爸爸给他穿上的第一天是某个重要的日子，也许这件外套陪他度过了第一天上幼儿园的恐惧。我不知道具体的原因——但我知道这件衣服对他来说不可替代。所以我补的时候，我不只是在缝布——我是在修复他和这件衣服之间的关系。如果我补得好，他穿上以后会觉得：它还在。我的东西还在。世界还是安全的。",
+                "text_pinyin": "Xiūbǔ hé tìhuàn de qūbié — nǐ shuō de hěn dào wèi. Dàn wǒ yào gàosu nǐ yī jiàn shì: xiūbǔ yīfu de shíhou, zuì zhòngyào de bú shì jìshù — shì lǐjiě zhè jiàn yīfu hé tā de zhǔrén zhī jiān de guānxi. Nàge nánhái wèishéme bù kěn chuān bié de wàitào? Yīnwèi zhè jiàn wàitào bù zhǐ shì yī jiàn yīfu — tā shì tā de ānquán gǎn. Yěxǔ tā bàba gěi tā chuān shàng de dì yī tiān shì mǒu ge zhòngyào de rìzi, yěxǔ zhè jiàn wàitào péi tā dùguò le dì yī tiān shàng yòu'éryuán de kǒngjù. Wǒ bù zhīdào jùtǐ de yuányīn — dàn wǒ zhīdào zhè jiàn yīfu duì tā lái shuō bù kě tìdài. Suǒyǐ wǒ bǔ de shíhou, wǒ bù zhǐ shì zài féng bù — wǒ shì zài xiūfù tā hé zhè jiàn yīfu zhī jiān de guānxi. Rúguǒ wǒ bǔ de hǎo, tā chuān shàng yǐhòu huì juéde: tā hái zài. Wǒ de dōngxi hái zài. Shìjiè hái shì ānquán de.",
+                "text_en": "The difference between mending and replacing — well said. But let me tell you: when mending clothes, n't technique — it's understanding the relationship between this garment and its owner. Why won't the boy wear another coat? Because this coat isn't clothing — it's his security."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to mending as repairing the relationship between person and object.",
+                "options": [
+                    {
+                        "text_zh": "修复他和衣服之间的关系——「它还在，世界还是安全的」。大多数成年人忘了：物品不只是物品。对五岁的孩子来说，这件外套就是世界的一部分。在一个所有东西都可以被即时替换的时代，您是少数还在说「让我们修一修」的人。这是一种价值观：相信关系值得被修复。",
+                        "text_pinyin": "Xiūfù tā hé yīfu zhī jiān de guānxi — 'tā hái zài, shìjiè hái shì ānquán de'. Dàduōshù chéngnián rén wàng le: wùpǐn bù zhǐ shì wùpǐn. Duì wǔ suì de háizi lái shuō, zhè jiàn wàitào jiù shì shìjiè de yī bùfen. Yěxǔ háizi shì duì de — wǒmen hé wùpǐn zhī jiān de guānxi běnlái jiù yīnggāi shì shēn de, bù kě tìdài de. Zài yī ge suǒyǒu dōngxi dōu kěyǐ bèi jíshí tìhuàn de shídài, nín shì shǎoshù hái zài shuō 'ràng wǒmen xiū yī xiū' de rén. Zhè bù zhǐ shì jìnéng — shì yī zhǒng jiàzhíguān: xiāngxìn guānxi zhíde bèi xiūfù.",
+                        "text_en": "Repairing the relationship — 'it's still here, the world is still safe.' Most adults have forgotten: objects aren't just objects. For a five-year-old, this coat is part of the world itself. Maybe children are right — our relationship with objects should be deep and irreplaceable. In an age where everything can be instantly replaced, you're among the few still saying 'let's mend it.' That's not just a skill — it's a value system: believing relationships are worth repairing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Children's wisdom about object attachment — mending as a value system in a disposable age."
+                    },
+                    {
+                        "text_zh": "现在的衣服质量是不是比以前差了？",
+                        "text_pinyin": "Xiànzài de yīfu zhìliàng shì bú shì bǐ yǐqián chà le?",
+                        "text_en": "Is clothing quality worse now than before?",
+                        "score": 0.0,
+                        "feedback": "Asks about manufacturing quality during a meditation on human-object bonds."
+                    },
+                    {
+                        "text_zh": "快时尚对您的生意影响大吗？",
+                        "text_pinyin": "Kuài shíshàng duì nín de shēngyì yǐngxiǎng dà ma?",
+                        "text_en": "Has fast fashion affected your business?",
+                        "score": 0.0,
+                        "feedback": "A business question during a philosophical exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "相信关系值得被修复——你说出了我五十年工作的核心。但让我再告诉你一件事——这是关于线的。你看这根红线——它从一个线团上来。这个线团可以缝很多件衣服。同一根线团上的线，连接了不同的人的不同的衣服。上个月我用同一个线团的线补了一件老奶奶的棉袄、一条小女孩的裙子、一个工人的手套。这三个人互相不认识——但他们身上有一根来自同一个线团的线。如果你把所有这些线都连起来看——我五十年用过的线——它们组成了一张巨大的看不见的网。这座城市里有上万件衣服上有我缝过的线。那些线在穿过街道、穿过人群，互相靠近又远离——但它们都从我的手里经过。我有时候觉得这座城市是被我的线缝在一起的。",
+                "text_pinyin": "Xiāngxìn guānxi zhíde bèi xiūfù — nǐ shuō chū le wǒ wǔshí nián gōngzuò de héxīn. Dàn ràng wǒ zài gàosu nǐ yī jiàn shì — zhè shì guānyú xiàn de. Nǐ kàn zhè gēn hóng xiàn — tā cóng yī ge xiàntuán shàng lái. Zhège xiàntuán kěyǐ féng hěn duō jiàn yīfu. Tóng yī gēn xiàntuán shàng de xiàn, liánjiē le bùtóng de rén de bùtóng de yīfu. Shàng ge yuè wǒ yòng tóng yī ge xiàntuán de xiàn bǔ le yī jiàn lǎo nǎinai de miánǎo, yī tiáo xiǎo nǚhái de qúnzi, yī ge gōngrén de shǒutào. Zhè sān ge rén hùxiāng bù rènshi — dàn tāmen shēn shàng yǒu yī gēn lái zì tóng yī ge xiàntuán de xiàn. Rúguǒ nǐ bǎ suǒyǒu zhèxiē xiàn dōu lián qǐlái kàn — wǒ wǔshí nián yòng guò de xiàn — tāmen zǔchéng le yī zhāng jùdà de kàn bú jiàn de wǎng. Zhè zuò chéngshì lǐ yǒu shàng wàn jiàn yīfu shàng yǒu wǒ féng guò de xiàn. Nàxiē xiàn zài chuān guò jiēdào, chuān guò rénqún, hùxiāng kàojìn yòu yuǎnlí — dàn tāmen dōu cóng wǒ de shǒu lǐ jīngguò. Wǒ yǒu shíhou juéde zhè zuò chéngshì shì bèi wǒ de xiàn féng zài yīqǐ de.",
+                "text_en": "Believing relationships are worth repairing — you've spoken the core of my fifty years. But let me tell you one more thing — about thread. Look at this red thread — it comes from a spool. This spool can mend many garments. Thread from the same spool connects different people's different clothes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the invisible web of thread connecting the city.",
+                "options": [
+                    {
+                        "text_zh": "一座城市被您的线缝在一起——那个老奶奶和小女孩身上有同一个线团的线，被看不见的线连着，虽然永远不会知道。五十年来成千上万的衣服从您手里经过，每件都带走了一段线和您手的温度。也许「社区」最原始的含义不是住在同一个地方，而是被同一双手照顾过。",
+                        "text_pinyin": "Yī zuò chéngshì bèi nín de xiàn féng zài yīqǐ — nàge lǎo nǎinai hé nàge xiǎo nǚhái zǒu zài tóng yī tiáo jiē shàng shí, tāmen shēn shàng yǒu lái zì tóng yī ge xiàntuán de xiàn, bèi yī gēn kàn bú jiàn de xiàn liánjiē zhe, suīrán yǒngyuǎn bú huì zhīdào. Nín de shǒu shì zhè zhāng wǎng de zhōngxīn. Wǔshí nián lái, chéng qiān shàng wàn de yīfu cóng nín shǒu lǐ jīngguò, měi yī jiàn dōu dài zǒu le yī duàn xiàn hé nín shǒu de wēndù. Yěxǔ zhè jiù shì 'shèqū' zuì yuánshǐ de hányì — bú shì zhù zài tóng yī ge dìfang, ér shì bèi tóng yī shuāng shǒu zhàogù guò.",
+                        "text_en": "A city stitched together by your thread — when that grandmother and that little girl walk on the same street, they carry thread from the same spool, connected by an invisible line they'll never know about. Your hands are the center of this web. Over fifty years, thousands of garments passed through your hands, each carrying away a length of thread and your warmth. Maybe that's the most original meaning of 'community' — not living in the same place, but being cared for by the same hands.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Community as being cared for by the same hands — the tailor as weaver of invisible bonds."
+                    },
+                    {
+                        "text_zh": "您一天能补几件衣服？",
+                        "text_pinyin": "Nín yī tiān néng bǔ jǐ jiàn yīfu?",
+                        "text_en": "How many garments can you mend in a day?",
+                        "score": 0.0,
+                        "feedback": "A productivity question during a meditation on invisible connection."
+                    },
+                    {
+                        "text_zh": "您有社交媒体账号吗？",
+                        "text_pinyin": "Nín yǒu shèjiāo méitǐ zhànghào ma?",
+                        "text_en": "Do you have social media accounts?",
+                        "score": 0.0,
+                        "feedback": "Asks about digital presence during a meditation on physical connection."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "被同一双手照顾过——这就是社区。你说到了我心坎里。最后我想给你看一样东西。这是我自己的一件衣服——你看，上面有很多补丁。不同颜色的补丁。每一个补丁都是在不同的年份补的。最早的这个——蓝色的——是我妈妈补的，那时候我还是小女孩。这个绿色的是我丈夫补的——他针脚很粗，但很结实。这个白色的是我女儿学缝纫的时候补的——歪歪扭扭的，但是是她的第一次。这件衣服上有三代人的针脚。我穿着它的时候，我感觉三代人都在抱着我。每一个补丁都是一双手说的「我在乎你」。这件衣服值多少钱？一分钱不值。但你能说它没有价值吗？",
+                "text_pinyin": "Bèi tóng yī shuāng shǒu zhàogù guò — zhè jiù shì shèqū. Nǐ shuō dào le wǒ xīnkǎn lǐ. Zuìhòu wǒ xiǎng gěi nǐ kàn yī yàng dōngxi. Zhè shì wǒ zìjǐ de yī jiàn yīfu — nǐ kàn, shàngmiàn yǒu hěn duō bǔdīng. Bùtóng yánsè de bǔdīng. Měi yī ge bǔdīng dōu shì zài bùtóng de niánfèn bǔ de. Zuì zǎo de zhège — lán sè de — shì wǒ māma bǔ de, nà shíhou wǒ hái shì xiǎo nǚhái. Zhège lǜsè de shì wǒ zhàngfu bǔ de — tā zhēnjiǎo hěn cū, dàn hěn jiēshi. Zhège báisè de shì wǒ nǚ'ér xué féngrèn de shíhou bǔ de — wāiwāiniǔniǔ de, dànshì shì tā de dì yī cì. Zhè jiàn yīfu shàng yǒu sān dài rén de zhēnjiǎo. Wǒ chuān zhe tā de shíhou, wǒ gǎnjué sān dài rén dōu zài bào zhe wǒ. Měi yī ge bǔdīng dōu shì yī shuāng shǒu shuō de 'wǒ zàihu nǐ'. Zhè jiàn yīfu zhí duōshǎo qián? Yī fēn qián bù zhí. Dàn nǐ néng shuō tā méiyǒu jiàzhí ma?",
+                "text_en": "Cared for by the same hands — that's community. You've spoken to my heart. One last thing to show you. This is my own garment — look, it has many patches. Different colors. Each patched in a different year. The earliest — blue — was my mother's, when I was still a little girl. This green one was my husband's — his stitches were rough but strong."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the garment with three generations of patches — worthless but invaluable.",
+                "options": [
+                    {
+                        "text_zh": "一分钱不值，但无价——蓝色是母亲的保护，绿色是丈夫笨拙的温柔，白色是女儿的第一次尝试。这件衣服不是衣服——是用针脚写的家书。每个补丁是一双手穿越时间留下的拥抱。他们的手不在了，但力度和温度都在针脚里。衣服最原始的功能不是遮体——是被爱包裹。谢谢您，林婶。",
+                        "text_pinyin": "Yī fēn qián bù zhí, dàn wújià — lán sè de shì mǔqīn de bǎohù, lǜsè de shì zhàngfu bènzhuō de wēnróu, báisè de shì nǚ'ér de dì yī cì chángshì. Zhè jiàn yīfu bú shì yīfu — shì yī fēng yòng zhēnjiǎo xiě chéng de jiā shū. Měi yī ge bǔdīng dōu shì yī shuāng shǒu chuānyuè shíjiān liú xià de yōngbào. Tāmen de shǒu bú zài le, dàn shǒu de lìdù, jiǎodù, wēndù dōu bǎocún zài zhēnjiǎo lǐ. Yěxǔ zhè cái shì yīfu zuì yuánshǐ de gōngnéng — bú shì zhē tǐ — shì bèi ài bāoguǒ. Xièxie nín, Lín shěn.",
+                        "text_en": "Worthless but priceless — blue is a mother's protection, green is a husband's clumsy tenderness, white is a daughter's first attempt. This garment isn't clothing — it's a family letter written in stitches. Each patch is a hug left by hands reaching across time. Their hands are gone, but the pressure, angle, warmth are preserved in every stitch. Maybe clothing's most original purpose isn't covering the body — it's being wrapped in love. Thank you, Auntie Lin.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Clothing as love made wearable — three generations' touch preserved in stitches."
+                    },
+                    {
+                        "text_zh": "您会把这件衣服传给您女儿吗？",
+                        "text_pinyin": "Nín huì bǎ zhè jiàn yīfu chuán gěi nín nǚ'ér ma?",
+                        "text_en": "Will you pass this garment to your daughter?",
+                        "score": 0.0,
+                        "feedback": "Asks about inheritance during the emotional climax."
+                    },
+                    {
+                        "text_zh": "您能教我缝纫吗？",
+                        "text_pinyin": "Nín néng jiāo wǒ féngrèn ma?",
+                        "text_en": "Can you teach me to sew?",
+                        "score": 0.0,
+                        "feedback": "A skill-learning request at the philosophical conclusion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Quanzhou (泉州) was historically China's greatest maritime port and a starting point of the Maritime Silk Road. The Chinese tradition of mending and reusing clothing (缝缝补补, féngfeng bǔbu) reflects both economic necessity and a philosophical value system that prizes maintenance over replacement. The red thread (红线) carries deep cultural significance in Chinese tradition — the Red Thread of Fate (红线, hóngxiàn) is said to connect those destined to be linked. The tailor's use of red thread transforms repair into connection. The concept of 惜物 (xīwù, cherishing objects) is central to traditional Chinese domestic philosophy — treating objects as partners in life rather than disposable commodities."
+    }
+}

@@ -86,4 +86,4 @@ This isn't because either tool is inadequate. It's because learning a language a
 
 The worst approach is spending weeks agonizing over which tool to use instead of studying. Pick one, start, and adjust as you go.
 
-I built [Mandarin](https://mandarin.app) because I wanted an SRS system designed specifically for Chinese — one that combines vocabulary drilling with graded reading, listening practice at adjustable speeds, tone grading, and real diagnostics that tell you where you're weak. It's $12/month, and HSK 1-2 content is free if you want to try it. But if Anki is working for you, keep using Anki. The best tool is the one that gets you studying every day.
+I built [Aelu](https://aelu.app) because I wanted an SRS system designed specifically for Chinese — one that combines vocabulary drilling with graded reading, listening practice at adjustable speeds, tone grading, and real diagnostics that tell you where you're weak. It's $14.99/month, and HSK 1-2 content is free if you want to try it. But if Anki is working for you, keep using Anki. The best tool is the one that gets you studying every day.

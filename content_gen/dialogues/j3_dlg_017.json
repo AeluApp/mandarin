@@ -1,0 +1,123 @@
+{
+    "title": "Picking Up a Package",
+    "title_zh": "取快递",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You go to the community package pickup station. The attendant, Xiao Wu, is sorting through a mountain of boxes. You see a familiar neighbor, Auntie Zhou, also picking up packages.",
+        "setup_zh": "你去社区快递站取快递。工作人员小吴正在整理一堆箱子。你看到邻居周阿姨也在取快递。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎，你也来取快递啊？我买了一个新茶壶，等了三天终于到了。你买了什么？",
+                "text_pinyin": "Āi, nǐ yě lái qǔ kuàidì a? Wǒ mǎi le yī ge xīn cháhú, děng le sān tiān zhōngyú dào le. Nǐ mǎi le shénme?",
+                "text_en": "Oh, you're picking up a package too? I bought a new teapot — waited three days and it's finally here. What did you buy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell Auntie Zhou about your package.",
+                "options": [
+                    {
+                        "text_zh": "我买了几本书，都是学中文用的。周阿姨，您喜欢喝茶啊？新茶壶是什么样的？",
+                        "text_pinyin": "Wǒ mǎi le jǐ běn shū, dōu shì xué Zhōngwén yòng de. Zhōu āyí, nín xǐhuan hē chá a? Xīn cháhú shì shénme yàng de?",
+                        "text_en": "I bought some books, all for studying Chinese. Auntie Zhou, you like tea? What does the new teapot look like?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shares your purchase and asks about hers — balanced conversation."
+                    },
+                    {
+                        "text_zh": "就是一些东西。",
+                        "text_pinyin": "Jiù shì yīxiē dōngxi.",
+                        "text_en": "Just some stuff.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Vague and doesn't reciprocate her openness."
+                    },
+                    {
+                        "text_zh": "几本书。",
+                        "text_pinyin": "Jǐ běn shū.",
+                        "text_en": "Some books.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief — could say more."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "学中文的书？你真用功！新茶壶是紫砂的，泡功夫茶特别好。以后你来我家，我泡好茶给你喝，我们可以一边喝茶一边练习中文。",
+                "text_pinyin": "Xué Zhōngwén de shū? Nǐ zhēn yònggōng! Xīn cháhú shì zǐshā de, pào gōngfu chá tèbié hǎo. Yǐhòu nǐ lái wǒ jiā, wǒ pào hǎo chá gěi nǐ hē, wǒmen kěyǐ yībiān hē chá yībiān liànxí Zhōngwén.",
+                "text_en": "Chinese study books? How diligent! The new teapot is Yixing purple clay — perfect for gongfu tea. Come to my place sometime, I'll brew good tea for you, and we can practice Chinese over tea."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her offer.",
+                "options": [
+                    {
+                        "text_zh": "那太好了！我一直想学怎么泡功夫茶。谢谢周阿姨，我周末有空就过来。",
+                        "text_pinyin": "Nà tài hǎo le! Wǒ yīzhí xiǎng xué zěnme pào gōngfu chá. Xièxie Zhōu āyí, wǒ zhōumò yǒu kòng jiù guòlái.",
+                        "text_en": "That would be wonderful! I've always wanted to learn how to brew gongfu tea. Thank you, Auntie Zhou — I'll come over this weekend if I'm free.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Eager and grateful — combines learning tea with language practice."
+                    },
+                    {
+                        "text_zh": "好的，有时间再说吧。",
+                        "text_pinyin": "Hǎo de, yǒu shíjiān zài shuō ba.",
+                        "text_en": "Sure, let's talk about it when I have time.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Non-committal — she's being generous."
+                    },
+                    {
+                        "text_zh": "我不太会喝茶。",
+                        "text_pinyin": "Wǒ bú tài huì hē chá.",
+                        "text_en": "I'm not really into tea.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Declines a warm cultural exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！我还有一些好的铁观音，泡出来特别香。那周六下午三点吧？我准备一些小点心。",
+                "text_pinyin": "Tài hǎo le! Wǒ hái yǒu yīxiē hǎo de Tiěguānyīn, pào chūlái tèbié xiāng. Nà zhōuliù xiàwǔ sān diǎn ba? Wǒ zhǔnbèi yīxiē xiǎo diǎnxīn.",
+                "text_en": "Wonderful! I also have some good Tieguanyin — brews with a lovely aroma. How about Saturday afternoon at three? I'll prepare some little snacks."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan.",
+                "options": [
+                    {
+                        "text_zh": "三点没问题！我带一些水果过来。谢谢周阿姨，周六见！",
+                        "text_pinyin": "Sān diǎn méi wèntí! Wǒ dài yīxiē shuǐguǒ guòlái. Xièxie Zhōu āyí, zhōuliù jiàn!",
+                        "text_en": "Three works! I'll bring some fruit. Thank you, Auntie Zhou — see you Saturday!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Offers to bring something — good reciprocity."
+                    },
+                    {
+                        "text_zh": "好的，周六见。",
+                        "text_pinyin": "Hǎo de, zhōuliù jiàn.",
+                        "text_en": "Okay, see you Saturday.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Confirms but doesn't offer to bring anything."
+                    },
+                    {
+                        "text_zh": "不用准备点心，我不吃零食。",
+                        "text_pinyin": "Bú yòng zhǔnbèi diǎnxīn, wǒ bù chī língshí.",
+                        "text_en": "No need for snacks, I don't eat them.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Declines her hospitality — culturally insensitive."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Package pickup stations are social hubs in Chinese neighborhoods — neighbors run into each other and chat. Yixing purple clay (紫砂) teapots are prized for gongfu tea. Offering to share tea is a classic gesture of friendship, and bringing fruit when visiting is good etiquette."
+    },
+    "hsk_level": 3
+}

@@ -1,0 +1,151 @@
+{
+  "title": "The Vanishing Taste",
+  "title_zh": "消失的味道",
+  "hsk_level": 8,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.75,
+  "tree": {
+    "setup": "You're sitting in a nearly empty restaurant in Chengdu with Chef Liao, a third-generation Sichuan cook who recently closed his family's restaurant after forty years. He now consults for chain restaurants but seems hollowed out by the work. He's drinking baijiu alone when you join him. The restaurant they're in serves a standardized version of the dish his family was famous for.",
+    "setup_zh": "你和廖师傅——一位第三代川菜厨师——坐在成都一家几乎空了的餐厅里。他最近关了自家经营了四十年的餐馆。他现在为连锁餐厅做顾问，但这份工作似乎让他心力交瘁。你过来的时候他正独自喝着白酒。他们所在的这家餐厅供应的正是他家招牌菜的标准化版本。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你刚才点的那道回锅肉——你觉得好吃吗？说实话。这是用我提供的「标准化配方」做的。调味料精确到克，烹饪时间精确到秒。全国三百家分店，每一份的味道都一模一样。但我告诉你，这个味道跟我爸做的回锅肉之间的差距，大到你无法想象。",
+        "text_pinyin": "Nǐ gāngcái diǎn de nà dào huíguōròu — nǐ juéde hǎochī ma? Shuō shíhuà. Zhè shì yòng wǒ tígōng de 'biāozhǔnhuà pèifāng' zuò de. Tiáowèiliào jīngquè dào kè, pēngrèn shíjiān jīngquè dào miǎo. Quánguó sānbǎi jiā fēndiàn, měi yī fèn de wèidào dōu yīmú yīyàng. Dàn wǒ gàosù nǐ, zhège wèidào gēn wǒ bà zuò de huíguōròu zhī jiān de chājù, dà dào nǐ wúfǎ xiǎngxiàng.",
+        "text_en": "That twice-cooked pork you just ordered — do you think it's good? Be honest. It's made from the 'standardized recipe' I provided. Seasoning measured to the gram, cooking time measured to the second. Three hundred branches nationwide, every serving tastes identical. But I'll tell you: the gap between this taste and my father's twice-cooked pork is larger than you can imagine."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Ask what was different about his father's version.",
+        "options": [
+          {
+            "text_zh": "配方一样，调料一样——那差距到底在哪里？是某种没办法写进配方的东西吗？",
+            "text_pinyin": "Pèifāng yīyàng, tiáoliào yīyàng — nà chājù dàodǐ zài nǎlǐ? Shì mǒu zhǒng méi bànfǎ xiě jìn pèifāng de dōngxī ma?",
+            "text_en": "Same recipe, same seasonings — so where's the gap? Is it something that can't be written into a recipe?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Chef Liao sets down his glass. He looks at you properly for the first time since you sat down."
+          },
+          {
+            "text_zh": "我觉得挺好吃的啊，味道很正宗。",
+            "text_pinyin": "Wǒ juéde tǐng hǎochī de a, wèidào hěn zhèngzōng.",
+            "text_en": "I think it tastes pretty good, honestly — very authentic.",
+            "score": 0.0,
+            "feedback": "Chef Liao lets out a short, humorless laugh and refills his cup. He doesn't argue with you. That's almost worse."
+          },
+          {
+            "text_zh": "你爸当时为什么不把配方写下来？",
+            "text_pinyin": "Nǐ bà dāngshí wèishéme bù bǎ pèifāng xiě xiàlái?",
+            "text_en": "Why didn't your father write the recipe down at the time?",
+            "score": 0.0,
+            "feedback": "Chef Liao looks at you with a complicated expression — like you've asked the right question for the wrong reason. 'He did write it down,' he says quietly. 'That's what I gave them.'"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "不能被量化——你说到了关键。我爸炒回锅肉从来不称调料，全凭手感。他看一块肉的颜色就知道该怎么调火候。同样的猪肉，冬天和夏天的含水量不一样，他会微调。同一道菜，今天做的和明天做的稍微有点不同——不是失误，是适应。这种随机性就是生命力。标准化把这种随机性消灭了，味道就死了。",
+        "text_pinyin": "Bù néng bèi liànghuà — nǐ shuō dào le guānjiàn. Wǒ bà chǎo huíguōròu cónglái bù chēng tiáoliào, quán píng shǒugǎn. Tā kàn yī kuài ròu de yánsè jiù zhīdào gāi zěnme tiáo huǒhòu. Tóngyàng de zhūròu, dōngtiān hé xiàtiān de hánshuǐliàng bù yīyàng, tā huì wēi tiáo. Tóng yī dào cài, jīntiān zuò de hé míngtiān zuò de shāowēi yǒudiǎn bùtóng — bú shì shīwù, shì shìyìng. Zhè zhǒng suíjīxìng jiù shì shēngmìnglì. Biāozhǔnhuà bǎ zhè zhǒng suíjīxìng xiāomiè le, wèidào jiù sǐ le.",
+        "text_en": "Can't be quantified — you've hit the key. My dad never measured seasonings when cooking twice-cooked pork — all by feel. He'd know how to adjust the heat just by looking at the meat's color. Same pork has different moisture content in winter and summer, and he'd make micro-adjustments. The same dish, made today versus tomorrow, would be slightly different — not a mistake, but adaptation. That variability is vitality. Standardization killed that variability, and the taste died."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Reflect on the connection between variability and vitality in cooking.",
+        "options": [
+          {
+            "text_zh": "就像现场演奏和录音室版本——录音室版完美、可重复，但现场版有呼吸、有即兴。你爸的菜是现场演奏，标准化配方是录音。",
+            "text_pinyin": "Jiù xiàng xiànchǎng yǎnzòu hé lùyīnshì bǎnběn — lùyīnshì bǎn wánměi, kě chóngfù, dàn xiànchǎng bǎn yǒu hūxī, yǒu jíxīng. Nǐ bà de cài shì xiànchǎng yǎnzòu, biāozhǔnhuà pèifāng shì lùyīn.",
+            "text_en": "Like a live performance versus a studio recording — the studio version is perfect, repeatable, but the live version breathes and improvises. Your father's cooking was live; the standardized recipe is the recording.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Chef Liao goes still for a moment. Then he nods slowly, staring at the table. 'Yeah,' he says. 'And I'm the one who turned it into a recording.'"
+          },
+          {
+            "text_zh": "但从商业角度来看，标准化是必须的，不然怎么扩张？",
+            "text_pinyin": "Dànshì cóng shāngyè jiǎodù lái kàn, biāozhǔnhuà shì bìxū de, bùrán zěnme kuòzhāng?",
+            "text_en": "But from a business standpoint, standardization is necessary — otherwise how do you scale?",
+            "score": 0.0,
+            "feedback": "Chef Liao looks at you like you've said something he's heard too many times from too many people he doesn't respect. He pours another drink."
+          },
+          {
+            "text_zh": "你现在还自己做饭吗？",
+            "text_pinyin": "Nǐ xiànzài hái zìjǐ zuò fàn ma?",
+            "text_en": "Do you still cook for yourself at home?",
+            "score": 0.0,
+            "feedback": "Chef Liao pauses. 'Not much,' he says, after a moment. It's an honest answer, but it lands like an admission he wasn't ready to make."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "现场演奏……这个比喻太准了。但你知道最讽刺的是什么吗？连锁店请我当顾问的时候，他们的原话是「我们要还原你爸的味道」。但还原是不可能的——因为那个味道不是一个固定的东西，它是一个活着的过程。你怎么还原一个过程？你只能还原一个结果的近似值。然后他们管这个近似值叫「正宗」。",
+        "text_pinyin": "Xiànchǎng yǎnzòu…… zhège bǐyù tài zhǔn le. Dàn nǐ zhīdào zuì fěngcì de shì shénme ma? Liánsuǒ diàn qǐng wǒ dāng gùwèn de shíhòu, tāmen de yuánhuà shì 'wǒmen yào huányuán nǐ bà de wèidào'. Dàn huányuán shì bùkěnéng de — yīnwèi nàge wèidào bú shì yīge gùdìng de dōngxī, tā shì yīge huó zhe de guòchéng. Nǐ zěnme huányuán yīge guòchéng? Nǐ zhǐ néng huányuán yīge jiéguǒ de jìnsìzhí. Ránhòu tāmen guǎn zhège jìnsìzhí jiào 'zhèngzōng'.",
+        "text_en": "Live performance… that analogy is spot on. But you know what's most ironic? When the chain hired me as a consultant, their exact words were 'We want to restore your father's taste.' But restoration is impossible — because that taste wasn't a fixed thing, it was a living process. How do you restore a process? You can only restore an approximation of a result. Then they call that approximation 'authentic.'"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the irony of calling an approximation 'authentic.'",
+        "options": [
+          {
+            "text_zh": "「正宗」变成了营销词——不再指向真实的来源，而是指向消费者期待的口感。连锁店卖的不是你爸的味道，是你爸味道的「概念」。",
+            "text_pinyin": "'Zhèngzōng' biàn chéng le yíngxiāo cí — bú zài zhǐxiàng zhēnshí de láiyuán, ér shì zhǐxiàng xiāofèizhě qīdài de kǒugǎn. Liánsuǒ diàn mài de bú shì nǐ bà de wèidào, shì nǐ bà wèidào de 'gàiniàn'.",
+            "text_en": "'Authentic' has become a marketing word — no longer pointing to a real source, but to the taste range consumers expect. The chain isn't selling your father's flavor. It's selling the concept of your father's flavor.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Chef Liao laughs — a real one this time, short and sharp. 'That's exactly what they did. They even put his photo on the menu.'"
+          },
+          {
+            "text_zh": "其实消费者也分辨不出来，大多数人觉得好吃就行了。",
+            "text_pinyin": "Qíshí xiāofèizhě yě fēnbiàn bù chūlái, dàduōshù rén juéde hǎochī jiù xíng le.",
+            "text_en": "Consumers can't really tell the difference anyway — most people just care that it tastes good.",
+            "score": 0.0,
+            "feedback": "Chef Liao looks at you for a long moment. 'I know,' he says finally, very quietly. It's not agreement — it's resignation, and it's the worst thing you could have said to him."
+          },
+          {
+            "text_zh": "你有没有在合同里限制他们怎么用「正宗」这个词？",
+            "text_pinyin": "Nǐ yǒu méiyǒu zài hétong lǐ xiànzhì tāmen zěnme yòng 'zhèngzōng' zhège cí?",
+            "text_en": "Did you put any restrictions in the contract about how they use the word 'authentic'?",
+            "score": 0.0,
+            "feedback": "Chef Liao rubs his face. 'I should have had a lawyer,' he mutters. You've accidentally touched a real wound, but from entirely the wrong direction."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "品牌叙事……对，就是这个。他们甚至在菜单上写了我们家的故事——「三代传承，匠心独运」。但那个故事被简化成了三行字的广告文案。他们用我爸的照片，用我家的历史，来给一种工业化产品镀金。而我呢？我是那个亲手把配方交出去的人。有时候夜里睡不着，我觉得自己像是出卖了什么。",
+        "text_pinyin": "Pǐnpái xùshì…… duì, jiù shì zhège. Tāmen shènzhì zài càidān shàng xiě le wǒmen jiā de gùshì — 'sān dài chuánchéng, jiàngxīn dúyùn'. Dàn nàge gùshì bèi jiǎnhuà chéng le sān háng zì de guǎnggào wén'àn. Tāmen yòng wǒ bà de zhàopiàn, yòng wǒ jiā de lìshǐ, lái gěi yī zhǒng gōngyèhuà chǎnpǐn dùjīn. Ér wǒ ne? Wǒ shì nàge qīnshǒu bǎ pèifāng jiāo chūqù de rén. Yǒu shíhòu yèlǐ shuì bù zháo, wǒ juéde zìjǐ xiàng shì chūmài le shénme.",
+        "text_en": "Brand narrative… yes, exactly. They even wrote our family story on the menu — 'Three generations of tradition, artisan spirit.' But that story was reduced to three lines of ad copy. They use my father's photo, my family's history, to gild an industrialized product. And me? I'm the one who handed over the recipe with my own hands. Sometimes I can't sleep at night. I feel like I sold something."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his guilt about handing over the family recipe.",
+        "options": [
+          {
+            "text_zh": "你交出去的只是文字和数字——你爸的手感、他对食材的直觉，那些不在纸上。你出卖的是一个空壳，灵魂一直在你这里。",
+            "text_pinyin": "Nǐ jiāo chūqù de zhǐ shì wénzì hé shùzì — nǐ bà de shǒugǎn, tā duì shícái de zhíjué, nàxiē bú zài zhǐ shàng. Nǐ chūmài de shì yī ge kōng ké, línghún yīzhí zài nǐ zhèlǐ.",
+            "text_en": "What you handed over was only words and numbers — your father's feel, his instinct for ingredients, those aren't on paper. What you sold was a shell. The soul has always been with you.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Chef Liao is quiet for a long time. He turns his cup in his hands. When he looks up his expression has shifted — not fixed, but slightly less heavy."
+          },
+          {
+            "text_zh": "顾问费应该不少吧？至少经济上有保障了。",
+            "text_pinyin": "Gùwèn fèi yīnggāi bù shǎo ba? Zhìshǎo jīngjì shàng yǒu bǎozhàng le.",
+            "text_en": "The consulting fee must be decent, right? At least you're financially secure now.",
+            "score": 0.0,
+            "feedback": "Chef Liao looks at you with something close to pity. He doesn't respond. He just refills his glass and stares at it."
+          },
+          {
+            "text_zh": "你有没有考虑过自己重新开一家小店？",
+            "text_pinyin": "Nǐ yǒu méiyǒu kǎolǜ guò zìjǐ chóngxīn kāi yī jiā xiǎo diàn?",
+            "text_en": "Have you ever considered opening a small place again on your own?",
+            "score": 0.0,
+            "feedback": "Chef Liao gives a short, tired sigh. 'Every week,' he says. Then silence. It's a real answer to a question that missed what he actually needed to hear."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The industrialization of regional Chinese cuisine through chain restaurants has sparked intense debate about what 'authentic' (正宗) means. Traditional Sichuan cooking relies on what chefs call 'wok breath' (锅气) — the unique flavor that emerges from a specific wok, a specific flame, and a specific cook's rhythm. When chain restaurants standardize these recipes, they preserve the ingredients but lose the improvisational quality that distinguished each cook's version. The tension between scalability and authenticity is one of China's most visible cultural-commercial conflicts."
+  }
+}

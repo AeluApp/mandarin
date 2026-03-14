@@ -1,0 +1,160 @@
+{
+    "title": "The Reservation Ritual",
+    "title_zh": "订位仪式",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_4_04_v0",
+    "tree": {
+        "setup": "You're calling to book a table at Golden Lotus, a popular restaurant known for its Cantonese dim sum and its hostess, Ms. Bai, who manages the reservation book with the intensity of an air traffic controller. Friday nights are her Super Bowl — every table has a flight plan.",
+        "setup_zh": "你正在给金莲花饭店打电话订位，这家以广式点心出名的热门餐厅。接待员白小姐管理预订本的认真程度堪比航空管制员。周五晚上是她的超级碗——每张桌子都有飞行计划。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，金莲花饭店。请问有什么可以帮您？",
+                "text_pinyin": "nín hǎo, Jīn Liánhuā Fàndiàn. qǐngwèn yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, Golden Lotus Restaurant. How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make a reservation.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想订一个位子。这个周五晚上，六个人，大概七点。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng dìng yí gè wèizi. zhège zhōuwǔ wǎnshang, liù gè rén, dàgài qī diǎn.",
+                        "text_en": "Hello, I'd like to make a reservation. This Friday evening, six people, around 7 PM.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Date, party size, time — all in one sentence. Ms. Bai's fingers are already flying across her book."
+                    },
+                    {
+                        "text_zh": "我想订位，周五晚上。",
+                        "text_pinyin": "wǒ xiǎng dìng wèi, zhōuwǔ wǎnshang.",
+                        "text_en": "I'd like to reserve a table — Friday evening.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need the rest of the details, but you've given her the hardest part: the day."
+                    },
+                    {
+                        "text_zh": "周五有位子吗？",
+                        "text_pinyin": "zhōuwǔ yǒu wèizi ma?",
+                        "text_en": "Do you have tables Friday?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Bai consults her book, which on Fridays looks like a military strategy map."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "周五晚上七点，六个人。我查一下……七点的话只剩大厅的位子了，包间已经满了。可以吗？",
+                "text_pinyin": "zhōuwǔ wǎnshang qī diǎn, liù gè rén. wǒ chá yíxià……qī diǎn de huà zhǐ shèng dàtīng de wèizi le, bāojiān yǐjīng mǎn le. kěyǐ ma?",
+                "text_en": "Friday evening at 7, six people. Let me check... for 7 PM we only have main hall tables left — private rooms are full. Is that OK?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept or negotiate.",
+                "options": [
+                    {
+                        "text_zh": "大厅可以。能不能给我们一个靠窗的位子？",
+                        "text_pinyin": "dàtīng kěyǐ. néng bu néng gěi wǒmen yí gè kào chuāng de wèizi?",
+                        "text_en": "Main hall is fine. Can we get a window table?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Accepting with a preference — Ms. Bai checks her layout and finds one window table left. You're in luck."
+                    },
+                    {
+                        "text_zh": "好的，大厅没问题。",
+                        "text_pinyin": "hǎo de, dàtīng méi wèntí.",
+                        "text_en": "OK, main hall is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Easy to accommodate. She pencils you in."
+                    },
+                    {
+                        "text_zh": "如果提前到六点半呢？有包间吗？",
+                        "text_pinyin": "rúguǒ tíqián dào liù diǎn bàn ne? yǒu bāojiān ma?",
+                        "text_en": "What if we come earlier, at 6:30? Any private rooms?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Creative negotiation. She checks — there's one room available at 6:30, but it needs to be vacated by 8:30."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "靠窗的位子没问题。请问订餐人的姓名和电话号码？",
+                "text_pinyin": "kào chuāng de wèizi méi wèntí. qǐngwèn dìng cān rén de xìngmíng hé diànhuà hàomǎ?",
+                "text_en": "Window table, no problem. What's the name and phone number for the reservation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your name and number.",
+                "options": [
+                    {
+                        "text_zh": "姓张，张明。电话是138-5678-1234。对了，我们有一个人吃素，能不能提前准备几个素菜？",
+                        "text_pinyin": "xìng Zhāng, Zhāng Míng. diànhuà shì yāo sān bā, wǔ liù qī bā, yāo èr sān sì. duìle, wǒmen yǒu yí gè rén chī sù, néng bu néng tíqián zhǔnbèi jǐ gè sù cài?",
+                        "text_en": "Surname Zhang, Zhang Ming. Phone: 138-5678-1234. Oh, one of us is vegetarian — can you prepare some vegetarian dishes in advance?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Name, number, and a dietary heads-up — Ms. Bai's flight plan is complete. She marks your table with a small star."
+                    },
+                    {
+                        "text_zh": "张明，138-5678-1234。",
+                        "text_pinyin": "Zhāng Míng, yāo sān bā, wǔ liù qī bā, yāo èr sān sì.",
+                        "text_en": "Zhang Ming, 138-5678-1234.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean data. She writes it down."
+                    },
+                    {
+                        "text_zh": "张。号码我一会儿发短信给你吧。",
+                        "text_pinyin": "Zhāng. hàomǎ wǒ yíhuìr fā duǎnxìn gěi nǐ ba.",
+                        "text_en": "Zhang. I'll text you the number later.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Bai hesitates — reservations without phone numbers make her nervous, but she writes down what she has."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，张先生。周五晚上七点，六位，靠窗。我们会准备素菜选项。如果有变化请提前打电话。",
+                "text_pinyin": "hǎo de, Zhāng xiānshēng. zhōuwǔ wǎnshang qī diǎn, liù wèi, kào chuāng. wǒmen huì zhǔnbèi sù cài xuǎnxiàng. rúguǒ yǒu biànhuà qǐng tíqián dǎ diànhuà.",
+                "text_en": "OK, Mr. Zhang. Friday at 7, six people, window table. We'll prepare vegetarian options. Please call if anything changes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and thank her.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢白小姐！周五见。",
+                        "text_pinyin": "hǎo de, xièxie Bái xiǎojiě! zhōuwǔ jiàn.",
+                        "text_en": "Great, thank you Ms. Bai! See you Friday.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Using her name and confirming the date — a clean landing. Ms. Bai adds a checkmark next to your reservation."
+                    },
+                    {
+                        "text_zh": "谢谢，再见！",
+                        "text_pinyin": "xièxie, zàijiàn!",
+                        "text_en": "Thanks, bye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick and clean. The reservation is secure."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "hǎo.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Bai files your reservation with slightly less enthusiasm than usual, but with equal professionalism."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "包间 (bāojiān, private dining rooms) are highly valued in Chinese restaurants for business dinners and celebrations. They're usually free but must be reserved in advance. Mentioning dietary needs (吃素 chī sù, vegetarian; 忌口 jìkǒu, restrictions) when booking is considerate."
+    }
+}

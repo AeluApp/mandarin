@@ -1,0 +1,124 @@
+{
+    "title": "The Online Shopping Maze",
+    "title_zh": "网购迷宫",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_5_04_v0",
+    "tree": {
+        "setup": "Your phone screen displays a Taobao listing for a desk lamp that has 50,000+ sales and a 4.8-star rating — but 847 of those reviews mention the word「亮」(bright) and 312 mention「不亮」(not bright), which is a contradiction that demands investigation. You're chatting with the store's online customer service representative, Xiao Yun, through the app's chat function. She responds with a speed that suggests she's handling twelve conversations simultaneously, each with equal attention.",
+        "setup_zh": "你的手机屏幕上显示着一个淘宝台灯的商品链接，累计销量5万+，评分4.8星——但847条评论提到了「亮」，312条提到了「不亮」，这个矛盾需要调查。你正在通过APP的聊天功能和店铺的在线客服小云对话。她回复的速度暗示她同时在处理十二个对话，每个都给予同等的关注。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "亲，您好！欢迎光临！请问有什么可以帮您的？😊",
+                "text_pinyin": "qīn, nín hǎo! huānyíng guānglín! qǐngwèn yǒu shénme kěyǐ bāng nín de?",
+                "text_en": "Dear customer, hello! Welcome! How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the desk lamp.",
+                "options": [
+                    {
+                        "text_zh": "你好，我看了这个台灯的评价，大部分说亮度够，但也有不少说不够亮。想问一下这个灯有几个亮度档位？最亮档大概多少瓦？另外，色温能不能调？我主要是晚上看书用的。",
+                        "text_pinyin": "nǐ hǎo, wǒ kàn le zhège táidēng de píngjià, dà bùfen shuō liàngdù gòu, dàn yě yǒu bù shǎo shuō búgòu liàng. xiǎng wèn yíxià zhège dēng yǒu jǐ gè liàngdù dàngwèi? zuì liàng dǎng dàgài duōshǎo wǎ? lìngwài, sèwēn néng bu néng tiáo? wǒ zhǔyào shì wǎnshàng kànshū yòng de.",
+                        "text_en": "Hello, I read the reviews for this lamp — most say the brightness is enough, but many say it's not bright enough. How many brightness levels does it have? How many watts at max? Also, is the color temperature adjustable? I mainly use it for reading at night.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific technical questions derived from review analysis — Xiao Yun shifts from standard script to detailed answers. A customer who reads reviews carefully gets treated differently."
+                    },
+                    {
+                        "text_zh": "这个台灯亮不亮？",
+                        "text_pinyin": "zhège táidēng liàng bú liàng?",
+                        "text_en": "Is this desk lamp bright?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll say yes. Everyone says yes. The question needs to be more specific."
+                    },
+                    {
+                        "text_zh": "评价里有人说不亮，真的假的？",
+                        "text_pinyin": "píngjià lǐ yǒu rén shuō bú liàng, zhēn de jiǎ de?",
+                        "text_en": "Some reviews say it's not bright — is that true?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She'll explain that brightness perception varies. It's not wrong, but it doesn't help you decide."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "亲，这款台灯有三个亮度档位和三个色温模式。最亮档是18瓦，色温可以在3000K暖光到6000K白光之间调节。评价里说不亮的顾客大多是用的最低档或者暖光模式，暖光看起来确实没有白光那么亮，但对眼睛更好。看书的话推荐中档+自然光4000K。",
+                "text_pinyin": "qīn, zhè kuǎn táidēng yǒu sān gè liàngdù dàngwèi hé sān gè sèwēn móshì. zuì liàng dǎng shì shíbā wǎ, sèwēn kěyǐ zài sān qiān K nuǎn guāng dào liù qiān K bái guāng zhī jiān tiáojié. píngjià lǐ shuō bú liàng de gùkè dà duō shì yòng de zuì dī dǎng huòzhě nuǎn guāng móshì, nuǎn guāng kàn qǐlái quèshí méiyǒu bái guāng nàme liàng, dàn duì yǎnjīng gèng hǎo. kànshū de huà tuījiàn zhōng dǎng + zìrán guāng sì qiān K.",
+                "text_en": "Dear, this lamp has three brightness levels and three color temperature modes. Max is 18 watts, color temperature adjustable from 3000K warm to 6000K cool white. Reviews saying 'not bright' were mostly using the lowest setting or warm mode — warm light does look dimmer than cool white but is better for eyes. For reading, I recommend medium brightness + 4000K natural light."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about delivery and deals.",
+                "options": [
+                    {
+                        "text_zh": "明白了，原来评价里的分歧是档位和色温的问题。那这个灯现在有什么优惠活动吗？我看到页面上写着「满减」但不太看得懂规则。另外，发货用什么快递？大概几天到？我在北京。",
+                        "text_pinyin": "míngbai le, yuánlái píngjià lǐ de fēnqí shì dàngwèi hé sèwēn de wèntí. nà zhège dēng xiànzài yǒu shénme yōuhuì huódòng ma? wǒ kàn dào yèmiàn shàng xiě zhe「mǎnjiǎn」dàn bú tài kàn de dǒng guīzé. lìngwài, fāhuò yòng shénme kuàidì? dàgài jǐ tiān dào? wǒ zài Běijīng.",
+                        "text_en": "I see — the review discrepancy was about settings and color temperature. Are there any current deals on this lamp? I see 'full reduction' on the page but can't quite understand the rules. Also, which courier is used for shipping? How many days to Beijing?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Solving the review mystery, asking about promotions, and logistics — Xiao Yun breaks down the 满减 rules: spend 199, save 20."
+                    },
+                    {
+                        "text_zh": "有没有优惠券？",
+                        "text_pinyin": "yǒu méiyǒu yōuhuì quàn?",
+                        "text_en": "Any coupons?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She sends a shop coupon link. Always ask."
+                    },
+                    {
+                        "text_zh": "太贵了，能不能便宜一点？",
+                        "text_pinyin": "tài guì le, néng bu néng piányi yìdiǎn?",
+                        "text_en": "Too expensive — can it be cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Online prices are usually fixed, but she can suggest bundling with another item for a bigger 满减 discount."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "现在满199减20，这个台灯原价189，加上一个替换灯泡29块就到199了，等于灯泡免费。快递是顺丰，北京的话一般两天到。要不要一起买？亲~",
+                "text_pinyin": "xiànzài mǎn yìbǎi jiǔshíjiǔ jiǎn èrshí, zhège táidēng yuánjià yìbǎi bāshíjiǔ, jiā shàng yí gè tìhuàn dēngpào èrshíjiǔ kuài jiù dào yìbǎi jiǔshíjiǔ le, děngyú dēngpào miǎnfèi. kuàidì shì Shùnfēng, Běijīng de huà yìbān liǎng tiān dào. yào búyào yìqǐ mǎi? qīn~",
+                "text_en": "Currently spend 199 get 20 off. The lamp is 189, add a replacement bulb at 29 and you hit 199 — basically the bulb is free. Shipping is SF Express, usually 2 days to Beijing. Want to add it? Dear~"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide and place the order.",
+                "options": [
+                    {
+                        "text_zh": "替换灯泡等于免费，那肯定加上。帮我下单吧——台灯加替换灯泡，满减以后应该是198块对吗？对了，如果收到以后有质量问题，退货流程是什么？运费谁出？",
+                        "text_pinyin": "tìhuàn dēngpào děngyú miǎnfèi, nà kěndìng jiā shàng. bāng wǒ xià dān ba——táidēng jiā tìhuàn dēngpào, mǎnjiǎn yǐhòu yīnggāi shì yìbǎi jiǔshíbā kuài duì ma? duì le, rúguǒ shōu dào yǐhòu yǒu zhìliàng wèntí, tuìhuò liúchéng shì shénme? yùnfèi shuí chū?",
+                        "text_en": "A free bulb — definitely adding that. Place the order — lamp plus bulb, should be 198 after the discount, right? Oh, if there's a quality issue after delivery, what's the return process? Who pays for return shipping?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Math verified, order placed, and return policy confirmed — Xiao Yun confirms: 198 yuan total, 7-day no-questions return, quality issues get free return shipping."
+                    },
+                    {
+                        "text_zh": "好，下单，台灯加灯泡。",
+                        "text_pinyin": "hǎo, xià dān, táidēng jiā dēngpào.",
+                        "text_en": "OK, order the lamp plus bulb.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Order placed. She sends the confirmation with a smiley face."
+                    },
+                    {
+                        "text_zh": "我再看看别的店吧。",
+                        "text_pinyin": "wǒ zài kàn kan bié de diàn ba.",
+                        "text_en": "Let me check other stores first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yun sends a「亲，我们支持七天无理由退换哦」— a final offer of the return policy safety net. The door is always open."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Taobao's 满减 (mǎnjiǎn, 'spend X save Y') promotions are designed to encourage bundled purchases. 顺丰 (Shùnfēng, SF Express) is China's premium courier service. Online customer service addresses customers as 亲 (qīn, short for 亲爱的, 'dear') — it's ubiquitous in Chinese e-commerce. Seven-day no-questions returns (七天无理由退换) are standard on Taobao/Tmall. Quality issues (质量问题) qualify for free return shipping (运费商家承担)."
+    }
+}

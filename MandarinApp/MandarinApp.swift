@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered,
             defer: false
         )
-        window.title = "Mandarin"
+        window.title = "Aelu"
         window.minSize = NSSize(width: 480, height: 400)
         window.contentView = webView
         window.makeKeyAndOrderFront(nil)
@@ -57,6 +57,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Load the dev server
         let url = URL(string: "http://127.0.0.1:5173")!
         webView.load(URLRequest(url: url))
+
+        // Set app icon programmatically (bypasses macOS icon cache issues)
+        if let iconPath = Bundle.main.path(forResource: "AppIcon", ofType: "icns") {
+            NSApp.applicationIconImage = NSImage(contentsOfFile: iconPath)
+        }
 
         // Activate the app
         NSApp.activate(ignoringOtherApps: true)
@@ -172,8 +177,8 @@ extension AppDelegate: WKNavigationDelegate {
             @media (prefers-color-scheme: dark) {
                 body { background: #2A2520; color: #D4C8BC; }
                 .card { background: #3A3530; }
-                button { background: #946070; }
-                button:hover { background: #A07080; }
+                code { background: #4A4540; color: #D4C8BC; }
+                .status { color: #A09080; }
             }
             .card {
                 text-align: center;
@@ -184,28 +189,40 @@ extension AppDelegate: WKNavigationDelegate {
             }
             .hanzi { font-size: 4rem; color: #946070; margin-bottom: 1rem; }
             h2 { font-weight: 500; margin-bottom: 0.5rem; }
-            p { color: #888; margin-bottom: 1.5rem; font-size: 0.95rem; }
+            .status { color: #888; margin-bottom: 1rem; font-size: 0.95rem; }
             code { background: #f0ece6; padding: 2px 8px; border-radius: 4px; font-size: 0.9rem; }
-            button {
-                background: #946070;
-                color: white;
-                border: none;
-                padding: 10px 28px;
-                border-radius: 8px;
-                font-size: 1rem;
-                cursor: pointer;
-                margin-top: 1rem;
+            .dot-pulse { display: inline-block; }
+            .dot-pulse::after {
+                content: '';
+                animation: dots 1.5s steps(4, end) infinite;
             }
-            button:hover { background: #7A5060; }
+            @keyframes dots {
+                0% { content: ''; }
+                25% { content: '.'; }
+                50% { content: '..'; }
+                75% { content: '...'; }
+            }
         </style>
         </head>
         <body>
         <div class="card">
             <div class="hanzi">\u{6F2B}</div>
-            <h2>Waiting for server</h2>
-            <p>Start the dev server with <code>./run app</code></p>
-            <button onclick="location.href='http://127.0.0.1:5173'">Retry</button>
+            <h2>Connecting<span class="dot-pulse"></span></h2>
+            <p class="status" id="status">Looking for server</p>
+            <p style="margin-top: 1rem;"><code>./run app</code></p>
         </div>
+        <script>
+            var attempt = 0;
+            function tryConnect() {
+                attempt++;
+                fetch('http://127.0.0.1:5173/', { mode: 'no-cors' })
+                    .then(function() { location.href = 'http://127.0.0.1:5173'; })
+                    .catch(function() {
+                        setTimeout(tryConnect, 2000);
+                    });
+            }
+            setTimeout(tryConnect, 2000);
+        </script>
         </body>
         </html>
         """

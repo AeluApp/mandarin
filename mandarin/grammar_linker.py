@@ -17,8 +17,12 @@ _DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 
 def _load_json(filename):
-    with open(os.path.join(_DATA_DIR, filename)) as f:
-        return json.load(f)
+    try:
+        with open(os.path.join(_DATA_DIR, filename)) as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        logger.error("Failed to load grammar data file %s: %s", filename, e)
+        raise
 
 
 # ── Lazy-loaded data caches ──────────────────────────────

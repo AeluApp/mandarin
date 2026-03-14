@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mandarin"
 version = "0.1.0"
-description = "Personal Mandarin learning system — local-first, CLI-based, durable."
+description = "Aelu — adaptive Chinese learning app with 27 drill types, graded reading, cleanup loop, FSRS scheduling, and tone grading. HSK 1-9 curriculum. Zero AI tokens at runtime."
 requires-python = ">=3.9"
 dependencies = [
     "typer>=0.9.0",
@@ -18,7 +18,7 @@ dependencies = [
     "simple-websocket>=1.0.0",
     "gunicorn>=22.0.0",
     "gevent>=24.2.1",
-    "stripe>=7.0.0",
+    "stripe>=14.0.0",
     "sentry-sdk[flask]>=1.40.0",
     "PyJWT>=2.8.0",
     "pyotp>=2.9.0",
@@ -29,9 +29,67 @@ audio = [
     "sounddevice>=0.4.6",
     "numpy>=1.24.0",
 ]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "hypothesis>=6.0.0",
+]
 
 [project.scripts]
 mandarin = "mandarin.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["mandarin*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers -q"
+
+[tool.coverage.run]
+source = ["mandarin"]
+omit = [
+    "mandarin/cli.py",
+    "mandarin/menu.py",
+    "mandarin/audio.py",
+    "mandarin/tone_grading.py",
+    "mandarin/web/templates/*",
+    "mandarin/web/static/*",
+    "mandarin/seed_data.py",
+    "mandarin/web/server.py",
+    "mandarin/web/wsgi.py",
+    "mandarin/wiring.py",
+]
+
+[tool.coverage.report]
+fail_under = 53
+show_missing = true
+skip_empty = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__",
+    "raise NotImplementedError",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "B",   # bugbear
+    "S",   # bandit (security)
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by line-length)
+    "S101",  # assert in tests
+    "S311",  # random not for crypto (we use secrets for crypto)
+    "B904",  # raise from in except (too noisy for existing code)
+]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101", "S106"]

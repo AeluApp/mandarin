@@ -3,35 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partner Program — Earn 30% Recurring | Mandarin</title>
-  <meta name="description" content="Join the Mandarin partner program. Earn 30% recurring commission recommending an adaptive Chinese learning app to your audience. Free lifetime account included.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Partner Program — Earn 25% Recurring | Aelu</title>
+  <meta name="description" content="Join the Aelu partner program. Earn 25% recurring commission recommending an adaptive Chinese learning app to your audience. Free lifetime account included.">
   <meta name="keywords" content="Chinese learning affiliate program, Mandarin app partner, language learning affiliate, Chinese teacher resources, recommend Chinese app">
-  <link rel="canonical" href="https://mandarinapp.com/partners">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/partners">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Partner Program — Earn 30% Recurring | Mandarin">
-  <meta property="og:description" content="Earn 30% recurring commission recommending an adaptive Chinese learning app. Free lifetime account included.">
+  <meta property="og:title" content="Partner Program — Earn 25% Recurring | Aelu">
+  <meta property="og:description" content="Earn 25% recurring commission recommending an adaptive Chinese learning app. Free lifetime account included.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/partners">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/partners">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Partner Program — Earn 30% Recurring | Mandarin">
-  <meta name="twitter:description" content="Earn 30% recurring commission recommending an adaptive Chinese learning app. Free lifetime account included.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Partner Program — Earn 25% Recurring | Aelu">
+  <meta name="twitter:description" content="Earn 25% recurring commission recommending an adaptive Chinese learning app. Free lifetime account included.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Partner Program — Mandarin",
-    "description": "Join the Mandarin partner program. Earn 30% recurring commission recommending an adaptive Chinese learning app.",
-    "url": "https://mandarinapp.com/partners"
+    "name": "Partner Program — Aelu",
+    "description": "Join the Aelu partner program. Earn 25% recurring commission recommending an adaptive Chinese learning app.",
+    "url": "https://aeluapp.com/partners"
   }
   </script>
 
@@ -141,7 +142,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -153,6 +157,30 @@
       .nav-links.nav-open { display: flex; }
       nav .container { position: relative; }
     }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
@@ -160,7 +188,7 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -169,14 +197,15 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners" aria-current="page">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
 
   <section class="hero">
     <div class="container">
-      <h1>Earn 30% recurring commission recommending Mandarin</h1>
+      <h1>Earn 25% recurring commission recommending Aelu</h1>
       <p class="hero-sub">You teach Chinese or create content for Chinese learners. We built an app that makes their practice more effective. Let's help them together.</p>
     </div>
   </section>
@@ -186,8 +215,8 @@
       <h2>The deal</h2>
       <div class="terms-grid">
         <div class="term-card">
-          <h3>30%</h3>
-          <p>Recurring commission on every payment from users you refer</p>
+          <h3>25%</h3>
+          <p>Recurring commission on every payment from users you refer, for up to 24 months per user</p>
         </div>
         <div class="term-card">
           <h3>90 days</h3>
@@ -223,14 +252,14 @@
           <div class="step-num">3</div>
           <div>
             <h3>Share your link</h3>
-            <p>You get a unique referral URL and a 20% discount code for your audience. Mention the app however feels natural.</p>
+            <p>You get a unique referral URL. If you want, we can also set up a discount code for your audience. Mention the app however feels natural.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div>
             <h3>Earn monthly</h3>
-            <p>30% of every payment from users who signed up through your link. Paid out monthly via PayPal or Stripe.</p>
+            <p>25% of every payment from users who signed up through your link, for up to 24 months per user. Paid out monthly via PayPal or Stripe.</p>
           </div>
         </div>
       </div>
@@ -252,12 +281,34 @@
     </div>
   </section>
 
+  <section class="how" style="background:var(--color-surface);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:600;margin-bottom:var(--space-3);">For Chinese teachers</h2>
+      <p style="color:var(--color-text-faint);max-width:520px;margin:0 auto var(--space-4);">Teachers get a dedicated partner track with higher commission on classroom subscriptions.</p>
+      <div class="terms-grid" style="grid-template-columns:1fr 1fr 1fr;max-width:540px;">
+        <div class="term-card">
+          <h3>35%</h3>
+          <p>Commission on classroom subscriptions ($8/student/mo)</p>
+        </div>
+        <div class="term-card">
+          <h3>$84</h3>
+          <p>Monthly income from a class of 30 students</p>
+        </div>
+        <div class="term-card">
+          <h3>5 free</h3>
+          <p>Student accounts (3 months each) to try before committing</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--space-4);font-size:0.9rem;color:var(--color-text-faint);">New student cohorts each semester create a self-renewing pipeline. <a href="#apply" style="color:var(--color-accent);">Apply below</a> and select "Classroom / School."</p>
+    </div>
+  </section>
+
   <section class="perks">
     <div class="container">
       <h2>What you get</h2>
       <ul class="perks-list">
         <li><strong>Free lifetime full-access account</strong> — <span>yours forever, regardless of whether you promote</span></li>
-        <li><strong>Unique referral link + discount code</strong> — <span>20% off first 3 months for your audience</span></li>
+        <li><strong>Unique referral link</strong> — <span>optional discount code available on request (15% off first 3 months)</span></li>
         <li><strong>Partner content kit</strong> — <span>talking points, screenshots, comparison tables, demo script</span></li>
         <li><strong>Early access to new features</strong> — <span>2 weeks before public release</span></li>
         <li><strong>Monthly commission reports</strong> — <span>clicks, signups, earnings, all transparent</span></li>
@@ -270,14 +321,14 @@
     <div class="container">
       <h2>What this looks like</h2>
       <div class="math-example">
-        <div class="math-row"><span>App price</span><span>$12/month</span></div>
-        <div class="math-row"><span>Your commission</span><span>30%</span></div>
-        <div class="math-row"><span>Per referred paying user</span><span>$3.60/month</span></div>
-        <div class="math-row"><span>10 referred users</span><span>$36/month</span></div>
-        <div class="math-row"><span>50 referred users</span><span>$180/month</span></div>
-        <div class="math-row"><span>100 referred users</span><span>$360/month</span></div>
+        <div class="math-row"><span>App price</span><span>$14.99/month</span></div>
+        <div class="math-row"><span>Your commission</span><span>25%</span></div>
+        <div class="math-row"><span>Per referred paying user</span><span>$3.75/month</span></div>
+        <div class="math-row"><span>10 referred users</span><span>$37.50/month</span></div>
+        <div class="math-row"><span>50 referred users</span><span>$187.50/month</span></div>
+        <div class="math-row"><span>100 referred users</span><span>$375/month</span></div>
       </div>
-      <p class="math-note">Recurring — you earn every month as long as referred users stay subscribed.</p>
+      <p class="math-note">Recurring for up to 24 months per referred user. Top partners with 50+ referrals earn 35%.</p>
     </div>
   </section>
 
@@ -331,7 +382,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

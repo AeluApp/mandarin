@@ -1,0 +1,185 @@
+{
+    "title": "The Mapmaker's Last Alley",
+    "title_zh": "制图师的最后一条巷子",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You've wandered into a narrow Beijing hutong and found an elderly woman, Auntie Fang, carefully sketching a hand-drawn map of the neighborhood on rice paper. She explains she's been mapping every hutong in the district for thirty years — but this is the last one that hasn't been demolished.",
+        "setup_zh": "你走进了北京一条狭窄的胡同，发现一位老太太——方阿姨——正在宣纸上仔细地绘制这片街区的手绘地图。她解释说她三十年来一直在绘制这个区里每一条胡同的地图——但这是最后一条还没被拆除的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这张图，每一条线都是我亲自走过的。有的巷子窄到只能侧身通过，但正因为窄，邻居之间反而亲近。现在这些线条大多数都变成了虚线——意思是已经不存在了。",
+                "text_pinyin": "Nǐ kàn zhè zhāng tú, měi yī tiáo xiàn dōu shì wǒ qīnzì zǒu guò de. Yǒu de xiàngzi zhǎi dào zhǐ néng cè shēn tōngguò, dàn zhèng yīnwèi zhǎi, línjū zhī jiān fǎn'ér qīnjìn. Xiànzài zhèxiē xiàntiáo dàduōshù dōu biàn chéng le xūxiàn — yìsi shì yǐjīng bú cúnzài le.",
+                "text_en": "Look at this map — every line is a lane I walked myself. Some alleys were so narrow you could only pass through sideways, but precisely because they were narrow, neighbors felt close to each other. Now most of these lines have become dashed — meaning they no longer exist."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say something to Auntie Fang about what her map is really preserving.",
+                "options": [
+                    {
+                        "text_zh": "所以这不只是地图——是记忆的存档。等胡同都没了，也许只有您的图纸还能证明它们存在过。",
+                        "text_pinyin": "Suǒyǐ zhè bù zhǐ shì dìtú — shì jìyì de cúndàng. Děng hútòng dōu méi le, yěxǔ zhǐ yǒu nín de túzhǐ hái néng zhèngmíng tāmen cúnzài guò.",
+                        "text_en": "So this isn't just a map — it's an archive of memory. Once the hutongs are gone, maybe only your drawings will prove they ever existed.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She pauses her brush and looks up at you, holding eye contact for a moment longer than usual. Then she nods slowly and goes back to drawing."
+                    },
+                    {
+                        "text_zh": "这些虚线代表已经拆了的？那剩下几条还在？",
+                        "text_pinyin": "Zhèxiē xūxiàn dàibiǎo yǐjīng chāi le de? Nà shèngxià jǐ tiáo hái zài?",
+                        "text_en": "The dashed lines mean already demolished? How many solid ones are left?",
+                        "score": 0.0,
+                        "feedback": "She glances at the map, then back at you. \"Just this one,\" she says quietly, and turns back to her drawing."
+                    },
+                    {
+                        "text_zh": "现在用手机导航就可以了，不需要手绘地图了吧？",
+                        "text_pinyin": "Xiànzài yòng shǒujī dǎoháng jiù kěyǐ le, bù xūyào shǒuhuì dìtú le ba?",
+                        "text_en": "You can just use phone navigation now, no need for hand-drawn maps, right?",
+                        "score": 0.0,
+                        "feedback": "She doesn't look up from her paper. After a moment she says, \"Maps tell you where to go. This tells you what was here.\""
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "抵抗？我没想过那么大的词。我只是觉得，一个地方如果连名字都没人记得了，那它就真的死了。你知道吗，很多胡同的名字本身就是故事——帽儿胡同是因为形状像帽子，百花深处是因为以前种满了花。",
+                "text_pinyin": "Dǐkàng? Wǒ méi xiǎng guò nàme dà de cí. Wǒ zhǐ shì juéde, yīge dìfang rúguǒ lián míngzì dōu méi rén jìde le, nà tā jiù zhēn de sǐ le. Nǐ zhīdào ma, hěn duō hútòng de míngzì běnshēn jiù shì gùshì — Màor Hútòng shì yīnwèi xíngzhuàng xiàng màozi, Bǎihuā Shēnchù shì yīnwèi yǐqián zhǒng mǎn le huā.",
+                "text_en": "Resistance? I never thought of such a grand word. I just feel that if no one even remembers a place's name, then it truly dies. Did you know, many hutong names are stories in themselves — Mao'er Hutong because it was shaped like a hat, Baihua Shenchu because it used to be full of flowers."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to what she said about names and the life of a place.",
+                "options": [
+                    {
+                        "text_zh": "地名消失的方式很微妙。当百花深处变成写字楼的地址，名字还在，但含义已经空了。您的地图至少保留了名字和地点之间那层联系。",
+                        "text_pinyin": "Dìmíng xiāoshī de fāngshì hěn wéimiào. Dāng Bǎihuā Shēnchù biàn chéng xiězìlóu de dìzhǐ, míngzì hái zài, dàn hányì yǐjīng kōng le. Nín de dìtú zhìshǎo bǎoliú le míngzì hé dìdiǎn zhī jiān nà céng liánxì.",
+                        "text_en": "Place names disappear in subtle ways. When Baihua Shenchu becomes an office tower's address, the name survives but the meaning's been hollowed out. Your maps at least preserve that connection.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She tilts her head and murmurs, \"Hollowed out — yes, that's exactly the right word for it,\" then writes something small in the corner of the map."
+                    },
+                    {
+                        "text_zh": "百花深处——我听说那里现在有一家很有名的咖啡馆。",
+                        "text_pinyin": "Bǎihuā Shēnchù — wǒ tīng shuō nàlǐ xiànzài yǒu yī jiā hěn yǒumíng de kāfēiguǎn.",
+                        "text_en": "Baihua Shenchu — I heard there's a famous café there now.",
+                        "score": 0.0,
+                        "feedback": "She gives you a long look. \"Yes,\" she says. \"There is.\""
+                    },
+                    {
+                        "text_zh": "北京现在的房价太高了，你觉得会降吗？",
+                        "text_pinyin": "Běijīng xiànzài de fángjià tài gāo le, nǐ juéde huì jiàng ma?",
+                        "text_en": "Housing prices in Beijing are too high now, do you think they'll go down?",
+                        "score": 0.0,
+                        "feedback": "She blinks, then quietly turns back to her map without answering."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说得好。我有时候在想，如果我不画了，这些记忆会不会随着我一起消失？我今年七十八了，手也没以前稳了。我女儿说让我把地图扫描成电子版，但我总觉得纸上的东西有一种温度。",
+                "text_pinyin": "Shuō de hǎo. Wǒ yǒu shíhòu zài xiǎng, rúguǒ wǒ bú huà le, zhèxiē jìyì huì bu huì suízhe wǒ yīqǐ xiāoshī? Wǒ jīnnián qīshíbā le, shǒu yě méi yǐqián wěn le. Wǒ nǚ'ér shuō ràng wǒ bǎ dìtú sǎomiáo chéng diànzǐ bǎn, dàn wǒ zǒng juéde zhǐ shàng de dōngxī yǒu yī zhǒng wēndù.",
+                "text_en": "Well said. Sometimes I wonder, if I stop drawing, will these memories disappear along with me? I'm seventy-eight this year, and my hands aren't as steady as before. My daughter says I should scan the maps into digital copies, but I always feel that things on paper have a certain warmth."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you think about scanning versus keeping the paper originals?",
+                "options": [
+                    {
+                        "text_zh": "两者不矛盾。电子版让更多人看到，但纸上的东西——哪里用力，哪里犹豫——扫描仪扫不出来。两种形式承载的信息不一样。",
+                        "text_pinyin": "Liǎng zhě bú máodùn. Diànzǐ bǎn ràng gèng duō rén kàn dào, dàn zhǐ shàng de dōngxī — nǎlǐ yònglì, nǎlǐ yóuyù — sǎomiáoyí sǎo bù chūlái. Liǎng zhǒng xíngshì chéngzài de xìnxī bù yīyàng.",
+                        "text_en": "They're not contradictory. Digital lets more people see them, but the things on paper — where you pressed hard, where you hesitated — a scanner can't capture that. The two carry different kinds of information.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She looks down at her own hand resting on the paper. \"Where you hesitated,\" she repeats softly. \"I never thought of it that way.\""
+                    },
+                    {
+                        "text_zh": "扫描也挺好的，电子版不会丢，以后还可以放大来看细节。",
+                        "text_pinyin": "Sǎomiáo yě tǐng hǎo de, diànzǐ bǎn bú huì diū, yǐhòu hái kěyǐ fàngdà lái kàn xìjié.",
+                        "text_en": "Scanning sounds good, digital copies won't get lost and you can zoom in on the details later.",
+                        "score": 0.0,
+                        "feedback": "She nods politely. \"Yes, my daughter says the same thing,\" she says, and doesn't add anything more."
+                    },
+                    {
+                        "text_zh": "现在AI画画比人画得好多了，您可以试试。",
+                        "text_pinyin": "Xiànzài AI huàhuà bǐ rén huà de hǎo duō le, nín kěyǐ shìshi.",
+                        "text_en": "AI can draw much better than humans now, you should try it.",
+                        "score": 0.0,
+                        "feedback": "She looks up at you, then back at the map. She doesn't say anything, just keeps drawing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得有道理。也许我应该两个都做。不过说实话，我最放不下的不是地图本身，是画地图的过程——每次走进一条胡同，都像在跟一个老朋友告别。",
+                "text_pinyin": "Nǐ shuō de yǒu dàolǐ. Yěxǔ wǒ yīnggāi liǎng ge dōu zuò. Búguò shuō shíhuà, wǒ zuì fàng bú xià de bú shì dìtú běnshēn, shì huà dìtú de guòchéng — měi cì zǒu jìn yī tiáo hútòng, dōu xiàng zài gēn yīge lǎo péngyǒu gàobié.",
+                "text_en": "You make a good point. Maybe I should do both. But honestly, what I can't let go of isn't the map itself, it's the process of making it — every time I walk into a hutong, it's like saying goodbye to an old friend."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that mapping a hutong is a form of farewell.",
+                "options": [
+                    {
+                        "text_zh": "也许告别本身也是一种陪伴。您没有假装什么都没变，而是选择把每一步都好好走完。等将来有人打开这张图，看到的不只是街道——还有一个人对这座城市的深情。",
+                        "text_pinyin": "Yěxǔ gàobié běnshēn yě shì yī zhǒng péibàn. Nín méiyǒu jiǎzhuāng shénme dōu méi biàn, ér shì xuǎnzé bǎ měi yī bù dōu hǎohǎo zǒu wán. Děng jiānglái yǒu rén dǎkāi zhè zhāng tú, kàn dào de bù zhǐ shì jiēdào — hái yǒu yīge rén duì zhè zuò chéngshì de shēnqíng.",
+                        "text_en": "Maybe farewell is itself companionship. You didn't pretend nothing changed — you chose to walk every step to the end. When someone opens this map, they'll see not streets, but one person's deep feeling for this city.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Her hand stops moving. She looks up at you with something soft in her expression, then quietly says, \"深情…… 是啊。\" and turns back to the map."
+                    },
+                    {
+                        "text_zh": "那这条胡同画完之后，您打算做什么？",
+                        "text_pinyin": "Nà zhè tiáo hútòng huà wán zhīhòu, nín dǎsuàn zuò shénme?",
+                        "text_en": "After you finish mapping this hutong, what do you plan to do?",
+                        "score": 0.0,
+                        "feedback": "She pauses, then answers practically: \"Rest my hand for a while, probably.\" She doesn't look up."
+                    },
+                    {
+                        "text_zh": "您应该去旅游，不要老是待在胡同里。",
+                        "text_pinyin": "Nín yīnggāi qù lǚyóu, búyào lǎo shì dāi zài hútòng lǐ.",
+                        "text_en": "You should go traveling, don't always stay in the hutongs.",
+                        "score": 0.0,
+                        "feedback": "She smiles briefly but it doesn't reach her eyes. \"This is where I want to be,\" she says, and keeps drawing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "深情……你这个年轻人说话倒是让人暖心。来，你帮我看看这个角落的比例画得准不准。这堵墙后面原来有一棵老槐树，去年被砍了。我还是把它画上了——在我的地图上，它永远都在。",
+                "text_pinyin": "Shēnqíng…… nǐ zhège niánqīngrén shuōhuà dào shì ràng rén nuǎnxīn. Lái, nǐ bāng wǒ kànkan zhège jiǎoluò de bǐlì huà de zhǔn bù zhǔn. Zhè dǔ qiáng hòumiàn yuánlái yǒu yī kē lǎo huáishù, qùnián bèi kǎn le. Wǒ háishì bǎ tā huà shàng le — zài wǒ de dìtú shàng, tā yǒngyuǎn dōu zài.",
+                "text_en": "Deep affection… you young people do say things that warm the heart. Come, help me check if the proportions of this corner are accurate. Behind this wall there used to be an old scholar tree — it was cut down last year. I drew it in anyway — on my map, it will always be there."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Say something about her choice to draw the tree even though it's gone.",
+                "options": [
+                    {
+                        "text_zh": "这才是您的地图最珍贵的地方——它不只记录现在有什么，也记录了曾经有过什么。普通地图只呈现当下，您的包含了时间的厚度。",
+                        "text_pinyin": "Zhè cái shì nín de dìtú zuì zhēnguì de dìfang — tā bù zhǐ jìlù xiànzài yǒu shénme, yě jìlù le céngjīng yǒu guò shénme. Pǔtōng dìtú zhǐ chéngxiàn dāngxià, nín de bāohán le shíjiān de hòudù.",
+                        "text_en": "That's what makes your map most precious — it doesn't just record what exists now, but what once existed. Ordinary maps only show the present. Yours contains the thickness of time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She pats the paper gently with one finger, right where the tree is drawn. \"Thickness of time,\" she murmurs. \"I like that.\""
+                    },
+                    {
+                        "text_zh": "画不存在的东西不就是造假吗？地图应该准确反映现实。",
+                        "text_pinyin": "Huà bù cúnzài de dōngxī bú jiù shì zàojiǎ ma? Dìtú yīnggāi zhǔnquè fǎnyìng xiànshí.",
+                        "text_en": "Drawing things that don't exist is just falsifying, isn't it? Maps should accurately reflect reality.",
+                        "score": 0.0,
+                        "feedback": "She looks at you steadily. \"This is a memory map, not a navigation app,\" she says, and turns back to her work."
+                    },
+                    {
+                        "text_zh": "槐树被砍了太可惜了。是谁决定砍的？",
+                        "text_pinyin": "Huáishù bèi kǎn le tài kěxī le. Shì shéi juédìng kǎn de?",
+                        "text_en": "Such a shame the tree was cut down. Who decided to cut it?",
+                        "score": 0.0,
+                        "feedback": "She shakes her head slightly. \"Does it matter now?\" she says quietly, and keeps drawing."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Hutong mapping has become a grassroots preservation movement in Beijing. As traditional neighborhoods are demolished for development, elderly residents and volunteers create hand-drawn maps that capture not just physical layouts but the social geography of communities — who lived where, which courtyards shared walls, where the communal water tap stood. These maps exist in tension with official cartography, preserving a human layer that satellite imagery cannot capture."
+    }
+}

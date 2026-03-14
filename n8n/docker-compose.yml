@@ -1,0 +1,38 @@
+# OpenClaw n8n workflow engine
+# Run: docker compose -f n8n/docker-compose.yml up -d
+#
+# n8n provides the automation layer between Aelu and Telegram:
+# - Scheduled study nudges
+# - Review queue polling
+# - Audit briefing delivery
+#
+# Aelu Flask endpoints (openclaw_routes.py) serve as the data source.
+# n8n workflows call these endpoints and route results to Telegram.
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_AUTH_PASSWORD:-changeme}
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      # Aelu API connection
+      - AELU_BASE_URL=${AELU_BASE_URL:-http://host.docker.internal:5173}
+      - OPENCLAW_API_KEY=${OPENCLAW_API_KEY:-}
+      - OPENCLAW_TELEGRAM_TOKEN=${OPENCLAW_TELEGRAM_TOKEN:-}
+      - OPENCLAW_TELEGRAM_OWNER_ID=${OPENCLAW_TELEGRAM_OWNER_ID:-}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/home/node/workflows:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  n8n_data:

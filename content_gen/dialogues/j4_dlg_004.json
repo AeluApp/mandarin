@@ -1,0 +1,117 @@
+{
+  "title": "The Bookshop Corner",
+  "title_zh": "书店的角落",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You discover a small secondhand bookshop tucked away in an old building. The owner, Lao Zhao, is reading behind the counter. Few customers come here.",
+    "setup_zh": "你在一栋老楼里发现了一家小小的二手书店。老板老赵正在柜台后面看书。很少有客人来这里。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "随便看，不用急。这里的书都是别人不要的，但每本都有故事。有些书里还夹着以前主人留下的东西——车票、照片、写了字的纸条。",
+        "text_pinyin": "Suíbiàn kàn, bú yòng jí. Zhèlǐ de shū dōu shì biérén bú yào de, dàn měi běn dōu yǒu gùshì. Yǒuxiē shū lǐ hái jiā zhe yǐqián zhǔrén liú xià de dōngxi — chēpiào, zhàopiàn, xiě le zì de zhǐtiáo.",
+        "text_en": "Browse at your leisure, no rush. The books here are all ones other people didn't want, but each one has a story. Some still have things left by their previous owners — tickets, photos, handwritten notes."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about the secondhand books.",
+        "options": [
+          {
+            "text_zh": "夹在书里的东西有时候比书本身更有意思。那些车票和纸条就像一个人生活的痕迹，虽然你不认识他，但能感觉到他曾经在这里。",
+            "text_pinyin": "Jiā zài shū lǐ de dōngxi yǒu shíhou bǐ shū běnshēn gèng yǒu yìsi. Nàxiē chēpiào hé zhǐtiáo jiù xiàng yīge rén shēnghuó de hénjì, suīrán nǐ bú rènshi tā, dàn néng gǎnjué dào tā céngjīng zài zhèlǐ.",
+            "text_en": "The things tucked in books are sometimes more interesting than the books themselves. Those tickets and notes are like traces of someone's life — even though you don't know them, you can feel they were here.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Observant and thoughtful — sees secondhand books as vessels of human presence."
+          },
+          {
+            "text_zh": "这些旧书应该整理一下，把里面夹的东西都清理干净，这样看起来更整齐，也好卖一些。",
+            "text_pinyin": "Zhèxiē jiù shū yīnggāi zhěnglǐ yīxià, bǎ lǐmiàn jiā de dōngxi dōu qīnglǐ gānjìng, zhèyàng kàn qǐlái gèng zhěngqí, yě hǎo mài yīxiē.",
+            "text_en": "You should tidy these old books up — clear out everything tucked inside so they look neater and sell better.",
+            "score": 0.0,
+            "feedback": "Lao Zhao pauses, then quietly says: 'If I took those things out, these books would just be paper.'"
+          },
+          {
+            "text_zh": "你这里有英文书吗？",
+            "text_pinyin": "Nǐ zhèlǐ yǒu Yīngwén shū ma?",
+            "text_en": "Do you have English books here?",
+            "score": 0.0,
+            "feedback": "Language preference question that ignores the charm of the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊。我最喜欢的是一本旧小说里夹的一封信，是一个人写给自己女儿的。信上说「爸爸不在的时候，看看这本书，就像爸爸在你旁边一样。」后来这本书到了我这里，那个女儿可能已经长大了。",
+        "text_pinyin": "Shì a. Wǒ zuì xǐhuān de shì yī běn jiù xiǎoshuō lǐ jiā de yī fēng xìn, shì yīge rén xiě gěi zìjǐ nǚ'ér de. Xìn shàng shuō 'bàba bú zài de shíhou, kàn kàn zhè běn shū, jiù xiàng bàba zài nǐ pángbiān yīyàng.' Hòulái zhè běn shū dào le wǒ zhèlǐ, nàge nǚ'ér kěnéng yǐjīng zhǎng dà le.",
+        "text_en": "Yeah. My favorite is a letter tucked in an old novel, written by someone to his daughter. It said, 'When dad isn't around, read this book, and it'll be like dad is right beside you.' Then the book ended up here — that daughter has probably grown up by now."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to this story.",
+        "options": [
+          {
+            "text_zh": "那封信还在书里吗？也许有一天她会来找这本书。有些东西丢了以后，你才知道它有多重要。",
+            "text_pinyin": "Nà fēng xìn hái zài shū lǐ ma? Yěxǔ yǒu yītiān tā huì lái zhǎo zhè běn shū. Yǒuxiē dōngxi diū le yǐhòu, nǐ cái zhīdào tā yǒu duō zhòngyào.",
+            "text_en": "Is the letter still in the book? Maybe one day she'll come looking for it. Some things — you only realize how important they are after you've lost them.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Hopeful and tender — imagines a reunion while acknowledging loss."
+          },
+          {
+            "text_zh": "这本小说是谁写的？",
+            "text_pinyin": "Zhè běn xiǎoshuō shì shéi xiě de?",
+            "text_en": "Who wrote this novel?",
+            "score": 0.0,
+            "feedback": "Focuses on the wrong detail; the letter matters, not the author."
+          },
+          {
+            "text_zh": "你这里有空调吗？有点热。",
+            "text_pinyin": "Nǐ zhèlǐ yǒu kōngtiáo ma? Yǒudiǎn rè.",
+            "text_en": "Do you have air conditioning here? It's a bit hot.",
+            "score": 0.0,
+            "feedback": "Comfort complaint during an emotional story."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "还在。我不会把它拿出来。也许你说得对，也许她永远不会来。但只要信还在书里，这个故事就还没有结束。",
+        "text_pinyin": "Hái zài. Wǒ bú huì bǎ tā ná chūlái. Yěxǔ nǐ shuō de duì, yěxǔ tā yǒngyuǎn bú huì lái. Dàn zhǐyào xìn hái zài shū lǐ, zhège gùshì jiù hái méiyǒu jiéshù.",
+        "text_en": "Still there. I won't take it out. Maybe you're right, maybe she'll never come. But as long as the letter stays in the book, the story hasn't ended."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his philosophy of keeping the letter.",
+        "options": [
+          {
+            "text_zh": "这就是你开这家书店的原因吧。不只是卖书，是帮这些书保留它们的记忆，等着也许有一天会被需要它的人找到。",
+            "text_pinyin": "Zhè jiù shì nǐ kāi zhè jiā shūdiàn de yuányīn ba. Bù zhǐ shì mài shū, shì bāng zhèxiē shū bǎoliú tāmen de jìyì, děng zhe yěxǔ yǒu yītiān huì bèi xūyào tā de rén zhǎo dào.",
+            "text_en": "That's why you run this bookshop, isn't it. Not just selling books, but helping them preserve their memories, waiting for the day when the person who needs them might find them.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Sees the deeper purpose — reframes the bookshop as a place of safekeeping."
+          },
+          {
+            "text_zh": "现在大家都看电子书了，纸质书越来越少了。",
+            "text_pinyin": "Xiànzài dàjiā dōu kàn diànzǐ shū le, zhǐzhì shū yuè lái yuè shǎo le.",
+            "text_en": "Everyone reads e-books now, paper books are getting fewer and fewer.",
+            "score": 0.0,
+            "feedback": "Industry observation that misses the emotional core."
+          },
+          {
+            "text_zh": "你每天几点关门？",
+            "text_pinyin": "Nǐ měi tiān jǐ diǎn guānmén?",
+            "text_en": "What time do you close every day?",
+            "score": 0.0,
+            "feedback": "Logistical question at a poignant moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Secondhand bookshops (二手书店) in China often occupy marginal spaces in old buildings, run by passionate individuals rather than profit. The Chinese tradition of leaving personal items in books — letters, tickets, pressed flowers — creates accidental time capsules. These shops serve as quiet sanctuaries for those who appreciate the intersection of reading and human memory."
+  }
+}

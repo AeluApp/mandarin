@@ -13,13 +13,18 @@ _DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "data
 
 
 def _load_json(filename):
-    with open(os.path.join(_DATA_DIR, filename)) as f:
-        return json.load(f)
+    try:
+        with open(os.path.join(_DATA_DIR, filename)) as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        logger.error("Failed to load content data file %s: %s", filename, e)
+        raise
 
 
 _VALID_ITEM_TYPES = {"vocab", "sentence", "phrase", "chunk", "grammar"}
 _VALID_REGISTERS = {"casual", "neutral", "professional", "mixed"}
 _VALID_STATUSES = {"drill_ready", "raw", "retired"}
+_VALID_REVIEW_STATUSES = {"approved", "pending_review", "rejected"}
 
 
 def insert_content_item(conn: sqlite3.Connection, *,
@@ -28,10 +33,12 @@ def insert_content_item(conn: sqlite3.Connection, *,
                         register: str = "neutral", content_lens: str = None,
                         source: str = None, source_context: str = None,
                         difficulty: float = 0.5, tags: list = None,
-                        status: str = "drill_ready") -> int:
+                        status: str = "drill_ready",
+                        review_status: str = "approved") -> int:
     """Insert a content item. Returns the new row ID.
 
     Validates inputs before insertion — raises ValueError on bad data.
+    AI-generated items should pass review_status='pending_review'.
     """
     if not hanzi or not hanzi.strip():
         raise ValueError("hanzi must be non-empty")
@@ -41,16 +48,19 @@ def insert_content_item(conn: sqlite3.Connection, *,
         raise ValueError(f"invalid register: {register!r}")
     if status not in _VALID_STATUSES:
         raise ValueError(f"invalid status: {status!r}")
+    if review_status not in _VALID_REVIEW_STATUSES:
+        raise ValueError(f"invalid review_status: {review_status!r}")
     if hsk_level is not None and not (1 <= hsk_level <= 9):
         raise ValueError(f"hsk_level must be 1-9, got {hsk_level}")
     cur = conn.execute("""
         INSERT INTO content_item
             (hanzi, pinyin, english, item_type, hsk_level, register,
-             content_lens, source, source_context, difficulty, tags, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             content_lens, source, source_context, difficulty, tags, status,
+             review_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (hanzi, pinyin, english, item_type, hsk_level, register,
           content_lens, source, source_context, difficulty,
-          json.dumps(tags or []), status))
+          json.dumps(tags or []), status, review_status))
     return cur.lastrowid
 
 
@@ -70,6 +80,25 @@ def seed_context_notes(conn: sqlite3.Connection, notes_dict: dict) -> int:
 _VALID_MODALITIES = {"reading", "listening", "speaking", "ime"}
 
 
+def _filter_unreviewed_ai_content(items: List[dict]) -> List[dict]:
+    """NIST AI RMF: skip AI-generated content that hasn't been human-reviewed.
+
+    If is_ai_generated=1 and human_reviewed_at is NULL, the item is excluded
+    and a warning is logged. This is a soft gate — does not require schema
+    changes to human_reviewed_at NOT NULL.
+    """
+    filtered = []
+    for item in items:
+        if item.get("is_ai_generated") and not item.get("human_reviewed_at"):
+            logger.warning(
+                "NIST-AI: skipping unreviewed AI content item %s (hanzi=%s, prompt=%s)",
+                item.get("id"), item.get("hanzi"), item.get("generated_by_prompt"),
+            )
+            continue
+        filtered.append(item)
+    return filtered
+
+
 def get_items_due(conn: sqlite3.Connection, modality: str,
                   limit: int = 20, today: str = None,
                   user_id: int = 1) -> List[dict]:
@@ -78,6 +107,8 @@ def get_items_due(conn: sqlite3.Connection, modality: str,
     Only returns drill_ready items. Uses half-life retention model
     to prioritize items with lowest predicted recall probability.
     Falls back to next_review_date ordering if half_life not available.
+
+    NIST AI RMF: AI-generated content without human review is excluded.
     """
     today = today or date.today().isoformat()
     rows = conn.execute("""
@@ -89,7 +120,10 @@ def get_items_due(conn: sqlite3.Connection, modality: str,
         LEFT JOIN progress p ON ci.id = p.content_item_id AND p.modality = ? AND p.user_id = ?
         WHERE ci.is_mined_out = 0
           AND ci.status = 'drill_ready'
+          AND ci.review_status = 'approved'
+          AND (ci.is_ai_generated = 0 OR ci.human_reviewed_at IS NOT NULL)
           AND (p.next_review_date IS NULL OR p.next_review_date <= ?)
+          AND (p.suspended_until IS NULL OR p.suspended_until <= ?)
         ORDER BY
             CASE WHEN p.next_review_date IS NULL THEN 0 ELSE 1 END,
             -- Prioritize by lowest predicted recall (most urgent)
@@ -99,8 +133,9 @@ def get_items_due(conn: sqlite3.Connection, modality: str,
             p.next_review_date ASC,
             ci.difficulty ASC
         LIMIT ?
-    """, (modality, user_id, today, today, limit)).fetchall()
-    return [dict(r) for r in rows]
+    """, (modality, user_id, today, today, today, limit)).fetchall()
+    items = [dict(r) for r in rows]
+    return _filter_unreviewed_ai_content(items)
 
 
 def get_new_items(conn: sqlite3.Connection, modality: str,
@@ -109,6 +144,8 @@ def get_new_items(conn: sqlite3.Connection, modality: str,
     """Get content items never reviewed in a given modality.
 
     Only returns drill_ready items.
+
+    NIST AI RMF: AI-generated content without human review is excluded.
     """
     if modality not in _VALID_MODALITIES:
         raise ValueError(f"Invalid modality: {modality!r}")
@@ -120,12 +157,15 @@ def get_new_items(conn: sqlite3.Connection, modality: str,
         WHERE p.id IS NULL
           AND ci.is_mined_out = 0
           AND ci.status = 'drill_ready'
+          AND ci.review_status = 'approved'
+          AND (ci.is_ai_generated = 0 OR ci.human_reviewed_at IS NOT NULL)
           AND ci.{suitable_col} = 1
           AND (ci.hsk_level IS NULL OR ci.hsk_level <= ?)
         ORDER BY ci.hsk_level ASC, ci.difficulty ASC
         LIMIT ?
     """, (modality, user_id, hsk_max, limit)).fetchall()
-    return [dict(r) for r in rows]
+    items = [dict(r) for r in rows]
+    return _filter_unreviewed_ai_content(items)
 
 
 def content_count(conn: sqlite3.Connection) -> int:

@@ -1,0 +1,94 @@
+{
+    "title": "Platform Nine",
+    "title_zh": "九号站台",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_travel_1_01_v0",
+    "tree": {
+        "setup": "A bustling train station, voices echoing off the high ceiling. Announcements scroll across electronic boards in red characters. You need to find your platform but the station is enormous. A security guard, Xiao Li, is standing near the entrance holding a thermos. He looks like he knows where everything is.",
+        "setup_zh": "热闹的火车站，声音在高高的天花板下回荡。红色的字在电子屏上滚动。你要找站台，但车站太大了。保安小李拿着保温杯站在入口旁边，看起来什么都知道。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你要去哪里？",
+                "text_pinyin": "nǐ hǎo! nǐ yào qù nǎlǐ?",
+                "text_en": "Hello! Where are you going?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him your destination.",
+                "options": [
+                    {
+                        "text_zh": "我要去北京。",
+                        "text_pinyin": "wǒ yào qù běijīng.",
+                        "text_en": "I'm going to Beijing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Li nods and points toward the far end of the station without hesitation. He gives directions daily -- he could do it blindfolded.「九号站台，往那边走。」"
+                    },
+                    {
+                        "text_zh": "我的火车在哪里？",
+                        "text_pinyin": "wǒ de huǒchē zài nǎlǐ?",
+                        "text_en": "Where is my train?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Li asks to see your ticket. He squints at the tiny print, then points confidently.「那边！」在哪里 is the essential 'where is' pattern."
+                    },
+                    {
+                        "text_zh": "火车站很大！",
+                        "text_pinyin": "huǒchē zhàn hěn dà!",
+                        "text_en": "The train station is so big!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Li chuckles -- he hears this from travelers every day.「是啊，小心别走丢了。」True, but you still need to tell him where you're going."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "九号站台。一直走，然后左拐。",
+                "text_pinyin": "jiǔ hào zhàntái. yìzhí zǒu, ránhòu zuǒ guǎi.",
+                "text_en": "Platform 9. Go straight, then turn left."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the directions.",
+                "options": [
+                    {
+                        "text_zh": "一直走，左拐。谢谢！",
+                        "text_pinyin": "yìzhí zǒu, zuǒ guǎi. xièxie!",
+                        "text_en": "Go straight, turn left. Thanks!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Li gives a small salute with his thermos hand. Repeating directions back is smart -- it confirms understanding. 一直走 means 'go straight.'"
+                    },
+                    {
+                        "text_zh": "谢谢你！",
+                        "text_pinyin": "xièxie nǐ!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Li nods. He watches you go, ready to shout a correction if you take a wrong turn. He's that kind of guard."
+                    },
+                    {
+                        "text_zh": "左拐还是右拐？",
+                        "text_pinyin": "zuǒ guǎi háishì yòu guǎi?",
+                        "text_en": "Left turn or right turn?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「左！左！」Xiao Li holds up his left hand and waves it. Asking for clarification with 还是 (háishì, 'or') is always wise when directions are involved."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "快走吧！火车快开了！",
+                "text_pinyin": "kuài zǒu ba! huǒchē kuài kāi le!",
+                "text_en": "Hurry! The train is about to leave!"
+            }
+        ],
+        "cultural_note": "Chinese train stations (火车站) are often massive. Always arrive early. Security guards and station workers are usually happy to help with directions. 号 (hào) is used for numbered platforms, gates, and rooms."
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "title": "The Bookshop That Stays Open Late",
+    "title_zh": "开到很晚的书店",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You discover a small 24-hour bookshop while walking home late at night. The owner, a quiet man in his fifties, is reading behind the counter.",
+        "setup_zh": "深夜走路回家时你发现了一家二十四小时小书店。五十多岁的老板安静地坐在柜台后面读书。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎。这么晚了还有人来，我很高兴。这家店已经开了二十年了，白天来的人越来越少，反而是夜里会来一些需要安静地方的人。",
+                "text_pinyin": "Huānyíng. Zhème wǎn le hái yǒu rén lái, wǒ hěn gāoxìng. Zhè jiā diàn yǐjīng kāi le èrshí nián le, báitiān lái de rén yuè lái yuè shǎo, fǎn'ér shì yè lǐ huì lái yīxiē xūyào ānjìng dìfang de rén.",
+                "text_en": "Welcome. I'm glad someone comes even this late. This shop has been open for twenty years. Fewer people come during the day, but at night, people who need a quiet place find their way here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about why he keeps the bookshop open 24 hours.",
+                "options": [
+                    {
+                        "text_zh": "二十年……在这个时代坚持开一家实体书店，一定不容易。为什么选择开到深夜？不只是为了生意吧？",
+                        "text_pinyin": "Èrshí nián…… zài zhège shídài jiānchí kāi yī jiā shítǐ shūdiàn, yídìng bù róngyì. Wèi shénme xuǎnzé kāi dào shēnyè? Bù zhǐ shì wèile shēngyì ba?",
+                        "text_en": "Twenty years... persisting with a physical bookshop in this era can't be easy. Why choose to stay open late into the night? It's not just about business, is it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Curious and respectful — sees the deeper purpose behind his choice."
+                    },
+                    {
+                        "text_zh": "你这里有畅销书榜吗？",
+                        "text_pinyin": "Nǐ zhèlǐ yǒu chàngxiāo shū bǎng ma?",
+                        "text_en": "Do you have a bestseller list?",
+                        "score": 0.0,
+                        "feedback": "Treats a late-night sanctuary like a commercial store."
+                    },
+                    {
+                        "text_zh": "深夜开门不害怕吗？",
+                        "text_pinyin": "Shēnyè kāimén bú hàipà ma?",
+                        "text_en": "Aren't you afraid staying open at night?",
+                        "score": 0.0,
+                        "feedback": "Focuses on safety rather than the spirit of the place."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不只是为了生意。深夜来的人大多不是为了买书，是为了找一个能待着的地方。有加班到很晚不想回空房子的人，有吵架后需要冷静的人，也有只是睡不着想翻翻书的人。我觉得一个城市需要这样的地方。",
+                "text_pinyin": "Bù zhǐ shì wèile shēngyì. Shēnyè lái de rén dàduō bú shì wèile mǎi shū, shì wèile zhǎo yīge néng dāi zhe de dìfang. Yǒu jiābān dào hěn wǎn bù xiǎng huí kōng fángzi de rén, yǒu chǎojià hòu xūyào lěngjìng de rén, yě yǒu zhǐ shì shuì bù zháo xiǎng fānfan shū de rén. Wǒ juéde yīge chéngshì xūyào zhèyàng de dìfang.",
+                "text_en": "Not just business. Most people who come at night aren't here to buy books — they're looking for somewhere to be. Some worked late and don't want to go back to an empty apartment. Some need to cool down after a fight. Some just can't sleep and want to browse. I think a city needs places like this."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on the role of this kind of space.",
+                "options": [
+                    {
+                        "text_zh": "你说得对，一个城市需要这样的地方——不卖东西，不问你为什么来，只是亮着灯等你。这家店不只是书店，是一盏留给深夜里需要温暖的人的灯。",
+                        "text_pinyin": "Nǐ shuō de duì, yīge chéngshì xūyào zhèyàng de dìfang — bú mài dōngxi, bú wèn nǐ wèi shénme lái, zhǐ shì liàng zhe dēng děng nǐ. Zhè jiā diàn bù zhǐ shì shūdiàn, shì yī zhǎn liú gěi shēnyè lǐ xūyào wēnnuǎn de rén de dēng.",
+                        "text_en": "A city needs places like this — not selling anything, not asking why you came, leaving the light on and waiting. This shop isn't a bookstore — it's a lamp left on for people who need warmth at night.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And deeply appreciative — captures the essence of what he's created."
+                    },
+                    {
+                        "text_zh": "但这样的店怎么赚钱呢？房租那么贵。",
+                        "text_pinyin": "Dàn zhèyàng de diàn zěnme zhuàn qián ne? Fángzū nàme guì.",
+                        "text_en": "But how does a shop like this make money? Rent is so expensive.",
+                        "score": 0.0,
+                        "feedback": "Pragmatic but deflating — he clearly keeps it open for reasons beyond profit."
+                    },
+                    {
+                        "text_zh": "你平时看什么类型的书？",
+                        "text_pinyin": "Nǐ píngshí kàn shénme lèixíng de shū?",
+                        "text_en": "What kind of books do you usually read?",
+                        "score": 0.0,
+                        "feedback": "Not wrong but shifts away from the deeper conversation about purpose."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一盏灯……谢谢你这么说。你今晚随便坐，想看什么都可以。不用买，就待着就好。这里的灯会一直亮着的。",
+                "text_pinyin": "Yī zhǎn dēng…… xièxie nǐ zhème shuō. Nǐ jīn wǎn suíbiàn zuò, xiǎng kàn shénme dōu kěyǐ. Bú yòng mǎi, jiù dāi zhe jiù hǎo. Zhèlǐ de dēng huì yīzhí liàng zhe de.",
+                "text_en": "A lamp... thank you for saying that. Sit anywhere tonight, read whatever you like. No need to buy, just being here is enough. The light here will always be on."
+            }
+        ],
+        "cultural_note": "24-hour bookshops (二十四小时书店) have become a cultural phenomenon in Chinese cities, most famously Sanlian Taofen Bookstore in Beijing. They serve as refuges for night owls, insomniacs, and people who simply need a quiet space. The concept resonates deeply in a culture where urban loneliness is widespread, and these shops are often described as「深夜里的一盏灯」(a light in the deep night) — spaces that offer belonging without conditions."
+    }
+}

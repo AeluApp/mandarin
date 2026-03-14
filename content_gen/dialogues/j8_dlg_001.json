@@ -1,0 +1,185 @@
+{
+    "title": "The Teacher Who Stopped Grading",
+    "title_zh": "不再打分的老师",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+        "setup": "You're having tea with Ms. Jiang, a recently retired high school Chinese literature teacher, in her small apartment filled with student letters. After thirty years in the classroom, she left because she could no longer reconcile her love of literature with what the education system demanded. She seems at peace with her decision but carries the weight of something unresolved.",
+        "setup_zh": "你在蒋老师——一位刚退休的高中语文老师——的小公寓里喝茶。公寓里堆满了学生的来信。在课堂上教了三十年后，她离开了，因为她无法再调和自己对文学的热爱与教育体制的要求。她对自己的决定看似平静，但似乎还有什么未解的心结。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道我最后一堂课上了什么吗？鲁迅的《故乡》。我问学生：「闰土为什么变了？」标准答案是封建社会的压迫。但有个学生说：「因为他长大了，长大就是这样的。」我觉得那个回答比标准答案深刻一百倍，但考试只认标准答案。那一刻我突然觉得，我不是在教文学，我是在教应试技巧。",
+                "text_pinyin": "Nǐ zhīdào wǒ zuìhòu yī táng kè shàng le shénme ma? Lǔ Xùn de 'Gùxiāng'. Wǒ wèn xuéshēng: 'Rùntǔ wèishéme biàn le?' Biāozhǔn dá'àn shì fēngjiàn shèhuì de yāpò. Dàn yǒu ge xuéshēng shuō: 'Yīnwèi tā zhǎng dà le, zhǎng dà jiù shì zhèyàng de.' Wǒ juéde nàge huídá bǐ biāozhǔn dá'àn shēnkè yībǎi bèi, dàn kǎoshì zhǐ rèn biāozhǔn dá'àn. Nà yī kè wǒ tūrán juéde, wǒ bú shì zài jiāo wénxué, wǒ shì zài jiāo yìngshì jìqiǎo.",
+                "text_en": "Know what my last class was about? Lu Xun's 'My Old Home.' I asked: 'Why did Runtu change?' Standard answer: feudal oppression. But one student said: 'Because he grew up — that's what growing up is like.' A hundred times more profound. But exams only accept the standard answer. That moment I realized: I wasn't teaching literature, I was teaching test-taking."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to her?",
+                "options": [
+                    {
+                        "text_zh": "那个学生用自己的经验去读文本，而不是套别人给的框架。但考试奖励的恰恰不是这个——它奖励的是你能不能准确地复现出那个框架。",
+                        "text_pinyin": "Nàge xuéshēng yòng zìjǐ de jīngyàn qù dú wénběn, ér bú shì tào biérén gěi de kuàngjià. Dàn kǎoshì jiǎnglì de qiàqià bú shì zhège — tā jiǎnglì de shì nǐ néng bù néng zhǔnquè de fùxiàn chū nàge kuàngjià.",
+                        "text_en": "That student read the text through his own experience, not someone else's framework. But the exam rewards exactly the opposite — it rewards whether you can accurately reproduce that framework.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "蒋老师放下茶杯，直起身：「对。准确复现。三十年里我改了多少份这样的卷子。」"
+                    },
+                    {
+                        "text_zh": "但标准答案也是有道理的——封建压迫确实是鲁迅的主题之一。",
+                        "text_pinyin": "Dàn biāozhǔn dá'àn yě shì yǒu dàolǐ de — fēngjiàn yāpò quèshí shì Lǔ Xùn de zhǔtí zhī yī.",
+                        "text_en": "But the standard answer isn't wrong — feudal oppression really is one of Lu Xun's themes.",
+                        "score": 0.0,
+                        "feedback": "蒋老师点点头：「没错。它也对。但那个学生的答案，也对。」她等着你往下想。"
+                    },
+                    {
+                        "text_zh": "现在高考改革了很多，主观题的比重也在提高吧？",
+                        "text_pinyin": "Xiànzài gāokǎo gǎigé le hěn duō, zhǔguān tí de bǐzhòng yě zài tígāo ba?",
+                        "text_en": "The gaokao has been reformed a lot — the proportion of subjective questions has been increasing, hasn't it?",
+                        "score": 0.0,
+                        "feedback": "蒋老师苦笑：「主观题有标准答案。这个改革我等了三十年。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "服从性——你这个词用得太准了。三十年里，我看着一届又一届学生，进来的时候对世界充满好奇，出去的时候只关心分数。我不怪学生，也不完全怪体制——这是一个系统性的问题。当十三亿人需要一个「公平」的筛选机制，标准化就成了唯一的选择。但公平和深度之间，我们选了公平，代价就是扼杀了深度。",
+                "text_pinyin": "Fúcóngxìng — nǐ zhège cí yòng de tài zhǔn le. Sānshí nián lǐ, wǒ kàn zhe yī jiè yòu yī jiè xuéshēng, jìnlái de shíhòu duì shìjiè chōngmǎn hàoqí, chūqù de shíhòu zhǐ guānxīn fēnshù. Wǒ bú guài xuéshēng, yě bù wánquán guài tǐzhì — zhè shì yīge xìtǒngxìng de wèntí. Dāng shísān yì rén xūyào yīge 'gōngpíng' de shāixuǎn jīzhì, biāozhǔnhuà jiù chéng le wéiyī de xuǎnzé. Dàn gōngpíng hé shēndù zhī jiān, wǒmen xuǎn le gōngpíng, dàijià jiù shì èshā le shēndù.",
+                "text_en": "Compliance — that word is too accurate. Over thirty years, I watched class after class of students enter full of curiosity about the world and leave caring only about scores. I don't blame the students, and I don't entirely blame the system — it's a systemic problem. When 1.3 billion people need a 'fair' screening mechanism, standardization becomes the only option. But between fairness and depth, we chose fairness, and the cost was strangling depth."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to her?",
+                "options": [
+                    {
+                        "text_zh": "任何允许主观判断的系统都会引入偏见。所以我能理解为什么选了标准化。只是——即使考试制度没法改，课堂上能不能让学生知道，那些不能得分的答案，有时候更真实？",
+                        "text_pinyin": "Rènhé yǔnxǔ zhǔguān pànduàn de xìtǒng dōu huì yǐnrù piānjiàn. Suǒyǐ wǒ néng lǐjiě wèishéme xuǎn le biāozhǔnhuà. Zhǐ shì — jíshǐ kǎoshì zhìdù méifǎ gǎi, kètáng shàng néng bu néng ràng xuéshēng zhīdào, nàxiē bù néng dé fēn de dá'àn, yǒu shíhòu gèng zhēnshí?",
+                        "text_en": "Any system allowing subjective judgment introduces bias — so I understand why standardization won. But even if the exam can't change, can the classroom at least let students know that unscored answers are sometimes the more honest ones?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "蒋老师慢慢点头：「我试过。」她停顿了一下。「这就是后来发生的事。」"
+                    },
+                    {
+                        "text_zh": "那你为什么不去开自己的补习班？自己当老板，可以想怎么教就怎么教。",
+                        "text_pinyin": "Nà nǐ wèishéme bú qù kāi zìjǐ de bǔxí bān? Zìjǐ dāng lǎobǎn, kěyǐ xiǎng zěnme jiāo jiù zěnme jiāo.",
+                        "text_en": "Why not start your own tutoring center? Be your own boss — teach however you want.",
+                        "score": 0.0,
+                        "feedback": "蒋老师轻声说：「补习班的家长，比学校家长更在乎分数。」"
+                    },
+                    {
+                        "text_zh": "国外的教育体制也有很多问题，不只是中国这样。",
+                        "text_pinyin": "Guówài de jiàoyù tǐzhì yě yǒu hěn duō wèntí, bù zhǐ shì Zhōngguó zhèyàng.",
+                        "text_en": "Education systems abroad have plenty of problems too — this isn't unique to China.",
+                        "score": 0.0,
+                        "feedback": "蒋老师笑了笑：「可能。但我教的是这里的孩子。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "体制的缝隙……我确实试过。有一段时间，我在课堂上花十分钟讲标准答案，剩下的时间带学生做自由讨论。但后来被家长投诉了——说我浪费时间，不讲考点。校长找我谈话，说理解我的想法，但让我「配合一下」。这个「配合一下」就是三十年——我配合了三十年，最后连自己都配合不了了。",
+                "text_pinyin": "Tǐzhì de fèngxì…… wǒ quèshí shì guò. Yǒu yī duàn shíjiān, wǒ zài kètáng shàng huā shí fēnzhōng jiǎng biāozhǔn dá'àn, shèng xià de shíjiān dài xuéshēng zuò zìyóu tǎolùn. Dàn hòulái bèi jiāzhǎng tóusù le — shuō wǒ làngfèi shíjiān, bù jiǎng kǎodiǎn. Xiàozhǎng zhǎo wǒ tánhuà, shuō lǐjiě wǒ de xiǎngfǎ, dàn ràng wǒ 'pèihé yīxià'. Zhège 'pèihé yīxià' jiù shì sānshí nián — wǒ pèihé le sānshí nián, zuìhòu lián zìjǐ dōu pèihé bùliǎo le.",
+                "text_en": "Cracks in the system… I did try. For a while, I spent ten minutes per class on the standard answers and used the remaining time for free discussion. But then parents complained — said I was wasting time, not covering test points. The principal talked to me, said he understood my ideas but asked me to 'cooperate a little.' That 'cooperate a little' lasted thirty years — I cooperated for thirty years, until finally I couldn't even cooperate with myself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to her?",
+                "options": [
+                    {
+                        "text_zh": "「配合一下」这四个字很可怕——它不是命令你改变，而是温和地请求你让步。每次让步都很小，小到觉得不值得抗争。三十年累积下来，就变成了一种自我背叛。",
+                        "text_pinyin": "'Pèihé yīxià' zhè sì ge zì hěn kěpà — tā bú shì mìnglìng nǐ gǎibiàn, ér shì wēnhé de qǐngqiú nǐ ràngbù. Měi cì ràngbù dōu hěn xiǎo, xiǎo dào juéde bù zhíde kàngzhēng. Sānshí nián lěijī xiàlái, jiù biàn chéng le yī zhǒng zìwǒ bèipàn.",
+                        "text_en": "'Cooperate a little' — insidious. Not an order to change, a gentle request to yield. Each concession so small it's not worth fighting. Thirty years of that accumulates into self-betrayal.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "蒋老师握着茶杯，看着桌面，过了一会儿才说：「自我背叛。对。就是这种感觉。」"
+                    },
+                    {
+                        "text_zh": "其实每个行业都是这样的，不只是教育。",
+                        "text_pinyin": "Qíshí měige hángyè dōu shì zhèyàng de, bù zhǐ shì jiàoyù.",
+                        "text_en": "Actually every field is like this — it's not just education.",
+                        "score": 0.0,
+                        "feedback": "蒋老师沉默了一下：「可能。但我说的是这三十年。」"
+                    },
+                    {
+                        "text_zh": "您现在可以写一本关于教育的书，肯定有很多人想看。",
+                        "text_pinyin": "Nín xiànzài kěyǐ xiě yī běn guānyú jiàoyù de shū, kěndìng yǒu hěn duō rén xiǎng kàn.",
+                        "text_en": "Now you could write a book about education — I'm sure a lot of people would want to read it.",
+                        "score": 0.0,
+                        "feedback": "蒋老师淡淡地笑了：「书。出版社也要审的。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "自我背叛……对，就是这种感觉。但你知道让我最矛盾的是什么吗？我的学生里有好几个考上了北大、清华，后来都过得不错。从结果来看，这个系统是「有效」的。但有效不等于正确。那些被筛掉的学生呢？那些不适应标准化的孩子呢？系统只展示它的成功案例，失败案例是沉默的。",
+                "text_pinyin": "Zìwǒ bèipàn…… duì, jiù shì zhè zhǒng gǎnjué. Dàn nǐ zhīdào ràng wǒ zuì máodùn de shì shénme ma? Wǒ de xuéshēng lǐ yǒu hǎo jǐ ge kǎo shàng le Běidà, Qīnghuá, hòulái dōu guò de búcuò. Cóng jiéguǒ lái kàn, zhège xìtǒng shì 'yǒuxiào' de. Dàn yǒuxiào bù děngyú zhèngquè. Nàxiē bèi shāi diào de xuéshēng ne? Nàxiē bù shìyìng biāozhǔnhuà de háizi ne? Xìtǒng zhǐ zhǎnshì tā de chénggōng ànlì, shībài ànlì shì chénmò de.",
+                "text_en": "Self-betrayal… yes, that's exactly it. But you know what troubles me most? Several of my students got into Peking University, Tsinghua, and went on to do well. From the results, the system 'works.' But effective doesn't mean right. What about the students who were filtered out? The children who couldn't adapt to standardization? The system only displays its success stories — the failure cases are silent."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to her?",
+                "options": [
+                    {
+                        "text_zh": "我们用考上北大清华的故事来证明系统有效，但从来不追问被淘汰的人去了哪里。而且——即使是那些「成功」的学生，他们在这个过程中失去了什么？",
+                        "text_pinyin": "Wǒmen yòng kǎo shàng Běidà Qīnghuá de gùshì lái zhèngmíng xìtǒng yǒuxiào, dàn cónglái bù zhuīwèn bèi táotài de rén qù le nǎlǐ. Ér qiě — jíshǐ shì nàxiē 'chénggōng' de xuéshēng, tāmen zài zhège guòchéng zhōng shīqù le shénme?",
+                        "text_en": "We use Peking and Tsinghua success stories to prove the system works, but never ask where the filtered-out ones ended up. And even for the 'successful' students — what did they lose in the process?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "蒋老师把信封里厚厚的一叠信放到桌上：「这些是他们后来写给我的。你说的那个问题，很多人在信里问自己。」"
+                    },
+                    {
+                        "text_zh": "总有人要被淘汰的，社会资源本来就有限。",
+                        "text_pinyin": "Zǒng yǒu rén yào bèi táotài de, shèhuì zīyuán běnlái jiù yǒuxiàn.",
+                        "text_en": "Someone always has to be filtered out — social resources are limited after all.",
+                        "score": 0.0,
+                        "feedback": "蒋老师沉默了一会儿，平静地问：「那个被筛掉的，如果是你呢？」"
+                    },
+                    {
+                        "text_zh": "您有没有跟那些考上名校的学生还保持联系？",
+                        "text_pinyin": "Nín yǒu méiyǒu gēn nàxiē kǎo shàng míngxiào de xuéshēng hái bǎochí liánxì?",
+                        "text_en": "Do you still stay in touch with the students who got into top universities?",
+                        "score": 0.0,
+                        "feedback": "蒋老师指了指桌上那叠信：「写信的，大多数是当年成绩不好的那些。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "感受力的萎缩……你说到了我最心痛的地方。我见过太多「优秀」的学生，作文写得完美无缺，但你读完以后什么感觉都没有。因为那不是他们在写，是标准答案在写。他们的语言是借来的，情感是表演的。这不是学生的错，是系统教会他们：真实的感受不值钱，规范的表达才值钱。",
+                "text_pinyin": "Gǎnshòulì de wěisuō…… nǐ shuō dào le wǒ zuì xīntòng de dìfang. Wǒ jiàn guò tài duō 'yōuxiù' de xuéshēng, zuòwén xiě de wánměi wúquē, dàn nǐ dú wán yǐhòu shénme gǎnjué dōu méiyǒu. Yīnwèi nà bú shì tāmen zài xiě, shì biāozhǔn dá'àn zài xiě. Tāmen de yǔyán shì jiè lái de, qínggǎn shì biǎoyǎn de. Zhè bú shì xuéshēng de cuò, shì xìtǒng jiāohuì tāmen: zhēnshí de gǎnshòu bù zhíqián, guīfàn de biǎodá cái zhíqián.",
+                "text_en": "Atrophy of feeling… you've touched my deepest pain. I've seen too many 'excellent' students whose essays are technically flawless, but after reading them you feel nothing. Because it's not them writing — it's the standard answers writing. Their language is borrowed, their emotions performed. This isn't the students' fault — the system taught them: genuine feelings aren't worth anything, standardized expression is."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to her?",
+                "options": [
+                    {
+                        "text_zh": "教会他们用一种不属于自己的语言说话，然后让他们误以为那就是自己的声音。等真正的语言退化以后，想找回来也找不到了。蒋老师，您愿意离开，说明您自己的声音还在。",
+                        "text_pinyin": "Jiāohuì tāmen yòng yī zhǒng bù shǔyú zìjǐ de yǔyán shuōhuà, ránhòu ràng tāmen wù yǐwéi nà jiù shì zìjǐ de shēngyīn. Děng zhēnzhèng de yǔyán tuìhuà yǐhòu, xiǎng zhǎo huílái yě zhǎo bù dào le. Jiǎng lǎoshī, nín yuànyì líkāi, shuōmíng nín zìjǐ de shēngyīn hái zài.",
+                        "text_en": "They were taught to speak in a language that isn't theirs, then led to mistake it for their own voice. Once the real language atrophies, you can't find it back. Ms. Jiang, your leaving proves your voice is still there.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "蒋老师低下头，过了一会儿，轻声说：「我不确定。但我想知道。这也是为什么我出来了。」"
+                    },
+                    {
+                        "text_zh": "学生们还年轻，进了社会自然会找到自己的表达方式。",
+                        "text_pinyin": "Xuéshēng men hái niánqīng, jìn le shèhuì zìrán huì zhǎo dào zìjǐ de biǎodá fāngshì.",
+                        "text_en": "Students are still young — they'll naturally find their own way of expressing themselves once they enter society.",
+                        "score": 0.0,
+                        "feedback": "蒋老师摇摇头：「有些人找到了。有些人以为那个借来的语言就是自己的，再也没有发现。」"
+                    },
+                    {
+                        "text_zh": "现在自媒体那么发达，年轻人有很多地方可以表达自己。",
+                        "text_pinyin": "Xiànzài zì méitǐ nàme fādá, niánqīngrén yǒu hěn duō dìfang kěyǐ biǎodá zìjǐ.",
+                        "text_en": "With self-media so developed now, young people have so many places to express themselves.",
+                        "score": 0.0,
+                        "feedback": "蒋老师苦笑：「有地方说话，和有话说——不一样的。」"
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's gaokao (高考) college entrance examination shapes the lives of approximately 10 million students annually. The standardized answer system (标准答案) for Chinese literature questions has been a persistent point of contention, with critics arguing that literary interpretation — inherently subjective — is reduced to memorizable templates. Teachers who attempt to introduce critical thinking often face resistance from parents focused on exam scores, creating what many educators describe as an irreconcilable tension between genuine learning and assessment."
+    }
+}

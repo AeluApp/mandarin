@@ -1,0 +1,458 @@
+[
+  {
+    "id": "j1_wit_001",
+    "title": "The Noodle Stand",
+    "title_zh": "面摊",
+    "hsk_level": 1,
+    "text_zh": "一个面摊。我每个星期去。老板从来不说“你好”。他看我一眼。我坐下来。他给我面。一样的面，每次都一样。有一次我说“谢谢”。他看了我一眼，好像我说了不对的话。",
+    "text_pinyin": "Yí gè miàntān. Wǒ měi gè xīngqī qù. Lǎobǎn cónglái bù shuō 'nǐ hǎo'. Tā kàn wǒ yì yǎn. Wǒ zuò xiàlái. Tā gěi wǒ miàn. Yíyàng de miàn, měi cì dōu yíyàng. Yǒu yí cì wǒ shuō 'xièxie'. Tā kàn le wǒ yì yǎn, hǎoxiàng wǒ shuō le bú duì de huà.",
+    "text_en": "A noodle stand. I go every week. The owner never says 'hello.' He glances at me. I sit down. He brings me noodles. The same noodles, same every time. Once I said 'thank you.' He looked at me as if I'd said something wrong.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "为什么老板看了“我”一眼？",
+        "q_en": "Why did the owner give 'me' a look?",
+        "options": [
+          {"text": "因为不需要说谢谢", "pinyin": "yīnwèi bù xūyào shuō xièxie", "text_en": "because 'thank you' wasn't necessary", "correct": true},
+          {"text": "因为老板不高兴", "pinyin": "yīnwèi lǎobǎn bù gāoxìng", "text_en": "because the owner was unhappy", "correct": false},
+          {"text": "因为面不好吃", "pinyin": "yīnwèi miàn bù hǎo chī", "text_en": "because the noodles weren't good", "correct": false},
+          {"text": "因为老板听不到", "pinyin": "yīnwèi lǎobǎn tīng bú dào", "text_en": "because the owner couldn't hear", "correct": false}
+        ],
+        "difficulty": 0.4,
+        "explanation": "The owner's silence IS his greeting. Saying 'thank you' broke the unspoken routine — for this owner, just showing up every week says enough."
+      }
+    ]
+  },
+  {
+    "id": "j1_wit_002",
+    "title": "My Neighbor's Dog",
+    "title_zh": "邻居的狗",
+    "hsk_level": 1,
+    "text_zh": "邻居的狗很小。邻居说它很凶。我看了看。它在睡觉。邻居说：“它醒的时候很凶。”我说：“好。”",
+    "text_pinyin": "Línjū de gǒu hěn xiǎo. Línjū shuō tā hěn xiōng. Wǒ kàn le kàn. Tā zài shuìjiào. Línjū shuō: 'Tā xǐng de shíhou hěn xiōng.' Wǒ shuō: 'Hǎo.'",
+    "text_en": "My neighbor's dog is tiny. My neighbor says it's fierce. I looked at it. It was sleeping. My neighbor said: 'It's fierce when it's awake.' I said: 'Okay.'",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "为什么“我”说“好”？",
+        "q_en": "Why did 'I' say 'okay'?",
+        "options": [
+          {"text": "因为不想跟邻居吵", "pinyin": "yīnwèi bù xiǎng gēn línjū chǎo", "text_en": "because they didn't want to argue with the neighbor", "correct": true},
+          {"text": "因为怕那只狗", "pinyin": "yīnwèi pà nà zhī gǒu", "text_en": "because they were afraid of the dog", "correct": false},
+          {"text": "因为狗真的很凶", "pinyin": "yīnwèi gǒu zhēn de hěn xiōng", "text_en": "because the dog really is fierce", "correct": false},
+          {"text": "因为想买那只狗", "pinyin": "yīnwèi xiǎng mǎi nà zhī gǒu", "text_en": "because they wanted to buy the dog", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "The narrator can see the tiny sleeping dog is not fierce. But correcting the neighbor would be rude, so 'okay' is the polite non-argument."
+      }
+    ]
+  },
+  {
+    "id": "j1_friction_001",
+    "title": "Who Sits Where",
+    "title_zh": "谁坐哪里",
+    "hsk_level": 1,
+    "text_zh": "公园里有一把椅子。一个老人每天坐在那里。今天他来了，有人坐在那里。老人站着看了很久。那个人没有看他。",
+    "text_pinyin": "Gōngyuán lǐ yǒu yì bǎ yǐzi. Yí gè lǎorén měi tiān zuò zài nàlǐ. Jīntiān tā lái le, yǒu rén zuò zài nàlǐ. Lǎorén zhàn zhe kàn le hěn jiǔ. Nà ge rén méi yǒu kàn tā.",
+    "text_en": "There's one bench in the park. An old man sits there every day. Today when he came, someone was sitting there. The old man stood and looked for a long time. The person didn't look at him.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "老人为什么站着看？",
+        "q_en": "Why did the old man stand and look?",
+        "options": [
+          {"text": "他觉得那是他的位子", "pinyin": "tā juéde nà shì tā de wèizi", "text_en": "he felt it was his seat", "correct": true},
+          {"text": "他想交朋友", "pinyin": "tā xiǎng jiāo péngyǒu", "text_en": "he wanted to make friends", "correct": false},
+          {"text": "他不想坐下", "pinyin": "tā bù xiǎng zuò xia", "text_en": "he didn't want to sit down", "correct": false},
+          {"text": "椅子坏了", "pinyin": "yǐzi huài le", "text_en": "the bench was broken", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "Habit created a sense of ownership. The bench isn't his — but it feels like his. The other person didn't look up, which is its own statement."
+      }
+    ]
+  },
+  {
+    "id": "j1_friction_002",
+    "title": "The Last Baozi",
+    "title_zh": "最后一个包子",
+    "hsk_level": 1,
+    "text_zh": "桌上有一个包子。我想吃。我的朋友也想吃。我们都看着包子。谁也没有说话。最后，我说：“你吃吧。”他说：“不不不，你吃。”我说：“你吃。”他说：“你吃。”包子冷了。",
+    "text_pinyin": "Zhuō shang yǒu yí gè bāozi. Wǒ xiǎng chī. Wǒ de péngyǒu yě xiǎng chī. Wǒmen dōu kàn zhe bāozi. Shéi yě méi yǒu shuōhuà. Zuìhòu, wǒ shuō: 'Nǐ chī ba.' Tā shuō: 'Bù bù bù, nǐ chī.' Wǒ shuō: 'Nǐ chī.' Tā shuō: 'Nǐ chī.' Bāozi lěng le.",
+    "text_en": "There's one baozi on the table. I want to eat it. My friend also wants to eat it. We both stare at the baozi. Neither speaks. Finally I say: 'You eat it.' He says: 'No no no, you eat it.' I say: 'You eat it.' He says: 'You eat it.' The baozi gets cold.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "为什么包子冷了？",
+        "q_en": "Why did the baozi get cold?",
+        "options": [
+          {"text": "因为两个人都在让，没有人吃", "pinyin": "yīnwèi liǎng gè rén dōu zài ràng, méi yǒu rén chī", "text_en": "because both kept deferring and nobody ate it", "correct": true},
+          {"text": "因为包子不好吃", "pinyin": "yīnwèi bāozi bù hǎo chī", "text_en": "because the baozi wasn't good", "correct": false},
+          {"text": "因为天气很冷", "pinyin": "yīnwèi tiānqì hěn lěng", "text_en": "because the weather was cold", "correct": false},
+          {"text": "因为他们不饿", "pinyin": "yīnwèi tāmen bú è", "text_en": "because they weren't hungry", "correct": false}
+        ],
+        "difficulty": 0.2,
+        "explanation": "Chinese polite refusal (让) can go back and forth until the opportunity passes. Both wanted the baozi — politeness prevented either from taking it."
+      }
+    ]
+  },
+  {
+    "id": "j1_satire_001",
+    "title": "The Meeting",
+    "title_zh": "开会",
+    "hsk_level": 1,
+    "text_zh": "我们开了一个会。会开了一个小时。大家说了很多话。开完会，我问朋友：“我们决定了什么？”他说：“我们决定下次再开一个会。”",
+    "text_pinyin": "Wǒmen kāi le yí gè huì. Huì kāi le yí gè xiǎoshí. Dàjiā shuō le hěn duō huà. Kāi wán huì, wǒ wèn péngyǒu: 'Wǒmen juédìng le shénme?' Tā shuō: 'Wǒmen juédìng xià cì zài kāi yí gè huì.'",
+    "text_en": "We had a meeting. The meeting lasted an hour. Everyone said a lot. After the meeting, I asked my friend: 'What did we decide?' He said: 'We decided to have another meeting.'",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这个会有什么问题？",
+        "q_en": "What was the problem with this meeting?",
+        "options": [
+          {"text": "说了很多但没有决定什么", "pinyin": "shuō le hěn duō dàn méi yǒu juédìng shénme", "text_en": "lots of talking but nothing was decided", "correct": true},
+          {"text": "会议太短了", "pinyin": "huìyì tài duǎn le", "text_en": "the meeting was too short", "correct": false},
+          {"text": "没有人说话", "pinyin": "méi yǒu rén shuōhuà", "text_en": "nobody spoke", "correct": false},
+          {"text": "朋友没来", "pinyin": "péngyǒu méi lái", "text_en": "the friend didn't come", "correct": false}
+        ],
+        "difficulty": 0.2,
+        "explanation": "The only outcome of the meeting was scheduling another meeting — a universally recognizable pattern of organizational inefficiency."
+      }
+    ]
+  },
+  {
+    "id": "j2_wit_001",
+    "title": "The Quiet Noodle Shop",
+    "title_zh": "安静的面馆",
+    "hsk_level": 2,
+    "text_zh": "那个面馆我去了很多次了。老板从来不跟客人聊天。你进来，他看你一眼，你坐下来，他端面过来。不问你要什么。因为他知道你要什么。有一天来了一个新客人，问了很多问题。老板每个问题都用一个字回答。新客人走了。老板看了看我，我们都没说话。那是我跟他最长的一次交流。",
+    "text_pinyin": "Nà ge miànguǎn wǒ qù le hěn duō cì le. Lǎobǎn cónglái bù gēn kèrén liáotiān. Nǐ jìnlái, tā kàn nǐ yì yǎn, nǐ zuò xiàlái, tā duān miàn guòlái. Bú wèn nǐ yào shénme. Yīnwèi tā zhīdào nǐ yào shénme. Yǒu yì tiān lái le yí gè xīn kèrén, wèn le hěn duō wèntí. Lǎobǎn měi gè wèntí dōu yòng yí gè zì huídá. Xīn kèrén zǒu le. Lǎobǎn kàn le kàn wǒ, wǒmen dōu méi shuōhuà. Nà shì wǒ gēn tā zuì cháng de yí cì jiāoliú.",
+    "text_en": "I've been to that noodle shop many times. The owner never chats with customers. You come in, he glances at you, you sit down, he brings noodles. Doesn't ask what you want. Because he knows. One day a new customer came and asked lots of questions. The owner answered each one in a single word. The new customer left. The owner looked at me. We didn't speak. That was our longest conversation.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "最后一句话是什么意思？",
+        "q_en": "What does the last sentence mean?",
+        "options": [
+          {"text": "不说话也是一种交流", "pinyin": "bù shuōhuà yě shì yì zhǒng jiāoliú", "text_en": "not speaking is also a form of communication", "correct": true},
+          {"text": "老板不会说话", "pinyin": "lǎobǎn bú huì shuōhuà", "text_en": "the owner can't speak", "correct": false},
+          {"text": "他们吵架了", "pinyin": "tāmen chǎojià le", "text_en": "they had a fight", "correct": false},
+          {"text": "面馆太吵了", "pinyin": "miànguǎn tài chǎo le", "text_en": "the noodle shop was too noisy", "correct": false}
+        ],
+        "difficulty": 0.4,
+        "explanation": "The shared look after the chatty customer left was a moment of mutual understanding — we both know how things work here. Silence between two people who understand each other is its own language."
+      }
+    ]
+  },
+  {
+    "id": "j2_wit_002",
+    "title": "The Expert",
+    "title_zh": "专家",
+    "hsk_level": 2,
+    "text_zh": "老周说他会修电脑。小梅的电脑坏了。老周看了五分钟。他说：“这个问题很复杂。”然后他关了电脑。然后他开了电脑。电脑好了。老周说：“看吧？我就说我会。”",
+    "text_pinyin": "Lǎo Zhōu shuō tā huì xiū diànnǎo. Xiǎo Méi de diànnǎo huài le. Lǎo Zhōu kàn le wǔ fēnzhōng. Tā shuō: 'Zhè ge wèntí hěn fùzá.' Ránhòu tā guān le diànnǎo. Ránhòu tā kāi le diànnǎo. Diànnǎo hǎo le. Lǎo Zhōu shuō: 'Kàn ba? Wǒ jiù shuō wǒ huì.'",
+    "text_en": "Old Zhou said he could fix computers. Xiao Mei's computer was broken. Zhou looked at it for five minutes. He said: 'This problem is very complex.' Then he turned off the computer. Then he turned it on. The computer worked. Zhou said: 'See? I told you I could.'",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "老周真的会修电脑吗？",
+        "q_en": "Does Old Zhou really know how to fix computers?",
+        "options": [
+          {"text": "不会，他只是关机再开机", "pinyin": "bú huì, tā zhǐ shì guān jī zài kāi jī", "text_en": "no, he just turned it off and on again", "correct": true},
+          {"text": "会，他修好了", "pinyin": "huì, tā xiū hǎo le", "text_en": "yes, he fixed it", "correct": false},
+          {"text": "不知道，电脑还是坏的", "pinyin": "bù zhīdào, diànnǎo háishi huài de", "text_en": "unknown, the computer is still broken", "correct": false},
+          {"text": "会，因为他看了五分钟", "pinyin": "huì, yīnwèi tā kàn le wǔ fēnzhōng", "text_en": "yes, because he looked at it for five minutes", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "Restarting a computer is the most basic fix, not expertise. Zhou's five minutes of 'analysis' and declaration of complexity was performance — the actual solution required no skill at all. But the computer works, so who's arguing?"
+      }
+    ]
+  },
+  {
+    "id": "j2_friction_001",
+    "title": "The Air Conditioner Temperature",
+    "title_zh": "空调温度",
+    "hsk_level": 2,
+    "text_zh": "办公室里有两个人。一个人冷，一个人热。冷的人把空调关了。热的人把空调开了。冷的人又关了。热的人又开了。他们没有说话。空调开了关，关了开。一整天。",
+    "text_pinyin": "Bàngōngshì lǐ yǒu liǎng gè rén. Yí gè rén lěng, yí gè rén rè. Lěng de rén bǎ kōngtiáo guān le. Rè de rén bǎ kōngtiáo kāi le. Lěng de rén yòu guān le. Rè de rén yòu kāi le. Tāmen méi yǒu shuōhuà. Kōngtiáo kāi le guān, guān le kāi. Yì zhěng tiān.",
+    "text_en": "Two people in an office. One is cold, one is hot. The cold person turns off the AC. The hot person turns it on. The cold person turns it off again. The hot person turns it on again. They don't speak. The AC goes on and off, off and on. All day.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这个故事最大的问题是什么？",
+        "q_en": "What is the biggest problem in this story?",
+        "options": [
+          {"text": "两个人不说话", "pinyin": "liǎng gè rén bù shuōhuà", "text_en": "the two people don't talk to each other", "correct": true},
+          {"text": "空调坏了", "pinyin": "kōngtiáo huài le", "text_en": "the AC is broken", "correct": false},
+          {"text": "办公室太大了", "pinyin": "bàngōngshì tài dà le", "text_en": "the office is too big", "correct": false},
+          {"text": "天气太冷了", "pinyin": "tiānqì tài lěng le", "text_en": "the weather is too cold", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "The AC war could be solved with one conversation. But neither person speaks — they communicate through the AC button instead. The conflict is about communication, not temperature."
+      }
+    ]
+  },
+  {
+    "id": "j2_satire_001",
+    "title": "The Notice Board",
+    "title_zh": "通知栏",
+    "hsk_level": 2,
+    "text_zh": "我们楼下有一个通知栏。上面有很多通知。新的通知在旧的通知上面。旧的通知在更旧的通知上面。现在通知有三层。没有人看通知。大家都知道里面写了什么。因为通知每次都差不多：请不要在楼道里放东西。楼道里还是有很多东西。",
+    "text_pinyin": "Wǒmen lóu xià yǒu yí gè tōngzhī lán. Shàngmiàn yǒu hěn duō tōngzhī. Xīn de tōngzhī zài jiù de tōngzhī shàngmiàn. Jiù de tōngzhī zài gèng jiù de tōngzhī shàngmiàn. Xiànzài tōngzhī yǒu sān céng. Méi yǒu rén kàn tōngzhī. Dàjiā dōu zhīdào lǐmiàn xiě le shénme. Yīnwèi tōngzhī měi cì dōu chàbuduō: qǐng bú yào zài lóudào lǐ fàng dōngxi. Lóudào lǐ háishi yǒu hěn duō dōngxi.",
+    "text_en": "There's a notice board downstairs. Lots of notices on it. New notices on top of old ones. Old ones on top of even older ones. Now the notices are three layers thick. Nobody reads them. Everyone knows what they say. Because the notices are always the same: please don't leave things in the hallway. The hallway still has lots of things in it.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这个故事想说什么？",
+        "q_en": "What is the story trying to say?",
+        "options": [
+          {"text": "通知没有用，但还是一直贴", "pinyin": "tōngzhī méi yǒu yòng, dàn háishi yìzhí tiē", "text_en": "the notices don't work, but they keep posting them", "correct": true},
+          {"text": "通知栏太小了", "pinyin": "tōngzhī lán tài xiǎo le", "text_en": "the notice board is too small", "correct": false},
+          {"text": "楼道很干净", "pinyin": "lóudào hěn gānjìng", "text_en": "the hallway is clean", "correct": false},
+          {"text": "大家都看通知", "pinyin": "dàjiā dōu kàn tōngzhī", "text_en": "everyone reads the notices", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "The notices keep coming, the problem stays the same. The system responds to ineffective communication with more of the same communication — a recognizable pattern in any organization."
+      }
+    ]
+  },
+  {
+    "id": "j3_wit_001",
+    "title": "The Review",
+    "title_zh": "评价",
+    "hsk_level": 3,
+    "text_zh": "老周做了一个蛋糕，让大家评价。老周问方阿姨好不好吃。方阿姨说：“很有特色。”老周问小梅好不好吃。小梅说：“你用了很多糖。”老周很高兴，因为他觉得“有特色”和“很多糖”都是好评。方阿姨看了小梅一眼。小梅没有看方阿姨。但是她们都知道蛋糕的味道。",
+    "text_pinyin": "Lǎo Zhōu zuò le yí gè dàngāo, ràng dàjiā píngjià. Lǎo Zhōu wèn Fāng āyí hǎo bù hǎo chī. Fāng āyí shuō: 'Hěn yǒu tèsè.' Lǎo Zhōu wèn Xiǎo Méi hǎo bù hǎo chī. Xiǎo Méi shuō: 'Nǐ yòng le hěn duō táng.' Lǎo Zhōu hěn gāoxìng, yīnwèi tā juéde 'yǒu tèsè' hé 'hěn duō táng' dōu shì hǎo píng. Fāng āyí kàn le Xiǎo Méi yì yǎn. Xiǎo Méi méi yǒu kàn Fāng āyí. Dànshì tāmen dōu zhīdào dàngāo de wèidào.",
+    "text_en": "Old Zhou made a cake and asked everyone to evaluate it. He asked Auntie Fang if it was good. Fang said: 'Very distinctive.' He asked Xiao Mei. Mei said: 'You used a lot of sugar.' Zhou was happy because he thought 'distinctive' and 'lots of sugar' were both compliments. Fang glanced at Mei. Mei didn't look at Fang. But they both knew what the cake tasted like.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "方阿姨说“有特色”是什么意思？",
+        "q_en": "What did Auntie Fang mean by 'very distinctive'?",
+        "options": [
+          {"text": "不好吃，但不想直说", "pinyin": "bù hǎo chī, dàn bù xiǎng zhí shuō", "text_en": "it wasn't good, but she didn't want to say so directly", "correct": true},
+          {"text": "蛋糕非常好吃", "pinyin": "dàngāo fēicháng hǎo chī", "text_en": "the cake was delicious", "correct": false},
+          {"text": "她没有吃过蛋糕", "pinyin": "tā méi yǒu chī guò dàngāo", "text_en": "she'd never had cake before", "correct": false},
+          {"text": "蛋糕很特别很贵", "pinyin": "dàngāo hěn tèbié hěn guì", "text_en": "the cake was special and expensive", "correct": false}
+        ],
+        "difficulty": 0.4,
+        "explanation": "'有特色' (distinctive) is classic Chinese diplomatic language — it sounds positive but doesn't actually say the food is good. Fang and Mei both know this; Zhou doesn't."
+      }
+    ]
+  },
+  {
+    "id": "j3_wit_002",
+    "title": "Uncle Bai's Advice",
+    "title_zh": "老白的建议",
+    "hsk_level": 3,
+    "text_zh": "我问老白应该先学什么菜。老白说：“做菜这件事，不能急。要先了解食材，再了解火候，然后了解自己。”我说：“那先学什么菜？”老白说：“这个嘛...具体做什么不重要。重要的是心态。”方阿姨路过，听到了。她说：“西红柿炒鸡蛋。先学西红柿炒鸡蛋。”我学了。很好吃。",
+    "text_pinyin": "Wǒ wèn Lǎo Bái yīnggāi xiān xué shénme cài. Lǎo Bái shuō: 'Zuò cài zhè jiàn shì, bù néng jí. Yào xiān liǎojiě shícái, zài liǎojiě huǒhòu, ránhòu liǎojiě zìjǐ.' Wǒ shuō: 'Nà xiān xué shénme cài?' Lǎo Bái shuō: 'Zhè ge ma... jùtǐ zuò shénme bú zhòngyào. Zhòngyào de shì xīntài.' Fāng āyí lùguò, tīng dào le. Tā shuō: 'Xīhóngshì chǎo jīdàn. Xiān xué xīhóngshì chǎo jīdàn.' Wǒ xué le. Hěn hǎo chī.",
+    "text_en": "I asked Uncle Bai what dish I should learn first. Bai said: 'Cooking is something you can't rush. First understand ingredients, then heat control, then understand yourself.' I said: 'But what dish first?' Bai said: 'Well... what specific dish doesn't matter. What matters is mindset.' Auntie Fang was passing by and overheard. She said: 'Tomato and eggs. Learn tomato and eggs first.' I learned it. It was delicious.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "老白和方阿姨的建议有什么不同？",
+        "q_en": "What's the difference between Bai's and Fang's advice?",
+        "options": [
+          {"text": "老白说的很多但不具体，方阿姨说的少但有用", "pinyin": "Lǎo Bái shuō de hěn duō dàn bù jùtǐ, Fāng āyí shuō de shǎo dàn yǒu yòng", "text_en": "Bai said a lot but was vague, Fang said little but was useful", "correct": true},
+          {"text": "老白比方阿姨更会做菜", "pinyin": "Lǎo Bái bǐ Fāng āyí gèng huì zuò cài", "text_en": "Bai is a better cook than Fang", "correct": false},
+          {"text": "方阿姨不懂做菜", "pinyin": "Fāng āyí bù dǒng zuò cài", "text_en": "Fang doesn't understand cooking", "correct": false},
+          {"text": "两个人的建议是一样的", "pinyin": "liǎng gè rén de jiànyì shì yíyàng de", "text_en": "both gave the same advice", "correct": false}
+        ],
+        "difficulty": 0.4,
+        "explanation": "Bai's philosophical vagueness ('understand yourself') versus Fang's concrete specificity ('tomato and eggs') is a recognizable pattern. Practical advice usually wins."
+      }
+    ]
+  },
+  {
+    "id": "j3_friction_001",
+    "title": "The New Store",
+    "title_zh": "新开的店",
+    "hsk_level": 3,
+    "text_zh": "巷子口开了一家新的咖啡店。很多年轻人来。巷子里的老住户觉得太吵了。但是咖啡店给老住户送了免费的咖啡。老住户喝了。觉得太苦了。但是没有说。因为是免费的。",
+    "text_pinyin": "Xiàngzi kǒu kāi le yì jiā xīn de kāfēi diàn. Hěn duō niánqīng rén lái. Xiàngzi lǐ de lǎo zhùhù juéde tài chǎo le. Dànshì kāfēi diàn gěi lǎo zhùhù sòng le miǎnfèi de kāfēi. Lǎo zhùhù hē le. Juéde tài kǔ le. Dànshì méi yǒu shuō. Yīnwèi shì miǎnfèi de.",
+    "text_en": "A new coffee shop opened at the entrance to the alley. Lots of young people come. The old residents think it's too noisy. But the coffee shop gave the old residents free coffee. The old residents drank it. They thought it was too bitter. But they didn't say so. Because it was free.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "老住户为什么没有说咖啡太苦？",
+        "q_en": "Why didn't the old residents say the coffee was too bitter?",
+        "options": [
+          {"text": "因为是免费的，不好意思批评", "pinyin": "yīnwèi shì miǎnfèi de, bù hǎo yìsi pīpíng", "text_en": "because it was free, so they felt awkward criticizing", "correct": true},
+          {"text": "因为他们喜欢苦咖啡", "pinyin": "yīnwèi tāmen xǐhuān kǔ kāfēi", "text_en": "because they like bitter coffee", "correct": false},
+          {"text": "因为他们不会说话", "pinyin": "yīnwèi tāmen bú huì shuōhuà", "text_en": "because they can't speak", "correct": false},
+          {"text": "因为咖啡店太远了", "pinyin": "yīnwèi kāfēi diàn tài yuǎn le", "text_en": "because the coffee shop was too far away", "correct": false}
+        ],
+        "difficulty": 0.3,
+        "explanation": "Receiving a free gift creates a social obligation (人情) that makes it hard to complain. The coffee shop's gesture was clever — it didn't solve the noise problem, but it made complaining awkward."
+      }
+    ]
+  },
+  {
+    "id": "j3_satire_001",
+    "title": "The Community Suggestion Box",
+    "title_zh": "社区意见箱",
+    "hsk_level": 3,
+    "text_zh": "秦经理在小区门口放了一个意见箱。第一天收到了一张纸，上面写着：“意见箱的位置不好。”秦经理把意见箱搬到了另一个地方。第二天收到了一张纸：“还是不好。”秦经理又搬了。第三天收到了一张纸：“放回原来的地方吧。”秦经理发现三张纸的字迹都是一样的。",
+    "text_pinyin": "Qín jīnglǐ zài xiǎoqū ménkǒu fàng le yí gè yìjiàn xiāng. Dì yī tiān shōu dào le yì zhāng zhǐ, shàngmiàn xiě zhe: 'Yìjiàn xiāng de wèizhì bù hǎo.' Qín jīnglǐ bǎ yìjiàn xiāng bān dào le lìng yí gè dìfang. Dì èr tiān shōu dào le yì zhāng zhǐ: 'Háishi bù hǎo.' Qín jīnglǐ yòu bān le. Dì sān tiān shōu dào le yì zhāng zhǐ: 'Fàng huí yuánlái de dìfang ba.' Qín jīnglǐ fāxiàn sān zhāng zhǐ de zìjì dōu shì yíyàng de.",
+    "text_en": "Manager Qin placed a suggestion box at the community entrance. Day one he received a note: 'The suggestion box is in a bad spot.' Qin moved it. Day two: 'Still not right.' Qin moved it again. Day three: 'Put it back where it was.' Qin noticed all three notes had the same handwriting.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "写这三张纸的人想做什么？",
+        "q_en": "What was the person who wrote these notes trying to do?",
+        "options": [
+          {"text": "他只是想用意见箱，不是真的有意见", "pinyin": "tā zhǐ shì xiǎng yòng yìjiàn xiāng, bú shì zhēn de yǒu yìjiàn", "text_en": "they just wanted to use the suggestion box, not actually suggest anything useful", "correct": true},
+          {"text": "他觉得意见箱的位置真的不好", "pinyin": "tā juéde yìjiàn xiāng de wèizhì zhēn de bù hǎo", "text_en": "they genuinely thought the location was bad", "correct": false},
+          {"text": "他想帮秦经理", "pinyin": "tā xiǎng bāng Qín jīnglǐ", "text_en": "they wanted to help Manager Qin", "correct": false},
+          {"text": "他写错了", "pinyin": "tā xiě cuò le", "text_en": "they made a mistake", "correct": false}
+        ],
+        "difficulty": 0.4,
+        "explanation": "The person's 'suggestions' about the box's location form a loop — move it, move it back. They were using the system for its own sake, not to solve a real problem. A gentle satire of participation for participation's sake."
+      }
+    ]
+  },
+  {
+    "id": "j4_wit_001",
+    "title": "The Performance Review",
+    "title_zh": "年终评估",
+    "hsk_level": 4,
+    "text_zh": "老周的年终评估写着：“工作态度积极。”这是真的。老周每天第一个到办公室。但是评估没有写的是：老周到了以后的一个小时都在泡茶和跟每个人聊天。方阿姨的评估写着：“工作认真负责，建议多与同事交流。”方阿姨看了看这句话，觉得这个建议非常可笑。因为她跟同事交流的方式就是认真工作。在她看来，没有比这更有效的交流了。",
+    "text_pinyin": "Lǎo Zhōu de niánzhōng pínggū xiě zhe: 'Gōngzuò tàidù jījí.' Zhè shì zhēn de. Lǎo Zhōu měi tiān dì yī gè dào bàngōngshì. Dànshì pínggū méi yǒu xiě de shì: Lǎo Zhōu dào le yǐhòu de yí gè xiǎoshí dōu zài pào chá hé gēn měi gè rén liáotiān. Fāng āyí de pínggū xiě zhe: 'Gōngzuò rènzhēn fùzé, jiànyì duō yǔ tóngshì jiāoliú.' Fāng āyí kàn le kàn zhè jù huà, juéde zhè ge jiànyì fēicháng kěxiào. Yīnwèi tā gēn tóngshì jiāoliú de fāngshì jiù shì rènzhēn gōngzuò. Zài tā kàn lái, méi yǒu bǐ zhè gèng yǒuxiào de jiāoliú le.",
+    "text_en": "Zhou's annual review said: 'Positive work attitude.' This is true. Zhou arrives first every day. What the review didn't say: Zhou spends the first hour making tea and chatting with everyone. Fang's review said: 'Serious and responsible worker. Suggestion: communicate more with colleagues.' Fang looked at this and found it absurd. Her way of communicating with colleagues IS doing her work well. In her view, there's no more effective communication than that.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "方阿姨为什么觉得建议“可笑”？",
+        "q_en": "Why did Fang find the suggestion 'absurd'?",
+        "options": [
+          {"text": "她觉得好好工作本身就是跟同事交流", "pinyin": "tā juéde hǎo hǎo gōngzuò běnshēn jiù shì gēn tóngshì jiāoliú", "text_en": "she believes doing good work is itself communication with colleagues", "correct": true},
+          {"text": "她不喜欢同事", "pinyin": "tā bù xǐhuān tóngshì", "text_en": "she doesn't like her colleagues", "correct": false},
+          {"text": "她不会说话", "pinyin": "tā bú huì shuōhuà", "text_en": "she can't speak", "correct": false},
+          {"text": "她觉得评估写错了", "pinyin": "tā juéde pínggū xiě cuò le", "text_en": "she thinks the review was wrong", "correct": false}
+        ],
+        "difficulty": 0.5,
+        "explanation": "Fang sees a fundamental misunderstanding: chatting isn't the only form of communication. Reliable work, consistent presence, and quiet competence are how she communicates respect for her colleagues. The review values social performance over substance."
+      }
+    ]
+  },
+  {
+    "id": "j5_friction_001",
+    "title": "The Old Tea House",
+    "title_zh": "老茶馆",
+    "hsk_level": 5,
+    "text_zh": "老陈的茶馆要拆了。地铁新出口要建在那里。老陈说：这条巷子两百年了，他是第四代茶馆老板，每天下午来喝茶的四个老人已经喝了十五年了。秦经理说：每天早上有四千人从那个出口走，坐地铁省下的四十秒对上班的人来说不是小事。老陈的数字是四个人、十五年。秦经理的数字是四千人、四十秒。两个数字都是真的。问题是哪个数字更重要。",
+    "text_pinyin": "Lǎo Chén de cháguǎn yào chāi le. Dìtiě xīn chūkǒu yào jiàn zài nàlǐ. Lǎo Chén shuō: zhè tiáo xiàngzi liǎngbǎi nián le, tā shì dì sì dài cháguǎn lǎobǎn, měi tiān xiàwǔ lái hē chá de sì gè lǎorén yǐjīng hē le shíwǔ nián le. Qín jīnglǐ shuō: měi tiān zǎoshang yǒu sì qiān rén cóng nà ge chūkǒu zǒu, zuò dìtiě shěng xia de sìshí miǎo duì shàngbān de rén lái shuō bú shì xiǎo shì. Lǎo Chén de shùzì shì sì gè rén, shíwǔ nián. Qín jīnglǐ de shùzì shì sì qiān rén, sìshí miǎo. Liǎng gè shùzì dōu shì zhēn de. Wèntí shì nǎ gè shùzì gèng zhòngyào.",
+    "text_en": "Old Chen's tea house is being demolished. A new subway exit will be built there. Chen says: this alley is two hundred years old, he's the fourth-generation tea house owner, the four old men who come for afternoon tea have been coming for fifteen years. Manager Qin says: four thousand people walk through that exit every morning, the forty seconds saved on the commute isn't trivial for working people. Chen's numbers are four people, fifteen years. Qin's numbers are four thousand people, forty seconds. Both numbers are true. The question is which numbers matter more.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这个故事想让读者想什么？",
+        "q_en": "What does this story want the reader to think about?",
+        "options": [
+          {"text": "不同的价值不能简单比较", "pinyin": "bùtóng de jiàzhí bù néng jiǎndān bǐjiào", "text_en": "different values can't be simply compared", "correct": true},
+          {"text": "地铁比茶馆重要", "pinyin": "dìtiě bǐ cháguǎn zhòngyào", "text_en": "the subway is more important than the tea house", "correct": false},
+          {"text": "茶馆比地铁重要", "pinyin": "cháguǎn bǐ dìtiě zhòngyào", "text_en": "the tea house is more important than the subway", "correct": false},
+          {"text": "秦经理做了错误的决定", "pinyin": "Qín jīnglǐ zuò le cuòwù de juédìng", "text_en": "Manager Qin made the wrong decision", "correct": false}
+        ],
+        "difficulty": 0.5,
+        "explanation": "The story presents two legitimate positions without choosing between them. Four people's fifteen-year ritual versus four thousand people's daily commute — depth of meaning versus breadth of impact. The reader must sit with the tension."
+      }
+    ]
+  },
+  {
+    "id": "j6_satire_001",
+    "title": "The Fourteen Plans",
+    "title_zh": "十四个方案",
+    "hsk_level": 6,
+    "text_zh": "小区委员会开了紧急会议，讨论停车问题。一共收到了十四个方案。第六号方案建议按生肖分配车位。老白提出了第六号方案。他准备了四十页的报告，从生肖与停车习惯的文化关联讲起。罗老师说这个方案“很有远见”。秦经理问：租的车怎么办？生肖怎么算？老白说他没有考虑租车的问题，但他相信租车也有生肖。会议开了四个小时。十四个方案都讨论了。每一个方案都有人反对，也有人支持。最后秦经理说他会整理会议记录。停车问题没有变化。大家觉得会议开得很充实。",
+    "text_pinyin": "Xiǎoqū wěiyuánhuì kāi le jǐnjí huìyì, tǎolùn tíngchē wèntí. Yígòng shōu dào le shísì gè fāng'àn. Dì liù hào fāng'àn jiànyì àn shēngxiào fēnpèi chēwèi. Lǎo Bái tíchū le dì liù hào fāng'àn. Tā zhǔnbèi le sìshí yè de bàogào, cóng shēngxiào yǔ tíngchē xíguàn de wénhuà guānlián jiǎng qǐ. Luó lǎoshī shuō zhè ge fāng'àn 'hěn yǒu yuǎnjiàn'. Qín jīnglǐ wèn: zū de chē zěnme bàn? Shēngxiào zěnme suàn? Lǎo Bái shuō tā méi yǒu kǎolǜ zū chē de wèntí, dàn tā xiāngxìn zū chē yě yǒu shēngxiào. Huìyì kāi le sì gè xiǎoshí. Shísì gè fāng'àn dōu tǎolùn le. Měi yí gè fāng'àn dōu yǒu rén fǎnduì, yě yǒu rén zhīchí. Zuìhòu Qín jīnglǐ shuō tā huì zhěnglǐ huìyì jìlù. Tíngchē wèntí méi yǒu biànhuà. Dàjiā juéde huìyì kāi de hěn chōngshí.",
+    "text_en": "The community committee held an emergency meeting to discuss parking. Fourteen plans were received. Plan #6 proposed assigning parking spots by zodiac sign. Uncle Bai submitted Plan #6. He prepared a forty-page report, starting from the cultural connection between zodiac signs and parking habits. Teacher Luo called the plan 'very forward-thinking.' Manager Qin asked: what about rental cars? How do you calculate a car's zodiac? Bai said he hadn't considered rental cars, but he believed rental cars also have zodiac signs. The meeting lasted four hours. All fourteen plans were discussed. Every plan had supporters and opponents. Finally Qin said he would compile the meeting minutes. The parking problem did not change. Everyone felt the meeting was very productive.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "最后一句话（“大家觉得会议开得很充实”）有什么深意？",
+        "q_en": "What is the deeper meaning of the last sentence ('Everyone felt the meeting was very productive')?",
+        "options": [
+          {"text": "其实什么都没有解决，但大家觉得参与了就够了", "pinyin": "qíshí shénme dōu méi yǒu jiějué, dàn dàjiā juéde cānyù le jiù gòu le", "text_en": "nothing was actually solved, but people felt that participating was enough", "correct": true},
+          {"text": "会议真的很有效", "pinyin": "huìyì zhēn de hěn yǒuxiào", "text_en": "the meeting was genuinely effective", "correct": false},
+          {"text": "停车问题解决了", "pinyin": "tíngchē wèntí jiějué le", "text_en": "the parking problem was solved", "correct": false},
+          {"text": "大家都同意了第六号方案", "pinyin": "dàjiā dōu tóngyì le dì liù hào fāng'àn", "text_en": "everyone agreed on Plan #6", "correct": false}
+        ],
+        "difficulty": 0.6,
+        "explanation": "The irony: four hours of discussion, fourteen plans, zero change — but everyone left feeling 'productive.' The system absorbed all that energy and effort without actually changing. Nobody was wrong or malicious; they were all trying. The comedy is structural, not personal."
+      }
+    ]
+  },
+  {
+    "id": "j7_wit_001",
+    "title": "The Silence Expert",
+    "title_zh": "沉默的专家",
+    "hsk_level": 7,
+    "text_zh": "方阿姨不太说话。但每次开会，她说一句话，大家都安静了。不是因为她说得大声，是因为她只在值得说的时候才说。老白说得最多。他有很多理论，每一个都听起来有道理，但仔细想想又找不到核心论点。有人说老白的发言像烟——看得见，散得快，最后空气里什么都没有。方阿姨的发言像钉子——很短，但打进去以后拔不出来。社区会议最有效率的时刻，是方阿姨说完一句话以后的那十秒钟沉默。那十秒钟里，所有人都在想她说的那句话是不是在说自己。通常是的。",
+    "text_pinyin": "Fāng āyí bú tài shuōhuà. Dàn měi cì kāi huì, tā shuō yí jù huà, dàjiā dōu ānjìng le. Bú shì yīnwèi tā shuō de dà shēng, shì yīnwèi tā zhǐ zài zhíde shuō de shíhou cái shuō. Lǎo Bái shuō de zuì duō. Tā yǒu hěn duō lǐlùn, měi yí gè dōu tīng qǐlái yǒu dàolǐ, dàn zǐxì xiǎng xiǎng yòu zhǎo bú dào héxīn lùndiǎn. Yǒu rén shuō Lǎo Bái de fāyán xiàng yān — kàn de jiàn, sàn de kuài, zuìhòu kōngqì lǐ shénme dōu méi yǒu. Fāng āyí de fāyán xiàng dīngzi — hěn duǎn, dàn dǎ jìnqù yǐhòu bá bù chūlái. Shèqū huìyì zuì yǒu xiàolǜ de shíkè, shì Fāng āyí shuō wán yí jù huà yǐhòu de nà shí miǎo zhōng chénmò. Nà shí miǎo zhōng lǐ, suǒyǒu rén dōu zài xiǎng tā shuō de nà jù huà shì bú shì zài shuō zìjǐ. Tōngcháng shì de.",
+    "text_en": "Auntie Fang doesn't talk much. But every meeting, when she says one sentence, everyone goes quiet. Not because she's loud — because she only speaks when it's worth speaking. Uncle Bai talks the most. He has many theories, each sounding reasonable, but on closer examination you can't find the core argument. Someone said Bai's speeches are like smoke — visible, quick to disperse, leaving nothing in the air. Fang's remarks are like nails — short, but once hammered in, impossible to pull out. The most efficient moment in any community meeting is the ten seconds of silence after Fang says one sentence. In those ten seconds, everyone is wondering whether what she said was about them. Usually it was.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "为什么说方阿姨的话“像钉子”？",
+        "q_en": "Why is Fang's speech compared to 'nails'?",
+        "options": [
+          {"text": "因为短、准确、而且让人忘不了", "pinyin": "yīnwèi duǎn, zhǔnquè, érqiě ràng rén wàng bù liǎo", "text_en": "because they're short, precise, and unforgettable", "correct": true},
+          {"text": "因为她说话很大声", "pinyin": "yīnwèi tā shuōhuà hěn dà shēng", "text_en": "because she speaks loudly", "correct": false},
+          {"text": "因为她说话让人不舒服", "pinyin": "yīnwèi tā shuōhuà ràng rén bù shūfu", "text_en": "because her words make people uncomfortable", "correct": false},
+          {"text": "因为她说的话很多", "pinyin": "yīnwèi tā shuō de huà hěn duō", "text_en": "because she says a lot", "correct": false}
+        ],
+        "difficulty": 0.6,
+        "explanation": "The nail metaphor captures precision and permanence — Fang's words are few but they stick. The contrast with Bai's 'smoke' (volume without substance) is a sharp observation about two fundamentally different communication styles."
+      }
+    ]
+  },
+  {
+    "id": "j8_friction_001",
+    "title": "Two Numbers",
+    "title_zh": "两个数字",
+    "hsk_level": 8,
+    "text_zh": "城市规划局要在老街区修一条新路，能把上班通勤时间缩短十二分钟。施工需要拆除三十七棵树和一个已经营业了四十年的早餐店。规划局的报告算了一笔账：如果每天有六千人走这条新路，每人省十二分钟，一年下来相当于节省了四十三万小时的人类生产力。早餐店的老板娘没有算账。她说：这个摊子是我婆婆传给我的，我女儿在这里长大。巷子里的人叫她“张姐”。规划局的报告里她是“影响范围内个体经营户（1户）”。两种描述都是准确的。一种用的是系统的语言，一种用的是人的语言。系统的语言能说服委员会。人的语言能让人在会后抽完一根烟还在想。问题不是谁对谁错。问题是做决定的人用哪种语言思考。",
+    "text_pinyin": "Chéngshì guīhuà jú yào zài lǎo jiēqū xiū yì tiáo xīn lù, néng bǎ shàngbān tōngqín shíjiān suōduǎn shí'èr fēnzhōng. Shīgōng xūyào chāichú sānshíqī kē shù hé yí gè yǐjīng yíngyè le sìshí nián de zǎocān diàn. Guīhuà jú de bàogào suàn le yì bǐ zhàng: rúguǒ měi tiān yǒu liùqiān rén zǒu zhè tiáo xīn lù, měi rén shěng shí'èr fēnzhōng, yì nián xialái xiāngdāng yú jiéshěng le sìshísān wàn xiǎoshí de rénlèi shēngchǎn lì. Zǎocān diàn de lǎobǎnniáng méi yǒu suàn zhàng. Tā shuō: zhè ge tānzi shì wǒ pópo chuán gěi wǒ de, wǒ nǚ'ér zài zhèlǐ zhǎng dà. Xiàngzi lǐ de rén jiào tā 'Zhāng jiě'. Guīhuà jú de bàogào lǐ tā shì 'yǐngxiǎng fànwéi nèi gètǐ jīngyíng hù (yī hù)'. Liǎng zhǒng miáoshù dōu shì zhǔnquè de. Yì zhǒng yòng de shì xìtǒng de yǔyán, yì zhǒng yòng de shì rén de yǔyán. Xìtǒng de yǔyán néng shuōfú wěiyuánhuì. Rén de yǔyán néng ràng rén zài huì hòu chōu wán yì gēn yān hái zài xiǎng. Wèntí bú shì shéi duì shéi cuò. Wèntí shì zuò juédìng de rén yòng nǎ zhǒng yǔyán sīkǎo.",
+    "text_en": "The city planning bureau wants to build a new road through the old district, cutting commute times by twelve minutes. Construction requires removing thirty-seven trees and a breakfast stand that's been operating for forty years. The bureau's report calculated: if six thousand people use this road daily, each saving twelve minutes, that's 430,000 hours of human productivity saved per year. The breakfast stand owner didn't calculate. She said: my mother-in-law passed this stand to me, my daughter grew up here. People in the alley call her 'Sister Zhang.' In the planning bureau's report, she is 'individually-operated business within impact zone (1 unit).' Both descriptions are accurate. One uses the language of systems, the other uses the language of people. The language of systems convinces committees. The language of people makes someone finish a cigarette after the meeting and still be thinking. The question isn't who's right. The question is which language decision-makers think in.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者认为“做决定的人用哪种语言思考”这个问题为什么重要？",
+        "q_en": "Why does the author think 'which language decision-makers think in' matters?",
+        "options": [
+          {"text": "因为不同的语言会导致不同的决定", "pinyin": "yīnwèi bùtóng de yǔyán huì dǎozhì bùtóng de juédìng", "text_en": "because different languages lead to different decisions", "correct": true},
+          {"text": "因为系统的语言总是对的", "pinyin": "yīnwèi xìtǒng de yǔyán zǒngshì duì de", "text_en": "because the language of systems is always right", "correct": false},
+          {"text": "因为人的语言不可靠", "pinyin": "yīnwèi rén de yǔyán bù kě kào", "text_en": "because the language of people is unreliable", "correct": false},
+          {"text": "因为委员会不应该做决定", "pinyin": "yīnwèi wěiyuánhuì bù yīnggāi zuò juédìng", "text_en": "because committees shouldn't make decisions", "correct": false}
+        ],
+        "difficulty": 0.7,
+        "explanation": "The passage shows that the same reality described in two different languages creates two different emotional and logical frameworks. '430,000 hours of productivity' and 'my daughter grew up here' are both true — but they push decision-makers in opposite directions. The language you think in shapes what you see as relevant."
+      }
+    ]
+  },
+  {
+    "id": "j9_wit_001",
+    "title": "What Remains",
+    "title_zh": "留下的东西",
+    "hsk_level": 9,
+    "text_zh": "方阿姨搬走以后，社区开了一次会。没有人提到她的名字。但是讨论到意见箱的时候，有人说“以前有人说过这个不合理”。讨论到停车方案的时候，有人说“上次那个人说的有道理”。讨论到厨房管理的时候，秦经理翻出了一张旧的纸条，上面写着三条建议——没有署名，但笔迹很工整，每一条都很短，都没有感叹号。老周看了看纸条说：“这个写得好。”没有人回答他。大家都知道是谁写的。她从来不需要自己的名字出现在任何地方。但是整个社区的运转方式里，到处都有她的痕迹——不是因为她做了什么惊天动地的事，是因为她在每一个需要有人说真话的时刻，刚好在场，刚好说了。一个人的价值不是他走了以后别人说了什么，是他走了以后别人做事的方式变了没有。方阿姨走了。大家做事的方式没有变。这是她留下的东西。",
+    "text_pinyin": "Fāng āyí bān zǒu yǐhòu, shèqū kāi le yí cì huì. Méi yǒu rén tí dào tā de míngzì. Dànshì tǎolùn dào yìjiàn xiāng de shíhou, yǒu rén shuō 'yǐqián yǒu rén shuō guò zhè ge bù hélǐ'. Tǎolùn dào tíngchē fāng'àn de shíhou, yǒu rén shuō 'shàng cì nà ge rén shuō de yǒu dàolǐ'. Tǎolùn dào chúfáng guǎnlǐ de shíhou, Qín jīnglǐ fān chū le yì zhāng jiù de zhǐtiáo, shàngmiàn xiě zhe sān tiáo jiànyì — méi yǒu shǔ míng, dàn bǐjì hěn gōngzhěng, měi yì tiáo dōu hěn duǎn, dōu méi yǒu gǎntànhào. Lǎo Zhōu kàn le kàn zhǐtiáo shuō: 'Zhè ge xiě de hǎo.' Méi yǒu rén huídá tā. Dàjiā dōu zhīdào shì shéi xiě de. Tā cónglái bù xūyào zìjǐ de míngzì chūxiàn zài rèn hé dìfang. Dànshì zhěng gè shèqū de yùnzhuǎn fāngshì lǐ, dào chù dōu yǒu tā de hénjì — bú shì yīnwèi tā zuò le shénme jīngtiān dòngdì de shì, shì yīnwèi tā zài měi yí gè xūyào yǒu rén shuō zhēn huà de shíkè, gānghǎo zàichǎng, gānghǎo shuō le. Yí gè rén de jiàzhí bú shì tā zǒu le yǐhòu biéren shuō le shénme, shì tā zǒu le yǐhòu biéren zuò shì de fāngshì biàn le méi yǒu. Fāng āyí zǒu le. Dàjiā zuò shì de fāngshì méi yǒu biàn. Zhè shì tā liú xia de dōngxi.",
+    "text_en": "After Auntie Fang moved away, the community held a meeting. Nobody mentioned her name. But when discussing the suggestion box, someone said 'someone once pointed out this isn't reasonable.' When discussing the parking plan, someone said 'that person from last time made a good point.' When discussing kitchen management, Manager Qin found an old note with three suggestions — unsigned, but the handwriting was neat, each suggestion short, none with exclamation marks. Old Zhou looked at it and said: 'This is well-written.' Nobody answered him. Everyone knew who wrote it. She never needed her name to appear anywhere. But in how the entire community operates, her traces are everywhere — not because she did anything dramatic, but because at every moment when someone needed to speak the truth, she happened to be there, and she happened to speak. A person's value isn't what people say after they leave. It's whether the way people do things changes after they leave. Auntie Fang left. The way people do things didn't change. That's what she left behind.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "为什么作者说“大家做事的方式没有变”是方阿姨留下的东西？",
+        "q_en": "Why does the author say 'the way people do things didn't change' is what Fang left behind?",
+        "options": [
+          {"text": "因为她的影响已经变成了大家做事的方式本身", "pinyin": "yīnwèi tā de yǐngxiǎng yǐjīng biàn chéng le dàjiā zuò shì de fāngshì běnshēn", "text_en": "because her influence has become the way people do things itself", "correct": true},
+          {"text": "因为她对社区没有影响", "pinyin": "yīnwèi tā duì shèqū méi yǒu yǐngxiǎng", "text_en": "because she had no influence on the community", "correct": false},
+          {"text": "因为大家忘了她", "pinyin": "yīnwèi dàjiā wàng le tā", "text_en": "because everyone forgot her", "correct": false},
+          {"text": "因为社区不需要改变", "pinyin": "yīnwèi shèqū bù xūyào gǎibiàn", "text_en": "because the community doesn't need to change", "correct": false}
+        ],
+        "difficulty": 0.8,
+        "explanation": "The deepest legacy isn't being remembered — it's having shaped a community's character so thoroughly that your influence persists as the normal way things are done. Fang's values (precision, honesty, brevity) are now embedded in how the community operates. She didn't leave behind words; she left behind behavior."
+      }
+    ]
+  }
+]

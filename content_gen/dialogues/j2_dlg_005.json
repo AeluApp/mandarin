@@ -1,0 +1,83 @@
+{
+  "title": "The Night Market Painter",
+  "title_zh": "夜市的画家",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "At a night market, you see an artist drawing portraits. He has an empty seat in front of him.",
+    "setup_zh": "在夜市上，你看到一位画家在画人像。他面前有一个空位。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "来，坐下吧！我给你画一张，十五分钟就好。",
+        "text_pinyin": "Lái, zuò xià ba! Wǒ gěi nǐ huà yī zhāng, shíwǔ fēnzhōng jiù hǎo.",
+        "text_en": "Come, sit down! I'll draw you one — only fifteen minutes."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his offer.",
+        "options": [
+          {
+            "text_zh": "好啊，我从来没有让人画过。要多少钱？",
+            "text_pinyin": "Hǎo a, wǒ cónglái méiyǒu ràng rén huà guò. Yào duōshao qián?",
+            "text_en": "Sure, I've never had anyone draw me before. How much?",
+            "score": 1.0,
+            "feedback": "Curious and practical — tries something new.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不喜欢夜市。",
+            "text_pinyin": "Wǒ bù xǐhuan yèshì.",
+            "text_en": "I don't like night markets.",
+            "score": 0.0,
+            "feedback": "You're already at the night market."
+          },
+          {
+            "text_zh": "你是哪里人？",
+            "text_pinyin": "Nǐ shì nǎlǐ rén?",
+            "text_en": "Where are you from?",
+            "score": 0.0,
+            "feedback": "Doesn't respond to his offer to draw you."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "三十块。你别动，放轻松就好。你在中国住了多长时间了？",
+        "text_pinyin": "Sānshí kuài. Nǐ bié dòng, fàng qīngsōng jiù hǎo. Nǐ zài Zhōngguó zhù le duō cháng shíjiān le?",
+        "text_en": "Thirty yuan. Don't move — just relax. How long have you been living in China?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him about your time in China while he draws.",
+        "options": [
+          {
+            "text_zh": "差不多半年了。我越来越喜欢这里的生活。",
+            "text_pinyin": "Chàbuduō bàn nián le. Wǒ yuè lái yuè xǐhuan zhèlǐ de shēnghuó.",
+            "text_en": "About half a year. I like the life here more and more.",
+            "score": 1.0,
+            "feedback": "Reflective and genuine — shares a real feeling.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你画得快不快？",
+            "text_pinyin": "Nǐ huà de kuài bú kuài?",
+            "text_en": "Do you draw fast?",
+            "score": 0.0,
+            "feedback": "He already said fifteen minutes."
+          },
+          {
+            "text_zh": "我想吃烤串。",
+            "text_pinyin": "Wǒ xiǎng chī kǎo chuàn.",
+            "text_en": "I want to eat skewers.",
+            "score": 0.0,
+            "feedback": "He asked about your time in China."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Night market portrait artists are a charming tradition. They capture a moment in time while conversation flows naturally. The casual intimacy of sitting still while a stranger draws you creates a unique connection."
+  }
+}

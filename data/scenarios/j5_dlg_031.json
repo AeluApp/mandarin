@@ -1,0 +1,89 @@
+{
+    "title": "Two Cities, One Life",
+    "title_zh": "两座城市，一种生活",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Yanan are sitting in a tea house. She recently moved from Chengdu to Shanghai for work and is adjusting to the differences.",
+        "setup_zh": "你和朋友亚南坐在茶馆里。她最近因为工作从成都搬到了上海，正在适应两个城市的不同。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "上海什么都快。走路快，说话快，吃饭也快。在成都的时候，我们下午可以在茶馆坐一整个下午，没有人觉得奇怪。这里好像每个人都在赶下一件事。",
+                "text_pinyin": "Shànghǎi shénme dōu kuài. Zǒulù kuài, shuōhuà kuài, chīfàn yě kuài. Zài Chéngdū de shíhou, wǒmen xiàwǔ kěyǐ zài cháguǎn zuò yī zhěnggè xiàwǔ, méiyǒu rén juéde qíguài. Zhèlǐ hǎoxiàng měi ge rén dōu zài gǎn xià yī jiàn shì.",
+                "text_en": "Everything in Shanghai is fast. Walking fast, talking fast, eating fast. In Chengdu, we could sit in a tea house all afternoon and nobody thought it was strange. Here everyone seems to be rushing to the next thing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her comparison of the two cities.",
+                "options": [
+                    {
+                        "text_zh": "每个城市都有自己的节奏。上海是奔跑的，成都是散步的。不是哪个更好，而是你要在这个节奏里找到自己的步伐。你不一定要跟着上海的速度走。",
+                        "text_pinyin": "Měi ge chéngshì dōu yǒu zìjǐ de jiézòu. Shànghǎi shì bēnpǎo de, Chéngdū shì sànbù de. Bú shì nǎge gèng hǎo, ér shì nǐ yào zài zhège jiézòu lǐ zhǎo dào zìjǐ de bùfá. Nǐ bú yídìng yào gēn zhe Shànghǎi de sùdù zǒu.",
+                        "text_en": "Every city has its own rhythm. Shanghai runs; Chengdu strolls. It's not about which is better, but finding your own pace within this rhythm. You don't have to match Shanghai's speed.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Balanced and wise — avoids judging either city and empowers her to set her own pace."
+                    },
+                    {
+                        "text_zh": "上海发展机会多，值得。",
+                        "text_pinyin": "Shànghǎi fāzhǎn jīhuì duō, zhíde.",
+                        "text_en": "Shanghai has more career opportunities, it's worth it.",
+                        "score": 0.0,
+                        "feedback": "Dismisses her feelings by emphasizing the practical trade-off."
+                    },
+                    {
+                        "text_zh": "那你为什么不回成都呢？",
+                        "text_pinyin": "Nà nǐ wèi shénme bù huí Chéngdū ne?",
+                        "text_en": "Then why don't you go back to Chengdu?",
+                        "score": 0.0,
+                        "feedback": "Oversimplifies — she came for a reason and is processing, not seeking escape."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到属于自己的步伐……我觉得你说得对。也许我可以在上海的忙碌里保留一些成都的慢。比如周末的时候不安排任何事，就像在成都那样，找一家安静的茶馆坐一坐。",
+                "text_pinyin": "Zhǎo dào shǔyú zìjǐ de bùfá…… wǒ juéde nǐ shuō de duì. Yěxǔ wǒ kěyǐ zài Shànghǎi de mánglù lǐ bǎoliú yīxiē Chéngdū de màn. Bǐrú zhōumò de shíhou bù ānpái rènhé shì, jiù xiàng zài Chéngdū nàyàng, zhǎo yī jiā ānjìng de cháguǎn zuò yī zuò.",
+                "text_en": "Finding my own pace... I think you're right. Maybe I can keep some of Chengdu's slowness within Shanghai's busyness. Like on weekends, not scheduling anything, just like in Chengdu — finding a quiet tea house and sitting."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Encourage her to blend the best of both cities.",
+                "options": [
+                    {
+                        "text_zh": "对，你不用完全变成一个上海人。把成都的心带在身上，到哪里都是你的城市。一个人可以同时属于两个地方。",
+                        "text_pinyin": "Duì, nǐ bú yòng wánquán biàn chéng yīge Shànghǎi rén. Bǎ Chéngdū de xīn dài zài shēn shàng, dào nǎlǐ dōu shì nǐ de chéngshì. Yīge rén kěyǐ tóngshí shǔyú liǎng ge dìfang.",
+                        "text_en": "Right, you don't have to completely become a Shanghainese person. Carry Chengdu in your heart, and wherever you go becomes your city. A person can belong to two places at once.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirming and poetic — dissolves the binary of choosing one identity."
+                    },
+                    {
+                        "text_zh": "上海也有很多好吃的啊。",
+                        "text_pinyin": "Shànghǎi yě yǒu hěn duō hǎochī de a.",
+                        "text_en": "Shanghai has lots of good food too.",
+                        "score": 0.0,
+                        "feedback": "Food isn't the issue she's processing."
+                    },
+                    {
+                        "text_zh": "你可以去找一些成都老乡，周末一起聚一聚。",
+                        "text_pinyin": "Nǐ kěyǐ qù zhǎo yīxiē Chéngdū lǎoxiāng, zhōumò yīqǐ jù yī jù.",
+                        "text_en": "You can find some fellow Chengdu people and get together on weekends.",
+                        "score": 0.0,
+                        "feedback": "Not wrong but doesn't engage with the deeper identity question."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "同时属于两个地方……我以前觉得这是一种矛盾，但你让我觉得这是一种丰富。谢谢你。下次我带你去一家我发现的茶馆，就在弄堂深处，有成都的感觉。",
+                "text_pinyin": "Tóngshí shǔyú liǎng ge dìfang…… wǒ yǐqián juéde zhè shì yī zhǒng máodùn, dàn nǐ ràng wǒ juéde zhè shì yī zhǒng fēngfù. Xièxie nǐ. Xià cì wǒ dài nǐ qù yī jiā wǒ fāxiàn de cháguǎn, jiù zài lòngtáng shēn chù, yǒu Chéngdū de gǎnjué.",
+                "text_en": "Belonging to two places at once... I used to think that was a contradiction, but you've made me see it as richness. Thank you. Next time I'll take you to a tea house I discovered, deep in an alley — it has a Chengdu feeling."
+            }
+        ],
+        "cultural_note": "The contrast between Chengdu and Shanghai is a frequent topic in Chinese culture. Chengdu is famous for its relaxed「慢生活」(màn shēnghuó, slow living) culture — tea houses, mahjong, and the philosophy that life should be enjoyed. Shanghai represents ambition, speed, and cosmopolitan energy. Many Chinese professionals who migrate between these poles grapple with dual identity, carrying the rhythm of their hometown within the tempo of their adopted city."
+    }
+}

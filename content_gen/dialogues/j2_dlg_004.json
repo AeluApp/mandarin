@@ -1,0 +1,83 @@
+{
+  "title": "A Lost Glove",
+  "title_zh": "丢了一只手套",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "On a cold morning, you find a single knitted glove on a bench. A woman nearby seems to be looking for something.",
+    "setup_zh": "一个冷天的早上，你在长椅上发现了一只手套。旁边有位女士好像在找什么。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你有没有看到一只红色的手套？我刚才坐在这里……",
+        "text_pinyin": "Nǐ yǒu méiyǒu kàn dào yī zhī hóngsè de shǒutào? Wǒ gāngcái zuò zài zhèlǐ……",
+        "text_en": "Have you seen a red glove? I was sitting here just now..."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Help her find the glove.",
+        "options": [
+          {
+            "text_zh": "是这只吗？我在长椅上看到的。",
+            "text_pinyin": "Shì zhè zhī ma? Wǒ zài chángyǐ shàng kàn dào de.",
+            "text_en": "Is it this one? I found it on the bench.",
+            "score": 1.0,
+            "feedback": "Helpful and direct — solves her problem immediately.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我觉得这个长椅上的东西不是手套。",
+            "text_pinyin": "Wǒ juéde zhège chángyǐ shàng de dōngxi bú shì shǒutào.",
+            "text_en": "I don't think this thing on the bench is a glove.",
+            "score": 0.0,
+            "feedback": "She looks confused — it's clearly a red glove sitting right there."
+          },
+          {
+            "text_zh": "你要去哪里？",
+            "text_pinyin": "Nǐ yào qù nǎlǐ?",
+            "text_en": "Where are you going?",
+            "score": 0.0,
+            "feedback": "Doesn't help her find the glove."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "就是这只！太感谢了！这是我妈妈织的，对我很重要。",
+        "text_pinyin": "Jiù shì zhè zhī! Tài gǎnxiè le! Zhè shì wǒ māma zhī de, duì wǒ hěn zhòngyào.",
+        "text_en": "That's the one! Thank you so much! My mom knitted it — it's very important to me."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her gratitude.",
+        "options": [
+          {
+            "text_zh": "太好了，找到就好。妈妈织的东西很珍贵。",
+            "text_pinyin": "Tài hǎo le, zhǎo dào jiù hǎo. Māma zhī de dōngxi hěn zhēnguì.",
+            "text_en": "Wonderful, glad you found it. Things mom made are precious.",
+            "score": 1.0,
+            "feedback": "Empathetic — recognizes the sentimental value.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "下次你应该小心一点，别再丢了。",
+            "text_pinyin": "Xià cì nǐ yīnggāi xiǎoxīn yīdiǎn, bié zài diū le.",
+            "text_en": "Next time you should be more careful and not lose it again.",
+            "score": 0.0,
+            "feedback": "She nods slowly, smile fading a little — she was thanking you, not asking for advice."
+          },
+          {
+            "text_zh": "我不喜欢红色。",
+            "text_pinyin": "Wǒ bù xǐhuan hóngsè.",
+            "text_en": "I don't like red.",
+            "score": 0.0,
+            "feedback": "Insensitive when she's emotional about her mom's glove."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Handmade gifts from family carry deep sentimental value in Chinese culture. A knitted glove from a mother represents love and care. Finding and returning such items creates small but meaningful connections between strangers."
+  }
+}

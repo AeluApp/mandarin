@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Share your view on the rise of electric vehicles.",
                 "options": [
-                    {"text_zh": "是啊，我也注意到了。我觉得这是一个好的趋势，一方面对环境有好处，另一方面电动车的技术越来越好，充电也越来越方便了。不过我有点担心电池回收的问题，不知道以后怎么处理那些旧电池。", "text_pinyin": "shì a, wǒ yě zhùyì dào le. wǒ juéde zhè shì yī gè hǎo de qūshì, yī fāngmiàn duì huánjìng yǒu hǎochu, lìng yī fāngmiàn diàndòng chē de jìshù yuè lái yuè hǎo, chōngdiàn yě yuè lái yuè fāngbiàn le. búguò wǒ yǒudiǎn dānxīn diànchí huíshōu de wèntí, bù zhīdào yǐhòu zěnme chǔlǐ nàxiē jiù diànchí.", "text_en": "Yeah, I noticed that too. I think it's a good trend -- on one hand it's good for the environment, on the other hand EV technology is getting better and charging is more convenient. But I'm a bit worried about battery recycling -- I don't know how they'll handle old batteries in the future.", "score": 1.0, "register": "casual", "feedback": "Balanced view -- uses 一方面...另一方面 to structure the argument, then adds a critical point about 电池回收. Shows you can discuss a topic from multiple angles."},
-                    {"text_zh": "确实，电动车现在很火。我也想买一辆，但是听说充电桩还不够多。", "text_pinyin": "quèshí, diàndòng chē xiànzài hěn huǒ. wǒ yě xiǎng mǎi yī liàng, dànshì tīngshuō chōngdiàn zhuāng hái bú gòu duō.", "text_en": "True, EVs are really popular now. I want to buy one too, but I've heard there aren't enough charging stations yet.", "score": 0.6, "register": "casual", "feedback": "Relevant personal connection, but stays on the surface. Adding your view on why this trend matters or what challenges remain makes the conversation richer."},
-                    {"text_zh": "我不太关心这些。我又没有车。", "text_pinyin": "wǒ bú tài guānxīn zhèxiē. wǒ yòu méiyǒu chē.", "text_en": "I don't really care about this stuff. I don't even have a car.", "score": 0.3, "register": "casual", "feedback": "Shuts down the conversation. Even if you don't own a car, the topic touches on environment, technology, and economy -- all worth discussing."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "是啊，我也注意到了。我觉得这是一个好的趋势，一方面对环境有好处，另一方面电动车的技术越来越好，充电也越来越方便了。不过我有点担心电池回收的问题，不知道以后怎么处理那些旧电池。",
+                        "text_pinyin": "shì a, wǒ yě zhùyì dào le. wǒ juéde zhè shì yī gè hǎo de qūshì, yī fāngmiàn duì huánjìng yǒu hǎochu, lìng yī fāngmiàn diàndòng chē de jìshù yuè lái yuè hǎo, chōngdiàn yě yuè lái yuè fāngbiàn le. búguò wǒ yǒudiǎn dānxīn diànchí huíshōu de wèntí, bù zhīdào yǐhòu zěnme chǔlǐ nàxiē jiù diànchí.",
+                        "text_en": "Yeah, I noticed that too. I think it's a good trend -- on one hand it's good for the environment, on the other hand EV technology is getting better and charging is more convenient. But I'm a bit worried about battery recycling -- I don't know how they'll handle old batteries in the future.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Balanced view -- uses 一方面...另一方面 to structure the argument, then adds a critical point about 电池回收. Shows you can discuss a topic from multiple angles."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Discuss the employment impact of the EV transition.",
                 "options": [
-                    {"text_zh": "你说得有道理。不过我觉得新的行业也会创造新的工作机会，比如电池生产、充电桩维护、软件开发这些。关键是政府和企业要帮助那些传统行业的工人学习新技能，让他们能顺利转行。这种变化需要时间，但方向是对的。", "text_pinyin": "nǐ shuō de yǒu dàolǐ. búguò wǒ juéde xīn de hángyè yě huì chuàngzào xīn de gōngzuò jīhuì, bǐrú diànchí shēngchǎn, chōngdiàn zhuāng wéihù, ruǎnjiàn kāifā zhèxiē. guānjiàn shì zhèngfǔ hé qǐyè yào bāngzhù nàxiē chuántǒng hángyè de gōngrén xuéxí xīn jìnéng, ràng tāmen néng shùnlì zhuǎnháng. zhè zhǒng biànhuà xūyào shíjiān, dàn fāngxiàng shì duì de.", "text_en": "You make a good point. But I think new industries will also create new job opportunities -- like battery production, charging station maintenance, software development. The key is for government and companies to help traditional industry workers learn new skills so they can smoothly transition careers. This change takes time, but the direction is right.", "score": 1.0, "register": "casual", "feedback": "Well-structured response -- acknowledges the concern, provides counterexamples, and proposes a solution. Using 关键是, 顺利转行, and 方向 shows you can discuss complex topics logically."},
-                    {"text_zh": "可能吧，但每次技术进步都会有人失业。以前马车被汽车取代的时候也是一样的。", "text_pinyin": "kěnéng ba, dàn měi cì jìshù jìnbù dōu huì yǒu rén shīyè. yǐqián mǎchē bèi qìchē qǔdài de shíhou yě shì yīyàng de.", "text_en": "Maybe, but every time technology advances, some people lose jobs. It was the same when horse carriages were replaced by cars.", "score": 0.6, "register": "casual", "feedback": "Good historical parallel, but doesn't address what should be done about it. Showing concern for affected workers deepens the conversation."},
-                    {"text_zh": "那也没办法，时代在变。跟不上就会被淘汰。", "text_pinyin": "nà yě méi bànfǎ, shídài zài biàn. gēn bú shàng jiù huì bèi táotài.", "text_en": "Nothing you can do about it, times are changing. If you can't keep up, you'll be eliminated.", "score": 0.3, "register": "casual", "feedback": "Harsh and dismissive. Your friend raised a real social concern. Responding with empathy and proposing solutions makes for better conversation and shows nuanced thinking."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "你说得有道理。不过我觉得新的行业也会创造新的工作机会，比如电池生产、充电桩维护、软件开发这些。关键是政府和企业要帮助那些传统行业的工人学习新技能，让他们能顺利转行。这种变化需要时间，但方向是对的。",
+                        "text_pinyin": "nǐ shuō de yǒu dàolǐ. búguò wǒ juéde xīn de hángyè yě huì chuàngzào xīn de gōngzuò jīhuì, bǐrú diànchí shēngchǎn, chōngdiàn zhuāng wéihù, ruǎnjiàn kāifā zhèxiē. guānjiàn shì zhèngfǔ hé qǐyè yào bāngzhù nàxiē chuántǒng hángyè de gōngrén xuéxí xīn jìnéng, ràng tāmen néng shùnlì zhuǎnháng. zhè zhǒng biànhuà xūyào shíjiān, dàn fāngxiàng shì duì de.",
+                        "text_en": "You make a good point. But I think new industries will also create new job opportunities -- like battery production, charging station maintenance, software development. The key is for government and companies to help traditional industry workers learn new skills so they can smoothly transition careers. This change takes time, but the direction is right.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Well-structured response -- acknowledges the concern, provides counterexamples, and proposes a solution. Using 关键是, 顺利转行, and 方向 shows you can discuss complex topics logically."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Share whether you'd consider buying an EV and why.",
                 "options": [
-                    {"text_zh": "我挺想买的，不过要等条件成熟一些。等我住的小区装了充电桩，而且电池技术再进步一点——比如充电更快、续航更长——我就会认真考虑了。估计再过两三年应该差不多。", "text_pinyin": "wǒ tǐng xiǎng mǎi de, búguò yào děng tiáojiàn chéngshú yīxiē. děng wǒ zhù de xiǎoqū zhuāng le chōngdiàn zhuāng, érqiě diànchí jìshù zài jìnbù yīdiǎn——bǐrú chōngdiàn gèng kuài, xùháng gèng cháng——wǒ jiù huì rènzhēn kǎolǜ le. gūjì zài guò liǎng sān nián yīnggāi chàbuduō.", "text_en": "I'd like to buy one, but I want to wait until conditions are more mature. Once my residential complex installs charging stations, and battery technology improves more -- like faster charging and longer range -- I'll seriously consider it. I'd estimate in about two to three more years.", "score": 1.0, "register": "casual", "feedback": "Thoughtful and specific -- states interest, conditions, specific improvements needed, and a timeline. Using 条件成熟, 续航, and 充电桩 shows command of relevant vocabulary."},
-                    {"text_zh": "可能会吧。但我还要再看看，现在还说不好。", "text_pinyin": "kěnéng huì ba. dàn wǒ hái yào zài kànkan, xiànzài hái shuō bù hǎo.", "text_en": "Maybe. But I need to wait and see, hard to say right now.", "score": 0.5, "register": "casual", "feedback": "Non-committal. Explaining what factors would influence your decision makes the conversation more interesting."},
-                    {"text_zh": "不会，我觉得坐地铁就够了。", "text_pinyin": "bú huì, wǒ juéde zuò dìtiě jiù gòu le.", "text_en": "No, I think taking the subway is enough.", "score": 0.4, "register": "casual", "feedback": "Valid lifestyle choice, but the conversation was about the broader trend, not just personal transport. Engaging with the topic shows social awareness."}
+                    {
+                        "text_zh": "我挺想买的，不过要等条件成熟一些。等我住的小区装了充电桩，而且电池技术再进步一点——比如充电更快、续航更长——我就会认真考虑了。估计再过两三年应该差不多。",
+                        "text_pinyin": "wǒ tǐng xiǎng mǎi de, búguò yào děng tiáojiàn chéngshú yīxiē. děng wǒ zhù de xiǎoqū zhuāng le chōngdiàn zhuāng, érqiě diànchí jìshù zài jìnbù yīdiǎn——bǐrú chōngdiàn gèng kuài, xùháng gèng cháng——wǒ jiù huì rènzhēn kǎolǜ le. gūjì zài guò liǎng sān nián yīnggāi chàbuduō.",
+                        "text_en": "I'd like to buy one, but I want to wait until conditions are more mature. Once my residential complex installs charging stations, and battery technology improves more -- like faster charging and longer range -- I'll seriously consider it. I'd estimate in about two to three more years.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Thoughtful and specific -- states interest, conditions, specific improvements needed, and a timeline. Using 条件成熟, 续航, and 充电桩 shows command of relevant vocabulary."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             }
         ],

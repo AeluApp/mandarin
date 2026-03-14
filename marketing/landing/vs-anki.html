@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mandarin vs Anki for Chinese — SRS Without the Overhead | Mandarin</title>
-  <meta name="description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling. No deck-building required.">
+  <title>Aelu vs Anki for Chinese — SRS Without the Overhead | Aelu</title>
+  <meta name="description" content="Anki is a powerful engine. Aelu is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling. No deck-building required.">
   <meta name="keywords" content="Anki alternative for Chinese, better than Anki Chinese, Anki vs dedicated Chinese app, Chinese SRS app, best spaced repetition for Chinese, Anki Chinese decks alternative">
-  <link rel="canonical" href="https://mandarinapp.com/vs-anki">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/vs-anki">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Mandarin vs Anki for Chinese — The SRS That Builds Itself">
-  <meta property="og:description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
+  <meta property="og:title" content="Aelu vs Anki for Chinese — The SRS That Builds Itself">
+  <meta property="og:description" content="Anki is a powerful engine. Aelu is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/vs-anki">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/vs-anki">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mandarin vs Anki for Chinese — The SRS That Builds Itself">
-  <meta name="twitter:description" content="Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Aelu vs Anki for Chinese — The SRS That Builds Itself">
+  <meta name="twitter:description" content="Anki is a powerful engine. Aelu is the car built around it. 27 drill types, graded reading, and adaptive scheduling. No deck-building required.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Mandarin vs Anki for Chinese — SRS Without the Overhead",
-    "description": "Anki is a powerful engine. Mandarin is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling.",
-    "url": "https://mandarinapp.com/vs-anki",
+    "name": "Aelu vs Anki for Chinese — SRS Without the Overhead",
+    "description": "Anki is a powerful engine. Aelu is the car built around it. 27 drill types, graded reading, cleanup loop, tone grading, and adaptive scheduling.",
+    "url": "https://aeluapp.com/vs-anki",
     "keywords": "Anki alternative for Chinese, better than Anki Chinese, Anki vs dedicated Chinese app"
   }
   </script>
@@ -73,7 +73,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -152,13 +155,38 @@
     .hero-label, .hero h1, .hero-sub, .cta-group { animation: drift-up 0.6s ease-out both; }
     .hero h1 { animation-delay: 0.1s; } .hero-sub { animation-delay: 0.2s; } .cta-group { animation-delay: 0.3s; }
     @media (prefers-reduced-motion: reduce) { .hero-label, .hero h1, .hero-sub, .cta-group { animation: none; opacity: 1; } }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -167,7 +195,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -175,12 +204,12 @@
   <section class="hero">
     <div class="container">
       <div class="hero-label">Anki Alternative for Chinese</div>
-      <h1>Anki is a powerful engine. Mandarin is the car built around it.</h1>
-      <p class="hero-sub">You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Mandarin gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps.</p>
+      <h1>Anki is a powerful engine. Aelu is the car built around it.</h1>
+      <p class="hero-sub">You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Aelu gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps.</p>
       <div class="cta-group">
         <form class="cta-email" action="#" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Try Mandarin free</button>
+          <button type="submit" class="btn-primary">Try Aelu free</button>
         </form>
         <p class="cta-note">Free for HSK 1-2. No credit card required.</p>
         <div class="cta-success">You're on the list. We'll let you know when it's ready.</div>
@@ -190,18 +219,18 @@
 
   <section class="comparison">
     <div class="container">
-      <h2>Anki vs. Mandarin for Chinese</h2>
+      <h2>Anki vs. Aelu for Chinese</h2>
       <table class="compare-table">
         <thead>
           <tr>
             <th>Feature</th>
             <th>Anki</th>
-            <th>Mandarin</th>
+            <th>Aelu</th>
           </tr>
         </thead>
         <tbody>
           <tr><td>Spaced repetition</td><td class="check">FSRS</td><td class="check">Modified FSRS</td></tr>
-          <tr><td>Pre-built Chinese curriculum</td><td class="cross">No (DIY decks)</td><td class="check">HSK 1-6</td></tr>
+          <tr><td>Pre-built Chinese curriculum</td><td class="cross">No (DIY decks)</td><td class="check">HSK 1-9</td></tr>
           <tr><td>Setup time required</td><td class="cross">Hours to days</td><td class="check">None</td></tr>
           <tr><td>Drill types</td><td class="cross">Flashcards only</td><td class="check">27 types</td></tr>
           <tr><td>Graded reading</td><td class="cross">No</td><td class="check">By HSK level</td></tr>
@@ -212,7 +241,7 @@
           <tr><td>Context notes per word</td><td class="cross">DIY</td><td class="check">Built in</td></tr>
           <tr><td>Customizability</td><td class="check">Infinite</td><td class="cross">Opinionated</td></tr>
           <tr><td>Multi-language / multi-subject</td><td class="check">Yes</td><td class="cross">Chinese only</td></tr>
-          <tr><td>Price</td><td class="check">Free</td><td>Free / $12/mo</td></tr>
+          <tr><td>Price</td><td class="check">Free</td><td>Free / $14.99/mo</td></tr>
         </tbody>
       </table>
     </div>
@@ -269,7 +298,7 @@
 
   <section>
     <div class="container">
-      <h2>What $12/month buys you over Anki</h2>
+      <h2>What $14.99/month buys you over Anki</h2>
       <div class="feature-grid">
         <div class="feature-item">
           <strong>No setup time</strong>
@@ -293,7 +322,7 @@
         </div>
         <div class="feature-item">
           <strong>A curriculum that decides for you</strong>
-          <span>Mandarin sequences content by HSK level, adjusts based on your performance data, and handles interleaving. You study. The system plans.</span>
+          <span>Aelu sequences content by HSK level, adjusts based on your performance data, and handles interleaving. You study. The system plans.</span>
         </div>
       </div>
     </div>
@@ -310,12 +339,12 @@
             <li>Study multiple languages or subjects alongside Chinese</li>
             <li>Have invested years in Chinese Anki decks you do not want to leave</li>
             <li>Need specialized vocabulary we do not cover (medical, legal, dialect)</li>
-            <li>Cannot pay $12/month and have time to invest in setup</li>
+            <li>Cannot pay $14.99/month and have time to invest in setup</li>
             <li>Want total control over every aspect of your SRS</li>
           </ul>
         </div>
         <div class="audience-box">
-          <h3>Use Mandarin if you...</h3>
+          <h3>Use Aelu if you...</h3>
           <ul class="audience-list">
             <li>Want to study Chinese, not maintain a flashcard system</li>
             <li>Want reading and drilling connected in one workflow</li>
@@ -332,10 +361,10 @@
   <section>
     <div class="container">
       <h2 style="margin-bottom: var(--space-3);">Honest take</h2>
-      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Anki is free. Anki has the canonical FSRS implementation. Anki's ecosystem is vastly larger. If you are technically proficient and willing to invest setup time, Anki plus a good deck plus supplementary reading tools can replicate much of what Mandarin does, for free.</p>
-      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Our advantage is integration and ease-of-use, not raw capability. Mandarin is for the learner who wants to sit down and practice Chinese without thinking about deck management, card templates, or plugin configuration.</p>
-      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">If you enjoy the meta-game of optimizing Anki, you will probably stay with Anki. If you want to open an app and study, Mandarin is worth $12/month.</p>
-      <p style="font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5;">"Anki is free and powerful. Mandarin is $12/month and you never build a deck. Different tools for different preferences."</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Anki is free. Anki has the canonical FSRS implementation. Anki's ecosystem is vastly larger. If you are technically proficient and willing to invest setup time, Anki plus a good deck plus supplementary reading tools can replicate much of what Aelu does, for free.</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">Our advantage is integration and ease-of-use, not raw capability. Aelu is for the learner who wants to sit down and practice Chinese without thinking about deck management, card templates, or plugin configuration.</p>
+      <p style="text-align: center; color: var(--color-text-faint); max-width: 540px; margin: 0 auto var(--space-3);">If you enjoy the meta-game of optimizing Anki, you will probably stay with Anki. If you want to open an app and study, Aelu is worth $14.99/month.</p>
+      <p style="font-style: italic; color: var(--color-secondary); font-size: 1.1rem; max-width: 480px; margin: var(--space-4) auto 0; text-align: center; line-height: 1.5;">"Anki is free and powerful. Aelu is $14.99/month and you never build a deck. Different tools for different preferences."</p>
     </div>
   </section>
 
@@ -346,7 +375,7 @@
       <div class="cta-group">
         <form class="cta-email" action="#" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Try Mandarin free</button>
+          <button type="submit" class="btn-primary">Try Aelu free</button>
         </form>
         <p class="cta-note">No credit card. No deck-building. Just learning.</p>
       </div>
@@ -355,7 +384,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

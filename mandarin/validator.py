@@ -9,13 +9,10 @@ as source of truth.
 """
 
 import json
-import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from . import db
-
-logger = logging.getLogger(__name__)
 
 HSK_DATA_DIR = Path(__file__).parent.parent / "data" / "hsk"
 
@@ -223,3 +220,82 @@ def fix_levels(conn, levels: Optional[List[int]] = None, dry_run: bool = False) 
         conn.commit()
 
     return {"fixed": len(details), "details": details}
+
+
+def find_duplicates(conn) -> List[dict]:
+    """Find content_item rows that share the same hanzi.
+
+    Returns a list of dicts: {"hanzi": str, "count": int, "ids": [int, ...]}.
+    Only returns hanzi values with count > 1.
+    """
+    rows = conn.execute(
+        """SELECT hanzi, COUNT(*) as cnt, GROUP_CONCAT(id) as ids
+           FROM content_item
+           GROUP BY hanzi
+           HAVING cnt > 1
+           ORDER BY cnt DESC"""
+    ).fetchall()
+
+    return [
+        {
+            "hanzi": r["hanzi"],
+            "count": r["cnt"],
+            "ids": [int(x) for x in r["ids"].split(",")],
+        }
+        for r in rows
+    ]
+
+
+def find_orphans(conn) -> dict:
+    """Find orphaned records across content-related tables.
+
+    Returns:
+        {
+            "orphan_progress": [{"id": int, "content_item_id": int}],
+            "orphan_error_log": [{"id": int, "content_item_id": int}],
+            "orphan_error_focus": [{"id": int, "content_item_id": int}],
+            "stale_items": [{"id": int, "hanzi": str}],
+        }
+
+    orphan_progress / orphan_error_*: rows referencing a content_item_id
+    that no longer exists in content_item.
+
+    stale_items: content_items with status='raw' that have never been drilled
+    (no row in progress and no row in error_log). These are safe to review
+    for cleanup.
+    """
+    orphan_progress = conn.execute(
+        """SELECT p.id, p.content_item_id
+           FROM progress p
+           LEFT JOIN content_item ci ON ci.id = p.content_item_id
+           WHERE ci.id IS NULL"""
+    ).fetchall()
+
+    orphan_error_log = conn.execute(
+        """SELECT el.id, el.content_item_id
+           FROM error_log el
+           LEFT JOIN content_item ci ON ci.id = el.content_item_id
+           WHERE ci.id IS NULL"""
+    ).fetchall()
+
+    orphan_error_focus = conn.execute(
+        """SELECT ef.id, ef.content_item_id
+           FROM error_focus ef
+           LEFT JOIN content_item ci ON ci.id = ef.content_item_id
+           WHERE ci.id IS NULL"""
+    ).fetchall()
+
+    stale_items = conn.execute(
+        """SELECT ci.id, ci.hanzi
+           FROM content_item ci
+           WHERE ci.status = 'raw'
+             AND NOT EXISTS (SELECT 1 FROM progress p WHERE p.content_item_id = ci.id)
+             AND NOT EXISTS (SELECT 1 FROM error_log el WHERE el.content_item_id = ci.id)"""
+    ).fetchall()
+
+    return {
+        "orphan_progress": [{"id": r["id"], "content_item_id": r["content_item_id"]} for r in orphan_progress],
+        "orphan_error_log": [{"id": r["id"], "content_item_id": r["content_item_id"]} for r in orphan_error_log],
+        "orphan_error_focus": [{"id": r["id"], "content_item_id": r["content_item_id"]} for r in orphan_error_focus],
+        "stale_items": [{"id": r["id"], "hanzi": r["hanzi"]} for r in stale_items],
+    }

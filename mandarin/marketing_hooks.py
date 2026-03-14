@@ -379,6 +379,47 @@ def check_email_triggers(db_path=None):
                     "reason": f"Paid user inactive for {days} days — final outreach",
                 })
 
+        # ── Win-back triggers (rules 15-17) ───────────────────────────────
+        # Find cancelled users at 7d, 30d, 60d post-cancellation.
+        cancelled_users = conn.execute(
+            """SELECT user_id, created_at as cancelled_at,
+                      CAST(julianday('now') - julianday(created_at) AS INTEGER) as days_since
+               FROM lifecycle_event
+               WHERE event_type = 'cancellation_completed'
+                 AND user_id IS NOT NULL"""
+        ).fetchall()
+
+        for row in cancelled_users:
+            uid = row["user_id"]
+            days = row["days_since"] or 0
+
+            # Rule 15: 7+ days post-cancel
+            if days >= 7 and not check_already_sent(uid, "winback", 1, conn):
+                triggers.append({
+                    "user_id": uid,
+                    "email_sequence": "winback",
+                    "email_number": 1,
+                    "reason": f"Cancelled {days} days ago — gentle win-back",
+                })
+
+            # Rule 16: 30+ days post-cancel
+            if days >= 30 and not check_already_sent(uid, "winback", 2, conn):
+                triggers.append({
+                    "user_id": uid,
+                    "email_sequence": "winback",
+                    "email_number": 2,
+                    "reason": f"Cancelled {days} days ago — progress reminder",
+                })
+
+            # Rule 17: 60+ days post-cancel
+            if days >= 60 and not check_already_sent(uid, "winback", 3, conn):
+                triggers.append({
+                    "user_id": uid,
+                    "email_sequence": "winback",
+                    "email_number": 3,
+                    "reason": f"Cancelled {days} days ago — final win-back",
+                })
+
         # ── Milestone triggers (rule 14) ──────────────────────────────────
         # Find unprocessed milestone events that haven't had an email sent yet.
         milestone_events = conn.execute(

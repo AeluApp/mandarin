@@ -110,6 +110,15 @@ CG.CGColorRelease.restype = None
 CG.CGContextSetTextPosition.argtypes = [ctypes.c_void_p, CGFloat, CGFloat]
 CG.CGContextSetTextPosition.restype = None
 
+CG.CGContextSaveGState.argtypes = [ctypes.c_void_p]
+CG.CGContextSaveGState.restype = None
+
+CG.CGContextRestoreGState.argtypes = [ctypes.c_void_p]
+CG.CGContextRestoreGState.restype = None
+
+CG.CGContextClip.argtypes = [ctypes.c_void_p]
+CG.CGContextClip.restype = None
+
 # ── CoreText ───────────────────────────────────────────────────────
 
 CT.CTFontCreateWithName.restype = ctypes.c_void_p
@@ -167,17 +176,21 @@ def create_icon_context(size):
     linen_r, linen_g, linen_b = 0xF2 / 255.0, 0xEB / 255.0, 0xE0 / 255.0
     accent_r, accent_g, accent_b = 0x94 / 255.0, 0x60 / 255.0, 0x70 / 255.0
 
-    # Fill background with linen
-    CG.CGContextSetRGBFillColor(ctx, linen_r, linen_g, linen_b, 1.0)
-    CG.CGContextFillRect(ctx, make_rect(0, 0, size, size))
-
-    # Rounded rect (macOS icon corner radius ~22.37%)
+    # Rounded rect only — no full-square fill so corners stay transparent.
+    # macOS applies its own squircle mask; we just need transparent corners.
     corner = size * 0.2237
     rect = make_rect(0, 0, size, size)
     path = CG.CGPathCreateWithRoundedRect(rect, corner, corner, None)
     CG.CGContextAddPath(ctx, path)
     CG.CGContextSetRGBFillColor(ctx, linen_r, linen_g, linen_b, 1.0)
     CG.CGContextFillPath(ctx)
+
+    # Clip to rounded rect so text doesn't bleed into transparent corners
+    CG.CGContextSaveGState(ctx)
+    path2 = CG.CGPathCreateWithRoundedRect(rect, corner, corner, None)
+    CG.CGContextAddPath(ctx, path2)
+    CG.CGContextClip(ctx)
+    CG.CGPathRelease(path2)
     CG.CGPathRelease(path)
 
     # Create font and color for text
@@ -217,6 +230,9 @@ def create_icon_context(size):
 
     CG.CGContextSetTextPosition(ctx, x, y)
     CT.CTLineDraw(line, ctx)
+
+    # Restore graphics state (remove clip)
+    CG.CGContextRestoreGState(ctx)
 
     # Create CGImage
     image = CG.CGBitmapContextCreateImage(ctx)

@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest changing plans because of the rain.",
                 "options": [
-                    {"text_zh": "下这么大的雨，太危险了，我们换个活动吧。", "text_pinyin": "xià zhème dà de yǔ, tài wēixiǎn le, wǒmen huàn ge huódòng ba.", "text_en": "With rain this heavy, it's too dangerous, let's switch to a different activity.", "score": 1.0, "register": "casual", "feedback": "Practical and safety-conscious — explains the reasoning and proposes a pivot."},
-                    {"text_zh": "算了吧，改天再去爬山怎么样？", "text_pinyin": "suàn le ba, gǎitiān zài qù páshān zěnmeyàng?", "text_en": "Forget it, how about we go hiking another day?", "score": 0.7, "register": "casual", "feedback": "Reasonable postponement, though suggesting an alternative for today keeps the day fun."},
-                    {"text_zh": "要不我们等一下看看，也许雨会停。", "text_pinyin": "yào bù wǒmen děng yīxià kànkan, yěxǔ yǔ huì tíng.", "text_en": "How about we wait a bit, maybe the rain will stop.", "score": 0.6, "register": "casual", "feedback": "Optimistic but uncertain — if it's already heavy rain, a backup plan is more practical."}
+                    {
+                        "text_zh": "我觉得先复习语法吧，那个部分我不太懂。",
+                        "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.",
+                        "text_en": "I think we should start with grammar, I don't really understand that part.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest changing plans because of the rain, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "可以啊，我以前打过篮球，我们一起去吧。",
+                        "text_pinyin": "kěyǐ a, wǒ yǐqián dǎ guò lánqiú, wǒmen yīqǐ qù ba.",
+                        "text_en": "Sure, I've played basketball before, let's go together.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest changing plans because of the rain, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "下这么大的雨，太危险了，我们换个活动吧。",
+                        "text_pinyin": "xià zhème dà de yǔ, tài wēixiǎn le, wǒmen huàn ge huódòng ba.",
+                        "text_en": "With rain this heavy, it's too dangerous, let's switch to a different activity.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical and safety-conscious — explains the reasoning and proposes a pivot."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest an indoor activity.",
                 "options": [
-                    {"text_zh": "我们去看电影或者找个地方喝咖啡吧。", "text_pinyin": "wǒmen qù kàn diànyǐng huòzhě zhǎo ge dìfang hē kāfēi ba.", "text_en": "Let's go see a movie or find a place to get coffee.", "score": 1.0, "register": "casual", "feedback": "Offers two options — giving choices makes it easy for your friend to agree."},
-                    {"text_zh": "要不去我家玩游戏？也很有意思。", "text_pinyin": "yào bù qù wǒ jiā wán yóuxì? yě hěn yǒu yìsi.", "text_en": "How about playing games at my place? That's also fun.", "score": 0.8, "register": "casual", "feedback": "Casual and welcoming — inviting someone to your home shows closeness."},
-                    {"text_zh": "随便吧，你说去哪里我就去哪里。", "text_pinyin": "suíbiàn ba, nǐ shuō qù nǎlǐ wǒ jiù qù nǎlǐ.", "text_en": "Whatever, wherever you say, I'll go.", "score": 0.4, "register": "casual", "feedback": "随便 can sound like you don't care — since you suggested changing plans, follow through with an idea."}
+                    {
+                        "text_zh": "可以啊，我以前打过篮球，我们一起去吧。",
+                        "text_pinyin": "kěyǐ a, wǒ yǐqián dǎ guò lánqiú, wǒmen yīqǐ qù ba.",
+                        "text_en": "Sure, I've played basketball before, let's go together.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest an indoor activity, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "哇，成都看起来很漂亮！你去了哪些地方？",
+                        "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?",
+                        "text_en": "Wow, Chengdu looks beautiful! What places did you visit?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest an indoor activity, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我们去看电影或者找个地方喝咖啡吧。",
+                        "text_pinyin": "wǒmen qù kàn diànyǐng huòzhě zhǎo ge dìfang hē kāfēi ba.",
+                        "text_en": "Let's go see a movie or find a place to get coffee.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Offers two options — giving choices makes it easy for your friend to agree."
+                    }
                 ]
             }
         ],

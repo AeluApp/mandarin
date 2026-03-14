@@ -1,28 +1,83 @@
 {
-  "name": "Mandarin",
-  "short_name": "Mandarin",
+  "id": "/",
+  "name": "Aelu — Patient Mandarin Study",
+  "short_name": "Aelu",
   "description": "Patient Mandarin study. Honest data, no theatrics.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#F2EBE0",
-  "theme_color": "#946070",
+  "theme_color": "#F2EBE0",
   "categories": ["education"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/static/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "/static/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/static/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Session",
+      "short_name": "Session",
+      "description": "Begin a study session",
+      "url": "/?action=start",
+      "icons": [
+        {
+          "src": "/static/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Grammar",
+      "short_name": "Grammar",
+      "description": "Browse grammar points",
+      "url": "/#grammar",
+      "icons": [
+        {
+          "src": "/static/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Reading",
+      "short_name": "Reading",
+      "description": "Open graded reader",
+      "url": "/#reading",
+      "icons": [
+        {
+          "src": "/static/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

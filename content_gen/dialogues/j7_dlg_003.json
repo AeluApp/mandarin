@@ -1,0 +1,185 @@
+{
+  "title": "The Library at the Edge of the District",
+  "title_zh": "城区边缘的图书馆",
+  "hsk_level": 7,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.7,
+  "tree": {
+    "setup": "You've discovered a small community library tucked into a ground-floor apartment in an aging residential compound. The volunteer librarian, Uncle Xu, a retired middle school teacher, has turned his own living room into a lending library for migrant workers' children in the neighborhood. It's late afternoon, and the last child has just left.",
+    "setup_zh": "你在一个老旧居民小区的底层住宅里发现了一间小型社区图书馆。志愿图书管理员徐叔叔——一位退休的初中教师——把自己的客厅改造成了一个借阅图书馆，专门为附近外来务工人员的孩子服务。现在是傍晚，最后一个孩子刚刚离开。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你来得正好，刚安静下来。下午来了六个孩子，最小的才上二年级。他们的父母都在附近的工地或者工厂上班，晚上才回来。这里就是他们放学后的落脚点。",
+        "text_pinyin": "Nǐ lái de zhènghǎo, gāng ānjìng xiàlái. Xiàwǔ lái le liù ge háizi, zuì xiǎo de cái shàng èr niánjí. Tāmen de fùmǔ dōu zài fùjìn de gōngdì huòzhě gōngchǎng shàngbān, wǎnshàng cái huílái. Zhèlǐ jiù shì tāmen fàngxué hòu de luòjiǎodiǎn.",
+        "text_en": "You came at just the right time — it just quieted down. Six children came this afternoon; the youngest is only in second grade. Their parents all work at nearby construction sites or factories and don't come home until evening. This is their landing place after school."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to what Uncle Xu said about the role this place plays for the children.",
+        "options": [
+          {
+            "text_zh": "所以这里不只是图书馆，更像是一个临时的家。对这些孩子来说，有个安全的地方待着、有人在旁边，可能比书本身更重要。",
+            "text_pinyin": "Suǒyǐ zhèlǐ bù zhǐ shì túshūguǎn, gèng xiàng shì yīge línshí de jiā. Duì zhèxiē háizi lái shuō, yǒu ge ānquán de dìfang dāi zhe, yǒu rén zài pángbiān, kěnéng bǐ shū běnshēn gèng zhòngyào.",
+            "text_en": "So this isn't just a library — it's more like a temporary home. For these children, having a safe place to be after school with someone present might matter more than the books themselves.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He nods slowly, hands on his knees. \"That took me a while to figure out,\" he says. \"Now I think you're right.\""
+          },
+          {
+            "text_zh": "这些孩子能在公立学校上学吗？户口有没有问题？",
+            "text_pinyin": "Zhèxiē háizi néng zài gōnglì xuéxiào shàngxué ma? Hùkǒu yǒu méiyǒu wèntí?",
+            "text_en": "Can these children attend public schools? Do they have hukou issues?",
+            "score": 0.0,
+            "feedback": "He sighs. \"Most of them manage to get in, but it's never simple,\" he says, and steers the conversation back to the library."
+          },
+          {
+            "text_zh": "你这里的书多吗？有没有英语教材？",
+            "text_pinyin": "Nǐ zhèlǐ de shū duō ma? Yǒu méiyǒu Yīngyǔ jiàocái?",
+            "text_en": "Do you have many books here? Any English textbooks?",
+            "score": 0.0,
+            "feedback": "He waves a hand at the shelves. \"Some of everything. But the books aren't really the point,\" he says, watching to see if you understand."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "嗯……一开始我以为关键是让他们多读书，后来才发现，很多孩子来了根本不看书，就坐在角落里画画或者发呆。我一开始还着急，后来想通了——他们需要的不是被要求做什么，而是被允许什么都不做。",
+        "text_pinyin": "Ǹg... Yī kāishǐ wǒ yǐwéi guānjiàn shì ràng tāmen duō dú shū, hòulái cái fāxiàn, hěn duō háizi lái le gēnběn bú kàn shū, jiù zuò zài jiǎoluò lǐ huàhuà huòzhě fādāi. Wǒ yī kāishǐ hái zhāojí, hòulái xiǎng tōng le — tāmen xūyào de bú shì bèi yāoqiú zuò shénme, ér shì bèi yǔnxǔ shénme dōu bú zuò.",
+        "text_en": "Mm... At first I thought the key was getting them to read more, but later I realized many children come and don't read at all — they just sit in a corner drawing or staring into space. I used to worry about that, but eventually I understood: what they need isn't to be told to do something, but to be allowed to do nothing."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his insight about what the children actually need.",
+        "options": [
+          {
+            "text_zh": "在学校要学习，在家可能要帮忙，到处都是任务和期待。一个不要求任何产出的空间反而成了最稀缺的东西。您提供的不是教育——是一种庇护。",
+            "text_pinyin": "Zài xuéxiào yào xuéxí, zài jiā kěnéng yào bāngmáng, dàochù dōu shì rènwù hé qīdài. Yīge bù yāoqiú rènhé chǎnchū de kōngjiān fǎn'ér chéng le zuì xīquē de dōngxī. Nín tígōng de bú shì jiàoyù — shì yī zhǒng bìhù.",
+            "text_en": "At school they have to study, at home they might have to help out — everywhere there are tasks and expectations. A space that demands nothing actually becomes the scarcest thing. What you provide isn't education — it's shelter.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He sits up a little straighter. \"Shelter,\" he says quietly. \"That's the word. I've been looking for that word.\""
+          },
+          {
+            "text_zh": "但是不看书的话，来图书馆有什么意义呢？",
+            "text_pinyin": "Dànshì bú kàn shū dehuà, lái túshūguǎn yǒu shénme yìyì ne?",
+            "text_en": "But if they're not reading, what's the point of coming to a library?",
+            "score": 0.0,
+            "feedback": "He gives you a patient look. \"I used to think that too,\" he says. \"Then I watched them for a while.\""
+          },
+          {
+            "text_zh": "我小时候也经常发呆，后来就好了。孩子嘛，长大就好了。",
+            "text_pinyin": "Wǒ xiǎo shíhòu yě jīngcháng fādāi, hòulái jiù hǎo le. Háizi ma, zhǎng dà jiù hǎo le.",
+            "text_en": "I used to space out a lot as a kid too, it got better later. Kids, they'll be fine when they grow up.",
+            "score": 0.0,
+            "feedback": "He nods but his expression tightens just slightly. \"These kids have a little more going on than that,\" he says carefully."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "庇护这个词用得准。有一个小女孩，叫小雨，她爸爸在建筑工地受了伤，妈妈在超市打两份工。她每天来，不说话，就趴在桌子上写日记。有一天她给我看了一页——上面写着「今天图书馆很暖和」。就这一句话。",
+        "text_pinyin": "Bìhù zhège cí yòng de zhǔn. Yǒu yīge xiǎo nǚhái, jiào Xiǎoyǔ, tā bàba zài jiànzhù gōngdì shòu le shāng, māma zài chāoshì dǎ liǎng fèn gōng. Tā měi tiān lái, bù shuōhuà, jiù pā zài zhuōzi shàng xiě rìjì. Yǒu yī tiān tā gěi wǒ kàn le yī yè — shàngmiàn xiě zhe 'jīntiān túshūguǎn hěn nuǎnhuo'. Jiù zhè yī jù huà.",
+        "text_en": "Shelter — that word is accurate. There's a little girl called Xiaoyu. Her father was injured on a construction site, and her mother works two shifts at a supermarket. She comes every day, doesn't talk, just leans on the table writing in her diary. One day she showed me a page — it said 'The library was warm today.' Just that one sentence."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to what Xiaoyu's diary entry reveals.",
+        "options": [
+          {
+            "text_zh": "那一句话比一整篇作文包含的东西都多。「暖和」可能不只是温度——是有人在，灯亮着，没人催她走。对每天要承受那么多的孩子来说，一个可以预期的安全的地方，本身就是最大的温暖。",
+            "text_pinyin": "Nà yī jù huà bǐ yī zhěng piān zuòwén bāohán de dōngxī dōu duō. 'Nuǎnhuo' kěnéng bù zhǐ shì wēndù — shì yǒu rén zài, dēng liàng zhe, méi rén cuī tā zǒu. Duì měi tiān yào chéngshòu nàme duō de háizi lái shuō, yīge kě yùqī de ānquán de dìfang, běnshēn jiù shì zuìdà de wēnnuǎn.",
+            "text_en": "That sentence holds more than an essay could. 'Warm' isn't temperature — it's someone being here, lights on, no one rushing her out. For a child carrying that much, a predictable safe place is the greatest warmth.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He's quiet for a moment. Then he gets up and straightens one of the chairs at the table — the one Xiaoyu probably sits at."
+          },
+          {
+            "text_zh": "你应该把她的日记给她妈妈看，让她妈妈知道她的感受。",
+            "text_pinyin": "Nǐ yīnggāi bǎ tā de rìjì gěi tā māma kàn, ràng tā māma zhīdào tā de gǎnshòu.",
+            "text_en": "You should show her diary to her mother, so her mother knows how she feels.",
+            "score": 0.0,
+            "feedback": "He shakes his head firmly. \"That's her diary. She showed me because she trusted me. I wouldn't do that.\""
+          },
+          {
+            "text_zh": "这个年纪的孩子应该多运动，不应该整天趴在桌子上。",
+            "text_pinyin": "Zhège niánjì de háizi yīnggāi duō yùndòng, bù yīnggāi zhěng tiān pā zài zhuōzi shàng.",
+            "text_en": "Children this age should exercise more, they shouldn't spend all day leaning on a desk.",
+            "score": 0.0,
+            "feedback": "He looks at you for a moment. \"She's not here because she has too much energy,\" he says quietly."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你理解得很透。但说实话，我也有撑不下去的时候。这套房子是我自己的，不用交租，但书要买、暖气费要交、有时候还要给孩子们准备点零食。老伴觉得我在花冤枉钱，邻居觉得我在多管闲事。",
+        "text_pinyin": "Nǐ lǐjiě de hěn tòu. Dàn shuō shíhuà, wǒ yě yǒu chēng bú xiàqù de shíhòu. Zhè tào fángzi shì wǒ zìjǐ de, bú yòng jiāo zū, dàn shū yào mǎi, nuǎnqì fèi yào jiāo, yǒu shíhòu hái yào gěi háizi men zhǔnbèi diǎn língshí. Lǎobàn juéde wǒ zài huā yuānwǎng qián, línjū juéde wǒ zài duō guǎn xiánshì.",
+        "text_en": "You understand deeply. But honestly, there are times I can barely keep going. This apartment is mine so I don't pay rent, but I need to buy books, pay heating bills, and sometimes prepare snacks for the children. My wife thinks I'm wasting money, and the neighbors think I'm meddling in other people's business."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the isolation and criticism he faces for doing this work.",
+        "options": [
+          {
+            "text_zh": "「多管闲事」这个标签特别伤人，因为它把善意定义成了越界。但您做的事情恰恰是因为「不是您的事」才更有意义——您选择去在乎跟自己没有关系的孩子。",
+            "text_pinyin": "'Duō guǎn xiánshì' zhège biāoqiān tèbié shāng rén, yīnwèi tā bǎ shànyì dìngyì chéng le yuèjiè. Dàn nín zuò de shìqíng qiàqià shì yīnwèi 'bú shì nín de shì' cái gèng yǒu yìyì — nín xuǎnzé qù zàihū gēn zìjǐ méiyǒu guānxì de háizi.",
+            "text_en": "The label 'meddling in others' business' is hurtful because it redefines goodwill as overstepping. But what you're doing matters precisely because 'it's not your business' — you chose to care about children who have nothing to do with you.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He exhales slowly, and some tension goes out of his shoulders. \"That's it,\" he says, almost to himself. \"That's the thing I couldn't explain to my wife.\""
+          },
+          {
+            "text_zh": "那你可以申请政府补贴啊，应该有这方面的政策。",
+            "text_pinyin": "Nà nǐ kěyǐ shēnqǐng zhèngfǔ bǔtiē a, yīnggāi yǒu zhè fāngmiàn de zhèngcè.",
+            "text_en": "You could apply for government subsidies, there should be policies for that.",
+            "score": 0.0,
+            "feedback": "He nods wearily. \"I've looked into it. It's a lot of paperwork for something uncertain.\" He sounds like someone who's already tried."
+          },
+          {
+            "text_zh": "你老伴说得也有道理，你也要照顾好自己。",
+            "text_pinyin": "Nǐ lǎobàn shuō de yě yǒu dàolǐ, nǐ yě yào zhàogù hǎo zìjǐ.",
+            "text_en": "Your wife has a point too, you need to take care of yourself.",
+            "score": 0.0,
+            "feedback": "He gives you a small, tired smile. \"She tells me the same thing,\" he says, and it's clear that's not what he needed to hear."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "谢谢你这么说。你知道吗，有时候支撑我继续做下去的不是什么大道理，就是一些很小的瞬间。比如小雨那句「图书馆很暖和」。比如有个男孩走的时候偷偷把书摆整齐了，以为我没看到。这些瞬间让我觉得，这件事虽然小，但不是没有意义的。",
+        "text_pinyin": "Xièxiè nǐ zhème shuō. Nǐ zhīdào ma, yǒu shíhòu zhīchēng wǒ jìxù zuò xiàqù de bú shì shénme dà dàolǐ, jiù shì yīxiē hěn xiǎo de shùnjiān. Bǐrú Xiǎoyǔ nà jù 'túshūguǎn hěn nuǎnhuo'. Bǐrú yǒu ge nánhái zǒu de shíhòu tōutōu bǎ shū bǎi zhěngqí le, yǐwéi wǒ méi kàn dào. Zhèxiē shùnjiān ràng wǒ juéde, zhè jiàn shì suīrán xiǎo, dàn bú shì méiyǒu yìyì de.",
+        "text_en": "Thank you for saying that. You know, what keeps me going sometimes isn't any grand principle — it's small moments. Like Xiaoyu's sentence about the library being warm. Like a boy who quietly straightened the books before leaving, thinking I didn't see. These moments make me feel that even though this work is small, it's not meaningless."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Close the conversation by saying something about the boy straightening the books.",
+        "options": [
+          {
+            "text_zh": "那个男孩偷偷摆书，说明您的图书馆已经教会了他一些东西——不是从书里学的，是从您的态度里学的。他看见一个人安静地照顾一个空间，然后他也开始照顾了。这种影响看不见，但是真实的。徐叔叔，这件事不小。",
+            "text_pinyin": "Nàge nánhái tōutōu bǎi shū, shuōmíng nín de túshūguǎn yǐjīng jiāohuì le tā yīxiē dōngxī — bú shì cóng shū lǐ xué de, shì cóng nín de tàidù lǐ xué de. Tā kàn jiàn yīge rén ānjìng de zhàogù yīge kōngjiān, ránhòu tā yě kāishǐ zhàogù le. Zhè zhǒng yǐngxiǎng kàn bú jiàn, dàn shì zhēnshí de. Xú shūshu, zhè jiàn shì bù xiǎo.",
+            "text_en": "The boy straightening books proves your library taught him something — not from a book, but your attitude. He saw someone quietly caring for a space, and started caring too.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "He sits very still for a moment. Then he nods, twice, slowly — like he's deciding to believe it."
+          },
+          {
+            "text_zh": "你可以在网上众筹，现在这种故事很容易传播。",
+            "text_pinyin": "Nǐ kěyǐ zài wǎngshàng zhòngchóu, xiànzài zhè zhǒng gùshì hěn róngyì chuánbō.",
+            "text_en": "You could crowdfund online, these kinds of stories spread easily nowadays.",
+            "score": 0.0,
+            "feedback": "He shakes his head. \"I don't want it to become a story,\" he says simply. \"I just want to keep doing it.\""
+          },
+          {
+            "text_zh": "你这里有空调吗？夏天孩子们不会热吗？",
+            "text_pinyin": "Nǐ zhèlǐ yǒu kōngtiáo ma? Xiàtiān háizi men bú huì rè ma?",
+            "text_en": "Do you have air conditioning here? Don't the kids get hot in summer?",
+            "score": 0.0,
+            "feedback": "\"There's a fan,\" he says, and gestures to the corner. The moment breaks quietly."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "China's migrant worker population — estimated at nearly 300 million — often leaves children in a gap between rural hometown schools and urban access. Children who move with their parents to cities frequently face barriers to enrollment in local public schools due to the hukou (household registration) system. Grassroots community libraries and after-school spaces fill a critical gap, though they operate largely without institutional support, sustained by individual dedication."
+  }
+}

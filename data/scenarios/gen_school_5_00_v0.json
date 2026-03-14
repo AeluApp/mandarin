@@ -1,0 +1,124 @@
+{
+    "title": "The Office Hours Philosopher",
+    "title_zh": "答疑时间的哲学家",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_5_00_v0",
+    "tree": {
+        "setup": "Professor Lin's office, third floor of the humanities building, where every horizontal surface holds a stack of books organized by a system only she understands. She teaches Modern Chinese Literature and has a reputation for giving feedback that is simultaneously devastating and encouraging — students leave her office uncertain whether they've been praised or criticized, but always motivated to revise. A framed calligraphy piece reads「学而不思则罔」(learning without thinking is labor lost).",
+        "setup_zh": "人文楼三楼林教授的办公室，每个水平面上都堆着只有她自己能看懂其排列逻辑的书堆。她教现代中国文学，以给出既毁灭性又鼓舞人心的反馈著称——学生离开她的办公室时说不清自己是被表扬了还是被批评了，但总是充满修改的动力。墙上挂着一幅书法写着「学而不思则罔」。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来吧，门开着。你是来问论文的事吧？坐。",
+                "text_pinyin": "jìnlái ba, mén kāi zhe. nǐ shì lái wèn lùnwén de shì ba? zuò.",
+                "text_en": "Come in, door's open. You're here about your paper? Sit."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about your essay feedback.",
+                "options": [
+                    {
+                        "text_zh": "林教授，您好。是的，我看到您在我的论文上写了很多批注，但有几个地方我不太理解。尤其是您在第三段旁边写的「论点不够深入」，我想请教您具体是指哪方面？",
+                        "text_pinyin": "Lín jiàoshòu, nín hǎo. shì de, wǒ kàn dào nín zài wǒ de lùnwén shàng xiě le hěn duō pīzhù, dàn yǒu jǐ gè dìfāng wǒ bú tài lǐjiě. yóuqí shì nín zài dì sān duàn pángbiān xiě de「lùndiǎn búgòu shēnrù」, wǒ xiǎng qǐngjiào nín jùtǐ shì zhǐ nǎ fāngmiàn?",
+                        "text_en": "Professor Lin, hello. Yes, I saw your many annotations on my paper, but there are a few parts I don't fully understand. Especially where you wrote 'argument not deep enough' next to paragraph three — could you explain what specifically you mean?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Specific, prepared, and citing the exact annotation — Professor Lin sets down her teacup. This is the kind of student visit she looks forward to."
+                    },
+                    {
+                        "text_zh": "您给我的论文打的分有点低，我想知道怎么改。",
+                        "text_pinyin": "nín gěi wǒ de lùnwén dǎ de fēn yǒudiǎn dī, wǒ xiǎng zhīdào zěnme gǎi.",
+                        "text_en": "My paper score was a bit low — I want to know how to improve it.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Grade-focused rather than learning-focused — she'll redirect you to the substance."
+                    },
+                    {
+                        "text_zh": "论文写得不好吗？",
+                        "text_pinyin": "lùnwén xiě de bù hǎo ma?",
+                        "text_en": "Was my paper not good?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Lin pauses.「不好」is not how she'd put it.「有潜力但需要打磨，」she says — it has potential but needs polishing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第三段你提出了一个很有意思的观点——鲁迅的讽刺手法受到了西方文学的影响。但你只用了两句话就跳到了结论。好的论证需要过程：你要引用具体的作品来支撑你的观点，还要考虑反面的可能性。",
+                "text_pinyin": "dì sān duàn nǐ tíchū le yí gè hěn yǒu yìsi de guāndiǎn——Lǔ Xùn de fěngcì shǒufǎ shòu dào le xīfāng wénxué de yǐngxiǎng. dàn nǐ zhǐ yòng le liǎng jù huà jiù tiào dào le jiélùn. hǎo de lùnzhèng xūyào guòchéng: nǐ yào yǐnyòng jùtǐ de zuòpǐn lái zhīchēng nǐ de guāndiǎn, hái yào kǎolǜ fǎnmiàn de kěnéng xìng.",
+                "text_en": "In paragraph three you raised an interesting point — that Lu Xun's satirical techniques were influenced by Western literature. But you jumped to the conclusion in just two sentences. Good argumentation needs a process: cite specific works to support your point, and consider counterarguments."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her feedback and ask how to improve.",
+                "options": [
+                    {
+                        "text_zh": "我明白了。您是说我需要展开论述的过程，不能直接从观点跳到结论。那如果我引用《狂人日记》和果戈理的《狂人日记》做比较，是不是更有说服力？另外，反面论证的话，是不是可以讨论鲁迅自己说的「拿来主义」这个概念？",
+                        "text_pinyin": "wǒ míngbai le. nín shì shuō wǒ xūyào zhǎnkāi lùnshù de guòchéng, bù néng zhíjiē cóng guāndiǎn tiào dào jiélùn. nà rúguǒ wǒ yǐnyòng《Kuángrén Rìjì》hé Guǒgēlǐ de《Kuángrén Rìjì》zuò bǐjiào, shì búshì gèng yǒu shuōfúlì? lìngwài, fǎnmiàn lùnzhèng de huà, shì búshì kěyǐ tǎolùn Lǔ Xùn zìjǐ shuō de「nálái zhǔyì」zhège gàiniàn?",
+                        "text_en": "I see — you're saying I need to develop the argument process, not jump from thesis to conclusion. If I compare Lu Xun's 'Diary of a Madman' with Gogol's version, would that be more persuasive? And for counterarguments, could I discuss Lu Xun's own concept of 'grab-ism'?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Connecting Lu Xun to Gogol and citing 拿来主义 — Professor Lin's eyebrows rise. This is the kind of thinking her annotations were designed to provoke."
+                    },
+                    {
+                        "text_zh": "好的，我会加一些引用。大概需要加多少？",
+                        "text_pinyin": "hǎo de, wǒ huì jiā yìxiē yǐnyòng. dàgài xūyào jiā duōshǎo?",
+                        "text_en": "OK, I'll add some citations. About how many do I need?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Asking about quantity rather than quality — she'll redirect: it's not about how many, it's about how well they support your argument."
+                    },
+                    {
+                        "text_zh": "那我把第三段重写一下？",
+                        "text_pinyin": "nà wǒ bǎ dì sān duàn chóngxiě yíxià?",
+                        "text_en": "Should I just rewrite paragraph three?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She shakes her head.「不是重写，是深挖。」Not rewriting — digging deeper. The bones of the argument are good."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "果戈理的比较非常好！「拿来主义」也是一个很好的角度。你看，你的思路其实很清晰，只是论文里没有充分展开。修改版的截止日期是下周五。如果需要再讨论，可以预约下周的答疑时间。",
+                "text_pinyin": "Guǒgēlǐ de bǐjiào fēicháng hǎo!「nálái zhǔyì」yě shì yí gè hěn hǎo de jiǎodù. nǐ kàn, nǐ de sīlù qíshí hěn qīngxī, zhǐ shì lùnwén lǐ méiyǒu chōngfèn zhǎnkāi. xiūgǎi bǎn de jiézhǐ rìqī shì xià zhōu wǔ. rúguǒ xūyào zài tǎolùn, kěyǐ yùyuē xià zhōu de dáyí shíjiān.",
+                "text_en": "The Gogol comparison is excellent! 'Grab-ism' is also a great angle. See — your thinking is actually very clear, it just wasn't fully developed in the paper. The revision deadline is next Friday. If you need another discussion, book next week's office hours."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm the deadline.",
+                "options": [
+                    {
+                        "text_zh": "谢谢林教授！您的指导让我思路清晰了很多。下周五之前我一定交修改版。如果修改过程中有新的问题，我可以先发邮件给您吗？",
+                        "text_pinyin": "xièxie Lín jiàoshòu! nín de zhǐdǎo ràng wǒ sīlù qīngxī le hěn duō. xià zhōu wǔ zhīqián wǒ yídìng jiāo xiūgǎi bǎn. rúguǒ xiūgǎi guòchéng zhōng yǒu xīn de wèntí, wǒ kěyǐ xiān fā yóujiàn gěi nín ma?",
+                        "text_en": "Thank you, Professor Lin! Your guidance has clarified my thinking significantly. I'll submit the revision before next Friday. If new questions come up during revision, may I email you first?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Gratitude, deadline commitment, and a proactive communication plan — Professor Lin nods. She'll respond to emails within 24 hours, unless the question could be answered by rereading the source material."
+                    },
+                    {
+                        "text_zh": "好的，下周五之前交。谢谢！",
+                        "text_pinyin": "hǎo de, xià zhōu wǔ zhīqián jiāo. xièxie!",
+                        "text_en": "OK, I'll submit by next Friday. Thanks!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clear and committed. She returns to her own reading."
+                    },
+                    {
+                        "text_zh": "能不能多给几天？下周五有点赶。",
+                        "text_pinyin": "néng bu néng duō gěi jǐ tiān? xià zhōu wǔ yǒudiǎn gǎn.",
+                        "text_en": "Can I have a few more days? Friday is a bit tight.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Lin's expression suggests that the deadline is not a suggestion. The calligraphy on the wall suddenly feels very relevant."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university office hours (答疑时间, dáyí shíjiān) are typically by appointment. Professors often write detailed annotations (批注, pīzhù) on papers. Lu Xun's (鲁迅) concept of 拿来主义 (nálái zhǔyì, 'grab-ism' or selective borrowing from foreign cultures) is a foundational concept in modern Chinese literary criticism."
+    }
+}

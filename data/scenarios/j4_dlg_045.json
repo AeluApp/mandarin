@@ -1,0 +1,83 @@
+{
+    "title": "The Clay Teapot",
+    "title_zh": "紫砂壶",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "At a tea house, the owner shows you a small clay teapot with a deep, glossy patina. She handles it with obvious reverence.",
+        "setup_zh": "在一间茶馆里，老板给你看一把有着深色光泽的小紫砂壶。她拿着它的时候明显很敬重。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这把壶是我外婆留下来的，已经用了四十多年了。你看这个颜色——新的紫砂壶不是这样的。这种光泽是茶养出来的，每天泡茶，一点一点变的。我外婆说这叫「养壶」——不是你在用壶，是你在养它。",
+                "text_pinyin": "Zhè bǎ hú shì wǒ wàipó liú xiàlái de, yǐjīng yòng le sìshí duō nián le. Nǐ kàn zhège yánsè — xīn de zǐshā hú bú shì zhèyàng de. Zhè zhǒng guāngzé shì chá yǎng chūlái de, měi tiān pào chá, yīdiǎn yīdiǎn biàn de. Wǒ wàipó shuō zhè jiào 'yǎng hú' — bú shì nǐ zài yòng hú, shì nǐ zài yǎng tā.",
+                "text_en": "This teapot was left to me by my grandmother — it's been used for over forty years. See this color — new Yixing teapots don't look like this. This sheen was nurtured by tea, brewed daily, changing bit by bit. My grandmother said it's called 'nurturing the pot' — you're not using the pot, you're raising it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of nurturing a teapot.",
+                "options": [
+                    {
+                        "text_zh": "养壶——多美的一个词。不是「用」，是「养」。就像养一个有生命的东西，用耐心和时间。四十年的茶泡进去，这把壶已经有了灵魂。",
+                        "text_pinyin": "'Yǎng hú' — duō měi de yī ge cí. Bú shì 'yòng', shì 'yǎng'. Jiù xiàng yǎng yī ge yǒu shēngmìng de dōngxi, yòng nàixīn hé shíjiān. Sìshí nián de chá pào jìnqù, zhè bǎ hú yǐjīng yǒu le línghún.",
+                        "text_en": "'Nurturing the pot' — what a beautiful phrase. Not 'using,' but 'nurturing.' Like raising a living thing with patience and time. Forty years of tea steeped into it — this pot has a soul now.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The pot as a living being — raised, not used."
+                    },
+                    {
+                        "text_zh": "四十年太久了，壶里面肯定不太卫生了吧？也许应该换一把新的，这样泡茶更干净。",
+                        "text_pinyin": "Sìshí nián tài jiǔ le, hú lǐmiàn kěndìng bú tài wèishēng le ba? Yěxǔ yīnggāi huàn yī bǎ xīn de, zhèyàng pào chá gèng gānjìng.",
+                        "text_en": "Forty years is a long time — the inside can't be very hygienic anymore, right? Maybe you should switch to a new one so the tea is cleaner.",
+                        "score": 0.0,
+                        "feedback": "She cradles the pot protectively: 'You think those forty years are dirt? That's my grandmother's whole life in there.'"
+                    },
+                    {
+                        "text_zh": "紫砂壶和普通茶壶有什么区别？",
+                        "text_pinyin": "Zǐshā hú hé pǔtōng cháhú yǒu shénme qūbié?",
+                        "text_en": "What's the difference between Yixing clay and regular teapots?",
+                        "score": 0.0,
+                        "feedback": "A technical comparison during an emotional sharing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对，它有灵魂了。最神奇的是——现在就算不放茶叶，只倒热水进去，出来的水都有淡淡的茶味。四十年的茶已经渗进了壶里。我外婆的习惯、她每天泡茶的时间、她喝的那种茶——都在这把壶里了。",
+                "text_pinyin": "Nǐ shuō de duì, tā yǒu línghún le. Zuì shénqí de shì — xiànzài jiùsuàn bù fàng cháyè, zhǐ dào rè shuǐ jìnqù, chūlái de shuǐ dōu yǒu dàndàn de cháwèi. Sìshí nián de chá yǐjīng shèn jìn le hú lǐ. Wǒ wàipó de xíguàn, tā měi tiān pào chá de shíjiān, tā hē de nà zhǒng chá — dōu zài zhè bǎ hú lǐ le.",
+                "text_en": "You're right, it has a soul. The most magical thing is — now even without tea leaves, just pouring hot water in, the water comes out with a faint tea flavor. Forty years of tea have seeped into the clay. My grandmother's habits, the time she brewed every day, the tea she drank — they're all in this pot."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the pot holding memories of her grandmother.",
+                "options": [
+                    {
+                        "text_zh": "这把壶不只是茶具——是您外婆的日记。每天的茶留下一点痕迹，四十年变成了现在这样。每次用它泡茶，其实是在跟外婆一起喝。",
+                        "text_pinyin": "Zhè bǎ hú bù zhǐ shì chájù — shì nín wàipó de rìjì. Měi tiān de chá liú xià yīdiǎn hénjì, sìshí nián biàn chéng le xiànzài zhèyàng. Měi cì yòng tā pào chá, qíshí shì zài gēn wàipó yīqǐ hē.",
+                        "text_en": "This pot isn't just a tea vessel — it's your grandmother's diary. Each day's tea left a trace, forty years became this. Every time you brew with it, you're having tea with her.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The pot as a daily diary — each cup is a reunion with grandmother."
+                    },
+                    {
+                        "text_zh": "您可以用这把壶泡什么茶？",
+                        "text_pinyin": "Nín kěyǐ yòng zhè bǎ hú pào shénme chá?",
+                        "text_en": "What tea can you brew in this pot?",
+                        "score": 0.0,
+                        "feedback": "A practical question during a moment about memory and love."
+                    },
+                    {
+                        "text_zh": "您有其他的紫砂壶吗？",
+                        "text_pinyin": "Nín yǒu qítā de zǐshā hú ma?",
+                        "text_en": "Do you have other Yixing teapots?",
+                        "score": 0.0,
+                        "feedback": "Asks about her collection when this one holds all the meaning."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Yixing clay teapots (紫砂壶) are treasured precisely because they absorb tea over decades. The concept of 养壶 (nurturing the pot) is one of China's most beautiful examples of patient care transforming an object. A well-nurtured pot becomes a taste archive of its owner's life — their preferences, their rituals, their years."
+    }
+}

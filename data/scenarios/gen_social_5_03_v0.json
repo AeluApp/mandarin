@@ -1,0 +1,124 @@
+{
+    "title": "The Apology Architect",
+    "title_zh": "道歉建筑师",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_5_03_v0",
+    "tree": {
+        "setup": "You're forty-five minutes late to meet your friend Xiao Mei at a café. Not fashionably late — genuinely, inexcusably late, because you fell asleep after setting your alarm for PM instead of AM. Her last text message, sent twenty minutes ago, was a single question mark. The one before that, sent ten minutes before, was two question marks. The escalation pattern suggests that by the time you arrive, you'll be facing three question marks and a glacial silence.",
+        "setup_zh": "你迟到了四十五分钟去咖啡馆见你的朋友小梅。不是时髦地迟到——是真正的、无可辩解地迟到了，因为你把闹钟设成了下午而不是上午然后睡过了头。她二十分钟前发的最后一条消息是一个问号。再之前十分钟发的是两个问号。从升级模式推断，等你到的时候，你将面对三个问号和冰川般的沉默。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "……你终于来了。",
+                "text_pinyin": "……nǐ zhōngyú lái le.",
+                "text_en": "...You're finally here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize for being very late.",
+                "options": [
+                    {
+                        "text_zh": "小梅，真的非常非常抱歉。我把闹钟设错了，设成了下午，睡过头了。这完全是我的错，没有任何借口。让你一个人等了四十五分钟，我知道这很不尊重你的时间。今天的咖啡和甜点全部我请，算是赔罪。",
+                        "text_pinyin": "Xiǎo Méi, zhēn de fēicháng fēicháng bàoqiàn. wǒ bǎ nàozhōng shè cuò le, shè chéng le xiàwǔ, shuì guòtóu le. zhè wánquán shì wǒ de cuò, méiyǒu rènhé jièkǒu. ràng nǐ yí gè rén děng le sìshíwǔ fēnzhōng, wǒ zhīdào zhè hěn bù zūnzhòng nǐ de shíjiān. jīntiān de kāfēi hé tiándiǎn quánbù wǒ qǐng, suàn shì péizuì.",
+                        "text_en": "Xiao Mei, I'm truly, deeply sorry. I set my alarm wrong — PM instead of AM — and overslept. This is entirely my fault, no excuses. Making you wait alone for forty-five minutes, I know that's disrespectful of your time. Coffee and dessert are on me today — my way of apologizing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Full ownership, no excuses, acknowledging the impact, and a concrete gesture — the glacial silence begins to thaw. Xiao Mei's expression shifts from stone to slate."
+                    },
+                    {
+                        "text_zh": "对不起对不起！路上堵车了。",
+                        "text_pinyin": "duìbuqǐ duìbuqǐ! lù shàng dǔchē le.",
+                        "text_en": "Sorry sorry! Traffic was terrible.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A common excuse. She'll accept it, but the lie hangs in the air — she can tell it wasn't traffic."
+                    },
+                    {
+                        "text_zh": "不好意思，来晚了。",
+                        "text_pinyin": "bù hǎoyìsi, lái wǎn le.",
+                        "text_en": "Sorry, I'm late.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Four words for forty-five minutes. The ratio of apology to lateness is insufficient."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "闹钟设成下午的？你是认真的吗？……好吧，至少你说实话了。我已经喝完了两杯咖啡，等你等到快要数天花板的格子了。你知道我最讨厌等人的。",
+                "text_pinyin": "nàozhōng shè chéng xiàwǔ de? nǐ shì rènzhēn de ma?……hǎo ba, zhìshǎo nǐ shuō shíhuà le. wǒ yǐjīng hē wán le liǎng bēi kāfēi, děng nǐ děng dào kuài yào shù tiānhuābǎn de gézi le. nǐ zhīdào wǒ zuì tǎoyàn děng rén de.",
+                "text_en": "You set the alarm to PM? Are you serious? ...Fine, at least you're honest. I've already finished two coffees and was about to start counting ceiling tiles. You know I hate waiting."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make amends and move past it.",
+                "options": [
+                    {
+                        "text_zh": "我知道你最不喜欢等人，这次真的太不应该了。下次我保证提前十五分钟到——不，提前二十分钟。如果我再迟到的话，你有权利罚我给你买一个月的奶茶。现在先点你想吃的，不要客气。",
+                        "text_pinyin": "wǒ zhīdào nǐ zuì bù xǐhuān děng rén, zhè cì zhēn de tài bù yīnggāi le. xià cì wǒ bǎozhèng tíqián shíwǔ fēnzhōng dào——bù, tíqián èrshí fēnzhōng. rúguǒ wǒ zài chídào de huà, nǐ yǒu quánlì fá wǒ gěi nǐ mǎi yí gè yuè de nǎichá. xiànzài xiān diǎn nǐ xiǎng chī de, búyào kèqi.",
+                        "text_en": "I know you hate waiting most — this was really unacceptable. Next time I promise to arrive fifteen minutes early — no, twenty minutes. If I'm late again, you have the right to make me buy you milk tea for a month. Now order whatever you want — don't hold back.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A concrete promise with a penalty clause and unlimited ordering — Xiao Mei's composure cracks into a reluctant smile. The milk tea threat is taken seriously."
+                    },
+                    {
+                        "text_zh": "下次一定不会了。你想吃什么？",
+                        "text_pinyin": "xià cì yídìng bú huì le. nǐ xiǎng chī shénme?",
+                        "text_en": "It won't happen again. What do you want to eat?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A promise without specifics. She lets it go — for now."
+                    },
+                    {
+                        "text_zh": "好了好了，别生气了。",
+                        "text_pinyin": "hǎo le hǎo le, bié shēngqì le.",
+                        "text_en": "OK OK, don't be mad.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Telling someone not to be mad after a 45-minute wait is like throwing water on a grease fire. Xiao Mei's expression returns to stone."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一个月的奶茶？你说的啊。我先记下了。好了，不跟你计较了。今天本来是要跟你说一件事的——我考上研究生了！",
+                "text_pinyin": "yí gè yuè de nǎichá? nǐ shuō de a. wǒ xiān jì xia le. hǎo le, bù gēn nǐ jìjiào le. jīntiān běnlái shì yào gēn nǐ shuō yí jiàn shì de——wǒ kǎo shàng yánjiūshēng le!",
+                "text_en": "A month of milk tea? You said it — I'm taking note. Fine, I won't hold it against you. Actually, I wanted to tell you something today — I got into grad school!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to her good news.",
+                "options": [
+                    {
+                        "text_zh": "什么？！考上了？！小梅你太厉害了！你准备了那么久，终于成功了！是哪个学校？哪个专业？这简直是今天最好的消息——我更惭愧了，这么重要的事情你等了我四十五分钟才说出来。",
+                        "text_pinyin": "shénme?! kǎo shàng le?! Xiǎo Méi nǐ tài lìhai le! nǐ zhǔnbèi le nàme jiǔ, zhōngyú chénggōng le! shì nǎge xuéxiào? nǎge zhuānyè? zhè jiǎnzhí shì jīntiān zuì hǎo de xiāoxi——wǒ gèng cánkuì le, zhème zhòngyào de shìqing nǐ děng le wǒ sìshíwǔ fēnzhōng cái shuō chūlái.",
+                        "text_en": "What?! You got in?! Xiao Mei, you're amazing! You prepared for so long — you finally made it! Which school? What major? This is the best news today — and now I feel even worse that you waited forty-five minutes to tell me this.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuine excitement, specific questions, and circling back to the guilt — the combination breaks through Xiao Mei's remaining frost. She laughs for the first time today."
+                    },
+                    {
+                        "text_zh": "恭喜恭喜！值得庆祝！",
+                        "text_pinyin": "gōngxǐ gōngxǐ! zhíde qìngzhù!",
+                        "text_en": "Congrats! Worth celebrating!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Appropriate but generic. She wanted a bigger reaction."
+                    },
+                    {
+                        "text_zh": "不错啊。读研很辛苦的你知道吧？",
+                        "text_pinyin": "búcuò a. dú yán hěn xīnkǔ de nǐ zhīdào ba?",
+                        "text_en": "Nice. You know grad school is tough, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dampening good news with a warning — the conversational equivalent of bringing an umbrella to someone's parade."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese friendship dynamics around lateness vary by generation and city — younger urban Chinese value punctuality more than older generations. 赔罪 (péizuì, making amends) through treating someone to food or drinks is a standard apology gesture. The escalating question marks in texts (？ → ？？ → ？？？) are a common Chinese texting pattern for expressing growing impatience. 奶茶 (nǎichá, milk tea) has become the universal currency of friendly debts and favors among young Chinese."
+    }
+}

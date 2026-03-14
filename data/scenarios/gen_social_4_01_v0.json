@@ -1,0 +1,124 @@
+{
+    "title": "The Birthday Invitation Architect",
+    "title_zh": "生日邀请建筑师",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_4_01_v0",
+    "tree": {
+        "setup": "Tuesday afternoon, a message pops up on your phone from Xiao Lin. She's planning her birthday party this weekend and treats the guest list with the seriousness of a state dinner — every attendee carefully considered, every dietary restriction noted, every seating arrangement planned to maximize conversational chemistry.",
+        "setup_zh": "周二下午，手机上弹出小林的消息。她在筹备这个周末的生日聚会，对待客人名单如同国宴一般认真——每位宾客都经过仔细考虑，每个饮食禁忌都记录在案，每个座位安排都旨在最大化聊天化学反应。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "嘿！周六是我生日，我在家办一个小聚会。你能来吗？晚上六点开始。",
+                "text_pinyin": "hēi! zhōuliù shì wǒ shēngrì, wǒ zài jiā bàn yí gè xiǎo jùhuì. nǐ néng lái ma? wǎnshang liù diǎn kāishǐ.",
+                "text_en": "Hey! Saturday's my birthday — I'm having a small party at home. Can you come? Starts at 6 PM."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the invitation.",
+                "options": [
+                    {
+                        "text_zh": "生日快乐！当然来！我可以带什么？需不需要我带点吃的？",
+                        "text_pinyin": "shēngrì kuàilè! dāngrán lái! wǒ kěyǐ dài shénme? xū bù xūyào wǒ dài diǎn chī de?",
+                        "text_en": "Happy birthday! Of course I'll come! What can I bring? Want me to bring some food?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Immediate acceptance plus offering to contribute — Xiao Lin adds you to the list with a star next to your name."
+                    },
+                    {
+                        "text_zh": "好啊，我来！",
+                        "text_pinyin": "hǎo a, wǒ lái!",
+                        "text_en": "Sure, I'll be there!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and simple. She smiles at her phone."
+                    },
+                    {
+                        "text_zh": "周六啊……我看看有没有别的事。",
+                        "text_pinyin": "zhōuliù a……wǒ kànkan yǒu méiyǒu bié de shì.",
+                        "text_en": "Saturday... let me check if I have other plans.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lin's party-planning spreadsheet trembles. Tentative RSVPs are her nemesis."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！你不用带吃的，我已经准备好了。但如果你想带酒或者甜品也可以。对了，你知道她喜欢什么酒吗？——开玩笑，我知道你不会选酒。带你自己来就够了！",
+                "text_pinyin": "tài hǎo le! nǐ búyòng dài chī de, wǒ yǐjīng zhǔnbèi hǎo le. dàn rúguǒ nǐ xiǎng dài jiǔ huòzhě tiánpǐn yě kěyǐ. duìle, nǐ zhīdào tā xǐhuān shénme jiǔ ma? — kāi wánxiào, wǒ zhīdào nǐ bú huì xuǎn jiǔ. dài nǐ zìjǐ lái jiù gòu le!",
+                "text_en": "Great! Don't bring food — I've got it covered. But wine or dessert is welcome. Do you know what she likes to drink? — Just kidding, I know you can't pick wine. Just bring yourself!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her teasing and ask about the gift.",
+                "options": [
+                    {
+                        "text_zh": "哈哈，你也太了解我了。那我带甜品吧。对了，你想要什么生日礼物？不要说「不用」哦。",
+                        "text_pinyin": "hāhā, nǐ yě tài liǎojiě wǒ le. nà wǒ dài tiánpǐn ba. duìle, nǐ xiǎng yào shénme shēngrì lǐwù? búyào shuō「búyòng」ó.",
+                        "text_en": "Haha, you know me too well. I'll bring dessert then. By the way, what do you want for a birthday gift? Don't say 'nothing'!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Preempting the「不用」is expert-level Chinese social navigation. She laughs and gives you a real answer."
+                    },
+                    {
+                        "text_zh": "好，我带甜品。要不要给你买个礼物？",
+                        "text_pinyin": "hǎo, wǒ dài tiánpǐn. yào búyào gěi nǐ mǎi gè lǐwù?",
+                        "text_en": "OK, I'll bring dessert. Should I get you a gift?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Thoughtful. She says「随便」but means「当然要。」"
+                    },
+                    {
+                        "text_zh": "好。几个人来？",
+                        "text_pinyin": "hǎo. jǐ gè rén lái?",
+                        "text_en": "OK. How many people?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Practical question, but she was hoping for more birthday enthusiasm."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你太好了！其实我最近想要一本画册，就是那种艺术类的。不用太贵的！周六见！",
+                "text_pinyin": "nǐ tài hǎo le! qíshí wǒ zuìjìn xiǎng yào yì běn huàcè, jiùshì nà zhǒng yìshù lèi de. búyòng tài guì de! zhōuliù jiàn!",
+                "text_en": "You're so sweet! Actually I've been wanting an art book — you know, one of those art collection ones. Nothing too expensive! See you Saturday!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan.",
+                "options": [
+                    {
+                        "text_zh": "画册没问题！我去书店看看。周六六点见，有什么需要帮忙的随时告诉我。",
+                        "text_pinyin": "huàcè méi wèntí! wǒ qù shūdiàn kànkan. zhōuliù liù diǎn jiàn, yǒu shénme xūyào bāngmáng de suíshí gàosu wǒ.",
+                        "text_en": "Art book, no problem! I'll check the bookstore. See you Saturday at 6 — let me know if you need help with anything.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Concrete plan, confirmed time, and offering help — Xiao Lin's party planning spreadsheet gains a green checkmark."
+                    },
+                    {
+                        "text_zh": "好的，周六见！生日快乐！",
+                        "text_pinyin": "hǎo de, zhōuliù jiàn! shēngrì kuàilè!",
+                        "text_en": "OK, see you Saturday! Happy birthday!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean close. The party will be exactly as organized as Xiao Lin needs it to be."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "hǎo.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The shortest possible confirmation. Xiao Lin considers adding an exclamation mark to your name on the guest list, just to compensate."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese birthday etiquette: guests often ask what gift the host wants (你想要什么礼物？). The host typically says「不用买礼物」(no need for gifts) at first — this is polite deflection, not a literal instruction. Bringing fruit, dessert, or wine to a house party is standard."
+    }
+}

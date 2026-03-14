@@ -1,0 +1,160 @@
+{
+    "title": "The Automotive Philosopher Returns",
+    "title_zh": "汽车哲学家归来",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_emergency_6_03_v0",
+    "tree": {
+        "setup": "A mountain road in Guizhou province, where mist clings to limestone karst formations like gauze on a sculpture. Your rental car has developed an alarming sound — something between a cough and a confession — and the engine temperature gauge is climbing steadily. You pull over at a scenic overlook that, under different circumstances, would be beautiful. The rental company's emergency line connects you to Master Kong, a mechanic-dispatcher who diagnoses cars by sound the way musicians tune instruments by ear. He asks you to hold the phone near the engine, listens for twelve seconds, and says: 「水泵。」 Water pump.",
+        "setup_zh": "贵州省的一条山路，雾气贴着石灰岩喀斯特地貌如同纱布包裹雕塑。你的租车发出了一种令人担忧的声音——介于咳嗽和坦白之间——发动机温度表在稳步攀升。你把车停在一个观景台，在别的情况下这里会很美。租车公司的紧急热线接通了孔师傅，一位用声音诊断汽车的修理工兼调度员，就像音乐家凭耳朵调音一样。他让你把手机放在发动机旁边，听了十二秒，说：「水泵。」",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "嗯，百分之九十是水泵的问题。你现在把发动机关掉，千万不要再开了。继续开的话发动机会过热，那就不是换水泵的事了，是换发动机的事了。你把精确位置发给我。",
+                "text_pinyin": "ǹg, bǎi fēn zhī jiǔshí shì shuǐ bèng de wèntí. nǐ xiànzài bǎ fādòngjī guān diào, qiānwàn búyào zài kāi le. jìxù kāi de huà fādòngjī huì guòrè, nà jiù búshì huàn shuǐ bèng de shì le, shì huàn fādòngjī de shì le. nǐ bǎ jīngquè wèizhì fā gěi wǒ.",
+                "text_en": "Mm, 90% chance it's the water pump. Turn off the engine now — do NOT drive any further. If you keep going, the engine will overheat, and then we're not talking about replacing a pump, we're talking about replacing an engine. Send me your exact location."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and send your location.",
+                "options": [
+                    {
+                        "text_zh": "发动机已经关了。我用手机地图看了一下，我在S309省道，离镇远大概二十公里的地方，旁边有一个观景台和一块写着「天星桥」的石头。我把定位截图发给你了。请问你们多久能到？我这边手机信号不太好，怕一会儿断了。",
+                        "text_pinyin": "fādòngjī yǐjīng guān le. wǒ yòng shǒujī dìtú kàn le yíxià, wǒ zài S sān líng jiǔ shěng dào, lí Zhènyuǎn dàgài èrshí gōnglǐ de dìfāng, pángbiān yǒu yí gè guānjǐngtái hé yí kuài xiě zhe「Tiānxīng Qiáo」de shítou. wǒ bǎ dìngwèi jiétú fā gěi nǐ le. qǐngwèn nǐmen duō jiǔ néng dào? wǒ zhè biān shǒujī xìnhào bú tài hǎo, pà yíhuìr duàn le.",
+                        "text_en": "Engine is off. I checked my phone map — I'm on provincial road S309, about 20km from Zhenyuan, next to a scenic overlook with a rock labeled 'Tianxing Bridge.' I've sent you a screenshot of my location. How long to reach me? My phone signal is weak — worried it might cut out.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Road number, distance from nearest town, landmarks, screenshot, and signal warning — Master Kong's mental map clicks into place. This is a rescuable situation."
+                    },
+                    {
+                        "text_zh": "关了。我在一条山路上，具体哪里不太确定。附近有个观景台。",
+                        "text_pinyin": "guān le. wǒ zài yì tiáo shān lù shàng, jùtǐ nǎlǐ bú tài quèdìng. fùjìn yǒu gè guānjǐngtái.",
+                        "text_en": "It's off. I'm on a mountain road — not sure exactly where. There's a scenic overlook nearby.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He needs more to pinpoint you. He'll ask about road signs and the last town you passed."
+                    },
+                    {
+                        "text_zh": "关了。你们快来吧！",
+                        "text_pinyin": "guān le. nǐmen kuài lái ba!",
+                        "text_en": "It's off. Come quick!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He can't come quickly without knowing where you are. The mist doesn't help navigation either."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "收到位置了。我让镇远那边的师傅出发，大概四十分钟到你那里。山路上信号确实不好，我们用短信保持联系。你现在做几件事：第一，打开双闪灯；第二，在车后方三十米放警示牌，后备箱里应该有；第三，人不要待在车里，到护栏外面去等。山路上弯多，怕有车看不到你。",
+                "text_pinyin": "shōu dào wèizhì le. wǒ ràng Zhènyuǎn nàbiān de shīfu chūfā, dàgài sìshí fēnzhōng dào nǐ nàlǐ. shān lù shàng xìnhào quèshí bù hǎo, wǒmen yòng duǎnxìn bǎochí liánxì. nǐ xiànzài zuò jǐ jiàn shì: dì yī, dǎkāi shuāng shǎn dēng; dì èr, zài chē hòufāng sānshí mǐ fàng jǐngshì pái, hòubèixiāng lǐ yīnggāi yǒu; dì sān, rén búyào dāi zài chē lǐ, dào hùlán wàimiàn qù děng. shān lù shàng wān duō, pà yǒu chē kàn bú dào nǐ.",
+                "text_en": "Location received. I'm sending a mechanic from Zhenyuan — about 40 minutes. Mountain signal is poor, so let's use text messages. Do these things now: first, turn on hazard lights; second, place the warning triangle 30 meters behind the car — should be in the trunk; third, don't stay in the car, wait outside the guardrail. Mountain roads have many curves — other cars might not see you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the safety steps and ask about costs.",
+                "options": [
+                    {
+                        "text_zh": "双闪开了，警示牌也放好了。我现在在护栏外面。请问修水泵大概需要多长时间？费用怎么算？如果当场修不了的话，拖车到镇远要多少钱？另外，我的租车保险能覆盖这些费用吗？",
+                        "text_pinyin": "shuāng shǎn kāi le, jǐngshì pái yě fàng hǎo le. wǒ xiànzài zài hùlán wàimiàn. qǐngwèn xiū shuǐ bèng dàgài xūyào duō cháng shíjiān? fèiyòng zěnme suàn? rúguǒ dāngchǎng xiū bù liǎo de huà, tuō chē dào Zhènyuǎn yào duōshǎo qián? lìngwài, wǒ de zū chē bǎoxiǎn néng fùgài zhèxiē fèiyòng ma?",
+                        "text_en": "Hazards on, warning triangle placed. I'm outside the guardrail. How long does a water pump repair take? How are costs calculated? If it can't be fixed on-site, how much to tow to Zhenyuan? Also, does my rental insurance cover these costs?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Safety executed, costs anticipated, insurance queried — Master Kong respects a stranded driver who maintains financial awareness even on a misty mountain road."
+                    },
+                    {
+                        "text_zh": "都做了。修要多久？",
+                        "text_pinyin": "dōu zuò le. xiū yào duō jiǔ?",
+                        "text_en": "All done. How long to fix?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He gives the estimate — depends on whether the part is available locally."
+                    },
+                    {
+                        "text_zh": "好的，我等着。",
+                        "text_pinyin": "hǎo de, wǒ děng zhe.",
+                        "text_en": "OK, I'll wait.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The mist and the karst keep you company. He'll text when the mechanic is close."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果是水泵的话，路边修不了，必须拖到修理厂。拖车费大概五百块，修理费看具体情况，换一个水泵加工时费大概在八百到一千二之间。你的租车合同上如果有基本道路救援的话，拖车费应该包含在内。修理费要看你买的是什么保险——全险的话通常能报销，基本险的话机械故障不在范围内。你翻翻合同上的保险条款。",
+                "text_pinyin": "rúguǒ shì shuǐ bèng de huà, lù biān xiū bù liǎo, bìxū tuō dào xiūlǐ chǎng. tuō chē fèi dàgài wǔbǎi kuài, xiūlǐ fèi kàn jùtǐ qíngkuàng, huàn yí gè shuǐ bèng jiā gōng shí fèi dàgài zài bābǎi dào yìqiān èr zhījiān. nǐ de zū chē hétong shàng rúguǒ yǒu jīběn dàolù jiùyuán de huà, tuō chē fèi yīnggāi bāohán zài nèi. xiūlǐ fèi yào kàn nǐ mǎi de shì shénme bǎoxiǎn——quán xiǎn de huà tōngcháng néng bàoxiāo, jīběn xiǎn de huà jīxiè gùzhàng bú zài fànwéi nèi. nǐ fānfan hétong shàng de bǎoxiǎn tiáokuǎn.",
+                "text_en": "A water pump can't be fixed roadside — needs to be towed. Towing is about 500 yuan, repair cost depends on specifics — water pump replacement plus labor is 800-1,200. If your rental contract includes basic roadside assistance, towing should be covered. Repair costs depend on your insurance type — comprehensive usually reimburses, basic doesn't cover mechanical failure. Check the insurance terms in your contract."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check the insurance and update Master Kong.",
+                "options": [
+                    {
+                        "text_zh": "我看了一下合同，我买的是全险，上面写着包含道路救援和机械故障维修。不过有一条说维修费用超过两千的话需要事先获得保险公司的批准。我把保险公司的电话号码找到了，要不要我先打给他们报备一下？",
+                        "text_pinyin": "wǒ kàn le yíxià hétong, wǒ mǎi de shì quán xiǎn, shàngmian xiě zhe bāohán dàolù jiùyuán hé jīxiè gùzhàng wéixiū. búguò yǒu yì tiáo shuō wéixiū fèiyòng chāoguò liǎngqiān de huà xūyào shìxiān huòdé bǎoxiǎn gōngsī de pīzhǔn. wǒ bǎ bǎoxiǎn gōngsī de diànhuà hàomǎ zhǎo dào le, yào búyào wǒ xiān dǎ gěi tāmen bàobèi yíxià?",
+                        "text_en": "I checked the contract — I have comprehensive coverage, which includes roadside assistance and mechanical repair. But there's a clause saying repairs over 2,000 yuan need pre-approval from the insurance company. I found their phone number — should I call them to report first?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Reading the fine print on a misty mountain — Master Kong is genuinely impressed. Most people don't check their contracts until the invoice arrives."
+                    },
+                    {
+                        "text_zh": "我买了全险，应该没问题。",
+                        "text_pinyin": "wǒ mǎi le quán xiǎn, yīnggāi méi wèntí.",
+                        "text_en": "I have comprehensive — should be fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Probably, but he suggests checking the details. Insurance terms are where the details live."
+                    },
+                    {
+                        "text_zh": "保险的事回去再说吧。先把车修好。",
+                        "text_pinyin": "bǎoxiǎn de shì huíqù zài shuō ba. xiān bǎ chē xiū hǎo.",
+                        "text_en": "I'll deal with insurance later. Fix the car first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Fixing first is understandable, but Master Kong notes that pre-approval can save headaches later."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，先打保险公司电话报备是对的，免得事后扯皮。师傅已经出发了，大概再二十分钟到。到了以后他会先检查确认是水泵问题，然后安排拖车。你在观景台那里等着就行，注意安全。有什么情况给我发短信。",
+                "text_pinyin": "duì, xiān dǎ bǎoxiǎn gōngsī diànhuà bàobèi shì duì de, miǎnde shìhòu chě pí. shīfu yǐjīng chūfā le, dàgài zài èrshí fēnzhōng dào. dào le yǐhòu tā huì xiān jiǎnchá quèrèn shì shuǐ bèng wèntí, ránhòu ānpái tuō chē. nǐ zài guānjǐngtái nàlǐ děng zhe jiù xíng, zhùyì ānquán. yǒu shénme qíngkuàng gěi wǒ fā duǎnxìn.",
+                "text_en": "Yes, calling the insurance company first is smart — avoids disputes later. The mechanic has left, about 20 more minutes. When he arrives, he'll confirm the water pump diagnosis, then arrange towing. Wait at the overlook, stay safe. Text me if anything changes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and ask about the repair timeline.",
+                "options": [
+                    {
+                        "text_zh": "谢谢孔师傅，你的判断让我心里有底了。最后问一下：拖到修理厂以后，修好大概要多长时间？我今天原本计划到镇远古镇住一晚的，不知道今天能不能取车。如果今天修不好的话，修理厂那边能帮我安排一辆替换车吗？",
+                        "text_pinyin": "xièxie Kǒng shīfu, nǐ de pànduàn ràng wǒ xīnlǐ yǒu dǐ le. zuìhòu wèn yíxià: tuō dào xiūlǐ chǎng yǐhòu, xiū hǎo dàgài yào duō cháng shíjiān? wǒ jīntiān yuánběn jìhuà dào Zhènyuǎn gǔ zhèn zhù yì wǎn de, bù zhīdào jīntiān néng bu néng qǔ chē. rúguǒ jīntiān xiū bù hǎo de huà, xiūlǐ chǎng nàbiān néng bāng wǒ ānpái yí liàng tìhuàn chē ma?",
+                        "text_en": "Thanks Master Kong — your diagnosis gives me peace of mind. One last question: after towing to the shop, how long will the repair take? I was planning to stay in Zhenyuan old town tonight — can I get the car back today? If not, can the repair shop arrange a replacement vehicle?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical contingency planning — Master Kong chuckles.「水泵这东西，修好了比新的还好用。」A repaired water pump works better than a new one. He's not sure that's true, but he believes it."
+                    },
+                    {
+                        "text_zh": "谢谢！二十分钟后见。",
+                        "text_pinyin": "xièxie! èrshí fēnzhōng hòu jiàn.",
+                        "text_en": "Thanks! See you in twenty minutes.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He corrects gently: it's the mechanic who's coming, not him. But he'll stay on call."
+                    },
+                    {
+                        "text_zh": "好，我等着。快来。",
+                        "text_pinyin": "hǎo, wǒ děng zhe. kuài lái.",
+                        "text_en": "OK, I'm waiting. Hurry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The mechanic is already driving as fast as mountain curves allow. The mist will lift eventually. So will the water pump."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese car rental insurance (租车保险) comes in tiers: basic (基本险) covers liability but not mechanical failure; comprehensive (全险) covers most issues. Roadside assistance (道路救援) is usually included in rental contracts. On mountain roads, the warning triangle (警示牌) should be placed 50-100 meters behind the car for visibility. Master mechanic (师傅, shīfu) is a respectful title for skilled tradespeople."
+    }
+}

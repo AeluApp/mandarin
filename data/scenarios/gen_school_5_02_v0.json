@@ -1,0 +1,124 @@
+{
+    "title": "The Library Negotiations",
+    "title_zh": "图书馆外交",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_5_02_v0",
+    "tree": {
+        "setup": "The university library's reference desk, where Librarian He has presided for eighteen years with the quiet authority of someone who knows where every book is and will tell you — but only after you've tried to find it yourself. She believes the search is part of the education. Her desk has a small wooden sign that reads「会找书的人不需要图书管理员；不会找书的人最需要图书管理员」(those who can find books don't need a librarian; those who can't need one most).",
+        "setup_zh": "大学图书馆的咨询台，何老师在这里主持了十八年，带着一种安静的权威感——她知道每本书在哪里，也会告诉你——但只有在你自己先试着找过之后。她相信寻找本身就是教育的一部分。她的桌上有一块小木牌写着「会找书的人不需要图书管理员；不会找书的人最需要图书管理员」。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，需要帮忙找什么？自己先查过数据库了吗？",
+                "text_pinyin": "nǐ hǎo, xūyào bāngmáng zhǎo shénme? zìjǐ xiān chá guò shùjùkù le ma?",
+                "text_en": "Hello, what are you looking for? Have you checked the database yourself first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for help finding research materials.",
+                "options": [
+                    {
+                        "text_zh": "何老师，您好。我查了数据库，找到了几篇相关的论文，但是我写的论文需要用到一些关于中国近代经济史的原始资料，数据库里搜不到。您知道这类资料应该去哪里找吗？我特别需要1920年代的贸易数据。",
+                        "text_pinyin": "Hé lǎoshī, nín hǎo. wǒ chá le shùjùkù, zhǎo dào le jǐ piān xiāngguān de lùnwén, dànshì wǒ xiě de lùnwén xūyào yòng dào yìxiē guānyú Zhōngguó jìndài jīngjì shǐ de yuánshǐ zīliào, shùjùkù lǐ sōu bú dào. nín zhīdào zhè lèi zīliào yīnggāi qù nǎlǐ zhǎo ma? wǒ tèbié xūyào yī jiǔ èr líng niándài de màoyì shùjù.",
+                        "text_en": "Librarian He, hello. I've searched the database and found some related papers, but my thesis needs primary sources on modern Chinese economic history that aren't in the database. Do you know where to find this kind of material? I specifically need 1920s trade data.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Demonstrated self-search, specific topic, and a precise time period — Librarian He's expression shifts from gatekeeper to guide. Primary sources are her specialty."
+                    },
+                    {
+                        "text_zh": "我在写论文，找不到参考资料。",
+                        "text_pinyin": "wǒ zài xiě lùnwén, zhǎo bú dào cānkǎo zīliào.",
+                        "text_en": "I'm writing a thesis and can't find reference materials.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll ask what topic, what you've already searched, and what specifically you need. The conversation will get there eventually."
+                    },
+                    {
+                        "text_zh": "数据库太难用了，什么都搜不到。",
+                        "text_pinyin": "shùjùkù tài nán yòng le, shénme dōu sōu bú dào.",
+                        "text_en": "The database is too hard to use — I can't find anything.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Librarian He glances at her wooden sign. She'll teach you to search before she searches for you."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "1920年代的贸易数据，很好的选题。我们馆的特藏室有一些民国时期的海关报告，可能有你需要的数据。另外，你可以试试中国知网的「历史文献」板块。我帮你开一个特藏室的借阅权限。",
+                "text_pinyin": "yī jiǔ èr líng niándài de màoyì shùjù, hěn hǎo de xuǎntí. wǒmen guǎn de tècáng shì yǒu yìxiē Mínguó shíqī de hǎiguān bàogào, kěnéng yǒu nǐ xūyào de shùjù. lìngwài, nǐ kěyǐ shì shi Zhōngguó Zhīwǎng de「lìshǐ wénxiàn」bǎnkuài. wǒ bāng nǐ kāi yí gè tècáng shì de jièyuè quánxiàn.",
+                "text_en": "1920s trade data — great topic. Our special collections room has some Republic-era customs reports that may have what you need. Also, try the 'historical documents' section of CNKI. I'll set up special collections access for you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about accessing special collections.",
+                "options": [
+                    {
+                        "text_zh": "民国时期的海关报告！太好了，这正是我需要的。特藏室的借阅权限怎么申请？需要导师签字吗？另外，这些资料能不能复印或者拍照？我怕弄坏原件。",
+                        "text_pinyin": "Mínguó shíqī de hǎiguān bàogào! tài hǎo le, zhè zhèng shì wǒ xūyào de. tècáng shì de jièyuè quánxiàn zěnme shēnqǐng? xūyào dǎoshī qiānzì ma? lìngwài, zhèxiē zīliào néng bu néng fùyìn huòzhě pāizhào? wǒ pà nòng huài yuánjiàn.",
+                        "text_en": "Republic-era customs reports! Perfect, that's exactly what I need. How do I apply for special collections access? Does my advisor need to sign? Also, can I photocopy or photograph these materials? I'm worried about damaging the originals.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about preservation shows respect for the materials — Librarian He approves. She explains: advisor signature required, photographing allowed with white cotton gloves, no flash."
+                    },
+                    {
+                        "text_zh": "好的，帮我开权限吧。特藏室在哪里？",
+                        "text_pinyin": "hǎo de, bāng wǒ kāi quánxiàn ba. tècáng shì zài nǎlǐ?",
+                        "text_en": "OK, set up the access. Where's the special collections room?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll walk you through the process and location."
+                    },
+                    {
+                        "text_zh": "特藏室？听起来很麻烦。有没有电子版？",
+                        "text_pinyin": "tècáng shì? tīng qǐlái hěn máfan. yǒu méiyǒu diànzǐ bǎn?",
+                        "text_en": "Special collections? Sounds like a hassle. Is there a digital version?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Librarian He pauses. Some materials from the 1920s do not have digital versions. The inconvenience is the point — primary sources require primary effort."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "需要导师签字的申请表，我这里有。拍照可以，但要戴白手套，不能用闪光灯。这些资料很珍贵——有些可能是全国仅存的几份之一。你先填表，导师签字以后拿回来给我，我当天就能给你开权限。",
+                "text_pinyin": "xūyào dǎoshī qiānzì de shēnqǐng biǎo, wǒ zhèlǐ yǒu. pāizhào kěyǐ, dàn yào dài bái shǒutào, bù néng yòng shǎnguāng dēng. zhèxiē zīliào hěn zhēnguì——yǒuxiē kěnéng shì quánguó jǐn cún de jǐ fèn zhī yī. nǐ xiān tián biǎo, dǎoshī qiānzì yǐhòu ná huílái gěi wǒ, wǒ dāngtiān jiù néng gěi nǐ kāi quánxiàn.",
+                "text_en": "I have the application form that needs your advisor's signature. Photography is allowed but wear white gloves and no flash. These materials are very precious — some may be among the few remaining copies in the country. Fill out the form, get your advisor's signature, and bring it back. I can activate access the same day."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Take the form and ask about other resources.",
+                "options": [
+                    {
+                        "text_zh": "明白了，我今天就去找导师签字。何老师，除了海关报告以外，这个时期还有没有其他跟经济相关的原始文献？比如报纸上的经济报道或者商会的记录？",
+                        "text_pinyin": "míngbai le, wǒ jīntiān jiù qù zhǎo dǎoshī qiānzì. Hé lǎoshī, chúle hǎiguān bàogào yǐwài, zhège shíqī hái yǒu méiyǒu qítā gēn jīngjì xiāngguān de yuánshǐ wénxiàn? bǐrú bàozhǐ shàng de jīngjì bàodào huòzhě shānghuì de jìlù?",
+                        "text_en": "Understood, I'll get my advisor's signature today. Librarian He, besides the customs reports, are there other primary economic documents from this period? Like newspaper economic reports or chamber of commerce records?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about supplementary primary sources — Librarian He's eyes light up. She mentions the Shanghai Chamber of Commerce archives and a digitized collection of 《申报》economic columns. Eighteen years of knowledge, deployed in thirty seconds."
+                    },
+                    {
+                        "text_zh": "好的，表格给我。我签完拿回来。谢谢何老师。",
+                        "text_pinyin": "hǎo de, biǎogé gěi wǒ. wǒ qiān wán ná huílái. xièxie Hé lǎoshī.",
+                        "text_en": "OK, give me the form. I'll get it signed and bring it back. Thanks, Librarian He.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient exchange. She hands you the form with a small nod."
+                    },
+                    {
+                        "text_zh": "全国仅存几份？那万一弄丢了怎么办？",
+                        "text_pinyin": "quánguó jǐn cún jǐ fèn? nà wànyī nòng diū le zěnme bàn?",
+                        "text_en": "Only a few copies in the country? What if I lose one?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Librarian He's expression suggests that the white gloves are not a suggestion, and losing a document is not among the options she has prepared for."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university libraries have special collections rooms (特藏室, tècáng shì) for rare and historical documents that require special access permissions. 中国知网 (Zhōngguó Zhīwǎng, CNKI) is the primary academic database in China. Republic-era (民国时期, Mínguó shíqī) documents from the 1910s-1940s are valuable primary sources for historical research. White cotton gloves (白手套) are standard protocol for handling rare documents."
+    }
+}

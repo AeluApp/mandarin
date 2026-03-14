@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them about your exercise routine.",
                 "options": [
-                    {"text_zh": "我一般跑步和游泳，一周三四次吧。", "text_pinyin": "wǒ yībān pǎobù hé yóuyǒng, yī zhōu sān sì cì ba.", "text_en": "I usually run and swim, about three or four times a week.", "score": 1.0, "register": "casual", "feedback": "Specific and conversational — mentions activities and frequency, which invites follow-up."},
-                    {"text_zh": "我最近开始跑步了，还在学呢。", "text_pinyin": "wǒ zuìjìn kāishǐ pǎobù le, hái zài xué ne.", "text_en": "I recently started running, still learning.", "score": 0.7, "register": "casual", "feedback": "Honest and humble — 还在学 shows a growth mindset. Good conversation starter."},
-                    {"text_zh": "不太多，偶尔来健身房运动一下。", "text_pinyin": "bú tài duō, ǒu'ěr lái jiànshēnfáng yùndòng yīxià.", "text_en": "Not much, I occasionally come to the gym to work out.", "score": 0.5, "register": "casual", "feedback": "Vague — your colleague is looking for specifics to build the conversation on."}
+                    {
+                        "text_zh": "你好，我想预约看医生。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng yùyuē kàn yīshēng.",
+                        "text_en": "Hello, I'd like to make an appointment to see a doctor.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your exercise routine, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我一般跑步和游泳，一周三四次吧。",
+                        "text_pinyin": "wǒ yībān pǎobù hé yóuyǒng, yī zhōu sān sì cì ba.",
+                        "text_en": "I usually run and swim, about three or four times a week.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific and conversational — mentions activities and frequency, which invites follow-up."
+                    },
+                    {
+                        "text_zh": "我一直想去看大熊猫！火锅辣不辣？",
+                        "text_pinyin": "wǒ yīzhí xiǎng qù kàn dà xióngmāo! huǒguō là bú là?",
+                        "text_en": "I've always wanted to see the pandas! Was the hotpot spicy?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your exercise routine, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond to the basketball invitation.",
                 "options": [
-                    {"text_zh": "可以啊，我以前打过篮球，我们一起去吧。", "text_pinyin": "kěyǐ a, wǒ yǐqián dǎ guò lánqiú, wǒmen yīqǐ qù ba.", "text_en": "Sure, I've played basketball before, let's go together.", "score": 1.0, "register": "casual", "feedback": "Enthusiastic and helpful — mentioning experience signals you can help them learn."},
-                    {"text_zh": "听起来不错，不过我不太会打篮球。", "text_pinyin": "tīng qǐlai búcuò, búguò wǒ bú tài huì dǎ lánqiú.", "text_en": "Sounds good, but I'm not very good at basketball.", "score": 0.7, "register": "casual", "feedback": "Honest — and since they're also learning, it's fine to be beginners together."},
-                    {"text_zh": "我对篮球没什么兴趣，还是跑步好。", "text_pinyin": "wǒ duì lánqiú méi shénme xìngqù, háishi pǎobù hǎo.", "text_en": "I'm not really interested in basketball, running is better.", "score": 0.5, "register": "casual", "feedback": "Honest but dismissive — suggesting an alternative activity would soften the decline."}
+                    {
+                        "text_zh": "可以啊，我以前打过篮球，我们一起去吧。",
+                        "text_pinyin": "kěyǐ a, wǒ yǐqián dǎ guò lánqiú, wǒmen yīqǐ qù ba.",
+                        "text_en": "Sure, I've played basketball before, let's go together.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and helpful — mentioning experience signals you can help them learn."
+                    },
+                    {
+                        "text_zh": "晚上七点吧，我们六点半在电影院门口见？",
+                        "text_pinyin": "wǎnshang qī diǎn ba, wǒmen liù diǎn bàn zài diànyǐngyuàn ménkǒu jiàn?",
+                        "text_en": "Let's do 7 PM, meet at the cinema entrance at 6:30?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the basketball invitation, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "当然可以！祝你生日快乐！我带什么来好呢？",
+                        "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?",
+                        "text_en": "Of course! Happy birthday! What should I bring?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the basketball invitation, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

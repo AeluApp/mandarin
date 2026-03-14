@@ -1,0 +1,89 @@
+{
+    "title": "Words That Can Be Held",
+    "title_zh": "握得住的字",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You notice your colleague Xiaowen writing a letter by hand during lunch break. In the age of instant messaging, it catches your attention.",
+        "setup_zh": "午休时你注意到同事小文在手写一封信。在即时通讯的时代，这引起了你的注意。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别觉得奇怪。我每个月都会给住在乡下的外婆写一封信。她不会用智能手机，家里的座机也经常打不通。写信是我们之间唯一稳定的联系方式。",
+                "text_pinyin": "Bié juéde qíguài. Wǒ měi ge yuè dōu huì gěi zhù zài xiāngxia de wàipó xiě yī fēng xìn. Tā bú huì yòng zhìnéng shǒujī, jiālǐ de zuòjī yě jīngcháng dǎ bù tōng. Xiě xìn shì wǒmen zhī jiān wéiyī wěndìng de liánxì fāngshì.",
+                "text_en": "Don't think it's strange. I write a letter to my grandmother in the countryside every month. She can't use a smartphone, and the landline at home often doesn't connect. Letters are the only reliable way we stay in touch."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her letter-writing habit.",
+                "options": [
+                    {
+                        "text_zh": "一点都不奇怪，我觉得很美。写信需要时间、需要想一想要说什么——这种慢本身就是一种用心。你外婆收到信的时候一定特别开心。",
+                        "text_pinyin": "Yīdiǎn dōu bù qíguài, wǒ juéde hěn měi. Xiě xìn xūyào shíjiān, xūyào xiǎng yī xiǎng yào shuō shénme — zhè zhǒng màn běnshēn jiù shì yī zhǒng yòng xīn. Nǐ wàipó shōu dào xìn de shíhou yídìng tèbié kāixīn.",
+                        "text_en": "Not strange at all — I think it's beautiful. Writing letters takes time, takes thinking about what to say. That slowness itself is a form of care. Your grandmother must be so happy when she receives them.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and appreciative — honors the intentionality behind letter writing."
+                    },
+                    {
+                        "text_zh": "你可以教她用微信视频啊。",
+                        "text_pinyin": "Nǐ kěyǐ jiāo tā yòng Wēixìn shìpín a.",
+                        "text_en": "You could teach her to use WeChat video.",
+                        "score": 0.0,
+                        "feedback": "She's not writing letters because she has no other option; the ritual matters."
+                    },
+                    {
+                        "text_zh": "现在还有人写信吗？感觉像上个世纪的事了。",
+                        "text_pinyin": "Xiànzài hái yǒu rén xiě xìn ma? Gǎnjué xiàng shàng ge shìjì de shì le.",
+                        "text_en": "Do people still write letters? Feels like something from last century.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — treats a meaningful practice as outdated."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "她每次回信都写得很慢，字歪歪扭扭的，因为她只上过三年学。但她每封信的最后都会写：「外婆想你，吃饱穿暖。」这八个字我看了一百多遍，每次看到都会鼻子酸。",
+                "text_pinyin": "Tā měi cì huí xìn dōu xiě de hěn màn, zì wāiwāi niūniū de, yīnwèi tā zhǐ shàng guò sān nián xué. Dàn tā měi fēng xìn de zuìhòu dōu huì xiě: 'Wàipó xiǎng nǐ, chī bǎo chuān nuǎn.' Zhè bā ge zì wǒ kàn le yībǎi duō biàn, měi cì kàn dào dōu huì bízi suān.",
+                "text_en": "She writes back very slowly, her characters crooked and wobbly because she only had three years of schooling. But at the end of every letter she writes: 'Grandma misses you — eat well and dress warmly.' I've read those eight characters over a hundred times, and every time my nose stings."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the beauty of her grandmother's letters.",
+                "options": [
+                    {
+                        "text_zh": "八个字比一千条微信消息都重。那些字是她一笔一笔写的，每一笔都带着对你的牵挂。手写的字有温度、有重量，是握在手里的爱。这些信你好好保存。",
+                        "text_pinyin": "Bā ge zì bǐ yīqiān tiáo Wēixìn xiāoxi dōu zhòng. Nàxiē zì shì tā yī bǐ yī bǐ xiě de, měi yī bǐ dōu dài zhe duì nǐ de qiānguà. Shǒuxiě de zì yǒu wēndù, yǒu zhòngliàng, shì wò zài shǒu lǐ de ài. Zhèxiē xìn nǐ hǎohǎo bǎocún.",
+                        "text_en": "Eight characters weigh more than a thousand WeChat messages. She wrote each stroke by hand, every stroke carrying her concern for you. Handwritten words have warmth, have weight — love you can hold. Keep these letters safe.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deeply moving — captures the physical and emotional weight of handwritten words."
+                    },
+                    {
+                        "text_zh": "你外婆身体怎么样？",
+                        "text_pinyin": "Nǐ wàipó shēntǐ zěnmeyàng?",
+                        "text_en": "How is your grandmother's health?",
+                        "score": 0.0,
+                        "feedback": "Not wrong but shifts from the beautiful detail she shared."
+                    },
+                    {
+                        "text_zh": "她的字写得好看吗？",
+                        "text_pinyin": "Tā de zì xiě de hǎokàn ma?",
+                        "text_en": "Is her handwriting nice?",
+                        "score": 0.0,
+                        "feedback": "She just said the characters are crooked, but that's what makes them precious."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "握在手里的爱……对，就是这种感觉。谢谢你能理解。我先把这封信写完，然后去邮局寄。虽然要走一个星期才能到，但我知道她每天都在等。",
+                "text_pinyin": "Wò zài shǒu lǐ de ài…… duì, jiù shì zhè zhǒng gǎnjué. Xièxie nǐ néng lǐjiě. Wǒ xiān bǎ zhè fēng xìn xiě wán, ránhòu qù yóujú jì. Suīrán yào zǒu yīge xīngqī cái néng dào, dàn wǒ zhīdào tā měi tiān dōu zài děng.",
+                "text_en": "Love you can hold in your hands... yes, that's exactly the feeling. Thank you for understanding. Let me finish this letter, then I'll go to the post office. It takes a week to arrive, but I know she's waiting every day."
+            }
+        ],
+        "cultural_note": "In rural China, many elderly people never learned to use digital technology, making physical letters their only connection to family members working in distant cities. China Post still delivers letters to remote villages, though the volume has dropped dramatically. The phrase「吃饱穿暖」(eat well, dress warmly) is a classic expression of Chinese parental and grandparental love — practical care distilled into the most essential wishes."
+    }
+}

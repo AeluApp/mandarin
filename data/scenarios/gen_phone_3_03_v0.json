@@ -1,0 +1,131 @@
+{
+    "title": "The Friend Who Over-Plans",
+    "title_zh": "计划狂朋友",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_3_03_v0",
+    "tree": {
+        "setup": "Your friend Xiao Peng calls you to plan this weekend's hiking trip. Xiao Peng is the kind of person who creates spreadsheets for casual outings. She has already researched three possible trails, checked the weather forecast for each hour, and prepared a gear checklist. All she needs from you is confirmation, but somehow the call will last twenty minutes.",
+        "setup_zh": "你的朋友小彭打电话来计划这周末的爬山活动。小彭是那种随便出去玩也要做表格的人。她已经研究了三条路线，查了每个小时的天气预报，还准备了装备清单。她只需要你确认一下，但这通电话不知怎么会打二十分钟。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂！我查好了！周六去爬山，你有空吧？天气预报说晴天，但是下午三点以后可能有小雨。",
+                "text_pinyin": "wèi! wǒ chá hǎo le! zhōuliù qù pá shān, nǐ yǒu kòng ba? tiānqì yùbào shuō qíngtiān, dànshì xiàwǔ sān diǎn yǐhòu kěnéng yǒu xiǎo yǔ.",
+                "text_en": "Hey! I've done the research! Hiking Saturday, you're free right? Weather forecast says sunny, but there might be light rain after 3 PM.",
+                "text_note": "Xiao Peng doesn't wait for an answer to her first question before moving on."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your availability and respond to her plans.",
+                "options": [
+                    {
+                        "text_zh": "周六可以！三点以后下雨的话，我们早点出发吧。几点集合？",
+                        "text_pinyin": "zhōuliù kěyǐ! sān diǎn yǐhòu xià yǔ de huà, wǒmen zǎodiǎn chūfā ba. jǐ diǎn jíhé?",
+                        "text_en": "Saturday works! If it rains after 3, let's leave early. What time do we meet?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「我想的也是！早上八点出发，十二点之前到山顶，下午一点下山。完美！」……的话 means 'if.' 集合 is 'meet up/assemble.' Xiao Peng is thrilled someone speaks her planning language."
+                    },
+                    {
+                        "text_zh": "有空。去哪座山？远不远？",
+                        "text_pinyin": "yǒu kòng. qù nǎ zuò shān? yuǎn bu yuǎn?",
+                        "text_en": "I'm free. Which mountain? Is it far?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「我选了三个地方！第一个……」Xiao Peng launches into her spreadsheet. 哪座山 uses the measure word 座 for mountains. You've just unlocked a ten-minute presentation."
+                    },
+                    {
+                        "text_zh": "应该可以吧。但是万一下雨怎么办？",
+                        "text_pinyin": "yīnggāi kěyǐ ba. dànshì wànyī xià yǔ zěnme bàn?",
+                        "text_en": "Should be fine. But what if it rains?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「我已经准备了三个备选方案！」Of course she has. 万一 is 'what if/just in case.' 怎么办 is 'what do we do.' Xiao Peng lives for contingency plans."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "八点地铁站门口集合！对了，你要带什么我列了一个清单：水、零食、防晒霜、雨衣。你有登山鞋吗？",
+                "text_pinyin": "bā diǎn dìtiězhàn ménkǒu jíhé! duì le, nǐ yào dài shénme wǒ liè le yí gè qīngdān: shuǐ, língshí, fángshàishuāng, yǔyī. nǐ yǒu dēngshānxié ma?",
+                "text_en": "Meet at 8 at the subway station entrance! By the way, I made a list of what to bring: water, snacks, sunscreen, rain jacket. Do you have hiking shoes?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your gear.",
+                "options": [
+                    {
+                        "text_zh": "登山鞋有。防晒霜我没有，你能多带一瓶吗？",
+                        "text_pinyin": "dēngshānxié yǒu. fángshàishuāng wǒ méiyǒu, nǐ néng duō dài yì píng ma?",
+                        "text_en": "I have hiking shoes. I don't have sunscreen though, can you bring an extra bottle?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「没问题！我买了两瓶，就知道有人会忘带！」多带 means 'bring an extra.' Xiao Peng already bought two bottles because she predicted this exact scenario."
+                    },
+                    {
+                        "text_zh": "差不多都有。不用担心，我会准备好的。",
+                        "text_pinyin": "chàbuduō dōu yǒu. bú yòng dānxīn, wǒ huì zhǔnbèi hǎo de.",
+                        "text_en": "I have most of it. Don't worry, I'll be prepared.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Peng is not convinced.「差不多？哪个没有？我帮你准备！」差不多 means 'more or less' -- not precise enough for Xiao Peng's standards."
+                    },
+                    {
+                        "text_zh": "我什么都没有。运动鞋可以吗？",
+                        "text_pinyin": "wǒ shénme dōu méiyǒu. yùndòngxié kěyǐ ma?",
+                        "text_en": "I don't have any of that. Are sneakers OK?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A long silence from Xiao Peng.「运动鞋……可以是可以，但是路比较滑的话……」She's calculating whether to cancel or go buy you gear. 什么都没有 is 'have nothing at all.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！那我把路线图和集合地点发到群里。还有一件事——小陈和小刘也想去，你介意吗？",
+                "text_pinyin": "hǎo! nà wǒ bǎ lùxiàntú hé jíhé dìdiǎn fā dào qún lǐ. hái yǒu yí jiàn shì — xiǎo chén hé xiǎo liú yě xiǎng qù, nǐ jièyì ma?",
+                "text_en": "Great! I'll send the route map and meeting point to the group chat. One more thing -- Xiao Chen and Xiao Liu also want to go, do you mind?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about additional people joining.",
+                "options": [
+                    {
+                        "text_zh": "当然不介意！人多更好玩。他们爬过这座山吗？",
+                        "text_pinyin": "dāngrán bú jièyì! rén duō gèng hǎowán. tāmen pá guo zhè zuò shān ma?",
+                        "text_en": "Of course I don't mind! More people is more fun. Have they hiked this mountain before?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「小陈去过，小刘是第一次。我给他们也发了装备清单。」不介意 is 'don't mind.' 爬过 uses the experiential 过 -- 'have climbed before.' Xiao Peng has already sent them the checklist."
+                    },
+                    {
+                        "text_zh": "没问题。但是如果人太多的话，坐一辆车够吗？",
+                        "text_pinyin": "méi wèntí. dànshì rúguǒ rén tài duō de huà, zuò yì liàng chē gòu ma?",
+                        "text_en": "No problem. But if there are too many people, will one car be enough?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「我们坐地铁去，不用开车。」Practical thinking, though Xiao Peng already solved transportation.一辆车 uses the measure word 辆 for vehicles."
+                    },
+                    {
+                        "text_zh": "随便你安排，我只管去就行了。",
+                        "text_pinyin": "suíbiàn nǐ ānpái, wǒ zhǐ guǎn qù jiù xíng le.",
+                        "text_en": "You arrange it however you want, I just need to show up.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Peng laughs.「你每次都这样！好吧，我安排。」随便你安排 is 'arrange however you like.' 只管 means 'just need to.' She appreciates the trust, even if she wishes you cared more about gear."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "那就这么定了！周六早上八点，别迟到啊。我还会提前一天再提醒你的。",
+                "text_pinyin": "nà jiù zhème dìng le! zhōuliù zǎoshang bā diǎn, bié chídào a. wǒ hái huì tíqián yì tiān zài tíxǐng nǐ de.",
+                "text_en": "Then it's settled! Saturday morning at 8, don't be late. I'll remind you again the day before."
+            }
+        ],
+        "cultural_note": "Group outings in China are often organized through WeChat group chats (群, qún). One person typically takes charge of planning (安排). 就这么定了 (jiù zhème dìng le) means 'then it's decided' -- the standard way to confirm plans. The measure word 座 is used for mountains, 辆 for vehicles."
+    }
+}

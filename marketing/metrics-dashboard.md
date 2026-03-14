@@ -61,7 +61,7 @@ Four levels, from business outcomes down to learning quality. Higher levels chan
 | Visitor -> Signup | Landing page conversion rate | 8-15% | < 5% | Messaging, page design, CTA clarity |
 | Signup -> First session | Onboarding completion | 60-75% | < 40% | Onboarding flow, email nudge sequence |
 | First session -> Activated | Completes 3+ sessions in first 14 days | 40-55% | < 25% | First-session experience, early content quality |
-| Activated -> Paid | Converts to $12/month plan | 15-25% | < 8% | Paywall placement, value demonstration |
+| Activated -> Paid | Converts to $14.99/month plan | 15-25% | < 8% | Paywall placement, value demonstration |
 | Free -> Paid (overall) | All free users who eventually convert | 5-12% | < 3% | Entire funnel needs audit |
 
 **Funnel math example at 1,000 visitors/month:**
@@ -72,7 +72,7 @@ Four levels, from business outcomes down to learning quality. Higher levels chan
   x 45% truly activated = 29 activated
   x 20% convert to paid = 6 new paying users/month
 
-At $12/month: $72 new MRR/month from 1,000 visitors
+At $14.99/month: $90 new MRR/month from 1,000 visitors
 ```
 
 This is why retention and churn matter more than top-of-funnel at this scale.
@@ -185,7 +185,7 @@ Where:
 - **ARPU** (Average Revenue Per User) = MRR / Paying users
 - **Monthly churn rate** = Users who cancelled this month / Paying users at start of month
 
-Example: $12 ARPU x (1 / 0.08) = $12 x 12.5 = **$150 LTV**
+Example: $14.99 ARPU x (1 / 0.08) = $14.99 x 12.5 = **$187 LTV**
 
 ### Segmented LTV
 
@@ -193,11 +193,11 @@ Not all users are equal. Segment by behavior to understand where lifetime value 
 
 | Segment | % of Users | Avg Tenure (months) | Monthly ARPU | Estimated LTV | Notes |
 |---------|-----------|---------------------|--------------|---------------|-------|
-| Power learner (5+ sessions/week) | 10% | 18+ | $12 | $216+ | Core audience, protect at all costs |
-| Steady learner (3-4 sessions/week) | 25% | 12 | $12 | $144 | Ideal users, optimize for this group |
-| Casual learner (1-2 sessions/week) | 35% | 6 | $12 | $72 | Acceptable but at churn risk |
-| Fading (< 1 session/week) | 20% | 3 | $12 | $36 | Intervention candidates |
-| Churned within trial/month 1 | 10% | 1 | $12 | $12 | Onboarding failure or bad fit |
+| Power learner (5+ sessions/week) | 10% | 18+ | $14.99 | $270+ | Core audience, protect at all costs |
+| Steady learner (3-4 sessions/week) | 25% | 12 | $14.99 | $180 | Ideal users, optimize for this group |
+| Casual learner (1-2 sessions/week) | 35% | 6 | $14.99 | $90 | Acceptable but at churn risk |
+| Fading (< 1 session/week) | 20% | 3 | $14.99 | $45 | Intervention candidates |
+| Churned within trial/month 1 | 10% | 1 | $14.99 | $15 | Onboarding failure or bad fit |
 
 **Weighted average LTV:** ~$108 (if distribution holds)
 
@@ -211,11 +211,11 @@ Not all users are equal. Segment by behavior to understand where lifetime value 
 | 1:1 - 2:1 | Unsustainable | Reduce spend, fix retention or conversion |
 | < 1:1 | Losing money | Kill the channel immediately |
 
-At $12/month and ~$108 LTV, your CAC ceiling is $36 (for 3:1). But aim for < $20 CAC to maintain healthy margins as a solo operation with no VC buffer.
+At $14.99/month and ~$135 LTV, your CAC ceiling is $45 (for 3:1). But aim for < $25 CAC to maintain healthy margins as a solo operation with no VC buffer.
 
 ### Optimization Levers (ranked by impact)
 
-1. **Reduce churn** -- Moving monthly churn from 10% to 7% increases LTV from $120 to $171. Single highest-leverage action. Focus on the Week 2-6 danger zone where most churn happens.
+1. **Reduce churn** -- Moving monthly churn from 10% to 7% increases LTV from $150 to $214. Single highest-leverage action. Focus on the Week 2-6 danger zone where most churn happens.
 2. **Increase activation rate** -- Getting more signups to their third session. Doesn't increase per-user LTV but increases total lifetime revenue by expanding the paying base.
 3. **Improve free-to-paid conversion** -- Better paywall timing, clearer value demonstration at the gate. Directly increases paying user count without more traffic.
 4. **Reduce CAC** -- Shift spend from paid channels to organic/content. Doesn't change LTV but improves the ratio.
@@ -878,7 +878,7 @@ WITH monthly_subs AS (
         strftime('%Y-%m', u.created_at) AS month,
         'new' AS type,
         COUNT(*) AS users,
-        COUNT(*) * 12 AS mrr  -- $12/month per user
+        COUNT(*) * 14.99 AS mrr  -- $14.99/month per user
     FROM users u
     WHERE u.plan = 'paid'
     GROUP BY month
@@ -984,7 +984,7 @@ LIMIT 30;
 | Term | Definition |
 |------|-----------|
 | **MRR** | Monthly Recurring Revenue. Sum of all active subscription amounts. |
-| **ARPU** | Average Revenue Per User. MRR / paying users. For this app, $12 flat until tiers are added. |
+| **ARPU** | Average Revenue Per User. MRR / paying users. For this app, $14.99 flat until tiers are added. |
 | **LTV** | Lifetime Value. Total revenue expected from a user over their entire subscription. |
 | **CAC** | Customer Acquisition Cost. Total spend to acquire one paying user. |
 | **WASU** | Weekly Active Studying Users. The north star metric. |

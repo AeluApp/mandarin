@@ -1,0 +1,130 @@
+{
+    "title": "The Wire Transfer Waltz",
+    "title_zh": "电汇之舞",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "A bank branch, mid-afternoon. You need to wire money internationally -- your friend in the US needs it for tuition. The international transfer specialist, Xiao Ding, handles these with the precision of a watchmaker. She has a small world map pinned behind her desk with tiny flags showing every country she's wired money to. There are a lot of flags.",
+        "setup_zh": "银行网点，下午三点。你需要国际汇款——美国的朋友交学费需要。国际汇款专员小丁处理每笔业务都像钟表匠。她桌子后面的墙上钉着一张小世界地图，上面插着她汇过款的每个国家的小旗子。旗子很多。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问您要办理什么业务？",
+                "text_pinyin": "nín hǎo, qǐngwèn nín yào bànlǐ shénme yèwù?",
+                "text_en": "Hello, what would you like to do?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you need to send money abroad.",
+                "options": [
+                    {
+                        "text_zh": "我想往美国汇一笔钱，是给朋友交学费的。",
+                        "text_pinyin": "wǒ xiǎng wǎng měiguó huì yì bǐ qián, shì gěi péngyou jiāo xuéfèi de.",
+                        "text_en": "I'd like to wire some money to the US for my friend's tuition.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Ding nods and pulls out the international transfer form with the reverence of someone handling a diplomatic treaty.「汇多少美元？」往 + country + 汇 is the pattern for wiring money abroad."
+                    },
+                    {
+                        "text_zh": "国际汇款手续费是多少？",
+                        "text_pinyin": "guójì huìkuǎn shǒuxùfèi shì duōshao?",
+                        "text_en": "What's the fee for an international wire?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Ding explains the fee structure clearly.「看金额。五千美元以下收一百五十块手续费。」手续费 means 'handling fee' -- always ask before committing."
+                    },
+                    {
+                        "text_zh": "用手机可以国际汇款吗？",
+                        "text_pinyin": "yòng shǒujī kěyǐ guójì huìkuǎn ma?",
+                        "text_en": "Can I do an international wire by phone?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ding shakes her head gently.「国际汇款必须到柜台办理。需要填表、签字。」Some things still require showing up in person."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。请填写这张汇款单。需要对方的银行名称、账号和SWIFT代码。",
+                "text_pinyin": "hǎo de. qǐng tiánxiě zhè zhāng huìkuǎn dān. xūyào duìfāng de yínháng míngchēng, zhànghào hé SWIFT dàimǎ.",
+                "text_en": "OK. Please fill out this wire transfer form. You'll need the recipient's bank name, account number, and SWIFT code."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about missing information.",
+                "options": [
+                    {
+                        "text_zh": "SWIFT代码我有。但是我不确定银行的英文全称，可以帮我查一下吗？",
+                        "text_pinyin": "SWIFT dàimǎ wǒ yǒu. dànshì wǒ bú quèdìng yínháng de yīngwén quánchēng, kěyǐ bāng wǒ chá yíxià ma?",
+                        "text_en": "I have the SWIFT code. But I'm not sure of the bank's full English name. Can you help me look it up?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Ding types the SWIFT code and the full name appears on her screen.「找到了。」她用铅笔在表格上轻轻写下来。不确定 means 'not sure' -- honest and saves time."
+                    },
+                    {
+                        "text_zh": "什么是SWIFT代码？我不太懂。",
+                        "text_pinyin": "shénme shì SWIFT dàimǎ? wǒ bú tài dǒng.",
+                        "text_en": "What's a SWIFT code? I don't really understand.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ding explains without judgment.「每个银行都有一个国际代码，就像银行的身份证号。让你朋友发给你就行。」不太懂 is 'don't really understand.'"
+                    },
+                    {
+                        "text_zh": "我朋友说他会把信息发给我，能等一会儿吗？",
+                        "text_pinyin": "wǒ péngyou shuō tā huì bǎ xìnxī fā gěi wǒ, néng děng yíhuìr ma?",
+                        "text_en": "My friend said he'll send me the info. Can you wait a moment?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ding glances at the queue.「可以，但是最好准备好了再来，今天人比较多。」等一会儿 is 'wait a moment.' Coming prepared is always better."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "表格填好了。一共汇两千美元，手续费一百五十元人民币。确认一下？",
+                "text_pinyin": "biǎogé tián hǎo le. yígòng huì liǎngqiān měiyuán, shǒuxùfèi yìbǎi wǔshí yuán rénmínbì. quèrèn yíxià?",
+                "text_en": "Form is complete. Total wire: 2000 USD, handling fee 150 RMB. Can you confirm?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about arrival time.",
+                "options": [
+                    {
+                        "text_zh": "确认。钱大概多久能到？",
+                        "text_pinyin": "quèrèn. qián dàgài duō jiǔ néng dào?",
+                        "text_en": "Confirmed. How long until the money arrives?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Ding checks.「一般两到三个工作日。到了以后系统会通知您。」多久能到 is 'how long until it arrives.' Xiao Ding adds a tiny American flag to her map."
+                    },
+                    {
+                        "text_zh": "好的，没问题。谢谢你的帮助！",
+                        "text_pinyin": "hǎo de, méi wèntí. xièxie nǐ de bāngzhù!",
+                        "text_en": "OK, no problem. Thanks for your help!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ding stamps the form with a single clean impression.「不客气。有问题随时来。」"
+                    },
+                    {
+                        "text_zh": "如果钱没到怎么办？可以退款吗？",
+                        "text_pinyin": "rúguǒ qián méi dào zěnme bàn? kěyǐ tuìkuǎn ma?",
+                        "text_en": "What if the money doesn't arrive? Can I get a refund?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Ding reassures you.「基本不会出问题。万一有问题，拿着回单来找我，我帮您追踪。」万一 means 'in case' -- a useful worry-management word."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，汇款已经提交了。这是回单，请保存好。祝一切顺利！",
+                "text_pinyin": "hǎo le, huìkuǎn yǐjīng tíjiāo le. zhè shì huídān, qǐng bǎocún hǎo. zhù yíqiè shùnlì!",
+                "text_en": "Done, the wire has been submitted. Here's your receipt, please keep it safe. Wishing you all the best!"
+            }
+        ],
+        "cultural_note": "International wire transfers (国际汇款) in China must be done at bank counters with proper documentation. SWIFT codes are required. Fees vary by bank and amount. Keep your receipt (回单) -- it's your proof of transfer."
+    },
+    "id": "gen_bank_3_01_v0"
+}

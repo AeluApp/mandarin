@@ -1,0 +1,94 @@
+{
+    "title": "Teacher Li's Office Hours",
+    "title_zh": "李老师的答疑时间",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_2_00_v0",
+    "tree": {
+        "setup": "Teacher Li's small office, lined with bookshelves and a collection of tea cans from every province she's visited. She's the kind of teacher who remembers which characters each student struggles with. Right now she's grading papers with a red pen that she holds like a calligraphy brush.",
+        "setup_zh": "李老师的小办公室，书架上摆满了她去过的每个省的茶叶罐。她是那种记得每个学生不会写哪个字的老师。现在她用红笔批作业，握笔像拿毛笔一样。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请进！有什么问题想问吗？",
+                "text_pinyin": "qǐng jìn! yǒu shénme wèntí xiǎng wèn ma?",
+                "text_en": "Come in! Do you have any questions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about your homework.",
+                "options": [
+                    {
+                        "text_zh": "李老师，我有一个语法问题。「了」和「过」有什么不同？",
+                        "text_pinyin": "lǐ lǎoshī, wǒ yǒu yí gè yǔfǎ wèntí.「le」hé「guo」yǒu shénme bùtóng?",
+                        "text_en": "Teacher Li, I have a grammar question. What's the difference between 了 and 过?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Li sets down her red pen and lights up -- this is her favorite topic.「好问题！了是说事情发生了，过是说你有这个经历。」有什么不同 is 'what's the difference' -- a learner's best friend."
+                    },
+                    {
+                        "text_zh": "老师，我的作业做得对不对？",
+                        "text_pinyin": "lǎoshī, wǒ de zuòyè zuò de duì bu duì?",
+                        "text_en": "Teacher, did I do my homework correctly?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Teacher Li flips to your paper.「大部分都对。这个地方有一个小错误……」She circles it gently. 对不对 asks 'right or not right.'"
+                    },
+                    {
+                        "text_zh": "这个考试难不难？",
+                        "text_pinyin": "zhè ge kǎoshì nán bu nán?",
+                        "text_en": "Is this exam hard?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Teacher Li smiles mysteriously.「如果你准备好了就不难。」She will neither confirm nor deny the difficulty level. She is a professional. 难不难 uses the A不A question form."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你的中文进步很快。继续这样学下去！",
+                "text_pinyin": "nǐ de zhōngwén jìnbù hěn kuài. jìxù zhèyàng xué xiàqù!",
+                "text_en": "Your Chinese is improving quickly. Keep studying like this!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her encouragement.",
+                "options": [
+                    {
+                        "text_zh": "谢谢老师！您教得很好。",
+                        "text_pinyin": "xièxie lǎoshī! nín jiāo de hěn hǎo.",
+                        "text_en": "Thank you, teacher! You teach very well.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Li waves the compliment away modestly, but reaches for her best tea.「喝一杯？」When a Chinese teacher offers tea, you've earned real respect."
+                    },
+                    {
+                        "text_zh": "我觉得还不够好。",
+                        "text_pinyin": "wǒ juéde hái bú gòu hǎo.",
+                        "text_en": "I don't think I'm good enough yet.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Teacher Li nods approvingly.「这种态度很好。但是你真的进步了。」She respects humility. 还不够 means 'still not enough.'"
+                    },
+                    {
+                        "text_zh": "学中文比我想的难。",
+                        "text_pinyin": "xué zhōngwén bǐ wǒ xiǎng de nán.",
+                        "text_en": "Learning Chinese is harder than I thought.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Teacher Li pours you tea without asking.「每个人都这么说。但是你已经能跟我说话了，对不对？」比 is 'compared to' -- the comparison pattern."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有问题随时来找我。门一直开着。",
+                "text_pinyin": "yǒu wèntí suíshí lái zhǎo wǒ. mén yìzhí kāizhe.",
+                "text_en": "Come find me anytime you have questions. The door is always open."
+            }
+        ],
+        "cultural_note": "Chinese teachers are addressed as 老师 (lǎoshī) and treated with significant respect. Office hours (答疑时间, dáyí shíjiān) are common. Offering tea to a student is a sign of warmth and mentorship."
+    }
+}

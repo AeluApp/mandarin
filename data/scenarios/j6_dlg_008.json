@@ -1,0 +1,117 @@
+{
+    "title": "The Wrong Department",
+    "title_zh": "走错了部门",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You're trying to register a small business in Hangzhou. You've been bounced between the Market Supervision Bureau and the Tax Bureau for three days. Today, a mid-level bureaucrat named Director He accidentally lets slip how the system actually works behind the scenes.",
+        "setup_zh": "你在杭州注册一家小公司。三天来你一直在市场监管局和税务局之间来回跑。今天，一位叫何科长的中层干部不小心透露了系统背后的实际运作方式。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你又来了？上次不是让你去税务局办完再回来吗？……等等，他们让你回来？让我看看你的材料。嗯……他们盖的这个章是旧版的，我们已经换新系统了。",
+                "text_pinyin": "Nǐ yòu lái le? Shàng cì bú shì ràng nǐ qù shuìwùjú bàn wán zài huílái ma? ... Děngdeng, tāmen ràng nǐ huílái? Ràng wǒ kànkan nǐ de cáiliào. Ēn ... tāmen gài de zhège zhāng shì jiù bǎn de, wǒmen yǐjīng huàn xīn xìtǒng le.",
+                "text_en": "You're back again? Didn't we tell you last time to finish at the Tax Bureau first? ... Wait, they sent you back? Let me see your documents. Hmm... the stamp they used is the old version. We've already switched to the new system."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express your frustration while trying to understand the systemic problem.",
+                "options": [
+                    {
+                        "text_zh": "何科长，这已经是我第三次来了。每次一个部门都说另一个部门的材料不对。我开始怀疑不是我的问题，是两个系统之间没有同步。你们换了新系统，税务局知道吗？",
+                        "text_pinyin": "Hé kēzhǎng, zhè yǐjīng shì wǒ dì sān cì lái le. Měi cì yīge bùmén dōu shuō lìng yīge bùmén de cáiliào bú duì. Wǒ kāishǐ huáiyí bú shì wǒ de wèntí, shì liǎng ge xìtǒng zhī jiān méiyǒu tóngbù. Nǐmen huàn le xīn xìtǒng, shuìwùjú zhīdào ma?",
+                        "text_en": "Director He, this is my third visit. Every time one department says the other's documents are wrong. I'm starting to suspect the problem isn't me — it's that the two systems aren't synchronized.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Identifies the structural cause — inter-departmental desynchronization — rather than blaming individuals."
+                    },
+                    {
+                        "text_zh": "你们这里能刷信用卡吗？",
+                        "text_pinyin": "Nǐmen zhèlǐ néng shuā xìnyòngkǎ ma?",
+                        "text_en": "Can I pay by credit card here?",
+                        "score": 0.0,
+                        "feedback": "Payment method question in the middle of a bureaucratic crisis."
+                    },
+                    {
+                        "text_zh": "附近有没有咖啡店？我想休息一下。",
+                        "text_pinyin": "Fùjìn yǒu méiyǒu kāfēidiàn? Wǒ xiǎng xiūxi yīxià.",
+                        "text_en": "Is there a coffee shop nearby? I want to take a break.",
+                        "score": 0.0,
+                        "feedback": "Gives up on the conversation at a critical moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说实话……他们可能不知道。我们上个月刚切换的，但是通知发下去之后，税务局那边回复的是'收到'。'收到'跟'执行'是两回事。在体制内，很多问题就卡在这个缝隙里。",
+                "text_pinyin": "Shuō shíhuà ... tāmen kěnéng bù zhīdào. Wǒmen shàng ge yuè gāng qiēhuàn de, dànshì tōngzhī fā xiàqù zhīhòu, shuìwùjú nàbiān huífù de shì 'shōudào'. 'Shōudào' gēn 'zhíxíng' shì liǎng huí shì. Zài tǐzhì nèi, hěn duō wèntí jiù kǎ zài zhège fèngxì lǐ.",
+                "text_en": "To be honest... they probably don't know. We just switched last month, and after the notice went out, the Tax Bureau replied with 'received.' But 'received' and 'implemented' are two different things. Within the system, many problems get stuck in exactly this gap."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Dig deeper into what he's revealing about institutional dysfunction.",
+                "options": [
+                    {
+                        "text_zh": "所以'收到'本质上只是一个确认信息到达的信号，不代表任何行动。这意味着整个跨部门协调靠的不是流程，而是个人关系——谁认识谁，谁愿意多打一个电话。对吗？",
+                        "text_pinyin": "Suǒyǐ 'shōudào' běnzhì shàng zhǐ shì yīge quèrèn xìnxī dàodá de xìnhào, bù dàibiǎo rènhé xíngdòng. Zhè yìwèi zhe zhěnggè kuà bùmén xiétiáo kào de bú shì liúchéng, ér shì gèrén guānxì — shéi rènshi shéi, shéi yuànyì duō dǎ yīge diànhuà. Duì ma?",
+                        "text_en": "So 'received' is a signal that information arrived, not that anyone acted. The entire cross-departmental coordination relies on personal relationships — who knows whom, who'll make an extra phone call. Am I right?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Precise diagnosis — identifies the gap between formal acknowledgment and actual execution, and names guanxi as the real mechanism."
+                    },
+                    {
+                        "text_zh": "你们周末上班吗？",
+                        "text_pinyin": "Nǐmen zhōumò shàngbān ma?",
+                        "text_en": "Do you work on weekends?",
+                        "score": 0.0,
+                        "feedback": "Scheduling question when he's revealing institutional insights."
+                    },
+                    {
+                        "text_zh": "杭州现在创业的人多不多？",
+                        "text_pinyin": "Hángzhōu xiànzài chuàngyè de rén duō bù duō?",
+                        "text_en": "Are there many entrepreneurs in Hangzhou now?",
+                        "score": 0.0,
+                        "feedback": "General question that misses the specific institutional revelation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你很聪明。没错，体制里的很多事情表面上有流程，实际上是人推动的。我帮你想个办法——我认识税务局的一个同事，我直接给他打个电话，让他帮你用新版章重新盖一下。你明天下午来取就行。",
+                "text_pinyin": "Nǐ hěn cōngmíng. Méi cuò, tǐzhì lǐ de hěn duō shìqíng biǎomiàn shàng yǒu liúchéng, shíjì shàng shì rén tuīdòng de. Wǒ bāng nǐ xiǎng ge bànfǎ — wǒ rènshi shuìwùjú de yīge tóngshì, wǒ zhíjiē gěi tā dǎ ge diànhuà, ràng tā bāng nǐ yòng xīn bǎn zhāng chóngxīn gài yīxià. Nǐ míngtiān xiàwǔ lái qǔ jiù xíng.",
+                "text_en": "You're sharp. That's right — many things in the system look like they have procedures on the surface, but are actually driven by people. Let me figure something out — I know someone at the Tax Bureau, I'll call him directly and have him re-stamp with the new version. You can pick it up tomorrow afternoon."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and reflect on what this reveals.",
+                "options": [
+                    {
+                        "text_zh": "太感谢了，何科长。不过这件事让我想到一个问题——如果每次解决问题都得靠'认识人'，那不认识人的怎么办？这个系统对有关系的人很友好，但对普通人来说就像一个迷宫。",
+                        "text_pinyin": "Tài gǎnxiè le, Hé kēzhǎng. Búguò zhè jiàn shì ràng wǒ xiǎngdào yīge wèntí — rúguǒ měi cì jiějué wèntí dōu děi kào 'rènshi rén', nà bù rènshi rén de zěnme bàn? Zhège xìtǒng duì yǒu guānxì de rén hěn yǒuhǎo, dàn duì pǔtōng rén lái shuō jiù xiàng yīge mígōng.",
+                        "text_en": "Thank you, Director He. But this makes me think — if solving problems requires 'knowing someone,' what about people who don't? This system is friendly to connected people, but for ordinary people it's a maze.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grateful but unflinching — names the equity problem inherent in guanxi-dependent systems."
+                    },
+                    {
+                        "text_zh": "杭州的西湖真的很美，你经常去吗？",
+                        "text_pinyin": "Hángzhōu de Xīhú zhēn de hěn měi, nǐ jīngcháng qù ma?",
+                        "text_en": "West Lake in Hangzhou is really beautiful, do you go often?",
+                        "score": 0.0,
+                        "feedback": "Tourism small talk after an important institutional revelation."
+                    },
+                    {
+                        "text_zh": "你觉得杭州和上海哪个城市更好？",
+                        "text_pinyin": "Nǐ juéde Hángzhōu hé Shànghǎi nǎge chéngshì gèng hǎo?",
+                        "text_en": "Which city do you think is better, Hangzhou or Shanghai?",
+                        "score": 0.0,
+                        "feedback": "City comparison when the conversation is about institutional design."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The gap between '收到' (received/acknowledged) and actual implementation is one of the most pervasive friction points in Chinese bureaucracy. Formal procedures exist on paper, but cross-departmental coordination frequently depends on 关系 (guanxi, personal relationships). The phrase '体制内' (within the system) refers to the world of government employment, where informal networks often matter more than formal hierarchies. For entrepreneurs navigating business registration, having a 'person on the inside' (有人) can be the difference between three days and three months."
+    }
+}

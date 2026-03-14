@@ -3,83 +3,2485 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Mandarin</title>
-  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <title>Admin — Aelu</title>
+  <script nonce="{{ csp_nonce }}">(function(){var h=new Date().getHours(),d=h>=19||h<7;document.documentElement.setAttribute("data-theme",d?"dark":"light");document.documentElement.style.backgroundColor=d?"#1C2028":"#F2EBE0";})()</script>
+  <link rel="icon" href="/static/favicon.ico?v=2" type="image/x-icon">
   <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
   <style nonce="{{ csp_nonce }}">
-    .admin-page { max-width: 800px; margin: 0 auto; padding: var(--space-6); }
-    .admin-header { margin-bottom: var(--space-6); }
+    .admin-page { max-width: 960px; margin: 0 auto; padding: var(--space-6); }
+    .admin-header { margin-bottom: var(--space-4); }
     .admin-header h1 { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); }
+    .admin-back { display: inline-block; margin-bottom: var(--space-4); color: var(--color-accent); text-decoration: none; font-family: var(--font-body); }
+
+    /* Tab bar */
+    .admin-tabs { display: flex; gap: var(--space-1); border-bottom: 2px solid var(--color-divider); margin-bottom: var(--space-5); flex-wrap: wrap; }
+    .admin-tab { padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s; }
+    .admin-tab:hover { color: var(--color-text); }
+    .admin-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+    /* Tab content */
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
+
+    /* Shared styles */
     .admin-section { margin-bottom: var(--space-6); }
     .admin-section h2 { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); }
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); }
-    .metric-card { background: var(--color-surface); padding: var(--space-4); border-radius: 8px; text-align: center; }
+    .metric-card { background: var(--color-surface); padding: var(--space-4); border-radius: var(--radius-lg, 0); text-align: center; }
     .metric-value { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-accent); }
     .metric-label { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin-top: var(--space-1); }
     .admin-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: var(--text-sm); }
     .admin-table th, .admin-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-divider); }
     .admin-table th { color: var(--color-text-dim); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--text-xs); }
-    .admin-back { display: inline-block; margin-bottom: var(--space-4); color: var(--color-accent); text-decoration: none; font-family: var(--font-body); }
+    .admin-table td { color: var(--color-text); }
+    .admin-table tr:hover td { background: var(--color-surface); }
+
+    /* Expandable traceback */
+    .tb-toggle { cursor: pointer; color: var(--color-accent); text-decoration: underline; font-size: var(--text-xs); }
+    .tb-content { display: none; margin-top: var(--space-2); }
+    .tb-content.open { display: block; }
+    .tb-content pre { background: var(--color-surface); padding: var(--space-3); border-radius: var(--radius); font-size: var(--text-xs); overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 300px; overflow-y: auto; color: var(--color-text); }
+
+    /* Severity badges */
+    .badge { display: inline-block; padding: 1px 6px; border-radius: var(--radius); font-size: var(--text-xs); font-weight: 600; }
+    .badge-error { background: var(--color-incorrect); color: var(--color-on-accent); }
+    .badge-warning { background: var(--color-mastery-stabilizing); color: var(--color-on-accent); }
+    .badge-info { background: var(--color-accent); color: var(--color-on-accent); }
+
+    /* Loading state */
+    .tab-loading { color: var(--color-text-dim); font-family: var(--font-body); padding: var(--space-4); }
+
+    /* Empty state */
+    .tab-empty { color: var(--color-text-dim); font-family: var(--font-body); font-style: italic; padding: var(--space-4); }
+
+    /* Hanzi in tables */
+    .admin-table .hanzi { font-family: var(--font-hanzi); font-size: var(--text-lg); }
+
+    /* Responsive overflow */
+    .table-wrap { overflow-x: auto; }
+
+    /* Tab description */
+    .tab-description { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-faint); margin-bottom: var(--space-3); font-style: italic; }
+
+    /* Health summary banner */
+    .health-green { border-left-color: var(--color-correct) !important; color: var(--color-correct); }
+    .health-yellow { border-left-color: var(--color-mastery-stabilizing) !important; color: var(--color-mastery-stabilizing); }
+    .health-red { border-left-color: var(--color-incorrect) !important; color: var(--color-incorrect); }
+
+    /* Metric tooltips */
+    .metric-card[title] { cursor: help; }
+
+    /* Funnel visualization */
+    .funnel-stages { display: flex; flex-direction: column; gap: var(--space-2); max-width: 600px; }
+    .funnel-stage { display: flex; align-items: center; gap: var(--space-3); }
+    .funnel-bar-wrap { flex: 1; position: relative; }
+    .funnel-bar { height: 36px; background: var(--color-accent); border-radius: var(--radius); display: flex; align-items: center; padding: 0 var(--space-3); min-width: 40px; transition: width 0.4s ease; }
+    .funnel-bar-label { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-on-accent); white-space: nowrap; font-weight: 600; }
+    .funnel-stage-name { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text); min-width: 100px; text-align: right; }
+    .funnel-arrow { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); padding-left: 110px; }
+
+    /* Segment cards grid */
+    .segment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3); }
+    .segment-card { background: var(--color-surface); padding: var(--space-3); border-radius: var(--radius-lg, 0); }
+    .segment-card-title { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); text-transform: capitalize; }
+    .segment-card-value { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-accent); }
+    .segment-card-sub { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); margin-top: var(--space-1); }
   </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+  {% if ga4_id %}
+  <script nonce="{{ csp_nonce }}" async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script>
+  <script nonce="{{ csp_nonce }}">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ ga4_id }}', {
+      send_page_view: true,
+      cookie_flags: 'SameSite=Lax;Secure'
+    });
+  </script>
+  {% endif %}
 </head>
 <body>
   <div class="admin-page">
-    <a href="/" class="admin-back">&larr; Back to app</a>
+    <a href="/" class="admin-back"><svg class="icon" style="display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M19 12H5M5 12l6-6M5 12l6 6"/></svg> Back to app</a>
     <div class="admin-header">
       <h1>Admin Dashboard</h1>
     </div>
 
-    <div class="admin-section">
-      <h2>Metrics</h2>
-      <div class="metrics-grid" id="metrics-grid">Loading...</div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="overview">Overview</button>
+      <button class="admin-tab" data-tab="issues">Issues</button>
+      <button class="admin-tab" data-tab="sessions">Sessions</button>
+      <button class="admin-tab" data-tab="security">Security</button>
+      <button class="admin-tab" data-tab="revenue">Revenue</button>
+      <button class="admin-tab" data-tab="retention">Retention</button>
+      <button class="admin-tab" data-tab="engagement">Engagement</button>
+      <button class="admin-tab" data-tab="partners">Partners</button>
+      <button class="admin-tab" data-tab="content">Content</button>
+      <button class="admin-tab" data-tab="quality">Quality</button>
+      <button class="admin-tab" data-tab="intelligence" id="intelligence-tab-btn">Intelligence <span id="intel-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
+      <button class="admin-tab" data-tab="notifications" id="notifications-tab-btn">Notifications <span id="notif-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
+      <button class="admin-tab" data-tab="ai-review" id="ai-review-tab-btn">AI Review <span id="ai-review-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
     </div>
 
-    <div class="admin-section">
-      <h2>Users</h2>
-      <div id="users-table">Loading...</div>
+    <!-- Overview -->
+    <div class="admin-tab-content active" id="tab-overview">
+      <p class="tab-description">Key numbers at a glance. Check this daily.</p>
+      <div id="health-summary" class="health-summary" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-4);border-left:4px solid var(--color-text-dim);font-family:var(--font-body);font-size:var(--text-sm);">Checking system health...</div>
+      <div class="admin-section">
+        <h2>Metrics</h2>
+        <div class="metrics-grid" id="metrics-grid">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Funnel</h2>
+        <div id="funnel-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Onboarding Funnel</h2>
+        <div id="onboarding-funnel-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Users</h2>
+        <div id="users-table">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Feedback</h2>
+        <div id="feedback-table">Loading...</div>
+      </div>
     </div>
 
-    <div class="admin-section">
-      <h2>Feedback</h2>
-      <div id="feedback-table">Loading...</div>
+    <!-- Issues (consolidated: crashes + client errors + error patterns) -->
+    <div class="admin-tab-content" id="tab-issues">
+      <p class="tab-description">Crashes, errors, and patterns. Copy-paste any row if you need to report a bug.</p>
+      <div class="admin-section">
+        <h2>Server Crashes</h2>
+        <div id="crashes-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Client-Side Errors</h2>
+        <div id="client-errors-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Error Patterns</h2>
+        <div id="error-patterns-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Sessions -->
+    <div class="admin-tab-content" id="tab-sessions">
+      <p class="tab-description">Every study session. Useful for checking if the app is being used.</p>
+      <div class="admin-section">
+        <h2>Sessions</h2>
+        <div id="sessions-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="admin-tab-content" id="tab-security">
+      <p class="tab-description">Login attempts, access denials. Usually empty = good.</p>
+      <div class="admin-section">
+        <h2>Security Scans</h2>
+        <div id="security-scans-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Security Events</h2>
+        <div id="security-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Revenue -->
+    <div class="admin-tab-content" id="tab-revenue">
+      <p class="tab-description">Money. MRR is the headline number.</p>
+      <div class="admin-section">
+        <h2>Revenue</h2>
+        <div id="revenue-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Retention Cohorts -->
+    <div class="admin-tab-content" id="tab-retention">
+      <p class="tab-description">Are users coming back? Green cells = good, red = losing people.</p>
+      <div class="admin-section">
+        <h2>Retention Cohorts</h2>
+        <div id="retention-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Engagement -->
+    <div class="admin-tab-content" id="tab-engagement">
+      <p class="tab-description">How often and how much people study. The bar chart shows daily volume.</p>
+      <div class="admin-section">
+        <h2>Engagement</h2>
+        <div id="engagement-content" class="tab-loading">Loading...</div>
+      </div>
+      <div class="admin-section">
+        <h2>Session Completion Segments</h2>
+        <div id="completion-segments-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Partners -->
+    <div class="admin-tab-content" id="tab-partners">
+      <p class="tab-description">Affiliate and referral tracking.</p>
+      <div class="admin-section">
+        <h2>Partner Attribution</h2>
+        <div id="partners-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Content Ingestion -->
+    <div class="admin-tab-content" id="tab-content">
+      <p class="tab-description">Add verified content to the media catalog. Every entry here was reviewed by a human.</p>
+      <div class="admin-section">
+        <h2>Add Content</h2>
+        <form id="content-ingest-form" style="max-width:600px;">
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">URL *</label>
+            <input type="url" name="url" required placeholder="https://..." style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Title (English) *</label>
+            <input type="text" name="title" required style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Title (Chinese)</label>
+            <input type="text" name="title_zh" style="width:100%;padding:8px;font-family:var(--font-hanzi);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-3);">
+            <div>
+              <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Source Platform *</label>
+              <select name="platform" required style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                <option value="">Select...</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Bilibili">Bilibili</option>
+                <option value="Netflix">Netflix</option>
+                <option value="iQIYI">iQIYI</option>
+                <option value="Youku">Youku</option>
+                <option value="Tencent">Tencent</option>
+                <option value="TikTok">TikTok</option>
+                <option value="Podcast">Podcast</option>
+                <option value="Blog">Blog / Article</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Content Type *</label>
+              <select name="content_type" required style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                <option value="">Select...</option>
+                <option value="series">Series</option>
+                <option value="movie">Movie</option>
+                <option value="short_video">Short Video</option>
+                <option value="documentary">Documentary</option>
+                <option value="variety">Variety</option>
+                <option value="podcast">Podcast</option>
+                <option value="animation">Animation</option>
+                <option value="music">Music</option>
+                <option value="educational">Educational</option>
+                <option value="news">News</option>
+                <option value="article">Article</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">HSK Level *</label>
+            <select name="hsk_level" required style="width:auto;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              <option value="">Select...</option>
+              <option value="1">HSK 1</option>
+              <option value="2">HSK 2</option>
+              <option value="3">HSK 3</option>
+              <option value="4">HSK 4</option>
+              <option value="5">HSK 5</option>
+              <option value="6">HSK 6</option>
+              <option value="7">HSK 7</option>
+              <option value="8">HSK 8</option>
+              <option value="9">HSK 9</option>
+            </select>
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Summary (English) *</label>
+            <textarea name="summary" required rows="3" style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);resize:vertical;"></textarea>
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Tags (comma-separated)</label>
+            <input type="text" name="tags" placeholder="slice-of-life, family, comedy" style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Why this content? (curator's note)</label>
+            <textarea name="curator_note" rows="2" style="width:100%;padding:8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);resize:vertical;"></textarea>
+          </div>
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-1);">Key Vocabulary (comma-separated hanzi)</label>
+            <input type="text" name="key_vocab" placeholder="e.g. &#x4F60;&#x597D;, &#x8C22;&#x8C22;" style="width:100%;padding:8px;font-family:var(--font-hanzi);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+
+          <!-- Quiz questions -->
+          <div style="margin-bottom:var(--space-3);">
+            <label style="display:block;font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-2);">Quiz Questions (at least 1 required)</label>
+            <div id="quiz-questions">
+              <div class="quiz-q" data-q="0" style="border:1px solid var(--color-divider);padding:var(--space-3);margin-bottom:var(--space-2);">
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Question 1</label>
+                <input type="text" name="q0_text" placeholder="Question text" required style="width:100%;padding:6px;margin:4px 0;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:4px 0;">
+                  <input type="text" name="q0_a0" placeholder="Option A" required style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q0_a1" placeholder="Option B" required style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q0_a2" placeholder="Option C" required style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q0_a3" placeholder="Option D" required style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                </div>
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Correct answer (0-3)</label>
+                <input type="number" name="q0_correct" min="0" max="3" value="0" required style="width:60px;padding:6px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              </div>
+              <div class="quiz-q" data-q="1" style="border:1px solid var(--color-divider);padding:var(--space-3);margin-bottom:var(--space-2);">
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Question 2 (optional)</label>
+                <input type="text" name="q1_text" placeholder="Question text" style="width:100%;padding:6px;margin:4px 0;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:4px 0;">
+                  <input type="text" name="q1_a0" placeholder="Option A" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q1_a1" placeholder="Option B" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q1_a2" placeholder="Option C" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q1_a3" placeholder="Option D" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                </div>
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Correct answer (0-3)</label>
+                <input type="number" name="q1_correct" min="0" max="3" value="0" style="width:60px;padding:6px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              </div>
+              <div class="quiz-q" data-q="2" style="border:1px solid var(--color-divider);padding:var(--space-3);margin-bottom:var(--space-2);">
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Question 3 (optional)</label>
+                <input type="text" name="q2_text" placeholder="Question text" style="width:100%;padding:6px;margin:4px 0;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:4px 0;">
+                  <input type="text" name="q2_a0" placeholder="Option A" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q2_a1" placeholder="Option B" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q2_a2" placeholder="Option C" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                  <input type="text" name="q2_a3" placeholder="Option D" style="padding:6px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+                </div>
+                <label style="font-size:var(--text-xs);color:var(--color-text-dim);">Correct answer (0-3)</label>
+                <input type="number" name="q2_correct" min="0" max="3" value="0" style="width:60px;padding:6px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:var(--space-4);">
+            <label style="font-size:var(--text-sm);color:var(--color-text-dim);">
+              <input type="checkbox" name="verified" checked> Verified (human-reviewed)
+            </label>
+          </div>
+
+          <button type="submit" style="padding:10px 24px;background:var(--color-accent);color:var(--color-on-accent);border:none;font-family:var(--font-body);font-size:var(--text-sm);font-weight:600;cursor:pointer;">Add to Catalog</button>
+          <div id="ingest-status" style="margin-top:var(--space-2);font-size:var(--text-sm);"></div>
+        </form>
+      </div>
+      <div class="admin-section">
+        <h2>Catalog</h2>
+        <div id="catalog-table" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Quality -->
+    <div class="admin-tab-content" id="tab-quality">
+      <p class="tab-description">DPMO, SPC control charts, process capability, retention survival, flow metrics, risk register, experiments.</p>
+
+      <div class="admin-section">
+        <h2>A/B Experiments</h2>
+        <div id="experiments-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>DPMO &amp; Sigma Level</h2>
+        <div id="quality-dpmo-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>SPC Control Charts</h2>
+        <div style="margin-bottom:var(--space-2);">
+          <select id="spc-chart-select" style="padding:4px 8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+            <option value="drill_accuracy">Drill Accuracy</option>
+            <option value="response_time">Response Time (ms)</option>
+            <option value="session_completion">Session Completion Rate</option>
+          </select>
+        </div>
+        <div id="quality-spc-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Process Capability</h2>
+        <div id="quality-capability-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Retention Survival Analysis</h2>
+        <div id="quality-retention-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Flow Metrics</h2>
+        <div id="quality-flow-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Risk Register</h2>
+        <button onclick="showAddRiskForm()" style="margin-bottom:var(--space-2);padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">+ Add Risk</button>
+        <div id="add-risk-form" style="display:none;margin-bottom:var(--space-3);padding:var(--space-3);background:var(--color-surface);max-width:500px;">
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Category</label>
+            <select id="risk-category" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              <option value="technical">Technical</option>
+              <option value="security">Security</option>
+              <option value="performance">Performance</option>
+              <option value="compliance">Compliance</option>
+              <option value="market">Market</option>
+              <option value="operational">Operational</option>
+            </select>
+          </div>
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Title *</label>
+            <input type="text" id="risk-title" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Description</label>
+            <textarea id="risk-description" rows="2" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);"></textarea>
+          </div>
+          <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-2);">
+            <div style="flex:1;">
+              <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Probability (1-5)</label>
+              <input type="number" id="risk-probability" min="1" max="5" value="3" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+            </div>
+            <div style="flex:1;">
+              <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Impact (1-5)</label>
+              <input type="number" id="risk-impact" min="1" max="5" value="3" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+            </div>
+          </div>
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Mitigation</label>
+            <textarea id="risk-mitigation" rows="2" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);"></textarea>
+          </div>
+          <button onclick="submitRisk()" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Save Risk</button>
+          <button onclick="document.getElementById('add-risk-form').style.display='none'" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;color:var(--color-text-dim);border:1px solid var(--color-divider);cursor:pointer;margin-left:var(--space-1);">Cancel</button>
+        </div>
+        <div id="quality-risks-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Work Items (Kanban)</h2>
+        <button onclick="showAddWorkItemForm()" style="margin-bottom:var(--space-2);padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">+ Add Item</button>
+        <div id="add-work-item-form" style="display:none;margin-bottom:var(--space-3);padding:var(--space-3);background:var(--color-surface);max-width:500px;">
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Title *</label>
+            <input type="text" id="work-item-title" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+          </div>
+          <div style="margin-bottom:var(--space-2);">
+            <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Type</label>
+            <select id="work-item-type" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
+              <option value="standard">Standard</option>
+              <option value="expedite">Expedite</option>
+              <option value="fixed_date">Fixed Date</option>
+              <option value="intangible">Intangible</option>
+            </select>
+          </div>
+          <button onclick="submitWorkItem()" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Save</button>
+          <button onclick="document.getElementById('add-work-item-form').style.display='none'" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;color:var(--color-text-dim);border:1px solid var(--color-divider);cursor:pointer;margin-left:var(--space-1);">Cancel</button>
+        </div>
+        <div id="quality-work-items-content" class="tab-loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Product Intelligence -->
+    <div class="admin-tab-content" id="tab-intelligence">
+      <p class="tab-description">Self-diagnosing product audit. Scans every dimension and generates prioritized Claude Code prompts.</p>
+      <div style="margin-bottom:var(--space-3);display:flex;gap:var(--space-2);align-items:center;">
+        <button id="intel-run-audit" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Run Audit</button>
+        <span id="intel-status" style="font-family:var(--font-body);font-size:var(--text-xs);color:var(--color-text-dim);"></span>
+      </div>
+
+      <!-- Overall health card -->
+      <div id="intel-overall" style="display:none;margin-bottom:var(--space-4);padding:var(--space-4);background:var(--color-surface);border-left:4px solid var(--color-accent);"></div>
+
+      <!-- Dimension scorecard -->
+      <div id="intel-scorecard" style="display:none;margin-bottom:var(--space-4);"></div>
+
+      <div id="intel-summary" style="display:none;margin-bottom:var(--space-4);"></div>
+      <div id="intel-filter" style="display:none;margin-bottom:var(--space-3);gap:var(--space-1);flex-wrap:wrap;"></div>
+
+      <!-- Copy all critical prompts button -->
+      <div id="intel-copy-all" style="display:none;margin-bottom:var(--space-3);"></div>
+
+      <div id="intelligence-content" class="tab-loading" style="font-family:var(--font-body);color:var(--color-text-dim);padding:var(--space-4);">Click "Run Audit" to analyze the product.</div>
+
+      <!-- Audit history -->
+      <div id="intel-history" style="display:none;margin-top:var(--space-4);"></div>
+
+      <!-- V4: Decision Queue -->
+      <div id="intel-decision-queue" style="display:none;margin-top:var(--space-4);">
+        <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Decision Queue</h3>
+        <div id="intel-queue-cards" style="display:flex;flex-direction:column;gap:var(--space-2);"></div>
+      </div>
+
+      <!-- V4: Finding Lifecycle Kanban -->
+      <div id="intel-kanban" style="display:none;margin-top:var(--space-4);">
+        <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Finding Lifecycle</h3>
+        <div id="intel-kanban-board" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-2);"></div>
+      </div>
+
+      <!-- V4: Sprint Plan -->
+      <div id="intel-sprint-plan" style="display:none;margin-top:var(--space-4);">
+        <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Sprint Plan</h3>
+        <div id="intel-sprint-content"></div>
+      </div>
+
+      <!-- V4: Feedback Dashboard -->
+      <div id="intel-feedback-dash" style="display:none;margin-top:var(--space-4);">
+        <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Feedback Loops</h3>
+        <div id="intel-feedback-content" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);"></div>
+      </div>
+
+      <!-- V4: Engine Self-Assessment -->
+      <div id="intel-engine-meta" style="display:none;margin-top:var(--space-4);">
+        <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Engine Self-Assessment</h3>
+        <div id="intel-meta-content"></div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="admin-tab-content" id="tab-notifications">
+      <p class="tab-description">Actionable alerts across all systems. Items auto-clear when resolved.</p>
+      <div style="margin-bottom:var(--space-3);">
+        <button id="notif-mark-all-read" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">Mark all read</button>
+      </div>
+      <div id="notifications-content" class="tab-loading">Loading...</div>
+    </div>
+
+    <!-- AI Review Queue -->
+    <div class="admin-tab-content" id="tab-ai-review">
+      <p class="tab-description">AI-generated content awaiting human review. Verify provenance before approving.</p>
+      <div id="ai-review-content" class="tab-loading">Loading...</div>
     </div>
   </div>
 
-  <script>
-    fetch("/api/admin/metrics").then(function(r) { return r.json(); }).then(function(d) {
+  <script nonce="{{ csp_nonce }}">
+    /* ── Helpers ── */
+    function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+    function shortDate(s) { return s ? esc(s).substring(0, 19) : "—"; }
+    function severityBadge(s) {
+      var cls = "badge-info";
+      if (s === "ERROR" || s === "CRITICAL") cls = "badge-error";
+      else if (s === "WARNING") cls = "badge-warning";
+      return '<span class="badge ' + cls + '">' + esc(s) + '</span>';
+    }
+
+    /* ── Tab switching ── */
+    var loadedTabs = {};
+    var tabButtons = document.querySelectorAll(".admin-tab");
+    var tabContents = document.querySelectorAll(".admin-tab-content");
+
+    tabButtons.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        var tab = btn.getAttribute("data-tab");
+        tabButtons.forEach(function(b) { b.classList.remove("active"); });
+        tabContents.forEach(function(c) { c.classList.remove("active"); });
+        btn.classList.add("active");
+        document.getElementById("tab-" + tab).classList.add("active");
+        if (!loadedTabs[tab]) {
+          loadedTabs[tab] = true;
+          loadTab(tab);
+        }
+      });
+    });
+
+    /* ── Overview tab (load immediately) ── */
+    loadedTabs["overview"] = true;
+
+    function adminFetch(url) {
+      return fetch(url, {credentials: "same-origin"}).then(function(r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      });
+    }
+
+    var _metricsData = null;
+    adminFetch("/api/admin/metrics").then(function(d) {
+      _metricsData = d;
       var html = '';
-      html += '<div class="metric-card"><div class="metric-value">' + d.total_signups + '</div><div class="metric-label">Total Signups</div></div>';
-      html += '<div class="metric-card"><div class="metric-value">' + d.active_users_7d + '</div><div class="metric-label">Active (7d)</div></div>';
-      html += '<div class="metric-card"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
+      html += '<div class="metric-card" title="Total accounts created since launch"><div class="metric-value">' + d.total_signups + '</div><div class="metric-label">Total Signups</div></div>';
+      html += '<div class="metric-card" title="Users who completed at least 1 session in the last 7 days"><div class="metric-value">' + d.active_users_7d + '</div><div class="metric-label">Active (7d)</div></div>';
+      html += '<div class="metric-card" title="Total study sessions started in the last 7 days"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
+      // Retention cohorts
+      if (d.d1_eligible > 0 || d.d7_eligible > 0 || d.d30_eligible > 0) {
+        html += '<div class="metric-card" title="% of users who came back after 1 day. Higher = better retention."><div class="metric-value">' + d.d1 + '%</div><div class="metric-label">D1 (' + d.d1_eligible + ' eligible)</div></div>';
+        html += '<div class="metric-card" title="% of users who came back after 7 days. Higher = better retention."><div class="metric-value">' + d.d7 + '%</div><div class="metric-label">D7 (' + d.d7_eligible + ' eligible)</div></div>';
+        html += '<div class="metric-card" title="% of users who came back after 30 days. Higher = better retention."><div class="metric-value">' + d.d30 + '%</div><div class="metric-label">D30 (' + d.d30_eligible + ' eligible)</div></div>';
+      }
       var tiers = d.tier_distribution || {};
       for (var t in tiers) {
-        html += '<div class="metric-card"><div class="metric-value">' + tiers[t] + '</div><div class="metric-label">' + t + '</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + tiers[t] + '</div><div class="metric-label">' + esc(t) + '</div></div>';
       }
       document.getElementById("metrics-grid").innerHTML = html;
+
+      // Platform breakdown
+      var plat = (d.platform || {}).platforms || [];
+      if (plat.length > 0) {
+        var platLabels = {"ios": "iPhone / iPad", "android": "Android", "macos": "macOS (Tauri)", "web": "aeluapp.com", "web_local": "localhost", "cli": "CLI"};
+        var platHtml = '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Sessions by Platform (7d)</h3>';
+        platHtml += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Platform</th><th>Sessions</th><th>Users</th><th>Avg Accuracy</th><th>Avg Duration</th></tr></thead><tbody>';
+        plat.forEach(function(p) {
+          var dur = p.avg_duration_s ? Math.round(p.avg_duration_s / 60) + 'm' : '-';
+          platHtml += '<tr><td>' + esc(platLabels[p.name] || p.name) + '</td><td>' + p.sessions + '</td><td>' + p.users + '</td><td>' + (p.avg_accuracy != null ? p.avg_accuracy + '%' : '-') + '</td><td>' + dur + '</td></tr>';
+        });
+        platHtml += '</tbody></table></div>';
+        document.getElementById("metrics-grid").insertAdjacentHTML('afterend', platHtml);
+      }
+      loadHealthSummary();
+    }).catch(function(e) {
+      document.getElementById("metrics-grid").innerHTML = '<p class="tab-empty">Failed to load metrics: ' + esc(e.message) + '</p>';
     });
 
-    fetch("/api/admin/users").then(function(r) { return r.json(); }).then(function(d) {
-      var html = '<table class="admin-table"><thead><tr><th>Email</th><th>Name</th><th>Tier</th><th>Joined</th><th>Last Session</th></tr></thead><tbody>';
+    adminFetch("/api/admin/users").then(function(d) {
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Email</th><th>Name</th><th>Tier</th><th>Joined</th><th>Last Session</th></tr></thead><tbody>';
       (d.users || []).forEach(function(u) {
-        html += '<tr><td>' + u.email + '</td><td>' + (u.display_name || '') + '</td><td>' + u.tier + '</td><td>' + (u.created_at || '').substring(0, 10) + '</td><td>' + (u.last_session || 'Never').substring(0, 10) + '</td></tr>';
+        html += '<tr><td>' + esc(u.email) + '</td><td>' + esc(u.display_name || '') + '</td><td>' + esc(u.tier) + '</td><td>' + shortDate(u.created_at) + '</td><td>' + shortDate(u.last_session) + '</td></tr>';
       });
-      html += '</tbody></table>';
+      html += '</tbody></table></div>';
       document.getElementById("users-table").innerHTML = html;
+    }).catch(function(e) {
+      document.getElementById("users-table").innerHTML = '<p class="tab-empty">Failed to load users: ' + esc(e.message) + '</p>';
     });
 
-    fetch("/api/admin/feedback").then(function(r) { return r.json(); }).then(function(d) {
+    adminFetch("/api/admin/feedback").then(function(d) {
       if (!d.feedback || d.feedback.length === 0) {
-        document.getElementById("feedback-table").innerHTML = '<p style="color:var(--color-text-dim)">No feedback yet.</p>';
+        document.getElementById("feedback-table").innerHTML = '<p class="tab-empty">No feedback yet.</p>';
         return;
       }
-      var html = '<table class="admin-table"><thead><tr><th>Rating</th><th>Comment</th><th>Type</th><th>Date</th></tr></thead><tbody>';
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Rating</th><th>Comment</th><th>Type</th><th>Date</th></tr></thead><tbody>';
       d.feedback.forEach(function(f) {
-        html += '<tr><td>' + f.rating + '</td><td>' + (f.comment || '') + '</td><td>' + f.type + '</td><td>' + (f.created_at || '').substring(0, 10) + '</td></tr>';
+        html += '<tr><td>' + esc(String(f.rating)) + '</td><td>' + esc(f.comment || '') + '</td><td>' + esc(f.type) + '</td><td>' + shortDate(f.created_at) + '</td></tr>';
       });
-      html += '</tbody></table>';
+      html += '</tbody></table></div>';
       document.getElementById("feedback-table").innerHTML = html;
+    }).catch(function(e) {
+      document.getElementById("feedback-table").innerHTML = '<p class="tab-empty">Failed to load feedback: ' + esc(e.message) + '</p>';
     });
+
+    /* ── Funnel (overview tab, load immediately) ── */
+    adminFetch("/api/admin/funnel").then(function(d) {
+      var el = document.getElementById("funnel-content");
+      var stages = d.stages || [];
+      if (stages.length === 0) { el.innerHTML = '<p class="tab-empty">No funnel data yet.</p>'; return; }
+
+      var maxCount = stages[0].count || 1;
+      var html = '<div class="funnel-stages">';
+      stages.forEach(function(s, i) {
+        var widthPct = Math.max(8, Math.round((s.count / maxCount) * 100));
+        html += '<div class="funnel-stage">';
+        html += '<div class="funnel-stage-name">' + esc(s.stage) + '</div>';
+        html += '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + widthPct + '%"><span class="funnel-bar-label">' + s.count + '</span></div></div>';
+        html += '</div>';
+        if (i > 0 && i < stages.length) {
+          html += '<div class="funnel-arrow">' + s.rate + '% from previous stage</div>';
+        }
+      });
+      html += '</div>';
+
+      // Overall signup to paid
+      html += '<div style="margin-top:var(--space-3);font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text-dim);">Overall signup-to-paid: <strong style="color:var(--color-accent);">' + (d.overall_rate || 0) + '%</strong></div>';
+
+      // UTM source breakdown
+      var sources = d.by_source || [];
+      if (sources.length > 0) {
+        html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Funnel by UTM Source</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Source</th><th>Signups</th><th>1st Session</th><th>Activated</th><th>Paid</th><th>Signup-to-Paid</th></tr></thead><tbody>';
+        sources.forEach(function(s) {
+          html += '<tr><td>' + esc(s.source) + '</td><td>' + s.signups + '</td><td>' + s.first_session + '</td><td>' + s.activated + '</td><td>' + s.paid + '</td><td>' + s.signup_to_paid_pct + '%</td></tr>';
+        });
+        html += '</tbody></table></div>';
+      }
+
+      el.innerHTML = html;
+    }).catch(function(e) {
+      document.getElementById("funnel-content").innerHTML = '<p class="tab-empty">Failed to load funnel data: ' + esc(e.message) + '</p>';
+    });
+
+    // Load onboarding funnel
+    adminFetch("/api/admin/onboarding-funnel").then(function(d) {
+      var el = document.getElementById("onboarding-funnel-content");
+      var stages = d.stages || [];
+      if (stages.length === 0) { el.innerHTML = '<p class="tab-empty">No onboarding data yet.</p>'; return; }
+      var maxCount = stages[0].count || 1;
+      var html = '<div class="funnel-stages">';
+      stages.forEach(function(s, i) {
+        var widthPct = Math.max(5, Math.round((s.count / maxCount) * 100));
+        html += '<div class="funnel-stage">';
+        html += '<div class="funnel-stage-name">' + esc(s.stage) + '</div>';
+        html += '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + widthPct + '%"><span class="funnel-bar-label">' + s.count + '</span></div></div>';
+        html += '</div>';
+        if (i > 0 && stages[i - 1].count > 0) {
+          var rate = Math.round(s.count / stages[i - 1].count * 100);
+          html += '<div class="funnel-arrow">' + rate + '% from previous stage</div>';
+        }
+      });
+      html += '</div>';
+      el.innerHTML = html;
+    }).catch(function(e) {
+      document.getElementById("onboarding-funnel-content").innerHTML = '<p class="tab-empty">Failed to load onboarding funnel.</p>';
+    });
+
+    /* ── Lazy tab loaders ── */
+    function loadTab(tab) {
+      var loaders = {
+        "issues": loadIssues,
+        "sessions": loadSessions,
+        "security": function() { loadSecurityScans(); loadSecurity(); },
+        "revenue": loadRevenue,
+        "retention": loadRetention,
+        "engagement": function() { loadEngagement(); loadCompletionSegments(); },
+        "partners": loadPartners,
+        "content": loadContentTab,
+        "quality": loadQuality,
+        "intelligence": loadIntelligence,
+        "notifications": loadNotifications,
+        "ai-review": loadAiReview,
+      };
+      if (loaders[tab]) loaders[tab]();
+    }
+
+    function loadIssues() {
+      loadCrashes();
+      loadClientErrors();
+      loadErrorPatterns();
+    }
+
+    function loadCrashes() {
+      adminFetch("/api/admin/crashes").then(function(d) {
+        var el = document.getElementById("crashes-content");
+        if (!d.crashes || d.crashes.length === 0) { el.innerHTML = '<p class="tab-empty">No server crashes recorded.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>Type</th><th>Message</th><th>Path</th><th>User</th><th>Severity</th><th></th></tr></thead><tbody>';
+        d.crashes.forEach(function(c, i) {
+          html += '<tr><td>' + shortDate(c.timestamp) + '</td><td>' + esc(c.error_type) + '</td><td>' + esc((c.error_message || '').substring(0, 80)) + '</td><td>' + esc((c.method || '') + ' ' + (c.path || '')) + '</td><td>' + esc(c.user_name || (c.user_id ? '#' + c.user_id : '—')) + '</td><td>' + severityBadge(c.severity) + '</td><td>';
+          if (c.traceback) {
+            html += '<span class="tb-toggle" data-tb="crash-tb-' + i + '">traceback</span>';
+          }
+          html += '</td></tr>';
+          if (c.traceback) {
+            html += '<tr><td colspan="7"><div class="tb-content" id="crash-tb-' + i + '"><pre>' + esc(c.traceback) + '</pre></div></td></tr>';
+          }
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+        el.querySelectorAll(".tb-toggle").forEach(function(t) {
+          t.addEventListener("click", function() {
+            var target = document.getElementById(t.getAttribute("data-tb"));
+            if (target) target.classList.toggle("open");
+          });
+        });
+      }).catch(function() {
+        document.getElementById("crashes-content").innerHTML = '<p class="tab-empty">Failed to load crash data.</p>';
+      });
+    }
+
+    function loadClientErrors() {
+      adminFetch("/api/admin/client-errors").then(function(d) {
+        var el = document.getElementById("client-errors-content");
+        if (!d.errors || d.errors.length === 0) { el.innerHTML = '<p class="tab-empty">No client errors recorded.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>Type</th><th>Message</th><th>Source</th><th>Line</th><th>Page</th><th>User</th><th></th></tr></thead><tbody>';
+        d.errors.forEach(function(e, i) {
+          html += '<tr><td>' + shortDate(e.timestamp) + '</td><td>' + esc(e.error_type) + '</td><td>' + esc((e.error_message || '').substring(0, 80)) + '</td><td>' + esc((e.source || '').split('/').pop()) + '</td><td>' + (e.line || '—') + '</td><td>' + esc((e.page_url || '').replace(/^https?:\/\/[^/]+/, '')) + '</td><td>' + esc(e.user_name || (e.user_id ? '#' + e.user_id : '—')) + '</td><td>';
+          if (e.stack) {
+            html += '<span class="tb-toggle" data-tb="ce-tb-' + i + '">stack</span>';
+          }
+          html += '</td></tr>';
+          if (e.stack) {
+            html += '<tr><td colspan="8"><div class="tb-content" id="ce-tb-' + i + '"><pre>' + esc(e.stack) + '</pre></div></td></tr>';
+          }
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+        el.querySelectorAll(".tb-toggle").forEach(function(t) {
+          t.addEventListener("click", function() {
+            var target = document.getElementById(t.getAttribute("data-tb"));
+            if (target) target.classList.toggle("open");
+          });
+        });
+      }).catch(function() {
+        document.getElementById("client-errors-content").innerHTML = '<p class="tab-empty">Failed to load client error data.</p>';
+      });
+    }
+
+    function loadSessions() {
+      adminFetch("/api/admin/sessions").then(function(d) {
+        var el = document.getElementById("sessions-content");
+        if (!d.sessions || d.sessions.length === 0) { el.innerHTML = '<p class="tab-empty">No sessions recorded.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>User</th><th>Type</th><th>Items</th><th>Correct</th><th>Outcome</th><th>Duration</th></tr></thead><tbody>';
+        d.sessions.forEach(function(s) {
+          var dur = s.duration ? Math.round(s.duration / 60) + 'm' : '—';
+          html += '<tr><td>' + shortDate(s.started_at) + '</td><td>' + esc(s.user_name || (s.user_id ? '#' + s.user_id : '—')) + '</td><td>' + esc(s.type) + '</td><td>' + (s.items_completed || 0) + '/' + (s.items_planned || 0) + '</td><td>' + (s.items_correct || 0) + '</td><td>' + esc(s.outcome || '—') + '</td><td>' + dur + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("sessions-content").innerHTML = '<p class="tab-empty">Failed to load session data.</p>';
+      });
+    }
+
+    function loadSecurityScans() {
+      adminFetch("/api/admin/security-scans").then(function(d) {
+        var el = document.getElementById("security-scans-content");
+        if (!d.scans || d.scans.length === 0) { el.innerHTML = '<p class="tab-empty">No security scans yet.</p><button class="btn btn-sm" onclick="triggerScan()" style="margin-top:var(--space-2)">Run Scan Now</button>'; return; }
+        var latest = d.scans[0];
+        var summary = {};
+        try { summary = JSON.parse(latest.summary || "{}"); } catch(e) {}
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (summary.high || 0) + '</div><div class="metric-label">HIGH</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (summary.medium || 0) + '</div><div class="metric-label">MEDIUM</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (summary.low || 0) + '</div><div class="metric-label">LOW</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + esc(latest.status) + '</div><div class="metric-label">Last: ' + shortDate(latest.started_at) + '</div></div>';
+        html += '</div>';
+        html += '<button class="btn btn-sm" onclick="triggerScan()" style="margin-top:var(--space-2);margin-bottom:var(--space-3)">Run Scan Now</button>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Date</th><th>Type</th><th>Status</th><th>Duration</th><th>HIGH</th><th>MED</th><th>LOW</th><th></th></tr></thead><tbody>';
+        d.scans.forEach(function(s) {
+          var sm = {};
+          try { sm = JSON.parse(s.summary || "{}"); } catch(e) {}
+          html += '<tr><td>' + shortDate(s.started_at) + '</td><td>' + esc(s.scan_type) + '</td><td>' + esc(s.status) + '</td><td>' + (s.duration_seconds || 0) + 's</td>';
+          html += '<td>' + (sm.high || 0) + '</td><td>' + (sm.medium || 0) + '</td><td>' + (sm.low || 0) + '</td>';
+          html += '<td><a href="#" onclick="viewScanDetail(' + s.id + ');return false">Details</a></td></tr>';
+        });
+        html += '</tbody></table></div>';
+        html += '<div id="scan-detail-panel"></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("security-scans-content").innerHTML = '<p class="tab-empty">Failed to load security scans.</p>';
+      });
+    }
+
+    function triggerScan() {
+      var el = document.getElementById("security-scans-content");
+      el.innerHTML = '<p class="tab-loading">Running scan... this may take a minute.</p>';
+      fetch("/api/admin/security-scans/trigger", { method: "POST", headers: { "X-Requested-With": "XMLHttpRequest" } })
+        .then(function(r) { return r.json(); })
+        .then(function() { loadSecurityScans(); })
+        .catch(function() { el.innerHTML = '<p class="tab-empty">Scan failed.</p>'; });
+    }
+
+    function viewScanDetail(scanId) {
+      adminFetch("/api/admin/security-scans/" + scanId).then(function(d) {
+        var el = document.getElementById("scan-detail-panel");
+        if (!d.findings || d.findings.length === 0) { el.innerHTML = '<p style="margin-top:var(--space-3)">No findings for this scan.</p>'; return; }
+        var html = '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading)">Findings (' + d.findings.length + ')</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Severity</th><th>Category</th><th>Title</th><th>File / Package</th><th>Description</th></tr></thead><tbody>';
+        d.findings.forEach(function(f) {
+          var loc = f.file_path ? esc(f.file_path) + (f.line_number ? ':' + f.line_number : '') : esc(f.package_name || '');
+          if (f.installed_version) loc += ' (' + esc(f.installed_version) + ')';
+          html += '<tr><td>' + severityBadge(f.severity) + '</td><td>' + esc(f.category) + '</td><td>' + esc(f.title) + '</td><td style="font-family:monospace;font-size:var(--text-xs)">' + loc + '</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis">' + esc((f.description || '').substring(0, 120)) + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("scan-detail-panel").innerHTML = '<p class="tab-empty">Failed to load scan details.</p>';
+      });
+    }
+
+    function loadSecurity() {
+      adminFetch("/api/admin/security-events").then(function(d) {
+        var el = document.getElementById("security-content");
+        if (!d.events || d.events.length === 0) { el.innerHTML = '<p class="tab-empty">No security events recorded.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Time</th><th>Event</th><th>User</th><th>IP</th><th>Severity</th><th>Details</th></tr></thead><tbody>';
+        d.events.forEach(function(e) {
+          html += '<tr><td>' + shortDate(e.timestamp) + '</td><td>' + esc(e.event_type) + '</td><td>' + esc(e.user_name || (e.user_id ? '#' + e.user_id : '—')) + '</td><td>' + esc(e.ip || '—') + '</td><td>' + severityBadge(e.severity) + '</td><td>' + esc((e.details || '').substring(0, 100)) + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("security-content").innerHTML = '<p class="tab-empty">Failed to load security data.</p>';
+      });
+    }
+
+    function loadErrorPatterns() {
+      adminFetch("/api/admin/error-patterns").then(function(d) {
+        var el = document.getElementById("error-patterns-content");
+        if (!d.patterns || d.patterns.length === 0) { el.innerHTML = '<p class="tab-empty">No unresolved error patterns.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Hanzi</th><th>Pinyin</th><th>English</th><th>Error Type</th><th>Count</th><th>User</th><th>Last Error</th><th>Streak</th></tr></thead><tbody>';
+        d.patterns.forEach(function(p) {
+          html += '<tr><td class="hanzi">' + esc(p.hanzi) + '</td><td>' + esc(p.pinyin) + '</td><td>' + esc(p.english) + '</td><td>' + esc(p.error_type) + '</td><td>' + p.count + '</td><td>' + esc(p.user_name || (p.user_id ? '#' + p.user_id : '—')) + '</td><td>' + shortDate(p.last_error) + '</td><td>' + (p.consecutive_correct || 0) + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("error-patterns-content").innerHTML = '<p class="tab-empty">Failed to load error pattern data.</p>';
+      });
+    }
+
+    function loadRevenue() {
+      adminFetch("/api/admin/revenue").then(function(d) {
+        var el = document.getElementById("revenue-content");
+        if (d.error) { el.innerHTML = '<p class="tab-empty">' + esc(d.error) + '</p>'; return; }
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card" title="Monthly Recurring Revenue \u2014 what you\'d earn this month if nothing changed"><div class="metric-value">$' + (d.mrr || 0).toLocaleString() + '</div><div class="metric-label">MRR</div></div>';
+        html += '<div class="metric-card" title="Annual Recurring Revenue \u2014 MRR \u00d7 12"><div class="metric-value">$' + (d.arr || 0).toLocaleString() + '</div><div class="metric-label">ARR</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (d.paid_users || 0) + '</div><div class="metric-label">Paid Users</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (d.teacher_users || 0) + '</div><div class="metric-label">Teacher Users</div></div>';
+        html += '<div class="metric-card" title="% of free users who upgraded to paid"><div class="metric-value">' + (d.conversion_rate || 0) + '%</div><div class="metric-label">Conversion Rate</div></div>';
+        html += '<div class="metric-card" title="% of paid users who cancelled in the last 30 days. Lower = better."><div class="metric-value">' + (d.churn_rate || 0) + '%</div><div class="metric-label">Churn Rate (30d)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (d.churn_count_30d || 0) + '</div><div class="metric-label">Cancellations (30d)</div></div>';
+        html += '<div class="metric-card" title="Estimated total revenue per user over their lifetime"><div class="metric-value">$' + (d.estimated_ltv || 0).toLocaleString() + '</div><div class="metric-label">Est. LTV</div></div>';
+        html += '</div>';
+
+        // Channel breakdown
+        if (d.channel_revenue) {
+          html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Revenue by Channel</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Channel</th><th>Monthly Revenue</th></tr></thead><tbody>';
+          for (var ch in d.channel_revenue) {
+            html += '<tr><td>' + esc(ch.replace(/_/g, ' ')) + '</td><td>$' + d.channel_revenue[ch].toLocaleString() + '</td></tr>';
+          }
+          html += '</tbody></table></div>';
+        }
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("revenue-content").innerHTML = '<p class="tab-empty">Failed to load revenue data.</p>';
+      });
+    }
+
+    function loadRetention() {
+      adminFetch("/api/admin/retention-cohorts").then(function(d) {
+        var el = document.getElementById("retention-content");
+        if (!d.cohorts || d.cohorts.length === 0) { el.innerHTML = '<p class="tab-empty">No cohort data yet.</p>'; return; }
+
+        var weeks = [];
+        for (var w = 1; w <= 12; w++) weeks.push("W" + w);
+
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Cohort</th><th>Size</th>';
+        weeks.forEach(function(w) { html += '<th>' + w + '</th>'; });
+        html += '</tr></thead><tbody>';
+
+        d.cohorts.forEach(function(c) {
+          html += '<tr><td>' + esc(c.cohort) + '<br><span style="font-size:var(--text-xs);color:var(--color-text-faint);">' + esc(c.week_start) + '</span></td>';
+          html += '<td>' + c.size + '</td>';
+          for (var w = 1; w <= 12; w++) {
+            var pct = (c.retention && c.retention["w" + w]) || 0;
+            var bg = pct >= 50 ? 'var(--color-correct)' : pct >= 25 ? 'var(--color-mastery-stabilizing)' : pct > 0 ? 'var(--color-incorrect)' : 'transparent';
+            var fg = pct > 0 ? 'var(--color-on-accent)' : 'var(--color-text-faint)';
+            var cellTitle = pct > 0 ? 'W' + w + ': ' + pct + '% of users from ' + esc(c.cohort) + ' were still active ' + w + ' weeks later' : '';
+            html += '<td style="background:' + bg + ';color:' + fg + ';text-align:center;font-weight:600;font-size:var(--text-xs);" title="' + cellTitle + '">' + (pct > 0 ? pct + '%' : '\u2014') + '</td>';
+          }
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("retention-content").innerHTML = '<p class="tab-empty">Failed to load retention data.</p>';
+      });
+    }
+
+    function loadEngagement() {
+      adminFetch("/api/admin/engagement").then(function(d) {
+        var el = document.getElementById("engagement-content");
+        var html = '';
+
+        // Metric cards
+        html += '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (d.avg_sessions_per_active_user || 0) + '</div><div class="metric-label">Avg Sessions / Active User / Day</div></div>';
+        var totalSessions30d = (d.daily_sessions || []).reduce(function(s, x) { return s + x.total_sessions; }, 0);
+        html += '<div class="metric-card"><div class="metric-value">' + totalSessions30d + '</div><div class="metric-label">Total Sessions (30d)</div></div>';
+        var totalUniqueUsers30d = new Set();
+        (d.daily_sessions || []).forEach(function(x) { totalUniqueUsers30d.add(x.date); });
+        html += '<div class="metric-card"><div class="metric-value">' + (d.daily_sessions || []).length + '</div><div class="metric-label">Active Days (30d)</div></div>';
+        html += '</div>';
+
+        // Daily session volume bar chart (SVG)
+        var days = d.daily_sessions || [];
+        if (days.length > 0) {
+          html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Daily Session Volume</h3>';
+          var maxSessions = Math.max.apply(null, days.map(function(x) { return x.total_sessions; }));
+          if (maxSessions === 0) maxSessions = 1;
+          var svgW = 700, svgH = 140, barW = Math.max(6, Math.floor((svgW - 40) / days.length) - 2);
+          html += '<svg width="100%" viewBox="0 0 ' + svgW + ' ' + svgH + '" style="max-width:' + svgW + 'px;display:block;margin:var(--space-2) 0;">';
+          days.forEach(function(day, i) {
+            var barH = Math.max(2, (day.total_sessions / maxSessions) * (svgH - 30));
+            var x = 30 + i * (barW + 2);
+            var y = svgH - 20 - barH;
+            html += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + barH + '" fill="var(--color-accent)" rx="2">';
+            html += '<title>' + esc(day.date) + ': ' + day.total_sessions + ' sessions, ' + day.unique_users + ' users</title></rect>';
+          });
+          // X-axis labels (every 5th day)
+          days.forEach(function(day, i) {
+            if (i % 5 === 0) {
+              var x = 30 + i * (barW + 2) + barW / 2;
+              html += '<text x="' + x + '" y="' + (svgH - 4) + '" text-anchor="middle" font-size="9" fill="var(--color-text-dim)">' + day.date.slice(5) + '</text>';
+            }
+          });
+          html += '</svg>';
+
+          // Sessions per user sparkline
+          html += '<h3 style="margin-top:var(--space-3);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Sessions per Active User</h3>';
+          var maxSPU = Math.max.apply(null, days.map(function(x) { return x.sessions_per_user; }));
+          if (maxSPU === 0) maxSPU = 1;
+          html += '<svg width="100%" viewBox="0 0 ' + svgW + ' 80" style="max-width:' + svgW + 'px;display:block;margin:var(--space-2) 0;">';
+          var points = days.map(function(day, i) {
+            var x = 30 + i * ((svgW - 60) / Math.max(1, days.length - 1));
+            var y = 70 - (day.sessions_per_user / maxSPU) * 60;
+            return x + ',' + y;
+          }).join(' ');
+          html += '<polyline points="' + points + '" fill="none" stroke="var(--color-accent)" stroke-width="2" />';
+          html += '</svg>';
+        }
+
+        // Top error types
+        var errors = d.top_error_types || [];
+        if (errors.length > 0) {
+          html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Top Error Types (Aggregate)</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Error Type</th><th>Total Count</th><th>Last 7d</th><th>Prev 7d</th><th>Trend</th></tr></thead><tbody>';
+          errors.forEach(function(e) {
+            var arrow = e.trend === 'up' ? '\u2191' : e.trend === 'down' ? '\u2193' : '\u2192';
+            var color = e.trend === 'up' ? 'var(--color-incorrect)' : e.trend === 'down' ? 'var(--color-correct)' : 'var(--color-text-dim)';
+            html += '<tr><td>' + esc(e.error_type) + '</td><td>' + e.count + '</td><td>' + e.recent_7d + '</td><td>' + e.prev_7d + '</td><td style="color:' + color + ';font-weight:600;">' + arrow + '</td></tr>';
+          });
+          html += '</tbody></table></div>';
+        }
+
+        el.innerHTML = html;
+      }).catch(function(e) {
+        document.getElementById("engagement-content").innerHTML = '<p class="tab-empty">Failed to load engagement data: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    function loadCompletionSegments() {
+      adminFetch("/api/admin/completion-segments").then(function(d) {
+        var el = document.getElementById("completion-segments-content");
+        var html = '';
+
+        // By session type
+        var byType = d.by_type || [];
+        if (byType.length > 0) {
+          html += '<h3 style="font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);margin-bottom:var(--space-2);">By Session Type</h3>';
+          html += '<div class="segment-grid">';
+          byType.forEach(function(s) {
+            html += '<div class="segment-card">';
+            html += '<div class="segment-card-title">' + esc(s.segment) + '</div>';
+            html += '<div class="segment-card-value">' + s.avg_completion + '%</div>';
+            html += '<div class="segment-card-sub">' + s.count + ' sessions, avg ' + s.avg_items + ' items</div>';
+            html += '</div>';
+          });
+          html += '</div>';
+        }
+
+        // By time of day
+        var byTime = d.by_time || [];
+        if (byTime.length > 0) {
+          html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);margin-bottom:var(--space-2);">By Time of Day</h3>';
+          html += '<div class="segment-grid">';
+          var timeLabels = { morning: "Morning (6\u201312)", afternoon: "Afternoon (12\u201318)", evening: "Evening (18\u201324)", night: "Night (0\u20136)" };
+          byTime.forEach(function(s) {
+            html += '<div class="segment-card">';
+            html += '<div class="segment-card-title">' + esc(timeLabels[s.segment] || s.segment) + '</div>';
+            html += '<div class="segment-card-value">' + s.avg_completion + '%</div>';
+            html += '<div class="segment-card-sub">' + s.count + ' sessions, avg ' + s.avg_items + ' items</div>';
+            html += '</div>';
+          });
+          html += '</div>';
+        }
+
+        if (byType.length === 0 && byTime.length === 0) {
+          html = '<p class="tab-empty">No completion segment data yet.</p>';
+        }
+
+        el.innerHTML = html;
+      }).catch(function(e) {
+        document.getElementById("completion-segments-content").innerHTML = '<p class="tab-empty">Failed to load completion segments: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    function loadPartners() {
+      adminFetch("/api/admin/partners").then(function(d) {
+        var el = document.getElementById("partners-content");
+        var html = '';
+
+        // Affiliate partners
+        var partners = d.partners || [];
+        if (partners.length > 0) {
+          html += '<h3 style="font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Affiliate Partners</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Partner</th><th>Code</th><th>Status</th><th>Referrals</th><th>Signups</th><th>Activated</th><th>Paid</th><th>Sessions</th><th>Commission</th></tr></thead><tbody>';
+          partners.forEach(function(p) {
+            html += '<tr><td>' + esc(p.partner_name) + '</td><td>' + esc(p.partner_code) + '</td><td>' + esc(p.status) + '</td><td>' + p.total_referrals + '</td><td>' + p.signups + '</td><td>' + p.activated + '</td><td>' + p.paid_conversions + '</td><td>' + p.total_sessions + '</td><td>$' + (p.total_commission || 0).toFixed(2) + '</td></tr>';
+          });
+          html += '</tbody></table></div>';
+        } else {
+          html += '<p class="tab-empty">No affiliate partners yet.</p>';
+        }
+
+        // UTM source attribution
+        var utms = d.utm_sources || [];
+        if (utms.length > 0) {
+          html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">UTM Source Attribution</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Source</th><th>Signups</th><th>Activated</th><th>Paid</th><th>Sessions</th></tr></thead><tbody>';
+          utms.forEach(function(u) {
+            html += '<tr><td>' + esc(u.source) + '</td><td>' + u.signups + '</td><td>' + u.activated + '</td><td>' + u.paid + '</td><td>' + u.total_sessions + '</td></tr>';
+          });
+          html += '</tbody></table></div>';
+        }
+
+        if (partners.length === 0 && utms.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No partner or attribution data yet.</p>';
+        } else {
+          el.innerHTML = html;
+        }
+      }).catch(function(e) {
+        document.getElementById("partners-content").innerHTML = '<p class="tab-empty">Failed to load partner data: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    /* ── Health summary banner ── */
+    function loadHealthSummary() {
+      var el = document.getElementById("health-summary");
+      var issues = [];
+      var level = "green";
+
+      // Fetch crashes and engagement in parallel
+      Promise.all([
+        adminFetch("/api/admin/crashes").catch(function() { return {crashes: []}; }),
+        adminFetch("/api/admin/engagement").catch(function() { return {top_error_types: [], top_crash_types: [], daily_sessions: []}; })
+      ]).then(function(results) {
+        var crashData = results[0];
+        var engData = results[1];
+
+        // Red: crashes in last 24h
+        var recentCrashes = (crashData.crashes || []).filter(function(c) {
+          if (!c.timestamp) return false;
+          var ts = new Date(c.timestamp);
+          return (Date.now() - ts.getTime()) < 86400000;
+        });
+        if (recentCrashes.length > 0) {
+          level = "red";
+          issues.push(recentCrashes.length + " crash(es) in the last 24 hours");
+        }
+
+        // Red: error trend up
+        var upErrors = (engData.top_error_types || []).filter(function(e) { return e.trend === "up"; });
+        var upCrashes = (engData.top_crash_types || []).filter(function(e) { return e.trend === "up"; });
+        if (upErrors.length > 0 || upCrashes.length > 0) {
+          if (level !== "red") level = "red";
+          var upCount = upErrors.length + upCrashes.length;
+          issues.push(upCount + " error type(s) trending up");
+        }
+
+        // Yellow: no sessions in 3 days
+        var dailySessions = engData.daily_sessions || [];
+        if (dailySessions.length >= 3) {
+          var lastThree = dailySessions.slice(-3);
+          var noActivity = lastThree.every(function(d) { return d.total_sessions === 0; });
+          if (noActivity && level === "green") {
+            level = "yellow";
+            issues.push("No sessions in 3+ days");
+          }
+        }
+
+        // Yellow: D7 retention below 20%
+        if (_metricsData && _metricsData.d7_eligible > 0 && _metricsData.d7 < 20) {
+          if (level === "green") level = "yellow";
+          issues.push("D7 retention is " + _metricsData.d7 + "% (below 20%)");
+        }
+
+        // Render
+        el.className = "health-summary health-" + level;
+        if (level === "green") {
+          el.textContent = "Everything looks healthy. No crashes, no errors trending up.";
+        } else if (level === "yellow") {
+          el.textContent = "Heads up: " + issues.join(". ") + ". Worth mentioning next session.";
+        } else {
+          el.textContent = "Something needs attention: " + issues.join(". ") + ". Flag this immediately.";
+        }
+      }).catch(function() {
+        el.textContent = "Could not determine system health.";
+        el.className = "health-summary";
+      });
+    }
+
+    /* ── Content ingestion ── */
+    function loadContentTab() {
+      // Load catalog table
+      adminFetch("/api/admin/content-catalog").then(function(d) {
+        var el = document.getElementById("catalog-table");
+        var entries = d.entries || [];
+        if (entries.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No catalog entries yet. Use the form above to add content.</p>';
+          return;
+        }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Title</th><th>HSK</th><th>Platform</th><th>URL</th><th>Verified</th><th>Added</th></tr></thead><tbody>';
+        entries.forEach(function(e) {
+          html += '<tr><td>' + esc(e.title) + '</td><td>' + (e.hsk_level || '—') + '</td><td>' + esc(e.platform || '—') + '</td><td><a href="' + esc(e.url) + '" target="_blank" rel="noopener" style="color:var(--color-accent);">link</a></td><td>' + (e.verified ? 'Yes' : 'No') + '</td><td>' + shortDate(e.added_at) + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("catalog-table").innerHTML = '<p class="tab-empty">Failed to load catalog.</p>';
+      });
+    }
+
+    // Content ingest form submission
+    document.getElementById("content-ingest-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var status = document.getElementById("ingest-status");
+
+      // Build quiz questions
+      var quizQuestions = [];
+      for (var qi = 0; qi < 3; qi++) {
+        var qText = form.elements["q" + qi + "_text"].value.trim();
+        if (!qText) continue;
+        var options = [];
+        for (var ai = 0; ai < 4; ai++) {
+          var opt = form.elements["q" + qi + "_a" + ai].value.trim();
+          if (opt) options.push(opt);
+        }
+        if (options.length < 2) continue;
+        quizQuestions.push({
+          question: qText,
+          options: options,
+          correct: parseInt(form.elements["q" + qi + "_correct"].value) || 0
+        });
+      }
+
+      if (quizQuestions.length === 0) {
+        status.textContent = "At least 1 quiz question with 2+ options is required.";
+        status.style.color = "var(--color-incorrect)";
+        return;
+      }
+
+      var payload = {
+        url: form.elements.url.value.trim(),
+        title: form.elements.title.value.trim(),
+        title_zh: form.elements.title_zh.value.trim(),
+        platform: form.elements.platform.value,
+        content_type: form.elements.content_type.value,
+        hsk_level: parseInt(form.elements.hsk_level.value) || 1,
+        summary: form.elements.summary.value.trim(),
+        tags: form.elements.tags.value.split(",").map(function(t) { return t.trim(); }).filter(Boolean),
+        curator_note: form.elements.curator_note.value.trim(),
+        key_vocab: form.elements.key_vocab.value.split(",").map(function(t) { return t.trim(); }).filter(Boolean),
+        quiz_questions: quizQuestions,
+        verified: form.elements.verified.checked
+      };
+
+      status.textContent = "Submitting...";
+      status.style.color = "var(--color-text-dim)";
+
+      fetch("/api/admin/content-ingest", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {"Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest"},
+        body: JSON.stringify(payload)
+      }).then(function(r) { return r.json().then(function(data) { return {ok: r.ok, data: data}; }); })
+        .then(function(result) {
+          if (result.ok) {
+            status.textContent = "Added: " + esc(result.data.title || payload.title);
+            status.style.color = "var(--color-correct)";
+            form.reset();
+            form.elements.verified.checked = true;
+            // Reload catalog
+            loadContentTab();
+          } else {
+            status.textContent = "Error: " + esc(result.data.error || "Unknown error");
+            status.style.color = "var(--color-incorrect)";
+          }
+        }).catch(function(err) {
+          status.textContent = "Network error: " + err.message;
+          status.style.color = "var(--color-incorrect)";
+        });
+    });
+
+    function loadQuality() {
+      loadDPMO();
+      loadSPC();
+      loadCapability();
+      loadRetentionAnalysis();
+      loadFlowMetrics();
+      loadRisks();
+      loadWorkItems();
+      loadExperiments();
+    }
+
+    function loadExperiments() {
+      adminFetch("/api/admin/experiments").then(function(d) {
+        var el = document.getElementById("experiments-content");
+        if (!d.experiments || d.experiments.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No experiments registered. Use the experiment module to create one.</p>';
+          return;
+        }
+        var html = '';
+        d.experiments.forEach(function(exp) {
+          // Status badge
+          var statusColors = {running: 'var(--color-correct)', paused: 'var(--color-secondary)', concluded: 'var(--color-text-dim)', draft: 'var(--color-text-dim)'};
+          var statusColor = statusColors[exp.status] || 'var(--color-text-dim)';
+
+          // Significance indicator
+          var sig = exp.significant
+            ? '<span style="color:var(--color-correct);font-weight:600;">&#10003; Significant</span>'
+            : '<span style="color:var(--color-text-dim);">Not significant</span>';
+
+          html += '<div style="margin-bottom:var(--space-4);padding:var(--space-3);background:var(--color-surface);border-radius:6px;">';
+          html += '<h3 style="font-family:var(--font-heading);margin-bottom:var(--space-2);">' + esc(exp.name) + '</h3>';
+          html += '<p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-2);">' + esc(exp.description || '') + '</p>';
+
+          // Status line
+          html += '<p style="font-size:var(--text-sm);margin-bottom:var(--space-2);">';
+          html += 'Status: <span style="color:' + statusColor + ';font-weight:600;">' + esc(exp.status) + '</span>';
+          html += ' &middot; Traffic: ' + (exp.traffic_pct || 100) + '%';
+          html += ' &middot; ' + sig;
+          if (exp.p_value != null) html += ' (p=' + exp.p_value + ')';
+          if (exp.effect_size != null) html += ' &middot; d=' + exp.effect_size;
+          if (exp.ci_95) html += ' &middot; CI=[' + exp.ci_95[0] + ', ' + exp.ci_95[1] + ']';
+          html += '</p>';
+
+          // Sample size progress bar
+          var variantNames = exp.variant_names || [];
+          var variants = exp.variants || {};
+          var minSample = exp.min_sample_size || 100;
+          var totalUsers = 0;
+          variantNames.forEach(function(v) { totalUsers += (variants[v] || {}).users || 0; });
+          var progress = Math.min(100, Math.round(totalUsers / (minSample * variantNames.length) * 100));
+          html += '<div style="margin-bottom:var(--space-2);">';
+          html += '<div style="font-size:var(--text-xs);margin-bottom:4px;">Sample: ' + totalUsers + ' / ' + (minSample * variantNames.length) + ' (' + progress + '%)</div>';
+          html += '<div style="background:var(--color-base);height:8px;border-radius:4px;overflow:hidden;">';
+          html += '<div style="background:' + (exp.min_sample_met ? 'var(--color-correct)' : 'var(--color-accent)') + ';height:100%;width:' + progress + '%;transition:width 0.3s;"></div>';
+          html += '</div></div>';
+
+          // Variant table
+          html += '<table class="admin-table" style="font-size:var(--text-sm);"><thead><tr><th>Variant</th><th>Users</th><th>Sessions</th><th>Completion Rate</th><th>Accuracy</th><th>Avg Duration</th></tr></thead><tbody>';
+          variantNames.forEach(function(v, i) {
+            var vd = variants[v] || {};
+            var label = i === 0 ? esc(v) + ' (control)' : esc(v);
+            html += '<tr><td>' + label + '</td>';
+            html += '<td>' + (vd.users || 0) + '</td>';
+            html += '<td>' + (vd.sessions || 0) + '</td>';
+            html += '<td>' + (vd.completion_rate || 0) + '%</td>';
+            html += '<td>' + (vd.avg_accuracy || 0) + '%</td>';
+            html += '<td>' + (vd.avg_duration || 0) + 's</td></tr>';
+          });
+          html += '</tbody></table>';
+
+          // Guardrail status
+          var guardrails = exp.guardrails || {};
+          var gKeys = Object.keys(guardrails);
+          if (gKeys.length > 0) {
+            html += '<div style="margin-top:var(--space-2);font-size:var(--text-sm);">';
+            html += '<strong>Guardrails:</strong> ';
+            gKeys.forEach(function(gk) {
+              var g = guardrails[gk];
+              var color = g.degraded ? 'var(--color-incorrect)' : 'var(--color-correct)';
+              var icon = g.degraded ? '&#10007;' : '&#10003;';
+              html += '<span style="color:' + color + ';margin-right:var(--space-2);">' + icon + ' ' + esc(gk) + '</span>';
+            });
+            html += '</div>';
+          }
+
+          // Sequential testing recommendation
+          var seq = exp.sequential || {};
+          if (seq.recommendation) {
+            var recColors = {stop_winner: 'var(--color-correct)', alert_guardrail: 'var(--color-incorrect)', stop_futility: 'var(--color-secondary)', continue: 'var(--color-text-dim)', insufficient_data: 'var(--color-text-dim)'};
+            html += '<div style="margin-top:var(--space-2);font-size:var(--text-sm);">';
+            html += '<strong>Recommendation:</strong> <span style="color:' + (recColors[seq.recommendation] || 'var(--color-text-dim)') + ';font-weight:600;">' + esc(seq.recommendation) + '</span>';
+            if (seq.adjusted_alpha != null) html += ' (adjusted alpha=' + seq.adjusted_alpha + ', info=' + Math.round((seq.information_fraction || 0) * 100) + '%)';
+            html += '</div>';
+          }
+
+          html += '</div>';
+        });
+        el.innerHTML = html;
+      }).catch(function() {
+        document.getElementById("experiments-content").innerHTML = '<p class="tab-empty">Failed to load experiments.</p>';
+      });
+    }
+
+    /* ── Product Intelligence ── */
+    var _intelData = null;
+    var _gradeColors = {A: "#27ae60", B: "#2ecc71", C: "#e67e22", D: "#e74c3c", F: "#c0392b"};
+    function loadIntelligence() {
+      // Don't auto-load — wait for button click, but load history
+      loadIntelHistory();
+    }
+    function runIntelligenceAudit() {
+      var el = document.getElementById("intelligence-content");
+      var status = document.getElementById("intel-status");
+      var summary = document.getElementById("intel-summary");
+      el.innerHTML = '<p class="tab-loading">Running product audit across all dimensions...</p>';
+      status.textContent = "Analyzing...";
+      adminFetch("/api/admin/product-intelligence").then(function(d) {
+        _intelData = d;
+        status.textContent = "Audit complete. " + (d.total || 0) + " findings.";
+
+        // Overall health card
+        var overallEl = document.getElementById("intel-overall");
+        if (d.overall) {
+          var gc = _gradeColors[d.overall.grade] || "var(--color-text-dim)";
+          var overHtml = '<div style="display:flex;align-items:center;gap:var(--space-4);font-family:var(--font-body);">';
+          overHtml += '<div style="font-size:48px;font-weight:700;color:' + gc + ';font-family:var(--font-heading);line-height:1;">' + esc(d.overall.grade) + '</div>';
+          overHtml += '<div><div style="font-size:var(--text-base);font-weight:600;color:var(--color-text);">Overall Health: ' + d.overall.score + '/100</div>';
+          if (d.synthesis && d.synthesis.summary) {
+            overHtml += '<div style="font-size:var(--text-sm);color:var(--color-text-dim);margin-top:4px;">' + esc(d.synthesis.summary) + '</div>';
+          }
+          if (d.synthesis && d.synthesis.data_gaps && d.synthesis.data_gaps.length > 0) {
+            overHtml += '<div style="font-size:var(--text-xs);color:#e67e22;margin-top:4px;">&#x26A0; ' + d.synthesis.data_gaps.length + ' dimension' + (d.synthesis.data_gaps.length !== 1 ? 's' : '') + ' lack sufficient data for confident grading</div>';
+          }
+          overHtml += '</div></div>';
+          overallEl.innerHTML = overHtml;
+          overallEl.style.display = "block";
+        }
+
+        // Dimension scorecard
+        var scorecardEl = document.getElementById("intel-scorecard");
+        if (d.dimension_scores) {
+          var scHtml = '<div class="metrics-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));">';
+          var dims = Object.keys(d.dimension_scores).sort();
+          dims.forEach(function(dim) {
+            var info = d.dimension_scores[dim];
+            var gColor = _gradeColors[info.grade] || "var(--color-text-dim)";
+            var trend = info.trend || "\u2192";
+            var trendColor = trend === "\u2191" ? "#27ae60" : trend === "\u2193" ? "#e74c3c" : "var(--color-text-dim)";
+            scHtml += '<div class="metric-card" style="border-top:3px solid ' + gColor + ';text-align:center;padding:var(--space-2);">';
+            scHtml += '<div style="font-size:28px;font-weight:700;color:' + gColor + ';font-family:var(--font-heading);">' + esc(info.grade) + '</div>';
+            scHtml += '<div style="font-size:var(--text-xs);color:var(--color-text-dim);">' + info.score + '/100 <span style="color:' + trendColor + ';">' + trend + '</span></div>';
+            scHtml += '<div style="font-size:var(--text-xs);font-weight:600;margin-top:2px;">' + esc(dim.charAt(0).toUpperCase() + dim.slice(1)) + '</div>';
+            if (info.finding_count > 0) {
+              scHtml += '<div style="font-size:10px;color:var(--color-text-dim);">' + info.finding_count + ' finding' + (info.finding_count !== 1 ? 's' : '') + '</div>';
+            }
+            var confColors = {high: "#27ae60", medium: "#e67e22", low: "#e74c3c", none: "#95a5a6"};
+            var conf = info.confidence || "high";
+            scHtml += '<div style="font-size:9px;color:' + (confColors[conf] || "#95a5a6") + ';margin-top:1px;">' + conf + ' data</div>';
+            scHtml += '</div>';
+          });
+          scHtml += '</div>';
+          scorecardEl.innerHTML = scHtml;
+          scorecardEl.style.display = "block";
+        }
+
+        // Summary cards (severity breakdown)
+        var bySev = d.by_severity || {};
+        var sumHtml = '<div class="metrics-grid">';
+        var sevColors = {critical: "var(--color-incorrect)", high: "#e67e22", medium: "var(--color-mastery-stabilizing)", low: "var(--color-text-dim)"};
+        var sevOrder = ["critical", "high", "medium", "low"];
+        sevOrder.forEach(function(s) {
+          var cnt = bySev[s] || 0;
+          if (cnt > 0) {
+            sumHtml += '<div class="metric-card" style="border-top:3px solid ' + sevColors[s] + '"><div class="metric-value" style="color:' + sevColors[s] + '">' + cnt + '</div><div class="metric-label">' + s.charAt(0).toUpperCase() + s.slice(1) + '</div></div>';
+          }
+        });
+        sumHtml += '<div class="metric-card"><div class="metric-value">' + (d.total || 0) + '</div><div class="metric-label">Total Findings</div></div>';
+        sumHtml += '</div>';
+        summary.innerHTML = sumHtml;
+        summary.style.display = "block";
+
+        // Copy all critical prompts button
+        var critFindings = (d.findings || []).filter(function(f) { return f.severity === "critical" || f.severity === "high"; });
+        var copyAllEl = document.getElementById("intel-copy-all");
+        if (critFindings.length > 0) {
+          copyAllEl.innerHTML = '<button id="intel-copy-all-btn" style="padding:6px 16px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;border-radius:3px;">Copy all critical/high prompts (' + critFindings.length + ')</button>';
+          copyAllEl.style.display = "block";
+          document.getElementById("intel-copy-all-btn").addEventListener("click", function() {
+            var allPrompts = critFindings.map(function(f) {
+              return "## " + f.title + " [" + f.severity + "]\n\n" + (f.claude_prompt || "");
+            }).join("\n\n---\n\n");
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(allPrompts).then(function() {
+                document.getElementById("intel-copy-all-btn").textContent = "Copied!";
+                setTimeout(function() {
+                  document.getElementById("intel-copy-all-btn").textContent = "Copy all critical/high prompts (" + critFindings.length + ")";
+                }, 2000);
+              });
+            }
+          });
+        }
+
+        // Dimension filter buttons
+        var byDim = d.by_dimension || {};
+        var filterEl = document.getElementById("intel-filter");
+        var filterHtml = '<button class="intel-dim-btn admin-tab active" data-dim="all" style="padding:4px 10px;font-size:var(--text-xs);">All (' + (d.total || 0) + ')</button>';
+        for (var dim in byDim) {
+          filterHtml += '<button class="intel-dim-btn admin-tab" data-dim="' + esc(dim) + '" style="padding:4px 10px;font-size:var(--text-xs);">' + esc(dim.charAt(0).toUpperCase() + dim.slice(1)) + ' (' + byDim[dim] + ')</button>';
+        }
+        filterEl.innerHTML = filterHtml;
+        filterEl.style.display = "flex";
+        filterEl.querySelectorAll(".intel-dim-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            filterEl.querySelectorAll(".intel-dim-btn").forEach(function(b) { b.classList.remove("active"); });
+            btn.classList.add("active");
+            renderIntelFindings(d.findings || [], btn.dataset.dim);
+          });
+        });
+
+        renderIntelFindings(d.findings || [], "all");
+
+        // Update badge
+        var badge = document.getElementById("intel-badge");
+        var critHigh = (bySev.critical || 0) + (bySev.high || 0);
+        if (badge && critHigh > 0) {
+          badge.textContent = critHigh;
+          badge.style.display = "inline";
+        }
+
+        // Refresh history
+        loadIntelHistory();
+
+        // V4: Render decision queue
+        renderDecisionQueue(d.decision_queue || []);
+        // V4: Render sprint plan
+        renderSprintPlan(d.sprint_plan || {});
+        // V4: Load feedback and meta dashboards
+        loadFeedbackDash();
+        loadEngineMeta();
+        // V4: Load finding lifecycle kanban
+        loadFindingKanban();
+      }).catch(function(e) {
+        el.innerHTML = '<p class="tab-empty">Audit failed: ' + esc(e.message) + '</p>';
+        status.textContent = "Error";
+      });
+    }
+
+    function loadIntelHistory() {
+      var histEl = document.getElementById("intel-history");
+      adminFetch("/api/admin/product-intelligence/history").then(function(d) {
+        if (!d.history || d.history.length === 0) {
+          histEl.style.display = "none";
+          return;
+        }
+        var html = '<details style="font-family:var(--font-body);font-size:var(--text-sm);">';
+        html += '<summary style="cursor:pointer;font-weight:600;padding:var(--space-2) 0;color:var(--color-text);">Audit History (' + d.history.length + ' runs)</summary>';
+        html += '<div style="display:flex;flex-direction:column;gap:var(--space-1);margin-top:var(--space-2);">';
+        d.history.forEach(function(run) {
+          var gc = _gradeColors[run.overall_grade] || "var(--color-text-dim)";
+          html += '<div style="padding:var(--space-2);background:var(--color-surface);display:flex;align-items:center;gap:var(--space-3);">';
+          html += '<span style="font-size:20px;font-weight:700;color:' + gc + ';font-family:var(--font-heading);min-width:30px;">' + esc(run.overall_grade) + '</span>';
+          html += '<span style="color:var(--color-text-dim);">' + esc(run.run_at) + '</span>';
+          html += '<span style="color:var(--color-text);">' + run.overall_score + '/100</span>';
+          html += '<span style="color:var(--color-text-dim);">' + run.findings_count + ' findings</span>';
+          if (run.critical_count > 0) html += '<span style="color:var(--color-incorrect);">' + run.critical_count + ' critical</span>';
+          if (run.high_count > 0) html += '<span style="color:#e67e22;">' + run.high_count + ' high</span>';
+          html += '</div>';
+        });
+        html += '</div></details>';
+        histEl.innerHTML = html;
+        histEl.style.display = "block";
+      }).catch(function() {
+        histEl.style.display = "none";
+      });
+    }
+
+    function renderIntelFindings(findings, dimFilter) {
+      var el = document.getElementById("intelligence-content");
+      var filtered = dimFilter === "all" ? findings : findings.filter(function(f) { return f.dimension === dimFilter; });
+      if (filtered.length === 0) {
+        el.innerHTML = '<p class="tab-empty">No findings for this dimension.</p>';
+        return;
+      }
+      var sevColors = {critical: "var(--color-incorrect)", high: "#e67e22", medium: "var(--color-mastery-stabilizing)", low: "var(--color-text-dim)"};
+      var sevIcons = {critical: "\u26a0", high: "\u25cf", medium: "\u25cb", low: "\u2139"};
+      var html = '<div style="display:flex;flex-direction:column;gap:var(--space-2);">';
+      filtered.forEach(function(f, idx) {
+        var color = sevColors[f.severity] || "var(--color-text-dim)";
+        var icon = sevIcons[f.severity] || "";
+        html += '<div style="padding:var(--space-3);background:var(--color-surface);border-left:4px solid ' + color + ';font-family:var(--font-body);font-size:var(--text-sm);">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:var(--space-1);">';
+        html += '<div style="flex:1;min-width:200px;">';
+        html += '<span style="color:' + color + ';margin-right:6px;font-size:var(--text-base);">' + icon + '</span>';
+        html += '<strong>' + esc(f.title) + '</strong>';
+        html += ' <span class="badge badge-info" style="font-size:10px;margin-left:6px;">' + esc(f.dimension) + '</span>';
+        html += '</div>';
+        html += '<span class="badge" style="background:' + color + ';color:#fff;font-size:10px;">' + esc(f.severity) + '</span>';
+        html += '</div>';
+
+        // Analysis
+        html += '<div style="margin-top:6px;color:var(--color-text);">' + esc(f.analysis) + '</div>';
+
+        // Recommendation
+        html += '<div style="margin-top:4px;color:var(--color-text-dim);font-size:var(--text-xs);"><strong>Recommendation:</strong> ' + esc(f.recommendation) + '</div>';
+
+        // Impact
+        if (f.impact) {
+          html += '<div style="margin-top:2px;color:var(--color-text-faint,var(--color-text-dim));font-size:var(--text-xs);"><strong>Impact:</strong> ' + esc(f.impact) + '</div>';
+        }
+
+        // Files
+        if (f.files && f.files.length > 0) {
+          html += '<div style="margin-top:2px;color:var(--color-text-faint,var(--color-text-dim));font-size:var(--text-xs);"><strong>Files:</strong> ' + esc(f.files.join(", ")) + '</div>';
+        }
+
+        // Claude Code prompt buttons
+        if (f.claude_prompt) {
+          html += '<div style="margin-top:8px;display:flex;gap:8px;">';
+          html += '<button class="intel-copy-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;border-radius:3px;">Copy Claude Code prompt</button>';
+          html += '<button class="intel-expand-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;border-radius:3px;">View prompt</button>';
+          html += '</div>';
+          html += '<pre class="intel-prompt-preview" id="intel-prompt-' + idx + '" style="display:none;margin-top:8px;padding:var(--space-2);background:var(--color-base);font-size:var(--text-xs);white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;border:1px solid var(--color-divider);color:var(--color-text);">' + esc(f.claude_prompt) + '</pre>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+      el.innerHTML = html;
+
+      // Wire copy buttons
+      el.querySelectorAll(".intel-copy-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          var i = parseInt(btn.dataset.idx);
+          var prompt = filtered[i].claude_prompt;
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(prompt).then(function() {
+              btn.textContent = "Copied!";
+              setTimeout(function() { btn.textContent = "Copy Claude Code prompt"; }, 2000);
+            });
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = prompt;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            btn.textContent = "Copied!";
+            setTimeout(function() { btn.textContent = "Copy Claude Code prompt"; }, 2000);
+          }
+        });
+      });
+
+      // Wire expand buttons
+      el.querySelectorAll(".intel-expand-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          var pre = document.getElementById("intel-prompt-" + btn.dataset.idx);
+          if (pre.style.display === "none") {
+            pre.style.display = "block";
+            btn.textContent = "Hide prompt";
+          } else {
+            pre.style.display = "none";
+            btn.textContent = "View prompt";
+          }
+        });
+      });
+    }
+
+    /* ── V4: Decision Queue ── */
+    function renderDecisionQueue(queue) {
+      var wrap = document.getElementById("intel-decision-queue");
+      var el = document.getElementById("intel-queue-cards");
+      if (!queue || queue.length === 0) { wrap.style.display = "none"; return; }
+      wrap.style.display = "block";
+      var escColors = {emergency:"#c0392b",escalate:"#e74c3c",alert:"#e67e22",nudge:"#f39c12",quiet:"var(--color-text-dim)"};
+      var classIcons = {auto_fix:"\u2699",informed_fix:"\u2139",judgment_call:"\u2696",values_decision:"\u2764",investigation:"\ud83d\udd0d"};
+      var html = '';
+      queue.slice(0,15).forEach(function(item) {
+        var ec = escColors[item.escalation_level] || "var(--color-text-dim)";
+        var ci = classIcons[item.decision_class] || "";
+        html += '<div style="padding:var(--space-2) var(--space-3);background:var(--color-surface);border-left:4px solid '+ec+';font-family:var(--font-body);font-size:var(--text-sm);display:flex;align-items:center;gap:var(--space-2);">';
+        html += '<span style="font-size:18px;" title="'+esc(item.decision_class)+'">'+ci+'</span>';
+        html += '<div style="flex:1;"><strong>'+esc(item.title)+'</strong>';
+        html += ' <span class="badge badge-info" style="font-size:9px;">'+esc(item.dimension)+'</span></div>';
+        html += '<span class="badge" style="background:'+ec+';color:#fff;font-size:10px;">'+esc(item.escalation_level)+'</span>';
+        html += '<span class="badge" style="font-size:9px;border:1px solid var(--color-divider);color:var(--color-text-dim);">'+esc(item.decision_class)+'</span>';
+        html += '</div>';
+      });
+      el.innerHTML = html;
+    }
+
+    /* ── V4: Finding Kanban ── */
+    function loadFindingKanban() {
+      var wrap = document.getElementById("intel-kanban");
+      var board = document.getElementById("intel-kanban-board");
+      adminFetch("/api/admin/intelligence/findings").then(function(d) {
+        if (!d.findings || d.findings.length === 0) { wrap.style.display = "none"; return; }
+        wrap.style.display = "block";
+        var cols = ["investigating","diagnosed","recommended","implemented","verified"];
+        var byStatus = {};
+        cols.forEach(function(c) { byStatus[c] = []; });
+        d.findings.forEach(function(f) { if (byStatus[f.status]) byStatus[f.status].push(f); });
+        var html = '';
+        cols.forEach(function(col) {
+          html += '<div style="background:var(--color-surface);padding:var(--space-2);min-height:100px;">';
+          html += '<div style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-1);text-transform:capitalize;">'+col+' ('+byStatus[col].length+')</div>';
+          byStatus[col].forEach(function(f) {
+            var sevC = {critical:"var(--color-incorrect)",high:"#e67e22",medium:"var(--color-mastery-stabilizing)",low:"var(--color-text-dim)"}[f.severity]||"var(--color-text-dim)";
+            html += '<div style="padding:4px 6px;margin-bottom:4px;border-left:3px solid '+sevC+';background:var(--color-base);font-size:var(--text-xs);">';
+            html += '<div style="font-weight:600;">'+esc(f.title.slice(0,50))+'</div>';
+            html += '<div style="color:var(--color-text-dim);">'+esc(f.dimension)+' &middot; '+Math.round(f.days_in_state||0)+'d</div>';
+            if (f.advisor_opinions && f.advisor_opinions.length > 0) {
+              html += '<div style="color:var(--color-text-dim);font-size:9px;margin-top:2px;">';
+              f.advisor_opinions.slice(0,2).forEach(function(op) {
+                html += esc(op.advisor)+':'+op.priority_score+' ';
+              });
+              html += '</div>';
+            }
+            html += '</div>';
+          });
+          html += '</div>';
+        });
+        board.innerHTML = html;
+      }).catch(function() { wrap.style.display = "none"; });
+    }
+
+    /* ── V4: Sprint Plan ── */
+    function renderSprintPlan(plan) {
+      var wrap = document.getElementById("intel-sprint-plan");
+      var el = document.getElementById("intel-sprint-content");
+      if (!plan || !plan.plan || plan.plan.length === 0) { wrap.style.display = "none"; return; }
+      wrap.style.display = "block";
+      var html = '<div style="font-family:var(--font-body);font-size:var(--text-sm);margin-bottom:var(--space-2);color:var(--color-text-dim);">';
+      html += 'Budget: '+plan.total_hours+'/'+plan.budget_hours+' hrs used, '+plan.remaining_hours+' remaining, '+plan.deferred_count+' deferred</div>';
+      html += '<div style="display:flex;flex-direction:column;gap:var(--space-1);">';
+      plan.plan.forEach(function(item, i) {
+        var sevC = {critical:"var(--color-incorrect)",high:"#e67e22",medium:"var(--color-mastery-stabilizing)",low:"var(--color-text-dim)"}[item.severity]||"var(--color-text-dim)";
+        html += '<div style="padding:var(--space-2);background:var(--color-surface);border-left:3px solid '+sevC+';display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);">';
+        html += '<span style="color:var(--color-text-dim);font-weight:600;min-width:20px;">#'+(i+1)+'</span>';
+        html += '<div style="flex:1;"><strong>'+esc(item.title)+'</strong>';
+        html += ' <span class="badge badge-info" style="font-size:9px;">'+esc(item.dimension)+'</span>';
+        if (item.winning_advisor) html += ' <span style="font-size:9px;color:var(--color-text-dim);">['+esc(item.winning_advisor)+']</span>';
+        html += '</div>';
+        html += '<span style="font-size:var(--text-xs);color:var(--color-text-dim);">'+item.effort_hours+'h</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+      el.innerHTML = html;
+    }
+
+    /* ── V4: Feedback Dashboard ── */
+    function loadFeedbackDash() {
+      var wrap = document.getElementById("intel-feedback-dash");
+      var el = document.getElementById("intel-feedback-content");
+      adminFetch("/api/admin/intelligence/feedback-summary").then(function(d) {
+        wrap.style.display = "block";
+        var html = '';
+        html += '<div class="metric-card"><div class="metric-value">'+d.closure_rate+'%</div><div class="metric-label">Loop Closure Rate</div><div style="font-size:var(--text-xs);color:var(--color-text-dim);">'+d.verified_outcomes+'/'+d.total_outcomes+' verified</div></div>';
+        html += '<div class="metric-card"><div class="metric-value" style="color:var(--color-correct);">'+d.effective_count+'</div><div class="metric-label">Effective Fixes</div><div style="font-size:var(--text-xs);color:var(--color-text-dim);">'+d.ineffective_count+' ineffective, '+d.neutral_count+' neutral</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">'+d.calibration_count+'</div><div class="metric-label">Threshold Calibrations</div></div>';
+        el.innerHTML = html;
+      }).catch(function() { wrap.style.display = "none"; });
+    }
+
+    /* ── V4: Engine Meta ── */
+    function loadEngineMeta() {
+      var wrap = document.getElementById("intel-engine-meta");
+      var el = document.getElementById("intel-meta-content");
+      adminFetch("/api/admin/intelligence/engine-meta").then(function(d) {
+        wrap.style.display = "block";
+        var fprColor = d.false_positive_rate < 15 ? "var(--color-correct)" : d.false_positive_rate < 30 ? "#e67e22" : "var(--color-incorrect)";
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">'+d.total_findings+'</div><div class="metric-label">Total Findings (90d)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value" style="color:var(--color-correct);">'+d.true_positives+'</div><div class="metric-label">True Positives</div></div>';
+        html += '<div class="metric-card"><div class="metric-value" style="color:'+fprColor+';">'+d.false_positive_rate+'%</div><div class="metric-label">False Positive Rate</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">'+(d.avg_resolution_days != null ? d.avg_resolution_days+'d' : 'N/A')+'</div><div class="metric-label">Avg Resolution Time</div></div>';
+        html += '</div>';
+        if (d.per_dimension && Object.keys(d.per_dimension).length > 0) {
+          html += '<details style="margin-top:var(--space-2);font-size:var(--text-xs);"><summary style="cursor:pointer;">Per-dimension accuracy</summary><div style="margin-top:var(--space-1);">';
+          Object.keys(d.per_dimension).sort().forEach(function(dim) {
+            var dd = d.per_dimension[dim];
+            html += '<div style="display:flex;gap:var(--space-2);padding:2px 0;"><span style="min-width:120px;font-weight:600;">'+esc(dim)+'</span>';
+            html += '<span>'+dd.total+' findings</span><span>'+dd.verified+' verified</span><span style="color:'+(dd.fpr>25?"var(--color-incorrect)":"var(--color-text-dim)")+';">FPR: '+dd.fpr+'%</span></div>';
+          });
+          html += '</div></details>';
+        }
+        el.innerHTML = html;
+      }).catch(function() { wrap.style.display = "none"; });
+    }
+
+    document.getElementById("intel-run-audit").addEventListener("click", runIntelligenceAudit);
+
+    function loadNotifications() {
+      adminFetch("/api/admin/notifications").then(function(d) {
+        var el = document.getElementById("notifications-content");
+        var items = d.notifications || [];
+        if (items.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No new notifications. Everything looks good.</p>';
+          return;
+        }
+        var html = '<div style="display:flex;flex-direction:column;gap:var(--space-2);">';
+        items.forEach(function(n, idx) {
+          var sevColor = n.severity === "critical" ? "var(--color-incorrect)" : n.severity === "warning" ? "#e67e22" : "var(--color-text-dim)";
+          var icon = n.severity === "critical" ? "\u26a0" : n.severity === "warning" ? "\u25cf" : "\u2139";
+          html += '<div style="padding:var(--space-3);background:var(--color-surface);border-left:4px solid ' + sevColor + ';font-family:var(--font-body);font-size:var(--text-sm);">';
+          html += '<div style="display:flex;justify-content:space-between;align-items:start;">';
+          html += '<div>';
+          html += '<span style="color:' + sevColor + ';margin-right:6px;">' + icon + '</span>';
+          html += '<strong>' + esc(n.title) + '</strong>';
+          html += ' <span style="color:var(--color-text-dim);font-size:var(--text-xs);margin-left:8px;">' + esc(n.tab || "") + '</span>';
+          html += '</div>';
+          html += '<span style="color:var(--color-text-dim);font-size:var(--text-xs);">' + shortDate(n.timestamp) + '</span>';
+          html += '</div>';
+          html += '<div style="margin-top:4px;color:var(--color-text);">' + esc(n.detail) + '</div>';
+          if (n.action_prompt) {
+            html += '<div style="margin-top:8px;display:flex;gap:8px;">';
+            html += '<button class="notif-action-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;border-radius:3px;">Copy prompt for Claude Code</button>';
+            html += '<button class="notif-expand-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;border-radius:3px;">View prompt</button>';
+            html += '</div>';
+            html += '<pre class="notif-prompt-preview" id="notif-prompt-' + idx + '" style="display:none;margin-top:8px;padding:var(--space-2);background:var(--color-base);font-size:var(--text-xs);white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;border:1px solid var(--color-divider);">' + esc(n.action_prompt) + '</pre>';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
+        el.innerHTML = html;
+
+        // Wire up action buttons
+        el.querySelectorAll(".notif-action-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var i = parseInt(btn.dataset.idx);
+            var prompt = items[i].action_prompt;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(prompt).then(function() {
+                btn.textContent = "Copied!";
+                setTimeout(function() { btn.textContent = "Copy prompt for Claude Code"; }, 2000);
+              });
+            } else {
+              // Fallback
+              var ta = document.createElement("textarea");
+              ta.value = prompt;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              document.body.removeChild(ta);
+              btn.textContent = "Copied!";
+              setTimeout(function() { btn.textContent = "Copy prompt for Claude Code"; }, 2000);
+            }
+          });
+        });
+
+        // Wire up expand/collapse buttons
+        el.querySelectorAll(".notif-expand-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var pre = document.getElementById("notif-prompt-" + btn.dataset.idx);
+            if (pre.style.display === "none") {
+              pre.style.display = "block";
+              btn.textContent = "Hide prompt";
+            } else {
+              pre.style.display = "none";
+              btn.textContent = "View prompt";
+            }
+          });
+        });
+      }).catch(function() {
+        document.getElementById("notifications-content").innerHTML = '<p class="tab-empty">Failed to load notifications.</p>';
+      });
+    }
+
+    // Load notification badge count on page load
+    adminFetch("/api/admin/notifications/count").then(function(d) {
+      var badge = document.getElementById("notif-badge");
+      if (badge && d.count > 0) {
+        badge.textContent = d.count;
+        badge.style.display = "inline";
+      }
+    }).catch(function() {});
+
+    // Mark all read handler
+    document.getElementById("notif-mark-all-read").addEventListener("click", function() {
+      adminFetch("/api/admin/notifications/mark-read", {method: "POST"}).then(function() {
+        var badge = document.getElementById("notif-badge");
+        if (badge) badge.style.display = "none";
+        loadNotifications();
+      }).catch(function() {});
+    });
+
+    /* ── AI Review Queue ── */
+    function loadAiReview() {
+      adminFetch("/api/admin/ai/review-queue").then(function(d) {
+        var el = document.getElementById("ai-review-content");
+        var items = d.items || [];
+        if (items.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No items awaiting review. Queue is clear.</p>';
+          return;
+        }
+        var html = '<div style="display:flex;flex-direction:column;gap:var(--space-3);">';
+        items.forEach(function(item) {
+          var c = item.content || {};
+          var issues = item.validation_issues || [];
+          html += '<div class="ai-review-card" data-id="' + esc(item.id) + '" style="padding:var(--space-3);background:var(--color-surface);border-left:4px solid var(--color-accent);font-family:var(--font-body);font-size:var(--text-sm);">';
+          html += '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:var(--space-2);">';
+          html += '<div>';
+          html += '<span class="hanzi" style="font-size:var(--text-xl);margin-right:var(--space-2);">' + esc(c.hanzi || "") + '</span>';
+          html += '<span style="color:var(--color-text-dim);">' + esc(c.pinyin || "") + '</span>';
+          html += ' &mdash; ' + esc(c.english || "");
+          html += '</div>';
+          html += '<span style="color:var(--color-text-dim);font-size:var(--text-xs);">' + esc(item.content_type) + ' &middot; ' + shortDate(item.queued_at) + '</span>';
+          html += '</div>';
+          if (c.example_sentence_hanzi) {
+            html += '<div style="margin-bottom:var(--space-2);color:var(--color-text-dim);font-size:var(--text-xs);">';
+            html += '<span class="hanzi">' + esc(c.example_sentence_hanzi) + '</span>';
+            if (c.example_sentence_pinyin) html += ' <span>(' + esc(c.example_sentence_pinyin) + ')</span>';
+            if (c.example_sentence_english) html += ' &mdash; ' + esc(c.example_sentence_english);
+            html += '</div>';
+          }
+          if (issues.length > 0) {
+            html += '<div style="margin-bottom:var(--space-2);"><span class="badge badge-warning">Validation issues</span> ' + esc(issues.join(", ")) + '</div>';
+          }
+          // Provenance checkbox
+          html += '<div style="margin:var(--space-2) 0;padding:var(--space-2);background:var(--color-base);border:1px solid var(--color-divider);">';
+          html += '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:var(--text-sm);">';
+          html += '<input type="checkbox" class="provenance-check" data-id="' + esc(item.id) + '">';
+          html += '<span>Provenance verified: content does not appear to be from a published source</span>';
+          html += '</label>';
+          html += '</div>';
+          // Reject notes
+          html += '<div style="margin-bottom:var(--space-2);">';
+          html += '<input type="text" class="reject-notes" data-id="' + esc(item.id) + '" placeholder="Rejection notes (required if rejecting for provenance concern)" style="width:100%;padding:6px 8px;font-family:var(--font-body);font-size:var(--text-xs);border:1px solid var(--color-divider);background:var(--color-base);color:var(--color-text);">';
+          html += '</div>';
+          // Action buttons
+          html += '<div style="display:flex;gap:8px;">';
+          html += '<button class="ai-review-approve" data-id="' + esc(item.id) + '" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-correct,#27ae60);color:#fff;border:none;cursor:pointer;border-radius:3px;">Approve</button>';
+          html += '<button class="ai-review-reject" data-id="' + esc(item.id) + '" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-incorrect,#c0392b);color:#fff;border:none;cursor:pointer;border-radius:3px;">Reject</button>';
+          html += '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+        el.innerHTML = html;
+
+        // Wire approve buttons
+        el.querySelectorAll(".ai-review-approve").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var id = btn.dataset.id;
+            var card = btn.closest(".ai-review-card");
+            var checkbox = card.querySelector(".provenance-check");
+            if (!checkbox.checked) {
+              alert("You must verify provenance before approving. Check the box to confirm content does not appear to be from a published source.");
+              return;
+            }
+            btn.disabled = true;
+            btn.textContent = "Approving...";
+            fetch("/api/admin/ai/review-queue/" + id + "/approve", {
+              method: "POST",
+              credentials: "same-origin",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({provenance_checked: 1})
+            }).then(function(r) { return r.json(); }).then(function(d) {
+              if (d.error) { alert(d.error); btn.disabled = false; btn.textContent = "Approve"; return; }
+              card.style.borderLeftColor = "var(--color-correct,#27ae60)";
+              card.style.opacity = "0.5";
+              btn.textContent = "Approved";
+              updateAiReviewBadge();
+            }).catch(function() { btn.disabled = false; btn.textContent = "Approve"; });
+          });
+        });
+
+        // Wire reject buttons
+        el.querySelectorAll(".ai-review-reject").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var id = btn.dataset.id;
+            var card = btn.closest(".ai-review-card");
+            var notesInput = card.querySelector(".reject-notes");
+            var notes = notesInput ? notesInput.value : "";
+            btn.disabled = true;
+            btn.textContent = "Rejecting...";
+            fetch("/api/admin/ai/review-queue/" + id + "/reject", {
+              method: "POST",
+              credentials: "same-origin",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({notes: notes})
+            }).then(function(r) { return r.json(); }).then(function(d) {
+              if (d.error) { alert(d.error); btn.disabled = false; btn.textContent = "Reject"; return; }
+              card.style.borderLeftColor = "var(--color-incorrect,#c0392b)";
+              card.style.opacity = "0.5";
+              btn.textContent = "Rejected";
+              updateAiReviewBadge();
+            }).catch(function() { btn.disabled = false; btn.textContent = "Reject"; });
+          });
+        });
+      }).catch(function(e) {
+        document.getElementById("ai-review-content").innerHTML = '<p class="tab-empty">Failed to load review queue: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    function updateAiReviewBadge() {
+      adminFetch("/api/admin/ai/review-queue").then(function(d) {
+        var badge = document.getElementById("ai-review-badge");
+        if (badge && d.count > 0) {
+          badge.textContent = d.count;
+          badge.style.display = "inline";
+        } else if (badge) {
+          badge.style.display = "none";
+        }
+      }).catch(function() {});
+    }
+
+    // Load AI review badge count on page load
+    adminFetch("/api/admin/ai/review-queue").then(function(d) {
+      var badge = document.getElementById("ai-review-badge");
+      if (badge && d.count > 0) {
+        badge.textContent = d.count;
+        badge.style.display = "inline";
+      }
+    }).catch(function() {});
+
+    function loadDPMO() {
+      adminFetch("/api/admin/quality/dpmo").then(function(d) {
+        var el = document.getElementById("quality-dpmo-content");
+        if (!d.current) { el.innerHTML = '<p class="tab-empty">No DPMO data yet. Metrics are calculated daily.</p>'; return; }
+        var c = d.current;
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (c.dpmo || 0).toLocaleString() + '</div><div class="metric-label">DPMO (30d)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (c.sigma_level || 0).toFixed(2) + 'σ</div><div class="metric-label">Sigma Level</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (c.total_opportunities || 0).toLocaleString() + '</div><div class="metric-label">Opportunities</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (c.total_defects || 0).toLocaleString() + '</div><div class="metric-label">Defects</div></div>';
+        html += '</div>';
+        if (d.trend && d.trend.length > 0) {
+          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">DPMO Trend (Weekly)</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Period</th><th>DPMO</th><th>Sigma</th><th>Opportunities</th></tr></thead><tbody>';
+          d.trend.forEach(function(t) {
+            html += '<tr><td>' + esc(t.period_end || '') + '</td><td>' + (t.dpmo || 0).toLocaleString() + '</td><td>' + (t.sigma_level || 0).toFixed(2) + 'σ</td><td>' + (t.total_opportunities || 0).toLocaleString() + '</td></tr>';
+          });
+          html += '</tbody></table></div></div>';
+        }
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-dpmo-content").innerHTML = '<p class="tab-empty">DPMO unavailable: ' + esc(e.message) + '</p>'; });
+    }
+
+    function loadSPC() {
+      var chartType = document.getElementById("spc-chart-select").value;
+      adminFetch("/api/admin/quality/spc?chart=" + chartType).then(function(d) {
+        var el = document.getElementById("quality-spc-content");
+        if (!d.observations || d.observations.length === 0) { el.innerHTML = '<p class="tab-empty">No SPC data yet.</p>'; return; }
+        var cl = d.control_limits || {};
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (cl.center_line || 0).toFixed(3) + '</div><div class="metric-label">Center Line</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (cl.ucl || 0).toFixed(3) + '</div><div class="metric-label">UCL (3σ)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (cl.lcl || 0).toFixed(3) + '</div><div class="metric-label">LCL (3σ)</div></div>';
+        var statusBadge = d.status === 'in_control' ? '<span class="badge badge-info">In Control</span>' : '<span class="badge badge-error">Out of Control</span>';
+        html += '<div class="metric-card"><div class="metric-value">' + statusBadge + '</div><div class="metric-label">Status</div></div>';
+        html += '</div>';
+        if (d.violations && d.violations.length > 0) {
+          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Violations</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Point</th><th>Value</th><th>Rule</th><th>Description</th></tr></thead><tbody>';
+          d.violations.forEach(function(v) {
+            html += '<tr><td>' + v.index + '</td><td>' + (v.value || 0).toFixed(3) + '</td><td>' + esc(v.rule) + '</td><td>' + esc(v.description) + '</td></tr>';
+          });
+          html += '</tbody></table></div></div>';
+        }
+        // ASCII sparkline of observations
+        html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Observations</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>#</th><th>Date</th><th>Value</th><th>Status</th></tr></thead><tbody>';
+        d.observations.forEach(function(obs, i) {
+          var isViolation = d.violations && d.violations.some(function(v) { return v.index === i; });
+          var badge = isViolation ? '<span class="badge badge-error">!</span>' : '';
+          html += '<tr><td>' + (i+1) + '</td><td>' + esc(obs.date || '') + '</td><td>' + (obs.value || 0).toFixed(3) + '</td><td>' + badge + '</td></tr>';
+        });
+        html += '</tbody></table></div></div>';
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-spc-content").innerHTML = '<p class="tab-empty">SPC unavailable: ' + esc(e.message) + '</p>'; });
+    }
+    document.getElementById("spc-chart-select").addEventListener("change", loadSPC);
+
+    function loadCapability() {
+      adminFetch("/api/admin/quality/capability").then(function(d) {
+        var el = document.getElementById("quality-capability-content");
+        var processes = d.processes || [];
+        if (processes.length === 0) { el.innerHTML = '<p class="tab-empty">No capability data yet.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Process</th><th>Mean</th><th>Std</th><th>Cpk</th><th>n</th><th>Status</th></tr></thead><tbody>';
+        processes.forEach(function(p) {
+          var cpk = p.cpk || 0;
+          var badge = cpk >= 1.33 ? '<span class="badge badge-info">Capable</span>' : cpk >= 1.0 ? '<span class="badge badge-warning">Marginal</span>' : '<span class="badge badge-error">Incapable</span>';
+          html += '<tr><td>' + esc(p.name || '') + '</td><td>' + (p.mean || 0).toFixed(2) + '</td><td>' + (p.std || 0).toFixed(2) + '</td><td>' + cpk.toFixed(3) + '</td><td>' + (p.n || 0) + '</td><td>' + badge + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-capability-content").innerHTML = '<p class="tab-empty">Capability data unavailable: ' + esc(e.message) + '</p>'; });
+    }
+
+    function loadRetentionAnalysis() {
+      adminFetch("/api/admin/quality/retention-analysis").then(function(d) {
+        var el = document.getElementById("quality-retention-content");
+        var km = d.survival || {};
+        if (!km.time_points || km.time_points.length === 0) { el.innerHTML = '<p class="tab-empty">No retention data yet.</p>'; return; }
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (km.median_survival || 'N/A') + '</div><div class="metric-label">Median Survival (days)</div></div>';
+        html += '</div>';
+        html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Survival Curve</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Day</th><th>Survival %</th><th>At Risk</th><th>Events</th></tr></thead><tbody>';
+        km.time_points.forEach(function(t, i) {
+          html += '<tr><td>' + t + '</td><td>' + ((km.survival_probabilities[i] || 0) * 100).toFixed(1) + '%</td><td>' + (km.n_at_risk[i] || 0) + '</td><td>' + (km.n_events[i] || 0) + '</td></tr>';
+        });
+        html += '</tbody></table></div></div>';
+        if (d.risk_factors) {
+          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Churn Risk Factors</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Factor</th><th>Correlation</th><th>Direction</th></tr></thead><tbody>';
+          var factors = d.risk_factors.factors || [];
+          factors.forEach(function(f) {
+            var dir = f.correlation > 0 ? '<span style="color:var(--color-correct)">Protective</span>' : '<span style="color:var(--color-incorrect)">Risk</span>';
+            html += '<tr><td>' + esc(f.name || '') + '</td><td>' + Math.abs(f.correlation || 0).toFixed(3) + '</td><td>' + dir + '</td></tr>';
+          });
+          html += '</tbody></table></div></div>';
+        }
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-retention-content").innerHTML = '<p class="tab-empty">Retention analysis unavailable: ' + esc(e.message) + '</p>'; });
+    }
+
+    function loadFlowMetrics() {
+      adminFetch("/api/admin/quality/flow").then(function(d) {
+        var el = document.getElementById("quality-flow-content");
+        var s = d.summary || {};
+        var html = '<div class="metrics-grid">';
+        var ct = s.cycle_time || {};
+        var lt = s.lead_time || {};
+        var tp = s.throughput || {};
+        html += '<div class="metric-card"><div class="metric-value">' + (ct.median || 0).toFixed(1) + 'h</div><div class="metric-label">Cycle Time (median)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (lt.median || 0).toFixed(1) + 'h</div><div class="metric-label">Lead Time (median)</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (tp.weekly_avg || 0).toFixed(1) + '</div><div class="metric-label">Throughput/week</div></div>';
+        html += '</div>';
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-flow-content").innerHTML = '<p class="tab-empty">Flow metrics unavailable: ' + esc(e.message) + '</p>'; });
+    }
+
+    function showAddRiskForm() { document.getElementById("add-risk-form").style.display = "block"; }
+
+    function submitRisk() {
+      var data = {
+        category: document.getElementById("risk-category").value,
+        title: document.getElementById("risk-title").value,
+        description: document.getElementById("risk-description").value,
+        probability: parseInt(document.getElementById("risk-probability").value) || 3,
+        impact: parseInt(document.getElementById("risk-impact").value) || 3,
+        mitigation: document.getElementById("risk-mitigation").value
+      };
+      if (!data.title) { alert("Title is required"); return; }
+      adminFetch("/api/admin/risks", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data) })
+        .then(function() { document.getElementById("add-risk-form").style.display = "none"; loadRisks(); })
+        .catch(function(e) { alert("Error: " + e.message); });
+    }
+
+    function loadRisks() {
+      adminFetch("/api/admin/risks").then(function(d) {
+        var el = document.getElementById("quality-risks-content");
+        if (!d.risks || d.risks.length === 0) { el.innerHTML = '<p class="tab-empty">No risks registered. Add risks to track them.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Score</th><th>Category</th><th>Title</th><th>P</th><th>I</th><th>Status</th><th>Mitigation</th></tr></thead><tbody>';
+        d.risks.forEach(function(r) {
+          var score = (r.probability || 0) * (r.impact || 0);
+          var scoreBadge = score >= 15 ? '<span class="badge badge-error">' + score + '</span>' : score >= 8 ? '<span class="badge badge-warning">' + score + '</span>' : '<span class="badge badge-info">' + score + '</span>';
+          html += '<tr><td>' + scoreBadge + '</td><td>' + esc(r.category) + '</td><td>' + esc(r.title) + '</td><td>' + r.probability + '</td><td>' + r.impact + '</td><td>' + esc(r.status) + '</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + esc(r.mitigation || '') + '">' + esc(r.mitigation || '-') + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-risks-content").innerHTML = '<p class="tab-empty">Risks unavailable: ' + esc(e.message) + '</p>'; });
+    }
+
+    function showAddWorkItemForm() { document.getElementById("add-work-item-form").style.display = "block"; }
+
+    function submitWorkItem() {
+      var data = {
+        title: document.getElementById("work-item-title").value,
+        item_type: document.getElementById("work-item-type").value
+      };
+      if (!data.title) { alert("Title is required"); return; }
+      adminFetch("/api/admin/work-items", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data) })
+        .then(function() { document.getElementById("add-work-item-form").style.display = "none"; loadWorkItems(); })
+        .catch(function(e) { alert("Error: " + e.message); });
+    }
+
+    function updateWorkItemStatus(itemId, newStatus) {
+      adminFetch("/api/admin/work-items/" + itemId, { method: "PUT", headers: {"Content-Type": "application/json"}, body: JSON.stringify({status: newStatus}) })
+        .then(function() { loadWorkItems(); })
+        .catch(function(e) { alert("Error: " + e.message); });
+    }
+
+    function loadWorkItems() {
+      adminFetch("/api/admin/work-items").then(function(d) {
+        var el = document.getElementById("quality-work-items-content");
+        if (!d.items || d.items.length === 0) { el.innerHTML = '<p class="tab-empty">No work items. Add items to track flow.</p>'; return; }
+        var statuses = ['backlog', 'ready', 'in_progress', 'review', 'done'];
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Title</th><th>Type</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody>';
+        d.items.forEach(function(item) {
+          var typeBadge = item.item_type === 'expedite' ? '<span class="badge badge-error">' + esc(item.item_type) + '</span>' : '<span class="badge badge-info">' + esc(item.item_type) + '</span>';
+          var nextStatus = '';
+          var si = statuses.indexOf(item.status);
+          if (si >= 0 && si < statuses.length - 1) {
+            nextStatus = statuses[si + 1];
+          }
+          var actionBtn = nextStatus ? '<button onclick="updateWorkItemStatus(' + item.id + ',\'' + nextStatus + '\')" style="padding:2px 8px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-surface);border:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);">→ ' + nextStatus.replace('_', ' ') + '</button>' : '<span class="badge badge-info">Done</span>';
+          html += '<tr><td>' + esc(item.title) + '</td><td>' + typeBadge + '</td><td>' + esc(item.status) + '</td><td>' + esc((item.created_at || '').substring(0, 10)) + '</td><td>' + actionBtn + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }).catch(function(e) { document.getElementById("quality-work-items-content").innerHTML = '<p class="tab-empty">Work items unavailable: ' + esc(e.message) + '</p>'; });
+    }
+    /* ═══════════════════════════════════════════════════════════════
+       Cumulative Flow Diagram (CFD)
+       Stacked area chart: X = dates, Y = cumulative item counts
+       per work_item status (ready, in_progress, done, blocked)
+       ═══════════════════════════════════════════════════════════════ */
+
+    function renderCFD(canvas, data) {
+      if (!canvas || !canvas.getContext) return canvas;
+      var ctx = canvas.getContext("2d");
+      var w = canvas.width;
+      var h = canvas.height;
+
+      // data: {dates: ["2026-03-01",...], series: {ready:[...], in_progress:[...], done:[...], blocked:[...]}}
+      var dates = (data && data.dates) || [];
+      var series = (data && data.series) || {};
+      var statuses = ["done", "in_progress", "ready", "blocked"];
+      var colors = {
+        done: "rgba(74, 122, 111, 0.7)",       // teal
+        in_progress: "rgba(184, 92, 58, 0.7)",  // terracotta
+        ready: "rgba(106, 122, 90, 0.7)",       // olive
+        blocked: "rgba(180, 80, 80, 0.7)",      // muted red
+      };
+
+      // Clear
+      var cs = getComputedStyle(document.documentElement);
+      ctx.fillStyle = cs.getPropertyValue("--color-surface").trim() || "#F8F5EF";
+      ctx.fillRect(0, 0, w, h);
+
+      if (dates.length === 0) {
+        ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("No CFD data yet", w / 2, h / 2);
+        return canvas;
+      }
+
+      var pad = {top: 20, right: 16, bottom: 32, left: 44};
+      var plotW = w - pad.left - pad.right;
+      var plotH = h - pad.top - pad.bottom;
+      var n = dates.length;
+
+      // Compute stacked totals
+      var stacked = [];
+      for (var i = 0; i < n; i++) {
+        var cumulative = 0;
+        var row = {};
+        for (var si = 0; si < statuses.length; si++) {
+          var s = statuses[si];
+          var val = (series[s] && series[s][i]) || 0;
+          row[s + "_base"] = cumulative;
+          cumulative += val;
+          row[s + "_top"] = cumulative;
+        }
+        row.total = cumulative;
+        stacked.push(row);
+      }
+
+      var maxY = Math.max.apply(null, stacked.map(function(r) { return r.total; }));
+      if (maxY === 0) maxY = 1;
+
+      function xPos(idx) { return pad.left + (idx / Math.max(n - 1, 1)) * plotW; }
+      function yPos(val) { return pad.top + plotH - (val / maxY) * plotH; }
+
+      // Draw stacked areas (bottom to top)
+      for (var si = 0; si < statuses.length; si++) {
+        var s = statuses[si];
+        ctx.fillStyle = colors[s] || "#999";
+        ctx.beginPath();
+        ctx.moveTo(xPos(0), yPos(stacked[0][s + "_base"]));
+        for (var i = 0; i < n; i++) ctx.lineTo(xPos(i), yPos(stacked[i][s + "_top"]));
+        for (var i = n - 1; i >= 0; i--) ctx.lineTo(xPos(i), yPos(stacked[i][s + "_base"]));
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // X axis date labels (first, middle, last)
+      ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+      ctx.font = "10px sans-serif";
+      ctx.textAlign = "center";
+      var labelIndices = [0, Math.floor(n / 2), n - 1];
+      for (var li = 0; li < labelIndices.length; li++) {
+        var idx = labelIndices[li];
+        if (idx < dates.length) {
+          ctx.fillText(dates[idx].substring(5), xPos(idx), h - 6);
+        }
+      }
+
+      // Y axis max label
+      ctx.textAlign = "right";
+      ctx.fillText(maxY.toString(), pad.left - 4, pad.top + 10);
+
+      // Legend
+      ctx.font = "9px sans-serif";
+      ctx.textAlign = "left";
+      var legendX = pad.left;
+      for (var si = 0; si < statuses.length; si++) {
+        ctx.fillStyle = colors[statuses[si]];
+        ctx.fillRect(legendX, 4, 10, 8);
+        ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+        ctx.fillText(statuses[si].replace("_", " "), legendX + 13, 12);
+        legendX += 72;
+      }
+
+      return canvas;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       Sprint Burndown Chart
+       X = days in sprint, Y = remaining points
+       Ideal line (straight from planned to 0) + actual line
+       ═══════════════════════════════════════════════════════════════ */
+
+    function renderSprintBurndown(canvas, sprint) {
+      if (!canvas || !canvas.getContext) return canvas;
+      var ctx = canvas.getContext("2d");
+      var w = canvas.width;
+      var h = canvas.height;
+
+      // sprint: {planned_points, days: [{day: 1, remaining: N}, ...], total_days}
+      var planned = (sprint && sprint.planned_points) || 0;
+      var days = (sprint && sprint.days) || [];
+      var totalDays = (sprint && sprint.total_days) || days.length || 1;
+
+      var cs = getComputedStyle(document.documentElement);
+      ctx.fillStyle = cs.getPropertyValue("--color-surface").trim() || "#F8F5EF";
+      ctx.fillRect(0, 0, w, h);
+
+      if (days.length === 0) {
+        ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("No sprint data", w / 2, h / 2);
+        return canvas;
+      }
+
+      var pad = {top: 20, right: 16, bottom: 28, left: 44};
+      var plotW = w - pad.left - pad.right;
+      var plotH = h - pad.top - pad.bottom;
+      var maxY = planned || Math.max.apply(null, days.map(function(d) { return d.remaining || 0; }));
+      if (maxY === 0) maxY = 1;
+
+      function xPos(day) { return pad.left + (day / totalDays) * plotW; }
+      function yPos(val) { return pad.top + plotH - (val / maxY) * plotH; }
+
+      // Ideal burndown line (dashed, teal)
+      var teal = cs.getPropertyValue("--color-accent").trim() || "#4A7A6F";
+      ctx.strokeStyle = teal;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(xPos(0), yPos(planned));
+      ctx.lineTo(xPos(totalDays), yPos(0));
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Actual burndown line (solid, terracotta)
+      var terracotta = cs.getPropertyValue("--color-secondary").trim() || "#B85C3A";
+      ctx.strokeStyle = terracotta;
+      ctx.lineWidth = 2.5;
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      for (var i = 0; i < days.length; i++) {
+        var x = xPos(days[i].day || i);
+        var y = yPos(days[i].remaining || 0);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Dots on actual line
+      ctx.fillStyle = terracotta;
+      for (var i = 0; i < days.length; i++) {
+        var x = xPos(days[i].day || i);
+        var y = yPos(days[i].remaining || 0);
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Axis labels
+      ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+      ctx.font = "10px sans-serif";
+      ctx.textAlign = "right";
+      ctx.fillText(planned.toString(), pad.left - 4, pad.top + 10);
+      ctx.fillText("0", pad.left - 4, pad.top + plotH);
+      ctx.textAlign = "center";
+      ctx.fillText("Day 1", xPos(0), h - 6);
+      ctx.fillText("Day " + totalDays, xPos(totalDays), h - 6);
+
+      // Legend
+      ctx.font = "9px sans-serif";
+      ctx.textAlign = "left";
+      ctx.setLineDash([6, 4]);
+      ctx.strokeStyle = teal;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, 6);
+      ctx.lineTo(pad.left + 16, 6);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+      ctx.fillText("Ideal", pad.left + 20, 10);
+      ctx.strokeStyle = terracotta;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(pad.left + 60, 6);
+      ctx.lineTo(pad.left + 76, 6);
+      ctx.stroke();
+      ctx.fillText("Actual", pad.left + 80, 10);
+
+      return canvas;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       Risk Burndown Chart
+       X = dates, Y = aggregate risk score over time
+       Line chart from risk_review data
+       ═══════════════════════════════════════════════════════════════ */
+
+    function renderRiskBurndown(canvas, reviews) {
+      if (!canvas || !canvas.getContext) return canvas;
+      var ctx = canvas.getContext("2d");
+      var w = canvas.width;
+      var h = canvas.height;
+
+      // reviews: [{date: "2026-03-01", aggregate_score: 42}, ...]
+      reviews = reviews || [];
+
+      var cs = getComputedStyle(document.documentElement);
+      ctx.fillStyle = cs.getPropertyValue("--color-surface").trim() || "#F8F5EF";
+      ctx.fillRect(0, 0, w, h);
+
+      if (reviews.length === 0) {
+        ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("No risk review data", w / 2, h / 2);
+        return canvas;
+      }
+
+      var pad = {top: 20, right: 16, bottom: 28, left: 44};
+      var plotW = w - pad.left - pad.right;
+      var plotH = h - pad.top - pad.bottom;
+      var n = reviews.length;
+
+      var scores = reviews.map(function(r) { return r.aggregate_score || 0; });
+      var maxScore = Math.max.apply(null, scores);
+      if (maxScore === 0) maxScore = 1;
+
+      function xPos(i) { return pad.left + (i / Math.max(n - 1, 1)) * plotW; }
+      function yPos(val) { return pad.top + plotH - (val / maxScore) * plotH; }
+
+      // Fill area under line
+      var teal = cs.getPropertyValue("--color-accent").trim() || "#4A7A6F";
+      ctx.fillStyle = teal.replace(")", ", 0.15)").replace("rgb", "rgba");
+      ctx.beginPath();
+      ctx.moveTo(xPos(0), yPos(0));
+      for (var i = 0; i < n; i++) ctx.lineTo(xPos(i), yPos(scores[i]));
+      ctx.lineTo(xPos(n - 1), yPos(0));
+      ctx.closePath();
+      ctx.fill();
+
+      // Line
+      ctx.strokeStyle = teal;
+      ctx.lineWidth = 2.5;
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      for (var i = 0; i < n; i++) {
+        var x = xPos(i);
+        var y = yPos(scores[i]);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Dots
+      ctx.fillStyle = teal;
+      for (var i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.arc(xPos(i), yPos(scores[i]), 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // X axis labels
+      ctx.fillStyle = cs.getPropertyValue("--color-text-dim").trim() || "#666";
+      ctx.font = "10px sans-serif";
+      ctx.textAlign = "center";
+      if (reviews[0] && reviews[0].date) ctx.fillText(reviews[0].date.substring(5), xPos(0), h - 6);
+      if (n > 1 && reviews[n - 1] && reviews[n - 1].date) ctx.fillText(reviews[n - 1].date.substring(5), xPos(n - 1), h - 6);
+
+      // Y axis labels
+      ctx.textAlign = "right";
+      ctx.fillText(Math.round(maxScore).toString(), pad.left - 4, pad.top + 10);
+      ctx.fillText("0", pad.left - 4, pad.top + plotH);
+
+      // Title
+      ctx.font = "bold 11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Risk Score Over Time", w / 2, pad.top - 4);
+
+      return canvas;
+    }
   </script>
 </body>
 </html>

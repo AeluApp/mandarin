@@ -1,0 +1,87 @@
+{
+    "title": "The Old Bridge",
+    "title_zh": "老桥",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "You and a local man are standing on an old stone bridge, watching the river below. It's late afternoon.",
+        "setup_zh": "你和一位当地人站在一座老石桥上，看着下面的河。现在是下午。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这座桥很老了，有一百多年了。你觉得漂亮吗？",
+                "text_pinyin": "Zhè zuò qiáo hěn lǎo le, yǒu yī bǎi duō nián le. Nǐ juéde piàoliang ma?",
+                "text_en": "This bridge is very old, over a hundred years. Do you think it's beautiful?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share what you think about the bridge.",
+                "options": [
+                    {
+                        "text_zh": "很漂亮。我喜欢老的东西，它们有故事。",
+                        "text_pinyin": "Hěn piàoliang. Wǒ xǐhuan lǎo de dōngxi, tāmen yǒu gùshi.",
+                        "text_en": "It's beautiful. I like old things -- they have stories.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to his pride in the bridge's history with a thoughtful reflection -- connects beauty with time."
+                    },
+                    {
+                        "text_zh": "很漂亮。一百多年了，很厉害。",
+                        "text_pinyin": "Hěn piàoliang. Yī bǎi duō nián le, hěn lìhai.",
+                        "text_en": "It's beautiful. Over a hundred years, that's impressive.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees it's beautiful and repeats the age -- acknowledges what he said but doesn't add your own feeling."
+                    },
+                    {
+                        "text_zh": "桥很老了，安不安全？",
+                        "text_pinyin": "Qiáo hěn lǎo le, ān bu ānquán?",
+                        "text_en": "The bridge is very old -- is it safe?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "He shared the bridge's age with pride, and you turned it into a safety concern -- misreads his tone completely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊。我小时候每天从这座桥上走过去上学。那时候水比现在清。",
+                "text_pinyin": "Shì a. Wǒ xiǎo shíhou měi tiān cóng zhè zuò qiáo shàng zǒu guòqù shàng xué. Nà shíhou shuǐ bǐ xiànzài qīng.",
+                "text_en": "Yes. When I was little, I walked across this bridge every day to go to school. The water was clearer back then."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his memory.",
+                "options": [
+                    {
+                        "text_zh": "那一定很好。每天走过这座桥，看着水和山。",
+                        "text_pinyin": "Nà yīdìng hěn hǎo. Měi tiān zǒu guò zhè zuò qiáo, kàn zhe shuǐ hé shān.",
+                        "text_en": "That must have been wonderful. Walking across this bridge every day, looking at the water and mountains.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enters into his memory gently -- imagines the scene he described of walking to school past the river."
+                    },
+                    {
+                        "text_zh": "听起来很好。你小时候住在这里吗？",
+                        "text_pinyin": "Tīng qǐlái hěn hǎo. Nǐ xiǎo shíhou zhù zài zhèlǐ ma?",
+                        "text_en": "Sounds nice. Did you live here as a child?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Supportive but asks something he just answered -- he told you he walked this bridge to school as a kid."
+                    },
+                    {
+                        "text_zh": "水不干净吗？",
+                        "text_pinyin": "Shuǐ bù gānjìng ma?",
+                        "text_en": "Is the water not clean?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "He mentioned the water used to be clearer as a nostalgic detail, and you zeroed in on pollution -- misses the emotional point entirely."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Old bridges in China are quiet witnesses to generations. When someone shares a childhood memory tied to a place, they're inviting you into their personal history. Listening with warmth is the most respectful response."
+    }
+}

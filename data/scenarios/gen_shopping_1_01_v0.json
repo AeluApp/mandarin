@@ -1,0 +1,94 @@
+{
+    "title": "The Wrong Size Shoes",
+    "title_zh": "鞋子不合适",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_shopping_1_01_v0",
+    "tree": {
+        "setup": "A small shoe shop on a side street. Xiao Zhang runs the store alone. He has an uncanny ability to guess shoe sizes just by looking at someone's feet, and he's almost never wrong. The shop smells like new leather and the faint sweetness of shoe polish.",
+        "setup_zh": "小巷里的一家鞋店。小张一个人经营。他有一种看脚就能猜鞋码的本事，而且几乎不会错。店里闻起来有新皮革和鞋油淡淡的甜味。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你要买鞋吗？",
+                "text_pinyin": "nǐ hǎo! nǐ yào mǎi xié ma?",
+                "text_en": "Hello! Are you looking for shoes?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him you want to buy shoes.",
+                "options": [
+                    {
+                        "text_zh": "是的，我想买一双鞋。",
+                        "text_pinyin": "shì de, wǒ xiǎng mǎi yì shuāng xié.",
+                        "text_en": "Yes, I'd like to buy a pair of shoes.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang nods and glances at your feet for exactly one second.「三十九号，对吧？」双 (shuāng) is the measure word for pairs -- shoes, socks, chopsticks."
+                    },
+                    {
+                        "text_zh": "我看看。",
+                        "text_pinyin": "wǒ kànkan.",
+                        "text_en": "I'll take a look.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang steps aside with a gracious wave. He can wait. He knows you'll find something. 看看 (kànkan, 'take a look') is wonderfully casual."
+                    },
+                    {
+                        "text_zh": "你的鞋好看吗？",
+                        "text_pinyin": "nǐ de xié hǎokàn ma?",
+                        "text_en": "Are your shoes good-looking?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang looks down at his own worn shop shoes and chooses not to answer that question. 好看 means 'good-looking' -- useful, but perhaps not as an opening line to the shopkeeper."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这双怎么样？你试试？",
+                "text_pinyin": "zhè shuāng zěnmeyàng? nǐ shìshi?",
+                "text_en": "How about this pair? Want to try them on?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try the shoes and respond.",
+                "options": [
+                    {
+                        "text_zh": "有点小，有大一点的吗？",
+                        "text_pinyin": "yǒudiǎn xiǎo, yǒu dà yìdiǎn de ma?",
+                        "text_en": "A bit small. Do you have slightly bigger ones?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang blinks -- his size guess was wrong. He stares at your feet in genuine disbelief, then silently fetches the next size up. A rare defeat. 有一点 + adjective is perfect for polite complaints."
+                    },
+                    {
+                        "text_zh": "很好！我要买。",
+                        "text_pinyin": "hěn hǎo! wǒ yào mǎi.",
+                        "text_en": "Very nice! I'll buy them.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang smiles with quiet pride. Another perfect match. He wraps them in tissue paper with the tenderness of someone bundling a gift."
+                    },
+                    {
+                        "text_zh": "太贵了吧。",
+                        "text_pinyin": "tài guì le ba.",
+                        "text_en": "That's too expensive.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Zhang sighs. He hears this daily. But he does have a cheaper pair behind the counter -- he was just hoping you'd go for the good ones."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这双很合适！穿着很好看。",
+                "text_pinyin": "zhè shuāng hěn héshì! chuānzhe hěn hǎokàn.",
+                "text_en": "This pair fits well! They look great on you."
+            }
+        ],
+        "cultural_note": "Chinese shoe sizes use a different numbering system. A US size 8 is roughly a Chinese 41. Shop owners are often remarkably good at estimating sizes by sight -- years of practice."
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "title": "The Wooden Bridge",
+    "title_zh": "木桥",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're hiking and stop to rest on a small wooden bridge over a stream. A local farmer is sitting there eating his lunch.",
+        "setup_zh": "你在爬山，停下来在一座小木桥上休息。一位当地的农民正坐在那里吃午饭。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "坐吧，这里有风，比山上凉快。你从城里来的吧？城里人都喜欢来爬山。我倒是每天都走这条路，已经走了几十年了，从来没觉得有什么特别。",
+                "text_pinyin": "Zuò ba, zhèlǐ yǒu fēng, bǐ shān shàng liángkuai. Nǐ cóng chéng lǐ lái de ba? Chéng lǐ rén dōu xǐhuan lái pá shān. Wǒ dào shì měi tiān dōu zǒu zhè tiáo lù, yǐjīng zǒu le jǐ shí nián le, cónglái méi juéde yǒu shénme tèbié.",
+                "text_en": "Sit down — there's a breeze here, cooler than up the mountain. You're from the city, right? City folks love hiking. I walk this road every day, have for decades — never thought it was anything special."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the contrast between his daily life and your visit.",
+                "options": [
+                    {
+                        "text_zh": "也许就是因为我不是每天都能来，所以觉得特别美。但我觉得您每天走在这条路上，其实是很幸福的——只是习惯了就不觉得了。",
+                        "text_pinyin": "Yěxǔ jiù shì yīnwèi wǒ bú shì měi tiān dōu néng lái, suǒyǐ juéde tèbié měi. Dàn wǒ juéde nín měi tiān zǒu zài zhè tiáo lù shàng, qíshí shì hěn xìngfú de — zhǐ shì xíguàn le jiù bù juéde le.",
+                        "text_en": "Maybe it's because I can't come every day that it feels so beautiful. But I think walking this path daily is actually a kind of happiness — you just stop noticing when you're used to it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The visitor sees what the local has stopped seeing — both perspectives hold truth."
+                    },
+                    {
+                        "text_zh": "这里空气真好。",
+                        "text_pinyin": "Zhèlǐ kōngqì zhēn hǎo.",
+                        "text_en": "The air here is really good.",
+                        "score": 0.0,
+                        "feedback": "A surface observation that doesn't engage his reflection."
+                    },
+                    {
+                        "text_zh": "您种什么菜？",
+                        "text_pinyin": "Nín zhǒng shénme cài?",
+                        "text_en": "What vegetables do you grow?",
+                        "score": 0.0,
+                        "feedback": "Changes subject to farming details."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你这样一说，我倒是想起来了——我小时候第一次走到这座桥，看到下面的水那么清，高兴了好半天。后来走了太多次，就不看了。也许你说得对，幸福一直在，是我自己忘了看。",
+                "text_pinyin": "Nǐ zhèyàng yī shuō, wǒ dào shì xiǎng qǐlái le — wǒ xiǎo shíhou dì yī cì zǒu dào zhè zuò qiáo, kàn dào xiàmian de shuǐ nàme qīng, gāoxìng le hǎo bàntiān. Hòulái zǒu le tài duō cì, jiù bú kàn le. Yěxǔ nǐ shuō de duì, xìngfú yīzhí zài, shì wǒ zìjǐ wàng le kàn.",
+                "text_en": "Now that you say it, I remember — the first time I walked to this bridge as a child and saw how clear the water was below, I was happy for a long time. After too many crossings, I stopped looking. Maybe you're right — the happiness was always here, I just forgot to look."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his rediscovery.",
+                "options": [
+                    {
+                        "text_zh": "水一直那么清，桥一直在。有时候我们需要一个外人的眼睛来帮我们重新看到身边的美。今天您帮了我，我也帮了您——挺好的。",
+                        "text_pinyin": "Shuǐ yīzhí nàme qīng, qiáo yīzhí zài. Yǒu shíhou wǒmen xūyào yī ge wàirén de yǎnjing lái bāng wǒmen chóngxīn kàn dào shēnbiān de měi. Jīntiān nín bāng le wǒ, wǒ yě bāng le nín — tǐng hǎo de.",
+                        "text_en": "The water's always been clear, the bridge always here. Sometimes we need an outsider's eyes to see the beauty around us again. Today you helped me, I helped you — that's nice.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mutual gift — the stranger and the local each restore the other's sight."
+                    },
+                    {
+                        "text_zh": "您应该多带朋友来这里看看。",
+                        "text_pinyin": "Nín yīnggāi duō dài péngyou lái zhèlǐ kànkan.",
+                        "text_en": "You should bring friends here to see it.",
+                        "score": 0.0,
+                        "feedback": "Advice-giving instead of savoring the shared moment."
+                    },
+                    {
+                        "text_zh": "这条小溪流到哪里去？",
+                        "text_pinyin": "Zhè tiáo xiǎo xī liú dào nǎlǐ qù?",
+                        "text_en": "Where does this stream flow to?",
+                        "score": 0.0,
+                        "feedback": "A geography question during an emotional exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，说得好。以前我觉得你们城里人来爬山是「不懂生活」——有山有什么好看的？今天才知道，也许你们比我们更会「看」。谢谢你啊，年轻人。明天过桥的时候，我会记得往下看看的。",
+                "text_pinyin": "Hāhā, shuō de hǎo. Yǐqián wǒ juéde nǐmen chéng lǐ rén lái pá shān shì 'bù dǒng shēnghuó' — yǒu shān yǒu shénme hǎokàn de? Jīntiān cái zhīdào, yěxǔ nǐmen bǐ wǒmen gèng huì 'kàn'. Xièxie nǐ a, niánqīng rén. Míngtiān guò qiáo de shíhou, wǒ huì jìde wǎng xià kànkan de.",
+                "text_en": "Haha, well said. I used to think city folks coming to hike 'didn't understand life' — what's so special about mountains? Now I see, maybe you're better at 'looking' than we are. Thank you, young person. Tomorrow when I cross this bridge, I'll remember to look down."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his thanks and his promise to look.",
+                "options": [
+                    {
+                        "text_zh": "那明天您往下看的时候，那条小溪就会变回您小时候第一次看到的样子。不是水变了，是眼睛变回来了。",
+                        "text_pinyin": "Nà míngtiān nín wǎng xià kàn de shíhou, nà tiáo xiǎo xī jiù huì biàn huí nín xiǎo shíhou dì yī cì kàn dào de yàngzi. Bú shì shuǐ biàn le, shì yǎnjing biàn huílái le.",
+                        "text_en": "Then tomorrow when you look down, that stream will look the way it did the first time you saw it as a child. Not because the water changed — because your eyes changed back.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The stream didn't change, the seeing did — a perfect closing thought."
+                    },
+                    {
+                        "text_zh": "我下次还会来爬山的！",
+                        "text_pinyin": "Wǒ xià cì hái huì lái pá shān de!",
+                        "text_en": "I'll come hiking again next time!",
+                        "score": 0.0,
+                        "feedback": "A future plan that doesn't match the depth of the conversation."
+                    },
+                    {
+                        "text_zh": "您午饭吃的什么？看起来很好吃。",
+                        "text_pinyin": "Nín wǔfàn chī de shénme? Kàn qǐlái hěn hǎochī.",
+                        "text_en": "What are you having for lunch? It looks tasty.",
+                        "score": 0.0,
+                        "feedback": "Pivots to food at the conclusion of a meaningful exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The contrast between city visitors and rural locals is a recurring theme in Chinese life. City dwellers often seek nature as escape, while locals may overlook what surrounds them daily. The concept of 重新看到 (seeing again) connects to Buddhist 初心 (beginner's mind) — the ability to perceive the familiar as if for the first time."
+    }
+}

@@ -1,18 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- low horizon -->
-  <line x1="0" y1="52" x2="120" y2="52" stroke-width="0.5"/>
-  <!-- moon -->
-  <circle cx="75" cy="18" r="5" stroke-width="0.6"/>
-  <!-- cloud crossing moon -->
-  <path d="M65 19 Q72 16 80 18 Q85 20 88 17" stroke-width="0.4"/>
-  <!-- stars -->
-  <circle cx="20" cy="10" r="0.6" stroke-width="0.5"/>
-  <circle cx="35" cy="22" r="0.4" stroke-width="0.4"/>
-  <circle cx="48" cy="8" r="0.5" stroke-width="0.5"/>
-  <circle cx="100" cy="12" r="0.5" stroke-width="0.5"/>
-  <circle cx="15" cy="30" r="0.3" stroke-width="0.4"/>
-  <circle cx="55" cy="28" r="0.4" stroke-width="0.4"/>
-  <circle cx="108" cy="28" r="0.6" stroke-width="0.5"/>
-  <circle cx="90" cy="38" r="0.3" stroke-width="0.4"/>
-  <circle cx="30" cy="42" r="0.5" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- rooftop silhouette -->
+  <path d="M0 78 L15 78 L15 70 L20 66 L30 66 L30 72 L50 72 L55 64 L65 64 L65 72 L80 72 L80 68 L85 62 L95 62 L95 68 L105 68 L105 74 L120 74 L125 66 L135 66 L135 74 L150 74 L150 70 L155 65 L168 65 L168 74 L180 74 L180 78 L200 78" stroke="#2a2a2a" stroke-width="0.7" fill="#2a2a2a" fill-opacity="0.06"/>
+  <!-- chimney -->
+  <rect x="88" y="56" width="4" height="6" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- antenna -->
+  <line x1="130" y1="66" x2="130" y2="58" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- crescent moon -->
+  <path d="M140 20 Q148 16 152 22 Q148 18 144 20 Q140 24 142 30 Q138 26 140 20" stroke="#2a2a2a" stroke-width="0.7" fill="#2a2a2a" fill-opacity="0.06"/>
+  <!-- moon glow -->
+  <circle cx="146" cy="22" r="8" stroke="#2a2a2a" stroke-width="0.15" opacity="0.12"/>
+  <circle cx="146" cy="22" r="14" stroke="#2a2a2a" stroke-width="0.1" opacity="0.06"/>
+  <!-- stars — varied sizes and brightness -->
+  <circle cx="28" cy="12" r="0.8" fill="#2a2a2a" fill-opacity="0.5"/>
+  <circle cx="28" cy="12" r="2" stroke="#2a2a2a" stroke-width="0.15" opacity="0.15"/>
+  <circle cx="52" cy="24" r="0.5" fill="#2a2a2a" fill-opacity="0.4"/>
+  <circle cx="78" cy="8" r="0.7" fill="#2a2a2a" fill-opacity="0.45"/>
+  <circle cx="78" cy="8" r="1.8" stroke="#2a2a2a" stroke-width="0.12" opacity="0.12"/>
+  <circle cx="110" cy="18" r="0.6" fill="#2a2a2a" fill-opacity="0.4"/>
+  <circle cx="172" cy="10" r="0.7" fill="#2a2a2a" fill-opacity="0.5"/>
+  <circle cx="172" cy="10" r="1.8" stroke="#2a2a2a" stroke-width="0.12" opacity="0.12"/>
+  <circle cx="188" cy="30" r="0.5" fill="#2a2a2a" fill-opacity="0.35"/>
+  <circle cx="16" cy="34" r="0.4" fill="#2a2a2a" fill-opacity="0.3"/>
+  <circle cx="42" cy="42" r="0.5" fill="#2a2a2a" fill-opacity="0.35"/>
+  <circle cx="118" cy="6" r="0.5" fill="#2a2a2a" fill-opacity="0.35"/>
+  <circle cx="65" cy="38" r="0.4" fill="#2a2a2a" fill-opacity="0.25"/>
+  <circle cx="185" cy="48" r="0.4" fill="#2a2a2a" fill-opacity="0.25"/>
+  <circle cx="95" cy="30" r="0.6" fill="#2a2a2a" fill-opacity="0.35"/>
+  <circle cx="160" cy="42" r="0.5" fill="#2a2a2a" fill-opacity="0.3"/>
+  <!-- cloud wisps -->
+  <path d="M20 50 Q35 46 50 50 Q60 48 70 52" stroke="#2a2a2a" stroke-width="0.35" opacity="0.2"/>
+  <path d="M22 52 Q38 48 52 52" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <path d="M110 44 Q125 40 140 44 Q148 42 155 46" stroke="#2a2a2a" stroke-width="0.35" opacity="0.2"/>
+  <path d="M115 46 Q130 42 145 46" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <!-- subtle horizon glow -->
+  <path d="M0 76 Q50 72 100 76 Q150 72 200 76" stroke="#2a2a2a" stroke-width="0.2" opacity="0.1"/>
+  <!-- window glow in building -->
+  <rect x="57" y="66" width="3" height="4" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.08"/>
+  <rect x="61" y="66" width="3" height="4" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.08"/>
+  <rect x="157" y="67" width="3" height="4" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.08"/>
+  <rect x="162" y="67" width="3" height="4" stroke="#2a2a2a" stroke-width="0.3" fill="#2a2a2a" fill-opacity="0.08"/>
 </svg>

@@ -1,0 +1,123 @@
+{
+    "title": "Walking in the Park",
+    "title_zh": "公园散步",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're walking in the park early in the morning and see a group of elderly people doing tai chi. One of them, Grandpa Wu, notices you watching and waves you over.",
+        "setup_zh": "清晨你在公园散步，看到一群老人在打太极拳。其中一位吴爷爷看到你在看，向你招手。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "年轻人，早上好！你是不是对太极拳感兴趣？过来一起练吧！",
+                "text_pinyin": "Niánqīng rén, zǎoshang hǎo! Nǐ shì bú shì duì tàijí quán gǎn xìngqù? Guòlái yīqǐ liàn ba!",
+                "text_en": "Young person, good morning! Are you interested in tai chi? Come practice with us!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his invitation.",
+                "options": [
+                    {
+                        "text_zh": "早上好！我看你们打得很好看，动作很慢很优美。我没学过，可以跟着学吗？",
+                        "text_pinyin": "Zǎoshang hǎo! Wǒ kàn nǐmen dǎ de hěn hǎokàn, dòngzuò hěn màn hěn yōuměi. Wǒ méi xué guò, kěyǐ gēn zhe xué ma?",
+                        "text_en": "Good morning! You all look wonderful — the movements are so slow and graceful. I've never learned — can I follow along?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Complimentary and humble — ideal approach."
+                    },
+                    {
+                        "text_zh": "我只是路过。",
+                        "text_pinyin": "Wǒ zhǐ shì lùguò.",
+                        "text_en": "I'm just passing by.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Declines but not rudely."
+                    },
+                    {
+                        "text_zh": "太极拳不是很慢吗？能锻炼身体吗？",
+                        "text_pinyin": "Tàijí quán bú shì hěn màn ma? Néng duànliàn shēntǐ ma?",
+                        "text_en": "Isn't tai chi really slow? Does it actually exercise the body?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Skeptical tone is disrespectful to practitioners."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以！太极拳看起来慢，但是每个动作都在锻炼身体。你跟着我做——先站好，两只脚分开，慢慢举起手……对，就是这样。",
+                "text_pinyin": "Dāngrán kěyǐ! Tàijí quán kàn qǐlái màn, dànshì měi ge dòngzuò dōu zài duànliàn shēntǐ. Nǐ gēn zhe wǒ zuò — xiān zhàn hǎo, liǎng zhī jiǎo fēnkāi, mànmàn jǔ qǐ shǒu…… duì, jiù shì zhèyàng.",
+                "text_en": "Of course! Tai chi looks slow, but every movement exercises the body. Follow me — first stand properly, feet apart, slowly raise your hands... yes, just like that."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond while learning the movements.",
+                "options": [
+                    {
+                        "text_zh": "看起来简单，做起来不容易啊！吴爷爷，您练了多久了？",
+                        "text_pinyin": "Kàn qǐlái jiǎndān, zuò qǐlái bù róngyì a! Wú yéye, nín liàn le duōjiǔ le?",
+                        "text_en": "It looks simple but it's not easy to do! Grandpa Wu, how long have you been practicing?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest about the difficulty and shows respect for his experience."
+                    },
+                    {
+                        "text_zh": "我做得对吗？",
+                        "text_pinyin": "Wǒ zuò de duì ma?",
+                        "text_en": "Am I doing it right?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Asks for feedback but doesn't engage further."
+                    },
+                    {
+                        "text_zh": "这个太难了，我做不了。",
+                        "text_pinyin": "Zhège tài nán le, wǒ zuò bù liǎo.",
+                        "text_en": "This is too hard, I can't do it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Gives up too quickly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我练了三十多年了！一开始谁都觉得难，慢慢来就好了。我们每天早上六点半在这里练，你要是想学，随时过来。来得多了，自然就会了。",
+                "text_pinyin": "Wǒ liàn le sānshí duō nián le! Yī kāishǐ shuí dōu juéde nán, mànmàn lái jiù hǎo le. Wǒmen měi tiān zǎoshang liù diǎn bàn zài zhèlǐ liàn, nǐ yàoshi xiǎng xué, suíshí guòlái. Lái de duō le, zìrán jiù huì le.",
+                "text_en": "Over thirty years! At first everyone finds it hard — take it slowly and it'll come. We practice here every morning at six thirty. If you want to learn, come anytime. Come often enough and you'll naturally get it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and respond.",
+                "options": [
+                    {
+                        "text_zh": "谢谢吴爷爷！三十年，真了不起。那我明天早上也来，可以吗？",
+                        "text_pinyin": "Xièxie Wú yéye! Sānshí nián, zhēn liǎobuqǐ. Nà wǒ míngtiān zǎoshang yě lái, kěyǐ ma?",
+                        "text_en": "Thank you, Grandpa Wu! Thirty years — that's amazing. I'll come tomorrow morning too, okay?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Expresses admiration and commits to returning — shows sincerity."
+                    },
+                    {
+                        "text_zh": "谢谢，我考虑考虑。",
+                        "text_pinyin": "Xièxie, wǒ kǎolǜ kǎolǜ.",
+                        "text_en": "Thanks, I'll think about it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Non-committal."
+                    },
+                    {
+                        "text_zh": "六点半太早了。",
+                        "text_pinyin": "Liù diǎn bàn tài zǎo le.",
+                        "text_en": "Six thirty is too early.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Focuses on the difficulty rather than the opportunity."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Early morning tai chi in parks is a beloved tradition across China. Groups welcome newcomers warmly. The phrase 「来得多了，自然就会了」 (come often enough and you'll get it) reflects the Chinese learning philosophy of patient repetition over time."
+    },
+    "hsk_level": 3
+}

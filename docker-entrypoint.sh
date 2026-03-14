@@ -3,8 +3,8 @@ set -e
 
 mkdir -p /data
 
-# If Litestream replica URL is configured, restore DB and run under replication
-if [ -n "$LITESTREAM_REPLICA_URL" ]; then
+# If Litestream S3 bucket is configured, restore DB and run under replication
+if [ -n "$LITESTREAM_S3_BUCKET" ]; then
     echo "Restoring database from Litestream replica..."
     litestream restore -if-db-not-exists -if-replica-exists -config /etc/litestream.yml /data/mandarin.db
 

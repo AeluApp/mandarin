@@ -1,0 +1,160 @@
+{
+    "title": "The Customer Service Labyrinth",
+    "title_zh": "客服迷宫",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_4_02_v0",
+    "tree": {
+        "setup": "You've been on hold for twelve minutes, listening to a loop of synthesized guzheng music that has become disturbingly familiar. Your internet hasn't worked for two days. Finally, customer service agent Xiao Li picks up — a young man whose voice suggests he has already handled approximately nine hundred complaints today, and yet somehow maintains the warmth of someone who genuinely wants to help.",
+        "setup_zh": "你已经等了十二分钟，听着循环播放的合成古筝音乐，熟悉到令人不安。你的网络已经两天不能用了。终于，客服小李接了电话——一个年轻人，声音听起来今天已经处理了大约九百个投诉，但不知怎么还保持着真心想帮忙的温暖。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，这里是网络客服中心。请问您遇到了什么问题？",
+                "text_pinyin": "nín hǎo, zhèlǐ shì wǎngluò kèfú zhōngxīn. qǐngwèn nín yùdào le shénme wèntí?",
+                "text_en": "Hello, this is the internet customer service center. What problem are you experiencing?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your internet problem.",
+                "options": [
+                    {
+                        "text_zh": "你好，我家的网络两天没有信号了。路由器重启过了，但是还是连不上。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiā de wǎngluò liǎng tiān méiyǒu xìnhào le. lùyóuqì chóngqǐ guò le, dànshì háishì lián bú shàng.",
+                        "text_en": "Hello, my home internet has had no signal for two days. I've restarted the router but still can't connect.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Duration plus troubleshooting already attempted — Xiao Li skips three steps in his script. You've saved you both five minutes."
+                    },
+                    {
+                        "text_zh": "网不能用了。",
+                        "text_pinyin": "wǎng bù néng yòng le.",
+                        "text_en": "The internet doesn't work.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear but sparse. He'll walk through the standard checklist with you."
+                    },
+                    {
+                        "text_zh": "你们的网络太差了！",
+                        "text_pinyin": "nǐmen de wǎngluò tài chà le!",
+                        "text_en": "Your internet service is terrible!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Xiao Li absorbs this with the practiced calm of a man who has a stress ball just off-camera."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我理解您很着急。我先查一下您的账户。请问您的手机号码是多少？",
+                "text_pinyin": "wǒ lǐjiě nín hěn zháojí. wǒ xiān chá yíxià nín de zhànghù. qǐngwèn nín de shǒujī hàomǎ shì duōshǎo?",
+                "text_en": "I understand you're frustrated. Let me check your account first. What's your phone number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your phone number.",
+                "options": [
+                    {
+                        "text_zh": "我的手机号是138-1234-5678。账户名是我的名字。",
+                        "text_pinyin": "wǒ de shǒujī hào shì yāo sān bā, yāo èr sān sì, wǔ liù qī bā. zhànghù míng shì wǒ de míngzi.",
+                        "text_en": "My number is 138-1234-5678. The account is under my name.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Using 幺 (yāo) for 1 on the phone — the correct way to avoid confusion with 七 (qī). Xiao Li types it in immediately."
+                    },
+                    {
+                        "text_zh": "138-1234-5678。",
+                        "text_pinyin": "yāo sān bā, yāo èr sān sì, wǔ liù qī bā.",
+                        "text_en": "138-1234-5678.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. He pulls up your account."
+                    },
+                    {
+                        "text_zh": "等一下，我找找看我的号码……",
+                        "text_pinyin": "děng yíxià, wǒ zhǎozhǎo kàn wǒ de hàomǎ……",
+                        "text_en": "Wait, let me look for my number...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Li waits. He has waited for longer. He has waited for people who never found their number."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到了。我看到您那边确实有一个网络故障。我们的技术人员明天下午可以去您家检查。您明天在家吗？",
+                "text_pinyin": "zhǎo dào le. wǒ kàn dào nín nàbiān quèshí yǒu yí gè wǎngluò gùzhàng. wǒmen de jìshù rényuán míngtiān xiàwǔ kěyǐ qù nín jiā jiǎnchá. nín míngtiān zài jiā ma?",
+                "text_en": "Found it. I can see there is indeed a network issue on your end. Our technician can come check tomorrow afternoon. Will you be home?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your availability.",
+                "options": [
+                    {
+                        "text_zh": "明天下午可以。大概几点？我需要请半天假。",
+                        "text_pinyin": "míngtiān xiàwǔ kěyǐ. dàgài jǐ diǎn? wǒ xūyào qǐng bàn tiān jiǎ.",
+                        "text_en": "Tomorrow afternoon works. What time roughly? I'll need to take a half day off.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking for a time window — because「下午」is the vaguest appointment in human history, and Xiao Li knows it."
+                    },
+                    {
+                        "text_zh": "好的，我在家等。",
+                        "text_pinyin": "hǎo de, wǒ zài jiā děng.",
+                        "text_en": "OK, I'll wait at home.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreeable. He'll give you a range."
+                    },
+                    {
+                        "text_zh": "能不能今天就来？",
+                        "text_pinyin": "néng bu néng jīntiān jiù lái?",
+                        "text_en": "Can they come today?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Li checks. Today's slots are full — tomorrow is the best he can do."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "大概两点到四点之间。技术人员会提前打电话给您。还有什么问题吗？",
+                "text_pinyin": "dàgài liǎng diǎn dào sì diǎn zhī jiān. jìshù rényuán huì tíqián dǎ diànhuà gěi nín. hái yǒu shénme wèntí ma?",
+                "text_en": "Between 2 and 4 PM roughly. The technician will call you in advance. Any other questions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and close the call.",
+                "options": [
+                    {
+                        "text_zh": "没有了。谢谢你，小李。你的态度很好，帮了我大忙。",
+                        "text_pinyin": "méiyǒu le. xièxie nǐ, Xiǎo Lǐ. nǐ de tàidu hěn hǎo, bāng le wǒ dà máng.",
+                        "text_en": "No more questions. Thank you, Xiao Li. Your attitude is great — you've been a big help.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Complimenting a service agent's attitude — Xiao Li's stress ball goes untouched for the first time today."
+                    },
+                    {
+                        "text_zh": "谢谢，再见。",
+                        "text_pinyin": "xièxie, zàijiàn.",
+                        "text_en": "Thanks, bye.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean exit. The guzheng music resumes for the next caller."
+                    },
+                    {
+                        "text_zh": "希望明天能修好。",
+                        "text_pinyin": "xīwàng míngtiān néng xiū hǎo.",
+                        "text_en": "Hope it gets fixed tomorrow.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Li hopes so too. He genuinely does."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "When reading phone numbers aloud in Chinese, 1 is often pronounced 幺 (yāo) instead of 一 (yī) to avoid confusion. Chinese customer service agents are addressed as 客服 (kèfú) and typically follow strict scripts, but personal warmth still shines through."
+    }
+}

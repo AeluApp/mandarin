@@ -1,0 +1,160 @@
+{
+    "title": "The Annual Checkup Philosopher",
+    "title_zh": "体检哲学家",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_doctor_5_02_v0",
+    "tree": {
+        "setup": "A health checkup center that manages to be both clinical and oddly calming — the walls are pale green, the staff wear matching scrubs with small smiley-face pins, and there's a water cooler that dispenses both cold and warm water (this being China, most people choose warm). Nurse Feng manages the checkup process with the efficiency of an air traffic controller and the warmth of a kindergarten teacher. She has guided three thousand people through their annual physicals and remembers a surprising number of their cholesterol levels.",
+        "setup_zh": "体检中心既有临床的严肃感又奇妙地让人安心——墙壁是淡绿色的，工作人员穿着统一的制服，上面别着小小的笑脸别针，饮水机同时供应冷水和温水（在中国，大多数人选择温水）。冯护士管理体检流程的效率堪比空管员，温暖程度堪比幼儿园老师。她已经带三千人做过年度体检，记住了其中许多人的胆固醇水平。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早上好！先登记一下。请问你的体检套餐是哪一种？带预约单了吗？",
+                "text_pinyin": "zǎoshàng hǎo! xiān dēngjì yíxià. qǐngwèn nǐ de tǐjiǎn tàocān shì nǎ yì zhǒng? dài yùyuē dān le ma?",
+                "text_en": "Good morning! Let's register first. Which checkup package are you booked for? Did you bring your appointment slip?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check in for your annual physical.",
+                "options": [
+                    {
+                        "text_zh": "早上好！预约单在这里。我预约的是全面体检套餐。这是我第一次在这里做体检，不太清楚流程。",
+                        "text_pinyin": "zǎoshàng hǎo! yùyuē dān zài zhèlǐ. wǒ yùyuē de shì quánmiàn tǐjiǎn tàocān. zhè shì wǒ dì yī cì zài zhèlǐ zuò tǐjiǎn, bú tài qīngchǔ liúchéng.",
+                        "text_en": "Good morning! Here's my appointment slip. I booked the comprehensive checkup package. This is my first time here — I'm not sure about the process.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Admitting unfamiliarity with the process — Nurse Feng beams. Guiding newcomers is her favorite part of the job."
+                    },
+                    {
+                        "text_zh": "预约了全面体检，给你看预约单。",
+                        "text_pinyin": "yùyuē le quánmiàn tǐjiǎn, gěi nǐ kàn yùyuē dān.",
+                        "text_en": "I booked the full checkup — here's the appointment slip.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She scans the barcode and you're in the system."
+                    },
+                    {
+                        "text_zh": "我来做体检的。",
+                        "text_pinyin": "wǒ lái zuò tǐjiǎn de.",
+                        "text_en": "I'm here for a checkup.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She'll need the appointment slip and package type. One detail at a time."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，全面套餐。今天的项目包括：抽血、尿检、心电图、B超、胸片、视力检查，还有内科和外科的一般检查。首先你空腹来的吧？抽血和B超需要空腹。",
+                "text_pinyin": "hǎo de, quánmiàn tàocān. jīntiān de xiàngmù bāokuò: chōu xuè, niào jiǎn, xīndiàntú, B chāo, xiōng piàn, shìlì jiǎnchá, hái yǒu nèikē hé wàikē de yìbān jiǎnchá. shǒuxiān nǐ kōngfù lái de ba? chōu xuè hé B chāo xūyào kōngfù.",
+                "text_en": "OK, comprehensive package. Today's items include: blood draw, urine test, ECG, ultrasound, chest X-ray, vision test, plus general internal medicine and surgical exams. First — you came fasting, right? Blood draw and ultrasound require fasting."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm you're fasting and ask about the order.",
+                "options": [
+                    {
+                        "text_zh": "对，从昨晚十点以后就没有吃东西了，只喝了一点水。这么多项目，有没有建议的先后顺序？哪些先做比较好？",
+                        "text_pinyin": "duì, cóng zuó wǎn shí diǎn yǐhòu jiù méiyǒu chī dōngxi le, zhǐ hē le yìdiǎn shuǐ. zhème duō xiàngmù, yǒu méiyǒu jiànyì de xiānhòu shùnxù? nǎxiē xiān zuò bǐjiào hǎo?",
+                        "text_en": "Yes, I haven't eaten since 10 PM last night — just had a little water. With so many items, is there a recommended order? Which ones should I do first?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Fasting confirmed with timeline, and asking about the optimal order — Nurse Feng produces a laminated route card she made herself."
+                    },
+                    {
+                        "text_zh": "空腹来的。先做什么？",
+                        "text_pinyin": "kōngfù lái de. xiān zuò shénme?",
+                        "text_en": "I'm fasting. What first?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. She hands you the route card."
+                    },
+                    {
+                        "text_zh": "空腹的。有点饿了。",
+                        "text_pinyin": "kōngfù de. yǒudiǎn è le.",
+                        "text_en": "Fasting. I'm a bit hungry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Nurse Feng sympathizes — she points to the breakfast area for after the blood draw. Just two more floors of fasting."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "先去三楼抽血，然后做B超，因为这两个都要空腹。做完以后可以去一楼吃早餐——我们提供免费的。吃完再做其他项目，不分先后。",
+                "text_pinyin": "xiān qù sān lóu chōu xuè, ránhòu zuò B chāo, yīnwèi zhè liǎng gè dōu yào kōngfù. zuò wán yǐhòu kěyǐ qù yī lóu chī zǎocān——wǒmen tígōng miǎnfèi de. chī wán zài zuò qítā xiàngmù, bù fēn xiānhòu.",
+                "text_en": "Go to the third floor for blood draw first, then ultrasound, since both require fasting. After those, you can eat breakfast on the first floor — we provide it for free. Then do the other items in any order."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and ask about results.",
+                "options": [
+                    {
+                        "text_zh": "太好了，还有免费早餐。请问体检报告什么时候能出来？是来取还是可以在网上查？",
+                        "text_pinyin": "tài hǎo le, hái yǒu miǎnfèi zǎocān. qǐngwèn tǐjiǎn bàogào shénme shíhòu néng chūlái? shì lái qǔ háishi kěyǐ zài wǎngshàng chá?",
+                        "text_en": "Great, free breakfast too! When will the checkup report be ready? Do I pick it up in person or can I check online?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Planning ahead for the results — Nurse Feng explains both options. Online is faster; in-person includes a doctor's consultation."
+                    },
+                    {
+                        "text_zh": "好的，先去三楼。结果多久出来？",
+                        "text_pinyin": "hǎo de, xiān qù sān lóu. jiéguǒ duō jiǔ chūlái?",
+                        "text_en": "OK, third floor first. How long for results?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She answers: three to five working days. The app is faster."
+                    },
+                    {
+                        "text_zh": "先去吃早餐行不行？",
+                        "text_pinyin": "xiān qù chī zǎocān xíng bù xíng?",
+                        "text_en": "Can I eat breakfast first?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Nurse Feng's smiley-face pin seems to dim slightly. Blood draw and ultrasound require fasting — breakfast comes after."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "报告三到五个工作日出来。你可以下载我们的APP查看电子版，也可以来这里取纸质版。取纸质版的话还可以预约一个医生帮你解读报告。建议你做一下报告解读，有些数据自己看可能不太理解。",
+                "text_pinyin": "bàogào sān dào wǔ gè gōngzuò rì chūlái. nǐ kěyǐ xiàzǎi wǒmen de APP chákàn diànzǐ bǎn, yě kěyǐ lái zhèlǐ qǔ zhǐzhì bǎn. qǔ zhǐzhì bǎn de huà hái kěyǐ yùyuē yí gè yīshēng bāng nǐ jiědú bàogào. jiànyì nǐ zuò yíxià bàogào jiědú, yǒuxiē shùjù zìjǐ kàn kěnéng bú tài lǐjiě.",
+                "text_en": "Report takes three to five business days. You can download our app for the electronic version or pick up a paper copy here. With the paper copy, you can also book a doctor to explain the results. I recommend the report consultation — some data can be hard to interpret on your own."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on how to get results and head to the blood draw.",
+                "options": [
+                    {
+                        "text_zh": "那我两个都要吧——先在APP上看电子版，然后再来取纸质版的时候预约医生解读。好了，我先去三楼抽血。冯护士，谢谢你！",
+                        "text_pinyin": "nà wǒ liǎng gè dōu yào ba——xiān zài APP shàng kàn diànzǐ bǎn, ránhòu zài lái qǔ zhǐzhì bǎn de shíhòu yùyuē yīshēng jiědú. hǎo le, wǒ xiān qù sān lóu chōu xuè. Féng hùshi, xièxie nǐ!",
+                        "text_en": "I'll do both — check the electronic version on the app first, then book a doctor's consultation when I pick up the paper copy. OK, I'll head to the third floor for the blood draw. Thank you, Nurse Feng!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Belt and suspenders approach to health data — Nurse Feng approves. She points to the elevator with a practiced gesture that somehow conveys both direction and encouragement."
+                    },
+                    {
+                        "text_zh": "好的，我下APP看吧。先去抽血了。",
+                        "text_pinyin": "hǎo de, wǒ xià APP kàn ba. xiān qù chōu xuè le.",
+                        "text_en": "OK, I'll use the app. Going for the blood draw now.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient choice. She waves you toward the elevator."
+                    },
+                    {
+                        "text_zh": "那个……抽血疼不疼？",
+                        "text_pinyin": "nàge……chōu xuè téng bú téng?",
+                        "text_en": "Um... does the blood draw hurt?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Nurse Feng has answered this question approximately three thousand times.「一点点，」she says, which has always been both true and insufficient."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Annual health checkups (年度体检, niándù tǐjiǎn) are common in China, often subsidized by employers. Checkup centers (体检中心) offer various packages (套餐, tàocān) ranging from basic to comprehensive. B超 (B chāo, ultrasound) and 胸片 (xiōng piàn, chest X-ray) are standard items. Most centers now offer both app-based and paper results, with optional doctor consultations to explain findings."
+    }
+}

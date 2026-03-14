@@ -1,0 +1,89 @@
+{
+  "title": "First Day of Autumn",
+  "title_zh": "立秋的那天",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're walking through a park with your friend Hao on the first cool day after summer. The leaves are just beginning to change.",
+    "setup_zh": "夏天过后第一个凉爽的日子，你和朋友浩在公园里散步。树叶刚开始变色。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你闻到了吗？空气里有一种不一样的味道。夏天的热气突然就散了，好像一夜之间就变成了秋天。每年到这个时候我都会有一种说不清的感觉。",
+        "text_pinyin": "Nǐ wén dào le ma? Kōngqì lǐ yǒu yī zhǒng bù yíyàng de wèidào. Xiàtiān de rèqì tūrán jiù sàn le, hǎoxiàng yī yè zhī jiān jiù biàn chéng le qiūtiān. Měi nián dào zhège shíhou wǒ dōu huì yǒu yī zhǒng shuō bù qīng de gǎnjué.",
+        "text_en": "Can you smell it? There's something different in the air. Summer's heat just suddenly lifted, as if autumn arrived overnight. Every year around this time I get a feeling I can't quite describe."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share how the change of season makes you feel.",
+        "options": [
+          {
+            "text_zh": "我也有。有点像轻微的忧伤，但不是难过。也许是因为秋天提醒我们时间在走，什么都留不住。但正因为留不住，所以才觉得珍贵。",
+            "text_pinyin": "Wǒ yě yǒu. Yǒudiǎn xiàng qīngwēi de yōushāng, dàn bú shì nánguò. Yěxǔ shì yīnwèi qiūtiān tíxǐng wǒmen shíjiān zài zǒu, shénme dōu liú bú zhù. Dàn zhèng yīnwèi liú bú zhù, suǒyǐ cái juéde zhēnguì.",
+            "text_en": "I feel it too. It's like a mild melancholy, but not sadness. Maybe it's because autumn reminds us that time is passing and nothing can be held onto. But precisely because we can't hold on, things feel precious.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Expressed — captures the bittersweet essence of seasonal change."
+          },
+          {
+            "text_zh": "我比较喜欢夏天，可以去游泳。",
+            "text_pinyin": "Wǒ bǐjiào xǐhuan xiàtiān, kěyǐ qù yóuyǒng.",
+            "text_en": "I prefer summer — you can go swimming.",
+            "score": 0.0,
+            "feedback": "Misses the reflective mood he's setting."
+          },
+          {
+            "text_zh": "天气预报说下周会更冷。",
+            "text_pinyin": "Tiānqì yùbào shuō xià zhōu huì gèng lěng.",
+            "text_en": "The weather forecast says next week will be colder.",
+            "score": 0.0,
+            "feedback": "Responds with data to a poetic observation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "珍贵……你说得好。我奶奶以前说，秋天是让人学会放手的季节。树叶落了不是因为树不要它们了，是因为该放下的时候就要放下。",
+        "text_pinyin": "Zhēnguì…… nǐ shuō de hǎo. Wǒ nǎinai yǐqián shuō, qiūtiān shì ràng rén xuéhuì fàngshǒu de jìjié. Shùyè luò le bú shì yīnwèi shù bú yào tāmen le, shì yīnwèi gāi fàng xià de shíhou jiù yào fàng xià.",
+        "text_en": "Precious... well said. My grandmother used to say autumn is the season for learning to let go. Leaves fall not because the tree doesn't want them, but because when it's time to release, you release."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the idea of letting go.",
+        "options": [
+          {
+            "text_zh": "你奶奶真有智慧。我们总是怕失去，但也许失去也是一种成长。就像树落了叶子才能过冬，来年才会有新的叶子。",
+            "text_pinyin": "Nǐ nǎinai zhēn yǒu zhìhuì. Wǒmen zǒng shì pà shīqù, dàn yěxǔ shīqù yě shì yī zhǒng chéngzhǎng. Jiù xiàng shù luò le yèzi cái néng guòdōng, lái nián cái huì yǒu xīn de yèzi.",
+            "text_en": "Your grandmother was truly wise. We're always afraid of losing things, but maybe loss is also a form of growth. Just like a tree sheds its leaves to survive winter, so new ones can come the following year.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Extends the metaphor naturally — connects seasonal wisdom to human experience."
+          },
+          {
+            "text_zh": "你奶奶现在身体怎么样？",
+            "text_pinyin": "Nǐ nǎinai xiànzài shēntǐ zěnmeyàng?",
+            "text_en": "How is your grandmother's health now?",
+            "score": 0.0,
+            "feedback": "Shifts to a personal inquiry instead of engaging with the wisdom shared."
+          },
+          {
+            "text_zh": "秋天的银杏叶很好看，我们去拍照吧。",
+            "text_pinyin": "Qiūtiān de yínxìng yè hěn hǎokàn, wǒmen qù pāi zhào ba.",
+            "text_en": "Ginkgo leaves are beautiful in autumn, let's go take photos.",
+            "score": 0.0,
+            "feedback": "Jumps to activity planning during a contemplative moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "嗯。你看那片叶子，正好落下来了。它不急也不慌，就是慢慢地飘下来。也许我们也可以学它，放下的时候不用那么用力。",
+        "text_pinyin": "En. Nǐ kàn nà piàn yèzi, zhènghǎo luò xiàlái le. Tā bù jí yě bù huāng, jiù shì mànman de piāo xiàlái. Yěxǔ wǒmen yě kěyǐ xué tā, fàng xià de shíhou bú yòng nàme yòng lì.",
+        "text_en": "Mm. Look, that leaf just fell. It's not hurried or panicked — it simply drifts down slowly. Maybe we can learn from it. When it's time to let go, we don't have to try so hard."
+      }
+    ],
+    "cultural_note": "The concept of 立秋 (lìqiū, Start of Autumn) is one of the 24 solar terms in the traditional Chinese calendar. Chinese culture has a deep tradition of connecting seasonal change to human emotion — autumn is associated with nostalgia, letting go, and quiet reflection. The phrase「悲秋」(bēi qiū, autumn melancholy) appears throughout classical Chinese poetry."
+  }
+}

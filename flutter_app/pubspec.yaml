@@ -1,0 +1,92 @@
+name: aelu
+description: Aelu — Mandarin learning, built for deep practice.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Navigation
+  go_router: ^14.0.0
+
+  # State management
+  riverpod: ^2.5.0
+  flutter_riverpod: ^2.5.0
+
+  # Networking
+  dio: ^5.4.0
+  web_socket_channel: ^3.0.0
+
+  # Storage
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.0
+  sqflite: ^2.3.0
+  path: ^1.9.0
+
+  # Push notifications
+  firebase_core: ^3.0.0
+  firebase_messaging: ^15.0.0
+  flutter_local_notifications: ^18.0.0
+  timezone: ^0.10.0
+
+  # UI
+  flutter_svg: ^2.0.0
+
+  # Platform
+  connectivity_plus: ^6.0.0
+
+  # Audio
+  record: ^6.0.0
+  audioplayers: ^6.0.0
+
+  # Payments
+  flutter_stripe: ^11.0.0
+
+  # Sharing
+  share_plus: ^10.0.0
+
+  # Utils
+  package_info_plus: ^8.0.0
+  url_launcher: ^6.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/sounds/
+    - assets/images/
+
+  fonts:
+    - family: CormorantGaramond
+      fonts:
+        - asset: assets/fonts/CormorantGaramond-Regular.ttf
+        - asset: assets/fonts/CormorantGaramond-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/CormorantGaramond-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/CormorantGaramond-Bold.ttf
+          weight: 700
+    - family: SourceSerif4
+      fonts:
+        - asset: assets/fonts/SourceSerif4-Regular.ttf
+        - asset: assets/fonts/SourceSerif4-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SourceSerif4-Bold.ttf
+          weight: 700
+    - family: NotoSerifSC
+      fonts:
+        - asset: assets/fonts/NotoSerifSC-Regular.otf
+        - asset: assets/fonts/NotoSerifSC-Medium.otf
+          weight: 500
+        - asset: assets/fonts/NotoSerifSC-Bold.otf
+          weight: 700

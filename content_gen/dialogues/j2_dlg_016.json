@@ -1,0 +1,83 @@
+{
+  "title": "The Homework Question",
+  "title_zh": "写作业的问题",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're studying at a café. A university student at the next table politely asks you a question.",
+    "setup_zh": "你在咖啡店学习。旁边桌的大学生礼貌地问你一个问题。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "不好意思打扰你。你的中文书看起来很有意思。你也在学中文吗？",
+        "text_pinyin": "Bù hǎo yìsi dǎrǎo nǐ. Nǐ de Zhōngwén shū kàn qǐlái hěn yǒu yìsi. Nǐ yě zài xué Zhōngwén ma?",
+        "text_en": "Sorry to bother you. Your Chinese book looks interesting. Are you studying Chinese too?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her about your studies.",
+        "options": [
+          {
+            "text_zh": "是的，我在学中文。学了差不多半年了，还不太好。",
+            "text_pinyin": "Shì de, wǒ zài xué Zhōngwén. Xué le chàbuduō bàn nián le, hái bú tài hǎo.",
+            "text_en": "Yes, I'm studying Chinese. About half a year now — still not very good.",
+            "score": 1.0,
+            "feedback": "Humble and open — invites conversation.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这不是中文书。",
+            "text_pinyin": "Zhè bú shì Zhōngwén shū.",
+            "text_en": "This isn't a Chinese book.",
+            "score": 0.0,
+            "feedback": "The setup says it's a Chinese book."
+          },
+          {
+            "text_zh": "中文太难了，我已经不想学了。",
+            "text_pinyin": "Zhōngwén tài nán le, wǒ yǐjīng bù xiǎng xué le.",
+            "text_en": "Chinese is too hard — I don't want to study it anymore.",
+            "score": 0.0,
+            "feedback": "She looks startled — she was just trying to make conversation, not hear you give up."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "半年已经很不错了！我也在写关于语言的作业。你觉得中文最难的是什么？",
+        "text_pinyin": "Bàn nián yǐjīng hěn búcuò le! Wǒ yě zài xiě guānyú yǔyán de zuòyè. Nǐ juéde Zhōngwén zuì nán de shì shénme?",
+        "text_en": "Half a year is already great! I'm writing a homework assignment about language too. What do you think is the hardest part of Chinese?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what you find most challenging.",
+        "options": [
+          {
+            "text_zh": "声调最难。有时候我说的，别人听不懂。",
+            "text_pinyin": "Shēngdiào zuì nán. Yǒu shíhou wǒ shuō de, biérén tīng bù dǒng.",
+            "text_en": "Tones are the hardest. Sometimes people can't understand what I say.",
+            "score": 1.0,
+            "feedback": "Honest and specific — a relatable language-learning struggle.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "都不难。",
+            "text_pinyin": "Dōu bù nán.",
+            "text_en": "None of it is hard.",
+            "score": 0.0,
+            "feedback": "Not believable and shuts down conversation."
+          },
+          {
+            "text_zh": "你的作业什么时候交？",
+            "text_pinyin": "Nǐ de zuòyè shénme shíhou jiāo?",
+            "text_en": "When is your homework due?",
+            "score": 0.0,
+            "feedback": "Deflects her question."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Chinese university students are often curious about foreigners learning their language. These café encounters lead to genuine exchanges about the challenges and joys of language learning. Mutual vulnerability about learning creates fast bonds."
+  }
+}

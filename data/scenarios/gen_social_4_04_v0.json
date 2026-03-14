@@ -1,0 +1,124 @@
+{
+    "title": "The Weekend Curator",
+    "title_zh": "周末策展人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_4_04_v0",
+    "tree": {
+        "setup": "Thursday evening. Your friend Xiao Wang calls to plan the weekend, treating it with the gravity of someone organizing a small expedition. He has opinions about everything — which park has the best shade trees, which restaurants serve the ideal ratio of meat to vegetables, and which coffee shops have chairs that don't hurt your back after forty-five minutes.",
+        "setup_zh": "周四傍晚。你的朋友小王打电话来规划周末，认真程度堪比组织一次小型探险。他对所有事情都有意见——哪个公园的遮荫树最好，哪家餐厅的荤素比例最理想，哪家咖啡馆的椅子坐四十五分钟不会腰疼。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个周末干什么？天气预报说周六是晴天。我们出去走走吧！",
+                "text_pinyin": "zhège zhōumò gàn shénme? tiānqì yùbào shuō zhōuliù shì qíngtiān. wǒmen chūqù zǒuzou ba!",
+                "text_en": "What should we do this weekend? The forecast says Saturday will be sunny. Let's go out!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a plan.",
+                "options": [
+                    {
+                        "text_zh": "好啊！我们可以上午去公园逛逛，中午在附近找个地方吃饭。你觉得呢？",
+                        "text_pinyin": "hǎo a! wǒmen kěyǐ shàngwǔ qù gōngyuán guàngguang, zhōngwǔ zài fùjìn zhǎo gè dìfāng chīfàn. nǐ juéde ne?",
+                        "text_en": "Sure! We could wander the park in the morning, then find somewhere nearby for lunch. What do you think?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A two-part plan with room for his input — Xiao Wang's expedition radar is activated."
+                    },
+                    {
+                        "text_zh": "随便，你说去哪里就去哪里。",
+                        "text_pinyin": "suíbiàn, nǐ shuō qù nǎlǐ jiù qù nǎlǐ.",
+                        "text_en": "Whatever — wherever you want to go.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll happily take charge. The itinerary will be detailed."
+                    },
+                    {
+                        "text_zh": "在家待着也挺好的。",
+                        "text_pinyin": "zài jiā dāi zhe yě tǐng hǎo de.",
+                        "text_en": "Staying home sounds good too.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Wang sputters. Wasting a sunny Saturday at home is, in his view, a crime against the calendar."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "去公园好！去朝阳公园吧，那边有一条新的步道，走起来特别舒服。午饭可以去旁边那条街，有一家新开的云南菜。",
+                "text_pinyin": "qù gōngyuán hǎo! qù Cháoyáng Gōngyuán ba, nàbiān yǒu yì tiáo xīn de bùdào, zǒu qǐlái tèbié shūfu. wǔfàn kěyǐ qù pángbiān nà tiáo jiē, yǒu yì jiā xīn kāi de Yúnnán cài.",
+                "text_en": "The park sounds great! Let's go to Chaoyang Park — there's a new walking trail that's really comfortable. For lunch we can go to that street nearby — there's a new Yunnan restaurant."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React and finalize details.",
+                "options": [
+                    {
+                        "text_zh": "云南菜好！我一直想试试过桥米线。几点见面？在公园门口等？",
+                        "text_pinyin": "Yúnnán cài hǎo! wǒ yìzhí xiǎng shìshi guòqiáo mǐxiàn. jǐ diǎn jiànmiàn? zài gōngyuán ménkǒu děng?",
+                        "text_en": "Yunnan food sounds great! I've always wanted to try crossing-the-bridge noodles. What time should we meet? At the park entrance?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Naming a specific dish and locking down logistics — Xiao Wang's weekend expedition has a launch time."
+                    },
+                    {
+                        "text_zh": "好啊，你定时间吧。",
+                        "text_pinyin": "hǎo a, nǐ dìng shíjiān ba.",
+                        "text_en": "Sounds good — you pick the time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He picks 9 AM. For Xiao Wang, a sunny Saturday starts early."
+                    },
+                    {
+                        "text_zh": "不要太早啊。",
+                        "text_pinyin": "búyào tài zǎo a.",
+                        "text_en": "Not too early though.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He negotiates down to 10 AM, with visible reluctance."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十点在南门见吧。对了，要不要叫上小陈？上次她说想出来玩的。",
+                "text_pinyin": "shí diǎn zài nán mén jiàn ba. duìle, yào búyào jiào shàng Xiǎo Chén? shàng cì tā shuō xiǎng chūlái wán de.",
+                "text_en": "10 AM at the south gate then. Oh, should we invite Xiao Chen? She mentioned wanting to hang out last time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about inviting Xiao Chen.",
+                "options": [
+                    {
+                        "text_zh": "好啊，叫上她！人多更热闹。你在群里发个消息吧。",
+                        "text_pinyin": "hǎo a, jiào shàng tā! rén duō gèng rènao. nǐ zài qún lǐ fā gè xiāoxi ba.",
+                        "text_en": "Sure, invite her! More people, more fun. Send a message in the group chat.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "热闹 — the Chinese ideal for a good outing. Xiao Wang types the group message before you finish your sentence."
+                    },
+                    {
+                        "text_zh": "可以。",
+                        "text_pinyin": "kěyǐ.",
+                        "text_en": "Sure.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He texts her. The expedition grows."
+                    },
+                    {
+                        "text_zh": "算了吧，就我们两个挺好的。",
+                        "text_pinyin": "suàn le ba, jiù wǒmen liǎng gè tǐng hǎo de.",
+                        "text_en": "Nah, just the two of us is fine.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Wang respects the preference, though his expedition instincts prefer a larger party."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Weekend planning in China often involves group chats (群, qún) on WeChat. The concept of 热闹 (rènao, lively/bustling) is highly valued — more people generally means more fun. Parks like 朝阳公园 are popular weekend destinations for walking, picnicking, and socializing."
+    }
+}

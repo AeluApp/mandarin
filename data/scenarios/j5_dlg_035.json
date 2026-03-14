@@ -1,0 +1,89 @@
+{
+    "title": "A Birthday Worth Remembering",
+    "title_zh": "值得记住的生日",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your friend Xiaomeng's birthday is next week. She's the kind of person who never wants a fuss, but you know she secretly appreciates small, meaningful gestures.",
+        "setup_zh": "朋友小梦下周过生日。她是那种从来不想麻烦别人的人，但你知道她其实很喜欢小小的、有心意的举动。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你别给我办什么生日会啊。我真的不喜欢那种大家围在一起唱生日歌的场面，太尴尬了。而且我也不想让朋友们花钱给我买礼物。",
+                "text_pinyin": "Nǐ bié gěi wǒ bàn shénme shēngrì huì a. Wǒ zhēn de bù xǐhuan nà zhǒng dàjiā wéi zài yīqǐ chàng shēngrì gē de chǎngmiàn, tài gāngà le. Érqiě wǒ yě bù xiǎng ràng péngyoumen huā qián gěi wǒ mǎi lǐwù.",
+                "text_en": "Don't throw me a birthday party. I really don't like the scene of everyone standing around singing happy birthday — it's too awkward. And I don't want friends spending money on gifts for me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest something small and meaningful instead.",
+                "options": [
+                    {
+                        "text_zh": "不办party，也不买贵的礼物。但我可以做一件小事——那天早上给你写一封手写的信，把认识以来想跟你说但没说过的话写下来。你觉得怎么样？",
+                        "text_pinyin": "Bú bàn party, yě bù mǎi guì de lǐwù. Dàn wǒ kěyǐ zuò yī jiàn xiǎo shì — nà tiān zǎoshang gěi nǐ xiě yī fēng shǒuxiě de xìn, bǎ rènshi yǐlái xiǎng gēn nǐ shuō dàn méi shuō guò de huà xiě xiàlái. Nǐ juéde zěnmeyàng?",
+                        "text_en": "No party, no expensive gifts. But I can do one small thing — write you a handwritten letter that morning, putting down all the things I've wanted to say since we met but never did. What do you think?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Calibrated — respects her boundaries while offering something deeply personal."
+                    },
+                    {
+                        "text_zh": "那我们就出去吃一顿大餐吧！我请客。",
+                        "text_pinyin": "Nà wǒmen jiù chūqù chī yī dùn dàcān ba! Wǒ qǐngkè.",
+                        "text_en": "Then let's go out for a big dinner! My treat.",
+                        "score": 0.0,
+                        "feedback": "Still spending money and making it an event — doesn't respect her wish for simplicity."
+                    },
+                    {
+                        "text_zh": "好吧，那就什么都不做了。",
+                        "text_pinyin": "Hǎo ba, nà jiù shénme dōu bú zuò le.",
+                        "text_en": "Okay, then we'll do nothing.",
+                        "score": 0.0,
+                        "feedback": "Takes her at face value — misses that she'd appreciate something thoughtful."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "手写的信？你……你真的会这么做吗？我已经很多年没有收到过手写的东西了。现在所有人都用手机，打几个字发出去就算了。你说的那些没说过的话是什么？",
+                "text_pinyin": "Shǒuxiě de xìn? Nǐ…… nǐ zhēn de huì zhème zuò ma? Wǒ yǐjīng hěn duō nián méiyǒu shōu dào guò shǒuxiě de dōngxi le. Xiànzài suǒyǒu rén dōu yòng shǒujī, dǎ jǐ ge zì fā chūqù jiù suàn le. Nǐ shuō de nàxiē méi shuō guò de huà shì shénme?",
+                "text_en": "A handwritten letter? You'd... really do that? I haven't received anything handwritten in years. Everyone uses phones now, type a few characters and send it. What are these unsaid things you mentioned?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give a hint of what you'd write.",
+                "options": [
+                    {
+                        "text_zh": "等你收到再看吧。但先告诉你一点——我想谢谢你做了一个不需要很多话就能让人安心的人。有些人在你身边，你会觉得世界安静了一点。你就是那种人。",
+                        "text_pinyin": "Děng nǐ shōu dào zài kàn ba. Dàn xiān gàosù nǐ yīdiǎn — wǒ xiǎng xièxie nǐ zuò le yīge bù xūyào hěn duō huà jiù néng ràng rén ānxīn de rén. Yǒuxiē rén zài nǐ shēnbiān, nǐ huì juéde shìjiè ānjìng le yīdiǎn. Nǐ jiù shì nà zhǒng rén.",
+                        "text_en": "Wait till you get it. But I can tell you a little — I want to thank you for being someone who makes people feel at ease without needing many words. Some people, when they're near you, make the world feel quieter. You're that kind of person.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Moving and specific — gives her a preview that shows genuine attention to who she is."
+                    },
+                    {
+                        "text_zh": "到时候你就知道了。现在不告诉你。",
+                        "text_pinyin": "Dào shíhou nǐ jiù zhīdào le. Xiànzài bú gàosù nǐ.",
+                        "text_en": "You'll find out when the time comes. Not telling you now.",
+                        "score": 0.0,
+                        "feedback": "Playful but misses the chance to give her something meaningful now."
+                    },
+                    {
+                        "text_zh": "就是一些平时不好意思说的话。",
+                        "text_pinyin": "Jiù shì yīxiē píngshí bù hǎoyìsi shuō de huà.",
+                        "text_en": "Just some things I'm usually too embarrassed to say.",
+                        "score": 0.0,
+                        "feedback": "Vague — doesn't give her the warmth she's clearly hoping for."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你让我觉得世界安静了一点……天哪，如果你把这些写在信里，我肯定会哭的。谢谢你。这已经是我收到的最好的生日礼物了，虽然信还没写。",
+                "text_pinyin": "Nǐ ràng wǒ juéde shìjiè ānjìng le yīdiǎn…… tiān na, rúguǒ nǐ bǎ zhèxiē xiě zài xìn lǐ, wǒ kěndìng huì kū de. Xièxie nǐ. Zhè yǐjīng shì wǒ shōu dào de zuì hǎo de shēngrì lǐwù le, suīrán xìn hái méi xiě.",
+                "text_en": "You make the world feel quieter... oh my, if you write that in the letter, I'll definitely cry. Thank you. This is already the best birthday gift I've received, even though the letter hasn't been written yet."
+            }
+        ],
+        "cultural_note": "In modern Chinese culture, handwritten letters have become rare and therefore deeply treasured. The contrast between a WeChat message and a handwritten letter represents the difference between convenience and intention. Chinese birthdays are traditionally celebrated with longevity noodles (长寿面) rather than cake, though Western-style birthday celebrations have become common. The concept of giving emotional rather than material gifts is increasingly valued among younger Chinese."
+    }
+}

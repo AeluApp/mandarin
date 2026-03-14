@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK Timeline Calculator — Aelu | Plan Your Chinese Study</title>
+  <meta name="description" content="Estimate how long it will take to reach your target HSK level. Enter your current level, target, and weekly study hours to get a personalized timeline with milestones.">
+  <meta name="keywords" content="HSK calculator, HSK timeline, how long to learn Chinese, HSK study plan, Chinese learning time, HSK level hours, HSK 1 to HSK 6, learn Mandarin timeline, Aelu">
+  <link rel="canonical" href="https://aelu.app/hsk-calculator">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="HSK Timeline Calculator — Aelu">
+  <meta property="og:description" content="How long will it take to reach your target HSK level? Enter your current level and study pace to find out.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aelu.app/hsk-calculator">
+  <meta property="og:image" content="https://aelu.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HSK Timeline Calculator — Aelu">
+  <meta name="twitter:description" content="How long will it take to reach your target HSK level? Enter your current level and study pace to find out.">
+  <meta name="twitter:image" content="https://aelu.app/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HSK Timeline Calculator",
+    "description": "Estimate how long it will take to reach your target HSK level based on your current level, study hours, and method.",
+    "url": "https://aelu.app/hsk-calculator",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Aelu",
+      "url": "https://aelu.app"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- Layout -- */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    .container-wide {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    section {
+      padding: var(--space-8) 0;
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+
+    /* -- Hero -- */
+    .hero {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-6);
+    }
+
+    .hero-hanzi {
+      font-family: var(--font-hanzi);
+      font-size: 3rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-3);
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-text-faint);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* -- Calculator -- */
+    .calculator {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      padding: var(--space-5);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .field {
+      margin-bottom: 0;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .field select {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-base);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B8680' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2rem;
+      cursor: pointer;
+    }
+
+    .field select:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    /* -- Slider -- */
+    .slider-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .slider-group input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 24px;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-runnable-track {
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--color-accent);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: -7px;
+    }
+
+    .slider-group input[type="range"]::-moz-range-track {
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+      border: none;
+    }
+
+    .slider-group input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--color-accent);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .slider-value {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      min-width: 3.5rem;
+      text-align: right;
+    }
+
+    /* -- Radio method -- */
+    .method-group {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--color-border);
+    }
+
+    .method-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .method-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .method-option label {
+      display: block;
+      padding: 0.6rem var(--space-2);
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-faint);
+      cursor: pointer;
+      transition: all 0.15s;
+      border-right: 1px solid var(--color-border);
+      margin-bottom: 0;
+    }
+
+    .method-option:last-child label {
+      border-right: none;
+    }
+
+    .method-option input:checked + label {
+      background: var(--color-accent);
+      color: var(--color-base);
+      border-color: var(--color-accent);
+    }
+
+    .method-option input:focus-visible + label {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    .method-note {
+      font-size: 0.8rem;
+      color: var(--color-text-faint);
+      margin-top: var(--space-2);
+      min-height: 1.2em;
+    }
+
+    /* -- Results -- */
+    .results {
+      margin-top: var(--space-5);
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-5);
+      display: none;
+    }
+
+    .results.visible {
+      display: block;
+    }
+
+    .result-headline {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+    }
+
+    .result-headline .accent {
+      color: var(--color-accent);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      text-align: center;
+    }
+
+    .stat-item .stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat-item .stat-label {
+      font-size: 0.8rem;
+      color: var(--color-text-faint);
+      margin-top: var(--space-1);
+      display: block;
+    }
+
+    /* -- Timeline Bar -- */
+    .timeline {
+      margin-bottom: var(--space-4);
+    }
+
+    .timeline-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .timeline-track {
+      background: var(--color-border);
+      height: 8px;
+      position: relative;
+      width: 100%;
+      overflow: visible;
+    }
+
+    .timeline-fill {
+      height: 100%;
+      background: var(--color-accent);
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: width 0.5s ease;
+    }
+
+    .timeline-milestones {
+      position: relative;
+      height: 36px;
+      margin-top: 4px;
+    }
+
+    .milestone {
+      position: absolute;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .milestone-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--color-border);
+      display: inline-block;
+      margin-bottom: 2px;
+      position: relative;
+      top: -13px;
+    }
+
+    .milestone-dot.reached {
+      background: var(--color-accent);
+    }
+
+    .milestone-dot.current {
+      background: var(--color-secondary);
+    }
+
+    .milestone-text {
+      font-size: 0.7rem;
+      color: var(--color-text-faint);
+      white-space: nowrap;
+    }
+
+    .milestone-text.target-text {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* -- Savings callout -- */
+    .savings-callout {
+      background: var(--color-base);
+      border: 1px solid var(--color-border);
+      padding: var(--space-3) var(--space-4);
+      text-align: center;
+      margin-top: var(--space-4);
+      display: none;
+    }
+
+    .savings-callout.visible {
+      display: block;
+    }
+
+    .savings-callout p {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      line-height: 1.6;
+    }
+
+    .savings-callout .savings-highlight {
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+
+    /* -- CTA -- */
+    .btn-primary {
+      display: inline-block;
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-accent);
+      color: var(--color-base);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: var(--space-2) var(--space-4);
+      background: transparent;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover { opacity: 0.85; }
+
+    .cta-section {
+      text-align: center;
+      padding: var(--space-6) 0 var(--space-8);
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .cta-section p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-5);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    /* -- Context Section -- */
+    .context {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .context h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .levels-table {
+      max-width: 600px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .levels-table th {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: left;
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 2px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    .levels-table td {
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+    }
+
+    .levels-table td:first-child {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .levels-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      margin-top: var(--space-4);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-hanzi { font-size: 2.2rem; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; gap: var(--space-2); }
+      .stat-item { display: flex; align-items: baseline; justify-content: center; gap: var(--space-2); }
+      .stat-item .stat-value { font-size: 1.4rem; }
+      .stat-item .stat-label { margin-top: 0; }
+      .method-group { flex-direction: column; }
+      .method-option label { border-right: none; border-bottom: 1px solid var(--color-border); }
+      .method-option:last-child label { border-bottom: none; }
+      .result-headline { font-size: 1.6rem; }
+      .milestone-text { font-size: 0.6rem; }
+      .nav-links { gap: var(--space-3); }
+      .levels-table { font-size: 0.85rem; }
+    }
+
+    /* -- Animation -- */
+    @keyframes drift-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-hanzi, .hero h1, .hero-sub, .calculator {
+      animation: drift-up 0.6s ease-out both;
+    }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .calculator { animation-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-hanzi, .hero h1, .hero-sub, .calculator {
+        animation: none;
+        opacity: 1;
+      }
+    }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-hanzi" aria-hidden="true">时间</div>
+      <h1>HSK Timeline Calculator</h1>
+      <p class="hero-sub">Estimate how long it will take to reach your target HSK level. Enter your details and get a personalized study timeline.</p>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="calculator">
+        <div class="calc-grid">
+
+          <!-- Current Level -->
+          <div class="field">
+            <label for="current-level">Current HSK Level</label>
+            <select id="current-level">
+              <option value="0">None (Beginner)</option>
+              <option value="1">HSK 1</option>
+              <option value="2">HSK 2</option>
+              <option value="3" selected>HSK 3</option>
+              <option value="4">HSK 4</option>
+              <option value="5">HSK 5</option>
+              <option value="6">HSK 6</option>
+              <option value="7">HSK 7</option>
+              <option value="8">HSK 8</option>
+              <option value="9">HSK 9</option>
+            </select>
+          </div>
+
+          <!-- Target Level -->
+          <div class="field">
+            <label for="target-level">Target HSK Level</label>
+            <select id="target-level">
+              <option value="1">HSK 1</option>
+              <option value="2">HSK 2</option>
+              <option value="3">HSK 3</option>
+              <option value="4">HSK 4</option>
+              <option value="5">HSK 5</option>
+              <option value="6" selected>HSK 6</option>
+              <option value="7">HSK 7</option>
+              <option value="8">HSK 8</option>
+              <option value="9">HSK 9</option>
+            </select>
+          </div>
+
+          <!-- Hours Per Week -->
+          <div class="field field-full">
+            <label for="hours-slider">Hours per week</label>
+            <div class="slider-group">
+              <input type="range" id="hours-slider" min="1" max="20" value="5" aria-label="Hours per week">
+              <span class="slider-value" id="hours-display">5 hrs</span>
+            </div>
+          </div>
+
+          <!-- Study Method -->
+          <div class="field field-full">
+            <label>Study method</label>
+            <div class="method-group" role="radiogroup" aria-label="Study method">
+              <div class="method-option">
+                <input type="radio" name="method" id="method-self" value="self" checked>
+                <label for="method-self">Self-study</label>
+              </div>
+              <div class="method-option">
+                <input type="radio" name="method" id="method-aelu" value="aelu">
+                <label for="method-aelu">With Aelu</label>
+              </div>
+              <div class="method-option">
+                <input type="radio" name="method" id="method-intensive" value="intensive">
+                <label for="method-intensive">Aelu + Tutor</label>
+              </div>
+            </div>
+            <p class="method-note" id="method-note">Standard self-study pace with textbooks and apps.</p>
+          </div>
+
+        </div>
+
+        <!-- Results Panel -->
+        <div class="results" id="results">
+
+          <div class="result-headline" id="result-headline">
+            <span class="accent" id="result-time"></span><br>
+            <span id="result-subtitle" style="font-size:0.6em;color:var(--color-text-faint);"></span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value" id="stat-weeks">--</span>
+              <span class="stat-label">weeks</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="stat-words">--</span>
+              <span class="stat-label">words to learn</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="stat-grammar">--</span>
+              <span class="stat-label">grammar points</span>
+            </div>
+          </div>
+
+          <!-- Timeline Bar -->
+          <div class="timeline">
+            <p class="timeline-label">Your path</p>
+            <div class="timeline-track">
+              <div class="timeline-fill" id="timeline-fill" style="width:0%;"></div>
+            </div>
+            <div class="timeline-milestones" id="timeline-milestones"></div>
+          </div>
+
+          <!-- Savings Callout (Aelu method) -->
+          <div class="savings-callout" id="savings-callout">
+            <p>With Aelu's adaptive scheduling and 27 drill types, learners typically reach their target <span class="savings-highlight" id="savings-text">20% faster</span> than self-study alone.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:var(--space-4);font-size:0.85rem;color:var(--color-text-faint);">
+        Estimates are based on published HSK hour guidelines and may vary by individual.
+      </p>
+    </div>
+  </section>
+
+  <!-- Reference Table -->
+  <section class="context">
+    <div class="container">
+      <h2>HSK levels at a glance</h2>
+      <table class="levels-table" aria-label="HSK level reference">
+        <thead>
+          <tr>
+            <th scope="col">Level</th>
+            <th scope="col">Words</th>
+            <th scope="col">Cumulative Hours</th>
+            <th scope="col">Ability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>HSK 1</td><td>150</td><td>80</td><td>Basic greetings, numbers, simple phrases</td></tr>
+          <tr><td>HSK 2</td><td>300</td><td>160</td><td>Simple daily conversations</td></tr>
+          <tr><td>HSK 3</td><td>600</td><td>320</td><td>Basic daily life and travel</td></tr>
+          <tr><td>HSK 4</td><td>1,200</td><td>480</td><td>Discuss familiar topics fluently</td></tr>
+          <tr><td>HSK 5</td><td>2,500</td><td>720</td><td>Read newspapers, watch films</td></tr>
+          <tr><td>HSK 6</td><td>5,000</td><td>960</td><td>Express views fluently in speech and writing</td></tr>
+          <tr><td>HSK 7</td><td>7,500</td><td>1,400</td><td>Use Chinese idiomatically in professional contexts</td></tr>
+          <tr><td>HSK 8</td><td>10,000</td><td>2,000</td><td>Near-native reading and discussion</td></tr>
+          <tr><td>HSK 9</td><td>11,000</td><td>3,000</td><td>Full professional and academic proficiency</td></tr>
+        </tbody>
+      </table>
+      <p class="levels-note">Hour estimates are approximate and assume focused study. Immersion, prior language experience, and study quality all affect actual timelines.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Start closing the gap.</h2>
+      <p>Aelu adapts to where you are and builds a path to where you want to be. 27 drill types. Graded reading. Honest metrics.</p>
+      <div class="cta-buttons">
+        <a href="/signup" class="btn-secondary" role="button">Start Free</a>
+        <a href="/signup?plan=full" class="btn-primary" role="button">Get Full Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
+      <p style="margin-top: var(--space-1);">&copy; 2026 Aelu</p>
+    </div>
+  </footer>
+
+  <script src="/marketing.js"></script>
+  <script>
+    // ── HSK Data ──
+    var HSK = {
+      0: { hours: 0,    words: 0,     grammar: 0   },
+      1: { hours: 80,   words: 150,   grammar: 30  },
+      2: { hours: 160,  words: 300,   grammar: 60  },
+      3: { hours: 320,  words: 600,   grammar: 100 },
+      4: { hours: 480,  words: 1200,  grammar: 150 },
+      5: { hours: 720,  words: 2500,  grammar: 210 },
+      6: { hours: 960,  words: 5000,  grammar: 280 },
+      7: { hours: 1400, words: 7500,  grammar: 350 },
+      8: { hours: 2000, words: 10000, grammar: 420 },
+      9: { hours: 3000, words: 11000, grammar: 500 }
+    };
+
+    // Method multipliers (applied to hours)
+    var METHOD = {
+      self:      1.0,
+      aelu:      0.8,   // 20% reduction
+      intensive: 0.7    // 30% reduction (full-time immersion/class)
+    };
+
+    var METHOD_NOTES = {
+      self:      'Standard self-study pace with textbooks and apps.',
+      aelu:      'Adaptive scheduling and targeted drills reduce study time by 20%.',
+      intensive: 'Aelu adaptive drills plus regular tutor sessions. Fastest path.'
+    };
+
+    // ── DOM References ──
+    var elCurrent     = document.getElementById('current-level');
+    var elTarget      = document.getElementById('target-level');
+    var elSlider      = document.getElementById('hours-slider');
+    var elHoursDisp   = document.getElementById('hours-display');
+    var elMethodNote  = document.getElementById('method-note');
+    var elResults     = document.getElementById('results');
+    var elResultTime  = document.getElementById('result-time');
+    var elResultSub   = document.getElementById('result-subtitle');
+    var elStatWeeks   = document.getElementById('stat-weeks');
+    var elStatWords   = document.getElementById('stat-words');
+    var elStatGrammar = document.getElementById('stat-grammar');
+    var elTimelineFill = document.getElementById('timeline-fill');
+    var elMilestones  = document.getElementById('timeline-milestones');
+    var elSavings     = document.getElementById('savings-callout');
+    var elSavingsText = document.getElementById('savings-text');
+
+    // ── Get selected method ──
+    function getMethod() {
+      var radios = document.querySelectorAll('input[name="method"]');
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) return radios[i].value;
+      }
+      return 'self';
+    }
+
+    // ── Calculate ──
+    function calculate() {
+      var current = parseInt(elCurrent.value);
+      var target  = parseInt(elTarget.value);
+      var hours   = parseInt(elSlider.value);
+      var method  = getMethod();
+
+      // Update hours display
+      elHoursDisp.textContent = hours + (hours === 1 ? ' hr' : ' hrs');
+
+      // Update method note
+      elMethodNote.textContent = METHOD_NOTES[method] || '';
+
+      // Validation
+      if (target <= current) {
+        elResults.className = 'results';
+        return;
+      }
+
+      // Calculate hours needed
+      var totalHoursRaw = HSK[target].hours - HSK[current].hours;
+      var multiplier = METHOD[method] || 1.0;
+      var totalHours = Math.round(totalHoursRaw * multiplier);
+
+      // Time
+      var weeks  = Math.ceil(totalHours / hours);
+      var months = Math.round(weeks / 4.33);
+
+      // Words and grammar
+      var wordsToLearn   = HSK[target].words - HSK[current].words;
+      var grammarToLearn = HSK[target].grammar - HSK[current].grammar;
+
+      // Display time
+      var timeStr;
+      if (months < 2) {
+        timeStr = weeks + (weeks === 1 ? ' week' : ' weeks');
+      } else if (months < 24) {
+        timeStr = months + ' months';
+      } else {
+        var years = (months / 12).toFixed(1);
+        // Remove trailing .0
+        if (years.indexOf('.0') === years.length - 2) {
+          years = years.slice(0, -2);
+        }
+        timeStr = years + (years === '1' ? ' year' : ' years');
+      }
+
+      elResultTime.textContent = timeStr;
+      elResultSub.textContent = 'to reach HSK ' + target + ' at ' + hours + ' hr' + (hours === 1 ? '' : 's') + '/week';
+      elStatWeeks.textContent = weeks.toLocaleString();
+      elStatWords.textContent = wordsToLearn.toLocaleString();
+      elStatGrammar.textContent = grammarToLearn.toLocaleString();
+
+      // Show results
+      elResults.className = 'results visible';
+
+      // ── Timeline ──
+      buildTimeline(current, target, hours, multiplier);
+
+      // ── Savings callout ──
+      if (method === 'aelu') {
+        var selfWeeks = Math.ceil(totalHoursRaw / hours);
+        var saved = selfWeeks - weeks;
+        if (saved > 0) {
+          var savedMonths = Math.round(saved / 4.33);
+          if (savedMonths >= 1) {
+            elSavingsText.textContent = savedMonths + ' month' + (savedMonths !== 1 ? 's' : '') + ' faster';
+          } else {
+            elSavingsText.textContent = saved + ' week' + (saved !== 1 ? 's' : '') + ' faster';
+          }
+        } else {
+          elSavingsText.textContent = '20% faster';
+        }
+        elSavings.className = 'savings-callout visible';
+      } else {
+        elSavings.className = 'savings-callout';
+      }
+    }
+
+    // ── Build Timeline Milestones ──
+    function buildTimeline(current, target, hoursPerWeek, multiplier) {
+      // Clear milestones
+      elMilestones.innerHTML = '';
+
+      // Determine range of levels to show
+      var startHours = HSK[current].hours;
+      var endHours   = HSK[target].hours;
+      var totalSpan  = endHours - startHours;
+
+      if (totalSpan <= 0) return;
+
+      // Fill bar to 100% (target is the endpoint)
+      elTimelineFill.style.width = '100%';
+
+      // Place milestones for each intermediate and target level
+      for (var lvl = current; lvl <= target; lvl++) {
+        var levelHours = HSK[lvl].hours;
+        var pct = ((levelHours - startHours) / totalSpan) * 100;
+
+        var adjustedHours = Math.round((levelHours - startHours) * multiplier);
+        var weeksToThis = Math.ceil(adjustedHours / hoursPerWeek);
+        var monthsToThis = Math.round(weeksToThis / 4.33);
+
+        var ms = document.createElement('div');
+        ms.className = 'milestone';
+        ms.style.left = pct + '%';
+
+        var dot = document.createElement('span');
+        dot.className = 'milestone-dot';
+        if (lvl === current) {
+          dot.className += ' current';
+        } else if (lvl === target) {
+          dot.className += ' reached';
+        } else {
+          dot.className += ' reached';
+        }
+
+        var text = document.createElement('span');
+        text.className = 'milestone-text';
+        if (lvl === target) {
+          text.className += ' target-text';
+        }
+
+        if (lvl === current) {
+          text.textContent = lvl === 0 ? 'Start' : 'HSK ' + lvl;
+        } else {
+          var timeLabel;
+          if (monthsToThis < 2) {
+            timeLabel = weeksToThis + 'w';
+          } else if (monthsToThis < 24) {
+            timeLabel = monthsToThis + 'mo';
+          } else {
+            timeLabel = (monthsToThis / 12).toFixed(1) + 'y';
+          }
+          text.textContent = 'HSK ' + lvl + ' (' + timeLabel + ')';
+        }
+
+        ms.appendChild(dot);
+        ms.appendChild(document.createElement('br'));
+        ms.appendChild(text);
+        elMilestones.appendChild(ms);
+      }
+    }
+
+    // ── Event Listeners ──
+    elCurrent.addEventListener('change', calculate);
+    elTarget.addEventListener('change', calculate);
+    elSlider.addEventListener('input', calculate);
+
+    var radios = document.querySelectorAll('input[name="method"]');
+    for (var i = 0; i < radios.length; i++) {
+      radios[i].addEventListener('change', calculate);
+    }
+
+    // ── Initial calculation ──
+    calculate();
+  </script>
+
+</body>
+</html>

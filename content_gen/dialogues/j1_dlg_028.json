@@ -1,0 +1,87 @@
+{
+    "title": "Evening Walk by the River",
+    "title_zh": "河边的晚走",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're taking an evening walk along a small river. A woman is sitting on a bench, feeding fish.",
+        "setup_zh": "你在小河边散步。一位女士坐在长椅上喂鱼。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也来散步吗？这里的鱼很多。你看！",
+                "text_pinyin": "Nǐ yě lái sànbù ma? Zhèlǐ de yú hěn duō. Nǐ kàn!",
+                "text_en": "Are you here for a walk too? There are so many fish here. Look!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her observation about the fish.",
+                "options": [
+                    {
+                        "text_zh": "哇，真的好多！你每天都来喂鱼吗？",
+                        "text_pinyin": "Wā, zhēn de hǎo duō! Nǐ měi tiān dōu lái wèi yú ma?",
+                        "text_en": "Wow, really so many! Do you come to feed the fish every day?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shares her excitement about the fish and asks about her routine -- she pointed them out and you looked."
+                    },
+                    {
+                        "text_zh": "对，我在散步。鱼很多啊。",
+                        "text_pinyin": "Duì, wǒ zài sànbù. Yú hěn duō a.",
+                        "text_en": "Yes, I'm walking. There are lots of fish.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers and observes the fish, but doesn't ask about her -- she was inviting a conversation."
+                    },
+                    {
+                        "text_zh": "你给鱼吃什么？",
+                        "text_pinyin": "Nǐ gěi yú chī shénme?",
+                        "text_en": "What do you feed the fish?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "A practical question, but she just said 'look!' with excitement -- respond to the wonder first, then ask details."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "差不多每天都来。吃完饭以后走一走，看看鱼，心情很好。",
+                "text_pinyin": "Chàbuduō měi tiān dōu lái. Chī wán fàn yǐhòu zǒu yī zǒu, kàn kan yú, xīnqíng hěn hǎo.",
+                "text_en": "Almost every day. After dinner I walk a bit, watch the fish, and it puts me in a good mood."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feelings about the evening.",
+                "options": [
+                    {
+                        "text_zh": "我也觉得。晚上在这里走走很舒服。",
+                        "text_pinyin": "Wǒ yě juéde. Wǎnshang zài zhèlǐ zǒu zou hěn shūfu.",
+                        "text_en": "I think so too. Walking here in the evening is really comfortable.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Echoes her feeling that the evening walk brings peace -- you both found the same quiet happiness by the river."
+                    },
+                    {
+                        "text_zh": "这里很安静。",
+                        "text_pinyin": "Zhèlǐ hěn ānjìng.",
+                        "text_en": "It's quiet here.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "A true observation but doesn't connect to what she shared about her mood -- she opened up and you gave a factual reply."
+                    },
+                    {
+                        "text_zh": "你每天吃完饭几点出来？",
+                        "text_pinyin": "Nǐ měi tiān chī wán fàn jǐ diǎn chūlái?",
+                        "text_en": "What time do you come out after dinner each day?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She shared that walking and watching fish puts her in a good mood, and you asked for her schedule -- misses the emotional point."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Evening riverside walks (散步) are a beloved Chinese ritual, especially after dinner. Feeding fish in neighborhood ponds is a meditative activity. These quiet encounters between strangers are ordinary but deeply restorative."
+    }
+}

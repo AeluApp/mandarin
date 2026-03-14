@@ -1,4 +1,4 @@
-"""Churn Detection & Risk Scoring — Marketing analytics for the Mandarin app.
+"""Churn Detection & Risk Scoring — Marketing analytics for the Aelu app.
 
 Analyzes session data for churn risk signals and produces a formatted report.
 Designed for the current single-user local database, but structured to support
@@ -31,8 +31,7 @@ from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
-# Default DB path — same convention as db/core.py
-_DEFAULT_DB_PATH = Path(__file__).parent.parent / "data" / "mandarin.db"
+from .settings import DB_PATH as _DEFAULT_DB_PATH
 
 
 # ---------------------------------------------------------------------------
@@ -400,11 +399,70 @@ def compute_churn_risk(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
     else:
         risk_level = "Low"
 
+    # Churn type classification (Doctrine §13: differentiate churn causes)
+    churn_type, intervention = _classify_churn_type(signals, days_gap, freq_decline,
+                                                     dur_decline, plateau, div_pts)
+
     return {
         "score": score,
         "risk_level": risk_level,
         "signals": signals,
+        "churn_type": churn_type,
+        "intervention": intervention,
     }
+
+
+# ---------------------------------------------------------------------------
+# Churn type classification (Doctrine §13: type-matched interventions)
+# ---------------------------------------------------------------------------
+
+_CHURN_TYPES = {
+    "life_event": {
+        "description": "Life event interruption — sudden gap after regular usage",
+        "intervention": "Welcome back. Your items are ready — we kept your place.",
+    },
+    "boredom": {
+        "description": "Boredom — sessions getting shorter, low drill variety",
+        "intervention": "New drill types unlocked. Try a listening or speaking session.",
+    },
+    "frustration": {
+        "description": "Frustration — accuracy plateau or declining, sessions shortening",
+        "intervention": "Session difficulty adjusted. Focus on your strongest items first.",
+    },
+    "habit_fade": {
+        "description": "Habit fade — gradual frequency decline, no acute trigger",
+        "intervention": "5 minutes keeps your rhythm. 12 items ready for review.",
+    },
+    "unknown": {
+        "description": "Insufficient data to classify churn type",
+        "intervention": "Items ready for review. About 5 minutes.",
+    },
+}
+
+
+def _classify_churn_type(signals: list, days_gap, freq_decline, dur_decline,
+                         plateau, div_pts) -> tuple:
+    """Classify churn into actionable types using a decision tree.
+
+    Returns (churn_type_key, intervention_message).
+    """
+    # Life event: sudden large gap (10+ days) but previously regular
+    if days_gap is not None and days_gap >= 10 and freq_decline < 0.3:
+        ct = "life_event"
+    # Frustration: accuracy plateau + duration declining
+    elif plateau and dur_decline > 0.3:
+        ct = "frustration"
+    # Boredom: duration declining + low drill diversity
+    elif dur_decline > 0.4 and div_pts >= 3:
+        ct = "boredom"
+    # Habit fade: gradual frequency decline
+    elif freq_decline > 0.3:
+        ct = "habit_fade"
+    else:
+        ct = "unknown"
+
+    info = _CHURN_TYPES[ct]
+    return ct, info["intervention"]
 
 
 # ---------------------------------------------------------------------------
@@ -586,8 +644,8 @@ def run_report(db_path: str = None, output_format: str = "rich",
     """
     path = Path(db_path) if db_path else _DEFAULT_DB_PATH
     if not path.exists():
-        print(f"  Database not found at: {path}")
-        print("  Run a session first to create the database.")
+        logger.warning("Database not found at: %s", path)
+        logger.warning("Run a session first to create the database.")
         return {"score": 0, "risk_level": "Unknown", "signals": []}
 
     conn = _get_connection(path)
@@ -613,7 +671,7 @@ def run_report(db_path: str = None, output_format: str = "rich",
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Churn Detection Report — Mandarin Learning App",
+        description="Churn Detection Report — Aelu",
     )
     parser.add_argument(
         "--db-path",

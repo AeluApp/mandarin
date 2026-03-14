@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Explain that you left your backpack here earlier.",
                 "options": [
-                    {"text_zh": "你好，我上午在这里喝咖啡，好像把背包忘在这儿了。", "text_pinyin": "nǐ hǎo, wǒ shàngwǔ zài zhèlǐ hē kāfēi, hǎoxiàng bǎ bēibāo wàng zài zhèr le.", "text_en": "Hi, I was having coffee here this morning and I think I left my backpack here.", "score": 1.0, "register": "neutral", "feedback": "Complete context — when, what you were doing, and what happened. 好像 appropriately hedges."},
-                    {"text_zh": "不好意思，你们有没有看到一个背包？", "text_pinyin": "bù hǎo yìsi, nǐmen yǒu méiyǒu kàn dào yī ge bēibāo?", "text_en": "Excuse me, have you seen a backpack?", "score": 0.7, "register": "neutral", "feedback": "Gets to the point, but saying when you were here narrows the search."},
-                    {"text_zh": "我的背包丢了，是不是在你们这里？", "text_pinyin": "wǒ de bēibāo diū le, shì bú shì zài nǐmen zhèlǐ?", "text_en": "My backpack is lost, is it here?", "score": 0.5, "register": "casual", "feedback": "A bit abrupt — starting with context (when you visited) helps staff locate it faster."}
+                    {
+                        "text_zh": "三十五，行不行？",
+                        "text_pinyin": "sānshí wǔ, xíng bù xíng?",
+                        "text_en": "Thirty-five, OK?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain that you left your backpack here earlier, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我上午在这里喝咖啡，好像把背包忘在这儿了。",
+                        "text_pinyin": "nǐ hǎo, wǒ shàngwǔ zài zhèlǐ hē kāfēi, hǎoxiàng bǎ bēibāo wàng zài zhèr le.",
+                        "text_en": "Hi, I was having coffee here this morning and I think I left my backpack here.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Complete context — when, what you were doing, and what happened. 好像 appropriately hedges."
+                    },
+                    {
+                        "text_zh": "好的，明天下午可以。几点？",
+                        "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?",
+                        "text_en": "OK, tomorrow afternoon works. What time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain that you left your backpack here earlier, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Describe your black backpack with a laptop inside.",
                 "options": [
-                    {"text_zh": "是黑色的，里面有一个笔记本电脑。", "text_pinyin": "shì hēisè de, lǐmiàn yǒu yī ge bǐjìběn diànnǎo.", "text_en": "It's black, with a laptop inside.", "score": 1.0, "register": "neutral", "feedback": "Clear description with distinguishing detail — color plus contents helps identify it."},
-                    {"text_zh": "黑色的背包，不太大，有两个口袋。", "text_pinyin": "hēisè de bēibāo, bú tài dà, yǒu liǎng ge kǒudài.", "text_en": "Black backpack, not too big, with two pockets.", "score": 0.8, "register": "neutral", "feedback": "Good physical description — size and pocket details are helpful identifiers."},
-                    {"text_zh": "黑色的，你能帮我找一下吗？", "text_pinyin": "hēisè de, nǐ néng bāng wǒ zhǎo yīxià ma?", "text_en": "Black. Can you help me look for it?", "score": 0.5, "register": "casual", "feedback": "Minimal description — they're already helping, so adding details is more useful than repeating the request."}
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your black backpack with a laptop inside, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我去买吧，附近有没有超市？",
+                        "text_pinyin": "wǒ qù mǎi ba, fùjìn yǒu méiyǒu chāoshì?",
+                        "text_en": "I'll go buy them. Is there a supermarket nearby?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your black backpack with a laptop inside, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "是黑色的，里面有一个笔记本电脑。",
+                        "text_pinyin": "shì hēisè de, lǐmiàn yǒu yī ge bǐjìběn diànnǎo.",
+                        "text_en": "It's black, with a laptop inside.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear description with distinguishing detail — color plus contents helps identify it."
+                    }
                 ]
             }
         ],

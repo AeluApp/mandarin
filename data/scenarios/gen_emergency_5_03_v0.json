@@ -1,0 +1,160 @@
+{
+    "title": "The Flat Tire Philosopher Returns",
+    "title_zh": "爆胎哲学家归来",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_emergency_5_03_v0",
+    "tree": {
+        "setup": "A four-lane highway at dusk, the sky turning the kind of orange that photographers chase and drivers curse, because it means you can't see the road clearly. Your rental car's tire has blown out with a theatrical bang, and you've managed to pull onto the shoulder. The insurance company's roadside assistance line connects you to Dispatcher Wu, a woman whose voice has the specific calm of someone who handles approximately forty of these calls per shift and has developed the ability to diagnose tire problems by the sound of the driver's voice.",
+        "setup_zh": "黄昏时分的四车道高速公路，天空变成摄影师追逐而司机咒骂的那种橙色——因为这意味着看不清路面。你租的车的轮胎发出了戏剧性的一声巨响爆了，你勉强把车停到了路肩上。保险公司的道路救援热线接通了调度员吴姐，她的声音有一种特殊的平静——每班处理大约四十个类似电话的人才有的那种平静，已经练就了从司机的语气中诊断轮胎问题的能力。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "道路救援中心，您好。请问您遇到了什么情况？",
+                "text_pinyin": "dàolù jiùyuán zhōngxīn, nín hǎo. qǐngwèn nín yù dào le shénme qíngkuàng?",
+                "text_en": "Roadside assistance center, hello. What's your situation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report the flat tire.",
+                "options": [
+                    {
+                        "text_zh": "你好，我在高速公路上爆胎了。我已经把车停到路肩上了，双闪灯开着。车是在神州租车租的，保险包含道路救援。现在天快黑了，路上车速很快，我有点担心安全问题。",
+                        "text_pinyin": "nǐ hǎo, wǒ zài gāosù gōnglù shàng bào tāi le. wǒ yǐjīng bǎ chē tíng dào lùjiān shàng le, shuāng shǎn dēng kāi zhe. chē shì zài Shénzhōu Zūchē zū de, bǎoxiǎn bāohán dàolù jiùyuán. xiànzài tiān kuài hēi le, lù shàng chē sù hěn kuài, wǒ yǒudiǎn dānxīn ānquán wèntí.",
+                        "text_en": "Hello, I have a flat tire on the highway. I've pulled onto the shoulder with hazard lights on. The car is from Shenzhou Car Rental — insurance includes roadside assistance. It's getting dark and traffic is fast — I'm a bit worried about safety.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Situation, safety measures taken, rental company, insurance status, and a specific concern — Dispatcher Wu can process all of this in the time it takes to type the first line of the report."
+                    },
+                    {
+                        "text_zh": "我爆胎了，在高速路上。快来帮忙！",
+                        "text_pinyin": "wǒ bào tāi le, zài gāosù lù shàng. kuài lái bāngmáng!",
+                        "text_en": "I have a flat tire on the highway. Come help quickly!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Urgent and clear. She'll need more details but understands the priority."
+                    },
+                    {
+                        "text_zh": "车胎坏了！怎么办？",
+                        "text_pinyin": "chē tāi huài le! zěnme bàn?",
+                        "text_en": "The tire's busted! What do I do?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dispatcher Wu's first instruction: calm down, then answer her questions. In that order."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，双闪灯开着很好。你有没有在车后方放三角警示牌？高速公路上必须放在车后一百五十米的地方。另外，请告诉我你具体在哪条高速公路上，最近的出口或者公里数标牌是什么？",
+                "text_pinyin": "hǎo de, shuāng shǎn dēng kāi zhe hěn hǎo. nǐ yǒu méiyǒu zài chē hòufāng fàng sānjiǎo jǐngshì pái? gāosù gōnglù shàng bìxū fàng zài chē hòu yìbǎi wǔshí mǐ de dìfāng. lìngwài, qǐng gàosu wǒ nǐ jùtǐ zài nǎ tiáo gāosù gōnglù shàng, zuìjìn de chūkǒu huòzhě gōnglǐ shù biāopái shì shénme?",
+                "text_en": "Good that the hazard lights are on. Did you place a warning triangle behind the car? On the highway, it needs to be 150 meters behind the vehicle. Also, tell me which highway you're on and the nearest exit or kilometer marker."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your location and triangle status.",
+                "options": [
+                    {
+                        "text_zh": "三角牌刚放好了，大概在车后一百五十米。我在京沪高速上，往上海方向，刚过了第118公里的标牌。最近的出口应该是昆山出口。",
+                        "text_pinyin": "sānjiǎo pái gāng fàng hǎo le, dàgài zài chē hòu yìbǎi wǔshí mǐ. wǒ zài Jīng-Hù gāosù shàng, wǎng Shànghǎi fāngxiàng, gāng guò le dì yìbǎi yīshíbā gōnglǐ de biāopái. zuìjìn de chūkǒu yīnggāi shì Kūnshān chūkǒu.",
+                        "text_en": "Just placed the warning triangle — about 150 meters behind the car. I'm on the Beijing-Shanghai Expressway heading toward Shanghai, just past the 118 km marker. The nearest exit should be Kunshan.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Highway name, direction, kilometer marker, and nearest exit — Dispatcher Wu can dispatch a crew within seconds. Your safety protocol is textbook."
+                    },
+                    {
+                        "text_zh": "在京沪高速上，不确定具体公里数。三角牌放了。",
+                        "text_pinyin": "zài Jīng-Hù gāosù shàng, bú quèdìng jùtǐ gōnglǐ shù. sānjiǎo pái fàng le.",
+                        "text_en": "On the Beijing-Shanghai Expressway — not sure of the exact kilometer. Triangle is placed.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direction and highway help. She'll ask about nearby exits."
+                    },
+                    {
+                        "text_zh": "三角牌？车里好像没有这个东西。",
+                        "text_pinyin": "sānjiǎo pái? chē lǐ hǎoxiàng méiyǒu zhège dōngxi.",
+                        "text_en": "Warning triangle? I don't think there's one in the car.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dispatcher Wu's voice tightens — a highway without a warning triangle is genuinely dangerous. She instructs you to stay inside the car behind the guardrail."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "京沪高速118公里处，收到。我现在派最近的救援车过去，大概三十分钟到。在等待期间，请你站在护栏外面，不要待在车里。高速公路上后车追尾的风险很高。你身上穿反光背心了吗？后备箱里应该有。",
+                "text_pinyin": "Jīng-Hù gāosù yìbǎi yīshíbā gōnglǐ chù, shōu dào. wǒ xiànzài pài zuìjìn de jiùyuán chē guòqù, dàgài sānshí fēnzhōng dào. zài děngdài qījiān, qǐng nǐ zhàn zài hùlán wàimiàn, búyào dāi zài chē lǐ. gāosù gōnglù shàng hòu chē zhuīwěi de fēngxiǎn hěn gāo. nǐ shēnshàng chuān fǎnguāng bèixīn le ma? hòubèixiāng lǐ yīnggāi yǒu.",
+                "text_en": "Beijing-Shanghai Expressway at the 118 km mark, noted. Dispatching the nearest rescue vehicle — about 30 minutes. While waiting, stand outside the guardrail, not in the car. The risk of rear-end collision on the highway is high. Are you wearing a reflective vest? There should be one in the trunk."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about safety measures and ask about the tire change.",
+                "options": [
+                    {
+                        "text_zh": "好的，我现在就去护栏外面。反光背心我找到了，穿上了。请问救援人员到了以后是换备胎还是拖车？如果需要换轮胎的话，费用是走保险还是我自己付？",
+                        "text_pinyin": "hǎo de, wǒ xiànzài jiù qù hùlán wàimiàn. fǎnguāng bèixīn wǒ zhǎo dào le, chuān shàng le. qǐngwèn jiùyuán rényuán dào le yǐhòu shì huàn bèitāi háishi tuō chē? rúguǒ xūyào huàn lúntāi de huà, fèiyòng shì zǒu bǎoxiǎn háishi wǒ zìjǐ fù?",
+                        "text_en": "OK, moving outside the guardrail now. Found the reflective vest and put it on. When the rescue crew arrives, will they change to the spare or tow the car? If a tire change is needed, does insurance cover it or do I pay out of pocket?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Safety compliance plus financial planning — Dispatcher Wu explains: spare tire if available, towing if not. Rental car insurance typically covers the rescue service; the tire itself depends on the rental agreement."
+                    },
+                    {
+                        "text_zh": "好的，我在护栏外面等。",
+                        "text_pinyin": "hǎo de, wǒ zài hùlán wàimiàn děng.",
+                        "text_en": "OK, I'll wait outside the guardrail.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Safe positioning confirmed. She'll send the crew."
+                    },
+                    {
+                        "text_zh": "三十分钟？天都黑了！",
+                        "text_pinyin": "sānshí fēnzhōng? tiān dōu hēi le!",
+                        "text_en": "Thirty minutes? It'll be dark by then!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dispatcher Wu understands the anxiety. That's exactly why she mentioned the reflective vest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果车上有备胎的话，救援人员会先帮你换备胎。备胎只能开到最近的修理厂，不能长时间用。道路救援的服务费走保险，但新轮胎的费用要看你跟租车公司的合同。我建议你等一下给租车公司也打个电话报备。",
+                "text_pinyin": "rúguǒ chē shàng yǒu bèitāi de huà, jiùyuán rényuán huì xiān bāng nǐ huàn bèitāi. bèitāi zhǐ néng kāi dào zuìjìn de xiūlǐ chǎng, bù néng cháng shíjiān yòng. dàolù jiùyuán de fúwù fèi zǒu bǎoxiǎn, dàn xīn lúntāi de fèiyòng yào kàn nǐ gēn zūchē gōngsī de hétong. wǒ jiànyì nǐ děng yíxià gěi zūchē gōngsī yě dǎ gè diànhuà bàobèi.",
+                "text_en": "If there's a spare tire, the rescue crew will change it first. But the spare can only get you to the nearest repair shop — not for long-term use. Roadside assistance service fee is covered by insurance, but the new tire cost depends on your rental agreement. I suggest calling the rental company to report this too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan and thank her.",
+                "options": [
+                    {
+                        "text_zh": "明白了，等换完备胎就开到最近的修理厂换新轮胎。我马上打电话给租车公司报备。吴姐，非常感谢你这么详细的指导。在高速上遇到这种事真的很紧张，你说话很冷静，让我安心多了。",
+                        "text_pinyin": "míngbai le, děng huàn wán bèitāi jiù kāi dào zuìjìn de xiūlǐ chǎng huàn xīn lúntāi. wǒ mǎshàng dǎ diànhuà gěi zūchē gōngsī bàobèi. Wú jiě, fēicháng gǎnxiè nǐ zhème xiángxì de zhǐdǎo. zài gāosù shàng yù dào zhè zhǒng shì zhēn de hěn jǐnzhāng, nǐ shuōhuà hěn lěngjìng, ràng wǒ ānxīn duō le.",
+                        "text_en": "Understood — after the spare is on, I'll drive to the nearest shop for a new tire. I'll call the rental company right away. Wu-jie, thank you so much for the detailed guidance. Having this happen on the highway is really nerve-wracking — your calm voice made me feel much more at ease.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Repeating the plan, taking action, and expressing genuine gratitude — Dispatcher Wu's calm voice is the product of forty calls per shift, but she still appreciates being told it helps."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。我等救援来。",
+                        "text_pinyin": "hǎo de, xièxie. wǒ děng jiùyuán lái.",
+                        "text_en": "OK, thanks. I'll wait for the rescue.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple and settled. The reflective vest catches the last light of the setting sun."
+                    },
+                    {
+                        "text_zh": "好吧。以后不租这个品牌的车了。",
+                        "text_pinyin": "hǎo ba. yǐhòu bú zū zhège pǐnpái de chē le.",
+                        "text_en": "Fine. I'm never renting this brand again.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dispatcher Wu does not represent the car manufacturer, but she understands the impulse. Flat tires happen to all brands equally."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "On Chinese highways (高速公路), a warning triangle (三角警示牌) must be placed 150 meters behind a stopped vehicle — this is legally required and regularly enforced. Reflective vests (反光背心) are mandatory equipment in rental cars. Standing outside the guardrail (护栏外) is critical for safety. 道路救援 (dàolù jiùyuán, roadside assistance) is included in most car rental insurance packages."
+    }
+}

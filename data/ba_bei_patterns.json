@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "entries": [
+    {"type": "rewrite", "svo": "我吃了苹果。", "ba_form": "我把苹果吃了。", "answer": "我把苹果吃了。", "distractors": ["我苹果把吃了。", "把我苹果吃了。"], "hsk_level": 4, "explanation": "把 moves object before verb for disposal emphasis"},
+    {"type": "rewrite", "svo": "他打破了杯子。", "ba_form": "他把杯子打破了。", "answer": "他把杯子打破了。", "distractors": ["他杯子把打破了。", "把他杯子打破了。"], "hsk_level": 4, "explanation": "把 + object + verb + result complement"},
+    {"type": "rewrite", "svo": "请你关门。", "ba_form": "请你把门关上。", "answer": "请你把门关上。", "distractors": ["请把你门关上。", "请你门把关上。"], "hsk_level": 4, "explanation": "把 sentence needs result complement (关上)"},
+    {"type": "rewrite", "svo": "她放好了书。", "ba_form": "她把书放好了。", "answer": "她把书放好了。", "distractors": ["她书把放好了。", "把她书放好了。"], "hsk_level": 4, "explanation": "把 + object + verb + 好 (properly done)"},
+    {"type": "rewrite", "svo": "我写完了作业。", "ba_form": "我把作业写完了。", "answer": "我把作业写完了。", "distractors": ["我作业把写完了。", "把作业我写完了。"], "hsk_level": 4, "explanation": "把 + object + verb + 完 (completed)"},
+    {"type": "rewrite", "svo": "他扔了垃圾。", "ba_form": "他把垃圾扔了。", "answer": "他把垃圾扔了。", "distractors": ["他垃圾把扔了。", "把垃圾他扔了。"], "hsk_level": 4, "explanation": "把 for disposal — literally 'disposing of' the garbage"},
+
+    {"type": "identify", "sentence": "杯子被打破了。", "answer": "被", "distractors": ["把", "neither"], "hsk_level": 4, "explanation": "被 marks the passive: the cup was broken (by someone)"},
+    {"type": "identify", "sentence": "我把房间打扫干净了。", "answer": "把", "distractors": ["被", "neither"], "hsk_level": 4, "explanation": "把 marks the disposal: I cleaned up the room"},
+    {"type": "identify", "sentence": "他的钱包被偷了。", "answer": "被", "distractors": ["把", "neither"], "hsk_level": 4, "explanation": "被 marks the passive: his wallet was stolen"},
+    {"type": "identify", "sentence": "请把窗户打开。", "answer": "把", "distractors": ["被", "neither"], "hsk_level": 4, "explanation": "把 marks disposal/manipulation of the window"},
+    {"type": "identify", "sentence": "那个消息被很多人转发了。", "answer": "被", "distractors": ["把", "neither"], "hsk_level": 5, "explanation": "被 passive: the message was forwarded by many people"},
+    {"type": "identify", "sentence": "他喝了咖啡。", "answer": "neither", "distractors": ["把", "被"], "hsk_level": 3, "explanation": "Simple SVO — no 把 or 被 needed"},
+
+    {"type": "fill", "sentence": "作业____老师批改了。", "answer": "被", "distractors": ["把", "给", "让"], "hsk_level": 4, "explanation": "Homework was graded by the teacher (passive)"},
+    {"type": "fill", "sentence": "请____行李放在这里。", "answer": "把", "distractors": ["被", "给", "让"], "hsk_level": 4, "explanation": "Please put the luggage here (disposal)"},
+    {"type": "fill", "sentence": "花瓶____猫打碎了。", "answer": "被", "distractors": ["把", "给", "让"], "hsk_level": 4, "explanation": "The vase was broken by the cat (passive)"},
+    {"type": "fill", "sentence": "他____手机忘在了出租车上。", "answer": "把", "distractors": ["被", "给", "让"], "hsk_level": 4, "explanation": "He left his phone in the taxi (disposal — the phone ended up somewhere)"},
+    {"type": "fill", "sentence": "这件事____他知道了。", "answer": "被", "distractors": ["把", "给", "让"], "hsk_level": 5, "explanation": "This matter was found out by him (passive)"},
+    {"type": "fill", "sentence": "她____头发剪短了。", "answer": "把", "distractors": ["被", "给", "让"], "hsk_level": 4, "explanation": "She cut her hair short (disposal/manipulation)"},
+
+    {"type": "rewrite", "svo": "我洗了衣服。", "ba_form": "我把衣服洗了。", "answer": "我把衣服洗了。", "distractors": ["我衣服把洗了。", "把我衣服洗了。"], "hsk_level": 4, "explanation": "把 moves the object (衣服) before the verb"},
+    {"type": "identify", "sentence": "这本书被翻译成了英文。", "answer": "被", "distractors": ["把", "neither"], "hsk_level": 5, "explanation": "被 passive: the book was translated into English"},
+    {"type": "fill", "sentence": "他____门锁上了。", "answer": "把", "distractors": ["被", "给", "让"], "hsk_level": 4, "explanation": "He locked the door (disposal + result complement 上)"},
+    {"type": "fill", "sentence": "蛋糕____小朋友们吃光了。", "answer": "被", "distractors": ["把", "给", "让"], "hsk_level": 4, "explanation": "The cake was eaten up by the kids (passive + result 光)"},
+    {"type": "identify", "sentence": "风把树吹倒了。", "answer": "把", "distractors": ["被", "neither"], "hsk_level": 5, "explanation": "The wind blew the tree down — 把 with natural force as agent"}
+  ]
+}

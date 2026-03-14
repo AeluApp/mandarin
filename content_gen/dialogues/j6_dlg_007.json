@@ -1,0 +1,118 @@
+{
+    "title": "The Night Market Anthropologist",
+    "title_zh": "夜市人类学家",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're at a night market in Kunming with a food anthropology PhD student named Sun Ming. He's been studying how night markets function as informal social infrastructure. He's watching the crowd and narrating patterns you wouldn't have noticed.",
+        "setup_zh": "你在昆明的夜市上，跟一个叫孙明的食品人类学博士生在一起。他一直在研究夜市如何充当非正式社会基础设施。他一边观察人群一边描述你不会注意到的规律。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你注意到了吗？每个摊位前面都有一个'无形的队列'——不是排队，而是一种默契。先到的人站左边，后到的站右边，老板的眼神负责调度。没有人说话，但每个人都知道谁是下一个。",
+                "text_pinyin": "Nǐ zhùyì dào le ma? Měi ge tānwèi qiánmiàn dōu yǒu yīge 'wúxíng de duìliè' — bú shì páiduì, ér shì yī zhǒng mòqì. Xiān dào de rén zhàn zuǒbiān, hòu dào de zhàn yòubiān, lǎobǎn de yǎnshén fùzé diàodù. Méiyǒu rén shuōhuà, dàn měi ge rén dōu zhīdào shéi shì xià yīge.",
+                "text_en": "Have you noticed? In front of every stall there's an 'invisible queue' — not a line, but an unspoken understanding. Those who arrive first stand on the left, latecomers on the right, and the vendor's gaze does the dispatching. Nobody speaks, but everyone knows who's next."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Sun Ming's observation about invisible queues.",
+                "options": [
+                    {
+                        "text_zh": "我从来没注意过，但你一说我就看到了。这其实是一种自组织系统对吧？没有规则，但有秩序。比那些用取号机的地方效率可能还高——因为它靠的是社会信号而不是技术手段。",
+                        "text_pinyin": "Wǒ cónglái méi zhùyì guò, dàn nǐ yī shuō wǒ jiù kàn dào le. Zhè qíshí shì yī zhǒng zì zǔzhī xìtǒng duì ba? Méiyǒu guīzé, dàn yǒu zhìxù. Bǐ nàxiē yòng qǔ hào jī de dìfang xiàolǜ kěnéng hái gāo — yīnwèi tā kào de shì shèhuì xìnhào ér bú shì jìshù shǒuduàn.",
+                        "text_en": "I never noticed, but now I see it. A self-organizing system — no rules, but there's order. Might be more efficient than places with ticket machines, because it relies on social signals rather than technology.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Excellent — sees the system-level pattern and names it, then contrasts with formal systems."
+                    },
+                    {
+                        "text_zh": "我们先吃点东西吧，你想吃什么？",
+                        "text_pinyin": "Wǒmen xiān chī diǎn dōngxi ba, nǐ xiǎng chī shénme?",
+                        "text_en": "Let's eat something first, what do you want?",
+                        "score": 0.0,
+                        "feedback": "He's sharing his research observations and you jump straight to ordering food."
+                    },
+                    {
+                        "text_zh": "这个夜市营业到几点？",
+                        "text_pinyin": "Zhège yèshì yíngyè dào jǐ diǎn?",
+                        "text_en": "What time does this night market close?",
+                        "score": 0.0,
+                        "feedback": "Logistical question that ignores his anthropological insight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，自组织。还有一个现象更有意思——你看那边卖烧烤的和卖凉粉的，他们紧挨着，但从来不抢客人。因为他们的产品是互补的。夜市摊主之间有一种非正式的生态平衡，这不是谁规划的，是自然演化出来的。",
+                "text_pinyin": "Duì, zì zǔzhī. Hái yǒu yīge xiànxiàng gèng yǒu yìsi — nǐ kàn nàbiān mài shāokǎo de hé mài liángfěn de, tāmen jǐn āi zhe, dàn cónglái bù qiǎng kèrén. Yīnwèi tāmen de chǎnpǐn shì hùbǔ de. Yèshì tānzhǔ zhī jiān yǒu yī zhǒng fēi zhèngshì de shēngtài pínghéng, zhè bú shì shéi guīhuà de, shì zìrán yǎnhuà chūlái de.",
+                "text_en": "Right, self-organizing. There's an even more interesting phenomenon — see the barbecue vendor and the cold noodle vendor over there? They're right next to each other but never steal each other's customers. Because their products are complementary. Night market vendors have an informal ecological balance — nobody planned it, it just evolved naturally."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Connect his night market ecology observation to a broader idea.",
+                "options": [
+                    {
+                        "text_zh": "这让我想到简·雅各布斯写的关于城市人行道的理论——多样性不是混乱，而是韧性的来源。如果城管把这个夜市'规范化'，按品类分区，这种自然形成的互补关系反而会被破坏。",
+                        "text_pinyin": "Zhè ràng wǒ xiǎngdào Jiǎn Yǎgèbùsī xiě de guānyú chéngshì rénxíngdào de lǐlùn — duōyàng xìng bú shì hǔnluàn, ér shì rènxìng de láiyuán. Rúguǒ chéngguǎn bǎ zhège yèshì 'guīfànhuà', àn pǐnlèi fēn qū, zhè zhǒng zìrán xíngchéng de hùbǔ guānxì fǎnér huì bèi pòhuài.",
+                        "text_en": "This reminds me of Jane Jacobs — diversity isn't chaos, it's resilience. If urban management 'standardized' this night market by segregating categories, the natural complementary relationships would be destroyed.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Brings in Jane Jacobs organically — connects micro-observation to urban theory and predicts the failure mode of top-down planning."
+                    },
+                    {
+                        "text_zh": "你论文什么时候写完？",
+                        "text_pinyin": "Nǐ lùnwén shénme shíhou xiě wán?",
+                        "text_en": "When will you finish your thesis?",
+                        "score": 0.0,
+                        "feedback": "Academic logistics instead of engaging with the ideas."
+                    },
+                    {
+                        "text_zh": "昆明冬天冷不冷？",
+                        "text_pinyin": "Kūnmíng dōngtiān lěng bù lěng?",
+                        "text_en": "Is winter in Kunming cold?",
+                        "score": 0.0,
+                        "feedback": "Weather question unrelated to the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你竟然知道雅各布斯！太少见了。其实城管已经'规范'过两次了。每次都是一样的结果——搬到新的固定摊位之后，人流量下降一半。因为顾客的行走路线是随机的，而随机性恰恰是夜市的生命力。",
+                "text_pinyin": "Nǐ jìngrán zhīdào Yǎgèbùsī! Tài shǎojiàn le. Qíshí chéngguǎn yǐjīng 'guīfàn' guò liǎng cì le. Měi cì dōu shì yīyàng de jiéguǒ — bān dào xīn de gùdìng tānwèi zhīhòu, rénliúliàng xiàjiàng yībàn. Yīnwèi gùkè de xíngzǒu lùxiàn shì suíjī de, ér suíjī xìng qiàqià shì yèshì de shēngmìnglì.",
+                "text_en": "You know Jacobs! That's rare. Actually, the urban management has 'standardized' this place twice already. Same result each time — after moving to fixed stalls, foot traffic drops by half. Because customers' walking paths are random, and randomness is precisely the night market's vitality."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on why randomness matters in these spaces.",
+                "options": [
+                    {
+                        "text_zh": "没错。夜市卖的不只是食物，还有'偶遇感'——你不知道下一个摊位是什么，闻到香味就转过去了。这种意外的快感，规划好的商场永远给不了。把夜市变成美食广场，就像把探险变成参观展览。",
+                        "text_pinyin": "Méi cuò. Yèshì mài de bù zhǐ shì shíwù, hái yǒu 'ǒuyù gǎn' — nǐ bù zhīdào xià yīge tānwèi shì shénme, wén dào xiāngwèi jiù zhuǎn guòqù le. Zhè zhǒng yìwài de kuàigǎn, guīhuà hǎo de shāngchǎng yǒngyuǎn gěi bù liǎo. Bǎ yèshì biàn chéng měishí guǎngchǎng, jiù xiàng bǎ tànxiǎn biàn chéng cānguān zhǎnlǎn.",
+                        "text_en": "Right. Night markets sell not just food, but serendipity — you don't know the next stall, you smell something and turn. That unexpected thrill is what planned malls can never provide. Turning a night market into a food court is like turning exploration into an exhibition.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Analogy — names serendipity as the product and contrasts exploration vs. curation."
+                    },
+                    {
+                        "text_zh": "我觉得烧烤还是东北的好吃。",
+                        "text_pinyin": "Wǒ juéde shāokǎo háishì Dōngběi de hǎochī.",
+                        "text_en": "I think Northeast barbecue is still the best.",
+                        "score": 0.0,
+                        "feedback": "Regional food ranking that ignores the theoretical discussion."
+                    },
+                    {
+                        "text_zh": "但是卫生问题怎么办？没有统一管理的话，食品安全很难保证。",
+                        "text_pinyin": "Dànshì wèishēng wèntí zěnme bàn? Méiyǒu tǒngyī guǎnlǐ de huà, shípǐn ānquán hěn nán bǎozhèng.",
+                        "text_en": "But what about hygiene? Without unified management, food safety is hard to guarantee.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Sun Ming just explained that randomness is the night market's vitality, and you respond with a regulatory concern. You're thinking like the city planner he just critiqued."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Night markets in China serve as informal social infrastructure — spaces where class, age, and professional boundaries temporarily dissolve. The tension between night markets and urban management (城管) is iconic: city officials often seek to 'civilize' these spaces through standardization (规范化), but the result frequently kills the spontaneity that made them vibrant. The concept of '烟火气' (smoky vitality / the warmth of everyday life) is often invoked to defend these messy, organic spaces against sanitized development."
+    }
+}

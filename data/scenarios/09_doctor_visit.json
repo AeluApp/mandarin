@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Describe your symptoms.",
                 "options": [
-                    {"text_zh": "我头疼，还有点儿发烧。", "text_pinyin": "wǒ tóuténg, hái yǒudiǎnr fāshāo.", "text_en": "I have a headache and a slight fever.", "score": 1.0, "register": "neutral", "feedback": "Clear symptom description — 头疼 and 发烧 are the key medical terms."},
-                    {"text_zh": "我嗓子疼，从昨天开始就不太舒服。", "text_pinyin": "wǒ sǎngzi téng, cóng zuótiān kāishǐ jiù bú tài shūfu.", "text_en": "My throat hurts, I haven't felt well since yesterday.", "score": 0.6, "register": "neutral", "feedback": "Specific symptom with timeline — good structure, but 头疼 and 发烧 are the key medical terms the doctor needs most."},
-                    {"text_zh": "我觉得可能是感冒了，有点不舒服。", "text_pinyin": "wǒ juéde kěnéng shì gǎnmào le, yǒudiǎn bù shūfu.", "text_en": "I think I might have a cold, feeling a bit off.", "score": 0.5, "register": "casual", "feedback": "Self-diagnosing is OK casually, but listing specific symptoms (头疼, 发烧, 嗓子疼) helps the doctor much more."}
+                    {
+                        "text_zh": "房子看起来不错，请问房租多少钱一个月？包不包水电费？",
+                        "text_pinyin": "fángzi kàn qǐlai búcuò, qǐngwèn fángzū duōshao qián yī ge yuè? bāo bù bāo shuǐdiànfèi?",
+                        "text_en": "The apartment looks nice. How much is the rent per month? Are utilities included?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your symptoms, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我头疼，还有点儿发烧。",
+                        "text_pinyin": "wǒ tóuténg, hái yǒudiǎnr fāshāo.",
+                        "text_en": "I have a headache and a slight fever.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear symptom description — 头疼 and 发烧 are the key medical terms."
+                    },
+                    {
+                        "text_zh": "不好意思，我房间的空调好像坏了，能不能帮我解决一下？",
+                        "text_pinyin": "bù hǎoyìsi, wǒ fángjiān de kōngtiáo hǎoxiàng huài le, néng bù néng bāng wǒ jiějué yīxià?",
+                        "text_en": "Excuse me, the AC in my room seems broken. Could you help me fix this?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your symptoms, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Ask about the result.",
                 "options": [
-                    {"text_zh": "检查结果怎么样？严重吗？", "text_pinyin": "jiǎnchá jiéguǒ zěnmeyàng? yánzhòng ma?", "text_en": "How are the results? Is it serious?", "score": 1.0, "register": "neutral", "feedback": "Perfect — direct and appropriate. 严重 shows you know the right word for 'serious'."},
-                    {"text_zh": "有没有什么大问题？需要吃药吗？", "text_pinyin": "yǒu méiyǒu shénme dà wèntí? xūyào chī yào ma?", "text_en": "Any big issues? Do I need medication?", "score": 0.6, "register": "neutral", "feedback": "Reasonable follow-up, but 检查结果怎么样 is more precise — ask about the results specifically."},
-                    {"text_zh": "应该没什么大事吧？", "text_pinyin": "yīnggāi méi shénme dàshì ba?", "text_en": "It shouldn't be anything serious, right?", "score": 0.4, "register": "casual", "feedback": "Seeking reassurance rather than information. Let the doctor give you the result with 检查结果怎么样."}
+                    {
+                        "text_zh": "我们也很舍不得你。祝你在上海一切顺利，有空常联系。",
+                        "text_pinyin": "wǒmen yě hěn shěbude nǐ. zhù nǐ zài shànghǎi yīqiè shùnlì, yǒu kòng cháng liánxì.",
+                        "text_en": "We'll miss you too. Wish you all the best in Shanghai, keep in touch when you can.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask about the result, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "检查结果怎么样？严重吗？",
+                        "text_pinyin": "jiǎnchá jiéguǒ zěnmeyàng? yánzhòng ma?",
+                        "text_en": "How are the results? Is it serious?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — direct and appropriate. 严重 shows you know the right word for 'serious'."
+                    },
+                    {
+                        "text_zh": "认识！好的，那我们约星期六上午怎么样？我来定时间。",
+                        "text_pinyin": "rènshi! hǎo de, nà wǒmen yuē xīngqīliù shàngwǔ zěnmeyàng? wǒ lái dìng shíjiān.",
+                        "text_en": "Yes! OK, how about Saturday morning? I'll set the time.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to ask about the result, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

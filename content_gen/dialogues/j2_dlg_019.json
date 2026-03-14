@@ -1,0 +1,83 @@
+{
+  "title": "The Streetlight Repairman",
+  "title_zh": "修路灯的人",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "Late afternoon, you notice a man fixing a broken streetlight on your block. You stop to watch.",
+    "setup_zh": "傍晚时分，你看到一个人在你家这条街修坏了的路灯。你停下来看。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这个灯坏了好几天了，今天终于来修了。你住在这条街上吗？",
+        "text_pinyin": "Zhège dēng huài le hǎo jǐ tiān le, jīntiān zhōngyú lái xiū le. Nǐ zhù zài zhè tiáo jiē shàng ma?",
+        "text_en": "This light has been broken for days — finally came to fix it today. Do you live on this street?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him you've noticed the broken light.",
+        "options": [
+          {
+            "text_zh": "对，我住这里。我也注意到了，晚上这里特别黑。",
+            "text_pinyin": "Duì, wǒ zhù zhèlǐ. Wǒ yě zhùyì dào le, wǎnshang zhèlǐ tèbié hēi.",
+            "text_en": "Yes, I live here. I noticed too — it's really dark here at night.",
+            "score": 1.0,
+            "feedback": "Observant — validates his work.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你修了多长时间了？",
+            "text_pinyin": "Nǐ xiū le duō cháng shíjiān le?",
+            "text_en": "How long have you been fixing it?",
+            "score": 0.0,
+            "feedback": "He just started and asked if you live here."
+          },
+          {
+            "text_zh": "我住在这里，但是我平时不太注意路灯。",
+            "text_pinyin": "Wǒ zhù zài zhèlǐ, dànshì wǒ píngshí bú tài zhùyì lùdēng.",
+            "text_en": "I live here, but I don't usually pay attention to the streetlights.",
+            "score": 0.0,
+            "feedback": "He glances up from his work — honest, but you did notice, and the prompt asked you to say so."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊，路灯很重要。大家回家的路上需要光。这个工作不起眼，但是我觉得有意思。",
+        "text_pinyin": "Shì a, lùdēng hěn zhòngyào. Dàjiā huí jiā de lù shàng xūyào guāng. Zhège gōngzuò bù qǐyǎn, dànshì wǒ juéde yǒu yìsi.",
+        "text_en": "Yeah, streetlights are important. People need light on their way home. This job isn't glamorous, but I find it meaningful."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his perspective on his work.",
+        "options": [
+          {
+            "text_zh": "我觉得这个工作很了不起。谢谢你让我们回家的路亮起来。",
+            "text_pinyin": "Wǒ juéde zhège gōngzuò hěn liǎobuqǐ. Xièxie nǐ ràng wǒmen huí jiā de lù liàng qǐlái.",
+            "text_en": "I think this work is admirable. Thank you for lighting our way home.",
+            "score": 1.0,
+            "feedback": "Sincere — recognizes the value of unseen labor.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你工资高不高？",
+            "text_pinyin": "Nǐ gōngzī gāo bù gāo?",
+            "text_en": "Is your salary high?",
+            "score": 0.0,
+            "feedback": "This reduces his heartfelt words to money."
+          },
+          {
+            "text_zh": "我不怕黑。",
+            "text_pinyin": "Wǒ bú pà hēi.",
+            "text_en": "I'm not afraid of the dark.",
+            "score": 0.0,
+            "feedback": "Misses his point entirely."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The people who maintain urban infrastructure — streetlight repairers, plumbers, electricians — are often invisible. In the iyashikei spirit, recognizing the dignity and meaning in 'small' work transforms how we see our neighborhoods."
+  }
+}

@@ -1,0 +1,94 @@
+{
+    "title": "Tea and Small Talk",
+    "title_zh": "喝茶聊天",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_social_1_02_v0",
+    "tree": {
+        "setup": "A friend's apartment, afternoon sunlight through sheer curtains. Xiao Mei has made tea and arranged cookies on a plate in a spiral pattern. She's the kind of person who asks how you're doing and actually listens to the answer. Her cat, Mimi, is watching you from the bookshelf.",
+        "setup_zh": "朋友的公寓，下午的阳光透过薄窗帘。小美泡了茶，把饼干在盘子里摆成螺旋形。她是那种问你最近怎么样、然后认真听回答的人。她的猫咪咪从书架上看着你。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来，喝茶。你最近怎么样？",
+                "text_pinyin": "lái, hē chá. nǐ zuìjìn zěnmeyàng?",
+                "text_en": "Here, have some tea. How have you been lately?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her how you've been.",
+                "options": [
+                    {
+                        "text_zh": "很好，谢谢！你呢？",
+                        "text_pinyin": "hěn hǎo, xièxie! nǐ ne?",
+                        "text_en": "Very well, thanks! And you?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Mei smiles and pours your tea with both hands. The cat blinks slowly -- in cat language, this means approval. 你呢 turns any statement into a conversation."
+                    },
+                    {
+                        "text_zh": "还可以。有点累。",
+                        "text_pinyin": "hái kěyǐ. yǒudiǎn lèi.",
+                        "text_en": "OK. A bit tired.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei pushes the cookie plate closer to you -- her universal remedy for tiredness. 还可以 is a perfectly honest middle-ground answer."
+                    },
+                    {
+                        "text_zh": "你的猫很可爱！",
+                        "text_pinyin": "nǐ de māo hěn kě'ài!",
+                        "text_en": "Your cat is really cute!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei introduces Mimi formally, including age, favorite sleeping spot, and preferred brand of treat. The cat yawns. 可爱 (kě'ài) is 'cute' -- one of the most-used adjectives in casual Chinese."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个周末你想做什么？",
+                "text_pinyin": "zhè ge zhōumò nǐ xiǎng zuò shénme?",
+                "text_en": "What do you want to do this weekend?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your weekend plans.",
+                "options": [
+                    {
+                        "text_zh": "我想去看电影。一起去？",
+                        "text_pinyin": "wǒ xiǎng qù kàn diànyǐng. yìqǐ qù?",
+                        "text_en": "I'd like to go see a movie. Want to come?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Mei claps her hands once.「好啊！看什么？」Inviting someone along with 一起去 is warm and natural."
+                    },
+                    {
+                        "text_zh": "我不知道，你呢？",
+                        "text_pinyin": "wǒ bù zhīdào, nǐ ne?",
+                        "text_en": "I don't know, what about you?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei already has a detailed plan involving a bookstore, a park, and a specific noodle shop. She was hoping you'd ask."
+                    },
+                    {
+                        "text_zh": "我要在家休息。",
+                        "text_pinyin": "wǒ yào zài jiā xiūxi.",
+                        "text_en": "I'm going to rest at home.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Mei nods understandingly. The cat purrs, as if to endorse this plan. 在家 means 'at home' -- a useful location phrase."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！再喝一杯茶吧。",
+                "text_pinyin": "hǎo! zài hē yì bēi chá ba.",
+                "text_en": "OK! Have another cup of tea."
+            }
+        ],
+        "cultural_note": "Offering tea (倒茶, dào chá) is a basic gesture of Chinese hospitality. Pouring with both hands shows respect. Asking 最近怎么样 (zuìjìn zěnmeyàng) is the standard 'how have you been' -- warmer and more personal than 你好."
+    }
+}

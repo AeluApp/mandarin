@@ -1,0 +1,90 @@
+{
+    "title": "The Courtyard We Grew Up In",
+    "title_zh": "长大的院子",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your childhood friend Xiaopeng happen to pass by the old neighborhood where you both grew up. The buildings are still there, but everything looks different.",
+        "setup_zh": "你和发小小鹏碰巧路过你们小时候住的老小区。楼还在，但一切看起来都不一样了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看，那个就是我们以前踢球的空地。现在变成停车场了。那时候觉得那块地好大好大，现在看其实就那么一小块。",
+                "text_pinyin": "Nǐ kàn, nàge jiù shì wǒmen yǐqián tī qiú de kòngdì. Xiànzài biàn chéng tíngchēchǎng le. Nà shíhou juéde nà kuài dì hǎo dà hǎo dà, xiànzài kàn qíshí jiù nàme yī xiǎo kuài.",
+                "text_en": "Look, that's the open lot where we used to play soccer. It's a parking lot now. Back then it seemed so huge, but looking at it now, it's actually just a small patch."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feelings about revisiting the old neighborhood.",
+                "options": [
+                    {
+                        "text_zh": "小时候什么都显得大，因为我们那么小。不只是这块空地，连回家的路都觉得特别长。现在走一遍，三分钟就到了。也许不是地方变小了，是我们长大了。",
+                        "text_pinyin": "Xiǎo shíhou shénme dōu xiǎn de dà, yīnwèi wǒmen nàme xiǎo. Bù zhǐ shì zhè kuài kòngdì, lián huí jiā de lù dōu juéde tèbié cháng. Xiànzài zǒu yī biàn, sān fēnzhōng jiù dào le. Yěxǔ bú shì dìfang biàn xiǎo le, shì wǒmen zhǎng dà le.",
+                        "text_en": "Everything seemed big when we were small, because we were so little. Even the walk home felt so long. Now I can walk it in three minutes. Maybe the place didn't shrink — we grew up.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Nostalgic and true — captures the shift in perspective that comes with growing up."
+                    },
+                    {
+                        "text_zh": "停车场挺方便的，这附近确实缺停车位。",
+                        "text_pinyin": "Tíngchēchǎng tǐng fāngbiàn de, zhè fùjìn quèshí quē tíngchē wèi.",
+                        "text_en": "A parking lot is convenient, this area really lacks parking spots.",
+                        "score": 0.0,
+                        "feedback": "Responds pragmatically to a nostalgic moment."
+                    },
+                    {
+                        "text_zh": "你小时候踢球踢得好吗？",
+                        "text_pinyin": "Nǐ xiǎo shíhou tī qiú tī de hǎo ma?",
+                        "text_en": "Were you good at soccer when you were a kid?",
+                        "score": 0.0,
+                        "feedback": "Sidesteps the emotional weight of returning to this place."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "长大了……是啊。你记不记得那个小卖部的阿姨？我们每天放学都去买五毛钱的冰棍。她总是多给我们一根，说天热，多吃点。",
+                "text_pinyin": "Zhǎng dà le…… shì a. Nǐ jì bú jìde nàge xiǎomàibù de āyí? Wǒmen měi tiān fàngxué dōu qù mǎi wǔ máo qián de bīnggùn. Tā zǒng shì duō gěi wǒmen yī gēn, shuō tiān rè, duō chī diǎn.",
+                "text_en": "Grew up... yeah. Do you remember the lady at the corner shop? We'd buy fifty-cent popsicles every day after school. She always gave us an extra one, saying it's hot out, have some more."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on those small kindnesses.",
+                "options": [
+                    {
+                        "text_zh": "我记得。那时候觉得那根多给的冰棍是全世界最好的东西。现在想想，那些小小的善意才是真正让童年温暖的东西。不是什么大事，就是有人愿意对你好一点。",
+                        "text_pinyin": "Wǒ jìde. Nà shíhou juéde nà gēn duō gěi de bīnggùn shì quán shìjiè zuì hǎo de dōngxi. Xiànzài xiǎngxiǎng, nàxiē xiǎo xiǎo de shànyì cái shì zhēnzhèng ràng tóngnián wēnnuǎn de dōngxi. Bú shì shénme dà shì, jiù shì yǒu rén yuànyì duì nǐ hǎo yīdiǎn.",
+                        "text_en": "Back then that extra popsicle felt like the best thing in the world. Now I realize those small kindnesses truly made childhood warm. Nothing big — someone willing to be a little extra good to you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Tender and wise — connects childhood memory to a universal truth about kindness."
+                    },
+                    {
+                        "text_zh": "现在的小孩都不吃冰棍了，都吃那种贵的冰淇淋了。时代不一样了。",
+                        "text_pinyin": "Xiànzài de xiǎohái dōu bù chī bīnggùn le, dōu chī nà zhǒng guì de bīngqílín le. Shídài bù yíyàng le.",
+                        "text_en": "Kids nowadays don't eat popsicles anymore — they all eat those fancy ice creams. Times have changed.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Xiaopeng is remembering a woman's small generosity, and you pivot to a generational comparison. The point isn't what kids eat now — it's what that extra popsicle meant."
+                    },
+                    {
+                        "text_zh": "那个小卖部还在吗？",
+                        "text_pinyin": "Nàge xiǎomàibù hái zài ma?",
+                        "text_en": "Is that corner shop still there?",
+                        "score": 0.0,
+                        "feedback": "Not terrible but focuses on the place rather than the feeling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有人愿意对你好一点……嗯。我们长大以后，好像越来越难做到这一点了。也许我们应该试试，做别人的那个「多给一根冰棍」的人。",
+                "text_pinyin": "Yǒu rén yuànyì duì nǐ hǎo yīdiǎn…… en. Wǒmen zhǎng dà yǐhòu, hǎoxiàng yuè lái yuè nán zuòdào zhè yīdiǎn le. Yěxǔ wǒmen yīnggāi shìshì, zuò biéren de nàge 'duō gěi yī gēn bīnggùn' de rén.",
+                "text_en": "Someone willing to be a little extra good... yeah. After growing up, it seems harder and harder to do that. Maybe we should try — be someone's 'extra popsicle' person."
+            }
+        ],
+        "cultural_note": "小卖部 (xiǎomàibù, corner shops) were once ubiquitous in Chinese residential neighborhoods, run by familiar faces who knew every family. The five-cent popsicle (五毛钱冰棍) is a powerful symbol of 1990s and 2000s Chinese childhood. As neighborhoods modernize and small shops are replaced by convenience store chains, these personal connections fade — making childhood revisits particularly bittersweet."
+    }
+}

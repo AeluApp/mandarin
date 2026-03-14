@@ -1,0 +1,117 @@
+{
+    "title": "The Last Bus",
+    "title_zh": "末班车",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're waiting at a bus stop late at night. A young office worker, Xiao Zhang, is also waiting. The city is unusually quiet.",
+        "setup_zh": "你深夜在公交车站等车。一个年轻的上班族小张也在等车。城市异常安静。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也在等末班车？还有十分钟。我每天都坐这趟车，已经习惯了。晚上十一点的城市，感觉不太一样。",
+                "text_pinyin": "Nǐ yě zài děng mòbān chē? Hái yǒu shí fēnzhōng. Wǒ měi tiān dōu zuò zhè tàng chē, yǐjīng xíguàn le. Wǎnshang shíyī diǎn de chéngshì, gǎnjué bú tài yīyàng.",
+                "text_en": "You're also waiting for the last bus? Ten more minutes. I take this bus every day, I'm used to it. The city at eleven p.m. feels different somehow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the late-night city.",
+                "options": [
+                    {
+                        "text_zh": "是啊，白天太吵了，到了晚上反而能听到一些平时听不到的声音。风的声音，远处的车。安静也是一种声音。",
+                        "text_pinyin": "Shì a, báitiān tài chǎo le, dào le wǎnshang fǎn'ér néng tīng dào yīxiē píngshí tīng bú dào de shēngyīn. Fēng de shēngyīn, yuǎnchù de chē. Ānjìng yě shì yī zhǒng shēngyīn.",
+                        "text_en": "Yeah, daytime is too noisy. At night you can actually hear sounds you normally can't — the wind, distant cars. Quiet is a kind of sound too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Observant and poetic — notices the beauty in nighttime stillness."
+                    },
+                    {
+                        "text_zh": "你每天加班到这么晚吗？",
+                        "text_pinyin": "Nǐ měi tiān jiābān dào zhème wǎn ma?",
+                        "text_en": "Do you work overtime this late every day?",
+                        "score": 0.0,
+                        "feedback": "Jumps to work instead of sharing the moment."
+                    },
+                    {
+                        "text_zh": "末班车几点出发？",
+                        "text_pinyin": "Mòbān chē jǐ diǎn chūfā?",
+                        "text_en": "What time does the last bus leave?",
+                        "score": 0.0,
+                        "feedback": "He just said ten minutes; this is redundant and unengaging."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "安静也是一种声音……我没这么想过。白天在办公室，到处都是人说话、打电话。到了晚上，反而觉得这个城市才是我的。",
+                "text_pinyin": "Ānjìng yě shì yī zhǒng shēngyīn…… wǒ méi zhème xiǎng guò. Báitiān zài bàngōngshì, dàochù dōu shì rén shuōhuà, dǎ diànhuà. Dào le wǎnshang, fǎn'ér juéde zhège chéngshì cái shì wǒ de.",
+                "text_en": "Quiet is a kind of sound... I never thought of it that way. During the day in the office, everyone's talking, making calls. At night, the city finally feels like it's mine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Talk about the feeling of owning the city at night.",
+                "options": [
+                    {
+                        "text_zh": "是啊，晚上反而能听到白天听不到的声音。风声，远处的车。安静也是一种声音。",
+                        "text_pinyin": "Shì a, wǎnshang fǎn'ér néng tīng dào báitiān tīng bú dào de shēngyīn. Fēng shēng, yuǎnchù de chē. Ānjìng yě shì yī zhǒng shēngyīn.",
+                        "text_en": "Yeah, at night you hear things you can't during the day. The wind, distant cars. Quiet is a kind of sound too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reversal — reframes late nights as a choice to preserve solitude."
+                    },
+                    {
+                        "text_zh": "你住在哪个小区？",
+                        "text_pinyin": "Nǐ zhù zài nǎge xiǎoqū?",
+                        "text_en": "Which apartment complex do you live in?",
+                        "score": 0.0,
+                        "feedback": "Personal question that breaks the reflective mood."
+                    },
+                    {
+                        "text_zh": "你用什么手机看时间？",
+                        "text_pinyin": "Nǐ yòng shénme shǒujī kàn shíjiān?",
+                        "text_en": "What phone do you use to check the time?",
+                        "score": 0.0,
+                        "feedback": "Irrelevant tech question."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "舍不得这段安静的时间……说得太对了。我每天回到家就坐在窗户旁边，不开灯，看外面的路灯。那个时候才觉得，今天终于是自己的了。",
+                "text_pinyin": "Shěbùdé zhè duàn ānjìng de shíjiān…… shuō de tài duì le. Wǒ měi tiān huí dào jiā jiù zuò zài chuānghù pángbiān, bù kāi dēng, kàn wàimiàn de lùdēng. Nàge shíhou cái juéde, jīntiān zhōngyú shì zìjǐ de le.",
+                "text_en": "Can't bear to give up the quiet time... that's exactly it. Every day when I get home I sit by the window, don't turn on the light, and watch the streetlamps outside. That's when I finally feel the day is my own."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to this image of solitude.",
+                "options": [
+                    {
+                        "text_zh": "不开灯看路灯，这个画面很美。有时候最好的休息不是做什么特别的事，而是什么都不做，就让自己安静地存在一会儿。",
+                        "text_pinyin": "Bù kāi dēng kàn lùdēng, zhège huàmiàn hěn měi. Yǒu shíhou zuì hǎo de xiūxi bú shì zuò shénme tèbié de shì, ér shì shénme dōu bú zuò, jiù ràng zìjǐ ānjìng de cúnzài yīhuìr.",
+                        "text_en": "Not turning on the light and watching streetlamps — that's a beautiful image. Sometimes the best rest isn't doing something special, but doing nothing at all, just quietly existing for a while.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirms solitude as valuable — validates the practice of stillness."
+                    },
+                    {
+                        "text_zh": "你应该早点睡觉，对身体好。",
+                        "text_pinyin": "Nǐ yīnggāi zǎo diǎn shuìjiào, duì shēntǐ hǎo.",
+                        "text_en": "You should sleep earlier, it's better for your health.",
+                        "score": 0.0,
+                        "feedback": "Health advice that dismisses the emotional value of his nightly ritual."
+                    },
+                    {
+                        "text_zh": "你觉得坐公交车好还是坐地铁好？",
+                        "text_pinyin": "Nǐ juéde zuò gōngjiāo chē hǎo háishì zuò dìtiě hǎo?",
+                        "text_en": "Do you think taking the bus or the subway is better?",
+                        "score": 0.0,
+                        "feedback": "Transport comparison during a moment of genuine connection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The concept of 末班车 (last bus) carries symbolic weight in Chinese urban life. For many office workers, the late-night commute represents a liminal space between work and personal life. The practice of sitting alone in the dark (不开灯) is a quiet form of self-care common among overworked young professionals in Chinese cities."
+    }
+}

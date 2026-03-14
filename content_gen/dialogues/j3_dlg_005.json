@@ -1,0 +1,123 @@
+{
+    "title": "Weekend Plans with a Friend",
+    "title_zh": "和朋友的周末计划",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your friend Xiao Chen sends you a message asking if you're free this weekend. You meet at the usual park bench to discuss plans.",
+        "setup_zh": "你的朋友小陈发消息问你周末有没有空。你们在平时常去的公园长椅上碰面，讨论周末的计划。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好久没出去玩了！这个周末你想做什么？我们可以去爬山，或者去那个新开的商场逛逛。",
+                "text_pinyin": "Hǎojiǔ méi chūqù wán le! Zhège zhōumò nǐ xiǎng zuò shénme? Wǒmen kěyǐ qù pá shān, huòzhě qù nàge xīn kāi de shāngchǎng guàngguang.",
+                "text_en": "It's been so long since we went out! What do you want to do this weekend? We could go hiking, or check out that new mall."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest what to do this weekend.",
+                "options": [
+                    {
+                        "text_zh": "我觉得爬山比较好。天气这么好，我们可以带一些吃的，在山上野餐。",
+                        "text_pinyin": "Wǒ juéde pá shān bǐjiào hǎo. Tiānqì zhème hǎo, wǒmen kěyǐ dài yīxiē chī de, zài shān shàng yěcān.",
+                        "text_en": "I think hiking is better. The weather's so nice — we could bring some food and have a picnic on the mountain.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and adds a nice detail about a picnic."
+                    },
+                    {
+                        "text_zh": "都可以，你决定吧。",
+                        "text_pinyin": "Dōu kěyǐ, nǐ juédìng ba.",
+                        "text_en": "Either is fine, you decide.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Easy-going but doesn't contribute to the planning."
+                    },
+                    {
+                        "text_zh": "我想在家休息，你自己去吧。",
+                        "text_pinyin": "Wǒ xiǎng zài jiā xiūxi, nǐ zìjǐ qù ba.",
+                        "text_en": "I want to rest at home — you go by yourself.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Dismissive — she's excited to spend time together."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好主意！山上野餐一定很舒服。那我们要不要叫小李一起？她上次说也想出去走走。",
+                "text_pinyin": "Hǎo zhǔyi! Shān shàng yěcān yīdìng hěn shūfu. Nà wǒmen yào bú yào jiào Xiǎo Lǐ yīqǐ? Tā shàng cì shuō yě xiǎng chūqù zǒuzou.",
+                "text_en": "Good idea! A mountaintop picnic would be lovely. Should we invite Xiao Li too? She mentioned wanting to get out last time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to inviting Xiao Li.",
+                "options": [
+                    {
+                        "text_zh": "当然好啊！人多更热闹。你给她发个消息吧。",
+                        "text_pinyin": "Dāngrán hǎo a! Rén duō gèng rènao. Nǐ gěi tā fā ge xiāoxi ba.",
+                        "text_en": "Of course! The more the merrier. Send her a message.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Inclusive and enthusiastic — good friend energy."
+                    },
+                    {
+                        "text_zh": "好吧，都行。",
+                        "text_pinyin": "Hǎo ba, dōu xíng.",
+                        "text_en": "Sure, whatever.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agreeable but unenthusiastic."
+                    },
+                    {
+                        "text_zh": "不要了，就我们两个人去吧。",
+                        "text_pinyin": "Bú yào le, jiù wǒmen liǎng ge rén qù ba.",
+                        "text_en": "Nah, let's just go the two of us.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Not wrong, but could seem exclusive."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！那我们周六早上九点在地铁站见？记得穿运动鞋，山路不太好走。",
+                "text_pinyin": "Tài hǎo le! Nà wǒmen zhōuliù zǎoshang jiǔ diǎn zài dìtiě zhàn jiàn? Jìde chuān yùndòng xié, shān lù bú tài hǎo zǒu.",
+                "text_en": "Great! Then shall we meet at the subway station at 9 on Saturday morning? Remember to wear sneakers — the mountain paths aren't easy to walk."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan.",
+                "options": [
+                    {
+                        "text_zh": "好的，九点见！我带水果和面包，你带水，怎么样？",
+                        "text_pinyin": "Hǎo de, jiǔ diǎn jiàn! Wǒ dài shuǐguǒ hé miànbāo, nǐ dài shuǐ, zěnmeyàng?",
+                        "text_en": "Okay, see you at nine! I'll bring fruit and bread, you bring water — how's that?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Takes initiative on logistics — shows you're a good planner."
+                    },
+                    {
+                        "text_zh": "好的，不见不散。",
+                        "text_pinyin": "Hǎo de, bú jiàn bú sàn.",
+                        "text_en": "Okay, see you there for sure.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Nice expression but doesn't add to the plan."
+                    },
+                    {
+                        "text_zh": "九点太早了，十点行吗？",
+                        "text_pinyin": "Jiǔ diǎn tài zǎo le, shí diǎn xíng ma?",
+                        "text_en": "Nine is too early — how about ten?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Reasonable to negotiate but slightly deflates the momentum."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Making plans with friends in China often involves multiple rounds of suggestions and confirmations. The phrase 「不见不散」 means 'we won't leave until we see each other' — a common way to confirm plans. Splitting who brings what for outings is a natural part of group planning."
+    },
+    "hsk_level": 3
+}

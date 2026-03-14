@@ -1,0 +1,117 @@
+{
+    "title": "The Fermentation Master",
+    "title_zh": "发酵师",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "In a centuries-old soy sauce workshop in Fujian, you meet Master Lin, who tends fermentation vats that have been active for over a hundred years. The air is thick with umami. He moves slowly among the vats, listening.",
+        "setup_zh": "在福建一间有几百年历史的酱油作坊里，你遇到了林师傅。他照料着活跃了一百多年的发酵缸。空气中弥漫着浓郁的鲜味。他在缸之间慢慢走着，侧耳倾听。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道吗，这些发酵缸里的菌群比我的年纪大得多——有些已经传了四五代了。每一缸里的微生物生态系统都是独一无二的，是几百年来这个特定环境里自然选择的结果。温度、湿度、木头的年龄、甚至空气中飘过的花粉——都在影响发酵。我不是在「做」酱油。微生物在做。我只是照顾它们。",
+                "text_pinyin": "Nǐ zhīdào ma, zhèxiē fājiào gāng lǐ de jūnqún bǐ wǒ de niánjì dà de duō — yǒuxiē yǐjīng chuán le sì wǔ dài le. Měi yī gāng lǐ de wēishēngwù shēngtài xìtǒng dōu shì dúyīwú'èr de, shì jǐ bǎi nián lái zhège tèdìng huánjìng lǐ zìrán xuǎnzé de jiéguǒ. Wēndù, shīdù, mùtou de niánlíng, shènzhì kōngqì zhōng piāo guò de huāfěn — dōu zài yǐngxiǎng fājiào. Wǒ bú shì zài 'zuò' jiàngyóu. Wēishēngwù zài zuò. Wǒ zhǐ shì zhàogù tāmen.",
+                "text_en": "You know, the microbial colonies in these fermentation vats are much older than me — some have been passed down four or five generations. Each vat's microbial ecosystem is unique, the result of natural selection in this specific environment over centuries. Temperature, humidity, the age of the wood, even pollen drifting through the air — all affect fermentation. I'm not 'making' soy sauce. The microbes are making it. I'm just taking care of them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his relationship with the microbes.",
+                "options": [
+                    {
+                        "text_zh": "您不是制造者，是照顾者——这个区别很关键。现代食品工业把发酵当「过程」来控制，您把它当「生命」来照料。这些菌群经历了几百年自然演化，复杂性不可能在实验室复制。您照顾的不是一缸酱油，是一百年的生命记忆。",
+                        "text_pinyin": "Nín bú shì zhìzào zhě, shì zhàogù zhě — zhège qūbié hěn guānjiàn. Xiàndài shípǐn gōngyè bǎ fājiào dāng 'guòchéng' lái kòngzhì, nín bǎ tā dāng 'shēngmìng' lái zhàoliào. Zhèxiē jūnqún jīnglì le jǐ bǎi nián zìrán yǎnhuà, fùzáxìng bùkěnéng zài shíyànshì fùzhì. Nín zhàogù de bú shì yī gāng jiàngyóu, shì yī bǎi nián de shēngmìng jìyì.",
+                        "text_en": "You're not a maker, you're a caretaker — that distinction is crucial. Modern food industry treats fermentation as a 'process' to control; you treat it as a 'life' to tend. These colonies evolved over centuries with a complexity that can't be replicated in a lab. What you care for isn't a vat of soy sauce — it's a hundred years of living memory.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Maker vs. caretaker — the vats as living evolutionary archives."
+                    },
+                    {
+                        "text_zh": "现代工厂的酱油和您做的有什么区别？",
+                        "text_pinyin": "Xiàndài gōngchǎng de jiàngyóu hé nín zuò de yǒu shénme qūbié?",
+                        "text_en": "What's the difference between factory soy sauce and yours?",
+                        "score": 0.0,
+                        "feedback": "A consumer comparison during a philosophical revelation."
+                    },
+                    {
+                        "text_zh": "发酵需要多长时间？",
+                        "text_pinyin": "Fājiào xūyào duō cháng shíjiān?",
+                        "text_en": "How long does fermentation take?",
+                        "score": 0.0,
+                        "feedback": "A production timeline question during a meditation on living systems."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一百年的生命记忆——对，就是这个。但最让我焦虑的是继承的问题。这些菌群不是一个配方——你不能写在纸上交给下一个人。它们是活的，需要每天照顾。温度变了怎么办、湿度不对怎么调——这些都是身体记忆，不是知识。我的手知道什么时候搅拌，我的鼻子知道哪一缸需要关注。但我不知道怎么把这些教给别人。我能教的只是「在旁边看三十年」。",
+                "text_pinyin": "Yī bǎi nián de shēngmìng jìyì — duì, jiù shì zhège. Dàn zuì ràng wǒ jiāolǜ de shì jìchéng de wèntí. Zhèxiē jūnqún bú shì yī ge pèifāng — nǐ bù néng xiě zài zhǐ shàng jiāo gěi xià yī ge rén. Tāmen shì huó de, xūyào měi tiān zhàogù. Wēndù biàn le zěnme bàn, shīdù bú duì zěnme tiáo — zhèxiē dōu shì shēntǐ jìyì, bú shì zhīshi. Wǒ de shǒu zhīdào shénme shíhou jiǎobàn, wǒ de bízi zhīdào nǎ yī gāng xūyào guānzhù. Dàn wǒ bù zhīdào zěnme bǎ zhèxiē jiāo gěi biéren. Wǒ néng jiāo de zhǐ shì 'zài pángbiān kàn sānshí nián'.",
+                "text_en": "A hundred years of living memory — yes. But what worries me most is succession. These colonies aren't a recipe — you can't write them on paper. They're alive, needing daily care. What to do when temperature shifts, how to adjust humidity — body memories, not knowledge. My hands know when to stir, my nose knows which vat needs attention. All I can teach is 'stand beside me and watch for thirty years.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the problem of transmitting body knowledge.",
+                "options": [
+                    {
+                        "text_zh": "「在旁边看三十年」——这是隐性知识传承的核心矛盾。它不存在于语言里，存在于身体和环境的长期互动中。这种知识只能通过共处、模仿、长时间的浸泡来传递。但现在的世界没有耐心等三十年了——智慧不是信息，是时间的沉淀。",
+                        "text_pinyin": "'Zài pángbiān kàn sānshí nián' — zhè shì yǐnxìng zhīshi chuánchéng de héxīn máodùn. Tā bù cúnzài yú yǔyán lǐ, cúnzài yú shēntǐ hé huánjìng de chángqī hùdòng zhōng. Zhè zhǒng zhīshi zhǐ néng tōngguò gòngchǔ, mófǎng, cháng shíjiān de jìnpào lái chuándì. Dàn xiànzài de shìjiè méiyǒu nàixīn děng sānshí nián le — zhìhuì bú shì xìnxī, shì shíjiān de chéndiàn.",
+                        "text_en": "'Watch for thirty years' — the core contradiction of tacit knowledge. It doesn't exist in language, but in long-term interaction between body and environment. This knowledge can only be passed through coexistence, imitation, prolonged immersion. But today's world has no patience for thirty years — wisdom isn't information, it's time's sediment.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Wisdom as time's sediment — irreducible to data, requiring decades of presence."
+                    },
+                    {
+                        "text_zh": "不能用传感器来监测吗？",
+                        "text_pinyin": "Bù néng yòng chuángǎnqì lái jiāncè ma?",
+                        "text_en": "Couldn't you use sensors to monitor?",
+                        "score": 0.0,
+                        "feedback": "A tech solution for what is fundamentally embodied knowledge."
+                    },
+                    {
+                        "text_zh": "您有徒弟吗？",
+                        "text_pinyin": "Nín yǒu túdì ma?",
+                        "text_en": "Do you have apprentices?",
+                        "score": 0.0,
+                        "feedback": "A personnel question during a meditation on the nature of knowledge itself."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "时间的沉淀……没有人比做发酵的人更理解这个词了。你知道最让我伤心的是什么吗？如果有一天这些缸停了——不是被打破，只是没有人继续照顾——菌群就会死。它们不会等你。它们每天都在活着，每天都需要有人在。这不像一件古董可以锁在柜子里保存。这是一种只有在持续照顾中才能存在的遗产。一旦照顾中断，即使只是一个月，几百年的积累就会永远消失。",
+                "text_pinyin": "Shíjiān de chéndiàn…… méiyǒu rén bǐ zuò fājiào de rén gèng lǐjiě zhège cí le. Nǐ zhīdào zuì ràng wǒ shāngxīn de shì shénme ma? Rúguǒ yǒu yī tiān zhèxiē gāng tíng le — bú shì bèi dǎ pò, zhǐ shì méiyǒu rén jìxù zhàogù — jūnqún jiù huì sǐ. Tāmen bú huì děng nǐ. Tāmen měi tiān dōu zài huó zhe, měi tiān dōu xūyào yǒu rén zài. Zhè bù xiàng yī jiàn gǔdǒng kěyǐ suǒ zài guìzi lǐ bǎocún. Zhè shì yī zhǒng zhǐyǒu zài chíxù zhàogù zhōng cáinéng cúnzài de yíchǎn. Yīdàn zhàogù zhōngduàn, jíshǐ zhǐ shì yī ge yuè, jǐ bǎi nián de jīlěi jiù huì yǒngyuǎn xiāoshī.",
+                "text_en": "Time's sediment... no one understands that better than a fermentation worker. What saddens me most? If these vats stop — not broken, just untended — the colonies die. They won't wait. They're alive every day, needing someone present every day. This isn't an antique you lock in a cabinet. This heritage only exists through continuous care. If care is interrupted even a month, centuries of accumulation vanish forever."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to heritage that requires continuous care to exist.",
+                "options": [
+                    {
+                        "text_zh": "只有在持续照顾中才能存在的遗产——最脆弱，也最真实。我们理解的「遗产」是静态的——建筑、文物、文献。但您说的是「活的遗产」，存在条件是每天有人在。这跟爱一样——一旦停下来，就慢慢消散。您每天走进作坊，就是在用在场维持几百年的生命。",
+                        "text_pinyin": "Zhǐyǒu zài chíxù zhàogù zhōng cáinéng cúnzài de yíchǎn — zuì cuìruò, yě zuì zhēnshí. Wǒmen lǐjiě de 'yíchǎn' shì jìngtài de — jiànzhù, wénwù, wénxiàn. Dàn nín shuō de shì 'huó de yíchǎn', cúnzài tiáojiàn shì měi tiān yǒu rén zài. Zhè gēn ài yīyàng — yīdàn tíng xiàlái, jiù mànman xiāosàn. Nín měi tiān zǒu jìn zuōfáng, jiù shì zài yòng zàichǎng wéichí jǐ bǎi nián de shēngmìng.",
+                        "text_en": "Heritage that only exists through continuous care — the most fragile and most authentic. We understand 'heritage' as static — buildings, artifacts, documents. But what you describe is 'living heritage,' whose condition is someone being there every day. It's like love — once you stop, it dissipates. Your walking into this workshop every day is using presence to sustain centuries of life.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Living heritage as daily devotion — presence as the only preservation."
+                    },
+                    {
+                        "text_zh": "政府有没有给你们非遗保护的资金？",
+                        "text_pinyin": "Zhèngfǔ yǒu méiyǒu gěi nǐmen fēiyí bǎohù de zījīn?",
+                        "text_en": "Does the government give you intangible heritage protection funding?",
+                        "score": 0.0,
+                        "feedback": "A policy question at the emotional peak."
+                    },
+                    {
+                        "text_zh": "科学家能不能分析菌群的基因然后保存？",
+                        "text_pinyin": "Kēxuéjiā néng bù néng fēnxī jūnqún de jīyīn ránhòu bǎocún?",
+                        "text_en": "Could scientists analyze and preserve the colony's genome?",
+                        "score": 0.0,
+                        "feedback": "A biotech proposal when the point is about irreducible embodied care."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Traditional Chinese fermentation (酿造) represents one of the world's most sophisticated examples of living heritage. Soy sauce, vinegar, and baijiu workshops maintain microbial ecosystems that have evolved over centuries in specific microclimates. These cannot be replicated — the microbes are adapted to particular wooden vats, building materials, and local air. When a workshop closes, an irreplaceable biological and cultural heritage dies. China's intangible heritage protection system (非遗) attempts to address this, but living fermentation cultures resist the static nature of preservation."
+    }
+}

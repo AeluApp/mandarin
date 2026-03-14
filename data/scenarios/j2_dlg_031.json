@@ -1,0 +1,83 @@
+{
+  "title": "The Tea Shop Cat",
+  "title_zh": "茶馆的猫",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You walk into a small tea shop and notice a cat sleeping on a chair by the window. The shop owner smiles as she sees you looking at it.",
+    "setup_zh": "你走进一家小茶馆，看到一只猫在窗边的椅子上睡觉。老板娘看到你在看猫，笑了。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "那是小橘。它每天都在那里睡觉。你可以坐它旁边，它不怕人的。",
+        "text_pinyin": "Nà shì Xiǎo Jú. Tā měi tiān dōu zài nàlǐ shuìjiào. Nǐ kěyǐ zuò tā pángbiān, tā bú pà rén de.",
+        "text_en": "That's Xiao Ju. She sleeps there every day. You can sit next to her — she's not afraid of people."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the cat and the tea shop atmosphere.",
+        "options": [
+          {
+            "text_zh": "它好可爱！在这里喝茶，旁边有只猫，感觉特别放松。",
+            "text_pinyin": "Tā hǎo kě'ài! Zài zhèlǐ hē chá, pángbiān yǒu zhī māo, gǎnjué tèbié fàngsōng.",
+            "text_en": "She's so cute! Drinking tea here with a cat beside me — it feels especially relaxing.",
+            "score": 1.0,
+            "feedback": "Warm and present — embraces the tea-and-cat serenity.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "猫毛会不会掉到茶里？",
+            "text_pinyin": "Māo máo huì bú huì diào dào chá lǐ?",
+            "text_en": "Won't cat hair fall into the tea?",
+            "score": 0.0,
+            "feedback": "A hygiene worry that kills the charm."
+          },
+          {
+            "text_zh": "你们这里有什么茶？",
+            "text_pinyin": "Nǐmen zhèlǐ yǒu shénme chá?",
+            "text_en": "What teas do you have here?",
+            "score": 0.0,
+            "feedback": "Jumps to the menu without acknowledging the cat."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "它来的时候还是一只小小的流浪猫。现在它觉得这里是它的家了。客人都很喜欢它。",
+        "text_pinyin": "Tā lái de shíhou háishi yī zhī xiǎo xiǎo de liúlàng māo. Xiànzài tā juéde zhèlǐ shì tā de jiā le. Kèren dōu hěn xǐhuan tā.",
+        "text_en": "When she arrived she was a tiny stray. Now she thinks this is her home. All the customers love her."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the cat's story.",
+        "options": [
+          {
+            "text_zh": "它找到了一个好家。我觉得它在这里很幸福——有人喝茶，有阳光，还有你照顾它。",
+            "text_pinyin": "Tā zhǎo dào le yī ge hǎo jiā. Wǒ juéde tā zài zhèlǐ hěn xìngfú — yǒu rén hē chá, yǒu yángguāng, hái yǒu nǐ zhàogù tā.",
+            "text_en": "She found a good home. I think she's happy here — people drinking tea, sunlight, and you taking care of her.",
+            "score": 1.0,
+            "feedback": "Sees the fullness of a simple life — tea, sun, care.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "流浪猫很多，你不能都收养啊。",
+            "text_pinyin": "Liúlàng māo hěn duō, nǐ bù néng dōu shōuyǎng a.",
+            "text_en": "There are lots of strays — you can't adopt them all.",
+            "score": 0.0,
+            "feedback": "Introduces a problem when she's sharing something gentle."
+          },
+          {
+            "text_zh": "它吃什么？",
+            "text_pinyin": "Tā chī shénme?",
+            "text_en": "What does she eat?",
+            "score": 0.0,
+            "feedback": "A practical detail that misses the emotional story."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Cats in Chinese tea shops and bookstores are beloved fixtures. The concept of a stray finding a permanent home in a small shop resonates deeply. 小橘 (little orange) is one of the most popular names for orange tabby cats in China, and shop cats often become minor local celebrities."
+  }
+}

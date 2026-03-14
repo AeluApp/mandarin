@@ -1,0 +1,196 @@
+{
+    "title": "The Apothecary Archivist",
+    "title_zh": "药房档案管理员",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_doctor_6_03_v0",
+    "tree": {
+        "setup": "A traditional Chinese medicine pharmacy attached to a hospital's TCM department, where wooden drawers labeled in brush calligraphy line the walls from floor to ceiling. The air smells of dried chrysanthemum and astragalus root. Pharmacist Lao Chen has been mixing herbal prescriptions for thirty-four years and speaks about herbs the way an archivist speaks about manuscripts — with reverence for their origins and respect for their combinations. He weighs ingredients on a brass balance scale, adjusting with tweezers for precision down to the gram.",
+        "setup_zh": "附属于医院中医科的一家传统中药房，毛笔书法标注的木制抽屉从地板排到天花板。空气中弥漫着干菊花和黄芪的味道。老陈药剂师调配草药处方已有三十四年，谈论草药的方式就像档案管理员谈论手稿——对其来源怀有敬意，对其配伍心存尊重。他用一台黄铜天平称量药材，用镊子精确调整到克。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来了。处方给我。中药还是西药？",
+                "text_pinyin": "lái le. chǔfāng gěi wǒ. zhōngyào háishì xīyào?",
+                "text_en": "You're here. Give me the prescription. Chinese or Western medicine?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over the TCM prescription and ask about it.",
+                "options": [
+                    {
+                        "text_zh": "老陈，你好。这是中医科的处方，说是调理脾胃的。我之前没吃过中药，不太了解怎么煎、怎么喝。能不能帮我解释一下方子里都有什么？",
+                        "text_pinyin": "Lǎo Chén, nǐ hǎo. zhè shì zhōngyī kē de chǔfāng, shuō shì tiáolǐ pí wèi de. wǒ zhīqián méi chī guò zhōngyào, bú tài liǎojiě zěnme jiān, zěnme hē. néng bu néng bāng wǒ jiěshì yíxià fāngzi lǐ dōu yǒu shénme?",
+                        "text_en": "Lao Chen, hello. This is a prescription from the TCM department — for regulating the spleen and stomach. I've never taken Chinese medicine before, so I don't know how to brew or drink it. Could you explain what's in the formula?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "First-time TCM user seeking understanding — Lao Chen puts down his tweezers. A fresh student of herbal medicine is his favorite kind of patient."
+                    },
+                    {
+                        "text_zh": "中药。帮我抓药。",
+                        "text_pinyin": "zhōngyào. bāng wǒ zhuā yào.",
+                        "text_en": "Chinese medicine. Fill it for me.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He reads the prescription and begins pulling drawers. He'll explain while he works if you ask."
+                    },
+                    {
+                        "text_zh": "医生开的。我也不知道是什么。",
+                        "text_pinyin": "yīshēng kāi de. wǒ yě bù zhīdào shì shénme.",
+                        "text_en": "The doctor prescribed it. I don't know what it is either.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He reads the prescription with the ease of someone reading their native language — which, for him, it is."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "（看处方）嗯，这是一个经典的健脾方子。主药是党参和白术，补气健脾的。配了茯苓祛湿，陈皮理气。还有甘草，调和各味药。一共七味药，七天的量。这个方子温和，适合你的情况。",
+                "text_pinyin": "(kàn chǔfāng) ǹg, zhè shì yí gè jīngdiǎn de jiàn pí fāngzi. zhǔ yào shì dǎngshēn hé báizhú, bǔ qì jiàn pí de. pèi le fúlíng qū shī, chénpí lǐ qì. hái yǒu gāncǎo, tiáohé gè wèi yào. yígòng qī wèi yào, qī tiān de liàng. zhège fāngzi wēnhé, shìhé nǐ de qíngkuàng.",
+                "text_en": "(Reading) Mm, this is a classic spleen-strengthening formula. The main herbs are codonopsis and atractylodes — tonifying qi and strengthening the spleen. Poria for dampness, tangerine peel for qi regulation. Plus licorice to harmonize the other herbs. Seven herbs, seven days' supply. It's gentle — suitable for your condition."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about how to prepare the medicine.",
+                "options": [
+                    {
+                        "text_zh": "七味药，七天。请问我是拿回去自己煎，还是你们可以帮忙代煎？我家里没有煎药的工具。如果代煎的话，是做成药液袋吗？怎么保存？",
+                        "text_pinyin": "qī wèi yào, qī tiān. qǐngwèn wǒ shì ná huíqù zìjǐ jiān, háishì nǐmen kěyǐ bāngmáng dài jiān? wǒ jiālǐ méiyǒu jiān yào de gōngjù. rúguǒ dài jiān de huà, shì zuò chéng yào yè dài ma? zěnme bǎocún?",
+                        "text_en": "Seven herbs, seven days. Do I take them home to brew myself, or can you do it here? I don't have brewing equipment at home. If you brew them, are they packaged in liquid bags? How do I store them?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical questions from someone who knows their own limitations — Lao Chen appreciates honesty about kitchen capabilities."
+                    },
+                    {
+                        "text_zh": "你们能帮我煎吗？",
+                        "text_pinyin": "nǐmen néng bāng wǒ jiān ma?",
+                        "text_en": "Can you brew them for me?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "They can. He explains the options."
+                    },
+                    {
+                        "text_zh": "这些药直接泡水喝吗？",
+                        "text_pinyin": "zhèxiē yào zhíjiē pào shuǐ hē ma?",
+                        "text_en": "Can I just steep these in water?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Chen suppresses a wince. These need proper decoction, not steeping. He explains the difference with the patience of an archivist correcting a common misconception."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们有代煎服务，机器煎好以后真空包装成药液袋。七天的量一共十四袋——每天两袋，早晚各一袋。冷藏保存，喝之前用热水泡温。代煎费用另加四十块。自己煎的话，用砂锅或者不锈钢锅，加水没过药面两厘米，先大火煮开再小火煎二十分钟。你选哪个？",
+                "text_pinyin": "wǒmen yǒu dài jiān fúwù, jīqì jiān hǎo yǐhòu zhēnkōng bāozhuāng chéng yào yè dài. qī tiān de liàng yígòng shísì dài——měi tiān liǎng dài, zǎo wǎn gè yí dài. lěngcáng bǎocún, hē zhīqián yòng rè shuǐ pào wēn. dài jiān fèiyòng lìng jiā sìshí kuài. zìjǐ jiān de huà, yòng shāguō huòzhě bùxiùgāng guō, jiā shuǐ mò guò yào miàn liǎng límǐ, xiān dà huǒ zhǔ kāi zài xiǎo huǒ jiān èrshí fēnzhōng. nǐ xuǎn nǎge?",
+                "text_en": "We have a machine-brewing service — vacuum-sealed into liquid bags. Seven days makes 14 bags — two per day, morning and evening. Refrigerate, warm in hot water before drinking. Brewing fee is 40 yuan extra. For home brewing: use a clay or stainless steel pot, add water 2cm above the herbs, bring to a boil, then simmer 20 minutes. Which do you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose and ask about dietary restrictions.",
+                "options": [
+                    {
+                        "text_zh": "代煎吧，方便又放心。喝中药的时候有什么饮食上的禁忌吗？我平时喜欢喝咖啡和吃辣的，这些需要忌口吗？",
+                        "text_pinyin": "dài jiān ba, fāngbiàn yòu fàngxīn. hē zhōngyào de shíhòu yǒu shénme yǐnshí shàng de jìnjì ma? wǒ píngshí xǐhuan hē kāfēi hé chī là de, zhèxiē xūyào jì kǒu ma?",
+                        "text_en": "Machine-brewed — convenient and reliable. Are there any dietary restrictions while taking Chinese medicine? I usually drink coffee and eat spicy food — should I avoid those?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about food interactions with TCM — Lao Chen lights up. The intersection of herbs and diet is his thesis topic, if he were the kind of man who wrote theses."
+                    },
+                    {
+                        "text_zh": "代煎吧。有什么不能吃的吗？",
+                        "text_pinyin": "dài jiān ba. yǒu shénme bù néng chī de ma?",
+                        "text_en": "Machine-brewed. Anything I can't eat?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He gives the standard list: cold, raw, spicy, greasy."
+                    },
+                    {
+                        "text_zh": "代煎。多少钱？",
+                        "text_pinyin": "dài jiān. duōshǎo qián?",
+                        "text_en": "Machine-brewed. How much?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He totals it up. The dietary advice will be written on the bag — he hopes you read it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "既然是调理脾胃的方子，辣的一定要少吃——辣的伤胃，跟这个方子的目的相反。咖啡的话，最好和中药隔开一到两个小时。另外，绿豆和萝卜也尽量避免，因为它们会减弱补气药的效果。总的原则是：温热、清淡、好消化。你把这个方子想象成给脾胃休假——你不会在休假的时候加班吧？",
+                "text_pinyin": "jìrán shì tiáolǐ pí wèi de fāngzi, là de yídìng yào shǎo chī——là de shāng wèi, gēn zhège fāngzi de mùdì xiāngfǎn. kāfēi de huà, zuìhǎo hé zhōngyào gé kāi yí dào liǎng gè xiǎoshí. lìngwài, lǜdòu hé luóbo yě jǐnliàng bìmiǎn, yīnwèi tāmen huì jiǎnruò bǔ qì yào de xiàoguǒ. zǒng de yuánzé shì: wēnrè, qīngdàn, hǎo xiāohuà. nǐ bǎ zhège fāngzi xiǎngxiàng chéng gěi pí wèi xiūjià——nǐ búhuì zài xiūjià de shíhòu jiā bān ba?",
+                "text_en": "Since this formula is for the spleen and stomach, definitely reduce spicy food — spicy irritates the stomach, opposite to the formula's purpose. Keep coffee 1-2 hours apart from the medicine. Also avoid mung beans and radish — they weaken qi-tonifying herbs. General principle: warm, light, easy to digest. Think of this formula as giving your spleen a vacation — you wouldn't work overtime on vacation, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm understanding and ask about follow-up.",
+                "options": [
+                    {
+                        "text_zh": "给脾胃放假，这个比喻太好了，我记住了。少辣、少咖啡、不吃绿豆和萝卜。七天吃完以后，需要回来复诊让医生调整方子吗？还是继续吃同一个方子？",
+                        "text_pinyin": "gěi pí wèi fàng jià, zhège bǐyù tài hǎo le, wǒ jì zhù le. shǎo là, shǎo kāfēi, bù chī lǜdòu hé luóbo. qī tiān chī wán yǐhòu, xūyào huílái fùzhěn ràng yīshēng tiáozhěng fāngzi ma? háishì jìxù chī tóng yí gè fāngzi?",
+                        "text_en": "Giving the spleen a vacation — brilliant analogy, I'll remember it. Less spicy, less coffee, no mung beans or radish. After the seven days, do I need to come back for the doctor to adjust the formula? Or continue the same one?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Remembering the analogy and asking about the treatment arc — Lao Chen adjusts his brass scale with satisfaction. Thirty-four years of analogies, and they still land."
+                    },
+                    {
+                        "text_zh": "好的，记住了。七天以后怎么办？",
+                        "text_pinyin": "hǎo de, jì zhù le. qī tiān yǐhòu zěnme bàn?",
+                        "text_en": "OK, noted. What do I do after seven days?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He explains the follow-up process."
+                    },
+                    {
+                        "text_zh": "不吃辣的可真难啊。",
+                        "text_pinyin": "bù chī là de kě zhēn nán a.",
+                        "text_en": "Not eating spicy food is really hard though.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He chuckles.「七天而已。脾胃的假期比你的假期短多了。」Seven days only. Your spleen's vacation is shorter than yours."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "中药讲究辨证论治，吃了七天以后身体情况可能有变化，方子也需要跟着调整。所以一定要复诊。好了，药材总共一百六十块，代煎四十块，总共两百块。代煎需要两个小时，下午三点以后来取。或者我们也可以快递到你家。",
+                "text_pinyin": "zhōngyào jiǎngjiu biàn zhèng lùn zhì, chī le qī tiān yǐhòu shēntǐ qíngkuàng kěnéng yǒu biànhuà, fāngzi yě xūyào gēn zhe tiáozhěng. suǒyǐ yídìng yào fùzhěn. hǎo le, yàocái zǒnggòng yìbǎi liùshí kuài, dài jiān sìshí kuài, zǒnggòng liǎngbǎi kuài. dài jiān xūyào liǎng gè xiǎoshí, xiàwǔ sān diǎn yǐhòu lái qǔ. huòzhě wǒmen yě kěyǐ kuàidì dào nǐ jiā.",
+                "text_en": "TCM emphasizes treatment based on pattern differentiation — after seven days your body may change, and the formula needs adjustment. So definitely follow up. OK, herbs total 160 yuan, brewing fee 40 — 200 total. Brewing takes two hours, pick up after 3 PM. Or we can deliver."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank him.",
+                "options": [
+                    {
+                        "text_zh": "快递到家方便多了，谢谢。老陈，你解释得太好了，让我这个中药新手一下子就懂了。下周复诊完以后还来找你抓药。三十四年的经验真不是盖的！",
+                        "text_pinyin": "kuàidì dào jiā fāngbiàn duō le, xièxie. Lǎo Chén, nǐ jiěshì de tài hǎo le, ràng wǒ zhège zhōngyào xīnshǒu yíxiàzi jiù dǒng le. xià zhōu fùzhěn wán yǐhòu hái lái zhǎo nǐ zhuā yào. sānshísì nián de jīngyàn zhēn búshì gài de!",
+                        "text_en": "Home delivery is much more convenient, thanks. Lao Chen, your explanations were wonderful — you made this TCM beginner understand right away. I'll come back for prescriptions after my follow-up next week. Thirty-four years of experience really shows!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging his decades of expertise — Lao Chen adjusts his brass scale one final time. The chrysanthemum and astragalus scent follows you out like a gentle farewell."
+                    },
+                    {
+                        "text_zh": "快递吧。谢谢老陈！",
+                        "text_pinyin": "kuàidì ba. xièxie Lǎo Chén!",
+                        "text_en": "Deliver please. Thanks Lao Chen!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods and begins preparing the next prescription. The drawers open and close in practiced rhythm."
+                    },
+                    {
+                        "text_zh": "好的，两百。",
+                        "text_pinyin": "hǎo de, liǎngbǎi.",
+                        "text_en": "OK, 200.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He takes the payment. The herbs are already weighed, the brass scale steady."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Traditional Chinese medicine pharmacies (中药房) fill herbal prescriptions (方子, fāngzi) using dried herbs stored in wooden drawers. 代煎 (dài jiān) — machine-brewing service — has modernized TCM by vacuum-sealing individual doses. TCM dietary restrictions (忌口, jì kǒu) are specific to each formula. The principle of 辨证论治 (biàn zhèng lùn zhì, treatment based on pattern differentiation) means prescriptions are adjusted as the patient's condition changes."
+    }
+}

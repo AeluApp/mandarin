@@ -1,0 +1,123 @@
+{
+    "title": "Weather Changes",
+    "title_zh": "天气变了",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're waiting at a bus stop when it suddenly starts to drizzle. The woman next to you, a friendly office worker, opens her umbrella and scoots closer.",
+        "setup_zh": "你在公交站等车，突然开始下小雨了。旁边的女士是一个看起来很友好的上班族，她打开了伞，靠近了你一些。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下雨了！你没带伞吧？过来，一起撑我的。早上出门的时候天还好好的呢。",
+                "text_pinyin": "Xià yǔ le! Nǐ méi dài sǎn ba? Guòlái, yīqǐ chēng wǒ de. Zǎoshang chūmén de shíhou tiān hái hǎohǎo de ne.",
+                "text_en": "It's raining! You didn't bring an umbrella, did you? Come over, share mine. It was perfectly fine this morning when I left."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her offer to share the umbrella.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！早上天气预报说不下雨，我就没带。最近天气变化真大。",
+                        "text_pinyin": "Xièxie nǐ! Zǎoshang tiānqì yùbào shuō bú xià yǔ, wǒ jiù méi dài. Zuìjìn tiānqì biànhuà zhēn dà.",
+                        "text_en": "Thank you! The weather forecast this morning said no rain, so I didn't bring one. The weather's been so unpredictable lately.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grateful and conversational — opens up a natural topic."
+                    },
+                    {
+                        "text_zh": "没关系，我不怕淋雨。",
+                        "text_pinyin": "Méi guānxi, wǒ bú pà lín yǔ.",
+                        "text_en": "It's fine, I don't mind getting wet.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Independent but refuses a kind gesture."
+                    },
+                    {
+                        "text_zh": "哦。",
+                        "text_pinyin": "Ó.",
+                        "text_en": "Oh.",
+                        "score": 0.3,
+                        "register": "curt",
+                        "feedback": "Barely a response — doesn't engage at all."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对啊，天气预报这几天都不太准。上周说会下雪，结果出太阳了。你觉得这个季节是不是越来越奇怪了？",
+                "text_pinyin": "Duì a, tiānqì yùbào zhè jǐ tiān dōu bú tài zhǔn. Shàng zhōu shuō huì xià xuě, jiéguǒ chū tàiyáng le. Nǐ juéde zhège jìjié shì bú shì yuè lái yuè qíguài le?",
+                "text_en": "Right, the forecast has been off these past few days. Last week they said it would snow, and it turned out sunny. Don't you think this season is getting stranger and stranger?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on the changing weather.",
+                "options": [
+                    {
+                        "text_zh": "是啊，我记得小时候每个季节都很分明，现在春天有时候像冬天一样冷。",
+                        "text_pinyin": "Shì a, wǒ jìde xiǎo shíhou měi ge jìjié dōu hěn fēnmíng, xiànzài chūntiān yǒu shíhou xiàng dōngtiān yīyàng lěng.",
+                        "text_en": "Yeah, I remember when I was young the seasons were really distinct. Now spring sometimes feels as cold as winter.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And personal — connects the weather to memory."
+                    },
+                    {
+                        "text_zh": "可能吧。",
+                        "text_pinyin": "Kěnéng ba.",
+                        "text_en": "Maybe.",
+                        "score": 0.3,
+                        "register": "curt",
+                        "feedback": "Too brief for a friendly conversation."
+                    },
+                    {
+                        "text_zh": "我不太关心天气，反正每天都得出门。",
+                        "text_pinyin": "Wǒ bú tài guānxīn tiānqì, fǎnzhèng měi tiān dōu děi chūmén.",
+                        "text_en": "I don't really care about weather — I have to go out every day anyway.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but closes the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对！以前秋天很长，现在感觉一下子就从夏天跳到冬天了。哦，车来了！你坐几路？",
+                "text_pinyin": "Duì! Yǐqián qiūtiān hěn cháng, xiànzài gǎnjué yīxiàzi jiù cóng xiàtiān tiào dào dōngtiān le. Ó, chē lái le! Nǐ zuò jǐ lù?",
+                "text_en": "Right! Autumn used to be long — now it feels like it jumps straight from summer to winter. Oh, the bus is here! Which line are you taking?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer and say goodbye.",
+                "options": [
+                    {
+                        "text_zh": "我坐十二路。谢谢你的伞！希望明天天气好一点。",
+                        "text_pinyin": "Wǒ zuò shí'èr lù. Xièxie nǐ de sǎn! Xīwàng míngtiān tiānqì hǎo yīdiǎn.",
+                        "text_en": "I'm taking the 12. Thanks for the umbrella! Hope the weather's better tomorrow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm farewell that circles back to the shared experience."
+                    },
+                    {
+                        "text_zh": "十二路。再见。",
+                        "text_pinyin": "Shí'èr lù. Zàijiàn.",
+                        "text_en": "The 12. Bye.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but doesn't acknowledge her kindness."
+                    },
+                    {
+                        "text_zh": "我不坐这班车。",
+                        "text_pinyin": "Wǒ bú zuò zhè bān chē.",
+                        "text_en": "I'm not taking this bus.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Fine but doesn't close the interaction warmly."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing an umbrella with a stranger is a common act of everyday kindness in China. Casual weather talk at bus stops creates brief but genuine connections between strangers. The phrase 「天气预报不准」 is a universal conversation starter."
+    },
+    "hsk_level": 3
+}

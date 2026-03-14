@@ -157,6 +157,66 @@ var CapacitorBridge = (function() {
         setupStatusBar(e.matches);
       });
     }
+
+    // Hide splash screen after setup completes
+    try {
+      var SplashScreen = window.Capacitor.Plugins.SplashScreen;
+      if (SplashScreen) await SplashScreen.hide();
+    } catch (e) {
+      // Plugin not available
+    }
+  }
+
+  // ── Camera OCR Lookup ────────────────────────────────────
+  // Uses Capacitor Camera plugin to capture an image, then sends to
+  // POST /api/dictionary/ocr for hanzi detection.
+  // Falls back to "OCR not available" in browser.
+
+  async function cameraLookup() {
+    if (!isCapacitor) {
+      return { error: "OCR camera lookup requires a native app." };
+    }
+    try {
+      var Camera = window.Capacitor.Plugins.Camera;
+      if (!Camera) {
+        return { error: "Camera plugin not available." };
+      }
+
+      // Capture photo
+      var photo = await Camera.getPhoto({
+        quality: 80,
+        allowEditing: false,
+        resultType: 'base64',  // CameraResultType.Base64
+        source: 'CAMERA',      // CameraSource.Camera
+        width: 1024,
+        height: 1024,
+      });
+
+      if (!photo || !photo.base64String) {
+        return { error: "No image captured." };
+      }
+
+      // Send to OCR endpoint
+      var response = await fetch('/api/dictionary/ocr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          image_base64: photo.base64String,
+          format: photo.format || 'jpeg',
+        }),
+      });
+
+      if (!response.ok) {
+        return { error: "OCR request failed (HTTP " + response.status + ")" };
+      }
+
+      var data = await response.json();
+      return data;  // {hanzi: "...", definitions: [...]} or {error: "..."}
+    } catch (e) {
+      _log.warn('[capacitor] camera lookup failed:', e);
+      return { error: "Camera lookup failed: " + (e.message || e) };
+    }
   }
 
   return {
@@ -168,6 +228,7 @@ var CapacitorBridge = (function() {
     setupKeyboard: setupKeyboard,
     setupStatusBar: setupStatusBar,
     setupDeepLinks: setupDeepLinks,
+    cameraLookup: cameraLookup,
     init: init,
   };
 })();

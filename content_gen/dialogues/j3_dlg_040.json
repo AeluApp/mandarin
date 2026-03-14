@@ -1,0 +1,87 @@
+{
+    "title": "Morning Exercise Together",
+    "title_zh": "一起晨练",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You bump into your colleague Xiao Duan jogging in the park early in the morning. Neither of you knew the other exercised here.",
+        "setup_zh": "清晨你在公园里跑步，碰到了同事小段也在慢跑。你们都不知道对方在这里锻炼。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎？你也在这里跑步啊！太巧了。你每天都来吗？",
+                "text_pinyin": "Āi? Nǐ yě zài zhèlǐ pǎobù a! Tài qiǎo le. Nǐ měi tiān dōu lái ma?",
+                "text_en": "Hey? You jog here too? What a coincidence! Do you come every day?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your exercise routine.",
+                "options": [
+                    {
+                        "text_zh": "差不多每天都来！没想到你也在这里跑步。以后我们可以一起跑，有伴的话更有动力。",
+                        "text_pinyin": "Chàbuduō měi tiān dōu lái! Méi xiǎng dào nǐ yě zài zhèlǐ pǎobù. Yǐhòu wǒmen kěyǐ yīqǐ pǎo, yǒu bàn dehuà gèng yǒu dònglì.",
+                        "text_en": "Almost every day! Didn't expect you here. We could run together from now on — having company is more motivating.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and suggests partnership."
+                    },
+                    {
+                        "text_zh": "偶尔来。",
+                        "text_pinyin": "Ǒu'ěr lái.",
+                        "text_en": "Occasionally.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief."
+                    },
+                    {
+                        "text_zh": "今天是第一次。",
+                        "text_pinyin": "Jīntiān shì dì yī cì.",
+                        "text_en": "First time today.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest but doesn't build."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好啊！一个人跑有时候真的很无聊。那我们每天早上七点在这个入口见？跑完还可以一起去旁边买早餐。",
+                "text_pinyin": "Hǎo a! Yī ge rén pǎo yǒu shíhou zhēn de hěn wúliáo. Nà wǒmen měi tiān zǎoshang qī diǎn zài zhège rùkǒu jiàn? Pǎo wán hái kěyǐ yīqǐ qù pángbiān mǎi zǎocān.",
+                "text_en": "Great! Running alone can get boring. So every morning at seven at this entrance? After running we can buy breakfast together nearby."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the morning routine.",
+                "options": [
+                    {
+                        "text_zh": "太好了！跑步加早餐，完美的早晨。明天七点见！",
+                        "text_pinyin": "Tài hǎo le! Pǎobù jiā zǎocān, wánměi de zǎochén. Míngtiān qī diǎn jiàn!",
+                        "text_en": "Perfect! Jogging plus breakfast — the perfect morning. See you at seven tomorrow!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic about the new routine."
+                    },
+                    {
+                        "text_zh": "好的，七点见。",
+                        "text_pinyin": "Hǎo de, qī diǎn jiàn.",
+                        "text_en": "Okay, seven o'clock.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Confirms without much energy."
+                    },
+                    {
+                        "text_zh": "七点有点早，七点半行吗？",
+                        "text_pinyin": "Qī diǎn yǒudiǎn zǎo, qī diǎn bàn xíng ma?",
+                        "text_en": "Seven is a bit early — how about seven thirty?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Negotiating is fine but less enthusiastic."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Morning exercise in parks is deeply embedded in Chinese urban life. Running with a partner (跑友) is popular for mutual motivation. The combination of exercise followed by a shared breakfast creates a daily ritual that strengthens both health and friendship."
+    },
+    "hsk_level": 3
+}

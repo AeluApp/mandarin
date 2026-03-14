@@ -24,10 +24,16 @@ def test_support_level_new_scenario():
     assert determine_support_level(scenario) == "full_support"
 
 
-def test_support_level_few_presentations():
-    """Scenario with <3 presentations should be full_support even with high score."""
-    scenario = {"times_presented": 2, "avg_score": 0.9}
+def test_support_level_one_presentation():
+    """Scenario with only 1 presentation should be full_support."""
+    scenario = {"times_presented": 1, "avg_score": 0.9}
     assert determine_support_level(scenario) == "full_support"
+
+
+def test_support_level_pinyin_support():
+    """Scenario with times >= 2 and avg >= 0.65 should be pinyin_support."""
+    scenario = {"times_presented": 2, "avg_score": 0.70}
+    assert determine_support_level(scenario) == "pinyin_support"
 
 
 def test_support_level_low_score():
@@ -36,17 +42,14 @@ def test_support_level_low_score():
     assert determine_support_level(scenario) == "full_support"
 
 
-def test_support_level_threshold_exact():
-    """Scenario at exactly the threshold should be hanzi_only."""
-    scenario = {
-        "times_presented": SUPPORT_REMOVAL_MIN_PRESENTATIONS,
-        "avg_score": SUPPORT_REMOVAL_AVG_SCORE,
-    }
+def test_support_level_hanzi_only_threshold():
+    """Scenario with times >= 4 and avg >= 0.80 should be hanzi_only."""
+    scenario = {"times_presented": 4, "avg_score": 0.80}
     assert determine_support_level(scenario) == "hanzi_only"
 
 
 def test_support_level_above_threshold():
-    """Scenario above threshold should be hanzi_only."""
+    """Scenario well above threshold should be hanzi_only."""
     scenario = {"times_presented": 10, "avg_score": 0.9}
     assert determine_support_level(scenario) == "hanzi_only"
 
@@ -127,9 +130,8 @@ def test_full_support_shows_pinyin_english():
     assert len(option_lines) >= 1
     # Options are shuffled, so check across all option lines
     all_options = " ".join(option_lines)
-    # Should contain pinyin and english for both options
+    # Max-two-of-three: when pinyin is available, show hanzi+pinyin (no english)
     assert "nǐ hǎo!" in all_options or "ēn." in all_options
-    assert "Hello!" in all_options or "Mm." in all_options
 
 
 def test_hanzi_only_hides_pinyin_english():
@@ -170,13 +172,13 @@ def test_hanzi_only_shows_support_reduced_message():
         return "1"
 
     run_dialogue_drill(scenario, show_fn, input_fn, support_level="hanzi_only")
-    assert any("Support reduced" in l for l in output)
+    assert any("Hanzi only" in l for l in output)
 
 
 def test_post_answer_always_reveals_full_info():
     """After answering, full info should always be revealed regardless of support level."""
     from unittest.mock import patch
-    for support_level in ["full_support", "hanzi_only"]:
+    for support_level in ["full_support", "pinyin_support", "hanzi_only"]:
         scenario = _make_scenario()
         output = []
 

@@ -1,0 +1,83 @@
+{
+  "title": "The Laundry Line",
+  "title_zh": "晾衣绳",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're hanging laundry on the shared balcony. Your neighbor comes out with her basket too.",
+    "setup_zh": "你在共用阳台上晾衣服。你的邻居也端着一盆衣服出来了。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "今天阳光真好，正好晾衣服。你来中国以后习惯了吗？",
+        "text_pinyin": "Jīntiān yángguāng zhēn hǎo, zhènghǎo liàng yīfu. Nǐ lái Zhōngguó yǐhòu xíguàn le ma?",
+        "text_en": "Great sunshine today — perfect for drying clothes. Have you gotten used to life in China?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share how you've adjusted.",
+        "options": [
+          {
+            "text_zh": "越来越习惯了。以前在家我都用烘干机，现在觉得晾衣服也很好。",
+            "text_pinyin": "Yuè lái yuè xíguàn le. Yǐqián zài jiā wǒ dōu yòng hōnggān jī, xiànzài juéde liàng yīfu yě hěn hǎo.",
+            "text_en": "More and more used to it. Back home I always used a dryer, but now I think air-drying is nice too.",
+            "score": 1.0,
+            "feedback": "Open and reflective — shows genuine adaptation.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不喜欢晾衣服。",
+            "text_pinyin": "Wǒ bù xǐhuan liàng yīfu.",
+            "text_en": "I don't like hanging laundry.",
+            "score": 0.0,
+            "feedback": "She asked a broader question about adjusting."
+          },
+          {
+            "text_zh": "你的衣服很多。",
+            "text_pinyin": "Nǐ de yīfu hěn duō.",
+            "text_en": "You have a lot of clothes.",
+            "score": 0.0,
+            "feedback": "An odd observation that ignores her question."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是吧？阳光晒过的衣服有一种味道，很好闻。我觉得这是最简单的幸福。",
+        "text_pinyin": "Shì ba? Yángguāng shài guò de yīfu yǒu yī zhǒng wèidào, hěn hǎo wén. Wǒ juéde zhè shì zuì jiǎndān de xìngfú.",
+        "text_en": "Right? Sun-dried clothes have a certain smell — very pleasant. I think it's the simplest kind of happiness."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her observation about simple happiness.",
+        "options": [
+          {
+            "text_zh": "你说得真好。我也开始喜欢这些小事了。",
+            "text_pinyin": "Nǐ shuō de zhēn hǎo. Wǒ yě kāishǐ xǐhuan zhèxiē xiǎo shì le.",
+            "text_en": "Beautifully said. I'm starting to love these little things too.",
+            "score": 1.0,
+            "feedback": "Genuine — embraces the small joys of daily life.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "烘干机更快。",
+            "text_pinyin": "Hōnggān jī gèng kuài.",
+            "text_en": "A dryer is faster.",
+            "score": 0.0,
+            "feedback": "Misses her point about simple pleasures."
+          },
+          {
+            "text_zh": "我要去买菜了。",
+            "text_pinyin": "Wǒ yào qù mǎi cài le.",
+            "text_en": "I need to go buy vegetables.",
+            "score": 0.0,
+            "feedback": "Leaves during a meaningful moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Air-drying laundry in the sun is a universal practice in China. Shared balcony time creates natural neighbor interactions. The smell of sun-dried clothes (阳光的味道) is often described as one of life's simplest and purest pleasures."
+  }
+}

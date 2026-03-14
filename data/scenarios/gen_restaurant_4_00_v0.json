@@ -1,0 +1,160 @@
+{
+    "title": "The Takeout Philosopher",
+    "title_zh": "外卖哲学家",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_4_00_v0",
+    "tree": {
+        "setup": "A small noodle shop on a rain-slicked street, warm yellow light spilling from the doorway. The owner, Uncle Luo, runs his takeout operation like a small kingdom: every order is confirmed twice, every container is checked for leaks, and every customer receives his personal opinion on whether their choice will 'travel well.' He takes the structural integrity of takeout very seriously.",
+        "setup_zh": "雨后湿润的街道上，一家小面馆，暖黄色的灯光从门口洒出来。老板罗叔把他的外卖业务经营得像一个小王国：每个订单确认两次，每个饭盒检查有没有漏，每个顾客都会得到他对于这道菜「外带是否合适」的个人意见。他非常重视外卖的结构完整性。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "小伙子，你要堂吃还是带走？",
+                "text_pinyin": "xiǎohuǒzi, nǐ yào táng chī háishì dài zǒu?",
+                "text_en": "Hey there, eating here or taking away?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him you want takeout.",
+                "options": [
+                    {
+                        "text_zh": "罗叔，今天带走。给我来一份牛肉面和两个小菜。",
+                        "text_pinyin": "Luó shū, jīntiān dài zǒu. gěi wǒ lái yí fèn niúròu miàn hé liǎng gè xiǎo cài.",
+                        "text_en": "Uncle Luo, takeout today. I'll have beef noodles and two side dishes.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Clear order with specifics. Uncle Luo nods and reaches for the good containers — the ones that don't leak."
+                    },
+                    {
+                        "text_zh": "带走。给我来碗面。",
+                        "text_pinyin": "dài zǒu. gěi wǒ lái wǎn miàn.",
+                        "text_en": "Takeout. Give me a bowl of noodles.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll need to know which noodles. His menu has seven kinds, and he has strong opinions about each."
+                    },
+                    {
+                        "text_zh": "随便什么都行。",
+                        "text_pinyin": "suíbiàn shénme dōu xíng.",
+                        "text_en": "Whatever is fine.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Uncle Luo recoils slightly. 随便 is a word he does not recognize in his kingdom."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "牛肉面带走可以，但是我建议面和汤分开装。不然到家面就泡软了。你要辣的还是不辣的？",
+                "text_pinyin": "niúròu miàn dài zǒu kěyǐ, dànshì wǒ jiànyì miàn hé tāng fēnkāi zhuāng. bùrán dào jiā miàn jiù pào ruǎn le. nǐ yào là de háishì bú là de?",
+                "text_en": "Beef noodles to go is fine, but I suggest packing the noodles and soup separately. Otherwise the noodles get soggy by the time you're home. Spicy or not?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose spice level and agree to his suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好主意，分开装吧。中辣的，谢谢。",
+                        "text_pinyin": "hǎo zhǔyi, fēnkāi zhuāng ba. zhōng là de, xièxie.",
+                        "text_en": "Good idea — separate packaging. Medium spicy, thanks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepting his expertise and choosing medium — Uncle Luo approves. He starts ladling with precision."
+                    },
+                    {
+                        "text_zh": "不辣的。",
+                        "text_pinyin": "bú là de.",
+                        "text_en": "Not spicy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods but adds a small container of chili oil on the side, just in case. He's thoughtful that way."
+                    },
+                    {
+                        "text_zh": "越辣越好！",
+                        "text_pinyin": "yuè là yuè hǎo!",
+                        "text_en": "The spicier the better!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Uncle Luo raises an eyebrow. He's heard this before, usually followed by a regretful phone call twenty minutes later."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好。小菜要哪两个？今天的凉拌黄瓜很新鲜。",
+                "text_pinyin": "hǎo. xiǎo cài yào nǎ liǎng gè? jīntiān de liángbàn huángguā hěn xīnxiān.",
+                "text_en": "OK. Which two side dishes? Today's cucumber salad is very fresh."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your side dishes.",
+                "options": [
+                    {
+                        "text_zh": "那就来一个凉拌黄瓜，再来一个酸辣土豆丝。",
+                        "text_pinyin": "nà jiù lái yí gè liángbàn huángguā, zài lái yí gè suānlà tǔdòu sī.",
+                        "text_en": "Then I'll have the cucumber salad and hot-and-sour shredded potato.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A balanced pair. Uncle Luo approves of the combination — one cold, one warm, complementary flavors."
+                    },
+                    {
+                        "text_zh": "凉拌黄瓜和……你推荐什么？",
+                        "text_pinyin": "liángbàn huángguā hé……nǐ tuījiàn shénme?",
+                        "text_en": "Cucumber salad and... what do you recommend?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Asking Uncle Luo for a recommendation activates his favorite mode — food advisor."
+                    },
+                    {
+                        "text_zh": "随便两个。",
+                        "text_pinyin": "suíbiàn liǎng gè.",
+                        "text_en": "Any two.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "That word again. Uncle Luo's kingdom has no room for 随便. He chooses for you, and he chooses well."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，一共二十八块。扫码还是现金？五分钟就好。",
+                "text_pinyin": "hǎo, yígòng èrshíbā kuài. sǎo mǎ háishì xiànjīn? wǔ fēnzhōng jiù hǎo.",
+                "text_en": "OK, 28 yuan total. Scan to pay or cash? It'll be five minutes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank him.",
+                "options": [
+                    {
+                        "text_zh": "扫码。谢谢罗叔，你做的面一直是最好吃的！",
+                        "text_pinyin": "sǎo mǎ. xièxie Luó shū, nǐ zuò de miàn yìzhí shì zuì hǎochī de!",
+                        "text_en": "I'll scan. Thanks, Uncle Luo — your noodles are always the best!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The compliment hits home. Uncle Luo adds an extra piece of beef to your container when he thinks you're not looking."
+                    },
+                    {
+                        "text_zh": "微信付。",
+                        "text_pinyin": "Wēixìn fù.",
+                        "text_en": "WeChat Pay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He holds up the QR code. Transaction complete."
+                    },
+                    {
+                        "text_zh": "二十八？上次不是二十五吗？",
+                        "text_pinyin": "èrshíbā? shàng cì búshì èrshíwǔ ma?",
+                        "text_en": "Twenty-eight? Wasn't it twenty-five last time?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Luo explains that beef prices went up. He looks genuinely pained about it."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In China, 堂吃 (táng chī, dine-in) and 带走/打包 (dài zǒu/dǎbāo, takeout) are the standard terms. Most small restaurants accept mobile payment via WeChat or Alipay QR codes. Regulars calling shop owners 叔/阿姨 (uncle/auntie) builds a warm relationship."
+    }
+}

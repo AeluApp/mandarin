@@ -1,0 +1,87 @@
+{
+    "title": "The Tea Shop",
+    "title_zh": "茶店",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You wander into a small tea shop. The owner is an older man who looks up from his teapot.",
+        "setup_zh": "你走进一家小茶店。老板是一位老先生，他从茶壶旁抬头看你。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来坐坐！你喝过中国茶吗？",
+                "text_pinyin": "Jìnlái zuò zuo! Nǐ hē guò Zhōngguó chá ma?",
+                "text_en": "Come in and sit! Have you tried Chinese tea?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him about your tea experience.",
+                "options": [
+                    {
+                        "text_zh": "喝过一点。我很喜欢，但是不太懂。",
+                        "text_pinyin": "Hē guò yīdiǎn. Wǒ hěn xǐhuan, dànshì bú tài dǒng.",
+                        "text_en": "I've had a little. I like it a lot, but I don't know much about it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest about your experience level -- he invited you in and you showed genuine humility and interest."
+                    },
+                    {
+                        "text_zh": "喝过。我喜欢绿茶。",
+                        "text_pinyin": "Hē guò. Wǒ xǐhuan lǜchá.",
+                        "text_en": "Yes. I like green tea.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers his question but jumps to a preference without the humility -- he's offering to teach you something."
+                    },
+                    {
+                        "text_zh": "这里有几种茶？",
+                        "text_pinyin": "Zhèlǐ yǒu jǐ zhǒng chá?",
+                        "text_en": "How many types of tea do you have?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Asks about inventory when he asked if you've tried Chinese tea -- treats the tea master like a cashier."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没关系！来，我给你泡一杯。这个是绿茶，很好喝。",
+                "text_pinyin": "Méi guānxi! Lái, wǒ gěi nǐ pào yī bēi. Zhège shì lǜchá, hěn hǎo hē.",
+                "text_en": "No worries! Here, I'll brew you a cup. This is green tea, it's very good."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond after tasting the tea.",
+                "options": [
+                    {
+                        "text_zh": "真的很好喝！谢谢您。",
+                        "text_pinyin": "Zhēn de hěn hǎo hē! Xièxie nín.",
+                        "text_en": "It's really delicious! Thank you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Appreciates the tea he brewed for you and uses 您 respectfully -- he shared his craft."
+                    },
+                    {
+                        "text_zh": "好喝。和我以前喝的不一样。",
+                        "text_pinyin": "Hǎo hē. Hé wǒ yǐqián hē de bù yīyàng.",
+                        "text_en": "It's good. Different from what I've had before.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Compliments but compares to past tea -- he just brewed something special and 'different' isn't quite the same as 'wonderful.'"
+                    },
+                    {
+                        "text_zh": "这个茶多少钱？",
+                        "text_pinyin": "Zhège chá duōshǎo qián?",
+                        "text_en": "How much is this tea?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He offered you a free cup to taste and you immediately asked about price -- in a tea shop, tasting is hospitality, not a transaction."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tea shops in China are places of rest and conversation. Shop owners often invite passersby to sit and taste tea with no obligation to buy. It's a generous tradition rooted in hospitality. Using 您 shows respect for elders."
+    }
+}

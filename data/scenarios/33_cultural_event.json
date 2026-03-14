@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them about your experience with Chinese tea.",
                 "options": [
-                    {"text_zh": "谢谢！我喝过一些，但是不太了解茶艺，今天想好好学一学。", "text_pinyin": "xièxie! wǒ hē guò yīxiē, dànshì bú tài liǎojiě cháyì, jīntiān xiǎng hǎohǎo xué yī xué.", "text_en": "Thanks! I've had some, but I don't know much about tea ceremony. I'd like to learn properly today.", "score": 1.0, "register": "neutral", "feedback": "Humble and enthusiastic — acknowledges some experience while showing eagerness to learn. Very appropriate tone."},
-                    {"text_zh": "喝过，我很喜欢绿茶，其他的茶还没试过。", "text_pinyin": "hē guò, wǒ hěn xǐhuan lǜchá, qítā de chá hái méi shì guò.", "text_en": "Yes, I like green tea a lot, but I haven't tried other types.", "score": 0.7, "register": "casual", "feedback": "Specific and honest — mentioning green tea shows genuine interest, though expressing desire to learn more would fit the setting."},
-                    {"text_zh": "没有，这是我第一次来这种地方，很期待。", "text_pinyin": "méiyǒu, zhè shì wǒ dì yī cì lái zhè zhǒng dìfang, hěn qīdài.", "text_en": "No, this is my first time at a place like this, I'm looking forward to it.", "score": 0.6, "register": "casual", "feedback": "Honest but 这种地方 can sound slightly dismissive — 茶艺馆 or 这样的活动 sounds more respectful."}
+                    {
+                        "text_zh": "不好意思，我房间的空调好像坏了，能不能帮我解决一下？",
+                        "text_pinyin": "bù hǎoyìsi, wǒ fángjiān de kōngtiáo hǎoxiàng huài le, néng bù néng bāng wǒ jiějué yīxià?",
+                        "text_en": "Excuse me, the AC in my room seems broken. Could you help me fix this?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your experience with chinese tea, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "可以换大一号的吗？",
+                        "text_pinyin": "kěyǐ huàn dà yī hào de ma?",
+                        "text_en": "Can I exchange for one size bigger?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them about your experience with chinese tea, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢！我喝过一些，但是不太了解茶艺，今天想好好学一学。",
+                        "text_pinyin": "xièxie! wǒ hē guò yīxiē, dànshì bú tài liǎojiě cháyì, jīntiān xiǎng hǎohǎo xué yī xué.",
+                        "text_en": "Thanks! I've had some, but I don't know much about tea ceremony. I'd like to learn properly today.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Humble and enthusiastic — acknowledges some experience while showing eagerness to learn. Very appropriate tone."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Comment on the tea's aroma and ask a question about it.",
                 "options": [
-                    {"text_zh": "好香啊！铁观音是什么类型的茶？每次泡多长时间？", "text_pinyin": "hǎo xiāng a! tiěguānyīn shì shénme lèixíng de chá? měi cì pào duō cháng shíjiān?", "text_en": "It smells wonderful! What type of tea is Tie Guan Yin? How long do you brew it each time?", "score": 1.0, "register": "neutral", "feedback": "Engaged and curious — complimenting the aroma and asking specific questions shows respect for the craft."},
-                    {"text_zh": "闻起来很香，跟我平时喝的茶不太一样。", "text_pinyin": "wén qǐlai hěn xiāng, gēn wǒ píngshí hē de chá bú tài yīyàng.", "text_en": "It smells really nice, different from the tea I usually drink.", "score": 0.7, "register": "casual", "feedback": "Good observation that opens discussion — the tea master can explain the difference."},
-                    {"text_zh": "嗯，很好闻，我觉得泡出来一定很好喝。", "text_pinyin": "ēn, hěn hǎo wén, wǒ juéde pào chūlái yīdìng hěn hǎo hē.", "text_en": "Mm, it smells great, I'm sure it'll taste wonderful when brewed.", "score": 0.5, "register": "casual", "feedback": "Positive but surface-level — asking a question about the tea shows deeper engagement with the experience."}
+                    {
+                        "text_zh": "给您。请问大概需要多长时间？",
+                        "text_pinyin": "gěi nín. qǐngwèn dàgài xūyào duō cháng shíjiān?",
+                        "text_en": "Here you go. About how long will it take?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to comment on the tea's aroma and ask a question about it, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好香啊！铁观音是什么类型的茶？每次泡多长时间？",
+                        "text_pinyin": "hǎo xiāng a! tiěguānyīn shì shénme lèixíng de chá? měi cì pào duō cháng shíjiān?",
+                        "text_en": "It smells wonderful! What type of tea is Tie Guan Yin? How long do you brew it each time?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Engaged and curious — complimenting the aroma and asking specific questions shows respect for the craft."
+                    },
+                    {
+                        "text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.",
+                        "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to comment on the tea's aroma and ask a question about it, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

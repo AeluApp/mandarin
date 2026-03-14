@@ -10,10 +10,10 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from . import db
-from .scheduler import plan_standard_session, plan_minimal_session, plan_catchup_session, get_day_profile
-from .runner import run_session
-from .reports import generate_status_report
+# Heavy internal imports are deferred to function bodies so that when
+# menu.py is invoked via `python -m mandarin.menu`, any import-time
+# error in db/scheduler/runner/reports is caught by the __main__ crash
+# handler instead of producing a raw traceback.
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def _input(prompt: str) -> str:
 def show_menu(expanded=False):
     """Display the main menu and return user choice."""
     console.print()
-    console.print("  漫 [bold]Mandarin[/bold]")
+    console.print("  漫 [bold]Aelu[/bold]")
     console.print()
 
     # Primary actions — always visible
@@ -66,6 +66,17 @@ def show_menu(expanded=False):
 
 def run_menu():
     """Main menu loop."""
+    # Deferred imports: when menu.py runs as __main__, the crash handler
+    # (installed in the if-__name__ block below) must be in place before
+    # any heavy internal imports execute.  Importing here instead of at
+    # module level ensures import-time errors get logged to crash.log.
+    global db, plan_standard_session, plan_minimal_session
+    global plan_catchup_session, get_day_profile, run_session, generate_status_report
+    from . import db
+    from .scheduler import plan_standard_session, plan_minimal_session, plan_catchup_session, get_day_profile
+    from .runner import run_session
+    from .reports import generate_status_report
+
     expanded = False
     while True:
         choice = show_menu(expanded=expanded)
@@ -540,8 +551,9 @@ def _launch_web():
     import webbrowser
     import threading
     from .web import create_app
+    from .settings import PORT, DEFAULT_PORT
 
-    port = 5173
+    port = PORT or DEFAULT_PORT
     url = f"http://localhost:{port}"
     flask_app = create_app()
 
@@ -600,7 +612,9 @@ def _run_watch(conn, user_id: int = 1):
     lens_weights = {}
     for col in ("lens_quiet_observation", "lens_institutions", "lens_urban_texture",
                  "lens_humane_mystery", "lens_identity", "lens_comedy",
-                 "lens_food", "lens_travel", "lens_explainers"):
+                 "lens_food", "lens_travel", "lens_explainers",
+                 "lens_wit", "lens_ensemble_comedy", "lens_sharp_observation",
+                 "lens_satire", "lens_moral_texture"):
         lens_weights[col] = float(profile.get(col) or 0.5)
 
     recs = recommend_media(conn, hsk_max=max_hsk, lens_weights=lens_weights, limit=3)
@@ -640,22 +654,23 @@ def _run_watch(conn, user_id: int = 1):
 if __name__ == "__main__":
     import sys
     import traceback
-    from pathlib import Path
+    from .log_config import configure_logging, utc_now_iso, CRASH_LOG
+    configure_logging(mode="cli")
+    _logger = logging.getLogger(__name__)
     try:
         run_menu()
     except KeyboardInterrupt:
         print("\n")
         sys.exit(0)
     except Exception:
-        log_dir = Path(__file__).parent.parent / "data"
+        log_dir = CRASH_LOG.parent
         log_dir.mkdir(parents=True, exist_ok=True)
-        log_path = log_dir / "crash.log"
         tb = traceback.format_exc()
-        with open(log_path, "a", encoding="utf-8") as f:
-            from datetime import datetime
+        with open(CRASH_LOG, "a", encoding="utf-8") as f:
             f.write(f"\n{'='*60}\n")
-            f.write(f"{datetime.now().isoformat()}\n")
+            f.write(f"{utc_now_iso()}\n")
             f.write(tb)
-        print(f"\n  Something went wrong. Details saved to: {log_path}")
-        print(f"  Run again or check the log.\n")
+        _logger.error("Unhandled exception in menu: %s", tb.splitlines()[-1])
+        print(f"\n  Something went wrong. Details saved to: {CRASH_LOG}", file=sys.stderr)
+        print(f"  Run again or check the log.\n", file=sys.stderr)
         sys.exit(1)

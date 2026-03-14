@@ -1,6 +1,6 @@
 # Vendor Migration Path
 
-How to export all data from the Mandarin learning system for migration to another platform or for GDPR compliance.
+How to export all data from the Aelu learning system for migration to another platform or for GDPR compliance.
 
 ## Export Endpoints
 

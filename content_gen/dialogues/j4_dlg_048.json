@@ -1,0 +1,83 @@
+{
+    "title": "The Morning Fog",
+    "title_zh": "晨雾",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You wake up early at a countryside guesthouse and step outside into thick morning fog. The innkeeper is already sitting on the porch with tea.",
+        "setup_zh": "你在一家乡村民宿早起，走到外面发现浓浓的晨雾。民宿老板已经坐在门廊上喝茶了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早。雾很大吧？不用怕，太阳出来就散了。我最喜欢早上有雾的时候——什么都看不清，世界好像只剩下声音了。你听，有鸟叫、有水声，但是看不到在哪里。",
+                "text_pinyin": "Zǎo. Wù hěn dà ba? Bú yòng pà, tàiyáng chūlái jiù sàn le. Wǒ zuì xǐhuan zǎoshang yǒu wù de shíhou — shénme dōu kàn bù qīng, shìjiè hǎoxiàng zhǐ shèng xià shēngyīn le. Nǐ tīng, yǒu niǎo jiào, yǒu shuǐ shēng, dànshì kàn bú dào zài nǎlǐ.",
+                "text_en": "Morning. Thick fog, right? Don't worry, it'll clear when the sun comes out. I love mornings with fog — you can't see anything clearly, the world seems reduced to just sound. Listen — birdsong, water, but you can't see where they are."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the fog and its effect on perception.",
+                "options": [
+                    {
+                        "text_zh": "真的，平时用眼睛看的世界，现在只能用耳朵听。好像雾把视觉关掉了，让我们重新用耳朵感受。看不见反而更丰富了。",
+                        "text_pinyin": "Zhēn de, píngshí yòng yǎnjing kàn de shìjiè, xiànzài zhǐ néng yòng ěrduo tīng. Hǎoxiàng wù bǎ shìjué guān diào le, ràng wǒmen chóngxīn yòng ěrduo gǎnshòu. Kàn bú jiàn fǎn'ér gèng fēngfù le.",
+                        "text_en": "Really — a world I normally see, now I can only hear. The fog turned off sight, making us relearn with our ears. Not seeing actually makes things richer.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Fog as a teacher — removing one sense to awaken another."
+                    },
+                    {
+                        "text_zh": "几点太阳会出来？",
+                        "text_pinyin": "Jǐ diǎn tàiyáng huì chūlái?",
+                        "text_en": "What time will the sun come out?",
+                        "score": 0.0,
+                        "feedback": "Wants the fog gone instead of experiencing it."
+                    },
+                    {
+                        "text_zh": "这里经常有雾吗？",
+                        "text_pinyin": "Zhèlǐ jīngcháng yǒu wù ma?",
+                        "text_en": "Is fog common here?",
+                        "score": 0.0,
+                        "feedback": "A weather pattern question during a sensory moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看不见反而更丰富——说得好。有雾的时候，远处不存在了。你只能感受身边的东西——脚下的土地，手里的茶杯，空气里的湿润。雾让世界变小了，但变小了反而变深了。",
+                "text_pinyin": "Kàn bú jiàn fǎn'ér gèng fēngfù — shuō de hǎo. Yǒu wù de shíhou, yuǎnchù bù cúnzài le. Nǐ zhǐ néng gǎnshòu shēnbiān de dōngxi — jiǎo xià de tǔdì, shǒu lǐ de chábēi, kōngqì lǐ de shīrùn. Wù ràng shìjiè biàn xiǎo le, dàn biàn xiǎo le fǎn'ér biàn shēn le.",
+                "text_en": "Not seeing makes things richer — well said. In fog, the distance stops existing. You can only feel what's near — the ground beneath your feet, the teacup in your hands, the moisture in the air. Fog makes the world smaller, but smaller becomes deeper."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of a smaller world being deeper.",
+                "options": [
+                    {
+                        "text_zh": "变小了反而变深了——也许是我最需要学的东西。平时总想看更远、想更多。但这个早晨的雾在教我：只关注脚下和手里的东西，就够了。",
+                        "text_pinyin": "Biàn xiǎo le fǎn'ér biàn shēn le — yěxǔ shì wǒ zuì xūyào xué de dōngxi. Píngshí zǒng xiǎng kàn gèng yuǎn, xiǎng gèng duō. Dàn zhège zǎochén de wù zài jiāo wǒ: zhǐ guānzhù jiǎo xià hé shǒu lǐ de dōngxi, jiù gòu le.",
+                        "text_en": "Smaller becomes deeper — maybe that's what I most need to learn. Always trying to see farther, think more. But this morning's fog teaches me: just focus on what's at your feet and in your hands. That's enough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The fog as life lesson — narrowing scope deepens experience."
+                    },
+                    {
+                        "text_zh": "我应该拍个照片。",
+                        "text_pinyin": "Wǒ yīnggāi pāi ge zhàopiàn.",
+                        "text_en": "I should take a photo.",
+                        "score": 0.0,
+                        "feedback": "Reaches for a camera during a moment about pure presence."
+                    },
+                    {
+                        "text_zh": "雾天开车很危险。",
+                        "text_pinyin": "Wù tiān kāi chē hěn wēixiǎn.",
+                        "text_en": "Driving in fog is dangerous.",
+                        "score": 0.0,
+                        "feedback": "A safety warning in a contemplative moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Morning fog (晨雾) in the Chinese countryside is a beloved natural phenomenon, appearing in countless landscape paintings. The aesthetic concept of 留白 (leaving white space) in Chinese art parallels the fog's effect: what is hidden enhances what is present. The innkeeper's insight that a smaller world is a deeper world echoes Daoist principles of reduction leading to fullness."
+    }
+}

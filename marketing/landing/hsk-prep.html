@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HSK Exam Prep App — Know Exactly Where You Stand | Mandarin</title>
-  <meta name="description" content="Track your HSK readiness across vocabulary, listening, reading, and tone accuracy. Adaptive drills target your actual weak spots. HSK 1-6 aligned. Free for HSK 1-2.">
+  <title>HSK Exam Prep App — Know Exactly Where You Stand | Aelu</title>
+  <meta name="description" content="Track your HSK readiness across vocabulary, listening, reading, and tone accuracy. Adaptive drills target your actual weak spots. HSK 1-9 aligned. Free for HSK 1-2.">
   <meta name="keywords" content="HSK study app, HSK prep app, HSK 3 study plan, HSK exam preparation, HSK readiness tracker, how to pass HSK 3, HSK vocabulary list, new HSK 3.0 changes, how long to pass HSK 3, HSK 3 listening practice, HSK 3.0 speaking test preparation">
-  <link rel="canonical" href="https://mandarinapp.com/hsk-prep">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/hsk-prep">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
   <meta property="og:title" content="HSK Exam Prep — Track Your Readiness Across All Skills">
-  <meta property="og:description" content="Stop guessing if you're ready for HSK. Mandarin tracks your readiness across vocabulary, listening, reading, and tone accuracy.">
+  <meta property="og:description" content="Stop guessing if you're ready for HSK. Aelu tracks your readiness across vocabulary, listening, reading, and tone accuracy.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/hsk-prep">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/hsk-prep">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HSK Exam Prep — Track Your Readiness Across All Skills">
-  <meta name="twitter:description" content="Stop guessing if you're ready for HSK. Mandarin tracks your readiness across vocabulary, listening, reading, and tone accuracy.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:description" content="Stop guessing if you're ready for HSK. Aelu tracks your readiness across vocabulary, listening, reading, and tone accuracy.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -31,7 +31,7 @@
     "@type": "WebPage",
     "name": "HSK Exam Prep App — Know Exactly Where You Stand",
     "description": "Track your HSK readiness across vocabulary, listening, reading, and tone accuracy. Adaptive drills target your actual weak spots.",
-    "url": "https://mandarinapp.com/hsk-prep",
+    "url": "https://aeluapp.com/hsk-prep",
     "keywords": "HSK study app, HSK prep, HSK 3 study plan, HSK exam preparation, HSK readiness tracker"
   }
   </script>
@@ -136,7 +136,10 @@
     /* Nav */
     nav { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none; }
+    .nav-brand { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); text-decoration: none;       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .nav-links { display: flex; gap: var(--space-4); list-style: none; }
     .nav-links a { font-size: 0.9rem; color: var(--color-text-faint); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text); }
@@ -148,6 +151,30 @@
       .nav-links.nav-open { display: flex; }
       nav .container { position: relative; }
     }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
   </style>
 </head>
 <body>
@@ -155,7 +182,7 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -164,7 +191,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -173,7 +201,7 @@
     <div class="container">
       <div class="hero-label">HSK Exam Preparation</div>
       <h1>Know exactly where you stand for HSK</h1>
-      <p class="hero-sub">Most apps tell you how many words you've seen. Mandarin tracks your readiness across vocabulary, listening, reading, and tone accuracy — so you know what to study, not just what to review.</p>
+      <p class="hero-sub">Most apps tell you how many words you've seen. Aelu tracks your readiness across vocabulary, listening, reading, and tone accuracy — so you know what to study, not just what to review.</p>
       <div class="cta-group">
         <form class="cta-email" action="#" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
@@ -188,7 +216,7 @@
   <section class="problem">
     <div class="container">
       <h2>HSK readiness isn't just vocabulary count</h2>
-      <p>You might know 600 words but still fail HSK 3 — because the test measures four distinct skills. Mandarin tracks all of them.</p>
+      <p>You might know 600 words but still fail HSK 3 — because the test measures four distinct skills. Aelu tracks all of them.</p>
       <div class="skill-grid">
         <div class="skill-card">
           <div class="hanzi">词</div>
@@ -216,7 +244,7 @@
 
   <section class="features">
     <div class="container">
-      <h2>What Mandarin does for HSK prep</h2>
+      <h2>What Aelu does for HSK prep</h2>
       <ul class="feature-list">
         <li><strong>Multi-skill HSK projection</strong> — see your estimated readiness for each HSK level across all four skills, updated after every session</li>
         <li><strong>Adaptive drilling</strong> — 27 drill types that automatically focus on your weakest skill area, not just vocabulary</li>
@@ -232,7 +260,7 @@
   <section class="hsk3-callout">
     <div class="container">
       <h2>HSK 3.0 launches July 2026</h2>
-      <p>The new HSK standard makes the HSKK speaking test <span class="highlight">mandatory from Level 3 onward</span>. Mandarin already includes speaking drills with tone grading — so you're preparing for the new standard, not the old one.</p>
+      <p>The new HSK standard makes the HSKK speaking test <span class="highlight">mandatory from Level 3 onward</span>. Aelu already includes speaking drills with tone grading — so you're preparing for the new standard, not the old one.</p>
       <p>The vocabulary lists are changing too. We're tracking every update and adjusting our curriculum as the standard finalizes.</p>
     </div>
   </section>
@@ -246,16 +274,16 @@
           <div class="pricing-price">$0</div>
           <ul class="pricing-features">
             <li>HSK 1-2 vocabulary and drills</li>
-            <li>5 drill types</li>
+            <li>All 27 drill types</li>
             <li>Basic HSK readiness tracking</li>
             <li>Beginner reading passages</li>
           </ul>
         </div>
         <div class="pricing-card featured">
           <h3>Full Access</h3>
-          <div class="pricing-price">$12 <span>/month</span></div>
+          <div class="pricing-price">$14.99 <span>/month</span></div>
           <ul class="pricing-features">
-            <li>HSK 1-6 full curriculum</li>
+            <li>HSK 1-9 full curriculum</li>
             <li>All 27 drill types</li>
             <li>Multi-skill readiness projection</li>
             <li>All reading and listening levels</li>
@@ -283,7 +311,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

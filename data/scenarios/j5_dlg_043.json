@@ -1,0 +1,89 @@
+{
+    "title": "The Quiet Helper",
+    "title_zh": "安静的帮助",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your colleague Xiaohui mentions she spends every Saturday morning volunteering at an elderly care center. She's never talked about it before.",
+        "setup_zh": "同事小慧提到她每个周六上午都在养老院做志愿者。她以前从来没说过这件事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你别发朋友圈啊。我去养老院不是为了让别人知道。那里有个九十岁的爷爷，每次看到我来就特别高兴。他没有孩子来看他，我就陪他下下棋，听他讲以前的事。",
+                "text_pinyin": "Nǐ bié fā péngyouquān a. Wǒ qù yǎnglǎoyuàn bú shì wèile ràng biéren zhīdào. Nàlǐ yǒu ge jiǔshí suì de yéye, měi cì kàn dào wǒ lái jiù tèbié gāoxìng. Tā méiyǒu háizi lái kàn tā, wǒ jiù péi tā xià xia qí, tīng tā jiǎng yǐqián de shì.",
+                "text_en": "Don't post about this on Moments. I don't go to the care center for other people to know. There's a ninety-year-old grandfather there who gets so happy every time he sees me come. No children visit him, so I keep him company, play chess, and listen to his stories."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her quiet kindness.",
+                "options": [
+                    {
+                        "text_zh": "不让别人知道的善意也许是最纯粹的。你做这件事不是为了被看见，而是因为那个爷爷需要被看见。这种安静的陪伴对他来说一定比任何药都管用。",
+                        "text_pinyin": "Bú ràng biéren zhīdào de shànyì yěxǔ shì zuì chúncuì de. Nǐ zuò zhè jiàn shì bú shì wèile bèi kànjiàn, ér shì yīnwèi nàge yéye xūyào bèi kànjiàn. Zhè zhǒng ānjìng de péibàn duì tā lái shuō yídìng bǐ rènhé yào dōu guǎnyòng.",
+                        "text_en": "Kindness that nobody knows about might be the purest kind. You do this not to be seen, but because that grandfather needs to be seen. That quiet companionship must work better for him than any medicine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honors both her humility and the old man's need — sees the giving in both directions."
+                    },
+                    {
+                        "text_zh": "你可以在网上发一下，鼓励更多人去当志愿者。",
+                        "text_pinyin": "Nǐ kěyǐ zài wǎng shàng fā yíxià, gǔlì gèng duō rén qù dāng zhìyuànzhě.",
+                        "text_en": "You could post about it online to encourage more people to volunteer.",
+                        "score": 0.0,
+                        "feedback": "Well-intentioned but contradicts her explicit wish for privacy."
+                    },
+                    {
+                        "text_zh": "每周六都去？不会太累吗？",
+                        "text_pinyin": "Měi zhōuliù dōu qù? Bú huì tài lèi ma?",
+                        "text_en": "Every Saturday? Isn't that tiring?",
+                        "score": 0.0,
+                        "feedback": "Frames it as a burden rather than a gift."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你知道他跟我说过什么吗？他说：「小慧，你来的时候，这一天就不一样了。」就这一句话，让我觉得所有的坚持都是值得的。有时候一个人需要的不是什么大的帮助，只是有人记得他的存在。",
+                "text_pinyin": "Nǐ zhīdào tā gēn wǒ shuō guò shénme ma? Tā shuō: 'Xiǎo Huì, nǐ lái de shíhou, zhè yī tiān jiù bù yíyàng le.' Jiù zhè yī jù huà, ràng wǒ juéde suǒyǒu de jiānchí dōu shì zhíde de. Yǒu shíhou yīge rén xūyào de bú shì shénme dà de bāngzhù, zhǐ shì yǒu rén jìde tā de cúnzài.",
+                "text_en": "You know what he said to me once? He said: 'Xiaohui, the day you come is different from other days.' Just that one sentence made me feel all the persistence was worth it. Sometimes what a person needs isn't big help — just someone who remembers they exist."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on what it means to be remembered.",
+                "options": [
+                    {
+                        "text_zh": "有人记得他的存在——这句话让我很感动。我们都怕被遗忘。你每周六去那里，是在告诉他：你很重要，你不是一个人。这比任何物质上的帮助都珍贵。",
+                        "text_pinyin": "Yǒu rén jìde tā de cúnzài — zhè jù huà ràng wǒ hěn gǎndòng. Wǒmen dōu pà bèi yíwàng. Nǐ měi zhōuliù qù nàlǐ, shì zài gàosù tā: nǐ hěn zhòngyào, nǐ bú shì yīge rén. Zhè bǐ rènhé wùzhì shàng de bāngzhù dōu zhēnguì.",
+                        "text_en": "Someone remembers they exist — that line moves me deeply. We all fear being forgotten. Going there every Saturday, you're telling him: you matter, you're not alone. That's more precious than any material help.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deeply compassionate — names the universal fear and the antidote she provides."
+                    },
+                    {
+                        "text_zh": "养老院的条件怎么样？",
+                        "text_pinyin": "Yǎnglǎoyuàn de tiáojiàn zěnmeyàng?",
+                        "text_en": "What are the conditions like at the care center?",
+                        "score": 0.0,
+                        "feedback": "Shifts to facility assessment."
+                    },
+                    {
+                        "text_zh": "你有没有想过以后做社工？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò yǐhòu zuò shègōng?",
+                        "text_en": "Have you thought about becoming a social worker?",
+                        "score": 0.0,
+                        "feedback": "Career-focused — not what this conversation is about."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你不是一个人……谢谢你能理解。这周六你要不要跟我一起去？不用做什么特别的，就去坐坐，听他讲讲故事。有些人的故事，需要有人听。",
+                "text_pinyin": "Nǐ bú shì yīge rén…… xièxie nǐ néng lǐjiě. Zhè zhōuliù nǐ yào bú yào gēn wǒ yīqǐ qù? Bú yòng zuò shénme tèbié de, jiù qù zuòzuo, tīng tā jiǎngjiang gùshi. Yǒuxiē rén de gùshi, xūyào yǒu rén tīng.",
+                "text_en": "You're not alone... thank you for understanding. Do you want to come with me this Saturday? You don't need to do anything special — just sit, listen to his stories. Some people's stories need someone to hear them."
+            }
+        ],
+        "cultural_note": "China's aging population has made elderly care a growing social concern. Many elderly people in care centers (养老院) receive few family visits, leading to profound loneliness. The concept of「安静的帮助」(quiet help) resonates with the Confucian ideal of modesty in good deeds —「做好事不留名」(do good without seeking recognition). Youth volunteering at care centers has become more common, though the emotional labor involved is often underappreciated."
+    }
+}

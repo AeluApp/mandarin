@@ -1,0 +1,117 @@
+{
+    "title": "Borrowing a Bowl",
+    "title_zh": "借一个碗",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're cooking dinner for friends but realize you don't have enough bowls. You decide to knock on your neighbor Auntie Chen's door to borrow a few.",
+        "setup_zh": "你在为朋友们做晚饭，发现碗不够用了。你决定去敲邻居陈阿姨的门，借几个碗。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Knock on the door and ask to borrow bowls.",
+                "options": [
+                    {
+                        "text_zh": "陈阿姨，不好意思。我请朋友吃饭，碗不够，能借三个吗？马上还您。",
+                        "text_pinyin": "Chén āyí, bù hǎoyìsi. Wǒ qǐng péngyou chīfàn, wǎn bú gòu, néng jiè sān ge ma? Mǎshàng huán nín.",
+                        "text_en": "Auntie Chen, sorry. I'm having friends for dinner and don't have enough bowls — could I borrow three? I'll return them right away.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Polite, specific, and promises to return them — exactly right."
+                    },
+                    {
+                        "text_zh": "你家有碗吗？借我几个。",
+                        "text_pinyin": "Nǐ jiā yǒu wǎn ma? Jiè wǒ jǐ ge.",
+                        "text_en": "Do you have bowls? Lend me some.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Too blunt — no pleasantries or explanation."
+                    },
+                    {
+                        "text_zh": "陈阿姨，有件小事想麻烦您一下。",
+                        "text_pinyin": "Chén āyí, yǒu jiàn xiǎo shì xiǎng máfan nín yīxià.",
+                        "text_en": "Auntie Chen, I have a small favor to ask.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Polite opener — the indirect approach is culturally appropriate."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以！你等一下，我去拿。你今天做什么好吃的啊？请朋友来多热闹！",
+                "text_pinyin": "Dāngrán kěyǐ! Nǐ děng yīxià, wǒ qù ná. Nǐ jīntiān zuò shénme hǎochī de a? Qǐng péngyou lái duō rènao!",
+                "text_en": "Of course! Wait a moment, I'll go get them. What are you cooking today? Having friends over is so lively!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your dinner plans.",
+                "options": [
+                    {
+                        "text_zh": "我做了红烧肉和两个素菜。陈阿姨，要不要也过来一起吃？菜很多。",
+                        "text_pinyin": "Wǒ zuò le hóngshāoròu hé liǎng ge sùcài. Chén āyí, yào bú yào yě guòlái yīqǐ chī? Cài hěn duō.",
+                        "text_en": "I made braised pork and two vegetable dishes. Auntie Chen, would you like to join us? There's plenty of food.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Generous and warm — inviting her is a natural kindness after borrowing."
+                    },
+                    {
+                        "text_zh": "就是一些家常菜。",
+                        "text_pinyin": "Jiù shì yīxiē jiācháng cài.",
+                        "text_en": "Just some home-style dishes.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Modest but doesn't extend the warmth."
+                    },
+                    {
+                        "text_zh": "碗拿来就行了，不用问那么多。",
+                        "text_pinyin": "Wǎn ná lái jiù xíng le, bú yòng wèn nàme duō.",
+                        "text_en": "Just bring the bowls, no need to ask so many questions.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Rude — she's being friendly while helping you."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "真的可以吗？那太好了！我一个人在家也没什么事。我正好做了一个汤，我也带过去吧！",
+                "text_pinyin": "Zhēn de kěyǐ ma? Nà tài hǎo le! Wǒ yī ge rén zài jiā yě méi shénme shì. Wǒ zhènghǎo zuò le yī ge tāng, wǒ yě dài guòqù ba!",
+                "text_en": "Really? That's wonderful! I'm home alone with nothing to do. I just made some soup — I'll bring it over too!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her bringing soup.",
+                "options": [
+                    {
+                        "text_zh": "太好了！陈阿姨做的汤一定很好喝。那我们六点开始，您过来就行。",
+                        "text_pinyin": "Tài hǎo le! Chén āyí zuò de tāng yīdìng hěn hǎohē. Nà wǒmen liù diǎn kāishǐ, nín guòlái jiù xíng.",
+                        "text_en": "Wonderful! Auntie Chen's soup must be delicious. We'll start at six — just come over.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Inclusive and appreciative — a small favor turns into a community dinner."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Fine but misses the warmth of the moment."
+                    },
+                    {
+                        "text_zh": "不用带了，菜已经够了。",
+                        "text_pinyin": "Bú yòng dài le, cài yǐjīng gòu le.",
+                        "text_en": "No need to bring anything, there's enough food.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite refusal but she wants to contribute — let her."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Borrowing household items from neighbors is common in Chinese communities and often leads to deeper connections. The natural response to borrowing is often reciprocity — inviting the neighbor to join, and the neighbor contributing food in return. This cycle of give-and-take builds community bonds."
+    },
+    "hsk_level": 3
+}

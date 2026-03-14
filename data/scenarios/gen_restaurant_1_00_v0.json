@@ -1,0 +1,124 @@
+{
+    "title": "Auntie Zhao's Lunch Rush",
+    "title_zh": "赵阿姨的午饭时间",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_restaurant_1_00_v0",
+    "tree": {
+        "setup": "A tiny noodle shop wedged between a print shop and a locksmith. Steam curls from the kitchen window. Auntie Zhao wipes down the counter with a rag that has seen better decades, humming a song from a TV drama. There are exactly four tables, and she knows every regular by their order.",
+        "setup_zh": "一家小面馆，夹在打印店和锁匠铺之间。厨房窗口冒着热气。赵阿姨用一块旧抹布擦柜台，哼着电视剧的歌。店里只有四张桌子，她记得每个老顾客的菜。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎，来了！你要吃什么？",
+                "text_pinyin": "āi, lái le! nǐ yào chī shénme?",
+                "text_en": "Hey, you're here! What do you want to eat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you'd like to eat.",
+                "options": [
+                    {
+                        "text_zh": "我要一碗面，谢谢。",
+                        "text_pinyin": "wǒ yào yì wǎn miàn, xièxie.",
+                        "text_en": "I'd like a bowl of noodles, thanks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao nods approvingly. She likes a person who knows what they want. 碗 (wǎn) is the measure word for bowls of food -- you'll use it constantly in restaurants."
+                    },
+                    {
+                        "text_zh": "你有什么？",
+                        "text_pinyin": "nǐ yǒu shénme?",
+                        "text_en": "What do you have?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao gestures at the wall menu with mild exasperation -- it's been the same six items for eleven years. But a fair question when you're new."
+                    },
+                    {
+                        "text_zh": "我不知道。",
+                        "text_pinyin": "wǒ bù zhīdào.",
+                        "text_en": "I don't know.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao sighs with the patience of someone who has fed thousands of indecisive customers. Try picking something from the menu next time!"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！你要大碗还是小碗？",
+                "text_pinyin": "hǎo de! nǐ yào dà wǎn háishì xiǎo wǎn?",
+                "text_en": "OK! Do you want a big bowl or a small bowl?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your bowl size.",
+                "options": [
+                    {
+                        "text_zh": "大碗，谢谢！",
+                        "text_pinyin": "dà wǎn, xièxie!",
+                        "text_en": "Big bowl, thanks!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao grins. She respects an appetite. 大 (dà) and 小 (xiǎo) are your best friends when sizing anything in Chinese."
+                    },
+                    {
+                        "text_zh": "小碗。",
+                        "text_pinyin": "xiǎo wǎn.",
+                        "text_en": "Small bowl.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A sensible choice. Auntie Zhao will secretly give you a little extra anyway -- she thinks everyone is too thin."
+                    },
+                    {
+                        "text_zh": "都可以。",
+                        "text_pinyin": "dōu kěyǐ.",
+                        "text_en": "Either is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "都可以 is a perfectly natural way to say you have no preference. Auntie Zhao will decide for you -- and it will be the big bowl."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十块钱。",
+                "text_pinyin": "shí kuài qián.",
+                "text_en": "Ten yuan."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank her.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢你！",
+                        "text_pinyin": "hǎo de, xièxie nǐ!",
+                        "text_en": "OK, thank you!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao waves you to a seat by the window, where the afternoon light is warmest. You're becoming a regular."
+                    },
+                    {
+                        "text_zh": "给你。",
+                        "text_pinyin": "gěi nǐ.",
+                        "text_en": "Here you go.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Short and functional. Auntie Zhao takes the money without ceremony -- she's already hollering your order to the kitchen."
+                    },
+                    {
+                        "text_zh": "太贵了！",
+                        "text_pinyin": "tài guì le!",
+                        "text_en": "Too expensive!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Zhao fixes you with a look that could curdle milk. Ten yuan for handmade noodles is a steal and she knows it. 太...了 is a useful pattern though -- just maybe not here."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In neighborhood noodle shops across China, the owner often remembers regulars and their orders. Prices are modest and bargaining is not expected -- unlike at markets. A warm 谢谢 goes a long way."
+    }
+}

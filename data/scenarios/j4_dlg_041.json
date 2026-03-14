@@ -1,0 +1,83 @@
+{
+    "title": "The Sleeping Village",
+    "title_zh": "午睡的村庄",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're visiting a small village at noon. The streets are empty. An old man sits in front of a shop, the only person awake during the village's afternoon nap.",
+        "setup_zh": "中午你来到一个小村庄。街上空空的。一位老人坐在一家小店前面，整个村庄午睡的时候只有他醒着。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "别奇怪，这个时间大家都在午睡呢。我们这里的规矩，中午十二点到两点，全村都安静下来。连狗都睡了。你要不要坐一会儿？反正也没地方去。",
+                "text_pinyin": "Bié qíguài, zhège shíjiān dàjiā dōu zài wǔshuì ne. Wǒmen zhèlǐ de guījǔ, zhōngwǔ shí'èr diǎn dào liǎng diǎn, quán cūn dōu ānjìng xiàlái. Lián gǒu dōu shuì le. Nǐ yào bú yào zuò yīhuìr? Fǎnzhèng yě méi dìfang qù.",
+                "text_en": "Don't be surprised — everyone's napping at this hour. The rule here: noon to two, the whole village goes quiet. Even the dogs sleep. Want to sit for a while? There's nowhere to go anyway."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the village's nap tradition.",
+                "options": [
+                    {
+                        "text_zh": "连狗都睡了——太可爱了。整个村庄一起午睡，这种节奏真好。城市里中午大家都在工作，从来不停。我好像已经忘了午睡是什么感觉了。",
+                        "text_pinyin": "Lián gǒu dōu shuì le — tài kě'ài le. Zhěnggè cūnzhuāng yīqǐ wǔshuì, zhè zhǒng jiézòu zhēn hǎo. Chéngshì lǐ zhōngwǔ dàjiā dōu zài gōngzuò, cónglái bù tíng. Wǒ hǎoxiàng yǐjīng wàng le wǔshuì shì shénme gǎnjué le.",
+                        "text_en": "Even the dogs sleep — that's adorable. The whole village napping together, what a beautiful rhythm. In the city, everyone works through noon, never stopping. I think I've forgotten what a nap feels like.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Contrasts city relentlessness with village rhythm — napping as a lost art."
+                    },
+                    {
+                        "text_zh": "这个村子有多少人？",
+                        "text_pinyin": "Zhège cūnzi yǒu duōshǎo rén?",
+                        "text_en": "How many people in this village?",
+                        "score": 0.0,
+                        "feedback": "Census question during a scene of gentle stillness."
+                    },
+                    {
+                        "text_zh": "你为什么没有午睡？",
+                        "text_pinyin": "Nǐ wèishéme méiyǒu wǔshuì?",
+                        "text_en": "Why aren't you napping?",
+                        "score": 0.0,
+                        "feedback": "Interrogates his wakefulness instead of enjoying the moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "城里人都忘了午睡，也忘了慢的意思。我们这里日出而作，日落而息，中午就休息。几百年了，一直是这样。不是因为懒，是因为我们跟着太阳走。太阳最热的时候，人就应该歇着。",
+                "text_pinyin": "Chéng lǐ rén dōu wàng le wǔshuì, yě wàng le màn de yìsi. Wǒmen zhèlǐ rì chū ér zuò, rì luò ér xī, zhōngwǔ jiù xiūxi. Jǐ bǎi nián le, yīzhí shì zhèyàng. Bú shì yīnwèi lǎn, shì yīnwèi wǒmen gēn zhe tàiyáng zǒu. Tàiyáng zuì rè de shíhou, rén jiù yīnggāi xiē zhe.",
+                "text_en": "City folks forgot napping, and forgot what 'slow' means. Here we work at sunrise, rest at sunset, and nap at noon. Hundreds of years, always like this. Not because we're lazy — because we follow the sun. When the sun is hottest, people should rest."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to following the sun's rhythm.",
+                "options": [
+                    {
+                        "text_zh": "跟着太阳走——比跟着闹钟走有智慧多了。城市里我们按照工作表生活，你们按照自然生活。也许最健康的节奏不是人定的，是天定的。",
+                        "text_pinyin": "Gēn zhe tàiyáng zǒu — bǐ gēn zhe nàozhōng zǒu yǒu zhìhuì duō le. Chéngshì lǐ wǒmen ànzhào gōngzuò biǎo shēnghuó, nǐmen ànzhào zìrán shēnghuó. Yěxǔ zuì jiànkāng de jiézòu bú shì rén dìng de, shì tiān dìng de.",
+                        "text_en": "Following the sun — wiser than following an alarm clock. In the city we live by schedules, here you live by nature. Maybe the healthiest rhythm isn't set by people, but by the sky.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural rhythm over artificial schedule — the sky as the truest clock."
+                    },
+                    {
+                        "text_zh": "但是这样效率不是很低吗？",
+                        "text_pinyin": "Dànshì zhèyàng xiàolǜ bú shì hěn dī ma?",
+                        "text_en": "But isn't that inefficient?",
+                        "score": 0.0,
+                        "feedback": "Applies urban productivity logic to village wisdom."
+                    },
+                    {
+                        "text_zh": "年轻人也午睡吗？",
+                        "text_pinyin": "Niánqīng rén yě wǔshuì ma?",
+                        "text_en": "Do the young people nap too?",
+                        "score": 0.0,
+                        "feedback": "Demographic question during a moment about rhythm."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The afternoon nap (午睡/午休) is a deeply rooted tradition in rural and even urban China. The phrase 日出而作，日落而息 (work at sunrise, rest at sunset) comes from an ancient folk song and represents an ideal of living in harmony with natural cycles. Many villages still observe collective noon quiet, a rhythm that predates clocks."
+    }
+}

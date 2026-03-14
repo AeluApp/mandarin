@@ -1,0 +1,1078 @@
+[
+  {
+    "title": "The Community Newsletter",
+    "title_zh": "社区通讯",
+    "hsk_level": 7,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+      "setup": "Manager Qin wants to start a community newsletter. Old Zhou volunteered to be editor-in-chief. Auntie Fang has read Zhou's previous writing. Teacher Luo has editorial standards. Xiao Mei was asked to contribute.",
+      "setup_zh": "秦经理想办一份社区通讯。老周自告奋勇当主编。方阿姨看过老周以前写的东西。罗老师有编辑标准。小梅被邀请投稿。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "社区通讯可以增强居民的归属感。我已经拟定了发刊计划，每月一期，每期八页。",
+          "text_pinyin": "Shèqū tōngxùn kěyǐ zēngqiáng jūmín de guīshǔ gǎn. Wǒ yǐjīng nǐdìng le fākān jìhuà, měi yuè yì qī, měi qī bā yè.",
+          "text_en": "A community newsletter can strengthen residents' sense of belonging. I've drafted a publication plan — monthly, eight pages per issue."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我来当主编！我有很多想法！第一期我想写十二篇文章！",
+          "text_pinyin": "Wǒ lái dāng zhǔbiān! Wǒ yǒu hěn duō xiǎngfǎ! Dì yī qī wǒ xiǎng xiě shí'èr piān wénzhāng!",
+          "text_en": "I'll be editor-in-chief! I have lots of ideas! For the first issue I want to write twelve articles!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "你上次写的通知，把'三楼'写成了'三搂'。而且一篇通知用了八个感叹号。",
+          "text_pinyin": "Nǐ shàng cì xiě de tōngzhī, bǎ 'sān lóu' xiě chéng le 'sān lǒu'. Érqiě yì piān tōngzhī yòng le bā gè gǎntànhào.",
+          "text_en": "The last notice you wrote, you wrote '三楼' (third floor) as '三搂' (third hug). And one notice used eight exclamation marks."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "如果要办通讯，就必须有基本的编辑标准。格式、校对、内容审核，一样都不能少。否则不如不办。",
+          "text_pinyin": "Rúguǒ yào bàn tōngxùn, jiù bìxū yǒu jīběn de biānjí biāozhǔn. Géshì, jiàoduì, nèiróng shěnhé, yíyàng dōu bù néng shǎo. Fǒuzé bùrú bú bàn.",
+          "text_en": "If we're doing a newsletter, there must be basic editorial standards. Format, proofreading, content review — nothing can be skipped. Otherwise don't bother."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "你们让我写什么？",
+          "text_pinyin": "Nǐmen ràng wǒ xiě shénme?",
+          "text_en": "What do you want me to write?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "写什么都行！你可以写一个专栏！比如'小梅看世界'！",
+          "text_pinyin": "Xiě shénme dōu xíng! Nǐ kěyǐ xiě yí gè zhuānlán! Bǐrú 'Xiǎo Méi kàn shìjiè'!",
+          "text_en": "Write anything! You could have a column! Like 'Xiao Mei's View of the World'!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...每期多少字？",
+          "text_pinyin": "...Měi qī duōshǎo zì?",
+          "text_en": "...How many characters per issue?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "随便！五百、一千、两千都行！",
+          "text_pinyin": "Suíbiàn! Wǔbǎi, yìqiān, liǎngqiān dōu xíng!",
+          "text_en": "Whatever! 500, 1000, 2000 — all fine!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "五十。",
+          "text_pinyin": "Wǔshí.",
+          "text_en": "Fifty."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The newsletter needs structure. How do you help organize it?",
+          "options": [
+            {
+              "text_zh": "我建议这样分工：秦经理负责发行和流程管理，罗老师负责编辑审核，老周负责采访和收集素材，小梅可以写一个简短的观察专栏。主编可以轮流做，或者让秦经理统筹。",
+              "text_pinyin": "Wǒ jiànyì zhèyàng fēngōng: Qín jīnglǐ fùzé fāxíng hé liúchéng guǎnlǐ, Luó lǎoshī fùzé biānjí shěnhé, Lǎo Zhōu fùzé cǎifǎng hé shōují sùcái, Xiǎo Méi kěyǐ xiě yí gè jiǎnduǎn de guānchá zhuānlán. Zhǔbiān kěyǐ lúnliú zuò, huòzhě ràng Qín jīnglǐ tǒngchóu.",
+              "text_en": "I'd suggest dividing labor: Qin handles distribution and process, Luo handles editorial review, Zhou handles interviews and gathering material, Mei writes a short observation column. Editor-in-chief could rotate, or Qin could coordinate overall.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "Everyone's strengths deployed. Zhou gets to be enthusiastic without controlling quality. Luo gets her standards. Mei's column will be the best-written fifty characters in the newsletter. Qin has process oversight."
+            },
+            {
+              "text_zh": "让老周当主编吧，他最有热情。",
+              "text_pinyin": "Ràng Lǎo Zhōu dāng zhǔbiān ba, tā zuì yǒu rèqíng.",
+              "text_en": "Let Zhou be editor — he's the most enthusiastic.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Enthusiasm is not the same as editorial competence. Fang's single raised eyebrow communicates volumes about '三搂.' The first issue will be... energetic."
+            },
+            {
+              "text_zh": "这个工作量太大了，不现实。",
+              "text_pinyin": "Zhè ge gōngzuò liàng tài dà le, bú xiànshí.",
+              "text_en": "This is too much work — not realistic.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Qin spent two weeks on the publication plan. Four people just volunteered (in various degrees of willingness). You're the only one who didn't contribute."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "分工方案我接受。我现在就起草编辑流程手册。",
+          "text_pinyin": "Fēngōng fāng'àn wǒ jiēshòu. Wǒ xiànzài jiù qǐcǎo biānjí liúchéng shǒucè.",
+          "text_en": "I accept the division of labor. I'll draft the editorial process manual now."
+        }
+      ],
+      "cultural_note": "Chinese community organizations often struggle with the gap between enthusiasm (热情) and execution capability (执行力). Effective delegation requires putting people where their strengths serve, not where they volunteer."
+    }
+  },
+  {
+    "title": "The Rent Increase Meeting",
+    "title_zh": "涨租讨论",
+    "hsk_level": 7,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+      "setup": "The property management company proposed a 15% maintenance fee increase. Manager Qin has the numbers. Teacher Luo is furious. Uncle Bai has a theory about inflation. Auntie Fang asks the question nobody wants to answer.",
+      "setup_zh": "物业公司提出物业费涨百分之十五。秦经理有数据。罗老师很愤怒。老白有一套关于通胀的理论。方阿姨问了一个谁都不想回答的问题。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "物业公司提出从明年起物业费上调百分之十五。他们的理由是人工成本上涨和设备老化。我核实了一下，这两点基本属实。",
+          "text_pinyin": "Wùyè gōngsī tíchū cóng míngnián qǐ wùyè fèi shàng diào bǎi fēn zhī shíwǔ. Tāmen de lǐyóu shì réngōng chéngběn shàngzhǎng hé shèbèi lǎohuà. Wǒ héshí le yíxià, zhè liǎng diǎn jīběn shǔshí.",
+          "text_en": "The property company proposes a 15% maintenance fee increase starting next year. Their reasons are rising labor costs and aging equipment. I verified — both points are basically accurate."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "电梯坏了三次没人修！楼道灯从十月份就不亮！他们连基本服务都做不好，凭什么涨价？涨价可以，先把该做的做好！",
+          "text_pinyin": "Diàntī huài le sān cì méi rén xiū! Lóudào dēng cóng shí yuèfèn jiù bú liàng! Tāmen lián jīběn fúwù dōu zuò bù hǎo, píng shénme zhǎng jià? Zhǎng jià kěyǐ, xiān bǎ gāi zuò de zuò hǎo!",
+          "text_en": "The elevator broke three times with no repairs! The hallway lights haven't worked since October! They can't even provide basic service — on what basis do they raise prices? Fine, raise prices — but first do what you're supposed to do!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "涨价这个事情吧，表面上看是物业费的问题，其实本质上是一个更深层次的经济结构问题。通胀不是物业公司能控制的。从宏观角度看——",
+          "text_pinyin": "Zhǎng jià zhè ge shìqíng ba, biǎomiàn shàng kàn shì wùyè fèi de wèntí, qíshí běnzhì shàng shì yí gè gèng shēn céngcì de jīngjì jiégòu wèntí. Tōngzhàng bú shì wùyè gōngsī néng kòngzhì de. Cóng hóngguān jiǎodù kàn —",
+          "text_en": "This price increase, on the surface it's a maintenance fee issue, but fundamentally it's a deeper structural economic problem. Inflation isn't something the property company can control. From a macro perspective —"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "老白，你交得起百分之十五吗？",
+          "text_pinyin": "Lǎo Bái, nǐ jiāo de qǐ bǎi fēn zhī shíwǔ ma?",
+          "text_en": "Uncle Bai, can you afford the 15%?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "这个...不是能不能的问题，是应不应该的问题。",
+          "text_pinyin": "Zhè ge... bú shì néng bù néng de wèntí, shì yīng bù yīnggāi de wèntí.",
+          "text_en": "That's... not a question of ability, it's a question of principle."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "五楼的老太太靠退休金过日子。百分之十五对她是一个月的菜钱。",
+          "text_pinyin": "Wǔ lóu de lǎo tàitai kào tuìxiū jīn guò rìzi. Bǎi fēn zhī shíwǔ duì tā shì yí gè yuè de cài qián.",
+          "text_en": "The elderly woman on the fifth floor lives on her pension. Fifteen percent is a month's grocery money for her."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The community needs a position for the negotiation with the property company. What do you propose?",
+          "options": [
+            {
+              "text_zh": "我建议分两步走。第一，列出物业目前没有履行的服务项目，要求他们在涨价之前先达标。第二，如果服务达标了，可以接受涨价，但不是百分之十五——可以谈百分之八到十，而且对低收入住户设一个减免比例。",
+              "text_pinyin": "Wǒ jiànyì fēn liǎng bù zǒu. Dì yī, liè chū wùyè mùqián méi yǒu lǚxíng de fúwù xiàngmù, yāoqiú tāmen zài zhǎng jià zhīqián xiān dá biāo. Dì èr, rúguǒ fúwù dá biāo le, kěyǐ jiēshòu zhǎng jià, dàn bú shì bǎi fēn zhī shíwǔ — kěyǐ tán bǎi fēn zhī bā dào shí, érqiě duì dī shōurù zhùhù shè yí gè jiǎnmiǎn bǐlì.",
+              "text_en": "I'd suggest a two-step approach. First, list the services the property company currently fails to provide — require them to meet standards before any increase. Second, if they meet standards, accept an increase but not 15% — negotiate 8-10%, with a reduced rate for low-income residents.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "Structured, fair, and addresses Fang's concern about the fifth-floor grandmother. Luo's anger gets channeled into the accountability list. Qin has a framework to work with. Even Bai's macro point gets absorbed into the 'negotiate the percentage' piece."
+            },
+            {
+              "text_zh": "不应该接受涨价。服务不到位就不应该涨。",
+              "text_pinyin": "Bù yīnggāi jiēshòu zhǎng jià. Fúwù bú dào wèi jiù bù yīnggāi zhǎng.",
+              "text_en": "We shouldn't accept any increase. If service isn't there, they shouldn't raise prices.",
+              "score": 2,
+              "register": "professional",
+              "feedback": "Emotionally satisfying and Luo agrees loudly. But Qin verified the cost pressures are real. Refusing any increase may lead to worse service or the company withdrawing. You need leverage, not a wall."
+            },
+            {
+              "text_zh": "百分之十五不算多，工资都在涨，物业费涨一点也正常。",
+              "text_pinyin": "Bǎi fēn zhī shíwǔ bú suàn duō, gōngzī dōu zài zhǎng, wùyè fèi zhǎng yì diǎn yě zhèngcháng.",
+              "text_en": "15% isn't that much — wages are going up too, a small fee increase is normal.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Fang's face. She just told you about a woman for whom this equals a month of food. 'Not that much' depends entirely on who's paying."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "两步走的方案我可以整理成正式文件。服务清单我明天就可以列出来。减免比例需要跟财务确认可行性。",
+          "text_pinyin": "Liǎng bù zǒu de fāng'àn wǒ kěyǐ zhěnglǐ chéng zhèngshì wénjiàn. Fúwù qīngdān wǒ míngtiān jiù kěyǐ liè chūlái. Jiǎnmiǎn bǐlì xūyào gēn cáiwù quèrèn kěxíng xìng.",
+          "text_en": "I can formalize the two-step proposal as an official document. The service checklist I can have by tomorrow. The reduced rate needs feasibility confirmation from finance."
+        }
+      ],
+      "cultural_note": "物业费 (property management fees) are a major source of community tension in Chinese cities. Negotiations between residents and property companies often require balancing legitimate cost pressures against service quality and affordability."
+    }
+  },
+  {
+    "title": "The Annual Award",
+    "title_zh": "年度评选",
+    "hsk_level": 7,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+      "setup": "The community is selecting a 'Good Neighbor of the Year.' Old Zhou nominated himself. Nobody else did. The committee (Fang, Luo, Qin, Mei, and you) must decide what to do.",
+      "setup_zh": "社区在评选'年度好邻居'。老周提名了自己。没有别人提名他。评委会（方阿姨、罗老师、秦经理、小梅和你）需要决定怎么办。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "收到五份提名。三份提名的是方阿姨——分别来自楼上的张家、隔壁的李阿姨和三楼的小王。一份是罗老师提名的秦经理——就是我。一份是老周提名的老周。",
+          "text_pinyin": "Shōu dào wǔ fèn tímíng. Sān fèn tímíng de shì Fāng āyí — fēnbié láizì lóu shàng de Zhāng jiā, gébì de Lǐ āyí hé sān lóu de Xiǎo Wáng. Yí fèn shì Luó lǎoshī tímíng de Qín jīnglǐ — jiù shì wǒ. Yí fèn shì Lǎo Zhōu tímíng de Lǎo Zhōu.",
+          "text_en": "Five nominations received. Three for Auntie Fang — from the Zhang family upstairs, Auntie Li next door, and Xiao Wang on the third floor. One is Teacher Luo nominating Manager Qin — that's me. One is Old Zhou nominating Old Zhou."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "自己提名自己...有这个先例吗？",
+          "text_pinyin": "Zìjǐ tímíng zìjǐ... yǒu zhè ge xiānlì ma?",
+          "text_en": "Nominating yourself... is there precedent for this?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "规定上没有禁止自我提名。",
+          "text_pinyin": "Guīdìng shàng méi yǒu jìnzhǐ zìwǒ tímíng.",
+          "text_en": "The rules don't prohibit self-nomination."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "老周每天帮大家拿快递、浇花、打扫楼道。他确实做了很多事。只是没有人想到提名他。这件事本身值得想一想。",
+          "text_pinyin": "Lǎo Zhōu měi tiān bāng dàjiā ná kuàidì, jiāo huā, dǎsǎo lóudào. Tā quèshí zuò le hěn duō shì. Zhǐshì méi yǒu rén xiǎng dào tímíng tā. Zhè jiàn shì běnshēn zhíde xiǎng yi xiǎng.",
+          "text_en": "Zhou takes deliveries for everyone every day, waters plants, cleans the hallway. He genuinely does a lot. It's just that nobody thought to nominate him. That itself is worth thinking about."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "方阿姨有三票。",
+          "text_pinyin": "Fāng āyí yǒu sān piào.",
+          "text_en": "Auntie Fang has three votes."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The committee needs a fair decision. What do you propose?",
+          "options": [
+            {
+              "text_zh": "方阿姨三票最多，按规则她应该得奖。但方阿姨刚才说的话让我想到一件事——也许我们可以增设一个'社区服务奖'，专门表彰每天默默做事的人，第一个给老周。这样既尊重了投票结果，也不忽视老周的付出。",
+              "text_pinyin": "Fāng āyí sān piào zuì duō, àn guīzé tā yīnggāi dé jiǎng. Dàn Fāng āyí gāngcái shuō de huà ràng wǒ xiǎng dào yí jiàn shì — yěxǔ wǒmen kěyǐ zēng shè yí gè 'shèqū fúwù jiǎng', zhuānmén biǎozhāng měi tiān mòmò zuò shì de rén, dì yī gè gěi Lǎo Zhōu. Zhèyàng jì zūnzhòng le tóupiào jiéguǒ, yě bù hūshì Lǎo Zhōu de fùchū.",
+              "text_en": "Fang has three votes and should win by the rules. But what she just said made me think — maybe we could create a 'Community Service Award' specifically for people who quietly do things every day, and give the first one to Zhou. That respects the vote AND acknowledges Zhou's contributions.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "Elegant institutional solution. Fang gets the award she earned. Zhou gets recognized for what he actually does. The new award becomes a permanent category. Qin immediately drafts the charter. Nobody loses face."
+            },
+            {
+              "text_zh": "方阿姨票最多，就给方阿姨吧。",
+              "text_pinyin": "Fāng āyí piào zuì duō, jiù gěi Fāng āyí ba.",
+              "text_en": "Fang has the most votes — just give it to her.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Procedurally correct. But Fang herself raised Zhou's invisible labor. Ignoring her own observation to simply accept her victory is oddly un-Fang."
+            },
+            {
+              "text_zh": "老周做了那么多事，应该把奖给他。",
+              "text_pinyin": "Lǎo Zhōu zuò le nàme duō shì, yīnggāi bǎ jiǎng gěi tā.",
+              "text_en": "Zhou does so much — we should give it to him.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Overriding three genuine community votes to give the award to a self-nominee undermines the whole process. Luo: '那以后大家都自己提名自己就行了？' (So from now on everyone just nominates themselves?)"
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "社区服务奖。好。老周应该知道有人看到了他做的事。",
+          "text_pinyin": "Shèqū fúwù jiǎng. Hǎo. Lǎo Zhōu yīnggāi zhīdào yǒu rén kàn dào le tā zuò de shì.",
+          "text_en": "Community Service Award. Good. Zhou should know someone noticed what he does."
+        }
+      ],
+      "cultural_note": "Recognition for 默默付出 (quiet contribution) is deeply valued in Chinese culture but structurally underrecognized. Creating formal channels for acknowledging invisible labor is considered wise community governance."
+    }
+  },
+  {
+    "title": "The Shared Kitchen Rules",
+    "title_zh": "公共厨房管理办法",
+    "hsk_level": 7,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+      "setup": "The shared kitchen has descended into chaos. Manager Qin drafted a 22-page management policy. Teacher Luo thinks it's too lenient. Uncle Bai thinks the concept of kitchen rules is an affront to cooking culture. Auntie Fang wants to know who left fish in the sink for three days.",
+      "setup_zh": "公共厨房已经乱套了。秦经理草拟了一份二十二页的管理办法。罗老师觉得太宽松了。老白觉得厨房规则的概念本身就是对烹饪文化的冒犯。方阿姨想知道是谁把鱼在水槽里放了三天。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "我拟定了《社区公共厨房使用与管理暂行办法》，一共二十二页，涵盖使用时间、卫生标准、设备维护、投诉流程四个方面。",
+          "text_pinyin": "Wǒ nǐdìng le 'Shèqū gōnggòng chúfáng shǐyòng yǔ guǎnlǐ zhànxíng bànfǎ', yígòng èrshí'èr yè, hángài shǐyòng shíjiān, wèishēng biāozhǔn, shèbèi wéihù, tóusù liúchéng sì gè fāngmiàn.",
+          "text_en": "I've drafted the 'Provisional Measures for Community Shared Kitchen Use and Management' — twenty-two pages covering usage hours, sanitation standards, equipment maintenance, and complaint procedures."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "二十二页。用来管一间厨房。",
+          "text_pinyin": "Èrshí'èr yè. Yòng lái guǎn yì jiān chúfáng.",
+          "text_en": "Twenty-two pages. To manage one kitchen."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "我看了。第七条太宽松了。'使用后应及时清理'——'应'是什么意思？是必须还是建议？如果是建议，等于没说。",
+          "text_pinyin": "Wǒ kàn le. Dì qī tiáo tài kuānsōng le. 'Shǐyòng hòu yīng jíshí qīnglǐ' — 'yīng' shì shénme yìsi? Shì bìxū háishì jiànyì? Rúguǒ shì jiànyì, děngyú méi shuō.",
+          "text_en": "I've read it. Article 7 is too lenient. 'Users should clean up promptly' — what does 'should' mean? Required or suggested? If suggested, it says nothing."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "做饭是一种创造性活动。你不能用管理条例来规范创造。历史上最好的菜，都不是在规定里诞生的。",
+          "text_pinyin": "Zuò fàn shì yì zhǒng chuàngzàoxìng huódòng. Nǐ bù néng yòng guǎnlǐ tiáolì lái guīfàn chuàngzào. Lìshǐ shàng zuì hǎo de cài, dōu bú shì zài guīdìng lǐ dànshēng de.",
+          "text_en": "Cooking is a creative activity. You can't regulate creativity with management policies. The best dishes in history were never born inside regulations."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "老白，水槽里那条鱼是你的吗？",
+          "text_pinyin": "Lǎo Bái, shuǐcáo lǐ nà tiáo yú shì nǐ de ma?",
+          "text_en": "Uncle Bai, is that fish in the sink yours?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "...那条鱼是在腌制过程中。",
+          "text_pinyin": "...Nà tiáo yú shì zài yānzhì guòchéng zhōng.",
+          "text_en": "...That fish is in the process of being marinated."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "三天了。",
+          "text_pinyin": "Sān tiān le.",
+          "text_en": "For three days."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The kitchen policy needs to work in reality. What do you suggest?",
+          "options": [
+            {
+              "text_zh": "二十二页太长了，没有人会看。建议简化成五条核心规则贴在墙上：用完清理、食物当天带走、公共工具用完归位、有问题找秦经理、违反两次取消使用权。规则简单才有人遵守。细节可以放在附件里需要的时候查。",
+              "text_pinyin": "Èrshí'èr yè tài cháng le, méi yǒu rén huì kàn. Jiànyì jiǎnhuà chéng wǔ tiáo héxīn guīzé tiē zài qiáng shàng: yòng wán qīnglǐ, shíwù dāngtiān dài zǒu, gōnggòng gōngjù yòng wán guī wèi, yǒu wèntí zhǎo Qín jīnglǐ, wéifǎn liǎng cì qǔxiāo shǐyòng quán. Guīzé jiǎndān cái yǒu rén zūnshǒu. Xìjié kěyǐ fàng zài fùjiàn lǐ xūyào de shíhou chá.",
+              "text_en": "Twenty-two pages is too long — nobody will read it. Simplify to five core rules on the wall: clean after use, take food home same day, return shared tools, issues go to Qin, two violations loses kitchen access. Simple rules get followed. Details can live in an appendix for reference.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "Luo gets her 'must' (not 'should'). Qin keeps his comprehensive policy as appendix. Bai's fish is covered by rule #2. Fang is satisfied — five rules she can point to. The kitchen may actually get cleaner."
+            },
+            {
+              "text_zh": "秦经理的办法很全面，就按这个来吧。",
+              "text_pinyin": "Qín jīnglǐ de bànfǎ hěn quánmiàn, jiù àn zhè ge lái ba.",
+              "text_en": "Qin's policy is comprehensive — let's go with it.",
+              "score": 2,
+              "register": "professional",
+              "feedback": "Respectful of Qin's work, but Fang is right — twenty-two pages for a kitchen is the bureaucratic equivalent of Bai's three-day fish. Nobody will read it."
+            },
+            {
+              "text_zh": "也许我们不需要规定，大家自觉就好了。",
+              "text_pinyin": "Yěxǔ wǒmen bù xūyào guīdìng, dàjiā zìjué jiù hǎo le.",
+              "text_en": "Maybe we don't need rules — everyone should just be self-disciplined.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "There is a three-day-old fish in the sink. Self-discipline has been tested and found wanting."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "五条核心规则加附件...结构上可行。我重新排版。老白，鱼的事，按新规第二条处理。",
+          "text_pinyin": "Wǔ tiáo héxīn guīzé jiā fùjiàn... jiégòu shàng kěxíng. Wǒ chóngxīn páibǎn. Lǎo Bái, yú de shì, àn xīn guī dì èr tiáo chǔlǐ.",
+          "text_en": "Five core rules plus appendix... structurally workable. I'll reformat. Uncle Bai, the fish situation falls under new rule number two."
+        }
+      ],
+      "cultural_note": "The tension between 全面管理 (comprehensive management) and 可操作性 (operability) is a constant theme in Chinese institutional life. The best policies are short enough to be followed."
+    }
+  },
+  {
+    "title": "The Emergency Committee",
+    "title_zh": "应急委员会",
+    "hsk_level": 8,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.85,
+    "tree": {
+      "setup": "A pipe burst in the basement. The community needs emergency coordination. All six characters respond in exactly the way you'd expect.",
+      "setup_zh": "地下室水管爆裂了。社区需要紧急协调。六个人的反应完全符合你对他们的预期。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "水管爆了！地下室都是水！我说了多少次要定期检修！多少次！这是可以预防的！完全可以预防的！",
+          "text_pinyin": "Shuǐguǎn bào le! Dìxiàshì dōu shì shuǐ! Wǒ shuō le duōshǎo cì yào dìngqī jiǎnxiū! Duōshǎo cì! Zhè shì kěyǐ yùfáng de! Wánquán kěyǐ yùfáng de!",
+          "text_en": "A pipe burst! The basement is flooded! How many times did I say we need regular maintenance? How many times! This was preventable! Completely preventable!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "我已经联系了维修队，预计四十分钟到。同时我需要确认：一，受影响范围；二，是否有电气安全隐患；三，居民疏散是否必要。按应急预案第三章执行。",
+          "text_pinyin": "Wǒ yǐjīng liánxì le wéixiū duì, yùjì sìshí fēnzhōng dào. Tóngshí wǒ xūyào quèrèn: yī, shòu yǐngxiǎng fànwéi; èr, shìfǒu yǒu diànqì ānquán yǐnhuàn; sān, jūmín shūsàn shìfǒu bìyào. Àn yìngjí yù'àn dì sān zhāng zhíxíng.",
+          "text_en": "I've contacted the repair team — ETA forty minutes. Meanwhile I need to confirm: one, extent of affected area; two, any electrical safety hazard; three, whether resident evacuation is necessary. Executing per emergency plan chapter three."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我去修！我以前修过水管！给我一把扳手！",
+          "text_pinyin": "Wǒ qù xiū! Wǒ yǐqián xiū guò shuǐguǎn! Gěi wǒ yì bǎ bānshǒu!",
+          "text_en": "I'll fix it! I've fixed pipes before! Give me a wrench!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "你以前修的那个水管，后来又漏了。而且比原来漏得更厉害。",
+          "text_pinyin": "Nǐ yǐqián xiū de nà ge shuǐguǎn, hòulái yòu lòu le. Érqiě bǐ yuánlái lòu de gèng lìhai.",
+          "text_en": "The pipe you fixed last time leaked again afterwards. Worse than before."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "水的问题本质上是时间的问题。管道老化是不可逆的。我们今天修好了，明天还会有新的地方出问题。与其修管道，不如反思我们跟基础设施的关系。",
+          "text_pinyin": "Shuǐ de wèntí běnzhì shàng shì shíjiān de wèntí. Guǎndào lǎohuà shì bùkě nì de. Wǒmen jīntiān xiū hǎo le, míngtiān hái huì yǒu xīn de dìfang chū wèntí. Yǔqí xiū guǎndào, bùrú fǎnsī wǒmen gēn jīchǔ shèshī de guānxì.",
+          "text_en": "The water issue is fundamentally a time issue. Pipe aging is irreversible. We fix it today, tomorrow something else breaks. Rather than fixing pipes, we should reflect on our relationship with infrastructure."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "地下室有水。维修队四十分钟到。现在需要有人去关总阀门。",
+          "text_pinyin": "Dìxiàshì yǒu shuǐ. Wéixiū duì sìshí fēnzhōng dào. Xiànzài xūyào yǒu rén qù guān zǒng fámén.",
+          "text_en": "There's water in the basement. Repair team arrives in forty minutes. Right now someone needs to go shut the main valve."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Xiao Mei has identified the immediate priority. How do you organize the response?",
+          "options": [
+            {
+              "text_zh": "小梅说得对，先关阀门。老周，你知道总阀门在哪里吗？你去关。秦经理继续协调维修队和安全评估。罗老师，你能通知受影响楼层的住户吗？大家先别讨论原因，等水止住了再说。",
+              "text_pinyin": "Xiǎo Méi shuō de duì, xiān guān fámén. Lǎo Zhōu, nǐ zhīdào zǒng fámén zài nǎlǐ ma? Nǐ qù guān. Qín jīnglǐ jìxù xiétiáo wéixiū duì hé ānquán pínggū. Luó lǎoshī, nǐ néng tōngzhī shòu yǐngxiǎng lóucéng de zhùhù ma? Dàjiā xiān bié tǎolùn yuányīn, děng shuǐ zhǐ zhù le zài shuō.",
+              "text_en": "Mei's right — valve first. Zhou, do you know where the main valve is? Go shut it off. Qin, continue coordinating the repair team and safety assessment. Luo, can you notify the affected floors' residents? Everyone, let's not discuss causes until the water is stopped.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "Clear command structure. Zhou's energy channeled to a task he can actually do (he does know where the valve is). Luo's urgency redirected to useful notification. Qin's process continues. Bai's philosophy gently shelved. Mei's observation became the plan."
+            },
+            {
+              "text_zh": "等维修队来吧，他们专业。",
+              "text_pinyin": "Děng wéixiū duì lái ba, tāmen zhuānyè.",
+              "text_en": "Let's wait for the repair team — they're professionals.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Forty minutes of water flowing. Mei just said the valve needs to be closed NOW. Waiting is not a strategy when the basement is flooding."
+            },
+            {
+              "text_zh": "我去关阀门，你们在这里等。",
+              "text_pinyin": "Wǒ qù guān fámén, nǐmen zài zhèlǐ děng.",
+              "text_en": "I'll go close the valve — everyone wait here.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Action is good, but going alone while everyone else waits wastes available people. Luo could be notifying residents. Qin could be managing the repair team. Solo heroism is less effective than coordination."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "总阀门我知道！在地下室东边！我去！",
+          "text_pinyin": "Zǒng fámén wǒ zhīdào! Zài dìxiàshì dōngbiān! Wǒ qù!",
+          "text_en": "I know where the main valve is! East side of the basement! I'm going!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "他这次确实知道。",
+          "text_pinyin": "Tā zhè cì quèshí zhīdào.",
+          "text_en": "This time he actually does know."
+        }
+      ],
+      "cultural_note": "In Chinese communities, crisis response reveals true organizational dynamics. The difference between 讨论问题 (discussing the problem) and 解决问题 (solving the problem) is a frequent frustration."
+    }
+  },
+  {
+    "title": "The Cultural Exchange Program",
+    "title_zh": "文化交流活动",
+    "hsk_level": 8,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.85,
+    "tree": {
+      "setup": "A foreign delegation is visiting the community next week. The committee must plan a cultural exchange event. Everyone has a different idea of what 'Chinese culture' means to present. The stakes are civic pride, but the conversation reveals deeper questions about identity and representation.",
+      "setup_zh": "下周有一个外国代表团要来参观社区。委员会要策划一个文化交流活动。每个人对于展示什么样的'中国文化'有不同的想法。涉及的是市民自豪感，但对话揭示了更深层次的身份认同和代表性问题。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我们表演太极拳！外国人最喜欢太极拳！我可以领队！",
+          "text_pinyin": "Wǒmen biǎoyǎn tàijí quán! Wàiguó rén zuì xǐhuān tàijí quán! Wǒ kěyǐ lǐng duì!",
+          "text_en": "We'll perform tai chi! Foreigners love tai chi! I can lead the group!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "你练了多久太极？",
+          "text_pinyin": "Nǐ liàn le duō jiǔ tàijí?",
+          "text_en": "How long have you practiced tai chi?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "看过很多视频！",
+          "text_pinyin": "Kàn guò hěn duō shìpín!",
+          "text_en": "I've watched lots of videos!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "文化交流不能马马虎虎！这代表的是我们社区的形象！应该展示真正有水平的东西——书法、茶艺、至少是能拿得出手的。",
+          "text_pinyin": "Wénhuà jiāoliú bù néng mǎmǎhūhū! Zhè dàibiǎo de shì wǒmen shèqū de xíngxiàng! Yīnggāi zhǎnshì zhēnzhèng yǒu shuǐpíng de dōngxi — shūfǎ, cháyì, zhìshǎo shì néng ná de chū shǒu de.",
+          "text_en": "Cultural exchange can't be done carelessly! This represents our community's image! We should showcase things with real quality — calligraphy, tea ceremony, at least things we can be proud of."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "为什么每次'展示中国文化'就是书法和茶艺？他们自己国家的唐人街也有书法和茶艺。我们社区的文化不是表演出来的——是早上六点那个面摊、是楼下那棵老树下每天下棋的四个人、是老周每天帮大家拿快递。那才是真的。",
+          "text_pinyin": "Wèishéme měi cì 'zhǎnshì Zhōngguó wénhuà' jiù shì shūfǎ hé cháyì? Tāmen zìjǐ guójiā de tángrénjiē yě yǒu shūfǎ hé cháyì. Wǒmen shèqū de wénhuà bú shì biǎoyǎn chūlái de — shì zǎoshang liù diǎn nà ge miàntān, shì lóu xià nà kē lǎo shù xià měi tiān xià qí de sì gè rén, shì Lǎo Zhōu měi tiān bāng dàjiā ná kuàidì. Nà cái shì zhēn de.",
+          "text_en": "Why is 'showcasing Chinese culture' always calligraphy and tea ceremony? Their own Chinatowns have calligraphy and tea ceremony. Our community's culture isn't performed — it's the noodle stand at 6am, the four people playing chess under the old tree every day, Zhou taking everyone's deliveries. That's what's real."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "方阿姨说到了本质。文化不是你'展示'的东西，是你'活着'的东西。但问题是：你怎么把'活着'的东西在一个下午展示给看不懂的人？",
+          "text_pinyin": "Fāng āyí shuō dào le běnzhì. Wénhuà bú shì nǐ 'zhǎnshì' de dōngxi, shì nǐ 'huó zhe' de dōngxi. Dàn wèntí shì: nǐ zěnme bǎ 'huó zhe' de dōngxi zài yí gè xiàwǔ zhǎnshì gěi kàn bù dǒng de rén?",
+          "text_en": "Auntie Fang hit the essence. Culture isn't something you 'showcase' — it's something you 'live.' But the question is: how do you present 'living' culture in one afternoon to people who don't share the context?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "让他们来吃面。不用解释。",
+          "text_pinyin": "Ràng tāmen lái chī miàn. Bú yòng jiěshì.",
+          "text_en": "Have them come eat noodles. No explanation needed."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The group needs a plan that's authentic, dignified, and doable. What do you propose?",
+          "options": [
+            {
+              "text_zh": "小梅的想法其实最好。不要'表演文化'，让他们'参与生活'。安排他们早上去面摊吃面，看楼下下棋的人，跟大家一起包饺子。然后罗老师可以准备一个简短的介绍，讲社区的历史和变化。不需要表演，但需要组织好节奏和翻译。这样他们看到的是真实的社区，不是一台文化展览。",
+              "text_pinyin": "Xiǎo Méi de xiǎngfǎ qíshí zuì hǎo. Bú yào 'biǎoyǎn wénhuà', ràng tāmen 'cānyù shēnghuó'. Ānpái tāmen zǎoshang qù miàntān chī miàn, kàn lóu xià xià qí de rén, gēn dàjiā yìqǐ bāo jiǎozi. Ránhòu Luó lǎoshī kěyǐ zhǔnbèi yí gè jiǎnduǎn de jièshào, jiǎng shèqū de lìshǐ hé biànhuà. Bù xūyào biǎoyǎn, dàn xūyào zǔzhī hǎo jiézòu hé fānyì. Zhèyàng tāmen kàn dào de shì zhēnshí de shèqū, bú shì yì tái wénhuà zhǎnlǎn.",
+              "text_en": "Mei's idea is actually the best. Don't 'perform culture' — let them 'participate in life.' Have them eat noodles at the morning stand, watch the chess players downstairs, make dumplings with everyone. Then Luo can prepare a brief introduction about the community's history and changes. No performance needed, but rhythm and translation need to be organized well. That way they see a real community, not a cultural exhibition.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "You synthesized everyone's inputs: Mei's instinct for authenticity, Fang's rejection of performance culture, Luo's standards, and even Zhou's desire to participate (he'll be making dumplings, enthusiastically). Qin starts building the logistics timeline."
+            },
+            {
+              "text_zh": "还是做书法和茶艺吧，比较安全。",
+              "text_pinyin": "Háishi zuò shūfǎ hé cháyì ba, bǐjiào ānquán.",
+              "text_en": "Let's just do calligraphy and tea ceremony — it's safer.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Fang just argued passionately against exactly this. Safe isn't the same as good. The delegation has seen calligraphy demonstrations before. They haven't seen your specific community."
+            },
+            {
+              "text_zh": "这种活动形式大于内容，随便搞一下就行了。",
+              "text_pinyin": "Zhè zhǒng huódòng xíngshì dà yú nèiróng, suíbiàn gǎo yíxià jiù xíng le.",
+              "text_en": "These events are more form than substance — just throw something together.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Luo's face darkens. Fang's observation about real vs performed culture was a genuine insight about identity and representation. Dismissing it as 'form over substance' misses the entire conversation."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "我来做时间表和翻译安排。需要跟面摊老板提前沟通。还有保险的问题——外国人在社区活动需要确认责任条款。",
+          "text_pinyin": "Wǒ lái zuò shíjiān biǎo hé fānyì ānpái. Xūyào gēn miàntān lǎobǎn tíqián gōutōng. Háiyǒu bǎoxiǎn de wèntí — wàiguó rén zài shèqū huódòng xūyào quèrèn zérèn tiáokuǎn.",
+          "text_en": "I'll handle the timetable and translation arrangements. Need to coordinate with the noodle stand owner in advance. Also the insurance question — foreign visitors doing community activities need liability terms confirmed."
+        }
+      ],
+      "cultural_note": "The tension between 'performance culture' (表演文化) and 'lived culture' (生活文化) is a genuine debate in Chinese community representation. Authentic experiences often leave stronger impressions than polished exhibitions."
+    }
+  },
+  {
+    "title": "The Time Capsule",
+    "title_zh": "时间胶囊",
+    "hsk_level": 8,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.85,
+    "tree": {
+      "setup": "The community is burying a time capsule to be opened in 25 years. Each person can contribute one item. The conversation about what to include reveals what each person values — and what they think the future should know.",
+      "setup_zh": "社区要埋一个时间胶囊，二十五年后打开。每个人可以放一件东西。关于放什么的讨论，暴露了每个人看重什么——以及他们觉得未来应该知道什么。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我放一张我们的集体照！让二十五年后的人看到我们！我现在就拍！",
+          "text_pinyin": "Wǒ fàng yì zhāng wǒmen de jítǐ zhào! Ràng èrshíwǔ nián hòu de rén kàn dào wǒmen! Wǒ xiànzài jiù pāi!",
+          "text_en": "I'll put in a group photo! Let the people in 25 years see us! I'll take it right now!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "应该放一些有教育意义的东西。比如今年的课程表，让未来的人知道我们的教育理念是什么样的。每一代人都应该向下一代留下精神遗产。",
+          "text_pinyin": "Yīnggāi fàng yìxiē yǒu jiàoyù yìyì de dōngxi. Bǐrú jīnnián de kèchéng biǎo, ràng wèilái de rén zhīdào wǒmen de jiàoyù lǐniàn shì shénme yàng de. Měi yí dài rén dōu yīnggāi xiàng xià yí dài liú xia jīngshén yíchǎn.",
+          "text_en": "We should include something educational. Like this year's curriculum, so future people know what our educational philosophy looked like. Every generation should leave a spiritual legacy for the next."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "我放面摊老板的菜单。手写的那种。上面有油渍。那个比课程表真实。",
+          "text_pinyin": "Wǒ fàng miàntān lǎobǎn de càidān. Shǒuxiě de nà zhǒng. Shàngmiàn yǒu yóuzì. Nà ge bǐ kèchéng biǎo zhēnshí.",
+          "text_en": "I'll put in the noodle stand owner's menu. The handwritten one. With grease stains on it. That's more real than a curriculum."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "我写一封信给二十五年后的人。告诉他们我们当时在想什么。不是大事，是日常的思考。比如我们怎么看这棵树，怎么看这条巷子，怎么跟邻居相处。",
+          "text_pinyin": "Wǒ xiě yì fēng xìn gěi èrshíwǔ nián hòu de rén. Gàosu tāmen wǒmen dāngshí zài xiǎng shénme. Bú shì dà shì, shì rìcháng de sīkǎo. Bǐrú wǒmen zěnme kàn zhè kē shù, zěnme kàn zhè tiáo xiàngzi, zěnme gēn línjū xiāngchǔ.",
+          "text_en": "I'll write a letter to the people 25 years from now. Tell them what we were thinking about. Not big things — daily thoughts. Like how we see this tree, this alley, how we get along with neighbors."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "一个U盘。装今天的日期、天气、物价、和'公共厨房管理暂行办法'。",
+          "text_pinyin": "Yí gè U pán. Zhuāng jīntiān de rìqī, tiānqì, wùjià, hé 'gōnggòng chúfáng guǎnlǐ zhànxíng bànfǎ'.",
+          "text_en": "A USB drive. With today's date, weather, prices, and the 'Provisional Kitchen Management Policy.'"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "U盘二十五年后不一定能读。需要考虑兼容性。另外，时间胶囊的防潮处理需要确认——我查一下有没有相关的行业标准。",
+          "text_pinyin": "U pán èrshíwǔ nián hòu bù yīdìng néng dú. Xūyào kǎolǜ jiānróng xìng. Lìngwài, shíjiān jiāonáng de fángcháo chǔlǐ xūyào quèrèn — wǒ chá yíxià yǒu méi yǒu xiāngguān de hángyè biāozhǔn.",
+          "text_en": "A USB drive might not be readable in 25 years. Need to consider compatibility. Also, the time capsule's moisture-proofing needs confirmation — let me check if there are relevant industry standards."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Everyone's contribution reflects who they are. What do you put in the time capsule?",
+          "options": [
+            {
+              "text_zh": "我放一张今天的报纸和一张手写的清单：我们社区现在有什么——面摊、老树、老周的快递服务、罗老师的规则、秦经理的流程、方阿姨的沉默、小梅的'嗯'、老白的理论。让二十五年后的人看看，这些东西还在不在。",
+              "text_pinyin": "Wǒ fàng yì zhāng jīntiān de bàozhǐ hé yì zhāng shǒuxiě de qīngdān: wǒmen shèqū xiànzài yǒu shénme — miàntān, lǎo shù, Lǎo Zhōu de kuàidì fúwù, Luó lǎoshī de guīzé, Qín jīnglǐ de liúchéng, Fāng āyí de chénmò, Xiǎo Méi de 'ǹg', Lǎo Bái de lǐlùn. Ràng èrshíwǔ nián hòu de rén kàn kan, zhèxiē dōngxi hái zài bú zài.",
+              "text_en": "I'll put in today's newspaper and a handwritten list: what our community has right now — the noodle stand, the old tree, Zhou's delivery service, Luo's rules, Qin's procedures, Fang's silences, Mei's 'mm,' Bai's theories. Let the people in 25 years see whether these things are still there.",
+              "score": 3,
+              "register": "neutral",
+              "feedback": "You captured the community not as an idea but as specific people and specific things. Everyone recognizes themselves in the list. There's a moment of quiet. Even Mei looks at you for slightly longer than usual."
+            },
+            {
+              "text_zh": "我同意老白的想法，写一封信。",
+              "text_pinyin": "Wǒ tóngyì Lǎo Bái de xiǎngfǎ, xiě yì fēng xìn.",
+              "text_en": "I agree with Uncle Bai — write a letter.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "A good idea — Bai's suggestion was actually one of his better ones. But you contributed his idea rather than your own. The time capsule should have your specific perspective too."
+            },
+            {
+              "text_zh": "随便放什么都行，关键是做好防潮。",
+              "text_pinyin": "Suíbiàn fàng shénme dōu xíng, guānjiàn shì zuò hǎo fángcháo.",
+              "text_en": "Doesn't matter what we put in — the key is moisture-proofing.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just Qin'd the conversation. Moisture-proofing is important, but everyone else is talking about what matters to them and what they want to leave behind. Your contribution is... logistics."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "好。那就这些。够了。不用再多了。",
+          "text_pinyin": "Hǎo. Nà jiù zhèxiē. Gòu le. Bú yòng zài duō le.",
+          "text_en": "Good. That's enough. No need for more."
+        }
+      ],
+      "cultural_note": "Time capsules (时间胶囊) in Chinese communities often become unexpected spaces for authentic self-expression — what people choose to preserve reveals what they value."
+    }
+  },
+  {
+    "title": "The Community Center Mural",
+    "title_zh": "社区中心壁画",
+    "hsk_level": 9,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.9,
+    "tree": {
+      "setup": "The community center's blank wall is being painted with a mural. A young artist has been hired, but the committee must approve the design. The conversation reveals six different ideas about what a community's public art should say — and who it should say it to.",
+      "setup_zh": "社区中心的一面空墙要画壁画。请了一位年轻艺术家，但设计需要委员会批准。讨论中暴露了六种不同的想法：社区的公共艺术应该表达什么——以及给谁看。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "艺术家提交了三个方案。方案一是抽象几何图案，现代风格。方案二是社区历史场景，写实风格。方案三是一棵大树，周围有各种小动物和人物。我个人没有偏好——我只负责确保流程合规和预算可控。",
+          "text_pinyin": "Yìshùjiā tíjiāo le sān gè fāng'àn. Fāng'àn yī shì chōuxiàng jǐhé tú'àn, xiàndài fēnggé. Fāng'àn èr shì shèqū lìshǐ chǎngjǐng, xiěshí fēnggé. Fāng'àn sān shì yì kē dà shù, zhōuwéi yǒu gè zhǒng xiǎo dòngwù hé rénwù. Wǒ gèrén méi yǒu piānhào — wǒ zhǐ fùzé quèbǎo liúchéng hé guī hé yùsuàn kě kòng.",
+          "text_en": "The artist submitted three proposals. Option one: abstract geometric patterns, modern style. Option two: community history scenes, realistic style. Option three: a large tree with various small animals and people around it. I personally have no preference — I'm only responsible for process compliance and budget control."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "第三个！大树！好看！而且每个人都能看懂！小朋友也喜欢！",
+          "text_pinyin": "Dì sān gè! Dà shù! Hǎo kàn! Érqiě měi gè rén dōu néng kàn dǒng! Xiǎopéngyǒu yě xǐhuān!",
+          "text_en": "Option three! The tree! Beautiful! And everyone can understand it! Kids will love it too!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "第二个。壁画应该有内容、有深度、有教育意义。历史场景能让下一代知道这个社区是怎么走过来的。公共艺术不是装饰，是精神建设。",
+          "text_pinyin": "Dì èr gè. Bìhuà yīnggāi yǒu nèiróng, yǒu shēndù, yǒu jiàoyù yìyì. Lìshǐ chǎngjǐng néng ràng xià yí dài zhīdào zhè ge shèqū shì zěnme zǒu guòlái de. Gōnggòng yìshù bú shì zhuāngshì, shì jīngshén jiànshè.",
+          "text_en": "Option two. A mural should have content, depth, and educational meaning. Historical scenes let the next generation know how this community got here. Public art isn't decoration — it's spiritual construction."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "'精神建设'。每次一说'精神建设'，出来的东西就像宣传栏。你想让这面墙变成宣传栏吗？好的壁画不需要'教育'任何人。它在那里，你经过的时候看一眼，觉得这个地方值得住——就够了。",
+          "text_pinyin": "'Jīngshén jiànshè'. Měi cì yì shuō 'jīngshén jiànshè', chūlái de dōngxi jiù xiàng xuānchuán lán. Nǐ xiǎng ràng zhè miàn qiáng biàn chéng xuānchuán lán ma? Hǎo de bìhuà bù xūyào 'jiàoyù' rèn hé rén. Tā zài nàlǐ, nǐ jīngguò de shíhou kàn yì yǎn, juéde zhè ge dìfang zhíde zhù — jiù gòu le.",
+          "text_en": "'Spiritual construction.' Every time someone says 'spiritual construction,' the result looks like a propaganda board. Do you want this wall to be a propaganda board? A good mural doesn't need to 'educate' anyone. It's there, you glance at it as you walk by, you feel this place is worth living in — that's enough."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "我觉得第一个方案有它的道理。抽象的东西不会过时。今天画的历史场景，十年后看起来就是旧的。但一个几何图案，二十年后看起来跟今天一样。艺术的生命力不在于你能不能看懂，而在于它能不能让你停下来。",
+          "text_pinyin": "Wǒ juéde dì yī gè fāng'àn yǒu tā de dàolǐ. Chōuxiàng de dōngxi bú huì guòshí. Jīntiān huà de lìshǐ chǎngjǐng, shí nián hòu kàn qǐlái jiù shì jiù de. Dàn yí gè jǐhé tú'àn, èrshí nián hòu kàn qǐlái gēn jīntiān yíyàng. Yìshù de shēngmìng lì bú zàiyú nǐ néng bù néng kàn dǒng, ér zàiyú tā néng bù néng ràng nǐ tíng xiàlái.",
+          "text_en": "I think option one has merit. Abstract things don't go out of date. Historical scenes painted today will look old in ten years. But a geometric pattern looks the same in twenty years as it does now. Art's vitality isn't in whether you understand it, but whether it makes you stop."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "让艺术家决定。",
+          "text_pinyin": "Ràng yìshùjiā juédìng.",
+          "text_en": "Let the artist decide."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "我们是委员会！委员会的职责就是做决策！不能把决策权交出去！",
+          "text_pinyin": "Wǒmen shì wěiyuánhuì! Wěiyuánhuì de zhízé jiù shì zuò juécè! Bù néng bǎ juécè quán jiāo chūqù!",
+          "text_en": "We're a committee! The committee's duty is to make decisions! We can't hand decision-making power away!"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Six different perspectives on what art should do. What position do you take?",
+          "options": [
+            {
+              "text_zh": "小梅和方阿姨说到了关键。我们不是在选装饰，是在选一面墙要表达什么。但我们也不是艺术家——我们知道自己要什么感觉，但怎么实现是她的专业。建议这样：我们把今天讨论的内容整理成一份简报给艺术家——我们想让人走过的时候觉得这里值得住，我们不想要宣传栏，我们希望十年后看起来不过时。然后让她根据这些方向重新设计一版。审美方向由我们定，专业表达由她来。",
+              "text_pinyin": "Xiǎo Méi hé Fāng āyí shuō dào le guānjiàn. Wǒmen bú shì zài xuǎn zhuāngshì, shì zài xuǎn yì miàn qiáng yào biǎodá shénme. Dàn wǒmen yě bú shì yìshùjiā — wǒmen zhīdào zìjǐ yào shénme gǎnjué, dàn zěnme shíxiàn shì tā de zhuānyè. Jiànyì zhèyàng: wǒmen bǎ jīntiān tǎolùn de nèiróng zhěnglǐ chéng yí fèn jiǎnbào gěi yìshùjiā — wǒmen xiǎng ràng rén zǒu guò de shíhou juéde zhèlǐ zhíde zhù, wǒmen bù xiǎng yào xuānchuán lán, wǒmen xīwàng shí nián hòu kàn qǐlái bú guòshí. Ránhòu ràng tā gēnjù zhèxiē fāngxiàng chóngxīn shèjì yì bǎn. Shěnměi fāngxiàng yóu wǒmen dìng, zhuānyè biǎodá yóu tā lái.",
+              "text_en": "Mei and Fang identified the key point. We're not choosing decoration — we're choosing what a wall should say. But we're also not artists — we know how we want it to feel, but execution is her expertise. I suggest: we compile today's discussion into a brief for the artist — we want people walking past to feel this place is worth living in, we don't want a propaganda board, we want it to look timeless in ten years. Then let her redesign based on those directions. Aesthetic direction from us, professional execution from her.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "You found the structural answer: separate what the committee can meaningfully decide (values, feeling, constraints) from what requires professional judgment (visual execution). Luo keeps her committee authority. Mei's instinct about trusting the artist is honored. Fang's anti-propaganda criterion becomes a design constraint. Everyone's input shapes the brief without anyone designing the mural."
+            },
+            {
+              "text_zh": "投票决定吧，少数服从多数。",
+              "text_pinyin": "Tóupiào juédìng ba, shǎoshù fúcóng duōshù.",
+              "text_en": "Let's vote — majority rules.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Democratic but reductive. The conversation generated real insight about what public art should do. Reducing it to a vote between three pre-existing options ignores everything that was said."
+            },
+            {
+              "text_zh": "这面墙不画也行。白墙也挺好看的。",
+              "text_pinyin": "Zhè miàn qiáng bú huà yě xíng. Bái qiáng yě tǐng hǎo kàn de.",
+              "text_en": "We don't have to paint it. A blank wall is fine too.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Six people just had one of the most substantive conversations about art and community identity they've ever had. Your contribution is to not have a mural. Fang looks at you. Says nothing. That's the loudest nothing yet."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "简报我来整理。需要各位确认一下核心诉求。另外，预算变更需要走一个补充审批。",
+          "text_pinyin": "Jiǎnbào wǒ lái zhěnglǐ. Xūyào gèwèi quèrèn yíxià héxīn sùqiú. Lìngwài, yùsuàn biàngēng xūyào zǒu yí gè bǔchōng shěnpī.",
+          "text_en": "I'll compile the brief. Need everyone to confirm core requirements. Also, budget changes need a supplementary approval process."
+        }
+      ],
+      "cultural_note": "Public art decisions in Chinese communities often become proxy debates about identity, taste, and governance style. The tension between 宣传 (propaganda) aesthetics and genuine artistic expression is a live cultural conversation."
+    }
+  },
+  {
+    "title": "The Farewell Dinner",
+    "title_zh": "送别晚餐",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.9,
+    "tree": {
+      "setup": "Auntie Fang is moving away. The community is organizing a farewell dinner. Everyone is preparing, but nobody quite knows how to say goodbye to someone who never needed anyone to say anything.",
+      "setup_zh": "方阿姨要搬走了。社区在组织一个送别晚餐。大家都在准备，但没有人知道怎么跟一个从来不需要别人说什么的人告别。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我要做一桌菜！十二个菜！代表一年十二个月！每一个月我们都在一起！",
+          "text_pinyin": "Wǒ yào zuò yì zhuō cài! Shí'èr gè cài! Dàibiǎo yì nián shí'èr gè yuè! Měi yí gè yuè wǒmen dōu zài yìqǐ!",
+          "text_en": "I'll cook twelve dishes! One for each month of the year! Every month we were together!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "这是一件重要的事。必须认真对待。我来负责致辞。方阿姨为这个社区做了很多——大家可能没有注意到，但她帮过的人比谁都多。只是她从来不说。",
+          "text_pinyin": "Zhè shì yí jiàn zhòngyào de shì. Bìxū rènzhēn duìdài. Wǒ lái fùzé zhìcí. Fāng āyí wèi zhè ge shèqū zuò le hěn duō — dàjiā kěnéng méi yǒu zhùyì dào, dàn tā bāng guò de rén bǐ shéi dōu duō. Zhǐshì tā cónglái bù shuō.",
+          "text_en": "This is important. It must be done properly. I'll handle the speech. Auntie Fang has done more for this community than anyone — people might not have noticed, but she's helped more people than anyone. She just never talks about it."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "一个人搬走了，但她留下的东西还在。方阿姨在不在，这个社区的性格已经被她影响了。就像一棵树移走了，根留在土里，那片土不一样了。",
+          "text_pinyin": "Yí gè rén bān zǒu le, dàn tā liú xia de dōngxi hái zài. Fāng āyí zài bú zài, zhè ge shèqū de xìnggé yǐjīng bèi tā yǐngxiǎng le. Jiù xiàng yì kē shù yí zǒu le, gēn liú zài tǔ lǐ, nà piàn tǔ bù yíyàng le.",
+          "text_en": "A person moves away, but what she left behind remains. Whether Fang is here or not, this community's character has been shaped by her. Like when a tree is transplanted — the roots stay in the soil, and that soil is different now."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...她不喜欢致辞。",
+          "text_pinyin": "...Tā bù xǐhuān zhìcí.",
+          "text_en": "...She doesn't like speeches."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "送别晚餐的预算已经批了。场地在社区活动室。我准备了一个相册——收集了过去几年的活动照片。另外，我想以管理处的名义发一封感谢信。但我不确定方阿姨会不会觉得太正式了。",
+          "text_pinyin": "Sòngbié wǎncān de yùsuàn yǐjīng pī le. Chǎngdì zài shèqū huódòngshì. Wǒ zhǔnbèi le yí gè xiàngcè — shōují le guòqù jǐ nián de huódòng zhàopiàn. Lìngwài, wǒ xiǎng yǐ guǎnlǐ chù de míngyì fā yì fēng gǎnxiè xìn. Dàn wǒ bú quèdìng Fāng āyí huì bú huì juéde tài zhèngshì le.",
+          "text_en": "The farewell dinner budget is approved. Venue is the community activity room. I've prepared a photo album — collected activity photos from the past few years. Also, I want to send a thank-you letter on behalf of the management office. But I'm not sure if Fang would find it too formal."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "太正式了。",
+          "text_pinyin": "Tài zhèngshì le.",
+          "text_en": "Too formal."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "How should the farewell dinner honor someone who doesn't want to be honored?",
+          "options": [
+            {
+              "text_zh": "方阿姨不喜欢被当主角。那就不要让她当主角。不要致辞，不要感谢信。就像平时一样吃一顿饭。老周做菜——不用十二个，做几个就好。大家坐在一起，聊聊天，看看照片。如果有人想说什么就说，不想说就不说。最好的告别是让她觉得这不是告别，而是跟平时一样的一个晚上——只是多了一点安静。",
+              "text_pinyin": "Fāng āyí bù xǐhuān bèi dāng zhǔjué. Nà jiù bú yào ràng tā dāng zhǔjué. Bú yào zhìcí, bú yào gǎnxiè xìn. Jiù xiàng píngshí yíyàng chī yí dùn fàn. Lǎo Zhōu zuò cài — bú yòng shí'èr gè, zuò jǐ gè jiù hǎo. Dàjiā zuò zài yìqǐ, liáo liáo tiān, kàn kan zhàopiàn. Rúguǒ yǒu rén xiǎng shuō shénme jiù shuō, bù xiǎng shuō jiù bù shuō. Zuì hǎo de gàobié shì ràng tā juéde zhè bú shì gàobié, ér shì gēn píngshí yíyàng de yí gè wǎnshang — zhǐshì duō le yìdiǎn ānjìng.",
+              "text_en": "Fang doesn't like being the center of attention. So don't make her the center. No speeches, no thank-you letters. Just eat together like always. Zhou cooks — not twelve dishes, just a few. Everyone sits together, chats, looks at photos. If someone wants to say something, they say it. If not, they don't. The best farewell is making her feel this isn't a farewell, but a regular evening — just with a little more quiet.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "You understood her. The dinner happens exactly like this. Zhou makes four dishes (they're slightly better than usual — he tried harder). The photos get passed around without commentary. Near the end, Fang says '这些年...' and then stops. Nobody fills the silence. That silence is the farewell."
+            },
+            {
+              "text_zh": "罗老师的致辞可以短一点，不用太正式。然后大家一起吃饭。",
+              "text_pinyin": "Luó lǎoshī de zhìcí kěyǐ duǎn yìdiǎn, bú yòng tài zhèngshì. Ránhòu dàjiā yìqǐ chī fàn.",
+              "text_en": "Luo's speech can be shorter, not too formal. Then everyone eats together.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "A compromise, but Mei already said Fang doesn't like speeches. Even a short speech makes Fang the subject of attention she didn't ask for. Close, but it's still a ceremony pretending not to be one."
+            },
+            {
+              "text_zh": "方阿姨应该不介意，毕竟是大家的心意。",
+              "text_pinyin": "Fāng āyí yīnggāi bú jièyì, bìjìng shì dàjiā de xīnyì.",
+              "text_en": "Fang probably won't mind — it's everyone's good intentions after all.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just decided what Fang feels on her behalf. Mei, who knows Fang best, just told you twice that it's too much. Good intentions that ignore the recipient's nature aren't really about the recipient."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "...吃饭就行了。",
+          "text_pinyin": "...Chī fàn jiù xíng le.",
+          "text_en": "...Just dinner is fine."
+        }
+      ],
+      "cultural_note": "Chinese farewell culture often involves an internal tension between wanting to express appreciation (表达心意) and respecting someone's preference for understatement. The most meaningful farewells often resemble ordinary moments — because that's what will be missed."
+    }
+  },
+  {
+    "title": "The Last Community Meeting",
+    "title_zh": "最后一次社区会议",
+    "hsk_level": 9,
+    "register": "professional",
+    "scenario_type": "dialogue",
+    "difficulty": 0.9,
+    "tree": {
+      "setup": "It's the year-end community meeting. Nothing urgent is on the agenda, but somehow the conversation becomes about what the community means — and whether it can survive the way things are changing.",
+      "setup_zh": "年终社区会议。议程上没有什么紧急的事，但不知怎么话题变成了社区的意义——以及在变化中它还能不能存续。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "今年的社区事务报告：处理投诉一百二十四件，组织活动十一次，修缮项目七个。意见箱收到建议两百三十一条——其中一百八十条来自老周。年度预算执行率百分之九十七。以上。",
+          "text_pinyin": "Jīnnián de shèqū shìwù bàogào: chǔlǐ tóusù yìbǎi èrshísì jiàn, zǔzhī huódòng shíyī cì, xiūshàn xiàngmù qī gè. Yìjiàn xiāng shōu dào jiànyì liǎngbǎi sānshíyī tiáo — qízhōng yìbǎi bāshí tiáo láizì Lǎo Zhōu. Niándù yùsuàn zhíxíng lǜ bǎi fēn zhī jiǔshíqī. Yǐshàng.",
+          "text_en": "This year's community affairs report: 124 complaints processed, 11 events organized, 7 repair projects. Suggestion box received 231 suggestions — 180 from Old Zhou. Annual budget execution rate: 97%. That's all."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "明年我的目标是三百条！",
+          "text_pinyin": "Míngnián wǒ de mùbiāo shì sānbǎi tiáo!",
+          "text_en": "My goal for next year is three hundred!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "数字很好，但数字不能代表一切。今年我们失去了三户老住户——两户搬走了，一户...王爷爷走了。这个社区在变。不只是硬件在变，人也在变。新搬来的人，很多连邻居都不认识。",
+          "text_pinyin": "Shùzì hěn hǎo, dàn shùzì bù néng dàibiǎo yíqiè. Jīnnián wǒmen shīqù le sān hù lǎo zhùhù — liǎng hù bān zǒu le, yí hù... Wáng yéye zǒu le. Zhè ge shèqū zài biàn. Bù zhǐ shì yìngjiàn zài biàn, rén yě zài biàn. Xīn bān lái de rén, hěn duō lián línjū dōu bú rènshi.",
+          "text_en": "Numbers are good, but numbers can't represent everything. This year we lost three longtime households — two moved away, one... Grandpa Wang passed. This community is changing. Not just the hardware — the people are changing. Many of the new residents don't even know their neighbors."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "罗老师说得对。但变化本身不是问题。问题是我们有没有能力让新来的人也觉得这里值得在意。如果一个人搬进来三年，从来没有一个邻居记得他的名字——那不是新人的问题，是我们的问题。",
+          "text_pinyin": "Luó lǎoshī shuō de duì. Dàn biànhuà běnshēn bú shì wèntí. Wèntí shì wǒmen yǒu méi yǒu nénglì ràng xīn lái de rén yě juéde zhèlǐ zhíde zàiyì. Rúguǒ yí gè rén bān jìnlái sān nián, cónglái méi yǒu yí gè línjū jì de tā de míngzì — nà bú shì xīn rén de wèntí, shì wǒmen de wèntí.",
+          "text_en": "Luo is right. But change itself isn't the problem. The problem is whether we have the capacity to make new people feel this place is worth caring about. If someone moves in and after three years no neighbor remembers their name — that's not the new person's problem. It's ours."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "以前不用'组织活动'来维系社区。大家住在一起，自然就有联系。但现在的生活方式不一样了。每个人都很忙，都在自己的世界里。也许社区这个概念本身需要重新定义。不是'住在一起的人'，而是'愿意为同一个地方负责的人'。",
+          "text_pinyin": "Yǐqián bú yòng 'zǔzhī huódòng' lái wéixì shèqū. Dàjiā zhù zài yìqǐ, zìrán jiù yǒu liánxì. Dàn xiànzài de shēnghuó fāngshì bù yíyàng le. Měi gè rén dōu hěn máng, dōu zài zìjǐ de shìjiè lǐ. Yěxǔ shèqū zhè ge gàiniàn běnshēn xūyào chóngxīn dìngyì. Bú shì 'zhù zài yìqǐ de rén', ér shì 'yuànyì wèi tóng yí gè dìfang fùzé de rén'.",
+          "text_en": "Before, you didn't need 'organized events' to maintain community. People lived together — connections happened naturally. But life is different now. Everyone's busy, in their own world. Maybe the concept of community itself needs redefining. Not 'people who live together,' but 'people willing to take responsibility for the same place.'"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "老白说了一句有道理的话。",
+          "text_pinyin": "Lǎo Bái shuō le yí jù yǒu dàolǐ de huà.",
+          "text_en": "Uncle Bai said something that makes sense."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "...谢谢。我觉得。",
+          "text_pinyin": "...Xièxie. Wǒ juéde.",
+          "text_en": "...Thank you. I think."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The meeting has become real. What do you say?",
+          "options": [
+            {
+              "text_zh": "我觉得答案已经在这个房间里了。我们今天讨论的不是停车位、不是物业费、不是意见箱。我们在讨论我们要不要继续在意这个地方。坐在这里的人——你们就是答案。明年我们可以做一件很简单的事：每个月有一天，开门。不用活动，不用流程。就是开着门，邻居可以进来坐坐。以前自然发生的事，我们现在需要有意地做。这不丢人。这是适应。",
+              "text_pinyin": "Wǒ juéde dá'àn yǐjīng zài zhè ge fángjiān lǐ le. Wǒmen jīntiān tǎolùn de bú shì tíngchē wèi, bú shì wùyè fèi, bú shì yìjiàn xiāng. Wǒmen zài tǎolùn wǒmen yào bú yào jìxù zàiyì zhè ge dìfang. Zuò zài zhèlǐ de rén — nǐmen jiù shì dá'àn. Míngnián wǒmen kěyǐ zuò yí jiàn hěn jiǎndān de shì: měi gè yuè yǒu yì tiān, kāi mén. Bú yòng huódòng, bú yòng liúchéng. Jiù shì kāi zhe mén, línjū kěyǐ jìnlái zuò zuo. Yǐqián zìrán fāshēng de shì, wǒmen xiànzài xūyào yǒuyì de zuò. Zhè bù diūrén. Zhè shì shìyìng.",
+              "text_en": "I think the answer is already in this room. Today we're not discussing parking spaces, property fees, or suggestion boxes. We're discussing whether we still want to care about this place. The people sitting here — you are the answer. Next year we could do one simple thing: one day a month, open your door. No events, no procedures. Just an open door — neighbors can come sit for a while. What used to happen naturally, we now need to do intentionally. That's not weakness. That's adaptation.",
+              "score": 3,
+              "register": "professional",
+              "feedback": "The room is quiet. Not Mei-quiet — genuinely quiet. Zhou nods slowly. Luo takes a breath to speak, then decides not to. Qin writes something down — not a procedure, just a note. Fang looks at the table. Bai, for once, doesn't elaborate. What you said was enough."
+            },
+            {
+              "text_zh": "我同意方阿姨说的，我们应该做得更好。",
+              "text_pinyin": "Wǒ tóngyì Fāng āyí shuō de, wǒmen yīnggāi zuò de gèng hǎo.",
+              "text_en": "I agree with Auntie Fang — we should do better.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Agreement without a concrete suggestion. Fang's observation was the diagnosis. The meeting needed a prescription. You validated the question without answering it."
+            },
+            {
+              "text_zh": "社区做得已经不错了，不用太担心。",
+              "text_pinyin": "Shèqū zuò de yǐjīng búcuò le, bú yòng tài dānxīn.",
+              "text_en": "The community is already doing fine — no need to worry too much.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Luo just talked about Grandpa Wang dying and neighbors disappearing. Fang just named a structural failure in how communities function. Telling them 'don't worry' is exactly the kind of comfortable denial that lets communities dissolve."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "开门日...不需要审批。我就记在明年计划里了。",
+          "text_pinyin": "Kāi mén rì... bù xūyào shěnpī. Wǒ jiù jì zài míngnián jìhuà lǐ le.",
+          "text_en": "Open door day... doesn't require approval. I'll note it in next year's plan."
+        }
+      ],
+      "cultural_note": "The tension between organic community (自然形成的社区) and organized community (有组织的社区) is one of the defining questions of modern Chinese urban life. As traditional living patterns dissolve, intentional effort replaces what proximity once provided."
+    }
+  },
+  {
+    "title": "The Morning After",
+    "title_zh": "第二天早上",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.85,
+    "tree": {
+      "setup": "The morning after the year-end meeting. You're at the noodle stand at 6am. The old man who runs it doesn't say hello — he never does. But today, Old Zhou is there too. And Xiao Mei. And, unexpectedly, Uncle Bai.",
+      "setup_zh": "年终会议第二天的早上。你六点在面摊。面摊老板没有打招呼——他从来不打招呼。但今天老周也在。小梅也在。还有，意外地，老白也在。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "你们也来了！太好了！我昨晚想了很多——关于开门日的事。我已经有了十七个想法！",
+          "text_pinyin": "Nǐmen yě lái le! Tài hǎo le! Wǒ zuó wǎn xiǎng le hěn duō — guānyú kāi mén rì de shì. Wǒ yǐjīng yǒu le shíqī gè xiǎngfǎ!",
+          "text_en": "You're all here! Great! I thought about it a lot last night — about the open door day. I already have seventeen ideas!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...你六点就在想这个？",
+          "text_pinyin": "...Nǐ liù diǎn jiù zài xiǎng zhè ge?",
+          "text_en": "...You've been thinking about this since 6am?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "五点。",
+          "text_pinyin": "Wǔ diǎn.",
+          "text_en": "Since five."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "我来是因为...我在想昨天的事。小梅说我说了一句有道理的话。这个很少发生。我想在这种状态消失之前，再来感受一下。",
+          "text_pinyin": "Wǒ lái shì yīnwèi... wǒ zài xiǎng zuótiān de shì. Xiǎo Méi shuō wǒ shuō le yí jù yǒu dàolǐ de huà. Zhè ge hěn shǎo fāshēng. Wǒ xiǎng zài zhè zhǒng zhuàngtài xiāoshī zhīqián, zài lái gǎnshòu yíxià.",
+          "text_en": "I'm here because... I've been thinking about yesterday. Xiao Mei said I said something that made sense. That rarely happens. I wanted to experience this state again before it fades."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "我没说'经常'有道理。我说了'一句'。",
+          "text_pinyin": "Wǒ méi shuō 'jīngcháng' yǒu dàolǐ. Wǒ shuō le 'yí jù'.",
+          "text_en": "I didn't say 'often' makes sense. I said 'one sentence.'"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "You're sitting at the noodle stand at 6am with three people you've come to know well. The old man brings noodles without asking. What do you say?",
+          "options": [
+            {
+              "text_zh": "你们注意到了吗——他从来不问我们要什么。他就知道。这就是方阿姨说的那种东西。不需要解释的那种。",
+              "text_pinyin": "Nǐmen zhùyì dào le ma — tā cónglái bú wèn wǒmen yào shénme. Tā jiù zhīdào. Zhè jiù shì Fāng āyí shuō de nà zhǒng dōngxi. Bù xūyào jiěshì de nà zhǒng.",
+              "text_en": "Have you noticed — he never asks us what we want. He just knows. That's the kind of thing Fang was talking about. The kind that doesn't need explaining.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Zhou looks at the noodle stand owner. Really looks at him, maybe for the first time. Mei eats in silence. Bai opens his mouth, reconsiders, and just nods. The old man doesn't notice any of this, which is exactly the point."
+            },
+            {
+              "text_zh": "开门日的事，我们慢慢来。不着急。",
+              "text_pinyin": "Kāi mén rì de shì, wǒmen màn man lái. Bù zháojí.",
+              "text_en": "The open door day — let's take it slow. No rush.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Wise pace-setting. Zhou's seventeen ideas can wait. But you missed the moment — four people at a noodle stand at 6am is itself a kind of open door."
+            },
+            {
+              "text_zh": "面不错。",
+              "text_pinyin": "Miàn búcuò.",
+              "text_en": "Good noodles.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "The simplest true thing. The old man doesn't respond. The noodles are the same as yesterday. That's the point."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "嗯。",
+          "text_pinyin": "Ǹg.",
+          "text_en": "Mm."
+        }
+      ],
+      "cultural_note": "The best moments of community are often the ones that don't look like community from the outside — just people in the same place at the same time, eating in comfortable silence."
+    }
+  }
+]

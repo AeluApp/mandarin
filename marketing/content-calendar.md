@@ -136,7 +136,7 @@ Columns: what to post, where to post it, source file, and whether it's ready to 
 | Tue | Post LinkedIn 5 (the cleanup loop) | LinkedIn | social-media.md | P |
 | Wed | Consider Google Ads start if conversion data warrants | Google Ads | ad-copy.md | Manual |
 | Thu | Post tweet #30 (FSI difficulty rankings) | Twitter/X | social-media.md | Y |
-| Fri | Send Newsletter Issue 8 (X months of Mandarin) | Email | newsletters.md | P |
+| Fri | Send Newsletter Issue 8 (X months with Aelu) | Email | newsletters.md | P |
 | Sat | Publish Short 14 (forgetting curve) | YT Shorts/TikTok/Reels | youtube-scripts.md | P |
 
 ---

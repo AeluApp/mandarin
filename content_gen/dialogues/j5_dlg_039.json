@@ -1,0 +1,89 @@
+{
+    "title": "Having Less, Living More",
+    "title_zh": "少一点，多一点",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your friend Xiaohe recently decluttered her apartment and now has very few possessions. You visit her simple, open living space.",
+        "setup_zh": "朋友小禾最近清理了公寓，现在东西很少。你来到她简洁开阔的家。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你觉得空吗？上个月我把不需要的东西都送掉或者捐了。以前这里堆得满满的，现在只留下真正用得上的。说来奇怪，东西少了以后我反而觉得空间大了，心里也宽了。",
+                "text_pinyin": "Nǐ juéde kōng ma? Shàng ge yuè wǒ bǎ bù xūyào de dōngxi dōu sòng diào huòzhě juān le. Yǐqián zhèlǐ duī de mǎn mǎn de, xiànzài zhǐ liú xià zhēnzhèng yòng de shàng de. Shuō lái qíguài, dōngxi shǎo le yǐhòu wǒ fǎn'ér juéde kōngjiān dà le, xīn lǐ yě kuān le.",
+                "text_en": "Does it feel empty to you? Last month I gave away or donated everything I didn't need. This place used to be packed full. Now I only keep what I actually use. Strangely, with fewer things, I feel like the space got bigger and my mind feels more open."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on having fewer things.",
+                "options": [
+                    {
+                        "text_zh": "不觉得空，觉得通透。我觉得我们拥有的东西太多的时候，东西反而在拥有我们——你得整理它、维护它、担心它。少一点东西，就多一点自由。",
+                        "text_pinyin": "Bù juéde kōng, juéde tōngtòu. Wǒ juéde wǒmen yōngyǒu de dōngxi tài duō de shíhou, dōngxi fǎn'ér zài yōngyǒu wǒmen — nǐ děi zhěnglǐ tā, wéihù tā, dānxīn tā. Shǎo yīdiǎn dōngxi, jiù duō yīdiǎn zìyóu.",
+                        "text_en": "It doesn't feel empty — it feels clear. I think when we own too many things, the things end up owning us. You have to organize them, maintain them, worry about them. Fewer things means more freedom.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp reversal — things owning us is a powerful reframe."
+                    },
+                    {
+                        "text_zh": "你不怕以后需要的时候没有了吗？",
+                        "text_pinyin": "Nǐ bú pà yǐhòu xūyào de shíhou méiyǒu le ma?",
+                        "text_en": "Aren't you afraid you'll need something later and it won't be there?",
+                        "score": 0.0,
+                        "feedback": "Projects scarcity anxiety — contradicts the freedom she's found."
+                    },
+                    {
+                        "text_zh": "你那些东西都送给谁了？",
+                        "text_pinyin": "Nǐ nàxiē dōngxi dōu sòng gěi shéi le?",
+                        "text_en": "Who did you give all your stuff to?",
+                        "score": 0.0,
+                        "feedback": "Focuses on the logistics rather than the philosophy."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "东西在拥有我们……你说得太好了。我以前买了很多衣服，但每天早上站在衣柜前反而不知道穿什么。现在只有十几件，早上起来拿一件就走，特别轻松。选择少了，反而更自在了。",
+                "text_pinyin": "Dōngxi zài yōngyǒu wǒmen…… nǐ shuō de tài hǎo le. Wǒ yǐqián mǎi le hěn duō yīfu, dàn měi tiān zǎoshang zhàn zài yīguì qián fǎn'ér bù zhīdào chuān shénme. Xiànzài zhǐ yǒu shí jǐ jiàn, zǎoshang qǐlái ná yī jiàn jiù zǒu, tèbié qīngsōng. Xuǎnzé shǎo le, fǎn'ér gèng zìzai le.",
+                "text_en": "Things owning us... that's so true. I used to have so many clothes, but every morning standing in front of the closet I couldn't decide what to wear. Now I have just a dozen pieces — I grab one in the morning and go. So much easier. Fewer choices, more freedom."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on choice overload.",
+                "options": [
+                    {
+                        "text_zh": "选择太多其实是一种负担。不只是衣服，信息和机会也是。我们觉得选择多是好事，但太多反而让人焦虑。真正的自由不是无限的选择，而是知道自己要什么。",
+                        "text_pinyin": "Xuǎnzé tài duō qíshí shì yī zhǒng fùdān. Bù zhǐ shì yīfu, xìnxī hé jīhuì yě shì. Wǒmen juéde xuǎnzé duō shì hǎo shì, dàn tài duō fǎn'ér ràng rén jiāolǜ. Zhēnzhèng de zìyóu bú shì wúxiàn de xuǎnzé, ér shì zhīdào zìjǐ yào shénme.",
+                        "text_en": "Too many choices is actually a burden. Not just clothes — information and opportunities too. We think more options is better, but too many causes anxiety. Real freedom isn't infinite choices — it's knowing what you want.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deep and applicable — extends minimalism from material to existential."
+                    },
+                    {
+                        "text_zh": "我做不到，我太喜欢买东西了。",
+                        "text_pinyin": "Wǒ zuò bú dào, wǒ tài xǐhuan mǎi dōngxi le.",
+                        "text_en": "I could never do that, I love shopping too much.",
+                        "score": 0.0,
+                        "feedback": "Self-focused — doesn't engage with her journey."
+                    },
+                    {
+                        "text_zh": "十几件衣服够换洗吗？",
+                        "text_pinyin": "Shí jǐ jiàn yīfu gòu huànxǐ ma?",
+                        "text_en": "Are a dozen pieces enough to rotate?",
+                        "score": 0.0,
+                        "feedback": "Practical concern that misses the philosophical point."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "知道自己要什么……这也许就是极简主义真正的意义——不是为了少，而是为了清楚。清楚什么是重要的，然后把不重要的放下。谢谢你，今天的对话就像我的家一样，简单但有分量。",
+                "text_pinyin": "Zhīdào zìjǐ yào shénme…… zhè yěxǔ jiù shì jíjiǎn zhǔyì zhēnzhèng de yìyì — bú shì wèile shǎo, ér shì wèile qīngchǔ. Qīngchǔ shénme shì zhòngyào de, ránhòu bǎ bú zhòngyào de fàng xià. Xièxie nǐ, jīntiān de duìhuà jiù xiàng wǒ de jiā yíyàng, jiǎndān dàn yǒu fènliàng.",
+                "text_en": "Knowing what you want... maybe that's what minimalism truly means — not about having less, but about having clarity. Being clear about what matters, then letting go of what doesn't. Thank you — today's conversation is like my home: simple but substantial."
+            }
+        ],
+        "cultural_note": "Minimalism (极简主义) has gained significant traction in China's urban centers, partly as a reaction to the rapid consumerism of the past decades. The concept resonates with traditional Chinese philosophical ideas — Daoist simplicity (简朴, jiǎnpǔ) and Buddhist non-attachment. The phrase「断舍离」(duàn shě lí, break-discard-separate), borrowed from a Japanese decluttering philosophy, has become a common term in Chinese lifestyle discussions."
+    }
+}

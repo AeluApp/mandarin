@@ -1,0 +1,87 @@
+{
+    "title": "Finding a Seat",
+    "title_zh": "找座位",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "The cafe is busy. You see one empty chair at a table where a young woman is studying.",
+        "setup_zh": "咖啡馆里人很多。你看到一个年轻女生的桌子上有一把空椅子。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，你要坐这里吗？可以的。",
+                "text_pinyin": "Nǐ hǎo, nǐ yào zuò zhèlǐ ma? Kěyǐ de.",
+                "text_en": "Hi, do you want to sit here? It's fine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and sit down.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！人好多啊。",
+                        "text_pinyin": "Xièxie nǐ! Rén hǎo duō a.",
+                        "text_en": "Thank you! It's so crowded.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Thanks her for offering and acknowledges the busy cafe -- a natural comment to make when sitting down."
+                    },
+                    {
+                        "text_zh": "谢谢！不好意思打扰你。",
+                        "text_pinyin": "Xièxie! Bù hǎo yìsi dǎrǎo nǐ.",
+                        "text_en": "Thanks! Sorry to bother you.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but overly apologetic -- she already said it's fine, so the apology makes it a bit awkward."
+                    },
+                    {
+                        "text_zh": "你在学什么？",
+                        "text_pinyin": "Nǐ zài xué shénme?",
+                        "text_en": "What are you studying?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Jumps into her personal business before even thanking her for sharing the table -- say thanks first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊，周末总是这样。你也来喝咖啡吗？",
+                "text_pinyin": "Shì a, zhōumò zǒngshì zhèyàng. Nǐ yě lái hē kāfēi ma?",
+                "text_en": "Yeah, weekends are always like this. Are you here for coffee too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you came for.",
+                "options": [
+                    {
+                        "text_zh": "对，我想喝杯咖啡，看看书。",
+                        "text_pinyin": "Duì, wǒ xiǎng hē bēi kāfēi, kànkan shū.",
+                        "text_en": "Yes, I want to have a cup of coffee and read a bit.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers her question and paints a calm picture -- matches the cafe atmosphere she described."
+                    },
+                    {
+                        "text_zh": "对，喝咖啡。",
+                        "text_pinyin": "Duì, hē kāfēi.",
+                        "text_en": "Yes, coffee.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but too short -- she's making casual conversation about weekends and this doesn't keep it going."
+                    },
+                    {
+                        "text_zh": "这里的咖啡贵不贵？",
+                        "text_pinyin": "Zhèlǐ de kāfēi guì bu guì?",
+                        "text_en": "Is the coffee here expensive?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "About the cafe, but she asked why you came -- talking price to a stranger feels like a different conversation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing tables with strangers in crowded cafes is completely normal in China. It's not awkward — it's practical. These brief, friendly exchanges with strangers are part of what makes public spaces feel alive."
+    }
+}

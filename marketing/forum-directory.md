@@ -1,4 +1,4 @@
-# Community & Forum Directory -- Mandarin
+# Community & Forum Directory -- Aelu
 
 **Last updated:** 2026-02-17
 **Owner:** Jason
@@ -17,7 +17,7 @@ Each community is rated on:
 
 **Strategy:** Start with Tier 1 communities. Add Tier 2 after establishing a consistent presence (4-6 weeks). Monitor Tier 3 for opportunistic engagement. Tier 4 is long-tail -- engage only when natural opportunities arise.
 
-**Golden rule:** Provide value first, always. Every community post should be 80% genuine contribution, 20% (at most) product mention. Build a reputation as "Jason who builds that Mandarin app and really knows Chinese pedagogy," not "Jason who keeps plugging his app."
+**Golden rule:** Provide value first, always. Every community post should be 80% genuine contribution, 20% (at most) product mention. Build a reputation as "Jason who builds that Aelu app and really knows Chinese pedagogy," not "Jason who keeps plugging his app."
 
 ---
 
@@ -40,7 +40,7 @@ Each community is rated on:
   - Discussion prompts about learning challenges (tones, characters, listening)
   - Progress reports with specific methodology details
 - **Posting tips:** Answer questions in the Quick Help Thread consistently. Build karma and recognition before ever mentioning your own project. Flair up. Use Chinese in your posts where appropriate. Never make a post that is just "check out my app."
-- **Example post that would work well:** "I built a spaced repetition system around HSK levels and tracked my retention rates over 6 months. Here's what the data showed about optimal review intervals for Chinese characters vs. vocabulary [detailed write-up with charts]. The tool I built is open for anyone curious, link in comments."
+- **Example post that would work well:** "I built a spaced repetition system around HSK levels and tracked my retention rates over 6 months. Here's what the data showed about optimal review intervals for Chinese characters vs. vocabulary [detailed write-up with charts]. The tool I built (Aelu) is open for anyone curious, link in comments."
 
 #### 2. r/languagelearning
 
@@ -91,7 +91,7 @@ Each community is rated on:
 - **Self-promotion rules:** Moderate.
 - **Best content types:** HSK study plans, vocabulary lists, test-taking strategies, "I passed HSK X" experience reports
 - **Posting tips:** Directly relevant to our HSK 1-3 seed content. Share genuinely useful HSK study resources.
-- **Example post that would work well:** "Data from tracking 299 HSK 1-3 vocabulary items: which words are hardest to retain and why"
+- **Example post that would work well:** "Data from tracking 10,000+ HSK 1-9 vocabulary items: which words are hardest to retain and why"
 
 #### 6. Other Active Chinese Learning Subreddits
 
@@ -413,7 +413,7 @@ These are perennial questions that consistently receive views. Answer thoroughly
   - SRS-based language learning app built in Rust/WASM (technical angle worked)
   - "LangTurbo" -- targeting intermediate learners (gap-in-market angle worked)
   - HayaiLearn -- Japanese language learning web app ($900/month indie story)
-- **Our angle:** Solo developer, deterministic (zero AI tokens at runtime), SQLite-based, 299 seed items with context notes, adaptive SRS, tone grading, HSK focus. The "no AI at runtime" angle is contrarian and interesting to HN.
+- **Our angle:** Solo developer, deterministic (zero AI tokens at runtime), SQLite-based, 10,000+ vocabulary items (HSK 1-9) with context notes, adaptive SRS, tone grading, HSK focus. The "no AI at runtime" angle is contrarian and interesting to HN.
 - **Audience overlap:** 2/5 (small percentage are Chinese learners, but high-influence audience)
 - **Effort:** 1/5 (one-time post, then engage with comments)
 - **Self-promotion tolerance:** Open (Show HN is explicitly for this)

@@ -1,0 +1,87 @@
+{
+    "title": "The Sound of a Piano",
+    "title_zh": "钢琴的声音",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "Walking through your apartment hallway, you hear someone playing piano. Your neighbor opens her door.",
+        "setup_zh": "你走在公寓走廊里，听到有人弹钢琴。你的邻居开了门。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "不好意思，太吵了吗？我女儿在练琴。",
+                "text_pinyin": "Bù hǎo yìsi, tài chǎo le ma? Wǒ nǚ'ér zài liàn qín.",
+                "text_en": "Sorry, is it too loud? My daughter is practicing piano."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reassure your neighbor.",
+                "options": [
+                    {
+                        "text_zh": "没有没有！弹得很好听。",
+                        "text_pinyin": "Méiyǒu méiyǒu! Tán de hěn hǎotīng.",
+                        "text_en": "Not at all! It sounds really beautiful.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reassures her immediately -- she was worried about the noise and you told her the piano sounds lovely."
+                    },
+                    {
+                        "text_zh": "没关系，不吵。",
+                        "text_pinyin": "Méi guānxi, bù chǎo.",
+                        "text_en": "It's fine, not loud.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Reassures her but doesn't compliment the playing -- she'll feel relieved but not delighted."
+                    },
+                    {
+                        "text_zh": "你女儿几岁了？",
+                        "text_pinyin": "Nǐ nǚ'ér jǐ suì le?",
+                        "text_en": "How old is your daughter?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She apologized about noise and you asked about her daughter's age -- answer whether it bothers you first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "真的吗？她才学了三个月。她听到你这样说会很高兴的。",
+                "text_pinyin": "Zhēn de ma? Tā cái xué le sān ge yuè. Tā tīng dào nǐ zhèyàng shuō huì hěn gāoxìng de.",
+                "text_en": "Really? She's only been learning for three months. She'll be so happy to hear that."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond warmly.",
+                "options": [
+                    {
+                        "text_zh": "三个月就这么好！请告诉她加油。",
+                        "text_pinyin": "Sān ge yuè jiù zhème hǎo! Qǐng gàosu tā jiāyóu.",
+                        "text_en": "This good after only three months! Please tell her to keep it up.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuinely impressed by her daughter's progress and sends encouragement -- the mother will pass it along happily."
+                    },
+                    {
+                        "text_zh": "三个月？很厉害。",
+                        "text_pinyin": "Sān ge yuè? Hěn lìhai.",
+                        "text_en": "Three months? Impressive.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Acknowledges the achievement but doesn't ask her to pass along encouragement -- a warmer touch would complete the moment."
+                    },
+                    {
+                        "text_zh": "她在学什么曲子？",
+                        "text_pinyin": "Tā zài xué shénme qǔzi?",
+                        "text_en": "What song is she learning?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The mother said her daughter would be happy to hear your compliment -- asking about the song instead skips over the emotional connection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Piano practice is extremely common in Chinese apartments. Neighbors often worry about noise, so reassuring them is a kindness. 加油 (jiāyóu) is the standard encouragement, meaning 'keep going' or 'you can do it.'"
+    }
+}

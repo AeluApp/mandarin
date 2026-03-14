@@ -1,15 +1,15 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.mandarinapp.app',
-  appName: 'Mandarin',
+  appId: 'com.aelu.app',
+  appName: 'Aelu',
   webDir: '../mandarin/web/static',
   server: {
-    url: process.env.CAPACITOR_SERVER_URL || 'https://mandarinapp.com',
-    cleartext: false,
+    url: process.env.CAPACITOR_SERVER_URL || 'http://localhost:5173/?native=1',
+    cleartext: true,
   },
   ios: {
-    scheme: 'Mandarin',
+    scheme: 'Aelu',
     contentInset: 'automatic',
   },
   android: {

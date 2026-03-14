@@ -1,0 +1,94 @@
+{
+    "title": "The Package That Arrived Twice",
+    "title_zh": "到了两次的包裹",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_2_04_v0",
+    "tree": {
+        "setup": "Your apartment building's package pickup point, which is the convenience store on the ground floor. Auntie Xu runs it. She has parcels stacked in mysterious towers that only she can navigate. You ordered one book online but received two identical packages. She's seen stranger things.",
+        "setup_zh": "你公寓楼下的取件点——一楼的便利店。许阿姨经营的。包裹叠成只有她能看懂的塔。你在网上买了一本书，但收到了两个一样的包裹。她见过更奇怪的事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "取快递？你叫什么名字？",
+                "text_pinyin": "qǔ kuàidì? nǐ jiào shénme míngzi?",
+                "text_en": "Picking up a delivery? What's your name?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her your name and the situation.",
+                "options": [
+                    {
+                        "text_zh": "我姓李。我好像收到了两个一样的包裹。",
+                        "text_pinyin": "wǒ xìng lǐ. wǒ hǎoxiàng shōudào le liǎng gè yíyàng de bāoguǒ.",
+                        "text_en": "My surname is Li. I think I received two identical packages.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Xu digs through her tower and produces two identical boxes.「确实两个！你只买了一个？」好像 means 'it seems like' -- perfect for when you're not sure."
+                    },
+                    {
+                        "text_zh": "李。我的快递到了吗？",
+                        "text_pinyin": "lǐ. wǒ de kuàidì dào le ma?",
+                        "text_en": "Li. Has my delivery arrived?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Xu scans her shelf.「到了到了，两个呢。」She hands you both boxes before you notice the duplicate. 到了 means 'has arrived.'"
+                    },
+                    {
+                        "text_zh": "你好。我在网上买了一本书。",
+                        "text_pinyin": "nǐ hǎo. wǒ zài wǎngshàng mǎi le yì běn shū.",
+                        "text_en": "Hello. I bought a book online.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Auntie Xu needs your name to find the package. She waits patiently.「你叫什么？手机号后四位？」在网上买 is 'bought online.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两个包裹都是你的。你要留一个退一个吗？",
+                "text_pinyin": "liǎng gè bāoguǒ dōu shì nǐ de. nǐ yào liú yí gè tuì yí gè ma?",
+                "text_en": "Both packages are yours. Do you want to keep one and return one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide what to do with the extra package.",
+                "options": [
+                    {
+                        "text_zh": "是的，这个多出来的怎么退？",
+                        "text_pinyin": "shì de, zhè ge duō chūlái de zěnme tuì?",
+                        "text_en": "Yes, how do I return the extra one?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Xu pulls out a return label from under the counter.「在手机上申请退货，然后把这个贴上就行。」多出来的 means 'the extra one' -- a natural way to describe duplicates."
+                    },
+                    {
+                        "text_zh": "我联系一下卖家再说。",
+                        "text_pinyin": "wǒ liánxì yíxià màijiā zài shuō.",
+                        "text_en": "Let me contact the seller first.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Auntie Xu nods.「也行。两个先都带走。」Contacting the seller (卖家) before deciding is sensible. 再说 means 'then we'll see.'"
+                    },
+                    {
+                        "text_zh": "算了，两本都留着吧。",
+                        "text_pinyin": "suàn le, liǎng běn dōu liúzhe ba.",
+                        "text_en": "Whatever, I'll keep both.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Xu shrugs.「也行。多一本可以送人。」算了 means 'forget it' or 'never mind' -- the language of surrender."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了。下次取快递直接来找我。",
+                "text_pinyin": "hǎo le. xià cì qǔ kuàidì zhíjiē lái zhǎo wǒ.",
+                "text_en": "OK. Next time you pick up a delivery, just come straight to me."
+            }
+        ],
+        "cultural_note": "Online shopping returns in China are easy -- most platforms have a 'return' button in the app. Packages are often held at community pickup points (代收点) run by convenience stores or dedicated lockers (快递柜)."
+    }
+}

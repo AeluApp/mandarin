@@ -1,0 +1,87 @@
+{
+    "title": "Waiting for the Train",
+    "title_zh": "等火车",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're at the train station waiting for a delayed train. A fellow passenger, an elderly teacher named Mr. Wen, strikes up a conversation.",
+        "setup_zh": "你在火车站等一班晚点的火车。一位同行的旅客——一位叫温老师的退休老师和你聊了起来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "火车又晚点了。不过没关系，等一等也挺好的。现在大家都太急了。你要去哪里？",
+                "text_pinyin": "Huǒchē yòu wǎndiǎn le. Búguò méi guānxi, děng yi děng yě tǐng hǎo de. Xiànzài dàjiā dōu tài jí le. Nǐ yào qù nǎlǐ?",
+                "text_en": "Train's delayed again. But that's okay — waiting a bit isn't bad. Everyone's in too much of a rush nowadays. Where are you headed?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your destination.",
+                "options": [
+                    {
+                        "text_zh": "去看我父母，好几个月没回家了。您呢，温老师？您也是回家吗？",
+                        "text_pinyin": "Qù kàn wǒ fùmǔ, hǎo jǐ ge yuè méi huí jiā le. Nín ne, Wēn lǎoshī? Nín yě shì huí jiā ma?",
+                        "text_en": "Going to see my parents — haven't been home in months. What about you, Mr. Wen? Are you heading home too?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shares personal context and returns the question — warm conversation."
+                    },
+                    {
+                        "text_zh": "回家。",
+                        "text_pinyin": "Huí jiā.",
+                        "text_en": "Going home.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief."
+                    },
+                    {
+                        "text_zh": "火车总是晚点，真烦。",
+                        "text_pinyin": "Huǒchē zǒng shì wǎndiǎn, zhēn fán.",
+                        "text_en": "Trains are always late, so annoying.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Focuses on complaint when he's offering calm perspective."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好几个月了！父母一定很想你。我是去杭州看我的学生，教了他们三十年，退休以后还保持联系。你说得对，有些东西不能等太久——比如看父母。",
+                "text_pinyin": "Hǎo jǐ ge yuè le! Fùmǔ yīdìng hěn xiǎng nǐ. Wǒ shì qù Hángzhōu kàn wǒ de xuésheng, jiāo le tāmen sānshí nián, tuìxiū yǐhòu hái bǎochí liánxì. Nǐ shuō de duì, yǒu xiē dōngxi bù néng děng tài jiǔ — bǐrú kàn fùmǔ.",
+                "text_en": "Months! Your parents must miss you. I'm going to Hangzhou to visit my students — taught them for thirty years, still keep in touch after retiring. You're right — some things shouldn't wait too long, like seeing your parents."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his beautiful teacher-student bond.",
+                "options": [
+                    {
+                        "text_zh": "三十年还保持联系，您和学生的感情一定很深。能遇到这样的好老师，他们很幸运。",
+                        "text_pinyin": "Sānshí nián hái bǎochí liánxì, nín hé xuésheng de gǎnqíng yīdìng hěn shēn. Néng yù dào zhèyàng de hǎo lǎoshī, tāmen hěn xìngyùn.",
+                        "text_en": "Staying in touch for thirty years — your bond with your students must be really deep. They're lucky to have had such a good teacher.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Acknowledges the beauty of lifelong connections."
+                    },
+                    {
+                        "text_zh": "当老师真好。",
+                        "text_pinyin": "Dāng lǎoshī zhēn hǎo.",
+                        "text_en": "Being a teacher must be nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Generic."
+                    },
+                    {
+                        "text_zh": "火车好像快来了。",
+                        "text_pinyin": "Huǒchē hǎoxiàng kuài lái le.",
+                        "text_en": "I think the train is almost here.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Changes the subject abruptly."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Waiting at Chinese train stations is a shared cultural experience — delays are common and create unexpected moments of connection between strangers. The teacher-student bond (师生情) in China often lasts a lifetime, well beyond formal education. 「有些东西不能等太久」 is wisdom commonly shared between strangers during journeys."
+    },
+    "hsk_level": 3
+}

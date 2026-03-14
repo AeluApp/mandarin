@@ -1,0 +1,83 @@
+{
+    "title": "The Letter Writer",
+    "title_zh": "代笔人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Near the post office, you see an elderly man sitting at a small table with pen and paper. A sign reads: 'Letters written on your behalf.' An older woman has just finished dictating a letter to him.",
+        "setup_zh": "邮局旁边，你看到一位老人坐在一张小桌子前，桌上有纸和笔。一个牌子写着「代写书信」。一位老太太刚给他口述完一封信。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好奇？这位阿姨不识字，但她想给在北京的儿子写封信。我替她写。你知道吗，现在能写信的人越来越少了，会写字但不会表达的更多。写信不只是写字——要把别人心里的话变成纸上的字。",
+                "text_pinyin": "Nǐ hàoqí? Zhè wèi āyí bú shí zì, dàn tā xiǎng gěi zài Běijīng de érzi xiě fēng xìn. Wǒ tì tā xiě. Nǐ zhīdào ma, xiànzài néng xiě xìn de rén yuè lái yuè shǎo le, huì xiě zì dàn bú huì biǎodá de gèng duō. Xiě xìn bù zhǐ shì xiě zì — yào bǎ biéren xīnlǐ de huà biàn chéng zhǐ shàng de zì.",
+                "text_en": "Curious? This lady can't read or write, but she wants to send a letter to her son in Beijing. I write for her. You know, fewer and fewer people write letters now — and many who can write characters can't express feelings. Writing letters isn't just writing — it's turning someone's heart into words on paper."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his role as a letter writer.",
+                "options": [
+                    {
+                        "text_zh": "把心里的话变成纸上的字——这工作太有意义了。您不只是写字，是在帮人传递表达不了的感情。这种信比任何微信消息都珍贵。",
+                        "text_pinyin": "Bǎ xīnlǐ de huà biàn chéng zhǐ shàng de zì — zhè gōngzuò tài yǒu yìyì le. Nín bù zhǐ shì xiě zì, shì zài bāng rén chuándì biǎodá bù liǎo de gǎnqíng. Zhè zhǒng xìn bǐ rènhé Wēixìn xiāoxi dōu zhēnguì.",
+                        "text_en": "Turning heart into words on paper — such meaningful work. You're not just writing, you're helping people convey feelings they can't express. These letters are more precious than any WeChat message.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sees the letter writer as an emotional translator — heart to paper."
+                    },
+                    {
+                        "text_zh": "为什么她不打电话？",
+                        "text_pinyin": "Wèishéme tā bù dǎ diànhuà?",
+                        "text_en": "Why doesn't she just call?",
+                        "score": 0.0,
+                        "feedback": "Suggests a replacement that misses why she chose a letter."
+                    },
+                    {
+                        "text_zh": "但是现在可以用语音消息啊，她直接给儿子发一段语音就好了，不用写信那么麻烦。",
+                        "text_pinyin": "Dànshì xiànzài kěyǐ yòng yǔyīn xiāoxi a, tā zhíjiē gěi érzi fā yī duàn yǔyīn jiù hǎo le, bú yòng xiě xìn nàme máfan.",
+                        "text_en": "But she could just send a voice message now — just record one directly for her son. No need for all the trouble of writing a letter.",
+                        "score": 0.0,
+                        "feedback": "He sets down his pen: 'A voice message disappears after you hear it. A letter waits in a drawer until you need it again.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "比微信珍贵——你说到了点子上。刚才那位阿姨说「告诉他我很好，让他不要担心，冬天要穿厚一点」。就这三句话。但是你知道吗，她说这三句话的时候哭了两次。微信打字打不出眼泪，但是信上的字，是带着眼泪写的。",
+                "text_pinyin": "Bǐ Wēixìn zhēnguì — nǐ shuō dào le diǎnzi shàng. Gāngcái nà wèi āyí shuō 'gàosu tā wǒ hěn hǎo, ràng tā bú yào dānxīn, dōngtiān yào chuān hòu yīdiǎn'. Jiù zhè sān jù huà. Dànshì nǐ zhīdào ma, tā shuō zhè sān jù huà de shíhou kū le liǎng cì. Wēixìn dǎ zì dǎ bù chū yǎnlèi, dànshì xìn shàng de zì, shì dài zhe yǎnlèi xiě de.",
+                "text_en": "More precious than WeChat — you hit the point. That lady just said, 'Tell him I'm fine, tell him not to worry, dress warmly in winter.' Just those three sentences. But you know, she cried twice saying them. WeChat typing can't convey tears, but the words in a letter are written with tears."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the tears behind three simple sentences.",
+                "options": [
+                    {
+                        "text_zh": "三句话，哭了两次。每句后面都是说不出口的想念。「我很好」是「别担心」，「穿厚一点」是「我没法在你身边」。您写下的不是字，是藏在简单话里的爱。",
+                        "text_pinyin": "Sān jù huà, kū le liǎng cì. Měi jù hòumiàn dōu shì shuō bù chūkǒu de xiǎngniàn. 'Wǒ hěn hǎo' shì 'bié dānxīn', 'chuān hòu yīdiǎn' shì 'wǒ méi fǎ zài nǐ shēnbiān'. Nín xiě xià de bú shì zì, shì cáng zài jiǎndān huà lǐ de ài.",
+                        "text_en": "Three sentences, cried twice. Behind each is unspoken longing. 'I'm fine' means 'don't worry.' 'Dress warmly' means 'I can't be by your side.' What you wrote isn't words — it's love hidden in simple phrases.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Decodes the mother's love — every simple sentence carries an ocean of feeling."
+                    },
+                    {
+                        "text_zh": "她儿子多久回来一次？",
+                        "text_pinyin": "Tā érzi duō jiǔ huílái yī cì?",
+                        "text_en": "How often does her son come home?",
+                        "score": 0.0,
+                        "feedback": "Investigates the son's schedule during a moment about a mother's love."
+                    },
+                    {
+                        "text_zh": "现在还有人收信吗？",
+                        "text_pinyin": "Xiànzài hái yǒu rén shōu xìn ma?",
+                        "text_en": "Does anyone still receive letters?",
+                        "score": 0.0,
+                        "feedback": "Questions the medium's viability during an emotional peak."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Professional letter writers (代笔人) once served an essential role in Chinese communities where illiteracy was common. Though increasingly rare, they still exist in some smaller cities and villages. The mother's three simple sentences — I'm fine, don't worry, dress warmly — are among the most universal expressions of Chinese parental love, where care is expressed through restraint and practical concern."
+    }
+}

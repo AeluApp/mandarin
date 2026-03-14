@@ -294,27 +294,22 @@ def test_default_show_pinyin_for_new():
 # ── Test 5: direct logic verification for all 6 stages + NULL ──
 
 def test_scaffold_logic_direct():
-    """Verify the mastery_stage -> show_pinyin mapping matches scheduler logic
+    """Verify the mastery_stage -> scaffold/english level mapping matches scheduler logic
     for all 6 stages plus the NULL default, without requiring plan_standard_session."""
+    from mandarin.config import SCAFFOLD_LEVELS
     expected = {
-        "seen":        True,
-        "passed_once": True,
-        "stabilizing": False,
-        "stable":      False,
-        "durable":     False,
-        "decayed":     False,
-        None:          True,   # default when mastery_stage is NULL
+        "seen":        {"pinyin": "full_pinyin", "english": "full"},
+        "passed_once": {"pinyin": "tone_marks",  "english": "full"},
+        "stabilizing": {"pinyin": "initial",     "english": "feedback_only"},
+        "stable":      {"pinyin": "none",        "english": "none"},
+        "durable":     {"pinyin": "none",        "english": "none"},
+        "decayed":     {"pinyin": "tone_marks",  "english": "feedback_only"},
+        None:          {"pinyin": "full_pinyin", "english": "full"},
     }
     for stage, want in expected.items():
-        # This mirrors the exact logic in plan_standard_session:
-        #   mastery_stage = item.get("mastery_stage") or "seen"
-        #   show_pinyin = mastery_stage in ("seen", "passed_once")
         mastery_stage = stage or "seen"
-        show_pinyin = mastery_stage in ("seen", "passed_once")
-        assert show_pinyin == want, \
-            f"Stage {stage!r}: expected show_pinyin={want}, got {show_pinyin}"
-
-
-
-    else:
-        print("All tests passed.")
+        levels = SCAFFOLD_LEVELS.get(mastery_stage, {"pinyin": "none", "english": "full"})
+        assert levels["pinyin"] == want["pinyin"], \
+            f"Stage {stage!r}: expected pinyin={want['pinyin']}, got {levels['pinyin']}"
+        assert levels["english"] == want["english"], \
+            f"Stage {stage!r}: expected english={want['english']}, got {levels['english']}"

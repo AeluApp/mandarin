@@ -1,0 +1,83 @@
+{
+    "title": "The Sleepy Cafe",
+    "title_zh": "安静的咖啡馆",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're in a nearly empty cafe on a rainy afternoon. A young freelance writer, Xiao Bai, is staring at her laptop without typing. She sighs and looks out the window.",
+        "setup_zh": "在一个下雨的下午，你在一家几乎没人的咖啡馆里。一个年轻的自由写手小白盯着她的笔记本电脑却没有打字。她叹了口气，看着窗外。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你是不是也在等灵感？我已经坐了两个小时了，一个字都没写出来。但奇怪的是，我也不想离开。也许灵感就像这场雨，你不知道什么时候会来。",
+                "text_pinyin": "Nǐ shì bú shì yě zài děng línggǎn? Wǒ yǐjīng zuò le liǎng ge xiǎoshí le, yīge zì dōu méi xiě chūlái. Dàn qíguài de shì, wǒ yě bù xiǎng líkāi. Yěxǔ línggǎn jiù xiàng zhè chǎng yǔ, nǐ bù zhīdào shénme shíhou huì lái.",
+                "text_en": "Are you also waiting for inspiration? I've been sitting here two hours without writing a single word. But strangely, I don't want to leave either. Maybe inspiration is like this rain — you don't know when it'll come."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about waiting for inspiration.",
+                "options": [
+                    {
+                        "text_zh": "灵感可能不是等来的，是在等的过程中慢慢长出来的。你看雨、发呆、喝咖啡——这些不是浪费时间，是在悄悄给灵感准备土壤。",
+                        "text_pinyin": "Línggǎn kěnéng bú shì děng lái de, shì zài děng de guòchéng zhōng mànman zhǎng chūlái de. Nǐ kàn yǔ, fādāi, hē kāfēi — zhèxiē bú shì làngfèi shíjiān, shì zài qiāoqiāo gěi línggǎn zhǔnbèi tǔrǎng.",
+                        "text_en": "Maybe inspiration isn't something you wait for — it grows while you're waiting. Watching rain, daydreaming, drinking coffee — not wasted time, but quietly preparing soil for inspiration.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes inactivity as creative preparation — a comforting perspective."
+                    },
+                    {
+                        "text_zh": "你在写什么？",
+                        "text_pinyin": "Nǐ zài xiě shénme?",
+                        "text_en": "What are you writing?",
+                        "score": 0.0,
+                        "feedback": "Project question when she's talking about creative struggle."
+                    },
+                    {
+                        "text_zh": "你试过去图书馆写吗？那里可能更安静。",
+                        "text_pinyin": "Nǐ shì guò qù túshūguǎn xiě ma? Nàlǐ kěnéng gèng ānjìng.",
+                        "text_en": "Have you tried writing at a library? It might be quieter.",
+                        "score": 0.0,
+                        "feedback": "Venue suggestion that misses the deeper issue."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "给灵感准备土壤……我喜欢这个说法。你知道吗，有时候我觉得写不出来是因为我太着急了。越着急越写不出来，越写不出来越着急。像一个困住自己的圆圈。",
+                "text_pinyin": "Gěi línggǎn zhǔnbèi tǔrǎng…… wǒ xǐhuān zhège shuōfǎ. Nǐ zhīdào ma, yǒu shíhou wǒ juéde xiě bù chūlái shì yīnwèi wǒ tài zháojí le. Yuè zháojí yuè xiě bù chūlái, yuè xiě bù chūlái yuè zháojí. Xiàng yīge kùn zhù zìjǐ de yuánquān.",
+                "text_en": "Preparing soil for inspiration... I like that. You know, sometimes I think the reason I can't write is that I'm too anxious about it. The more anxious, the less I can write; the less I write, the more anxious. It's like a circle trapping myself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the anxiety cycle.",
+                "options": [
+                    {
+                        "text_zh": "打破这个圆圈的方法也许不是更努力地写，而是允许自己不写。不写也没关系。听了雨声、喝了好咖啡，这也是有价值的一天。",
+                        "text_pinyin": "Dǎpò zhège yuánquān de fāngfǎ yěxǔ bú shì gèng nǔlì de xiě, ér shì yǔnxǔ zìjǐ bù xiě. Bù xiě yě méi guānxi. Tīng le yǔ shēng, hē le hǎo kāfēi, zhè yě shì yǒu jiàzhí de yī tiān.",
+                        "text_en": "Maybe breaking the circle isn't writing harder, but allowing yourself not to write. Not writing is okay. You heard rain, drank good coffee — that's still a worthwhile day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compassionate and liberating — gives permission to rest without guilt."
+                    },
+                    {
+                        "text_zh": "你每天写多少字？",
+                        "text_pinyin": "Nǐ měi tiān xiě duōshǎo zì?",
+                        "text_en": "How many words do you write per day?",
+                        "score": 0.0,
+                        "feedback": "Productivity metric during a conversation about creative anxiety."
+                    },
+                    {
+                        "text_zh": "你可以先写个大纲，再慢慢写。",
+                        "text_pinyin": "Nǐ kěyǐ xiān xiě ge dàgāng, zài mànman xiě.",
+                        "text_en": "You could write an outline first, then fill it in.",
+                        "score": 0.0,
+                        "feedback": "Writing advice when she needs emotional support, not technique."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Cafes (咖啡馆) have become important creative spaces in Chinese cities, especially for freelance workers and writers. The concept of 发呆 (fādāi, zoning out / daydreaming) is increasingly valued in Chinese culture as a legitimate form of rest — even designated '发呆' spaces have appeared in some Chinese cities. The creative anxiety Xiao Bai describes resonates with many young Chinese professionals navigating the tension between productivity culture and creative work."
+    }
+}

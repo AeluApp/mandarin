@@ -9,16 +9,32 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 
+from werkzeug.security import generate_password_hash
+
 from .. import db
-from ..auth import create_user, authenticate, get_user_by_id, create_reset_token, reset_password, verify_email
+from ..auth import create_user, authenticate, get_user_by_id, create_reset_token, reset_password, verify_email, _validate_password
 from ..email import send_welcome, send_password_reset, send_email_verification
 from ..mfa import verify_totp, verify_backup_code
 from ..security import log_security_event, SecurityEvent, Severity
-from ..settings import IS_PRODUCTION
+# IS_PRODUCTION no longer needed — invite code enforcement uses feature_flag table
 
 logger = logging.getLogger(__name__)
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+
+
+def _is_native_request():
+    """Detect Capacitor/native iOS requests that can't handle 302 redirects."""
+    # Check for native=1 query param, Capacitor user-agent, or referer from capacitor
+    if request.args.get("native") == "1":
+        return True
+    ua = (request.headers.get("User-Agent") or "").lower()
+    if "capacitor" in ua:
+        return True
+    referer = request.headers.get("Referer") or ""
+    if "capacitor://" in referer:
+        return True
+    return False
 
 
 class User:
@@ -46,6 +62,10 @@ class User:
     @property
     def is_admin(self):
         return self._data.get("is_admin", False)
+
+    @property
+    def role(self):
+        return self._data.get("role", "student")
 
     @property
     def is_authenticated(self):
@@ -78,6 +98,8 @@ def load_user(user_id):
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
+        if _is_native_request():
+            return render_template("index.html")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -101,9 +123,25 @@ def login():
                         # Store pending MFA user in session, don't login yet
                         session["pending_mfa_user_id"] = user_dict["id"]
                         session["pending_mfa_next"] = request.args.get("next")
+                        if _is_native_request():
+                            return render_template("mfa_verify.html")
                         return redirect(url_for("auth.mfa_verify"))
 
+                    # Session fixation protection: clear session before login
+                    session.clear()
                     login_user(User(user_dict), remember=True)
+                    # Lifecycle: user_returned (if last login was 24+ hours ago)
+                    try:
+                        last_login = user_dict.get("last_login_at")
+                        if last_login:
+                            from datetime import datetime, timezone, timedelta
+                            last_dt = datetime.strptime(last_login, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+                            if datetime.now(timezone.utc) - last_dt > timedelta(hours=24):
+                                from ..marketing_hooks import log_lifecycle_event
+                                log_lifecycle_event("user_returned", user_id=str(user_dict["id"]), conn=conn,
+                                                    days_away=round((datetime.now(timezone.utc) - last_dt).total_seconds() / 86400, 1))
+                    except Exception:
+                        pass
                     next_page = request.args.get("next")
                     # Prevent open redirect — only allow relative URLs
                     if next_page:
@@ -114,6 +152,8 @@ def login():
                                                user_id=user_dict["id"],
                                                details=f"blocked redirect to {request.args.get('next')}",
                                                severity=Severity.WARNING)
+                    if _is_native_request():
+                        return render_template("index.html")
                     return redirect(next_page or url_for("index"))
                 else:
                     flash("Invalid email or password.", "error")
@@ -129,6 +169,8 @@ def login():
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
+        if _is_native_request():
+            return render_template("index.html")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -146,13 +188,34 @@ def register():
             flash("Passwords do not match.", "error")
             return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
 
-        if IS_PRODUCTION and not invite_code:
+        # Check feature flag for invite code requirement
+        invite_required = False
+        try:
+            with db.connection() as conn:
+                flag_row = conn.execute(
+                    "SELECT enabled FROM feature_flag WHERE name = 'require_invite_code'"
+                ).fetchone()
+                if flag_row and flag_row["enabled"]:
+                    invite_required = True
+        except (OSError, TypeError):
+            pass
+
+        if invite_required and not invite_code:
             flash("An invite code is required.", "error")
             return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
 
+        # Teacher registration via ?role=teacher
+        role = request.args.get("role", "student")
+        if role not in ("student", "teacher"):
+            role = "student"
+
         try:
             with db.connection() as conn:
-                user_dict = create_user(conn, email, password, display_name, invite_code=invite_code if invite_code else None)
+                user_dict = create_user(conn, email, password, display_name,
+                                        invite_code=invite_code if invite_code else None,
+                                        role=role)
+                # Session fixation protection: clear session before login
+                session.clear()
                 login_user(User(user_dict), remember=True)
                 # Send verification email (Item 16)
                 verify_token = user_dict.pop("_verify_token", None)
@@ -160,6 +223,27 @@ def register():
                     verify_url = request.host_url.rstrip('/') + url_for('auth.verify_email_view', token=verify_token)
                     send_email_verification(email, verify_url)
                 send_welcome(email, display_name)
+                # Capture UTM parameters for attribution
+                try:
+                    utm_source = request.args.get("utm_source") or request.form.get("utm_source") or ""
+                    utm_medium = request.args.get("utm_medium") or request.form.get("utm_medium") or ""
+                    utm_campaign = request.args.get("utm_campaign") or request.form.get("utm_campaign") or ""
+                    if utm_source or utm_medium or utm_campaign:
+                        conn.execute(
+                            "UPDATE user SET utm_source=?, utm_medium=?, utm_campaign=? WHERE id=?",
+                            (utm_source or None, utm_medium or None, utm_campaign or None, user_dict["id"])
+                        )
+                        conn.commit()
+                except Exception:
+                    pass
+                # Lifecycle: signup
+                try:
+                    from ..marketing_hooks import log_lifecycle_event
+                    log_lifecycle_event("signup", user_id=str(user_dict["id"]), conn=conn)
+                except Exception:
+                    pass
+                if _is_native_request():
+                    return render_template("index.html")
                 return redirect(url_for("index"))
         except ValueError as e:
             flash(str(e), "error")
@@ -169,7 +253,9 @@ def register():
             flash("An error occurred. Please try again.", "error")
             return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
 
-    return render_template("register.html", email="", display_name="", invite_code="")
+    role = request.args.get("role", "student")
+    return render_template("register.html", email="", display_name="", invite_code="",
+                           teacher_mode=(role == "teacher"))
 
 
 @auth_bp.route("/mfa-verify", methods=["GET", "POST"])
@@ -212,15 +298,19 @@ def mfa_verify():
                 if verified:
                     user_dict = get_user_by_id(conn, pending_user_id)
                     if user_dict:
+                        # Save redirect URL before clearing session
+                        next_page = session.get("pending_mfa_next")
+                        # Session fixation protection: clear session before login
+                        session.clear()
                         login_user(User(user_dict), remember=True)
                         log_security_event(conn, SecurityEvent.MFA_VERIFIED,
                                            user_id=pending_user_id)
-                        next_page = session.pop("pending_mfa_next", None)
-                        session.pop("pending_mfa_user_id", None)
                         if next_page:
                             parsed = urlparse(next_page)
                             if parsed.netloc or parsed.scheme:
                                 next_page = None
+                        if _is_native_request():
+                            return render_template("index.html")
                         return redirect(next_page or url_for("index"))
 
                 log_security_event(conn, SecurityEvent.MFA_FAILED,
@@ -244,9 +334,11 @@ def logout():
     try:
         with db.connection() as conn:
             log_security_event(conn, SecurityEvent.LOGOUT, user_id=user_id)
-    except (OSError, TypeError):
-        pass
+    except (OSError, TypeError) as e:
+        logger.warning("Failed to log LOGOUT security event for user_id=%s: %s", user_id, e)
     logout_user()
+    if _is_native_request():
+        return render_template("login.html", email="")
     return redirect(url_for("auth.login"))
 
 
@@ -364,3 +456,47 @@ def unsubscribe():
         flash("An error occurred.", "error")
 
     return redirect(url_for("auth.login"))
+
+
+@auth_bp.route("/api/account/change-password", methods=["POST"])
+@login_required
+def change_password():
+    """Change password while logged in. Requires old password verification."""
+    data = request.get_json(silent=True) or {}
+    old_password = data.get("old_password") or ""
+    new_password = data.get("new_password") or ""
+
+    if not old_password or not new_password:
+        return jsonify({"error": "Old password and new password are required."}), 400
+
+    try:
+        with db.connection() as conn:
+            # Verify old password
+            user_dict = authenticate(conn, current_user.email, old_password)
+            if not user_dict:
+                log_security_event(conn, SecurityEvent.PASSWORD_RESET_FAILED,
+                                   user_id=current_user.id,
+                                   details="change-password: wrong old password",
+                                   severity=Severity.WARNING)
+                return jsonify({"error": "Current password is incorrect."}), 403
+
+            # Validate new password
+            _validate_password(new_password)
+
+            # Update hash and revoke all refresh tokens (force re-login)
+            password_hash = generate_password_hash(new_password, method="pbkdf2:sha256")
+            conn.execute(
+                """UPDATE user SET password_hash = ?, updated_at = datetime('now'),
+                   refresh_token_hash = NULL, refresh_token_expires = NULL
+                   WHERE id = ?""",
+                (password_hash, current_user.id),
+            )
+            conn.commit()
+            log_security_event(conn, SecurityEvent.PASSWORD_CHANGED, user_id=current_user.id)
+
+            return jsonify({"changed": True})
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except (OSError, TypeError) as e:
+        logger.error("Change password error: %s", e)
+        return jsonify({"error": "An error occurred. Please try again."}), 500

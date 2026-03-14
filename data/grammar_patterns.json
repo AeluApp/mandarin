@@ -1,116 +1,2571 @@
 {
   "grammar_patterns": {
-    "Subject + \u662f + Object": ["\u662f"],
-    "Subject + \u5f88 + Adjective": ["\u5f88"],
-    "\u4e0d negation": ["\u4e0d"],
-    "\u6ca1 negation": ["\u6ca1"],
-    "\u7684 possession/modification": ["\u7684"],
-    "\u4e86 completed action": ["\u4e86"],
-    "\u5417 yes/no question": ["\u5417"],
-    "\u5462 follow-up question": ["\u5462"],
-    "Measure words (\u4e2a/\u672c/\u676f)": ["\u4e2a", "\u672c", "\u676f", "\u5757", "\u6761", "\u5f20"],
-    "\u5728 location": ["\u5728"],
-    "\u8fc7 experience": ["\u8fc7"],
-    "\u6b63\u5728 ongoing action": ["\u6b63\u5728"],
-    "\u6bd4 comparison": ["\u6bd4"],
-    "\u8981/\u60f3 want/plan": ["\u8981", "\u60f3"],
-    "\u53ef\u4ee5/\u80fd ability/permission": ["\u53ef\u4ee5", "\u80fd"],
-    "\u5f97 complement degree": ["\u5f97"],
-    "\u4ece...\u5230 from...to": ["\u4ece", "\u5230"],
-    "Time + \u7684\u65f6\u5019": ["\u7684\u65f6\u5019", "\u65f6\u5019"],
-    "\u628a disposal": ["\u628a"],
-    "\u88ab passive": ["\u88ab"],
-    "\u662f...\u7684 emphasis": ["\u662f", "\u7684"],
-    "\u8d8a\u6765\u8d8a increasingly": ["\u8d8a\u6765\u8d8a", "\u8d8a"],
-    "\u53c8...\u53c8 both...and": ["\u53c8"],
-    "Result complement (\u5230/\u5b8c/\u597d)": ["\u5230", "\u5b8c", "\u597d"],
-    "Direction complement (\u6765/\u53bb/\u4e0a/\u4e0b)": ["\u8fdb\u6765", "\u51fa\u53bb", "\u4e0a\u6765", "\u4e0b\u53bb", "\u56de\u6765", "\u8fc7\u6765", "\u8fc7\u53bb"],
-    "\u9664\u4e86...\u4ee5\u5916": ["\u9664\u4e86", "\u4ee5\u5916"],
-    "\u867d\u7136...\u4f46\u662f although...but": ["\u867d\u7136", "\u4f46\u662f"],
-    "\u4e0d\u4f46...\u800c\u4e14 not only...but also": ["\u4e0d\u4f46", "\u800c\u4e14"],
-    "\u5982\u679c...\u5c31 if...then": ["\u5982\u679c"],
-    "\u56e0\u4e3a...\u6240\u4ee5 because...therefore": ["\u56e0\u4e3a", "\u6240\u4ee5"],
-    "\u8fde...\u90fd/\u4e5f even": ["\u8fde"],
-    "\u4e00\u8fb9...\u4e00\u8fb9 while simultaneously": ["\u4e00\u8fb9"],
-    "\u5bf9...\u6765\u8bf4 for/regarding": ["\u5bf9", "\u6765\u8bf4"],
-    "\u65e2\u7136...\u5c31 since...then": ["\u65e2\u7136"],
-    "\u5373\u4f7f...\u4e5f even if...also": ["\u5373\u4f7f"],
-    "\u4e0d\u7ba1...\u90fd regardless": ["\u4e0d\u7ba1"],
-    "\u4e0e\u5176...\u4e0d\u5982 rather than...better to": ["\u4e0e\u5176", "\u4e0d\u5982"],
-    "\u4e4b\u6240\u4ee5...\u662f\u56e0\u4e3a the reason...is because": ["\u4e4b\u6240\u4ee5", "\u662f\u56e0\u4e3a"],
-    "\u4ee5...\u4e3a take...as": ["\u4ee5"],
-    "\u4f55\u51b5 let alone": ["\u4f55\u51b5"],
-    "\u4ee5\u81f3\u4e8e so much that": ["\u4ee5\u81f3\u4e8e"],
-    "\u56fa\u7136...\u4f46 admittedly...but": ["\u56fa\u7136"],
-    "\u5c31...\u800c\u8a00 as far as...concerned": ["\u800c\u8a00"],
-    "\u4e0d\u4ec5...\u53cd\u800c not only not...but instead": ["\u4e0d\u4ec5", "\u53cd\u800c"],
-    "\u975e\u4f46...\u53cd\u800c not only not...but on the contrary": ["\u975e\u4f46", "\u53cd\u800c"],
-    "\u65e0\u8bba\u5982\u4f55 no matter what": ["\u65e0\u8bba\u5982\u4f55"],
-    "\u81f3\u4e8e as for / regarding": ["\u81f3\u4e8e"],
-    "\u4ece\u800c thereby / thus": ["\u4ece\u800c"],
-    "\u4ee5\u514d in order to avoid": ["\u4ee5\u514d"],
-    "\u5c3d\u7ba1 despite / even though": ["\u5c3d\u7ba1"],
-    "\u51b5\u4e14 moreover / besides": ["\u51b5\u4e14"],
-    "\u5018\u82e5 if / supposing": ["\u5018\u82e5"],
-    "\u9274\u4e8e in view of / considering": ["\u9274\u4e8e"],
-    "\u6709\u9274\u4e8e\u6b64 in light of this": ["\u6709\u9274\u4e8e\u6b64"],
-    "\u7eb5\u7136 even if / even though": ["\u7eb5\u7136"],
-    "\u4e0d\u5916\u4e4e nothing more than": ["\u4e0d\u5916\u4e4e"],
-    "\u672a\u514d rather / unavoidably": ["\u672a\u514d"],
-    "\u5c82\u975e isn't it / rhetorical question": ["\u5c82\u975e"],
-    "\u83ab\u975e could it be that": ["\u83ab\u975e"],
-    "\u65e0\u975e nothing but / merely": ["\u65e0\u975e"],
-    "\u8bda\u7136 admittedly / indeed": ["\u8bda\u7136"],
-    "\u59d1\u4e14 for the time being": ["\u59d1\u4e14"]
+    "Subject + 是 + Object": [
+      "是"
+    ],
+    "Subject + 很 + Adjective": [
+      "很"
+    ],
+    "不 negation": [
+      "不"
+    ],
+    "没 negation": [
+      "没"
+    ],
+    "的 possession/modification": [
+      "的"
+    ],
+    "了 completed action": [
+      "了"
+    ],
+    "吗 yes/no question": [
+      "吗"
+    ],
+    "呢 follow-up question": [
+      "呢"
+    ],
+    "Measure words (个/本/杯)": [
+      "个",
+      "本",
+      "杯",
+      "块",
+      "条",
+      "张"
+    ],
+    "在 location": [
+      "在"
+    ],
+    "过 experience": [
+      "过"
+    ],
+    "正在 ongoing action": [
+      "正在"
+    ],
+    "比 comparison": [
+      "比"
+    ],
+    "要/想 want/plan": [
+      "要",
+      "想"
+    ],
+    "可以/能 ability/permission": [
+      "可以",
+      "能"
+    ],
+    "得 complement degree": [
+      "得"
+    ],
+    "从...到 from...to": [
+      "从",
+      "到"
+    ],
+    "Time + 的时候": [
+      "的时候",
+      "时候"
+    ],
+    "把 disposal": [
+      "把"
+    ],
+    "被 passive": [
+      "被"
+    ],
+    "是...的 emphasis": [
+      "是",
+      "的"
+    ],
+    "越来越 increasingly": [
+      "越来越",
+      "越"
+    ],
+    "又...又 both...and": [
+      "又"
+    ],
+    "Result complement (到/完/好)": [
+      "到",
+      "完",
+      "好"
+    ],
+    "Direction complement (来/去/上/下)": [
+      "进来",
+      "出去",
+      "上来",
+      "下去",
+      "回来",
+      "过来",
+      "过去"
+    ],
+    "除了...以外": [
+      "除了",
+      "以外"
+    ],
+    "虽然...但是 although...but": [
+      "虽然",
+      "但是"
+    ],
+    "不但...而且 not only...but also": [
+      "不但",
+      "而且"
+    ],
+    "如果...就 if...then": [
+      "如果"
+    ],
+    "因为...所以 because...therefore": [
+      "因为",
+      "所以"
+    ],
+    "连...都/也 even": [
+      "连"
+    ],
+    "一边...一边 while simultaneously": [
+      "一边"
+    ],
+    "对...来说 for/regarding": [
+      "对",
+      "来说"
+    ],
+    "既然...就 since...then": [
+      "既然"
+    ],
+    "即使...也 even if...also": [
+      "即使"
+    ],
+    "不管...都 regardless": [
+      "不管"
+    ],
+    "与其...不如 rather than...better to": [
+      "与其",
+      "不如"
+    ],
+    "之所以...是因为 the reason...is because": [
+      "之所以",
+      "是因为"
+    ],
+    "以...为 take...as": [
+      "以"
+    ],
+    "何况 let alone": [
+      "何况"
+    ],
+    "以至于 so much that": [
+      "以至于"
+    ],
+    "固然...但 admittedly...but": [
+      "固然"
+    ],
+    "就...而言 as far as...concerned": [
+      "而言"
+    ],
+    "不仅...反而 not only not...but instead": [
+      "不仅",
+      "反而"
+    ],
+    "非但...反而 not only not...but on the contrary": [
+      "非但",
+      "反而"
+    ],
+    "无论如何 no matter what": [
+      "无论如何"
+    ],
+    "至于 as for / regarding": [
+      "至于"
+    ],
+    "从而 thereby / thus": [
+      "从而"
+    ],
+    "以免 in order to avoid": [
+      "以免"
+    ],
+    "尽管 despite / even though": [
+      "尽管"
+    ],
+    "况且 moreover / besides": [
+      "况且"
+    ],
+    "倘若 if / supposing": [
+      "倘若"
+    ],
+    "鉴于 in view of / considering": [
+      "鉴于"
+    ],
+    "有鉴于此 in light of this": [
+      "有鉴于此"
+    ],
+    "纵然 even if / even though": [
+      "纵然"
+    ],
+    "不外乎 nothing more than": [
+      "不外乎"
+    ],
+    "未免 rather / unavoidably": [
+      "未免"
+    ],
+    "岂非 isn't it / rhetorical question": [
+      "岂非"
+    ],
+    "莫非 could it be that": [
+      "莫非"
+    ],
+    "无非 nothing but / merely": [
+      "无非"
+    ],
+    "诚然 admittedly / indeed": [
+      "诚然"
+    ],
+    "姑且 for the time being": [
+      "姑且"
+    ],
+    "有 have/exist": [
+      "有"
+    ],
+    "也 also": [
+      "也"
+    ],
+    "都 all/both": [
+      "都"
+    ],
+    "Question words 谁/什么/哪/哪儿": [
+      "谁",
+      "什么",
+      "哪",
+      "哪儿",
+      "哪里"
+    ],
+    "几/多少 how many": [
+      "几",
+      "多少"
+    ],
+    "会 can/will": [
+      "会"
+    ],
+    "太...了 too...": [
+      "太"
+    ],
+    "这/那 demonstratives": [
+      "这",
+      "那"
+    ],
+    "和 and": [
+      "和"
+    ],
+    "还是 or (choice question)": [
+      "还是"
+    ],
+    "去/来+V purpose": [
+      "去",
+      "来"
+    ],
+    "Verb reduplication 看看": [
+      "看看",
+      "试试",
+      "想想",
+      "说说",
+      "等等",
+      "听听"
+    ],
+    "吧 suggestion": [
+      "吧"
+    ],
+    "喜欢+V like doing": [
+      "喜欢"
+    ],
+    "多+adj how (degree question)": [
+      "多大",
+      "多高",
+      "多远",
+      "多长",
+      "多少"
+    ],
+    "Time word placement": [
+      "昨天",
+      "今天",
+      "明天",
+      "现在",
+      "以前",
+      "以后"
+    ],
+    "还 still/in addition": [
+      "还"
+    ],
+    "二 vs 两 two": [
+      "两"
+    ],
+    "就 then/immediately": [
+      "就"
+    ],
+    "才 only then/only": [
+      "才"
+    ],
+    "已经...了 already": [
+      "已经"
+    ],
+    "一点儿 a little": [
+      "一点儿",
+      "一点"
+    ],
+    "有点儿 somewhat (negative)": [
+      "有点儿",
+      "有点"
+    ],
+    "最 superlative": [
+      "最"
+    ],
+    "先...再 first...then": [
+      "先"
+    ],
+    "又 again (past)": [
+      "又"
+    ],
+    "再 again (future)": [
+      "再"
+    ],
+    "别 don't (imperative)": [
+      "别"
+    ],
+    "V+着 continuous state": [
+      "着"
+    ],
+    "地 adverbial particle": [
+      "地"
+    ],
+    "给 for/give": [
+      "给"
+    ],
+    "让/叫 causative": [
+      "让",
+      "叫"
+    ],
+    "向/往 towards": [
+      "向",
+      "往"
+    ],
+    "...的话 if (colloquial)": [
+      "的话"
+    ],
+    "一下 briefly": [
+      "一下"
+    ],
+    "快要...了 about to": [
+      "快要",
+      "快"
+    ],
+    "只 only": [
+      "只"
+    ],
+    "极了 extremely": [
+      "极了"
+    ],
+    "跟...一样 same as": [
+      "一样",
+      "跟"
+    ],
+    "A不如B not as good as": [
+      "不如"
+    ],
+    "一...就 as soon as": [
+      "一"
+    ],
+    "Potential complement V得/不了": [
+      "得",
+      "不了",
+      "不到",
+      "不完"
+    ],
+    "只要...就 as long as": [
+      "只要"
+    ],
+    "只好 have no choice but": [
+      "只好"
+    ],
+    "看起来 looks like": [
+      "看起来"
+    ],
+    "根据 according to": [
+      "根据"
+    ],
+    "关于 about/concerning": [
+      "关于"
+    ],
+    "原来 originally/turns out": [
+      "原来"
+    ],
+    "总是 always": [
+      "总是"
+    ],
+    "差不多 almost/about the same": [
+      "差不多"
+    ],
+    "为了 in order to": [
+      "为了"
+    ],
+    "对...感兴趣 interested in": [
+      "感兴趣"
+    ],
+    "然后 then/afterwards": [
+      "然后"
+    ],
+    "虽然...但是 although (basic)": [
+      "虽然"
+    ],
+    "竟然 unexpectedly": [
+      "竟然"
+    ],
+    "反正 anyway": [
+      "反正"
+    ],
+    "难道 rhetorical question": [
+      "难道"
+    ],
+    "至少 at least": [
+      "至少"
+    ],
+    "甚至 even": [
+      "甚至"
+    ],
+    "尤其 especially": [
+      "尤其"
+    ],
+    "首先...其次 firstly...secondly": [
+      "首先",
+      "其次"
+    ],
+    "总之 in short": [
+      "总之"
+    ],
+    "另外 in addition": [
+      "另外"
+    ],
+    "否则 otherwise": [
+      "否则"
+    ],
+    "除非 unless": [
+      "除非"
+    ],
+    "倒 contrary to expectation": [
+      "倒"
+    ],
+    "毕竟 after all": [
+      "毕竟"
+    ],
+    "万一 in case": [
+      "万一"
+    ],
+    "难免 hard to avoid": [
+      "难免"
+    ],
+    "何必 why bother": [
+      "何必"
+    ],
+    "未必 not necessarily": [
+      "未必"
+    ],
+    "果然 as expected": [
+      "果然"
+    ],
+    "似乎 seemingly": [
+      "似乎"
+    ],
+    "到底 after all/ultimately": [
+      "到底"
+    ],
+    "从此 from then on": [
+      "从此"
+    ],
+    "据说 it is said": [
+      "据说"
+    ],
+    "可见 it can be seen": [
+      "可见"
+    ],
+    "此外 furthermore": [
+      "此外"
+    ],
+    "因此 therefore": [
+      "因此"
+    ],
+    "向来 always/all along": [
+      "向来"
+    ],
+    "不免 inevitably": [
+      "不免"
+    ],
+    "反之 on the contrary": [
+      "反之"
+    ],
+    "无疑 undoubtedly": [
+      "无疑"
+    ],
+    "不禁 can't help but": [
+      "不禁"
+    ],
+    "简直 simply/virtually": [
+      "简直"
+    ],
+    "偏偏 contrary to expectations": [
+      "偏偏"
+    ],
+    "归根结底 in the final analysis": [
+      "归根结底"
+    ],
+    "总而言之 in summary": [
+      "总而言之"
+    ],
+    "进而 and then further": [
+      "进而"
+    ],
+    "与其说...不如说 rather than...better to say": [
+      "与其说",
+      "不如说"
+    ],
+    "归根到底 at the root": [
+      "归根到底"
+    ],
+    "可想而知 as one can imagine": [
+      "可想而知"
+    ],
+    "由此 from this / thereby": [
+      "由此"
+    ],
+    "与此同时 at the same time": [
+      "与此同时"
+    ],
+    "充其量 at most": [
+      "充其量"
+    ],
+    "基于 based on": [
+      "基于"
+    ],
+    "何尝 when has...ever": [
+      "何尝"
+    ],
+    "难怪 no wonder": [
+      "难怪"
+    ],
+    "之际 at the time of": [
+      "之际"
+    ],
+    "趁 take advantage of": [
+      "趁"
+    ],
+    "所谓 so-called": [
+      "所谓"
+    ],
+    "无从 have no way to": [
+      "无从"
+    ],
+    "归咎于 attribute blame to": [
+      "归咎于"
+    ],
+    "但凡 if only / whenever": [
+      "但凡"
+    ],
+    "势必 bound to / inevitably": [
+      "势必"
+    ],
+    "固有 inherent": [
+      "固有"
+    ],
+    "无可厚非 understandable / beyond reproach": [
+      "无可厚非"
+    ],
+    "动辄 easily / at every turn": [
+      "动辄"
+    ],
+    "焉知 how would one know": [
+      "焉知"
+    ],
+    "岂料 who would have thought": [
+      "岂料"
+    ],
+    "殊不知 little does one know": [
+      "殊不知"
+    ],
+    "断然 absolutely / resolutely": [
+      "断然"
+    ],
+    "不啻 no less than": [
+      "不啻"
+    ],
+    "何以 how / why (classical)": [
+      "何以"
+    ],
+    "怎么 how": [
+      "怎么"
+    ],
+    "为什么 why": [
+      "为什么"
+    ],
+    "在+V progressive": [
+      "在"
+    ],
+    "到 arrive/to": [
+      "到"
+    ],
+    "从 from": [
+      "从"
+    ],
+    "Location words 上/下/里/旁边": [
+      "上",
+      "下",
+      "里",
+      "旁边"
+    ],
+    "Duration complement V+了+time": [],
+    "每 every": [
+      "每"
+    ],
+    "一些 some": [
+      "一些"
+    ],
+    "很多 many/much": [
+      "很多"
+    ],
+    "真 really": [
+      "真"
+    ],
+    "可能 maybe": [
+      "可能"
+    ],
+    "应该 should": [
+      "应该"
+    ],
+    "得(děi) must/have to": [
+      "得"
+    ],
+    "到...去 go to": [
+      "到"
+    ],
+    "更 even more": [
+      "更"
+    ],
+    "或者 or (statements)": [
+      "或者"
+    ],
+    "离 distance from": [
+      "离"
+    ],
+    "对 towards/regarding": [
+      "对"
+    ],
+    "左右 approximately": [
+      "左右"
+    ],
+    "以前 before": [
+      "以前"
+    ],
+    "以后 after": [
+      "以后"
+    ],
+    "一定 definitely": [
+      "一定"
+    ],
+    "必须 must": [
+      "必须"
+    ],
+    "可是 but": [
+      "可是"
+    ],
+    "所以 so/therefore": [
+      "所以"
+    ],
+    "虽然...但是 although (HSK2 intro)": [
+      "虽然"
+    ],
+    "刚 just (recently)": [
+      "刚"
+    ],
+    "一直 continuously": [
+      "一直"
+    ],
+    "马上 immediately": [
+      "马上"
+    ],
+    "其实 actually": [
+      "其实"
+    ],
+    "终于 finally": [
+      "终于"
+    ],
+    "刚才 just now": [
+      "刚才"
+    ],
+    "特别 especially/particularly": [
+      "特别"
+    ],
+    "几乎 almost": [
+      "几乎"
+    ],
+    "突然 suddenly": [
+      "突然"
+    ],
+    "虽然...可是 although...but (variant)": [
+      "虽然",
+      "可是"
+    ],
+    "因为...所以 because...so (basic)": [
+      "因为",
+      "所以"
+    ],
+    "一边...一边 while doing (basic)": [
+      "一边"
+    ],
+    "不但...而且 not only...but (basic)": [
+      "不但",
+      "而且"
+    ],
+    "恐怕 I'm afraid": [
+      "恐怕"
+    ],
+    "果然 as expected (basic)": [
+      "果然"
+    ],
+    "居然 surprisingly": [
+      "居然"
+    ],
+    "A比B+adj+多了 much more comparison": [
+      "多了"
+    ],
+    "越A越B the more...the more": [
+      "越"
+    ],
+    "不是...而是 not X but Y": [
+      "不是",
+      "而是"
+    ],
+    "到处 everywhere": [
+      "到处"
+    ],
+    "一直 continuously (directional)": [
+      "一直"
+    ],
+    "不得不 have no choice but": [
+      "不得不"
+    ],
+    "宁可...也不 would rather...than": [
+      "宁可"
+    ],
+    "无论...都 regardless": [
+      "无论"
+    ],
+    "由于 due to": [
+      "由于"
+    ],
+    "随着 along with": [
+      "随着"
+    ],
+    "相反 on the contrary": [
+      "相反"
+    ],
+    "不仅...而且 not only...but also (formal)": [
+      "不仅",
+      "而且"
+    ],
+    "只有...才 only if...then": [
+      "只有"
+    ],
+    "要不然 otherwise (colloquial)": [
+      "要不然"
+    ],
+    "并 and/moreover (formal)": [
+      "并"
+    ],
+    "以及 as well as": [
+      "以及"
+    ],
+    "于是 thereupon": [
+      "于是"
+    ],
+    "实际上 actually/in fact": [
+      "实际上"
+    ],
+    "一方面...另一方面 on one hand...on the other": [
+      "一方面",
+      "另一方面"
+    ],
+    "到...为止 until": [
+      "为止"
+    ],
+    "按照 according to": [
+      "按照"
+    ],
+    "代替 instead of": [
+      "代替"
+    ],
+    "恐怕 I'm afraid (formal)": [
+      "恐怕"
+    ],
+    "显然 obviously": [
+      "显然"
+    ],
+    "既...又 both...and (formal)": [
+      "既"
+    ],
+    "而 but/and/yet": [
+      "而"
+    ],
+    "于是 thereupon (formal)": [
+      "于是"
+    ],
+    "逐渐 gradually": [
+      "逐渐"
+    ],
+    "一旦 once/if ever": [
+      "一旦"
+    ],
+    "不得已 have no choice": [
+      "不得已"
+    ],
+    "不由得 can't help but": [
+      "不由得"
+    ],
+    "恰好 happen to": [
+      "恰好"
+    ],
+    "从而 thereby (HSK5 intro)": [
+      "从而"
+    ],
+    "何况 let alone (HSK5 intro)": [
+      "何况"
+    ],
+    "以免 so as to avoid (HSK5 intro)": [
+      "以免"
+    ],
+    "尚且...何况 even X...let alone Y": [
+      "尚且",
+      "何况"
+    ],
+    "势必 is bound to (intro)": [
+      "势必"
+    ],
+    "然而 however": [
+      "然而"
+    ],
+    "反倒 on the contrary": [
+      "反倒"
+    ],
+    "况且 moreover (HSK5 intro)": [
+      "况且"
+    ],
+    "以便 in order to": [
+      "以便"
+    ],
+    "不至于 not so bad as to": [
+      "不至于"
+    ],
+    "难以 hard to": [
+      "难以"
+    ],
+    "无非 nothing but (HSK6 intro)": [
+      "无非"
+    ],
+    "迫不得已 forced by circumstances": [
+      "迫不得已"
+    ],
+    "以至于 to the extent that (HSK6)": [
+      "以至于"
+    ],
+    "尚 still/yet (formal)": [
+      "尚"
+    ],
+    "乃至 and even": [
+      "乃至"
+    ],
+    "并非 not at all": [
+      "并非"
+    ],
+    "一旦...就 once...then": [
+      "一旦"
+    ],
+    "出于 out of/based on": [
+      "出于"
+    ],
+    "不惜 not hesitate to": [
+      "不惜"
+    ],
+    "可谓 can be called": [
+      "可谓"
+    ],
+    "以致 so that (negative result)": [
+      "以致"
+    ],
+    "与其 rather than (standalone)": [
+      "与其"
+    ],
+    "非...不可 must/have to": [
+      "不可"
+    ],
+    "莫过于 nothing more than": [
+      "莫过于"
+    ],
+    "不得而知 unknown": [
+      "不得而知"
+    ],
+    "有所 somewhat/to some extent": [
+      "有所"
+    ],
+    "乃 is/indeed (literary)": [
+      "乃"
+    ],
+    "未尝 have never": [
+      "未尝"
+    ],
+    "不妨 might as well": [
+      "不妨"
+    ],
+    "非...不可 must (HSK7)": [
+      "非",
+      "不可"
+    ],
+    "唯有 only": [
+      "唯有"
+    ],
+    "据此 based on this": [
+      "据此"
+    ],
+    "尤为 especially (formal)": [
+      "尤为"
+    ],
+    "一度 once/at one time": [
+      "一度"
+    ],
+    "不失为 can be considered": [
+      "不失为"
+    ],
+    "有待 remain to be": [
+      "有待"
+    ],
+    "无不 without exception": [
+      "无不"
+    ],
+    "以至于 result of excess (HSK7)": [
+      "以至于"
+    ],
+    "诚如 just as (literary)": [
+      "诚如"
+    ],
+    "不啻于 no less than": [
+      "不啻于"
+    ],
+    "无可奈何 helpless": [
+      "无可奈何"
+    ],
+    "不遗余力 spare no effort": [
+      "不遗余力"
+    ],
+    "与日俱增 increase day by day": [
+      "与日俱增"
+    ],
+    "言之有理 makes sense": [
+      "言之有理"
+    ],
+    "不言而喻 goes without saying": [
+      "不言而喻"
+    ],
+    "有目共睹 obvious to all": [
+      "有目共睹"
+    ],
+    "以身作则 lead by example": [
+      "以身作则"
+    ],
+    "无所不在 omnipresent": [
+      "无所不在"
+    ],
+    "望文生义 take literally": [
+      "望文生义"
+    ],
+    "顾名思义 as the name suggests": [
+      "顾名思义"
+    ],
+    "于斯 at this/herein": [
+      "于斯"
+    ],
+    "有过之而无不及 even surpass": [
+      "有过之而无不及"
+    ],
+    "当之无愧 deserve without doubt": [
+      "当之无愧"
+    ],
+    "亦 also (literary)": [
+      "亦"
+    ],
+    "乃至于 and even (extending scope)": [
+      "乃至于"
+    ],
+    "无以 have nothing to (classical)": [
+      "无以"
+    ],
+    "不置可否 neither confirm nor deny": [
+      "不置可否"
+    ],
+    "了 perfective & change-of-state": [
+      "了"
+    ],
+    "真 really/truly": [
+      "真"
+    ],
+    "可能 maybe/possibly": [
+      "可能"
+    ],
+    "应该 should/ought to": [
+      "应该"
+    ],
+    "得 (děi) must/have to": [
+      "得(děi)"
+    ],
+    "到...去 go to (a place)": [
+      "到…去"
+    ],
+    "以前 before/in the past": [
+      "以前"
+    ],
+    "以后 after/in the future": [
+      "以后"
+    ],
+    "一定 definitely/certainly": [
+      "一定"
+    ],
+    "可是 but/however": [
+      "可是"
+    ],
+    "一直 continuously/all along": [
+      "一直"
+    ],
+    "马上 immediately/right away": [
+      "马上"
+    ],
+    "恐怕 I'm afraid that": [
+      "恐怕"
+    ],
+    "A比B+adj+多了 much more than": [
+      "比+多了"
+    ],
+    "不得不 have no choice but to": [
+      "不得不"
+    ],
+    "无论...都 regardless of": [
+      "无论…都"
+    ],
+    "随着 along with / as": [
+      "随着"
+    ],
+    "并 and/moreover (formal conjunction)": [
+      "并"
+    ],
+    "于是 thereupon/so": [
+      "于是"
+    ],
+    "到...为止 up until": [
+      "到…为止"
+    ],
+    "代替 instead of / in place of": [
+      "代替"
+    ],
+    "恐怕 I'm afraid (formal context)": [
+      "恐怕(正式)"
+    ],
+    "而 conjunction (but/and/yet)": [
+      "而"
+    ],
+    "一旦 once / if ever": [
+      "一旦"
+    ],
+    "从而 thereby (HSK 5 intro)": [
+      "从而"
+    ],
+    "何况 let alone (HSK 5 intro)": [
+      "何况"
+    ],
+    "以免 so as to avoid (HSK 5 intro)": [
+      "以免"
+    ],
+    "尚且...何况 even X, let alone Y": [
+      "尚且…何况"
+    ],
+    "势必 is bound to": [
+      "势必"
+    ],
+    "况且 moreover (HSK 5 intro)": [
+      "况且"
+    ],
+    "无非 nothing but (HSK 6 intro)": [
+      "无非"
+    ],
+    "以至于 to the extent that (HSK 6 usage)": [
+      "以至于"
+    ],
+    "并非 not at all / is not": [
+      "并非"
+    ],
+    "出于 out of / based on": [
+      "出于"
+    ],
+    "非...不可 must / have to": [
+      "非…不可"
+    ],
+    "莫过于 nothing more than / the greatest is": [
+      "莫过于"
+    ],
+    "不得而知 unknown / cannot be known": [
+      "不得而知"
+    ],
+    "有所 somewhat / to some extent": [
+      "有所"
+    ],
+    "非…不可 must": [
+      "非…不可"
+    ],
+    "一度 once / at one time": [
+      "一度"
+    ],
+    "以至于 to the extent that": [
+      "以至于(HSK7)"
+    ],
+    "无可奈何 helpless / have no alternative": [
+      "无可奈何"
+    ],
+    "言之有理 what you said makes sense": [
+      "言之有理"
+    ],
+    "于斯 at this / herein": [
+      "于斯"
+    ],
+    "当之无愧 deserve without a doubt": [
+      "当之无愧"
+    ],
+    "乃至于 and even": [
+      "乃至于"
+    ],
+    "无以 have nothing to / unable to": [
+      "无以"
+    ],
+    "Noun predicate sentence": [
+      "名词谓语句"
+    ],
+    "年/月/日 date format": [
+      "年月日"
+    ],
+    "点/分 telling time": [
+      "点/分"
+    ],
+    "Double object V+IO+DO": [
+      "双宾语结构"
+    ],
+    "SVO basic word order": [
+      "SVO基本语序"
+    ],
+    "Adjective predicate without 是": [
+      "形容词谓语句"
+    ],
+    "Number + measure word + noun": [
+      "数+量词+名词"
+    ],
+    "是不是 A-not-A question": [
+      "是不是"
+    ],
+    "V不V A-not-A question": [
+      "V不V问句"
+    ],
+    "想/要 expressing desire": [
+      "想/要(愿望)"
+    ],
+    "岁 expressing age": [
+      "岁"
+    ],
+    "要是...就 if...then (colloquial)": [
+      "要是…就"
+    ],
+    "V+得多 much more (degree)": [
+      "V+得多"
+    ],
+    "又...又 both...and (HSK2 intro)": [
+      "又…又(初级)"
+    ],
+    "比+adj+一点 a bit more": [
+      "比+一点"
+    ],
+    "V+到 result 'arrive/reach'": [
+      "V+到(结果)"
+    ],
+    "V+见 result 'perceive'": [
+      "V+见(感知)"
+    ],
+    "V+懂 result 'understand'": [
+      "V+懂(理解)"
+    ],
+    "V+会 result 'learn/master'": [
+      "V+会(学会)"
+    ],
+    "V+完 result 'finish'": [
+      "V+完(完成)"
+    ],
+    "V+开 result 'open/apart'": [
+      "V+开(打开/分开)"
+    ],
+    "V+上 directional 'up/attach'": [
+      "V+上(向上/接触)"
+    ],
+    "V+下 directional 'down/remain'": [
+      "V+下(向下/留下)"
+    ],
+    "V+来 directional 'towards speaker'": [
+      "V+来(靠近)"
+    ],
+    "V+去 directional 'away from speaker'": [
+      "V+去(远离)"
+    ],
+    "一会儿 a moment": [
+      "一会儿"
+    ],
+    "多么 how (exclamatory)": [
+      "多么"
+    ],
+    "Exclamatory particles 哦/啊/呀": [
+      "感叹助词"
+    ],
+    "一共 altogether": [
+      "一共"
+    ],
+    "当然 of course": [
+      "当然"
+    ],
+    "几+MW approximate small number": [
+      "几+量词(概数)"
+    ],
+    "百/千/万 large numbers": [
+      "百/千/万"
+    ],
+    "第+number ordinal": [
+      "第+数字"
+    ],
+    "得 complement marker (structural)": [
+      "得(补语标记)"
+    ],
+    "Topic-comment structure": [
+      "话题-评论结构"
+    ],
+    "每...都 every...all": [
+      "每…都"
+    ],
+    "V+了+number+MW+noun completed quantity": [
+      "V+了+数量"
+    ],
+    "多长时间 asking duration": [
+      "多长时间"
+    ],
+    "怎么样 how about / what's it like": [
+      "怎么样"
+    ],
+    "因为 because (standalone)": [
+      "因为(单独)"
+    ],
+    "虽然...但是 concessive (HSK2 full)": [
+      "虽然…但是(完整)"
+    ],
+    "不但...而且 additive (HSK2 full)": [
+      "不但…而且(完整)"
+    ],
+    "Frequency complement 次/遍/回": [
+      "频率补语"
+    ],
+    "不+adj+吗 rhetorical confirmation": [
+      "不+adj+吗(反问)"
+    ],
+    "除了...以外 except/besides (HSK2 intro)": [
+      "除了…以外(初级)"
+    ],
+    "连...都/也 even (HSK2 intro)": [
+      "连…都/也(初级)"
+    ],
+    "越来越 more and more (HSK2 intro)": [
+      "越来越(初级)"
+    ],
+    "千万 by all means/absolutely must": [
+      "千万"
+    ],
+    "其中 among (them)": [
+      "其中"
+    ],
+    "差点(儿) almost/nearly": [
+      "差点(儿)"
+    ],
+    "本来 originally": [
+      "本来"
+    ],
+    "幸好/幸亏 fortunately": [
+      "幸好/幸亏"
+    ],
+    "可惜 it's a pity": [
+      "可惜"
+    ],
+    "大概 probably/roughly": [
+      "大概"
+    ],
+    "另外 in addition/another": [
+      "另外(此外)"
+    ],
+    "反而 on the contrary": [
+      "反而"
+    ],
+    "甚至 even (emphasis)": [
+      "甚至(强调)"
+    ],
+    "果然 as expected (full pattern)": [
+      "果然(完整)"
+    ],
+    "并+不/没 actually not": [
+      "并+不/没"
+    ],
+    "赶紧 hurry up/quickly": [
+      "赶紧"
+    ],
+    "随便 casual/whatever": [
+      "随便"
+    ],
+    "顺便 conveniently/while at it": [
+      "顺便"
+    ],
+    "使/让/叫+sb+V full causative": [
+      "使/让/叫(使役完整)"
+    ],
+    "把+obj+V+在/到/给 ba with locative/dative": [
+      "把+V+在/到/给"
+    ],
+    "被+agent+V+complement full passive": [
+      "被+施事+V+补语"
+    ],
+    "V+起来 start to / seem": [
+      "V+起来(开始/看似)"
+    ],
+    "V+出来 perceive/detect": [
+      "V+出来(识别)"
+    ],
+    "V+下来 settle/continue": [
+      "V+下来(定下/持续)"
+    ],
+    "V+下去 continue further": [
+      "V+下去(继续)"
+    ],
+    "连...都 full emphatic": [
+      "连…都(完整强调)"
+    ],
+    "除了...还/也 besides...also": [
+      "除了…还/也"
+    ],
+    "要是 if (colloquial standalone)": [
+      "要是(口语)"
+    ],
+    "不管...都 no matter (basic)": [
+      "不管…都(基础)"
+    ],
+    "既...又 both...and (balanced)": [
+      "既…又(基础)"
+    ],
+    "即使...也 even if (basic intro)": [
+      "即使…也(基础)"
+    ],
+    "不过 however/but (mild)": [
+      "不过"
+    ],
+    "而且 moreover/and also": [
+      "而且(递进)"
+    ],
+    "于是 so/thereupon (narrative)": [
+      "于是(叙事)"
+    ],
+    "否则 otherwise (HSK3 intro)": [
+      "否则(书面)"
+    ],
+    "尽量 to the best of ability": [
+      "尽量"
+    ],
+    "干脆 simply/just (decisive)": [
+      "干脆"
+    ],
+    "明明 clearly/obviously": [
+      "明明"
+    ],
+    "往往 often/usually (tendency)": [
+      "往往"
+    ],
+    "恰好/恰恰 precisely/exactly": [
+      "恰好/恰恰"
+    ],
+    "好不容易 with great difficulty": [
+      "好不容易"
+    ],
+    "动不动 at the slightest provocation": [
+      "动不动"
+    ],
+    "接着 then/next (continuation)": [
+      "接着"
+    ],
+    "分之 fraction/percentage": [
+      "分之"
+    ],
+    "倍 multiple/times": [
+      "倍"
+    ],
+    "Adj+死了 extremely (colloquial)": [
+      "Adj+死了"
+    ],
+    "一点都不/也不 not at all": [
+      "一点都不/也不"
+    ],
+    "越...越 the more...the more (full)": [
+      "越…越(完整)"
+    ],
+    "假如...就 supposing...then": [
+      "假如…就"
+    ],
+    "哪怕...也 even if (strong concessive)": [
+      "哪怕…也"
+    ],
+    "要不是 if it weren't for": [
+      "要不是"
+    ],
+    "以为 to mistakenly believe": [
+      "以为"
+    ],
+    "看来 it seems/apparently": [
+      "看来"
+    ],
+    "各 each/every (individual)": [
+      "各"
+    ],
+    "任何 any/whatever": [
+      "任何"
+    ],
+    "整个 entire/whole": [
+      "整个"
+    ],
+    "所有 all (formal totality)": [
+      "所有"
+    ],
+    "其中 among them/of which": [
+      "其中"
+    ],
+    "及时 timely/in time": [
+      "及时"
+    ],
+    "彼此 each other/mutually": [
+      "彼此"
+    ],
+    "不得了 extremely/terribly": [
+      "不得了"
+    ],
+    "好像 seems like/as if": [
+      "好像"
+    ],
+    "确实 indeed/truly": [
+      "确实"
+    ],
+    "显然 obviously (HSK4 intro)": [
+      "显然(HSK4)"
+    ],
+    "不见得 not necessarily": [
+      "不见得"
+    ],
+    "一般 generally/usually": [
+      "一般"
+    ],
+    "到底 after all/exactly (HSK4 full)": [
+      "到底(完整)"
+    ],
+    "究竟 after all/exactly (formal inquiry)": [
+      "究竟"
+    ],
+    "简直 simply/virtually (HSK4 intro)": [
+      "简直(HSK4)"
+    ],
+    "陆续 one after another": [
+      "陆续"
+    ],
+    "逐渐 gradually (HSK4 intro)": [
+      "逐渐(HSK4)"
+    ],
+    "纷纷 one after another/in succession": [
+      "纷纷"
+    ],
+    "不断 unceasingly/continuously": [
+      "不断"
+    ],
+    "始终 from beginning to end": [
+      "始终"
+    ],
+    "即 namely/that is (formal)": [
+      "即"
+    ],
+    "将 will/shall (formal future)": [
+      "将"
+    ],
+    "则 then/in that case (formal)": [
+      "则"
+    ],
+    "以 with/by means of (formal)": [
+      "以(介词)"
+    ],
+    "为 for/in order to (formal purpose)": [
+      "为(目的)"
+    ],
+    "嘛 particle for obvious reasons": [
+      "嘛"
+    ],
+    "来着 particle for recent past": [
+      "来着"
+    ],
+    "着呢 very much/quite (emphasis)": [
+      "着呢"
+    ],
+    "似的 like/as if (suffix)": [
+      "似的"
+    ],
+    "的确 indeed/truly (affirmation)": [
+      "的确"
+    ],
+    "不然 otherwise/or else": [
+      "不然"
+    ],
+    "从来 always/all along (with negation)": [
+      "从来"
+    ],
+    "V+成 result complement become": [
+      "动词+成"
+    ],
+    "V+掉 result complement off/away": [
+      "动词+掉"
+    ],
+    "被 passive without agent": [
+      "被(无施事)"
+    ],
+    "所+V(的)+N nominalization": [
+      "所+动词+的+名词"
+    ],
+    "V+过来/过去 compound directional": [
+      "动词+过来/过去"
+    ],
+    "之一 one of": [
+      "之一"
+    ],
+    "以来 since (temporal)": [
+      "以来"
+    ],
+    "多亏 thanks to/lucky that": [
+      "多亏"
+    ],
+    "难道...吗 full rhetorical question": [
+      "难道…吗"
+    ],
+    "要是...就 if...then (HSK4 colloquial)": [
+      "要是…就"
+    ],
+    "千万 by all means/definitely (HSK4 emphasis)": [
+      "千万"
+    ],
+    "往往 often/tend to (HSK4 pattern)": [
+      "往往"
+    ],
+    "加以 to give/apply (formal action)": [
+      "加以"
+    ],
+    "予以 to give/grant (formal)": [
+      "予以"
+    ],
+    "得以 to be able to (formal enablement)": [
+      "得以"
+    ],
+    "善于 to be good at": [
+      "善于"
+    ],
+    "勇于 to have courage to": [
+      "勇于"
+    ],
+    "敢于 to dare to": [
+      "敢于"
+    ],
+    "乐于 to be willing/happy to": [
+      "乐于"
+    ],
+    "忙于 to be busy with": [
+      "忙于"
+    ],
+    "致使 to cause/result in (formal)": [
+      "致使"
+    ],
+    "导致 to lead to/cause": [
+      "导致"
+    ],
+    "促使 to urge/prompt": [
+      "促使"
+    ],
+    "迫使 to force/compel": [
+      "迫使"
+    ],
+    "以...为主 primarily/mainly": [
+      "以…为主"
+    ],
+    "以...为基础 based on": [
+      "以…为基础"
+    ],
+    "以...为目的 with the purpose of": [
+      "以…为目的"
+    ],
+    "就是...也 even if...still (emphatic)": [
+      "就是…也"
+    ],
+    "再...也 no matter how...still": [
+      "再…也"
+    ],
+    "别说...就是 let alone...even": [
+      "别说…就是"
+    ],
+    "不免 inevitably (HSK5 intro)": [
+      "不免(HSK5)"
+    ],
+    "可不 isn't that so": [
+      "可不"
+    ],
+    "所谓 so-called (HSK5 intro)": [
+      "所谓(HSK5)"
+    ],
+    "不惜 not hesitate to (HSK5 intro)": [
+      "不惜(HSK5)"
+    ],
+    "不失为 can be considered (HSK5 intro)": [
+      "不失为(HSK5)"
+    ],
+    "诸如 such as (formal enumeration)": [
+      "诸如"
+    ],
+    "凡是 every/all without exception": [
+      "凡是"
+    ],
+    "以来 since (HSK5 temporal)": [
+      "以来(HSK5)"
+    ],
+    "之际 at the time of (formal)": [
+      "之际(HSK5)"
+    ],
+    "不时 from time to time": [
+      "不时"
+    ],
+    "日益 increasingly/day by day": [
+      "日益"
+    ],
+    "与其...不如 rather than...better to (HSK5 full)": [
+      "与其…不如(完整)"
+    ],
+    "不论/无论...都 regardless of (HSK5 full)": [
+      "不论/无论…都(完整)"
+    ],
+    "非...不可 must/have to (HSK5 intro)": [
+      "非…不可(HSK5)"
+    ],
+    "何必 why bother (HSK5 full)": [
+      "何必(完整)"
+    ],
+    "何况 let alone (reinforced, HSK5)": [
+      "何况(加强)"
+    ],
+    "反正 anyway/in any case (HSK5 full)": [
+      "反正(完整)"
+    ],
+    "原来 it turns out/originally (HSK5 full)": [
+      "原来(完整)"
+    ],
+    "恐怕 I'm afraid/probably (HSK5 full)": [
+      "恐怕(HSK5)"
+    ],
+    "未必 not necessarily (formal, HSK5)": [
+      "未必(HSK5)"
+    ],
+    "势必 certainly/bound to (HSK5 intro)": [
+      "势必(HSK5)"
+    ],
+    "仿佛 as if/seemingly": [
+      "仿佛"
+    ],
+    "好比 just like/comparable to": [
+      "好比"
+    ],
+    "一旦 once/as soon as (HSK5 conditional)": [
+      "一旦(HSK5)"
+    ],
+    "总之 in short/in a word (HSK5 usage)": [
+      "总之(HSK5)"
+    ],
+    "归根结底 in the final analysis (HSK5 usage)": [
+      "归根结底(HSK5)"
+    ],
+    "从而 thereby/thus (HSK5 usage)": [
+      "从而(HSK5)"
+    ],
+    "进而 furthermore/going further (HSK5 usage)": [
+      "进而(HSK5)"
+    ],
+    "何尝 when has it ever (rhetorical, HSK5)": [
+      "何尝(HSK5)"
+    ],
+    "岂不 wouldn't it be (rhetorical)": [
+      "岂不"
+    ],
+    "总而言之 in summary (HSK5 usage)": [
+      "总而言之(HSK5)"
+    ],
+    "当务之急 the most urgent matter": [
+      "当务之急"
+    ],
+    "以致 with the result that (HSK6)": [
+      "以致(HSK6)"
+    ],
+    "有所+V have somewhat V-ed": [
+      "有所+V"
+    ],
+    "加以+V apply/carry out": [
+      "加以+V"
+    ],
+    "予以+V give/grant (formal)": [
+      "予以+V"
+    ],
+    "得以 manage to / able to": [
+      "得以"
+    ],
+    "给以/给予 give/grant (formal written)": [
+      "给予"
+    ],
+    "为...所 passive (literary)": [
+      "为…所(文言)"
+    ],
+    "要不 otherwise/or else": [
+      "要不"
+    ],
+    "无所谓 doesn't matter": [
+      "无所谓"
+    ],
+    "何以 how come (formal HSK6)": [
+      "何以(HSK6)"
+    ],
+    "乃 is/indeed (HSK6 literary)": [
+      "乃(HSK6)"
+    ],
+    "以求 in order to seek": [
+      "以求"
+    ],
+    "有助于 helpful to/conducive to": [
+      "有助于"
+    ],
+    "有利于 beneficial to": [
+      "有利于"
+    ],
+    "无益于 not beneficial to": [
+      "无益于"
+    ],
+    "至今 to this day/up to now": [
+      "至今"
+    ],
+    "由此可见 from this it can be seen": [
+      "由此可见"
+    ],
+    "综上所述 in summary (of above)": [
+      "综上所述"
+    ],
+    "一言以蔽之 in a word/to sum up": [
+      "一言以蔽之"
+    ],
+    "可见 it is evident (HSK6 discourse)": [
+      "可见(HSK6)"
+    ],
+    "不至于 not go so far as to (HSK6)": [
+      "不至于(HSK6)"
+    ],
+    "何处 where (literary)": [
+      "何处"
+    ],
+    "与其说...不如说 rather than say...better to say (HSK6)": [
+      "与其说…不如说(HSK6)"
+    ],
+    "以免 in order to avoid (HSK6)": [
+      "以免(HSK6)"
+    ],
+    "万一 in case/just in case (HSK6)": [
+      "万一(HSK6)"
+    ],
+    "难免 hard to avoid (HSK6)": [
+      "难免(HSK6)"
+    ],
+    "势必 bound to/certainly (HSK6)": [
+      "势必(HSK6)"
+    ],
+    "未免 a bit too/rather (HSK6)": [
+      "未免(HSK6)"
+    ],
+    "大不了 at worst/big deal": [
+      "大不了"
+    ],
+    "罢了 that's all/merely": [
+      "罢了"
+    ],
+    "不妨 might as well (HSK6)": [
+      "不妨(HSK6)"
+    ],
+    "索性 simply/might as well (decisive)": [
+      "索性"
+    ],
+    "固然 admittedly/it is true that (HSK6 standalone)": [
+      "固然(单用)"
+    ],
+    "即便 even if (formal)": [
+      "即便"
+    ],
+    "极为 extremely (formal)": [
+      "极为"
+    ],
+    "颇 rather/quite (literary)": [
+      "颇"
+    ],
+    "何 what/where (literary interrogative)": [
+      "何(疑问)"
+    ],
+    "岂 how could/rhetorical": [
+      "岂"
+    ],
+    "之 literary possessive/pronoun": [
+      "之"
+    ],
+    "其 his/her/its (literary pronoun)": [
+      "其(代词)"
+    ],
+    "所 that which (literary nominalizer)": [
+      "所(名词化)"
+    ],
+    "则 then (literary conjunction)": [
+      "则"
+    ],
+    "且 moreover/and (literary)": [
+      "且(文言)"
+    ],
+    "而 and/but (literary full usage)": [
+      "而(完整用法)"
+    ],
+    "以 by means of (literary)": [
+      "以(文言)"
+    ],
+    "者 one who (literary nominalizer)": [
+      "者"
+    ],
+    "固 originally/inherently (literary)": [
+      "固(文言)"
+    ],
+    "焉 here/how (literary particle)": [
+      "焉(文言)"
+    ],
+    "尽 as much as possible": [
+      "尽(尽量)"
+    ],
+    "需 need (formal single-character)": [
+      "需(单字)"
+    ],
+    "蛮 quite/rather (colloquial)": [
+      "蛮(口语)"
+    ],
+    "也 literary sentence-final particle": [
+      "也(句末助词)"
+    ],
+    "概莫能外 without exception": [
+      "概莫能外"
+    ],
+    "不可或缺 indispensable": [
+      "不可或缺"
+    ],
+    "行之有效 proven effective": [
+      "行之有效"
+    ],
+    "相得益彰 complement each other": [
+      "相得益彰"
+    ],
+    "相辅相成 mutually complementary": [
+      "相辅相成"
+    ],
+    "截然不同 completely different": [
+      "截然不同"
+    ],
+    "举足轻重 pivotal/of great importance": [
+      "举足轻重"
+    ],
+    "不可思议 inconceivable": [
+      "不可思议"
+    ],
+    "理所当然 as a matter of course": [
+      "理所当然"
+    ],
+    "不言自明 self-evident": [
+      "不言自明"
+    ],
+    "显而易见 obviously/clearly": [
+      "显而易见"
+    ],
+    "无所适从 at a loss what to do": [
+      "无所适从"
+    ],
+    "不可避免 unavoidable": [
+      "不可避免"
+    ],
+    "首当其冲 bear the brunt": [
+      "首当其冲"
+    ],
+    "众所周知 as everyone knows": [
+      "众所周知"
+    ],
+    "微乎其微 negligible/minuscule": [
+      "微乎其微"
+    ],
+    "名副其实 live up to the name": [
+      "名副其实"
+    ],
+    "见仁见智 different people different views": [
+      "见仁见智"
+    ],
+    "不谋而合 happen to coincide": [
+      "不谋而合"
+    ],
+    "与生俱来 innate/born with": [
+      "与生俱来"
+    ],
+    "恰如其分 apt/appropriate": [
+      "恰如其分"
+    ],
+    "根深蒂固 deep-rooted": [
+      "根深蒂固"
+    ],
+    "哉 classical exclamatory particle": [
+      "哉"
+    ],
+    "矣 classical completion particle": [
+      "矣"
+    ],
+    "乎 classical question particle": [
+      "乎"
+    ],
+    "夫 classical topic marker": [
+      "夫(发语词)"
+    ],
+    "盖 classical 'it is because'": [
+      "盖(发语词)"
+    ],
+    "然 so/like this (classical)": [
+      "然(文言)"
+    ],
+    "故 therefore (classical)": [
+      "故(文言)"
+    ],
+    "若 if/like (classical)": [
+      "若(文言)"
+    ],
+    "虽 although (classical standalone)": [
+      "虽(文言单用)"
+    ],
+    "犹 still/like (classical)": [
+      "犹(文言)"
+    ],
+    "或 some/perhaps (classical)": [
+      "或(文言)"
+    ],
+    "即 even if/that is (classical)": [
+      "即(文言)"
+    ],
+    "遂 thereupon (classical)": [
+      "遂(文言)"
+    ],
+    "皆 all (classical)": [
+      "皆(文言)"
+    ],
+    "莫 don't/none (classical)": [
+      "莫(文言)"
+    ],
+    "唯/惟 only (classical)": [
+      "唯/惟(文言)"
+    ],
+    "未 not yet (classical)": [
+      "未(文言)"
+    ],
+    "非 not/is not (classical)": [
+      "非(文言)"
+    ],
+    "相 each other/mutually (classical)": [
+      "相(文言)"
+    ],
+    "如...何 what to do about (classical)": [
+      "如…何"
+    ],
+    "无乃...乎 isn't it that (classical rhetorical)": [
+      "无乃…乎"
+    ],
+    "何...之有 what X is there (classical rhetorical)": [
+      "何…之有"
+    ],
+    "得无...乎 could it be that (classical)": [
+      "得无…乎"
+    ],
+    "所以...者 the reason why (classical)": [
+      "所以…者"
+    ],
+    "为...所 passive (classical)": [
+      "为…所(古文被动)"
+    ],
+    "不亦...乎 isn't it (classical rhetorical)": [
+      "不亦…乎"
+    ],
+    "何其 how very (exclamatory classical)": [
+      "何其"
+    ],
+    "也 classical affirmative sentence-final": [
+      "也(判断句末)"
+    ]
   },
   "grammar_exclusions": {
-    "\u4e0d negation": ["\u4e0d\u5ba2\u6c14", "\u4e0d\u597d\u610f\u601d", "\u5bf9\u4e0d\u8d77", "\u4e0d\u8fc7", "\u4e0d\u4f46", "\u4e0d\u7ba1", "\u4e0d\u8bba", "\u4e0d\u5c11", "\u4e0d\u540c", "\u5dee\u4e0d\u591a", "\u4e86\u4e0d\u8d77", "\u4e0d\u9519"],
-    "\u6ca1 negation": ["\u6ca1\u5173\u7cfb", "\u6ca1\u610f\u601d"],
-    "\u7684 possession/modification": ["\u76ee\u7684", "\u7684\u786e", "\u6253\u7684", "\u6709\u7684"],
-    "\u4e86 completed action": ["\u4e86\u89e3", "\u4e86\u4e0d\u8d77", "\u4e3a\u4e86", "\u9664\u4e86"],
-    "Subject + \u662f + Object": ["\u4f46\u662f", "\u53ef\u662f", "\u8fd8\u662f", "\u4e0d\u662f", "\u4e8e\u662f", "\u603b\u662f", "\u8981\u662f", "\u5c31\u662f"],
-    "\u5728 location": ["\u73b0\u5728", "\u5b58\u5728", "\u6b63\u5728", "\u4e0d\u5728"],
-    "\u8fc7 experience": ["\u4e0d\u8fc7", "\u8fc7\u6765", "\u8fc7\u53bb", "\u8fc7\u7a0b", "\u7ecf\u8fc7", "\u8d85\u8fc7", "\u901a\u8fc7"],
-    "\u6bd4 comparison": ["\u6bd4\u5982", "\u6bd4\u8d5b", "\u6bd4\u8f83"],
-    "\u5f97 complement degree": ["\u5f97\u5230", "\u89c9\u5f97", "\u8bb0\u5f97", "\u61c2\u5f97", "\u503c\u5f97"],
-    "Subject + \u5f88 + Adjective": ["\u5f88\u591a"],
-    "\u4ee5...\u4e3a take...as": ["\u4ee5\u4e3a", "\u4ee5\u540e", "\u4ee5\u524d", "\u4ee5\u5916", "\u4ee5\u4e0a", "\u4ee5\u4e0b", "\u53ef\u4ee5", "\u6240\u4ee5"],
-    "\u8fde...\u90fd/\u4e5f even": ["\u8fde\u5fd9", "\u8fde\u7eed", "\u8fde\u63a5"],
-    "Result complement (\u5230/\u5b8c/\u597d)": ["\u5230\u5904", "\u77e5\u9053", "\u5b8c\u5168", "\u597d\u5403", "\u597d\u770b", "\u597d\u73a9", "\u597d\u50cf", "\u4f60\u597d", "\u5927\u5bb6\u597d", "\u597d\u5904"]
+    "不 negation": [
+      "不客气",
+      "不好意思",
+      "对不起",
+      "不过",
+      "不但",
+      "不管",
+      "不论",
+      "不少",
+      "不同",
+      "差不多",
+      "了不起",
+      "不错"
+    ],
+    "没 negation": [
+      "没关系",
+      "没意思"
+    ],
+    "的 possession/modification": [
+      "目的",
+      "的确",
+      "打的",
+      "有的"
+    ],
+    "了 completed action": [
+      "了解",
+      "了不起",
+      "为了",
+      "除了"
+    ],
+    "Subject + 是 + Object": [
+      "但是",
+      "可是",
+      "还是",
+      "不是",
+      "于是",
+      "总是",
+      "要是",
+      "就是"
+    ],
+    "在 location": [
+      "现在",
+      "存在",
+      "正在",
+      "不在"
+    ],
+    "过 experience": [
+      "不过",
+      "过来",
+      "过去",
+      "过程",
+      "经过",
+      "超过",
+      "通过"
+    ],
+    "比 comparison": [
+      "比如",
+      "比赛",
+      "比较"
+    ],
+    "得 complement degree": [
+      "得到",
+      "觉得",
+      "记得",
+      "懂得",
+      "值得"
+    ],
+    "Subject + 很 + Adjective": [
+      "很多"
+    ],
+    "以...为 take...as": [
+      "以为",
+      "以后",
+      "以前",
+      "以外",
+      "以上",
+      "以下",
+      "可以",
+      "所以"
+    ],
+    "连...都/也 even": [
+      "连忙",
+      "连续",
+      "连接"
+    ],
+    "Result complement (到/完/好)": [
+      "到处",
+      "知道",
+      "完全",
+      "好吃",
+      "好看",
+      "好玩",
+      "好像",
+      "你好",
+      "大家好",
+      "好处"
+    ],
+    "有 have/exist": [
+      "没有",
+      "所有",
+      "有的",
+      "有名",
+      "有些"
+    ],
+    "也 also": [
+      "也许"
+    ],
+    "都 all/both": [
+      "首都"
+    ],
+    "会 can/will": [
+      "开会",
+      "社会",
+      "机会"
+    ],
+    "这/那 demonstratives": [
+      "这里",
+      "那里",
+      "这儿",
+      "那儿"
+    ],
+    "和 and": [
+      "和平",
+      "和谐"
+    ],
+    "吧 suggestion": [
+      "网吧",
+      "酒吧"
+    ],
+    "还 still/in addition": [
+      "还是"
+    ],
+    "就 then/immediately": [
+      "就是",
+      "成就"
+    ],
+    "才 only then/only": [
+      "人才",
+      "刚才"
+    ],
+    "最 superlative": [
+      "最后",
+      "最近"
+    ],
+    "又 again (past)": [
+      "又…又"
+    ],
+    "再 again (future)": [
+      "再见",
+      "再说"
+    ],
+    "别 don't (imperative)": [
+      "别的",
+      "别人",
+      "特别",
+      "区别",
+      "分别",
+      "告别"
+    ],
+    "V+着 continuous state": [
+      "着急",
+      "着凉"
+    ],
+    "地 adverbial particle": [
+      "地方",
+      "地铁",
+      "地图",
+      "地球",
+      "土地"
+    ],
+    "给 for/give": [
+      "给力"
+    ],
+    "让/叫 causative": [
+      "叫做"
+    ],
+    "只 only": [
+      "只好",
+      "只要",
+      "只是"
+    ],
+    "倒 contrary to expectation": [
+      "倒下",
+      "倒霉",
+      "摔倒"
+    ],
+    "到 arrive/to": [
+      "知道",
+      "到处",
+      "到底",
+      "想到",
+      "看到"
+    ],
+    "从 from": [
+      "从此",
+      "从而",
+      "从来"
+    ],
+    "每 every": [
+      "每天"
+    ],
+    "对 towards/regarding": [
+      "对不起",
+      "对面",
+      "对方",
+      "对于"
+    ],
+    "并 and/moreover (formal)": [
+      "并非",
+      "并且"
+    ],
+    "而 but/and/yet": [
+      "而且",
+      "然而",
+      "而言",
+      "反而"
+    ],
+    "尚 still/yet (formal)": [
+      "尚且",
+      "高尚"
+    ]
   },
   "skill_patterns": {
-    "ordering food": ["food", "eat", "drink", "restaurant", "dish", "rice", "tea", "water", "coffee", "menu", "vegetable", "fruit", "noodle", "dumpling", "cup", "glass", "hungry", "delicious"],
-    "asking directions": ["where", "direction", "left", "right", "front", "back", "inside", "road", "map", "north", "south", "east", "west", "near", "far", "next to"],
-    "making introductions": ["name", "call", "introduce", "meet", "surname", "hello", "I am", "country", "nationality"],
-    "shopping and bargaining": ["buy", "sell", "money", "price", "expensive", "cheap", "how much", "yuan", "RMB", "shop", "store", "market", "pay", "cost"],
-    "making plans": ["plan", "tomorrow", "weekend", "together", "let's", "time", "when", "meet", "appointment", "o'clock", "free"],
-    "phone conversations": ["phone", "call", "hello", "telephone", "dial", "answer", "number"],
-    "expressing complaints": ["complain", "dissatisfied", "return", "wrong", "problem", "broken", "sorry"],
-    "casual vs formal greeting": ["hello", "hi", "you", "how are you"],
-    "politeness softening": ["please", "excuse me", "sorry", "thank", "trouble", "bother"],
-    "respectful address forms": ["teacher", "mister", "miss", "sir", "madam", "Mr.", "Mrs."],
-    "deflecting compliments": ["compliment", "praise", "modest"],
-    "gift-giving language": ["gift", "present", "give"],
+    "ordering food": [
+      "food",
+      "eat",
+      "drink",
+      "restaurant",
+      "dish",
+      "rice",
+      "tea",
+      "water",
+      "coffee",
+      "menu",
+      "vegetable",
+      "fruit",
+      "noodle",
+      "dumpling",
+      "cup",
+      "glass",
+      "hungry",
+      "delicious"
+    ],
+    "asking directions": [
+      "where",
+      "direction",
+      "left",
+      "right",
+      "front",
+      "back",
+      "inside",
+      "road",
+      "map",
+      "north",
+      "south",
+      "east",
+      "west",
+      "near",
+      "far",
+      "next to"
+    ],
+    "making introductions": [
+      "name",
+      "call",
+      "introduce",
+      "meet",
+      "surname",
+      "hello",
+      "I am",
+      "country",
+      "nationality"
+    ],
+    "shopping and bargaining": [
+      "buy",
+      "sell",
+      "money",
+      "price",
+      "expensive",
+      "cheap",
+      "how much",
+      "yuan",
+      "RMB",
+      "shop",
+      "store",
+      "market",
+      "pay",
+      "cost"
+    ],
+    "making plans": [
+      "plan",
+      "tomorrow",
+      "weekend",
+      "together",
+      "let's",
+      "time",
+      "when",
+      "meet",
+      "appointment",
+      "o'clock",
+      "free"
+    ],
+    "phone conversations": [
+      "phone",
+      "call",
+      "hello",
+      "telephone",
+      "dial",
+      "answer",
+      "number"
+    ],
+    "expressing complaints": [
+      "complain",
+      "dissatisfied",
+      "return",
+      "wrong",
+      "problem",
+      "broken",
+      "sorry"
+    ],
+    "casual vs formal greeting": [
+      "hello",
+      "hi",
+      "you",
+      "how are you"
+    ],
+    "politeness softening": [
+      "please",
+      "excuse me",
+      "sorry",
+      "thank",
+      "trouble",
+      "bother"
+    ],
+    "respectful address forms": [
+      "teacher",
+      "mister",
+      "miss",
+      "sir",
+      "madam",
+      "Mr.",
+      "Mrs."
+    ],
+    "deflecting compliments": [
+      "compliment",
+      "praise",
+      "modest"
+    ],
+    "gift-giving language": [
+      "gift",
+      "present",
+      "give"
+    ],
     "tone pair discrimination": [],
     "third tone sandhi": [],
-    "job interviews": ["interview", "job", "work", "career", "position", "hire", "resume", "salary", "experience", "company", "apply"],
-    "explaining reasons": ["because", "reason", "why", "therefore", "cause", "explain", "result", "since"],
-    "news comprehension": ["news", "report", "government", "economy", "society", "international", "event", "policy", "media", "article"],
-    "formal requests": ["request", "apply", "formal", "submit", "permission", "approve", "document", "official", "register"],
-    "academic discussion": ["research", "study", "theory", "analysis", "academic", "science", "university", "data", "experiment", "method"],
-    "business negotiation": ["negotiate", "contract", "deal", "partner", "invest", "profit", "budget", "terms", "agreement", "trade"],
-    "public speaking": ["speech", "audience", "present", "lecture", "debate", "opinion", "argue", "point", "convince", "discuss"],
-    "formal debate": ["debate", "oppose", "refute", "argument", "stance", "counter", "proposition", "logic"],
-    "diplomatic language": ["diplomat", "negotiate", "treaty", "ambassador", "protocol", "alliance", "international", "foreign"],
-    "humor and irony": ["joke", "funny", "humor", "irony", "sarcasm", "wit", "laugh", "ridiculous"],
-    "scholarly argumentation": ["evidence", "argument", "thesis", "scholarly", "academic", "prove", "hypothesis", "analyze"],
-    "rhetorical persuasion": ["persuade", "rhetoric", "convince", "appeal", "audience", "influence", "position"],
-    "technical explanation": ["technical", "mechanism", "process", "system", "function", "principle", "method", "technology"],
-    "literary analysis": ["literary", "novel", "poem", "author", "theme", "metaphor", "symbolism", "narrative", "prose"],
-    "cultural allusion comprehension": ["allusion", "proverb", "idiom", "historical", "reference", "classic", "philosophy", "confucius"],
-    "register switching": ["formal", "informal", "colloquial", "literary", "register", "style", "tone"],
-    "simultaneous interpretation register": ["interpret", "translation", "simultaneous", "professional"],
-    "classical Chinese recognition": ["classical", "ancient", "literary", "archaic", "wenyan"],
-    "cross-dialectal comprehension": ["dialect", "accent", "regional", "cantonese", "shanghainese", "variation"]
+    "job interviews": [
+      "interview",
+      "job",
+      "work",
+      "career",
+      "position",
+      "hire",
+      "resume",
+      "salary",
+      "experience",
+      "company",
+      "apply"
+    ],
+    "explaining reasons": [
+      "because",
+      "reason",
+      "why",
+      "therefore",
+      "cause",
+      "explain",
+      "result",
+      "since"
+    ],
+    "news comprehension": [
+      "news",
+      "report",
+      "government",
+      "economy",
+      "society",
+      "international",
+      "event",
+      "policy",
+      "media",
+      "article"
+    ],
+    "formal requests": [
+      "request",
+      "apply",
+      "formal",
+      "submit",
+      "permission",
+      "approve",
+      "document",
+      "official",
+      "register"
+    ],
+    "academic discussion": [
+      "research",
+      "study",
+      "theory",
+      "analysis",
+      "academic",
+      "science",
+      "university",
+      "data",
+      "experiment",
+      "method"
+    ],
+    "business negotiation": [
+      "negotiate",
+      "contract",
+      "deal",
+      "partner",
+      "invest",
+      "profit",
+      "budget",
+      "terms",
+      "agreement",
+      "trade"
+    ],
+    "public speaking": [
+      "speech",
+      "audience",
+      "present",
+      "lecture",
+      "debate",
+      "opinion",
+      "argue",
+      "point",
+      "convince",
+      "discuss"
+    ],
+    "formal debate": [
+      "debate",
+      "oppose",
+      "refute",
+      "argument",
+      "stance",
+      "counter",
+      "proposition",
+      "logic"
+    ],
+    "diplomatic language": [
+      "diplomat",
+      "negotiate",
+      "treaty",
+      "ambassador",
+      "protocol",
+      "alliance",
+      "international",
+      "foreign"
+    ],
+    "humor and irony": [
+      "joke",
+      "funny",
+      "humor",
+      "irony",
+      "sarcasm",
+      "wit",
+      "laugh",
+      "ridiculous"
+    ],
+    "scholarly argumentation": [
+      "evidence",
+      "argument",
+      "thesis",
+      "scholarly",
+      "academic",
+      "prove",
+      "hypothesis",
+      "analyze"
+    ],
+    "rhetorical persuasion": [
+      "persuade",
+      "rhetoric",
+      "convince",
+      "appeal",
+      "audience",
+      "influence",
+      "position"
+    ],
+    "technical explanation": [
+      "technical",
+      "mechanism",
+      "process",
+      "system",
+      "function",
+      "principle",
+      "method",
+      "technology"
+    ],
+    "literary analysis": [
+      "literary",
+      "novel",
+      "poem",
+      "author",
+      "theme",
+      "metaphor",
+      "symbolism",
+      "narrative",
+      "prose"
+    ],
+    "cultural allusion comprehension": [
+      "allusion",
+      "proverb",
+      "idiom",
+      "historical",
+      "reference",
+      "classic",
+      "philosophy",
+      "confucius"
+    ],
+    "register switching": [
+      "formal",
+      "informal",
+      "colloquial",
+      "literary",
+      "register",
+      "style",
+      "tone"
+    ],
+    "simultaneous interpretation register": [
+      "interpret",
+      "translation",
+      "simultaneous",
+      "professional"
+    ],
+    "classical Chinese recognition": [
+      "classical",
+      "ancient",
+      "literary",
+      "archaic",
+      "wenyan"
+    ],
+    "cross-dialectal comprehension": [
+      "dialect",
+      "accent",
+      "regional",
+      "cantonese",
+      "shanghainese",
+      "variation"
+    ]
   }
 }

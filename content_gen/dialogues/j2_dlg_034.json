@@ -1,0 +1,83 @@
+{
+  "title": "The Warm Bowl",
+  "title_zh": "温暖的碗",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're eating congee at a small shop on a cold morning. The owner notices you warming your hands on the bowl.",
+    "setup_zh": "天冷的早上，你在一家小店喝粥。老板看到你用碗暖手。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "冷吧？粥要慢慢喝，不要急。热粥暖肚子，也暖心。",
+        "text_pinyin": "Lěng ba? Zhōu yào mànman hē, bú yào jí. Rè zhōu nuǎn dùzi, yě nuǎn xīn.",
+        "text_en": "Cold, right? Drink the congee slowly, no rush. Hot congee warms the belly and the heart."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his kind words.",
+        "options": [
+          {
+            "text_zh": "谢谢大叔。这碗粥真的很暖和。冷天喝一碗热粥，觉得什么都好了。",
+            "text_pinyin": "Xièxie dàshū. Zhè wǎn zhōu zhēn de hěn nuǎnhuo. Lěng tiān hē yī wǎn rè zhōu, juéde shénme dōu hǎo le.",
+            "text_en": "Thank you, uncle. This congee is really warming. A bowl of hot congee on a cold day — everything feels better.",
+            "score": 1.0,
+            "feedback": "Simple gratitude — a bowl of congee as a remedy for everything.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这个粥里有什么？",
+            "text_pinyin": "Zhège zhōu lǐ yǒu shénme?",
+            "text_en": "What's in this congee?",
+            "score": 0.0,
+            "feedback": "Ingredient check instead of appreciating his care."
+          },
+          {
+            "text_zh": "今天零下几度了。",
+            "text_pinyin": "Jīntiān líng xià jǐ dù le.",
+            "text_en": "It's below zero today.",
+            "score": 0.0,
+            "feedback": "A temperature report instead of warmth."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我妈妈以前也是这样说的——「冷了就喝粥」。粥不贵，也不复杂，但是能让人舒服。简单的东西最好。",
+        "text_pinyin": "Wǒ māma yǐqián yě shì zhèyàng shuō de — 'lěng le jiù hē zhōu'. Zhōu bú guì, yě bù fùzá, dànshì néng ràng rén shūfu. Jiǎndān de dōngxi zuì hǎo.",
+        "text_en": "My mom used to say the same thing — 'When it's cold, drink congee.' Congee isn't expensive or complicated, but it makes you feel good. Simple things are the best."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his philosophy about simplicity.",
+        "options": [
+          {
+            "text_zh": "你妈妈说得对。最简单的东西，给人最多的温暖。你的粥也是这样。",
+            "text_pinyin": "Nǐ māma shuō de duì. Zuì jiǎndān de dōngxi, gěi rén zuì duō de wēnnuǎn. Nǐ de zhōu yě shì zhèyàng.",
+            "text_en": "Your mom was right. The simplest things give the most warmth. Your congee is just like that.",
+            "score": 1.0,
+            "feedback": "Connects his mother's wisdom to his present work — his congee carries her warmth.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你每天都这么早开门吗？",
+            "text_pinyin": "Nǐ měi tiān dōu zhème zǎo kāi mén ma?",
+            "text_en": "Do you open this early every day?",
+            "score": 0.0,
+            "feedback": "Business hours question during a warm moment."
+          },
+          {
+            "text_zh": "我还想要一碗。",
+            "text_pinyin": "Wǒ hái xiǎng yào yī wǎn.",
+            "text_en": "I want another bowl.",
+            "score": 0.0,
+            "feedback": "Ordering more food instead of connecting."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Congee (粥) is one of China's most essential comfort foods, often the first thing served to someone who is cold, sick, or tired. The phrase 冷了就喝粥 is maternal wisdom passed through generations. A bowl of plain congee represents care in its most distilled form — nothing fancy, just warmth."
+  }
+}

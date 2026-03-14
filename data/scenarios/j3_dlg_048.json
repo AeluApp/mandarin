@@ -1,0 +1,87 @@
+{
+    "title": "Recommending a Song",
+    "title_zh": "推荐一首歌",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your friend Xiao Yan notices you listening to music on your headphones and asks what you're listening to.",
+        "setup_zh": "你的朋友小燕看到你戴着耳机听音乐，问你在听什么。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你在听什么歌啊？看你听得很开心的样子。",
+                "text_pinyin": "Nǐ zài tīng shénme gē a? Kàn nǐ tīng de hěn kāixīn de yàngzi.",
+                "text_en": "What song are you listening to? You look like you're really enjoying it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share the song with her.",
+                "options": [
+                    {
+                        "text_zh": "一首很安静的中文歌，叫《晴天》。旋律特别好听，你要不要听听？",
+                        "text_pinyin": "Yī shǒu hěn ānjìng de Zhōngwén gē, jiào \"Qíngtiān\". Xuánlǜ tèbié hǎotīng, nǐ yào bú yào tīngtīng?",
+                        "text_en": "A quiet Chinese song called 'Sunny Day.' The melody is really beautiful — want to listen?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Shares enthusiastically and offers to let her listen."
+                    },
+                    {
+                        "text_zh": "一首歌。",
+                        "text_pinyin": "Yī shǒu gē.",
+                        "text_en": "A song.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Not helpful."
+                    },
+                    {
+                        "text_zh": "你不会喜欢的。",
+                        "text_pinyin": "Nǐ bú huì xǐhuan de.",
+                        "text_en": "You wouldn't like it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dismissive and assumes her taste."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哇，真好听！歌词也很美。我最近一直在听一个新的歌手，她的声音很特别。我们交换歌单吧？",
+                "text_pinyin": "Wā, zhēn hǎotīng! Gēcí yě hěn měi. Wǒ zuìjìn yīzhí zài tīng yī ge xīn de gēshǒu, tā de shēngyīn hěn tèbié. Wǒmen jiāohuàn gēdān ba?",
+                "text_en": "Wow, it's lovely! The lyrics are beautiful too. I've been listening to a new singer lately — her voice is really unique. Want to swap playlists?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the playlist swap idea.",
+                "options": [
+                    {
+                        "text_zh": "好啊！我最喜欢发现新的好歌了。你发给我，我也把我的歌单分享给你。",
+                        "text_pinyin": "Hǎo a! Wǒ zuì xǐhuan fāxiàn xīn de hǎo gē le. Nǐ fā gěi wǒ, wǒ yě bǎ wǒ de gēdān fēnxiǎng gěi nǐ.",
+                        "text_en": "Sure! I love discovering new music. Send me yours and I'll share mine too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enthusiastic mutual sharing."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "Hǎo.",
+                        "text_en": "Okay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agrees but no energy."
+                    },
+                    {
+                        "text_zh": "我不太用歌单。",
+                        "text_pinyin": "Wǒ bú tài yòng gēdān.",
+                        "text_en": "I don't really use playlists.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Misses the connection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing music and playlists (歌单) is a popular form of friendship bonding among young Chinese. Songs are often shared through WeChat or music apps. Discovering new music through friends is valued as a form of cultural exchange."
+    },
+    "hsk_level": 3
+}

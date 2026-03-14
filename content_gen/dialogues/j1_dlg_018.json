@@ -1,0 +1,87 @@
+{
+    "title": "The Sleeping Cat",
+    "title_zh": "睡觉的猫",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're sitting in a quiet courtyard. A stray cat comes and sits next to you. Your neighbor notices.",
+        "setup_zh": "你坐在一个安静的院子里。一只流浪猫过来坐在你旁边。你的邻居看到了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，这只猫很喜欢你！它叫小黄。每天都来这里。",
+                "text_pinyin": "Hāhā, zhè zhī māo hěn xǐhuan nǐ! Tā jiào Xiǎo Huáng. Měi tiān dōu lái zhèlǐ.",
+                "text_en": "Haha, this cat really likes you! Its name is Xiao Huang. It comes here every day."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the cat.",
+                "options": [
+                    {
+                        "text_zh": "它好可爱。它是你的猫吗？",
+                        "text_pinyin": "Tā hǎo kě'ài. Tā shì nǐ de māo ma?",
+                        "text_en": "It's so cute. Is it your cat?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to the cat choosing to sit with you and asks a natural follow-up about whose cat it is."
+                    },
+                    {
+                        "text_zh": "小黄？好名字。",
+                        "text_pinyin": "Xiǎo Huáng? Hǎo míngzi.",
+                        "text_en": "Xiao Huang? Good name.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Acknowledges the name but doesn't say much else -- the neighbor was excited about the cat liking you."
+                    },
+                    {
+                        "text_zh": "它吃什么？",
+                        "text_pinyin": "Tā chī shénme?",
+                        "text_en": "What does it eat?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Practical question, but the neighbor told you the cat likes you and comes here every day -- respond to that warmth first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不是我的猫，是大家的猫。我们都给它吃东西。你要不要喂它？",
+                "text_pinyin": "Bú shì wǒ de māo, shì dàjiā de māo. Wǒmen dōu gěi tā chī dōngxi. Nǐ yào bu yào wèi tā?",
+                "text_en": "It's not my cat — it's everyone's cat. We all feed it. Want to feed it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the offer to feed the cat.",
+                "options": [
+                    {
+                        "text_zh": "好啊！它吃什么？",
+                        "text_pinyin": "Hǎo a! Tā chī shénme?",
+                        "text_en": "Sure! What does it eat?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Accepts the offer to join the community care for the cat -- you're becoming part of the neighborhood."
+                    },
+                    {
+                        "text_zh": "大家都给它吃东西？真好。",
+                        "text_pinyin": "Dàjiā dōu gěi tā chī dōngxi? Zhēn hǎo.",
+                        "text_en": "Everyone feeds it? That's nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Appreciates the community spirit but doesn't answer whether you want to feed it -- she invited you to participate."
+                    },
+                    {
+                        "text_zh": "它有主人吗？",
+                        "text_pinyin": "Tā yǒu zhǔrén ma?",
+                        "text_en": "Does it have an owner?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She just explained it's everyone's cat -- asking about an owner shows you didn't absorb what she said about shared care."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Community cats are a beloved part of many Chinese neighborhoods. They belong to no one and everyone. Residents leave food and water, and the cats become a shared source of quiet joy. Feeding the neighborhood cat is a small act of belonging."
+    }
+}

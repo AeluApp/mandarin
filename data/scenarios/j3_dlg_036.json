@@ -1,0 +1,87 @@
+{
+    "title": "Late Night Snack Run",
+    "title_zh": "深夜吃宵夜",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "It's late at night and you and your roommate Xiao Peng are both still awake, feeling hungry. You decide to go find a late-night snack.",
+        "setup_zh": "深夜了，你和室友小鹏都还没睡，觉得饿了。你们决定去找点宵夜吃。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好饿啊！都十一点了，附近还有什么吃的？我想吃烧烤！",
+                "text_pinyin": "Hǎo è a! Dōu shíyī diǎn le, fùjìn hái yǒu shénme chī de? Wǒ xiǎng chī shāokǎo!",
+                "text_en": "So hungry! It's already eleven — is there anything to eat nearby? I want barbecue!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a place or alternative.",
+                "options": [
+                    {
+                        "text_zh": "巷子口那家烧烤摊应该还开着，走路十分钟。我也想吃烤串和啤酒！走吧！",
+                        "text_pinyin": "Xiàngzi kǒu nà jiā shāokǎo tān yīnggāi hái kāi zhe, zǒulù shí fēnzhōng. Wǒ yě xiǎng chī kǎochuàn hé píjiǔ! Zǒu ba!",
+                        "text_en": "That barbecue stall at the alley entrance should still be open — ten minutes' walk. I'm craving skewers and beer too! Let's go!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Matches his energy and has a plan."
+                    },
+                    {
+                        "text_zh": "我们煮方便面吧，不想出去。",
+                        "text_pinyin": "Wǒmen zhǔ fāngbiànmiàn ba, bù xiǎng chūqù.",
+                        "text_en": "Let's just make instant noodles — I don't want to go out.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but less adventurous."
+                    },
+                    {
+                        "text_zh": "太晚了，明天再吃吧。",
+                        "text_pinyin": "Tài wǎn le, míngtiān zài chī ba.",
+                        "text_en": "It's too late — eat tomorrow.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Kills the spontaneous fun."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！烤串加啤酒，完美的组合。晚上坐在路边吃烧烤，这才是生活啊。你要吃什么？我要羊肉串和鸡翅。",
+                "text_pinyin": "Tài hǎo le! Kǎochuàn jiā píjiǔ, wánměi de zǔhé. Wǎnshang zuò zài lùbiān chī shāokǎo, zhè cái shì shēnghuó a. Nǐ yào chī shénme? Wǒ yào yángròu chuàn hé jīchì.",
+                "text_en": "Awesome! Skewers and beer — perfect combo. Sitting roadside eating barbecue at night — that's living. What do you want? I'm getting lamb skewers and chicken wings."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order your food.",
+                "options": [
+                    {
+                        "text_zh": "我要牛肉串、烤茄子，再来两瓶啤酒。今天辛苦了一天，值得犒劳一下自己。",
+                        "text_pinyin": "Wǒ yào niúròu chuàn, kǎo qiézi, zài lái liǎng píng píjiǔ. Jīntiān xīnkǔ le yī tiān, zhíde kàoláo yīxià zìjǐ.",
+                        "text_en": "Beef skewers, grilled eggplant, and two beers. Worked hard all day — deserve to treat ourselves.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Embraces the moment and acknowledges the day's effort."
+                    },
+                    {
+                        "text_zh": "随便吧，你帮我点。",
+                        "text_pinyin": "Suíbiàn ba, nǐ bāng wǒ diǎn.",
+                        "text_en": "Whatever, you order for me.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Disengaged."
+                    },
+                    {
+                        "text_zh": "少点一些，太晚吃东西不好。",
+                        "text_pinyin": "Shǎo diǎn yīxiē, tài wǎn chī dōngxi bù hǎo.",
+                        "text_en": "Order less — eating this late isn't healthy.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Preachy during a fun outing."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Late-night barbecue (宵夜烧烤) is a beloved social ritual in Chinese cities. Sitting at small plastic tables on the sidewalk, eating skewers and drinking beer, is considered one of life's simple pleasures. The phrase 「这才是生活」 (this is really living) captures the carefree spirit."
+    },
+    "hsk_level": 3
+}

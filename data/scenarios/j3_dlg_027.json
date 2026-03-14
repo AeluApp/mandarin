@@ -1,0 +1,123 @@
+{
+    "title": "A New Coffee Shop",
+    "title_zh": "新开的咖啡店",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "A new small coffee shop has opened in your neighborhood. Your friend Xiao Qian wants to check it out with you on a lazy Sunday afternoon.",
+        "setup_zh": "你们小区新开了一家小咖啡店。朋友小钱想在一个悠闲的周日下午和你一起去看看。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这家店的装修好有意思！都是木头的桌子和椅子，墙上还有很多老照片。你觉得怎么样？",
+                "text_pinyin": "Zhè jiā diàn de zhuāngxiū hǎo yǒu yìsi! Dōu shì mùtou de zhuōzi hé yǐzi, qiáng shàng hái yǒu hěn duō lǎo zhàopiàn. Nǐ juéde zěnmeyàng?",
+                "text_en": "This shop's decor is so interesting! All wooden tables and chairs, and lots of old photos on the walls. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your impression of the shop.",
+                "options": [
+                    {
+                        "text_zh": "我很喜欢！感觉很温暖，像在朋友家一样。那些老照片拍的是这个街区以前的样子吧？",
+                        "text_pinyin": "Wǒ hěn xǐhuan! Gǎnjué hěn wēnnuǎn, xiàng zài péngyou jiā yīyàng. Nàxiē lǎo zhàopiàn pāi de shì zhège jiēqū yǐqián de yàngzi ba?",
+                        "text_en": "I really like it! It feels warm, like being at a friend's home. Those old photos must be of this neighborhood from before, right?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Observant and engaging — connects the decor to a deeper story."
+                    },
+                    {
+                        "text_zh": "还行吧。",
+                        "text_pinyin": "Hái xíng ba.",
+                        "text_en": "It's okay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lukewarm when she's excited."
+                    },
+                    {
+                        "text_zh": "有点小。",
+                        "text_pinyin": "Yǒudiǎn xiǎo.",
+                        "text_en": "It's a bit small.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Critical first impression."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好像是的！你看这张，是以前的菜市场，现在变成了停车场。真是太不一样了。你想喝什么？我请客。",
+                "text_pinyin": "Hǎoxiàng shì de! Nǐ kàn zhè zhāng, shì yǐqián de càishìchǎng, xiànzài biàn chéng le tíngchē chǎng. Zhēn shì tài bù yīyàng le. Nǐ xiǎng hē shénme? Wǒ qǐngkè.",
+                "text_en": "I think so! Look at this one — it used to be a vegetable market, now it's a parking lot. So different. What would you like to drink? My treat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order a drink.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你请客！我要一杯拿铁。下次我请你，我们可以试试他们的甜点。",
+                        "text_pinyin": "Xièxie nǐ qǐngkè! Wǒ yào yī bēi ná tiě. Xià cì wǒ qǐng nǐ, wǒmen kěyǐ shìshi tāmen de tiándiǎn.",
+                        "text_en": "Thanks for treating! I'll have a latte. Next time it's my treat — we can try their desserts.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grateful and reciprocal — good friend dynamics."
+                    },
+                    {
+                        "text_zh": "拿铁。",
+                        "text_pinyin": "Ná tiě.",
+                        "text_en": "Latte.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Doesn't acknowledge her treating."
+                    },
+                    {
+                        "text_zh": "我自己付吧。",
+                        "text_pinyin": "Wǒ zìjǐ fù ba.",
+                        "text_en": "I'll pay for myself.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but refusing a friend's treat can seem stiff."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！拿铁配甜点，下次一定来。这家店离我们这么近，以后周末又多了一个好地方了。",
+                "text_pinyin": "Hǎo! Ná tiě pèi tiándiǎn, xià cì yīdìng lái. Zhè jiā diàn lí wǒmen zhème jìn, yǐhòu zhōumò yòu duō le yī ge hǎo dìfang le.",
+                "text_en": "Great! Latte with dessert — definitely next time. This shop is so close to us — now we have another great spot for weekends."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the new spot.",
+                "options": [
+                    {
+                        "text_zh": "对啊！以后我们可以每个周末来这里坐坐，聊聊天，看看书。太好了。",
+                        "text_pinyin": "Duì a! Yǐhòu wǒmen kěyǐ měi ge zhōumò lái zhèlǐ zuòzuo, liáoliao tiān, kànkan shū. Tài hǎo le.",
+                        "text_en": "Right! From now on we can come here every weekend to hang out, chat, read. How lovely.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Paints a gentle picture of a new weekend ritual."
+                    },
+                    {
+                        "text_zh": "希望他们能开得久一点。",
+                        "text_pinyin": "Xīwàng tāmen néng kāi de jiǔ yīdiǎn.",
+                        "text_en": "Hope they stay open for a while.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Slightly pessimistic but understandable concern."
+                    },
+                    {
+                        "text_zh": "嗯。",
+                        "text_pinyin": "En.",
+                        "text_en": "Mm.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Barely responds."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "New neighborhood cafés often become important social spaces in Chinese urban life. The tradition of 「我请客」 (I'll treat) followed by the expected reciprocal 「下次我请」 (next time my treat) is a natural rhythm of Chinese friendship."
+    },
+    "hsk_level": 3
+}

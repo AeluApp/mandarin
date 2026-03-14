@@ -1,0 +1,123 @@
+{
+    "title": "The Missing Umbrella",
+    "title_zh": "消失的雨伞",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "It's raining in Shanghai. You're standing inside a convenience store watching the shared umbrella rack outside. A woman, Wei, is standing next to you. You both just watched someone walk up, take a shared umbrella, and leave. Now a second person has arrived, seen the rack is one umbrella lighter, and is eyeing the remaining ones.",
+        "setup_zh": "上海下雨了。你站在便利店里看着外面的共享雨伞架。一个叫小薇的女生站在你旁边。你们刚看到一个人走过来，拿了一把共享雨伞就走了。现在第二个人到了，看到架子上少了一把，正在打量剩下的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看你看——那个穿灰衣服的，拿伞之前看了一下四周。他知道这不太对，但他还是拿了。他安慰自己的方式大概是'反正别人也拿了'。",
+                "text_pinyin": "Nǐ kàn nǐ kàn — nàge chuān huī yīfu de, ná sǎn zhīqián kàn le yīxià sìzhōu. Tā zhīdào zhè bú tài duì, dàn tā háishì ná le. Tā ānwèi zìjǐ de fāngshì dàgài shì 'fǎnzhèng biérén yě ná le'.",
+                "text_en": "Look, look — the one in gray, he looked around before taking the umbrella. He knows it's not quite right, but he still took it. His way of comforting himself is probably 'well, other people took them too.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "You're both watching this unfold like a nature documentary. Join the commentary.",
+                "options": [
+                    {
+                        "text_zh": "注意他走路的姿势——前十步走得很快，心虚。等过了路口，就放慢了，那把伞已经从'共享雨伞'变成'我的伞'了。身份转换完成。",
+                        "text_pinyin": "Zhùyì tā zǒulù de zīshì — qián shí bù zǒu de hěn kuài, xīnxū. Děng guò le lùkǒu, jiù fàngmàn le, nà bǎ sǎn yǐjīng cóng 'gòngxiǎng yǔsǎn' biàn chéng 'wǒ de sǎn' le. Shēnfèn zhuǎnhuàn wánchéng.",
+                        "text_en": "Watch his walk — first ten steps, he's moving fast, guilty. Once he's past the intersection, he slows down. That umbrella has already gone from 'shared umbrella' to 'my umbrella.' Identity transfer complete.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "You've matched her nature-documentary tone perfectly. The 'identity transfer' observation lands because it's specific and true."
+                    },
+                    {
+                        "text_zh": "其实这种共享雨伞的模式本身就有问题，设计者高估了人们的归还率。",
+                        "text_pinyin": "Qíshí zhè zhǒng gòngxiǎng yǔsǎn de móshì běnshēn jiù yǒu wèntí, shèjìzhě gāogū le rénmen de guīhuán lǜ.",
+                        "text_en": "Actually the shared umbrella model itself is flawed, the designers overestimated people's return rate.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's doing live commentary on a heist. You've switched to a business school case study."
+                    },
+                    {
+                        "text_zh": "也许他真的急着用，下这么大的雨，也能理解吧。",
+                        "text_pinyin": "Yěxǔ tā zhēn de jí zhe yòng, xià zhème dà de yǔ, yě néng lǐjiě ba.",
+                        "text_en": "Maybe he really needed it urgently, it's raining so hard, it's understandable.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's not judging him. She's narrating. You've rushed to his defense before anyone accused him of anything."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈哈，'身份转换完成'！——等等，你看，又来一个。这个更好——她看到架子上只剩两把了，你看她的表情，她在算。她在想'如果我不拿，等一下别人也会拿走的，那我不就亏了？'",
+                "text_pinyin": "Hāhāhā, 'shēnfèn zhuǎnhuàn wánchéng'! — Děngdeng, nǐ kàn, yòu lái yīge. Zhège gèng hǎo — tā kàn dào jiàzi shàng zhǐ shèng liǎng bǎ le, nǐ kàn tā de biǎoqíng, tā zài suàn. Tā zài xiǎng 'rúguǒ wǒ bù ná, děng yīxià biérén yě huì ná zǒu de, nà wǒ bú jiù kuī le?'",
+                "text_en": "Hahaha, 'identity transfer complete'! — Wait, look, another one. This one's even better — she sees there are only two left on the rack. Look at her face, she's calculating. She's thinking 'if I don't take one, someone else will take it anyway, so wouldn't I be the loser?'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "The scarcity is accelerating the behavior. Narrate what happens next.",
+                "options": [
+                    {
+                        "text_zh": "经典的囚徒困境，现场直播版。你看——她拿了。而且她拿了以后看了一眼最后那一把，你说她在想什么？她在想要不要把最后一把也拿走，'帮朋友带一把'。",
+                        "text_pinyin": "Jīngdiǎn de qiútú kùnjìng, xiànchǎng zhíbō bǎn. Nǐ kàn — tā ná le. Érqiě tā ná le yǐhòu kàn le yī yǎn zuìhòu nà yī bǎ, nǐ shuō tā zài xiǎng shénme? Tā zài xiǎng yào bú yào bǎ zuìhòu yī bǎ yě ná zǒu, 'bāng péngyou dài yī bǎ'.",
+                        "text_en": "Classic prisoner's dilemma, live. She took one. After taking it she glanced at the last one. What do you think? She's wondering whether to grab the last one too, 'for a friend.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The glance at the last umbrella is the comic detail that makes this. Everyone's been that person doing the mental math."
+                    },
+                    {
+                        "text_zh": "我们应该出去告诉她那些伞是要归还的，不是免费拿的。",
+                        "text_pinyin": "Wǒmen yīnggāi chūqù gàosù tā nàxiē sǎn shì yào guīhuán de, bú shì miǎnfèi ná de.",
+                        "text_en": "We should go out and tell her those umbrellas are supposed to be returned, not taken for free.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You've broken the fourth wall of the nature documentary. She was enjoying the observation, not building a case for intervention."
+                    },
+                    {
+                        "text_zh": "这种行为其实反映了一种社会信任的缺失，值得深思。",
+                        "text_pinyin": "Zhè zhǒng xíngwéi qíshí fǎnyìng le yī zhǒng shèhuì xìnrèn de quēshī, zhíde shēnsī.",
+                        "text_en": "This kind of behavior actually reflects a lack of social trust, it's worth reflecting on deeply.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She's laughing. You've handed her a sociology abstract. The tone gap is visible from space."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "她没拿最后一把！你看——她犹豫了一下，走了。她留下了最后一把。也许这就是人性的底线吧。全拿走太贪了，留一把给下一个人，自己就不算坏人了。哎——你看，第四个人来了。他在看最后那一把。",
+                "text_pinyin": "Tā méi ná zuìhòu yī bǎ! Nǐ kàn — tā yóuyù le yīxià, zǒu le. Tā liú xià le zuìhòu yī bǎ. Yěxǔ zhè jiù shì rénxìng de dǐxiàn ba. Quán ná zǒu tài tān le, liú yī bǎ gěi xià yīge rén, zìjǐ jiù bú suàn huài rén le. Āi — nǐ kàn, dì sì ge rén lái le. Tā zài kàn zuìhòu nà yī bǎ.",
+                "text_en": "She didn't take the last one! Look — she hesitated, then left. She left the last one. Maybe that's the floor of human nature. Taking all of them is too greedy; leave one for the next person and you're not a bad person. Oh — look, a fourth person just showed up. He's looking at the last one."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "The last umbrella. The final act.",
+                "options": [
+                    {
+                        "text_zh": "他不会拿的。最后一把有一种道德重力——拿走'其中一把'跟拿走'最后一把'感觉完全不一样。拿最后一把的人没法告诉自己'反正还有别的'。……他拿了。我对人类的信心又调整了一下。",
+                        "text_pinyin": "Tā bú huì ná de. Zuìhòu yī bǎ yǒu yī zhǒng dàodé zhònglì — ná zǒu 'qízhōng yī bǎ' gēn ná zǒu 'zuìhòu yī bǎ' gǎnjué wánquán bù yīyàng. Ná zuìhòu yī bǎ de rén méi fǎ gàosù zìjǐ 'fǎnzhèng hái yǒu biéde'. ... Tā ná le. Wǒ duì rénlèi de xìnxīn yòu tiáozhěng le yīxià.",
+                        "text_en": "He won't take it. The last one has moral gravity — taking 'one of them' versus 'the last one' feel completely different. The last-taker can't say 'there are still others.' ... He took it. Humanity confidence adjusted.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The prediction, the reversal, and 'adjusted my confidence slightly' — the understatement makes it land."
+                    },
+                    {
+                        "text_zh": "算了，我们也出去吧，反正伞都没了，雨也没那么大了。",
+                        "text_pinyin": "Suàn le, wǒmen yě chūqù ba, fǎnzhèng sǎn dōu méi le, yǔ yě méi nàme dà le.",
+                        "text_en": "Forget it, let's go too, there are no umbrellas left anyway, and the rain isn't that heavy anymore.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "The climax of the show just happened and you're heading for the exit. She's still staring at the empty rack."
+                    },
+                    {
+                        "text_zh": "这就是为什么共享经济在中国很难成功。缺乏监管，谁都可以拿，当然就没了。",
+                        "text_pinyin": "Zhè jiù shì wèi shénme gòngxiǎng jīngjì zài Zhōngguó hěn nán chénggōng. Quēfá jiānguǎn, shéi dōu kěyǐ ná, dāngrán jiù méi le.",
+                        "text_en": "This is why the sharing economy struggles in China. No oversight, anyone can take them, of course they're gone.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You just watched four strangers perform a one-act play about human nature, and your takeaway is a policy recommendation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Shared umbrella schemes in Chinese cities (共享雨伞) became a minor cultural phenomenon and cautionary tale. Companies like Sharing E Umbrella lost nearly all 300,000 umbrellas within weeks, becoming a national joke about the gap between techno-optimism and actual behavior. The real comedy isn't in the theft itself but in the micro-negotiations people have with their own conscience — the glance around, the speed of the walk, the decision about whether to take the last one."
+    }
+}

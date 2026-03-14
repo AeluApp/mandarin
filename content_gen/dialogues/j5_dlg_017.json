@@ -1,0 +1,89 @@
+{
+  "title": "The Little Place Around the Corner",
+  "title_zh": "转角的小店",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You and your colleague Lao Zhou are trying to decide where to eat lunch. He mentions a small family-run restaurant that most people walk past without noticing.",
+    "setup_zh": "你和同事老周在决定中午去哪儿吃。他提到了一家不起眼的家庭小餐馆。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "我带你去一个地方。就在转角那条巷子里，没有招牌，门口只有一个小黑板写着今天的菜。老板夫妻俩自己做，每天就做二十份，卖完就关门。",
+        "text_pinyin": "Wǒ dài nǐ qù yīge dìfang. Jiù zài zhuǎnjiǎo nà tiáo xiàngzi lǐ, méiyǒu zhāopái, ménkǒu zhǐ yǒu yīge xiǎo hēibǎn xiě zhe jīntiān de cài. Lǎobǎn fūqī liǎ zìjǐ zuò, měi tiān jiù zuò èrshí fèn, mài wán jiù guānmén.",
+        "text_en": "Let me take you somewhere. It's in the alley around the corner — no sign, just a small blackboard at the door with today's menu. The husband and wife cook everything themselves, only twenty servings a day, and they close when it's sold out."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "React to his description of the restaurant.",
+        "options": [
+          {
+            "text_zh": "只做二十份就关门？这种店才有意思。不是为了赚更多，而是做好自己能做到的量。这种态度在现在很少见了。",
+            "text_pinyin": "Zhǐ zuò èrshí fèn jiù guānmén? Zhè zhǒng diàn cái yǒu yìsi. Bú shì wèile zhuàn gèng duō, ér shì zuò hǎo zìjǐ néng zuòdào de liàng. Zhè zhǒng tàidù zài xiànzài hěn shǎo jiàn le.",
+            "text_en": "Only twenty servings and then they close? That's the kind of place I find interesting. Not about making more money, but about doing well within their capacity. That attitude is rare these days.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Appreciative — values quality and intention over scale."
+          },
+          {
+            "text_zh": "没有招牌的店卫生条件怎么样？",
+            "text_pinyin": "Méiyǒu zhāopái de diàn wèishēng tiáojiàn zěnmeyàng?",
+            "text_en": "What are the hygiene conditions like at a place with no sign?",
+            "score": 0.0,
+            "feedback": "Practical concern that misses the charm he's describing."
+          },
+          {
+            "text_zh": "我们去那个新开的连锁店吧，有优惠券。",
+            "text_pinyin": "Wǒmen qù nàge xīn kāi de liánsuǒ diàn ba, yǒu yōuhuìquàn.",
+            "text_en": "Let's go to that new chain restaurant, I have a coupon.",
+            "score": 0.0,
+            "feedback": "Chooses convenience over the experience he's offering."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "老板姓刘，大家叫他刘叔。他以前在大酒店当厨师，退休以后跟老婆开了这个小店。他说大酒店做的菜好看但没有灵魂，他想做自己真正想吃的东西。",
+        "text_pinyin": "Lǎobǎn xìng Liú, dàjiā jiào tā Liú shū. Tā yǐqián zài dà jiǔdiàn dāng chúshī, tuìxiū yǐhòu gēn lǎopo kāi le zhège xiǎo diàn. Tā shuō dà jiǔdiàn zuò de cài hǎokàn dàn méiyǒu línghún, tā xiǎng zuò zìjǐ zhēnzhèng xiǎng chī de dōngxi.",
+        "text_en": "The owner's surname is Liu, everyone calls him Uncle Liu. He used to be a chef at a big hotel. After retiring, he opened this little place with his wife. He says hotel food looks beautiful but has no soul — he wanted to make what he truly wants to eat."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Uncle Liu's philosophy about food.",
+        "options": [
+          {
+            "text_zh": "有灵魂的菜——我喜欢这个说法。大酒店的菜是给别人吃的，这里的菜是给自己做的。你能吃出来那种差别。走吧，我已经很期待了。",
+            "text_pinyin": "Yǒu línghún de cài — wǒ xǐhuan zhège shuōfǎ. Dà jiǔdiàn de cài shì gěi biéren chī de, zhèlǐ de cài shì gěi zìjǐ zuò de. Nǐ néng chī chūlái nà zhǒng chābié. Zǒu ba, wǒ yǐjīng hěn qīdài le.",
+            "text_en": "Food with soul — I love that way of putting it. Hotel food is made for others; the food here is made for themselves. You can taste the difference. Let's go, I'm already looking forward to it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Enthusiastic and thoughtful — picks up on the philosophy behind the cooking."
+          },
+          {
+            "text_zh": "退休了还开店？不累吗？",
+            "text_pinyin": "Tuìxiū le hái kāi diàn? Bú lèi ma?",
+            "text_en": "Opening a shop after retiring? Isn't that tiring?",
+            "score": 0.0,
+            "feedback": "Sees it as labor rather than passion."
+          },
+          {
+            "text_zh": "二十份会不会不够？我们去晚了怎么办？",
+            "text_pinyin": "Èrshí fèn huì bú huì bú gòu? Wǒmen qù wǎn le zěnme bàn?",
+            "text_en": "Will twenty servings be enough? What if we get there late?",
+            "score": 0.0,
+            "feedback": "Practical but misses the soul of the conversation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "走！今天是周四，刘叔周四做酸菜鱼。他每次看到有人吃得干干净净，就站在厨房门口偷偷笑。那种笑容你在大酒店里看不到。",
+        "text_pinyin": "Zǒu! Jīntiān shì zhōusì, Liú shū zhōusì zuò suāncài yú. Tā měi cì kàn dào yǒu rén chī de gāngān jìngjìng, jiù zhàn zài chúfáng ménkǒu tōutōu xiào. Nà zhǒng xiàoróng nǐ zài dà jiǔdiàn lǐ kàn bú dào.",
+        "text_en": "Let's go! Today's Thursday — Uncle Liu makes pickled cabbage fish on Thursdays. Every time he sees someone finish every last bite, he stands at the kitchen door and smiles to himself. That kind of smile you'll never see in a big hotel."
+      }
+    ],
+    "cultural_note": "Small, family-run restaurants with no signage (无招牌小店) are a beloved part of Chinese food culture. They rely entirely on word-of-mouth and repeat customers. The concept of「有灵魂的菜」(food with soul) resonates deeply — many Chinese food enthusiasts believe the best meals come from cooks who care more about the food than the profit, a sentiment captured in food documentaries and social media food culture."
+  }
+}

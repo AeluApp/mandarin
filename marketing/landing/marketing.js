@@ -1,4 +1,4 @@
-// marketing.js — Shared marketing infrastructure for Mandarin landing pages
+// marketing.js — Shared marketing infrastructure for Aelu landing pages
 
 (function() {
   'use strict';
@@ -27,7 +27,7 @@
 
   // === Referral Cookie ===
   // If ?ref=PARTNER_CODE exists, set a first-party cookie lasting 90 days
-  // Cookie name: mandarin_ref
+  // Cookie name: aelu_ref
   // Only set if no existing cookie (first-click attribution)
 
   function captureReferralCode() {
@@ -36,11 +36,11 @@
     if (!ref) return;
 
     // Check if cookie already exists (first-click attribution)
-    if (getCookie('mandarin_ref')) return;
+    if (getCookie('aelu_ref')) return;
 
     var expires = new Date();
     expires.setDate(expires.getDate() + 90);
-    document.cookie = 'mandarin_ref=' + encodeURIComponent(ref) +
+    document.cookie = 'aelu_ref=' + encodeURIComponent(ref) +
       ';expires=' + expires.toUTCString() +
       ';path=/;SameSite=Lax';
   }
@@ -63,7 +63,7 @@
     safeGtag('event', 'waitlist_signup', {
       event_category: 'conversion',
       signup_source: source || 'unknown',
-      referral_code: getCookie('mandarin_ref') || '',
+      referral_code: getCookie('aelu_ref') || '',
       utm_source: getStoredUTM('utm_source'),
       utm_medium: getStoredUTM('utm_medium'),
       utm_campaign: getStoredUTM('utm_campaign')
@@ -96,7 +96,7 @@
   function trackAffiliateFormSubmit() {
     safeGtag('event', 'affiliate_form_submit', {
       event_category: 'conversion',
-      referral_code: getCookie('mandarin_ref') || ''
+      referral_code: getCookie('aelu_ref') || ''
     });
   }
 
@@ -116,7 +116,7 @@
     // Check if user already signed up
     var alreadySignedUp = false;
     try {
-      alreadySignedUp = localStorage.getItem('mandarin_waitlist_signed_up') === 'true';
+      alreadySignedUp = localStorage.getItem('aelu_waitlist_signed_up') === 'true';
     } catch (e) {
       // localStorage not available
     }
@@ -143,8 +143,8 @@
 
         // Store signup state
         try {
-          localStorage.setItem('mandarin_waitlist_signed_up', 'true');
-          localStorage.setItem('mandarin_waitlist_email', email);
+          localStorage.setItem('aelu_waitlist_signed_up', 'true');
+          localStorage.setItem('aelu_waitlist_email', email);
         } catch (err) {
           // localStorage not available
         }
@@ -261,11 +261,70 @@
     });
   }
 
+  // === Capacitor: skip landing, go straight to login ===
+
+  function capacitorRedirect() {
+    if (window.Capacitor && window.Capacitor.Plugins) {
+      try { window.Capacitor.Plugins.SplashScreen.hide(); } catch(e) {}
+      window.location.href = '/auth/login';
+      return true;
+    }
+    return false;
+  }
+
+  // === Landing Page A/B Testing ===
+  // Server-side assignment via cookie-based hashing (replaces unstable client fingerprint)
+
+  function initHeadlineABTest() {
+    var h1 = document.querySelector('.hero h1');
+    if (!h1) return;
+
+    var variants = [
+      'Learn Chinese the way your brain actually works',  // Control (A)
+      'The patient way to learn Chinese — and the one that lasts.',   // Variant B
+    ];
+
+    // Ensure visitor cookie exists for stable assignment
+    if (!getCookie('aelu_vid')) {
+      var vid = 'v_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+      var expires = new Date();
+      expires.setDate(expires.getDate() + 365);
+      document.cookie = 'aelu_vid=' + vid + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
+    }
+
+    // Fetch variant from server (server uses cookie for deterministic assignment)
+    fetch('/api/experiment/landing-variant')
+      .then(function(resp) { return resp.json(); })
+      .then(function(data) {
+        if (data.variant && data.variant_index < variants.length) {
+          h1.textContent = variants[data.variant_index];
+
+          var variantLabel = data.variant;
+          // Store variant for signup attribution
+          try {
+            sessionStorage.setItem('aelu_headline_variant', variantLabel);
+          } catch (e) {}
+
+          // Track impression
+          safeGtag('event', 'ab_impression', {
+            event_category: 'experiment',
+            experiment_name: 'landing_headline',
+            variant: variantLabel
+          });
+        }
+      })
+      .catch(function() {
+        // Fallback: keep default headline (control)
+      });
+  }
+
   // === Initialize Everything ===
 
   function init() {
+    if (capacitorRedirect()) return;
     captureUTMParams();
     captureReferralCode();
+    initHeadlineABTest();
     initNewsletterSignup();
     initScrollDepthTracking();
     initCTATracking();
@@ -282,7 +341,7 @@
   }
 
   // === Public API (for use by other scripts if needed) ===
-  window.MandarinMarketing = {
+  window.AeluMarketing = {
     trackWaitlistSignup: trackWaitlistSignup,
     trackCTAClick: trackCTAClick,
     trackBlogRead: trackBlogRead,

@@ -1,0 +1,123 @@
+{
+    "title": "Rainy Day at the Noodle Shop",
+    "title_zh": "雨天的面馆",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You duck into a small noodle shop to escape the rain. The shop owner, Boss Huang, is a cheerful man who loves chatting with customers.",
+        "setup_zh": "你为了躲雨走进了一家小面馆。老板黄师傅是个爱聊天的开朗人。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "快进来！外面雨好大。来，坐这里，先喝杯热水暖暖身子。你要吃什么面？",
+                "text_pinyin": "Kuài jìnlái! Wàimiàn yǔ hǎo dà. Lái, zuò zhèlǐ, xiān hē bēi rè shuǐ nuǎnnuan shēnzi. Nǐ yào chī shénme miàn?",
+                "text_en": "Come in quick! It's pouring outside. Here, sit down, have some hot water to warm up first. What noodles would you like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order noodles and respond to his warmth.",
+                "options": [
+                    {
+                        "text_zh": "谢谢老板！一碗牛肉面吧。这家店我路过很多次了，今天终于有机会来尝尝。",
+                        "text_pinyin": "Xièxie lǎobǎn! Yī wǎn niúròu miàn ba. Zhè jiā diàn wǒ lùguò hěn duō cì le, jīntiān zhōngyú yǒu jīhuì lái chángchang.",
+                        "text_en": "Thanks, boss! A bowl of beef noodles, please. I've walked past this shop many times — finally have a chance to try it today.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Friendly and gives him a compliment — great way to start."
+                    },
+                    {
+                        "text_zh": "牛肉面，不要辣。",
+                        "text_pinyin": "Niúròu miàn, bú yào là.",
+                        "text_en": "Beef noodles, no spice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Clear order but no warmth."
+                    },
+                    {
+                        "text_zh": "有菜单吗？",
+                        "text_pinyin": "Yǒu càidān ma?",
+                        "text_en": "Do you have a menu?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Practical but misses the personal touch."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好嘞！我们家的牛肉面是用老汤慢慢炖的，味道特别香。你等一下，十分钟就好。这个天气吃碗热面最舒服了。",
+                "text_pinyin": "Hǎo lei! Wǒmen jiā de niúròu miàn shì yòng lǎo tāng mànmàn dùn de, wèidào tèbié xiāng. Nǐ děng yīxià, shí fēnzhōng jiù hǎo. Zhège tiānqì chī wǎn rè miàn zuì shūfu le.",
+                "text_en": "Coming right up! Our beef noodles use an old-recipe broth simmered slowly — especially fragrant. Just ten minutes. Nothing better than hot noodles on a day like this."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Continue the conversation while waiting.",
+                "options": [
+                    {
+                        "text_zh": "老汤啊？那一定很有味道。黄师傅，您开这家店多久了？",
+                        "text_pinyin": "Lǎo tāng a? Nà yīdìng hěn yǒu wèidào. Huáng shīfu, nín kāi zhè jiā diàn duōjiǔ le?",
+                        "text_en": "Old-recipe broth? Must be really flavorful. Boss Huang, how long have you had this shop?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shows interest in his craft and story."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but doesn't engage."
+                    },
+                    {
+                        "text_zh": "有没有Wi-Fi？",
+                        "text_pinyin": "Yǒu méiyǒu Wi-Fi?",
+                        "text_en": "Do you have Wi-Fi?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Practical but ignores the personal moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "快二十年了！这条街变了很多，但是来吃面的老客人还是那些人。下雨天来的人最多，大家都喜欢躲进来吃碗热的。来，面好了！",
+                "text_pinyin": "Kuài èrshí nián le! Zhè tiáo jiē biàn le hěn duō, dànshì lái chī miàn de lǎo kèrén háishi nàxiē rén. Xià yǔ tiān lái de rén zuì duō, dàjiā dōu xǐhuan duǒ jìnlái chī wǎn rè de. Lái, miàn hǎo le!",
+                "text_en": "Almost twenty years! This street has changed a lot, but the regular customers are still the same people. Rainy days bring the most people — everyone likes to duck in for a hot bowl. Here, noodles are ready!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond after tasting the noodles.",
+                "options": [
+                    {
+                        "text_zh": "哇，真好吃！汤头特别鲜。难怪这么多年了客人还是那么多。我以后一定常来。",
+                        "text_pinyin": "Wā, zhēn hǎochī! Tāngtóu tèbié xiān. Nánguài zhème duō nián le kèrén háishi nàme duō. Wǒ yǐhòu yīdìng cháng lái.",
+                        "text_en": "Wow, it's delicious! The broth is so savory. No wonder you still have so many customers after all these years. I'll definitely come back often.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Genuine appreciation that connects taste to his dedication."
+                    },
+                    {
+                        "text_zh": "不错。",
+                        "text_pinyin": "Búcuò.",
+                        "text_en": "Not bad.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Understated — he'd appreciate more warmth."
+                    },
+                    {
+                        "text_zh": "能不能多加点肉？",
+                        "text_pinyin": "Néng bù néng duō jiā diǎn ròu?",
+                        "text_en": "Can you add more meat?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Requesting more before even finishing — seems ungrateful."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small neighborhood noodle shops are pillars of Chinese community life. Many have been run by the same family for decades. The phrase 「老汤」 refers to a broth recipe passed down and slowly developed over years — a source of pride for any noodle shop owner."
+    },
+    "hsk_level": 3
+}

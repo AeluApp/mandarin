@@ -111,7 +111,7 @@ No sound effects for UI interactions. The only non-music audio is a single soft 
 
 **Duration:** 1 second (holds until video ends)
 
-**Visual:** Warm stone background. "Mandarin" in large Cormorant Garamond, warm navy (#2A3650). "Patient Chinese Study" below in Source Sans 3, lighter weight. The 漫 character sits quietly in the bottom right, small, in dusty rose.
+**Visual:** Warm stone background. "Aelu" in large Cormorant Garamond, warm navy (#2A3650). "Patient Chinese Study" below in Source Sans 3, lighter weight. The 漫 character sits quietly in the bottom right, small, in dusty rose.
 
 **Text overlay:** Integrated into the closing card.
 

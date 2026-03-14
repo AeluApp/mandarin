@@ -1,0 +1,117 @@
+{
+    "title": "The Subway Sociologist",
+    "title_zh": "地铁社会学家",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're on the Beijing subway during rush hour with a sociology professor named Dr. Tang. She's been studying commuter behavior for ten years and is quietly narrating the social dynamics happening around you.",
+        "setup_zh": "早高峰时段你在北京地铁上，旁边是一位叫唐教授的社会学学者。她研究通勤行为十年了，正在小声描述你们周围发生的社会动态。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看那个拿着包占座的人——他把包放在旁边的空位上，假装在看手机。他不是不知道有人站着，他是在用包当边界。这是一种'领地行为'。",
+                "text_pinyin": "Nǐ kàn nàge ná zhe bāo zhàn zuò de rén — tā bǎ bāo fàng zài pángbiān de kōngwèi shàng, jiǎzhuāng zài kàn shǒujī. Tā bú shì bù zhīdào yǒu rén zhàn zhe, tā shì zài yòng bāo dāng biānjiè. Zhè shì yī zhǒng 'lǐngdì xíngwéi'.",
+                "text_en": "See that person using their bag to save a seat? They placed it on the empty seat next to them, pretending to look at their phone. They're not unaware people are standing — they're using the bag as a boundary. This is 'territorial behavior.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with Dr. Tang's observation.",
+                "options": [
+                    {
+                        "text_zh": "太反直觉了——缝隙不是弱点，反而是生存策略。现代桥梁追求密封和刚性，但刚性意味着一旦超过临界点就断裂。这座桥的思路刚好相反：允许移动，允许渗透，反而获得了柔韧性。",
+                        "text_pinyin": "Tài fǎn zhíjué le — fèngxì bú shì ruòdiǎn, fǎnér shì shēngcún cèlüè. Xiàndài qiáoliáng zhuīqiú mìfēng hé gāngxìng, dàn gāngxìng yìwèi zhe yīdàn chāoguò línjièdiǎn jiù duànliè. Zhè zuò qiáo de sīlù gānghǎo xiāngfǎn: yǔnxǔ yídòng, yǔnxǔ shèntòu, fǎnér huòdé le róurèn xìng.",
+                        "text_en": "So counterintuitive — gaps aren't weaknesses, they're survival strategy. Modern bridges pursue sealing and rigidity, but rigidity means fracture once you exceed the critical point. This bridge's philosophy is opposite: allow movement, allow permeation, and gain flexibility.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Adds a layer to her observation — identifies silence as the enabling mechanism."
+                    },
+                    {
+                        "text_zh": "下一站是哪里？",
+                        "text_pinyin": "Xià yī zhàn shì nǎlǐ?",
+                        "text_en": "What's the next stop?",
+                        "score": 0.0,
+                        "feedback": "Navigation question during an observation game."
+                    },
+                    {
+                        "text_zh": "北京地铁比上海的挤多了。",
+                        "text_pinyin": "Běijīng dìtiě bǐ Shànghǎi de jǐ duō le.",
+                        "text_en": "Beijing's subway is much more crowded than Shanghai's.",
+                        "score": 0.0,
+                        "feedback": "Generic comparison that doesn't engage with the behavioral analysis."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你观察力不错。再看另一个现象——门快关的时候冲进来的那些人，他们不是来不及了，大部分其实有时间等下一班。但'赶上这一班'有一种心理奖励感，就像抢到了什么东西。这跟购物时的'限时抢购'是同一种心理机制。",
+                "text_pinyin": "Nǐ guānchálì búcuò. Zài kàn lìng yīge xiànxiàng — mén kuài guān de shíhou chōng jìnlái de nàxiē rén, tāmen bú shì lái bù jí le, dà bùfen qíshí yǒu shíjiān děng xià yī bān. Dàn 'gǎn shàng zhè yī bān' yǒu yī zhǒng xīnlǐ jiǎnglì gǎn, jiù xiàng qiǎng dào le shénme dōngxi. Zhè gēn gòuwù shí de 'xiànshí qiǎnggòu' shì tóng yī zhǒng xīnlǐ jīzhì.",
+                "text_en": "Good eye. Now watch another phenomenon — those people who rush in as the doors are closing. They're not actually late; most of them have time to wait for the next train. But 'catching this one' provides a psychological reward, like snagging something. It's the same mechanism as 'flash sales' in shopping."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Build on the connection between commuter behavior and consumer psychology.",
+                "options": [
+                    {
+                        "text_zh": "这让我想到——我们这个时代迷恋'消除不确定性'，但也许真正持久的系统不是密不透风的，而是能跟环境一起晃动的。不管是桥、建筑还是制度，过于刚性的东西在意外面前最脆弱。",
+                        "text_pinyin": "Zhè ràng wǒ xiǎngdào — wǒmen zhège shídài míliàn 'xiāochú bù quèdìng xìng', dàn yěxǔ zhēnzhèng chíjiǔ de xìtǒng bú shì mì bù tòu fēng de, ér shì néng gēn huánjìng yīqǐ huàngdòng de. Bùguǎn shì qiáo, jiànzhù háishì zhìdù, guòyú gāngxìng de dōngxi zài yìwài miànqián zuì cuìruò.",
+                        "text_en": "This makes me think — our era is obsessed with 'eliminating uncertainty,' but truly enduring systems aren't airtight, they sway with their environment. Whether bridges, buildings, or institutions, overly rigid things are most fragile when the unexpected hits.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the analysis with an original observation about morning vs. evening asymmetry."
+                    },
+                    {
+                        "text_zh": "你经常坐地铁上班吗？",
+                        "text_pinyin": "Nǐ jīngcháng zuò dìtiě shàngbān ma?",
+                        "text_en": "Do you take the subway to work often?",
+                        "score": 0.0,
+                        "feedback": "Biographical question that breaks the analytical flow."
+                    },
+                    {
+                        "text_zh": "我觉得共享单车比地铁方便。",
+                        "text_pinyin": "Wǒ juéde gòngxiǎng dānchē bǐ dìtiě fāngbiàn.",
+                        "text_en": "I think bike-sharing is more convenient than the subway.",
+                        "score": 0.0,
+                        "feedback": "Transportation preference that misses the behavioral science discussion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很敏锐的观察。我研究里还有一个发现——地铁里的'让座'行为正在变化。十年前，年轻人看到老人会主动让座。现在更多人假装没看到，不是因为不想让，而是因为他们不确定对方是不是'真的老'。年龄的视觉判断变得模糊了，于是善意被犹豫取代了。",
+                "text_pinyin": "Hěn mǐnruì de guānchá. Wǒ yánjiū lǐ hái yǒu yīge fāxiàn — dìtiě lǐ de 'ràng zuò' xíngwéi zhèngzài biànhuà. Shí nián qián, niánqīng rén kàn dào lǎorén huì zhǔdòng ràng zuò. Xiànzài gèng duō rén jiǎzhuāng méi kàn dào, bú shì yīnwèi bù xiǎng ràng, ér shì yīnwèi tāmen bù quèdìng duìfāng shì bú shì 'zhēn de lǎo'. Niánlíng de shìjué pànduàn biàn de móhú le, yúshì shànyì bèi yóuyù qǔdài le.",
+                "text_en": "Very sharp observation. My research found another thing — seat-giving behavior on the subway is changing. Ten years ago, young people would proactively give up seats for the elderly. Now more people pretend not to see, not because they don't want to, but because they're unsure if the other person is 'really old.' The visual judgment of age has become blurry, so kindness is replaced by hesitation."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the changing dynamics of seat-giving.",
+                "options": [
+                    {
+                        "text_zh": "'跟自然谈判'——这个说法太好了。这也是一种谦逊的工程观：承认我们不可能控制一切，最好的策略不是对抗而是适应。三百年前的工匠比我们更懂这个道理。",
+                        "text_pinyin": "'Gēn zìrán tánpàn' — zhège shuōfǎ tài hǎo le. Zhè yě shì yī zhǒng qiānxùn de gōngchéng guān: chéngrèn wǒmen bù kěnéng kòngzhì yīqiè, zuì hǎo de cèlüè bú shì duìkàng ér shì shìyìng. Sānbǎi nián qián de gōngjiang bǐ wǒmen gèng dǒng zhège dàolǐ.",
+                        "text_en": "'Negotiating with nature' — beautiful. A humble engineering philosophy: accepting we can't control everything, the best strategy is adaptation, not resistance. Craftsmen 300 years ago understood this better than we do.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Names the paradox precisely — improved health creates ambiguity that paralyzes prosocial behavior."
+                    },
+                    {
+                        "text_zh": "你在哪个大学任教？",
+                        "text_pinyin": "Nǐ zài nǎge dàxué rènjiào?",
+                        "text_en": "Which university do you teach at?",
+                        "score": 0.0,
+                        "feedback": "Career question that disrupts the fascinating research insight."
+                    },
+                    {
+                        "text_zh": "我觉得北京应该增加更多地铁线路。",
+                        "text_pinyin": "Wǒ juéde Běijīng yīnggāi zēngjiā gèng duō dìtiě xiànlù.",
+                        "text_en": "I think Beijing should add more subway lines.",
+                        "score": 0.0,
+                        "feedback": "Infrastructure opinion that ignores the behavioral discussion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Seat-giving (让座) on Chinese public transit is a deeply embedded social norm, reinforced by announcements, signs, and cultural expectation. However, viral incidents — such as elderly passengers aggressively demanding seats or young people being publicly shamed for not yielding — have made the act fraught with anxiety. The shift Dr. Tang describes is real: many young commuters report wanting to give up seats but fearing either the awkwardness of misjudging someone's age or the social pressure of a public interaction. Some cities have introduced 'silent giving' systems where seat assignments are managed digitally."
+    }
+}

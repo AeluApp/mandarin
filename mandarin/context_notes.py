@@ -4,10 +4,6 @@ Culturally rich, observational notes that make vocabulary feel personal
 rather than generic flashcard material. Keyed by hanzi.
 """
 
-import logging
-
-logger = logging.getLogger(__name__)
-
 CONTEXT_NOTES = {
     # === HSK 1 (150 items) ===
     "爱": "The bottom component is a friend (友) cradled by a roof and claws — love as something you grasp and shelter. The simplified form dropped the heart (心) that the traditional character has, which says something.",
@@ -126,12 +122,12 @@ CONTEXT_NOTES = {
     "先生": "Born first — the elder, the teacher, the mister. 先生 once specifically meant 'teacher' (and still does in some contexts). Now it's the standard formal address for adult men: [Surname]先生.",
     "现在": "Appear-exist: what appears and exists right now. One of those words you use dozens of times a day without thinking about it. 现在几点 (what time is it now) is a survival phrase.",
     "小": "Three strokes suggesting something being divided into smaller pieces. Opposite of 大. 小 before a surname (小李, 小王) is a casual, friendly way to address someone younger or junior — common in workplaces.",
-    "小姐": "Little-elder, which makes no sense literally. Historically a polite address for young women; in some regions and contexts now has unwanted connotations, so 女士 (nǚshì) has become the safer formal option in mainland China.",
+    "小姐": "Little-elder, which makes no sense literally. Historically a polite address for young women; in mainland China 小姐 can mean 'prostitute' depending on context and region, so 女士 (nǚshì) is the safer formal option. In Taiwan, 小姐 is still perfectly polite.",
     "些": "Some, a few. The character combines 此 (this) and 二 (two) — 'these two-ish,' a vague small quantity. 一些 (some) and 有些 (some, somewhat) are the most common combinations.",
     "写": "Simplified from 寫, which had a roof radical over components meaning 'pour out.' Writing as pouring out meaning under shelter. The simplified version barely hints at this.",
     "星期": "Star-period. The seven-day week wasn't traditional in China — it was adopted in the early 20th century. Days are numbered: 星期一 through 星期六, with Sunday as 星期天 or 星期日.",
     "学生": "Study-born, one who is born to learn. The relationship between 学生 and 老师 is fundamental in Chinese culture — the teacher-student bond carries Confucian weight that persists today.",
-    "学习": "Study-practice. 学 has a child (子) under a roof being taught; 习 originally showed a bird practicing flying (羽, wings). Learning is studying and then practicing until you can fly.",
+    "学习": "Study-practice. 学 has a child (子) under a roof being taught; 习 originally showed a bird practicing flying (羽, wings). 学 is the input; 习 is the repetition.",
     "学校": "Study-school. 校 has the wood radical (木), suggesting the wooden buildings of early schools. The compound is straightforward — a place for studying.",
     "一": "A single horizontal stroke — the most elemental character. Changes tone depending on what follows: yī in isolation, yí before fourth tone, yì before others. These tone changes are automatic for native speakers but maddening for learners.",
     "衣服": "Clothing. 衣 is a pictograph of a robe with collar and sleeves visible. As a radical (衤), it appears in 裤 (pants), 裙 (skirt), 被 (quilt). When you see 衤, think fabric.",
@@ -159,7 +155,7 @@ CONTEXT_NOTES = {
     "下雨": "Fall-rain. The rain 'descends' — Chinese weather verbs use directional complements. 下雪 (snow falls) uses the same structure. The sky drops things on you; you don't passively experience weather.",
     "想": "Heart/mind radical (心) at the bottom, with 相 (mutual, appearance) on top — what appears in your heart-mind. Covers 'think,' 'miss (someone),' and 'want to.' Context separates them.",
     "谢谢": "The doubled form for emphasis — a single 谢 exists but sounds clipped. 谢 contains 射 (shoot) and the speech radical, roughly 'words shot back in return.' A verbal volley of gratitude.",
-    "一点儿": "One-dot-er. 'A little bit.' The 儿 is the northern/Beijing r-colored suffix. Southerners might say 一点 without it. Essential for softening requests: 便宜一点儿 (a little cheaper, please).",
+    "一点儿": "One-dot-er. 'A little bit.' The 儿 is the northern/Beijing r-colored suffix. Southerners might say 一点 without it. Essential for softening requests: 能便宜一点儿吗 (could you make it a little cheaper?).",
     "医生": "Medicine-born, one born to medicine. Doctors in China are addressed as [Surname]医生 or sometimes [Surname]大夫 (dàifu). The prestige of medicine in Chinese culture is immense and longstanding.",
     "怎么样": "How-about-it. The go-to phrase for soliciting opinions: 这个怎么样? (how about this one?). Also used for 'how is/was it' — 北京怎么样? (how's Beijing?).",
     "这": "This/here. The demonstrative that, along with 那 (that), structures most of Chinese spatial reference. 这个, 这里, 这样 — you'll build dozens of phrases from it.",

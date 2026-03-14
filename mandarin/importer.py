@@ -56,6 +56,9 @@ def import_csv_text(conn, text: str, *,
                     source_name: str = "csv_import") -> Tuple[int, int]:
     """Import vocabulary from CSV text content.
 
+    Runs the entire import inside one transaction — rolls back on error
+    so no partial data is committed.
+
     Returns (items_added, items_skipped).
     """
     reader = csv.reader(io.StringIO(text))
@@ -75,83 +78,95 @@ def import_csv_text(conn, text: str, *,
         data_rows = rows
         col_map = None
 
-    # Record source
-    source_id = _record_source(conn, "quizlet", source_name,
-                               register=register, content_lens=content_lens)
+    try:
+        # Record source
+        source_id = _record_source(conn, "quizlet", source_name,
+                                   register=register, content_lens=content_lens)
 
-    added = 0
-    skipped = 0
+        # Pre-fetch existing hanzi for bulk dedup
+        existing = {}
+        for row in conn.execute(
+            "SELECT id, hanzi, pinyin, english FROM content_item"
+        ).fetchall():
+            existing[row["hanzi"]] = row
 
-    for row in data_rows:
-        if not row or all(not cell.strip() for cell in row):
-            continue
+        added = 0
+        skipped = 0
 
-        try:
-            if col_map:
-                item = _extract_from_mapped(row, col_map)
-            else:
-                item = _extract_from_two_col(row)
-
-            if not item:
-                skipped += 1
+        for row in data_rows:
+            if not row or all(not cell.strip() for cell in row):
                 continue
 
-            hanzi, pinyin, english = item
-
-            # Check for existing item with same hanzi
-            exists = conn.execute(
-                "SELECT id, pinyin, english FROM content_item WHERE hanzi = ?", (hanzi,)
-            ).fetchone()
-            if exists:
-                # If existing item has empty fields and import has data, update it
-                ex_pinyin = (exists["pinyin"] or "").strip()
-                ex_english = (exists["english"] or "").strip()
-                if (not ex_pinyin and pinyin) or (not ex_english and english):
-                    updates = {}
-                    if not ex_pinyin and pinyin:
-                        updates["pinyin"] = pinyin
-                    if not ex_english and english:
-                        updates["english"] = english
-                    # Safe: keys are from hardcoded "pinyin"/"english" checks above
-                    set_clause = ", ".join(f"{k} = ?" for k in updates)
-                    vals = list(updates.values()) + [exists["id"]]
-                    conn.execute(f"UPDATE content_item SET {set_clause} WHERE id = ?", vals)
-                    # Promote status if now complete
-                    if (pinyin or ex_pinyin) and (english or ex_english):
-                        conn.execute(
-                            "UPDATE content_item SET status = 'drill_ready' WHERE id = ?",
-                            (exists["id"],)
-                        )
-                    added += 1
+            try:
+                if col_map:
+                    item = _extract_from_mapped(row, col_map)
                 else:
+                    item = _extract_from_two_col(row)
+
+                if not item:
                     skipped += 1
-                continue
+                    continue
 
-            db.insert_content_item(
-                conn,
-                hanzi=hanzi,
-                pinyin=pinyin,
-                english=english,
-                hsk_level=hsk_level,
-                register=register,
-                content_lens=content_lens,
-                source=f"csv:{source_name}",
+                hanzi, pinyin, english = item
+
+                # Check for existing item with same hanzi (in-memory lookup)
+                exists = existing.get(hanzi)
+                if exists:
+                    # If existing item has empty fields and import has data, update it
+                    ex_pinyin = (exists["pinyin"] or "").strip()
+                    ex_english = (exists["english"] or "").strip()
+                    if (not ex_pinyin and pinyin) or (not ex_english and english):
+                        updates = {}
+                        if not ex_pinyin and pinyin:
+                            updates["pinyin"] = pinyin
+                        if not ex_english and english:
+                            updates["english"] = english
+                        # Safe: keys are from hardcoded "pinyin"/"english" checks above
+                        set_clause = ", ".join(f"{k} = ?" for k in updates)
+                        vals = list(updates.values()) + [exists["id"]]
+                        conn.execute(f"UPDATE content_item SET {set_clause} WHERE id = ?", vals)
+                        # Promote status if now complete
+                        if (pinyin or ex_pinyin) and (english or ex_english):
+                            conn.execute(
+                                "UPDATE content_item SET status = 'drill_ready' WHERE id = ?",
+                                (exists["id"],)
+                            )
+                        added += 1
+                    else:
+                        skipped += 1
+                    continue
+
+                db.insert_content_item(
+                    conn,
+                    hanzi=hanzi,
+                    pinyin=pinyin,
+                    english=english,
+                    hsk_level=hsk_level,
+                    register=register,
+                    content_lens=content_lens,
+                    source=f"csv:{source_name}",
+                )
+                # Track newly inserted hanzi so later rows dedup against it
+                existing[hanzi] = {"id": None, "hanzi": hanzi, "pinyin": pinyin, "english": english}
+                added += 1
+
+            except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
+                logger.debug("import skipped item %r: %s", row, e)
+                skipped += 1
+
+        # Update source stats
+        if source_id:
+            conn.execute(
+                "UPDATE content_source SET items_extracted = ? WHERE id = ?",
+                (added, source_id)
             )
-            added += 1
 
-        except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
-            logger.debug("import skipped item %r: %s", hanzi, e)
-            skipped += 1
+        conn.commit()
+        return added, skipped
 
-    # Update source stats
-    if source_id:
-        conn.execute(
-            "UPDATE content_source SET items_extracted = ? WHERE id = ?",
-            (added, source_id)
-        )
-
-    conn.commit()
-    return added, skipped
+    except Exception:
+        conn.rollback()
+        raise
 
 
 def _detect_columns(header: list) -> dict:
@@ -239,45 +254,52 @@ def import_srt(conn, file_path: str, *,
     if not sentences:
         return 0, 0
 
-    # Record source
-    source_id = _record_source(conn, "subtitle", source_name,
-                               register=register, content_lens=content_lens)
+    try:
+        # Record source
+        source_id = _record_source(conn, "subtitle", source_name,
+                                   register=register, content_lens=content_lens)
 
-    added = 0
-    skipped = 0
+        # Pre-fetch existing hanzi for bulk dedup
+        existing_hanzi = {
+            r["hanzi"] for r in conn.execute("SELECT hanzi FROM content_item").fetchall()
+        }
 
-    for hanzi in sentences:
-        # Skip duplicates
-        exists = conn.execute(
-            "SELECT id FROM content_item WHERE hanzi = ?", (hanzi,)
-        ).fetchone()
-        if exists:
-            skipped += 1
-            continue
+        added = 0
+        skipped = 0
 
-        item_id = db.insert_content_item(
-            conn,
-            hanzi=hanzi,
-            pinyin="",  # Pinyin not available from subtitles
-            english="",  # Translation not available
-            item_type="sentence",
-            register=register,
-            content_lens=content_lens,
-            source=f"subtitle:{source_name}",
-            difficulty=_estimate_sentence_difficulty(hanzi),
-        )
-        # SRT imports lack pinyin/english — mark as raw
-        conn.execute("UPDATE content_item SET status = 'raw' WHERE id = ?", (item_id,))
-        added += 1
+        for hanzi in sentences:
+            if hanzi in existing_hanzi:
+                skipped += 1
+                continue
 
-    if source_id:
-        conn.execute(
-            "UPDATE content_source SET items_extracted = ? WHERE id = ?",
-            (added, source_id)
-        )
+            item_id = db.insert_content_item(
+                conn,
+                hanzi=hanzi,
+                pinyin="",  # Pinyin not available from subtitles
+                english="",  # Translation not available
+                item_type="sentence",
+                register=register,
+                content_lens=content_lens,
+                source=f"subtitle:{source_name}",
+                difficulty=_estimate_sentence_difficulty(hanzi),
+            )
+            # SRT imports lack pinyin/english — mark as raw
+            conn.execute("UPDATE content_item SET status = 'raw' WHERE id = ?", (item_id,))
+            existing_hanzi.add(hanzi)
+            added += 1
 
-    conn.commit()
-    return added, skipped
+        if source_id:
+            conn.execute(
+                "UPDATE content_source SET items_extracted = ? WHERE id = ?",
+                (added, source_id)
+            )
+
+        conn.commit()
+        return added, skipped
+
+    except Exception:
+        conn.rollback()
+        raise
 
 
 def _parse_srt(text: str, min_chars: int = 2, max_chars: int = 40) -> List[str]:
@@ -536,7 +558,6 @@ def _record_source(conn, source_type: str, name: str, *,
             INSERT INTO content_source (source_type, name, url, file_path, register, content_lens)
             VALUES (?, ?, ?, ?, ?, ?)
         """, (source_type, name, url, file_path, register, content_lens))
-        conn.commit()
         return cur.lastrowid
     except sqlite3.Error as e:
         logger.debug("content source insert failed: %s", e)

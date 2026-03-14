@@ -1,0 +1,94 @@
+{
+    "title": "The Stationery Connoisseur",
+    "title_zh": "文具鉴赏家",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_shopping_1_03_v0",
+    "tree": {
+        "setup": "A stationery shop near a school. The owner, Uncle Liu, believes every pen has a personality. He tests each one before selling it, leaving rows of tiny ink spirals on a notepad. Right now he's examining a new shipment of erasers with a magnifying glass. The shop smells like fresh paper.",
+        "setup_zh": "学校旁边的文具店。店主刘叔叔相信每支笔都有性格。他卖之前都要试一试，在本子上留下一排排小墨水圈。现在他正用放大镜检查一批新橡皮。店里闻起来有新纸的味道。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你想买什么？",
+                "text_pinyin": "nǐ hǎo! nǐ xiǎng mǎi shénme?",
+                "text_en": "Hello! What would you like to buy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what you need.",
+                "options": [
+                    {
+                        "text_zh": "我要买一支笔。",
+                        "text_pinyin": "wǒ yào mǎi yì zhī bǐ.",
+                        "text_en": "I'd like to buy a pen.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Liu's face transforms. He reaches under the counter and produces three pens, each on its own little cloth.「这支写得很流畅，这支颜色深……」支 (zhī) is the measure word for pens."
+                    },
+                    {
+                        "text_zh": "有没有本子？",
+                        "text_pinyin": "yǒu méiyǒu běnzi?",
+                        "text_en": "Do you have notebooks?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Liu gestures at an entire wall of notebooks, organized by line spacing, cover color, and page count. He asks if you prefer grids or lines with the seriousness of a sommelier asking about wine preferences."
+                    },
+                    {
+                        "text_zh": "最便宜的是什么？",
+                        "text_pinyin": "zuì piányi de shì shénme?",
+                        "text_en": "What's the cheapest?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Liu winces as though you've asked a chef for their least favorite dish. He produces a pen but warns you solemnly:「这支……写得不太好。」最 + adjective means 'the most.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这支笔很好写。三块钱。",
+                "text_pinyin": "zhè zhī bǐ hěn hǎo xiě. sān kuài qián.",
+                "text_en": "This pen writes very well. Three yuan."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to buy it.",
+                "options": [
+                    {
+                        "text_zh": "好的，我买这个。",
+                        "text_pinyin": "hǎo de, wǒ mǎi zhè ge.",
+                        "text_en": "OK, I'll buy this one.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Liu wraps the pen in tissue paper as though it were a calligraphy brush from the Song dynasty. He's placed it in exactly the right hands, he feels."
+                    },
+                    {
+                        "text_zh": "我再看看。",
+                        "text_pinyin": "wǒ zài kànkan.",
+                        "text_en": "I'll look around more.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Liu nods patiently. He'll be here. The pen will be here. Take your time. 再 + verb means 'to do it again' or 'more.'"
+                    },
+                    {
+                        "text_zh": "不要了，谢谢。",
+                        "text_pinyin": "bú yào le, xièxie.",
+                        "text_en": "No thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Liu gently returns the pen to its cloth with the gravity of a father putting a child back to bed. He'll find it a worthy owner someday."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好好用啊！这支笔会陪你很久的。",
+                "text_pinyin": "hǎohǎo yòng a! zhè zhī bǐ huì péi nǐ hěn jiǔ de.",
+                "text_en": "Use it well! This pen will be with you for a long time."
+            }
+        ],
+        "cultural_note": "Stationery culture is serious in China. Students and office workers often have strong preferences about pens, and stationery shops near schools do brisk business. A good pen is considered a small but meaningful tool for success."
+    }
+}

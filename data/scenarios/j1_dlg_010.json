@@ -1,0 +1,87 @@
+{
+    "title": "The Stationery Shop Cat",
+    "title_zh": "文具店的猫",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "You walk into a small stationery shop. A cat is sleeping on a stack of notebooks. The shop owner is writing behind the counter.",
+        "setup_zh": "你走进一家小文具店。一只猫在一摞本子上睡觉。店主在柜台后面写字。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，欢迎！你喜欢猫吗？她叫小花。",
+                "text_pinyin": "Nǐ hǎo, huānyíng! Nǐ xǐhuan māo ma? Tā jiào Xiǎo Huā.",
+                "text_en": "Hello, welcome! Do you like cats? Her name is Xiao Hua."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the cat.",
+                "options": [
+                    {
+                        "text_zh": "我很喜欢猫！小花好可爱。",
+                        "text_pinyin": "Wǒ hěn xǐhuan māo! Xiǎo Huā hǎo kě'ài.",
+                        "text_en": "I really like cats! Xiao Hua is so cute.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Responds to her pride in introducing Xiao Hua -- she named the cat and you used the name back."
+                    },
+                    {
+                        "text_zh": "嗯，猫挺好的。你们有什么笔？",
+                        "text_pinyin": "Ēn, māo tǐng hǎo de. Nǐmen yǒu shénme bǐ?",
+                        "text_en": "Yeah, cats are nice. What pens do you have?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Acknowledges the cat briefly but pivots to shopping -- she was introducing you to Xiao Hua, not taking your order yet."
+                    },
+                    {
+                        "text_zh": "这些本子多少钱？",
+                        "text_pinyin": "Zhèxiē běnzi duōshǎo qián?",
+                        "text_en": "How much are these notebooks?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She's introducing you to the shop cat and you went straight to pricing the notebooks -- misses the personal moment she offered."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "她很喜欢客人。你想买什么？我们有笔、本子、还有信纸。",
+                "text_pinyin": "Tā hěn xǐhuan kèren. Nǐ xiǎng mǎi shénme? Wǒmen yǒu bǐ, běnzi, hái yǒu xìnzhǐ.",
+                "text_en": "She really likes guests. What would you like to buy? We have pens, notebooks, and stationery paper."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the owner what you'd like.",
+                "options": [
+                    {
+                        "text_zh": "我想买一个本子。有没有好看的？",
+                        "text_pinyin": "Wǒ xiǎng mǎi yī ge běnzi. Yǒu méiyǒu hǎokàn de?",
+                        "text_en": "I'd like a notebook. Do you have a nice-looking one?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Picks from what she offered and asks for a recommendation -- shows you trust her taste."
+                    },
+                    {
+                        "text_zh": "我看看。",
+                        "text_pinyin": "Wǒ kànkan.",
+                        "text_en": "Let me look.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Reasonable but doesn't engage -- she listed her products and you want to browse silently."
+                    },
+                    {
+                        "text_zh": "你们有电脑吗？",
+                        "text_pinyin": "Nǐmen yǒu diànnǎo ma?",
+                        "text_en": "Do you have computers?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She told you they have pens, notebooks, and stationery paper -- asking for computers in a small stationery shop misreads what kind of store this is."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small stationery shops (文具店) are common in Chinese neighborhoods, often run by a single owner. They're cozy, personal places where the shop cat is as much a fixture as the merchandise. Choosing a notebook or pen is a small, tactile pleasure."
+    }
+}

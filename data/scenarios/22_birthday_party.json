@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Accept the invitation and ask what you can bring.",
                 "options": [
-                    {"text_zh": "当然可以！祝你生日快乐！我带什么来好呢？", "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?", "text_en": "Of course! Happy birthday! What should I bring?", "score": 1.0, "register": "casual", "feedback": "Enthusiastic, warm, and thoughtful — offering to bring something shows consideration."},
-                    {"text_zh": "好啊，我一定来！几点开始呢？", "text_pinyin": "hǎo a, wǒ yīdìng lái! jǐ diǎn kāishǐ ne?", "text_en": "Great, I'll definitely come! What time does it start?", "score": 0.8, "register": "casual", "feedback": "Positive and practical — asking about time shows you're serious about attending."},
-                    {"text_zh": "可以，周六我有空，去你家吃饭。", "text_pinyin": "kěyǐ, zhōuliù wǒ yǒu kòng, qù nǐ jiā chīfàn.", "text_en": "Sure, I'm free Saturday, I'll come eat at your place.", "score": 0.5, "register": "casual", "feedback": "Accepts but sounds transactional — a birthday deserves some warmth like 生日快乐."}
+                    {
+                        "text_zh": "我们去看电影或者找个地方喝咖啡吧。",
+                        "text_pinyin": "wǒmen qù kàn diànyǐng huòzhě zhǎo ge dìfang hē kāfēi ba.",
+                        "text_en": "Let's go see a movie or find a place to get coffee.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to accept the invitation and ask what you can bring, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "当然可以！祝你生日快乐！我带什么来好呢？",
+                        "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?",
+                        "text_en": "Of course! Happy birthday! What should I bring?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enthusiastic, warm, and thoughtful — offering to bring something shows consideration."
+                    },
+                    {
+                        "text_zh": "是的，我预订了。我姓李。",
+                        "text_pinyin": "shì de, wǒ yùdìng le. wǒ xìng lǐ.",
+                        "text_en": "Yes, I have a reservation. My surname is Li.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to accept the invitation and ask what you can bring, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Insist on bringing something anyway.",
                 "options": [
-                    {"text_zh": "那怎么行，我带一个蛋糕过去吧。", "text_pinyin": "nà zěnme xíng, wǒ dài yī ge dàngāo guòqù ba.", "text_en": "How can I come empty-handed? I'll bring a cake.", "score": 1.0, "register": "casual", "feedback": "那怎么行 is a natural way to politely insist — bringing a cake to a birthday is always welcome."},
-                    {"text_zh": "好吧，那我带一些水果过来。", "text_pinyin": "hǎo ba, nà wǒ dài yīxiē shuǐguǒ guòlái.", "text_en": "OK then, I'll bring some fruit over.", "score": 0.7, "register": "casual", "feedback": "Fruit is a classic guest gift in China — a solid choice even if less birthday-specific."},
-                    {"text_zh": "好的好的，那我就不带东西了。", "text_pinyin": "hǎo de hǎo de, nà wǒ jiù bú dài dōngxi le.", "text_en": "OK OK, then I won't bring anything.", "score": 0.4, "register": "casual", "feedback": "Taking the host literally is a misstep — in Chinese culture, the polite dance of insisting is expected."}
+                    {
+                        "text_zh": "那怎么行，我带一个蛋糕过去吧。",
+                        "text_pinyin": "nà zěnme xíng, wǒ dài yī ge dàngāo guòqù ba.",
+                        "text_en": "How can I come empty-handed? I'll bring a cake.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "那怎么行 is a natural way to politely insist — bringing a cake to a birthday is always welcome."
+                    },
+                    {
+                        "text_zh": "好啊，我很想去！你想看几点的？",
+                        "text_pinyin": "hǎo a, wǒ hěn xiǎng qù! nǐ xiǎng kàn jǐ diǎn de?",
+                        "text_en": "Sure, I'd love to go! What time do you want to see?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to insist on bringing something anyway, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "哇，成都看起来很漂亮！你去了哪些地方？",
+                        "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?",
+                        "text_en": "Wow, Chengdu looks beautiful! What places did you visit?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to insist on bringing something anyway, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

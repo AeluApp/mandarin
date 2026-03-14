@@ -1,0 +1,160 @@
+{
+    "title": "The Housewarming Choreographer",
+    "title_zh": "暖房编导",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_5_02_v0",
+    "tree": {
+        "setup": "Your colleague Xiao Sun has moved into a new apartment and sent a group message: 「这周六来我家暖房！不用带什么东西，人来就行。」Everyone knows「不用带什么东西」actually means「definitely bring something, but I want to seem casual about it.」You need to navigate the gift-choosing, food-bringing, and party-attending protocol with the social precision of someone who understands the unwritten rules.",
+        "setup_zh": "你的同事小孙搬了新家，在群里发了条消息：「这周六来我家暖房！不用带什么东西，人来就行。」每个人都知道「不用带什么东西」实际上的意思是「一定要带点东西，但我想显得随意一点。」你需要以理解潜规则的社交精确度来应对选礼物、带食物和参加派对的礼仪。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你来了！快进快进！鞋子放门口就行。哎呀你还带东西了！说了不用带的。",
+                "text_pinyin": "nǐ lái le! kuài jìn kuài jìn! xiézi fàng ménkǒu jiù xíng. āiyā nǐ hái dài dōngxi le! shuō le bú yòng dài de.",
+                "text_en": "You're here! Come in, come in! Leave your shoes at the door. Oh, you brought something! I said you didn't need to!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer your housewarming gift.",
+                "options": [
+                    {
+                        "text_zh": "说不带怎么行！这是一套茶具，我看你之前发朋友圈说想学泡茶，正好你新家有个漂亮的阳台，以后可以在阳台上喝茶。恭喜你搬新家！",
+                        "text_pinyin": "shuō bú dài zěnme xíng! zhè shì yí tào chájù, wǒ kàn nǐ zhīqián fā Péngyouquān shuō xiǎng xué pào chá, zhènghǎo nǐ xīn jiā yǒu gè piàoliang de yángtái, yǐhòu kěyǐ zài yángtái shàng hē chá. gōngxǐ nǐ bān xīn jiā!",
+                        "text_en": "How could I not bring anything! This is a tea set — I saw on your WeChat Moments that you wanted to learn tea-making. Your new place has a lovely balcony — perfect for drinking tea. Congratulations on the new home!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A gift connected to a social media post and the new space — this is the kind of thoughtfulness that earns you the best seat at the housewarming dinner."
+                    },
+                    {
+                        "text_zh": "带了一箱水果，大家一起吃。搬新家快乐！",
+                        "text_pinyin": "dài le yì xiāng shuǐguǒ, dàjiā yìqǐ chī. bān xīn jiā kuàilè!",
+                        "text_en": "Brought a box of fruit for everyone. Happy new home!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Fruit is always appropriate — practical, shareable, and impossible to go wrong with."
+                    },
+                    {
+                        "text_zh": "你说不用带我就没带。空手来的。",
+                        "text_pinyin": "nǐ shuō bú yòng dài wǒ jiù méi dài. kōng shǒu lái de.",
+                        "text_en": "You said not to bring anything, so I didn't. Came empty-handed.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Taking 「不用带」literally — a social misread. Xiao Sun's smile doesn't change, but the seating arrangement might."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "茶具！太有心了！谢谢谢谢！来来来，我带你参观一下新房子。客厅大不大？阳台是我最喜欢的地方。你觉得怎么样？",
+                "text_pinyin": "chájù! tài yǒuxīn le! xièxie xièxie! lái lái lái, wǒ dài nǐ cānguān yíxià xīn fángzi. kètīng dà bú dà? yángtái shì wǒ zuì xǐhuān de dìfāng. nǐ juéde zěnmeyàng?",
+                "text_en": "A tea set! So thoughtful! Thank you! Come, let me give you a tour. Is the living room big enough? The balcony is my favorite spot. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Comment on the new apartment.",
+                "options": [
+                    {
+                        "text_zh": "客厅真的很大，采光也特别好。阳台那个角落放茶桌简直太完美了——以后我来蹭茶喝。装修风格很清爽，你是自己设计的还是找了设计师？那个书架的位置选得很好，刚好利用了角落的空间。",
+                        "text_pinyin": "kètīng zhēn de hěn dà, cǎiguāng yě tèbié hǎo. yángtái nàge jiǎoluò fàng chá zhuō jiǎnzhí tài wánměi le——yǐhòu wǒ lái cèng chá hē. zhuāngxiū fēnggé hěn qīngshuǎng, nǐ shì zìjǐ shèjì de háishi zhǎo le shèjìshī? nàge shūjià de wèizhi xuǎn de hěn hǎo, gānghǎo lìyòng le jiǎoluò de kōngjiān.",
+                        "text_en": "The living room is really spacious, and the natural light is great. That balcony corner is perfect for a tea table — I'll come freeload tea in the future. The decor style is really fresh — did you design it yourself or hire a designer? The bookshelf placement is clever, making great use of the corner space.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific compliments about lighting, layout decisions, and a promise to visit again — Xiao Sun beams. Every new homeowner wants their choices validated."
+                    },
+                    {
+                        "text_zh": "挺好的！比你之前的房子大多了。",
+                        "text_pinyin": "tǐng hǎo de! bǐ nǐ zhīqián de fángzi dà duō le.",
+                        "text_en": "Very nice! Much bigger than your old place.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A comparison compliment — she's pleased, though she might have preferred praise for the design rather than just the size."
+                    },
+                    {
+                        "text_zh": "不错不错。租金多少啊？",
+                        "text_pinyin": "búcuò búcuò. zūjīn duōshǎo a?",
+                        "text_en": "Nice, nice. How much is the rent?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Asking about rent during a housewarming tour — the social equivalent of reading someone's grocery receipt. Some things are better left unasked."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，随时来喝茶！装修是我自己设计的，省了不少钱。对了，待会儿吃什么你们有没有意见？我准备了火锅，但如果有人不吃辣的话，也有清汤锅底。",
+                "text_pinyin": "hāha, suíshí lái hē chá! zhuāngxiū shì wǒ zìjǐ shèjì de, shěng le bù shǎo qián. duì le, dàihuǐr chī shénme nǐmen yǒu méiyǒu yìjiàn? wǒ zhǔnbèi le huǒguō, dàn rúguǒ yǒu rén bù chī là de huà, yě yǒu qīngtāng guōdǐ.",
+                "text_en": "Haha, come anytime for tea! I designed the decor myself — saved a lot of money. Oh — any preferences for dinner? I prepared hotpot, but if anyone doesn't eat spicy, I have a mild broth base too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about dinner and offer to help.",
+                "options": [
+                    {
+                        "text_zh": "火锅太棒了！鸳鸯锅底最好——一边辣一边不辣，大家都能吃。我带了一些牛肉卷和虾滑，直接放进去涮就行。需不需要我帮忙切菜或者准备蘸料？",
+                        "text_pinyin": "huǒguō tài bàng le! yuānyāng guōdǐ zuìhǎo——yì biān là yì biān bú là, dàjiā dōu néng chī. wǒ dài le yìxiē niúròu juǎn hé xiāhuá, zhíjiē fàng jìnqù shuàn jiù xíng. xū bù xūyào wǒ bāngmáng qiē cài huòzhě zhǔnbèi zhàn liào?",
+                        "text_en": "Hotpot is amazing! A dual-flavor pot would be best — spicy on one side, mild on the other, everyone's happy. I brought some beef rolls and shrimp paste — just drop them in. Need help cutting vegetables or preparing dipping sauce?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Bringing hotpot ingredients, suggesting the dual-pot compromise, and offering to help — this is a housewarming guest who earns a permanent invitation."
+                    },
+                    {
+                        "text_zh": "火锅好！我能吃辣。",
+                        "text_pinyin": "huǒguō hǎo! wǒ néng chī là.",
+                        "text_en": "Hotpot's great! I can handle spicy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Enthusiastic but self-focused. The others who can't eat spicy also need consideration."
+                    },
+                    {
+                        "text_zh": "火锅会把新房子搞得很油的，你确定吗？",
+                        "text_pinyin": "huǒguō huì bǎ xīn fángzi gǎo de hěn yóu de, nǐ quèdìng ma?",
+                        "text_en": "Won't hotpot make the new place greasy? Are you sure?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A practical concern voiced at the wrong moment. It's her house, her hotpot, her grease."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你太周到了！牛肉卷和虾滑正好是我忘了买的。来来来，厨房在这边，帮我切一下蔬菜。对了，你觉得我应该养一盆什么植物？阳台上空空的，想放点绿色的东西。",
+                "text_pinyin": "nǐ tài zhōudào le! niúròu juǎn hé xiāhuá zhènghǎo shì wǒ wàng le mǎi de. lái lái lái, chúfáng zài zhè biān, bāng wǒ qiē yíxià shūcài. duì le, nǐ juéde wǒ yīnggāi yǎng yì pén shénme zhíwù? yángtái shàng kōngkōng de, xiǎng fàng diǎn lǜsè de dōngxi.",
+                "text_en": "You're so thoughtful! Beef rolls and shrimp paste are exactly what I forgot to buy. Come, kitchen's this way — help me cut vegetables. Oh — what plant do you think I should get? The balcony is empty, want to add some green."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest plants and help prepare.",
+                "options": [
+                    {
+                        "text_zh": "阳台朝南的话，可以养一盆薄荷——不仅好看，泡茶的时候还可以摘几片叶子放进去。如果你怕麻烦，多肉植物最好养了，忘了浇水也不会死。好了，蔬菜我来切，你去招呼其他人吧。",
+                        "text_pinyin": "yángtái cháo nán de huà, kěyǐ yǎng yì pén bòhe——bùjǐn hǎokàn, pào chá de shíhòu hái kěyǐ zhāi jǐ piàn yèzi fàng jìnqù. rúguǒ nǐ pà máfan, duōròu zhíwù zuìhǎo yǎng le, wàng le jiāo shuǐ yě bú huì sǐ. hǎo le, shūcài wǒ lái qiē, nǐ qù zhāohu qítā rén ba.",
+                        "text_en": "If the balcony faces south, you could grow mint — not only pretty, but you can pick leaves for your tea. If you want low maintenance, succulents are easiest — they survive even if you forget to water. OK, I'll cut the vegetables — you go greet the other guests.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mint for the tea setup, succulents as backup, and taking over kitchen duty — the kind of guest every host dreams of."
+                    },
+                    {
+                        "text_zh": "养个仙人掌吧，不用管它。蔬菜怎么切？",
+                        "text_pinyin": "yǎng gè xiānrénzhǎng ba, bú yòng guǎn tā. shūcài zěnme qiē?",
+                        "text_en": "Get a cactus — zero maintenance. How do I cut these vegetables?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical plant advice and willingness to help. She shows you the hotpot-appropriate thickness."
+                    },
+                    {
+                        "text_zh": "我不太会养植物，养什么都死。你自己看着办吧。",
+                        "text_pinyin": "wǒ bú tài huì yǎng zhíwù, yǎng shénme dōu sǐ. nǐ zìjǐ kàn zhe bàn ba.",
+                        "text_en": "I'm terrible with plants — everything dies. Figure it out yourself.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A non-answer that misses the bonding moment. She was asking for your opinion, not your horticultural resume."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese housewarming parties (暖房/乔迁之喜) follow unwritten gift-giving rules: bringing food, fruit, household items, or plants is customary even when the host says「不用带东西」. 鸳鸯锅 (yuānyāng guō, dual-flavor hotpot) solves the spicy-versus-mild debate. Commenting on a new home's 采光 (cǎiguāng, natural lighting) and layout shows appreciation. Offering to help in the kitchen is valued — it signals closeness rather than obligation."
+    }
+}

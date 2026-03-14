@@ -1,0 +1,130 @@
+{
+    "title": "The Practice Test Prophecy",
+    "title_zh": "模拟考预言",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_3_03_v0",
+    "tree": {
+        "setup": "A campus cafe the week before the HSK exam. Your study partner, Xiao Rong, has spread three practice tests across the table and is cross-referencing them with the intensity of a conspiracy theorist connecting red strings on a corkboard. She claims she can predict which grammar points will appear on the exam based on patterns from the last five years. Her predictions have been right 80% of the time.",
+        "setup_zh": "HSK考试前一周的校园咖啡厅。你的学习搭档小蓉把三套模拟题铺满了桌子，像阴谋论者在软木板上连红线一样地交叉参照。她说她能根据过去五年的规律预测考试会出什么语法点。她的预测准确率是百分之八十。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我分析了一下，今年'被'字句和'把'字句肯定会考。还有补语，每年都考。你补语掌握得怎么样？",
+                "text_pinyin": "wǒ fēnxī le yíxià, jīnnián 'bèi' zì jù hé 'bǎ' zì jù kěndìng huì kǎo. háiyǒu bǔyǔ, měi nián dōu kǎo. nǐ bǔyǔ zhǎngwò de zěnmeyàng?",
+                "text_en": "I've analyzed it -- this year 被-sentences and 把-sentences will definitely be tested. Also complements, they appear every year. How's your grasp of complements?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Assess your own preparation honestly.",
+                "options": [
+                    {
+                        "text_zh": "结果补语还行，但是程度补语我总是搞混。比如'好得很'和'很好'有什么区别？",
+                        "text_pinyin": "jiéguǒ bǔyǔ hái xíng, dànshì chéngdù bǔyǔ wǒ zǒngshì gǎo hún. bǐrú 'hǎo de hěn' hé 'hěn hǎo' yǒu shénme qūbié?",
+                        "text_en": "Result complements are OK, but I always mix up degree complements. Like what's the difference between '好得很' and '很好'?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Rong snaps her fingers.「好问题！'好得很'比'很好'更强调程度。而且'好得很'更口语化。」搞混 is 'mix up.' 区别 is 'difference.' Identifying your specific weak point is the first step to fixing it."
+                    },
+                    {
+                        "text_zh": "补语？我完全不会。可能来不及了吧。",
+                        "text_pinyin": "bǔyǔ? wǒ wánquán bú huì. kěnéng lái bu jí le ba.",
+                        "text_en": "Complements? I have no idea about them. It's probably too late, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Rong grabs your shoulders.「来得及！还有一周呢。我把最常考的五种补语总结了，你背下来就行。」来不及 is 'too late.' 来得及 is 'there's still time.' She won't let you give up."
+                    },
+                    {
+                        "text_zh": "还可以吧。模拟题做了几套，正确率大概百分之七十。",
+                        "text_pinyin": "hái kěyǐ ba. mónǐ tí zuò le jǐ tào, zhèngquè lǜ dàgài bǎifēn zhī qīshí.",
+                        "text_en": "Not bad I guess. I've done a few practice tests, accuracy is about 70%.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「百分之七十不够。HSK三级要百分之六十过，但是你要留余地。目标应该是百分之八十以上。」正确率 is 'accuracy rate.' 留余地 means 'leave a margin.' Xiao Rong has standards."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来，我们做一个限时练习。听力部分二十道题，给你十五分钟。计时开始！",
+                "text_pinyin": "lái, wǒmen zuò yí gè xiànshí liànxí. tīnglì bùfen èrshí dào tí, gěi nǐ shíwǔ fēnzhōng. jìshí kāishǐ!",
+                "text_en": "Come on, let's do a timed practice. Listening section, twenty questions, fifteen minutes. Timer starts now!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to the timed practice after finishing.",
+                "options": [
+                    {
+                        "text_zh": "做完了。有三道不太确定。第七题和第十二题的对话太快了，没听清关键词。",
+                        "text_pinyin": "zuò wán le. yǒu sān dào bú tài quèdìng. dì qī tí hé dì shíèr tí de duìhuà tài kuài le, méi tīng qīng guānjiàncí.",
+                        "text_en": "Done. Three I'm not sure about. Questions 7 and 12 -- the dialogues were too fast, I didn't catch the key words.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「关键词没听清的话，试试先看选项再听。这样你知道要听什么。」关键词 is 'key words.' 选项 is 'answer choices.' Xiao Rong's test-taking strategy is solid."
+                    },
+                    {
+                        "text_zh": "有点紧张。时间太紧了，最后五道题是猜的。",
+                        "text_pinyin": "yǒudiǎn jǐnzhāng. shíjiān tài jǐn le, zuìhòu wǔ dào tí shì cāi de.",
+                        "text_en": "A bit nervous. Time was too tight, I guessed the last five.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「考试的时候也会紧张，所以现在练是对的。猜了五道太多了，要练速度。」紧张 is 'nervous.' 猜 is 'guess.' Practice under pressure builds exam stamina."
+                    },
+                    {
+                        "text_zh": "好像没有那么难？我觉得都听懂了。",
+                        "text_pinyin": "hǎoxiàng méiyǒu nàme nán? wǒ juéde dōu tīng dǒng le.",
+                        "text_en": "Doesn't seem that hard? I think I understood everything.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Rong raises an eyebrow.「我们对答案看看。」She checks. You got 16 out of 20.「四道错了。你觉得都懂了但是有些理解偏了。」偏了 means 'off/deviated.' Overconfidence is its own trap."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不错不错。对了，阅读部分你有没有什么技巧？我发现你阅读速度比听力好很多。",
+                "text_pinyin": "búcuò búcuò. duì le, yuèdú bùfen nǐ yǒu méiyǒu shénme jìqiǎo? wǒ fāxiàn nǐ yuèdú sùdù bǐ tīnglì hǎo hěn duō.",
+                "text_en": "Not bad. By the way, do you have any tips for the reading section? I noticed your reading speed is much better than your listening."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your reading strategy.",
+                "options": [
+                    {
+                        "text_zh": "我先看问题再看文章，这样知道要找什么信息。不认识的字先跳过，看上下文猜意思。",
+                        "text_pinyin": "wǒ xiān kàn wèntí zài kàn wénzhāng, zhèyàng zhīdào yào zhǎo shénme xìnxī. bú rènshi de zì xiān tiào guo, kàn shàngxiàwén cāi yìsi.",
+                        "text_en": "I read the questions first, then the passage, so I know what info to look for. Unknown characters I skip first and guess from context.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Rong writes this down.「先看问题再看文章——对！这个方法省时间。上下文猜词也是HSK很重要的技能。」上下文 is 'context.' 跳过 is 'skip.' Good test strategy is a skill in itself."
+                    },
+                    {
+                        "text_zh": "没什么技巧，就是多练。我每天做两篇阅读理解。",
+                        "text_pinyin": "méi shénme jìqiǎo, jiùshì duō liàn. wǒ měi tiān zuò liǎng piān yuèdú lǐjiě.",
+                        "text_en": "No special technique, just practice a lot. I do two reading comprehension passages every day.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「每天两篇？那你已经做了很多了。难怪阅读不错。」Xiao Rong looks impressed. 多练 is 'practice more.' 难怪 means 'no wonder.' Consistency beats talent."
+                    },
+                    {
+                        "text_zh": "其实阅读我也不太有信心。我们互相帮忙吧，我帮你练阅读，你帮我练听力。",
+                        "text_pinyin": "qíshí yuèdú wǒ yě bú tài yǒu xìnxīn. wǒmen hùxiāng bāngmáng ba, wǒ bāng nǐ liàn yuèdú, nǐ bāng wǒ liàn tīnglì.",
+                        "text_en": "Actually I'm not that confident in reading either. Let's help each other -- I help you practice reading, you help me practice listening.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「成交！」Xiao Rong sticks out her hand for a handshake.「从明天开始，每天交换一套题。」互相 is 'mutually.' 信心 is 'confidence.' Study partnerships built on complementary strengths are the best kind."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，今天先到这里。明天同一时间继续。记住——离考试还有七天，每天进步一点点就够了。别熬夜！",
+                "text_pinyin": "hǎo, jīntiān xiān dào zhèlǐ. míngtiān tóng yí shíjiān jìxù. jìzhù — lí kǎoshì hái yǒu qī tiān, měi tiān jìnbù yìdiǎndiǎn jiù gòu le. bié áo yè!",
+                "text_en": "OK, let's stop here for today. Same time tomorrow. Remember -- seven days until the exam, a little progress each day is enough. Don't stay up late!"
+            }
+        ],
+        "cultural_note": "HSK (汉语水平考试, Hànyǔ Shuǐpíng Kǎoshì) is the standardized Chinese proficiency test. Common study strategies include doing 模拟题 (mónǐ tí, practice tests) and analyzing past patterns. 补语 (bǔyǔ, complements) are a major grammar focus at HSK 3-4. 别熬夜 (bié áo yè, don't pull all-nighters) is universal exam-week wisdom."
+    }
+}

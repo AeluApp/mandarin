@@ -1,4 +1,4 @@
-"""Weekly Metrics Report Generator — Marketing analytics for the Mandarin app.
+"""Weekly Metrics Report Generator — Marketing analytics for the Aelu app.
 
 Calculates Level 1-3 KPIs from metrics-dashboard.md and outputs a formatted
 weekly report. Saves reports to the reports/ directory as .txt and .md files.
@@ -30,7 +30,7 @@ from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
-_DEFAULT_DB_PATH = Path(__file__).parent.parent / "data" / "mandarin.db"
+from .settings import DB_PATH as _DEFAULT_DB_PATH
 _REPORTS_DIR = Path(__file__).parent.parent / "reports"
 
 
@@ -78,7 +78,7 @@ def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
           AND items_completed > 0
           AND user_id = ?
     """, (user_id,)).fetchone()
-    sessions_30d = row["cnt"] or 0
+    sessions_30d = (row["cnt"] or 0) if row else 0
     metrics["active_users_30d"] = 1 if sessions_30d > 0 else 0
 
     # WAU: session in last 7 days
@@ -88,7 +88,7 @@ def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
           AND items_completed > 0
           AND user_id = ?
     """, (user_id,)).fetchone()
-    sessions_7d = row["cnt"] or 0
+    sessions_7d = (row["cnt"] or 0) if row else 0
     metrics["wau"] = 1 if sessions_7d > 0 else 0
     metrics["sessions_this_week"] = sessions_7d
 
@@ -100,7 +100,7 @@ def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
           AND items_completed > 0
           AND user_id = ?
     """, (user_id,)).fetchone()
-    metrics["sessions_last_week"] = row["cnt"] or 0
+    metrics["sessions_last_week"] = (row["cnt"] or 0) if row else 0
 
     return metrics
 
@@ -147,8 +147,8 @@ def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
           AND items_completed > 0
           AND user_id = ?
     """, (user_id,)).fetchone()
-    total_items = row["total"] or 0
-    total_correct = row["correct"] or 0
+    total_items = (row["total"] or 0) if row else 0
+    total_correct = (row["correct"] or 0) if row else 0
     metrics["drill_accuracy_pct"] = round(_safe_pct(total_correct, total_items), 1)
 
     # Drill accuracy by modality (from progress table, overall)
@@ -164,8 +164,9 @@ def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
             GROUP BY modality
         """, (user_id,)).fetchall()
         for r in rows:
-            mod = r["modality"]
-            modality_acc[mod] = round(_safe_pct(r["correct"], r["attempts"]), 1)
+            mod = r["modality"] if r else None
+            if mod:
+                modality_acc[mod] = round(_safe_pct(r["correct"] or 0, r["attempts"] or 0), 1)
     metrics["accuracy_by_modality"] = modality_acc
 
     # Drill type diversity (unique modalities used this week)
@@ -232,7 +233,7 @@ def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
                   AND p.last_review_date >= ve.created_at
                   AND p.user_id = ?
             """, (user_id, user_id)).fetchone()
-            drilled_after = row2["cnt"] or 0
+            drilled_after = (row2["cnt"] or 0) if row2 else 0
 
         metrics["cleanup_loop_looked_up"] = looked_up
         metrics["cleanup_loop_drilled"] = drilled_after
@@ -438,6 +439,358 @@ def _funnel_metrics(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 
 
 # ---------------------------------------------------------------------------
+# North Star: Weekly Items Mastered per Active User
+# ---------------------------------------------------------------------------
+
+def _north_star(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+    """Calculate the north star metric: weekly items mastered per active user.
+
+    An item is 'mastered' when it has 3+ attempts and 85%+ accuracy.
+    We count items that crossed the 85% threshold this week (reviewed this week
+    and currently at 85%+).
+    """
+    metrics = {}
+
+    if not _table_exists(conn, "progress"):
+        return {"items_mastered_this_week": 0, "mastered_per_active_user": 0.0}
+
+    # Items reviewed this week that are now at 85%+ mastery
+    row = conn.execute("""
+        SELECT COUNT(*) AS cnt FROM progress
+        WHERE total_attempts >= 3
+          AND (total_correct * 1.0 / total_attempts) >= 0.85
+          AND last_review_date >= date('now', '-7 days')
+          AND user_id = ?
+    """, (user_id,)).fetchone()
+    mastered = row["cnt"] or 0
+    metrics["items_mastered_this_week"] = mastered
+
+    # Active users this week (for multi-user: COUNT DISTINCT)
+    row = conn.execute("""
+        SELECT COUNT(DISTINCT user_id) AS cnt FROM session_log
+        WHERE started_at >= datetime('now', '-7 days')
+          AND items_completed > 0
+    """).fetchone()
+    active_users = row["cnt"] or 1
+    metrics["active_users_this_week"] = active_users
+    metrics["mastered_per_active_user"] = round(_safe_div(mastered, active_users), 1)
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
+# False Mastery Health Metric (Doctrine §2)
+# ---------------------------------------------------------------------------
+
+def _false_mastery_rate(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+    """Rate at which mastered items subsequently fail. Healthy if ≤10%."""
+    from .diagnostics import compute_false_mastery_rate
+    return compute_false_mastery_rate(conn, user_id=user_id)
+
+
+# ---------------------------------------------------------------------------
+# Completion Rate by Segment
+# ---------------------------------------------------------------------------
+
+def _completion_by_segment(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+    """Session completion rate broken out by session_type and HSK level band."""
+    metrics = {"by_session_type": {}, "by_hsk_band": {}}
+
+    # By session_type (exclude sessions < 30 seconds)
+    rows = conn.execute("""
+        SELECT session_type,
+               COUNT(*) AS total,
+               SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) AS completed
+        FROM session_log
+        WHERE started_at >= datetime('now', '-7 days')
+          AND (duration_seconds IS NULL OR duration_seconds >= 30)
+          AND user_id = ?
+        GROUP BY session_type
+    """, (user_id,)).fetchall()
+    for r in rows:
+        stype = r["session_type"] or "unknown"
+        total = r["total"] or 0
+        completed = r["completed"] or 0
+        metrics["by_session_type"][stype] = {
+            "total": total,
+            "completed": completed,
+            "rate": round(_safe_pct(completed, total), 1),
+        }
+
+    # Accuracy by HSK level band (from progress table, not sessions)
+    if _table_exists(conn, "progress"):
+        rows = conn.execute("""
+            SELECT
+                CASE
+                    WHEN ci.hsk_level BETWEEN 1 AND 3 THEN 'HSK 1-3'
+                    WHEN ci.hsk_level BETWEEN 4 AND 6 THEN 'HSK 4-6'
+                    WHEN ci.hsk_level BETWEEN 7 AND 9 THEN 'HSK 7-9'
+                    ELSE 'Other'
+                END AS band,
+                SUM(p.total_attempts) AS attempts,
+                SUM(p.total_correct) AS correct
+            FROM progress p
+            JOIN content_item ci ON ci.id = p.content_item_id
+            WHERE p.total_attempts > 0
+              AND p.last_review_date >= date('now', '-7 days')
+              AND p.user_id = ?
+            GROUP BY band
+        """, (user_id,)).fetchall()
+        for r in rows:
+            band = r["band"] or "Other"
+            attempts = r["attempts"] or 0
+            correct = r["correct"] or 0
+            metrics["by_hsk_band"][band] = {
+                "total": attempts,
+                "completed": correct,
+                "rate": round(_safe_pct(correct, attempts), 1),
+            }
+
+    # Overall rate
+    row = conn.execute("""
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) AS completed
+        FROM session_log
+        WHERE started_at >= datetime('now', '-7 days')
+          AND (duration_seconds IS NULL OR duration_seconds >= 30)
+          AND user_id = ?
+    """, (user_id,)).fetchone()
+    total = row["total"] or 0
+    completed = row["completed"] or 0
+    metrics["overall_rate"] = round(_safe_pct(completed, total), 1)
+    metrics["overall_total"] = total
+    metrics["overall_completed"] = completed
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
+# D1/D7/D30 Retention Cohorts (multi-user ready)
+# ---------------------------------------------------------------------------
+
+def _retention_cohorts(conn: sqlite3.Connection) -> Dict:
+    """Calculate D1, D7, D30 retention rates across all users.
+
+    For each user who signed up in the trailing 30 days, check if they had
+    a session on day 1, day 7, and day 30 relative to signup.
+    """
+    metrics = {"d1": 0.0, "d7": 0.0, "d30": 0.0, "signups_30d": 0}
+
+    if not _table_exists(conn, "lifecycle_event"):
+        return metrics
+
+    # Get signup dates for users who signed up in last 60 days
+    signups = conn.execute("""
+        SELECT user_id, MIN(created_at) AS signup_date
+        FROM lifecycle_event
+        WHERE event_type = 'signup'
+          AND created_at >= datetime('now', '-60 days')
+        GROUP BY user_id
+    """).fetchall()
+
+    if not signups:
+        return metrics
+
+    d1_eligible = 0
+    d1_retained = 0
+    d7_eligible = 0
+    d7_retained = 0
+    d30_eligible = 0
+    d30_retained = 0
+
+    for s in signups:
+        uid = s["user_id"]
+        signup_str = s["signup_date"]
+        if not signup_str:
+            continue
+        try:
+            signup_dt = datetime.fromisoformat(signup_str.replace("Z", "+00:00"))
+        except (ValueError, TypeError):
+            continue
+
+        now = datetime.now(timezone.utc)
+        days_since = (now - signup_dt).days
+
+        # D1: had session on day 0-1 (within 48h of signup)
+        if days_since >= 1:
+            d1_eligible += 1
+            row = conn.execute("""
+                SELECT 1 FROM session_log
+                WHERE user_id = ?
+                  AND items_completed > 0
+                  AND started_at >= ? AND started_at < ?
+                LIMIT 1
+            """, (uid, signup_str, (signup_dt + timedelta(hours=48)).isoformat())).fetchone()
+            if row:
+                d1_retained += 1
+
+        # D7: had session on days 6-8
+        if days_since >= 8:
+            d7_eligible += 1
+            day6 = (signup_dt + timedelta(days=6)).isoformat()
+            day9 = (signup_dt + timedelta(days=9)).isoformat()
+            row = conn.execute("""
+                SELECT 1 FROM session_log
+                WHERE user_id = ?
+                  AND items_completed > 0
+                  AND started_at >= ? AND started_at < ?
+                LIMIT 1
+            """, (uid, day6, day9)).fetchone()
+            if row:
+                d7_retained += 1
+
+        # D30: had session on days 28-32
+        if days_since >= 32:
+            d30_eligible += 1
+            day28 = (signup_dt + timedelta(days=28)).isoformat()
+            day33 = (signup_dt + timedelta(days=33)).isoformat()
+            row = conn.execute("""
+                SELECT 1 FROM session_log
+                WHERE user_id = ?
+                  AND items_completed > 0
+                  AND started_at >= ? AND started_at < ?
+                LIMIT 1
+            """, (uid, day28, day33)).fetchone()
+            if row:
+                d30_retained += 1
+
+    metrics["signups_30d"] = len(signups)
+    metrics["d1"] = round(_safe_pct(d1_retained, d1_eligible), 1)
+    metrics["d1_eligible"] = d1_eligible
+    metrics["d1_retained"] = d1_retained
+    metrics["d7"] = round(_safe_pct(d7_retained, d7_eligible), 1)
+    metrics["d7_eligible"] = d7_eligible
+    metrics["d7_retained"] = d7_retained
+    metrics["d30"] = round(_safe_pct(d30_retained, d30_eligible), 1)
+    metrics["d30_eligible"] = d30_eligible
+    metrics["d30_retained"] = d30_retained
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
+# Growth Accounting (multi-user ready)
+# ---------------------------------------------------------------------------
+
+def _growth_accounting(conn: sqlite3.Connection) -> Dict:
+    """Break active users into new, retained, resurrected, and churned.
+
+    - New: session this week, no session in any prior week
+    - Retained: session this week AND last week
+    - Resurrected: session this week, none in weeks 2-4, had one before that
+    - Churned: session last week, no session this week
+    """
+    metrics = {"new": 0, "retained": 0, "resurrected": 0, "churned": 0,
+               "net_retention": 0.0}
+
+    # Users active this week
+    this_week = set()
+    rows = conn.execute("""
+        SELECT DISTINCT user_id FROM session_log
+        WHERE started_at >= datetime('now', '-7 days')
+          AND items_completed > 0
+    """).fetchall()
+    for r in rows:
+        this_week.add(r["user_id"])
+
+    # Users active last week
+    last_week = set()
+    rows = conn.execute("""
+        SELECT DISTINCT user_id FROM session_log
+        WHERE started_at >= datetime('now', '-14 days')
+          AND started_at < datetime('now', '-7 days')
+          AND items_completed > 0
+    """).fetchall()
+    for r in rows:
+        last_week.add(r["user_id"])
+
+    # Users active weeks 2-4 ago (but not last week)
+    weeks_2_4 = set()
+    rows = conn.execute("""
+        SELECT DISTINCT user_id FROM session_log
+        WHERE started_at >= datetime('now', '-28 days')
+          AND started_at < datetime('now', '-14 days')
+          AND items_completed > 0
+    """).fetchall()
+    for r in rows:
+        weeks_2_4.add(r["user_id"])
+
+    # Users with any session before 4 weeks ago
+    older = set()
+    rows = conn.execute("""
+        SELECT DISTINCT user_id FROM session_log
+        WHERE started_at < datetime('now', '-28 days')
+          AND items_completed > 0
+    """).fetchall()
+    for r in rows:
+        older.add(r["user_id"])
+
+    all_prior = last_week | weeks_2_4 | older
+
+    for uid in this_week:
+        if uid not in all_prior:
+            metrics["new"] += 1
+        elif uid in last_week:
+            metrics["retained"] += 1
+        else:
+            metrics["resurrected"] += 1
+
+    for uid in last_week:
+        if uid not in this_week:
+            metrics["churned"] += 1
+
+    retained_plus_churned = metrics["retained"] + metrics["churned"]
+    metrics["net_retention"] = round(
+        _safe_pct(metrics["retained"] + metrics["resurrected"], retained_plus_churned), 1
+    ) if retained_plus_churned > 0 else 0.0
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
+# Crash Rate
+# ---------------------------------------------------------------------------
+
+def _crash_rate(conn: sqlite3.Connection) -> Dict:
+    """Calculate server crash rate: crashes / total sessions this week."""
+    metrics = {"crashes": 0, "sessions": 0, "rate_pct": 0.0, "top_errors": []}
+
+    # Crash count (last 7 days)
+    if _table_exists(conn, "crash_log"):
+        row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM crash_log
+            WHERE timestamp >= datetime('now', '-7 days')
+        """).fetchone()
+        metrics["crashes"] = row["cnt"] or 0
+
+        # Top 3 error types
+        rows = conn.execute("""
+            SELECT error_type, COUNT(*) AS cnt
+            FROM crash_log
+            WHERE timestamp >= datetime('now', '-7 days')
+            GROUP BY error_type
+            ORDER BY cnt DESC
+            LIMIT 3
+        """).fetchall()
+        metrics["top_errors"] = [
+            {"type": r["error_type"], "count": r["cnt"]} for r in rows
+        ]
+
+    # Total sessions as denominator (more reliable than log line count)
+    row = conn.execute("""
+        SELECT COUNT(*) AS cnt FROM session_log
+        WHERE started_at >= datetime('now', '-7 days')
+    """).fetchone()
+    metrics["sessions"] = row["cnt"] or 0
+
+    metrics["rate_pct"] = round(
+        _safe_pct(metrics["crashes"], metrics["sessions"]), 3
+    )
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
 # Week-over-week comparison
 # ---------------------------------------------------------------------------
 
@@ -510,8 +863,16 @@ def _generate_report_text(
     funnel: Dict,
     wow: Dict,
     report_date: str,
+    extra: Optional[Dict] = None,
 ) -> str:
     """Generate the weekly report as plain text."""
+    extra = extra or {}
+    ns = extra.get("north_star", {})
+    comp_seg = extra.get("completion_by_segment", {})
+    retention = extra.get("retention", {})
+    growth = extra.get("growth", {})
+    crashes = extra.get("crashes", {})
+
     lines = []
     lines.append(f"WEEKLY REPORT: Week of {report_date}")
     lines.append("=" * 60)
@@ -519,6 +880,10 @@ def _generate_report_text(
 
     # North Star
     lines.append("NORTH STAR")
+    mastered = ns.get("items_mastered_this_week", 0)
+    per_user = ns.get("mastered_per_active_user", 0.0)
+    lines.append(f"  Items mastered/user:     {per_user} "
+                 f"({mastered} items mastered this week)")
     lines.append(f"  WASU:                    {biz['wau']} "
                  f"(sessions this week: {biz['sessions_this_week']})")
     lines.append("")
@@ -602,6 +967,54 @@ def _generate_report_text(
         lines.append(f"  Session outcomes (30d):  {outcome_str}")
     lines.append("")
 
+    # Completion Rate by Segment
+    if comp_seg:
+        lines.append("COMPLETION RATE BY SEGMENT")
+        lines.append(f"  Overall:                 {comp_seg.get('overall_rate', 0)}% "
+                     f"({comp_seg.get('overall_completed', 0)}/{comp_seg.get('overall_total', 0)})")
+        if comp_seg.get("by_session_type"):
+            for stype, data in comp_seg["by_session_type"].items():
+                lines.append(f"    {stype:<22} {data['rate']}% ({data['completed']}/{data['total']})")
+        if comp_seg.get("by_hsk_band"):
+            lines.append("  Accuracy by HSK band (7d):")
+            for band, data in comp_seg["by_hsk_band"].items():
+                lines.append(f"    {band:<22} {data['rate']}% ({data['completed']}/{data['total']} items)")
+        lines.append("")
+
+    # Crash Rate
+    if crashes:
+        lines.append("RELIABILITY")
+        lines.append(f"  Crashes this week:       {crashes.get('crashes', 0)}")
+        lines.append(f"  Sessions this week:      {crashes.get('sessions', 0)}")
+        lines.append(f"  Crash rate:              {crashes.get('rate_pct', 0)}%")
+        if crashes.get("top_errors"):
+            for err in crashes["top_errors"]:
+                lines.append(f"    {err['type']}: {err['count']}")
+        lines.append("")
+
+    # Retention Cohorts
+    if retention and retention.get("signups_30d", 0) > 0:
+        lines.append("RETENTION COHORTS")
+        lines.append(f"  Signups (60d):           {retention.get('signups_30d', 0)}")
+        lines.append(f"  D1 retention:            {retention.get('d1', 0)}% "
+                     f"({retention.get('d1_retained', 0)}/{retention.get('d1_eligible', 0)})")
+        lines.append(f"  D7 retention:            {retention.get('d7', 0)}% "
+                     f"({retention.get('d7_retained', 0)}/{retention.get('d7_eligible', 0)})")
+        lines.append(f"  D30 retention:           {retention.get('d30', 0)}% "
+                     f"({retention.get('d30_retained', 0)}/{retention.get('d30_eligible', 0)})")
+        lines.append("")
+
+    # Growth Accounting
+    if growth and (growth.get("new", 0) + growth.get("retained", 0) +
+                   growth.get("resurrected", 0) + growth.get("churned", 0)) > 0:
+        lines.append("GROWTH ACCOUNTING")
+        lines.append(f"  New users:               {growth.get('new', 0)}")
+        lines.append(f"  Retained:                {growth.get('retained', 0)}")
+        lines.append(f"  Resurrected:             {growth.get('resurrected', 0)}")
+        lines.append(f"  Churned:                 {growth.get('churned', 0)}")
+        lines.append(f"  Net retention:           {growth.get('net_retention', 0)}%")
+        lines.append("")
+
     # Week-over-week
     lines.append("WEEK-OVER-WEEK COMPARISON")
     lines.append(f"  Sessions:     {biz['sessions_this_week']} vs {biz['sessions_last_week']} "
@@ -623,14 +1036,25 @@ def _generate_report_md(
     funnel: Dict,
     wow: Dict,
     report_date: str,
+    extra: Optional[Dict] = None,
 ) -> str:
     """Generate the weekly report as Markdown."""
+    extra = extra or {}
+    ns = extra.get("north_star", {})
+    comp_seg = extra.get("completion_by_segment", {})
+    retention = extra.get("retention", {})
+    growth = extra.get("growth", {})
+    crashes = extra.get("crashes", {})
+
     lines = []
     lines.append(f"# Weekly Report: Week of {report_date}")
     lines.append("")
 
     # North Star
     lines.append("## North Star")
+    mastered = ns.get("items_mastered_this_week", 0)
+    per_user = ns.get("mastered_per_active_user", 0.0)
+    lines.append(f"- **Items mastered/active user:** {per_user} ({mastered} items this week)")
     lines.append(f"- **WASU:** {biz['wau']} (sessions this week: {biz['sessions_this_week']})")
     lines.append("")
 
@@ -735,6 +1159,69 @@ def _generate_report_md(
             lines.append(f"| {d} | {c} |")
         lines.append("")
 
+    # Completion Rate by Segment
+    if comp_seg:
+        lines.append("## Completion Rate by Segment")
+        lines.append(f"**Overall:** {comp_seg.get('overall_rate', 0)}% "
+                     f"({comp_seg.get('overall_completed', 0)}/{comp_seg.get('overall_total', 0)} sessions)")
+        lines.append("")
+        if comp_seg.get("by_session_type"):
+            lines.append("| Session Type | Total | Completed | Rate |")
+            lines.append("|-------------|-------|-----------|------|")
+            for stype, data in comp_seg["by_session_type"].items():
+                lines.append(f"| {stype} | {data['total']} | {data['completed']} | {data['rate']}% |")
+            lines.append("")
+        if comp_seg.get("by_hsk_band"):
+            lines.append("### Accuracy by HSK Band (7d)")
+            lines.append("| HSK Band | Attempts | Correct | Accuracy |")
+            lines.append("|----------|----------|---------|----------|")
+            for band, data in comp_seg["by_hsk_band"].items():
+                lines.append(f"| {band} | {data['total']} | {data['completed']} | {data['rate']}% |")
+            lines.append("")
+
+    # Reliability
+    if crashes:
+        lines.append("## Reliability")
+        lines.append(f"- **Crashes (7d):** {crashes.get('crashes', 0)}")
+        lines.append(f"- **Sessions (7d):** {crashes.get('sessions', 0)}")
+        lines.append(f"- **Crash rate:** {crashes.get('rate_pct', 0)}%")
+        if crashes.get("top_errors"):
+            lines.append("")
+            lines.append("| Error Type | Count |")
+            lines.append("|-----------|-------|")
+            for err in crashes["top_errors"]:
+                lines.append(f"| {err['type']} | {err['count']} |")
+        lines.append("")
+
+    # Retention Cohorts
+    if retention and retention.get("signups_30d", 0) > 0:
+        lines.append("## Retention Cohorts")
+        lines.append(f"Signups in last 60 days: {retention.get('signups_30d', 0)}")
+        lines.append("")
+        lines.append("| Cohort | Eligible | Retained | Rate |")
+        lines.append("|--------|----------|----------|------|")
+        lines.append(f"| D1 (session within 48h) | {retention.get('d1_eligible', 0)} | "
+                     f"{retention.get('d1_retained', 0)} | {retention.get('d1', 0)}% |")
+        lines.append(f"| D7 (session days 6-8) | {retention.get('d7_eligible', 0)} | "
+                     f"{retention.get('d7_retained', 0)} | {retention.get('d7', 0)}% |")
+        lines.append(f"| D30 (session days 28-32) | {retention.get('d30_eligible', 0)} | "
+                     f"{retention.get('d30_retained', 0)} | {retention.get('d30', 0)}% |")
+        lines.append("")
+
+    # Growth Accounting
+    if growth and (growth.get("new", 0) + growth.get("retained", 0) +
+                   growth.get("resurrected", 0) + growth.get("churned", 0)) > 0:
+        lines.append("## Growth Accounting")
+        lines.append("| Category | Users |")
+        lines.append("|----------|-------|")
+        lines.append(f"| New (first session ever) | {growth.get('new', 0)} |")
+        lines.append(f"| Retained (active both weeks) | {growth.get('retained', 0)} |")
+        lines.append(f"| Resurrected (returned after gap) | {growth.get('resurrected', 0)} |")
+        lines.append(f"| Churned (active last week, not this) | {growth.get('churned', 0)} |")
+        lines.append(f"")
+        lines.append(f"**Net retention:** {growth.get('net_retention', 0)}%")
+        lines.append("")
+
     # WoW
     lines.append("## Week-over-Week")
     lines.append("| Metric | This Week | Last Week | Delta |")
@@ -757,6 +1244,7 @@ def _print_report_rich(
     funnel: Dict,
     wow: Dict,
     report_date: str,
+    extra: Optional[Dict] = None,
 ) -> None:
     """Print the report using Rich tables."""
     from rich.console import Console
@@ -764,13 +1252,24 @@ def _print_report_rich(
     from rich.panel import Panel
     from rich import box
 
+    extra = extra or {}
+    ns = extra.get("north_star", {})
+    comp_seg = extra.get("completion_by_segment", {})
+    retention = extra.get("retention", {})
+    growth = extra.get("growth", {})
+    crashes = extra.get("crashes", {})
+
     console = Console()
     console.print()
 
-    # Header
+    # Header — North Star: Items Mastered per Active User
+    mastered = ns.get("items_mastered_this_week", 0)
+    per_user = ns.get("mastered_per_active_user", 0.0)
     console.print(Panel(
-        f"[bold]WASU (North Star):[/bold] {biz['wau']}    "
-        f"[dim]Sessions this week: {biz['sessions_this_week']} "
+        f"[bold]Items mastered/user (North Star):[/bold] {per_user}  "
+        f"[dim]({mastered} items this week)[/dim]\n"
+        f"[bold]WASU:[/bold] {biz['wau']}    "
+        f"[dim]Sessions: {biz['sessions_this_week']} "
         f"({_delta_str(wow['sessions_delta'])} WoW)[/dim]",
         title=f"Weekly Metrics Report -- {report_date}",
         border_style="dim",
@@ -882,6 +1381,75 @@ def _print_report_rich(
                   f"Vocab encounters: {funnel['vocab_encounters_this_week']}[/dim]")
     console.print()
 
+    # Completion Rate by Segment
+    if comp_seg and comp_seg.get("by_session_type"):
+        t = Table(title=f"Completion Rate by Segment (overall: {comp_seg.get('overall_rate', 0)}%)",
+                  box=box.SIMPLE, width=76)
+        t.add_column("Segment", style="bold", min_width=24)
+        t.add_column("Total", justify="right")
+        t.add_column("Completed", justify="right")
+        t.add_column("Rate", justify="right")
+        for stype, data in comp_seg["by_session_type"].items():
+            rate = data["rate"]
+            color = "[green]" if rate >= 75 else "[yellow]" if rate >= 60 else "[red]"
+            t.add_row(stype, str(data["total"]), str(data["completed"]),
+                      f"{color}{rate}%[/{color[1:]}")
+        if comp_seg.get("by_hsk_band"):
+            for band, data in comp_seg["by_hsk_band"].items():
+                rate = data["rate"]
+                color = "[green]" if rate >= 75 else "[yellow]" if rate >= 60 else "[red]"
+                t.add_row(band, str(data["total"]), str(data["completed"]),
+                          f"{color}{rate}%[/{color[1:]}")
+        console.print(t)
+
+    # Reliability
+    if crashes:
+        crash_count = crashes.get("crashes", 0)
+        crash_rate = crashes.get("rate_pct", 0)
+        color = "[green]" if crash_rate < 0.1 else "[yellow]" if crash_rate < 1 else "[red]"
+        console.print(f"  Crashes (7d): {color}{crash_count}[/{color[1:]}  "
+                      f"Rate: {color}{crash_rate}%[/{color[1:]}  "
+                      f"[dim](of {crashes.get('sessions', 0)} sessions)[/dim]")
+        if crashes.get("top_errors"):
+            for err in crashes["top_errors"]:
+                console.print(f"    [dim]{err['type']}: {err['count']}[/dim]")
+        console.print()
+
+    # Retention Cohorts
+    if retention and retention.get("signups_30d", 0) > 0:
+        t = Table(title="Retention Cohorts", box=box.SIMPLE, width=76)
+        t.add_column("Cohort", style="bold", min_width=24)
+        t.add_column("Eligible", justify="right")
+        t.add_column("Retained", justify="right")
+        t.add_column("Rate", justify="right")
+        for label, key in [("D1 (within 48h)", "d1"), ("D7 (days 6-8)", "d7"),
+                           ("D30 (days 28-32)", "d30")]:
+            rate = retention.get(key, 0)
+            color = "[green]" if rate >= 50 else "[yellow]" if rate >= 25 else "[red]"
+            t.add_row(label,
+                      str(retention.get(f"{key}_eligible", 0)),
+                      str(retention.get(f"{key}_retained", 0)),
+                      f"{color}{rate}%[/{color[1:]}")
+        console.print(t)
+
+    # Growth Accounting
+    if growth and (growth.get("new", 0) + growth.get("retained", 0) +
+                   growth.get("resurrected", 0) + growth.get("churned", 0)) > 0:
+        t = Table(title="Growth Accounting", box=box.SIMPLE, width=76)
+        t.add_column("Category", style="bold", min_width=30)
+        t.add_column("Users", justify="right")
+        t.add_row("New (first session ever)", str(growth.get("new", 0)))
+        t.add_row("Retained (active both weeks)", f"[green]{growth.get('retained', 0)}[/green]")
+        t.add_row("Resurrected (returned after gap)", str(growth.get("resurrected", 0)))
+        t.add_row("Churned (active last week only)", f"[red]{growth.get('churned', 0)}[/red]")
+        t.add_row("", "")
+        nr = growth.get("net_retention", 0)
+        color = "[green]" if nr >= 100 else "[yellow]" if nr >= 80 else "[red]"
+        t.add_row("[bold]Net retention[/bold]", f"{color}{nr}%[/{color[1:]}")
+        console.print(t)
+
+    console.print()
+
 
 # ---------------------------------------------------------------------------
 # Report runner
@@ -902,8 +1470,8 @@ def generate_report(db_path: str = None, output_format: str = "rich",
     """
     path = Path(db_path) if db_path else _DEFAULT_DB_PATH
     if not path.exists():
-        print(f"  Database not found at: {path}")
-        print("  Run a session first to create the database.")
+        logger.warning("Database not found at: %s", path)
+        logger.warning("Run a session first to create the database.")
         return {}
 
     conn = _get_connection(path)
@@ -913,19 +1481,28 @@ def generate_report(db_path: str = None, output_format: str = "rich",
         learn = _learning_outcomes(conn, user_id=user_id)
         funnel = _funnel_metrics(conn, user_id=user_id)
         wow = _week_comparison(conn, user_id=user_id)
+        ns = _north_star(conn, user_id=user_id)
+        comp_seg = _completion_by_segment(conn, user_id=user_id)
+        retention = _retention_cohorts(conn)
+        growth = _growth_accounting(conn)
+        crashes = _crash_rate(conn)
+        false_mastery = _false_mastery_rate(conn, user_id=user_id)
     finally:
         conn.close()
 
     report_date = date.today().isoformat()
 
     # Console output
+    extra = {"north_star": ns, "completion_by_segment": comp_seg,
+             "retention": retention, "growth": growth, "crashes": crashes,
+             "false_mastery": false_mastery}
     if output_format == "rich":
         try:
-            _print_report_rich(biz, eng, learn, funnel, wow, report_date)
+            _print_report_rich(biz, eng, learn, funnel, wow, report_date, extra=extra)
         except ImportError:
-            print(_generate_report_text(biz, eng, learn, funnel, wow, report_date))
+            print(_generate_report_text(biz, eng, learn, funnel, wow, report_date, extra=extra))
     elif output_format == "plain":
-        print(_generate_report_text(biz, eng, learn, funnel, wow, report_date))
+        print(_generate_report_text(biz, eng, learn, funnel, wow, report_date, extra=extra))
 
     # Save to files
     if save:
@@ -933,11 +1510,11 @@ def generate_report(db_path: str = None, output_format: str = "rich",
         filename_base = f"weekly-report-{report_date}"
 
         txt_path = _REPORTS_DIR / f"{filename_base}.txt"
-        txt_content = _generate_report_text(biz, eng, learn, funnel, wow, report_date)
+        txt_content = _generate_report_text(biz, eng, learn, funnel, wow, report_date, extra=extra)
         txt_path.write_text(txt_content, encoding="utf-8")
 
         md_path = _REPORTS_DIR / f"{filename_base}.md"
-        md_content = _generate_report_md(biz, eng, learn, funnel, wow, report_date)
+        md_content = _generate_report_md(biz, eng, learn, funnel, wow, report_date, extra=extra)
         md_path.write_text(md_content, encoding="utf-8")
 
         if output_format != "quiet":
@@ -952,6 +1529,12 @@ def generate_report(db_path: str = None, output_format: str = "rich",
         "learning_outcomes": learn,
         "funnel": funnel,
         "week_comparison": wow,
+        "north_star": ns,
+        "completion_by_segment": comp_seg,
+        "retention": retention,
+        "growth": growth,
+        "crashes": crashes,
+        "false_mastery": false_mastery,
     }
 
 
@@ -961,7 +1544,7 @@ def generate_report(db_path: str = None, output_format: str = "rich",
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Weekly Metrics Report — Mandarin Learning App",
+        description="Weekly Metrics Report — Aelu",
     )
     parser.add_argument(
         "--db-path",

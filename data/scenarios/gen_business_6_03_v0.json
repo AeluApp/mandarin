@@ -1,0 +1,160 @@
+{
+    "title": "The Negotiation Geometer",
+    "title_zh": "谈判几何学家",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_business_6_03_v0",
+    "tree": {
+        "setup": "A small meeting room with frosted glass walls, late afternoon light filtering through half-drawn blinds. You've requested a salary review meeting with your department head, Director Mao, a woman who negotiates with the patience of a geologist — she thinks in layers, in epochs, in the slow accumulation of evidence. Her desk has a framed calligraphy of 以理服人 (persuade through reason), and she lives by it. She has approved exactly forty-one raises in her career and denied twenty-seven, and she remembers the reasoning behind every single decision.",
+        "setup_zh": "一间磨砂玻璃墙壁的小会议室，午后的光线从半拉的百叶窗中渗入。你约了部门主管毛总监谈薪资调整——一位以地质学家般的耐心进行谈判的女性——她的思考以层次、以时代、以证据的缓慢积累为单位。她的办公桌上有一幅「以理服人」的装裱书法，她以此为信条。她职业生涯中批准了恰好四十一次加薪，拒绝了二十七次，每一个决定背后的理由她都记得。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "坐吧。你说想聊聊薪资的事。你先说说你的想法。",
+                "text_pinyin": "zuò ba. nǐ shuō xiǎng liáoliao xīnzī de shì. nǐ xiān shuōshuo nǐ de xiǎngfǎ.",
+                "text_en": "Sit down. You said you wanted to discuss salary. Tell me your thoughts."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your case for a raise.",
+                "options": [
+                    {
+                        "text_zh": "毛总监，谢谢您抽时间。我在公司已经两年了，这两年里承担的责任范围明显扩大了——从最初的执行层面发展到现在独立带项目。上季度我负责的跨境营销项目超额完成了KPI百分之三十。基于工作内容的变化和市场的薪资水平，我希望能讨论一下薪资调整的可能性。",
+                        "text_pinyin": "Máo zǒngjiān, xièxie nín chōu shíjiān. wǒ zài gōngsī yǐjīng liǎng nián le, zhè liǎng nián lǐ chéngdān de zérèn fànwéi míngxiǎn kuòdà le——cóng zuìchū de zhíxíng céngmiàn fāzhǎn dào xiànzài dúlì dài xiàngmù. shàng jìdù wǒ fùzé de kuà jìng yíngxiāo xiàngmù chāo'é wánchéng le KPI bǎi fēn zhī sānshí. jīyú gōngzuò nèiróng de biànhuà hé shìchǎng de xīnzī shuǐpíng, wǒ xīwàng néng tǎolùn yíxià xīnzī tiáozhěng de kěnéngxìng.",
+                        "text_en": "Director Mao, thank you for making time. I've been with the company two years, and my responsibilities have expanded significantly — from execution-level work to independently leading projects. Last quarter, the cross-border marketing project I led exceeded KPI by 30%. Based on the evolution of my role and market salary benchmarks, I'd like to discuss the possibility of a salary adjustment.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Timeline, scope expansion, quantified achievement, and market context — Director Mao recognizes the structure of a well-prepared argument. The geological layers are in place."
+                    },
+                    {
+                        "text_zh": "我觉得我的薪资和我做的工作不太匹配。我想加薪。",
+                        "text_pinyin": "wǒ juéde wǒ de xīnzī hé wǒ zuò de gōngzuò bú tài pǐpèi. wǒ xiǎng jiā xīn.",
+                        "text_en": "I feel my salary doesn't match my work. I want a raise.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Honest but thin. She'll need evidence — feelings are not the currency of negotiation in her office."
+                    },
+                    {
+                        "text_zh": "我听说同事们的薪资都比我高。",
+                        "text_pinyin": "wǒ tīngshuō tóngshìmen de xīnzī dōu bǐ wǒ gāo.",
+                        "text_en": "I've heard my colleagues all earn more than me.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Comparison-based arguments are her least favorite kind. The calligraphy reads 以理服人 — reason, not rumor."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你的项目表现确实很好，这个我也给上面汇报过。但我想了解得更具体一些：你说的「市场薪资水平」，你做过调研吗？你期望的调整幅度大概是多少？",
+                "text_pinyin": "nǐ de xiàngmù biǎoxiàn quèshí hěn hǎo, zhège wǒ yě gěi shàngmian huìbào guò. dàn wǒ xiǎng liǎojiě de gèng jùtǐ yìxiē: nǐ shuō de「shìchǎng xīnzī shuǐpíng」, nǐ zuò guò diàoyán ma? nǐ qīwàng de tiáozhěng fúdù dàgài shì duōshǎo?",
+                "text_en": "Your project performance was indeed strong — I've reported that upward. But I'd like more specifics: this 'market salary level' you mentioned — have you done research? What kind of adjustment range are you thinking?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your salary research and expectations.",
+                "options": [
+                    {
+                        "text_zh": "我看了几个招聘平台的数据，同行业同岗位同经验水平的薪资中位数大概比我目前的薪资高百分之二十到二十五。考虑到公司的薪资体系和预算周期，我期望的幅度是百分之十五到二十。当然，如果短期内薪资调整有困难的话，我也愿意讨论其他形式的补偿，比如绩效奖金或者职级的调整。",
+                        "text_pinyin": "wǒ kàn le jǐ gè zhāopìn píngtái de shùjù, tóng hángyè tóng gǎngwèi tóng jīngyàn shuǐpíng de xīnzī zhōngwèi shù dàgài bǐ wǒ mùqián de xīnzī gāo bǎi fēn zhī èrshí dào èrshíwǔ. kǎolǜ dào gōngsī de xīnzī tǐxì hé yùsuàn zhōuqī, wǒ qīwàng de fúdù shì bǎi fēn zhī shíwǔ dào èrshí. dāngrán, rúguǒ duǎnqī nèi xīnzī tiáozhěng yǒu kùnnan de huà, wǒ yě yuànyì tǎolùn qítā xíngshì de bǔcháng, bǐrú jìxiào jiǎngjīn huòzhě zhíjí de tiáozhěng.",
+                        "text_en": "I looked at data from several recruitment platforms — the median salary for the same industry, role, and experience level is about 20-25% higher than my current salary. Considering the company's salary structure and budget cycle, I'm hoping for 15-20%. Of course, if a salary adjustment is difficult in the short term, I'm also open to discussing other forms of compensation, like performance bonuses or a grade-level change.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Market data, realistic range, and flexible alternatives — Director Mao's geological patience meets an argument built on solid strata. She opens her notebook."
+                    },
+                    {
+                        "text_zh": "我大概看了一下，市场上类似的岗位比我现在高不少。我希望能加百分之二十。",
+                        "text_pinyin": "wǒ dàgài kàn le yíxià, shìchǎng shàng lèisì de gǎngwèi bǐ wǒ xiànzài gāo bùshǎo. wǒ xīwàng néng jiā bǎi fēn zhī èrshí.",
+                        "text_en": "I've roughly looked — similar roles in the market pay quite a bit more. I'm hoping for a 20% raise.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "A number without supporting detail. She respects the directness but needs the data."
+                    },
+                    {
+                        "text_zh": "我不确定具体数字，但是感觉应该涨一些。",
+                        "text_pinyin": "wǒ bú quèdìng jùtǐ shùzì, dànshì gǎnjué yīnggāi zhǎng yìxiē.",
+                        "text_en": "I'm not sure about the exact number, but I feel it should go up.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Coming to a salary negotiation without a number is like showing up to a chess match without pieces. She waits."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你的调研和期望都比较合理。不过说实话，公司今年的薪资调整预算比较紧。百分之二十可能比较难批下来。但是百分之十到十二可能有空间。另外你提到的职级调整，我觉得是值得考虑的——你现在的工作内容确实已经超出了当前的职级描述。",
+                "text_pinyin": "nǐ de diàoyán hé qīwàng dōu bǐjiào hélǐ. búguò shuō shíhuà, gōngsī jīnnián de xīnzī tiáozhěng yùsuàn bǐjiào jǐn. bǎi fēn zhī èrshí kěnéng bǐjiào nán pī xiàlái. dànshì bǎi fēn zhī shí dào shí'èr kěnéng yǒu kōngjiān. lìngwài nǐ tí dào de zhíjí tiáozhěng, wǒ juéde shì zhíde kǎolǜ de——nǐ xiànzài de gōngzuò nèiróng quèshí yǐjīng chāochū le dāngqián de zhíjí miáoshù.",
+                "text_en": "Your research and expectations are reasonable. But honestly, this year's salary adjustment budget is tight. 20% would be hard to approve. But 10-12% might be feasible. Also, the grade-level adjustment you mentioned is worth considering — your current work does exceed your current job description."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Negotiate the middle ground.",
+                "options": [
+                    {
+                        "text_zh": "我理解预算的限制。如果薪资方面能做到百分之十二，再加上职级从高级专员调整到副经理，我觉得这是一个双方都能接受的方案。职级调整也意味着明年的薪资空间会更大。这样的组合方案您觉得有可能推动吗？",
+                        "text_pinyin": "wǒ lǐjiě yùsuàn de xiànzhì. rúguǒ xīnzī fāngmiàn néng zuò dào bǎi fēn zhī shí'èr, zài jiā shàng zhíjí cóng gāojí zhuānyuán tiáozhěng dào fù jīnglǐ, wǒ juéde zhè shì yí gè shuāng fāng dōu néng jiēshòu de fāng'àn. zhíjí tiáozhěng yě yìwèi zhe míngnián de xīnzī kōngjiān huì gèng dà. zhèyàng de zǔhé fāng'àn nín juéde yǒu kěnéng tuīdòng ma?",
+                        "text_en": "I understand the budget constraints. If we could do 12% on salary plus a grade-level promotion from senior specialist to deputy manager, I think that's a solution both sides can accept. The grade change also means more salary room next year. Do you think this combined proposal could be pushed forward?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Accepting constraints while maximizing the package — Director Mao sees a negotiator who thinks in compound interest. The calligraphy approves."
+                    },
+                    {
+                        "text_zh": "那就百分之十二吧。职级的事以后再说。",
+                        "text_pinyin": "nà jiù bǎi fēn zhī shí'èr ba. zhíjí de shì yǐhòu zài shuō.",
+                        "text_en": "Then let's go with 12%. We can discuss the grade later.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Taking the immediate win. She notes it — pragmatic, but you left value on the table."
+                    },
+                    {
+                        "text_zh": "百分之十二太低了。我希望至少百分之十五。",
+                        "text_pinyin": "bǎi fēn zhī shí'èr tài dī le. wǒ xīwàng zhìshǎo bǎi fēn zhī shíwǔ.",
+                        "text_en": "12% is too low. I want at least 15%.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pushing past her stated range without new evidence. The geological layers shift uncomfortably."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "百分之十二加职级调整，这个方案我可以向上面提。不过职级调整需要HR那边的审批流程，可能要一到两个月。薪资调整的话，如果批了，下个月的工资就能体现。我回去整理一下，尽快给你答复。",
+                "text_pinyin": "bǎi fēn zhī shí'èr jiā zhíjí tiáozhěng, zhège fāng'àn wǒ kěyǐ xiàng shàngmian tí. búguò zhíjí tiáozhěng xūyào HR nàbiān de shěnpī liúchéng, kěnéng yào yí dào liǎng gè yuè. xīnzī tiáozhěng de huà, rúguǒ pī le, xià gè yuè de gōngzī jiù néng tǐxiàn. wǒ huíqù zhěnglǐ yíxià, jǐnkuài gěi nǐ dáfù.",
+                "text_en": "12% plus grade adjustment — I can present this proposal upward. The grade change needs HR approval though, which could take one to two months. The salary adjustment, if approved, would show in next month's pay. I'll put it together and get back to you as soon as possible."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and close the negotiation.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢毛总监。我很感激您愿意推动这件事。不管最终结果如何，这次谈话让我对自己的发展方向更清晰了。如果需要我提供任何补充材料来支持审批，请随时告诉我。",
+                        "text_pinyin": "fēicháng gǎnxiè Máo zǒngjiān. wǒ hěn gǎnjī nín yuànyì tuīdòng zhè jiàn shì. bùguǎn zuìzhōng jiéguǒ rúhé, zhè cì tánhuà ràng wǒ duì zìjǐ de fāzhǎn fāngxiàng gèng qīngxī le. rúguǒ xūyào wǒ tígōng rènhé bǔchōng cáiliào lái zhīchí shěnpī, qǐng suíshí gàosu wǒ.",
+                        "text_en": "Thank you very much Director Mao. I appreciate your willingness to advocate for this. Regardless of the final outcome, this conversation has clarified my development path. If you need any supporting materials for the approval, please let me know anytime.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Gratitude, perspective, and proactive support — Director Mao's forty-second approved raise may be on its way. The calligraphy catches the afternoon light."
+                    },
+                    {
+                        "text_zh": "谢谢毛总监！期待好消息。",
+                        "text_pinyin": "xièxie Máo zǒngjiān! qīdài hǎo xiāoxi.",
+                        "text_en": "Thanks Director Mao! Looking forward to good news.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Optimistic close. She'll do her part — the geological process has been set in motion."
+                    },
+                    {
+                        "text_zh": "好的，那我等消息了。",
+                        "text_pinyin": "hǎo de, nà wǒ děng xiāoxi le.",
+                        "text_en": "OK, I'll wait for news then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Passive. She prefers negotiators who stay engaged even after the conversation ends."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese salary negotiations often involve discussing the 'total package' (综合方案), not just base salary. Grade-level promotions (职级调整) can unlock future salary bands. The phrase 以理服人 (yǐ lǐ fú rén, 'persuade through reason') reflects a cultural preference for data-driven arguments over emotional appeals in professional settings."
+    }
+}

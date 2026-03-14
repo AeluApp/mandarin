@@ -16,6 +16,15 @@ from . import db
 
 logger = logging.getLogger(__name__)
 
+# Allowlist of valid lens columns for dynamic SQL in apply_proposal
+_VALID_LENS_COLS = frozenset({
+    "lens_quiet_observation", "lens_institutions", "lens_urban_texture",
+    "lens_humane_mystery", "lens_identity", "lens_comedy",
+    "lens_food", "lens_travel", "lens_explainers", "lens_wit",
+    "lens_ensemble_comedy", "lens_sharp_observation", "lens_satire",
+    "lens_moral_texture",
+})
+
 
 def detect_patterns(conn, user_id: int = 1) -> list:
     """Detect patterns that might warrant system changes.
@@ -126,7 +135,7 @@ def _suggest_error_fix(error_type: str) -> str:
         "tone": "Add tone-pair minimal pairs as warm-up: present two words "
                 "differing only in tone, ask which matches a meaning. "
                 "Add 1 extra tone drill per session.",
-        "segment": "Slow down IME drills: show the pinyin syllable-by-syllable "
+        "segment": "Slow down typing drills: show the pinyin syllable-by-syllable "
                    "before asking for full input. Add more listening-then-type exercises.",
         "ime_confusable": "Create a 'confusable pairs' drill set: present the two "
                          "confusable options side by side with meanings, then test.",
@@ -441,7 +450,7 @@ def _execute_proposal(conn, trigger: str, proposal_data: dict, user_id: int = 1)
         if scores:
             top = max(scores, key=scores.get)
             bottom = min(scores, key=scores.get)
-            # Safe: top/bottom are from lens_cols whitelist above
+            assert top in _VALID_LENS_COLS and bottom in _VALID_LENS_COLS
             conn.execute(
                 f"UPDATE learner_profile SET {top} = MIN(1.0, {top} + 0.2) WHERE user_id = ?",
                 (user_id,)
@@ -479,9 +488,9 @@ def _execute_proposal(conn, trigger: str, proposal_data: dict, user_id: int = 1)
             "lens_food", "lens_travel",
         ]
         for col in lens_cols:
+            assert col in _VALID_LENS_COLS
             score = profile.get(col) or 0.5
             if score < 0.4:
-                # Safe: col is from lens_cols whitelist above
                 conn.execute(
                     f"UPDATE learner_profile SET {col} = MAX(0.1, {col} - 0.1) WHERE user_id = ?",
                     (user_id,)

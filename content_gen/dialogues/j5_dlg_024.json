@@ -1,0 +1,90 @@
+{
+    "title": "The Painting in the Hallway",
+    "title_zh": "走廊里的画",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Yueming stop in front of a painting at a small local gallery. It's a simple landscape — mountains, mist, a small boat. But something about it holds you both still.",
+        "setup_zh": "你和朋友月明在一家小画廊前停了下来。一幅简单的风景画——山、雾、一只小船。但不知道为什么，你们两个都站住了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你有没有觉得，好的画不是让你想说话，而是让你想安静下来？这幅画我已经看了五分钟了，好像什么都没想，但又好像想了很多。",
+                "text_pinyin": "Nǐ yǒu méiyǒu juéde, hǎo de huà bú shì ràng nǐ xiǎng shuōhuà, ér shì ràng nǐ xiǎng ānjìng xiàlái? Zhè fú huà wǒ yǐjīng kàn le wǔ fēnzhōng le, hǎoxiàng shénme dōu méi xiǎng, dàn yòu hǎoxiàng xiǎng le hěn duō.",
+                "text_en": "Don't you think a good painting doesn't make you want to speak, but makes you want to be quiet? I've been looking at this painting for five minutes. It's as if I'm thinking nothing, yet somehow thinking about everything."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feeling about the painting.",
+                "options": [
+                    {
+                        "text_zh": "山只画了一半，船那么小，雾把剩下的都藏起来了。正因为看不到的部分，你才会去想象。好的艺术不会告诉你一切，而是给你空间。",
+                        "text_pinyin": "Shān zhǐ huà le yībàn, chuán nàme xiǎo, wù bǎ shèng xià de dōu cáng qǐlái le. Zhèng yīnwèi kàn bú dào de bùfen, nǐ cái huì qù xiǎngxiàng. Hǎo de yìshù bú huì gàosù nǐ yīqiè, ér shì gěi nǐ kōngjiān.",
+                        "text_en": "The mountain is half-painted, the boat is tiny, mist hides the rest. It's precisely because of the unseen parts that you imagine. Good art doesn't tell you everything — it gives you space.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perceptive — connects the aesthetic of negative space to the experience of viewing."
+                    },
+                    {
+                        "text_zh": "确实挺好看的。你知道这个画家是谁吗？有名吗？",
+                        "text_pinyin": "Quèshí tǐng hǎokàn de. Nǐ zhīdào zhège huàjiā shì shéi ma? Yǒumíng ma?",
+                        "text_en": "It is pretty. Do you know who the painter is? Are they famous?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Yueming is describing an experience of stillness, and you redirect to the painter's credentials. The painting's power doesn't depend on who made it."
+                    },
+                    {
+                        "text_zh": "我更喜欢颜色鲜艳的画，这个太淡了。",
+                        "text_pinyin": "Wǒ gèng xǐhuan yánsè xiānyàn de huà, zhège tài dàn le.",
+                        "text_en": "I prefer paintings with brighter colors, this one is too pale.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — judges rather than engages."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "给你空间……说得真好。也许这就是中国画和西洋画最大的区别吧。西洋画想让你看到一切，中国画想让你自己去填满那些留白。",
+                "text_pinyin": "Gěi nǐ kōngjiān…… shuō de zhēn hǎo. Yěxǔ zhè jiù shì Zhōngguó huà hé xīyáng huà zuì dà de qūbié ba. Xīyáng huà xiǎng ràng nǐ kàn dào yīqiè, Zhōngguó huà xiǎng ràng nǐ zìjǐ qù tiánmǎn nàxiē liúbái.",
+                "text_en": "Gives you space... beautifully said. Maybe that's the biggest difference between Chinese and Western painting. Western painting wants you to see everything; Chinese painting wants you to fill in the blank spaces yourself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on what blank space means beyond art.",
+                "options": [
+                    {
+                        "text_zh": "生活也需要留白。我们总想把每天都填满，但有时候最有意义的时刻反而是什么都没发生的时候。就像这幅画里的雾——看不见的部分最有味道。",
+                        "text_pinyin": "Shēnghuó yě xūyào liúbái. Wǒmen zǒng xiǎng bǎ měi tiān dōu tiánmǎn, dàn yǒu shíhou zuì yǒu yìyì de shíkè fǎn'ér shì shénme dōu méi fāshēng de shíhou. Jiù xiàng zhè fú huà lǐ de wù — kàn bú jiàn de bùfen zuì yǒu wèidào.",
+                        "text_en": "Life needs blank space too. We always want to fill every day, but sometimes the most meaningful moments are when nothing happens. Like the mist in this painting — the invisible part has the most flavor.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Philosophical and natural — extends the art principle into life wisdom."
+                    },
+                    {
+                        "text_zh": "你学过画画吗？",
+                        "text_pinyin": "Nǐ xué guò huà huà ma?",
+                        "text_en": "Have you studied painting?",
+                        "score": 0.0,
+                        "feedback": "Shifts to personal history instead of continuing the reflection."
+                    },
+                    {
+                        "text_zh": "我们去看看旁边那幅画吧。",
+                        "text_pinyin": "Wǒmen qù kànkan pángbiān nà fú huà ba.",
+                        "text_en": "Let's go look at the painting next to this one.",
+                        "score": 0.0,
+                        "feedback": "Moves on too quickly — doesn't honor the moment of stillness."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "生活也需要留白……我以后每次觉得太忙的时候，就来看看这幅画。让自己站一站，什么都不做，就够了。",
+                "text_pinyin": "Shēnghuó yě xūyào liúbái…… wǒ yǐhòu měi cì juéde tài máng de shíhou, jiù lái kànkan zhè fú huà. Ràng zìjǐ zhàn yī zhàn, shénme dōu bú zuò, jiù gòu le.",
+                "text_en": "Life needs blank space too... from now on, whenever I feel too busy, I'll come look at this painting. Just stand for a while, doing nothing. That will be enough."
+            }
+        ],
+        "cultural_note": "留白 (liúbái, leaving blank/negative space) is a central concept in Chinese ink painting, calligraphy, and aesthetics. Rather than filling the canvas, the artist deliberately leaves empty space, inviting the viewer's imagination to complete the scene. This principle extends beyond art into Chinese philosophy — the idea that emptiness creates meaning, echoing Daoist concepts of「无」(wú, nothingness) as essential to understanding「有」(yǒu, being)."
+    }
+}

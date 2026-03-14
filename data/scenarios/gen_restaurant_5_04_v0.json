@@ -1,0 +1,160 @@
+{
+    "title": "The Reservation Architect",
+    "title_zh": "订位建筑师",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_5_04_v0",
+    "tree": {
+        "setup": "Making a reservation at Cloud Nine Restaurant for a dinner that matters — your partner's parents are visiting from out of town, and this meal will be the second time you've met them. The first time, at a casual noodle shop, went well enough that they're open to a second meeting. The hostess, Xiao Lu, manages reservations with the spatial awareness of a Tetris champion, fitting parties into time slots and table configurations with an efficiency that borders on art.",
+        "setup_zh": "在九霄饭店订位，为一顿重要的晚餐——你伴侣的父母从外地来访，这顿饭将是你和他们第二次见面。第一次在一家普通面馆见面，结果还不错，他们愿意再见一次。领位小陆管理订位的空间感堪比俄罗斯方块冠军，把客人安排进时间段和桌子布局的效率近乎艺术。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "九霄饭店，您好。需要订位吗？",
+                "text_pinyin": "Jiǔxiāo Fàndiàn, nín hǎo. xūyào dìng wèi ma?",
+                "text_en": "Cloud Nine Restaurant, hello. Would you like to make a reservation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make a reservation for a special dinner.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想订这个周六晚上的位子。一共四个人。这次比较特殊——是跟女朋友的父母第二次见面，所以位置方面有没有比较安静、靠窗的座位？",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng dìng zhège zhōu liù wǎnshàng de wèizi. yígòng sì gè rén. zhè cì bǐjiào tèshū——shì gēn nǚpéngyou de fùmǔ dì èr cì jiànmiàn, suǒyǐ wèizhi fāngmiàn yǒu méiyǒu bǐjiào ānjìng, kào chuāng de zuòwèi?",
+                        "text_en": "Hello, I'd like to reserve for this Saturday evening. Four people. This occasion is a bit special — it's the second time meeting my girlfriend's parents, so is there a quiet window seat available?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Explaining the occasion gives the hostess context to work with. Xiao Lu's Tetris instincts activate — she knows exactly which table suits「meeting the parents.」"
+                    },
+                    {
+                        "text_zh": "周六晚上四个人，有位子吗？",
+                        "text_pinyin": "zhōu liù wǎnshàng sì gè rén, yǒu wèizi ma?",
+                        "text_en": "Saturday evening, four people — do you have a table?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Basic and efficient. She'll assign a table based on availability, not occasion."
+                    },
+                    {
+                        "text_zh": "我要订位。最好的桌子。",
+                        "text_pinyin": "wǒ yào dìng wèi. zuì hǎo de zhuōzi.",
+                        "text_en": "I want a reservation. The best table.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lu's definition of「最好」depends on context. Without knowing the occasion, she'll guess — and guessing is not her favorite activity."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "见女朋友的父母啊，那肯定要用心安排。周六晚上六点到八点的时间段有一个靠窗的四人桌，在我们的安静区域。不过七点以后比较抢手，你希望几点到？",
+                "text_pinyin": "jiàn nǚpéngyou de fùmǔ a, nà kěndìng yào yòngxīn ānpái. zhōu liù wǎnshàng liù diǎn dào bā diǎn de shíjiān duàn yǒu yí gè kào chuāng de sì rén zhuō, zài wǒmen de ānjìng qūyù. búguò qī diǎn yǐhòu bǐjiào qiǎngshǒu, nǐ xīwàng jǐ diǎn dào?",
+                "text_en": "Meeting the girlfriend's parents — we definitely need to arrange this well. There's a window table for four in our quiet section, available from 6 to 8 PM Saturday. After 7 it gets competitive. What time would you like to arrive?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a time and ask about the menu.",
+                "options": [
+                    {
+                        "text_zh": "六点半到可以吗？这样不会太早也不会太赶。对了，她父母是从福建来的，口味偏清淡。你们有没有什么推荐的菜？或者能不能提前看一下菜单？",
+                        "text_pinyin": "liù diǎn bàn dào kěyǐ ma? zhèyàng bú huì tài zǎo yě bú huì tài gǎn. duì le, tā fùmǔ shì cóng Fújiàn lái de, kǒuwèi piān qīngdàn. nǐmen yǒu méiyǒu shénme tuījiàn de cài? huòzhě néng bu néng tíqián kàn yíxià càidān?",
+                        "text_en": "Can we arrive at 6:30? Not too early, not too rushed. By the way, her parents are from Fujian — they prefer mild flavors. Any dish recommendations? Or can I see the menu in advance?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Timing logic, guest preferences, and advance planning — Xiao Lu pulls up the menu on her tablet. She has recommendations specifically for Fujian palates."
+                    },
+                    {
+                        "text_zh": "六点半吧。菜单能发给我看看吗？",
+                        "text_pinyin": "liù diǎn bàn ba. càidān néng fā gěi wǒ kàn kan ma?",
+                        "text_en": "6:30. Can you send me the menu?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll send it via WeChat. Preview the dishes at your leisure."
+                    },
+                    {
+                        "text_zh": "随便什么时间都行。",
+                        "text_pinyin": "suíbiàn shénme shíjiān dōu xíng.",
+                        "text_en": "Any time works.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "For a dinner with the parents, 「随便」is the one word you shouldn't use. Xiao Lu picks 6:30 for you."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "六点半没问题。福建口味偏清淡的话，我推荐我们的清蒸鲈鱼和药膳鸡汤，还有一个虾仁豆腐煲，都不辣。如果想提前点菜也可以，到时候上菜会更快。需要提前安排什么吗？比如鲜花、蛋糕之类的？",
+                "text_pinyin": "liù diǎn bàn méi wèntí. Fújiàn kǒuwèi piān qīngdàn de huà, wǒ tuījiàn wǒmen de qīngzhēng lúyú hé yàoshàn jītāng, hái yǒu yí gè xiārén dòufu bāo, dōu bú là. rúguǒ xiǎng tíqián diǎn cài yě kěyǐ, dàoshíhòu shàng cài huì gèng kuài. xūyào tíqián ānpái shénme ma? bǐrú xiānhuā, dàngāo zhī lèi de?",
+                "text_en": "6:30 is fine. For Fujian mild palates, I recommend our steamed sea bass, herbal chicken soup, and a shrimp tofu casserole — all non-spicy. You can pre-order if you want — food will arrive faster. Need any special arrangements? Flowers, cake, anything like that?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Finalize the arrangements.",
+                "options": [
+                    {
+                        "text_zh": "清蒸鲈鱼和鸡汤都点上吧，再加一个蔬菜。鲜花和蛋糕不用了，不想搞得太隆重，怕他们不自在。不过如果能准备一壶好茶的话就太好了——他们是福建人，应该喜欢喝茶。",
+                        "text_pinyin": "qīngzhēng lúyú hé jītāng dōu diǎn shàng ba, zài jiā yí gè shūcài. xiānhuā hé dàngāo bú yòng le, bù xiǎng gǎo de tài lóngzhòng, pà tāmen bú zìzai. búguò rúguǒ néng zhǔnbèi yì hú hǎo chá de huà jiù tài hǎo le——tāmen shì Fújiàn rén, yīnggāi xǐhuān hē chá.",
+                        "text_en": "Let's order the steamed sea bass and chicken soup, plus a vegetable dish. No flowers or cake — I don't want it too formal, might make them uncomfortable. But if you could prepare a pot of good tea, that would be perfect — they're from Fujian, so they probably love tea.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Knowing that Fujian people appreciate tea is the kind of cultural detail that makes Xiao Lu's job a pleasure. She makes a note: iron goddess oolong, the Fujian classic."
+                    },
+                    {
+                        "text_zh": "那就按你推荐的来吧。不用鲜花。",
+                        "text_pinyin": "nà jiù àn nǐ tuījiàn de lái ba. bú yòng xiānhuā.",
+                        "text_en": "Go with your recommendations. No flowers.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Trusting the hostess's judgment is efficient. She'll set it up perfectly."
+                    },
+                    {
+                        "text_zh": "鲜花蛋糕都要！搞得隆重一点。",
+                        "text_pinyin": "xiānhuā dàngāo dōu yào! gǎo de lóngzhòng yìdiǎn.",
+                        "text_en": "Flowers and cake, all of it! Make it grand.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Grand gestures at a second meeting can feel premature. Xiao Lu arranges it but suggests keeping it tasteful rather than theatrical."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "茶没问题，我们有很好的铁观音。好的，我总结一下：周六六点半，四位，靠窗安静区，预点清蒸鲈鱼、药膳鸡汤、一个蔬菜，配铁观音。请留一下您的姓名和联系方式。",
+                "text_pinyin": "chá méi wèntí, wǒmen yǒu hěn hǎo de Tiěguānyīn. hǎo de, wǒ zǒngjié yíxià: zhōu liù liù diǎn bàn, sì wèi, kào chuāng ānjìng qū, yù diǎn qīngzhēng lúyú, yàoshàn jītāng, yí gè shūcài, pèi Tiěguānyīn. qǐng liú yíxià nín de xìngmíng hé liánxì fāngshì.",
+                "text_en": "Tea is no problem — we have excellent Iron Goddess oolong. OK, let me summarize: Saturday at 6:30, four guests, window table in the quiet section, pre-ordered steamed sea bass, herbal chicken soup, one vegetable, with Iron Goddess tea. Please leave your name and contact number."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and thank her.",
+                "options": [
+                    {
+                        "text_zh": "完全正确。我叫张明，电话138-xxxx-xxxx。小陆，谢谢你帮我安排得这么周到。如果周六之前我想加菜或者改时间，直接打这个电话就行吗？",
+                        "text_pinyin": "wánquán zhèngquè. wǒ jiào Zhāng Míng, diànhuà yāo sān bā-xxxx-xxxx. Xiǎo Lù, xièxie nǐ bāng wǒ ānpái de zhème zhōudào. rúguǒ zhōu liù zhīqián wǒ xiǎng jiā cài huòzhě gǎi shíjiān, zhíjiē dǎ zhège diànhuà jiù xíng ma?",
+                        "text_en": "All correct. My name is Zhang Ming, phone 138-xxxx-xxxx. Xiao Lu, thank you for arranging everything so thoughtfully. If I want to add dishes or change the time before Saturday, can I just call this number?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Confirming modification procedures — the sign of someone who understands that plans with in-laws require flexibility. Xiao Lu confirms: call anytime, and she'll be on shift Saturday."
+                    },
+                    {
+                        "text_zh": "好的，张明，138-xxxx-xxxx。谢谢！",
+                        "text_pinyin": "hǎo de, Zhāng Míng, yāo sān bā-xxxx-xxxx. xièxie!",
+                        "text_en": "OK, Zhang Ming, 138-xxxx-xxxx. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean booking. She saves your info and the Tetris board gains another perfectly placed piece."
+                    },
+                    {
+                        "text_zh": "名字电话给你了。别忘了啊。",
+                        "text_pinyin": "míngzi diànhuà gěi nǐ le. bié wàng le a.",
+                        "text_en": "Gave you my name and number. Don't forget.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lu has not forgotten a reservation in three years. She smiles politely and enters it into the system."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Meeting your partner's parents (见家长, jiàn jiāzhǎng) is a significant milestone in Chinese relationships. Choosing a restaurant for this occasion requires balancing formality with comfort. Fujian people (福建人) are known for their tea culture, especially 铁观音 (Tiěguānyīn, Iron Goddess oolong). Pre-ordering dishes (提前点菜) for important dinners is common and shows thoughtful planning. Keeping the atmosphere relaxed rather than overly formal is generally preferred."
+    }
+}

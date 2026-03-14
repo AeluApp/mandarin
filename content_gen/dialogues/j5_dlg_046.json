@@ -1,0 +1,89 @@
+{
+  "title": "The Umbrella at the Door",
+  "title_zh": "门口的伞",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "It's raining hard and you're stuck at a convenience store entrance. A stranger silently hands you a spare umbrella before walking away.",
+    "setup_zh": "雨下得很大，你被困在便利店门口。一个陌生人默默递给你一把备用伞，然后就走了。你跟旁边同样在躲雨的人说起了这件事。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "那个人刚才直接给你一把伞就走了？连名字都没留？现在还有这样的人啊。我已经很久没遇到过这种不图回报的好意了。",
+        "text_pinyin": "Nàge rén gāngcái zhíjiē gěi nǐ yī bǎ sǎn jiù zǒu le? Lián míngzi dōu méi liú? Xiànzài hái yǒu zhèyàng de rén a. Wǒ yǐjīng hěn jiǔ méi yù dào guò zhè zhǒng bù tú huíbào de hǎoyì le.",
+        "text_en": "That person just gave you an umbrella and walked away? Didn't even leave a name? People like that still exist. It's been a long time since I've encountered kindness that asks for nothing in return."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Reflect on the stranger's kindness.",
+        "options": [
+          {
+            "text_zh": "我也很惊讶。但也许这种善意一直存在，只是我们太习惯了互相防备，反而看不到了。一把伞不值多少钱，但在雨里递给一个陌生人的那一刻，它变得特别珍贵。",
+            "text_pinyin": "Wǒ yě hěn jīngyà. Dàn yěxǔ zhè zhǒng shànyì yīzhí cúnzài, zhǐ shì wǒmen tài xíguàn le hùxiāng fángbèi, fǎn'ér kàn bú dào le. Yī bǎ sǎn bù zhí duōshǎo qián, dàn zài yǔ lǐ dì gěi yīge mòshēngrén de nà yī kè, tā biàn de tèbié zhēnguì.",
+            "text_en": "Maybe this kindness has always been there — we've become so used to guarding against each other that we can't see it. An umbrella isn't worth much, but handed to a stranger in the rain, it becomes precious.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "— questions our default suspicion and elevates a simple act."
+          },
+          {
+            "text_zh": "他可能是卖伞的吧。",
+            "text_pinyin": "Tā kěnéng shì mài sǎn de ba.",
+            "text_en": "He was probably selling umbrellas.",
+            "score": 0.0,
+            "feedback": "Cynical — assumes commercial motive for a pure gesture."
+          },
+          {
+            "text_zh": "你认识他吗？也许是你的邻居。",
+            "text_pinyin": "Nǐ rènshi tā ma? Yěxǔ shì nǐ de línjū.",
+            "text_en": "Do you know him? Maybe he's your neighbor.",
+            "score": 0.0,
+            "feedback": "Tries to rationalize instead of appreciating."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "确实。也许善意一直都在，只是我们忘了看。你打算怎么办？那把伞以后还给他吗？",
+        "text_pinyin": "Quèshí. Yěxǔ shànyì yīzhí dōu zài, zhǐ shì wǒmen wàng le kàn. Nǐ dǎsuàn zěnme bàn? Nà bǎ sǎn yǐhòu hái gěi tā ma?",
+        "text_en": "Indeed. Maybe kindness has always been there, we just forgot to look. What are you going to do? Return the umbrella to him later?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what you plan to do with the umbrella.",
+        "options": [
+          {
+            "text_zh": "我不知道怎么还给他。但也许最好的还法不是还给他，而是下次下雨的时候，把这把伞递给另一个需要的人。让这份善意继续传下去。",
+            "text_pinyin": "Wǒ bù zhīdào zěnme hái gěi tā. Dàn yěxǔ zuì hǎo de huán fǎ bú shì hái gěi tā, ér shì xià cì xià yǔ de shíhou, bǎ zhè bǎ sǎn dì gěi lìng yīge xūyào de rén. Ràng zhè fèn shànyì jìxù chuán xià qù.",
+            "text_en": "I don't know how to return it. But maybe the best way isn't giving it back — it's the next time it rains, handing this umbrella to someone else who needs it. Let the kindness keep passing forward.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "— transforms a single act of kindness into a chain of generosity."
+          },
+          {
+            "text_zh": "我把它放在家里吧，以后可以用。",
+            "text_pinyin": "Wǒ bǎ tā fàng zài jiālǐ ba, yǐhòu kěyǐ yòng.",
+            "text_en": "I'll keep it at home, I can use it later.",
+            "score": 0.0,
+            "feedback": "Keeps the kindness instead of passing it forward."
+          },
+          {
+            "text_zh": "算了吧，一把伞而已。",
+            "text_pinyin": "Suàn le ba, yī bǎ sǎn éryǐ.",
+            "text_en": "Forget it, it's just an umbrella.",
+            "score": 0.0,
+            "feedback": "Minimizes the significance of the gesture."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "让善意传下去……你让我想起了一句话：「你不知道你的一个小小的举动会改变谁的一天。」也许那个人已经忘了今天递伞这件事，但你会记得。这就够了。",
+        "text_pinyin": "Ràng shànyì chuán xià qù…… nǐ ràng wǒ xiǎng qǐ le yī jù huà: 'Nǐ bù zhīdào nǐ de yīge xiǎo xiǎo de jǔdòng huì gǎibiàn shéi de yī tiān.' Yěxǔ nàge rén yǐjīng wàng le jīntiān dì sǎn zhè jiàn shì, dàn nǐ huì jìde. Zhè jiù gòu le.",
+        "text_en": "Letting kindness pass forward... you remind me of a saying: 'You never know whose day your small act will change.' Maybe that person has already forgotten handing over the umbrella today, but you'll remember. That's enough."
+      }
+    ],
+    "cultural_note": "The concept of「传递善意」(passing kindness forward) has deep roots in Chinese culture, connected to the Buddhist idea of cultivating merit (积德, jī dé) through good deeds. The umbrella is a powerful symbol in Chinese culture — sharing an umbrella (共伞) represents intimacy and care, and the act of giving away an umbrella to a stranger embodies the highest form of selfless generosity."
+  }
+}

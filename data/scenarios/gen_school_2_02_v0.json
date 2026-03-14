@@ -1,0 +1,94 @@
+{
+    "title": "The Overdue Library Book",
+    "title_zh": "过期的图书",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_2_02_v0",
+    "tree": {
+        "setup": "The university library return desk. You have a book that's two weeks overdue. The librarian, Auntie Duan, keeps a meticulous record of every overdue book in a handwritten ledger. She doesn't get angry -- she gets disappointed, which is somehow worse. She taps her pen on the desk in a rhythm only she understands.",
+        "setup_zh": "大学图书馆还书台。你有一本书过期两周了。图书管理员段阿姨用手写账本记录每一本过期的书。她不生气——她失望，这不知道为什么更可怕。她用笔敲桌子，节奏只有她自己懂。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这本书……已经过期两个星期了。",
+                "text_pinyin": "zhè běn shū... yǐjīng guòqī liǎng gè xīngqī le.",
+                "text_en": "This book... has been overdue for two weeks."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize for the late return.",
+                "options": [
+                    {
+                        "text_zh": "对不起，我忘了还。要交罚款吗？",
+                        "text_pinyin": "duìbuqǐ, wǒ wàng le huán. yào jiāo fákuǎn ma?",
+                        "text_en": "Sorry, I forgot to return it. Do I need to pay a fine?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Duan appreciates the honesty. She checks her ledger.「两块钱。下次记得按时还啊。」忘了 + verb is 'forgot to.' Owning up immediately is always the best policy."
+                    },
+                    {
+                        "text_zh": "不好意思，最近太忙了。",
+                        "text_pinyin": "bù hǎoyìsi, zuìjìn tài máng le.",
+                        "text_en": "Sorry, I've been too busy recently.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Duan's pen-tapping slows but doesn't stop. She's heard this excuse from every student since 1998.「忙也要还书啊。」最近太忙了 is the universal excuse."
+                    },
+                    {
+                        "text_zh": "两个星期？我以为是一个星期……",
+                        "text_pinyin": "liǎng gè xīngqī? wǒ yǐwéi shì yí gè xīngqī...",
+                        "text_en": "Two weeks? I thought it was one...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Duan opens the book to the due date stamp, printed clearly on the card. She turns it to face you. The evidence is conclusive. 以为 means 'thought (incorrectly).'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两块钱罚款。你还想借别的书吗？",
+                "text_pinyin": "liǎng kuài qián fákuǎn. nǐ hái xiǎng jiè bié de shū ma?",
+                "text_en": "Two yuan fine. Do you want to borrow anything else?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and decide about more books.",
+                "options": [
+                    {
+                        "text_zh": "好的，给你两块钱。我想再借一本。",
+                        "text_pinyin": "hǎo de, gěi nǐ liǎng kuài qián. wǒ xiǎng zài jiè yì běn.",
+                        "text_en": "OK, here's two yuan. I'd like to borrow another one.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Duan takes the money and writes the fine in her ledger with a red pen. She eyes you.「这次按时还。」Her trust must be rebuilt. 再借 means 'borrow again.'"
+                    },
+                    {
+                        "text_zh": "今天就还书，不借了。",
+                        "text_pinyin": "jīntiān jiù huán shū, bú jiè le.",
+                        "text_en": "Just returning today, not borrowing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Duan processes the return in silence. She stamps the card with finality. The book is home. 就...不...了 means 'just doing X, not doing Y.'"
+                    },
+                    {
+                        "text_zh": "两块钱太多了吧？",
+                        "text_pinyin": "liǎng kuài qián tài duō le ba?",
+                        "text_en": "Two yuan is too much, isn't it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Duan's pen stops mid-tap. She looks at you over her glasses. The rules are the rules. Two yuan for two weeks is, in fact, extremely lenient. She does not say this. She doesn't need to."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了。下次看看到期时间，别忘了。",
+                "text_pinyin": "hǎo le. xià cì kànkan dàoqī shíjiān, bié wàng le.",
+                "text_en": "All done. Next time check the due date, don't forget."
+            }
+        ],
+        "cultural_note": "Chinese university libraries typically charge small fines for overdue books. The 借书证 (jièshū zhèng, library card) tracks everything. Librarians have long memories -- return your books on time."
+    }
+}

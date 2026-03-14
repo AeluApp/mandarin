@@ -1,0 +1,83 @@
+{
+    "title": "The Bicycle Repairman",
+    "title_zh": "修自行车的人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "Your bicycle has a flat tire. You bring it to a small repair stand under a tree. The repairman works quietly, his hands black with grease.",
+        "setup_zh": "你的自行车爆胎了。你推到一棵树下的修车摊。修车师傅安静地工作着，双手沾满了油污。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "坐着等一下，很快就好。这个内胎还能补，不用换新的。现在的人什么东西坏了就想换新的，其实很多东西修一修还能用很久。",
+                "text_pinyin": "Zuò zhe děng yīxià, hěn kuài jiù hǎo. Zhège nèitāi hái néng bǔ, bú yòng huàn xīn de. Xiànzài de rén shénme dōngxi huài le jiù xiǎng huàn xīn de, qíshí hěn duō dōngxi xiū yī xiū hái néng yòng hěn jiǔ.",
+                "text_en": "Sit and wait a moment, it'll be quick. This inner tube can still be patched — no need for a new one. People today want to replace everything that breaks, but many things can last a long time with a little repair."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his philosophy about repairing vs. replacing.",
+                "options": [
+                    {
+                        "text_zh": "您说得对。我们太习惯扔东西了。其实修好一个东西比买一个新的更有意义——因为你给了它第二次生命。",
+                        "text_pinyin": "Nín shuō de duì. Wǒmen tài xíguàn rēng dōngxi le. Qíshí xiū hǎo yī ge dōngxi bǐ mǎi yī ge xīn de gèng yǒu yìyì — yīnwèi nǐ gěi le tā dì èr cì shēngmìng.",
+                        "text_en": "You're right. We're too used to throwing things away. Actually, repairing something is more meaningful than buying new — because you give it a second life.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Repair as resurrection — giving things a second chance at life."
+                    },
+                    {
+                        "text_zh": "不过补过的地方总是比原来的弱一点吧？我还是有点担心骑着骑着又坏了。换新的可能更放心一些。",
+                        "text_pinyin": "Búguò bǔ guò de dìfāng zǒng shì bǐ yuánlái de ruò yīdiǎn ba? Wǒ háishì yǒudiǎn dānxīn qí zhe qí zhe yòu huài le. Huàn xīn de kěnéng gèng fàngxīn yīxiē.",
+                        "text_en": "But a patched spot is always weaker than the original, right? I'm a bit worried it'll break again while riding. Replacing might give more peace of mind.",
+                        "score": 0.0,
+                        "feedback": "He presses the patch firmly and says: 'A scar doesn't mean something is weak. Sometimes it's the strongest part.'"
+                    },
+                    {
+                        "text_zh": "补好以后还会再破吗？",
+                        "text_pinyin": "Bǔ hǎo yǐhòu hái huì zài pò ma?",
+                        "text_en": "Will it puncture again after patching?",
+                        "score": 0.0,
+                        "feedback": "Doubts his repair instead of engaging his thought."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第二次生命——哈，没想到补个胎还能说得这么有道理。我干这行三十多年了。以前每条街都有修车的，现在越来越少了。大家都骑共享单车，坏了就换一辆，没人修了。",
+                "text_pinyin": "Dì èr cì shēngmìng — hā, méi xiǎng dào bǔ ge tāi hái néng shuō de zhème yǒu dàolǐ. Wǒ gàn zhè háng sānshí duō nián le. Yǐqián měi tiáo jiē dōu yǒu xiū chē de, xiànzài yuè lái yuè shǎo le. Dàjiā dōu qí gòngxiǎng dānchē, huài le jiù huàn yī liàng, méi rén xiū le.",
+                "text_en": "Second life — ha, never thought patching a tire could sound so meaningful. I've been doing this over thirty years. Every street used to have a bike repairman — now fewer and fewer. Everyone rides shared bikes, if one breaks just switch to another, nobody repairs anymore."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the disappearing craft of bicycle repair.",
+                "options": [
+                    {
+                        "text_zh": "但您还在这里——说明还有人需要您，还有人相信修比换好。也许不是每条街都需要修车师傅了，但这条街因为有您，不一样。",
+                        "text_pinyin": "Dàn nín hái zài zhèlǐ — shuōmíng hái yǒu rén xūyào nín, hái yǒu rén xiāngxìn xiū bǐ huàn hǎo. Yěxǔ bú shì měi tiáo jiē dōu xūyào xiū chē shīfù le, dàn zhè tiáo jiē yīnwèi yǒu nín, bù yīyàng.",
+                        "text_en": "But you're still here — that means someone needs you, someone believes repairing is better than replacing. Maybe not every street needs a repairman now, but this street is different because of you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "His presence defines the street — the repairman as guardian of care."
+                    },
+                    {
+                        "text_zh": "共享单车确实方便。",
+                        "text_pinyin": "Gòngxiǎng dānchē quèshí fāngbiàn.",
+                        "text_en": "Shared bikes are indeed convenient.",
+                        "score": 0.0,
+                        "feedback": "Validates the system that's displacing him."
+                    },
+                    {
+                        "text_zh": "您打算干到什么时候？",
+                        "text_pinyin": "Nín dǎsuàn gàn dào shénme shíhou?",
+                        "text_en": "How long do you plan to keep doing this?",
+                        "score": 0.0,
+                        "feedback": "Asks about retirement during a moment of affirmation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bicycle repairmen (修车师傅) were once as common as mailboxes on Chinese streets. Their disappearance mirrors a broader shift from repair culture to replacement culture. The remaining repairmen — often under trees with simple tools — represent a vanishing ethic: that things worth using are worth fixing."
+    }
+}

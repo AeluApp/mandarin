@@ -1,0 +1,130 @@
+{
+    "title": "The Loan Officer's Garden",
+    "title_zh": "贷款专员的花园",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "A bank branch with a small indoor garden in the waiting area -- real plants, carefully tended. You're here to ask about a personal loan. The loan officer, Manager Zhou, has a desk covered in family photos and a miniature bonsai tree that he prunes during phone calls. He explains financial products the way a gardener explains soil: patiently, with genuine enthusiasm for the subject.",
+        "setup_zh": "银行网点，等候区有一个小室内花园——真植物，精心打理。你来咨询个人贷款。贷款专员周经理桌上摆满了家庭照片和一棵小盆栽，他打电话时会修剪盆栽。他介绍金融产品就像园丁介绍土壤：耐心，对这个话题有真正的热情。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请坐。今天想了解什么业务？",
+                "text_pinyin": "nín hǎo, qǐng zuò. jīntiān xiǎng liǎojiě shénme yèwù?",
+                "text_en": "Hello, please sit. What would you like to learn about today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him you're interested in a loan.",
+                "options": [
+                    {
+                        "text_zh": "我想了解一下个人贷款，不知道利率是多少。",
+                        "text_pinyin": "wǒ xiǎng liǎojiě yíxià gèrén dàikuǎn, bù zhīdào lìlǜ shì duōshao.",
+                        "text_en": "I'd like to learn about personal loans. I'm not sure what the interest rate is.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou leans forward and pulls out a brochure. He explains rates the way one describes weather patterns -- with care and context.「现在的利率比去年低。」了解一下 is 'to learn a bit about.'"
+                    },
+                    {
+                        "text_zh": "我需要借一些钱，但是不太了解流程。",
+                        "text_pinyin": "wǒ xūyào jiè yìxiē qián, dànshì bú tài liǎojiě liúchéng.",
+                        "text_en": "I need to borrow some money, but I don't really understand the process.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou nods warmly. He gets this question daily and never tires of it.「没关系，我从头给您解释。」流程 means 'process' -- essential for any bureaucratic interaction."
+                    },
+                    {
+                        "text_zh": "贷款需要什么条件？",
+                        "text_pinyin": "dàikuǎn xūyào shénme tiáojiàn?",
+                        "text_en": "What are the requirements for a loan?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou lists them on his fingers, trimming a dead leaf from his bonsai between points.「收入证明、身份证、还有工作证明。」条件 means 'conditions/requirements.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们有两种贷款。一种是固定利率的，另一种是浮动利率的。您更倾向于哪种？",
+                "text_pinyin": "wǒmen yǒu liǎng zhǒng dàikuǎn. yì zhǒng shì gùdìng lìlǜ de, lìng yì zhǒng shì fúdòng lìlǜ de. nín gèng qīngxiàng yú nǎ zhǒng?",
+                "text_en": "We have two types of loans. One has a fixed rate, the other has a floating rate. Which do you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the difference.",
+                "options": [
+                    {
+                        "text_zh": "固定和浮动有什么区别？哪种更划算？",
+                        "text_pinyin": "gùdìng hé fúdòng yǒu shénme qūbié? nǎ zhǒng gèng huásuàn?",
+                        "text_en": "What's the difference between fixed and floating? Which is more worthwhile?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou draws a small graph on a notepad -- two lines, one steady, one wavy. He explains with the clarity of a patient teacher.「固定的每个月一样多，浮动的可能高也可能低。」划算 means 'cost-effective.'"
+                    },
+                    {
+                        "text_zh": "我想要稳定一点的，固定利率吧。",
+                        "text_pinyin": "wǒ xiǎng yào wěndìng yìdiǎn de, gùdìng lìlǜ ba.",
+                        "text_en": "I'd like something more stable. Fixed rate.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou nods.「大多数人都选固定的。心里踏实。」稳定 means 'stable' -- a word that works in finance and life."
+                    },
+                    {
+                        "text_zh": "利率太高了吧？能不能便宜一点？",
+                        "text_pinyin": "lìlǜ tài gāo le ba? néng bu néng piányi yìdiǎn?",
+                        "text_en": "Isn't the rate too high? Can it be lower?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Zhou smiles gently. Bank rates are not negotiable like market prices.「利率是统一的，但是您可以选择不同的还款期限来减少月供。」This isn't a fruit stall, but the question is understandable."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。如果您决定了，需要带这些材料来办理。我给您写一个清单。",
+                "text_pinyin": "hǎo de. rúguǒ nín juédìng le, xūyào dài zhèxiē cáiliào lái bànlǐ. wǒ gěi nín xiě yí gè qīngdān.",
+                "text_en": "OK. If you decide, you'll need to bring these documents. I'll write you a list."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and ask about timeline.",
+                "options": [
+                    {
+                        "text_zh": "谢谢周经理。批下来大概需要多久？",
+                        "text_pinyin": "xièxie zhōu jīnglǐ. pī xiàlái dàgài xūyào duō jiǔ?",
+                        "text_en": "Thank you, Manager Zhou. How long does approval take?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou checks his calendar while watering his bonsai.「一般五到七个工作日。材料齐全的话更快。」批下来 means 'to get approved.'"
+                    },
+                    {
+                        "text_zh": "好的，我回去考虑一下再来。",
+                        "text_pinyin": "hǎo de, wǒ huíqù kǎolǜ yíxià zài lái.",
+                        "text_en": "OK, I'll go think about it and come back.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Zhou hands you his business card with both hands.「不急，想好了再来。有问题随时打电话。」考虑一下 means 'think it over.'"
+                    },
+                    {
+                        "text_zh": "您的盆栽真好看！养了多久了？",
+                        "text_pinyin": "nín de pénzāi zhēn hǎokàn! yǎng le duō jiǔ le?",
+                        "text_en": "Your bonsai is beautiful! How long have you been growing it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Manager Zhou's eyes light up.「五年了！跟这个银行一样大。」He's clearly been waiting for someone to ask. Sometimes the best business conversations start with a genuine compliment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。这是我的名片。有什么问题随时联系我。祝您一切顺利！",
+                "text_pinyin": "hǎo de. zhè shì wǒ de míngpiàn. yǒu shénme wèntí suíshí liánxì wǒ. zhù nín yíqiè shùnlì!",
+                "text_en": "OK. Here's my card. Contact me anytime with questions. Wishing you all the best!"
+            }
+        ],
+        "cultural_note": "Chinese banks use formal titles -- 经理 (jīnglǐ, manager) is standard. Loan applications require 收入证明 (income proof), 身份证 (ID), and 工作证明 (employment proof). Decisions take about a week. Building rapport with your bank officer helps."
+    },
+    "id": "gen_bank_3_00_v0"
+}

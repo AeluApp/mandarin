@@ -1,0 +1,83 @@
+{
+  "title": "The School Gate at Pickup Time",
+  "title_zh": "放学时间的校门口",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "You walk past a school gate at pickup time. A parent waiting outside starts chatting with you.",
+    "setup_zh": "你路过一所学校的门口，正是放学时间。一位等孩子的家长跟你聊天。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也来接孩子吗？还是路过？",
+        "text_pinyin": "Nǐ yě lái jiē háizi ma? Háishi lùguò?",
+        "text_en": "Are you here to pick up a child too? Or just passing by?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Explain why you're here.",
+        "options": [
+          {
+            "text_zh": "我路过的。这里每天都这么热闹吗？",
+            "text_pinyin": "Wǒ lùguò de. Zhèlǐ měi tiān dōu zhème rènao ma?",
+            "text_en": "I'm just passing by. Is it this lively every day?",
+            "score": 1.0,
+            "feedback": "Friendly and curious — engages naturally.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不认识你。",
+            "text_pinyin": "Wǒ bú rènshi nǐ.",
+            "text_en": "I don't know you.",
+            "score": 0.0,
+            "feedback": "Unfriendly response to a casual conversation."
+          },
+          {
+            "text_zh": "这个学校好不好？",
+            "text_pinyin": "Zhège xuéxiào hǎo bù hǎo?",
+            "text_en": "Is this school good?",
+            "score": 0.0,
+            "feedback": "Doesn't answer whether you're picking up a child or passing by."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "每天都这样！孩子们出来的时候最开心了。你看，那边卖糖葫芦的老爷爷也每天都来。",
+        "text_pinyin": "Měi tiān dōu zhèyàng! Háizimen chūlái de shíhou zuì kāixīn le. Nǐ kàn, nàbiān mài tánghúlu de lǎoyéye yě měi tiān dōu lái.",
+        "text_en": "Every day! The kids are happiest when they come out. See, the old man selling candied hawthorns over there comes every day too."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "React to the scene.",
+        "options": [
+          {
+            "text_zh": "真的很温馨。小时候我也很期待放学。",
+            "text_pinyin": "Zhēn de hěn wēnxīn. Xiǎo shíhou wǒ yě hěn qīdài fàngxué.",
+            "text_en": "It's really heartwarming. When I was little, I also looked forward to getting out of school.",
+            "score": 1.0,
+            "feedback": "Reflective — connects to a universal childhood feeling.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "糖葫芦好吃吗？",
+            "text_pinyin": "Tánghúlu hǎochī ma?",
+            "text_en": "Are candied hawthorns tasty?",
+            "score": 0.0,
+            "feedback": "Misses the emotional beat of the moment."
+          },
+          {
+            "text_zh": "我要走了。",
+            "text_pinyin": "Wǒ yào zǒu le.",
+            "text_en": "I need to go.",
+            "score": 0.0,
+            "feedback": "Leaves abruptly during a warm moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "School pickup time (放学) is a daily ritual that transforms quiet streets into joyful scenes. Grandparents, parents, and snack vendors all converge. The tanghulu (糖葫芦) seller is an iconic figure — a thread of continuity across generations."
+  }
+}

@@ -23,7 +23,7 @@
 - Collections: submit to "Language Learning" and "Education" collections after launch
 
 **Twitter/X**
-- Create @mandarinapp or use your personal account (personal is often better for indie)
+- Create @aeluapp or use your personal account (personal is often better for indie)
 - Content type: short "building in public" threads
   - "Today I added HSK 3.0 vocabulary. Here's what changed in the new standard..."
   - "My Chinese reading accuracy went from 62% to 81% in 4 weeks. Here's the data."
@@ -126,7 +126,7 @@ Subject: Built a Chinese learning app — would love your honest take
 
 Hi [Name],
 
-We're an independent team learning Mandarin, and we built an app called Mandarin
+We're an independent team learning Mandarin, and we built an app called Aelu
 around what I call the "cleanup loop" — you read graded Chinese passages,
 tap words you don't know, and those exact words become your next drill.
 
@@ -142,7 +142,7 @@ Here's a quick demo: [link to 60-second screen recording]
 Thanks for all the content you create — it's been genuinely helpful
 in my own learning.
 
-Mandarin
+Aelu
 ```
 
 **Key rules:**
@@ -177,11 +177,11 @@ This means 6 blog posts = 30+ pieces of content across channels.
 
 | Product | Relationship | Opportunity |
 |---------|-------------|-------------|
-| Pleco | Dictionary app — everyone uses it | "Use Pleco for dictionary, Mandarin for SRS + reading" positioning |
+| Pleco | Dictionary app — everyone uses it | "Use Pleco for dictionary, Aelu for SRS + reading" positioning |
 | Mandarin Companion | Physical graded readers | Cross-promotion: "Read their books, drill vocabulary in your app" |
 | Glossika | Sentence drilling (different approach) | "Use both" blog post |
 | iTalki | Tutoring platform | "Drill between tutoring sessions" positioning |
-| HelloTalk | Language exchange | "Practice with Mandarin, then apply on HelloTalk" |
+| HelloTalk | Language exchange | "Practice with Aelu, then apply on HelloTalk" |
 
 ### Institutional / B2B (future)
 

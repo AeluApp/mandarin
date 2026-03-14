@@ -1,0 +1,87 @@
+{
+    "title": "Trying Street Food",
+    "title_zh": "尝小吃",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You and your friend Xiao Rong are walking through a night market, surrounded by the smells and sounds of street food vendors.",
+        "setup_zh": "你和朋友小容在夜市里走着，到处都是小吃摊的香味和叫卖声。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哇，好香！你看那边有臭豆腐、烤红薯、还有糖葫芦。你想先吃什么？",
+                "text_pinyin": "Wā, hǎo xiāng! Nǐ kàn nàbiān yǒu chòu dòufu, kǎo hóngshǔ, hái yǒu táng húlu. Nǐ xiǎng xiān chī shénme?",
+                "text_en": "Wow, it smells amazing! Look — they have stinky tofu, roasted sweet potato, and candied hawthorn. What do you want to try first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose something to eat.",
+                "options": [
+                    {
+                        "text_zh": "先来一份臭豆腐吧！闻起来臭，吃起来香。你敢不敢吃？",
+                        "text_pinyin": "Xiān lái yī fèn chòu dòufu ba! Wén qǐlái chòu, chī qǐlái xiāng. Nǐ gǎn bù gǎn chī?",
+                        "text_en": "Let's start with stinky tofu! Smells bad, tastes great. Dare to try?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Adventurous and playful — perfect night market energy."
+                    },
+                    {
+                        "text_zh": "烤红薯吧，安全一点。",
+                        "text_pinyin": "Kǎo hóngshǔ ba, ānquán yīdiǎn.",
+                        "text_en": "Sweet potato — safer choice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Safe but less adventurous."
+                    },
+                    {
+                        "text_zh": "我不太想吃路边摊。",
+                        "text_pinyin": "Wǒ bú tài xiǎng chī lùbiān tān.",
+                        "text_en": "I don't really want to eat at street stalls.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Kills the night market vibe."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我当然敢！臭豆腐是我的最爱！老板，来两份臭豆腐，多放辣酱！然后我们再去买糖葫芦，边走边吃。",
+                "text_pinyin": "Wǒ dāngrán gǎn! Chòu dòufu shì wǒ de zuì ài! Lǎobǎn, lái liǎng fèn chòu dòufu, duō fàng làjiàng! Ránhòu wǒmen zài qù mǎi tánghúlu, biān zǒu biān chī.",
+                "text_en": "Of course I dare! Stinky tofu is my favorite! Boss, two servings of stinky tofu, extra spicy sauce! Then let's get candied hawthorn and eat as we walk."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the night market experience.",
+                "options": [
+                    {
+                        "text_zh": "边走边吃，这就是逛夜市的乐趣！我好久没这么开心了。下次我们试那边的煎饼果子。",
+                        "text_pinyin": "Biān zǒu biān chī, zhè jiù shì guàng yèshì de lèqù! Wǒ hǎojiǔ méi zhème kāixīn le. Xià cì wǒmen shì nàbiān de jiānbing guǒzi.",
+                        "text_en": "Eating while walking — that's the joy of night markets! I haven't been this happy in a long time. Next time let's try the jianbing guozi over there.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Embraces the experience fully and plans ahead."
+                    },
+                    {
+                        "text_zh": "味道不错。",
+                        "text_pinyin": "Wèidào búcuò.",
+                        "text_en": "Tastes good.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Understated for a vibrant scene."
+                    },
+                    {
+                        "text_zh": "太油了。",
+                        "text_pinyin": "Tài yóu le.",
+                        "text_en": "Too oily.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Complaining during a fun outing."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Night markets (夜市) are vibrant social spaces where friends bond over adventurous eating. Stinky tofu (臭豆腐) is the quintessential dare food — its paradox of smelling terrible but tasting wonderful is a source of endless conversation. 「边走边吃」 (eating while walking) captures the casual, carefree spirit of night market culture."
+    },
+    "hsk_level": 3
+}

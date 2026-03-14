@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mandarin — Adaptive Chinese Learning for Serious Learners</title>
-  <meta name="description" content="Master Mandarin Chinese with adaptive SRS drills, graded reading, and listening practice. Every word you look up becomes practice. HSK 1-6 aligned. No AI fluff — just effective learning.">
+  <title>Aelu — Adaptive Chinese Learning for Serious Learners</title>
+  <meta name="description" content="Master Mandarin Chinese with adaptive SRS drills, graded reading, and listening practice. Every word you look up becomes practice. HSK 1-9 aligned.">
   <meta name="keywords" content="learn Chinese, Mandarin learning app, best app to learn Chinese, HSK study app, Chinese SRS app, spaced repetition Chinese, Chinese flashcard app, Chinese vocabulary app, graded Chinese reading, Chinese listening practice, adaptive Chinese learning app, best app to learn Mandarin">
-  <link rel="canonical" href="https://mandarinapp.com/">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://aeluapp.com/">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Mandarin — Adaptive Chinese Learning for Serious Learners">
+  <meta property="og:title" content="Aelu — Adaptive Chinese Learning for Serious Learners">
   <meta property="og:description" content="Master Mandarin with adaptive drills that learn what you need. Read real Chinese, listen at your speed, and every word you look up becomes practice.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mandarin — Adaptive Chinese Learning for Serious Learners">
+  <meta name="twitter:title" content="Aelu — Adaptive Chinese Learning for Serious Learners">
   <meta name="twitter:description" content="Master Mandarin with adaptive drills that learn what you need. Every word you look up becomes practice.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Mandarin",
+    "name": "Aelu",
     "applicationCategory": "EducationalApplication",
     "operatingSystem": "Web",
-    "description": "Adaptive Chinese learning app with SRS drills, graded reading, and listening practice. HSK 1-6 aligned.",
+    "description": "Adaptive Chinese learning app with SRS drills, graded reading, and listening practice. HSK 1-9 aligned.",
     "offers": [
       {
         "@type": "Offer",
@@ -42,7 +42,7 @@
       },
       {
         "@type": "Offer",
-        "price": "12",
+        "price": "14.99",
         "priceCurrency": "USD",
         "description": "Full Access Monthly"
       }
@@ -521,6 +521,21 @@
       font-weight: 600;
       color: var(--color-text);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
     }
 
     .nav-links {
@@ -539,6 +554,17 @@
     .nav-links a:hover,
     .nav-links a[aria-current="page"] {
       color: var(--color-text);
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
     }
 
     .nav-toggle {
@@ -583,7 +609,7 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -592,7 +618,8 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -602,15 +629,27 @@
     <div class="container">
       <div class="hero-hanzi" aria-hidden="true">学而时习之</div>
       <h1>Learn Chinese the way your brain actually works</h1>
+      <p class="hero-promise" style="font-family:var(--font-heading);font-size:1.2rem;color:var(--color-secondary);margin-bottom:var(--space-2);">10 minutes a day. Every word you learn stays learned.</p>
       <p class="hero-sub">Adaptive drills that focus on what you struggle with. Read real Chinese with instant glosses. Every word you look up becomes practice.</p>
       <div class="cta-group">
-        <form class="cta-email" id="signup-form" action="#" method="post">
+        <form class="cta-email" id="signup-form" action="/register" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Get early access</button>
+          <button type="submit" class="btn-primary">Sign up free</button>
         </form>
         <p class="cta-note">Free to start. No credit card required.</p>
-        <div class="cta-success" id="signup-success">You're on the list. We'll let you know when it's ready.</div>
+        <div class="cta-success" id="signup-success">Check your email to get started.</div>
       </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="trust-bar" style="padding:var(--space-4) 0;text-align:center;border-bottom:1px solid var(--color-border);">
+    <div class="container" style="display:flex;justify-content:center;gap:var(--space-5);flex-wrap:wrap;font-size:0.9rem;color:var(--color-text-faint);">
+      <span>10,000+ vocabulary items</span>
+      <span>27 drill types</span>
+      <span>HSK 1-9 aligned</span>
+      <span>Works offline</span>
+      <span>30-day money-back guarantee</span>
     </div>
   </section>
 
@@ -622,7 +661,7 @@
         <li>Duolingo teaches you to match pictures, not read a menu</li>
         <li>Anki expects you to build your own curriculum from scratch</li>
         <li>Generic SRS apps drill vocabulary in isolation, disconnected from real Chinese</li>
-        <li>AI-generated content is getting worse, not better — wrong tones, unnatural phrasing</li>
+        <li>Auto-generated content with wrong tones and unnatural phrasing</li>
       </ul>
     </div>
   </section>
@@ -630,7 +669,7 @@
   <!-- Features -->
   <section class="features">
     <div class="container-wide">
-      <h2>Built different</h2>
+      <h2>What makes this work</h2>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-hanzi">适</div>
@@ -650,7 +689,7 @@
         <div class="feature-card">
           <div class="feature-hanzi">考</div>
           <h3>HSK aligned</h3>
-          <p>Content structured around HSK 1-6. Track your projected exam readiness. Know exactly where you stand and what to work on next.</p>
+          <p>Content structured around HSK 1-9. Track your projected exam readiness. Know exactly where you stand and what to work on next.</p>
         </div>
       </div>
     </div>
@@ -689,9 +728,9 @@
   <!-- Differentiator -->
   <section class="diff">
     <div class="container">
-      <h2>No AI tokens. No subscriptions to OpenAI.</h2>
-      <div class="diff-quote">"The system uses zero AI tokens at runtime. Every drill, every score, every recommendation is deterministic."</div>
-      <p>Your learning data stays local. Responses are instant. No waiting for an API. No monthly AI costs passed to you. Just a fast, predictable system that works offline.</p>
+      <h2>Fast, consistent, works offline.</h2>
+      <div class="diff-quote">"Every drill, every score, every recommendation is deterministic. The same right answer every time."</div>
+      <p>Responses are instant. No waiting for a server. No variable quality. Just a fast, predictable system that works offline.</p>
     </div>
   </section>
 
@@ -705,7 +744,7 @@
           <div class="pricing-price">$0</div>
           <ul class="pricing-features">
             <li>HSK 1-2 vocabulary and drills</li>
-            <li>5 drill types</li>
+            <li>All 27 drill types</li>
             <li>Basic progress tracking</li>
             <li>Graded reading (beginner)</li>
           </ul>
@@ -713,9 +752,9 @@
         <div class="pricing-card featured">
           <div class="pricing-label">Full access</div>
           <h3>Learner</h3>
-          <div class="pricing-price">$12 <span>/month</span></div>
+          <div class="pricing-price">$14.99 <span>/month</span></div>
           <ul class="pricing-features">
-            <li>HSK 1-6 full curriculum</li>
+            <li>HSK 1-9 full curriculum</li>
             <li>All 27 drill types</li>
             <li>Adaptive scheduling</li>
             <li>Graded reading (all levels)</li>
@@ -729,15 +768,32 @@
     </div>
   </section>
 
+  <!-- Methodology -->
+  <section class="methodology" style="padding:var(--space-6) 0;background:var(--color-surface);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
+    <div class="container" style="max-width:640px;">
+      <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:600;text-align:center;margin-bottom:var(--space-4);">Built on research, not guesswork</h2>
+      <p style="font-size:0.95rem;color:var(--color-text-faint);line-height:1.65;margin-bottom:var(--space-3);">Aelu's scheduling algorithm is based on FSRS (Free Spaced Repetition Scheduler) with Bayesian confidence dampening — the same family of algorithms used in peer-reviewed spaced repetition research. Every drill, every interval, every difficulty rating is computed deterministically. No AI hallucinations. No variable quality.</p>
+      <p style="font-size:0.95rem;color:var(--color-text-faint);line-height:1.65;">Your progress data stays on your device. We never sell or share your learning data. Payment processing is handled by Stripe.</p>
+    </div>
+  </section>
+
+  <!-- Guarantee -->
+  <section class="guarantee" style="padding:var(--space-5) 0;text-align:center;">
+    <div class="container" style="max-width:520px;">
+      <p style="font-family:var(--font-heading);font-size:1.3rem;font-weight:600;margin-bottom:var(--space-2);">30-day money-back guarantee</p>
+      <p style="font-size:0.9rem;color:var(--color-text-faint);line-height:1.6;">If you're not satisfied within the first 30 days, email us and we'll refund your payment in full. No hoops, no retention offers, no forms to fill out.</p>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="final-cta">
     <div class="container">
       <h2>Start learning the way serious learners do</h2>
-      <p>Join the waitlist. Free for the first 50 users.</p>
+      <p>Free to start. No credit card required.</p>
       <div class="cta-group">
-        <form class="cta-email" id="signup-form-bottom" action="#" method="post">
+        <form class="cta-email" id="signup-form-bottom" action="/register" method="post">
           <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="btn-primary">Get early access</button>
+          <button type="submit" class="btn-primary">Sign up free</button>
         </form>
       </div>
     </div>
@@ -745,7 +801,7 @@
 
   <footer>
     <div class="container">
-      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
+      <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
       <p style="margin-top: var(--space-2);">Built by a learner, for learners.</p>
     </div>

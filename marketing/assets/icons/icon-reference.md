@@ -1,4 +1,4 @@
-# Mandarin UI Icon Reference
+# Aelu UI Icon Reference
 
 SVG sprite sheet: `ui-icons.svg`
 

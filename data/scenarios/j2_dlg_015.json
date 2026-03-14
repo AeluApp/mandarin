@@ -1,0 +1,83 @@
+{
+  "title": "Morning Fog",
+  "title_zh": "早上的雾",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You step outside early and find the neighborhood wrapped in fog. A security guard is at his post, drinking tea.",
+    "setup_zh": "你一大早出门，发现整个小区都被雾笼罩了。保安在他的岗位上喝茶。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这么早出门？今天雾很大，走路小心点。",
+        "text_pinyin": "Zhème zǎo chūmén? Jīntiān wù hěn dà, zǒu lù xiǎoxīn diǎn.",
+        "text_en": "Out this early? The fog is heavy today — be careful walking."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his concern.",
+        "options": [
+          {
+            "text_zh": "谢谢提醒。雾好大，对面都看不清。但是很漂亮。",
+            "text_pinyin": "Xièxie tíxǐng. Wù hǎo dà, duìmiàn dōu kàn bù qīng. Dànshì hěn piàoliang.",
+            "text_en": "Thanks for the reminder. The fog is so thick I can't see across the street. But it's beautiful.",
+            "score": 1.0,
+            "feedback": "Grateful and observant — finds beauty in the fog.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "嗯，我知道。我看了天气预报，今天有雾。",
+            "text_pinyin": "Ǹg, wǒ zhīdào. Wǒ kàn le tiānqì yùbào, jīntiān yǒu wù.",
+            "text_en": "Yeah, I know. I checked the weather forecast — there's fog today.",
+            "score": 0.0,
+            "feedback": "He nods, but you just stated what he can already see. He was looking out for you."
+          },
+          {
+            "text_zh": "你喝的是什么茶？",
+            "text_pinyin": "Nǐ hē de shì shénme chá?",
+            "text_en": "What tea are you drinking?",
+            "score": 0.0,
+            "feedback": "He's warning you about the fog."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是挺漂亮的。我在这里工作十几年了，每年冬天都有这样的雾。像住在云里一样。",
+        "text_pinyin": "Shì tǐng piàoliang de. Wǒ zài zhèlǐ gōngzuò shí jǐ nián le, měi nián dōngtiān dōu yǒu zhèyàng de wù. Xiàng zhù zài yún lǐ yīyàng.",
+        "text_en": "It is beautiful. I've worked here over ten years — every winter there's fog like this. Like living in the clouds."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his poetic observation.",
+        "options": [
+          {
+            "text_zh": "「住在云里」，说得真好。您在这里一定看过很多风景。",
+            "text_pinyin": "「Zhù zài yún lǐ」, shuō de zhēn hǎo. Nín zài zhèlǐ yīdìng kàn guò hěn duō fēngjǐng.",
+            "text_en": "Living in the clouds — beautifully put. You must have seen many sights here.",
+            "score": 1.0,
+            "feedback": "Appreciative — honors his words and experience.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "十几年太长了。",
+            "text_pinyin": "Shí jǐ nián tài cháng le.",
+            "text_en": "Ten-plus years is too long.",
+            "score": 0.0,
+            "feedback": "Dismissive of his dedication."
+          },
+          {
+            "text_zh": "我得走了，不然要迟到了。",
+            "text_pinyin": "Wǒ děi zǒu le, bùrán yào chídào le.",
+            "text_en": "I need to go or I'll be late.",
+            "score": 0.0,
+            "feedback": "Cuts short a lovely moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Security guards (保安) are the quiet sentinels of Chinese neighborhoods. Often overlooked, they observe the seasons change from their posts year after year. Their observations can be surprisingly poetic — they see the neighborhood in ways residents miss."
+  }
+}

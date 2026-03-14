@@ -1,0 +1,94 @@
+{
+    "title": "The Gentle Taxi Driver",
+    "title_zh": "温和的出租车司机",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_travel_1_03_v0",
+    "tree": {
+        "setup": "Outside the train station, late afternoon. Taxis queue along the curb. You climb into one driven by Uncle Gao, who has a dashboard covered in good-luck charms and a small photo of his granddaughter taped to the sun visor. He drives slowly and carefully, which is unusual for a taxi driver, and he knows it.",
+        "setup_zh": "火车站外，傍晚时分。出租车沿着路边排队。你上了高叔叔的车，仪表盘上全是吉祥物，遮阳板上贴着孙女的小照片。他开车很慢很小心——对出租车司机来说不太常见，他自己也知道。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！去哪里？",
+                "text_pinyin": "nǐ hǎo! qù nǎlǐ?",
+                "text_en": "Hello! Where to?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him your destination.",
+                "options": [
+                    {
+                        "text_zh": "请去这个地方。",
+                        "text_pinyin": "qǐng qù zhè ge dìfang.",
+                        "text_en": "Please go to this place.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "You show him the address on your phone. Uncle Gao puts on reading glasses, studies it carefully, and nods.「认识，走了。」请 + verb is polite and clear."
+                    },
+                    {
+                        "text_zh": "去宾馆。",
+                        "text_pinyin": "qù bīnguǎn.",
+                        "text_en": "To the hotel.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Gao asks which one -- there are several in this area. He waits patiently while you check your phone. Short and functional, but he needs more detail."
+                    },
+                    {
+                        "text_zh": "不太远。",
+                        "text_pinyin": "bú tài yuǎn.",
+                        "text_en": "It's not too far.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Gao smiles politely but he still doesn't know WHERE you're going. Distance alone doesn't help. Try telling him the actual place name."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。你是来玩的吗？",
+                "text_pinyin": "hǎo de. nǐ shì lái wán de ma?",
+                "text_en": "OK. Are you here for fun?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat with the driver.",
+                "options": [
+                    {
+                        "text_zh": "是的，第一次来。",
+                        "text_pinyin": "shì de, dì yī cì lái.",
+                        "text_en": "Yes, it's my first time here.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Gao lights up and begins a gentle tour-guide narration of every building you pass.「那个是老图书馆……」第一次 means 'first time' -- it often unlocks free local advice."
+                    },
+                    {
+                        "text_zh": "是的，这里很好。",
+                        "text_pinyin": "shì de, zhèlǐ hěn hǎo.",
+                        "text_en": "Yes, it's nice here.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Gao nods with hometown pride. He was born in this city and has been driving its streets for thirty years. A compliment about his city goes straight to his heart."
+                    },
+                    {
+                        "text_zh": "我来工作。",
+                        "text_pinyin": "wǒ lái gōngzuò.",
+                        "text_en": "I'm here for work.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Gao asks what kind of work with genuine curiosity. Taxi drivers in China are often excellent conversationalists -- if you let them."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "到了！二十三块。欢迎来我们城市！",
+                "text_pinyin": "dào le! èrshísān kuài. huānyíng lái wǒmen chéngshì!",
+                "text_en": "We're here! Twenty-three yuan. Welcome to our city!"
+            }
+        ],
+        "cultural_note": "Chinese taxi drivers often chat with passengers -- asking where you're from, if you like the city, and recommending local food. It's part of the ride. Tips are not expected, but a friendly conversation is always appreciated."
+    }
+}

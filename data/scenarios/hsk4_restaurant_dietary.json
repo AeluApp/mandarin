@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Explain your dietary restrictions and ask about the dishes.",
                 "options": [
-                    {"text_zh": "谢谢。不好意思，我得先说一下，我对花生过敏，所以宫保鸡丁我不能吃。另外，我不太能吃辣。你们的麻辣豆腐能做不辣的吗？或者你能推荐几个不辣、不含花生的菜吗？", "text_pinyin": "xièxie. bùhǎoyìsi, wǒ děi xiān shuō yīxià, wǒ duì huāshēng guòmǐn, suǒyǐ gōngbǎo jīdīng wǒ bù néng chī. lìngwài, wǒ bú tài néng chī là. nǐmen de málà dòufu néng zuò bú là de ma? huòzhě nǐ néng tuījiàn jǐ gè bú là, bù hán huāshēng de cài ma?", "text_en": "Thanks. Sorry, I need to mention first that I'm allergic to peanuts, so I can't eat the Kung Pao Chicken. Also, I can't really handle spicy food. Can your Mapo Tofu be made non-spicy? Or could you recommend some dishes that are not spicy and don't contain peanuts?", "score": 1.0, "register": "neutral", "feedback": "Clear and thorough -- states the allergy upfront, explains both restrictions, and asks for alternatives. Using 过敏 correctly is important for food safety."},
-                    {"text_zh": "我不能吃花生，有别的菜吗？", "text_pinyin": "wǒ bù néng chī huāshēng, yǒu bié de cài ma?", "text_en": "I can't eat peanuts, do you have other dishes?", "score": 0.5, "register": "casual", "feedback": "Mentions peanuts but not the spice issue. When you have multiple dietary restrictions, state all of them at once so the server can recommend appropriately."},
-                    {"text_zh": "这两个菜我都不要。你们还有什么菜？", "text_pinyin": "zhè liǎng gè cài wǒ dōu bú yào. nǐmen hái yǒu shénme cài?", "text_en": "I don't want either of those. What else do you have?", "score": 0.3, "register": "blunt", "feedback": "Rejects without explanation -- the server can't help you if they don't know your restrictions. Always explain why so they can make safe recommendations."}
+                    {
+                        "text_zh": "谢谢。不好意思，我得先说一下，我对花生过敏，所以宫保鸡丁我不能吃。另外，我不太能吃辣。你们的麻辣豆腐能做不辣的吗？或者你能推荐几个不辣、不含花生的菜吗？",
+                        "text_pinyin": "xièxie. bùhǎoyìsi, wǒ děi xiān shuō yīxià, wǒ duì huāshēng guòmǐn, suǒyǐ gōngbǎo jīdīng wǒ bù néng chī. lìngwài, wǒ bú tài néng chī là. nǐmen de málà dòufu néng zuò bú là de ma? huòzhě nǐ néng tuījiàn jǐ gè bú là, bù hán huāshēng de cài ma?",
+                        "text_en": "Thanks. Sorry, I need to mention first that I'm allergic to peanuts, so I can't eat the Kung Pao Chicken. Also, I can't really handle spicy food. Can your Mapo Tofu be made non-spicy? Or could you recommend some dishes that are not spicy and don't contain peanuts?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and thorough -- states the allergy upfront, explains both restrictions, and asks for alternatives. Using 过敏 correctly is important for food safety."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Order your dishes and confirm the details.",
                 "options": [
-                    {"text_zh": "听起来都不错。那我们要一个清蒸鱼和一个蒜蓉西兰花。我朋友想吃辣的，再来一个麻辣豆腐。对了，清蒸鱼里面不会放花生吧？我想再确认一下。", "text_pinyin": "tīng qǐlái dōu búcuò. nà wǒmen yào yī gè qīngzhēng yú hé yī gè suànróng xīlánhuā. wǒ péngyou xiǎng chī là de, zài lái yī gè málà dòufu. duìle, qīngzhēng yú lǐmiàn bú huì fàng huāshēng ba? wǒ xiǎng zài quèrèn yīxià.", "text_en": "Those all sound good. We'll have one steamed fish and one broccoli with garlic. My friend wants something spicy, so add one Mapo Tofu. Oh, the steamed fish won't have peanuts, right? I just want to double-check.", "score": 1.0, "register": "neutral", "feedback": "Orders for both people, accommodates the friend's preferences too, and double-checks for the allergen. This level of care with a food allergy is exactly right."},
-                    {"text_zh": "那就要清蒸鱼和西兰花吧。再来两碗米饭。", "text_pinyin": "nà jiù yào qīngzhēng yú hé xīlánhuā ba. zài lái liǎng wǎn mǐfàn.", "text_en": "We'll have the steamed fish and broccoli then. And two bowls of rice.", "score": 0.7, "register": "neutral", "feedback": "Clean order but doesn't consider your friend's preferences. Also, double-checking about peanuts in a new dish is a good safety habit for allergy sufferers."},
-                    {"text_zh": "随便吧，你推荐什么就吃什么。", "text_pinyin": "suíbiàn ba, nǐ tuījiàn shénme jiù chī shénme.", "text_en": "Whatever, I'll eat whatever you recommend.", "score": 0.3, "register": "casual", "feedback": "With a food allergy, you should never leave decisions entirely to others. Always verify each dish yourself -- it's your health at stake."}
+                    {
+                        "text_zh": "听起来都不错。那我们要一个清蒸鱼和一个蒜蓉西兰花。我朋友想吃辣的，再来一个麻辣豆腐。对了，清蒸鱼里面不会放花生吧？我想再确认一下。",
+                        "text_pinyin": "tīng qǐlái dōu búcuò. nà wǒmen yào yī gè qīngzhēng yú hé yī gè suànróng xīlánhuā. wǒ péngyou xiǎng chī là de, zài lái yī gè málà dòufu. duìle, qīngzhēng yú lǐmiàn bú huì fàng huāshēng ba? wǒ xiǎng zài quèrèn yīxià.",
+                        "text_en": "Those all sound good. We'll have one steamed fish and one broccoli with garlic. My friend wants something spicy, so add one Mapo Tofu. Oh, the steamed fish won't have peanuts, right? I just want to double-check.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Orders for both people, accommodates the friend's preferences too, and double-checks for the allergen. This level of care with a food allergy is exactly right."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Finish ordering and thank the server.",
                 "options": [
-                    {"text_zh": "好的，那再来一壶茶吧。非常感谢你帮我注意过敏的问题，这样我吃得放心多了。", "text_pinyin": "hǎo de, nà zài lái yī hú chá ba. fēicháng gǎnxiè nǐ bāng wǒ zhùyì guòmǐn de wèntí, zhèyàng wǒ chī de fàngxīn duō le.", "text_en": "OK, and a pot of tea please. Thank you so much for being careful about my allergy -- it makes me feel much more at ease eating.", "score": 1.0, "register": "neutral", "feedback": "Gracious -- thanking the server specifically for accommodating your allergy encourages attentive service and leaves a warm impression."},
-                    {"text_zh": "来两杯水就行了。谢谢。", "text_pinyin": "lái liǎng bēi shuǐ jiù xíng le. xièxie.", "text_en": "Just two glasses of water. Thanks.", "score": 0.7, "register": "neutral", "feedback": "Simple and polite. A brief thank-you for their help with your allergy would be a nice touch."},
-                    {"text_zh": "不用了，就这些。", "text_pinyin": "bú yòng le, jiù zhèxiē.", "text_en": "No need, that's all.", "score": 0.4, "register": "blunt", "feedback": "Functional but cold. The server went out of their way to help with your dietary needs -- acknowledging that costs nothing."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "好的，那再来一壶茶吧。非常感谢你帮我注意过敏的问题，这样我吃得放心多了。",
+                        "text_pinyin": "hǎo de, nà zài lái yī hú chá ba. fēicháng gǎnxiè nǐ bāng wǒ zhùyì guòmǐn de wèntí, zhèyàng wǒ chī de fàngxīn duō le.",
+                        "text_en": "OK, and a pot of tea please. Thank you so much for being careful about my allergy -- it makes me feel much more at ease eating.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Gracious -- thanking the server specifically for accommodating your allergy encourages attentive service and leaves a warm impression."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             }
         ],

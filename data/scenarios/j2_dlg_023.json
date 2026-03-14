@@ -1,0 +1,83 @@
+{
+  "title": "Morning Steam",
+  "title_zh": "早晨的蒸汽",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You stop at a small breakfast stall on your way to class. The owner is steaming baozi and the whole street smells wonderful.",
+    "setup_zh": "你上课路上在一个小早餐摊停下来。老板正在蒸包子，整条街都飘着香味。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "早啊！今天的包子刚蒸好，热的。你想吃什么馅的？",
+        "text_pinyin": "Zǎo a! Jīntiān de bāozi gāng zhēng hǎo, rè de. Nǐ xiǎng chī shénme xiàn de?",
+        "text_en": "Morning! Today's baozi just finished steaming, nice and hot. What filling would you like?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Order something and respond to her warmth.",
+        "options": [
+          {
+            "text_zh": "早上好！给我两个菜包子吧。每天早上闻到这个香味，一天都会很开心。",
+            "text_pinyin": "Zǎoshang hǎo! Gěi wǒ liǎng ge cài bāozi ba. Měi tiān zǎoshang wén dào zhège xiāngwèi, yī tiān dōu huì hěn kāixīn.",
+            "text_en": "Good morning! Two vegetable baozi please. Smelling this every morning makes the whole day feel happy.",
+            "score": 1.0,
+            "feedback": "Warm and appreciative — connects a simple smell to daily joy.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "给我一个吧。我赶时间，能快一点吗？",
+            "text_pinyin": "Gěi wǒ yī ge ba. Wǒ gǎn shíjiān, néng kuài yīdiǎn ma?",
+            "text_en": "Give me one. I'm in a hurry — can you be quick?",
+            "score": 0.0,
+            "feedback": "She hands it over with a smaller smile. You ordered, but rushed right past her warmth."
+          },
+          {
+            "text_zh": "我不太饿。",
+            "text_pinyin": "Wǒ bú tài è.",
+            "text_en": "I'm not that hungry.",
+            "score": 0.0,
+            "feedback": "You stopped at the stall, so this doesn't make sense."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊，我每天早上四点就起来做包子了。虽然很累，但是看到大家吃得开心，我也开心。",
+        "text_pinyin": "Shì a, wǒ měi tiān zǎoshang sì diǎn jiù qǐlái zuò bāozi le. Suīrán hěn lèi, dànshì kàn dào dàjiā chī de kāixīn, wǒ yě kāixīn.",
+        "text_en": "Yeah, I get up at four every morning to make them. It's tiring, but seeing everyone enjoy their food makes me happy too."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her dedication.",
+        "options": [
+          {
+            "text_zh": "四点啊！你真的很辛苦。谢谢你，因为有你，我们每天早上都有这么好吃的早餐。",
+            "text_pinyin": "Sì diǎn a! Nǐ zhēn de hěn xīnkǔ. Xièxie nǐ, yīnwèi yǒu nǐ, wǒmen měi tiān zǎoshang dōu yǒu zhème hǎochī de zǎocān.",
+            "text_en": "Four o'clock! You really work hard. Thank you — because of you, we have such delicious breakfast every morning.",
+            "score": 1.0,
+            "feedback": "Genuine gratitude — sees and honors her effort.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你应该多休息。",
+            "text_pinyin": "Nǐ yīnggāi duō xiūxi.",
+            "text_en": "You should rest more.",
+            "score": 0.0,
+            "feedback": "Unsolicited advice rather than appreciation."
+          },
+          {
+            "text_zh": "你有没有肉包子？",
+            "text_pinyin": "Nǐ yǒu méiyǒu ròu bāozi?",
+            "text_en": "Do you have meat baozi?",
+            "score": 0.0,
+            "feedback": "Ignores her personal sharing to ask about menu."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Breakfast stalls (早餐摊) are a cornerstone of Chinese morning life. Vendors often start work before dawn, and their regulars form a quiet community of familiar faces. The steam rising from bamboo baskets in the cool morning air is one of China's most iconic everyday scenes."
+  }
+}

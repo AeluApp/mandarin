@@ -1,0 +1,124 @@
+{
+    "title": "The Comparison Connoisseur",
+    "title_zh": "比较鉴赏家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_4_03_v0",
+    "tree": {
+        "setup": "An electronics store where the fluorescent lights hum a constant middle C. You need a new laptop and are standing between two models like a person choosing between two roads in a yellow wood. The sales consultant, Xiao He, has the gift of explaining technical specifications using analogies that even your grandmother would understand.",
+        "setup_zh": "电子产品店里日光灯嗡嗡作响，保持着恒定的中央C。你需要一台新笔记本电脑，站在两个型号之间，像一个在黄色树林中两条路之间做选择的人。销售顾问小何有一种天赋，能用你奶奶都能听懂的比喻来解释技术参数。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "看笔记本电脑？这两款都不错。你平时用电脑做什么？",
+                "text_pinyin": "kàn bǐjìběn diànnǎo? zhè liǎng kuǎn dōu búcuò. nǐ píngshí yòng diànnǎo zuò shénme?",
+                "text_en": "Looking at laptops? Both of these are good. What do you usually use a computer for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your needs.",
+                "options": [
+                    {
+                        "text_zh": "主要是办公和看视频。偶尔修图。不打游戏。",
+                        "text_pinyin": "zhǔyào shì bàngōng hé kàn shìpín. ǒu'ěr xiū tú. bù dǎ yóuxì.",
+                        "text_en": "Mainly office work and watching videos. Occasional photo editing. No gaming.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Clear use case. Xiao He immediately knows which model to recommend — and more importantly, which one NOT to oversell."
+                    },
+                    {
+                        "text_zh": "上网，看视频什么的。",
+                        "text_pinyin": "shàngwǎng, kàn shìpín shénme de.",
+                        "text_en": "Internet, watching videos and stuff.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "General enough. He'll suggest the more affordable option."
+                    },
+                    {
+                        "text_zh": "什么都用。",
+                        "text_pinyin": "shénme dōu yòng.",
+                        "text_en": "Everything.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Xiao He pauses. 「什么都用」is the laptop equivalent of「随便」— it means he needs to ask more questions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "那这两个的区别主要是：这台便宜的内存是8G，够办公用。那台贵一点的是16G，修图更流畅。价格差八百块。",
+                "text_pinyin": "nà zhè liǎng gè de qūbié zhǔyào shì: zhè tái piányi de nèicún shì bā G, gòu bàngōng yòng. nà tái guì yìdiǎn de shì shíliù G, xiū tú gèng liúchàng. jiàgé chā bābǎi kuài.",
+                "text_en": "The main difference: the cheaper one has 8GB RAM — enough for office work. The pricier one has 16GB — smoother for photo editing. 800 yuan price difference."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask follow-up questions to decide.",
+                "options": [
+                    {
+                        "text_zh": "如果以后想加内存，便宜的那台可以升级吗？",
+                        "text_pinyin": "rúguǒ yǐhòu xiǎng jiā nèicún, piányi de nà tái kěyǐ shēngjí ma?",
+                        "text_en": "If I want to add memory later, can the cheaper one be upgraded?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Forward-thinking question. Xiao He checks the specs — and his respect for you goes up a notch."
+                    },
+                    {
+                        "text_zh": "贵的那台还有什么优点？",
+                        "text_pinyin": "guì de nà tái hái yǒu shénme yōudiǎn?",
+                        "text_en": "What other advantages does the expensive one have?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He lists screen quality and battery life. His analogies involve tea thermoses and window sizes."
+                    },
+                    {
+                        "text_zh": "八百块差挺多的。",
+                        "text_pinyin": "bābǎi kuài chā tǐng duō de.",
+                        "text_en": "800 yuan is quite a difference.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He nods. For some people it is, for others it isn't. He won't push either way."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这台可以升级，没问题。对了，这两台现在都有活动，买电脑送鼠标和电脑包。",
+                "text_pinyin": "zhè tái kěyǐ shēngjí, méi wèntí. duìle, zhè liǎng tái xiànzài dōu yǒu huódòng, mǎi diànnǎo sòng shǔbiāo hé diànnǎo bāo.",
+                "text_en": "This one can be upgraded, no problem. By the way, both are on promotion — buy a laptop, get a free mouse and laptop bag."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make your decision.",
+                "options": [
+                    {
+                        "text_zh": "那我买便宜的那台。以后需要的话再升级。还能送鼠标和电脑包，挺好的。",
+                        "text_pinyin": "nà wǒ mǎi piányi de nà tái. yǐhòu xūyào de huà zài shēngjí. hái néng sòng shǔbiāo hé diànnǎo bāo, tǐng hǎo de.",
+                        "text_en": "I'll take the cheaper one. I can upgrade later if needed. The free mouse and bag are a nice bonus.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Rational choice with a future-proof plan. Xiao He wraps it up, genuinely happy he didn't oversell."
+                    },
+                    {
+                        "text_zh": "我买贵的那台吧，省得以后升级麻烦。",
+                        "text_pinyin": "wǒ mǎi guì de nà tái ba, shěngde yǐhòu shēngjí máfan.",
+                        "text_en": "I'll get the expensive one — saves the hassle of upgrading later.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Also rational, just from the other direction. He processes the sale."
+                    },
+                    {
+                        "text_zh": "我再考虑考虑吧。",
+                        "text_pinyin": "wǒ zài kǎolǜ kǎolǜ ba.",
+                        "text_en": "Let me think about it more.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He hands you his business card. The promotion ends Sunday — no pressure, but also pressure."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese electronics stores often bundle promotions (活动, huódòng) — free accessories with a purchase. Sales staff tend to be knowledgeable and patient. The phrase 性价比 (xìngjiàbǐ, price-to-performance ratio) is the magic word in Chinese consumer culture."
+    }
+}

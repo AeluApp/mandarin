@@ -35,9 +35,9 @@ All templates below are ready to personalize and send. Replace [brackets] with s
 
 Hi [Name],
 
-I've been watching your [channel/blog/podcast] while learning Mandarin — [specific detail about their content that you genuinely found useful, e.g., "your breakdown of tone sandhi rules in the 不 video finally made the pattern click for me"].
+I've been watching your [channel/blog/podcast] while learning Aelu — [specific detail about their content that you genuinely found useful, e.g., "your breakdown of tone sandhi rules in the 不 video finally made the pattern click for me"].
 
-We built a Chinese learning app called Mandarin. The core idea is what we call the "cleanup loop" — you read graded Chinese passages, tap words you don't know, and those exact words become your next drill session. It also has 27 drill types, adaptive scheduling, and HSK 1-6 alignment.
+We built a Chinese learning app called Aelu. The core idea is what we call the "cleanup loop" — you read graded Chinese passages, tap words you don't know, and those exact words become your next drill session. It also has 27 drill types, adaptive scheduling, and HSK 1-6 alignment.
 
 I'd love to give you a free lifetime account — no strings attached. If you try it and it's not worth mentioning to your audience, that's completely fine. But if you do find it useful, I have an affiliate program (30% recurring commission on referred paying users) that might be worth exploring.
 
@@ -45,9 +45,9 @@ Here's a 60-second demo: [link to short video]
 
 Either way, thanks for the content you create. It's genuinely helpful.
 
-Mandarin
+Aelu
 [your email]
-[mandarinapp.com]
+[aeluapp.com]
 
 ---
 
@@ -72,9 +72,9 @@ No commitment needed — try it yourself first. If it doesn't fit your teaching 
 
 Here's a quick demo: [link to short video]
 
-Mandarin
+Aelu
 [your email]
-[mandarinapp.com]
+[aeluapp.com]
 
 ---
 
@@ -86,7 +86,7 @@ Mandarin
 
 Hi [Name/School],
 
-I've built a Chinese learning app called Mandarin that I think could complement your courses well. It focuses on the practice side — adaptive drills, graded reading, and listening exercises — which is the part students often struggle to do between classes.
+I've built a Chinese learning app called Aelu that I think could complement your courses well. It focuses on the practice side — adaptive drills, graded reading, and listening exercises — which is the part students often struggle to do between classes.
 
 A few things that might interest you:
 - HSK 1-6 aligned curriculum with 27 drill types
@@ -101,23 +101,23 @@ I'm exploring partnerships with Chinese language schools. Options could include:
 
 Would you be open to a 15-minute call to discuss? Happy to give you a free account to try first.
 
-Mandarin
+Aelu
 [your email]
-[mandarinapp.com]
+[aeluapp.com]
 
 ---
 
 ## Template A: First Touch — Complementary App/Tool
 
-**Subject:** Cross-promotion idea — Mandarin (Chinese SRS app) + [Their Product]
+**Subject:** Cross-promotion idea — Aelu (Chinese SRS app) + [Their Product]
 
 **Body:**
 
 Hi [Name/Team],
 
-We built a Chinese learning app called Mandarin focused on adaptive SRS drills, graded reading, and the "cleanup loop" (words you look up during reading become drills).
+We built a Chinese learning app called Aelu focused on adaptive SRS drills, graded reading, and the "cleanup loop" (words you look up during reading become drills).
 
-I think our products are complementary rather than competitive — [specific reason, e.g., "Pleco is the dictionary everyone uses, and Mandarin is the drill system that turns lookups into retention" or "HelloTalk is where learners practice conversation, and Mandarin is where they build the vocabulary to have those conversations"].
+I think our products are complementary rather than competitive — [specific reason, e.g., "Pleco is the dictionary everyone uses, and Aelu is the drill system that turns lookups into retention" or "HelloTalk is where learners practice conversation, and Aelu is where they build the vocabulary to have those conversations"].
 
 Would you be open to exploring a cross-promotion? Ideas:
 - We recommend each other in our respective "tools we use" / resources sections
@@ -126,9 +126,9 @@ Would you be open to exploring a cross-promotion? Ideas:
 
 No pressure — just thought the overlap in audience makes this worth exploring.
 
-Mandarin
+Aelu
 [your email]
-[mandarinapp.com]
+[aeluapp.com]
 
 ---
 
@@ -140,7 +140,7 @@ Mandarin
 
 Hi [Name],
 
-We are an independent team learning Mandarin who built a study app because nothing else worked the way we actually learn. We think the story might interest your listeners.
+We are an independent team learning Aelu who built a study app because nothing else worked the way we actually learn. We think the story might interest your listeners.
 
 **Potential episode angles:**
 - "The cleanup loop" — a study method that bridges reading and drilling
@@ -152,15 +152,15 @@ We are an independent team learning Mandarin who built a study app because nothi
 - 27 drill types across reading, listening, speaking, and tones
 - HSK 1-6 aligned
 - Built in Python + SQLite, runs locally
-- [X] months into learning Mandarin myself
+- [X] months into learning Aelu myself
 
 I've been a listener of [their podcast] for [timeframe] — [specific episode you liked and why].
 
 Happy to do a pre-call to see if it's a fit. No worries if the timing isn't right.
 
-Mandarin
+Aelu
 [your email]
-[mandarinapp.com]
+[aeluapp.com]
 
 ---
 
@@ -176,13 +176,13 @@ Just bumping this in case it got buried. Happy to send a free account if you'd l
 
 Either way, keep up the great content.
 
-Mandarin
+Aelu
 
 ---
 
 ## Template C: Welcome Email (after partner accepts)
 
-**Subject:** Welcome to the Mandarin Partner Program — here's everything you need
+**Subject:** Welcome to the Aelu Partner Program — here's everything you need
 
 **Body:**
 
@@ -197,7 +197,7 @@ Welcome! Here's everything you need to get started:
 - This is a lifetime full-access account — it never expires.
 
 **Your affiliate links:**
-- Referral URL: `mandarinapp.com/?ref=[PARTNER_CODE]`
+- Referral URL: `aeluapp.com/?ref=[PARTNER_CODE]`
 - Discount code for your audience: `[CODE]20` (20% off first 3 months)
 
 **Your commission:**
@@ -217,13 +217,13 @@ Questions anytime: [your email]
 
 Thanks for giving this a shot.
 
-Mandarin
+Aelu
 
 ---
 
 ## Template D: Monthly Commission Report (automated later, manual for now)
 
-**Subject:** Your Mandarin partner report — [Month Year]
+**Subject:** Your Aelu partner report — [Month Year]
 
 **Body:**
 
@@ -243,19 +243,19 @@ Top performing content: [if you can track which of their links/posts drove the m
 
 Thanks for being a partner. Let me know if you need anything.
 
-Mandarin
+Aelu
 
 ---
 
 ## Template E: Quarterly Check-In
 
-**Subject:** Quick check-in — anything you'd like to see in Mandarin?
+**Subject:** Quick check-in — anything you'd like to see in Aelu?
 
 **Body:**
 
 Hi [Name],
 
-Quick check-in from the Mandarin side. Two things:
+Quick check-in from the Aelu side. Two things:
 
 1. Is there anything in the app that would make it more useful for your audience? Feature requests from partners get priority.
 
@@ -263,7 +263,7 @@ Quick check-in from the Mandarin side. Two things:
 
 No pressure on either — just want to make sure you have what you need.
 
-Mandarin
+Aelu
 
 ---
 

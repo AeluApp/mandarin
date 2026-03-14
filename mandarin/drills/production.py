@@ -8,7 +8,8 @@ import threading
 
 from .base import (
     DrillResult, format_hanzi, format_hanzi_inline,
-    _skip_result, _handle_confidence,
+    format_answer_feedback,
+    _skip_result, _handle_confidence, get_progressive_hint,
 )
 from .hints import get_hanzi_hint
 from .mc import run_mc_drill
@@ -96,7 +97,7 @@ def grade_sentence_production(user_input: str, template: dict) -> tuple:
 # ── Construction transfer drill ──────────────────────────────
 
 def run_transfer_drill(item: dict, conn, show_fn, input_fn,
-                       prominent: bool = True) -> DrillResult:
+                       prominent: bool = True, english_level: str = "full") -> DrillResult:
     """Construction transfer: test if learner recognizes a grammar pattern in a new context.
 
     Shows a construction name + pattern, presents the target item alongside
@@ -125,6 +126,7 @@ def run_transfer_drill(item: dict, conn, show_fn, input_fn,
     distractor_rows = conn.execute("""
         SELECT ci.hanzi, ci.pinyin, ci.english FROM content_item ci
         WHERE ci.status = 'drill_ready'
+          AND ci.review_status = 'approved'
           AND ci.id != ?
           AND ci.id NOT IN (
               SELECT cc2.content_item_id FROM content_construction cc2
@@ -194,77 +196,104 @@ def char_overlap_score(expected: str, user_input: str) -> float:
 
 
 def run_translation_drill(item: dict, conn, show_fn, input_fn,
-                          prominent: bool = True) -> DrillResult:
-    """Free-form translation: show English, type hanzi or pinyin."""
-    show_fn(f"\n  How would you say: \"{item['english']}\"?")
+                          prominent: bool = True, english_level: str = "full") -> DrillResult:
+    """Free-form translation: show English (or pinyin), type hanzi or pinyin."""
+    # When English is faded, prompt with pinyin instead
+    if english_level != "full":
+        show_fn(f"\n  What does this mean: \"{item['pinyin']}\"?")
+    else:
+        show_fn(f"\n  How would you say: \"{item['english']}\"?")
     show_fn(f"  [dim]Type the hanzi (or pinyin):[/dim]")
 
-    answer = input_fn("\n  > ").strip()
+    hint_stage = 0
+    hints_used = 0
+    while True:
+        answer = input_fn("\n  > ").strip()
 
-    if answer.upper() in ("Q", "B"):
-        return _skip_result(item, "reading", "translation", answer)
+        if answer.upper() in ("Q", "B"):
+            return _skip_result(item, "reading", "translation", answer)
 
-    conf_result = _handle_confidence(answer, item, "reading", "translation",
-                                     item["hanzi"], show_fn)
-    if conf_result:
-        return conf_result
+        conf_result = _handle_confidence(answer, item, "reading", "translation",
+                                         item["hanzi"], show_fn, english_level=english_level,
+                                         allow_hint=True)
+        if conf_result == "HINT":
+            hint_text, hint_stage = get_progressive_hint(item, hint_stage)
+            show_fn(hint_text)
+            hints_used += 1
+            continue
+        if conf_result:
+            return conf_result
 
-    expected_hanzi = item["hanzi"]
-    expected_pinyin = item.get("pinyin", "")
+        expected_hanzi = item["hanzi"]
+        expected_pinyin = item.get("pinyin", "")
 
-    # Check exact hanzi match first
-    if answer == expected_hanzi:
-        return DrillResult(
-            content_item_id=item["id"], modality="reading", drill_type="translation",
-            correct=True, user_answer=answer, expected_answer=expected_hanzi,
-            confidence="full",
-        )
-
-    # Check pinyin match (stripped of tones)
-    if expected_pinyin:
-        user_stripped = strip_tones(normalize_pinyin(answer))
-        expected_stripped = strip_tones(normalize_pinyin(expected_pinyin))
-        if user_stripped and user_stripped == expected_stripped:
+        # Check exact hanzi match first
+        if answer == expected_hanzi:
+            if hints_used:
+                return DrillResult(
+                    content_item_id=item["id"], modality="reading", drill_type="translation",
+                    correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                    confidence="half", score=0.5,
+                    feedback=f"  (correct, with {hints_used} hint{'s' if hints_used > 1 else ''})",
+                )
             return DrillResult(
                 content_item_id=item["id"], modality="reading", drill_type="translation",
                 correct=True, user_answer=answer, expected_answer=expected_hanzi,
-                feedback=f"  (pinyin accepted \u2014 the hanzi is {format_hanzi_inline(expected_hanzi)})",
                 confidence="full",
             )
 
-    # Character overlap scoring
-    score = char_overlap_score(expected_hanzi, answer)
-    if score >= 0.6:
-        return DrillResult(
-            content_item_id=item["id"], modality="reading", drill_type="translation",
-            correct=True, user_answer=answer, expected_answer=expected_hanzi,
-            feedback=f"  (close \u2014 exact: {format_hanzi_inline(expected_hanzi)} {expected_pinyin})",
-            confidence="half", score=score,
-        )
-    elif score >= 0.3:
+        # Check pinyin match (stripped of tones)
+        if expected_pinyin:
+            user_stripped = strip_tones(normalize_pinyin(answer))
+            expected_stripped = strip_tones(normalize_pinyin(expected_pinyin))
+            if user_stripped and user_stripped == expected_stripped:
+                if hints_used:
+                    return DrillResult(
+                        content_item_id=item["id"], modality="reading", drill_type="translation",
+                        correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                        feedback=f"  (pinyin accepted, with hints \u2014 the hanzi is {format_hanzi_inline(expected_hanzi)})",
+                        confidence="half", score=0.5,
+                    )
+                return DrillResult(
+                    content_item_id=item["id"], modality="reading", drill_type="translation",
+                    correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                    feedback=f"  (pinyin accepted \u2014 the hanzi is {format_hanzi_inline(expected_hanzi)})",
+                    confidence="full",
+                )
+
+        # Character overlap scoring
+        score = char_overlap_score(expected_hanzi, answer)
+        if score >= 0.6:
+            return DrillResult(
+                content_item_id=item["id"], modality="reading", drill_type="translation",
+                correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                feedback=f"  (close \u2014 exact: {format_hanzi_inline(expected_hanzi)} {expected_pinyin})",
+                confidence="half", score=score,
+            )
+        elif score >= 0.3:
+            return DrillResult(
+                content_item_id=item["id"], modality="reading", drill_type="translation",
+                correct=False, user_answer=answer, expected_answer=expected_hanzi,
+                feedback=format_answer_feedback(item, english_level),
+                error_type="vocab", error_cause="production_vocab", confidence="half", score=score,
+            )
+
+        feedback = format_answer_feedback(item, english_level)
+        hint_text, _ = get_hanzi_hint(expected_hanzi, wrong_answer=answer, error_type="vocab")
+        if hint_text:
+            feedback += f"\n{hint_text}"
+
         return DrillResult(
             content_item_id=item["id"], modality="reading", drill_type="translation",
             correct=False, user_answer=answer, expected_answer=expected_hanzi,
-            feedback=f"  \u2192 {format_hanzi_inline(expected_hanzi)} ({expected_pinyin}) = {item['english']}",
-            error_type="vocab", confidence="half", score=score,
+            error_type="vocab", error_cause="production_vocab", feedback=feedback,
         )
-
-    feedback = f"  \u2192 {format_hanzi_inline(expected_hanzi)} ({expected_pinyin}) = {item['english']}"
-    hint_text, _ = get_hanzi_hint(expected_hanzi, wrong_answer=answer, error_type="vocab")
-    if hint_text:
-        feedback += f"\n{hint_text}"
-
-    return DrillResult(
-        content_item_id=item["id"], modality="reading", drill_type="translation",
-        correct=False, user_answer=answer, expected_answer=expected_hanzi,
-        error_type="vocab", feedback=feedback,
-    )
 
 
 # ── Sentence construction drill ──────────────────────────────
 
 def run_sentence_build_drill(item: dict, conn, show_fn, input_fn,
-                             prominent: bool = True) -> DrillResult:
+                             prominent: bool = True, english_level: str = "full") -> DrillResult:
     """Sentence build: show English meaning + key word, user types full Chinese sentence.
 
     If a matching sentence template is available (from sentence_templates.json),
@@ -273,6 +302,7 @@ def run_sentence_build_drill(item: dict, conn, show_fn, input_fn,
     """
     hanzi = item.get("hanzi", "").strip()
     english = item.get("english", "").strip()
+    pinyin = item.get("pinyin", "").strip()
 
     if not hanzi or not english:
         return None
@@ -288,33 +318,48 @@ def run_sentence_build_drill(item: dict, conn, show_fn, input_fn,
         prompt_en = template.get("prompt_en", english)
         key_hint = template.get("key_word_hint", "")
 
-        show_fn(f"\n  Say in Chinese: [bold]{prompt_en}[/bold]")
+        # When English is faded, show pinyin prompt instead
+        if english_level != "full":
+            show_fn(f"\n  Say in Chinese: [bold]{pinyin}[/bold]")
+        else:
+            show_fn(f"\n  Say in Chinese: [bold]{prompt_en}[/bold]")
         if key_hint:
             show_fn(f"  Key word: {format_hanzi_inline(key_hint)}\n")
         else:
             show_fn("")
 
-        answer = input_fn("  sentence> ").strip()
-
-        if answer.upper() in ("Q", "B"):
-            return _skip_result(item, "reading", "sentence_build", answer)
-
         best_answer = template.get("acceptable_answers", [hanzi])[0]
-        conf_result = _handle_confidence(answer, item, "reading", "sentence_build",
-                                         best_answer, show_fn)
-        if conf_result:
-            return conf_result
+        hint_stage = 0
+        hints_used = 0
+        while True:
+            answer = input_fn("  sentence> ").strip()
 
-        score, feedback, correct = grade_sentence_production(answer, template)
-        if not feedback and not correct:
-            feedback = f"  \u2192 {format_hanzi_inline(best_answer)}"
+            if answer.upper() in ("Q", "B"):
+                return _skip_result(item, "reading", "sentence_build", answer)
 
-        return DrillResult(
-            content_item_id=item["id"], modality="reading", drill_type="sentence_build",
-            correct=correct, user_answer=answer, expected_answer=best_answer,
-            error_type=None if correct else "grammar", feedback=feedback,
-            score=score,
-        )
+            conf_result = _handle_confidence(answer, item, "reading", "sentence_build",
+                                             best_answer, show_fn, english_level=english_level,
+                                             allow_hint=True)
+            if conf_result == "HINT":
+                hint_text, hint_stage = get_progressive_hint(item, hint_stage)
+                show_fn(hint_text)
+                hints_used += 1
+                continue
+            if conf_result:
+                return conf_result
+
+            score, feedback, correct = grade_sentence_production(answer, template)
+            if hints_used and correct:
+                score = min(score, 0.5)
+            if not feedback and not correct:
+                feedback = f"  \u2192 {format_hanzi_inline(best_answer)}"
+
+            return DrillResult(
+                content_item_id=item["id"], modality="reading", drill_type="sentence_build",
+                correct=correct, user_answer=answer, expected_answer=best_answer,
+                error_type=None if correct else "grammar", feedback=feedback,
+                score=score, confidence="half" if hints_used and correct else "full",
+            )
 
     # Fallback: original single-answer logic
     if " " in hanzi:
@@ -327,55 +372,65 @@ def run_sentence_build_drill(item: dict, conn, show_fn, input_fn,
 
     key_word = random.choice(parts)
 
-    show_fn(f"\n  Say in Chinese: [bold]{english}[/bold]")
+    # When English is faded, show pinyin prompt instead
+    if english_level != "full":
+        show_fn(f"\n  Say in Chinese: [bold]{pinyin}[/bold]")
+    else:
+        show_fn(f"\n  Say in Chinese: [bold]{english}[/bold]")
     show_fn(f"  Key word: {format_hanzi_inline(key_word)}\n")
 
-    answer = input_fn("  sentence> ").strip()
+    hint_stage = 0
+    hints_used = 0
+    while True:
+        answer = input_fn("  sentence> ").strip()
 
-    if answer.upper() in ("Q", "B"):
-        return _skip_result(item, "reading", "sentence_build", answer)
+        if answer.upper() in ("Q", "B"):
+            return _skip_result(item, "reading", "sentence_build", answer)
 
-    conf_result = _handle_confidence(answer, item, "reading", "sentence_build",
-                                     hanzi, show_fn)
-    if conf_result:
-        return conf_result
+        conf_result = _handle_confidence(answer, item, "reading", "sentence_build",
+                                         hanzi, show_fn, english_level=english_level,
+                                         allow_hint=True)
+        if conf_result == "HINT":
+            hint_text, hint_stage = get_progressive_hint(item, hint_stage)
+            show_fn(hint_text)
+            hints_used += 1
+            continue
+        if conf_result:
+            return conf_result
 
-    expected_norm = hanzi.replace(" ", "")
-    answer_norm = answer.replace(" ", "")
+        expected_norm = hanzi.replace(" ", "")
+        answer_norm = answer.replace(" ", "")
 
-    if answer_norm == expected_norm:
-        correct = True
-        confidence = "full"
-    elif all(ch in answer_norm for ch in expected_norm):
-        correct = False
-        confidence = "half"
-    else:
-        correct = False
-        confidence = "full"
+        if answer_norm == expected_norm:
+            correct = True
+            confidence = "half" if hints_used else "full"
+        elif all(ch in answer_norm for ch in expected_norm):
+            correct = False
+            confidence = "half"
+        else:
+            correct = False
+            confidence = "full"
 
-    feedback = ""
-    if not correct:
-        feedback = f"  \u2192 {format_hanzi_inline(hanzi)}"
-        pinyin = item.get("pinyin", "")
-        if pinyin:
-            feedback += f" ({pinyin})"
-        feedback += f"\n  = {english}"
+        feedback = ""
+        if not correct:
+            feedback = format_answer_feedback(item, english_level)
 
-    return DrillResult(
-        content_item_id=item["id"], modality="reading", drill_type="sentence_build",
-        correct=correct, user_answer=answer, expected_answer=hanzi,
-        error_type=None if correct else "grammar", feedback=feedback,
-        confidence=confidence,
-    )
+        return DrillResult(
+            content_item_id=item["id"], modality="reading", drill_type="sentence_build",
+            correct=correct, user_answer=answer, expected_answer=hanzi,
+            error_type=None if correct else "grammar", feedback=feedback,
+            confidence=confidence, score=0.5 if hints_used and correct else None,
+        )
 
 
 # ── Word order drill ──────────────────────────────
 
 def run_word_order_drill(item: dict, conn, show_fn, input_fn,
-                         prominent: bool = True) -> DrillResult:
+                         prominent: bool = True, english_level: str = "full") -> DrillResult:
     """Word order: show English + jumbled Chinese words, user arranges correctly."""
     hanzi = item.get("hanzi", "").strip()
     english = item.get("english", "").strip()
+    pinyin = item.get("pinyin", "").strip()
 
     if not hanzi or not english:
         return None
@@ -400,33 +455,48 @@ def run_word_order_drill(item: dict, conn, show_fn, input_fn,
         random.shuffle(jumbled)
         attempts += 1
 
-    # Display
+    # Display — when English is faded, show pinyin instead
     show_fn(f"\n  Arrange in correct Chinese word order:")
-    show_fn(f"  English: [bold]{english}[/bold]\n")
+    if english_level != "full":
+        show_fn(f"  Pinyin: [bold]{pinyin}[/bold]\n")
+    else:
+        show_fn(f"  English: [bold]{english}[/bold]\n")
     show_fn(f"  Words: {format_hanzi_inline('  '.join(jumbled))}\n")
 
-    answer = input_fn("  order> ").strip()
+    hint_stage = 0
+    hints_used = 0
+    while True:
+        answer = input_fn("  order> ").strip()
 
-    if answer.upper() in ("Q", "B"):
-        return _skip_result(item, "reading", "word_order", answer)
+        if answer.upper() in ("Q", "B"):
+            return _skip_result(item, "reading", "word_order", answer)
 
-    conf_result = _handle_confidence(answer, item, "reading", "word_order",
-                                     hanzi, show_fn)
-    if conf_result:
-        return conf_result
+        conf_result = _handle_confidence(answer, item, "reading", "word_order",
+                                         hanzi, show_fn, english_level=english_level,
+                                         allow_hint=True)
+        if conf_result == "HINT":
+            hint_text, hint_stage = get_progressive_hint(item, hint_stage)
+            show_fn(hint_text)
+            hints_used += 1
+            continue
+        if conf_result:
+            return conf_result
 
-    # Normalize both: strip spaces for comparison
-    expected_norm = hanzi.replace(" ", "")
-    answer_norm = answer.replace(" ", "")
+        # Normalize both: strip spaces for comparison
+        expected_norm = hanzi.replace(" ", "")
+        answer_norm = answer.replace(" ", "")
 
-    correct = answer_norm == expected_norm
-    feedback = ""
-    if not correct:
-        feedback = f"  \u2192 Correct order: {format_hanzi_inline(hanzi)}"
-        feedback += f"\n  = {english}"
+        correct = answer_norm == expected_norm
+        feedback = ""
+        if not correct:
+            feedback = f"  \u2192 Correct order: {format_hanzi_inline(hanzi)}"
+            if english_level in ("full", "feedback_only"):
+                feedback += f"\n  = {english}"
 
-    return DrillResult(
-        content_item_id=item["id"], modality="reading", drill_type="word_order",
-        correct=correct, user_answer=answer, expected_answer=hanzi,
-        error_type=None if correct else "grammar", feedback=feedback,
-    )
+        return DrillResult(
+            content_item_id=item["id"], modality="reading", drill_type="word_order",
+            correct=correct, user_answer=answer, expected_answer=hanzi,
+            error_type=None if correct else "grammar", feedback=feedback,
+            confidence="half" if hints_used and correct else "full",
+            score=0.5 if hints_used and correct else None,
+        )

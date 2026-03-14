@@ -1,0 +1,89 @@
+{
+    "title": "What My Parents Don't Understand",
+    "title_zh": "父母不懂的事",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and your friend Lina are sitting in a late-night ramen shop. She just had another argument with her parents about her life choices.",
+        "setup_zh": "你和朋友丽娜在一家深夜拉面店里。她刚和父母又吵了一架，关于她的人生选择。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我妈又打电话来催婚了。她不理解我为什么三十岁了还不结婚，为什么放着稳定的国企不待非要去创业。在她看来，我做的每一个选择都是错的。但她不知道，按照她的标准活着会让我窒息。",
+                "text_pinyin": "Wǒ mā yòu dǎ diànhuà lái cuī hūn le. Tā bù lǐjiě wǒ wèi shénme sānshí suì le hái bù jiéhūn, wèi shénme fàng zhe wěndìng de guóqǐ bú dāi fēi yào qù chuàngyè. Zài tā kàn lái, wǒ zuò de měi yīge xuǎnzé dōu shì cuò de. Dàn tā bù zhīdào, ànzhào tā de biāozhǔn huó zhe huì ràng wǒ zhìxī.",
+                "text_en": "My mom called again to push marriage. She doesn't understand why I'm thirty and not married, why I left a stable state-owned enterprise to start my own business. In her eyes, every choice I've made is wrong. But she doesn't know that living by her standards would suffocate me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Lina's frustration with her parents.",
+                "options": [
+                    {
+                        "text_zh": "你妈妈不是不爱你，她是用她那个年代的坐标系来爱你。在她经验里，稳定等于安全，结婚等于幸福。但你们活在不同时代，成功的定义变了。代际冲突不是谁对谁错，而是两套经验在碰撞。",
+                        "text_pinyin": "Nǐ māma bú shì bú ài nǐ, tā shì yòng tā nàge niándài de zuòbiāo xì lái ài nǐ. Zài tā jīngyàn lǐ, wěndìng děngyú ānquán, jiéhūn děngyú xìngfú. Dàn nǐmen huó zài bùtóng shídài, chénggōng de dìngyì biàn le. Dàijì chōngtū bú shì shéi duì shéi cuò, ér shì liǎng tào jīngyàn zài pèngzhuàng.",
+                        "text_en": "Your mom isn't unloving — she loves you through her generation's coordinate system. In her experience, stability equals safety, marriage equals happiness. But you live in different eras, and success has been redefined. Generational conflict isn't right vs. wrong, it's two experience systems colliding.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "'Two experience systems colliding' — a precise, empathetic framing that validates both sides."
+                    },
+                    {
+                        "text_zh": "你就别听她的了，自己的人生自己做主。",
+                        "text_pinyin": "Nǐ jiù bié tīng tā de le, zìjǐ de rénshēng zìjǐ zuòzhǔ.",
+                        "text_en": "Just don't listen to her — your life, your decisions.",
+                        "score": 0.0,
+                        "feedback": "Too simplistic — ignores the complexity of family bonds."
+                    },
+                    {
+                        "text_zh": "你妈说得也有道理，三十岁确实应该考虑一下了。",
+                        "text_pinyin": "Nǐ mā shuō de yě yǒu dàolǐ, sānshí suì quèshí yīnggāi kǎolǜ yíxià le.",
+                        "text_en": "Your mom has a point — at thirty you really should start thinking about it.",
+                        "score": 0.0,
+                        "feedback": "Sides with the parent — invalidates her autonomy."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两套经验系统碰撞……你这个比喻太准了。最难受的不是吵架，而是吵完以后她会哭。她一哭我就觉得自己是不是太自私了。但如果我为了让她不哭而放弃我想要的生活，那我的余生就要为她而活了。这个结怎么解？",
+                "text_pinyin": "Liǎng tào jīngyàn xìtǒng pèngzhuàng…… nǐ zhège bǐyù tài zhǔn le. Zuì nánshòu de bú shì chǎojià, ér shì chǎo wán yǐhòu tā huì kū. Tā yī kū wǒ jiù juéde zìjǐ shì bu shì tài zìsī le. Dàn rúguǒ wǒ wèile ràng tā bú kū ér fàngqì wǒ xiǎng yào de shēnghuó, nà wǒ de yúshēng jiù yào wèi tā ér huó le. Zhège jié zěnme jiě?",
+                "text_en": "Two experience systems colliding... that metaphor is spot on. The hardest part isn't the arguing — it's that she cries afterward. When she cries, I wonder if I'm being too selfish. But if I give up the life I want just so she won't cry, then I'll spend the rest of my life living for her. How do you untie this knot?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer wisdom on the impossible tension between self and family.",
+                "options": [
+                    {
+                        "text_zh": "这个结也许不用解开，只要松一松。你不需要她完全理解你，也不必完全按她的方式来。但你可以让她看到你是认真的——不是叛逆，而是深思熟虑的选择。她的担心会慢慢变成信任。",
+                        "text_pinyin": "Zhège jié yěxǔ bú yòng jiěkāi, zhǐyào sōng yī sōng. Nǐ bù xūyào tā wánquán lǐjiě nǐ, yě bùbì wánquán àn tā de fāngshì lái. Dàn nǐ kěyǐ ràng tā kàn dào nǐ shì rènzhēn de — bú shì pànnì, ér shì shēnsī shúlǜ de xuǎnzé. Tā de dānxīn huì mànman biàn chéng xìnrèn.",
+                        "text_en": "Maybe this knot doesn't need untying, just loosening. You don't need her to fully understand you, nor follow her way entirely. But you can show her you're serious — not rebellion, but deliberate choice. Her worry will slowly become trust.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mature and compassionate — reframes the conflict as a process rather than a problem to solve."
+                    },
+                    {
+                        "text_zh": "你妈妈那一代人不懂个人自由。",
+                        "text_pinyin": "Nǐ māma nà yīdài rén bù dǒng gèrén zìyóu.",
+                        "text_en": "Your mom's generation doesn't understand personal freedom.",
+                        "score": 0.0,
+                        "feedback": "Dismissive of an entire generation — creates more division."
+                    },
+                    {
+                        "text_zh": "你有没有试过坐下来好好跟她谈一次？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu shì guò zuò xiàlái hǎohǎo gēn tā tán yī cì?",
+                        "text_en": "Have you tried sitting down and having a real talk with her?",
+                        "score": 0.0,
+                        "feedback": "Well-intentioned but naive — suggests a simple conversation can resolve deeply structural differences."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "担心慢慢变成信任……我希望是这样的。也许我需要的不是让她同意我，而是让她放心。谢谢你。吃完这碗面我回去给她打个电话。不聊那些争的东西，就问问她今天吃了什么、身体好不好。",
+                "text_pinyin": "Dānxīn mànman biàn chéng xìnrèn…… wǒ xīwàng shì zhèyàng de. Yěxǔ wǒ xūyào de bú shì ràng tā tóngyì wǒ, ér shì ràng tā fàngxīn. Xièxie nǐ. Chī wán zhè wǎn miàn wǒ huí qù gěi tā dǎ ge diànhuà. Bù liáo nàxiē zhēng de dōngxi, jiù wènwen tā jīntiān chī le shénme, shēntǐ hǎo bù hǎo.",
+                "text_en": "Worry slowly becoming trust... I hope so. Maybe what I need isn't her agreement, but her peace of mind. Thank you. After this bowl of ramen, I'll call her. Won't talk about the things we argue about — just ask what she ate today, how she's feeling."
+            }
+        ],
+        "cultural_note": "The tension between filial piety (孝) and individual autonomy is one of the defining struggles for young Chinese adults. The phrase「催婚」(cuī hūn, pushing for marriage) describes the relentless family pressure many face to marry by a certain age. Chinese parents' emotional strategies — especially a mother's tears — carry enormous weight in a culture where causing parental distress is deeply stigmatized. The emerging compromise — living autonomously while maintaining emotional connection — represents a new generation's attempt to honor both tradition and selfhood."
+    }
+}

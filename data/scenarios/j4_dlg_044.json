@@ -1,0 +1,83 @@
+{
+    "title": "The Stone Steps",
+    "title_zh": "石阶",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're climbing ancient stone steps up a mountain path. A monk passes you going down, carrying a basket of vegetables.",
+        "setup_zh": "你在爬一条山路上的古老石阶。一位和尚提着一篮蔬菜从山上走下来，和你擦肩而过。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "慢慢走，不着急。这些石阶有三百多年了，每一级都被很多人踩过。你看，中间都凹下去了——那是几百年的脚印。",
+                "text_pinyin": "Mànman zǒu, bù zháojí. Zhèxiē shí jiē yǒu sānbǎi duō nián le, měi yī jí dōu bèi hěn duō rén cǎi guò. Nǐ kàn, zhōngjiān dōu āo xiàqù le — nà shì jǐ bǎi nián de jiǎoyìn.",
+                "text_en": "Walk slowly, no rush. These stone steps are over three hundred years old — each one has been stepped on by many people. Look, the centers are worn concave — those are hundreds of years of footprints."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the worn stone steps.",
+                "options": [
+                    {
+                        "text_zh": "几百年的脚印——我从没这样看过石阶。每个凹下去的地方都是无数人走过的证据。我现在这一步也在加深这个印记。很奇妙。",
+                        "text_pinyin": "Jǐ bǎi nián de jiǎoyìn — wǒ cóng méi zhèyàng kàn guò shí jiē. Měi ge āo xiàqù de dìfang dōu shì wúshù rén zǒu guò de zhèngjù. Wǒ xiànzài zhè yī bù yě zài jiāshēn zhège yìnjì. Hěn qímiào.",
+                        "text_en": "Hundreds of years of footprints — I've never looked at stone steps this way. Every worn spot is evidence of countless people passing. My step right now deepens that mark. Magical.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Each step adds to centuries of passage — connecting to all who walked before."
+                    },
+                    {
+                        "text_zh": "山上有什么？",
+                        "text_pinyin": "Shān shàng yǒu shénme?",
+                        "text_en": "What's at the top?",
+                        "score": 0.0,
+                        "feedback": "Destination question during a reflection on the path itself."
+                    },
+                    {
+                        "text_zh": "这些台阶应该修一修了。",
+                        "text_pinyin": "Zhèxiē táijiē yīnggāi xiū yī xiū le.",
+                        "text_en": "These steps should be repaired.",
+                        "score": 0.0,
+                        "feedback": "Suggests erasing the very history he's pointing out."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是的，你的脚印也在里面了。有时候我走这条路的时候会想——以前走这里的人看到的风景和我看到的一样吗？树可能不同了，但山没变，天没变，风也没变。",
+                "text_pinyin": "Shì de, nǐ de jiǎoyìn yě zài lǐmiàn le. Yǒu shíhou wǒ zǒu zhè tiáo lù de shíhou huì xiǎng — yǐqián zǒu zhèlǐ de rén kàn dào de fēngjǐng hé wǒ kàn dào de yīyàng ma? Shù kěnéng bùtóng le, dàn shān méi biàn, tiān méi biàn, fēng yě méi biàn.",
+                "text_en": "Yes, your footprint is in there now too. Sometimes when I walk this path I wonder — did the people who walked here before see the same scenery I see? The trees might be different, but the mountain hasn't changed, the sky hasn't changed, the wind hasn't changed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to what changes and what doesn't.",
+                "options": [
+                    {
+                        "text_zh": "山、天、风——这些是永恒的。人来了又走了，但每个走过这条路的人都和同一座山分享过一个瞬间。这就是这条路的意义——连接不同时代的人。",
+                        "text_pinyin": "Shān, tiān, fēng — zhèxiē shì yǒnghéng de. Rén lái le yòu zǒu le, dàn měi ge zǒu guò zhè tiáo lù de rén dōu hé tóng yī zuò shān fēnxiǎng guò yī ge shùnjiān. Zhè jiù shì zhè tiáo lù de yìyì — liánjiē bùtóng shídài de rén.",
+                        "text_en": "Mountain, sky, wind — these are eternal. People come and go, but everyone who walked this path shared a moment with the same mountain. That's this path's meaning — connecting people across eras.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The path as a bridge across time — centuries of shared moments."
+                    },
+                    {
+                        "text_zh": "您每天都走这条路吗？",
+                        "text_pinyin": "Nín měi tiān dōu zǒu zhè tiáo lù ma?",
+                        "text_en": "Do you walk this path every day?",
+                        "score": 0.0,
+                        "feedback": "A routine question that doesn't match the depth."
+                    },
+                    {
+                        "text_zh": "这条路通向哪个寺庙？",
+                        "text_pinyin": "Zhè tiáo lù tōng xiàng nǎge sìmiào?",
+                        "text_en": "Which temple does this path lead to?",
+                        "score": 0.0,
+                        "feedback": "Destination logistics during a timeless reflection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Ancient mountain paths (石阶) in China bear the physical imprint of centuries of pilgrims, monks, and travelers. The concave wear on each step is considered beautiful, not deteriorated — proof of connection across time. Monks often walk these paths daily with a contemplative awareness that transforms routine into meditation."
+    }
+}

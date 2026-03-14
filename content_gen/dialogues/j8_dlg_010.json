@@ -1,0 +1,117 @@
+{
+    "title": "The Lighthouse Keeper",
+    "title_zh": "守灯塔的人",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "On a rocky island off the coast of Zhejiang, you visit one of the last manned lighthouses in China. The keeper, Old Zhou, has been here alone for eighteen years. The lighthouse is scheduled to be automated next month.",
+        "setup_zh": "在浙江海岸外的一座礁石岛上，你参观了中国最后几座有人值守的灯塔之一。守灯人老周已经在这里独自守了十八年。下个月灯塔就要自动化了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "十八年了。每天晚上检查灯，擦玻璃，观察海面。自动化以后，一个传感器加一台电脑就够了。比我准确，比我不知疲倦。但你知道吗——有些东西传感器感觉不到。暴风雨来之前，空气有一种味道，海浪的节奏会变。这些我的身体知道，但没有任何传感器可以量化「空气的味道变了」。",
+                "text_pinyin": "Shíbā nián le. Měi tiān wǎnshang jiǎnchá dēng, cā bōli, guānchá hǎimiàn. Zìdònghuà yǐhòu, yī ge chuángǎnqì jiā yī tái diànnǎo jiù gòu le. Bǐ wǒ zhǔnquè, bǐ wǒ bù zhī píjuàn. Dàn nǐ zhīdào ma — yǒuxiē dōngxi chuángǎnqì gǎnjué bú dào. Bàofēngyǔ lái zhīqián, kōngqì yǒu yī zhǒng wèidào, hǎilàng de jiézòu huì biàn. Zhèxiē wǒ de shēntǐ zhīdào, dàn méiyǒu rènhé chuángǎnqì kěyǐ liànghuà 'kōngqì de wèidào biàn le'.",
+                "text_en": "Eighteen years. Every night checking the light, wiping the glass, watching the sea. After automation, a sensor and a computer will be enough. More accurate than me, more tireless. But you know — some things sensors can't feel. Before a storm, the air has a smell, the wave rhythm changes. My body knows these things, but no sensor can quantify 'the air smells different.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the body knowledge that sensors can't replicate.",
+                "options": [
+                    {
+                        "text_zh": "传感器测湿度、气压、风速——但它闻不到风暴来临前的味道。那种「味道」是温度、盐分、气压、水汽和十八年经验共同构成的综合感知。您的身体不生产数据，生产判断。自动化取代您，获得的是精度，失去的是判断力。",
+                        "text_pinyin": "Chuángǎnqì cè shīdù, qìyā, fēngsù — dàn tā wén bú dào fēngbào láilín qián de wèidào. Nà zhǒng 'wèidào' shì wēndù, yánfèn, qìyā, shuǐqì hé shíbā nián jīngyàn gòngtóng gòuchéng de zōnghé gǎnzhī. Nín de shēntǐ bù shēngchǎn shùjù, shēngchǎn pànduàn. Zìdònghuà qǔdài nín, huòdé de shì jīngdù, shīqù de shì pànduànlì.",
+                        "text_en": "Sensors measure humidity, pressure, wind speed — but they can't smell the scent before a storm. That 'scent' is temperature, salinity, pressure, moisture, and eighteen years of experience forming a composite perception. Your body doesn't produce data, it produces judgment. When automation replaces you, what's gained is precision; what's lost is judgment.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Data vs. judgment — the body as the most sophisticated instrument."
+                    },
+                    {
+                        "text_zh": "自动化以后您打算做什么？",
+                        "text_pinyin": "Zìdònghuà yǐhòu nín dǎsuàn zuò shénme?",
+                        "text_en": "What will you do after automation?",
+                        "score": 0.0,
+                        "feedback": "Asks about retirement plans during a deeper reflection."
+                    },
+                    {
+                        "text_zh": "一个人在这里不寂寞吗？",
+                        "text_pinyin": "Yī ge rén zài zhèlǐ bú jìmò ma?",
+                        "text_en": "Don't you get lonely here alone?",
+                        "score": 0.0,
+                        "feedback": "Asks about loneliness instead of engaging his observation about embodied knowledge."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "判断力比精度更能救命——说到了根本。但我想说的不只是技术层面的事。十八年来，每天晚上我点亮这盏灯，我知道海上有人在看着它。那些渔船、那些货轮——它们看到的不只是一束光，是一个信号：「有人在这里守着你。」自动化的灯和人守的灯，亮度一样，位置一样，但含义不同。一个是「系统在运行」，一个是「有人在看着你」。你觉得在暴风雨中的船员，更需要哪一种？",
+                "text_pinyin": "Pànduànlì bǐ jīngdù gèng néng jiù mìng — shuō dào le gēnběn. Dàn wǒ xiǎng shuō de bù zhǐ shì jìshù céngmiàn de shì. Shíbā nián lái, měi tiān wǎnshang wǒ diǎn liàng zhè zhǎn dēng, wǒ zhīdào hǎi shàng yǒu rén zài kàn zhe tā. Nàxiē yúchuán, nàxiē huòlún — tāmen kàn dào de bù zhǐ shì yī shù guāng, shì yī ge xìnhào: 'yǒu rén zài zhèlǐ shǒu zhe nǐ.' Zìdònghuà de dēng hé rén shǒu de dēng, liàngdù yīyàng, wèizhì yīyàng, dàn hányì bùtóng. Yī ge shì 'xìtǒng zài yùnxíng', yī ge shì 'yǒu rén zài kàn zhe nǐ'. Nǐ juéde zài bàofēngyǔ zhōng de chuányuán, gèng xūyào nǎ yī zhǒng?",
+                "text_en": "Emotional autobiography — yes. But something special: when she painted happy flowers, the strokes were fast, colors vivid. When she was sad, she chose cold-toned flowers, strokes cautious and slow. She couldn't write down her feelings, but she could paint them. The flowers became her diary, a diary only she could read — until I learned to read it too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the difference between a system running and someone watching over you.",
+                "options": [
+                    {
+                        "text_zh": "「系统在运行」和「有人在看着你」——同一束光，照亮的不是同一个东西。自动化的灯照亮海面，您的灯照亮信念——「我不是一个人在海上」。灯塔的真正功能从来不只是导航——是人类对彼此说「你不是孤独的」最古老的方式。",
+                        "text_pinyin": "'Xìtǒng zài yùnxíng' hé 'yǒu rén zài kàn zhe nǐ' — tóng yī shù guāng, zhào liàng de bú shì tóng yī ge dōngxi. Zìdònghuà de dēng zhào liàng hǎimiàn, nín de dēng zhào liàng xìnniàn — 'wǒ bú shì yī ge rén zài hǎi shàng'. Dēngtǎ de zhēnzhèng gōngnéng cónglái bù zhǐ shì dǎoháng — shì rénlèi duì bǐcǐ shuō 'nǐ bú shì gūdú de' zuì gǔlǎo de fāngshì.",
+                        "text_en": "'A system is running' and 'someone is watching over you' — the same beam of light, but illuminating different things. The automated light illuminates the sea; your light illuminates belief — 'I'm not alone out here.' The lighthouse's true function was never just navigation — it's humanity's oldest way of saying 'you're not alone.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The lighthouse illuminates faith, not just water — human presence as the oldest comfort."
+                    },
+                    {
+                        "text_zh": "船员知道灯塔是有人守的吗？",
+                        "text_pinyin": "Chuányuán zhīdào dēngtǎ shì yǒu rén shǒu de ma?",
+                        "text_en": "Do the crews know the lighthouse is manned?",
+                        "score": 0.0,
+                        "feedback": "A factual question that misses the philosophical point."
+                    },
+                    {
+                        "text_zh": "自动化系统会不会出故障？",
+                        "text_pinyin": "Zìdònghuà xìtǒng huì bú huì chū gùzhàng?",
+                        "text_en": "Could the automated system malfunction?",
+                        "score": 0.0,
+                        "feedback": "A reliability question during a meditation on human presence."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "「你不是孤独的」——十八年来，这就是我每晚点灯时心里想的。不是在想灯有多亮、角度对不对——是在想海上的人。也许他们从来不知道有人在这里想着他们。但这不重要。就像你刚才说的——给予不需要被知道。下个月我走以后，灯还会亮。但那个灯里会少一些东西。外表看不出来，亮度不变。只是……不一样了。",
+                "text_pinyin": "'Nǐ bú shì gūdú de' — shíbā nián lái, zhè jiù shì wǒ měi wǎn diǎn dēng shí xīnlǐ xiǎng de. Bú shì zài xiǎng dēng yǒu duō liàng, jiǎodù duì bú duì — shì zài xiǎng hǎi shàng de rén. Yěxǔ tāmen cónglái bù zhīdào yǒu rén zài zhèlǐ xiǎng zhe tāmen. Dàn zhè bù zhòngyào. Jiù xiàng nǐ gāngcái shuō de — gěiyǔ bù xūyào bèi zhīdào. Xià ge yuè wǒ zǒu yǐhòu, dēng hái huì liàng. Dàn nàge dēng lǐ huì shǎo yīxiē dōngxi. Wàibiǎo kàn bù chūlái, liàngdù bú biàn. Zhǐ shì…… bù yīyàng le.",
+                "text_en": "Love made visible... you know the hardest part? She stopped painting three years before she passed — her hands shook too much. Those last three years, I'd bring her flowers. Real ones. She'd look at them and I knew she was painting them in her mind. The painting never stopped — only the hand did. Even now, when I see certain flowers, I paint them for her. I've become her hands."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the invisible loss within the unchanged light.",
+                "options": [
+                    {
+                        "text_zh": "外表一样，但不一样了——也许是我们这个时代最隐秘的损失。我们用效率替换了关怀，用系统替换了个人，所有指标都没变。但有一种东西消失了：一个人每晚在风中为陌生人点灯的那颗心。您的十八年留在了这里的风里、盐里、石头里。",
+                        "text_pinyin": "Wàibiǎo yīyàng, dàn bù yīyàng le — yěxǔ shì wǒmen zhège shídài zuì yǐnmì de sǔnshī. Wǒmen yòng xiàolǜ tìhuàn le guānhuái, yòng xìtǒng tìhuàn le gèrén, suǒyǒu zhǐbiāo dōu méi biàn. Dàn yǒu yī zhǒng dōngxi xiāoshī le: yī ge rén měi wǎn zài fēng zhōng wèi mòshēngrén diǎn dēng de nà kē xīn. Nín de shíbā nián liú zài le zhèlǐ de fēng lǐ, yán lǐ, shítou lǐ.",
+                        "text_en": "Same on the outside, but different — maybe the most hidden loss of our era. We replaced care with efficiency, individuals with systems, and all the metrics stayed the same. But something vanished: the heart of a person lighting a lamp in the wind for strangers each night. Your eighteen years remain in the wind, the salt, the stone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The most hidden loss of our era — efficiency replaces care, metrics stay perfect, but the soul knows something is gone."
+                    },
+                    {
+                        "text_zh": "您会想念这个地方吗？",
+                        "text_pinyin": "Nín huì xiǎngniàn zhège dìfang ma?",
+                        "text_en": "Will you miss this place?",
+                        "score": 0.0,
+                        "feedback": "The obvious question; the entire conversation has been about how deeply he's embedded here."
+                    },
+                    {
+                        "text_zh": "灯塔可以改成民宿。",
+                        "text_pinyin": "Dēngtǎ kěyǐ gǎi chéng mínsù.",
+                        "text_en": "The lighthouse could be turned into a guesthouse.",
+                        "score": 0.0,
+                        "feedback": "A commercial suggestion during a farewell to a life's calling."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's manned lighthouses are steadily being automated, with the last keepers retiring without replacement. These keepers often served in extreme isolation for decades, developing an embodied knowledge of local weather patterns that no instrument can replicate. The philosophical question of whether a human-tended light and an automated light carry the same meaning connects to broader Chinese discussions about 人情味 (rénqíng wèi, the flavor of human feeling) — the intangible quality that distinguishes human care from mechanical function."
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "title": "The Overnight Train",
+    "title_zh": "夜行列车",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're on an overnight train, lying in a bunk bed. The passenger below you, an older traveler named Old Xu, can't sleep. The train rocks gently and moonlight comes through the curtain.",
+        "setup_zh": "你在夜行列车的卧铺上。下铺的旅客，一位叫老徐的长者，也睡不着。列车轻轻地摇晃，月光从窗帘的缝隙里透进来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也睡不着啊？火车上睡不着不一定是坏事。你听那个声音——车轮碰到铁轨的声音，像一首很慢的歌。小时候坐火车，我最喜欢听这个声音。",
+                "text_pinyin": "Nǐ yě shuì bù zháo a? Huǒchē shàng shuì bù zháo bù yīdìng shì huài shì. Nǐ tīng nàge shēngyīn — chēlún pèng dào tiěguǐ de shēngyīn, xiàng yī shǒu hěn màn de gē. Xiǎo shíhou zuò huǒchē, wǒ zuì xǐhuān tīng zhège shēngyīn.",
+                "text_en": "Can't sleep either? Not sleeping on a train isn't necessarily bad. Listen to that sound — wheels meeting rails, like a very slow song. When I rode trains as a child, this was my favorite sound."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the train sounds.",
+                "options": [
+                    {
+                        "text_zh": "比电视好看——因为是真的。每片叶子掉的方式都不一样，掉了就掉了，不会重播。真实的东西总比屏幕上的更动人。",
+                        "text_pinyin": "Bǐ diànshì hǎokàn — yīnwèi shì zhēn de. Měi piàn yèzi diào de fāngshì dōu bù yīyàng, diào le jiù diào le, bú huì chóngbō. Zhēnshí de dōngxi zǒng bǐ píngmù shàng de gèng dòngrén.",
+                        "text_en": "More beautiful than TV — because it's real. Every leaf falls differently, and once it falls, no replay. Real things are always more moving than what's on a screen.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Captures the in-between quality of train travel — liminal and poetic."
+                    },
+                    {
+                        "text_zh": "你要去哪里？",
+                        "text_pinyin": "Nǐ yào qù nǎlǐ?",
+                        "text_en": "Where are you going?",
+                        "score": 0.0,
+                        "feedback": "Destination question when he's savoring the journey itself."
+                    },
+                    {
+                        "text_zh": "你带了耳塞吗？可能戴上就能睡着了。",
+                        "text_pinyin": "Nǐ dài le ěrsāi ma? Kěnéng dài shàng jiù néng shuì zháo le.",
+                        "text_en": "Did you bring earplugs? You might fall asleep with them.",
+                        "score": 0.0,
+                        "feedback": "Practical suggestion that treats sleeplessness as a problem rather than an experience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不属于任何地方……对。我年轻的时候最喜欢这种感觉。不用想工作，不用想家里的事。在火车上，你只是一个在移动的人。什么都不需要做，只要在那里就好。",
+                "text_pinyin": "Bù shǔyú rènhé dìfāng…… duì. Wǒ niánqīng de shíhou zuì xǐhuān zhè zhǒng gǎnjué. Bú yòng xiǎng gōngzuò, bú yòng xiǎng jiā lǐ de shì. Zài huǒchē shàng, nǐ zhǐ shì yīge zài yídòng de rén. Shénme dōu bù xūyào zuò, zhǐyào zài nàlǐ jiù hǎo.",
+                "text_en": "Belonging nowhere... exactly. When I was young that was my favorite feeling. No thinking about work, no thinking about home. On a train, you're just a person in motion. Nothing needs doing, just being there is enough."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the freedom of just being.",
+                "options": [
+                    {
+                        "text_zh": "年轻时怕失去，长大才明白失去也是生活的一部分。叶子落了是为了让树休息，也为了明年的新叶子。放下一些东西，才能接住新的。",
+                        "text_pinyin": "Niánqīng shí pà shīqù, zhǎng dà cái míngbái shīqù yě shì shēnghuó de yī bùfèn. Yèzi luò le shì wèi le ràng shù xiūxi, yě wèi le míngnián de xīn yèzi. Fàng xià yīxiē dōngxi, cái néng jiē zhù xīn de.",
+                        "text_en": "When young we fear loss; growing up we understand it's part of life. Leaves fall so the tree can rest and for next year's new leaves. You let go of some things to catch new ones.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Elevates idleness on a train to philosophical freedom."
+                    },
+                    {
+                        "text_zh": "高铁比这个快多了，你怎么不坐高铁？",
+                        "text_pinyin": "Gāotiě bǐ zhège kuài duō le, nǐ zěnme bú zuò gāotiě?",
+                        "text_en": "The high-speed train is much faster, why didn't you take that?",
+                        "score": 0.0,
+                        "feedback": "Efficiency question that misses why he chose the slow train."
+                    },
+                    {
+                        "text_zh": "我觉得火车上的被子不太干净。",
+                        "text_pinyin": "Wǒ juéde huǒchē shàng de bèizi bú tài gānjìng.",
+                        "text_en": "I think the blankets on trains aren't very clean.",
+                        "score": 0.0,
+                        "feedback": "Hygiene complaint during a contemplative exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Overnight trains (夜行列车) were once the primary mode of long-distance travel in China. While high-speed rail has replaced most routes, older travelers often prefer the slower pace. The rhythmic sound of wheels on tracks (哐当哐当) is deeply nostalgic for many Chinese, associated with family journeys and the meditative quality of unhurried travel."
+    }
+}

@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Share your thoughts on the movie's theme and characters.",
                 "options": [
-                    {"text_zh": "我也觉得这部作品很深刻。情节设计得很好，特别是主要人物的变化让我很感动。它反映了普通人面对困难时的选择，主题很有意义。", "text_pinyin": "wǒ yě juéde zhè bù zuòpǐn hěn shēnkè. qíngjié shèjì de hěn hǎo, tèbié shì zhǔyào rénwù de biànhuà ràng wǒ hěn gǎndòng. tā fǎnyìng le pǔtōng rén miànduì kùnnán shí de xuǎnzé, zhǔtí hěn yǒu yìyì.", "text_en": "I also think this work is very profound. The plot is well-designed, especially how the main character's transformation moved me. It reflects ordinary people's choices when facing difficulties — the theme is very meaningful.", "score": 1.0, "register": "informal", "feedback": "Rich analysis — uses 作品, 情节, 人物, 感动, 反映, and 深刻 naturally. Shows genuine engagement with the work."},
-                    {"text_zh": "故事还不错，人物演得挺好的。就是有些地方有点慢。", "text_pinyin": "gùshì hái búcuò, rénwù yǎn de tǐng hǎo de. jiùshì yǒuxiē dìfāng yǒudiǎn màn.", "text_en": "The story was pretty good, the characters were well-acted. Just some parts were a bit slow.", "score": 0.6, "register": "casual", "feedback": "Surface-level review. Try to discuss the 主题 and what the 作品 反映 — go beyond just liking or disliking to deeper analysis."},
-                    {"text_zh": "还行吧，我觉得一般。", "text_pinyin": "hái xíng ba, wǒ juéde yībān.", "text_en": "It was okay, I thought it was average.", "score": 0.2, "register": "casual", "feedback": "Too brief for a literary discussion. Your friend offered a thoughtful take — engage with the 主题, 人物, or 情节 to continue the conversation."}
+                    {
+                        "text_zh": "我也觉得这部作品很深刻。情节设计得很好，特别是主要人物的变化让我很感动。它反映了普通人面对困难时的选择，主题很有意义。",
+                        "text_pinyin": "wǒ yě juéde zhè bù zuòpǐn hěn shēnkè. qíngjié shèjì de hěn hǎo, tèbié shì zhǔyào rénwù de biànhuà ràng wǒ hěn gǎndòng. tā fǎnyìng le pǔtōng rén miànduì kùnnán shí de xuǎnzé, zhǔtí hěn yǒu yìyì.",
+                        "text_en": "I also think this work is very profound. The plot is well-designed, especially how the main character's transformation moved me. It reflects ordinary people's choices when facing difficulties — the theme is very meaningful.",
+                        "score": 1.0,
+                        "register": "informal",
+                        "feedback": "Rich analysis — uses 作品, 情节, 人物, 感动, 反映, and 深刻 naturally. Shows genuine engagement with the work."
+                    },
+                    {
+                        "text_zh": "这不是一个非此即彼的问题。环保和经济发展并不一定矛盾。关键在于转型的过程中，政府要提供足够的过渡期和配套措施——比如对失业工人进行职业培训、在煤炭地区扶持新兴产业、给受影响的企业提供技术升级的补贴。我承认目前有些地方做得不够好，但解决方案不是放弃环保目标，而是完善转型的具体路径。",
+                        "text_pinyin": "zhè bú shì yī gè fēicǐjíbǐ de wèntí. huánbǎo hé jīngjì fāzhǎn bìng bù yīdìng máodùn. guānjiàn zàiyú zhuǎnxíng de guòchéng zhōng, zhèngfǔ yào tígōng zúgòu de guòdù qī hé pèitào cuòshī——bǐrú duì shīyè gōngrén jìnxíng zhíyè péixùn, zài méitàn dìqū fúchí xīnxīng chǎnyè, gěi shòu yǐngxiǎng de qǐyè tígōng jìshù shēngjí de bǔtiē. wǒ chéngrèn mùqián yǒuxiē dìfāng zuò de bú gòu hǎo, dàn jiějué fāng'àn bú shì fàngqì huánbǎo mùbiāo, ér shì wánshàn zhuǎnxíng de jùtǐ lùjìng.",
+                        "text_en": "This isn't an either-or question. Environmental protection and economic development aren't necessarily contradictory. The key is that during the transition, the government needs to provide sufficient transition periods and supporting measures -- like vocational training for unemployed workers, fostering emerging industries in coal regions, and providing technology upgrade subsidies for affected businesses. I admit some places haven't done this well enough, but the solution isn't to abandon environmental goals, but to refine the specific path of transition.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your thoughts on the movie's theme and characters, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "当然可以。比如你讲完市场数据以后要转到竞争分析，可以说'了解了市场的整体情况，接下来我们看看竞争格局'或者'以上是市场数据，下面我从竞争角度来分析'。这种句子让听众知道你要换话题了，不会觉得突然。你下次做报告之前，可以先把幻灯片发给我，我帮你看看结构和逻辑有没有问题。多练几次就会越来越自然的。",
+                        "text_pinyin": "dāngrán kěyǐ. bǐrú nǐ jiǎng wán shìchǎng shùjù yǐhòu yào zhuǎn dào jìngzhēng fēnxī, kěyǐ shuō 'liǎojiě le shìchǎng de zhěngtǐ qíngkuàng, jiēxiàlái wǒmen kànkan jìngzhēng géjú' huòzhě 'yǐshàng shì shìchǎng shùjù, xiàmiàn wǒ cóng jìngzhēng jiǎodù lái fēnxī'. zhè zhǒng jùzi ràng tīngzhòng zhīdào nǐ yào huàn huàtí le, bú huì juéde tūrán. nǐ xià cì zuò bàogào zhīqián, kěyǐ xiān bǎ huàndēngpiàn fā gěi wǒ, wǒ bāng nǐ kànkan jiégòu hé luójì yǒu méiyǒu wèntí. duō liàn jǐ cì jiù huì yuè lái yuè zìrán de.",
+                        "text_en": "Of course. For example, after presenting market data and transitioning to competitive analysis, you could say 'Now that we understand the overall market situation, let's look at the competitive landscape' or 'Above was the market data; now let me analyze from a competition perspective.' These sentences let the audience know you're changing topics so it doesn't feel abrupt. Before your next report, you can send me the slides first and I'll review the structure and logic. With more practice, it'll become more natural.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your thoughts on the movie's theme and characters, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Describe which scene moved you and why.",
                 "options": [
-                    {"text_zh": "最让我感动的是结尾那个情节。主人公终于理解了父亲的选择，那个场景反映了两代人之间的矛盾和理解，非常深刻。", "text_pinyin": "zuì ràng wǒ gǎndòng de shì jiéwěi nàge qíngjié. zhǔréngōng zhōngyú lǐjiě le fùqīn de xuǎnzé, nàge chǎngjǐng fǎnyìng le liǎng dài rén zhījiān de máodùn hé lǐjiě, fēicháng shēnkè.", "text_en": "What moved me most was the ending scene. The protagonist finally understood his father's choice — that scene reflected the conflict and understanding between two generations, very profound.", "score": 1.0, "register": "informal", "feedback": "Specific and heartfelt — identifies a particular 情节, explains why it was 感动, and connects it to a broader 主题 of generational conflict."},
-                    {"text_zh": "我觉得中间那段挺感动的，但是具体的我记不太清了。", "text_pinyin": "wǒ juéde zhōngjiān nà duàn tǐng gǎndòng de, dànshì jùtǐ de wǒ jì bù tài qīng le.", "text_en": "I thought the middle part was quite moving, but I don't remember the specifics.", "score": 0.5, "register": "casual", "feedback": "Shows emotional response but lacks specifics. Try to recall a particular 情节 or 人物 moment to make your 感动 concrete."},
-                    {"text_zh": "整部电影都还好，没有特别感动的地方。", "text_pinyin": "zhěng bù diànyǐng dōu hái hǎo, méiyǒu tèbié gǎndòng de dìfāng.", "text_en": "The whole movie was fine, nothing particularly moving.", "score": 0.3, "register": "casual", "feedback": "Disconnects from the conversation. Even if nothing strongly moved you, picking one 情节 to discuss shows engagement and lets you practice literary vocabulary."}
+                    {
+                        "text_zh": "这不是一个非此即彼的问题。环保和经济发展并不一定矛盾。关键在于转型的过程中，政府要提供足够的过渡期和配套措施——比如对失业工人进行职业培训、在煤炭地区扶持新兴产业、给受影响的企业提供技术升级的补贴。我承认目前有些地方做得不够好，但解决方案不是放弃环保目标，而是完善转型的具体路径。",
+                        "text_pinyin": "zhè bú shì yī gè fēicǐjíbǐ de wèntí. huánbǎo hé jīngjì fāzhǎn bìng bù yīdìng máodùn. guānjiàn zàiyú zhuǎnxíng de guòchéng zhōng, zhèngfǔ yào tígōng zúgòu de guòdù qī hé pèitào cuòshī——bǐrú duì shīyè gōngrén jìnxíng zhíyè péixùn, zài méitàn dìqū fúchí xīnxīng chǎnyè, gěi shòu yǐngxiǎng de qǐyè tígōng jìshù shēngjí de bǔtiē. wǒ chéngrèn mùqián yǒuxiē dìfāng zuò de bú gòu hǎo, dàn jiějué fāng'àn bú shì fàngqì huánbǎo mùbiāo, ér shì wánshàn zhuǎnxíng de jùtǐ lùjìng.",
+                        "text_en": "This isn't an either-or question. Environmental protection and economic development aren't necessarily contradictory. The key is that during the transition, the government needs to provide sufficient transition periods and supporting measures -- like vocational training for unemployed workers, fostering emerging industries in coal regions, and providing technology upgrade subsidies for affected businesses. I admit some places haven't done this well enough, but the solution isn't to abandon environmental goals, but to refine the specific path of transition.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe which scene moved you and why, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "最让我感动的是结尾那个情节。主人公终于理解了父亲的选择，那个场景反映了两代人之间的矛盾和理解，非常深刻。",
+                        "text_pinyin": "zuì ràng wǒ gǎndòng de shì jiéwěi nàge qíngjié. zhǔréngōng zhōngyú lǐjiě le fùqīn de xuǎnzé, nàge chǎngjǐng fǎnyìng le liǎng dài rén zhījiān de máodùn hé lǐjiě, fēicháng shēnkè.",
+                        "text_en": "What moved me most was the ending scene. The protagonist finally understood his father's choice — that scene reflected the conflict and understanding between two generations, very profound.",
+                        "score": 1.0,
+                        "register": "informal",
+                        "feedback": "Specific and heartfelt — identifies a particular 情节, explains why it was 感动, and connects it to a broader 主题 of generational conflict."
+                    },
+                    {
+                        "text_zh": "我觉得目标确实有挑战性，但不一定不切实际。你看现在中国在可再生能源方面的投资力度有多大——太阳能板和风力发电的产能已经是全球第一了。碳中和不是说完全不排放，而是通过技术手段实现排放和吸收的平衡。当然，从传统能源转型到清洁能源，过程肯定不会一帆风顺，需要政策支持和技术突破。",
+                        "text_pinyin": "wǒ juéde mùbiāo quèshí yǒu tiǎozhàn xìng, dàn bù yīdìng bú qiè shíjì. nǐ kàn xiànzài zhōngguó zài kě zàishēng néngyuán fāngmiàn de tóuzī lìdù yǒu duō dà——tàiyángnéng bǎn hé fēnglì fādiàn de chǎnnéng yǐjīng shì quánqiú dì yī le. tàn zhōnghé bú shì shuō wánquán bù páifàng, ér shì tōngguò jìshù shǒuduàn shíxiàn páifàng hé xīshōu de pínghéng. dāngrán, cóng chuántǒng néngyuán zhuǎnxíng dào qīngjié néngyuán, guòchéng kěndìng bú huì yīfān fēngshùn, xūyào zhèngcè zhīchí hé jìshù tūpò.",
+                        "text_en": "I think the goal is certainly challenging, but not necessarily unrealistic. Look at how much China is investing in renewable energy now -- solar panel and wind power capacity is already number one globally. Carbon neutrality doesn't mean zero emissions -- it means achieving a balance between emissions and absorption through technological means. Of course, the transition from traditional to clean energy won't be smooth sailing; it requires policy support and technological breakthroughs.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe which scene moved you and why, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

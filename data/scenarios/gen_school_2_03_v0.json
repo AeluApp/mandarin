@@ -1,0 +1,94 @@
+{
+    "title": "The Flashcard Marathon",
+    "title_zh": "单词卡马拉松",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_2_03_v0",
+    "tree": {
+        "setup": "A campus coffee shop the evening before the exam. Your classmate Xiao Rui is surrounded by flashcards arranged in mysterious piles. She has a system: green pile is 'know well,' yellow is 'kind of know,' red is 'never seen this character in my life.' The red pile is significantly taller than the others. She looks up with the hollow eyes of someone who started studying too late.",
+        "setup_zh": "校园咖啡店，考试前一天晚上。同学小瑞被神秘的单词卡堆包围。她有一套系统：绿色堆是「会了」，黄色是「差不多」，红色是「这辈子没见过这个字」。红色堆明显比其他的高。她抬起头，眼神空洞——开始复习太晚了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也来复习了？我觉得我完了。",
+                "text_pinyin": "nǐ yě lái fùxí le? wǒ juéde wǒ wán le.",
+                "text_en": "You're here to review too? I think I'm doomed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her exam anxiety.",
+                "options": [
+                    {
+                        "text_zh": "别担心！我们一起复习吧。",
+                        "text_pinyin": "bié dānxīn! wǒmen yìqǐ fùxí ba.",
+                        "text_en": "Don't worry! Let's review together.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Rui's eyes regain a spark of hope. She slides the red pile toward you.「你先考我这些。」别担心 is the standard 'don't worry' -- followed by a solution, it's even better."
+                    },
+                    {
+                        "text_zh": "我也没准备好。你的红色那堆是什么？",
+                        "text_pinyin": "wǒ yě méi zhǔnbèi hǎo. nǐ de hóngsè nà duī shì shénme?",
+                        "text_en": "I'm not prepared either. What's that red pile?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Rui holds up a card from the red pile and stares at it as if waiting for divine revelation.「这个字……我觉得是个动词？」Shared suffering builds bonds."
+                    },
+                    {
+                        "text_zh": "我觉得考试不会太难。",
+                        "text_pinyin": "wǒ juéde kǎoshì bú huì tài nán.",
+                        "text_en": "I don't think the exam will be too hard.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Rui looks at you, then at her red pile, then back at you. She decides to believe you because the alternative is despair.「真的吗？你觉得？」不会太难 is hopeful but risky to say to a panicking friend."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你帮我背一下这些生词，好不好？我总是记了又忘。",
+                "text_pinyin": "nǐ bāng wǒ bèi yíxià zhèxiē shēngcí, hǎo bu hǎo? wǒ zǒngshì jì le yòu wàng.",
+                "text_en": "Can you help me memorize these vocab words? I keep memorizing then forgetting."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Help her study.",
+                "options": [
+                    {
+                        "text_zh": "好！我来考你。",
+                        "text_pinyin": "hǎo! wǒ lái kǎo nǐ.",
+                        "text_en": "OK! I'll quiz you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "You hold up cards one by one. Xiao Rui gets three right, two wrong, and one she just stares at in silence.「这个我放弃了。」我来考你 means 'I'll test you' -- a natural study partner phrase."
+                    },
+                    {
+                        "text_zh": "我们用造句的方式记，比较容易。",
+                        "text_pinyin": "wǒmen yòng zào jù de fāngshì jì, bǐjiào róngyì.",
+                        "text_en": "Let's memorize by making sentences, it's easier.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Rui tries it and three red-pile words move to yellow.「你太聪明了！」用...的方式 means 'by way of' -- a handy pattern for suggesting methods."
+                    },
+                    {
+                        "text_zh": "我觉得你应该早点开始复习。",
+                        "text_pinyin": "wǒ juéde nǐ yīnggāi zǎo diǎn kāishǐ fùxí.",
+                        "text_en": "I think you should have started reviewing earlier.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Rui stares at you. She is aware. She does not need this observation right now. She needs flashcard help.「我知道！帮我背单词好不好？」应该 means 'should' -- technically correct, but poorly timed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你！明天一起加油！",
+                "text_pinyin": "xièxie nǐ! míngtiān yìqǐ jiāyóu!",
+                "text_en": "Thank you! Let's do our best together tomorrow!"
+            }
+        ],
+        "cultural_note": "Last-minute cramming (临时抱佛脚, línshí bào fójiǎo, 'hugging Buddha's feet at the last moment') is a universal student experience in China. Study partners (学伴) help each other quiz and memorize, especially vocabulary (生词)."
+    }
+}

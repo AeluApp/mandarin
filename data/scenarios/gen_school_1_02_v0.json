@@ -1,0 +1,94 @@
+{
+    "title": "The Library Guardian",
+    "title_zh": "图书馆的守护者",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_school_1_02_v0",
+    "tree": {
+        "setup": "The school library, hushed and warm. Librarian Uncle Zhao sits behind a desk stacked with books he's been meaning to re-shelve for three weeks. He speaks in a whisper so reverent you'd think the books could hear him. A hand-painted sign reads: 'Silence is the music of knowledge.'",
+        "setup_zh": "学校图书馆，安静又温暖。图书管理员赵叔叔坐在堆满书的桌子后面——那些书他打算上架已经三个星期了。他说话轻得像怕书能听见。一块手写的牌子写着：「安静是知识的音乐。」",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "嘘……你好。你要找什么书？",
+                "text_pinyin": "xū... nǐ hǎo. nǐ yào zhǎo shénme shū?",
+                "text_en": "Shh... hello. What book are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what kind of book you need.",
+                "options": [
+                    {
+                        "text_zh": "我想找中文书。",
+                        "text_pinyin": "wǒ xiǎng zhǎo zhōngwén shū.",
+                        "text_en": "I'd like to find a Chinese book.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Zhao's eyes sparkle. He stands up with the urgency of someone who has waited years for this exact request. 找 (zhǎo, 'to look for') is one of the most useful verbs you'll learn."
+                    },
+                    {
+                        "text_zh": "有没有中文书？",
+                        "text_pinyin": "yǒu méiyǒu zhōngwén shū?",
+                        "text_en": "Do you have Chinese books?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Zhao gestures at the entire east wall with quiet pride. There are hundreds. He asks if you want easy ones or hard ones.「容易的还是难的？」"
+                    },
+                    {
+                        "text_zh": "我不知道。",
+                        "text_pinyin": "wǒ bù zhīdào.",
+                        "text_en": "I don't know.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Zhao is unfazed. He produces a picture book about a cat who travels China and places it gently on the desk.「先看这个吧。」Even when you don't know what you want, librarians find a way."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这本书很好。你看一下？",
+                "text_pinyin": "zhè běn shū hěn hǎo. nǐ kàn yíxià?",
+                "text_en": "This book is very good. Want to take a look?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Zhao hands over the book the way one passes a sleeping kitten. He whispers:「慢慢看。」本 (běn) is the measure word for books -- you'll see it everywhere."
+                    },
+                    {
+                        "text_zh": "这本书多少钱？",
+                        "text_pinyin": "zhè běn shū duōshao qián?",
+                        "text_en": "How much is this book?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Zhao stares at you with gentle horror. This is a library. The books are free to borrow. He recovers and points at the borrowing desk with trembling dignity."
+                    },
+                    {
+                        "text_zh": "太难了吧？",
+                        "text_pinyin": "tài nán le ba?",
+                        "text_en": "Isn't it too hard?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Zhao shakes his head and opens it to the first page. Lots of pictures, big characters. He selected this with great care. 太...了吧 softens the complaint into a question."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "可以借一个星期。好好看！",
+                "text_pinyin": "kěyǐ jiè yí gè xīngqī. hǎohǎo kàn!",
+                "text_en": "You can borrow it for one week. Read it well!"
+            }
+        ],
+        "cultural_note": "Chinese school and public libraries (图书馆, túshūguǎn) are often very quiet, hushed spaces. Librarians tend to take their role as guardians of knowledge seriously. 借 (jiè) means both 'to borrow' and 'to lend' -- context tells you which."
+    }
+}

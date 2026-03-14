@@ -1,0 +1,81 @@
+{
+    "title": "Cooking for a Sick Friend",
+    "title_zh": "给生病的朋友做饭",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your friend Xiao Sun is sick with a cold. You decide to bring her some homemade congee.",
+        "setup_zh": "你的朋友小孙感冒了。你决定给她送一些自己做的粥。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Arrive at her door with the congee.",
+                "options": [
+                    {
+                        "text_zh": "小孙，我给你熬了一碗皮蛋瘦肉粥。生病了要好好吃东西，喝点热的会舒服一些。",
+                        "text_pinyin": "Xiǎo Sūn, wǒ gěi nǐ áo le yī wǎn pídàn shòuròu zhōu. Shēngbìng le yào hǎohǎo chī dōngxi, hē diǎn rè de huì shūfu yīxiē.",
+                        "text_en": "Xiao Sun, I made you a bowl of century egg and pork congee. You need to eat well when you're sick — something hot will make you feel better.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Caring and practical — brings food and gentle advice."
+                    },
+                    {
+                        "text_zh": "这是给你的粥。",
+                        "text_pinyin": "Zhè shì gěi nǐ de zhōu.",
+                        "text_en": "This is congee for you.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gives the food but with little warmth."
+                    },
+                    {
+                        "text_zh": "你好点了吗？我路过就来看看。",
+                        "text_pinyin": "Nǐ hǎo diǎn le ma? Wǒ lùguò jiù lái kànkan.",
+                        "text_en": "Are you feeling better? I was just passing by.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Downplays the effort of cooking and coming."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你专门给我做的？太感动了！这两天我什么都不想吃，但是闻到粥的味道突然饿了。你真好。",
+                "text_pinyin": "Nǐ zhuānmén gěi wǒ zuò de? Tài gǎndòng le! Zhè liǎng tiān wǒ shénme dōu bù xiǎng chī, dànshì wén dào zhōu de wèidào tūrán è le. Nǐ zhēn hǎo.",
+                "text_en": "You made this specially for me? I'm so touched! I haven't wanted to eat anything these past two days, but smelling the congee made me suddenly hungry. You're so kind."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond warmly.",
+                "options": [
+                    {
+                        "text_zh": "快趁热喝！你好好休息，有什么需要的随时告诉我。别着急上班，身体最重要。",
+                        "text_pinyin": "Kuài chèn rè hē! Nǐ hǎohǎo xiūxi, yǒu shénme xūyào de suíshí gàosu wǒ. Bié zháojí shàngbān, shēntǐ zuì zhòngyào.",
+                        "text_en": "Drink it while it's hot! Rest well — let me know if you need anything. Don't rush back to work; your health is most important.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Attentive and genuinely caring."
+                    },
+                    {
+                        "text_zh": "不客气，小事。",
+                        "text_pinyin": "Bú kèqi, xiǎo shì.",
+                        "text_en": "You're welcome, it's nothing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Modest but doesn't express ongoing care."
+                    },
+                    {
+                        "text_zh": "你去看医生了吗？",
+                        "text_pinyin": "Nǐ qù kàn yīshēng le ma?",
+                        "text_en": "Have you seen a doctor?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but a bit clinical for the moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bringing congee (粥) to a sick friend is one of the most quintessential acts of caring in Chinese culture. 皮蛋瘦肉粥 (century egg and lean pork congee) is considered both nourishing and comforting. The phrase 「身体最重要」 is a common expression of genuine concern."
+    },
+    "hsk_level": 3
+}

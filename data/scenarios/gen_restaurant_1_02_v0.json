@@ -1,0 +1,94 @@
+{
+    "title": "No Spice, Please",
+    "title_zh": "不要辣的",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_restaurant_1_02_v0",
+    "tree": {
+        "setup": "A Sichuan noodle stall in a food court. The cook, Xiao Liu, has forearms like a sailor and a gentle voice. Everything on the menu has a small chili pepper icon next to it. The woman at the next table is fanning her mouth. The air itself seems to tingle.",
+        "setup_zh": "美食广场里的一家四川面摊。厨师小刘手臂粗壮，声音却很温柔。菜单上每道菜旁边都有一个小辣椒图标。旁边桌的女人正在扇嘴巴。连空气都是辣的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！想吃面吗？",
+                "text_pinyin": "nǐ hǎo! xiǎng chī miàn ma?",
+                "text_en": "Hello! Want some noodles?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order noodles but ask for no spice.",
+                "options": [
+                    {
+                        "text_zh": "我要一碗面，不要辣的。",
+                        "text_pinyin": "wǒ yào yì wǎn miàn, bú yào là de.",
+                        "text_en": "I'd like a bowl of noodles, not spicy.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Liu blinks twice, as if you've asked for the ocean without water. But he nods respectfully. 不要 + [thing] is the cleanest way to say 'without' at this level."
+                    },
+                    {
+                        "text_zh": "我要吃面。",
+                        "text_pinyin": "wǒ yào chī miàn.",
+                        "text_en": "I want to eat noodles.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "You'll get noodles -- but at a Sichuan stall, that means spicy by default. You forgot to mention 不要辣的! Xiao Liu is already reaching for the chili oil."
+                    },
+                    {
+                        "text_zh": "辣的好吃吗？",
+                        "text_pinyin": "là de hǎochī ma?",
+                        "text_en": "Is the spicy one good?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Liu's face lights up like a sunrise. He was born for this question. 好吃 (hǎochī, 'delicious') is one of the most useful food words you'll learn."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，不辣的。你要大碗还是小碗？",
+                "text_pinyin": "hǎo de, bú là de. nǐ yào dà wǎn háishì xiǎo wǎn?",
+                "text_en": "OK, not spicy. Big bowl or small bowl?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a size.",
+                "options": [
+                    {
+                        "text_zh": "小碗，谢谢。",
+                        "text_pinyin": "xiǎo wǎn, xièxie.",
+                        "text_en": "Small bowl, thanks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Liu nods. His small bowls are what most restaurants would call medium, but he has his own system and no one questions it."
+                    },
+                    {
+                        "text_zh": "大碗！",
+                        "text_pinyin": "dà wǎn!",
+                        "text_en": "Big bowl!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Liu grins. He loads the bowl with the quiet pride of an artist framing a canvas."
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "duōshao qián?",
+                        "text_en": "How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A practical question. Xiao Liu points at the price board -- small is 12, big is 15. 多少钱 will serve you well in every shop in China."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，请等一下！",
+                "text_pinyin": "hǎo de, qǐng děng yíxià!",
+                "text_en": "OK, please wait a moment!"
+            }
+        ],
+        "cultural_note": "In Sichuan-style restaurants, spicy (辣) is the default. If you can't handle heat, always specify 不辣 (bú là) or 微辣 (wēi là, 'mildly spicy'). Nobody will judge you -- much."
+    }
+}

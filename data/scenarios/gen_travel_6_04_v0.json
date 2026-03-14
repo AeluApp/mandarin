@@ -1,0 +1,232 @@
+{
+    "title": "The Rental Agreement Philosopher",
+    "title_zh": "租车合同哲学家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_travel_6_04_v0",
+    "tree": {
+        "setup": "A car rental office near the airport, where the afternoon sun illuminates a wall of car keys hanging on labeled hooks like a museum of small possibilities. Branch manager Mr. Jiang has a philosophy about rental cars: every scratch tells a story, every kilometer adds character, and the deposit is not a punishment but a 'mutual trust fund.' He keeps a photo album of cars that were returned in interesting condition — the album is locked, but its existence is well-known. You need a car for a week-long road trip through Yunnan province, and you have strong opinions about fuel economy because the roads to Shangri-La are long and gas stations are philosophical concepts.",
+        "setup_zh": "机场附近的租车公司，午后的阳光照在墙上一排排挂着标签的车钥匙上，像一座微型可能性博物馆。门店经理蒋师傅对租车有一套哲学：每道划痕都是一个故事，每公里都增添性格，押金不是惩罚而是「互信基金」。他有一本记录那些以有趣状态归还的车辆的相册——相册上了锁，但它的存在众所周知。你需要一辆车，做一周的云南自驾之旅，而且你对油耗有自己的想法——因为去香格里拉的路很长，加油站是一种哲学概念。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎，请问要租车吗？自驾还是带司机？",
+                "text_pinyin": "huānyíng, qǐngwèn yào zū chē ma? zìjià háishi dài sījī?",
+                "text_en": "Welcome — looking to rent a car? Self-drive or with a driver?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your road trip plan and requirements.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想租一辆车自驾，从昆明出发，走大理、丽江，最后到香格里拉，大概一个星期。路上有山路，所以最好是SUV，动力要够，油耗也不能太高。有适合的车吗？",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng zū yí liàng chē zìjià, cóng Kūnmíng chūfā, zǒu Dàlǐ, Lìjiāng, zuìhòu dào Xiānggélǐlā, dàgài yí gè xīngqī. lù shàng yǒu shānlù, suǒyǐ zuìhǎo shì SUV, dònglì yào gòu, yóuhào yě bù néng tài gāo. yǒu shìhé de chē ma?",
+                        "text_en": "Hello, I'd like to rent a car for a self-drive trip — starting from Kunming, through Dali, Lijiang, ending at Shangri-La. About a week. There are mountain roads, so preferably an SUV with enough power, but not too thirsty on fuel. Do you have something suitable?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Route, duration, terrain awareness, vehicle type, and fuel priority — Mr. Jiang sets down his tea with the deliberateness of someone who has just received a properly structured request. The keys on the wall seem to stand a little straighter."
+                    },
+                    {
+                        "text_zh": "我要租车去云南旅游，一个星期。有SUV吗？",
+                        "text_pinyin": "wǒ yào zū chē qù Yúnnán lǚyóu, yí gè xīngqī. yǒu SUV ma?",
+                        "text_en": "I want to rent a car for a trip in Yunnan — one week. Do you have SUVs?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Duration and type — he can work with this. He'll ask about your specific route to recommend the right vehicle."
+                    },
+                    {
+                        "text_zh": "有什么车？",
+                        "text_pinyin": "yǒu shénme chē?",
+                        "text_en": "What cars do you have?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Jiang gestures at the wall of keys. 「看你的需求，」he says. It depends on your needs. The wall has forty-seven sets of keys. This could take a while."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "昆明到香格里拉，经典路线。那条路海拔变化大，有些路段弯道很多。我推荐两款：一款是丰田RAV4，两驱的，每天租金三百二，油耗大概百公里七升。另一款是哈弗H6，四驱的，每天三百八，油耗百公里八升左右，但是山路上更有优势。你更看重油耗还是通过性？",
+                "text_pinyin": "Kūnmíng dào Xiānggélǐlā, jīngdiǎn lùxiàn. nà tiáo lù hǎibá biànhuà dà, yǒuxiē lùduàn wāndào hěn duō. wǒ tuījiàn liǎng kuǎn: yì kuǎn shì Fēngtián RAV4, liǎng qū de, měi tiān zūjīn sānbǎi èr, yóuhào dàgài bǎi gōnglǐ qī shēng. lìng yì kuǎn shì Hāfú H6, sì qū de, měi tiān sānbǎi bā, yóuhào bǎi gōnglǐ bā shēng zuǒyòu, dànshì shānlù shàng gèng yǒu yōushì. nǐ gèng kàn zhòng yóuhào háishi tōngguò xìng?",
+                "text_en": "Kunming to Shangri-La — classic route. Big altitude changes, lots of curves on some stretches. I'd recommend two: a Toyota RAV4, two-wheel drive, 320/day, about 7L per 100km. Or a Haval H6, four-wheel drive, 380/day, about 8L per 100km but better on mountain roads. Do you prioritize fuel economy or handling?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about road conditions and choose a vehicle.",
+                "options": [
+                    {
+                        "text_zh": "这个季节那边的路况怎么样？会不会有需要四驱的路段？如果大部分路段两驱就够的话，RAV4的油耗确实更有吸引力。但如果有烂路或者泥路，安全第一，我还是选四驱的。",
+                        "text_pinyin": "zhège jìjié nàbiān de lùkuàng zěnmeyàng? huì bú huì yǒu xūyào sì qū de lùduàn? rúguǒ dà bùfen lùduàn liǎng qū jiù gòu de huà, RAV4 de yóuhào quèshí gèng yǒu xīyǐnlì. dàn rúguǒ yǒu làn lù huòzhě ní lù, ānquán dì yī, wǒ háishi xuǎn sì qū de.",
+                        "text_en": "How are road conditions there this season? Are there stretches that need four-wheel drive? If two-wheel drive is sufficient for most of it, the RAV4's fuel economy is more attractive. But if there are rough or muddy roads, safety first — I'll go with the four-wheel drive.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Season-specific road conditions, conditional decision-making — Mr. Jiang pulls out a road condition report he prints weekly from the highway bureau's website. This is a customer who understands that the road between Lijiang and Shangri-La has opinions about who drives it."
+                    },
+                    {
+                        "text_zh": "四驱的吧，安全一点。",
+                        "text_pinyin": "sì qū de ba, ānquán yìdiǎn.",
+                        "text_en": "Four-wheel drive — safer.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Conservative choice. Mr. Jiang approves. 「山路上，多花六十块买个安心，」he says. Sixty yuan more a day buys peace of mind on mountain roads."
+                    },
+                    {
+                        "text_zh": "便宜的那个。",
+                        "text_pinyin": "piányi de nàge.",
+                        "text_en": "The cheaper one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Jiang pauses. Price is valid, but he's seen what the road to Shangri-La does to two-wheel-drive confidence. He offers a gentle caveat."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "现在三月份，有些路段可能还有残雪，特别是翻越山口的时候。我建议选四驱的。H6的四驱系统自动切换，山路上很稳。那就定H6？我跟你说一下押金和保险的事。",
+                "text_pinyin": "xiànzài sān yuè fèn, yǒuxiē lùduàn kěnéng hái yǒu cán xuě, tèbié shì fānyuè shānkǒu de shíhòu. wǒ jiànyì xuǎn sì qū de. H6 de sì qū xìtǒng zìdòng qiēhuàn, shānlù shàng hěn wěn. nà jiù dìng H6? wǒ gēn nǐ shuō yíxià yājīn hé bǎoxiǎn de shì.",
+                "text_en": "It's March now — some stretches may still have residual snow, especially when crossing mountain passes. I'd recommend four-wheel drive. The H6's 4WD system switches automatically — very stable on mountain roads. So we'll go with the H6? Let me explain the deposit and insurance."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about insurance details.",
+                "options": [
+                    {
+                        "text_zh": "好，就H6。请问押金多少？保险有几种？我想了解一下基本险和全险的区别。如果在山路上出了小事故，比如石子崩了挡风玻璃，走保险怎么处理？",
+                        "text_pinyin": "hǎo, jiù H6. qǐngwèn yājīn duōshǎo? bǎoxiǎn yǒu jǐ zhǒng? wǒ xiǎng liǎojiě yíxià jīběn xiǎn hé quán xiǎn de qūbié. rúguǒ zài shānlù shàng chū le xiǎo shìgù, bǐrú shízi bēng le dǎngfēng bōli, zǒu bǎoxiǎn zěnme chǔlǐ?",
+                        "text_en": "OK, the H6. How much is the deposit? What insurance options are there? I'd like to understand the difference between basic and full coverage. If there's a minor incident on mountain roads — say, a rock chips the windshield — how does the insurance process work?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Deposit, insurance tiers, AND a specific scenario question — Mr. Jiang reaches for the contract binder. This is the customer who reads fine print. His photo album grows nervous."
+                    },
+                    {
+                        "text_zh": "押金和保险怎么算？",
+                        "text_pinyin": "yājīn hé bǎoxiǎn zěnme suàn?",
+                        "text_en": "How do the deposit and insurance work?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Both topics in one question. He opens the contract to the relevant page."
+                    },
+                    {
+                        "text_zh": "不会太贵吧？",
+                        "text_pinyin": "bú huì tài guì ba?",
+                        "text_en": "It's not too expensive, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Jiang smiles. 「贵不贵看你怎么想，」he says. Expensive is relative — relative to the alternative of not having insurance on a mountain pass."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "押金五千块，刷信用卡预授权，还车的时候没有问题就解冻。保险有两种：基本险每天五十，包括第三者责任和车辆损失，但是有两千块的免赔额。全险每天八十，零免赔，连挡风玻璃、轮胎这些都包。走山路的话，我个人建议全险。石子崩玻璃太常见了。",
+                "text_pinyin": "yājīn wǔ qiān kuài, shuā xìnyòngkǎ yù shòuquán, huán chē de shíhòu méiyǒu wèntí jiù jiědòng. bǎoxiǎn yǒu liǎng zhǒng: jīběn xiǎn měi tiān wǔshí, bāokuò dì sān zhě zérèn hé chēliàng sǔnshī, dànshì yǒu liǎng qiān kuài de miǎn péi é. quán xiǎn měi tiān bāshí, líng miǎn péi, lián dǎngfēng bōli, lúntāi zhèxiē dōu bāo. zǒu shānlù de huà, wǒ gèrén jiànyì quán xiǎn. shízi bēng bōli tài chángjiàn le.",
+                "text_en": "Deposit is 5000 yuan — credit card pre-authorization, released when you return the car without issues. Two insurance options: basic at 50/day covers third-party liability and vehicle damage, but with a 2000 yuan deductible. Full coverage is 80/day, zero deductible — even windshield and tires are covered. For mountain roads, I personally recommend full coverage. Rock chips are way too common."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose insurance and ask about the return process.",
+                "options": [
+                    {
+                        "text_zh": "那就全险吧，每天多三十块，一周才多两百一，比修一块挡风玻璃便宜多了。还车的时候有什么流程？必须还到这个门店吗？还是可以在大理或者丽江的门店还？",
+                        "text_pinyin": "nà jiù quán xiǎn ba, měi tiān duō sānshí kuài, yì zhōu cái duō liǎngbǎi yī, bǐ xiū yí kuài dǎngfēng bōli piányi duō le. huán chē de shíhòu yǒu shénme liúchéng? bìxū huán dào zhège méndiàn ma? háishi kěyǐ zài Dàlǐ huòzhě Lìjiāng de méndiàn huán?",
+                        "text_en": "Full coverage then — 30 more per day, only 210 extra for the week, much cheaper than fixing a windshield. What's the return process? Do I have to return it to this branch? Or can I drop it off in Dali or Lijiang?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Quick mental math on the insurance cost AND asking about one-way returns — Mr. Jiang appreciates a customer who thinks in total trip cost, not daily rates. 「可以异地还车，」he says. Cross-city returns are possible, but there's a fee."
+                    },
+                    {
+                        "text_zh": "全险。还车怎么还？",
+                        "text_pinyin": "quán xiǎn. huán chē zěnme huán?",
+                        "text_en": "Full coverage. How do I return it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Decisive. He explains the return inspection process — a walkthrough he describes with the tenderness of someone checking on an old friend."
+                    },
+                    {
+                        "text_zh": "基本险够了吧。",
+                        "text_pinyin": "jīběn xiǎn gòu le ba.",
+                        "text_en": "Basic insurance should be enough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Jiang doesn't argue, but he does glance at the photo album. The album has opinions about deductibles."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "可以异地还车，我们在大理和丽江都有门店。异地还车费是四百块。还车的时候，工作人员会绕车检查一圈，拍照记录。油箱加满还车就行。如果一切正常，押金当天就解冻。好，我现在帮你办手续？需要驾照和护照。",
+                "text_pinyin": "kěyǐ yìdì huán chē, wǒmen zài Dàlǐ hé Lìjiāng dōu yǒu méndiàn. yìdì huán chē fèi shì sìbǎi kuài. huán chē de shíhòu, gōngzuò rényuán huì rào chē jiǎnchá yì quān, pāi zhào jìlù. yóuxiāng jiā mǎn huán chē jiù xíng. rúguǒ yíqiè zhèngcháng, yājīn dāngtiān jiù jiědòng. hǎo, wǒ xiànzài bāng nǐ bàn shǒuxù? xūyào jiàzhào hé hùzhào.",
+                "text_en": "Cross-city returns are available — we have branches in Dali and Lijiang. The drop-off fee is 400 yuan. At return, staff will walk around the car, take photos for records. Just return it with a full tank. If everything checks out, the deposit unfreezes same day. Shall I start the paperwork? I'll need your license and passport."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide documents and ask about road tips.",
+                "options": [
+                    {
+                        "text_zh": "好的，这是我的驾照和护照。蒋师傅，你对这条路线肯定很熟悉，有什么要特别注意的吗？比如哪段路容易堵车，或者哪里一定要加满油？",
+                        "text_pinyin": "hǎo de, zhè shì wǒ de jiàzhào hé hùzhào. Jiǎng shīfu, nǐ duì zhè tiáo lùxiàn kěndìng hěn shúxī, yǒu shénme yào tèbié zhùyì de ma? bǐrú nǎ duàn lù róngyì dǔ chē, huòzhě nǎlǐ yídìng yào jiā mǎn yóu?",
+                        "text_en": "Here's my license and passport. Mr. Jiang, you must know this route well — any particular things to watch out for? Like which stretches get traffic jams, or where I should definitely fill up?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking the rental manager for route intelligence — Mr. Jiang's eyes brighten. He opens a drawer and pulls out a photocopied route map with handwritten annotations. Gas stations circled in red. Scenic overlooks marked in blue. One restaurant underlined three times. This is his masterwork."
+                    },
+                    {
+                        "text_zh": "驾照和护照都在这里。可以办了。",
+                        "text_pinyin": "jiàzhào hé hùzhào dōu zài zhèlǐ. kěyǐ bàn le.",
+                        "text_en": "License and passport here. Let's proceed.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. He processes the paperwork. The route map stays in the drawer — a treasure unasked for."
+                    },
+                    {
+                        "text_zh": "这些够了吗？还需要什么？",
+                        "text_pinyin": "zhèxiē gòu le ma? hái xūyào shénme?",
+                        "text_en": "Is this enough? What else do you need?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He checks the documents. Everything is in order. The paperwork begins its journey from blank form to binding contract."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这条路我太熟了。记住三件事：第一，过了丽江以后去香格里拉的路上，有一个加油站在虎跳峡附近，那是最后一个比较靠谱的加油站，一定要加满。第二，翻山口的时候慢一点，弯道多，有时候对面会来大卡车。第三，到了香格里拉海拔三千多米，有些人会有高原反应，准备一点葡萄糖。好了，合同签一下，钥匙给你。",
+                "text_pinyin": "zhè tiáo lù wǒ tài shú le. jìzhu sān jiàn shì: dì yī, guò le Lìjiāng yǐhòu qù Xiānggélǐlā de lù shàng, yǒu yí gè jiāyóu zhàn zài Hǔ Tiào Xiá fùjìn, nà shì zuìhòu yí gè bǐjiào kàopǔ de jiāyóu zhàn, yídìng yào jiā mǎn. dì èr, fān shānkǒu de shíhòu màn yìdiǎn, wāndào duō, yǒu shíhòu duìmiàn huì lái dà kǎchē. dì sān, dào le Xiānggélǐlā hǎibá sān qiān duō mǐ, yǒuxiē rén huì yǒu gāoyuán fǎnyìng, zhǔnbèi yìdiǎn pútáotáng. hǎo le, hétong qiān yíxià, yàoshi gěi nǐ.",
+                "text_en": "I know this route too well. Remember three things: First, after Lijiang heading to Shangri-La, there's a gas station near Tiger Leaping Gorge — it's the last reliable one, fill up for sure. Second, slow down at the mountain pass — lots of curves, and sometimes trucks come from the opposite direction. Third, Shangri-La is over 3000 meters altitude — some people get altitude sickness, bring some glucose tablets. OK, sign the contract, here are the keys."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Sign the contract and thank him warmly.",
+                "options": [
+                    {
+                        "text_zh": "虎跳峡加油站、山口慢行、葡萄糖。记住了。蒋师傅，你这些经验太宝贵了，比任何导航软件都管用。合同签好了。回来的时候给你带香格里拉的酥油茶！",
+                        "text_pinyin": "Hǔ Tiào Xiá jiāyóu zhàn, shānkǒu màn xíng, pútáotáng. jìzhu le. Jiǎng shīfu, nǐ zhèxiē jīngyàn tài bǎoguì le, bǐ rènhé dǎoháng ruǎnjiàn dōu guǎnyòng. hétong qiān hǎo le. huílái de shíhòu gěi nǐ dài Xiānggélǐlā de sūyóu chá!",
+                        "text_en": "Tiger Leaping Gorge gas station, slow at the pass, glucose tablets. Got it. Mr. Jiang, this experience of yours is more valuable than any GPS. Contract's signed. I'll bring you Shangri-La butter tea when I return!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the three tips, praising local knowledge over technology, promising butter tea — Mr. Jiang hands you the keys with the ceremonial gravity of someone entrusting you with more than a vehicle. The road to Shangri-La is long. The H6 is ready. The glucose tablets are your homework."
+                    },
+                    {
+                        "text_zh": "谢谢蒋师傅，这些提醒很有用。我出发了！",
+                        "text_pinyin": "xièxie Jiǎng shīfu, zhèxiē tíxǐng hěn yǒuyòng. wǒ chūfā le!",
+                        "text_en": "Thanks Mr. Jiang, these tips are really useful. I'm heading out!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gratitude acknowledged, keys in hand. The road begins at the parking lot gate. Turn left for Yunnan."
+                    },
+                    {
+                        "text_zh": "好的，签了。车在哪里？",
+                        "text_pinyin": "hǎo de, qiān le. chē zài nǎlǐ?",
+                        "text_en": "OK, signed. Where's the car?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Parking spot B12. The H6 is silver. Mr. Jiang watches you go and adds a new entry to his route-tip notebook. Another car headed for the mountains. Another story beginning."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Renting a car in China requires a valid Chinese driver's license or an International Driving Permit with Chinese translation. Deposits (押金, yājīn) are standard and typically held via credit card pre-authorization (预授权, yù shòuquán). The Kunming-Dali-Lijiang-Shangri-La route is one of China's most popular self-drive trips. Altitude sickness (高原反应, gāoyuán fǎnyìng) is common above 3000 meters — glucose tablets (葡萄糖) and taking it slow are standard precautions."
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "title": "A Photo of Home",
+    "title_zh": "家的照片",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "Your classmate Xiao Hong shows you a photo on her phone. It's her family's house in the countryside.",
+        "setup_zh": "你的同学小红给你看她手机上的照片。那是她在农村的家。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看，这是我家！后面是山，前面有一条小河。",
+                "text_pinyin": "Nǐ kàn, zhè shì wǒ jiā! Hòumiàn shì shān, qiánmiàn yǒu yī tiáo xiǎo hé.",
+                "text_en": "Look, this is my home! Behind it are mountains, and in front there's a small river."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to the photo of her home.",
+                "options": [
+                    {
+                        "text_zh": "好漂亮！你家在哪里？",
+                        "text_pinyin": "Hǎo piàoliang! Nǐ jiā zài nǎlǐ?",
+                        "text_en": "So beautiful! Where is your home?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Responds to the mountains and river in her photo with genuine excitement -- she'll love sharing more."
+                    },
+                    {
+                        "text_zh": "很好看！你想家吗？",
+                        "text_pinyin": "Hěn hǎokàn! Nǐ xiǎng jiā ma?",
+                        "text_en": "Looks nice! Do you miss home?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Appreciates the photo but jumps to a heavy question -- she's excited to show you, not ready for homesickness talk yet."
+                    },
+                    {
+                        "text_zh": "你的手机拍照很好。",
+                        "text_pinyin": "Nǐ de shǒujī pāi zhào hěn hǎo.",
+                        "text_en": "Your phone takes good photos.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Comments on the phone camera instead of her home -- she's sharing something personal and you're reviewing the hardware."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在云南。我很想家。你想不想去看看？",
+                "text_pinyin": "Zài Yúnnán. Wǒ hěn xiǎng jiā. Nǐ xiǎng bu xiǎng qù kànkan?",
+                "text_en": "In Yunnan. I really miss home. Would you like to visit sometime?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation and her feelings of missing home.",
+                "options": [
+                    {
+                        "text_zh": "我很想去！云南一定很美。你什么时候回家？",
+                        "text_pinyin": "Wǒ hěn xiǎng qù! Yúnnán yīdìng hěn měi. Nǐ shénme shíhou huí jiā?",
+                        "text_en": "I'd love to go! Yunnan must be beautiful. When are you going home?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepts her invitation warmly and asks about her plans to go home -- she said she misses it, and you cared enough to ask."
+                    },
+                    {
+                        "text_zh": "云南很远吧？",
+                        "text_pinyin": "Yúnnán hěn yuǎn ba?",
+                        "text_en": "Yunnan is far, right?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A factual question when she just shared that she misses home -- doesn't respond to her feelings."
+                    },
+                    {
+                        "text_zh": "好啊。那里吃什么？",
+                        "text_pinyin": "Hǎo a. Nàlǐ chī shénme?",
+                        "text_en": "Sure. What do they eat there?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Accepts the invitation but immediately asks about food -- she just said she misses home and you pivoted to cuisine."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Many young Chinese people study or work far from their hometowns. Sharing photos of home is a way of carrying that place with them. The phrase 想家 (miss home) carries a gentle ache that most people understand."
+    }
+}

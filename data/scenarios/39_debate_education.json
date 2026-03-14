@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Share your view on the education system.",
                 "options": [
-                    {"text_zh": "我认为现在的教育观念确实需要改变。制度太注重考试成绩，忽视了学生的全面发展和素质教育。改革应该让孩子有更多自由发展的空间。", "text_pinyin": "wǒ rènwéi xiànzài de jiàoyù guānniàn quèshí xūyào gǎibiàn. zhìdù tài zhùzhòng kǎoshì chéngjì, hūshì le xuéshēng de quánmiàn fāzhǎn hé sùzhì jiàoyù. gǎigé yīnggāi ràng háizi yǒu gèng duō zìyóu fāzhǎn de kōngjiān.", "text_en": "I think current education concepts do need to change. The system focuses too much on exam scores and neglects students' well-rounded development and quality education. Reform should give children more room for free development.", "score": 1.0, "register": "semi-formal", "feedback": "Thorough — uses 观念, 制度, 改革, 全面, and 素质 naturally. Presents a clear argument with reasoning."},
-                    {"text_zh": "压力大是有的，但是竞争这么激烈，不努力就没有好的未来。", "text_pinyin": "yālì dà shì yǒu de, dànshì jìngzhēng zhème jīliè, bù nǔlì jiù méiyǒu hǎo de wèilái.", "text_en": "There is a lot of pressure, but competition is so fierce — without hard work, there's no good future.", "score": 0.6, "register": "semi-formal", "feedback": "A valid counterpoint using 压力 and 竞争. But consider also addressing whether the 制度 itself should change, not just individual effort."},
-                    {"text_zh": "我觉得还好吧，每个国家的教育都有问题。", "text_pinyin": "wǒ juéde hái hǎo ba, měi gè guójiā de jiàoyù dōu yǒu wèntí.", "text_en": "I think it's fine, every country's education has problems.", "score": 0.3, "register": "casual", "feedback": "Dismissive — in a debate, engage with the specific issues of 制度 and 改革 rather than deflecting with generalities."}
+                    {
+                        "text_zh": "放心，我会尊重你的意思。我只是客观地转达你的感受，不会多说也不会少说。不管结果怎样，你做了正确的选择——你愿意给这段友情一个机会，但也有自己的底线。我明天就去找张伟谈，谈完了给你打电话。",
+                        "text_pinyin": "fàngxīn, wǒ huì zūnzhòng nǐ de yìsi. wǒ zhǐshì kèguān de zhuǎndá nǐ de gǎnshòu, bú huì duō shuō yě bú huì shǎo shuō. bùguǎn jiéguǒ zěnyàng, nǐ zuò le zhèngquè de xuǎnzé——nǐ yuànyì gěi zhè duàn yǒuqíng yī gè jīhuì, dàn yě yǒu zìjǐ de dǐxiàn. wǒ míngtiān jiù qù zhǎo zhāng wěi tán, tán wán le gěi nǐ dǎ diànhuà.",
+                        "text_en": "Don't worry, I'll respect your wishes. I'll just objectively relay your feelings -- I won't add or subtract anything. Regardless of the outcome, you made the right choice -- you're willing to give this friendship a chance, but you also have your boundaries. I'll go talk to Zhang Wei tomorrow and call you after.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your view on the education system, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "谢谢您的肯定。客户管理方面，我今年确实花了很多精力去优化沟通流程，很高兴能看到满意度的提升。关于数据分析项目的延期，我承认那是我的责任。主要原因是我低估了数据清洗的工作量，没有及时向您汇报进度问题。这件事让我意识到项目管理和风险评估是我需要加强的能力。",
+                        "text_pinyin": "xièxie nín de kěndìng. kèhù guǎnlǐ fāngmiàn, wǒ jīnnián quèshí huā le hěn duō jīnglì qù yōuhuà gōutōng liúchéng, hěn gāoxìng néng kàn dào mǎnyìdù de tíshēng. guānyú shùjù fēnxī xiàngmù de yánqī, wǒ chéngrèn nà shì wǒ de zérèn. zhǔyào yuányīn shì wǒ dīgū le shùjù qīngxǐ de gōngzuòliàng, méiyǒu jíshí xiàng nín huìbào jìndù wèntí. zhè jiàn shì ràng wǒ yìshí dào xiàngmù guǎnlǐ hé fēngxiǎn pínggū shì wǒ xūyào jiāqiáng de nénglì.",
+                        "text_en": "Thank you for the recognition. In client management, I did put a lot of effort into optimizing communication processes this year, and I'm glad to see the satisfaction improvement. Regarding the data analysis project delay, I acknowledge that was my responsibility. The main reason was that I underestimated the workload for data cleaning and didn't report the progress issues to you in time. This experience made me realize that project management and risk assessment are capabilities I need to strengthen.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to share your view on the education system, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我认为现在的教育观念确实需要改变。制度太注重考试成绩，忽视了学生的全面发展和素质教育。改革应该让孩子有更多自由发展的空间。",
+                        "text_pinyin": "wǒ rènwéi xiànzài de jiàoyù guānniàn quèshí xūyào gǎibiàn. zhìdù tài zhùzhòng kǎoshì chéngjì, hūshì le xuéshēng de quánmiàn fāzhǎn hé sùzhì jiàoyù. gǎigé yīnggāi ràng háizi yǒu gèng duō zìyóu fāzhǎn de kōngjiān.",
+                        "text_en": "I think current education concepts do need to change. The system focuses too much on exam scores and neglects students' well-rounded development and quality education. Reform should give children more room for free development.",
+                        "score": 1.0,
+                        "register": "semi-formal",
+                        "feedback": "Thorough — uses 观念, 制度, 改革, 全面, and 素质 naturally. Presents a clear argument with reasoning."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Explain why education reform is difficult.",
                 "options": [
-                    {"text_zh": "我觉得最大的问题是观念很难改变。家长、学校和社会都习惯了用成绩来衡量学生。要真正实现全面的素质教育，需要整个社会的观念都跟着改变。", "text_pinyin": "wǒ juéde zuì dà de wèntí shì guānniàn hěn nán gǎibiàn. jiāzhǎng, xuéxiào hé shèhuì dōu xíguàn le yòng chéngjì lái héngliáng xuéshēng. yào zhēnzhèng shíxiàn quánmiàn de sùzhì jiàoyù, xūyào zhěnggè shèhuì de guānniàn dōu gēnzhe gǎibiàn.", "text_en": "I think the biggest issue is that mindsets are hard to change. Parents, schools, and society are all used to measuring students by grades. To truly achieve comprehensive quality education, the entire society's values need to change along with it.", "score": 1.0, "register": "semi-formal", "feedback": "Insightful — identifies 观念 as the root obstacle and connects it to 全面 素质教育. Well-structured argument."},
-                    {"text_zh": "改革需要时间，不可能一下子就改好。慢慢来吧。", "text_pinyin": "gǎigé xūyào shíjiān, bù kěnéng yīxiàzi jiù gǎi hǎo. mànmàn lái ba.", "text_en": "Reform takes time, it can't be fixed all at once. Take it slowly.", "score": 0.5, "register": "casual", "feedback": "True but shallow. Try to analyze why specifically — is it 观念, 制度 structure, or something else? Deeper 分析 strengthens your argument."},
-                    {"text_zh": "这个问题太大了，我也说不好。", "text_pinyin": "zhège wèntí tài dà le, wǒ yě shuō bù hǎo.", "text_en": "This question is too big, I can't really say.", "score": 0.2, "register": "casual", "feedback": "Avoids the question entirely. Even a partial answer using 观念, 制度, or 压力 shows engagement with the topic."}
+                    {
+                        "text_zh": "我觉得最大的问题是观念很难改变。家长、学校和社会都习惯了用成绩来衡量学生。要真正实现全面的素质教育，需要整个社会的观念都跟着改变。",
+                        "text_pinyin": "wǒ juéde zuì dà de wèntí shì guānniàn hěn nán gǎibiàn. jiāzhǎng, xuéxiào hé shèhuì dōu xíguàn le yòng chéngjì lái héngliáng xuéshēng. yào zhēnzhèng shíxiàn quánmiàn de sùzhì jiàoyù, xūyào zhěnggè shèhuì de guānniàn dōu gēnzhe gǎibiàn.",
+                        "text_en": "I think the biggest issue is that mindsets are hard to change. Parents, schools, and society are all used to measuring students by grades. To truly achieve comprehensive quality education, the entire society's values need to change along with it.",
+                        "score": 1.0,
+                        "register": "semi-formal",
+                        "feedback": "Insightful — identifies 观念 as the root obstacle and connects it to 全面 素质教育. Well-structured argument."
+                    },
+                    {
+                        "text_zh": "你好，我是市场部的王明。我遇到了两个问题。第一个是从前天开始，公司的内部系统运行速度特别慢，打开一个页面需要等三十秒以上，有时候还会自动掉线。第二个问题更紧急——我昨天在做一份季度报告，保存的时候系统突然崩溃了，重新登录以后发现文件的最新版本丢失了，只剩下上周的旧版本。这份报告后天就要交，所以恢复文件对我来说非常重要。",
+                        "text_pinyin": "nǐ hǎo, wǒ shì shìchǎng bù de wáng míng. wǒ yù dào le liǎng gè wèntí. dì yī gè shì cóng qiántiān kāishǐ, gōngsī de nèibù xìtǒng yùnxíng sùdù tèbié màn, dǎkāi yī gè yèmiàn xūyào děng sānshí miǎo yǐshàng, yǒushíhou hái huì zìdòng diàoxiàn. dì èr gè wèntí gèng jǐnjí——wǒ zuótiān zài zuò yī fèn jìdù bàogào, bǎocún de shíhou xìtǒng tūrán bēngkuì le, chóngxīn dēnglù yǐhòu fāxiàn wénjiàn de zuìxīn bǎnběn diūshī le, zhǐ shèngxia shàng zhōu de jiù bǎnběn. zhè fèn bàogào hòutiān jiù yào jiāo, suǒyǐ huīfù wénjiàn duì wǒ lái shuō fēicháng zhòngyào.",
+                        "text_en": "Hello, I'm Wang Ming from the marketing department. I have two issues. First, starting two days ago, the internal system has been running extremely slowly -- opening a page takes over 30 seconds, and sometimes it disconnects automatically. The second problem is more urgent -- yesterday while working on a quarterly report, the system suddenly crashed while saving, and after logging back in, the latest version of the file was lost. Only last week's old version remains. This report is due the day after tomorrow, so recovering the file is very important to me.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain why education reform is difficult, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "非常感谢李总的信任和支持。我一定会认真准备，提前做好项目计划和分工方案。如果过程中遇到困难，我会及时向您请教。我不会让您失望的。",
+                        "text_pinyin": "fēicháng gǎnxiè lǐ zǒng de xìnrèn hé zhīchí. wǒ yīdìng huì rènzhēn zhǔnbèi, tíqián zuò hǎo xiàngmù jìhuà hé fēngōng fāng'àn. rúguǒ guòchéng zhōng yù dào kùnnán, wǒ huì jíshí xiàng nín qǐngjiào. wǒ bú huì ràng nín shīwàng de.",
+                        "text_en": "Thank you very much for your trust and support, Manager Li. I'll prepare carefully and put together the project plan and task assignments in advance. If I encounter difficulties along the way, I'll consult you promptly. I won't let you down.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain why education reform is difficult, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

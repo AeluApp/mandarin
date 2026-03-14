@@ -1,11 +1,8 @@
 """Curriculum queries — grammar, skills, HSK progression."""
 
-import logging
 import sqlite3
 from pathlib import Path
 from typing import List, Optional
-
-logger = logging.getLogger(__name__)
 
 
 def get_grammar_points(conn: sqlite3.Connection, hsk_max: int = 9) -> List[dict]:

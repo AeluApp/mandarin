@@ -1,6 +1,6 @@
 {
-  "productName": "Mandarin",
-  "identifier": "com.mandarin.desktop",
+  "productName": "Aelu",
+  "identifier": "com.aelu.desktop",
   "version": "1.0.0",
   "build": {
     "frontendDist": "../src"
@@ -9,7 +9,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "漫 Mandarin",
+        "title": "漫 Aelu",
         "width": 900,
         "height": 700,
         "minWidth": 400,
@@ -29,7 +29,11 @@
       "icons/icon.png"
     ],
     "macOS": {
-      "minimumSystemVersion": "12.0"
+      "minimumSystemVersion": "12.0",
+      "entitlements": "./Entitlements.plist",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Aelu uses your microphone for speaking practice and tone grading."
+      }
     },
     "externalBin": [
       "binaries/mandarin-server"

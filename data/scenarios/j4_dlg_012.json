@@ -1,0 +1,83 @@
+{
+    "title": "The Record Store",
+    "title_zh": "唱片店",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You wander into a small record store in an old neighborhood. The owner, Lao Ma, is playing a vinyl record. The warm crackle fills the quiet shop.",
+        "setup_zh": "你走进了一个老街区里的小唱片店。老板老马正在放一张黑胶唱片。温暖的沙沙声充满了安静的小店。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你听，这种沙沙的声音，数字音乐里没有。很多人觉得这是噪音，但我觉得这就是音乐的呼吸。就像老房子会发出声音一样，有生命的东西都会。",
+                "text_pinyin": "Nǐ tīng, zhè zhǒng shāsha de shēngyīn, shùzì yīnyuè lǐ méiyǒu. Hěn duō rén juéde zhè shì zàoyīn, dàn wǒ juéde zhè jiù shì yīnyuè de hūxī. Jiù xiàng lǎo fángzi huì fāchū shēngyīn yīyàng, yǒu shēngmìng de dōngxi dōu huì.",
+                "text_en": "Listen — that crackling sound, you won't find it in digital music. Many people think it's noise, but I think it's music breathing. Just like old houses make sounds — anything alive does."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his observation about vinyl.",
+                "options": [
+                    {
+                        "text_zh": "音乐的呼吸——我喜欢这个说法。数字音乐太干净了，干净到感觉不到它是真实的。这种沙沙声反而让人觉得温暖，好像音乐就在你旁边。",
+                        "text_pinyin": "Yīnyuè de hūxī — wǒ xǐhuān zhège shuōfǎ. Shùzì yīnyuè tài gānjìng le, gānjìng dào gǎnjué bú dào tā shì zhēnshí de. Zhè zhǒng shāsha shēng fǎn'ér ràng rén juéde wēnnuǎn, hǎoxiàng yīnyuè jiù zài nǐ pángbiān.",
+                        "text_en": "Music breathing — I love that way of putting it. Digital music is too clean, so clean it doesn't feel real. This crackling actually feels warm, as if the music is right beside you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engages with the sensory idea — imperfection as warmth and presence."
+                    },
+                    {
+                        "text_zh": "其实现在的数字音乐音质已经很好了，比唱片清楚多了，而且也方便。这种沙沙声应该算是一种缺点吧。",
+                        "text_pinyin": "Qíshí xiànzài de shùzì yīnyuè yīnzhì yǐjīng hěn hǎo le, bǐ chàngpiàn qīngchǔ duō le, érqiě yě fāngbiàn. Zhè zhǒng shāsha shēng yīnggāi suàn shì yī zhǒng quēdiǎn ba.",
+                        "text_en": "Actually, digital music has great sound quality now — much clearer than vinyl, and more convenient. That crackling sound is really a defect, isn't it?",
+                        "score": 0.0,
+                        "feedback": "Lao Ma smiles patiently: 'A defect? Then wrinkles on a face are defects too. But they tell you someone has lived.'"
+                    },
+                    {
+                        "text_zh": "现在谁还买唱片啊？都用手机听了。",
+                        "text_pinyin": "Xiànzài shéi hái mǎi chàngpiàn a? Dōu yòng shǒujī tīng le.",
+                        "text_en": "Who still buys records? Everyone listens on their phone.",
+                        "score": 0.0,
+                        "feedback": "Dismissive of his passion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对。而且你知道吗，听唱片有一个好处——你不能跳过。从第一首到最后一首，你必须完整地听。现在的人听音乐，不喜欢就下一首。但有些歌，你要听几遍才能真正听懂。",
+                "text_pinyin": "Duì. Érqiě nǐ zhīdào ma, tīng chàngpiàn yǒu yīge hǎochù — nǐ bù néng tiào guò. Cóng dì yī shǒu dào zuìhòu yī shǒu, nǐ bìxū wánzhěng de tīng. Xiànzài de rén tīng yīnyuè, bù xǐhuān jiù xià yī shǒu. Dàn yǒuxiē gē, nǐ yào tīng jǐ biàn cái néng zhēnzhèng tīng dǒng.",
+                "text_en": "Exactly. And you know, listening to records has one advantage — you can't skip. From first track to last, you have to listen all the way through. People now, if they don't like a song, they skip. But some songs, you need to hear them several times before you truly understand."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about patience in listening.",
+                "options": [
+                    {
+                        "text_zh": "对，我们太习惯跳过不喜欢的东西了。但最好的东西不是一开始就喜欢的，是慢慢理解以后才发现它的好。音乐是这样，人也是。",
+                        "text_pinyin": "Duì, wǒmen tài xíguàn tiào guò bù xǐhuan de dōngxi le. Dàn zuì hǎo de dōngxi bú shì yī kāishǐ jiù xǐhuan de, shì mànman lǐjiě yǐhòu cái fāxiàn tā de hǎo. Yīnyuè shì zhèyàng, rén yě shì.",
+                        "text_en": "Right, we're too used to skipping what we don't like. But the best things aren't what you like at first — they reveal themselves after you slowly understand them. Music is like that, people too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the music insight to human relationships — patience as a virtue."
+                    },
+                    {
+                        "text_zh": "你这里有流行音乐的唱片吗？",
+                        "text_pinyin": "Nǐ zhèlǐ yǒu liúxíng yīnyuè de chàngpiàn ma?",
+                        "text_en": "Do you have pop music records here?",
+                        "score": 0.0,
+                        "feedback": "Genre request during a discussion about listening deeply."
+                    },
+                    {
+                        "text_zh": "你觉得哪个牌子的耳机最好？",
+                        "text_pinyin": "Nǐ juéde nǎge páizi de ěrjī zuì hǎo?",
+                        "text_en": "What brand of headphones do you think is best?",
+                        "score": 0.0,
+                        "feedback": "Equipment question that misses the point about patience and attention."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Vinyl record shops have experienced a quiet resurgence in Chinese cities, often run by music enthusiasts rather than businesspeople. The Chinese concept of 慢生活 (slow living) aligns with the vinyl listening experience — deliberate, unhurried, requiring full attention. These shops serve as cultural refuges for people seeking an alternative to the speed of digital consumption."
+    }
+}

@@ -1,0 +1,196 @@
+{
+    "title": "The Exchange Rate Oracle",
+    "title_zh": "汇率先知",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_bank_5_03_v0",
+    "tree": {
+        "setup": "The foreign exchange window at a branch near the university district, where the afternoon light falls on a board of currency rates that changes so frequently the numbers seem to shimmer. Mr. Cao has worked this window for twenty-two years and can quote the USD/CNY rate to four decimal places from memory. He keeps a small world map behind his desk with pins marking every country whose currency he has handled — there are forty-seven pins.",
+        "setup_zh": "大学城附近支行的外币兑换窗口，午后的光线落在一块汇率牌上，上面的数字变化得如此频繁，仿佛在闪烁。曹先生在这个窗口工作了二十二年，能凭记忆报出美元兑人民币汇率到小数点后四位。他桌子后面挂着一张小型世界地图，上面用大头针标记着他经手过的每个国家的货币——一共四十七颗针。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，需要办理外币业务吗？",
+                "text_pinyin": "nín hǎo, xūyào bànlǐ wàibì yèwù ma?",
+                "text_en": "Hello, do you need foreign currency services?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about exchanging dollars to yuan.",
+                "options": [
+                    {
+                        "text_zh": "您好，我想把美元换成人民币。今天的汇率是多少？我有一千美元现金。",
+                        "text_pinyin": "nín hǎo, wǒ xiǎng bǎ Měiyuán huàn chéng Rénmínbì. jīntiān de huìlǜ shì duōshǎo? wǒ yǒu yì qiān Měiyuán xiànjīn.",
+                        "text_en": "Hello, I'd like to exchange US dollars for RMB. What's today's rate? I have one thousand dollars in cash.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear request with the amount stated upfront. Mr. Cao glances at the board but doesn't need to — he already knows: 7.2341."
+                    },
+                    {
+                        "text_zh": "我想换钱，美元换人民币。",
+                        "text_pinyin": "wǒ xiǎng huàn qián, Měiyuán huàn Rénmínbì.",
+                        "text_en": "I want to exchange money — dollars to RMB.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll ask how much. The rate is the same either way."
+                    },
+                    {
+                        "text_zh": "汇率好不好？我想换点钱。",
+                        "text_pinyin": "huìlǜ hǎo bù hǎo? wǒ xiǎng huàn diǎn qián.",
+                        "text_en": "Is the rate good? I want to exchange some money.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Cao pauses. In twenty-two years, no one has asked him if the rate is「好」— it simply is what the market says it is."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "今天美元兑人民币的现钞买入价是7.2341。一千美元大概能换七千二百三十四块一毛。不过这个汇率每天都会变。您需要现在就换吗？",
+                "text_pinyin": "jīntiān Měiyuán duì Rénmínbì de xiànchāo mǎirù jià shì qī diǎn èr sān sì yāo. yì qiān Měiyuán dàgài néng huàn qī qiān èrbǎi sānshísì kuài yì máo. búguò zhège huìlǜ měi tiān dōu huì biàn. nín xūyào xiànzài jiù huàn ma?",
+                "text_en": "Today's cash buying rate for USD to RMB is 7.2341. A thousand dollars is roughly 7,234.10 yuan. The rate changes daily though. Do you want to exchange now?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to exchange now or wait.",
+                "options": [
+                    {
+                        "text_zh": "这个汇率比上周好一点。好的，我现在就换吧。需要出示什么证件吗？",
+                        "text_pinyin": "zhège huìlǜ bǐ shàng zhōu hǎo yìdiǎn. hǎo de, wǒ xiànzài jiù huàn ba. xūyào chūshì shénme zhèngjiàn ma?",
+                        "text_en": "This rate is a bit better than last week. OK, I'll exchange now. What ID do I need to show?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Knowing last week's rate — Mr. Cao's eyebrows rise a millimeter. He respects someone who tracks the numbers."
+                    },
+                    {
+                        "text_zh": "好，就换吧。",
+                        "text_pinyin": "hǎo, jiù huàn ba.",
+                        "text_en": "OK, let's do it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Decisive. Mr. Cao reaches for the forms."
+                    },
+                    {
+                        "text_zh": "明天汇率会不会更好？",
+                        "text_pinyin": "míngtiān huìlǜ huì bú huì gèng hǎo?",
+                        "text_en": "Will the rate be better tomorrow?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Cao looks at you with the gentle pity of a man who has watched people try to time the market for two decades.「如果我知道明天的汇率，我就不在这里上班了。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "需要您的护照。另外提醒您一下，每人每年的换汇额度是五万美元。一千美元完全没问题。请把美元和护照一起给我。",
+                "text_pinyin": "xūyào nín de hùzhào. lìngwài tíxǐng nín yíxià, měi rén měi nián de huànhuì édù shì wǔ wàn Měiyuán. yì qiān Měiyuán wánquán méi wèntí. qǐng bǎ Měiyuán hé hùzhào yìqǐ gěi wǒ.",
+                "text_en": "I'll need your passport. Also, a reminder: the annual exchange limit per person is $50,000 USD. One thousand is no problem. Please hand me the dollars and passport together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your documents and ask about the limit.",
+                "options": [
+                    {
+                        "text_zh": "给您。五万美元的限额是每年重新算的对吗？从一月一号开始？",
+                        "text_pinyin": "gěi nín. wǔ wàn Měiyuán de xiàn'é shì měi nián chóngxīn suàn de duì ma? cóng yī yuè yī hào kāishǐ?",
+                        "text_en": "Here you go. The fifty thousand limit resets annually, right? Starting January first?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A follow-up question that shows financial literacy. Mr. Cao confirms — and adds a pin to his mental map of prepared customers."
+                    },
+                    {
+                        "text_zh": "好的，都在这里了。",
+                        "text_pinyin": "hǎo de, dōu zài zhèlǐ le.",
+                        "text_en": "OK, here's everything.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean handoff. He counts the bills with the speed of a card dealer."
+                    },
+                    {
+                        "text_zh": "五万够用了，我用不了那么多。",
+                        "text_pinyin": "wǔ wàn gòu yòng le, wǒ yòng bù liǎo nàme duō.",
+                        "text_en": "Fifty thousand is more than enough — I won't need that much.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Cao nods politely. He has met people who said the same thing in January and returned in October asking about the remaining balance."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，每年一月一号重置。好，我清点一下……一千美元整，没问题。按今天的汇率，您能拿到七千二百三十四块一毛。请确认金额然后签字。",
+                "text_pinyin": "duì, měi nián yī yuè yī hào chóngzhì. hǎo, wǒ qīngdiǎn yíxià……yì qiān Měiyuán zhěng, méi wèntí. àn jīntiān de huìlǜ, nín néng ná dào qī qiān èrbǎi sānshísì kuài yì máo. qǐng quèrèn jīn'é ránhòu qiānzì.",
+                "text_en": "Correct, resets every January first. OK, let me count... one thousand USD even, no problem. At today's rate, you'll receive 7,234.10 yuan. Please confirm the amount and sign."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and sign.",
+                "options": [
+                    {
+                        "text_zh": "金额没问题，签好了。请问人民币是直接存到我的账户还是给我现金？",
+                        "text_pinyin": "jīn'é méi wèntí, qiān hǎo le. qǐngwèn Rénmínbì shì zhíjiē cún dào wǒ de zhànghù háishi gěi wǒ xiànjīn?",
+                        "text_en": "Amount is correct, signed. Will the RMB go directly into my account or will you give me cash?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical question about the delivery method. Mr. Cao offers both options — your choice."
+                    },
+                    {
+                        "text_zh": "好的，签好了。",
+                        "text_pinyin": "hǎo de, qiān hǎo le.",
+                        "text_en": "OK, signed.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He processes the paperwork with the calm of someone who has signed a thousand receipts."
+                    },
+                    {
+                        "text_zh": "七千二……挺好的。签了。",
+                        "text_pinyin": "qī qiān èr……tǐng hǎo de. qiān le.",
+                        "text_en": "Seven thousand two... not bad. Signed.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Cao does not editorialize on whether rates are「好」or「不好」. The market is the market."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "都可以。如果您带了这家银行的卡，可以直接转入账户。您有我们银行的账户吗？",
+                "text_pinyin": "dōu kěyǐ. rúguǒ nín dài le zhè jiā yínháng de kǎ, kěyǐ zhíjiē zhuǎn rù zhànghù. nín yǒu wǒmen yínháng de zhànghù ma?",
+                "text_en": "Either way works. If you have a card with our bank, I can transfer it directly to your account. Do you have an account with us?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose how to receive the money.",
+                "options": [
+                    {
+                        "text_zh": "有，请直接转到我的账户吧，比较方便。这是我的银行卡。对了，曹先生，如果以后我需要把人民币换回美元，流程是一样的吗？",
+                        "text_pinyin": "yǒu, qǐng zhíjiē zhuǎn dào wǒ de zhànghù ba, bǐjiào fāngbiàn. zhè shì wǒ de yínháng kǎ. duì le, Cáo xiānsheng, rúguǒ yǐhòu wǒ xūyào bǎ Rénmínbì huàn huí Měiyuán, liúchéng shì yíyàng de ma?",
+                        "text_en": "Yes, please transfer it to my account — more convenient. Here's my card. By the way, Mr. Cao, if I need to convert RMB back to dollars later, is the process the same?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Planning for the round trip — Mr. Cao explains the selling rate differs from the buying rate, and the annual limit applies to both directions. He adds a forty-eighth mental pin."
+                    },
+                    {
+                        "text_zh": "转到账户吧，给你卡。",
+                        "text_pinyin": "zhuǎn dào zhànghù ba, gěi nǐ kǎ.",
+                        "text_en": "Transfer to my account — here's my card.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick and clean. The money appears in your account before you finish putting your wallet away."
+                    },
+                    {
+                        "text_zh": "还是拿现金吧，不太信任电子的。",
+                        "text_pinyin": "háishi ná xiànjīn ba, bú tài xìnrèn diànzǐ de.",
+                        "text_en": "I'll take cash — I don't really trust digital.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Cao, a man who has watched digital banking transform the industry over twenty-two years, simply counts out the bills."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's annual foreign exchange limit (年度换汇额度) is $50,000 USD equivalent per person per year. Banks distinguish between the 现钞买入价 (cash buying rate, for physical bills) and 现汇买入价 (transfer buying rate, for electronic transfers) — the cash rate is slightly less favorable. Always bring your passport for foreign exchange transactions."
+    }
+}

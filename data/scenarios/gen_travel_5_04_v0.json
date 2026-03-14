@@ -1,0 +1,160 @@
+{
+    "title": "The Rental Car Whisperer",
+    "title_zh": "租车低语者",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_5_04_v0",
+    "tree": {
+        "setup": "A small car rental office near the train station, its walls covered in laminated maps with routes highlighted in three colors — scenic (green), efficient (blue), and \"don't unless you enjoy adventure\" (red). Behind the counter sits Lao Fan, a man who has rented out the same fleet of twenty cars for fifteen years and knows each vehicle by personality. Car number seven pulls slightly to the left. Car twelve's air conditioning only works on the highway. He matches drivers to cars the way a sommelier matches wine to food.",
+        "setup_zh": "火车站附近的一家小型租车行，墙上贴满了过塑的地图，路线用三种颜色标注——风景路线（绿色）、高效路线（蓝色）和「除非你喜欢冒险否则别走」路线（红色）。柜台后面坐着老范，一个把同一批二十辆车租了十五年的人，他了解每辆车的性格。七号车方向盘微微偏左。十二号车的空调只在上高速的时候才好使。他给司机配车的方式就像侍酒师给菜配酒。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎！来租车的？要去哪里？",
+                "text_pinyin": "huānyíng! lái zū chē de? yào qù nǎlǐ?",
+                "text_en": "Welcome! Here to rent a car? Where are you heading?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your trip and ask about available cars.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想租一辆车去大理，大概三天。我不太熟悉这边的路况，所以想要一辆好开的车。有什么推荐吗？",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng zū yí liàng chē qù Dàlǐ, dàgài sān tiān. wǒ bú tài shúxī zhè biān de lùkuàng, suǒyǐ xiǎng yào yí liàng hǎo kāi de chē. yǒu shénme tuījiàn ma?",
+                        "text_en": "Hello, I'd like to rent a car to go to Dali, about three days. I'm not very familiar with roads here, so I want something easy to drive. Any recommendations?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Destination, duration, and honest self-assessment — Lao Fan's eyes narrow with the pleasure of a sommelier hearing「I don't know wine, but I like something smooth.」"
+                    },
+                    {
+                        "text_zh": "我想租车，三天。有什么车？",
+                        "text_pinyin": "wǒ xiǎng zū chē, sān tiān. yǒu shénme chē?",
+                        "text_en": "I want to rent a car for three days. What do you have?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll need to know where you're going. The destination determines the car."
+                    },
+                    {
+                        "text_zh": "最便宜的车多少钱？",
+                        "text_pinyin": "zuì piányi de chē duōshǎo qián?",
+                        "text_en": "How much is the cheapest car?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Fan winces slightly. The cheapest car is number seven, and number seven has opinions about mountain roads."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "去大理啊，山路不少。我推荐十四号车，是一辆SUV，动力好，空间大，跑山路稳当。一天两百八，三天的话给你打个折，七百五。",
+                "text_pinyin": "qù Dàlǐ a, shān lù bùshǎo. wǒ tuījiàn shísì hào chē, shì yí liàng SUV, dònglì hǎo, kōngjiān dà, pǎo shān lù wěndang. yì tiān liǎngbǎi bā, sān tiān de huà gěi nǐ dǎ gè zhé, qībǎi wǔ.",
+                "text_en": "To Dali — lots of mountain roads. I recommend car number 14, an SUV. Good power, spacious, stable on mountain roads. 280 per day, 750 for three days with a discount."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about insurance and deposit.",
+                "options": [
+                    {
+                        "text_zh": "听起来不错。请问保险怎么算？需要交多少押金？",
+                        "text_pinyin": "tīng qǐlái búcuò. qǐngwèn bǎoxiǎn zěnme suàn? xūyào jiāo duōshǎo yājīn?",
+                        "text_en": "Sounds good. How does insurance work? How much is the deposit?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The questions of a responsible renter. Lao Fan pulls out a clear, one-page contract — he believes contracts should be shorter than the drive."
+                    },
+                    {
+                        "text_zh": "好，就这辆吧。需要什么手续？",
+                        "text_pinyin": "hǎo, jiù zhè liàng ba. xūyào shénme shǒuxù?",
+                        "text_en": "OK, I'll take that one. What paperwork is needed?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He starts the process. Insurance details will come with the contract."
+                    },
+                    {
+                        "text_zh": "太贵了，有没有便宜一点的？",
+                        "text_pinyin": "tài guì le, yǒu méiyǒu piányi yìdiǎn de?",
+                        "text_en": "Too expensive — anything cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He has cheaper options, but he wouldn't send them to Dali.「山路上省钱不如省心，」he says. On mountain roads, peace of mind beats a bargain."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "基本保险包含在租金里了。如果要全险的话，每天加五十块。押金三千，还车的时候退给你。需要您的驾照和护照，还有信用卡。",
+                "text_pinyin": "jīběn bǎoxiǎn bāohán zài zūjīn lǐ le. rúguǒ yào quán xiǎn de huà, měi tiān jiā wǔshí kuài. yājīn sānqiān, huán chē de shíhòu tuì gěi nǐ. xūyào nín de jiàzhào hé hùzhào, hái yǒu xìnyòngkǎ.",
+                "text_en": "Basic insurance is included. Full coverage is 50 more per day. Deposit is 3,000, refunded when you return the car. I'll need your license, passport, and credit card."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on insurance and ask about returning the car.",
+                "options": [
+                    {
+                        "text_zh": "那就买全险吧，山路上安全第一。还车的时候要加满油吗？可以在大理还车吗？",
+                        "text_pinyin": "nà jiù mǎi quán xiǎn ba, shān lù shàng ānquán dì yī. huán chē de shíhòu yào jiā mǎn yóu ma? kěyǐ zài Dàlǐ huán chē ma?",
+                        "text_en": "I'll go with full coverage — safety first on mountain roads. Do I need to return it with a full tank? Can I return it in Dali?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Full coverage and practical return questions — Lao Fan marks you as a category-A renter in his mental ledger."
+                    },
+                    {
+                        "text_zh": "好的，全险。什么时候还车？",
+                        "text_pinyin": "hǎo de, quán xiǎn. shénme shíhòu huán chē?",
+                        "text_en": "OK, full coverage. When do I return it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He notes the return date. Three days from now, same office."
+                    },
+                    {
+                        "text_zh": "不用全险了，基本的就行。",
+                        "text_pinyin": "búyòng quán xiǎn le, jīběn de jiù xíng.",
+                        "text_en": "No need for full coverage, basic is fine.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Fan respects the choice but adds:「山路上小心点。」Be careful on mountain roads. Car fourteen will take care of you either way."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "异地还车可以，但是要加两百块的手续费。加满油还车，不然要按我们的油价算，比加油站贵一点。对了，去大理走高速快，但是走老路风景好。你看墙上的地图，绿色的线就是风景路线。",
+                "text_pinyin": "yìdì huán chē kěyǐ, dànshì yào jiā liǎngbǎi kuài de shǒuxù fèi. jiā mǎn yóu huán chē, bùrán yào àn wǒmen de yóu jià suàn, bǐ jiāyóu zhàn guì yìdiǎn. duì le, qù Dàlǐ zǒu gāosù kuài, dànshì zǒu lǎo lù fēngjǐng hǎo. nǐ kàn qiáng shàng de dìtú, lǜsè de xiàn jiùshì fēngjǐng lùxiàn.",
+                "text_en": "Returning in Dali is possible — 200 yuan surcharge. Return with a full tank, otherwise we charge our rate, which is pricier. Oh, the highway to Dali is faster, but the old road has better scenery. See the map — the green line is the scenic route."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Finalize the rental and thank him.",
+                "options": [
+                    {
+                        "text_zh": "好的，我还是回这里还车吧，省两百块。风景路线我一定要试试。谢谢老范，你比导航APP靠谱多了！",
+                        "text_pinyin": "hǎo de, wǒ háishì huí zhèlǐ huán chē ba, shěng liǎngbǎi kuài. fēngjǐng lùxiàn wǒ yídìng yào shìshi. xièxie Lǎo Fàn, nǐ bǐ dǎoháng APP kàopǔ duō le!",
+                        "text_en": "OK, I'll return it here to save the 200. I'll definitely try the scenic route. Thanks Lao Fan — you're more reliable than any GPS app!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Saving money wisely and complimenting his route knowledge — Lao Fan beams. He's been more reliable than GPS since before GPS existed."
+                    },
+                    {
+                        "text_zh": "好的，我回来还车。谢谢！",
+                        "text_pinyin": "hǎo de, wǒ huílái huán chē. xièxie!",
+                        "text_en": "OK, I'll bring it back. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hands you the keys. Car fourteen is parked outside, waiting to meet its new driver."
+                    },
+                    {
+                        "text_zh": "知道了。车钥匙给我吧。",
+                        "text_pinyin": "zhīdào le. chē yàoshi gěi wǒ ba.",
+                        "text_en": "Got it. Keys please.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Efficient. He hands them over with a last piece of advice:「十四号喜欢高转速，别怕给油。」Number fourteen likes high RPMs — don't be shy on the gas."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Renting a car in China requires a valid Chinese driver's license or an international driving permit (国际驾照). Deposits (押金, yājīn) are standard and usually charged to a credit card. Many rental companies offer one-way (异地还车) options for a surcharge. Mountain roads in Yunnan are scenic but demanding."
+    }
+}

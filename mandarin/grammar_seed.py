@@ -1,9 +1,17 @@
-"""Seed grammar points and language skills for HSK 1-6."""
+"""Seed grammar points and language skills for HSK 1-9."""
 
 import json
-import logging
 
-logger = logging.getLogger(__name__)
+from .grammar_extra_hsk1_3 import EXTRA_GRAMMAR_HSK1_3
+from .grammar_extra_hsk4_6 import EXTRA_GRAMMAR_HSK4_6
+from .grammar_extra_hsk7_9 import EXTRA_GRAMMAR_HSK7_9
+from .grammar_extra_hsk1_2_r2 import EXTRA_GRAMMAR_HSK1_2_R2
+from .grammar_extra_hsk3_4_r2 import EXTRA_GRAMMAR_HSK3_4_R2
+from .grammar_extra_hsk5_6_r2 import EXTRA_GRAMMAR_HSK5_6_R2
+from .grammar_extra_hsk7_9_r2 import EXTRA_GRAMMAR_HSK7_9_R2
+from .grammar_extra_hsk1_3_r3 import EXTRA_GRAMMAR_HSK1_3_R3
+from .grammar_extra_hsk4_5_r3 import EXTRA_GRAMMAR_HSK4_5_R3
+from .grammar_extra_hsk6_9_r3 import EXTRA_GRAMMAR_HSK6_9_R3
 
 
 GRAMMAR_POINTS = [
@@ -481,6 +489,18 @@ GRAMMAR_POINTS = [
          {"zh": "姑且相信他说的话吧。", "pinyin": "Gūqiě xiāngxìn tā shuō de huà ba.", "en": "Let's take his word for it for now."},
      ]},
 ]
+
+# Extend with comprehensive HSK 1-9 grammar coverage
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK1_3)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK4_6)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK7_9)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK1_2_R2)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK3_4_R2)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK5_6_R2)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK7_9_R2)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK1_3_R3)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK4_5_R3)
+GRAMMAR_POINTS.extend(EXTRA_GRAMMAR_HSK6_9_R3)
 
 
 SKILLS = [

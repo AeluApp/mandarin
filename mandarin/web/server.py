@@ -1,15 +1,18 @@
 """Standalone Flask server for desktop app sidecar."""
-import os
+import logging
 import sys
 from . import create_app
-from ..settings import IS_PRODUCTION
+from ..settings import IS_PRODUCTION, PORT, DEFAULT_PORT
+
+logger = logging.getLogger(__name__)
 
 
 def main():
     try:
-        port = int(os.environ.get("PORT", 0)) or (int(sys.argv[1]) if len(sys.argv) > 1 else 5173)
+        port = PORT or (int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PORT)
     except ValueError:
-        print(f"Invalid port: {sys.argv[1]}")
+        logger.error("Invalid port: %s", sys.argv[1])
+        print(f"Invalid port: {sys.argv[1]}", file=sys.stderr)
         sys.exit(1)
     host = "0.0.0.0" if IS_PRODUCTION else "127.0.0.1"
     app = create_app()

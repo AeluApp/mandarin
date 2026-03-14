@@ -1,0 +1,151 @@
+{
+    "title": "The Clockmaker Who Stopped Counting",
+    "title_zh": "不再数时间的钟表匠",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "In a narrow lane off a quiet Shanghai street, you find a tiny watch repair shop that seems out of time. The clockmaker, Master Zhong, is in his seventies. Dozens of old clocks line the walls, ticking at different speeds. He's examining a pocket watch with a magnifying loupe. Strangely, the clock above his workbench has no hands.",
+        "setup_zh": "在上海一条安静街道旁的窄巷里，你找到了一家仿佛脱离了时间的小型钟表修理店。钟表匠钟师傅七十多岁了。数十只老钟排列在墙上，以不同的速度滴答作响。他正用放大镜检查一只怀表。奇怪的是，他工作台上方的钟没有指针。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你注意到那个没有指针的钟了？那是我故意的。修了一辈子钟表，退休以后第一件事就是把自己的钟卸了指针。别人觉得奇怪，但我觉得这是我送给自己的自由——不再被时间追着跑。钟还在走，你听得到机芯的声音，但你不需要知道几点了。",
+                "text_pinyin": "Nǐ zhùyì dào nàge méiyǒu zhǐzhēn de zhōng le? Nà shì wǒ gùyì de. Xiū le yī bèizi zhōngbiǎo, tuìxiū yǐhòu dì yī jiàn shì jiù shì bǎ zìjǐ de zhōng xiè le zhǐzhēn. Biérén juéde qíguài, dàn wǒ juéde zhè shì wǒ sòng gěi zìjǐ de zìyóu — bú zài bèi shíjiān zhuī zhe pǎo. Zhōng hái zài zǒu, nǐ tīng de dào jīxīn de shēngyīn, dàn nǐ bù xūyào zhīdào jǐ diǎn le.",
+                "text_en": "You noticed the clock with no hands? That was deliberate. After a lifetime of repairing clocks, the first thing I did when I retired was remove the hands from my own clock. Others find it strange, but I think it's a gift of freedom I gave myself — no longer chased by time. The clock still runs — you can hear the movement — but you don't need to know what time it is."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to him?",
+                "options": [
+                    {
+                        "text_zh": "您没有让钟停下来——那是否定时间。您只是卸掉了指针——那是从时间的计量中退出。这两者不一样。",
+                        "text_pinyin": "Nín méiyǒu ràng zhōng tíng xiàlái — nà shì fǒudìng shíjiān. Nín zhǐ shì xiè diào le zhǐzhēn — nà shì cóng shíjiān de jìliàng zhōng tuìchū. Zhè liǎng zhě bù yīyàng.",
+                        "text_en": "You didn't stop the clock — that would be denying time. You just removed the hands — that's withdrawing from time's measurement. Those two things are different.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "钟师傅放下放大镜，对你看了一会儿：「你说出了我自己都没说清楚的事。」"
+                    },
+                    {
+                        "text_zh": "没有指针怎么知道什么时候吃饭？",
+                        "text_pinyin": "Méiyǒu zhǐzhēn zěnme zhīdào shénme shíhòu chīfàn?",
+                        "text_en": "Without hands, how do you know when to eat?",
+                        "score": 0.0,
+                        "feedback": "钟师傅轻声笑了：「饿了就吃。」他低头继续看怀表。"
+                    },
+                    {
+                        "text_zh": "这些老钟放在这里，是等着有人来修的吗？",
+                        "text_pinyin": "Zhèxiē lǎo zhōng fàng zài zhèlǐ, shì děng zhe yǒu rén lái xiū de ma?",
+                        "text_en": "Are all these old clocks here waiting for someone to bring them in for repair?",
+                        "score": 0.0,
+                        "feedback": "钟师傅扫了一眼墙上的钟：「有些是。有些是我自己的。」他没有展开。"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "和解——对，就是和解。我年轻的时候恨时间，觉得它不够用。中年的时候怕时间，觉得它过得太快。现在老了，反而不急了。不是因为时间变慢了，而是因为我不再跟它赛跑了。你知道吗，所有的钟表其实都在说同一句话：「来不及了」。但我的这个没有指针的钟在说：「不急」。",
+                "text_pinyin": "Héjiě — duì, jiù shì héjiě. Wǒ niánqīng de shíhòu hèn shíjiān, juéde tā búgòu yòng. Zhōngnián de shíhòu pà shíjiān, juéde tā guò de tài kuài. Xiànzài lǎo le, fǎn'ér bú jí le. Bú shì yīnwèi shíjiān biàn màn le, ér shì yīnwèi wǒ bú zài gēn tā sàipǎo le. Nǐ zhīdào ma, suǒyǒu de zhōngbiǎo qíshí dōu zài shuō tóng yī jù huà: 'láibují le'. Dàn wǒ de zhège méiyǒu zhǐzhēn de zhōng zài shuō: 'bú jí'.",
+                "text_en": "Making peace — yes, exactly. When I was young I resented time, felt there wasn't enough. In middle age I feared time, felt it passed too fast. Now that I'm old, I'm not in a hurry anymore. Not because time slowed down, but because I stopped racing it. You know, all clocks are actually saying the same thing: 'Too late.' But my handless clock says: 'No rush.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to him?",
+                "options": [
+                    {
+                        "text_zh": "我们看时间不是为了知道现在几点，而是为了算还剩多少。所有的计时器其实都是倒计时器。您把指针卸掉，钟就不再告诉您还剩多少了——只告诉您它还在转。",
+                        "text_pinyin": "Wǒmen kàn shíjiān bú shì wèile zhīdào xiànzài jǐ diǎn, ér shì wèile suàn hái shèng duōshǎo. Suǒyǒu de jìshíqì qíshí dōu shì dàojìshí qì. Nín bǎ zhǐzhēn xiè diào, zhōng jiù bú zài gàosù nín hái shèng duōshǎo le — zhǐ gàosù nín tā hái zài zhuǎn.",
+                        "text_en": "We check time not to know the hour, but to calculate how much is left. Every timer is a countdown. Remove the hands and the clock stops telling how much remains — it only says it's still going.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "钟师傅慢慢点头，目光落在那只没有指针的钟上：「倒计时器。是这样。」"
+                    },
+                    {
+                        "text_zh": "您退休以后主要做什么？还在接修钟的单子吗？",
+                        "text_pinyin": "Nín tuìxiū yǐhòu zhǔyào zuò shénme? Hái zài jiē xiū zhōng de dānzi ma?",
+                        "text_en": "What do you mainly do since retiring? Are you still taking repair orders?",
+                        "score": 0.0,
+                        "feedback": "钟师傅指了指工作台上的怀表：「还接。但不赶了。」"
+                    },
+                    {
+                        "text_zh": "您年轻的时候一定修了很多名表吧？",
+                        "text_pinyin": "Nín niánqīng de shíhòu yīdìng xiū le hěn duō míng biǎo ba?",
+                        "text_en": "You must have repaired a lot of famous watches in your younger years?",
+                        "score": 0.0,
+                        "feedback": "钟师傅摇摇头：「名表也好，便宜表也好，心都一样不好受。」他岔开了话题。"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "倒计时器——你说得太对了。但你知道我修钟表这么多年最大的感悟是什么吗？每一只钟表都有自己的性格。不是我在修它，是我在听它——听它哪里不舒服、哪个齿轮在挣扎。好的修理师不是技术好，是耐心好。你要等钟表自己告诉你问题在哪里。",
+                "text_pinyin": "Dàojìshí qì — nǐ shuō de tài duì le. Dàn nǐ zhīdào wǒ xiū zhōngbiǎo zhème duō nián zuìdà de gǎnwù shì shénme ma? Měi yī zhī zhōngbiǎo dōu yǒu zìjǐ de xìnggé. Bú shì wǒ zài xiū tā, shì wǒ zài tīng tā — tīng tā nǎlǐ bú shūfu, nǎge chǐlún zài zhēngzhá. Hǎo de xiūlǐ shī bú shì jìshù hǎo, shì nàixīn hǎo. Nǐ yào děng zhōngbiǎo zìjǐ gàosù nǐ wèntí zài nǎlǐ.",
+                "text_en": "Countdown timer — you're absolutely right. But do you know what my biggest insight is from all these years of repairing clocks? Every clock has its own personality. I'm not repairing it — I'm listening to it. Listening to where it's uncomfortable, which gear is struggling. A good repairman isn't skilled, he's patient. You have to wait for the clock to tell you where the problem is."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to him?",
+                "options": [
+                    {
+                        "text_zh": "不急着修，先去听——这不只是修钟的方法吧。好像对人也是这样：先理解，再行动，解决方案往往自己就浮现了。",
+                        "text_pinyin": "Bù jí zhe xiū, xiān qù tīng — zhè bù zhǐ shì xiū zhōng de fāngfǎ ba. Hǎoxiàng duì rén yě shì zhèyàng: xiān lǐjiě, zài xíngdòng, jiějué fāng'àn wǎngwǎng zìjǐ jiù fúxiàn le.",
+                        "text_en": "Don't rush to fix it, just listen first — that's not only about clocks, is it. Seems true with people too: understand first, then act, and the solution often surfaces on its own.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "钟师傅把怀表放到一边，抬起头：「你说到了。我对人，也是这样。」"
+                    },
+                    {
+                        "text_zh": "现在修钟表的年轻人越来越少了，以后这个手艺怎么传？",
+                        "text_pinyin": "Xiànzài xiū zhōngbiǎo de niánqīngrén yuè lái yuè shǎo le, yǐhòu zhège shǒuyì zěnme chuán?",
+                        "text_en": "Fewer and fewer young people repair clocks now — how will this craft be passed on?",
+                        "score": 0.0,
+                        "feedback": "钟师傅叹了口气：「传不下去，就算了。」他没有很在乎的样子。"
+                    },
+                    {
+                        "text_zh": "智能手表坏了一般直接换，您这里接吗？",
+                        "text_pinyin": "Zhìnéng shǒubiǎo huài le yībān zhíjiē huàn, nín zhèlǐ jiē ma?",
+                        "text_en": "Most people just replace a smartwatch when it breaks — do you take those here?",
+                        "score": 0.0,
+                        "feedback": "钟师傅苦笑了一下：「那种东西，我打不开。」他重新拿起放大镜。"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到了我心里。其实我对人也是这样。我老伴身体不好的那几年，我每天陪着她，不说什么，就是在旁边。她走了以后，我才发现陪伴不需要做什么，在场就够了。就像这些钟——你不需要给它们上发条，它们只是需要有人偶尔来听一听。",
+                "text_pinyin": "Nǐ shuō dào le wǒ xīnlǐ. Qíshí wǒ duì rén yě shì zhèyàng. Wǒ lǎobàn shēntǐ bù hǎo de nà jǐ nián, wǒ měi tiān péi zhe tā, bù shuō shénme, jiù shì zài pángbiān. Tā zǒu le yǐhòu, wǒ cái fāxiàn péibàn bù xūyào zuò shénme, zàichǎng jiù gòu le. Jiù xiàng zhèxiē zhōng — nǐ bù xūyào gěi tāmen shàng fātiáo, tāmen zhǐ shì xūyào yǒu rén ǒu'ěr lái tīng yī tīng.",
+                "text_en": "You've touched my heart. Actually, I'm the same way with people. During the years my wife was unwell, I sat with her every day, not saying anything, just being there. After she passed, I realized that companionship doesn't require doing anything — being present is enough. Like these clocks — you don't need to wind them, they just need someone to come listen once in a while."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "What do you say to him?",
+                "options": [
+                    {
+                        "text_zh": "听钟，陪妻子，守着这间小店——钟师傅，您这一辈子学的好像只有一件事：怎么好好地「在」。不追，不催，只是安静地在场。",
+                        "text_pinyin": "Tīng zhōng, péi qīzi, shǒu zhe zhè jiān xiǎo diàn — Zhōng shīfu, nín zhè yī bèizi xué de hǎoxiàng zhǐ yǒu yī jiàn shì: zěnme hǎohǎo de 'zài'. Bù zhuī, bù cuī, zhǐ shì ānjìng de zàichǎng.",
+                        "text_en": "Listening to clocks, sitting with your wife, keeping this little shop — Master Zhong, it seems like you've spent your whole life learning just one thing: how to truly be present. Not chasing, not rushing, just quietly there.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "钟师傅没有立刻说话。他看了看墙上那些滴答作响的钟，最后轻声说：「是。就这一件事。」"
+                    },
+                    {
+                        "text_zh": "您一个人住不觉得寂寞吗？",
+                        "text_pinyin": "Nín yīge rén zhù bù juéde jìmò ma?",
+                        "text_en": "Don't you feel lonely living alone?",
+                        "score": 0.0,
+                        "feedback": "钟师傅朝墙上的钟摆了摆手：「有它们。」"
+                    },
+                    {
+                        "text_zh": "这间店的租金贵吗？在上海开店不容易吧。",
+                        "text_pinyin": "Zhè jiān diàn de zūjīn guì ma? Zài Shànghǎi kāi diàn bù róngyì ba.",
+                        "text_en": "Is the rent for this shop expensive? Running a shop in Shanghai can't be easy.",
+                        "score": 0.0,
+                        "feedback": "钟师傅想了想：「还行。房东也老了，不怎么涨。」他把话题带走了。"
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Clock repair shops were once common in Chinese cities, where mechanical watches and clocks were valued possessions requiring regular maintenance. The decline of this trade mirrors broader shifts in consumer culture — from repairing to replacing, from mechanical to digital. The philosophical dimension of the clockmaker's relationship with time resonates with Daoist concepts of flowing with natural rhythms rather than measuring and controlling them."
+    }
+}

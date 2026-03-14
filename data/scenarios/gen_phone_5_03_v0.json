@@ -1,0 +1,160 @@
+{
+    "title": "The Catch-Up Call Choreography",
+    "title_zh": "叙旧的节奏",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_5_03_v0",
+    "tree": {
+        "setup": "Saturday afternoon, that particular quality of weekend silence when the whole city seems to be napping. You're scrolling through your contacts and stop on Xiao Fang — your college roommate who moved to Shenzhen two years ago. You used to talk every week; now it's been four months since the last call. The guilt of friendship maintenance has been building like an unpaid utility bill, and today you decide to pay it.",
+        "setup_zh": "星期六下午，那种全城仿佛都在午睡的特殊周末寂静。你在翻看通讯录，停在了小方的名字上——你的大学室友，两年前搬去了深圳。你们曾经每周通话；现在距离上次打电话已经四个月了。友情维护的愧疚感像未缴的水电费一样越积越多，今天你决定交上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂？哎，真的假的？你居然主动打电话给我！太阳从西边出来了吧？",
+                "text_pinyin": "wèi? āi, zhēn de jiǎ de? nǐ jūrán zhǔdòng dǎ diànhuà gěi wǒ! tàiyáng cóng xībiān chūlái le ba?",
+                "text_en": "Hello? Wait — you're actually calling me? Did the sun rise from the west?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the playful teasing.",
+                "options": [
+                    {
+                        "text_zh": "哈哈，是啊，我知道，四个月没打电话了。不是不想联系你，是最近工作忙得昏天暗地的。今天终于有空，第一个就想到你了。你最近怎么样？",
+                        "text_pinyin": "hāha, shì a, wǒ zhīdào, sì gè yuè méi dǎ diànhuà le. búshì bù xiǎng liánxì nǐ, shì zuìjìn gōngzuò máng de hūntiān àndì de. jīntiān zhōngyú yǒu kòng, dì yí gè jiù xiǎng dào nǐ le. nǐ zuìjìn zěnmeyàng?",
+                        "text_en": "Haha, yeah, I know — four months without calling. It's not that I didn't want to reach out — work has been absolutely crazy. Today I finally have time, and you were the first person I thought of. How have you been?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Acknowledging the gap without over-apologizing, blaming work (universally accepted), and the flattery of being first on the list — Xiao Fang's mock offense dissolves instantly."
+                    },
+                    {
+                        "text_zh": "别说了，我有罪。你最近好吗？",
+                        "text_pinyin": "bié shuō le, wǒ yǒu zuì. nǐ zuìjìn hǎo ma?",
+                        "text_en": "Don't even start — I'm guilty. How are you?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Self-deprecating and redirecting — she laughs and moves on."
+                    },
+                    {
+                        "text_zh": "你也没有打给我啊。",
+                        "text_pinyin": "nǐ yě méiyǒu dǎ gěi wǒ a.",
+                        "text_en": "You didn't call me either!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Technically true, but deflection between friends is like scoring points in a game neither person wins."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我挺好的。跟你说个大新闻——我上个月换工作了！从原来那个公司跳到了一家做人工智能的创业公司。工资涨了百分之三十，但加班也多了。你呢？还在原来的公司？",
+                "text_pinyin": "wǒ tǐng hǎo de. gēn nǐ shuō gè dà xīnwén——wǒ shàng gè yuè huàn gōngzuò le! cóng yuánlái nàge gōngsī tiào dào le yì jiā zuò réngōng zhìnéng de chuàngyè gōngsī. gōngzī zhǎng le bǎifēnzhī sānshí, dàn jiābān yě duō le. nǐ ne? hái zài yuánlái de gōngsī?",
+                "text_en": "I'm doing well. Big news — I switched jobs last month! Jumped from my old company to an AI startup. 30% salary increase, but more overtime too. What about you? Still at the same company?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to her news and share yours.",
+                "options": [
+                    {
+                        "text_zh": "真的？恭喜你！人工智能现在特别火，你跳得好。百分之三十的涨幅也很厉害。我还在原来的公司，不过最近升了一级，带了一个小团队。说实话也挺累的，但至少学到不少东西。",
+                        "text_pinyin": "zhēn de? gōngxǐ nǐ! réngōng zhìnéng xiànzài tèbié huǒ, nǐ tiào de hǎo. bǎifēnzhī sānshí de zhǎngfú yě hěn lìhai. wǒ hái zài yuánlái de gōngsī, búguò zuìjìn shēng le yì jí, dài le yí gè xiǎo tuánduì. shuō shíhuà yě tǐng lèi de, dàn zhìshǎo xué dào bù shǎo dōngxi.",
+                        "text_en": "Really? Congratulations! AI is so hot right now — great move. A 30% raise is impressive too. I'm still at the same company, but I was recently promoted — leading a small team now. It's tiring, honestly, but at least I'm learning a lot.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuine congratulations plus honest sharing — the exchange of life updates that makes a phone call worth four months of silence."
+                    },
+                    {
+                        "text_zh": "恭喜！我还是老样子，没什么变化。",
+                        "text_pinyin": "gōngxǐ! wǒ háishi lǎo yàngzi, méi shénme biànhuà.",
+                        "text_en": "Congrats! I'm same as always — nothing new.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Modest or avoidant — she'll push for details. Old friends don't accept「没什么变化」easily."
+                    },
+                    {
+                        "text_zh": "创业公司？小心啊，不稳定的。",
+                        "text_pinyin": "chuàngyè gōngsī? xiǎoxīn a, bú wěndìng de.",
+                        "text_en": "A startup? Be careful — those aren't stable.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A valid concern delivered at the wrong moment. She just shared good news — caution can come later, after the congratulations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "带团队了？不错啊！对了，你什么时候来深圳啊？上次说要来一直没来。我现在住在南山区，离科技园很近。你要是来的话我带你到处逛逛。",
+                "text_pinyin": "dài tuánduì le? búcuò a! duì le, nǐ shénme shíhòu lái Shēnzhèn a? shàng cì shuō yào lái yìzhí méi lái. wǒ xiànzài zhù zài Nánshān Qū, lí Kējì Yuán hěn jìn. nǐ yào shì lái de huà wǒ dài nǐ dàochù guàng guang.",
+                "text_en": "Leading a team? Not bad! By the way, when are you coming to Shenzhen? You said you would last time but never did. I'm living in Nanshan District now, near the Tech Park. If you come, I'll show you around."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss a potential visit.",
+                "options": [
+                    {
+                        "text_zh": "我确实一直想去！下个月有一个五一假期，我看看能不能请多一天假凑一个长周末过来。到时候你可别加班啊。对了，深圳有什么好吃的推荐吗？我记得你以前不是说发现了一家超好吃的潮汕火锅？",
+                        "text_pinyin": "wǒ quèshí yìzhí xiǎng qù! xià gè yuè yǒu yí gè Wǔ-Yī jiàqī, wǒ kàn kan néng bu néng qǐng duō yì tiān jiǎ còu yí gè cháng zhōumò guòlái. dàoshíhòu nǐ kě bié jiābān a. duì le, Shēnzhèn yǒu shénme hǎochī de tuījiàn ma? wǒ jìde nǐ yǐqián búshì shuō fāxiàn le yì jiā chāo hǎochī de Cháoshàn huǒguō?",
+                        "text_en": "I've been meaning to! Next month there's the May Day holiday — let me see if I can take an extra day off for a long weekend visit. Just don't work overtime when I come! Oh — any food recommendations in Shenzhen? I remember you mentioned finding an amazing Chaoshan hotpot place?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A specific timeframe, a joke about her overtime, and remembering a detail from months ago — this is how friendship maintenance bills get paid in full."
+                    },
+                    {
+                        "text_zh": "等我有空一定去。你先把好吃的地方都存着。",
+                        "text_pinyin": "děng wǒ yǒu kòng yídìng qù. nǐ xiān bǎ hǎochī de dìfāng dōu cún zhe.",
+                        "text_en": "I'll definitely come when I have time. Save all the good restaurants for me.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「等有空」is the friendship equivalent of「下次一定」— well-meaning but unscheduled."
+                    },
+                    {
+                        "text_zh": "深圳太远了，机票太贵。",
+                        "text_pinyin": "Shēnzhèn tài yuǎn le, jīpiào tài guì.",
+                        "text_en": "Shenzhen is too far — flights are expensive.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Practical barriers stated as facts. She'll suggest high-speed rail, which is cheaper and almost as fast."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "五一来太好了！那家潮汕火锅还在，而且我又发现了一家超好的肠粉店。你来的话住我那里就行了，省得订酒店。哎，跟你说个八卦——你还记得大学的老周吗？他下个月要结婚了！",
+                "text_pinyin": "Wǔ-Yī lái tài hǎo le! nà jiā Cháoshàn huǒguō hái zài, érqiě wǒ yòu fāxiàn le yì jiā chāo hǎo de chángfěn diàn. nǐ lái de huà zhù wǒ nàlǐ jiù xíng le, shěng de dìng jiǔdiàn. āi, gēn nǐ shuō gè bāguà——nǐ hái jìde dàxué de Lǎo Zhōu ma? tā xià gè yuè yào jiéhūn le!",
+                "text_en": "Coming for May Day would be great! That Chaoshan hotpot place is still there, and I found an amazing rice noodle roll shop too. Stay at my place — save on hotels. Oh, some gossip — remember Lao Zhou from college? He's getting married next month!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to the gossip and wrap up the call.",
+                "options": [
+                    {
+                        "text_zh": "老周要结婚了？！不是吧！上次见他的时候他还说单身挺好的。世事难料啊。好了，我一定五一去找你，到时候你带我吃遍深圳。我先去买机票了！下次别等四个月再联系了，咱们以后至少每个月通个电话。",
+                        "text_pinyin": "Lǎo Zhōu yào jiéhūn le?! búshì ba! shàng cì jiàn tā de shíhòu tā hái shuō dānshēn tǐng hǎo de. shìshì nánliào a. hǎo le, wǒ yídìng Wǔ-Yī qù zhǎo nǐ, dàoshíhòu nǐ dài wǒ chī biàn Shēnzhèn. wǒ xiān qù mǎi jīpiào le! xià cì bié děng sì gè yuè zài liánxì le, zánmen yǐhòu zhìshǎo měi gè yuè tōng gè diànhuà.",
+                        "text_en": "Lao Zhou is getting married?! No way! Last time I saw him he said being single was great. Life is unpredictable. OK, I'm definitely coming for May Day — show me all the food in Shenzhen. I'm going to buy my ticket now! Let's not wait four months to talk again — at least once a month from now on.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gossip reaction, concrete plans, and a commitment to regular contact — the phone call has done its work. Four months of distance, closed in twenty minutes."
+                    },
+                    {
+                        "text_zh": "真的假的！好了，改天再聊。保重！",
+                        "text_pinyin": "zhēn de jiǎ de! hǎo le, gǎitiān zài liáo. bǎozhòng!",
+                        "text_en": "No way! Alright, let's chat again sometime. Take care!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「改天再聊」— the farewell that means well but sets no date. She'll hold you to it anyway."
+                    },
+                    {
+                        "text_zh": "老周？不太记得了。好了，先这样吧。",
+                        "text_pinyin": "Lǎo Zhōu? bú tài jìde le. hǎo le, xiān zhèyàng ba.",
+                        "text_en": "Lao Zhou? I don't really remember. OK, let's leave it here.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Not remembering a college classmate and cutting the gossip short — Xiao Fang's enthusiasm takes a small dip. The call ends politely but without the warmth it deserves."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Phone catch-ups between Chinese friends often include 八卦 (bāguà, gossip) about mutual acquaintances — it's a bonding ritual. 五一 (Wǔ-Yī, May Day) is a major holiday for travel. 潮汕火锅 (Cháoshàn huǒguō) and 肠粉 (chángfěn, rice noodle rolls) are Guangdong regional specialties popular in Shenzhen. The phrase 太阳从西边出来了 (the sun rose from the west) expresses shocked disbelief, used playfully among friends."
+    }
+}

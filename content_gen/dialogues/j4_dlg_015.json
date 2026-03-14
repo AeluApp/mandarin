@@ -1,0 +1,123 @@
+{
+    "title": "The Office Thermostat",
+    "title_zh": "空调之争",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "It's a hot afternoon in the office. Your colleague Sister Chen sits near the AC unit and has turned it down to 20 degrees. You sit far from the AC and are freezing. Neither of you will say what this is actually about.",
+        "setup_zh": "办公室里一个炎热的下午。你的同事陈姐坐在空调旁边，把温度调到了20度。你坐得离空调很远，已经冻得不行了。你们谁都不会说出这件事的真正含义。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎，今天好热啊。我刚才把空调调低了一点，你不介意吧？太热了影响工作效率。我这边靠窗，太阳一直晒。",
+                "text_pinyin": "Āi, jīntiān hǎo rè a. Wǒ gāngcái bǎ kōngtiáo tiáo dī le yīdiǎn, nǐ bú jièyì ba? Tài rè le yǐngxiǎng gōngzuò xiàolǜ. Wǒ zhè biān kào chuāng, tàiyáng yīzhí shài.",
+                "text_en": "Oh, it's so hot today. I turned the AC down a bit just now, you don't mind, right? Being too hot affects work efficiency. I'm by the window, the sun keeps hitting me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "You're wearing a sweater in July. You definitely mind. But she framed it as a question you can't say no to.",
+                "options": [
+                    {
+                        "text_zh": "没事没事。不过我这边好像风特别大，我都快要穿外套了。陈姐，你那边的风没这边大吧？",
+                        "text_pinyin": "Méi shì méi shì. Búguò wǒ zhè biān hǎoxiàng fēng tèbié dà, wǒ dōu kuài yào chuān wàitào le. Chén jiě, nǐ nà biān de fēng méi zhè biān dà ba?",
+                        "text_en": "No problem, no problem. But the airflow over here seems really strong, I'm almost putting on a jacket. Sister Chen, the breeze isn't as strong on your side, is it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "You've matched her move. She cited 'work efficiency,' you cited 'airflow.' Nobody has said 'I'm cold, turn it up.' The negotiation has begun."
+                    },
+                    {
+                        "text_zh": "太冷了，你能不能调高一点？",
+                        "text_pinyin": "Tài lěng le, nǐ néng bù néng tiáo gāo yīdiǎn?",
+                        "text_en": "It's too cold, can you turn it up a bit?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She spent two sentences building a case. You've just made a direct request with no justification. In this office, that's bringing a knife to a chess match."
+                    },
+                    {
+                        "text_zh": "好的，你觉得合适就行。",
+                        "text_pinyin": "Hǎo de, nǐ juéde héshì jiù xíng.",
+                        "text_en": "Sure, whatever you think is best.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You've surrendered the temperature of your workspace for the rest of the afternoon. She'll remember this concession."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是吗？那可能是出风口的位置问题。不过呢，空调设在20度，其实整体温度大概是24、25度的样子，很正常的。你要是冷的话……可以喝点热水。",
+                "text_pinyin": "Shì ma? Nà kěnéng shì chūfēngkǒu de wèizhì wèntí. Búguò ne, kōngtiáo shè zài èrshí dù, qíshí zhěngtǐ wēndù dàgài shì èrshísì, èrshíwǔ dù de yàngzi, hěn zhèngcháng de. Nǐ yàoshi lěng de huà ... kěyǐ hē diǎn rè shuǐ.",
+                "text_en": "Really? That might be the vent position. But you know, setting it at 20 means the overall room temperature is about 24, 25 degrees — very normal. If you're cold... you could drink some hot water."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She just told you to drink hot water. The universal Chinese response to all problems. She's not budging.",
+                "options": [
+                    {
+                        "text_zh": "我理解。电话说完就完了，但信可以拿在手里看很多遍。看着他的字，就像他在你面前。信和电话不一样，信是留得住的。",
+                        "text_pinyin": "Wǒ lǐjiě. Diànhuà shuō wán jiù wán le, dàn xìn kěyǐ ná zài shǒu lǐ kàn hěn duō biàn. Kàn zhe tā de zì, jiù xiàng tā zài nǐ miànqián. Xìn hé diànhuà bù yīyàng, xìn shì liú de zhù de.",
+                        "text_en": "I understand. A phone call ends, but a letter you can hold and read over and over. His handwriting feels like he's right there. Letters and calls are different — letters stay.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "You've escalated from feelings to data, matched her 'efficiency' framing, and proposed a number. The padded jacket image makes it funny without making it hostile."
+                    },
+                    {
+                        "text_zh": "好吧，我去倒点热水。",
+                        "text_pinyin": "Hǎo ba, wǒ qù dào diǎn rè shuǐ.",
+                        "text_en": "Alright, I'll go pour some hot water.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You're literally doing what she suggested. The temperature stays at 20. She controls the thermostat for the rest of the summer."
+                    },
+                    {
+                        "text_zh": "陈姐，你那边热是因为靠窗，你要不要换个位子？",
+                        "text_pinyin": "Chén jiě, nǐ nà biān rè shì yīnwèi kào chuāng, nǐ yào bú yào huàn ge wèizi?",
+                        "text_en": "Sister Chen, you're hot because you're by the window. Want to switch seats?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You've proposed she move desks. In most offices, seat assignments are decided by seniority, not thermostat disputes. She's been at that desk for six years."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "26度？哪个研究？……好吧好吧，24就24。不过明天如果太阳更大，我还是得调低一点。你也可以跟行政说给你那边加个挡风板。这样公平吧？",
+                "text_pinyin": "Èrshíliù dù? Nǎge yánjiū? ... Hǎo ba hǎo ba, èrshísì jiù èrshísì. Búguò míngtiān rúguǒ tàiyáng gèng dà, wǒ háishì děi tiáo dī yīdiǎn. Nǐ yě kěyǐ gēn xíngzhèng shuō gěi nǐ nà biān jiā ge dǎngfēng bǎn. Zhèyàng gōngpíng ba?",
+                "text_en": "26 degrees? Which study? ... Fine fine, 24 it is. But tomorrow if the sun's stronger, I'll still need to turn it down. You could also ask admin to put a wind deflector on your side. Fair enough?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She's conceded two degrees but already laid groundwork for tomorrow's re-negotiation.",
+                "options": [
+                    {
+                        "text_zh": "挡风板是个好主意，我去问问。陈姐，你看咱俩为了两度的温差谈了十分钟，这个效率才是真正需要研究的。",
+                        "text_pinyin": "Dǎngfēng bǎn shì ge hǎo zhǔyì, wǒ qù wènwen. Chén jiě, nǐ kàn zánmen liǎ wèile liǎng dù de wēnchā tán le shí fēnzhōng, zhège xiàolǜ cái shì zhēnzhèng xūyào yánjiū de.",
+                        "text_en": "The wind deflector is a good idea, I'll ask about it. Sister Chen, look at us — ten minutes of negotiation over two degrees. Now that's the efficiency that really needs studying.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepts the deal and names the absurdity without making it personal. She laughs because it's true."
+                    },
+                    {
+                        "text_zh": "好的，谢谢陈姐。那明天再说吧。",
+                        "text_pinyin": "Hǎo de, xièxie Chén jiě. Nà míngtiān zài shuō ba.",
+                        "text_en": "Okay, thanks Sister Chen. We'll talk about it tomorrow then.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You've accepted a ceasefire that expires in 24 hours. Tomorrow the same ten-minute negotiation starts from zero."
+                    },
+                    {
+                        "text_zh": "24度还是有点低。25行不行？",
+                        "text_pinyin": "Èrshísì dù háishì yǒudiǎn dī. Èrshíwǔ xíng bù xíng?",
+                        "text_en": "24 is still a bit low. How about 25?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "She just conceded. Immediately pushing for more turns a compromise into an escalation. Pick up the win."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Office AC temperature disputes are a universal workplace phenomenon, but in Chinese offices they carry additional subtext. Seniority often determines who controls the thermostat. The suggestion to 'drink hot water' (喝热水) is such a stereotypical Chinese response to any discomfort that it has become a meme. The real negotiation is rarely about temperature — it's about whose comfort takes priority in a shared space."
+    }
+}

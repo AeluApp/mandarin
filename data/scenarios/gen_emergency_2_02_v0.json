@@ -1,0 +1,94 @@
+{
+    "title": "The Passport Panic",
+    "title_zh": "护照不见了",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_2_02_v0",
+    "tree": {
+        "setup": "A hotel lobby, morning. You're checking out and your passport isn't in your bag. You've checked every pocket, every zippered compartment. The front desk clerk, Xiao Yin, watches you with the patient sympathy of someone who has witnessed this exact crisis play out many times. She already has a plan.",
+        "setup_zh": "酒店大厅，早上。你要退房，但护照不在包里。你检查了每一个口袋、每一个拉链夹层。前台小尹用那种见过无数次同样场面的耐心看着你。她已经有了方案。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "怎么了？您找什么？",
+                "text_pinyin": "zěnme le? nín zhǎo shénme?",
+                "text_en": "What's wrong? What are you looking for?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your missing passport.",
+                "options": [
+                    {
+                        "text_zh": "我的护照找不到了！可能在房间里。",
+                        "text_pinyin": "wǒ de hùzhào zhǎo bu dào le! kěnéng zài fángjiān lǐ.",
+                        "text_en": "I can't find my passport! Maybe it's in the room.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Yin is already reaching for the room phone.「别着急，我让人去房间看看。」找不到 is the potential complement for 'can't find.' 可能 (kěnéng) means 'maybe.'"
+                    },
+                    {
+                        "text_zh": "我的护照丢了！怎么办？",
+                        "text_pinyin": "wǒ de hùzhào diū le! zěnme bàn?",
+                        "text_en": "I lost my passport! What do I do?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yin remains calm -- panic is contagious and she's immune.「先别急。您最后一次用护照是什么时候？」丢了 can mean 'lost' or 'gone' -- less permanent than 'it's been stolen.'"
+                    },
+                    {
+                        "text_zh": "你们能帮我找吗？",
+                        "text_pinyin": "nǐmen néng bāng wǒ zhǎo ma?",
+                        "text_en": "Can you help me look?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Yin nods immediately.「当然可以。您住几号房？」能 + verb + 吗 is a polite way to ask for help."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们去房间看看。您今天早上在哪里用过护照？",
+                "text_pinyin": "wǒmen qù fángjiān kànkan. nín jīntiān zǎoshang zài nǎlǐ yòng guo hùzhào?",
+                "text_en": "Let's check the room. Where did you use your passport this morning?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Think about where you last had it.",
+                "options": [
+                    {
+                        "text_zh": "我今天早上在前台用了，然后……放在桌子上了？",
+                        "text_pinyin": "wǒ jīntiān zǎoshang zài qiántái yòng le, ránhòu... fàng zài zhuōzi shàng le?",
+                        "text_en": "I used it at the front desk this morning, then... maybe I left it on the table?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Yin checks under the front desk and finds it between two folders. She holds it up like a trophy.「在这里！」Retracing steps (然后) is exactly the right approach."
+                    },
+                    {
+                        "text_zh": "我不记得了……",
+                        "text_pinyin": "wǒ bú jìde le...",
+                        "text_en": "I don't remember...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yin starts a systematic search. She's done this before. She checks the business center, the breakfast area, and your room. Calm efficiency wins."
+                    },
+                    {
+                        "text_zh": "可能在房间的保险柜里！",
+                        "text_pinyin": "kěnéng zài fángjiān de bǎoxiǎnguì lǐ!",
+                        "text_en": "Maybe in the room safe!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Yin leads you back upstairs. You open the safe. There it is. The relief is physical.「太好了！」保险柜 is 'safe' or 'lockbox' -- always a good place to check."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "找到了吧！以后重要的东西放在一个地方。",
+                "text_pinyin": "zhǎodào le ba! yǐhòu zhòngyào de dōngxi fàng zài yí gè dìfang.",
+                "text_en": "Found it! In the future, keep important things in one place."
+            }
+        ],
+        "cultural_note": "Your passport is your most important document in China as a foreigner -- it's needed for hotels, banks, train tickets, and more. Hotel front desks often help look for lost items. 保险柜 (bǎoxiǎnguì, room safe) is standard in Chinese hotels."
+    }
+}

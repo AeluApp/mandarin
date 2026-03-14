@@ -4,8 +4,10 @@ import re
 
 from .base import (
     DrillResult, format_hanzi, format_hanzi_inline, format_hanzi_option,
+    format_answer_feedback,
     _skip_result, _handle_confidence, _run_mc_input,
     cause_to_error_type, classify_error_cause, elaborate_error,
+    get_progressive_hint,
 )
 from .hints import get_hanzi_hint
 from .mc import generate_mc_options
@@ -94,8 +96,8 @@ def _pinyin_match(user: str, expected: str):
         return True, "numbered"
 
     # Plain pinyin (no tones at all) -- accept as correct but note it
-    user_stripped = strip_tones(user)
-    expected_stripped = strip_tones(expected)
+    user_stripped = normalize_pinyin(strip_tones(user))
+    expected_stripped = normalize_pinyin(strip_tones(expected))
     if user_stripped == expected_stripped and user_stripped:
         return True, "no_tone"
 
@@ -135,54 +137,72 @@ def run_ime_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True) -
     show_fn(f"\n  Type the pinyin for:")
     show_fn(format_hanzi(item['hanzi'], prominent))
 
-    answer = input_fn("  pinyin> ").strip()
+    hint_stage = 0
+    hints_used = 0
+    while True:
+        answer = input_fn("  pinyin> ").strip()
 
-    if answer.upper() in ("Q", "B"):
-        return _skip_result(item, "ime", "ime_type", answer)
+        if answer.upper() in ("Q", "B"):
+            return _skip_result(item, "ime", "ime_type", answer)
 
-    conf_result = _handle_confidence(answer, item, "ime", "ime_type", item["pinyin"], show_fn)
-    if conf_result:
-        return conf_result
+        conf_result = _handle_confidence(answer, item, "ime", "ime_type", item["pinyin"], show_fn,
+                                         allow_hint=True)
+        if conf_result == "HINT":
+            hint_text, hint_stage = get_progressive_hint(item, hint_stage)
+            show_fn(hint_text)
+            hints_used += 1
+            continue
+        if conf_result:
+            return conf_result
 
-    expected = item["pinyin"].strip()
-    correct, match_type = _pinyin_match(answer, expected)
+        expected = item["pinyin"].strip()
+        correct, match_type = _pinyin_match(answer, expected)
 
-    error_type = None
-    feedback = ""
-    if not correct:
-        error_type = _classify_ime_error(answer, expected)
-        feedback = f"  → {format_hanzi_inline(item['hanzi'])} = {expected}"
-        if error_type == "tone":
-            feedback += "  (tones were off)"
-        elif error_type == "ime_confusable":
-            feedback += "  (close — check the syllables)"
-        # Additional elaboration from error-cause classifier
-        cause = classify_error_cause(answer, expected, "ime_type", item)
-        elaboration = elaborate_error(cause, answer, expected, item, "ime_type")
-        if elaboration:
-            feedback += f"\n{elaboration}"
-    elif match_type == "no_tone":
-        # Correct syllables but no tones provided — accept but note it
-        feedback = f"  (correct syllables — practice the tones: {expected})"
+        error_type = None
+        cause = None
+        feedback = ""
+        if not correct:
+            error_type = _classify_ime_error(answer, expected)
+            feedback = f"  \u2192 {format_hanzi_inline(item['hanzi'])} = {expected}"
+            if error_type == "tone":
+                feedback += "  (right syllables \u2014 check the tones)"
+            elif error_type == "ime_confusable":
+                feedback += "  (close \u2014 check the syllables)"
+            # Additional elaboration from error-cause classifier
+            cause = classify_error_cause(answer, expected, "ime_type", item)
+            elaboration = elaborate_error(cause, answer, expected, item, "ime_type")
+            if elaboration:
+                feedback += f"\n{elaboration}"
+        elif match_type == "no_tone":
+            # Correct syllables but no tones provided — accept but note it
+            feedback = f"  (correct syllables \u2014 practice the tones: {expected})"
 
-    return DrillResult(
-        content_item_id=item["id"], modality="ime", drill_type="ime_type",
-        correct=correct, user_answer=answer, expected_answer=expected,
-        error_type=error_type, feedback=feedback,
-    )
+        return DrillResult(
+            content_item_id=item["id"], modality="ime", drill_type="ime_type",
+            correct=correct, user_answer=answer, expected_answer=expected,
+            error_type=error_type, error_cause=cause, feedback=feedback,
+            confidence="half" if hints_used and correct else "full",
+            score=0.5 if hints_used and correct else None,
+        )
 
 
 # ── New pinyin drills ──────────────────────────────
 
-def run_english_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True) -> DrillResult:
-    """English -> Pinyin MC: show English, pick the correct pinyin."""
+def run_english_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True,
+                                english_level: str = "full") -> DrillResult:
+    """English -> Pinyin MC: show English (or hanzi), pick the correct pinyin."""
     options, tier = generate_mc_options(conn, item, field="pinyin", n_options=4)
 
-    show_fn(f"\n  What's the pinyin for: \"{item['english']}\"?\n")
+    # When English is faded, show hanzi as prompt instead
+    if english_level != "full":
+        show_fn(f"\n  What's the pinyin for: {format_hanzi_inline(item['hanzi'])}?\n")
+    else:
+        show_fn(f"\n  What's the pinyin for: \"{item['english']}\"?\n")
     for i, opt in enumerate(options, 1):
         show_fn(f"  {i}. {opt}")
 
-    result = _run_mc_input(item, options, item["pinyin"], "reading", "english_to_pinyin", show_fn, input_fn)
+    result = _run_mc_input(item, options, item["pinyin"], "reading", "english_to_pinyin", show_fn, input_fn,
+                           english_level=english_level)
     if isinstance(result, DrillResult):
         return result
     user_picked = result
@@ -190,8 +210,9 @@ def run_english_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: 
     correct = user_picked == item["pinyin"]
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
-        feedback = f"  → {format_hanzi_inline(item['hanzi'])} ({item['pinyin']}) = {item['english']}"
+        feedback = format_answer_feedback(item, english_level)
         cause = classify_error_cause(user_picked, item["pinyin"], "english_to_pinyin", item)
         elaboration = elaborate_error(cause, user_picked, item["pinyin"], item, "english_to_pinyin")
         if elaboration:
@@ -201,7 +222,7 @@ def run_english_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: 
     return DrillResult(
         content_item_id=item["id"], modality="reading", drill_type="english_to_pinyin",
         correct=correct, user_answer=user_picked, expected_answer=item["pinyin"],
-        error_type=error_type, feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
         distractor_tier=tier,
     )
 
@@ -224,6 +245,7 @@ def run_hanzi_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: bo
     correct = user_picked == item["pinyin"]
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
         feedback = f"  → {format_hanzi_inline(item['hanzi'])} ({item['pinyin']}) = {item['english']}"
         cause = classify_error_cause(user_picked, item["pinyin"], "hanzi_to_pinyin", item)
@@ -235,20 +257,26 @@ def run_hanzi_to_pinyin_drill(item: dict, conn, show_fn, input_fn, prominent: bo
     return DrillResult(
         content_item_id=item["id"], modality="reading", drill_type="hanzi_to_pinyin",
         correct=correct, user_answer=user_picked, expected_answer=item["pinyin"],
-        error_type=error_type, feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
         distractor_tier=tier,
     )
 
 
-def run_pinyin_to_hanzi_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True) -> DrillResult:
-    """Pinyin -> Hanzi MC: show pinyin + English, pick the correct hanzi."""
+def run_pinyin_to_hanzi_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True,
+                              english_level: str = "full") -> DrillResult:
+    """Pinyin -> Hanzi MC: show pinyin (+ English when not faded), pick the correct hanzi."""
     options, tier = generate_mc_options(conn, item, field="hanzi", n_options=4)
 
-    show_fn(f"\n  Which character is: {item['pinyin']}  ({item['english']})?\n")
+    # When English is faded, drop the English hint from the prompt
+    if english_level != "full":
+        show_fn(f"\n  Which character is: {item['pinyin']}?\n")
+    else:
+        show_fn(f"\n  Which character is: {item['pinyin']}  ({item['english']})?\n")
     for i, opt in enumerate(options, 1):
         show_fn(f"  {i}. {format_hanzi_option(opt)}")
 
-    result = _run_mc_input(item, options, item["hanzi"], "reading", "pinyin_to_hanzi", show_fn, input_fn)
+    result = _run_mc_input(item, options, item["hanzi"], "reading", "pinyin_to_hanzi", show_fn, input_fn,
+                           english_level=english_level)
     if isinstance(result, DrillResult):
         return result
     user_picked = result
@@ -256,8 +284,9 @@ def run_pinyin_to_hanzi_drill(item: dict, conn, show_fn, input_fn, prominent: bo
     correct = user_picked == item["hanzi"]
     feedback = ""
     error_type = None
+    cause = None
     if not correct:
-        feedback = f"  → {format_hanzi_inline(item['hanzi'])} ({item['pinyin']}) = {item['english']}"
+        feedback = format_answer_feedback(item, english_level)
         cause = classify_error_cause(user_picked, item["hanzi"], "pinyin_to_hanzi", item)
         elaboration = elaborate_error(cause, user_picked, item["hanzi"], item, "pinyin_to_hanzi")
         if elaboration:
@@ -270,6 +299,6 @@ def run_pinyin_to_hanzi_drill(item: dict, conn, show_fn, input_fn, prominent: bo
     return DrillResult(
         content_item_id=item["id"], modality="reading", drill_type="pinyin_to_hanzi",
         correct=correct, user_answer=user_picked, expected_answer=item["hanzi"],
-        error_type=error_type, feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
         distractor_tier=tier,
     )

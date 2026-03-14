@@ -1,0 +1,194 @@
+[
+  {
+    "id": "j3_observe_041",
+    "title": "The Forgotten Garden",
+    "title_zh": "被遗忘的花园",
+    "hsk_level": 3,
+    "text_zh": "城市东边有一块空地，以前是一个工厂。工厂搬走以后，那块地就空了。但是慢慢地，不知道谁开始在那里种花。先是几朵向日葵，然后是一排月季。等我发现的时候，那里已经变成了一个小花园。附近的老人经常来浇水、拔草。没有人组织，也没有人管理。大家只是觉得空地太难看了，就自己动手种点东西。有一天我问一个正在浇花的阿姨：「这些花是你种的吗？」她说：「我只种了那边几棵。但是你看，每个人种一点，慢慢地就变成了一个花园。」那个花园比较小也比较乱，但是每一棵花都是有人在乎的。",
+    "text_pinyin": "Chéngshì dōngbiān yǒu yí kuài kōngdì, yǐqián shì yí gè gōngchǎng. Gōngchǎng bān zǒu yǐhòu, nà kuài dì jiù kōng le. Dànshì mànman de, bù zhīdào shéi kāishǐ zài nàlǐ zhòng huā. Xiān shì jǐ duǒ xiàngrìkuí, ránhòu shì yì pái yuèjì. Děng wǒ fāxiàn de shíhou, nàlǐ yǐjīng biàn chéng le yí gè xiǎo huāyuán. Fùjìn de lǎorén jīngcháng lái jiāo shuǐ, bá cǎo. Méiyǒu rén zǔzhī, yě méiyǒu rén guǎnlǐ. Dàjiā zhǐshì juéde kōngdì tài nánkàn le, jiù zìjǐ dòngshǒu zhòng diǎn dōngxi. Yǒu yì tiān wǒ wèn yí gè zhèngzài jiāo huā de āyí:「Zhèxiē huā shì nǐ zhòng de ma?」Tā shuō:「Wǒ zhǐ zhòng le nàbiān jǐ kē. Dànshì nǐ kàn, měi gè rén zhòng yìdiǎn, mànman de jiù biàn chéng le yí gè huāyuán.」Nàge huāyuán bǐjiào xiǎo yě bǐjiào luàn, dànshì měi yì kē huā dōu shì yǒu rén zàihū de.",
+    "text_en": "On the city's east side there's an empty lot that used to be a factory. After the factory moved, the land sat empty. But gradually, someone started planting flowers there. First a few sunflowers, then a row of roses. By the time I noticed, it had become a small garden. Elderly neighbors come to water and pull weeds. Nobody organized it, nobody manages it. People just felt the empty lot was too ugly and started planting things themselves. One day I asked an auntie who was watering: 'Did you plant these flowers?' She said: 'I only planted a few over there. But look — everyone plants a little, and slowly it becomes a garden.' That garden is rather small and rather messy, but every flower is cared for by someone.",
+    "questions": [
+      {"type": "mc", "q_zh": "那块空地以前是什么？", "q_en": "What was the empty lot before?",
+       "options": [
+         {"text": "公园", "pinyin": "gōngyuán", "text_en": "park", "correct": false},
+         {"text": "工厂", "pinyin": "gōngchǎng", "text_en": "factory", "correct": true},
+         {"text": "学校", "pinyin": "xuéxiào", "text_en": "school", "correct": false},
+         {"text": "停车场", "pinyin": "tíngchē chǎng", "text_en": "parking lot", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "花园是怎么形成的？", "q_en": "How was the garden formed?",
+       "options": [
+         {"text": "政府组织的", "pinyin": "zhèngfǔ zǔzhī de", "text_en": "organized by government", "correct": false},
+         {"text": "每个人自己种一点，慢慢变成的", "pinyin": "měi gè rén zìjǐ zhòng yìdiǎn, mànman biàn chéng de", "text_en": "everyone planted a little, gradually formed", "correct": true},
+         {"text": "一个人种的", "pinyin": "yí gè rén zhòng de", "text_en": "planted by one person", "correct": false},
+         {"text": "花自己长出来的", "pinyin": "huā zìjǐ zhǎng chūlái de", "text_en": "flowers grew on their own", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得这个花园怎么样？", "q_en": "How does 'I' describe the garden?",
+       "options": [
+         {"text": "很大很漂亮", "pinyin": "hěn dà hěn piàoliang", "text_en": "big and beautiful", "correct": false},
+         {"text": "比较小也比较乱，但每棵花都有人在乎", "pinyin": "bǐjiào xiǎo yě bǐjiào luàn, dàn měi kē huā dōu yǒu rén zàihū", "text_en": "small and messy, but every flower is cared for", "correct": true},
+         {"text": "需要有人来管理", "pinyin": "xūyào yǒu rén lái guǎnlǐ", "text_en": "needs someone to manage it", "correct": false},
+         {"text": "应该变成公园", "pinyin": "yīnggāi biàn chéng gōngyuán", "text_en": "should become a park", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_mystery_007",
+    "title": "The Footprints in the Snow",
+    "title_zh": "雪地上的脚印",
+    "hsk_level": 3,
+    "text_zh": "下雪那天早上，我发现阳台上有一排小脚印。脚印从栏杆那里开始，走到花盆旁边，又走回去了。我住在四楼——谁会爬上来呢？我觉得比较奇怪，就去问了邻居。楼下的王叔叔说他也看到了，但是在三楼的阳台上。我们两个一起去看了一楼的阳台——也有！而且一楼的阳台上，花盆旁边还有一个小洞。我蹲下来看了看——洞里面有几颗花生。原来是松鼠！小区旁边有一棵很大的松树，松鼠从树上跳到阳台上来，在花盆的土里藏花生过冬。这个小谜题比较简单，但是看到答案的时候，我笑了很久。",
+    "text_pinyin": "Xià xuě nà tiān zǎoshang, wǒ fāxiàn yángtái shàng yǒu yì pái xiǎo jiǎoyìn. Jiǎoyìn cóng lángān nàlǐ kāishǐ, zǒu dào huāpén pángbiān, yòu zǒu huíqu le. Wǒ zhù zài sì lóu——shéi huì pá shànglái ne? Wǒ juéde bǐjiào qíguài, jiù qù wèn le línjū. Lóu xià de Wáng shūshu shuō tā yě kàn dào le, dànshì zài sān lóu de yángtái shàng. Wǒmen liǎng gè yìqǐ qù kàn le yī lóu de yángtái——yě yǒu! Érqiě yī lóu de yángtái shàng, huāpén pángbiān hái yǒu yí gè xiǎo dòng. Wǒ dūn xiàlái kàn le kàn——dòng lǐmiàn yǒu jǐ kē huāshēng. Yuánlái shì sōngshǔ! Xiǎoqū pángbiān yǒu yì kē hěn dà de sōngshù, sōngshǔ cóng shù shàng tiào dào yángtái shàng lái, zài huāpén de tǔ lǐ cáng huāshēng guò dōng. Zhège xiǎo mítí bǐjiào jiǎndān, dànshì kàn dào dá'àn de shíhou, wǒ xiào le hěn jiǔ.",
+    "text_en": "The morning it snowed, I found small footprints on my balcony. They went from the railing to the flower pot and back. I live on the fourth floor — who would climb up here? I found it rather strange and asked neighbors. Uncle Wang downstairs said he'd seen them too, on the third-floor balcony. We checked the first floor — they were there too! And on the first floor, there was a small hole next to the flower pot. I crouched down to look — there were peanuts inside! It was a squirrel! There's a big pine tree near the complex. The squirrel jumps from the tree to the balconies, burying peanuts in the pot soil for winter. This little mystery was rather simple, but when I saw the answer, I laughed for a long time.",
+    "questions": [
+      {"type": "mc", "q_zh": "脚印是从哪里到哪里的？", "q_en": "Where did the footprints go?",
+       "options": [
+         {"text": "从门口到阳台", "pinyin": "cóng ménkǒu dào yángtái", "text_en": "from door to balcony", "correct": false},
+         {"text": "从栏杆到花盆，又走回去", "pinyin": "cóng lángān dào huāpén, yòu zǒu huíqu", "text_en": "from railing to flower pot and back", "correct": true},
+         {"text": "从楼下到楼上", "pinyin": "cóng lóu xià dào lóu shàng", "text_en": "from downstairs to upstairs", "correct": false},
+         {"text": "在阳台上绕了一圈", "pinyin": "zài yángtái shàng rào le yì quān", "text_en": "circled around the balcony", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "花盆旁边的洞里有什么？", "q_en": "What was in the hole by the flower pot?",
+       "options": [
+         {"text": "虫子", "pinyin": "chóngzi", "text_en": "bugs", "correct": false},
+         {"text": "花生", "pinyin": "huāshēng", "text_en": "peanuts", "correct": true},
+         {"text": "树叶", "pinyin": "shùyè", "text_en": "leaves", "correct": false},
+         {"text": "什么都没有", "pinyin": "shénme dōu méiyǒu", "text_en": "nothing", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "脚印是谁留下的？", "q_en": "Who left the footprints?",
+       "options": [
+         {"text": "小偷", "pinyin": "xiǎotōu", "text_en": "a thief", "correct": false},
+         {"text": "猫", "pinyin": "māo", "text_en": "a cat", "correct": false},
+         {"text": "松鼠", "pinyin": "sōngshǔ", "text_en": "a squirrel", "correct": true},
+         {"text": "鸟", "pinyin": "niǎo", "text_en": "a bird", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_identity_008",
+    "title": "The Work Persona",
+    "title_zh": "工作中的我",
+    "hsk_level": 3,
+    "text_zh": "上班的时候，我是一个比较安静、说话很少的人。同事们觉得我很严肃，不太好接近。但是下班以后，我跟朋友在一起的时候完全不一样——我会讲笑话，会唱歌，会大声笑。有一次，一个同事在商场里碰到了我和朋友。他看到我在跟朋友开玩笑，非常惊讶，说：「你上班的时候从来不笑的！」我不知道怎么回答。后来我想了很久：上班的我和下班的我，哪个才是真的我？也许都是。我们在不同的地方，需要不同的样子。这不是假装，而是因为每个地方需要的「我」不一样。但是不管哪个我，回到家以后，我只想做最轻松的那一个。",
+    "text_pinyin": "Shàngbān de shíhou, wǒ shì yí gè bǐjiào ānjìng, shuō huà hěn shǎo de rén. Tóngshìmen juéde wǒ hěn yánsù, bú tài hǎo jiējìn. Dànshì xiàbān yǐhòu, wǒ gēn péngyou zài yìqǐ de shíhou wánquán bù yíyàng——wǒ huì jiǎng xiàohua, huì chàng gē, huì dà shēng xiào. Yǒu yí cì, yí gè tóngshì zài shāngchǎng lǐ pèng dào le wǒ hé péngyou. Tā kàn dào wǒ zài gēn péngyou kāi wánxiào, fēicháng jīngyà, shuō:「Nǐ shàngbān de shíhou cónglái bú xiào de!」Wǒ bù zhīdào zěnme huídá. Hòulái wǒ xiǎng le hěn jiǔ: shàngbān de wǒ hé xiàbān de wǒ, nǎge cái shì zhēn de wǒ? Yěxǔ dōu shì. Wǒmen zài bùtóng de dìfang, xūyào bùtóng de yàngzi. Zhè búshì jiǎzhuāng, ér shì yīnwèi měi gè dìfang xūyào de「wǒ」bù yíyàng. Dànshì bùguǎn nǎge wǒ, huí dào jiā yǐhòu, wǒ zhǐ xiǎng zuò zuì qīngsōng de nà yí gè.",
+    "text_en": "At work, I'm a rather quiet person who rarely talks. Colleagues think I'm serious and hard to approach. But after work, when I'm with friends, I'm completely different — I tell jokes, sing, laugh out loud. Once a colleague ran into me and my friends at the mall. He saw me joking around and was astonished: 'You never smile at work!' I didn't know how to respond. Later I thought about it a long time: the work me and the off-work me — which is the real me? Maybe both. In different places we need different selves. This isn't pretending — it's because each place needs a different 'me.' But regardless of which me, when I get home, I just want to be the most relaxed one.",
+    "questions": [
+      {"type": "mc", "q_zh": "同事觉得「我」在上班的时候怎么样？", "q_en": "How do colleagues see 'me' at work?",
+       "options": [
+         {"text": "很幽默", "pinyin": "hěn yōumò", "text_en": "very humorous", "correct": false},
+         {"text": "很严肃，不太好接近", "pinyin": "hěn yánsù, bú tài hǎo jiējìn", "text_en": "serious, hard to approach", "correct": true},
+         {"text": "很热情", "pinyin": "hěn rèqíng", "text_en": "very warm", "correct": false},
+         {"text": "经常迟到", "pinyin": "jīngcháng chídào", "text_en": "often late", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "同事在商场看到「我」的时候为什么惊讶？", "q_en": "Why was the colleague surprised at the mall?",
+       "options": [
+         {"text": "「我」在买很贵的东西", "pinyin": "wǒ zài mǎi hěn guì de dōngxi", "text_en": "I was buying expensive things", "correct": false},
+         {"text": "「我」在跟朋友开玩笑", "pinyin": "wǒ zài gēn péngyou kāi wánxiào", "text_en": "I was joking with friends", "correct": true},
+         {"text": "「我」一个人在逛街", "pinyin": "wǒ yí gè rén zài guàng jiē", "text_en": "I was shopping alone", "correct": false},
+         {"text": "「我」穿的衣服不一样", "pinyin": "wǒ chuān de yīfu bù yíyàng", "text_en": "I was dressed differently", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」最后觉得上班和下班的自己哪个是真的？", "q_en": "Which self does 'I' think is real?",
+       "options": [
+         {"text": "上班的", "pinyin": "shàngbān de", "text_en": "work self", "correct": false},
+         {"text": "下班的", "pinyin": "xiàbān de", "text_en": "off-work self", "correct": false},
+         {"text": "也许都是", "pinyin": "yěxǔ dōu shì", "text_en": "maybe both", "correct": true},
+         {"text": "都不是", "pinyin": "dōu búshì", "text_en": "neither", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_observe_042",
+    "title": "The Paper Airplane",
+    "title_zh": "纸飞机",
+    "hsk_level": 3,
+    "text_zh": "今天下午我在阳台上晒太阳的时候，一架纸飞机飞到了我的阳台上。飞机上面写着：「如果你捡到了这架纸飞机，请在上面写一句话，然后从阳台上扔出去。」我笑了。我想了一会儿，在飞机上写了：「今天的天气很好。」然后把它扔了出去。我看着它飞了一会儿，落在了楼下的花园里。五分钟以后，我看到一个小朋友捡起了它，看了看上面的字，又加了一句话，然后用力扔了出去。我不知道那架纸飞机最后去了哪里。但是我觉得它带着很多人的一句话，飞得比较远了。也许这就是人和人之间最简单的连接——不需要见面，一句话就够了。",
+    "text_pinyin": "Jīntiān xiàwǔ wǒ zài yángtái shàng shài tàiyáng de shíhou, yí jià zhǐ fēijī fēi dào le wǒ de yángtái shàng. Fēijī shàngmiàn xiězhe:「Rúguǒ nǐ jiǎn dào le zhè jià zhǐ fēijī, qǐng zài shàngmiàn xiě yí jù huà, ránhòu cóng yángtái shàng rēng chūqù.」Wǒ xiào le. Wǒ xiǎng le yíhuìr, zài fēijī shàng xiě le:「Jīntiān de tiānqì hěn hǎo.」Ránhòu bǎ tā rēng le chūqù. Wǒ kànzhe tā fēi le yíhuìr, luò zài le lóu xià de huāyuán lǐ. Wǔ fēnzhōng yǐhòu, wǒ kàn dào yí gè xiǎopéngyou jiǎn qǐ le tā, kàn le kàn shàngmiàn de zì, yòu jiā le yí jù huà, ránhòu yòng lì rēng le chūqù. Wǒ bù zhīdào nà jià zhǐ fēijī zuìhòu qù le nǎlǐ. Dànshì wǒ juéde tā dàizhe hěn duō rén de yí jù huà, fēi de bǐjiào yuǎn le. Yěxǔ zhè jiùshì rén hé rén zhījiān zuì jiǎndān de liánjiē——bù xūyào jiànmiàn, yí jù huà jiù gòu le.",
+    "text_en": "This afternoon while sunbathing on my balcony, a paper airplane landed on it. It said: 'If you find this airplane, write a sentence on it and throw it from your balcony.' I smiled. I thought for a moment, wrote: 'Today's weather is very nice,' and threw it out. I watched it fly a while before landing in the garden below. Five minutes later, I saw a child pick it up, read the writing, add a sentence, and throw it hard. I don't know where that paper airplane ended up. But I feel it carried many people's words and flew rather far. Maybe this is the simplest connection between people — no need to meet, one sentence is enough.",
+    "questions": [
+      {"type": "mc", "q_zh": "纸飞机上写了什么？", "q_en": "What was written on the paper airplane?",
+       "options": [
+         {"text": "一个名字", "pinyin": "yí gè míngzi", "text_en": "a name", "correct": false},
+         {"text": "请写一句话然后扔出去", "pinyin": "qǐng xiě yí jù huà ránhòu rēng chūqù", "text_en": "write a sentence and throw it", "correct": true},
+         {"text": "一个电话号码", "pinyin": "yí gè diànhuà hàomǎ", "text_en": "a phone number", "correct": false},
+         {"text": "一个地址", "pinyin": "yí gè dìzhǐ", "text_en": "an address", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」在飞机上写了什么？", "q_en": "What did 'I' write on the airplane?",
+       "options": [
+         {"text": "你好", "pinyin": "nǐ hǎo", "text_en": "hello", "correct": false},
+         {"text": "今天的天气很好", "pinyin": "jīntiān de tiānqì hěn hǎo", "text_en": "today's weather is nice", "correct": true},
+         {"text": "我住在五楼", "pinyin": "wǒ zhù zài wǔ lóu", "text_en": "I live on the fifth floor", "correct": false},
+         {"text": "我叫什么名字", "pinyin": "wǒ jiào shénme míngzi", "text_en": "my name", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得这是什么？", "q_en": "What does 'I' think this is?",
+       "options": [
+         {"text": "一个游戏", "pinyin": "yí gè yóuxì", "text_en": "a game", "correct": false},
+         {"text": "人和人之间最简单的连接", "pinyin": "rén hé rén zhījiān zuì jiǎndān de liánjiē", "text_en": "the simplest connection between people", "correct": true},
+         {"text": "小朋友的玩具", "pinyin": "xiǎopéngyou de wánjù", "text_en": "a child's toy", "correct": false},
+         {"text": "浪费纸", "pinyin": "làngfèi zhǐ", "text_en": "wasting paper", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_comedy_009",
+    "title": "The GPS Voice",
+    "title_zh": "导航的声音",
+    "hsk_level": 3,
+    "text_zh": "我爸爸最近学会了用手机导航。但是他有一个问题——他总是跟导航吵架。导航说「请右转」，他说「右边是墙你让我怎么转！」导航说「前方一百米掉头」，他说「你早点说不行吗！」最好笑的一次，导航说「您已偏离路线，正在重新规划」。爸爸生气地说：「不是我偏离路线，是你的路线有问题！」妈妈在旁边笑得不行，说：「你跟一个机器吵架，它又听不到。」爸爸说：「我知道它听不到，但是说出来我比较舒服。」从那以后，每次坐爸爸的车，我都一边听导航一边听爸爸的评论，觉得这比听相声还有意思。",
+    "text_pinyin": "Wǒ bàba zuìjìn xuéhuì le yòng shǒujī dǎoháng. Dànshì tā yǒu yí gè wèntí——tā zǒng shì gēn dǎoháng chǎo jià. Dǎoháng shuō「qǐng yòu zhuǎn」, tā shuō「yòubiān shì qiáng nǐ ràng wǒ zěnme zhuǎn!」Dǎoháng shuō「qiánfāng yì bǎi mǐ diào tóu」, tā shuō「nǐ zǎo diǎn shuō bù xíng ma!」Zuì hǎoxiào de yí cì, dǎoháng shuō「nín yǐ piānlí lùxiàn, zhèngzài chóngxīn guīhuà」. Bàba shēngqì de shuō:「Búshì wǒ piānlí lùxiàn, shì nǐ de lùxiàn yǒu wèntí!」Māma zài pángbiān xiào de bùxíng, shuō:「Nǐ gēn yí gè jīqì chǎo jià, tā yòu tīng bú dào.」Bàba shuō:「Wǒ zhīdào tā tīng bú dào, dànshì shuō chūlái wǒ bǐjiào shūfu.」Cóng nà yǐhòu, měi cì zuò bàba de chē, wǒ dōu yìbiān tīng dǎoháng yìbiān tīng bàba de pínglùn, juéde zhè bǐ tīng xiàngsheng hái yǒuyìsi.",
+    "text_en": "My dad recently learned to use phone navigation. But he has a problem — he always argues with the GPS. The GPS says 'please turn right,' he says 'there's a wall on the right, how am I supposed to turn!' The GPS says 'make a U-turn in 100 meters,' he says 'couldn't you have said that earlier!' The funniest time, the GPS said 'you have deviated from the route, recalculating.' Dad said angrily: 'I didn't deviate — your route has a problem!' Mom was laughing uncontrollably next to him: 'You're arguing with a machine that can't hear you.' Dad said: 'I know it can't hear, but saying it makes me feel better.' Since then, every ride in Dad's car, I listen to the GPS and Dad's commentary at the same time — more entertaining than comedy shows.",
+    "questions": [
+      {"type": "mc", "q_zh": "爸爸跟什么吵架？", "q_en": "What does Dad argue with?",
+       "options": [
+         {"text": "妈妈", "pinyin": "māma", "text_en": "Mom", "correct": false},
+         {"text": "手机导航", "pinyin": "shǒujī dǎoháng", "text_en": "phone GPS", "correct": true},
+         {"text": "路上的人", "pinyin": "lù shàng de rén", "text_en": "people on the road", "correct": false},
+         {"text": "收音机", "pinyin": "shōuyīnjī", "text_en": "the radio", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "妈妈说了什么？", "q_en": "What did Mom say?",
+       "options": [
+         {"text": "爸爸开车不好", "pinyin": "bàba kāi chē bù hǎo", "text_en": "Dad drives poorly", "correct": false},
+         {"text": "跟机器吵架，它又听不到", "pinyin": "gēn jīqì chǎo jià, tā yòu tīng bú dào", "text_en": "arguing with a machine that can't hear", "correct": true},
+         {"text": "应该换一个导航", "pinyin": "yīnggāi huàn yí gè dǎoháng", "text_en": "should change the GPS", "correct": false},
+         {"text": "不要用导航了", "pinyin": "bú yào yòng dǎoháng le", "text_en": "stop using GPS", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得坐爸爸的车怎么样？", "q_en": "How does 'I' feel about riding in Dad's car?",
+       "options": [
+         {"text": "很害怕", "pinyin": "hěn hàipà", "text_en": "scared", "correct": false},
+         {"text": "比听相声还有意思", "pinyin": "bǐ tīng xiàngsheng hái yǒuyìsi", "text_en": "more entertaining than comedy shows", "correct": true},
+         {"text": "很烦", "pinyin": "hěn fán", "text_en": "annoying", "correct": false},
+         {"text": "没什么感觉", "pinyin": "méi shénme gǎnjué", "text_en": "no particular feeling", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_observe_043",
+    "title": "The Last Leaf",
+    "title_zh": "最后一片叶子",
+    "hsk_level": 3,
+    "text_zh": "秋天快要结束的时候，窗外那棵树只剩下最后一片叶子了。我每天都看着它，想：它什么时候会掉下来？刮风的时候，它动了一下，但是没有掉。下雨的时候，它又动了一下，还是没有掉。我开始佩服这片叶子了。一个星期过去了，它还在那里。我跟妈妈说了这件事。妈妈说：「你不要盯着它看，等你不注意的时候，它自然就掉了。」我觉得妈妈说得比较对。很多事情都是这样——你越在意，它越不走；你不看了，它就自己走了。后来有一天早上，我一看窗外，树上什么都没有了。那片叶子悄悄地走了，没有跟我说再见。",
+    "text_pinyin": "Qiūtiān kuài yào jiéshù de shíhou, chuāng wài nà kē shù zhǐ shèng xià zuìhòu yí piàn yèzi le. Wǒ měi tiān dōu kànzhe tā, xiǎng: tā shénme shíhou huì diào xiàlái? Guā fēng de shíhou, tā dòng le yíxià, dànshì méiyǒu diào. Xià yǔ de shíhou, tā yòu dòng le yíxià, háishi méiyǒu diào. Wǒ kāishǐ pèifú zhè piàn yèzi le. Yí gè xīngqī guòqu le, tā hái zài nàlǐ. Wǒ gēn māma shuō le zhè jiàn shì. Māma shuō:「Nǐ bú yào dīngzhe tā kàn, děng nǐ bú zhùyì de shíhou, tā zìrán jiù diào le.」Wǒ juéde māma shuō de bǐjiào duì. Hěn duō shìqing dōu shì zhèyàng——nǐ yuè zàiyì, tā yuè bù zǒu; nǐ bú kàn le, tā jiù zìjǐ zǒu le. Hòulái yǒu yì tiān zǎoshang, wǒ yí kàn chuāng wài, shù shàng shénme dōu méiyǒu le. Nà piàn yèzi qiāoqiāo de zǒu le, méiyǒu gēn wǒ shuō zàijiàn.",
+    "text_en": "Near the end of autumn, the tree outside my window had only one leaf left. I watched it every day, wondering: when will it fall? When the wind blew, it trembled but didn't fall. When it rained, it trembled again but still held on. I began to admire this leaf. A week passed and it was still there. I told Mom about it. She said: 'Stop staring at it. When you're not paying attention, it'll fall on its own.' I think Mom was rather right. Many things work this way — the more you watch, the longer they stay; look away, and they leave on their own. Then one morning I looked out the window and the tree was bare. That leaf had quietly left, without saying goodbye.",
+    "questions": [
+      {"type": "mc", "q_zh": "树上还剩几片叶子？", "q_en": "How many leaves were left on the tree?",
+       "options": [
+         {"text": "三片", "pinyin": "sān piàn", "text_en": "three", "correct": false},
+         {"text": "一片", "pinyin": "yí piàn", "text_en": "one", "correct": true},
+         {"text": "五片", "pinyin": "wǔ piàn", "text_en": "five", "correct": false},
+         {"text": "一片都没有了", "pinyin": "yí piàn dōu méiyǒu le", "text_en": "none left", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "妈妈说了什么道理？", "q_en": "What wisdom did Mom share?",
+       "options": [
+         {"text": "叶子早晚会掉的", "pinyin": "yèzi zǎo wǎn huì diào de", "text_en": "leaves will fall eventually", "correct": false},
+         {"text": "不盯着看，不注意的时候它自然就掉了", "pinyin": "bú dīngzhe kàn, bú zhùyì de shíhou tā zìrán jiù diào le", "text_en": "stop staring, it'll fall when you're not watching", "correct": true},
+         {"text": "秋天的叶子都会掉", "pinyin": "qiūtiān de yèzi dōu huì diào", "text_en": "autumn leaves all fall", "correct": false},
+         {"text": "不要太在意", "pinyin": "bú yào tài zàiyì", "text_en": "don't care too much", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "叶子最后怎么了？", "q_en": "What happened to the leaf?",
+       "options": [
+         {"text": "被风吹走了", "pinyin": "bèi fēng chuī zǒu le", "text_en": "blown away by wind", "correct": false},
+         {"text": "悄悄地走了，没有说再见", "pinyin": "qiāoqiāo de zǒu le, méiyǒu shuō zàijiàn", "text_en": "left quietly without saying goodbye", "correct": true},
+         {"text": "一直没有掉", "pinyin": "yìzhí méiyǒu diào", "text_en": "never fell", "correct": false},
+         {"text": "「我」摘了下来", "pinyin": "wǒ zhāi le xiàlái", "text_en": "I picked it off", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  }
+]

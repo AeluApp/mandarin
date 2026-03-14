@@ -1,0 +1,117 @@
+{
+    "title": "The Locked Room on the Third Floor",
+    "title_zh": "三楼锁着的房间",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You've just moved into an old apartment building in Chengdu. Your neighbor across the hall, a retired detective named Uncle Fang, mentions that the apartment on the third floor has been locked for two years. Nobody knows who owns it, but sometimes people hear sounds at night.",
+        "setup_zh": "你刚搬进成都一栋老公寓楼。对面的邻居方叔是个退休的侦探，提到三楼有间公寓锁了两年。没人知道谁是房主，但有时候晚上能听到声响。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你是新搬来的吧？跟你说个事儿——三楼靠右那间，你别好奇去敲门。锁了两年了，物业也不管。但有意思的是，电表一直在走。",
+                "text_pinyin": "Nǐ shì xīn bān lái de ba? Gēn nǐ shuō ge shìr — sān lóu kào yòu nà jiān, nǐ bié hàoqí qù qiāo mén. Suǒ le liǎng nián le, wùyè yě bù guǎn. Dàn yǒu yìsi de shì, diànbiǎo yīzhí zài zǒu.",
+                "text_en": "You just moved in, right? Let me tell you something — that unit on the right side of the third floor, don't go knocking out of curiosity. Been locked for two years, property management doesn't deal with it. But here's the interesting thing: the electric meter's been running the whole time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Uncle Fang's intriguing detail about the electric meter.",
+                "options": [
+                    {
+                        "text_zh": "电表一直在走？那就说明里面有东西在用电。要么是有人定期来，要么是什么设备一直开着。方叔，你以前做侦探的——你觉得最可能的解释是什么？",
+                        "text_pinyin": "Diànbiǎo yīzhí zài zǒu? Nà jiù shuōmíng lǐmiàn yǒu dōngxi zài yòng diàn. Yàome shì yǒu rén dìngqī lái, yàome shì shénme shèbèi yīzhí kāi zhe. Fāng shū, nǐ yǐqián zuò zhēntàn de — nǐ juéde zuì kěnéng de jiěshì shì shénme?",
+                        "text_en": "The meter's been running? That means something inside is using electricity. Either someone comes by regularly, or some equipment is running continuously. Uncle Fang, you used to be a detective — what do you think the most likely explanation is?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Good deductive thinking — identifies the key implications and appeals to his expertise."
+                    },
+                    {
+                        "text_zh": "这栋楼的物业费贵不贵？",
+                        "text_pinyin": "Zhè dòng lóu de wùyè fèi guì bú guì?",
+                        "text_en": "Are the property management fees expensive in this building?",
+                        "score": 0.0,
+                        "feedback": "A man is telling you about a mystery and you're asking about HOA fees."
+                    },
+                    {
+                        "text_zh": "我还没把宽带装好，你知道哪个运营商比较好吗？",
+                        "text_pinyin": "Wǒ hái méi bǎ kuāndài zhuāng hǎo, nǐ zhīdào nǎge yùnyíngshāng bǐjiào hǎo ma?",
+                        "text_en": "I haven't set up my internet yet, do you know which provider is better?",
+                        "score": 0.0,
+                        "feedback": "Practical question that kills the detective-story atmosphere."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我观察了一下。快递从来没有送到那个门牌号的。但是每个月月初，会有一个人来——穿得很普通，戴着口罩，提着一个黑色的袋子。待大概一个小时就走。我试着跟他打过招呼，他不理我。",
+                "text_pinyin": "Wǒ guānchá le yīxià. Kuàidì cónglái méiyǒu sòng dào nàge ménpái hào de. Dànshì měi ge yuè yuèchū, huì yǒu yīge rén lái — chuān de hěn pǔtōng, dài zhe kǒuzhào, tí zhe yīge hēisè de dàizi. Dāi dàgài yīge xiǎoshí jiù zǒu. Wǒ shì zhe gēn tā dǎ guò zhāohu, tā bù lǐ wǒ.",
+                "text_en": "I've been observing. Deliveries never come to that door number. But at the beginning of every month, someone shows up — dressed plainly, wearing a mask, carrying a black bag. Stays about an hour and leaves. I tried greeting him once; he ignored me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reason through the clues with Uncle Fang.",
+                "options": [
+                    {
+                        "text_zh": "月初来一次，每次带个袋子——如果是搬东西应该更频繁。你觉得有没有可能是在维护什么？比如浇花、检查设备之类的？而且他不想被认出来，所以才戴口罩、不跟人说话。",
+                        "text_pinyin": "Yuèchū lái yī cì, měi cì dài ge dàizi — rúguǒ shì bān dōngxi yīnggāi gèng pínfán. Nǐ juéde yǒu méiyǒu kěnéng shì zài wéihù shénme? Bǐrú jiāo huā, jiǎnchá shèbèi zhī lèi de? Érqiě tā bù xiǎng bèi rèn chūlái, suǒyǐ cái dài kǒuzhào, bù gēn rén shuōhuà.",
+                        "text_en": "Once a month, always with a bag — if he were moving things it'd be more frequent. Think he's maintaining something? Watering plants, checking equipment? And he doesn't want to be recognized — hence the mask, no talking.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sound reasoning — eliminates the moving hypothesis and proposes maintenance, while noting the deliberate anonymity."
+                    },
+                    {
+                        "text_zh": "我最近在追一部电视剧，你看不看电视？",
+                        "text_pinyin": "Wǒ zuìjìn zài zhuī yī bù diànshìjù, nǐ kàn bú kàn diànshì?",
+                        "text_en": "I've been following a TV series, do you watch TV?",
+                        "score": 0.0,
+                        "feedback": "You're in the middle of a real-life mystery and you pivot to TV."
+                    },
+                    {
+                        "text_zh": "成都的火锅真的好吃，你推荐哪家？",
+                        "text_pinyin": "Chéngdū de huǒguō zhēn de hǎochī, nǐ tuījiàn nǎ jiā?",
+                        "text_en": "Chengdu hotpot is really delicious, which restaurant do you recommend?",
+                        "score": 0.0,
+                        "feedback": "Derails the detective conversation entirely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "维护……有道理。还有一个细节——我有一次正好在楼道里，听到他在打电话，声音很低，但我听到他说了一句'数据已经备份了'。你觉得这意味着什么？",
+                "text_pinyin": "Wéihù ... yǒu dàolǐ. Hái yǒu yīge xìjié — wǒ yǒu yī cì zhènghǎo zài lóudào lǐ, tīng dào tā zài dǎ diànhuà, shēngyīn hěn dī, dàn wǒ tīng dào tā shuō le yī jù 'shùjù yǐjīng bèifèn le'. Nǐ juéde zhè yìwèi zhe shénme?",
+                "text_en": "Maintenance... makes sense. One more detail — I happened to be in the hallway once and heard him on the phone, voice very low, but I caught him saying 'the data has been backed up.' What do you think that means?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Put the clues together.",
+                "options": [
+                    {
+                        "text_zh": "电表一直走、每月来一次、'数据备份'——越来越像一个私人服务器机房。有人把服务器放在居民楼里，可能为了省钱，也可能不想留商业注册记录。不违法，但肯定不合规。",
+                        "text_pinyin": "Diànbiǎo yīzhí zǒu, měi yuè lái yī cì, 'shùjù bèifèn' — yuè lái yuè xiàng yīge sīrén fúwùqì jīfáng. Yǒu rén bǎ fúwùqì fàng zài jūmín lóu lǐ, kěnéng wèile shěng qián, yě kěnéng bù xiǎng liú shāngyè zhùcè jìlù. Bú wéifǎ, dàn kěndìng bù héguī.",
+                        "text_en": "Meter running, monthly visits, 'data backup' — increasingly looks like a private server room. Someone running servers in a residential building, maybe to save money or avoid a commercial trail. Not illegal, but definitely not compliant.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Excellent deduction — synthesizes all the clues into a coherent and plausible theory."
+                    },
+                    {
+                        "text_zh": "你退休之后平时做什么消遣？",
+                        "text_pinyin": "Nǐ tuìxiū zhīhòu píngshí zuò shénme xiāoqiǎn?",
+                        "text_en": "What do you do for fun since retiring?",
+                        "score": 0.0,
+                        "feedback": "The man just dropped a major clue and you ask about hobbies."
+                    },
+                    {
+                        "text_zh": "最近天气挺热的，你觉得今年夏天会更热吗？",
+                        "text_pinyin": "Zuìjìn tiānqì tǐng rè de, nǐ juéde jīnnián xiàtiān huì gèng rè ma?",
+                        "text_en": "It's been pretty hot lately, do you think this summer will be hotter?",
+                        "score": 0.0,
+                        "feedback": "Weather small talk when you're piecing together a mystery."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Running private server rooms in residential buildings (居民楼) is a real phenomenon in Chinese cities, where commercial data center space is expensive and regulations are unevenly enforced. Retired people (especially former police or security professionals) often become de facto neighborhood watchmen, maintaining an observational awareness that stems from decades of professional habit. The detail of the electric meter (电表) is culturally specific — in older Chinese buildings, meters are often visible in public hallways, making neighbor surveillance both easy and normalized."
+    }
+}

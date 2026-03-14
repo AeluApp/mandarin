@@ -1,0 +1,83 @@
+{
+    "title": "The Fruit Stand",
+    "title_zh": "水果摊",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You stop at a small fruit stand run by a cheerful woman, Sister Mei. She's arranging peaches with care, turning each one so the best side faces out.",
+        "setup_zh": "你在一个小水果摊前停下来。老板梅姐是一位开朗的女性。她正在仔细地摆放桃子，把每一个最好看的那面朝外。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这些桃子，每一个我都转了一下，让它最好看的那面对着客人。有人说我太认真了，但我觉得水果也有自己最好的样子，应该让别人看到。",
+                "text_pinyin": "Nǐ kàn zhèxiē táozi, měi yīge wǒ dōu zhuǎn le yīxià, ràng tā zuì hǎokàn de nà miàn duì zhe kèrén. Yǒu rén shuō wǒ tài rènzhēn le, dàn wǒ juéde shuǐguǒ yě yǒu zìjǐ zuì hǎo de yàngzi, yīnggāi ràng biérén kàn dào.",
+                "text_en": "Look at these peaches — I turned each one to show its best side to customers. Some people say I'm too serious about it, but I think fruit has its best face too, and it should be seen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her care with the peaches.",
+                "options": [
+                    {
+                        "text_zh": "这不是太认真，这是用心。大多数人只是把水果堆在那里，但你认真对待每一个桃子。做小事也能做得很美。",
+                        "text_pinyin": "Zhè bú shì tài rènzhēn, zhè shì yòngxīn. Dà duōshù rén zhǐ shì bǎ shuǐguǒ duī zài nàlǐ, dàn nǐ rènzhēn duìdài měi yīge táozi. Zuò xiǎo shì yě néng zuò de hěn měi.",
+                        "text_en": "That's not being too serious — that's being thoughtful. Most people just pile fruit up, but you treat each peach with care. Even small things can be done beautifully.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Validates her attention to detail as craft rather than obsession."
+                    },
+                    {
+                        "text_zh": "这些桃子甜不甜？",
+                        "text_pinyin": "Zhèxiē táozi tián bù tián?",
+                        "text_en": "Are these peaches sweet?",
+                        "score": 0.0,
+                        "feedback": "Taste question that ignores her careful arrangement."
+                    },
+                    {
+                        "text_zh": "其实客人买水果主要看新不新鲜，摆得好不好看应该没那么重要吧。反正买回去就吃了。",
+                        "text_pinyin": "Qíshí kèrén mǎi shuǐguǒ zhǔyào kàn xīn bù xīnxiān, bǎi de hǎo bù hǎokàn yīnggāi méi nàme zhòngyào ba. Fǎnzhèng mǎi huíqù jiù chī le.",
+                        "text_en": "Honestly, customers mostly care if fruit is fresh. How it's arranged probably doesn't matter much — they'll eat it as soon as they get home anyway.",
+                        "score": 0.0,
+                        "feedback": "Sister Mei pauses mid-turn: 'If that were true, nobody would ever arrange flowers either.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "用心，对。我妈妈以前也是卖水果的。她教我说，「不管做什么，都要让别人看到你的心意。」哪怕只是摆一个水果摊，你也能让路过的人觉得今天的生活好了一点。",
+                "text_pinyin": "Yòngxīn, duì. Wǒ māma yǐqián yě shì mài shuǐguǒ de. Tā jiāo wǒ shuō, 'bùguǎn zuò shénme, dōu yào ràng biérén kàn dào nǐ de xīnyì.' Nǎpà zhǐ shì bǎi yīge shuǐguǒ tān, nǐ yě néng ràng lùguò de rén juéde jīntiān de shēnghuó hǎo le yīdiǎn.",
+                "text_en": "Thoughtful, yes. My mother sold fruit too. She taught me: 'No matter what you do, let people see your care in it.' Even if it's just a fruit stand, you can make someone passing by feel life is a little better today."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her mother's teaching.",
+                "options": [
+                    {
+                        "text_zh": "你妈妈说得真好。让路过的人觉得生活好了一点——这就是最了不起的事。不用做大事，每天认真做好小事，就在让世界更好。",
+                        "text_pinyin": "Nǐ māma shuō de zhēn hǎo. Ràng lùguò de rén juéde shēnghuó hǎo le yīdiǎn — zhè jiù shì zuì liǎobuqǐ de shì. Bú yòng zuò dà shì, měi tiān rènzhēn zuò hǎo xiǎo shì, jiù zài ràng shìjiè gèng hǎo.",
+                        "text_en": "Your mother said it perfectly. Making passersby feel life is a little better — that's remarkable. No need for big things; doing small things well each day already makes the world better.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honors the philosophy of small acts mattering — grounded and genuine."
+                    },
+                    {
+                        "text_zh": "你妈妈还在卖水果吗？",
+                        "text_pinyin": "Nǐ māma hái zài mài shuǐguǒ ma?",
+                        "text_en": "Is your mother still selling fruit?",
+                        "score": 0.0,
+                        "feedback": "Status question that shifts from the teaching."
+                    },
+                    {
+                        "text_zh": "你这里有西瓜吗？",
+                        "text_pinyin": "Nǐ zhèlǐ yǒu xīguā ma?",
+                        "text_en": "Do you have watermelon?",
+                        "score": 0.0,
+                        "feedback": "Inventory question during a heartfelt exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The care with which Chinese fruit vendors arrange their displays reflects a broader cultural value of 用心 (yòngxīn, putting heart into something). Small-scale fruit vendors, often family businesses passed between generations, are a vital part of Chinese street life. The philosophy that even the humblest work can brighten someone's day connects to the Confucian idea that moral excellence is practiced in ordinary, daily actions."
+    }
+}

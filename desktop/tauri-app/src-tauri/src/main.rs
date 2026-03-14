@@ -7,6 +7,9 @@ use tauri::{Manager, RunEvent};
 use tauri_plugin_shell::ShellExt;
 use tauri_plugin_shell::process::{CommandChild, CommandEvent};
 
+#[cfg(target_os = "macos")]
+use objc::{msg_send, sel, sel_impl, runtime::Object};
+
 const PORT: u16 = 5173;
 
 struct SidecarState {
@@ -27,6 +30,40 @@ fn kill_process_tree(pid: u32) {
         libc::kill(-(pid as i32), libc::SIGKILL);
         libc::kill(pid as i32, libc::SIGKILL);
     }
+}
+
+/// Configure the WKWebView to allow media capture (microphone) and inline playback.
+/// This is required for `navigator.mediaDevices.getUserMedia` to work in WKWebView.
+#[cfg(target_os = "macos")]
+fn configure_webview_media(app: &tauri::App) {
+    use tauri::WebviewWindow;
+
+    let window: WebviewWindow = app.get_webview_window("main")
+        .expect("main window not found");
+
+    // Access the underlying WKWebView via the webview's ns_view
+    window.with_webview(|webview| {
+        unsafe {
+            // The wry webview inner is a WKWebView. Access its configuration.
+            let wk_webview: *mut Object = webview.inner().cast();
+            let configuration: *mut Object = msg_send![wk_webview, configuration];
+            let preferences: *mut Object = msg_send![configuration, preferences];
+
+            // WKPreferences: enable JavaScript (should already be on, but be explicit)
+            let _: () = msg_send![preferences, _setMediaDevicesEnabled: true];
+            let _: () = msg_send![preferences, _setMediaCaptureRequiresSecureConnection: false];
+
+            // WKWebViewConfiguration: allow inline media playback
+            let _: () = msg_send![configuration, setAllowsInlineMediaPlayback: true];
+
+            // Set mediaTypesRequiringUserActionForPlayback to none (0 = WKAudiovisualMediaTypeNone)
+            let _: () = msg_send![configuration, setMediaTypesRequiringUserActionForPlayback: 0u64];
+
+            eprintln!("[tauri] WKWebView media capture configured");
+        }
+    }).unwrap_or_else(|e| {
+        eprintln!("[tauri] failed to configure webview media: {:?}", e);
+    });
 }
 
 fn main() {
@@ -75,6 +112,10 @@ fn main() {
                     }
                 }
             });
+
+            // Configure WKWebView for microphone access and inline media playback
+            #[cfg(target_os = "macos")]
+            configure_webview_media(app);
 
             Ok(())
         })

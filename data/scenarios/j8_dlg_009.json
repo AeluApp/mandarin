@@ -1,0 +1,118 @@
+{
+    "title": "The Porcelain Restorer",
+    "title_zh": "修瓷人",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You visit a porcelain restoration workshop in Jingdezhen. The restorer, Ms. Ye, is reassembling a Song dynasty celadon bowl from seventeen fragments. Her desk lamp illuminates each tiny shard.",
+        "setup_zh": "你在景德镇参观一个瓷器修复工作室。修复师叶女士正在用十七片碎片重新拼合一只宋代青瓷碗。台灯照亮了每一片小碎片。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这只碗碎成了十七片。拼起来大概需要三个月。很多人问我「为什么不去修一个完整的碗？修碎片有什么意义？」但你看——每一道裂纹都是这只碗经历过的时间。如果我修好了，所有的碎片重新在一起，裂纹还在，但碗又完整了。它会比一只从未破过的碗更美。不是因为破了更美，而是因为「破了又完整」这个过程本身就是一种美。",
+                "text_pinyin": "Zhè zhī wǎn suì chéng le shíqī piàn. Pīn qǐlái dàgài xūyào sān ge yuè. Hěn duō rén wèn wǒ 'wèishéme bú qù xiū yī ge wánzhěng de wǎn? Xiū suìpiàn yǒu shénme yìyì?' Dàn nǐ kàn — měi yī dào lièwén dōu shì zhè zhī wǎn jīnglì guò de shíjiān. Rúguǒ wǒ xiū hǎo le, suǒyǒu de suìpiàn chóngxīn zài yīqǐ, lièwén hái zài, dàn wǎn yòu wánzhěng le. Tā huì bǐ yī zhī cóng wèi pò guò de wǎn gèng měi. Bú shì yīnwèi pò le gèng měi, ér shì yīnwèi 'pò le yòu wánzhěng' zhège guòchéng běnshēn jiù shì yī zhǒng měi.",
+                "text_en": "This bowl broke into seventeen pieces. Reassembly takes about three months. Many ask: 'Why not work on an intact bowl?' But every crack is time this bowl lived through. When I finish, cracks still visible, but whole again. More beautiful than a bowl that never broke. Not because breaking is beautiful, but because 'broken and made whole' — that process is a kind of beauty."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the beauty of 'broken and made whole again.'",
+                "options": [
+                    {
+                        "text_zh": "「破了又完整」——这不只是修复技术，是一种对时间的态度。从未破过的碗只有一个故事：被制造。这只碗有三个故事：被制造、被打碎、被修复。修复不是抹去裂纹——是承认裂纹，然后选择继续完整。",
+                        "text_pinyin": "'Pò le yòu wánzhěng' — zhè bù zhǐ shì xiūfù jìshù, shì yī zhǒng duì shíjiān de tàidù. Cóng wèi pò guò de wǎn zhǐyǒu yī ge gùshì: bèi zhìzào. Zhè zhī wǎn yǒu sān ge gùshì: bèi zhìzào, bèi dǎ suì, bèi xiūfù. Xiūfù bú shì mǒ qù lièwén — shì chéngrèn lièwén, ránhòu xuǎnzé jìxù wánzhěng.",
+                        "text_en": "'Broken and made whole' — not just a technique, but an attitude toward time. A bowl that never broke has one story: being made. This bowl has three: made, broken, restored. Restoration isn't erasing cracks — it's acknowledging them, then choosing to be whole again.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Three stories instead of one — restored wholeness surpasses original wholeness."
+                    },
+                    {
+                        "text_zh": "这跟日本的金缮是一样的道理吗？",
+                        "text_pinyin": "Zhè gēn Rìběn de jīnshàn shì yīyàng de dàolǐ ma?",
+                        "text_en": "Is this the same principle as Japanese kintsugi?",
+                        "score": 0.0,
+                        "feedback": "Compares to another tradition instead of engaging with her own philosophy."
+                    },
+                    {
+                        "text_zh": "这跟日本的金缮是一样的道理吧？用金粉填裂缝，也是强调修复的美。",
+                        "text_pinyin": "Zhè gēn Rìběn de jīnshàn shì yīyàng de dàolǐ ba? Yòng jīnfěn tián lièfèng, yě shì qiángdiào xiūfù de měi.",
+                        "text_en": "This is the same idea as Japanese kintsugi, right? Using gold powder to fill cracks, also emphasizing the beauty of repair.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Ms. Ye sets down her tool. 'She just articulated her own philosophy — that the process of being broken and made whole is itself beautiful — and you immediately filed it under someone else's tradition.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "三个故事——说得好。但我要告诉你最难的部分：拼的时候，有些碎片之间会有缝隙——因为碎裂的时候有些粉末丢失了。那些缝隙是永远填不满的。我能做到的不是「恢复原状」——是「在缺失中重建完整」。接受有些东西永远回不来了，但依然选择把剩下的拼在一起——这才是修复的真正含义。",
+                "text_pinyin": "Sān ge gùshì — shuō de hǎo. Dàn wǒ yào gàosu nǐ zuì nán de bùfen: pīn de shíhou, yǒuxiē suìpiàn zhī jiān huì yǒu fèngxì — yīnwèi suìliè de shíhou yǒuxiē fěnmò diūshī le. Nàxiē fèngxì shì yǒngyuǎn tián bù mǎn de. Wǒ néng zuò dào de bú shì 'huīfù yuánzhuàng' — shì 'zài quēshī zhōng chóngjiàn wánzhěng'. Jiēshòu yǒuxiē dōngxi yǒngyuǎn huí bù lái le, dàn yīrán xuǎnzé bǎ shèng xià de pīn zài yīqǐ — zhè cái shì xiūfù de zhēnzhèng hányì.",
+                "text_en": "Three stories — well said. But let me tell you the hardest part: when assembling, there are gaps between some fragments — because some dust was lost during the breaking. Those gaps can never be filled. What I can achieve isn't 'restoring to original' — it's 'rebuilding wholeness within loss.' Accepting that some things will never come back, yet still choosing to piece together what remains — that's the true meaning of restoration."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to rebuilding wholeness within loss.",
+                "options": [
+                    {
+                        "text_zh": "在缺失中重建完整——这不只是在说瓷碗了。真正的修复从来不是回到从前。它是站在碎片之间说：「有些东西没了，但我选择用剩下的重新组成整体。」那个整体不完美，但比「完美」更诚实——因为它承认了失去，同时拒绝了放弃。",
+                        "text_pinyin": "Zài quēshī zhōng chóngjiàn wánzhěng — zhè bù zhǐ shì zài shuō cí wǎn le. Zhēnzhèng de xiūfù cónglái bú shì huí dào cóngqián. Tā shì zhàn zài suìpiàn zhī jiān shuō: 'yǒuxiē dōngxi méi le, dàn wǒ xuǎnzé yòng shèng xià de chóngxīn zǔchéng zhěngtǐ.' Nàge zhěngtǐ bù wánměi, dàn bǐ 'wánměi' gèng chéngshí — yīnwèi tā chéngrèn le shīqù, tóngshí jùjué le fàngqì.",
+                        "text_en": "Rebuilding wholeness within loss — this isn't about a bowl anymore. True restoration never means going back. It's standing among fragments saying: 'some things are gone, but I choose to reassemble what remains into a whole.' That whole isn't perfect, but more honest than 'perfect' — it acknowledges loss while refusing surrender.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Restoration as the space between acknowledging loss and refusing surrender."
+                    },
+                    {
+                        "text_zh": "用什么胶水来粘？",
+                        "text_pinyin": "Yòng shénme jiāoshuǐ lái zhān?",
+                        "text_en": "What glue do you use?",
+                        "score": 0.0,
+                        "feedback": "An adhesive question during a profound philosophical exchange."
+                    },
+                    {
+                        "text_zh": "如果碎片太小了，拼不起来怎么办？",
+                        "text_pinyin": "Rúguǒ suìpiàn tài xiǎo le, pīn bù qǐlái zěnme bàn?",
+                        "text_en": "What if the fragments are too small to reassemble?",
+                        "score": 0.0,
+                        "feedback": "Asks about failure cases during a meditation on choosing to repair."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "承认失去，拒绝放弃——你把我三十年做的事浓缩成了一句话。但我还想补充一点：有时候修复完成以后，我会坐在那里看着修好的碗，觉得它比原来更让我感动。不是因为我的工作好——是因为它经历了碎裂还在这里。它的存在本身就是一种勇气。每一只修复过的碗都在安静地说：「我碎过，但我还在。」",
+                "text_pinyin": "Chéngrèn shīqù, jùjué fàngqì — nǐ bǎ wǒ sānshí nián zuò de shì nóngsuō chéng le yī jù huà. Dàn wǒ hái xiǎng bǔchōng yīdiǎn: yǒu shíhou xiūfù wánchéng yǐhòu, wǒ huì zuò zài nàlǐ kàn zhe xiū hǎo de wǎn, juéde tā bǐ yuánlái gèng ràng wǒ gǎndòng. Bú shì yīnwèi wǒ de gōngzuò hǎo — shì yīnwèi tā jīnglì le suìliè hái zài zhèlǐ. Tā de cúnzài běnshēn jiù shì yī zhǒng yǒngqì. Měi yī zhī xiūfù guò de wǎn dōu zài ānjìng de shuō: 'Wǒ suì guò, dàn wǒ hái zài.'",
+                "text_en": "Acknowledging loss, refusing surrender — you've compressed thirty years of my work into one sentence. But I want to add: sometimes after a restoration is complete, I sit and look at the repaired bowl, and feel more moved by it than the original. Not because my work is good — because it endured shattering and is still here. Its very existence is a form of courage. Every restored bowl quietly says: 'I was broken, but I'm still here.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the bowl's quiet courage.",
+                "options": [
+                    {
+                        "text_zh": "「我碎过，但我还在」——这七个字可以写在每个经历过破碎还选择继续的人心里。从未破过的碗是幸运的，碎了又修复的碗是勇敢的。幸运不需要勇气，但从碎片中站起来需要。每修好一只碗，就在告诉世界：碎裂不是终点。",
+                        "text_pinyin": "'Wǒ suì guò, dàn wǒ hái zài' — zhè qī ge zì kěyǐ xiě zài měi ge jīnglì guò pòsuì hái xuǎnzé jìxù de rén xīnlǐ. Cóng wèi pò guò de wǎn shì xìngyùn de, suì le yòu xiūfù de wǎn shì yǒnggǎn de. Xìngyùn bù xūyào yǒngqì, dàn cóng suìpiàn zhōng zhàn qǐlái xūyào. Měi xiū hǎo yī zhī wǎn, jiù zài gàosu shìjiè: suìliè bú shì zhōngdiǎn.",
+                        "text_en": "'I was broken, but I'm still here' — those seven characters belong in the heart of everyone who shattered and chose to continue. A bowl that never broke is lucky; one broken and restored is brave. Luck doesn't require courage, but rising from fragments does. Each restored bowl tells the world: shattering is not the end.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The restored bowl as a declaration of courage — shattering is not the end."
+                    },
+                    {
+                        "text_zh": "您修过最难的碗是哪一只？",
+                        "text_pinyin": "Nín xiū guò zuì nán de wǎn shì nǎ yī zhī?",
+                        "text_en": "What's the hardest bowl you've ever restored?",
+                        "score": 0.0,
+                        "feedback": "Asks for a highlight reel at the emotional peak."
+                    },
+                    {
+                        "text_zh": "您有没有收徒弟？",
+                        "text_pinyin": "Nín yǒu méiyǒu shōu túdì?",
+                        "text_en": "Have you taken apprentices?",
+                        "score": 0.0,
+                        "feedback": "A succession question during a meditation on courage."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Jingdezhen (景德镇) has been China's porcelain capital for over a millennium. The Chinese tradition of porcelain restoration predates Japanese kintsugi and uses different techniques — including lacquer, staples, and ceramic paste. The philosophy that a restored piece surpasses an unbroken one connects to the Chinese concept of 涅槃 (nièpán, nirvana through destruction) and the broader cultural value placed on resilience through adversity (凤凰涅槃, the phoenix rising)."
+    }
+}

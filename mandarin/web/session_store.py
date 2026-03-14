@@ -84,6 +84,14 @@ class SessionStore:
             if session:
                 session._resuming = False
 
+    def find_by_user(self, user_id: int) -> Optional[ActiveSession]:
+        """Find an active session for the given user."""
+        with self._lock:
+            for sess in self._sessions.values():
+                if sess.user_id == user_id:
+                    return sess
+        return None
+
     def remove(self, token: str) -> None:
         with self._lock:
             removed = self._sessions.pop(token, None)

@@ -1,6 +1,6 @@
-# Brand Guide -- Mandarin
+# Brand Guide -- Aelu
 
-This is the definitive brand bible for Mandarin. All design decisions, marketing materials, web pages, emails, partner communications, and product interfaces derive from this document. When in doubt, this document wins.
+This is the definitive brand bible for Aelu. All design decisions, marketing materials, web pages, emails, partner communications, and product interfaces derive from this document. When in doubt, this document wins.
 
 Last updated: 2026-02-17
 
@@ -12,17 +12,17 @@ Last updated: 2026-02-17
 
 The quiet confidence of knowing exactly where you stand in a language that once felt impossible.
 
-This is not a tagline. It is the emotional truth underneath every screen, every drill, every diagnostic. Mandarin exists so that a learner can look at their data and feel neither inflated nor deflated -- just grounded. The app is the rare space where honesty and warmth coexist without tension.
+This is not a tagline. It is the emotional truth underneath every screen, every drill, every diagnostic. Aelu exists so that a learner can look at their data and feel neither inflated nor deflated -- just grounded. The app is the rare space where honesty and warmth coexist without tension.
 
 ### Brand Promise
 
 Every session leaves you measurably closer to reading, hearing, and speaking real Chinese -- and you will always know exactly how close.
 
-This is not a feature promise. It is an experience promise. We promise that using Mandarin will never feel like a waste of time, never feel dishonest about your progress, and never feel like it was designed by someone who has never studied a language.
+This is not a feature promise. It is an experience promise. We promise that using Aelu will never feel like a waste of time, never feel dishonest about your progress, and never feel like it was designed by someone who has never studied a language.
 
 ### Brand Personality
 
-Mandarin is a person in their late thirties who has been studying something difficult for a long time and has gotten genuinely good at it -- not through talent, but through patience and honest self-assessment. They sit across from you at a wooden table in a warm, well-lit room. They do not rush. They do not flatter. When you get something wrong, they tell you clearly and without judgment. When you get something right, they nod -- not with enthusiasm, but with recognition. They never say "great job" unless they mean it. They are the kind of person who remembers your specific weaknesses from last time and has already adjusted today's plan. You trust them because they have never lied to you, not even to make you feel better.
+Aelu is a person in their late thirties who has been studying something difficult for a long time and has gotten genuinely good at it -- not through talent, but through patience and honest self-assessment. They sit across from you at a wooden table in a warm, well-lit room. They do not rush. They do not flatter. When you get something wrong, they tell you clearly and without judgment. When you get something right, they nod -- not with enthusiasm, but with recognition. They never say "great job" unless they mean it. They are the kind of person who remembers your specific weaknesses from last time and has already adjusted today's plan. You trust them because they have never lied to you, not even to make you feel better.
 
 They dress simply. They speak in short, clear sentences. They have strong opinions about pedagogy but hold them without arrogance. They think streak-based motivation is quietly corrosive. They think most learning apps are built for investors, not learners. They built something different because they were tired of the alternative.
 
@@ -510,7 +510,7 @@ The app uses a two-part logo composition:
 
 1. **Logo mark:** The character (man, "flowing/rambling" -- the first character of manhua, manga, etc.) displayed in --font-hanzi at --text-display size (3.2rem), weight 700, color --color-accent. It settles into place with the logoSettle animation.
 
-2. **Logo text:** "Mandarin" displayed in --font-heading (Cormorant Garamond) at --text-base (1rem), weight 400, color --color-text-dim, with --tracking-wide (0.15em) letter spacing.
+2. **Logo text:** "Aelu" displayed in --font-heading (Cormorant Garamond) at --text-base (1rem), weight 400, color --color-text-dim, with --tracking-wide (0.15em) letter spacing.
 
 3. **Horizon line:** A 48px wide, 1px tall line in --color-divider centered below the text, animating in with horizonDraw.
 
@@ -518,12 +518,12 @@ These three elements together form the complete logo. They are always stacked ve
 
 ### Wordmark Specification
 
-- "Mandarin" set in Cormorant Garamond at 400 weight
+- "Aelu" set in Cormorant Garamond at 400 weight
 - Letter-spacing: 0.15em
 - Color: --color-text-dim on light backgrounds (#5A6678); --color-text-dim on dark backgrounds (#A09888)
 - Minimum display size: 14px (below this, the letter-spacing and thin serifs become illegible)
 - Clear space: At minimum, --space-3 (12px) on all sides
-- The wordmark is always lowercase-initial: "Mandarin" -- never "MANDARIN," never "mandarin"
+- The wordmark is always lowercase-initial: "Aelu" -- never "AELU," never "aelu"
 
 **Do not:**
 - Stretch, compress, or rotate the wordmark
@@ -582,10 +582,10 @@ Must be legible at 16x16px (favicon), 32x32px (tab icon), 180x180px (Apple touch
 
 - Emails should feel like a personal letter, not a marketing template
 - No heavy HTML -- minimal formatting, no header images, no multi-column layouts
-- From name: "Mandarin" (not "Mandarin Team," not "Mandarin App")
+- From name: "Aelu" (not "Aelu Team," not "Aelu App")
 - Font: System fonts only (email clients cannot reliably load custom fonts) -- use `Georgia, 'Times New Roman', serif` as the closest system match to Source Serif 4
 - Links in a muted rose color (approximate --color-accent #946070 in email-safe hex)
-- Sign-off: "-- Mandarin," no title, no signature block logo
+- Sign-off: "-- Aelu," no title, no signature block logo
 - Maximum one CTA per email, and it should be a text link, not a styled button
 - Line length: aim for 60-70 characters per line for readability
 

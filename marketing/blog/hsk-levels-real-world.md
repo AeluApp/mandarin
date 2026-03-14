@@ -103,8 +103,8 @@ Once you know where you're weak, the fix is straightforward (if not easy):
 - **Weak reading?** Read material at your level with inline support for unknown words — look things up, but don't stop for every word. Let context carry you sometimes.
 - **Weak vocabulary?** Spaced repetition drilling, but with varied drill types — not just flashcards. Cloze deletion, audio recognition, tone pair discrimination, character writing.
 
-The diagnostics in [Mandarin](https://mandarin.app) show you where you are across all four skills — vocabulary recognition, listening comprehension, reading fluency, and tone accuracy — so you can target your actual weak points instead of grinding what you're already decent at. It's the approach I wish I'd had from the start.
+The diagnostics in [Aelu](https://aelu.app) show you where you are across all four skills — vocabulary recognition, listening comprehension, reading fluency, and tone accuracy — so you can target your actual weak points instead of grinding what you're already decent at. It's the approach I wish I'd had from the start.
 
 ---
 
-*This post is part of a series on learning Mandarin as an adult. More at [mandarin.app/blog](https://mandarin.app/blog).*
+*This post is part of a series on learning Mandarin as an adult. More at [aelu.app/blog](https://aelu.app/blog).*

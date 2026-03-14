@@ -40,9 +40,9 @@ Product Hunt is the single highest-ROI launch event for indie dev tools. A top-5
 This goes live immediately after your product is posted. It's the most-read text on your PH page.
 
 ```
-Hey Product Hunt! We're the team behind Mandarin, and we're learning Mandarin ourselves.
+Hey Product Hunt! We're the team behind Aelu, and we're learning Mandarin ourselves.
 
-Mandarin was built because we got frustrated with the gap between studying flashcards and actually understanding Chinese. Most apps drill you on random word lists. We wanted something that drills the words we actually struggled with.
+Aelu was built because we got frustrated with the gap between studying flashcards and actually understanding Chinese. Most apps drill you on random word lists. We wanted something that drills the words we actually struggled with.
 
 The core idea is the "cleanup loop":
 1. Read a graded Chinese passage
@@ -58,7 +58,7 @@ Some things I'm proud of:
 
 I'd love feedback from other language learners. What would make this more useful? What's missing?
 
-Free for HSK 1-2. Full access is $12/month.
+Free for HSK 1-2. Full access is $14.99/month.
 ```
 
 ### Launch Day Protocol
@@ -108,11 +108,11 @@ HN "Show HN" posts get seen by technical builders who respect craft. Your "solo 
 
 ### The Post
 
-**Title**: `Show HN: An adaptive Chinese learning app with 27 drill types and zero AI`
+**Title**: `Show HN: Aelu – An adaptive Chinese learning app with 27 drill types and zero AI`
 
 **Body** (keep it short — HN readers click first, read second):
 ```
-I'm learning Mandarin and built an app around a concept I call the "cleanup loop":
+I'm learning Mandarin and built Aelu around a concept I call the "cleanup loop":
 
 1. Read graded Chinese passages at your level
 2. Tap any word you don't know
@@ -122,7 +122,7 @@ The system has 27 drill types across reading, listening, speaking, and tone accu
 
 Tech: Python, Flask, SQLite. No AI API calls at runtime — all scheduling and scoring is deterministic. The adaptive algorithm uses modified FSRS with bayesian confidence dampening and interleaving enforcement.
 
-HSK 1-6 aligned. Free for HSK 1-2, $12/month for full access.
+HSK 1-6 aligned. Free for HSK 1-2, $14.99/month for full access.
 
 Feedback welcome — especially from other language learners or people building educational tools.
 ```
@@ -174,11 +174,11 @@ You can't fake social proof, but you can have it ready:
 
 **In-app feedback prompt:**
 After a user completes their 10th session, show:
-> "How's it going? If Mandarin is helping, a quick testimonial would mean the world. If it's not, I want to know that too."
+> "How's it going? If Aelu is helping, a quick testimonial would mean the world. If it's not, I want to know that too."
 > [Write a testimonial] [Something's not working]
 
 **Email ask (Day 14 email):**
-> "Quick question: if you had to tell a friend what Mandarin does in one sentence, what would you say? Hit reply — I read every response."
+> "Quick question: if you had to tell a friend what Aelu does in one sentence, what would you say? Hit reply — I read every response."
 
 Responses become testimonials (with permission).
 
@@ -210,7 +210,7 @@ Add a testimonials section to the landing page between "features" and "how it wo
 At your scale, a complex referral system isn't worth building. Start with the simplest version:
 
 **How it works:**
-1. Every paid user gets a unique referral code: `mandarinapp.com/ref/USER123`
+1. Every paid user gets a unique referral code: `aeluapp.com/ref/USER123`
 2. When someone signs up through that link, both the referrer and the new user get 1 free month
 3. Referral code is stored in a cookie and captured at signup
 
@@ -222,7 +222,7 @@ ALTER TABLE user ADD COLUMN referral_credits INTEGER DEFAULT 0;
 ```
 
 **Display:**
-- In user settings/profile: "Share Mandarin: [your referral link] — you both get a free month"
+- In user settings/profile: "Share Aelu: [your referral link] — you both get a free month"
 - In the Day 14 email: "Know someone else learning Chinese? Share your link: [referral link]"
 
 **Caps:**

@@ -1,10 +1,10 @@
 #!/bin/bash
-# Build MandarinApp — a minimal macOS WKWebView wrapper
+# Build Aelu.app — a minimal macOS WKWebView wrapper
 # Usage: ./build.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-APP_NAME="Mandarin"
+APP_NAME="Aelu"
 APP_BUNDLE="$SCRIPT_DIR/$APP_NAME.app"
 
 echo "Building $APP_NAME.app..."
@@ -75,6 +75,9 @@ fi
 
 # ── Write PkgInfo ──────────────────────────────────────────────────
 echo -n "APPL????" > "$APP_BUNDLE/Contents/PkgInfo"
+
+# ── Sign bundle (required for Dock icon on macOS Sonoma+) ─────────
+codesign --force --sign - "$APP_BUNDLE" 2>/dev/null && echo "  Signed (ad-hoc)."
 
 echo ""
 echo "Built: $APP_BUNDLE"

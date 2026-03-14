@@ -1,0 +1,123 @@
+{
+    "title": "At the Fruit Stand",
+    "title_zh": "水果摊",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You stop at the neighborhood fruit stand. The vendor, Sister Liu, is arranging fresh strawberries. The fruit looks beautiful in the afternoon sun.",
+        "setup_zh": "你在小区门口的水果摊前停下。摊主刘姐正在摆放新鲜的草莓。下午的阳光下水果看起来很美。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来看看！今天的草莓特别新鲜，早上刚从农场运过来的。你要不要尝一个？",
+                "text_pinyin": "Lái kànkan! Jīntiān de cǎoméi tèbié xīnxiān, zǎoshang gāng cóng nóngchǎng yùn guòlái de. Nǐ yào bú yào cháng yī ge?",
+                "text_en": "Come have a look! Today's strawberries are really fresh — just delivered from the farm this morning. Want to try one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the offer to try a strawberry.",
+                "options": [
+                    {
+                        "text_zh": "好啊！哇，真甜。这个季节的草莓最好吃了。多少钱一斤？",
+                        "text_pinyin": "Hǎo a! Wā, zhēn tián. Zhège jìjié de cǎoméi zuì hǎochī le. Duōshǎo qián yī jīn?",
+                        "text_en": "Sure! Wow, so sweet. Strawberries are the best this time of year. How much per jin?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Natural — tries, compliments, then asks the price."
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "Duōshǎo qián?",
+                        "text_en": "How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Skips the tasting and goes straight to business."
+                    },
+                    {
+                        "text_zh": "不用了，我不吃草莓。",
+                        "text_pinyin": "Bú yòng le, wǒ bù chī cǎoméi.",
+                        "text_en": "No thanks, I don't eat strawberries.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Flat refusal at a fruit stand."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十五块一斤。你要是买两斤，我给你便宜一点，二十五就行。你还想要别的水果吗？芒果也很好。",
+                "text_pinyin": "Shíwǔ kuài yī jīn. Nǐ yàoshi mǎi liǎng jīn, wǒ gěi nǐ piányi yīdiǎn, èrshíwǔ jiù xíng. Nǐ hái xiǎng yào bié de shuǐguǒ ma? Mángguǒ yě hěn hǎo.",
+                "text_en": "Fifteen yuan per jin. If you buy two jin, I'll give you a discount — just twenty-five. Want any other fruit? The mangoes are good too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide what to buy.",
+                "options": [
+                    {
+                        "text_zh": "那就买两斤草莓吧。再来一个芒果，今天给自己做一个水果沙拉。",
+                        "text_pinyin": "Nà jiù mǎi liǎng jīn cǎoméi ba. Zài lái yī ge mángguǒ, jīntiān gěi zìjǐ zuò yī ge shuǐguǒ shālā.",
+                        "text_en": "I'll take two jin of strawberries then. And one mango — I'll make myself a fruit salad today.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Takes the deal and shares a fun plan."
+                    },
+                    {
+                        "text_zh": "就一斤草莓吧。",
+                        "text_pinyin": "Jiù yī jīn cǎoméi ba.",
+                        "text_en": "Just one jin of strawberries.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple but doesn't take the deal."
+                    },
+                    {
+                        "text_zh": "太贵了，十块行不行？",
+                        "text_pinyin": "Tài guì le, shí kuài xíng bù xíng?",
+                        "text_en": "Too expensive — how about ten?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Haggling too aggressively for a neighborhood stand."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "水果沙拉！好主意！那我再送你几颗蓝莓吧，放在沙拉里好看又好吃。你是住这个小区的吧？以后常来啊！",
+                "text_pinyin": "Shuǐguǒ shālā! Hǎo zhǔyi! Nà wǒ zài sòng nǐ jǐ kē lánméi ba, fàng zài shālā lǐ hǎokàn yòu hǎochī. Nǐ shì zhù zhège xiǎoqū de ba? Yǐhòu cháng lái a!",
+                "text_en": "Fruit salad! Good idea! Let me throw in a few blueberries — they'll look pretty and taste great in the salad. You live in this neighborhood, right? Come by often!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her for the extra blueberries.",
+                "options": [
+                    {
+                        "text_zh": "谢谢刘姐！你人太好了。以后买水果一定来你这里。",
+                        "text_pinyin": "Xièxie Liú jiě! Nǐ rén tài hǎo le. Yǐhòu mǎi shuǐguǒ yīdìng lái nǐ zhèlǐ.",
+                        "text_en": "Thank you, Sister Liu! You're so kind. I'll always come here for fruit from now on.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and loyal — builds a lasting neighborhood relationship."
+                    },
+                    {
+                        "text_zh": "谢谢。",
+                        "text_pinyin": "Xièxie.",
+                        "text_en": "Thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but minimal."
+                    },
+                    {
+                        "text_zh": "不用了，够了。",
+                        "text_pinyin": "Bú yòng le, gòu le.",
+                        "text_en": "No need, that's enough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Refuses a free gift — culturally awkward."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Neighborhood fruit vendors often build relationships with regular customers by offering small extras (送你几个). Buying fruit is a daily ritual in China, and the friendly banter at fruit stands is a cornerstone of community life."
+    },
+    "hsk_level": 3
+}

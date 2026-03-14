@@ -1,0 +1,124 @@
+{
+    "title": "The Study Group Architect",
+    "title_zh": "学习小组建筑师",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_4_01_v0",
+    "tree": {
+        "setup": "The campus coffee shop, mid-afternoon. Your classmate Xiao Yang has the organizational instincts of a general and the caffeine tolerance of a hospital resident. She wants to form a study group for the upcoming Chinese history exam, and she's brought a color-coded spreadsheet printed on A3 paper — because some people simply refuse to do things at a normal scale.",
+        "setup_zh": "校园咖啡馆，下午三点。你的同学小杨有将军般的组织本能和住院医生般的咖啡因耐受力。她想为即将到来的中国历史考试组建学习小组，还带了一张A3纸打印的彩色编码表——因为有些人就是不愿意在正常尺度上做事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来，坐！我已经把考试范围整理好了。我们一共六章，每人负责两章，怎么样？",
+                "text_pinyin": "lái, zuò! wǒ yǐjīng bǎ kǎoshì fànwéi zhěnglǐ hǎo le. wǒmen yígòng liù zhāng, měi rén fùzé liǎng zhāng, zěnmeyàng?",
+                "text_en": "Come, sit! I've organized the exam scope. Six chapters total — each person takes two. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her plan.",
+                "options": [
+                    {
+                        "text_zh": "效率真高！我可以负责第三章和第四章，那两章我比较熟。",
+                        "text_pinyin": "xiàolǜ zhēn gāo! wǒ kěyǐ fùzé dì sān zhāng hé dì sì zhāng, nà liǎng zhāng wǒ bǐjiào shú.",
+                        "text_en": "So efficient! I can take chapters 3 and 4 — I'm more familiar with those.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Volunteering for specific chapters with a reason — Xiao Yang color-codes your name in blue immediately."
+                    },
+                    {
+                        "text_zh": "好啊，我可以做。给我分哪两章？",
+                        "text_pinyin": "hǎo a, wǒ kěyǐ zuò. gěi wǒ fēn nǎ liǎng zhāng?",
+                        "text_en": "Sure, I can do it. Which two chapters for me?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Willing but passive. She assigns you chapters before your coffee arrives."
+                    },
+                    {
+                        "text_zh": "六章好多啊……",
+                        "text_pinyin": "liù zhāng hǎo duō a……",
+                        "text_en": "Six chapters is a lot...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yang's spreadsheet doesn't accommodate despair. She redirects you to the schedule column."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了。那我们什么时候见面复习？我觉得每周见两次比较好，周二和周四下午。",
+                "text_pinyin": "tài hǎo le. nà wǒmen shénme shíhòu jiànmiàn fùxí? wǒ juéde měi zhōu jiàn liǎng cì bǐjiào hǎo, zhōuèr hé zhōusì xiàwǔ.",
+                "text_en": "Great. When should we meet to review? I think twice a week is good — Tuesday and Thursday afternoons."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the schedule.",
+                "options": [
+                    {
+                        "text_zh": "周二可以，但是周四我有别的课。能不能换成周三？",
+                        "text_pinyin": "zhōuèr kěyǐ, dànshì zhōusì wǒ yǒu bié de kè. néng bu néng huàn chéng zhōusān?",
+                        "text_en": "Tuesday works, but I have another class Thursday. Can we switch to Wednesday?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Counter-proposing rather than just refusing — Xiao Yang checks her spreadsheet and nods."
+                    },
+                    {
+                        "text_zh": "都可以，你定吧。",
+                        "text_pinyin": "dōu kěyǐ, nǐ dìng ba.",
+                        "text_en": "Either works — you decide.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She writes it down. Her spreadsheet grows."
+                    },
+                    {
+                        "text_zh": "两次太多了吧？一次够了。",
+                        "text_pinyin": "liǎng cì tài duō le ba? yí cì gòu le.",
+                        "text_en": "Twice is too much, isn't it? Once is enough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yang pauses. The color-coded schedule quivers with disapproval."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，周二和周三。在图书馆二楼见面？那里比较安静。别忘了每次带你负责的那部分笔记。",
+                "text_pinyin": "hǎo, zhōuèr hé zhōusān. zài túshūguǎn èr lóu jiànmiàn? nàlǐ bǐjiào ānjìng. bié wàng le měi cì dài nǐ fùzé de nà bùfen bǐjì.",
+                "text_en": "OK, Tuesday and Wednesday. Meet on the library's second floor? It's quieter there. Don't forget to bring your notes for your chapters each time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and add something to the plan.",
+                "options": [
+                    {
+                        "text_zh": "没问题。我还有一个建议——我们可以做一些模拟题练习，互相考对方。",
+                        "text_pinyin": "méi wèntí. wǒ hái yǒu yí gè jiànyì — wǒmen kěyǐ zuò yìxiē mónǐ tí liànxí, hùxiāng kǎo duìfāng.",
+                        "text_en": "No problem. I have a suggestion too — we could do practice questions and quiz each other.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Contributing to the plan earns you a promotion in Xiao Yang's mental org chart. She adds 「模拟题」to her spreadsheet in red."
+                    },
+                    {
+                        "text_zh": "好，图书馆见。",
+                        "text_pinyin": "hǎo, túshūguǎn jiàn.",
+                        "text_en": "OK, see you at the library.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Confirmed and committed. The study group is born."
+                    },
+                    {
+                        "text_zh": "笔记？我的笔记不太好……",
+                        "text_pinyin": "bǐjì? wǒ de bǐjì bú tài hǎo……",
+                        "text_en": "Notes? My notes aren't great...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yang slides you a spare highlighter. In her world, bad notes are just notes that haven't been organized yet."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Study groups (学习小组, xuéxí xiǎozǔ) are very common in Chinese universities. Students often divide review material and teach each other. The library (图书馆) is the most popular study venue, and seat availability during exam season is fiercely competitive."
+    }
+}

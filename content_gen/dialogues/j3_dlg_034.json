@@ -1,0 +1,87 @@
+{
+  "title": "Finding a Quiet Spot to Study",
+  "title_zh": "找安静的地方学习",
+  "register": "casual",
+  "scenario_type": "daily_life",
+  "difficulty": 2,
+  "tree": {
+    "setup": "You're looking for a quiet place to study. Your classmate Xiao Jiang suggests the community library.",
+    "setup_zh": "你在找一个安静的学习地方。同学小蒋建议去社区图书馆。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你要是想找安静的地方，社区图书馆很不错。人少、空调也好、还有免费的Wi-Fi。我昨天刚去过。",
+        "text_pinyin": "Nǐ yàoshi xiǎng zhǎo ānjìng de dìfang, shèqū túshūguǎn hěn búcuò. Rén shǎo, kōngtiáo yě hǎo, hái yǒu miǎnfèi de Wi-Fi. Wǒ zuótiān gāng qù guò.",
+        "text_en": "If you want somewhere quiet, the community library is great. Not many people, good air conditioning, and free Wi-Fi. I just went yesterday."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the suggestion.",
+        "options": [
+          {
+            "text_zh": "听起来很好！在哪里啊？我怎么不知道我们社区有图书馆。你要不要一起去？",
+            "text_pinyin": "Tīng qǐlái hěn hǎo! Zài nǎlǐ a? Wǒ zěnme bù zhīdào wǒmen shèqū yǒu túshūguǎn. Nǐ yào bú yào yīqǐ qù?",
+            "text_en": "Sounds great! Where is it? I didn't even know our community had a library. Want to go together?",
+            "score": 3,
+            "register": "casual",
+            "feedback": "Enthusiastic and invites her to join — study partner energy."
+          },
+          {
+            "text_zh": "好的，我去看看。",
+            "text_pinyin": "Hǎo de, wǒ qù kànkan.",
+            "text_en": "Okay, I'll check it out.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Accepts but doesn't invite company."
+          },
+          {
+            "text_zh": "我还是去咖啡馆吧。",
+            "text_pinyin": "Wǒ háishi qù kāfēi guǎn ba.",
+            "text_en": "I'll just go to a café instead.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Dismisses her helpful suggestion."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "好啊！我也正想去写论文。就在小区东门旁边，走路五分钟。我们下午两点出发怎么样？",
+        "text_pinyin": "Hǎo a! Wǒ yě zhèng xiǎng qù xiě lùnwén. Jiù zài xiǎoqū dōngmén pángbiān, zǒulù wǔ fēnzhōng. Wǒmen xiàwǔ liǎng diǎn chūfā zěnmeyàng?",
+        "text_en": "Sure! I also need to work on my thesis. It's right next to the east gate of our complex — five minutes' walk. How about we leave at two this afternoon?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Confirm the study plan.",
+        "options": [
+          {
+            "text_zh": "两点没问题！我带一些零食和水，学累了我们可以休息一下。",
+            "text_pinyin": "Liǎng diǎn méi wèntí! Wǒ dài yīxiē língshí hé shuǐ, xué lèi le wǒmen kěyǐ xiūxi yīxià.",
+            "text_en": "Two works! I'll bring snacks and water — when we get tired, we can take a break.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "Preparation — good study buddy."
+          },
+          {
+            "text_zh": "好的，两点见。",
+            "text_pinyin": "Hǎo de, liǎng diǎn jiàn.",
+            "text_en": "Okay, see you at two.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Confirms but no extras."
+          },
+          {
+            "text_zh": "我可能会迟到。",
+            "text_pinyin": "Wǒ kěnéng huì chídào.",
+            "text_en": "I might be late.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Already signaling unreliability."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Community libraries (社区图书馆) are quiet, free havens for students and self-learners in Chinese neighborhoods. Studying together with friends — bringing snacks, taking breaks — is a valued form of companionship. The mutual accountability helps both people stay focused."
+  },
+  "hsk_level": 3
+}

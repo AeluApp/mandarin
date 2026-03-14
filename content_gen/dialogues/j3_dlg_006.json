@@ -1,0 +1,123 @@
+{
+    "title": "Visiting a Bookstore",
+    "title_zh": "逛书店",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You wander into a cozy neighborhood bookstore. The owner, a gentle woman in her forties named Sister Fang, is shelving new arrivals. Soft music plays in the background.",
+        "setup_zh": "你走进一家温馨的小书店。老板方姐四十多岁，正在摆放新到的书。背景里放着轻柔的音乐。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎来看看！今天新到了一些小说和旅行书。你平时喜欢看什么类型的书？",
+                "text_pinyin": "Huānyíng lái kànkan! Jīntiān xīn dào le yīxiē xiǎoshuō hé lǚxíng shū. Nǐ píngshí xǐhuan kàn shénme lèixíng de shū?",
+                "text_en": "Welcome, have a look! We got some new novels and travel books today. What kind of books do you usually like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what kind of books you like.",
+                "options": [
+                    {
+                        "text_zh": "我最近对旅行书很感兴趣。有没有关于中国小城市的？",
+                        "text_pinyin": "Wǒ zuìjìn duì lǚxíng shū hěn gǎn xìngqù. Yǒu méiyǒu guānyú Zhōngguó xiǎo chéngshì de?",
+                        "text_en": "I've been interested in travel books lately. Do you have any about small Chinese cities?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Specific and engaging — gives her something to work with."
+                    },
+                    {
+                        "text_zh": "我随便看看。",
+                        "text_pinyin": "Wǒ suíbiàn kànkan.",
+                        "text_en": "I'm just browsing.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Fine but doesn't open a conversation."
+                    },
+                    {
+                        "text_zh": "我不怎么看书。",
+                        "text_pinyin": "Wǒ bù zěnme kàn shū.",
+                        "text_en": "I don't really read much.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Odd thing to say in a bookstore."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有的！这本写的是云南的大理，特别美。还有一本是关于贵州的小村庄的，作者住在那里一年，写得很温暖。",
+                "text_pinyin": "Yǒu de! Zhè běn xiě de shì Yúnnán de Dàlǐ, tèbié měi. Hái yǒu yī běn shì guānyú Guìzhōu de xiǎo cūnzhuāng de, zuòzhě zhù zài nàlǐ yī nián, xiě de hěn wēnnuǎn.",
+                "text_en": "Yes! This one is about Dali in Yunnan — really beautiful. And this one is about a small village in Guizhou — the author lived there for a year, very warmly written."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her recommendations.",
+                "options": [
+                    {
+                        "text_zh": "贵州那本听起来很有意思！我一直想去贵州看看。我可以翻一翻吗？",
+                        "text_pinyin": "Guìzhōu nà běn tīng qǐlái hěn yǒu yìsi! Wǒ yīzhí xiǎng qù Guìzhōu kànkan. Wǒ kěyǐ fān yi fān ma?",
+                        "text_en": "The Guizhou one sounds really interesting! I've always wanted to visit Guizhou. Can I flip through it?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shows genuine interest and connects the book to a personal wish."
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "Duōshǎo qián?",
+                        "text_en": "How much?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Jumps straight to price without engaging with the content."
+                    },
+                    {
+                        "text_zh": "两本都不错，我都要。",
+                        "text_pinyin": "Liǎng běn dōu búcuò, wǒ dōu yào.",
+                        "text_en": "Both look good, I'll take both.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Generous but skips the browsing experience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以！你坐那边的椅子上慢慢看。我给你倒杯茶。在书店里不用着急，想看多久就看多久。",
+                "text_pinyin": "Dāngrán kěyǐ! Nǐ zuò nàbiān de yǐzi shàng mànmàn kàn. Wǒ gěi nǐ dào bēi chá. Zài shūdiàn lǐ bú yòng zháojí, xiǎng kàn duōjiǔ jiù kàn duōjiǔ.",
+                "text_en": "Of course! Sit in that chair over there and take your time. I'll pour you some tea. No rush in a bookstore — read as long as you like."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her kindness.",
+                "options": [
+                    {
+                        "text_zh": "谢谢方姐！这种书店现在越来越少了，我很喜欢这里的感觉。",
+                        "text_pinyin": "Xièxie Fāng jiě! Zhè zhǒng shūdiàn xiànzài yuè lái yuè shǎo le, wǒ hěn xǐhuan zhèlǐ de gǎnjué.",
+                        "text_en": "Thank you, Sister Fang! Bookstores like this are becoming rarer — I really like the feeling here.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Appreciative and thoughtful — acknowledges the value of small bookstores."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but doesn't match her warmth."
+                    },
+                    {
+                        "text_zh": "你们几点关门？",
+                        "text_pinyin": "Nǐmen jǐ diǎn guānmén?",
+                        "text_en": "What time do you close?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Practical but misses the warm moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Independent bookstores in China often serve tea and encourage lingering. They represent a quieter alternative to the fast-paced digital world. Many book lovers treasure these spaces as community gathering points."
+    },
+    "hsk_level": 3
+}

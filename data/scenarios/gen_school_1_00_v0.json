@@ -1,0 +1,94 @@
+{
+    "title": "Teacher Wang's Handwriting Standards",
+    "title_zh": "王老师的写字标准",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_school_1_00_v0",
+    "tree": {
+        "setup": "A Chinese language classroom with green chalkboards and morning light slanting through tall windows. Teacher Wang writes every character on the board as though she's painting a scroll. She once spent four minutes perfecting a single 我 while the class watched in reverent silence. Today she's returning homework.",
+        "setup_zh": "中文教室，绿色黑板，早晨的阳光从大窗户照进来。王老师在黑板上写每一个字都像在画画。她曾经花了四分钟写一个「我」字，全班安静地看着。今天她在发作业。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你的作业写得很好。",
+                "text_pinyin": "nǐ hǎo! nǐ de zuòyè xiě de hěn hǎo.",
+                "text_en": "Hello! Your homework is written very well."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank your teacher.",
+                "options": [
+                    {
+                        "text_zh": "谢谢老师！",
+                        "text_pinyin": "xièxie lǎoshī!",
+                        "text_en": "Thank you, teacher!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Wang gives a small, satisfied nod. In Chinese classrooms, 老师 (lǎoshī) is both a title and a term of respect -- always use it when addressing your teacher."
+                    },
+                    {
+                        "text_zh": "是吗？太好了！",
+                        "text_pinyin": "shì ma? tài hǎo le!",
+                        "text_en": "Really? Great!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Teacher Wang smiles at your enthusiasm. 太好了 is a wonderfully versatile expression of happiness."
+                    },
+                    {
+                        "text_zh": "我不知道。",
+                        "text_pinyin": "wǒ bù zhīdào.",
+                        "text_en": "I don't know.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Teacher Wang tilts her head. She just complimented you -- a simple 谢谢 would have been the natural response here."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你每天都写汉字吗？",
+                "text_pinyin": "nǐ měi tiān dōu xiě hànzì ma?",
+                "text_en": "Do you write Chinese characters every day?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your study habits.",
+                "options": [
+                    {
+                        "text_zh": "是的，我每天写。",
+                        "text_pinyin": "shì de, wǒ měi tiān xiě.",
+                        "text_en": "Yes, I write every day.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Wang's eyes light up. She pulls out a practice sheet from her desk -- a gift for the dedicated student. 每天 (měi tiān, every day) is a key time phrase."
+                    },
+                    {
+                        "text_zh": "有时候写。",
+                        "text_pinyin": "yǒu shíhou xiě.",
+                        "text_en": "Sometimes.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Teacher Wang nods slowly, in the way that means she's already planning additional practice sheets for you. 有时候 is honest and natural."
+                    },
+                    {
+                        "text_zh": "我不喜欢写字。",
+                        "text_pinyin": "wǒ bù xǐhuan xiě zì.",
+                        "text_en": "I don't like writing characters.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Teacher Wang inhales as though you've said you don't like breathing. She will recover, but it may take a moment. 不喜欢 is grammatically correct, though."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很好。明天见！",
+                "text_pinyin": "hěn hǎo. míngtiān jiàn!",
+                "text_en": "Very good. See you tomorrow!"
+            }
+        ],
+        "cultural_note": "In Chinese education, beautiful handwriting (书法, shūfǎ) is deeply valued. Teachers often comment on the quality of character writing, not just correctness. 老师 is used as a respectful form of address -- never use a teacher's first name alone."
+    }
+}

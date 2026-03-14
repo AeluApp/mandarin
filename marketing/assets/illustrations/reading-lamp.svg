@@ -1,16 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
   <!-- desk surface -->
-  <line x1="15" y1="48" x2="105" y2="48" stroke-width="0.6"/>
+  <path d="M20 76 L180 76" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="20" y="76" width="160" height="3" stroke="none" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- desk front edge detail -->
+  <line x1="20" y1="79" x2="180" y2="79" stroke="#2a2a2a" stroke-width="0.4" opacity="0.5"/>
+  <!-- desk legs -->
+  <line x1="28" y1="79" x2="26" y2="96" stroke="#2a2a2a" stroke-width="0.7"/>
+  <line x1="172" y1="79" x2="174" y2="96" stroke="#2a2a2a" stroke-width="0.7"/>
   <!-- lamp base -->
-  <line x1="40" y1="48" x2="40" y2="44" stroke-width="0.5"/>
-  <!-- lamp arm -->
-  <line x1="40" y1="44" x2="60" y2="24" stroke-width="0.6"/>
+  <ellipse cx="55" cy="76" rx="8" ry="2" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- lamp arm — curved, articulated -->
+  <path d="M55 74 L55 60 Q55 52 60 46 L72 30" stroke="#2a2a2a" stroke-width="0.9"/>
+  <!-- lamp joint -->
+  <circle cx="55" cy="60" r="1.2" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.1"/>
   <!-- lamp shade -->
-  <polyline points="54,24 60,20 66,24" stroke-width="0.6"/>
+  <path d="M62 32 L72 26 L82 32" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M62 32 L64 34 L80 34 L82 32" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- light cone — soft, triangular glow -->
+  <path d="M66 34 L54 68 L90 68 L78 34" stroke="#2a2a2a" stroke-width="0.2" fill="#2a2a2a" fill-opacity="0.025"/>
   <!-- light rays -->
-  <line x1="56" y1="26" x2="50" y2="38" stroke-width="0.3"/>
-  <line x1="60" y1="26" x2="60" y2="40" stroke-width="0.3"/>
-  <line x1="64" y1="26" x2="70" y2="38" stroke-width="0.3"/>
-  <!-- book suggestion on desk -->
-  <path d="M70 48 L70 44 L80 44 L80 48" stroke-width="0.4"/>
+  <line x1="68" y1="35" x2="58" y2="60" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <line x1="72" y1="35" x2="72" y2="62" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <line x1="76" y1="35" x2="86" y2="60" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <!-- open book -->
+  <path d="M90 76 L90 64 Q105 60 120 64 L120 76" stroke="#2a2a2a" stroke-width="0.6"/>
+  <path d="M120 76 L120 64 Q135 60 150 64 L150 76" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- book spine -->
+  <line x1="120" y1="64" x2="120" y2="76" stroke="#2a2a2a" stroke-width="0.8"/>
+  <!-- text lines on left page -->
+  <line x1="94" y1="67" x2="116" y2="67" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <line x1="94" y1="69.5" x2="114" y2="69.5" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <line x1="94" y1="72" x2="116" y2="72" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <!-- text lines on right page -->
+  <line x1="124" y1="67" x2="146" y2="67" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <line x1="124" y1="69.5" x2="144" y2="69.5" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <line x1="124" y1="72" x2="146" y2="72" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <!-- teacup -->
+  <path d="M156 76 Q156 68 160 66 Q164 64 168 66 Q172 68 172 76" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- teacup handle -->
+  <path d="M172 68 Q178 68 178 72 Q178 76 172 76" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- steam from tea -->
+  <path d="M160 64 Q159 58 161 54" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
+  <path d="M164" y1="62" x2="164" y2="56" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M164 62 Q165 56 163 52" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M168 64 Q169 58 167 54" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <!-- small pencil/pen on desk -->
+  <line x1="78" y1="75" x2="88" y2="73" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M78 75 L76.5 76" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- wall behind -->
+  <line x1="0" y1="16" x2="200" y2="16" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
 </svg>

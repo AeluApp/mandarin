@@ -1,0 +1,117 @@
+{
+    "title": "The Tea Leaves",
+    "title_zh": "茶叶",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You visit a tea farmer's home in the mountains. She pours you a cup of tea from leaves she picked that morning.",
+        "setup_zh": "你在山里拜访一位茶农的家。她用今天早上采的茶叶给你泡了一杯茶。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "尝尝看。这是今天早上太阳出来之前采的，露水还在叶子上。早上的茶叶最嫩，味道最好。你喝得出来吗？",
+                "text_pinyin": "Chángchang kàn. Zhè shì jīntiān zǎoshang tàiyáng chūlái zhīqián cǎi de, lùshuǐ hái zài yèzi shàng. Zǎoshang de cháyè zuì nèn, wèidào zuì hǎo. Nǐ hē de chūlái ma?",
+                "text_en": "Try it. These were picked before sunrise this morning, with dew still on the leaves. Morning tea leaves are the most tender, the best flavor. Can you taste the difference?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the tea and her care.",
+                "options": [
+                    {
+                        "text_zh": "太好喝了。有一种很清新的味道，好像能尝到今天早上的山和空气。我在城里喝的茶从来没有这个味道。",
+                        "text_pinyin": "Tài hǎo hē le. Yǒu yī zhǒng hěn qīngxīn de wèidào, hǎoxiàng néng cháng dào jīntiān zǎoshang de shān hé kōngqì. Wǒ zài chéng lǐ hē de chá cónglái méiyǒu zhège wèidào.",
+                        "text_en": "It's wonderful. There's a fresh flavor — it's like tasting this morning's mountain and air. Tea in the city never tastes like this.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Tasting the landscape in the cup — connects flavor to place."
+                    },
+                    {
+                        "text_zh": "这是什么品种的茶？",
+                        "text_pinyin": "Zhè shì shénme pǐnzhǒng de chá?",
+                        "text_en": "What variety of tea is this?",
+                        "score": 0.0,
+                        "feedback": "Classifying instead of experiencing."
+                    },
+                    {
+                        "text_zh": "你每天都起那么早吗？",
+                        "text_pinyin": "Nǐ měi tiān dōu qǐ nàme zǎo ma?",
+                        "text_en": "Do you get up that early every day?",
+                        "score": 0.0,
+                        "feedback": "Schedule question instead of tasting the moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "能尝出来就好。城里的茶是包装好的，已经离开山很久了。茶叶和人一样，离开家太久，味道就会变。最好的茶，就是在它长大的地方喝。水也是这里的山泉水。",
+                "text_pinyin": "Néng cháng chūlái jiù hǎo. Chéng lǐ de chá shì bāozhuāng hǎo de, yǐjīng líkāi shān hěn jiǔ le. Cháyè hé rén yīyàng, líkāi jiā tài jiǔ, wèidào jiù huì biàn. Zuì hǎo de chá, jiù shì zài tā zhǎng dà de dìfang hē. Shuǐ yě shì zhèlǐ de shān quán shuǐ.",
+                "text_en": "Good that you can tell. City tea is packaged, already far from the mountain. Tea leaves are like people — away from home too long, the flavor changes. The best tea is drunk where it grew. The water is from our mountain spring too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her analogy about tea and people.",
+                "options": [
+                    {
+                        "text_zh": "茶叶和人一样——这让我很感动。来这里之前我不知道茶的味道和它的家分不开。也许人也是这样，最好的状态是在属于自己的地方。",
+                        "text_pinyin": "Cháyè hé rén yīyàng — zhè ràng wǒ hěn gǎndòng. Lái zhèlǐ zhīqián wǒ bù zhīdào chá de wèidào hé tā de jiā fēn bù kāi. Yěxǔ rén yě shì zhèyàng, zuì hǎo de zhuàngtài shì zài shǔyú zìjǐ de dìfāng.",
+                        "text_en": "Tea and people are the same — that really moves me. Before coming here I didn't know tea's flavor was inseparable from its home. Maybe people are the same, at their best where they belong.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Flavor and belonging are inseparable — for tea and for people."
+                    },
+                    {
+                        "text_zh": "你的茶卖到哪里去？",
+                        "text_pinyin": "Nǐ de chá mài dào nǎlǐ qù?",
+                        "text_en": "Where do you sell your tea?",
+                        "score": 0.0,
+                        "feedback": "Commercial question during a poetic moment."
+                    },
+                    {
+                        "text_zh": "我可以买一些带回去吗？",
+                        "text_pinyin": "Wǒ kěyǐ mǎi yīxiē dài huíqù ma?",
+                        "text_en": "Can I buy some to take back?",
+                        "score": 0.0,
+                        "feedback": "She just said tea tastes best where it grew."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你来这里喝这杯茶，比带走一百包茶叶都有意义。因为这个味道只属于这个地方、这个早晨、这一刻。以后你想起这杯茶，就会想起这座山、这片云。这才是茶真正的价值。",
+                "text_pinyin": "Nǐ lái zhèlǐ hē zhè bēi chá, bǐ dài zǒu yī bǎi bāo cháyè dōu yǒu yìyì. Yīnwèi zhège wèidào zhǐ shǔyú zhège dìfang, zhège zǎochén, zhè yī kè. Yǐhòu nǐ xiǎng qǐ zhè bēi chá, jiù huì xiǎng qǐ zhè zuò shān, zhè piàn yún. Zhè cái shì chá zhēnzhèng de jiàzhí.",
+                "text_en": "Coming here to drink this cup of tea is more meaningful than taking a hundred bags home. Because this flavor belongs only to this place, this morning, this moment. Later when you remember this tea, you'll remember this mountain, these clouds. That's the true value of tea."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the irreplaceability of this moment.",
+                "options": [
+                    {
+                        "text_zh": "这杯茶我一定会记住。不是味道本身，而是整个画面——山、云、泉水、还有您。谢谢您让我明白了什么是「在场」。",
+                        "text_pinyin": "Zhè bēi chá wǒ yīdìng huì jì zhù. Bú shì wèidào běnshēn, ér shì zhěnggè huàmiàn — shān, yún, quánshuǐ, hái yǒu nín. Xièxie nín ràng wǒ míngbai le shénme shì 'zàichǎng'.",
+                        "text_en": "I'll always remember this cup of tea. Not the flavor itself, but the whole scene — the mountain, clouds, spring water, and you. Thank you for helping me understand what it means to 'be present.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The tea is a portal to a full sensory memory — presence is the real gift."
+                    },
+                    {
+                        "text_zh": "那我多喝几杯吧！",
+                        "text_pinyin": "Nà wǒ duō hē jǐ bēi ba!",
+                        "text_en": "Then let me have a few more cups!",
+                        "score": 0.0,
+                        "feedback": "Tries to accumulate quantity after a lesson about irreplaceability."
+                    },
+                    {
+                        "text_zh": "您这里可以住宿吗？",
+                        "text_pinyin": "Nín zhèlǐ kěyǐ zhùsù ma?",
+                        "text_en": "Can I stay overnight here?",
+                        "score": 0.0,
+                        "feedback": "Logistics question at the peak of the conversation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese tea culture emphasizes 地域性 (terroir) — the inseparable relationship between tea and its landscape. Mountain spring water (山泉水) is considered essential for the truest expression of the leaf. The farmer's insight that tea's real value is in the moment of drinking echoes the Zen tea concept of 一期一会 — each encounter is once in a lifetime."
+    }
+}

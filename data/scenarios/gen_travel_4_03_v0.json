@@ -1,0 +1,124 @@
+{
+    "title": "The Airport Choreographer",
+    "title_zh": "机场编舞师",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_4_03_v0",
+    "tree": {
+        "setup": "Beijing Capital Airport, Terminal 3, where the ceiling arcs overhead like the ribcage of a sleeping giant. You're checking in for a domestic flight to Chengdu, and the check-in agent, Ms. Shen, processes passengers with the choreographed efficiency of someone who has boarded approximately fifty thousand people onto aircraft and considers each boarding pass a small work of art.",
+        "setup_zh": "北京首都机场T3航站楼，天花板在头顶弯成弧形，像沉睡巨人的肋骨。你正在办理飞往成都的国内航班值机手续。值机员沈小姐处理旅客的效率如同编排过的舞蹈——她已经送大约五万人登上飞机，并且把每张登机牌都视为一件小小的艺术品。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请出示您的身份证和行程单。",
+                "text_pinyin": "nín hǎo, qǐng chūshì nín de shēnfènzhèng hé xíngchéng dān.",
+                "text_en": "Hello, please show your ID and itinerary."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your documents.",
+                "options": [
+                    {
+                        "text_zh": "你好，这是我的身份证。我坐下午两点去成都的航班。能不能帮我选一个靠过道的座位？",
+                        "text_pinyin": "nǐ hǎo, zhè shì wǒ de shēnfènzhèng. wǒ zuò xiàwǔ liǎng diǎn qù Chéngdū de hángbān. néng bu néng bāng wǒ xuǎn yí gè kào guòdào de zuòwèi?",
+                        "text_en": "Hello, here's my ID. I'm on the 2 PM flight to Chengdu. Can you give me an aisle seat?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "ID ready, flight identified, seat preference stated — Ms. Shen's fingers dance across the keyboard. You're her favorite kind of passenger."
+                    },
+                    {
+                        "text_zh": "给你，身份证在这里。去成都的。",
+                        "text_pinyin": "gěi nǐ, shēnfènzhèng zài zhèlǐ. qù Chéngdū de.",
+                        "text_en": "Here, my ID. Going to Chengdu.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She finds the booking. Seat assignment will be random unless you ask."
+                    },
+                    {
+                        "text_zh": "我的航班是哪个？我忘了时间。",
+                        "text_pinyin": "wǒ de hángbān shì nǎge? wǒ wàng le shíjiān.",
+                        "text_en": "Which is my flight? I forgot the time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Shen checks. She's encountered this before — usually from people who book flights the way they order lunch."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，靠过道的座位给您安排好了。23C。您有托运行李吗？",
+                "text_pinyin": "hǎo de, kào guòdào de zuòwèi gěi nín ānpái hǎo le. èrshísān C. nín yǒu tuōyùn xíngli ma?",
+                "text_en": "OK, aisle seat arranged for you. 23C. Do you have any checked luggage?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your luggage.",
+                "options": [
+                    {
+                        "text_zh": "有一个箱子要托运。这个背包我随身带上飞机。",
+                        "text_pinyin": "yǒu yí gè xiāngzi yào tuōyùn. zhège bēibāo wǒ suíshēn dài shàng fēijī.",
+                        "text_en": "One suitcase to check. This backpack I'll carry on.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear distinction between checked and carry-on. Ms. Shen tags the suitcase with practiced precision."
+                    },
+                    {
+                        "text_zh": "这个箱子。",
+                        "text_pinyin": "zhège xiāngzi.",
+                        "text_en": "This suitcase.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She weighs it — within the limit. Onto the belt it goes."
+                    },
+                    {
+                        "text_zh": "两个都要带上飞机可以吗？",
+                        "text_pinyin": "liǎng gè dōu yào dài shàng fēijī kěyǐ ma?",
+                        "text_en": "Can I bring both on the plane?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She eyes the suitcase. If it's under 20 inches, maybe. If not, it's going on the belt."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "行李18公斤，没有超重。这是您的登机牌。登机口是B26，下午一点四十开始登机。注意听广播。",
+                "text_pinyin": "xíngli shíbā gōngjīn, méiyǒu chāo zhòng. zhè shì nín de dēngjī pái. dēngjī kǒu shì B èrshíliù, xiàwǔ yì diǎn sìshí kāishǐ dēngjī. zhùyì tīng guǎngbō.",
+                "text_en": "Luggage is 18 kg — no overweight. Here's your boarding pass. Gate B26, boarding starts at 1:40 PM. Listen for the announcements."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and head to the gate.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！B26，一点四十。安检在哪个方向？",
+                        "text_pinyin": "xièxie! B èrshíliù, yì diǎn sìshí. ānjiǎn zài nǎge fāngxiàng?",
+                        "text_en": "Thanks! B26, 1:40. Which direction is security?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the key info and asking the next logical question. Ms. Shen points to the left with a gesture as precise as a ballet move."
+                    },
+                    {
+                        "text_zh": "谢谢！",
+                        "text_pinyin": "xièxie!",
+                        "text_en": "Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She's already calling the next passenger. The choreography continues."
+                    },
+                    {
+                        "text_zh": "超重的话要多付钱吗？",
+                        "text_pinyin": "chāo zhòng de huà yào duō fù qián ma?",
+                        "text_en": "If it was overweight, would I pay more?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A hypothetical question at check-in — Ms. Shen answers without breaking rhythm: yes, roughly 1% of the ticket price per kilo."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese domestic flights require 身份证 (ID card) or passport. Checked luggage (托运行李) is usually free up to 20-23 kg depending on the airline. Boarding (登机) typically starts 30-40 minutes before departure. Always check your gate number (登机口) — Chinese airports are large."
+    }
+}

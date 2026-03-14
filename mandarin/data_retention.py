@@ -47,7 +47,6 @@ def purge_expired(conn: sqlite3.Connection, dry_run: bool = False) -> dict:
         "error_log": "created_at",
         "security_audit_log": "timestamp",
         "rate_limit": "expires_at",
-        "drill_response": "created_at",
         "vocab_encounter": "created_at",
     }
 
@@ -101,4 +100,26 @@ def purge_expired(conn: sqlite3.Connection, dry_run: bool = False) -> dict:
     if not dry_run:
         conn.commit()
 
+    # Trim crash.log to 10K lines max (not auto-rotated like the others)
+    if not dry_run:
+        _trim_crash_log()
+
     return results
+
+
+_MAX_CRASH_LOG_LINES = 10_000
+
+
+def _trim_crash_log():
+    """Keep only the last 10K lines of crash.log."""
+    from .log_config import CRASH_LOG
+    try:
+        if not CRASH_LOG.exists():
+            return
+        lines = CRASH_LOG.read_text(encoding="utf-8").splitlines()
+        if len(lines) > _MAX_CRASH_LOG_LINES:
+            trimmed = lines[-_MAX_CRASH_LOG_LINES:]
+            CRASH_LOG.write_text("\n".join(trimmed) + "\n", encoding="utf-8")
+            logger.info("Trimmed crash.log from %d to %d lines", len(lines), len(trimmed))
+    except OSError as e:
+        logger.debug("crash.log trim failed: %s", e)

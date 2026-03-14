@@ -1,0 +1,124 @@
+{
+    "title": "The Jade Market Philosopher",
+    "title_zh": "玉石市场哲学家",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_3_00_v0",
+    "tree": {
+        "setup": "A jade and antique market on a weekend morning. Stalls shimmer with bracelets, pendants, and tea sets. Uncle Bao has been selling jade for forty years. His stall is small but every piece is arranged on black velvet with museum precision. He can spot a fake from across the room and considers bargaining a form of philosophical dialogue. He's drinking tea and seems in no rush.",
+        "setup_zh": "周末早上的玉石古玩市场。摊位上闪着手镯、吊坠和茶具的光。鲍叔卖了四十年玉。他的摊位不大，但每件东西都摆在黑丝绒上，精确得像博物馆。他隔着整个房间都能看出假货，认为讨价还价是哲学对话。他在喝茶，一点也不急。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "随便看看。不要急，选玉要慢慢来。好的玉不是用眼睛选的，是用手摸的。",
+                "text_pinyin": "suíbiàn kànkan. búyào jí, xuǎn yù yào mànmàn lái. hǎo de yù bú shì yòng yǎnjīng xuǎn de, shì yòng shǒu mō de.",
+                "text_en": "Look around. Don't rush, choosing jade takes time. Good jade isn't chosen with the eyes, but with the hands."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about a piece that caught your eye.",
+                "options": [
+                    {
+                        "text_zh": "这个手镯很好看。请问是什么玉？是天然的吗？",
+                        "text_pinyin": "zhè ge shǒuzhuó hěn hǎokàn. qǐngwèn shì shénme yù? shì tiānrán de ma?",
+                        "text_en": "This bracelet is beautiful. What kind of jade is it? Is it natural?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Uncle Bao picks it up and holds it to the light.「和田玉，A货。看这个颜色，均匀不均匀？越均匀越好。」天然 is 'natural.' A货 means 'grade A/genuine.' He's already teaching you."
+                    },
+                    {
+                        "text_zh": "最便宜的是哪个？我想买一个小礼物送人。",
+                        "text_pinyin": "zuì piányi de shì nǎ ge? wǒ xiǎng mǎi yí gè xiǎo lǐwù sòng rén.",
+                        "text_en": "Which is the cheapest? I want to buy a small gift for someone.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Bao's expression shifts slightly.「便宜的有，但是送人的话不能太随便。你预算多少？」送人 is 'give as a gift.' 预算 is 'budget.' He won't sell you something embarrassing."
+                    },
+                    {
+                        "text_zh": "我不太懂玉。能教我怎么分辨真假吗？",
+                        "text_pinyin": "wǒ bú tài dǒng yù. néng jiāo wǒ zěnme fēnbiàn zhēn jiǎ ma?",
+                        "text_en": "I don't know much about jade. Can you teach me how to tell real from fake?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Bao puts down his tea with great seriousness.「坐。」He pulls out three pieces.「摸这个——凉不凉？真玉摸起来凉。假的不会。」分辨真假 is 'distinguish real from fake.' You've just enrolled in Jade School."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个吊坠不错，适合你说的那种礼物。和田玉，做工也好。你猜多少钱？",
+                "text_pinyin": "zhè ge diàozhuì búcuò, shìhé nǐ shuō de nà zhǒng lǐwù. hétiányù, zuògōng yě hǎo. nǐ cāi duōshao qián?",
+                "text_en": "This pendant is nice, suitable for the kind of gift you mentioned. Hetian jade, good craftsmanship. How much do you think it costs?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Start the bargaining process.",
+                "options": [
+                    {
+                        "text_zh": "不太敢猜。您直说吧，我不会砍价，但是太贵的话我确实买不起。",
+                        "text_pinyin": "bú tài gǎn cāi. nín zhí shuō ba, wǒ bú huì kǎnjià, dànshì tài guì de huà wǒ quèshí mǎi bu qǐ.",
+                        "text_en": "I'm afraid to guess. Just tell me straight, I'm not good at bargaining, but if it's too expensive I genuinely can't afford it.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Uncle Bao chuckles.「实在人！八百。」Honesty is a bargaining strategy too. 砍价 is 'haggle.' 确实 means 'genuinely.' He gave you a fair price because you didn't play games."
+                    },
+                    {
+                        "text_zh": "做工这么好……三百？",
+                        "text_pinyin": "zuògōng zhème hǎo... sānbǎi?",
+                        "text_en": "With such good craftsmanship... 300?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Bao pretends to be wounded.「三百？你在考验我的耐心。这个成本就不止三百。七百，最低了。」做工 is 'craftsmanship.' Starting low is expected -- the dance has begun."
+                    },
+                    {
+                        "text_zh": "我在网上看过类似的，大概四五百。你这个能便宜一点吗？",
+                        "text_pinyin": "wǒ zài wǎng shàng kàn guo lèisì de, dàgài sì wǔ bǎi. nǐ zhè ge néng piányi yìdiǎn ma?",
+                        "text_en": "I've seen similar ones online for about 400-500. Can you give a better price?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Bao leans forward.「网上的你敢买？你能摸得到吗？我的你摸过了，知道是真的。六百五。」类似 is 'similar.' Referencing online prices is a modern bargaining tactic -- Uncle Bao has a counter-argument."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好吧，看你是真心想买的。五百五，交个朋友。这个价格你在别的地方买不到这个质量的。",
+                "text_pinyin": "hǎo ba, kàn nǐ shì zhēnxīn xiǎng mǎi de. wǔbǎi wǔ, jiāo gè péngyou. zhè ge jiàgé nǐ zài bié de dìfang mǎi bu dào zhè ge zhìliàng de.",
+                "text_en": "OK, I can see you're genuinely interested. 550, let's become friends. At this price you won't find this quality anywhere else."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to buy.",
+                "options": [
+                    {
+                        "text_zh": "成交！可以刷卡吗？还是只收现金？",
+                        "text_pinyin": "chéngjiāo! kěyǐ shuā kǎ ma? háishi zhǐ shōu xiànjīn?",
+                        "text_en": "Deal! Can I pay by card? Or cash only?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「微信支付宝都行。现金也行。」Uncle Bao wraps the pendant in silk cloth.「给朋友的话，我再送你一个盒子。」成交 is 'deal.' Even traditional jade sellers accept mobile payment now."
+                    },
+                    {
+                        "text_zh": "五百行不行？凑个整数。",
+                        "text_pinyin": "wǔbǎi xíng bu xíng? còu gè zhěngshù.",
+                        "text_en": "How about 500? A round number.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Bao sighs theatrically.「你太会砍了。好吧，五百。但是你下次再来要跟我买茶具。」凑个整数 is 'round it to a whole number' -- a classic bargaining move."
+                    },
+                    {
+                        "text_zh": "我再想想。能不能先帮我留着？我明天来拿。",
+                        "text_pinyin": "wǒ zài xiǎngxiang. néng bu néng xiān bāng wǒ liú zhe? wǒ míngtiān lái ná.",
+                        "text_en": "Let me think about it. Can you hold it for me? I'll come get it tomorrow.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Bao shrugs.「可以留一天。但是明天如果有人出价高……」留着 is 'hold/keep.' He'll hold it but makes no guarantees. The gentle pressure of scarcity."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bargaining (讨价还价, tǎojià huánjià) is expected at Chinese markets. 交个朋友 (jiāo gè péngyou, 'let's become friends') is the seller's way of signaling the final price. 和田玉 (Hétiányù) is prized Chinese jade from Xinjiang. 凑个整数 (còu gè zhěngshù, 'round number') is a classic closing tactic."
+    }
+}

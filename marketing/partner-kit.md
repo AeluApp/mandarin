@@ -8,13 +8,13 @@ Share this with partners so they have everything they need to mention or review 
 
 | Detail | Value |
 |--------|-------|
-| **App name** | Mandarin |
+| **App name** | Aelu |
 | **Tagline** | Adaptive Chinese learning for serious learners |
 | **One-liner** | "Every word you look up becomes practice." |
-| **Price** | Free (HSK 1-2) / $12/month (full access) |
+| **Price** | Free (HSK 1-2) / $14.99/month (full access) |
 | **Platform** | Web (desktop + mobile browser) |
 | **Builder** | Jason — solo developer, learning Mandarin himself |
-| **Content** | HSK 1-6 aligned, 299 seed items (HSK 1-3), 26 grammar points |
+| **Content** | HSK 1-9 aligned, 10,000+ vocabulary items, 26 grammar points |
 | **Drill types** | 27 (reading, listening, speaking, tones, cloze, sentence construction, etc.) |
 | **Key differentiator** | The "cleanup loop" — words you look up during reading become drills |
 | **AI usage** | Zero AI tokens at runtime — all deterministic |
@@ -29,7 +29,7 @@ Use whichever of these resonate with your audience:
 ### For general audiences:
 - "It's like Anki but with a curriculum. You don't build decks — you just study."
 - "27 drill types, not just flashcards. Reading, listening, speaking, and tone practice all in one place."
-- "Free for HSK 1-2. Full access is $12/month."
+- "Free for HSK 1-2. Full access is $14.99/month."
 
 ### For SRS-savvy audiences (Anki users, etc.):
 - "Modified FSRS algorithm with bayesian confidence dampening and interleaving enforcement."
@@ -69,7 +69,7 @@ This is the app's most unique feature. Here's how to explain it simply:
 
 Partners can use this table in reviews or comparisons:
 
-| Feature | Mandarin | Duolingo | Anki | HelloChinese | Hack Chinese |
+| Feature | Aelu | Duolingo | Anki | HelloChinese | Hack Chinese |
 |---------|----------|----------|------|-------------|-------------|
 | Spaced repetition | Yes (FSRS) | Limited | Yes | Basic | Yes |
 | Drill types | 27 | ~3 | 1 (flashcard) | ~6 | 1 (flashcard) |
@@ -82,7 +82,7 @@ Partners can use this table in reviews or comparisons:
 | Multi-skill diagnostics | Yes | No | No | No | No |
 | Deck building required | No | No | Yes | No | No |
 | AI at runtime | No | Yes | No | Yes | No |
-| Price (full) | $12/mo | $7/mo | Free | $10/mo | $15/mo |
+| Price (full) | $14.99/mo | $7/mo | Free | $10/mo | $15/mo |
 | Free tier | HSK 1-2 | Limited | Full | Limited | Trial |
 
 *Note: Competitor features may have changed. Partners should verify current details.*
@@ -116,7 +116,7 @@ Partners can use this table in reviews or comparisons:
 
 If a partner wants to record a walkthrough, suggest this structure (2-3 minutes):
 
-**0:00-0:15** — "I've been trying Mandarin, a Chinese learning app built by a solo developer. Here's what makes it different."
+**0:00-0:15** — "I've been trying Aelu, a Chinese learning app built by a solo developer. Here's what makes it different."
 
 **0:15-0:45** — Start a drill session. Show 2-3 different drill types (e.g., vocabulary recognition → tone pair → cloze deletion). "It has 27 drill types, not just flashcards. The system picks what I need to work on."
 
@@ -126,7 +126,7 @@ If a partner wants to record a walkthrough, suggest this structure (2-3 minutes)
 
 **1:45-2:15** — Show the listening feature. Play a passage. Adjust speed. Reveal transcript. "Listening practice at adjustable speed, with transcript reveal. The words I missed feed into my drills."
 
-**2:15-2:30** — "Free for HSK 1-2. Full access is $12/month. Link in the description for 20% off your first 3 months."
+**2:15-2:30** — "Free for HSK 1-2. Full access is $14.99/month. Link in the description for 20% off your first 3 months."
 
 ---
 
@@ -135,16 +135,16 @@ If a partner wants to record a walkthrough, suggest this structure (2-3 minutes)
 Partners can use or adapt these for their own channels:
 
 ### Tweet/X post:
-> I've been using @mandarinapp for [X] weeks. The "cleanup loop" is genuinely clever — every word I look up during reading becomes a drill. It's like having a tutor who notices exactly what I don't know. [referral link]
+> I've been using @aeluapp for [X] weeks. The "cleanup loop" is genuinely clever — every word I look up during reading becomes a drill. It's like having a tutor who notices exactly what I don't know. [referral link]
 
 ### Instagram caption:
 > Found a Chinese learning app that actually respects my time. 27 drill types, graded reading, and adaptive scheduling that focuses on my weak spots. No streaks, no XP, no cartoon owl — just effective practice. Link in bio for 20% off.
 
 ### YouTube video description blurb:
-> I've been using Mandarin for my Chinese study. It's an adaptive SRS app with 27 drill types, graded reading, and a "cleanup loop" that turns every word you look up into a drill. Free for HSK 1-2, full access $12/month. Try it here: [referral link] (20% off first 3 months with code [CODE])
+> I've been using Aelu for my Chinese study. It's an adaptive SRS app with 27 drill types, graded reading, and a "cleanup loop" that turns every word you look up into a drill. Free for HSK 1-2, full access $14.99/month. Try it here: [referral link] (20% off first 3 months with code [CODE])
 
 ### Blog mention paragraph:
-> For SRS practice, I've been using Mandarin (mandarinapp.com). What sets it apart from Anki or other flashcard apps is the "cleanup loop" — you read graded Chinese passages at your HSK level, and every word you tap to look up gets added to your drill queue. The system has 27 drill types (not just flashcards), adaptive scheduling that targets your weakest skill, and HSK 1-6 alignment. It's free for HSK 1-2 content, with full access at $12/month. [I'm an affiliate — I earn a commission if you sign up through my link, but I only recommend tools I actually use.]
+> For SRS practice, I've been using Aelu (aeluapp.com). What sets it apart from Anki or other flashcard apps is the "cleanup loop" — you read graded Chinese passages at your HSK level, and every word you tap to look up gets added to your drill queue. The system has 27 drill types (not just flashcards), adaptive scheduling that targets your weakest skill, and HSK 1-6 alignment. It's free for HSK 1-2 content, with full access at $14.99/month. [I'm an affiliate — I earn a commission if you sign up through my link, but I only recommend tools I actually use.]
 
 ---
 

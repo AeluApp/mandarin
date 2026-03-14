@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Give a brief self-introduction relevant to the job.",
                 "options": [
-                    {"text_zh": "你好，我叫杰森，我大学学的是市场营销，毕业后有三年工作经验。", "text_pinyin": "nǐ hǎo, wǒ jiào jiésēn, wǒ dàxué xué de shì shìchǎng yíngxiāo, bìyè hòu yǒu sān nián gōngzuò jīngyàn.", "text_en": "Hello, my name is Jason, I studied marketing in university, and I have three years of work experience after graduation.", "score": 1.0, "register": "neutral", "feedback": "Structured and relevant — name, education, experience. Hits the key points for a professional intro."},
-                    {"text_zh": "您好，我叫杰森，对市场营销很感兴趣，希望能在这里学到更多。", "text_pinyin": "nín hǎo, wǒ jiào jiésēn, duì shìchǎng yíngxiāo hěn gǎn xìngqù, xīwàng néng zài zhèlǐ xué dào gèng duō.", "text_en": "Hello, I'm Jason, I'm very interested in marketing and hope to learn more here.", "score": 0.7, "register": "neutral", "feedback": "Polite with 您 and shows enthusiasm, but lacks concrete experience — interviewers want specifics."},
-                    {"text_zh": "我是杰森，以前在一家广告公司工作过，做了不少项目。", "text_pinyin": "wǒ shì jiésēn, yǐqián zài yī jiā guǎnggào gōngsī gōngzuò guò, zuò le bù shǎo xiàngmù.", "text_en": "I'm Jason, I used to work at an advertising company, did quite a few projects.", "score": 0.6, "register": "casual", "feedback": "Has substance but skips the greeting — starting with 你好/您好 and structuring your answer shows professionalism."}
+                    {
+                        "text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.",
+                        "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to give a brief self-introduction relevant to the job, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "给您。请问大概需要多长时间？",
+                        "text_pinyin": "gěi nín. qǐngwèn dàgài xūyào duō cháng shíjiān?",
+                        "text_en": "Here you go. About how long will it take?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to give a brief self-introduction relevant to the job, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我叫杰森，我大学学的是市场营销，毕业后有三年工作经验。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiào jiésēn, wǒ dàxué xué de shì shìchǎng yíngxiāo, bìyè hòu yǒu sān nián gōngzuò jīngyàn.",
+                        "text_en": "Hello, my name is Jason, I studied marketing in university, and I have three years of work experience after graduation.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Structured and relevant — name, education, experience. Hits the key points for a professional intro."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Describe your greatest strength with an example.",
                 "options": [
-                    {"text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。", "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.", "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.", "score": 1.0, "register": "neutral", "feedback": "Concrete and believable — 认真 (diligent/serious) is highly valued in Chinese workplaces, and the example supports it."},
-                    {"text_zh": "我很喜欢学习新东西，适应能力也比较强。", "text_pinyin": "wǒ hěn xǐhuan xuéxí xīn dōngxi, shìyìng nénglì yě bǐjiào qiáng.", "text_en": "I really like learning new things, and my adaptability is fairly strong.", "score": 0.7, "register": "neutral", "feedback": "Good qualities but abstract — an example would make it more convincing."},
-                    {"text_zh": "我的团队合作能力不错，跟同事相处得很好。", "text_pinyin": "wǒ de tuánduì hézuò nénglì búcuò, gēn tóngshì xiāngchǔ de hěn hǎo.", "text_en": "My teamwork skills are good, I get along well with colleagues.", "score": 0.6, "register": "neutral", "feedback": "Relevant skill but vague — everyone claims teamwork. A specific example would stand out."}
+                    {
+                        "text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。",
+                        "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.",
+                        "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Concrete and believable — 认真 (diligent/serious) is highly valued in Chinese workplaces, and the example supports it."
+                    },
+                    {
+                        "text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.",
+                        "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your greatest strength with an example, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我们也很舍不得你。祝你在上海一切顺利，有空常联系。",
+                        "text_pinyin": "wǒmen yě hěn shěbude nǐ. zhù nǐ zài shànghǎi yīqiè shùnlì, yǒu kòng cháng liánxì.",
+                        "text_en": "We'll miss you too. Wish you all the best in Shanghai, keep in touch when you can.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe your greatest strength with an example, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

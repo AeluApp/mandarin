@@ -1,0 +1,196 @@
+{
+    "title": "The Currency Philosopher",
+    "title_zh": "货币哲学家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_bank_6_03_v0",
+    "tree": {
+        "setup": "The foreign exchange counter of Bank of China, a semicircular window with rates displayed on an LED board that refreshes every thirty seconds — a financial heartbeat visible from across the lobby. Exchange specialist Mr. Qiu has watched currencies rise and fall for twenty-three years with the equanimity of a tide watcher. He keeps a small notebook of interesting exchange rate patterns he's noticed over the decades, though he insists they are 'observations, not predictions.' His favorite pen has the Bank of China logo worn almost invisible by years of form-filling.",
+        "setup_zh": "中国银行的外汇柜台，一个半圆形窗口，LED屏上的汇率每三十秒刷新一次——一个从大厅对面就能看到的金融心跳。外汇专员邱先生以潮汐观测者般的平静注视着货币的起落已有二十三年。他有一本小笔记本，记录着他几十年来注意到的有趣汇率规律，尽管他坚持说那些是「观察，不是预测」。他最喜欢的笔上中国银行的标志已经被多年的填表磨得几乎看不见了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问要换外币吗？",
+                "text_pinyin": "nín hǎo, qǐngwèn yào huàn wàibì ma?",
+                "text_en": "Hello, do you want to exchange foreign currency?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your exchange needs.",
+                "options": [
+                    {
+                        "text_zh": "邱先生，你好。我下周要去日本出差，想用人民币换一些日元。大概需要换五十万日元左右。另外，我手上还有一些上次去欧洲剩下的欧元，也想一起换成人民币。",
+                        "text_pinyin": "Qiū xiānsheng, nǐ hǎo. wǒ xià zhōu yào qù Rìběn chū chāi, xiǎng yòng rénmínbì huàn yìxiē Rìyuán. dàgài xūyào huàn wǔshí wàn Rìyuán zuǒyòu. lìngwài, wǒ shǒu shàng hái yǒu yìxiē shàng cì qù Ōuzhōu shèng xià de Ōuyuán, yě xiǎng yìqǐ huàn chéng rénmínbì.",
+                        "text_en": "Mr. Qiu, hello. I'm going to Japan on business next week and want to exchange RMB for yen — about 500,000 yen. Also, I have some leftover euros from a European trip — I'd like to convert those to RMB too.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Two-way exchange in a single visit — Mr. Qiu reaches for his notebook with the excitement of a man about to discuss two currencies simultaneously."
+                    },
+                    {
+                        "text_zh": "我要换日元。",
+                        "text_pinyin": "wǒ yào huàn Rìyuán.",
+                        "text_en": "I want to exchange for yen.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He checks the rate. The LED board flickers with fresh numbers."
+                    },
+                    {
+                        "text_zh": "现在换日元合适吗？汇率怎么样？",
+                        "text_pinyin": "xiànzài huàn Rìyuán héshì ma? huìlǜ zěnmeyàng?",
+                        "text_en": "Is now a good time to exchange yen? How's the rate?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Qiu's hand twitches toward his notebook. He has observations — not predictions — about the yen this month."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，两笔业务可以一起办。先看今天的牌价：卖出价是日元100兑人民币4.89，买入价是欧元1兑人民币7.82。五十万日元需要人民币两万四千四百五十块。您有多少欧元要换？",
+                "text_pinyin": "hǎo de, liǎng bǐ yèwù kěyǐ yìqǐ bàn. xiān kàn jīntiān de pái jià: mài chū jià shì Rìyuán yìbǎi duì rénmínbì sì diǎn bā jiǔ, mǎi rù jià shì Ōuyuán yī duì rénmínbì qī diǎn bā èr. wǔshí wàn Rìyuán xūyào rénmínbì liǎng wàn sìqiān sìbǎi wǔshí kuài. nín yǒu duōshǎo Ōuyuán yào huàn?",
+                "text_en": "OK, we can process both together. Today's rates: selling price is JPY 100 to RMB 4.89, buying price is EUR 1 to RMB 7.82. 500,000 yen requires 24,450 RMB. How many euros do you have?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him the euro amount and ask about rate differences.",
+                "options": [
+                    {
+                        "text_zh": "大概三百欧元。我注意到买入价和卖出价不一样，中间差了不少。请问这个差价是固定的还是会变的？如果我等到明天，汇率可能会更好吗？",
+                        "text_pinyin": "dàgài sānbǎi Ōuyuán. wǒ zhùyì dào mǎi rù jià hé mài chū jià bù yíyàng, zhōngjiān chà le bùshǎo. qǐngwèn zhège chā jià shì gùdìng de háishì huì biàn de? rúguǒ wǒ děng dào míngtiān, huìlǜ kěnéng huì gèng hǎo ma?",
+                        "text_en": "About 300 euros. I noticed the buying and selling prices are different — there's quite a spread. Is that spread fixed or variable? Could the rate be better tomorrow?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about the bid-ask spread — Mr. Qiu's eyes light up. This is the kind of question that keeps his notebook relevant."
+                    },
+                    {
+                        "text_zh": "三百欧元。今天换划算吗？",
+                        "text_pinyin": "sānbǎi Ōuyuán. jīntiān huàn huásuàn ma?",
+                        "text_en": "300 euros. Is today a good deal?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He gives a careful, noncommittal answer. Observations, not predictions."
+                    },
+                    {
+                        "text_zh": "三百。直接换吧。",
+                        "text_pinyin": "sānbǎi. zhíjiē huàn ba.",
+                        "text_en": "300. Just exchange it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Decisive. He processes it without further commentary, though his notebook remains open."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "差价会随市场波动变化，一般在中间价的百分之零点五左右。至于明天的汇率，我只能说……汇率每天都在变，有可能更好，也有可能更差。不过对于旅游和出差这种小额换汇来说，一两天的差别不会太大。三百欧元按今天的买入价，可以换两千三百四十六块人民币。",
+                "text_pinyin": "chā jià huì suí shìchǎng bōdòng biànhuà, yìbān zài zhōngjiān jià de bǎi fēn zhī líng diǎn wǔ zuǒyòu. zhìyú míngtiān de huìlǜ, wǒ zhǐ néng shuō……huìlǜ měi tiān dōu zài biàn, yǒu kěnéng gèng hǎo, yě yǒu kěnéng gèng chà. búguò duìyú lǚyóu hé chū chāi zhè zhǒng xiǎo'é huàn huì lái shuō, yì liǎng tiān de chābié búhuì tài dà. sānbǎi Ōuyuán àn jīntiān de mǎi rù jià, kěyǐ huàn liǎngqiān sānbǎi sìshíliù kuài rénmínbì.",
+                "text_en": "The spread varies with the market — usually about 0.5% around the mid-rate. As for tomorrow's rate, I can only say... rates change daily, could be better or worse. But for small amounts like travel and business trips, a day or two won't make much difference. 300 euros at today's buying price comes to 2,346 RMB."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide and ask about the denominations for the yen.",
+                "options": [
+                    {
+                        "text_zh": "说得有道理，那就今天换吧。日元的话，能不能给我一些小面额的？到了日本买小东西方便。一万面额的给大部分，然后给我一些一千和五千的。",
+                        "text_pinyin": "shuō de yǒu dàolǐ, nà jiù jīntiān huàn ba. Rìyuán de huà, néng bu néng gěi wǒ yìxiē xiǎo miàn'é de? dào le Rìběn mǎi xiǎo dōngxi fāngbiàn. yí wàn miàn'é de gěi dà bùfen, ránhòu gěi wǒ yìxiē yìqiān hé wǔqiān de.",
+                        "text_en": "Good point — let's do it today then. For the yen, can you give me some smaller bills? They'll be handy for small purchases in Japan. Mostly 10,000 bills, but some 1,000s and 5,000s too.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Denomination planning — Mr. Qiu opens his cash drawer and begins counting with the practiced rhythm of twenty-three years."
+                    },
+                    {
+                        "text_zh": "好的，换吧。日元什么面额都行。",
+                        "text_pinyin": "hǎo de, huàn ba. Rìyuán shénme miàn'é dōu xíng.",
+                        "text_en": "OK, let's exchange. Any denomination for the yen is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll give you mostly large bills. You'll discover the inconvenience of only having 10,000-yen notes at a 7-Eleven."
+                    },
+                    {
+                        "text_zh": "那今天就换。",
+                        "text_pinyin": "nà jīntiān jiù huàn.",
+                        "text_en": "Let's exchange today then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He begins processing. The LED board refreshes — the rate you locked in was good enough."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没问题，小面额的我尽量多给您一些。请先填一下购汇申请表，写明用途是因私旅行。然后签字确认金额。对了，提醒您一下：日本很多地方已经可以用手机支付了，但是有些小店和交通卡充值还是只收现金。",
+                "text_pinyin": "méi wèntí, xiǎo miàn'é de wǒ jǐnliàng duō gěi nín yìxiē. qǐng xiān tián yíxià gòu huì shēnqǐng biǎo, xiě míng yòngtú shì yīn sī lǚxíng. ránhòu qiānzì quèrèn jīn'é. duì le, tíxǐng nín yíxià: Rìběn hěn duō dìfāng yǐjīng kěyǐ yòng shǒujī zhīfù le, dànshì yǒuxiē xiǎo diàn hé jiāotōng kǎ chōngzhí háishì zhǐ shōu xiànjīn.",
+                "text_en": "No problem, I'll include plenty of smaller bills. Please fill out the exchange application — write 'personal travel' as the purpose. Then sign to confirm the amount. By the way, a tip: many places in Japan accept mobile payment now, but some small shops and transit card top-ups still only take cash."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Fill out the form and ask about bringing leftover yen back.",
+                "options": [
+                    {
+                        "text_zh": "表填好了。谢谢您的建议。还有一个问题：如果我从日本回来以后还有剩余的日元，可以再换回人民币吗？需要保留什么凭证吗？",
+                        "text_pinyin": "biǎo tián hǎo le. xièxie nín de jiànyì. hái yǒu yí gè wèntí: rúguǒ wǒ cóng Rìběn huílái yǐhòu hái yǒu shèngyú de Rìyuán, kěyǐ zài huàn huí rénmínbì ma? xūyào bǎoliú shénme píngzhèng ma?",
+                        "text_en": "Form is filled out. Thanks for the tip. One more question: if I have leftover yen after coming back from Japan, can I convert it back to RMB? Do I need to keep any receipts?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thinking about the return trip's exchange — Mr. Qiu's notebook appreciates a client who thinks in round trips."
+                    },
+                    {
+                        "text_zh": "好的，表填好了。",
+                        "text_pinyin": "hǎo de, biǎo tián hǎo le.",
+                        "text_en": "OK, form is done.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He processes the exchange and begins counting bills."
+                    },
+                    {
+                        "text_zh": "表在这里。快点办吧，我赶时间。",
+                        "text_pinyin": "biǎo zài zhèlǐ. kuài diǎn bàn ba, wǒ gǎn shíjiān.",
+                        "text_en": "Form's here. Please hurry — I'm in a rush.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Qiu processes at his own pace — currencies deserve respect, not haste."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "可以换回来，但是要保留今天的兑换水单。结汇的时候凭这个水单办理，不占用您下次的购汇额度。好了，这是您的日元：四十五张一万的，五张五千的，二十五张一千的。一共五十万。还有欧元换的两千三百四十六块人民币。请您当面点一下。",
+                "text_pinyin": "kěyǐ huàn huílái, dànshì yào bǎoliú jīntiān de duìhuàn shuǐ dān. jié huì de shíhòu píng zhège shuǐ dān bànlǐ, bú zhànyòng nín xià cì de gòu huì é dù. hǎo le, zhè shì nín de Rìyuán: sìshíwǔ zhāng yí wàn de, wǔ zhāng wǔqiān de, èrshíwǔ zhāng yìqiān de. yígòng wǔshí wàn. hái yǒu Ōuyuán huàn de liǎngqiān sānbǎi sìshíliù kuài rénmínbì. qǐng nín dāng miàn diǎn yíxià.",
+                "text_en": "You can convert it back — but keep today's exchange receipt. Use it for the reconversion, and it won't count against your annual quota. Here's your yen: 45 ten-thousands, 5 five-thousands, 25 one-thousands. 500,000 total. And 2,346 RMB from the euros. Please count it in front of me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Count the money and thank him.",
+                "options": [
+                    {
+                        "text_zh": "点好了，金额都对。邱先生，非常感谢。二十三年做外汇，您一定见过很多汇率的起起落落吧。这些经验比任何金融APP都有价值。",
+                        "text_pinyin": "diǎn hǎo le, jīn'é dōu duì. Qiū xiānsheng, fēicháng gǎnxiè. èrshísān nián zuò wàihuì, nín yídìng jiàn guò hěn duō huìlǜ de qǐ qǐ luò luò ba. zhèxiē jīngyàn bǐ rènhé jīnróng APP dōu yǒu jiàzhí.",
+                        "text_en": "Counted — amounts are correct. Mr. Qiu, thank you so much. Twenty-three years in foreign exchange — you must have seen many rate fluctuations. That experience is worth more than any financial app.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging his two decades of observations — Mr. Qiu closes his notebook with the quiet satisfaction of a philosopher whose work has been recognized."
+                    },
+                    {
+                        "text_zh": "数好了，没问题。谢谢！水单我收好。",
+                        "text_pinyin": "shǔ hǎo le, méi wèntí. xièxie! shuǐ dān wǒ shōu hǎo.",
+                        "text_en": "Counted, all good. Thanks! I'll keep the receipt.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Keeping the receipt — the one instruction he cares about most. He nods with approval."
+                    },
+                    {
+                        "text_zh": "对了，谢谢。走了。",
+                        "text_pinyin": "duì le, xièxie. zǒu le.",
+                        "text_en": "Correct, thanks. I'm off.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "He watches you leave with your yen. The LED board refreshes. A new rate, a new observation for the notebook."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Currency exchange in China uses distinct buy (买入) and sell (卖出) rates. The 兑换水单 (exchange receipt) is essential — keep it to reconvert leftover foreign currency without using your annual quota. Banks offer better rates than airports or hotels. The annual individual foreign exchange limit is $50,000 USD equivalent."
+    }
+}

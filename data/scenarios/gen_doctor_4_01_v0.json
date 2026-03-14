@@ -1,0 +1,160 @@
+{
+    "title": "The Prescription Poet",
+    "title_zh": "处方诗人",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_4_01_v0",
+    "tree": {
+        "setup": "The pharmacy counter at the back of a small hospital, where afternoon light filters through frosted glass. Pharmacist Sun has been filling prescriptions for twenty years and reads doctors' handwriting the way archaeologists read ancient scripts — with patience, expertise, and occasional disbelief. He arranges pill bottles with the precision of a chess player setting up a board.",
+        "setup_zh": "小医院后面的药房柜台，午后的光线透过磨砂玻璃照进来。药剂师孙师傅配药二十年，读医生的字迹就像考古学家读古文——需要耐心、专业知识，偶尔还需要一点信仰。他摆放药瓶的精确程度堪比棋手布局。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请把处方给我看看。",
+                "text_pinyin": "nín hǎo, qǐng bǎ chǔfāng gěi wǒ kànkan.",
+                "text_en": "Hello, please let me see your prescription."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over the prescription.",
+                "options": [
+                    {
+                        "text_zh": "给你，这是医生开的处方。请问这些药怎么吃？",
+                        "text_pinyin": "gěi nǐ, zhè shì yīshēng kāi de chǔfāng. qǐngwèn zhèxiē yào zěnme chī?",
+                        "text_en": "Here — this is the prescription the doctor gave me. How should I take these medicines?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Proactive about dosage instructions. Pharmacist Sun adjusts his reading glasses with satisfaction."
+                    },
+                    {
+                        "text_zh": "在这里。",
+                        "text_pinyin": "zài zhèlǐ.",
+                        "text_en": "Here it is.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He takes it and squints at the handwriting. Some things never change."
+                    },
+                    {
+                        "text_zh": "我不知道医生写的什么，你能看懂吗？",
+                        "text_pinyin": "wǒ bù zhīdào yīshēng xiě de shénme, nǐ néng kàn dǒng ma?",
+                        "text_en": "I don't know what the doctor wrote — can you read it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pharmacist Sun chuckles.「放心，这个字迹我已经认了十五年了。」He's been reading this doctor's handwriting for fifteen years."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，一共三种药。这个白色的是消炎药，一天三次，饭后吃。这个黄色的是止咳药，咳嗽的时候吃。",
+                "text_pinyin": "hǎo de, yígòng sān zhǒng yào. zhège báisè de shì xiāoyán yào, yì tiān sān cì, fàn hòu chī. zhège huángsè de shì zhǐ ké yào, késou de shíhòu chī.",
+                "text_en": "OK, three types of medicine. The white one is anti-inflammatory — three times a day, after meals. The yellow one is cough medicine — take it when you cough."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the third medicine.",
+                "options": [
+                    {
+                        "text_zh": "明白了。那第三种药是什么？也是饭后吃吗？",
+                        "text_pinyin": "míngbai le. nà dì sān zhǒng yào shì shénme? yě shì fàn hòu chī ma?",
+                        "text_en": "Got it. What's the third one? Also after meals?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Tracking all three — Sun nods approvingly. Most patients zone out after the second medication."
+                    },
+                    {
+                        "text_zh": "还有一种呢？",
+                        "text_pinyin": "hái yǒu yì zhǒng ne?",
+                        "text_en": "And the other one?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Short but on point. He pulls out the third bottle."
+                    },
+                    {
+                        "text_zh": "这么多药啊……",
+                        "text_pinyin": "zhème duō yào a……",
+                        "text_en": "So much medicine...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Sun smiles.「三种不算多。上星期有人开了八种。」Three is nothing — last week someone got eight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第三种是维生素C，每天一片，什么时候吃都行。对了，吃药期间不要喝酒。",
+                "text_pinyin": "dì sān zhǒng shì wéishēngsù C, měi tiān yí piàn, shénme shíhòu chī dōu xíng. duìle, chī yào qījiān búyào hē jiǔ.",
+                "text_en": "The third is vitamin C — one tablet daily, anytime is fine. Oh, and don't drink alcohol while on the medication."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm you understand and ask about duration.",
+                "options": [
+                    {
+                        "text_zh": "好的，不喝酒。请问这些药要吃几天？",
+                        "text_pinyin": "hǎo de, bù hē jiǔ. qǐngwèn zhèxiē yào yào chī jǐ tiān?",
+                        "text_en": "OK, no alcohol. How many days should I take these?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Duration matters — finishing antibiotics too early is Pharmacist Sun's recurring nightmare."
+                    },
+                    {
+                        "text_zh": "我知道了。",
+                        "text_pinyin": "wǒ zhīdào le.",
+                        "text_en": "I understand.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll tell you the duration anyway — he never lets a patient leave without knowing."
+                    },
+                    {
+                        "text_zh": "一点酒都不行吗？",
+                        "text_pinyin": "yìdiǎn jiǔ dōu bù xíng ma?",
+                        "text_en": "Not even a little alcohol?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Sun fixes you with a look that has ended a thousand negotiations.「一点都不行。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "消炎药吃五天，吃完为止，不要提前停。一共八十五块。",
+                "text_pinyin": "xiāoyán yào chī wǔ tiān, chī wán wéizhǐ, búyào tíqián tíng. yígòng bāshíwǔ kuài.",
+                "text_en": "Take the anti-inflammatory for five days — finish the course, don't stop early. That's 85 yuan total."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and thank him.",
+                "options": [
+                    {
+                        "text_zh": "好的，五天吃完。给你八十五。谢谢孙师傅，解释得很清楚！",
+                        "text_pinyin": "hǎo de, wǔ tiān chī wán. gěi nǐ bāshíwǔ. xièxie Sūn shīfu, jiěshì de hěn qīngchǔ!",
+                        "text_en": "OK, five full days. Here's 85. Thanks, Pharmacist Sun — your explanation was very clear!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Confirming the course length and complimenting his clarity — Sun arranges the medicine bag for you with visible pride."
+                    },
+                    {
+                        "text_zh": "好，谢谢。",
+                        "text_pinyin": "hǎo, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hands you the bag with a nod. Another prescription filled, another patient sent on their way."
+                    },
+                    {
+                        "text_zh": "怎么这么贵？",
+                        "text_pinyin": "zěnme zhème guì?",
+                        "text_en": "How is it so expensive?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Sun pauses. Eighty-five yuan for three medications and twenty years of expertise. He lets the silence answer."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese hospitals, the pharmacy (药房, yàofáng) is usually a separate window where you pick up prescriptions after seeing the doctor. Pharmacists are addressed as 药剂师 (yàojìshī) formally, or 师傅 (shīfu) casually, showing respect for their craft."
+    }
+}

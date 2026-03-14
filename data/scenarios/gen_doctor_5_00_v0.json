@@ -1,0 +1,196 @@
+{
+    "title": "The Symptom Cartographer",
+    "title_zh": "症状制图师",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_doctor_5_00_v0",
+    "tree": {
+        "setup": "The outpatient department of a hospital that smells of disinfectant and quiet worry. Dr. Yao has been a general practitioner for fifteen years and treats each patient consultation as a small detective story — symptoms are clues, your body is the crime scene, and the diagnosis is the reveal. She has a habit of drawing tiny diagrams to explain conditions, her desk scattered with small sketches of organs that look like they belong in an anatomy textbook illustrated by a children's book artist.",
+        "setup_zh": "门诊部弥漫着消毒水和安静忧虑的气味。姚医生做了十五年全科医生，把每次门诊当成一个小侦探故事——症状是线索，身体是案发现场，诊断是最终揭晓。她习惯画小小的图来解释病情，桌上散落着各种器官的小素描，看起来像是儿童绘本画家画的解剖教科书。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。哪里不舒服？",
+                "text_pinyin": "qǐng zuò. nǎlǐ bù shūfu?",
+                "text_en": "Please sit. What's bothering you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your symptoms.",
+                "options": [
+                    {
+                        "text_zh": "姚医生，我最近一个星期一直头疼，尤其是下午的时候比较严重。同时眼睛也很干，看电脑时间长了会模糊。另外晚上睡觉不太好，经常半夜醒来。",
+                        "text_pinyin": "Yáo yīshēng, wǒ zuìjìn yí gè xīngqī yìzhí tóu téng, yóuqí shì xiàwǔ de shíhòu bǐjiào yánzhòng. tóngshí yǎnjīng yě hěn gān, kàn diànnǎo shíjiān cháng le huì móhu. lìngwài wǎnshàng shuìjiào bú tài hǎo, jīngcháng bànyè xǐng lái.",
+                        "text_en": "Dr. Yao, I've had a headache for the past week, especially severe in the afternoon. My eyes are also very dry and get blurry after looking at the computer for a long time. Also, I'm not sleeping well — I often wake up in the middle of the night.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Three symptoms with timing details — Dr. Yao reaches for a fresh piece of paper. This is the kind of report that makes her detective instincts sing."
+                    },
+                    {
+                        "text_zh": "我头疼，睡不好觉。",
+                        "text_pinyin": "wǒ tóu téng, shuì bù hǎo jiào.",
+                        "text_en": "I have headaches and can't sleep well.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Two data points. She'll need to ask several follow-ups to map the full picture."
+                    },
+                    {
+                        "text_zh": "我最近身体不太好。",
+                        "text_pinyin": "wǒ zuìjìn shēntǐ bú tài hǎo.",
+                        "text_en": "I haven't been feeling well lately.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Yao's pen hovers over the blank page. She'll need to conduct the entire investigation herself."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "头疼一个星期了，下午加重，加上眼睛干涩和失眠。你每天看电脑多长时间？工作压力大不大？",
+                "text_pinyin": "tóu téng yí gè xīngqī le, xiàwǔ jiāzhòng, jiā shàng yǎnjīng gān sè hé shīmián. nǐ měi tiān kàn diànnǎo duō cháng shíjiān? gōngzuò yālì dà bú dà?",
+                "text_en": "Headache for a week, worse in the afternoon, plus dry eyes and insomnia. How many hours a day do you use the computer? Is work stressful?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer about your work habits.",
+                "options": [
+                    {
+                        "text_zh": "每天至少八到十个小时对着电脑，有时候周末也要加班。最近有一个大项目，压力确实挺大的。晚上躺下以后脑子里还在想工作的事。",
+                        "text_pinyin": "měi tiān zhìshǎo bā dào shí gè xiǎoshí duì zhe diànnǎo, yǒu shíhòu zhōumò yě yào jiābān. zuìjìn yǒu yí gè dà xiàngmù, yālì quèshí tǐng dà de. wǎnshàng tǎng xia yǐhòu nǎozi lǐ hái zài xiǎng gōngzuò de shì.",
+                        "text_en": "At least eight to ten hours a day at the computer, sometimes working weekends too. There's a big project recently — the pressure is quite heavy. Even after lying down at night my mind is still on work.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The full picture emerges. Dr. Yao draws a small diagram connecting screen time, stress, and sleep — three arrows forming a cycle."
+                    },
+                    {
+                        "text_zh": "看电脑挺长时间的，工作也挺忙的。",
+                        "text_pinyin": "kàn diànnǎo tǐng cháng shíjiān de, gōngzuò yě tǐng máng de.",
+                        "text_en": "I spend a long time on the computer, and work is quite busy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Approximate but useful. She'll ask about specific hours."
+                    },
+                    {
+                        "text_zh": "应该跟电脑没关系吧？",
+                        "text_pinyin": "yīnggāi gēn diànnǎo méi guānxi ba?",
+                        "text_en": "It shouldn't be related to the computer, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Yao's eyebrows express a gentle disagreement. The detective has strong suspicions about the computer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我先给你做一些基本检查。血压、视力都看一下。另外我建议验一下血，排除其他问题。你最近吃药了吗？有没有过敏的药物？",
+                "text_pinyin": "wǒ xiān gěi nǐ zuò yìxiē jīběn jiǎnchá. xuèyā, shìlì dōu kàn yíxià. lìngwài wǒ jiànyì yàn yíxià xuè, páichú qítā wèntí. nǐ zuìjìn chī yào le ma? yǒu méiyǒu guòmǐn de yàowù?",
+                "text_en": "Let me do some basic checks first. Blood pressure, vision. I also recommend a blood test to rule out other issues. Have you taken any medication recently? Any drug allergies?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer about medications and allergies.",
+                "options": [
+                    {
+                        "text_zh": "最近没有吃药。我对青霉素过敏，其他药物没有过敏的。之前体检的时候血压偏低，不知道现在怎么样。",
+                        "text_pinyin": "zuìjìn méiyǒu chī yào. wǒ duì qīngméisù guòmǐn, qítā yàowù méiyǒu guòmǐn de. zhīqián tǐjiǎn de shíhòu xuèyā piān dī, bù zhīdào xiànzài zěnmeyàng.",
+                        "text_en": "I haven't taken any medication recently. I'm allergic to penicillin — no other drug allergies. My blood pressure was on the low side at my last physical, not sure about now.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Allergy info plus medical history — Dr. Yao writes「青霉素过敏」in red on your chart. This is the kind of detail that prevents complications."
+                    },
+                    {
+                        "text_zh": "没吃药，也没有过敏。",
+                        "text_pinyin": "méi chī yào, yě méiyǒu guòmǐn.",
+                        "text_en": "No medication, no allergies.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean slate. She proceeds with the checks."
+                    },
+                    {
+                        "text_zh": "我不太记得了。好像有一种药不能吃。",
+                        "text_pinyin": "wǒ bú tài jìde le. hǎoxiàng yǒu yì zhǒng yào bù néng chī.",
+                        "text_en": "I don't really remember. I think there's one drug I can't take.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Yao's pen stops.「好像」and drug allergies should not share a sentence. She'll note it as unknown and proceed with extra caution."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，青霉素过敏已经记下来了。检查结果出来了：血压正常，视力有一点下降，应该是用眼过度。我的初步判断是长期看屏幕加上压力太大，导致的紧张性头痛和视觉疲劳。",
+                "text_pinyin": "hǎo de, qīngméisù guòmǐn yǐjīng jì xiàlái le. jiǎnchá jiéguǒ chūlái le: xuèyā zhèngcháng, shìlì yǒu yìdiǎn xiàjiàng, yīnggāi shì yòng yǎn guòdù. wǒ de chūbù pànduàn shì chángqī kàn píngmù jiā shàng yālì tài dà, dǎozhì de jǐnzhāng xìng tóutòng hé shìjué píláo.",
+                "text_en": "OK, penicillin allergy noted. Results are in: blood pressure is normal, vision has dropped slightly — likely from overuse. My preliminary assessment is tension headaches and visual fatigue from prolonged screen time combined with excessive stress."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about treatment options.",
+                "options": [
+                    {
+                        "text_zh": "紧张性头痛……那需要吃药吗？还是说改变生活习惯就能好？有没有什么具体的建议？",
+                        "text_pinyin": "jǐnzhāng xìng tóutòng……nà xūyào chī yào ma? háishi shuō gǎibiàn shēnghuó xíguàn jiù néng hǎo? yǒu méiyǒu shénme jùtǐ de jiànyì?",
+                        "text_en": "Tension headaches... do I need medication, or can lifestyle changes help? Do you have specific recommendations?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about lifestyle versus medication — Dr. Yao draws a small scale with pills on one side and a clock on the other."
+                    },
+                    {
+                        "text_zh": "那怎么办？",
+                        "text_pinyin": "nà zěnme bàn?",
+                        "text_en": "So what do I do?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Open-ended but engaged. She'll outline the options."
+                    },
+                    {
+                        "text_zh": "不严重吧？",
+                        "text_pinyin": "bù yánzhòng ba?",
+                        "text_en": "It's not serious, is it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Yao says it's not serious now, but the emphasis on「现在」carries weight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两方面都需要。我给你开一些缓解头痛的药，不含青霉素成分。但更重要的是：每工作一个小时要休息十分钟，看看远处。尽量在十一点前睡觉。如果一周后还没有改善，再来复查。血液检查的结果明天出来，我会打电话通知你。",
+                "text_pinyin": "liǎng fāngmiàn dōu xūyào. wǒ gěi nǐ kāi yìxiē huǎnjiě tóutòng de yào, bù hán qīngméisù chéngfèn. dàn gèng zhòngyào de shì: měi gōngzuò yí gè xiǎoshí yào xiūxi shí fēnzhōng, kàn kan yuǎnchù. jǐnliàng zài shíyī diǎn qián shuìjiào. rúguǒ yì zhōu hòu hái méiyǒu gǎishàn, zài lái fùchá. xuèyè jiǎnchá de jiéguǒ míngtiān chūlái, wǒ huì dǎ diànhuà tōngzhī nǐ.",
+                "text_en": "Both are needed. I'll prescribe some headache relief medication — no penicillin components. But more importantly: rest ten minutes every hour of work and look into the distance. Try to sleep before eleven. If there's no improvement in a week, come back for a follow-up. Blood test results come tomorrow — I'll call you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the plan and thank her.",
+                "options": [
+                    {
+                        "text_zh": "明白了。每小时休息十分钟，十一点前睡觉。处方在哪里取药？对了，血液检查结果如果有问题的话，是要再来一趟吗？",
+                        "text_pinyin": "míngbai le. měi xiǎoshí xiūxi shí fēnzhōng, shíyī diǎn qián shuìjiào. chǔfāng zài nǎlǐ qǔ yào? duì le, xuèyè jiǎnchá jiéguǒ rúguǒ yǒu wèntí de huà, shì yào zài lái yí tàng ma?",
+                        "text_en": "Understood. Rest ten minutes every hour, sleep before eleven. Where do I pick up the prescription? And if the blood test shows issues, should I come back in?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the instructions and asking about next steps — Dr. Yao points you to the pharmacy downstairs. If she calls, come back. If not, the case is closed."
+                    },
+                    {
+                        "text_zh": "好的，谢谢姚医生。",
+                        "text_pinyin": "hǎo de, xièxie Yáo yīshēng.",
+                        "text_en": "OK, thank you Dr. Yao.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Brief but courteous. She hands you the prescription with one of her tiny diagrams attached — a small eye with an arrow pointing at a distant mountain."
+                    },
+                    {
+                        "text_zh": "这些我做不到啊，工作太忙了。",
+                        "text_pinyin": "zhèxiē wǒ zuò bú dào a, gōngzuò tài máng le.",
+                        "text_en": "I can't do all that — work is too busy.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Yao draws a small cycle: work → stress → headache → less work → more stress. The point is clear without words."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hospitals have outpatient departments (门诊, ménzhěn) where you see doctors without a prior appointment by taking a number. Doctors typically see many patients per day and consultations are brief but thorough. 青霉素过敏 (qīngméisù guòmǐn, penicillin allergy) is always recorded prominently. Follow-up visits (复查, fùchá) are standard for ongoing conditions."
+    }
+}

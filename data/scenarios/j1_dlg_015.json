@@ -1,0 +1,87 @@
+{
+    "title": "The Night Market",
+    "title_zh": "夜市",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "You're walking through a night market with your friend. Lights are everywhere. The smell of grilled food fills the air.",
+        "setup_zh": "你和朋友在夜市里走。到处都是灯。空气里都是烤肉的香味。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好香啊！你想吃什么？那边有烤串，这边有面条。",
+                "text_pinyin": "Hǎo xiāng a! Nǐ xiǎng chī shénme? Nà biān yǒu kǎo chuàn, zhè biān yǒu miàntiáo.",
+                "text_en": "Smells so good! What do you want to eat? Over there they have kebabs, over here they have noodles."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose what to eat.",
+                "options": [
+                    {
+                        "text_zh": "我想吃烤串！我们去那边看看。",
+                        "text_pinyin": "Wǒ xiǎng chī kǎo chuàn! Wǒmen qù nà biān kànkan.",
+                        "text_en": "I want kebabs! Let's go check that one out.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Picks from what she pointed out and suggests going together -- matches the excited energy of the night market."
+                    },
+                    {
+                        "text_zh": "都想吃！你想吃什么？",
+                        "text_pinyin": "Dōu xiǎng chī! Nǐ xiǎng chī shénme?",
+                        "text_en": "I want both! What do you want?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Enthusiastic but doesn't decide -- she was hoping you'd pick so you could go explore together."
+                    },
+                    {
+                        "text_zh": "先看看有什么吧。",
+                        "text_pinyin": "Xiān kànkan yǒu shénme ba.",
+                        "text_en": "Let's see what they have first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She just told you what's available and you want to browse more -- dampens the 'let's go!' energy she brought."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！这个摊的烤串很好吃。你要几串？",
+                "text_pinyin": "Hǎo! Zhège tān de kǎo chuàn hěn hǎochī. Nǐ yào jǐ chuàn?",
+                "text_en": "Great! This stall's kebabs are really good. How many do you want?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order some kebabs.",
+                "options": [
+                    {
+                        "text_zh": "我要五串！你也要吗？",
+                        "text_pinyin": "Wǒ yào wǔ chuàn! Nǐ yě yào ma?",
+                        "text_en": "I want five! Do you want some too?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Orders decisively and includes your friend -- generous and matches the sharing spirit of night markets."
+                    },
+                    {
+                        "text_zh": "三串吧。",
+                        "text_pinyin": "Sān chuàn ba.",
+                        "text_en": "Three, I guess.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but sounds unenthusiastic -- she said these are really good and your response doesn't match her excitement."
+                    },
+                    {
+                        "text_zh": "多少钱一串？",
+                        "text_pinyin": "Duōshǎo qián yī chuàn?",
+                        "text_en": "How much per kebab?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Asks about price when she asked how many you want -- at a night market with friends, checking costs first feels stingy."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Night markets are one of the most vibrant parts of Chinese urban life. The sensory experience — lights, sounds, smells — is overwhelming in the best way. Sharing food with a friend at a night market is one of life's simple, perfect pleasures."
+    }
+}

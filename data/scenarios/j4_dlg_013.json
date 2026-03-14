@@ -1,0 +1,83 @@
+{
+    "title": "Walking After Dinner",
+    "title_zh": "饭后散步",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You're taking a walk after dinner along a river. Your colleague Xiao Wei, who usually seems stressed at work, is walking beside you. The evening is warm and the river reflects city lights.",
+        "setup_zh": "你在晚饭后沿着河边散步。平时在工作中总是看起来很紧张的同事小韦走在你旁边。晚上很温暖，河水倒映着城市的灯光。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你约我出来散步。在办公室的时候，我总觉得喘不过气来。但走在河边，听着水的声音，好像所有的压力都变小了。",
+                "text_pinyin": "Xièxie nǐ yuē wǒ chūlái sànbù. Zài bàngōngshì de shíhou, wǒ zǒng juéde chuǎn bú guò qì lái. Dàn zǒu zài hé biān, tīng zhe shuǐ de shēngyīn, hǎoxiàng suǒyǒu de yālì dōu biàn xiǎo le.",
+                "text_en": "Thanks for inviting me for a walk. In the office I always feel like I can't breathe. But walking by the river, listening to the water, it's like all the pressure shrinks."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Xiao Wei about the pressure.",
+                "options": [
+                    {
+                        "text_zh": "没事没事。不过我这边风特别大，都快穿外套了。陈姐，你那边风没这么大吧？",
+                        "text_pinyin": "Méi shì méi shì. Búguò wǒ zhè biān fēng tèbié dà, dōu kuài chuān wàitào le. Chén jiě, nǐ nà biān fēng méi zhème dà ba?",
+                        "text_en": "No problem, no problem. But the airflow over here is really strong, I'm almost putting on a jacket. Sister Chen, the breeze isn't this strong on your side, right?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compassionate and wise — distinguishes between fixing problems and changing your relationship to them."
+                    },
+                    {
+                        "text_zh": "你工作压力大是因为什么？",
+                        "text_pinyin": "Nǐ gōngzuò yālì dà shì yīnwèi shénme?",
+                        "text_en": "What causes your work stress?",
+                        "score": 0.0,
+                        "feedback": "Probing the source of stress when she's trying to escape it."
+                    },
+                    {
+                        "text_zh": "你有没有想过换工作？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò huàn gōngzuò?",
+                        "text_en": "Have you thought about changing jobs?",
+                        "score": 0.0,
+                        "feedback": "Career advice when she needs presence, not solutions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对。事情还在，但我会不一样。我以前一直觉得，只有把所有事情都做完了才能休息。但事情永远做不完，我却越来越累。",
+                "text_pinyin": "Nǐ shuō de duì. Shìqíng hái zài, dàn wǒ huì bù yīyàng. Wǒ yǐqián yīzhí juéde, zhǐyǒu bǎ suǒyǒu shìqíng dōu zuò wán le cái néng xiūxi. Dàn shìqíng yǒngyuǎn zuò bù wán, wǒ què yuè lái yuè lèi.",
+                "text_en": "You're right. The things are still there, but I'll be different. I used to think I could only rest after finishing everything. But things never end, and I just get more and more tired."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the trap of endless work.",
+                "options": [
+                    {
+                        "text_zh": "热水是好主意。陈姐，我看到一个研究说26度效率最高。咱们折中一下调到24？你那边不会太热，我也不用穿棉袄了。",
+                        "text_pinyin": "Rè shuǐ shì hǎo zhǔyì. Chén jiě, wǒ kàn dào yī ge yánjiū shuō èrshíliù dù xiàolǜ zuì gāo. Zánmen zhézhōng yīxià tiáo dào èrshísì? Nǐ nà biān bú huì tài rè, wǒ yě bú yòng chuān miánaǒ le.",
+                        "text_en": "Hot water is a good idea. Sister Chen, a study says 26 degrees is best for productivity. How about we compromise at 24? You won't be too hot, and I won't need a padded jacket.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes rest as necessity, not luxury — a healing perspective."
+                    },
+                    {
+                        "text_zh": "你应该跟领导说，工作量太大了。",
+                        "text_pinyin": "Nǐ yīnggāi gēn lǐngdǎo shuō, gōngzuòliàng tài dà le.",
+                        "text_en": "You should tell your boss the workload is too heavy.",
+                        "score": 0.0,
+                        "feedback": "Workplace advice that shifts from emotional support to problem-solving."
+                    },
+                    {
+                        "text_zh": "你试过瑜伽吗？听说对减压很有用。",
+                        "text_pinyin": "Nǐ shì guò yújiā ma? Tīngshuō duì jiǎnyā hěn yǒuyòng.",
+                        "text_en": "Have you tried yoga? I hear it's good for stress relief.",
+                        "score": 0.0,
+                        "feedback": "Wellness recommendation instead of genuine emotional engagement."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The Chinese tradition of 饭后散步 (post-dinner walking) is deeply embedded in daily life, often expressed in the proverb 饭后百步走，活到九十九 (walk a hundred steps after eating, live to ninety-nine). For many urban workers facing intense workplace pressure (996 culture), evening walks along rivers and parks serve as essential decompression rituals."
+    }
+}

@@ -1,0 +1,160 @@
+{
+    "title": "The Platform Philosopher",
+    "title_zh": "站台哲学家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_4_01_v0",
+    "tree": {
+        "setup": "Beijing South Railway Station, a cathedral of glass and steel where thousands of travelers move with purpose through the main hall. You need to buy a ticket to Shanghai on the high-speed rail. The ticket agent, Ms. Qiu, works her computer with the speed of a concert pianist and rates destinations by their 'nap quality' — Shanghai gets 4.5 stars because the seats recline just enough.",
+        "setup_zh": "北京南站，一座玻璃和钢铁的大教堂，成千上万的旅客在大厅里有目的地移动。你需要买一张去上海的高铁票。售票员邱小姐操作电脑的速度堪比音乐会钢琴师，还按「午睡质量」给目的地打分——上海得4.5星，因为座椅刚好能倾斜到舒适角度。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下一位。您好，去哪里？",
+                "text_pinyin": "xià yí wèi. nín hǎo, qù nǎlǐ?",
+                "text_en": "Next. Hello, where to?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her your destination and preferred time.",
+                "options": [
+                    {
+                        "text_zh": "你好，我要一张明天去上海的高铁票。上午的，越早越好。",
+                        "text_pinyin": "nǐ hǎo, wǒ yào yì zhāng míngtiān qù Shànghǎi de gāotiě piào. shàngwǔ de, yuè zǎo yuè hǎo.",
+                        "text_en": "Hello, I need a high-speed rail ticket to Shanghai for tomorrow. Morning, as early as possible.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Destination, date, time preference — Ms. Qiu's fingers are already flying. She has three options before you finish speaking."
+                    },
+                    {
+                        "text_zh": "去上海，明天的票。",
+                        "text_pinyin": "qù Shànghǎi, míngtiān de piào.",
+                        "text_en": "To Shanghai, tomorrow.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll ask about time preference and seat class next."
+                    },
+                    {
+                        "text_zh": "去上海。",
+                        "text_pinyin": "qù Shànghǎi.",
+                        "text_en": "To Shanghai.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She waits. When? What class? Ms. Qiu needs data the way a pianist needs sheet music."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "明天上午最早的是七点十五分的，四个半小时到上海虹桥。二等座553块，一等座933块。你要哪个？",
+                "text_pinyin": "míngtiān shàngwǔ zuì zǎo de shì qī diǎn shíwǔ fēn de, sì gè bàn xiǎoshí dào Shànghǎi Hóngqiáo. èr děng zuò wǔbǎi wǔshísān kuài, yī děng zuò jiǔbǎi sānshísān kuài. nǐ yào nǎge?",
+                "text_en": "The earliest tomorrow morning is 7:15 — four and a half hours to Shanghai Hongqiao. Second class is 553 yuan, first class is 933. Which one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your seat class.",
+                "options": [
+                    {
+                        "text_zh": "二等座就好。靠窗的座位还有吗？",
+                        "text_pinyin": "èr děng zuò jiù hǎo. kào chuāng de zuòwèi hái yǒu ma?",
+                        "text_en": "Second class is fine. Are there any window seats left?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Window seat request — Ms. Qiu checks and nods. She rates window seats highly for nap quality due to the headrest angle."
+                    },
+                    {
+                        "text_zh": "二等座。",
+                        "text_pinyin": "èr děng zuò.",
+                        "text_en": "Second class.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She assigns a seat. Quick."
+                    },
+                    {
+                        "text_zh": "有没有更便宜的？",
+                        "text_pinyin": "yǒu méiyǒu gèng piányi de?",
+                        "text_en": "Anything cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Qiu looks up from her screen. There is no third class on the high-speed rail. She suggests a regular train at half the price but three times the duration."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "靠窗的有。请出示您的身份证。票价553块，可以扫码支付。",
+                "text_pinyin": "kào chuāng de yǒu. qǐng chūshì nín de shēnfènzhèng. piào jià wǔbǎi wǔshísān kuài, kěyǐ sǎo mǎ zhīfù.",
+                "text_en": "Window seat available. Please show your ID. That's 553 yuan — you can scan to pay."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Pay and confirm.",
+                "options": [
+                    {
+                        "text_zh": "好的，身份证在这里。我扫码付。请问明天需要提前多久到站？",
+                        "text_pinyin": "hǎo de, shēnfènzhèng zài zhèlǐ. wǒ sǎo mǎ fù. qǐngwèn míngtiān xūyào tíqián duō jiǔ dào zhàn?",
+                        "text_en": "OK, here's my ID. I'll scan to pay. How early should I arrive at the station tomorrow?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about arrival time shows planning. Ms. Qiu recommends thirty minutes — and she would know."
+                    },
+                    {
+                        "text_zh": "给你身份证。",
+                        "text_pinyin": "gěi nǐ shēnfènzhèng.",
+                        "text_en": "Here's my ID.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She processes it with machine-like efficiency."
+                    },
+                    {
+                        "text_zh": "可以用现金吗？",
+                        "text_pinyin": "kěyǐ yòng xiànjīn ma?",
+                        "text_en": "Can I pay with cash?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She nods — cash is still accepted, though her fingers were poised for the QR code."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "提前半个小时就行。从南门进去，过安检，在候车大厅等。这是您的票。祝您旅途愉快。",
+                "text_pinyin": "tíqián bàn gè xiǎoshí jiù xíng. cóng nán mén jìnqù, guò ānjiǎn, zài hòuchē dàtīng děng. zhè shì nín de piào. zhù nín lǚtú yúkuài.",
+                "text_en": "Half an hour early is enough. Enter from the south gate, go through security, and wait in the departure hall. Here's your ticket. Have a pleasant trip."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！解释得很清楚。",
+                        "text_pinyin": "xièxie nǐ! jiěshì de hěn qīngchǔ.",
+                        "text_en": "Thank you! Very clear explanation.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Ms. Qiu allows herself a brief smile. Shanghai gets 4.5 stars for nap quality — you'll discover why tomorrow."
+                    },
+                    {
+                        "text_zh": "谢谢！",
+                        "text_pinyin": "xièxie!",
+                        "text_en": "Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She calls the next person. Another traveler dispatched."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "hǎo.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Qiu has already moved on. 「下一位。」Next."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's high-speed rail (高铁, gāotiě) is one of the world's most extensive networks. Second class (二等座) is comfortable and popular; first class (一等座) has wider seats. You need your ID to buy tickets and to pass through security checkpoints at the station."
+    }
+}

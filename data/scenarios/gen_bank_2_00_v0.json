@@ -1,0 +1,130 @@
+{
+    "title": "The Stamp Perfectionist",
+    "title_zh": "完美的印章",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_2_00_v0",
+    "tree": {
+        "setup": "A small bank branch with marble floors and fluorescent lights. You're here to open an account. The teller, Xiao Tang, has been working here for twelve years and takes immense pride in the perfect alignment of her stamp ink. She tests each stamp on scrap paper first, adjusting pressure and angle until the impression is flawless. The line behind you does not concern her.",
+        "setup_zh": "一家小银行，大理石地板，日光灯。你来开户。柜员小唐在这里工作了十二年，对印章的红墨水对齐非常自豪。她每次盖章前都先在废纸上试，调整力度和角度，直到印记完美无缺。你身后的队伍跟她无关。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问您要办什么业务？",
+                "text_pinyin": "nín hǎo, qǐngwèn nín yào bàn shénme yèwù?",
+                "text_en": "Hello, what service would you like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her you want to open an account.",
+                "options": [
+                    {
+                        "text_zh": "我想开一个银行账户。",
+                        "text_pinyin": "wǒ xiǎng kāi yí gè yínháng zhànghù.",
+                        "text_en": "I'd like to open a bank account.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang nods and pulls out a form with the reverence of someone unrolling a sacred scroll. She uncaps her favorite stamp -- the one with the perfectly even ink pad.「请先填这个表。」"
+                    },
+                    {
+                        "text_zh": "我第一次来这个银行。",
+                        "text_pinyin": "wǒ dì yī cì lái zhè ge yínháng.",
+                        "text_en": "This is my first time at this bank.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang softens slightly -- she appreciates a newcomer. She explains the process with extra care, pointing at each form field with her pen cap."
+                    },
+                    {
+                        "text_zh": "开户要多长时间？",
+                        "text_pinyin": "kāi hù yào duō cháng shíjiān?",
+                        "text_en": "How long does it take to open an account?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang pauses. The honest answer depends on how many stamps need to be perfect today.「大概二十分钟。」多长时间 is the standard way to ask about duration."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。请给我看一下您的身份证。",
+                "text_pinyin": "hǎo de. qǐng gěi wǒ kàn yíxià nín de shēnfènzhèng.",
+                "text_en": "OK. Please show me your ID."
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "您要设一个密码。请输入六个数字。",
+                "text_pinyin": "nín yào shè yí gè mìmǎ. qǐng shūrù liù gè shùzì.",
+                "text_en": "You need to set a password. Please enter six digits."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the password setup.",
+                "options": [
+                    {
+                        "text_zh": "好的，我输入了。",
+                        "text_pinyin": "hǎo de, wǒ shūrù le.",
+                        "text_en": "OK, I've entered it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang nods and reaches for her stamp. She positions it above the form, breathes once, and brings it down with surgical precision. She examines the result. A tiny smile. It's perfect."
+                    },
+                    {
+                        "text_zh": "密码可以用生日吗？",
+                        "text_pinyin": "mìmǎ kěyǐ yòng shēngrì ma?",
+                        "text_en": "Can I use my birthday as the password?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang leans forward and lowers her voice.「可以，但是不太安全。」She says this the way a doctor says 'you can eat cake, but...' 可以 + 但是 is useful for qualified permission."
+                    },
+                    {
+                        "text_zh": "六个数字？我记不住。",
+                        "text_pinyin": "liù gè shùzì? wǒ jì bu zhù.",
+                        "text_en": "Six digits? I can't remember that.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Tang's expression suggests she has heard this concern before and does not consider it valid. Six digits. That's the rule. 记不住 means 'can't remember' -- a potential complement."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，您的卡办好了。请收好。",
+                "text_pinyin": "hǎo le, nín de kǎ bàn hǎo le. qǐng shōu hǎo.",
+                "text_en": "Done, your card is ready. Please keep it safe."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您！ATM在哪里？",
+                        "text_pinyin": "xièxie nín! ATM zài nǎlǐ?",
+                        "text_en": "Thank you! Where is the ATM?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang points toward the lobby entrance.「出门左边。」Practical follow-up. She stamps your receipt one final time -- perfectly, naturally."
+                    },
+                    {
+                        "text_zh": "太好了，谢谢您！",
+                        "text_pinyin": "tài hǎo le, xièxie nín!",
+                        "text_en": "Great, thank you!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang gives a professional nod and calls the next number. She's already reaching for a fresh ink pad. Using 您 in a bank is natural and appreciated."
+                    },
+                    {
+                        "text_zh": "这个卡可以在网上用吗？",
+                        "text_pinyin": "zhè ge kǎ kěyǐ zài wǎngshàng yòng ma?",
+                        "text_en": "Can I use this card online?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Tang explains you'll need to activate online banking separately.「要开通网上银行。」She hands you yet another form. There are always more forms."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Opening a bank account in China (开户, kāi hù) requires your ID card or passport. The official stamps (盖章, gài zhāng) are a key part of Chinese bureaucracy -- documents aren't official without them. Many bank tellers take genuine pride in their stamp work."
+    }
+}

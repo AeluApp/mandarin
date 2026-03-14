@@ -1,10 +1,10 @@
-# 漫 Mandarin
+# 漫 Aelu
 
 Patient Mandarin study. Honest data, no theatrics.
 
 ## Identity
 
-**Name:** Mandarin
+**Name:** Aelu
 **Mark:** 漫 (màn — drifting, wandering, leisurely)
 **Position:** A place for patient language study, not a product that optimizes engagement.
 

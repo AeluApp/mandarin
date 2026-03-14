@@ -1,0 +1,87 @@
+{
+    "title": "Sharing Tangerines",
+    "title_zh": "分橘子",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "Your colleague brings a bag of tangerines to the office. She offers you some.",
+        "setup_zh": "你的同事带了一袋橘子到办公室。她给你一些。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我妈妈给了我很多橘子。你要不要吃一个？",
+                "text_pinyin": "Wǒ māma gěi le wǒ hěn duō júzi. Nǐ yào bú yào chī yī ge?",
+                "text_en": "My mom gave me lots of tangerines. Want to have one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her offer.",
+                "options": [
+                    {
+                        "text_zh": "好啊，谢谢！你妈妈真好。",
+                        "text_pinyin": "Hǎo a, xièxie! Nǐ māma zhēn hǎo.",
+                        "text_en": "Sure, thanks! Your mom is really kind.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Accepts the tangerine and appreciates that her mom sent them -- connects with the family gesture behind the offer."
+                    },
+                    {
+                        "text_zh": "好，谢谢。",
+                        "text_pinyin": "Hǎo, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Accepts politely but doesn't comment on her mom or the tangerines -- she was sharing something from her family."
+                    },
+                    {
+                        "text_zh": "你妈妈住在哪里？",
+                        "text_pinyin": "Nǐ māma zhù zài nǎlǐ?",
+                        "text_en": "Where does your mom live?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Asks about her mom's location before even accepting the tangerine or saying thanks -- take the fruit first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "她家有很多橘子树。每年都会给我很多。这些特别甜。",
+                "text_pinyin": "Tā jiā yǒu hěn duō júzi shù. Měi nián dōu huì gěi wǒ hěn duō. Zhèxiē tèbié tián.",
+                "text_en": "She has lots of tangerine trees at home. Every year she gives me a lot. These are especially sweet."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Continue the conversation about the tangerines.",
+                "options": [
+                    {
+                        "text_zh": "真的好甜！我很喜欢。你妈妈家在哪里？",
+                        "text_pinyin": "Zhēn de hǎo tián! Wǒ hěn xǐhuan. Nǐ māma jiā zài nǎlǐ?",
+                        "text_en": "Really sweet! I like them a lot. Where is your mom's home?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Confirms the sweetness she mentioned and shows genuine interest in her family's tangerine trees."
+                    },
+                    {
+                        "text_zh": "很甜！谢谢。",
+                        "text_pinyin": "Hěn tián! Xièxie.",
+                        "text_en": "Very sweet! Thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Acknowledges the taste but doesn't engage further -- she was telling a story about her mom's trees."
+                    },
+                    {
+                        "text_zh": "我也想有橘子树。",
+                        "text_pinyin": "Wǒ yě xiǎng yǒu júzi shù.",
+                        "text_en": "I want tangerine trees too.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She's sharing about her mom's garden and you made it about yourself -- respond to her story first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing food from home is a deep Chinese social ritual. When a parent sends fruit or homemade food, sharing it with colleagues strengthens workplace bonds. Refusing would be slightly awkward — accepting graciously is the warm response."
+    }
+}

@@ -6,14 +6,12 @@ Generates xAPI statements from drill sessions for learning record interoperabili
 from __future__ import annotations
 
 import json
-import logging
 import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from . import db
-
-logger = logging.getLogger(__name__)
+from .settings import CANONICAL_URL
 
 # xAPI verb IRIs
 VERBS = {
@@ -25,7 +23,7 @@ VERBS = {
     "progressed": "http://adlnet.gov/expapi/verbs/progressed",
 }
 
-ACTIVITY_BASE = "https://mandarin.app/activities"
+ACTIVITY_BASE = f"{CANONICAL_URL}/activities"
 
 
 def _make_actor(user_id: int, email: Optional[str] = None) -> Dict[str, Any]:
@@ -33,7 +31,7 @@ def _make_actor(user_id: int, email: Optional[str] = None) -> Dict[str, Any]:
     actor = {
         "objectType": "Agent",
         "account": {
-            "homePage": "https://mandarin.app",
+            "homePage": CANONICAL_URL,
             "name": str(user_id),
         },
     }

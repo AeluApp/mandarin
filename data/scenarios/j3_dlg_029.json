@@ -1,0 +1,117 @@
+{
+    "title": "Helping Carry Groceries",
+    "title_zh": "帮忙拎菜",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You see Grandma Sun struggling to carry heavy bags of groceries up the stairs to your apartment building. She lives on the third floor.",
+        "setup_zh": "你看到孙奶奶提着很重的菜袋子，正在吃力地上楼。她住在三楼。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Offer to help.",
+                "options": [
+                    {
+                        "text_zh": "孙奶奶，我来帮您拎吧！这么重，您一个人不方便。",
+                        "text_pinyin": "Sūn nǎinai, wǒ lái bāng nín līn ba! Zhème zhòng, nín yī ge rén bù fāngbiàn.",
+                        "text_en": "Grandma Sun, let me help carry those! They're so heavy — it's hard for you alone.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Proactive and caring — exactly the right response."
+                    },
+                    {
+                        "text_zh": "您需要帮忙吗？",
+                        "text_pinyin": "Nín xūyào bāngmáng ma?",
+                        "text_en": "Do you need help?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but gives her room to refuse out of politeness."
+                    },
+                    {
+                        "text_zh": "（走过去，没说什么）",
+                        "text_pinyin": "(Zǒu guòqù, méi shuō shénme)",
+                        "text_en": "(Walk past without saying anything)",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Missing an obvious chance to help."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎，太谢谢你了！今天买多了，一个人真提不动。你刚下班吧？累不累？",
+                "text_pinyin": "Āi, tài xièxie nǐ le! Jīntiān mǎi duō le, yī ge rén zhēn tí bù dòng. Nǐ gāng xiàbān ba? Lèi bú lèi?",
+                "text_en": "Oh, thank you so much! I bought too much today — really can't carry it all alone. Did you just get off work? Are you tired?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond while carrying the bags upstairs.",
+                "options": [
+                    {
+                        "text_zh": "不累不累！这点东西很轻的。孙奶奶，您今天买了这么多，是要做什么好吃的吗？",
+                        "text_pinyin": "Bú lèi bú lèi! Zhè diǎn dōngxi hěn qīng de. Sūn nǎinai, nín jīntiān mǎi le zhème duō, shì yào zuò shénme hǎochī de ma?",
+                        "text_en": "Not tired at all! These are light. Grandma Sun, you bought so much — are you making something special?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Downplays the effort and shows interest — very warm."
+                    },
+                    {
+                        "text_zh": "没事，举手之劳。",
+                        "text_pinyin": "Méi shì, jǔshǒu zhī láo.",
+                        "text_en": "It's nothing, just a small favor.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Humble but doesn't extend the conversation."
+                    },
+                    {
+                        "text_zh": "是挺重的。",
+                        "text_pinyin": "Shì tǐng zhòng de.",
+                        "text_en": "They are pretty heavy.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Makes her feel guilty for accepting help."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我孙子明天从北京回来，我给他做红烧排骨！他最爱吃奶奶做的菜了。你等一下，我给你拿几个苹果。",
+                "text_pinyin": "Wǒ sūnzi míngtiān cóng Běijīng huílái, wǒ gěi tā zuò hóngshāo páigǔ! Tā zuì ài chī nǎinai zuò de cài le. Nǐ děng yīxià, wǒ gěi nǐ ná jǐ ge píngguǒ.",
+                "text_en": "My grandson is coming back from Beijing tomorrow — I'm making braised ribs for him! He loves grandma's cooking. Wait a moment, let me get you some apples."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her wanting to give you apples.",
+                "options": [
+                    {
+                        "text_zh": "谢谢孙奶奶！您孙子回来一定很开心。红烧排骨闻到味道就知道好吃了。",
+                        "text_pinyin": "Xièxie Sūn nǎinai! Nín sūnzi huílái yīdìng hěn kāixīn. Hóngshāo páigǔ wén dào wèidào jiù zhīdào hǎochī le.",
+                        "text_en": "Thank you, Grandma Sun! Your grandson must be so happy to come back. The braised ribs will smell delicious — you just know they'll be great.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepts gracefully and shares in her excitement about family."
+                    },
+                    {
+                        "text_zh": "不用了，太客气了。",
+                        "text_pinyin": "Bú yòng le, tài kèqi le.",
+                        "text_en": "No need, you're too kind.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite refusal — but in this context, accepting is more gracious."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。再见。",
+                        "text_pinyin": "Hǎo de, xièxie. Zàijiàn.",
+                        "text_en": "Okay, thanks. Bye.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Accepts but rushes off."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Helping elderly neighbors with heavy items is a natural expectation in Chinese communities. The exchange — help carrying groceries, receive apples in return — represents the reciprocal kindness that holds neighborhoods together. Grandparents cooking for returning grandchildren is a deeply emotional family tradition."
+    },
+    "hsk_level": 3
+}

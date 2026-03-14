@@ -1,0 +1,117 @@
+{
+    "title": "The Demolished Garden",
+    "title_zh": "拆掉的花园",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+        "setup": "You're sitting on rubble that was once a courtyard garden in an old Beijing hutong. A retired architect, Mr. Wu, who designed the garden decades ago, has come to see it one last time before complete demolition.",
+        "setup_zh": "你坐在废墟上——这里曾经是北京一条老胡同里的庭院花园。退休建筑师吴先生几十年前设计了这个花园，他来最后看一眼，然后就要彻底拆除了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这块地方以前有一棵石榴树，那边有一个小水池。每年秋天石榴红了，从二楼窗户看下去，整个院子像一幅画。我1987年设计的这个花园，用了一个原则——「借景」。院子虽然小，但我把远处那棵老槐树借进来了，站在这个角度看，它好像长在院子里。现在老槐树也要砍了。借不到了。",
+                "text_pinyin": "Zhè kuài dìfang yǐqián yǒu yī kē shíliú shù, nàbiān yǒu yī ge xiǎo shuǐchí. Měi nián qiūtiān shíliú hóng le, cóng èr lóu chuānghu kàn xiàqù, zhěnggè yuànzi xiàng yī fú huà. Wǒ yī jiǔ bā qī nián shèjì de zhège huāyuán, yòng le yī ge yuánzé — 'jiè jǐng'. Yuànzi suīrán xiǎo, dàn wǒ bǎ yuǎnchù nà kē lǎo huáishù jiè jìnlái le, zhàn zài zhège jiǎodù kàn, tā hǎoxiàng zhǎng zài yuànzi lǐ. Xiànzài lǎo huáishù yě yào kǎn le. Jiè bú dào le.",
+                "text_en": "There used to be a pomegranate tree here, a pond over there. Every autumn the pomegranates turned red — from the second floor, the whole courtyard was like a painting. I designed this garden in 1987 using one principle — 'borrowed scenery.' The courtyard was small, but I borrowed that old scholar tree — from this angle, it seemed to grow in the courtyard. Now that tree is being cut too. Nothing left to borrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the loss of the borrowed scenery.",
+                "options": [
+                    {
+                        "text_zh": "「借景」的前提是景还在——远处的树被砍、天际线被高楼取代，「借」的对象消失了，花园的空间感就崩塌了。您设计的不只是花园，是花园和世界之间的关系。关系的一端拆了，另一端也失去了意义。",
+                        "text_pinyin": "'Jiè jǐng' de qiántí shì jǐng hái zài — yuǎnchù de shù bèi kǎn, tiānjìxiàn bèi gāolóu qǔdài, 'jiè' de duìxiàng xiāoshī le, huāyuán de kōngjiān gǎn jiù bēngtā le. Nín shèjì de bù zhǐ shì huāyuán, shì huāyuán hé shìjiè zhī jiān de guānxi. Guānxi de yī duān chāi le, lìng yī duān yě shīqù le yìyì.",
+                        "text_en": "'Borrowed scenery' requires the scenery to exist. When the distant tree is cut, the skyline replaced by towers, the 'borrowing' vanishes and the garden's spatial sense collapses. You designed not just a garden, but a relationship between garden and world. Sever one end, the other loses meaning.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Borrowed scenery as relational design — when the world changes, the garden dies twice."
+                    },
+                    {
+                        "text_zh": "能不能移植那棵槐树？",
+                        "text_pinyin": "Néng bù néng yízhí nà kē huáishù?",
+                        "text_en": "Could the scholar tree be transplanted?",
+                        "score": 0.0,
+                        "feedback": "A logistical solution to an irreversible spatial loss."
+                    },
+                    {
+                        "text_zh": "新建筑会有花园吗？",
+                        "text_pinyin": "Xīn jiànzhù huì yǒu huāyuán ma?",
+                        "text_en": "Will the new building have a garden?",
+                        "score": 0.0,
+                        "feedback": "Asks about replacement during a moment of irreversible loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "关系——你说到了最痛的地方。中国传统园林从来不是孤立的——它和山、水、天空是一个整体。苏州的拙政园为什么美？因为设计师知道墙外有什么，知道什么时候月亮会出现在那个窗户的位置。园林的一半在墙内，一半在墙外。现在的开发商造花园，就是在小区中间放几棵树、一个喷泉。那不是花园，那是装饰。花园需要和外面的世界呼吸——但现在外面的世界不允许你呼吸了。",
+                "text_pinyin": "Guānxi — nǐ shuō dào le zuì tòng de dìfang. Zhōngguó chuántǒng yuánlín cónglái bú shì gūlì de — tā hé shān, shuǐ, tiānkōng shì yī ge zhěngtǐ. Sūzhōu de Zhuōzhèng Yuán wèishéme měi? Yīnwèi shèjìshī zhīdào qiáng wài yǒu shénme, zhīdào shénme shíhou yuèliang huì chūxiàn zài nàge chuānghu de wèizhì. Yuánlín de yībàn zài qiáng nèi, yībàn zài qiáng wài. Xiànzài de kāifāshāng zào huāyuán, jiù shì zài xiǎoqū zhōngjiān fàng jǐ kē shù, yī ge pēnquán. Nà bú shì huāyuán, nà shì zhuāngshì. Huāyuán xūyào hé wàimiàn de shìjiè hūxī — dàn xiànzài wàimiàn de shìjiè bù yǔnxǔ nǐ hūxī le.",
+                "text_en": "Relationship — you've hit the sorest point. Chinese gardens were never isolated — they were one whole with mountains, water, sky. Why is Suzhou's Humble Administrator's Garden beautiful? The designer knew what was beyond the wall, when the moon would appear in that window. Half a garden is inside the wall, half outside. Today's developers place trees and a fountain in a compound. That's not a garden, it's decoration."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the distinction between garden and decoration.",
+                "options": [
+                    {
+                        "text_zh": "花园的一半在墙外——当墙外变成停车场和玻璃幕墙，「借」的可能性就被切断了。不是花园死了——是花园能呼吸的那个世界死了。一旦对话切断，即使原样重建，它也只是复制品，不再是活的空间。",
+                        "text_pinyin": "Huāyuán de yībàn zài qiáng wài — dāng qiáng wài biàn chéng tíngchēchǎng hé bōli mùqiáng, 'jiè' de kěnéngxìng jiù bèi qiēduàn le. Bú shì huāyuán sǐ le — shì huāyuán néng hūxī de nàge shìjiè sǐ le. Yīdàn duìhuà qiēduàn, jíshǐ yuányàng chóngjiàn, tā yě zhǐ shì fùzhìpǐn, bú zài shì huó de kōngjiān.",
+                        "text_en": "Half the garden is outside the wall — when outside becomes parking lots and glass curtain walls, 'borrowing' is severed. It's not that the garden died — the world it breathed with died. Once severed, even an exact rebuild is just a replica, no longer a living space.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The world the garden breathed with is what died — rebuilding without context is taxidermy."
+                    },
+                    {
+                        "text_zh": "苏州的园林保护得怎么样？",
+                        "text_pinyin": "Sūzhōu de yuánlín bǎohù de zěnmeyàng?",
+                        "text_en": "How well are Suzhou's gardens preserved?",
+                        "score": 0.0,
+                        "feedback": "Asks about other gardens while standing in the ruins of this one."
+                    },
+                    {
+                        "text_zh": "您有没有这个花园的照片？",
+                        "text_pinyin": "Nín yǒu méiyǒu zhège huāyuán de zhàopiàn?",
+                        "text_en": "Do you have photos of this garden?",
+                        "score": 0.0,
+                        "feedback": "Documentation request during a meditation on what photos can't capture."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "活的空间……对。一个花园是活的，它随着光线变化、随着季节呼吸、随着周围的环境调整自己。你可以拍一千张照片，但照片拍不到风穿过石榴树的感觉，拍不到雨后石头上的湿润，拍不到黄昏时老槐树的影子慢慢移过水面。这些不是花园的「特征」——这些就是花园。我现在站在这里，脚下是碎砖头，但我还能闻到石榴树的味道。也许味道是最后消失的东西。",
+                "text_pinyin": "Huó de kōngjiān…… duì. Yī ge huāyuán shì huó de, tā suízhe guāngxiàn biànhuà, suízhe jìjié hūxī, suízhe zhōuwéi de huánjìng tiáozhěng zìjǐ. Nǐ kěyǐ pāi yīqiān zhāng zhàopiàn, dàn zhàopiàn pāi bú dào fēng chuānguò shíliú shù de gǎnjué, pāi bú dào yǔ hòu shítou shàng de shīrùn, pāi bú dào huánghūn shí lǎo huáishù de yǐngzi mànman yí guò shuǐmiàn. Zhèxiē bú shì huāyuán de 'tèzhēng' — zhèxiē jiù shì huāyuán. Wǒ xiànzài zhàn zài zhèlǐ, jiǎo xià shì suì zhuāntou, dàn wǒ hái néng wén dào shíliú shù de wèidào. Yěxǔ wèidào shì zuìhòu xiāoshī de dōngxi.",
+                "text_en": "A garden is alive — it shifts with light, breathes with seasons, adjusts with surroundings. A thousand photos can't capture wind through a pomegranate tree, moisture on stones after rain, the scholar tree's shadow crossing the water at dusk. These aren't the garden's 'features' — they are the garden. Standing here now, broken bricks underfoot, I can still smell the pomegranate tree. Maybe scent is the last thing to disappear."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to scent as the last trace of the garden.",
+                "options": [
+                    {
+                        "text_zh": "味道是最后消失的——因为味道不需要形状、不需要结构，它可以在废墟上继续存在。也许多年以后，有人走过这里，突然闻到一种说不清的香味——那是埋在土里的石榴树根最后一次呼吸。那个瞬间，花园通过气味短暂地复活了。",
+                        "text_pinyin": "Wèidào shì zuìhòu xiāoshī de — yīnwèi wèidào bù xūyào xíngzhuàng, bù xūyào jiégòu, tā kěyǐ zài fèixū shàng jìxù cúnzài. Yěxǔ duō nián yǐhòu, yǒu rén zǒu guò zhèlǐ, tūrán wén dào yī zhǒng shuō bù qīng de xiāngwèi — nà shì mái zài tǔ lǐ de shíliú shù gēn zuìhòu yī cì hūxī. Nàge shùnjiān, huāyuán tōngguò qìwèi duǎnzàn de fùhuó le.",
+                        "text_en": "Scent is the last to disappear — it needs no shape, no structure, it can persist atop ruins. Years from now, someone passing here will catch an inexplicable fragrance — the buried pomegranate roots breathing one last time. In that instant, the garden briefly revives through scent.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Beauty returns as scent from buried roots — the garden's afterlife in a stranger's passing awareness."
+                    },
+                    {
+                        "text_zh": "这块地会建什么？",
+                        "text_pinyin": "Zhè kuài dì huì jiàn shénme?",
+                        "text_en": "What will be built on this land?",
+                        "score": 0.0,
+                        "feedback": "Asks about construction plans while standing in a moment of mourning."
+                    },
+                    {
+                        "text_zh": "您设计过其他的花园吗？",
+                        "text_pinyin": "Nín shèjì guò qítā de huāyuán ma?",
+                        "text_en": "Have you designed other gardens?",
+                        "score": 0.0,
+                        "feedback": "A portfolio question during a funeral for this one."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "借景 (jiè jǐng, borrowed scenery) is one of the most sophisticated principles of Chinese garden design, integrating elements beyond the garden's walls — distant mountains, neighboring trees, the sky — into the garden's visual composition. The destruction of Beijing's hutong gardens is one of the city's most lamented cultural losses. The concept that 'half the garden is outside the wall' encapsulates a worldview where boundaries are porous and beauty is relational, not contained."
+    }
+}

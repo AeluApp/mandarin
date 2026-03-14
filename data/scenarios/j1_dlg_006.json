@@ -1,0 +1,87 @@
+{
+    "title": "Lost in the Park",
+    "title_zh": "在公园迷路了",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "You're walking in a park and can't find the exit. You ask a woman sitting on a bench for help.",
+        "setup_zh": "你在公园里散步，找不到出口了。你向坐在长椅上的一位女士求助。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你要去哪里？",
+                "text_pinyin": "Nǐ hǎo! Nǐ yào qù nǎlǐ?",
+                "text_en": "Hello! Where do you need to go?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask her where the exit is.",
+                "options": [
+                    {
+                        "text_zh": "你好！请问，出口在哪里？",
+                        "text_pinyin": "Nǐ hǎo! Qǐngwèn, chūkǒu zài nǎlǐ?",
+                        "text_en": "Hello! Excuse me, where is the exit?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uses 请问 to ask politely -- respectful and gets right to what you need."
+                    },
+                    {
+                        "text_zh": "我找不到出口了。",
+                        "text_pinyin": "Wǒ zhǎo bú dào chūkǒu le.",
+                        "text_en": "I can't find the exit.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Explains the problem but doesn't directly ask for help -- she'll probably help anyway, but it's less clear."
+                    },
+                    {
+                        "text_zh": "这个公园很大。",
+                        "text_pinyin": "Zhège gōngyuán hěn dà.",
+                        "text_en": "This park is very big.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "States an observation instead of asking for directions -- she offered to help and you just commented on the scenery."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "出口？你往前走，然后往左，就到了。",
+                "text_pinyin": "Chūkǒu? Nǐ wǎng qián zǒu, ránhòu wǎng zuǒ, jiù dào le.",
+                "text_en": "The exit? Walk straight ahead, then turn left, and you'll be there."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her for the directions.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！这个公园真漂亮。",
+                        "text_pinyin": "Xièxie nǐ! Zhège gōngyuán zhēn piàoliang.",
+                        "text_en": "Thank you! This park is really beautiful.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Thanks her for the directions and adds a warm compliment about the park."
+                    },
+                    {
+                        "text_zh": "谢谢！",
+                        "text_pinyin": "Xièxie!",
+                        "text_en": "Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grateful but brief -- a little more warmth would match her helpfulness."
+                    },
+                    {
+                        "text_zh": "往前走多远？",
+                        "text_pinyin": "Wǎng qián zǒu duō yuǎn?",
+                        "text_en": "How far forward?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Practical follow-up, but she already said the directions clearly -- skipping the thank-you feels ungrateful after she helped you."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese parks are places where strangers naturally help each other. Asking for directions is a common and perfectly comfortable interaction. Adding a compliment about the park is a gentle way to show appreciation."
+    }
+}

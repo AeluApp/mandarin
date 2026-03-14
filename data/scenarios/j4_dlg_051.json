@@ -1,0 +1,83 @@
+{
+    "title": "The Last Bus",
+    "title_zh": "末班车",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're waiting for the last bus of the night. The only other person at the stop is a tired-looking nurse still in her scrubs.",
+        "setup_zh": "你在等末班车。站台上唯一的另一个人是一位看起来很累的护士，还穿着工作服。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "末班车总是这么安静。白天的公交车很吵、很挤，但是最后一班只有几个人。我每天都坐这班车回家。你也是刚下班吗？",
+                "text_pinyin": "Mò bān chē zǒng shì zhème ānjìng. Báitiān de gōngjiāo chē hěn chǎo, hěn jǐ, dànshì zuìhòu yī bān zhǐyǒu jǐ ge rén. Wǒ měi tiān dōu zuò zhè bān chē huí jiā. Nǐ yě shì gāng xià bān ma?",
+                "text_en": "The last bus is always this quiet. Daytime buses are noisy and crowded, but the last one has just a few people. I take this bus home every day. Did you just get off work too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the quiet of the last bus and her daily routine.",
+                "options": [
+                    {
+                        "text_zh": "是的。末班车有一种特别的安静，像是这座城市终于深呼吸了一下。每天最后一班车上的人，大概都有自己辛苦了一天的故事。",
+                        "text_pinyin": "Shì de. Mò bān chē yǒu yī zhǒng tèbié de ānjìng, xiàng shì zhè zuò chéngshì zhōngyú shēn hūxī le yīxià. Měi tiān zuìhòu yī bān chē shàng de rén, dàgài dōu yǒu zìjǐ xīnkǔ le yī tiān de gùshi.",
+                        "text_en": "Yes. The last bus has a special quiet — like the city finally took a deep breath. Everyone on the last bus probably has their own story of a hard day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The last bus as the city's exhale — shared exhaustion as quiet solidarity."
+                    },
+                    {
+                        "text_zh": "末班车几点到？",
+                        "text_pinyin": "Mò bān chē jǐ diǎn dào?",
+                        "text_en": "What time does the last bus arrive?",
+                        "score": 0.0,
+                        "feedback": "A schedule check instead of engaging her reflection."
+                    },
+                    {
+                        "text_zh": "你不打车回家吗？",
+                        "text_pinyin": "Nǐ bù dǎ chē huí jiā ma?",
+                        "text_en": "Don't you take a taxi home?",
+                        "score": 0.0,
+                        "feedback": "Suggests alternatives when she's sharing a ritual."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "辛苦了一天的故事——对，就是这样。我在医院工作，今天值了十二个小时的班。但是等末班车的这几分钟反而是我一天里最放松的时候。什么都不用做，就站在这里，等着。",
+                "text_pinyin": "Xīnkǔ le yī tiān de gùshi — duì, jiù shì zhèyàng. Wǒ zài yīyuàn gōngzuò, jīntiān zhí le shí'èr ge xiǎoshí de bān. Dànshì děng mò bān chē de zhè jǐ fēnzhōng fǎn'ér shì wǒ yī tiān lǐ zuì fàngsōng de shíhou. Shénme dōu bú yòng zuò, jiù zhàn zài zhèlǐ, děng zhe.",
+                "text_en": "Stories of a hard day — yes, exactly. I work at the hospital, did a twelve-hour shift today. But these few minutes waiting for the last bus are actually the most relaxing part of my day. Nothing to do, just stand here and wait."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to waiting as the most relaxing moment.",
+                "options": [
+                    {
+                        "text_zh": "等待反而最放松——这几分钟没人需要你，没事要处理，只需要做一件事：等。也许等待本身就是一种休息，只是我们平时把它当成浪费时间。",
+                        "text_pinyin": "Děngdài fǎn'ér zuì fàngsōng — zhè jǐ fēnzhōng méi rén xūyào nǐ, méi shì yào chǔlǐ, zhǐ xūyào zuò yī jiàn shì: děng. Yěxǔ děngdài běnshēn jiù shì yī zhǒng xiūxi, zhǐ shì wǒmen píngshí bǎ tā dāng chéng làngfèi shíjiān.",
+                        "text_en": "Waiting is the most relaxing — nobody needs you for these minutes, nothing to handle, just one thing to do: wait. Maybe waiting itself is rest; we just usually treat it as wasted time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes waiting from waste to rest — doing nothing as the deepest relief."
+                    },
+                    {
+                        "text_zh": "十二个小时太长了。",
+                        "text_pinyin": "Shí'èr ge xiǎoshí tài cháng le.",
+                        "text_en": "Twelve hours is too long.",
+                        "score": 0.0,
+                        "feedback": "Comments on her schedule instead of her insight."
+                    },
+                    {
+                        "text_zh": "医院忙吗？",
+                        "text_pinyin": "Yīyuàn máng ma?",
+                        "text_en": "Is the hospital busy?",
+                        "score": 0.0,
+                        "feedback": "Workplace question during a moment of personal peace."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The last bus (末班车) is a quiet institution in Chinese cities. Its passengers are often those who work the latest — nurses, restaurant workers, security guards. The few minutes waiting at the stop become an accidental meditation, a pause between duty and rest. For essential workers, these small in-between moments are often the only true break in a long day."
+    }
+}

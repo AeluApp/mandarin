@@ -1,0 +1,123 @@
+{
+    "title": "Morning Greeting in the Courtyard",
+    "title_zh": "院子里的早安",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You step out into the courtyard of your apartment building on a cool morning. Your neighbor, Auntie Li, is watering her potted plants. She looks up and smiles.",
+        "setup_zh": "一个凉爽的早晨，你走进公寓楼的院子。你的邻居李阿姨正在给盆栽浇水。她抬头看到你，微笑了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早啊！今天起得真早。你看，我的茉莉花开了，好香。",
+                "text_pinyin": "Zǎo a! Jīntiān qǐ de zhēn zǎo. Nǐ kàn, wǒ de mòlìhuā kāi le, hǎo xiāng.",
+                "text_en": "Morning! You're up early today. Look, my jasmine bloomed — it smells wonderful."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Auntie Li's greeting and her flowers.",
+                "options": [
+                    {
+                        "text_zh": "真漂亮！我也想种一些花，但是我不太会照顾它们。",
+                        "text_pinyin": "Zhēn piàoliang! Wǒ yě xiǎng zhòng yīxiē huā, dànshì wǒ bú tài huì zhàogù tāmen.",
+                        "text_en": "So pretty! I want to grow some flowers too, but I'm not very good at taking care of them.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Warm and honest — shows interest and opens the conversation naturally."
+                    },
+                    {
+                        "text_zh": "嗯，不错。",
+                        "text_pinyin": "En, búcuò.",
+                        "text_en": "Mm, not bad.",
+                        "score": 1,
+                        "register": "curt",
+                        "feedback": "Too brief — Auntie Li is being warm; a short reply feels distant."
+                    },
+                    {
+                        "text_zh": "我不喜欢花，我对花粉过敏。",
+                        "text_pinyin": "Wǒ bù xǐhuan huā, wǒ duì huāfěn guòmǐn.",
+                        "text_en": "I don't like flowers, I'm allergic to pollen.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest but shuts down the conversation quickly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "种花不难的！茉莉花很好养，你只要每天浇一点水，放在有阳光的地方就行了。你要不要我给你一盆小的？",
+                "text_pinyin": "Zhòng huā bù nán de! Mòlìhuā hěn hǎo yǎng, nǐ zhǐyào měi tiān jiāo yīdiǎn shuǐ, fàng zài yǒu yángguāng de dìfang jiù xíng le. Nǐ yào bú yào wǒ gěi nǐ yī pén xiǎo de?",
+                "text_en": "Growing flowers isn't hard! Jasmine is easy to care for — you just need to water it a little every day and put it somewhere sunny. Would you like me to give you a small pot?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her offer of a jasmine plant.",
+                "options": [
+                    {
+                        "text_zh": "真的吗？那太好了！谢谢李阿姨，我一定好好照顾它。",
+                        "text_pinyin": "Zhēn de ma? Nà tài hǎo le! Xièxie Lǐ āyí, wǒ yīdìng hǎohǎo zhàogù tā.",
+                        "text_en": "Really? That would be great! Thank you, Auntie Li — I'll take good care of it.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Grateful and warm — exactly the right tone for accepting a neighbor's kindness."
+                    },
+                    {
+                        "text_zh": "不用了，我怕养不活。",
+                        "text_pinyin": "Bú yòng le, wǒ pà yǎng bù huó.",
+                        "text_en": "No need, I'm afraid I'd kill it.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite refusal, but misses a chance to connect with a kind neighbor."
+                    },
+                    {
+                        "text_zh": "我周末太忙了，没时间。",
+                        "text_pinyin": "Wǒ zhōumò tài máng le, méi shíjiān.",
+                        "text_en": "I'm too busy on weekends, no time.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Abrupt — she's offering something small and easy, not asking for a big commitment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！明天我帮你准备一盆。对了，你早饭吃了吗？我刚蒸了一些包子。",
+                "text_pinyin": "Hǎo! Míngtiān wǒ bāng nǐ zhǔnbèi yī pén. Duìle, nǐ zǎofàn chī le ma? Wǒ gāng zhēng le yīxiē bāozi.",
+                "text_en": "Great! I'll prepare one for you tomorrow. By the way, have you eaten breakfast? I just steamed some baozi."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her breakfast offer.",
+                "options": [
+                    {
+                        "text_zh": "还没呢！李阿姨做的包子一定很好吃。我能尝一个吗？",
+                        "text_pinyin": "Hái méi ne! Lǐ āyí zuò de bāozi yīdìng hěn hǎochī. Wǒ néng cháng yī ge ma?",
+                        "text_en": "Not yet! Auntie Li's baozi must be delicious. Can I try one?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Friendly and appreciative — builds the neighborly bond."
+                    },
+                    {
+                        "text_zh": "谢谢，我已经吃过了。",
+                        "text_pinyin": "Xièxie, wǒ yǐjīng chī guò le.",
+                        "text_en": "Thanks, I've already eaten.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but declines the connection."
+                    },
+                    {
+                        "text_zh": "我不吃早饭。",
+                        "text_pinyin": "Wǒ bù chī zǎofàn.",
+                        "text_en": "I don't eat breakfast.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Blunt — dismisses her kindness without warmth."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese neighborhoods, especially older communities, sharing food and plants between neighbors is a common form of social bonding. Auntie Li's offer of jasmine and baozi reflects the warmth of everyday community life."
+    },
+    "hsk_level": 3
+}

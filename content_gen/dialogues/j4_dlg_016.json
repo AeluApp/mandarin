@@ -1,0 +1,83 @@
+{
+    "title": "The Letter Box",
+    "title_zh": "信箱",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You notice an old woman, Grandma Zhou, checking a rusty mailbox outside an apartment building. She looks disappointed. You've seen her check it every day this week.",
+        "setup_zh": "你注意到一位老奶奶周奶奶在公寓楼外面查看一个生锈的信箱。她看起来有些失望。你这个星期每天都看到她来查。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "又没有信。我孙子在国外工作，以前每个月给我写一封信。现在都打电话了，方便是方便，但我还是想收到一封手写的信。",
+                "text_pinyin": "Yòu méiyǒu xìn. Wǒ sūnzi zài guówài gōngzuò, yǐqián měi ge yuè gěi wǒ xiě yī fēng xìn. Xiànzài dōu dǎ diànhuà le, fāngbiàn shì fāngbiàn, dàn wǒ háishì xiǎng shōu dào yī fēng shǒuxiě de xìn.",
+                "text_en": "No letter again. My grandson works abroad — he used to write me a letter every month. Now it's all phone calls. Convenient, sure, but I still want to receive a handwritten letter."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about handwritten letters.",
+                "options": [
+                    {
+                        "text_zh": "我理解。电话说完就完了，但一封信可以拿在手里看很多遍。看着他的字，就好像他就在你面前一样。信和电话不一样，信是留得住的。",
+                        "text_pinyin": "Wǒ lǐjiě. Diànhuà shuō wán jiù wán le, dàn yī fēng xìn kěyǐ ná zài shǒu lǐ kàn hěn duō biàn. Kàn zhe tā de zì, jiù hǎoxiàng tā jiù zài nǐ miànqián yīyàng. Xìn hé diànhuà bù yīyàng, xìn shì liú de zhù de.",
+                        "text_en": "I understand. A phone call ends when it ends, but a letter you can hold and read again and again. Looking at his handwriting, it's like he's right in front of you. Letters and calls are different — letters stay.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Tender and precise — identifies what makes letters irreplaceable."
+                    },
+                    {
+                        "text_zh": "你孙子在哪个国家？",
+                        "text_pinyin": "Nǐ sūnzi zài nǎge guójiā?",
+                        "text_en": "Which country is your grandson in?",
+                        "score": 0.0,
+                        "feedback": "Geography question when she's talking about missing connection."
+                    },
+                    {
+                        "text_zh": "你可以让他发微信给你啊。",
+                        "text_pinyin": "Nǐ kěyǐ ràng tā fā Wēixìn gěi nǐ a.",
+                        "text_en": "You could have him send you WeChat messages.",
+                        "score": 0.0,
+                        "feedback": "Tech solution that misses why she values physical letters."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "留得住的，对。我把他以前写的信都放在一个铁盒子里。有时候想他了，就拿出来看看。看着他从小到大字越写越好，就像看着他长大一样。",
+                "text_pinyin": "Liú de zhù de, duì. Wǒ bǎ tā yǐqián xiě de xìn dōu fàng zài yīge tiě hézi lǐ. Yǒu shíhou xiǎng tā le, jiù ná chūlái kàn kàn. Kàn zhe tā cóng xiǎo dào dà zì yuè xiě yuè hǎo, jiù xiàng kàn zhe tā zhǎng dà yīyàng.",
+                "text_en": "They stay, yes. I keep all his old letters in a tin box. When I miss him, I take them out and read them. Watching his handwriting improve from childhood to now — it's like watching him grow up."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the tin box of letters.",
+                "options": [
+                    {
+                        "text_zh": "一个铁盒子装着他成长的过程，比照片还珍贵。每封信都是他当时的样子——心情、想法、字迹。这些手机里存不了。",
+                        "text_pinyin": "Yī ge tiě hézi zhuāng zhe tā chéngzhǎng de guòchéng, bǐ zhàopiàn hái zhēnguì. Měi fēng xìn dōu shì tā dāngshí de yàngzi — xīnqíng, xiǎngfǎ, zìjì. Zhèxiē shǒujī lǐ cún bù liǎo.",
+                        "text_en": "A tin box holding his growth, more precious than any photo. Each letter is who he was then — his mood, thoughts, handwriting. A phone can't store these things.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sees the letters as a growth record — values the physicality of handwriting."
+                    },
+                    {
+                        "text_zh": "你孙子多大了？",
+                        "text_pinyin": "Nǐ sūnzi duō dà le?",
+                        "text_en": "How old is your grandson?",
+                        "score": 0.0,
+                        "feedback": "Age question during a tender moment about memory."
+                    },
+                    {
+                        "text_zh": "铁盒子会不会生锈？你应该换一个。",
+                        "text_pinyin": "Tiě hézi huì bú huì shēngxiù? Nǐ yīnggāi huàn yīge.",
+                        "text_en": "Won't the tin box rust? You should get a new one.",
+                        "score": 0.0,
+                        "feedback": "Container maintenance advice during an emotional story."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The decline of letter writing in China mirrors a global trend, but carries particular weight for elderly Chinese who may not be comfortable with smartphones. For grandparents with family members abroad (留学生 or overseas workers), handwritten letters represented a tangible connection. The Chinese postal system's distinctive green mailboxes are becoming increasingly empty as digital communication replaces physical mail."
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "title": "The Librarian's Index Card System",
+    "title_zh": "图书管理员的卡片系统",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_3_02_v0",
+    "tree": {
+        "setup": "The university library reference desk. The head librarian, Auntie Deng, maintains both a digital catalog and a personal index card system she built over twenty years. She trusts the cards more. When you approach looking for a book on Tang Dynasty poetry, she adjusts her reading glasses and pulls open a drawer of cards with the reverence of someone opening a treasure chest.",
+        "setup_zh": "大学图书馆参考台。馆长邓阿姨同时维护着电子目录和她花二十年建立的个人索引卡系统。她更信任卡片。当你来找唐诗方面的书时，她扶了扶老花镜，像打开宝箱一样拉开一个抽屉。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "唐诗？好，你要的是文学评论还是诗集本身？这两个在不同的楼层。",
+                "text_pinyin": "tángshī? hǎo, nǐ yào de shì wénxué pínglùn háishi shījí běnshēn? zhè liǎng ge zài bùtóng de lóucéng.",
+                "text_en": "Tang poetry? OK, do you want literary criticism or the poetry collection itself? These are on different floors."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain what you need for your assignment.",
+                "options": [
+                    {
+                        "text_zh": "我在写一篇关于李白的论文。需要他的诗集，也需要一些分析他写作风格的书。",
+                        "text_pinyin": "wǒ zài xiě yì piān guānyú lǐ bái de lùnwén. xūyào tā de shījí, yě xūyào yìxiē fēnxī tā xiězuò fēnggé de shū.",
+                        "text_en": "I'm writing a paper on Li Bai. I need his poetry collection and also some books analyzing his writing style.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Deng's eyes sparkle.「李白！好选择。」She flips through her cards at impressive speed.「诗集在四楼古典文学区，评论类的在三楼。我给你列几本。」分析 is 'analyze.' 写作风格 is 'writing style.'"
+                    },
+                    {
+                        "text_zh": "老师推荐了一本书，但是我忘了书名。好像跟唐诗三百首有关。",
+                        "text_pinyin": "lǎoshī tuījiàn le yì běn shū, dànshì wǒ wàng le shūmíng. hǎoxiàng gēn tángshī sānbǎi shǒu yǒuguān.",
+                        "text_en": "My teacher recommended a book but I forgot the title. Something related to Three Hundred Tang Poems.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Deng sighs.「跟唐诗三百首有关的书有很多。你记得作者吗？或者出版社？」书名 is 'book title.' Vague descriptions require detective work."
+                    },
+                    {
+                        "text_zh": "随便哪本关于唐诗的都行。",
+                        "text_pinyin": "suíbiàn nǎ běn guānyú tángshī de dōu xíng.",
+                        "text_en": "Any book about Tang poetry will do.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Deng lowers her glasses.「随便？写论文不能随便。你先告诉我你的题目，我帮你选最合适的。」随便 means 'whatever/casual' -- not the attitude for academic research."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我给你找了三本。这两本可以借出去，借期是三十天。这一本是参考书，只能在阅览室看，不能带走。",
+                "text_pinyin": "wǒ gěi nǐ zhǎo le sān běn. zhè liǎng běn kěyǐ jiè chūqù, jièqī shì sānshí tiān. zhè yì běn shì cānkǎoshū, zhǐnéng zài yuèlǎnshì kàn, bù néng dài zǒu.",
+                "text_en": "I found three for you. These two can be checked out, loan period is thirty days. This one is a reference book -- you can only read it in the reading room, can't take it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about borrowing and using the reference book.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！参考书那本可以复印几页吗？我只需要其中两章的内容。",
+                        "text_pinyin": "xièxie! cānkǎoshū nà běn kěyǐ fùyìn jǐ yè ma? wǒ zhǐ xūyào qízhōng liǎng zhāng de nèiróng.",
+                        "text_en": "Thanks! Can I photocopy a few pages of the reference book? I only need the content from two chapters.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「可以，复印机在二楼。但是一次最多复印三十页，版权规定。」复印 is 'photocopy.' 其中 means 'among them/of which.' 版权 is 'copyright.' Auntie Deng knows every rule."
+                    },
+                    {
+                        "text_zh": "三十天借期如果不够，可以续借吗？",
+                        "text_pinyin": "sānshí tiān jièqī rúguǒ bú gòu, kěyǐ xù jiè ma?",
+                        "text_en": "If thirty days isn't enough, can I renew the loan?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「可以在网上续借一次，再加十五天。但是如果有人预约了，就不能续了。」续借 is 'renew a loan.' 预约 is 'reserve.' Practical question."
+                    },
+                    {
+                        "text_zh": "这三本都在哪个书架？我自己去找。",
+                        "text_pinyin": "zhè sān běn dōu zài nǎ ge shūjià? wǒ zìjǐ qù zhǎo.",
+                        "text_en": "Which bookshelves are these three on? I'll go find them myself.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Deng writes call numbers on a slip of paper with beautiful handwriting.「四楼左边第三排，三楼右边第二排。找不到就来问我。」书架 is 'bookshelf.' She writes clearer call numbers than the printer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，如果你的论文需要更多资料，三楼有电子数据库，可以搜学术论文。你有账号吗？",
+                "text_pinyin": "duì le, rúguǒ nǐ de lùnwén xūyào gèng duō zīliào, sān lóu yǒu diànzǐ shùjùkù, kěyǐ sōu xuéshù lùnwén. nǐ yǒu zhànghào ma?",
+                "text_en": "By the way, if your paper needs more materials, there's an electronic database on the third floor where you can search academic papers. Do you have an account?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the database.",
+                "options": [
+                    {
+                        "text_zh": "没有，怎么申请？需要什么手续？",
+                        "text_pinyin": "méiyǒu, zěnme shēnqǐng? xūyào shénme shǒuxù?",
+                        "text_en": "No, how do I apply? What's the process?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「带学生证来前台，五分钟就开好了。知网和万方都可以用。」Auntie Deng says this like it's the easiest thing in the world. 手续 is 'procedures.' 学生证 is 'student ID.' 知网 (CNKI) is China's main academic database."
+                    },
+                    {
+                        "text_zh": "有账号。但是我不太会用那个系统，能教我一下吗？",
+                        "text_pinyin": "yǒu zhànghào. dànshì wǒ bú tài huì yòng nà ge xìtǒng, néng jiāo wǒ yíxià ma?",
+                        "text_en": "I have an account. But I'm not very good at using the system, could you show me?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Auntie Deng stands up immediately.「走，我带你去。」She loves demonstrating the database -- it's her digital kingdom. 不太会用 is 'not very good at using.' Asking for help is always welcome here."
+                    },
+                    {
+                        "text_zh": "谢谢提醒！我先把这几本书看完，不够再用数据库。",
+                        "text_pinyin": "xièxie tíxǐng! wǒ xiān bǎ zhè jǐ běn shū kàn wán, bú gòu zài yòng shùjùkù.",
+                        "text_en": "Thanks for the reminder! I'll finish these books first, then use the database if I need more.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「也好。不过别等到最后一天才发现不够。」提醒 is 'reminder.' 先...再... is 'first...then...' Auntie Deng has seen too many last-minute panics."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university libraries use 知网 (CNKI/Zhīwǎng) and 万方 (Wànfāng) as primary academic databases. Reference books (参考书) often can't leave the reading room (阅览室). 借期 (jièqī) is 'loan period.' Librarians in China often build deep personal knowledge of their collections beyond what the catalog shows."
+    }
+}

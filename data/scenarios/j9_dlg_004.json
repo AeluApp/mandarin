@@ -1,0 +1,151 @@
+{
+    "title": "The Color Before Dawn",
+    "title_zh": "黎明前的颜色",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You are on a rooftop in old Chengdu with a retired painter, Mrs. Jiang, who wakes at 4 AM every morning to watch the sky change. She has a notebook filled with color swatches she has mixed to match each dawn she's witnessed over twenty years. A cup of tea steams beside her.",
+        "setup_zh": "你和退休画家蒋女士在成都老城区的屋顶上。她每天凌晨四点起来看天空变化。她有一本笔记本，记录了二十年来每一次黎明她调配出的颜色样本。一杯茶在她旁边冒着热气。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看——现在是四点二十分。天还是黑的，但不是纯黑。你仔细看东边——有一种颜色正在出现，但你说不出它是什么颜色。不是蓝、不是灰、不是紫。它是一种只在这个时刻存在的颜色——再早五分钟它不在，再晚五分钟它就变成别的东西了。我画了二十年黎明，最大的发现不是天空有多美——是天空中存在大量我们没有名字的颜色。我们的语言只给了我们几十个颜色词——红、蓝、绿、紫——但天空在黎明的四十分钟里经过了上千种颜色。那些没有名字的颜色——它们存在吗？当然存在。但因为没有名字，大多数人看不见它们。",
+                "text_pinyin": "Nǐ kàn — xiànzài shì sì diǎn èrshí fēn. Tiān hái shì hēi de, dàn bú shì chún hēi. Nǐ zǐxì kàn dōngbiān — yǒu yī zhǒng yánsè zhèngzài chūxiàn, dàn nǐ shuō bù chū tā shì shénme yánsè. Bú shì lán, bú shì huī, bú shì zǐ. Tā shì yī zhǒng zhǐ zài zhège shíkè cúnzài de yánsè — zài zǎo wǔ fēnzhōng tā bú zài, zài wǎn wǔ fēnzhōng tā jiù biàn chéng bié de dōngxi le. Wǒ huà le èrshí nián límíng, zuì dà de fāxiàn bú shì tiānkōng yǒu duō měi — shì tiānkōng zhōng cúnzài dàliàng wǒmen méiyǒu míngzì de yánsè. Wǒmen de yǔyán zhǐ gěi le wǒmen jǐ shí ge yánsè cí — hóng, lán, lǜ, zǐ — dàn tiānkōng zài límíng de sìshí fēnzhōng lǐ jīngguò le shàng qiān zhǒng yánsè. Nàxiē méiyǒu míngzì de yánsè — tāmen cúnzài ma? Dāngrán cúnzài. Dàn yīnwèi méiyǒu míngzì, dàduōshù rén kàn bú jiàn tāmen.",
+                "text_en": "Look — it's 4:20 now. The sky is still dark, but not purely dark. Look carefully at the east — a color is emerging, but you can't say what color it is. Not blue, not gray, not purple. It's a color that only exists at this moment — five minutes earlier it wasn't there, five minutes later it becomes something else."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that nameless colors are invisible to most people.",
+                "options": [
+                    {
+                        "text_zh": "没有名字所以看不见——语言塑造了我们能看到什么。只有「蓝」这个词，天空的一千种蓝都被压缩成一个概念。那些介于蓝和紫之间的颜色真实存在，但语言把它们过滤掉了。您二十年来做的事，是在给无名的事物命名——用颜料命名。每个色块都是对天空说：「我看见你了。」",
+                        "text_pinyin": "Méiyǒu míngzì suǒyǐ kàn bú jiàn — yǔyán sùzào le wǒmen néng kàn dào shénme. Zhǐyǒu 'lán' zhège cí, tiānkōng de yī qiān zhǒng lán dōu bèi yāsuō chéng yī ge gàiniàn. Nàxiē jiè yú lán hé zǐ zhī jiān de yánsè zhēnshí cúnzài, dàn yǔyán bǎ tāmen guòlǜ diào le. Nín èrshí nián lái zuò de shì, shì zài gěi wúmíng de shìwù mìngmíng — yòng yánliào mìngmíng. Měi ge sè kuài dōu shì duì tiānkōng shuō: 'wǒ kàn jiàn nǐ le.'",
+                        "text_en": "Nameless, therefore invisible — language shapes what we can see. With only the word 'blue,' a thousand blues in the sky compress into one concept. Colors between blue and purple genuinely exist, but language filters them out. What you've done for twenty years is naming the nameless — with pigment. Each swatch says to the sky: 'I see you.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Language as perceptual filter — art's primal function is making the unnamed visible."
+                    },
+                    {
+                        "text_zh": "您用什么牌子的颜料？",
+                        "text_pinyin": "Nín yòng shénme páizi de yánliào?",
+                        "text_en": "What brand of paint do you use?",
+                        "score": 0.0,
+                        "feedback": "Asks about materials during a meditation on perception and naming."
+                    },
+                    {
+                        "text_zh": "拍照不是更方便吗？",
+                        "text_pinyin": "Pāi zhào bú shì gèng fāngbiàn ma?",
+                        "text_en": "Wouldn't photography be more convenient?",
+                        "score": 0.0,
+                        "feedback": "Suggests technological substitution for an embodied practice."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "「我看见你了」——是的。这就是我对每一个黎明说的话。但你知道最让我震惊的是什么吗？二十年了，没有两个黎明的颜色是完全一样的。这本笔记本里有七千多个色块——每一个都不同。同一个方向、同一个季节、同一个钟点——颜色都不一样。因为云不一样、湿度不一样、风不一样、你的眼睛不一样。黎明是不可重复的。每一个黎明都是宇宙只发生一次的事件。但大多数人把黎明当作可以预期的、重复的事情——「明天还会有一个黎明」。是的，明天会有。但不是这一个。这一个正在消失——就在我们说话的这一刻，它已经变了。",
+                "text_pinyin": "'Wǒ kàn jiàn nǐ le' — shì de. Zhè jiù shì wǒ duì měi yī ge límíng shuō de huà. Dàn nǐ zhīdào zuì ràng wǒ zhènjīng de shì shénme ma? Èrshí nián le, méiyǒu liǎng ge límíng de yánsè shì wánquán yīyàng de. Zhè běn bǐjìběn lǐ yǒu qī qiān duō ge sè kuài — měi yī ge dōu bùtóng. Tóng yī ge fāngxiàng, tóng yī ge jìjié, tóng yī ge zhōngdiǎn — yánsè dōu bù yīyàng. Yīnwèi yún bù yīyàng, shīdù bù yīyàng, fēng bù yīyàng, nǐ de yǎnjīng bù yīyàng. Límíng shì bù kě chóngfù de. Měi yī ge límíng dōu shì yǔzhòu zhǐ fāshēng yī cì de shìjiàn. Dàn dàduōshù rén bǎ límíng dāng zuò kěyǐ yùqī de, chóngfù de shìqíng — 'míngtiān hái huì yǒu yī ge límíng'. Shì de, míngtiān huì yǒu. Dàn bú shì zhè yī ge. Zhè yī ge zhèngzài xiāoshī — jiù zài wǒmen shuōhuà de zhè yī kè, tā yǐjīng biàn le.",
+                "text_en": "'I see you' — yes. That's what I say to every dawn. But do what shocks me most? In twenty years, no two dawns have had exactly the same colors. This notebook has over seven thousand swatches — each one different. Same direction, same season, same hour — the colors differ. Because the clouds differ, humidity differs, wind differs, your eyes differ. Dawn is unrepeatable."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the unrepeatable nature of each dawn.",
+                "options": [
+                    {
+                        "text_zh": "七千个色块没有重复——您的笔记本证明了：没有「每天」，只有「这一天」。我们不珍惜黎明，是因为相信它会再来。但「它」不会——「另一个」会来，「它」已经永远走了。您凌晨四点起来，不是因为黎明美，是因为这个黎明只有这一次。每个色块不是记录，是告别。",
+                        "text_pinyin": "Qī qiān ge sè kuài méiyǒu chóngfù — nín de bǐjìběn zhèngmíng le: méiyǒu 'měi tiān', zhǐyǒu 'zhè yī tiān'. Wǒmen bù zhēnxī límíng, shì yīnwèi xiāngxìn tā huì zài lái. Dàn 'tā' bú huì — 'lìng yī ge' huì lái, 'tā' yǐjīng yǒngyuǎn zǒu le. Nín língchén sì diǎn qǐlái, bú shì yīnwèi límíng měi, shì yīnwèi zhège límíng zhǐyǒu zhè yī cì. Měi ge sè kuài bú shì jìlù, shì gàobié.",
+                        "text_en": "Seven thousand swatches, not one repeated — your notebook proves: there is no 'every day,' only 'this day.' We don't cherish dawn because we believe it will come again. But 'it' won't — 'another one' will, but 'it' is gone forever. You wake at four AM not because dawn is beautiful, but because this dawn exists only once. Each swatch isn't a record — it's a farewell.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Each swatch as farewell — the distinction between 'it' and 'another one' reveals time's unrepeatable nature."
+                    },
+                    {
+                        "text_zh": "您办过画展吗？",
+                        "text_pinyin": "Nín bàn guò huàzhǎn ma?",
+                        "text_en": "Have you held any exhibitions?",
+                        "score": 0.0,
+                        "feedback": "Asks about exhibitions during a revelation about impermanence."
+                    },
+                    {
+                        "text_zh": "成都的空气污染会不会影响颜色？",
+                        "text_pinyin": "Chéngdū de kōngqì wūrǎn huì bú huì yǐngxiǎng yánsè?",
+                        "text_en": "Does Chengdu's air pollution affect the colors?",
+                        "score": 0.0,
+                        "feedback": "Introduces environmental concerns during a meditation on impermanence."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "告别——对。每一个色块都是一次告别。但我还要纠正一点：不只是告别。你看——此刻天空正在变。二十分钟前的那个颜色已经走了。但它变成了现在这个颜色。它没有消失——它变成了别的东西。这是黎明教给我的最深的一课：没有什么真正消失。一切都在变成别的东西。那个四点二十分的无名颜色，变成了四点四十分的另一种无名颜色。第一个颜色「死」了吗？不，它活在第二个颜色里面——因为没有第一个，就不会有第二个。每一个瞬间都怀着前一个瞬间的全部记忆。所以我的色块不是七千次告别——是七千个证据，证明一切都在继续，只是换了一种方式存在。",
+                "text_pinyin": "Gàobié — duì. Měi yī ge sè kuài dōu shì yī cì gàobié. Dàn wǒ hái yào jiūzhèng yīdiǎn: bù zhǐ shì gàobié. Nǐ kàn — cǐkè tiānkōng zhèngzài biàn. Èrshí fēnzhōng qián de nàge yánsè yǐjīng zǒu le. Dàn tā biàn chéng le xiànzài zhège yánsè. Tā méiyǒu xiāoshī — tā biàn chéng le bié de dōngxi. Zhè shì límíng jiāo gěi wǒ de zuì shēn de yī kè: méiyǒu shénme zhēnzhèng xiāoshī. Yīqiè dōu zài biàn chéng bié de dōngxi. Nàge sì diǎn èrshí fēn de wúmíng yánsè, biàn chéng le sì diǎn sìshí fēn de lìng yī zhǒng wúmíng yánsè. Dì yī ge yánsè 'sǐ' le ma? Bù, tā huó zài dì èr ge yánsè lǐmiàn — yīnwèi méiyǒu dì yī ge, jiù bú huì yǒu dì èr ge. Měi yī ge shùnjiān dōu huái zhe qián yī ge shùnjiān de quánbù jìyì. Suǒyǐ wǒ de sè kuài bú shì qī qiān cì gàobié — shì qī qiān ge zhèngjù, zhèngmíng yīqiè dōu zài jìxù, zhǐ shì huàn le yī zhǒng fāngshì cúnzài.",
+                "text_en": "Farewell — yes. Each swatch is a farewell. But let me correct one thing: it's not only farewell. Look — the sky is changing right now. The color from twenty minutes ago is gone. But it became this current color. It didn't disappear — it became something else. This is the deepest lesson dawn has taught me: nothing truly disappears. Everything becomes something else."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that nothing disappears, everything becomes something else.",
+                "options": [
+                    {
+                        "text_zh": "每个瞬间都怀着前一个瞬间的记忆——不是消失和出现，是「变成」。四点二十分的颜色没有死，它生出了四点四十分的颜色。我们以为变化是丧失。但也许变化是积累——昨天的我活在今天的我里面。七千个色块连在一起，不是七千个分离的瞬间，是一条连续的河流。",
+                        "text_pinyin": "Měi ge shùnjiān dōu huái zhe qián yī ge shùnjiān de jìyì — bú shì xiāoshī hé chūxiàn, shì 'biàn chéng'. Sì diǎn èrshí fēn de yánsè méiyǒu sǐ, tā shēng chū le sì diǎn sìshí fēn de yánsè. Wǒmen yǐwéi biànhuà shì sàngshī. Dàn yěxǔ biànhuà shì jīlěi — zuótiān de wǒ huó zài jīntiān de wǒ lǐmiàn. Qī qiān ge sè kuài lián zài yīqǐ, bú shì qī qiān ge fēnlí de shùnjiān, shì yī tiáo liánxù de héliú.",
+                        "text_en": "Every moment carries the memory of the one before — not disappearing and appearing, but 'becoming.' The 4:20 color didn't die — it birthed the 4:40 color. We think change is loss. But maybe change is accumulation — yesterday's me lives inside today's me. Seven thousand swatches connected aren't seven thousand separate moments — they're one continuous river.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Change as pregnancy, not death — every moment carries the memory of all that came before."
+                    },
+                    {
+                        "text_zh": "您考虑过出一本书吗？",
+                        "text_pinyin": "Nín kǎolǜ guò chū yī běn shū ma?",
+                        "text_en": "Have you considered publishing a book?",
+                        "score": 0.0,
+                        "feedback": "A publishing question at the philosophical climax."
+                    },
+                    {
+                        "text_zh": "这么多年，最美的黎明是哪一天？",
+                        "text_pinyin": "Zhème duō nián, zuì měi de límíng shì nǎ yī tiān?",
+                        "text_en": "Over all these years, which day had the most beautiful dawn?",
+                        "score": 0.0,
+                        "feedback": "Asks for a ranking when the teaching is that each is incomparable."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一条连续的河流——是的。你看。天亮了。黎明结束了。但它没有结束——它变成了白天。白天会变成黄昏，黄昏会变成夜晚，夜晚会怀着明天的黎明。所以黎明从来没有真正开始过，也从来没有真正结束过。它只是在不断地变成自己的下一个版本。我今天早上调出了一个新的颜色——第七千零三十一个。它和之前所有的都不一样。但它和之前所有的都有关系。就像你——你今天来到这个屋顶，你和昨天的你不一样了。但昨天的你活在今天的你里面。你这个人就是一条河流。这杯茶也是——它一分钟前比现在热。但一分钟前的那杯茶变成了现在这杯。什么都没有丢失。",
+                "text_pinyin": "Yī tiáo liánxù de héliú — shì de. Nǐ kàn. Tiān liàng le. Límíng jiéshù le. Dàn tā méiyǒu jiéshù — tā biàn chéng le báitiān. Báitiān huì biàn chéng huánghūn, huánghūn huì biàn chéng yèwǎn, yèwǎn huì huái zhe míngtiān de límíng. Suǒyǐ límíng cónglái méiyǒu zhēnzhèng kāishǐ guò, yě cónglái méiyǒu zhēnzhèng jiéshù guò. Tā zhǐ shì zài búduàn de biàn chéng zìjǐ de xià yī ge bǎnběn. Wǒ jīntiān zǎoshang tiáo chū le yī ge xīn de yánsè — dì qī qiān líng sānshíyī ge. Tā hé zhīqián suǒyǒu de dōu bù yīyàng. Dàn tā hé zhīqián suǒyǒu de dōu yǒu guānxi. Jiù xiàng nǐ — nǐ jīntiān lái dào zhège wūdǐng, nǐ hé zuótiān de nǐ bù yīyàng le. Dàn zuótiān de nǐ huó zài jīntiān de nǐ lǐmiàn. Nǐ zhège rén jiù shì yī tiáo héliú. Zhè bēi chá yě shì — tā yī fēnzhōng qián bǐ xiànzài rè. Dàn yī fēnzhōng qián de nà bēi chá biàn chéng le xiànzài zhè bēi. Shénme dōu méiyǒu diūshī.",
+                "text_en": "A continuous river — yes. Look. It's light now. Dawn has ended. But it hasn't ended — it became daytime. Daytime will become dusk, dusk will become night, night will carry tomorrow's dawn. So dawn never truly began, and never truly ended. It keeps becoming its next version. This morning I mixed a new color — number seven thousand and thirty-one. Different from all before it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to everything being a river — nothing lost, everything becoming.",
+                "options": [
+                    {
+                        "text_zh": "什么都没有丢失——如果一切都是河流，「丧失」就不存在。水没有丢失，只是流到了下游。也许悲伤的本质不是失去了什么，而是暂时忘记了：一切都还在，只是换了形式。谢谢您和您的七千零三十一个颜色。",
+                        "text_pinyin": "Shénme dōu méiyǒu diūshī — rúguǒ yīqiè dōu shì héliú, 'sàngshī' jiù bù cúnzài. Shuǐ méiyǒu diūshī, zhǐ shì liú dào le xiàyóu. Yěxǔ bēishāng de běnzhì bú shì shīqù le shénme, ér shì zànshí wàngjì le: yīqiè dōu hái zài, zhǐ shì huàn le xíngshì. Xièxie nín hé nín de qī qiān líng sānshíyī ge yánsè.",
+                        "text_en": "Nothing has been lost — if everything is a river, 'loss' doesn't exist. Water isn't lost, it just flowed downstream. Maybe grief's essence isn't losing something, but temporarily forgetting: everything is still here, just in a different form. Thank you — and your seven thousand and thirty-one colors.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grief as forgetting that nothing is lost — everything still exists in a different form."
+                    },
+                    {
+                        "text_zh": "我可以看看您的笔记本吗？",
+                        "text_pinyin": "Wǒ kěyǐ kànkan nín de bǐjìběn ma?",
+                        "text_en": "May I look through your notebook?",
+                        "score": 0.0,
+                        "feedback": "Asks to browse the notebook instead of sitting with the teaching."
+                    },
+                    {
+                        "text_zh": "明天我能再来看黎明吗？",
+                        "text_pinyin": "Míngtiān wǒ néng zài lái kàn límíng ma?",
+                        "text_en": "Can I come again tomorrow to watch the dawn?",
+                        "score": 0.0,
+                        "feedback": "A scheduling question at the philosophical conclusion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The Chinese philosophical concept of 变化 (biànhuà, transformation/change) is central to both Daoist and Buddhist thought. The Yijing (易经, Book of Changes) posits that change is the only constant, and that understanding change is the foundation of wisdom. The painter's practice of cataloguing unrepeatable colors connects to the Buddhist concept of 无常 (wúcháng, impermanence) — not as something to mourn, but as the source of each moment's preciousness. In Chinese ink painting tradition, artists traditionally observe nature for years before attempting to paint it, reflecting the belief that perception must deepen before expression can begin."
+    }
+}

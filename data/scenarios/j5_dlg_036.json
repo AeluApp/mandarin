@@ -1,0 +1,89 @@
+{
+    "title": "Things I Forgot to Say Thank You For",
+    "title_zh": "忘了说谢谢的事",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaoyu are walking through a quiet park in the evening. She mentions something she's been thinking about.",
+        "setup_zh": "傍晚你和朋友小雨在安静的公园里散步。她提到了一些她最近在想的事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我今天突然想到一件事——我们平时会因为大事跟人说谢谢，但那些小的、不起眼的帮助，好像从来没有感谢过。比如我妈每天早上帮我放好杯子和水，我从来没有对她说过谢谢。",
+                "text_pinyin": "Wǒ jīntiān tūrán xiǎng dào yī jiàn shì — wǒmen píngshí huì yīnwèi dà shì gēn rén shuō xièxie, dàn nàxiē xiǎo de, bù qǐyǎn de bāngzhù, hǎoxiàng cónglái méiyǒu gǎnxiè guò. Bǐrú wǒ mā měi tiān zǎoshang bāng wǒ fàng hǎo bēizi hé shuǐ, wǒ cónglái méiyǒu duì tā shuō guò xièxie.",
+                "text_en": "I had a sudden thought today — we say thank you to people for big things, but those small, inconspicuous acts of help we never seem to acknowledge. Like my mom puts out a cup and water for me every morning, and I've never once thanked her for it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her reflection on gratitude.",
+                "options": [
+                    {
+                        "text_zh": "也许正因为这些事太小太日常了，我们反而忽略了。但这些小事最费心——她不是偶尔做一次，是每天都做，不求回报。最深的爱往往藏在最平常的事里。",
+                        "text_pinyin": "Yěxǔ zhèng yīnwèi zhèxiē shì tài xiǎo tài rìcháng le, wǒmen fǎn'ér hūlüè le. Dàn zhèxiē xiǎo shì zuì fèi xīn — tā bú shì ǒu'ěr zuò yī cì, shì měi tiān dōu zuò, bù qiú huíbào. Zuì shēn de ài wǎngwǎng cáng zài zuì píngcháng de shì lǐ.",
+                        "text_en": "Maybe precisely because these things are so small and daily, we overlook them. But they take the most care — she doesn't do it once in a while, she does it every day, expecting nothing back. The deepest love hides in the most ordinary things.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Profound and gentle — illuminates the invisible labor of love."
+                    },
+                    {
+                        "text_zh": "那你下次记得说谢谢就好了。",
+                        "text_pinyin": "Nà nǐ xià cì jìde shuō xièxie jiù hǎo le.",
+                        "text_en": "Just remember to say thank you next time.",
+                        "score": 0.0,
+                        "feedback": "Oversimplified — treats a deep realization as a simple action item."
+                    },
+                    {
+                        "text_zh": "父母做这些是应该的吧。",
+                        "text_pinyin": "Fùmǔ zuò zhèxiē shì yīnggāi de ba.",
+                        "text_en": "Isn't it just what parents are supposed to do?",
+                        "score": 0.0,
+                        "feedback": "Dismissive — takes parental love for granted."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "最深的爱藏在最平常的事里……你说得我眼眶都湿了。我以后要学会看见这些小事。不一定要说出「谢谢」两个字，但至少心里要知道。",
+                "text_pinyin": "Zuì shēn de ài cáng zài zuì píngcháng de shì lǐ…… nǐ shuō de wǒ yǎnkuàng dōu shī le. Wǒ yǐhòu yào xuéhuì kànjiàn zhèxiē xiǎo shì. Bú yídìng yào shuō chū 'xièxie' liǎng ge zì, dàn zhìshǎo xīn lǐ yào zhīdào.",
+                "text_en": "The deepest love hidden in the most ordinary things... you're making my eyes water. From now on I want to learn to see these small things. I don't necessarily have to say the words 'thank you,' but at least know it in my heart."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share something you're grateful for but haven't expressed.",
+                "options": [
+                    {
+                        "text_zh": "我也有。一个朋友每次跟我说话都认真看着我的眼睛，让我觉得每句话都重要。我从没告诉过她，但这个习惯让我在最不自信的时候也觉得自己值得被听到。",
+                        "text_pinyin": "Wǒ yě yǒu. Yīge péngyou měi cì gēn wǒ shuōhuà dōu rènzhēn kàn zhe wǒ de yǎnjīng, ràng wǒ juéde měi jù huà dōu zhòngyào. Wǒ cóng méi gàosù guò tā, dàn zhège xíguàn ràng wǒ zài zuì bú zìxìn de shíhou yě juéde zìjǐ zhíde bèi tīng dào.",
+                        "text_en": "I have one too. A friend always looks me in the eyes when we talk, making every word feel important. I've never told her, but that habit makes me feel worth hearing even at my least confident.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Vulnerable and reciprocal — matches her openness with genuine personal sharing."
+                    },
+                    {
+                        "text_zh": "我们应该多跟家人说说心里话。",
+                        "text_pinyin": "Wǒmen yīnggāi duō gēn jiārén shuōshuō xīnlǐ huà.",
+                        "text_en": "We should speak from the heart more with our families.",
+                        "score": 0.0,
+                        "feedback": "Generic advice — doesn't match the personal depth she offered."
+                    },
+                    {
+                        "text_zh": "你回去可以给你妈买个礼物。",
+                        "text_pinyin": "Nǐ huí qù kěyǐ gěi nǐ mā mǎi ge lǐwù.",
+                        "text_en": "You could buy your mom a gift when you go back.",
+                        "score": 0.0,
+                        "feedback": "Materializes gratitude — misses the point about seeing, not spending."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "值得被听到的……你那个朋友一定不知道她给了你多大的力量。也许这就是最好的善意——做的人不觉得特别，但收到的人一辈子记得。",
+                "text_pinyin": "Zhíde bèi tīng dào de…… nǐ nàge péngyou yídìng bù zhīdào tā gěi le nǐ duō dà de lìliang. Yěxǔ zhè jiù shì zuì hǎo de shànyì — zuò de rén bù juéde tèbié, dàn shōu dào de rén yíbèizi jìde.",
+                "text_en": "Worth being heard... your friend probably has no idea how much strength she gave you. Maybe that's the best kind of kindness — the person doing it doesn't think it's special, but the one receiving it remembers for a lifetime."
+            }
+        ],
+        "cultural_note": "Chinese culture traditionally emphasizes implicit gratitude over explicit verbal thanks — love and care are shown through actions rather than words. The phrase「心里知道」(know it in your heart) captures this cultural approach to gratitude. Young Chinese people are increasingly exploring the emotional intelligence of naming and expressing gratitude, influenced by both Western psychological frameworks and a renewed appreciation for traditional filial piety (孝, xiào)."
+    }
+}

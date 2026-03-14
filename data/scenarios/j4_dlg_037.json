@@ -1,0 +1,83 @@
+{
+    "title": "The Porcelain Bowl",
+    "title_zh": "瓷碗",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "At a flea market, you pick up a chipped blue porcelain bowl. The seller, an older woman, notices your interest.",
+        "setup_zh": "在跳蚤市场上，你拿起一个有缺口的蓝色瓷碗。卖家，一位年纪大的女人，注意到你的兴趣。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个碗有一个小缺口，所以很便宜。但是你看这个蓝色——以前的碗才有这种颜色。现在的碗都太白了，没有温度。这个碗是用过的，被人好好用过的。",
+                "text_pinyin": "Zhège wǎn yǒu yī ge xiǎo quēkǒu, suǒyǐ hěn piányi. Dànshì nǐ kàn zhège lán sè — yǐqián de wǎn cái yǒu zhè zhǒng yánsè. Xiànzài de wǎn dōu tài bái le, méiyǒu wēndù. Zhège wǎn shì yòng guò de, bèi rén hǎohāo yòng guò de.",
+                "text_en": "This bowl has a small chip, so it's very cheap. But look at this blue — only old bowls have this color. Modern bowls are too white, no warmth. This bowl has been used — really used by someone."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the character of the old bowl.",
+                "options": [
+                    {
+                        "text_zh": "这个蓝色真的很特别——像是有故事的颜色。缺口反而让它更真实。完美的碗到处都有，但有过生活痕迹的碗是独一无二的。",
+                        "text_pinyin": "Zhège lán sè zhēn de hěn tèbié — xiàng shì yǒu gùshi de yánsè. Quēkǒu fǎn'ér ràng tā gèng zhēnshí. Wánměi de wǎn dàochù dōu yǒu, dàn yǒu guò shēnghuó hénjì de wǎn shì dúyīwú'èr de.",
+                        "text_en": "This blue is really special — it's a color with stories. The chip actually makes it more real. Perfect bowls are everywhere, but one with marks of life is one of a kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The chip as proof of life — imperfection as authenticity."
+                    },
+                    {
+                        "text_zh": "能便宜一点吗？",
+                        "text_pinyin": "Néng piányi yīdiǎn ma?",
+                        "text_en": "Can you make it cheaper?",
+                        "score": 0.0,
+                        "feedback": "Haggles when she's sharing something deeper."
+                    },
+                    {
+                        "text_zh": "缺口会不会割手？",
+                        "text_pinyin": "Quēkǒu huì bú huì gē shǒu?",
+                        "text_en": "Will the chip cut my hand?",
+                        "score": 0.0,
+                        "feedback": "A safety concern that misses the beauty she's pointing out."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得真好。现在的人都要新的、完美的。旧的、有裂纹的就扔了。但我觉得，用了很多年的东西有一种暖，新东西没有的暖。因为它记住了被使用的每一天。",
+                "text_pinyin": "Nǐ shuō de zhēn hǎo. Xiànzài de rén dōu yào xīn de, wánměi de. Jiù de, yǒu lièwén de jiù rēng le. Dàn wǒ juéde, yòng le hěn duō nián de dōngxi yǒu yī zhǒng nuǎn, xīn dōngxi méiyǒu de nuǎn. Yīnwèi tā jì zhù le bèi shǐyòng de měi yī tiān.",
+                "text_en": "You put it well. People today want new, perfect things. Old things with cracks get thrown away. But I think things used for many years have a warmth that new things don't have. Because they remember every day they were used."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the warmth stored in old things.",
+                "options": [
+                    {
+                        "text_zh": "这个蓝色真特别——像是有故事的颜色。缺口反而让它更真实。完美的碗到处有，有生活痕迹的碗才是独一无二的。",
+                        "text_pinyin": "Zhège lán sè zhēn tèbié — xiàng shì yǒu gùshi de yánsè. Quēkǒu fǎn'ér ràng tā gèng zhēnshí. Wánměi de wǎn dàochù yǒu, yǒu shēnghuó hénjì de wǎn cái shì dúyīwú'èr de.",
+                        "text_en": "This blue is really special — a color with stories. The chip makes it more real. Perfect bowls are everywhere, but one with marks of life is truly one of a kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Continuing the bowl's life story — new hands, new memories, same warmth."
+                    },
+                    {
+                        "text_zh": "你这里还有别的旧碗吗？",
+                        "text_pinyin": "Nǐ zhèlǐ hái yǒu bié de jiù wǎn ma?",
+                        "text_en": "Do you have other old bowls?",
+                        "score": 0.0,
+                        "feedback": "Browsing for more items during a meaningful exchange."
+                    },
+                    {
+                        "text_zh": "日本有一种修碗的艺术叫金缮。",
+                        "text_pinyin": "Rìběn yǒu yī zhǒng xiū wǎn de yìshù jiào jīnshàn.",
+                        "text_en": "Japan has a bowl-repair art called kintsugi.",
+                        "score": 0.0,
+                        "feedback": "Pivots to another culture's practice instead of honoring this moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese households, a well-used rice bowl (饭碗) can carry decades of family history. The concept that objects absorb the warmth (温度) of their users reflects an animistic thread in Chinese thinking — that daily use imbues objects with a kind of life. Flea markets (跳蚤市场) in China are treasure troves of such storied objects."
+    }
+}

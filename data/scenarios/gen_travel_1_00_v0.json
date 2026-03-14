@@ -1,0 +1,94 @@
+{
+    "title": "The Helpful Hotel Auntie",
+    "title_zh": "热心的宾馆阿姨",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_travel_1_00_v0",
+    "tree": {
+        "setup": "A small guesthouse on a quiet street. The lobby has a fish tank, a plastic plant, and a calendar from last year. Auntie Jiang sits behind the front desk in a puffy jacket, watching a drama on her phone. She looks up when the door chimes.",
+        "setup_zh": "安静街道上的小宾馆。大厅有鱼缸、塑料花和去年的日历。蒋阿姨穿着羽绒服坐在前台，用手机看电视剧。门铃响了，她抬起头来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！住房间吗？",
+                "text_pinyin": "nǐ hǎo! zhù fángjiān ma?",
+                "text_en": "Hello! Are you looking for a room?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about a room.",
+                "options": [
+                    {
+                        "text_zh": "是的，有房间吗？",
+                        "text_pinyin": "shì de, yǒu fángjiān ma?",
+                        "text_en": "Yes, do you have a room?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Jiang pauses her drama -- a major concession.「有有有！」She reaches for a room key with a large plastic keychain shaped like a fish. 有 + noun + 吗 is the go-to availability question."
+                    },
+                    {
+                        "text_zh": "一个房间多少钱？",
+                        "text_pinyin": "yí gè fángjiān duōshao qián?",
+                        "text_en": "How much is a room?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「一百二，有空调。」Auntie Jiang says this like she's offering a state secret. Getting the price upfront is smart. 多少钱 never fails."
+                    },
+                    {
+                        "text_zh": "这里是宾馆吗？",
+                        "text_pinyin": "zhèlǐ shì bīnguǎn ma?",
+                        "text_en": "Is this a hotel?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Jiang looks at the front desk, the room keys, and the sign that says 'HOTEL' in three languages. She decides you must be very tired from traveling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你住几天？",
+                "text_pinyin": "nǐ zhù jǐ tiān?",
+                "text_en": "How many days are you staying?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her how long you're staying.",
+                "options": [
+                    {
+                        "text_zh": "两天。",
+                        "text_pinyin": "liǎng tiān.",
+                        "text_en": "Two days.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Jiang writes it down in a notebook that appears to be from 2003. She hands you the fish keychain.「二楼，左边。」天 (tiān) is the measure word for days."
+                    },
+                    {
+                        "text_zh": "一天。",
+                        "text_pinyin": "yì tiān.",
+                        "text_en": "One day.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Jiang nods. Short stay, no fuss. She gives you the room closest to the bathroom -- a small kindness."
+                    },
+                    {
+                        "text_zh": "我不知道。",
+                        "text_pinyin": "wǒ bù zhīdào.",
+                        "text_en": "I don't know.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Jiang looks at you with the mild concern of someone whose job requires certainty.「先住一天吧。」She'll sort it out. She always does."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！上楼吧。有什么事叫我。",
+                "text_pinyin": "hǎo! shàng lóu ba. yǒu shénme shì jiào wǒ.",
+                "text_en": "OK! Head upstairs. Call me if you need anything."
+            }
+        ],
+        "cultural_note": "Small guesthouses (宾馆, bīnguǎn) are common in Chinese towns. They're simpler and cheaper than hotels (酒店, jiǔdiàn). The owner often lives on-site and may offer local restaurant tips if you ask nicely."
+    }
+}

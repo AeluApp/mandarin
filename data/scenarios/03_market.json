@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Try to negotiate a lower price.",
                 "options": [
-                    {"text_zh": "太贵了。三十块可以吗？", "text_pinyin": "tài guì le. sānshí kuài kěyǐ ma?", "text_en": "Too expensive. How about thirty?", "score": 1.0, "register": "casual", "feedback": "Classic haggling — state it's too expensive, then offer."},
-                    {"text_zh": "便宜一点吧。", "text_pinyin": "piányi yīdiǎn ba.", "text_en": "A little cheaper, please.", "score": 0.8, "register": "casual", "feedback": "Good — asking for cheaper. Even better with a specific number."},
-                    {"text_zh": "不要。", "text_pinyin": "bú yào.", "text_en": "Don't want it.", "score": 0.3, "register": "blunt", "feedback": "That just walks away. Try negotiating first!"}
+                    {
+                        "text_zh": "晚上七点吧，我们六点半在电影院门口见？",
+                        "text_pinyin": "wǎnshang qī diǎn ba, wǒmen liù diǎn bàn zài diànyǐngyuàn ménkǒu jiàn?",
+                        "text_en": "Let's do 7 PM, meet at the cinema entrance at 6:30?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to try to negotiate a lower price, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "太贵了。三十块可以吗？",
+                        "text_pinyin": "tài guì le. sānshí kuài kěyǐ ma?",
+                        "text_en": "Too expensive. How about thirty?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Classic haggling — state it's too expensive, then offer."
+                    },
+                    {
+                        "text_zh": "哇，成都看起来很漂亮！你去了哪些地方？",
+                        "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?",
+                        "text_en": "Wow, Chengdu looks beautiful! What places did you visit?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to try to negotiate a lower price, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Close the deal or counter again.",
                 "options": [
-                    {"text_zh": "好吧，四十块。", "text_pinyin": "hǎo ba, sìshí kuài.", "text_en": "OK, forty.", "score": 0.9, "register": "casual", "feedback": "Deal made. 好吧 shows you're accepting gracefully."},
-                    {"text_zh": "三十五，行不行？", "text_pinyin": "sānshí wǔ, xíng bù xíng?", "text_en": "Thirty-five, OK?", "score": 1.0, "register": "casual", "feedback": "Nice counter. 行不行 is a natural way to propose."},
-                    {"text_zh": "还是太贵了。", "text_pinyin": "háishi tài guì le.", "text_en": "Still too expensive.", "score": 0.5, "register": "casual", "feedback": "You can say this, but offering a number moves things forward."}
+                    {
+                        "text_zh": "三十五，行不行？",
+                        "text_pinyin": "sānshí wǔ, xíng bù xíng?",
+                        "text_en": "Thirty-five, OK?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Nice counter. 行不行 is a natural way to propose."
+                    },
+                    {
+                        "text_zh": "我一直想去看大熊猫！火锅辣不辣？",
+                        "text_pinyin": "wǒ yīzhí xiǎng qù kàn dà xióngmāo! huǒguō là bú là?",
+                        "text_en": "I've always wanted to see the pandas! Was the hotpot spicy?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to close the deal or counter again, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好啊，我很想去！你想看几点的？",
+                        "text_pinyin": "hǎo a, wǒ hěn xiǎng qù! nǐ xiǎng kàn jǐ diǎn de?",
+                        "text_en": "Sure, I'd love to go! What time do you want to see?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to close the deal or counter again, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

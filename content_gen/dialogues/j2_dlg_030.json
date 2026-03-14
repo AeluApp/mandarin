@@ -1,0 +1,83 @@
+{
+  "title": "The Old Photograph",
+  "title_zh": "老照片",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're helping your landlord clean out a storage room. She finds an old photograph and pauses, smiling.",
+    "setup_zh": "你在帮房东打扫储物间。她找到了一张老照片，停下来，微笑着。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你看，这是二十年前的照片。这是我和我丈夫刚搬到这里的时候。那时候这里还是新的。",
+        "text_pinyin": "Nǐ kàn, zhè shì èrshí nián qián de zhàopiàn. Zhè shì wǒ hé wǒ zhàngfu gāng bān dào zhèlǐ de shíhou. Nà shíhou zhèlǐ háishi xīn de.",
+        "text_en": "Look, this is a photo from twenty years ago. This is when my husband and I first moved here. Everything was still new then."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her memory with care.",
+        "options": [
+          {
+            "text_zh": "你们看起来好开心啊。二十年了，这个家一定有很多故事。",
+            "text_pinyin": "Nǐmen kàn qǐlái hǎo kāixīn a. Èrshí nián le, zhège jiā yīdìng yǒu hěn duō gùshì.",
+            "text_en": "You both look so happy. Twenty years — this home must have so many stories.",
+            "score": 1.0,
+            "feedback": "Tender and interested — sees the life within the walls.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这个房间真的很乱。",
+            "text_pinyin": "Zhège fángjiān zhēn de hěn luàn.",
+            "text_en": "This room is really messy.",
+            "score": 0.0,
+            "feedback": "Ignores her emotional moment to comment on the mess."
+          },
+          {
+            "text_zh": "照片在哪里拍的？",
+            "text_pinyin": "Zhàopiàn zài nǎlǐ pāi de?",
+            "text_en": "Where was the photo taken?",
+            "score": 0.0,
+            "feedback": "A factual question that misses the warmth of the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊，很多故事。孩子在这里长大，过年在这里吃饭。虽然房子旧了，但是我不想搬走。",
+        "text_pinyin": "Shì a, hěn duō gùshì. Háizi zài zhèlǐ zhǎng dà, guò nián zài zhèlǐ chī fàn. Suīrán fángzi jiù le, dànshì wǒ bù xiǎng bān zǒu.",
+        "text_en": "Yes, many stories. The children grew up here, we had New Year's dinner here. The house is old now, but I don't want to move."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to why she wants to stay.",
+        "options": [
+          {
+            "text_zh": "我觉得老房子有一种温暖，新房子没有的。因为这里有你们的生活。",
+            "text_pinyin": "Wǒ juéde lǎo fángzi yǒu yī zhǒng wēnnuǎn, xīn fángzi méiyǒu de. Yīnwèi zhèlǐ yǒu nǐmen de shēnghuó.",
+            "text_en": "I think old houses have a warmth that new ones don't. Because your life is here.",
+            "score": 1.0,
+            "feedback": "Understands that a home is made of memories, not materials.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "新房子会更舒服。",
+            "text_pinyin": "Xīn fángzi huì gèng shūfu.",
+            "text_en": "A new house would be more comfortable.",
+            "score": 0.0,
+            "feedback": "Misses why she values this place."
+          },
+          {
+            "text_zh": "这个房子多大？",
+            "text_pinyin": "Zhège fángzi duō dà?",
+            "text_en": "How big is this house?",
+            "score": 0.0,
+            "feedback": "A practical question during a sentimental moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "In China, homes carry deep emotional weight. Many older people resist moving even when offered newer apartments because their homes hold decades of family memories. The phrase 虽然旧了但不想搬走 captures a common sentiment: the wear of a home is not deterioration but evidence of a life fully lived within it."
+  }
+}

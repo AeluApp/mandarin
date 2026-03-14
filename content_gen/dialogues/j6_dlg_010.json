@@ -1,0 +1,123 @@
+{
+    "title": "The Escalating Misunderstanding",
+    "title_zh": "越来越离谱的误会",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You ordered a custom bookshelf from a local carpenter, Mr. Qian, but through a series of miscommunications, he built a shoe rack instead. Now he's insisting that what you described was definitely a shoe rack. The situation is escalating in the most absurd way possible.",
+        "setup_zh": "你跟本地木匠钱师傅订了一个定制书架，但由于一系列沟通失误，他做成了鞋架。现在他坚持你描述的就是鞋架。情况正在以最荒谬的方式升级。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你不是说要一个'放东西的架子，一排一排的，靠墙放'吗？这不就是鞋架吗？你看，一排一排的，靠墙放。哪里不对？",
+                "text_pinyin": "Nǐ bú shì shuō yào yīge 'fàng dōngxi de jiàzi, yī pái yī pái de, kào qiáng fàng' ma? Zhè bú jiù shì xiéjià ma? Nǐ kàn, yī pái yī pái de, kào qiáng fàng. Nǎlǐ bú duì?",
+                "text_en": "Didn't you say you wanted 'a rack for putting things on, row by row, against the wall'? Isn't that a shoe rack? Look — row by row, against the wall. What's wrong?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try to explain the difference while appreciating the absurd logic.",
+                "options": [
+                    {
+                        "text_zh": "钱师傅，从纯逻辑上讲，你说得没错——书架确实是'放东西的架子，一排一排的，靠墙放'。但是鞋架也是，衣架也是，酒架也是。如果按这个描述来做，你可以做出世界上任何一种架子。",
+                        "text_pinyin": "Qián shīfu, cóng chún luójí shàng jiǎng, nǐ shuō de méi cuò — shūjià quèshí shì 'fàng dōngxi de jiàzi, yī pái yī pái de, kào qiáng fàng'. Dànshì xiéjià yě shì, yījià yě shì, jiǔjià yě shì. Rúguǒ àn zhège miáoshù lái zuò, nǐ kěyǐ zuò chū shìjiè shàng rènhé yī zhǒng jiàzi.",
+                        "text_en": "Mr. Qian, logically you're not wrong — a bookshelf is 'a rack for things, row by row, against the wall.' But so is a shoe rack, a wine rack. Following that description, you could build any rack in the world.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Meets the absurdity with equally precise absurdity — acknowledges his logic while showing why it collapses."
+                    },
+                    {
+                        "text_zh": "钱师傅，书架和鞋架完全不一样。书架要高的，鞋架是矮的。书架放书，鞋架放鞋。这是两种东西。",
+                        "text_pinyin": "Qián shīfu, shūjià hé xiéjià wánquán bù yīyàng. Shūjià yào gāo de, xiéjià shì ǎi de. Shūjià fàng shū, xiéjià fàng xié. Zhè shì liǎng zhǒng dōngxi.",
+                        "text_en": "Mr. Qian, a bookshelf and a shoe rack are completely different. Bookshelves are tall, shoe racks are short. Bookshelves hold books, shoe racks hold shoes. They're two different things.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You're explaining the difference like a dictionary entry. He already knows what a bookshelf is. The problem is his logic, not his vocabulary."
+                    },
+                    {
+                        "text_zh": "钱师傅，我当时说得很清楚，是你没认真听。这是你的责任，不是我的问题。",
+                        "text_pinyin": "Qián shīfu, wǒ dāngshí shuō de hěn qīngchǔ, shì nǐ méi rènzhēn tīng. Zhè shì nǐ de zérèn, bú shì wǒ de wèntí.",
+                        "text_en": "Mr. Qian, I was perfectly clear at the time. You weren't listening carefully. This is your responsibility, not my problem.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "He's already dug into his position. Going straight to blame just makes him defensive without resolving anything."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你看，你自己也说了，书架和鞋架本质上是一样的东西！区别只是大小而已。你要大一点的？我可以给你加几层，加完以后不就是书架了吗？",
+                "text_pinyin": "Nǐ kàn, nǐ zìjǐ yě shuō le, shūjià hé xiéjià běnzhì shàng shì yīyàng de dōngxi! Qūbié zhǐ shì dàxiǎo éryǐ. Nǐ yào dà yīdiǎn de? Wǒ kěyǐ gěi nǐ jiā jǐ céng, jiā wán yǐhòu bú jiù shì shūjià le ma?",
+                "text_en": "See, you just said it yourself — a bookshelf and a shoe rack are essentially the same thing! The only difference is size. You want bigger? I can add a few layers, and once I do, isn't that a bookshelf?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his escalating but strangely compelling logic.",
+                "options": [
+                    {
+                        "text_zh": "等等，你的意思是鞋架只是书架的幼年形态？再长几层就成熟了？钱师傅，按照这个理论，椅子加四条腿就是桌子，桌子加个盖就是棺材。我们已经进入了一个很危险的哲学领域。",
+                        "text_pinyin": "Děngdeng, nǐ de yìsi shì xiéjià zhǐ shì shūjià de yòunián xíngtài? Zài zhǎng jǐ céng jiù chéngshú le? Qián shīfu, ànzhào zhège lǐlùn, yǐzi jiā sì tiáo tuǐ jiù shì zhuōzi, zhuōzi jiā ge gài jiù shì guāncai. Wǒmen yǐjīng jìnrù le yīge hěn wēixiǎn de zhéxué lǐngyù.",
+                        "text_en": "Wait — a shoe rack is the juvenile form of a bookshelf? It matures by growing layers? Mr.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Takes his logic to its absurd conclusion with the chair-table-coffin chain."
+                    },
+                    {
+                        "text_zh": "那行吧，你加几层试试，加到一米八左右应该差不多了。",
+                        "text_pinyin": "Nà xíng ba, nǐ jiā jǐ céng shìshi, jiā dào yī mǐ bā zuǒyòu yīnggāi chàbuduō le.",
+                        "text_en": "Fine then, try adding a few layers, getting it to about 1.8 meters should do it.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "You're accepting the premise that a shoe rack can be promoted into a bookshelf through sheer height. He's won the philosophical argument."
+                    },
+                    {
+                        "text_zh": "钱师傅，我们还是看看当时的订单吧，上面写得很清楚。",
+                        "text_pinyin": "Qián shīfu, wǒmen háishì kànkan dāngshí de dìngdān ba, shàngmiàn xiě de hěn qīngchǔ.",
+                        "text_en": "Mr. Qian, let's just look at the original order form, it's written very clearly.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Reaching for paperwork when the whole joke is that his logic is airtight on its own terms. The order form won't help if the description really was that vague."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈哈！你这个人有意思。好吧好吧，我承认，我看错了你的图纸——你那个字写得太草了，我把'书'看成了'鞋'。但你也得承认，你的描述确实太模糊了！我们各退一步——我给你改成书架，材料费你再补一点？",
+                "text_pinyin": "Hāhāhā! Nǐ zhège rén yǒu yìsi. Hǎo ba hǎo ba, wǒ chéngrèn, wǒ kàn cuò le nǐ de túzhǐ — nǐ nàge zì xiě de tài cǎo le, wǒ bǎ 'shū' kàn chéng le 'xié'. Dàn nǐ yě děi chéngrèn, nǐ de miáoshù quèshí tài móhú le! Wǒmen gè tuì yī bù — wǒ gěi nǐ gǎi chéng shūjià, cáiliào fèi nǐ zài bǔ yīdiǎn?",
+                "text_en": "Hahaha! You're a funny one. Fine, fine — I admit, I misread your drawing. Your handwriting is too messy; I read '书' (book) as '鞋' (shoe). But you have to admit, your description was way too vague! Let's each take a step back — I'll convert it to a bookshelf, you cover a bit more for materials?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the negotiation with humor.",
+                "options": [
+                    {
+                        "text_zh": "成交。但我有一个条件——以后我写什么字你看不懂的，直接问我，别自己猜。不然下次我要一张床，你可能给我做一条船。两者的区别嘛……也就是一个翻面的问题。",
+                        "text_pinyin": "Chéngjiāo. Dàn wǒ yǒu yīge tiáojiàn — yǐhòu wǒ xiě shénme zì nǐ kàn bù dǒng de, zhíjiē wèn wǒ, bié zìjǐ cāi. Bùrán xià cì wǒ yào yī zhāng chuáng, nǐ kěnéng gěi wǒ zuò yī tiáo chuán. Liǎng zhě de qūbié ma ... yě jiù shì yīge fānmiàn de wèntí.",
+                        "text_en": "Deal. But one condition — if you can't read something I wrote, ask me directly. Don't guess. Otherwise next time I order a bed, you might build me a boat. The difference is a matter of flipping it over.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Continues the furniture-taxonomy joke while setting a practical boundary, and the bed/boat flip is genuinely funny."
+                    },
+                    {
+                        "text_zh": "行，那就这么办吧。材料费我补给你，下次注意就行了。",
+                        "text_pinyin": "Xíng, nà jiù zhème bàn ba. Cáiliào fèi wǒ bǔ gěi nǐ, xià cì zhùyì jiù xíng le.",
+                        "text_en": "Fine, let's do that then. I'll cover the extra materials, just be more careful next time.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "A reasonable conclusion, but after that entire philosophical journey, ending on 'just be careful next time' lands flat. He opened a door for humor and you closed it with logistics."
+                    },
+                    {
+                        "text_zh": "钱师傅，说实话，这件事让我有点不高兴。希望你能理解我的感受。",
+                        "text_pinyin": "Qián shīfu, shuō shíhuà, zhè jiàn shì ràng wǒ yǒudiǎn bù gāoxìng. Xīwàng nǐ néng lǐjiě wǒ de gǎnshòu.",
+                        "text_en": "Mr. Qian, honestly, this situation has made me a bit unhappy. I hope you can understand my feelings.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "He just admitted fault with a joke and offered a fair deal. Pulling out emotional sincerity now reads like you missed the shift in tone."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The phrase '各退一步' (each take a step back) is a foundational negotiation principle in Chinese social interactions. In disputes — whether between neighbors, business partners, or strangers — reaching a resolution often requires both sides to publicly concede something, preserving mutual face (面子). The humor in this scenario also touches on a real challenge: Chinese handwriting (especially cursive 草书-influenced styles) can genuinely render characters ambiguous, and artisans who work from handwritten notes frequently navigate this ambiguity."
+    }
+}

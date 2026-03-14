@@ -1,0 +1,89 @@
+{
+    "title": "The Corner Table",
+    "title_zh": "角落的桌子",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're sitting at your usual corner table in a small café. The owner, Sister Chen, brings you tea without asking — she knows your order by now.",
+        "setup_zh": "你坐在一家小咖啡馆里你常坐的角落。老板陈姐不用问就端来了茶——她已经记住了你的习惯。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "老样子，一杯茉莉花茶。你今天看起来比平时安静，是不是有心事？",
+                "text_pinyin": "Lǎo yàngzi, yī bēi mòlìhuā chá. Nǐ jīntiān kàn qǐlái bǐ píngshí ānjìng, shì bu shì yǒu xīnshì?",
+                "text_en": "The usual — one jasmine tea. You look quieter than usual today. Is something on your mind?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Sister Chen's observation.",
+                "options": [
+                    {
+                        "text_zh": "也没什么大事。就是最近总觉得时间过得太快，好像每天都在赶，但又说不清在赶什么。",
+                        "text_pinyin": "Yě méi shénme dà shì. Jiù shì zuìjìn zǒng juéde shíjiān guò de tài kuài, hǎoxiàng měi tiān dōu zài gǎn, dàn yòu shuō bù qīng zài gǎn shénme.",
+                        "text_en": "Nothing major. I've just been feeling like time passes too fast lately. Like I'm rushing every day, but I can't even say what I'm rushing toward.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest and vulnerable — opens up naturally to someone who cares."
+                    },
+                    {
+                        "text_zh": "没有，我很好。今天的茶很香。",
+                        "text_pinyin": "Méiyǒu, wǒ hěn hǎo. Jīntiān de chá hěn xiāng.",
+                        "text_en": "No, I'm fine. Today's tea is fragrant.",
+                        "score": 0.0,
+                        "feedback": "Deflects — closes off a genuine moment of connection."
+                    },
+                    {
+                        "text_zh": "你们这里有WiFi吗？密码多少？",
+                        "text_pinyin": "Nǐmen zhèlǐ yǒu WiFi ma? Mìmǎ duōshǎo?",
+                        "text_en": "Do you have WiFi here? What's the password?",
+                        "score": 0.0,
+                        "feedback": "Ignores her warmth entirely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在赶什么都不知道……我以前也是这样。后来我开了这家店，才学会慢下来。你看外面那棵银杏树，现在正在变黄。你今天有没有抬头看过它？",
+                "text_pinyin": "Zài gǎn shénme dōu bù zhīdào…… wǒ yǐqián yě shì zhèyàng. Hòulái wǒ kāi le zhè jiā diàn, cái xuéhuì màn xiàlái. Nǐ kàn wàimiàn nà kē yínxìng shù, xiànzài zhèng zài biàn huáng. Nǐ jīntiān yǒu méiyǒu táitóu kàn guò tā?",
+                "text_en": "Don't even know what you're rushing toward... I used to be the same. After I opened this shop, I learned to slow down. Look at the ginkgo tree outside — it's turning yellow right now. Did you look up at it today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on what Sister Chen is saying.",
+                "options": [
+                    {
+                        "text_zh": "没有……我经过那棵树无数次了，好像从来没有认真看过。也许问题就在这里，我太习惯低着头走路，错过了很多本来就在眼前的东西。",
+                        "text_pinyin": "Méiyǒu…… wǒ jīngguò nà kē shù wúshù cì le, hǎoxiàng cónglái méiyǒu rènzhēn kàn guò. Yěxǔ wèntí jiù zài zhèlǐ, wǒ tài xíguàn dī zhe tóu zǒulù, cuòguò le hěn duō běnlái jiù zài yǎnqián de dōngxi.",
+                        "text_en": "No... I've walked past that tree countless times, but I don't think I've ever looked at it. Maybe that's the problem — I'm so used to walking with my head down that I miss what's in front of me.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Self-aware and poetic — takes her metaphor and applies it honestly."
+                    },
+                    {
+                        "text_zh": "银杏树的叶子可以泡茶吗？",
+                        "text_pinyin": "Yínxìng shù de yèzi kěyǐ pào chá ma?",
+                        "text_en": "Can you make tea from ginkgo leaves?",
+                        "score": 0.0,
+                        "feedback": "Misses the metaphorical point entirely."
+                    },
+                    {
+                        "text_zh": "我没时间看树，太忙了。",
+                        "text_pinyin": "Wǒ méi shíjiān kàn shù, tài máng le.",
+                        "text_en": "I don't have time to look at trees, I'm too busy.",
+                        "score": 0.0,
+                        "feedback": "Proves her point but without self-awareness — doubles down on the rushing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "出去的时候抬头看看吧。慢一秒钟，世界就不一样了。我的茶不急，你也不急。",
+                "text_pinyin": "Chūqù de shíhou táitóu kànkan ba. Màn yī miǎozhōng, shìjiè jiù bù yíyàng le. Wǒ de chá bù jí, nǐ yě bù jí.",
+                "text_en": "Look up when you leave. One second slower, and the world looks different. My tea isn't in a hurry, and neither are you."
+            }
+        ],
+        "cultural_note": "In many Chinese neighborhoods, small shop owners serve as informal community anchors — they remember regulars' orders, notice when someone seems troubled, and offer quiet wisdom. The ginkgo tree (银杏树) is beloved in China for its golden autumn foliage, and ginkgo-lined streets become pilgrimage sites every fall. Sister Chen's invitation to slow down echoes a growing counter-movement to China's fast-paced urban life."
+    }
+}

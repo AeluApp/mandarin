@@ -1,0 +1,83 @@
+{
+  "title": "The Last Light",
+  "title_zh": "最后的光",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're sitting on the steps outside your building as the last light of the day fades. Your downstairs neighbor sits down with two cups of tea and offers you one.",
+    "setup_zh": "你坐在楼下的台阶上，看着最后的阳光慢慢消失。楼下的邻居端着两杯茶走来，递给你一杯。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "给你一杯。我看你坐在这里，觉得你可能也想喝杯茶。这个时间的光最好看。",
+        "text_pinyin": "Gěi nǐ yī bēi. Wǒ kàn nǐ zuò zài zhèlǐ, juéde nǐ kěnéng yě xiǎng hē bēi chá. Zhège shíjiān de guāng zuì hǎokàn.",
+        "text_en": "Here, one for you. I saw you sitting here and thought you might want some tea. The light at this hour is the most beautiful."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Accept the tea and respond to the light.",
+        "options": [
+          {
+            "text_zh": "谢谢你！你真好。是啊，这个时候的天空颜色特别温柔。我最喜欢这个时间。",
+            "text_pinyin": "Xièxie nǐ! Nǐ zhēn hǎo. Shì a, zhège shíhou de tiānkōng yánsè tèbié wēnróu. Wǒ zuì xǐhuan zhège shíjiān.",
+            "text_en": "Thank you! That's so kind. Yes, the sky at this hour is so gentle in color. It's my favorite time.",
+            "score": 1.0,
+            "feedback": "Gracious and present — meets her kindness with shared appreciation.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不太喝茶。",
+            "text_pinyin": "Wǒ bú tài hē chá.",
+            "text_en": "I don't really drink tea.",
+            "score": 0.0,
+            "feedback": "Declines a gesture of kindness over a preference."
+          },
+          {
+            "text_zh": "快天黑了。",
+            "text_pinyin": "Kuài tiān hēi le.",
+            "text_en": "It's getting dark soon.",
+            "score": 0.0,
+            "feedback": "States the obvious instead of savoring the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我丈夫以前也喜欢这个时间。他说「一天里最好的几分钟」。以前我们经常一起坐在这里，看天慢慢暗下来。",
+        "text_pinyin": "Wǒ zhàngfu yǐqián yě xǐhuan zhège shíjiān. Tā shuō 'yī tiān lǐ zuì hǎo de jǐ fēnzhōng'. Yǐqián wǒmen jīngcháng yīqǐ zuò zài zhèlǐ, kàn tiān mànman àn xiàlái.",
+        "text_en": "My husband used to love this time too. He called it 'the best few minutes of the day.' We used to sit here together and watch the sky slowly darken."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her memory with gentleness.",
+        "options": [
+          {
+            "text_zh": "一天里最好的几分钟——他说得真好。今天谢谢你和我一起看这个最后的光。",
+            "text_pinyin": "Yī tiān lǐ zuì hǎo de jǐ fēnzhōng — tā shuō de zhēn hǎo. Jīntiān xièxie nǐ hé wǒ yīqǐ kàn zhège zuìhòu de guāng.",
+            "text_en": "The best few minutes of the day — he said it perfectly. Thank you for watching the last light with me today.",
+            "score": 1.0,
+            "feedback": "Carries his phrase forward into this moment — the light is shared again.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你丈夫去哪了？",
+            "text_pinyin": "Nǐ zhàngfu qù nǎ le?",
+            "text_en": "Where did your husband go?",
+            "score": 0.0,
+            "feedback": "Pries into loss during a tender moment."
+          },
+          {
+            "text_zh": "我们应该进去了，蚊子出来了。",
+            "text_pinyin": "Wǒmen yīnggāi jìnqù le, wénzi chūlái le.",
+            "text_en": "We should go in — the mosquitoes are coming out.",
+            "score": 0.0,
+            "feedback": "Mosquitoes break the spell of a poignant moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Dusk (黄昏) carries special emotional weight in Chinese culture, often associated with nostalgia and gentle sadness. Sharing tea at this hour is an act of quiet companionship. The neighbor continuing her husband's ritual — sitting at dusk — by inviting someone else to share it is a beautiful way of keeping a memory alive through action."
+  }
+}

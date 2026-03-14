@@ -1,0 +1,124 @@
+{
+    "title": "The Waimai Standoff",
+    "title_zh": "外卖争议",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_3_00_v0",
+    "tree": {
+        "setup": "Your food delivery order arrived missing one dish. The delivery driver, Lao Tao, is standing at your door holding the bag and looking at his phone with increasing confusion. He has six more deliveries to make and it's raining, but he's the kind of person who can't leave a problem unsolved. His electric scooter beeps impatiently in the hallway.",
+        "setup_zh": "你的外卖少了一个菜。送餐员老陶站在你门口，拿着袋子看手机，越来越困惑。他还有六单要送，外面下着雨，但他是那种不把问题解决就走不了的人。他的电动车在走廊里不耐烦地叫着。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "不好意思，是不是少了一个菜？我看看订单。",
+                "text_pinyin": "bù hǎoyìsi, shì bu shì shǎo le yí gè cài? wǒ kànkan dìngdān.",
+                "text_en": "Sorry, is there a dish missing? Let me check the order."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what's missing.",
+                "options": [
+                    {
+                        "text_zh": "对，我点了三个菜，但是袋子里只有两个。少了一份宫保鸡丁。",
+                        "text_pinyin": "duì, wǒ diǎn le sān gè cài, dànshì dàizi lǐ zhǐyǒu liǎng gè. shǎo le yí fèn gōngbǎo jīdīng.",
+                        "text_en": "Right, I ordered three dishes but there are only two in the bag. The kung pao chicken is missing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Tao checks the bag and nods.「确实少了。可能是餐厅忘放了。我联系他们。」Clear identification of the problem: quantity ordered, quantity received, which item is missing. 一份 is the measure word for a serving."
+                    },
+                    {
+                        "text_zh": "好像少了一个菜。你能帮我看看吗？",
+                        "text_pinyin": "hǎoxiàng shǎo le yí gè cài. nǐ néng bāng wǒ kànkan ma?",
+                        "text_en": "It seems like there's a dish missing. Can you help me check?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「我看看……订单上是三个菜。袋子里……一、二。对，少了一个。」好像 is 'it seems like' -- a softer way to raise a problem."
+                    },
+                    {
+                        "text_zh": "没关系，可能是我记错了。",
+                        "text_pinyin": "méi guānxi, kěnéng shì wǒ jì cuò le.",
+                        "text_en": "It's OK, maybe I remembered wrong.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Tao frowns and checks anyway.「不对，订单上确实是三个菜。少了就是少了，不能让你吃亏。」记错 is 'remembered wrong.' But Lao Tao won't let an error slide -- it's a matter of principle."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我给餐厅打电话了。他们说忘放了，可以重新送一份，但是要等大概三十分钟。或者你可以在App上申请退那个菜的钱。你想怎么办？",
+                "text_pinyin": "wǒ gěi cāntīng dǎ diànhuà le. tāmen shuō wàng fàng le, kěyǐ chóngxīn sòng yí fèn, dànshì yào děng dàgài sānshí fēnzhōng. huòzhě nǐ kěyǐ zài App shàng shēnqǐng tuì nà ge cài de qián. nǐ xiǎng zěnme bàn?",
+                "text_en": "I called the restaurant. They said they forgot to include it. They can send a new one, but it'll take about 30 minutes. Or you can request a refund for that dish on the app. What would you like to do?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose how to resolve it.",
+                "options": [
+                    {
+                        "text_zh": "三十分钟太久了，我直接在App上退款吧。谢谢你帮忙联系。",
+                        "text_pinyin": "sānshí fēnzhōng tài jiǔ le, wǒ zhíjiē zài App shàng tuìkuǎn ba. xièxie nǐ bāngmáng liánxì.",
+                        "text_en": "30 minutes is too long, I'll just get a refund on the app. Thanks for helping contact them.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「好的，退款的话在订单页面点'申请退款'就行。」退款 is 'refund.' Lao Tao looks relieved -- he can get to his other deliveries. Practical decision-making."
+                    },
+                    {
+                        "text_zh": "那就再送一份吧。反正我不着急。",
+                        "text_pinyin": "nà jiù zài sòng yí fèn ba. fǎnzhèng wǒ bù zháojí.",
+                        "text_en": "Then have them send another one. I'm not in a hurry anyway.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「好，我让他们快一点。」Lao Tao looks at his phone -- six more deliveries. 反正 means 'anyway/in any case.' 不着急 is 'not in a hurry.' Patient of you."
+                    },
+                    {
+                        "text_zh": "能不能让餐厅多送一个菜作为补偿？",
+                        "text_pinyin": "néng bu néng ràng cāntīng duō sòng yí gè cài zuòwéi bǔcháng?",
+                        "text_en": "Can you ask the restaurant to send an extra dish as compensation?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Tao scratches his head.「这个我做不了主，你可以在App上跟客服说。」补偿 is 'compensation.' 做不了主 means 'can't make that decision.' Worth asking, but the driver isn't the right person."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，能不能麻烦你在App上给我一个好评？不是因为今天这个事，是因为下雨天我跑了十公里过来的……",
+                "text_pinyin": "duì le, néng bu néng máfan nǐ zài App shàng gěi wǒ yí gè hǎopíng? bú shì yīnwèi jīntiān zhè ge shì, shì yīnwèi xià yǔ tiān wǒ pǎo le shí gōnglǐ guòlái de...",
+                "text_en": "By the way, could I trouble you to leave me a good review on the app? Not because of today's issue, but because I rode 10 kilometers in the rain to get here..."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his review request.",
+                "options": [
+                    {
+                        "text_zh": "当然可以！下雨天送外卖辛苦了。我现在就给你五星好评。",
+                        "text_pinyin": "dāngrán kěyǐ! xià yǔ tiān sòng wàimài xīnkǔ le. wǒ xiànzài jiù gěi nǐ wǔ xīng hǎopíng.",
+                        "text_en": "Of course! Delivering in the rain is hard work. I'll give you a five-star review right now.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Tao's face breaks into a grin.「谢谢谢谢！那我走了，还有六单呢！」五星好评 is 'five-star review.' 辛苦了 acknowledges his effort. Reviews directly affect delivery drivers' income in China."
+                    },
+                    {
+                        "text_zh": "没问题。你注意安全，雨天路滑。",
+                        "text_pinyin": "méi wèntí. nǐ zhùyì ānquán, yǔ tiān lù huá.",
+                        "text_en": "No problem. Be careful, the roads are slippery in the rain.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Tao waves and jogs to his scooter.「放心！我天天跑，习惯了！」注意安全 is 'be careful/stay safe.' 路滑 is 'slippery roads.' Showing concern for delivery drivers is genuinely kind."
+                    },
+                    {
+                        "text_zh": "好评可以，但是少了一个菜这个事不能给餐厅好评。",
+                        "text_pinyin": "hǎopíng kěyǐ, dànshì shǎo le yí gè cài zhè ge shì bù néng gěi cāntīng hǎopíng.",
+                        "text_en": "I can give you a good review, but I can't give the restaurant one since a dish was missing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「对对对，餐厅和骑手的评分是分开的！」Lao Tao nods vigorously. In Chinese delivery apps, restaurant and driver ratings are separate. 分开的 means 'separate.' Fair distinction."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Food delivery (外卖, wàimài) is ubiquitous in Chinese cities, dominated by Meituan and Ele.me. Delivery drivers (骑手, qíshǒu) rely heavily on ratings (好评, hǎopíng). 辛苦了 (xīnkǔ le) is especially meaningful to service workers. Missing items are handled through in-app refunds (退款, tuìkuǎn)."
+    }
+}

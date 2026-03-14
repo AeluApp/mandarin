@@ -1,0 +1,89 @@
+{
+  "title": "The Friend Who Understands Silence",
+  "title_zh": "懂得沉默的朋友",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You and your close friend Xiaolan are sitting by the river, watching boats pass. You've been sitting in comfortable silence for a while.",
+    "setup_zh": "你和好朋友小兰坐在河边看船经过。你们已经安静地坐了好一会儿了。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你知道我最喜欢跟你在一起的什么吗？就是可以不说话。跟别人在一起不说话会觉得尴尬，但跟你不说话反而觉得很舒服。",
+        "text_pinyin": "Nǐ zhīdào wǒ zuì xǐhuan gēn nǐ zài yīqǐ de shénme ma? Jiù shì kěyǐ bù shuōhuà. Gēn biéren zài yīqǐ bù shuōhuà huì juéde gāngà, dàn gēn nǐ bù shuōhuà fǎn'ér juéde hěn shūfu.",
+        "text_en": "You know what I like most about being with you? That we don't have to talk. Being silent with others feels awkward, but being silent with you actually feels comfortable."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to this observation about your friendship.",
+        "options": [
+          {
+            "text_zh": "我也是这么觉得的。好的朋友不需要一直填满沉默。能一起安静地坐着，说明我们之间已经不需要用话来证明什么了。",
+            "text_pinyin": "Wǒ yě shì zhème juéde de. Hǎo de péngyou bù xūyào yīzhí tiánmǎn chénmò. Néng yīqǐ ānjìng de zuò zhe, shuōmíng wǒmen zhī jiān yǐjīng bù xūyào yòng huà lái zhèngmíng shénme le.",
+            "text_en": "I feel the same way. Good friends don't need to constantly fill the silence. Being able to sit quietly together means we no longer need words to prove anything between us.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Reciprocal and genuine — affirms the depth of the friendship."
+          },
+          {
+            "text_zh": "是吗？我以为你不说话是因为心情不好。",
+            "text_pinyin": "Shì ma? Wǒ yǐwéi nǐ bù shuōhuà shì yīnwèi xīnqíng bù hǎo.",
+            "text_en": "Really? I thought you were quiet because you're in a bad mood.",
+            "score": 0.0,
+            "feedback": "Misreads the moment — projects worry when she's expressing appreciation."
+          },
+          {
+            "text_zh": "我们聊点什么吧，太安静了。",
+            "text_pinyin": "Wǒmen liáo diǎn shénme ba, tài ānjìng le.",
+            "text_en": "Let's chat about something, it's too quiet.",
+            "score": 0.0,
+            "feedback": "Contradicts what she just said she values about the friendship."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "不需要用话来证明什么……对。我觉得这个世界太吵了，所有人都在说话，但真正有人愿意听的时候很少。你是那种愿意听的人，所以跟你在一起不用伪装。",
+        "text_pinyin": "Bù xūyào yòng huà lái zhèngmíng shénme…… duì. Wǒ juéde zhège shìjiè tài chǎo le, suǒyǒu rén dōu zài shuōhuà, dàn zhēnzhèng yǒu rén yuànyì tīng de shíhou hěn shǎo. Nǐ shì nà zhǒng yuànyì tīng de rén, suǒyǐ gēn nǐ zài yīqǐ bú yòng wěizhuāng.",
+        "text_en": "No need to prove anything with words... right. I think this world is too noisy. Everyone is talking, but rarely does someone truly listen. You're the kind of person who's willing to listen, so I don't have to pretend around you."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what her friendship means to you.",
+        "options": [
+          {
+            "text_zh": "能让一个人不用伪装，这也许是友谊能给的最好的东西。我也感谢你愿意在我面前做最真实的自己。这条河以后不管怎么变，我们能一起坐在这里就很好了。",
+            "text_pinyin": "Néng ràng yīge rén bú yòng wěizhuāng, zhè yěxǔ shì yǒuyì néng gěi de zuì hǎo de dōngxi. Wǒ yě gǎnxiè nǐ yuànyì zài wǒ miànqián zuò zuì zhēnshí de zìjǐ. Zhè tiáo hé yǐhòu bùguǎn zěnme biàn, wǒmen néng yīqǐ zuò zài zhèlǐ jiù hěn hǎo le.",
+            "text_en": "Letting someone drop the pretense — maybe that's the best gift friendship can offer. I'm also grateful you're willing to be your truest self around me. No matter how this river changes, being able to sit here together is enough.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Moving and mutual — returns the vulnerability she offered."
+          },
+          {
+            "text_zh": "你在跟别人在一起的时候会伪装吗？",
+            "text_pinyin": "Nǐ zài gēn biéren zài yīqǐ de shíhou huì wěizhuāng ma?",
+            "text_en": "Do you pretend around other people?",
+            "score": 0.0,
+            "feedback": "Probes instead of reciprocates — turns an intimate moment into an interview."
+          },
+          {
+            "text_zh": "对了，你今晚有什么安排？",
+            "text_pinyin": "Duì le, nǐ jīn wǎn yǒu shénme ānpái?",
+            "text_en": "By the way, do you have any plans tonight?",
+            "score": 0.0,
+            "feedback": "Abruptly shifts from depth to logistics."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我们能一起坐在这里就很好了……嗯。那就再坐一会儿吧，听听水的声音。什么都不用说。",
+        "text_pinyin": "Wǒmen néng yīqǐ zuò zài zhèlǐ jiù hěn hǎo le…… en. Nà jiù zài zuò yīhuìr ba, tīng tīng shuǐ de shēngyīn. Shénme dōu bú yòng shuō.",
+        "text_en": "Being able to sit here together is enough... yes. Let's sit a while longer then, listening to the water. Nothing needs to be said."
+      }
+    ],
+    "cultural_note": "In Chinese philosophy, particularly in Daoist thought, the concept of「此时无声胜有声」(silence speaks louder than words) values shared quiet as a mark of deep connection. Modern Chinese social life often emphasizes group activities and lively conversation, making friendships that allow comfortable silence especially precious. The image of two friends sitting by water evokes classical Chinese poetry's tradition of contemplative companionship."
+  }
+}

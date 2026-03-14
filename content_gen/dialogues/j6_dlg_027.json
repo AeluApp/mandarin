@@ -1,0 +1,89 @@
+{
+    "title": "The Shared Courtyard",
+    "title_zh": "共享的院子",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "Your friend Xiaohan has transformed an abandoned lot between apartment buildings into a community garden. Neighbors who never spoke before now share tools and recipes.",
+        "setup_zh": "朋友小含把楼间的一块废弃空地改造成了社区花园。以前从不说话的邻居现在互相分享工具和食谱。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道最让我惊讶的是什么吗？不是这块空地变成了花园，而是人变了。三楼的李阿姨和五楼的王叔以前从来不打招呼，现在每天早上一起浇花。一块共享的土地创造了一种共享的关系。物理空间改变了社会空间。",
+                "text_pinyin": "Nǐ zhīdào zuì ràng wǒ jīngyà de shì shénme ma? Bú shì zhè kuài kòngdì biàn chéng le huāyuán, ér shì rén biàn le. Sān lóu de Lǐ āyí hé wǔ lóu de Wáng shū yǐqián cónglái bù dǎ zhāohu, xiànzài měi tiān zǎoshang yīqǐ jiāo huā. Yī kuài gòngxiǎng de tǔdì chuàngzào le yī zhǒng gòngxiǎng de guānxì. Wùlǐ kōngjiān gǎibiàn le shèhuì kōngjiān.",
+                "text_en": "You know what surprised me most? Not that this empty lot became a garden, but that people changed. Auntie Li on the third floor and Uncle Wang on the fifth never used to greet each other — now they water flowers together every morning. Shared land created shared relationships. Physical space changed social space."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on how space shapes community.",
+                "options": [
+                    {
+                        "text_zh": "人际关系需要物理空间才能发生。高楼把人叠在一起，但没连在一起。花园给了陌生人自然开口的理由。社区不是组织出来的，是从合适的空间里长出来的。",
+                        "text_pinyin": "Rénjì guānxì xūyào wùlǐ kōngjiān cái néng fāshēng. Gāolóu bǎ rén dié zài yīqǐ, dàn méi lián zài yīqǐ. Huāyuán gěi le mòshēngrén zìrán kāikǒu de lǐyóu. Shèqū bú shì zǔzhī chūlái de, shì cóng héshì de kōngjiān lǐ zhǎng chūlái de.",
+                        "text_en": "Relationships need physical space to happen. High-rises stack people but don't connect them. A garden gives strangers a reason to naturally start talking. Community isn't organized — it grows from the right space.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Analytically sharp — connects micro-community building to urban planning principles."
+                    },
+                    {
+                        "text_zh": "你不怕物业来管吗？这块地有没有使用权的问题？",
+                        "text_pinyin": "Nǐ bú pà wùyè lái guǎn ma? Zhè kuài dì yǒu méiyǒu shǐyòng quán de wèntí?",
+                        "text_en": "Aren't you worried about the property management? Are there land-use issues?",
+                        "score": 0.0,
+                        "feedback": "Bureaucratic concern that misses the social achievement."
+                    },
+                    {
+                        "text_zh": "挺好的，但能持续多久呢？",
+                        "text_pinyin": "Tǐng hǎo de, dàn néng chíxù duō jiǔ ne?",
+                        "text_en": "It's nice, but how long can it last?",
+                        "score": 0.0,
+                        "feedback": "Pessimistic — undermines what she's built before appreciating it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "叠在一起但不连在一起——这正是我之前的感受。我在这栋楼住了三年，连隔壁邻居姓什么都不知道。我们共享墙壁，但不共享生活。这个花园做的事情其实很简单：它给了人一个一起做某件事的理由。不是一起消费，而是一起创造。",
+                "text_pinyin": "Dié zài yīqǐ dàn bù lián zài yīqǐ — zhè zhèng shì wǒ zhīqián de gǎnshòu. Wǒ zài zhè dòng lóu zhù le sān nián, lián gébì línjū xìng shénme dōu bù zhīdào. Wǒmen gòngxiǎng qiángbì, dàn bù gòngxiǎng shēnghuó. Zhège huāyuán zuò de shìqíng qíshí hěn jiǎndān: tā gěi le rén yīge yīqǐ zuò mǒu jiàn shì de lǐyóu. Bú shì yīqǐ xiāofèi, ér shì yīqǐ chuàngzào.",
+                "text_en": "Stacked together but not connected — that was exactly my feeling. I lived in this building for three years without knowing my next-door neighbor's surname. We share walls, but not lives. What this garden does is actually simple: it gives people a reason to do something together. Not consuming together, but creating together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the difference between consuming and creating together.",
+                "options": [
+                    {
+                        "text_zh": "这个区别太重要了。消费是并行的——我们坐在同一个餐厅但毫无交集。但创造是交互的——你必须协商、妥协、分享。一起种一棵树、修一堵矮墙，共同劳动产生的纽带比任何团建活动都强。",
+                        "text_pinyin": "Zhège qūbié tài zhòngyào le. Xiāofèi shì bìngxíng de — wǒmen zuò zài tóng yīge cāntīng dàn háo wú jiāojí. Dàn chuàngzào shì jiāohù de — nǐ bìxū xiéshāng, tuǒxié, fēnxiǎng. Yīqǐ zhòng yī kē shù, xiū yī dǔ ǎi qiáng, gòngtóng láodòng chǎnshēng de niǔdài bǐ rènhé tuánjiàn huódòng dōu qiáng.",
+                        "text_en": "That distinction is crucial. Consumption is parallel — sitting in the same restaurant without intersection. But creation is interactive — you must negotiate, compromise, share. Planting a tree together, repairing a wall together — bonds from shared labor are stronger than any team-building.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sociological distinction — consumption isolates, creation connects."
+                    },
+                    {
+                        "text_zh": "你有没有想过把这个经验推广到其他小区？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò bǎ zhège jīngyàn tuīguǎng dào qítā xiǎoqū?",
+                        "text_en": "Have you thought about expanding this to other neighborhoods?",
+                        "score": 0.0,
+                        "feedback": "Jumps to scaling before fully appreciating the local achievement."
+                    },
+                    {
+                        "text_zh": "但是每个人的审美不一样，种什么花不会吵架吗？",
+                        "text_pinyin": "Dànshì měi ge rén de shěnměi bù yíyàng, zhòng shénme huā bú huì chǎojià ma?",
+                        "text_en": "But everyone has different tastes — don't people argue about what flowers to plant?",
+                        "score": 0.0,
+                        "feedback": "Focuses on potential conflict rather than the community-building she's describing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在劳动中人是真实的……对。你无法假装种花。你的手脏了，你的膝盖疼了，你旁边的人帮你扶了一下花盆——这些真实的瞬间比任何社交软件上的互动都更有意义。也许我们不需要更多的社交平台，我们只需要更多的花园。",
+                "text_pinyin": "Zài láodòng zhōng rén shì zhēnshí de…… duì. Nǐ wúfǎ jiǎzhuāng zhòng huā. Nǐ de shǒu zāng le, nǐ de xīgài téng le, nǐ pángbiān de rén bāng nǐ fú le yíxià huāpén — zhèxiē zhēnshí de shùnjiān bǐ rènhé shèjiāo ruǎnjiàn shàng de hùdòng dōu gèng yǒu yìyì. Yěxǔ wǒmen bù xūyào gèng duō de shèjiāo píngtái, wǒmen zhǐ xūyào gèng duō de huāyuán.",
+                "text_en": "In labor, people are genuine... right. You can't fake planting flowers. Your hands get dirty, your knees hurt, the person beside you steadies a flower pot for you — these real moments are more meaningful than any interaction on social media. Maybe we don't need more social platforms. We just need more gardens."
+            }
+        ],
+        "cultural_note": "Community gardens (社区花园) are emerging in Chinese cities as grassroots responses to urban alienation. In traditional Chinese communities, shared courtyards (大院) naturally fostered neighborly bonds, but modern high-rise living has isolated people behind locked doors. The concept of「共建」(gòngjiàn, co-building) reflects a growing movement to reclaim shared spaces and rebuild community through collaborative action rather than consumption."
+    }
+}

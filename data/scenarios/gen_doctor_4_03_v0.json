@@ -1,0 +1,160 @@
+{
+    "title": "The Neighborhood Pharmacist",
+    "title_zh": "街角药店",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_4_03_v0",
+    "tree": {
+        "setup": "A small pharmacy tucked between a noodle shop and a locksmith, its green cross sign glowing softly in the evening light. Behind the counter, Auntie He — nobody calls her 'pharmacist' — has been dispensing medicine and unsolicited life advice in equal measure for thirty years. She can diagnose a cold from across the room and believes strongly that no problem can't be improved by ginger tea.",
+        "setup_zh": "一家小药店，夹在面馆和锁匠铺之间，绿色十字招牌在傍晚的灯光下柔和地发亮。柜台后面，何阿姨——没人叫她「药剂师」——三十年来一直以同等的热情发药和发表人生建议。她能隔着房间诊断出感冒，并且坚信没有什么问题是姜茶解决不了的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎呀，脸色不太好啊。怎么了？感冒了？",
+                "text_pinyin": "āiyā, liǎnsè bú tài hǎo a. zěnme le? gǎnmào le?",
+                "text_en": "Oh dear, you don't look well. What's wrong? Caught a cold?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you need.",
+                "options": [
+                    {
+                        "text_zh": "何阿姨，我有点头疼，想买一些感冒药。你推荐什么？",
+                        "text_pinyin": "Hé āyí, wǒ yǒudiǎn tóu téng, xiǎng mǎi yìxiē gǎnmào yào. nǐ tuījiàn shénme?",
+                        "text_en": "Auntie He, I have a slight headache and want to buy some cold medicine. What do you recommend?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Asking for her recommendation is the right move — Auntie He lives for this question."
+                    },
+                    {
+                        "text_zh": "我想买感冒药。",
+                        "text_pinyin": "wǒ xiǎng mǎi gǎnmào yào.",
+                        "text_en": "I want to buy cold medicine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. She'll ask follow-up questions whether you want her to or not."
+                    },
+                    {
+                        "text_zh": "有没有什么药让我马上好起来？",
+                        "text_pinyin": "yǒu méiyǒu shénme yào ràng wǒ mǎshàng hǎo qǐlái?",
+                        "text_en": "Is there anything that'll make me better right away?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie He laughs.「马上好？那是神仙药。」She'll offer you the next best thing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "头疼的话……你打喷嚏吗？流鼻涕吗？咳嗽呢？",
+                "text_pinyin": "tóu téng de huà……nǐ dǎ pēntì ma? liú bítì ma? késou ne?",
+                "text_en": "Headache... do you sneeze? Runny nose? Coughing?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your other symptoms.",
+                "options": [
+                    {
+                        "text_zh": "打喷嚏，流鼻涕，但是不咳嗽。鼻子堵得很厉害。",
+                        "text_pinyin": "dǎ pēntì, liú bítì, dànshì bù késou. bízi dǔ de hěn lìhai.",
+                        "text_en": "Sneezing, runny nose, but no cough. My nose is very stuffy.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect symptom inventory. Auntie He is already pulling two boxes from the shelf behind her."
+                    },
+                    {
+                        "text_zh": "鼻子不通气，有点难受。",
+                        "text_pinyin": "bízi bù tōng qì, yǒudiǎn nánshòu.",
+                        "text_en": "My nose is stuffed up — it's uncomfortable.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "不通气 — good vocabulary for congestion. She knows exactly which shelf to reach for."
+                    },
+                    {
+                        "text_zh": "反正就是不舒服。",
+                        "text_pinyin": "fǎnzhèng jiùshì bù shūfu.",
+                        "text_en": "Basically just feeling bad.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Auntie He peers at you more closely, then makes her own diagnosis. She hasn't been wrong in twelve years."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "那我推荐这个——治鼻塞和头疼的，效果很好。一天吃两次，早晚各一次。十八块。",
+                "text_pinyin": "nà wǒ tuījiàn zhège — zhì bísāi hé tóu téng de, xiàoguǒ hěn hǎo. yì tiān chī liǎng cì, zǎo wǎn gè yí cì. shíbā kuài.",
+                "text_en": "Then I recommend this — it treats congestion and headaches, works very well. Take it twice a day, morning and evening. 18 yuan."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to buy it and ask about side effects.",
+                "options": [
+                    {
+                        "text_zh": "好的，我买一盒。吃了会不会犯困？我明天还要上班。",
+                        "text_pinyin": "hǎo de, wǒ mǎi yì hé. chī le huì bú huì fàn kùn? wǒ míngtiān hái yào shàngbān.",
+                        "text_en": "OK, I'll take a box. Will it make me drowsy? I have work tomorrow.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about side effects is always smart. Auntie He nods — 「会有一点，但是不严重。」"
+                    },
+                    {
+                        "text_zh": "好，我买。",
+                        "text_pinyin": "hǎo, wǒ mǎi.",
+                        "text_en": "OK, I'll buy it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She trusts you trust her. The box is already in the bag."
+                    },
+                    {
+                        "text_zh": "有没有更便宜的？",
+                        "text_pinyin": "yǒu méiyǒu gèng piányi de?",
+                        "text_en": "Is there anything cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie He blinks slowly.「十八块买健康，比买奶茶便宜多了。」Eighteen yuan for health is cheaper than bubble tea."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "稍微有一点困。对了，回去煮点姜茶喝。生姜加红糖，比什么药都管用。",
+                "text_pinyin": "shāowēi yǒu yìdiǎn kùn. duìle, huíqù zhǔ diǎn jiāng chá hē. shēngjiāng jiā hóngtáng, bǐ shénme yào dōu guǎnyòng.",
+                "text_en": "It might make you a little drowsy. Oh, and make some ginger tea when you get home. Ginger with brown sugar — works better than any medicine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and say goodbye.",
+                "options": [
+                    {
+                        "text_zh": "谢谢何阿姨！我回去就煮姜茶。你比医生还细心。",
+                        "text_pinyin": "xièxie Hé āyí! wǒ huíqù jiù zhǔ jiāng chá. nǐ bǐ yīshēng hái xìxīn.",
+                        "text_en": "Thanks, Auntie He! I'll make ginger tea as soon as I get home. You're more attentive than a doctor.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The highest compliment. Auntie He waves you off with a proud smile and calls after you:「多穿点！」"
+                    },
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She watches you leave and mutters to herself:「又一个不穿够衣服的年轻人。」"
+                    },
+                    {
+                        "text_zh": "再见。",
+                        "text_pinyin": "zàijiàn.",
+                        "text_en": "Bye.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The green cross sign glows behind you. Auntie He is already diagnosing the next customer from across the room."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Neighborhood pharmacies (药店, yàodiàn) in China sell many medicines without prescription. Ginger tea with brown sugar (姜茶加红糖) is a beloved traditional cold remedy. Pharmacists often function as informal community health advisors."
+    }
+}

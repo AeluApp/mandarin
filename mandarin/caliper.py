@@ -5,17 +5,15 @@ Generates Caliper events from drill sessions for learning analytics interoperabi
 
 from __future__ import annotations
 
-import logging
 import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from . import db
-
-logger = logging.getLogger(__name__)
+from .settings import CANONICAL_URL
 
 CALIPER_CONTEXT = "http://purl.imsglobal.org/ctx/caliper/v1p2"
-CALIPER_BASE = "https://mandarin.app"
+CALIPER_BASE = CANONICAL_URL
 
 # Caliper event types
 EVENT_TYPES = {

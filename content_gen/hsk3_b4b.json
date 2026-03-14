@@ -1,0 +1,290 @@
+[
+  {
+    "id": "j3_observe_035",
+    "title": "The Bus Stop Conversation",
+    "title_zh": "公交站的对话",
+    "hsk_level": 3,
+    "text_zh": "等公交车的时候，旁边一个老奶奶忽然问我：「年轻人，现在几点了？」我看了手机告诉她。然后她又问：「十七路车多久来一趟？」我帮她查了一下，说大概还要等十分钟。她笑着说：「谢谢你。我不太会用手机。」我们就这样聊了起来。她告诉我她要去医院看老伴。她说她每个星期都去，坐公交车要四十分钟。我问她：「为什么不让儿子开车送您？」她说：「儿子很忙。而且我一个人坐公交车，还能跟人说说话。在医院的时候我一直在说话，坐公交车的时候也想说说话。」车来了。她上车以后，回头对我笑了笑。那个笑比较淡，但是很真。",
+    "text_pinyin": "Děng gōngjiāo chē de shíhou, pángbiān yí gè lǎo nǎinai hūrán wèn wǒ:「Niánqīng rén, xiànzài jǐ diǎn le?」Wǒ kàn le shǒujī gàosu tā. Ránhòu tā yòu wèn:「Shíqī lù chē duō jiǔ lái yí tàng?」Wǒ bāng tā chá le yíxià, shuō dàgài hái yào děng shí fēnzhōng. Tā xiàozhe shuō:「Xièxie nǐ. Wǒ bú tài huì yòng shǒujī.」Wǒmen jiù zhèyàng liáo le qǐlái. Tā gàosu wǒ tā yào qù yīyuàn kàn lǎobàn. Tā shuō tā měi gè xīngqī dōu qù, zuò gōngjiāo chē yào sìshí fēnzhōng. Wǒ wèn tā:「Wèishénme bú ràng érzi kāi chē sòng nín?」Tā shuō:「Érzi hěn máng. Érqiě wǒ yí gè rén zuò gōngjiāo chē, hái néng gēn rén shuō shuō huà. Zài yīyuàn de shíhou wǒ yìzhí zài shuō huà, zuò gōngjiāo chē de shíhou yě xiǎng shuō shuō huà.」Chē lái le. Tā shàng chē yǐhòu, huítóu duì wǒ xiào le xiào. Nàge xiào bǐjiào dàn, dànshì hěn zhēn.",
+    "text_en": "While waiting for the bus, an old grandmother suddenly asked me: 'Young man, what time is it?' I checked my phone and told her. Then she asked: 'How often does the 17 come?' I looked it up — about ten minutes. She smiled: 'Thank you. I'm not very good with phones.' We started chatting. She told me she was going to the hospital to see her husband. She goes every week — forty minutes by bus. I asked: 'Why not have your son drive you?' She said: 'My son is busy. Besides, riding the bus alone, I can still talk to people. At the hospital I'm always talking — on the bus I want to talk too.' The bus came. After boarding, she turned back and smiled at me. That smile was rather faint, but very genuine.",
+    "questions": [
+      {"type": "mc", "q_zh": "老奶奶要去哪里？", "q_en": "Where was the grandmother going?",
+       "options": [
+         {"text": "超市", "pinyin": "chāoshì", "text_en": "supermarket", "correct": false},
+         {"text": "医院看老伴", "pinyin": "yīyuàn kàn lǎobàn", "text_en": "hospital to see her husband", "correct": true},
+         {"text": "儿子家", "pinyin": "érzi jiā", "text_en": "son's home", "correct": false},
+         {"text": "公园", "pinyin": "gōngyuán", "text_en": "park", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "她为什么不让儿子送？", "q_en": "Why doesn't she have her son drive her?",
+       "options": [
+         {"text": "儿子没有车", "pinyin": "érzi méiyǒu chē", "text_en": "son has no car", "correct": false},
+         {"text": "她不想麻烦儿子", "pinyin": "tā bù xiǎng máfan érzi", "text_en": "doesn't want to trouble her son", "correct": false},
+         {"text": "儿子很忙，而且她想在路上跟人说话", "pinyin": "érzi hěn máng, érqiě tā xiǎng zài lù shàng gēn rén shuō huà", "text_en": "son is busy, and she wants to talk to people on the way", "correct": true},
+         {"text": "医院离家很近", "pinyin": "yīyuàn lí jiā hěn jìn", "text_en": "hospital is close to home", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得老奶奶的笑怎么样？", "q_en": "How does 'I' describe the grandmother's smile?",
+       "options": [
+         {"text": "很大声很开心", "pinyin": "hěn dà shēng hěn kāixīn", "text_en": "loud and happy", "correct": false},
+         {"text": "比较淡但是很真", "pinyin": "bǐjiào dàn dànshì hěn zhēn", "text_en": "rather faint but genuine", "correct": true},
+         {"text": "有点难过", "pinyin": "yǒudiǎn nánguò", "text_en": "a bit sad", "correct": false},
+         {"text": "跟别人一样", "pinyin": "gēn biéren yíyàng", "text_en": "same as everyone else's", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_urban_014",
+    "title": "The Bridge at Night",
+    "title_zh": "夜晚的桥",
+    "hsk_level": 3,
+    "text_zh": "我住的地方附近有一座旧桥。白天的时候，桥上全是车和人，很吵。但是晚上十点以后，桥变得比较安静了。有时候我会一个人走到桥上去。站在桥中间，能看到两边的城市灯光倒映在河水里。风从河面上吹过来，比较凉。我发现晚上来桥上的人都不赶时间。有人站在那里看风景，有人靠在栏杆上打电话。有一对情侣坐在桥头的台阶上，什么也不说，就看着对面的灯。我觉得每座城市都应该有一座这样的桥——白天是路，晚上是一个可以停下来想事情的地方。",
+    "text_pinyin": "Wǒ zhù de dìfang fùjìn yǒu yí zuò jiù qiáo. Báitiān de shíhou, qiáo shàng quán shì chē hé rén, hěn chǎo. Dànshì wǎnshang shí diǎn yǐhòu, qiáo biàn de bǐjiào ānjìng le. Yǒu shíhou wǒ huì yí gè rén zǒu dào qiáo shàng qù. Zhàn zài qiáo zhōngjiān, néng kàn dào liǎng biān de chéngshì dēngguāng dào yìng zài héshuǐ lǐ. Fēng cóng hémiàn shàng chuī guòlái, bǐjiào liáng. Wǒ fāxiàn wǎnshang lái qiáo shàng de rén dōu bù gǎn shíjiān. Yǒu rén zhàn zài nàlǐ kàn fēngjǐng, yǒu rén kào zài lángān shàng dǎ diànhuà. Yǒu yí duì qínglǚ zuò zài qiáotóu de táijiē shàng, shénme yě bù shuō, jiù kànzhe duìmiàn de dēng. Wǒ juéde měi zuò chéngshì dōu yīnggāi yǒu yí zuò zhèyàng de qiáo——báitiān shì lù, wǎnshang shì yí gè kěyǐ tíng xiàlái xiǎng shìqing de dìfang.",
+    "text_en": "Near where I live there's an old bridge. During the day it's packed with cars and people, very noisy. But after ten at night, it gets rather quiet. Sometimes I walk there alone. Standing in the middle, you can see city lights on both sides reflected in the river. The wind from the water is rather cool. I notice the people who come to the bridge at night are in no rush. Some stand and watch the scenery, some lean on the railing making phone calls. A couple sits on the steps at the bridge's end, saying nothing, just watching the lights across the way. I think every city should have a bridge like this — a road by day, a place to stop and think at night.",
+    "questions": [
+      {"type": "mc", "q_zh": "白天的桥怎么样？", "q_en": "What's the bridge like during the day?",
+       "options": [
+         {"text": "很安静", "pinyin": "hěn ānjìng", "text_en": "very quiet", "correct": false},
+         {"text": "全是车和人，很吵", "pinyin": "quán shì chē hé rén, hěn chǎo", "text_en": "packed with cars and people, noisy", "correct": true},
+         {"text": "没有人去", "pinyin": "méiyǒu rén qù", "text_en": "nobody goes there", "correct": false},
+         {"text": "在修路", "pinyin": "zài xiū lù", "text_en": "under construction", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "站在桥中间能看到什么？", "q_en": "What can you see from the middle of the bridge?",
+       "options": [
+         {"text": "远处的山", "pinyin": "yuǎnchù de shān", "text_en": "distant mountains", "correct": false},
+         {"text": "城市灯光倒映在河水里", "pinyin": "chéngshì dēngguāng dào yìng zài héshuǐ lǐ", "text_en": "city lights reflected in the river", "correct": true},
+         {"text": "很多船", "pinyin": "hěn duō chuán", "text_en": "many boats", "correct": false},
+         {"text": "对面的公园", "pinyin": "duìmiàn de gōngyuán", "text_en": "a park across", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得这座桥晚上是什么？", "q_en": "What does 'I' think the bridge is at night?",
+       "options": [
+         {"text": "一条路", "pinyin": "yì tiáo lù", "text_en": "a road", "correct": false},
+         {"text": "一个可以停下来想事情的地方", "pinyin": "yí gè kěyǐ tíng xiàlái xiǎng shìqing de dìfang", "text_en": "a place to stop and think", "correct": true},
+         {"text": "一个约会的地方", "pinyin": "yí gè yuēhuì de dìfang", "text_en": "a dating spot", "correct": false},
+         {"text": "一个拍照的地方", "pinyin": "yí gè pāi zhào de dìfang", "text_en": "a photo spot", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_comedy_007",
+    "title": "The Plant That Won't Die",
+    "title_zh": "死不了的植物",
+    "hsk_level": 3,
+    "text_zh": "我养植物一直养不好。仙人掌被我养死了，多肉也被我养死了。朋友们都说我是「植物杀手」。但是有一天，我在办公桌上发现了一盆绿色的小植物。不知道是谁放的。我决定试一试。第一个星期，我忘了浇水。它还活着。第二个星期，我浇了太多水。它还活着。第三个星期，我把它放在了没有阳光的角落里。它还活着。我越来越佩服这盆植物。一个月以后，我问同事：「这是什么植物？这么厉害？」同事看了一眼，笑着说：「那是塑料的。」",
+    "text_pinyin": "Wǒ yǎng zhíwù yìzhí yǎng bù hǎo. Xiānrénzhǎng bèi wǒ yǎng sǐ le, duōròu yě bèi wǒ yǎng sǐ le. Péngyoumen dōu shuō wǒ shì「zhíwù shāshǒu」. Dànshì yǒu yì tiān, wǒ zài bàngōng zhuō shàng fāxiàn le yì pén lǜsè de xiǎo zhíwù. Bù zhīdào shì shéi fàng de. Wǒ juédìng shì yí shì. Dì-yī gè xīngqī, wǒ wàng le jiāo shuǐ. Tā hái huózhe. Dì-èr gè xīngqī, wǒ jiāo le tài duō shuǐ. Tā hái huózhe. Dì-sān gè xīngqī, wǒ bǎ tā fàng zài le méiyǒu yángguāng de jiǎoluò lǐ. Tā hái huózhe. Wǒ yuè lái yuè pèifú zhè pén zhíwù. Yí gè yuè yǐhòu, wǒ wèn tóngshì:「Zhè shì shénme zhíwù? Zhème lìhai?」Tóngshì kàn le yì yǎn, xiàozhe shuō:「Nà shì sùliào de.」",
+    "text_en": "I've always been terrible at keeping plants alive. I killed a cactus, killed a succulent. Friends all call me the 'plant killer.' But one day I found a small green plant on my desk. No idea who put it there. I decided to try. Week one, I forgot to water it. Still alive. Week two, I watered too much. Still alive. Week three, I put it in a sunless corner. Still alive. I grew more and more impressed by this plant. A month later, I asked a colleague: 'What kind of plant is this? It's amazing!' The colleague glanced at it and laughed: 'That's plastic.'",
+    "questions": [
+      {"type": "mc", "q_zh": "朋友们叫「我」什么？", "q_en": "What do friends call 'me'?",
+       "options": [
+         {"text": "植物专家", "pinyin": "zhíwù zhuānjiā", "text_en": "plant expert", "correct": false},
+         {"text": "植物杀手", "pinyin": "zhíwù shāshǒu", "text_en": "plant killer", "correct": true},
+         {"text": "绿色达人", "pinyin": "lǜsè dárén", "text_en": "green thumb", "correct": false},
+         {"text": "花园先生", "pinyin": "huāyuán xiānsheng", "text_en": "Mr. Garden", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "为什么那盆植物一直不死？", "q_en": "Why didn't the plant die?",
+       "options": [
+         {"text": "因为它很强壮", "pinyin": "yīnwèi tā hěn qiángzhuàng", "text_en": "because it's strong", "correct": false},
+         {"text": "因为同事帮忙照顾", "pinyin": "yīnwèi tóngshì bāngmáng zhàogu", "text_en": "colleague helped take care of it", "correct": false},
+         {"text": "因为是塑料的", "pinyin": "yīnwèi shì sùliào de", "text_en": "because it's plastic", "correct": true},
+         {"text": "因为办公室的环境好", "pinyin": "yīnwèi bàngōngshì de huánjìng hǎo", "text_en": "good office environment", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」之前养死了什么植物？", "q_en": "What plants did 'I' kill before?",
+       "options": [
+         {"text": "玫瑰和兰花", "pinyin": "méigui hé lánhuā", "text_en": "roses and orchids", "correct": false},
+         {"text": "仙人掌和多肉", "pinyin": "xiānrénzhǎng hé duōròu", "text_en": "cactus and succulent", "correct": true},
+         {"text": "向日葵", "pinyin": "xiàngrìkuí", "text_en": "sunflower", "correct": false},
+         {"text": "竹子", "pinyin": "zhúzi", "text_en": "bamboo", "correct": false}
+       ], "difficulty": 0.2}
+    ]
+  },
+  {
+    "id": "j3_inst_007",
+    "title": "The Community Fridge",
+    "title_zh": "社区冰箱",
+    "hsk_level": 3,
+    "text_zh": "我们小区最近在大门口放了一个冰箱，叫做「共享冰箱」。规则很简单：如果你有多余的食物，可以放进去；如果你需要食物，可以免费拿。刚开始大家都不太好意思拿。一个星期以后，冰箱里的东西越来越多——有人放了水果，有人放了牛奶，有人放了自己做的饭菜。物业每天检查一次，把过期的食物拿走。有一个住在六楼的老奶奶，每天做饭的时候都会多做一份，放在冰箱里。她在饭盒上写：「今天的菜：红烧肉。不辣。」慢慢地，越来越多的人开始在饭盒上写东西。除了食物以外，那个冰箱里放满了温暖。",
+    "text_pinyin": "Wǒmen xiǎoqū zuìjìn zài dàmén kǒu fàng le yí gè bīngxiāng, jiào zuò「gòngxiǎng bīngxiāng」. Guīzé hěn jiǎndān: rúguǒ nǐ yǒu duōyú de shíwù, kěyǐ fàng jìnqù; rúguǒ nǐ xūyào shíwù, kěyǐ miǎnfèi ná. Gāng kāishǐ dàjiā dōu bú tài hǎoyìsi ná. Yí gè xīngqī yǐhòu, bīngxiāng lǐ de dōngxi yuè lái yuè duō——yǒu rén fàng le shuǐguǒ, yǒu rén fàng le niúnǎi, yǒu rén fàng le zìjǐ zuò de fàncài. Wùyè měi tiān jiǎnchá yí cì, bǎ guòqī de shíwù ná zǒu. Yǒu yí gè zhù zài liù lóu de lǎo nǎinai, měi tiān zuò fàn de shíhou dōu huì duō zuò yí fèn, fàng zài bīngxiāng lǐ. Tā zài fànhé shàng xiě:「Jīntiān de cài: hóngshāo ròu. Bú là.」Mànman de, yuè lái yuè duō de rén kāishǐ zài fànhé shàng xiě dōngxi. Chúle shíwù yǐwài, nàge bīngxiāng lǐ fàng mǎn le wēnnuǎn.",
+    "text_en": "Our complex recently placed a fridge at the main gate called the 'shared fridge.' The rules are simple: if you have extra food, put it in; if you need food, take it for free. At first people were too shy to take anything. After a week, the fridge was filling up — some added fruit, some milk, some home-cooked meals. Property management checks once daily and removes expired food. A grandmother on the sixth floor makes an extra portion whenever she cooks and puts it in the fridge. She writes on the container: 'Today's dish: braised pork. Not spicy.' Gradually, more and more people started writing on their containers. Besides food, that fridge is filled with warmth.",
+    "questions": [
+      {"type": "mc", "q_zh": "共享冰箱的规则是什么？", "q_en": "What are the shared fridge rules?",
+       "options": [
+         {"text": "只能放不能拿", "pinyin": "zhǐ néng fàng bù néng ná", "text_en": "can only add, not take", "correct": false},
+         {"text": "有多余的放进去，需要的免费拿", "pinyin": "yǒu duōyú de fàng jìnqù, xūyào de miǎnfèi ná", "text_en": "put in extras, take what you need for free", "correct": true},
+         {"text": "每人每天只能拿一个", "pinyin": "měi rén měi tiān zhǐ néng ná yí gè", "text_en": "one item per person per day", "correct": false},
+         {"text": "需要付钱", "pinyin": "xūyào fù qián", "text_en": "need to pay", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "六楼的老奶奶做了什么？", "q_en": "What does the 6th-floor grandmother do?",
+       "options": [
+         {"text": "每天检查冰箱", "pinyin": "měi tiān jiǎnchá bīngxiāng", "text_en": "checks the fridge daily", "correct": false},
+         {"text": "每天多做一份饭放进去", "pinyin": "měi tiān duō zuò yí fèn fàn fàng jìnqù", "text_en": "makes an extra portion daily and puts it in", "correct": true},
+         {"text": "帮忙打扫冰箱", "pinyin": "bāngmáng dǎsǎo bīngxiāng", "text_en": "helps clean the fridge", "correct": false},
+         {"text": "每天去拿食物", "pinyin": "měi tiān qù ná shíwù", "text_en": "takes food daily", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得冰箱里除了食物还有什么？", "q_en": "What does 'I' think the fridge holds besides food?",
+       "options": [
+         {"text": "饮料", "pinyin": "yǐnliào", "text_en": "drinks", "correct": false},
+         {"text": "温暖", "pinyin": "wēnnuǎn", "text_en": "warmth", "correct": true},
+         {"text": "纸条", "pinyin": "zhǐtiáo", "text_en": "notes", "correct": false},
+         {"text": "花", "pinyin": "huā", "text_en": "flowers", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_food_006",
+    "title": "The Soup Grandmother Taught Me",
+    "title_zh": "奶奶教的汤",
+    "hsk_level": 3,
+    "text_zh": "我小时候身体不太好，经常感冒。每次感冒的时候，奶奶都会给我煮一碗姜汤。她的做法比较特别：先把姜切成很薄的片，然后放一点红糖，最后加两个大枣。她说：「这个汤喝完身体会暖暖的，感冒好得比较快。」长大以后我自己也学会了做这个汤。每次觉得不舒服或者天气冷的时候，我就做一碗。但是不知道为什么，味道总是跟奶奶做的不太一样。后来我想明白了——不是味道不一样，是喝的时候旁边没有奶奶坐着。有些东西的味道，不在锅里，在人心里。",
+    "text_pinyin": "Wǒ xiǎo shíhou shēntǐ bú tài hǎo, jīngcháng gǎnmào. Měi cì gǎnmào de shíhou, nǎinai dōu huì gěi wǒ zhǔ yì wǎn jiāng tāng. Tā de zuòfǎ bǐjiào tèbié: xiān bǎ jiāng qiē chéng hěn báo de piàn, ránhòu fàng yìdiǎn hóngtáng, zuìhòu jiā liǎng gè dà zǎo. Tā shuō:「Zhège tāng hē wán shēntǐ huì nuǎnnuǎn de, gǎnmào hǎo de bǐjiào kuài.」Zhǎng dà yǐhòu wǒ zìjǐ yě xuéhuì le zuò zhège tāng. Měi cì juéde bù shūfu huòzhě tiānqì lěng de shíhou, wǒ jiù zuò yì wǎn. Dànshì bù zhīdào wèishénme, wèidào zǒng shì gēn nǎinai zuò de bú tài yíyàng. Hòulái wǒ xiǎng míngbai le——búshì wèidào bù yíyàng, shì hē de shíhou pángbiān méiyǒu nǎinai zuòzhe. Yǒuxiē dōngxi de wèidào, bú zài guō lǐ, zài rén xīnlǐ.",
+    "text_en": "When I was little my health wasn't great — I caught colds often. Every time I was sick, Grandmother would make me ginger soup. Her method was rather special: first slice ginger very thin, add some brown sugar, then two red dates. She'd say: 'After drinking this your body gets warm, and the cold gets better faster.' As an adult I learned to make it myself. Whenever I feel unwell or the weather's cold, I make a bowl. But somehow it never tastes quite like Grandmother's. Later I figured it out — it's not that the taste is different. It's that when I drink it, Grandmother isn't sitting beside me. Some things get their taste not from the pot, but from the heart.",
+    "questions": [
+      {"type": "mc", "q_zh": "奶奶做的姜汤里放了什么？", "q_en": "What did Grandmother put in the ginger soup?",
+       "options": [
+         {"text": "姜、白糖、苹果", "pinyin": "jiāng, báitáng, píngguǒ", "text_en": "ginger, white sugar, apple", "correct": false},
+         {"text": "姜、红糖、大枣", "pinyin": "jiāng, hóngtáng, dà zǎo", "text_en": "ginger, brown sugar, red dates", "correct": true},
+         {"text": "姜、蜂蜜、柠檬", "pinyin": "jiāng, fēngmì, níngméng", "text_en": "ginger, honey, lemon", "correct": false},
+         {"text": "姜、盐、葱", "pinyin": "jiāng, yán, cōng", "text_en": "ginger, salt, scallion", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」自己做的汤味道怎么样？", "q_en": "How does the soup 'I' make taste?",
+       "options": [
+         {"text": "跟奶奶做的一样", "pinyin": "gēn nǎinai zuò de yíyàng", "text_en": "same as Grandmother's", "correct": false},
+         {"text": "比奶奶做的好喝", "pinyin": "bǐ nǎinai zuò de hǎo hē", "text_en": "better than Grandmother's", "correct": false},
+         {"text": "总是跟奶奶做的不太一样", "pinyin": "zǒng shì gēn nǎinai zuò de bú tài yíyàng", "text_en": "always a bit different from Grandmother's", "correct": true},
+         {"text": "完全不好喝", "pinyin": "wánquán bù hǎo hē", "text_en": "not good at all", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得味道不一样的原因是什么？", "q_en": "Why does 'I' think it tastes different?",
+       "options": [
+         {"text": "材料不一样", "pinyin": "cáiliào bù yíyàng", "text_en": "different ingredients", "correct": false},
+         {"text": "做法不对", "pinyin": "zuòfǎ bú duì", "text_en": "wrong method", "correct": false},
+         {"text": "喝的时候旁边没有奶奶坐着", "pinyin": "hē de shíhou pángbiān méiyǒu nǎinai zuòzhe", "text_en": "Grandmother isn't sitting beside when drinking", "correct": true},
+         {"text": "用的锅不一样", "pinyin": "yòng de guō bù yíyàng", "text_en": "different pot", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j3_observe_036",
+    "title": "The Dog Walker's Route",
+    "title_zh": "遛狗的路线",
+    "hsk_level": 3,
+    "text_zh": "每天傍晚六点半，我都会在小区里遛狗。走了三年同一条路以后，我发现了一个有趣的事情——我遇到的人和事每天都不一样，但是路线从来没变过。比如，星期一我总是在花园的转角遇到刘奶奶和她的小白狗。星期三的傍晚，快递员的车会停在三号楼前面。星期五晚上，一楼的灯总是最先亮。有一天我决定换一条路走。结果什么都不一样了——遇到的人不认识了，花也不是我看惯了的那些。我走了十分钟就回来了。我忽然明白，习惯不是因为懒，而是因为那条路上有我在乎的东西。",
+    "text_pinyin": "Měi tiān bàngwǎn liù diǎn bàn, wǒ dōu huì zài xiǎoqū lǐ liú gǒu. Zǒu le sān nián tóng yì tiáo lù yǐhòu, wǒ fāxiàn le yí gè yǒuqù de shìqing——wǒ yù dào de rén hé shì měi tiān dōu bù yíyàng, dànshì lùxiàn cónglái méi biàn guò. Bǐrú, xīngqī yī wǒ zǒng shì zài huāyuán de zhuǎnjiǎo yù dào Liú nǎinai hé tā de xiǎo bái gǒu. Xīngqī sān de bàngwǎn, kuàidìyuán de chē huì tíng zài sān hào lóu qiánmiàn. Xīngqī wǔ wǎnshang, yī lóu de dēng zǒng shì zuì xiān liàng. Yǒu yì tiān wǒ juédìng huàn yì tiáo lù zǒu. Jiéguǒ shénme dōu bù yíyàng le——yù dào de rén bú rènshi le, huā yě búshì wǒ kàn guàn le de nàxiē. Wǒ zǒu le shí fēnzhōng jiù huílái le. Wǒ hūrán míngbai, xíguàn búshì yīnwèi lǎn, ér shì yīnwèi nà tiáo lù shàng yǒu wǒ zàihū de dōngxi.",
+    "text_en": "Every evening at six-thirty I walk my dog around the complex. After three years on the same route, I noticed something interesting — the people and events I encounter differ daily, but the route never changes. For example, on Mondays I always meet Grandma Liu and her little white dog at the garden corner. Wednesday evenings, the delivery truck parks in front of Building 3. Friday nights, the first-floor lights are always first to turn on. One day I decided to take a different route. Everything changed — didn't recognize anyone, the flowers weren't the ones I was used to. I came back after ten minutes. I suddenly understood: habit isn't laziness — it's because there are things I care about along that path.",
+    "questions": [
+      {"type": "mc", "q_zh": "「我」走了多久同一条路？", "q_en": "How long has 'I' walked the same route?",
+       "options": [
+         {"text": "一年", "pinyin": "yì nián", "text_en": "one year", "correct": false},
+         {"text": "三年", "pinyin": "sān nián", "text_en": "three years", "correct": true},
+         {"text": "五年", "pinyin": "wǔ nián", "text_en": "five years", "correct": false},
+         {"text": "半年", "pinyin": "bàn nián", "text_en": "half a year", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "换了路以后怎么样？", "q_en": "What happened after changing routes?",
+       "options": [
+         {"text": "发现了更好的路线", "pinyin": "fāxiàn le gèng hǎo de lùxiàn", "text_en": "found a better route", "correct": false},
+         {"text": "什么都不一样了，十分钟就回来了", "pinyin": "shénme dōu bù yíyàng le, shí fēnzhōng jiù huílái le", "text_en": "everything was different, came back in ten minutes", "correct": true},
+         {"text": "遇到了更多有趣的人", "pinyin": "yù dào le gèng duō yǒuqù de rén", "text_en": "met more interesting people", "correct": false},
+         {"text": "狗不想走了", "pinyin": "gǒu bù xiǎng zǒu le", "text_en": "dog didn't want to walk", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得习惯是因为什么？", "q_en": "What does 'I' think habits are about?",
+       "options": [
+         {"text": "因为懒", "pinyin": "yīnwèi lǎn", "text_en": "because of laziness", "correct": false},
+         {"text": "因为那条路上有在乎的东西", "pinyin": "yīnwèi nà tiáo lù shàng yǒu zàihū de dōngxi", "text_en": "because there are things I care about along that path", "correct": true},
+         {"text": "因为没有别的路可以走", "pinyin": "yīnwèi méiyǒu biéde lù kěyǐ zǒu", "text_en": "no other route available", "correct": false},
+         {"text": "因为狗喜欢那条路", "pinyin": "yīnwèi gǒu xǐhuan nà tiáo lù", "text_en": "the dog likes that route", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j3_mystery_006",
+    "title": "The Changing Menu",
+    "title_zh": "会变的菜单",
+    "hsk_level": 3,
+    "text_zh": "公司楼下的小饭馆有一个奇怪的习惯——菜单每天都不一样。不是换了菜，而是菜的价格每天都会变。有时候番茄炒蛋十二块，有时候只要八块。同事们都觉得很奇怪。我比较好奇，决定观察一下。我发现了一个规律：每到月底的时候，菜价就会变便宜；每到节假日之前，菜价也会降。我去问了老板。老板说：「月底大家钱不太够了，我把价格降一降。节假日之前很多人要买东西，手上也不宽裕。」她从来没有跟别人说过这个事情。我问她：「你不怕赚不到钱吗？」她说：「赚得少一点没关系。他们能吃得起饭，比较重要。」",
+    "text_pinyin": "Gōngsī lóu xià de xiǎo fànguǎn yǒu yí gè qíguài de xíguàn——càidān měi tiān dōu bù yíyàng. Búshì huàn le cài, ér shì cài de jiàgé měi tiān dōu huì biàn. Yǒu shíhou fānqié chǎo dàn shí'èr kuài, yǒu shíhou zhǐ yào bā kuài. Tóngshìmen dōu juéde hěn qíguài. Wǒ bǐjiào hàoqí, juédìng guānchá yíxià. Wǒ fāxiàn le yí gè guīlǜ: měi dào yuèdǐ de shíhou, cài jià jiù huì biàn piányi; měi dào jié jiàrì zhīqián, cài jià yě huì jiàng. Wǒ qù wèn le lǎobǎn. Lǎobǎn shuō:「Yuèdǐ dàjiā qián bú tài gòu le, wǒ bǎ jiàgé jiàng yí jiàng. Jié jiàrì zhīqián hěn duō rén yào mǎi dōngxi, shǒu shàng yě bù kuānyù.」Tā cónglái méiyǒu gēn biéren shuō guò zhège shìqing. Wǒ wèn tā:「Nǐ bú pà zhuàn bú dào qián ma?」Tā shuō:「Zhuàn de shǎo yìdiǎn méi guānxi. Tāmen néng chī de qǐ fàn, bǐjiào zhòngyào.」",
+    "text_en": "The small restaurant below our office has a strange habit — the menu is different every day. Not different dishes, but different prices. Sometimes scrambled eggs with tomato is twelve yuan, sometimes only eight. Colleagues found it odd. I was rather curious and decided to observe. I found a pattern: prices drop at month-end and before holidays. I asked the owner. She said: 'At month-end people are short on money, so I lower prices. Before holidays they need to buy things and funds are tight too.' She'd never told anyone about this. I asked: 'Aren't you afraid of losing money?' She said: 'Earning a little less is fine. What matters more is that they can afford to eat.'",
+    "questions": [
+      {"type": "mc", "q_zh": "菜单什么时候会变？", "q_en": "When does the menu change?",
+       "options": [
+         {"text": "每个星期一", "pinyin": "měi gè xīngqī yī", "text_en": "every Monday", "correct": false},
+         {"text": "月底和节假日之前菜价会降", "pinyin": "yuèdǐ hé jié jiàrì zhīqián cài jià huì jiàng", "text_en": "prices drop at month-end and before holidays", "correct": true},
+         {"text": "下雨的时候", "pinyin": "xià yǔ de shíhou", "text_en": "when it rains", "correct": false},
+         {"text": "客人多的时候", "pinyin": "kèrén duō de shíhou", "text_en": "when there are many customers", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "老板为什么降价？", "q_en": "Why does the owner lower prices?",
+       "options": [
+         {"text": "菜不新鲜了", "pinyin": "cài bù xīnxiān le", "text_en": "food isn't fresh", "correct": false},
+         {"text": "想跟别的饭馆竞争", "pinyin": "xiǎng gēn biéde fànguǎn jìngzhēng", "text_en": "competing with other restaurants", "correct": false},
+         {"text": "月底和节假日前大家钱不太够", "pinyin": "yuèdǐ hé jié jiàrì qián dàjiā qián bú tài gòu", "text_en": "people are short on money at month-end and before holidays", "correct": true},
+         {"text": "她想关门了", "pinyin": "tā xiǎng guān mén le", "text_en": "she wants to close", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "老板觉得什么比较重要？", "q_en": "What does the owner think is more important?",
+       "options": [
+         {"text": "赚很多钱", "pinyin": "zhuàn hěn duō qián", "text_en": "earning a lot", "correct": false},
+         {"text": "菜的味道好", "pinyin": "cài de wèidào hǎo", "text_en": "food tasting good", "correct": false},
+         {"text": "大家能吃得起饭", "pinyin": "dàjiā néng chī de qǐ fàn", "text_en": "everyone can afford to eat", "correct": true},
+         {"text": "开更大的店", "pinyin": "kāi gèng dà de diàn", "text_en": "opening a bigger restaurant", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  },
+  {
+    "id": "j3_identity_007",
+    "title": "The Language I Dream In",
+    "title_zh": "做梦用的语言",
+    "hsk_level": 3,
+    "text_zh": "我在国外住了五年。刚来的时候，我做梦都是用中文。后来慢慢地，梦里开始出现英文了。有一天我做了一个梦，梦里我跟一个人说英文，但是说到一半忽然不知道一个词怎么说了，就换成了中文。那个人听不懂，我就一边比划一边说。醒来以后，我觉得比较有意思。我跟朋友说了这件事，朋友问我：「那你现在想事情用什么语言？」我想了想，发现我想简单的事情用英文，但是想到家人和小时候的事情，还是会自动用中文。也许语言不只是工具——它还是我们放感情的地方。越深的感情，越用最早学会的语言来装。",
+    "text_pinyin": "Wǒ zài guówài zhù le wǔ nián. Gāng lái de shíhou, wǒ zuòmèng dōu shì yòng Zhōngwén. Hòulái mànman de, mèng lǐ kāishǐ chūxiàn Yīngwén le. Yǒu yì tiān wǒ zuò le yí gè mèng, mèng lǐ wǒ gēn yí gè rén shuō Yīngwén, dànshì shuō dào yíbàn hūrán bù zhīdào yí gè cí zěnme shuō le, jiù huàn chéng le Zhōngwén. Nàge rén tīng bù dǒng, wǒ jiù yìbiān bǐhua yìbiān shuō. Xǐng lái yǐhòu, wǒ juéde bǐjiào yǒuyìsi. Wǒ gēn péngyou shuō le zhè jiàn shì, péngyou wèn wǒ:「Nà nǐ xiànzài xiǎng shìqing yòng shénme yǔyán?」Wǒ xiǎng le xiǎng, fāxiàn wǒ xiǎng jiǎndān de shìqing yòng Yīngwén, dànshì xiǎng dào jiārén hé xiǎo shíhou de shìqing, háishi huì zìdòng yòng Zhōngwén. Yěxǔ yǔyán bù zhǐshì gōngjù——tā háishi wǒmen fàng gǎnqíng de dìfang. Yuè shēn de gǎnqíng, yuè yòng zuì zǎo xuéhuì de yǔyán lái zhuāng.",
+    "text_en": "I've lived abroad for five years. When I first arrived, I dreamed only in Chinese. Gradually, English started appearing in my dreams. One day I dreamed I was speaking English to someone, but halfway through I couldn't find a word and switched to Chinese. The person didn't understand, so I was gesturing while speaking. After waking up, I found it rather interesting. I told a friend, who asked: 'So what language do you think in now?' I thought about it and realized I think simple things in English, but when I think of family and childhood, Chinese comes automatically. Maybe language isn't just a tool — it's also where we keep our feelings. The deeper the emotion, the more it uses the language we learned first.",
+    "questions": [
+      {"type": "mc", "q_zh": "刚到国外的时候，做梦用什么语言？", "q_en": "What language did 'I' dream in when first abroad?",
+       "options": [
+         {"text": "英文", "pinyin": "Yīngwén", "text_en": "English", "correct": false},
+         {"text": "中文", "pinyin": "Zhōngwén", "text_en": "Chinese", "correct": true},
+         {"text": "两种都有", "pinyin": "liǎng zhǒng dōu yǒu", "text_en": "both", "correct": false},
+         {"text": "不记得了", "pinyin": "bú jìde le", "text_en": "doesn't remember", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "在梦里说英文说到一半怎么了？", "q_en": "What happened mid-conversation in the dream?",
+       "options": [
+         {"text": "对方走了", "pinyin": "duìfāng zǒu le", "text_en": "the other person left", "correct": false},
+         {"text": "忘了一个词，换成了中文", "pinyin": "wàng le yí gè cí, huàn chéng le Zhōngwén", "text_en": "forgot a word, switched to Chinese", "correct": true},
+         {"text": "醒了", "pinyin": "xǐng le", "text_en": "woke up", "correct": false},
+         {"text": "不想说英文了", "pinyin": "bù xiǎng shuō Yīngwén le", "text_en": "didn't want to speak English", "correct": false}
+       ], "difficulty": 0.3},
+      {"type": "mc", "q_zh": "「我」觉得语言是什么？", "q_en": "What does 'I' think language is?",
+       "options": [
+         {"text": "只是工具", "pinyin": "zhǐshì gōngjù", "text_en": "just a tool", "correct": false},
+         {"text": "放感情的地方", "pinyin": "fàng gǎnqíng de dìfang", "text_en": "a place to keep emotions", "correct": true},
+         {"text": "越多越好", "pinyin": "yuè duō yuè hǎo", "text_en": "the more the better", "correct": false},
+         {"text": "不太重要", "pinyin": "bú tài zhòngyào", "text_en": "not very important", "correct": false}
+       ], "difficulty": 0.4}
+    ]
+  },
+  {
+    "id": "j3_observe_037",
+    "title": "The Street Lamp Repairman",
+    "title_zh": "修路灯的人",
+    "hsk_level": 3,
+    "text_zh": "我下班回家的路上有一段路很黑，因为路灯坏了。我走了好几天，都是摸黑走。有一天晚上，我看到一个人站在路灯下面，开着一辆小车，车上有梯子。他正在修路灯。我站在旁边看了一会儿。他爬上梯子，把灯泡换了，灯就亮了。整条路忽然变得比较亮了。他从梯子上下来，看了看灯，满意地点了点头。我跟他说了一声谢谢。他笑着说：「不用谢我，这是我的工作。每天晚上城市里有很多灯坏了，我就开着车一盏一盏地修。」我看着他开着车去修下一盏灯，忽然觉得，这座城市的夜晚，是被这样的人一盏一盏地照亮的。",
+    "text_pinyin": "Wǒ xiàbān huí jiā de lù shàng yǒu yí duàn lù hěn hēi, yīnwèi lùdēng huài le. Wǒ zǒu le hǎo jǐ tiān, dōu shì mō hēi zǒu. Yǒu yì tiān wǎnshang, wǒ kàn dào yí gè rén zhàn zài lùdēng xiàmiàn, kāizhe yì liàng xiǎo chē, chē shàng yǒu tīzi. Tā zhèngzài xiū lùdēng. Wǒ zhàn zài pángbiān kàn le yíhuìr. Tā pá shàng tīzi, bǎ dēngpào huàn le, dēng jiù liàng le. Zhěng tiáo lù hūrán biàn de bǐjiào liàng le. Tā cóng tīzi shàng xiàlái, kàn le kàn dēng, mǎnyì de diǎn le diǎn tóu. Wǒ gēn tā shuō le yì shēng xièxie. Tā xiàozhe shuō:「Bú yòng xiè wǒ, zhè shì wǒ de gōngzuò. Měi tiān wǎnshang chéngshì lǐ yǒu hěn duō dēng huài le, wǒ jiù kāizhe chē yì zhǎn yì zhǎn de xiū.」Wǒ kànzhe tā kāizhe chē qù xiū xià yì zhǎn dēng, hūrán juéde, zhè zuò chéngshì de yèwǎn, shì bèi zhèyàng de rén yì zhǎn yì zhǎn de zhào liàng de.",
+    "text_en": "On my way home from work there's a stretch of dark road because the street light was broken. I walked it in the dark for several days. One evening I saw a man standing under the street lamp with a small truck and a ladder. He was fixing the light. I watched for a while. He climbed the ladder, changed the bulb, and the light came on. The whole road suddenly got rather bright. He climbed down, looked at the light, and nodded with satisfaction. I thanked him. He smiled: 'No need to thank me — it's my job. Every night there are many broken lights in the city. I just drive around fixing them one by one.' I watched him drive off to the next light and suddenly felt that this city's nights are lit up by people like him, one lamp at a time.",
+    "questions": [
+      {"type": "mc", "q_zh": "那段路为什么很黑？", "q_en": "Why was that stretch dark?",
+       "options": [
+         {"text": "没有路灯", "pinyin": "méiyǒu lùdēng", "text_en": "no street lights", "correct": false},
+         {"text": "路灯坏了", "pinyin": "lùdēng huài le", "text_en": "street light was broken", "correct": true},
+         {"text": "树太多了", "pinyin": "shù tài duō le", "text_en": "too many trees", "correct": false},
+         {"text": "在修路", "pinyin": "zài xiū lù", "text_en": "road construction", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "那个人的工作是什么？", "q_en": "What is the man's job?",
+       "options": [
+         {"text": "开出租车", "pinyin": "kāi chūzū chē", "text_en": "taxi driver", "correct": false},
+         {"text": "每天晚上修坏了的路灯", "pinyin": "měi tiān wǎnshang xiū huài le de lùdēng", "text_en": "fixing broken street lights every night", "correct": true},
+         {"text": "送快递", "pinyin": "sòng kuàidì", "text_en": "delivery", "correct": false},
+         {"text": "保安", "pinyin": "bǎo'ān", "text_en": "security", "correct": false}
+       ], "difficulty": 0.2},
+      {"type": "mc", "q_zh": "「我」觉得城市的夜晚是被谁照亮的？", "q_en": "Who does 'I' think lights up the city's nights?",
+       "options": [
+         {"text": "政府", "pinyin": "zhèngfǔ", "text_en": "the government", "correct": false},
+         {"text": "像修路灯的人这样的人", "pinyin": "xiàng xiū lùdēng de rén zhèyàng de rén", "text_en": "people like the street light repairman", "correct": true},
+         {"text": "住在城市里的人", "pinyin": "zhù zài chéngshì lǐ de rén", "text_en": "city residents", "correct": false},
+         {"text": "商店的灯", "pinyin": "shāngdiàn de dēng", "text_en": "shop lights", "correct": false}
+       ], "difficulty": 0.3}
+    ]
+  }
+]

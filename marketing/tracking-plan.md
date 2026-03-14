@@ -3,7 +3,7 @@
 ## GA4 Setup
 
 ### Property Configuration
-- Property name: Mandarin App
+- Property name: Aelu App
 - Currency: USD
 - Time zone: US/Eastern (or your local)
 - Enhanced measurement: ON (page views, scrolls, outbound clicks, site search)
@@ -19,7 +19,7 @@ Track these events in GA4 → Admin → Events → Create Event:
 | `cta_click` | Any CTA button click | `cta_location`, `cta_text` | Identify highest-performing CTAs |
 | `scroll_75` | User scrolls 75% of page | `page_path` | Content engagement depth |
 | `pricing_view` | Pricing section enters viewport | `variant` | How many visitors see pricing |
-| `outbound_click` | Click to app.mandarinapp.com | `link_url` | Track landing → app conversion |
+| `outbound_click` | Click to app.aeluapp.com | `link_url` | Track landing → app conversion |
 
 ### Post-Launch Events (add when app is live)
 
@@ -77,7 +77,7 @@ pricingObserver.observe(document.querySelector('.pricing'));
 ### Structure
 All external links to your landing pages must use UTM parameters:
 ```
-https://mandarinapp.com/?utm_source=SOURCE&utm_medium=MEDIUM&utm_campaign=CAMPAIGN&utm_content=CONTENT
+https://aeluapp.com/?utm_source=SOURCE&utm_medium=MEDIUM&utm_campaign=CAMPAIGN&utm_content=CONTENT
 ```
 
 ### UTM Taxonomy
@@ -93,42 +93,42 @@ https://mandarinapp.com/?utm_source=SOURCE&utm_medium=MEDIUM&utm_campaign=CAMPAI
 
 **Reddit posts:**
 ```
-https://mandarinapp.com/?utm_source=reddit&utm_medium=organic&utm_campaign=launch&utm_content=r-chineselanguage
-https://mandarinapp.com/?utm_source=reddit&utm_medium=organic&utm_campaign=value-post&utm_content=r-learnchinese
+https://aeluapp.com/?utm_source=reddit&utm_medium=organic&utm_campaign=launch&utm_content=r-chineselanguage
+https://aeluapp.com/?utm_source=reddit&utm_medium=organic&utm_campaign=value-post&utm_content=r-learnchinese
 ```
 
 **Blog post CTAs:**
 ```
-https://mandarinapp.com/?utm_source=blog&utm_medium=organic&utm_campaign=hsk3-study-plan&utm_content=bottom-cta
-https://mandarinapp.com/?utm_source=blog&utm_medium=organic&utm_campaign=anki-comparison&utm_content=bottom-cta
+https://aeluapp.com/?utm_source=blog&utm_medium=organic&utm_campaign=hsk3-study-plan&utm_content=bottom-cta
+https://aeluapp.com/?utm_source=blog&utm_medium=organic&utm_campaign=anki-comparison&utm_content=bottom-cta
 ```
 
 **Google Ads:**
 ```
-https://mandarinapp.com/hsk?utm_source=google&utm_medium=cpc&utm_campaign=hsk-study-intent&utm_content=ad-v1
-https://mandarinapp.com/srs?utm_source=google&utm_medium=cpc&utm_campaign=anki-alternative&utm_content=ad-v1
+https://aeluapp.com/hsk?utm_source=google&utm_medium=cpc&utm_campaign=hsk-study-intent&utm_content=ad-v1
+https://aeluapp.com/srs?utm_source=google&utm_medium=cpc&utm_campaign=anki-alternative&utm_content=ad-v1
 ```
 
 **Meta Ads:**
 ```
-https://mandarinapp.com/?utm_source=meta&utm_medium=paid&utm_campaign=cleanup-loop&utm_content=story-v1
-https://mandarinapp.com/?utm_source=meta&utm_medium=paid&utm_campaign=anti-duolingo&utm_content=feed-v1
+https://aeluapp.com/?utm_source=meta&utm_medium=paid&utm_campaign=cleanup-loop&utm_content=story-v1
+https://aeluapp.com/?utm_source=meta&utm_medium=paid&utm_campaign=anti-duolingo&utm_content=feed-v1
 ```
 
 **Product Hunt:**
 ```
-https://mandarinapp.com/?utm_source=producthunt&utm_medium=referral&utm_campaign=ph-launch
+https://aeluapp.com/?utm_source=producthunt&utm_medium=referral&utm_campaign=ph-launch
 ```
 
 **Hacker News:**
 ```
-https://mandarinapp.com/?utm_source=hackernews&utm_medium=referral&utm_campaign=showhn
+https://aeluapp.com/?utm_source=hackernews&utm_medium=referral&utm_campaign=showhn
 ```
 
 **Email sequence:**
 ```
-https://mandarinapp.com/?utm_source=email&utm_medium=email&utm_campaign=welcome-sequence&utm_content=email-1-cta
-https://mandarinapp.com/?utm_source=email&utm_medium=email&utm_campaign=welcome-sequence&utm_content=email-3-reader
+https://aeluapp.com/?utm_source=email&utm_medium=email&utm_campaign=welcome-sequence&utm_content=email-1-cta
+https://aeluapp.com/?utm_source=email&utm_medium=email&utm_campaign=welcome-sequence&utm_content=email-3-reader
 ```
 
 ---
@@ -219,13 +219,13 @@ fbq('track', 'Purchase', { value: 12.00, currency: 'USD' });
 ### Retargeting Ad Copy
 
 **Visited but didn't sign up:**
-> Still looking for a better way to study Chinese? Mandarin adapts to your weak spots — no deck-building required. Free to start.
+> Still looking for a better way to study Chinese? Aelu adapts to your weak spots — no deck-building required. Free to start.
 
 **Signed up but not activated:**
-> Your Mandarin account is waiting. Your first session takes 10 minutes and the system calibrates to your level. [Start now →]
+> Your Aelu account is waiting. Your first session takes 10 minutes and the system calibrates to your level. [Start now →]
 
 **Free user upgrade:**
-> You've been learning for [X] weeks. Ready for the full curriculum? HSK 3-6, all 27 drill types, speaking practice. $12/month.
+> You've been learning for [X] weeks. Ready for the full curriculum? HSK 3-6, all 27 drill types, speaking practice. $14.99/month.
 
 ---
 

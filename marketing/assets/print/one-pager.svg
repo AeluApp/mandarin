@@ -10,19 +10,19 @@
 
   <!-- ===== HEADER ===== -->
   <text x="60" y="80" font-family="'Noto Serif SC', serif" font-weight="700" font-size="56" fill="#946070">漫</text>
-  <text x="126" y="72" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="36" fill="#2A3650">Mandarin</text>
+  <text x="126" y="72" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="36" fill="#2A3650">Aelu</text>
   <text x="126" y="98" font-family="'Source Serif 4', serif" font-weight="400" font-size="16" fill="#5A6678">Patient Chinese study</text>
 
   <!-- Header horizon line -->
   <line x1="60" y1="130" x2="790" y2="130" stroke="#D8D0C4" stroke-width="1"/>
 
-  <!-- ===== SECTION 1: What is Mandarin? ===== -->
-  <text x="60" y="190" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">What is Mandarin?</text>
+  <!-- ===== SECTION 1: What is Aelu? ===== -->
+  <text x="60" y="190" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="28" fill="#2A3650">What is Aelu?</text>
 
   <!-- Accent line under heading -->
   <line x1="60" y1="202" x2="160" y2="202" stroke="#946070" stroke-width="1"/>
 
-  <text x="60" y="244" font-family="'Source Serif 4', serif" font-weight="400" font-size="15" fill="#2A3650">Mandarin is a study companion built for serious learners who want</text>
+  <text x="60" y="244" font-family="'Source Serif 4', serif" font-weight="400" font-size="15" fill="#2A3650">Aelu is a study companion built for serious learners who want</text>
   <text x="60" y="266" font-family="'Source Serif 4', serif" font-weight="400" font-size="15" fill="#2A3650">clarity over gamification. Three things set it apart:</text>
 
   <!-- Bullet 1 -->
@@ -32,7 +32,7 @@
 
   <!-- Bullet 2 -->
   <rect x="80" y="362" width="4" height="4" fill="#946070"/>
-  <text x="100" y="368" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Hand-curated content by a real Mandarin learner.</text>
+  <text x="100" y="368" font-family="'Source Serif 4', serif" font-weight="600" font-size="15" fill="#2A3650">Hand-curated content by a real Aelu learner.</text>
   <text x="100" y="390" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">Every item reviewed for accuracy, register, and real-world relevance.</text>
 
   <!-- Bullet 3 -->
@@ -78,12 +78,12 @@
 
   <!-- Pro tier -->
   <text x="80" y="952" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="22" fill="#2A3650">Pro</text>
-  <text x="140" y="952" font-family="'Source Serif 4', serif" font-weight="400" font-size="18" fill="#946070">$12/month</text>
+  <text x="140" y="952" font-family="'Source Serif 4', serif" font-weight="400" font-size="18" fill="#946070">$14.99/month</text>
   <text x="80" y="976" font-family="'Source Serif 4', serif" font-weight="400" font-size="14" fill="#5A6678">HSK 1-9. Reading, listening, media shelf. Diagnostics and forecasting.</text>
 
   <!-- ===== FOOTER ===== -->
   <line x1="60" y1="1030" x2="790" y2="1030" stroke="#D8D0C4" stroke-width="1"/>
 
   <text x="60" y="1066" font-family="'Noto Serif SC', serif" font-weight="700" font-size="20" fill="#946070">漫</text>
-  <text x="88" y="1062" font-family="'Source Serif 4', serif" font-weight="400" font-size="13" fill="#5A6678">mandarin.app</text>
+  <text x="88" y="1062" font-family="'Source Serif 4', serif" font-weight="400" font-size="13" fill="#5A6678">aelu.app</text>
 </svg>

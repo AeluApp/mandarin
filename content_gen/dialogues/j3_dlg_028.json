@@ -1,0 +1,87 @@
+{
+  "title": "Talking About a Dream",
+  "title_zh": "聊梦想",
+  "register": "casual",
+  "scenario_type": "daily_life",
+  "difficulty": 2,
+  "tree": {
+    "setup": "You and your friend Xiao Fang are lying on the grass in the park on a warm afternoon, looking up at the clouds. The conversation turns to dreams and wishes.",
+    "setup_zh": "温暖的下午，你和朋友小方躺在公园的草地上看云。聊天的话题转向了梦想和愿望。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你小时候有没有什么特别的梦想？我小时候想当画家，画很多很多美丽的风景。",
+        "text_pinyin": "Nǐ xiǎo shíhou yǒu méiyǒu shénme tèbié de mèngxiǎng? Wǒ xiǎo shíhou xiǎng dāng huàjiā, huà hěn duō hěn duō měilì de fēngjǐng.",
+        "text_en": "Did you have a special dream when you were little? I wanted to be a painter as a kid — painting lots and lots of beautiful scenery."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your childhood dream.",
+        "options": [
+          {
+            "text_zh": "我小时候想开书店，每天被书包围着。现在做了别的工作，但还是爱看书。",
+            "text_pinyin": "Wǒ xiǎo shíhou xiǎng kāi shūdiàn, měi tiān bèi shū bāowéi zhe. Xiànzài zuò le bié de gōngzuò, dàn háishi ài kàn shū.",
+            "text_en": "I wanted to open a bookstore as a kid, surrounded by books every day. Ended up doing something else, but I still love reading.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "Shares openly and asks about her dream — a beautiful mutual exchange."
+          },
+          {
+            "text_zh": "我没什么特别的梦想。",
+            "text_pinyin": "Wǒ méi shénme tèbié de mèngxiǎng.",
+            "text_en": "I didn't have any particular dream.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Misses a chance to share something personal."
+          },
+          {
+            "text_zh": "小时候的梦想都不现实。",
+            "text_pinyin": "Xiǎo shíhou de mèngxiǎng dōu bú xiànshí.",
+            "text_en": "Childhood dreams are all unrealistic.",
+            "score": 1,
+            "register": "casual",
+            "feedback": "Cynical — kills the warm mood."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "开书店多好啊！有时候还画一画，不过只是自己开心画的，不是专业的。我觉得梦想不一定要实现，保留着那份喜欢就很好了。",
+        "text_pinyin": "Kāi shūdiàn duō hǎo a! Yǒu shíhou hái huà yī huà, búguò zhǐ shì zìjǐ kāixīn huà de, bú shì zhuānyè de. Wǒ juéde mèngxiǎng bù yīdìng yào shíxiàn, bǎoliú zhe nà fèn xǐhuan jiù hěn hǎo le.",
+        "text_en": "A bookstore, how lovely! I still paint sometimes, just for fun — nothing professional. I think dreams don't have to come true; keeping that love alive is good enough."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her philosophy about dreams.",
+        "options": [
+          {
+            "text_zh": "对。你还在画画，我还在看书，那份喜欢还在，就够了。",
+            "text_pinyin": "Duì. Nǐ hái zài huàhuà, wǒ hái zài kàn shū, nà fèn xǐhuan hái zài, jiù gòu le.",
+            "text_en": "Right. You're still painting, I'm still reading — that love's still there. That's enough.",
+            "score": 3,
+            "register": "casual",
+            "feedback": "And poetic — perfectly matches the gentle mood."
+          },
+          {
+            "text_zh": "是啊，你说得对。",
+            "text_pinyin": "Shì a, nǐ shuō de duì.",
+            "text_en": "Yeah, you're right.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Agrees but doesn't add depth."
+          },
+          {
+            "text_zh": "我觉得还是应该努力实现梦想。",
+            "text_pinyin": "Wǒ juéde háishi yīnggāi nǔlì shíxiàn mèngxiǎng.",
+            "text_en": "I think you should still try to achieve your dreams.",
+            "score": 2,
+            "register": "casual",
+            "feedback": "Misses the nuance of her point about keeping the love alive."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "In Chinese culture, lying on grass and talking about dreams is a rare moment of openness among friends. The idea that 「保留着那份喜欢就很好了」 (keeping that love alive is enough) reflects a gentle, non-pressured approach to aspirations that is increasingly valued."
+  },
+  "hsk_level": 3
+}

@@ -1,5 +1,5 @@
 /**
- * ab-test.js — Lightweight A/B testing utility for Mandarin landing pages.
+ * ab-test.js — Lightweight A/B testing utility for Aelu landing pages.
  * No external dependencies. Under 100 lines.
  *
  * Usage:
@@ -7,7 +7,7 @@
  *   // 1. Test which variant a user is assigned to:
  *   var headline = abTest('hero-headline', ['A', 'B']);
  *   if (headline === 'A') {
- *     document.getElementById('hero-h1').textContent = 'Patient Mandarin study.';
+ *     document.getElementById('hero-h1').textContent = 'Patient Chinese study.';
  *   } else {
  *     document.getElementById('hero-h1').textContent = 'Learn Chinese with honest data.';
  *   }

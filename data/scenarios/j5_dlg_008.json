@@ -1,0 +1,90 @@
+{
+  "title": "A Book That Changed Everything",
+  "title_zh": "改变我的一本书",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're browsing a used bookstore with your friend Yichen. He picks up a worn copy of a book and holds it like an old friend.",
+    "setup_zh": "你和朋友一辰在一家旧书店里。他拿起一本翻旧了的书，像握着一位老朋友。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这本书我大学的时候读了三遍。那时候我什么都不确定——专业选得对不对，以后要做什么。读完以后我没有找到答案，但不知道为什么，我不那么害怕了。",
+        "text_pinyin": "Zhè běn shū wǒ dàxué de shíhou dú le sān biàn. Nà shíhou wǒ shénme dōu bú quèdìng — zhuānyè xuǎn de duì bú duì, yǐhòu yào zuò shénme. Dú wán yǐhòu wǒ méiyǒu zhǎo dào dá'àn, dàn bù zhīdào wèi shénme, wǒ bú nàme hàipà le.",
+        "text_en": "I read this book three times in university. Back then I was uncertain about everything — whether I'd chosen the right major, what I'd do with my life. After reading it I didn't find answers, but somehow, I wasn't as afraid anymore."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Ask about what made the book special.",
+        "options": [
+          {
+            "text_zh": "不是给你答案，而是让你不再害怕没有答案——这种书才是真正有力量的。是什么内容让你有这种感觉？",
+            "text_pinyin": "Bú shì gěi nǐ dá'àn, ér shì ràng nǐ bú zài hàipà méiyǒu dá'àn — zhè zhǒng shū cái shì zhēnzhèng yǒu lìliang de. Shì shénme nèiróng ràng nǐ yǒu zhè zhǒng gǎnjué?",
+            "text_en": "Not giving you answers, but making you no longer afraid of not having them — that's what truly powerful books do. What was it about the content that made you feel that way?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Reframing — recognizes the book's real gift and asks to go deeper."
+          },
+          {
+            "text_zh": "这本书叫什么名字？我回去在网上搜搜看。",
+            "text_pinyin": "Zhè běn shū jiào shénme míngzì? Wǒ huíqù zài wǎng shàng sōu sōu kàn.",
+            "text_en": "What's this book called? I'll look it up online when I get home.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He's sharing a formative emotional experience, and you respond with an information request. The question isn't what it's called — it's what it did to him."
+          },
+          {
+            "text_zh": "我不太喜欢读书，我更喜欢看视频。",
+            "text_pinyin": "Wǒ bú tài xǐhuan dú shū, wǒ gèng xǐhuan kàn shìpín.",
+            "text_en": "I don't really like reading, I prefer watching videos.",
+            "score": 0.0,
+            "feedback": "Dismisses his emotional connection to books."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "书里有一句话我到现在还记得：「你不需要看到整条路，只需要看到下一步就够了。」那时候的我总想把未来全部想清楚，但其实没有人能做到。",
+        "text_pinyin": "Shū lǐ yǒu yī jù huà wǒ dào xiànzài hái jìde: 'Nǐ bù xūyào kàn dào zhěng tiáo lù, zhǐ xūyào kàn dào xià yī bù jiù gòu le.' Nà shíhou de wǒ zǒng xiǎng bǎ wèilái quánbù xiǎng qīngchǔ, dàn qíshí méiyǒu rén néng zuòdào.",
+        "text_en": "There's a line in the book I still remember: 'You don't need to see the whole road, just the next step is enough.' Back then I always wanted to figure out the entire future, but nobody can actually do that."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share how a book or idea has affected you.",
+        "options": [
+          {
+            "text_zh": "我也有过类似的经历。有一本书让我明白，不完美是正常的，不需要什么都做到最好才开始行动。有时候一句话就够了，在对的时刻读到，整个人都不一样了。",
+            "text_pinyin": "Wǒ yě yǒu guò lèisì de jīnglì. Yǒu yī běn shū ràng wǒ míngbai, bù wánměi shì zhèngcháng de, bù xūyào shénme dōu zuòdào zuì hǎo cái kāishǐ xíngdòng. Yǒu shíhou yī jù huà jiù gòu le, zài duì de shíkè dú dào, zhěnggè rén dōu bù yíyàng le.",
+            "text_en": "I've had a similar experience. A book helped me understand that imperfection is normal — you don't have to be perfect at everything before you start. Sometimes one sentence is enough. Read at the right moment, it changes you entirely.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Genuine and reciprocal — shares vulnerability while affirming his experience."
+          },
+          {
+            "text_zh": "现在谁还看纸质书啊，都用电子书了。",
+            "text_pinyin": "Xiànzài shéi hái kàn zhǐzhì shū a, dōu yòng diànzǐ shū le.",
+            "text_en": "Who still reads paper books? Everyone uses e-books now.",
+            "score": 0.0,
+            "feedback": "Dismisses the tangible, emotional connection to physical books."
+          },
+          {
+            "text_zh": "你大学读的什么专业？",
+            "text_pinyin": "Nǐ dàxué dú de shénme zhuānyè?",
+            "text_en": "What did you major in at university?",
+            "score": 0.0,
+            "feedback": "Diverts from the meaningful thread about books and growth."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "在对的时刻读到……没错。也许这就是旧书店存在的意义吧。每本旧书都在等一个需要它的人。来，这本我买给你，也许你也会需要它。",
+        "text_pinyin": "Zài duì de shíkè dú dào…… méi cuò. Yěxǔ zhè jiù shì jiù shūdiàn cúnzài de yìyì ba. Měi běn jiù shū dōu zài děng yīge xūyào tā de rén. Lái, zhè běn wǒ mǎi gěi nǐ, yěxǔ nǐ yě huì xūyào tā.",
+        "text_en": "Read at the right moment... exactly. Maybe that's what used bookstores are for. Every old book is waiting for someone who needs it. Here, I'll buy this one for you — maybe you'll need it too."
+      }
+    ],
+    "cultural_note": "Used bookstores (旧书店) hold a special place in Chinese literary culture, especially in university towns. The practice of gifting books carries emotional weight — it's sharing a piece of your inner world. Many Chinese readers describe a single book or sentence that arrived at exactly the right moment in their lives, a concept resonant with the Buddhist idea of「缘分」(yuánfèn, fated connection)."
+  }
+}

@@ -1,0 +1,160 @@
+{
+    "title": "The Sunday Phone Call",
+    "title_zh": "星期天的电话",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_4_03_v0",
+    "tree": {
+        "setup": "A lazy Sunday afternoon. Your friend Xiao Chen hasn't been seen in three weeks — no messages, no calls, nothing. This is unusual for someone who normally sends you food photos at least twice a day. You decide to call and check in, half expecting to discover he's either fallen in love, started a business, or both.",
+        "setup_zh": "一个慵懒的星期天下午。你的朋友小陈已经三个星期没有消息了——没有微信，没有电话，什么都没有。对于一个平时至少每天给你发两次美食照片的人来说，这很不正常。你决定打个电话看看，半猜他不是恋爱了就是创业了，或者两个都有。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂？哎，好久没联系了！最近忙什么呢？",
+                "text_pinyin": "wèi? āi, hǎo jiǔ méi liánxì le! zuìjìn máng shénme ne?",
+                "text_en": "Hello? Hey, long time no contact! What've you been busy with?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask what he's been up to.",
+                "options": [
+                    {
+                        "text_zh": "就是啊！三个星期都没有你的消息。你没事吧？是不是发生了什么？",
+                        "text_pinyin": "jiùshì a! sān gè xīngqī dōu méiyǒu nǐ de xiāoxi. nǐ méi shì ba? shìbúshì fāshēng le shénme?",
+                        "text_en": "Exactly! Three weeks without a word from you. Are you OK? Did something happen?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Concerned but not intrusive — the tone lands perfectly. Xiao Chen laughs, which means the news is probably good."
+                    },
+                    {
+                        "text_zh": "你怎么不回我消息啊？",
+                        "text_pinyin": "nǐ zěnme bù huí wǒ xiāoxi a?",
+                        "text_en": "Why didn't you reply to my messages?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A bit accusatory but fair. He owed you at least a food photo."
+                    },
+                    {
+                        "text_zh": "好久不见。",
+                        "text_pinyin": "hǎo jiǔ bújiàn.",
+                        "text_en": "Long time no see.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Classic opener but lacks the warmth of actual concern. He'll fill in the blanks himself."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，我没事！其实是我换了工作，刚开始特别忙，每天加班到很晚。现在好一点了。你最近怎么样？",
+                "text_pinyin": "hāhā, wǒ méi shì! qíshí shì wǒ huàn le gōngzuò, gāng kāishǐ tèbié máng, měi tiān jiā bān dào hěn wǎn. xiànzài hǎo yìdiǎn le. nǐ zuìjìn zěnmeyàng?",
+                "text_en": "Haha, I'm fine! Actually I changed jobs — at first it was super busy, overtime every day until late. It's better now. How about you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your news and suggest meeting up.",
+                "options": [
+                    {
+                        "text_zh": "换工作了？恭喜啊！我这边还是老样子。周末有空吗？出来吃个饭，你给我讲讲新工作。",
+                        "text_pinyin": "huàn gōngzuò le? gōngxǐ a! wǒ zhèbiān háishì lǎo yàngzi. zhōumò yǒu kòng ma? chūlái chī gè fàn, nǐ gěi wǒ jiǎngjiǎng xīn gōngzuò.",
+                        "text_en": "Changed jobs? Congratulations! Same old for me. Free this weekend? Let's grab a meal — tell me about the new job.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Congratulations plus a meal invite — the friendship maintenance manual. Xiao Chen is already thinking about restaurants."
+                    },
+                    {
+                        "text_zh": "我挺好的。周末见个面吧？",
+                        "text_pinyin": "wǒ tǐng hǎo de. zhōumò jiàn gè miàn ba?",
+                        "text_en": "I'm good. Meet up this weekend?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient scheduling. He agrees immediately."
+                    },
+                    {
+                        "text_zh": "还行。",
+                        "text_pinyin": "hái xíng.",
+                        "text_en": "Not bad.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The conversational equivalent of a shrug. Xiao Chen waits for more that doesn't come."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好啊！周六中午怎么样？我知道一家新开的湖南菜馆，评价特别好。",
+                "text_pinyin": "hǎo a! zhōuliù zhōngwǔ zěnmeyàng? wǒ zhīdào yì jiā xīn kāi de Húnán cài guǎn, píngjià tèbié hǎo.",
+                "text_en": "Sure! How about Saturday noon? I know a new Hunan restaurant that has great reviews."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his suggestion.",
+                "options": [
+                    {
+                        "text_zh": "周六中午可以！湖南菜我喜欢，不过别太辣的啊。老地方见还是你发个地址给我？",
+                        "text_pinyin": "zhōuliù zhōngwǔ kěyǐ! Húnán cài wǒ xǐhuān, búguò bié tài là de a. lǎo dìfāng jiàn háishì nǐ fā gè dìzhǐ gěi wǒ?",
+                        "text_en": "Saturday noon works! I love Hunan food, but not too spicy though. Meet at the usual spot or send me the address?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Confirming, setting a spice preference, and arranging logistics — the complete response. The food photos will resume soon."
+                    },
+                    {
+                        "text_zh": "好，周六见！",
+                        "text_pinyin": "hǎo, zhōuliù jiàn!",
+                        "text_en": "Great, see you Saturday!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple and happy. He'll text you the address."
+                    },
+                    {
+                        "text_zh": "湖南菜太辣了吧……",
+                        "text_pinyin": "Húnán cài tài là le ba……",
+                        "text_en": "Isn't Hunan food too spicy...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Chen sighs. He's been saving this restaurant recommendation for three weeks."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "放心，我们可以点不辣的。我把地址微信发给你。对了，你还是那个手机号吧？",
+                "text_pinyin": "fàngxīn, wǒmen kěyǐ diǎn bú là de. wǒ bǎ dìzhǐ Wēixìn fā gěi nǐ. duìle, nǐ háishì nàge shǒujī hào ba?",
+                "text_en": "Don't worry, we can order mild dishes. I'll WeChat you the address. By the way, you still have the same phone number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and say goodbye.",
+                "options": [
+                    {
+                        "text_zh": "对，还是这个号。那周六见！对了，这次该你请客了吧？",
+                        "text_pinyin": "duì, háishì zhège hào. nà zhōuliù jiàn! duìle, zhè cì gāi nǐ qǐngkè le ba?",
+                        "text_en": "Yep, same number. See you Saturday! By the way, it's your turn to treat, right?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The eternal Chinese friendship question: whose turn to pay? Xiao Chen groans, but you can hear the grin."
+                    },
+                    {
+                        "text_zh": "对。周六见，别再消失了！",
+                        "text_pinyin": "duì. zhōuliù jiàn, bié zài xiāoshī le!",
+                        "text_en": "Yes. See you Saturday — don't disappear again!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A gentle warning wrapped in friendship. He promises not to."
+                    },
+                    {
+                        "text_zh": "好，拜拜。",
+                        "text_pinyin": "hǎo, bàibài.",
+                        "text_en": "OK, bye-bye.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Quick sign-off. The food photos will return by Wednesday — that's the real sign of reconciliation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese friendships, 好久不见 (hǎo jiǔ bújiàn, 'long time no see') is always followed by a meal plan. The question of 谁请客 (shéi qǐngkè, 'who treats') is a core social ritual — friends keep an informal running tally."
+    }
+}

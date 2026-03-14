@@ -1,0 +1,87 @@
+{
+    "title": "A Neighborhood Clean-Up",
+    "title_zh": "社区大扫除",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "The neighborhood committee organizes a community clean-up day. You meet your neighbor, Uncle Deng, while picking up trash in the park.",
+        "setup_zh": "社区居委会组织大扫除。你在公园捡垃圾时遇到了邻居邓叔叔。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也来参加大扫除啦！真好，年轻人能参加，我们都很高兴。这边的垃圾有点多，我们一起捡吧。",
+                "text_pinyin": "Nǐ yě lái cānjiā dà sǎochú la! Zhēn hǎo, niánqīng rén néng cānjiā, wǒmen dōu hěn gāoxìng. Zhè biān de lājī yǒudiǎn duō, wǒmen yīqǐ jiǎn ba.",
+                "text_en": "You came for the clean-up too! Great — we're all happy when young people join. There's quite a bit of trash over here, let's pick it up together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond positively.",
+                "options": [
+                    {
+                        "text_zh": "当然来了！大家一起动手，公园很快就干净了。邓叔叔，您每次都参加吗？",
+                        "text_pinyin": "Dāngrán lái le! Dàjiā yīqǐ dòngshǒu, gōngyuán hěn kuài jiù gānjìng le. Dèng shūshu, nín měi cì dōu cānjiā ma?",
+                        "text_en": "Of course! With everyone working together, the park will be clean in no time. Uncle Deng, do you come every time?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and shows respect for his regular participation."
+                    },
+                    {
+                        "text_zh": "嗯，我来帮忙。",
+                        "text_pinyin": "En, wǒ lái bāngmáng.",
+                        "text_en": "Yeah, I'm here to help.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Good but brief."
+                    },
+                    {
+                        "text_zh": "居委会让我来的。",
+                        "text_pinyin": "Jūwěihuì ràng wǒ lái de.",
+                        "text_en": "The neighborhood committee told me to come.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Makes it sound forced rather than voluntary."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每次都来！这个公园我天天在这里散步，当然要维护好。你看，捡完以后是不是漂亮多了？",
+                "text_pinyin": "Měi cì dōu lái! Zhège gōngyuán wǒ tiāntiān zài zhèlǐ sànbù, dāngrán yào wéihù hǎo. Nǐ kàn, jiǎn wán yǐhòu shì bú shì piàoliang duō le?",
+                "text_en": "Every time! I walk in this park every day, so of course I want to keep it nice. Look — isn't it much prettier after cleaning up?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the results of the clean-up.",
+                "options": [
+                    {
+                        "text_zh": "确实！干净的公园让人心情都变好了。邓叔叔，您对这个社区真用心。我以后也常来帮忙。",
+                        "text_pinyin": "Quèshí! Gānjìng de gōngyuán ràng rén xīnqíng dōu biàn hǎo le. Dèng shūshu, nín duì zhège shèqū zhēn yòngxīn. Wǒ yǐhòu yě cháng lái bāngmáng.",
+                        "text_en": "Definitely! A clean park lifts everyone's spirits. Uncle Deng, you really care about this community. I'll come help more often too.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Appreciative and commits to future involvement."
+                    },
+                    {
+                        "text_zh": "是好看多了。",
+                        "text_pinyin": "Shì hǎokàn duō le.",
+                        "text_en": "It does look better.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees but doesn't commit."
+                    },
+                    {
+                        "text_zh": "人们不应该乱扔垃圾。",
+                        "text_pinyin": "Rénmen bù yīnggāi luàn rēng lājī.",
+                        "text_en": "People shouldn't litter.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Complains rather than appreciates the effort."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Community clean-up days (大扫除) are organized regularly in Chinese neighborhoods. Active participation shows community spirit. Elders who regularly volunteer earn deep respect. The phrase 「用心」 (to put one's heart into something) is a meaningful compliment."
+    },
+    "hsk_level": 3
+}

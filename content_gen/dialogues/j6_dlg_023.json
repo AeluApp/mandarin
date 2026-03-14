@@ -1,0 +1,89 @@
+{
+    "title": "The Village That Became a City",
+    "title_zh": "变成城市的村庄",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You visit your friend Xiaogang's hometown in Guangdong. What was once a fishing village is now surrounded by high-rise developments. He shows you the one remaining ancestral hall.",
+        "setup_zh": "你去广东探访朋友小刚的老家。这里曾经是一个渔村，现在被高楼包围了。他带你看唯一剩下的祠堂。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个祠堂是我们村最后一栋旧建筑了。三年前他们差点也拆了，是几个老人跪在推土机前面才保住的。那些开发商不明白，对我们来说这不只是一栋房子——我们家族五代人的名字都刻在里面。",
+                "text_pinyin": "Zhège cítáng shì wǒmen cūn zuìhòu yī dòng jiù jiànzhù le. Sān nián qián tāmen chàdiǎn yě chāi le, shì jǐ ge lǎorén guì zài tuītǔjī qiánmiàn cái bǎo zhù de. Nàxiē kāifāshāng bù míngbai, duì wǒmen lái shuō zhè bù zhǐ shì yī dòng fángzi — wǒmen jiāzú wǔ dài rén de míngzi dōu kè zài lǐmiàn.",
+                "text_en": "This ancestral hall is the last old building in our village. Three years ago they nearly demolished it too — a few elders had to kneel in front of the bulldozers to save it. The developers don't understand — to us this isn't just a building. Five generations of our family's names are carved inside."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the significance of the ancestral hall.",
+                "options": [
+                    {
+                        "text_zh": "五代人的名字——那不是建筑，是根。拆掉它等于拆掉一个家族的记忆。城市化追求效率和利润，但有些东西不能用经济指标衡量。祠堂可能不值钱，但它承载着社区的身份认同。",
+                        "text_pinyin": "Wǔ dài rén de míngzi — nà bú shì jiànzhù, shì gēn. Chāi diào tā děngyú chāi diào yīge jiāzú de jìyì. Chéngshìhuà zhuīqiú xiàolǜ hé lìrùn, dàn yǒuxiē dōngxi bù néng yòng jīngjì zhǐbiāo héngliáng. Cítáng kěnéng bù zhíqián, dàn tā chéngzài zhe shèqū de shēnfèn rèntóng.",
+                        "text_en": "Five generations of names — that's not architecture, that's roots. Tearing it down tears down a family's memory. Urbanization pursues efficiency, but some things can't be measured economically. A hall may not be worth money, but it carries a community's identity.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Framing — separates economic value from cultural and existential value."
+                    },
+                    {
+                        "text_zh": "但是旧房子住着不方便，新房子条件更好。",
+                        "text_pinyin": "Dànshì jiù fángzi zhù zhe bù fāngbiàn, xīn fángzi tiáojiàn gèng hǎo.",
+                        "text_en": "But old buildings aren't convenient to live in — new ones have better conditions.",
+                        "score": 0.0,
+                        "feedback": "The hall isn't about living conditions but identity."
+                    },
+                    {
+                        "text_zh": "政府应该把它保护起来，申请文物。",
+                        "text_pinyin": "Zhèngfǔ yīnggāi bǎ tā bǎohù qǐlái, shēnqǐng wénwù.",
+                        "text_en": "The government should protect it and apply for heritage status.",
+                        "score": 0.0,
+                        "feedback": "Bureaucratic solution — doesn't engage with the emotional and philosophical dimension."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "承载身份认同……你说到点子上了。你知道最让我心疼的是什么吗？不是建筑被拆了，而是建筑被拆以后，年轻人连这个地方曾经是什么都不知道了。我侄子出生的时候，村子已经变成了小区。他不知道这里曾经有海风、有渔船、有晒鱼干的架子。记忆的断层比建筑的断层更可怕。",
+                "text_pinyin": "Chéngzài shēnfèn rèntóng…… nǐ shuō dào diǎnzi shàng le. Nǐ zhīdào zuì ràng wǒ xīnténg de shì shénme ma? Bú shì jiànzhù bèi chāi le, ér shì jiànzhù bèi chāi yǐhòu, niánqīng rén lián zhège dìfang céngjīng shì shénme dōu bù zhīdào le. Wǒ zhízǐ chūshēng de shíhou, cūnzi yǐjīng biàn chéng le xiǎoqū. Tā bù zhīdào zhèlǐ céngjīng yǒu hǎifēng, yǒu yúchuán, yǒu shài yúgān de jiàzi. Jìyì de duàncéng bǐ jiànzhù de duàncéng gèng kěpà.",
+                "text_en": "Carrying identity... you've hit the point. You know what pains me most? Not that the buildings were demolished, but that after they were, young people don't even know what this place once was. When my nephew was born, the village had already become an apartment complex. He doesn't know this place once had sea breeze, fishing boats, and racks for drying fish. The rupture of memory is more frightening than the rupture of buildings."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the concept of memory rupture.",
+                "options": [
+                    {
+                        "text_zh": "你在做记忆的守护者——用故事把这个地方的样子传下去。建筑可以被拆，但只要有人还讲这些故事，渔村就还活着。你侄子不记得海风，但你可以告诉他。",
+                        "text_pinyin": "Nǐ zài zuò jìyì de shǒuhù zhě — yòng gùshi bǎ zhège dìfang de yàngzi chuán xià qù. Jiànzhù kěyǐ bèi chāi, dàn zhǐyào yǒu rén hái jiǎng zhèxiē gùshi, yúcūn jiù hái huó zhe. Nǐ zhízǐ bú jìde hǎifēng, dàn nǐ kěyǐ gàosù tā.",
+                        "text_en": "You're a guardian of memory — passing down what this place was through stories. Buildings can be torn down, but as long as someone tells these stories, the fishing village lives. Your nephew doesn't remember the sea breeze, but you can tell him.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Elevates his role from mourner to guardian — transforms grief into purpose."
+                    },
+                    {
+                        "text_zh": "时代在发展，这是不可避免的。",
+                        "text_pinyin": "Shídài zài fāzhǎn, zhè shì bù kě bìmiǎn de.",
+                        "text_en": "Times are developing, this is unavoidable.",
+                        "score": 0.0,
+                        "feedback": "Fatalistic — denies the possibility and value of preservation."
+                    },
+                    {
+                        "text_zh": "你可以拍些照片和视频记录下来。",
+                        "text_pinyin": "Nǐ kěyǐ pāi xiē zhàopiàn hé shìpín jìlù xiàlái.",
+                        "text_en": "You could take photos and videos to document it.",
+                        "score": 0.0,
+                        "feedback": "Practical but insufficient — documentation is different from living memory."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "记忆的守护者……嗯。来，我带你进去看看。里面的墙上刻着我太爷爷的名字。他一辈子是渔民，可能从来没想过他的孙子会站在高楼环绕的祠堂里，跟一个朋友讲述他的故事。但他的名字还在。只要名字还在，根就还在。",
+                "text_pinyin": "Jìyì de shǒuhù zhě…… en. Lái, wǒ dài nǐ jìn qù kànkan. Lǐmiàn de qiáng shàng kè zhe wǒ tàiyéye de míngzi. Tā yíbèizi shì yúmín, kěnéng cónglái méi xiǎng guò tā de sūnzi huì zhàn zài gāolóu huánrào de cítáng lǐ, gēn yīge péngyou jiǎngshù tā de gùshi. Dàn tā de míngzi hái zài. Zhǐyào míngzi hái zài, gēn jiù hái zài.",
+                "text_en": "Guardian of memory... yes. Come, I'll take you inside. My great-grandfather's name is carved on the wall inside. He was a fisherman his whole life. He probably never imagined his grandson would stand in an ancestral hall surrounded by high-rises, telling his story to a friend. But his name is still there. As long as the name remains, the roots remain."
+            }
+        ],
+        "cultural_note": "Ancestral halls (祠堂, cítáng) are central to Chinese clan culture, particularly in Guangdong and Fujian provinces. They serve as sites of ancestor worship, family record-keeping, and community gatherings. China's rapid urbanization has demolished countless such structures. The phrase「记忆的断层」(rupture of memory) captures a widespread concern that urbanization erases not just buildings but the intergenerational transmission of local identity, dialect, customs, and family history."
+    }
+}

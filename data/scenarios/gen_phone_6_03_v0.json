@@ -1,0 +1,160 @@
+{
+    "title": "The Long-Distance Cartographer",
+    "title_zh": "长途制图师",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_phone_6_03_v0",
+    "tree": {
+        "setup": "Your apartment, evening. The city sounds have softened to the hum of distant traffic and the chirp of a neighbor's cricket cage. You're calling your friend Lao Xu, who moved to Chengdu eighteen months ago to start a hotpot restaurant — a dream he'd been marinating in for years. You haven't spoken in three months, and the gap has filled with the kind of small guilt that accumulates between good friends who keep meaning to call. His number rings four times before he picks up, and when he does, you can hear kitchen sounds — the sizzle of oil, the clatter of ladles, the ambient roar of a restaurant in full service.",
+        "setup_zh": "你的公寓，傍晚。城市的声音已柔和成远处车流的嗡鸣和邻居蛐蛐笼的叫声。你打电话给老朋友老徐，他十八个月前搬到成都开了一家火锅店——一个他酝酿多年的梦想。你们已经三个月没通过话了，这段间隙填满了那种好朋友之间总想着要打但还没打的小小愧疚。他的号码响了四声才接，接起来的时候你能听到厨房的声音——油的滋滋声、勺子的叮当声、满场营业的餐厅的环境轰鸣。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂？哎呀，老朋友！你总算想起我了！等一下，我换个安静的地方——（厨房声变小）好了，后面仓库里清静。怎么样，最近过得好吗？",
+                "text_pinyin": "wèi? āiyā, lǎo péngyou! nǐ zǒngsuàn xiǎng qǐ wǒ le! děng yíxià, wǒ huàn gè ānjìng de dìfāng——(chúfáng shēng biàn xiǎo) hǎo le, hòumiàn cāngkù lǐ qīngjìng. zěnmeyàng, zuìjìn guò de hǎo ma?",
+                "text_en": "Hello? Hey, old friend! You finally remembered me! Hold on, let me find a quiet spot — (kitchen sounds fade) OK, the storage room in the back. How's it going? Life treating you well?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize for not calling and catch up.",
+                "options": [
+                    {
+                        "text_zh": "老徐！实在不好意思，三个月没打电话了。最近工作上的事情一件接一件，等我反应过来日子就这么过去了。听你那边的动静，生意不错啊？火锅店开得怎么样了？",
+                        "text_pinyin": "Lǎo Xú! shízài bù hǎoyìsi, sān gè yuè méi dǎ diànhuà le. zuìjìn gōngzuò shàng de shìqing yí jiàn jiē yí jiàn, děng wǒ fǎnyìng guòlái rìzi jiù zhème guòqù le. tīng nǐ nàbiān de dòngjìng, shēngyì búcuò a? huǒguō diàn kāi de zěnmeyàng le?",
+                        "text_en": "Lao Xu! I'm really sorry — three months without calling. Work stuff kept piling up and before I knew it the days just flew by. Sounds busy on your end — business is good? How's the hotpot restaurant going?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuine apology without over-explaining, plus immediate interest in his life — Lao Xu's voice warms. The storage room echoes with friendship rekindled."
+                    },
+                    {
+                        "text_zh": "好久没打了！你还好吗？",
+                        "text_pinyin": "hǎo jiǔ méi dǎ le! nǐ hái hǎo ma?",
+                        "text_en": "It's been so long! You doing OK?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Light but warm. He'll fill you in."
+                    },
+                    {
+                        "text_zh": "嗯，最近太忙了。",
+                        "text_pinyin": "ǹg, zuìjìn tài máng le.",
+                        "text_en": "Yeah, been too busy.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Everyone is busy. Lao Xu doesn't take it personally — but he'd prefer more enthusiasm after three months."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "别客气了！我也是忙得脚不沾地，不怪你。火锅店还不错，现在基本每天都满座了。不过说实话，开餐厅比我想象的累多了——不只是做菜，还有管人、管账、管卫生检查，一个人要当十个人用。上个月还被隔壁的饭店投诉说我们的排烟太大……你呢？还在那个公司吗？",
+                "text_pinyin": "bié kèqi le! wǒ yě shì máng de jiǎo bú zhān dì, bú guài nǐ. huǒguō diàn hái búcuò, xiànzài jīběn měi tiān dōu mǎn zuò le. búguò shuō shíhuà, kāi cāntīng bǐ wǒ xiǎngxiàng de lèi duō le——bùzhǐ shì zuò cài, hái yǒu guǎn rén, guǎn zhàng, guǎn wèishēng jiǎnchá, yí gè rén yào dāng shí gè rén yòng. shàng gè yuè hái bèi gébì de fàndiàn tóusù shuō wǒmen de pái yān tài dà……nǐ ne? hái zài nàge gōngsī ma?",
+                "text_en": "Don't apologize! I've been running around like crazy too — can't blame you. Hotpot shop is doing well, basically full every night now. But honestly, running a restaurant is way harder than I imagined — it's not just cooking, it's managing staff, finances, health inspections, one person doing ten jobs. Last month the restaurant next door even complained our exhaust was too much... What about you? Still at the same company?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your news and show interest in his challenges.",
+                "options": [
+                    {
+                        "text_zh": "每天满座！太厉害了老徐。管理的事确实烦人，不过能做到天天满座说明你的味道肯定没问题。排烟的事怎么解决了？我还在原来的公司，不过刚升了职，现在带一个小团队。压力大了不少，但是比之前有意思。对了，我在考虑五月份去成都出差，到时候一定要去你店里坐坐。",
+                        "text_pinyin": "měi tiān mǎn zuò! tài lìhai le Lǎo Xú. guǎnlǐ de shì quèshí fán rén, búguò néng zuò dào tiāntiān mǎn zuò shuōmíng nǐ de wèidào kěndìng méi wèntí. pái yān de shì zěnme jiějué le? wǒ hái zài yuánlái de gōngsī, búguò gāng shēng le zhí, xiànzài dài yí gè xiǎo tuánduì. yālì dà le bùshǎo, dànshì bǐ zhīqián yǒu yìsi. duì le, wǒ zài kǎolǜ wǔ yuè fèn qù Chéngdū chū chāi, dào shíhòu yídìng yào qù nǐ diàn lǐ zuòzuo.",
+                        "text_en": "Full every night! That's amazing Lao Xu. Management stuff is annoying, but being full every day means your food is definitely on point. How did the exhaust issue get resolved? I'm still at the same company but just got promoted — leading a small team now. More pressure, but more interesting than before. By the way, I'm considering a business trip to Chengdu in May — I definitely want to visit your place.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Affirmation, specific question about his challenge, reciprocal sharing, and a future visit plan — Lao Xu's voice brightens. The storage room suddenly feels less like storage."
+                    },
+                    {
+                        "text_zh": "厉害！我还在原来的公司，升职了。五月份可能去成都，到时候去你那吃饭。",
+                        "text_pinyin": "lìhai! wǒ hái zài yuánlái de gōngsī, shēng zhí le. wǔ yuè fèn kěnéng qù Chéngdū, dào shíhòu qù nǐ nà chī fàn.",
+                        "text_en": "Impressive! Still at the same company, got promoted. Might go to Chengdu in May — I'll eat at your place.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Good news shared efficiently. He'll want details."
+                    },
+                    {
+                        "text_zh": "我还是老样子。开餐厅确实辛苦吧。",
+                        "text_pinyin": "wǒ háishì lǎo yàngzi. kāi cāntīng quèshí xīnkǔ ba.",
+                        "text_en": "I'm the same as always. Running a restaurant must be tough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Understated. He senses there's more to tell and gently prods."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "升职了？恭喜恭喜！带团队可比自己干累多了——我现在管六个员工，深有体会。排烟的事最后花了两万多装了一套新的净化设备，心疼死了。不过装了以后确实好多了，隔壁也不说了。你五月份真要来成都的话，太好了！住我家就行，别住酒店。我带你吃那些游客找不到的小馆子——你知道的，成都最好吃的东西都在巷子里。",
+                "text_pinyin": "shēng zhí le? gōngxǐ gōngxǐ! dài tuánduì kě bǐ zìjǐ gàn lèi duō le——wǒ xiànzài guǎn liù gè yuángōng, shēn yǒu tǐhuì. pái yān de shì zuìhòu huā le liǎng wàn duō zhuāng le yí tào xīn de jìnghuà shèbèi, xīnténg sǐ le. búguò zhuāng le yǐhòu quèshí hǎo duō le, gébì yě bù shuō le. nǐ wǔ yuè fèn zhēn yào lái Chéngdū de huà, tài hǎo le! zhù wǒ jiā jiù xíng, bié zhù jiǔdiàn. wǒ dài nǐ chī nàxiē yóukè zhǎo bú dào de xiǎo guǎnzi——nǐ zhīdào de, Chéngdū zuì hǎo chī de dōngxi dōu zài xiàngzi lǐ.",
+                "text_en": "Promoted? Congratulations! Leading a team is way harder than working solo — I manage six employees now, I know the feeling. The exhaust thing ended up costing over 20,000 for a new purification system — painful. But it works and the neighbor stopped complaining. If you really come to Chengdu in May, that's great! Stay at my place, no hotel needed. I'll take you to the little spots tourists can't find — you know, the best food in Chengdu is always in the alleys."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his invitation and deepen the conversation.",
+                "options": [
+                    {
+                        "text_zh": "住你家太客气了，我住酒店就行，但是你带我吃巷子里的馆子我绝对不拒绝！两万块的净化设备确实肉疼，不过这是长期投资，以后再也不用担心邻居投诉了。对了老徐，你当初辞职出来开店，这一年多下来有没有后悔过？我有时候也想做点自己的事情，但是又不敢迈出那一步。",
+                        "text_pinyin": "zhù nǐ jiā tài kèqi le, wǒ zhù jiǔdiàn jiù xíng, dànshì nǐ dài wǒ chī xiàngzi lǐ de guǎnzi wǒ juéduì bù jùjué! liǎng wàn kuài de jìnghuà shèbèi quèshí ròu téng, búguò zhè shì chángqī tóuzī, yǐhòu zài yě búyòng dānxīn línjū tóusù le. duì le Lǎo Xú, nǐ dāngchū cí zhí chūlái kāi diàn, zhè yì nián duō xià lái yǒu méiyǒu hòuhuǐ guò? wǒ yǒu shíhòu yě xiǎng zuò diǎn zìjǐ de shìqing, dànshì yòu bù gǎn mài chū nà yí bù.",
+                        "text_en": "Staying at your place is too generous — I'll get a hotel, but the alley restaurants I absolutely won't refuse! 20K for purification equipment stings, but it's a long-term investment — no more neighbor complaints. By the way Lao Xu, looking back after a year and a half since you quit to start the restaurant, any regrets? Sometimes I think about doing my own thing too, but I can't quite take that step.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframing his expense as investment, then asking a genuinely vulnerable question — the conversation deepens from catch-up to the kind of talk that reminds both friends why they call each other."
+                    },
+                    {
+                        "text_zh": "巷子里的馆子好！我到时候一定来。你后悔过吗，辞职开店？",
+                        "text_pinyin": "xiàngzi lǐ de guǎnzi hǎo! wǒ dào shíhòu yídìng lái. nǐ hòuhuǐ guò ma, cí zhí kāi diàn?",
+                        "text_en": "Alley restaurants, great! I'll definitely come. Any regrets about quitting to start the shop?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct question, warmly asked. He'll give an honest answer."
+                    },
+                    {
+                        "text_zh": "好的，到时候你带路。",
+                        "text_pinyin": "hǎo de, dào shíhòu nǐ dài lù.",
+                        "text_en": "OK, you lead the way when I come.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A promise to follow. The deeper conversation waits for another day — or another three months."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "后悔？前三个月天天后悔，哈哈！那时候生意差、不知道怎么管人、钱也在哗哗往外流。有一天晚上差点买了回去的火车票。但是第四个月开始有回头客了，第六个月开始盈利了。现在回头看，最难的不是钱的问题，是心理上的那道坎——你习惯了每个月发工资的安全感，突然没有了，会很慌。但是你如果真的想做，我的建议是：先别辞职，先用业余时间做市场调研。等你准备到觉得有七成把握了，就跳。十成把握是等不到的。",
+                "text_pinyin": "hòuhuǐ? qián sān gè yuè tiāntiān hòuhuǐ, hāha! nà shíhòu shēngyì chà, bù zhīdào zěnme guǎn rén, qián yě zài huāhuā wǎng wài liú. yǒu yì tiān wǎnshang chàdiǎn mǎi le huíqù de huǒchē piào. dànshì dì sì gè yuè kāishǐ yǒu huítóu kè le, dì liù gè yuè kāishǐ yínglì le. xiànzài huítóu kàn, zuì nán de búshì qián de wèntí, shì xīnlǐ shàng de nà dào kǎn——nǐ xíguàn le měi gè yuè fā gōngzī de ānquán gǎn, tūrán méiyǒu le, huì hěn huāng. dànshì nǐ rúguǒ zhēn de xiǎng zuò, wǒ de jiànyì shì: xiān bié cí zhí, xiān yòng yèyú shíjiān zuò shìchǎng diàoyán. děng nǐ zhǔnbèi dào juéde yǒu qī chéng bǎwò le, jiù tiào. shí chéng bǎwò shì děng bú dào de.",
+                "text_en": "Regrets? The first three months I regretted it daily, haha! Business was bad, I had no idea how to manage people, money was flowing out like water. One night I almost bought a train ticket back. But the fourth month, repeat customers started coming. Sixth month, profit. Looking back, the hardest part wasn't money — it was the psychological barrier. You're used to the security of monthly salary, and suddenly it's gone — that's terrifying. But if you really want to do it, my advice: don't quit yet. Do market research in your free time first. When you feel 70% ready, jump. You'll never be 100% ready."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his advice meaningfully and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "七成把握就跳——这句话我要记住。说实话，听你这么说让我心里踏实了不少。你能把一个从零开始的火锅店做到天天满座，就说明这条路是走得通的。好了老徐，不耽误你做生意了，厨房还等着你呢。五月份我确定行程以后第一时间告诉你。下次别三个月了——以后至少每个月打一次！",
+                        "text_pinyin": "qī chéng bǎwò jiù tiào——zhè jù huà wǒ yào jì zhù. shuō shíhuà, tīng nǐ zhème shuō ràng wǒ xīnlǐ tāshi le bùshǎo. nǐ néng bǎ yí gè cóng líng kāishǐ de huǒguō diàn zuò dào tiāntiān mǎn zuò, jiù shuōmíng zhè tiáo lù shì zǒu de tōng de. hǎo le Lǎo Xú, bù dānwu nǐ zuò shēngyì le, chúfáng hái děng zhe nǐ ne. wǔ yuè fèn wǒ quèdìng xíngchéng yǐhòu dì yī shíjiān gàosu nǐ. xià cì bié sān gè yuè le——yǐhòu zhìshǎo měi gè yuè dǎ yí cì!",
+                        "text_en": "70% ready and jump — I'm memorizing that. Honestly, hearing you say all this really puts my mind at ease. That you built a hotpot restaurant from scratch to full every night proves this path is walkable. OK Lao Xu, I won't keep you from business — the kitchen's waiting. I'll let you know my May plans as soon as they're set. No more three-month gaps — at least once a month from now on!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Absorbing the advice, affirming his achievement, being considerate of his time, committing to staying in touch — the kind of phone call that both friends will think about later. The storage room has served its purpose."
+                    },
+                    {
+                        "text_zh": "说得好。我回去好好想想。五月份见！别太累了老徐。",
+                        "text_pinyin": "shuō de hǎo. wǒ huíqù hǎohāo xiǎngxiang. wǔ yuè fèn jiàn! bié tài lèi le Lǎo Xú.",
+                        "text_en": "Well said. I'll think it over. See you in May! Don't overwork yourself Lao Xu.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Warm and caring. He'll look forward to May."
+                    },
+                    {
+                        "text_zh": "好的，我挂了。下次再聊。",
+                        "text_pinyin": "hǎo de, wǒ guà le. xià cì zài liáo.",
+                        "text_en": "OK, I'll hang up. Chat next time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Quick farewell. Lao Xu goes back to the kitchen, back to the sizzle and clatter. He'll save a table for May."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese friends often maintain relationships through periodic phone calls (打电话叙旧), with the guilt of not calling being a recognized social emotion. The phrase 七成把握就跳 (70% ready and jump) captures a common Chinese entrepreneurial philosophy. Offering to host friends at home (住我家) is a genuine gesture of closeness, while 巷子里的馆子 (alley restaurants) represents authentic local cuisine hidden from tourists."
+    }
+}

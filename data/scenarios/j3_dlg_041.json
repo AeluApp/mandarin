@@ -1,0 +1,87 @@
+{
+    "title": "Feeding Pigeons",
+    "title_zh": "喂鸽子",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're sitting on a park bench eating bread when pigeons gather around. A little girl with her grandmother watches excitedly.",
+        "setup_zh": "你坐在公园长椅上吃面包，鸽子们围了过来。一个小女孩和她的奶奶在旁边兴奋地看着。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哥哥，你在喂鸽子吗？我也想喂！可是我没有面包……",
+                "text_pinyin": "Gēge, nǐ zài wèi gēzi ma? Wǒ yě xiǎng wèi! Kěshì wǒ méiyǒu miànbāo……",
+                "text_en": "Big brother, are you feeding the pigeons? I want to feed them too! But I don't have any bread..."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the little girl.",
+                "options": [
+                    {
+                        "text_zh": "来，给你一些面包。你慢慢地撕成小块，放在地上，鸽子就会过来了。",
+                        "text_pinyin": "Lái, gěi nǐ yīxiē miànbāo. Nǐ mànmàn de sī chéng xiǎo kuài, fàng zài dìshang, gēzi jiù huì guòlái le.",
+                        "text_en": "Here, have some bread. Tear it into small pieces slowly and put them on the ground — the pigeons will come.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Kind and patient — teaches her how to do it."
+                    },
+                    {
+                        "text_zh": "好啊。",
+                        "text_pinyin": "Hǎo a.",
+                        "text_en": "Sure.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Shares but doesn't engage."
+                    },
+                    {
+                        "text_zh": "我的面包不多了。",
+                        "text_pinyin": "Wǒ de miànbāo bù duō le.",
+                        "text_en": "I don't have much bread left.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Refuses a small child — harsh."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你！你真是好心人。我孙女最喜欢小动物了。你经常来这里喂鸽子吗？",
+                "text_pinyin": "Xièxie nǐ! Nǐ zhēn shì hǎoxīn rén. Wǒ sūnnǚ zuì xǐhuan xiǎo dòngwù le. Nǐ jīngcháng lái zhèlǐ wèi gēzi ma?",
+                "text_en": "Thank you! You're such a kind person. My granddaughter loves little animals. Do you come here often to feed the pigeons?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat with the grandmother.",
+                "options": [
+                    {
+                        "text_zh": "偶尔来。看到鸽子和小朋友在一起，心情就变得很好。您孙女好可爱！",
+                        "text_pinyin": "Ǒu'ěr lái. Kàndào gēzi hé xiǎo péngyou zài yīqǐ, xīnqíng jiù biàn de hěn hǎo. Nín sūnnǚ hǎo kě'ài!",
+                        "text_en": "Occasionally. Seeing pigeons and children together always brightens my mood. Your granddaughter is so cute!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and connects the simple joys of the moment."
+                    },
+                    {
+                        "text_zh": "是的，有空就来。",
+                        "text_pinyin": "Shì de, yǒu kòng jiù lái.",
+                        "text_en": "Yes, whenever I'm free.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but doesn't engage further."
+                    },
+                    {
+                        "text_zh": "偶尔。",
+                        "text_pinyin": "Ǒu'ěr.",
+                        "text_en": "Occasionally.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Minimal."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Feeding pigeons in parks is a gentle intergenerational activity in China. Children calling young adults 「哥哥」 or 「姐姐」 is endearing and expected. Grandparents watching their grandchildren discover nature is one of the sweetest everyday scenes in Chinese life."
+    },
+    "hsk_level": 3
+}

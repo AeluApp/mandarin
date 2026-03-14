@@ -1,0 +1,160 @@
+{
+    "title": "The Slide Deck Sculptor",
+    "title_zh": "幻灯片雕塑家",
+    "hsk_level": 4,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_business_4_02_v0",
+    "tree": {
+        "setup": "A glass-walled meeting room overlooking a courtyard where sparrows are arguing about crumbs. You're presenting a new product design to the client, Ms. Huang, who has the unsettling habit of smiling warmly regardless of whether she loves or hates what she's seeing. Your colleague Xiao Wang is managing the projector with the focus of a bomb technician.",
+        "setup_zh": "一间玻璃墙的会议室，俯瞰院子里几只为面包渣争吵的麻雀。你要向客户黄女士展示新的产品设计。黄女士有个让人不安的习惯——不管喜不喜欢你的方案，她都笑容满面。你的同事小王正用拆炸弹的专注度操作投影仪。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我们准备好了，请开始吧。期待看到你们的新设计。",
+                "text_pinyin": "wǒmen zhǔnbèi hǎo le, qǐng kāishǐ ba. qīdài kàn dào nǐmen de xīn shèjì.",
+                "text_en": "We're ready — please begin. Looking forward to seeing your new design."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Open your presentation.",
+                "options": [
+                    {
+                        "text_zh": "谢谢黄女士。今天我给大家介绍我们最新的设计方案。这个方案有三个主要特点。",
+                        "text_pinyin": "xièxie Huáng nǚshì. jīntiān wǒ gěi dàjiā jièshào wǒmen zuìxīn de shèjì fāng'àn. zhège fāng'àn yǒu sān gè zhǔyào tèdiǎn.",
+                        "text_en": "Thank you, Ms. Huang. Today I'll introduce our latest design proposal. This proposal has three key features.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Three key features — a structure that promises clarity. Ms. Huang's smile may actually be genuine this time."
+                    },
+                    {
+                        "text_zh": "好的，我开始了。请看这个设计。",
+                        "text_pinyin": "hǎo de, wǒ kāishǐ le. qǐng kàn zhège shèjì.",
+                        "text_en": "OK, I'll begin. Please look at this design.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Brief opener — fine, but she's waiting for the substance. Xiao Wang advances to slide two."
+                    },
+                    {
+                        "text_zh": "嗯，这个是我们做的……请看。",
+                        "text_pinyin": "ǹg, zhège shì wǒmen zuò de……qǐng kàn.",
+                        "text_en": "Um, this is what we made... please look.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A nervous start. The sparrows outside seem more confident. But Ms. Huang's smile doesn't waver."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个颜色方案很有意思。但是你们考虑过其他的颜色吗？",
+                "text_pinyin": "zhège yánsè fāng'àn hěn yǒu yìsi. dànshì nǐmen kǎolǜ guò qítā de yánsè ma?",
+                "text_en": "This color scheme is interesting. But have you considered other colors?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Address her color question.",
+                "options": [
+                    {
+                        "text_zh": "考虑过。我们准备了两个备选方案，可以翻到下一页看看。",
+                        "text_pinyin": "kǎolǜ guò. wǒmen zhǔnbèi le liǎng gè bèixuǎn fāng'àn, kěyǐ fān dào xià yí yè kànkan.",
+                        "text_en": "Yes, we have. We prepared two alternative options — you can see them on the next page.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Prepared alternatives — the mark of a thorough presentation. Xiao Wang advances the slide with a satisfied click."
+                    },
+                    {
+                        "text_zh": "我们可以换颜色，没问题。",
+                        "text_pinyin": "wǒmen kěyǐ huàn yánsè, méi wèntí.",
+                        "text_en": "We can change the colors, no problem.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Flexible, but it might come across as not having thought deeply about the choice."
+                    },
+                    {
+                        "text_zh": "这个颜色是我们觉得最好的。",
+                        "text_pinyin": "zhège yánsè shì wǒmen juéde zuì hǎo de.",
+                        "text_en": "This color is what we think is best.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Confident, but Ms. Huang asked about alternatives. In client presentations, the question is always the answer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "第二个方案不错。价格方面呢？预算大概是多少？",
+                "text_pinyin": "dì èr gè fāng'àn búcuò. jiàgé fāngmiàn ne? yùsuàn dàgài shì duōshǎo?",
+                "text_en": "The second option is nice. What about pricing? What's the approximate budget?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present the budget information.",
+                "options": [
+                    {
+                        "text_zh": "预算大概是十五万。这包括设计、生产和包装的费用。详细的报价单我可以明天发给您。",
+                        "text_pinyin": "yùsuàn dàgài shì shíwǔ wàn. zhè bāokuò shèjì, shēngchǎn hé bāozhuāng de fèiyòng. xiángxì de bàojià dān wǒ kěyǐ míngtiān fā gěi nín.",
+                        "text_en": "The budget is about 150,000. This includes design, production, and packaging costs. I can send you a detailed quote tomorrow.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Comprehensive and transparent. Ms. Huang makes a note — her first of the meeting. Progress."
+                    },
+                    {
+                        "text_zh": "大概十五万左右吧。",
+                        "text_pinyin": "dàgài shíwǔ wàn zuǒyòu ba.",
+                        "text_en": "About 150,000 or so.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The double hedging (大概 and 左右) makes it sound uncertain, but the number itself is informative."
+                    },
+                    {
+                        "text_zh": "这个……我要回去查一下具体的数字。",
+                        "text_pinyin": "zhège……wǒ yào huíqù chá yíxià jùtǐ de shùzì.",
+                        "text_en": "That... I'll need to go back and check the specific numbers.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Budget questions in presentations should never be surprises. Xiao Wang silently closes his eyes for exactly one second."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，整体来说我们很满意。请把详细的报价和时间表发给我们。",
+                "text_pinyin": "hǎo de, zhěngtǐ lái shuō wǒmen hěn mǎnyì. qǐng bǎ xiángxì de bàojià hé shíjiān biǎo fā gěi wǒmen.",
+                "text_en": "OK, overall we're quite satisfied. Please send us the detailed quote and timeline."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close the meeting professionally.",
+                "options": [
+                    {
+                        "text_zh": "一定！我明天就把报价和时间表发到您邮箱。谢谢您今天抽时间来看我们的方案。",
+                        "text_pinyin": "yídìng! wǒ míngtiān jiù bǎ bàojià hé shíjiān biǎo fā dào nín yóuxiāng. xièxie nín jīntiān chōu shíjiān lái kàn wǒmen de fāng'àn.",
+                        "text_en": "Absolutely! I'll send the quote and timeline to your email tomorrow. Thank you for taking the time to review our proposal.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Professional close with a concrete next step. The sparrows outside have settled their argument too."
+                    },
+                    {
+                        "text_zh": "好的，我会发给您的。谢谢！",
+                        "text_pinyin": "hǎo de, wǒ huì fā gěi nín de. xièxie!",
+                        "text_en": "OK, I'll send it to you. Thank you!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clean and reliable. Ms. Huang shakes your hand with her perpetual smile."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Xiao Wang is already unplugging the projector with the expression of someone who carried a team today."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese business culture, clients often express satisfaction indirectly. 「不错」(búcuò, 'not bad') from a client is high praise. Always follow up with concrete deliverables and timelines — the meeting is the beginning of the relationship, not the end."
+    }
+}

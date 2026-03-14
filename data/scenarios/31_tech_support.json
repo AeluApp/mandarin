@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Describe the problem with your phone.",
                 "options": [
-                    {"text_zh": "最近手机总是突然死机，而且重新开机以后很慢。", "text_pinyin": "zuìjìn shǒujī zǒngshì tūrán sǐjī, érqiě chóngxīn kāijī yǐhòu hěn màn.", "text_en": "Recently my phone keeps suddenly crashing, and it's very slow after restarting.", "score": 1.0, "register": "neutral", "feedback": "Detailed and clear — describes both the main problem and a related symptom, helping diagnosis."},
-                    {"text_zh": "手机不太好用了，经常出问题，你能看看吗？", "text_pinyin": "shǒujī bú tài hǎoyòng le, jīngcháng chū wèntí, nǐ néng kànkan ma?", "text_en": "The phone isn't working well, keeps having problems, can you take a look?", "score": 0.6, "register": "casual", "feedback": "Vague — 经常出问题 doesn't tell the technician what kind of problem. Be specific."},
-                    {"text_zh": "我的手机用了两年了，现在死机的次数越来越多。", "text_pinyin": "wǒ de shǒujī yòng le liǎng nián le, xiànzài sǐjī de cìshù yuè lái yuè duō.", "text_en": "I've had my phone for two years, and it's crashing more and more frequently.", "score": 0.8, "register": "neutral", "feedback": "Good context — mentioning the age of the phone and the increasing frequency helps the technician assess the issue."}
+                    {
+                        "text_zh": "三千三可以吗？没有电梯，六楼搬东西确实不太方便。",
+                        "text_pinyin": "sān qiān sān kěyǐ ma? méiyǒu diàntī, liù lóu bān dōngxi quèshí bú tài fāngbiàn.",
+                        "text_en": "How about 3,300? No elevator, and moving things to the 6th floor is really inconvenient.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe the problem with your phone, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "是送给我的中文老师的，我想买一个实用又好看的礼物。",
+                        "text_pinyin": "shì sòng gěi wǒ de zhōngwén lǎoshī de, wǒ xiǎng mǎi yī ge shíyòng yòu hǎokàn de lǐwù.",
+                        "text_en": "It's for my Chinese teacher. I'd like something both practical and nice-looking.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to describe the problem with your phone, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "最近手机总是突然死机，而且重新开机以后很慢。",
+                        "text_pinyin": "zuìjìn shǒujī zǒngshì tūrán sǐjī, érqiě chóngxīn kāijī yǐhòu hěn màn.",
+                        "text_en": "Recently my phone keeps suddenly crashing, and it's very slow after restarting.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Detailed and clear — describes both the main problem and a related symptom, helping diagnosis."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond about your phone's storage situation.",
                 "options": [
-                    {"text_zh": "可能是，我照片和视频比较多，可以帮我清理一下吗？", "text_pinyin": "kěnéng shì, wǒ zhàopiàn hé shìpín bǐjiào duō, kěyǐ bāng wǒ qīnglǐ yīxià ma?", "text_en": "Maybe, I have a lot of photos and videos. Can you help me clean it up?", "score": 1.0, "register": "neutral", "feedback": "Acknowledges the likely cause and makes a clear request — efficient communication."},
-                    {"text_zh": "我不太确定，你帮我看看还有多少内存吧。", "text_pinyin": "wǒ bú tài quèdìng, nǐ bāng wǒ kànkan hái yǒu duōshao nèicún ba.", "text_en": "I'm not sure, can you check how much memory is left?", "score": 0.7, "register": "neutral", "feedback": "Reasonable — admitting uncertainty and asking for a check is practical."},
-                    {"text_zh": "应该没有吧，我不经常拍照什么的。", "text_pinyin": "yīnggāi méiyǒu ba, wǒ bù jīngcháng pāizhào shénme de.", "text_en": "Probably not, I don't take photos much or anything like that.", "score": 0.6, "register": "casual", "feedback": "If storage isn't the issue, this helps rule it out — but let the technician verify rather than guessing."}
+                    {
+                        "text_zh": "好的，谢谢你。如果需要换房间的话，请提前告诉我。",
+                        "text_pinyin": "hǎo de, xièxie nǐ. rúguǒ xūyào huàn fángjiān de huà, qǐng tíqián gàosu wǒ.",
+                        "text_en": "OK, thanks. If I need to switch rooms, please let me know in advance.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond about your phone's storage situation, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "可能是，我照片和视频比较多，可以帮我清理一下吗？",
+                        "text_pinyin": "kěnéng shì, wǒ zhàopiàn hé shìpín bǐjiào duō, kěyǐ bāng wǒ qīnglǐ yīxià ma?",
+                        "text_en": "Maybe, I have a lot of photos and videos. Can you help me clean it up?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledges the likely cause and makes a clear request — efficient communication."
+                    },
+                    {
+                        "text_zh": "我想换一些人民币，请问汇率是多少？",
+                        "text_pinyin": "wǒ xiǎng huàn yīxiē rénmínbì, qǐngwèn huìlǜ shì duōshao?",
+                        "text_en": "I'd like to exchange some RMB. What's the exchange rate?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond about your phone's storage situation, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

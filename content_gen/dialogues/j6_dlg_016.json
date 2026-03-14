@@ -1,0 +1,152 @@
+{
+    "title": "The Secondhand Bookshop",
+    "title_zh": "旧书店",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You browse a cramped secondhand bookshop in a Chongqing alley. The owner, Mr. Fang, sits behind towers of yellowed volumes. He has run this shop for thirty years and can tell you the story behind almost every book on his shelves.",
+        "setup_zh": "你在重庆的一条巷子里逛一家狭小的旧书店。店主方先生坐在发黄的书堆后面。他开了三十年的店，几乎能讲出每一本书的来历。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这本书你可以翻一下。里面有批注——不是我写的，是上一个主人写的。你看这里——他在这一段旁边写了三个字：「不同意」。但到了最后一页，他又写了两个字：「懂了」。一个读者从不同意到懂了，这整个过程都留在了书页上。这比书的内容还精彩。",
+                "text_pinyin": "Zhè běn shū nǐ kěyǐ fān yīxià. Lǐmiàn yǒu pīzhù — bú shì wǒ xiě de, shì shàng yī ge zhǔrén xiě de. Nǐ kàn zhèlǐ — tā zài zhè yī duàn pángbiān xiě le sān ge zì: 'bù tóngyì'. Dàn dào le zuìhòu yī yè, tā yòu xiě le liǎng ge zì: 'dǒng le'. Yī ge dúzhě cóng bù tóngyì dào dǒng le, zhè zhěnggè guòchéng dōu liú zài le shūyè shàng. Zhè bǐ shū de nèiróng hái jīngcǎi.",
+                "text_en": "You can flip through this one. There are marginal notes — not mine, from the previous owner. See here — beside this passage he wrote three characters: 'Disagree.' But on the last page, he wrote two more: 'Understood.' A reader going from disagreement to understanding — that entire journey preserved in the margins. That's more fascinating than the book itself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show Mr. Fang you're genuinely moved by what he just pointed out.",
+                "options": [
+                    {
+                        "text_zh": "批注是写给自己的，不是写给别人看的——所以比书本身还真实。买这本书，你也买到了另一个人的思考过程。",
+                        "text_pinyin": "Pīzhù shì xiě gěi zìjǐ de, bú shì xiě gěi biérén kàn de — suǒyǐ bǐ shū běnshēn hái zhēnshí. Mǎi zhè běn shū, nǐ yě mǎi dào le lìng yī ge rén de sīkǎo guòchéng.",
+                        "text_en": "Marginalia is written for yourself, not for others — so it's more honest than the book itself. Buy this book, and you also buy another person's thinking process.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mr. Fang sets the book down slowly and nods, like you've confirmed something he's thought for years but rarely said aloud."
+                    },
+                    {
+                        "text_zh": "有意思。不过现在写批注的人越来越少了吧，大家都用电子书了。",
+                        "text_pinyin": "Yǒu yìsi. Búguò xiànzài xiě pīzhù de rén yuè lái yuè shǎo le ba, dàjiā dōu yòng diànzǐ shū le.",
+                        "text_en": "That's interesting. But fewer and fewer people write marginalia nowadays — everyone uses e-books.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Mr. Fang pauses. He glances down at the annotations, then back at you. 'I'm showing you one reader's entire journey in ink,' he says quietly, 'and you're thinking about market trends.'"
+                    },
+                    {
+                        "text_zh": "他为什么最后改变想法了？",
+                        "text_pinyin": "Tā wèishéme zuìhòu gǎibiàn xiǎngfǎ le?",
+                        "text_en": "Why did he change his mind by the end?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang tilts his head, a little surprised. 'I have no idea,' he says flatly. 'That's the whole point.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "另一个人的思考过程——你说得对。我这里有些书被三四个人转手过，每个人都留了不同的批注。同一段话，一个人画了线写了「精彩」，另一个人在旁边画了问号。同一本书在不同人手里变成了完全不同的东西——因为每个人带着不同的经历来读。书不是固定的——它是活的，跟每一个读者发生不同的化学反应。",
+                "text_pinyin": "Lìng yī ge rén de sīkǎo guòchéng — nǐ shuō de duì. Wǒ zhèlǐ yǒuxiē shū bèi sān sì ge rén zhuǎnshǒu guò, měi ge rén dōu liú le bùtóng de pīzhù. Tóng yī duàn huà, yī ge rén huà le xiàn xiě le 'jīngcǎi', lìng yī ge rén zài pángbiān huà le wènhào. Tóng yī běn shū zài bùtóng rén shǒu lǐ biàn chéng le wánquán bùtóng de dōngxi — yīnwèi měi ge rén dài zhe bùtóng de jīnglì lái dú. Shū bú shì gùdìng de — tā shì huó de, gēn měi yī ge dúzhě fāshēng bùtóng de huàxué fǎnyìng.",
+                "text_en": "Another person's thinking process — exactly. I have books here that passed through three or four people, each leaving different notes. The same passage: one person underlined it and wrote 'brilliant,' another put a question mark beside it. The same book in different hands becomes an entirely different thing — because each person brings different experiences to it. A book isn't fixed — it's alive, having different chemical reactions with each reader."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that the same book becomes a different thing in different hands.",
+                "options": [
+                    {
+                        "text_zh": "书没有变——读者不同，所以书就不同了。也许没有两个人真正读过同一本书。",
+                        "text_pinyin": "Shū méiyǒu biàn — dúzhě bùtóng, suǒyǐ shū jiù bùtóng le. Yěxǔ méiyǒu liǎng ge rén zhēnzhèng dú guò tóng yī běn shū.",
+                        "text_en": "The book hasn't changed — but the reader differs, so the book differs. Maybe no two people have ever really read the same book.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mr. Fang leans forward on the counter. 'Say that again,' he says quietly, as if he wants to make sure he heard it right."
+                    },
+                    {
+                        "text_zh": "你最推荐哪本书？",
+                        "text_pinyin": "Nǐ zuì tuījiàn nǎ běn shū?",
+                        "text_en": "Which book do you recommend most?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang waves a hand at the stacks around him. 'Depends who's reading it,' he says. You can tell he expected a different kind of response."
+                    },
+                    {
+                        "text_zh": "那「精彩」和问号是在同一段旁边吗？",
+                        "text_pinyin": "Nà 'jīngcǎi' hé wènhào shì zài tóng yī duàn pángbiān ma?",
+                        "text_en": "Were the 'brilliant' and the question mark written next to the same passage?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang flips to the page and looks. 'Mm. Different sections,' he mutters. He seems mildly disappointed you went literal."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没有两个人读过同一本书——我经营了三十年旧书店，这一点我可以确认。但还有一件事让我着迷：有时候一个人买了一本书，十年后又把它卖回来。我一看——批注的墨水颜色不一样。他十年前用蓝色笔画了线，十年后用黑色笔在旁边写了新的注解。同一个人在不同年龄读同一本书，反应也完全不同。他不只是在和书对话——他在和十年前的自己对话。",
+                "text_pinyin": "Méiyǒu liǎng ge rén dú guò tóng yī běn shū — wǒ jīngyíng le sānshí nián jiù shūdiàn, zhè yīdiǎn wǒ kěyǐ quèrèn. Dàn hái yǒu yī jiàn shì ràng wǒ zháomí: yǒu shíhou yī ge rén mǎi le yī běn shū, shí nián hòu yòu bǎ tā mài huílái. Wǒ yī kàn — pīzhù de mòshuǐ yánsè bù yīyàng. Tā shí nián qián yòng lán sè bǐ huà le xiàn, shí nián hòu yòng hēi sè bǐ zài pángbiān xiě le xīn de zhùjiě. Tóng yī ge rén zài bùtóng niánlíng dú tóng yī běn shū, fǎnyìng yě wánquán bùtóng. Tā bù zhǐ shì zài hé shū duìhuà — tā zài hé shí nián qián de zìjǐ duìhuà.",
+                "text_en": "No two people have read the same book — thirty years running this shop, I can confirm that. But something fascinates me: sometimes someone buys a book, sells it back ten years later. The ink colors differ. Blue underlines ten years ago; new black annotations now. The same person, different ages, reacts completely differently. He's dialoguing with his ten-years-ago self."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of rereading as a conversation with your younger self.",
+                "options": [
+                    {
+                        "text_zh": "蓝色和黑色之间的距离就是他这十年的成长。书是固定的刻度尺，人是移动的——每次重读，你其实是在量自己走了多远。",
+                        "text_pinyin": "Lán sè hé hēi sè zhī jiān de jùlí jiù shì tā zhè shí nián de chéngzhǎng. Shū shì gùdìng de kèdù chǐ, rén shì yídòng de — měi cì chóng dú, nǐ qíshí shì zài liáng zìjǐ zǒu le duō yuǎn.",
+                        "text_en": "The distance between the blue and the black is his ten years of growth. The book is a fixed ruler; the reader is moving — every time you reread, you're really measuring how far you've traveled.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mr. Fang goes quiet for a moment. Then he reaches under the counter and pulls out a worn book with two ink colors visible on the spine. He doesn't say anything — just sets it where you can see it."
+                    },
+                    {
+                        "text_zh": "你有没有遇到过名人的藏书？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu yù dào guò míngrén de cángshū?",
+                        "text_en": "Have you ever come across a famous person's book collection?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang shrugs. 'A few times. They wrote the same kinds of things as everyone else.' He looks a little let down that you changed the subject."
+                    },
+                    {
+                        "text_zh": "他卖回来的时候，你有没有联系他本人？",
+                        "text_pinyin": "Tā mài huílái de shíhou, nǐ yǒu méiyǒu liánxì tā běnrén?",
+                        "text_en": "When he sold it back, did you try to contact him?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang shakes his head slowly. 'I don't keep names. That's not the point.' He taps the cover of the book instead."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "固定的刻度尺——这个比喻我很喜欢。所以我从来不扔书。每一本卖不出去的旧书，我都留着。因为每一本都是某个人在某个时刻的心理状态的记录。它们不只是文字——它们是凝固的时间。这间小店里有三万本书——也就是三万个来自不同年代、不同人生阶段的人的心理快照。有时候我觉得我不是在经营一家书店——我在管理一座看不见的人心博物馆。",
+                "text_pinyin": "Gùdìng de kèdù chǐ — zhège bǐyù wǒ hěn xǐhuan. Suǒyǐ wǒ cónglái bù rēng shū. Měi yī běn mài bù chūqù de jiù shū, wǒ dōu liú zhe. Yīnwèi měi yī běn dōu shì mǒu ge rén zài mǒu ge shíkè de xīnlǐ zhuàngtài de jìlù. Tāmen bù zhǐ shì wénzì — tāmen shì nínggù de shíjiān. Zhè jiān xiǎo diàn lǐ yǒu sān wàn běn shū — yě jiù shì sān wàn ge lái zì bùtóng niándài, bùtóng rénshēng jiēduàn de rén de xīnlǐ kuàizhào. Yǒu shíhou wǒ juéde wǒ bú shì zài jīngyíng yī jiā shūdiàn — wǒ zài guǎnlǐ yī zuò kàn bú jiàn de rénxīn bówùguǎn.",
+                "text_en": "A fixed ruler — I like that metaphor. That's why I never throw books away. Every unsold book, I keep. Because each one is a record of someone's psychological state at some moment. They're not just text — they're solidified time. This small shop holds thirty thousand books — thirty thousand psychological snapshots from different eras, different life stages. Sometimes I feel I'm not running a bookshop — I'm managing an invisible museum of human hearts."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the bookshop as an invisible museum of human hearts.",
+                "options": [
+                    {
+                        "text_zh": "博物馆收藏的是人选择展示的东西。这里收藏的是人没打算展示的——随手写的问号、半句话、「不同意」。这些反而更真实。",
+                        "text_pinyin": "Bówùguǎn shōucáng de shì rén xuǎnzé zhǎnshì de dōngxi. Zhèlǐ shōucáng de shì rén méi dǎsuàn zhǎnshì de — suíshǒu xiě de wènhào, bàn jù huà, 'bù tóngyì'. Zhèxiē fǎn'ér gèng zhēnshí.",
+                        "text_en": "Museums collect what people chose to show. This place collects what they never meant to show — a quick question mark, half a sentence, 'disagree.' Those are actually more real.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mr. Fang puts both hands flat on the counter and looks around at the stacks like he's seeing them fresh. 'That's exactly it,' he says, almost to himself."
+                    },
+                    {
+                        "text_zh": "这家店的租金贵吗？",
+                        "text_pinyin": "Zhè jiā diàn de zūjīn guì ma?",
+                        "text_en": "Is the rent expensive here?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang's expression flattens. 'Reasonable,' he says, and looks back down at his book. The conversation has clearly cooled."
+                    },
+                    {
+                        "text_zh": "现在年轻人还读纸质书吗？",
+                        "text_pinyin": "Xiànzài niánqīngrén hái dú zhǐzhì shū ma?",
+                        "text_en": "Do young people still read paper books these days?",
+                        "score": 0.0,
+                        "feedback": "Mr. Fang sighs — not rudely, but with the weight of a question he's been asked too many times. 'Some do,' he says, and waits to see if you have anything more interesting to add."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Secondhand bookshops (旧书店) in Chinese cities serve as informal archives of intellectual life. The Chinese tradition of marginal annotation (批注, pīzhù) dates back centuries — scholars would add commentary alongside classical texts, creating layered conversations across generations. The concept of books as living objects that change with each reader connects to the hermeneutic tradition in Chinese literary criticism, where meaning is understood as arising from the interaction between text and reader rather than residing in the text alone."
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "title": "Waiting for the Bus",
+    "title_zh": "等公交车",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're at a bus stop in the morning. An old man is also waiting. He starts a conversation.",
+        "setup_zh": "早上你在公交车站等车。一位老爷爷也在等车。他开始聊天。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天天气真好。你去哪里？",
+                "text_pinyin": "Jīntiān tiānqì zhēn hǎo. Nǐ qù nǎlǐ?",
+                "text_en": "The weather is really nice today. Where are you going?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him where you're headed.",
+                "options": [
+                    {
+                        "text_zh": "我去学校。今天有中文课。",
+                        "text_pinyin": "Wǒ qù xuéxiào. Jīntiān yǒu Zhōngwén kè.",
+                        "text_en": "I'm going to school. I have Chinese class today.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers where you're going and shares a detail -- gives the old man something to respond to."
+                    },
+                    {
+                        "text_zh": "去学校。",
+                        "text_pinyin": "Qù xuéxiào.",
+                        "text_en": "Going to school.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers but very briefly -- he started a friendly conversation and this doesn't keep it going."
+                    },
+                    {
+                        "text_zh": "对，天气很好。您也在等车？",
+                        "text_pinyin": "Duì, tiānqì hěn hǎo. Nín yě zài děng chē?",
+                        "text_en": "Yes, nice weather. Are you waiting for the bus too?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Responds to his weather comment but doesn't answer where you're going -- he asked a question and you asked one back instead."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "学中文？好啊！我年轻的时候也喜欢学东西。",
+                "text_pinyin": "Xué Zhōngwén? Hǎo a! Wǒ niánqīng de shíhou yě xǐhuan xué dōngxi.",
+                "text_en": "Learning Chinese? Great! When I was young, I also loved learning things."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his kind words.",
+                "options": [
+                    {
+                        "text_zh": "中文很有意思。您每天都坐这路车吗？",
+                        "text_pinyin": "Zhōngwén hěn yǒu yìsi. Nín měi tiān dōu zuò zhè lù chē ma?",
+                        "text_en": "Chinese is very interesting. Do you take this bus every day?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Shares your enthusiasm and asks about his routine with respectful 您 -- keeps the warm exchange going."
+                    },
+                    {
+                        "text_zh": "是的，很有意思。",
+                        "text_pinyin": "Shì de, hěn yǒu yìsi.",
+                        "text_en": "Yes, it's interesting.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agrees but doesn't engage with his personal memory about loving to learn -- he shared something and you gave a flat reply."
+                    },
+                    {
+                        "text_zh": "您年轻的时候学什么？",
+                        "text_pinyin": "Nín niánqīng de shíhou xué shénme?",
+                        "text_en": "What did you study when you were young?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Related to what he said, but asking an old man 'when you were young' can feel pointed -- he was connecting with your experience, not inviting an interview."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bus stops in Chinese cities are natural social spaces, especially for older residents. The elderly often enjoy chatting with younger people. Using 您 instead of 你 shows respect for elders."
+    }
+}

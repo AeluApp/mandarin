@@ -1,0 +1,83 @@
+{
+  "title": "The Paper Crane",
+  "title_zh": "纸鹤",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're at a café and notice a girl at the next table folding paper cranes. She has a whole line of them in front of her.",
+    "setup_zh": "你在咖啡馆，看到旁边桌的女孩在折纸鹤。她面前已经有了一排纸鹤。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你在看我的纸鹤吗？我在给朋友折的，她下个星期生日。",
+        "text_pinyin": "Nǐ zài kàn wǒ de zhǐhè ma? Wǒ zài gěi péngyou zhé de, tā xià ge xīngqī shēngrì.",
+        "text_en": "Are you looking at my paper cranes? I'm folding them for a friend — her birthday is next week."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her handmade gift.",
+        "options": [
+          {
+            "text_zh": "好漂亮啊！自己折的礼物最有心意。你的朋友一定会很开心。",
+            "text_pinyin": "Hǎo piàoliang a! Zìjǐ zhé de lǐwù zuì yǒu xīnyì. Nǐ de péngyou yīdìng huì hěn kāixīn.",
+            "text_en": "They're so pretty! A handmade gift has the most heart. Your friend will be so happy.",
+            "score": 1.0,
+            "feedback": "Appreciates the care behind the craft — handmade means heartfelt.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你为什么不买个礼物？",
+            "text_pinyin": "Nǐ wèishéme bù mǎi ge lǐwù?",
+            "text_en": "Why don't you just buy a gift?",
+            "score": 0.0,
+            "feedback": "Suggests buying is better than making."
+          },
+          {
+            "text_zh": "你折了多少个？",
+            "text_pinyin": "Nǐ zhé le duōshǎo ge?",
+            "text_en": "How many have you folded?",
+            "score": 0.0,
+            "feedback": "Counts cranes instead of seeing the gesture."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我希望她会喜欢。现在大家都在网上买东西，自己做的东西不多了。但是我觉得，花时间做一个东西，这个东西就有了意义。",
+        "text_pinyin": "Wǒ xīwàng tā huì xǐhuan. Xiànzài dàjiā dōu zài wǎng shàng mǎi dōngxi, zìjǐ zuò de dōngxi bù duō le. Dànshì wǒ juéde, huā shíjiān zuò yī ge dōngxi, zhège dōngxi jiù yǒu le yìyì.",
+        "text_en": "I hope she'll like them. Everyone buys things online now — handmade things are rare. But I think when you spend time making something, it gains meaning."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her idea about handmade meaning.",
+        "options": [
+          {
+            "text_zh": "你说得对。买的东西有价格，但是做的东西有时间和心在里面。这是不一样的。",
+            "text_pinyin": "Nǐ shuō de duì. Mǎi de dōngxi yǒu jiàgé, dànshì zuò de dōngxi yǒu shíjiān hé xīn zài lǐmiàn. Zhè shì bù yīyàng de.",
+            "text_en": "You're right. Bought things have a price, but made things have time and heart inside them. That's different.",
+            "score": 1.0,
+            "feedback": "Distinguishes price from meaning — time spent is love stored.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你可以教我折吗？",
+            "text_pinyin": "Nǐ kěyǐ jiāo wǒ zhé ma?",
+            "text_en": "Can you teach me to fold them?",
+            "score": 0.0,
+            "feedback": "Shifts to a request instead of engaging her thought."
+          },
+          {
+            "text_zh": "网上买更方便。",
+            "text_pinyin": "Wǎng shàng mǎi gèng fāngbiàn.",
+            "text_en": "Buying online is more convenient.",
+            "score": 0.0,
+            "feedback": "Argues for convenience against her point about meaning."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Paper crane folding (折纸鹤) is a beloved tradition. Folding 1,000 cranes (千纸鹤) is believed to make a wish come true. Handmade gifts carry special weight in Chinese culture — the time spent making them is considered a form of devotion that bought gifts cannot match."
+  }
+}

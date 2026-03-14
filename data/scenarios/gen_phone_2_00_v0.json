@@ -1,0 +1,94 @@
+{
+    "title": "The Dentist's Receptionist",
+    "title_zh": "牙科的前台",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_2_00_v0",
+    "tree": {
+        "setup": "You're calling a dental clinic to make an appointment. The receptionist, Xiao Bai, speaks at exactly the right volume and pace for phone calls -- she has perfected this over years. She has a cup of warm water on her desk that she sips between calls. Her calendar is color-coded by appointment type.",
+        "setup_zh": "你给牙科诊所打电话预约。前台小白说话的音量和速度刚好适合电话——这是她多年练出来的。桌上有一杯温水，每个电话之间她喝一口。她的日历按预约类型用颜色分了类。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，阳光牙科。请问有什么可以帮您？",
+                "text_pinyin": "nín hǎo, yángguāng yákē. qǐngwèn yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, Sunshine Dental. How can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her you want to make an appointment.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想预约看牙。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng yùyuē kàn yá.",
+                        "text_en": "Hello, I'd like to make a dental appointment.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Bai opens her color-coded calendar.「好的，您想约什么时候？」预约 is the formal word for 'appointment.' 看牙 literally means 'see teeth' -- perfectly natural."
+                    },
+                    {
+                        "text_zh": "我牙疼，想看医生。",
+                        "text_pinyin": "wǒ yá téng, xiǎng kàn yīshēng.",
+                        "text_en": "I have a toothache and want to see a doctor.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Bai's voice shifts to concerned efficiency.「疼得厉害吗？我帮您安排早一点的时间。」Mentioning pain often gets you an earlier slot."
+                    },
+                    {
+                        "text_zh": "你们今天有空吗？",
+                        "text_pinyin": "nǐmen jīntiān yǒu kòng ma?",
+                        "text_en": "Do you have availability today?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Bai checks her calendar.「今天满了，明天下午可以吗？」有空 means 'to have free time' -- useful for scheduling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个星期四下午两点可以吗？",
+                "text_pinyin": "zhè ge xīngqīsì xiàwǔ liǎng diǎn kěyǐ ma?",
+                "text_en": "How about this Thursday at 2 PM?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm or suggest another time.",
+                "options": [
+                    {
+                        "text_zh": "可以，星期四下午两点。",
+                        "text_pinyin": "kěyǐ, xīngqīsì xiàwǔ liǎng diǎn.",
+                        "text_en": "Yes, Thursday at 2 PM.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Bai writes it down in green ink (green means check-up in her system).「好的，记住了。请提前十分钟到。」Repeating the time confirms the appointment."
+                    },
+                    {
+                        "text_zh": "星期四不行，星期五可以吗？",
+                        "text_pinyin": "xīngqīsì bù xíng, xīngqīwǔ kěyǐ ma?",
+                        "text_en": "Thursday doesn't work. How about Friday?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Bai flips a page.「星期五上午十点可以。」不行 (bù xíng) is a direct but acceptable way to say something doesn't work."
+                    },
+                    {
+                        "text_zh": "能不能早一点？我很疼。",
+                        "text_pinyin": "néng bu néng zǎo yìdiǎn? wǒ hěn téng.",
+                        "text_en": "Can it be earlier? I'm in a lot of pain.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Bai checks for cancellations.「明天上午有一个空的，您来吗？」能不能 is a polite 'can or can't' request form."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，预约好了。请带上医保卡。再见！",
+                "text_pinyin": "hǎo de, yùyuē hǎo le. qǐng dài shang yībǎokǎ. zàijiàn!",
+                "text_en": "OK, the appointment is set. Please bring your insurance card. Goodbye!"
+            }
+        ],
+        "cultural_note": "Phone appointments in China are straightforward. Dental clinics (牙科, yákē) often ask you to arrive 10-15 minutes early for paperwork. 医保卡 (yībǎokǎ) is the national health insurance card."
+    }
+}

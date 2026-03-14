@@ -1,0 +1,87 @@
+{
+    "title": "At the Hospital",
+    "title_zh": "在医院",
+    "hsk_level": 1,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.12,
+    "tree": {
+        "setup": "You have a headache and go to the clinic. The doctor is kind and patient.",
+        "setup_zh": "你头疼，去了诊所。医生很和蔼，很有耐心。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，哪里不舒服？",
+                "text_pinyin": "Nǐ hǎo, nǎlǐ bù shūfu?",
+                "text_en": "Hello, what's bothering you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the doctor what's wrong.",
+                "options": [
+                    {
+                        "text_zh": "我头疼。从昨天开始的。",
+                        "text_pinyin": "Wǒ tóu téng. Cóng zuótiān kāishǐ de.",
+                        "text_en": "I have a headache. It started yesterday.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Tells the doctor both the symptom and when it started -- gives her what she needs to help you."
+                    },
+                    {
+                        "text_zh": "我头疼。",
+                        "text_pinyin": "Wǒ tóu téng.",
+                        "text_en": "I have a headache.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Names the symptom but doesn't say when it started -- she'll have to ask a follow-up."
+                    },
+                    {
+                        "text_zh": "我觉得不舒服。今天很忙。",
+                        "text_pinyin": "Wǒ juéde bù shūfu. Jīntiān hěn máng.",
+                        "text_en": "I don't feel well. Today is very busy.",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Mentions being unwell but adds a complaint about being busy -- she asked what's wrong, not about your schedule."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你昨天睡得好吗？喝水多不多？",
+                "text_pinyin": "Nǐ zuótiān shuì de hǎo ma? Hē shuǐ duō bu duō?",
+                "text_en": "Did you sleep well yesterday? Have you been drinking enough water?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer the doctor's questions about sleep and water.",
+                "options": [
+                    {
+                        "text_zh": "我昨天睡得不太好。水喝得不多。",
+                        "text_pinyin": "Wǒ zuótiān shuì de bú tài hǎo. Shuǐ hē de bù duō.",
+                        "text_en": "I didn't sleep very well yesterday. I haven't been drinking much water.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Answers both of her questions directly -- gives the doctor the full picture she needs."
+                    },
+                    {
+                        "text_zh": "睡得不太好。",
+                        "text_pinyin": "Shuì de bú tài hǎo.",
+                        "text_en": "Didn't sleep well.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Answers one question but ignores the one about water -- she asked two things for a reason."
+                    },
+                    {
+                        "text_zh": "我昨天工作到很晚。",
+                        "text_pinyin": "Wǒ zuótiān gōngzuò dào hěn wǎn.",
+                        "text_en": "I worked until very late yesterday.",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Explains why you might not have slept, but she asked specific medical questions about sleep and water -- give her the answers, not the backstory."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese doctors often start with simple lifestyle questions — sleep, water, diet. The approach is holistic, treating the whole person rather than just the symptom. A kind doctor who takes time to listen is a small but healing comfort."
+    }
+}

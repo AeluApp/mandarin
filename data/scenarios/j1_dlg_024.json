@@ -1,0 +1,87 @@
+{
+    "title": "A Quiet Library Morning",
+    "title_zh": "安静的图书馆早上",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You arrive at the neighborhood library early. The librarian is shelving books and smiles at you.",
+        "setup_zh": "你一早就到了社区图书馆。图书管理员在整理书，对你微笑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "早上好！今天来得很早啊。你想看什么书？",
+                "text_pinyin": "Zǎoshang hǎo! Jīntiān lái de hěn zǎo a. Nǐ xiǎng kàn shénme shū?",
+                "text_en": "Good morning! You're here early today. What kind of book would you like to read?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the librarian what you'd like to read.",
+                "options": [
+                    {
+                        "text_zh": "我想看一本中文书。有没有很简单的？",
+                        "text_pinyin": "Wǒ xiǎng kàn yī běn Zhōngwén shū. Yǒu méiyǒu hěn jiǎndān de?",
+                        "text_en": "I'd like to read a Chinese book. Do you have a very simple one?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest about your level without embarrassment -- she noticed you came early, which shows dedication."
+                    },
+                    {
+                        "text_zh": "我想看中文书。",
+                        "text_pinyin": "Wǒ xiǎng kàn Zhōngwén shū.",
+                        "text_en": "I want to read a Chinese book.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Says what you want but doesn't mention your level -- she'll have to guess what's appropriate for you."
+                    },
+                    {
+                        "text_zh": "我每天都来得很早。",
+                        "text_pinyin": "Wǒ měi tiān dōu lái de hěn zǎo.",
+                        "text_en": "I come early every day.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Responds to her comment about being early but doesn't answer what book you want -- she asked a question and you talked about your habits."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有的！这本是写给小朋友的，很好看。你试试？",
+                "text_pinyin": "Yǒu de! Zhè běn shì xiě gěi xiǎopéngyou de, hěn hǎokàn. Nǐ shìshi?",
+                "text_en": "Yes! This one is written for children, it's very good. Want to try it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢你！我在这里看。",
+                        "text_pinyin": "Hǎo de, xièxie nǐ! Wǒ zài zhèlǐ kàn.",
+                        "text_en": "Okay, thank you! I'll read it here.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepts her recommendation gracefully -- she found something at your level and you trust her judgment."
+                    },
+                    {
+                        "text_zh": "好，谢谢。有没有别的？",
+                        "text_pinyin": "Hǎo, xièxie. Yǒu méiyǒu bié de?",
+                        "text_en": "Okay, thanks. Are there others?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Accepts but immediately asks for more options -- she just recommended something specific for you."
+                    },
+                    {
+                        "text_zh": "小朋友的书？太简单了吧？",
+                        "text_pinyin": "Xiǎopéngyou de shū? Tài jiǎndān le ba?",
+                        "text_en": "A children's book? Isn't that too simple?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "You asked for something simple and she delivered, but now you're second-guessing -- she matched your own request."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Community libraries (社区图书馆) in China are quiet refuges. Librarians often take a personal interest in helping readers, especially those learning Chinese. Reading children's books is a respected way to build literacy."
+    }
+}

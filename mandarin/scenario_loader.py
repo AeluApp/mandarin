@@ -15,14 +15,19 @@ SUPPORT_REMOVAL_MIN_PRESENTATIONS = 3
 
 
 def determine_support_level(scenario: dict) -> str:
-    """Determine whether a scenario should show full support or hanzi only.
+    """Determine dialogue support level based on presentation history.
 
-    Returns "full_support" or "hanzi_only".
+    Returns "full_support", "pinyin_support", or "hanzi_only".
+    - full_support: hanzi + pinyin + english (NPC lines and player options)
+    - pinyin_support: hanzi + pinyin only (no english)
+    - hanzi_only: hanzi only (P key reveals pinyin)
     """
     times = scenario.get("times_presented", 0) or 0
     avg = scenario.get("avg_score") or 0.0
-    if times >= SUPPORT_REMOVAL_MIN_PRESENTATIONS and avg >= SUPPORT_REMOVAL_AVG_SCORE:
+    if times >= 4 and avg >= 0.80:
         return "hanzi_only"
+    if times >= 2 and avg >= 0.65:
+        return "pinyin_support"
     return "full_support"
 
 

@@ -46,7 +46,7 @@ class TestTOTPSecret:
         secret = generate_totp_secret()
         uri = get_provisioning_uri(secret, "test@example.com")
         assert uri.startswith("otpauth://totp/")
-        assert "Mandarin" in uri
+        assert "Aelu" in uri
         assert "test%40example.com" in uri or "test@example.com" in uri
 
     def test_verify_correct_code(self):

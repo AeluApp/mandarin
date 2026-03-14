@@ -1,0 +1,83 @@
+{
+  "title": "The Shared Umbrella",
+  "title_zh": "共用的伞",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "It suddenly starts raining as you leave the library. A classmate you've seen before but never talked to offers to share her umbrella.",
+    "setup_zh": "你离开图书馆的时候突然下起了雨。一个你见过但没说过话的同学让你一起用她的伞。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你没带伞吗？我们一起走吧，我的伞够大的。",
+        "text_pinyin": "Nǐ méi dài sǎn ma? Wǒmen yīqǐ zǒu ba, wǒ de sǎn gòu dà de.",
+        "text_en": "You didn't bring an umbrella? Let's walk together — mine is big enough."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Accept her offer warmly.",
+        "options": [
+          {
+            "text_zh": "谢谢你！真的太好了。我今天没想到会下雨。你去哪个方向？",
+            "text_pinyin": "Xièxie nǐ! Zhēn de tài hǎo le. Wǒ jīntiān méi xiǎng dào huì xià yǔ. Nǐ qù nǎge fāngxiàng?",
+            "text_en": "Thank you! That's so kind. I didn't expect rain today. Which direction are you heading?",
+            "score": 1.0,
+            "feedback": "Grateful and natural — opens the door to conversation.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "没关系，我可以跑回去。",
+            "text_pinyin": "Méi guānxi, wǒ kěyǐ pǎo huíqù.",
+            "text_en": "It's fine, I can run back.",
+            "score": 0.0,
+            "feedback": "Declines a kind offer unnecessarily."
+          },
+          {
+            "text_zh": "雨会停吗？",
+            "text_pinyin": "Yǔ huì tíng ma?",
+            "text_en": "Will the rain stop?",
+            "score": 0.0,
+            "feedback": "Avoids engaging with her gesture."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "我也往南走。你是不是经常来图书馆？我好像总能看到你。",
+        "text_pinyin": "Wǒ yě wǎng nán zǒu. Nǐ shì bú shì jīngcháng lái túshūguǎn? Wǒ hǎoxiàng zǒng néng kàn dào nǐ.",
+        "text_en": "I'm heading south too. Do you come to the library often? I feel like I always see you there."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share why you spend time at the library.",
+        "options": [
+          {
+            "text_zh": "对，我很喜欢那里。图书馆很安静，在那里学习的时候，时间过得特别快。你也经常去吗？",
+            "text_pinyin": "Duì, wǒ hěn xǐhuan nàlǐ. Túshūguǎn hěn ānjìng, zài nàlǐ xuéxí de shíhou, shíjiān guò de tèbié kuài. Nǐ yě jīngcháng qù ma?",
+            "text_en": "Yes, I love it there. The library is so quiet — when I study there, time flies. Do you go often too?",
+            "score": 1.0,
+            "feedback": "Open and reciprocal — builds the friendship naturally.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "是啊，我要考试。",
+            "text_pinyin": "Shì a, wǒ yào kǎoshì.",
+            "text_en": "Yeah, I have exams.",
+            "score": 0.0,
+            "feedback": "This reduces the library to exam prep, misses the connection."
+          },
+          {
+            "text_zh": "是啊，我去图书馆是因为那里有WiFi。",
+            "text_pinyin": "Shì a, wǒ qù túshūguǎn shì yīnwèi nàlǐ yǒu WiFi.",
+            "text_en": "Yeah, I go to the library because they have WiFi there.",
+            "score": 0.0,
+            "feedback": "She nods but the conversation stalls — she was hoping to connect, not hear about WiFi."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Sharing an umbrella (共伞) is one of the most natural and common small kindnesses in China. It often becomes the starting point for friendships. The phrase 好像总能看到你 is a gentle way of saying 'I've noticed you' without being intrusive — a very Chinese way to acknowledge a quiet familiarity."
+  }
+}

@@ -1,0 +1,151 @@
+{
+    "title": "The Detective of Lost Objects",
+    "title_zh": "失物侦探",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're sitting in a cluttered office above a locksmith shop in an old Beijing neighborhood. The owner, Old Qian, is known locally as someone who finds lost things — not a private detective exactly, but a retired postal worker who uses his encyclopedic knowledge of the neighborhood's rhythms to reunite people with lost possessions. He's studying a faded photograph someone dropped off this morning.",
+        "setup_zh": "你坐在一个老北京社区锁匠店楼上的杂乱办公室里。店主老钱在附近很有名——他专门帮人找失物。他不算是私家侦探，而是一个退休邮递员，凭借他对社区节奏的百科全书般的了解，帮人们找回丢失的东西。他正在研究今天早上有人送来的一张褪色照片。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这张照片，背面写着「1987年春，什刹海」。今天早上一个老太太拿来的，说是在搬家的时候弄丢了一整盒老照片，这是唯一找回来的一张。她不是要我找照片——照片已经没了——她想找照片里另外那个人。三十多年没联系了。",
+                "text_pinyin": "Nǐ kàn zhè zhāng zhàopiàn, bèimiàn xiě zhe '1987 nián chūn, Shíchàhǎi'. Jīntiān zǎoshang yīge lǎo tàitai ná lái de, shuō shì zài bānjiā de shíhòu nòng diū le yī zhěng hé lǎo zhàopiàn, zhè shì wéiyī zhǎo huílái de yī zhāng. Tā bú shì yào wǒ zhǎo zhàopiàn — zhàopiàn yǐjīng méi le — tā xiǎng zhǎo zhàopiàn lǐ lìngwài nàge rén. Sānshí duō nián méi liánxì le.",
+                "text_en": "Look at this photo — on the back it says 'Spring 1987, Shichahai.' An elderly woman brought it in this morning. She said she lost a whole box of old photos while moving, and this is the only one she recovered. She doesn't want me to find the photos — they're gone — she wants to find the other person in the photo. They haven't been in contact for over thirty years."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about how he goes about finding someone from thirty years ago.",
+                "options": [
+                    {
+                        "text_zh": "三十多年……这不是一般的寻人启事能解决的。您平时怎么找人？不像是靠数据库，更像是靠一种对这片地方的直觉？",
+                        "text_pinyin": "Sānshí duō nián…… zhè bú shì yībān de xúnrén qǐshì néng jiějué de. Nín píngshí zěnme zhǎo rén? Bú xiàng shì kào shùjùkù, gèng xiàng shì kào yī zhǒng duì zhè piàn dìfang de zhíjué?",
+                        "text_en": "Over thirty years… a missing-person notice won't solve this. How do you usually find people? It doesn't seem like you rely on databases — more like some kind of intuition about this area?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He looks up from the photo with a small pleased expression. \"Intuition — that's one word for it,\" he says. \"Let me tell you what it actually is.\""
+                    },
+                    {
+                        "text_zh": "现在用互联网搜一下不就行了？何必这么麻烦。",
+                        "text_pinyin": "Xiànzài yòng hùliánwǎng sōu yīxià bú jiù xíng le? Hébì zhème máfan.",
+                        "text_en": "Just search on the internet, why make it so complicated?",
+                        "score": 0.0,
+                        "feedback": "He holds up the photo. \"This woman is probably in her seventies. She's not online,\" he says, not unkindly."
+                    },
+                    {
+                        "text_zh": "三十年没联系，对方可能已经搬走了或者去世了吧？",
+                        "text_pinyin": "Sānshí nián méi liánxì, duìfāng kěnéng yǐjīng bān zǒu le huòzhě qùshì le ba?",
+                        "text_en": "After thirty years without contact, the other person might have moved away or passed away, right?",
+                        "score": 0.0,
+                        "feedback": "\"Possibly,\" he says, and sets the photo down. \"But the old lady wants to know for certain. That's enough reason for me to look.\""
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "直觉？也算吧。我当了三十年邮递员，每天骑自行车在同一片区域转。谁搬来了、谁搬走了、哪家生了孩子、哪家老人过世了——这些我都知道。人们觉得邮递员只是送信的，但其实我们是城市的毛细血管，最细微的变化都经过我们的手。",
+                "text_pinyin": "Zhíjué? Yě suàn ba. Wǒ dāng le sānshí nián yóudìyuán, měi tiān qí zìxíngchē zài tóngyī piàn qūyù zhuǎn. Shéi bān lái le, shéi bān zǒu le, nǎ jiā shēng le háizi, nǎ jiā lǎorén guòshì le — zhèxiē wǒ dōu zhīdào. Rénmen juéde yóudìyuán zhǐ shì sòng xìn de, dàn qíshí wǒmen shì chéngshì de máoxì xuèguǎn, zuì xìwēi de biànhuà dōu jīngguò wǒmen de shǒu.",
+                "text_en": "Intuition? You could call it that. I was a postal worker for thirty years, riding my bicycle through the same area every day. Who moved in, who moved away, which family had a baby, which family's elder passed away — I knew it all. People think postal workers just deliver mail, but really we're the city's capillaries — the most subtle changes pass through our hands."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his metaphor of postal workers as the city's capillaries.",
+                "options": [
+                    {
+                        "text_zh": "毛细血管这个比喻太好了。动脉是大路，地铁线，而你们走的是地图上不标注的小路。正因为路线细到无人关注，反而观察到了整个城市最真实的脉动。",
+                        "text_pinyin": "Máoxì xuèguǎn zhège bǐyù tài hǎo le. Dòngmài shì dà lù, dìtiě xiàn, ér nǐmen zǒu de shì dìtú shàng bù biāozhù de xiǎo lù. Zhèng yīnwèi lùxiàn xì dào wú rén guānzhù, fǎn'ér guānchá dào le zhěnggè chéngshì zuì zhēnshí de màidòng.",
+                        "text_en": "The capillary metaphor is perfect. Arteries are main roads and subway lines, but you walked lanes that don't appear on maps. Because your routes were too fine to notice, you saw the city's most authentic pulse.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He taps the table once, satisfied. \"That's right. Nobody ever watched us, so we watched everything.\""
+                    },
+                    {
+                        "text_zh": "现在还有人寄信吗？我觉得邮局快被淘汰了吧。",
+                        "text_pinyin": "Xiànzài hái yǒu rén jì xìn ma? Wǒ juéde yóujú kuài bèi táotài le ba.",
+                        "text_en": "Does anyone still send letters? I think the post office is becoming obsolete.",
+                        "score": 0.0,
+                        "feedback": "He gives you a slightly deflated look. \"The post office still exists,\" he says. \"But yes, it's changed a lot.\""
+                    },
+                    {
+                        "text_zh": "三十年同一条路线，不觉得无聊吗？",
+                        "text_pinyin": "Sānshí nián tóngyī tiáo lùxiàn, bù juéde wúliáo ma?",
+                        "text_en": "Thirty years on the same route — didn't that get boring?",
+                        "score": 0.0,
+                        "feedback": "He shakes his head. \"The route was the same. The street was different every single day,\" he says."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "活的记忆——对，就是这个感觉。比如这张照片，1987年什刹海。我记得那几年什刹海边上有一家裁缝铺，老板姓周。如果照片里的女人当年住在附近，周师傅的老婆可能认识她——那时候邻里之间谁不认识谁呢？所以我现在要做的第一步是找到周师傅的后人。",
+                "text_pinyin": "Huó de jìyì — duì, jiù shì zhège gǎnjué. Bǐrú zhè zhāng zhàopiàn, 1987 nián Shíchàhǎi. Wǒ jìde nà jǐ nián Shíchàhǎi biān shàng yǒu yī jiā cáiféng pù, lǎobǎn xìng Zhōu. Rúguǒ zhàopiàn lǐ de nǚrén dāngnián zhù zài fùjìn, Zhōu shīfu de lǎopó kěnéng rènshì tā — nà shíhòu línlǐ zhī jiān shéi bú rènshì shéi ne? Suǒyǐ wǒ xiànzài yào zuò de dì yī bù shì zhǎo dào Zhōu shīfu de hòurén.",
+                "text_en": "Living memory — yes, that's exactly how it feels. Take this photo: 1987, Shichahai. I remember that in those years there was a tailor shop by Shichahai — the owner's surname was Zhou. If the woman in the photo lived nearby back then, Master Zhou's wife might have known her — in those days, who among the neighbors didn't know everyone? So my first step is to find Master Zhou's descendants."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the way he reasons through chains of people rather than chains of evidence.",
+                "options": [
+                    {
+                        "text_zh": "你的推理跟警察完全不同。他们靠证据链，你靠的是关系链——谁认识谁，谁住在谁旁边。这种方法的前提是社区足够紧密，每个人都是别人记忆的一部分。",
+                        "text_pinyin": "Nǐ de tuīlǐ gēn jǐngchá wánquán bùtóng. Tāmen kào zhèngjù liàn, nǐ kào de shì guānxì liàn — shéi rènshì shéi, shéi zhù zài shéi pángbiān. Zhè zhǒng fāngfǎ de qiántí shì shèqū zúgòu jǐnmì, měige rén dōu shì biérén jìyì de yī bùfen.",
+                        "text_en": "Your reasoning differs from police work. They follow evidence chains; you follow relationship chains — who knew whom, who lived next to whom. It only works if the community is tight enough that everyone is part of someone's memory.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He points at you. \"Exactly. And that's also why it's getting harder.\""
+                    },
+                    {
+                        "text_zh": "你应该开个抖音号，记录你的破案过程，肯定能火。",
+                        "text_pinyin": "Nǐ yīnggāi kāi ge Dǒuyīn hào, jìlù nǐ de pò'àn guòchéng, kěndìng néng huǒ.",
+                        "text_en": "You should start a Douyin account and record your cases, you'd definitely go viral.",
+                        "score": 0.0,
+                        "feedback": "He looks at you like you've said something from another world. \"I don't want to go viral,\" he says flatly. \"I want to find the woman.\""
+                    },
+                    {
+                        "text_zh": "找人的话，直接发朋友圈不是更快吗？",
+                        "text_pinyin": "Zhǎo rén dehuà, zhíjiē fā péngyǒu quān bú shì gèng kuài ma?",
+                        "text_en": "If you're looking for someone, wouldn't posting on WeChat Moments be faster?",
+                        "score": 0.0,
+                        "feedback": "\"The person I'm looking for is in her seventies. She's not on WeChat Moments,\" he says patiently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到点子上了。我最近越来越难找了——不是因为我老了，是因为社区散了。以前一个裁缝铺可以连接半条街的人，现在大家住在不同的小区里，互相不认识。我的方法需要的原材料正在消失。",
+                "text_pinyin": "Nǐ shuō dào diǎnzi shàng le. Wǒ zuìjìn yuè lái yuè nán zhǎo le — bú shì yīnwèi wǒ lǎo le, shì yīnwèi shèqū sàn le. Yǐqián yīge cáiféng pù kěyǐ liánjiē bàn tiáo jiē de rén, xiànzài dàjiā zhù zài bùtóng de xiǎoqū lǐ, hùxiāng bú rènshì. Wǒ de fāngfǎ xūyào de yuáncáiliào zhèngzài xiāoshī.",
+                "text_en": "You've hit the nail on the head. It's been getting harder and harder for me lately — not because I'm getting old, but because the community has scattered. A tailor shop used to connect half a street's worth of people; now everyone lives in different residential compounds, strangers to each other. The raw material my method needs is disappearing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that the social fabric his method depends on is dissolving.",
+                "options": [
+                    {
+                        "text_zh": "有点像一种悖论——您做的事情证明了社区联系的价值，但您能做这件事的前提，也就是社区本身，正在瓦解。您越成功，越让人意识到那种东西正在消失。",
+                        "text_pinyin": "Yǒudiǎn xiàng yī zhǒng bèilùn — nín zuò de shìqíng zhèngmíng le shèqū liánxì de jiàzhí, dàn nín néng zuò zhè jiàn shì de qiántí, yě jiù shì shèqū běnshēn, zhèngzài wǎjiě. Nín yuè chénggōng, yuè ràng rén yìshí dào nà zhǒng dōngxī zhèngzài xiāoshī.",
+                        "text_en": "It's almost a paradox — your work proves the value of community connections, but the premise for doing it — the community itself — is dissolving. The better you are at this, the more it highlights what's being lost.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He's quiet for a moment. He sets the photograph down and looks at it. \"I hadn't thought about it that way,\" he says slowly. \"But yes.\""
+                    },
+                    {
+                        "text_zh": "那你退休以后不是应该好好休息吗？何必给自己找事做。",
+                        "text_pinyin": "Nà nǐ tuìxiū yǐhòu bú shì yīnggāi hǎohǎo xiūxi ma? Hébì gěi zìjǐ zhǎo shì zuò.",
+                        "text_en": "Shouldn't you be resting properly after retirement? Why look for things to do?",
+                        "score": 0.0,
+                        "feedback": "He looks up at you. \"Resting from what?\" he says simply."
+                    },
+                    {
+                        "text_zh": "我觉得城市化是大趋势，没办法阻挡的。",
+                        "text_pinyin": "Wǒ juéde chéngshìhuà shì dà qūshì, méi bànfǎ zǔdǎng de.",
+                        "text_en": "I think urbanization is the big trend, there's no stopping it.",
+                        "score": 0.0,
+                        "feedback": "He nods without expression. \"I know,\" he says. \"I'm not trying to stop it. I'm just trying to find this one woman.\""
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's rapid urbanization has fragmented the dense social networks that once characterized traditional neighborhoods. Postal workers in the pre-digital era served as informal social infrastructure — knowing residents by name, tracking moves and life events through address changes. The 'lost object detective' figure represents a form of community knowledge that has no digital equivalent: an embodied understanding of how lives intersect in physical space, built over decades of daily presence."
+    }
+}

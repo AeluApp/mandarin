@@ -1,0 +1,83 @@
+{
+  "title": "Rain on the Window",
+  "title_zh": "窗户上的雨",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "It's raining outside. You and your roommate are sitting by the window drinking tea and watching the rain.",
+    "setup_zh": "外面下雨了。你和你的室友坐在窗边喝茶，看着窗外的雨。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "下雨天哪儿也去不了。不过我觉得下雨天待在家里也很好。",
+        "text_pinyin": "Xià yǔ tiān nǎr yě qù bù liǎo. Búguò wǒ juéde xià yǔ tiān dāi zài jiālǐ yě hěn hǎo.",
+        "text_en": "Can't go anywhere on a rainy day. But I think staying home on rainy days is nice too."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share what you enjoy about rainy days.",
+        "options": [
+          {
+            "text_zh": "我也喜欢下雨天。听雨的声音，喝热茶，很舒服。",
+            "text_pinyin": "Wǒ yě xǐhuan xià yǔ tiān. Tīng yǔ de shēngyīn, hē rè chá, hěn shūfu.",
+            "text_en": "I like rainy days too. Listening to the rain, drinking hot tea — it's comfortable.",
+            "score": 1.0,
+            "feedback": "Peaceful and present — finds comfort in the rain.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我想出去玩。",
+            "text_pinyin": "Wǒ xiǎng chūqù wán.",
+            "text_en": "I want to go out and have fun.",
+            "score": 0.0,
+            "feedback": "Rejects the cozy rainy-day mood."
+          },
+          {
+            "text_zh": "明天会不会下雨？",
+            "text_pinyin": "Míngtiān huì bú huì xià yǔ?",
+            "text_en": "Will it rain tomorrow?",
+            "score": 0.0,
+            "feedback": "Jumps to weather forecasting instead of enjoying the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，就是这种感觉。小时候下雨，我妈妈会给我做热汤。现在一下雨我就想喝汤。",
+        "text_pinyin": "Duì, jiù shì zhè zhǒng gǎnjué. Xiǎo shíhou xià yǔ, wǒ māma huì gěi wǒ zuò rè tāng. Xiànzài yī xià yǔ wǒ jiù xiǎng hē tāng.",
+        "text_en": "Exactly, that feeling. When it rained as a kid, my mom would make me hot soup. Now whenever it rains, I crave soup."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her memory about rain and soup.",
+        "options": [
+          {
+            "text_zh": "这真好。有些味道和记忆是一起的。你妈妈做的什么汤？",
+            "text_pinyin": "Zhè zhēn hǎo. Yǒuxiē wèidào hé jìyì shì yīqǐ de. Nǐ māma zuò de shénme tāng?",
+            "text_en": "That's lovely. Some tastes and memories go together. What soup did your mom make?",
+            "score": 1.0,
+            "feedback": "Gentle and curious — honors the connection between food and memory.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不太喜欢喝汤。",
+            "text_pinyin": "Wǒ bú tài xǐhuan hē tāng.",
+            "text_en": "I don't really like soup.",
+            "score": 0.0,
+            "feedback": "Dismisses her fond memory with a personal preference."
+          },
+          {
+            "text_zh": "你妈妈在哪里？",
+            "text_pinyin": "Nǐ māma zài nǎlǐ?",
+            "text_en": "Where is your mom?",
+            "score": 0.0,
+            "feedback": "Too direct; could touch on something sensitive."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Rainy days in China often evoke feelings of nostalgia and coziness. Hot soup (热汤) is closely associated with maternal care. The connection between weather, food, and childhood memories is a common thread in Chinese daily conversation, where sensory experiences carry deep emotional weight."
+  }
+}

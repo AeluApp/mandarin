@@ -1,0 +1,124 @@
+{
+    "title": "The Red Envelope Dilemma",
+    "title_zh": "红包难题",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_3_01_v0",
+    "tree": {
+        "setup": "Your colleague Xiao Mei is getting married next month and just handed you an invitation at the office. The red and gold card is beautiful. You know you need to give a red envelope (hongbao) but have no idea how much money is appropriate. Your desk neighbor, Lao Zhou, watches you stare at the invitation with the expression of someone solving a math problem.",
+        "setup_zh": "你的同事小梅下个月结婚，刚在办公室给了你请帖。红金色的请帖很漂亮。你知道要给红包但完全不知道给多少合适。你隔壁桌的老周看着你盯着请帖，像在解数学题的表情。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "收到请帖了？纠结红包给多少吧？",
+                "text_pinyin": "shōu dào qǐngtiě le? jiūjié hóngbāo gěi duōshao ba?",
+                "text_en": "Got the invitation? Struggling with how much to put in the red envelope?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for guidance on the red envelope amount.",
+                "options": [
+                    {
+                        "text_zh": "是啊，完全不知道行情。一般同事的婚礼给多少合适？",
+                        "text_pinyin": "shì a, wánquán bù zhīdào hángqíng. yìbān tóngshì de hūnlǐ gěi duōshao héshì?",
+                        "text_en": "Yeah, I have no idea what's standard. How much is usually appropriate for a colleague's wedding?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Zhou leans in like a financial advisor.「同事的话，一般五百到八百。关系好的话可以给一千。但是千万不要给四百——四不吉利。」行情 is 'going rate.' 合适 is 'appropriate.' 不吉利 means 'unlucky.'"
+                    },
+                    {
+                        "text_zh": "红包是一定要给的吗？可以送礼物代替吗？",
+                        "text_pinyin": "hóngbāo shì yídìng yào gěi de ma? kěyǐ sòng lǐwù dàitì ma?",
+                        "text_en": "Is a red envelope mandatory? Can I give a gift instead?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Zhou shakes his head firmly.「婚礼一定要给红包。礼物可以另外送，但红包不能少。这是规矩。」代替 is 'replace/substitute.' 规矩 is 'custom/rule.' Red envelopes at weddings are non-negotiable."
+                    },
+                    {
+                        "text_zh": "给两百行吗？",
+                        "text_pinyin": "gěi liǎngbǎi xíng ma?",
+                        "text_en": "Would 200 be OK?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Zhou winces.「两百……有点少。现在行情最少也要五百。不然人家会记住的。」记住 here means 'will remember' -- and not in a good way."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "还有，金额要双数的。六百六十六、八百八十八这种最好。六和八都是吉利数字。不要给带四的数。",
+                "text_pinyin": "háiyǒu, jīn'é yào shuāngshù de. liùbǎi liùshíliù, bābǎi bāshíbā zhè zhǒng zuì hǎo. liù hé bā dōu shì jílì shùzì. búyào gěi dài sì de shù.",
+                "text_en": "Also, the amount should be an even number. 666, 888 -- these are best. 6 and 8 are lucky numbers. Don't give amounts with 4."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond and ask more details.",
+                "options": [
+                    {
+                        "text_zh": "明白了，六百六十六。是用微信转账还是现金放红包里？",
+                        "text_pinyin": "míngbai le, liùbǎi liùshíliù. shì yòng wēixìn zhuǎnzhàng háishi xiànjīn fàng hóngbāo lǐ?",
+                        "text_en": "Got it, 666. Should I send it via WeChat transfer or put cash in a physical red envelope?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「看情况。如果你去婚礼现场，带现金红包，到门口有签到台。如果去不了，微信转账也行。」转账 is 'transfer.' 签到台 is 'sign-in desk.' Both methods are acceptable."
+                    },
+                    {
+                        "text_zh": "原来数字也有讲究啊。那六百八好不好？",
+                        "text_pinyin": "yuánlái shùzì yě yǒu jiǎngjiu a. nà liùbǎi bā hǎo bu hǎo?",
+                        "text_en": "So numbers matter too. Is 608 OK?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「六百八？有点奇怪。要么六百六，要么八百。选一个整数。」有讲究 means 'there are particular rules.' 要么...要么 is 'either...or.' Stick to established auspicious numbers."
+                    },
+                    {
+                        "text_zh": "哇，规矩好多。我以前完全不知道。谢谢你教我！",
+                        "text_pinyin": "wa, guījǔ hǎo duō. wǒ yǐqián wánquán bù zhīdào. xièxie nǐ jiāo wǒ!",
+                        "text_en": "Wow, so many rules. I had no idea before. Thanks for teaching me!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Zhou waves dismissively.「不客气。这种事问一次就知道了。以后别人结婚你也知道怎么做了。」规矩 is 'rules/customs.' Learning social rules saves embarrassment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，婚礼那天你去不去？如果去的话，穿正式一点。别穿白色或者黑色——那是参加葬礼穿的。",
+                "text_pinyin": "duì le, hūnlǐ nà tiān nǐ qù bu qù? rúguǒ qù de huà, chuān zhèngshì yìdiǎn. bié chuān báisè huòzhě hēisè — nà shì cānjiā zànglǐ chuān de.",
+                "text_en": "By the way, are you going to the wedding? If so, dress up a bit. Don't wear white or black -- those are for funerals."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm attendance and ask about dress code.",
+                "options": [
+                    {
+                        "text_zh": "去的。那穿什么颜色好？深蓝色的西装可以吗？",
+                        "text_pinyin": "qù de. nà chuān shénme yánsè hǎo? shēn lán sè de xīzhuāng kěyǐ ma?",
+                        "text_en": "I'm going. What color should I wear? Is a dark blue suit OK?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「深蓝色完全没问题！很得体。」Lao Zhou nods approvingly. 得体 means 'appropriate/proper.' Dark blue is always safe for Chinese weddings."
+                    },
+                    {
+                        "text_zh": "想去。但是那天可能有事。如果去不了的话只发红包可以吗？",
+                        "text_pinyin": "xiǎng qù. dànshì nà tiān kěnéng yǒu shì. rúguǒ qù bu liǎo de huà zhǐ fā hóngbāo kěyǐ ma?",
+                        "text_en": "I want to go. But I might have something that day. If I can't make it, is just sending a red envelope OK?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「可以的，提前给她微信转账就行。但是记得说一句祝福的话。」去不了 is 'can't make it.' 祝福 is 'blessing/well-wishes.' A red envelope with a warm message works."
+                    },
+                    {
+                        "text_zh": "去！不穿黑色白色，记住了。红色呢？红色吉利吧？",
+                        "text_pinyin": "qù! bù chuān hēisè báisè, jìzhù le. hóngsè ne? hóngsè jílì ba?",
+                        "text_en": "I'll go! No black or white, got it. What about red? Red is lucky, right?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「红色是新娘穿的！你穿红色的话抢了人家的风头。」Lao Zhou catches a potential disaster. 抢风头 is 'steal the spotlight.' Red is reserved for the bride in Chinese weddings."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Wedding red envelopes (婚礼红包) follow strict rules: even numbers, auspicious digits (6=smooth, 8=wealth), never use 4 (sounds like 'death'). Common amounts: 666, 800, 888, 1000. Don't wear white, black, or red to Chinese weddings -- white/black are funeral colors, red is for the bride. 签到台 (qiāndào tái) is where you register and hand in your red envelope."
+    }
+}

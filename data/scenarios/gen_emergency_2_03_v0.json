@@ -1,0 +1,94 @@
+{
+    "title": "The Flat Tire Philosopher",
+    "title_zh": "轮胎哲学家",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_2_03_v0",
+    "tree": {
+        "setup": "A quiet road outside a small town. Your shared ride has a flat tire. The driver, Lao He, steps out, looks at the tire, and sighs with the philosophical acceptance of a man who has been on this road many times. He has a spare tire and a jack, and he seems in no particular rush. A farmer's field stretches out to the horizon. It's very peaceful, if you ignore the flat tire.",
+        "setup_zh": "小镇外面的安静公路。你坐的车爆胎了。司机老何下车看着轮胎，用一种哲学般的淡然叹了口气。他有备胎和千斤顶，不太着急。旁边是一望无际的农田。如果忽略爆胎的话，其实很安静。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "唉，爆胎了。没关系，我换一下，你等等。",
+                "text_pinyin": "āi, bào tāi le. méi guānxi, wǒ huàn yíxià, nǐ děngdeng.",
+                "text_en": "Sigh, flat tire. No worries, I'll change it, just wait."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the situation.",
+                "options": [
+                    {
+                        "text_zh": "需要我帮忙吗？",
+                        "text_pinyin": "xūyào wǒ bāngmáng ma?",
+                        "text_en": "Do you need help?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao He waves you off but looks pleased you offered.「不用不用，我一个人可以。」Offering help with 需要我帮忙吗 is always appreciated, even when declined."
+                    },
+                    {
+                        "text_zh": "要多长时间？",
+                        "text_pinyin": "yào duō cháng shíjiān?",
+                        "text_en": "How long will it take?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao He looks at the sky as if consulting it.「二十分钟吧。」He's done this before. Many times. On this exact stretch of road, in fact. 多长时间 asks about duration."
+                    },
+                    {
+                        "text_zh": "我们可以叫别的车吗？",
+                        "text_pinyin": "wǒmen kěyǐ jiào bié de chē ma?",
+                        "text_en": "Can we call another car?",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Lao He looks at you, then at the empty road, then at the field. There is no signal. There is no other car. There is only the tire and the jack and the horizon. He begins changing the tire."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，换好了！不好意思，让你等了。",
+                "text_pinyin": "hǎo le, huàn hǎo le! bù hǎoyìsi, ràng nǐ děng le.",
+                "text_en": "Done, it's changed! Sorry for making you wait."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reassure him.",
+                "options": [
+                    {
+                        "text_zh": "没关系！你很厉害，换得很快。",
+                        "text_pinyin": "méi guānxi! nǐ hěn lìhai, huàn de hěn kuài.",
+                        "text_en": "No problem! You're impressive, that was fast.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao He wipes his hands on a rag and smiles -- the quiet smile of a man whose skills have been recognized.「习惯了。」厉害 is a great compliment meaning 'impressive' or 'skilled.'"
+                    },
+                    {
+                        "text_zh": "谢谢！我们走吧。",
+                        "text_pinyin": "xièxie! wǒmen zǒu ba.",
+                        "text_en": "Thanks! Let's go.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao He nods and starts the engine. The fields roll past again. He turns on the radio. Everything is back to normal."
+                    },
+                    {
+                        "text_zh": "这个轮胎以后不会再爆吧？",
+                        "text_pinyin": "zhè ge lúntāi yǐhòu bú huì zài bào ba?",
+                        "text_en": "This tire won't blow again, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao He looks at you with the patience of the Buddha.「这是备胎，新的。放心吧。」放心 means 'don't worry' -- he's an old hand at reassurance."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "开车嘛，什么事都可能遇到。放心吧！",
+                "text_pinyin": "kāi chē ma, shénme shì dōu kěnéng yùdào. fàngxīn ba!",
+                "text_en": "When you drive, anything can happen. Don't worry!"
+            }
+        ],
+        "cultural_note": "Breakdowns on Chinese roads, especially rural ones, are handled with remarkable calm. Drivers usually carry spare tires and tools. 放心 (fàngxīn, 'be at ease') is one of the most comforting phrases in Chinese -- it means 'I've got this.'"
+    }
+}

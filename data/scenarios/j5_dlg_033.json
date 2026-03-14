@@ -1,0 +1,89 @@
+{
+    "title": "The Box Under the Bed",
+    "title_zh": "床下的箱子",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your friend Xiaolu found a box of old printed photos while cleaning her apartment. She's sitting cross-legged on the floor, sorting through them.",
+        "setup_zh": "朋友小璐在整理公寓时发现了一箱旧照片。她盘腿坐在地上，一张一张地翻看。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这张——这是我小学毕业的时候，全班合照。那时候我们都觉得小学毕业是天大的事，以为离开以后就再也见不到了。结果长大了才发现，真正让人难过的离别都是悄悄发生的。",
+                "text_pinyin": "Nǐ kàn zhè zhāng — zhè shì wǒ xiǎoxué bìyè de shíhou, quán bān hézhào. Nà shíhou wǒmen dōu juéde xiǎoxué bìyè shì tiān dà de shì, yǐwéi líkāi yǐhòu jiù zài yě jiàn bú dào le. Jiéguǒ zhǎng dà le cái fāxiàn, zhēnzhèng ràng rén nánguò de líbié dōu shì qiāoqiāo fāshēng de.",
+                "text_en": "Look at this one — this is from my elementary school graduation, the whole class photo. Back then we all thought graduation was the biggest deal, that we'd never see each other again. But growing up, I realized the partings that truly make you sad all happen quietly."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her observation about partings.",
+                "options": [
+                    {
+                        "text_zh": "悄悄发生的离别……是啊。不是谁突然消失了，而是联系慢慢少了，有一天你发现已经很久没有说过话了。这种离别没有告别的机会，所以更让人遗憾。",
+                        "text_pinyin": "Qiāoqiāo fāshēng de líbié…… shì a. Bú shì shéi tūrán xiāoshī le, ér shì liánxì mànman shǎo le, yǒu yī tiān nǐ fāxiàn yǐjīng hěn jiǔ méiyǒu shuō guò huà le. Zhè zhǒng líbié méiyǒu gàobié de jīhuì, suǒyǐ gèng ràng rén yíhàn.",
+                        "text_en": "Partings that happen quietly... yes. It's not that someone suddenly disappears, but contact slowly fades, and one day you realize it's been ages since you spoke. These partings have no chance for goodbye, which makes them more regrettable.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Resonant and precise — names the mechanism of gradual loss."
+                    },
+                    {
+                        "text_zh": "现在都用手机拍照了，不用洗照片了。",
+                        "text_pinyin": "Xiànzài dōu yòng shǒujī pāi zhào le, bú yòng xǐ zhàopiàn le.",
+                        "text_en": "Now everyone uses phones, no need to print photos.",
+                        "score": 0.0,
+                        "feedback": "Compares technology when she's sharing emotion."
+                    },
+                    {
+                        "text_zh": "你还联系班里的同学吗？",
+                        "text_pinyin": "Nǐ hái liánxì bān lǐ de tóngxué ma?",
+                        "text_en": "Are you still in touch with your classmates?",
+                        "score": 0.0,
+                        "feedback": "Not terrible but misses the philosophical depth of what she said."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你看这些照片，每一张背后都有一个故事，但大部分我已经记不清了。有时候看到一张照片里的人，我知道我们以前很好，但想不起来我们一起做过什么。记忆真的很脆弱。",
+                "text_pinyin": "Nǐ kàn zhèxiē zhàopiàn, měi yī zhāng bèihòu dōu yǒu yīge gùshi, dàn dà bùfen wǒ yǐjīng jì bù qīng le. Yǒu shíhou kàn dào yī zhāng zhàopiàn lǐ de rén, wǒ zhīdào wǒmen yǐqián hěn hǎo, dàn xiǎng bù qǐlái wǒmen yīqǐ zuò guò shénme. Jìyì zhēn de hěn cuìruò.",
+                "text_en": "Look at these photos — each one has a story behind it, but most I can't remember clearly. Sometimes I see a person in a photo and know we used to be close, but I can't recall what we did together. Memory is really fragile."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer a comforting thought about memory and photos.",
+                "options": [
+                    {
+                        "text_zh": "也许记不清细节没关系。你记得你们曾经很好，这就是最重要的记忆。照片的意义不是让你记住一切，而是提醒你那段时光真实存在过。故事模糊了，温度还在。",
+                        "text_pinyin": "Yěxǔ jì bù qīng xìjié méi guānxi. Nǐ jìde nǐmen céngjīng hěn hǎo, zhè jiù shì zuì zhòngyào de jìyì. Zhàopiàn de yìyì bú shì ràng nǐ jìzhù yīqiè, ér shì tíxǐng nǐ nà duàn shíguāng zhēnshí cúnzài guò. Gùshi móhu le, wēndù hái zài.",
+                        "text_en": "Maybe not remembering the details is okay. You remember you were close — that's the most important memory. Photos don't exist to make you remember everything, but to remind you that time really happened. Stories fade, but the warmth remains.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gentle and comforting — redefines what memory preservation means."
+                    },
+                    {
+                        "text_zh": "你应该把这些照片扫描存到电脑里，不然会褪色。",
+                        "text_pinyin": "Nǐ yīnggāi bǎ zhèxiē zhàopiàn sǎomiáo cún dào diànnǎo lǐ, bùrán huì tuìsè.",
+                        "text_en": "You should scan these photos and save them on your computer, otherwise they'll fade.",
+                        "score": 0.0,
+                        "feedback": "Practical advice that misses the emotional moment."
+                    },
+                    {
+                        "text_zh": "你小时候好可爱啊！",
+                        "text_pinyin": "Nǐ xiǎo shíhou hǎo kě'ài a!",
+                        "text_en": "You were so cute as a kid!",
+                        "score": 0.0,
+                        "feedback": "Superficial — doesn't engage with the deeper reflection on memory and loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "温度还在……嗯。谢谢你。我不会把这些照片扔掉的。就算记不清了，至少我知道自己曾经被这么多人温暖过。",
+                "text_pinyin": "Wēndù hái zài…… en. Xièxie nǐ. Wǒ bú huì bǎ zhèxiē zhàopiàn rēng diào de. Jiùsuàn jì bù qīng le, zhìshǎo wǒ zhīdào zìjǐ céngjīng bèi zhème duō rén wēnnuǎn guò.",
+                "text_en": "The warmth remains... yes. Thank you. I won't throw these photos away. Even if I can't remember clearly, at least I know I was once warmed by so many people."
+            }
+        ],
+        "cultural_note": "Physical printed photographs carry special emotional weight in China, where the transition from film to digital happened rapidly in the 2000s. Many families have boxes of old photos from an era before smartphones, each one deliberately taken and developed. The phrase「温度还在」(the warmth remains) speaks to a Chinese understanding of memory as emotional rather than factual — what matters is not the precise details but the feeling that persists."
+    }
+}

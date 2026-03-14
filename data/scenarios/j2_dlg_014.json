@@ -1,0 +1,83 @@
+{
+  "title": "The Photo Booth",
+  "title_zh": "照相馆",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You need a passport photo. You find a small, old-fashioned photo studio run by an elderly couple.",
+    "setup_zh": "你需要拍证件照。你找到了一家老式照相馆，老板是一对老夫妻。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "拍证件照？好，你坐这里。不要紧张，笑一笑。",
+        "text_pinyin": "Pāi zhèngjiàn zhào? Hǎo, nǐ zuò zhèlǐ. Bú yào jǐnzhāng, xiào yī xiào.",
+        "text_en": "Passport photo? Okay, sit here. Don't be nervous — smile a little."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "React to the photo session.",
+        "options": [
+          {
+            "text_zh": "好的。我每次拍照都不太自然，不好意思。",
+            "text_pinyin": "Hǎo de. Wǒ měi cì pāi zhào dōu bú tài zìrán, bù hǎo yìsi.",
+            "text_en": "Okay. I'm always a bit unnatural in photos, sorry about that.",
+            "score": 1.0,
+            "feedback": "Honest and endearing — relatable admission.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你们这里有WiFi吗？",
+            "text_pinyin": "Nǐmen zhèlǐ yǒu WiFi ma?",
+            "text_en": "Do you have WiFi here?",
+            "score": 0.0,
+            "feedback": "You're about to have your photo taken."
+          },
+          {
+            "text_zh": "外面的路很难找。",
+            "text_pinyin": "Wàimiàn de lù hěn nán zhǎo.",
+            "text_en": "The road outside was hard to find.",
+            "score": 0.0,
+            "feedback": "He's trying to help you pose."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "没关系，很多人都这样。你看旁边，对，就这样。好了！你要看看吗？",
+        "text_pinyin": "Méi guānxi, hěn duō rén dōu zhèyàng. Nǐ kàn pángbiān, duì, jiù zhèyàng. Hǎo le! Nǐ yào kànkan ma?",
+        "text_en": "No worries, lots of people are like that. Look to the side — yes, just like that. Done! Want to see?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Look at the photo and respond.",
+        "options": [
+          {
+            "text_zh": "拍得真好！比我以前拍的好多了。谢谢您。",
+            "text_pinyin": "Pāi de zhēn hǎo! Bǐ wǒ yǐqián pāi de hǎo duō le. Xièxie nín.",
+            "text_en": "It came out great! Much better than ones I've had before. Thank you.",
+            "score": 1.0,
+            "feedback": "Genuine compliment — makes the photographer happy.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "可以便宜一点吗？",
+            "text_pinyin": "Kěyǐ piányi yīdiǎn ma?",
+            "text_en": "Can it be cheaper?",
+            "score": 0.0,
+            "feedback": "He's showing you the result, not quoting a price."
+          },
+          {
+            "text_zh": "我不太满意。",
+            "text_pinyin": "Wǒ bú tài mǎnyì.",
+            "text_en": "I'm not very satisfied.",
+            "score": 0.0,
+            "feedback": "Unlikely for such a kind interaction, and impolite."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Old-fashioned photo studios (照相馆) are disappearing but still cherished. The owners' patience and warmth turn a mundane task into a human moment. Their skill with lighting often produces surprisingly good portraits."
+  }
+}

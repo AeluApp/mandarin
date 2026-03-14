@@ -1,0 +1,94 @@
+{
+    "title": "The Study Group Organizer",
+    "title_zh": "学习小组组长",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_school_2_01_v0",
+    "tree": {
+        "setup": "The university cafeteria, lunch hour. Xiao Yan is organizing a study group for the upcoming Chinese exam. She has a spreadsheet on her laptop, color-coded by subject area, and is recruiting members with the energy of a startup founder pitching to investors. She has already assigned roles to people who haven't agreed yet.",
+        "setup_zh": "大学食堂，午饭时间。小燕在组织中文考试的学习小组。她的笔记本电脑上有一个按科目用颜色分类的表格，招人的劲头像创业者路演。她已经给还没答应的人分好了任务。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "嘿！你要不要加入我们的学习小组？星期二和星期四在图书馆。",
+                "text_pinyin": "hēi! nǐ yào bu yào jiārù wǒmen de xuéxí xiǎozǔ? xīngqī èr hé xīngqīsì zài túshūguǎn.",
+                "text_en": "Hey! Want to join our study group? Tuesdays and Thursdays at the library."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation.",
+                "options": [
+                    {
+                        "text_zh": "好啊！你们学什么？",
+                        "text_pinyin": "hǎo a! nǐmen xué shénme?",
+                        "text_en": "Sure! What do you study?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yan pulls up her spreadsheet triumphantly.「语法、生词、还有听力。每次两个小时。」你们学什么 shows interest while gathering information."
+                    },
+                    {
+                        "text_zh": "几个人？我不太喜欢人多的小组。",
+                        "text_pinyin": "jǐ gè rén? wǒ bú tài xǐhuan rén duō de xiǎozǔ.",
+                        "text_en": "How many people? I don't really like big groups.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「现在四个人，加上你五个。不多！」Xiao Yan assures you the group is 'intimate.' She defines intimate as 'fewer than twelve.' 不太喜欢 is a polite way to express a preference."
+                    },
+                    {
+                        "text_zh": "我想想……我星期二有课。",
+                        "text_pinyin": "wǒ xiǎngxiang... wǒ xīngqī èr yǒu kè.",
+                        "text_en": "Let me think... I have class on Tuesday.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yan is already adjusting her spreadsheet.「那你星期四来？」She adapts. She always adapts. 有课 means 'to have class.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！你可以负责准备生词表。我发给你。",
+                "text_pinyin": "tài hǎo le! nǐ kěyǐ fùzé zhǔnbèi shēngcí biǎo. wǒ fā gěi nǐ.",
+                "text_en": "Great! You can be in charge of preparing the vocabulary list. I'll send it to you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to your assigned role.",
+                "options": [
+                    {
+                        "text_zh": "好的，没问题！",
+                        "text_pinyin": "hǎo de, méi wèntí!",
+                        "text_en": "OK, no problem!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yan adds your name to the spreadsheet in green (green means 'confirmed'). You've been recruited. 没问题 is the most reliable way to accept a task."
+                    },
+                    {
+                        "text_zh": "等一下，我还没说我要加入……",
+                        "text_pinyin": "děng yíxià, wǒ hái méi shuō wǒ yào jiārù...",
+                        "text_en": "Wait, I haven't said I'm joining yet...",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yan blinks. In her mind, you joined the moment you said 好啊. She recalibrates.「那你再想想？」还没 + verb means 'haven't yet.'"
+                    },
+                    {
+                        "text_zh": "我做别的可以吗？比如找教室。",
+                        "text_pinyin": "wǒ zuò bié de kěyǐ ma? bǐrú zhǎo jiàoshì.",
+                        "text_en": "Can I do something else? Like finding a classroom.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yan adjusts the spreadsheet without complaint -- she respects someone who knows their strengths.「也行！」比如 means 'for example.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！我把微信群的链接发给你。星期四见！",
+                "text_pinyin": "tài hǎo le! wǒ bǎ wēixìn qún de liànjiē fā gěi nǐ. xīngqīsì jiàn!",
+                "text_en": "Great! I'll send you the WeChat group link. See you Thursday!"
+            }
+        ],
+        "cultural_note": "Study groups in Chinese universities are often organized via WeChat (微信) groups. One person usually takes the lead. Group study is culturally valued -- the idea is that everyone learns better together."
+    }
+}

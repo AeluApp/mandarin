@@ -1,0 +1,124 @@
+{
+    "title": "The Late Arrival Sonata",
+    "title_zh": "迟到奏鸣曲",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_4_03_v0",
+    "tree": {
+        "setup": "A café with wood-paneled walls and the smell of fresh pastry. You were supposed to meet your friend Xiao Mei at 3 PM. It is now 3:25. The subway had other plans, involving an unexplained fifteen-minute stop between stations during which the only announcement was 'please wait patiently' — repeated with increasing irony. Xiao Mei has been texting you question marks of escalating size.",
+        "setup_zh": "一家木质墙板的咖啡馆，空气里飘着新鲜糕点的香味。你本来应该下午三点跟小梅见面。现在已经三点二十五了。地铁有别的计划，包括在两站之间莫名其妙地停了十五分钟，唯一的广播是「请乘客耐心等候」——重复得越来越讽刺。小梅一直在给你发越来越大的问号。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你终于来了！我还以为你不来了呢。怎么回事？",
+                "text_pinyin": "nǐ zhōngyú lái le! wǒ hái yǐwéi nǐ bù lái le ne. zěnme huí shì?",
+                "text_en": "You're finally here! I thought you weren't coming. What happened?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize and explain.",
+                "options": [
+                    {
+                        "text_zh": "对不起对不起！地铁在中间停了十五分钟，也没说原因。我一直在给你发消息，你没收到吗？",
+                        "text_pinyin": "duìbuqǐ duìbuqǐ! dìtiě zài zhōngjiān tíng le shíwǔ fēnzhōng, yě méi shuō yuányīn. wǒ yìzhí zài gěi nǐ fā xiāoxi, nǐ méi shōu dào ma?",
+                        "text_en": "I'm so sorry! The subway stopped for fifteen minutes between stations without explanation. I kept texting you — didn't you get them?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Double apology, explanation, and evidence of communication attempts — Xiao Mei's irritation begins to dissolve."
+                    },
+                    {
+                        "text_zh": "不好意思，地铁晚了。",
+                        "text_pinyin": "bù hǎo yìsi, dìtiě wǎn le.",
+                        "text_en": "Sorry, the subway was late.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief but honest. She'll accept it, though the question marks were not sent lightly."
+                    },
+                    {
+                        "text_zh": "路上堵车了。",
+                        "text_pinyin": "lù shàng dǔ chē le.",
+                        "text_en": "Traffic was bad.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Wait — you said you took the subway. Xiao Mei's eyes narrow. Consistency matters."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哦，地铁故障啊。那没办法。我已经帮你点了一杯拿铁，不知道你还喝不喝。",
+                "text_pinyin": "ó, dìtiě gùzhàng a. nà méi bànfǎ. wǒ yǐjīng bāng nǐ diǎn le yì bēi ná tiě, bù zhīdào nǐ hái hē bù hē.",
+                "text_en": "Oh, subway breakdown. Can't help that then. I already ordered you a latte — not sure if you still want it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept graciously and make it up to her.",
+                "options": [
+                    {
+                        "text_zh": "你还帮我点了？太好了！今天的咖啡我请。算是迟到的补偿。",
+                        "text_pinyin": "nǐ hái bāng wǒ diǎn le? tài hǎo le! jīntiān de kāfēi wǒ qǐng. suàn shì chídào de bǔcháng.",
+                        "text_en": "You ordered for me? That's so nice! Coffee's on me today — consider it late-arrival compensation.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Turning the apology into generosity — Xiao Mei's question marks are forgiven and forgotten."
+                    },
+                    {
+                        "text_zh": "谢谢！拿铁正好。",
+                        "text_pinyin": "xièxie! ná tiě zhènghǎo.",
+                        "text_en": "Thanks! Latte is perfect.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grateful. The latte is still warm, and so is the friendship."
+                    },
+                    {
+                        "text_zh": "等了很久吧？",
+                        "text_pinyin": "děng le hěn jiǔ ba?",
+                        "text_en": "You waited a long time, huh?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Stating the obvious — she was here for twenty-five minutes. But at least you acknowledge it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好好好，那你请。以后记得早出门十分钟，北京的地铁你也知道的。对了，我要跟你说一件事——",
+                "text_pinyin": "hǎo hǎo hǎo, nà nǐ qǐng. yǐhòu jìde zǎo chūmén shí fēnzhōng, Běijīng de dìtiě nǐ yě zhīdào de. duìle, wǒ yào gēn nǐ shuō yí jiàn shì——",
+                "text_en": "OK OK, your treat then. Remember to leave ten minutes early next time — you know Beijing's subway. Oh, I wanted to tell you something—"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show you're listening and move forward.",
+                "options": [
+                    {
+                        "text_zh": "你说！我洗耳恭听。下次一定提前出门，保证不迟到。",
+                        "text_pinyin": "nǐ shuō! wǒ xǐ ěr gōng tīng. xià cì yídìng tíqián chūmén, bǎozhèng bù chídào.",
+                        "text_en": "Tell me! I'm all ears. And I'll definitely leave early next time — guaranteed no lateness.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "洗耳恭听 is a lovely idiom here — 'washing my ears to listen respectfully.' Xiao Mei laughs. The afternoon is saved."
+                    },
+                    {
+                        "text_zh": "什么事？",
+                        "text_pinyin": "shénme shì?",
+                        "text_en": "What is it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Ready to listen. The coffee conversation begins properly."
+                    },
+                    {
+                        "text_zh": "下次不会了。说吧。",
+                        "text_pinyin": "xià cì bú huì le. shuō ba.",
+                        "text_en": "Won't happen again. Go ahead.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The promise is noted. Xiao Mei will test it next time."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Punctuality is valued in China, but transportation delays (especially subway and traffic) are universally understood excuses. The key to a good apology is: acknowledge, explain, and compensate. Offering to 请客 (qǐngkè, treat) is a classic make-up gesture."
+    }
+}

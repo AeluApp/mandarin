@@ -1,0 +1,83 @@
+{
+  "title": "The Slow Morning",
+  "title_zh": "慢慢的早上",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "It's Sunday morning. Your neighbor is watering plants on her balcony. You step out onto yours with a cup of coffee.",
+    "setup_zh": "星期天早上。你的邻居在阳台上给植物浇水。你端着一杯咖啡走到自己的阳台上。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "早啊！今天不用上班，真好。你看，我的花开了！",
+        "text_pinyin": "Zǎo a! Jīntiān bú yòng shàng bān, zhēn hǎo. Nǐ kàn, wǒ de huā kāi le!",
+        "text_en": "Morning! No work today — so nice. Look, my flowers bloomed!"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her excitement about the flowers.",
+        "options": [
+          {
+            "text_zh": "真漂亮！粉色的花，太好看了。你种了多长时间了？",
+            "text_pinyin": "Zhēn piàoliang! Fěnsè de huā, tài hǎokàn le. Nǐ zhǒng le duō cháng shíjiān le?",
+            "text_en": "So beautiful! Pink flowers — gorgeous. How long have you been growing them?",
+            "score": 1.0,
+            "feedback": "Shares her excitement genuinely — shows real interest.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不会种花。",
+            "text_pinyin": "Wǒ bú huì zhǒng huā.",
+            "text_en": "I don't know how to grow flowers.",
+            "score": 0.0,
+            "feedback": "Turns her joy into your limitation."
+          },
+          {
+            "text_zh": "今天天气怎么样？",
+            "text_pinyin": "Jīntiān tiānqì zěnmeyàng?",
+            "text_en": "How's the weather today?",
+            "score": 0.0,
+            "feedback": "Generic weather talk that ignores her blooming flowers."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "三个月了！每天浇水，等啊等，终于开了。有时候等待也是一种快乐。",
+        "text_pinyin": "Sān ge yuè le! Měi tiān jiāo shuǐ, děng a děng, zhōngyú kāi le. Yǒu shíhou děngdài yě shì yī zhǒng kuàilè.",
+        "text_en": "Three months! Watering every day, waiting and waiting, and finally they bloomed. Sometimes waiting is a kind of joy too."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her idea about waiting.",
+        "options": [
+          {
+            "text_zh": "等待也是快乐——我觉得你说得太好了。慢慢来的东西，最后都是最美的。",
+            "text_pinyin": "Děngdài yě shì kuàilè — wǒ juéde nǐ shuō de tài hǎo le. Mànman lái de dōngxi, zuìhòu dōu shì zuì měi de.",
+            "text_en": "Waiting is joy — I think that's beautifully said. Things that come slowly are always the most beautiful in the end.",
+            "score": 1.0,
+            "feedback": "Affirms the beauty of patience — slow is beautiful.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "三个月太久了吧。",
+            "text_pinyin": "Sān ge yuè tài jiǔ le ba.",
+            "text_en": "Three months is too long.",
+            "score": 0.0,
+            "feedback": "Dismisses her patience as a waste."
+          },
+          {
+            "text_zh": "你种的是什么花？",
+            "text_pinyin": "Nǐ zhǒng de shì shénme huā?",
+            "text_en": "What kind of flowers are they?",
+            "score": 0.0,
+            "feedback": "Asks for a label when she's sharing a philosophy."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Balcony gardening (阳台种花) is a cherished hobby in Chinese apartment living. The patient tending of plants mirrors a deeper cultural value: that worthwhile things require daily care and unhurried time. Sunday mornings, free from work, are when these small rituals shine brightest."
+  }
+}

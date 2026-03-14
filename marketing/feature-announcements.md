@@ -1,4 +1,4 @@
-# Feature Announcement System — Mandarin
+# Feature Announcement System — Aelu
 
 A ready-to-use playbook for announcing features at every scale. Copy-paste from this document; adapt the bracketed details.
 
@@ -196,7 +196,7 @@ The app now has 30 drill types. [See the full list.](/features/drills)
 ```
 Subject line options (pick one, adapt for the feature):
   1. [Feature name] is live — here's what it does
-  2. New in Mandarin: [one-line description]
+  2. New in Aelu: [one-line description]
   3. I built [feature name] because [personal reason]
 
 Preview text: [One sentence that completes the subject line — this shows
@@ -220,14 +220,14 @@ Three things to know:
 
 [1-2 sentences of personal context. Why I built this. Optional.]
 
-— Mandarin
+— Aelu
 
 P.S. [One sentence — either a limitation acknowledgment, a teaser for
 what's next, or an invitation to reply with feedback.]
 ```
 
 **Tone guidance:**
-- From "Mandarin" as the brand voice.
+- From "Aelu" as the brand voice.
 - Concise. The reader should be able to scan in 30 seconds.
 - One CTA, not three. Don't dilute.
 
@@ -237,7 +237,7 @@ what's next, or an invitation to reply with feedback.]
 
 **Subject line options:**
 1. Listening practice is live -- here's what it does
-2. New in Mandarin: adjustable-speed listening with transcript reveal
+2. New in Aelu: adjustable-speed listening with transcript reveal
 3. I built listening practice because my ears were two HSK levels behind my eyes
 
 **Preview text:** Practice listening at your pace, then check what you actually caught.
@@ -246,7 +246,7 @@ what's next, or an invitation to reply with feedback.]
 
 Hey --
 
-Listening practice is live in Mandarin. You can now listen to graded Chinese passages at adjustable speed, with transcript reveal after you've listened.
+Listening practice is live in Aelu. You can now listen to graded Chinese passages at adjustable speed, with transcript reveal after you've listened.
 
 [SCREENSHOT: Listening view showing the speed slider at 0.8x, play button, and hidden transcript area]
 
@@ -260,7 +260,7 @@ Three things to know:
 
 I built this because my own diagnostics showed my listening at HSK 2 while my vocabulary was at HSK 3. That gap is common -- most learners I've talked to have it. Listening is slow to build, but targeted practice at the right difficulty level makes it measurable.
 
--- Mandarin
+-- Aelu
 
 P.S. This is v1. Speed control and transcript reveal work well. Sentence-by-sentence playback is next. If you have feedback after trying it, just reply to this email.
 
@@ -298,7 +298,7 @@ and why it matters.] [Try it →](link)
 
 **Post 1: Announcement (what + why)**
 ```
-[Feature name] is live in Mandarin.
+[Feature name] is live in Aelu.
 
 [2-3 sentences: what it does, stated as a user benefit. One concrete detail.]
 
@@ -328,11 +328,11 @@ Why [feature name] matters if you're learning Chinese:
 ##### Complete Examples: "Cleanup Loop" Launch
 
 **Post 1:**
-The cleanup loop is live in Mandarin.
+The cleanup loop is live in Aelu.
 
 Every word you look up while reading a graded passage now becomes a drill in your next session. Real gaps become real practice -- no generic word lists, just the vocabulary you actually struggled with.
 
-mandarinapp.com/features/cleanup-loop
+aeluapp.com/features/cleanup-loop
 
 **Post 2:**
 Here's what the cleanup loop looks like in practice:
@@ -348,7 +348,7 @@ Why the cleanup loop matters if you're learning Chinese:
 - Words come with context because you encountered them in a real passage first
 - Retention improves because the memory has a richer association
 
-This is the feature that changed my own study the most. mandarinapp.com/features/cleanup-loop
+This is the feature that changed my own study the most. aeluapp.com/features/cleanup-loop
 
 ---
 
@@ -362,7 +362,7 @@ Just shipped: [specific improvement].
 
 [1-2 sentences on what it does and why it matters.]
 
-[Link or "live now in Mandarin"]
+[Link or "live now in Aelu"]
 ```
 
 **Option B (data-driven):**
@@ -380,7 +380,7 @@ I kept running into [problem] during my own study, so I built [solution].
 
 [1 sentence on how it works.]
 
-Live now in Mandarin. [Link]
+Live now in Aelu. [Link]
 ```
 
 ---
@@ -392,21 +392,21 @@ Just shipped: adaptive day profiles.
 
 The app now adjusts session content based on time of day. Morning sessions lean toward new material when your brain is fresh. Evening sessions focus on review. No configuration needed -- it reads the clock.
 
-Live now in Mandarin.
+Live now in Aelu.
 
 **Example 2 (Option B -- Speed Improvement):**
 Average drill session load time was 2.3 seconds. Now it's 0.4 seconds.
 
 Rebuilt the session scheduler to precompute drill queues. Same adaptive logic, no more waiting.
 
-mandarinapp.com
+aeluapp.com
 
 **Example 3 (Option C -- Interleaving Enforcement):**
 I kept doing the same drill type five times in a row, so I built interleaving enforcement.
 
 The app now mixes drill types within a session -- vocabulary recognition, then a cloze, then a tone pair -- because varied practice produces better retention than blocked practice. The research is clear on this.
 
-Live now in Mandarin.
+Live now in Aelu.
 
 ---
 
@@ -436,7 +436,7 @@ Most Chinese learners know their HSK level as a single number. "I'm HSK 3." But 
 
 Your vocabulary might be HSK 3. Your listening might be HSK 2. Your tone accuracy might be barely HSK 1. If you walked into the HSK 3 exam with that profile, you'd pass the reading section and fail the listening section. The single number gave you false confidence.
 
-I built HSK projection into Mandarin to fix this. The system tracks four skills independently -- vocabulary recognition, listening comprehension, reading fluency, and tone accuracy -- and projects when you'll reach a given HSK level in each one. Not a single date. Four dates.
+I built HSK projection into Aelu to fix this. The system tracks four skills independently -- vocabulary recognition, listening comprehension, reading fluency, and tone accuracy -- and projects when you'll reach a given HSK level in each one. Not a single date. Four dates.
 
 Here's what mine looks like right now: vocabulary is on track for HSK 4 by September. Listening won't get there until December. That three-month gap tells me exactly where to focus.
 
@@ -444,7 +444,7 @@ The projection updates after every session based on your actual performance data
 
 The broader point: any skill assessment that collapses multiple dimensions into one number is lying to you. Language proficiency isn't one thing. Measuring it as one thing leads to studying the wrong skills.
 
-If you're learning Mandarin and want an honest read on where you actually stand, Mandarin is free for HSK 1-2 content.
+If you're learning Mandarin and want an honest read on where you actually stand, Aelu is free for HSK 1-2 content.
 
 #MandarinChinese #LanguageLearning #HSK #EdTech #SpacedRepetition
 
@@ -459,7 +459,7 @@ Caption:
 
 [2-3 sentences: why it matters, written conversationally.]
 
-[1 sentence: personal touch from Mandarin.]
+[1 sentence: personal touch from Aelu.]
 
 [CTA: link in bio, free tier mention.]
 
@@ -615,7 +615,7 @@ No pressure to post about this. Just keeping you informed. If you want
 early access to test the feature before launch, reply and I'll set
 you up.
 
-— Mandarin
+— Aelu
 ```
 
 ---
@@ -626,7 +626,7 @@ you up.
 
 Hey --
 
-Quick heads up: listening practice goes live in Mandarin on March 15. I wanted you to know before the public announcement so you can plan content if you want to.
+Quick heads up: listening practice goes live in Aelu on March 15. I wanted you to know before the public announcement so you can plan content if you want to.
 
 **What it is:**
 Graded listening practice with adjustable speed (0.5x to 1.5x) and transcript reveal. Learners listen to a passage at their HSK level, then reveal the transcript to check what they caught. Words they missed feed into their drill queue through the cleanup loop.
@@ -640,7 +640,7 @@ Graded listening practice with adjustable speed (0.5x to 1.5x) and transcript re
 [Attached: listening-practice-light.png, listening-practice-dark.png -- 1920x1080]
 
 **Your affiliate link reminder:**
-Your referral link is mandarinapp.com/?ref=[CODE]. Cookie lasts 90 days. You earn 20% recurring on any paid signups through your link.
+Your referral link is aeluapp.com/?ref=[CODE]. Cookie lasts 90 days. You earn 20% recurring on any paid signups through your link.
 
 **Timeline:**
 - March 8: This email (you're getting it now)
@@ -650,7 +650,7 @@ Your referral link is mandarinapp.com/?ref=[CODE]. Cookie lasts 90 days. You ear
 
 No pressure to post about this. Just keeping you informed. If you want early access to test listening practice before launch, reply and I'll set you up.
 
--- Mandarin
+-- Aelu
 
 ---
 
@@ -702,9 +702,9 @@ No pressure to post about this. Just keeping you informed. If you want early acc
 
 | Day | Action | Owner | Notes |
 |-----|--------|-------|-------|
-| Day -7 | Partner notification email | Mandarin | Tier 1 only. Use partner template above. |
-| Day -3 | Teaser post on social media | Mandarin | One post. "Something's coming" framing. No details, just a hint. Example: "Been working on something for the listening gap. More on [date]." |
-| Day -1 | Preview email to existing users | Mandarin | Short. "Tomorrow: [feature name]. Here's a 1-sentence preview." Builds anticipation without spoiling the full announcement. |
+| Day -7 | Partner notification email | Aelu | Tier 1 only. Use partner template above. |
+| Day -3 | Teaser post on social media | Aelu | One post. "Something's coming" framing. No details, just a hint. Example: "Been working on something for the listening gap. More on [date]." |
+| Day -1 | Preview email to existing users | Aelu | Short. "Tomorrow: [feature name]. Here's a 1-sentence preview." Builds anticipation without spoiling the full announcement. |
 
 ### Launch day
 
@@ -845,7 +845,7 @@ If you're using the cleanup loop, you might also want to explore [graded reading
 
 Hey --
 
-The cleanup loop is live in Mandarin. Every word you look up while reading a graded passage now automatically becomes a drill in your next session.
+The cleanup loop is live in Aelu. Every word you look up while reading a graded passage now automatically becomes a drill in your next session.
 
 [SCREENSHOT: Graded reader with a tapped word flowing into the next day's drill queue]
 
@@ -859,7 +859,7 @@ Three things to know:
 
 I built this because I was frustrated with the disconnect between my reading and my drills. I'd read Chinese and hit words I didn't know, then open my drill session and practice completely different words. The cleanup loop is the fix I wanted for my own study.
 
--- Mandarin
+-- Aelu
 
 P.S. This is the foundation for a lot of what's coming next. Listening practice will feed into the same loop -- words you miss while listening will become drills too. More on that soon.
 
@@ -868,13 +868,13 @@ P.S. This is the foundation for a lot of what's coming next. Listening practice 
 #### 3 Tweets
 
 **Tweet 1:**
-The cleanup loop is live in Mandarin.
+The cleanup loop is live in Aelu.
 
 Read a Chinese passage. Tap words you don't know. Those exact words become drills in your next session.
 
 No generic word lists. Just: the words YOU struggled with yesterday are today's practice.
 
-mandarinapp.com/features/cleanup-loop
+aeluapp.com/features/cleanup-loop
 
 **Tweet 2:**
 Here's the cleanup loop in action:
@@ -900,7 +900,7 @@ Every language learning app has the same architecture problem: the study curricu
 
 You drill vocabulary from a preset list. You read content that uses different vocabulary. The overlap is partial at best. You're studying one version of the language and encountering another.
 
-I built the cleanup loop in Mandarin to fix this. The concept is simple: every word you look up while reading a graded Chinese passage automatically becomes a drill in your next study session. Your reading gaps directly inform your practice. No curation needed -- the system watches what you don't know and builds your next session around it.
+I built the cleanup loop in Aelu to fix this. The concept is simple: every word you look up while reading a graded Chinese passage automatically becomes a drill in your next study session. Your reading gaps directly inform your practice. No curation needed -- the system watches what you don't know and builds your next session around it.
 
 The results from my own study: words that entered my drill queue through reading context had roughly 40% higher 7-day retention than words from the standard HSK curriculum list. Same scheduling algorithm, same drill types. The only variable was whether the word had a reading context attached to it.
 
@@ -948,7 +948,7 @@ Has anyone else tried bridging reading and SRS this way? Curious whether the ret
 
 Hey --
 
-Quick heads up: the cleanup loop goes live in Mandarin on March 1. This is probably the feature I'd most want you to know about -- it's the app's key differentiator.
+Quick heads up: the cleanup loop goes live in Aelu on March 1. This is probably the feature I'd most want you to know about -- it's the app's key differentiator.
 
 **What it is:**
 Every word a learner looks up while reading a graded Chinese passage automatically becomes a drill in their next session. Reading gaps feed directly into SRS practice. No manual deck-building, no generic word lists -- just the words the learner actually struggled with.
@@ -962,7 +962,7 @@ Every word a learner looks up while reading a graded Chinese passage automatical
 [Attached: cleanup-loop-light.png, cleanup-loop-dark.png -- 1920x1080, showing the graded reader with a tapped word and the corresponding drill in the next session]
 
 **Your affiliate link reminder:**
-Your referral link is mandarinapp.com/?ref=[CODE]. Cookie lasts 90 days. You earn 20% recurring on paid signups.
+Your referral link is aeluapp.com/?ref=[CODE]. Cookie lasts 90 days. You earn 20% recurring on paid signups.
 
 **Timeline:**
 - February 22: This email (you're getting it now)
@@ -972,7 +972,7 @@ Your referral link is mandarinapp.com/?ref=[CODE]. Cookie lasts 90 days. You ear
 
 No pressure to post about this. If you want early access to test the cleanup loop before launch, reply and I'll set you up.
 
--- Mandarin
+-- Aelu
 
 ---
 
@@ -986,7 +986,7 @@ No pressure to post about this. If you want early access to test the cleanup loo
 
 The HSK exam is being overhauled. Starting July 2026, the level structure expands from 1-6 to 1-9, with significantly more vocabulary at the upper levels and mandatory speaking from Level 3 onward.
 
-If you're an advanced learner or planning to reach advanced proficiency, this matters. And Mandarin now has content for it.
+If you're an advanced learner or planning to reach advanced proficiency, this matters. And Aelu now has content for it.
 
 **What's changing with HSK 3.0**
 
@@ -1000,7 +1000,7 @@ The new standard also restructures the lower levels. Old HSK 1-2 maps roughly to
 
 **What we added**
 
-Mandarin now includes 1,200 HSK 7-9 vocabulary items, each with:
+Aelu now includes 1,200 HSK 7-9 vocabulary items, each with:
 
 - Pinyin and definitions
 - HSK 3.0 level tags (7, 8, or 9)
@@ -1019,7 +1019,7 @@ If you're earlier in your studies, this content won't appear in your sessions ye
 
 The biggest shift in HSK 3.0 isn't the vocabulary count -- it's the mandatory speaking component. From Level 3 onward, HSKK (the speaking test) is no longer optional. Tone accuracy in spoken production matters more than ever.
 
-Mandarin already includes speaking drills with tone grading. If you're targeting HSK 7+ on the new scale, building tone accuracy now will pay off. The content is in place; the practice tools are ready.
+Aelu already includes speaking drills with tone grading. If you're targeting HSK 7+ on the new scale, building tone accuracy now will pay off. The content is in place; the practice tools are ready.
 
 **What's next**
 
@@ -1035,14 +1035,14 @@ For more on the HSK 3.0 changes, see [HSK 3.0 overview](/resources/hsk-3) and [s
 
 **Subject line options:**
 1. HSK 7-9 content is live -- advanced Chinese, new standard
-2. New in Mandarin: 1,200 vocabulary items for HSK 7-9
-3. The new HSK goes to Level 9. Mandarin is ready.
+2. New in Aelu: 1,200 vocabulary items for HSK 7-9
+3. The new HSK goes to Level 9. Aelu is ready.
 
 **Preview text:** 1,200 advanced vocabulary items for the new HSK 3.0 upper levels.
 
 Hey --
 
-HSK 7-9 content is live in Mandarin. 1,200 advanced vocabulary items, tagged for the new HSK 3.0 standard, integrated with all 27 drill types and the adaptive scheduler.
+HSK 7-9 content is live in Aelu. 1,200 advanced vocabulary items, tagged for the new HSK 3.0 standard, integrated with all 27 drill types and the adaptive scheduler.
 
 [SCREENSHOT: HSK projection view showing projections through Level 9]
 
@@ -1056,7 +1056,7 @@ Three things to know:
 
 I added this because the new HSK timeline is coming fast and advanced learners shouldn't have to wait for content. This is the initial set -- it'll expand as the 3.0 specs are finalized.
 
--- Mandarin
+-- Aelu
 
 P.S. If you're at the HSK 7-9 level and find vocabulary that's missing or incorrectly tagged, reply to this email. Your feedback directly improves the content.
 
@@ -1065,13 +1065,13 @@ P.S. If you're at the HSK 7-9 level and find vocabulary that's missing or incorr
 #### 3 Tweets
 
 **Tweet 1:**
-HSK 7-9 content is live in Mandarin.
+HSK 7-9 content is live in Aelu.
 
 1,200 advanced vocabulary items for the new HSK 3.0 upper levels. Pinyin, definitions, context notes, integrated with all 27 drill types.
 
 The new HSK goes to Level 9. Now the app does too.
 
-mandarinapp.com
+aeluapp.com
 
 **Tweet 2:**
 What HSK 7-9 actually means:
@@ -1080,12 +1080,12 @@ HSK 7: ~5,636 words
 HSK 8: ~8,840 words
 HSK 9: ~11,092 words, 6,000 characters
 
-The new standard launches July 2026. If you're an advanced learner, the vocabulary is in Mandarin and ready to drill now.
+The new standard launches July 2026. If you're an advanced learner, the vocabulary is in Aelu and ready to drill now.
 
 **Tweet 3:**
 HSK 3.0's biggest change isn't the vocabulary -- it's mandatory speaking from Level 3 onward.
 
-Mandarin already has speaking drills with tone grading. The HSK 7-9 vocabulary is now live too.
+Aelu already has speaking drills with tone grading. The HSK 7-9 vocabulary is now live too.
 
 If you're preparing for the new exam, both the content and the practice tools are ready.
 
@@ -1107,7 +1107,7 @@ If you're preparing for the new exam, both the content and the practice tools ar
 
 **Title:** The app just got better: dark mode is here
 
-Dark mode is live in Mandarin. The app now follows your system appearance preference -- if your OS is set to dark, the app goes dark. No toggle needed.
+Dark mode is live in Aelu. The app now follows your system appearance preference -- if your OS is set to dark, the app goes dark. No toggle needed.
 
 **What it looks like**
 
@@ -1134,7 +1134,7 @@ Dark mode is live now for all users, free and paid.
 #### 2 Tweets
 
 **Tweet 1:**
-Dark mode is live in Mandarin.
+Dark mode is live in Aelu.
 
 Warm charcoal base, teal accents, and Noto Serif SC hanzi rendering designed for low-light character recognition. Follows your system preference automatically.
 
@@ -1166,7 +1166,7 @@ These rules apply to every piece of announcement content. Print this section and
 - **Lead with the user benefit.** "You can now listen to graded passages at adjustable speed" not "I implemented a Web Audio API-based playback system with variable rate control."
 - **Be specific about what shipped.** "27 drill types" not "many drill types." "0.4-second load time" not "faster loading."
 - **Acknowledge limitations honestly.** "This is v1 of listening practice. Speed control and transcript reveal work well. Sentence-by-sentence playback is coming." Users trust you more when you're honest about boundaries.
-- **Use the brand voice.** "We built this because..." not "We're excited to announce..." Mandarin is the voice. Direct and personal.
+- **Use the brand voice.** "We built this because..." not "We're excited to announce..." Aelu is the voice. Direct and personal.
 - **Include concrete examples.** A real word, a real passage, a real scenario. Abstract descriptions of features don't land.
 - **Be proud when warranted, and be specific about what you're proud of.** "I'm proud of how the cleanup loop turned out -- it's the feature that most changed my own study" is honest. "I'm thrilled to announce our revolutionary new feature" is hollow.
 
@@ -1185,6 +1185,6 @@ These rules apply to every piece of announcement content. Print this section and
 - No praise inflation ("Great job!" becomes "Session complete. 14/16 correct.")
 - No artificial urgency
 - Honest about what works and what doesn't yet
-- Mandarin is the voice -- direct and personal, not corporate
+- Aelu is the voice -- direct and personal, not corporate
 - Every metric is defensible; every claim is specific
 - It's okay to be proud. It's not okay to be hyperbolic.

@@ -1,0 +1,94 @@
+{
+    "title": "The High-Speed Train Seat Swap",
+    "title_zh": "高铁换座",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_2_01_v0",
+    "tree": {
+        "setup": "A high-speed train, smooth and quiet. You find your seat but someone is already sitting in it -- an elderly woman, Grandma Xu, who has settled in with snacks, a thermos, and a small blanket. She looks up with the innocence of someone who may or may not have read her ticket correctly.",
+        "setup_zh": "高铁上，又稳又安静。你找到座位但有人已经坐了——一位老太太许奶奶，零食、保温杯和小毯子都铺好了。她抬头看你，一脸无辜，可能看错了票上的座位。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎？这是你的座位吗？",
+                "text_pinyin": "āi? zhè shì nǐ de zuòwèi ma?",
+                "text_en": "Oh? Is this your seat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Politely explain the seat situation.",
+                "options": [
+                    {
+                        "text_zh": "是的，我的票是这个座位。不过没关系，您坐吧。",
+                        "text_pinyin": "shì de, wǒ de piào shì zhè ge zuòwèi. búguò méi guānxi, nín zuò ba.",
+                        "text_en": "Yes, my ticket is for this seat. But it's OK, you can sit here.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grandma Xu's face melts with gratitude. She insists on sharing her snacks with you -- dried plums, sunflower seeds, and something unidentifiable but delicious. 不过没关系 is 'but it's fine' -- gracious yielding."
+                    },
+                    {
+                        "text_zh": "您好，我看一下您的票好吗？可能座位弄错了。",
+                        "text_pinyin": "nín hǎo, wǒ kàn yíxià nín de piào hǎo ma? kěnéng zuòwèi nòng cuò le.",
+                        "text_en": "Hello, may I see your ticket? The seats might be mixed up.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grandma Xu checks her ticket and gasps.「哎呀！我是隔壁车厢的！」She gathers her snacks with apologetic speed. 弄错了 means 'got it wrong.'"
+                    },
+                    {
+                        "text_zh": "不好意思，我想这个座位是我的。",
+                        "text_pinyin": "bù hǎoyìsi, wǒ xiǎng zhè ge zuòwèi shì wǒ de.",
+                        "text_en": "Excuse me, I think this seat is mine.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Grandma Xu looks at her ticket, realizes the error, and begins the great migration of snacks.「对不起对不起！」不好意思 is the perfect softener for awkward situations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎呀，我看错了！真不好意思。小伙子/姑娘，你人真好。",
+                "text_pinyin": "āiyā, wǒ kàn cuò le! zhēn bù hǎoyìsi. xiǎohuǒzi/gūniang, nǐ rén zhēn hǎo.",
+                "text_en": "Oh my, I read it wrong! I'm so sorry. You're really kind."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond graciously.",
+                "options": [
+                    {
+                        "text_zh": "没事没事！您慢慢收拾。",
+                        "text_pinyin": "méi shì méi shì! nín mànman shōushi.",
+                        "text_en": "It's nothing! Take your time packing up.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grandma Xu pats your hand affectionately before moving. She leaves a bag of dried plums on your armrest as a thank-you gift. 慢慢 + verb tells someone to take their time."
+                    },
+                    {
+                        "text_zh": "没关系，这种事经常发生。",
+                        "text_pinyin": "méi guānxi, zhè zhǒng shì jīngcháng fāshēng.",
+                        "text_en": "No problem, this happens a lot.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Grandma Xu relaxes a little.「是吗？我这个老人眼睛不好了。」经常发生 means 'happens frequently' -- reassuring in awkward moments."
+                    },
+                    {
+                        "text_zh": "您要帮忙搬东西吗？",
+                        "text_pinyin": "nín yào bāngmáng bān dōngxi ma?",
+                        "text_en": "Do you want help moving your things?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grandma Xu waves you off but looks deeply moved.「不用不用！」She tells the passenger next to her new seat about the wonderful young person in car 7. 搬东西 means 'move things.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你啊！来，吃点梅子。",
+                "text_pinyin": "xièxie nǐ a! lái, chī diǎn méizi.",
+                "text_en": "Thank you! Here, have some dried plums."
+            }
+        ],
+        "cultural_note": "Seat mix-ups on Chinese trains are common and usually resolved gently. Yielding your seat to elderly passengers (让座, ràng zuò) is culturally valued. Sharing snacks with strangers on long train rides is a time-honored tradition."
+    }
+}

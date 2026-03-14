@@ -1,0 +1,160 @@
+{
+    "title": "The Size Whisperer",
+    "title_zh": "尺码低语者",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_5_02_v0",
+    "tree": {
+        "setup": "A shoe store where the displays are arranged by color rather than size — an aesthetic choice that makes browsing beautiful and shopping confusing. Sales Associate Mei has a gift: she can estimate your shoe size by watching you walk three steps. She's been wrong exactly twice in four years, and both times the customer's feet were between sizes. You're looking for running shoes, and she's already studying your gait from across the store.",
+        "setup_zh": "一家按颜色而非尺码排列展品的鞋店——审美上很美，购物体验上很混乱。销售员小梅有一个天赋：看你走三步就能估出你的鞋码。四年里她只错过两次，那两次顾客的脚都恰好在两个尺码之间。你在找跑步鞋，她已经在店的另一头研究你的步态了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！看跑步鞋吧？42码，对不对？",
+                "text_pinyin": "nǐ hǎo! kàn pǎobù xié ba? sìshí'èr mǎ, duì bú duì?",
+                "text_en": "Hello! Looking at running shoes? Size 42, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to her guess and explain what you need.",
+                "options": [
+                    {
+                        "text_zh": "……42码。你怎么知道的？对，我想找一双跑步鞋。我每周跑三到四次，每次大概五公里。之前穿的那双鞋底太硬了，跑完膝盖疼。有没有缓震好一点的？",
+                        "text_pinyin": "……sìshí'èr mǎ. nǐ zěnme zhīdào de? duì, wǒ xiǎng zhǎo yì shuāng pǎobù xié. wǒ měi zhōu pǎo sān dào sì cì, měi cì dàgài wǔ gōnglǐ. zhīqián chuān de nà shuāng xiédǐ tài yìng le, pǎo wán xīgài téng. yǒu méiyǒu huǎnzhèn hǎo yìdiǎn de?",
+                        "text_en": "...Size 42. How did you know? Yes, I'm looking for running shoes. I run three to four times a week, about 5K each time. My previous pair had soles that were too hard — my knees hurt after running. Do you have something with better cushioning?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Running frequency, distance, and a specific problem — Mei now has a complete profile. She's already mentally sorting through three models."
+                    },
+                    {
+                        "text_zh": "对！42码。有什么推荐的跑步鞋？",
+                        "text_pinyin": "duì! sìshí'èr mǎ. yǒu shénme tuījiàn de pǎobù xié?",
+                        "text_en": "Yes! Size 42. Any recommended running shoes?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Confirmed size, open question. She'll ask about your running habits."
+                    },
+                    {
+                        "text_zh": "不是42，是41。",
+                        "text_pinyin": "búshì sìshí'èr, shì sìshíyī.",
+                        "text_en": "Not 42, it's 41.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mei's expression suggests this is one of her rare misses. She'll bring both sizes — she suspects you might be between them."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每周跑三四次、五公里的话，需要中等缓震的。太软了反而不好，因为你需要一定的支撑力。我推荐这两款：一个是国产品牌的，缓震和透气性都不错，四百八十块；另一个是进口的，科技含量更高，但是八百九。你想先试哪双？",
+                "text_pinyin": "měi zhōu pǎo sān sì cì, wǔ gōnglǐ de huà, xūyào zhōngděng huǎnzhèn de. tài ruǎn le fǎn'ér bù hǎo, yīnwèi nǐ xūyào yídìng de zhīchēng lì. wǒ tuījiàn zhè liǎng kuǎn: yí gè shì guóchǎn pǐnpái de, huǎnzhèn hé tòuqì xìng dōu búcuò, sìbǎi bāshí kuài; lìng yí gè shì jìnkǒu de, kējì hánliàng gèng gāo, dànshì bābǎi jiǔ. nǐ xiǎng xiān shì nǎ shuāng?",
+                "text_en": "Running 3-4 times a week at 5K, you need medium cushioning. Too soft is actually bad — you need some support. I recommend these two: one is a domestic brand with good cushioning and breathability, 480 yuan; the other is imported with more technology, but 890. Which do you want to try first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try the shoes and compare.",
+                "options": [
+                    {
+                        "text_zh": "两双都试试吧。对了，跑步鞋是不是应该比平时穿的鞋大半码？我听说跑步的时候脚会胀一点，需要留空间。",
+                        "text_pinyin": "liǎng shuāng dōu shì shì ba. duì le, pǎobù xié shì búshì yīnggāi bǐ píngshí chuān de xié dà bàn mǎ? wǒ tīngshuō pǎobù de shíhòu jiǎo huì zhàng yìdiǎn, xūyào liú kōngjiān.",
+                        "text_en": "Let me try both. By the way, should running shoes be half a size larger than regular shoes? I've heard your feet swell a bit while running, so you need extra room.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The half-size rule — Mei nods approvingly. She brings out both in 42 and 42.5, because a customer who knows about foot swelling deserves options."
+                    },
+                    {
+                        "text_zh": "先试便宜的那双吧。",
+                        "text_pinyin": "xiān shì piányi de nà shuāng ba.",
+                        "text_en": "Let me try the cheaper pair first.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Budget-conscious approach. She laces it up for you."
+                    },
+                    {
+                        "text_zh": "为什么进口的贵那么多？",
+                        "text_pinyin": "wèishénme jìnkǒu de guì nàme duō?",
+                        "text_en": "Why is the imported one so much more expensive?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mei explains the technology difference with the patience of someone who gives this speech daily."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说得对，跑步鞋留半码很有必要。这双42.5的国产款感觉怎么样？走两步试试。好的鞋子穿上去应该马上就觉得舒服，不需要磨合期。",
+                "text_pinyin": "shuō de duì, pǎobù xié liú bàn mǎ hěn yǒu bìyào. zhè shuāng sìshí'èr diǎn wǔ de guóchǎn kuǎn gǎnjué zěnmeyàng? zǒu liǎng bù shì shi. hǎo de xiézi chuān shàngqù yīnggāi mǎshàng jiù juéde shūfu, bù xūyào móhé qī.",
+                "text_en": "You're right — half size up for running is important. How does this 42.5 domestic pair feel? Walk a few steps. Good shoes should feel comfortable immediately — no break-in period needed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give your feedback on the fit.",
+                "options": [
+                    {
+                        "text_zh": "这双穿起来确实很舒服，脚趾前面有一点空间，缓震也能感觉到。不过鞋面好像有点紧，脚背这里有点压。进口那双试一下对比看看？",
+                        "text_pinyin": "zhè shuāng chuān qǐlái quèshí hěn shūfu, jiǎozhǐ qiánmiàn yǒu yìdiǎn kōngjiān, huǎnzhèn yě néng gǎnjué dào. búguò xiémiàn hǎoxiàng yǒudiǎn jǐn, jiǎobèi zhèlǐ yǒudiǎn yā. jìnkǒu nà shuāng shì yíxià duìbǐ kàn kan?",
+                        "text_en": "This pair is indeed comfortable — there's space in front of the toes and I can feel the cushioning. But the upper seems a bit tight — there's pressure on the top of my foot. Let me try the imported pair for comparison?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific feedback on fit — toe room, cushioning, and a pressure point. Mei adjusts her recommendation: the imported pair has a wider last that might solve the instep pressure."
+                    },
+                    {
+                        "text_zh": "还行，挺舒服的。",
+                        "text_pinyin": "hái xíng, tǐng shūfu de.",
+                        "text_en": "Not bad, pretty comfortable.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need more detail. 'Comfortable' doesn't tell her about fit issues."
+                    },
+                    {
+                        "text_zh": "差不多吧，就买这双好了。",
+                        "text_pinyin": "chàbuduō ba, jiù mǎi zhè shuāng hǎo le.",
+                        "text_en": "It's OK, I'll just buy these.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mei's gift is wasted on「差不多」— she encourages you to try both before deciding."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "进口这双的鞋面更宽一点，可能更适合你。来，穿上走两步……怎么样？两双都穿了以后感觉有什么区别？",
+                "text_pinyin": "jìnkǒu zhè shuāng de xiémiàn gèng kuān yìdiǎn, kěnéng gèng shìhé nǐ. lái, chuān shàng zǒu liǎng bù……zěnmeyàng? liǎng shuāng dōu chuān le yǐhòu gǎnjué yǒu shénme qūbié?",
+                "text_en": "The imported pair has a slightly wider upper — might suit you better. Here, put them on and walk... how is it? After trying both, what's the difference?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Compare and make your decision.",
+                "options": [
+                    {
+                        "text_zh": "进口这双确实鞋面更宽松，脚背不压了。缓震也更软一些但不会太软。不过贵了将近一倍……这样吧，这双进口的能不能打个折？我以后经常来买。",
+                        "text_pinyin": "jìnkǒu zhè shuāng quèshí xiémiàn gèng kuānsōng, jiǎobèi bú yā le. huǎnzhèn yě gèng ruǎn yìxiē dàn bú huì tài ruǎn. búguò guì le jiāngjìn yí bèi……zhèyàng ba, zhè shuāng jìnkǒu de néng bu néng dǎ gè zhé? wǒ yǐhòu jīngcháng lái mǎi.",
+                        "text_en": "The imported pair does have a roomier upper — no more pressure on my instep. Cushioning is also softer but not too soft. But it's nearly double the price... tell you what, can I get a discount on the imported pair? I'll be a regular customer.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Detailed comparison plus a negotiation attempt — Mei checks with her manager and comes back with a 10% discount plus free insoles. Your analysis earned you the deal."
+                    },
+                    {
+                        "text_zh": "还是买国产的吧，便宜一半。",
+                        "text_pinyin": "háishi mǎi guóchǎn de ba, piányi yíbàn.",
+                        "text_en": "I'll go with the domestic pair — half the price.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A practical choice. She suggests trying the next width up in the domestic pair to solve the instep issue."
+                    },
+                    {
+                        "text_zh": "两双差不多，看不出区别。",
+                        "text_pinyin": "liǎng shuāng chàbuduō, kàn bù chū qūbié.",
+                        "text_en": "They're about the same — I can't tell the difference.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mei blinks. The difference between a 480-yuan shoe and an 890-yuan shoe is always detectable. She suggests walking on the treadmill they have in the corner."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese shoe sizes use the European numbering system (38-46). Running shoe fitting follows the same half-size-up rule internationally. 国产品牌 (guóchǎn pǐnpái, domestic brands) like Li-Ning, Anta, and Peak have significantly improved in quality and compete with imported brands at lower prices. Negotiating discounts (打折, dǎ zhé) in specialty stores is possible, especially with a promise of repeat business."
+    }
+}

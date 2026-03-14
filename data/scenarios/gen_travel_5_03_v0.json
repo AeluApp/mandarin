@@ -1,0 +1,160 @@
+{
+    "title": "The Departure Gate Philosopher",
+    "title_zh": "登机口哲学家",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_5_03_v0",
+    "tree": {
+        "setup": "Terminal 2 of a major airport, fluorescent lights humming over rows of blue plastic seats. Your flight to Kunming has been delayed — the departure board flickers between \"delayed\" and \"boarding soon\" with the indecision of someone choosing a restaurant. The gate agent, Mr. Yan, manages delays with the composure of a man who has personally seen 847 flights leave late and knows that every single one eventually departed. His counter is spotless. His announcements are poetry.",
+        "setup_zh": "大型机场的二号航站楼，荧光灯在成排的蓝色塑料座椅上嗡嗡作响。你飞昆明的航班延误了——出发信息屏在「延误」和「即将登机」之间闪烁，犹豫不决得像一个选餐厅的人。登机口工作人员严先生以一种亲眼看过八百四十七次航班晚点的人才有的镇定来处理延误，他知道每一班最终都飞走了。他的柜台一尘不染。他的广播是诗。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "（广播）各位旅客请注意，飞往昆明的MU5832次航班由于天气原因延误，预计延误一个小时。请各位旅客在登机口附近等候。给您带来不便，敬请谅解。",
+                "text_pinyin": "(guǎngbō) gèwèi lǚkè qǐng zhùyì, fēi wǎng Kūnmíng de MU wǔ bā sān èr cì hángbān yóuyú tiānqì yuányīn yánwù, yùjì yánwù yí gè xiǎoshí. qǐng gèwèi lǚkè zài dēngjī kǒu fùjìn děnghòu. gěi nín dài lái bú biàn, jìng qǐng liàngjiě.",
+                "text_en": "(Announcement) Attention passengers: Flight MU5832 to Kunming is delayed due to weather — estimated one-hour delay. Please wait near the gate. We apologize for the inconvenience."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Go to the counter and ask about the delay.",
+                "options": [
+                    {
+                        "text_zh": "你好，我是MU5832的旅客。请问延误一个小时是确定的吗？还是有可能更久？我在昆明有人接机。",
+                        "text_pinyin": "nǐ hǎo, wǒ shì MU wǔ bā sān èr de lǚkè. qǐngwèn yánwù yí gè xiǎoshí shì quèdìng de ma? háishì yǒu kěnéng gèng jiǔ? wǒ zài Kūnmíng yǒu rén jiē jī.",
+                        "text_en": "Hello, I'm on MU5832. Is the one-hour delay confirmed, or could it be longer? Someone is picking me up in Kunming.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Specific, calm, and explaining why the delay matters to you — Mr. Yan respects a passenger who asks precise questions."
+                    },
+                    {
+                        "text_zh": "飞机什么时候能飞？",
+                        "text_pinyin": "fēijī shénme shíhòu néng fēi?",
+                        "text_en": "When can the plane take off?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The eternal question of delayed passengers. He gives the best estimate he has."
+                    },
+                    {
+                        "text_zh": "怎么又延误了？每次都延误！",
+                        "text_pinyin": "zěnme yòu yánwù le? měi cì dōu yánwù!",
+                        "text_en": "Delayed again? It's always delayed!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Yan has heard this 847 times. His expression doesn't change.「天气不是我们能控制的，」he says gently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "目前的消息是延误一个小时，但是天气情况一直在变化，有可能会调整。我建议您先通知接机的人。如果有进一步消息，我们会广播通知。",
+                "text_pinyin": "mùqián de xiāoxi shì yánwù yí gè xiǎoshí, dànshì tiānqì qíngkuàng yìzhí zài biànhuà, yǒu kěnéng huì tiáozhěng. wǒ jiànyì nín xiān tōngzhī jiē jī de rén. rúguǒ yǒu jìnyíbù xiāoxi, wǒmen huì guǎngbō tōngzhī.",
+                "text_en": "Current estimate is one hour, but weather is changing — it could be adjusted. I'd suggest notifying whoever is picking you up. We'll make announcements if there are updates."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about compensation or meal vouchers.",
+                "options": [
+                    {
+                        "text_zh": "好的，我先发个消息。请问如果延误超过两个小时，航空公司会提供餐券或者其他补偿吗？",
+                        "text_pinyin": "hǎo de, wǒ xiān fā gè xiāoxi. qǐngwèn rúguǒ yánwù chāoguò liǎng gè xiǎoshí, hángkōng gōngsī huì tígōng cānquàn huòzhě qítā bǔcháng ma?",
+                        "text_en": "OK, I'll send a message first. If the delay exceeds two hours, does the airline provide meal vouchers or other compensation?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Knowing to ask about the two-hour threshold — Mr. Yan pulls out a printed policy sheet. He appreciates passengers who know the system."
+                    },
+                    {
+                        "text_zh": "有没有吃的？",
+                        "text_pinyin": "yǒu méiyǒu chī de?",
+                        "text_en": "Is there food?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A universal concern during delays. He points toward the vending machines and explains the voucher policy."
+                    },
+                    {
+                        "text_zh": "那我只能等了。",
+                        "text_pinyin": "nà wǒ zhǐ néng děng le.",
+                        "text_en": "Then I can only wait.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The philosophy of airport delays in six characters. Mr. Yan nods — waiting is, indeed, the main activity."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果延误超过两个小时，我们会发餐券。超过四个小时的话，航空公司负责安排住宿。不过今天应该不会那么久。您可以先去那边的休息区坐一下，充电插座在柱子旁边。",
+                "text_pinyin": "rúguǒ yánwù chāoguò liǎng gè xiǎoshí, wǒmen huì fā cānquàn. chāoguò sì gè xiǎoshí de huà, hángkōng gōngsī fùzé ānpái zhùsù. búguò jīntiān yīnggāi búhuì nàme jiǔ. nín kěyǐ xiān qù nàbiān de xiūxi qū zuò yíxià, chōngdiàn chāzuò zài zhùzi pángbiān.",
+                "text_en": "If it's over two hours, we'll issue meal vouchers. Over four hours, the airline arranges accommodation. But today shouldn't be that long. You can sit in the rest area over there — charging outlets are by the pillars."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about changing flights or getting updates.",
+                "options": [
+                    {
+                        "text_zh": "谢谢。如果我想改签到晚一点的航班，可以吗？需要加钱吗？",
+                        "text_pinyin": "xièxie. rúguǒ wǒ xiǎng gǎi qiān dào wǎn yìdiǎn de hángbān, kěyǐ ma? xūyào jiā qián ma?",
+                        "text_en": "Thanks. If I want to rebook to a later flight, is that possible? Would there be an extra charge?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Exploring options without demanding them — Mr. Yan checks the system with genuine helpfulness."
+                    },
+                    {
+                        "text_zh": "好的，我在这里等着。有消息告诉我。",
+                        "text_pinyin": "hǎo de, wǒ zài zhèlǐ děng zhe. yǒu xiāoxi gàosu wǒ.",
+                        "text_en": "OK, I'll wait here. Let me know if there's news.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Patient. He'll make announcements. The charging outlets are calling."
+                    },
+                    {
+                        "text_zh": "我能退票吗？",
+                        "text_pinyin": "wǒ néng tuì piào ma?",
+                        "text_en": "Can I get a refund?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "For weather delays, full refunds are available. But he gently suggests waiting — the weather usually clears."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "因为是天气原因延误，改签免费。今天晚上还有一班九点的飞昆明。不过我建议您再等等，因为最新消息是天气在好转，可能不用等一个小时。",
+                "text_pinyin": "yīnwèi shì tiānqì yuányīn yánwù, gǎi qiān miǎnfèi. jīntiān wǎnshang hái yǒu yì bān jiǔ diǎn de fēi Kūnmíng. búguò wǒ jiànyì nín zài děng deng, yīnwèi zuìxīn xiāoxi shì tiānqì zài hǎozhuǎn, kěnéng búyòng děng yí gè xiǎoshí.",
+                "text_en": "Since it's a weather delay, rebooking is free. There's a 9 PM flight to Kunming tonight. But I'd suggest waiting — latest update says weather is improving, might not even be a full hour."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide and thank him.",
+                "options": [
+                    {
+                        "text_zh": "那我就再等一下吧。谢谢严先生，你说得很清楚。希望天气快点好起来。",
+                        "text_pinyin": "nà wǒ jiù zài děng yíxià ba. xièxie Yán xiānsheng, nǐ shuō de hěn qīngchǔ. xīwàng tiānqì kuài diǎn hǎo qǐlái.",
+                        "text_en": "Then I'll wait a bit longer. Thank you Mr. Yan — you've been very clear. Hope the weather clears soon.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Trusting his advice and thanking him by name — Mr. Yan adjusts his tie slightly. In 847 delays, clear communication is his proudest achievement."
+                    },
+                    {
+                        "text_zh": "好的，我等着。谢谢。",
+                        "text_pinyin": "hǎo de, wǒ děng zhe. xièxie.",
+                        "text_en": "OK, I'll wait. Thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods. The departure board flickers again — this time, it seems more optimistic."
+                    },
+                    {
+                        "text_zh": "唉，坐飞机总是这样。",
+                        "text_pinyin": "āi, zuò fēijī zǒngshì zhèyàng.",
+                        "text_en": "Sigh, flying is always like this.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Yan neither confirms nor denies. He has seen 847 delays, and each one was unique in its own tedious way."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese airlines provide compensation for delays: meal vouchers (餐券, cānquàn) for 2+ hour delays, hotel accommodation for 4+ hours or overnight. Weather delays (天气原因) allow free rebooking (改签, gǎi qiān). The key phrase for delays is 航班延误 (hángbān yánwù)."
+    }
+}

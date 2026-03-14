@@ -1,12 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="48" x2="120" y2="48" stroke-width="0.5"/>
-  <!-- hills -->
-  <path d="M0 48 Q20 36 40 48" stroke-width="0.6"/>
-  <path d="M50 48 Q75 32 100 48" stroke-width="0.6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- sky: sunrise glow band -->
+  <rect x="0" y="40" width="200" height="8" stroke="none" fill="#2a2a2a" fill-opacity="0.02"/>
+  <!-- distant hills -->
+  <path d="M0 48 Q20 36 45 42 Q60 32 80 40 Q100 28 120 38 Q140 30 165 42 Q185 36 200 44" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.04"/>
   <!-- rising sun -->
-  <circle cx="60" cy="40" r="5" stroke-width="0.5"/>
-  <!-- boat -->
-  <path d="M25 50 Q30 53 35 50" stroke-width="0.6"/>
-  <line x1="30" y1="50" x2="30" y2="46" stroke-width="0.4"/>
+  <circle cx="100" cy="42" r="10" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- sun rays -->
+  <line x1="100" y1="30" x2="100" y2="24" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <line x1="108" y1="33" x2="112" y2="28" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <line x1="92" y1="33" x2="88" y2="28" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <line x1="112" y1="40" x2="118" y2="38" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <line x1="88" y1="40" x2="82" y2="38" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <!-- water line -->
+  <line x1="0" y1="56" x2="200" y2="56" stroke="#2a2a2a" stroke-width="0.4" opacity="0.4"/>
+  <!-- sun reflection on water -->
+  <line x1="92" y1="58" x2="108" y2="58" stroke="#2a2a2a" stroke-width="0.3" opacity="0.25"/>
+  <line x1="88" y1="62" x2="112" y2="62" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <line x1="90" y1="66" x2="110" y2="66" stroke="#2a2a2a" stroke-width="0.2" opacity="0.15"/>
+  <line x1="94" y1="70" x2="106" y2="70" stroke="#2a2a2a" stroke-width="0.2" opacity="0.12"/>
+  <!-- fishing boat 1 — foreground left -->
+  <path d="M20 60 Q30 56 50 58 Q55 60 52 64 Q40 66 22 64 Q18 62 20 60" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- mast -->
+  <line x1="35" y1="58" x2="35" y2="38" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- sail -->
+  <path d="M35 40 L45 48 L35 50" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- rigging -->
+  <line x1="35" y1="38" x2="22" y2="60" stroke="#2a2a2a" stroke-width="0.2" opacity="0.3"/>
+  <line x1="35" y1="38" x2="50" y2="58" stroke="#2a2a2a" stroke-width="0.2" opacity="0.3"/>
+  <!-- boat reflection -->
+  <path d="M24 66 Q36 68 48 66" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <!-- fishing boat 2 — mid-ground right -->
+  <path d="M140 54 Q150 52 165 54 Q168 56 165 58 Q155 60 142 58 Q138 56 140 54" stroke="#2a2a2a" stroke-width="0.5" opacity="0.6"/>
+  <line x1="152" y1="54" x2="152" y2="40" stroke="#2a2a2a" stroke-width="0.4" opacity="0.6"/>
+  <path d="M152 42 L160 50 L152 52" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <!-- small boat 3 — far -->
+  <path d="M170 50 Q176 48 182 50" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <line x1="176" y1="50" x2="176" y2="44" stroke="#2a2a2a" stroke-width="0.25" opacity="0.4"/>
+  <!-- water ripples -->
+  <path d="M10 68 Q18 66 26 68" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <path d="M55 72 Q65 70 75 72" stroke="#2a2a2a" stroke-width="0.25" opacity="0.18"/>
+  <path d="M125 68 Q135 66 145 68" stroke="#2a2a2a" stroke-width="0.25" opacity="0.18"/>
+  <path d="M30 76 Q42 74 54 76" stroke="#2a2a2a" stroke-width="0.2" opacity="0.12"/>
+  <path d="M150 74 Q162 72 174 74" stroke="#2a2a2a" stroke-width="0.2" opacity="0.12"/>
+  <!-- dock pilings foreground -->
+  <line x1="4" y1="52" x2="4" y2="78" stroke="#2a2a2a" stroke-width="0.7"/>
+  <line x1="12" y1="52" x2="12" y2="80" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- rope between pilings -->
+  <path d="M4 56 Q8 58 12 56" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <!-- birds -->
+  <path d="M60 22 Q62 20 64 22" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M68 24 Q70 22 72 24" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <path d="M75 20 Q77 18 79 20" stroke="#2a2a2a" stroke-width="0.2" opacity="0.2"/>
 </svg>

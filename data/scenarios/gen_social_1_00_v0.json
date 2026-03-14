@@ -1,0 +1,94 @@
+{
+    "title": "The Neighbor on the Stairs",
+    "title_zh": "楼梯上的邻居",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_social_1_00_v0",
+    "tree": {
+        "setup": "The stairwell of your apartment building, early evening. You're carrying groceries up to the third floor. Your neighbor, Auntie Sun, is coming down with a small dog wearing a knitted sweater. She knows everyone in the building and considers the hallway her social office.",
+        "setup_zh": "傍晚时分，公寓楼的楼梯间。你提着菜往三楼走。邻居孙阿姨带着一只穿毛衣的小狗正下楼。她认识楼里每一个人，把走廊当成她的社交办公室。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎，回来了！今天忙不忙？",
+                "text_pinyin": "āi, huílái le! jīntiān máng bu máng?",
+                "text_en": "Hey, you're back! Were you busy today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat with your neighbor.",
+                "options": [
+                    {
+                        "text_zh": "今天有点忙。你呢？",
+                        "text_pinyin": "jīntiān yǒudiǎn máng. nǐ ne?",
+                        "text_en": "A bit busy today. And you?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Sun is delighted. She tells you about her entire day in thirty seconds, including what every neighbor on every floor had for lunch. 你呢 is the most natural way to return a question."
+                    },
+                    {
+                        "text_zh": "不忙，很好。",
+                        "text_pinyin": "bù máng, hěn hǎo.",
+                        "text_en": "Not busy, all good.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Sun nods. Her dog sniffs your grocery bag with professional interest. A short answer is fine -- she'll carry the conversation anyway."
+                    },
+                    {
+                        "text_zh": "你的狗很好看！",
+                        "text_pinyin": "nǐ de gǒu hěn hǎokàn!",
+                        "text_en": "Your dog is very cute!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Sun beams and holds the dog up like a trophy.「他叫豆豆！」Complimenting someone's pet is always a winning move in Chinese small talk."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你买了什么菜？",
+                "text_pinyin": "nǐ mǎi le shénme cài?",
+                "text_en": "What groceries did you buy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you bought.",
+                "options": [
+                    {
+                        "text_zh": "买了一些水果和鸡蛋。",
+                        "text_pinyin": "mǎi le yìxiē shuǐguǒ hé jīdàn.",
+                        "text_en": "I bought some fruit and eggs.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Sun inspects your bag from a distance and nods approvingly.「水果很新鲜吧？」一些 means 'some' -- very handy with 了 for talking about what you did."
+                    },
+                    {
+                        "text_zh": "不太多。",
+                        "text_pinyin": "bú tài duō.",
+                        "text_en": "Not too much.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Sun peers at your bag anyway. She'll form her own conclusions. 不太 softens any adjective -- 'not too much,' 'not too far,' 'not too late.'"
+                    },
+                    {
+                        "text_zh": "我做饭不好吃。",
+                        "text_pinyin": "wǒ zuò fàn bù hǎochī.",
+                        "text_en": "My cooking isn't very good.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Sun clutches her chest as though this is a personal emergency.「明天来我家吃！」You may have just gotten yourself a dinner invitation. And a cooking lesson."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，我带豆豆去走走。明天见！",
+                "text_pinyin": "hǎo le, wǒ dài dòudou qù zǒuzou. míngtiān jiàn!",
+                "text_en": "OK, I'm taking Doudou for a walk. See you tomorrow!"
+            }
+        ],
+        "cultural_note": "In Chinese apartment buildings, neighbors often chat in stairwells and hallways. Asking about groceries, meals, and daily activities is considered friendly, not nosy. Building relationships with neighbors (邻居, línjū) is part of community life."
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "title": "The Fruit Seller's Daughter",
+    "title_zh": "水果店的女儿",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're buying fruit at a neighborhood stand. A little girl is helping her mother arrange the fruit.",
+        "setup_zh": "你在小区的水果摊买水果。一个小女孩在帮妈妈摆水果。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "叔叔好！你想买什么水果？",
+                "text_pinyin": "Shūshu hǎo! Nǐ xiǎng mǎi shénme shuǐguǒ?",
+                "text_en": "Hello, uncle! What fruit would you like to buy?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what fruit you want.",
+                "options": [
+                    {
+                        "text_zh": "我想买一些苹果。你帮妈妈做得真好！",
+                        "text_pinyin": "Wǒ xiǎng mǎi yīxiē píngguǒ. Nǐ bāng māma zuò de zhēn hǎo!",
+                        "text_en": "I'd like some apples. You're really good at helping your mom!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers her question and encourages her for helping -- she called you 叔叔 respectfully, and you're kind in return."
+                    },
+                    {
+                        "text_zh": "苹果。多少钱？",
+                        "text_pinyin": "Píngguǒ. Duōshǎo qián?",
+                        "text_en": "Apples. How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gets to the point but a bit blunt for a little girl who greeted you so politely."
+                    },
+                    {
+                        "text_zh": "你多大了？",
+                        "text_pinyin": "Nǐ duō dà le?",
+                        "text_en": "How old are you?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She asked what fruit you want and you asked her age instead -- answer her question, she's working the stand."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢叔叔！这些苹果很甜的！妈妈说今天的最好。",
+                "text_pinyin": "Xièxie shūshu! Zhèxiē píngguǒ hěn tián de! Māma shuō jīntiān de zuì hǎo.",
+                "text_en": "Thank you, uncle! These apples are really sweet! Mom says today's are the best."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her recommendation.",
+                "options": [
+                    {
+                        "text_zh": "好，那我买五个。谢谢你！",
+                        "text_pinyin": "Hǎo, nà wǒ mǎi wǔ ge. Xièxie nǐ!",
+                        "text_en": "Okay, I'll buy five then. Thank you!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Trusts the little girl's recommendation from her mom -- she'll be proud she made a sale."
+                    },
+                    {
+                        "text_zh": "好，给我两个吧。",
+                        "text_pinyin": "Hǎo, gěi wǒ liǎng ge ba.",
+                        "text_en": "Okay, give me two.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Buys some but doesn't thank her or acknowledge her enthusiasm about how sweet they are."
+                    },
+                    {
+                        "text_zh": "我看看，甜不甜。",
+                        "text_pinyin": "Wǒ kànkan, tián bu tián.",
+                        "text_en": "Let me see if they're sweet.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She and her mom both vouched for the sweetness, and you want to verify -- shows you don't trust what she said."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Children helping at family businesses is a common sight in Chinese neighborhoods. It teaches responsibility early and strengthens family bonds. Addressing a young man as 叔叔 (uncle) is a polite convention for children."
+    }
+}

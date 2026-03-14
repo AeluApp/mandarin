@@ -1,0 +1,83 @@
+{
+  "title": "The Corner Bookshop",
+  "title_zh": "街角的书店",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You wander into a tiny bookshop. The owner, a quiet middle-aged man, is reading behind the counter.",
+    "setup_zh": "你走进一家很小的书店。老板，一个安静的中年男人，在柜台后面看书。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "慢慢看，不着急。如果你想找什么书，可以告诉我。",
+        "text_pinyin": "Mànman kàn, bù zháojí. Rúguǒ nǐ xiǎng zhǎo shénme shū, kěyǐ gàosu wǒ.",
+        "text_en": "Take your time, no rush. If you're looking for something, just let me know."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him why you came in.",
+        "options": [
+          {
+            "text_zh": "谢谢。我没有想找什么特别的书，只是觉得这里很舒服，想进来看看。",
+            "text_pinyin": "Xièxie. Wǒ méiyǒu xiǎng zhǎo shénme tèbié de shū, zhǐ shì juéde zhèlǐ hěn shūfu, xiǎng jìnlái kànkan.",
+            "text_en": "Thank you. I'm not looking for anything specific — I just felt this place was welcoming and wanted to browse.",
+            "score": 1.0,
+            "feedback": "Honest and open — drawn in by the atmosphere, not a purchase.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你们有英文书吗？",
+            "text_pinyin": "Nǐmen yǒu Yīngwén shū ma?",
+            "text_en": "Do you have English books?",
+            "score": 0.0,
+            "feedback": "A transactional question that misses the mood."
+          },
+          {
+            "text_zh": "这个书店很小。",
+            "text_pinyin": "Zhège shūdiàn hěn xiǎo.",
+            "text_en": "This bookshop is very small.",
+            "score": 0.0,
+            "feedback": "An observation that could feel dismissive."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "那就好。现在大家都在网上买书，来书店的人越来越少了。但是我觉得，在书店里找书和在网上找书是不一样的。有时候你不知道你要什么，走进来，一本书就找到了你。",
+        "text_pinyin": "Nà jiù hǎo. Xiànzài dàjiā dōu zài wǎng shàng mǎi shū, lái shūdiàn de rén yuè lái yuè shǎo le. Dànshì wǒ juéde, zài shūdiàn lǐ zhǎo shū hé zài wǎng shàng zhǎo shū shì bù yīyàng de. Yǒu shíhou nǐ bù zhīdào nǐ yào shénme, zǒu jìnlái, yī běn shū jiù zhǎo dào le nǐ.",
+        "text_en": "Good. Everyone buys books online now, fewer and fewer people come to bookshops. But I think finding a book in a shop and finding one online are different. Sometimes you don't know what you want, you walk in, and a book finds you."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his idea about books finding you.",
+        "options": [
+          {
+            "text_zh": "「一本书找到了你」——我很喜欢这个说法。在网上你搜索，但是在书店里你遇见。这种遇见是最好的。",
+            "text_pinyin": "'Yī běn shū zhǎo dào le nǐ' — wǒ hěn xǐhuan zhège shuōfǎ. Zài wǎng shàng nǐ sōusuǒ, dànshì zài shūdiàn lǐ nǐ yùjiàn. Zhè zhǒng yùjiàn shì zuì hǎo de.",
+            "text_en": "'A book finds you' — I love that phrase. Online you search, but in a bookshop you encounter. That kind of encounter is the best.",
+            "score": 1.0,
+            "feedback": "Captures the magic of browsing — encounter over algorithm.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "网上买比较便宜。",
+            "text_pinyin": "Wǎng shàng mǎi bǐjiào piányi.",
+            "text_en": "Buying online is cheaper.",
+            "score": 0.0,
+            "feedback": "Argues price in a conversation about serendipity."
+          },
+          {
+            "text_zh": "你打算一直开这个书店吗？",
+            "text_pinyin": "Nǐ dǎsuàn yīzhí kāi zhège shūdiàn ma?",
+            "text_en": "Do you plan to keep this bookshop open?",
+            "score": 0.0,
+            "feedback": "Raises the specter of closure during a philosophical exchange."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Small independent bookshops in China have been disappearing as online shopping dominates. Those that survive often become quiet sanctuaries. The idea that 书找到了你 (a book finds you) reflects a Chinese appreciation for 缘分 (yuánfèn) — meaningful encounters that feel fated rather than chosen."
+  }
+}

@@ -1,0 +1,83 @@
+{
+    "title": "The Window Seat",
+    "title_zh": "靠窗的座位",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're at a small restaurant, sitting by the window. The cook, Lao Deng, brings your food and lingers to chat. Outside, autumn leaves are falling slowly.",
+        "setup_zh": "你在一家小饭馆靠窗的位置坐着。厨师老邓送来你的菜，停下来聊天。窗外，秋天的树叶慢慢飘落。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个位置是我们店里最好的。很多客人喜欢坐这里，不是因为菜好吃，是因为可以看外面的树。秋天的时候，叶子一片一片掉下来，比电视好看多了。",
+                "text_pinyin": "Zhège wèizhì shì wǒmen diàn lǐ zuì hǎo de. Hěn duō kèrén xǐhuān zuò zhèlǐ, bú shì yīnwèi cài hǎochī, shì yīnwèi kěyǐ kàn wàimiàn de shù. Qiūtiān de shíhou, yèzi yī piàn yī piàn diào xiàlái, bǐ diànshì hǎokàn duō le.",
+                "text_en": "This is the best seat in our restaurant. Many customers like sitting here — not because the food is good, but because you can watch the tree outside. In autumn, the leaves fall one by one. Much more beautiful than TV."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the window view.",
+                "options": [
+                    {
+                        "text_zh": "比电视好看——因为它是真的。每一片叶子掉下来的方式都不一样，而且掉了就是掉了，不会重播。真实的东西总是比屏幕上的更动人。",
+                        "text_pinyin": "Bǐ diànshì hǎokàn — yīnwèi tā shì zhēn de. Měi yī piàn yèzi diào xiàlái de fāngshì dōu bù yīyàng, érqiě diào le jiù shì diào le, bú huì chóngbō. Zhēnshí de dōngxi zǒng shì bǐ píngmù shàng de gèng dòngrén.",
+                        "text_en": "More beautiful than TV — because it's real. Every leaf falls differently, and once it falls, it's fallen, no replay. Real things are always more moving than what's on a screen.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Appreciates the irreplaceable quality of real-time nature."
+                    },
+                    {
+                        "text_zh": "菜也很好吃啊。",
+                        "text_pinyin": "Cài yě hěn hǎochī a.",
+                        "text_en": "The food is delicious too.",
+                        "score": 0.0,
+                        "feedback": "Deflects from his lovely observation with a compliment."
+                    },
+                    {
+                        "text_zh": "你们有没有包间？",
+                        "text_pinyin": "Nǐmen yǒu méiyǒu bāojiān?",
+                        "text_en": "Do you have a private room?",
+                        "score": 0.0,
+                        "feedback": "Seating logistics during a poetic moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不会重播，对。你说的太好了。我年轻的时候觉得秋天很伤感，叶子掉了就没了。但现在我想，掉了才能长新的。每年秋天的叶子都不一样，就像每年的自己也不一样。",
+                "text_pinyin": "Bú huì chóngbō, duì. Nǐ shuō de tài hǎo le. Wǒ niánqīng de shíhou juéde qiūtiān hěn shānggǎn, yèzi diào le jiù méi le. Dàn xiànzài wǒ xiǎng, diào le cái néng zhǎng xīn de. Měi nián qiūtiān de yèzi dōu bù yīyàng, jiù xiàng měi nián de zìjǐ yě bù yīyàng.",
+                "text_en": "No replay, right. That's beautifully put. When I was young I thought autumn was sad — leaves fall and they're gone. But now I think, they have to fall for new ones to grow. Every autumn's leaves are different, just like every year you're a different person."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his changed perspective on autumn.",
+                "options": [
+                    {
+                        "text_zh": "看不见的东西有时候比看得见的更重要。一个学生因为您一句话改变了想法，因为您的鼓励找到了自信——这些影响也许传了很多年了。",
+                        "text_pinyin": "Kàn bújiàn de dōngxi yǒu shíhou bǐ kàn de jiàn de gèng zhòngyào. Yī ge xuéshēng yīnwèi nín yī jù huà gǎibiàn le xiǎngfǎ, yīnwèi nín de gǔlì zhǎo dào le zìxìn — zhèxiē yǐngxiǎng yěxǔ chuán le hěn duō nián le.",
+                        "text_en": "Invisible things are sometimes more important than visible ones. A student changed their thinking because of something you said, found confidence through your encouragement — those effects may have been rippling for years.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mature perspective — connects natural cycles to personal growth."
+                    },
+                    {
+                        "text_zh": "你这里冬天也有客人吗？",
+                        "text_pinyin": "Nǐ zhèlǐ dōngtiān yě yǒu kèrén ma?",
+                        "text_en": "Do you have customers in winter too?",
+                        "score": 0.0,
+                        "feedback": "Business question that breaks the seasonal reflection."
+                    },
+                    {
+                        "text_zh": "你种的是什么树？",
+                        "text_pinyin": "Nǐ zhòng de shì shénme shù?",
+                        "text_en": "What kind of tree is it?",
+                        "score": 0.0,
+                        "feedback": "Botanical question during a philosophical exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Autumn holds special significance in Chinese culture, often associated with both melancholy (秋愁) and philosophical reflection. The falling of leaves (落叶) is a pervasive metaphor in Chinese poetry for loss, change, and renewal. Many Chinese people develop a more positive relationship with autumn's symbolism as they age — seeing letting go not as loss but as making space for growth."
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "title": "The Voicemail Maze",
+    "title_zh": "语音留言",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_2_01_v0",
+    "tree": {
+        "setup": "You're trying to reach the delivery company about a package that hasn't arrived. After navigating a phone menu, you finally reach a human -- Xiao Zhu, a customer service rep who sounds like she's smiling even through the phone. She has a way of making logistics sound almost cheerful.",
+        "setup_zh": "你在打快递公司的电话，问一个没到的包裹。听了一圈语音菜单之后，终于接通了人——客服小朱，听声音好像在笑。她有本事把物流的事说得很开心。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，快递客服。请问您的快递单号是多少？",
+                "text_pinyin": "nín hǎo, kuàidì kèfú. qǐngwèn nín de kuàidì dān hào shì duōshao?",
+                "text_en": "Hello, delivery service. What's your tracking number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your situation.",
+                "options": [
+                    {
+                        "text_zh": "单号是SF123456。我的快递还没到。",
+                        "text_pinyin": "dān hào shì SF yāo èr sān sì wǔ liù. wǒ de kuàidì hái méi dào.",
+                        "text_en": "The tracking number is SF123456. My delivery hasn't arrived yet.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Zhu types it in.「我查一下……在路上了！今天下午应该到。」还没到 means 'hasn't arrived yet' -- 还没 + verb is the 'not yet' pattern."
+                    },
+                    {
+                        "text_zh": "我等了三天了！我的东西在哪里？",
+                        "text_pinyin": "wǒ děng le sān tiān le! wǒ de dōngxi zài nǎlǐ?",
+                        "text_en": "I've been waiting three days! Where's my stuff?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Zhu stays cheerful.「理解理解！您告诉我单号，我马上帮您查。」等了三天了 uses the double 了 to emphasize ongoing duration. Effective, if slightly intense."
+                    },
+                    {
+                        "text_zh": "我没有单号。可以用手机号查吗？",
+                        "text_pinyin": "wǒ méiyǒu dān hào. kěyǐ yòng shǒujī hào chá ma?",
+                        "text_en": "I don't have the tracking number. Can I look it up by phone number?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Zhu says yes without missing a beat.「可以！请告诉我您的手机号。」Knowing alternative ways to look things up is practical wisdom."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "查到了！您的快递在路上了，今天下午到。如果不在家，快递员会打电话给您。",
+                "text_pinyin": "chá dào le! nín de kuàidì zài lùshang le, jīntiān xiàwǔ dào. rúguǒ bú zài jiā, kuàidìyuán huì dǎ diànhuà gěi nín.",
+                "text_en": "Found it! Your delivery is on its way, arriving this afternoon. If you're not home, the courier will call you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about delivery arrangements.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢！可以放在门口吗？",
+                        "text_pinyin": "hǎo de, xièxie! kěyǐ fàng zài ménkǒu ma?",
+                        "text_en": "OK, thanks! Can they leave it at the door?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Zhu notes it.「好的，我备注一下。」放在门口 is how millions of Chinese packages get delivered every day."
+                    },
+                    {
+                        "text_zh": "我下午不在家。明天可以送吗？",
+                        "text_pinyin": "wǒ xiàwǔ bú zài jiā. míngtiān kěyǐ sòng ma?",
+                        "text_en": "I won't be home this afternoon. Can they deliver tomorrow?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Zhu arranges it happily.「没问题，明天上午给您送。」Rescheduling with 可以...吗 is clean and polite."
+                    },
+                    {
+                        "text_zh": "太好了！",
+                        "text_pinyin": "tài hǎo le!",
+                        "text_en": "Great!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Zhu's smile is audible.「还有别的事吗？」Short and satisfied. Sometimes that's all you need."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，还有别的事吗？祝您生活愉快！",
+                "text_pinyin": "hǎo de, hái yǒu bié de shì ma? zhù nín shēnghuó yúkuài!",
+                "text_en": "OK, anything else? Wishing you a pleasant day!"
+            }
+        ],
+        "cultural_note": "China's delivery system (快递, kuàidì) is astonishingly fast -- same-city packages often arrive within hours. Couriers (快递员) will call before delivering. Leaving packages at the door or in lockers (快递柜) is extremely common."
+    }
+}

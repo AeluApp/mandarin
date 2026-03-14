@@ -1,6 +1,6 @@
 # Testimonial Collection & Display System
 
-**Product:** Ming (明) -- Mandarin Learning System
+**Product:** Aelu
 **Document type:** Internal operations guide
 **Last updated:** 2026-02-21
 
@@ -8,7 +8,7 @@
 
 ## 1. Philosophy
 
-Testimonials for Ming should read like field notes from one serious learner to another. They are not marketing copy. They are evidence.
+Testimonials for Aelu should read like field notes from one serious learner to another. They are not marketing copy. They are evidence.
 
 The goal is not to persuade through enthusiasm but to let real learning outcomes speak plainly. A learner who says "I finally stopped confusing second and third tones after the scaffolded review caught the pattern I was missing" is worth more than a hundred "This app is amazing!" quotes.
 
@@ -20,7 +20,7 @@ The goal is not to persuade through enthusiasm but to let real learning outcomes
 - Every claim in a displayed testimonial should be defensible. If someone says "I passed HSK 3 in four months," we should be able to verify they were an active user for that period. We do not display claims we cannot reasonably corroborate.
 - Testimonials are a mirror, not a megaphone. They reflect what the product actually does, not what we wish it did.
 
-**Tone alignment:** The same calm, adult, data-grounded voice that defines Ming's learning experience should define how we present learner voices. No exclamation marks added in editing. No superlatives inserted. The Civic Sanctuary aesthetic -- warm, unhurried, respectful -- extends to how we handle other people's words.
+**Tone alignment:** The same calm, adult, data-grounded voice that defines Aelu's learning experience should define how we present learner voices. No exclamation marks added in editing. No superlatives inserted. The Civic Sanctuary aesthetic -- warm, unhurried, respectful -- extends to how we handle other people's words.
 
 This document exists to formalize restraint, not to optimize extraction.
 
@@ -64,7 +64,7 @@ Responses under 15 words are stored as feedback data only. Responses of 15+ word
 
 Sent at 30, 90, and 180 days after account creation. Plain text emails, no HTML templates. Subject lines are direct:
 
-- 30 days: "Quick question about your first month with Ming"
+- 30 days: "Quick question about your first month with Aelu"
 - 90 days: "How is your Mandarin study going?"
 - 180 days: "Six months in -- what has the experience been like?"
 
@@ -74,7 +74,7 @@ Each email contains one open-ended question and a reply link. No surveys, no rat
 
 Five questions, conducted asynchronously (written) or via 15-minute call:
 
-1. What were you using for Mandarin study before Ming? What was missing?
+1. What were you using for Mandarin study before Aelu? What was missing?
 2. Describe a specific moment where something clicked that hadn't before.
 3. What does your typical study session look like?
 4. What would you change about the product?
@@ -194,7 +194,7 @@ CREATE INDEX idx_testimonials_tags ON testimonials(tags);
 - The consent form must be separate from the app's general terms of service. Bundled consent is not valid consent under GDPR.
 - For users in California, the consent form must disclose that testimonial data may be used for marketing purposes (CCPA category: commercial information).
 - Retain consent records (date, method, version) for at least 3 years after withdrawal.
-- If Ming expands to serve users in the EU, conduct a Data Protection Impact Assessment for the testimonial system before launching it in that market.
+- If Aelu expands to serve users in the EU, conduct a Data Protection Impact Assessment for the testimonial system before launching it in that market.
 - Minors (under 16 in the EU, under 13 in the US): do not collect or display testimonials from users identified as minors. If age is unknown, the `anonymous` permission level with no identifying details is the only acceptable option.
 
 ---
@@ -241,7 +241,7 @@ Each testimonial receives one or more tags from this controlled list:
 
 **Good:**
 
-> "I kept confusing 买 and 卖 for months on Anki. Ming's interleaved tone drills forced me to distinguish them in context, and I stopped mixing them up within two weeks."
+> "I kept confusing 买 and 卖 for months on Anki. Aelu's interleaved tone drills forced me to distinguish them in context, and I stopped mixing them up within two weeks."
 > -- HSK 3, 4 months
 
 Why this works: Specific problem. Specific feature. Specific outcome. Timeframe given. No hyperbole.
@@ -261,7 +261,7 @@ Why this fails: Vague. Unverifiable claim ("basically fluent"). Manufactured ent
 
 **Bad:**
 
-> "Ming is way better than Duolingo and HelloChinese combined."
+> "Aelu is way better than Duolingo and HelloChinese combined."
 
 Why this fails: Unsubstantiated comparison. No specific observation. Reads like astroturfing.
 
@@ -282,7 +282,7 @@ This has a real observation buried inside informal language. With the user's per
 | Page | Quantity | Purpose | Selection Criteria |
 |---|---|---|---|
 | Homepage | 3, rotating | First impression -- show breadth of learner types | One beginner (HSK 1-2), one intermediate (HSK 3-4), one long-term user (6+ months) |
-| Pricing | 2 | Handle objections -- "Is $12/month worth it?" | Both must have `value` or `comparison` tag |
+| Pricing | 2 | Handle objections -- "Is $14.99/month worth it?" | Both must have `value` or `comparison` tag |
 | About | 1 | Align with product philosophy | Should reference methodology or learning approach, not just praise |
 
 Rotation: Homepage testimonials rotate on page load from a pool of 6-9 approved quotes. Pricing and About testimonials are static, reviewed quarterly.
@@ -322,7 +322,7 @@ Rotation: Homepage testimonials rotate on page load from a pool of 6-9 approved 
 
 ### Where Testimonials Do Not Appear
 
-**Inside the learning app itself.** The study environment is a focused space. No social proof banners, no "See what others are saying" cards, no testimonial carousels on the dashboard. When a user is inside Ming, the only voice they should hear is the system's instructional voice and their own learning data. Marketing has no place in the session flow.
+**Inside the learning app itself.** The study environment is a focused space. No social proof banners, no "See what others are saying" cards, no testimonial carousels on the dashboard. When a user is inside Aelu, the only voice they should hear is the system's instructional voice and their own learning data. Marketing has no place in the session flow.
 
 Also never display testimonials in:
 - Popup modals
@@ -409,9 +409,9 @@ This does not need to be a formal version control system. A `testimonial_version
 
 ## 7. Anti-Patterns to Avoid
 
-These are the rules that protect the integrity of the testimonial system. Violating them degrades trust -- both the user's trust in Ming and the team's trust in its own data.
+These are the rules that protect the integrity of the testimonial system. Violating them degrades trust -- both the user's trust in Aelu and the team's trust in its own data.
 
-**No incentivized testimonials.** Do not offer free months, discounts, extended trials, premium features, or any other incentive in exchange for testimonials. "Leave a review and get a free month" is a disqualifying practice. If a testimonial was influenced by an incentive, it is not a testimonial -- it is paid endorsement, and it must be disclosed as such under FTC guidelines. Ming does not do paid endorsements.
+**No incentivized testimonials.** Do not offer free months, discounts, extended trials, premium features, or any other incentive in exchange for testimonials. "Leave a review and get a free month" is a disqualifying practice. If a testimonial was influenced by an incentive, it is not a testimonial -- it is paid endorsement, and it must be disclosed as such under FTC guidelines. Aelu does not do paid endorsements.
 
 **No cherry-picking only positive sentiment.** If the collection system consistently surfaces negative or neutral feedback, that is a product signal, not a marketing problem. Display testimonials that are genuinely positive, but do not suppress the existence of mixed feedback. The internal quarterly report (Section 9) should include sentiment distribution, not just the highlights. If a 4-star review makes a valid criticism alongside praise, that mixed review is more credible than a 5-star rave.
 
@@ -419,7 +419,7 @@ These are the rules that protect the integrity of the testimonial system. Violat
 
 **No fabricated testimonials.** No fake users. No composite quotes assembled from multiple users. No "inspired by real feedback" paraphrases attributed to fictional people. This includes AI-generated testimonials, even if based on real sentiment data.
 
-**No testimonials from churned users.** If a user has cancelled their subscription and not returned within 60 days, their testimonial should be removed from display at the next quarterly review. Someone who no longer uses the product should not be implicitly endorsing it. Exception: if the testimonial specifically describes a completed, self-contained experience (e.g., "I used Ming to prepare for and pass HSK 3"), it may remain with a note that it reflects a past experience.
+**No testimonials from churned users.** If a user has cancelled their subscription and not returned within 60 days, their testimonial should be removed from display at the next quarterly review. Someone who no longer uses the product should not be implicitly endorsing it. Exception: if the testimonial specifically describes a completed, self-contained experience (e.g., "I used Aelu to prepare for and pass HSK 3"), it may remain with a note that it reflects a past experience.
 
 **No learning speed promises.** Do not display testimonials that claim or imply specific learning timelines unless the claim can be verified against the user's actual data. "I learned 500 characters in a month" is a claim that can be checked. If it cannot be verified, it cannot be displayed. Even if verified, add context: the user's prior experience, study hours per day, and other factors that make their timeline non-generalizable.
 
@@ -473,7 +473,7 @@ Video testimonials require a separate video/audio release form in addition to th
 
 ### Hosting
 
-- Self-hosted MP4 files served from Ming's own infrastructure or a privacy-respecting CDN.
+- Self-hosted MP4 files served from Aelu's own infrastructure or a privacy-respecting CDN.
 - Do not embed YouTube, Vimeo, or other third-party players on the marketing site. Third-party embeds introduce tracking cookies, which conflicts with the user's consent scope.
 - Video files should be optimized for web: H.264 codec, max 720p, target file size under 15MB for a 90-second clip.
 - Provide manual play controls. No autoplay.

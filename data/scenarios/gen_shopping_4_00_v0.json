@@ -1,0 +1,124 @@
+{
+    "title": "The Market Mathematician",
+    "title_zh": "菜市场数学家",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_4_00_v0",
+    "tree": {
+        "setup": "A morning market where the stalls are covered in tarps of blue and orange, and the vendors call out prices like auctioneers. Auntie Ma sells fruit from a wooden cart and considers price negotiations a form of sport. She adjusts her prices based on a complex algorithm that accounts for time of day, freshness, how much you're buying, and whether she likes the look of you.",
+        "setup_zh": "早市的摊位上撑着蓝色和橙色的篷布，摊贩们像拍卖师一样喊着价格。马大姐从一辆木推车上卖水果，把砍价当作一种运动。她根据一套复杂的算法调整价格，考虑因素包括：时间、新鲜度、你买多少，以及她是否觉得你顺眼。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来看看啊！草莓新鲜的，今天早上刚到的！十五块一斤！",
+                "text_pinyin": "lái kànkan a! cǎoméi xīnxiān de, jīntiān zǎoshang gāng dào de! shíwǔ kuài yì jīn!",
+                "text_en": "Come look! Fresh strawberries, just arrived this morning! Fifteen yuan per jin!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Begin negotiating the price.",
+                "options": [
+                    {
+                        "text_zh": "看起来不错。但是十五块有点贵吧？十块一斤行不行？",
+                        "text_pinyin": "kàn qǐlái búcuò. dànshì shíwǔ kuài yǒudiǎn guì ba? shí kuài yì jīn xíng bù xíng?",
+                        "text_en": "They look good. But fifteen is a bit expensive, right? How about ten yuan per jin?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Opening at ten — a bold but not insulting counter. Auntie Ma grins. The game is on."
+                    },
+                    {
+                        "text_zh": "能不能便宜一点？",
+                        "text_pinyin": "néng bu néng piányi yìdiǎn?",
+                        "text_en": "Can you make it cheaper?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The universal market opener. She'll counter with twelve."
+                    },
+                    {
+                        "text_zh": "太贵了！",
+                        "text_pinyin": "tài guì le!",
+                        "text_en": "Too expensive!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Auntie Ma is unmoved. She hears this exactly thirty-seven times before 9 AM."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十块？不行不行，你看这个个头多大！最少十三。你买两斤的话我给你算便宜一点。",
+                "text_pinyin": "shí kuài? bù xíng bù xíng, nǐ kàn zhège gètou duō dà! zuìshǎo shísān. nǐ mǎi liǎng jīn de huà wǒ gěi nǐ suàn piányi yìdiǎn.",
+                "text_en": "Ten? No way — look how big these are! Thirteen at least. Buy two jin and I'll give you a better price."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Counter-offer.",
+                "options": [
+                    {
+                        "text_zh": "好吧，两斤，十一块一斤，行不行？一共二十二。",
+                        "text_pinyin": "hǎo ba, liǎng jīn, shíyī kuài yì jīn, xíng bù xíng? yígòng èrshí'èr.",
+                        "text_en": "OK, two jin, eleven per jin — deal? That's twenty-two total.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Volume commitment plus a clear total — Auntie Ma's algorithm is computing. She's close to accepting."
+                    },
+                    {
+                        "text_zh": "十二块两斤可以吗？",
+                        "text_pinyin": "shí'èr kuài liǎng jīn kěyǐ ma?",
+                        "text_en": "Twelve for two jin?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Wait — twelve total or per jin? She'll clarify, because precision is her currency."
+                    },
+                    {
+                        "text_zh": "太贵了，我去别的摊看看。",
+                        "text_pinyin": "tài guì le, wǒ qù bié de tān kànkan.",
+                        "text_en": "Too expensive — I'll check other stalls.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The walk-away gambit. Auntie Ma calls after you:「好好好，十二块一斤！回来！」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎呀，你真会讲价。好吧好吧，十二块一斤，两斤二十四。再送你几个小的。",
+                "text_pinyin": "āiyā, nǐ zhēn huì jiǎng jià. hǎo ba hǎo ba, shí'èr kuài yì jīn, liǎng jīn èrshísì. zài sòng nǐ jǐ gè xiǎo de.",
+                "text_en": "Aiya, you really know how to bargain. OK OK, twelve per jin, two jin for twenty-four. I'll throw in a few small ones too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept and pay.",
+                "options": [
+                    {
+                        "text_zh": "谢谢马大姐！你的草莓看起来比别家的好。下次还来你这里买。",
+                        "text_pinyin": "xièxie Mǎ dàjiě! nǐ de cǎoméi kàn qǐlái bǐ bié jiā de hǎo. xià cì hái lái nǐ zhèlǐ mǎi.",
+                        "text_en": "Thanks, Auntie Ma! Your strawberries look better than the other stalls'. I'll come back next time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compliment plus loyalty promise — the market vendor's love language. She tosses in two extra strawberries."
+                    },
+                    {
+                        "text_zh": "好的，二十四。谢谢！",
+                        "text_pinyin": "hǎo de, èrshísì. xièxie!",
+                        "text_en": "OK, twenty-four. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean transaction. She bags the fruit with practiced hands."
+                    },
+                    {
+                        "text_zh": "能不能再便宜一点？",
+                        "text_pinyin": "néng bu néng zài piányi yìdiǎn?",
+                        "text_en": "Can you go even lower?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Ma's smile freezes. There is a limit to the sport, and you've found it."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bargaining (讨价还价, tǎojià huánjià) is expected at open markets but not at supermarkets or malls. The key is to be playful, not aggressive. 一斤 (yì jīn) is 500 grams — the standard market weight unit in China."
+    }
+}

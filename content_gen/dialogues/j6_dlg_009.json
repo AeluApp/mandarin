@@ -1,0 +1,117 @@
+{
+    "title": "The Landlord's Renovation",
+    "title_zh": "房东的装修",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "Your neighbor in a Shanghai lane house, Auntie Jiang, is furious. The landlord of the building next door has gutted a 1930s shikumen house and is turning it into a boutique hotel. She wants to know if you think this counts as 'preservation.'",
+        "setup_zh": "你在上海弄堂里的邻居蒋阿姨非常生气。隔壁楼的房东把一栋1930年代的石库门房子掏空了，正在改建成精品酒店。她想知道你觉得这算不算'保护'。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看见隔壁了吗？外面的壳留着，里面全拆了。挂了个牌子说'历史保护建筑'。保护？把里面的人都赶走了，把灵魂都掏空了，就留个壳——这叫保护？",
+                "text_pinyin": "Nǐ kànjiàn gébì le ma? Wàimiàn de ké liú zhe, lǐmiàn quán chāi le. Guà le ge páizi shuō 'lìshǐ bǎohù jiànzhù'. Bǎohù? Bǎ lǐmiàn de rén dōu gǎn zǒu le, bǎ línghún dōu tāo kōng le, jiù liú ge ké — zhè jiào bǎohù?",
+                "text_en": "Did you see next door? They kept the shell on the outside but gutted everything inside. Put up a sign saying 'historically protected building.' Protection? They drove out all the people inside, hollowed out the soul, and just kept the shell — you call that protection?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Auntie Jiang's indignation about the shikumen renovation.",
+                "options": [
+                    {
+                        "text_zh": "有意思的是，如果有人直接说'这里有人坐吗？'，那个人几乎一定会把包拿走。所以这个领地行为不是强制的，更像是一种试探——看周围的人愿不愿意打破沉默。沉默本身变成了默认同意。",
+                        "text_pinyin": "Yǒu yìsi de shì, rúguǒ yǒu rén zhíjiē shuō 'zhèlǐ yǒu rén zuò ma?', nàge rén jīhū yīdìng huì bǎ bāo ná zǒu. Suǒyǐ zhège lǐngdì xíngwéi bú shì qiángzhì de, gèng xiàng shì yī zhǒng shìtàn — kàn zhōuwéi de rén yuàn bú yuànyì dǎpò chénmò. Chénmò běnshēn biàn chéng le mòrèn tóngyì.",
+                        "text_en": "Interestingly, if someone directly asks 'is anyone sitting here?', the bag will be moved. So this territorial behavior isn't coercive — it's a probe, testing whether people will break the silence. Silence itself becomes tacit consent.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Names the architectural concept while validating her intuition — bridges expert knowledge with lived experience."
+                    },
+                    {
+                        "text_zh": "那家精品酒店收费贵不贵？",
+                        "text_pinyin": "Nà jiā jīngpǐn jiǔdiàn shōufèi guì bú guì?",
+                        "text_en": "Is that boutique hotel expensive?",
+                        "score": 0.0,
+                        "feedback": "Asking about room rates when she's grieving her neighborhood's transformation."
+                    },
+                    {
+                        "text_zh": "你今天晚饭做什么？",
+                        "text_pinyin": "Nǐ jīntiān wǎnfàn zuò shénme?",
+                        "text_en": "What are you making for dinner tonight?",
+                        "score": 0.0,
+                        "feedback": "Completely ignores her emotional state."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "立面主义——这个词好。我跟你说，以前住在里面的老王一家，三代人了。搬走的时候老王哭了，说他在这个灶台上做了四十年的饭。现在灶台拆了，换成了进口厨房设备，给游客做'老上海体验'。讽刺不讽刺？",
+                "text_pinyin": "Lìmiàn zhǔyì — zhège cí hǎo. Wǒ gēn nǐ shuō, yǐqián zhù zài lǐmiàn de Lǎo Wáng yī jiā, sān dài rén le. Bān zǒu de shíhou Lǎo Wáng kū le, shuō tā zài zhège zàotái shàng zuò le sìshí nián de fàn. Xiànzài zàotái chāi le, huàn chéng le jìnkǒu chúfáng shèbèi, gěi yóukè zuò 'lǎo Shànghǎi tǐyàn'. Fěngcì bú fěngcì?",
+                "text_en": "Facadism — good word. Let me tell you, the Old Wang family that used to live there — three generations. When they moved out, Old Wang cried and said he'd been cooking on that stove for forty years. Now the stove is gone, replaced with imported kitchen equipment, serving tourists an 'Old Shanghai Experience.' Ironic or what?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the irony she's describing.",
+                "options": [
+                    {
+                        "text_zh": "对，两者的共同点是人为制造的稀缺感。下一班车两分钟就来，但关门倒计时激活了'再不抢就没了'的本能。有意思的是，这种行为早高峰比晚高峰多——也许跟早上觉得时间更珍贵有关。",
+                        "text_pinyin": "Duì, liǎng zhě de gòngtóng diǎn shì rénwéi zhìzào de xīquē gǎn. Xià yī bān chē liǎng fēnzhōng jiù lái, dàn guānmén dàojìshí jīhuó le 'zài bù qiǎng jiù méi le' de běnnéng. Yǒu yìsi de shì, zhè zhǒng xíngwéi zǎo gāofēng bǐ wǎn gāofēng duō — yěxǔ gēn zǎoshang juéde shíjiān gèng zhēnguì yǒuguān.",
+                        "text_en": "Right, both share artificially manufactured scarcity. Next train is two minutes away, but the closing countdown triggers 'grab it or lose it' instinct. Interestingly, this happens more in morning rush — perhaps people feel time is more precious then.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Metaphor — 'taxidermy' captures the paradox of killing something to display it as alive."
+                    },
+                    {
+                        "text_zh": "老王搬到哪里去了？",
+                        "text_pinyin": "Lǎo Wáng bān dào nǎlǐ qù le?",
+                        "text_en": "Where did Old Wang move to?",
+                        "score": 0.0,
+                        "feedback": "While not unreasonable, it shifts away from the structural critique she's building toward."
+                    },
+                    {
+                        "text_zh": "我最近想学摄影，你觉得拍弄堂怎么样？",
+                        "text_pinyin": "Wǒ zuìjìn xiǎng xué shèyǐng, nǐ juéde pāi lóngtáng zěnmeyàng?",
+                        "text_en": "I've been wanting to learn photography, what do you think about photographing the lane houses?",
+                        "score": 0.0,
+                        "feedback": "Aestheticizing the very thing she's mourning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "标本化！对，就是这个感觉。我跟你说，我在这条弄堂住了快三十年了。最怕的不是拆，最怕的是这种'假保留'——让你以为你的历史被尊重了，其实只是被消费了。",
+                "text_pinyin": "Biāoběn huà! Duì, jiù shì zhège gǎnjué. Wǒ gēn nǐ shuō, wǒ zài zhè tiáo lóngtáng zhù le kuài sānshí nián le. Zuì pà de bú shì chāi, zuì pà de shì zhè zhǒng 'jiǎ bǎoliú' — ràng nǐ yǐwéi nǐ de lìshǐ bèi zūnzhòng le, qíshí zhǐ shì bèi xiāofèi le.",
+                "text_en": "Taxidermy! Yes, that's exactly the feeling. I've lived in this lane for nearly thirty years. What I fear most isn't demolition — what I fear most is this kind of 'fake preservation.' Making you think your history is being respected, when really it's just being consumed."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her distinction between demolition and fake preservation.",
+                "options": [
+                    {
+                        "text_zh": "这是一个社会悖论——大家更健康、看起来更年轻，反而让善意变得更难执行。让座的前提是你要做一个公开的年龄判断，而这个判断本身可能冒犯人。'不确定'变成了不作为的合理借口。",
+                        "text_pinyin": "Zhè shì yīge shèhuì bèilùn — dàjiā gèng jiànkāng, kàn qǐlái gèng niánqīng, fǎnér ràng shànyì biàn de gèng nán zhíxíng. Ràng zuò de qiántí shì nǐ yào zuò yīge gōngkāi de niánlíng pànduàn, ér zhège pànduàn běnshēn kěnéng màofàn rén. 'Bù quèdìng' biàn chéng le bú zuòwéi de hélǐ jièkǒu.",
+                        "text_en": "A social paradox — everyone looks younger and healthier, making kindness harder to execute. Giving up a seat requires a public age judgment that might offend. 'Uncertainty' becomes a reasonable excuse for inaction.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Articulates the political mechanism — fake preservation disarms resistance by co-opting the language of respect."
+                    },
+                    {
+                        "text_zh": "你觉得上海的房价还会涨吗？",
+                        "text_pinyin": "Nǐ juéde Shànghǎi de fángjià hái huì zhǎng ma?",
+                        "text_en": "Do you think Shanghai's housing prices will keep rising?",
+                        "score": 0.0,
+                        "feedback": "Real estate speculation when she's talking about community displacement."
+                    },
+                    {
+                        "text_zh": "这条弄堂有多少年历史了？",
+                        "text_pinyin": "Zhè tiáo lóngtáng yǒu duōshǎo nián lìshǐ le?",
+                        "text_en": "How many years of history does this lane have?",
+                        "score": 0.0,
+                        "feedback": "Factual question that misses the emotional and political depth of the moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Shanghai's shikumen (石库门) lane houses are a unique architectural form blending Western and Chinese styles, built primarily in the 1920s-1930s. The tension between preservation and gentrification is intense — areas like Xintiandi were celebrated as preservation successes, but critics note that the original residents were all displaced. The concept of '假保留' (fake preservation) resonates widely: the physical form survives, but the social life it housed does not. Some residents have coined the phrase '留了房子，赶了人' (kept the building, drove out the people)."
+    }
+}

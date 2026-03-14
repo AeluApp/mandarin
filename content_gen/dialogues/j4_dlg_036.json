@@ -1,0 +1,117 @@
+{
+    "title": "The Paper Lantern Maker",
+    "title_zh": "做灯笼的人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "In a narrow alley, you find a workshop where an elderly man makes paper lanterns by hand. Soft light glows from dozens of finished lanterns hanging from the ceiling.",
+        "setup_zh": "在一条窄巷子里，你找到一间手工做纸灯笼的作坊。几十个做好的灯笼挂在天花板上，散发着柔和的光。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "进来看看吧。小心头，灯笼多。这些都是我一个一个做的。快过年了，订单多，但是我不会赶工。每个灯笼都要认真做，不然点上灯以后，光就不均匀。",
+                "text_pinyin": "Jìnlái kànkan ba. Xiǎoxīn tóu, dēnglong duō. Zhèxiē dōu shì wǒ yī ge yī ge zuò de. Kuài guò nián le, dìngdān duō, dànshì wǒ bú huì gǎn gōng. Měi ge dēnglong dōu yào rènzhēn zuò, bùrán diǎn shàng dēng yǐhòu, guāng jiù bù jūnyún.",
+                "text_en": "Come in and look. Watch your head — lots of lanterns. I made each one by hand. New Year is coming, lots of orders, but I won't rush. Each lantern must be made carefully, otherwise when you light it, the glow won't be even."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his craftsmanship and the lantern light.",
+                "options": [
+                    {
+                        "text_zh": "这里好美——像走进了一个光做成的世界。每个灯笼的光都这么柔和，我能感觉到您花了很多心思。不赶工这件事本身就很了不起。",
+                        "text_pinyin": "Zhèlǐ hǎo měi — xiàng zǒu jìn le yī ge guāng zuò chéng de shìjiè. Měi ge dēnglong de guāng dōu zhème róuhé, wǒ néng gǎnjué dào nín huā le hěn duō xīnsi. Bù gǎn gōng zhè jiàn shì běnshēn jiù hěn liǎobuqǐ.",
+                        "text_en": "It's beautiful here — like walking into a world made of light. Each lantern's glow is so soft, I can feel how much care you put in. Refusing to rush is itself remarkable.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sees the workshop as an art world — and honors the patience behind it."
+                    },
+                    {
+                        "text_zh": "做一个灯笼要多长时间？",
+                        "text_pinyin": "Zuò yī ge dēnglong yào duō cháng shíjiān?",
+                        "text_en": "How long does one lantern take?",
+                        "score": 0.0,
+                        "feedback": "Measures production time instead of appreciating the art."
+                    },
+                    {
+                        "text_zh": "机器做的灯笼也很好看吧？",
+                        "text_pinyin": "Jīqì zuò de dēnglong yě hěn hǎokàn ba?",
+                        "text_en": "Machine-made lanterns look nice too, right?",
+                        "score": 0.0,
+                        "feedback": "Compares mass production to his handcraft."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你懂。很多人觉得灯笼就是灯笼，买一个便宜的挂上就好了。但我爸教我——灯笼是用来「送光」的。过年的时候，家家户户挂灯笼，不只是好看，是把光送给经过的每一个人。所以灯笼的光一定要好。",
+                "text_pinyin": "Xièxie nǐ dǒng. Hěn duō rén juéde dēnglong jiù shì dēnglong, mǎi yī ge piányi de guà shàng jiù hǎo le. Dàn wǒ bà jiāo wǒ — dēnglong shì yòng lái 'sòng guāng' de. Guò nián de shíhou, jiājiā hùhù guà dēnglong, bù zhǐ shì hǎokàn, shì bǎ guāng sòng gěi jīngguò de měi yī ge rén. Suǒyǐ dēnglong de guāng yīdìng yào hǎo.",
+                "text_en": "Thank you for understanding. Many people think a lantern is just a lantern — buy a cheap one and hang it up. But my father taught me — lanterns are for 'giving light.' During New Year, every household hangs lanterns, not just for decoration, but to give light to everyone who passes by. So the lantern's light must be good."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of lanterns giving light to passersby.",
+                "options": [
+                    {
+                        "text_zh": "「送光」——这个词太美了。灯笼不只是照亮自己的家，是照亮路人的路。这样一想，您做的每个灯笼都是送给陌生人的礼物。",
+                        "text_pinyin": "'Sòng guāng' — zhège cí tài měi le. Dēnglong bù zhǐ shì zhào liàng zìjǐ de jiā, shì zhào liàng lùrén de lù. Zhèyàng yī xiǎng, nín zuò de měi ge dēnglong dōu shì sòng gěi mòshēng rén de lǐwù.",
+                        "text_en": "'Giving light' — what a beautiful phrase. Lanterns don't just illuminate your own home, they light the way for passersby. Seen that way, every lantern you make is a gift to strangers.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lanterns as anonymous gifts of light — generosity without knowing the recipient."
+                    },
+                    {
+                        "text_zh": "您父亲也是做灯笼的吗？",
+                        "text_pinyin": "Nín fùqīn yě shì zuò dēnglong de ma?",
+                        "text_en": "Did your father also make lanterns?",
+                        "score": 0.0,
+                        "feedback": "Family history question during a moment about light's meaning."
+                    },
+                    {
+                        "text_zh": "现在还有多少人手工做灯笼？",
+                        "text_pinyin": "Xiànzài hái yǒu duōshǎo rén shǒugōng zuò dēnglong?",
+                        "text_en": "How many people still make lanterns by hand?",
+                        "score": 0.0,
+                        "feedback": "Industry survey during a philosophical conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是这样。做灯笼的人和看到灯光的人可能一辈子都不会认识，但那一刻，光是连着的。我觉得这是最温暖的关系——不需要认识，不需要感谢，只是把光放在那里，有人看到就够了。",
+                "text_pinyin": "Duì, jiù shì zhèyàng. Zuò dēnglong de rén hé kàn dào dēngguāng de rén kěnéng yībèizi dōu bú huì rènshi, dàn nà yī kè, guāng shì lián zhe de. Wǒ juéde zhè shì zuì wēnnuǎn de guānxi — bù xūyào rènshi, bù xūyào gǎnxiè, zhǐ shì bǎ guāng fàng zài nàlǐ, yǒu rén kàn dào jiù gòu le.",
+                "text_en": "Exactly. The lantern maker and the person who sees the light may never meet, but in that moment, the light connects them. I think that's the warmest kind of relationship — no need to know each other, no need for thanks, just putting light there for someone to see."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his philosophy of anonymous connection through light.",
+                "options": [
+                    {
+                        "text_zh": "不需要认识，不需要感谢——这种善意最纯粹。世界上也许有很多这样的光——做面的阿姨、扫街的叔叔、种树的人。您让我看到了这个。",
+                        "text_pinyin": "Bù xūyào rènshi, bù xūyào gǎnxiè — zhè zhǒng shànyì zuì chúncuì. Shìjiè shàng yěxǔ yǒu hěn duō zhèyàng de guāng — zuò miàn de āyí, sǎo jiē de shūshu, zhǒng shù de rén. Nín ràng wǒ kàn dào le zhège.",
+                        "text_en": "No need to know, no need to thank — that's the purest kindness. The world probably has many such lights — the auntie making noodles, the uncle sweeping streets, people planting trees. You helped me see that.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the lantern metaphor to all invisible kindness — everyone is a light-giver."
+                    },
+                    {
+                        "text_zh": "我可以买一个灯笼吗？",
+                        "text_pinyin": "Wǒ kěyǐ mǎi yī ge dēnglong ma?",
+                        "text_en": "Can I buy a lantern?",
+                        "score": 0.0,
+                        "feedback": "Purchase request during a profound exchange about anonymous giving."
+                    },
+                    {
+                        "text_zh": "您应该开个网店。",
+                        "text_pinyin": "Nín yīnggāi kāi ge wǎng diàn.",
+                        "text_en": "You should open an online store.",
+                        "score": 0.0,
+                        "feedback": "Business advice at the emotional peak."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Red lanterns (红灯笼) are among China's most powerful symbols of warmth and community. The tradition of hanging lanterns during Spring Festival transforms dark streets into rivers of warm light. The craftsman's concept of 送光 (giving light) elevates a decorative object into an act of generosity — the lantern-maker as an anonymous benefactor to every nighttime passerby."
+    }
+}

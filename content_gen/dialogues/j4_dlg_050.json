@@ -1,0 +1,83 @@
+{
+    "title": "The Wind Chime",
+    "title_zh": "风铃",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You notice a handmade wind chime hanging outside a small shop. The owner, a young woman, sees you listening to it.",
+        "setup_zh": "你注意到一家小店外面挂着一个手工风铃。店主，一个年轻女人，看到你在听风铃的声音。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你在听风铃吗？这是我奶奶做的。她说风铃是「看得见的风」——平时风是看不见的，但是通过风铃，你就能看到风在那里，还能听到它说话。",
+                "text_pinyin": "Nǐ zài tīng fēnglíng ma? Zhè shì wǒ nǎinai zuò de. Tā shuō fēnglíng shì 'kàn de jiàn de fēng' — píngshí fēng shì kàn bú jiàn de, dànshì tōngguò fēnglíng, nǐ jiù néng kàn dào fēng zài nàlǐ, hái néng tīng dào tā shuōhuà.",
+                "text_en": "Listening to the wind chime? My grandmother made it. She said wind chimes are 'visible wind' — normally wind is invisible, but through a wind chime, you can see where the wind is, and even hear it speak."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of wind chimes making wind visible.",
+                "options": [
+                    {
+                        "text_zh": "「看得见的风」——这个说法太诗意了。风铃让无形的变成有形的，让安静的变成有声音的。您奶奶一定是一个很有智慧的人。",
+                        "text_pinyin": "'Kàn de jiàn de fēng' — zhège shuōfǎ tài shīyì le. Fēnglíng ràng wúxíng de biàn chéng yǒuxíng de, ràng ānjìng de biàn chéng yǒu shēngyīn de. Nín nǎinai yīdìng shì yī ge hěn yǒu zhìhuì de rén.",
+                        "text_en": "'Visible wind' — what a poetic phrase. Wind chimes make the formless visible, the silent audible. Your grandmother must have been a very wise person.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honors the grandmother's poetic wisdom — making the invisible real."
+                    },
+                    {
+                        "text_zh": "这个风铃卖吗？",
+                        "text_pinyin": "Zhège fēnglíng mài ma?",
+                        "text_en": "Is this wind chime for sale?",
+                        "score": 0.0,
+                        "feedback": "Tries to buy a family heirloom."
+                    },
+                    {
+                        "text_zh": "什么材料做的？",
+                        "text_pinyin": "Shénme cáiliào zuò de?",
+                        "text_en": "What material is it made of?",
+                        "score": 0.0,
+                        "feedback": "Asks about materials during a moment about meaning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "她是。她还说过「如果你觉得生活太安静了，就挂一个风铃。它会告诉你，风一直都在，只是你没注意」。我奶奶去世以后，我把这个风铃挂在店门口。每次风吹的时候，我就觉得她在跟我说话。",
+                "text_pinyin": "Tā shì. Tā hái shuō guò 'rúguǒ nǐ juéde shēnghuó tài ānjìng le, jiù guà yī ge fēnglíng. Tā huì gàosu nǐ, fēng yīzhí dōu zài, zhǐ shì nǐ méi zhùyì'. Wǒ nǎinai qùshì yǐhòu, wǒ bǎ zhège fēnglíng guà zài diàn ménkǒu. Měi cì fēng chuī de shíhou, wǒ jiù juéde tā zài gēn wǒ shuōhuà.",
+                "text_en": "She was. She also said, 'If life feels too quiet, hang a wind chime. It'll tell you the wind has always been there, you just weren't paying attention.' After my grandmother passed, I hung this chime at the shop door. Every time the wind blows, I feel like she's talking to me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the wind chime as her grandmother's voice.",
+                "options": [
+                    {
+                        "text_zh": "她不在了，但风还在，风铃还在，她的声音就还在。也许她做风铃就是为了这个——留一个声音，让风替她继续说。",
+                        "text_pinyin": "Tā bú zài le, dàn fēng hái zài, fēnglíng hái zài, tā de shēngyīn jiù hái zài. Yěxǔ tā zuò fēnglíng jiù shì wèile zhège — liú yī ge shēngyīn, ràng fēng tì tā jìxù shuō.",
+                        "text_en": "She's gone, but the wind is still here, the chime is still here, so her voice is still here. Maybe that's why she made it — leaving a sound for the wind to keep speaking for her.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The wind chime as a voice that outlives its maker — carried by the wind forever."
+                    },
+                    {
+                        "text_zh": "你奶奶是什么时候去世的？",
+                        "text_pinyin": "Nǐ nǎinai shì shénme shíhou qùshì de?",
+                        "text_en": "When did your grandmother pass away?",
+                        "score": 0.0,
+                        "feedback": "Pries into timing during a moment about enduring presence."
+                    },
+                    {
+                        "text_zh": "风铃声音会不会吵到邻居？",
+                        "text_pinyin": "Fēnglíng shēngyīn huì bú huì chǎo dào línjū?",
+                        "text_en": "Does the wind chime bother the neighbors?",
+                        "score": 0.0,
+                        "feedback": "A noise complaint during an intimate remembrance."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Wind chimes (风铃) in Chinese culture serve both decorative and spiritual purposes. The idea that wind itself is always present but unnoticed until a chime reveals it parallels Daoist thought about the invisible forces shaping daily life. Hanging a deceased relative's handmade object where wind activates it creates a form of ongoing communication — the boundary between remembrance and presence dissolves."
+    }
+}

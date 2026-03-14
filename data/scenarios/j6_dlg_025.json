@@ -1,0 +1,89 @@
+{
+    "title": "Why Make Beautiful Things",
+    "title_zh": "为什么要做美的东西",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You visit your friend Yiming's studio. He's a calligrapher who left a lucrative tech job to practice his art full-time. His friends think he's lost his mind.",
+        "setup_zh": "你去朋友一鸣的工作室。他是一个书法家，辞掉了高薪的科技公司工作，全职练习书法。他的朋友们都觉得他疯了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "大家都说我浪费了名校的文凭和大厂的经验。但你看这个「永」字——王羲之说过，一个「永」字包含了书法所有的基本笔画。我每天写一百个「永」字，每次都不一样。这种感觉，写代码的时候从来没有过。",
+                "text_pinyin": "Dàjiā dōu shuō wǒ làngfèi le míng xiào de wénpíng hé dà chǎng de jīngyàn. Dàn nǐ kàn zhège 'yǒng' zì — Wáng Xīzhī shuō guò, yīge 'yǒng' zì bāohán le shūfǎ suǒyǒu de jīběn bǐhuà. Wǒ měi tiān xiě yībǎi ge 'yǒng' zì, měi cì dōu bù yíyàng. Zhè zhǒng gǎnjué, xiě dàimǎ de shíhou cónglái méiyǒu guò.",
+                "text_en": "Everyone says I've wasted my elite degree and big-company experience. But look at this character '永' — Wang Xizhi said a single '永' contains all the fundamental strokes of calligraphy. I write a hundred '永' characters every day, and each one is different. That feeling — I never had it writing code."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his choice and his art.",
+                "options": [
+                    {
+                        "text_zh": "每个'永'字都不一样——这就是手工和机器的区别。代码追求可复制，书法追求不可复制。每一笔都带着你那一刻的呼吸和情绪。你没有浪费什么，你在用另一种语言表达自己。",
+                        "text_pinyin": "Měi ge 'yǒng' zì dōu bù yíyàng — zhè jiù shì shǒugōng hé jīqì de qūbié. Dàimǎ zhuīqiú kě fùzhì, shūfǎ zhuīqiú bù kě fùzhì. Měi yī bǐ dōu dài zhe nǐ nà yī kè de hūxī hé qíngxù. Nǐ méiyǒu làngfèi shénme, nǐ zài yòng lìng yī zhǒng yǔyán biǎodá zìjǐ.",
+                        "text_en": "Each character is different — that's the difference between craft and machine. Code pursues replicability; calligraphy pursues unreplicability. Each stroke carries your breath and emotion in that moment. You haven't wasted anything — you're expressing yourself in another language.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp contrast between replicability and uniqueness — validates his art on its own terms."
+                    },
+                    {
+                        "text_zh": "但你靠书法能养活自己吗？",
+                        "text_pinyin": "Dàn nǐ kào shūfǎ néng yǎnghuó zìjǐ ma?",
+                        "text_en": "But can you make a living from calligraphy?",
+                        "score": 0.0,
+                        "feedback": "This reduces art to income — the question he hears from everyone else."
+                    },
+                    {
+                        "text_zh": "你可以一边工作一边练，不用辞职啊。",
+                        "text_pinyin": "Nǐ kěyǐ yībiān gōngzuò yībiān liàn, bú yòng cízhí a.",
+                        "text_en": "You could practice while keeping your job, no need to quit.",
+                        "score": 0.0,
+                        "feedback": "Compromising advice that misses why full commitment matters to him."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "用一种不同的语言表达自己……谢谢你能这样看。很多人问我「书法有什么用」，但这个问题本身就是错的。你不会问一朵花有什么用、一首歌有什么用。美的存在不需要理由。但在一个什么都要有用的社会里，没有用的东西反而最珍贵。",
+                "text_pinyin": "Yòng yī zhǒng bùtóng de yǔyán biǎodá zìjǐ…… xièxie nǐ néng zhèyàng kàn. Hěn duō rén wèn wǒ 'shūfǎ yǒu shénme yòng', dàn zhège wèntí běnshēn jiù shì cuò de. Nǐ bú huì wèn yī duǒ huā yǒu shénme yòng, yī shǒu gē yǒu shénme yòng. Měi de cúnzài bù xūyào lǐyóu. Dàn zài yīge shénme dōu yào yǒuyòng de shèhuì lǐ, méiyǒu yòng de dōngxi fǎn'ér zuì zhēnguì.",
+                "text_en": "Expressing yourself in a different language... thank you for seeing it that way. Many people ask me 'what's the use of calligraphy,' but the question itself is wrong. You wouldn't ask what a flower is for, or what a song is for. Beauty doesn't need a reason to exist. But in a society where everything must be useful, useless things are paradoxically the most precious."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on the value of useless beauty.",
+                "options": [
+                    {
+                        "text_zh": "庄子说过：'人皆知有用之用，而莫知无用之用也。'也许你书法最大的意义就在于它没有实用价值。它提醒我们，人不只是为了'有用'而存在。我们也需要无用的美和无目的的创造。",
+                        "text_pinyin": "Zhuāngzǐ shuō guò: 'Rén jiē zhī yǒuyòng zhī yòng, ér mò zhī wúyòng zhī yòng yě.' Yěxǔ nǐ shūfǎ zuì dà de yìyì jiù zàiyú tā méiyǒu shíyòng jiàzhí. Tā tíxǐng wǒmen, rén bù zhǐ shì wèile 'yǒuyòng' ér cúnzài. Wǒmen yě xūyào wúyòng de měi hé wú mùdì de chuàngzào.",
+                        "text_en": "Zhuangzi said: 'Everyone knows the use of the useful, but no one knows the use of the useless.' Maybe your calligraphy's greatest meaning is its lack of practical value. It reminds us we don't exist only to be useful. We also need useless beauty and purposeless creation.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Masterful use of Zhuangzi to validate his path — philosophically grounded and deeply affirming."
+                    },
+                    {
+                        "text_zh": "你的字确实写得很好看。",
+                        "text_pinyin": "Nǐ de zì quèshí xiě de hěn hǎokàn.",
+                        "text_en": "Your calligraphy really does look beautiful.",
+                        "score": 0.0,
+                        "feedback": "Surface compliment — doesn't engage with the philosophical dimension."
+                    },
+                    {
+                        "text_zh": "也许你可以在网上卖，现在很多人喜欢收藏。",
+                        "text_pinyin": "Yěxǔ nǐ kěyǐ zài wǎng shàng mài, xiànzài hěn duō rén xǐhuan shōucáng.",
+                        "text_en": "Maybe you could sell online — lots of people like collecting calligraphy now.",
+                        "score": 0.0,
+                        "feedback": "Commodifies his art immediately after he explained why utility isn't the point."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "无用之用……庄子说到了我心里去了。来，我写一个字送给你。你想要什么字？",
+                "text_pinyin": "Wúyòng zhī yòng…… Zhuāngzǐ shuō dào le wǒ xīn lǐ qù le. Lái, wǒ xiě yīge zì sòng gěi nǐ. Nǐ xiǎng yào shénme zì?",
+                "text_en": "The use of the useless... Zhuangzi spoke right to my heart. Come, I'll write a character for you as a gift. What character would you like?"
+            }
+        ],
+        "cultural_note": "Wang Xizhi (王羲之, 303-361 CE) is China's most celebrated calligrapher, and the character「永」(yǒng, eternity) is indeed considered to contain all eight basic strokes of Chinese calligraphy (永字八法). The Zhuangzi quote about「无用之用」(the use of the useless) is from a famous passage about a gnarled, 'useless' tree that survives precisely because no one cuts it down — a parable about the value of not being instrumentally useful. This philosophy profoundly resonates with artists in China's hyper-pragmatic modern economy."
+    }
+}

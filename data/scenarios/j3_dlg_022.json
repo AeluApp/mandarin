@@ -1,0 +1,87 @@
+{
+    "title": "A Quiet Morning at the Lake",
+    "title_zh": "湖边的安静早晨",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're sitting by a small lake in the park, watching ducks swim. An older man with a fishing rod sits down nearby. He seems content just watching the water.",
+        "setup_zh": "你坐在公园的小湖边，看鸭子游泳。一个拿着鱼竿的老人在附近坐下。他看起来很满足，只是在看着水面。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天早上真安静，连鸟叫声都比平时好听。你也喜欢来这里坐坐吗？",
+                "text_pinyin": "Jīntiān zǎoshang zhēn ānjìng, lián niǎo jiào shēng dōu bǐ píngshí hǎotīng. Nǐ yě xǐhuan lái zhèlǐ zuòzuo ma?",
+                "text_en": "It's so quiet this morning — even the birdsong sounds better than usual. Do you like coming here to sit too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your connection to this spot.",
+                "options": [
+                    {
+                        "text_zh": "嗯，我经常来。工作忙的时候，来这里坐一会儿，心情就好多了。这里的水和树让人放松。",
+                        "text_pinyin": "En, wǒ jīngcháng lái. Gōngzuò máng de shíhou, lái zhèlǐ zuò yīhuìr, xīnqíng jiù hǎo duō le. Zhèlǐ de shuǐ hé shù ràng rén fàngsōng.",
+                        "text_en": "Yeah, I come often. When work gets busy, sitting here for a while really improves my mood. The water and trees are so relaxing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Personal and reflective — matches the peaceful atmosphere."
+                    },
+                    {
+                        "text_zh": "是的，这里不错。",
+                        "text_pinyin": "Shì de, zhèlǐ búcuò.",
+                        "text_en": "Yes, it's nice here.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreeable but brief."
+                    },
+                    {
+                        "text_zh": "我今天第一次来。",
+                        "text_pinyin": "Wǒ jīntiān dì yī cì lái.",
+                        "text_en": "It's my first time here.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest but doesn't add to the mood."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊，现在的年轻人太忙了。我退休以后，每天早上都来这里钓鱼。其实鱼钓不钓得到不重要，重要的是这段安静的时间。",
+                "text_pinyin": "Shì a, xiànzài de niánqīng rén tài máng le. Wǒ tuìxiū yǐhòu, měi tiān zǎoshang dōu lái zhèlǐ diào yú. Qíshí yú diào bù diào de dào bú zhòngyào, zhòngyào de shì zhè duàn ānjìng de shíjiān.",
+                "text_en": "Yeah, young people nowadays are too busy. Since I retired, I come fishing here every morning. Actually, whether I catch any fish doesn't matter — what matters is this quiet time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his philosophy about fishing.",
+                "options": [
+                    {
+                        "text_zh": "我很喜欢您说的——重要的不是结果，是这个过程和这份安静。我们平时太在意结果了。",
+                        "text_pinyin": "Wǒ hěn xǐhuan nín shuō de — zhòngyào de bú shì jiéguǒ, shì zhège guòchéng hé zhè fèn ānjìng. Wǒmen píngshí tài zàiyì jiéguǒ le.",
+                        "text_en": "I really like what you said — what matters isn't the result, but the process and the quiet. We usually care too much about results.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He nods slowly, as if you've put into words something he's felt for years."
+                    },
+                    {
+                        "text_zh": "你今天钓到鱼了吗？",
+                        "text_pinyin": "Nǐ jīntiān diào dào yú le ma?",
+                        "text_en": "Did you catch any fish today?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He chuckles softly and shakes his head — you heard the words but not what he was saying."
+                    },
+                    {
+                        "text_zh": "退休以后一定很自由。",
+                        "text_pinyin": "Tuìxiū yǐhòu yīdìng hěn zìyóu.",
+                        "text_en": "Retirement must be very freeing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Related but redirects from his insight."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Fishing in Chinese culture is often associated with contemplation and patience, not just catching fish. The saying 「醉翁之意不在酒」 (the drunkard's intention is not in the wine) captures this — the activity is a vehicle for peace, not the goal itself."
+    },
+    "hsk_level": 3
+}

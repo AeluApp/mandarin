@@ -1,0 +1,89 @@
+{
+  "title": "The Way of Tea",
+  "title_zh": "茶的道理",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "An elderly tea master, Teacher Xu, invites you to sit at her tea table. She moves slowly, washing the cups, warming the pot, measuring the leaves. There is no hurry.",
+    "setup_zh": "一位年长的茶艺师徐老师请你在她的茶桌前坐下。她动作很慢，洗杯、温壶、量茶叶。一切都不急。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "泡茶最重要的第一步不是放茶叶，是洗杯子。你看我洗这个杯子的时候，不只是在洗干净，也是在让自己安静下来。茶不急，人也不应该急。",
+        "text_pinyin": "Pào chá zuì zhòngyào de dì yī bù bú shì fàng cháyè, shì xǐ bēizi. Nǐ kàn wǒ xǐ zhège bēizi de shíhou, bù zhǐ shì zài xǐ gānjìng, yě shì zài ràng zìjǐ ānjìng xiàlái. Chá bù jí, rén yě bù yīnggāi jí.",
+        "text_en": "The most important first step of brewing tea isn't adding leaves — it's washing the cups. When I wash this cup, I'm not just cleaning it, I'm also letting myself settle down. Tea isn't in a hurry, and neither should we be."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Teacher Xu's first lesson.",
+        "options": [
+          {
+            "text_zh": "洗杯子是在为茶做准备，也是在为自己做准备。如果心没有静下来，再好的茶也喝不出味道。原来泡茶从洗杯子那一刻就开始了。",
+            "text_pinyin": "Xǐ bēizi shì zài wèi chá zuò zhǔnbèi, yě shì zài wèi zìjǐ zuò zhǔnbèi. Rúguǒ xīn méiyǒu jìng xiàlái, zài hǎo de chá yě hē bù chū wèidào. Yuánlái pào chá cóng xǐ bēizi nà yī kè jiù kāishǐ le.",
+            "text_en": "Washing the cups is preparing for the tea, and preparing yourself. If the heart hasn't settled, even the finest tea won't taste right. So brewing really begins from the moment you wash the cups.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Attentive and receptive — absorbs the lesson and articulates it back."
+          },
+          {
+            "text_zh": "什么茶最贵？",
+            "text_pinyin": "Shénme chá zuì guì?",
+            "text_en": "What tea is the most expensive?",
+            "score": 0.0,
+            "feedback": "Commodifies the experience."
+          },
+          {
+            "text_zh": "可以快一点吗？我等一下还有事。",
+            "text_pinyin": "Kěyǐ kuài yīdiǎn ma? Wǒ děng yíxià hái yǒu shì.",
+            "text_en": "Can you go a bit faster? I have something to do later.",
+            "score": 0.0,
+            "feedback": "Violates the entire spirit of the tea ceremony — rushing defeats the purpose."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你学得很快。第一泡茶我们不喝，倒掉。不是因为不好，是因为第一泡是茶叶在醒来。就像人一样，刚起床的时候不是最好的状态。给它一点时间，它会展开自己。",
+        "text_pinyin": "Nǐ xué de hěn kuài. Dì yī pào chá wǒmen bù hē, dào diào. Bú shì yīnwèi bù hǎo, shì yīnwèi dì yī pào shì cháyè zài xǐng lái. Jiù xiàng rén yíyàng, gāng qǐchuáng de shíhou bú shì zuì hǎo de zhuàngtài. Gěi tā yīdiǎn shíjiān, tā huì zhǎnkāi zìjǐ.",
+        "text_en": "You learn quickly. The first brew we don't drink — we pour it out. Not because it's bad, but because the first brew is the tea leaves waking up. Just like people, we're not at our best right after waking. Give it some time, and it will unfold."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Reflect on the metaphor of tea leaves unfolding.",
+        "options": [
+          {
+            "text_zh": "给它时间让它展开自己——这不只是在说茶叶吧。我觉得人也一样，有的人很快就绽放了，有的人需要慢慢泡。不能因为第一印象就判断一个人的好坏。",
+            "text_pinyin": "Gěi tā shíjiān ràng tā zhǎnkāi zìjǐ — zhè bù zhǐ shì zài shuō cháyè ba. Wǒ juéde rén yě yíyàng, yǒu de rén hěn kuài jiù zhànfàng le, yǒu de rén xūyào mànman pào. Bù néng yīnwèi dì yī yìnxiàng jiù pànduàn yīge rén de hǎo huài.",
+            "text_en": "Giving it time to unfold itself — you're not just talking about tea leaves, are you? I think people are the same. Some bloom quickly, others need slow steeping. You can't judge someone by the first impression.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Shows genuine insight — extends the tea metaphor to human relationships."
+          },
+          {
+            "text_zh": "原来第一泡不能喝，我以前都不知道。",
+            "text_pinyin": "Yuánlái dì yī pào bù néng hē, wǒ yǐqián dōu bù zhīdào.",
+            "text_en": "I didn't know you couldn't drink the first brew.",
+            "score": 0.0,
+            "feedback": "Surface-level — treats it as a factoid rather than a lesson."
+          },
+          {
+            "text_zh": "这个茶闻起来好香！",
+            "text_pinyin": "Zhège chá wén qǐlái hǎo xiāng!",
+            "text_en": "This tea smells wonderful!",
+            "score": 0.0,
+            "feedback": "Appreciative but doesn't engage with the philosophical layer."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "你理解了。茶道不是教你怎么泡茶，是教你怎么看人、看世界。来，第二泡好了。慢慢喝，让茶在嘴里待一会儿。好东西都值得多等一等。",
+        "text_pinyin": "Nǐ lǐjiě le. Chádào bú shì jiāo nǐ zěnme pào chá, shì jiāo nǐ zěnme kàn rén, kàn shìjiè. Lái, dì èr pào hǎo le. Mànman hē, ràng chá zài zuǐ lǐ dāi yīhuìr. Hǎo dōngxi dōu zhíde duō děng yī děng.",
+        "text_en": "You understand. The way of tea doesn't teach you how to brew — it teaches you how to see people, how to see the world. Come, the second brew is ready. Drink slowly, let the tea rest in your mouth a while. Good things are always worth waiting for."
+      }
+    ],
+    "cultural_note": "Chinese tea ceremony (茶道 or 茶艺) is not merely about making tea — it's a meditative practice that cultivates patience, presence, and appreciation. The act of discarding the first brew (洗茶, xǐ chá) symbolizes both cleansing and awakening. In Chinese philosophy, tea has been linked to self-cultivation for over a thousand years, with the saying「茶如人生」(tea is like life) — bitter at first, sweet in the aftertaste."
+  }
+}

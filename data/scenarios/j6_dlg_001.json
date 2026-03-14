@@ -1,0 +1,152 @@
+{
+    "title": "The Vanishing Alleyway",
+    "title_zh": "消失的胡同",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're sitting in a hutong courtyard teahouse in Beijing. The elderly owner, Lao Chen, is lamenting how developers are eyeing the last stretch of his alley. You've been coming here for months.",
+        "setup_zh": "你坐在北京胡同四合院茶馆里。年迈的老板老陈正在感叹开发商盯上了他胡同的最后一段。你已经来这儿好几个月了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看对面那堵墙上的'拆'字了吗？上周才喷的。我在这条胡同住了五十年，眼看着一条条街变成了商业区。",
+                "text_pinyin": "Nǐ kàn duìmiàn nà dǔ qiáng shàng de 'chāi' zì le ma? Shàng zhōu cái pēn de. Wǒ zài zhè tiáo hútòng zhù le wǔshí nián, yǎnkàn zhe yī tiáo tiáo jiē biàn chéng le shāngyè qū.",
+                "text_en": "Did you see the '拆' character painted on the wall across the way? Just sprayed last week. I've lived in this hutong fifty years, watching street after street turn into commercial zones."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Lao Chen about what's happening to the neighborhood.",
+                "options": [
+                    {
+                        "text_zh": "我注意到了。每次来这边都觉得少了点什么，但又说不清楚。可能不是少了建筑，是少了某种气氛吧。",
+                        "text_pinyin": "Wǒ zhùyì dào le. Měi cì lái zhè biān dōu juéde shǎo le diǎn shénme, dàn yòu shuō bù qīngchǔ. Kěnéng bú shì shǎo le jiànzhù, shì shǎo le mǒu zhǒng qìfēn ba.",
+                        "text_en": "I've noticed. Every time I come here I feel like something's missing, but I can't quite put my finger on it. Maybe it's not the buildings that are gone — it's a certain atmosphere.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Observational and empathetic — matches the reflective tone Lao Chen is setting."
+                    },
+                    {
+                        "text_zh": "不过发展也是好事啊。新的商业区能带来就业，经济也能发展起来。",
+                        "text_pinyin": "Búguò fāzhǎn yě shì hǎo shì a. Xīn de shāngyè qū néng dàilái jiùyè, jīngjì yě néng fāzhǎn qǐlái.",
+                        "text_en": "But development is a good thing too. New commercial zones bring jobs and boost the economy.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Lao Chen is watching fifty years of his life get painted with a demolition character, and you offer him a macroeconomics talking point. He knows the arguments — he's mourning."
+                    },
+                    {
+                        "text_zh": "你知道附近哪儿有停车场吗？我今天开车来的。",
+                        "text_pinyin": "Nǐ zhīdào fùjìn nǎr yǒu tíngchēchǎng ma? Wǒ jīntiān kāi chē lái de.",
+                        "text_en": "Do you know where there's a parking lot nearby? I drove here today.",
+                        "score": 0.0,
+                        "feedback": "Completely ignores the emotional weight of the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "气氛？你说得对。以前邻居之间的关系不是靠微信维持的，是靠每天早上在门口碰面、借一把盐、帮忙看孩子。现在搬走的人越来越多，留下来的都是老人。",
+                "text_pinyin": "Qìfēn? Nǐ shuō de duì. Yǐqián línjū zhī jiān de guānxì bú shì kào Wēixìn wéichí de, shì kào měi tiān zǎoshang zài ménkǒu pèngmiàn, jiè yī bǎ yán, bāngmáng kàn háizi. Xiànzài bān zǒu de rén yuè lái yuè duō, liú xiàlái de dōu shì lǎorén.",
+                "text_en": "Atmosphere? You're right. Neighbor relationships used to be maintained not through WeChat, but by running into each other at the doorstep every morning, borrowing a pinch of salt, helping watch the kids. Now more and more people move away, and only the elderly stay behind."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask Lao Chen about his own situation — will he stay or go?",
+                "options": [
+                    {
+                        "text_zh": "那您呢？如果真的拆了，您打算怎么办？搬去那种统一规划的回迁房？",
+                        "text_pinyin": "Nà nín ne? Rúguǒ zhēn de chāi le, nín dǎsuàn zěnme bàn? Bān qù nà zhǒng tǒngyī guīhuà de huíqiān fáng?",
+                        "text_en": "What about you? If they really demolish this, what will you do? Move into one of those standardized relocation apartments?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Directly engages with his personal stakes and shows you understand the relocation housing system."
+                    },
+                    {
+                        "text_zh": "你听说过最近那个新的购物中心吗？好像很不错。",
+                        "text_pinyin": "Nǐ tīngshuō guò zuìjìn nàge xīn de gòuwù zhōngxīn ma? Hǎoxiàng hěn búcuò.",
+                        "text_en": "Have you heard about that new shopping mall? It seems pretty nice.",
+                        "score": 0.0,
+                        "feedback": "Mentioning a new mall to someone grieving the loss of traditional neighborhoods is oblivious."
+                    },
+                    {
+                        "text_zh": "我最近在学做饭，你有什么好的食谱推荐吗？",
+                        "text_pinyin": "Wǒ zuìjìn zài xué zuòfàn, nǐ yǒu shénme hǎo de shípǔ tuījiàn ma?",
+                        "text_en": "I've been learning to cook recently, do you have any good recipes to recommend?",
+                        "score": 0.0,
+                        "feedback": "Ignores the entire thread of conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "回迁房？那种地方我去参观过。二十层楼，每户长得一模一样，邻居之间连门都不开。说是改善生活条件，其实是把社区拆散了。",
+                "text_pinyin": "Huíqiān fáng? Nà zhǒng dìfang wǒ qù cānguān guò. Èrshí céng lóu, měi hù zhǎng de yīmú yīyàng, línjū zhī jiān lián mén dōu bù kāi. Shuō shì gǎishàn shēnghuó tiáojiàn, qíshí shì bǎ shèqū chāi sàn le.",
+                "text_en": "Relocation housing? I've visited those places. Twenty-story towers, every unit identical, neighbors don't even open their doors to each other. They say it's improving living conditions, but really they're dismantling the community."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on the tension between development and preservation.",
+                "options": [
+                    {
+                        "text_zh": "这就是矛盾所在吧。条件确实需要改善——老房子的确不好住。但改善不等于推倒重来。有没有可能在保留社区结构的前提下进行改造呢？",
+                        "text_pinyin": "Zhè jiù shì máodùn suǒzài ba. Tiáojiàn quèshí xūyào gǎishàn — lǎo fángzi díquè bù hǎo zhù. Dàn gǎishàn bù děngyú tuīdǎo chónglái. Yǒu méiyǒu kěnéng zài bǎoliú shèqū jiégòu de qiántí xià jìnxíng gǎizào ne?",
+                        "text_en": "That's exactly the tension, isn't it. Conditions do need improving — old houses genuinely aren't comfortable to live in. But improving doesn't mean tearing everything down and starting over. Is there a way to renovate while preserving the community structure?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Nuanced response that acknowledges both sides without being dismissive of either — exactly the kind of conversation Lao Chen would appreciate."
+                    },
+                    {
+                        "text_zh": "对了，你这里有WiFi密码吗？",
+                        "text_pinyin": "Duì le, nǐ zhèlǐ yǒu WiFi mìmǎ ma?",
+                        "text_en": "Oh right, do you have the WiFi password here?",
+                        "score": 0.0,
+                        "feedback": "Completely derails a meaningful exchange."
+                    },
+                    {
+                        "text_zh": "我觉得北京的地铁系统真的很方便，你经常坐地铁吗？",
+                        "text_pinyin": "Wǒ juéde Běijīng de dìtiě xìtǒng zhēn de hěn fāngbiàn, nǐ jīngcháng zuò dìtiě ma?",
+                        "text_en": "I think Beijing's subway system is really convenient, do you ride it often?",
+                        "score": 0.0,
+                        "feedback": "Unrelated to the ongoing discussion about neighborhood demolition."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有人提过微改造，就是保留原来的格局，只是把管道、电线、厕所这些升级。可是这种方案赚不了多少钱，开发商没兴趣。归根结底还是一个利益问题。",
+                "text_pinyin": "Yǒu rén tí guò wēi gǎizào, jiù shì bǎoliú yuánlái de géjú, zhǐ shì bǎ guǎndào, diànxiàn, cèsuǒ zhèxiē shēngjí. Kěshì zhè zhǒng fāng'àn zhuàn bù liǎo duōshǎo qián, kāifāshāng méi xìngqù. Guīgēn jiédǐ háishì yīge lìyì wèntí.",
+                "text_en": "Some people have proposed micro-renovation — keeping the original layout but just upgrading the pipes, wiring, and toilets. But that kind of plan doesn't make much money, so developers aren't interested. At the end of the day, it's a question of profit."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the systemic nature of the problem.",
+                "options": [
+                    {
+                        "text_zh": "所以问题不在于技术上能不能做到，而在于现行制度下，谁有动力去做。居民想留，开发商想拆，政府夹在中间。这种博弈里，声音最小的往往是住了最久的人。",
+                        "text_pinyin": "Suǒyǐ wèntí bú zàiyú jìshù shàng néng bù néng zuòdào, ér zàiyú xiànxíng zhìdù xià, shéi yǒu dònglì qù zuò. Jūmín xiǎng liú, kāifāshāng xiǎng chāi, zhèngfǔ jiā zài zhōngjiān. Zhè zhǒng bóyì lǐ, shēngyīn zuì xiǎo de wǎngwǎng shì zhù le zuì jiǔ de rén.",
+                        "text_en": "So the problem isn't technical feasibility, but who has the incentive. Residents want to stay, developers want to demolish, government is caught between. In this game, the quietest voices are the people who've lived there longest.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Structural analysis that names the power dynamics directly — shows real understanding of how urban development works in China."
+                    },
+                    {
+                        "text_zh": "你有没有养过猫？胡同里的猫特别多。",
+                        "text_pinyin": "Nǐ yǒu méiyǒu yǎng guò māo? Hútòng lǐ de māo tèbié duō.",
+                        "text_en": "Have you ever had a cat? There are so many cats in the hutongs.",
+                        "score": 0.0,
+                        "feedback": "A non-sequitur that abandons the substantive discussion."
+                    },
+                    {
+                        "text_zh": "我觉得应该多建公园，你觉得呢？",
+                        "text_pinyin": "Wǒ juéde yīnggāi duō jiàn gōngyuán, nǐ juéde ne?",
+                        "text_en": "I think they should build more parks, what do you think?",
+                        "score": 0.0,
+                        "feedback": "Vaguely related to urban planning but doesn't engage with the specific issue at hand."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The painted character '拆' (chāi, demolish) on buildings is one of the most recognizable symbols of urban transformation in China. Hutong residents facing demolition often receive relocation compensation, but the social fabric — decades of neighbor relationships, shared courtyards, and informal community support — cannot be rebuilt in high-rise towers. The tension between modernization and preservation remains one of urban China's defining debates."
+    }
+}

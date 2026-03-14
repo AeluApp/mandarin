@@ -1,0 +1,87 @@
+{
+    "title": "Birthday Wishes",
+    "title_zh": "生日快乐",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "Today is your classmate Xiao Wang's birthday. You see him at school and want to wish him well.",
+        "setup_zh": "今天是同学小王的生日。你在学校看到了他。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你知道吗，今天是我的生日！",
+                "text_pinyin": "Nǐ hǎo! Nǐ zhīdào ma, jīntiān shì wǒ de shēngrì!",
+                "text_en": "Hi! Did you know, today is my birthday!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Wish him a happy birthday.",
+                "options": [
+                    {
+                        "text_zh": "生日快乐！你今年多大了？",
+                        "text_pinyin": "Shēngrì kuàilè! Nǐ jīnnián duō dà le?",
+                        "text_en": "Happy birthday! How old are you this year?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Leads with birthday wishes and follows with a friendly question -- exactly right when someone shares their birthday excitement."
+                    },
+                    {
+                        "text_zh": "生日快乐！",
+                        "text_pinyin": "Shēngrì kuàilè!",
+                        "text_en": "Happy birthday!",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "The right words but nothing more -- he was clearly excited and a follow-up question would match his energy."
+                    },
+                    {
+                        "text_zh": "今天？你要做什么？",
+                        "text_pinyin": "Jīntiān? Nǐ yào zuò shénme?",
+                        "text_en": "Today? What are you going to do?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Jumps to plans without saying happy birthday first -- the most basic thing when someone announces their birthday."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我二十岁了！晚上我请大家吃饭，你来吗？",
+                "text_pinyin": "Wǒ èrshí suì le! Wǎnshang wǒ qǐng dàjiā chī fàn, nǐ lái ma?",
+                "text_en": "I'm twenty! Tonight I'm treating everyone to dinner, will you come?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept his dinner invitation.",
+                "options": [
+                    {
+                        "text_zh": "当然来！去哪里吃？",
+                        "text_pinyin": "Dāngrán lái! Qù nǎlǐ chī?",
+                        "text_en": "Of course I'll come! Where are we eating?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic acceptance that matches his excitement about turning 20 and treating friends."
+                    },
+                    {
+                        "text_zh": "好啊。几点？",
+                        "text_pinyin": "Hǎo a. Jǐ diǎn?",
+                        "text_en": "Sure. What time?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Accepts but without much energy -- he's turning 20 and inviting everyone, and your response is a bit flat."
+                    },
+                    {
+                        "text_zh": "二十岁了！你请客吗？",
+                        "text_pinyin": "Èrshí suì le! Nǐ qǐngkè ma?",
+                        "text_en": "Twenty! Are you treating?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "He just said he's treating everyone to dinner and you asked if he's paying -- you weren't listening to what he said."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In China, the birthday person often treats their friends to dinner, rather than the other way around. It's a generous gesture that says「I'm happy, and I want to share that happiness with the people I care about.」"
+    }
+}

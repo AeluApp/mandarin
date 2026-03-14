@@ -1,0 +1,124 @@
+{
+    "title": "The Livestream Shopping Guru",
+    "title_zh": "直播购物大师",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_3_04_v0",
+    "tree": {
+        "setup": "Your colleague Xiao Tang is obsessed with livestream shopping. She has three packages arriving daily and considers it a sport. During lunch break, she's trying to convince you to buy something from a live broadcast happening right now on her phone. The streamer is shouting numbers with the energy of a horse race announcer. Xiao Tang's thumb hovers over the buy button with practiced precision.",
+        "setup_zh": "你的同事小唐痴迷直播购物。她每天收三个快递，认为这是一种运动。午休时间，她想说服你从手机上正在进行的直播里买东西。主播像赛马解说员一样喊数字。小唐的拇指以练过的精准度悬在购买按钮上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "快看快看！这个主播现在在卖坚果礼盒，原价一百二，直播价五十九！限量五百份！你要不要拍一个？",
+                "text_pinyin": "kuài kàn kuài kàn! zhè ge zhǔbō xiànzài zài mài jiānguǒ lǐhé, yuánjià yìbǎi èr, zhíbō jià wǔshíjiǔ! xiànliàng wǔbǎi fèn! nǐ yào bu yào pāi yí gè?",
+                "text_en": "Look look! This streamer is selling a nut gift box, original price 120, livestream price 59! Limited to 500! Do you want to grab one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her enthusiasm.",
+                "options": [
+                    {
+                        "text_zh": "等一下，让我看看评论区。有没有人买过说质量怎么样？",
+                        "text_pinyin": "děng yíxià, ràng wǒ kànkan pínglùn qū. yǒu méiyǒu rén mǎi guo shuō zhìliàng zěnmeyàng?",
+                        "text_en": "Hold on, let me check the comments. Has anyone who bought it said how the quality is?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Tang scrolls impatiently.「这个主播口碑很好的。看，这个人说'已经回购三次了。'」评论区 is 'comment section.' 口碑 is 'reputation.' 回购 means 'repurchased.' Smart to check before buying."
+                    },
+                    {
+                        "text_zh": "五十九？真的假的？会不会是假的坚果？",
+                        "text_pinyin": "wǔshíjiǔ? zhēn de jiǎ de? huì bu huì shì jiǎ de jiānguǒ?",
+                        "text_en": "59? For real? Could they be fake nuts?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「不会！这个是大品牌。直播间价格低是因为厂家直接供货。」真的假的 is 'for real?' (expressing disbelief). 厂家直接供货 means 'factory direct supply.'"
+                    },
+                    {
+                        "text_zh": "不用了。我不太相信直播购物。怕买到跟图片不一样的东西。",
+                        "text_pinyin": "bú yòng le. wǒ bú tài xiāngxìn zhíbō gòuwù. pà mǎi dào gēn túpiàn bù yíyàng de dōngxi.",
+                        "text_en": "No thanks. I don't really trust livestream shopping. I'm afraid of getting something different from the picture.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「图片和实物不一样的话可以退啊！七天无理由退换。」Xiao Tang has an answer for everything. 相信 is 'trust.' 实物 is 'actual product.' Return policies reduce the risk."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来来来，下一个产品更好。看这个蓝牙耳机，原价三百九，直播间一百九十九！我已经用了两个月了，音质很好。",
+                "text_pinyin": "lái lái lái, xià yí gè chǎnpǐn gèng hǎo. kàn zhè ge lányá ěrjī, yuánjià sānbǎi jiǔ, zhíbō jiān yìbǎi jiǔshíjiǔ! wǒ yǐjīng yòng le liǎng gè yuè le, yīnzhì hěn hǎo.",
+                "text_en": "Come come, the next product is even better. Look at these Bluetooth earbuds, original price 390, livestream price 199! I've been using them for two months, sound quality is great."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Consider the earbuds offer.",
+                "options": [
+                    {
+                        "text_zh": "你自己在用？那我看看。续航怎么样？能用多久？",
+                        "text_pinyin": "nǐ zìjǐ zài yòng? nà wǒ kànkan. xùháng zěnmeyàng? néng yòng duōjiǔ?",
+                        "text_en": "You use them yourself? Let me see then. How's the battery life? How long do they last?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「充一次电可以用六个小时。充电盒可以再充四次。」Xiao Tang pulls hers out as evidence. 续航 is 'battery life.' A personal recommendation from someone you know carries weight."
+                    },
+                    {
+                        "text_zh": "一百九十九还是有点贵。有没有更便宜的耳机？",
+                        "text_pinyin": "yìbǎi jiǔshíjiǔ háishi yǒudiǎn guì. yǒu méiyǒu gèng piányi de ěrjī?",
+                        "text_en": "199 is still a bit expensive. Are there cheaper earbuds?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「便宜的有，但是音质差很多。这个价位已经是性价比最高的了。」性价比 is 'value for money' -- one of the most important shopping concepts in China."
+                    },
+                    {
+                        "text_zh": "直播间的价格跟网上正常价格差多少？有时候'原价'是故意标高的。",
+                        "text_pinyin": "zhíbō jiān de jiàgé gēn wǎng shàng zhèngcháng jiàgé chā duōshao? yǒu shíhou 'yuánjià' shì gùyì biāo gāo de.",
+                        "text_en": "How different is the livestream price from the normal online price? Sometimes 'original prices' are deliberately inflated.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Tang pauses. She opens another app to check.「嗯……网上最低是两百二十。所以确实便宜了二十块。」故意标高 is 'deliberately inflated.' Critical thinking impresses even Xiao Tang."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎，你看这个弹幕——有人说刚收到的坚果礼盒很新鲜！我帮你拍了吗？还没付款可以取消的。",
+                "text_pinyin": "āi, nǐ kàn zhè ge dànmù — yǒu rén shuō gāng shōu dào de jiānguǒ lǐhé hěn xīnxiān! wǒ bāng nǐ pāi le ma? hái méi fùkuǎn kěyǐ qǔxiāo de.",
+                "text_en": "Hey, look at this comment -- someone says the nut box they just received is really fresh! Did I buy one for you? You can cancel if you haven't paid yet."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make your final decision.",
+                "options": [
+                    {
+                        "text_zh": "好吧，坚果礼盒帮我拍一个。五十九块也不贵。但是耳机我再想想。",
+                        "text_pinyin": "hǎo ba, jiānguǒ lǐhé bāng wǒ pāi yí gè. wǔshíjiǔ kuài yě bú guì. dànshì ěrjī wǒ zài xiǎngxiang.",
+                        "text_en": "Fine, grab a nut box for me. 59 isn't expensive. But let me think more about the earbuds.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Tang's thumb strikes the buy button.「拍好了！三天到货。」拍 in livestream shopping means 'snap up/buy.' Setting limits on impulse purchases is wise -- buy the cheap one, think about the expensive one."
+                    },
+                    {
+                        "text_zh": "算了，我还是不买了。我怕一开始买就停不下来。",
+                        "text_pinyin": "suàn le, wǒ háishi bú mǎi le. wǒ pà yì kāishǐ mǎi jiù tíng bu xiàlái.",
+                        "text_en": "Forget it, I won't buy anything. I'm afraid once I start I won't be able to stop.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Tang laughs knowingly.「说得对。我就是这样开始的。先买一个，然后每天看直播……」停不下来 is 'can't stop.' Self-awareness about shopping habits is healthy."
+                    },
+                    {
+                        "text_zh": "两个都帮我拍吧！你说得对，这个价格确实划算。",
+                        "text_pinyin": "liǎng ge dōu bāng wǒ pāi ba! nǐ shuō de duì, zhè ge jiàgé quèshí huásuàn.",
+                        "text_en": "Get both for me! You're right, these prices are a good deal.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Tang claps.「你觉醒了！欢迎加入直播购物大军！」划算 is 'good deal/worth it.' 觉醒 is 'awakened.' You've crossed a threshold -- Xiao Tang now has a shopping buddy."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Livestream shopping (直播购物, zhíbō gòuwù) is massive in China, with platforms like Taobao Live and Douyin. 拍 (pāi) means 'to buy' in this context. 弹幕 (dànmù) are real-time scrolling comments. 性价比 (xìngjiàbǐ, value for money) is the ultimate compliment for a product. 原价 (yuánjià) vs 直播价 (zhíbō jià) -- always verify the 'original price' is real."
+    }
+}

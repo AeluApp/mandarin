@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Screenshot generation helper for Mandarin app store and marketing assets.
+Screenshot generation helper for Aelu app store and marketing assets.
 
 Opens the local Flask app at specific URLs for manual screenshot capture.
 Generates a checklist markdown file with dimensions and captions.
@@ -169,7 +169,7 @@ def generate_checklist():
 
 def main():
     print("=" * 60)
-    print("  Mandarin Screenshot Capture Helper")
+    print("  Aelu Screenshot Capture Helper")
     print("=" * 60)
     print()
     print(f"Base URL: {BASE_URL}")

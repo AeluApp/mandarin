@@ -1,0 +1,123 @@
+{
+  "title": "The Compliment Deflection",
+  "title_zh": "夸不得的人",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "Your colleague Lao Wang just gave a brilliant presentation that clearly took weeks of preparation. You try to compliment him. He will not accept it. The denial will escalate far beyond anything reasonable.",
+    "setup_zh": "你的同事老王刚做了一个非常精彩的演讲，明显准备了好几周。你想夸他。他不会接受的。否认的程度会远远超出合理范围。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "哎呀，终于讲完了。刚才PPT第三页的数据出了点问题，你注意到了吗？我昨天太晚了没来得及检查。",
+        "text_pinyin": "Āiyā, zhōngyú jiǎng wán le. Gāngcái PPT dì sān yè de shùjù chū le diǎn wèntí, nǐ zhùyì dào le ma? Wǒ zuótiān tài wǎn le méi láidejí jiǎnchá.",
+        "text_en": "Oh, finally done. Did you notice the data issue on slide three? I was up too late last night and didn't have time to check."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Nobody noticed anything on slide three. He's preemptively deflecting a compliment you haven't even given yet.",
+        "options": [
+          {
+            "text_zh": "第三页？没人注意到。老王，说实话，整个演讲非常流畅，数据也很有说服力。你准备了很久吧？",
+            "text_pinyin": "Dì sān yè? Méi rén zhùyì dào. Lǎo Wáng, shuō shíhuà, zhěnggè yǎnjiǎng fēicháng liúchàng, shùjù yě hěn yǒu shuōfúlì. Nǐ zhǔnbèi le hěn jiǔ ba?",
+            "text_en": "Slide three? Nobody noticed. Lao Wang, honestly, the whole presentation was very smooth, and the data was convincing. You must have prepared for a long time?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "You've dismissed his preemptive self-criticism and delivered the compliment directly. Now the real game begins."
+          },
+          {
+            "text_zh": "是吗？我没注意到第三页有问题。下次可以多检查一下。",
+            "text_pinyin": "Shì ma? Wǒ méi zhùyì dào dì sān yè yǒu wèntí. Xià cì kěyǐ duō jiǎnchá yīxià.",
+            "text_en": "Really? I didn't notice any issue on slide three. You could check more carefully next time.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He invented a flaw, and you've offered improvement advice for it. He was fishing for reassurance, not a performance review."
+          },
+          {
+            "text_zh": "辛苦了，赶紧休息一下吧。",
+            "text_pinyin": "Xīnkǔ le, gǎnjǐn xiūxi yīxià ba.",
+            "text_en": "You worked hard, get some rest.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "Acknowledging effort without acknowledging quality. He heard 'you tried hard,' not 'you were good.'"
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "准备了很久？没有没有，就随便弄的。主要是领导给的方向好，我就是把数据整理了一下而已。任何人拿到这些数据都能讲得比我好。",
+        "text_pinyin": "Zhǔnbèi le hěn jiǔ? Méiyǒu méiyǒu, jiù suíbiàn nòng de. Zhǔyào shì lǐngdǎo gěi de fāngxiàng hǎo, wǒ jiùshì bǎ shùjù zhěnglǐ le yīxià éryǐ. Rènhé rén ná dào zhèxiē shùjù dōu néng jiǎng de bǐ wǒ hǎo.",
+            "text_en": "Prepared for a long time? No no, I just threw it together. The direction from leadership was good, I just organized the data a bit. Anyone with this data could have presented it better than me."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "He's credited leadership, minimized his own work, and claimed anyone could do better. The deflection is escalating.",
+        "options": [
+          {
+            "text_zh": "老王，你刚才说'随便弄的'，但我看到你上周每天加班到九点。你'随便弄'的标准好像比大多数人认真做的标准还高。",
+            "text_pinyin": "Lǎo Wáng, nǐ gāngcái shuō 'suíbiàn nòng de', dàn wǒ kàn dào nǐ shàng zhōu měi tiān jiābān dào jiǔ diǎn. Nǐ 'suíbiàn nòng' de biāozhǔn hǎoxiàng bǐ dàduōshù rén rènzhēn zuò de biāozhǔn hái gāo.",
+            "text_en": "Lao Wang, you just said you 'threw it together,' but I saw you working overtime until nine every day last week. Your standard for 'throwing it together' seems higher than most people's standard for serious work.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "You've used evidence to pin down the deflection. He can't deny working late when you literally saw him. Now he has to find a new escape route."
+          },
+          {
+            "text_zh": "也是，领导的方向确实定得好。你执行得也不错。",
+            "text_pinyin": "Yě shì, lǐngdǎo de fāngxiàng quèshí dìng de hǎo. Nǐ zhíxíng de yě búcuò.",
+            "text_en": "True, leadership did set a good direction. You executed it well too.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "You've accepted his reframing. He's the executor now, not the creator. The compliment has been downgraded from 'brilliant' to 'competent.'"
+          },
+          {
+            "text_zh": "别谦虚了，大家都觉得你讲得好。",
+            "text_pinyin": "Bié qiānxū le, dàjiā dōu juéde nǐ jiǎng de hǎo.",
+            "text_en": "Stop being modest, everyone thought you did great.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "Telling someone to stop being modest is like telling someone to stop sneezing. It doesn't address the mechanism, it just makes them deflect harder."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "加班？那是因为我效率太低了！别人可能两天就做完的东西我用了一周。你看隔壁部门的小李，人家做汇报从来不加班，那才叫能力强。我这种就是……笨鸟先飞吧。",
+        "text_pinyin": "Jiābān? Nà shì yīnwèi wǒ xiàolǜ tài dī le! Biérén kěnéng liǎng tiān jiù zuò wán de dōngxi wǒ yòng le yī zhōu. Nǐ kàn gébì bùmén de Xiǎo Lǐ, rénjiā zuò huìbào cónglái bú jiābān, nà cái jiào nénglì qiáng. Wǒ zhè zhǒng jiùshì ... bèn niǎo xiān fēi ba.",
+        "text_en": "Overtime? That's because I'm too slow! What others could finish in two days took me a week. Look at Xiao Li in the next department — he never works late on his reports, now THAT's real ability. I'm just... the slow bird that has to fly first."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "He's now calling himself a slow bird. The modesty has become absurd. End this loop.",
+        "options": [
+          {
+            "text_zh": "好吧老王，你赢了。你是全公司最没用的人，刚才那个演讲是你一生中最大的意外。你满意了吗？还是你还需要我说你长得丑？",
+            "text_pinyin": "Hǎo ba Lǎo Wáng, nǐ yíng le. Nǐ shì quán gōngsī zuì méi yòng de rén, gāngcái nàge yǎnjiǎng shì nǐ yīshēng zhōng zuìdà de yìwài. Nǐ mǎnyì le ma? Háishì nǐ hái xūyào wǒ shuō nǐ zhǎng de chǒu?",
+            "text_en": "Fine, Lao Wang, you win. You're the most useless person in the company, that presentation was the biggest accident of your life. Satisfied? Or do you also need me to say you're ugly?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "You've taken his modesty to its logical extreme and turned it into a joke. The absurdity breaks the loop because there's nowhere left to deflect to."
+          },
+          {
+            "text_zh": "你太谦虚了。真的，你应该对自己更有信心一些。",
+            "text_pinyin": "Nǐ tài qiānxū le. Zhēn de, nǐ yīnggāi duì zìjǐ gèng yǒu xìnxīn yīxiē.",
+            "text_en": "You're too modest. Really, you should have more confidence in yourself.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "You've turned a comedy into a therapy session. He doesn't lack confidence. He's performing humility. These are different problems."
+          },
+          {
+            "text_zh": "也是，小李确实挺厉害的。不过你也不差啦。",
+            "text_pinyin": "Yě shì, Xiǎo Lǐ quèshí tǐng lìhai de. Búguò nǐ yě bú chà la.",
+            "text_en": "True, Xiao Li is pretty impressive. But you're not bad either.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He invented Xiao Li as a deflection device and you've agreed that Xiao Li is better. The compliment has been successfully redirected to a person in another department."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Compliment deflection (谦虚, qiānxū) is deeply embedded in Chinese social etiquette. Accepting a compliment directly can be seen as arrogant (骄傲). The expected move is to deny, credit others, or point out flaws. The phrase '笨鸟先飞' (the slow bird flies first) is a classic self-deprecation idiom meaning 'I'm not talented, I just work harder to compensate.' The comedy arises when the deflection becomes so extreme that the complimenter must either escalate or surrender."
+  }
+}

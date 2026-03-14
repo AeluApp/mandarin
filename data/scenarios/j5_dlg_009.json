@@ -1,0 +1,89 @@
+{
+    "title": "A Place I Keep Returning To",
+    "title_zh": "总想回去的地方",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your colleague Jing are eating lunch together. She mentions a small town in Yunnan that she visited years ago and keeps wanting to return to.",
+        "setup_zh": "你和同事静一起吃午饭。她提到了多年前去过的云南小镇，一直想再回去。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我五年前去过云南的一个小镇，名字我都快忘了，但那里的感觉我一直记得。早上推开窗户就是山，空气里有松树的味道，时间好像过得特别慢。",
+                "text_pinyin": "Wǒ wǔ nián qián qù guò Yúnnán de yīge xiǎo zhèn, míngzi wǒ dōu kuài wàng le, dàn nàlǐ de gǎnjué wǒ yīzhí jìde. Zǎoshang tuī kāi chuānghu jiù shì shān, kōngqì lǐ yǒu sōngshù de wèidào, shíjiān hǎoxiàng guò de tèbié màn.",
+                "text_en": "Five years ago I visited a small town in Yunnan. I've almost forgotten the name, but I still remember how it felt. Every morning I'd open the window to mountains, the air smelled of pine trees, and time seemed to pass especially slowly."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Jing's travel memory.",
+                "options": [
+                    {
+                        "text_zh": "你记住的不是名字，而是感觉。也许那才是旅行真正留下来的东西——不是照片，是某个瞬间的安静。",
+                        "text_pinyin": "Nǐ jìzhù de bú shì míngzi, ér shì gǎnjué. Yěxǔ nà cái shì lǚxíng zhēnzhèng liú xiàlái de dōngxi — bú shì zhàopiàn, shì mǒu ge shùnjiān de ānjìng.",
+                        "text_en": "What you remember isn't the name, but the feeling. Maybe that's what travel really leaves behind — not photos, but the stillness of a certain moment.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And true — captures what makes certain places unforgettable."
+                    },
+                    {
+                        "text_zh": "云南的机票贵不贵？",
+                        "text_pinyin": "Yúnnán de jīpiào guì bú guì?",
+                        "text_en": "Are flights to Yunnan expensive?",
+                        "score": 0.0,
+                        "feedback": "This reduces a lyrical memory to travel logistics."
+                    },
+                    {
+                        "text_zh": "你拍了很多照片吗？发给我看看。",
+                        "text_pinyin": "Nǐ pāi le hěn duō zhàopiàn ma? Fā gěi wǒ kànkan.",
+                        "text_en": "Did you take a lot of photos? Send them to me.",
+                        "score": 0.0,
+                        "feedback": "She just said the feeling matters more than tangible records."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是安静。我在那里住了一个小客栈，老板娘每天早上泡普洱茶。我们就坐在院子里，有一搭没一搭地聊天。什么都不急。回到城市以后我才发现，原来我已经很久没有过那种不着急的感觉了。",
+                "text_pinyin": "Duì, jiù shì ānjìng. Wǒ zài nàlǐ zhù le yīge xiǎo kèzhàn, lǎobǎnniáng měi tiān zǎoshang pào Pǔ'ěr chá. Wǒmen jiù zuò zài yuànzi lǐ, yǒu yī dā méi yī dā de liáotiān. Shénme dōu bù jí. Huí dào chéngshì yǐhòu wǒ cái fāxiàn, yuánlái wǒ yǐjīng hěn jiǔ méiyǒu guò nà zhǒng bù zháojí de gǎnjué le.",
+                "text_en": "Right, exactly — stillness. I stayed at a small guesthouse there. The owner brewed Pu'er tea every morning. We'd sit in the courtyard chatting casually. Nothing was urgent. After returning to the city, I realized I hadn't felt unhurried like that in a very long time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on why we keep wanting to return to certain places.",
+                "options": [
+                    {
+                        "text_zh": "也许我们想回去的不是那个地方，而是在那里的那个自己。那时候的你没有被催着赶着，能真正地活在当下。也许不用回去，在这里也能偶尔给自己那样的时刻。",
+                        "text_pinyin": "Yěxǔ wǒmen xiǎng huí qù de bú shì nàge dìfang, ér shì zài nàlǐ de nàge zìjǐ. Nà shíhou de nǐ méiyǒu bèi cuī zhe gǎn zhe, néng zhēnzhèng de huó zài dāngxià. Yěxǔ bú yòng huí qù, zài zhèlǐ yě néng ǒu'ěr gěi zìjǐ nàyàng de shíkè.",
+                        "text_en": "Maybe what we want to return to isn't the place, but who we were there. You weren't being rushed — you could live in the present. You don't have to go back. Give yourself those moments here sometimes.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Profound and gentle — reframes nostalgia as something you can recreate within."
+                    },
+                    {
+                        "text_zh": "你应该再去一次，拍个视频发到网上。",
+                        "text_pinyin": "Nǐ yīnggāi zài qù yī cì, pāi ge shìpín fā dào wǎng shàng.",
+                        "text_en": "You should go again and post a video online.",
+                        "score": 0.0,
+                        "feedback": "Commodifies the experience."
+                    },
+                    {
+                        "text_zh": "普洱茶好喝吗？我比较喜欢绿茶。",
+                        "text_pinyin": "Pǔ'ěr chá hǎo hē ma? Wǒ bǐjiào xǐhuan lǜchá.",
+                        "text_en": "Is Pu'er tea good? I prefer green tea.",
+                        "score": 0.0,
+                        "feedback": "Fixates on tea preference instead of the deeper meaning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在这里也能给自己那样的时刻……你说得对。也许今天中午就是这样的时刻。不急着回去上班，就坐在这里多聊一会儿。",
+                "text_pinyin": "Zài zhèlǐ yě néng gěi zìjǐ nàyàng de shíkè…… nǐ shuō de duì. Yěxǔ jīntiān zhōngwǔ jiù shì zhèyàng de shíkè. Bù jí zhe huí qù shàng bān, jiù zuò zài zhèlǐ duō liáo yīhuìr.",
+                "text_en": "Give yourself those moments here too... you're right. Maybe this lunchtime is one of those moments. No rush to get back to work — just sit here and chat a while longer."
+            }
+        ],
+        "cultural_note": "Yunnan province, with its diverse ethnic cultures and stunning mountain landscapes, holds a special place in Chinese imagination as a retreat from urban pressure. The phrase「有一搭没一搭地聊天」describes casual, unhurried conversation — chatting with no particular purpose, a rhythm increasingly rare in fast-paced city life. Small guesthouses (客栈) in towns like Dali and Lijiang have become symbols of a slower, more contemplative way of living."
+    }
+}

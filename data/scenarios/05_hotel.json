@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Say yes, you have a reservation under your name.",
                 "options": [
-                    {"text_zh": "是的，我预订了。我姓李。", "text_pinyin": "shì de, wǒ yùdìng le. wǒ xìng lǐ.", "text_en": "Yes, I have a reservation. My surname is Li.", "score": 1.0, "register": "neutral", "feedback": "Clear and professional. 我姓... is the standard way to give your surname."},
-                    {"text_zh": "有。我叫李明。", "text_pinyin": "yǒu. wǒ jiào lǐ míng.", "text_en": "Yes. My name is Li Ming.", "score": 0.8, "register": "casual", "feedback": "Works fine. 我姓 is slightly more formal for hotels."},
-                    {"text_zh": "对。", "text_pinyin": "duì.", "text_en": "Yes.", "score": 0.4, "register": "minimal", "feedback": "They'll need your name too!"}
+                    {
+                        "text_zh": "当然可以！祝你生日快乐！我带什么来好呢？",
+                        "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?",
+                        "text_en": "Of course! Happy birthday! What should I bring?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say yes, you have a reservation under your name, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "你好，我上午在这里喝咖啡，好像把背包忘在这儿了。",
+                        "text_pinyin": "nǐ hǎo, wǒ shàngwǔ zài zhèlǐ hē kāfēi, hǎoxiàng bǎ bēibāo wàng zài zhèr le.",
+                        "text_en": "Hi, I was having coffee here this morning and I think I left my backpack here.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say yes, you have a reservation under your name, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "是的，我预订了。我姓李。",
+                        "text_pinyin": "shì de, wǒ yùdìng le. wǒ xìng lǐ.",
+                        "text_en": "Yes, I have a reservation. My surname is Li.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and professional. 我姓... is the standard way to give your surname."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Confirm and ask about breakfast.",
                 "options": [
-                    {"text_zh": "对的。请问有早餐吗？", "text_pinyin": "duì de. qǐngwèn yǒu zǎocān ma?", "text_en": "That's right. Is breakfast included?", "score": 1.0, "register": "neutral", "feedback": "Confirms and asks a practical follow-up. Well done."},
-                    {"text_zh": "对。早餐几点？", "text_pinyin": "duì. zǎocān jǐ diǎn?", "text_en": "Yes. What time is breakfast?", "score": 0.9, "register": "neutral", "feedback": "Good — assumes breakfast is included and asks the time."},
-                    {"text_zh": "嗯，对。", "text_pinyin": "ēn, duì.", "text_en": "Mm, yes.", "score": 0.6, "register": "minimal", "feedback": "Confirmed, but a follow-up question makes the exchange more natural."}
+                    {
+                        "text_zh": "十二点吧。你想吃什么都行。",
+                        "text_pinyin": "shí'èr diǎn ba. nǐ xiǎng chī shénme dōu xíng.",
+                        "text_en": "How about noon. Whatever you want is fine.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to confirm and ask about breakfast, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "当然可以！祝你生日快乐！我带什么来好呢？",
+                        "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?",
+                        "text_en": "Of course! Happy birthday! What should I bring?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to confirm and ask about breakfast, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "对的。请问有早餐吗？",
+                        "text_pinyin": "duì de. qǐngwèn yǒu zǎocān ma?",
+                        "text_en": "That's right. Is breakfast included?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Confirms and asks a practical follow-up. Well done."
+                    }
                 ]
             }
         ],

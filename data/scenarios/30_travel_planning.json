@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest a destination and give your reasoning.",
                 "options": [
-                    {"text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。", "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.", "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.", "score": 1.0, "register": "casual", "feedback": "Well-reasoned suggestion — gives a destination and two practical reasons. Shows you've thought about it."},
-                    {"text_zh": "去海边怎么样？我们可以游泳和晒太阳。", "text_pinyin": "qù hǎibiān zěnmeyàng? wǒmen kěyǐ yóuyǒng hé shài tàiyáng.", "text_en": "How about the beach? We can swim and sunbathe.", "score": 0.7, "register": "casual", "feedback": "Fun suggestion but vague on location — which beach? China has a long coastline."},
-                    {"text_zh": "五一哪里都是人，不如在家附近玩玩算了。", "text_pinyin": "wǔyī nǎlǐ dōu shì rén, bùrú zài jiā fùjìn wánwan suàn le.", "text_en": "Everywhere is packed during May Day, why don't we just hang around near home.", "score": 0.5, "register": "casual", "feedback": "Realistic about crowds but deflating — your friends want to plan something exciting."}
+                    {
+                        "text_zh": "我觉得可以去云南，那边风景好，而且五月天气不太热。",
+                        "text_pinyin": "wǒ juéde kěyǐ qù yúnnán, nàbiān fēngjǐng hǎo, érqiě wǔ yuè tiānqì bú tài rè.",
+                        "text_en": "I think we could go to Yunnan. The scenery is nice there, and the weather isn't too hot in May.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Well-reasoned suggestion — gives a destination and two practical reasons. Shows you've thought about it."
+                    },
+                    {
+                        "text_zh": "有的，在这里。",
+                        "text_pinyin": "yǒu de, zài zhèlǐ.",
+                        "text_en": "Yes, here it is.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest a destination and give your reasoning, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我觉得我比较认真，做事之前会先做好计划，然后一步一步完成。",
+                        "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, zuòshì zhīqián huì xiān zuò hǎo jìhuà, ránhòu yī bù yī bù wánchéng.",
+                        "text_en": "I think I'm quite diligent — before doing things I make a plan first, then complete it step by step.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest a destination and give your reasoning, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Address the cost concern and suggest a solution.",
                 "options": [
-                    {"text_zh": "我们可以坐高铁去，虽然时间长一点，但是便宜很多。", "text_pinyin": "wǒmen kěyǐ zuò gāotiě qù, suīrán shíjiān cháng yīdiǎn, dànshì piányi hěn duō.", "text_en": "We can take the high-speed train. It takes longer, but it's much cheaper.", "score": 1.0, "register": "casual", "feedback": "Practical alternative — 虽然...但是 shows you weighed the tradeoff. High-speed rail is a great option in China."},
-                    {"text_zh": "如果现在就订机票的话，应该还不会太贵。", "text_pinyin": "rúguǒ xiànzài jiù dìng jīpiào dehuà, yīnggāi hái bú huì tài guì.", "text_en": "If we book flights now, they shouldn't be too expensive yet.", "score": 0.7, "register": "casual", "feedback": "Valid point — early booking helps, though May Day flights tend to be pricey regardless."},
-                    {"text_zh": "我查一下机票价格，然后告诉你们。", "text_pinyin": "wǒ chá yīxià jīpiào jiàgé, ránhòu gàosu nǐmen.", "text_en": "Let me check flight prices and I'll let you know.", "score": 0.6, "register": "casual", "feedback": "Responsible, but doesn't address the concern in the moment — offering an alternative like trains keeps the planning moving."}
+                    {
+                        "text_zh": "我头疼，还有点儿发烧。",
+                        "text_pinyin": "wǒ tóuténg, hái yǒudiǎnr fāshāo.",
+                        "text_en": "I have a headache and a slight fever.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to address the cost concern and suggest a solution, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "不好意思，我房间的空调好像坏了，能不能帮我解决一下？",
+                        "text_pinyin": "bù hǎoyìsi, wǒ fángjiān de kōngtiáo hǎoxiàng huài le, néng bù néng bāng wǒ jiějué yīxià?",
+                        "text_en": "Excuse me, the AC in my room seems broken. Could you help me fix this?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to address the cost concern and suggest a solution, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我们可以坐高铁去，虽然时间长一点，但是便宜很多。",
+                        "text_pinyin": "wǒmen kěyǐ zuò gāotiě qù, suīrán shíjiān cháng yīdiǎn, dànshì piányi hěn duō.",
+                        "text_en": "We can take the high-speed train. It takes longer, but it's much cheaper.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical alternative — 虽然...但是 shows you weighed the tradeoff. High-speed rail is a great option in China."
+                    }
                 ]
             }
         ],

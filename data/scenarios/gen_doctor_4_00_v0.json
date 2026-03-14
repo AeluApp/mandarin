@@ -1,0 +1,160 @@
+{
+    "title": "The Symptom Storyteller",
+    "title_zh": "症状故事家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_4_00_v0",
+    "tree": {
+        "setup": "A neighborhood clinic with pale green walls and the faint hum of an ancient air conditioner. Dr. Wen has a gift for explaining medical conditions using food metaphors — sore throats are 'like swallowing a cactus,' fevers are 'your body making soup.' She keeps a jar of lollipops on her desk, technically for children, but she's been known to offer them to nervous adults.",
+        "setup_zh": "社区诊所，淡绿色的墙壁，老旧空调发出轻微的嗡嗡声。温医生擅长用食物来比喻病情——嗓子疼是「像吞了仙人掌」，发烧是「身体在煲汤」。她桌上放着一罐棒棒糖，名义上给小孩，但紧张的大人也偶尔能得到一根。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。哪里不舒服？慢慢说，不着急。",
+                "text_pinyin": "qǐng zuò. nǎlǐ bù shūfu? mànmàn shuō, bù zháojí.",
+                "text_en": "Please sit. What's bothering you? Take your time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your symptoms.",
+                "options": [
+                    {
+                        "text_zh": "温医生，我这几天头疼，嗓子也疼，还有一点发烧。",
+                        "text_pinyin": "Wēn yīshēng, wǒ zhè jǐ tiān tóu téng, sǎngzi yě téng, hái yǒu yìdiǎn fāshāo.",
+                        "text_en": "Dr. Wen, I've had headaches these past few days, my throat hurts too, and I have a slight fever.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Three symptoms, clearly listed. Dr. Wen nods — 「头疼加嗓子疼加发烧，classic三件套。」"
+                    },
+                    {
+                        "text_zh": "我不太舒服，感觉全身都不对劲。",
+                        "text_pinyin": "wǒ bú tài shūfu, gǎnjué quánshēn dōu bú duìjìn.",
+                        "text_en": "I don't feel well — my whole body feels off.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "不对劲 captures the feeling well, but she'll need you to be more specific. Where exactly is the soup being made?"
+                    },
+                    {
+                        "text_zh": "我生病了。",
+                        "text_pinyin": "wǒ shēng bìng le.",
+                        "text_en": "I'm sick.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Wen smiles gently. 「这个我看出来了，」she says.「具体是什么样的不舒服？」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "嗓子疼的话……像吞仙人掌那种疼，还是像吃了太辣的火锅？让我看看。张嘴，啊——",
+                "text_pinyin": "sǎngzi téng de huà……xiàng tūn xiānrénzhǎng nà zhǒng téng, háishì xiàng chī le tài là de huǒguō? ràng wǒ kànkan. zhāng zuǐ, ā——",
+                "text_en": "Sore throat... is it the 'swallowing a cactus' kind of pain, or more like 'eating too-spicy hotpot'? Let me take a look. Open wide, ah—"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the type of pain.",
+                "options": [
+                    {
+                        "text_zh": "更像仙人掌那种。吞口水的时候特别疼，喝热水会好一点。",
+                        "text_pinyin": "gèng xiàng xiānrénzhǎng nà zhǒng. tūn kǒushuǐ de shíhòu tèbié téng, hē rè shuǐ huì hǎo yìdiǎn.",
+                        "text_en": "More like the cactus kind. It really hurts when I swallow, but hot water helps a bit.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Playing along with the metaphor AND adding useful clinical detail — Dr. Wen is delighted."
+                    },
+                    {
+                        "text_zh": "就是疼。吃东西的时候更疼。",
+                        "text_pinyin": "jiùshì téng. chī dōngxi de shíhòu gèng téng.",
+                        "text_en": "It just hurts. Especially when eating.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical information. She makes a note and moves on."
+                    },
+                    {
+                        "text_zh": "很疼。",
+                        "text_pinyin": "hěn téng.",
+                        "text_en": "Very painful.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Wen peers at your throat and provides her own assessment. Sometimes the patient just needs to sit still."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "嗯，看起来是普通感冒。你最近休息得怎么样？有没有好好睡觉？",
+                "text_pinyin": "ǹg, kàn qǐlái shì pǔtōng gǎnmào. nǐ zuìjìn xiūxi de zěnmeyàng? yǒu méiyǒu hǎohāo shuìjiào?",
+                "text_en": "Hmm, looks like a common cold. How's your rest been lately? Have you been sleeping well?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about your sleep habits.",
+                "options": [
+                    {
+                        "text_zh": "最近工作比较忙，每天只睡五六个小时。我知道这样不好。",
+                        "text_pinyin": "zuìjìn gōngzuò bǐjiào máng, měi tiān zhǐ shuì wǔ liù gè xiǎoshí. wǒ zhīdào zhèyàng bù hǎo.",
+                        "text_en": "Work's been busy lately — I only sleep five or six hours a night. I know that's not good.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Self-aware patients heal faster, in Dr. Wen's experience. She nods with warm seriousness."
+                    },
+                    {
+                        "text_zh": "还可以，但是有时候睡不着。",
+                        "text_pinyin": "hái kěyǐ, dànshì yǒu shíhòu shuì bù zháo.",
+                        "text_en": "It's OK, but sometimes I can't fall asleep.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "睡不着 — insomnia is relevant. She adds it to her mental recipe of what's going on."
+                    },
+                    {
+                        "text_zh": "还行吧。",
+                        "text_pinyin": "hái xíng ba.",
+                        "text_en": "It's fine, I guess.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Dr. Wen tilts her head. 「还行」in a doctor's office usually means「不太行。」She'll ask more."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我给你开一些药。多喝水，多休息——睡眠就是最好的药。三天以后如果还没好，再来看我。",
+                "text_pinyin": "wǒ gěi nǐ kāi yìxiē yào. duō hē shuǐ, duō xiūxi — shuìmián jiùshì zuì hǎo de yào. sān tiān yǐhòu rúguǒ hái méi hǎo, zài lái kàn wǒ.",
+                "text_en": "I'll prescribe some medicine. Drink lots of water and rest — sleep is the best medicine. If you're not better in three days, come back."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and ask about the medicine.",
+                "options": [
+                    {
+                        "text_zh": "谢谢温医生。请问这些药饭前吃还是饭后吃？",
+                        "text_pinyin": "xièxie Wēn yīshēng. qǐngwèn zhèxiē yào fàn qián chī háishì fàn hòu chī?",
+                        "text_en": "Thank you, Dr. Wen. Should I take these before or after meals?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "The right question to ask. Dr. Wen beams — and slides a lollipop across the desk. 「拿着，」she says.「对嗓子没用，但对心情有用。」"
+                    },
+                    {
+                        "text_zh": "好的，谢谢医生。",
+                        "text_pinyin": "hǎo de, xièxie yīshēng.",
+                        "text_en": "OK, thanks, doctor.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite. She waves goodbye and calls the next patient."
+                    },
+                    {
+                        "text_zh": "三天？那么久吗？",
+                        "text_pinyin": "sān tiān? nàme jiǔ ma?",
+                        "text_en": "Three days? That long?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Wen laughs softly.「感冒就像煲汤，急不来。」Colds are like making soup — you can't rush them."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese doctors commonly ask about sleep, diet, and emotional state alongside physical symptoms, reflecting traditional medicine's holistic approach. The instruction 多喝热水 (duō hē rè shuǐ, drink more hot water) is genuinely ubiquitous medical advice in China."
+    }
+}

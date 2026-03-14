@@ -1,0 +1,124 @@
+{
+    "title": "The Comparison Scientist",
+    "title_zh": "比较科学家",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_5_03_v0",
+    "tree": {
+        "setup": "An electronics store where every surface glows with screens displaying their own specifications in a competitive parade of brightness and pixel counts. You need a new laptop for both work and occasional video editing. Sales Associate Lao Xu has been selling computers since the days of CRT monitors and takes a perverse pleasure in explaining why the mid-range option is usually the best value — a philosophy that has made him the store's most trusted but least profitable employee.",
+        "setup_zh": "一家电子产品店，每个表面都闪烁着屏幕，竞争性地展示着自己的亮度和像素数规格。你需要一台既能工作又能偶尔做视频编辑的新笔记本电脑。销售老许从CRT显示器的年代就开始卖电脑了，他有一种奇特的乐趣：解释为什么中档产品通常是最划算的——这个理念让他成了店里最受信赖但利润贡献最低的员工。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "看电脑？说说你的需求，别先看价格。价格是最后考虑的事情。",
+                "text_pinyin": "kàn diànnǎo? shuō shuō nǐ de xūqiú, bié xiān kàn jiàgé. jiàgé shì zuìhòu kǎolǜ de shìqing.",
+                "text_en": "Looking at computers? Tell me your needs first — don't look at prices yet. Price is the last thing to consider."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe what you need.",
+                "options": [
+                    {
+                        "text_zh": "老许，我需要一台笔记本电脑，主要用来办公——处理文档、表格、视频会议这些。但偶尔也会做一些视频编辑，不是专业级的，就是简单的剪辑。预算大概在五千到八千之间。续航最好能撑一天，因为我经常出差。",
+                        "text_pinyin": "Lǎo Xǔ, wǒ xūyào yì tái bǐjìběn diànnǎo, zhǔyào yòng lái bàngōng——chǔlǐ wéndàng, biǎogé, shìpín huìyì zhèxiē. dàn ǒu'ěr yě huì zuò yìxiē shìpín biānjí, búshì zhuānyè jí de, jiùshì jiǎndān de jiǎnjí. yùsuàn dàgài zài wǔ qiān dào bā qiān zhī jiān. xùháng zuìhǎo néng chēng yì tiān, yīnwèi wǒ jīngcháng chūchāi.",
+                        "text_en": "Lao Xu, I need a laptop, mainly for office work — documents, spreadsheets, video calls. But I also do some video editing occasionally — nothing professional, just simple cuts. Budget is about 5,000 to 8,000. Battery should ideally last all day since I travel for work a lot.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Use case, secondary need, budget range, and a key requirement — Lao Xu is already mentally eliminating 80% of the inventory. Three models survive his internal filter."
+                    },
+                    {
+                        "text_zh": "我想买个笔记本电脑，办公用的，能剪视频的。",
+                        "text_pinyin": "wǒ xiǎng mǎi gè bǐjìběn diànnǎo, bàngōng yòng de, néng jiǎn shìpín de.",
+                        "text_en": "I want a laptop for office work that can handle video editing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll need a budget range and portability requirements."
+                    },
+                    {
+                        "text_zh": "最好的笔记本电脑是哪个？",
+                        "text_pinyin": "zuì hǎo de bǐjìběn diànnǎo shì nǎge?",
+                        "text_en": "Which is the best laptop?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Xu chuckles.「最好的要看对谁来说，」he says. The best laptop is the one that matches your needs — which is why he asked first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "五千到八千，办公加轻度视频编辑，需要续航好。我给你推荐三个选择：A款五千五，办公完全够用，但视频编辑会稍微吃力；B款六千八，性能平衡，办公和轻度视频编辑都能胜任；C款七千九，处理器更好，视频编辑更流畅，但续航稍微短一点。你猜我推荐哪个？",
+                "text_pinyin": "wǔ qiān dào bā qiān, bàngōng jiā qīngdù shìpín biānjí, xūyào xùháng hǎo. wǒ gěi nǐ tuījiàn sān gè xuǎnzé: A kuǎn wǔ qiān wǔ, bàngōng wánquán gòu yòng, dàn shìpín biānjí huì shāowēi chīlì; B kuǎn liù qiān bā, xìngnéng pínghéng, bàngōng hé qīngdù shìpín biānjí dōu néng shèngrèn; C kuǎn qī qiān jiǔ, chǔlǐ qì gèng hǎo, shìpín biānjí gèng liúchàng, dàn xùháng shāowēi duǎn yìdiǎn. nǐ cāi wǒ tuījiàn nǎge?",
+                "text_en": "5-8K, office plus light video editing, good battery. I'll recommend three options: Model A at 5,500 — great for office, but video editing will strain it a bit; Model B at 6,800 — balanced performance, handles both office and light video; Model C at 7,900 — better processor, smoother video editing, but slightly shorter battery. Guess which one I recommend?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Guess his recommendation and ask about details.",
+                "options": [
+                    {
+                        "text_zh": "让我猜……B款，六千八那个？因为性能平衡最适合我的需求，而且价格在中间。你不是最喜欢推荐中档的吗？不过认真问一下：B款和C款的具体配置差在哪里？处理器和内存分别是什么？",
+                        "text_pinyin": "ràng wǒ cāi……B kuǎn, liù qiān bā nàge? yīnwèi xìngnéng pínghéng zuì shìhé wǒ de xūqiú, érqiě jiàgé zài zhōngjiān. nǐ búshì zuì xǐhuān tuījiàn zhōngdàng de ma? búguò rènzhēn wèn yíxià: B kuǎn hé C kuǎn de jùtǐ pèizhì chà zài nǎlǐ? chǔlǐ qì hé nèicún fēnbié shì shénme?",
+                        "text_en": "Let me guess... Model B, the 6,800 one? Because balanced performance fits my needs best, and it's the middle price. You always recommend the mid-range, right? But seriously — what's the specific difference between B and C? What processor and RAM does each have?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Guessing correctly and then drilling into specifics — Lao Xu grins. A customer who understands the mid-range philosophy and still asks about specs is his ideal customer."
+                    },
+                    {
+                        "text_zh": "B款吧？中间那个？",
+                        "text_pinyin": "B kuǎn ba? zhōngjiān nàge?",
+                        "text_en": "Model B? The middle one?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Correct. He explains why with visible satisfaction."
+                    },
+                    {
+                        "text_zh": "C款吧？贵的应该好。",
+                        "text_pinyin": "C kuǎn ba? guì de yīnggāi hǎo.",
+                        "text_en": "Model C? The expensive one should be better.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Xu sighs with the weariness of a man who has spent twenty years explaining that「贵的」does not always mean「适合你的。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "知我者也。B款处理器是最新的中端处理器，16GB内存，512GB固态硬盘，续航大概十个小时。C款处理器高一级，同样16GB内存但可以自己升级到32GB，续航大概八个小时。你现在视频编辑用什么软件？如果是剪映的话，B款完全够用了。",
+                "text_pinyin": "zhī wǒ zhě yě. B kuǎn chǔlǐ qì shì zuìxīn de zhōngduān chǔlǐ qì, shíliù GB nèicún, wǔbǎi yīshí'èr GB gùtài yìngpán, xùháng dàgài shí gè xiǎoshí. C kuǎn chǔlǐ qì gāo yì jí, tóngyàng shíliù GB nèicún dàn kěyǐ zìjǐ shēngjí dào sānshí'èr GB, xùháng dàgài bā gè xiǎoshí. nǐ xiànzài shìpín biānjí yòng shénme ruǎnjiàn? rúguǒ shì Jiǎnyìng de huà, B kuǎn wánquán gòu yòng le.",
+                "text_en": "You know me well. Model B has the latest mid-range processor, 16GB RAM, 512GB SSD, about 10 hours battery. Model C is one tier higher on the processor, same 16GB but upgradeable to 32GB, about 8 hours battery. What video editing software do you use? If it's CapCut, Model B is more than sufficient."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Make your final decision.",
+                "options": [
+                    {
+                        "text_zh": "用剪映为主，偶尔用Premiere。那B款确实够用了，而且续航多两个小时对出差很重要。就B款吧。对了，老许，你们有没有以旧换新的活动？我的旧笔记本还能用，但是想看看能抵多少钱。",
+                        "text_pinyin": "yòng Jiǎnyìng wéi zhǔ, ǒu'ěr yòng Premiere. nà B kuǎn quèshí gòu yòng le, érqiě xùháng duō liǎng gè xiǎoshí duì chūchāi hěn zhòngyào. jiù B kuǎn ba. duì le, Lǎo Xǔ, nǐmen yǒu méiyǒu yǐ jiù huàn xīn de huódòng? wǒ de jiù bǐjìběn hái néng yòng, dànshì xiǎng kàn kan néng dǐ duōshǎo qián.",
+                        "text_en": "Mainly CapCut, occasionally Premiere. Then B is definitely enough, and two extra hours of battery matters for business travel. Model B it is. Oh, Lao Xu — do you have a trade-in program? My old laptop still works but I'd like to see how much credit I can get.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Decision grounded in usage analysis plus asking about trade-in — Lao Xu's satisfaction is complete. He checks the trade-in value on his system."
+                    },
+                    {
+                        "text_zh": "就B款吧。帮我包起来。",
+                        "text_pinyin": "jiù B kuǎn ba. bāng wǒ bāo qǐlái.",
+                        "text_en": "Model B. Wrap it up.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Decisive. He boxes it with the care of someone handing over a well-chosen tool."
+                    },
+                    {
+                        "text_zh": "让我再想想，下次再来买。",
+                        "text_pinyin": "ràng wǒ zài xiǎng xiǎng, xià cì zài lái mǎi.",
+                        "text_en": "Let me think about it — I'll come back next time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Xu nods without pressure. He knows the analysis was thorough — the decision will happen."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese electronics shopping culture values detailed spec comparison (配置对比, pèizhì duìbǐ). 以旧换新 (yǐ jiù huàn xīn, trade-in) programs are common at electronics retailers. 剪映 (Jiǎnyìng, CapCut) is China's most popular consumer video editing app, developed by ByteDance. Mid-range recommendations (中档推荐) from experienced salespeople often represent the best value intersection of performance and price."
+    }
+}

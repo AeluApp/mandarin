@@ -1,0 +1,89 @@
+{
+    "title": "Late-Night Reflections",
+    "title_zh": "深夜的想法",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "It's past midnight. You and your roommate Daming are sitting on the balcony, unable to sleep. The city below is finally quiet.",
+        "setup_zh": "已经过了午夜。你和室友大明坐在阳台上，睡不着。楼下的城市终于安静了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你有没有过那种感觉？白天忙的时候什么都不想，一到晚上安静下来，脑子里就开始翻来覆去想很多事。",
+                "text_pinyin": "Nǐ yǒu méiyǒu guò nà zhǒng gǎnjué? Báitiān máng de shíhou shénme dōu bù xiǎng, yī dào wǎnshang ānjìng xiàlái, nǎozi lǐ jiù kāishǐ fānlái fùqù xiǎng hěn duō shì.",
+                "text_en": "Have you ever had that feeling? During the busy day you don't think about anything, but as soon as it gets quiet at night, your mind starts turning things over and over."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share whether you relate to this feeling.",
+                "options": [
+                    {
+                        "text_zh": "经常。尤其是那些白天没有时间处理的情绪，到了晚上都会冒出来。有时候不一定是坏事，安静的时候反而能看清一些东西。",
+                        "text_pinyin": "Jīngcháng. Yóuqí shì nàxiē báitiān méiyǒu shíjiān chǔlǐ de qíngxù, dào le wǎnshang dōu huì mào chūlái. Yǒu shíhou bú yídìng shì huài shì, ānjìng de shíhou fǎn'ér néng kàn qīng yīxiē dōngxi.",
+                        "text_en": "Often. Especially emotions I didn't have time to process during the day — they all surface at night. Sometimes it's not necessarily bad. In the quiet, you can actually see some things more clearly.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest and reflective — normalizes nighttime overthinking and reframes it gently."
+                    },
+                    {
+                        "text_zh": "你应该早点睡觉，别想太多。",
+                        "text_pinyin": "Nǐ yīnggāi zǎo diǎn shuìjiào, bié xiǎng tài duō.",
+                        "text_en": "You should go to bed earlier and stop overthinking.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — shuts down the reflective mood."
+                    },
+                    {
+                        "text_zh": "我一般睡前看手机，很快就睡着了。",
+                        "text_pinyin": "Wǒ yībān shuì qián kàn shǒujī, hěn kuài jiù shuì zháo le.",
+                        "text_en": "I usually look at my phone before bed and fall asleep quickly.",
+                        "score": 0.0,
+                        "feedback": "Misses the deeper conversation about inner life."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看清一些东西……也许吧。我最近一直在想，我现在过的生活是不是我真正想要的。不是说不好，就是觉得每天都差不多，好像在走一条别人画好的路。",
+                "text_pinyin": "Kàn qīng yīxiē dōngxi…… yěxǔ ba. Wǒ zuìjìn yīzhí zài xiǎng, wǒ xiànzài guò de shēnghuó shì bu shì wǒ zhēnzhèng xiǎng yào de. Bú shì shuō bù hǎo, jiù shì juéde měi tiān dōu chàbuduō, hǎoxiàng zài zǒu yī tiáo biéren huà hǎo de lù.",
+                "text_en": "See things more clearly... maybe. I've been thinking lately — is the life I'm living really the one I want? It's not that it's bad, it just feels like every day is the same, like I'm walking a path someone else drew."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his existential reflection.",
+                "options": [
+                    {
+                        "text_zh": "我觉得有这种想法不代表你走错了路，只是说明你开始认真思考了。很多人连这一步都不会走。也许答案不需要今晚就找到，先问出来就已经很好了。",
+                        "text_pinyin": "Wǒ juéde yǒu zhè zhǒng xiǎngfǎ bú dàibiǎo nǐ zǒu cuò le lù, zhǐ shì shuōmíng nǐ kāishǐ rènzhēn sīkǎo le. Hěn duō rén lián zhè yī bù dōu bú huì zǒu. Yěxǔ dá'àn bù xūyào jīn wǎn jiù zhǎo dào, xiān wèn chūlái jiù yǐjīng hěn hǎo le.",
+                        "text_en": "Having these thoughts doesn't mean you're on the wrong path — it means you've started thinking seriously. Many people never take that step. The answer doesn't need to come tonight. Asking the question is enough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Patient and wise — validates the questioning without rushing to solutions."
+                    },
+                    {
+                        "text_zh": "你可以去旅游散散心。",
+                        "text_pinyin": "Nǐ kěyǐ qù lǚyóu sànsàn xīn.",
+                        "text_en": "You could go traveling to clear your mind.",
+                        "score": 0.0,
+                        "feedback": "Surface-level — offers escape rather than engagement."
+                    },
+                    {
+                        "text_zh": "别想了，明天还要上班呢。",
+                        "text_pinyin": "Bié xiǎng le, míngtiān hái yào shàng bān ne.",
+                        "text_en": "Stop thinking about it, you have work tomorrow.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — uses practicality to avoid depth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "先问出来就已经很好了……谢谢你。夜里说的话好像比白天的更真。也许我们都需要这样的时刻，停下来听听自己心里的声音。",
+                "text_pinyin": "Xiān wèn chūlái jiù yǐjīng hěn hǎo le…… xièxie nǐ. Yè lǐ shuō de huà hǎoxiàng bǐ báitiān de gèng zhēn. Yěxǔ wǒmen dōu xūyào zhèyàng de shíkè, tíng xiàlái tīng tīng zìjǐ xīn lǐ de shēngyīn.",
+                "text_en": "Just asking is already enough... thank you. Words spoken at night feel more real than daytime ones. Maybe we all need moments like this — to stop and listen to the voice inside."
+            }
+        ],
+        "cultural_note": "In Chinese culture, there's a saying「夜深人静」(yè shēn rén jìng, deep night when people are quiet) — the idea that stillness and truth emerge in the late hours. Many young Chinese workers describe feeling trapped in routines shaped by societal expectations (stable job, marriage timeline, homeownership), and late-night conversations with close friends become rare spaces for honest self-reflection."
+    }
+}

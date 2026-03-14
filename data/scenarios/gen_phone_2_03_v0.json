@@ -1,0 +1,94 @@
+{
+    "title": "Dinner Plans by Phone",
+    "title_zh": "电话约晚饭",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_phone_2_03_v0",
+    "tree": {
+        "setup": "Your phone rings. It's your friend Xiao Peng, who has the unusual habit of calling instead of texting. He insists that calling is 'more personal.' He always calls at exactly 6 PM because that's when he starts thinking about dinner, which is his favorite subject.",
+        "setup_zh": "手机响了。是你朋友小鹏，他有一个奇怪的习惯——打电话不发消息。他坚持说打电话「更有人情味」。他总在晚上六点打，因为那时候他开始想晚饭，这是他最爱的话题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂！是我，小鹏！你吃了没？",
+                "text_pinyin": "wéi! shì wǒ, xiǎo péng! nǐ chī le méi?",
+                "text_en": "Hey! It's me, Xiao Peng! Have you eaten?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer his greeting.",
+                "options": [
+                    {
+                        "text_zh": "还没呢！你想吃什么？",
+                        "text_pinyin": "hái méi ne! nǐ xiǎng chī shénme?",
+                        "text_en": "Not yet! What do you want to eat?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Peng is thrilled -- you've given him permission to talk about food.「我想吃火锅！你觉得怎么样？」还没呢 is natural casual Chinese for 'not yet.'"
+                    },
+                    {
+                        "text_zh": "吃了。你呢？",
+                        "text_pinyin": "chī le. nǐ ne?",
+                        "text_en": "I have. You?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Peng is undeterred.「那你陪我去吃？我一个人吃没意思。」'Have you eaten?' is as much greeting as question in Chinese."
+                    },
+                    {
+                        "text_zh": "你怎么又打电话？发消息不行吗？",
+                        "text_pinyin": "nǐ zěnme yòu dǎ diànhuà? fā xiāoxi bù xíng ma?",
+                        "text_en": "Why are you calling again? Can't you text?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Peng sighs dramatically.「打电话多好啊，能听到声音！」He will never change. 又 means 'again' -- implies mild exasperation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们去吃火锅吧！新开了一家，听说很好吃。七点在地铁站见？",
+                "text_pinyin": "wǒmen qù chī huǒguō ba! xīn kāi le yì jiā, tīngshuō hěn hǎochī. qī diǎn zài dìtiě zhàn jiàn?",
+                "text_en": "Let's go eat hotpot! A new place opened, I heard it's great. Meet at the subway at 7?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his plan.",
+                "options": [
+                    {
+                        "text_zh": "好啊！七点见！",
+                        "text_pinyin": "hǎo a! qī diǎn jiàn!",
+                        "text_en": "Sure! See you at 7!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Peng hangs up immediately -- the deal is sealed and he needs to get ready. Quick confirmation + time = perfect phone plan."
+                    },
+                    {
+                        "text_zh": "七点太早了，七点半行不行？",
+                        "text_pinyin": "qī diǎn tài zǎo le, qī diǎn bàn xíng bu xíng?",
+                        "text_en": "7 is too early, how about 7:30?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Peng agrees reluctantly -- thirty minutes is a long time when you're hungry.「行行行，七点半！」行不行 is the casual way to ask 'OK or not?'"
+                    },
+                    {
+                        "text_zh": "火锅啊……可以吃别的吗？",
+                        "text_pinyin": "huǒguō a... kěyǐ chī bié de ma?",
+                        "text_en": "Hotpot... can we eat something else?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A long pause on the line. Xiao Peng is processing the betrayal.「可以……那你想吃什么？」He'll recover, but hotpot was his first love."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！别迟到啊！我先到了就先点菜！",
+                "text_pinyin": "tài hǎo le! bié chídào a! wǒ xiān dào le jiù xiān diǎn cài!",
+                "text_en": "Great! Don't be late! If I get there first I'm ordering ahead!"
+            }
+        ],
+        "cultural_note": "你吃了没 (nǐ chī le méi, 'have you eaten?') is one of the most common greetings in Chinese -- it's a way of showing care, not necessarily asking about food. Friends often make plans by phone right before the event, especially for dinner."
+    }
+}

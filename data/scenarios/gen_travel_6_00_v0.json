@@ -1,0 +1,196 @@
+{
+    "title": "The Concierge Cartographer",
+    "title_zh": "礼宾地图师",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_travel_6_00_v0",
+    "tree": {
+        "setup": "The lobby of a boutique hotel in the French Concession district, where a ceiling fan turns slowly above potted ferns and the check-in desk is made from reclaimed wood that the owner claims was once a ferry pier. Front desk manager Ms. Shen keeps a hand-drawn map of the neighborhood behind the counter — every restaurant, park, and hidden alley marked in colored ink, updated seasonally. You're booking a room for a five-day stay, and you have preferences about floor height, morning light, and proximity to traffic noise — in that order.",
+        "setup_zh": "法租界一家精品酒店的大堂，天花板风扇在盆栽蕨类植物上方缓缓转动，前台柜台用的回收木材据老板说曾经是渡口码头的一部分。前台经理沈小姐在柜台后面放着一张手绘的街区地图——每家餐厅、公园和隐秘小巷都用彩色墨水标注，按季节更新。你要预订五天的房间，对楼层高度、早晨采光和交通噪音的距离有偏好——按这个优先级排列。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临。请问是要办理入住还是预订房间？",
+                "text_pinyin": "huānyíng guānglín. qǐngwèn shì yào bànlǐ rùzhù háishi yùdìng fángjiān?",
+                "text_en": "Welcome. Are you checking in or making a reservation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you want to book a room for five days with specific preferences.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想预订一间房，住五天，从这周四到下周一。最好是高楼层的，朝东的房间，这样早晨采光好一些。如果能离马路远一点就更好了。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng yùdìng yì jiān fáng, zhù wǔ tiān, cóng zhè zhōusì dào xià zhōuyī. zuìhǎo shì gāo lóucéng de, cháo dōng de fángjiān, zhèyàng zǎochen cǎiguāng hǎo yìxiē. rúguǒ néng lí mǎlù yuǎn yìdiǎn jiù gèng hǎo le.",
+                        "text_en": "Hello, I'd like to book a room for five days, from this Thursday to next Monday. Preferably a high floor, east-facing for morning light. And if it could be farther from the road, even better.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Dates, floor preference, orientation, noise concern — all layered in order of priority. Ms. Shen's fingers are already moving across her booking system. You've given her a puzzle she enjoys solving."
+                    },
+                    {
+                        "text_zh": "我想订房，住五天。有安静一点的房间吗？",
+                        "text_pinyin": "wǒ xiǎng dìng fáng, zhù wǔ tiān. yǒu ānjìng yìdiǎn de fángjiān ma?",
+                        "text_en": "I'd like to book a room for five days. Do you have a quieter room?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Duration and one preference — a good start. She'll ask which dates and whether you have other requirements."
+                    },
+                    {
+                        "text_zh": "有房间吗？我要住几天。",
+                        "text_pinyin": "yǒu fángjiān ma? wǒ yào zhù jǐ tiān.",
+                        "text_en": "Do you have rooms? I need to stay a few days.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Shen smiles. 「几天」is a range, not a number. She'll need more before consulting her map of available rooms."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，周四到周一，五个晚上。我看一下……六楼有一间朝东的豪华大床房，窗户对着梧桐树。离马路最远的位置，非常安静。还有四楼一间标准双床房，也是朝东，价格便宜三百。您想要哪种房型？",
+                "text_pinyin": "hǎo de, zhōusì dào zhōuyī, wǔ gè wǎnshang. wǒ kàn yíxià……liù lóu yǒu yì jiān cháo dōng de háohuá dà chuáng fáng, chuānghu duì zhe wútóng shù. lí mǎlù zuì yuǎn de wèizhì, fēicháng ānjìng. háiyǒu sì lóu yì jiān biāozhǔn shuāng chuáng fáng, yě shì cháo dōng, jiàgé piányi sānbǎi. nín xiǎng yào nǎ zhǒng fángxíng?",
+                "text_en": "OK, Thursday to Monday, five nights. Let me check... sixth floor has an east-facing deluxe king room, windows facing the plane trees. Farthest from the road, very quiet. Also a fourth-floor standard twin, also east-facing, 300 yuan cheaper. Which room type would you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the price difference and what's included.",
+                "options": [
+                    {
+                        "text_zh": "六楼那间听起来很理想。请问每晚多少钱？含早餐吗？住五个晚上的话有没有什么优惠？",
+                        "text_pinyin": "liù lóu nà jiān tīng qǐlái hěn lǐxiǎng. qǐngwèn měi wǎn duōshǎo qián? hán zǎocān ma? zhù wǔ gè wǎnshang de huà yǒu méiyǒu shénme yōuhuì?",
+                        "text_en": "The sixth-floor room sounds ideal. How much per night? Does it include breakfast? Any discount for five nights?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Price, inclusions, multi-night discount — the hospitality trifecta. Ms. Shen pulls out a rate card with the practiced grace of a magician producing a card from thin air."
+                    },
+                    {
+                        "text_zh": "六楼的多少钱一晚？",
+                        "text_pinyin": "liù lóu de duōshǎo qián yì wǎn?",
+                        "text_en": "How much per night for the sixth floor?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The essential question. She'll quote the rack rate, but there's always room to ask about packages."
+                    },
+                    {
+                        "text_zh": "贵不贵？",
+                        "text_pinyin": "guì bú guì?",
+                        "text_en": "Is it expensive?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Shen pauses diplomatically. 「贵」is relative — relative to the plane trees, the morning light, and the silence. She quotes a number."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "六楼豪华间每晚六百八，含双人自助早餐。住五晚以上我们可以打九折，算下来每晚六百一十二。四楼标准间是四百八，也含早餐。两种房型都有免费WiFi和二十四小时热水。",
+                "text_pinyin": "liù lóu háohuá jiān měi wǎn liùbǎi bā, hán shuāngrén zìzhù zǎocān. zhù wǔ wǎn yǐshàng wǒmen kěyǐ dǎ jiǔ zhé, suàn xiàlái měi wǎn liùbǎi yīshí'èr. sì lóu biāozhǔn jiān shì sìbǎi bā, yě hán zǎocān. liǎng zhǒng fángxíng dōu yǒu miǎnfèi WiFi hé èrshísì xiǎoshí rè shuǐ.",
+                "text_en": "The sixth-floor deluxe is 680 per night, including buffet breakfast for two. For five or more nights we offer a 10% discount — works out to 612 per night. The fourth-floor standard is 480, also with breakfast. Both have free WiFi and 24-hour hot water."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on the room and ask about check-in/checkout details.",
+                "options": [
+                    {
+                        "text_zh": "九折很合适，那就订六楼的豪华间吧。请问入住和退房分别是几点？我周四可能下午两点左右到，能提前入住吗？另外，退房那天行李可以寄存吗？",
+                        "text_pinyin": "jiǔ zhé hěn héshì, nà jiù dìng liù lóu de háohuá jiān ba. qǐngwèn rùzhù hé tuìfáng fēnbié shì jǐ diǎn? wǒ zhōusì kěnéng xiàwǔ liǎng diǎn zuǒyòu dào, néng tíqián rùzhù ma? lìngwài, tuìfáng nà tiān xíngli kěyǐ jìcún ma?",
+                        "text_en": "The discount works for me — I'll take the sixth-floor deluxe. What are check-in and checkout times? I might arrive around 2 PM Thursday — can I check in early? Also, can I store luggage on checkout day?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Early check-in and luggage storage — the logistics of a seasoned traveler. Ms. Shen notes both requests without blinking. This is the kind of guest who reads the fine print and still enjoys the experience."
+                    },
+                    {
+                        "text_zh": "那就六楼吧。几点入住？",
+                        "text_pinyin": "nà jiù liù lóu ba. jǐ diǎn rùzhù?",
+                        "text_en": "I'll take the sixth floor. What time is check-in?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll tell you: 2 PM standard, but earlier can sometimes be arranged. Checkout is noon."
+                    },
+                    {
+                        "text_zh": "好，就这个。",
+                        "text_pinyin": "hǎo, jiù zhège.",
+                        "text_en": "OK, this one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Decision made, details pending. Ms. Shen will walk you through the rest — she always does."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "正常入住是下午三点，但是两点到的话我们可以安排提前入住，要看当天房间的情况。退房是中午十二点。行李寄存没有问题，前台可以免费保管到晚上八点。我现在帮您登记，请出示一下护照或者身份证。",
+                "text_pinyin": "zhèngcháng rùzhù shì xiàwǔ sān diǎn, dànshì liǎng diǎn dào de huà wǒmen kěyǐ ānpái tíqián rùzhù, yào kàn dāngtiān fángjiān de qíngkuàng. tuìfáng shì zhōngwǔ shí'èr diǎn. xíngli jìcún méiyǒu wèntí, qiántái kěyǐ miǎnfèi bǎoguǎn dào wǎnshang bā diǎn. wǒ xiànzài bāng nín dēngjì, qǐng chūshì yíxià hùzhào huòzhě shēnfènzhèng.",
+                "text_en": "Standard check-in is 3 PM, but if you arrive at 2 we can try to arrange early check-in, depending on room availability that day. Checkout is noon. Luggage storage is no problem — the front desk holds it free until 8 PM. I'll register you now — may I see your passport or ID?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your passport and ask about local recommendations.",
+                "options": [
+                    {
+                        "text_zh": "好的，这是我的护照。对了，我看到你们柜台后面有一张手绘地图，能给我推荐几个附近走路能到的好地方吗？特别是吃早餐以外的正餐的地方。",
+                        "text_pinyin": "hǎo de, zhè shì wǒ de hùzhào. duìle, wǒ kàn dào nǐmen guìtái hòumian yǒu yì zhāng shǒuhuì dìtú, néng gěi wǒ tuījiàn jǐ gè fùjìn zǒulù néng dào de hǎo dìfang ma? tèbié shì chī zǎocān yǐwài de zhèngcān de dìfang.",
+                        "text_en": "Here's my passport. By the way, I noticed the hand-drawn map behind the counter — can you recommend some good places within walking distance? Especially for meals beyond breakfast.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Noticing the map — Ms. Shen's face lights up. She pulls it out, smoothing it on the counter like a captain unfurling a navigation chart. Every restaurant recommendation comes with a story about who runs it and what to order first."
+                    },
+                    {
+                        "text_zh": "这是护照。附近有什么好吃的吗？",
+                        "text_pinyin": "zhè shì hùzhào. fùjìn yǒu shénme hǎochī de ma?",
+                        "text_en": "Here's my passport. Any good food nearby?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She has opinions. The map comes out. She circles three spots in red — her personal top tier."
+                    },
+                    {
+                        "text_zh": "护照在这里。没别的事了。",
+                        "text_pinyin": "hùzhào zài zhèlǐ. méi bié de shì le.",
+                        "text_en": "Passport's here. Nothing else.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Shen processes the passport efficiently. The map stays behind the counter — a treasure you walked past without opening."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了，这张地图是我自己画的！红色标记的是我最推荐的。出门左转走三分钟有一家本帮菜馆，红烧肉做得特别好。往右走有一条小巷子，里面有一家咖啡馆和一家书店，很适合下午去坐坐。好了，登记完了。这是您的预订确认单和房卡。",
+                "text_pinyin": "tài hǎo le, zhè zhāng dìtú shì wǒ zìjǐ huà de! hóngsè biāojì de shì wǒ zuì tuījiàn de. chū mén zuǒ zhuǎn zǒu sān fēnzhōng yǒu yì jiā běnbāng cài guǎn, hóngshāo ròu zuò de tèbié hǎo. wǎng yòu zǒu yǒu yì tiáo xiǎo xiàngzi, lǐmian yǒu yì jiā kāfēi guǎn hé yì jiā shūdiàn, hěn shìhé xiàwǔ qù zuòzuo. hǎo le, dēngjì wán le. zhè shì nín de yùdìng quèrèn dān hé fáng kǎ.",
+                "text_en": "Great — I drew this map myself! The red marks are my top picks. Turn left out the door, three minutes' walk to a Shanghainese restaurant with amazing braised pork. Turn right and there's an alley with a café and a bookstore — perfect for an afternoon visit. All set — here's your booking confirmation and room key."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm the booking.",
+                "options": [
+                    {
+                        "text_zh": "这张地图太棒了，你画得真用心。红烧肉那家我一定去试试。沈小姐，非常感谢你的帮助，周四见！",
+                        "text_pinyin": "zhè zhāng dìtú tài bàng le, nǐ huà de zhēn yòngxīn. hóngshāo ròu nà jiā wǒ yídìng qù shìshi. Shěn xiǎojiě, fēicháng gǎnxiè nǐ de bāngzhù, zhōusì jiàn!",
+                        "text_en": "This map is wonderful — you really put your heart into it. I'll definitely try the braised pork place. Ms. Shen, thank you so much for your help — see you Thursday!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Appreciating the map's artistry and committing to a recommendation — Ms. Shen folds a copy of the map and slides it into your confirmation envelope. Some hotels give you a city; she gives you a neighborhood."
+                    },
+                    {
+                        "text_zh": "谢谢沈小姐，周四见。",
+                        "text_pinyin": "xièxie Shěn xiǎojiě, zhōusì jiàn.",
+                        "text_en": "Thanks, Ms. Shen. See you Thursday.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Warm and efficient. She waves. The ceiling fan turns. The ferns sway. Thursday is three sleeps away."
+                    },
+                    {
+                        "text_zh": "好的，再见。",
+                        "text_pinyin": "hǎo de, zàijiàn.",
+                        "text_en": "OK, bye.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Shen watches you go and returns the map to its hook. The red marks will be there when you're ready for them."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese hotels require passport or ID registration (登记) by law. Boutique hotels in historic districts like Shanghai's French Concession (法租界) often have knowledgeable staff who serve as informal neighborhood guides. 本帮菜 (běnbāng cài) refers to traditional Shanghainese cuisine. The 打折 (dǎzhé) discount system works in tenths: 九折 means 90% of the price (10% off)."
+    }
+}

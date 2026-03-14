@@ -1,0 +1,123 @@
+{
+    "title": "Comparing Favorite Seasons",
+    "title_zh": "最喜欢的季节",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You and your friend Xiao Lin are sitting on a bench by the lake in the park. Autumn leaves are falling around you. Xiao Lin looks up at the trees and starts talking about seasons.",
+        "setup_zh": "你和朋友小林坐在公园湖边的长椅上。秋天的树叶正在飘落。小林抬头看着树，开始聊季节。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这些叶子，红的、黄的、橘的，真好看。我最喜欢秋天了。你呢？你最喜欢什么季节？",
+                "text_pinyin": "Nǐ kàn zhèxiē yèzi, hóng de, huáng de, jú de, zhēn hǎokàn. Wǒ zuì xǐhuan qiūtiān le. Nǐ ne? Nǐ zuì xǐhuan shénme jìjié?",
+                "text_en": "Look at these leaves — red, yellow, orange — so pretty. I love autumn the most. What about you? What's your favorite season?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your favorite season.",
+                "options": [
+                    {
+                        "text_zh": "我最喜欢春天。到处都是花，空气新鲜，每次春天来了都特别开心。",
+                        "text_pinyin": "Wǒ zuì xǐhuan chūntiān. Dàochù dōu shì huā, kōngqì xīnxiān, měi cì chūntiān lái le dōu tèbié kāixīn.",
+                        "text_en": "I like spring the most. Flowers everywhere, the air is fresh — every time spring comes I'm really happy.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Expressive and personal — paints a vivid picture of why you love spring."
+                    },
+                    {
+                        "text_zh": "我也喜欢秋天。",
+                        "text_pinyin": "Wǒ yě xǐhuan qiūtiān.",
+                        "text_en": "I like autumn too.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreement but doesn't add your own perspective."
+                    },
+                    {
+                        "text_zh": "我没有特别喜欢的季节。",
+                        "text_pinyin": "Wǒ méiyǒu tèbié xǐhuan de jìjié.",
+                        "text_en": "I don't have a particular favorite season.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Misses a chance to share and connect."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "春天也很美！但是我觉得秋天有一种特别的感觉——不热也不冷，而且看着叶子变颜色，感觉时间过得很慢。你觉得每个季节都有什么特别的地方吗？",
+                "text_pinyin": "Chūntiān yě hěn měi! Dànshì wǒ juéde qiūtiān yǒu yī zhǒng tèbié de gǎnjué — bú rè yě bù lěng, érqiě kàn zhe yèzi biàn yánsè, gǎnjué shíjiān guò de hěn màn. Nǐ juéde měi ge jìjié dōu yǒu shénme tèbié de dìfang ma?",
+                "text_en": "Spring is beautiful too! But I feel autumn has a special quality — not hot, not cold, and watching the leaves change color makes time feel slow. Do you think every season has something special?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share something special about each season.",
+                "options": [
+                    {
+                        "text_zh": "对啊。春天看花，夏天吃西瓜，秋天看树叶，冬天喝热茶。每个季节都挺好的。",
+                        "text_pinyin": "Duì a. Chūntiān kàn huā, xiàtiān chī xīguā, qiūtiān kàn shùyè, dōngtiān hē rè chá. Měi ge jìjié dōu tǐng hǎo de.",
+                        "text_en": "Yeah. Spring you watch flowers, summer eat watermelon, autumn enjoy the leaves, winter drink hot tea. Every season's got something.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And balanced — finds joy in every season."
+                    },
+                    {
+                        "text_zh": "大概吧，我没想过这个问题。",
+                        "text_pinyin": "Dàgài ba, wǒ méi xiǎng guò zhège wèntí.",
+                        "text_en": "Probably, I've never thought about it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest but doesn't engage with the reflection."
+                    },
+                    {
+                        "text_zh": "夏天太热了，冬天太冷了，我觉得只有春天和秋天好。",
+                        "text_pinyin": "Xiàtiān tài rè le, dōngtiān tài lěng le, wǒ juéde zhǐyǒu chūntiān hé qiūtiān hǎo.",
+                        "text_en": "Summer is too hot, winter is too cold — I think only spring and autumn are good.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Opinionated but a bit negative about half the year."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得真好！我以前不喜欢冬天，但是后来发现冬天在家里看书喝茶确实很舒服。谢谢你，今天这个下午真开心。",
+                "text_pinyin": "Nǐ shuō de zhēn hǎo! Wǒ yǐqián bù xǐhuan dōngtiān, dànshì hòulái fāxiàn dōngtiān zài jiālǐ kàn shū hē chá quèshí hěn shūfu. Xièxie nǐ, jīntiān zhège xiàwǔ zhēn kāixīn.",
+                "text_en": "That's so well put! I used to not like winter, but later I found that reading and drinking tea at home in winter is actually really comfortable. Thank you — this afternoon has been so nice."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond warmly to close the conversation.",
+                "options": [
+                    {
+                        "text_zh": "我也很开心。下次春天，我们再来这里看花吧。",
+                        "text_pinyin": "Wǒ yě hěn kāixīn. Xià cì chūntiān, wǒmen zài lái zhèlǐ kàn huā ba.",
+                        "text_en": "I'm happy too. Next spring, let's come back here to see the flowers.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and forward-looking — makes a gentle plan for the future."
+                    },
+                    {
+                        "text_zh": "嗯，今天确实不错。",
+                        "text_pinyin": "En, jīntiān quèshí búcuò.",
+                        "text_en": "Yeah, today was nice.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreeable but doesn't extend the warmth."
+                    },
+                    {
+                        "text_zh": "好了，该回家了。",
+                        "text_pinyin": "Hǎo le, gāi huí jiā le.",
+                        "text_en": "Alright, time to head home.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Abrupt end to a gentle moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Appreciating the changing seasons is deeply embedded in Chinese culture. Each season has its associated activities, foods, and feelings. The practice of sitting with a friend and simply watching nature — without needing to do anything — reflects the Chinese value of being present in the moment."
+    },
+    "hsk_level": 3
+}

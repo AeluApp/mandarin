@@ -1,0 +1,89 @@
+{
+    "title": "The Question That Has No Rush",
+    "title_zh": "不急着回答的问题",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "Late at night, you and your friend Xiaochen are the last two people in a small café. He's thirty-five and says he still doesn't know what his life is for.",
+        "setup_zh": "深夜，你和朋友小辰是一家小咖啡馆里最后两个人。他三十五岁了，说他还是不知道自己活着是为了什么。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "三十五了。按照社会的标准，我应该已经找到了自己的「使命」或者「方向」。但说实话，我还是不知道。不是说我过得不好——工作稳定，朋友不少，身体健康。但总觉得少了什么，好像在等一个答案，但又不知道问题是什么。",
+                "text_pinyin": "Sānshí wǔ le. Ànzhào shèhuì de biāozhǔn, wǒ yīnggāi yǐjīng zhǎo dào le zìjǐ de 'shǐmìng' huòzhě 'fāngxiàng'. Dàn shuō shíhuà, wǒ háishì bù zhīdào. Bú shì shuō wǒ guò de bù hǎo — gōngzuò wěndìng, péngyou bù shǎo, shēntǐ jiànkāng. Dàn zǒng juéde shǎo le shénme, hǎoxiàng zài děng yīge dá'àn, dàn yòu bù zhīdào wèntí shì shénme.",
+                "text_en": "Thirty-five. By society's standards, I should have already found my 'mission' or 'direction.' But honestly, I still don't know. It's not that my life is bad — stable job, plenty of friends, good health. But something always feels missing, like I'm waiting for an answer without knowing the question."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his feeling of purposelessness.",
+                "options": [
+                    {
+                        "text_zh": "也许'不知道'本身不是问题。我们被一种叙事绑架了——好像每个人都应该在某个年龄找到'人生使命'。但很多人一辈子都在寻找，过程本身就有意义。目的感不是找到的，是活出来的。",
+                        "text_pinyin": "Yěxǔ 'bù zhīdào' běnshēn bú shì wèntí. Wǒmen bèi yī zhǒng xùshì bǎngjià le — hǎoxiàng měi ge rén dōu yīnggāi zài mǒu ge niánlíng zhǎo dào 'rénshēng shǐmìng'. Dàn hěn duō rén yíbèizi dōu zài xúnzhǎo, guòchéng běnshēn jiù yǒu yìyì. Mùdì gǎn bú shì zhǎo dào de, shì huó chūlái de.",
+                        "text_en": "Maybe 'not knowing' isn't the problem. We've been hijacked by a narrative — as if everyone should find their 'life mission' by a certain age. But many people search their whole lives, and the searching itself is meaningful. Purpose isn't found, it's lived into being.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Liberating — dismantles the pressure of 'finding purpose' and replaces it with daily authenticity."
+                    },
+                    {
+                        "text_zh": "你应该去做一些新的尝试，比如换个工作或者学一个新技能。",
+                        "text_pinyin": "Nǐ yīnggāi qù zuò yīxiē xīn de chángshì, bǐrú huàn ge gōngzuò huòzhě xué yīge xīn jìnéng.",
+                        "text_en": "You should try something new, like changing jobs or learning a new skill.",
+                        "score": 0.0,
+                        "feedback": "Action-oriented but bypasses the existential depth he's expressing."
+                    },
+                    {
+                        "text_zh": "三十五岁还早啊，别着急。",
+                        "text_pinyin": "Sānshí wǔ suì hái zǎo a, bié zháojí.",
+                        "text_en": "Thirty-five is still young, don't worry.",
+                        "score": 0.0,
+                        "feedback": "Dismissive reassurance — doesn't engage with the real feeling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "活出来的，不是找到的……这跟我一直在想的不一样。我以为目的感是一个答案——某一天你突然顿悟了，知道了自己应该做什么。但也许它更像种子——你不知道什么时候种下的，但有一天发现它已经在长了。",
+                "text_pinyin": "Huó chūlái de, bú shì zhǎo dào de…… zhè gēn wǒ yīzhí zài xiǎng de bù yíyàng. Wǒ yǐwéi mùdì gǎn shì yīge dá'àn — mǒu yī tiān nǐ tūrán dùnwù le, zhīdào le zìjǐ yīnggāi zuò shénme. Dàn yěxǔ tā gèng xiàng zhǒngzǐ — nǐ bù zhīdào shénme shíhou zhòng xià de, dàn yǒu yī tiān fāxiàn tā yǐjīng zài zhǎng le.",
+                "text_en": "Lived into being, not found... that's different from what I'd been thinking. I thought purpose was an answer — one day you suddenly have an epiphany and know what you should do. But maybe it's more like a seed — you don't know when it was planted, but one day you notice it's already growing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer a closing thought about purpose as a growing thing.",
+                "options": [
+                    {
+                        "text_zh": "也许你的种子已经在长了，只是你没认出它。每天帮推车的老人，周末给朋友做饭，今晚愿意说出困惑——这些不是在等待目的，这就是目的正在生长的方式。先活着，它会长出来。",
+                        "text_pinyin": "Yěxǔ nǐ de zhǒngzǐ yǐjīng zài zhǎng le, zhǐ shì nǐ méi rèn chū tā. Měi tiān bāng tuī chē de lǎorén, zhōumò gěi péngyou zuòfàn, jīn wǎn yuànyì shuō chū kùnhuò — zhèxiē bú shì zài děngdài mùdì, zhè jiù shì mùdì zhèngzài shēngzhǎng de fāngshì. Xiān huó zhe, tā huì zhǎng chūlái.",
+                        "text_en": "Maybe your seed is already growing — you just haven't recognized it. Helping the old man every day, cooking for friends on weekends, voicing confusion tonight — these aren't waiting for purpose, they are purpose growing. Live first, it will grow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deeply compassionate and specific — shows him purpose is already present in his daily kindnesses."
+                    },
+                    {
+                        "text_zh": "你可以去读一些关于人生规划的书。",
+                        "text_pinyin": "Nǐ kěyǐ qù dú yīxiē guānyú rénshēng guīhuà de shū.",
+                        "text_en": "You could read some books about life planning.",
+                        "score": 0.0,
+                        "feedback": "Turns an existential conversation into a self-help prescription."
+                    },
+                    {
+                        "text_zh": "我也不知道我活着是为了什么，但我不太想这些。",
+                        "text_pinyin": "Wǒ yě bù zhīdào wǒ huó zhe shì wèile shénme, dàn wǒ bú tài xiǎng zhèxiē.",
+                        "text_en": "I don't know what I'm living for either, but I don't think about it much.",
+                        "score": 0.0,
+                        "feedback": "Avoidant — he's trying to go deeper, not looking for someone to match his confusion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "先活着，它自己会长出来……嗯。也许我一直在找的那个答案，其实一直在我身边。只是它太安静了，被我对宏大目标的执念遮住了。谢谢你。这杯最后的咖啡，是今晚最好的味道。",
+                "text_pinyin": "Xiān huó zhe, tā zìjǐ huì zhǎng chūlái…… en. Yěxǔ wǒ yīzhí zài zhǎo de nàge dá'àn, qíshí yīzhí zài wǒ shēnbiān. Zhǐ shì tā tài ānjìng le, bèi wǒ duì hóngdà mùbiāo de zhíniàn zhē zhù le. Xièxie nǐ. Zhè bēi zuìhòu de kāfēi, shì jīn wǎn zuì hǎo de wèidào.",
+                "text_en": "Live first, and it will grow on its own... yes. Maybe the answer I've been looking for has been beside me all along. It was just too quiet, obscured by my fixation on grand goals. Thank you. This last cup of coffee is the best taste of the evening."
+            }
+        ],
+        "cultural_note": "The question of purpose (人生意义) weighs heavily on many Chinese adults who grew up with clear, externally defined goals (study hard, pass exams, get a good job) but find themselves directionless once those milestones are achieved. The concept of「活出来」(huó chūlái, lived into being) echoes both existentialist philosophy and Chinese Buddhist practice — the idea that meaning emerges through engaged living rather than intellectual discovery. The midnight café conversation between friends is itself an example of purpose manifesting: authentic human connection."
+    }
+}

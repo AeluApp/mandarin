@@ -1,0 +1,83 @@
+{
+    "title": "The Rooftop Clothesline",
+    "title_zh": "天台上的衣服",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You go up to the rooftop to hang laundry and find your elderly neighbor already there, watching the clouds while her sheets dry in the wind.",
+        "setup_zh": "你到天台上去晒衣服，发现楼上的老奶奶已经在那里了，一边看云一边等被单晒干。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "上来啦？今天的风正好，衣服很快就能干。你看那些云，走得好快。我小时候觉得云是活的，会走路。现在还是这样觉得。",
+                "text_pinyin": "Shàng lái la? Jīntiān de fēng zhènghǎo, yīfu hěn kuài jiù néng gān. Nǐ kàn nàxiē yún, zǒu de hǎo kuài. Wǒ xiǎo shíhou juéde yún shì huó de, huì zǒulù. Xiànzài háishi zhèyàng juéde.",
+                "text_en": "You're up! The wind is perfect today — clothes will dry quickly. Look at those clouds, moving so fast. As a child I thought clouds were alive, that they walked. I still think so."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her view of clouds as alive.",
+                "options": [
+                    {
+                        "text_zh": "云是活的——我喜欢这个想法。有自己的方向和速度，每朵云都不会再来第二次。也许云真的是活的，只是大人不愿意这样想了。",
+                        "text_pinyin": "Yún shì huó de — wǒ xǐhuan zhège xiǎngfǎ. Yǒu zìjǐ de fāngxiàng hé sùdù, měi duǒ yún dōu bú huì zài lái dì èr cì. Yěxǔ yún zhēn de shì huó de, zhǐ shì dàrén bú yuànyì zhèyàng xiǎng le.",
+                        "text_en": "Clouds are alive — I love that. Their own direction and speed, each cloud never comes again. Maybe clouds really are alive — adults just don't want to think that way.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Each cloud unique and unrepeatable — childlike seeing as deeper truth."
+                    },
+                    {
+                        "text_zh": "今天风大，衣服可能会被吹跑。",
+                        "text_pinyin": "Jīntiān fēng dà, yīfu kěnéng huì bèi chuī pǎo.",
+                        "text_en": "It's windy today, the clothes might blow away.",
+                        "score": 0.0,
+                        "feedback": "A practical worry during a whimsical moment."
+                    },
+                    {
+                        "text_zh": "下午会下雨吗？",
+                        "text_pinyin": "Xiàwǔ huì xià yǔ ma?",
+                        "text_en": "Will it rain this afternoon?",
+                        "score": 0.0,
+                        "feedback": "Weather prediction instead of cloud-gazing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈哈，你跟我想的一样。我老伴以前也喜欢来天台看云。他说「云是最自由的，没有人能管它去哪里」。我觉得天台是这栋楼最好的地方——离天最近。",
+                "text_pinyin": "Hāhā, nǐ gēn wǒ xiǎng de yīyàng. Wǒ lǎobàn yǐqián yě xǐhuan lái tiāntái kàn yún. Tā shuō 'yún shì zuì zìyóu de, méiyǒu rén néng guǎn tā qù nǎlǐ'. Wǒ juéde tiāntái shì zhè dòng lóu zuì hǎo de dìfang — lí tiān zuì jìn.",
+                "text_en": "Haha, you think just like me. My late husband also loved coming to the roof to watch clouds. He said, 'Clouds are the freest — nobody can tell them where to go.' I think the rooftop is the best place in this building — closest to the sky."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her memory of watching clouds together.",
+                "options": [
+                    {
+                        "text_zh": "离天最近——也许也离他最近。每次您来天台看云，也许他也在某朵云里看着您。他说得对，云是自由的。也许那是最好的方式。",
+                        "text_pinyin": "Lí tiān zuì jìn — yěxǔ yě lí tā zuì jìn. Měi cì nín lái tiāntái kàn yún, yěxǔ tā yě zài mǒu duǒ yún lǐ kàn zhe nín. Tā shuō de duì, yún shì zìyóu de. Yěxǔ nà shì zuì hǎo de fāngshì.",
+                        "text_en": "Closest to the sky — and maybe closest to him. Every time you watch clouds from the roof, maybe he's watching from one. He was right, clouds are free. Maybe that's the best way.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Transforms the rooftop into a meeting place between here and elsewhere — tender and gentle."
+                    },
+                    {
+                        "text_zh": "您经常来天台吗？",
+                        "text_pinyin": "Nín jīngcháng lái tiāntái ma?",
+                        "text_en": "Do you come to the roof often?",
+                        "score": 0.0,
+                        "feedback": "A frequency question during a moment about love and loss."
+                    },
+                    {
+                        "text_zh": "天台可以种花。",
+                        "text_pinyin": "Tiāntái kěyǐ zhòng huā.",
+                        "text_en": "You could grow flowers on the roof.",
+                        "score": 0.0,
+                        "feedback": "A gardening suggestion during an intimate memory."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rooftops (天台) in Chinese apartment buildings are shared spaces for laundry but also serve as open-air sanctuaries. For older residents especially, the rooftop is where daily chores meet contemplation. Watching clouds together is a quiet but deeply intimate activity, and the phrase 离天最近 takes on layered meaning when the other person has passed away."
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "title": "The Fruit Auntie's Best Picks",
+    "title_zh": "水果阿姨的好水果",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_shopping_1_00_v0",
+    "tree": {
+        "setup": "A morning fruit market under a canopy of tarps. Auntie Huang arranges her apples with the care of a museum curator -- each one facing the same direction, stems aligned. She believes you can tell a person's character by which fruit they choose first.",
+        "setup_zh": "早市的水果摊，蓝色帆布棚下。黄阿姨摆苹果像在布展——每个朝同一个方向，果柄对齐。她相信从一个人先选什么水果就能看出性格。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来看看！今天的水果很好！",
+                "text_pinyin": "lái kànkan! jīntiān de shuǐguǒ hěn hǎo!",
+                "text_en": "Come look! Today's fruit is great!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the fruit.",
+                "options": [
+                    {
+                        "text_zh": "苹果多少钱？",
+                        "text_pinyin": "píngguǒ duōshao qián?",
+                        "text_en": "How much are the apples?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Huang picks one up and holds it to the light like a jewel.「五块钱一斤。今天的特别甜。」多少钱 is the essential price-asking phrase."
+                    },
+                    {
+                        "text_zh": "这个是什么？",
+                        "text_pinyin": "zhè ge shì shénme?",
+                        "text_en": "What is this?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "You point at a strange bumpy fruit. Auntie Huang lights up:「这是荔枝！很好吃！」She loves explaining her inventory."
+                    },
+                    {
+                        "text_zh": "太贵了。",
+                        "text_pinyin": "tài guì le.",
+                        "text_en": "Too expensive.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Huang hasn't even told you the price yet. She narrows her eyes. Starting negotiations before the opening offer is bold, if premature."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你要几斤？",
+                "text_pinyin": "nǐ yào jǐ jīn?",
+                "text_en": "How many jin do you want?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her how much you want.",
+                "options": [
+                    {
+                        "text_zh": "两斤，谢谢。",
+                        "text_pinyin": "liǎng jīn, xièxie.",
+                        "text_en": "Two jin, thanks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Huang selects each apple by hand, rejecting two that don't meet her standards. She puts them in a bag with a satisfied nod. 斤 (jīn) is about 500 grams -- the standard market unit."
+                    },
+                    {
+                        "text_zh": "一斤。",
+                        "text_pinyin": "yì jīn.",
+                        "text_en": "One jin.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A modest amount. Auntie Huang gives you a look that says she knows you'll be back for more tomorrow."
+                    },
+                    {
+                        "text_zh": "我要一个。",
+                        "text_pinyin": "wǒ yào yí gè.",
+                        "text_en": "I want one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Huang pauses. Fruit is sold by weight (斤), not by the piece, at most markets. But she sighs and picks you out the best single apple she has, because she's a professional."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "十块钱。明天还来啊！",
+                "text_pinyin": "shí kuài qián. míngtiān hái lái a!",
+                "text_en": "Ten yuan. Come back tomorrow!"
+            }
+        ],
+        "cultural_note": "Chinese markets sell fruit by the 斤 (jīn, about 500g), not by the piece. Vendors often hand-select the best pieces for repeat customers. Building a relationship with your regular fruit vendor is a small but real part of daily life."
+    }
+}

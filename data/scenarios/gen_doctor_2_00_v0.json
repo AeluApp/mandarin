@@ -1,0 +1,124 @@
+{
+    "title": "Dr. Chen's Careful Ear",
+    "title_zh": "陈医生仔细听",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_doctor_2_00_v0",
+    "tree": {
+        "setup": "A neighborhood clinic with pale green walls and a poster about hand-washing that has been there since 2008. Dr. Chen is a young doctor who listens to every patient with the same gentle intensity, leaning forward slightly, nodding at intervals. She believes that most diagnoses begin with good listening. Her stethoscope is draped over her shoulders like a scarf.",
+        "setup_zh": "社区诊所，淡绿色的墙壁，一张2008年就有的洗手海报。陈医生是个年轻的大夫，每个病人她都认真听，微微前倾，时不时点头。她觉得好的诊断从好的倾听开始。听诊器搭在肩上像围巾。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。哪里不舒服？",
+                "text_pinyin": "qǐng zuò. nǎlǐ bù shūfu?",
+                "text_en": "Please sit. Where are you uncomfortable?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your symptoms.",
+                "options": [
+                    {
+                        "text_zh": "我头疼，而且有点发烧。",
+                        "text_pinyin": "wǒ tóu téng, érqiě yǒudiǎn fā shāo.",
+                        "text_en": "I have a headache, and I have a slight fever.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Dr. Chen nods and reaches for her thermometer.「什么时候开始的？」她问。Listing symptoms with 而且 (érqiě, 'and also') gives a clear picture. 头疼 and 发烧 are essential medical vocab."
+                    },
+                    {
+                        "text_zh": "我不太舒服。",
+                        "text_pinyin": "wǒ bú tài shūfu.",
+                        "text_en": "I don't feel too well.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Dr. Chen waits for more details. 不太舒服 is a good start, but she needs specifics.「能说得具体一点吗？」Try mentioning which part of your body hurts."
+                    },
+                    {
+                        "text_zh": "我嗓子疼，不想吃东西。",
+                        "text_pinyin": "wǒ sǎngzi téng, bù xiǎng chī dōngxi.",
+                        "text_en": "My throat hurts and I don't want to eat.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Dr. Chen asks you to open your mouth.「啊——」She shines a small flashlight. Describing symptoms as [body part] + 疼 is the most useful medical pattern at this level."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "从什么时候开始的？",
+                "text_pinyin": "cóng shénme shíhou kāishǐ de?",
+                "text_en": "When did it start?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her when it started.",
+                "options": [
+                    {
+                        "text_zh": "从昨天晚上开始的。",
+                        "text_pinyin": "cóng zuótiān wǎnshang kāishǐ de.",
+                        "text_en": "Since last night.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Dr. Chen writes this down.「不到一天，还好。」从...开始 is the pattern for 'since.' She's already forming a diagnosis."
+                    },
+                    {
+                        "text_zh": "两三天了。",
+                        "text_pinyin": "liǎng sān tiān le.",
+                        "text_en": "Two or three days.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Dr. Chen looks slightly more concerned.「来得有点晚了。」She examines you more thoroughly. Using approximate numbers (两三, liǎng sān) is very natural in Chinese."
+                    },
+                    {
+                        "text_zh": "我不记得了。",
+                        "text_pinyin": "wǒ bú jìde le.",
+                        "text_en": "I don't remember.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Dr. Chen asks follow-up questions patiently. She'll figure it out. Doctors are used to patients who can't pinpoint when symptoms began."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "应该是感冒了。我给你开点药。多喝水，好好休息。",
+                "text_pinyin": "yīnggāi shì gǎnmào le. wǒ gěi nǐ kāi diǎn yào. duō hē shuǐ, hǎohǎo xiūxi.",
+                "text_en": "It's probably a cold. I'll prescribe some medicine. Drink lots of water and rest well."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask a follow-up question.",
+                "options": [
+                    {
+                        "text_zh": "谢谢医生。要吃几天的药？",
+                        "text_pinyin": "xièxie yīshēng. yào chī jǐ tiān de yào?",
+                        "text_en": "Thank you, doctor. How many days should I take the medicine?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Dr. Chen writes it on the prescription:「三天，每天三次。」吃药 (chī yào) literally means 'eat medicine' -- the standard way to say 'take medicine' in Chinese."
+                    },
+                    {
+                        "text_zh": "需要打针吗？",
+                        "text_pinyin": "xūyào dǎ zhēn ma?",
+                        "text_en": "Do I need an injection?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Dr. Chen shakes her head.「不用，吃药就好。」She's not one of those doctors who prescribes injections for everything. 打针 is 'to get an injection.'"
+                    },
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Dr. Chen smiles and walks you to the door. She'll be here if the cold doesn't improve in three days."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese clinics (诊所) are more casual than hospitals. 多喝水 (duō hē shuǐ, 'drink more water') is practically a national prescription -- you'll hear it for every ailment. Chinese medicine culture often involves both Western and traditional remedies."
+    }
+}

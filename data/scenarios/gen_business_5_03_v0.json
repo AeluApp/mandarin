@@ -1,0 +1,196 @@
+{
+    "title": "The Raise as a River Crossing",
+    "title_zh": "加薪如渡河",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_business_5_03_v0",
+    "tree": {
+        "setup": "Department Head Liang's office at 4:47 PM — you chose this time strategically, knowing she's at her most contemplative after her afternoon tea and before the end-of-day rush. Her office has a calligraphy scroll that reads「静以修身」(tranquility cultivates character), which feels like either philosophical guidance or a warning about the conversation you're about to have. You've been with the company for two years, taken on three extra projects, and your annual review was「exceeds expectations.」Today you ask for what the market says you're worth.",
+        "setup_zh": "下午四点四十七分，梁部长的办公室——你特意选了这个时间，知道她在下午茶之后、下班前的忙碌之前最沉思。她办公室里挂着一幅写着「静以修身」的书法，感觉像是人生哲理的指引，又像是对你即将进行的谈话的一种警告。你在公司已经两年了，额外承担了三个项目，年度评估是「超出预期」。今天你要争取市场说你值得的薪资。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请进，坐吧。你说有事想谈？",
+                "text_pinyin": "qǐng jìn, zuò ba. nǐ shuō yǒu shì xiǎng tán?",
+                "text_en": "Come in, sit down. You said you wanted to discuss something?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Open the salary discussion.",
+                "options": [
+                    {
+                        "text_zh": "梁部长，谢谢您抽时间。我想跟您聊一下薪资调整的事。过去两年我的工作范围扩大了不少，包括负责了三个额外的项目，去年的评估结果也是超出预期。我觉得是时候讨论一下薪酬是不是能反映这些变化。",
+                        "text_pinyin": "Liáng bùzhǎng, xièxie nín chōu shíjiān. wǒ xiǎng gēn nín liáo yíxià xīnzī tiáozhěng de shì. guòqù liǎng nián wǒ de gōngzuò fànwéi kuòdà le bù shǎo, bāokuò fùzé le sān gè éwài de xiàngmù, qùnián de pínggū jiéguǒ yě shì chāochū yùqī. wǒ juéde shì shíhòu tǎolùn yíxià xīnchóu shì búshì néng fǎnyìng zhèxiē biànhuà.",
+                        "text_en": "Department Head Liang, thank you for making time. I'd like to discuss a salary adjustment. Over the past two years my scope has expanded significantly, including taking on three additional projects, and my last review was 'exceeds expectations.' I think it's time to discuss whether my compensation can reflect these changes.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Evidence-based, respectful, framed as a discussion rather than a demand — Department Head Liang leans back, which means she's listening seriously."
+                    },
+                    {
+                        "text_zh": "我想谈谈加薪的事。",
+                        "text_pinyin": "wǒ xiǎng tán tán jiā xīn de shì.",
+                        "text_en": "I'd like to talk about a raise.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Direct. She waits for the reasoning — which is the part that matters."
+                    },
+                    {
+                        "text_zh": "我觉得我的工资太低了。",
+                        "text_pinyin": "wǒ juéde wǒ de gōngzī tài dī le.",
+                        "text_en": "I think my salary is too low.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A complaint rather than a case. Department Head Liang glances at the calligraphy scroll.「静以修身。」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我注意到你这两年的表现确实很出色。那你心里有一个具体的数字吗？还是说我们先聊一下你的期望？",
+                "text_pinyin": "wǒ zhùyì dào nǐ zhè liǎng nián de biǎoxiàn quèshí hěn chūsè. nà nǐ xīnlǐ yǒu yí gè jùtǐ de shùzì ma? háishi shuō wǒmen xiān liáo yíxià nǐ de qīwàng?",
+                "text_en": "I've noticed your performance over the past two years has been excellent. Do you have a specific number in mind, or shall we discuss your expectations first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your salary expectation.",
+                "options": [
+                    {
+                        "text_zh": "我做了一些调研。目前市场上同等职位和经验的薪资水平大概在月薪两万到两万五之间。考虑到我现在的薪资和承担的工作量，我觉得百分之二十的调整是比较合理的。",
+                        "text_pinyin": "wǒ zuò le yìxiē diàoyán. mùqián shìchǎng shàng tóngděng zhíwèi hé jīngyàn de xīnzī shuǐpíng dàgài zài yuèxīn liǎng wàn dào liǎng wàn wǔ zhī jiān. kǎolǜ dào wǒ xiànzài de xīnzī hé chéngdān de gōngzuò liàng, wǒ juéde bǎifēnzhī èrshí de tiáozhěng shì bǐjiào hélǐ de.",
+                        "text_en": "I've done some research. The current market rate for equivalent positions and experience is about 20,000 to 25,000 per month. Considering my current salary and workload, I think a 20% adjustment is reasonable.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Market data, a percentage rather than an ultimatum, and the word「合理」— Department Head Liang respects someone who prepares for this conversation the way they'd prepare for a client meeting."
+                    },
+                    {
+                        "text_zh": "我希望能涨百分之二十左右。",
+                        "text_pinyin": "wǒ xīwàng néng zhǎng bǎifēnzhī èrshí zuǒyòu.",
+                        "text_en": "I'm hoping for about a 20% increase.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "The number is reasonable; the reasoning is assumed. She'll want to know why."
+                    },
+                    {
+                        "text_zh": "越多越好，您看着办。",
+                        "text_pinyin": "yuè duō yuè hǎo, nín kàn zhe bàn.",
+                        "text_en": "As much as possible — you decide.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Deflecting the negotiation to the other side. Department Head Liang's expression suggests this is not the strategy she would recommend."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "百分之二十……说实话，今年公司的预算比较紧。不过你的贡献我是认可的。我可以先提百分之十五，然后在半年后根据新项目的情况再评估一次。你觉得呢？",
+                "text_pinyin": "bǎifēnzhī èrshí……shuō shíhuà, jīnnián gōngsī de yùsuàn bǐjiào jǐn. búguò nǐ de gòngxiàn wǒ shì rènkě de. wǒ kěyǐ xiān tí bǎifēnzhī shíwǔ, ránhòu zài bàn nián hòu gēnjù xīn xiàngmù de qíngkuàng zài pínggū yí cì. nǐ juéde ne?",
+                "text_en": "Twenty percent... honestly, the company budget is tight this year. But I recognize your contributions. I can offer 15% first, then re-evaluate in six months based on the new project. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the counter-offer.",
+                "options": [
+                    {
+                        "text_zh": "我理解预算的限制。百分之十五加上半年后的评估机会，我可以接受。不过我能不能请您把半年后再评估这个承诺写进邮件里？这样对我们双方都有一个明确的参考。",
+                        "text_pinyin": "wǒ lǐjiě yùsuàn de xiànzhì. bǎifēnzhī shíwǔ jiā shàng bàn nián hòu de pínggū jīhuì, wǒ kěyǐ jiēshòu. búguò wǒ néng bu néng qǐng nín bǎ bàn nián hòu zài pínggū zhège chéngnuò xiě jìn yóujiàn lǐ? zhèyàng duì wǒmen shuāngfāng dōu yǒu yí gè míngquè de cānkǎo.",
+                        "text_en": "I understand the budget constraints. 15% plus a six-month review opportunity — I can accept that. But could you put the six-month review commitment in an email? That gives both of us a clear reference point.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Accepting the counter but requesting documentation — Department Head Liang nods. Written commitments survive budget cycles; verbal ones sometimes don't."
+                    },
+                    {
+                        "text_zh": "好吧，百分之十五也行。",
+                        "text_pinyin": "hǎo ba, bǎifēnzhī shíwǔ yě xíng.",
+                        "text_en": "OK, 15% works too.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreed without securing the follow-up. The six-month review may or may not materialize."
+                    },
+                    {
+                        "text_zh": "百分之十五太少了。能不能再多一点？",
+                        "text_pinyin": "bǎifēnzhī shíwǔ tài shǎo le. néng bu néng zài duō yìdiǎn?",
+                        "text_en": "15% is too little. Can it be more?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Pushing without new reasoning. She just explained the budget constraint — repeating the ask without new information rarely moves the needle."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "可以，我今天就发一封确认邮件给你。除了薪资以外，你对职业发展还有什么想法？比如岗位晋升或者培训方面？",
+                "text_pinyin": "kěyǐ, wǒ jīntiān jiù fā yì fēng quèrèn yóujiàn gěi nǐ. chúle xīnzī yǐwài, nǐ duì zhíyè fāzhǎn hái yǒu shénme xiǎngfǎ? bǐrú gǎngwèi jìnshēng huòzhě péixùn fāngmiàn?",
+                "text_en": "Sure, I'll send a confirmation email today. Besides salary, do you have any thoughts on career development? Like promotion or training opportunities?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss career development goals.",
+                "options": [
+                    {
+                        "text_zh": "确实有想过。如果明年有团队主管的机会，我很感兴趣。另外，公司如果有高级项目管理的培训课程，我也想参加。我觉得这对我现在负责的项目也会有帮助。",
+                        "text_pinyin": "quèshí yǒu xiǎng guò. rúguǒ míngnián yǒu tuánduì zhǔguǎn de jīhuì, wǒ hěn gǎn xìngqù. lìngwài, gōngsī rúguǒ yǒu gāojí xiàngmù guǎnlǐ de péixùn kèchéng, wǒ yě xiǎng cānjiā. wǒ juéde zhè duì wǒ xiànzài fùzé de xiàngmù yě huì yǒu bāngzhù.",
+                        "text_en": "I have thought about it. If there's a team lead opportunity next year, I'm very interested. Also, if the company offers advanced project management training, I'd like to attend. I think it would benefit my current projects too.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Framing development as mutual benefit — Department Head Liang makes a note. She's already thinking about next year's org chart."
+                    },
+                    {
+                        "text_zh": "暂时没有，先把薪资的事定下来吧。",
+                        "text_pinyin": "zànshí méiyǒu, xiān bǎ xīnzī de shì dìng xiàlái ba.",
+                        "text_en": "Not right now — let's settle the salary first.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Focused but missing an opportunity. She was offering something beyond money."
+                    },
+                    {
+                        "text_zh": "只要钱到位就行。",
+                        "text_pinyin": "zhǐyào qián dào wèi jiù xíng.",
+                        "text_en": "As long as the money's right, that's enough.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Department Head Liang glances at the calligraphy again.「静以修身」has never felt more relevant."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，明年确实有一些调整的计划。我会留意适合你的机会。那今天就先谈到这里，我去发邮件。",
+                "text_pinyin": "hǎo de, míngnián quèshí yǒu yìxiē tiáozhěng de jìhuà. wǒ huì liúyì shìhé nǐ de jīhuì. nà jīntiān jiù xiān tán dào zhèlǐ, wǒ qù fā yóujiàn.",
+                "text_en": "Good — there are indeed some restructuring plans for next year. I'll keep an eye out for opportunities that suit you. Let's wrap up here for today — I'll go send that email."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and close the meeting.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢梁部长。我很感激您的支持和理解。收到邮件以后我会确认回复。今后我会继续努力，不辜负您的信任。",
+                        "text_pinyin": "fēicháng gǎnxiè Liáng bùzhǎng. wǒ hěn gǎnjī nín de zhīchí hé lǐjiě. shōu dào yóujiàn yǐhòu wǒ huì quèrèn huífù. jīnhòu wǒ huì jìxù nǔlì, bú gūfù nín de xìnrèn.",
+                        "text_en": "Thank you very much, Department Head Liang. I really appreciate your support and understanding. I'll reply to confirm once I receive the email. I'll continue working hard to live up to your trust.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Gratitude, follow-up commitment, and a forward-looking promise — she appreciates the professionalism. The calligraphy scroll approves."
+                    },
+                    {
+                        "text_zh": "谢谢梁部长，辛苦您了。",
+                        "text_pinyin": "xièxie Liáng bùzhǎng, xīnkǔ nín le.",
+                        "text_en": "Thank you, Department Head Liang. Sorry for the trouble.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Polite and appropriate. She waves you out — the email arrives before you reach your desk."
+                    },
+                    {
+                        "text_zh": "好的，拜拜。",
+                        "text_pinyin": "hǎo de, báibái.",
+                        "text_en": "OK, bye-bye.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "拜拜 to your boss after a salary negotiation is... a choice. She pretends not to notice."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Salary negotiations in China (薪资谈判, xīnzī tánpàn) often happen during annual reviews or after significant achievements. Using market data (市场水平, shìchǎng shuǐpíng) strengthens your position. Getting commitments in writing (邮件确认) is increasingly standard in Chinese workplaces. Framing development goals as benefiting both you and the company shows the collaborative spirit valued in Chinese business culture."
+    }
+}

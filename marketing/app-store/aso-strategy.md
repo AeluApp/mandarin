@@ -2,7 +2,7 @@
 
 ## Overview
 
-Mandarin occupies a specific niche: serious adult Chinese learners who are underserved by gamified apps. The ASO strategy targets this audience directly rather than competing for the broadest possible search terms. The approach favors high-intent, lower-volume keywords over high-volume, low-intent ones.
+Aelu occupies a specific niche: serious adult Chinese learners who are underserved by gamified apps. The ASO strategy targets this audience directly rather than competing for the broadest possible search terms. The approach favors high-intent, lower-volume keywords over high-volume, low-intent ones.
 
 ---
 
@@ -28,7 +28,7 @@ Mandarin occupies a specific niche: serious adult Chinese learners who are under
 chinese,mandarin,hsk,learn chinese,study,pinyin,tones,characters,vocabulary,hanzi,spaced repetition
 ```
 
-**Rationale:** "Mandarin" is in the app name and "Chinese Study" is in the subtitle, so the keyword field avoids redundancy with those. Every character counts.
+**Rationale:** "Aelu" is in the app name and "Chinese Study" is in the subtitle, so the keyword field avoids redundancy with those. Every character counts.
 
 ---
 
@@ -117,7 +117,7 @@ These are combinations that users actually search for. They are targeted through
 
 ### Principles
 
-Mandarin does not manipulate users into leaving reviews. The strategy is: build something worth reviewing, then ask at the right moment in the right way.
+Aelu does not manipulate users into leaving reviews. The strategy is: build something worth reviewing, then ask at the right moment in the right way.
 
 ### When to Ask
 
@@ -140,7 +140,7 @@ Mandarin does not manipulate users into leaving reviews. The strategy is: build 
 Use Apple's native `SKStoreReviewController` / Google's in-app review API. Do not build a custom prompt. The native dialog is less intrusive and more trusted.
 
 **Pre-prompt (optional, shown before the native dialog):**
-> "You have been studying for [X] days. If Mandarin is useful to you, a review helps other learners find it. No pressure — study comes first."
+> "You have been studying for [X] days. If Aelu is useful to you, a review helps other learners find it. No pressure — study comes first."
 
 If the user taps "Not now," respect it silently. No guilt. No follow-up. No "Are you sure?"
 
@@ -226,7 +226,7 @@ If the user taps "Not now," respect it silently. No guilt. No follow-up. No "Are
 
 ## Anti-Patterns to Avoid
 
-These are common ASO tactics that conflict with the Mandarin brand:
+These are common ASO tactics that conflict with the Aelu brand:
 
 1. **Keyword stuffing** in the description. Write for humans. Search algorithms reward relevance, not density.
 2. **Fake urgency** in promotional text ("Limited time!" "Start today!"). This is streak anxiety in marketing form.

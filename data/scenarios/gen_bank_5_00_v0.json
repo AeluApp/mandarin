@@ -1,0 +1,232 @@
+{
+    "title": "The Account Opening Ceremony",
+    "title_zh": "开户仪式",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_bank_5_00_v0",
+    "tree": {
+        "setup": "A flagship branch of the Bank of China in Shanghai's French Concession, where art deco ceiling moldings watch over modern banking terminals. Ms. Gu has been the senior account manager for twelve years and approaches every new account opening as if she were welcoming someone into a private club — thorough, warm, and with an almost reverential attention to paperwork. She keeps a small orchid on her desk that she has somehow kept alive through three office renovations.",
+        "setup_zh": "上海法租界的中国银行旗舰支行，装饰艺术风格的天花板装饰俯视着现代银行终端。顾女士担任高级客户经理已经十二年，对待每一次开户都像在欢迎某人加入私人俱乐部——细致、温暖，对文书工作近乎虔诚。她桌上的小兰花不知怎么在三次办公室装修中存活了下来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，欢迎光临。请问您今天想办理什么业务？",
+                "text_pinyin": "nín hǎo, huānyíng guānglín. qǐngwèn nín jīntiān xiǎng bànlǐ shénme yèwù?",
+                "text_en": "Hello, welcome. What business would you like to handle today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you want to open an account for business purposes.",
+                "options": [
+                    {
+                        "text_zh": "顾经理，您好。我想开一个储蓄账户，主要用于工资入账和日常消费。另外，我也想了解一下你们的理财产品。",
+                        "text_pinyin": "Gù jīnglǐ, nín hǎo. wǒ xiǎng kāi yí gè chǔxù zhànghù, zhǔyào yòngyú gōngzī rù zhàng hé rìcháng xiāofèi. lìngwài, wǒ yě xiǎng liǎojiě yíxià nǐmen de lǐcái chǎnpǐn.",
+                        "text_en": "Manager Gu, hello. I'd like to open a savings account, mainly for salary deposits and daily expenses. Also, I'd like to learn about your financial products.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Purpose-driven account opening plus investment interest — Ms. Gu's orchid seems to lean toward you. She reaches for the premium brochure."
+                    },
+                    {
+                        "text_zh": "我想开户。普通储蓄账户就行。",
+                        "text_pinyin": "wǒ xiǎng kāi hù. pǔtōng chǔxù zhànghù jiù xíng.",
+                        "text_en": "I'd like to open an account. Regular savings is fine.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clear and simple. She starts the standard process."
+                    },
+                    {
+                        "text_zh": "我需要一个银行账户。",
+                        "text_pinyin": "wǒ xūyào yí gè yínháng zhànghù.",
+                        "text_en": "I need a bank account.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She'll ask which type. There are seven, and she can explain each one's merits like a sommelier explaining wine regions."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。储蓄账户我们有两种：普通活期和定期。活期利率比较低但是随时可以取，定期利率高但有时间限制。您的工资入账建议用活期。理财产品的话，我们可以开完户以后再详细聊。先请您填一下这个申请表。",
+                "text_pinyin": "hǎo de. chǔxù zhànghù wǒmen yǒu liǎng zhǒng: pǔtōng huóqī hé dìngqī. huóqī lìlǜ bǐjiào dī dànshì suíshí kěyǐ qǔ, dìngqī lìlǜ gāo dàn yǒu shíjiān xiànzhì. nín de gōngzī rù zhàng jiànyì yòng huóqī. lǐcái chǎnpǐn de huà, wǒmen kěyǐ kāi wán hù yǐhòu zài xiángxì liáo. xiān qǐng nín tián yíxià zhège shēnqǐng biǎo.",
+                "text_en": "OK. We have two types of savings accounts: regular demand deposit and fixed-term. Demand deposit has lower interest but you can withdraw anytime; fixed-term has higher interest but with time restrictions. For salary deposits, I'd suggest demand. We can discuss financial products in detail after opening the account. Please fill out this application form first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the differences and start filling in the form.",
+                "options": [
+                    {
+                        "text_zh": "明白了，先开活期的。请问如果以后想把一部分钱转到定期，可以在手机银行上操作吗？",
+                        "text_pinyin": "míngbai le, xiān kāi huóqī de. qǐngwèn rúguǒ yǐhòu xiǎng bǎ yí bùfen qián zhuǎn dào dìngqī, kěyǐ zài shǒujī yínháng shàng cāozuò ma?",
+                        "text_en": "Got it — I'll start with demand deposit. If I want to move some money to fixed-term later, can I do that through the mobile banking app?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Forward-thinking question about digital banking — Ms. Gu nods approvingly. She'll set up your mobile banking today."
+                    },
+                    {
+                        "text_zh": "好的，活期。我先填表。",
+                        "text_pinyin": "hǎo de, huóqī. wǒ xiān tián biǎo.",
+                        "text_en": "OK, demand deposit. I'll fill out the form.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She hands you the form and a pen — a nice pen, because details matter."
+                    },
+                    {
+                        "text_zh": "活期和定期我不太清楚区别。能再解释一下吗？",
+                        "text_pinyin": "huóqī hé dìngqī wǒ bú tài qīngchǔ qūbié. néng zài jiěshì yíxià ma?",
+                        "text_en": "I'm not clear on the difference between demand and fixed. Can you explain again?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She explains with renewed patience, using a household metaphor: demand deposit is a pantry, fixed-term is a wine cellar."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然可以，手机银行非常方便。表填好了？我看一下……好的。接下来需要设置密码和绑定手机号。您想设置什么样的密码提示？",
+                "text_pinyin": "dāngrán kěyǐ, shǒujī yínháng fēicháng fāngbiàn. biǎo tián hǎo le? wǒ kàn yíxià……hǎo de. jiē xiàlái xūyào shèzhì mìmǎ hé bǎngdìng shǒujī hào. nín xiǎng shèzhì shénme yàng de mìmǎ tíshì?",
+                "text_en": "Of course — mobile banking is very convenient. Done with the form? Let me check... good. Next we need to set a password and link your phone number. What kind of password hint would you like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Set up security features.",
+                "options": [
+                    {
+                        "text_zh": "密码我已经想好了。手机号用我现在的号码就行。请问你们有短信提醒功能吗？就是每次有交易就发一条短信。",
+                        "text_pinyin": "mìmǎ wǒ yǐjīng xiǎng hǎo le. shǒujī hào yòng wǒ xiànzài de hàomǎ jiù xíng. qǐngwèn nǐmen yǒu duǎnxìn tíxǐng gōngnéng ma? jiùshì měi cì yǒu jiāoyì jiù fā yì tiáo duǎnxìn.",
+                        "text_en": "I've thought of a password already. Use my current phone number. Do you have SMS alert notifications? Like a text message every time there's a transaction.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Security-conscious — Ms. Gu adds the SMS alert service. It costs 2 yuan per month, which she considers the cheapest insurance in banking."
+                    },
+                    {
+                        "text_zh": "好的，我现在设密码。",
+                        "text_pinyin": "hǎo de, wǒ xiànzài shè mìmǎ.",
+                        "text_en": "OK, I'll set the password now.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She slides the keypad toward you with a discreet turn of her head."
+                    },
+                    {
+                        "text_zh": "密码可以用生日吗？",
+                        "text_pinyin": "mìmǎ kěyǐ yòng shēngrì ma?",
+                        "text_en": "Can I use my birthday as the password?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Gu's orchid wilts imperceptibly. She recommends against it with the gentle firmness of someone who has seen many compromised accounts."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "短信提醒有的，每月两块钱。非常推荐。好了，您的账户已经开好了。这是您的银行卡和存折。我现在帮您下载手机银行APP，好吗？",
+                "text_pinyin": "duǎnxìn tíxǐng yǒu de, měi yuè liǎng kuài qián. fēicháng tuījiàn. hǎo le, nín de zhànghù yǐjīng kāi hǎo le. zhè shì nín de yínháng kǎ hé cúnzhé. wǒ xiànzài bāng nín xiàzài shǒujī yínháng APP, hǎo ma?",
+                "text_en": "SMS alerts are available — 2 yuan per month. Highly recommended. OK, your account is now open. Here's your bank card and passbook. Shall I help you download the mobile banking app?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept help with the app and ask about the financial products.",
+                "options": [
+                    {
+                        "text_zh": "好的，请帮我下载。对了，您刚才提到理财产品，能简单介绍一下吗？我手上有一些闲钱想投资。",
+                        "text_pinyin": "hǎo de, qǐng bāng wǒ xiàzài. duìle, nín gāngcái tí dào lǐcái chǎnpǐn, néng jiǎndān jièshào yíxià ma? wǒ shǒu shàng yǒu yìxiē xiánqián xiǎng tóuzī.",
+                        "text_en": "Yes, please help me download it. By the way, you mentioned financial products earlier — can you give me a brief introduction? I have some spare money I'd like to invest.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "闲钱 (spare money) plus investment interest — Ms. Gu shifts into her advisory mode, which is her true calling."
+                    },
+                    {
+                        "text_zh": "好，谢谢。理财产品以后再说吧。",
+                        "text_pinyin": "hǎo, xièxie. lǐcái chǎnpǐn yǐhòu zài shuō ba.",
+                        "text_en": "OK, thanks. I'll look into financial products later.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She nods, leaving the door open for next time."
+                    },
+                    {
+                        "text_zh": "手机银行我自己会弄。",
+                        "text_pinyin": "shǒujī yínháng wǒ zìjǐ huì nòng.",
+                        "text_en": "I can set up mobile banking myself.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Independent but she still hands you a guide. Her twelve years have taught her that 'I'll figure it out' has a 40% success rate."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然。我们目前有低风险的货币基金，年化收益大概百分之三左右。还有中等风险的债券基金，收益更高但有波动。您的风险偏好是保守型还是进取型？",
+                "text_pinyin": "dāngrán. wǒmen mùqián yǒu dī fēngxiǎn de huòbì jījīn, niánhuà shōuyì dàgài bǎi fēn zhī sān zuǒyòu. hái yǒu zhōngděng fēngxiǎn de zhàiquàn jījīn, shōuyì gèng gāo dàn yǒu bōdòng. nín de fēngxiǎn piānhǎo shì bǎoshǒu xíng háishì jìnqǔ xíng?",
+                "text_en": "Of course. We currently have low-risk money market funds with about 3% annualized returns. Also medium-risk bond funds with higher returns but with fluctuations. Is your risk preference conservative or aggressive?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss your investment preferences.",
+                "options": [
+                    {
+                        "text_zh": "我偏保守的。先把一部分放到货币基金吧，等我更了解市场以后再考虑其他的。稳定比高收益对我来说更重要。",
+                        "text_pinyin": "wǒ piān bǎoshǒu de. xiān bǎ yí bùfen fàng dào huòbì jījīn ba, děng wǒ gèng liǎojiě shìchǎng yǐhòu zài kǎolǜ qítā de. wěndìng bǐ gāo shōuyì duì wǒ lái shuō gèng zhòngyào.",
+                        "text_en": "I lean conservative. Let me put part in the money market fund first — I'll consider others after I understand the market better. Stability matters more to me than high returns.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A measured, self-aware approach. Ms. Gu writes「稳健型客户」on her notes — her favorite kind of investor."
+                    },
+                    {
+                        "text_zh": "都可以，你推荐哪个？",
+                        "text_pinyin": "dōu kěyǐ, nǐ tuījiàn nǎge?",
+                        "text_en": "Either is fine — which do you recommend?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She recommends the money market fund for beginners, with the care of someone tending her orchid."
+                    },
+                    {
+                        "text_zh": "有没有收益特别高的？",
+                        "text_pinyin": "yǒu méiyǒu shōuyì tèbié gāo de?",
+                        "text_en": "Anything with really high returns?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Gu pauses. High returns mean high risk — she explains this with a metaphor about orchids: the rarest ones are the hardest to keep alive."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "非常明智的选择。我把货币基金的资料发到您手机上，您可以回去慢慢研究。今天的业务都办完了，还有其他需要吗？",
+                "text_pinyin": "fēicháng míngzhì de xuǎnzé. wǒ bǎ huòbì jījīn de zīliào fā dào nín shǒujī shàng, nín kěyǐ huíqù mànmàn yánjiū. jīntiān de yèwù dōu bàn wán le, hái yǒu qítā xūyào ma?",
+                "text_en": "Very wise choice. I'll send the fund materials to your phone — you can study them at home. Today's business is all done. Anything else?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and wrap up.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢顾经理。您解释得特别清楚，让我觉得很放心。以后有问题可以直接找您吗？",
+                        "text_pinyin": "fēicháng gǎnxiè Gù jīnglǐ. nín jiěshì de tèbié qīngchǔ, ràng wǒ juéde hěn fàngxīn. yǐhòu yǒu wèntí kěyǐ zhíjiē zhǎo nín ma?",
+                        "text_en": "Thank you so much, Manager Gu. Your explanations were very clear and put me at ease. Can I come to you directly with future questions?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Asking to maintain the relationship — Ms. Gu hands you her business card. The orchid seems to bloom a little brighter."
+                    },
+                    {
+                        "text_zh": "没有了，谢谢！",
+                        "text_pinyin": "méiyǒu le, xièxie!",
+                        "text_en": "That's all, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean exit. She files your paperwork with characteristic precision."
+                    },
+                    {
+                        "text_zh": "好了。",
+                        "text_pinyin": "hǎo le.",
+                        "text_en": "That's it.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Gu's smile remains professional, but the orchid seems to close its petals slightly."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese banks offer multiple account types: 活期 (huóqī, demand/current) for everyday use, and 定期 (dìngqī, fixed-term) for savings. Mobile banking (手机银行) has become essential. Financial products (理财产品) range from low-risk money market funds to higher-risk equity investments."
+    }
+}

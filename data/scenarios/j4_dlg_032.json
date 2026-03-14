@@ -1,0 +1,117 @@
+{
+    "title": "The Ink Stone",
+    "title_zh": "墨石",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You visit a small calligraphy studio and find the teacher, Mr. Chen, slowly grinding ink on a stone. The room smells of ink and sandalwood.",
+        "setup_zh": "你走进一间小小的书法工作室，看到陈老师正在慢慢地磨墨。房间里弥漫着墨汁和檀香的味道。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "不好意思，我在磨墨。坐吧，等我磨好。很多人觉得磨墨是浪费时间，但其实这是写字之前最重要的一步。磨墨的时候，心会慢慢静下来。",
+                "text_pinyin": "Bù hǎoyìsi, wǒ zài mó mò. Zuò ba, děng wǒ mó hǎo. Hěn duō rén juéde mó mò shì làngfèi shíjiān, dàn qíshí zhè shì xiě zì zhīqián zuì zhòngyào de yī bù. Mó mò de shíhou, xīn huì mànman jìng xiàlái.",
+                "text_en": "Sorry, I'm grinding ink. Have a seat, wait for me to finish. Many people think grinding ink is a waste of time, but it's actually the most important step before writing. While grinding ink, the heart slowly settles."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his practice of grinding ink.",
+                "options": [
+                    {
+                        "text_zh": "心慢慢静下来——原来磨墨不只是准备墨汁，也是在准备写字的人。这个过程本身就是一种练习。",
+                        "text_pinyin": "Xīn mànman jìng xiàlái — yuánlái mó mò bù zhǐ shì zhǔnbèi mòzhī, yě shì zài zhǔnbèi xiě zì de rén. Zhège guòchéng běnshēn jiù shì yī zhǒng liànxí.",
+                        "text_en": "The heart slowly settles — so grinding ink isn't just preparing the ink, it's preparing the person who writes. The process itself is a form of practice.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sees that preparation is not separate from the art — it is the art."
+                    },
+                    {
+                        "text_zh": "现在不是有墨水可以直接用吗？",
+                        "text_pinyin": "Xiànzài bú shì yǒu mòshuǐ kěyǐ zhíjiē yòng ma?",
+                        "text_en": "Can't you just use bottled ink now?",
+                        "score": 0.0,
+                        "feedback": "Suggests a shortcut that misses the entire point."
+                    },
+                    {
+                        "text_zh": "磨墨要多长时间？",
+                        "text_pinyin": "Mó mò yào duō cháng shíjiān?",
+                        "text_en": "How long does grinding ink take?",
+                        "score": 0.0,
+                        "feedback": "Measures time when the practice is about losing track of it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你理解得很好。我学书法的时候，师父说过一句话——「急着写出来的字，一笔都站不住」。书法不是手的事，是心的事。如果你心里乱，手再稳也写不好。",
+                "text_pinyin": "Nǐ lǐjiě de hěn hǎo. Wǒ xué shūfǎ de shíhou, shīfu shuō guò yī jù huà — 'jí zhe xiě chūlái de zì, yī bǐ dōu zhàn bú zhù'. Shūfǎ bú shì shǒu de shì, shì xīn de shì. Rúguǒ nǐ xīnlǐ luàn, shǒu zài wěn yě xiě bù hǎo.",
+                "text_en": "You understand well. When I was learning calligraphy, my teacher said — 'Characters written in haste can't stand on even one stroke.' Calligraphy isn't about the hand, it's about the heart. If your heart is chaotic, no amount of steady hands will save the writing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the connection between inner state and outer expression.",
+                "options": [
+                    {
+                        "text_zh": "「一笔都站不住」——这个画面特别生动。字是心的镜子，心乱了，字就歪了。这不只是书法的道理，好像什么事情都是这样。先安心，才能做好。",
+                        "text_pinyin": "'Yī bǐ dōu zhàn bú zhù' — zhège huàmiàn tèbié shēngdòng. Zì shì xīn de jìngzi, xīn luàn le, zì jiù wāi le. Zhè bù zhǐ shì shūfǎ de dàolǐ, hǎoxiàng shénme shìqing dōu shì zhèyàng. Xiān ānxīn, cáinéng zuò hǎo.",
+                        "text_en": "'Can't stand on one stroke' — what a vivid image. Characters mirror the heart; disordered heart, crooked strokes. This isn't about calligraphy — it's true of everything. Settle the heart first, then the work.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends calligraphy into a universal principle — inner order precedes outer quality."
+                    },
+                    {
+                        "text_zh": "您写了多少年书法了？",
+                        "text_pinyin": "Nín xiě le duōshǎo nián shūfǎ le?",
+                        "text_en": "How many years have you practiced calligraphy?",
+                        "score": 0.0,
+                        "feedback": "Asks for credentials during a philosophical moment."
+                    },
+                    {
+                        "text_zh": "您觉得楷书和行书哪个更难？",
+                        "text_pinyin": "Nín juéde kǎishū hé xíngshū nǎge gèng nán?",
+                        "text_en": "Which is harder, regular script or running script?",
+                        "score": 0.0,
+                        "feedback": "A technical comparison that derails the deeper conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "就是这样。我年轻的时候急着想把字练漂亮，每天写很多。但是越急越写不好。后来才明白，不是写得多就能写好，而是心够静才能写好。现在我每天只写几个字，但是每个字都是认真的。",
+                "text_pinyin": "Jiù shì zhèyàng. Wǒ niánqīng de shíhou jí zhe xiǎng bǎ zì liàn piàoliang, měi tiān xiě hěn duō. Dànshì yuè jí yuè xiě bù hǎo. Hòulái cái míngbai, bú shì xiě de duō jiù néng xiě hǎo, ér shì xīn gòu jìng cáinéng xiě hǎo. Xiànzài wǒ měi tiān zhǐ xiě jǐ ge zì, dànshì měi ge zì dōu shì rènzhēn de.",
+                "text_en": "Exactly. When I was young I rushed to make my characters beautiful, writing many each day. But the more I rushed, the worse they got. Only later did I understand: it's not writing more that makes you better, it's having a quiet enough heart. Now I write only a few characters a day, but each one is sincere."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his journey from quantity to quality.",
+                "options": [
+                    {
+                        "text_zh": "每个字都是认真的——这比写一千个敷衍的字更有意义。我觉得这也是一种勇气，敢于少做，但是每一件都做到最好。",
+                        "text_pinyin": "Měi ge zì dōu shì rènzhēn de — zhè bǐ xiě yīqiān ge fūyǎn de zì gèng yǒu yìyì. Wǒ juéde zhè yě shì yī zhǒng yǒngqì, gǎn yú shǎo zuò, dànshì měi yī jiàn dōu zuò dào zuì hǎo.",
+                        "text_en": "Each character done sincerely — that means more than a thousand careless ones. I think that's also a kind of courage: daring to do less, but making each thing the best it can be.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Less as courage — doing fewer things with full attention is harder than doing many carelessly."
+                    },
+                    {
+                        "text_zh": "您的字可以卖吗？",
+                        "text_pinyin": "Nín de zì kěyǐ mài ma?",
+                        "text_en": "Do you sell your calligraphy?",
+                        "score": 0.0,
+                        "feedback": "Introduces commerce into a discussion about sincerity."
+                    },
+                    {
+                        "text_zh": "我也想学书法，在哪里可以学？",
+                        "text_pinyin": "Wǒ yě xiǎng xué shūfǎ, zài nǎlǐ kěyǐ xué?",
+                        "text_en": "I want to learn calligraphy too — where can I study?",
+                        "score": 0.0,
+                        "feedback": "Asks for logistics during a meaningful philosophical exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Ink grinding (磨墨) is considered the meditative threshold of calligraphy. The four treasures of the study (文房四宝) — brush, ink, paper, and inkstone — are not just tools but partners in contemplation. The master's phrase 急着写出来的字一笔都站不住 encapsulates a core teaching: rushed work lacks structural integrity, in calligraphy and in life."
+    }
+}

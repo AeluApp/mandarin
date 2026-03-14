@@ -1,0 +1,89 @@
+{
+    "title": "The Neighborhood Is Changing",
+    "title_zh": "小区变了",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You run into Aunt Zhang at the neighborhood convenience store. She's lived here for twenty years and has noticed how much the area has changed recently.",
+        "setup_zh": "你在小区的便利店遇到了张阿姨。她在这里住了二十年，最近发现这片区域变化很大。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看那边，又开了一家咖啡店。以前那个位置是一家修鞋铺，老师傅修了三十年的鞋。上个月关门了，说是租金涨了三倍。",
+                "text_pinyin": "Nǐ kàn nà biān, yòu kāi le yī jiā kāfēi diàn. Yǐqián nàge wèizhì shì yī jiā xiū xié pù, lǎo shīfu xiū le sānshí nián de xié. Shàng ge yuè guānmén le, shuō shì zūjīn zhǎng le sān bèi.",
+                "text_en": "Look over there, another coffee shop opened. That spot used to be a shoe repair shop — the old craftsman repaired shoes for thirty years. He closed last month because the rent tripled."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the neighborhood changes.",
+                "options": [
+                    {
+                        "text_zh": "三十年……他肯定对这个地方有很深的感情。这样的小店越来越少了，取代它们的都是连锁店。方便是方便了，但总觉得少了点什么。",
+                        "text_pinyin": "Sānshí nián…… tā kěndìng duì zhège dìfang yǒu hěn shēn de gǎnqíng. Zhèyàng de xiǎo diàn yuè lái yuè shǎo le, qǔdài tāmen de dōu shì liánsuǒ diàn. Fāngbiàn shì fāngbiàn le, dàn zǒng juéde shǎo le diǎn shénme.",
+                        "text_en": "Thirty years... he must have had deep feelings for this place. These little shops are fewer and fewer, replaced by chain stores. It's more convenient, sure, but something always feels missing.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Empathetic and observant — honors the craftsman's connection to the neighborhood."
+                    },
+                    {
+                        "text_zh": "那家咖啡好喝吗？",
+                        "text_pinyin": "Nà jiā kāfēi hǎo hē ma?",
+                        "text_en": "Is the coffee at that place any good?",
+                        "score": 0.0,
+                        "feedback": "Ignores the loss she's describing."
+                    },
+                    {
+                        "text_zh": "现在的房租确实太贵了。你家的租金涨了吗？",
+                        "text_pinyin": "Xiànzài de fángzū quèshí tài guì le. Nǐ jiā de zūjīn zhǎng le ma?",
+                        "text_en": "Rent is really too expensive now. Has your rent gone up?",
+                        "score": 0.0,
+                        "feedback": "Makes it about her personal finances rather than the community loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "少了人情味儿。以前修鞋的老师傅认识我们每一个人，知道谁家的孩子考上了大学，谁家的老人身体不好。咖啡店的年轻人可不会记住这些。",
+                "text_pinyin": "Shǎo le rénqíngwèir. Yǐqián xiū xié de lǎo shīfu rènshi wǒmen měi yīge rén, zhīdào shéi jiā de háizi kǎo shàng le dàxué, shéi jiā de lǎorén shēntǐ bù hǎo. Kāfēi diàn de niánqīng rén kě bú huì jìzhù zhèxiē.",
+                "text_en": "The human warmth is missing. The old cobbler knew every one of us — who had a kid that got into university, whose elderly parent wasn't doing well. The young people at the coffee shop won't remember any of that."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on community connection.",
+                "options": [
+                    {
+                        "text_zh": "这种关系是用时间堆出来的，搬不走也买不到。也许我们可以主动跟新邻居多说说话？改变已经发生了，但人情味儿不一定非要跟着消失。",
+                        "text_pinyin": "Zhè zhǒng guānxì shì yòng shíjiān duī chūlái de, bān bù zǒu yě mǎi bú dào. Yěxǔ wǒmen kěyǐ zhǔdòng gēn xīn línjū duō shuōshuō huà? Gǎibiàn yǐjīng fāshēng le, dàn rénqíngwèir bú yídìng fēi yào gēn zhe xiāoshī.",
+                        "text_en": "That relationship is built over time — you can't move or buy it. Maybe we can talk more with new neighbors? Change has happened, but human warmth doesn't have to disappear with it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Constructive and gentle — acknowledges the loss while proposing a way forward."
+                    },
+                    {
+                        "text_zh": "你有那个师傅的联系方式吗？我的鞋坏了。",
+                        "text_pinyin": "Nǐ yǒu nàge shīfu de liánxì fāngshì ma? Wǒ de xié huài le.",
+                        "text_en": "Do you have that cobbler's contact info? My shoes are broken.",
+                        "score": 0.0,
+                        "feedback": "Practical request that misses the emotional weight."
+                    },
+                    {
+                        "text_zh": "时代在变嘛，我们也要跟上。",
+                        "text_pinyin": "Shídài zài biàn ma, wǒmen yě yào gēn shàng.",
+                        "text_en": "Times are changing, we have to keep up.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — invalidates her feelings about community loss."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对。也许我明天做一锅红烧肉，给楼上新搬来的那家人送一份去。总得有人先开口嘛。",
+                "text_pinyin": "Nǐ shuō de duì. Yěxǔ wǒ míngtiān zuò yī guō hóngshāo ròu, gěi lóu shàng xīn bān lái de nà jiā rén sòng yī fèn qù. Zǒng děi yǒu rén xiān kāikǒu ma.",
+                "text_en": "You're right. Maybe tomorrow I'll make a pot of braised pork and bring some to the new family that moved in upstairs. Someone has to make the first move."
+            }
+        ],
+        "cultural_note": "人情味儿 (rénqíngwèir, human warmth/personal touch) is a concept deeply cherished in Chinese community life. Traditional neighborhoods were held together by small daily interactions — the cobbler, the vegetable vendor, the tailor — people who knew your family's story. Rapid urban development has replaced many such community anchors with chain businesses, and the resulting sense of disconnection is a common topic of quiet lament."
+    }
+}

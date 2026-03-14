@@ -1,0 +1,117 @@
+{
+    "title": "The Teahouse Philosopher",
+    "title_zh": "茶馆哲学家",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "In a Chengdu teahouse, you meet an elderly retired professor named Grandpa Ye who spends his afternoons watching people. He claims he can tell a person's story by how they drink tea.",
+        "setup_zh": "在成都一间茶馆里，你遇到了一位退休老教授叶爷爷，他每天下午在这里看人。他说他能从一个人喝茶的方式看出一个人的故事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看那边那个年轻人——杯子端起来又放下，放下又端起来，茶都凉了还没喝几口。他不是来喝茶的，他是来做一个决定的。喝茶只是给自己找一个停下来思考的理由。",
+                "text_pinyin": "Nǐ kàn nàbiān nàge niánqīng rén — bēizi duān qǐlái yòu fàng xià, fàng xià yòu duān qǐlái, chá dōu liáng le hái méi hē jǐ kǒu. Tā bú shì lái hē chá de, tā shì lái zuò yīge juédìng de. Hē chá zhǐ shì gěi zìjǐ zhǎo yīge tíng xiàlái sīkǎo de lǐyóu.",
+                "text_en": "See that young man over there? Picks up his cup, puts it down, picks it up again — tea's gone cold and he's barely had a sip. He's not here to drink tea; he's here to make a decision. Tea is just an excuse to stop and think."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with Grandpa Ye's people-reading practice.",
+                "options": [
+                    {
+                        "text_zh": "你是怎么判断的？是因为他反复拿起杯子又放下这个动作？这种重复行为一般意味着内心有矛盾——身体在做一件事，但注意力完全不在上面。",
+                        "text_pinyin": "Nǐ shì zěnme pànduàn de? Shì yīnwèi tā fǎnfù ná qǐ bēizi yòu fàng xià zhège dòngzuò? Zhè zhǒng chóngfù xíngwéi yībān yìwèi zhe nèixīn yǒu máodùn — shēntǐ zài zuò yī jiàn shì, dàn zhùyìlì wánquán bú zài shàngmiàn.",
+                        "text_en": "How did you determine that? Is it the repeated picking up and putting down? That kind of repetitive behavior usually signals inner conflict — the body is doing one thing, but attention is completely elsewhere.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engages analytically with his method — asks how he reads the sign and adds your own interpretation."
+                    },
+                    {
+                        "text_zh": "你每天下午都来这里吗？",
+                        "text_pinyin": "Nǐ měi tiān xiàwǔ dōu lái zhèlǐ ma?",
+                        "text_en": "Do you come here every afternoon?",
+                        "score": 0.0,
+                        "feedback": "Routine question instead of engaging with his observation."
+                    },
+                    {
+                        "text_zh": "这里的茶好不好喝？",
+                        "text_pinyin": "Zhèlǐ de chá hǎo bù hǎo hē?",
+                        "text_en": "Is the tea here good?",
+                        "score": 0.0,
+                        "feedback": "Tea review when he's doing social observation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没错。再看那边那对夫妻——女的一直在说话，男的一直在点头，但你注意他的眼睛，他在看窗外。他的点头不是同意，是一种自动反应。他的心已经不在这个对话里了。你说这是疏远还是疲倦？",
+                "text_pinyin": "Méi cuò. Zài kàn nàbiān nà duì fūqī — nǚ de yīzhí zài shuōhuà, nán de yīzhí zài diǎntóu, dàn nǐ zhùyì tā de yǎnjīng, tā zài kàn chuāng wài. Tā de diǎntóu bú shì tóngyì, shì yī zhǒng zìdòng fǎnyìng. Tā de xīn yǐjīng bú zài zhège duìhuà lǐ le. Nǐ shuō zhè shì shūyuǎn háishì píjuàn?",
+                "text_en": "That's right. Now look at that couple — the woman keeps talking, the man keeps nodding, but watch his eyes: he's looking out the window. His nodding isn't agreement, it's an automatic response. His heart has already left this conversation. Would you call that estrangement or fatigue?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Distinguish between the two possibilities Grandpa Ye offers.",
+                "options": [
+                    {
+                        "text_zh": "那就不是退休后整理出来的——这个人一直在读这些书，三十年来从未停过，只是最近才决定还回来。让我好奇的是——为什么是现在？也许……这个人知道自己的时间不多了。",
+                        "text_pinyin": "Nà jiù bú shì tuìxiū hòu zhěnglǐ chūlái de — zhège rén yīzhí zài dú zhèxiē shū, sānshí nián lái cóng wèi tíng guò, zhǐ shì zuìjìn cái juédìng huán huílái. Ràng wǒ hàoqí de shì — wèishénme shì xiànzài? Yěxǔ ... zhège rén zhīdào zìjǐ de shíjiān bù duō le.",
+                        "text_en": "Then this person has been reading these books for thirty years without stopping — only recently deciding to return them. What I wonder is — why now? Maybe... this person knows their time is running out.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Refuses the binary and proposes a developmental model — fatigue as a pathway to estrangement."
+                    },
+                    {
+                        "text_zh": "他可能只是在想晚饭吃什么。",
+                        "text_pinyin": "Tā kěnéng zhǐ shì zài xiǎng wǎnfàn chī shénme.",
+                        "text_en": "He's probably just thinking about what to have for dinner.",
+                        "score": 0.0,
+                        "feedback": "Flippant dismissal that doesn't engage with the analytical exercise."
+                    },
+                    {
+                        "text_zh": "成都人都喜欢喝茶吗？",
+                        "text_pinyin": "Chéngdū rén dōu xǐhuān hē chá ma?",
+                        "text_en": "Do all Chengdu people like drinking tea?",
+                        "score": 0.0,
+                        "feedback": "Generic cultural question that ignores the observation game."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "年轻人，你观察力不错。来，我给你看一个你——你的茶从端起来到现在，一口都没喝。你的手一直握着杯子，但眼睛在到处看。说明什么？说明你是一个收集信息比体验感受更重要的人。你活在分析里，不在此刻里。",
+                "text_pinyin": "Niánqīng rén, nǐ guānchálì búcuò. Lái, wǒ gěi nǐ kàn yīge nǐ — nǐ de chá cóng duān qǐlái dào xiànzài, yī kǒu dōu méi hē. Nǐ de shǒu yīzhí wò zhe bēizi, dàn yǎnjīng zài dàochù kàn. Shuōmíng shénme? Shuōmíng nǐ shì yīge shōují xìnxī bǐ tǐyàn gǎnshòu gèng zhòngyào de rén. Nǐ huó zài fēnxī lǐ, bú zài cǐkè lǐ.",
+                "text_en": "Young man, your observation skills are good. Now let me show you one — you. Your tea, from when you picked it up until now, you haven't taken a single sip. Your hand keeps holding the cup but your eyes are looking everywhere. What does that mean? It means you're someone for whom collecting information matters more than experiencing feelings. You live in analysis, not in the moment."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to being read so accurately.",
+                "options": [
+                    {
+                        "text_zh": "……说得太准了，我没法反驳。不过您想过没有——也许活在分析里本身就是一种感受方式？我通过观察和理解来体验世界，这跟直接去'感受'并不矛盾。只是入口不同。",
+                        "text_pinyin": "... Shuō de tài zhǔn le, wǒ méi fǎ fǎnbó. Búguò nín xiǎng guò méiyǒu — yěxǔ huó zài fēnxī lǐ běnshēn jiù shì yī zhǒng gǎnshòu fāngshì? Wǒ tōngguò guānchá hé lǐjiě lái tǐyàn shìjiè, zhè gēn zhíjiē qù 'gǎnshòu' bìng bù máodùn. Zhǐ shì rùkǒu bùtóng.",
+                        "text_en": "Too accurate, I can't argue. But have you considered — living in analysis is itself a form of feeling? I experience the world through observation and understanding. That's not contradictory to feeling. It's a different entry point.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Accepts the read gracefully but pushes back philosophically — reframes analysis as a mode of experience."
+                    },
+                    {
+                        "text_zh": "哈哈，你说得对，我赶紧喝口茶。",
+                        "text_pinyin": "Hāhā, nǐ shuō de duì, wǒ gǎnjǐn hē kǒu chá.",
+                        "text_en": "Haha, you're right, let me hurry and take a sip.",
+                        "score": 0.0,
+                        "feedback": "Deflects with humor instead of engaging with the insight."
+                    },
+                    {
+                        "text_zh": "你以前是教什么的？",
+                        "text_pinyin": "Nǐ yǐqián shì jiāo shénme de?",
+                        "text_en": "What did you teach before?",
+                        "score": 0.0,
+                        "feedback": "Biographical deflection to avoid the personal moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chengdu's teahouse culture (茶馆文化) is among the richest in China. Unlike formal tea ceremonies elsewhere, Chengdu teahouses are democratic social spaces where people come to gossip, play mahjong, read newspapers, or simply watch the world go by. The practice of 'reading people' through their tea-drinking habits reflects a broader Chinese cultural value: indirect observation as a form of wisdom. The phrase '品茶品人' (taste tea, taste people) captures this connection between attentiveness to tea and attentiveness to human nature."
+    }
+}

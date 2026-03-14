@@ -1,0 +1,87 @@
+{
+    "title": "Lost and Found",
+    "title_zh": "捡到东西",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You find a small wallet on a bench in the park. An older woman comes hurrying back, looking frantic.",
+        "setup_zh": "你在公园长椅上捡到一个小钱包。一位老太太急匆匆地跑回来，看起来很着急。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "哎呀，我的钱包！我刚才坐在这里，走的时候忘了。你看到一个红色的小钱包了吗？",
+                "text_pinyin": "Āiyā, wǒ de qiánbāo! Wǒ gāngcái zuò zài zhèlǐ, zǒu de shíhou wàng le. Nǐ kàndào yī ge hóngsè de xiǎo qiánbāo le ma?",
+                "text_en": "Oh no, my wallet! I was sitting here earlier and forgot it when I left. Did you see a small red wallet?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Return the wallet.",
+                "options": [
+                    {
+                        "text_zh": "是这个吗？我刚在长椅上看到的。您看看里面的东西都在不在。",
+                        "text_pinyin": "Shì zhège ma? Wǒ gāng zài chángyǐ shàng kàndào de. Nín kànkan lǐmiàn de dōngxi dōu zài bú zài.",
+                        "text_en": "Is this it? I just found it on the bench. Please check if everything inside is still there.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Helpful and careful — asking her to check shows integrity."
+                    },
+                    {
+                        "text_zh": "给你。",
+                        "text_pinyin": "Gěi nǐ.",
+                        "text_en": "Here you go.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Returns it but too abruptly."
+                    },
+                    {
+                        "text_zh": "你先证明这是你的。",
+                        "text_pinyin": "Nǐ xiān zhèngmíng zhè shì nǐ de.",
+                        "text_en": "First prove it's yours.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She described it accurately and is clearly distressed — too suspicious."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "就是这个！谢天谢地！里面有我的身份证和医保卡，丢了可就麻烦了。谢谢你啊，你真是好人！",
+                "text_pinyin": "Jiù shì zhège! Xiètiān xièdì! Lǐmiàn yǒu wǒ de shēnfènzhèng hé yī bǎo kǎ, diū le kě jiù máfan le. Xièxie nǐ a, nǐ zhēn shì hǎo rén!",
+                "text_en": "That's it! Thank goodness! It has my ID card and medical insurance card — losing those would have been so much trouble. Thank you, you're truly a good person!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her gratitude.",
+                "options": [
+                    {
+                        "text_zh": "不客气，谁看到都会这样做的。您以后出门要小心一点，把钱包放在包里比较安全。",
+                        "text_pinyin": "Bú kèqi, shuí kàndào dōu huì zhèyàng zuò de. Nín yǐhòu chūmén yào xiǎoxīn yīdiǎn, bǎ qiánbāo fàng zài bāo lǐ bǐjiào ānquán.",
+                        "text_en": "You're welcome — anyone would do the same. Please be a bit more careful when you go out — keeping your wallet in your bag is safer.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Humble and gently caring — offers practical advice without being preachy."
+                    },
+                    {
+                        "text_zh": "没事，再见。",
+                        "text_pinyin": "Méi shì, zàijiàn.",
+                        "text_en": "It's nothing, bye.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Kind but rushed."
+                    },
+                    {
+                        "text_zh": "下次要小心啊！",
+                        "text_pinyin": "Xià cì yào xiǎoxīn a!",
+                        "text_en": "Be careful next time!",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Slightly lecturing tone."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Returning lost items is considered a basic virtue in Chinese culture. The humble response 「谁看到都会这样做的」 (anyone would do the same) reflects the value of modesty. ID cards and medical insurance cards are essential documents in daily Chinese life."
+    },
+    "hsk_level": 3
+}

@@ -1,0 +1,124 @@
+{
+    "title": "The Bill-Splitting Ballet",
+    "title_zh": "AA制芭蕾",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_5_01_v0",
+    "tree": {
+        "setup": "A round table at a Sichuan restaurant, scattered with the aftermath of a group dinner — eight people, twelve dishes, three bottles of beer, and one bill that lands on the table like a diplomatic document requiring multilateral negotiation. Your colleague Xiao Gao has already reached for it with the reflexive speed of someone who's been in this situation before. The question is not who pays, but how the ancient dance of bill-negotiation will unfold this time.",
+        "setup_zh": "一家川菜馆的圆桌上，散落着八个人、十二道菜、三瓶啤酒的聚餐残局，还有一张像外交文件一样需要多方谈判的账单落在桌上。你的同事小高已经以老手般的反射速度伸手去拿。问题不是谁付钱，而是这次抢单的古老舞蹈将如何展开。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这顿我请！大家别跟我抢。今天高兴，就当庆祝项目结束了。",
+                "text_pinyin": "zhè dùn wǒ qǐng! dàjiā bié gēn wǒ qiǎng. jīntiān gāoxìng, jiù dàng qìngzhù xiàngmù jiéshù le.",
+                "text_en": "This meal's on me! Don't fight me for it. I'm happy today — let's call it a project completion celebration."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Xiao Gao's offer to pay.",
+                "options": [
+                    {
+                        "text_zh": "小高，别别别。这顿应该我请才对——上次团建的时候你已经请过一次了。这次让我来，就算是我对大家这几个月辛苦工作的一点心意。",
+                        "text_pinyin": "Xiǎo Gāo, bié bié bié. zhè dùn yīnggāi wǒ qǐng cái duì——shàng cì tuánjiàn de shíhòu nǐ yǐjīng qǐng guò yí cì le. zhè cì ràng wǒ lái, jiù suàn shì wǒ duì dàjiā zhè jǐ gè yuè xīnkǔ gōngzuò de yìdiǎn xīnyì.",
+                        "text_en": "Xiao Gao, no no no. I should treat this time — you already paid at the last team event. Let me handle it, as a small token for everyone's hard work these past months.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Citing the previous treat and framing it as team appreciation — the classic counter-move in bill-snatching chess. Xiao Gao's grip on the check loosens, but doesn't let go."
+                    },
+                    {
+                        "text_zh": "要不我们AA吧？人多，分开比较公平。",
+                        "text_pinyin": "yào bú wǒmen AA ba? rén duō, fēnkāi bǐjiào gōngpíng.",
+                        "text_en": "How about we split it? With so many people, splitting is fairer.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The pragmatic solution — modern, fair, but breaking the traditional dance. Some at the table nod; Xiao Gao looks slightly deflated."
+                    },
+                    {
+                        "text_zh": "好啊，那今天你请。下次我请。",
+                        "text_pinyin": "hǎo a, nà jīntiān nǐ qǐng. xià cì wǒ qǐng.",
+                        "text_en": "Sure, you treat today. I'll get next time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Accepting immediately without resistance — the bill-snatching ritual requires at least three rounds of protest. This is surrender in the first move."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不行不行，上次是上次，今天是我提出来聚餐的，当然我请。你要是过意不去的话，下次你请甜点。今天的单就别跟我抢了。",
+                "text_pinyin": "bùxíng bùxíng, shàng cì shì shàng cì, jīntiān shì wǒ tíchū lái jùcān de, dāngrán wǒ qǐng. nǐ yào shì guòyìbuqù de huà, xià cì nǐ qǐng tiándiǎn. jīntiān de dān jiù bié gēn wǒ qiǎng le.",
+                "text_en": "No way — last time was last time. I'm the one who suggested this dinner, so naturally I pay. If you feel bad, treat dessert next time. Don't fight me for today's bill."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Continue the negotiation or accept gracefully.",
+                "options": [
+                    {
+                        "text_zh": "好吧好吧，说不过你。那这次你请，但是下次团队出去玩一定轮到我。大家都听到了啊，给我做个见证！那至少让我付饮料的钱吧？",
+                        "text_pinyin": "hǎo ba hǎo ba, shuō bú guò nǐ. nà zhè cì nǐ qǐng, dànshì xià cì tuánduì chūqù wán yídìng lún dào wǒ. dàjiā dōu tīng dào le a, gěi wǒ zuò gè jiànzhèng! nà zhìshǎo ràng wǒ fù yǐnliào de qián ba?",
+                        "text_en": "Fine, fine — you win. You treat this time, but next team outing is definitely my turn. Everyone heard that — be my witnesses! At least let me pay for the drinks?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Three rounds of protest, graceful surrender with a condition, calling witnesses, and a partial-pay offer — this is bill-snatching executed at the highest level."
+                    },
+                    {
+                        "text_zh": "那好吧，谢谢小高。下次一定我请。",
+                        "text_pinyin": "nà hǎo ba, xièxie Xiǎo Gāo. xià cì yídìng wǒ qǐng.",
+                        "text_en": "OK then, thanks Xiao Gao. Definitely my turn next time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A clean surrender after two rounds. Honorable, if slightly early."
+                    },
+                    {
+                        "text_zh": "好的，随便你。",
+                        "text_pinyin": "hǎo de, suíbiàn nǐ.",
+                        "text_en": "OK, whatever you want.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「随便你」in a bill negotiation is like a white flag without the pole. The table goes quiet for half a second."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "饮料就三瓶啤酒，几十块钱的事，也让我请了。不过你说的下次我记住了啊！好了，我去结账。服务员！买单！",
+                "text_pinyin": "yǐnliào jiù sān píng píjiǔ, jǐ shí kuài qián de shì, yě ràng wǒ qǐng le. búguò nǐ shuō de xià cì wǒ jì zhù le a! hǎo le, wǒ qù jiézhàng. fúwùyuán! mǎi dān!",
+                "text_en": "The drinks were just three beers — a few dozen yuan. Let me cover those too. But I'm holding you to next time! OK, I'm going to pay. Waiter! Check please!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React and suggest what to do after dinner.",
+                "options": [
+                    {
+                        "text_zh": "谢谢小高，太客气了！大家吃得开心吧？走，吃完了去唱歌怎么样？这次唱歌的钱我出。不接受反驳！",
+                        "text_pinyin": "xièxie Xiǎo Gāo, tài kèqi le! dàjiā chī de kāixīn ba? zǒu, chī wán le qù chàng gē zěnmeyàng? zhè cì chàng gē de qián wǒ chū. bù jiēshòu fǎnbó!",
+                        "text_en": "Thanks Xiao Gao, so generous! Did everyone enjoy the meal? Let's go sing karaoke after! This time the KTV is on me. No arguments accepted!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Seizing the initiative for the next expense — a masterful recovery. The bill-snatching dance continues into the second venue."
+                    },
+                    {
+                        "text_zh": "谢谢！今天吃得很开心。",
+                        "text_pinyin": "xièxie! jīntiān chī de hěn kāixīn.",
+                        "text_en": "Thanks! Great meal today.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Warm and genuine. The evening ends on a high note."
+                    },
+                    {
+                        "text_zh": "行，那我先走了。",
+                        "text_pinyin": "xíng, nà wǒ xiān zǒu le.",
+                        "text_en": "OK, I'll head out first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Leaving right after someone treats — the social equivalent of reading the last page of a book and putting it back on the shelf."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The bill-fighting ritual (抢单, qiǎng dān) is a cornerstone of Chinese dining culture. The person who suggested the dinner typically pays (请客, qǐngkè). Proper etiquette requires at least 2-3 rounds of protest before accepting. AA制 (going Dutch) is increasingly common among younger urban Chinese but can feel impersonal in group settings. Offering to cover drinks or the next venue is a face-saving compromise."
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "title": "The Karaoke Negotiation",
+    "title_zh": "KTV谈判",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_3_02_v0",
+    "tree": {
+        "setup": "Friday night at a KTV (karaoke). Your friend group has split into factions: Xiao Dan wants to sing 90s Chinese pop, Xiao Hao insists on English songs, and the room has been booked for three hours. Xiao Dan holds the remote control like a scepter. The screen glows with a queue of songs. The fruit platter is untouched because nobody can agree on the first song.",
+        "setup_zh": "周五晚上KTV。你们的朋友圈分裂了：小丹要唱九十年代华语流行，小浩坚持唱英文歌，包间订了三个小时。小丹像拿权杖一样拿着遥控器。屏幕上闪着待播歌曲。水果拼盘没人动，因为第一首歌都定不下来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "先唱周杰伦！不会唱周杰伦来什么KTV？",
+                "text_pinyin": "xiān chàng zhōujiélún! bú huì chàng zhōujiélún lái shénme KTV?",
+                "text_en": "Jay Chou first! What's the point of KTV if you can't sing Jay Chou?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Mediate between the factions.",
+                "options": [
+                    {
+                        "text_zh": "这样吧，一人选两首，轮流唱。先来一首大家都会的热场！",
+                        "text_pinyin": "zhèyàng ba, yì rén xuǎn liǎng shǒu, lúnliú chàng. xiān lái yì shǒu dàjiā dōu huì de rèchǎng!",
+                        "text_en": "How about this -- each person picks two songs, we take turns. Start with one everyone knows to warm up!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Both factions pause. Xiao Dan nods.「行。那先唱《朋友》，大家都会。」轮流 is 'take turns.' 热场 is 'warm up the atmosphere.' Diplomacy through structure."
+                    },
+                    {
+                        "text_zh": "周杰伦可以啊！小浩，你先让一下，下一首你选。",
+                        "text_pinyin": "zhōujiélún kěyǐ a! xiǎo hào, nǐ xiān ràng yíxià, xià yì shǒu nǐ xuǎn.",
+                        "text_en": "Jay Chou works! Xiao Hao, give in for now, you pick next.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Hao grumbles but accepts.「行吧。但下一首是我的。」让一下 is 'give way/compromise.' Picking sides works short-term but you need a system."
+                    },
+                    {
+                        "text_zh": "你们别吵了。先吃水果，想好了再唱。",
+                        "text_pinyin": "nǐmen bié chǎo le. xiān chī shuǐguǒ, xiǎng hǎo le zài chàng.",
+                        "text_en": "Stop arguing. Eat fruit first, sing when you've decided.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Nobody touches the fruit. 别吵了 is 'stop arguing.' Delaying the decision doesn't solve it -- the clock is ticking on three hours of booth rental."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好好好，轮流！我先来一首《晴天》。你要不要一起唱？我可以唱副歌，你唱主歌。",
+                "text_pinyin": "hǎo hǎo hǎo, lúnliú! wǒ xiān lái yì shǒu 'qíngtiān.' nǐ yào bu yào yìqǐ chàng? wǒ kěyǐ chàng fùgē, nǐ chàng zhǔgē.",
+                "text_en": "OK OK, taking turns! I'll start with 'Sunny Day.' Want to sing together? I can do the chorus, you do the verses."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the duet invitation.",
+                "options": [
+                    {
+                        "text_zh": "好啊！不过我不太会唱中文歌。歌词在屏幕上有拼音吗？",
+                        "text_pinyin": "hǎo a! búguò wǒ bú tài huì chàng zhōngwén gē. gēcí zài píngmù shàng yǒu pīnyīn ma?",
+                        "text_en": "Sure! But I'm not great at Chinese songs. Do the lyrics on screen have pinyin?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「有的有，有的没有。没有的话你跟着我唱就行了。」歌词 is 'lyrics.' KTV screens show characters that light up with the music -- with or without pinyin."
+                    },
+                    {
+                        "text_zh": "我先听你唱一遍，下一轮我再试试。",
+                        "text_pinyin": "wǒ xiān tīng nǐ chàng yí biàn, xià yì lún wǒ zài shìshi.",
+                        "text_en": "Let me hear you sing it once first, I'll try next round.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「好，你先听！」Xiao Dan grabs the mic with confidence. 听一遍 is 'listen once.' Learning the melody first is a safe strategy."
+                    },
+                    {
+                        "text_zh": "我唱歌很难听的……你们唱，我鼓掌。",
+                        "text_pinyin": "wǒ chàng gē hěn nántīng de... nǐmen chàng, wǒ gǔzhǎng.",
+                        "text_en": "My singing is terrible... You guys sing, I'll clap.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「KTV不是比赛！唱得难听才好玩！」Xiao Dan shoves the mic toward you. 难听 is 'bad sounding.' 鼓掌 is 'clap.' At KTV, enthusiasm matters more than talent."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不错不错！你的发音其实挺好的。来，到你选歌了。你要点什么？中文英文都行。",
+                "text_pinyin": "búcuò búcuò! nǐ de fāyīn qíshí tǐng hǎo de. lái, dào nǐ xuǎn gē le. nǐ yào diǎn shénme? zhōngwén yīngwén dōu xíng.",
+                "text_en": "Not bad! Your pronunciation is actually pretty good. Come on, your turn to pick. What do you want? Chinese or English, either is fine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose your song.",
+                "options": [
+                    {
+                        "text_zh": "我点一首《月亮代表我的心》吧。这首歌我练过，比较有信心。",
+                        "text_pinyin": "wǒ diǎn yì shǒu 'yuèliang dàibiǎo wǒ de xīn' ba. zhè shǒu gē wǒ liàn guo, bǐjiào yǒu xìnxīn.",
+                        "text_en": "I'll pick 'The Moon Represents My Heart.' I've practiced this one, I'm more confident.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The room erupts.「经典！」Everyone knows this song. Xiao Dan and Xiao Hao both sing along. 点歌 is 'to select a song.' 练过 means 'have practiced.' Choosing a classic unites any KTV room."
+                    },
+                    {
+                        "text_zh": "有没有节奏比较简单的中文歌？我怕跟不上拍子。",
+                        "text_pinyin": "yǒu méiyǒu jiézòu bǐjiào jiǎndān de zhōngwén gē? wǒ pà gēn bu shàng pāizi.",
+                        "text_en": "Are there any Chinese songs with simpler rhythm? I'm afraid I can't keep the beat.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「《小幸运》节奏慢，歌词也简单！」Xiao Dan scrolls through suggestions. 节奏 is 'rhythm.' 跟不上拍子 is 'can't keep up with the beat.' Asking for a recommendation shows you want to participate."
+                    },
+                    {
+                        "text_zh": "我唱一首英文歌吧。小浩你一起来！",
+                        "text_pinyin": "wǒ chàng yì shǒu yīngwén gē ba. xiǎo hào nǐ yìqǐ lái!",
+                        "text_en": "I'll sing an English song. Xiao Hao, join me!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Hao jumps up.「终于！」Xiao Dan rolls her eyes but starts eating watermelon. 一起来 is 'join in together.' Bringing in the person who felt left out is socially smooth."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "KTV (卡拉OK) is a staple of Chinese social life. Private rooms (包间, bāojiān) are rented by the hour. 点歌 (diǎn gē) means selecting songs from the system. Classic crowd-pleasers include《月亮代表我的心》and anything by 周杰伦 (Jay Chou). Nobody actually cares if you sing badly -- it's about participation and fun."
+    }
+}

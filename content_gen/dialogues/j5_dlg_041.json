@@ -1,0 +1,89 @@
+{
+    "title": "The Bench by the River",
+    "title_zh": "河边的长椅",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Xiaojun are walking along the river when he stops at a specific bench and sits down with a familiar sigh.",
+        "setup_zh": "你和朋友小军沿着河边走，他在一把特定的长椅前停下来，熟悉地叹了口气坐下。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这把长椅是我在这个城市最喜欢的地方。每次遇到想不通的事，我就来这里坐一会儿。不做什么，就看看水，听听风。坐完以后好像什么都没解决，但心里会舒服一点。",
+                "text_pinyin": "Zhè bǎ chángyǐ shì wǒ zài zhège chéngshì zuì xǐhuan de dìfang. Měi cì yù dào xiǎng bù tōng de shì, wǒ jiù lái zhèlǐ zuò yīhuìr. Bú zuò shénme, jiù kànkan shuǐ, tīng tīng fēng. Zuò wán yǐhòu hǎoxiàng shénme dōu méi jiějué, dàn xīn lǐ huì shūfu yīdiǎn.",
+                "text_en": "This bench is my favorite place in the whole city. Whenever I can't figure something out, I come sit here for a while. I don't do anything — just watch the water, listen to the wind. When I leave, nothing seems solved, but my heart feels a bit better."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his attachment to this place.",
+                "options": [
+                    {
+                        "text_zh": "有时候我们不需要解决问题，只需要一个能让自己安静下来的地方。这把长椅不会给你答案，但它给了你空间。有这样一个地方，是一种幸运。",
+                        "text_pinyin": "Yǒu shíhou wǒmen bù xūyào jiějué wèntí, zhǐ xūyào yīge néng ràng zìjǐ ānjìng xiàlái de dìfang. Zhè bǎ chángyǐ bú huì gěi nǐ dá'àn, dàn tā gěi le nǐ kōngjiān. Yǒu zhèyàng yīge dìfang, shì yī zhǒng xìngyùn.",
+                        "text_en": "Sometimes we don't need to solve problems, we just need a place that lets us be quiet. This bench won't give you answers, but it gives you space. Having a place like this is a kind of luck.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gentle and affirming — values the role of sacred personal spaces."
+                    },
+                    {
+                        "text_zh": "你应该找人聊聊，别一个人闷着。",
+                        "text_pinyin": "Nǐ yīnggāi zhǎo rén liáoliao, bié yīge rén mēn zhe.",
+                        "text_en": "You should talk to someone, don't just keep it inside.",
+                        "score": 0.0,
+                        "feedback": "Well-intentioned but invalidates his coping method."
+                    },
+                    {
+                        "text_zh": "这个长椅看起来很旧了，应该换一个新的。",
+                        "text_pinyin": "Zhège chángyǐ kàn qǐlái hěn jiù le, yīnggāi huàn yīge xīn de.",
+                        "text_en": "This bench looks old, they should replace it.",
+                        "score": 0.0,
+                        "feedback": "Completely misses the emotional significance — treats it as furniture."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "给了我空间……对。我觉得每个人都需要这样一个「自己的地方」。不需要大，不需要漂亮，只要到了那里就觉得能呼吸了。你有没有这样的地方？",
+                "text_pinyin": "Gěi le wǒ kōngjiān…… duì. Wǒ juéde měi ge rén dōu xūyào zhèyàng yīge 'zìjǐ de dìfang'. Bù xūyào dà, bù xūyào piàoliang, zhǐyào dào le nàlǐ jiù juéde néng hūxī le. Nǐ yǒu méiyǒu zhèyàng de dìfang?",
+                "text_en": "Gave me space... right. I think everyone needs a 'place of their own' like this. Doesn't need to be big or beautiful, just somewhere that when you arrive, you feel like you can breathe. Do you have a place like that?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your own quiet place.",
+                "options": [
+                    {
+                        "text_zh": "有。我家楼顶有一个小天台，晚上没人去。我有时候会上去看星星，虽然城市里能看到的很少。但站在那里吹着风，觉得自己很小，问题也跟着变小了。",
+                        "text_pinyin": "Yǒu. Wǒ jiā lóudǐng yǒu yīge xiǎo tiāntái, wǎnshang méi rén qù. Wǒ yǒu shíhou huì shàng qù kàn xīngxīng, suīrán chéngshì lǐ néng kàn dào de hěn shǎo. Dàn zhàn zài nàlǐ chuī zhe fēng, juéde zìjǐ hěn xiǎo, wèntí yě gēn zhe biàn xiǎo le.",
+                        "text_en": "Yes. There's a small rooftop above my building, nobody goes at night. Sometimes I look at stars — you can't see many in the city. But standing there in the wind, I feel small, and my problems shrink too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reciprocal and poetic — matches his vulnerability with your own."
+                    },
+                    {
+                        "text_zh": "我没有特别喜欢的地方，到处都差不多。",
+                        "text_pinyin": "Wǒ méiyǒu tèbié xǐhuan de dìfang, dàochù dōu chàbuduō.",
+                        "text_en": "I don't have a special place, everywhere is about the same.",
+                        "score": 0.0,
+                        "feedback": "Flat — doesn't reciprocate his openness."
+                    },
+                    {
+                        "text_zh": "我一般去健身房释放压力。",
+                        "text_pinyin": "Wǒ yībān qù jiànshēnfáng shìfàng yālì.",
+                        "text_en": "I usually go to the gym to release stress.",
+                        "score": 0.0,
+                        "feedback": "Not wrong but shifts from contemplation to activity — different mode."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "问题也跟着变小了……哈哈，我喜欢这个说法。也许有一天我们可以交换一下——你来我的河边，我去你的天台。看看对方的世界是什么样的。",
+                "text_pinyin": "Wèntí yě gēn zhe biàn xiǎo le…… hāhā, wǒ xǐhuan zhège shuōfǎ. Yěxǔ yǒu yī tiān wǒmen kěyǐ jiāohuàn yíxià — nǐ lái wǒ de hé biān, wǒ qù nǐ de tiāntái. Kànkan duìfāng de shìjiè shì shénme yàng de.",
+                "text_en": "Problems shrink along... haha, I like that. Maybe one day we can trade — you come to my river, I go to your rooftop. See what each other's world looks like."
+            }
+        ],
+        "cultural_note": "In dense Chinese cities, finding personal space is a challenge. Many people develop an attachment to a specific bench, rooftop, or quiet corner that becomes their sanctuary. The concept of having a「自己的地方」(a place of one's own) resonates deeply in a culture where shared living spaces are common and privacy is often limited."
+    }
+}

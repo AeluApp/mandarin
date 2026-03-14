@@ -1,0 +1,151 @@
+{
+    "title": "The Weight of Snow",
+    "title_zh": "雪的重量",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You're in a mountain temple in Sichuan during the first snowfall. The abbot, Master Huai, sits with you watching snow accumulate on bamboo branches outside. He hasn't spoken to anyone in three days — this is his first conversation.",
+        "setup_zh": "初雪时节，你在四川的一座山寺里。住持怀师父和你一起坐着，看雪慢慢积在窗外的竹枝上。他已经三天没跟任何人说话了——这是他的第一次对话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你来得正好。看竹子——雪一点一点地积，竹子一点一点地弯。它不会折断。到了某个时刻，雪会自己滑下来，竹子弹回去。但如果雪积得太快、太重，来不及滑落——竹子就断了。这不是竹子不够强，是雪太急。大多数人的崩溃也是这样——不是因为不够坚强，是因为压力来得太密集，还没来得及释放一次，下一层就压上来了。问题从来不是重量——是间隔。",
+                "text_pinyin": "Nǐ lái de zhènghǎo. Kàn zhúzi — xuě yīdiǎn yīdiǎn de jī, zhúzi yīdiǎn yīdiǎn de wān. Tā bú huì zhéduàn. Dào le mǒu ge shíkè, xuě huì zìjǐ huá xiàlái, zhúzi tán huíqù. Dàn rúguǒ xuě jī de tài kuài, tài zhòng, lái bù jí huáluò — zhúzi jiù duàn le. Zhè bú shì zhúzi bú gòu qiáng, shì xuě tài jí. Dàduōshù rén de bēngkuì yě shì zhèyàng — bú shì yīnwèi bú gòu jiānqiáng, shì yīnwèi yālì lái de tài mìjí, hái méi lái de jí shìfàng yī cì, xià yī céng jiù yā shànglái le. Wèntí cónglái bú shì zhòngliàng — shì jiāngé.",
+                "text_en": "You've come at the right time. Watch the bamboo — snow accumulates bit by bit, bamboo bends bit by bit. It won't break. At a certain moment, the snow slides off on its own, the bamboo springs back. But if snow piles too fast, too heavy, before it can slide off — the bamboo breaks. Not because the bamboo isn't strong enough, but because the snow is too relentless."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the distinction between weight and intervals.",
+                "options": [
+                    {
+                        "text_zh": "问题不是重量，是间隔——这颠覆了对承受力的理解。真正的问题不是「你能扛多少」，是「你有没有时间在两次重压之间恢复」。竹子的智慧不在于它有多硬，是它允许自己弯，然后在间隔里弹回来。",
+                        "text_pinyin": "Wèntí bú shì zhòngliàng, shì jiāngé — zhè diānfù le duì chéngshòulì de lǐjiě. Zhēnzhèng de wèntí bú shì 'nǐ néng káng duōshǎo', shì 'nǐ yǒu méiyǒu shíjiān zài liǎng cì zhòngyā zhī jiān huīfù'. Zhúzi de zhìhuì bú zài yú tā yǒu duō yìng, shì tā yǔnxǔ zìjǐ wān, ránhòu zài jiāngé lǐ tán huílái.",
+                        "text_en": "The problem isn't weight, it's intervals — that overturns how I think about endurance.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Master Huai nods very slightly, eyes still on the bamboo. After a moment he says, 'You can see it.'"
+                    },
+                    {
+                        "text_zh": "这跟佛教的修行有什么关系？",
+                        "text_pinyin": "Zhè gēn Fójiào de xiūxíng yǒu shénme guānxi?",
+                        "text_en": "How does this connect to Buddhist practice?",
+                        "score": 0.0,
+                        "feedback": "Master Huai glances at you briefly. 'Everything connects to everything,' he says, mildly. He turns back to the window. He was hoping you'd stay with the bamboo a little longer."
+                    },
+                    {
+                        "text_zh": "那受到很大压力的时候，应该怎么做？",
+                        "text_pinyin": "Nà shòu dào hěn dà yālì de shíhou, yīnggāi zěnme zuò?",
+                        "text_en": "So when you're under great pressure, what should you do?",
+                        "score": 0.0,
+                        "feedback": "Master Huai is quiet for a moment. Then he gestures at the bamboo outside. 'Keep watching,' he says."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "节奏——你抓到了。但我要更进一步：竹子不思考「我什么时候该弯」。它只是弯了。雪落下来，它弯。雪滑走了，它弹回去。没有计划、没有判断、没有「我应该坚强」的念头。人和竹子最大的区别不是身体——是头脑。人在弯曲的时候会想「我不应该弯」，在需要释放的时候会想「释放是软弱的」。于是压力积累了，但释放被堵住了。竹子不知道什么是面子、什么是坚强。所以它永远不会被压力压到来不及释放的地步——除非外力太快。而人呢？人的外力有一半是自己加上去的。",
+                "text_pinyin": "Jiézòu — nǐ zhuā dào le. Dàn wǒ yào gèng jìn yī bù: zhúzi bù sīkǎo 'wǒ shénme shíhou gāi wān'. Tā zhǐ shì wān le. Xuě luò xiàlái, tā wān. Xuě huá zǒu le, tā tán huíqù. Méiyǒu jìhuà, méiyǒu pànduàn, méiyǒu 'wǒ yīnggāi jiānqiáng' de niàntou. Rén hé zhúzi zuì dà de qūbié bú shì shēntǐ — shì tóunǎo. Rén zài wānqū de shíhou huì xiǎng 'wǒ bù yīnggāi wān', zài xūyào shìfàng de shíhou huì xiǎng 'shìfàng shì ruǎnruò de'. Yúshì yālì jīlěi le, dàn shìfàng bèi dǔ zhù le. Zhúzi bù zhīdào shénme shì miànzi, shénme shì jiānqiáng. Suǒyǐ tā yǒngyuǎn bú huì bèi yālì yā dào lái bù jí shìfàng de dìbù — chúfēi wàilì tài kuài. Ér rén ne? Rén de wàilì yǒu yībàn shì zìjǐ jiā shàngqù de.",
+                "text_en": "Rhythm — you've caught it. But let me go further: bamboo doesn't think 'when should I bend.' It bends. Snow falls, it bends. Snow slides off, it springs back. No planning, no judgment, no thought of 'I should be strong.' The greatest difference between humans and bamboo isn't the body — it's the mind."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the self-imposed pressure that blocks natural release.",
+                "options": [
+                    {
+                        "text_zh": "人在承受压力的同时，还要承受「我不应该觉得有压力」的压力。痛苦之上叠加了对痛苦的否认——那才是真正压垮人的东西。不是原始的重量，是对重量的抗拒。头脑把弯曲本身变成了一种新的重量。",
+                        "text_pinyin": "Rén zài chéngshòu yālì de tóngshí, hái yào chéngshòu 'wǒ bù yīnggāi juéde yǒu yālì' de yālì. Tòngkǔ zhī shàng diéjiā le duì tòngkǔ de fǒurèn — nà cái shì zhēnzhèng yā kuǎ rén de dōngxi. Bú shì yuánshǐ de zhòngliàng, shì duì zhòngliàng de dǐkàng. Tóunǎo bǎ wānqū běnshēn biàn chéng le yī zhǒng xīn de zhòngliàng.",
+                        "text_en": "While bearing pressure, people also bear the pressure of 'I shouldn't feel pressured.' Denial of suffering layered on top of suffering — that's what truly breaks people.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Master Huai turns from the window and looks at you directly for the first time. He says nothing, but his expression has changed — the way a teacher's does when a student stops repeating and starts thinking."
+                    },
+                    {
+                        "text_zh": "这是不是就是「放下」的意思？",
+                        "text_pinyin": "Zhè shì bú shì jiù shì 'fàng xià' de yìsi?",
+                        "text_en": "Is this basically what 'letting go' means?",
+                        "score": 0.0,
+                        "feedback": "Master Huai looks at you calmly. 'Maybe,' he says. 'But naming it doesn't do the thing.' He turns back to the bamboo."
+                    },
+                    {
+                        "text_zh": "您三天不说话，是不是也是为了让自己有间隔？",
+                        "text_pinyin": "Nín sān tiān bù shuōhuà, shì bú shì yě shì wèile ràng zìjǐ yǒu jiāngé?",
+                        "text_en": "Were your three days of silence also a kind of interval — giving yourself space to recover?",
+                        "score": 0.0,
+                        "feedback": "Master Huai tilts his head slightly. 'That's one way to put it,' he says, without quite committing. He seems mildly amused that you turned the teaching back on him."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "弯曲变成了新的重量——这就是我想说的核心。你观察得很准。但还有一层——你看，雪停了。竹子现在正在弹回来。但它弹回来的样子和之前不完全一样。仔细看——弯曲过的地方有一个轻微的弧度留下了。竹子记住了那场雪。它没有假装雪没有来过。它弹回来了，但它允许自己被那场雪改变了一点点。这才是真正的恢复——不是变回原来的样子，是带着经历过的痕迹继续站着。",
+                "text_pinyin": "Wānqū biàn chéng le xīn de zhòngliàng — zhè jiù shì wǒ xiǎng shuō de héxīn. Nǐ guānchá de hěn zhǔn. Dàn hái yǒu yī céng — nǐ kàn, xuě tíng le. Zhúzi xiànzài zhèngzài tán huílái. Dàn tā tán huílái de yàngzi hé zhīqián bù wánquán yīyàng. Zǐxì kàn — wānqū guò de dìfang yǒu yī ge qīngwēi de húdù liú xià le. Zhúzi jì zhù le nà chǎng xuě. Tā méiyǒu jiǎzhuāng xuě méiyǒu lái guò. Tā tán huílái le, dàn tā yǔnxǔ zìjǐ bèi nà chǎng xuě gǎibiàn le yīdiǎndiǎn. Zhè cái shì zhēnzhèng de huīfù — bú shì biàn huí yuánlái de yàngzi, shì dài zhe jīnglì guò de hénjì jìxù zhàn zhe.",
+                "text_en": "Bending became new weight — that's the core of what I wanted to say. You observe precisely. But there's another layer — look, the snow stopped. The bamboo is springing back now. But it doesn't look exactly the same as before. Look closely — where it bent, a slight curve remains. The bamboo remembered that snow. It didn't pretend the snow never came."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to true recovery as standing with traces, not returning to original form.",
+                "options": [
+                    {
+                        "text_zh": "我们总把恢复等同于「变回原来的样子」——好像痛苦是一个可以删除的文件。但竹子不删除。那个轻微的弧度不是损伤——是经历。一个人身上的「弯曲」，是他活过来的证据，不是需要被治愈的伤疤。",
+                        "text_pinyin": "Wǒmen zǒng bǎ huīfù děngtóng yú 'biàn huí yuánlái de yàngzi' — hǎoxiàng tòngkǔ shì yī ge kěyǐ shānchú de wénjiàn. Dàn zhúzi bù shānchú. Nàge qīngwēi de húdù bú shì sǔnshāng — shì jīnglì. Yī ge rén shēnshàng de 'wānqū', shì tā huó guòlái de zhèngjù, bú shì xūyào bèi zhìyù de shāngbā.",
+                        "text_en": "We always equate recovery with 'returning to what you were' — as if suffering were a file that can be deleted. But bamboo doesn't delete. That slight curve isn't damage — it's experience.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Master Huai lets out a slow breath — something between agreement and relief. He looks at the bamboo once more. 'Yes,' he says. Just that."
+                    },
+                    {
+                        "text_zh": "禅宗怎么看待这个问题？",
+                        "text_pinyin": "Chánzōng zěnme kàndài zhège wèntí?",
+                        "text_en": "What does Zen Buddhism say about this?",
+                        "score": 0.0,
+                        "feedback": "Master Huai is quiet for a moment. 'You're looking at it,' he says finally, nodding toward the bamboo. He seems slightly disappointed you reached for a text when the thing itself was right there."
+                    },
+                    {
+                        "text_zh": "您经历过什么让您有这样的理解？",
+                        "text_pinyin": "Nín jīnglì guò shénme ràng nín yǒu zhèyàng de lǐjiě?",
+                        "text_en": "What did you go through that brought you to this understanding?",
+                        "score": 0.0,
+                        "feedback": "Master Huai smiles faintly. 'Many winters,' he says. He turns the question away gently but completely — this isn't his story to share right now."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "继续生长……对。你看那棵竹子——它明年还会遇到雪。它知道这一点吗？不知道。它在意吗？不在意。它只是继续长。这才是竹子教给我们的最后一课：不是关于承受，不是关于恢复——是关于「不管发生了什么，继续生长」。生长不需要理由，不需要条件完美，不需要确定未来不会有更大的雪。它只需要一件事：还活着。只要还活着，就继续长。这是世界上最简单的哲学——但也是最难做到的。",
+                "text_pinyin": "Jìxù shēngzhǎng…… duì. Nǐ kàn nà kē zhúzi — tā míngnián hái huì yù dào xuě. Tā zhīdào zhè yīdiǎn ma? Bù zhīdào. Tā zàiyì ma? Bú zàiyì. Tā zhǐ shì jìxù zhǎng. Zhè cái shì zhúzi jiāo gěi wǒmen de zuìhòu yī kè: bú shì guānyú chéngshòu, bú shì guānyú huīfù — shì guānyú 'bùguǎn fāshēng le shénme, jìxù shēngzhǎng'. Shēngzhǎng bù xūyào lǐyóu, bù xūyào tiáojiàn wánměi, bù xūyào quèdìng wèilái bú huì yǒu gèng dà de xuě. Tā zhǐ xūyào yī jiàn shì: hái huó zhe. Zhǐyào hái huó zhe, jiù jìxù zhǎng. Zhè shì shìjiè shàng zuì jiǎndān de zhéxué — dàn yě shì zuì nán zuò dào de.",
+                "text_en": "Keep growing… yes. Look at that bamboo — next year it will meet snow again. Does it know this? No. Does it care? No. It keeps growing. This is bamboo's final lesson: not about endurance, not about recovery — about 'no matter what happened, keep growing.' Growth doesn't need a reason, doesn't need perfect conditions, doesn't need certainty that next year's snow won't be heavier."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the final teaching: keep growing.",
+                "options": [
+                    {
+                        "text_zh": "竹子不问「值不值得长」——它长，是因为它活着。「活着」和「生长」是同一个动词。我们人类把它们拆开了，于是可以活着却不生长，存在却不展开。也许今天坐在这里，就是我的一次间隔——在两场雪之间，让自己弹回来的时间。谢谢您。",
+                        "text_pinyin": "Zhúzi bù wèn 'zhí bù zhíde zhǎng' — tā zhǎng, shì yīnwèi tā huó zhe. 'Huó zhe' hé 'shēngzhǎng' shì tóng yī ge dòngcí. Wǒmen rénlèi bǎ tāmen chāi kāi le, yúshì kěyǐ huó zhe què bù shēngzhǎng, cúnzài què bù zhǎnkāi. Yěxǔ jīntiān zuò zài zhèlǐ, jiù shì wǒ de yī cì jiāngé — zài liǎng chǎng xuě zhī jiān, ràng zìjǐ tán huílái de shíjiān. Xièxie nín.",
+                        "text_en": "Bamboo doesn't ask 'is it worth growing' — it grows because it's alive. 'Being alive' and 'growing' are the same verb.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Master Huai looks at you for a moment, then back at the bamboo. He doesn't say anything more. That silence is the response."
+                    },
+                    {
+                        "text_zh": "您每年冬天都在这里看竹子吗？",
+                        "text_pinyin": "Nín měi nián dōngtiān dōu zài zhèlǐ kàn zhúzi ma?",
+                        "text_en": "Do you watch the bamboo here every winter?",
+                        "score": 0.0,
+                        "feedback": "Master Huai nods simply. 'Yes.' A pause. 'It teaches something different every time.' The conversation has gently slipped into something more ordinary."
+                    },
+                    {
+                        "text_zh": "我可以在这里住几天吗？",
+                        "text_pinyin": "Wǒ kěyǐ zài zhèlǐ zhù jǐ tiān ma?",
+                        "text_en": "Would it be possible for me to stay here a few days?",
+                        "score": 0.0,
+                        "feedback": "Master Huai turns to look at you with mild surprise. 'You can speak to the guestmaster,' he says. Practical and kind — but the teaching moment has passed."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Bamboo (竹) is one of the Four Gentlemen (四君子) of Chinese art and philosophy, representing resilience, flexibility, and integrity. The observation of bamboo bending under snow is a classic contemplative practice in Chinese monasteries. The teaching here — that intervals matter more than weight, and that recovery means growing with traces rather than erasing experience — synthesizes Daoist naturalism, Buddhist acceptance, and Confucian perseverance into a single image visible from any temple window."
+    }
+}

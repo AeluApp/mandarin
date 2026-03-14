@@ -149,16 +149,17 @@ def test_mastery_requires_variation():
     assert row["mastery_stage"] != "stable", \
         f"should not be stable with only 1 drill type, got {row['mastery_stage']}"
 
-    # Now add a different drill type — should unlock stable
+    # Now add a production drill type — should unlock stable
+    # (production gate requires at least 1 correct production drill for stable)
     record_attempt(conn, ids[0], "reading", True, session_id=session_id,
-                   drill_type="tone")
+                   drill_type="reverse_mc")
 
     row = conn.execute(
         "SELECT mastery_stage FROM progress WHERE content_item_id = ?",
         (ids[0],)
     ).fetchone()
     assert row["mastery_stage"] == "stable", \
-        f"should be stable with 2 drill types and multi-day spacing, got {row['mastery_stage']}"
+        f"should be stable with 2 drill types (incl. production) and multi-day spacing, got {row['mastery_stage']}"
     conn.close()
 
 

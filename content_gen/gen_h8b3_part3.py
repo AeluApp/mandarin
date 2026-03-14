@@ -1,0 +1,88 @@
+# -*- coding: utf-8 -*-
+import sys
+sys.path.insert(0, "/Users/jasongerson/mandarin/content_gen")
+from gen_helpers import *
+
+P = []
+
+P.append(passage("j8_observe_017", "The Second Life of Cardboard Boxes", "纸箱的第二人生", 8,
+    "快递纸箱在被拆开的那一刻，对大多数人而言已经完成了它的使命。但在我住的老小区里，纸箱拥有一条完整的第二人生轨迹。首先，它会被拆解、压平，整齐地码在阳台角落里，等待废品回收员的到来。回收员是一位五十多岁的大姐，她骑着一辆改装过的三轮车，每周三和周六准时出现。纸箱按大小分级定价：鞋盒大小的两毛，电器包装箱的五毛到一块。但并非所有纸箱都走上了回收这条路。有些纸箱被赋予了新的功能：楼下王奶奶用一个大纸箱给流浪猫做了一个窝，在里面铺上旧毛毯，放在单元门旁边的角落里。李叔叔用几个纸箱在菜园子里搭了一道临时挡风墙。还有人把纸箱裁成合适的形状垫在衣柜底部防潮。这些纸箱在商品流通链中是最卑微的角色——它的存在只是为了保护里面的东西不受损坏。但当它进入日常生活的改造链条时，它获得了一种物品原本不具有的尊严：被需要、被改造、被珍惜。",
+    "Kuàidì zhǐxiāng zài bèi chāi kāi de nà yī kè, duì dàduōshù rén ér yán yǐjīng wánchéng le tā de shǐmìng.",
+    "The moment a delivery cardboard box is opened, for most people its mission is complete. But in my old neighborhood, boxes have a full second-life trajectory. First, they're disassembled, flattened, neatly stacked in a balcony corner, awaiting the recycling collector. She's a woman in her fifties who rides a modified tricycle, appearing Wednesdays and Saturdays. Boxes are priced by size: shoe-box sized for two mao, appliance boxes for five mao to one yuan. But not all boxes go to recycling. Some gain new functions: Grandma Wang downstairs made a stray cat shelter from a large box, lining it with old blankets, placed in the corner by the building entrance. Uncle Li built a temporary windbreak in his garden plot from several boxes. Others cut boxes to fit wardrobe bottoms for moisture prevention. In the commercial supply chain, boxes are the humblest role—existing only to protect contents from damage. But when entering daily life's repurposing chain, they gain a dignity objects don't inherently possess: being needed, being transformed, being valued.",
+    mc("纸箱在老小区里获得「第二人生」的本质是什么？", "What is the essence of cardboard boxes gaining a 'second life' in the old neighborhood?",
+       [o("废品回收行业很发达","fèipǐn huíshōu hángyè hěn fādá","The recycling industry is well-developed"),
+        o("居民通过创造性改造赋予废弃物品新的功能和价值","jūmín tōngguò chuàngzàoxìng gǎizào fùyǔ fèiqì wùpǐn xīn de gōngnéng hé jiàzhí","Residents give discarded items new functions and value through creative repurposing",True),
+        o("快递箱质量很好","kuàidì xiāng zhìliàng hěn hǎo","Delivery boxes are high quality"),
+        o("小区里没有足够的储物空间","xiǎoqū lǐ méiyǒu zúgòu de chǔwù kōngjiān","The neighborhood lacks storage space")], 0.4),
+    mc("作者说纸箱获得了「物品原本不具有的尊严」，这里的「尊严」指什么？", "What does the 'dignity objects don't inherently possess' mean?",
+       [o("纸箱变得很贵","zhǐxiāng biàn de hěn guì","Boxes became expensive"),
+        o("被人需要、被改造、被珍惜的状态赋予了原本一次性的物品存在意义","bèi rén xūyào, bèi gǎizào, bèi zhēnxī de zhuàngtài fùyǔ le yuánběn yīcìxìng de wùpǐn cúnzài yìyì","Being needed, transformed, and valued gives disposable items existential meaning",True),
+        o("纸箱可以做很多东西","zhǐxiāng kěyǐ zuò hěn duō dōngxi","Boxes can be made into many things"),
+        o("环保意识在提高","huánbǎo yìshi zài tígāo","Environmental awareness is increasing")], 0.5),
+    mc("废品回收员每周出现两次这个细节说明了什么？", "What does the detail of the recycling collector appearing twice weekly illustrate?",
+       [o("回收业务需求量大","huíshōu yèwù xūqiúliàng dà","Recycling demand is high"),
+        o("老小区的日常生活有着固定的、人际化的节奏","lǎo xiǎoqū de rìcháng shēnghuó yǒu zhe gùdìng de, rénjìhuà de jiézòu","Old neighborhood daily life has a fixed, interpersonal rhythm",True),
+        o("回收员工作很辛苦","huíshōu yuán gōngzuò hěn xīnkǔ","The collector works very hard"),
+        o("纸箱积累速度很快","zhǐxiāng jīlěi sùdù hěn kuài","Boxes accumulate quickly")], 0.45)))
+
+P.append(passage("j8_urban_006", "The Invisible Infrastructure of Delivery Riders", "外卖骑手的隐形基础设施", 8,
+    "如果你仔细观察，外卖骑手在城市中已经建立了一套与正式交通系统平行的隐形基础设施。每个商圈都有骑手们约定俗成的「等候区」——通常是某栋写字楼背面的人行道或某个商场的地下车库入口。这些地方不是任何人规划的，而是骑手们在长期实践中自发选择的：距离取餐点最近、不会被保安驱赶、有足够的空间停放电动车。更精密的是他们的「路线知识」——哪条巷子可以避开红灯，哪栋楼的电梯最快，哪个小区的门禁可以直接刷骑手码进入。这些知识不会出现在任何导航软件中，它们完全依靠口口相传和亲身试错来积累。我曾经跟一位骑手聊天，他说他对这座城市五公里范围内的每栋楼、每条捷径、每个可能的停车点都了如指掌。他的这种知识是一种城市的「暗知识」——维持着城市运转的效率，却从未被任何正式系统承认或记录。当我们评价一座城市是否「智慧」时，或许不应该只看它的数字化基础设施，还应该看那些由无数个体的经验汇聚而成的隐形网络。",
+    "Rúguǒ nǐ zǐxì guānchá, wàimài qíshǒu zài chéngshì zhōng yǐjīng jiànlì le yī tào yǔ zhèngshì jiāotōng xìtǒng píngxíng de yǐnxíng jīchǔ shèshī.",
+    "If you observe carefully, delivery riders have built an invisible infrastructure parallel to the formal traffic system. Every commercial district has riders' customary 'waiting zones'—usually the sidewalk behind an office building or a mall's underground garage entrance. These weren't planned by anyone but spontaneously selected through long practice: closest to pickup points, safe from security guards, with enough space for electric scooters. More precise is their 'route knowledge'—which alleys bypass red lights, which buildings have the fastest elevators, which neighborhoods' gates accept rider codes directly. None of this appears in any navigation app; it's accumulated entirely through word of mouth and trial and error. I once chatted with a rider who said he knew every building, shortcut, and parking spot within five kilometers by heart. This knowledge is a city's 'dark knowledge'—sustaining urban efficiency yet never acknowledged or recorded by any formal system. When we evaluate whether a city is 'smart,' perhaps we should look not only at its digital infrastructure but also at the invisible networks formed by countless individuals' accumulated experience.",
+    mc("骑手的「路线知识」与导航软件有什么不同？", "How does riders' 'route knowledge' differ from navigation apps?",
+       [o("骑手的知识不够准确","qíshǒu de zhīshi búgòu zhǔnquè","Riders' knowledge isn't accurate enough"),
+        o("它包含导航软件无法记录的非正式信息，如门禁规则和电梯速度","tā bāohán dǎoháng ruǎnjiàn wúfǎ jìlù de fēi zhèngshì xìnxī, rú ménjìn guīzé hé diàntī sùdù","It includes informal information navigation apps can't record, like gate rules and elevator speeds",True),
+        o("导航软件比骑手知识更全面","dǎoháng ruǎnjiàn bǐ qíshǒu zhīshi gèng quánmiàn","Navigation apps are more comprehensive"),
+        o("骑手不使用导航软件","qíshǒu bú shǐyòng dǎoháng ruǎnjiàn","Riders don't use navigation apps")], 0.45),
+    mc("作者所说的「暗知识」核心特征是什么？", "What is the core characteristic of the 'dark knowledge' the author describes?",
+       [o("它是非法的","tā shì fēifǎ de","It is illegal"),
+        o("维持城市运转但从未被正式系统承认或记录","wéichí chéngshì yùnzhuǎn dàn cóng wèi bèi zhèngshì xìtǒng chéngrèn huò jìlù","It sustains urban functioning but is never acknowledged or recorded by formal systems",True),
+        o("只有骑手才知道","zhǐ yǒu qíshǒu cái zhīdào","Only riders know it"),
+        o("它很危险","tā hěn wēixiǎn","It is dangerous")], 0.5),
+    mc("骑手「等候区」的形成说明了什么？", "What does the formation of riders' 'waiting zones' illustrate?",
+       [o("商圈的停车位不够","shāngquān de tíngchē wèi búgòu","Commercial districts lack parking"),
+        o("实际使用者会在正式规划之外自发创造出功能性空间","shíjì shǐyòngzhě huì zài zhèngshì guīhuà zhīwài zìfā chuàngzào chū gōngnéngxìng kōngjiān","Actual users spontaneously create functional spaces outside formal planning",True),
+        o("外卖平台应该为骑手提供等候区","wàimài píngtái yīnggāi wèi qíshǒu tígōng děnghòu qū","Delivery platforms should provide waiting zones"),
+        o("保安不应该驱赶骑手","bǎo'ān bù yīnggāi qūgǎn qíshǒu","Security guards shouldn't chase riders away")], 0.45)))
+
+P.append(passage("j8_identity_004", "The Photograph That Doesn't Look Like Me", "不像我的那张照片", 8,
+    "我的身份证照片已经用了十年，那上面的人与现在的我几乎判若两人。十年前的我更瘦，头发更长，眼神里有一种我现在已经找不到的东西——可能是某种未经世事的锐气。每次在银行或酒店出示身份证时，工作人员都会多看两眼，在照片和真人之间反复比对。有人委婉地问过我：「这是您本人吗？」我总是笑着说是。但这个问题在哲学意义上其实很有意思：那张照片上的人确实是「我」吗？如果一个人的外貌、体重、发型、表情甚至眼神都发生了变化，那么身份证上的「身份」究竟锚定在什么上面？不是外貌——它会变；不是名字——它可以改；不是地址——我已经搬了四次家。真正连接十年前的那个人和现在这个人的，或许只有一样东西：记忆的连续性。我记得那张照片是在哪个下午、在哪个派出所、由哪台机器拍的。正是这条记忆的细线，把两个看起来不像同一个人的人绑在了一起。",
+    "Wǒ de shēnfènzhèng zhàopiàn yǐjīng yòng le shí nián, nà shàngmiàn de rén yǔ xiànzài de wǒ jīhū pàn ruò liǎng rén.",
+    "My ID photo is ten years old, and the person in it bears almost no resemblance to the current me. Ten-years-ago me was thinner, with longer hair, and something in the eyes I can no longer find—perhaps an unworn sharpness. Each time I present my ID at a bank or hotel, staff glance back and forth between photo and face. Someone once tactfully asked: 'Is this you?' I always smile and say yes. But the question is philosophically interesting: is the person in that photo really 'me'? If a person's appearance, weight, hairstyle, expression, and even gaze have all changed, what exactly does the 'identity' on the ID card anchor to? Not appearance—it changes; not name—it can be changed; not address—I've moved four times. What truly connects the person from ten years ago with the present person is perhaps only one thing: the continuity of memory. I remember which afternoon, at which police station, by which machine that photo was taken. It is this thin thread of memory that binds two people who don't look like the same person.",
+    mc("作者认为身份的本质锚定在什么上面？", "What does the author believe identity is fundamentally anchored in?",
+       [o("外貌特征","wàimào tèzhēng","Physical appearance"),
+        o("记忆的连续性","jìyì de liánxùxìng","The continuity of memory",True),
+        o("法律文件","fǎlǜ wénjiàn","Legal documents"),
+        o("DNA","DNA","DNA")], 0.5),
+    mc("工作人员问「这是您本人吗」的尴尬场景在文中起什么作用？", "What role does the awkward 'is this you?' scene play?",
+       [o("批评身份证照片更新制度","pīpíng shēnfènzhèng zhàopiàn gēngxīn zhìdù","Criticizing the ID photo update system"),
+        o("引出关于身份本质的哲学思考","yǐnchū guānyú shēnfèn běnzhì de zhéxué sīkǎo","Introducing philosophical reflection on the nature of identity",True),
+        o("说明作者变化太大","shuōmíng zuòzhě biànhuà tài dà","Showing the author has changed too much"),
+        o("展示银行服务不够人性化","zhǎnshì yínháng fúwù búgòu rénxìnghuà","Showing bank service is not humane enough")], 0.45),
+    mc("照片里「未经世事的锐气」这个描述暗示了什么？", "What does 'unworn sharpness' in the photo suggest?",
+       [o("十年前的作者更自信","shí nián qián de zuòzhě gèng zìxìn","The author was more confident ten years ago"),
+        o("时间和经历磨去了年轻时的棱角，这是一种不可逆的变化","shíjiān hé jīnglì mó qù le niánqīng shí de léngjiǎo, zhè shì yī zhǒng bùkě nì de biànhuà","Time and experience have worn away youthful edges, an irreversible change",True),
+        o("作者需要更多睡眠","zuòzhě xūyào gèng duō shuìmián","The author needs more sleep"),
+        o("照片的光线比现在好","zhàopiàn de guāngxiàn bǐ xiànzài hǎo","The photo lighting was better than now")], 0.45)))
+
+P.append(passage("j8_observe_018", "The Silence Between Songs", "歌曲之间的沉默", 8,
+    "在音乐专辑的时代，歌曲之间的沉默是一种被精心设计的空白。那两三秒钟的静默不是空无一物的间隔，而是一次呼吸——它让上一首歌的余韵有时间消散，也让听者的耳朵为下一首歌做好准备。好的专辑制作人深谙这个道理：沉默本身就是音乐的一部分。但在流媒体时代，这种沉默正在消失。算法推荐的歌单让歌曲无缝衔接，一首歌的最后一个音符还没落地，下一首歌的前奏就挤了进来。我们不再体验音乐的呼吸节奏，而是被一条不间断的声音流包裹。这种变化看似微小，实际上改变了我们与音乐的关系：从「倾听」变成了「消费」，从「选择」变成了「被投喂」。我有时会故意在两首歌之间暂停几秒钟，重新体验那种沉默。在那几秒钟里，上一首歌的情感会在胸腔里缓缓沉淀，像茶叶在杯底慢慢展开。那种沉淀的感觉，是无缝播放永远无法提供的。沉默不是音乐的缺席，而是音乐最安静的形态。",
+    "Zài yīnyuè zhuānjí de shídài, gēqǔ zhījiān de chénmò shì yī zhǒng bèi jīngxīn shèjì de kòngbái.",
+    "In the album era, silence between songs was a carefully designed blank. Those two or three seconds weren't empty intervals but a breath—letting the previous song's lingering emotion dissipate and preparing the listener's ear for what comes next. Good album producers understood: silence itself is part of the music. But in the streaming era, this silence is disappearing. Algorithm-curated playlists make songs seamlessly connect, the last note of one song barely fading before the next song's intro pushes in. We no longer experience music's breathing rhythm but are wrapped in an unbroken sound stream. This seemingly small change actually transforms our relationship with music: from 'listening' to 'consuming,' from 'choosing' to 'being fed.' Sometimes I deliberately pause a few seconds between songs, re-experiencing that silence. In those seconds, the previous song's emotion slowly settles in my chest, like tea leaves gradually unfurling at the cup's bottom. That settling feeling is something seamless playback can never provide. Silence is not the absence of music, but music's quietest form.",
+    mc("作者认为流媒体时代音乐体验的核心变化是什么？", "What does the author see as the core change in music experience in the streaming era?",
+       [o("音质变差了","yīnzhì biàn chà le","Sound quality worsened"),
+        o("从主动倾听和选择变成了被动消费和被投喂","cóng zhǔdòng qīngtīng hé xuǎnzé biàn chéng le bèidòng xiāofèi hé bèi tóuwèi","From active listening and choosing to passive consumption and being fed",True),
+        o("歌曲越来越短","gēqǔ yuè lái yuè duǎn","Songs are getting shorter"),
+        o("人们听音乐的时间减少了","rénmen tīng yīnyuè de shíjiān jiǎnshǎo le","People spend less time listening to music")], 0.45),
+    mc("作者说「沉默不是音乐的缺席，而是音乐最安静的形态」，核心含义是什么？", "What is the core meaning of 'silence is not the absence of music but its quietest form'?",
+       [o("没有声音也是一种音乐","méiyǒu shēngyīn yě shì yī zhǒng yīnyuè","No sound is also a kind of music"),
+        o("歌曲间的沉默承载着情感沉淀的功能，是完整音乐体验不可缺少的部分","gēqǔ jiān de chénmò chéngzài zhe qínggǎn chéndiàn de gōngnéng, shì wánzhěng yīnyuè tǐyàn bùkě quēshǎo de bùfen","Silence between songs carries the function of emotional settling and is an indispensable part of the complete music experience",True),
+        o("安静的环境有利于欣赏音乐","ānjìng de huánjìng yǒulì yú xīnshǎng yīnyuè","Quiet environments help appreciate music"),
+        o("流媒体应该在歌曲之间加入停顿","liúméitǐ yīnggāi zài gēqǔ zhījiān jiārù tíngdùn","Streaming services should insert pauses between songs")], 0.55),
+    mc("作者用「茶叶在杯底慢慢展开」来比喻什么？", "What does the author use 'tea leaves gradually unfurling at the cup's bottom' to metaphorize?",
+       [o("音乐的旋律","yīnyuè de xuánlǜ","Music's melody"),
+        o("歌曲结束后情感在内心缓慢沉淀的过程","gēqǔ jiéshù hòu qínggǎn zài nèixīn huǎnmàn chéndiàn de guòchéng","The process of emotion slowly settling in one's heart after a song ends",True),
+        o("泡茶的技巧","pào chá de jìqiǎo","Tea-making technique"),
+        o("时间的流逝","shíjiān de liúshì","The passage of time")], 0.4)))
+
+append_save("hsk8_batch3.json", P)

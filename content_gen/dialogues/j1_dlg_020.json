@@ -1,0 +1,87 @@
+{
+    "title": "The Old Cat on the Wall",
+    "title_zh": "墙上的老猫",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're sitting on a bench in your neighborhood. An elderly neighbor notices you watching a cat on a wall.",
+        "setup_zh": "你坐在小区的长椅上。一位老邻居看到你在看墙上的猫。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也喜欢这只猫吗？它每天都在这里。",
+                "text_pinyin": "Nǐ yě xǐhuan zhè zhī māo ma? Tā měi tiān dōu zài zhèlǐ.",
+                "text_en": "Do you like this cat too? It's here every day."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your feelings about the cat.",
+                "options": [
+                    {
+                        "text_zh": "喜欢！它看起来很开心。",
+                        "text_pinyin": "Xǐhuan! Tā kàn qǐlái hěn kāixīn.",
+                        "text_en": "Yes! It looks very happy.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Notices the cat's contentment -- shows you see what she sees in this daily visitor."
+                    },
+                    {
+                        "text_zh": "喜欢。我第一次看到它。",
+                        "text_pinyin": "Xǐhuan. Wǒ dì yī cì kàn dào tā.",
+                        "text_en": "I like it. This is my first time seeing it.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers honestly but doesn't engage much -- she's a regular observer and you could connect over the cat."
+                    },
+                    {
+                        "text_zh": "你住在这里很久了吗？",
+                        "text_pinyin": "Nǐ zhù zài zhèlǐ hěn jiǔ le ma?",
+                        "text_en": "Have you lived here a long time?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "About the neighborhood, but she asked if you like the cat -- answer her question before changing subjects."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊，它很喜欢晒太阳。我叫它「小花」。",
+                "text_pinyin": "Shì a, tā hěn xǐhuan shài tàiyáng. Wǒ jiào tā「Xiǎo Huā」.",
+                "text_en": "Yes, it loves sunbathing. I call it Little Flower."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the cat's name.",
+                "options": [
+                    {
+                        "text_zh": "「小花」！好名字。它是你的猫吗？",
+                        "text_pinyin": "「Xiǎo Huā」! Hǎo míngzi. Tā shì nǐ de māo ma?",
+                        "text_en": "Little Flower! Good name. Is it your cat?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Repeats the name with delight and asks a natural follow-up -- she shared something personal and you received it warmly."
+                    },
+                    {
+                        "text_zh": "小花。它喜欢晒太阳啊。",
+                        "text_pinyin": "Xiǎo Huā. Tā xǐhuan shài tàiyáng a.",
+                        "text_en": "Little Flower. It likes sunbathing.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Acknowledges what she said but just repeats it -- she told you it loves sunbathing and you echoed it back."
+                    },
+                    {
+                        "text_zh": "你还有别的猫吗？",
+                        "text_pinyin": "Nǐ hái yǒu bié de māo ma?",
+                        "text_en": "Do you have other cats?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Jumps past her naming this specific cat to ask about others -- she was sharing something special about this one."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Neighborhood cats in China are often communal pets — no one officially owns them, but everyone feeds them and gives them names. They become part of the neighborhood's shared life."
+    }
+}

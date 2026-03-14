@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Introduce yourself and confirm you just moved in.",
                 "options": [
-                    {"text_zh": "你好，我是新搬来的，我叫杰森。", "text_pinyin": "nǐ hǎo, wǒ shì xīn bān lái de, wǒ jiào jiésēn.", "text_en": "Hello, I just moved in, my name is Jason.", "score": 1.0, "register": "neutral", "feedback": "Great — friendly greeting with your name. Natural and complete."},
-                    {"text_zh": "对，我昨天刚搬来的。", "text_pinyin": "duì, wǒ zuótiān gāng bān lái de.", "text_en": "Yes, I just moved in yesterday.", "score": 0.7, "register": "casual", "feedback": "Confirms you moved in, but introducing your name makes it warmer."},
-                    {"text_zh": "嗯，是的，我住这里了。", "text_pinyin": "ēn, shì de, wǒ zhù zhèlǐ le.", "text_en": "Yeah, I live here now.", "score": 0.5, "register": "casual", "feedback": "Functional but a bit flat — adding your name opens the door to friendship."}
+                    {
+                        "text_zh": "你好，我是新搬来的，我叫杰森。",
+                        "text_pinyin": "nǐ hǎo, wǒ shì xīn bān lái de, wǒ jiào jiésēn.",
+                        "text_en": "Hello, I just moved in, my name is Jason.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Great — friendly greeting with your name. Natural and complete."
+                    },
+                    {
+                        "text_zh": "她是老师，在一个小学教书。",
+                        "text_pinyin": "tā shì lǎoshī, zài yī ge xiǎoxué jiāoshū.",
+                        "text_en": "She's a teacher, she teaches at a primary school.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to introduce yourself and confirm you just moved in, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "苹果怎么卖？我想买一些。",
+                        "text_pinyin": "píngguǒ zěnme mài? wǒ xiǎng mǎi yīxiē.",
+                        "text_en": "How much are the apples? I'd like to buy some.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to introduce yourself and confirm you just moved in, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Thank your neighbor for the warm welcome.",
                 "options": [
-                    {"text_zh": "太好了，谢谢你！以后多多关照。", "text_pinyin": "tài hǎo le, xièxie nǐ! yǐhòu duōduō guānzhào.", "text_en": "That's great, thank you! Please look after me in the future.", "score": 1.0, "register": "neutral", "feedback": "多多关照 is a warm, humble expression that builds goodwill with neighbors."},
-                    {"text_zh": "谢谢你，你人真好啊。", "text_pinyin": "xièxie nǐ, nǐ rén zhēn hǎo a.", "text_en": "Thank you, you're really nice.", "score": 0.7, "register": "casual", "feedback": "Warm and genuine, though 多多关照 is more standard in this context."},
-                    {"text_zh": "好的好的，谢谢你了。", "text_pinyin": "hǎo de hǎo de, xièxie nǐ le.", "text_en": "OK OK, thanks.", "score": 0.5, "register": "casual", "feedback": "Polite enough but misses the chance to build a neighborly connection."}
+                    {
+                        "text_zh": "你好，请问地铁站在哪儿？",
+                        "text_pinyin": "nǐ hǎo, qǐngwèn dìtiě zhàn zài nǎr?",
+                        "text_en": "Hello, excuse me, where is the subway station?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank your neighbor for the warm welcome, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "老师，我没听懂，请您再说一次。",
+                        "text_pinyin": "lǎoshī, wǒ méi tīng dǒng, qǐng nín zài shuō yī cì.",
+                        "text_en": "Teacher, I didn't understand, please say it once more.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to thank your neighbor for the warm welcome, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "太好了，谢谢你！以后多多关照。",
+                        "text_pinyin": "tài hǎo le, xièxie nǐ! yǐhòu duōduō guānzhào.",
+                        "text_en": "That's great, thank you! Please look after me in the future.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "多多关照 is a warm, humble expression that builds goodwill with neighbors."
+                    }
                 ]
             }
         ],

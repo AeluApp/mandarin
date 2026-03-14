@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What HSK Level Do You Need for Real-World Goals? — Mandarin Blog</title>
+  <title>What HSK Level Do You Need for Real-World Goals? — Aelu Blog</title>
   <meta name="description" content="An honest breakdown of what each HSK level (1-9) actually gets you in real life: travel, work, reading, conversation, and media comprehension.">
   <meta name="keywords" content="HSK levels real world, what HSK level do I need, HSK 1 2 3 4 5 6 meaning, HSK level for work in China, HSK level for conversation, new HSK 3.0 changes, HSK speaking ability, Chinese fluency levels">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
   <meta property="og:title" content="What HSK Level Do You Need for Real-World Goals?">
   <meta property="og:description" content="An honest breakdown of what each HSK level actually gets you in real life: travel, work, reading, conversation, and media comprehension.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://mandarinapp.com/blog/hsk-levels-real-world">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/blog/hsk-levels-real-world">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="article:author" content="Mandarin">
+  <meta property="article:author" content="Aelu">
   <meta property="article:published_time" content="2026-01-21">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="What HSK Level Do You Need for Real-World Goals?">
   <meta name="twitter:description" content="An honest breakdown of what each HSK level actually gets you in real life: travel, work, reading, conversation, and media comprehension.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -33,18 +34,18 @@
     "description": "An honest breakdown of what each HSK level (1-9) actually gets you in real life: travel, work, reading, conversation, and media comprehension.",
     "author": {
       "@type": "Organization",
-      "name": "Mandarin"
+      "name": "Aelu"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Mandarin",
-      "url": "https://mandarinapp.com"
+      "name": "Aelu",
+      "url": "https://aeluapp.com"
     },
     "datePublished": "2026-01-21",
     "dateModified": "2026-01-21",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://mandarinapp.com/blog/hsk-levels-real-world"
+      "@id": "https://aeluapp.com/blog/hsk-levels-real-world"
     }
   }
   </script>
@@ -53,7 +54,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="alternate" type="application/rss+xml" title="Mandarin Blog" href="/blog/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Aelu Blog" href="/blog/feed.xml">
   <style>
     :root {
       --color-base: #F2EBE0;
@@ -137,18 +138,83 @@
     .share-bar button svg { width: 16px; height: 16px; fill: currentColor; }
     .share-bar .share-copied { font-size: 0.8rem; color: var(--color-secondary); opacity: 0; transition: opacity 0.2s ease; }
     .share-bar .share-copied.visible { opacity: 1; }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">Mandarin</a>
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/blog" aria-current="page">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -269,7 +335,7 @@
       <li><strong>Weak vocabulary?</strong> Spaced repetition drilling, but with varied drill types &mdash; not just flashcards. Cloze deletion, audio recognition, tone pair discrimination, character writing.</li>
     </ul>
 
-    <p>The diagnostics in <a href="https://mandarinapp.com">Mandarin</a> show you where you are across all four skills &mdash; vocabulary recognition, listening comprehension, reading fluency, and tone accuracy &mdash; so you can target your actual weak points instead of grinding what you are already decent at. It is the approach most learners wish they had from the start.</p>
+    <p>The diagnostics in <a href="https://aeluapp.com">Aelu</a> show you where you are across all four skills &mdash; vocabulary recognition, listening comprehension, reading fluency, and tone accuracy &mdash; so you can target your actual weak points instead of grinding what you are already decent at. It is the approach most learners wish they had from the start.</p>
   </article>
 
   <div class="share-bar">
@@ -291,14 +357,14 @@
   </div>
 
   <div class="article-cta">
-    <h3>Try Mandarin free</h3>
+    <h3>Try Aelu free</h3>
     <p>HSK 1-2 content, all core drill types, no credit card required.</p>
-    <a href="https://mandarinapp.com" class="btn-primary">Start learning</a>
+    <a href="https://aeluapp.com" class="btn-primary">Start learning</a>
   </div>
 
   <div class="newsletter">
     <h3>Get new posts by email</h3>
-    <p>One or two emails a month on learning Mandarin. No spam.</p>
+    <p>One or two emails a month on learning Chinese. No spam.</p>
     <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
       <button type="submit" class="btn-primary">Subscribe</button>

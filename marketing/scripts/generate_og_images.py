@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate Open Graph images (1200x630) for all Mandarin landing pages.
+Generate Open Graph images (1200x630) for all Aelu landing pages.
 
 Generates both SVG files and PNG files (via Pillow).
 Output directory: marketing/landing/og/
@@ -31,10 +31,10 @@ PAGES = [
     ("chinese-listening-practice", "Chinese Listening Practice:\nHow to Improve"),
     ("hsk-levels-real-world", "What HSK Level Do You\nNeed for Real-World Goals?"),
     ("founder-story", "I Built a Chinese\nLearning App"),
-    ("vs-duolingo", "Mandarin vs Duolingo"),
-    ("vs-anki", "Mandarin vs Anki"),
-    ("vs-hack-chinese", "Mandarin vs Hack Chinese"),
-    ("vs-hellochinese", "Mandarin vs HelloChinese"),
+    ("vs-duolingo", "Aelu vs Duolingo"),
+    ("vs-anki", "Aelu vs Anki"),
+    ("vs-hack-chinese", "Aelu vs Hack Chinese"),
+    ("vs-hellochinese", "Aelu vs HelloChinese"),
     ("partner-kit", "Partner Content Kit"),
     ("affiliates", "Partner Program"),
 ]
@@ -95,8 +95,7 @@ def generate_svg(slug, title):
   <rect width="{WIDTH}" height="{HEIGHT}" fill="{BG_COLOR}"/>
 
   <!-- Wordmark -->
-  <text x="600" y="80" font-family="Noto Serif SC, Songti SC, serif" font-size="28" font-weight="700" fill="{ACCENT_COLOR}" text-anchor="middle" opacity="0.7">&#28459;</text>
-  <text x="640" y="80" font-family="Cormorant Garamond, Georgia, serif" font-size="28" font-weight="600" fill="{TEXT_COLOR}" text-anchor="middle">Mandarin</text>
+  <text x="600" y="80" font-family="Cormorant Garamond, Georgia, serif" font-size="28" font-weight="600" fill="{TEXT_COLOR}" text-anchor="middle">Aelu</text>
 
   <!-- Page title -->
 {title_lines_svg}
@@ -104,7 +103,7 @@ def generate_svg(slug, title):
   <rect x="552" y="{bar_y:.0f}" width="96" height="3" fill="{ACCENT_COLOR}"/>
 
   <!-- URL -->
-  <text x="600" y="590" font-family="Source Serif 4, Georgia, serif" font-size="18" fill="{FAINT_COLOR}" text-anchor="middle">mandarinapp.com</text>
+  <text x="600" y="590" font-family="Source Serif 4, Georgia, serif" font-size="18" fill="{FAINT_COLOR}" text-anchor="middle">aeluapp.com</text>
 </svg>'''
 
     return svg
@@ -179,7 +178,7 @@ def generate_png(slug, title, output_path):
     url_font = load_font(body_font_names, 18)
 
     # Draw wordmark
-    wm_text = "Mandarin"
+    wm_text = "Aelu"
     wm_bbox = draw.textbbox((0, 0), wm_text, font=wordmark_font)
     wm_w = wm_bbox[2] - wm_bbox[0]
     draw.text(((WIDTH - wm_w) / 2, 48), wm_text, fill=text_rgb, font=wordmark_font)
@@ -205,7 +204,7 @@ def generate_png(slug, title, output_path):
     )
 
     # Draw URL
-    url_text = "mandarinapp.com"
+    url_text = "aeluapp.com"
     url_bbox = draw.textbbox((0, 0), url_text, font=url_font)
     url_w = url_bbox[2] - url_bbox[0]
     draw.text(((WIDTH - url_w) / 2, 580), url_text, fill=faint_rgb, font=url_font)

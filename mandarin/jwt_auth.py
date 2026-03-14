@@ -38,8 +38,10 @@ def decode_access_token(token: str) -> int | None:
         sub = payload.get("sub")
         return int(sub) if sub is not None else None
     except jwt.ExpiredSignatureError:
+        logger.info("JWT access token expired")
         return None
-    except (jwt.InvalidTokenError, KeyError, TypeError):
+    except (jwt.InvalidTokenError, KeyError, TypeError) as e:
+        logger.warning("JWT access token invalid: %s", type(e).__name__)
         return None
 
 
@@ -76,6 +78,7 @@ def store_refresh_token(conn: sqlite3.Connection, user_id: int, token_hash: str)
         (token_hash, expires, user_id),
     )
     conn.commit()
+    logger.info("Refresh token stored for user_id=%d, expires=%s", user_id, expires)
 
 
 def validate_refresh_token(conn: sqlite3.Connection, raw_token: str) -> int | None:
@@ -89,6 +92,7 @@ def validate_refresh_token(conn: sqlite3.Connection, raw_token: str) -> int | No
         (token_hash,),
     ).fetchone()
     if not row:
+        logger.info("Refresh token validation failed: token not found")
         return None
     # Check expiry
     expires_str = row["refresh_token_expires"]
@@ -96,9 +100,12 @@ def validate_refresh_token(conn: sqlite3.Connection, raw_token: str) -> int | No
         try:
             expires = datetime.strptime(expires_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
             if datetime.now(timezone.utc) > expires:
+                logger.info("Refresh token expired for user_id=%d", row["id"])
                 return None
         except (ValueError, TypeError):
-            pass
+            # Malformed expiry — reject token (fail-safe)
+            logger.warning("Malformed refresh_token_expires for user_id=%d: %r", row["id"], expires_str)
+            return None
     return row["id"]
 
 
@@ -109,3 +116,4 @@ def revoke_refresh_token(conn: sqlite3.Connection, user_id: int) -> None:
         (user_id,),
     )
     conn.commit()
+    logger.info("Refresh token revoked for user_id=%d", user_id)

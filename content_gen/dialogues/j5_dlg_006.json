@@ -1,0 +1,90 @@
+{
+  "title": "Grandmother's Recipe",
+  "title_zh": "奶奶的食谱",
+  "hsk_level": 5,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.5,
+  "tree": {
+    "setup": "You're in the kitchen with your friend Xiaowen. She's trying to recreate her grandmother's braised fish, working from memory since no recipe was ever written down.",
+    "setup_zh": "你和朋友小文在厨房里。她正试着凭记忆重做奶奶的红烧鱼，因为食谱从来没有写下来过。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "我奶奶做的红烧鱼，我再也做不出那个味道。她从来不量调料，都是看感觉放的。我小时候站在旁边看了无数次，但自己做的时候总是差一点。",
+        "text_pinyin": "Wǒ nǎinai zuò de hóngshāo yú, wǒ zài yě zuò bù chū nàge wèidào. Tā cónglái bù liáng tiáoliào, dōu shì kàn gǎnjué fàng de. Wǒ xiǎo shíhou zhàn zài pángbiān kàn le wúshù cì, dàn zìjǐ zuò de shíhou zǒng shì chà yīdiǎn.",
+        "text_en": "My grandmother's braised fish — I can never recreate that flavor. She never measured seasonings, she just went by feel. I watched her countless times as a child, but when I try it myself, something is always slightly off."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to Xiaowen about her grandmother's cooking.",
+        "options": [
+          {
+            "text_zh": "也许差的那一点不是调料的问题，是记忆里的味道。小时候吃的东西总是特别好吃，因为那时候有奶奶在旁边。",
+            "text_pinyin": "Yěxǔ chà de nà yīdiǎn bú shì tiáoliào de wèntí, shì jìyì lǐ de wèidào. Xiǎo shíhou chī de dōngxi zǒng shì tèbié hǎochī, yīnwèi nà shíhou yǒu nǎinai zài pángbiān.",
+            "text_en": "Maybe what's missing isn't about seasonings — it's the taste in your memory. Food from childhood always tastes especially good because grandmother was there beside you.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Tender and insightful — connects taste to emotion and presence."
+          },
+          {
+            "text_zh": "你可以在网上搜一下红烧鱼的做法。",
+            "text_pinyin": "Nǐ kěyǐ zài wǎng shàng sōu yíxià hóngshāo yú de zuòfǎ.",
+            "text_en": "You can search for a braised fish recipe online.",
+            "score": 0.0,
+            "feedback": "Misses the emotional point about grandmother's unique touch."
+          },
+          {
+            "text_zh": "你多做几次就好了，熟能生巧嘛。下次注意火候应该就差不多了。",
+            "text_pinyin": "Nǐ duō zuò jǐ cì jiù hǎo le, shú néng shēng qiǎo ma. Xià cì zhùyì huǒhòu yīnggāi jiù chàbuduō le.",
+            "text_en": "Just practice a few more times — practice makes perfect. Pay attention to the heat next time and it should be close enough.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "She's not looking for cooking tips. The gap isn't technique — it's that her grandmother is gone."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊。有时候我做这道菜，不完全是为了味道，是想通过做饭跟她再靠近一点。她去世已经五年了，但每次闻到红烧的香味，我就想起她的厨房。",
+        "text_pinyin": "Shì a. Yǒu shíhou wǒ zuò zhè dào cài, bù wánquán shì wèile wèidào, shì xiǎng tōngguò zuòfàn gēn tā zài kào jìn yīdiǎn. Tā qùshì yǐjīng wǔ nián le, dàn měi cì wén dào hóngshāo de xiāngwèi, wǒ jiù xiǎng qǐ tā de chúfáng.",
+        "text_en": "Yeah. Sometimes when I cook this dish, it's not entirely about the flavor — it's wanting to feel closer to her through cooking. She passed away five years ago, but every time I smell braised food, I think of her kitchen."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share a comforting thought about keeping memories alive.",
+        "options": [
+          {
+            "text_zh": "做饭就是你和她之间的纽带。也许味道不完全一样，但你每次做这道菜的时候，她的记忆就还活着。这比任何食谱都重要。",
+            "text_pinyin": "Zuòfàn jiù shì nǐ hé tā zhī jiān de niǔdài. Yěxǔ wèidào bù wánquán yíyàng, dàn nǐ měi cì zuò zhè dào cài de shíhou, tā de jìyì jiù hái huó zhe. Zhè bǐ rènhé shípǔ dōu zhòngyào.",
+            "text_en": "Cooking is the bond between you and her. Maybe the taste isn't exactly the same, but every time you make this dish, her memory stays alive. That matters more than any recipe.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Warm and meaningful — elevates the act of cooking beyond technique."
+          },
+          {
+            "text_zh": "你应该把做法记下来，不然以后会忘记。",
+            "text_pinyin": "Nǐ yīnggāi bǎ zuòfǎ jì xiàlái, bùrán yǐhòu huì wàngjì.",
+            "text_en": "You should write the recipe down so you don't forget it later.",
+            "score": 0.0,
+            "feedback": "Practical but misses the emotional depth of the moment."
+          },
+          {
+            "text_zh": "下次你可以试试用别的鱼。",
+            "text_pinyin": "Xià cì nǐ kěyǐ shìshì yòng bié de yú.",
+            "text_en": "Next time you can try using a different kind of fish.",
+            "score": 0.0,
+            "feedback": "Focuses on ingredients when the conversation is about memory."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "谢谢你。来，尝尝今天做的。虽然跟奶奶的不一样，但也是我用心做的。也许有一天，我的孩子也会想念我做的这个味道。",
+        "text_pinyin": "Xièxie nǐ. Lái, chángchang jīntiān zuò de. Suīrán gēn nǎinai de bù yíyàng, dàn yě shì wǒ yòng xīn zuò de. Yěxǔ yǒu yī tiān, wǒ de háizi yě huì xiǎngniàn wǒ zuò de zhège wèidào.",
+        "text_en": "Thank you. Here, taste today's attempt. It's not the same as grandmother's, but I made it with heart. Maybe one day, my children will miss my version of this flavor too."
+      }
+    ],
+    "cultural_note": "In Chinese families, recipes are rarely written down — they're transmitted through observation and practice across generations. The phrase「看感觉放」(go by feel) describes an intuitive cooking style common among older Chinese cooks. When a family elder passes away, their dishes become irreplaceable, making cooking an act of remembrance and connection."
+  }
+}

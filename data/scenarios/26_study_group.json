@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Agree and suggest a time and place to study.",
                 "options": [
-                    {"text_zh": "好主意！我们明天下午在图书馆见吧？", "text_pinyin": "hǎo zhǔyi! wǒmen míngtiān xiàwǔ zài túshūguǎn jiàn ba?", "text_en": "Good idea! Shall we meet at the library tomorrow afternoon?", "score": 1.0, "register": "neutral", "feedback": "Agrees enthusiastically and offers a concrete plan — time and place make it actionable."},
-                    {"text_zh": "可以啊，你觉得在哪里复习比较好？", "text_pinyin": "kěyǐ a, nǐ juéde zài nǎlǐ fùxí bǐjiào hǎo?", "text_en": "Sure, where do you think is a good place to study?", "score": 0.7, "register": "neutral", "feedback": "Agrees and solicits input — collaborative but could be more decisive."},
-                    {"text_zh": "我也想复习，但是我时间不太多。", "text_pinyin": "wǒ yě xiǎng fùxí, dànshì wǒ shíjiān bú tài duō.", "text_en": "I want to review too, but I don't have much time.", "score": 0.5, "register": "neutral", "feedback": "Sounds hesitant — if you want to join, committing to a specific time works better than hedging."}
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to agree and suggest a time and place to study, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好的，明天下午可以。几点？",
+                        "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?",
+                        "text_en": "OK, tomorrow afternoon works. What time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to agree and suggest a time and place to study, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好主意！我们明天下午在图书馆见吧？",
+                        "text_pinyin": "hǎo zhǔyi! wǒmen míngtiān xiàwǔ zài túshūguǎn jiàn ba?",
+                        "text_en": "Good idea! Shall we meet at the library tomorrow afternoon?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Agrees enthusiastically and offers a concrete plan — time and place make it actionable."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest starting with the part you find hardest.",
                 "options": [
-                    {"text_zh": "我觉得先复习语法吧，那个部分我不太懂。", "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.", "text_en": "I think we should start with grammar, I don't really understand that part.", "score": 1.0, "register": "neutral", "feedback": "Honest about weak areas — good study groups tackle difficult topics first."},
-                    {"text_zh": "先看看生词吧，生词多记一些比较好。", "text_pinyin": "xiān kànkan shēngcí ba, shēngcí duō jì yīxiē bǐjiào hǎo.", "text_en": "Let's look at vocabulary first, it's better to memorize more words.", "score": 0.7, "register": "neutral", "feedback": "Reasonable approach — vocabulary is always useful, though grammar is harder to study alone."},
-                    {"text_zh": "都行，你说吧，我听你安排就好。", "text_pinyin": "dōu xíng, nǐ shuō ba, wǒ tīng nǐ ānpái jiù hǎo.", "text_en": "Whatever works, you decide, I'll follow your arrangement.", "score": 0.5, "register": "neutral", "feedback": "Too passive — they asked for your input because group study works best when everyone contributes."}
+                    {
+                        "text_zh": "我们做西红柿炒鸡蛋吧，我可以帮你切菜。",
+                        "text_pinyin": "wǒmen zuò xīhóngshì chǎo jīdàn ba, wǒ kěyǐ bāng nǐ qiē cài.",
+                        "text_en": "Let's make tomato scrambled eggs, I can help you cut vegetables.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest starting with the part you find hardest, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest starting with the part you find hardest, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我觉得先复习语法吧，那个部分我不太懂。",
+                        "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.",
+                        "text_en": "I think we should start with grammar, I don't really understand that part.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Honest about weak areas — good study groups tackle difficult topics first."
+                    }
                 ]
             }
         ],

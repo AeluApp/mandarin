@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service — Mandarin</title>
-  <meta name="description" content="Terms of Service for Mandarin, the adaptive Chinese learning app. Clear, readable terms written in plain language.">
-  <link rel="canonical" href="https://mandarinapp.com/terms">
+  <title>Terms of Service — Aelu</title>
+  <meta name="description" content="Terms of Service for Aelu, the adaptive Chinese learning app. Clear, readable terms written in plain language.">
+  <link rel="canonical" href="https://aeluapp.com/terms">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Terms of Service — Mandarin">
-  <meta property="og:description" content="Terms of Service for Mandarin. Clear language, no legal fog.">
+  <meta property="og:title" content="Terms of Service — Aelu">
+  <meta property="og:description" content="Terms of Service for Aelu. Clear language, no legal fog.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/terms">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/terms">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Terms of Service — Mandarin">
-  <meta name="twitter:description" content="Terms of Service for Mandarin. Clear language, no legal fog.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Terms of Service — Aelu">
+  <meta name="twitter:description" content="Terms of Service for Aelu. Clear language, no legal fog.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +36,7 @@
       --color-secondary: #6A7A5A;
       --color-border: #D8D0C4;
       --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
       --radius: 0;
       --space-1: 0.25rem;
       --space-2: 0.5rem;
@@ -90,6 +91,9 @@
       font-weight: 600;
       color: var(--color-text);
       text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .nav-links {
@@ -201,6 +205,65 @@
       .legal h1 { font-size: 1.8rem; }
       .nav-links { gap: var(--space-3); }
     }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
   </style>
 </head>
 <body>
@@ -208,13 +271,17 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -226,26 +293,26 @@
       <h1>Terms of Service</h1>
       <p class="effective-date">Effective: February 1, 2026</p>
 
-      <p>These terms govern your use of Mandarin (the "Service"), a web-based Chinese learning application operated by Mandarin ("we," "us," "the developer"). By using Mandarin, you agree to these terms. They are written in plain language because you should be able to understand the agreement you are entering.</p>
+      <p>These terms govern your use of Aelu (the "Service"), a web-based Chinese learning application operated by Aelu ("we," "us," "the developer"). By using Aelu, you agree to these terms. They are written in plain language because you should be able to understand the agreement you are entering.</p>
 
       <h2>1. What the Service Is</h2>
-      <p>Mandarin is an adaptive Chinese learning application that provides spaced repetition drills, graded reading, listening practice, speaking drills with tone grading, and per-skill diagnostics. It is a web app that runs in your browser on desktop and mobile devices. It is a tool for studying Chinese -- not a replacement for a teacher, tutor, or language partner.</p>
+      <p>Aelu is an adaptive Chinese learning application that provides spaced repetition drills, graded reading, listening practice, speaking drills with tone grading, and per-skill diagnostics. It is a web app that runs in your browser on desktop and mobile devices. It is a tool for studying Chinese -- not a replacement for a teacher, tutor, or language partner.</p>
 
       <h2>2. Free and Paid Tiers</h2>
-      <p>Mandarin offers two tiers:</p>
+      <p>Aelu offers two tiers:</p>
       <ul>
         <li><strong>Free:</strong> HSK 1-2 content, all 27 drill types, graded reading, listening practice, and basic progress tracking. No time limit. No credit card required.</li>
-        <li><strong>Full Access ($12/month):</strong> Everything in Free, plus HSK 3-6 content, full diagnostics, adaptive day profiles, context notes, media shelf, and encounter-aware cleanup loop.</li>
+        <li><strong>Full Access ($14.99/month):</strong> Everything in Free, plus HSK 3-9 content, full diagnostics, adaptive day profiles, context notes, media shelf, and encounter-aware cleanup loop.</li>
       </ul>
       <p>The free tier is not a trial. It is a permanent tier with full functionality for HSK 1-2 content.</p>
 
       <h2>3. Account Responsibilities</h2>
-      <p>If you create an account, you are responsible for keeping your login credentials secure. You are responsible for all activity under your account. If you believe your account has been compromised, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a> immediately.</p>
-      <p>You must be at least 13 years old to use Mandarin. The service is designed for adults and we do not knowingly collect data from children under 13.</p>
+      <p>If you create an account, you are responsible for keeping your login credentials secure. You are responsible for all activity under your account. If you believe your account has been compromised, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a> immediately.</p>
+      <p>You must be at least 13 years old to use Aelu. The service is designed for adults and we do not knowingly collect data from children under 13.</p>
 
       <h2>4. Payment and Billing</h2>
       <p>Payments for the Full Access tier are processed through Stripe. We do not store your credit card details -- Stripe handles all payment data securely. You can pay with major credit cards, debit cards, Apple Pay, and Google Pay where available.</p>
-      <p>Full Access is billed monthly. Your subscription renews automatically each month until you cancel. The price is $12/month. If we ever change the price, existing subscribers will receive at least 30 days notice before any increase takes effect.</p>
+      <p>Full Access is billed monthly. Your subscription renews automatically each month until you cancel. The price is $14.99/month. If we ever change the price, existing subscribers will receive at least 30 days notice before any increase takes effect.</p>
 
       <h2>5. Cancellation and Refunds</h2>
       <p>You can cancel your Full Access subscription at any time from your account settings. When you cancel:</p>
@@ -255,14 +322,14 @@
         <li>Your data and progress are never deleted. Everything stays exactly as it is.</li>
         <li>If you re-subscribe later, your progress picks up where you left off.</li>
       </ul>
-      <p><strong>30-day refund policy:</strong> If you are not satisfied within the first 30 days of a paid subscription, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a> and we will refund your payment in full. No forms, no retention offers, no hoops.</p>
+      <p><strong>30-day refund policy:</strong> If you are not satisfied within the first 30 days of a paid subscription, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a> and we will refund your payment in full. No forms, no retention offers, no hoops.</p>
 
       <h2>6. Data and Privacy</h2>
       <p>Your learning data (study history, drill scores, progress) is stored locally on your device. We do not sell, share, or monetize your personal data. We do not run third-party ad networks.</p>
       <p>For full details on what we collect and how we handle it, see our <a href="/privacy">Privacy Policy</a>.</p>
 
       <h2>7. Acceptable Use</h2>
-      <p>Use Mandarin for learning Chinese. Do not:</p>
+      <p>Use Aelu for learning Chinese. Do not:</p>
       <ul>
         <li>Attempt to access other users' accounts or data.</li>
         <li>Reverse-engineer, scrape, or redistribute the app's content, curriculum, or source code.</li>
@@ -272,14 +339,15 @@
       <p>If you violate these terms, we may suspend or terminate your account. We will try to reach out first if the violation seems unintentional.</p>
 
       <h2>8. Intellectual Property</h2>
-      <p><strong>Our content:</strong> The curriculum, drill content, graded reading passages, context notes, and all other educational content in Mandarin are the intellectual property of the developer. You may not copy, redistribute, or resell this content.</p>
+      <p><strong>Our content:</strong> The curriculum, drill content, graded reading passages, context notes, and all other educational content in Aelu are the intellectual property of the developer. You may not copy, redistribute, or resell this content.</p>
+      <p><strong>AI-generated content:</strong> Some educational content in Aelu -- including drill sentences, example passages, and error explanations -- is generated by open-source language models running locally on our infrastructure. All generated content passes through automated validation and human review before it reaches learners. We use this approach to create natural, context-rich practice material at scale. No user data is sent to external AI services.</p>
       <p><strong>Your data:</strong> Your study data -- scores, progress, drill history, reading history -- belongs to you. You can export it at any time. If you delete your account, we delete your data. We never claim ownership of your learning data.</p>
 
       <h2>9. Affiliate Program</h2>
-      <p>Mandarin offers an affiliate program for partners who refer users. The basic terms: 20% recurring commission, 90-day cookie window, lifetime recurring commissions on referred accounts. Payouts are processed monthly. Full affiliate program terms are provided separately when you join the program. Participating in the affiliate program does not alter these Terms of Service.</p>
+      <p>Aelu offers an affiliate program for partners who refer users. The basic terms: 20% recurring commission, 90-day cookie window, lifetime recurring commissions on referred accounts. Payouts are processed monthly. Full affiliate program terms are provided separately when you join the program. Participating in the affiliate program does not alter these Terms of Service.</p>
 
       <h2>10. Limitation of Liability</h2>
-      <p>Mandarin is a language learning tool. It is provided "as is." We work hard to keep it accurate, available, and useful, but we cannot guarantee:</p>
+      <p>Aelu is a language learning tool. It is provided "as is." We work hard to keep it accurate, available, and useful, but we cannot guarantee:</p>
       <ul>
         <li>That the service will be available 100% of the time.</li>
         <li>That all content is free of errors (though we fix errors as soon as we find them).</li>
@@ -300,7 +368,7 @@
       <p>These terms are governed by the laws of the United States. Any disputes will be resolved through good-faith communication first. If that does not work, disputes will be handled through binding arbitration under the rules of the American Arbitration Association, unless you are in a jurisdiction that gives you the right to bring claims in court -- in which case, that right is preserved.</p>
 
       <h2>13. Contact</h2>
-      <p>Questions about these terms? Email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>. Every email gets read and we will respond within a few business days.</p>
+      <p>Questions about these terms? Email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. Every email gets read and we will respond within a few business days.</p>
 
     </div>
   </main>
@@ -308,9 +376,9 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
-      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
-      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/breach-notification">Security</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
     </div>
   </footer>
 

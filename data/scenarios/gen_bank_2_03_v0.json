@@ -1,0 +1,94 @@
+{
+    "title": "The Currency Exchange Counter",
+    "title_zh": "换钱窗口",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_2_03_v0",
+    "tree": {
+        "setup": "The foreign exchange window at a Bank of China branch. Behind the glass, Auntie Zheng counts bills with the speed of a card dealer in a casino. She has a stack of foreign currencies arranged by country, each bundle wrapped in a paper band with the exchange rate written in her perfect handwriting. She considers each transaction a small act of international diplomacy.",
+        "setup_zh": "中国银行的外汇窗口。玻璃后面，郑阿姨数钱的速度像赌场发牌员。她把外币按国家分好，每一捆用纸条捆着，上面是她工整的字写的汇率。她觉得每一笔交易都是一次小型国际外交。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问要换什么外币？",
+                "text_pinyin": "nín hǎo, qǐngwèn yào huàn shénme wàibì?",
+                "text_en": "Hello, what foreign currency do you want to exchange?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what currency you want to exchange.",
+                "options": [
+                    {
+                        "text_zh": "我想把美元换成人民币。",
+                        "text_pinyin": "wǒ xiǎng bǎ měiyuán huàn chéng rénmínbì.",
+                        "text_en": "I'd like to exchange US dollars for RMB.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Zheng checks the rate board and nods approvingly -- the rate is decent today.「今天汇率不错。」把 A 换成 B is the essential exchange pattern."
+                    },
+                    {
+                        "text_zh": "今天的汇率是多少？",
+                        "text_pinyin": "jīntiān de huìlǜ shì duōshao?",
+                        "text_en": "What's today's exchange rate?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Auntie Zheng points at the electronic board above her head, then recites the number from memory anyway -- she checks it every morning before opening.「一美元换七块一。」"
+                    },
+                    {
+                        "text_zh": "这里可以换钱吗？",
+                        "text_pinyin": "zhèlǐ kěyǐ huàn qián ma?",
+                        "text_en": "Can I exchange money here?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Zheng glances at the large sign above her window that reads 'FOREIGN EXCHANGE' in four languages. She smiles patiently.「可以。您要换什么？」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。换多少？请给我看一下您的护照。",
+                "text_pinyin": "hǎo de. huàn duōshao? qǐng gěi wǒ kàn yíxià nín de hùzhào.",
+                "text_en": "OK. How much? Please show me your passport."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her the amount and provide your passport.",
+                "options": [
+                    {
+                        "text_zh": "换三百美元。这是我的护照。",
+                        "text_pinyin": "huàn sānbǎi měiyuán. zhè shì wǒ de hùzhào.",
+                        "text_en": "Three hundred dollars. Here's my passport.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Auntie Zheng takes the passport with both hands, studies it, and types the information with practiced speed. She counts out the RMB in a blur of fingers.「两千一百三十块。」"
+                    },
+                    {
+                        "text_zh": "我不确定要换多少。一百美元可以吗？",
+                        "text_pinyin": "wǒ bú quèdìng yào huàn duōshao. yìbǎi měiyuán kěyǐ ma?",
+                        "text_en": "I'm not sure how much. Is one hundred OK?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Auntie Zheng processes it without judgment. One hundred, three hundred, she treats every amount with the same professionalism. 不确定 is a polite way to express uncertainty."
+                    },
+                    {
+                        "text_zh": "护照在宾馆里。怎么办？",
+                        "text_pinyin": "hùzhào zài bīnguǎn lǐ. zěnme bàn?",
+                        "text_en": "My passport is at the hotel. What do I do?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Zheng shakes her head gently. No passport, no exchange. Bank rules.「对不起，必须要护照。」You'll need to come back. 必须 means 'must.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了。请数一下。有问题马上说啊。",
+                "text_pinyin": "hǎo le. qǐng shǔ yíxià. yǒu wèntí mǎshàng shuō a.",
+                "text_en": "Done. Please count it. If there's a problem, say so right away."
+            }
+        ],
+        "cultural_note": "Currency exchange (换外币) in China requires a passport for foreigners. Bank of China has the most exchange windows. Rates change daily. Always count your money at the counter -- once you leave the window, it's hard to dispute. 数 (shǔ) means 'to count.'"
+    }
+}

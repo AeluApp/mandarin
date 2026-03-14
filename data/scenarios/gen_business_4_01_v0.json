@@ -1,0 +1,160 @@
+{
+    "title": "The Meeting Maestro",
+    "title_zh": "会议指挥家",
+    "hsk_level": 4,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_business_4_01_v0",
+    "tree": {
+        "setup": "Conference room 3B smells faintly of jasmine tea and whiteboard markers. Team leader Xu Wei runs meetings with the precision of a symphony conductor — each agenda item has a time limit, each person gets exactly one chance to speak before the round opens up. He's placed a bowl of tangerines in the center of the table, because he believes productive meetings require vitamin C.",
+        "setup_zh": "3B会议室里隐约飘着茉莉花茶和白板笔的气味。团队主管徐伟开会像指挥交响乐一样精准——每个议程都有时限，每个人先发言一次，然后再自由讨论。他在桌子中间放了一碗橘子，因为他相信高效的会议需要维生素C。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好，大家都到了。今天主要讨论新项目的时间安排。谁先说？",
+                "text_pinyin": "hǎo, dàjiā dōu dào le. jīntiān zhǔyào tǎolùn xīn xiàngmù de shíjiān ānpái. shéi xiān shuō?",
+                "text_en": "OK, everyone's here. Today we're mainly discussing the schedule for the new project. Who wants to go first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Volunteer to share your part of the project timeline.",
+                "options": [
+                    {
+                        "text_zh": "我先说吧。我负责的部分大概需要两个星期，下周一可以开始。",
+                        "text_pinyin": "wǒ xiān shuō ba. wǒ fùzé de bùfen dàgài xūyào liǎng gè xīngqī, xià zhōuyī kěyǐ kāishǐ.",
+                        "text_en": "I'll go first. My part will take about two weeks, and I can start next Monday.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Volunteering to go first and giving a clear timeline — Xu Wei peels a tangerine in your honor."
+                    },
+                    {
+                        "text_zh": "我可以说一下我的部分。",
+                        "text_pinyin": "wǒ kěyǐ shuō yíxià wǒ de bùfen.",
+                        "text_en": "I can talk about my part.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Willing but unspecific. He'll ask for the details, but he appreciates the initiative."
+                    },
+                    {
+                        "text_zh": "我还没想好，别人先说吧。",
+                        "text_pinyin": "wǒ hái méi xiǎng hǎo, biéren xiān shuō ba.",
+                        "text_en": "I haven't figured it out yet — let someone else go first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xu Wei nods, but makes a small mark next to your name. In his world, unpreparedness is a minor chord in an otherwise clean symphony."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两个星期，不错。但是客户希望我们一个月之内完成整个项目。你觉得能提前吗？",
+                "text_pinyin": "liǎng gè xīngqī, búcuò. dànshì kèhù xīwàng wǒmen yí gè yuè zhī nèi wánchéng zhěnggè xiàngmù. nǐ juéde néng tíqián ma?",
+                "text_en": "Two weeks, not bad. But the client wants the whole project done within a month. Do you think you can finish earlier?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the timeline pressure.",
+                "options": [
+                    {
+                        "text_zh": "如果有人帮忙的话，我可以试试十天完成。但是质量不能降低。",
+                        "text_pinyin": "rúguǒ yǒu rén bāngmáng de huà, wǒ kěyǐ shìshi shí tiān wánchéng. dànshì zhìliàng bù néng jiàngdī.",
+                        "text_en": "If someone can help, I can try to finish in ten days. But quality can't be compromised.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Conditional commitment with a quality boundary — exactly the kind of answer that makes Xu Wei's whiteboard markers last longer."
+                    },
+                    {
+                        "text_zh": "我尽量吧。",
+                        "text_pinyin": "wǒ jǐnliàng ba.",
+                        "text_en": "I'll try my best.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "尽量 is the universal Chinese office hedge. He's heard it a thousand times, but it's never wrong."
+                    },
+                    {
+                        "text_zh": "我觉得两个星期已经很紧了。",
+                        "text_pinyin": "wǒ juéde liǎng gè xīngqī yǐjīng hěn jǐn le.",
+                        "text_en": "I think two weeks is already tight.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Honest, and Xu Wei respects that. Better to push back now than to promise and fail later."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，那我安排小李帮你。还有一件事——周三之前能不能给客户发一份进度报告？",
+                "text_pinyin": "hǎo, nà wǒ ānpái Xiǎo Lǐ bāng nǐ. hái yǒu yí jiàn shì — zhōusān zhīqián néng bù néng gěi kèhù fā yí fèn jìndù bàogào?",
+                "text_en": "OK, I'll assign Xiao Li to help you. One more thing — can you send the client a progress report by Wednesday?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm or negotiate the report deadline.",
+                "options": [
+                    {
+                        "text_zh": "没问题，周三之前我一定发。需要用什么格式？",
+                        "text_pinyin": "méi wèntí, zhōusān zhīqián wǒ yídìng fā. xūyào yòng shénme géshì?",
+                        "text_en": "No problem, I'll definitely send it by Wednesday. What format should I use?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Confirmed and asked about format — proactive. Xu Wei slides a tangerine across the table to you."
+                    },
+                    {
+                        "text_zh": "好的，我会发的。",
+                        "text_pinyin": "hǎo de, wǒ huì fā de.",
+                        "text_en": "OK, I'll send it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Reliable. He trusts you'll get it done."
+                    },
+                    {
+                        "text_zh": "周三有点赶。周四可以吗？",
+                        "text_pinyin": "zhōusān yǒudiǎn gǎn. zhōusì kěyǐ ma?",
+                        "text_en": "Wednesday is a bit rushed. Can I do Thursday?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He pauses, recalculates. One day won't break anything — he agrees, but the tangerine stays where it is."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，今天的会就到这里。大家辛苦了。别忘了拿个橘子。",
+                "text_pinyin": "hǎo, jīntiān de huì jiù dào zhèlǐ. dàjiā xīnkǔ le. bié wàng le ná gè júzi.",
+                "text_en": "OK, that's it for today's meeting. Good work everyone. Don't forget to take a tangerine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Wrap up the meeting politely.",
+                "options": [
+                    {
+                        "text_zh": "谢谢徐主管！我回去就开始准备报告。",
+                        "text_pinyin": "xièxie Xú zhǔguǎn! wǒ huíqù jiù kāishǐ zhǔnbèi bàogào.",
+                        "text_en": "Thanks, Supervisor Xu! I'll start working on the report right away.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Proactive follow-through. Xu Wei's meetings always end with someone inspired — today it's you."
+                    },
+                    {
+                        "text_zh": "辛苦了，大家再见。",
+                        "text_pinyin": "xīnkǔ le, dàjiā zàijiàn.",
+                        "text_en": "Good work everyone, goodbye.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "辛苦了 is always the right note to end on. You take a tangerine on the way out."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The shortest possible exit. You didn't take a tangerine, and Xu Wei noticed."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "辛苦了 (xīnkǔ le, 'you've worked hard') is the standard way to acknowledge collective effort at the end of a meeting or workday. It's both a compliment and a farewell — use it generously."
+    }
+}

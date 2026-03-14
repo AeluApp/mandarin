@@ -1,0 +1,123 @@
+{
+    "title": "Learning to Make Tea Eggs",
+    "title_zh": "学做茶叶蛋",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your neighbor, Grandma Zhao, is making tea eggs in the shared kitchen area. The fragrant smell draws you over.",
+        "setup_zh": "你的邻居赵奶奶在公共厨房做茶叶蛋。香气吸引了你走过去。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "闻到香味了吧？我在煮茶叶蛋。你吃过茶叶蛋吗？",
+                "text_pinyin": "Wén dào xiāngwèi le ba? Wǒ zài zhǔ cháyè dàn. Nǐ chī guò cháyè dàn ma?",
+                "text_en": "You smelled it, didn't you? I'm making tea eggs. Have you ever had tea eggs?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about tea eggs.",
+                "options": [
+                    {
+                        "text_zh": "闻起来好香啊！我吃过，但是从来没自己做过。赵奶奶，您能教教我吗？",
+                        "text_pinyin": "Wén qǐlái hǎo xiāng a! Wǒ chī guò, dànshì cónglái méi zìjǐ zuò guò. Zhào nǎinai, nín néng jiāojiao wǒ ma?",
+                        "text_en": "It smells amazing! I've had them, but never made them myself. Grandma Zhao, could you teach me?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Eager to learn — elders love sharing their cooking knowledge."
+                    },
+                    {
+                        "text_zh": "吃过。",
+                        "text_pinyin": "Chī guò.",
+                        "text_en": "I have.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief — doesn't engage."
+                    },
+                    {
+                        "text_zh": "没吃过，看起来颜色很奇怪。",
+                        "text_pinyin": "Méi chī guò, kàn qǐlái yánsè hěn qíguài.",
+                        "text_en": "Never had them — they look a strange color.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Critical about something she's proud of."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "当然！很简单的。先把鸡蛋煮熟，然后轻轻敲一敲，让蛋壳有裂纹。再放进去跟茶叶、酱油、八角一起慢慢煮。煮得越久越入味。",
+                "text_pinyin": "Dāngrán! Hěn jiǎndān de. Xiān bǎ jīdàn zhǔ shú, ránhòu qīngqīng qiāo yī qiāo, ràng dànké yǒu lièwén. Zài fàng jìnqù gēn cháyè, jiàngyóu, bājiǎo yīqǐ mànmàn zhǔ. Zhǔ de yuè jiǔ yuè rù wèi.",
+                "text_en": "Of course! It's very simple. First boil the eggs, then gently tap them to crack the shells. Then put them back to simmer slowly with tea leaves, soy sauce, and star anise. The longer they cook, the more flavorful."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the cooking lesson.",
+                "options": [
+                    {
+                        "text_zh": "原来这么简单！那个裂纹是不是就是让味道进去的？我以为很复杂呢。",
+                        "text_pinyin": "Yuánlái zhème jiǎndān! Nàge lièwén shì bú shì jiù shì ràng wèidào jìnqù de? Wǒ yǐwéi hěn fùzá ne.",
+                        "text_en": "So that's how it works! The cracks let the flavor in, right? I thought it was much more complicated.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shows understanding and genuine learning."
+                    },
+                    {
+                        "text_zh": "要煮多久？",
+                        "text_pinyin": "Yào zhǔ duōjiǔ?",
+                        "text_en": "How long should they cook?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Practical question but misses the appreciation."
+                    },
+                    {
+                        "text_zh": "超市也有卖的吧？",
+                        "text_pinyin": "Chāoshì yě yǒu mài de ba?",
+                        "text_en": "They sell them at the supermarket, right?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Suggests buying instead of learning — dismisses her teaching."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对！你很聪明。来，这几个煮好了，你先尝一个。下次我煮的时候叫你，我们一起做。",
+                "text_pinyin": "Duì! Nǐ hěn cōngming. Lái, zhè jǐ ge zhǔ hǎo le, nǐ xiān cháng yī ge. Xià cì wǒ zhǔ de shíhou jiào nǐ, wǒmen yīqǐ zuò.",
+                "text_en": "Exactly! You're clever. Here, these are done — try one first. Next time I make them, I'll call you and we'll do it together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond after tasting.",
+                "options": [
+                    {
+                        "text_zh": "哇，好好吃！又香又入味。赵奶奶，谢谢您！我期待下次一起做。",
+                        "text_pinyin": "Wā, hǎo hǎochī! Yòu xiāng yòu rù wèi. Zhào nǎinai, xièxie nín! Wǒ qīdài xià cì yīqǐ zuò.",
+                        "text_en": "Wow, so delicious! Fragrant and full of flavor. Thank you, Grandma Zhao! I look forward to making them together next time.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Genuine appreciation and excitement about next time."
+                    },
+                    {
+                        "text_zh": "味道不错。",
+                        "text_pinyin": "Wèidào búcuò.",
+                        "text_en": "Tastes good.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Understated for such a kind gesture."
+                    },
+                    {
+                        "text_zh": "有点咸了。",
+                        "text_pinyin": "Yǒudiǎn xián le.",
+                        "text_en": "A bit salty.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Critical of her cooking — rude."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tea eggs (茶叶蛋) are a beloved Chinese snack found everywhere from home kitchens to convenience stores. The marbled pattern from the cracked shells is both beautiful and functional. Learning to make them from an elder is a small but meaningful cultural exchange."
+    },
+    "hsk_level": 3
+}

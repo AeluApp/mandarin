@@ -1,0 +1,117 @@
+{
+    "title": "The Old Photograph",
+    "title_zh": "老照片",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You're helping a neighbor, Grandpa Liu, sort through old boxes in his apartment. He finds a faded photograph and stops to look at it.",
+        "setup_zh": "你在帮邻居刘爷爷整理家里的旧箱子。他找到了一张旧照片，停下来看。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这张照片，是我三十年前在工厂门口拍的。那时候我们每天早上一起骑自行车上班，路上说说笑笑的。现在那个工厂已经变成了一个公园。",
+                "text_pinyin": "Nǐ kàn zhè zhāng zhàopiàn, shì wǒ sānshí nián qián zài gōngchǎng ménkǒu pāi de. Nà shíhou wǒmen měi tiān zǎoshang yīqǐ qí zìxíngchē shàngbān, lù shàng shuō shuō xiào xiào de. Xiànzài nàge gōngchǎng yǐjīng biàn chéng le yīge gōngyuán.",
+                "text_en": "Look at this photo — it was taken thirty years ago at the factory entrance. Back then we'd ride bicycles to work together every morning, chatting and laughing along the way. Now that factory has become a park."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the old photograph.",
+                "options": [
+                    {
+                        "text_zh": "照片里的人看起来都很开心。有时候最好的时光不是因为条件好，而是因为身边有一起走路的人。",
+                        "text_pinyin": "Zhàopiàn lǐ de rén kàn qǐlái dōu hěn kāixīn. Yǒu shíhou zuì hǎo de shíguāng bú shì yīnwèi tiáojiàn hǎo, ér shì yīnwèi shēnbiān yǒu yīqǐ zǒu lù de rén.",
+                        "text_en": "Everyone in the photo looks so happy. Sometimes the best times aren't because conditions were good, but because you had people walking beside you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perceptive — sees the happiness as relational, not material."
+                    },
+                    {
+                        "text_zh": "那个工厂生产什么？",
+                        "text_pinyin": "Nàge gōngchǎng shēngchǎn shénme?",
+                        "text_en": "What did the factory produce?",
+                        "score": 0.0,
+                        "feedback": "Industrial detail that misses the emotional weight of the memory."
+                    },
+                    {
+                        "text_zh": "这张照片可以修一修，让颜色更好看。",
+                        "text_pinyin": "Zhè zhāng zhàopiàn kěyǐ xiū yī xiū, ràng yánsè gèng hǎokàn.",
+                        "text_en": "You could restore this photo, make the colors look better.",
+                        "score": 0.0,
+                        "feedback": "Technical fix when he's sharing a memory."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，就是这样。那时候工资不高，住的房子也小，但下班以后大家坐在院子里聊天，孩子们一起玩。现在条件好了，但邻居之间连名字都不知道。",
+                "text_pinyin": "Duì, jiù shì zhèyàng. Nà shíhou gōngzī bù gāo, zhù de fángzi yě xiǎo, dàn xiàbān yǐhòu dàjiā zuò zài yuànzi lǐ liáo tiān, háizimen yīqǐ wán. Xiànzài tiáojiàn hǎo le, dàn línjū zhī jiān lián míngzì dōu bù zhīdào.",
+                "text_en": "Exactly. Back then wages were low, houses were small, but after work everyone sat in the courtyard chatting and the kids played together. Now conditions are better, but neighbors don't even know each other's names."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his observation about community loss.",
+                "options": [
+                    {
+                        "text_zh": "也许以前的生活虽然简单，但人和人之间的距离很近。现在我们住的房子大了，但心里的距离也远了。",
+                        "text_pinyin": "Yěxǔ yǐqián de shēnghuó suīrán jiǎndān, dàn rén hé rén zhī jiān de jùlí hěn jìn. Xiànzài wǒmen zhù de fángzi dà le, dàn xīn lǐ de jùlí yě yuǎn le.",
+                        "text_en": "Maybe life was simpler before, but people were close to each other. Now our houses are bigger, but the distance in our hearts has grown too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Captures the paradox — material improvement paired with emotional distance."
+                    },
+                    {
+                        "text_zh": "你那些老同事还联系吗？",
+                        "text_pinyin": "Nǐ nàxiē lǎo tóngshì hái liánxì ma?",
+                        "text_en": "Are you still in touch with those old colleagues?",
+                        "score": 0.0,
+                        "feedback": "Practical follow-up that doesn't engage with the broader observation."
+                    },
+                    {
+                        "text_zh": "现在的公园好不好玩？",
+                        "text_pinyin": "Xiànzài de gōngyuán hǎo bù hǎowán?",
+                        "text_en": "Is the park fun now?",
+                        "score": 0.0,
+                        "feedback": "Ignores the nostalgic reflection entirely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "心里的距离远了……你说得对。我有时候想，进步到底是什么？如果生活越来越方便，但人越来越孤单，这算进步吗？",
+                "text_pinyin": "Xīn lǐ de jùlí yuǎn le…… nǐ shuō de duì. Wǒ yǒu shíhou xiǎng, jìnbù dàodǐ shì shénme? Rúguǒ shēnghuó yuè lái yuè fāngbiàn, dàn rén yuè lái yuè gūdān, zhè suàn jìnbù ma?",
+                "text_en": "The distance in our hearts... you're right. Sometimes I wonder, what is progress really? If life gets more and more convenient, but people get more and more lonely, does that count as progress?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his question about progress.",
+                "options": [
+                    {
+                        "text_zh": "真正的进步应该包括人和人之间的关系。东西多了、速度快了，但如果我们失去了坐在院子里聊天的感觉，那不算完整的进步。",
+                        "text_pinyin": "Zhēnzhèng de jìnbù yīnggāi bāokuò rén hé rén zhī jiān de guānxì. Dōngxi duō le, sùdù kuài le, dàn rúguǒ wǒmen shīqù le zuò zài yuànzi lǐ liáo tiān de gǎnjué, nà bú suàn wánzhěng de jìnbù.",
+                        "text_en": "Real progress should include relationships between people. More stuff, faster speed — but if we lose the feeling of chatting in a courtyard, that's not complete progress.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Definition of progress — includes the human dimension."
+                    },
+                    {
+                        "text_zh": "现在科技很发达，可以视频聊天。",
+                        "text_pinyin": "Xiànzài kējì hěn fādá, kěyǐ shìpín liáo tiān.",
+                        "text_en": "Technology is very advanced now, you can video chat.",
+                        "score": 0.0,
+                        "feedback": "Tech solution that misses the point about in-person connection."
+                    },
+                    {
+                        "text_zh": "你要不要把这些旧箱子扔了？",
+                        "text_pinyin": "Nǐ yào bú yào bǎ zhèxiē jiù xiāngzi rēng le?",
+                        "text_en": "Do you want to throw away these old boxes?",
+                        "score": 0.0,
+                        "feedback": "Cleanup logistics during a meaningful conversation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The transformation of state-owned factories (国营工厂) into parks and commercial spaces is a common phenomenon in Chinese cities. The factory-era work unit (单位) system created tight-knit communities where colleagues were also neighbors. Many older Chinese people feel nostalgic for this communal lifestyle, even while acknowledging the material improvements of modern life."
+    }
+}

@@ -22,6 +22,11 @@ from mandarin.auth import (
     get_user_by_id,
     create_reset_token,
     reset_password,
+    verify_email,
+    _validate_password,
+    _load_common_passwords,
+    MAX_FAILED_ATTEMPTS,
+    LOCKOUT_DURATION_MINUTES,
 )
 
 
@@ -384,6 +389,281 @@ class TestPasswordReset:
 
 
 # ---------------------------------------------------------------------------
+# Account lockout (CIS Control 6.2)
+# ---------------------------------------------------------------------------
+
+class TestAccountLockout:
+
+    def test_lockout_after_max_failed_attempts(self, test_db):
+        """Account locks after MAX_FAILED_ATTEMPTS wrong passwords."""
+        conn, _ = test_db
+        _create_test_user(conn)
+
+        for i in range(MAX_FAILED_ATTEMPTS):
+            result = authenticate(conn, TEST_EMAIL, "wrongpassword")
+            assert result is None
+
+        # Account should now be locked — correct password should fail
+        result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
+        assert result is None
+
+        # Verify locked_until is set in the database
+        row = conn.execute(
+            "SELECT failed_login_attempts, locked_until FROM user WHERE email = ?",
+            (TEST_EMAIL,)
+        ).fetchone()
+        assert row["failed_login_attempts"] >= MAX_FAILED_ATTEMPTS
+        assert row["locked_until"] is not None
+
+    def test_failed_attempts_increment(self, test_db):
+        """Each failed login increments the counter."""
+        conn, _ = test_db
+        created = _create_test_user(conn)
+
+        authenticate(conn, TEST_EMAIL, "wrongpassword")
+        row = conn.execute(
+            "SELECT failed_login_attempts FROM user WHERE id = ?", (created["id"],)
+        ).fetchone()
+        assert row["failed_login_attempts"] == 1
+
+        authenticate(conn, TEST_EMAIL, "wrongpassword")
+        row = conn.execute(
+            "SELECT failed_login_attempts FROM user WHERE id = ?", (created["id"],)
+        ).fetchone()
+        assert row["failed_login_attempts"] == 2
+
+    def test_successful_login_resets_failed_attempts(self, test_db):
+        """A successful login resets the failed_login_attempts counter."""
+        conn, _ = test_db
+        created = _create_test_user(conn)
+
+        # Two failed attempts
+        authenticate(conn, TEST_EMAIL, "wrongpassword")
+        authenticate(conn, TEST_EMAIL, "wrongpassword")
+
+        # Now succeed
+        result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
+        assert result is not None
+
+        row = conn.execute(
+            "SELECT failed_login_attempts, locked_until FROM user WHERE id = ?",
+            (created["id"],)
+        ).fetchone()
+        assert row["failed_login_attempts"] == 0
+        assert row["locked_until"] is None
+
+    def test_locked_account_rejects_even_correct_password(self, test_db):
+        """A locked account rejects login even with the correct password."""
+        conn, _ = test_db
+        created = _create_test_user(conn)
+
+        # Manually lock the account with a future lockout time
+        future = (datetime.now(timezone.utc) + timedelta(minutes=30)).strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+        conn.execute(
+            "UPDATE user SET locked_until = ?, failed_login_attempts = ? WHERE id = ?",
+            (future, MAX_FAILED_ATTEMPTS, created["id"]),
+        )
+        conn.commit()
+
+        result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
+        assert result is None
+
+    def test_expired_lockout_allows_login(self, test_db):
+        """Once lockout expires, the user can log in again."""
+        conn, _ = test_db
+        created = _create_test_user(conn)
+
+        # Set lockout to the past (already expired)
+        past = (datetime.now(timezone.utc) - timedelta(minutes=1)).strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+        conn.execute(
+            "UPDATE user SET locked_until = ?, failed_login_attempts = ? WHERE id = ?",
+            (past, MAX_FAILED_ATTEMPTS, created["id"]),
+        )
+        conn.commit()
+
+        result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
+        assert result is not None
+        assert result["id"] == created["id"]
+
+    def test_malformed_locked_until_rejects_login(self, test_db):
+        """A malformed locked_until string fails safe by rejecting login."""
+        conn, _ = test_db
+        created = _create_test_user(conn)
+
+        conn.execute(
+            "UPDATE user SET locked_until = 'not-a-datetime' WHERE id = ?",
+            (created["id"],),
+        )
+        conn.commit()
+
+        result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
+        assert result is None
+
+
+# ---------------------------------------------------------------------------
+# Invite codes
+# ---------------------------------------------------------------------------
+
+class TestInviteCodes:
+
+    def _insert_invite_code(self, conn, code="TESTCODE", max_uses=1, use_count=0):
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        conn.execute(
+            "INSERT INTO invite_code (code, created_at, max_uses, use_count) VALUES (?, ?, ?, ?)",
+            (code, now, max_uses, use_count),
+        )
+        conn.commit()
+
+    def test_valid_invite_code_creates_user(self, test_db):
+        conn, _ = test_db
+        self._insert_invite_code(conn, "VALID1")
+        user = create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, invite_code="VALID1")
+        assert user is not None
+        assert user["email"] == TEST_EMAIL
+
+    def test_valid_invite_code_increments_use_count(self, test_db):
+        conn, _ = test_db
+        self._insert_invite_code(conn, "COUNTME", max_uses=5, use_count=0)
+        create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, invite_code="COUNTME")
+        row = conn.execute("SELECT use_count FROM invite_code WHERE code = 'COUNTME'").fetchone()
+        assert row["use_count"] == 1
+
+    def test_invalid_invite_code_raises(self, test_db):
+        conn, _ = test_db
+        with pytest.raises(ValueError, match="Invalid invite code"):
+            create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, invite_code="NONEXISTENT")
+
+    def test_fully_used_invite_code_raises(self, test_db):
+        """An invite code that has been fully used (use_count >= max_uses) is rejected."""
+        conn, _ = test_db
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        conn.execute(
+            "INSERT INTO invite_code (code, created_at, max_uses, use_count, used_at) VALUES (?, ?, ?, ?, ?)",
+            ("USED1", now, 1, 1, now),
+        )
+        conn.commit()
+        with pytest.raises(ValueError, match="usage limit"):
+            create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, invite_code="USED1")
+
+    def test_invite_code_at_usage_limit_raises(self, test_db):
+        """An invite code at its max_uses limit (but used_at is NULL) raises usage limit error."""
+        conn, _ = test_db
+        self._insert_invite_code(conn, "LIMIT1", max_uses=3, use_count=3)
+        with pytest.raises(ValueError, match="reached its usage limit"):
+            create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, invite_code="LIMIT1")
+
+
+# ---------------------------------------------------------------------------
+# Role validation
+# ---------------------------------------------------------------------------
+
+class TestRoleValidation:
+
+    def test_invalid_role_defaults_to_student(self, test_db):
+        conn, _ = test_db
+        user = create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, role="admin")
+        assert user["role"] == "student"
+
+    def test_teacher_role_accepted(self, test_db):
+        conn, _ = test_db
+        user = create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, role="teacher")
+        assert user["role"] == "teacher"
+
+    def test_student_role_accepted(self, test_db):
+        conn, _ = test_db
+        user = create_user(conn, TEST_EMAIL, TEST_PASSWORD, TEST_NAME, role="student")
+        assert user["role"] == "student"
+
+
+# ---------------------------------------------------------------------------
+# Email verification
+# ---------------------------------------------------------------------------
+
+class TestEmailVerification:
+
+    def test_verify_email_with_valid_token(self, test_db):
+        conn, _ = test_db
+        user = _create_test_user(conn)
+        verify_token = user["_verify_token"]
+
+        result = verify_email(conn, verify_token)
+        assert result is True
+
+        row = conn.execute(
+            "SELECT email_verified, email_verify_token FROM user WHERE id = ?",
+            (user["id"],),
+        ).fetchone()
+        assert row["email_verified"] == 1
+        assert row["email_verify_token"] is None
+
+    def test_verify_email_with_invalid_token(self, test_db):
+        conn, _ = test_db
+        _create_test_user(conn)
+
+        result = verify_email(conn, "totally-fake-token")
+        assert result is False
+
+    def test_verify_email_with_expired_token(self, test_db):
+        conn, _ = test_db
+        user = _create_test_user(conn)
+
+        # Expire the verify token
+        past = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+        conn.execute(
+            "UPDATE user SET email_verify_expires = ? WHERE id = ?",
+            (past, user["id"]),
+        )
+        conn.commit()
+
+        result = verify_email(conn, user["_verify_token"])
+        assert result is False
+
+    def test_verify_email_token_is_single_use(self, test_db):
+        conn, _ = test_db
+        user = _create_test_user(conn)
+        verify_token = user["_verify_token"]
+
+        assert verify_email(conn, verify_token) is True
+        # Second use should fail (token cleared after first use)
+        assert verify_email(conn, verify_token) is False
+
+    def test_create_user_returns_verify_token(self, test_db):
+        conn, _ = test_db
+        user = _create_test_user(conn)
+        assert "_verify_token" in user
+        assert isinstance(user["_verify_token"], str)
+        assert len(user["_verify_token"]) > 0
+
+
+# ---------------------------------------------------------------------------
+# Common password loading
+# ---------------------------------------------------------------------------
+
+class TestCommonPasswordLoading:
+
+    def test_missing_file_falls_back_to_empty_set(self, test_db):
+        """When common_passwords.txt is missing, validation still works (no crash)."""
+        import mandarin.auth as auth_mod
+        # Save and reset the cache to force reload
+        original = auth_mod._common_passwords
+        auth_mod._common_passwords = None
+        try:
+            with patch("pathlib.Path.read_text", side_effect=FileNotFoundError("no file")):
+                result = auth_mod._load_common_passwords()
+                assert result == set()
+                # Password validation should still work (just no common check)
+                _validate_password("avalidpassword1")  # should not raise
+        finally:
+            auth_mod._common_passwords = original
+
+
+# ---------------------------------------------------------------------------
 # Flask web auth routes
 # ---------------------------------------------------------------------------
 
@@ -401,8 +681,7 @@ class TestWebAuthRoutes:
 
         from mandarin.web import create_app
 
-        app = create_app()
-        app.config["TESTING"] = True
+        app = create_app(testing=True)
         # Disable CSRF for test POSTs (WTForms not used, but just in case)
         app.config["WTF_CSRF_ENABLED"] = False
 

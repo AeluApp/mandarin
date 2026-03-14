@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Mandarin</title>
-  <meta name="description" content="Privacy Policy for Mandarin, the adaptive Chinese learning app. What we collect, what we don't, and how your data is handled. Written in plain language.">
-  <link rel="canonical" href="https://mandarinapp.com/privacy">
+  <title>Privacy Policy — Aelu</title>
+  <meta name="description" content="Privacy Policy for Aelu, the adaptive Chinese learning app. What we collect, what we don't, and how your data is handled. Written in plain language.">
+  <link rel="canonical" href="https://aeluapp.com/privacy">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Privacy Policy — Mandarin">
-  <meta property="og:description" content="Privacy Policy for Mandarin. What we collect, what we don't, and why. Plain language.">
+  <meta property="og:title" content="Privacy Policy — Aelu">
+  <meta property="og:description" content="Privacy Policy for Aelu. What we collect, what we don't, and why. Plain language.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mandarinapp.com/privacy">
-  <meta property="og:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta property="og:url" content="https://aeluapp.com/privacy">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Privacy Policy — Mandarin">
-  <meta name="twitter:description" content="Privacy Policy for Mandarin. What we collect, what we don't, and why.">
-  <meta name="twitter:image" content="https://mandarinapp.com/og-image.jpg">
+  <meta name="twitter:title" content="Privacy Policy — Aelu">
+  <meta name="twitter:description" content="Privacy Policy for Aelu. What we collect, what we don't, and why.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +36,7 @@
       --color-secondary: #6A7A5A;
       --color-border: #D8D0C4;
       --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Source Sans 3', 'Source Serif 4', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
       --radius: 0;
       --space-1: 0.25rem;
       --space-2: 0.5rem;
@@ -90,6 +91,9 @@
       font-weight: 600;
       color: var(--color-text);
       text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .nav-links {
@@ -201,6 +205,65 @@
       .legal h1 { font-size: 1.8rem; }
       .nav-links { gap: var(--space-3); }
     }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
   </style>
 </head>
 <body>
@@ -208,13 +271,17 @@
   <!-- Nav -->
   <nav aria-label="Main navigation">
     <div class="container">
-      <a href="/" class="nav-brand">Mandarin</a>
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/partners">Partners</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
       </ul>
     </div>
   </nav>
@@ -226,7 +293,7 @@
       <h1>Privacy Policy</h1>
       <p class="effective-date">Effective: February 1, 2026</p>
 
-      <p>This policy explains what data Mandarin collects, what it does not collect, and how your information is handled. It is written in plain language because privacy policies should be readable, not endurable.</p>
+      <p>This policy explains what data Aelu collects, what it does not collect, and how your information is handled. It is written in plain language because privacy policies should be readable, not endurable.</p>
 
       <h2>1. What We Collect</h2>
 
@@ -245,7 +312,7 @@
         <li>We do not sell your data to anyone. Not now, not ever.</li>
         <li>We do not run third-party advertising networks or display ads.</li>
         <li>We do not use tracking pixels from social media platforms.</li>
-        <li>We do not send your study data to any external AI service. The system uses zero AI tokens at runtime -- all processing is deterministic and happens locally or on our servers without external API calls.</li>
+        <li>We do not send your study data to any external service. All processing happens locally or on our servers.</li>
         <li>We do not create advertising profiles based on your behavior.</li>
         <li>We do not share your data with data brokers.</li>
       </ul>
@@ -260,7 +327,7 @@
 
       <h2>4. Cookies</h2>
 
-      <p>Mandarin uses first-party cookies only. We do not use third-party tracking cookies.</p>
+      <p>Aelu uses first-party cookies only. We do not use third-party tracking cookies.</p>
       <ul>
         <li><strong>Session cookie:</strong> Keeps you logged in while you use the app. Expires when you close your browser or after a set period.</li>
         <li><strong>Referral tracking cookie:</strong> If you arrive via an affiliate link, a cookie records the referral source so the affiliate receives proper credit. This cookie expires after 90 days.</li>
@@ -288,12 +355,14 @@
 
       <h2>6. Third Parties</h2>
 
-      <p>We use three external services. That is the complete list.</p>
+      <p>We use four external services. That is the complete list.</p>
       <ul>
-        <li><strong>Stripe</strong> -- processes payments for Full Access subscriptions. Stripe receives your payment information directly. <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe Privacy Policy</a>.</li>
+        <li><strong>Stripe</strong> -- processes payments for Full Access subscriptions. Stripe receives your payment information directly. <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe Privacy Policy</a> · <a href="https://stripe.com/legal/dpa" rel="noopener noreferrer" target="_blank">Stripe DPA</a>.</li>
         <li><strong>Formspree</strong> -- processes contact form submissions. Formspree receives your email address and message content. <a href="https://formspree.io/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Formspree Privacy Policy</a>.</li>
-        <li><strong>Google Analytics 4</strong> -- provides website analytics as described above. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a>.</li>
+        <li><strong>Google Analytics 4</strong> -- provides website analytics as described above. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a> · <a href="https://business.safety.google/adsprocessorterms/" rel="noopener noreferrer" target="_blank">Google DPA</a>.</li>
+        <li><strong>Resend</strong> -- delivers transactional email (account verification, password resets, weekly progress updates). Resend receives your email address and the content of system-generated messages. <a href="https://resend.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Resend Privacy Policy</a> · <a href="https://resend.com/legal/dpa" rel="noopener noreferrer" target="_blank">Resend DPA</a>.</li>
       </ul>
+      <p>We have Data Processing Agreements in place with each of these providers. Links to their DPA documentation are provided above for transparency.</p>
       <p>We do not use any other third-party services that receive your data. No ad networks. No social login providers. No third-party analytics beyond GA4.</p>
 
       <h2>7. Data Retention</h2>
@@ -313,15 +382,15 @@
         <li><strong>Correct:</strong> Update your email address or other account information at any time.</li>
         <li><strong>Object:</strong> If you have concerns about how your data is being used, email us and we will address it.</li>
       </ul>
-      <p>To exercise any of these rights, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>.</p>
+      <p>To exercise any of these rights, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>.</p>
 
       <h2>9. Children's Privacy</h2>
 
-      <p>Mandarin is not designed for children under 13 and we do not knowingly collect data from children under 13. If you believe a child under 13 has created an account, please contact us and we will delete the account and associated data promptly.</p>
+      <p>Aelu is not designed for children under 13 and we do not knowingly collect data from children under 13. If you believe a child under 13 has created an account, please contact us and we will delete the account and associated data promptly.</p>
 
       <h2>10. International Users</h2>
 
-      <p>Mandarin is operated from the United States. If you are using the service from outside the US, your account data (email, hashed password) may be stored on servers in the United States. Your learning data is stored locally on your device regardless of where you are located. By using the service, you consent to the transfer of account data to the United States.</p>
+      <p>Aelu is operated from the United States. If you are using the service from outside the US, your account data (email, hashed password) may be stored on servers in the United States. Your learning data is stored locally on your device regardless of where you are located. By using the service, you consent to the transfer of account data to the United States.</p>
 
       <h2>11. Changes to This Policy</h2>
 
@@ -335,7 +404,7 @@
 
       <h2>12. Contact</h2>
 
-      <p>For privacy-related questions, concerns, or requests, email <a href="mailto:hello@mandarinapp.com">hello@mandarinapp.com</a>. Every email gets read and we will respond within a few business days. If you have a data access or deletion request, we will fulfill it within 30 days.</p>
+      <p>For privacy-related questions, concerns, or requests, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. Every email gets read and we will respond within a few business days. If you have a data access or deletion request, we will fulfill it within 30 days.</p>
 
     </div>
   </main>
@@ -343,9 +412,9 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a> · <a href="/partners">Partners</a></p>
-      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
-      <p style="margin-top: var(--space-2);">&copy; 2026 Mandarin</p>
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/breach-notification">Security</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
     </div>
   </footer>
 

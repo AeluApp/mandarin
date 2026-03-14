@@ -1,0 +1,94 @@
+{
+    "title": "The Shared Bike Adventure",
+    "title_zh": "共享单车",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_2_04_v0",
+    "tree": {
+        "setup": "A row of shared bikes outside a subway station. You want to ride one to your hotel but you've never used the app before. A college student, Xiao Di, is unlocking one next to you. She notices you staring at the QR code on the bike like it's written in ancient script.",
+        "setup_zh": "地铁站外一排共享单车。你想骑去酒店但没用过这个App。大学生小迪正在旁边解锁一辆车。她发现你盯着车上的二维码，像在看甲骨文。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你要骑车吗？要我帮你扫码吗？",
+                "text_pinyin": "nǐ yào qí chē ma? yào wǒ bāng nǐ sǎo mǎ ma?",
+                "text_en": "Do you want to ride? Want me to help you scan the code?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept her help.",
+                "options": [
+                    {
+                        "text_zh": "太好了！我第一次用这个App。",
+                        "text_pinyin": "tài hǎo le! wǒ dì yī cì yòng zhè ge App.",
+                        "text_en": "That would be great! It's my first time using this app.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Di walks you through the process with the patience of a tech support veteran.「先注册，然后扫这个码就行了。」第一次用 means 'first time using.'"
+                    },
+                    {
+                        "text_zh": "怎么扫码？我不太会。",
+                        "text_pinyin": "zěnme sǎo mǎ? wǒ bú tài huì.",
+                        "text_en": "How do I scan the code? I'm not sure how.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Di demonstrates on her own phone.「打开App，点这个按钮，对着二维码扫。」不太会 is 'not really sure how to' -- honest without being self-deprecating."
+                    },
+                    {
+                        "text_zh": "骑车去酒店远不远？",
+                        "text_pinyin": "qí chē qù jiǔdiàn yuǎn bu yuǎn?",
+                        "text_en": "Is it far to ride to the hotel?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Di asks which hotel. She pulls up the map.「不远，骑车十分钟。」She's helpful in the easy, uncomplicated way of someone who bikes everywhere."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，解锁了！骑车的时候小心一点，这边的路有点窄。",
+                "text_pinyin": "hǎo le, jiě suǒ le! qí chē de shíhou xiǎoxīn yìdiǎn, zhèbiān de lù yǒudiǎn zhǎi.",
+                "text_en": "Done, it's unlocked! Be careful riding, the roads around here are a bit narrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and ask about returning the bike.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！还车的时候怎么锁？",
+                        "text_pinyin": "xièxie! huán chē de shíhou zěnme suǒ?",
+                        "text_en": "Thanks! How do I lock it when I return it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Di shows you the lock on the back wheel.「骑到了就把锁合上，App会自动结算。」还车 means 'return the vehicle.' 锁 means 'to lock.'"
+                    },
+                    {
+                        "text_zh": "多少钱？按时间算吗？",
+                        "text_pinyin": "duōshao qián? àn shíjiān suàn ma?",
+                        "text_en": "How much is it? Is it by time?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「一块五，半小时。」Xiao Di says. Shared bikes are almost free -- the convenience is the point. 按时间算 means 'calculated by time.'"
+                    },
+                    {
+                        "text_zh": "可以停在任何地方吗？",
+                        "text_pinyin": "kěyǐ tíng zài rènhé dìfang ma?",
+                        "text_en": "Can I park it anywhere?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Di shakes her head.「要停在白色的停车框里，不然会扣钱。」任何 means 'any.' There are designated parking zones."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，骑慢一点！第一次骑不用着急。",
+                "text_pinyin": "hǎo le, qí màn yìdiǎn! dì yī cì qí bú yòng zháojí.",
+                "text_en": "OK, ride slowly! No rush for your first time."
+            }
+        ],
+        "cultural_note": "Shared bikes (共享单车, gòngxiǎng dānchē) are everywhere in Chinese cities. Major apps include Meituan and Hellobike. They cost about 1.5 yuan per 30 minutes. Park in designated zones (停车框) to avoid extra charges."
+    }
+}

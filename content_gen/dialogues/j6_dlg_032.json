@@ -1,0 +1,89 @@
+{
+    "title": "The Box That Sets You Free",
+    "title_zh": "让你自由的框架",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're talking with a musician friend, Yue, who composes music within strict traditional forms. She surprises you by saying constraints make her more creative, not less.",
+        "setup_zh": "你在和音乐人朋友月聊天，她在严格的传统曲式里作曲。她出人意料地说限制让她更有创造力，而不是更少。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "很多人以为创造力就是完全的自由——想做什么就做什么。但我发现恰恰相反。当我面前有无限的选择时，我反而什么都写不出来。但当我给自己设定一个框架——比如只用五个音、或者固定在七拍——我的创造力反而被激发出来了。",
+                "text_pinyin": "Hěn duō rén yǐwéi chuàngzào lì jiù shì wánquán de zìyóu — xiǎng zuò shénme jiù zuò shénme. Dàn wǒ fāxiàn qiàqià xiāngfǎn. Dāng wǒ miànqián yǒu wúxiàn de xuǎnzé shí, wǒ fǎn'ér shénme dōu xiě bù chūlái. Dàn dāng wǒ gěi zìjǐ shèdìng yīge kuàngjià — bǐrú zhǐ yòng wǔ ge yīn, huòzhě gùdìng zài qī pāi — wǒ de chuàngzào lì fǎn'ér bèi jīfā chūlái le.",
+                "text_en": "Many people think creativity is total freedom — doing whatever you want. But I've found the opposite is true. When I face infinite choices, I can't write anything. But when I set a framework — like using only five notes, or fixing a seven-beat pattern — my creativity is actually triggered."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explore the paradox of constraint and creativity.",
+                "options": [
+                    {
+                        "text_zh": "这让我想到河流和河岸的关系。没有河岸的水只是漫无目的的洪水。正是因为两岸的限制，水才有了方向和力量。创造力也一样——框架不是牢笼，而是给能量一个流动的方向。",
+                        "text_pinyin": "Zhè ràng wǒ xiǎngdào héliú hé hé'àn de guānxì. Méiyǒu hé'àn de shuǐ zhǐ shì mànwú mùdì de hóngshuǐ. Zhèng shì yīnwèi liǎng àn de xiànzhì, shuǐ cái yǒu le fāngxiàng hé lìliang. Chuàngzào lì yě yíyàng — kuàngjià bú shì láolóng, ér shì gěi néngliàng yīge liúdòng de fāngxiàng.",
+                        "text_en": "This reminds me of a river and its banks. Water without banks is just aimless flood. The banks' constraint gives water direction and force. Creativity is the same — a framework isn't a cage, but gives energy a direction to flow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Yue's eyes light up — she sets her pen down and leans forward, clearly wanting to keep going."
+                    },
+                    {
+                        "text_zh": "但太多限制不会扼杀创造力吗？",
+                        "text_pinyin": "Dàn tài duō xiànzhì bú huì èshā chuàngzào lì ma?",
+                        "text_en": "But wouldn't too many constraints kill creativity?",
+                        "score": 0.0,
+                        "feedback": "Reasonable question but misses the nuance of chosen vs imposed constraints."
+                    },
+                    {
+                        "text_zh": "我更喜欢自由发挥，不喜欢被规则限制。",
+                        "text_pinyin": "Wǒ gèng xǐhuan zìyóu fāhuī, bù xǐhuan bèi guīzé xiànzhì.",
+                        "text_en": "I prefer free expression, I don't like being limited by rules.",
+                        "score": 0.0,
+                        "feedback": "Reflexive resistance — exactly the assumption she's challenging."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "河流和河岸……这个比喻太美了。你知道吗，中国传统诗词就是最好的证明。律诗要求五个字或七个字一行，押韵，平仄对仗——限制极其严格。但正是在这些限制里，李白和杜甫写出了人类历史上最自由的诗句。自由不是没有边界，而是在边界内舞蹈。",
+                "text_pinyin": "Héliú hé hé'àn…… zhège bǐyù tài měi le. Nǐ zhīdào ma, Zhōngguó chuántǒng shīcí jiù shì zuì hǎo de zhèngmíng. Lǜshī yāoqiú wǔ ge zì huò qī ge zì yī háng, yāyùn, píngzè duìzhàng — xiànzhì jíqí yángé. Dàn zhèng shì zài zhèxiē xiànzhì lǐ, Lǐ Bái hé Dù Fǔ xiě chū le rénlèi lìshǐ shàng zuì zìyóu de shījù. Zìyóu bú shì méiyǒu biānjiè, ér shì zài biānjiè nèi wǔdǎo.",
+                "text_en": "River and banks... what a beautiful metaphor. You know, Chinese classical poetry is the best proof. Regulated verse requires five or seven characters per line, rhyme, tonal patterns — extremely strict constraints. Yet within those constraints, Li Bai and Du Fu wrote some of the freest verses in human history. Freedom isn't the absence of boundaries, but dancing within them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on freedom as dancing within boundaries.",
+                "options": [
+                    {
+                        "text_zh": "在边界内舞蹈——也许这不只适用于艺术，也适用于人生。我们都有限制——时间有限、能力有限。但正是这些限制定义了我们的选择，让选择有意义。如果什么都可以做，做什么都没意义。",
+                        "text_pinyin": "Zài biānjiè nèi wǔdǎo — yěxǔ zhè bù zhǐ shìyòng yú yìshù, yě shìyòng yú rénshēng. Wǒmen dōu yǒu xiànzhì — shíjiān yǒuxiàn, nénglì yǒuxiàn. Dàn zhèng shì zhèxiē xiànzhì dìngyì le wǒmen de xuǎnzé, ràng xuǎnzé yǒu yìyì. Rúguǒ shénme dōu kěyǐ zuò, zuò shénme dōu méi yìyì.",
+                        "text_en": "Dancing within boundaries — maybe this applies not just to art but to life. We all have limits — time, ability. But limits define our choices and make them meaningful. If everything were possible, nothing would mean anything.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Extends the artistic principle into existential philosophy — limits create meaning."
+                    },
+                    {
+                        "text_zh": "你的音乐在哪里可以听到？",
+                        "text_pinyin": "Nǐ de yīnyuè zài nǎlǐ kěyǐ tīng dào?",
+                        "text_en": "Where can I listen to your music?",
+                        "score": 0.0,
+                        "feedback": "Shifts to promotion rather than engaging with the insight."
+                    },
+                    {
+                        "text_zh": "你有没有试过完全自由的即兴创作？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu shì guò wánquán zìyóu de jíxìng chuàngzuò?",
+                        "text_en": "Have you tried completely free improvisation?",
+                        "score": 0.0,
+                        "feedback": "Circles back to the assumption she's already addressed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每一步都是一个有重量的决定……对。也许这就是为什么有限的生命比永生更有价值。因为时间有限，所以每一天都有分量；因为能力有限，所以每一次努力都有意义。来，我弹给你听我最新写的那首曲子——五个音，七拍，但里面有整个宇宙。",
+                "text_pinyin": "Měi yī bù dōu shì yīge yǒu zhòngliàng de juédìng…… duì. Yěxǔ zhè jiù shì wèi shénme yǒuxiàn de shēngmìng bǐ yǒngshēng gèng yǒu jiàzhí. Yīnwèi shíjiān yǒuxiàn, suǒyǐ měi yī tiān dōu yǒu fènliàng; yīnwèi nénglì yǒuxiàn, suǒyǐ měi yī cì nǔlì dōu yǒu yìyì. Lái, wǒ tán gěi nǐ tīng wǒ zuìxīn xiě de nà shǒu qǔzi — wǔ ge yīn, qī pāi, dàn lǐmiàn yǒu zhěnggè yǔzhòu.",
+                "text_en": "Every step a weighted decision... yes. Maybe that's why a finite life is more valuable than immortality. Because time is limited, every day carries weight; because ability is limited, every effort has meaning. Come, let me play you my newest piece — five notes, seven beats, but it contains an entire universe."
+            }
+        ],
+        "cultural_note": "Chinese classical poetry (律诗, lǜshī) is one of the most strictly constrained literary forms in world literature — requiring exact character counts, tonal patterns (平仄), and rhyme schemes. Yet within these constraints, Tang Dynasty poets produced works of unparalleled emotional freedom and beauty. This paradox mirrors the broader Chinese aesthetic principle that form and freedom are not opposed but complementary — constraint channels creative energy rather than suppressing it."
+    }
+}

@@ -29,6 +29,7 @@ from .mc import (
     generate_mc_options,
     run_mc_drill,
     run_reverse_mc_drill,
+    run_contrastive_drill,
 )
 
 # ── pinyin ──────────────────────────────
@@ -86,7 +87,27 @@ from .advanced import (
     run_homophone_drill,
     run_cloze_context_drill,
     run_synonym_disc_drill,
+    run_tone_sandhi_drill,
+    run_collocation_drill,
+    run_radical_drill,
+    run_chengyu_drill,
 )
+
+# ── number ──────────────────────────────
+from .number import run_number_system_drill
+
+# ── grammar_drills ──────────────────────────────
+from .grammar_drills import (
+    run_complement_drill,
+    run_ba_bei_drill,
+    run_error_correction_drill,
+)
+
+# ── image_association ──────────────────────────────
+from .image_association import run_image_association_drill
+
+# ── video_comprehension ──────────────────────────────
+from .video_comprehension import run_video_comprehension_drill
 
 # ── dispatch ──────────────────────────────
 from .dispatch import (

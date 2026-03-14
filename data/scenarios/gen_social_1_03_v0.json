@@ -1,0 +1,94 @@
+{
+    "title": "Running Late",
+    "title_zh": "迟到了",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_social_1_03_v0",
+    "tree": {
+        "setup": "The entrance of a movie theater, 7:15 PM. Your friend Xiao Yang has been waiting since 7:00. He's standing with his arms crossed, tapping one foot. He's not actually angry -- he's just dramatic. He's been rehearsing his disappointed face in the glass door.",
+        "setup_zh": "电影院门口，晚上七点一刻。你朋友小杨从七点就在等了。他双手交叉站着，一只脚在打拍子。他其实没生气——只是有点夸张。他在玻璃门上练了好几遍失望的表情。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你来了！我等了很久了！",
+                "text_pinyin": "nǐ lái le! wǒ děng le hěn jiǔ le!",
+                "text_en": "You're here! I've been waiting forever!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize for being late.",
+                "options": [
+                    {
+                        "text_zh": "对不起！我来晚了。",
+                        "text_pinyin": "duìbuqǐ! wǒ lái wǎn le.",
+                        "text_en": "Sorry! I'm late.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yang drops the disappointed face immediately -- he can't maintain it longer than five seconds. He grins.「没事没事！」对不起 is the standard apology. Clean and direct."
+                    },
+                    {
+                        "text_zh": "不好意思，路上人很多。",
+                        "text_pinyin": "bù hǎoyìsi, lùshang rén hěn duō.",
+                        "text_en": "Sorry, there were lots of people on the way.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yang nods sagely -- traffic is a universally accepted excuse in Chinese cities. 不好意思 is softer than 对不起, perfect for minor social infractions."
+                    },
+                    {
+                        "text_zh": "七点十五分了？",
+                        "text_pinyin": "qī diǎn shíwǔ fēn le?",
+                        "text_en": "It's 7:15 already?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yang's eyes widen. Playing innocent when you're clearly late is a bold strategy. He appreciates the audacity, if not the punctuality."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没关系！快走吧，电影要开始了！",
+                "text_pinyin": "méi guānxi! kuài zǒu ba, diànyǐng yào kāishǐ le!",
+                "text_en": "It's fine! Let's go, the movie is about to start!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond and head in.",
+                "options": [
+                    {
+                        "text_zh": "走吧！",
+                        "text_pinyin": "zǒu ba!",
+                        "text_en": "Let's go!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "You both hurry through the doors. Xiao Yang has already forgiven you -- he was mostly just glad to have someone to see the movie with. 走吧 is the universal 'let's go.'"
+                    },
+                    {
+                        "text_zh": "谢谢你等我！",
+                        "text_pinyin": "xièxie nǐ děng wǒ!",
+                        "text_en": "Thanks for waiting for me!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yang is genuinely touched. Nobody has ever thanked him for waiting. He files this away as a reason you're a good friend."
+                    },
+                    {
+                        "text_zh": "我们买爆米花吗？",
+                        "text_pinyin": "wǒmen mǎi bàomǐhuā ma?",
+                        "text_en": "Should we buy popcorn?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yang stares at you. You are fifteen minutes late and now you want to stop for snacks. His left eye twitches. But... he does want popcorn."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "下次早点来啊！",
+                "text_pinyin": "xià cì zǎo diǎn lái a!",
+                "text_en": "Come earlier next time!"
+            }
+        ],
+        "cultural_note": "Chinese people value punctuality (准时, zhǔnshí), but a few minutes late for social events is usually forgiven with a quick 对不起 or 不好意思. Blaming traffic or subway crowds is always understood."
+    }
+}

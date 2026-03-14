@@ -1,0 +1,87 @@
+{
+    "title": "Thanking the Delivery Person",
+    "title_zh": "谢谢快递员",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "A delivery person arrives at your door in heavy rain, bringing your package. He's soaked despite his raincoat.",
+        "setup_zh": "大雨中，快递员送包裹到你家门口。虽然穿了雨衣，但他全身都湿透了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您的快递，麻烦签收一下。不好意思，淋湿了一点，但是里面的东西没有问题。",
+                "text_pinyin": "Nín de kuàidì, máfan qiān shōu yīxià. Bù hǎoyìsi, lín shī le yīdiǎn, dànshì lǐmiàn de dōngxi méiyǒu wèntí.",
+                "text_en": "Your package — please sign for it. Sorry, it got a bit wet on the outside, but the contents are fine."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the delivery person.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！下这么大的雨还送过来，辛苦了。你要不要进来喝杯热水？",
+                        "text_pinyin": "Xièxie nǐ! Xià zhème dà de yǔ hái sòng guòlái, xīnkǔ le. Nǐ yào bú yào jìnlái hē bēi rè shuǐ?",
+                        "text_en": "Thank you! Delivering in such heavy rain — you've worked hard. Want to come in for a cup of hot water?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and acknowledges his effort beyond just the transaction."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite but doesn't acknowledge the weather."
+                    },
+                    {
+                        "text_zh": "怎么湿了？你应该保护好包裹。",
+                        "text_pinyin": "Zěnme shī le? Nǐ yīnggāi bǎohù hǎo bāoguǒ.",
+                        "text_en": "Why is it wet? You should protect packages better.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Critical of someone working in pouring rain."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不用了，谢谢！还有好几个包裹要送呢。您能理解就好，有些客人看到湿了就不高兴。谢谢您这么好。",
+                "text_pinyin": "Bú yòng le, xièxie! Hái yǒu hǎo jǐ ge bāoguǒ yào sòng ne. Nín néng lǐjiě jiù hǎo, yǒu xiē kèrén kàndào shī le jiù bù gāoxìng. Xièxie nín zhème hǎo.",
+                "text_en": "No need, thanks! Still have several more to deliver. I'm glad you understand — some customers get upset about wet packages. Thank you for being so kind."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Send him off warmly.",
+                "options": [
+                    {
+                        "text_zh": "路上小心！雨太大了注意安全。你真的辛苦了。",
+                        "text_pinyin": "Lù shàng xiǎoxīn! Yǔ tài dà le zhùyì ānquán. Nǐ zhēn de xīnkǔ le.",
+                        "text_en": "Be careful on the road! It's raining so hard — stay safe. You really work hard.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Genuine care for a worker's wellbeing."
+                    },
+                    {
+                        "text_zh": "好的，再见。",
+                        "text_pinyin": "Hǎo de, zàijiàn.",
+                        "text_en": "Okay, bye.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Standard."
+                    },
+                    {
+                        "text_zh": "下次别下雨天送了。",
+                        "text_pinyin": "Xià cì bié xià yǔ tiān sòng le.",
+                        "text_en": "Don't deliver in rain next time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "They don't get to choose when to deliver."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Delivery workers (快递员) form the backbone of urban convenience in China. The phrase 「辛苦了」 (you've worked hard) is an important expression of respect for people in service roles. Small acts of kindness — offering water, showing understanding — go a long way."
+    },
+    "hsk_level": 3
+}

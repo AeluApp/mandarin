@@ -1,0 +1,89 @@
+{
+    "title": "What We Learn When Nobody Is Teaching",
+    "title_zh": "没人教的时候我们在学什么",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and your friend Xiaoqing, a kindergarten teacher, are discussing how children learn versus how adults learn. She's noticed something surprising in her classroom.",
+        "setup_zh": "你和朋友小晴——一位幼儿园老师——在讨论孩子和成人学习方式的区别。她在教室里发现了一些有趣的事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我发现了一个矛盾：孩子在自由玩耍的时候学到的东西，往往比我正式教他们的时候更多、更深。当我刻意去教的时候，他们在模仿我；但当我退后一步让他们自己探索的时候，他们在创造。教育最有效的时刻，也许恰恰是教育者消失的时刻。",
+                "text_pinyin": "Wǒ fāxiàn le yīge máodùn: háizi zài zìyóu wánshuǎ de shíhou xué dào de dōngxi, wǎngwǎng bǐ wǒ zhèngshì jiāo tāmen de shíhou gèng duō, gèng shēn. Dāng wǒ kèyì qù jiāo de shíhou, tāmen zài mófǎng wǒ; dàn dāng wǒ tuì hòu yī bù ràng tāmen zìjǐ tànsuǒ de shíhou, tāmen zài chuàngzào. Jiàoyù zuì yǒuxiào de shíkè, yěxǔ qiàqià shì jiàoyù zhě xiāoshī de shíkè.",
+                "text_en": "I've discovered a contradiction: what children learn during free play is often more and deeper than what they learn when I formally teach them. When I deliberately teach, they imitate me; but when I step back and let them explore, they create. Perhaps education's most effective moment is precisely when the educator disappears."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with this paradox of teaching.",
+                "options": [
+                    {
+                        "text_zh": "最好的老师不是给答案的人，而是创造条件让学生自己找到答案的人。你退后一步留出的空间，就是创造力的土壤。过度干预反而压缩了探索。教育的艺术在于知道什么时候不教。",
+                        "text_pinyin": "Zuì hǎo de lǎoshī bú shì gěi dá'àn de rén, ér shì chuàngzào tiáojiàn ràng xuéshēng zìjǐ zhǎo dào dá'àn de rén. Nǐ tuì hòu yī bù liú chū de kōngjiān, jiù shì chuàngzào lì de tǔrǎng. Guòdù gānyù fǎn'ér yāsuō le tànsuǒ. Jiàoyù de yìshù zàiyú zhīdào shénme shíhou bú jiào.",
+                        "text_en": "The best teacher isn't someone who gives answers, but creates conditions for students to find their own. The space you create by stepping back is soil for creativity. Over-intervention compresses exploration. The art of education is knowing when not to teach.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Precise and layered — extends her observation into educational philosophy."
+                    },
+                    {
+                        "text_zh": "但如果不教他们，他们怎么学到知识？",
+                        "text_pinyin": "Dàn rúguǒ bú jiào tāmen, tāmen zěnme xué dào zhīshi?",
+                        "text_en": "But if you don't teach them, how will they learn knowledge?",
+                        "score": 0.0,
+                        "feedback": "Misses her distinction between formal knowledge and deeper learning."
+                    },
+                    {
+                        "text_zh": "小孩子就是喜欢玩而已。",
+                        "text_pinyin": "Xiǎo háizi jiù shì xǐhuan wán éryǐ.",
+                        "text_en": "Little kids just like to play, that's all.",
+                        "score": 0.0,
+                        "feedback": "Dismisses play as unserious — exactly the mindset she's challenging."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "知道什么时候不教……这可能是最难学的教学技巧。我们整个体系都在训练老师「教得更多」，但很少有人思考「教得更少」的价值。我在想，也许成年人的很多问题就出在这里——我们被教了太多正确答案，以至于失去了自己提问的能力。",
+                "text_pinyin": "Zhīdào shénme shíhou bú jiào…… zhè kěnéng shì zuì nán xué de jiàoxué jìqiǎo. Wǒmen zhěnggè tǐxì dōu zài xùnliàn lǎoshī 'jiāo de gèng duō', dàn hěn shǎo yǒu rén sīkǎo 'jiāo de gèng shǎo' de jiàzhí. Wǒ zài xiǎng, yěxǔ chéngnián rén de hěn duō wèntí jiù chū zài zhèlǐ — wǒmen bèi jiāo le tài duō zhèngquè dá'àn, yǐzhì yú shīqù le zìjǐ tí wèn de nénglì.",
+                "text_en": "Knowing when not to teach... that may be the hardest teaching skill to learn. Our entire system trains teachers to 'teach more,' but rarely does anyone consider the value of 'teaching less.' I wonder — maybe many adult problems originate here. We were taught so many correct answers that we lost the ability to ask our own questions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on how this affects adults.",
+                "options": [
+                    {
+                        "text_zh": "完全同意。我们花了二十年接受教育，然后花余生试图找回教育前那个敢问「为什么」的自己。也许最好的教育不是增加什么，而是保护孩子天生就有的好奇心。不让它被标准答案覆盖掉。",
+                        "text_pinyin": "Wánquán tóngyì. Wǒmen huā le èrshí nián jiēshòu jiàoyù, ránhòu huā yúshēng shìtú zhǎo huí jiàoyù qián nàge gǎn wèn 'wèi shénme' de zìjǐ. Yěxǔ zuì hǎo de jiàoyù bú shì zēngjiā shénme, ér shì bǎohù háizi tiānshēng jiù yǒu de hàoqí xīn. Bú ràng tā bèi biāozhǔn dá'àn fùgài diào.",
+                        "text_en": "We spend twenty years being educated, then spend the rest recovering the self that dared ask 'why.' Maybe the best education isn't adding something, but protecting the curiosity children are born with. Not letting standard answers overwrite it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Inversion — education as recovery, not acquisition."
+                    },
+                    {
+                        "text_zh": "但基础知识还是要教的，否则什么都不会。",
+                        "text_pinyin": "Dàn jīchǔ zhīshi háishì yào jiāo de, fǒuzé shénme dōu bú huì.",
+                        "text_en": "But basic knowledge still needs to be taught, otherwise they won't know anything.",
+                        "score": 0.0,
+                        "feedback": "Misses the nuance — she's not against teaching facts, but against suppressing inquiry."
+                    },
+                    {
+                        "text_zh": "你们幼儿园的课程是怎么安排的？",
+                        "text_pinyin": "Nǐmen yòu'éryuán de kèchéng shì zěnme ānpái de?",
+                        "text_en": "How is your kindergarten curriculum structured?",
+                        "score": 0.0,
+                        "feedback": "Bureaucratic — shifts from philosophy to scheduling."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "保护好奇心……也许这就是我真正的工作。不是教他们认字、算数，而是保护那个在他们眼睛里闪着光的东西。谢谢你，这次对话让我重新理解了我在做的事。",
+                "text_pinyin": "Bǎohù hàoqí xīn…… yěxǔ zhè jiù shì wǒ zhēnzhèng de gōngzuò. Bú shì jiāo tāmen rèn zì, suànshù, ér shì bǎohù nàge zài tāmen yǎnjīng lǐ shǎn zhe guāng de dōngxi. Xièxie nǐ, zhè cì duìhuà ràng wǒ chóngxīn lǐjiě le wǒ zài zuò de shì.",
+                "text_en": "Protecting curiosity... maybe that's my real job. Not teaching them characters and arithmetic, but protecting that light shining in their eyes. Thank you — this conversation helped me re-understand what I'm doing."
+            }
+        ],
+        "cultural_note": "Chinese education has traditionally emphasized teacher authority and knowledge transmission (传道授业解惑). The emerging counter-movement values play-based learning and inquiry, influenced by both Western educational philosophy (Montessori, Reggio Emilia) and indigenous Chinese traditions like the Socratic-style dialogues found in Confucian classics. The tension between exam preparation and genuine learning remains one of the most debated topics in Chinese educational reform."
+    }
+}

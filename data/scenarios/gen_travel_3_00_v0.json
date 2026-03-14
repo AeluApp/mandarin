@@ -1,0 +1,124 @@
+{
+    "title": "The Boutique Hotel Negotiations",
+    "title_zh": "精品酒店谈判",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_3_00_v0",
+    "tree": {
+        "setup": "A converted courtyard hotel (四合院酒店) in a Beijing hutong. The entrance is through a narrow alley lined with potted plants. The owner, Lao Chen, restored every beam and tile himself. He greets you at the carved wooden door wearing a linen shirt and cloth shoes. His Labrador, Douban, sniffs your luggage with professional interest. You booked online but the photos didn't capture how the afternoon light fills the courtyard.",
+        "setup_zh": "北京胡同里一家改建的四合院酒店。入口是一条两边摆着盆栽的窄巷。老板老陈自己修复了每根梁和每块砖。他穿着亚麻衬衫和布鞋在雕花木门口迎接你。他的拉布拉多豆瓣用专业的兴趣嗅你的行李。你在网上订的，但照片没拍出下午阳光洒满院子的样子。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎！你就是网上订房的那位吧？一路过来好找吗？胡同里导航有时候不太准。",
+                "text_pinyin": "huānyíng! nǐ jiùshì wǎng shàng dìng fáng de nà wèi ba? yí lù guòlái hǎo zhǎo ma? hútòng lǐ dǎoháng yǒu shíhou bú tài zhǔn.",
+                "text_en": "Welcome! You're the one who booked online, right? Was it easy to find? GPS in the hutongs isn't always accurate."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Check in and comment on the place.",
+                "options": [
+                    {
+                        "text_zh": "好不容易找到！导航让我在隔壁巷子转了两圈。但是这个院子太漂亮了，值得迷路。",
+                        "text_pinyin": "hǎo bù róngyì zhǎo dào! dǎoháng ràng wǒ zài gébì xiàngzi zhuǎn le liǎng quān. dànshì zhè ge yuànzi tài piàoliang le, zhíde mí lù.",
+                        "text_en": "It took some effort! GPS had me going in circles in the next alley. But this courtyard is so beautiful, it was worth getting lost.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Chen laughs.「都这样！下次来直接打我电话，我出来接你。」好不容易 is 'with great difficulty.' 值得 means 'worth it.' Complimenting his restoration work is the fastest way to his heart."
+                    },
+                    {
+                        "text_zh": "还好，跟着地图上的标记走就找到了。这个四合院是你自己修的？",
+                        "text_pinyin": "hái hǎo, gēnzhe dìtú shàng de biāojì zǒu jiù zhǎo dào le. zhè ge sìhéyuàn shì nǐ zìjǐ xiū de?",
+                        "text_en": "Not too bad, followed the markers on the map and found it. Did you restore this courtyard yourself?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Chen's face glows.「修了三年。每根梁都是原来的，只是加固了。」标记 is 'markers.' 加固 is 'reinforced.' You've asked the question he most wants to answer."
+                    },
+                    {
+                        "text_zh": "找到了。我订了三个晚上。房间在哪里？",
+                        "text_pinyin": "zhǎo dào le. wǒ dìng le sān ge wǎnshang. fángjiān zài nǎlǐ?",
+                        "text_en": "Found it. I booked three nights. Where's the room?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Chen blinks. Douban tilts his head.「不急不急，先喝杯茶。」He gestures to the courtyard table. In a place like this, checking in is a process, not a transaction."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来，先喝杯茶。你订的是东厢房，最安静的那间。窗户对着那棵石榴树。对了，早餐包含在房费里。你有什么忌口吗？",
+                "text_pinyin": "lái, xiān hē bēi chá. nǐ dìng de shì dōng xiāngfáng, zuì ānjìng de nà jiān. chuānghu duìzhe nà kē shíliú shù. duì le, zǎocān bāohán zài fángfèi lǐ. nǐ yǒu shénme jìkǒu ma?",
+                "text_en": "Come, have some tea first. You booked the east wing room, the quietest one. The window faces that pomegranate tree. Breakfast is included. Do you have any dietary restrictions?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about breakfast and ask about the area.",
+                "options": [
+                    {
+                        "text_zh": "没有忌口。早餐是中式还是西式的？还有，附近有什么值得去的地方？",
+                        "text_pinyin": "méiyǒu jìkǒu. zǎocān shì zhōngshì háishi xīshì de? háiyǒu, fùjìn yǒu shénme zhíde qù de dìfang?",
+                        "text_en": "No restrictions. Is breakfast Chinese or Western style? Also, what's worth visiting nearby?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「中式——豆浆油条包子粥。我每天换着做。」Lao Chen pulls out a hand-drawn neighborhood map.「这个胡同走到头就是鼓楼。」值得去 is 'worth going to.' His hand-drawn map is better than any app."
+                    },
+                    {
+                        "text_zh": "太好了！几点吃早餐？我早上起得比较晚。",
+                        "text_pinyin": "tài hǎo le! jǐ diǎn chī zǎocān? wǒ zǎoshang qǐ de bǐjiào wǎn.",
+                        "text_en": "Great! What time is breakfast? I tend to get up late in the morning.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「七点到九点半。晚了也没关系，跟我说一声就行。」起得比较晚 is 'get up rather late.' Small hotels are flexible -- just communicate."
+                    },
+                    {
+                        "text_zh": "谢谢！这个茶很好喝。是什么茶？",
+                        "text_pinyin": "xièxie! zhè ge chá hěn hǎo hē. shì shénme chá?",
+                        "text_en": "Thanks! This tea is really good. What kind is it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「茉莉花茶。老北京喝的都是这个。」Lao Chen tops off your cup. 茉莉花茶 is jasmine tea -- the quintessential Beijing tea. Noticing the tea earns points with Lao Chen."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对了，我看你订的是标准间。其实我们还有一间带独立小院子的房间，景色更好。只贵一百块一晚。要不要看看？",
+                "text_pinyin": "duì le, wǒ kàn nǐ dìng de shì biāozhǔn jiān. qíshí wǒmen hái yǒu yì jiān dài dúlì xiǎo yuànzi de fángjiān, jǐngsè gèng hǎo. zhǐ guì yìbǎi kuài yì wǎn. yào bu yào kànkan?",
+                "text_en": "By the way, I see you booked a standard room. Actually we have a room with its own private courtyard, better view. Only 100 more per night. Want to take a look?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide about the room upgrade.",
+                "options": [
+                    {
+                        "text_zh": "可以看看吗？如果确实好很多的话我可以考虑升级。三个晚上的话总共多三百？",
+                        "text_pinyin": "kěyǐ kànkan ma? rúguǒ quèshí hǎo hěn duō de huà wǒ kěyǐ kǎolǜ shēngjí. sān ge wǎnshang de huà zǒnggòng duō sānbǎi?",
+                        "text_en": "Can I take a look? If it's really much better I might consider upgrading. Three nights would be 300 more total?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Chen leads you through a moon gate to a private courtyard with a stone table under a persimmon tree.「看，这棵树秋天结柿子，可以直接摘。」升级 is 'upgrade.' 考虑 is 'consider.' Seeing before deciding is wise."
+                    },
+                    {
+                        "text_zh": "标准间就可以了，谢谢。预算有限。",
+                        "text_pinyin": "biāozhǔn jiān jiù kěyǐ le, xièxie. yùsuàn yǒuxiàn.",
+                        "text_en": "The standard room is fine, thanks. Budget is limited.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「完全没问题！东厢房也很好的。窗外就是石榴树。」Lao Chen doesn't push. 预算有限 is clear and polite. He respects direct communication."
+                    },
+                    {
+                        "text_zh": "独立小院子？听起来很棒！直接升级吧。",
+                        "text_pinyin": "dúlì xiǎo yuànzi? tīng qǐlai hěn bàng! zhíjiē shēngjí ba.",
+                        "text_en": "Private courtyard? Sounds amazing! Let's upgrade directly.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Chen smiles.「好！我帮你换过去。豆瓣，带客人去看房间！」直接 is 'directly/immediately.' The Labrador leads the way. Spontaneous decisions can lead to the best travel memories."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Courtyard hotels (四合院酒店, sìhéyuàn jiǔdiàn) in Beijing's hutongs offer a unique cultural experience. 东厢房 (dōng xiāngfáng) is 'east wing room' in traditional courtyard architecture. 茉莉花茶 (mòlìhuā chá, jasmine tea) is Beijing's signature tea. Small hotels in China often have a personal touch -- hand-drawn maps, home-cooked breakfast, and the owner's dog."
+    }
+}

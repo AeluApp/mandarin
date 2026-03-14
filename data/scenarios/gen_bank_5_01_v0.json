@@ -1,0 +1,160 @@
+{
+    "title": "The International Wire Transfer Ballet",
+    "title_zh": "国际汇款芭蕾",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_bank_5_01_v0",
+    "tree": {
+        "setup": "The international business window at a Bank of China branch, where a small plaque reads '外汇业务' in gold lettering. Mr. Zhong has processed international transfers to 47 countries and can recite SWIFT codes the way some people recite phone numbers. He treats each international transfer as a small diplomatic mission — money crossing borders deserves ceremony.",
+        "setup_zh": "中国银行支行的国际业务窗口，一块小牌子上用金字写着「外汇业务」。钟先生已经处理过往47个国家的国际汇款，能像背电话号码一样背出SWIFT代码。他把每笔国际汇款都当作一次小型外交任务——跨越国境的资金值得仪式感。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问您要办理什么外汇业务？",
+                "text_pinyin": "nín hǎo, qǐngwèn nín yào bànlǐ shénme wàihuì yèwù?",
+                "text_en": "Hello, what foreign exchange business would you like to handle?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your international transfer needs.",
+                "options": [
+                    {
+                        "text_zh": "你好，我需要汇一笔钱到美国。是给在纽约读书的孩子交学费。大概需要汇五千美元。",
+                        "text_pinyin": "nǐ hǎo, wǒ xūyào huì yì bǐ qián dào Měiguó. shì gěi zài Niǔyuē dúshū de háizi jiāo xuéfèi. dàgài xūyào huì wǔqiān měiyuán.",
+                        "text_en": "Hello, I need to wire money to the US. It's tuition for my child studying in New York. About five thousand US dollars.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Purpose, destination, and amount — Mr. Zhong opens the international transfer form with the reverence of a diplomat opening a treaty."
+                    },
+                    {
+                        "text_zh": "我要往美国汇钱。",
+                        "text_pinyin": "wǒ yào wǎng Měiguó huì qián.",
+                        "text_en": "I need to wire money to the US.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll need the details, but the direction is clear."
+                    },
+                    {
+                        "text_zh": "国际汇款怎么办？我没办过。",
+                        "text_pinyin": "guójì huìkuǎn zěnme bàn? wǒ méi bàn guò.",
+                        "text_en": "How do international transfers work? I've never done one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Zhong settles in. First-timers are his specialty — and his longest conversations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "留学学费汇款我们经常办。需要准备这些材料：您的身份证、收款人的银行账号和SWIFT代码、还有学校的录取通知书或者学费账单。今天的汇率是一美元兑换七块二五。",
+                "text_pinyin": "liúxué xuéfèi huìkuǎn wǒmen jīngcháng bàn. xūyào zhǔnbèi zhèxiē cáiliào: nín de shēnfènzhèng, shōukuǎn rén de yínháng zhànghào hé SWIFT dàimǎ, hái yǒu xuéxiào de lùqǔ tōngzhī shū huòzhě xuéfèi zhàngdān. jīntiān de huìlǜ shì yì měiyuán duìhuàn qī kuài èr wǔ.",
+                "text_en": "We handle tuition transfers regularly. You'll need: your ID, the recipient's bank account and SWIFT code, plus the school's admission letter or tuition bill. Today's rate is 7.25 yuan per dollar."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide the materials and ask about fees.",
+                "options": [
+                    {
+                        "text_zh": "这些材料我都带了。SWIFT代码在这个文件上。请问手续费怎么算？还有到账大概需要几天？",
+                        "text_pinyin": "zhèxiē cáiliào wǒ dōu dài le. SWIFT dàimǎ zài zhège wénjiàn shàng. qǐngwèn shǒuxù fèi zěnme suàn? hái yǒu dào zhàng dàgài xūyào jǐ tiān?",
+                        "text_en": "I have all the materials. The SWIFT code is on this document. How are the fees calculated? And how many days until it arrives?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Prepared with all documents and asking the right questions — Mr. Zhong's diplomatic mission proceeds smoothly."
+                    },
+                    {
+                        "text_zh": "身份证和学费单在这里。SWIFT代码是什么？",
+                        "text_pinyin": "shēnfènzhèng hé xuéfèi dān zài zhèlǐ. SWIFT dàimǎ shì shénme?",
+                        "text_en": "ID and tuition bill are here. What's a SWIFT code?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Mr. Zhong explains — it's the international bank identification code. He's explained this approximately four thousand times."
+                    },
+                    {
+                        "text_zh": "我没带录取通知书。没有可以吗？",
+                        "text_pinyin": "wǒ méi dài lùqǔ tōngzhī shū. méiyǒu kěyǐ ma?",
+                        "text_en": "I didn't bring the admission letter. Is that OK without it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "For amounts under $500, sometimes. For $5,000, he'll need documentation. Foreign exchange regulations require it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "手续费是汇款金额的千分之一，最低五十块，最高二百六十块。五千美元的话手续费大概一百五十块。电汇一般三到五个工作日到账。",
+                "text_pinyin": "shǒuxù fèi shì huìkuǎn jīn'é de qiān fēn zhī yī, zuìdī wǔshí kuài, zuìgāo èrbǎi liùshí kuài. wǔqiān měiyuán de huà shǒuxù fèi dàgài yìbǎi wǔshí kuài. diànhuì yìbān sān dào wǔ gè gōngzuò rì dào zhàng.",
+                "text_en": "The fee is 0.1% of the transfer amount, minimum 50 yuan, maximum 260. For $5,000, the fee is about 150 yuan. Wire transfers generally take 3-5 business days."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about exchange rate locking.",
+                "options": [
+                    {
+                        "text_zh": "一百五十块的手续费可以接受。请问今天的汇率可以锁定吗？还是到了那边才按当天的汇率换算？",
+                        "text_pinyin": "yìbǎi wǔshí kuài de shǒuxù fèi kěyǐ jiēshòu. qǐngwèn jīntiān de huìlǜ kěyǐ suǒdìng ma? háishì dào le nàbiān cái àn dāngtiān de huìlǜ huànsuàn?",
+                        "text_en": "150 yuan fee is fine. Can today's exchange rate be locked in? Or is it converted at the rate when it arrives?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about rate locking — an advanced question. Mr. Zhong adjusts his glasses with respect. Today's rate applies at the point of transfer."
+                    },
+                    {
+                        "text_zh": "好的，请办理吧。",
+                        "text_pinyin": "hǎo de, qǐng bànlǐ ba.",
+                        "text_en": "OK, please process it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He begins the form. The diplomatic mission is underway."
+                    },
+                    {
+                        "text_zh": "能不能等汇率更好的时候再汇？",
+                        "text_pinyin": "néng bu néng děng huìlǜ gèng hǎo de shíhòu zài huì?",
+                        "text_en": "Can I wait until the rate is better?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Zhong smiles.「如果我能预测汇率，我就不会在这里工作了。」If he could predict rates, he wouldn't be working here."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "汇率在汇款当天锁定。好的，所有信息我都核对过了。一共需要支付三万六千四百块人民币，包括五千美元的等值和手续费。请在这里签字确认。",
+                "text_pinyin": "huìlǜ zài huìkuǎn dāngtiān suǒdìng. hǎo de, suǒyǒu xìnxī wǒ dōu héduì guò le. yígòng xūyào zhīfù sānwàn liùqiān sìbǎi kuài rénmínbì, bāokuò wǔqiān měiyuán de děngzhí hé shǒuxù fèi. qǐng zài zhèlǐ qiānzì quèrèn.",
+                "text_en": "The rate locks on the day of transfer. OK, I've verified all the information. Total payment is 36,400 yuan RMB, including the $5,000 equivalent and fees. Please sign here to confirm."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Review and sign.",
+                "options": [
+                    {
+                        "text_zh": "我检查一下……收款人信息、金额、汇率都没问题。签好了。请问到账以后会有通知吗？",
+                        "text_pinyin": "wǒ jiǎnchá yíxià……shōukuǎn rén xìnxī, jīn'é, huìlǜ dōu méi wèntí. qiān hǎo le. qǐngwèn dào zhàng yǐhòu huì yǒu tōngzhī ma?",
+                        "text_en": "Let me check... recipient info, amount, rate — all correct. Signed. Will I be notified when it arrives?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Verifying before signing and asking about confirmation — Mr. Zhong nods with the satisfaction of a diplomat concluding a successful negotiation."
+                    },
+                    {
+                        "text_zh": "没问题，签好了。",
+                        "text_pinyin": "méi wèntí, qiān hǎo le.",
+                        "text_en": "No problem, signed.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He processes it. The money begins its journey."
+                    },
+                    {
+                        "text_zh": "三万六……好多钱啊。",
+                        "text_pinyin": "sānwàn liù……hǎo duō qián a.",
+                        "text_en": "36,000... that's a lot of money.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Zhong nods sympathetically. Education is expensive everywhere, but especially when it crosses oceans."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "International transfers from China require documentation (like tuition bills) due to foreign exchange controls. Each Chinese citizen has an annual foreign exchange quota (年度换汇额度) of $50,000. SWIFT codes are essential for international banking. 电汇 (diànhuì, wire transfer) is the standard method."
+    }
+}

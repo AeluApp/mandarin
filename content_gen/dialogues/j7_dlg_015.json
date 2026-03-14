@@ -1,0 +1,135 @@
+{
+    "title": "The Restaurant Order",
+    "title_zh": "点菜的艺术",
+    "hsk_level": 7,
+    "register": "formal",
+    "scenario_type": "dialogue",
+    "difficulty": 0.65,
+    "tree": {
+        "setup": "You're at a dinner with a client, Mr. Huang, and your boss, Director Zhao. It's time to order. Everyone says '随便' (whatever) but nobody means it. Mr. Huang doesn't eat spicy food but won't say so. Director Zhao is vegetarian this month but hasn't announced it. You're the most junior person at the table, which means you're supposed to order, which means you'll be blamed if it's wrong.",
+        "setup_zh": "你跟客户黄总、你的上司赵主任在餐厅吃饭。该点菜了。每个人都说'随便'，但没有人是真的随便。黄总不吃辣但不会说，赵主任这个月吃素但没宣布。你是桌上最年轻的，所以应该你来点，点错了就是你的问题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来来来，不用客气，随便点，我什么都行。黄总，您看看有什么想吃的？",
+                "text_pinyin": "Lái lái lái, bú yòng kèqi, suíbiàn diǎn, wǒ shénme dōu xíng. Huáng zǒng, nín kànkan yǒu shénme xiǎng chī de?",
+                "text_en": "Come come come, don't be polite, just order whatever, I'm fine with anything. Mr. Huang, see anything you'd like?"
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "赵主任太客气了。我也随便，你们点就好，我不挑食的。就是——最近胃不太好，太油腻的就别点了。",
+                "text_pinyin": "Zhào zhǔrèn tài kèqi le. Wǒ yě suíbiàn, nǐmen diǎn jiù hǎo, wǒ bù tiāoshí de. Jiùshì — zuìjìn wèi bú tài hǎo, tài yóunì de jiù bié diǎn le.",
+                "text_en": "Director Zhao is too kind. I'm easy too, you all order, I'm not picky. Just — my stomach hasn't been great lately, so nothing too greasy."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Two 随便's and one dietary restriction disguised as a health complaint. You need to navigate this.",
+                "options": [
+                    {
+                        "text_zh": "那咱们先来几个清淡的？我看这家的清蒸鲈鱼不错，再来一个凉拌黄瓜开开胃。黄总，您平时口味偏清淡还是……？",
+                        "text_pinyin": "Nà zánmen xiān lái jǐ ge qīngdàn de? Wǒ kàn zhè jiā de qīngzhēng lúyú búcuò, zài lái yīge liángbàn huángguā kāi kāi wèi. Huáng zǒng, nín píngshí kǒuwèi piān qīngdàn háishì ...?",
+                        "text_en": "How about we start with some lighter dishes? The steamed bass here looks good, and a cold cucumber to start. Mr. Huang, do you generally prefer lighter flavors or...?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "You've responded to the unspoken no-grease request, proposed safe dishes, and given Mr. Huang an opening to reveal his spice preference without having to volunteer it."
+                    },
+                    {
+                        "text_zh": "黄总，赵主任，你们随便点吧，我吃什么都行。",
+                        "text_pinyin": "Huáng zǒng, Zhào zhǔrèn, nǐmen suíbiàn diǎn ba, wǒ chī shénme dōu xíng.",
+                        "text_en": "Mr. Huang, Director Zhao, please just order, I'm fine with anything.",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "Three people have now said 随便. The menu is open, the waiter is waiting, and nobody has ordered anything. You've added a third layer of polite paralysis."
+                    },
+                    {
+                        "text_zh": "这家的水煮鱼很有名，我们来一份？再来一个麻婆豆腐？",
+                        "text_pinyin": "Zhè jiā de shuǐzhǔ yú hěn yǒumíng, wǒmen lái yī fèn? Zài lái yīge mápó dòufu?",
+                        "text_en": "Their boiled fish in chili oil is famous, shall we get that? And some mapo tofu?",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "Both dishes are aggressively spicy. Mr. Huang's 'stomach issues' were code for 'no spicy food.' You've ordered exactly what he can't eat."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "清蒸鲈鱼好，清淡又有档次。不过光吃鱼不够吧？要不要来个肉菜？我听说他们的红烧排骨做得不错——当然，如果黄总觉得太油就算了。",
+                "text_pinyin": "Qīngzhēng lúyú hǎo, qīngdàn yòu yǒu dàngcì. Búguò guāng chī yú bú gòu ba? Yào bú yào lái ge ròu cài? Wǒ tīngshuō tāmen de hóngshāo páigǔ zuò de búcuò — dāngrán, rúguǒ Huáng zǒng juéde tài yóu jiù suàn le.",
+                "text_en": "Steamed bass is good, light but classy. But just fish isn't enough, is it? Should we add a meat dish? I heard their braised ribs are good — of course, if Mr. Huang thinks it's too greasy, we'll skip it."
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "排骨没问题没问题！我就是怕你们迁就我。其实我什么都能吃，真的。对了——你们喝酒吗？我今天可以少喝一点。",
+                "text_pinyin": "Páigǔ méi wèntí méi wèntí! Wǒ jiùshì pà nǐmen qiānjiù wǒ. Qíshí wǒ shénme dōu néng chī, zhēn de. Duì le — nǐmen hē jiǔ ma? Wǒ jīntiān kěyǐ shǎo hē yīdiǎn.",
+                "text_en": "Ribs are no problem! I was just worried you'd accommodate me. Actually I can eat anything, really. Oh — are you drinking? I can have a little today."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Mr. Huang just said 'I can have a little' which means he wants to drink but needs someone else to initiate. Your boss hasn't said whether he's drinking.",
+                "options": [
+                    {
+                        "text_zh": "赵主任，今天难得跟黄总一起吃饭，要不要来一瓶白酒？当然如果您赶时间，喝啤酒也挺好的。黄总，您看呢？",
+                        "text_pinyin": "Zhào zhǔrèn, jīntiān nándé gēn Huáng zǒng yīqǐ chīfàn, yào bú yào lái yī píng báijiǔ? Dāngrán rúguǒ nín gǎn shíjiān, hē píjiǔ yě tǐng hǎo de. Huáng zǒng, nín kàn ne?",
+                        "text_en": "Director Zhao, it's rare to dine with Mr. Huang, shall we get a bottle of baijiu? Of course, if you're pressed for time, beer works too. Mr. Huang, what do you think?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "You've put the decision on the boss, given him an easy downgrade to beer, and bounced it to the client. Everyone gets to look like they're deferring while the bottle is already on its way."
+                    },
+                    {
+                        "text_zh": "我不喝酒，你们随意吧。",
+                        "text_pinyin": "Wǒ bù hē jiǔ, nǐmen suíyì ba.",
+                        "text_en": "I don't drink, you go ahead.",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "In a client dinner, refusing to drink without offering an alternative changes the tone of the table. Mr. Huang's 'I can have a little' was an invitation, not a weather report."
+                    },
+                    {
+                        "text_zh": "来两瓶白酒吧，今天好好喝！",
+                        "text_pinyin": "Lái liǎng píng báijiǔ ba, jīntiān hǎohǎo hē!",
+                        "text_en": "Let's get two bottles of baijiu, let's drink well tonight!",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "Mr. Huang said 'a little.' Your boss hasn't said anything. You're the junior person ordering two bottles. This is deciding the drinking pace for both superiors."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "白酒可以，不过别喝太多，明天还要上班嘛。来半斤就行了。你看，菜也点了，酒也有了。小伙子安排得不错。",
+                "text_pinyin": "Báijiǔ kěyǐ, búguò bié hē tài duō, míngtiān hái yào shàngbān ma. Lái bàn jīn jiù xíng le. Nǐ kàn, cài yě diǎn le, jiǔ yě yǒu le. Xiǎohuǒzi ānpái de búcuò.",
+                "text_en": "Baijiu works, but let's not overdo it, we still have work tomorrow. Half a jin is enough. See, food's ordered, drinks are set. The young one arranged things nicely."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Director Zhao just publicly approved your ordering. Mr. Huang is nodding. You've survived the minefield. Close it out.",
+                "options": [
+                    {
+                        "text_zh": "哪里哪里，都是赵主任和黄总好说话。要是你们谁有什么忌口的直接说啊——不然我就要开始猜了，猜错了可就不是点菜的问题了，是读心术的问题了。",
+                        "text_pinyin": "Nǎlǐ nǎlǐ, dōu shì Zhào zhǔrèn hé Huáng zǒng hǎo shuōhuà. Yàoshi nǐmen shéi yǒu shénme jìkǒu de zhíjiē shuō a — bùrán wǒ jiù yào kāishǐ cāi le, cāi cuò le kě jiù bú shì diǎncài de wèntí le, shì dúxīnshù de wèntí le.",
+                        "text_en": "Director Zhao and Mr. Huang are easy to work with. If anyone has dietary restrictions, say so directly — otherwise I'll have to guess, and if I guess wrong, it's not ordering anymore, it's mind-reading.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Self-deprecating, names the 随便 game without accusing anyone of playing it, and gets a laugh. The mind-reading line gives them permission to actually state preferences next time."
+                    },
+                    {
+                        "text_zh": "谢谢赵主任！希望菜合大家胃口。",
+                        "text_pinyin": "Xièxie Zhào zhǔrèn! Xīwàng cài hé dàjiā wèikǒu.",
+                        "text_en": "Thank you Director Zhao! I hope the food suits everyone's taste.",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "Safe and correct, but after navigating a three-way diplomatic negotiation disguised as dinner ordering, a stock phrase feels like you don't know what just happened."
+                    },
+                    {
+                        "text_zh": "不够的话我们再加。赵主任，还有什么需要的吗？",
+                        "text_pinyin": "Bú gòu de huà wǒmen zài jiā. Zhào zhǔrèn, hái yǒu shénme xūyào de ma?",
+                        "text_en": "We can add more if it's not enough. Director Zhao, anything else needed?",
+                        "score": 0.0,
+                        "register": "formal",
+                        "feedback": "You've just closed a deal and you're reopening the menu. Let the order stand. Every new question is a new chance for someone to say 随便 again."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Group dinner ordering (点菜) in Chinese business culture is an elaborate status negotiation. The most junior person typically orders, but must read unspoken preferences from senior diners who will only say '随便' (whatever). Dietary restrictions are often expressed indirectly through health complaints rather than direct statements. The phrase '少喝一点' (drink a little less) is rarely a statement of intent — it's a signal that drinking will happen. Successfully navigating a dinner order demonstrates social intelligence (情商) more clearly than any presentation."
+    }
+}

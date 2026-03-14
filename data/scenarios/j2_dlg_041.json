@@ -1,0 +1,83 @@
+{
+  "title": "The Bridge at Dusk",
+  "title_zh": "黄昏的桥",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're leaning on the railing of a small stone bridge at dusk. A fisherman below is packing up for the day.",
+    "setup_zh": "黄昏的时候，你靠在一座小石桥的栏杆上。桥下的一个钓鱼的人正在收拾东西。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "今天没钓到什么鱼。不过没关系，坐了一下午，很舒服。",
+        "text_pinyin": "Jīntiān méi diào dào shénme yú. Búguò méi guānxi, zuò le yī xiàwǔ, hěn shūfu.",
+        "text_en": "Didn't catch much today. But it doesn't matter — I sat here all afternoon and it was comfortable."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his relaxed attitude about not catching fish.",
+        "options": [
+          {
+            "text_zh": "我觉得钓鱼最好的不是钓到鱼，是坐在那里的时间。水的声音，风的声音，什么都不想。",
+            "text_pinyin": "Wǒ juéde diàoyú zuì hǎo de bú shì diào dào yú, shì zuò zài nàlǐ de shíjiān. Shuǐ de shēngyīn, fēng de shēngyīn, shénme dōu bù xiǎng.",
+            "text_en": "I think the best part of fishing isn't catching fish — it's the time spent sitting there. The sound of water, the sound of wind, thinking of nothing.",
+            "score": 1.0,
+            "feedback": "Understands that fishing is really about stillness, not the catch.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "一条鱼也没有吗？",
+            "text_pinyin": "Yī tiáo yú yě méiyǒu ma?",
+            "text_en": "Not even one fish?",
+            "score": 0.0,
+            "feedback": "Focuses on the catch, which he already said doesn't matter."
+          },
+          {
+            "text_zh": "你明天还来吗？",
+            "text_pinyin": "Nǐ míngtiān hái lái ma?",
+            "text_en": "Will you come again tomorrow?",
+            "score": 0.0,
+            "feedback": "Looks ahead instead of being present in this moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "说得对。年轻的时候我钓鱼是为了吃鱼。现在我钓鱼是为了安静。年纪大了就知道了——安静是最好的。",
+        "text_pinyin": "Shuō de duì. Niánqīng de shíhou wǒ diàoyú shì wèile chī yú. Xiànzài wǒ diàoyú shì wèile ānjìng. Niánjì dà le jiù zhīdào le — ānjìng shì zuì hǎo de.",
+        "text_en": "Exactly. When I was young I fished to eat fish. Now I fish for the quiet. When you get older you understand — quiet is the best."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his wisdom about quiet.",
+        "options": [
+          {
+            "text_zh": "我虽然还年轻，但是我也开始觉得安静是最好的了。谢谢你告诉我这些。",
+            "text_pinyin": "Wǒ suīrán hái niánqīng, dànshì wǒ yě kāishǐ juéde ānjìng shì zuì hǎo de le. Xièxie nǐ gàosu wǒ zhèxiē.",
+            "text_en": "I'm still young, but I'm starting to feel the same — quiet is the best. Thank you for sharing that with me.",
+            "score": 1.0,
+            "feedback": "Humble and receptive — learning from an elder's earned wisdom.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "年轻人比较忙。",
+            "text_pinyin": "Niánqīng rén bǐjiào máng.",
+            "text_en": "Young people are busier.",
+            "score": 0.0,
+            "feedback": "Creates a generational divide instead of bridging it."
+          },
+          {
+            "text_zh": "你钓了多少年了？",
+            "text_pinyin": "Nǐ diào le duōshǎo nián le?",
+            "text_en": "How many years have you been fishing?",
+            "score": 0.0,
+            "feedback": "Asks for a number during a moment of shared wisdom."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Fishing in China has long been associated with philosophical contemplation. The legendary Daoist figure Jiang Ziya famously fished with a straight hook, caring nothing for the catch. The transition from fishing-for-food to fishing-for-quiet mirrors a common Chinese life arc: from striving to stillness."
+  }
+}

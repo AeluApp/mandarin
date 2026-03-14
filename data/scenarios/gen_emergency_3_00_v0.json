@@ -1,0 +1,130 @@
+{
+    "title": "The Neighbor's Water Emergency",
+    "title_zh": "邻居的水灾",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "Your apartment, 11 PM. Water is seeping under your front door from the hallway. Your upstairs neighbor, Lao Wang, has left a faucet running while falling asleep watching TV. The building security guard, Xiao Cheng, arrives with a mop and the calm authority of someone who has seen every plumbing disaster known to humanity.",
+        "setup_zh": "（邻居的水灾场景）",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，怎么了？",
+                "text_pinyin": "nǐ hǎo, zěnme le?",
+                "text_en": "Hello, what happened?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the emergency.",
+                "options": [
+                    {
+                        "text_zh": "楼上漏水了，水从天花板滴到我家客厅里。已经用桶接着了，但是越来越多。",
+                        "text_pinyin": "lóu shàng lòu shuǐ le, shuǐ cóng tiānhuābǎn dī dào wǒ jiā kètīng lǐ. yǐjīng yòng tǒng jiēzhe le, dànshì yuè lái yuè duō.",
+                        "text_en": "The upstairs is leaking. Water is dripping from the ceiling into my living room. I'm catching it with a bucket, but it's getting worse.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear situation report. 越来越多 means 'more and more.' Showing you've already taken initial action (bucket) is smart."
+                    },
+                    {
+                        "text_zh": "我家出了点问题，你能来看看吗？",
+                        "text_pinyin": "wǒ jiā chū le diǎn wèntí, nǐ néng lái kànkan ma?",
+                        "text_en": "There's a problem at my place. Can you come take a look?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "出了点问题 is 'a problem has come up.' Try to be more specific so they bring the right tools."
+                    },
+                    {
+                        "text_zh": "快来！水到处都是！",
+                        "text_pinyin": "kuài lái! shuǐ dàochù dōu shì!",
+                        "text_en": "Come quick! Water is everywhere!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Urgent but lacking details. 到处都是 means 'everywhere.' Try to add the location and floor number."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "别急，我先联系楼上的住户把水关掉。你那里有没有电器在水附近？先把电断了比较安全。",
+                "text_pinyin": "bié jí, wǒ xiān liánxì lóu shàng de zhùhù bǎ shuǐ guān diào. nǐ nàlǐ yǒu méiyǒu diànqì zài shuǐ fùjìn? xiān bǎ diàn duàn le bǐjiào ānquán.",
+                "text_en": "Don't panic. I'll contact the upstairs resident to turn off the water. Are there any electrical appliances near the water? It's safer to cut the power first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about electrical safety.",
+                "options": [
+                    {
+                        "text_zh": "好的，我现在去把客厅的电断了。电视和插座都在那边。",
+                        "text_pinyin": "hǎo de, wǒ xiànzài qù bǎ kètīng de diàn duàn le. diànshì hé chāzuò dōu zài nàbiān.",
+                        "text_en": "OK, I'll go cut the power in the living room now. The TV and outlets are over there.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Safety first. 断电 means 'cut the power.' Acting on safety advice immediately is exactly right."
+                    },
+                    {
+                        "text_zh": "电器已经搬走了。就是地板上全是水。",
+                        "text_pinyin": "diànqì yǐjīng bān zǒu le. jiùshì dìbǎn shàng quán shì shuǐ.",
+                        "text_en": "I've already moved the appliances. It's just that the floor is completely wet.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Already handled. 全是水 means 'completely covered in water.'"
+                    },
+                    {
+                        "text_zh": "没有想到！谢谢你提醒。",
+                        "text_pinyin": "méiyǒu xiǎngdào! xièxie nǐ tíxǐng.",
+                        "text_en": "I didn't think of that! Thanks for the reminder.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "没有想到 means 'didn't think of it.' Accepting advice gracefully is a strength."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我十分钟到你家。楼上的住户已经把水关了。你先用毛巾把水吸一下。明天我们会安排维修。",
+                "text_pinyin": "wǒ shí fēnzhōng dào nǐ jiā. lóu shàng de zhùhù yǐjīng bǎ shuǐ guān le. nǐ xiān yòng máojīn bǎ shuǐ xī yíxià. míngtiān wǒmen huì ānpái wéixiū.",
+                "text_en": "I'll be at your place in ten minutes. The upstairs resident has turned off the water. Use towels to soak up the water for now. We'll arrange repairs tomorrow."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them and ask about damage compensation.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！我的地板可能损坏了，这个费用谁负责？",
+                        "text_pinyin": "xièxie nǐ! wǒ de dìbǎn kěnéng sǔnhuài le, zhè ge fèiyòng shéi fùzé?",
+                        "text_en": "Thank you! My floor might be damaged. Who's responsible for the cost?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A practical question. 损坏 means 'damaged.' 谁负责 means 'who's responsible.' This is important to establish early."
+                    },
+                    {
+                        "text_zh": "好的。需要拍照留证据吗？",
+                        "text_pinyin": "hǎo de. xūyào pāi zhào liú zhèngjù ma?",
+                        "text_en": "OK. Should I take photos as evidence?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Smart thinking. 拍照留证据 means 'take photos as evidence.' Documentation helps with insurance and responsibility claims."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！辛苦了！",
+                        "text_pinyin": "hǎo de, xièxie! xīnkǔ le!",
+                        "text_en": "OK, thanks! Appreciate your hard work!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "辛苦了 shows appreciation for someone working late to help you. Simple but effective."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "拍几张照片保存好。楼上的住户应该负责维修费用。我来了以后帮你协调。",
+                "text_pinyin": "pāi jǐ zhāng zhàopiàn bǎocún hǎo. lóu shàng de zhùhù yīnggāi fùzé wéixiū fèiyòng. wǒ lái le yǐhòu bāng nǐ xiétiáo.",
+                "text_en": "Take some photos and save them. The upstairs resident should be responsible for repair costs. I'll help coordinate when I get there."
+            }
+        ],
+        "cultural_note": "In Chinese apartment buildings, water damage from upstairs neighbors is common. The responsible party (楼上住户) should pay for repairs. Property management (物业) mediates disputes. Always document damage with photos (拍照留证据)."
+    },
+    "id": "gen_emergency_3_00_v0"
+}

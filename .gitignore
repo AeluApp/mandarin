@@ -24,12 +24,30 @@ env/
 .DS_Store
 Thumbs.db
 
-# SQLite databases (data dir has the real one)
+# SQLite databases and runtime data
 *.db
-!data/mandarin.db
+*.db-shm
+*.db-wal
+data/mandarin.db
 
-# Logs
+# Logs (including rotated)
 *.log
+*.log.*
+
+# Audio recordings (runtime user data)
+data/recordings/
+
+# Test / coverage artifacts
+.coverage
+coverage.json
+htmlcov/
+.hypothesis/
+
+# Backup files
+*.bak
+
+# Claude Code session data
+.claude/
 
 # Tauri build artifacts
 src-tauri/target/

@@ -1,0 +1,83 @@
+{
+  "title": "The Kite",
+  "title_zh": "风筝",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're in a field near the river watching an old man fly a kite. He notices you watching and waves you over.",
+    "setup_zh": "你在河边的一片空地上看一位老人放风筝。他看到你在看，朝你招手。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "来，你要不要试试？放风筝很简单，就是要耐心。",
+        "text_pinyin": "Lái, nǐ yào bú yào shìshi? Fàng fēngzhēng hěn jiǎndān, jiù shì yào nàixīn.",
+        "text_en": "Come, do you want to try? Flying a kite is simple — you just need patience."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his invitation.",
+        "options": [
+          {
+            "text_zh": "我想试试！我以前没放过风筝。看起来很好玩，风筝飞得好高啊。",
+            "text_pinyin": "Wǒ xiǎng shìshi! Wǒ yǐqián méi fàng guò fēngzhēng. Kàn qǐlái hěn hǎowán, fēngzhēng fēi de hǎo gāo a.",
+            "text_en": "I'd love to try! I've never flown a kite before. It looks fun — the kite is flying so high!",
+            "score": 1.0,
+            "feedback": "Open and enthusiastic — willing to learn something new.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不会。",
+            "text_pinyin": "Wǒ bú huì.",
+            "text_en": "I don't know how.",
+            "score": 0.0,
+            "feedback": "He just offered to teach you."
+          },
+          {
+            "text_zh": "今天风大不大？",
+            "text_pinyin": "Jīntiān fēng dà bú dà?",
+            "text_en": "Is the wind strong today?",
+            "score": 0.0,
+            "feedback": "Asks about conditions instead of accepting his offer."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "好！你拿着线，慢慢放。放风筝就像做人——不能太紧，也不能太松。要跟风配合。",
+        "text_pinyin": "Hǎo! Nǐ ná zhe xiàn, mànman fàng. Fàng fēngzhēng jiù xiàng zuò rén — bù néng tài jǐn, yě bù néng tài sōng. Yào gēn fēng pèihé.",
+        "text_en": "Good! Hold the string and let it out slowly. Flying a kite is like being a person — can't be too tight, can't be too loose. You have to work with the wind."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his kite-flying philosophy.",
+        "options": [
+          {
+            "text_zh": "跟风配合——我喜欢这个说法。不是控制风，是和风一起。谢谢你教我。",
+            "text_pinyin": "Gēn fēng pèihé — wǒ xǐhuan zhège shuōfǎ. Bú shì kòngzhì fēng, shì hé fēng yīqǐ. Xièxie nǐ jiāo wǒ.",
+            "text_en": "Work with the wind — I like that. Not controlling the wind, but moving with it. Thank you for teaching me.",
+            "score": 1.0,
+            "feedback": "Catches the deeper meaning — living is about harmony, not control.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这个风筝你在哪里买的？",
+            "text_pinyin": "Zhège fēngzhēng nǐ zài nǎlǐ mǎi de?",
+            "text_en": "Where did you buy this kite?",
+            "score": 0.0,
+            "feedback": "Shopping question during a life lesson."
+          },
+          {
+            "text_zh": "我怕线断了。",
+            "text_pinyin": "Wǒ pà xiàn duàn le.",
+            "text_en": "I'm afraid the string will break.",
+            "score": 0.0,
+            "feedback": "Worry instead of wonder."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Kite-flying (放风筝) is one of China's oldest recreational traditions. Elders in parks often use it as a meditation practice. The metaphor of 跟风配合 (working with the wind) reflects Daoist philosophy — harmony with natural forces rather than dominance over them."
+  }
+}

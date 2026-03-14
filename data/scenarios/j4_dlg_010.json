@@ -1,0 +1,83 @@
+{
+  "title": "The Quiet Subway",
+  "title_zh": "安静的地铁",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.45,
+  "tree": {
+    "setup": "It's late evening on a nearly empty subway car. You and a young graphic designer, Xiao Lin, are the only passengers. The train hums softly through the tunnels.",
+    "setup_zh": "深夜，地铁车厢里几乎没有人。你和一个年轻的设计师小林是仅有的乘客。列车在隧道里轻轻地响。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你有没有发现，晚上坐地铁的感觉完全不一样？白天挤在人群里，你只想快点到站。现在车厢空了，反而不想下车了。",
+        "text_pinyin": "Nǐ yǒu méiyǒu fāxiàn, wǎnshang zuò dìtiě de gǎnjué wánquán bù yīyàng? Báitiān jǐ zài rénqún lǐ, nǐ zhǐ xiǎng kuài diǎn dào zhàn. Xiànzài chēxiāng kōng le, fǎn'ér bù xiǎng xià chē le.",
+        "text_en": "Have you noticed how riding the subway at night feels completely different? During the day, packed in with everyone, you just want to reach your stop. Now that the car is empty, I don't even want to get off."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about the empty subway.",
+        "options": [
+          {
+            "text_zh": "我也有这种感觉。白天地铁是工具，晚上地铁变成了一个移动的小房间。窗外是黑的隧道，车里只有灯光和安静。像一个属于自己的空间。",
+            "text_pinyin": "Wǒ yě yǒu zhè zhǒng gǎnjué. Báitiān dìtiě shì gōngjù, wǎnshang dìtiě biàn chéng le yīge yídòng de xiǎo fángjiān. Chuāng wài shì hēi de suìdào, chē lǐ zhǐ yǒu dēngguāng hé ānjìng. Xiàng yīge shǔyú zìjǐ de kōngjiān.",
+            "text_en": "I feel the same way. During the day the subway is a tool; at night it becomes a moving little room. Outside is the dark tunnel, inside is just light and quiet. Like a space that belongs to you.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Transforms mundane transit into a personal sanctuary."
+          },
+          {
+            "text_zh": "你从哪一站上的车？",
+            "text_pinyin": "Nǐ cóng nǎ yī zhàn shàng de chē?",
+            "text_en": "Which station did you get on at?",
+            "score": 0.0,
+            "feedback": "Logistical question that misses the atmospheric observation."
+          },
+          {
+            "text_zh": "晚上坐地铁安全吗？",
+            "text_pinyin": "Wǎnshang zuò dìtiě ānquán ma?",
+            "text_en": "Is it safe to ride the subway at night?",
+            "score": 0.0,
+            "feedback": "Safety question that disrupts the contemplative mood."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "属于自己的空间，说得好。我做设计的，白天一直盯着电脑屏幕。到了晚上坐在这里，看着窗户上自己的倒影，才有时间想一想今天到底做了什么。",
+        "text_pinyin": "Shǔyú zìjǐ de kōngjiān, shuō de hǎo. Wǒ zuò shèjì de, báitiān yīzhí dīng zhe diànnǎo píngmù. Dào le wǎnshang zuò zài zhèlǐ, kàn zhe chuānghù shàng zìjǐ de dàoyǐng, cái yǒu shíjiān xiǎng yī xiǎng jīntiān dàodǐ zuò le shénme.",
+        "text_en": "A space that belongs to you — well put. I'm a designer, I stare at a computer screen all day. At night, sitting here, looking at my reflection in the window, I finally have time to think about what I actually did today."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about reflection in the window.",
+        "options": [
+          {
+            "text_zh": "地铁窗户上的倒影很有意思——你看到的是自己，但背景一直在变。好像在提醒你，人还是那个人，但每一天都不一样。",
+            "text_pinyin": "Dìtiě chuānghù shàng de dàoyǐng hěn yǒu yìsi — nǐ kàn dào de shì zìjǐ, dàn bèijǐng yīzhí zài biàn. Hǎoxiàng zài tíxǐng nǐ, rén háishì nàge rén, dàn měi yī tiān dōu bù yīyàng.",
+            "text_en": "The reflection in the subway window is interesting — you see yourself, but the background keeps changing. As if reminding you that you're still the same person, but every day is different.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Observation — uses the subway window as a metaphor for identity and time."
+          },
+          {
+            "text_zh": "你做什么类型的设计？",
+            "text_pinyin": "Nǐ zuò shénme lèixíng de shèjì?",
+            "text_en": "What type of design do you do?",
+            "score": 0.0,
+            "feedback": "Career question that breaks the reflective mood."
+          },
+          {
+            "text_zh": "你每天加班到很晚吗？",
+            "text_pinyin": "Nǐ měi tiān jiābān dào hěn wǎn ma?",
+            "text_en": "Do you work overtime until late every day?",
+            "score": 0.0,
+            "feedback": "Work schedule question during a contemplative exchange."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Chinese subway systems are among the busiest in the world during rush hours. The contrast between the daytime crush and the late-night emptiness creates a distinct atmosphere that many urban workers cherish. The practice of looking at one's reflection in dark subway windows is a universally recognized moment of urban solitude."
+  }
+}

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Content Policy — Aelu</title>
+  <meta name="description" content="How Aelu uses AI to generate educational content, what safeguards are in place, and what we do not do with your data.">
+  <link rel="canonical" href="https://aeluapp.com/ai-content-policy">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Content Policy — Aelu">
+  <meta property="og:description" content="How Aelu uses AI to generate educational content. Transparent, plain-language disclosure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aeluapp.com/ai-content-policy">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Content Policy — Aelu">
+  <meta name="twitter:description" content="How Aelu uses AI to generate educational content. Transparent, plain-language disclosure.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* -- Legal content -- */
+    .legal {
+      padding: var(--space-8) 0;
+    }
+
+    .legal h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .legal .effective-date {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-6);
+    }
+
+    .legal h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .legal p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-3);
+      line-height: 1.75;
+    }
+
+    .legal ul {
+      list-style: none;
+      margin-bottom: var(--space-3);
+      padding-left: var(--space-4);
+    }
+
+    .legal ul li {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      line-height: 1.75;
+      padding: var(--space-1) 0;
+      position: relative;
+    }
+
+    .legal ul li::before {
+      content: "\2014";
+      position: absolute;
+      left: calc(-1 * var(--space-4));
+      color: var(--color-border);
+    }
+
+    .legal a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .legal strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      border-top: 1px solid var(--color-border);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .legal h1 { font-size: 1.8rem; }
+      .nav-links { gap: var(--space-3); }
+    }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- AI Content Policy -->
+  <main class="legal">
+    <div class="container">
+
+      <h1>AI Content Policy</h1>
+      <p class="effective-date">Effective: March 13, 2026</p>
+
+      <p>Aelu uses AI to generate some of the educational content you study. This page explains exactly what that means: what is generated, how it is reviewed, what we claim (and do not claim) about ownership, and what we do not do with your data. No legal fog.</p>
+
+      <h2>1. How Aelu Uses AI</h2>
+      <p>Aelu uses <strong>Qwen 2.5</strong>, an open-source large language model, running locally on our own infrastructure via <a href="https://ollama.com">Ollama</a>. The model generates Chinese-language educational content: drill sentences, graded reading passages, and error explanations.</p>
+      <p>The model runs on our servers. It does not call out to any external AI service. No data leaves our infrastructure during content generation. There are zero API calls to OpenAI, Anthropic, Google, or any other third-party AI provider at runtime.</p>
+      <p>We also use the <a href="https://cc-cedict.org/wiki/">CC-CEDICT</a> dictionary (licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>) as part of our retrieval-augmented generation (RAG) knowledge base. This helps the model produce accurate vocabulary, pinyin, and definitions.</p>
+
+      <h2>2. What Is AI-Generated vs. Human-Authored</h2>
+      <p>Here is a clear breakdown:</p>
+
+      <p><strong>AI-generated (with human review):</strong></p>
+      <ul>
+        <li>Drill sentences and prompts across all drill types</li>
+        <li>Graded reading passages</li>
+        <li>Error explanations (why a particular answer was wrong)</li>
+      </ul>
+
+      <p><strong>Human-authored:</strong></p>
+      <ul>
+        <li>Curriculum structure, HSK level mappings, and skill taxonomies</li>
+        <li>Context notes (usage guidance, cultural context, register notes)</li>
+        <li>Dialogue scenarios and their narrative framing</li>
+        <li>Grammar point explanations and sequencing</li>
+        <li>All adaptive scheduling logic (spaced repetition, interleaving, day profiles)</li>
+        <li>The review criteria used to evaluate AI-generated content</li>
+      </ul>
+
+      <p>When we say "human-authored," we mean a person wrote it. When we say "AI-generated with human review," we mean a model produced a draft, automated validation checked it for structural and linguistic correctness, and a human reviewer approved, edited, or rejected it before it entered the content pool.</p>
+
+      <h2>3. Content Quality Assurance</h2>
+      <p>AI-generated content does not go directly to learners. Every piece passes through a three-stage pipeline:</p>
+
+      <p><strong>Stage 1 — Automated validation.</strong> Generated content is checked programmatically for structural integrity: correct character/pinyin pairing, HSK level appropriateness, grammar pattern compliance, and deduplication against existing items. Content that fails validation is discarded.</p>
+
+      <p><strong>Stage 2 — Human review queue.</strong> Content that passes automated validation enters a review queue. A reviewer evaluates naturalness, pedagogical fit, cultural appropriateness, and accuracy. Reviewers can approve, edit, or reject each item.</p>
+
+      <p><strong>Stage 3 — Approval and deployment.</strong> Only approved content enters the active content pool that learners study from. Rejected items are logged with rejection reasons to improve future generation.</p>
+
+      <p>This pipeline means there is always a human judgment step between the model's output and what you see in a drill or passage. The pipeline is not infallible, but it is deliberate.</p>
+
+      <h2>4. Copyright and Ownership</h2>
+      <p>We want to be honest about the legal landscape rather than pretend it is settled.</p>
+
+      <p>The U.S. Copyright Office has stated that purely AI-generated content, without sufficient human creative contribution, may not be eligible for copyright protection. This is an evolving area of law, and other jurisdictions may take different positions.</p>
+
+      <p>Here is where Aelu's content falls:</p>
+      <ul>
+        <li><strong>Human-authored content</strong> (curriculum, context notes, scenarios, grammar explanations) is original creative work and is protected by copyright.</li>
+        <li><strong>AI-generated content</strong> (drill sentences, passages, error explanations) is produced by a model and then filtered and reviewed by humans. The human review step adds judgment but may not constitute the kind of creative authorship that copyright law requires. We do not make a definitive copyright claim on this content.</li>
+        <li><strong>The system as a whole</strong> — the selection, arrangement, curation, and pedagogical sequencing of content — reflects substantial human creative decisions and is protected.</li>
+      </ul>
+
+      <p>We believe transparency is more valuable than an aggressive legal claim we cannot fully support. If the legal landscape changes, we will update this section.</p>
+
+      <h2>5. What Aelu Does NOT Do with AI</h2>
+      <p>Some things we want to be explicit about:</p>
+      <ul>
+        <li><strong>No user data is sent to external AI services.</strong> Your study history, drill responses, scores, and personal information never leave our infrastructure for AI processing. The model runs locally.</li>
+        <li><strong>No training on user data.</strong> We do not use your learning data, drill responses, or any other personal data to train or fine-tune AI models.</li>
+        <li><strong>No real-time AI generation during your study sessions.</strong> Content is generated and reviewed in advance. When you study, you are working with pre-approved content served from our database. There are zero AI inference calls while you are drilling, reading, or listening.</li>
+        <li><strong>No AI-driven personalization of content text.</strong> The adaptive system (spaced repetition, scheduling, difficulty selection) is entirely deterministic code. AI generates the content; algorithms decide when to show it to you. These are separate systems.</li>
+        <li><strong>No AI chatbots or conversational agents.</strong> Aelu does not use AI to chat with you, answer your questions in real time, or simulate a tutor. The educational experience is structured drills and reading, not open-ended conversation.</li>
+      </ul>
+
+      <h2>6. Provenance and Traceability</h2>
+      <p>Every piece of AI-generated content in Aelu carries internal metadata:</p>
+      <ul>
+        <li>The model version that generated it</li>
+        <li>The generation timestamp</li>
+        <li>The prompt template and parameters used</li>
+        <li>The validation results (pass/fail and specific checks)</li>
+        <li>The review decision (approved/edited/rejected) and reviewer</li>
+        <li>The source data used in generation (e.g., CC-CEDICT entries, HSK word lists)</li>
+      </ul>
+
+      <p>This traceability exists so that if a content quality issue is discovered, we can trace it back to its source, understand why it passed review, and fix the pipeline. It is an engineering practice, not a marketing claim.</p>
+
+      <h2>7. CC-CEDICT Attribution</h2>
+      <p>Aelu's knowledge base includes data from the <a href="https://cc-cedict.org/wiki/">CC-CEDICT</a> project, a collaboratively maintained Chinese-English dictionary. CC-CEDICT is licensed under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>. We use this data for vocabulary lookup, pinyin generation, and definition retrieval within our RAG pipeline. We gratefully acknowledge the CC-CEDICT community's contribution.</p>
+
+      <h2>8. Changes to This Policy</h2>
+      <p>AI is a fast-moving field. We will update this policy as our practices evolve or as the legal landscape changes. When we make material changes, we will post the updated policy with a new effective date. If you have an Aelu account, we will notify you by email of significant changes.</p>
+
+      <h2>9. Questions</h2>
+      <p>If you have questions about how Aelu uses AI, or if you want to report a content quality issue, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. We will respond within a few business days.</p>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/breach-notification">Security</a> · <a href="/ai-content-policy">AI Content Policy</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
+    </div>
+  </footer>
+
+</body>
+</html>

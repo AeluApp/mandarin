@@ -1,0 +1,89 @@
+{
+    "title": "What Is Worth Doing",
+    "title_zh": "什么值得做",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You and a philosophy graduate student, Mingzhe, are walking through an old temple garden. He's been struggling with the question of meaning after finishing his thesis.",
+        "setup_zh": "你和哲学研究生明哲在一座古庙的花园里散步。他写完论文后一直在纠结「意义」这个问题。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我花了三年研究「意义」这个概念，写了十万字的论文。但写完的那一刻我发现自己反而更困惑了。如果意义不是被发现的而是被创造的，那创造本身有没有意义？这就变成了一个无限循环。",
+                "text_pinyin": "Wǒ huā le sān nián yánjiū 'yìyì' zhège gàiniàn, xiě le shí wàn zì de lùnwén. Dàn xiě wán de nà yī kè wǒ fāxiàn zìjǐ fǎn'ér gèng kùnhuò le. Rúguǒ yìyì bú shì bèi fāxiàn de ér shì bèi chuàngzào de, nà chuàngzào běnshēn yǒu méiyǒu yìyì? Zhè jiù biàn chéng le yīge wúxiàn xúnhuán.",
+                "text_en": "I spent three years studying the concept of 'meaning' and wrote a 100,000-character thesis. But the moment I finished, I found myself more confused than before. If meaning isn't discovered but created, does the act of creating itself have meaning? It becomes an infinite loop."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Engage with his philosophical spiral.",
+                "options": [
+                    {
+                        "text_zh": "也许问题不在于找不到答案，而在于你用思考去找一个需要用生活来回答的问题。意义不在论文里。它在你做一件事忘了问'有没有意义'的那个瞬间。种树时你不问意义，你只是在种。",
+                        "text_pinyin": "Yěxǔ wèntí bú zàiyú zhǎo bú dào dá'àn, ér zàiyú nǐ yòng sīkǎo qù zhǎo yīge xūyào yòng shēnghuó lái huídá de wèntí. Yìyì bú zài lùnwén lǐ. Tā zài nǐ zuò yī jiàn shì wàng le wèn 'yǒu méiyǒu yìyì' de nàge shùnjiān. Zhòng shù shí nǐ bú wèn yìyì, nǐ zhǐ shì zài zhòng.",
+                        "text_en": "Maybe the problem isn't finding the answer, but using thinking to answer something only living can. Meaning isn't in the thesis. It's in the moment you do something and forget to ask 'does this have meaning.' Planting a tree, you don't ask — you just plant.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Cuts through the intellectual spiral with experiential wisdom — exactly what a philosopher stuck in abstraction needs."
+                    },
+                    {
+                        "text_zh": "你想太多了，人活着就是吃饭睡觉工作，不需要什么意义。",
+                        "text_pinyin": "Nǐ xiǎng tài duō le, rén huó zhe jiù shì chīfàn shuìjiào gōngzuò, bù xūyào shénme yìyì.",
+                        "text_en": "You're overthinking — life is just eating, sleeping, and working, no need for meaning.",
+                        "score": 0.0,
+                        "feedback": "Anti-intellectual — dismisses a genuine existential struggle."
+                    },
+                    {
+                        "text_zh": "你的导师怎么说？",
+                        "text_pinyin": "Nǐ de dǎoshī zěnme shuō?",
+                        "text_en": "What does your thesis advisor say?",
+                        "score": 0.0,
+                        "feedback": "Defers to authority — doesn't engage personally."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "忘了问的那个瞬间……你让我想到了庄子说的「鱼之乐」。鱼在水里游的时候不会问自己快不快乐，它只是在游。也许意义就像快乐一样，你越追它越跑，但当你不再追的时候，它反而就在身边了。",
+                "text_pinyin": "Wàng le wèn de nàge shùnjiān…… nǐ ràng wǒ xiǎng dào le Zhuāngzǐ shuō de 'yú zhī lè'. Yú zài shuǐ lǐ yóu de shíhou bú huì wèn zìjǐ kuài bú kuàilè, tā zhǐ shì zài yóu. Yěxǔ yìyì jiù xiàng kuàilè yíyàng, nǐ yuè zhuī tā yuè pǎo, dàn dāng nǐ bú zài zhuī de shíhou, tā fǎn'ér jiù zài shēnbiān le.",
+                "text_en": "The moment you forget to ask... you remind me of Zhuangzi's 'joy of fish.' When a fish swims, it doesn't ask whether it's happy — it just swims. Maybe meaning is like happiness — the more you chase it, the more it runs. But when you stop chasing, it's already beside you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Close with a thought about living the answer.",
+                "options": [
+                    {
+                        "text_zh": "也许你的论文不是白写的。你花了三年去追一个问题，追到最后发现答案不在终点，而在追的过程本身。这三年你读了书、思考了、困惑了、挣扎了——这些就是意义。意义不是结论，是体验。",
+                        "text_pinyin": "Yěxǔ nǐ de lùnwén bú shì bái xiě de. Nǐ huā le sān nián qù zhuī yīge wèntí, zhuī dào zuìhòu fāxiàn dá'àn bú zài zhōngdiǎn, ér zài zhuī de guòchéng běnshēn. Zhè sān nián nǐ dú le shū, sīkǎo le, kùnhuò le, zhēngzhá le — zhèxiē jiù shì yìyì. Yìyì bú shì jiélùn, shì tǐyàn.",
+                        "text_en": "Maybe your thesis wasn't written in vain. You spent three years chasing a question and discovered the answer isn't at the destination but in the chase.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Resolves his paradox — reframes the journey as the answer."
+                    },
+                    {
+                        "text_zh": "毕业了打算做什么工作？",
+                        "text_pinyin": "Bìyè le dǎsuàn zuò shénme gōngzuò?",
+                        "text_en": "What kind of job are you planning to get after graduation?",
+                        "score": 0.0,
+                        "feedback": "Pulls him out of a profound moment into career planning."
+                    },
+                    {
+                        "text_zh": "你可以继续读博，再研究几年。",
+                        "text_pinyin": "Nǐ kěyǐ jìxù dú bó, zài yánjiū jǐ nián.",
+                        "text_en": "You could do a PhD and research for a few more years.",
+                        "score": 0.0,
+                        "feedback": "More of the same approach — staying in the intellectual loop rather than breaking out."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "意义不是结论，是体验……这比我论文里写的任何一句话都更接近真相。谢谢你。也许我应该少读一点书，多种一点树。",
+                "text_pinyin": "Yìyì bú shì jiélùn, shì tǐyàn…… zhè bǐ wǒ lùnwén lǐ xiě de rènhé yī jù huà dōu gèng jiējìn zhēnxiàng. Xièxie nǐ. Yěxǔ wǒ yīnggāi shǎo dú yīdiǎn shū, duō zhòng yīdiǎn shù.",
+                "text_en": "Meaning isn't a conclusion, it's experience... that's closer to the truth than anything in my thesis. Thank you. Maybe I should read fewer books and plant more trees."
+            }
+        ],
+        "cultural_note": "Zhuangzi's (庄子) parable of the「鱼之乐」(joy of fish) is one of the most famous passages in Chinese philosophy — Zhuangzi observes fish swimming and declares they are happy, challenged by his friend Huizi who asks how he can know what fish feel. The dialogue raises questions about empathy, knowledge, and the nature of happiness. The tension between intellectual understanding and lived experience is central to Chinese philosophical traditions, where both Daoist and Chan Buddhist thought emphasize direct experience (体验) over abstract reasoning."
+    }
+}

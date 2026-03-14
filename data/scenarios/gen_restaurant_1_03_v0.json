@@ -1,0 +1,94 @@
+{
+    "title": "The Cold Dish Misunderstanding",
+    "title_zh": "凉菜的误会",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_restaurant_1_03_v0",
+    "tree": {
+        "setup": "A family restaurant where the tables have glass tops over floral tablecloths. Grandma Li runs the front while her daughter cooks. A cat sleeps on a chair by the door as if it owns the place. The menu is handwritten on a whiteboard, and Grandma Li has crossed out two items with no explanation.",
+        "setup_zh": "一家家庭餐馆，桌子上铺着花布，盖着玻璃。李奶奶管前台，她女儿做菜。一只猫在门口的椅子上睡觉，好像这是它的店。菜单写在白板上，李奶奶划掉了两道菜，没有解释。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来啦！想吃点什么？",
+                "text_pinyin": "lái la! xiǎng chī diǎn shénme?",
+                "text_en": "You're here! What would you like to eat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask what's good today.",
+                "options": [
+                    {
+                        "text_zh": "今天什么好吃？",
+                        "text_pinyin": "jīntiān shénme hǎochī?",
+                        "text_en": "What's good today?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grandma Li beams. She loves this question. She leans in conspiratorially:「今天的鱼很好。」今天 (jīntiān) + adjective is a natural way to ask for daily recommendations."
+                    },
+                    {
+                        "text_zh": "你好，我要吃饭。",
+                        "text_pinyin": "nǐ hǎo, wǒ yào chī fàn.",
+                        "text_en": "Hello, I want to eat.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grandma Li chuckles -- well, yes, that's why you're here. 吃饭 literally means 'eat rice' but it's the general word for having a meal."
+                    },
+                    {
+                        "text_zh": "那个菜是什么？",
+                        "text_pinyin": "nà ge cài shì shénme?",
+                        "text_en": "What's that dish?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "You point at something on the whiteboard. Grandma Li squints at her own handwriting.「哦，那个啊……」Using 那个 to point things out is perfectly natural."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你要不要一个凉菜？很好吃的！",
+                "text_pinyin": "nǐ yào bú yào yí gè liángcài? hěn hǎochī de!",
+                "text_en": "Do you want a cold dish? It's very tasty!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好的，我要一个。",
+                        "text_pinyin": "hǎo de, wǒ yào yí gè.",
+                        "text_en": "OK, I'll have one.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grandma Li nods with satisfaction. She was going to bring it anyway, but she appreciates the formality of being asked."
+                    },
+                    {
+                        "text_zh": "凉菜是什么？",
+                        "text_pinyin": "liángcài shì shénme?",
+                        "text_en": "What's a cold dish?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grandma Li explains with hand gestures: cold, vegetables, sauce. She seems genuinely delighted to teach you. 凉菜 are chilled appetizer dishes -- a staple of Chinese dining."
+                    },
+                    {
+                        "text_zh": "不要，谢谢。",
+                        "text_pinyin": "bú yào, xièxie.",
+                        "text_en": "No thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Grandma Li looks at you the way a mother looks at a child who refuses vegetables. She'll respect your choice. Barely."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！等一下就好。",
+                "text_pinyin": "hǎo! děng yíxià jiù hǎo.",
+                "text_en": "OK! It'll be ready in a moment."
+            }
+        ],
+        "cultural_note": "凉菜 (liángcài, cold dishes) are served at the start of a meal -- cucumber salad, spiced tofu skin, cold noodles. They're not leftovers; they're intentionally chilled. First-time visitors sometimes expect hot food and are surprised!"
+    }
+}

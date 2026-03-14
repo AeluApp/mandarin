@@ -1,0 +1,83 @@
+{
+  "title": "The Courtyard Tree",
+  "title_zh": "院子里的树",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're sitting in a quiet courtyard. An old woman is sitting under a big tree, fanning herself slowly.",
+    "setup_zh": "你坐在一个安静的院子里。一位老奶奶坐在一棵大树下，慢慢地扇扇子。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "坐这里吧，树下凉快。这棵树是我丈夫种的，已经三十年了。",
+        "text_pinyin": "Zuò zhèlǐ ba, shù xià liángkuai. Zhè kē shù shì wǒ zhàngfu zhǒng de, yǐjīng sānshí nián le.",
+        "text_en": "Sit here — it's cool under the tree. My husband planted this tree. It's been thirty years."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the tree and its history.",
+        "options": [
+          {
+            "text_zh": "三十年了！这棵树好大。在这里坐着真的很舒服，谢谢您。",
+            "text_pinyin": "Sānshí nián le! Zhè kē shù hǎo dà. Zài zhèlǐ zuò zhe zhēn de hěn shūfu, xièxie nín.",
+            "text_en": "Thirty years! The tree is so big. Sitting here is really comfortable — thank you.",
+            "score": 1.0,
+            "feedback": "Respectful and present — appreciates the shade and its history.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这是什么树？",
+            "text_pinyin": "Zhè shì shénme shù?",
+            "text_en": "What kind of tree is this?",
+            "score": 0.0,
+            "feedback": "A botanical question that misses the personal meaning."
+          },
+          {
+            "text_zh": "今天真热。",
+            "text_pinyin": "Jīntiān zhēn rè.",
+            "text_en": "It's really hot today.",
+            "score": 0.0,
+            "feedback": "A weather complaint instead of honoring her story."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊。他说「种一棵树，以后就有地方乘凉了」。他走了以后，我每天都在树下坐。好像他还在。",
+        "text_pinyin": "Shì a. Tā shuō 'zhǒng yī kē shù, yǐhòu jiù yǒu dìfang chéngliáng le'. Tā zǒu le yǐhòu, wǒ měi tiān dōu zài shù xià zuò. Hǎoxiàng tā hái zài.",
+        "text_en": "Yes. He said, 'Plant a tree, and later there'll be shade to enjoy.' After he passed, I sit under the tree every day. It feels like he's still here."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond gently to her memory.",
+        "options": [
+          {
+            "text_zh": "他种的树还在给你凉快——我觉得他的心意也还在。这棵树就像他留给你的礼物。",
+            "text_pinyin": "Tā zhǒng de shù hái zài gěi nǐ liángkuai — wǒ juéde tā de xīnyì yě hái zài. Zhè kē shù jiù xiàng tā liú gěi nǐ de lǐwù.",
+            "text_en": "The tree he planted still gives you shade — I think his care is still here too. This tree is like a gift he left for you.",
+            "score": 1.0,
+            "feedback": "The tree as a living gift — his care outlasts his life.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "他是什么时候去世的？",
+            "text_pinyin": "Tā shì shénme shíhou qùshì de?",
+            "text_en": "When did he pass away?",
+            "score": 0.0,
+            "feedback": "Pries into grief instead of honoring the memory."
+          },
+          {
+            "text_zh": "你一个人住吗？",
+            "text_pinyin": "Nǐ yī ge rén zhù ma?",
+            "text_en": "Do you live alone?",
+            "score": 0.0,
+            "feedback": "An intrusive question during a tender moment."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Planting trees for future shade (前人栽树，后人乘凉) is a Chinese proverb about generosity that outlasts a single lifetime. Courtyards with old trees are treasured spaces in Chinese homes, and the tree often becomes a symbol of the family member who planted it — a living memorial."
+  }
+}

@@ -1,0 +1,83 @@
+{
+    "title": "The Night Train",
+    "title_zh": "夜车",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're on an overnight train, unable to sleep. The person in the bunk across from you is also awake, quietly looking out the window at passing lights.",
+        "setup_zh": "你在一辆夜间火车上，睡不着。对面铺位的人也没睡，静静地看着窗外闪过的灯光。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也睡不着吗？夜车上最有意思的就是窗外的灯光——一闪一闪的，每一个光点后面都是一个人家。你说他们在做什么呢？",
+                "text_pinyin": "Nǐ yě shuì bù zháo ma? Yè chē shàng zuì yǒu yìsi de jiù shì chuāng wài de dēngguāng — yī shǎn yī shǎn de, měi yī ge guāng diǎn hòumiàn dōu shì yī ge rénjiā. Nǐ shuō tāmen zài zuò shénme ne?",
+                "text_en": "Can't sleep either? The most interesting thing on a night train is the lights outside the window — flickering past, each point of light is someone's home. What do you think they're doing?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her imagination about the lights.",
+                "options": [
+                    {
+                        "text_zh": "也许有人在给孩子讲故事，有人在洗碗，有人也在看窗外——看到我们的火车经过，想着那些人要去哪里。我们想他们，他们也许也在想我们。",
+                        "text_pinyin": "Yěxǔ yǒu rén zài gěi háizi jiǎng gùshi, yǒu rén zài xǐ wǎn, yǒu rén yě zài kàn chuāng wài — kàn dào wǒmen de huǒchē jīngguò, xiǎng zhe nàxiē rén yào qù nǎlǐ. Wǒmen xiǎng tāmen, tāmen yěxǔ yě zài xiǎng wǒmen.",
+                        "text_en": "Maybe someone's telling their child a story, someone's washing dishes, someone's looking out their window — seeing our train pass, wondering where we're going. We think of them; maybe they think of us too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reciprocity — the watchers are being watched."
+                    },
+                    {
+                        "text_zh": "大概都睡了吧。",
+                        "text_pinyin": "Dàgài dōu shuì le ba.",
+                        "text_en": "They're probably all asleep.",
+                        "score": 0.0,
+                        "feedback": "Shuts down her imaginative game."
+                    },
+                    {
+                        "text_zh": "你要去哪里？",
+                        "text_pinyin": "Nǐ yào qù nǎlǐ?",
+                        "text_en": "Where are you headed?",
+                        "score": 0.0,
+                        "feedback": "Changes subject from the lights to travel logistics."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈，我们在想他们，他们也在想我们——这个想法真好。火车就是这样，把很多不认识的人放在一个空间里。明天大家就各自走各自的路了，但今晚我们一起看了同一片灯光。",
+                "text_pinyin": "Hā, wǒmen zài xiǎng tāmen, tāmen yě zài xiǎng wǒmen — zhège xiǎngfǎ zhēn hǎo. Huǒchē jiù shì zhèyàng, bǎ hěn duō bù rènshi de rén fàng zài yī ge kōngjiān lǐ. Míngtiān dàjiā jiù gèzì zǒu gèzì de lù le, dàn jīnwǎn wǒmen yīqǐ kàn le tóng yī piàn dēngguāng.",
+                "text_en": "Ha, we're thinking about them and they're thinking about us — what a lovely thought. That's what trains do — put strangers together in one space. Tomorrow everyone goes their separate ways, but tonight we watched the same lights together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the temporary closeness of strangers on a train.",
+                "options": [
+                    {
+                        "text_zh": "也许旅行最珍贵的不是到达目的地，而是路上遇到的人和风景。就算以后不再见面，今晚的灯光和这次对话，我都会记住。",
+                        "text_pinyin": "Yěxǔ lǚxíng zuì zhēnguì de bú shì dàodá mùdìdì, ér shì lù shàng yù dào de rén hé fēngjǐng. Jiùsuàn yǐhòu bú zài jiànmiàn, jīnwǎn de dēngguāng hé zhè cì duìhuà, wǒ dōu huì jì zhù.",
+                        "text_en": "Maybe travel's most precious part isn't arriving, but the people and sights along the way. Even if we never meet again, I'll remember tonight's lights and this conversation.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The journey matters more than the destination — a night train philosophy."
+                    },
+                    {
+                        "text_zh": "你要不要加我微信？",
+                        "text_pinyin": "Nǐ yào bú yào jiā wǒ Wēixìn?",
+                        "text_en": "Want to add me on WeChat?",
+                        "score": 0.0,
+                        "feedback": "Tries to make permanent what is beautiful precisely because it's temporary."
+                    },
+                    {
+                        "text_zh": "我们应该试着睡了。",
+                        "text_pinyin": "Wǒmen yīnggāi shì zhe shuì le.",
+                        "text_en": "We should try to sleep.",
+                        "score": 0.0,
+                        "feedback": "Breaks a rare moment of connection with practicality."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Night trains (夜车) have long been spaces of intimate strangers in China. The brief, deep conversations between people who will never meet again carry a special quality — unguarded, honest, and ephemeral. The flickering lights outside are a shared canvas for imagination, a tradition of long-distance Chinese rail travel."
+    }
+}

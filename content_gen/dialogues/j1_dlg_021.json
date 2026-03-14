@@ -1,0 +1,87 @@
+{
+    "title": "Rain on the Window",
+    "title_zh": "窗外的雨",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "It's raining outside. You're in a small café. The person at the next table looks out the window and speaks to you.",
+        "setup_zh": "外面下雨了。你在一家小咖啡店里。旁边的人看着窗外，跟你说话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天的雨好大。你有伞吗？",
+                "text_pinyin": "Jīntiān de yǔ hǎo dà. Nǐ yǒu sǎn ma?",
+                "text_en": "The rain is really heavy today. Do you have an umbrella?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them about your umbrella situation.",
+                "options": [
+                    {
+                        "text_zh": "没有，我没带伞。我想在这里等一等。",
+                        "text_pinyin": "Méiyǒu, wǒ méi dài sǎn. Wǒ xiǎng zài zhèlǐ děng yī děng.",
+                        "text_en": "No, I didn't bring one. I'll wait here a bit.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Honest about the umbrella and relaxed about waiting -- no rush, just enjoying the cafe."
+                    },
+                    {
+                        "text_zh": "没有。你呢？",
+                        "text_pinyin": "Méiyǒu. Nǐ ne?",
+                        "text_en": "No. You?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers but minimal -- she started a friendly conversation and you gave only two words back."
+                    },
+                    {
+                        "text_zh": "对啊，雨很大。你常来这里吗？",
+                        "text_pinyin": "Duì a, yǔ hěn dà. Nǐ cháng lái zhèlǐ ma?",
+                        "text_en": "Yeah, heavy rain. Do you come here often?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Agrees about the rain but doesn't answer about the umbrella, then pivots -- she asked a specific question and you dodged it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我也是。下雨天在这里喝咖啡，很舒服。",
+                "text_pinyin": "Wǒ yě shì. Xià yǔ tiān zài zhèlǐ hē kāfēi, hěn shūfu.",
+                "text_en": "Me too. Drinking coffee on a rainy day here is really nice."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree and share how you feel.",
+                "options": [
+                    {
+                        "text_zh": "对，很安静。我很喜欢听雨的声音。",
+                        "text_pinyin": "Duì, hěn ānjìng. Wǒ hěn xǐhuan tīng yǔ de shēngyīn.",
+                        "text_en": "Yes, it's very quiet. I love listening to the sound of rain.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Builds on her observation about rainy-day comfort -- adds something personal about the sound of rain."
+                    },
+                    {
+                        "text_zh": "对，很舒服。",
+                        "text_pinyin": "Duì, hěn shūfu.",
+                        "text_en": "Yes, very comfortable.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Agrees with her but doesn't add anything -- she set up a nice moment and you just echoed it."
+                    },
+                    {
+                        "text_zh": "你喝的是什么咖啡？",
+                        "text_pinyin": "Nǐ hē de shì shénme kāfēi?",
+                        "text_en": "What kind of coffee are you drinking?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She was savoring the atmosphere of rain and coffee, and you asked about her order -- practical but misses the mood."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Rainy days in China often bring a sense of stillness. Many people use them as an excuse to slow down — sitting in a café, watching the rain, and enjoying a quiet moment with a stranger."
+    }
+}

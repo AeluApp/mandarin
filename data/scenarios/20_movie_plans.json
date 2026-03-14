@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Say you're interested and ask what time.",
                 "options": [
-                    {"text_zh": "好啊，我很想去！你想看几点的？", "text_pinyin": "hǎo a, wǒ hěn xiǎng qù! nǐ xiǎng kàn jǐ diǎn de?", "text_en": "Sure, I'd love to go! What time do you want to see?", "score": 1.0, "register": "casual", "feedback": "Enthusiastic and practical — shows interest and moves to planning."},
-                    {"text_zh": "可以啊，什么电影？好看吗？", "text_pinyin": "kěyǐ a, shénme diànyǐng? hǎokàn ma?", "text_en": "Sure, what movie? Is it good?", "score": 0.7, "register": "casual", "feedback": "Reasonable to ask about the movie first, though your friend might not know if it's good yet."},
-                    {"text_zh": "我周末可能有空，到时候再说吧。", "text_pinyin": "wǒ zhōumò kěnéng yǒu kòng, dào shíhou zài shuō ba.", "text_en": "I might be free this weekend, let's talk about it later.", "score": 0.5, "register": "casual", "feedback": "非committal — 到时候再说 can feel like a soft rejection in Chinese social contexts."}
+                    {
+                        "text_zh": "当然可以！祝你生日快乐！我带什么来好呢？",
+                        "text_pinyin": "dāngrán kěyǐ! zhù nǐ shēngrì kuàilè! wǒ dài shénme lái hǎo ne?",
+                        "text_en": "Of course! Happy birthday! What should I bring?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you're interested and ask what time, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好啊，我很想去！你想看几点的？",
+                        "text_pinyin": "hǎo a, wǒ hěn xiǎng qù! nǐ xiǎng kàn jǐ diǎn de?",
+                        "text_en": "Sure, I'd love to go! What time do you want to see?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and practical — shows interest and moves to planning."
+                    },
+                    {
+                        "text_zh": "我觉得先复习语法吧，那个部分我不太懂。",
+                        "text_pinyin": "wǒ juéde xiān fùxí yǔfǎ ba, nà ge bùfen wǒ bú tài dǒng.",
+                        "text_en": "I think we should start with grammar, I don't really understand that part.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to say you're interested and ask what time, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Choose a time and suggest meeting up.",
                 "options": [
-                    {"text_zh": "晚上七点吧，我们六点半在电影院门口见？", "text_pinyin": "wǎnshang qī diǎn ba, wǒmen liù diǎn bàn zài diànyǐngyuàn ménkǒu jiàn?", "text_en": "Let's do 7 PM, meet at the cinema entrance at 6:30?", "score": 1.0, "register": "casual", "feedback": "Decisive and thoughtful — picks a time, suggests a meeting point, and arrives early."},
-                    {"text_zh": "都可以，你决定吧，我听你的。", "text_pinyin": "dōu kěyǐ, nǐ juédìng ba, wǒ tīng nǐ de.", "text_en": "Either works, you decide, I'll go with yours.", "score": 0.6, "register": "casual", "feedback": "Flexible but doesn't help plan — your friend asked for your preference."},
-                    {"text_zh": "下午两点好，看完还能去吃晚饭。", "text_pinyin": "xiàwǔ liǎng diǎn hǎo, kàn wán hái néng qù chī wǎnfàn.", "text_en": "2 PM is good, after the movie we can still go eat dinner.", "score": 0.8, "register": "casual", "feedback": "Good thinking — suggests a plan beyond just the movie, which shows social initiative."}
+                    {
+                        "text_zh": "那怎么行，我带一个蛋糕过去吧。",
+                        "text_pinyin": "nà zěnme xíng, wǒ dài yī ge dàngāo guòqù ba.",
+                        "text_en": "How can I come empty-handed? I'll bring a cake.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to choose a time and suggest meeting up, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "晚上七点吧，我们六点半在电影院门口见？",
+                        "text_pinyin": "wǎnshang qī diǎn ba, wǒmen liù diǎn bàn zài diànyǐngyuàn ménkǒu jiàn?",
+                        "text_en": "Let's do 7 PM, meet at the cinema entrance at 6:30?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Decisive and thoughtful — picks a time, suggests a meeting point, and arrives early."
+                    },
+                    {
+                        "text_zh": "十二点吧。你想吃什么都行。",
+                        "text_pinyin": "shí'èr diǎn ba. nǐ xiǎng chī shénme dōu xíng.",
+                        "text_en": "How about noon. Whatever you want is fine.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to choose a time and suggest meeting up, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

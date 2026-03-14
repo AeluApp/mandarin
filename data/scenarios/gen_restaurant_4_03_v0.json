@@ -1,0 +1,124 @@
+{
+    "title": "The Diplomatic Complaint",
+    "title_zh": "外交投诉",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_restaurant_4_03_v0",
+    "tree": {
+        "setup": "A mid-range restaurant where the tablecloths are white and the expectations are reasonable. Your fish arrived cold — not lukewarm, but the kind of cold that suggests it may have been sitting on a counter contemplating its life choices. The manager, Mr. Jiang, approaches your table with the practiced calm of someone who has turned complaints into compliments for fifteen years.",
+        "setup_zh": "一家中档餐厅，白色桌布，期望值合理。你的鱼端上来是凉的——不是微温，而是那种像在柜台上思考人生一样的凉。经理姜先生走向你的桌子，带着十五年来把投诉变成好评的从容。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问菜还满意吗？",
+                "text_pinyin": "nín hǎo, qǐngwèn cài hái mǎnyì ma?",
+                "text_en": "Hello, is everything satisfactory with your meal?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Politely raise the issue with the cold fish.",
+                "options": [
+                    {
+                        "text_zh": "你好，其他菜都很好，但是这个鱼是凉的。好像放了很久才端上来的。能不能帮我换一下？",
+                        "text_pinyin": "nǐ hǎo, qítā cài dōu hěn hǎo, dànshì zhège yú shì liáng de. hǎoxiàng fàng le hěn jiǔ cái duān shànglái de. néng bu néng bāng wǒ huàn yíxià?",
+                        "text_en": "Hello, the other dishes are great, but this fish is cold. It seems like it sat for a long time before being served. Could you replace it?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Balanced — complimenting other dishes while addressing the problem. Mr. Jiang appreciates a customer who can criticize without destroying."
+                    },
+                    {
+                        "text_zh": "这个鱼是凉的。",
+                        "text_pinyin": "zhège yú shì liáng de.",
+                        "text_en": "This fish is cold.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. He touches the plate, confirms, and apologizes immediately."
+                    },
+                    {
+                        "text_zh": "你们的菜怎么是凉的？",
+                        "text_pinyin": "nǐmen de cài zěnme shì liáng de?",
+                        "text_en": "Why is your food cold?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The accusatory 你们 puts him slightly on the defensive, but Mr. Jiang is a professional absorber of blame."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "非常抱歉！这确实是我们的问题。我马上让厨房重新做一份。给您添麻烦了。",
+                "text_pinyin": "fēicháng bàoqiàn! zhè quèshí shì wǒmen de wèntí. wǒ mǎshàng ràng chúfáng chóngxīn zuò yí fèn. gěi nín tiān máfan le.",
+                "text_en": "I'm very sorry! This is definitely our fault. I'll have the kitchen make a fresh one right away. Sorry for the trouble."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept his apology.",
+                "options": [
+                    {
+                        "text_zh": "没关系，谢谢你处理得这么快。",
+                        "text_pinyin": "méi guānxi, xièxie nǐ chǔlǐ de zhème kuài.",
+                        "text_en": "No problem — thanks for handling it so quickly.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Gracious acceptance. Mr. Jiang makes a mental note to send a complimentary dessert — this is how diplomacy works."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Calm and accepted. He hurries to the kitchen."
+                    },
+                    {
+                        "text_zh": "希望这次是热的。",
+                        "text_pinyin": "xīwàng zhè cì shì rè de.",
+                        "text_en": "Hope it's hot this time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A pointed remark. Mr. Jiang will personally check the temperature before it leaves the kitchen."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "新的鱼来了。为了表示歉意，今天这道菜免单，再送您一份甜品。",
+                "text_pinyin": "xīn de yú lái le. wèile biǎoshì qiànyì, jīntiān zhè dào cài miǎn dān, zài sòng nín yí fèn tiánpǐn.",
+                "text_en": "Here's the new fish. As an apology, this dish is on the house, plus a complimentary dessert."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the generous gesture.",
+                "options": [
+                    {
+                        "text_zh": "哇，太客气了！其实不用免单，重新做一份就够了。谢谢你们的服务态度。",
+                        "text_pinyin": "wa, tài kèqi le! qíshí búyòng miǎn dān, chóngxīn zuò yí fèn jiù gòu le. xièxie nǐmen de fúwù tàidu.",
+                        "text_en": "Wow, that's too kind! You really didn't need to comp it — remaking it was enough. Thanks for the great service attitude.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Deflecting generosity while accepting it — peak Chinese dining etiquette. Mr. Jiang bows slightly."
+                    },
+                    {
+                        "text_zh": "谢谢！这条鱼好多了。",
+                        "text_pinyin": "xièxie! zhè tiáo yú hǎo duō le.",
+                        "text_en": "Thanks! This fish is much better.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple and comparative. The fish is redeemed."
+                    },
+                    {
+                        "text_zh": "应该的。",
+                        "text_pinyin": "yīnggāi de.",
+                        "text_en": "As it should be.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Jiang's smile remains professional, but his dessert portions may be slightly smaller."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese restaurants often resolve complaints with 免单 (miǎn dān, comping the dish) or 打折 (dǎzhé, a discount). The phrase 给您添麻烦了 (gěi nín tiān máfan le) is the standard service apology — acknowledging trouble caused."
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "title": "Returning a Book",
+    "title_zh": "还书",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You borrowed a book from your friend Xiao Gao last month. You're meeting to return it at a café.",
+        "setup_zh": "你上个月从朋友小高那里借了一本书。你们约在一家咖啡馆见面还书。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Return the book and share your thoughts.",
+                "options": [
+                    {
+                        "text_zh": "小高，书我看完了，还给你。写得真好！特别是中间那一段，让我感动了很久。",
+                        "text_pinyin": "Xiǎo Gāo, shū wǒ kàn wán le, huán gěi nǐ. Xiě de zhēn hǎo! Tèbié shì zhōngjiān nà yī duàn, ràng wǒ gǎndòng le hěn jiǔ.",
+                        "text_en": "Xiao Gao, I finished the book — here it is. It was really well-written! Especially that part in the middle — it moved me for a long time.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Returns the book with genuine feedback — shows you actually read and cared."
+                    },
+                    {
+                        "text_zh": "书还给你。",
+                        "text_pinyin": "Shū huán gěi nǐ.",
+                        "text_en": "Here's your book back.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Returns it but offers nothing about the reading experience."
+                    },
+                    {
+                        "text_zh": "我还没看完呢，但是先还给你吧。",
+                        "text_pinyin": "Wǒ hái méi kàn wán ne, dànshì xiān huán gěi nǐ ba.",
+                        "text_en": "I haven't finished it yet, but I'll give it back.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Borrowed it a month ago and didn't finish — not ideal."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你也喜欢那一段啊？我看到那里的时候也哭了。这本书是我朋友推荐给我的，没想到这么好。你最近还想看什么书？",
+                "text_pinyin": "Nǐ yě xǐhuan nà yī duàn a? Wǒ kàndào nàlǐ de shíhou yě kū le. Zhè běn shū shì wǒ péngyou tuījiàn gěi wǒ de, méi xiǎng dào zhème hǎo. Nǐ zuìjìn hái xiǎng kàn shénme shū?",
+                "text_en": "You liked that part too? I cried when I read it. A friend recommended this book to me — didn't expect it to be so good. What else do you want to read lately?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Talk about what you want to read next.",
+                "options": [
+                    {
+                        "text_zh": "最近想看轻松的，有好笑的小说吗？这本太感动了，想换换心情。",
+                        "text_pinyin": "Zuìjìn xiǎng kàn qīngsōng de, yǒu hǎoxiào de xiǎoshuō ma? Zhè běn tài gǎndòng le, xiǎng huàn huàn xīnqíng.",
+                        "text_en": "I want something lighter — any funny novels? This one was so emotional, I need a change of mood.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Honest and fun — shows self-awareness about reading moods."
+                    },
+                    {
+                        "text_zh": "不知道，你有什么推荐吗？",
+                        "text_pinyin": "Bù zhīdào, nǐ yǒu shénme tuījiàn ma?",
+                        "text_en": "Not sure, do you have recommendations?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Relies on them entirely."
+                    },
+                    {
+                        "text_zh": "我可能不看书了，最近太忙了。",
+                        "text_pinyin": "Wǒ kěnéng bú kàn shū le, zuìjìn tài máng le.",
+                        "text_en": "I might not read for a while — too busy.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Shuts down the book-sharing bond."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我有一本！是一个日本作家写的，讲一只猫和它主人的故事，特别温馨也很好笑。我下次带给你。",
+                "text_pinyin": "Wǒ yǒu yī běn! Shì yī ge Rìběn zuòjiā xiě de, jiǎng yī zhī māo hé tā zhǔrén de gùshi, tèbié wēnxīn yě hěn hǎoxiào. Wǒ xià cì dài gěi nǐ.",
+                "text_en": "I have one! It's by a Japanese author — about a cat and its owner, very heartwarming and funny. I'll bring it next time."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the recommendation.",
+                "options": [
+                    {
+                        "text_zh": "关于猫的故事我一定喜欢！谢谢小高，我们总是互相推荐好书，这种感觉真好。",
+                        "text_pinyin": "Guānyú māo de gùshi wǒ yīdìng xǐhuan! Xièxie Xiǎo Gāo, wǒmen zǒng shì hùxiāng tuījiàn hǎo shū, zhè zhǒng gǎnjué zhēn hǎo.",
+                        "text_en": "A cat story? I'll definitely love it! Thanks, Xiao Gao — I love how we always recommend good books to each other. It's a great feeling.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Appreciates both the book and the friendship built through reading."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but flat."
+                    },
+                    {
+                        "text_zh": "日本的书翻译得好不好？",
+                        "text_pinyin": "Rìběn de shū fānyì de hǎo bù hǎo?",
+                        "text_en": "Are Japanese books well-translated?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Skeptical instead of receptive."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Borrowing and lending books is a meaningful form of friendship in China. Returning a book with thoughtful comments shows respect for the lender's taste. Book recommendations create ongoing connections between friends."
+    },
+    "hsk_level": 3
+}

@@ -1,0 +1,232 @@
+{
+    "title": "The Interview as Chess Match",
+    "title_zh": "面试棋局",
+    "hsk_level": 6,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_business_6_00_v0",
+    "tree": {
+        "setup": "A corner office on the thirty-second floor, where floor-to-ceiling windows frame the city skyline like a motivational poster that happens to be real. Director Fang sits behind a desk notable for its emptiness — one notebook, one pen, one ceramic tea cup. She conducts interviews the way a Go master plays: with long silences, unexpected questions, and an uncanny ability to read the space between your words. She has hired 340 people in her career and claims she can tell within the first ninety seconds whether someone belongs. The remaining fifty-eight minutes, she says, are for the candidate to discover what she already knows.",
+        "setup_zh": "三十二楼的一间角落办公室，落地窗将城市天际线框成一幅恰好是真实的励志海报。方总监坐在一张以空旷著称的办公桌后——一个笔记本，一支笔，一个陶瓷茶杯。她面试的方式如同围棋大师下棋：漫长的沉默，出其不意的问题，以及一种不可思议的能力——读出你话语之间的空白。她职业生涯中雇用过三百四十人，声称在最初的九十秒内就能判断一个人是否合适。剩下的五十八分钟，她说，是让候选人自己发现她已经知道的事情。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。先自我介绍一下吧。不用太正式，就像跟一个同事聊天一样。",
+                "text_pinyin": "qǐng zuò. xiān zìwǒ jièshào yíxià ba. búyòng tài zhèngshì, jiù xiàng gēn yí gè tóngshì liáo tiān yíyàng.",
+                "text_en": "Please sit. Introduce yourself — no need to be too formal, just like chatting with a colleague."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself naturally but professionally.",
+                "options": [
+                    {
+                        "text_zh": "方总监好。我叫李明，在市场营销领域工作了五年，之前在一家互联网公司负责品牌推广和社交媒体策略。我对贵公司感兴趣，主要是因为你们在跨境电商方面的创新做法，和我之前的经验有很多契合点。",
+                        "text_pinyin": "Fāng zǒngjiān hǎo. wǒ jiào Lǐ Míng, zài shìchǎng yíngxiāo lǐngyù gōngzuò le wǔ nián, zhīqián zài yì jiā hùliánwǎng gōngsī fùzé pǐnpái tuīguǎng hé shèjiāo méitǐ cèlüè. wǒ duì guì gōngsī gǎn xìngqù, zhǔyào shì yīnwèi nǐmen zài kuà jìng diànshāng fāngmiàn de chuàngxīn zuòfǎ, hé wǒ zhīqián de jīngyàn yǒu hěn duō qìhé diǎn.",
+                        "text_en": "Hello Director Fang. I'm Li Ming — five years in marketing, previously handling brand promotion and social media strategy at an internet company. I'm interested in your company mainly because of your innovative approach to cross-border e-commerce, which aligns well with my experience.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Experience summary plus specific company knowledge plus alignment reasoning — Director Fang takes a small sip of tea. The ninety-second clock has started well."
+                    },
+                    {
+                        "text_zh": "我叫李明，做市场营销的，有五年经验。",
+                        "text_pinyin": "wǒ jiào Lǐ Míng, zuò shìchǎng yíngxiāo de, yǒu wǔ nián jīngyàn.",
+                        "text_en": "I'm Li Ming, I do marketing, five years of experience.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Facts without narrative. She'll draw the story out of you — she's good at that."
+                    },
+                    {
+                        "text_zh": "方总好。嗯……我主要做市场方面的工作。简历上都写了。",
+                        "text_pinyin": "Fāng zǒng hǎo. ǹg……wǒ zhǔyào zuò shìchǎng fāngmiàn de gōngzuò. jiǎnlì shàng dōu xiě le.",
+                        "text_en": "Hello Director Fang. Um... I mainly do marketing work. It's all on my resume.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Referring to the resume in an interview is like bringing a map to a conversation about the journey. She wanted the story, not the document."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "跨境电商确实是我们的重点方向。说到品牌推广，你之前做过最成功的一个案例是什么？不一定是规模最大的，我想听你觉得最有意思的那个。",
+                "text_pinyin": "kuà jìng diànshāng quèshí shì wǒmen de zhòngdiǎn fāngxiàng. shuō dào pǐnpái tuīguǎng, nǐ zhīqián zuò guò zuì chénggōng de yí gè ànlì shì shénme? bù yídìng shì guīmó zuì dà de, wǒ xiǎng tīng nǐ juéde zuì yǒu yìsi de nàge.",
+                "text_en": "Cross-border e-commerce is indeed our focus. Speaking of brand promotion — what's the most successful campaign you've worked on? Not necessarily the biggest — I want to hear the one you found most interesting."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share a specific professional achievement.",
+                "options": [
+                    {
+                        "text_zh": "最有意思的应该是去年我们为一个国产护肤品牌做的东南亚推广。当时预算有限，我们没有走传统的广告投放路线，而是和当地的小众博主合作，用他们的语言和审美来讲品牌故事。三个月内品牌知名度在目标市场提升了百分之四十，销售额翻了一番。关键是我们用了不到竞品三分之一的预算。",
+                        "text_pinyin": "zuì yǒu yìsi de yīnggāi shì qùnián wǒmen wèi yí gè guóchǎn hùfūpǐn pǐnpái zuò de Dōngnányà tuīguǎng. dāngshí yùsuàn yǒuxiàn, wǒmen méiyǒu zǒu chuántǒng de guǎnggào tóufàng lùxiàn, érshì hé dāngdì de xiǎozhòng bózhǔ hézuò, yòng tāmen de yǔyán hé shěnměi lái jiǎng pǐnpái gùshi. sān gè yuè nèi pǐnpái zhīmíngdù zài mùbiāo shìchǎng tíshēng le bǎi fēn zhī sìshí, xiāoshòu'é fān le yì fān. guānjiàn shì wǒmen yòng le bú dào jìngpǐn sān fēn zhī yī de yùsuàn.",
+                        "text_en": "The most interesting was a Southeast Asian campaign for a domestic skincare brand last year. With a limited budget, we skipped traditional ad placement and partnered with local micro-influencers, using their language and aesthetics to tell the brand story. Within three months, brand awareness rose 40% in the target market and sales doubled. The key was doing it at less than a third of competitors' budgets.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Specific metrics, creative strategy, and cost efficiency — Director Fang writes something in her notebook for the first time. In her system, that means you've earned the second question."
+                    },
+                    {
+                        "text_zh": "去年帮一个品牌做了海外推广，效果不错。销售额增长了很多。",
+                        "text_pinyin": "qùnián bāng yí gè pǐnpái zuò le hǎiwài tuīguǎng, xiàoguǒ búcuò. xiāoshòu'é zēngzhǎng le hěn duō.",
+                        "text_en": "Last year I helped a brand with overseas promotion — it went well. Sales grew a lot.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Good start, but 'a lot' isn't a number. She'll ask for specifics — she always asks for specifics."
+                    },
+                    {
+                        "text_zh": "我做过很多项目，都还比较成功。",
+                        "text_pinyin": "wǒ zuò guò hěn duō xiàngmù, dōu hái bǐjiào chénggōng.",
+                        "text_en": "I've done many projects — they were all fairly successful.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "General claims without evidence. Director Fang's pen stays still. She's waiting for a story with edges."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "用三分之一的预算达到这个效果，说明你对资源分配有感觉。那我换个角度问：你觉得这个项目有什么不足的地方？如果重新做一次，你会怎么调整？",
+                "text_pinyin": "yòng sān fēn zhī yī de yùsuàn dádào zhège xiàoguǒ, shuōmíng nǐ duì zīyuán fēnpèi yǒu gǎnjué. nà wǒ huàn gè jiǎodù wèn: nǐ juéde zhège xiàngmù yǒu shénme bùzú de dìfāng? rúguǒ chóngxīn zuò yí cì, nǐ huì zěnme tiáozhěng?",
+                "text_en": "Achieving that with a third of the budget shows instinct for resource allocation. Let me ask from a different angle: what were the project's weaknesses? If you did it again, what would you change?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect honestly on the project's shortcomings.",
+                "options": [
+                    {
+                        "text_zh": "最大的不足是数据追踪做得不够精细。当时我们只看了整体的转化率，但没有细分到每个博主带来的具体效果。如果重新做，我会建立一个更完善的归因模型，这样能更精确地评估每个合作方的投入产出比，也为下次的预算分配提供更可靠的依据。",
+                        "text_pinyin": "zuì dà de bùzú shì shùjù zhuīzōng zuò de búgòu jīngxì. dāngshí wǒmen zhǐ kàn le zhěngtǐ de zhuǎnhuà lǜ, dàn méiyǒu xì fēn dào měi gè bózhǔ dài lái de jùtǐ xiàoguǒ. rúguǒ chóngxīn zuò, wǒ huì jiànlì yí gè gèng wánshàn de guīyīn móxíng, zhèyàng néng gèng jīngquè de pínggū měi gè hézuò fāng de tóurù chǎnchū bǐ, yě wèi xià cì de yùsuàn fēnpèi tígōng gèng kěkào de yījù.",
+                        "text_en": "The biggest weakness was insufficient data tracking granularity. We only looked at overall conversion rates but didn't break down each influencer's specific contribution. If I did it again, I'd build a better attribution model — that way we could evaluate each partner's ROI more precisely and have better data for future budget decisions.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Specific weakness, analytical reasoning, concrete improvement plan — Director Fang writes in her notebook again. Two notes in one interview is her equivalent of a standing ovation."
+                    },
+                    {
+                        "text_zh": "数据分析方面可以做得更好。下次会多投入一些在这方面。",
+                        "text_pinyin": "shùjù fēnxī fāngmiàn kěyǐ zuò de gèng hǎo. xià cì huì duō tóurù yìxiē zài zhè fāngmiàn.",
+                        "text_en": "The data analysis could have been better. I'd invest more in that next time.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Honest but vague. She appreciates the self-awareness but wants the specifics."
+                    },
+                    {
+                        "text_zh": "总体来说效果很好，没什么太大的问题。",
+                        "text_pinyin": "zǒngtǐ lái shuō xiàoguǒ hěn hǎo, méi shénme tài dà de wèntí.",
+                        "text_en": "Overall it went well — no major issues.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "No project is without flaws. Director Fang's tea cup pauses midway to her lips — the absence of self-criticism is itself a data point."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "归因模型确实是很多团队忽略的。那谈谈你对这个岗位的理解吧。你看过我们的职位描述，你觉得这个角色最大的挑战会是什么？",
+                "text_pinyin": "guīyīn móxíng quèshí shì hěn duō tuánduì hūlüè de. nà tántan nǐ duì zhège gǎngwèi de lǐjiě ba. nǐ kàn guò wǒmen de zhíwèi miáoshù, nǐ juéde zhège juésè zuì dà de tiǎozhàn huì shì shénme?",
+                "text_en": "Attribution models are indeed overlooked by many teams. Now, let's talk about your understanding of this role. You've seen our job description — what do you think the biggest challenge of this position would be?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Analyze the role's challenges.",
+                "options": [
+                    {
+                        "text_zh": "我觉得最大的挑战是如何在不同市场之间保持品牌调性的一致性。贵公司面向的市场很多元——东南亚、中东、拉美——每个地区的消费者心理和文化敏感度都不一样。如何在本地化和品牌统一之间找到平衡点，这需要既有策略眼光又有执行的灵活性。",
+                        "text_pinyin": "wǒ juéde zuì dà de tiǎozhàn shì rúhé zài bùtóng shìchǎng zhījiān bǎochí pǐnpái diàoxìng de yīzhìxìng. guì gōngsī miànxiàng de shìchǎng hěn duōyuán——Dōngnányà, Zhōngdōng, Lādīng Měizhōu——měi gè dìqū de xiāofèizhě xīnlǐ hé wénhuà mǐngǎndù dōu bù yíyàng. rúhé zài běndìhuà hé pǐnpái tǒngyī zhījiān zhǎo dào pínghéng diǎn, zhè xūyào jì yǒu cèlüè yǎnguāng yòu yǒu zhíxíng de línghuóxìng.",
+                        "text_en": "I think the biggest challenge is maintaining brand consistency across different markets. Your company targets diverse markets — Southeast Asia, Middle East, Latin America — each with different consumer psychology and cultural sensitivities. Finding the balance between localization and brand unity requires both strategic vision and execution flexibility.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Market-specific analysis that demonstrates research and strategic thinking — Director Fang closes her notebook. She's heard enough to make her assessment."
+                    },
+                    {
+                        "text_zh": "应该是跨文化沟通吧。不同的市场需要不同的方法。",
+                        "text_pinyin": "yīnggāi shì kuà wénhuà gōutōng ba. bùtóng de shìchǎng xūyào bùtóng de fāngfǎ.",
+                        "text_en": "Probably cross-cultural communication. Different markets need different approaches.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Correct direction but needs depth. She'll probe for specifics."
+                    },
+                    {
+                        "text_zh": "我觉得挑战不大，我有信心能做好。",
+                        "text_pinyin": "wǒ juéde tiǎozhàn bú dà, wǒ yǒu xìnxīn néng zuò hǎo.",
+                        "text_en": "I don't think it's too challenging — I'm confident I can handle it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Confidence without analysis. Director Fang's expression doesn't change, but her pen cap goes back on — the interview has shifted."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "本地化和统一性的平衡，说得好。最后一个问题——也是我最喜欢问的：你有什么问题想问我的？关于团队、公司、或者这个岗位本身，都可以。",
+                "text_pinyin": "běndìhuà hé tǒngyīxìng de pínghéng, shuō de hǎo. zuìhòu yí gè wèntí——yě shì wǒ zuì xǐhuan wèn de: nǐ yǒu shénme wèntí xiǎng wèn wǒ de? guānyú tuánduì, gōngsī, huòzhě zhège gǎngwèi běnshēn, dōu kěyǐ.",
+                "text_en": "Balancing localization and unity — well said. Last question — and my favorite to ask: do you have any questions for me? About the team, the company, or the role itself — anything."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask a thoughtful question about the company or role.",
+                "options": [
+                    {
+                        "text_zh": "我想了解一下，贵公司在评估市场团队绩效的时候，除了传统的KPI以外，还会看哪些维度？我问这个是因为我觉得品牌建设的很多价值是长期的，不一定能在短期数据里体现出来。您怎么看待这种短期指标和长期价值之间的张力？",
+                        "text_pinyin": "wǒ xiǎng liǎojiě yíxià, guì gōngsī zài pínggū shìchǎng tuánduì jìxiào de shíhòu, chúle chuántǒng de KPI yǐwài, hái huì kàn nǎxiē wéidù? wǒ wèn zhège shì yīnwèi wǒ juéde pǐnpái jiànshè de hěn duō jiàzhí shì chángqī de, bù yídìng néng zài duǎnqī shùjù lǐ tǐxiàn chūlái. nín zěnme kàndài zhè zhǒng duǎnqī zhǐbiāo hé chángqī jiàzhí zhījiān de zhānglì?",
+                        "text_en": "I'd like to know: besides traditional KPIs, what other dimensions does the company use to evaluate the marketing team's performance? I ask because I believe much of brand building's value is long-term and may not show up in short-term data. How do you view the tension between short-term metrics and long-term value?",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "A question that reveals strategic maturity and intellectual curiosity — Director Fang leans forward. This is the moment she's been waiting for: when the interview becomes a real conversation."
+                    },
+                    {
+                        "text_zh": "团队有多少人？工作氛围怎么样？",
+                        "text_pinyin": "tuánduì yǒu duōshǎo rén? gōngzuò fēnwéi zěnmeyàng?",
+                        "text_en": "How big is the team? What's the work atmosphere like?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Standard questions. She answers accurately but the conversation stays at the surface."
+                    },
+                    {
+                        "text_zh": "没什么问题了。",
+                        "text_pinyin": "méi shénme wèntí le.",
+                        "text_en": "No questions.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "No questions is itself an answer. Director Fang notes it. The empty desk feels emptier."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个问题问得很好。我们确实在探索更综合的评估体系……（详细回答后）好，今天的面试就到这里。整体感觉不错。我们会在一周之内通知结果。你有我助理的联系方式吗？如果有任何问题可以随时联系。",
+                "text_pinyin": "zhège wèntí wèn de hěn hǎo. wǒmen quèshí zài tànsuǒ gèng zōnghé de pínggū tǐxì……(xiángxì huídá hòu) hǎo, jīntiān de miànshì jiù dào zhèlǐ. zhěngtǐ gǎnjué búcuò. wǒmen huì zài yì zhōu zhī nèi tōngzhī jiéguǒ. nǐ yǒu wǒ zhùlǐ de liánxì fāngshì ma? rúguǒ yǒu rènhé wèntí kěyǐ suíshí liánxì.",
+                "text_en": "(After a detailed response) OK, that wraps up today's interview. Good overall impression. We'll notify you of the result within a week. Do you have my assistant's contact info? Feel free to reach out with any questions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and close professionally.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢方总监，今天的交流让我对这个岗位和公司有了更深的了解，也更坚定了我想加入的想法。助理的联系方式我有了。无论结果如何，今天的对话对我来说都很有收获。期待您的消息。",
+                        "text_pinyin": "fēicháng gǎnxiè Fāng zǒngjiān, jīntiān de jiāoliú ràng wǒ duì zhège gǎngwèi hé gōngsī yǒu le gèng shēn de liǎojiě, yě gèng jiāndìng le wǒ xiǎng jiārù de xiǎngfǎ. zhùlǐ de liánxì fāngshì wǒ yǒu le. wúlùn jiéguǒ rúhé, jīntiān de duìhuà duì wǒ lái shuō dōu hěn yǒu shōuhuò. qīdài nín de xiāoxi.",
+                        "text_en": "Thank you very much Director Fang. Today's conversation deepened my understanding of the role and the company, and strengthened my desire to join. I have your assistant's contact. Regardless of the outcome, this conversation has been truly valuable. I look forward to hearing from you.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Graceful, specific, and genuine — Director Fang stands to shake your hand. In her ninety-second assessment, you passed. The remaining fifty-eight minutes confirmed it."
+                    },
+                    {
+                        "text_zh": "谢谢！期待好消息。",
+                        "text_pinyin": "xièxie! qīdài hǎo xiāoxi.",
+                        "text_en": "Thanks! Looking forward to good news.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Optimistic. She escorts you to the door with a professional smile."
+                    },
+                    {
+                        "text_zh": "好的，那我先走了。",
+                        "text_pinyin": "hǎo de, nà wǒ xiān zǒu le.",
+                        "text_en": "OK, I'll head out then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Abrupt endings in interviews leave the wrong final impression. She makes a small note — the last note matters as much as the first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese job interviews (面试) at larger companies often involve behavioral questions and case analysis. Using 贵公司 (guì gōngsī, 'your esteemed company') shows respect. The phrase 期待您的消息 (qīdài nín de xiāoxi) is the standard professional sign-off. Follow-up thank-you messages via WeChat are increasingly common."
+    }
+}

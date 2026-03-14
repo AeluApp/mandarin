@@ -1,0 +1,196 @@
+{
+    "title": "The Interview Garden",
+    "title_zh": "面试花园",
+    "hsk_level": 4,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_business_4_00_v0",
+    "tree": {
+        "setup": "A corner office on the eighth floor of a design firm, where someone has placed a small bamboo plant on every windowsill. Ms. Chen Mei, the hiring manager, interviews candidates the way a gardener evaluates seedlings — not for what they are now, but for what they might become. She offers you tea before a single question.",
+        "setup_zh": "一家设计公司八楼的角落办公室，每个窗台上都摆着一盆小竹子。招聘经理陈梅面试候选人就像园丁挑选树苗——看的不是现在，而是将来。她在提问之前先给你倒了茶。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐，先喝口茶。你可以先自我介绍一下吗？",
+                "text_pinyin": "qǐng zuò, xiān hē kǒu chá. nǐ kěyǐ xiān zìwǒ jièshào yíxià ma?",
+                "text_en": "Please sit down and have some tea first. Could you introduce yourself?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself professionally.",
+                "options": [
+                    {
+                        "text_zh": "谢谢。我叫……，去年从大学毕业，学的是设计。我对你们公司的项目很感兴趣。",
+                        "text_pinyin": "xièxie. wǒ jiào……, qùnián cóng dàxué bìyè, xué de shì shèjì. wǒ duì nǐmen gōngsī de xiàngmù hěn gǎn xìngqù.",
+                        "text_en": "Thank you. My name is... I graduated from university last year, majoring in design. I'm very interested in your company's projects.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Structured and warm. Ms. Chen sets down her pen — she's listening rather than just taking notes."
+                    },
+                    {
+                        "text_zh": "我是设计专业的，想来你们公司工作。",
+                        "text_pinyin": "wǒ shì shèjì zhuānyè de, xiǎng lái nǐmen gōngsī gōngzuò.",
+                        "text_en": "I studied design, and I want to work at your company.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Direct but a bit thin. She'll want to know more, but the honesty is refreshing."
+                    },
+                    {
+                        "text_zh": "嗯……我不太会自我介绍。我很喜欢设计。",
+                        "text_pinyin": "ǹg……wǒ bú tài huì zìwǒ jièshào. wǒ hěn xǐhuān shèjì.",
+                        "text_en": "Um... I'm not great at introducing myself. I really like design.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The honesty is endearing. Ms. Chen smiles — she was once equally nervous in this exact chair."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很好。你以前有没有工作经验？实习也算。",
+                "text_pinyin": "hěn hǎo. nǐ yǐqián yǒu méiyǒu gōngzuò jīngyàn? shíxí yě suàn.",
+                "text_en": "Good. Do you have any work experience? Internships count too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your experience.",
+                "options": [
+                    {
+                        "text_zh": "我在一家小公司实习过半年，主要做网页设计。学到了很多实际的东西。",
+                        "text_pinyin": "wǒ zài yì jiā xiǎo gōngsī shíxí guò bàn nián, zhǔyào zuò wǎngyè shèjì. xué dào le hěn duō shíjì de dōngxi.",
+                        "text_en": "I interned at a small company for six months, mainly doing web design. I learned a lot of practical things.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Specific and grounded. She makes a small note: 「实践经验。」"
+                    },
+                    {
+                        "text_zh": "我做过一些实习。",
+                        "text_pinyin": "wǒ zuò guò yìxiē shíxí.",
+                        "text_en": "I've done some internships.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "True but vague. She'll ask for details, which is fine — she's patient."
+                    },
+                    {
+                        "text_zh": "没有正式的工作经验，但是我在学校做过很多项目。",
+                        "text_pinyin": "méiyǒu zhèngshì de gōngzuò jīngyàn, dànshì wǒ zài xuéxiào zuò guò hěn duō xiàngmù.",
+                        "text_en": "No formal work experience, but I did many projects at school.",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Honest. Ms. Chen respects that more than embellishment — she's seen enough decorated resumes."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不错。你觉得你最大的优点是什么？",
+                "text_pinyin": "búcuò. nǐ juéde nǐ zuìdà de yōudiǎn shì shénme?",
+                "text_en": "Not bad. What do you think is your greatest strength?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your greatest strength.",
+                "options": [
+                    {
+                        "text_zh": "我觉得我比较认真，而且愿意学新的东西。遇到问题不会轻易放弃。",
+                        "text_pinyin": "wǒ juéde wǒ bǐjiào rènzhēn, érqiě yuànyì xué xīn de dōngxi. yùdào wèntí bú huì qīngyì fàngqì.",
+                        "text_en": "I think I'm quite conscientious, and willing to learn new things. I don't give up easily when facing problems.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "认真 and persistence — the bamboo-plant qualities Ms. Chen looks for. She nods slowly."
+                    },
+                    {
+                        "text_zh": "我工作很努力。",
+                        "text_pinyin": "wǒ gōngzuò hěn nǔlì.",
+                        "text_en": "I work very hard.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Everyone says this, but the way you say it — without bravado — makes her believe you."
+                    },
+                    {
+                        "text_zh": "我不确定……可能是我的创意？",
+                        "text_pinyin": "wǒ bú quèdìng……kěnéng shì wǒ de chuàngyì?",
+                        "text_en": "I'm not sure... maybe my creativity?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The question mark at the end is almost audible. But 创意 is exactly what a design firm needs — own it more next time."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "最后一个问题——你有什么想问我的吗？",
+                "text_pinyin": "zuìhòu yí gè wèntí — nǐ yǒu shénme xiǎng wèn wǒ de ma?",
+                "text_en": "Last question — is there anything you'd like to ask me?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask a thoughtful question about the company.",
+                "options": [
+                    {
+                        "text_zh": "请问新员工一般会参加什么样的培训？我想知道公司怎么帮助新人成长。",
+                        "text_pinyin": "qǐngwèn xīn yuángōng yìbān huì cānjiā shénme yàng de péixùn? wǒ xiǎng zhīdào gōngsī zěnme bāngzhù xīnrén chéngzhǎng.",
+                        "text_en": "What kind of training do new employees usually receive? I'd like to know how the company helps newcomers grow.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "A question about growth — Ms. Chen's favorite topic. The bamboo on the windowsill seems to lean toward you approvingly."
+                    },
+                    {
+                        "text_zh": "请问上班时间是几点到几点？",
+                        "text_pinyin": "qǐngwèn shàngbān shíjiān shì jǐ diǎn dào jǐ diǎn?",
+                        "text_en": "What are the working hours?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Practical, but she was hoping for something that showed more curiosity about the work itself."
+                    },
+                    {
+                        "text_zh": "没有了，谢谢。",
+                        "text_pinyin": "méiyǒu le, xièxie.",
+                        "text_en": "No, thank you.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An interview without questions is like a garden without rain. Ms. Chen writes a small note, but her smile doesn't waver."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好问题。我们有三个月的培训计划。谢谢你来面试，我们会尽快通知你结果的。",
+                "text_pinyin": "hǎo wèntí. wǒmen yǒu sān gè yuè de péixùn jìhuà. xièxie nǐ lái miànshì, wǒmen huì jǐnkuài tōngzhī nǐ jiéguǒ de.",
+                "text_en": "Good question. We have a three-month training program. Thank you for coming — we'll notify you of the result as soon as possible."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and say goodbye.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您，陈经理。今天跟您聊得很愉快，期待您的回复。",
+                        "text_pinyin": "xièxie nín, Chén jīnglǐ. jīntiān gēn nín liáo de hěn yúkuài, qīdài nín de huífù.",
+                        "text_en": "Thank you, Manager Chen. I enjoyed our conversation today and look forward to your reply.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Graceful exit. Ms. Chen watches you leave and waters the nearest bamboo — her way of saying the interview went well."
+                    },
+                    {
+                        "text_zh": "谢谢，再见！",
+                        "text_pinyin": "xièxie, zàijiàn!",
+                        "text_en": "Thank you, goodbye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Polite and clean. She files your resume near the top of the stack."
+                    },
+                    {
+                        "text_zh": "好的，那我走了。",
+                        "text_pinyin": "hǎo de, nà wǒ zǒu le.",
+                        "text_en": "OK, I'll be going then.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "A bit abrupt for a formal setting, but Ms. Chen is forgiving. The bamboo, however, is not."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese interviews, it's common for the interviewer to offer tea (请喝茶) as a gesture of hospitality. Asking about 培训 (péixùn, training) shows you're thinking long-term, which employers value highly."
+    }
+}

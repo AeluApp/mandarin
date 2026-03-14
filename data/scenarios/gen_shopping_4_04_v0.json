@@ -1,0 +1,160 @@
+{
+    "title": "The Online Shopping Sherpa",
+    "title_zh": "网购向导",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_4_04_v0",
+    "tree": {
+        "setup": "Your apartment, evening. Your friend Xiao Ling is visiting, and you've been trying to order a bookshelf on Taobao for twenty minutes. The number of options is paralyzing — there are bookshelves in every material, color, and philosophical orientation. Xiao Ling, who once described online shopping as 'the only sport that matters,' takes control of your laptop with the confidence of a surgeon.",
+        "setup_zh": "你的公寓，傍晚。朋友小玲来做客，你已经在淘宝上试着买书架二十分钟了。选项多得让人瘫痪——每种材料、颜色和哲学取向的书架都有。小玲曾经把网购描述为「唯一重要的运动」，她带着外科医生的自信接管了你的笔记本电脑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你这样选要选到明天。让我来。你要什么样的书架？多大的？",
+                "text_pinyin": "nǐ zhèyàng xuǎn yào xuǎn dào míngtiān. ràng wǒ lái. nǐ yào shénme yàng de shūjià? duō dà de?",
+                "text_en": "At this rate you'll be shopping until tomorrow. Let me handle it. What kind of bookshelf? How big?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe what you want.",
+                "options": [
+                    {
+                        "text_zh": "我想要一个木头的，不要太大，能放在卧室角落里的那种。预算大概三百块以内。",
+                        "text_pinyin": "wǒ xiǎng yào yí gè mùtou de, búyào tài dà, néng fàng zài wòshì jiǎoluò lǐ de nà zhǒng. yùsuàn dàgài sānbǎi kuài yǐnèi.",
+                        "text_en": "I want a wooden one, not too big — the kind that fits in a bedroom corner. Budget around 300 yuan or less.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Material, size, location, budget — Xiao Ling's fingers fly across the keyboard. She filters with surgical precision."
+                    },
+                    {
+                        "text_zh": "小一点的，便宜的。",
+                        "text_pinyin": "xiǎo yìdiǎn de, piányi de.",
+                        "text_en": "Small and cheap.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Two filters applied. She sorts by price and narrows the list to thirty-seven options in three seconds."
+                    },
+                    {
+                        "text_zh": "我不知道，好看的就行。",
+                        "text_pinyin": "wǒ bù zhīdào, hǎokàn de jiù xíng.",
+                        "text_en": "I don't know — anything that looks good.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ling stares at you with the expression of a surgeon who's been told to 'cut wherever.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看，这个怎么样？竹子的，四层，评价4.9分。二百六十八块。还包邮。",
+                "text_pinyin": "kàn, zhège zěnmeyàng? zhúzi de, sì céng, píngjià sì diǎn jiǔ fēn. èrbǎi liùshíbā kuài. hái bāo yóu.",
+                "text_en": "Look, how about this one? Bamboo, four shelves, rated 4.9 stars. 268 yuan. Free shipping too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Evaluate the option.",
+                "options": [
+                    {
+                        "text_zh": "评价不错。让我看看买家评论……有没有说质量怎么样的？",
+                        "text_pinyin": "píngjià búcuò. ràng wǒ kànkan mǎijiā pínglùn……yǒu méiyǒu shuō zhìliàng zěnmeyàng de?",
+                        "text_en": "Good rating. Let me check buyer reviews... any that mention the quality?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Checking reviews — the mark of an evolving online shopper. Xiao Ling scrolls to the photo reviews and nods."
+                    },
+                    {
+                        "text_zh": "看起来可以。",
+                        "text_pinyin": "kàn qǐlái kěyǐ.",
+                        "text_en": "Looks OK.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Passive approval. She adds it to the cart but keeps looking — a true shopper never stops at the first option."
+                    },
+                    {
+                        "text_zh": "竹子的会不会不结实？",
+                        "text_pinyin": "zhúzi de huì bú huì bù jiēshi?",
+                        "text_en": "Wouldn't bamboo be flimsy?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ling shows you a review where someone put thirty books on it. Bamboo is surprisingly sturdy, like certain friendships."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "买家说质量不错，而且组装很简单。对了，你有没有优惠券？我帮你领一张。",
+                "text_pinyin": "mǎijiā shuō zhìliàng búcuò, érqiě zǔzhuāng hěn jiǎndān. duìle, nǐ yǒu méiyǒu yōuhuì quàn? wǒ bāng nǐ lǐng yì zhāng.",
+                "text_en": "Buyers say quality is good and assembly is simple. Oh, do you have any coupons? Let me find one for you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about coupons and confirm the purchase.",
+                "options": [
+                    {
+                        "text_zh": "我不知道怎么领优惠券。你帮我弄吧。能省多少？",
+                        "text_pinyin": "wǒ bù zhīdào zěnme lǐng yōuhuì quàn. nǐ bāng wǒ nòng ba. néng shěng duōshǎo?",
+                        "text_en": "I don't know how to get coupons. Help me out. How much can I save?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Admitting ignorance and asking for help — Xiao Ling clicks three buttons and saves you twenty yuan with the satisfaction of a treasure hunter."
+                    },
+                    {
+                        "text_zh": "直接买吧，不用优惠券了。",
+                        "text_pinyin": "zhíjiē mǎi ba, búyòng yōuhuì quàn le.",
+                        "text_en": "Just buy it — skip the coupon.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ling physically cannot let you pay full price. She finds a coupon anyway."
+                    },
+                    {
+                        "text_zh": "优惠券是什么？",
+                        "text_pinyin": "yōuhuì quàn shì shénme?",
+                        "text_en": "What's a coupon?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ling turns to you slowly. She has never been more motivated to teach someone anything."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "领好了！减二十块。现在只要二百四十八。我帮你下单了？",
+                "text_pinyin": "lǐng hǎo le! jiǎn èrshí kuài. xiànzài zhǐ yào èrbǎi sìshíbā. wǒ bāng nǐ xià dān le?",
+                "text_en": "Got it! Twenty off. Now it's just 248. Shall I place the order?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the order.",
+                "options": [
+                    {
+                        "text_zh": "下单吧！谢谢你，小玲。没有你我可能真的要选到明天。",
+                        "text_pinyin": "xià dān ba! xièxie nǐ, Xiǎo Líng. méiyǒu nǐ wǒ kěnéng zhēnde yào xuǎn dào míngtiān.",
+                        "text_en": "Place the order! Thanks, Xiao Ling. Without you I really would have been shopping until tomorrow.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ling clicks 'confirm' with the triumphant energy of someone crossing a finish line. The bookshelf will arrive in three days."
+                    },
+                    {
+                        "text_zh": "好，买。",
+                        "text_pinyin": "hǎo, mǎi.",
+                        "text_en": "OK, buy it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "One click. Done. She closes the laptop with the finality of closing a case file."
+                    },
+                    {
+                        "text_zh": "等一下，我再看看别的……",
+                        "text_pinyin": "děng yíxià, wǒ zài kànkan bié de……",
+                        "text_en": "Wait, let me look at others...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ling closes the laptop.「不行。你已经看了二十分钟了。这个就是最好的。买。」She has spoken."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Taobao (淘宝) is China's largest online marketplace. Key shopping vocabulary: 评价 (píngjià, reviews), 包邮 (bāo yóu, free shipping), 优惠券 (yōuhuì quàn, coupons), 下单 (xià dān, place an order). Buyer photo reviews (买家秀) are considered more reliable than text reviews."
+    }
+}

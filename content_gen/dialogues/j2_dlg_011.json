@@ -1,0 +1,83 @@
+{
+  "title": "The Slow Train",
+  "title_zh": "慢火车",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're on a slow train through the countryside. The passenger across from you opens a conversation.",
+    "setup_zh": "你坐慢车穿过乡下。对面的乘客跟你聊了起来。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你去哪里？这趟车走得很慢，不过可以看风景。",
+        "text_pinyin": "Nǐ qù nǎlǐ? Zhè tàng chē zǒu de hěn màn, búguò kěyǐ kàn fēngjǐng.",
+        "text_en": "Where are you going? This train is very slow, but you can see the scenery."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him your destination and how you feel about the trip.",
+        "options": [
+          {
+            "text_zh": "我去下一站。慢一点也好，窗外的风景真好看。",
+            "text_pinyin": "Wǒ qù xià yī zhàn. Màn yīdiǎn yě hǎo, chuāng wài de fēngjǐng zhēn hǎokàn.",
+            "text_en": "I'm going to the next stop. Slow is fine — the scenery outside is beautiful.",
+            "score": 1.0,
+            "feedback": "Relaxed and present — enjoys the journey.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不喜欢坐火车。",
+            "text_pinyin": "Wǒ bù xǐhuan zuò huǒchē.",
+            "text_en": "I don't like taking trains.",
+            "score": 0.0,
+            "feedback": "You're already on the train."
+          },
+          {
+            "text_zh": "你的行李很多。",
+            "text_pinyin": "Nǐ de xíngli hěn duō.",
+            "text_en": "You have a lot of luggage.",
+            "score": 0.0,
+            "feedback": "A bit rude and doesn't answer his question."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊，现在大家都坐高铁了。但是我觉得慢车有慢车的好。能看到很多小地方。",
+        "text_pinyin": "Shì a, xiànzài dàjiā dōu zuò gāotiě le. Dànshì wǒ juéde màn chē yǒu màn chē de hǎo. Néng kàn dào hěn duō xiǎo dìfang.",
+        "text_en": "Yeah, everyone takes the high-speed train now. But I think slow trains have their own charm. You can see lots of small places."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your perspective on slow travel.",
+        "options": [
+          {
+            "text_zh": "我也这样觉得。有时候慢一点，反而能看到更多。",
+            "text_pinyin": "Wǒ yě zhèyàng juéde. Yǒu shíhou màn yīdiǎn, fǎn'ér néng kàn dào gèng duō.",
+            "text_en": "I feel the same. Sometimes going slower, you actually see more.",
+            "score": 1.0,
+            "feedback": "— connects with his philosophy.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "高铁比较贵。",
+            "text_pinyin": "Gāotiě bǐjiào guì.",
+            "text_en": "High-speed trains are more expensive.",
+            "score": 0.0,
+            "feedback": "He's talking about the charm of slow travel, not cost."
+          },
+          {
+            "text_zh": "我想睡觉了。",
+            "text_pinyin": "Wǒ xiǎng shuìjiào le.",
+            "text_en": "I want to sleep.",
+            "score": 0.0,
+            "feedback": "Ends the conversation abruptly."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "China's slow trains (慢车/绿皮车) are a nostalgic counterpoint to the high-speed rail network. They stop at small towns the bullet trains skip, carrying farmers, students, and travelers who prefer the unhurried pace. Conversations between strangers flow easily."
+  }
+}

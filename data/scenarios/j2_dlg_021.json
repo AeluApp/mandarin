@@ -1,0 +1,83 @@
+{
+  "title": "The Kite on the Hill",
+  "title_zh": "山坡上的风筝",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "On a windy afternoon, you walk to a hill where a grandfather is flying a kite with his granddaughter.",
+    "setup_zh": "一个有风的下午，你走到一个小山坡，看到一位爷爷在和孙女放风筝。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也来放风筝吗？今天的风很好！",
+        "text_pinyin": "Nǐ yě lái fàng fēngzhēng ma? Jīntiān de fēng hěn hǎo!",
+        "text_en": "Are you here to fly kites too? The wind is great today!"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him why you're here.",
+        "options": [
+          {
+            "text_zh": "我来散步的。你们的风筝飞得好高！",
+            "text_pinyin": "Wǒ lái sànbù de. Nǐmen de fēngzhēng fēi de hǎo gāo!",
+            "text_en": "I'm here for a walk. Your kite is flying so high!",
+            "score": 1.0,
+            "feedback": "Friendly and observant — compliments their kite.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我没有风筝。",
+            "text_pinyin": "Wǒ méiyǒu fēngzhēng.",
+            "text_en": "I don't have a kite.",
+            "score": 0.0,
+            "feedback": "He asked if you're here to fly kites, and a simple no would be better."
+          },
+          {
+            "text_zh": "这个山不高。",
+            "text_pinyin": "Zhège shān bù gāo.",
+            "text_en": "This hill isn't very high.",
+            "score": 0.0,
+            "feedback": "Irrelevant to the conversation about kites."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "这个风筝是我自己做的。小时候我爷爷教我做的。现在我教我孙女。",
+        "text_pinyin": "Zhège fēngzhēng shì wǒ zìjǐ zuò de. Xiǎo shíhou wǒ yéye jiāo wǒ zuò de. Xiànzài wǒ jiāo wǒ sūnnǚ.",
+        "text_en": "I made this kite myself. My grandfather taught me when I was little. Now I'm teaching my granddaughter."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the generational story.",
+        "options": [
+          {
+            "text_zh": "三代人传下来的，真好。她一定很开心。",
+            "text_pinyin": "Sān dài rén chuán xiàlái de, zhēn hǎo. Tā yīdìng hěn kāixīn.",
+            "text_en": "Three generations passing it down — that's wonderful. She must be so happy.",
+            "score": 1.0,
+            "feedback": "Moved — recognizes the beauty of the tradition.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "买一个比较方便。",
+            "text_pinyin": "Mǎi yī ge bǐjiào fāngbiàn.",
+            "text_en": "Buying one is more convenient.",
+            "score": 0.0,
+            "feedback": "The grandfather glances at his granddaughter, then back at you — a quiet pause where the warmth of the moment slips away."
+          },
+          {
+            "text_zh": "我该回去了。",
+            "text_pinyin": "Wǒ gāi huíqù le.",
+            "text_en": "I should head back.",
+            "score": 0.0,
+            "feedback": "Leaves during a touching story."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Kite flying is an ancient Chinese tradition dating back over 2,000 years. Hand-making kites and teaching the craft to grandchildren represents the passage of knowledge and love between generations. Windy hills are gathering places for this timeless activity."
+  }
+}

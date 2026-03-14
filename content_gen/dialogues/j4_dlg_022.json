@@ -1,0 +1,83 @@
+{
+  "title": "The Old Courtyard",
+  "title_zh": "老院子",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You've wandered into an old courtyard in a quiet part of the city. A retired music teacher, Mr. Luo, is sitting there playing an erhu. The music is slow and gentle.",
+    "setup_zh": "你走进了城市安静角落的一个老院子。一位退休的音乐老师罗先生正坐在那里拉二胡。音乐缓慢而温柔。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "啊，进来坐吧，不用客气。我每天下午在这里拉一会儿。不是为了给谁听，就是觉得这个院子太安静了，需要一点声音。",
+        "text_pinyin": "A, jìnlái zuò ba, bú yòng kèqi. Wǒ měi tiān xiàwǔ zài zhèlǐ lā yīhuìr. Bú shì wèi le gěi shéi tīng, jiù shì juéde zhège yuànzi tài ānjìng le, xūyào yīdiǎn shēngyīn.",
+        "text_en": "Ah, come in and sit. No need to be polite. I play a bit here every afternoon. Not for anyone in particular — I just feel this courtyard is too quiet and needs a little sound."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his playing.",
+        "options": [
+          {
+            "text_zh": "给安静的院子一点声音——这个理由很美。音乐和安静其实不矛盾，好的音乐会让安静变得更丰富，而不是打破它。",
+            "text_pinyin": "Gěi ānjìng de yuànzi yīdiǎn shēngyīn — zhège lǐyóu hěn měi. Yīnyuè hé ānjìng qíshí bù máodùn, hǎo de yīnyuè huì ràng ānjìng biàn de gèng fēngfù, ér bú shì dǎpò tā.",
+            "text_en": "Giving a quiet courtyard some sound — what a beautiful reason. Music and quiet aren't actually contradictory; good music makes the quiet richer, rather than breaking it.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Perceptive — music as enriching silence rather than replacing it."
+          },
+          {
+            "text_zh": "你拉了多少年二胡了？",
+            "text_pinyin": "Nǐ lā le duōshǎo nián èrhú le?",
+            "text_en": "How many years have you played the erhu?",
+            "score": 0.0,
+            "feedback": "Biographical question instead of engaging with his reason for playing."
+          },
+          {
+            "text_zh": "这个院子是谁的？",
+            "text_pinyin": "Zhège yuànzi shì shéi de?",
+            "text_en": "Whose courtyard is this?",
+            "score": 0.0,
+            "feedback": "Ownership question during a musical moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "确实。我教了三十年音乐，最难教学生的就是这个道理——音乐不是噪音，好的音乐知道什么时候停下来。就像说话一样，最重要的不是你说了什么，是你在什么时候不说。",
+        "text_pinyin": "Quèshí. Wǒ jiāo le sānshí nián yīnyuè, zuì nán jiāo xuéshēng de jiù shì zhège dàolǐ — yīnyuè bú shì zàoyīn, hǎo de yīnyuè zhīdào shénme shíhou tíng xiàlái. Jiù xiàng shuōhuà yīyàng, zuì zhòngyào de bú shì nǐ shuō le shénme, shì nǐ zài shénme shíhou bù shuō.",
+        "text_en": "Indeed. I taught music for thirty years, and the hardest thing to teach students was this — music isn't noise, good music knows when to pause. It's like speaking: the most important thing isn't what you say, it's when you stay silent."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his insight about silence in music.",
+        "options": [
+          {
+            "text_zh": "知道什么时候不说——这个道理不只适用于音乐。在生活中也是一样，有时候最好的回应不是说话，而是安静地陪在旁边。",
+            "text_pinyin": "Zhīdào shénme shíhou bù shuō — zhège dàolǐ bù zhǐ shìyòng yú yīnyuè. Zài shēnghuó zhōng yě shì yīyàng, yǒu shíhou zuì hǎo de huíyìng bú shì shuōhuà, ér shì ānjìng de péi zài pángbiān.",
+            "text_en": "Knowing when not to speak — that applies beyond music. In life too, sometimes the best response isn't words, but quietly being there beside someone.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Extends the musical principle to human relationships — presence over speech."
+          },
+          {
+            "text_zh": "你的学生现在都在做什么？",
+            "text_pinyin": "Nǐ de xuéshēng xiànzài dōu zài zuò shénme?",
+            "text_en": "What are your students doing now?",
+            "score": 0.0,
+            "feedback": "Alumni question during a deep insight."
+          },
+          {
+            "text_zh": "二胡难不难学？",
+            "text_pinyin": "Èrhú nán bù nán xué?",
+            "text_en": "Is the erhu hard to learn?",
+            "score": 0.0,
+            "feedback": "Difficulty question that misses the philosophical point."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "The erhu (二胡), a two-stringed Chinese fiddle, is one of the most expressive instruments in Chinese music. Its tone is often compared to the human voice, capable of conveying deep emotion. The concept of silence within music (留白, leaving blank space) parallels the Chinese painting technique of the same name — the idea that what you leave out is as important as what you include."
+  }
+}

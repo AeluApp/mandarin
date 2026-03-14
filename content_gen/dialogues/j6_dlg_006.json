@@ -1,0 +1,117 @@
+{
+    "title": "The Elevator That Thinks",
+    "title_zh": "会思考的电梯",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're stuck in a slow elevator in a Shenzhen tech park with a product manager named Zhao Yue. She's just come from a meeting about an AI-powered elevator system that 'learns' building traffic patterns. She finds the whole concept absurd.",
+        "setup_zh": "你被困在深圳科技园一部很慢的电梯里，同行的是一位叫赵悦的产品经理。她刚从一个关于AI智能电梯系统的会议出来，这个系统据说能'学习'大楼的人流规律。她觉得这个概念太荒谬了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你知道他们现在要给电梯装AI吗？说是可以预测每层楼的用电梯需求，提前把空电梯派过去。我就问了一句：'那如果它预测错了呢？'会议室安静了十秒钟。",
+                "text_pinyin": "Nǐ zhīdào tāmen xiànzài yào gěi diàntī zhuāng AI ma? Shuō shì kěyǐ yùcè měi céng lóu de yòng diàntī xūqiú, tíqián bǎ kōng diàntī pài guòqù. Wǒ jiù wèn le yī jù: 'Nà rúguǒ tā yùcè cuò le ne?' Huìyìshì ānjìng le shí miǎo zhōng.",
+                "text_en": "Did you know they want to install AI in elevators now? Supposedly it can predict elevator demand on each floor and dispatch empty ones in advance. I just asked one question: 'What if it predicts wrong?' The meeting room went silent for ten seconds."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the AI elevator concept.",
+                "options": [
+                    {
+                        "text_zh": "十秒钟的沉默说明他们从来没想过这问题。这是很多AI项目的通病——先假设预测是准的，再倒推产品价值。但电梯不像推荐算法，推荐错了划一下就过去了，电梯预测错了人就在走廊干等。",
+                        "text_pinyin": "Shí miǎo zhōng de chénmò shuōmíng tāmen cónglái méi xiǎng guò zhè wèntí. Zhè shì hěn duō AI xiàngmù de tōngbìng — xiān jiǎshè yùcè shì zhǔn de, zài dào tuī chǎnpǐn jiàzhí. Dàn diàntī bù xiàng tuījiàn suànfǎ, tuījiàn cuò le huá yīxià jiù guòqù le, diàntī yùcè cuò le rén jiù zài zǒuláng gān děng.",
+                        "text_en": "Ten seconds of silence means they never considered this. Common AI flaw — assume predictions are accurate, then reverse-engineer value. But elevators aren't recommendation algorithms; wrong predictions mean people waiting in hallways.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp structural critique — distinguishes between low-cost and high-cost prediction failures."
+                    },
+                    {
+                        "text_zh": "这栋楼有多少层？",
+                        "text_pinyin": "Zhè dòng lóu yǒu duōshǎo céng?",
+                        "text_en": "How many floors does this building have?",
+                        "score": 0.0,
+                        "feedback": "She's making a point about tech absurdity and you ask about building specs."
+                    },
+                    {
+                        "text_zh": "你下班以后一般做什么？",
+                        "text_pinyin": "Nǐ xiàbān yǐhòu yībān zuò shénme?",
+                        "text_en": "What do you usually do after work?",
+                        "score": 0.0,
+                        "feedback": "Generic after-work question that ignores the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "而且你有没有发现，所有这些'智能'产品，最后都是在要求用户配合机器。以前是机器为人服务，现在变成了人得按机器的逻辑行动。你得在它'期望'你出现的时间出现在它'预测'你会去的楼层。",
+                "text_pinyin": "Érqiě nǐ yǒu méiyǒu fāxiàn, suǒyǒu zhèxiē 'zhìnéng' chǎnpǐn, zuìhòu dōu shì zài yāoqiú yònghù pèihé jīqì. Yǐqián shì jīqì wèi rén fúwù, xiànzài biàn chéng le rén děi àn jīqì de luójí xíngdòng. Nǐ děi zài tā 'qīwàng' nǐ chūxiàn de shíjiān chūxiàn zài tā 'yùcè' nǐ huì qù de lóucéng.",
+                "text_en": "And have you noticed — all these 'smart' products end up demanding that users accommodate the machine. It used to be machines serving people; now people have to act according to the machine's logic. You need to appear at the time it 'expects' you, on the floor it 'predicts' you'll go to."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Build on her observation about humans serving machines.",
+                "options": [
+                    {
+                        "text_zh": "这是一种很微妙的权力翻转。卖这些系统时说的都是'提升效率''优化体验'，但实际上是在要求人类变得更可预测。如果你不符合模型的假设，不是模型有问题——是你有问题。",
+                        "text_pinyin": "Zhè shì yī zhǒng hěn wēimiào de quánlì fānzhuǎn. Mài zhèxiē xìtǒng shí shuō de dōu shì 'tíshēng xiàolǜ' 'yōuhuà tǐyàn', dàn shíjì shàng shì zài yāoqiú rénlèi biàn de gèng kě yùcè. Rúguǒ nǐ bù fúhé móxíng de jiǎshè, bú shì móxíng yǒu wèntí — shì nǐ yǒu wèntí.",
+                        "text_en": "A subtle power inversion. When selling these systems they say 'improving efficiency,' but they're demanding humans become more predictable. If you don't fit the model's assumptions, the model doesn't have a problem — you do.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Excellent escalation — names the ideological inversion at the heart of predictive tech."
+                    },
+                    {
+                        "text_zh": "你觉得5G以后网速会更快吗？",
+                        "text_pinyin": "Nǐ juéde 5G yǐhòu wǎngsù huì gèng kuài ma?",
+                        "text_en": "Do you think internet speeds will be faster with 5G?",
+                        "score": 0.0,
+                        "feedback": "Surface-level tech question that misses the philosophical thread."
+                    },
+                    {
+                        "text_zh": "这个电梯怎么这么慢啊？",
+                        "text_pinyin": "Zhège diàntī zěnme zhème màn a?",
+                        "text_en": "Why is this elevator so slow?",
+                        "score": 0.0,
+                        "feedback": "Stating the obvious rather than engaging with the ideas."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哈，'是你有问题'——这句话太准了。有时候我在公司开会，提出一个质疑，对方就说'你这个场景不是主流用户行为'。意思就是：你的需求不在模型里，所以你的需求不存在。",
+                "text_pinyin": "Hā, 'shì nǐ yǒu wèntí' — zhè jù huà tài zhǔn le. Yǒu shíhou wǒ zài gōngsī kāihuì, tíchū yīge zhìyí, duìfāng jiù shuō 'nǐ zhège chǎngjǐng bú shì zhǔliú yònghù xíngwéi'. Yìsi jiù shì: nǐ de xūqiú bú zài móxíng lǐ, suǒyǐ nǐ de xūqiú bù cúnzài.",
+                "text_en": "Ha, 'it's you that has a problem' — that's so accurate. Sometimes in meetings at work, I raise a concern and the response is 'that scenario isn't mainstream user behavior.' Which means: your need isn't in the model, so your need doesn't exist."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the epistemological problem she's describing.",
+                "options": [
+                    {
+                        "text_zh": "这其实是一个认识论问题——模型定义了什么是'正常'，然后用这个定义排除异常。但所谓异常，很多时候只是没被统计到的多样性。好的产品应该为意外留余地，而不是把意外当作错误。",
+                        "text_pinyin": "Zhè qíshí shì yīge rènshílùn wèntí — móxíng dìngyì le shénme shì 'zhèngcháng', ránhòu yòng zhège dìngyì páichú yìcháng. Dàn suǒwèi yìcháng, hěn duō shíhou zhǐ shì méi bèi tǒngjì dào de duōyàng xìng. Hǎo de chǎnpǐn yīnggāi wèi yìwài liú yúdì, ér bú shì bǎ yìwài dàng zuò cuòwù.",
+                        "text_en": "This is an epistemological problem — the model defines 'normal,' then uses that definition to exclude anomalies. But anomalies are often diversity that hasn't been counted. Good products should leave room for the unexpected, not treat it as error.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Elevates the conversation to epistemology — reframes 'edge cases' as uncounted diversity."
+                    },
+                    {
+                        "text_zh": "你在这个科技园工作多久了？",
+                        "text_pinyin": "Nǐ zài zhège kējì yuán gōngzuò duōjiǔ le?",
+                        "text_en": "How long have you worked in this tech park?",
+                        "score": 0.0,
+                        "feedback": "Small talk that breaks the intellectual momentum."
+                    },
+                    {
+                        "text_zh": "你用的是什么牌子的手机？",
+                        "text_pinyin": "Nǐ yòng de shì shénme páizi de shǒujī?",
+                        "text_en": "What brand of phone do you use?",
+                        "score": 0.0,
+                        "feedback": "Consumer question irrelevant to the discussion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Shenzhen's tech parks (科技园) are ground zero for China's innovation culture, where the pressure to add AI to every product has created a phenomenon sometimes called '为了AI而AI' (AI for AI's sake). Product managers who question the fundamental assumptions of AI products often face the accusation of being '不够有互联网思维' (lacking internet thinking). The tension between genuine innovation and performative technology is a live debate in Chinese tech culture."
+    }
+}

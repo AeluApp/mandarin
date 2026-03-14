@@ -1,0 +1,123 @@
+{
+    "title": "Talking About a TV Show",
+    "title_zh": "聊电视剧",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're having lunch with your colleague Xiao Yang. She's excited about a TV drama she's been watching.",
+        "setup_zh": "你和同事小杨一起吃午饭。她最近在追一部电视剧，很兴奋地聊了起来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你最近有没有看那部新的电视剧？就是那个讲一家人在小城市开饭馆的，叫《小城味道》。",
+                "text_pinyin": "Nǐ zuìjìn yǒu méiyǒu kàn nà bù xīn de diànshìjù? Jiù shì nàge jiǎng yī jiā rén zài xiǎo chéngshì kāi fànguǎn de, jiào \"Xiǎo Chéng Wèidào\".",
+                "text_en": "Have you been watching that new TV drama? The one about a family running a restaurant in a small city — called 'Small City Flavors.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her about the show.",
+                "options": [
+                    {
+                        "text_zh": "听说过但是还没看。好看吗？讲的是什么故事？",
+                        "text_pinyin": "Tīngshuō guò dànshì hái méi kàn. Hǎokàn ma? Jiǎng de shì shénme gùshi?",
+                        "text_en": "I've heard of it but haven't watched it yet. Is it good? What's the story about?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shows interest and invites her to share — good conversational move."
+                    },
+                    {
+                        "text_zh": "我不看电视。",
+                        "text_pinyin": "Wǒ bú kàn diànshì.",
+                        "text_en": "I don't watch TV.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Shuts down her enthusiasm completely."
+                    },
+                    {
+                        "text_zh": "没有，最近太忙了。",
+                        "text_pinyin": "Méiyǒu, zuìjìn tài máng le.",
+                        "text_en": "No, I've been too busy lately.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest but doesn't engage with her excitement."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "特别好看！讲的是一个妈妈带着两个孩子，在小城市开了一个小饭馆。每一集都有不同的客人来，每个人都有自己的故事。很温暖，看完心情特别好。",
+                "text_pinyin": "Tèbié hǎokàn! Jiǎng de shì yī ge māma dài zhe liǎng ge háizi, zài xiǎo chéngshì kāi le yī ge xiǎo fànguǎn. Měi yī jí dōu yǒu bùtóng de kèrén lái, měi ge rén dōu yǒu zìjǐ de gùshi. Hěn wēnnuǎn, kàn wán xīnqíng tèbié hǎo.",
+                "text_en": "It's really good! It's about a mother and her two kids who open a small restaurant in a small city. Each episode has different customers, each with their own story. It's very warm — you feel great after watching."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her description.",
+                "options": [
+                    {
+                        "text_zh": "听你这么一说，我也想看了！我喜欢这种温暖的故事。一共有多少集？",
+                        "text_pinyin": "Tīng nǐ zhème yī shuō, wǒ yě xiǎng kàn le! Wǒ xǐhuan zhè zhǒng wēnnuǎn de gùshi. Yīgòng yǒu duōshǎo jí?",
+                        "text_en": "The way you describe it makes me want to watch it too! I like warm stories like that. How many episodes total?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Engaged and curious — mirrors her enthusiasm."
+                    },
+                    {
+                        "text_zh": "好吧，我有空看看。",
+                        "text_pinyin": "Hǎo ba, wǒ yǒu kòng kànkan.",
+                        "text_en": "Okay, I'll check it out when I have time.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Mildly interested but not enthusiastic."
+                    },
+                    {
+                        "text_zh": "我比较喜欢看动作片。",
+                        "text_pinyin": "Wǒ bǐjiào xǐhuan kàn dòngzuò piàn.",
+                        "text_en": "I prefer action movies.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Redirects away from what she wants to share."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "二十集，每集才四十分钟，很快就看完了。要不要今天晚上我们一起看两集？我可以带零食过来！",
+                "text_pinyin": "Èrshí jí, měi jí cái sìshí fēnzhōng, hěn kuài jiù kàn wán le. Yào bú yào jīntiān wǎnshang wǒmen yīqǐ kàn liǎng jí? Wǒ kěyǐ dài língshí guòlái!",
+                "text_en": "Twenty episodes, each only forty minutes — you'll finish it quickly. Want to watch a couple episodes together tonight? I can bring snacks!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation to watch together.",
+                "options": [
+                    {
+                        "text_zh": "好啊！那我准备茶，你带零食。八点可以吗？",
+                        "text_pinyin": "Hǎo a! Nà wǒ zhǔnbèi chá, nǐ dài língshí. Bā diǎn kěyǐ ma?",
+                        "text_en": "Sure! I'll prepare tea, you bring snacks. Is eight okay?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and practical — makes it a plan."
+                    },
+                    {
+                        "text_zh": "今天可能不行，改天吧。",
+                        "text_pinyin": "Jīntiān kěnéng bù xíng, gǎi tiān ba.",
+                        "text_en": "Tonight might not work — another time?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Reasonable but a slight letdown."
+                    },
+                    {
+                        "text_zh": "我一个人看就行了。",
+                        "text_pinyin": "Wǒ yī ge rén kàn jiù xíng le.",
+                        "text_en": "I can just watch alone.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Declines the social aspect of her invitation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Watching TV dramas together is a popular bonding activity in China. Slice-of-life dramas about family restaurants, small towns, and everyday warmth (生活剧) are beloved for their comfort and relatability. Sharing snacks while watching is a cozy tradition."
+    },
+    "hsk_level": 3
+}

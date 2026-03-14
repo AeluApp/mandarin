@@ -1,0 +1,94 @@
+{
+    "title": "The Helpful Security Guard",
+    "title_zh": "热心的保安",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_2_00_v0",
+    "tree": {
+        "setup": "A shopping mall entrance, early evening. You've tripped on a loose tile and scraped your knee. Security guard Lao Deng rushes over with a first-aid kit that he keeps impeccably organized -- bandages sorted by size, antiseptic wipes in a neat row. He treats every minor injury with the gravity of an emergency room surgeon.",
+        "setup_zh": "商场入口，傍晚。你被松动的地砖绊倒，膝盖擦伤了。保安老邓拿着急救箱跑过来——绷带按大小分好，消毒巾整整齐齐。他对每个小伤都像急诊医生一样认真。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你没事吧？我看看！",
+                "text_pinyin": "nǐ méi shì ba? wǒ kànkan!",
+                "text_en": "Are you OK? Let me see!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what happened.",
+                "options": [
+                    {
+                        "text_zh": "我摔倒了，膝盖有点疼。",
+                        "text_pinyin": "wǒ shuāi dǎo le, xīgài yǒudiǎn téng.",
+                        "text_en": "I fell down and my knee hurts a little.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Deng kneels down and examines the scrape with the focus of an art restorer assessing a damaged painting.「不严重，我帮你擦一下。」摔倒 is 'to fall down' -- useful when you need it."
+                    },
+                    {
+                        "text_zh": "没事没事，不要紧。",
+                        "text_pinyin": "méi shì méi shì, bú yàojǐn.",
+                        "text_en": "It's nothing, don't worry about it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Deng is not convinced. He has already opened the first-aid kit and will not be closing it without treating something. 不要紧 means 'it doesn't matter' -- good for brushing off concern."
+                    },
+                    {
+                        "text_zh": "需要叫救护车吗？",
+                        "text_pinyin": "xūyào jiào jiùhùchē ma?",
+                        "text_en": "Do we need to call an ambulance?",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Lao Deng looks at your scraped knee, then back at you, with the measured patience of someone who has had this exact conversation before.「不用不用，我有创可贴。」It's a scrape."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "来，坐这里。我帮你贴个创可贴。",
+                "text_pinyin": "lái, zuò zhèlǐ. wǒ bāng nǐ tiē ge chuāngkětiē.",
+                "text_en": "Here, sit down. I'll put a band-aid on it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你！你人真好。",
+                        "text_pinyin": "xièxie nǐ! nǐ rén zhēn hǎo.",
+                        "text_en": "Thank you! You're really kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Deng waves it off modestly, but straightens his uniform a little.「小事小事。」你人真好 is a warm compliment -- 'you're really a good person.'"
+                    },
+                    {
+                        "text_zh": "不好意思，麻烦你了。",
+                        "text_pinyin": "bù hǎoyìsi, máfan nǐ le.",
+                        "text_en": "Sorry to trouble you.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Deng shakes his head firmly. This is literally his job and also his calling.「不麻烦！」麻烦你了 is a polite way to acknowledge someone's effort."
+                    },
+                    {
+                        "text_zh": "那个地砖太危险了！",
+                        "text_pinyin": "nà ge dì zhuān tài wēixiǎn le!",
+                        "text_en": "That floor tile is too dangerous!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Deng nods gravely and pulls out a small notebook. He writes down the location of the tile. He will report this. He reports everything. 危险 means 'dangerous.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了！走路小心一点啊！",
+                "text_pinyin": "hǎo le! zǒu lù xiǎoxīn yìdiǎn a!",
+                "text_en": "All done! Be careful walking!"
+            }
+        ],
+        "cultural_note": "Security guards (保安, bǎo'ān) in Chinese malls and residential compounds often go beyond their job description -- giving directions, lending umbrellas, and providing basic first aid. 创可贴 (chuāngkětiē) is the Chinese word for band-aid."
+    }
+}

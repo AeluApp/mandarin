@@ -1,6 +1,6 @@
-# Mandarin Mobile (Capacitor)
+# Aelu Mobile (Capacitor)
 
-Wraps the Mandarin web app as a native iOS/Android app using Capacitor.
+Wraps the Aelu web app as a native iOS/Android app using Capacitor.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Place source files in `resources/`:
 After generating the iOS project:
 
 1. Open Xcode: `npx cap open ios`
-2. Set Bundle ID: `com.mandarinapp.app`
+2. Set Bundle ID: `com.aelu.app`
 3. Set deployment target: iOS 16.0+
 4. Add Info.plist keys from `ios-plist-additions.xml`
 5. Configure signing (Team, Provisioning Profile)

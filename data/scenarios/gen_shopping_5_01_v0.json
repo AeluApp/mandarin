@@ -1,0 +1,124 @@
+{
+    "title": "The Return Policy Philosopher",
+    "title_zh": "退货政策哲学家",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_5_01_v0",
+    "tree": {
+        "setup": "The customer service counter at a department store, where the afternoon light falls on a display of returns waiting to be processed — shoes in boxes, electronics in bags, and one lonely umbrella. Service Manager Jiang handles returns with the thoroughness of a forensic investigator: she examines tags, checks receipts, and assesses wear patterns. Your purchase — a winter jacket bought online and picked up in-store — doesn't fit, and the zipper pulls to the left in a way that suggests the jacket is having an existential crisis about its purpose.",
+        "setup_zh": "百货商店的客服柜台，午后的光线落在一排等待处理的退货上——鞋盒、电子产品袋子，还有一把孤独的伞。服务经理蒋以法医调查员般的严谨处理退货：她检查标签、核实收据、评估磨损痕迹。你的购买品——一件网上下单到店自取的冬季外套——不合身，而且拉链向左偏，仿佛这件外套正在经历关于自身用途的存在危机。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，需要退换货吗？请出示小票和商品。",
+                "text_pinyin": "nín hǎo, xūyào tuìhuàn huò ma? qǐng chūshì xiǎopiào hé shāngpǐn.",
+                "text_en": "Hello, returning or exchanging? Please show your receipt and the item."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the return.",
+                "options": [
+                    {
+                        "text_zh": "您好，我想退这件外套。上周在网上买的，到店自取的。有两个问题：一是尺码偏大，我买的L码但穿起来像XL；二是拉链有点歪，拉的时候总是卡住。小票和订单号都在这里。",
+                        "text_pinyin": "nín hǎo, wǒ xiǎng tuì zhè jiàn wàitào. shàng zhōu zài wǎngshàng mǎi de, dào diàn zìqǔ de. yǒu liǎng gè wèntí: yī shì chǐmǎ piān dà, wǒ mǎi de L mǎ dàn chuān qǐlái xiàng XL; èr shì lāliàn yǒudiǎn wāi, lā de shíhòu zǒngshì kǎ zhù. xiǎopiào hé dìngdān hào dōu zài zhèlǐ.",
+                        "text_en": "Hello, I'd like to return this jacket. Bought online last week, picked up in-store. Two issues: the size runs large — I bought L but it fits like XL; and the zipper is crooked, it catches when I pull it. Receipt and order number are here.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Two clear problems plus documentation — Manager Jiang examines the zipper with the focus of someone who has seen a thousand zippers and knows immediately which ones are defective."
+                    },
+                    {
+                        "text_zh": "这件外套不合适，我想退。",
+                        "text_pinyin": "zhè jiàn wàitào bù héshì, wǒ xiǎng tuì.",
+                        "text_en": "This jacket doesn't fit — I want to return it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need to see the receipt and examine the item."
+                    },
+                    {
+                        "text_zh": "这件衣服质量太差了。",
+                        "text_pinyin": "zhè jiàn yīfu zhìliàng tài chà le.",
+                        "text_en": "This clothing is terrible quality.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Jiang inspects the jacket without commenting on your assessment. Her forensic approach will determine quality independently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我看一下……拉链确实有问题，这是质量问题。尺码偏大的话可能是这个品牌本身的版型偏大。质量问题的话我们可以全额退款。你想退款还是换一件？如果换的话，M码可能更适合你。",
+                "text_pinyin": "wǒ kàn yíxià……lāliàn quèshí yǒu wèntí, zhè shì zhìliàng wèntí. chǐmǎ piān dà de huà kěnéng shì zhège pǐnpái běnshēn de bǎnxíng piān dà. zhìliàng wèntí de huà wǒmen kěyǐ quán'é tuìkuǎn. nǐ xiǎng tuìkuǎn háishi huàn yí jiàn? rúguǒ huàn de huà, M mǎ kěnéng gèng shìhé nǐ.",
+                "text_en": "Let me see... the zipper is indeed faulty — that's a quality issue. The large sizing might be this brand's cut running big. For quality issues, we offer a full refund. Do you want a refund or exchange? If exchanging, M might fit you better."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide between refund and exchange.",
+                "options": [
+                    {
+                        "text_zh": "拉链有问题的话，我担心换一件也可能有同样的问题。能不能帮我看一下M码的有没有库存？如果有的话我想先检查一下拉链，没问题再换。退款退到原来的支付方式吗？",
+                        "text_pinyin": "lāliàn yǒu wèntí de huà, wǒ dānxīn huàn yí jiàn yě kěnéng yǒu tóngyàng de wèntí. néng bu néng bāng wǒ kàn yíxià M mǎ de yǒu méiyǒu kùcún? rúguǒ yǒu de huà wǒ xiǎng xiān jiǎnchá yíxià lāliàn, méi wèntí zài huàn. tuìkuǎn tuì dào yuánlái de zhīfù fāngshì ma?",
+                        "text_en": "If the zipper is faulty, I'm worried an exchange might have the same problem. Could you check if M is in stock? If so, I'd like to inspect the zipper first before deciding. Does the refund go back to the original payment method?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Inspecting before exchanging — Manager Jiang respects a cautious consumer. She checks stock and brings out an M for inspection."
+                    },
+                    {
+                        "text_zh": "那就退款吧，比较省事。",
+                        "text_pinyin": "nà jiù tuìkuǎn ba, bǐjiào shěng shì.",
+                        "text_en": "Just refund then — easier that way.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean exit. She processes the refund."
+                    },
+                    {
+                        "text_zh": "换一件M码的吧，应该没问题。",
+                        "text_pinyin": "huàn yí jiàn M mǎ de ba, yīnggāi méi wèntí.",
+                        "text_en": "Exchange for an M — should be fine.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Optimistic. She brings one out, but you should check the zipper before leaving."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "M码有库存，我拿一件给你看。退款的话三到五个工作日退回原支付方式。如果换的话不需要补差价，因为是质量问题。你先看看这件M码的拉链。",
+                "text_pinyin": "M mǎ yǒu kùcún, wǒ ná yí jiàn gěi nǐ kàn. tuìkuǎn de huà sān dào wǔ gè gōngzuò rì tuì huí yuán zhīfù fāngshì. rúguǒ huàn de huà bù xūyào bǔ chājià, yīnwèi shì zhìliàng wèntí. nǐ xiān kàn kan zhè jiàn M mǎ de lāliàn.",
+                "text_en": "M is in stock — let me get one. Refund takes 3-5 business days to the original payment. Exchange has no price difference since it's a quality issue. Check this M's zipper first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Inspect and decide.",
+                "options": [
+                    {
+                        "text_zh": "这件的拉链很顺滑，没问题。尺寸我也比了一下，M码确实更合适。那就换这件吧。需要我签什么单子吗？换货以后这件还在保修范围内吧？",
+                        "text_pinyin": "zhè jiàn de lāliàn hěn shùnhuá, méi wèntí. chǐcùn wǒ yě bǐ le yíxià, M mǎ quèshí gèng héshì. nà jiù huàn zhè jiàn ba. xūyào wǒ qiān shénme dānzi ma? huànhuò yǐhòu zhè jiàn hái zài bǎoxiū fànwéi nèi ba?",
+                        "text_en": "This one's zipper is smooth — no issues. I compared the sizes too, M fits much better. I'll exchange for this one. Do I need to sign anything? Is the replacement still under warranty?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Inspecting, confirming, and asking about warranty — the complete exchange protocol. Manager Jiang nods: sign the form, and the warranty resets from today."
+                    },
+                    {
+                        "text_zh": "这件可以，换这件吧。",
+                        "text_pinyin": "zhè jiàn kěyǐ, huàn zhè jiàn ba.",
+                        "text_en": "This one works — I'll take it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick decision. She processes the exchange."
+                    },
+                    {
+                        "text_zh": "还是退款算了，我不太信这个牌子了。",
+                        "text_pinyin": "háishi tuìkuǎn suàn le, wǒ bú tài xìn zhège pǐnpái le.",
+                        "text_en": "Actually, just refund — I don't trust this brand anymore.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Brand trust, once broken, is hard to repair. She processes the refund without argument."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese return policies vary between stores and online platforms. Quality issues (质量问题, zhìliàng wèntí) typically qualify for full refunds regardless of return period. Online-to-store purchases (网上下单到店自取) combine convenience with the ability to inspect in person. Refunds usually return to the original payment method (原支付方式) within 3-5 business days."
+    }
+}

@@ -177,6 +177,7 @@ def test_stabilizing_to_stable():
     result = _compute_mastery_transition(
         row, True, "full", streak_correct=6, streak_incorrect=0,
         drill_type="mc", distinct_days=3, total_after=10, drill_type_count=2,
+        has_production_correct=True,
     )
     assert result["mastery_stage"] == "stable"
     assert result["stable_since_date"] is not None
@@ -258,6 +259,7 @@ def test_legacy_improving_remapped():
     result = _compute_mastery_transition(
         row, True, "full", streak_correct=6, streak_incorrect=0,
         drill_type="mc", distinct_days=3, total_after=10, drill_type_count=2,
+        has_production_correct=True,
     )
     assert result["mastery_stage"] == "stable"
 

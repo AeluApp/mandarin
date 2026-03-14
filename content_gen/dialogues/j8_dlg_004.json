@@ -1,0 +1,117 @@
+{
+    "title": "The Empty Classroom",
+    "title_zh": "空教室",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You're visiting a friend who teaches philosophy at a small university. He takes you to an empty classroom after hours. Chalk dust still lingers in the air. He seems contemplative.",
+        "setup_zh": "你去看一个在小大学教哲学的朋友。下课后他带你去了一间空教室。空气中还飘着粉笔灰。他看起来若有所思。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你闻到了吗？粉笔灰的味道。每次走进空教室我都会闻到。这个味道让我想起一个问题：一堂课结束以后，它去了哪里？板书被擦了，笔记被合上了，学生走了。课的「内容」也许还在某个人的脑子里——但课本身呢？那个由特定的人、特定的时间、特定的光线构成的「此刻」，消失了。教学是所有艺术中最短暂的——连一张照片都留不下。",
+                "text_pinyin": "Nǐ wén dào le ma? Fěnbǐ huī de wèidào. Měi cì zǒu jìn kōng jiàoshì wǒ dōu huì wén dào. Zhège wèidào ràng wǒ xiǎng qǐ yī ge wèntí: yī táng kè jiéshù yǐhòu, tā qù le nǎlǐ? Bǎnshū bèi cā le, bǐjì bèi hé shàng le, xuéshēng zǒu le. Kè de 'nèiróng' yěxǔ hái zài mǒu ge rén de nǎozi lǐ — dàn kè běnshēn ne? Nàge yóu tèdìng de rén, tèdìng de shíjiān, tèdìng de guāngxiàn gòuchéng de 'cǐ kè', xiāoshī le. Jiàoxué shì suǒyǒu yìshù zhōng zuì duǎnzàn de — lián yī zhāng zhàopiàn dōu liú bú xià.",
+                "text_en": "Do you smell it? Chalk dust. I smell it every time I enter an empty classroom. That smell makes me think: after a class ends, where does it go? The board is erased, notebooks closed, students gone. The 'content' might still be in someone's head — but the class itself? That 'moment' composed of specific people, specific time, specific light — it vanishes. Teaching is the most ephemeral of all arts — you can't even keep a photograph."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his idea that teaching is the most ephemeral art.",
+                "options": [
+                    {
+                        "text_zh": "最短暂的艺术——但也许正因为短暂，才最纯粹。画家留下画，作家留下书，老师什么都不留——除了对一个人思维方式的改变。改变是看不见的，也不署名。教学的产物是一个人内在的微小位移——可能十年后才被感知到。",
+                        "text_pinyin": "Zuì duǎnzàn de yìshù — dàn yěxǔ zhèng yīnwèi duǎnzàn, cái zuì chúncuì. Huàjiā liú xià huà, zuòjiā liú xià shū, lǎoshī shénme dōu bù liú — chúle duì yī ge rén sīwéi fāngshì de gǎibiàn. Gǎibiàn shì kàn bú jiàn de, yě bù shǔmíng. Jiàoxué de chǎnwù shì yī ge rén nèizài de wēixiǎo wèiyí — kěnéng shí nián hòu cái bèi gǎnzhī dào.",
+                        "text_en": "The most ephemeral art — but maybe because it's ephemeral, the purest. Teachers leave nothing except a change in how someone thinks. That change is invisible, unsigned. A tiny inner displacement — maybe only felt ten years later.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He turns toward you slowly, like he wasn't expecting that. \"微小位移。\" He repeats it quietly, testing the phrase. \"对。就是这个。\""
+                    },
+                    {
+                        "text_zh": "可以录像啊，现在很多课都有回放。",
+                        "text_pinyin": "Kěyǐ lùxiàng a, xiànzài hěn duō kè dōu yǒu huífàng.",
+                        "text_en": "You could record it — many classes have replays now.",
+                        "score": 0.0,
+                        "feedback": "He nods politely but his gaze drifts back to the empty chairs. \"录像录的是我在说话。录不到那个——\" He trails off, not quite explaining it."
+                    },
+                    {
+                        "text_zh": "那你为什么还要教？",
+                        "text_pinyin": "Nà nǐ wèishéme hái yào jiāo?",
+                        "text_en": "So why do you keep teaching?",
+                        "score": 0.0,
+                        "feedback": "He gives you a sideways look — a little amused, a little caught off guard. \"你问的这个……我刚才其实是想往另一个方向说的。\" He pauses. \"但这也是个好问题。\""
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "微小位移——这个词用得精准。今天下午我在讲庄子的「无用之用」，有个女生突然停下了笔，抬起头看了我几秒钟。就那几秒钟，我知道某个东西在她脑子里移动了。但我不知道移动了什么，她自己可能也不知道。那几秒钟就是教学最有价值的瞬间——但它不可记录、不可重复、不可考核。整个教育体系都在追求可量化的结果，但真正改变一个人的那个瞬间，恰恰是不可量化的。",
+                "text_pinyin": "Wēixiǎo wèiyí — zhège cí yòng de jīngzhǔn. Jīntiān xiàwǔ wǒ zài jiǎng Zhuāngzǐ de 'wúyòng zhī yòng', yǒu ge nǚshēng tūrán tíng xià le bǐ, tái qǐ tóu kàn le wǒ jǐ miǎozhōng. Jiù nà jǐ miǎozhōng, wǒ zhīdào mǒu ge dōngxi zài tā nǎozi lǐ yídòng le. Dàn wǒ bù zhīdào yídòng le shénme, tā zìjǐ kěnéng yě bù zhīdào. Nà jǐ miǎozhōng jiù shì jiàoxué zuì yǒu jiàzhí de shùnjiān — dàn tā bùkě jìlù, bùkě chóngfù, bùkě kǎohé. Zhěnggè jiàoyù tǐxì dōu zài zhuīqiú kě liànghuà de jiéguǒ, dàn zhēnzhèng gǎibiàn yī ge rén de nàge shùnjiān, qiàqiǎ shì bùkě liànghuà de.",
+                "text_en": "Tiny displacement — precisely put. This afternoon teaching Zhuangzi's 'usefulness of the useless,' a girl stopped writing, looked up at me for a few seconds. Something moved in her mind. But it's unrecordable, unrepeatable, unexaminable. The entire education system pursues quantifiable outcomes, but the moment that truly changes a person is what can't be quantified."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to that moment — the girl stopping her pen, something moving.",
+                "options": [
+                    {
+                        "text_zh": "你在讲「无用之用」的时候，恰恰发生了一个「无用之用」的瞬间。那几秒钟不会出现在考试卷上，不会被评估系统捕获——但可能是她这学期最重要的几秒钟。真正的教育和教育评估之间，有一个结构性的错位。",
+                        "text_pinyin": "Nǐ zài jiǎng 'wúyòng zhī yòng' de shíhou, qiàqiǎ fāshēng le yī ge 'wúyòng zhī yòng' de shùnjiān. Nà jǐ miǎozhōng bú huì chūxiàn zài kǎoshì juǎn shàng, bú huì bèi pínggū xìtǒng bǔhuò — dàn kěnéng shì tā zhè xuéqī zuì zhòngyào de jǐ miǎozhōng. Zhēnzhèng de jiàoyù hé jiàoyù pínggū zhī jiān, yǒu yī ge jiégòuxìng de cuòwèi.",
+                        "text_en": "While teaching 'the usefulness of the useless,' a moment of 'useless usefulness' occurred. Those seconds won't appear on any exam — but may be the most important of her semester. Between real education and its evaluation, there's a structural misalignment.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He laughs once — short, a little surprised. \"结构性的错位。\" He leans back against the desk. \"我跟学院说了三年了，说不清楚——你刚才三句话说清楚了。\""
+                    },
+                    {
+                        "text_zh": "她后来问你问题了吗？",
+                        "text_pinyin": "Tā hòulái wèn nǐ wèntí le ma?",
+                        "text_en": "Did she ask you a question afterward?",
+                        "score": 0.0,
+                        "feedback": "He thinks for a second. \"没有。下课就走了。\" He says it like that's exactly the point. \"就是这样——什么都没发生，又什么都发生了。\""
+                    },
+                    {
+                        "text_zh": "现在的学生对哲学感兴趣吗？",
+                        "text_pinyin": "Xiànzài de xuéshēng duì zhéxué gǎn xìngqù ma?",
+                        "text_en": "Are students interested in philosophy these days?",
+                        "score": 0.0,
+                        "feedback": "He tilts his head — it's not quite the question he was expecting. \"有的感兴趣，有的是被调剂来的。\" A small shrug. \"跟以前差不多吧。\""
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "结构性错位——准确。整个系统用论文数量、考试分数、就业率来衡量教育，但教育最核心的东西——一个人的觉醒——恰恰不在这些指标里。你知道最讽刺的是什么吗？如果那个女生期末考试考了满分，系统会说「教学有效」。如果她考得很差，但十年后因为那几秒钟的停顿重新审视了自己的人生——这种效果，系统看不到。我们建了一个只能看到短期结果的教育体制，然后用它来评判一个本质上是长期甚至终生才能显现的过程。",
+                "text_pinyin": "Jiégòuxìng cuòwèi — zhǔnquè. Zhěnggè xìtǒng yòng lùnwén shùliàng, kǎoshì fēnshù, jiùyè lǜ lái héngliáng jiàoyù, dàn jiàoyù zuì héxīn de dōngxi — yī ge rén de juéxǐng — qiàqiǎ bú zài zhèxiē zhǐbiāo lǐ. Nǐ zhīdào zuì fěngcì de shì shénme ma? Rúguǒ nàge nǚshēng qīmò kǎoshì kǎo le mǎnfēn, xìtǒng huì shuō 'jiàoxué yǒuxiào'. Rúguǒ tā kǎo de hěn chà, dàn shí nián hòu yīnwèi nà jǐ miǎozhōng de tíngdùn chóngxīn shěnshì le zìjǐ de rénshēng — zhè zhǒng xiàoguǒ, xìtǒng kàn bú dào. Wǒmen jiàn le yī ge zhǐ néng kàn dào duǎnqī jiéguǒ de jiàoyù tǐzhì, ránhòu yòng tā lái pínpàn yī ge běnzhì shàng shì chángqī shènzhì zhōngshēng cáinéng xiǎnxiàn de guòchéng.",
+                "text_en": "Structural misalignment — precise. The system measures education with paper counts, scores, employment rates, but education's essence — a person's awakening — isn't in those metrics. If that girl aces the final, the system says 'effective.' If she scores poorly but ten years later, because of that pause, re-examines her life — the system can't see that. We've built an evaluation for short-term results judging a lifelong process."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the gap between teaching's timescale and evaluation's timescale.",
+                "options": [
+                    {
+                        "text_zh": "也许真正的教学评估应该在二十年后——但那时没人能把某个改变追溯到某堂课了。教学的悲剧和美好在于同一件事：你永远无法证明你做过的事有意义。但你知道粉笔灰的味道为什么让你留在这里。这间空教室不是空的。",
+                        "text_pinyin": "Yěxǔ zhēnzhèng de jiàoxué pínggū yīnggāi zài èrshí nián hòu — dàn nà shí méi rén néng bǎ mǒu ge gǎibiàn zhuīsù dào mǒu táng kè le. Jiàoxué de bēijù hé měihǎo zàiyú tóng yī jiàn shì: nǐ yǒngyuǎn wúfǎ zhèngmíng nǐ zuò guò de shì yǒu yìyì. Dàn nǐ zhīdào fěnbǐ huī de wèidào wèishéme ràng nǐ liú zài zhèlǐ. Zhè jiān kōng jiàoshì bú shì kōng de.",
+                        "text_en": "Maybe true teaching evaluation should happen twenty years later — but by then, no one can trace a change to a specific class. Teaching's tragedy and beauty are the same thing: you can never prove what you did mattered. But you know why chalk dust keeps you here. This empty classroom isn't empty.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "He's quiet for a moment. He looks around the room — the rows of empty chairs, the dusty board — as if seeing it slightly differently. \"这间空教室不是空的。\" He repeats your phrase back, slowly. Then he just nods."
+                    },
+                    {
+                        "text_zh": "你有没有想过离开学术界？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò líkāi xuéshùjiè?",
+                        "text_en": "Have you thought about leaving academia?",
+                        "score": 0.0,
+                        "feedback": "He tilts his head, slightly caught off guard by the shift. \"想过。\" A pause. \"但每次走进来闻到这个味道——\" He gestures vaguely at the room. \"就又不想了。\""
+                    },
+                    {
+                        "text_zh": "也许应该改革教育评估体系。",
+                        "text_pinyin": "Yěxǔ yīnggāi gǎigé jiàoyù pínggū tǐxì.",
+                        "text_en": "Maybe the education evaluation system should be reformed.",
+                        "score": 0.0,
+                        "feedback": "He nods, but his expression is tired. \"当然应该。\" He looks at the empty chairs again. \"但我今晚不想谈这个。今晚就想在这里站一会儿。\""
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The tension between quantifiable outcomes and genuine education is acute in China's exam-driven system. Zhuangzi's concept of 无用之用 (the usefulness of the useless) has never been more relevant — philosophy departments at Chinese universities are often under pressure to justify their 'practical value,' yet their most valuable contributions are precisely what can't be measured. The smell of chalk dust (粉笔灰) is itself becoming nostalgic as digital whiteboards replace blackboards."
+    }
+}

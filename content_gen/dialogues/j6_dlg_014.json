@@ -1,0 +1,117 @@
+{
+    "title": "The Library Ghost",
+    "title_zh": "图书馆幽灵",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.55,
+    "tree": {
+        "setup": "You're in a university library in Nanjing. The librarian, Ms. Zheng, notices you're the only person who checks out actual physical books anymore. She tells you about a mysterious patron who has been returning books that were never checked out — books that had been missing for decades.",
+        "setup_zh": "你在南京一所大学图书馆里。图书管理员郑老师注意到你是唯一还在借纸质书的人。她告诉你有一个神秘读者一直在归还从未借出的书——这些书已经失踪了几十年。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你是这个月唯一借实体书的人，你知道吗？其他人都用电子版。不过我跟你说一件怪事——最近三个月，还书箱里每周都会出现一两本老书，系统里显示这些书三十年前就标记为'遗失'了。",
+                "text_pinyin": "Nǐ shì zhège yuè wéiyī jiè shítǐ shū de rén, nǐ zhīdào ma? Qítā rén dōu yòng diànzǐ bǎn. Búguò wǒ gēn nǐ shuō yī jiàn guàishì — zuìjìn sān ge yuè, huán shū xiāng lǐ měi zhōu dōu huì chūxiàn yī liǎng běn lǎo shū, xìtǒng lǐ xiǎnshì zhèxiē shū sānshí nián qián jiù biāojì wéi 'yíshī' le.",
+                "text_en": "Did you know you're the only person who's checked out a physical book this month? Everyone else uses digital. But let me tell you something strange — for the past three months, one or two old books show up in the return box every week. The system shows these books were marked 'lost' thirty years ago."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the mystery of the returning books.",
+                "options": [
+                    {
+                        "text_zh": "三十年——那差不多是上世纪九十年代。当时的借书制度应该还是手写卡片吧？有没有可能是当年的学生或者老师，退休之后在整理家里的东西，发现了这些书？一种迟到三十年的归还。",
+                        "text_pinyin": "Sānshí nián — nà chàbuduō shì shàng shìjì jiǔshí niándài. Dāngshí de jiè shū zhìdù yīnggāi háishì shǒuxiě kǎpiàn ba? Yǒu méiyǒu kěnéng shì dāngnián de xuéshēng huòzhě lǎoshī, tuìxiū zhīhòu zài zhěnglǐ jiālǐ de dōngxi, fāxiàn le zhèxiē shū? Yī zhǒng chídào sānshí nián de guīhuán.",
+                        "text_en": "Thirty years — roughly the 1990s. The borrowing system was handwritten cards, right? Could be a former student or teacher who, after retiring, is sorting through things at home and finding these books? A thirty-year-late return.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Good reasoning — identifies the time period, the system, and proposes a plausible theory."
+                    },
+                    {
+                        "text_zh": "你们图书馆几点关门？",
+                        "text_pinyin": "Nǐmen túshūguǎn jǐ diǎn guānmén?",
+                        "text_en": "What time does the library close?",
+                        "score": 0.0,
+                        "feedback": "Hours question when she's sharing a mystery."
+                    },
+                    {
+                        "text_zh": "我想复印一些资料，复印机在哪里？",
+                        "text_pinyin": "Wǒ xiǎng fùyìn yīxiē zīliào, fùyìnjī zài nǎlǐ?",
+                        "text_en": "I want to photocopy some materials, where's the copier?",
+                        "score": 0.0,
+                        "feedback": "Practical question that ignores the intriguing story."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我也是这么想的。但有一个细节让我改变了看法——这些书里面夹着书签，书签上写着笔记，笔迹是同一个人的。内容都是读书心得，有些写得非常深刻。最让我吃惊的是，笔记的日期是连续的，从九十年代一直写到去年。",
+                "text_pinyin": "Wǒ yě shì zhème xiǎng de. Dàn yǒu yīge xìjié ràng wǒ gǎibiàn le kànfǎ — zhèxiē shū lǐmiàn jiā zhe shūqiān, shūqiān shàng xiě zhe bǐjì, bǐjì shì tóng yīge rén de. Nèiróng dōu shì dúshū xīndé, yǒuxiē xiě de fēicháng shēnkè. Zuì ràng wǒ chījīng de shì, bǐjì de rìqī shì liánxù de, cóng jiǔshí niándài yīzhí xiě dào qùnián.",
+                "text_en": "That's what I thought too. But one detail changed my mind — these books have bookmarks inside them with notes in the same handwriting. They're all reading reflections, some remarkably profound. What shocked me most is that the dates on the notes are continuous — from the 1990s all the way to last year."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Process this new information and revise your theory.",
+                "options": [
+                    {
+                        "text_zh": "这是一种精妙的自我维持机制。每个人都觉得'改变不值得'——因为规则一变，你也会失去未来可能获得的特权。所以大家宁可忍受当下的不公，也不愿放弃将来的可能性。比强制更有效。",
+                        "text_pinyin": "Zhè shì yī zhǒng jīngmiào de zìwǒ wéichí jīzhì. Měi ge rén dōu juéde 'gǎibiàn bù zhíde' — yīnwèi guīzé yī biàn, nǐ yě huì shīqù wèilái kěnéng huòdé de tèquán. Suǒyǐ dàjiā nìngkě rěnshòu dāngxià de bùgōng, yě bù yuàn fàngqì jiānglái de kěnéng xìng. Bǐ qiángzhì gèng yǒuxiào.",
+                        "text_en": "An ingenious self-sustaining mechanism. Everyone feels 'change isn't worth it' — if rules change, you'd lose the privilege you might gain. So people endure present injustice to keep future possibility. More effective than coercion.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Sharp revision — eliminates the first theory and arrives at a poignant possibility."
+                    },
+                    {
+                        "text_zh": "笔记写的什么内容？",
+                        "text_pinyin": "Bǐjì xiě de shénme nèiróng?",
+                        "text_en": "What do the notes say?",
+                        "score": 0.0,
+                        "feedback": "While factual, it's a flat information request rather than reasoning through the clues."
+                    },
+                    {
+                        "text_zh": "你有没有报警？也许是偷书贼。",
+                        "text_pinyin": "Nǐ yǒu méiyǒu bàojǐng? Yěxǔ shì tōu shū zéi.",
+                        "text_en": "Did you report it to the police? Maybe it's a book thief.",
+                        "score": 0.0,
+                        "feedback": "Jumps to an accusatory conclusion that misses the emotional texture of the situation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说到点子上了。上周归还的那本书里，夹着一张纸条，上面写着：'这些年，是这些书陪我度过了最孤独的时光。现在该让它们回家了。'我看到这句话的时候，站在还书箱前面哭了。",
+                "text_pinyin": "Nǐ shuō dào diǎnzi shàng le. Shàng zhōu guīhuán de nà běn shū lǐ, jiā zhe yī zhāng zhǐtiáo, shàngmiàn xiě zhe: 'Zhèxiē nián, shì zhèxiē shū péi wǒ dùguò le zuì gūdú de shíguāng. Xiànzài gāi ràng tāmen huí jiā le.' Wǒ kàn dào zhè jù huà de shíhou, zhàn zài huán shū xiāng qiánmiàn kū le.",
+                "text_en": "You hit the nail on the head. In the book returned last week, there was a slip of paper that read: 'All these years, these books kept me company through my loneliest times. Now it's time to let them go home.' When I read that, I stood in front of the return box and cried."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the emotional revelation.",
+                "options": [
+                    {
+                        "text_zh": "这恰恰证明了他说的是真话——如果不敏感，编辑不会删。审查的逻辑有时候是最好的真相探测器：越是被删的，越触及了核心。那位院长说出了大家都知道但没人敢公开承认的现实。",
+                        "text_pinyin": "Zhè qiàqià zhèngmíng le tā shuō de shì zhēnhuà — rúguǒ bù mǐngǎn, biānjí bú huì shān. Shěnchá de luójí yǒu shíhou shì zuì hǎo de zhēnxiàng tàncè qì: yuè shì bèi shān de, yuè chùjí le héxīn. Nà wèi yuànzhǎng shuō chū le dàjiā dōu zhīdào dàn méi rén gǎn gōngkāi chéngrèn de xiànshí.",
+                        "text_en": "That proves it's true — if it weren't sensitive, the editor wouldn't delete it. Censorship logic is the best truth detector: the more something gets deleted, the more it touches the core. That director voiced what everyone knows but nobody dares openly admit.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reframes the entire narrative — from theft to companionship, from return to farewell."
+                    },
+                    {
+                        "text_zh": "你能不能查到是谁还的？监控录像应该有吧。",
+                        "text_pinyin": "Nǐ néng bù néng chá dào shì shéi huán de? Jiānkòng lùxiàng yīnggāi yǒu ba.",
+                        "text_en": "Can you find out who returned them? There should be surveillance footage.",
+                        "score": 0.0,
+                        "feedback": "Surveillance instinct misses the emotional weight of the moment."
+                    },
+                    {
+                        "text_zh": "这些书现在还能借吗？",
+                        "text_pinyin": "Zhèxiē shū xiànzài hái néng jiè ma?",
+                        "text_en": "Can these books still be checked out?",
+                        "score": 0.0,
+                        "feedback": "Transactional question that flattens the story."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university libraries in the 1990s operated on a handwritten card system (借书卡), and many books from that era were never digitized or tracked electronically. The phenomenon of 'lost' books being quietly returned decades later is not uncommon. In Chinese culture, the relationship between a reader and their books carries moral weight — the phrase '书是朋友' (books are friends) is taken more literally than in many Western contexts. The act of returning something after a long time implicitly involves face (面子) and conscience (良心), which is why it's often done anonymously."
+    }
+}

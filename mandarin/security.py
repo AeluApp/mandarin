@@ -10,6 +10,7 @@ Zero Trust principle: log every access decision, successful or not.
 from __future__ import annotations
 
 import logging
+import re
 import sqlite3
 from datetime import datetime, timezone
 from enum import Enum
@@ -33,6 +34,7 @@ class SecurityEvent(str, Enum):
     PASSWORD_RESET_REQUESTED = "password_reset_requested"
     PASSWORD_RESET_COMPLETED = "password_reset_completed"
     PASSWORD_RESET_FAILED = "password_reset_failed"
+    PASSWORD_CHANGED = "password_changed"
 
     # Token events
     TOKEN_ISSUED = "token_issued"
@@ -75,13 +77,25 @@ class Severity(str, Enum):
     CRITICAL = "CRITICAL"
 
 
-def _send_critical_alert(event_type: str, user_id: int | None, details: str | None) -> None:
-    """Send critical security alert via webhook and email (Item 9)."""
-    import os
+def _send_critical_alert(
+    event_type: str,
+    user_id: int | None,
+    details: str | None,
+    conn: sqlite3.Connection | None = None,
+) -> None:
+    """Send critical security alert via webhook and email (Item 9).
+
+    If both delivery channels fail, logs at CRITICAL and records the
+    delivery failure in security_audit_log so no alert is silently lost.
+    """
+    from .settings import ALERT_WEBHOOK_URL, ADMIN_EMAIL
     alert_msg = f"CRITICAL: {event_type} user={user_id} details={details}"
 
+    webhook_ok = False
+    email_ok = False
+
     # POST to webhook if configured
-    webhook_url = os.environ.get("ALERT_WEBHOOK_URL")
+    webhook_url = ALERT_WEBHOOK_URL
     if webhook_url:
         try:
             import requests
@@ -91,17 +105,40 @@ def _send_critical_alert(event_type: str, user_id: int | None, details: str | No
                 "event_type": event_type,
                 "user_id": user_id,
             }, timeout=5)
+            webhook_ok = True
         except Exception as e:
             logger.error("Alert webhook failed: %s", e)
 
     # Send admin email
-    admin_email = os.environ.get("ADMIN_EMAIL")
+    admin_email = ADMIN_EMAIL
     if admin_email:
         try:
             from .email import send_alert
             send_alert(admin_email, f"[CRITICAL] {event_type}", alert_msg)
+            email_ok = True
         except Exception as e:
             logger.error("Alert email failed: %s", e)
+
+    # If ALL delivery channels failed, escalate so the failure isn't silent
+    if not webhook_ok and not email_ok:
+        logger.critical(
+            "ALERT DELIVERY FAILURE — no channel succeeded for %s user=%s: %s",
+            event_type, user_id, details,
+        )
+        if conn is not None:
+            try:
+                now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                conn.execute(
+                    """INSERT INTO security_audit_log
+                       (timestamp, event_type, user_id, details, severity)
+                       VALUES (?, ?, ?, ?, ?)""",
+                    (now, "alert_delivery_failure", user_id,
+                     f"Both webhook and email failed for: {event_type} — {details}",
+                     "CRITICAL"),
+                )
+                conn.commit()
+            except sqlite3.Error:
+                pass  # Table may not exist or DB may be in error state
 
 
 def _redact_pii(text: str) -> str:
@@ -110,7 +147,6 @@ def _redact_pii(text: str) -> str:
     - Email: j***@example.com
     - IP: last octet masked (192.168.1.xxx)
     """
-    import re
     if not text:
         return text
     # Redact emails
@@ -170,7 +206,7 @@ def log_security_event(
             (now, event_str, user_id, ip_address, user_agent, details, severity_str),
         )
         conn.commit()
-    except sqlite3.OperationalError:
+    except sqlite3.Error:
         # Table might not exist yet (pre-migration) — log to stderr
         logger.warning("security_audit_log table not available, event: %s user=%s", event_str, user_id)
 
@@ -184,4 +220,4 @@ def log_security_event(
 
     # Item 9: Critical event alerting
     if severity_str == "CRITICAL":
-        _send_critical_alert(event_str, user_id, details)
+        _send_critical_alert(event_str, user_id, details, conn=conn)

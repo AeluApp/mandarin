@@ -1,0 +1,117 @@
+{
+  "title": "The Neighborhood Cat",
+  "title_zh": "小区的猫",
+  "hsk_level": 4,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're sitting on a bench in your apartment complex's courtyard. A neighbor, Auntie Li, is feeding a stray cat. The evening light is warm and golden.",
+    "setup_zh": "你坐在小区院子里的长椅上。邻居李阿姨正在喂一只流浪猫。傍晚的阳光温暖金黄。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "这只猫已经来了三年了。刚来的时候特别怕人，躲在垃圾桶后面不敢出来。现在它认识我了，每天傍晚等我。",
+        "text_pinyin": "Zhè zhī māo yǐjīng lái le sān nián le. Gāng lái de shíhou tèbié pà rén, duǒ zài lājī tǒng hòumiàn bù gǎn chūlái. Xiànzài tā rènshi wǒ le, měi tiān bàngwǎn děng wǒ.",
+        "text_en": "This cat has been coming for three years now. When it first arrived it was terrified of people, hiding behind the trash cans. Now it knows me and waits for me every evening."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond about the cat.",
+        "options": [
+          {
+            "text_zh": "三年了，那你们已经是老朋友了。信任需要时间，猫和人都一样。",
+            "text_pinyin": "Sān nián le, nà nǐmen yǐjīng shì lǎo péngyǒu le. Xìnrèn xūyào shíjiān, māo hé rén dōu yīyàng.",
+            "text_en": "Three years — you're old friends by now. Trust takes time, for cats and people alike.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Draws a gentle parallel between animal and human trust."
+          },
+          {
+            "text_zh": "你为什么不把它带回家养？",
+            "text_pinyin": "Nǐ wèishénme bù bǎ tā dài huí jiā yǎng?",
+            "text_en": "Why don't you bring it home to raise?",
+            "score": 0.0,
+            "feedback": "Jumps to problem-solving instead of appreciating the relationship as it is."
+          },
+          {
+            "text_zh": "流浪猫会不会有病？你要小心。",
+            "text_pinyin": "Liúlàng māo huì bú huì yǒu bìng? Nǐ yào xiǎoxīn.",
+            "text_en": "Don't stray cats carry diseases? You should be careful.",
+            "score": 0.0,
+            "feedback": "Clinical concern that misses the tenderness of the moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "老朋友，对。我老伴去年走了以后，每天最期待的就是这个时候。你说奇不奇怪，一只猫能让一个人不觉得那么孤单。",
+        "text_pinyin": "Lǎo péngyǒu, duì. Wǒ lǎobàn qùnián zǒu le yǐhòu, měi tiān zuì qīdài de jiù shì zhège shíhou. Nǐ shuō qí bù qíguài, yī zhī māo néng ràng yīge rén bù juéde nàme gūdān.",
+        "text_en": "Old friends, yes. After my husband passed away last year, this is the moment I look forward to most every day. Isn't it strange — a cat can make a person feel less lonely."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond with warmth.",
+        "options": [
+          {
+            "text_zh": "一点也不奇怪。陪伴不一定要说话，有时候安安静静地在一起就够了。这只猫也需要您，你们互相陪伴。",
+            "text_pinyin": "Yīdiǎn yě bù qíguài. Péibàn bù yīdìng yào shuōhuà, yǒu shíhou ān'ānjìngjìng de zài yīqǐ jiù gòu le. Zhè zhī māo yě xūyào nín, nǐmen hùxiāng péibàn.",
+            "text_en": "Not strange at all. Companionship doesn't require words — sometimes being quietly together is enough. This cat needs you too. You keep each other company.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Compassionate and true — validates her experience without minimizing it."
+          },
+          {
+            "text_zh": "您可以参加小区的活动，认识新朋友。",
+            "text_pinyin": "Nín kěyǐ cānjiā xiǎoqū de huódòng, rènshi xīn péngyǒu.",
+            "text_en": "You could join community activities and meet new friends.",
+            "score": 0.0,
+            "feedback": "Well-meaning advice but dismisses her current source of comfort."
+          },
+          {
+            "text_zh": "这只猫是什么颜色的？",
+            "text_pinyin": "Zhè zhī māo shì shénme yánsè de?",
+            "text_en": "What color is this cat?",
+            "score": 0.0,
+            "feedback": "Trivial question after she shared something deeply personal."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "互相陪伴……你说得真好。你知道吗，下雨天它也来，就在那个屋檐下面等我。我给它做了一个小窝，放在楼下。",
+        "text_pinyin": "Hùxiāng péibàn…… nǐ shuō de zhēn hǎo. Nǐ zhīdào ma, xià yǔ tiān tā yě lái, jiù zài nàge wūyán xiàmiàn děng wǒ. Wǒ gěi tā zuò le yīge xiǎo wō, fàng zài lóu xià.",
+        "text_en": "Keeping each other company... that's beautifully put. You know, it comes even on rainy days, waiting under that eave. I made it a little shelter and put it downstairs."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her dedication.",
+        "options": [
+          {
+            "text_zh": "下雨天也来，这说明它是真的信任您了。有些关系不需要语言，不需要解释，只要每天都在就好。",
+            "text_pinyin": "Xià yǔ tiān yě lái, zhè shuōmíng tā shì zhēn de xìnrèn nín le. Yǒuxiē guānxì bù xūyào yǔyán, bù xūyào jiěshì, zhǐyào měi tiān dōu zài jiù hǎo.",
+            "text_en": "Coming even in the rain — that shows it truly trusts you. Some relationships don't need language or explanation, just showing up every day.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Affirming and poetic — elevates a simple bond into something meaningful."
+          },
+          {
+            "text_zh": "冬天会不会太冷？你应该给它买个暖的窝。",
+            "text_pinyin": "Dōngtiān huì bú huì tài lěng? Nǐ yīnggāi gěi tā mǎi ge nuǎn de wō.",
+            "text_en": "Won't it be too cold in winter? You should buy it a warm shelter.",
+            "score": 0.0,
+            "feedback": "Practical advice that misses the emotional resonance."
+          },
+          {
+            "text_zh": "我家附近也有很多流浪猫。",
+            "text_pinyin": "Wǒ jiā fùjìn yě yǒu hěn duō liúlàng māo.",
+            "text_en": "There are lots of stray cats near my home too.",
+            "score": 0.0,
+            "feedback": "Redirects to yourself instead of staying with her story."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "In Chinese residential communities (小区), feeding stray cats is a common practice, especially among older residents. These quiet daily rituals often become important sources of companionship, particularly for those living alone after losing a spouse. The relationship between feeder and stray cat represents a form of mutual care that transcends the need for words."
+  }
+}

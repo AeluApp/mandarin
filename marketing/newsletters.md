@@ -24,7 +24,7 @@ Hey —
 
 [1-sentence soft mention of the app, if relevant — not every issue]
 
-— Mandarin
+— Aelu
 
 P.S. [One question to invite replies]
 ```
@@ -50,7 +50,7 @@ The bonus: when you look up a word while reading, you've encountered it in conte
 
 More on that next time.
 
-— Mandarin
+— Aelu
 
 P.S. What's the hardest part of Chinese for you right now? Hit reply — I read every one.
 
@@ -75,7 +75,7 @@ This is especially powerful for Chinese, where you're looking at 3,000-5,000+ un
 
 The practical takeaway: **review new words within 24 hours of first encountering them.** If you read a passage today and looked up 5 words, review those 5 words tomorrow. Don't wait until your "next study session" three days from now.
 
-— Mandarin
+— Aelu
 
 P.S. Do you use spaced repetition already? Anki, an app, or something else? Curious what tools people are using.
 
@@ -103,7 +103,7 @@ Three weeks in, the gap is closing. Not dramatically — listening is genuinely 
 
 The lesson: if you're only tracking vocabulary count, you're flying blind. Track each skill separately and let your study time follow the weakest one.
 
-— Mandarin
+— Aelu
 
 P.S. Which of the four skills (vocabulary, listening, reading, speaking) is YOUR weakest? I bet it's listening.
 
@@ -130,7 +130,7 @@ The research backs this up: discrimination between similar sounds improves with 
 
 If you do nothing else this week, find a tone pair drill (many apps and websites have them) and spend 10 minutes on it. You'll feel the difference.
 
-— Mandarin
+— Aelu
 
 P.S. Which tone combination trips you up most? For most English speakers it's 2nd + 3rd.
 
@@ -161,7 +161,7 @@ The transition timeline: old HSK tests will be phased out through 2026-2027. Che
 
 The new HSK is actually a better test. It measures real proficiency, not just word recognition.
 
-— Mandarin
+— Aelu
 
 P.S. Are you planning to take HSK before or after the 3.0 transition? Reply and let me know — I'm curious how people are thinking about timing.
 
@@ -193,7 +193,7 @@ When I drill 看见 after reading a story where someone "看见了一个老朋�
 
 I've been using this cycle for [X] weeks and the difference in retention is noticeable. Words from reading stick. Words from lists... less so.
 
-— Mandarin
+— Aelu
 
 P.S. If you try this approach (with any reading material + any flashcard system), I'd love to hear how it goes.
 
@@ -221,13 +221,13 @@ For weeks, I tracked "items drilled per day." This is a vanity metric. It measur
 
 **Lesson for learners:** "I studied for 2 hours" means nothing. "I can recognize 85% of HSK 3 vocabulary in context" means something.
 
-— Mandarin
+— Aelu
 
 P.S. What's a study mistake you made that you wish someone had warned you about?
 
 ---
 
-## Issue 8: One Year of Mandarin (When You Reach This Milestone)
+## Issue 8: One Year of Learning (When You Reach This Milestone)
 **Subject:** What [X] months of Mandarin actually looks like — the honest version
 
 Hey —
@@ -264,7 +264,7 @@ I've been studying Mandarin for [X] months. Here's the honest report.
 
 This is a multi-year project. I'm at the beginning. But the beginning is further than I expected to get.
 
-— Mandarin
+— Aelu
 
 P.S. If you've been studying Chinese for a while, how does your experience compare? I'd love to hear.
 

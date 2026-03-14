@@ -1,4 +1,4 @@
-# Community Content Library — Mandarin
+## Community Content Library — Aelu
 
 Pre-written, ready-to-post content for community engagement. Every piece is value-first. Copy, personalize, and post.
 
@@ -42,7 +42,7 @@ The honest answer: basic functional Chinese in 1 year, comfortable in 2-3 years,
 
 There's no single best — it depends on what skill you need most:
 
-**For vocabulary/SRS:** Hack Chinese or Anki if you like building your own decks. Both use proven spaced repetition. If you want something that goes beyond flashcards with 27+ drill types and adaptive multi-skill scheduling, I built an app called Mandarin that does this — but I'm biased.
+**For vocabulary/SRS:** Hack Chinese or Anki if you like building your own decks. Both use proven spaced repetition. If you want something that goes beyond flashcards with 27+ drill types and adaptive multi-skill scheduling, I built an app called Aelu that does this — but I'm biased.
 
 **For absolute beginners:** HelloChinese has the best structured beginner course with a gentle learning curve.
 
@@ -831,7 +831,7 @@ The honest reason: I can't afford it. If 1,000 users each run 20 drill sessions 
 
 The principled reason: language learning doesn't need AI at runtime. Spaced repetition is a deterministic algorithm. Tone pair drilling has objectively correct answers. Reading comprehension questions have fixed answers. The schedule should be computed, not generated.
 
-Where AI helped: I used Claude to generate seed content — 299 vocabulary items, context notes, dialogue scenarios, grammar explanations. But this was a one-time authoring cost, not a per-session expense.
+Where AI helped: I used Claude to help generate seed content — vocabulary items, context notes, dialogue scenarios, grammar explanations. The library now has 10,000+ items across HSK 1-9. But this was a one-time authoring cost, not a per-session expense.
 
 **Why SQLite:**
 
@@ -914,7 +914,7 @@ Every new language learning app launches with "powered by GPT-4" or "AI tutor in
 
 **Why:**
 
-**Cost predictability.** LLM APIs charge per token. My costs scale linearly with usage. For a $12/month consumer app, I need costs under $1/user/month to be viable. A single GPT-4 conversation can cost $0.10-0.50. Ten drill sessions with AI grading could consume my entire margin.
+**Cost predictability.** LLM APIs charge per token. My costs scale linearly with usage. For a $14.99/month consumer app, I need costs under $1/user/month to be viable. A single GPT-4 conversation can cost $0.10-0.50. Ten drill sessions with AI grading could consume my entire margin.
 
 **Determinism.** When a learner gets a drill wrong, I need to know exactly why and adjust the schedule accordingly. LLM outputs are stochastic — the same input can produce different grades. My scoring logic is deterministic: given the same input, you always get the same result. This makes debugging, testing, and optimization possible.
 
@@ -922,7 +922,7 @@ Every new language learning app launches with "powered by GPT-4" or "AI tutor in
 
 **Offline capability.** My app works without internet. If the AI goes down, my users still study.
 
-**Where AI was useful:** Content creation. I used Claude to help author 299 vocabulary context notes, dialogue scenarios, and reading passages. This was a one-time cost during development, not a runtime dependency.
+**Where AI was useful:** Content creation. I used Claude to help author vocabulary context notes, dialogue scenarios, and reading passages — the library now covers 10,000+ items across HSK 1-9. This was a one-time cost during development, not a runtime dependency.
 
 **Where I might add AI later:** Conversation practice. There's no deterministic substitute for free-form speaking practice. If I add it, it'll be an optional premium feature with its own cost structure — not embedded in the core drill system.
 
@@ -1008,7 +1008,7 @@ Confidence-rated recall and error analysis. Tests whether you know what you know
 
 **Title:** Solo dev economics: what it actually costs to run a language learning app
 
-I'm a solo developer running a Chinese learning app at $12/month. Here's the actual breakdown of costs, revenue, and whether this is viable.
+I'm a solo developer running a Chinese learning app at $14.99/month. Here's the actual breakdown of costs, revenue, and whether this is viable.
 
 **Fixed costs (monthly):**
 - Domain + DNS: $1.50/month ($18/year)
@@ -1018,22 +1018,22 @@ I'm a solo developer running a Chinese learning app at $12/month. Here's the act
 
 **Variable costs (per user):**
 - Infrastructure per user: ~$0.01/month (SQLite is free, no API calls)
-- Payment processing (Stripe): 2.9% + $0.30 per transaction = $0.65/month per paying user
-- Total variable: ~$0.66/month per paying user
+- Payment processing (Stripe): 2.9% + $0.30 per transaction = $0.74/month per paying user
+- Total variable: ~$0.75/month per paying user
 
 **Revenue per paying user:**
-- $12.00 gross
-- -$0.66 payment processing
-- -$3.60 affiliate commission (if referred)
-- = $7.74 net (with affiliate) or $11.34 net (direct)
+- $14.99 gross
+- -$0.74 payment processing
+- -$4.50 affiliate commission (if referred)
+- = $9.75 net (with affiliate) or $14.25 net (direct)
 
 **Break-even analysis:**
 - Fixed costs: $12/month
-- Need 2 paying users to cover fixed costs (laughably low)
+- Need 1 paying user to cover fixed costs (laughably low)
 - Real break-even question: how many users to cover my time?
 - At 20 hours/week and $50/hour opportunity cost: need $4,000/month
-- $4,000 ÷ $8.50 average net per user = ~470 paying users
-- At 5-10% free-to-paid conversion: need 4,700-9,400 total users
+- $4,000 ÷ $12 average net per user = ~333 paying users
+- At 5-10% free-to-paid conversion: need 3,300-6,600 total users
 
 **The advantage of zero marginal cost:**
 Because there are no API calls, no AI tokens, and no per-session compute, my 1,000th user costs the same as my 10th user: essentially nothing. This is the structural advantage of deterministic systems over AI-dependent ones.
@@ -1041,10 +1041,10 @@ Because there are no API calls, no AI tokens, and no per-session compute, my 1,0
 **The disadvantage of being solo:**
 Everything takes longer. A feature that a team builds in a week takes me a month. Customer support is me. Marketing is me. Bug fixes compete with feature development. But the flip side: my overhead is near zero, my decision-making is instant, and I keep 100% of the equity.
 
-**Is $12/month the right price?**
-Market context: Duolingo Super is $7/month, HelloChinese is $10/month, Hack Chinese is $15/month, Skritter is $15/month. At $12, I'm in the middle — not the cheapest (I'm not trying to be) and not the most expensive (I don't have the brand to command premium pricing yet).
+**Is $14.99/month the right price?**
+Market context: Duolingo Super is $7/month, HelloChinese is $10/month, Hack Chinese is $15/month, Skritter is $15/month. At $14.99, I'm near the top of the range — not the cheapest (I'm not trying to be) and priced alongside the serious tools (Hack Chinese, Skritter) because that's the audience I serve.
 
-The math works if I reach 500 paying users. The question is whether the market is big enough and my product is good enough. We'll see.
+The math works if I reach 350 paying users. The question is whether the market is big enough and my product is good enough. We'll see.
 
 ---
 
@@ -1104,40 +1104,40 @@ This is great to see. Your listening-to-vocabulary gap is a common pattern — t
 Congrats on passing. That's your work, not the app's — the tool just schedules things, you did the learning. Curious: was there anything in the study process that surprised you or that you'd do differently looking back?
 
 **5. Someone compares the app favorably to a competitor**
-I appreciate that, but I want to be fair — [competitor] does [their strength] really well, and if that's what someone needs most, it might be the better choice for them. The apps serve somewhat different priorities. Glad Mandarin fits what you're looking for though.
+I appreciate that, but I want to be fair — [competitor] does [their strength] really well, and if that's what someone needs most, it might be the better choice for them. The apps serve somewhat different priorities. Glad Aelu fits what you're looking for though.
 
 ### Criticism Responses
 
 **6. "The content is too limited"**
-Fair criticism. Right now the strongest coverage is HSK 1-3 with 299 seed items. HSK 4-6 content exists but is thinner. I'm actively expanding it. If you're at a level that feels underserved, I'd genuinely like to know what specific content you're missing — that directly shapes what I build next.
+Fair criticism at launch, but we've expanded significantly — the system now has 10,000+ vocabulary items covering HSK 1-9. The deepest supplementary content (context notes, dialogue scenarios, reading passages) is still strongest at HSK 1-3, with ongoing expansion for higher levels. If you're at a level that feels underserved, I'd genuinely like to know what specific content you're missing — that directly shapes what I build next.
 
-**7. "$12/month is too expensive"**
-I understand. The free tier covers all of HSK 1-2 with no time limit, so you can use that indefinitely if it's enough for your current level. The paid tier makes sense when you hit HSK 3+ and want the full diagnostics and content. For context, my costs per user are near zero (no AI tokens, no cloud), so the price reflects content and development time rather than infrastructure costs. But I get it — $12 is $12.
+**7. "$14.99/month is too expensive"**
+I understand. The free tier covers all of HSK 1-2 with no time limit, so you can use that indefinitely if it's enough for your current level. The paid tier makes sense when you hit HSK 3+ and want the full diagnostics and content. For context, my costs per user are near zero (no AI tokens, no cloud), so the price reflects content and development time rather than infrastructure costs. But I get it — $14.99 is $14.99.
 
 **8. "I prefer Anki"**
-Completely reasonable. Anki is a fantastic tool, and if you've already invested time building your decks and workflow, switching has a real cost. The main thing Mandarin offers that Anki doesn't is multi-skill drilling (listening, tones, cloze, production — not just flashcards) and the cleanup loop from reading. But if flashcard-style SRS is what works for you, Anki is hard to beat.
+Completely reasonable. Anki is a fantastic tool, and if you've already invested time building your decks and workflow, switching has a real cost. The main thing Aelu offers that Anki doesn't is multi-skill drilling (listening, tones, cloze, production — not just flashcards) and the cleanup loop from reading. But if flashcard-style SRS is what works for you, Anki is hard to beat.
 
 **9. "There's no mobile app"**
 You're right, and it's a real gap. It works in mobile browsers but it's not the same as a native app. I'm a solo developer and building native iOS + Android apps would double my development surface. It's on the roadmap but I don't want to promise a timeline I can't keep. For now, mobile browser is the workaround.
 
 **10. "The app is too niche"**
-It is niche — deliberately. I built it for self-study adults working through HSK levels with structured SRS practice. If you want conversation practice, gamification, or a broad multi-language platform, there are much better options (HelloTalk, Duolingo, Babbel). Mandarin is for people who want deep, adaptive drilling in Chinese specifically. That's a small audience, but I'd rather serve them well than serve everyone poorly.
+It is niche — deliberately. I built it for self-study adults working through HSK levels with structured SRS practice. If you want conversation practice, gamification, or a broad multi-language platform, there are much better options (HelloTalk, Duolingo, Babbel). Aelu is for people who want deep, adaptive drilling in Chinese specifically. That's a small audience, but I'd rather serve them well than serve everyone poorly.
 
 ### Question Responses
 
 **11. "How is this different from Anki?"**
 Three main things: (1) 27 drill types beyond flashcards — cloze, listening, speaking, tone pairs, sentence construction. Anki has one: flashcard. (2) Multi-skill diagnostics — the app tracks vocabulary, reading, listening, and tones separately and tells you which is lagging. Anki tracks cards due. (3) The cleanup loop — words you look up during graded reading feed into your drill queue automatically. No manual card creation.
 
-The tradeoff: you lose Anki's infinite customization and community deck ecosystem. If you love building and tweaking decks, Anki is better. If you want to open an app and immediately start multi-skill practice, Mandarin is better.
+The tradeoff: you lose Anki's infinite customization and community deck ecosystem. If you love building and tweaking decks, Anki is better. If you want to open an app and immediately start multi-skill practice, Aelu is better.
 
 **12. "Does it work on iPhone/Android?"**
 It's a web app, so it works in any browser including mobile Safari and Chrome on Android. No app store download needed. The experience is good on mobile but not identical to a native app — no push notifications, slightly different touch interactions. Native mobile apps are on the roadmap but I don't have a timeline yet.
 
 **13. "Is there a free trial?"**
-The free tier IS the trial — it covers all HSK 1-2 content with all 27 drill types, no time limit, no credit card required. If you're at HSK 1-2, you might never need to pay. The paid tier ($12/month) unlocks HSK 3-6+ content, full diagnostics, and advanced features.
+The free tier IS the trial — it covers all HSK 1-2 content with all 27 drill types, no time limit, no credit card required. If you're at HSK 1-2, you might never need to pay. The paid tier ($14.99/month) unlocks HSK 3-6+ content, full diagnostics, and advanced features.
 
 **14. "What HSK levels does it cover?"**
-HSK 1-6, with HSK 7-9 in progress. The deepest coverage is HSK 1-3 right now (299 seed items, full context notes, dialogue scenarios). HSK 4-6 has vocabulary and drills but the supplementary content is still being expanded. HSK 7-9 is newer and actively being built.
+HSK 1-9. The system has 10,000+ vocabulary items across all nine levels. The deepest supplementary content (full context notes, dialogue scenarios, graded reading) is HSK 1-3. HSK 4-9 has vocabulary and drills with supplementary content still being expanded.
 
 **15. "Can I import my existing flashcard decks?"**
 Not currently. The app uses its own curriculum aligned to HSK levels rather than user-created decks. This is a deliberate choice — it means every item has been quality-checked and has context notes, audio, and multiple drill types attached. The tradeoff is less flexibility. If deck import is important to you, Anki is the better choice.
@@ -1197,7 +1197,7 @@ Welcome! Here's a no-nonsense starting path:
 Don't buy 5 textbooks. Don't try 8 apps. Pick one course and one SRS tool, and stick with them for 3 months before evaluating.
 
 **30. Advanced learner asking if the app is worth it**
-Honestly, it depends on what you need. The strongest coverage is HSK 1-3 right now. If you're at HSK 5-6, the content at your level is thinner and you might not get enough value for $12/month yet. HSK 7-9 content is being built but isn't complete. If your main need is reading practice and encounter-based drilling at higher levels, it could still be useful — the cleanup loop works at any level. But I'd rather be honest about the current coverage than oversell. Try the free tier and see if the drill types and approach click for you.
+Honestly, it depends on what you need. The strongest coverage is HSK 1-3 right now. If you're at HSK 5-6, the content at your level is thinner and you might not get enough value for $14.99/month yet. HSK 7-9 content is being built but isn't complete. If your main need is reading practice and encounter-based drilling at higher levels, it could still be useful — the cleanup loop works at any level. But I'd rather be honest about the current coverage than oversell. Try the free tier and see if the drill types and approach click for you.
 
 ---
 
@@ -1422,11 +1422,11 @@ Honest ratings by a learner who has tried all of these. 5 = excellent, 1 = weak/
 | **Chinese Zero to Hero** | $20-30/mo | 2 | 3 | 3 | 4 | 3 | 5 | 2 | Web | Full video course, HSK 1-9 |
 | **LingoDeer** | $0-12/mo | 3 | 4 | 2 | 3 | 2 | 3 | 3 | iOS/Android | Gamified but more rigorous than Duolingo |
 | **Dong Chinese** | Free-$5/mo | 3 | 2 | 4 | 2 | 1 | 4 | 2 | Web/iOS | Comprehensible input reading |
-| **Mandarin** | $0-12/mo | 5 | 5 (27 types) | 4 | 4 | 3 | 5 | 5 | Web | Multi-skill SRS, serious self-study |
+| **Aelu** | $0-14.99/mo | 5 | 5 (27 types) | 4 | 4 | 3 | 5 | 5 | Web | Multi-skill SRS, serious self-study |
 
 **Notes:**
 - Ratings reflect my assessment as of February 2026. Features and pricing change.
-- I built Mandarin, so take that rating with appropriate skepticism.
+- I built Aelu, so take that rating with appropriate skepticism.
 - "Best for" assumes the learner fits that specific need — there's no single "best app."
 - Most serious learners use 2-3 tools. My recommended combinations below.
 
@@ -1436,9 +1436,9 @@ Honest ratings by a learner who has tried all of these. 5 = excellent, 1 = weak/
 
 **Beginner setup:** HelloChinese + Pleco + any graded reader (Du Chinese or Mandarin Companion books)
 
-**Serious self-study:** Mandarin or Hack Chinese (SRS) + Pleco (dictionary) + Du Chinese (reading) + iTalki (speaking, 1-2x/week)
+**Serious self-study:** Aelu or Hack Chinese (SRS) + Pleco (dictionary) + Du Chinese (reading) + iTalki (speaking, 1-2x/week)
 
-**HSK exam prep:** Mandarin or Hack Chinese (adaptive SRS) + HSK Standard Course textbook + past exam papers
+**HSK exam prep:** Aelu or Hack Chinese (adaptive SRS) + HSK Standard Course textbook + past exam papers
 
 **Full immersion support:** HelloTalk (conversation) + Pleco (dictionary) + any SRS tool + Chinese media at your level
 

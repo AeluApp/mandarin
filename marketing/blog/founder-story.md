@@ -1,12 +1,12 @@
 # I Built a Chinese Learning App. Here's What I Learned About Language Acquisition.
 
-*I started learning Mandarin and couldn't find a tool that worked the way my brain needed it to. So I built one. Along the way, I learned more about how memory works than I expected — and made every mistake in the product-development playbook.*
+*I started learning Chinese and couldn't find a tool that worked the way my brain needed it to. So I built one. Along the way, I learned more about how memory works than I expected — and made every mistake in the product-development playbook.*
 
 ---
 
 ## How this started
 
-About two years ago, I decided to learn Mandarin. Not "learn a few phrases for a trip" — actually learn it. Read a newspaper. Have a conversation. Understand what's being said in the Chinese dramas my partner watches.
+About two years ago, I decided to learn Chinese. Not "learn a few phrases for a trip" — actually learn it. Read a newspaper. Have a conversation. Understand what's being said in the Chinese dramas my partner watches.
 
 I downloaded Duolingo first, because everyone does. It was fine for about a week. The gamification kept me opening the app, but after a few days I realized I was optimizing for streaks, not learning. I'd match pictures to words, tap the right answer in a multiple-choice lineup, and feel good about a green progress bar — but when I tried to recall anything without the app's scaffolding, it was gone. The game mechanics were working exactly as designed. They just weren't designed for retention.
 
@@ -110,12 +110,12 @@ I'm still building it. The graded reading library is growing. The drill types ar
 
 If you're learning Chinese, I'd genuinely like you to try it. Not because I need users for a growth metric — I'm a solo developer, not a startup chasing Series A. But because the tool gets better when more people use it and tell me what's missing.
 
-HSK 1-2 content is free, no time limit. Full access to all levels, all drill types, all diagnostics is $12/month. No annual upsell, no "premium tier," no in-app purchases.
+HSK 1-2 content is free, no time limit. Full access to all levels, all drill types, all diagnostics is $14.99/month. No annual upsell, no "premium tier," no in-app purchases.
 
-If you're curious: [mandarin.app](https://mandarin.app)
+If you're curious: [aelu.app](https://aelu.app)
 
-And if you just read this whole thing and have thoughts — about the approach, the research, the mistakes — I'm at hello@mandarin.app. I read everything.
+And if you just read this whole thing and have thoughts — about the approach, the research, the mistakes — I'm at hello@aeluapp.com. I read everything.
 
 ---
 
-*This post is part of a series on learning Mandarin as an adult. More at [mandarin.app/blog](https://mandarin.app/blog).*
+*This post is part of a series on learning Chinese as an adult. More at [aeluapp.com/blog](https://aeluapp.com/blog).*

@@ -1,0 +1,89 @@
+{
+    "title": "The Dream I Keep Having",
+    "title_zh": "反复出现的梦",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You and your friend Mingyu are walking home after a late dinner. The streetlights cast long shadows. He mentions a recurring dream he's been having.",
+        "setup_zh": "你和朋友明宇晚饭后一起走路回家。路灯拉出长长的影子。他提到了一个反复做的梦。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你会不会觉得我奇怪？我最近一直做一个同样的梦。梦里我走在一条很长的路上，两边都是麦田，风吹着麦子发出沙沙的声音。我不知道要去哪里，但我不着急。",
+                "text_pinyin": "Nǐ huì bú huì juéde wǒ qíguài? Wǒ zuìjìn yīzhí zuò yīge tóngyàng de mèng. Mèng lǐ wǒ zǒu zài yī tiáo hěn cháng de lù shang, liǎng biān dōu shì màitián, fēng chuī zhe màizi fā chū shāshā de shēngyīn. Wǒ bù zhīdào yào qù nǎlǐ, dàn wǒ bù zháojí.",
+                "text_en": "Would you think I'm strange? I've been having the same dream over and over. In the dream I'm walking on a very long road, wheat fields on both sides, wind making the wheat rustle. I don't know where I'm going, but I'm not in a hurry."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his dream.",
+                "options": [
+                    {
+                        "text_zh": "一点都不奇怪。梦有时候比现实更诚实。也许你的梦在说，你不需要知道目的地，路上的感觉对了就好。你在梦里不着急，也许是因为醒着的时候一直在赶路。",
+                        "text_pinyin": "Yīdiǎn dōu bù qíguài. Mèng yǒu shíhou bǐ xiànshí gèng chéngshí. Yěxǔ nǐ de mèng zài shuō, nǐ bù xūyào zhīdào mùdìdì, lù shang de gǎnjué duì le jiù hǎo. Nǐ zài mèng lǐ bù zháojí, yěxǔ shì yīnwèi xǐng zhe de shíhou yīzhí zài gǎn lù.",
+                        "text_en": "Not strange at all. Dreams are sometimes more honest than reality. Maybe your dream is saying you don't need to know the destination — the feeling on the road being right is enough. You're unhurried in the dream, maybe because you're always rushing when awake.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Deep and gentle — reads the dream as a message from his subconscious."
+                    },
+                    {
+                        "text_zh": "你是不是压力太大了？做梦跟压力有关系。",
+                        "text_pinyin": "Nǐ shì bu shì yālì tài dà le? Zuòmèng gēn yālì yǒu guānxi.",
+                        "text_en": "Are you under too much stress? Dreams are related to stress.",
+                        "score": 0.0,
+                        "feedback": "Medicalizes a beautiful dream — misses the peaceful quality he's describing."
+                    },
+                    {
+                        "text_zh": "我很少做梦，或者说醒来就忘了。",
+                        "text_pinyin": "Wǒ hěn shǎo zuòmèng, huòzhě shuō xǐng lái jiù wàng le.",
+                        "text_en": "I rarely dream, or I forget as soon as I wake up.",
+                        "score": 0.0,
+                        "feedback": "Self-referential — doesn't engage with what he shared."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "清醒的时候一直在赶路……你说得太对了。白天我总是在想下一步要做什么，但梦里的我只是在走。没有手机，没有计划，只有风和麦田。也许那才是我真正想要的生活。",
+                "text_pinyin": "Qīngxǐng de shíhou yīzhí zài gǎn lù…… nǐ shuō de tài duì le. Báitiān wǒ zǒng shì zài xiǎng xià yī bù yào zuò shénme, dàn mèng lǐ de wǒ zhǐ shì zài zǒu. Méiyǒu shǒujī, méiyǒu jìhuà, zhǐ yǒu fēng hé màitián. Yěxǔ nà cái shì wǒ zhēnzhèng xiǎng yào de shēnghuó.",
+                "text_en": "Always rushing when awake... you're so right. During the day I'm always thinking about what to do next, but in the dream I'm just walking. No phone, no plans, just wind and wheat fields. Maybe that's the life I truly want."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer a thought about listening to what dreams tell us.",
+                "options": [
+                    {
+                        "text_zh": "你不用搬到麦田去住，但可以在生活里创造一些「梦里的时刻」——关掉手机，出去走走，让自己有不知道去哪里的时间。梦给了你线索，告诉你心里在渴望什么。",
+                        "text_pinyin": "Nǐ bú yòng bān dào màitián qù zhù, dàn kěyǐ zài shēnghuó lǐ chuàngzào yīxiē \"mèng lǐ de shíkè\" — guān diào shǒujī, chūqù zǒuzou, ràng zìjǐ yǒu bù zhīdào qù nǎlǐ de shíjiān. Mèng gěi le nǐ xiànsuǒ, gàosù nǐ xīn lǐ zài kěwàng shénme.",
+                        "text_en": "You don't have to move to a wheat field, but you can create \"dream moments\" in life — turn off your phone, go walk, give yourself time without direction. The dream gave you a clue about what your heart longs for.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Practical wisdom — bridges the dream world and daily life beautifully."
+                    },
+                    {
+                        "text_zh": "你可以试试睡觉前少喝水，也许就不做梦了。",
+                        "text_pinyin": "Nǐ kěyǐ shìshì shuìjiào qián shǎo hē shuǐ, yěxǔ jiù bú zuòmèng le.",
+                        "text_en": "Try drinking less water before bed, maybe you won't dream.",
+                        "score": 0.0,
+                        "feedback": "Misses the entire point — he likes the dream."
+                    },
+                    {
+                        "text_zh": "梦没有什么意义，只是大脑在整理信息。",
+                        "text_pinyin": "Mèng méiyǒu shénme yìyì, zhǐ shì dànǎo zài zhěnglǐ xìnxī.",
+                        "text_en": "Dreams don't have meaning, the brain is just organizing information.",
+                        "score": 0.0,
+                        "feedback": "Reductive — dismisses a meaningful personal experience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "梦里的时刻……我喜欢这个说法。也许今晚回去以后，我在梦里会走到一个地方。不管去哪里，至少路上有风。",
+                "text_pinyin": "Mèng lǐ de shíkè…… wǒ xǐhuan zhège shuōfǎ. Yěxǔ jīn wǎn huí qù yǐhòu, wǒ zài mèng lǐ huì zǒu dào yīge dìfang. Bùguǎn qù nǎlǐ, zhìshǎo lù shang yǒu fēng.",
+                "text_en": "Dream moments... I like that phrase. Maybe tonight when I go back, I'll walk somewhere in my dream. Wherever it is, at least there'll be wind along the way."
+            }
+        ],
+        "cultural_note": "Dream interpretation (解梦, jiěmèng) has a long history in Chinese culture, from the ancient classic「周公解梦」(Duke of Zhou's Dream Interpretations) to modern psychological interest. The image of wheat fields and wind evokes rural China's pastoral landscapes, which hold nostalgic power for urban workers whose families often come from farming communities. Dreams of open spaces are often interpreted as the subconscious seeking freedom from constraint."
+    }
+}

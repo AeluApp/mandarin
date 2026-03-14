@@ -53,6 +53,9 @@ case "$CMD" in
     doctor)
         python3 -m mandarin.doctor
         ;;
+    wiring)
+        python3 -m mandarin.wiring
+        ;;
     churn-report)
         shift
         python3 -m mandarin.churn_detection "$@"
@@ -121,12 +124,20 @@ case "$CMD" in
         echo "    churn-report Churn detection and risk scoring"
         echo "    metrics      Weekly metrics report with KPIs"
         echo ""
+        echo "  OpenClaw:"
+        echo "    telegram     Start Telegram bot"
+        echo "    whatsapp     Start WhatsApp bot (webhook via Flask)"
+        echo "    discord      Start Discord bot"
+        echo "    imessage     Start iMessage bot (macOS only)"
+        echo "    voice        Start voice agent server"
+        echo ""
         echo "  System:"
         echo "    assess       Diagnostic assessment"
         echo "    improve      Self-improvement proposals"
         echo "    focus <lens> Boost a content lens"
         echo "    settings     View/change settings"
         echo "    doctor       System health check"
+        echo "    wiring       Integration wiring check"
         echo "    seed-context Load context notes"
         echo "    retention-purge  Purge expired data per retention policies"
         echo "    test         Run tests"
@@ -136,6 +147,30 @@ case "$CMD" in
         echo "  Shell integration:"
         echo "    source ~/mandarin/shell-hook.sh  (add to .zshrc)"
         echo ""
+        ;;
+    telegram)
+        python3 -c "from mandarin.openclaw.telegram_bot import run_bot; run_bot()"
+        ;;
+    whatsapp)
+        echo "  WhatsApp bot runs via Flask webhooks."
+        echo "  Set OPENCLAW_WHATSAPP_TOKEN, OPENCLAW_WHATSAPP_PHONE_ID,"
+        echo "  OPENCLAW_WHATSAPP_VERIFY_TOKEN, OPENCLAW_WHATSAPP_OWNER_NUMBER"
+        echo "  then start the web server: ./run app"
+        echo "  Webhook URL: https://your-domain/api/openclaw/webhook/whatsapp"
+        ;;
+    discord)
+        python3 -c "from mandarin.openclaw.discord_bot import run_bot; run_bot()"
+        ;;
+    imessage)
+        python3 -c "from mandarin.openclaw.imessage_bot import run_bot; run_bot()"
+        ;;
+    voice)
+        python3 -c "
+import asyncio
+from mandarin.openclaw.voice_agent import run_voice_server
+from mandarin.settings import OPENCLAW_PIPECAT_PORT
+asyncio.run(run_voice_server(OPENCLAW_PIPECAT_PORT))
+"
         ;;
     "")
         python3 -m mandarin.cli

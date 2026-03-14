@@ -1,0 +1,124 @@
+{
+    "title": "The Shoe Size Conversion",
+    "title_zh": "鞋码换算",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_shopping_3_02_v0",
+    "tree": {
+        "setup": "A sneaker store in a shopping mall. You're looking for running shoes but Chinese shoe sizes are different from what you're used to. The salesperson, Xiao Feng, is a sneaker enthusiast who treats each shoe fitting like a scientific experiment. He has a foot-measuring device and strong opinions about arch support. The back wall is floor-to-ceiling boxes in perfect chromatic order.",
+        "setup_zh": "商场里的运动鞋店。你想买跑步鞋，但中国鞋码和你习惯的不一样。售货员小冯是运动鞋发烧友，把每次试鞋当成科学实验。他有量脚器，对足弓支撑有强烈看法。后面的墙上是从地板到天花板的鞋盒，按颜色完美排列。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎！要买什么类型的鞋？跑步、篮球还是休闲的？",
+                "text_pinyin": "huānyíng! yào mǎi shénme lèixíng de xié? pǎobù, lánqiú háishi xiūxián de?",
+                "text_en": "Welcome! What type of shoes are you looking for? Running, basketball, or casual?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain what you need and your size confusion.",
+                "options": [
+                    {
+                        "text_zh": "想买跑步鞋。但是我不知道中国的鞋码。我在国外穿42号，这里是多大？",
+                        "text_pinyin": "xiǎng mǎi pǎobù xié. dànshì wǒ bù zhīdào zhōngguó de xiémǎ. wǒ zài guówài chuān sìshíèr hào, zhèlǐ shì duō dà?",
+                        "text_en": "I want running shoes. But I don't know Chinese shoe sizes. I wear 42 abroad, what size is that here?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Feng pulls out a conversion chart.「欧码42的话，中国码也差不多42到43。但是每个品牌不一样，我帮你量一下脚最准。」鞋码 is 'shoe size.' 欧码 is 'European size.' Giving a reference size helps enormously."
+                    },
+                    {
+                        "text_zh": "跑步鞋。我不知道自己穿多大的。可以试穿吗？",
+                        "text_pinyin": "pǎobù xié. wǒ bù zhīdào zìjǐ chuān duō dà de. kěyǐ shì chuān ma?",
+                        "text_en": "Running shoes. I don't know my size. Can I try them on?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「当然可以！我先帮你量一下脚。」Xiao Feng produces his measuring device with pride. 试穿 is 'try on.' Without a starting size, measuring first saves time."
+                    },
+                    {
+                        "text_zh": "跑步鞋。哪双最好？",
+                        "text_pinyin": "pǎobù xié. nǎ shuāng zuì hǎo?",
+                        "text_en": "Running shoes. Which pair is the best?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「'最好'看你怎么定义。你跑多远？路面是什么样的？你的脚型是什么？」Xiao Feng needs data before he can recommend. 哪双 uses the measure word 双 for pairs of shoes."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "量好了。你的脚是43码，但是偏宽。这双适合宽脚型的，你试试。对了，跑步鞋要买大半码的，不然跑久了脚趾会不舒服。",
+                "text_pinyin": "liáng hǎo le. nǐ de jiǎo shì sìshísān mǎ, dànshì piān kuān. zhè shuāng shìhé kuān jiǎoxíng de, nǐ shìshi. duì le, pǎobù xié yào mǎi dà bàn mǎ de, bùrán pǎo jiǔ le jiǎozhǐ huì bù shūfu.",
+                "text_en": "Measured. You're a 43, but on the wide side. This pair suits wide feet, try it. By the way, running shoes should be half a size up, otherwise your toes will be uncomfortable on long runs."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try them on and give feedback.",
+                "options": [
+                    {
+                        "text_zh": "穿起来挺舒服的，但是感觉鞋底有点硬。有没有软一点的？我主要在柏油路上跑。",
+                        "text_pinyin": "chuān qǐlai tǐng shūfu de, dànshì gǎnjué xiédǐ yǒudiǎn yìng. yǒu méiyǒu ruǎn yìdiǎn de? wǒ zhǔyào zài bǎiyóulù shàng pǎo.",
+                        "text_en": "They're pretty comfortable, but the sole feels a bit hard. Do you have softer ones? I mainly run on asphalt.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「柏油路的话确实需要减震好一点的。」Xiao Feng pulls out another pair reverently.「这双减震是最好的，但是贵两百块。」鞋底 is 'sole.' 减震 is 'cushioning.' Specifying your running surface shows sophistication."
+                    },
+                    {
+                        "text_zh": "大小合适。颜色有别的吗？我不太喜欢这个颜色。",
+                        "text_pinyin": "dàxiǎo héshì. yánsè yǒu bié de ma? wǒ bú tài xǐhuan zhè ge yánsè.",
+                        "text_en": "Size fits. Are there other colors? I don't really like this one.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「这款有黑色、白色和灰色。灰色最百搭。」大小合适 is 'the size fits.' 百搭 means 'goes with everything' -- a useful fashion vocabulary word."
+                    },
+                    {
+                        "text_zh": "还行吧。多少钱？",
+                        "text_pinyin": "hái xíng ba. duōshao qián?",
+                        "text_en": "They're OK. How much?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Feng looks slightly deflated.「还行？穿上走两步试试。跑步鞋不能站着感觉，要走几步。」还行 is 'they're OK' -- not the enthusiasm he was hoping for. He wants you to properly test them."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这双原价八百九，现在打八折，七百一。会员的话还可以再减五十。你要不要办一张会员卡？免费的。",
+                "text_pinyin": "zhè shuāng yuánjià bābǎi jiǔ, xiànzài dǎ bā zhé, qībǎi yī. huìyuán de huà hái kěyǐ zài jiǎn wǔshí. nǐ yào bu yào bàn yì zhāng huìyuán kǎ? miǎnfèi de.",
+                "text_en": "This pair was originally 890, now 20% off, 710. With a membership you can save another 50. Want to get a membership card? It's free."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on the purchase.",
+                "options": [
+                    {
+                        "text_zh": "那就办一张吧。打完折再减五十的话是六百六？直接买了。",
+                        "text_pinyin": "nà jiù bàn yì zhāng ba. dǎ wán zhé zài jiǎn wǔshí de huà shì liùbǎi liù? zhíjiē mǎi le.",
+                        "text_en": "Then I'll get one. After the discount minus 50, that's 660? I'll take them.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「对！六百六十。我帮您包起来。」Xiao Feng beams. 打折 is 'discount.' 八折 is '80% of original price' (20% off). Doing the math out loud confirms you understood the pricing."
+                    },
+                    {
+                        "text_zh": "七百一有点贵。能再便宜一点吗？",
+                        "text_pinyin": "qībǎi yī yǒudiǎn guì. néng zài piányi yìdiǎn ma?",
+                        "text_en": "710 is a bit expensive. Can it be a bit cheaper?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「商场里的价格是固定的，不能再减了。但是办会员卡可以减五十。」Brand stores in malls have fixed prices (固定价格) -- bargaining only works at markets."
+                    },
+                    {
+                        "text_zh": "我再想想。可以先拍张照片回去比较一下吗？",
+                        "text_pinyin": "wǒ zài xiǎngxiang. kěyǐ xiān pāi zhāng zhàopiàn huíqù bǐjiào yíxià ma?",
+                        "text_en": "Let me think about it. Can I take a photo to compare when I get home?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「可以拍照！但是这个折扣只到月底。」Xiao Feng is used to the photo-compare-buy-online strategy. 比较 is 'compare.' He gives you the deadline to create urgency."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese shoe sizes (鞋码) use a similar numbering to European sizes but can vary by brand. 打八折 means '20% off' (you pay 80%). Department store prices are usually fixed, unlike markets. 会员卡 (huìyuán kǎ, membership card) discounts are common in Chinese retail. Always ask about current promotions (优惠活动)."
+    }
+}

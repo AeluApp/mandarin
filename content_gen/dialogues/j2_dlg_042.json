@@ -1,0 +1,83 @@
+{
+  "title": "The Old Song",
+  "title_zh": "老歌",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You hear a familiar melody coming from a small shop. The shopkeeper is humming while arranging shelves.",
+    "setup_zh": "你听到一家小店里传来一首熟悉的旋律。店主一边整理货架一边哼着歌。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "啊，你听到了吗？这首歌是我年轻时候最喜欢的。已经很多年了。",
+        "text_pinyin": "A, nǐ tīng dào le ma? Zhè shǒu gē shì wǒ niánqīng shíhou zuì xǐhuan de. Yǐjīng hěn duō nián le.",
+        "text_en": "Ah, did you hear it? This song was my favorite when I was young. It's been so many years."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his connection with the old song.",
+        "options": [
+          {
+            "text_zh": "旋律很好听。老歌有一种特别的感觉——听到的时候，好像回到了以前。",
+            "text_pinyin": "Xuánlǜ hěn hǎotīng. Lǎo gē yǒu yī zhǒng tèbié de gǎnjué — tīng dào de shíhou, hǎoxiàng huí dào le yǐqián.",
+            "text_en": "The melody is lovely. Old songs have a special feeling — when you hear them, it's like going back in time.",
+            "score": 1.0,
+            "feedback": "Connects music to time travel — songs as portals to the past.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "这首歌我听过。现在有很多新的翻唱版本。",
+            "text_pinyin": "Zhè shǒu gē wǒ tīng guò. Xiànzài yǒu hěn duō xīn de fānchàng bǎnběn.",
+            "text_en": "I've heard this song. There are a lot of new cover versions now.",
+            "score": 0.0,
+            "feedback": "He nods politely, but his eyes drift. He wasn't talking about covers — he was talking about his youth."
+          },
+          {
+            "text_zh": "我没听过这首歌。",
+            "text_pinyin": "Wǒ méi tīng guò zhè shǒu gē.",
+            "text_en": "I've never heard this song.",
+            "score": 0.0,
+            "feedback": "Closes off the conversation."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，就是这种感觉。一首歌就能让我想起那时候的朋友，那时候的日子。音乐真的很神奇。",
+        "text_pinyin": "Duì, jiù shì zhè zhǒng gǎnjué. Yī shǒu gē jiù néng ràng wǒ xiǎng qǐ nà shíhou de péngyou, nà shíhou de rìzi. Yīnyuè zhēn de hěn shénqí.",
+        "text_en": "Exactly that feeling. One song and I remember the friends from back then, the days from back then. Music is truly magical."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the magic of music and memory.",
+        "options": [
+          {
+            "text_zh": "是啊，音乐可以保存时间。虽然那些日子过去了，但是歌还在，记忆也还在。",
+            "text_pinyin": "Shì a, yīnyuè kěyǐ bǎocún shíjiān. Suīrán nàxiē rìzi guòqù le, dànshì gē hái zài, jìyì yě hái zài.",
+            "text_en": "Yes, music can preserve time. Even though those days are gone, the songs remain, and so do the memories.",
+            "score": 1.0,
+            "feedback": "Music as a time capsule — the days pass but the melody stays.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你现在还跟那些朋友联系吗？",
+            "text_pinyin": "Nǐ xiànzài hái gēn nàxiē péngyou liánxì ma?",
+            "text_en": "Are you still in touch with those friends?",
+            "score": 0.0,
+            "feedback": "Pries into relationships during a musical moment."
+          },
+          {
+            "text_zh": "我比较喜欢新歌。",
+            "text_pinyin": "Wǒ bǐjiào xǐhuan xīn gē.",
+            "text_en": "I prefer newer songs.",
+            "score": 0.0,
+            "feedback": "Dismisses his nostalgia with a preference."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Old songs (老歌) hold enormous cultural significance in China, where music from the 1980s and 1990s is associated with a period of opening and optimism. Hearing an old song can trigger powerful memories. The phrase 音乐很神奇 speaks to a widely held belief that music has an almost mystical power to preserve emotions across decades."
+  }
+}

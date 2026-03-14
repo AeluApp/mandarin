@@ -1,0 +1,94 @@
+{
+    "title": "Before the Test",
+    "title_zh": "考试之前",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_school_1_03_v0",
+    "tree": {
+        "setup": "The hallway outside the exam room, ten minutes before the test. Xiao Lin is sitting on the floor surrounded by flashcards arranged in a pattern only she understands. She's been here since seven. Her thermos of tea is already empty. She looks up when she sees you.",
+        "setup_zh": "考试教室外的走廊，离考试还有十分钟。小林坐在地上，周围铺满了只有她自己能看懂的单词卡。她七点就到了。保温杯里的茶已经喝完了。她看到你就抬起头来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你准备好了吗？",
+                "text_pinyin": "nǐ zhǔnbèi hǎo le ma?",
+                "text_en": "Are you ready?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her how you feel about the test.",
+                "options": [
+                    {
+                        "text_zh": "准备好了！",
+                        "text_pinyin": "zhǔnbèi hǎo le!",
+                        "text_en": "I'm ready!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Lin nods with respect, then looks down at her 200 flashcards and wonders if she overprepared. (She didn't.) 准备好了 is the go-to phrase for 'I'm ready.'"
+                    },
+                    {
+                        "text_zh": "我有一点紧张。",
+                        "text_pinyin": "wǒ yǒu yìdiǎn jǐnzhāng.",
+                        "text_en": "I'm a little nervous.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lin reaches into her bag and offers you a candy.「吃这个，会好的。」有一点 (yǒu yìdiǎn) is a gentle way to express a small amount of something."
+                    },
+                    {
+                        "text_zh": "什么考试？",
+                        "text_pinyin": "shénme kǎoshì?",
+                        "text_en": "What test?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lin's left eye twitches. She has been studying for two weeks. She takes a deep breath. She will be fine. You, perhaps, should check the schedule."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们一起加油！考试不难的。",
+                "text_pinyin": "wǒmen yìqǐ jiāyóu! kǎoshì bú nán de.",
+                "text_en": "Let's do our best! The test isn't hard."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Encourage each other before going in.",
+                "options": [
+                    {
+                        "text_zh": "加油！",
+                        "text_pinyin": "jiāyóu!",
+                        "text_en": "Let's go!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Lin smiles and starts gathering her flashcards with the precision of a card dealer. 加油 literally means 'add oil' -- it's the universal Chinese encouragement."
+                    },
+                    {
+                        "text_zh": "谢谢你！",
+                        "text_pinyin": "xièxie nǐ!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Lin waves it off modestly. She's already mentally reviewing vocabulary as she walks toward the door."
+                    },
+                    {
+                        "text_zh": "我想回家。",
+                        "text_pinyin": "wǒ xiǎng huí jiā.",
+                        "text_en": "I want to go home.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Lin grabs your arm with surprising strength for someone who weighs 45 kilograms.「不行！一起去！」Sometimes friends don't let you flee. 回家 means 'to go home.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "走吧！一起进去！",
+                "text_pinyin": "zǒu ba! yìqǐ jìnqù!",
+                "text_en": "Let's go! Let's go in together!"
+            }
+        ],
+        "cultural_note": "加油 (jiāyóu) is used before exams, sports events, and any challenging moment. Students often encourage each other with it. Chinese exam culture is intense -- preparation is taken very seriously, and doing well reflects not just on you but on everyone who helped you study."
+    }
+}

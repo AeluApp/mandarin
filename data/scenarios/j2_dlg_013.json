@@ -1,0 +1,83 @@
+{
+  "title": "The Vegetable Garden",
+  "title_zh": "菜园子",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "Your neighbor has a small vegetable garden on the rooftop. She invites you up to see it.",
+    "setup_zh": "你的邻居在楼顶有一个小菜园。她邀请你上去看看。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "快看，这些都是我自己种的。有西红柿、黄瓜，还有一些葱。",
+        "text_pinyin": "Kuài kàn, zhèxiē dōu shì wǒ zìjǐ zhǒng de. Yǒu xīhóngshì, huángguā, hái yǒu yīxiē cōng.",
+        "text_en": "Look, I grew all of these myself. Tomatoes, cucumbers, and some scallions."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "React to her garden.",
+        "options": [
+          {
+            "text_zh": "太厉害了！你每天都要浇水吗？",
+            "text_pinyin": "Tài lìhai le! Nǐ měi tiān dōu yào jiāo shuǐ ma?",
+            "text_en": "That's amazing! Do you water them every day?",
+            "score": 1.0,
+            "feedback": "Admiring and curious — asks about her routine.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不会种菜。",
+            "text_pinyin": "Wǒ bú huì zhǒng cài.",
+            "text_en": "I don't know how to grow vegetables.",
+            "score": 0.0,
+            "feedback": "Doesn't engage with what she's showing you."
+          },
+          {
+            "text_zh": "楼顶好热。",
+            "text_pinyin": "Lóudǐng hǎo rè.",
+            "text_en": "The rooftop is very hot.",
+            "score": 0.0,
+            "feedback": "She's proudly showing her garden."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "差不多每天。你要不要拿一些回去？自己种的，没有农药，吃着放心。",
+        "text_pinyin": "Chàbuduō měi tiān. Nǐ yào bú yào ná yīxiē huíqù? Zìjǐ zhǒng de, méiyǒu nóngyào, chī zhe fàngxīn.",
+        "text_en": "Almost every day. Want to take some home? Home-grown, no pesticides — you can eat with peace of mind."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her generosity.",
+        "options": [
+          {
+            "text_zh": "真的可以吗？太谢谢你了！我今晚用它做一道菜。",
+            "text_pinyin": "Zhēn de kěyǐ ma? Tài xièxie nǐ le! Wǒ jīn wǎn yòng tā zuò yī dào cài.",
+            "text_en": "Really? Thank you so much! I'll make a dish with them tonight.",
+            "score": 1.0,
+            "feedback": "Grateful and specific — shows you'll use the gift.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我一般在超市买菜。",
+            "text_pinyin": "Wǒ yībān zài chāoshì mǎi cài.",
+            "text_en": "I usually buy vegetables at the supermarket.",
+            "score": 0.0,
+            "feedback": "Dismisses her offer of fresh produce."
+          },
+          {
+            "text_zh": "你种了多少年了？",
+            "text_pinyin": "Nǐ zhǒng le duōshao nián le?",
+            "text_en": "How many years have you been growing?",
+            "score": 0.0,
+            "feedback": "She just offered you vegetables and you didn't respond."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Rooftop gardens (楼顶菜园) are common in Chinese apartment buildings. Growing your own vegetables is a point of pride, and sharing the harvest with neighbors strengthens community bonds. 放心 (peace of mind) about food safety is a major value."
+  }
+}

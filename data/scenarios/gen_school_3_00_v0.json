@@ -1,0 +1,130 @@
+{
+    "title": "The Teacher's Red Pen Philosophy",
+    "title_zh": "红笔哲学",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_3_00_v0",
+    "tree": {
+        "setup": "Teacher Luo's office during office hours. Her desk is a careful ecosystem of red pens (three shades), student essays in neat stacks, and a succulent plant she talks to when she thinks no one is listening. You're here to discuss your latest essay, which came back with more red ink than black. Teacher Luo believes corrections are love letters to your future self.",
+        "setup_zh": "罗老师的办公室，答疑时间。她的桌子是一个精心维护的生态系统：三种深浅的红笔、整齐叠放的学生作文和一盆她以为没人听到时会跟它说话的多肉植物。你来讨论最近的作文，红字比黑字还多。罗老师觉得批改是写给你未来自己的情书。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "来来来，坐下。你的作文我看了。内容不错，但是语法问题比较多。我们一起看看好不好？",
+                "text_pinyin": "lái lái lái, zuò xia. nǐ de zuòwén wǒ kàn le. nèiróng búcuò, dànshì yǔfǎ wèntí bǐjiào duō. wǒmen yìqǐ kànkan hǎo bu hǎo?",
+                "text_en": "Come in, sit down. I've read your essay. The content is good, but there are quite a few grammar issues. Shall we look at it together?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her assessment and ask about specific issues.",
+                "options": [
+                    {
+                        "text_zh": "好的。我知道'把'字句用得不太对。您能帮我看看哪里错了吗？",
+                        "text_pinyin": "hǎo de. wǒ zhīdào 'bǎ' zì jù yòng de bú tài duì. nín néng bāng wǒ kànkan nǎlǐ cuò le ma?",
+                        "text_en": "OK. I know I didn't use 把-sentences correctly. Could you help me see where I went wrong?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Luo's eyes light up.「你自己能发现问题，这很好！来，看这一段……」Identifying your own weakness before being told shows self-awareness. 把字句 is a key grammar structure."
+                    },
+                    {
+                        "text_zh": "红色的字好多啊……我是不是写得很差？",
+                        "text_pinyin": "hóngsè de zì hǎo duō a... wǒ shì bu shì xiě de hěn chà?",
+                        "text_en": "There's so much red... Did I do really badly?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Teacher Luo smiles gently.「红字多不代表写得差。代表我认真看了。不认真看的作文才可怕。」代表 means 'represents.' 认真 is 'carefully/seriously.' Her red pen is a sign of investment."
+                    },
+                    {
+                        "text_zh": "我花了很长时间写的。不知道为什么还是有这么多错误。",
+                        "text_pinyin": "wǒ huā le hěn cháng shíjiān xiě de. bù zhīdào wèishénme háishi yǒu zhème duō cuòwù.",
+                        "text_en": "I spent a long time writing it. I don't know why there are still so many errors.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「花时间不等于花对时间。你写之前列提纲了吗？」Teacher Luo taps her pen. 花时间 is 'spend time.' 不等于 is 'doesn't equal.' 提纲 is 'outline.' Time management matters."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看这一句：「我把那个故事听了三遍。」这里不能用'把'，因为'听'不改变'故事'的状态。应该说'我听了那个故事三遍。'",
+                "text_pinyin": "kàn zhè yí jù: 'wǒ bǎ nà ge gùshi tīng le sān biàn.' zhèlǐ bù néng yòng 'bǎ', yīnwèi 'tīng' bù gǎibiàn 'gùshi' de zhuàngtài. yīnggāi shuō 'wǒ tīng le nà ge gùshi sān biàn.'",
+                "text_en": "Look at this sentence: 'I 把-ed the story listened three times.' You can't use 把 here, because 'listen' doesn't change the state of 'the story.' It should be 'I listened to the story three times.'"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show you understand the correction.",
+                "options": [
+                    {
+                        "text_zh": "明白了。'把'后面的动作要对那个东西有影响，对吧？比如'把门关了'可以，因为门的状态变了。",
+                        "text_pinyin": "míngbai le. 'bǎ' hòumiàn de dòngzuò yào duì nà ge dōngxi yǒu yǐngxiǎng, duì ba? bǐrú 'bǎ mén guān le' kěyǐ, yīnwèi mén de zhuàngtài biàn le.",
+                        "text_en": "I see. The action after 把 needs to affect the object, right? Like '把门关了' works because the door's state changes.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Luo claps her hands once.「完全正确！你用自己的例子说明了规则，这说明你真的懂了。」Generating your own example shows real comprehension. 影响 is 'influence/affect.' 状态 is 'state.'"
+                    },
+                    {
+                        "text_zh": "哦，所以'把'只能用在动作会改变东西的时候？",
+                        "text_pinyin": "ó, suǒyǐ 'bǎ' zhǐnéng yòng zài dòngzuò huì gǎibiàn dōngxi de shíhou?",
+                        "text_en": "Oh, so 把 can only be used when the action changes something?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「基本上是这样。还有几种特殊情况，但是先记住这个规则。」基本上 is 'basically.' Teacher Luo doesn't overwhelm with exceptions."
+                    },
+                    {
+                        "text_zh": "这个语法太难了。英语里没有这个。",
+                        "text_pinyin": "zhè ge yǔfǎ tài nán le. yīngyǔ lǐ méiyǒu zhè ge.",
+                        "text_en": "This grammar is too hard. English doesn't have this.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「难不代表学不会。你已经比上个月进步很多了。」Teacher Luo opens a drawer and pulls out your previous essay.「看，这篇错误更多。」进步 means 'progress.' She keeps all your old essays."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "还有一个问题。你写'因为……所以……'的时候，前后逻辑不太通。「因为今天下雨，所以我昨天没去。」时间对不上。",
+                "text_pinyin": "hái yǒu yí gè wèntí. nǐ xiě 'yīnwèi... suǒyǐ...' de shíhou, qiánhòu luójí bú tài tōng. 'yīnwèi jīntiān xià yǔ, suǒyǐ wǒ zuótiān méi qù.' shíjiān duì bu shàng.",
+                "text_en": "One more issue. When you use 'because...so...' the logic doesn't quite flow. 'Because it rained today, so I didn't go yesterday.' The timeline doesn't match."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Correct your sentence.",
+                "options": [
+                    {
+                        "text_zh": "应该是'因为昨天下雨，所以我没去'，对吗？因为原因和结果要在同一个时间。",
+                        "text_pinyin": "yīnggāi shì 'yīnwèi zuótiān xià yǔ, suǒyǐ wǒ méi qù', duì ma? yīnwèi yuányīn hé jiéguǒ yào zài tóngyī gè shíjiān.",
+                        "text_en": "It should be 'Because it rained yesterday, I didn't go,' right? Because the cause and effect need to be in the same timeframe.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Teacher Luo nods approvingly.「对！因果关系的时间要统一。你现在就可以把作文改一下，下周交给我。」原因 is 'cause.' 结果 is 'result.' 统一 is 'consistent.'"
+                    },
+                    {
+                        "text_zh": "啊，我粗心了。应该都是'昨天'。",
+                        "text_pinyin": "a, wǒ cūxīn le. yīnggāi dōu shì 'zuótiān.'",
+                        "text_en": "Ah, I was careless. It should both be 'yesterday.'",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「不完全是粗心。这是因为你写的时候在用英文思维。」粗心 means 'careless.' 英文思维 is 'English-language thinking.' Teacher Luo sees through to the root cause."
+                    },
+                    {
+                        "text_zh": "好，我回去改。还有别的大问题吗？",
+                        "text_pinyin": "hǎo, wǒ huíqù gǎi. hái yǒu bié de dà wèntí ma?",
+                        "text_en": "OK, I'll fix it when I go back. Are there other big issues?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「大问题没有了。小问题还有几个，我都标出来了。修改之后再给我看看。」回去改 is 'go back and fix.' Teacher Luo has marked everything -- you just need to read the red ink."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，修改之后下周交给我。记住，写完以后大声读一遍。如果读起来不通顺，那一般是语法有问题。",
+                "text_pinyin": "hǎo le, xiūgǎi zhīhòu xià zhōu jiāo gěi wǒ. jìzhù, xiě wán yǐhòu dàshēng dú yí biàn. rúguǒ dú qǐlai bù tōngshùn, nà yìbān shì yǔfǎ yǒu wèntí.",
+                "text_en": "OK, submit the revision to me next week. Remember, read it out loud after writing. If it doesn't flow smoothly, there's usually a grammar problem."
+            }
+        ],
+        "cultural_note": "Chinese teachers use red pens (红笔) for corrections -- it's universal and carries no stigma. Office hours (答疑时间, dáyí shíjiān) are common at Chinese schools. The 把-sentence (把字句) is one of the most challenging grammar points for learners. Reading essays aloud (大声读) is a traditional study technique in Chinese education."
+    }
+}

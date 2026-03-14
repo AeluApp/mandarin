@@ -1,0 +1,87 @@
+{
+    "title": "Lending an Umbrella",
+    "title_zh": "借伞",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "It starts raining as your classmate Xiao Bai is about to leave school. She forgot her umbrella.",
+        "setup_zh": "放学时突然下雨了，你的同学小白忘带伞了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "糟糕，又下雨了！我今天忘带伞了。你有伞吗？",
+                "text_pinyin": "Zāogāo, yòu xià yǔ le! Wǒ jīntiān wàng dài sǎn le. Nǐ yǒu sǎn ma?",
+                "text_en": "Oh no, it's raining again! I forgot my umbrella today. Do you have one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her predicament.",
+                "options": [
+                    {
+                        "text_zh": "我有！你拿去用吧，我家很近，跑几步就到了。",
+                        "text_pinyin": "Wǒ yǒu! Nǐ ná qù yòng ba, wǒ jiā hěn jìn, pǎo jǐ bù jiù dào le.",
+                        "text_en": "I have one! Take it — my home is close, I can just run.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Selfless and warm — prioritizes her need."
+                    },
+                    {
+                        "text_zh": "我有，但是只有一把，我们一起撑吧。",
+                        "text_pinyin": "Wǒ yǒu, dànshì zhǐ yǒu yī bǎ, wǒmen yīqǐ chēng ba.",
+                        "text_en": "I have one, but just one — let's share it.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Practical and friendly."
+                    },
+                    {
+                        "text_zh": "我也没带。",
+                        "text_pinyin": "Wǒ yě méi dài.",
+                        "text_en": "I didn't bring one either.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Doesn't help at all."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你家真的近吗？别淋雨感冒了。要不我们一起撑你的伞，我送你到家再走？",
+                "text_pinyin": "Nǐ jiā zhēn de jìn ma? Bié lín yǔ gǎnmào le. Yào bù wǒmen yīqǐ chēng nǐ de sǎn, wǒ sòng nǐ dào jiā zài zǒu?",
+                "text_en": "Is your home really close? Don't get wet and catch a cold. How about we share your umbrella — I'll walk you home first?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好啊！那就一起走吧。路上我们还能聊聊天。",
+                        "text_pinyin": "Hǎo a! Nà jiù yīqǐ zǒu ba. Lùshang wǒmen hái néng liáoliao tiān.",
+                        "text_en": "Sure! Let's walk together then. We can chat on the way.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Turns a rainy inconvenience into quality time."
+                    },
+                    {
+                        "text_zh": "不用了，我真的没关系。",
+                        "text_pinyin": "Bú yòng le, wǒ zhēn de méi guānxi.",
+                        "text_en": "No need, I'm really fine.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Stubbornly independent."
+                    },
+                    {
+                        "text_zh": "好吧。",
+                        "text_pinyin": "Hǎo ba.",
+                        "text_en": "Okay.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Accepts but without warmth."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing an umbrella (同撑一把伞) is a classic image of friendship and care in Chinese culture. Offering your umbrella to someone else, even at the cost of getting wet yourself, is considered a natural and admirable act of kindness."
+    },
+    "hsk_level": 3
+}

@@ -1,0 +1,282 @@
+[
+  {
+    "id": "j6_system_057",
+    "title": "The Taxi Driver's Knowledge System",
+    "title_zh": "出租车司机的知识体系",
+    "hsk_level": 6,
+    "text_zh": "在导航软件普及以前，出租车司机依赖的是一套完全储存在大脑中的城市认知系统。老张师傅开了二十八年出租车，他告诉我，这套系统的基础是「骨架记忆」——先记住城市的主干道和环路，然后逐渐填充每个区域的毛细血管般的小街小巷。他能背出城区四百多条街道的名称，知道哪些路口在什么时段容易堵车，甚至记得某些店铺搬迁前的旧地址。导航软件出现以后，年轻司机不再需要积累这些知识，但老张说他依然不太信任导航。「它不知道东三环辅路在雨天会积水，不知道西四环那个出口的限速摄像头上个月刚移了位置。」他的语气中没有抱怨，只有一种平静的自信。有时候乘客会用导航和老张的路线做比较，发现他的路线虽然在地图上看起来更绕，实际到达时间却更短。老张把这归功于对城市「呼吸节奏」的理解——哪些地方正在施工，哪些路段因为有学校所以早晚高峰特别拥挤，这些信息是任何算法都难以实时捕捉的。",
+    "text_pinyin": "Zài dǎoháng ruǎnjiàn pǔjí yǐqián, chūzū chē sījī yīlài de shì yí tào wánquán chǔcún zài dànǎo zhōng de chéngshì rènzhī xìtǒng. Lǎo Zhāng shīfu kāi le èrshíbā nián chūzū chē, tā gàosu wǒ, zhè tào xìtǒng de jīchǔ shì 「gǔjià jìyì」 — xiān jì zhù chéngshì de zhǔgàndào hé huánlù, ránhòu zhújiàn tiánchōng měi gè qūyù de máoxì xuèguǎn bān de xiǎo jiē xiǎo xiàng. Tā néng bèi chū chéngqū sìbǎi duō tiáo jiēdào de míngchēng, zhīdào nǎxiē lùkǒu zài shénme shíduàn róngyì dǔ chē, shènzhì jì de mǒuxiē diànpù bānqiān qián de jiù dìzhǐ. Dǎoháng ruǎnjiàn chūxiàn yǐhòu, niánqīng sījī bú zài xūyào jīlěi zhèxiē zhīshi, dàn Lǎo Zhāng shuō tā yīrán bú tài xìnrèn dǎoháng. 「Tā bù zhīdào Dōng Sān Huán fǔlù zài yǔtiān huì jī shuǐ, bù zhīdào Xī Sì Huán nàge chūkǒu de xiànsù shèxiàngtóu shàng ge yuè gāng yí le wèizhì.」 Tā de yǔqì zhōng méiyǒu bàoyuàn, zhǐ yǒu yì zhǒng píngjìng de zìxìn. Yǒushíhou chéngkè huì yòng dǎoháng hé Lǎo Zhāng de lùxiàn zuò bǐjiào, fāxiàn tā de lùxiàn suīrán zài dìtú shàng kàn qǐlái gèng rào, shíjì dàodá shíjiān què gèng duǎn. Lǎo Zhāng bǎ zhè guīgōng yú duì chéngshì 「hūxī jiézòu」 de lǐjiě — nǎxiē dìfang zhèngzài shīgōng, nǎxiē lùduàn yīnwèi yǒu xuéxiào suǒyǐ zǎo wǎn gāofēng tèbié yōngjǐ, zhèxiē xìnxī shì rènhé suànfǎ dōu nányǐ shíshí bǔzhuō de.",
+    "text_en": "Before navigation apps became widespread, taxi drivers relied on a city cognitive system stored entirely in their brains. Master Zhang has driven a taxi for twenty-eight years. He told me the foundation of this system is 'skeleton memory' — first memorizing the city's arterial roads and ring roads, then gradually filling in the capillary-like small streets and alleys of each district. He can recite the names of over four hundred streets in the urban area, knows which intersections get congested at what times, and even remembers old addresses of shops that have since relocated. After navigation software appeared, young drivers no longer need to accumulate this knowledge, but Old Zhang says he still doesn't quite trust navigation. 'It doesn't know that the East Third Ring service road floods on rainy days, doesn't know that the speed camera at the West Fourth Ring exit was moved last month.' His tone carries no complaint, only a calm confidence. Sometimes passengers compare the navigation route with Old Zhang's and find that although his route looks more roundabout on the map, the actual arrival time is shorter. Old Zhang attributes this to his understanding of the city's 'breathing rhythm' — which areas are under construction, which road segments are especially congested during school rush hours — information that any algorithm struggles to capture in real time.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "老张师傅所说的「骨架记忆」是什么意思？",
+        "q_en": "What does Master Zhang mean by 'skeleton memory'?",
+        "options": [
+          {"text": "记住所有街道的名字", "pinyin": "jì zhù suǒyǒu jiēdào de míngzi", "text_en": "Memorizing all street names", "correct": false},
+          {"text": "先记住主干道和环路，再记小街小巷", "pinyin": "xiān jì zhù zhǔgàndào hé huánlù, zài jì xiǎo jiē xiǎo xiàng", "text_en": "First memorizing arterial roads and ring roads, then small streets", "correct": true},
+          {"text": "记住乘客常去的目的地", "pinyin": "jì zhù chéngkè cháng qù de mùdìdì", "text_en": "Memorizing destinations passengers often go to", "correct": false},
+          {"text": "背诵地图上的路线", "pinyin": "bèisòng dìtú shàng de lùxiàn", "text_en": "Reciting routes from the map", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "老张为什么不太信任导航软件？",
+        "q_en": "Why doesn't Old Zhang fully trust navigation software?",
+        "options": [
+          {"text": "因为他不会用手机", "pinyin": "yīnwèi tā bú huì yòng shǒujī", "text_en": "Because he can't use a phone", "correct": false},
+          {"text": "因为导航不知道积水、施工等实时细节", "pinyin": "yīnwèi dǎoháng bù zhīdào jī shuǐ, shīgōng děng shíshí xìjié", "text_en": "Because navigation doesn't know real-time details like flooding and construction", "correct": true},
+          {"text": "因为导航的路线太远", "pinyin": "yīnwèi dǎoháng de lùxiàn tài yuǎn", "text_en": "Because navigation routes are too long", "correct": false},
+          {"text": "因为他喜欢传统的方式", "pinyin": "yīnwèi tā xǐhuan chuántǒng de fāngshì", "text_en": "Because he prefers the traditional way", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j6_system_058",
+    "title": "The Supermarket's Closing Ritual",
+    "title_zh": "超市的关门仪式",
+    "hsk_level": 6,
+    "text_zh": "晚上九点半，超市开始播放那首固定的关门音乐——一首轻柔的萨克斯风曲子，旋律带着几分忧伤，像是在温柔地驱赶最后的顾客。这首曲子在整栋建筑里回荡，与白天那些节奏明快的促销广播形成了鲜明对比。还在购物的人开始加快脚步，从犹豫不决变成果断选择，购物车的速度明显提升了。收银台前的队伍在最后二十分钟内经历了一个有趣的压缩过程：九点十分还有四条队伍在运作，九点二十分减少到两条，九点半只剩下一条。最后那位收银员的表情总是带着一种疲惫但宽容的耐心，仿佛在说「没关系，你慢慢来，我等得起」。在收银台彻底关闭以后，超市进入了一个鲜为人知的阶段：夜间理货。几位穿制服的工作人员开始清点货架、补充商品、调整价格标签。在顾客看不到的时间里，整个超市像一台精密的机器在进行自我维护和重置，为明天早上八点的重新开门做准备。我偶尔加班很晚经过超市，透过玻璃门看到里面灯火通明却空无一人，只有货架在荧光灯下安静地等待，觉得那个场景有一种说不出的孤独的美。",
+    "text_pinyin": "Wǎnshang jiǔ diǎn bàn, chāoshì kāishǐ bōfàng nà shǒu gùdìng de guān mén yīnyuè — yì shǒu qīngróu de sàkèsī fēng qǔzi, xuánlǜ dài zhe jǐ fēn yōushāng, xiàng shì zài wēnróu de qūgǎn zuìhòu de gùkè. Zhè shǒu qǔzi zài zhěng dòng jiànzhù lǐ huídàng, yǔ báitiān nàxiē jiézòu míngkuài de cùxiāo guǎngbō xíngchéng le xiānmíng duìbǐ. Hái zài gòuwù de rén kāishǐ jiākuài jiǎobù, cóng yóuyù bù jué biàn chéng guǒduàn xuǎnzé, gòuwù chē de sùdù míngxiǎn tíshēng le. Shōuyín tái qián de duìwǔ zài zuìhòu èrshí fēnzhōng nèi jīnglì le yí gè yǒuqù de yāsuō guòchéng: jiǔ diǎn shí fēn hái yǒu sì tiáo duìwǔ zài yùnzuò, jiǔ diǎn èrshí fēn jiǎnshǎo dào liǎng tiáo, jiǔ diǎn bàn zhǐ shèng xià yì tiáo. Zuìhòu nà wèi shōuyínyuán de biǎoqíng zǒngshì dài zhe yì zhǒng píbèi dàn kuānróng de nàixīn, fǎngfú zài shuō 「méi guānxi, nǐ mànmàn lái, wǒ děng de qǐ」. Zài shōuyín tái chèdǐ guānbì yǐhòu, chāoshì jìnrù le yí gè xiǎn wéi rén zhī de jiēduàn: yèjiān lǐ huò. Jǐ wèi chuān zhìfú de gōngzuò rényuán kāishǐ qīngdiǎn huòjià, bǔchōng shāngpǐn, tiáozhěng jiàgé biāoqiān. Zài gùkè kàn bú dào de shíjiān lǐ, zhěng gè chāoshì xiàng yì tái jīngmì de jīqì zài jìnxíng zìwǒ wéihù hé chóngzhì, wèi míngtiān zǎoshang bā diǎn de chóngxīn kāi mén zuò zhǔnbèi. Wǒ ǒu'ěr jiābān hěn wǎn jīngguò chāoshì, tòuguò bōli mén kàn dào lǐmiàn dēnghuǒ tōngmíng què kōng wú yì rén, zhǐ yǒu huòjià zài yíngguāng dēng xià ānjìng de děngdài, juéde nàge chǎngjǐng yǒu yì zhǒng shuō bù chū de gūdú de měi.",
+    "text_en": "At 9:30 PM, the supermarket begins playing its fixed closing music — a gentle saxophone piece, its melody tinged with melancholy, as if tenderly ushering out the last customers. The tune echoes throughout the building, forming a stark contrast with the upbeat promotional broadcasts of daytime. People still shopping quicken their pace, shifting from indecision to decisive choices, shopping cart speeds noticeably increasing. The checkout queues undergo an interesting compression in the final twenty minutes: at 9:10 four lines are still operating, by 9:20 it's down to two, at 9:30 only one remains. The last cashier's expression always carries a weary but tolerant patience, as if saying 'It's okay, take your time, I can wait.' After the registers close completely, the supermarket enters a phase few know about: nighttime restocking. Several uniformed workers begin counting shelves, replenishing goods, adjusting price tags. In the hours invisible to customers, the entire supermarket operates like a precision machine performing self-maintenance and reset, preparing for tomorrow morning's eight o'clock reopening. I occasionally pass the supermarket after working late, peering through the glass doors to see it brightly lit yet completely empty, only shelves waiting quietly under fluorescent lights — a scene possessing an inexpressible, lonely beauty.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "超市关门前的音乐有什么特点？",
+        "q_en": "What characterizes the supermarket's closing music?",
+        "options": [
+          {"text": "节奏明快的流行歌曲", "pinyin": "jiézòu míngkuài de liúxíng gēqǔ", "text_en": "An upbeat pop song", "correct": false},
+          {"text": "轻柔的萨克斯风曲子，带着几分忧伤", "pinyin": "qīngróu de sàkèsī fēng qǔzi, dài zhe jǐ fēn yōushāng", "text_en": "A gentle saxophone piece with a touch of melancholy", "correct": true},
+          {"text": "语音提示广播", "pinyin": "yǔyīn tíshì guǎngbō", "text_en": "A voice announcement", "correct": false},
+          {"text": "古典钢琴曲", "pinyin": "gǔdiǎn gāngqín qǔ", "text_en": "Classical piano music", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者晚上加班经过空无一人的超市时有什么感受？",
+        "q_en": "What does the author feel passing the empty supermarket late at night?",
+        "options": [
+          {"text": "害怕", "pinyin": "hàipà", "text_en": "Fear", "correct": false},
+          {"text": "无聊", "pinyin": "wúliáo", "text_en": "Boredom", "correct": false},
+          {"text": "一种说不出的孤独的美", "pinyin": "yì zhǒng shuō bù chū de gūdú de měi", "text_en": "An inexpressible, lonely beauty", "correct": true},
+          {"text": "饥饿", "pinyin": "jī'è", "text_en": "Hunger", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j6_system_059",
+    "title": "The Bus Route's Living Memory",
+    "title_zh": "公交线路的活态记忆",
+    "hsk_level": 6,
+    "text_zh": "十七路公交车已经运行了三十多年，是这个城市历史最悠久的公交线路之一。它的路线穿越了从老城区到新开发区的整个城市剖面，沿途的变化浓缩了这座城市三十年的发展史。始发站在火车站广场，那是七十年代建的苏联风格建筑，灰色的水泥外墙上至今还保留着褪色的红色标语。第三站经过的那条商业街曾经是全市最繁华的购物中心，现在已经被大型综合体取代，只剩几家老字号还在坚持。第七站旁边的棉纺厂在九十年代末关闭了，厂房被改造成了一个文创园区，但门口那棵法国梧桐树还是当年工人们种的。第十二站是一片二十年前的商品房小区，楼房的外立面已经显出了岁月的痕迹——阳台上晾着五颜六色的衣服，空调外机锈迹斑斑。终点站在城市最东边的高新技术开发区，玻璃幕墙的写字楼整齐划一，年轻的程序员们行色匆匆。坐一趟十七路公交车就像做了一次时间旅行，窗外的风景从旧到新，从沧桑到崭新，四十分钟内走过了一座城市的前世今生。",
+    "text_pinyin": "Shíqī lù gōngjiāo chē yǐjīng yùnxíng le sānshí duō nián, shì zhège chéngshì lìshǐ zuì yōujiǔ de gōngjiāo lùxiàn zhī yī. Tā de lùxiàn chuānyuè le cóng lǎo chéngqū dào xīn kāifāqū de zhěng gè chéngshì pōumiàn, yántú de biànhuà nóngsuō le zhè zuò chéngshì sānshí nián de fāzhǎn shǐ. Shǐfā zhàn zài huǒchē zhàn guǎngchǎng, nà shì qīshí niándài jiàn de Sūlián fēnggé jiànzhù, huīsè de shuǐní wài qiáng shàng zhìjīn hái bǎoliú zhe tuìsè de hóngsè biāoyǔ. Dì sān zhàn jīngguò de nà tiáo shāngyè jiē céngjīng shì quán shì zuì fánhuá de gòuwù zhōngxīn, xiànzài yǐjīng bèi dàxíng zōnghétǐ qǔdài, zhǐ shèng jǐ jiā lǎozìhào hái zài jiānchí. Dì qī zhàn pángbiān de miánfǎng chǎng zài jiǔshí niándài mò guānbì le, chǎngfáng bèi gǎizào chéng le yí gè wénchuàng yuánqū, dàn ménkǒu nà kē Fǎguó wútóng shù háishi dāngnián gōngrénmen zhǒng de. Dì shí'èr zhàn shì yí piàn èrshí nián qián de shāngpǐnfáng xiǎoqū, lóufáng de wài lìmiàn yǐjīng xiǎn chū le suìyuè de hénjì — yángtái shàng liàng zhe wǔyánliùsè de yīfu, kōngtiáo wàijī xiùjì bānbān. Zhōngdiǎn zhàn zài chéngshì zuì dōngbiān de gāoxīn jìshù kāifāqū, bōli mùqiáng de xiězìlóu zhěngqí huàyī, niánqīng de chéngxùyuánmen xíngsè cōngcōng. Zuò yí tàng shíqī lù gōngjiāo chē jiù xiàng zuò le yí cì shíjiān lǚxíng, chuāng wài de fēngjǐng cóng jiù dào xīn, cóng cāngsāng dào zhǎnxīn, sìshí fēnzhōng nèi zǒu guò le yí zuò chéngshì de qiánshì jīnshēng.",
+    "text_en": "Bus Route 17 has been running for over thirty years, one of the city's oldest bus lines. Its route traverses the entire urban cross-section from the old city to the new development zone, with changes along the way condensing thirty years of the city's development history. The first stop is at the train station plaza, a Soviet-style building from the seventies, its grey cement exterior still bearing faded red slogans. The commercial street at the third stop was once the city's most bustling shopping center, now replaced by large complexes, with only a few time-honored brands still holding on. The cotton mill beside the seventh stop closed in the late nineties; the factory buildings were converted into a cultural-creative park, but the plane tree at the entrance was still planted by the workers back then. The twelfth stop is a twenty-year-old commercial housing compound, the building facades already showing the marks of time — colorful clothes hanging on balconies, air conditioning units spotted with rust. The terminal is in the high-tech development zone on the city's eastern edge, glass-curtain office buildings uniformly aligned, young programmers hurrying about. Riding Bus 17 is like taking a time-travel journey — the scenery outside the window flows from old to new, from weathered to brand-new, traversing a city's past and present lives in forty minutes.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "始发站的建筑是什么风格的？",
+        "q_en": "What architectural style is the first stop's building?",
+        "options": [
+          {"text": "现代玻璃幕墙", "pinyin": "xiàndài bōli mùqiáng", "text_en": "Modern glass curtain wall", "correct": false},
+          {"text": "七十年代苏联风格", "pinyin": "qīshí niándài Sūlián fēnggé", "text_en": "1970s Soviet style", "correct": true},
+          {"text": "中国传统建筑", "pinyin": "Zhōngguó chuántǒng jiànzhù", "text_en": "Traditional Chinese architecture", "correct": false},
+          {"text": "日式木结构", "pinyin": "Rìshì mù jiégòu", "text_en": "Japanese wooden structure", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者为什么说坐十七路公交车像时间旅行？",
+        "q_en": "Why does the author say riding Bus 17 is like time travel?",
+        "options": [
+          {"text": "因为车开得很慢", "pinyin": "yīnwèi chē kāi de hěn màn", "text_en": "Because the bus goes very slowly", "correct": false},
+          {"text": "因为路线穿越了从老城区到新区的不同历史阶段", "pinyin": "yīnwèi lùxiàn chuānyuè le cóng lǎo chéngqū dào xīn qū de bùtóng lìshǐ jiēduàn", "text_en": "Because the route passes through different historical eras from old city to new zone", "correct": true},
+          {"text": "因为乘客都是老人", "pinyin": "yīnwèi chéngkè dōu shì lǎorén", "text_en": "Because all passengers are elderly", "correct": false},
+          {"text": "因为车上播放老歌", "pinyin": "yīnwèi chē shàng bōfàng lǎo gē", "text_en": "Because old songs play on the bus", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j6_system_060",
+    "title": "The Weather Forecast as Daily Ceremony",
+    "title_zh": "天气预报的仪式",
+    "hsk_level": 6,
+    "text_zh": "我父亲每天晚上七点半准时收看电视天气预报，这个习惯已经保持了将近三十年。即使他的手机上有更准确的实时天气应用，他仍然坚持收看那个由同一位播报员主持的传统天气预报节目。对他来说，这不仅仅是获取气象信息，而是一种每日必不可少的仪式——标志着一天的正式收尾。播报员的声音平稳而有节制，像是一个值得信赖的老朋友在为你总结这一天的天空故事。我父亲会在播报开始前把茶泡好，坐在固定的沙发位置上，偶尔对着屏幕发出评论：「明天有雨，你出门带把伞」或者「气温要降了，把厚衣服找出来」。这些评论是单向的，不需要回应，更像是他通过天气预报与家庭日常连接的方式。有一次播报员因病请假了两天，换了一个年轻的临时替代者。我父亲看完以后摇了摇头说：「信息是一样的，但感觉不对。」我后来才慢慢理解，他看的不是天气，而是那种由熟悉和重复构建起来的安全感。",
+    "text_pinyin": "Wǒ fùqīn měi tiān wǎnshang qī diǎn bàn zhǔnshí shōukàn diànshì tiānqì yùbào, zhège xíguàn yǐjīng bǎochí le jiāngjìn sānshí nián. Jíshǐ tā de shǒujī shàng yǒu gèng zhǔnquè de shíshí tiānqì yìngyòng, tā réngrán jiānchí shōukàn nà ge yóu tóng yí wèi bōbào yuán zhǔchí de chuántǒng tiānqì yùbào jiémù. Duì tā lái shuō, zhè bùjǐnjǐn shì huòqǔ qìxiàng xìnxī, ér shì yì zhǒng měi rì bìbùkěshǎo de yíshì — biāozhì zhe yì tiān de zhèngshì shōuwěi. Bōbào yuán de shēngyīn píngwěn ér yǒu jiézhì, xiàng shì yí gè zhíde xìnlài de lǎo péngyou zài wèi nǐ zǒngjié zhè yì tiān de tiānkōng gùshi. Wǒ fùqīn huì zài bōbào kāishǐ qián bǎ chá pào hǎo, zuò zài gùdìng de shāfā wèizhì shàng, ǒu'ěr duì zhe píngmù fāchū pínglùn: 「míngtiān yǒu yǔ, nǐ chūmén dài bǎ sǎn」 huòzhě 「qìwēn yào jiàng le, bǎ hòu yīfu zhǎo chūlái」. Zhèxiē pínglùn shì dānxiàng de, bù xūyào huíyìng, gèng xiàng shì tā tōngguò tiānqì yùbào yǔ jiātíng rìcháng liánjiē de fāngshì. Yǒu yí cì bōbào yuán yīn bìng qǐngjià le liǎng tiān, huàn le yí gè niánqīng de línshí tìdài zhě. Wǒ fùqīn kàn wán yǐhòu yáo le yáo tóu shuō: 「xìnxī shì yíyàng de, dàn gǎnjué bú duì.」 Wǒ hòulái cái mànmàn lǐjiě, tā kàn de búshì tiānqì, ér shì nà zhǒng yóu shúxī hé chóngfù gòujiàn qǐlái de ānquán gǎn.",
+    "text_en": "My father watches the television weather forecast at exactly 7:30 every evening — a habit he has maintained for nearly thirty years. Even though his phone has more accurate real-time weather apps, he still insists on watching that traditional weather forecast program hosted by the same broadcaster. For him, this isn't merely about obtaining meteorological information; it's an indispensable daily ritual — marking the formal conclusion of each day. The broadcaster's voice is steady and measured, like a trustworthy old friend summarizing the day's sky story for you. My father brews his tea before the broadcast begins, sits in his fixed sofa spot, and occasionally comments at the screen: 'It'll rain tomorrow, take an umbrella when you go out' or 'Temperature's dropping, dig out the thick clothes.' These comments are one-directional, requiring no response — more like his way of connecting with family routine through the weather forecast. Once the broadcaster took two days off for illness, replaced by a young temporary substitute. After watching, my father shook his head and said: 'The information is the same, but it doesn't feel right.' I only gradually understood later — what he watches isn't the weather, but the sense of security built from familiarity and repetition.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "父亲为什么不用手机上更准确的天气应用？",
+        "q_en": "Why doesn't the father use the more accurate weather app on his phone?",
+        "options": [
+          {"text": "因为他不会用智能手机", "pinyin": "yīnwèi tā bú huì yòng zhìnéng shǒujī", "text_en": "Because he can't use a smartphone", "correct": false},
+          {"text": "因为电视天气预报对他来说是一种每日仪式", "pinyin": "yīnwèi diànshì tiānqì yùbào duì tā lái shuō shì yì zhǒng měi rì yíshì", "text_en": "Because the TV forecast is a daily ritual for him", "correct": true},
+          {"text": "因为手机信号不好", "pinyin": "yīnwèi shǒujī xìnhào bù hǎo", "text_en": "Because phone signal is poor", "correct": false},
+          {"text": "因为电视预报更准确", "pinyin": "yīnwèi diànshì yùbào gèng zhǔnquè", "text_en": "Because the TV forecast is more accurate", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "当播报员被年轻人替换以后，父亲的反应是什么？",
+        "q_en": "How did the father react when the broadcaster was replaced by a young person?",
+        "options": [
+          {"text": "觉得年轻人播得更好", "pinyin": "juéde niánqīngrén bō de gèng hǎo", "text_en": "Thought the young person was better", "correct": false},
+          {"text": "没有注意到区别", "pinyin": "méiyǒu zhùyì dào qūbié", "text_en": "Didn't notice the difference", "correct": false},
+          {"text": "说信息一样但感觉不对", "pinyin": "shuō xìnxī yíyàng dàn gǎnjué bú duì", "text_en": "Said the information was the same but it didn't feel right", "correct": true},
+          {"text": "换了频道", "pinyin": "huàn le píndào", "text_en": "Changed the channel", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j6_system_061",
+    "title": "The Apartment Building's Sound Map",
+    "title_zh": "公寓楼的声音地图",
+    "hsk_level": 6,
+    "text_zh": "住在老式公寓楼里，你会逐渐学会一种听觉制图术——通过声音来判断整栋楼的生活状态。早上六点二十分，五楼李阿姨的闹钟会准时响起，那是一种老式电子闹钟特有的尖锐蜂鸣，穿透力极强，连隔了两层楼的我都能听到。六点四十分，三楼那户人家开始烧水，电热水壶加热到沸腾时发出的嗡鸣声沿着管道传遍整个楼体。七点一刻，楼道里开始回荡各种出门的声响：钥匙转动、防盗门关闭的咔嗒声、高跟鞋在楼梯上的有节奏的敲击。白天的公寓楼是安静的，只有偶尔的装修声或者送快递的门铃声打破沉默。傍晚五点以后，厨房排油烟机的嗡嗡声开始此起彼伏，这是全楼居民同时做晚饭的信号。晚上九点以后，楼里渐渐安静下来，只剩下水管里水流的声音和偶尔传来的电视声。有时候半夜会突然听到楼上拖椅子的声音，沉闷而短促，让你在黑暗中想象楼上的邻居此刻在做什么——也许是失眠了，起来倒了杯水，然后又回到了沉默之中。",
+    "text_pinyin": "Zhù zài lǎoshì gōngyù lóu lǐ, nǐ huì zhújiàn xuéhuì yì zhǒng tīngjué zhìtú shù — tōngguò shēngyīn lái pànduàn zhěng dòng lóu de shēnghuó zhuàngtài. Zǎoshang liù diǎn èrshí fēn, wǔ lóu Lǐ āyí de nàozhōng huì zhǔnshí xiǎng qǐ, nà shì yì zhǒng lǎoshì diànzǐ nàozhōng tèyǒu de jiānruì fēngmíng, chuāntòulì jí qiáng, lián gé le liǎng céng lóu de wǒ dōu néng tīng dào. Liù diǎn sìshí fēn, sān lóu nà hù rénjia kāishǐ shāo shuǐ, diàn rèshuǐ hú jiārè dào fèiténg shí fāchū de wēngmíng shēng yánzhe guǎndào chuán biàn zhěng gè lóutǐ. Qī diǎn yí kè, lóudào lǐ kāishǐ huídàng gè zhǒng chūmén de shēngxiǎng: yàoshi zhuǎndòng, fángdào mén guānbì de kādā shēng, gāogēnxié zài lóutī shàng de yǒu jiézòu de qiāojī. Báitiān de gōngyù lóu shì ānjìng de, zhǐ yǒu ǒu'ěr de zhuāngxiū shēng huòzhě sòng kuàidì de ménlíng shēng dǎpò chénmò. Bàngwǎn wǔ diǎn yǐhòu, chúfáng pái yóuyān jī de wēngwēng shēng kāishǐ cǐqǐbǐfú, zhè shì quán lóu jūmín tóngshí zuò wǎnfàn de xìnhào. Wǎnshang jiǔ diǎn yǐhòu, lóu lǐ jiànjiàn ānjìng xiàlái, zhǐ shèng xià shuǐguǎn lǐ shuǐ liú de shēngyīn hé ǒu'ěr chuánlái de diànshì shēng. Yǒushíhou bànyè huì tūrán tīng dào lóu shàng tuō yǐzi de shēngyīn, chénmèn ér duǎncù, ràng nǐ zài hēi'àn zhōng xiǎngxiàng lóu shàng de línjū cǐkè zài zuò shénme — yěxǔ shì shīmián le, qǐlái dào le bēi shuǐ, ránhòu yòu huí dào le chénmò zhī zhōng.",
+    "text_en": "Living in an old apartment building, you gradually learn an auditory cartography — judging the entire building's state of life through sound. At 6:20 AM, Auntie Li on the fifth floor's alarm clock sounds punctually — that piercing beep unique to old electronic alarms, with such penetrating power that even I, two floors away, can hear it. At 6:40, the household on the third floor starts boiling water, the electric kettle's hum as it reaches a boil traveling through the pipes across the entire building. At 7:15, the hallway begins echoing with various departure sounds: keys turning, the click of security doors closing, the rhythmic tapping of high heels on stairs. The apartment building is quiet during the day, with only occasional renovation noise or delivery doorbells breaking the silence. After 5 PM, the buzzing of kitchen range hoods rises and falls in waves — the signal that all residents are simultaneously cooking dinner. After 9 PM, the building gradually quiets, leaving only the sound of water flowing in pipes and occasional television noise. Sometimes at midnight you'll suddenly hear the sound of a chair being dragged upstairs, muffled and brief, making you imagine in the darkness what the upstairs neighbor is doing at this moment — perhaps unable to sleep, getting up to pour a glass of water, then returning to silence.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "傍晚五点以后的排油烟机声音意味着什么？",
+        "q_en": "What does the range hood noise after 5 PM signify?",
+        "options": [
+          {"text": "有人在装修厨房", "pinyin": "yǒu rén zài zhuāngxiū chúfáng", "text_en": "Someone is renovating a kitchen", "correct": false},
+          {"text": "全楼居民同时做晚饭", "pinyin": "quán lóu jūmín tóngshí zuò wǎnfàn", "text_en": "All building residents cooking dinner simultaneously", "correct": true},
+          {"text": "排油烟机坏了", "pinyin": "pái yóuyān jī huài le", "text_en": "The range hood is broken", "correct": false},
+          {"text": "餐厅在做外卖", "pinyin": "cāntīng zài zuò wàimài", "text_en": "A restaurant is preparing takeout", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "半夜听到楼上拖椅子的声音，作者想象邻居在做什么？",
+        "q_en": "When hearing a chair dragged upstairs at midnight, what does the author imagine?",
+        "options": [
+          {"text": "在搬家", "pinyin": "zài bānjiā", "text_en": "Moving house", "correct": false},
+          {"text": "在打扫卫生", "pinyin": "zài dǎsǎo wèishēng", "text_en": "Cleaning", "correct": false},
+          {"text": "也许失眠了，起来倒了杯水", "pinyin": "yěxǔ shīmián le, qǐlái dào le bēi shuǐ", "text_en": "Perhaps unable to sleep, getting up to pour a glass of water", "correct": true},
+          {"text": "在做运动", "pinyin": "zài zuò yùndòng", "text_en": "Exercising", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j6_system_062",
+    "title": "The Recycling Station's Quiet Economy",
+    "title_zh": "回收站的静默经济",
+    "hsk_level": 6,
+    "text_zh": "小区北门外有一个废品回收站，经营者是一对来自安徽的中年夫妻。他们每天早上五点半开始工作，在大多数居民还在睡觉的时候就已经把前一天收来的废品分好了类。纸板箱被压扁后整齐地码成一米多高的方块，塑料瓶按颜色和材质分成三堆，金属罐单独放在一个角落。这种分类的精确程度令人惊讶，他们只用目测和手感就能区分不同等级的塑料，这是十几年实践积累出来的专业技能。每周三下午，一辆蓝色的大卡车会来把这些分好类的废品运走，这是回收链条中的下一个环节。回收站的收入不高但很稳定，靠的是对城市物质流动的深刻理解：他们知道搬家季节纸箱最多，节日之后酒瓶数量会骤增，开学前旧课本和练习册会集中出现。这对夫妻很少说话，配合默契得像一台运转良好的机器。有时候我路过会给他们带两瓶水，他们接过以后总是微微点头致谢，然后继续手中的工作。那种专注和沉默让我觉得他们的工作有一种被严重低估的尊严。",
+    "text_pinyin": "Xiǎoqū běi mén wài yǒu yí gè fèipǐn huíshōu zhàn, jīngyíng zhě shì yí duì láizì Ānhuī de zhōngnián fūqī. Tāmen měi tiān zǎoshang wǔ diǎn bàn kāishǐ gōngzuò, zài dà duōshù jūmín hái zài shuìjiào de shíhou jiù yǐjīng bǎ qián yì tiān shōu lái de fèipǐn fēn hǎo le lèi. Zhǐbǎn xiāng bèi yā biǎn hòu zhěngqí de mǎ chéng yì mǐ duō gāo de fāngkuài, sùliào píng àn yánsè hé cáizhì fēn chéng sān duī, jīnshǔ guàn dāndú fàng zài yí gè jiǎoluò. Zhè zhǒng fēnlèi de jīngquè chéngdù lìng rén jīngyà, tāmen zhǐ yòng mùcè hé shǒugǎn jiù néng qūfēn bùtóng děngjí de sùliào, zhè shì shí jǐ nián shíjiàn jīlěi chūlái de zhuānyè jìnéng. Měi zhōu sān xiàwǔ, yí liàng lánsè de dà kǎchē huì lái bǎ zhèxiē fēn hǎo lèi de fèipǐn yùn zǒu, zhè shì huíshōu liántiáo zhōng de xià yí gè huánjié. Huíshōu zhàn de shōurù bù gāo dàn hěn wěndìng, kào de shì duì chéngshì wùzhì liúdòng de shēnkè lǐjiě: tāmen zhīdào bānjiā jìjié zhǐ xiāng zuì duō, jiérì zhīhòu jiǔ píng shùliàng huì zhòuzēng, kāixué qián jiù kèběn hé liànxí cè huì jízhōng chūxiàn. Zhè duì fūqī hěn shǎo shuōhuà, pèihé mòqì de xiàng yì tái yùnzhuǎn liánghǎo de jīqì. Yǒushíhou wǒ lùguò huì gěi tāmen dài liǎng píng shuǐ, tāmen jiē guò yǐhòu zǒngshì wēiwēi diǎntóu zhìxiè, ránhòu jìxù shǒu zhōng de gōngzuò. Nà zhǒng zhuānzhù hé chénmò ràng wǒ juéde tāmen de gōngzuò yǒu yì zhǒng bèi yánzhòng dīgū de zūnyán.",
+    "text_en": "Outside the north gate of our compound is a waste recycling station, run by a middle-aged couple from Anhui. They start work at 5:30 every morning, having already sorted the previous day's collected recyclables while most residents are still sleeping. Cardboard boxes are flattened and neatly stacked into blocks over a meter high, plastic bottles sorted into three piles by color and material, metal cans placed separately in a corner. The precision of this classification is astonishing — they can distinguish different grades of plastic by sight and touch alone, a professional skill accumulated through over a decade of practice. Every Wednesday afternoon, a blue truck comes to transport these sorted recyclables away — the next link in the recycling chain. The station's income isn't high but is stable, built on a deep understanding of the city's material flow: they know cardboard boxes peak during moving season, bottle counts surge after holidays, and old textbooks and workbooks appear in clusters before the school year starts. This couple rarely speaks, their coordination as seamless as a well-running machine. Sometimes when I pass by I bring them two bottles of water; they always nod slightly in thanks after accepting, then continue their work. That focus and silence makes me feel their work possesses a severely underestimated dignity.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这对夫妻怎么区分不同等级的塑料？",
+        "q_en": "How does this couple distinguish different grades of plastic?",
+        "options": [
+          {"text": "用专业设备检测", "pinyin": "yòng zhuānyè shèbèi jiǎncè", "text_en": "Using professional equipment", "correct": false},
+          {"text": "看标签", "pinyin": "kàn biāoqiān", "text_en": "Reading labels", "correct": false},
+          {"text": "只用目测和手感", "pinyin": "zhǐ yòng mùcè hé shǒugǎn", "text_en": "By sight and touch alone", "correct": true},
+          {"text": "按重量区分", "pinyin": "àn zhòngliàng qūfēn", "text_en": "By weight", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "他们怎么知道什么时候废品最多？",
+        "q_en": "How do they know when recyclables are most abundant?",
+        "options": [
+          {"text": "通过网上的数据分析", "pinyin": "tōngguò wǎng shàng de shùjù fēnxī", "text_en": "Through online data analysis", "correct": false},
+          {"text": "物业公司告诉他们的", "pinyin": "wùyè gōngsī gàosu tāmen de", "text_en": "Property management tells them", "correct": false},
+          {"text": "通过对城市物质流动的深刻理解和经验", "pinyin": "tōngguò duì chéngshì wùzhì liúdòng de shēnkè lǐjiě hé jīngyàn", "text_en": "Through deep understanding and experience of city material flow", "correct": true},
+          {"text": "随机收集，没有规律", "pinyin": "suíjī shōují, méiyǒu guīlǜ", "text_en": "Random collection with no pattern", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j6_system_063",
+    "title": "The Neighbourhood Watch Aunties",
+    "title_zh": "小区的义务巡逻队",
+    "hsk_level": 6,
+    "text_zh": "我们小区有一支由六位退休阿姨组成的非正式义务巡逻队。她们没有制服、没有编制、没有任何官方授权，但她们对小区安全事务的掌控力超过了大多数正式的保安。这支巡逻队的核心人物是张阿姨，她在小区住了二十多年，能叫出百分之八十以上住户的名字。每天下午她们会分两条路线巡视小区：一条覆盖东边的六栋楼和中心花园，另一条负责西边的五栋楼和地下车库入口。巡逻的内容看似随意——散步、聊天、逗逗花坛边的流浪猫——但实际上她们在持续收集信息。陌生面孔会被不动声色地观察和记录，可疑车辆的车牌号会被默默背下来，任何不寻常的声响都会引起她们的警觉。有一次，她们注意到三号楼的一户人家连续三天没有开窗通风，于是主动去敲门询问，结果发现独居的王奶奶因为感冒发烧卧床不起。这件事以后，整个小区对巡逻队的态度从「多管闲事」变成了「默默感激」。她们的存在证明了一个道理：最有效的社区安全系统往往不是技术性的，而是人情味的。",
+    "text_pinyin": "Wǒmen xiǎoqū yǒu yì zhī yóu liù wèi tuìxiū āyí zǔchéng de fēi zhèngshì yìwù xúnluó duì. Tāmen méiyǒu zhìfú, méiyǒu biānzhì, méiyǒu rènhé guānfāng shòuquán, dàn tāmen duì xiǎoqū ānquán shìwù de zhǎngkònglì chāoguò le dà duōshù zhèngshì de bǎo'ān. Zhè zhī xúnluó duì de héxīn rénwù shì Zhāng āyí, tā zài xiǎoqū zhù le èrshí duō nián, néng jiào chū bǎi fēn zhī bāshí yǐshàng zhùhù de míngzi. Měi tiān xiàwǔ tāmen huì fēn liǎng tiáo lùxiàn xúnshì xiǎoqū: yì tiáo fùgài dōngbiān de liù dòng lóu hé zhōngxīn huāyuán, lìng yì tiáo fùzé xībiān de wǔ dòng lóu hé dìxià chēkù rùkǒu. Xúnluó de nèiróng kàn sì suíyì — sànbù, liáotiān, dòu dou huātán biān de liúlàng māo — dàn shíjì shàng tāmen zài chíxù shōují xìnxī. Mòshēng miànkǒng huì bèi bú dòng shēngsè de guānchá hé jìlù, kěyí chēliàng de chēpái hào huì bèi mòmò bèi xiàlái, rènhé bù xúncháng de shēngxiǎng dōu huì yǐnqǐ tāmen de jǐngjué. Yǒu yí cì, tāmen zhùyì dào sān hào lóu de yí hù rénjia liánxù sān tiān méiyǒu kāi chuāng tōngfēng, yúshì zhǔdòng qù qiāo mén xúnwèn, jiéguǒ fāxiàn dújū de Wáng nǎinai yīnwèi gǎnmào fāshāo wòchuáng bù qǐ. Zhè jiàn shì yǐhòu, zhěng gè xiǎoqū duì xúnluó duì de tàidu cóng 「duō guǎn xiánshì」 biàn chéng le 「mòmò gǎnjī」. Tāmen de cúnzài zhèngmíng le yí gè dàolǐ: zuì yǒuxiào de shèqū ānquán xìtǒng wǎngwǎng búshì jìshùxìng de, ér shì rénqíngwèi de.",
+    "text_en": "Our compound has an informal volunteer patrol team consisting of six retired aunties. They have no uniforms, no official positions, no authorization whatsoever, yet their control over the compound's security affairs exceeds that of most formal security guards. The patrol team's core figure is Auntie Zhang, who has lived in the compound for over twenty years and can call out the names of more than eighty percent of residents. Every afternoon they split into two routes to patrol: one covering the six buildings on the east side and the central garden, the other responsible for the five buildings on the west side and the underground garage entrance. The patrol content appears casual — strolling, chatting, playing with stray cats by the flower beds — but in reality they're continuously gathering intelligence. Unfamiliar faces are observed and noted without betraying any sign, suspicious vehicle license plates are silently memorized, any unusual sounds trigger their alertness. Once they noticed that a household in Building 3 hadn't opened their windows to ventilate for three consecutive days, so they proactively knocked to inquire, discovering that Grandma Wang, who lives alone, had been bedridden with a cold and fever. After this incident, the entire compound's attitude toward the patrol team shifted from 'meddlesome busybodies' to 'silent gratitude.' Their existence proves a truth: the most effective community security systems are often not technological, but rooted in human warmth.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "巡逻队发现王奶奶有什么问题？",
+        "q_en": "What problem did the patrol team discover with Grandma Wang?",
+        "options": [
+          {"text": "她家被盗了", "pinyin": "tā jiā bèi dào le", "text_en": "Her home was robbed", "correct": false},
+          {"text": "她因为感冒发烧卧床不起", "pinyin": "tā yīnwèi gǎnmào fāshāo wòchuáng bù qǐ", "text_en": "She was bedridden with a cold and fever", "correct": true},
+          {"text": "她搬走了", "pinyin": "tā bān zǒu le", "text_en": "She had moved away", "correct": false},
+          {"text": "她家在装修", "pinyin": "tā jiā zài zhuāngxiū", "text_en": "Her home was being renovated", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者认为最有效的社区安全系统是什么样的？",
+        "q_en": "What does the author believe the most effective community security system is like?",
+        "options": [
+          {"text": "高科技监控系统", "pinyin": "gāo kējì jiānkòng xìtǒng", "text_en": "High-tech surveillance systems", "correct": false},
+          {"text": "专业保安团队", "pinyin": "zhuānyè bǎo'ān tuánduì", "text_en": "Professional security teams", "correct": false},
+          {"text": "人情味的，而不是技术性的", "pinyin": "rénqíngwèi de, ér búshì jìshùxìng de", "text_en": "Rooted in human warmth, not technology", "correct": true},
+          {"text": "政府管理的", "pinyin": "zhèngfǔ guǎnlǐ de", "text_en": "Government-managed", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j6_system_064",
+    "title": "The Traffic Light's Invisible Persuasion",
+    "title_zh": "红绿灯的隐形说服术",
+    "hsk_level": 6,
+    "text_zh": "我每天上班经过的那个十字路口有一个特别长的红灯——整整九十秒。在这九十秒里，我观察到了人类耐心的精确分界线。前三十秒，大多数行人会安静等待，看看手机或者抬头观察天空。三十秒到六十秒之间，身体语言开始变化：有人开始左右张望，有人把重心从一只脚换到另一只脚，有人不耐烦地看了看手表。六十秒以后，第一批闯红灯的人出现了——通常是一两个急匆匆的年轻人，他们在确认没有来车以后快步穿过路口。他们的行动会产生一种微妙的示范效应：又有三四个人跟了上去。到了最后十秒，还在等待的人反而成了少数派，他们站在路边，一方面觉得自己是对的，另一方面又为自己的等待感到莫名的尴尬。我属于坚持等到最后的那一类人，但我承认这种坚持更多是出于一种固执的习惯，而非道德优越感。绿灯亮起的那一刻，等待者和闯红灯者都汇入了同一股人流，仿佛什么都没有发生过。红绿灯沉默地记录着这一切，每九十秒重复一次同样的实验。",
+    "text_pinyin": "Wǒ měi tiān shàngbān jīngguò de nàge shízì lùkǒu yǒu yí gè tèbié cháng de hóngdēng — zhěngzhěng jiǔshí miǎo. Zài zhè jiǔshí miǎo lǐ, wǒ guānchá dào le rénlèi nàixīn de jīngquè fēnjiè xiàn. Qián sānshí miǎo, dà duōshù xíngrén huì ānjìng děngdài, kànkan shǒujī huòzhě táitóu guānchá tiānkōng. Sānshí miǎo dào liùshí miǎo zhī jiān, shēntǐ yǔyán kāishǐ biànhuà: yǒu rén kāishǐ zuǒyòu zhāngwàng, yǒu rén bǎ zhòngxīn cóng yì zhī jiǎo huàn dào lìng yì zhī jiǎo, yǒu rén bú nàifán de kàn le kàn shǒubiǎo. Liùshí miǎo yǐhòu, dì yī pī chuǎng hóngdēng de rén chūxiàn le — tōngcháng shì yī liǎng gè jí cōngcōng de niánqīngrén, tāmen zài quèrèn méiyǒu lái chē yǐhòu kuàibù chuānguò lùkǒu. Tāmen de xíngdòng huì chǎnshēng yì zhǒng wēimiào de shìfàn xiàoyìng: yòu yǒu sān sì gè rén gēn le shàngqù. Dào le zuìhòu shí miǎo, hái zài děngdài de rén fǎn'ér chéng le shǎoshù pài, tāmen zhàn zài lù biān, yì fāngmiàn juéde zìjǐ shì duì de, lìng yì fāngmiàn yòu wèi zìjǐ de děngdài gǎndào mòmíng de gāngà. Wǒ shǔyú jiānchí děng dào zuìhòu de nà yí lèi rén, dàn wǒ chéngrèn zhè zhǒng jiānchí gèng duō shì chūyú yì zhǒng gùzhí de xíguàn, ér fēi dàodé yōuyuè gǎn. Lǜ dēng liàng qǐ de nà yí kè, děngdài zhě hé chuǎng hóngdēng zhě dōu huìrù le tóng yí gǔ rénliú, fǎngfú shénme dōu méiyǒu fāshēng guò. Hónglǜdēng chénmò de jìlù zhe zhè yíqiè, měi jiǔshí miǎo chóngfù yí cì tóngyàng de shíyàn.",
+    "text_en": "The intersection I pass on my way to work has a particularly long red light — a full ninety seconds. In those ninety seconds, I've observed the precise boundary of human patience. In the first thirty seconds, most pedestrians wait quietly, checking their phones or looking up at the sky. Between thirty and sixty seconds, body language begins to shift: some start looking left and right, some shift their weight from one foot to the other, some impatiently glance at their watch. After sixty seconds, the first jaywalkers appear — usually one or two hurrying young people who stride across the intersection after confirming no cars are coming. Their action produces a subtle demonstration effect: three or four more follow. In the final ten seconds, those still waiting have become the minority, standing at the curb, on one hand feeling they're in the right, on the other feeling inexplicably embarrassed about their own waiting. I belong to the type that persists until the end, but I admit this persistence comes more from stubborn habit than moral superiority. The moment the green light comes on, waiters and jaywalkers alike merge into the same stream of people, as if nothing had happened. The traffic light silently records all of this, repeating the same experiment every ninety seconds.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "大约什么时候开始有人闯红灯？",
+        "q_en": "Approximately when do people start jaywalking?",
+        "options": [
+          {"text": "前三十秒", "pinyin": "qián sānshí miǎo", "text_en": "In the first thirty seconds", "correct": false},
+          {"text": "六十秒以后", "pinyin": "liùshí miǎo yǐhòu", "text_en": "After sixty seconds", "correct": true},
+          {"text": "最后十秒", "pinyin": "zuìhòu shí miǎo", "text_en": "In the last ten seconds", "correct": false},
+          {"text": "红灯一亮就开始", "pinyin": "hóngdēng yí liàng jiù kāishǐ", "text_en": "As soon as the red light turns on", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者为什么坚持等到绿灯？",
+        "q_en": "Why does the author insist on waiting for the green light?",
+        "options": [
+          {"text": "因为害怕被罚款", "pinyin": "yīnwèi hàipà bèi fákuǎn", "text_en": "Because of fear of being fined", "correct": false},
+          {"text": "因为道德优越感", "pinyin": "yīnwèi dàodé yōuyuè gǎn", "text_en": "Because of moral superiority", "correct": false},
+          {"text": "更多是出于固执的习惯", "pinyin": "gèng duō shì chūyú gùzhí de xíguàn", "text_en": "More out of stubborn habit", "correct": true},
+          {"text": "因为路口有摄像头", "pinyin": "yīnwèi lùkǒu yǒu shèxiàngtóu", "text_en": "Because there are cameras at the intersection", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  }
+]

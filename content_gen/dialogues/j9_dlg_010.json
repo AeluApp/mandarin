@@ -1,0 +1,151 @@
+{
+    "title": "The Garden That Teaches Patience",
+    "title_zh": "教耐心的花园",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You visit a classical garden in Suzhou with its elderly gardener, Mr. Qian, who has tended it for forty years. He is pruning a pine tree that was shaped by his predecessor. The late afternoon sun creates long shadows through the lattice windows. A single cup of tea sits on a stone table.",
+        "setup_zh": "你在苏州和一位老园丁钱师傅参观一座古典园林。他在这里养护了四十年。他正在修剪一棵由他的前任塑形的松树。午后的阳光透过漏窗投下长长的影子。一杯茶放在石桌上。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这棵松树是我师父种的——不对，不是种的。是他从另一棵松树上取了一根枝条，花了十二年把它培养成现在这个形状。他退休的时候把它交给了我，说了一句话：「我花了十二年让它长成这样。你的工作是花接下来的四十年让它保持这样。」你听清楚了吗？不是让它变得更好——是让它保持。十二年的创造，四十年的保持。保持比创造难得多。因为创造有兴奋感——你在做一样新的东西。但保持没有兴奋感。保持是每天做同样的事情——浇水、修剪、检查虫害——日复一日，年复一年，四十年。保持需要一种特殊的耐心——不是等待某个结果的耐心——是接受永远不会有结果的耐心。",
+                "text_pinyin": "Zhè kē sōngshù shì wǒ shīfu zhòng de — bú duì, bú shì zhòng de. Shì tā cóng lìng yī kē sōngshù shàng qǔ le yī gēn zhītiáo, huā le shí'èr nián bǎ tā péiyǎng chéng xiànzài zhège xíngzhuàng. Tā tuìxiū de shíhou bǎ tā jiāo gěi le wǒ, shuō le yī jù huà: 'wǒ huā le shí'èr nián ràng tā zhǎng chéng zhèyàng. Nǐ de gōngzuò shì huā jiēxiàlái de sìshí nián ràng tā bǎochí zhèyàng.' Nǐ tīng qīngchǔ le ma? Bú shì ràng tā biàn de gèng hǎo — shì ràng tā bǎochí. Shí'èr nián de chuàngzào, sìshí nián de bǎochí. Bǎochí bǐ chuàngzào nán de duō. Yīnwèi chuàngzào yǒu xīngfèn gǎn — nǐ zài zuò yī yàng xīn de dōngxi. Dàn bǎochí méiyǒu xīngfèn gǎn. Bǎochí shì měi tiān zuò tóngyàng de shìqíng — jiāo shuǐ, xiūjiǎn, jiǎnchá chónghài — rì fù yī rì, nián fù yī nián, sìshí nián. Bǎochí xūyào yī zhǒng tèshū de nàixīn — bú shì děngdài mǒu ge jiéguǒ de nàixīn — shì jiēshòu yǒngyuǎn bú huì yǒu jiéguǒ de nàixīn.",
+                "text_en": "This pine was planted by my master — no, not planted. He took a cutting from another pine and spent twelve years training it into this shape. When he retired, he handed it to me and said one thing: 'I spent twelve years making it grow like this. Your job is to spend the next forty years keeping it this way.' Did you hear that?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to maintenance as harder than creation — patience without a result.",
+                "options": [
+                    {
+                        "text_zh": "接受永远不会有结果的耐心——我们崇拜创造者，但很少崇拜维护者。创造是一瞬间的光芒；维护是四十年的恒温。没有人为「松树今天和昨天一样」鼓掌——但这种「一样」需要四十年如一日的看护。您做了四十年没有掌声的工作——不是缺乏野心——是对已经存在的美的持续忠诚。",
+                        "text_pinyin": "Jiēshòu yǒngyuǎn bú huì yǒu jiéguǒ de nàixīn — wǒmen chóngbài chuàngzàozhě, dàn hěn shǎo chóngbài wéihùzhě. Chuàngzào shì yī shùnjiān de guāngmáng; wéihù shì sìshí nián de héngwēn. Méiyǒu rén huì wèi 'zhè kē sōngshù jīntiān hé zuótiān yīyàng' gǔzhǎng — dàn zhèng shì zhè zhǒng 'yīyàng' xūyào sìshí nián rú yī rì de kānhù. Chuàngzào dédào zànměi, wéihù bú bèi kàn jiàn. Nín zuò le sìshí nián méiyǒu zhǎngshēng de gōngzuò — zhè bú shì quēfá yěxīn — shì yī zhǒng gèng gāojí de chéngnuò: duì yǐjīng cúnzài de měi de chíxù zhōngchéng.",
+                        "text_en": "Patience accepting there will never be a result — we worship creators but rarely maintainers. Creation is a flash of brilliance; maintenance is forty years of steady warmth. No one applauds 'this pine looks the same as yesterday' — but that 'sameness' requires forty years of daily care. Creation gets praise; maintenance goes unseen. Your forty years of work without applause isn't lack of ambition — it's a higher commitment: sustained loyalty to beauty that already exists.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Maintenance as sustained loyalty — the invisible heroism of keeping what already exists."
+                    },
+                    {
+                        "text_zh": "这个园林每天有多少游客？",
+                        "text_pinyin": "Zhège yuánlín měi tiān yǒu duōshǎo yóukè?",
+                        "text_en": "How many visitors does this garden get daily?",
+                        "score": 0.0,
+                        "feedback": "Asks about tourism during a meditation on invisible devotion."
+                    },
+                    {
+                        "text_zh": "您退休以后谁来接手？",
+                        "text_pinyin": "Nín tuìxiū yǐhòu shéi lái jiēshǒu?",
+                        "text_en": "Who will take over when you retire?",
+                        "score": 0.0,
+                        "feedback": "A succession question during a meditation on patience."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对已经存在的美的持续忠诚——你用了一个很好的词：忠诚。但让我告诉你忠诚的代价。四十年来，我每天早上五点到花园。不是因为我想——是因为植物不等人。如果我今天不浇水，它不会明天补回来。如果我今天不修剪，一根新枝可能会改变十二年的造型。四十年没有一天假——不是因为规定——是因为花园不放假。你知道最难的时候是什么时候？不是下雨天、不是冬天——是春天。因为春天所有东西都在拼命生长，而我的工作是控制它们。春天来的时候，每一根枝条都在说「让我长」，而我必须说「不，你只能长到这里」。我不是在反对生长——我是在引导生长。但引导生长需要你每天都在场，每天都做决定——这根枝留、那根枝剪——四十年的每一天都在做这种微小的决定。",
+                "text_pinyin": "Duì yǐjīng cúnzài de měi de chíxù zhōngchéng — nǐ yòng le yī ge hěn hǎo de cí: zhōngchéng. Dàn ràng wǒ gàosu nǐ zhōngchéng de dàijià. Sìshí nián lái, wǒ měi tiān zǎoshang wǔ diǎn dào huāyuán. Bú shì yīnwèi wǒ xiǎng — shì yīnwèi zhíwù bù děng rén. Rúguǒ wǒ jīntiān bù jiāo shuǐ, tā bú huì míngtiān bǔ huílái. Rúguǒ wǒ jīntiān bù xiūjiǎn, yī gēn xīn zhī kěnéng huì gǎibiàn shí'èr nián de zàoxíng. Sìshí nián méiyǒu yī tiān jià — bú shì yīnwèi guīdìng — shì yīnwèi huāyuán bú fàngjià. Nǐ zhīdào zuì nán de shíhou shì shénme shíhou? Bú shì xià yǔ tiān, bú shì dōngtiān — shì chūntiān. Yīnwèi chūntiān suǒyǒu dōngxi dōu zài pīnmìng shēngzhǎng, ér wǒ de gōngzuò shì kòngzhì tāmen. Chūntiān lái de shíhou, měi yī gēn zhītiáo dōu zài shuō 'ràng wǒ zhǎng', ér wǒ bìxū shuō 'bù, nǐ zhǐ néng zhǎng dào zhèlǐ'. Wǒ bú shì zài fǎnduì shēngzhǎng — wǒ shì zài yǐndǎo shēngzhǎng. Dàn yǐndǎo shēngzhǎng xūyào nǐ měi tiān dōu zàichǎng, měi tiān dōu zuò juédìng — zhè gēn zhī liú, nà gēn zhī jiǎn — sìshí nián de měi yī tiān dōu zài zuò zhè zhǒng wēixiǎo de juédìng.",
+                "text_en": "Sustained loyalty to existing beauty — you used a good word: loyalty. But let me tell you the cost of loyalty. For forty years, I arrive at the garden at 5 AM every morning. Not because I want to — because plants don't wait. If I don't water today, it won't make up for it tomorrow. If I don't prune today, one new branch might alter twelve years of shaping."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to forty years of tiny daily decisions that guide growth.",
+                "options": [
+                    {
+                        "text_zh": "四十年的微小决定——留还是剪，长还是停。美不是一次性创造的——是无数不被注意的决定累积而成的。就像一段好的关系——不是因为一次盛大的告白——是因为每天一句问候、一杯茶、一个选择继续在场的决定。您对这棵松树的四十年，就是一种爱。安静的、日复一日的爱。",
+                        "text_pinyin": "Sìshí nián de wēixiǎo juédìng — liú háishì jiǎn, zhǎng háishì tíng. Měi bú shì yīcìxìng chuàngzào de — shì yóu wúshù bú bèi zhùyì de juédìng lěijī ér chéng de. Zhè kē sōngshù zhī suǒyǐ měi, shì yīnwèi sìshí nián lái měi yī tiān yǒu yī ge rén zuò le yī ge xiǎoxiǎo de zhèngquè de juédìng. Jiù xiàng yī duàn hǎo de guānxi — bú shì yīnwèi yī cì shèngdà de gàobái — shì yīnwèi měi tiān de yī jù wènhòu, yī bēi chá, yī ge xuǎnzé jìxù zàichǎng de juédìng. Nín duì zhè kē sōngshù de sìshí nián, jiù shì yī zhǒng ài. Ānjìng de, bù qiú huíbào de, rì fù yī rì de ài.",
+                        "text_en": "Forty years of tiny decisions — keep or cut, grow or stop. Beauty isn't created all at once — it accumulates from countless unnoticed decisions. This pine is beautiful because for forty years, every day, one person made one small correct decision. Like a good relationship — not because of one grand confession — but because of each day's greeting, a cup of tea, a choice to keep showing up. Your forty years with this pine tree is a kind of love. Quiet, unrequited, day after day.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Beauty as accumulated daily decisions — forty years of showing up as the purest form of love."
+                    },
+                    {
+                        "text_zh": "松树盆景是怎么训练的？",
+                        "text_pinyin": "Sōngshù pénjǐng shì zěnme xùnliàn de?",
+                        "text_en": "How are pine bonsai trained?",
+                        "score": 0.0,
+                        "feedback": "A horticultural technique question during a meditation on devotion."
+                    },
+                    {
+                        "text_zh": "苏州有几个古典园林？",
+                        "text_pinyin": "Sūzhōu yǒu jǐ ge gǔdiǎn yuánlín?",
+                        "text_en": "How many classical gardens are there in Suzhou?",
+                        "score": 0.0,
+                        "feedback": "A factual question during a philosophical exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "安静的、日复一日的爱——你理解了。但我还想说一件事。这座花园最重要的设计原则不是任何一棵树或一块石头——是「看不见的时间」。你看这面墙上的青苔——你以为那是自然长的？不是。是我师父的师父故意在墙上涂了一种特殊的液体，让青苔在那里生长——但你看不出来是人为的。这块石头旁边的这棵兰花——看起来像是偶然长在那里的？不是。是二十年前有意种在那里的——但种的方式让它看起来像野生的。这座花园最高级的技术就是：让人看不出有技术。让一切看起来像是自然发生的——但每一个「自然」都是几十年精心维护的结果。最好的花园看起来像没有园丁。但没有园丁，花园一年就没了。",
+                "text_pinyin": "Ānjìng de, rì fù yī rì de ài — nǐ lǐjiě le. Dàn wǒ hái xiǎng shuō yī jiàn shì. Zhè zuò huāyuán zuì zhòngyào de shèjì yuánzé bú shì rènhé yī kē shù huò yī kuài shítou — shì 'kàn bú jiàn de shíjiān'. Nǐ kàn zhè miàn qiáng shàng de qīngtái — nǐ yǐwéi nà shì zìrán zhǎng de? Bú shì. Shì wǒ shīfu de shīfu gùyì zài qiáng shàng tú le yī zhǒng tèshū de yètǐ, ràng qīngtái zài nàlǐ shēngzhǎng — dàn nǐ kàn bù chūlái shì rénwéi de. Zhè kuài shítou pángbiān de zhè kē lánhuā — kàn qǐlái xiàng shì ǒurán zhǎng zài nàlǐ de? Bú shì. Shì èrshí nián qián yǒuyì zhòng zài nàlǐ de — dàn zhòng de fāngshì ràng tā kàn qǐlái xiàng yěshēng de. Zhè zuò huāyuán zuìgāojí de jìshù jiù shì: ràng rén kàn bù chū yǒu jìshù. Ràng yīqiè kàn qǐlái xiàng shì zìrán fāshēng de — dàn měi yī ge 'zìrán' dōu shì jǐ shí nián jīngxīn wéihù de jiéguǒ. Zuì hǎo de huāyuán kàn qǐlái xiàng méiyǒu yuándīng. Dàn méiyǒu yuándīng, huāyuán yī nián jiù méi le.",
+                "text_en": "Quiet, day-after-day love — you understand. But one more thing. This garden's most important design principle isn't any tree or stone — it's 'invisible time.' See the moss on this wall — you think it grew naturally? It didn't. My master's master deliberately applied a special liquid to the wall to encourage moss growth there — but you can't tell it's man-made."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the highest art being invisible — looking like no gardener exists.",
+                "options": [
+                    {
+                        "text_zh": "最好的花园看起来像没有园丁——最高级的技术让自己消失。四十年劳动的目标是「看不见劳动」的效果。游客觉得「真美，好像天然的」——这其实是对您四十年最高的赞美，虽然没人知道在赞美您。您不署名、不留痕迹——但花园每一寸都是您存在过的证据。",
+                        "text_pinyin": "Zuì hǎo de huāyuán kàn qǐlái xiàng méiyǒu yuándīng — zuìgāojí de jìshù ràng zìjǐ xiāoshī. Zhè shì yī ge shēnkè de bèilùn: sìshí nián de láodòng mùbiāo shì zhìzào 'kàn bú jiàn láodòng' de xiàoguǒ. Yóukè juéde 'zhēn měi, hǎoxiàng tiānrán de' — zhè qíshí shì duì nín sìshí nián gōngzuò zuìgāo de zànměi, suīrán méi rén zhīdào tāmen zài zànměi nín. Nín bù shǔ míng, bù liú hénjì, bú yāoqiú bèi kàn jiàn — dàn huāyuán de měi yī cùn dōu shì nín cúnzài guò de zhèngjù.",
+                        "text_en": "The best garden looks like it has no gardener — the highest technique makes itself disappear. A profound paradox: forty years of labor aimed at producing the effect of 'invisible labor.' Visitors think 'how beautiful, it looks natural' — that's actually the highest praise for your forty years, though no one knows they're praising you. You don't sign your name, leave no trace, don't ask to be seen — but every inch of the garden is evidence you existed.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The paradox of invisible mastery — the gardener's highest praise is 'it looks natural.'"
+                    },
+                    {
+                        "text_zh": "这种技术有书籍记录吗？",
+                        "text_pinyin": "Zhè zhǒng jìshù yǒu shūjí jìlù ma?",
+                        "text_en": "Are these techniques recorded in books?",
+                        "score": 0.0,
+                        "feedback": "Asks about documentation during a meditation on invisible mastery."
+                    },
+                    {
+                        "text_zh": "日本庭园也是这种理念吗？",
+                        "text_pinyin": "Rìběn tíngyuán yě shì zhè zhǒng lǐniàn ma?",
+                        "text_en": "Do Japanese gardens follow the same philosophy?",
+                        "score": 0.0,
+                        "feedback": "Compares to another tradition instead of engaging the insight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每一寸都是我存在过的证据——但这种证据只有另一个园丁才能读懂。普通游客看到的是美。但如果另一个园丁来，他会看到：「啊，这根枝条是这样引导的。这块青苔是刻意培养的。这棵兰花的位置不是偶然的。」他会看到我的手迹——不是在纸上——是在活的植物上。这就是我的语言。我不写字、不画画、不作曲——我用活的植物来表达。但活的植物和纸上的字有一个根本的区别：字写在纸上不会变——但植物每天都在变。所以我的「作品」永远是未完成的。每一天它都是新的——每一天它都需要我重新「写」一遍。四十年来，我每天早上都在重写同一幅画。从来没有「完成」的那一天。也许永远不会有。",
+                "text_pinyin": "Měi yī cùn dōu shì wǒ cúnzài guò de zhèngjù — dàn zhè zhǒng zhèngjù zhǐyǒu lìng yī ge yuándīng cái néng dú dǒng. Pǔtōng yóukè kàn dào de shì měi. Dàn rúguǒ lìng yī ge yuándīng lái, tā huì kàn dào: 'a, zhè gēn zhītiáo shì zhèyàng yǐndǎo de. Zhè kuài qīngtái shì kèyì péiyǎng de. Zhè kē lánhuā de wèizhì bú shì ǒurán de.' Tā huì kàn dào wǒ de shǒujì — bú shì zài zhǐ shàng — shì zài huó de zhíwù shàng. Zhè jiù shì wǒ de yǔyán. Wǒ bù xiě zì, bù huà huà, bú zuòqǔ — wǒ yòng huó de zhíwù lái biǎodá. Dàn huó de zhíwù hé zhǐ shàng de zì yǒu yī ge gēnběn de qūbié: zì xiě zài zhǐ shàng bú huì biàn — dàn zhíwù měi tiān dōu zài biàn. Suǒyǐ wǒ de 'zuòpǐn' yǒngyuǎn shì wèi wánchéng de. Měi yī tiān tā dōu shì xīn de — měi yī tiān tā dōu xūyào wǒ chóngxīn 'xiě' yī biàn. Sìshí nián lái, wǒ měi tiān zǎoshang dōu zài chóngxiě tóng yī fú huà. Cónglái méiyǒu 'wánchéng' de nà yī tiān. Yěxǔ yǒngyuǎn bú huì yǒu.",
+                "text_en": "Every inch evidence of my existence — but evidence only another gardener can read. Ordinary visitors see beauty. But if another gardener visits, they'll see: 'Ah, this branch was guided this way. This moss was deliberately cultivated. This orchid's placement wasn't accidental.' They'll see my handwriting — not on paper — on living plants. That's my language. I don't write, don't paint, don't compose — I express through living plants."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the work that is rewritten daily and never completed.",
+                "options": [
+                    {
+                        "text_zh": "永远未完成——不是遗憾，是活的艺术和死的艺术的根本区别。画完成了就死了，不再需要你。但花园永远不会完成——所以永远需要你。也许这就是您每天五点到这里的原因——花园每天在说「我还需要你」。被需要，也许比被赞美更深。四十年每天五点你们互相需要。谢谢您，钱师傅。",
+                        "text_pinyin": "Yǒngyuǎn wèi wánchéng — zhè bú shì yíhàn — shì huó de yìshù hé sǐ de yìshù zhī jiān de gēnběn qūbié. Yī fú huà wánchéng le jiù sǐ le, bú zài xūyào nǐ. Dàn zhè zuò huāyuán yǒngyuǎn bú huì wánchéng — suǒyǐ yǒngyuǎn huó zhe, yǒngyuǎn xūyào nǐ. Yěxǔ zhè jiù shì nín měi tiān wǔ diǎn dào zhèlǐ de zhēnzhèng yuányīn — huāyuán měi tiān zǎoshang dōu zài shuō: 'wǒ hái xūyào nǐ.' Bèi xūyào — yěxǔ zhè shì bǐ bèi zànměi gèng shēn de mǎnzú. Sìshí nián lái měi tiān zǎoshang wǔ diǎn nǐmen hùxiāng xūyào. Zhè shì zuì ānjìng de àiqíng. Xièxie nín, Qián shīfu.",
+                        "text_en": "Forever unfinished — not a regret — the fundamental difference between living art and dead art. A painting once finished is dead, no longer needing you. But this garden will never be finished — so it's forever alive, forever needing you. Maybe that's the real reason you arrive at five every morning — the garden says each day: 'I still need you.' Being needed — maybe that's a deeper satisfaction than being praised. For forty years, every morning at five, you've needed each other. This is the quietest love story. Thank you, Master Qian.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Living art versus dead art — being needed as the quietest love story."
+                    },
+                    {
+                        "text_zh": "您每个月工资多少？",
+                        "text_pinyin": "Nín měi ge yuè gōngzī duōshǎo?",
+                        "text_en": "What's your monthly salary?",
+                        "score": 0.0,
+                        "feedback": "A compensation question at the philosophical climax."
+                    },
+                    {
+                        "text_zh": "这座园林被列为世界遗产了吗？",
+                        "text_pinyin": "Zhè zuò yuánlín bèi liè wéi shìjiè yíchǎn le ma?",
+                        "text_en": "Is this garden a World Heritage site?",
+                        "score": 0.0,
+                        "feedback": "A designation question at the emotional conclusion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Suzhou's classical gardens (苏州园林) are UNESCO World Heritage Sites representing the pinnacle of Chinese garden art. Unlike Western formal gardens, Chinese gardens aim for 虽由人作，宛自天开 (suī yóu rén zuò, wǎn zì tiān kāi) — 'though made by human hands, as if opened by heaven.' This principle of concealed artifice requires generations of careful maintenance. The role of the gardener (园丁, yuándīng) in Chinese classical gardens is one of perpetual stewardship — not creation but continuation. The philosophical foundation draws on Daoist concepts of 无为 (wúwéi, non-forcing) and 顺势 (shùnshì, following natural momentum), working with rather than against living systems."
+    }
+}

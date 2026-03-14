@@ -1,0 +1,100 @@
+{
+    "title": "The Transfer That Took a Village",
+    "title_zh": "转账风波",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_2_01_v0",
+    "tree": {
+        "setup": "The bank lobby, mid-morning. You need to transfer money to a friend. The queue number system says you're number 47; they're currently serving number 31. Teller Lao Zhang has worked here since the bank opened. He types with two fingers and reads every account number aloud twice, as if confirming it with the universe.",
+        "setup_zh": "银行大厅，上午十点多。你要给朋友转账。排号机显示你是47号，现在叫到31号。老张从这家银行开业就在这里了。他用两根手指打字，每个账号都要大声读两遍，好像在跟宇宙确认。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "四十七号！请到二号窗口。",
+                "text_pinyin": "sìshíqī hào! qǐng dào èr hào chuāngkǒu.",
+                "text_en": "Number 47! Please come to window 2."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the teller what you need.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想转账给朋友。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng zhuǎn zhàng gěi péngyou.",
+                        "text_en": "Hello, I'd like to transfer money to a friend.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Zhang adjusts his glasses and pulls up the transfer screen with deliberate keystrokes.「好的，请告诉我对方的账号。」转账 (zhuǎn zhàng) is 'to transfer money' -- essential banking vocabulary."
+                    },
+                    {
+                        "text_zh": "我要给别人打钱。",
+                        "text_pinyin": "wǒ yào gěi biérén dǎ qián.",
+                        "text_en": "I want to send money to someone.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Zhang understands perfectly -- 打钱 is the colloquial version of 转账. He nods and begins the process with his trademark two-finger typing."
+                    },
+                    {
+                        "text_zh": "转账用手机可以吗？",
+                        "text_pinyin": "zhuǎn zhàng yòng shǒujī kěyǐ ma?",
+                        "text_en": "Can I transfer using my phone?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Zhang looks at your phone the way a blacksmith looks at a 3D printer -- with respect but no personal interest.「可以，但是你已经来了……」A fair point. You're already here."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "请告诉我对方的账号和姓名。",
+                "text_pinyin": "qǐng gàosu wǒ duìfāng de zhànghào hé xìngmíng.",
+                "text_en": "Please tell me the recipient's account number and name."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide the account details.",
+                "options": [
+                    {
+                        "text_zh": "账号是……我给您看手机上的。",
+                        "text_pinyin": "zhànghào shì... wǒ gěi nín kàn shǒujī shàng de.",
+                        "text_en": "The account number is... let me show you on my phone.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Lao Zhang leans forward and squints at your phone screen. He reads each digit aloud twice:「三、七、零、二……三、七、零、二……」He will not be rushed."
+                    },
+                    {
+                        "text_zh": "我朋友的名字是王明。",
+                        "text_pinyin": "wǒ péngyou de míngzi shì wáng míng.",
+                        "text_en": "My friend's name is Wang Ming.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Lao Zhang writes the name down carefully.「王，是哪个王？三横一竖的王？」Even common surnames get the full verification treatment."
+                    },
+                    {
+                        "text_zh": "我忘了账号。可以等一下吗？",
+                        "text_pinyin": "wǒ wàng le zhànghào. kěyǐ děng yíxià ma?",
+                        "text_en": "I forgot the account number. Can you wait a moment?",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Lao Zhang sighs but waits with practiced patience. He's seen this many times. 忘了 is the past tense of 'forget' -- you'll use it more often than you'd like."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "转多少钱？",
+                "text_pinyin": "zhuǎn duōshao qián?",
+                "text_en": "How much are you transferring?"
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，转账成功了。这是回单，请收好。",
+                "text_pinyin": "hǎo de, zhuǎn zhàng chénggōng le. zhè shì huídān, qǐng shōu hǎo.",
+                "text_en": "OK, the transfer is complete. Here's your receipt, please keep it."
+            }
+        ],
+        "cultural_note": "Chinese banks still use a queue number system (排号, pái hào). Despite the rise of mobile payment (手机支付), many people still visit branches for large transfers. Tellers will verify every detail multiple times -- patience is essential."
+    }
+}

@@ -1,0 +1,196 @@
+{
+    "title": "The Checkup Choreographer",
+    "title_zh": "体检编舞师",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_doctor_6_02_v0",
+    "tree": {
+        "setup": "The reception area of a private health checkup center, where soft instrumental music plays and the waiting room chairs are upholstered in medical-grade leather — an attempt to make preventive medicine feel like a spa visit. Counselor Ms. Ding manages the checkup packages with the organizational precision of an event planner. She has memorized 28 different examination packages and can customize one in under four minutes. Her desk is organized by body system: cardiovascular on the left, digestive in the middle, endocrine on the right. She says every body tells a story, and a good checkup reads the first chapter.",
+        "setup_zh": "一家私立体检中心的接待区，柔和的器乐在播放，候诊椅包裹着医用级皮革——一种让预防医学感觉像水疗的尝试。咨询师丁女士以活动策划师般的组织精度管理体检套餐。她背下了二十八种不同的体检套餐，能在四分钟内定制一套。她的桌面按身体系统组织：左边是心血管，中间是消化系统，右边是内分泌。她说每个身体都在讲述一个故事，好的体检读的是第一章。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，欢迎来到瑞康体检中心。请问您有预约吗？还是想先了解一下我们的体检套餐？",
+                "text_pinyin": "nín hǎo, huānyíng lái dào Ruì Kāng tǐjiǎn zhōngxīn. qǐngwèn nín yǒu yùyuē ma? háishì xiǎng xiān liǎojiě yíxià wǒmen de tǐjiǎn tàocān?",
+                "text_en": "Hello, welcome to Ruikang Health Checkup Center. Do you have an appointment, or would you like to learn about our checkup packages?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your checkup needs.",
+                "options": [
+                    {
+                        "text_zh": "我没有预约。公司要求做年度体检，但我想做一个比公司基础套餐更全面的。我今年三十五岁，平时坐办公室比较多，家族里有高血压和糖尿病的病史。能不能根据我的情况推荐一个合适的套餐？",
+                        "text_pinyin": "wǒ méiyǒu yùyuē. gōngsī yāoqiú zuò niándù tǐjiǎn, dàn wǒ xiǎng zuò yí gè bǐ gōngsī jīchǔ tàocān gèng quánmiàn de. wǒ jīnnián sānshíwǔ suì, píngshí zuò bàngōngshì bǐjiào duō, jiāzú lǐ yǒu gāo xuèyā hé tángniàobìng de bìngshǐ. néng bu néng gēnjù wǒ de qíngkuàng tuījiàn yí gè héshì de tàocān?",
+                        "text_en": "No appointment. My company requires an annual checkup, but I want something more comprehensive than the basic company package. I'm 35, mostly sedentary office work, and there's a family history of high blood pressure and diabetes. Can you recommend a suitable package based on my situation?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Age, lifestyle, and family history — Ms. Ding's internal catalog narrows from 28 packages to 4 in three seconds. This is the information she needs to write your body's first chapter."
+                    },
+                    {
+                        "text_zh": "我想做个全面的体检。你们有什么套餐？",
+                        "text_pinyin": "wǒ xiǎng zuò gè quánmiàn de tǐjiǎn. nǐmen yǒu shénme tàocān?",
+                        "text_en": "I want a comprehensive checkup. What packages do you have?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She pulls out the menu. Without personal details, she'll show you the full catalog."
+                    },
+                    {
+                        "text_zh": "帮我选一个中等价位的就行。",
+                        "text_pinyin": "bāng wǒ xuǎn yí gè zhōngděng jiàwèi de jiù xíng.",
+                        "text_en": "Just pick a mid-range one for me.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Choosing by price is like choosing a route by distance — it might miss the important stops. She gently asks about your health background."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "根据您的情况，我推荐「精英套餐」，在基础项目之外增加了三项：糖化血红蛋白检测——这个比普通血糖更能反映长期的血糖控制情况；颈动脉超声——评估心血管风险；还有腹部CT——因为长期久坐的人需要关注肝脏和胰腺。总价两千八百块。您觉得怎么样？",
+                "text_pinyin": "gēnjù nín de qíngkuàng, wǒ tuījiàn「jīngyīng tàocān」, zài jīchǔ xiàngmù zhīwài zēngjiā le sān xiàng: tánghuà xuèhóng dànbái jiǎncè——zhège bǐ pǔtōng xuètáng gèng néng fǎnyìng chángqī de xuètáng kòngzhì qíngkuàng; jǐng dòngmài chāoshēng——pínggū xīn xuèguǎn fēngxiǎn; hái yǒu fùbù CT——yīnwèi chángqī jiǔ zuò de rén xūyào guānzhù gānzàng hé yíxiàn. zǒng jià liǎngqiān bābǎi kuài. nín juéde zěnmeyàng?",
+                "text_en": "Based on your profile, I recommend the 'Elite Package' — it adds three items beyond the basics: HbA1c testing, which reflects long-term blood sugar control better than a standard glucose test; carotid ultrasound for cardiovascular risk assessment; and abdominal CT, because sedentary workers need to watch liver and pancreas. Total is 2,800 yuan. What do you think?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about specific tests and what the basic package includes.",
+                "options": [
+                    {
+                        "text_zh": "听起来很有针对性。请问基础套餐包括哪些项目？这样我能比较一下，看看精英套餐多出来的这三项是否有必要。另外，糖化血红蛋白和普通血糖检查具体有什么区别？",
+                        "text_pinyin": "tīng qǐlái hěn yǒu zhēnduìxìng. qǐngwèn jīchǔ tàocān bāokuò nǎxiē xiàngmù? zhèyàng wǒ néng bǐjiào yíxià, kànkan jīngyīng tàocān duō chūlái de zhè sān xiàng shìfǒu yǒu bìyào. lìngwài, tánghuà xuèhóng dànbái hé pǔtōng xuètáng jiǎnchá jùtǐ yǒu shénme qūbié?",
+                        "text_en": "Sounds targeted. What's in the basic package? I'd like to compare and see if the three extra items in the Elite are necessary. Also, what's the specific difference between HbA1c and a standard blood sugar test?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Comparative analysis and scientific curiosity — Ms. Ding brings out a side-by-side comparison chart she prepared for exactly this kind of informed client."
+                    },
+                    {
+                        "text_zh": "基础套餐多少钱？差多少？",
+                        "text_pinyin": "jīchǔ tàocān duōshǎo qián? chà duōshǎo?",
+                        "text_en": "How much is the basic? What's the price difference?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Price comparison is valid. She shows the difference — about 800 yuan for three significant additions."
+                    },
+                    {
+                        "text_zh": "两千八，有点贵。有没有便宜的？",
+                        "text_pinyin": "liǎngqiān bā, yǒudiǎn guì. yǒu méiyǒu piányi de?",
+                        "text_en": "2,800 is a bit steep. Anything cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She has cheaper options, but gently notes that your family history makes the cardiovascular and metabolic tests particularly important."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "基础套餐包括血常规、尿常规、肝功能、肾功能、空腹血糖、血脂四项、心电图、腹部B超、胸部X光，还有内外科的基本检查。一千八百块。精英套餐多出来的糖化血红蛋白特别重要——普通血糖只能看抽血那一刻的情况，可能刚好正常。但糖化反映的是过去三个月的平均水平，更能发现早期的问题。考虑到您的家族史，我强烈建议加这一项。",
+                "text_pinyin": "jīchǔ tàocān bāokuò xuè chángguī, niào chángguī, gān gōngnéng, shèn gōngnéng, kōngfù xuètáng, xuèzhī sì xiàng, xīndiàntú, fùbù B chāo, xiōngbù X guāng, hái yǒu nèi wài kē de jīběn jiǎnchá. yìqiān bābǎi kuài. jīngyīng tàocān duō chūlái de tánghuà xuèhóng dànbái tèbié zhòngyào——pǔtōng xuètáng zhǐ néng kàn chōu xuè nà yí kè de qíngkuàng, kěnéng gānghǎo zhèngcháng. dàn tánghuà fǎnyìng de shì guòqù sān gè yuè de píngjūn shuǐpíng, gèng néng fāxiàn zǎoqī de wèntí. kǎolǜ dào nín de jiāzú shǐ, wǒ qiánglìe jiànyì jiā zhè yí xiàng.",
+                "text_en": "The basic includes CBC, urinalysis, liver function, kidney function, fasting glucose, lipid panel, ECG, abdominal ultrasound, chest X-ray, and basic internal/surgical exam. 1,800 yuan. The Elite's HbA1c is particularly important — regular glucose only captures that moment, which could coincidentally be normal. HbA1c reflects the three-month average, catching early issues. Given your family history, I strongly recommend it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide on the package and ask about scheduling.",
+                "options": [
+                    {
+                        "text_zh": "您分析得很有道理，那就选精英套餐吧。我想预约下周做，请问哪天方便？另外，我需要提前准备什么？是不是要空腹？体检当天大概需要多长时间？",
+                        "text_pinyin": "nín fēnxī de hěn yǒu dàolǐ, nà jiù xuǎn jīngyīng tàocān ba. wǒ xiǎng yùyuē xià zhōu zuò, qǐngwèn nǎ tiān fāngbiàn? lìngwài, wǒ xūyào tíqián zhǔnbèi shénme? shìbúshì yào kōngfù? tǐjiǎn dāngtiān dàgài xūyào duō cháng shíjiān?",
+                        "text_en": "Your analysis makes sense — I'll go with the Elite. I'd like to book for next week — which day works? What do I need to prepare? Do I need to fast? How long does it take on the day?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Decision made, logistics covered — Ms. Ding pulls up the scheduling system with the satisfaction of an event planner whose proposal has been accepted."
+                    },
+                    {
+                        "text_zh": "好，精英套餐。什么时候能做？",
+                        "text_pinyin": "hǎo, jīngyīng tàocān. shénme shíhòu néng zuò?",
+                        "text_en": "OK, Elite package. When can I do it?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She checks availability. The preparation instructions will follow."
+                    },
+                    {
+                        "text_zh": "那就精英的吧。贵就贵了。",
+                        "text_pinyin": "nà jiù jīngyīng de ba. guì jiù guì le.",
+                        "text_en": "Fine, the Elite then. Expensive is expensive.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She notes the reluctance but moves forward. Prevention is always cheaper than treatment — she doesn't say this, but her expression does."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "下周三和周五都有空位。建议选早上的时段，因为有空腹项目。准备事项：前一天晚上十点以后不要吃东西，可以喝清水。体检当天不要做剧烈运动。穿宽松的衣服方便检查。整个流程大概两到三个小时。报告一般三个工作日后可以取，也可以在我们的APP上查看。",
+                "text_pinyin": "xià zhōusān hé zhōuwǔ dōu yǒu kòng wèi. jiànyì xuǎn zǎoshang de shíduàn, yīnwèi yǒu kōngfù xiàngmù. zhǔnbèi shìxiàng: qián yì tiān wǎnshang shí diǎn yǐhòu búyào chī dōngxi, kěyǐ hē qīng shuǐ. tǐjiǎn dāngtiān búyào zuò jīliè yùndòng. chuān kuānsōng de yīfu fāngbiàn jiǎnchá. zhěnggè liúchéng dàgài liǎng dào sān gè xiǎoshí. bàogào yìbān sān gè gōngzuò rì hòu kěyǐ qǔ, yě kěyǐ zài wǒmen de APP shàng chákàn.",
+                "text_en": "Next Wednesday and Friday both have openings. I suggest morning for the fasting tests. Preparation: no food after 10 PM the night before, water is OK. No intense exercise on checkup day. Wear loose clothing. The whole process takes 2-3 hours. Report is usually ready in 3 business days — can be viewed on our app too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Book the appointment and ask about follow-up.",
+                "options": [
+                    {
+                        "text_zh": "那就约周三早上吧。报告出来以后，如果有什么指标异常，你们会提供进一步的建议吗？比如需要去医院做更详细的检查，你们能帮忙转诊吗？",
+                        "text_pinyin": "nà jiù yuē zhōusān zǎoshang ba. bàogào chūlái yǐhòu, rúguǒ yǒu shénme zhǐbiāo yìcháng, nǐmen huì tígōng jìnyíbù de jiànyì ma? bǐrú xūyào qù yīyuàn zuò gèng xiángxì de jiǎnchá, nǐmen néng bāngmáng zhuǎn zhěn ma?",
+                        "text_en": "Wednesday morning then. After the report comes out, if any indicators are abnormal, do you provide further advice? For example, if I need more detailed tests at a hospital, can you help with referrals?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thinking about the post-checkup pathway — Ms. Ding explains their referral network with pride. The first chapter is only valuable if someone reads chapter two."
+                    },
+                    {
+                        "text_zh": "周三早上。报告怎么取？",
+                        "text_pinyin": "zhōusān zǎoshang. bàogào zěnme qǔ?",
+                        "text_en": "Wednesday morning. How do I get the report?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She explains: app or in-person pickup. Both options are efficient."
+                    },
+                    {
+                        "text_zh": "好的，周三。",
+                        "text_pinyin": "hǎo de, zhōusān.",
+                        "text_en": "OK, Wednesday.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Booked. She'll send preparation reminders via text — she believes in checkup preparation the way coaches believe in warm-ups."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们有专门的报告解读服务，出结果后可以预约和我们的医生一对一解读。如果需要转诊，我们和几家三甲医院有合作，可以帮您优先预约。好，周三早上八点到九点之间来就可以。这是您的预约确认单和准备须知。到时候带上身份证和这张单子就行。",
+                "text_pinyin": "wǒmen yǒu zhuānmén de bàogào jiědú fúwù, chū jiéguǒ hòu kěyǐ yùyuē hé wǒmen de yīshēng yī duì yī jiědú. rúguǒ xūyào zhuǎn zhěn, wǒmen hé jǐ jiā sān jiǎ yīyuàn yǒu hézuò, kěyǐ bāng nín yōuxiān yùyuē. hǎo, zhōusān zǎoshang bā diǎn dào jiǔ diǎn zhījiān lái jiù kěyǐ. zhè shì nín de yùyuē quèrèn dān hé zhǔnbèi xūzhī. dào shíhòu dài shàng shēnfènzhèng hé zhè zhāng dānzi jiù xíng.",
+                "text_en": "We offer a dedicated report interpretation service — you can book a one-on-one with our doctor after results. For referrals, we partner with several top-tier hospitals and can arrange priority appointments. OK, come between 8-9 AM Wednesday. Here's your confirmation and preparation guide. Just bring your ID and this slip."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢丁女士，您的推荐很专业，让我对体检有了更全面的认识。周三早上见。对了，你们的APP叫什么名字？我想提前下载好。",
+                        "text_pinyin": "fēicháng gǎnxiè Dīng nǚshì, nín de tuījiàn hěn zhuānyè, ràng wǒ duì tǐjiǎn yǒu le gèng quánmiàn de rènshi. zhōusān zǎoshang jiàn. duì le, nǐmen de APP jiào shénme míngzi? wǒ xiǎng tíqián xiàzài hǎo.",
+                        "text_en": "Thank you so much Ms. Ding — your recommendation was very professional and gave me a much better understanding of the checkup process. See you Wednesday morning. By the way, what's the app called? I'd like to download it in advance.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Proactive about the digital component — Ms. Ding hands you a card with a QR code. Every body tells a story, and yours begins on Wednesday."
+                    },
+                    {
+                        "text_zh": "谢谢！周三见。",
+                        "text_pinyin": "xièxie! zhōusān jiàn.",
+                        "text_en": "Thanks! See you Wednesday.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Booked and confirmed. She files your card with the 27 others for Wednesday."
+                    },
+                    {
+                        "text_zh": "好的，走了。",
+                        "text_pinyin": "hǎo de, zǒu le.",
+                        "text_en": "OK, I'm off.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "She watches you leave and hopes you remember the 10 PM fasting cutoff. The instrumental music continues its spa-like reassurance."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Annual health checkups (体检, tǐjiǎn) are standard in Chinese corporate culture, often covered by employers. Private checkup centers (体检中心) offer various packages (套餐, tàocān) ranging from basic to premium. 三甲医院 (sān jiǎ yīyuàn) refers to China's top-tier hospitals. HbA1c (糖化血红蛋白) is increasingly included in comprehensive packages for early diabetes screening."
+    }
+}

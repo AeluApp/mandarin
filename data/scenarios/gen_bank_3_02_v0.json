@@ -1,0 +1,94 @@
+{
+    "title": "The Card That Came Back",
+    "title_zh": "失而复得的银行卡",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "The bank's lost card service desk. You reported your card lost last week and got a replacement, but now you've found the original card in your coat pocket. The service rep, Xiao Feng, has seen this exact situation approximately four hundred times. She greets you with the knowing smile of someone who could write a book called 'Where Cards Hide: A Memoir.'",
+        "setup_zh": "银行挂失服务台。你上周挂失了银行卡，补办了新卡，但现在在大衣口袋里找到了原来的卡。客服小凤见过这种情况大约四百次了。她用一种见多识广的微笑迎接你——她可以写一本书叫《银行卡躲在哪里：回忆录》。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，有什么可以帮您？",
+                "text_pinyin": "nín hǎo, yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, how can I help?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the situation.",
+                "options": [
+                    {
+                        "text_zh": "上周我挂失了银行卡，但是今天又找到了。旧卡还能用吗？",
+                        "text_pinyin": "shàng zhōu wǒ guà shī le yínháng kǎ, dànshì jīntiān yòu zhǎodào le. jiù kǎ hái néng yòng ma?",
+                        "text_en": "Last week I reported my card lost, but I found it today. Can the old card still be used?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Feng nods with zero surprise.「旧卡已经作废了，用新卡就行。旧卡可以剪掉。」又找到了 means 'found it again.' 作废 means 'voided.'"
+                    },
+                    {
+                        "text_zh": "不好意思，我犯了一个错误。我的卡其实没有丢。",
+                        "text_pinyin": "bù hǎoyìsi, wǒ fàn le yí gè cuòwù. wǒ de kǎ qíshí méiyǒu diū.",
+                        "text_en": "Sorry, I made a mistake. My card wasn't actually lost.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Feng waves away the apology.「没关系，这种情况很常见。」犯了一个错误 means 'made a mistake.' 其实 means 'actually.'"
+                    },
+                    {
+                        "text_zh": "新卡和旧卡可以同时用吗？",
+                        "text_pinyin": "xīn kǎ hé jiù kǎ kěyǐ tóngshí yòng ma?",
+                        "text_en": "Can I use both the new and old cards at the same time?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Feng shakes her head.「不行。挂失以后旧卡就自动作废了。只能用新卡。」同时 means 'simultaneously.' Banks don't allow parallel cards."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "旧卡已经作废了，不能再用了。您的新卡激活了吗？",
+                "text_pinyin": "jiù kǎ yǐjīng zuòfèi le, bù néng zài yòng le. nín de xīn kǎ jīhuó le ma?",
+                "text_en": "The old card is void and can't be used anymore. Have you activated your new card?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about activating the new card.",
+                "options": [
+                    {
+                        "text_zh": "还没有。怎么激活？在ATM上就可以吗？",
+                        "text_pinyin": "hái méiyǒu. zěnme jīhuó? zài ATM shàng jiù kěyǐ ma?",
+                        "text_en": "Not yet. How do I activate it? Can I do it at an ATM?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Feng walks you to the nearest ATM.「插卡，输入密码，取一次钱就激活了。」激活 means 'activate.' ATM activation is the simplest method."
+                    },
+                    {
+                        "text_zh": "激活了。密码和以前一样吗？",
+                        "text_pinyin": "jīhuó le. mìmǎ hé yǐqián yíyàng ma?",
+                        "text_en": "Yes. Is the password the same as before?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「是的，密码没变。如果想改密码也可以在ATM上改。」和以前一样 means 'the same as before.'"
+                    },
+                    {
+                        "text_zh": "旧卡上绑定的东西会自动转到新卡上吗？",
+                        "text_pinyin": "jiù kǎ shàng bǎngdìng de dōngxi huì zìdòng zhuǎn dào xīn kǎ shàng ma?",
+                        "text_en": "Will things linked to the old card automatically transfer to the new one?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Feng considers this.「账户是一样的，所以余额自动转了。但是自动扣款的可能需要更新卡号。」绑定 means 'linked/bound.' An important practical question."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，都处理好了。把旧卡交给我，我帮您销毁。以后东西找不到先别急，看看大衣口袋！",
+                "text_pinyin": "hǎo le, dōu chǔlǐ hǎo le. bǎ jiù kǎ jiāo gěi wǒ, wǒ bāng nín xiāohuǐ. yǐhòu dōngxi zhǎo bu dào xiān bié jí, kànkan dàyī kǒudai!",
+                "text_en": "All done. Give me the old card, I'll destroy it. Next time you can't find something, don't panic -- check your coat pockets!"
+            }
+        ],
+        "cultural_note": "Once a Chinese bank card is reported lost (挂失), it's permanently voided. The new card links to the same account but has a new number. Always update auto-payment services (自动扣款) with the new card number."
+    },
+    "id": "gen_bank_3_02_v0"
+}

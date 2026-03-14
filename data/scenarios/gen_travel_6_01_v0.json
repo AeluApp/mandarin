@@ -1,0 +1,196 @@
+{
+    "title": "The Platform Horologist",
+    "title_zh": "站台计时师",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_travel_6_01_v0",
+    "tree": {
+        "setup": "The main hall of a high-speed rail station at 6:47 AM, thirteen minutes before your train to Chengdu departs. The departure board clicks through updates with the rhythm of a mechanical heartbeat. Your ticket shows Car 7, Seat 12A, but the platform assignment has just changed — from Platform 3 to Platform 9, which is on the opposite end of a station large enough to have its own weather system. Information desk attendant Mr. Wei has been working the morning shift for eleven years and can recite the platform layout from memory, including the location of every elevator, escalator, and the one drinking fountain that actually works.",
+        "setup_zh": "高铁站大厅，早晨六点四十七分，距离你去成都的列车发车还有十三分钟。出发信息牌以机械心跳般的节奏更新着。你的车票显示七号车厢十二A座，但站台刚刚变了——从三号站台改到九号站台，在车站的另一端，而这个车站大到几乎有自己的气候系统。问讯处的魏师傅上早班已经十一年了，能背出站台布局的每一个细节，包括每部电梯、扶梯和唯一一个还能出水的饮水机的位置。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问需要什么帮助？",
+                "text_pinyin": "nǐ hǎo, qǐngwèn xūyào shénme bāngzhù?",
+                "text_en": "Hello, how can I help?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the platform change urgently.",
+                "options": [
+                    {
+                        "text_zh": "你好，我坐七点的G308次去成都。刚才看到站台从三号改成九号了。请问从这里到九号站台怎么走最快？我还有十二分钟。",
+                        "text_pinyin": "nǐ hǎo, wǒ zuò qī diǎn de G sān líng bā cì qù Chéngdū. gāngcái kàn dào zhàntái cóng sān hào gǎi chéng jiǔ hào le. qǐngwèn cóng zhèlǐ dào jiǔ hào zhàntái zěnme zǒu zuì kuài? wǒ hái yǒu shí'èr fēnzhōng.",
+                        "text_en": "Hello, I'm taking the 7:00 G308 to Chengdu. I just saw the platform changed from 3 to 9. What's the fastest way to Platform 9 from here? I have twelve minutes.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Train number, destination, platform change, time constraint — all in one breath. Mr. Wei is already pointing. Eleven years of morning shifts have prepared him for exactly this."
+                    },
+                    {
+                        "text_zh": "站台变了！九号站台在哪里？",
+                        "text_pinyin": "zhàntái biàn le! jiǔ hào zhàntái zài nǎlǐ?",
+                        "text_en": "The platform changed! Where's Platform 9?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Urgent and clear. He points left. Details will follow as you walk."
+                    },
+                    {
+                        "text_zh": "我的车，站台是哪个？",
+                        "text_pinyin": "wǒ de chē, zhàntái shì nǎge?",
+                        "text_en": "My train — which platform?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He needs your train number first. 「哪趟车？」he asks, fingers hovering over his computer. The clock ticks."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "G308，对，刚换到九号站台了。你从这里往左走，过了检票口以后走到底，坐扶梯下去，然后右转。跟着地上的蓝色箭头走就行。大概六分钟的路。不过你有行李箱的话，建议坐电梯，在扶梯旁边。",
+                "text_pinyin": "G sān líng bā, duì, gāng huàn dào jiǔ hào zhàntái le. nǐ cóng zhèlǐ wǎng zuǒ zǒu, guò le jiǎnpiào kǒu yǐhòu zǒu dào dǐ, zuò fútī xià qù, ránhòu yòu zhuǎn. gēn zhe dì shàng de lán sè jiàntóu zǒu jiù xíng. dàgài liù fēnzhōng de lù. búguò nǐ yǒu xíngli xiāng de huà, jiànyì zuò diàntī, zài fútī pángbiān.",
+                "text_en": "G308 — yes, just changed to Platform 9. Go left from here, past the ticket gate, walk to the end, take the escalator down, then turn right. Follow the blue arrows on the floor. About six minutes. If you have a suitcase, I'd suggest the elevator — it's next to the escalator."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm the directions and ask about your car's boarding position.",
+                "options": [
+                    {
+                        "text_zh": "好的，往左、过检票口、走到底、扶梯下去、右转。我有行李箱，坐电梯。到了九号站台以后，七号车厢大概在站台的什么位置？前面还是后面？",
+                        "text_pinyin": "hǎo de, wǎng zuǒ, guò jiǎnpiào kǒu, zǒu dào dǐ, fútī xià qù, yòu zhuǎn. wǒ yǒu xíngli xiāng, zuò diàntī. dào le jiǔ hào zhàntái yǐhòu, qī hào chēxiāng dàgài zài zhàntái de shénme wèizhì? qiánmian háishi hòumian?",
+                        "text_en": "OK — left, past the gate, to the end, escalator down, right turn. I have a suitcase, so elevator. Once I reach Platform 9, where roughly is Car 7? Front or back?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the directions to confirm, then asking about car position — Mr. Wei nods approvingly. Passengers who repeat directions back catch their trains. The ones who don't, don't."
+                    },
+                    {
+                        "text_zh": "六分钟够吗？我怕赶不上。",
+                        "text_pinyin": "liù fēnzhōng gòu ma? wǒ pà gǎn bú shàng.",
+                        "text_en": "Will six minutes be enough? I'm worried I won't make it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「够的，」he says firmly. He has timed this route in every possible condition, including during Spring Festival crowds. Six minutes is his professional estimate."
+                    },
+                    {
+                        "text_zh": "太远了。能不能换一趟车？",
+                        "text_pinyin": "tài yuǎn le. néng bu néng huàn yì tàng chē?",
+                        "text_en": "That's too far. Can I switch to a different train?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Wei pauses. Switching trains involves the ticket office, queues, and probably a later departure. Six minutes of walking versus forty minutes of bureaucracy. He recommends walking."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "七号车厢在站台中间偏后的位置。站台上地面有车厢编号的标记，你找到7A的位置等就行。对了，检票口需要刷身份证或者护照，你准备好。",
+                "text_pinyin": "qī hào chēxiāng zài zhàntái zhōngjiān piān hòu de wèizhì. zhàntái shàng dìmiàn yǒu chēxiāng biānhào de biāojì, nǐ zhǎo dào qī A de wèizhì děng jiù xíng. duìle, jiǎnpiào kǒu xūyào shuā shēnfènzhèng huòzhě hùzhào, nǐ zhǔnbèi hǎo.",
+                "text_en": "Car 7 is in the middle-to-rear of the platform. There are car number markings on the platform floor — find the 7A position and wait there. Oh, the ticket gate requires your ID or passport scan — have it ready."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about using a foreign passport at the gate.",
+                "options": [
+                    {
+                        "text_zh": "我用的是外国护照，检票口的机器能识别吗？上次在另一个站刷不了，最后走了人工通道。",
+                        "text_pinyin": "wǒ yòng de shì wàiguó hùzhào, jiǎnpiào kǒu de jīqì néng shíbié ma? shàng cì zài lìng yí gè zhàn shuā bù liǎo, zuìhòu zǒu le réngōng tōngdào.",
+                        "text_en": "I have a foreign passport — can the gate machines read it? Last time at another station it didn't work and I had to use the manual lane.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Past experience informing a practical question — Mr. Wei nods. Foreign passport compatibility varies by station. He knows exactly which gates here can read them and which can't."
+                    },
+                    {
+                        "text_zh": "外国护照能过检票口吗？",
+                        "text_pinyin": "wàiguó hùzhào néng guò jiǎnpiào kǒu ma?",
+                        "text_en": "Can a foreign passport get through the gate?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Good question. He'll direct you to the right gate — or the manual lane if needed."
+                    },
+                    {
+                        "text_zh": "护照在这里。我直接过去了。",
+                        "text_pinyin": "hùzhào zài zhèlǐ. wǒ zhíjiē guòqù le.",
+                        "text_en": "Passport's here. I'll head over.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He calls after you: 「走最右边那个通道！」The rightmost lane. Some advice is worth hearing before you've already passed it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们这个站新装的机器可以读外国护照，不过偶尔会出问题。如果刷不了，你直接走最右边的人工通道，把护照和车票给工作人员看就行。人工通道不用排队，很快的。",
+                "text_pinyin": "wǒmen zhège zhàn xīn zhuāng de jīqì kěyǐ dú wàiguó hùzhào, búguò ǒu'ěr huì chū wèntí. rúguǒ shuā bù liǎo, nǐ zhíjiē zǒu zuì yòubiān de réngōng tōngdào, bǎ hùzhào hé chēpiào gěi gōngzuò rényuán kàn jiù xíng. réngōng tōngdào búyòng páiduì, hěn kuài de.",
+                "text_en": "Our station's new machines can read foreign passports, though they occasionally have issues. If it doesn't work, go straight to the manual lane on the far right — show staff your passport and ticket. The manual lane has no queue — it's fast."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and ask one more practical question before rushing off.",
+                "options": [
+                    {
+                        "text_zh": "太好了，谢谢魏师傅！最后一个问题：车上有餐车吗？还是需要自己带吃的？到成都要八个小时，我还没吃早饭。",
+                        "text_pinyin": "tài hǎo le, xièxie Wèi shīfu! zuìhòu yí gè wèntí: chē shàng yǒu cānchē ma? háishi xūyào zìjǐ dài chī de? dào Chéngdū yào bā gè xiǎoshí, wǒ hái méi chī zǎofàn.",
+                        "text_en": "Great, thanks Mr. Wei! One last question: is there a dining car on the train? Or should I bring food? It's eight hours to Chengdu and I haven't had breakfast.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical foresight — Mr. Wei points toward a convenience store visible from the desk. 「餐车有，但是贵。那边有个便利店，三分钟够你买点东西。」Dining car exists but is expensive. The convenience store is right there. Three minutes."
+                    },
+                    {
+                        "text_zh": "谢谢！我赶紧走了。",
+                        "text_pinyin": "xièxie! wǒ gǎnjǐn zǒu le.",
+                        "text_en": "Thanks! I'd better hurry.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He waves you off. The clock reads 6:51. Nine minutes, six minutes of walking, three minutes of margin. The math works — barely."
+                    },
+                    {
+                        "text_zh": "知道了，谢谢。",
+                        "text_pinyin": "zhīdào le, xièxie.",
+                        "text_en": "Got it, thanks.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Brief. He watches you head left — the correct direction. One more passenger delivered to the right platform. Eleven years, thousands of mornings, still counting."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "餐车在五号车厢，不过价格比外面贵不少。你出了我这里右手边有个便利店，买点面包和水，三分钟就够。快去吧，注意看蓝色箭头！",
+                "text_pinyin": "cānchē zài wǔ hào chēxiāng, búguò jiàgé bǐ wàimiàn guì bùshǎo. nǐ chū le wǒ zhèlǐ yòushǒu biān yǒu gè biànlì diàn, mǎi diǎn miànbāo hé shuǐ, sān fēnzhōng jiù gòu. kuài qù ba, zhùyì kàn lán sè jiàntóu!",
+                "text_en": "Dining car is in Car 5, but prices are much higher than outside. There's a convenience store to the right of my desk — grab some bread and water, three minutes is enough. Go! Follow the blue arrows!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him quickly and head off.",
+                "options": [
+                    {
+                        "text_zh": "魏师傅你太专业了，什么都知道！我先去便利店买点东西，然后跟着蓝色箭头走。谢谢你，下次经过这个站还来找你问路！",
+                        "text_pinyin": "Wèi shīfu nǐ tài zhuānyè le, shénme dōu zhīdào! wǒ xiān qù biànlì diàn mǎi diǎn dōngxi, ránhòu gēn zhe lán sè jiàntóu zǒu. xièxie nǐ, xià cì jīngguò zhège zhàn hái lái zhǎo nǐ wèn lù!",
+                        "text_en": "Mr. Wei, you're incredibly professional — you know everything! I'll hit the convenience store first, then follow the blue arrows. Thanks — next time I pass through this station I'm coming back to you for directions!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging eleven years of expertise in a thirty-second exchange — Mr. Wei allows himself a small smile. The blue arrows will guide you from here. The bread will be mediocre. The train will be on time. Chengdu will be worth it."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！再见！",
+                        "text_pinyin": "hǎo de, xièxie! zàijiàn!",
+                        "text_en": "OK, thanks! Bye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Already moving. The blue arrows begin at the end of the corridor. Follow them like breadcrumbs."
+                    },
+                    {
+                        "text_zh": "走了走了！",
+                        "text_pinyin": "zǒu le zǒu le!",
+                        "text_en": "Going, going!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Mr. Wei watches you break into a half-jog. He checks the clock. 6:52. You'll make it. He always knows."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese high-speed rail (高铁, gāotiě) stations are often enormous, with platform changes (站台变更) that can require significant walking. Car positions (车厢位置) are marked on platform floors with letters corresponding to door positions. Foreign passport holders may need manual ticket gates (人工通道, réngōng tōngdào) as automated gates don't always read non-Chinese IDs. The 12306 app is essential for real-time updates."
+    }
+}

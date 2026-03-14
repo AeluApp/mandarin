@@ -1,0 +1,87 @@
+{
+    "title": "Shopping for Vegetables",
+    "title_zh": "买菜",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You go to the morning market to buy fresh vegetables. The vegetable vendor, Auntie Ma, greets you warmly. She always remembers her regular customers.",
+        "setup_zh": "你去早市买新鲜蔬菜。卖菜的马阿姨热情地跟你打招呼。她总是记得老顾客。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "又来了！今天想买什么？青菜特别新鲜，豆腐也是今天早上刚做的。",
+                "text_pinyin": "Yòu lái le! Jīntiān xiǎng mǎi shénme? Qīngcài tèbié xīnxiān, dòufu yě shì jīntiān zǎoshang gāng zuò de.",
+                "text_en": "You're back! What would you like today? The greens are super fresh, and the tofu was just made this morning."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her what you need.",
+                "options": [
+                    {
+                        "text_zh": "马阿姨好！给我一把青菜和一块豆腐吧。今天晚上想做一个简单的青菜豆腐汤。",
+                        "text_pinyin": "Mǎ āyí hǎo! Gěi wǒ yī bǎ qīngcài hé yī kuài dòufu ba. Jīntiān wǎnshang xiǎng zuò yī ge jiǎndān de qīngcài dòufu tāng.",
+                        "text_en": "Hi Auntie Ma! I'll have some greens and a piece of tofu. Tonight I want to make a simple greens and tofu soup.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Friendly and shares your cooking plan — builds the relationship."
+                    },
+                    {
+                        "text_zh": "青菜和豆腐。",
+                        "text_pinyin": "Qīngcài hé dòufu.",
+                        "text_en": "Greens and tofu.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gets the job done but no warmth."
+                    },
+                    {
+                        "text_zh": "有没有便宜一点的？",
+                        "text_pinyin": "Yǒu méiyǒu piányi yīdiǎn de?",
+                        "text_en": "Anything cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Focuses only on price in a relationship-building context."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "青菜豆腐汤，好喝又健康！你要是再加一点虾皮，味道会更鲜。我这里有，要不要一小包？",
+                "text_pinyin": "Qīngcài dòufu tāng, hǎohē yòu jiànkāng! Nǐ yàoshi zài jiā yīdiǎn xiāpí, wèidào huì gèng xiān. Wǒ zhèlǐ yǒu, yào bú yào yī xiǎo bāo?",
+                "text_en": "Greens and tofu soup — delicious and healthy! If you add some dried shrimp, it'll taste even richer. I have some here — want a small bag?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her cooking tip.",
+                "options": [
+                    {
+                        "text_zh": "好主意！加虾皮我没想到。那来一小包吧。马阿姨，你比菜谱还有用！",
+                        "text_pinyin": "Hǎo zhǔyi! Jiā xiāpí wǒ méi xiǎng dào. Nà lái yī xiǎo bāo ba. Mǎ āyí, nǐ bǐ càipǔ hái yǒuyòng!",
+                        "text_en": "Good idea! I never thought of adding dried shrimp. I'll take a small bag. Auntie Ma, you're more useful than a recipe book!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Appreciative and playful — strengthens the bond."
+                    },
+                    {
+                        "text_zh": "好的，加一包。",
+                        "text_pinyin": "Hǎo de, jiā yī bāo.",
+                        "text_en": "Okay, add a bag.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Takes the suggestion but no personal touch."
+                    },
+                    {
+                        "text_zh": "不用了，就这些。",
+                        "text_pinyin": "Bú yòng le, jiù zhèxiē.",
+                        "text_en": "No need, just these.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical but declines her helpful suggestion."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Morning markets (早市) are the heart of daily food culture in China. Vendors build personal relationships with regular customers and often share cooking tips. The phrase 「老顾客」 (regular customer) carries warmth and mutual recognition."
+    },
+    "hsk_level": 3
+}

@@ -1,0 +1,102 @@
+{
+  "name": "Aelu Audit Briefing",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "audit-complete",
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "audit-complete"
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/audit",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "fetch-audit",
+      "name": "Fetch Audit Results",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/notify",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "={{ JSON.stringify({ message: '📊 Weekly Audit Complete\\n\\n' + $json.audit }) }}"
+        },
+        "contentType": "application/json"
+      },
+      "id": "send-briefing",
+      "name": "Send Audit Briefing",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'briefing_sent' }) }}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [{"node": "Fetch Audit Results", "type": "main", "index": 0}]
+      ]
+    },
+    "Fetch Audit Results": {
+      "main": [
+        [{"node": "Send Audit Briefing", "type": "main", "index": 0}]
+      ]
+    },
+    "Send Audit Briefing": {
+      "main": [
+        [{"node": "Respond", "type": "main", "index": 0}]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{"name": "openclaw"}]
+}

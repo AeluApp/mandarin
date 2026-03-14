@@ -1,0 +1,83 @@
+{
+  "title": "The Bus Window",
+  "title_zh": "公交车的窗",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're on the bus going home. An older woman sitting next to you notices you looking out the window at the sunset.",
+    "setup_zh": "你坐公交车回家。旁边的阿姨看到你一直在看窗外的夕阳。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "今天的夕阳真好看。你是不是也在看？",
+        "text_pinyin": "Jīntiān de xīyáng zhēn hǎokàn. Nǐ shì bú shì yě zài kàn?",
+        "text_en": "Today's sunset is really beautiful. Are you watching it too?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your feelings about the sunset.",
+        "options": [
+          {
+            "text_zh": "是的，太漂亮了。每天都有夕阳，但是每天都不一样。今天的颜色特别好看。",
+            "text_pinyin": "Shì de, tài piàoliang le. Měi tiān dōu yǒu xīyáng, dànshì měi tiān dōu bù yīyàng. Jīntiān de yánsè tèbié hǎokàn.",
+            "text_en": "Yes, it's so beautiful. There's a sunset every day, but each one is different. Today's colors are especially lovely.",
+            "score": 1.0,
+            "feedback": "Noticing that each day's sunset is unique — an eye for the ordinary.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我在看手机。",
+            "text_pinyin": "Wǒ zài kàn shǒujī.",
+            "text_en": "I'm looking at my phone.",
+            "score": 0.0,
+            "feedback": "Denies a shared moment of beauty."
+          },
+          {
+            "text_zh": "还有几站到？",
+            "text_pinyin": "Hái yǒu jǐ zhàn dào?",
+            "text_en": "How many more stops?",
+            "score": 0.0,
+            "feedback": "Bus logistics during a sunset moment."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "对，每天都不一样。我女儿总是说我「每天都拍夕阳」。但是我觉得，好看的东西就应该记下来。",
+        "text_pinyin": "Duì, měi tiān dōu bù yīyàng. Wǒ nǚ'ér zǒng shì shuō wǒ 'měi tiān dōu pāi xīyáng'. Dànshì wǒ juéde, hǎokàn de dōngxi jiù yīnggāi jì xiàlái.",
+        "text_en": "Right, every day is different. My daughter always says I 'take sunset photos every day.' But I think beautiful things should be recorded."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her habit of photographing sunsets.",
+        "options": [
+          {
+            "text_zh": "我觉得这个习惯很好。以后你可以看这些照片，想起今天，想起每一个美好的傍晚。",
+            "text_pinyin": "Wǒ juéde zhège xíguàn hěn hǎo. Yǐhòu nǐ kěyǐ kàn zhèxiē zhàopiàn, xiǎng qǐ jīntiān, xiǎng qǐ měi yī ge měihǎo de bàngwǎn.",
+            "text_en": "I think that's a wonderful habit. Later you can look at those photos and remember today — remember every beautiful evening.",
+            "score": 1.0,
+            "feedback": "Validates her small ritual — every photo is a saved evening.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "手机拍的不好看。",
+            "text_pinyin": "Shǒujī pāi de bù hǎokàn.",
+            "text_en": "Phone photos don't look good.",
+            "score": 0.0,
+            "feedback": "Critiques her tool instead of understanding the meaning."
+          },
+          {
+            "text_zh": "你女儿多大了？",
+            "text_pinyin": "Nǐ nǚ'ér duō dà le?",
+            "text_en": "How old is your daughter?",
+            "score": 0.0,
+            "feedback": "Changes subject away from the sunset conversation."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Older Chinese women often develop deeply personal rituals around beauty — photographing sunsets, pressing flowers, saving autumn leaves. The gentle teasing from children (每天都拍夕阳) is affectionate, not dismissive. These daily recordings of beauty represent a form of quiet gratitude for ordinary life."
+  }
+}

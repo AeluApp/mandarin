@@ -1,0 +1,124 @@
+{
+    "title": "The Takeout Diplomat",
+    "title_zh": "外卖外交官",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_5_00_v0",
+    "tree": {
+        "setup": "Your takeout order from Golden Phoenix Restaurant has arrived with three problems: the kung pao chicken has been replaced by sweet and sour pork, the rice is cold, and there are no chopsticks. The delivery rider is already gone, his electric scooter a distant whine. You call the restaurant and reach Auntie Jin, the owner, who takes food complaints as personally as a painter takes criticism of their portraits — because to her, every dish that leaves her kitchen is a self-portrait.",
+        "setup_zh": "你从金凤饭店点的外卖到了，带着三个问题：宫保鸡丁变成了糖醋排骨，米饭是冷的，而且没有筷子。外卖骑手已经走了，电动车的嗡嗡声越来越远。你打电话给饭店，接电话的是老板金婶，她把关于食物的投诉当作对画家画作的批评一样往心里去——因为对她来说，每一道离开她厨房的菜都是一幅自画像。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "金凤饭店，你好！订外卖的吧？今天忙得不得了，有什么事？",
+                "text_pinyin": "Jīnfèng Fàndiàn, nǐ hǎo! dìng wàimài de ba? jīntiān máng de bùdéliǎo, yǒu shénme shì?",
+                "text_en": "Golden Phoenix Restaurant, hello! You ordered takeout? It's been crazy busy today — what's up?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the order problems politely.",
+                "options": [
+                    {
+                        "text_zh": "金婶您好，我是刚才那个订外卖的。有几个小问题想跟您说一下。我点的是宫保鸡丁，但是收到的是糖醋排骨。另外米饭是凉的，也没有放筷子。",
+                        "text_pinyin": "Jīn shěn nín hǎo, wǒ shì gāngcái nàge dìng wàimài de. yǒu jǐ gè xiǎo wèntí xiǎng gēn nín shuō yíxià. wǒ diǎn de shì gōngbǎo jīdīng, dànshì shōu dào de shì tángcù páigǔ. lìngwài mǐfàn shì liáng de, yě méiyǒu fàng kuàizi.",
+                        "text_en": "Hello Auntie Jin, I'm the takeout order from just now. A few small issues to mention. I ordered kung pao chicken, but received sweet and sour pork ribs. Also, the rice is cold and there are no chopsticks.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Calling them「小问题」softens the complaint beautifully. Auntie Jin gasps — a wrong dish is an unforgivable error in her kitchen, even on the busiest day."
+                    },
+                    {
+                        "text_zh": "菜送错了，饭也是凉的。",
+                        "text_pinyin": "cài sòng cuò le, fàn yě shì liáng de.",
+                        "text_en": "The food was wrong, and the rice is cold.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Concise but effective. She's already checking the order slip."
+                    },
+                    {
+                        "text_zh": "你们怎么搞的？送的什么东西？",
+                        "text_pinyin": "nǐmen zěnme gǎo de? sòng de shénme dōngxi?",
+                        "text_en": "What's going on? What did you send me?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Jin's kitchen pride is wounded, but aggressive complaints make the wound defensive rather than apologetic."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎呀，对不起对不起！今天订单太多了，厨房搞混了。糖醋排骨你先吃着，宫保鸡丁我马上让人重新做一份给你送过去。米饭也换一份热的。筷子是我们的失误，不好意思。",
+                "text_pinyin": "āiyā, duìbuqǐ duìbuqǐ! jīntiān dìngdān tài duō le, chúfáng gǎo hùn le. tángcù páigǔ nǐ xiān chī zhe, gōngbǎo jīdīng wǒ mǎshàng ràng rén chóngxīn zuò yí fèn gěi nǐ sòng guòqù. mǐfàn yě huàn yí fèn rè de. kuàizi shì wǒmen de shīwù, bù hǎoyìsi.",
+                "text_en": "Oh no, I'm so sorry! Too many orders today — the kitchen mixed them up. Keep the sweet and sour ribs and eat those first — I'll have the kung pao chicken remade and delivered right away. New hot rice too. The chopsticks are our mistake, I apologize."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her solution.",
+                "options": [
+                    {
+                        "text_zh": "没关系，我理解忙的时候容易出错。糖醋排骨我留着，不用退了。那宫保鸡丁大概多久能送到？另外，重新送过来的话需要再付一次配送费吗？",
+                        "text_pinyin": "méi guānxi, wǒ lǐjiě máng de shíhòu róngyì chū cuò. tángcù páigǔ wǒ liú zhe, bú yòng tuì le. nà gōngbǎo jīdīng dàgài duō jiǔ néng sòng dào? lìngwài, chóngxīn sòng guòlái de huà xūyào zài fù yí cì pèisòng fèi ma?",
+                        "text_en": "No worries — I understand mistakes happen when it's busy. I'll keep the sweet and sour ribs, no need to take them back. How long until the kung pao chicken arrives? And will there be another delivery fee for the re-send?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gracious about the error plus practical questions — Auntie Jin insists: no extra charge, and she's throwing in a free drink as an apology."
+                    },
+                    {
+                        "text_zh": "好的，那我等着。",
+                        "text_pinyin": "hǎo de, nà wǒ děng zhe.",
+                        "text_en": "OK, I'll wait.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Patient. She'll rush the re-order."
+                    },
+                    {
+                        "text_zh": "还要再等啊？我都饿了。",
+                        "text_pinyin": "hái yào zài děng a? wǒ dōu è le.",
+                        "text_en": "I have to wait again? I'm already hungry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Auntie Jin's guilt doubles.「先吃排骨！」she insists. The pork ribs are not the enemy."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "配送费当然不用再付了！大概二十分钟能送到。我再送你一瓶酸梅汤，算是道歉。你是我们的老顾客了，我不想让你失望。",
+                "text_pinyin": "pèisòng fèi dāngrán bú yòng zài fù le! dàgài èrshí fēnzhōng néng sòng dào. wǒ zài sòng nǐ yì píng suānméi tāng, suàn shì dàoqiàn. nǐ shì wǒmen de lǎo gùkè le, wǒ bù xiǎng ràng nǐ shīwàng.",
+                "text_en": "Of course no extra delivery fee! About twenty minutes. I'll throw in a bottle of sour plum drink as an apology. You're a regular — I don't want to let you down."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and close the call.",
+                "options": [
+                    {
+                        "text_zh": "太客气了，金婶！酸梅汤正好配排骨。那我等着了，不着急。你们今天这么忙，辛苦了。下次有空了我去店里吃，你给我推荐几个新菜。",
+                        "text_pinyin": "tài kèqi le, Jīn shěn! suānméi tāng zhènghǎo pèi páigǔ. nà wǒ děng zhe le, bù zháojí. nǐmen jīntiān zhème máng, xīnkǔ le. xià cì yǒu kòng le wǒ qù diàn lǐ chī, nǐ gěi wǒ tuījiàn jǐ gè xīn cài.",
+                        "text_en": "Too kind, Auntie Jin! Sour plum drink goes perfectly with the ribs. I'll wait — no rush. You all must be exhausted being so busy today. Next time I'll eat at the restaurant and you can recommend some new dishes.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Turning a complaint into a future visit — Auntie Jin hangs up already planning which new dishes to showcase. The relationship is stronger for the mistake."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！等着了。",
+                        "text_pinyin": "hǎo de, xièxie! děng zhe le.",
+                        "text_en": "OK, thanks! I'll be waiting.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple and satisfied. The pork ribs are already being eaten."
+                    },
+                    {
+                        "text_zh": "嗯，下次别搞错了。",
+                        "text_pinyin": "ǹg, xià cì bié gǎo cuò le.",
+                        "text_en": "Mm, don't mess up next time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Fair but cold. Auntie Jin hangs up with her pride bruised — the free drink was an olive branch, and it wasn't fully accepted."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese takeout complaints are best handled with a balance of directness and face-saving. Using 小问题 (xiǎo wèntí, small issues) instead of accusations softens the conversation. Many restaurants offer free items (送, sòng) as apology — sour plum drink (酸梅汤, suānméi tāng) is a classic choice. Regular customers (老顾客, lǎo gùkè) receive special attention and treatment in Chinese food culture."
+    }
+}

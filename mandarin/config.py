@@ -109,6 +109,9 @@ PROMOTE_STABLE_DAYS = 3
 PROMOTE_DURABLE_DAYS_STABLE = 30
 PROMOTE_DURABLE_SUCCESSES = 5
 
+# Production direction gate — require at least 1 correct production drill before stable
+REQUIRE_PRODUCTION_FOR_STABLE = True
+
 # Demotion thresholds
 DEMOTE_STABLE_STREAK_INCORRECT = 3
 DEMOTE_STABILIZING_STREAK_INCORRECT = 3
@@ -181,15 +184,16 @@ GAP_WEIGHTS = {
 # ── Gradient scaffolding (Vygotsky ZPD fading) ──
 
 SCAFFOLD_LEVELS = {
-    "seen":        "full_pinyin",   # Show full pinyin above hanzi
-    "passed_once": "tone_marks",    # Show tone numbers only: "3 3"
-    "stabilizing": "initial",       # Show first letter of each syllable: "n h"
-    "stable":      "none",
-    "durable":     "none",
-    "decayed":     "tone_marks",    # Re-scaffold on decay
+    "seen":        {"pinyin": "full_pinyin", "english": "full"},
+    "passed_once": {"pinyin": "tone_marks",  "english": "full"},
+    "stabilizing": {"pinyin": "initial",     "english": "feedback_only"},
+    "stable":      {"pinyin": "none",        "english": "none"},
+    "durable":     {"pinyin": "none",        "english": "none"},
+    "decayed":     {"pinyin": "tone_marks",  "english": "feedback_only"},
 }
 
 SCAFFOLD_ORDER = ["none", "initial", "tone_marks", "full_pinyin"]
+ENGLISH_ORDER = ["none", "feedback_only", "full"]
 
 # ── Time-of-day penalty ──
 
@@ -300,3 +304,186 @@ ADAPTIVE_LENGTH_MIN_ITEMS = 4         # Floor for shrunken session length
 ADAPTIVE_LENGTH_HIGH_COMPLETION = 0.95  # Avg completion above this → grow session
 ADAPTIVE_LENGTH_HIGH_MIN_SESSIONS = 5   # Need this many sessions for growth
 ADAPTIVE_LENGTH_GROW_FACTOR = 1.1     # Multiply base length by this when growing
+
+
+# ── Parameter registry declarations ──
+# Register tunable constants with the intelligence engine's parameter graph.
+# These are used by the influence model to learn which parameters affect which metrics.
+
+def _register_all_parameters():
+    """Register all tunable parameters. Called at import time."""
+    from .intelligence.parameter_registry import _PARAMETER_REGISTRY_PENDING
+    _p = _PARAMETER_REGISTRY_PENDING.append
+
+    # Retention model
+    _p({"parameter_name": "RECALL_THRESHOLD", "file_path": "mandarin/config.py",
+        "current_value": RECALL_THRESHOLD, "current_value_str": str(RECALL_THRESHOLD),
+        "value_type": "ratio", "primary_dimension": "retention",
+        "secondary_dimensions": "[]", "min_valid": 0.5, "max_valid": 0.99,
+        "soft_min": 0.75, "soft_max": 0.95, "change_direction": "either",
+        "notes": "Review when recall drops below this"})
+
+    _p({"parameter_name": "INITIAL_HALF_LIFE", "file_path": "mandarin/config.py",
+        "current_value": INITIAL_HALF_LIFE, "current_value_str": str(INITIAL_HALF_LIFE),
+        "value_type": "float", "primary_dimension": "retention",
+        "secondary_dimensions": "[]", "min_valid": 0.1, "max_valid": 7.0,
+        "soft_min": 0.5, "soft_max": 3.0, "change_direction": "either",
+        "notes": "Half-life for first encounter (days)"})
+
+    # SM-2 intervals
+    _p({"parameter_name": "INTERVAL_INITIAL", "file_path": "mandarin/config.py",
+        "current_value": INTERVAL_INITIAL, "current_value_str": str(INTERVAL_INITIAL),
+        "value_type": "float", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["retention"]', "min_valid": 0.25, "max_valid": 7.0,
+        "soft_min": 0.5, "soft_max": 3.0, "change_direction": "either",
+        "notes": "First correct answer interval (days)"})
+
+    _p({"parameter_name": "INTERVAL_SECOND", "file_path": "mandarin/config.py",
+        "current_value": INTERVAL_SECOND, "current_value_str": str(INTERVAL_SECOND),
+        "value_type": "float", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["retention"]', "min_valid": 1.0, "max_valid": 14.0,
+        "soft_min": 2.0, "soft_max": 7.0, "change_direction": "either",
+        "notes": "Second correct answer interval (days)"})
+
+    # Ease
+    _p({"parameter_name": "EASE_FLOOR", "file_path": "mandarin/config.py",
+        "current_value": EASE_FLOOR, "current_value_str": str(EASE_FLOOR),
+        "value_type": "float", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": "[]", "min_valid": 1.0, "max_valid": 2.5,
+        "soft_min": 1.1, "soft_max": 1.5, "change_direction": "either",
+        "notes": "Minimum ease factor"})
+
+    # Mastery stage promotion
+    _p({"parameter_name": "PROMOTE_STABILIZING_STREAK", "file_path": "mandarin/config.py",
+        "current_value": PROMOTE_STABILIZING_STREAK, "current_value_str": str(PROMOTE_STABILIZING_STREAK),
+        "value_type": "int", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": "[]", "min_valid": 1, "max_valid": 10,
+        "soft_min": 2, "soft_max": 5, "change_direction": "either",
+        "notes": "Correct streak to promote to stabilizing"})
+
+    _p({"parameter_name": "PROMOTE_STABLE_STREAK", "file_path": "mandarin/config.py",
+        "current_value": PROMOTE_STABLE_STREAK, "current_value_str": str(PROMOTE_STABLE_STREAK),
+        "value_type": "int", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": "[]", "min_valid": 2, "max_valid": 15,
+        "soft_min": 4, "soft_max": 10, "change_direction": "either",
+        "notes": "Correct streak to promote to stable"})
+
+    # Demotion
+    _p({"parameter_name": "DEMOTE_WEAK_CYCLE_THRESHOLD", "file_path": "mandarin/config.py",
+        "current_value": DEMOTE_WEAK_CYCLE_THRESHOLD, "current_value_str": str(DEMOTE_WEAK_CYCLE_THRESHOLD),
+        "value_type": "int", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["frustration"]', "min_valid": 1, "max_valid": 10,
+        "soft_min": 2, "soft_max": 5, "change_direction": "either",
+        "notes": "Weak cycles before demotion"})
+
+    # Difficulty
+    _p({"parameter_name": "DIFFICULTY_CORRECT_ALPHA", "file_path": "mandarin/config.py",
+        "current_value": DIFFICULTY_CORRECT_ALPHA, "current_value_str": str(DIFFICULTY_CORRECT_ALPHA),
+        "value_type": "float", "primary_dimension": "drill_quality",
+        "secondary_dimensions": "[]", "min_valid": 0.01, "max_valid": 0.2,
+        "soft_min": 0.03, "soft_max": 0.1, "change_direction": "either",
+        "notes": "Difficulty decrease rate on correct answer"})
+
+    _p({"parameter_name": "DIFFICULTY_WRONG_BETA", "file_path": "mandarin/config.py",
+        "current_value": DIFFICULTY_WRONG_BETA, "current_value_str": str(DIFFICULTY_WRONG_BETA),
+        "value_type": "float", "primary_dimension": "drill_quality",
+        "secondary_dimensions": "[]", "min_valid": 0.01, "max_valid": 0.2,
+        "soft_min": 0.04, "soft_max": 0.12, "change_direction": "either",
+        "notes": "Difficulty increase rate on wrong answer"})
+
+    # Tone boost
+    _p({"parameter_name": "TONE_BOOST_ACCURACY_THRESHOLD", "file_path": "mandarin/config.py",
+        "current_value": TONE_BOOST_ACCURACY_THRESHOLD, "current_value_str": str(TONE_BOOST_ACCURACY_THRESHOLD),
+        "value_type": "ratio", "primary_dimension": "tone_phonology",
+        "secondary_dimensions": "[]", "min_valid": 0.3, "max_valid": 0.9,
+        "soft_min": 0.4, "soft_max": 0.7, "change_direction": "decrease",
+        "notes": "Below this accuracy → boost speaking weight"})
+
+    _p({"parameter_name": "TONE_BOOST_MULTIPLIER", "file_path": "mandarin/config.py",
+        "current_value": TONE_BOOST_MULTIPLIER, "current_value_str": str(TONE_BOOST_MULTIPLIER),
+        "value_type": "float", "primary_dimension": "tone_phonology",
+        "secondary_dimensions": "[]", "min_valid": 1.0, "max_valid": 3.0,
+        "soft_min": 1.2, "soft_max": 2.0, "change_direction": "increase",
+        "notes": "Speaking weight multiplier when tone accuracy is low"})
+
+    _p({"parameter_name": "TONE_BOOST_MAX_WEIGHT", "file_path": "mandarin/config.py",
+        "current_value": TONE_BOOST_MAX_WEIGHT, "current_value_str": str(TONE_BOOST_MAX_WEIGHT),
+        "value_type": "ratio", "primary_dimension": "tone_phonology",
+        "secondary_dimensions": "[]", "min_valid": 0.15, "max_valid": 0.6,
+        "soft_min": 0.25, "soft_max": 0.45, "change_direction": "increase",
+        "notes": "Maximum speaking weight after tone boost"})
+
+    # Session planning
+    _p({"parameter_name": "MAX_NEW_ITEM_RATIO", "file_path": "mandarin/config.py",
+        "current_value": MAX_NEW_ITEM_RATIO, "current_value_str": str(MAX_NEW_ITEM_RATIO),
+        "value_type": "ratio", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["retention"]', "min_valid": 0.05, "max_valid": 0.6,
+        "soft_min": 0.1, "soft_max": 0.4, "change_direction": "either",
+        "notes": "Max ratio of new items per session"})
+
+    _p({"parameter_name": "MIN_SESSION_ITEMS", "file_path": "mandarin/config.py",
+        "current_value": MIN_SESSION_ITEMS, "current_value_str": str(MIN_SESSION_ITEMS),
+        "value_type": "int", "primary_dimension": "engagement",
+        "secondary_dimensions": "[]", "min_valid": 2, "max_valid": 15,
+        "soft_min": 3, "soft_max": 8, "change_direction": "either",
+        "notes": "Minimum drills in a session"})
+
+    _p({"parameter_name": "SESSION_TIME_CAP_SECONDS", "file_path": "mandarin/config.py",
+        "current_value": SESSION_TIME_CAP_SECONDS, "current_value_str": str(SESSION_TIME_CAP_SECONDS),
+        "value_type": "int", "primary_dimension": "engagement",
+        "secondary_dimensions": '["ux"]', "min_valid": 300, "max_valid": 1800,
+        "soft_min": 480, "soft_max": 900, "change_direction": "either",
+        "notes": "Auto-finish session after this many seconds"})
+
+    # Error focus
+    _p({"parameter_name": "ERROR_FOCUS_LIMIT", "file_path": "mandarin/config.py",
+        "current_value": ERROR_FOCUS_LIMIT, "current_value_str": str(ERROR_FOCUS_LIMIT),
+        "value_type": "int", "primary_dimension": "drill_quality",
+        "secondary_dimensions": '["frustration"]', "min_valid": 1, "max_valid": 10,
+        "soft_min": 2, "soft_max": 5, "change_direction": "either",
+        "notes": "Max error-focus items per session"})
+
+    # Bounce detection
+    _p({"parameter_name": "BOUNCE_ERROR_RATE", "file_path": "mandarin/config.py",
+        "current_value": BOUNCE_ERROR_RATE, "current_value_str": str(BOUNCE_ERROR_RATE),
+        "value_type": "ratio", "primary_dimension": "frustration",
+        "secondary_dimensions": '["ux"]', "min_valid": 0.2, "max_valid": 0.7,
+        "soft_min": 0.3, "soft_max": 0.5, "change_direction": "decrease",
+        "notes": "Error rate threshold for struggling level detection"})
+
+    # Confusable boost
+    _p({"parameter_name": "CONFUSABLE_BOOST_MULT", "file_path": "mandarin/config.py",
+        "current_value": CONFUSABLE_BOOST_MULT, "current_value_str": str(CONFUSABLE_BOOST_MULT),
+        "value_type": "float", "primary_dimension": "drill_quality",
+        "secondary_dimensions": "[]", "min_valid": 1.0, "max_valid": 2.0,
+        "soft_min": 1.1, "soft_max": 1.6, "change_direction": "increase",
+        "notes": "Priority boost for confusable pair items"})
+
+    # Adaptive session
+    _p({"parameter_name": "ADAPTIVE_LOW_COMPLETION", "file_path": "mandarin/config.py",
+        "current_value": ADAPTIVE_LOW_COMPLETION, "current_value_str": str(ADAPTIVE_LOW_COMPLETION),
+        "value_type": "ratio", "primary_dimension": "ux",
+        "secondary_dimensions": '["engagement"]', "min_valid": 0.3, "max_valid": 0.8,
+        "soft_min": 0.5, "soft_max": 0.7, "change_direction": "either",
+        "notes": "Completion rate below this → light mode"})
+
+    _p({"parameter_name": "ADAPTIVE_EXIT_RATE", "file_path": "mandarin/config.py",
+        "current_value": ADAPTIVE_EXIT_RATE, "current_value_str": str(ADAPTIVE_EXIT_RATE),
+        "value_type": "ratio", "primary_dimension": "ux",
+        "secondary_dimensions": '["engagement"]', "min_valid": 0.2, "max_valid": 0.7,
+        "soft_min": 0.3, "soft_max": 0.5, "change_direction": "decrease",
+        "notes": "Early exit rate above this → light mode"})
+
+    # New item budget
+    _p({"parameter_name": "NEW_BUDGET_DEFAULT", "file_path": "mandarin/config.py",
+        "current_value": NEW_BUDGET_DEFAULT, "current_value_str": str(NEW_BUDGET_DEFAULT),
+        "value_type": "int", "primary_dimension": "srs_funnel",
+        "secondary_dimensions": '["retention"]', "min_valid": 1, "max_valid": 10,
+        "soft_min": 2, "soft_max": 5, "change_direction": "either",
+        "notes": "Default new items when mastery is above medium"})
+
+
+try:
+    _register_all_parameters()
+except ImportError:
+    pass  # intelligence module not yet available (e.g., during initial setup)

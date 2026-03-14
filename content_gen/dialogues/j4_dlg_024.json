@@ -1,0 +1,83 @@
+{
+    "title": "The Empty Classroom",
+    "title_zh": "空教室",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You walk past an old school and peek inside an empty classroom. A former teacher, Mrs. Huang, is standing there looking at the blackboard. School ended years ago but the building hasn't been torn down.",
+        "setup_zh": "你路过一所旧学校，往一间空教室里看。一位以前的老师黄老师站在那里看着黑板。学校几年前就关了，但建筑还没有拆。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你也进来看看吧。我以前在这里教了二十年书。你看黑板上还有粉笔的痕迹，虽然已经看不清写的什么了。每次路过，我都会进来站一会儿。",
+                "text_pinyin": "Nǐ yě jìnlái kàn kàn ba. Wǒ yǐqián zài zhèlǐ jiāo le èrshí nián shū. Nǐ kàn hēibǎn shàng hái yǒu fěnbǐ de hénjì, suīrán yǐjīng kàn bù qīng xiě de shénme le. Měi cì lùguò, wǒ dōu huì jìnlái zhàn yīhuìr.",
+                "text_en": "Come in and look. I taught here for twenty years. See — there are still chalk traces on the blackboard, though you can't make out what was written anymore. Every time I pass by, I come in and stand for a while."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the empty classroom.",
+                "options": [
+                    {
+                        "text_zh": "虽然教室空了，但你教过的那些学生还带着你给他们的东西走在外面的世界里。黑板上的字可以擦掉，但你教给他们的东西擦不掉。",
+                        "text_pinyin": "Suīrán jiàoshì kōng le, dàn nǐ jiāo guò de nàxiē xuéshēng hái dài zhe nǐ gěi tāmen de dōngxi zǒu zài wàimiàn de shìjiè lǐ. Hēibǎn shàng de zì kěyǐ cā diào, dàn nǐ jiāo gěi tāmen de dōngxi cā bú diào.",
+                        "text_en": "The classroom is empty, but the students you taught are out in the world carrying what you gave them. Words on a blackboard can be erased, but what you taught them can't.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Comforting and true — reframes emptiness as legacy."
+                    },
+                    {
+                        "text_zh": "这个学校为什么关了？",
+                        "text_pinyin": "Zhège xuéxiào wèishénme guān le?",
+                        "text_en": "Why did this school close?",
+                        "score": 0.0,
+                        "feedback": "Administrative question during an emotional return."
+                    },
+                    {
+                        "text_zh": "这个建筑以后会变成什么？",
+                        "text_pinyin": "Zhège jiànzhù yǐhòu huì biàn chéng shénme?",
+                        "text_en": "What will this building become in the future?",
+                        "score": 0.0,
+                        "feedback": "Development question that ignores her feelings."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "擦不掉……谢谢你这么说。有时候我想，当老师到底留下了什么？不像盖房子的人，你能看到你建的楼。我留下的东西看不见，只能相信它在那里。",
+                "text_pinyin": "Cā bú diào…… xièxie nǐ zhème shuō. Yǒu shíhou wǒ xiǎng, dāng lǎoshī dàodǐ liú xià le shénme? Bù xiàng gài fángzi de rén, nǐ néng kàn dào nǐ jiàn de lóu. Wǒ liú xià de dōngxi kàn bújiàn, zhǐ néng xiāngxìn tā zài nàlǐ.",
+                "text_en": "Can't be erased... thank you for saying that. Sometimes I wonder, what did being a teacher actually leave behind? Unlike someone who builds houses — you can see the buildings. What I left behind is invisible. I can only believe it's there."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her doubt about her legacy.",
+                "options": [
+                    {
+                        "text_zh": "教室空了，但学生还带着您给的东西走在外面。黑板上的字能擦掉，但您教他们的东西擦不掉。",
+                        "text_pinyin": "Jiàoshì kōng le, dàn xuéshēng hái dài zhe nín gěi de dōngxi zǒu zài wàimiàn. Hēibǎn shàng de zì néng cā diào, dàn nín jiāo tāmen de dōngxi cā bú diào.",
+                        "text_en": "The classroom is empty, but your students are out in the world carrying what you gave them. Words on a blackboard can be erased, but what you taught them can't.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Reassuring and concrete — gives her invisible legacy tangible possibility."
+                    },
+                    {
+                        "text_zh": "你退休以后做什么？",
+                        "text_pinyin": "Nǐ tuìxiū yǐhòu zuò shénme?",
+                        "text_en": "What do you do since retiring?",
+                        "score": 0.0,
+                        "feedback": "Retirement activities question during a profound moment."
+                    },
+                    {
+                        "text_zh": "你教的是什么科目？",
+                        "text_pinyin": "Nǐ jiāo de shì shénme kēmù?",
+                        "text_en": "What subject did you teach?",
+                        "score": 0.0,
+                        "feedback": "Subject question that misses her existential reflection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The closing of rural and small-town schools (撤校并校) has been a widespread phenomenon in China as populations shift to cities. For teachers who spent decades in these schools, the empty buildings represent both personal loss and social change. The Chinese concept of 师恩 (shī'ēn, the grace of a teacher) holds that a teacher's influence is lifelong and often invisible — shaping character in ways that only reveal themselves years later."
+    }
+}

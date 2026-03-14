@@ -2,28 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#946070" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1C2028" media="(prefers-color-scheme: dark)">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" id="meta-theme-color" content="#F2EBE0">
+  <meta name="color-scheme" content="light dark">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>Mandarin</title>
-  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Aelu">
+  <meta name="application-name" content="Aelu">
+  <meta name="description" content="Patient Mandarin study with spaced repetition. Honest data, no theatrics.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="build-id" content="{{ build_id }}">
+  <title>Aelu</title>
+  <meta property="og:title" content="Aelu — Patient Mandarin Study">
+  <meta property="og:description" content="Learn Mandarin with spaced repetition. Honest data, no theatrics.">
+  <meta property="og:image" content="/static/og-image.png">
+  <meta property="og:type" content="website">
+  <!-- Theme detection BEFORE CSS to prevent dark-mode flash -->
+  <script nonce="{{ csp_nonce }}">
+    (function(){var h=new Date().getHours(),d=h>=19||h<7;
+    document.documentElement.setAttribute("data-theme",d?"dark":"light");
+    document.documentElement.style.backgroundColor=d?"#1C2028":"#F2EBE0";
+    var m=document.getElementById("meta-theme-color");
+    if(m)m.setAttribute("content",d?"#1C2028":"#F2EBE0");
+    /* Swap themed images — uses dark-src if available, falls back to light with CSS filter */
+    document.addEventListener("DOMContentLoaded",function(){
+      if(!d)return;
+      document.querySelectorAll(".themed-img").forEach(function(img){
+        var darkSrc=img.getAttribute("data-dark-src");
+        if(!darkSrc)return;
+        var lightSrc=img.getAttribute("data-light-src")||img.src;
+        var test=new Image();
+        test.onload=function(){img.src=darkSrc;};
+        test.onerror=function(){img.src=lightSrc;};
+        test.src=darkSrc;
+      });
+    });
+    })();
+  </script>
+  <link rel="icon" href="/static/favicon.ico?v=2" type="image/x-icon">
+  <link rel="icon" href="/static/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/static/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/static/icon-512.png">
   <link rel="manifest" href="/static/manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Critical Latin fonts — render-blocking (small, fast) -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
   <!-- CJK fonts — loaded async (large, non-blocking) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400&display=swap"></noscript>
   <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  <!-- Critical CSS fallback — ensures page is usable if external CSS fails to load -->
+  <style nonce="{{ csp_nonce }}">
+    .hidden{display:none!important}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    body{font-family:'Source Serif 4',Georgia,serif;color:#2A3650;background:#F2EBE0;margin:0;padding:0;line-height:1.7;-webkit-font-smoothing:antialiased}
+    section{max-width:480px;margin:0 auto;padding:0 1.5rem}
+    @media(prefers-color-scheme:dark){body{background:#1C2028;color:#E4DDD0}}
+  </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
+  {% if ga4_id %}
+  <script nonce="{{ csp_nonce }}">
+    /* GA4 — only load after cookie consent */
+    window._ga4Id = '{{ ga4_id }}';
+    function _loadGA4() {
+      if (window._ga4Loaded) return;
+      window._ga4Loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._ga4Id;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', window._ga4Id, {
+        send_page_view: true,
+        cookie_flags: 'SameSite=Lax;Secure'
+      });
+    }
+    /* Auto-load if user already consented */
+    if (localStorage.getItem('aelu_cookie_consent') === 'accepted') _loadGA4();
+  </script>
+  {% endif %}
 </head>
 <body>
-  <a href="#drill-area" class="skip-link">Skip to content</a>
-  <div id="app" role="main">
+  {% include "ui-icons.svg" %}
+  <a href="#app" class="skip-link">Skip to content</a>
+  <!-- Cookie consent banner -->
+  <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:1rem 1.5rem;background:var(--color-surface,#F7F1E8);border-top:1px solid var(--color-border,#D8D0C4);font-size:0.85rem;color:var(--color-text-faint,#8B8680);" role="dialog" aria-label="Cookie consent">
+    <div style="max-width:600px;margin:0 auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <p style="flex:1;margin:0;">We use a cookie for your session and, with your consent, analytics to improve the app. <a href="/privacy" style="color:var(--color-accent,#946070);">Privacy policy</a></p>
+      <button id="cookie-accept" style="padding:0.4rem 1rem;background:var(--color-accent,#946070);color:var(--color-base,#F2EBE0);border:none;cursor:pointer;font-size:0.85rem;font-weight:600;">Accept</button>
+      <button id="cookie-decline" style="padding:0.4rem 1rem;background:transparent;border:1px solid var(--color-border,#D8D0C4);cursor:pointer;font-size:0.85rem;color:var(--color-text-faint,#8B8680);">Decline</button>
+    </div>
+  </div>
+  <script nonce="{{ csp_nonce }}">
+    (function(){
+      if (localStorage.getItem('aelu_cookie_consent')) return;
+      var b = document.getElementById('cookie-banner');
+      if (b) b.style.display = 'block';
+      document.getElementById('cookie-accept').addEventListener('click', function(){
+        localStorage.setItem('aelu_cookie_consent', 'accepted');
+        b.style.display = 'none';
+        if (typeof _loadGA4 === 'function') _loadGA4();
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function(){
+        localStorage.setItem('aelu_cookie_consent', 'declined');
+        b.style.display = 'none';
+      });
+    })();
+  </script>
+  <div id="app" role="main" tabindex="-1">
     <!-- Status bar — always visible -->
     <div id="status-bar" role="status" aria-live="polite">
       <span id="status-dot" class="dot-idle" aria-hidden="true"></span>
@@ -33,8 +125,15 @@
 
     <!-- Header -->
     <header role="banner">
-      <div class="logo-mark" aria-hidden="true">漫</div>
-      <div class="logo-text">Mandarin</div>
+      <img data-light-src="/static/icon-app.png" data-dark-src="/static/icon-app-dark.png" src="/static/icon-app.png" alt="Aelu" class="logo-icon themed-img">
+      <div class="logo-text">Aelu</div>
+      <div class="account-bar">
+        <span class="account-name">{{ current_user.display_name or current_user.email }}</span>
+        <form action="/auth/logout" method="post" class="logout-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="account-link">Log out</button>
+        </form>
+      </div>
       <div class="horizon" aria-hidden="true"></div>
       <div class="session-info">
         Session #{{ profile.total_sessions + 1 }} · {{ day_profile.name }}{% if streak_days > 1 %} · {{ streak_days }} consecutive days{% endif %}
@@ -45,8 +144,8 @@
     <section id="dashboard" aria-label="Dashboard">
       <div class="stats-row" role="list" aria-label="Quick stats">
         <div class="stat" role="listitem">
-          <div class="stat-value">{{ item_count }}</div>
-          <div class="stat-label">Items</div>
+          <div class="stat-value">{{ items_learning|default(0) }}</div>
+          <div class="stat-label">Learning</div>
         </div>
         <div class="stat" role="listitem">
           <div class="stat-value">{{ profile.total_sessions }}</div>
@@ -54,44 +153,61 @@
         </div>
         {% if mastery %}
         {% for level, m in mastery.items()|sort %}
-        <div class="stat" role="listitem">
-          <div class="stat-value">{{ m.pct|int }}%</div>
+        {% set mastery_pct = (m.pct|default(0))|round(0)|int %}
+        {% set has_progress = (m.mastered|default(0) + m.seen|default(0) + m.passed_once|default(0) + m.stabilizing|default(0) + m.stable|default(0) + m.durable|default(0)) > 0 %}
+        {% if has_progress or level|int <= 3 %}
+        <div class="stat stat-hsk" role="listitem"
+             data-hsk="{{ level }}"
+             data-total="{{ m.total }}"
+             data-mastered="{{ m.mastered|default(0) }}"
+             data-seen="{{ m.seen|default(0) }}"
+             data-durable="{{ m.durable|default(0) }}"
+             data-stable="{{ m.stable|default(0) }}"
+             data-stabilizing="{{ m.stabilizing|default(0) }}"
+             data-passed="{{ m.passed_once|default(0) }}">
+          <div class="stat-value">{{ mastery_pct }}%</div>
           <div class="stat-label">HSK {{ level }}</div>
         </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
       </div>
 
-      {% if accuracy_trend and accuracy_trend|length > 1 %}
-      <div class="stats-sparkline" aria-label="Recent accuracy trend">
-        <span class="sparkline-chars">{{ accuracy_sparkline }}</span>
-        <div class="sparkline-meta">{{ accuracy_trend|length }} sessions</div>
-      </div>
-      {% endif %}
+      <!-- Streak + study calendar — populated by JS -->
+      <div id="streak-calendar" class="streak-calendar hidden" aria-label="Study streak"></div>
+
+      <!-- Next session preview — populated by JS -->
+      <div id="next-session-preview" class="next-session-preview hidden" aria-label="Next session preview"></div>
 
       <div class="actions">
         <button id="btn-start" class="btn-primary" aria-label="Start full session">Begin</button>
-        <button id="btn-mini" class="btn-secondary" aria-label="Start mini session">Quick session <kbd>M</kbd></button>
+        <button id="btn-mini" class="btn-secondary" aria-label="Start mini session">Quick session</button>
       </div>
       <div class="actions actions-exposure">
         <button id="btn-read" class="btn-secondary" aria-label="Open graded reader">Read</button>
         <button id="btn-watch" class="btn-secondary" aria-label="Browse media shelf">Watch</button>
         <button id="btn-listen" class="btn-secondary" aria-label="Start listening practice">Listen</button>
+        <button id="btn-grammar" class="btn-secondary" aria-label="Study grammar points"><span class="btn-grammar-icon" aria-hidden="true">文</span> Grammar</button>
+      </div>
+      <div id="session-explain" class="session-explain hidden">
+        <button id="btn-explain" class="btn-link btn-sm" type="button" aria-expanded="false" aria-controls="session-explain-content">Why these drills?</button>
+        <div id="session-explain-content" class="session-explain-content hidden" aria-live="polite"></div>
+      </div>
+      <div id="teacher-nav" class="actions hidden">
+        <button id="btn-my-classes" class="btn-secondary" aria-label="Open teacher dashboard">My Classes</button>
       </div>
 
       <!-- Onboarding checklist (hidden if all complete or dismissed) -->
       <div id="onboarding-checklist" class="onboarding-checklist hidden" aria-label="Getting started checklist">
         <div class="onboarding-header">
           <h3>Getting Started</h3>
-          <button id="onboarding-dismiss" class="onboarding-dismiss" aria-label="Dismiss checklist">&times;</button>
+          <button id="onboarding-dismiss" class="onboarding-dismiss" aria-label="Dismiss checklist"><svg class="icon"><use href="#icon-close"/></svg></button>
         </div>
         <ul class="onboarding-items" id="onboarding-items">
           <!-- Populated by JS -->
         </ul>
         <div id="onboarding-complete-msg" class="onboarding-complete hidden">You're set.</div>
       </div>
-
-      <div class="horizon" aria-hidden="true"></div>
 
       <!-- Mastery stage distribution -->
       {% if mastery %}
@@ -100,6 +216,8 @@
         {% set total = m.total or 1 %}
         {% set not_seen = m.not_seen|default(0) %}
         {% set unseen_pct = (not_seen / total * 100)|round(1) %}
+        {% set has_any_progress = (m.mastered|default(0) + m.seen_stage|default(0) + m.passed_once|default(0) + m.stabilizing|default(0) + m.stable|default(0) + m.durable|default(0)) > 0 %}
+        {% if has_any_progress or level|int <= 3 %}
         <div class="mastery-bar-row"
              data-hsk="{{ level }}"
              data-total="{{ total }}"
@@ -112,35 +230,36 @@
           <span class="mastery-bar-label">HSK {{ level }}</span>
           <div class="mastery-bar" role="meter" aria-label="HSK {{ level }} mastery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ m.pct|int }}">
             {% if m.durable|default(0) > 0 %}
-            <div class="bar-seg bar-durable" style="width:{{ (m.durable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.durable }}: {{ m.durable }} ({{ (m.durable / total * 100)|round(1) }}%)"></div>
+            <div class="bar-seg bar-durable" style="width:{{ (m.durable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.durable }}: {{ m.durable }} ({{ (m.durable / total * 100)|round(1) }}%)" title="Mastered 3+ months ago — very unlikely to forget."></div>
             {% endif %}
             {% if m.stable|default(0) > 0 %}
-            <div class="bar-seg bar-stable" style="width:{{ (m.stable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stable }}: {{ m.stable }} ({{ (m.stable / total * 100)|round(1) }}%)"></div>
+            <div class="bar-seg bar-stable" style="width:{{ (m.stable / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stable }}: {{ m.stable }} ({{ (m.stable / total * 100)|round(1) }}%)" title="Mastered 1-3 months ago — solid long-term memory."></div>
             {% endif %}
             {% if m.stabilizing|default(0) > 0 %}
-            <div class="bar-seg bar-stabilizing" style="width:{{ (m.stabilizing / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stabilizing }}: {{ m.stabilizing }} ({{ (m.stabilizing / total * 100)|round(1) }}%)"></div>
+            <div class="bar-seg bar-stabilizing" style="width:{{ (m.stabilizing / total * 100)|round(1) }}%" aria-label="{{ stage_labels.stabilizing }}: {{ m.stabilizing }} ({{ (m.stabilizing / total * 100)|round(1) }}%)" title="Improving — correct 3+ times in the last week."></div>
             {% endif %}
             {% if m.passed_once|default(0) > 0 %}
-            <div class="bar-seg bar-passed" style="width:{{ (m.passed_once / total * 100)|round(1) }}%" aria-label="{{ stage_labels.passed_once }}: {{ m.passed_once }} ({{ (m.passed_once / total * 100)|round(1) }}%)"></div>
+            <div class="bar-seg bar-passed" style="width:{{ (m.passed_once / total * 100)|round(1) }}%" aria-label="{{ stage_labels.passed_once }}: {{ m.passed_once }} ({{ (m.passed_once / total * 100)|round(1) }}%)" title="Correct at least once — still being practiced."></div>
             {% endif %}
             {% if m.seen_stage|default(0) > 0 %}
-            <div class="bar-seg bar-seen" style="width:{{ (m.seen_stage / total * 100)|round(1) }}%" aria-label="{{ stage_labels.seen }}: {{ m.seen_stage }} ({{ (m.seen_stage / total * 100)|round(1) }}%)"></div>
+            <div class="bar-seg bar-seen" style="width:{{ (m.seen_stage / total * 100)|round(1) }}%" aria-label="{{ stage_labels.seen }}: {{ m.seen_stage }} ({{ (m.seen_stage / total * 100)|round(1) }}%)" title="Encountered but not yet answered correctly."></div>
             {% endif %}
             {% if not_seen > 0 %}
-            <div class="bar-seg bar-unseen" style="width:{{ unseen_pct }}%" aria-label="{{ stage_labels.not_seen }}: {{ not_seen }} ({{ unseen_pct }}%)"></div>
+            <div class="bar-seg bar-unseen" style="width:{{ unseen_pct }}%" aria-label="{{ stage_labels.not_seen }}: {{ not_seen }} ({{ unseen_pct }}%)" title="Not yet presented in a session."></div>
             {% endif %}
           </div>
-          <span class="mastery-bar-meta">{{ total - not_seen }} of {{ total }}</span>
-          <div class="mastery-bar-detail">{% set sep = joiner(" · ") %}{% if m.durable|default(0) > 0 %}{{ sep() }}{{ stage_labels.durable }}: {{ m.durable }} ({{ (m.durable / total * 100)|round(0)|int }}%){% endif %}{% if m.stable|default(0) > 0 %}{{ sep() }}{{ stage_labels.stable }}: {{ m.stable }} ({{ (m.stable / total * 100)|round(0)|int }}%){% endif %}{% if m.stabilizing|default(0) > 0 %}{{ sep() }}{{ stage_labels.stabilizing }}: {{ m.stabilizing }} ({{ (m.stabilizing / total * 100)|round(0)|int }}%){% endif %}{% if m.passed_once|default(0) > 0 %}{{ sep() }}{{ stage_labels.passed_once }}: {{ m.passed_once }} ({{ (m.passed_once / total * 100)|round(0)|int }}%){% endif %}{% if m.seen_stage|default(0) > 0 %}{{ sep() }}{{ stage_labels.seen }}: {{ m.seen_stage }} ({{ (m.seen_stage / total * 100)|round(0)|int }}%){% endif %}{% if not_seen > 0 %}{{ sep() }}{{ stage_labels.not_seen }}: {{ not_seen }} ({{ unseen_pct|round(0)|int }}%){% endif %}</div>
+          <span class="mastery-bar-meta">{{ m.mastered|default(0) }} of {{ total }}</span>
+          {% set mastered_n = (m.stable|default(0)) + (m.durable|default(0)) %}
+          {% set learning_n = (m.stabilizing|default(0)) + (m.passed_once|default(0)) + (m.seen_stage|default(0)) %}
+          {% set new_n = not_seen %}
+          <div class="mastery-bar-detail">Mastered: {{ mastered_n }} · Learning: {{ learning_n }} · New: {{ new_n }}</div>
         </div>
+        {% endif %}
         {% endfor %}
         <div class="mastery-legend">
-          <span class="legend-item"><span class="legend-dot bar-durable" aria-hidden="true"></span>{{ stage_labels.durable }}</span>
-          <span class="legend-item"><span class="legend-dot bar-stable" aria-hidden="true"></span>{{ stage_labels.stable }}</span>
-          <span class="legend-item"><span class="legend-dot bar-stabilizing" aria-hidden="true"></span>{{ stage_labels.stabilizing }}</span>
-          <span class="legend-item"><span class="legend-dot bar-passed" aria-hidden="true"></span>{{ stage_labels.passed_once }}</span>
-          <span class="legend-item"><span class="legend-dot bar-seen" aria-hidden="true"></span>{{ stage_labels.seen }}</span>
-          <span class="legend-item"><span class="legend-dot bar-unseen" aria-hidden="true"></span>{{ stage_labels.not_seen }}</span>
+          <span class="legend-item" title="Stable + durable — long-term memory."><span class="legend-dot bar-stable" aria-hidden="true"></span>Mastered</span>
+          <span class="legend-item" title="Stabilizing + introduced — actively practicing."><span class="legend-dot bar-stabilizing" aria-hidden="true"></span>Learning</span>
+          <span class="legend-item" title="Not yet encountered or just seen."><span class="legend-dot bar-unseen" aria-hidden="true"></span>New</span>
         </div>
       </div>
       {% endif %}
@@ -148,20 +267,54 @@
       {% if errors %}
       <div class="error-summary" aria-label="Error patterns">
         <h3>Recent error patterns</h3>
+        {% set error_labels = {
+          'tone': 'Tone',
+          'segment': 'Phonetics',
+          'ime_confusable': 'Similar characters',
+          'grammar': 'Grammar',
+          'vocab': 'Vocabulary',
+          'other': 'Other',
+          'register_mismatch': 'Register',
+          'particle_misuse': 'Particle',
+          'function_word_omission': 'Function word',
+          'temporal_sequencing': 'Sequencing',
+          'measure_word': 'Measure word',
+          'politeness_softening': 'Politeness',
+          'reference_tracking': 'Reference',
+          'pragmatics_mismatch': 'Pragmatics'
+        } %}
+        {% set error_hints = {
+          'tone': 'Wrong tone in pronunciation — these get extra practice.',
+          'segment': 'Confusion between similar sounds (zh/z, sh/s, etc.).',
+          'ime_confusable': 'Typed a similar-looking character.',
+          'grammar': 'Sentence structure or word order issues.',
+          'vocab': 'Didn\u2019t recall the meaning or reading.',
+          'register_mismatch': 'Used wrong formality level.',
+          'particle_misuse': 'Wrong particle (的/地/得, 了/过, etc.).',
+          'function_word_omission': 'Missing a function word.',
+          'measure_word': 'Wrong or missing measure word (量词).',
+          'politeness_softening': 'Tone too direct or not polite enough.'
+        } %}
         {% for etype, count in errors.items() %}
-        <span class="error-tag">{{ etype }}: {{ count }}</span>
+        {% if loop.index <= 3 %}
+        <span class="error-tag" title="{{ error_hints.get(etype, '') }}">{{ error_labels.get(etype, etype) }}: {{ count }}</span>
+        {% endif %}
         {% endfor %}
       </div>
       {% endif %}
 
-      <div class="horizon" aria-hidden="true"></div>
-
       <!-- Panels group -->
       <div class="panels-group">
 
+      <!-- Weekly summary panel -->
+      <div id="weekly-panel" class="panel collapsible">
+        <button class="panel-toggle" aria-expanded="false" aria-controls="weekly-summary" data-panel="weekly-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> This Week</button>
+        <div class="panel-body panel-closed" id="weekly-summary" aria-label="This week's activity"></div>
+      </div>
+
       <!-- Forecast panel -->
       <div id="forecast-panel" class="panel collapsible">
-        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="forecast-content" data-panel="forecast-panel"><span class="toggle-icon" aria-hidden="true">+</span> Forecast</h3>
+        <button class="panel-toggle" aria-expanded="false" aria-controls="forecast-content" data-panel="forecast-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Forecast</button>
         <div class="panel-body panel-closed" id="forecast-content">
           <div class="panel-skeleton" aria-label="Loading forecast">
             <div class="skeleton-line"></div>
@@ -172,7 +325,7 @@
 
       <!-- Retention panel -->
       <div id="retention-panel" class="panel collapsible">
-        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="retention-content" data-panel="retention-panel"><span class="toggle-icon" aria-hidden="true">+</span> Memory</h3>
+        <button class="panel-toggle" aria-expanded="false" aria-controls="retention-content" data-panel="retention-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Memory</button>
         <div class="panel-body panel-closed" id="retention-content">
           <div class="panel-skeleton" aria-label="Loading memory stats">
             <div class="skeleton-line"></div>
@@ -181,9 +334,20 @@
         </div>
       </div>
 
+      <!-- Skill Balance (per-modality diagnostics) -->
+      <div id="diagnostics-panel" class="panel collapsible">
+        <button class="panel-toggle" aria-expanded="false" aria-controls="diagnostics-content" data-panel="diagnostics-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Skill Balance</button>
+        <div class="panel-body panel-closed" id="diagnostics-content">
+          <div class="panel-skeleton" aria-label="Assessing skill balance">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- Session history -->
       <div id="sessions-panel" class="panel collapsible">
-        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="sessions-content" data-panel="sessions-panel"><span class="toggle-icon" aria-hidden="true">+</span> Recent Sessions</h3>
+        <button class="panel-toggle" aria-expanded="false" aria-controls="sessions-content" data-panel="sessions-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Recent Sessions</button>
         <div class="panel-body panel-closed" id="sessions-content">
           <div class="panel-skeleton" aria-label="Loading sessions">
             <div class="skeleton-line"></div>
@@ -192,22 +356,186 @@
         </div>
       </div>
 
-      <!-- Export panel -->
-      <div id="export-panel" class="panel collapsible">
-        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="export-content" data-panel="export-panel"><span class="toggle-icon" aria-hidden="true">+</span> Export</h3>
-        <div class="panel-body panel-closed" id="export-content">
-          <a href="/api/export/progress" class="export-link">Download progress (CSV)</a>
-          <a href="/api/export/sessions" class="export-link">Download sessions (CSV)</a>
-          <a href="/api/export/errors" class="export-link">Download errors (CSV)</a>
+      <!-- Account panel -->
+      <div id="account-panel" class="panel collapsible">
+        <button class="panel-toggle" aria-expanded="false" aria-controls="account-content" data-panel="account-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Account</button>
+        <div class="panel-body panel-closed" id="account-content">
+          <div class="settings-section">
+
+            <!-- Email -->
+            <div class="settings-row">
+              <span class="settings-label">Email</span>
+              <span class="settings-value" id="account-email">{{ current_user.email }}</span>
+            </div>
+
+            <!-- Password -->
+            <div class="settings-row">
+              <span class="settings-label">Password</span>
+              <span class="settings-value">
+                <button id="change-password-toggle" class="btn-secondary btn-sm" type="button">Change password</button>
+              </span>
+            </div>
+            <div id="change-password-form" class="settings-inline-form hidden">
+              <input type="password" id="cp-old" placeholder="Current password" class="input-field" autocomplete="current-password">
+              <input type="password" id="cp-new" placeholder="New password" class="input-field" autocomplete="new-password">
+              <input type="password" id="cp-confirm" placeholder="Confirm new password" class="input-field" autocomplete="new-password">
+              <div class="settings-form-actions">
+                <button id="cp-submit" class="btn-primary btn-sm" type="button">Update password</button>
+                <button id="cp-cancel" class="btn-secondary btn-sm" type="button">Cancel</button>
+              </div>
+              <div id="cp-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+
+            <!-- Subscription -->
+            <div class="settings-row">
+              <span class="settings-label">Subscription</span>
+              <span class="settings-value" id="account-tier">Loading…</span>
+            </div>
+            <div id="account-billing-row" class="settings-row hidden">
+              <span class="settings-label"></span>
+              <span class="settings-value">
+                <button id="manage-billing-btn" class="btn-secondary btn-sm" type="button">Manage Billing</button>
+              </span>
+            </div>
+            <div id="subscription-actions-row" class="settings-row hidden">
+              <span class="settings-label"></span>
+              <span class="settings-value">
+                <button id="btn-pause-sub" class="btn-secondary btn-sm" type="button">Pause subscription</button>
+                <button id="btn-cancel-sub" class="btn-secondary btn-sm btn-danger-text" type="button">Cancel subscription</button>
+              </span>
+            </div>
+            <div id="pause-sub-section" class="settings-inline-form hidden">
+              <p class="settings-hint">Pause your subscription. Your data is kept safe.</p>
+              <div class="settings-form-actions">
+                <button class="btn-secondary btn-sm" data-pause="1">1 month</button>
+                <button class="btn-secondary btn-sm" data-pause="2">2 months</button>
+                <button class="btn-secondary btn-sm" data-pause="3">3 months</button>
+                <button id="pause-cancel-btn" class="btn-secondary btn-sm" type="button">Never mind</button>
+              </div>
+              <div id="pause-sub-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+            <div id="cancel-sub-section" class="settings-inline-form hidden">
+              <p class="settings-hint">We're sorry to see you go. Could you tell us why?</p>
+              <select id="cancel-reason" class="input-field">
+                <option value="">Select a reason…</option>
+                <option value="too_expensive">Too expensive</option>
+                <option value="not_using">Not using it enough</option>
+                <option value="found_better">Found a better option</option>
+                <option value="content_gap">Missing content I need</option>
+                <option value="taking_break">Taking a break from studying</option>
+                <option value="achieved_goal">Achieved my learning goal</option>
+                <option value="other">Other</option>
+              </select>
+              <textarea id="cancel-details" class="input-field" placeholder="Any other details? (optional)" rows="2"></textarea>
+              <div class="settings-form-actions">
+                <button id="cancel-confirm-btn" class="btn-danger btn-sm" type="button">Cancel subscription</button>
+                <button id="cancel-back-btn" class="btn-secondary btn-sm" type="button">Keep subscription</button>
+              </div>
+              <div id="cancel-sub-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+
+            <!-- MFA -->
+            <div class="settings-row">
+              <span class="settings-label">Two-factor auth</span>
+              <span class="settings-value" id="account-mfa-status">Loading…</span>
+            </div>
+            <div id="mfa-setup-section" class="settings-inline-form hidden">
+              <p class="settings-hint" id="mfa-setup-instructions"></p>
+              <div id="mfa-qr-container" style="text-align:center;margin:var(--space-3) 0;"></div>
+              <p class="settings-hint" style="font-size:var(--text-xs);color:var(--color-text-faint);text-align:center;">Or enter this secret manually:</p>
+              <code id="mfa-secret-display" class="mfa-secret"></code>
+              <div id="mfa-backup-codes" class="mfa-backup hidden">
+                <p class="settings-hint">Save these backup codes somewhere safe:</p>
+                <pre id="mfa-backup-list"></pre>
+              </div>
+              <input type="text" id="mfa-verify-code" placeholder="Enter 6-digit code" class="input-field" inputmode="numeric" autocomplete="one-time-code">
+              <div class="settings-form-actions">
+                <button id="mfa-verify-btn" class="btn-primary btn-sm" type="button">Verify &amp; enable</button>
+                <button id="mfa-cancel-btn" class="btn-secondary btn-sm" type="button">Cancel</button>
+              </div>
+              <div id="mfa-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+            <div id="mfa-disable-section" class="settings-inline-form hidden">
+              <input type="text" id="mfa-disable-code" placeholder="Enter 6-digit code to disable" class="input-field" inputmode="numeric" autocomplete="one-time-code">
+              <div class="settings-form-actions">
+                <button id="mfa-disable-confirm-btn" class="btn-primary btn-sm btn-danger" type="button">Disable MFA</button>
+                <button id="mfa-disable-cancel-btn" class="btn-secondary btn-sm" type="button">Cancel</button>
+              </div>
+              <div id="mfa-disable-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+
+            <!-- Admin -->
+            {% if current_user.is_admin %}
+            <div class="settings-row">
+              <span class="settings-label">Admin</span>
+              <span class="settings-value">
+                <a href="/admin/" class="btn-secondary btn-sm" style="text-decoration:none;display:inline-block;">Dashboard</a>
+              </span>
+            </div>
+            {% endif %}
+
+            <!-- Interests -->
+            <div class="settings-row">
+              <span class="settings-label">Interests</span>
+              <span class="settings-value">
+                <button id="personalization-toggle" class="btn-secondary btn-sm" type="button">Choose topics</button>
+              </span>
+            </div>
+            <div id="personalization-section" class="settings-inline-form hidden">
+              <p class="settings-hint">Select topics that interest you. The scheduler will prioritize vocabulary from these domains.</p>
+              <div id="personalization-domains" class="personalization-domains"></div>
+              <div class="settings-form-actions">
+                <button id="personalization-save" class="btn-primary btn-sm" type="button">Save</button>
+                <button id="personalization-cancel" class="btn-secondary btn-sm" type="button">Cancel</button>
+              </div>
+              <div id="personalization-message" class="settings-message hidden" aria-live="polite"></div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="settings-row">
+              <span class="settings-label">Streak reminders</span>
+              <span class="settings-value">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-streak-reminders">
+                  <span class="toggle-slider"></span>
+                </label>
+              </span>
+            </div>
+            <div class="settings-row">
+              <span class="settings-label">Marketing emails</span>
+              <span class="settings-value">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-marketing-emails">
+                  <span class="toggle-slider"></span>
+                </label>
+              </span>
+            </div>
+
+            <!-- Data -->
+            <div class="settings-row">
+              <span class="settings-label">Your data</span>
+              <span class="settings-value">
+                <a href="/api/account/export" class="btn-secondary btn-sm">Export Data (JSON)</a>
+              </span>
+            </div>
+            <div class="settings-row settings-danger-zone">
+              <span class="settings-label">Delete account</span>
+              <span class="settings-value">
+                <button id="delete-account-btn" class="btn-danger btn-sm" type="button">Delete Account</button>
+              </span>
+            </div>
+            <div id="delete-account-message" class="settings-message hidden" aria-live="polite"></div>
+
+          </div>
         </div>
       </div>
 
       <!-- Referral panel -->
       <div id="referral-panel" class="panel collapsible">
-        <h3 role="button" tabindex="0" aria-expanded="false" aria-controls="referral-content" data-panel="referral-panel"><span class="toggle-icon" aria-hidden="true">+</span> Invite a Friend</h3>
+        <button class="panel-toggle" aria-expanded="false" aria-controls="referral-content" data-panel="referral-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Invite a Friend</button>
         <div class="panel-body panel-closed" id="referral-content">
           <div class="referral-section">
-            <p class="referral-description">Share Mandarin with friends learning Chinese. You'll both benefit.</p>
+            <p class="referral-description">Share Aelu with friends learning Chinese. You'll both benefit.</p>
             <div class="referral-link-row">
               <input type="text" id="referral-link-input" class="referral-link-input" readonly aria-label="Your referral link">
               <button id="referral-copy-btn" class="btn-secondary referral-copy-btn" aria-label="Copy referral link">Copy Link</button>
@@ -226,7 +554,15 @@
         <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
         <button id="btn-report-problem" class="dashboard-footer-link" aria-label="Report a problem">Report a Problem</button>
         <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
-        <a href="/about" class="dashboard-footer-link" aria-label="Help and about">Help</a>
+        <button id="btn-join-classroom" class="dashboard-footer-link hidden" aria-label="Join a classroom">Join Classroom</button>
+        <span id="join-classroom-sep" class="dashboard-footer-sep hidden" aria-hidden="true">&middot;</span>
+        <a href="/faq" class="dashboard-footer-link" aria-label="Help and FAQ">Help</a>
+        <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="/about" class="dashboard-footer-link" aria-label="About">About</a>
+        <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="/privacy" class="dashboard-footer-link" aria-label="Privacy policy">Privacy</a>
+        <span class="dashboard-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="/terms" class="dashboard-footer-link" aria-label="Terms of service">Terms</a>
       </div>
     </section>
 
@@ -234,7 +570,7 @@
     <div id="feedback-bar" class="feedback-bar hidden" aria-label="Feedback">
       <div class="feedback-bar-inner">
         <div id="feedback-prompt" class="feedback-prompt">
-          <span class="feedback-question">How likely are you to recommend Mandarin? </span>
+          <span class="feedback-question">How likely are you to recommend Aelu? </span>
           <div class="feedback-ratings" id="feedback-ratings">
             <!-- 1-10 buttons generated by JS -->
           </div>
@@ -245,7 +581,7 @@
           <button id="feedback-submit-btn" class="btn-primary feedback-submit-btn">Submit</button>
         </div>
         <div id="feedback-thanks" class="feedback-thanks hidden">Thank you.</div>
-        <button id="feedback-close" class="feedback-close" aria-label="Close feedback">&times;</button>
+        <button id="feedback-close" class="feedback-close" aria-label="Close feedback"><svg class="icon"><use href="#icon-close"/></svg></button>
       </div>
     </div>
 
@@ -265,13 +601,13 @@
         <div class="input-row">
           <label for="answer-input" class="sr-only">Your answer</label>
           <input type="text" id="answer-input" autocomplete="off" autofocus aria-label="Your answer">
-          <button id="btn-submit" aria-label="Submit answer">&rarr;</button>
+          <button id="btn-submit" aria-label="Submit answer"><svg class="icon"><use href="#icon-arrow-right"/></svg></button>
         </div>
         <div class="shortcuts" role="toolbar" aria-label="Quick actions">
-          <button class="btn-shortcut" data-quick="Q" aria-label="Done with session">done <kbd>Q</kbd></button>
-          <button class="btn-shortcut" data-quick="B" aria-label="Skip">skip <kbd>B</kbd></button>
-          <button class="btn-shortcut" data-quick="?" aria-label="50/50 hint">hint <kbd>?</kbd></button>
-          <button class="btn-shortcut" data-quick="N" aria-label="Unsure">unsure <kbd>N</kbd></button>
+          <button class="btn-shortcut" data-quick="B" aria-label="Skip">skip</button>
+          <button class="btn-shortcut" data-quick="?" aria-label="Hint" title="Get a hint or narrow to 2 choices (?)">hint</button>
+          <button class="btn-shortcut" data-quick="N" aria-label="Mark as unknown" title="Mark as unknown — shows the answer (N)">unknown</button>
+          <button id="btn-end-session" class="btn-shortcut btn-shortcut-end" data-quick="Q" aria-label="End session">done</button>
         </div>
       </div>
 
@@ -291,7 +627,7 @@
     <!-- Reading view -->
     <section id="reading" class="hidden" aria-label="Graded reader">
       <div class="reading-header">
-        <button id="reading-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <button id="reading-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
         <div class="reading-controls">
           <select id="reading-level" aria-label="HSK level filter">
             <option value="">All levels</option>
@@ -305,6 +641,7 @@
           <label class="toggle-label"><input type="checkbox" id="reading-translation-toggle"> Translation</label>
         </div>
       </div>
+      <div id="reading-progress-dashboard" class="reading-progress-dashboard hidden"></div>
       <div id="reading-list" class="reading-list">
         <!-- Passage list populated by JS -->
       </div>
@@ -313,20 +650,34 @@
         <div id="reading-pinyin" class="reading-pinyin hidden"></div>
         <div id="reading-translation" class="reading-translation hidden"></div>
         <div id="reading-stats" class="reading-stats"></div>
+        <div id="reading-questions" class="reading-questions hidden"></div>
+        <div id="reading-comments" class="reading-comments hidden"></div>
         <div class="reading-nav">
-          <button id="reading-prev" class="btn-secondary" disabled>&larr; Previous</button>
-          <button id="reading-next" class="btn-secondary">Next &rarr;</button>
+          <button id="reading-prev" class="btn-secondary" disabled><svg class="icon"><use href="#icon-arrow-left"/></svg> Previous</button>
+          <button id="reading-next" class="btn-secondary">Next <svg class="icon"><use href="#icon-arrow-right"/></svg></button>
         </div>
       </div>
       <div id="reading-gloss" class="reading-gloss hidden" role="tooltip"></div>
+
+      <!-- Analyze Text — user-importable content -->
+      <div id="reading-analyze" class="reading-analyze">
+        <button id="reading-analyze-toggle" class="btn-link btn-sm" type="button" aria-expanded="false" aria-controls="reading-analyze-panel">Analyze your own text</button>
+        <div id="reading-analyze-panel" class="reading-analyze-panel hidden">
+          <textarea id="analyze-input" class="analyze-input" rows="4" placeholder="Paste Chinese text here..." aria-label="Chinese text to analyze"></textarea>
+          <button id="analyze-submit" class="btn-secondary">Analyze</button>
+          <div id="analyze-results" class="analyze-results hidden"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Media view -->
     <section id="media" class="hidden" aria-label="Media shelf">
       <div class="media-header">
-        <button id="media-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <button id="media-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
         <h2>Media Shelf</h2>
       </div>
+      <div id="media-stats-dashboard" class="media-stats-dashboard hidden"></div>
+      <div id="media-type-chips" class="media-type-chips"></div>
       <div id="media-grid" class="media-grid">
         <!-- Recommendation cards populated by JS -->
       </div>
@@ -339,10 +690,12 @@
     <!-- Media comprehension quiz -->
     <section id="media-quiz" class="hidden" aria-label="Media comprehension quiz">
       <div class="media-quiz-header">
-        <button id="media-quiz-back" class="btn-secondary btn-back-nav" aria-label="Back to media shelf">&larr; Back</button>
+        <button id="media-quiz-back" class="btn-secondary btn-back-nav" aria-label="Back to media shelf"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
         <h2 id="media-quiz-title"></h2>
       </div>
+      <div id="media-quiz-source" class="media-quiz-source hidden"></div>
       <div id="media-quiz-vocab" class="media-quiz-vocab"></div>
+      <div id="media-quiz-passage" class="media-quiz-passage hidden"></div>
       <div id="media-quiz-questions" class="media-quiz-questions"></div>
       <div id="media-quiz-result" class="media-quiz-result hidden"></div>
       <div id="media-quiz-cultural" class="media-quiz-cultural hidden"></div>
@@ -351,7 +704,7 @@
     <!-- Listening view -->
     <section id="listening" class="hidden" aria-label="Listening practice">
       <div class="listening-header">
-        <button id="listening-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard">&larr; Back</button>
+        <button id="listening-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
         <div class="listening-controls">
           <select id="listening-level" aria-label="HSK level filter">
             <option value="">All levels</option>
@@ -362,15 +715,22 @@
           <div class="speed-control">
             <label for="listening-speed">Speed:</label>
             <select id="listening-speed">
-              <option value="0.7">0.7x</option>
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
               <option value="1.0" selected>1.0x</option>
-              <option value="1.2">1.2x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
             </select>
           </div>
         </div>
       </div>
+      <div id="listening-stats" class="listening-stats hidden"></div>
       <div id="listening-content" class="listening-content">
         <div id="listening-title" class="listening-title"></div>
+        <div class="listening-mode-tabs">
+          <button id="listening-mode-listen" class="listening-mode-tab active" data-mode="listen">Listen</button>
+          <button id="listening-mode-dictation" class="listening-mode-tab" data-mode="dictation">Dictation</button>
+        </div>
         <div class="listening-actions">
           <button id="listening-play" class="btn-primary">Play</button>
           <button id="listening-replay" class="btn-secondary hidden">Play Again</button>
@@ -380,19 +740,177 @@
         </div>
         <button id="listening-reveal" class="btn-secondary hidden">Show Transcript</button>
         <div id="listening-questions" class="listening-questions hidden"></div>
+        <!-- Dictation mode UI -->
+        <div id="listening-dictation-area" class="listening-dictation-area hidden">
+          <p class="dictation-instruction">Listen to the passage, then type what you heard.</p>
+          <textarea id="dictation-input" class="dictation-input" rows="4" placeholder="Type what you heard in Chinese..." aria-label="Dictation input"></textarea>
+          <button id="dictation-check" class="btn-primary">Check</button>
+          <div id="dictation-result" class="dictation-result hidden"></div>
+        </div>
         <button id="listening-new" class="btn-secondary">New Passage</button>
       </div>
       <div id="listening-gloss" class="reading-gloss hidden" role="tooltip"></div>
     </section>
+
+    <!-- Grammar view -->
+    <section id="grammar" class="hidden" aria-label="Grammar study">
+      <div class="grammar-header">
+        <button id="grammar-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
+        <h2>Grammar</h2>
+      </div>
+      <div class="grammar-level-tabs" id="grammar-level-tabs" role="tablist" aria-label="HSK level filter">
+        <!-- Tabs generated dynamically from /api/grammar/levels -->
+      </div>
+      <div id="grammar-mastery-summary" class="grammar-mastery-summary"></div>
+      <div id="grammar-list" class="grammar-list">
+        <!-- Grammar cards populated by JS -->
+      </div>
+      <div id="grammar-lesson" class="grammar-lesson hidden">
+        <button id="grammar-lesson-back" class="btn-secondary btn-back-nav"><svg class="icon"><use href="#icon-arrow-left"/></svg> All Points</button>
+        <div id="grammar-lesson-content"></div>
+      </div>
+    </section>
+
+    <!-- Teacher dashboard view -->
+    <section id="teacher-dashboard" class="hidden" aria-label="Teacher dashboard">
+      <div class="teacher-header">
+        <button id="teacher-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
+        <h2>My Classes</h2>
+      </div>
+      <div class="teacher-actions">
+        <button id="teacher-create-class" class="btn-primary">Create Class</button>
+      </div>
+      <div id="teacher-create-form" class="teacher-create-form hidden">
+        <div class="field">
+          <label for="new-class-name">Class Name</label>
+          <input type="text" id="new-class-name" placeholder="e.g. HSK 2 — Spring 2026" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="new-class-desc">Description (optional)</label>
+          <input type="text" id="new-class-desc" placeholder="Brief description" maxlength="250">
+        </div>
+        <div class="teacher-create-btns">
+          <button id="teacher-create-submit" class="btn-primary">Create</button>
+          <button id="teacher-create-cancel" class="btn-secondary">Cancel</button>
+        </div>
+      </div>
+      <div id="teacher-class-list" class="teacher-class-list">
+        <!-- Class cards populated by JS -->
+      </div>
+      <!-- Class detail view (students + analytics) -->
+      <div id="teacher-class-detail" class="teacher-class-detail hidden">
+        <div class="class-detail-header">
+          <button id="class-detail-back" class="btn-secondary btn-back-nav"><svg class="icon"><use href="#icon-arrow-left"/></svg> All Classes</button>
+          <h3 id="class-detail-name"></h3>
+          <div id="class-detail-code" class="class-code-display"></div>
+        </div>
+        <div class="class-detail-tabs">
+          <button class="class-tab active" data-tab="students">Students</button>
+          <button class="class-tab" data-tab="analytics">Analytics</button>
+          <button class="class-tab" data-tab="invite">Invite</button>
+        </div>
+        <div id="class-tab-students" class="class-tab-content">
+          <div id="class-student-table" class="class-student-table"></div>
+        </div>
+        <div id="class-tab-analytics" class="class-tab-content hidden">
+          <div id="class-analytics" class="class-analytics"></div>
+        </div>
+        <div id="class-tab-invite" class="class-tab-content hidden">
+          <div class="invite-section">
+            <p>Share this code with students:</p>
+            <div class="invite-code-row">
+              <span id="invite-code-display" class="invite-code-big"></span>
+              <button id="invite-code-copy" class="btn-secondary">Copy</button>
+            </div>
+            <div class="invite-bulk-section">
+              <h4>Bulk Invite by Email</h4>
+              <textarea id="invite-emails" rows="3" placeholder="Enter emails, one per line"></textarea>
+              <button id="invite-bulk-send" class="btn-primary">Send Invitations</button>
+              <div id="invite-bulk-status" class="hidden"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Student detail panel -->
+        <div id="student-detail-panel" class="student-detail-panel hidden">
+          <button id="student-detail-close" class="btn-secondary btn-back-nav"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back to Roster</button>
+          <div id="student-detail-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Join classroom view (for students) -->
+    <div id="join-classroom-modal" class="join-classroom-modal hidden">
+      <div class="join-classroom-inner">
+        <h3>Join a Classroom</h3>
+        <p>Enter the class code provided by your teacher.</p>
+        <div class="field">
+          <input type="text" id="join-class-code" placeholder="Class code" maxlength="20">
+        </div>
+        <div id="join-class-status" class="hidden"></div>
+        <div class="join-classroom-btns">
+          <button id="join-class-submit" class="btn-primary">Join</button>
+          <button id="join-class-cancel" class="btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Global tooltip for mastery bars -->
   <div id="mastery-tooltip" class="mastery-tooltip" aria-hidden="true"></div>
 
+  <noscript><div style="padding:2rem;text-align:center;font-family:sans-serif;">Aelu requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+  <script nonce="{{ csp_nonce }}">
+    (function(){
+      if (typeof fetch === 'undefined' || typeof Promise === 'undefined' || typeof CSS === 'undefined' || typeof CSS.supports !== 'function') {
+        document.getElementById('app').innerHTML = '<div style="padding:3rem;text-align:center;font-family:sans-serif;max-width:480px;margin:0 auto;">'
+          + '<h2 style="margin-bottom:1rem;">Browser not supported</h2>'
+          + '<p>Aelu requires a modern browser. Please use a recent version of Chrome, Firefox, Safari, or Edge.</p></div>';
+        throw new Error('unsupported browser');
+      }
+    })();
+  </script>
+  <script nonce="{{ csp_nonce }}">window.IS_PRODUCTION={{ is_production|tojson }};window.AELU_CANONICAL_URL={{ canonical_url|tojson }};window.AELU_PRICING={{ pricing_display|tojson }};</script>
+  <script src="/static/offline-queue.js?v={{ static_hash('offline-queue.js') }}" defer></script>
+  <script src="/static/capacitor-bridge.js?v={{ static_hash('capacitor-bridge.js') }}" defer></script>
   <script src="/static/app.js?v={{ static_hash('app.js') }}" defer></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/static/sw.js').catch(function() {});
+  <!-- Global gloss tooltip — outside all sections so it works from any view -->
+  <div id="global-gloss" class="reading-gloss hidden" role="tooltip"></div>
+
+  <!-- SW update banner (hidden by default, shown when a new version is waiting) -->
+  <div id="sw-update-banner" class="hidden" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--color-accent,#3A7C7E);color:#fff;padding:0.6rem 1.2rem;border-radius:8px;font-size:0.85rem;z-index:9999;display:flex;align-items:center;gap:0.8rem;box-shadow:0 2px 12px rgba(0,0,0,0.2);">
+    <span>A new version is available.</span>
+    <button onclick="if(window._swRegistration&&window._swRegistration.waiting){window._swRegistration.waiting.postMessage({type:'SKIP_WAITING'})}" style="background:#fff;color:var(--color-accent,#3A7C7E);border:none;padding:0.3rem 0.8rem;border-radius:4px;cursor:pointer;font-weight:600;font-size:0.85rem;">Reload</button>
+  </div>
+
+  <script nonce="{{ csp_nonce }}">
+    if ('serviceWorker' in navigator && !(window.Capacitor)) {
+      navigator.serviceWorker.register('/static/sw.js').then(function(reg) {
+        /* Check for updates every 60 minutes */
+        setInterval(function() { reg.update(); }, 60 * 60 * 1000);
+        /* Detect when a new SW is waiting */
+        function onWaiting() {
+          var banner = document.getElementById('sw-update-banner');
+          if (banner) banner.classList.remove('hidden');
+        }
+        if (reg.waiting) { onWaiting(); }
+        reg.addEventListener('updatefound', function() {
+          var newSW = reg.installing;
+          if (newSW) {
+            newSW.addEventListener('statechange', function() {
+              if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+                onWaiting();
+              }
+            });
+          }
+        });
+        /* Reload on controller change (new SW activated) */
+        var refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (!refreshing) { refreshing = true; location.reload(); }
+        });
+        /* Expose for the reload button */
+        window._swRegistration = reg;
+      }).catch(function() {});
     }
   </script>
 </body>

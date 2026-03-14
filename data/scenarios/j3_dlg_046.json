@@ -1,0 +1,87 @@
+{
+    "title": "Sharing an Umbrella in the Rain",
+    "title_zh": "雨中同行",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're caught in the rain without an umbrella. A kind stranger offers to share theirs as you both walk toward the subway station.",
+        "setup_zh": "你被雨淋到了，没有伞。一个好心的陌生人让你和他一起撑伞走向地铁站。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你没带伞吧？来，一起走吧，地铁站就在前面。",
+                "text_pinyin": "Nǐ méi dài sǎn ba? Lái, yīqǐ zǒu ba, dìtiě zhàn jiù zài qiánmiàn.",
+                "text_en": "You don't have an umbrella, right? Come, let's walk together — the subway station is just ahead."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept the kind offer.",
+                "options": [
+                    {
+                        "text_zh": "太谢谢了！今天出门的时候还是晴天呢。你真好心。",
+                        "text_pinyin": "Tài xièxie le! Jīntiān chūmén de shíhou háishi qíngtiān ne. Nǐ zhēn hǎoxīn.",
+                        "text_en": "Thank you so much! It was sunny when I left home. You're very kind.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Grateful and opens a conversation naturally."
+                    },
+                    {
+                        "text_zh": "谢谢。",
+                        "text_pinyin": "Xièxie.",
+                        "text_en": "Thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief."
+                    },
+                    {
+                        "text_zh": "没关系，我不怕雨。",
+                        "text_pinyin": "Méi guānxi, wǒ bú pà yǔ.",
+                        "text_en": "It's fine, I don't mind rain.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Refuses kindness."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "天气预报说今天下午会下雨，所以我出门就带了伞。你在这边工作吗？",
+                "text_pinyin": "Tiānqì yùbào shuō jīntiān xiàwǔ huì xià yǔ, suǒyǐ wǒ chūmén jiù dài le sǎn. Nǐ zài zhè biān gōngzuò ma?",
+                "text_en": "The forecast said rain this afternoon, so I brought my umbrella. Do you work around here?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Chat while walking together.",
+                "options": [
+                    {
+                        "text_zh": "嗯，在前面那栋楼上班。以后我要多看天气预报了！你也在这附近上班吗？",
+                        "text_pinyin": "En, zài qiánmiàn nà dòng lóu shàngbān. Yǐhòu wǒ yào duō kàn tiānqì yùbào le! Nǐ yě zài zhè fùjìn shàngbān ma?",
+                        "text_en": "Yeah, in that building up ahead. I should check the forecast more! Do you work nearby too?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Conversational and self-deprecating — builds rapport."
+                    },
+                    {
+                        "text_zh": "嗯。",
+                        "text_pinyin": "En.",
+                        "text_en": "Yeah.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Barely engaging with a kind stranger."
+                    },
+                    {
+                        "text_zh": "到了，谢谢！",
+                        "text_pinyin": "Dào le, xièxie!",
+                        "text_en": "We're here, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Ends early."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing an umbrella with a stranger is a beautiful everyday act of kindness in China. Brief conversations with strangers during these moments often feel unexpectedly warm and human."
+    },
+    "hsk_level": 3
+}

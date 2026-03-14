@@ -1,0 +1,94 @@
+{
+    "title": "The Study Buddy",
+    "title_zh": "学习伙伴",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_school_1_01_v0",
+    "tree": {
+        "setup": "The campus library cafe, late afternoon. Xiao Ming sits across from you with three different colored highlighters arranged by length. He has a system for studying that involves color-coding everything, including his snacks. He's looking for someone to practice Chinese with.",
+        "setup_zh": "校园图书馆的咖啡角，下午晚些时候。小明坐在你对面，三支不同颜色的荧光笔按长短排好。他学习有一套系统——什么都要用颜色分类，连零食也是。他在找人一起练中文。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "嗨！你也在学中文吗？",
+                "text_pinyin": "hāi! nǐ yě zài xué zhōngwén ma?",
+                "text_en": "Hey! Are you studying Chinese too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him about your Chinese studies.",
+                "options": [
+                    {
+                        "text_zh": "是的，我在学中文。",
+                        "text_pinyin": "shì de, wǒ zài xué zhōngwén.",
+                        "text_en": "Yes, I'm studying Chinese.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ming beams and immediately slides a green highlighter across the table -- a peace offering, apparently. 在 + verb shows an action in progress."
+                    },
+                    {
+                        "text_zh": "我是学生。",
+                        "text_pinyin": "wǒ shì xuéshēng.",
+                        "text_en": "I'm a student.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "True, and grammatically solid. Xiao Ming nods and tries again:「学什么？」He really wants to know if you're in his Chinese class."
+                    },
+                    {
+                        "text_zh": "中文很难。",
+                        "text_pinyin": "zhōngwén hěn nán.",
+                        "text_en": "Chinese is hard.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ming looks at you with the deep understanding of someone who once cried over the character for 'turtle.' He gets it. 很难 (hěn nán) means 'very difficult.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！我们一起学，好不好？",
+                "text_pinyin": "tài hǎo le! wǒmen yìqǐ xué, hǎo bu hǎo?",
+                "text_en": "Great! Let's study together, OK?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his invitation.",
+                "options": [
+                    {
+                        "text_zh": "好的！",
+                        "text_pinyin": "hǎo de!",
+                        "text_en": "OK!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ming opens his notebook to reveal the most meticulously organized vocabulary list you've ever seen. Each word has its own tiny box. You're in good hands."
+                    },
+                    {
+                        "text_zh": "什么时候？",
+                        "text_pinyin": "shénme shíhou?",
+                        "text_en": "When?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Practical. Xiao Ming pulls out a color-coded schedule. Tuesday and Thursday are green, which means 'Chinese practice.' Obviously. 什么时候 is essential for making plans."
+                    },
+                    {
+                        "text_zh": "我没有时间。",
+                        "text_pinyin": "wǒ méiyǒu shíjiān.",
+                        "text_en": "I don't have time.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ming's face falls, but he carefully highlights your name in yellow on his 'maybe later' list. 没有 negates 有 -- you'll use this pattern constantly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！明天下午三点，在这里？",
+                "text_pinyin": "hǎo! míngtiān xiàwǔ sān diǎn, zài zhèlǐ?",
+                "text_en": "OK! Tomorrow at 3 PM, here?"
+            }
+        ],
+        "cultural_note": "Study groups (学习小组, xuéxí xiǎozǔ) are very common in Chinese schools. Students often form close bonds through shared study, and helping each other is seen as a virtue rather than a shortcut."
+    }
+}

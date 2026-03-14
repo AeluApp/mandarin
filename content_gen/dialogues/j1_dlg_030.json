@@ -1,0 +1,87 @@
+{
+    "title": "Flowers at the Market",
+    "title_zh": "菜市场的花",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're at the morning market and notice a flower stall. The seller is arranging bouquets.",
+        "setup_zh": "你在早市上看到一个花摊。卖花的人在整理花束。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！想买花吗？今天的花很新鲜。",
+                "text_pinyin": "Nǐ hǎo! Xiǎng mǎi huā ma? Jīntiān de huā hěn xīnxiān.",
+                "text_en": "Hello! Want to buy flowers? Today's flowers are very fresh."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the flower seller.",
+                "options": [
+                    {
+                        "text_zh": "好漂亮！这些是什么花？",
+                        "text_pinyin": "Hǎo piàoliang! Zhèxiē shì shénme huā?",
+                        "text_en": "So beautiful! What kind of flowers are these?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Responds to the fresh flowers with genuine curiosity -- she said they're fresh today and you want to know more."
+                    },
+                    {
+                        "text_zh": "我看看。很好看。",
+                        "text_pinyin": "Wǒ kànkan. Hěn hǎokàn.",
+                        "text_en": "Let me look. Very pretty.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Shows interest but doesn't ask anything -- she's ready to tell you about the flowers."
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "Duōshǎo qián?",
+                        "text_en": "How much?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Jumps straight to price when she proudly told you the flowers are fresh today -- no appreciation for what she's offering."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这些是百合花。你可以买几枝回家，放在桌子上很好看。",
+                "text_pinyin": "Zhèxiē shì bǎihé huā. Nǐ kěyǐ mǎi jǐ zhī huí jiā, fàng zài zhuōzi shàng hěn hǎokàn.",
+                "text_en": "These are lilies. You can buy a few to take home — they look lovely on a table."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide whether to buy.",
+                "options": [
+                    {
+                        "text_zh": "好，我买三枝。多少钱？",
+                        "text_pinyin": "Hǎo, wǒ mǎi sān zhī. Duōshao qián?",
+                        "text_en": "Okay, I'll buy three. How much?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Decides to buy after hearing her description of lilies on a table -- follows her suggestion naturally."
+                    },
+                    {
+                        "text_zh": "百合花，好看。我买一枝吧。",
+                        "text_pinyin": "Bǎihé huā, hǎokàn. Wǒ mǎi yī zhī ba.",
+                        "text_en": "Lilies, pretty. I'll buy one.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Buys but only one -- she suggested a few for the table and you went minimal."
+                    },
+                    {
+                        "text_zh": "我家的桌子很小。",
+                        "text_pinyin": "Wǒ jiā de zhuōzi hěn xiǎo.",
+                        "text_en": "My table at home is small.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She pictured lilies on your table and you responded with a reason they might not fit -- deflates her sales pitch."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Morning wet markets (菜市场) in China often have flower stalls alongside vegetables and meat. Buying fresh flowers for the home is an affordable daily pleasure, not reserved for special occasions. Lilies (百合) symbolize harmony."
+    }
+}

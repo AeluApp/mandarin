@@ -1,0 +1,130 @@
+{
+    "title": "The Dentist Who Remembers Everything",
+    "title_zh": "记忆力超强的牙医",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_3_00_v0",
+    "tree": {
+        "setup": "You're calling Dr. Qiu's dental clinic to make an appointment. The receptionist, Xiao Ning, has an extraordinary memory -- she remembers every patient's last visit, which tooth was treated, and whether they flossed enough. She answers the phone on the first ring, as if she was waiting specifically for your call.",
+        "setup_zh": "你打电话给邱医生的牙科诊所预约。接线员小宁记忆力惊人——她记得每个病人上次来的时间、治了哪颗牙、有没有好好用牙线。电话响了一声她就接了，好像专门在等你的电话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "邱医生牙科，您好！请问您是新病人还是老病人？",
+                "text_pinyin": "qiū yīshēng yákē, nín hǎo! qǐngwèn nín shì xīn bìngrén háishi lǎo bìngrén?",
+                "text_en": "Dr. Qiu's Dental, hello! Are you a new or returning patient?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you're a new patient and need an appointment.",
+                "options": [
+                    {
+                        "text_zh": "您好，我是新病人。我想预约一个时间看牙。",
+                        "text_pinyin": "nín hǎo, wǒ shì xīn bìngrén. wǒ xiǎng yùyuē yí gè shíjiān kàn yá.",
+                        "text_en": "Hello, I'm a new patient. I'd like to make an appointment for a dental visit.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Ning's keyboard clicks rapidly.「好的，新病人！欢迎欢迎。我先帮您登记一下。」预约 is 'make an appointment.' Clear and complete."
+                    },
+                    {
+                        "text_zh": "我牙疼，想尽快看医生。",
+                        "text_pinyin": "wǒ yá téng, xiǎng jǐnkuài kàn yīshēng.",
+                        "text_en": "I have a toothache, I want to see the doctor as soon as possible.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Ning's tone shifts to concern.「牙疼可不能等！我看看今天下午有没有空。」尽快 means 'as soon as possible' -- urgency communicated perfectly."
+                    },
+                    {
+                        "text_zh": "我需要看牙。什么时候有空？",
+                        "text_pinyin": "wǒ xūyào kàn yá. shénme shíhou yǒu kòng?",
+                        "text_en": "I need to see a dentist. When is there availability?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ning checks the schedule.「这周四下午和周五上午都有。」什么时候有空 works, though adding whether you're a new patient helps her prepare the right paperwork."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这周四下午三点有一个空位，或者下周一上午十点。您方便哪个时间？",
+                "text_pinyin": "zhè zhōusì xiàwǔ sān diǎn yǒu yí gè kòngwèi, huòzhě xià zhōuyī shàngwǔ shí diǎn. nín fāngbiàn nǎ ge shíjiān?",
+                "text_en": "There's an opening this Thursday at 3 PM, or next Monday at 10 AM. Which time works for you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a time and confirm.",
+                "options": [
+                    {
+                        "text_zh": "周四下午三点可以。我需要带什么证件吗？",
+                        "text_pinyin": "zhōusì xiàwǔ sān diǎn kěyǐ. wǒ xūyào dài shénme zhèngjiàn ma?",
+                        "text_en": "Thursday at 3 PM works. Do I need to bring any documents?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「带身份证或者护照就行。如果有以前的病历也带上。」Xiao Ning sounds impressed by your preparation. 证件 means 'identification documents.' 病历 is 'medical records.'"
+                    },
+                    {
+                        "text_zh": "下周一吧。三点太早了，我下午要上班。",
+                        "text_pinyin": "xià zhōuyī ba. sān diǎn tài zǎo le, wǒ xiàwǔ yào shàngbān.",
+                        "text_en": "Next Monday then. 3 PM is too early, I have work in the afternoon.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「好，下周一上午十点。记得提前十五分钟来填表。」She pauses.「三点太早？」She sounds puzzled but lets it go. Explaining your schedule conflict is practical."
+                    },
+                    {
+                        "text_zh": "都可以。你觉得哪个时间比较好？",
+                        "text_pinyin": "dōu kěyǐ. nǐ juéde nǎ ge shíjiān bǐjiào hǎo?",
+                        "text_en": "Either works. Which time do you think is better?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Ning considers this seriously.「周四吧，邱医生周四心情比较好。」She says this with complete sincerity. 比较好 means 'relatively better.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，帮您预约好了。请问您贵姓？电话号码方便留一个吗？",
+                "text_pinyin": "hǎo de, bāng nín yùyuē hǎo le. qǐngwèn nín guì xìng? diànhuà hàomǎ fāngbiàn liú yí gè ma?",
+                "text_en": "OK, I've booked it for you. May I have your surname? And could you leave a phone number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give your name and number.",
+                "options": [
+                    {
+                        "text_zh": "我姓王。手机号是一三八零零五五六七八九。",
+                        "text_pinyin": "wǒ xìng wáng. shǒujī hào shì yāo sān bā líng líng wǔ wǔ liù qī bā jiǔ.",
+                        "text_en": "My surname is Wang. My mobile number is 13800556789.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「王先生/女士，记下了。周四见！」In China, phone numbers use 幺 (yāo) for 1 to avoid confusion with 七 (qī). Xiao Ning repeats the number back perfectly."
+                    },
+                    {
+                        "text_zh": "我叫王明。号码我发短信给你吧？",
+                        "text_pinyin": "wǒ jiào wáng míng. hàomǎ wǒ fā duǎnxìn gěi nǐ ba?",
+                        "text_en": "I'm Wang Ming. Can I text you the number?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「可以，我们的号码是这个——」She gives you the clinic number. 发短信 means 'send a text.' Modern and practical, though giving it by phone is faster."
+                    },
+                    {
+                        "text_zh": "王。电话号码现在不方便说，到了再给你。",
+                        "text_pinyin": "wáng. diànhuà hàomǎ xiànzài bù fāngbiàn shuō, dào le zài gěi nǐ.",
+                        "text_en": "Wang. I can't give the number right now, I'll give it when I arrive.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Ning pauses.「好吧……但是万一需要通知您改时间的话……」She trails off. Clinics need a contact number for schedule changes. 不方便 means 'not convenient.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！那我们周四见。记得提前十五分钟到，要填一张新病人的表格。",
+                "text_pinyin": "hǎo de! nà wǒmen zhōusì jiàn. jìde tíqián shíwǔ fēnzhōng dào, yào tián yì zhāng xīn bìngrén de biǎogé.",
+                "text_en": "OK! See you Thursday then. Remember to arrive 15 minutes early to fill out the new patient form."
+            }
+        ],
+        "cultural_note": "When making appointments by phone in China, always state whether you're a new or returning patient (新病人/老病人). Phone numbers are read digit by digit, with 1 pronounced as 幺 (yāo) to avoid confusion. 贵姓 (guì xìng) is the polite way to ask someone's surname."
+    }
+}

@@ -1,0 +1,160 @@
+{
+    "title": "The Study Group Symphony",
+    "title_zh": "学习小组交响曲",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_school_5_01_v0",
+    "tree": {
+        "setup": "A corner table in the campus library, surrounded by the quiet industry of exam season. Your study group for the Advanced Economics final consists of four people with four different study methods: Xiao Wu memorizes everything, Xiao Li makes mind maps, you prefer practice problems, and Ah Jie hasn't opened the textbook yet but claims he'll be fine because he「pays attention in class.」The exam is in five days.",
+        "setup_zh": "校园图书馆角落的桌子，被考试季安静的勤奋气氛包围着。你们高级经济学期末考的学习小组有四个人、四种学习方法：小吴什么都背、小李画思维导图、你偏爱做练习题、阿杰还没翻过课本但声称他「上课认真听了」所以没问题。离考试还有五天。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好了大家，还有五天。我觉得我们应该先把重点章节列出来，然后分工复习。谁先说说想法？",
+                "text_pinyin": "hǎo le dàjiā, hái yǒu wǔ tiān. wǒ juéde wǒmen yīnggāi xiān bǎ zhòngdiǎn zhāngjié liè chūlái, ránhòu fēngōng fùxí. shuí xiān shuō shuō xiǎngfǎ?",
+                "text_en": "OK everyone, five days left. I think we should list the key chapters first, then divide the review. Who wants to share ideas?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Propose a study plan.",
+                "options": [
+                    {
+                        "text_zh": "我觉得可以这样：前三天每个人负责两个章节，把重点整理出来分享给大家。第四天一起做往年真题，第五天查漏补缺。至于怎么分章节，我们按各自擅长的领域来分比较好。",
+                        "text_pinyin": "wǒ juéde kěyǐ zhèyàng: qián sān tiān měi gè rén fùzé liǎng gè zhāngjié, bǎ zhòngdiǎn zhěnglǐ chūlái fēnxiǎng gěi dàjiā. dì sì tiān yìqǐ zuò wǎngnián zhēntí, dì wǔ tiān chálòubǔquē. zhìyú zěnme fēn zhāngjié, wǒmen àn gèzì shàncháng de lǐngyù lái fēn bǐjiào hǎo.",
+                        "text_en": "I think we could do this: first three days, each person covers two chapters and shares notes with everyone. Day four, we do past exams together. Day five, fill in the gaps. For chapter assignments, let's divide by our strengths.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "A five-day roadmap with division of labor — Xiao Wu is already reaching for her highlighter. Even Ah Jie seems slightly motivated."
+                    },
+                    {
+                        "text_zh": "先做真题吧，看看考什么再复习。",
+                        "text_pinyin": "xiān zuò zhēntí ba, kàn kan kǎo shénme zài fùxí.",
+                        "text_en": "Let's start with past exams to see what's tested, then review.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "A valid strategy, though some prefer to review before testing themselves."
+                    },
+                    {
+                        "text_zh": "五天够了吗？我觉得不太够。",
+                        "text_pinyin": "wǔ tiān gòu le ma? wǒ juéde bú tài gòu.",
+                        "text_en": "Is five days enough? I don't think so.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ah Jie gives you a look.「别吓人了，」he says. The time is what it is."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个方案不错。那章节怎么分？宏观经济学部分我比较熟，我可以负责第三和第四章。阿杰，你呢？你擅长哪部分？",
+                "text_pinyin": "zhège fāng'àn búcuò. nà zhāngjié zěnme fēn? hóngguān jīngjìxué bùfen wǒ bǐjiào shú, wǒ kěyǐ fùzé dì sān hé dì sì zhāng. Ā Jié, nǐ ne? nǐ shàncháng nǎ bùfen?",
+                "text_en": "This plan is good. So how do we divide chapters? I'm familiar with the macroeconomics section — I'll take chapters 3 and 4. Ah Jie, what about you? Which section are you strong in?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Help assign chapters and manage Ah Jie.",
+                "options": [
+                    {
+                        "text_zh": "我来负责微观经济学的第一和第二章吧，这部分我做过很多练习题。小李，你擅长国际贸易那块吧？第七第八章给你。阿杰，剩下的第五第六章是货币政策和财政政策，这两章上课的时候你不是说特别感兴趣吗？",
+                        "text_pinyin": "wǒ lái fùzé wēiguān jīngjìxué de dì yī hé dì èr zhāng ba, zhè bùfen wǒ zuò guò hěn duō liànxí tí. Xiǎo Lǐ, nǐ shàncháng guójì màoyì nà kuài ba? dì qī dì bā zhāng gěi nǐ. Ā Jié, shèng xia de dì wǔ dì liù zhāng shì huòbì zhèngcè hé cáizhèng zhèngcè, zhè liǎng zhāng shàngkè de shíhòu nǐ búshì shuō tèbié gǎn xìngqù ma?",
+                        "text_en": "I'll take chapters 1 and 2 on microeconomics — I've done lots of practice problems on those. Xiao Li, you're good at international trade, right? Chapters 7 and 8 are yours. Ah Jie, the remaining chapters 5 and 6 are monetary and fiscal policy — didn't you say those were really interesting in class?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Assigning Ah Jie chapters he supposedly found interesting — a diplomatic masterstroke. He can't refuse without admitting he wasn't paying attention in class after all."
+                    },
+                    {
+                        "text_zh": "阿杰随便选两章吧。我选第一第二章。",
+                        "text_pinyin": "Ā Jié suíbiàn xuǎn liǎng zhāng ba. wǒ xuǎn dì yī dì èr zhāng.",
+                        "text_en": "Ah Jie can pick any two chapters. I'll take 1 and 2.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Letting Ah Jie choose freely is a gamble — he'll pick whichever chapters look shortest."
+                    },
+                    {
+                        "text_zh": "阿杰你真的没看过课本吗？",
+                        "text_pinyin": "Ā Jié nǐ zhēn de méi kàn guò kèběn ma?",
+                        "text_en": "Ah Jie, you really haven't looked at the textbook?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Calling out Ah Jie in front of the group — his smile doesn't waver but a small crack appears. Study groups work best when embarrassment stays private."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，分工定了。那整理笔记的格式统一一下吧？要不然每个人整理的格式都不一样，看起来很乱。用什么格式好？",
+                "text_pinyin": "hǎo, fēngōng dìng le. nà zhěnglǐ bǐjì de géshì tǒngyī yíxià ba? yào bùrán měi gè rén zhěnglǐ de géshì dōu bù yíyàng, kàn qǐlái hěn luàn. yòng shénme géshì hǎo?",
+                "text_en": "OK, assignments are set. Let's standardize the notes format? Otherwise everyone's notes will look different and be confusing. What format should we use?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Suggest a format for shared notes.",
+                "options": [
+                    {
+                        "text_zh": "我建议每个章节用这个格式：先列核心概念和定义，然后写关键公式，最后加两三道典型例题和解题思路。都用共享文档写，这样大家随时可以看和补充。每人最晚后天晚上传完。",
+                        "text_pinyin": "wǒ jiànyì měi gè zhāngjié yòng zhège géshì: xiān liè héxīn gàiniàn hé dìngyì, ránhòu xiě guānjiàn gōngshì, zuìhòu jiā liǎng sān dào diǎnxíng lìtí hé jiětí sīlù. dōu yòng gòngxiǎng wéndàng xiě, zhèyàng dàjiā suíshí kěyǐ kàn hé bǔchōng. měi rén zuì wǎn hòutiān wǎnshàng chuán wán.",
+                        "text_en": "I suggest this format for each chapter: list core concepts and definitions first, then key formulas, then add two or three typical problems with solution approaches. Use a shared document so everyone can view and add to it. Everyone uploads by the day after tomorrow evening at the latest.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Structure, platform, and deadline — the study group has just become a well-oiled machine. Even Ah Jie is nodding, though his expression suggests he's calculating exactly how late he can upload."
+                    },
+                    {
+                        "text_zh": "随便什么格式都行，重要的是内容。",
+                        "text_pinyin": "suíbiàn shénme géshì dōu xíng, zhòngyào de shì nèiróng.",
+                        "text_en": "Any format is fine — content matters more.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Philosophically true, practically chaotic. Four different formats will arrive."
+                    },
+                    {
+                        "text_zh": "谁有上届学长的笔记？直接用他们的不就好了？",
+                        "text_pinyin": "shuí yǒu shàng jiè xuézhǎng de bǐjì? zhíjiē yòng tāmen de bú jiù hǎo le?",
+                        "text_en": "Anyone have notes from last year's seniors? Can't we just use those?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Professor Lin's calligraphy echoes from across campus:「学而不思则罔。」Borrowed notes are not the same as understanding."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "共享文档的主意好。那后天晚上大家检查一下彼此的笔记，有问题可以互相纠正。第四天做真题的时候，我们计时做，然后互相批改。这样更接近考试状态。",
+                "text_pinyin": "gòngxiǎng wéndàng de zhǔyi hǎo. nà hòutiān wǎnshàng dàjiā jiǎnchá yíxià bǐcǐ de bǐjì, yǒu wèntí kěyǐ hùxiāng jiūzhèng. dì sì tiān zuò zhēntí de shíhòu, wǒmen jìshí zuò, ránhòu hùxiāng pīgǎi. zhèyàng gèng jiējìn kǎoshì zhuàngtài.",
+                "text_en": "Shared doc is a good idea. Day after tomorrow evening, everyone reviews each other's notes and corrects any issues. Day four when we do past exams, we'll time ourselves and then grade each other. That way it's closer to exam conditions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree and motivate the group.",
+                "options": [
+                    {
+                        "text_zh": "好，计划定了。大家加油！其实我们四个人的学习方式互补性挺强的——小吴的记忆力、小李的框架思维、我的做题经验，加上阿杰的……课堂积累。只要每个人认真完成自己的部分，这次肯定没问题。",
+                        "text_pinyin": "hǎo, jìhuà dìng le. dàjiā jiāyóu! qíshí wǒmen sì gè rén de xuéxí fāngshì hùbǔ xìng tǐng qiáng de——Xiǎo Wú de jìyìlì, Xiǎo Lǐ de kuàngjià sīwéi, wǒ de zuòtí jīngyàn, jiā shàng Ā Jié de……kètáng jīlěi. zhǐyào měi gè rén rènzhēn wánchéng zìjǐ de bùfen, zhè cì kěndìng méi wèntí.",
+                        "text_en": "Good, plan is set. Let's do this! Actually our four study styles complement each other well — Xiao Wu's memory, Xiao Li's framework thinking, my problem-solving experience, plus Ah Jie's... classroom accumulation. If everyone finishes their part, we'll definitely be fine.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The pause before「课堂积累」is perfectly calibrated — a gentle tease that acknowledges Ah Jie's claim while implying accountability. He grins. The study group has cohesion."
+                    },
+                    {
+                        "text_zh": "好，那就这么定了。大家加油。",
+                        "text_pinyin": "hǎo, nà jiù zhème dìng le. dàjiā jiāyóu.",
+                        "text_en": "Good, it's settled. Let's do this.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Simple, effective. The group disperses to their respective chapters."
+                    },
+                    {
+                        "text_zh": "希望大家别拖延。上次小组作业就有人拖到最后一天。",
+                        "text_pinyin": "xīwàng dàjiā bié tuōyán. shàng cì xiǎozǔ zuòyè jiù yǒu rén tuō dào zuìhòu yì tiān.",
+                        "text_en": "Hope nobody procrastinates. Last group project someone waited until the last day.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Everyone at the table knows who that someone was. Ah Jie suddenly becomes very interested in his phone."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese university study groups (学习小组, xuéxí xiǎozǔ) are common during exam season. Sharing notes through 共享文档 (gòngxiǎng wéndàng, shared documents) using apps like Tencent Docs or Feishu is standard practice. 往年真题 (wǎngnián zhēntí, past exam papers) are considered the most valuable study resource. The phrase 查漏补缺 (chálòubǔquē, find and fill gaps) is a common study strategy expression."
+    }
+}

@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Suggest making a dish and offer to help.",
                 "options": [
-                    {"text_zh": "我们做西红柿炒鸡蛋吧，我可以帮你切菜。", "text_pinyin": "wǒmen zuò xīhóngshì chǎo jīdàn ba, wǒ kěyǐ bāng nǐ qiē cài.", "text_en": "Let's make tomato scrambled eggs, I can help you cut vegetables.", "score": 1.0, "register": "casual", "feedback": "Perfect — suggests a classic dish and volunteers to help. 西红柿炒鸡蛋 is a beloved everyday dish."},
-                    {"text_zh": "都可以，你会做什么菜呢？", "text_pinyin": "dōu kěyǐ, nǐ huì zuò shénme cài ne?", "text_en": "Anything's fine, what dishes can you make?", "score": 0.6, "register": "casual", "feedback": "Flexible but puts all the decision-making on your friend — suggesting something shows initiative."},
-                    {"text_zh": "做个简单的面条怎么样？很快的。", "text_pinyin": "zuò ge jiǎndān de miàntiáo zěnmeyàng? hěn kuài de.", "text_en": "How about making some simple noodles? It's quick.", "score": 0.7, "register": "casual", "feedback": "Practical suggestion — 怎么样 is a natural way to propose an idea."}
+                    {
+                        "text_zh": "哇，成都看起来很漂亮！你去了哪些地方？",
+                        "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?",
+                        "text_en": "Wow, Chengdu looks beautiful! What places did you visit?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest making a dish and offer to help, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我们做西红柿炒鸡蛋吧，我可以帮你切菜。",
+                        "text_pinyin": "wǒmen zuò xīhóngshì chǎo jīdàn ba, wǒ kěyǐ bāng nǐ qiē cài.",
+                        "text_en": "Let's make tomato scrambled eggs, I can help you cut vegetables.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect — suggests a classic dish and volunteers to help. 西红柿炒鸡蛋 is a beloved everyday dish."
+                    },
+                    {
+                        "text_zh": "我一般跑步和游泳，一周三四次吧。",
+                        "text_pinyin": "wǒ yībān pǎobù hé yóuyǒng, yī zhōu sān sì cì ba.",
+                        "text_en": "I usually run and swim, about three or four times a week.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to suggest making a dish and offer to help, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Offer to go buy the eggs yourself.",
                 "options": [
-                    {"text_zh": "我去买吧，附近有没有超市？", "text_pinyin": "wǒ qù mǎi ba, fùjìn yǒu méiyǒu chāoshì?", "text_en": "I'll go buy them. Is there a supermarket nearby?", "score": 1.0, "register": "casual", "feedback": "Proactive and considerate — volunteering to go shows you're a good guest."},
-                    {"text_zh": "那我们一起去超市买东西吧。", "text_pinyin": "nà wǒmen yīqǐ qù chāoshì mǎi dōngxi ba.", "text_en": "Then let's go to the supermarket together.", "score": 0.8, "register": "casual", "feedback": "Going together is fun and social — a great option when cooking with friends."},
-                    {"text_zh": "没有鸡蛋的话，换一个菜也行。", "text_pinyin": "méiyǒu jīdàn dehuà, huàn yī ge cài yě xíng.", "text_en": "If there are no eggs, we can switch to a different dish.", "score": 0.5, "register": "casual", "feedback": "Problem-solving, but your friend already suggested buying eggs — going along shows flexibility."}
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to offer to go buy the eggs yourself, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我去买吧，附近有没有超市？",
+                        "text_pinyin": "wǒ qù mǎi ba, fùjìn yǒu méiyǒu chāoshì?",
+                        "text_en": "I'll go buy them. Is there a supermarket nearby?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Proactive and considerate — volunteering to go shows you're a good guest."
+                    },
+                    {
+                        "text_zh": "好的，明天下午可以。几点？",
+                        "text_pinyin": "hǎo de, míngtiān xiàwǔ kěyǐ. jǐ diǎn?",
+                        "text_en": "OK, tomorrow afternoon works. What time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to offer to go buy the eggs yourself, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

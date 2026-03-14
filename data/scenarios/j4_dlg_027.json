@@ -1,0 +1,83 @@
+{
+    "title": "The Teapot",
+    "title_zh": "茶壶",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+        "setup": "You're visiting a ceramics studio. The potter, Sister Ye, is shaping a teapot on her wheel. The studio smells of wet clay and is filled with warm light.",
+        "setup_zh": "你在参观一个陶瓷工作室。陶艺师叶姐正在转盘上做一把茶壶。工作室里弥漫着湿泥土的气味，充满了温暖的光线。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看，做茶壶最难的不是形状，是厚薄。太厚了茶凉得慢，太薄了容易碎。要找到一个刚刚好的厚度。做人也是这样，太硬了会碎，太软了撑不住。",
+                "text_pinyin": "Nǐ kàn, zuò cháhú zuì nán de bú shì xíngzhuàng, shì hòubáo. Tài hòu le chá liáng de màn, tài báo le róngyì suì. Yào zhǎo dào yīge gāng gāng hǎo de hòudù. Zuòrén yě shì zhèyàng, tài yìng le huì suì, tài ruǎn le chēng bú zhù.",
+                "text_en": "Look — the hardest part of making a teapot isn't the shape, it's the thickness. Too thick and the tea cools slowly; too thin and it breaks easily. You have to find the just-right thickness. Being a person is the same — too hard and you'll break, too soft and you can't hold up."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her comparison.",
+                "options": [
+                    {
+                        "text_zh": "刚刚好的厚度——这需要很多经验才能找到吧。不管是做茶壶还是做人，都要知道什么时候该坚强，什么时候该柔软。",
+                        "text_pinyin": "Gāng gāng hǎo de hòudù — zhè xūyào hěn duō jīngyàn cái néng zhǎo dào ba. Bùguǎn shì zuò cháhú háishì zuòrén, dōu yào zhīdào shénme shíhou gāi jiānqiáng, shénme shíhou gāi róuruǎn.",
+                        "text_en": "Just-right thickness — that must take a lot of experience to find. Whether making teapots or being a person, you need to know when to be strong and when to be soft.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engages with the metaphor naturally — extends it to emotional wisdom."
+                    },
+                    {
+                        "text_zh": "你做一把茶壶要多长时间？",
+                        "text_pinyin": "Nǐ zuò yī bǎ cháhú yào duō cháng shíjiān?",
+                        "text_en": "How long does it take to make a teapot?",
+                        "score": 0.0,
+                        "feedback": "Production time question during a philosophical metaphor."
+                    },
+                    {
+                        "text_zh": "厚薄应该可以用机器控制吧？现在的技术很先进，机器做的比手工更精确，也更统一。",
+                        "text_pinyin": "Hòubáo yīnggāi kěyǐ yòng jīqì kòngzhì ba? Xiànzài de jìshù hěn xiānjìn, jīqì zuò de bǐ shǒugōng gèng jīngquè, yě gèng tǒngyī.",
+                        "text_en": "Can't you control the thickness with machines? Modern technology is advanced — machines are more precise and consistent than handwork.",
+                        "score": 0.0,
+                        "feedback": "Sister Ye keeps her hands on the wheel: 'A machine can make a perfect pot. But it can't make one that remembers how it felt to be shaped.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，需要时间。我年轻的时候做的茶壶不是太厚就是太薄。师傅说我太着急了，泥巴能感觉到你的心情——你紧张，它就紧张；你放松，它才会听你的话。",
+                "text_pinyin": "Duì, xūyào shíjiān. Wǒ niánqīng de shíhou zuò de cháhú bú shì tài hòu jiù shì tài báo. Shīfu shuō wǒ tài zháojí le, níba néng gǎnjué dào nǐ de xīnqíng — nǐ jǐnzhāng, tā jiù jǐnzhāng; nǐ fàngsōng, tā cái huì tīng nǐ de huà.",
+                "text_en": "Right, it takes time. When I was young, my teapots were always either too thick or too thin. My master said I was too anxious — the clay can feel your mood. When you're tense, it's tense. Only when you relax will it listen to you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the clay sensing mood.",
+                "options": [
+                    {
+                        "text_zh": "像慢歌——确实是。还有车厢轻轻摇晃，像被什么东西推着走。火车上的时间不属于任何地方，离开了出发地，还没到目的地。",
+                        "text_pinyin": "Xiàng màn gē — quèshí shì. Hái yǒu chēxiāng qīng qīng yáohuàng, xiàng bèi shénme dōngxi tuī zhe zǒu. Huǒchē shàng de shíjiān bù shǔyú rènhé dìfāng, líkāi le chūfā dì, hái méi dào mùdìdì.",
+                        "text_en": "Like a slow song — it really is. The gentle swaying of the car, like being pushed along. Time on a train belongs nowhere — left the departure, haven't reached the destination.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Trusts the craft wisdom and generalizes it — calmness as creative prerequisite."
+                    },
+                    {
+                        "text_zh": "你师傅是谁？很有名吗？",
+                        "text_pinyin": "Nǐ shīfu shì shéi? Hěn yǒumíng ma?",
+                        "text_en": "Who was your master? Were they famous?",
+                        "score": 0.0,
+                        "feedback": "Fame question that misses the practical wisdom being shared."
+                    },
+                    {
+                        "text_zh": "这应该是经验的问题吧。多练习几年，手法熟练了，自然就不会紧张了。跟心情应该没什么关系。",
+                        "text_pinyin": "Zhè yīnggāi shì jīngyàn de wèntí ba. Duō liànxí jǐ nián, shǒufǎ shúliàn le, zìrán jiù bú huì jǐnzhāng le. Gēn xīnqíng yīnggāi méi shénme guānxi.",
+                        "text_en": "That's probably just a matter of experience. Practice enough years, your technique gets smooth, and you naturally stop being tense. Mood probably has nothing to do with it.",
+                        "score": 0.0,
+                        "feedback": "Sister Ye smiles: 'I've been doing this twenty years, and the clay still knows when I've had a bad day.'"
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese pottery, especially Yixing teapot making (宜兴紫砂壶), is a revered craft with centuries of tradition. The idea that clay responds to the maker's emotional state is a commonly held belief among potters. The master-apprentice system in Chinese ceramics emphasizes not just technical skill but cultivating inner calm (心静), reflecting the Daoist principle that the creator's spirit enters the creation."
+    }
+}

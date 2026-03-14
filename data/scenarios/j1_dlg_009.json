@@ -1,0 +1,87 @@
+{
+    "title": "Calling a Friend",
+    "title_zh": "打电话给朋友",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You call your friend Xiao Ming to see if they want to have dinner together tonight.",
+        "setup_zh": "你给朋友小明打电话，想问他今晚要不要一起吃饭。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "喂？你好！",
+                "text_pinyin": "Wèi? Nǐ hǎo!",
+                "text_en": "Hello? Hi!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Greet your friend and ask about dinner.",
+                "options": [
+                    {
+                        "text_zh": "小明，你好！今天晚上你有时间吗？我们一起吃饭吧。",
+                        "text_pinyin": "Xiǎo Míng, nǐ hǎo! Jīntiān wǎnshang nǐ yǒu shíjiān ma? Wǒmen yīqǐ chī fàn ba.",
+                        "text_en": "Xiao Ming, hi! Do you have time tonight? Let's eat dinner together.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Gets right to the point with a warm invitation -- exactly why you called."
+                    },
+                    {
+                        "text_zh": "小明！你现在忙吗？",
+                        "text_pinyin": "Xiǎo Míng! Nǐ xiànzài máng ma?",
+                        "text_en": "Xiao Ming! Are you busy right now?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Starts the conversation but doesn't mention dinner yet -- you'll get there, but it's a slower path."
+                    },
+                    {
+                        "text_zh": "你吃晚饭了吗？",
+                        "text_pinyin": "Nǐ chī wǎnfàn le ma?",
+                        "text_en": "Have you eaten dinner yet?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Related to dinner, but sounds like you're checking if he already ate rather than inviting him -- the purpose of your call gets lost."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好啊！你想吃什么？中国菜还是西餐？",
+                "text_pinyin": "Hǎo a! Nǐ xiǎng chī shénme? Zhōngguó cài háishì xīcān?",
+                "text_en": "Sounds good! What do you want to eat? Chinese food or Western food?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him what kind of food you prefer.",
+                "options": [
+                    {
+                        "text_zh": "我想吃中国菜。你知道哪里好吃吗？",
+                        "text_pinyin": "Wǒ xiǎng chī Zhōngguó cài. Nǐ zhīdào nǎlǐ hǎochī ma?",
+                        "text_en": "I want Chinese food. Do you know a good place?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Makes a clear choice and asks for his recommendation -- keeps the dinner plan moving forward."
+                    },
+                    {
+                        "text_zh": "都可以。你想吃什么？",
+                        "text_pinyin": "Dōu kěyǐ. Nǐ xiǎng chī shénme?",
+                        "text_en": "Either is fine. What do you want?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Flexible but doesn't commit -- he gave you two options and you bounced the question back."
+                    },
+                    {
+                        "text_zh": "我不太饿。",
+                        "text_pinyin": "Wǒ bú tài è.",
+                        "text_en": "I'm not that hungry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "You just invited him to dinner and now you say you're not hungry -- sends a confusing signal about why you called."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Calling a friend to share a meal is one of the most common social gestures in China. The phrase 一起吃饭吧 is an invitation that says「I want your company.」Food is always better shared."
+    }
+}

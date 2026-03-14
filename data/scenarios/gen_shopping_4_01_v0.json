@@ -1,0 +1,124 @@
+{
+    "title": "The Return Policy Diplomat",
+    "title_zh": "退货外交官",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_4_01_v0",
+    "tree": {
+        "setup": "A department store's customer service counter, clean and brightly lit. You bought a jacket two days ago and the zipper has already broken — not a slow decline, but a sudden, catastrophic failure during what was merely a normal zipping motion. The returns clerk, Ms. Deng, has the calm of someone who has heard every return excuse in existence and has developed the ability to sort genuine complaints from creative fiction in under five seconds.",
+        "setup_zh": "百货商场的客服台，干净明亮。你两天前买了一件夹克，拉链已经坏了——不是慢慢退化，而是在一个正常的拉拉链动作中突然、灾难性地失败了。退货员邓小姐有一种听过所有退货借口的从容，能在五秒钟内分辨真正的投诉和创意小说。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，有什么可以帮您？",
+                "text_pinyin": "nín hǎo, yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the return.",
+                "options": [
+                    {
+                        "text_zh": "你好，我两天前买了这件夹克，但是拉链坏了。这是收据。我想退货或者换一件。",
+                        "text_pinyin": "nǐ hǎo, wǒ liǎng tiān qián mǎi le zhè jiàn jiákè, dànshì lāliàn huài le. zhè shì shōujù. wǒ xiǎng tuì huò huòzhě huàn yí jiàn.",
+                        "text_en": "Hello, I bought this jacket two days ago but the zipper broke. Here's the receipt. I'd like to return or exchange it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Problem, proof, and desired outcome — Ms. Deng's five-second assessment: genuine complaint. She reaches for the return form."
+                    },
+                    {
+                        "text_zh": "这个拉链坏了，我要退。",
+                        "text_pinyin": "zhège lāliàn huài le, wǒ yào tuì.",
+                        "text_en": "This zipper broke — I want to return it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct. She'll ask for the receipt next."
+                    },
+                    {
+                        "text_zh": "你们卖的东西质量太差了。",
+                        "text_pinyin": "nǐmen mài de dōngxi zhìliàng tài chà le.",
+                        "text_en": "The stuff you sell is terrible quality.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Deng absorbs this without blinking. She's heard worse. She'll still help you, but with exactly zero extra warmth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我看一下……确实是质量问题。两天之内有收据，可以退全款，也可以换同一款。您选哪个？",
+                "text_pinyin": "wǒ kàn yíxià……quèshí shì zhìliàng wèntí. liǎng tiān zhī nèi yǒu shōujù, kěyǐ tuì quán kuǎn, yě kěyǐ huàn tóng yí kuǎn. nín xuǎn nǎge?",
+                "text_en": "Let me see... yes, this is a quality issue. Within two days with a receipt, you can get a full refund or exchange for the same style. Which do you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose refund or exchange.",
+                "options": [
+                    {
+                        "text_zh": "我还是喜欢这个款式。能不能换一件？我要检查一下拉链再拿走。",
+                        "text_pinyin": "wǒ háishì xǐhuān zhège kuǎnshì. néng bu néng huàn yí jiàn? wǒ yào jiǎnchá yíxià lāliàn zài ná zǒu.",
+                        "text_en": "I still like the style. Can I exchange? I want to check the zipper before taking it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Exchanging and checking quality — Ms. Deng nods approvingly. A lesson learned becomes a lesson applied."
+                    },
+                    {
+                        "text_zh": "退款吧。",
+                        "text_pinyin": "tuì kuǎn ba.",
+                        "text_en": "Refund, please.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She processes it efficiently. The money returns to your account."
+                    },
+                    {
+                        "text_zh": "两个都不太满意。能不能换别的款？",
+                        "text_pinyin": "liǎng gè dōu bú tài mǎnyì. néng bu néng huàn bié de kuǎn?",
+                        "text_en": "Neither is ideal. Can I exchange for a different style?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She checks the policy — different style exchanges require manager approval. She calls the manager."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我去拿一件新的给您检查。请稍等一下。",
+                "text_pinyin": "hǎo de, wǒ qù ná yí jiàn xīn de gěi nín jiǎnchá. qǐng shāo děng yíxià.",
+                "text_en": "OK, I'll get a new one for you to check. Please wait a moment."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her when she returns.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！这件的拉链没问题。谢谢你帮我处理，服务很好。",
+                        "text_pinyin": "xièxie! zhè jiàn de lāliàn méi wèntí. xièxie nǐ bāng wǒ chǔlǐ, fúwù hěn hǎo.",
+                        "text_en": "Thanks! This one's zipper is fine. Thank you for handling this — great service.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Checking, confirming, and complimenting the service — Ms. Deng marks this as a successful resolution with quiet satisfaction."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "hǎo de, xièxie.",
+                        "text_en": "OK, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She hands you the bag. Another return resolved before lunch."
+                    },
+                    {
+                        "text_zh": "希望这件不要再坏了。",
+                        "text_pinyin": "xīwàng zhè jiàn búyào zài huài le.",
+                        "text_en": "Hope this one doesn't break too.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Deng smiles thinly. She hopes so too — for both your sakes."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese return policies vary by store. Most major retailers accept returns within 7-15 days with receipt (收据, shōujù or 发票, fāpiào). Quality issues (质量问题) are usually handled quickly. Always keep your receipt and original packaging."
+    }
+}

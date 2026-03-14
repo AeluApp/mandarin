@@ -1,4 +1,4 @@
-# Keyword Strategy — Mandarin Learning App
+# Keyword Strategy — Aelu Learning App
 
 **Compiled: 2026-02-17**
 
@@ -41,7 +41,7 @@ These are searched by people actively looking for a tool or app to buy/download.
 | how to pass HSK 3 | Medium | Informational | **Medium** | **Very High** — direct pipeline to your HSK 3 content |
 | how to pass HSK 1 | Medium | Informational | **Medium** | **Very High** — beginner funnel |
 | how to pass HSK 4 | Medium | Informational | **Medium** | **High** — future content expansion |
-| HSK vocabulary list | High | Informational | **High** | **Very High** — your app has 299 seed items |
+| HSK vocabulary list | High | Informational | **High** | **Very High** — your app has 10,000+ items across HSK 1-9 |
 | HSK 3 vocabulary list | Medium-High | Informational | **High** | **Very High** — heavily saturated but perennial |
 | HSK 3 study plan | Low-Medium | Informational | **Medium** | **Very High** — adaptive scheduling showcase |
 | new HSK 3.0 changes | Medium (spiking) | Informational | **Medium** | **Very High** — timely; HSK 3.0 launches July 2026 |

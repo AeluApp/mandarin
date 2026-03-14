@@ -1,8 +1,8 @@
-# Press Kit -- Mandarin
+# Press Kit -- Aelu
 
 Last updated: 2026-02-21
 
-This document contains everything a journalist, blogger, or podcast host needs to cover Mandarin. If anything is missing, contact press@mandarin.app.
+This document contains everything a journalist, blogger, or podcast host needs to cover Aelu. If anything is missing, contact press@aelu.app.
 
 ---
 
@@ -10,19 +10,19 @@ This document contains everything a journalist, blogger, or podcast host needs t
 
 ### Short Boilerplate (for tight placements)
 
-Mandarin is a desktop and web application for adult Chinese learners who want honest progress tracking and serious drill-based study. It covers HSK levels 1 through 9 with 12 drill types, a graded reader, extensive listening, and per-skill diagnostics -- all running deterministically with zero AI tokens at runtime. Free for HSK 1-2. Pro access is $12/month.
+Aelu is a desktop and web application for adult Chinese learners who want honest progress tracking and serious drill-based study. It covers HSK levels 1 through 9 with 12 drill types, a graded reader, extensive listening, and per-skill diagnostics -- all running deterministically with zero AI tokens at runtime. Free for HSK 1-2. Pro access is $14.99/month.
 
-Mandarin was built by a solo developer who started learning Chinese as an adult and could not find a tool that distinguished between words you recognize and words you actually know. The result is a system where reading feeds drilling, every metric is defensible, and nothing exists to manufacture a feeling of progress that is not real.
+Aelu was built by a solo developer who started learning Chinese as an adult and could not find a tool that distinguished between words you recognize and words you actually know. The result is a system where reading feeds drilling, every metric is defensible, and nothing exists to manufacture a feeling of progress that is not real.
 
 ### Expanded Boilerplate
 
-Mandarin is an adaptive Chinese learning application built for adults who treat language study as a serious, long-term project. The app tracks learner progress across vocabulary, listening, reading, tone accuracy, and grammar as separate skills -- not a single blended score -- and uses a modified FSRS scheduling algorithm with Bayesian confidence dampening to ensure that mastery is earned, not inflated by a few lucky sessions.
+Aelu is an adaptive Chinese learning application built for adults who treat language study as a serious, long-term project. The app tracks learner progress across vocabulary, listening, reading, tone accuracy, and grammar as separate skills -- not a single blended score -- and uses a modified FSRS scheduling algorithm with Bayesian confidence dampening to ensure that mastery is earned, not inflated by a few lucky sessions.
 
 The product's defining feature is its "cleanup loop": words encountered during graded reading flow directly into drill sessions across 12 exercise types, including tone discrimination, cloze deletion, audio matching, sentence construction, and speaking drills with tone grading. This closes the gap between passive reading and active recall that most language apps leave open.
 
-At runtime, Mandarin uses zero calls to large language models. All scheduling, scoring, content selection, and feedback is deterministic -- computed from the learner's own data using algorithms derived from memory science research. The content library includes 299 hand-curated vocabulary items with context notes, 30+ dialogue scenarios, 45+ graded reading passages, 26 integrated grammar points, and a media shelf with level-matched recommendations for Chinese podcasts, shows, and books.
+At runtime, Aelu uses zero calls to large language models. All scheduling, scoring, content selection, and feedback is deterministic -- computed from the learner's own data using algorithms derived from memory science research. The content library includes 10,000+ hand-curated vocabulary items across HSK 1-9 with context notes, 30+ dialogue scenarios, 45+ graded reading passages, 26 integrated grammar points, and a media shelf with level-matched recommendations for Chinese podcasts, shows, and books.
 
-The app runs as a web application and a desktop application (via Tauri), with all learner data stored locally on-device. There is no account creation required to start. The free tier includes full functionality for HSK 1-2 content. Pro access ($12/month) unlocks HSK levels 1 through 9, all drill types, and all features. There is no annual upsell, no tiered pricing, and no feature gating on the free plan beyond content scope.
+The app runs as a web application and a desktop application (via Tauri), with all learner data stored locally on-device. There is no account creation required to start. The free tier includes full functionality for HSK 1-2 content. Pro access ($14.99/month) unlocks HSK levels 1 through 9, all drill types, and all features. There is no annual upsell, no tiered pricing, and no feature gating on the free plan beyond content scope.
 
 ---
 
@@ -30,18 +30,18 @@ The app runs as a web application and a desktop application (via Tauri), with al
 
 | Category | Detail |
 |---|---|
-| **Product name** | Mandarin |
+| **Product name** | Aelu |
 | **Character** | 漫 (man) |
 | **Tagline** | Patient Chinese study |
 | **Launch date** | TBD |
 | **Platforms** | Web (any modern browser), Desktop (macOS, Windows, Linux via Tauri) |
-| **Pricing** | Free (HSK 1-2, all drill types) / Pro $12/month (HSK 1-9, all features) |
+| **Pricing** | Free (HSK 1-2, all drill types) / Pro $14.99/month (HSK 1-9, all features) |
 | **Tech stack** | Python, SQLite, Flask, Web Audio API, Tauri (desktop) |
 | **AI at runtime** | None. Zero LLM API calls. All logic is deterministic. |
 | **Drill types** | 12 (recognition, production, cloze, tone pair, sentence construction, audio matching, speaking, and more) |
 | **HSK coverage** | Levels 1-9 (aligned to HSK 3.0 standard) |
 | **Grammar points** | 26, integrated into drills |
-| **Vocabulary items** | 299 seed items (HSK 1-3) with hand-written context notes |
+| **Vocabulary items** | 10,000+ items (HSK 1-9) with hand-written context notes |
 | **Reading passages** | 45+ graded passages |
 | **Dialogue scenarios** | 30+ |
 | **Scheduling algorithm** | Modified FSRS with Bayesian confidence dampening |
@@ -49,8 +49,8 @@ The app runs as a web application and a desktop application (via Tauri), with al
 | **Offline support** | Yes |
 | **Team size** | 1 |
 | **Founded** | 2026 |
-| **Website** | mandarin.app |
-| **Press contact** | press@mandarin.app |
+| **Website** | aelu.app |
+| **Press contact** | press@aelu.app |
 
 ---
 
@@ -108,7 +108,7 @@ All logo files are located in `marketing/assets/`. The following files are avail
 | `logo-mark-dark.svg` | Mark for use on dark backgrounds |
 | `logo-horizontal.svg` | Full logo with wordmark, horizontal layout |
 | `logo-horizontal-dark.svg` | Horizontal logo for dark backgrounds |
-| `logo-wordmark.svg` | Text-only wordmark ("Mandarin") |
+| `logo-wordmark.svg` | Text-only wordmark ("Aelu") |
 | `logo-wordmark-dark.svg` | Wordmark for dark backgrounds |
 | `logo-monochrome.svg` | Single-color version for limited-color contexts |
 | `logo-app-icon.svg` | Square app icon for store listings and favicons |
@@ -132,7 +132,7 @@ All logo files are located in `marketing/assets/`. The following files are avail
 
 **Background guidance:** The standard logo is designed for light, warm backgrounds (#F2EBE0 or similar). Use the dark variant on backgrounds darker than 50% luminance. Use the monochrome variant when color reproduction is limited (newsprint, single-color contexts).
 
-**Raster exports:** If you need PNG or JPG versions at specific resolutions, contact press@mandarin.app with the required dimensions.
+**Raster exports:** If you need PNG or JPG versions at specific resolutions, contact press@aelu.app with the required dimensions.
 
 ---
 
@@ -144,32 +144,32 @@ All logo files are located in `marketing/assets/`. The following files are avail
 
 **FOR IMMEDIATE RELEASE**
 
-### Mandarin Launches as a Quiet Alternative to Gamified Chinese Learning Apps
+### Aelu Launches as a Quiet Alternative to Gamified Chinese Learning Apps
 
 *A solo-built study tool for adults who want honest progress tracking, not streaks and leaderboards*
 
-**[CITY], [DATE]** -- Mandarin, a Chinese learning application built by a solo developer, launches today as a desktop and web tool for adult learners studying HSK levels 1 through 9. The app offers 12 drill types, a graded reader, extensive listening practice, and per-skill diagnostics -- with zero artificial intelligence at runtime.
+**[CITY], [DATE]** -- Aelu, a Chinese learning application built by a solo developer, launches today as a desktop and web tool for adult learners studying HSK levels 1 through 9. The app offers 12 drill types, a graded reader, extensive listening practice, and per-skill diagnostics -- with zero artificial intelligence at runtime.
 
-Unlike gamified language apps that blend progress metrics into a single encouraging score, Mandarin tracks vocabulary, listening, reading, and tone accuracy as separate skills, each with its own HSK-level estimate. The system uses a modified FSRS scheduling algorithm to determine review timing based on each learner's actual recall data, and applies Bayesian confidence dampening to prevent premature mastery ratings.
+Unlike gamified language apps that blend progress metrics into a single encouraging score, Aelu tracks vocabulary, listening, reading, and tone accuracy as separate skills, each with its own HSK-level estimate. The system uses a modified FSRS scheduling algorithm to determine review timing based on each learner's actual recall data, and applies Bayesian confidence dampening to prevent premature mastery ratings.
 
 The app's core mechanism -- what the developer calls the "cleanup loop" -- connects reading directly to drilling. Words looked up during graded reading passages automatically appear in subsequent drill sessions across multiple exercise types. The intent is to close the gap between encountering a word in context and being able to recall, produce, and hear it reliably.
 
 **[Founder quote placeholder:]** *"[Insert a 1-2 sentence quote from the founder about why they built the app and what makes it different. Keep the tone factual, not promotional.]"*
 
 **Availability and Pricing:**
-Mandarin is available now at mandarin.app. The free tier includes full functionality for HSK 1-2 content across all drill types. Pro access is $12/month and unlocks HSK levels 1 through 9 with all features. There is no annual plan requirement, no tiered pricing, and no feature limitations on the free tier beyond content scope.
+Aelu is available now at aelu.app. The free tier includes full functionality for HSK 1-2 content across all drill types. Pro access is $14.99/month and unlocks HSK levels 1 through 9 with all features. There is no annual plan requirement, no tiered pricing, and no feature limitations on the free tier beyond content scope.
 
-**About Mandarin:**
-Mandarin is a Chinese learning application for adults who want measurable, honest progress in reading, listening, and speaking Mandarin Chinese. Built by a solo developer who studies Mandarin daily, the app uses deterministic algorithms -- not generative AI -- to schedule reviews, score performance, and select content. All learner data is stored locally on-device. More information at mandarin.app.
+**About Aelu:**
+Aelu is a Chinese learning application for adults who want measurable, honest progress in reading, listening, and speaking Mandarin Chinese. Built by a solo developer who studies Mandarin daily, the app uses deterministic algorithms -- not generative AI -- to schedule reviews, score performance, and select content. All learner data is stored locally on-device. More information at aelu.app.
 
 **Press Contact:**
-press@mandarin.app
+press@aelu.app
 
 ---
 
 ## 7. Media Contact
 
-**Press inquiries:** press@mandarin.app
+**Press inquiries:** press@aelu.app
 
 **Response commitment:** All press inquiries receive a response within 24 hours. For time-sensitive requests (same-day deadline), note the urgency in the subject line.
 
@@ -182,9 +182,9 @@ press@mandarin.app
 - Advance access to the product under embargo (see Section 10)
 
 **What we ask:**
-- Please use the official product name "Mandarin" (capital M, no article -- not "the Mandarin app")
-- Please link to mandarin.app when referencing the product online
-- If quoting the founder, please use "the founder of Mandarin" rather than a personal name
+- Please use the official product name "Aelu" (capital A, no article -- not "the Aelu app")
+- Please link to aelu.app when referencing the product online
+- If quoting the founder, please use "the founder of Aelu" rather than a personal name
 
 ---
 
@@ -192,9 +192,9 @@ press@mandarin.app
 
 For interviews, podcast appearances, and media conversations. These are not scripted answers -- they are the core ideas worth communicating, in whatever order fits the conversation.
 
-1. **The gap between studying and knowing.** Most language apps optimize for engagement -- time in app, daily streaks, completion rates. These metrics correlate loosely, at best, with actual language ability. Mandarin was built to track what you can actually do: recall a word under time pressure, hear a tone correctly, read a sentence without help, produce a phrase from memory. These are different skills, and the app measures them separately.
+1. **The gap between studying and knowing.** Most language apps optimize for engagement -- time in app, daily streaks, completion rates. These metrics correlate loosely, at best, with actual language ability. Aelu was built to track what you can actually do: recall a word under time pressure, hear a tone correctly, read a sentence without help, produce a phrase from memory. These are different skills, and the app measures them separately.
 
-2. **Why zero AI at runtime matters.** Generative AI is useful for building content. It is unreliable for delivering it. A drill that gives you a different answer depending on when you ask it is not a drill -- it is a guess. Every piece of feedback in Mandarin is computed deterministically from the learner's data. The answer is the same at 2am as it is at 2pm. That consistency is the foundation of trust.
+2. **Why zero AI at runtime matters.** Generative AI is useful for building content. It is unreliable for delivering it. A drill that gives you a different answer depending on when you ask it is not a drill -- it is a guess. Every piece of feedback in Aelu is computed deterministically from the learner's data. The answer is the same at 2am as it is at 2pm. That consistency is the foundation of trust.
 
 3. **The cleanup loop.** The single most important feature is also the simplest to explain: when you read Chinese in the app and look up a word, that word becomes your next practice session. Not a flashcard -- multi-skill practice across different exercise types. Reading feeds drilling. Drilling improves reading. The loop is the product.
 
@@ -226,7 +226,7 @@ A: Because the product should prove itself before asking for money. The free tie
 
 A: The product is intentionally scoped for solo maintenance. The tech stack is simple: Python, SQLite, Flask. There is no microservice architecture, no complex cloud infrastructure, no machine learning pipeline to retrain. Content is hand-curated, not generated at scale. The tradeoff is that the content library grows slowly -- but it grows carefully, with context notes and usage information that automated systems do not produce. A solo developer who uses the product daily catches problems that a larger team with less direct engagement might not.
 
-**Q: What is your business model? Is $12/month sustainable for a solo product?**
+**Q: What is your business model? Is $14.99/month sustainable for a solo product?**
 
 A: The cost structure is minimal. There are no AI API costs, no large engineering team, no office, no investor obligations. The infrastructure is a static site and a lightweight server. At even modest subscriber counts, the economics work. The goal is not venture-scale growth -- it is a sustainable product that serves its users well and supports its developer. That is a different business model than most edtech companies, and it requires a different scale to work.
 
@@ -266,8 +266,8 @@ Journalists and content creators covering the product may request a complimentar
 **Corrections:**
 If published coverage contains factual errors about the product, we will reach out with a correction request. We ask that outlets update digital articles when factual errors are identified. We understand that editorial independence means we have no control over opinions, framing, or conclusions -- only factual accuracy.
 
-**To arrange embargo access, exclusives, or review copies:** press@mandarin.app
+**To arrange embargo access, exclusives, or review copies:** press@aelu.app
 
 ---
 
-*This press kit is maintained by the Mandarin team. For the most current version, contact press@mandarin.app.*
+*This press kit is maintained by the Mandarin team. For the most current version, contact press@aelu.app.*

@@ -1,0 +1,160 @@
+{
+    "title": "The Passport Pilgrim",
+    "title_zh": "护照朝圣者",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_4_02_v0",
+    "tree": {
+        "setup": "The lobby of a police station near the tourist district, where a rotating fan stirs the warm afternoon air. Officer Liang sits behind a desk that is organized with military precision — pens sorted by color, forms stacked by type. She handles lost-item reports with the thoroughness of someone who believes every misplaced object has a story, and every story has a resolution.",
+        "setup_zh": "旅游区附近派出所的大厅，旋转风扇搅动着温暖的午后空气。梁警官坐在一张军事级整洁的桌子后面——笔按颜色分类，表格按类型叠放。她处理遗失物品报告时有一种信念：每件丢失的东西都有一个故事，每个故事都有一个结局。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问有什么事？",
+                "text_pinyin": "nǐ hǎo, qǐngwèn yǒu shénme shì?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her you've lost your passport.",
+                "options": [
+                    {
+                        "text_zh": "你好，我的护照丢了。我是外国人，昨天在出租车上可能掉了。我需要报案。",
+                        "text_pinyin": "nǐ hǎo, wǒ de hùzhào diū le. wǒ shì wàiguó rén, zuótiān zài chūzū chē shàng kěnéng diào le. wǒ xūyào bào àn.",
+                        "text_en": "Hello, I've lost my passport. I'm a foreigner — I may have dropped it in a taxi yesterday. I need to file a report.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear situation, possible location, and knowing to file a report — Officer Liang pulls out the right form immediately."
+                    },
+                    {
+                        "text_zh": "我的护照不见了！",
+                        "text_pinyin": "wǒ de hùzhào bújiàn le!",
+                        "text_en": "My passport is missing!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She hears the alarm in your voice and switches to her calm, methodical mode."
+                    },
+                    {
+                        "text_zh": "我有一个很大的问题。",
+                        "text_pinyin": "wǒ yǒu yí gè hěn dà de wèntí.",
+                        "text_en": "I have a big problem.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Liang waits patiently. Big problems are her specialty, but she needs specifics."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "别着急。我帮你填一个报案表。请问你是哪个国家的？护照号码记得吗？",
+                "text_pinyin": "bié zháojí. wǒ bāng nǐ tián yí gè bào àn biǎo. qǐngwèn nǐ shì nǎge guójiā de? hùzhào hàomǎ jìde ma?",
+                "text_en": "Don't worry. I'll help you fill out a report. What country are you from? Do you remember your passport number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your nationality and passport info.",
+                "options": [
+                    {
+                        "text_zh": "我是美国人。护照号码我手机里有照片，我找一下……在这里，号码是这个。",
+                        "text_pinyin": "wǒ shì Měiguó rén. hùzhào hàomǎ wǒ shǒujī lǐ yǒu zhàopiàn, wǒ zhǎo yíxià……zài zhèlǐ, hàomǎ shì zhège.",
+                        "text_en": "I'm American. I have a photo of my passport on my phone — let me find it... here, the number is this.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A photo of your passport on your phone — Officer Liang gives you the look of someone who has just met a genuinely prepared traveler. This is rare."
+                    },
+                    {
+                        "text_zh": "我是美国人。护照号码我不记得了。",
+                        "text_pinyin": "wǒ shì Měiguó rén. hùzhào hàomǎ wǒ bú jìde le.",
+                        "text_en": "I'm American. I don't remember the passport number.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She can work without the number — your embassy can provide it later."
+                    },
+                    {
+                        "text_zh": "美国来的。其他的我不太清楚。",
+                        "text_pinyin": "Měiguó lái de. qítā de wǒ bú tài qīngchǔ.",
+                        "text_en": "From America. I'm not sure about the rest.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She adds what she can and plans to contact the embassy for the rest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，有照片最好。你还需要去你们国家的大使馆补办一个临时护照。你知道大使馆的地址吗？",
+                "text_pinyin": "hǎo de, yǒu zhàopiàn zuì hǎo. nǐ hái xūyào qù nǐmen guójiā de dàshǐguǎn bǔ bàn yí gè línshí hùzhào. nǐ zhīdào dàshǐguǎn de dìzhǐ ma?",
+                "text_en": "Good, having a photo is best. You'll also need to go to your country's embassy for a temporary passport. Do you know the embassy's address?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the embassy or say you know the location.",
+                "options": [
+                    {
+                        "text_zh": "我知道大使馆在哪里。请问你们这个报案单我去大使馆的时候要带吗？",
+                        "text_pinyin": "wǒ zhīdào dàshǐguǎn zài nǎlǐ. qǐngwèn nǐmen zhège bào àn dān wǒ qù dàshǐguǎn de shíhòu yào dài ma?",
+                        "text_en": "I know where the embassy is. Do I need to bring this police report when I go?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thinking ahead about documentation — Officer Liang confirms that yes, the embassy will need this report."
+                    },
+                    {
+                        "text_zh": "大使馆在哪里？你能告诉我吗？",
+                        "text_pinyin": "dàshǐguǎn zài nǎlǐ? nǐ néng gàosu wǒ ma?",
+                        "text_en": "Where is the embassy? Can you tell me?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She writes the address on a separate card for you. She keeps embassy addresses for six countries memorized."
+                    },
+                    {
+                        "text_zh": "还要去大使馆？这么麻烦……",
+                        "text_pinyin": "hái yào qù dàshǐguǎn? zhème máfan……",
+                        "text_en": "I have to go to the embassy too? So much hassle...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Liang nods sympathetically. Losing a passport is never just one errand — it's a whole quest."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，这个报案单一定要带。好了，报案表填好了。这是你的那份，请收好。祝你顺利。",
+                "text_pinyin": "duì, zhège bào àn dān yídìng yào dài. hǎo le, bào àn biǎo tián hǎo le. zhè shì nǐ de nà fèn, qǐng shōu hǎo. zhù nǐ shùnlì.",
+                "text_en": "Yes, you must bring this report. OK, the form is done. Here's your copy — keep it safe. Good luck."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank Officer Liang.",
+                "options": [
+                    {
+                        "text_zh": "非常感谢梁警官！你帮了我大忙。我现在就去大使馆。",
+                        "text_pinyin": "fēicháng gǎnxiè Liáng jǐngguān! nǐ bāng le wǒ dà máng. wǒ xiànzài jiù qù dàshǐguǎn.",
+                        "text_en": "Thank you so much, Officer Liang! You've been a huge help. I'll head to the embassy now.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Grateful and action-oriented. She watches you leave with a small nod — another story headed toward its resolution."
+                    },
+                    {
+                        "text_zh": "谢谢你！",
+                        "text_pinyin": "xièxie nǐ!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief but sincere. She straightens her pens and waits for the next visitor."
+                    },
+                    {
+                        "text_zh": "好吧。希望能找到护照。",
+                        "text_pinyin": "hǎo ba. xīwàng néng zhǎo dào hùzhào.",
+                        "text_en": "Alright. Hope the passport turns up.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Liang gives you a realistic but kind look. Hope is good; the embassy is better."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "If you lose your passport in China, you need two things: a police report (报案单, bào àn dān) from the local station, and a visit to your country's embassy or consulate for a temporary replacement. Always keep a photo of your passport on your phone as backup."
+    }
+}

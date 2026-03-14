@@ -840,27 +840,30 @@ def test_valid_plan_passes():
     assert result is plan
 
 
-def test_invalid_modality_raises():
+def test_invalid_modality_filtered():
+    """Invalid modality drills are silently dropped, not crashed."""
     from mandarin.scheduler import _validate_plan, SessionPlan
     plan = SessionPlan(
         session_type="standard",
         drills=[make_drill_item(modality="invalid_mod", drill_type="mc")],
     )
-    with pytest.raises(AssertionError):
-        _validate_plan(plan)
+    result = _validate_plan(plan)
+    assert len(result.drills) == 0
 
 
-def test_invalid_drill_type_raises():
+def test_invalid_drill_type_filtered():
+    """Invalid drill_type drills are silently dropped, not crashed."""
     from mandarin.scheduler import _validate_plan, SessionPlan
     plan = SessionPlan(
         session_type="standard",
         drills=[make_drill_item(modality="reading", drill_type="invalid_type")],
     )
-    with pytest.raises(AssertionError):
-        _validate_plan(plan)
+    result = _validate_plan(plan)
+    assert len(result.drills) == 0
 
 
-def test_duplicate_item_ids_raises():
+def test_duplicate_item_ids_deduped():
+    """Duplicate item_ids are deduplicated, not crashed."""
     from mandarin.scheduler import _validate_plan, SessionPlan
     plan = SessionPlan(
         session_type="standard",
@@ -869,8 +872,8 @@ def test_duplicate_item_ids_raises():
             make_drill_item(item_id=1, modality="ime", drill_type="ime_type"),
         ],
     )
-    with pytest.raises(AssertionError):
-        _validate_plan(plan)
+    result = _validate_plan(plan)
+    assert len(result.drills) == 1
 
 
 def test_dialogue_duplicates_allowed():
@@ -887,14 +890,15 @@ def test_dialogue_duplicates_allowed():
     assert len(result.drills) == 2
 
 
-def test_invalid_session_type_raises():
+def test_invalid_session_type_defaults():
+    """Invalid session_type defaults to 'standard', not crashed."""
     from mandarin.scheduler import _validate_plan, SessionPlan
     plan = SessionPlan(
         session_type="unknown_type",
         drills=[],
     )
-    with pytest.raises(AssertionError):
-        _validate_plan(plan)
+    result = _validate_plan(plan)
+    assert result.session_type == "standard"
 
 
 def test_empty_drills_valid():
@@ -1512,16 +1516,24 @@ def test_scaffold_levels_complete():
     for stage in stages:
         assert stage in SCAFFOLD_LEVELS, \
             f"missing scaffold level for {stage}"
+        levels = SCAFFOLD_LEVELS[stage]
+        assert "pinyin" in levels, f"missing 'pinyin' key for {stage}"
+        assert "english" in levels, f"missing 'english' key for {stage}"
 
 
 def test_scaffold_progression_fades_support():
     """Scaffold should fade from full support to none as mastery increases."""
-    from mandarin.config import SCAFFOLD_LEVELS, SCAFFOLD_ORDER
-    # seen should have the most support, durable the least
-    seen_idx = SCAFFOLD_ORDER.index(SCAFFOLD_LEVELS["seen"])
-    durable_idx = SCAFFOLD_ORDER.index(SCAFFOLD_LEVELS["durable"])
+    from mandarin.config import SCAFFOLD_LEVELS, SCAFFOLD_ORDER, ENGLISH_ORDER
+    # seen should have the most pinyin support, durable the least
+    seen_idx = SCAFFOLD_ORDER.index(SCAFFOLD_LEVELS["seen"]["pinyin"])
+    durable_idx = SCAFFOLD_ORDER.index(SCAFFOLD_LEVELS["durable"]["pinyin"])
     assert seen_idx > durable_idx, \
         "seen should have more scaffold support than durable"
+    # English should also fade: seen=full, stable=none
+    seen_eng = ENGLISH_ORDER.index(SCAFFOLD_LEVELS["seen"]["english"])
+    stable_eng = ENGLISH_ORDER.index(SCAFFOLD_LEVELS["stable"]["english"])
+    assert seen_eng > stable_eng, \
+        "seen should have more English support than stable"
 
 
 # ── TestConfusableHelpers ──

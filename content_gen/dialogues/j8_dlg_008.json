@@ -1,0 +1,117 @@
+{
+    "title": "The Cartographer's Grief",
+    "title_zh": "制图人的忧伤",
+    "hsk_level": 8,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.75,
+    "tree": {
+        "setup": "You meet a retired cartographer in a Yunnan tea house. She spent decades mapping rural villages by hand before satellite mapping made her work obsolete. She has a stack of her hand-drawn maps on the table.",
+        "setup_zh": "你在云南的一间茶馆里遇到一位退休的制图员。在卫星制图让她的工作变得过时之前，她花了几十年用手绘制农村地图。桌上放着一叠她手绘的地图。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你看这些地图——每一张我都走过那片土地。画一张村庄的地图要在那里住至少一个月。卫星可以在一秒钟内拍下整个区域，但它拍到的和我画的不是同一个东西。卫星看到的是坐标、海拔、建筑面积。我看到的是：这条路雨天会变成泥、这棵树是村里最老的人种的、这片田到了秋天会变金色。这些信息不在卫星图上。",
+                "text_pinyin": "Nǐ kàn zhèxiē dìtú — měi yī zhāng wǒ dōu zǒu guò nà piàn tǔdì. Huà yī zhāng cūnzhuāng de dìtú yào zài nàlǐ zhù zhìshǎo yī ge yuè. Wèixīng kěyǐ zài yī miǎozhōng nèi pāi xià zhěnggè qūyù, dàn tā pāi dào de hé wǒ huà de bú shì tóng yī ge dōngxi. Wèixīng kàn dào de shì zuòbiāo, hǎibá, jiànzhù miànjī. Wǒ kàn dào de shì: zhè tiáo lù yǔ tiān huì biàn chéng ní, zhè kē shù shì cūn lǐ zuì lǎo de rén zhǒng de, zhè piàn tián dào le qiūtiān huì biàn jīnsè. Zhèxiē xìnxī bú zài wèixīng tú shàng.",
+                "text_en": "Look at these maps — every one, I walked that land. Drawing a village map meant living there at least a month. A satellite captures a region in one second, but what it captures and what I drew aren't the same. The satellite sees coordinates, elevation, building area. I saw: this road turns to mud in rain, this tree was planted by the village's oldest resident, this field turns gold in autumn. None of that is on a satellite map."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the difference between her maps and satellite imagery.",
+                "options": [
+                    {
+                        "text_zh": "卫星图是「俯瞰」，您的地图是「亲历」——两种完全不同的认知方式。俯瞰给你精度，但剥离了感官经验和人文记忆。您的地图里有雨的触感、秋天的颜色、一棵树的故事——它们是让土地成为「地方」而不只是「位置」的东西。",
+                        "text_pinyin": "Wèixīng tú shì 'fǔkàn', nín de dìtú shì 'qīnlì' — liǎng zhǒng wánquán bùtóng de rènzhī fāngshì. Fǔkàn gěi nǐ jīngdù, dàn bōlí le gǎnguān jīngyàn hé rénwén jìyì. Nín de dìtú lǐ yǒu yǔ de chùgǎn, qiūtiān de yánsè, yī kē shù de gùshì — tāmen shì ràng tǔdì chéngwéi 'dìfang' ér bù zhǐ shì 'wèizhì' de dōngxi.",
+                        "text_en": "Satellite maps are 'overview,' yours are 'lived experience' — two completely different ways of knowing. Overview gives precision but strips sensory experience and human memory. Your maps contain rain's touch, autumn's colors, a tree's story — what makes land a 'place' rather than a 'location.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Place vs. location — her maps contain what satellites structurally cannot see."
+                    },
+                    {
+                        "text_zh": "但是卫星地图更准确吧？",
+                        "text_pinyin": "Dànshì wèixīng dìtú gèng zhǔnquè ba?",
+                        "text_en": "But satellite maps are more accurate, right?",
+                        "score": 0.0,
+                        "feedback": "Argues for the technology that displaced her."
+                    },
+                    {
+                        "text_zh": "您画地图用什么工具？",
+                        "text_pinyin": "Nín huà dìtú yòng shénme gōngjù?",
+                        "text_en": "What tools did you use to draw maps?",
+                        "score": 0.0,
+                        "feedback": "A technical question during a philosophical contrast."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "「地方」和「位置」的区别——你说到了关键。我画过一个苗族村庄的地图，村长带我走了每条路。他指着一块空地说「这里以前是打谷场，我爷爷在这里教我唱歌」。我在地图上标了一个符号，写了一行小字。卫星看到的是一块空地，面积0.3亩。但对那个村长来说，那不是空地——那是一个声音还在回响的地方。地图应该记录这些声音，但现在的地图只记录形状。",
+                "text_pinyin": "'Dìfang' hé 'wèizhì' de qūbié — nǐ shuō dào le guānjiàn. Wǒ huà guò yī ge Miáozú cūnzhuāng de dìtú, cūnzhǎng dài wǒ zǒu le měi tiáo lù. Tā zhǐ zhe yī kuài kōngdì shuō 'zhèlǐ yǐqián shì dǎ gǔ chǎng, wǒ yéye zài zhèlǐ jiāo wǒ chànggē'. Wǒ zài dìtú shàng biāo le yī ge fúhào, xiě le yī háng xiǎo zì. Wèixīng kàn dào de shì yī kuài kōngdì, miànjī líng diǎn sān mǔ. Dàn duì nàge cūnzhǎng lái shuō, nà bú shì kōngdì — nà shì yī ge shēngyīn hái zài huíxiǎng de dìfang. Dìtú yīnggāi jìlù zhèxiē shēngyīn, dàn xiànzài de dìtú zhǐ jìlù xíngzhuàng.",
+                "text_en": "'Place' and 'location' — you've hit the key. I once mapped a Miao village; the chief walked every path with me. He pointed to an empty lot: 'This used to be the threshing ground — my grandfather taught me to sing here.' I marked a symbol and wrote a note. The satellite sees an empty lot, 0.3 mu. For that chief, it's not empty — sounds still echo there. Maps should record these sounds, but modern maps only record shapes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to maps recording sounds vs. shapes.",
+                "options": [
+                    {
+                        "text_zh": "声音还在回响的地方——也许是对「地方」最诗意的定义。「位置」只有坐标，「地方」有回声。您的地图记录的不是地理，是记忆的地理。当村庄消失、村长们离去，您的地图成了唯一知道那块空地上有歌声的证据。",
+                        "text_pinyin": "Shēngyīn hái zài huíxiǎng de dìfang — yěxǔ shì duì 'dìfang' zuì shīyì de dìngyì. 'Wèizhì' zhǐyǒu zuòbiāo, 'dìfang' yǒu huíshēng. Nín de dìtú jìlù de bú shì dìlǐ, shì jìyì de dìlǐ. Dāng cūnzhuāng xiāoshī, cūnzhǎngmen líqù, nín de dìtú chéng le wéiyī zhīdào nà kuài kōngdì shàng yǒu gēshēng de zhèngjù.",
+                        "text_en": "A place where sounds still echo — perhaps the most poetic definition of 'place.' A 'location' has coordinates; a 'place' has echoes. Your maps record not geography but the geography of memory. When villages vanish and chiefs pass on, your maps become the only evidence that there was song on that empty lot.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Memory geography — the 'imprecise' map as the most precise record of human life."
+                    },
+                    {
+                        "text_zh": "您的地图有没有被档案馆收藏？",
+                        "text_pinyin": "Nín de dìtú yǒu méiyǒu bèi dàng'ànguǎn shōucáng?",
+                        "text_en": "Have your maps been collected by an archive?",
+                        "score": 0.0,
+                        "feedback": "An archival question during a moment about the irreplaceable nature of lived mapping."
+                    },
+                    {
+                        "text_zh": "谷歌地图有没有类似的功能？",
+                        "text_pinyin": "Gǔgē dìtú yǒu méiyǒu lèisì de gōngnéng?",
+                        "text_en": "Does Google Maps have a similar feature?",
+                        "score": 0.0,
+                        "feedback": "Compares her life's work to a commercial app."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "记忆的地理……你知道吗，我现在最遗憾的不是我的工作被卫星取代了——技术进步是必然的。我最遗憾的是，我只画了这么多张。中国有几十万个村庄，每一个都有自己的歌声、自己的树、自己的泥路。它们正在以我无法跟上的速度消失。每消失一个村庄，就消失了一整个「声音的地图」——一套只有住在那里的人才知道的，关于这片土地的隐藏知识。我画了三百张地图，但有三十万个村庄在我没到之前就已经沉默了。",
+                "text_pinyin": "Jìyì de dìlǐ…… nǐ zhīdào ma, wǒ xiànzài zuì yíhàn de bú shì wǒ de gōngzuò bèi wèixīng qǔdài le — jìshù jìnbù shì bìrán de. Wǒ zuì yíhàn de shì, wǒ zhǐ huà le zhème duō zhāng. Zhōngguó yǒu jǐ shí wàn ge cūnzhuāng, měi yī ge dōu yǒu zìjǐ de gēshēng, zìjǐ de shù, zìjǐ de ní lù. Tāmen zhèngzài yǐ wǒ wúfǎ gēn shàng de sùdù xiāoshī. Měi xiāoshī yī ge cūnzhuāng, jiù xiāoshī le yī zhěnggè 'shēngyīn de dìtú' — yī tào zhǐyǒu zhù zài nàlǐ de rén cái zhīdào de, guānyú zhè piàn tǔdì de yǐncáng zhīshi. Wǒ huà le sānbǎi zhāng dìtú, dàn yǒu sānshí wàn ge cūnzhuāng zài wǒ méi dào zhīqián jiù yǐjīng chénmò le.",
+                "text_en": "Geography of memory... my greatest regret isn't that satellites replaced me — progress is inevitable. My regret is that I only drew this many. China has hundreds of thousands of villages, each with its own songs, trees, mud roads. They're disappearing faster than I could ever keep up. Each vanished village is a lost 'map of sounds.' I drew three hundred maps, but three hundred thousand villages fell silent before I could reach them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the scale of what's been lost unrecorded.",
+                "options": [
+                    {
+                        "text_zh": "三百张和三十万个——这个落差本身就是无声的悲剧。但您画下的三百张，每一张都是从沉默中抢救出来的声音。这三百张证明了一件事：有人用脚走过这片土地，用耳朵听过歌声，用手把声音变成了线条。",
+                        "text_pinyin": "Sānbǎi zhāng hé sānshí wàn ge — zhège luòchā běnshēn jiù shì wúshēng de bēijù. Dàn nín huà xià de sānbǎi zhāng, měi yī zhāng dōu shì cóng chénmò zhōng qiǎngjiù chūlái de shēngyīn. Zhè sānbǎi zhāng zhèngmíng le yī jiàn shì: yǒu rén yòng jiǎo zǒu guò zhè piàn tǔdì, yòng ěrduo tīng guò gēshēng, yòng shǒu bǎ shēngyīn biàn chéng le xiàntiáo.",
+                        "text_en": "Three hundred versus three hundred thousand — that gap itself is a silent tragedy. But each of your three hundred maps is a sound rescued from silence. Those three hundred prove one thing: someone walked this land, listened to its songs, and turned those sounds into lines.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The measure is not quantity but irreplaceability — each map is a rescued voice."
+                    },
+                    {
+                        "text_zh": "也许可以培训更多的人来画这种地图？",
+                        "text_pinyin": "Yěxǔ kěyǐ péixùn gèng duō de rén lái huà zhè zhǒng dìtú?",
+                        "text_en": "Maybe more people could be trained to draw these kinds of maps?",
+                        "score": 0.0,
+                        "feedback": "A scalability suggestion that ignores the inherent limitation she's grieving."
+                    },
+                    {
+                        "text_zh": "数字地图能不能加上这些文化标注？",
+                        "text_pinyin": "Shùzì dìtú néng bù néng jiā shàng zhèxiē wénhuà biāozhù?",
+                        "text_en": "Could digital maps add these cultural annotations?",
+                        "score": 0.0,
+                        "feedback": "A feature request during a moment about irreplaceable human presence."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's rapid urbanization has resulted in the disappearance of an estimated 900,000 natural villages since 2000. Each village carried unique local knowledge — about weather patterns, soil conditions, water sources, and cultural practices — that existed nowhere else. Hand-drawn cartography (手绘地图) represented a deeply embodied way of knowing territory, requiring prolonged physical presence. The shift to satellite mapping gained immense precision but lost the human dimension of place-knowledge."
+    }
+}

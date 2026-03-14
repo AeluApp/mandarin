@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>California Privacy Notice (CCPA) — Aelu</title>
+  <meta name="description" content="California Consumer Privacy Act (CCPA) notice for Aelu. How California residents can exercise their privacy rights.">
+  <link rel="canonical" href="https://aeluapp.com/ccpa">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=2">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="California Privacy Notice (CCPA) — Aelu">
+  <meta property="og:description" content="CCPA notice for Aelu. Your California privacy rights explained in plain language.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aeluapp.com/ccpa">
+  <meta property="og:image" content="https://aeluapp.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="California Privacy Notice (CCPA) — Aelu">
+  <meta name="twitter:description" content="CCPA notice for Aelu. Your California privacy rights explained in plain language.">
+  <meta name="twitter:image" content="https://aeluapp.com/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+  <style>
+    :root {
+      --color-base: #F2EBE0;
+      --color-surface: #F7F1E8;
+      --color-text: #2A3650;
+      --color-text-faint: #8B8680;
+      --color-accent: #946070;
+      --color-secondary: #6A7A5A;
+      --color-border: #D8D0C4;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --radius: 0;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-base: #1C2028;
+        --color-surface: #242830;
+        --color-text: #E4DDD0;
+        --color-text-faint: #8B8680;
+        --color-border: #3A3530;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    /* -- Nav -- */
+    nav {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+          display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* -- Legal content -- */
+    .legal {
+      padding: var(--space-8) 0;
+    }
+
+    .legal h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .legal .effective-date {
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-6);
+    }
+
+    .legal h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .legal p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-3);
+      line-height: 1.75;
+    }
+
+    .legal ul {
+      list-style: none;
+      margin-bottom: var(--space-3);
+      padding-left: var(--space-4);
+    }
+
+    .legal ul li {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      line-height: 1.75;
+      padding: var(--space-1) 0;
+      position: relative;
+    }
+
+    .legal ul li::before {
+      content: "\2014";
+      position: absolute;
+      left: calc(-1 * var(--space-4));
+      color: var(--color-border);
+    }
+
+    .legal a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .legal strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* -- Footer -- */
+    footer {
+      padding: var(--space-5) 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      border-top: 1px solid var(--color-border);
+    }
+
+    footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-2);
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .legal h1 { font-size: 1.8rem; }
+      .nav-links { gap: var(--space-3); }
+    }
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-brand-icon {
+        mix-blend-mode: normal;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .nav-cta {
+      color: var(--color-base) !important;
+      background: var(--color-accent);
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-base);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-3);
+        z-index: 100;
+      }
+      .nav-links.nav-open { display: flex; }
+      nav .container { position: relative; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/auth/login">Log in</a></li>
+        <li><a href="/auth/register" class="nav-cta">Sign up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CCPA Content -->
+  <main class="legal">
+    <div class="container">
+
+      <h1>California Privacy Notice</h1>
+      <p class="effective-date">Effective: March 13, 2026</p>
+
+      <p>This notice supplements our <a href="/privacy">Privacy Policy</a> and applies to California residents under the California Consumer Privacy Act of 2018 and the California Privacy Rights Act of 2020 (collectively, "CCPA"). It is written in plain language because you should be able to understand your rights without hiring a lawyer.</p>
+
+      <h2>1. Categories of Personal Information We Collect</h2>
+      <p>In the preceding 12 months, we have collected the following categories of personal information from users of Aelu:</p>
+      <ul>
+        <li><strong>Identifiers:</strong> Email address, account username, IP address (in server logs).</li>
+        <li><strong>Account credentials:</strong> Hashed password (we never store or access your plaintext password).</li>
+        <li><strong>Commercial information:</strong> Subscription status, payment history (payment details are processed and stored by Stripe, not by us).</li>
+        <li><strong>Internet or network activity:</strong> Session logs, pages visited within the app, browser type, referring URL. If you have opted in to analytics cookies, Google Analytics 4 may collect additional browsing data.</li>
+        <li><strong>Education information:</strong> Study progress, drill scores, reading history, listening history, vocabulary encounter data, and other learning metrics you generate by using Aelu.</li>
+      </ul>
+      <p>We collect this information directly from you when you create an account and use the service. We do not purchase personal information from third parties or collect it from public sources.</p>
+
+      <h2>2. How We Use Personal Information</h2>
+      <p>We use the categories of personal information listed above for the following business purposes:</p>
+      <ul>
+        <li>Providing the Aelu service: delivering adaptive drills, tracking your progress, generating diagnostics.</li>
+        <li>Processing payments and managing subscriptions (via Stripe).</li>
+        <li>Sending transactional emails: account verification, password resets, weekly progress summaries (via Resend).</li>
+        <li>Maintaining security: detecting unauthorized access, preventing fraud.</li>
+        <li>Improving the service: analyzing aggregate, de-identified usage patterns to fix bugs and improve the learning experience.</li>
+      </ul>
+
+      <h2>3. We Do Not Sell or Share Your Personal Information</h2>
+      <p><strong>Aelu does not sell your personal information.</strong> We have not sold personal information in the preceding 12 months, and we have no plans to do so. We do not share personal information for cross-context behavioral advertising.</p>
+      <p>Because we do not sell or share personal information, the CCPA right to opt out of sale/sharing is satisfied by default. There is nothing to opt out of. If this ever changes, we will update this notice and provide an opt-out mechanism before any sale or sharing occurs.</p>
+
+      <h2>4. Service Providers</h2>
+      <p>We disclose personal information to the following categories of service providers, solely for the business purposes described above:</p>
+      <ul>
+        <li><strong>Stripe</strong> (payment processing): receives your payment method and billing information to process subscription charges.</li>
+        <li><strong>Resend</strong> (email delivery): receives your email address to deliver transactional emails on our behalf.</li>
+        <li><strong>Google Analytics 4</strong> (analytics, optional): if you consent to analytics cookies, GA4 receives browsing and usage data. You can decline analytics cookies at any time via the cookie consent banner, and no data will be sent to Google.</li>
+      </ul>
+      <p>Each service provider is contractually prohibited from using your data for any purpose other than performing services for Aelu.</p>
+
+      <h2>5. Your Rights Under the CCPA</h2>
+      <p>As a California resident, you have the following rights:</p>
+
+      <p><strong>Right to Know.</strong> You can request that we disclose the categories and specific pieces of personal information we have collected about you, the categories of sources, the business purposes for collection, and the categories of third parties with whom we have shared your information.</p>
+
+      <p><strong>Right to Delete.</strong> You can request that we delete the personal information we have collected about you. We will delete your data and direct our service providers to do the same, subject to certain exceptions permitted by law (for example, we may retain data necessary to complete a transaction you requested, detect security incidents, or comply with legal obligations).</p>
+
+      <p><strong>Right to Correct.</strong> You can request that we correct inaccurate personal information we maintain about you.</p>
+
+      <p><strong>Right to Opt Out of Sale/Sharing.</strong> As stated above, we do not sell or share your personal information. This right is satisfied by default.</p>
+
+      <p><strong>Right to Non-Discrimination.</strong> We will not discriminate against you for exercising any of your CCPA rights. We will not deny you the service, charge you a different price, provide a different quality of service, or retaliate in any way.</p>
+
+      <h2>6. How to Exercise Your Rights</h2>
+      <p>To submit a request to know, delete, or correct your personal information, you can:</p>
+      <ul>
+        <li>Email us at <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a> with the subject line "CCPA Request."</li>
+        <li>Use the data export and account deletion features in your account settings (available now -- no need to email).</li>
+      </ul>
+      <p>You may also designate an authorized agent to submit a request on your behalf. If you use an authorized agent, we may require the agent to provide proof of written authorization and we may need to verify your identity directly.</p>
+
+      <h2>7. Verification Process</h2>
+      <p>When you submit a request, we need to verify that you are the person whose data is being requested. Our verification process works as follows:</p>
+      <ul>
+        <li><strong>For requests submitted while logged in:</strong> Your authenticated session serves as verification. No additional steps are needed.</li>
+        <li><strong>For requests submitted via email:</strong> We will ask you to verify ownership of the email address associated with your Aelu account. We will send a verification code to that email address, and you must provide the code back to us before we process the request.</li>
+        <li><strong>For deletion requests:</strong> Because deletion is irreversible, we require you to confirm the request after receiving our verification email.</li>
+      </ul>
+      <p>We will respond to verifiable requests within 45 calendar days. If we need additional time (up to 45 more days), we will notify you in writing and explain the reason.</p>
+
+      <h2>8. Data Retention</h2>
+      <p>We retain your personal information for as long as your account is active, plus a reasonable period afterward to fulfill the purposes described in this notice. If you delete your account, we delete your personal information within 30 days, except where retention is required by law. Server logs containing IP addresses are retained for 90 days, then permanently deleted.</p>
+
+      <h2>9. Financial Incentive Programs</h2>
+      <p>Aelu does not offer financial incentive programs that involve the collection or sale of personal information. Our free tier is available to all users regardless of the personal information they provide. It is not a financial incentive -- it is simply how the product works.</p>
+
+      <h2>10. Changes to This Notice</h2>
+      <p>We may update this notice to reflect changes in our practices or changes in the law. When we do, we will post the updated notice on this page with a new effective date. For material changes, we will notify you by email at least 30 days in advance.</p>
+
+      <h2>11. Contact</h2>
+      <p>If you have questions about this notice or your California privacy rights, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. Every email gets read and we will respond within a few business days.</p>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-links"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
+      <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/breach-notification">Security</a></p>
+      <p style="margin-top: var(--space-2);">&copy; 2026 Aelu</p>
+    </div>
+  </footer>
+
+</body>
+</html>

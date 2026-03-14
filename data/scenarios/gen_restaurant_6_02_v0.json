@@ -1,0 +1,160 @@
+{
+    "title": "The Dietary Diplomat",
+    "title_zh": "饮食外交官",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_restaurant_6_02_v0",
+    "tree": {
+        "setup": "A Cantonese restaurant known for its dim sum, where bamboo steamers stack in towers behind the kitchen window like a culinary skyline. You have food allergies that require careful navigation — shellfish and peanuts, specifically — and you're dining with Chinese colleagues who have chosen this restaurant for a team lunch. The head waiter, Mr. Liang, has served diners with dietary restrictions for twenty-two years and considers allergen management an art form. He keeps a laminated allergen chart in his apron pocket and consults it with the seriousness of a doctor reviewing test results.",
+        "setup_zh": "一家以点心闻名的粤菜餐厅，竹蒸笼在厨房窗口后面叠成塔状，如同一道烹饪天际线。你有需要小心应对的食物过敏——贝壳类和花生——你正和中国同事们一起在这里吃团队午餐。领班梁先生为有饮食限制的食客服务了二十二年，他把过敏原管理视为一门艺术。他在围裙口袋里放着一张过塑的过敏原对照表，查阅时的认真程度如同医生审阅检查结果。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "各位好，欢迎光临。今天几位？需要包间还是大厅？",
+                "text_pinyin": "gèwèi hǎo, huānyíng guānglín. jīntiān jǐ wèi? xūyào bāojiān háishì dàtīng?",
+                "text_en": "Welcome everyone. How many today? Private room or main hall?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Mention your dietary restrictions before ordering.",
+                "options": [
+                    {
+                        "text_zh": "梁先生好，我们八位，大厅就行。点菜之前有一件重要的事情要告诉您：我对贝壳类海鲜和花生严重过敏。不是不喜欢吃，是吃了会有过敏反应的那种。请问你们的菜品有没有这两种食材的？另外，厨房在炒菜的时候会不会用花生油？",
+                        "text_pinyin": "Liáng xiānsheng hǎo, wǒmen bā wèi, dàtīng jiù xíng. diǎn cài zhīqián yǒu yí jiàn zhòngyào de shìqing yào gàosu nín: wǒ duì bèiké lèi hǎixiān hé huāshēng yánzhòng guòmǐn. búshì bù xǐhuan chī, shì chī le huì yǒu guòmǐn fǎnyìng de nà zhǒng. qǐngwèn nǐmen de càipǐn yǒu méiyǒu zhè liǎng zhǒng shícái de? lìngwài, chúfáng zài chǎo cài de shíhòu huì búhuì yòng huāshēng yóu?",
+                        "text_en": "Hello Mr. Liang — eight of us, main hall is fine. Before ordering, something important: I have serious allergies to shellfish and peanuts. Not a preference — an actual allergic reaction. Do your dishes contain either? Also, does the kitchen use peanut oil for cooking?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Distinguishing between preference and allergy, asking about hidden ingredients — Mr. Liang reaches for the laminated chart. This is the kind of diner whose safety he takes personally."
+                    },
+                    {
+                        "text_zh": "我不能吃海鲜和花生。",
+                        "text_pinyin": "wǒ bù néng chī hǎixiān hé huāshēng.",
+                        "text_en": "I can't eat seafood or peanuts.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll need clarification: 'can't' as in allergy or preference? And all seafood or just shellfish? The details matter."
+                    },
+                    {
+                        "text_zh": "你们有什么不含过敏原的菜？",
+                        "text_pinyin": "nǐmen yǒu shénme bù hán guòmǐn yuán de cài?",
+                        "text_en": "What dishes don't contain allergens?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Without knowing which allergens, Mr. Liang's chart is useless. He needs specifics."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢您提前告诉我，这很重要。我们厨房用的是大豆油，不是花生油，这点您可以放心。关于贝壳类，我们的虾饺和蒸凤爪都不含贝壳类。但是有几道菜里有虾——虾饺虽然叫虾饺，但虾和贝壳类不一样，请问您对虾过敏吗？",
+                "text_pinyin": "xièxie nín tíqián gàosu wǒ, zhè hěn zhòngyào. wǒmen chúfáng yòng de shì dàdòu yóu, búshì huāshēng yóu, zhè diǎn nín kěyǐ fàngxīn. guānyú bèiké lèi, wǒmen de xiā jiǎo hé zhēng fèng zhǎo dōu bù hán bèiké lèi. dànshì yǒu jǐ dào cài lǐ yǒu xiā——xiā jiǎo suīrán jiào xiā jiǎo, dàn xiā hé bèiké lèi bù yíyàng, qǐngwèn nín duì xiā guòmǐn ma?",
+                "text_en": "Thank you for telling me in advance — this is important. Our kitchen uses soybean oil, not peanut oil, so that's safe. Regarding shellfish: our shrimp dumplings and steamed chicken feet don't contain shellfish. But some dishes have shrimp — shrimp and shellfish are different categories. Are you allergic to shrimp too?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Clarify the allergy details and ask for recommendations.",
+                "options": [
+                    {
+                        "text_zh": "虾可以吃，我只对蛤蜊、蚌、扇贝这些双壳类过敏。还有螃蟹也不行。知道厨房用大豆油我就放心了。那请您帮我看看菜单上哪些菜是完全安全的？我不想因为我的过敏影响大家点菜的选择。如果有些菜是含贝壳类的，其他同事可以点，只要我的那份不含就行。",
+                        "text_pinyin": "xiā kěyǐ chī, wǒ zhǐ duì gélí, bàng, shànbèi zhèxiē shuāng ké lèi guòmǐn. hái yǒu pángxiè yě bùxíng. zhīdào chúfáng yòng dàdòu yóu wǒ jiù fàngxīn le. nà qǐng nín bāng wǒ kànkan càidān shàng nǎxiē cài shì wánquán ānquán de? wǒ bù xiǎng yīnwèi wǒ de guòmǐn yǐngxiǎng dàjiā diǎn cài de xuǎnzé. rúguǒ yǒuxiē cài shì hán bèiké lèi de, qítā tóngshì kěyǐ diǎn, zhǐyào wǒ de nà fèn bù hán jiù xíng.",
+                        "text_en": "Shrimp is fine — I'm only allergic to clams, mussels, scallops, those bivalves. And crab. Good to know about the soybean oil. Could you help identify which menu items are completely safe for me? I don't want my allergies to limit everyone else's choices. If some dishes contain shellfish, colleagues can order them — just my portion needs to be safe.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Precise allergy delineation plus consideration for the group — Mr. Liang marks five safe dishes on the menu with a practiced hand. Twenty-two years of allergen diplomacy at work."
+                    },
+                    {
+                        "text_zh": "虾没问题。请推荐几个安全的菜。",
+                        "text_pinyin": "xiā méi wèntí. qǐng tuījiàn jǐ gè ānquán de cài.",
+                        "text_en": "Shrimp is fine. Please recommend some safe dishes.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He pulls out the chart and begins matching."
+                    },
+                    {
+                        "text_zh": "反正海鲜的都别给我。",
+                        "text_pinyin": "fǎnzhèng hǎixiān de dōu bié gěi wǒ.",
+                        "text_en": "Just don't give me anything with seafood.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Overly broad — you'd miss the shrimp dumplings, which are safe. Mr. Liang clarifies."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "（在菜单上标记）这几道完全没有贝壳类和花生：叉烧包、虾饺、蒸排骨、白灼菜心、豉汁蒸凤爪、萝卜糕。还有炒饭和炒面也是安全的。有一道要注意：XO酱炒牛河——XO酱里面有干贝，就是扇贝做的，这道菜您不能吃。我会在您的菜上做一个特别标记，厨房那边我亲自交代。",
+                "text_pinyin": "(zài càidān shàng biāojì) zhè jǐ dào wánquán méiyǒu bèiké lèi hé huāshēng: chāshāo bāo, xiā jiǎo, zhēng páigǔ, bái zhuó càixīn, chǐ zhī zhēng fèng zhǎo, luóbo gāo. hái yǒu chǎo fàn hé chǎo miàn yě shì ānquán de. yǒu yí dào yào zhùyì: XO jiàng chǎo niú hé——XO jiàng lǐmiàn yǒu gānbèi, jiùshì shànbèi zuò de, zhè dào cài nín bù néng chī. wǒ huì zài nín de cài shàng zuò yí gè tèbié biāojì, chúfáng nàbiān wǒ qīnzì jiāodài.",
+                "text_en": "(Marking the menu) These are completely free of shellfish and peanuts: char siu bao, shrimp dumplings, steamed spare ribs, blanched choy sum, black bean chicken feet, turnip cake. Fried rice and noodles are safe too. One to watch: XO sauce fried rice noodles — XO sauce contains dried scallop, which is shellfish. You can't have that. I'll put a special mark on your dishes and personally brief the kitchen."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and order for yourself.",
+                "options": [
+                    {
+                        "text_zh": "谢谢梁先生，XO酱含干贝这一点我之前完全没想到——如果不是您提醒，我可能就点了。那我要虾饺、蒸排骨、叉烧包和一碗炒饭。其他的菜让同事们自己选就好了。还有一个小问题：如果我不小心吃到了过敏的东西，附近最近的医院在哪里？希望用不上，但以防万一。",
+                        "text_pinyin": "xièxie Liáng xiānsheng, XO jiàng hán gānbèi zhè yì diǎn wǒ zhīqián wánquán méi xiǎng dào——rúguǒ búshì nín tíxǐng, wǒ kěnéng jiù diǎn le. nà wǒ yào xiā jiǎo, zhēng páigǔ, chāshāo bāo hé yì wǎn chǎo fàn. qítā de cài ràng tóngshìmen zìjǐ xuǎn jiù hǎo le. hái yǒu yí gè xiǎo wèntí: rúguǒ wǒ bù xiǎoxīn chī dào le guòmǐn de dōngxi, fùjìn zuìjìn de yīyuàn zài nǎlǐ? xīwàng yòng bú shàng, dàn yǐ fáng wànyī.",
+                        "text_en": "Thank you Mr. Liang — I had no idea XO sauce contains dried scallop. If you hadn't mentioned it, I might have ordered it. I'll have the shrimp dumplings, steamed spare ribs, char siu bao, and fried rice. Colleagues can choose the rest. One more small question: if I accidentally eat something allergenic, where's the nearest hospital? Hopefully unnecessary, but just in case.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging the hidden allergen, ordering safely, and preparing for worst case — Mr. Liang's respect deepens. He writes the hospital address on a card from his pocket."
+                    },
+                    {
+                        "text_zh": "那我就点安全的这几个。XO酱那个不要。谢谢！",
+                        "text_pinyin": "nà wǒ jiù diǎn ānquán de zhè jǐ gè. XO jiàng nàge búyào. xièxie!",
+                        "text_en": "I'll order from the safe ones. No XO sauce. Thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear and safe. He marks the order."
+                    },
+                    {
+                        "text_zh": "好的，你帮我选几个就行。",
+                        "text_pinyin": "hǎo de, nǐ bāng wǒ xuǎn jǐ gè jiù xíng.",
+                        "text_en": "OK, just pick some for me.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "He can, and will. But he'd prefer you understood your own safe choices — autonomy is part of allergy safety."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "最近的医院是仁和医院，走路五分钟，出门左转到第一个路口就能看到。不过不用担心，我已经跟厨房打招呼了，您的菜会用单独的锅和餐具来做。来了这么多年，还没有过过敏的情况发生。好了，菜单我收了，马上就上第一轮点心。",
+                "text_pinyin": "zuìjìn de yīyuàn shì Rénhé Yīyuàn, zǒu lù wǔ fēnzhōng, chū mén zuǒ zhuǎn dào dì yī gè lùkǒu jiù néng kàn dào. búguò búyòng dānxīn, wǒ yǐjīng gēn chúfáng dǎ zhāohu le, nín de cài huì yòng dāndú de guō hé cānjù lái zuò. lái le zhème duō nián, hái méiyǒu guò guòmǐn de qíngkuàng fāshēng. hǎo le, càidān wǒ shōu le, mǎshàng jiù shàng dì yī lún diǎnxīn.",
+                "text_en": "Nearest hospital is Renhe Hospital — five-minute walk, left out the door to the first intersection. But don't worry, I've briefed the kitchen — your dishes will be prepared with separate pans and utensils. In all my years here, we've never had an allergy incident. OK, I'll take the menus — first round of dim sum coming right up."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express gratitude and reassure your colleagues.",
+                "options": [
+                    {
+                        "text_zh": "太感谢了梁先生，单独的锅和餐具这个做法让我完全放心了。（转向同事们）大家别因为我的过敏就不敢点想吃的菜——你们尽管点海鲜的，我这边完全没问题。梁先生已经安排得非常周到了。",
+                        "text_pinyin": "tài gǎnxiè le Liáng xiānsheng, dāndú de guō hé cānjù zhège zuòfǎ ràng wǒ wánquán fàngxīn le. (zhuǎn xiàng tóngshìmen) dàjiā bié yīnwèi wǒ de guòmǐn jiù bù gǎn diǎn xiǎng chī de cài——nǐmen jǐnguǎn diǎn hǎixiān de, wǒ zhè biān wánquán méi wèntí. Liáng xiānsheng yǐjīng ānpái de fēicháng zhōudào le.",
+                        "text_en": "Thank you so much Mr. Liang — separate pans and utensils completely sets my mind at ease. (Turning to colleagues) Everyone, don't let my allergies stop you from ordering what you want — go ahead and order the seafood dishes, I'm perfectly fine. Mr. Liang has arranged everything thoroughly.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thanking the professional and liberating the group — the dual diplomacy of dining with allergies. The bamboo steamers begin their procession."
+                    },
+                    {
+                        "text_zh": "谢谢！大家放心点菜吧，我没问题。",
+                        "text_pinyin": "xièxie! dàjiā fàngxīn diǎn cài ba, wǒ méi wèntí.",
+                        "text_en": "Thanks! Everyone order freely, I'm fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief but effective reassurance. The dim sum begins."
+                    },
+                    {
+                        "text_zh": "好的，快上菜吧，饿了。",
+                        "text_pinyin": "hǎo de, kuài shàng cài ba, è le.",
+                        "text_en": "OK, bring the food — I'm hungry.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Hunger is the universal language. The first steamer arrives."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Food allergies (食物过敏) are taken increasingly seriously in Chinese restaurants, though awareness varies. Key phrases: 我对X过敏 (wǒ duì X guòmǐn, I'm allergic to X). Hidden allergens like XO sauce (XO酱, containing dried scallop) and oyster sauce (蚝油, containing oyster extract) can catch diners off guard. Many Chinese kitchens use 大豆油 (soybean oil) rather than 花生油 (peanut oil), but it's always worth asking."
+    }
+}

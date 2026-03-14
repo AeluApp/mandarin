@@ -22,7 +22,7 @@ from .runner import run_session
 
 app = typer.Typer(
     name="mandarin",
-    help="Mandarin learning system. Default: run today's session.",
+    help="Aelu — patient Mandarin study. Default: run today's session.",
     add_completion=False,
     no_args_is_help=False,
 )
@@ -95,10 +95,10 @@ def today(ctx: typer.Context):
 def _onboard_first_run(conn):
     """Interactive first-run onboarding: offer to load HSK 1 vocabulary."""
     console.print(Panel(
-        "[bold]漫 Mandarin[/bold]\n\n"
+        "[bold]漫 Aelu[/bold]\n\n"
         "HSK 1-9 word lists available (10,000+ items).\n"
         "HSK 1 has ~500 words.\n",
-        title="漫 Mandarin", border_style="dim",
+        title="漫 Aelu", border_style="dim",
     ))
 
     resp = console.input("  Load HSK 1 vocabulary? (y/n) ").strip().lower()
@@ -172,13 +172,13 @@ def _run_session_flow(conn, profile, user_id: int = 1):
     total_sessions = profile.get("total_sessions", 0) or 0
 
     console.print()
-    console.print("  漫 Mandarin", style="bold")
+    console.print("  漫 Aelu", style="bold")
     console.print(f"  Session #{total_sessions + 1} · {day_profile['name']}", style="dim")
     console.print()
 
     if total_sessions == 0:
         console.print("  Q = done, B = skip, N = unsure, ? = hint")
-        console.print("  MC drills: answer by number. IME drills: type pinyin.")
+        console.print("  MC drills: answer by number. Typing drills: type pinyin.")
         console.print("  Web UI: [bold]./run app[/bold]")
         console.print()
     else:
@@ -223,7 +223,7 @@ def mini():
             return
 
         console.print()
-        console.print("  漫 Mandarin — Mini Session", style="bold")
+        console.print("  漫 Aelu — Mini Session", style="bold")
         console.print()
 
         plan = plan_minimal_session(conn)
@@ -240,7 +240,7 @@ def catchup():
             return
 
         console.print()
-        console.print("  漫 Mandarin — Catch-up Session", style="bold")
+        console.print("  漫 Aelu — Catch-up Session", style="bold")
         console.print()
 
         plan = plan_catchup_session(conn)
@@ -387,7 +387,7 @@ def library():
         total = sum(status_counts.values())
 
         console.print()
-        console.print("  漫 Mandarin — Library", style="bold")
+        console.print("  漫 Aelu — Library", style="bold")
         console.print()
 
         status_table = Table(box=box.SIMPLE, show_header=False, padding=(0, 1))
@@ -430,7 +430,7 @@ def library():
 def guide():
     """Quick reference — what to run and when."""
     console.print()
-    console.print("  漫 Mandarin — Quick Guide", style="bold")
+    console.print("  漫 Aelu — Quick Guide", style="bold")
     console.print()
 
     guide_table = Table(box=box.SIMPLE, show_header=False, padding=(0, 1))
@@ -458,6 +458,24 @@ def guide():
     console.print()
 
 
+@app.command(name="media-check")
+def media_check():
+    """Validate all media shelf URLs for accessibility."""
+    from .media import validate_media_urls
+    console.print("\n  Checking media URLs...", style="dim")
+    results = validate_media_urls(timeout=10)
+    broken = [r for r in results if r["status"] != "ok"]
+    ok_count = len(results) - len(broken)
+    console.print(f"  {ok_count}/{len(results)} URLs accessible")
+    if broken:
+        console.print()
+        for r in broken:
+            console.print(f"  [{r['status']}] {r['id']}: {r.get('error', r.get('http_status', 'unknown'))}", style="yellow")
+    else:
+        console.print("  All media URLs are healthy.", style="green")
+    console.print()
+
+
 @app.command()
 def status(
     detail: bool = typer.Option(False, "--detail", "-d", help="Show extended mastery, retention, and error details"),
@@ -480,7 +498,7 @@ def status(
         seen_total = solid + growing + early + needs_review
 
         console.print()
-        console.print("  漫 Mandarin — Status", style="bold")
+        console.print("  漫 Aelu — Status", style="bold")
 
         # ── Primary signal: Am I getting better? ──
         console.print()
@@ -683,6 +701,99 @@ def _avg_accuracy(sessions: list) -> float:
 
 
 @app.command()
+def debug():
+    """Show debug info: last session trace, drill errors, anomalies."""
+    import json
+    from pathlib import Path
+
+    data_dir = Path(__file__).resolve().parent.parent / "data"
+    errors_log = data_dir / "drill_errors.log"
+    trace_log = data_dir / "session_trace.jsonl"
+
+    console.print()
+
+    # ── Drill errors ──
+    if errors_log.exists() and errors_log.stat().st_size > 0:
+        content = errors_log.read_text()
+        # Count error blocks
+        n_errors = content.count("=" * 60)
+        console.print(f"  [bold red]Drill errors:[/] {n_errors} logged")
+        # Show last error
+        blocks = content.split("=" * 60)
+        last = blocks[-1].strip() if blocks else ""
+        if last:
+            console.print(f"  [dim]Latest:[/]")
+            for line in last.split("\n")[:8]:
+                console.print(f"    {line}")
+        console.print(f"  [dim]Full log: data/drill_errors.log[/]")
+    else:
+        console.print("  [green]No drill errors logged.[/]")
+
+    console.print()
+
+    # ── Session trace ──
+    if trace_log.exists() and trace_log.stat().st_size > 0:
+        lines = trace_log.read_text().strip().split("\n")
+        # Find the last session
+        events = []
+        last_session_id = None
+        for line in reversed(lines):
+            try:
+                e = json.loads(line)
+                if last_session_id is None:
+                    last_session_id = e.get("session")
+                if e.get("session") == last_session_id:
+                    events.append(e)
+                else:
+                    break
+            except json.JSONDecodeError:
+                continue
+        events.reverse()
+
+        if events:
+            console.print(f"  [bold]Last session[/] (id={last_session_id}):")
+            # Summary stats
+            start_ev = next((e for e in events if e["event"] == "session_start"), None)
+            end_ev = next((e for e in events if e["event"] == "session_end"), None)
+            crashes = [e for e in events if e["event"] == "drill_crash"]
+            skips = [e for e in events if e["event"] == "drill_skip"]
+            pivots = [e for e in events if e["event"] == "struggle_pivot"]
+
+            if start_ev:
+                console.print(f"    Plan: {start_ev.get('n_drills', '?')} drills ({start_ev.get('session_type', '?')})")
+            if end_ev:
+                console.print(f"    Result: {end_ev.get('correct', '?')}/{end_ev.get('completed', '?')} correct, "
+                              f"{end_ev.get('elapsed_s', '?')}s")
+                if end_ev.get("early_exit"):
+                    console.print("    [yellow]Early exit[/]")
+
+            if crashes:
+                console.print(f"    [bold red]Crashes: {len(crashes)}[/]")
+                for c in crashes:
+                    console.print(f"      {c.get('drill_type', '?')} on {c.get('hanzi', '?')}: {c.get('error', '?')[:80]}")
+            if skips:
+                console.print(f"    [yellow]Skips: {len(skips)}[/]")
+            if pivots:
+                console.print(f"    [yellow]Struggle pivot at accuracy {pivots[0].get('accuracy', '?')}[/]")
+
+            # Per-drill breakdown
+            drills = [e for e in events if e["event"] == "drill_done"]
+            if drills:
+                console.print(f"\n    [dim]Drill-by-drill:[/]")
+                for d in drills:
+                    mark = "✓" if d.get("correct") else "✗"
+                    ms = d.get("ms", "")
+                    ms_str = f" {ms}ms" if ms else ""
+                    console.print(f"      {mark} {d.get('drill_type', '?'):18s} {d.get('hanzi', ''):6s}{ms_str}")
+
+        console.print(f"\n  [dim]Full trace: data/session_trace.jsonl[/]")
+    else:
+        console.print("  [dim]No session trace yet. Run a session first.[/]")
+
+    console.print()
+
+
+@app.command()
 def report():
     """Generate a full progress report."""
     with db.connection() as conn:
@@ -710,7 +821,7 @@ def assess(
             return
 
         console.print()
-        console.print("  漫 Mandarin — Assessment", style="bold")
+        console.print("  漫 Aelu — Assessment", style="bold")
         console.print()
 
         # Levels
@@ -792,7 +903,7 @@ def calibrate():
         from .diagnostics import plan_calibrate_session, update_calibration_levels
 
         console.print()
-        console.print("  漫 Mandarin — Calibration", style="bold")
+        console.print("  漫 Aelu — Calibration", style="bold")
         console.print()
 
         plan = plan_calibrate_session(conn)
@@ -832,7 +943,7 @@ def goal():
         growth = get_growth_summary(conn)
 
         console.print()
-        console.print("  漫 Mandarin — Goal", style="bold")
+        console.print("  漫 Aelu — Goal", style="bold")
         console.print()
 
         # Readiness score
@@ -895,7 +1006,7 @@ def forecast():
         pace = fc["pace"]
 
         console.print()
-        console.print("  漫 Mandarin — Forecast", style="bold")
+        console.print("  漫 Aelu — Forecast", style="bold")
         console.print()
 
         # Pace line
@@ -1103,7 +1214,7 @@ def improve_cmd(
             return
 
         console.print()
-        console.print("  漫 Mandarin — System Improvement Proposals", style="bold")
+        console.print("  漫 Aelu — System Improvement Proposals", style="bold")
         console.print()
 
         for p in proposals:
@@ -1243,7 +1354,7 @@ def scenarios():
             console.print()
             return
 
-        console.print("  漫 Mandarin — Dialogue Scenarios", style="bold")
+        console.print("  漫 Aelu — Dialogue Scenarios", style="bold")
         console.print()
         sc_table = Table(box=box.SIMPLE, show_header=True, padding=(0, 1))
         sc_table.add_column("ID", justify="right")
@@ -1486,7 +1597,7 @@ def speak():
 
         from .scheduler import plan_speaking_session
         console.print()
-        console.print("  漫 Mandarin — Speaking Practice", style="bold")
+        console.print("  漫 Aelu — Speaking Practice", style="bold")
         console.print()
 
         plan = plan_speaking_session(conn)
@@ -1540,7 +1651,7 @@ def listen(
     pause = {"slow": 2.5, "normal": 1.5, "fast": 0.8}.get(pace, 1.5)
 
     console.print()
-    console.print("  漫 Mandarin — Passive Listening", style="bold")
+    console.print("  漫 Aelu — Passive Listening", style="bold")
     console.print(f"  {len(items)} items · HSK ≤{hsk} · {pace} pace")
     console.print("  Just listen and absorb. Enter = next, Q = quit.")
     console.print()
@@ -1578,21 +1689,23 @@ def listen(
 
 @app.command("app")
 def web_app(
-    port: int = typer.Option(5173, "--port", "-p", help="Port to run on"),
+    port: int = typer.Option(None, "--port", "-p", help="Port to run on"),
     no_open: bool = typer.Option(False, "--no-open", help="Don't auto-open browser"),
 ):
     """Launch the web interface in your browser."""
     from .web import create_app
+    from .settings import PORT as _env_port, DEFAULT_PORT
     import webbrowser
     import threading
 
+    port = port or _env_port or DEFAULT_PORT
     flask_app = create_app()
     url = f"http://localhost:{port}"
 
     if not no_open:
         threading.Timer(1.0, lambda: webbrowser.open(url)).start()
 
-    console.print(f"\n  漫 Mandarin — Web UI at {url}")
+    console.print(f"\n  漫 Aelu — Web UI at {url}")
     console.print("  Press Ctrl+C to stop.\n")
 
     flask_app.run(host="127.0.0.1", port=port, debug=False)
@@ -1660,7 +1773,7 @@ def portfolio():
         growth = get_growth_summary(conn)
 
         console.print()
-        console.print("  漫 Mandarin — Portfolio", style="bold")
+        console.print("  漫 Aelu — Portfolio", style="bold")
         console.print(f"  [dim]{growth['phase_label']}[/dim]")
         console.print()
 
@@ -2051,7 +2164,9 @@ def watch(
         lens_weights = {}
         for col in ("lens_quiet_observation", "lens_institutions", "lens_urban_texture",
                      "lens_humane_mystery", "lens_identity", "lens_comedy",
-                     "lens_food", "lens_travel", "lens_explainers"):
+                     "lens_food", "lens_travel", "lens_explainers",
+                     "lens_wit", "lens_ensemble_comedy", "lens_sharp_observation",
+                     "lens_satire", "lens_moral_texture"):
             lens_weights[col] = float(profile.get(col) or 0.5)
 
         # If specific media_id given, go straight to it
@@ -2377,11 +2492,19 @@ def metrics(
     generate_report(output_format=output_format, save=not no_save)
 
 
+@app.command()
+def wiring():
+    """Check integration wiring (CSS, data fields, API contracts)."""
+    from .wiring import run_checks, print_report
+    results = run_checks()
+    print_report(results)
+
+
 # ── Auth commands ──────────────────────────────
 
 @app.command()
 def login():
-    """Log in to your Mandarin account."""
+    """Log in to your Aelu account."""
     from .cli_auth import get_cli_auth, save_cli_auth
     from .auth import authenticate
 
@@ -2413,7 +2536,7 @@ def login():
 
 @app.command()
 def logout():
-    """Log out of your Mandarin account."""
+    """Log out of your Aelu account."""
     from .cli_auth import get_cli_auth, clear_cli_auth
 
     existing = get_cli_auth()
@@ -2427,7 +2550,7 @@ def logout():
 
 @app.command()
 def register():
-    """Create a new Mandarin account."""
+    """Create a new Aelu account."""
     from .cli_auth import get_cli_auth, save_cli_auth
     from .auth import create_user
 

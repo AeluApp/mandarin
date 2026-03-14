@@ -1,0 +1,1177 @@
+[
+  {
+    "id": "j1_observe_011",
+    "title": "Two Cups of Tea",
+    "title_zh": "两杯茶",
+    "hsk_level": 1,
+    "text_zh": "下午三点，我给自己做了两杯茶。一杯在桌子上，一杯在手里。我喝手里的，看桌子上的。两杯茶都不说话。",
+    "text_pinyin": "Xiàwǔ sān diǎn, wǒ gěi zìjǐ zuò le liǎng bēi chá. Yì bēi zài zhuōzi shàng, yì bēi zài shǒu lǐ. Wǒ hē shǒu lǐ de, kàn zhuōzi shàng de. Liǎng bēi chá dōu bù shuōhuà.",
+    "text_en": "At three in the afternoon, I make myself two cups of tea. One is on the table, one is in my hand. I drink the one in my hand and watch the one on the table. Neither cup of tea speaks.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我做了几杯茶？",
+        "q_en": "How many cups of tea did I make?",
+        "options": [
+          {"text": "一杯", "pinyin": "yì bēi", "text_en": "One cup", "correct": false},
+          {"text": "两杯", "pinyin": "liǎng bēi", "text_en": "Two cups", "correct": true},
+          {"text": "三杯", "pinyin": "sān bēi", "text_en": "Three cups", "correct": false},
+          {"text": "没有做茶", "pinyin": "méiyǒu zuò chá", "text_en": "Didn't make tea", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我喝哪杯茶？",
+        "q_en": "Which cup of tea do I drink?",
+        "options": [
+          {"text": "桌子上的", "pinyin": "zhuōzi shàng de", "text_en": "The one on the table", "correct": false},
+          {"text": "手里的", "pinyin": "shǒu lǐ de", "text_en": "The one in my hand", "correct": true},
+          {"text": "两杯都喝", "pinyin": "liǎng bēi dōu hē", "text_en": "Both cups", "correct": false},
+          {"text": "都不喝", "pinyin": "dōu bù hē", "text_en": "Neither", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "这是什么时候？",
+        "q_en": "What time is it?",
+        "options": [
+          {"text": "早上六点", "pinyin": "zǎoshang liù diǎn", "text_en": "Six in the morning", "correct": false},
+          {"text": "中午", "pinyin": "zhōngwǔ", "text_en": "Noon", "correct": false},
+          {"text": "下午三点", "pinyin": "xiàwǔ sān diǎn", "text_en": "Three in the afternoon", "correct": true},
+          {"text": "晚上", "pinyin": "wǎnshang", "text_en": "Evening", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_observe_012",
+    "title": "The Dog That Sits",
+    "title_zh": "坐着的狗",
+    "hsk_level": 1,
+    "text_zh": "学校前面有一只狗。它每天都来，坐在那里看人。学生来了，它看。学生走了，它也看。没有人叫它来，但是它想来。",
+    "text_pinyin": "Xuéxiào qiánmiàn yǒu yì zhī gǒu. Tā měi tiān dōu lái, zuò zài nàlǐ kàn rén. Xuéshēng lái le, tā kàn. Xuéshēng zǒu le, tā yě kàn. Méiyǒu rén jiào tā lái, dànshì tā xiǎng lái.",
+    "text_en": "There's a dog in front of the school. It comes every day and sits there watching people. Students arrive — it watches. Students leave — it watches too. Nobody calls it to come, but it wants to come.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "狗在哪里？",
+        "q_en": "Where is the dog?",
+        "options": [
+          {"text": "学校前面", "pinyin": "xuéxiào qiánmiàn", "text_en": "In front of the school", "correct": true},
+          {"text": "商店里面", "pinyin": "shāngdiàn lǐmiàn", "text_en": "Inside a shop", "correct": false},
+          {"text": "家里", "pinyin": "jiā lǐ", "text_en": "At home", "correct": false},
+          {"text": "医院后面", "pinyin": "yīyuàn hòumiàn", "text_en": "Behind the hospital", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "狗每天做什么？",
+        "q_en": "What does the dog do every day?",
+        "options": [
+          {"text": "跑", "pinyin": "pǎo", "text_en": "Run", "correct": false},
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleep", "correct": false},
+          {"text": "看人", "pinyin": "kàn rén", "text_en": "Watch people", "correct": true},
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Eat things", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "谁叫狗来的？",
+        "q_en": "Who called the dog to come?",
+        "options": [
+          {"text": "老师", "pinyin": "lǎoshī", "text_en": "The teacher", "correct": false},
+          {"text": "学生", "pinyin": "xuéshēng", "text_en": "Students", "correct": false},
+          {"text": "没有人", "pinyin": "méiyǒu rén", "text_en": "Nobody", "correct": true},
+          {"text": "朋友", "pinyin": "péngyou", "text_en": "A friend", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_observe_013",
+    "title": "Quiet Afternoon",
+    "title_zh": "安静的下午",
+    "hsk_level": 1,
+    "text_zh": "下午，家里没有人。我一个人坐着喝水。外面有雨，不大。猫在我的书上面睡觉。我不想叫它起来。",
+    "text_pinyin": "Xiàwǔ, jiā lǐ méiyǒu rén. Wǒ yí gè rén zuòzhe hē shuǐ. Wàimiàn yǒu yǔ, bú dà. Māo zài wǒ de shū shàngmiàn shuìjiào. Wǒ bù xiǎng jiào tā qǐlái.",
+    "text_en": "In the afternoon, nobody is home. I sit alone drinking water. There's rain outside, not heavy. The cat is sleeping on top of my book. I don't want to wake it up.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "家里有几个人？",
+        "q_en": "How many people are home?",
+        "options": [
+          {"text": "两个人", "pinyin": "liǎng gè rén", "text_en": "Two people", "correct": false},
+          {"text": "一个人", "pinyin": "yí gè rén", "text_en": "One person", "correct": true},
+          {"text": "三个人", "pinyin": "sān gè rén", "text_en": "Three people", "correct": false},
+          {"text": "没有人", "pinyin": "méiyǒu rén", "text_en": "Nobody", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "猫在哪里睡觉？",
+        "q_en": "Where is the cat sleeping?",
+        "options": [
+          {"text": "在桌子上", "pinyin": "zài zhuōzi shàng", "text_en": "On the table", "correct": false},
+          {"text": "在书上面", "pinyin": "zài shū shàngmiàn", "text_en": "On top of the book", "correct": true},
+          {"text": "在外面", "pinyin": "zài wàimiàn", "text_en": "Outside", "correct": false},
+          {"text": "在我的衣服上", "pinyin": "zài wǒ de yīfu shàng", "text_en": "On my clothes", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "外面怎么了？",
+        "q_en": "What's happening outside?",
+        "options": [
+          {"text": "很热", "pinyin": "hěn rè", "text_en": "It's very hot", "correct": false},
+          {"text": "下雨了", "pinyin": "xià yǔ le", "text_en": "It's raining", "correct": true},
+          {"text": "很冷", "pinyin": "hěn lěng", "text_en": "It's very cold", "correct": false},
+          {"text": "有很多人", "pinyin": "yǒu hěn duō rén", "text_en": "There are many people", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_observe_014",
+    "title": "What the Cat Sees",
+    "title_zh": "猫看到什么",
+    "hsk_level": 1,
+    "text_zh": "我的猫坐在那里看外面。我也坐下来看。外面有什么？我看到人在走。猫看到什么？我不知道。可能猫看到的和我不一样。",
+    "text_pinyin": "Wǒ de māo zuò zài nàlǐ kàn wàimiàn. Wǒ yě zuò xiàlái kàn. Wàimiàn yǒu shénme? Wǒ kàn dào rén zài zǒu. Māo kàn dào shénme? Wǒ bù zhīdào. Kěnéng māo kàn dào de hé wǒ bù yíyàng.",
+    "text_en": "My cat sits there looking outside. I sit down and look too. What's outside? I see people walking. What does the cat see? I don't know. Maybe the cat sees something different from me.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "猫在做什么？",
+        "q_en": "What is the cat doing?",
+        "options": [
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleeping", "correct": false},
+          {"text": "看外面", "pinyin": "kàn wàimiàn", "text_en": "Looking outside", "correct": true},
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Eating", "correct": false},
+          {"text": "跑", "pinyin": "pǎo", "text_en": "Running", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我看到外面有什么？",
+        "q_en": "What do I see outside?",
+        "options": [
+          {"text": "猫", "pinyin": "māo", "text_en": "Cats", "correct": false},
+          {"text": "人在走", "pinyin": "rén zài zǒu", "text_en": "People walking", "correct": true},
+          {"text": "狗在跑", "pinyin": "gǒu zài pǎo", "text_en": "Dogs running", "correct": false},
+          {"text": "什么都没有", "pinyin": "shénme dōu méiyǒu", "text_en": "Nothing", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我知道猫看到什么吗？",
+        "q_en": "Do I know what the cat sees?",
+        "options": [
+          {"text": "知道", "pinyin": "zhīdào", "text_en": "Yes", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "No", "correct": true},
+          {"text": "猫说了", "pinyin": "māo shuō le", "text_en": "The cat said", "correct": false},
+          {"text": "朋友说了", "pinyin": "péngyou shuō le", "text_en": "A friend said", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_observe_015",
+    "title": "Before Anyone Wakes Up",
+    "title_zh": "大家起床前",
+    "hsk_level": 1,
+    "text_zh": "早上五点，我起床了。家里的人都在睡觉。我一个人坐在那里喝茶。外面没有人，没有车。这个时候，我最高兴。",
+    "text_pinyin": "Zǎoshang wǔ diǎn, wǒ qǐchuáng le. Jiā lǐ de rén dōu zài shuìjiào. Wǒ yí gè rén zuò zài nàlǐ hē chá. Wàimiàn méiyǒu rén, méiyǒu chē. Zhège shíhou, wǒ zuì gāoxìng.",
+    "text_en": "At five in the morning, I get up. Everyone at home is sleeping. I sit there alone drinking tea. Outside, there are no people, no cars. This is when I'm happiest.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我几点起床？",
+        "q_en": "What time do I wake up?",
+        "options": [
+          {"text": "六点", "pinyin": "liù diǎn", "text_en": "Six o'clock", "correct": false},
+          {"text": "五点", "pinyin": "wǔ diǎn", "text_en": "Five o'clock", "correct": true},
+          {"text": "七点", "pinyin": "qī diǎn", "text_en": "Seven o'clock", "correct": false},
+          {"text": "八点", "pinyin": "bā diǎn", "text_en": "Eight o'clock", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "家里的人在做什么？",
+        "q_en": "What are the people at home doing?",
+        "options": [
+          {"text": "吃饭", "pinyin": "chī fàn", "text_en": "Eating", "correct": false},
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleeping", "correct": true},
+          {"text": "工作", "pinyin": "gōngzuò", "text_en": "Working", "correct": false},
+          {"text": "看书", "pinyin": "kàn shū", "text_en": "Reading", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我什么时候最高兴？",
+        "q_en": "When am I happiest?",
+        "options": [
+          {"text": "和朋友在一起的时候", "pinyin": "hé péngyou zài yìqǐ de shíhou", "text_en": "When with friends", "correct": false},
+          {"text": "早上一个人的时候", "pinyin": "zǎoshang yí gè rén de shíhou", "text_en": "When alone in the morning", "correct": true},
+          {"text": "晚上的时候", "pinyin": "wǎnshang de shíhou", "text_en": "In the evening", "correct": false},
+          {"text": "中午的时候", "pinyin": "zhōngwǔ de shíhou", "text_en": "At noon", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_observe_016",
+    "title": "Watching the Rain Stop",
+    "title_zh": "看雨停",
+    "hsk_level": 1,
+    "text_zh": "下雨了。我在饭店里坐着，喝咖啡，看外面。雨很大，人都在跑。一个小时后，雨小了。人走了，我也走了。但是我不想走。",
+    "text_pinyin": "Xià yǔ le. Wǒ zài fàndiàn lǐ zuòzhe, hē kāfēi, kàn wàimiàn. Yǔ hěn dà, rén dōu zài pǎo. Yí gè xiǎoshí hòu, yǔ xiǎo le. Rén zǒu le, wǒ yě zǒu le. Dànshì wǒ bù xiǎng zǒu.",
+    "text_en": "It's raining. I sit in a restaurant, drinking coffee, watching outside. The rain is heavy — people are all running. An hour later, the rain lessens. People leave, and I leave too. But I don't want to leave.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我在哪里？",
+        "q_en": "Where am I?",
+        "options": [
+          {"text": "家里", "pinyin": "jiā lǐ", "text_en": "At home", "correct": false},
+          {"text": "学校", "pinyin": "xuéxiào", "text_en": "School", "correct": false},
+          {"text": "饭店里", "pinyin": "fàndiàn lǐ", "text_en": "In a restaurant", "correct": true},
+          {"text": "商店里", "pinyin": "shāngdiàn lǐ", "text_en": "In a shop", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "下雨的时候，人在做什么？",
+        "q_en": "What are people doing when it rains?",
+        "options": [
+          {"text": "走", "pinyin": "zǒu", "text_en": "Walking", "correct": false},
+          {"text": "跑", "pinyin": "pǎo", "text_en": "Running", "correct": true},
+          {"text": "坐着", "pinyin": "zuòzhe", "text_en": "Sitting", "correct": false},
+          {"text": "看书", "pinyin": "kàn shū", "text_en": "Reading", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我想走吗？",
+        "q_en": "Do I want to leave?",
+        "options": [
+          {"text": "想", "pinyin": "xiǎng", "text_en": "Yes", "correct": false},
+          {"text": "不想", "pinyin": "bù xiǎng", "text_en": "No", "correct": true},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "Don't know", "correct": false},
+          {"text": "已经走了", "pinyin": "yǐjīng zǒu le", "text_en": "Already left", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_urban_006",
+    "title": "The Shop That Never Opens",
+    "title_zh": "不开门的商店",
+    "hsk_level": 1,
+    "text_zh": "我家前面有一个小商店。但是这个商店不开门。我每天都看，它都关着。里面有很多东西，但是没有人。我问朋友，朋友也不知道为什么。",
+    "text_pinyin": "Wǒ jiā qiánmiàn yǒu yí gè xiǎo shāngdiàn. Dànshì zhège shāngdiàn bù kāi mén. Wǒ měi tiān dōu kàn, tā dōu guānzhe. Lǐmiàn yǒu hěn duō dōngxi, dànshì méiyǒu rén. Wǒ wèn péngyou, péngyou yě bù zhīdào wèishénme.",
+    "text_en": "There's a small shop in front of my home. But this shop doesn't open. I look every day — it's always closed. There are many things inside, but no people. I ask my friend, but my friend doesn't know why either.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "商店在哪里？",
+        "q_en": "Where is the shop?",
+        "options": [
+          {"text": "学校后面", "pinyin": "xuéxiào hòumiàn", "text_en": "Behind the school", "correct": false},
+          {"text": "我家前面", "pinyin": "wǒ jiā qiánmiàn", "text_en": "In front of my home", "correct": true},
+          {"text": "医院里面", "pinyin": "yīyuàn lǐmiàn", "text_en": "Inside the hospital", "correct": false},
+          {"text": "饭店后面", "pinyin": "fàndiàn hòumiàn", "text_en": "Behind the restaurant", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "商店里面有什么？",
+        "q_en": "What's inside the shop?",
+        "options": [
+          {"text": "很多人", "pinyin": "hěn duō rén", "text_en": "Many people", "correct": false},
+          {"text": "什么都没有", "pinyin": "shénme dōu méiyǒu", "text_en": "Nothing", "correct": false},
+          {"text": "很多东西", "pinyin": "hěn duō dōngxi", "text_en": "Many things", "correct": true},
+          {"text": "猫和狗", "pinyin": "māo hé gǒu", "text_en": "Cats and dogs", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "朋友知道商店为什么不开吗？",
+        "q_en": "Does the friend know why the shop doesn't open?",
+        "options": [
+          {"text": "知道", "pinyin": "zhīdào", "text_en": "Yes", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "No", "correct": true},
+          {"text": "没有问", "pinyin": "méiyǒu wèn", "text_en": "Wasn't asked", "correct": false},
+          {"text": "朋友说了", "pinyin": "péngyou shuō le", "text_en": "The friend explained", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_urban_007",
+    "title": "Night Bus",
+    "title_zh": "晚上的车",
+    "hsk_level": 1,
+    "text_zh": "晚上十一点，车上的人很少。我坐在后面，看前面的人。一个人在看书，一个人在睡觉。车很大，人很少。我很高兴。",
+    "text_pinyin": "Wǎnshang shíyī diǎn, chē shàng de rén hěn shǎo. Wǒ zuò zài hòumiàn, kàn qiánmiàn de rén. Yí gè rén zài kàn shū, yí gè rén zài shuìjiào. Chē hěn dà, rén hěn shǎo. Wǒ hěn gāoxìng.",
+    "text_en": "At eleven at night, there are few people on the bus. I sit in the back and watch the people in front. One person is reading, one person is sleeping. The bus is big, the people are few. I'm happy.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "车上有多少人？",
+        "q_en": "How many people are on the bus?",
+        "options": [
+          {"text": "很多", "pinyin": "hěn duō", "text_en": "Many", "correct": false},
+          {"text": "很少", "pinyin": "hěn shǎo", "text_en": "Few", "correct": true},
+          {"text": "没有人", "pinyin": "méiyǒu rén", "text_en": "Nobody", "correct": false},
+          {"text": "十个", "pinyin": "shí gè", "text_en": "Ten", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我坐在哪里？",
+        "q_en": "Where do I sit?",
+        "options": [
+          {"text": "前面", "pinyin": "qiánmiàn", "text_en": "In front", "correct": false},
+          {"text": "后面", "pinyin": "hòumiàn", "text_en": "In back", "correct": true},
+          {"text": "中间", "pinyin": "zhōngjiān", "text_en": "In the middle", "correct": false},
+          {"text": "外面", "pinyin": "wàimiàn", "text_en": "Outside", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "前面的人在做什么？",
+        "q_en": "What are the people in front doing?",
+        "options": [
+          {"text": "说话和吃饭", "pinyin": "shuōhuà hé chī fàn", "text_en": "Talking and eating", "correct": false},
+          {"text": "看书和睡觉", "pinyin": "kàn shū hé shuìjiào", "text_en": "Reading and sleeping", "correct": true},
+          {"text": "打电话", "pinyin": "dǎ diànhuà", "text_en": "Making phone calls", "correct": false},
+          {"text": "看电视", "pinyin": "kàn diànshì", "text_en": "Watching TV", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_urban_008",
+    "title": "The Same Road Every Day",
+    "title_zh": "每天走的路",
+    "hsk_level": 1,
+    "text_zh": "我每天走同一条路去工作。路上有一个商店，一个饭店，一个学校。我都认识它们了。今天，商店前面多了一只猫。这让我很高兴。",
+    "text_pinyin": "Wǒ měi tiān zǒu tóng yì tiáo lù qù gōngzuò. Lù shàng yǒu yí gè shāngdiàn, yí gè fàndiàn, yí gè xuéxiào. Wǒ dōu rènshi tāmen le. Jīntiān, shāngdiàn qiánmiàn duō le yì zhī māo. Zhè ràng wǒ hěn gāoxìng.",
+    "text_en": "I walk the same road to work every day. On the road there's a shop, a restaurant, a school. I know them all now. Today, there's a new cat in front of the shop. This makes me happy.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我去哪里？",
+        "q_en": "Where am I going?",
+        "options": [
+          {"text": "学校", "pinyin": "xuéxiào", "text_en": "School", "correct": false},
+          {"text": "工作", "pinyin": "gōngzuò", "text_en": "Work", "correct": true},
+          {"text": "饭店", "pinyin": "fàndiàn", "text_en": "Restaurant", "correct": false},
+          {"text": "医院", "pinyin": "yīyuàn", "text_en": "Hospital", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "路上有几个地方？",
+        "q_en": "How many places are on the road?",
+        "options": [
+          {"text": "两个", "pinyin": "liǎng gè", "text_en": "Two", "correct": false},
+          {"text": "三个", "pinyin": "sān gè", "text_en": "Three", "correct": true},
+          {"text": "四个", "pinyin": "sì gè", "text_en": "Four", "correct": false},
+          {"text": "一个", "pinyin": "yí gè", "text_en": "One", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "今天有什么不一样？",
+        "q_en": "What's different today?",
+        "options": [
+          {"text": "商店关了", "pinyin": "shāngdiàn guān le", "text_en": "The shop is closed", "correct": false},
+          {"text": "多了一只猫", "pinyin": "duō le yì zhī māo", "text_en": "There's a new cat", "correct": true},
+          {"text": "下雨了", "pinyin": "xià yǔ le", "text_en": "It's raining", "correct": false},
+          {"text": "路不一样了", "pinyin": "lù bù yíyàng le", "text_en": "The road is different", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_urban_009",
+    "title": "Sounds of Home",
+    "title_zh": "家的声音",
+    "hsk_level": 1,
+    "text_zh": "晚上，我回到家。上面的人在说话，下面的人在听音乐。我在中间。我听到上面的人，也听到下面的人。他们不知道我在听。",
+    "text_pinyin": "Wǎnshang, wǒ huí dào jiā. Shàngmiàn de rén zài shuōhuà, xiàmiàn de rén zài tīng yīnyuè. Wǒ zài zhōngjiān. Wǒ tīng dào shàngmiàn de rén, yě tīng dào xiàmiàn de rén. Tāmen bù zhīdào wǒ zài tīng.",
+    "text_en": "At night, I return home. The people above are talking, the people below are listening to music. I'm in the middle. I hear the people above and the people below. They don't know I'm listening.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "上面的人在做什么？",
+        "q_en": "What are the people above doing?",
+        "options": [
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleeping", "correct": false},
+          {"text": "说话", "pinyin": "shuōhuà", "text_en": "Talking", "correct": true},
+          {"text": "看电视", "pinyin": "kàn diànshì", "text_en": "Watching TV", "correct": false},
+          {"text": "吃饭", "pinyin": "chī fàn", "text_en": "Eating", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我住在哪里？",
+        "q_en": "Where do I live?",
+        "options": [
+          {"text": "上面", "pinyin": "shàngmiàn", "text_en": "Above", "correct": false},
+          {"text": "下面", "pinyin": "xiàmiàn", "text_en": "Below", "correct": false},
+          {"text": "中间", "pinyin": "zhōngjiān", "text_en": "In the middle", "correct": true},
+          {"text": "外面", "pinyin": "wàimiàn", "text_en": "Outside", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "他们知道我在听吗？",
+        "q_en": "Do they know I'm listening?",
+        "options": [
+          {"text": "知道", "pinyin": "zhīdào", "text_en": "Yes", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "No", "correct": true},
+          {"text": "可能知道", "pinyin": "kěnéng zhīdào", "text_en": "Maybe", "correct": false},
+          {"text": "我问了他们", "pinyin": "wǒ wèn le tāmen", "text_en": "I asked them", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_urban_010",
+    "title": "Morning at the Train Station",
+    "title_zh": "早上的火车站",
+    "hsk_level": 1,
+    "text_zh": "早上七点，火车站里有很多人。有的人在跑，有的人坐着看电话。一个小孩在睡觉，他的妈妈看着他。大家都要去一个地方，但是现在，大家都在这里。",
+    "text_pinyin": "Zǎoshang qī diǎn, huǒchēzhàn lǐ yǒu hěn duō rén. Yǒude rén zài pǎo, yǒude rén zuòzhe kàn diànhuà. Yí gè xiǎohái zài shuìjiào, tā de māma kànzhe tā. Dàjiā dōu yào qù yí gè dìfang, dànshì xiànzài, dàjiā dōu zài zhèlǐ.",
+    "text_en": "At seven in the morning, the train station is full of people. Some run, some sit looking at their phones. A small child is sleeping — his mother watches him. Everyone wants to go somewhere, but right now, everyone is here.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这是什么地方？",
+        "q_en": "What place is this?",
+        "options": [
+          {"text": "机场", "pinyin": "jīchǎng", "text_en": "Airport", "correct": false},
+          {"text": "火车站", "pinyin": "huǒchēzhàn", "text_en": "Train station", "correct": true},
+          {"text": "学校", "pinyin": "xuéxiào", "text_en": "School", "correct": false},
+          {"text": "医院", "pinyin": "yīyuàn", "text_en": "Hospital", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "小孩在做什么？",
+        "q_en": "What is the child doing?",
+        "options": [
+          {"text": "跑", "pinyin": "pǎo", "text_en": "Running", "correct": false},
+          {"text": "看电话", "pinyin": "kàn diànhuà", "text_en": "Looking at a phone", "correct": false},
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleeping", "correct": true},
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Eating", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "大家都想做什么？",
+        "q_en": "What does everyone want to do?",
+        "options": [
+          {"text": "回家", "pinyin": "huí jiā", "text_en": "Go home", "correct": false},
+          {"text": "去一个地方", "pinyin": "qù yí gè dìfang", "text_en": "Go somewhere", "correct": true},
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleep", "correct": false},
+          {"text": "吃饭", "pinyin": "chī fàn", "text_en": "Eat", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_inst_003",
+    "title": "The Hospital at Night",
+    "title_zh": "晚上的医院",
+    "hsk_level": 1,
+    "text_zh": "晚上十点，医院里还有人。医生在工作，他们很忙。一个医生对我说：「你可以回家了。」我说：「谢谢。」他没有说「再见」，他已经在看下一个人了。",
+    "text_pinyin": "Wǎnshang shí diǎn, yīyuàn lǐ hái yǒu rén. Yīshēng zài gōngzuò, tāmen hěn máng. Yí gè yīshēng duì wǒ shuō:「Nǐ kěyǐ huí jiā le.」Wǒ shuō:「Xièxie.」Tā méiyǒu shuō「zàijiàn」, tā yǐjīng zài kàn xià yí gè rén le.",
+    "text_en": "At ten at night, there are still people in the hospital. Doctors are working — they're very busy. One doctor says to me: 'You can go home now.' I say: 'Thank you.' He doesn't say goodbye — he's already looking at the next person.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "医生在做什么？",
+        "q_en": "What are the doctors doing?",
+        "options": [
+          {"text": "睡觉", "pinyin": "shuìjiào", "text_en": "Sleeping", "correct": false},
+          {"text": "工作", "pinyin": "gōngzuò", "text_en": "Working", "correct": true},
+          {"text": "吃饭", "pinyin": "chī fàn", "text_en": "Eating", "correct": false},
+          {"text": "回家", "pinyin": "huí jiā", "text_en": "Going home", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "医生对我说什么？",
+        "q_en": "What did the doctor say to me?",
+        "options": [
+          {"text": "你不能走", "pinyin": "nǐ bù néng zǒu", "text_en": "You can't leave", "correct": false},
+          {"text": "你可以回家了", "pinyin": "nǐ kěyǐ huí jiā le", "text_en": "You can go home now", "correct": true},
+          {"text": "明天再来", "pinyin": "míngtiān zài lái", "text_en": "Come again tomorrow", "correct": false},
+          {"text": "再见", "pinyin": "zàijiàn", "text_en": "Goodbye", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "医生为什么没有说「再见」？",
+        "q_en": "Why didn't the doctor say goodbye?",
+        "options": [
+          {"text": "他不高兴", "pinyin": "tā bù gāoxìng", "text_en": "He's unhappy", "correct": false},
+          {"text": "他已经在看下一个人了", "pinyin": "tā yǐjīng zài kàn xià yí gè rén le", "text_en": "He's already seeing the next person", "correct": true},
+          {"text": "他不会说", "pinyin": "tā bú huì shuō", "text_en": "He can't say it", "correct": false},
+          {"text": "他走了", "pinyin": "tā zǒu le", "text_en": "He left", "correct": false}
+        ],
+        "difficulty": 0.4
+      }
+    ]
+  },
+  {
+    "id": "j1_inst_004",
+    "title": "The School After Hours",
+    "title_zh": "下午的学校",
+    "hsk_level": 1,
+    "text_zh": "下午五点，学生都走了。学校里很安静。一个老师还在里面，他在看学生写的字。他看了很多，一个一个地看。他看得很认真。",
+    "text_pinyin": "Xiàwǔ wǔ diǎn, xuéshēng dōu zǒu le. Xuéxiào lǐ hěn ānjìng. Yí gè lǎoshī hái zài lǐmiàn, tā zài kàn xuéshēng xiě de zì. Tā kàn le hěn duō, yí gè yí gè de kàn. Tā kàn de hěn rènzhēn.",
+    "text_en": "At five in the afternoon, the students have all left. The school is very quiet. One teacher is still inside, reading the characters the students wrote. He reads many of them, one by one. He reads very carefully.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "学生都在哪里？",
+        "q_en": "Where are the students?",
+        "options": [
+          {"text": "在学校里", "pinyin": "zài xuéxiào lǐ", "text_en": "In school", "correct": false},
+          {"text": "都走了", "pinyin": "dōu zǒu le", "text_en": "All left", "correct": true},
+          {"text": "在吃饭", "pinyin": "zài chī fàn", "text_en": "Eating", "correct": false},
+          {"text": "在睡觉", "pinyin": "zài shuìjiào", "text_en": "Sleeping", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "老师在看什么？",
+        "q_en": "What is the teacher reading?",
+        "options": [
+          {"text": "书", "pinyin": "shū", "text_en": "Books", "correct": false},
+          {"text": "电话", "pinyin": "diànhuà", "text_en": "Phone", "correct": false},
+          {"text": "学生写的字", "pinyin": "xuéshēng xiě de zì", "text_en": "Characters students wrote", "correct": true},
+          {"text": "电视", "pinyin": "diànshì", "text_en": "TV", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "老师怎么看？",
+        "q_en": "How does the teacher read them?",
+        "options": [
+          {"text": "很快", "pinyin": "hěn kuài", "text_en": "Very quickly", "correct": false},
+          {"text": "一个一个地看", "pinyin": "yí gè yí gè de kàn", "text_en": "One by one", "correct": true},
+          {"text": "不想看", "pinyin": "bù xiǎng kàn", "text_en": "Doesn't want to read", "correct": false},
+          {"text": "和同学一起看", "pinyin": "hé tóngxué yìqǐ kàn", "text_en": "Reads with classmates", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_inst_005",
+    "title": "Buying Water at the Airport",
+    "title_zh": "在机场买水",
+    "hsk_level": 1,
+    "text_zh": "在机场，一瓶水要二十块钱。外面的商店只要三块。我问：「为什么这么贵？」他说：「这是机场。」我买了。我不高兴，但是我很渴。",
+    "text_pinyin": "Zài jīchǎng, yì píng shuǐ yào èrshí kuài qián. Wàimiàn de shāngdiàn zhǐ yào sān kuài. Wǒ wèn:「Wèishénme zhème guì?」Tā shuō:「Zhè shì jīchǎng.」Wǒ mǎi le. Wǒ bù gāoxìng, dànshì wǒ hěn kě.",
+    "text_en": "At the airport, a bottle of water costs twenty yuan. Outside shops, it's only three. I ask: 'Why so expensive?' He says: 'This is the airport.' I buy it. I'm not happy, but I'm very thirsty.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "机场的水多少钱？",
+        "q_en": "How much is the water at the airport?",
+        "options": [
+          {"text": "三块", "pinyin": "sān kuài", "text_en": "Three yuan", "correct": false},
+          {"text": "十块", "pinyin": "shí kuài", "text_en": "Ten yuan", "correct": false},
+          {"text": "二十块", "pinyin": "èrshí kuài", "text_en": "Twenty yuan", "correct": true},
+          {"text": "五块", "pinyin": "wǔ kuài", "text_en": "Five yuan", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我买了水吗？",
+        "q_en": "Did I buy the water?",
+        "options": [
+          {"text": "买了", "pinyin": "mǎi le", "text_en": "Yes", "correct": true},
+          {"text": "没买", "pinyin": "méi mǎi", "text_en": "No", "correct": false},
+          {"text": "买了茶", "pinyin": "mǎi le chá", "text_en": "Bought tea instead", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "Don't know", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我为什么买了？",
+        "q_en": "Why did I buy it?",
+        "options": [
+          {"text": "因为不贵", "pinyin": "yīnwèi bú guì", "text_en": "Because it's not expensive", "correct": false},
+          {"text": "因为我很渴", "pinyin": "yīnwèi wǒ hěn kě", "text_en": "Because I'm very thirsty", "correct": true},
+          {"text": "因为朋友想喝", "pinyin": "yīnwèi péngyou xiǎng hē", "text_en": "Because my friend wants to drink", "correct": false},
+          {"text": "因为我高兴", "pinyin": "yīnwèi wǒ gāoxìng", "text_en": "Because I'm happy", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_inst_006",
+    "title": "The New Teacher",
+    "title_zh": "新老师",
+    "hsk_level": 1,
+    "text_zh": "我们有一个新老师。她很年轻，但是她说汉语说得非常好。第一天，她对我们说：「请叫我王老师。」她说话不多，但是说的都很有用。同学们都很喜欢她。",
+    "text_pinyin": "Wǒmen yǒu yí gè xīn lǎoshī. Tā hěn niánqīng, dànshì tā shuō Hànyǔ shuō de fēicháng hǎo. Dì yī tiān, tā duì wǒmen shuō:「Qǐng jiào wǒ Wáng lǎoshī.」Tā shuōhuà bù duō, dànshì shuō de dōu hěn yǒuyòng. Tóngxuémen dōu hěn xǐhuan tā.",
+    "text_en": "We have a new teacher. She's very young, but she speaks Chinese extremely well. On the first day, she says to us: 'Please call me Teacher Wang.' She doesn't talk much, but everything she says is useful. The classmates all like her a lot.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "新老师叫什么？",
+        "q_en": "What is the new teacher called?",
+        "options": [
+          {"text": "李老师", "pinyin": "Lǐ lǎoshī", "text_en": "Teacher Li", "correct": false},
+          {"text": "王老师", "pinyin": "Wáng lǎoshī", "text_en": "Teacher Wang", "correct": true},
+          {"text": "张老师", "pinyin": "Zhāng lǎoshī", "text_en": "Teacher Zhang", "correct": false},
+          {"text": "她没有说", "pinyin": "tā méiyǒu shuō", "text_en": "She didn't say", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "老师说话多吗？",
+        "q_en": "Does the teacher talk a lot?",
+        "options": [
+          {"text": "很多", "pinyin": "hěn duō", "text_en": "A lot", "correct": false},
+          {"text": "不多", "pinyin": "bù duō", "text_en": "Not much", "correct": true},
+          {"text": "不说话", "pinyin": "bù shuōhuà", "text_en": "Doesn't talk", "correct": false},
+          {"text": "非常多", "pinyin": "fēicháng duō", "text_en": "Very much", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "同学们喜欢她吗？",
+        "q_en": "Do the classmates like her?",
+        "options": [
+          {"text": "不喜欢", "pinyin": "bù xǐhuan", "text_en": "Don't like", "correct": false},
+          {"text": "都很喜欢", "pinyin": "dōu hěn xǐhuan", "text_en": "All like her a lot", "correct": true},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "Don't know", "correct": false},
+          {"text": "有的喜欢有的不喜欢", "pinyin": "yǒude xǐhuan yǒude bù xǐhuan", "text_en": "Some do some don't", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_mystery_003",
+    "title": "Who Drank My Tea?",
+    "title_zh": "谁喝了我的茶？",
+    "hsk_level": 1,
+    "text_zh": "早上，我做了一杯茶。我去了一下外面。回来的时候，茶少了。谁喝了？家里只有我和猫。猫不喝茶。那是谁？我看了看猫，猫看了看我。",
+    "text_pinyin": "Zǎoshang, wǒ zuò le yì bēi chá. Wǒ qù le yíxià wàimiàn. Huílái de shíhou, chá shǎo le. Shéi hē le? Jiā lǐ zhǐ yǒu wǒ hé māo. Māo bù hē chá. Nà shì shéi? Wǒ kàn le kàn māo, māo kàn le kàn wǒ.",
+    "text_en": "In the morning, I make a cup of tea. I step outside briefly. When I come back, there's less tea. Who drank it? At home there's only me and the cat. Cats don't drink tea. Then who was it? I look at the cat. The cat looks at me.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "回来的时候，茶怎么了？",
+        "q_en": "When I came back, what happened to the tea?",
+        "options": [
+          {"text": "没有了", "pinyin": "méiyǒu le", "text_en": "It's gone", "correct": false},
+          {"text": "茶少了", "pinyin": "chá shǎo le", "text_en": "There's less tea", "correct": true},
+          {"text": "茶多了", "pinyin": "chá duō le", "text_en": "There's more tea", "correct": false},
+          {"text": "茶还是一样", "pinyin": "chá háishi yíyàng", "text_en": "The tea is the same", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "家里有谁？",
+        "q_en": "Who is at home?",
+        "options": [
+          {"text": "我和朋友", "pinyin": "wǒ hé péngyou", "text_en": "Me and a friend", "correct": false},
+          {"text": "我和猫", "pinyin": "wǒ hé māo", "text_en": "Me and the cat", "correct": true},
+          {"text": "我一个人", "pinyin": "wǒ yí gè rén", "text_en": "Just me", "correct": false},
+          {"text": "我和狗", "pinyin": "wǒ hé gǒu", "text_en": "Me and the dog", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我知道谁喝了茶吗？",
+        "q_en": "Do I know who drank the tea?",
+        "options": [
+          {"text": "知道，是猫", "pinyin": "zhīdào, shì māo", "text_en": "Yes, the cat", "correct": false},
+          {"text": "知道，是朋友", "pinyin": "zhīdào, shì péngyou", "text_en": "Yes, a friend", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "No", "correct": true},
+          {"text": "是我自己", "pinyin": "shì wǒ zìjǐ", "text_en": "It was me", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_mystery_004",
+    "title": "The Phone Call",
+    "title_zh": "那个电话",
+    "hsk_level": 1,
+    "text_zh": "昨天晚上，有人打电话给我。我说：「你好，你是谁？」那个人没有说话。我又说：「请问你是谁？」他还是没有说话。然后，电话关了。今天，他又打了。",
+    "text_pinyin": "Zuótiān wǎnshang, yǒu rén dǎ diànhuà gěi wǒ. Wǒ shuō:「Nǐ hǎo, nǐ shì shéi?」Nàge rén méiyǒu shuōhuà. Wǒ yòu shuō:「Qǐngwèn nǐ shì shéi?」Tā háishi méiyǒu shuōhuà. Ránhòu, diànhuà guān le. Jīntiān, tā yòu dǎ le.",
+    "text_en": "Last night, someone called me. I said: 'Hello, who are you?' The person didn't speak. I said again: 'May I ask who you are?' They still didn't speak. Then the phone went dead. Today, they called again.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "那个人说话了吗？",
+        "q_en": "Did the person speak?",
+        "options": [
+          {"text": "说了", "pinyin": "shuō le", "text_en": "Yes", "correct": false},
+          {"text": "没有说话", "pinyin": "méiyǒu shuōhuà", "text_en": "Didn't speak", "correct": true},
+          {"text": "说了一个字", "pinyin": "shuō le yí gè zì", "text_en": "Said one word", "correct": false},
+          {"text": "说了名字", "pinyin": "shuō le míngzi", "text_en": "Said their name", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "电话是什么时候打来的？",
+        "q_en": "When did the call come?",
+        "options": [
+          {"text": "今天早上", "pinyin": "jīntiān zǎoshang", "text_en": "This morning", "correct": false},
+          {"text": "昨天晚上", "pinyin": "zuótiān wǎnshang", "text_en": "Last night", "correct": true},
+          {"text": "昨天中午", "pinyin": "zuótiān zhōngwǔ", "text_en": "Yesterday noon", "correct": false},
+          {"text": "明天", "pinyin": "míngtiān", "text_en": "Tomorrow", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "今天怎么了？",
+        "q_en": "What happened today?",
+        "options": [
+          {"text": "没有人打电话", "pinyin": "méiyǒu rén dǎ diànhuà", "text_en": "Nobody called", "correct": false},
+          {"text": "那个人又打了", "pinyin": "nàge rén yòu dǎ le", "text_en": "That person called again", "correct": true},
+          {"text": "我打给他了", "pinyin": "wǒ dǎ gěi tā le", "text_en": "I called them", "correct": false},
+          {"text": "朋友打来了", "pinyin": "péngyou dǎ lái le", "text_en": "A friend called", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_mystery_005",
+    "title": "The Missing Book",
+    "title_zh": "不见了的书",
+    "hsk_level": 1,
+    "text_zh": "我的书不在桌子上了。昨天它还在。我问同学：「你看到我的书了吗？」同学说：「没有。」我在家里到处找。最后，我在猫的下面找到了。猫正在上面睡觉。",
+    "text_pinyin": "Wǒ de shū bú zài zhuōzi shàng le. Zuótiān tā hái zài. Wǒ wèn tóngxué:「Nǐ kàn dào wǒ de shū le ma?」Tóngxué shuō:「Méiyǒu.」Wǒ zài jiā lǐ dàochù zhǎo. Zuìhòu, wǒ zài māo de xiàmiàn zhǎo dào le. Māo zhèngzài shàngmiàn shuìjiào.",
+    "text_en": "My book isn't on the table anymore. Yesterday it was still there. I ask a classmate: 'Did you see my book?' The classmate says: 'No.' I search everywhere at home. Finally, I find it under the cat. The cat is sleeping on top of it.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "书在哪里？",
+        "q_en": "Where is the book?",
+        "options": [
+          {"text": "在桌子上", "pinyin": "zài zhuōzi shàng", "text_en": "On the table", "correct": false},
+          {"text": "在猫的下面", "pinyin": "zài māo de xiàmiàn", "text_en": "Under the cat", "correct": true},
+          {"text": "在同学那里", "pinyin": "zài tóngxué nàlǐ", "text_en": "At the classmate's", "correct": false},
+          {"text": "不见了", "pinyin": "bújiàn le", "text_en": "It's gone", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "同学看到书了吗？",
+        "q_en": "Did the classmate see the book?",
+        "options": [
+          {"text": "看到了", "pinyin": "kàn dào le", "text_en": "Yes", "correct": false},
+          {"text": "没有", "pinyin": "méiyǒu", "text_en": "No", "correct": true},
+          {"text": "他拿走了", "pinyin": "tā ná zǒu le", "text_en": "Took it away", "correct": false},
+          {"text": "没有问", "pinyin": "méiyǒu wèn", "text_en": "Didn't ask", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "猫在做什么？",
+        "q_en": "What is the cat doing?",
+        "options": [
+          {"text": "看书", "pinyin": "kàn shū", "text_en": "Reading", "correct": false},
+          {"text": "在书上面睡觉", "pinyin": "zài shū shàngmiàn shuìjiào", "text_en": "Sleeping on the book", "correct": true},
+          {"text": "跑", "pinyin": "pǎo", "text_en": "Running", "correct": false},
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Eating", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_identity_002",
+    "title": "Two Languages",
+    "title_zh": "两个语言",
+    "hsk_level": 1,
+    "text_zh": "我说英语，也在学汉语。说英语的时候，我是一个人。说汉语的时候，我好像是另一个人。说汉语的我说话少，但是想的多。我不知道哪个是真的我。",
+    "text_pinyin": "Wǒ shuō Yīngyǔ, yě zài xué Hànyǔ. Shuō Yīngyǔ de shíhou, wǒ shì yí gè rén. Shuō Hànyǔ de shíhou, wǒ hǎoxiàng shì lìng yí gè rén. Shuō Hànyǔ de wǒ shuōhuà shǎo, dànshì xiǎng de duō. Wǒ bù zhīdào nǎge shì zhēn de wǒ.",
+    "text_en": "I speak English and am also learning Chinese. When I speak English, I'm one person. When I speak Chinese, I seem to be another person. The Chinese-speaking me talks less but thinks more. I don't know which one is the real me.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我在学什么？",
+        "q_en": "What am I learning?",
+        "options": [
+          {"text": "英语", "pinyin": "Yīngyǔ", "text_en": "English", "correct": false},
+          {"text": "汉语", "pinyin": "Hànyǔ", "text_en": "Chinese", "correct": true},
+          {"text": "日语", "pinyin": "Rìyǔ", "text_en": "Japanese", "correct": false},
+          {"text": "法语", "pinyin": "Fǎyǔ", "text_en": "French", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "说汉语的我是什么样的？",
+        "q_en": "What is the Chinese-speaking me like?",
+        "options": [
+          {"text": "说话很多", "pinyin": "shuōhuà hěn duō", "text_en": "Talks a lot", "correct": false},
+          {"text": "说话少，想的多", "pinyin": "shuōhuà shǎo, xiǎng de duō", "text_en": "Talks less, thinks more", "correct": true},
+          {"text": "很高兴", "pinyin": "hěn gāoxìng", "text_en": "Very happy", "correct": false},
+          {"text": "不想说话", "pinyin": "bù xiǎng shuōhuà", "text_en": "Doesn't want to talk", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "我知道哪个是真的我吗？",
+        "q_en": "Do I know which one is the real me?",
+        "options": [
+          {"text": "英语的我", "pinyin": "Yīngyǔ de wǒ", "text_en": "The English me", "correct": false},
+          {"text": "汉语的我", "pinyin": "Hànyǔ de wǒ", "text_en": "The Chinese me", "correct": false},
+          {"text": "两个都是", "pinyin": "liǎng gè dōu shì", "text_en": "Both are", "correct": false},
+          {"text": "不知道", "pinyin": "bù zhīdào", "text_en": "Don't know", "correct": true}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_identity_003",
+    "title": "Not From Here",
+    "title_zh": "不是这里的人",
+    "hsk_level": 1,
+    "text_zh": "我住在北京，但是我不是中国人。有人问我：「你是哪国人？」我说了，他们说：「你的汉语很好！」我说：「谢谢。」但是我想说的是：我住在这里，这里也是我的家。",
+    "text_pinyin": "Wǒ zhù zài Běijīng, dànshì wǒ bú shì Zhōngguó rén. Yǒu rén wèn wǒ:「Nǐ shì nǎ guó rén?」Wǒ shuō le, tāmen shuō:「Nǐ de Hànyǔ hěn hǎo!」Wǒ shuō:「Xièxie.」Dànshì wǒ xiǎng shuō de shì: wǒ zhù zài zhèlǐ, zhèlǐ yě shì wǒ de jiā.",
+    "text_en": "I live in Beijing, but I'm not Chinese. People ask me: 'Where are you from?' I answer, and they say: 'Your Chinese is very good!' I say: 'Thank you.' But what I want to say is: I live here — this is my home too.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我住在哪里？",
+        "q_en": "Where do I live?",
+        "options": [
+          {"text": "上海", "pinyin": "Shànghǎi", "text_en": "Shanghai", "correct": false},
+          {"text": "北京", "pinyin": "Běijīng", "text_en": "Beijing", "correct": true},
+          {"text": "美国", "pinyin": "Měiguó", "text_en": "America", "correct": false},
+          {"text": "英国", "pinyin": "Yīngguó", "text_en": "England", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "人们对我说什么？",
+        "q_en": "What do people say to me?",
+        "options": [
+          {"text": "你好", "pinyin": "nǐ hǎo", "text_en": "Hello", "correct": false},
+          {"text": "你的汉语很好", "pinyin": "nǐ de Hànyǔ hěn hǎo", "text_en": "Your Chinese is very good", "correct": true},
+          {"text": "再见", "pinyin": "zàijiàn", "text_en": "Goodbye", "correct": false},
+          {"text": "对不起", "pinyin": "duìbuqǐ", "text_en": "Sorry", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我想说什么？",
+        "q_en": "What do I want to say?",
+        "options": [
+          {"text": "谢谢", "pinyin": "xièxie", "text_en": "Thank you", "correct": false},
+          {"text": "我不是中国人", "pinyin": "wǒ bú shì Zhōngguó rén", "text_en": "I'm not Chinese", "correct": false},
+          {"text": "这里也是我的家", "pinyin": "zhèlǐ yě shì wǒ de jiā", "text_en": "This is my home too", "correct": true},
+          {"text": "我要回家", "pinyin": "wǒ yào huí jiā", "text_en": "I want to go home", "correct": false}
+        ],
+        "difficulty": 0.4
+      }
+    ]
+  },
+  {
+    "id": "j1_identity_004",
+    "title": "My Name",
+    "title_zh": "我的名字",
+    "hsk_level": 1,
+    "text_zh": "我有两个名字。一个是英语名字，一个是中文名字。朋友叫我英语名字。老师叫我中文名字。有时候我听到中文名字，要想一下：那是在叫我吗？",
+    "text_pinyin": "Wǒ yǒu liǎng gè míngzi. Yí gè shì Yīngyǔ míngzi, yí gè shì Zhōngwén míngzi. Péngyou jiào wǒ Yīngyǔ míngzi. Lǎoshī jiào wǒ Zhōngwén míngzi. Yǒu shíhou wǒ tīng dào Zhōngwén míngzi, yào xiǎng yíxià: nà shì zài jiào wǒ ma?",
+    "text_en": "I have two names. One is an English name, one is a Chinese name. Friends call me by my English name. Teachers call me by my Chinese name. Sometimes when I hear the Chinese name, I have to think for a moment: is that calling me?",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我有几个名字？",
+        "q_en": "How many names do I have?",
+        "options": [
+          {"text": "一个", "pinyin": "yí gè", "text_en": "One", "correct": false},
+          {"text": "两个", "pinyin": "liǎng gè", "text_en": "Two", "correct": true},
+          {"text": "三个", "pinyin": "sān gè", "text_en": "Three", "correct": false},
+          {"text": "没有", "pinyin": "méiyǒu", "text_en": "None", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "谁叫我中文名字？",
+        "q_en": "Who calls me by my Chinese name?",
+        "options": [
+          {"text": "朋友", "pinyin": "péngyou", "text_en": "Friends", "correct": false},
+          {"text": "老师", "pinyin": "lǎoshī", "text_en": "Teachers", "correct": true},
+          {"text": "同学", "pinyin": "tóngxué", "text_en": "Classmates", "correct": false},
+          {"text": "大家", "pinyin": "dàjiā", "text_en": "Everyone", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "听到中文名字的时候，我怎么样？",
+        "q_en": "What happens when I hear my Chinese name?",
+        "options": [
+          {"text": "很高兴", "pinyin": "hěn gāoxìng", "text_en": "Very happy", "correct": false},
+          {"text": "要想一下那是不是在叫我", "pinyin": "yào xiǎng yíxià nà shì bu shì zài jiào wǒ", "text_en": "Have to think if it's calling me", "correct": true},
+          {"text": "不想听", "pinyin": "bù xiǎng tīng", "text_en": "Don't want to hear", "correct": false},
+          {"text": "马上回答", "pinyin": "mǎshàng huídá", "text_en": "Answer immediately", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j1_comedy_002",
+    "title": "The Wrong Coffee",
+    "title_zh": "买错了咖啡",
+    "hsk_level": 1,
+    "text_zh": "我去饭店买咖啡。我说：「请给我一杯咖啡。」他给了我两杯。我说：「我只要一杯。」他说：「第二杯是送你的。」我说：「谢谢。」但是我不喝咖啡，我是给朋友买的。",
+    "text_pinyin": "Wǒ qù fàndiàn mǎi kāfēi. Wǒ shuō:「Qǐng gěi wǒ yì bēi kāfēi.」Tā gěi le wǒ liǎng bēi. Wǒ shuō:「Wǒ zhǐ yào yì bēi.」Tā shuō:「Dì èr bēi shì sòng nǐ de.」Wǒ shuō:「Xièxie.」Dànshì wǒ bù hē kāfēi, wǒ shì gěi péngyou mǎi de.",
+    "text_en": "I go to a restaurant to buy coffee. I say: 'One coffee please.' He gives me two. I say: 'I only want one.' He says: 'The second one is free for you.' I say: 'Thank you.' But I don't drink coffee — I'm buying it for a friend.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "他给了我几杯咖啡？",
+        "q_en": "How many cups of coffee did he give me?",
+        "options": [
+          {"text": "一杯", "pinyin": "yì bēi", "text_en": "One", "correct": false},
+          {"text": "两杯", "pinyin": "liǎng bēi", "text_en": "Two", "correct": true},
+          {"text": "三杯", "pinyin": "sān bēi", "text_en": "Three", "correct": false},
+          {"text": "没有", "pinyin": "méiyǒu", "text_en": "None", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我喝咖啡吗？",
+        "q_en": "Do I drink coffee?",
+        "options": [
+          {"text": "喝", "pinyin": "hē", "text_en": "Yes", "correct": false},
+          {"text": "不喝", "pinyin": "bù hē", "text_en": "No", "correct": true},
+          {"text": "有时候喝", "pinyin": "yǒu shíhou hē", "text_en": "Sometimes", "correct": false},
+          {"text": "喝茶", "pinyin": "hē chá", "text_en": "Drink tea", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "咖啡是给谁买的？",
+        "q_en": "Who was the coffee bought for?",
+        "options": [
+          {"text": "给我自己", "pinyin": "gěi wǒ zìjǐ", "text_en": "For myself", "correct": false},
+          {"text": "给朋友", "pinyin": "gěi péngyou", "text_en": "For a friend", "correct": true},
+          {"text": "给老师", "pinyin": "gěi lǎoshī", "text_en": "For the teacher", "correct": false},
+          {"text": "给同学", "pinyin": "gěi tóngxué", "text_en": "For a classmate", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_comedy_003",
+    "title": "The Cat's Schedule",
+    "title_zh": "猫的一天",
+    "hsk_level": 1,
+    "text_zh": "我的猫早上睡觉，中午睡觉，下午也睡觉。晚上，它起来了。它看着我，好像在说：「你为什么不睡觉？」我说：「因为我要工作。」猫不明白。它又睡了。",
+    "text_pinyin": "Wǒ de māo zǎoshang shuìjiào, zhōngwǔ shuìjiào, xiàwǔ yě shuìjiào. Wǎnshang, tā qǐlái le. Tā kànzhe wǒ, hǎoxiàng zài shuō:「Nǐ wèishénme bú shuìjiào?」Wǒ shuō:「Yīnwèi wǒ yào gōngzuò.」Māo bù míngbai. Tā yòu shuì le.",
+    "text_en": "My cat sleeps in the morning, sleeps at noon, sleeps in the afternoon too. At night, it gets up. It looks at me as if saying: 'Why aren't you sleeping?' I say: 'Because I have to work.' The cat doesn't understand. It goes back to sleep.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "猫什么时候起来？",
+        "q_en": "When does the cat get up?",
+        "options": [
+          {"text": "早上", "pinyin": "zǎoshang", "text_en": "Morning", "correct": false},
+          {"text": "中午", "pinyin": "zhōngwǔ", "text_en": "Noon", "correct": false},
+          {"text": "晚上", "pinyin": "wǎnshang", "text_en": "Night", "correct": true},
+          {"text": "下午", "pinyin": "xiàwǔ", "text_en": "Afternoon", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "猫好像在说什么？",
+        "q_en": "What does the cat seem to be saying?",
+        "options": [
+          {"text": "我想吃东西", "pinyin": "wǒ xiǎng chī dōngxi", "text_en": "I want to eat", "correct": false},
+          {"text": "你为什么不睡觉", "pinyin": "nǐ wèishénme bú shuìjiào", "text_en": "Why aren't you sleeping", "correct": true},
+          {"text": "我想出去", "pinyin": "wǒ xiǎng chūqù", "text_en": "I want to go out", "correct": false},
+          {"text": "你好", "pinyin": "nǐ hǎo", "text_en": "Hello", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "最后猫做了什么？",
+        "q_en": "What did the cat do in the end?",
+        "options": [
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Ate", "correct": false},
+          {"text": "跑了", "pinyin": "pǎo le", "text_en": "Ran away", "correct": false},
+          {"text": "又睡了", "pinyin": "yòu shuì le", "text_en": "Went back to sleep", "correct": true},
+          {"text": "看电视", "pinyin": "kàn diànshì", "text_en": "Watched TV", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_comedy_004",
+    "title": "Learning to Say Thank You",
+    "title_zh": "学说谢谢",
+    "hsk_level": 1,
+    "text_zh": "我学汉语的第一天，老师说：「先学一个词：谢谢。」我说：「谢谢。」老师说：「很好。」我说：「谢谢。」老师说：「不用谢。」我说：「谢谢。」老师笑了。",
+    "text_pinyin": "Wǒ xué Hànyǔ de dì yī tiān, lǎoshī shuō:「Xiān xué yí gè cí: xièxie.」Wǒ shuō:「Xièxie.」Lǎoshī shuō:「Hěn hǎo.」Wǒ shuō:「Xièxie.」Lǎoshī shuō:「Búyòng xiè.」Wǒ shuō:「Xièxie.」Lǎoshī xiào le.",
+    "text_en": "On my first day learning Chinese, the teacher says: 'First learn one word: thank you.' I say: 'Thank you.' The teacher says: 'Very good.' I say: 'Thank you.' The teacher says: 'You're welcome.' I say: 'Thank you.' The teacher laughs.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "第一天学的是什么词？",
+        "q_en": "What word was learned on the first day?",
+        "options": [
+          {"text": "你好", "pinyin": "nǐ hǎo", "text_en": "Hello", "correct": false},
+          {"text": "谢谢", "pinyin": "xièxie", "text_en": "Thank you", "correct": true},
+          {"text": "再见", "pinyin": "zàijiàn", "text_en": "Goodbye", "correct": false},
+          {"text": "对不起", "pinyin": "duìbuqǐ", "text_en": "Sorry", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "我说了几次「谢谢」？",
+        "q_en": "How many times did I say 'thank you'?",
+        "options": [
+          {"text": "一次", "pinyin": "yí cì", "text_en": "Once", "correct": false},
+          {"text": "两次", "pinyin": "liǎng cì", "text_en": "Twice", "correct": false},
+          {"text": "三次", "pinyin": "sān cì", "text_en": "Three times", "correct": true},
+          {"text": "四次", "pinyin": "sì cì", "text_en": "Four times", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "最后老师怎么了？",
+        "q_en": "What did the teacher do in the end?",
+        "options": [
+          {"text": "不高兴", "pinyin": "bù gāoxìng", "text_en": "Was unhappy", "correct": false},
+          {"text": "笑了", "pinyin": "xiào le", "text_en": "Laughed", "correct": true},
+          {"text": "走了", "pinyin": "zǒu le", "text_en": "Left", "correct": false},
+          {"text": "又说了一次", "pinyin": "yòu shuō le yí cì", "text_en": "Said it again", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j1_food_002",
+    "title": "Dinner for One",
+    "title_zh": "一个人吃饭",
+    "hsk_level": 1,
+    "text_zh": "晚上，我一个人去饭店吃饭。我要了米饭、一个菜、一杯茶。饭店里的人都是两个人、三个人。只有我一个人。但是菜很好吃。一个人吃饭，也可以很好。",
+    "text_pinyin": "Wǎnshang, wǒ yí gè rén qù fàndiàn chī fàn. Wǒ yào le mǐfàn, yí gè cài, yì bēi chá. Fàndiàn lǐ de rén dōu shì liǎng gè rén, sān gè rén. Zhǐ yǒu wǒ yí gè rén. Dànshì cài hěn hǎochī. Yí gè rén chī fàn, yě kěyǐ hěn hǎo.",
+    "text_en": "In the evening, I go to a restaurant alone to eat. I order rice, one dish, and a cup of tea. Everyone in the restaurant is in groups of two, three. I'm the only one alone. But the food is delicious. Eating alone can be good too.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "我要了什么？",
+        "q_en": "What did I order?",
+        "options": [
+          {"text": "米饭、菜、茶", "pinyin": "mǐfàn, cài, chá", "text_en": "Rice, a dish, tea", "correct": true},
+          {"text": "米饭和咖啡", "pinyin": "mǐfàn hé kāfēi", "text_en": "Rice and coffee", "correct": false},
+          {"text": "水果和水", "pinyin": "shuǐguǒ hé shuǐ", "text_en": "Fruit and water", "correct": false},
+          {"text": "两个菜", "pinyin": "liǎng gè cài", "text_en": "Two dishes", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "饭店里的人都是怎么样的？",
+        "q_en": "How are the people in the restaurant grouped?",
+        "options": [
+          {"text": "都是一个人", "pinyin": "dōu shì yí gè rén", "text_en": "All alone", "correct": false},
+          {"text": "两个人、三个人", "pinyin": "liǎng gè rén, sān gè rén", "text_en": "In twos and threes", "correct": true},
+          {"text": "很多人", "pinyin": "hěn duō rén", "text_en": "Big groups", "correct": false},
+          {"text": "没有人", "pinyin": "méiyǒu rén", "text_en": "Nobody", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "我觉得一个人吃饭怎么样？",
+        "q_en": "How do I feel about eating alone?",
+        "options": [
+          {"text": "不好", "pinyin": "bù hǎo", "text_en": "Not good", "correct": false},
+          {"text": "也可以很好", "pinyin": "yě kěyǐ hěn hǎo", "text_en": "Can be good too", "correct": true},
+          {"text": "很不高兴", "pinyin": "hěn bù gāoxìng", "text_en": "Very unhappy", "correct": false},
+          {"text": "不想再来了", "pinyin": "bù xiǎng zài lái le", "text_en": "Don't want to come again", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  }
+]

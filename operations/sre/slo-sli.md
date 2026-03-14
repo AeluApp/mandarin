@@ -1,6 +1,6 @@
 # Service Level Objectives (SLOs) and Indicators (SLIs)
 
-## Service: Mandarin Learning Platform
+## Service: Aelu Learning Platform
 
 ### SLO 1: Availability
 - **SLI**: Proportion of successful health checks (HTTP 200 from `/api/health/ready`)

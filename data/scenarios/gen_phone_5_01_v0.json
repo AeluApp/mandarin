@@ -1,0 +1,160 @@
+{
+    "title": "The Voicemail Virtuoso",
+    "title_zh": "留言大师",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_5_01_v0",
+    "tree": {
+        "setup": "Your phone displays「未接来电(3)」— three missed calls from the same number, all within twenty minutes. It's the HR department of a company you interviewed with last week. You call back and get their voicemail. Then they call again. Then you play phone tag for three more rounds before finally connecting with HR Manager Xie, who sounds like she's been through this dance before and has learned to enjoy it.",
+        "setup_zh": "你的手机显示「未接来电(3)」——同一个号码在二十分钟内打了三次。是你上周面试的那家公司的人力资源部。你回拨过去接到了他们的语音信箱。然后他们又打来。然后你们又互相追了三个来回，终于接通了人力资源部的谢经理，她听起来像是早就经历过这种电话追逐战，并且已经学会了享受它。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "终于接通了！你好，我是光明科技人力资源部的谢经理。请问是张先生吗？",
+                "text_pinyin": "zhōngyú jiē tōng le! nǐ hǎo, wǒ shì Guāngmíng Kējì rénlì zīyuán bù de Xiè jīnglǐ. qǐngwèn shì Zhāng xiānsheng ma?",
+                "text_en": "Finally connected! Hello, I'm Manager Xie from Guangming Tech's HR department. Is this Mr. Zhang?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your identity and apologize for missing her calls.",
+                "options": [
+                    {
+                        "text_zh": "谢经理，您好！是我，张明。非常抱歉，刚才在开会所以没能接到您的电话。我看到有三个未接来电，就赶紧回拨了。请问有什么消息？",
+                        "text_pinyin": "Xiè jīnglǐ, nín hǎo! shì wǒ, Zhāng Míng. fēicháng bàoqiàn, gāngcái zài kāihuì suǒyǐ méi néng jiē dào nín de diànhuà. wǒ kàn dào yǒu sān gè wèi jiē lái diàn, jiù gǎnjǐn huí bō le. qǐngwèn yǒu shénme xiāoxi?",
+                        "text_en": "Manager Xie, hello! Yes, it's me, Zhang Ming. I'm very sorry — I was in a meeting and couldn't answer. I saw the three missed calls and called back right away. Any news?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Polite explanation without over-apologizing, and getting to the point — Manager Xie appreciates efficiency. Three calls means she has something worth saying."
+                    },
+                    {
+                        "text_zh": "是我。抱歉没接到电话。",
+                        "text_pinyin": "shì wǒ. bàoqiàn méi jiē dào diànhuà.",
+                        "text_en": "That's me. Sorry I missed your calls.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief and acknowledged. She moves on to the reason for calling."
+                    },
+                    {
+                        "text_zh": "是的，你们打了好多次啊。",
+                        "text_pinyin": "shì de, nǐmen dǎ le hǎo duō cì a.",
+                        "text_en": "Yes — you called a lot of times.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Xie pauses. The observation is accurate but the tone makes it sound like a complaint about being pursued."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没关系！是好消息。上周的面试你通过了，我们想正式给你发一个录用通知。薪资待遇和入职日期需要跟你确认一下。你现在方便谈吗？",
+                "text_pinyin": "méi guānxi! shì hǎo xiāoxi. shàng zhōu de miànshì nǐ tōngguò le, wǒmen xiǎng zhèngshì gěi nǐ fā yí gè lùyòng tōngzhī. xīnzī dàiyù hé rùzhí rìqī xūyào gēn nǐ quèrèn yíxià. nǐ xiànzài fāngbiàn tán ma?",
+                "text_en": "No worries! It's good news. You passed last week's interview — we'd like to officially send you an offer. We need to confirm salary and start date with you. Is now a good time to talk?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express your excitement and confirm availability.",
+                "options": [
+                    {
+                        "text_zh": "太好了，非常感谢！我现在方便。请问薪资待遇具体是怎样的？另外，入职日期有没有灵活性？因为我需要给现在的公司提前一个月辞职。",
+                        "text_pinyin": "tài hǎo le, fēicháng gǎnxiè! wǒ xiànzài fāngbiàn. qǐngwèn xīnzī dàiyù jùtǐ shì zěnyàng de? lìngwài, rùzhí rìqī yǒu méiyǒu línghuó xìng? yīnwèi wǒ xūyào gěi xiànzài de gōngsī tíqián yí gè yuè cízhí.",
+                        "text_en": "That's wonderful, thank you! I'm available now. What are the specific salary terms? Also, is there flexibility on the start date? I need to give my current company one month's notice.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Enthusiasm tempered with practical questions — Manager Xie respects candidates who think about transitions rather than just destinations."
+                    },
+                    {
+                        "text_zh": "太好了！现在可以谈。",
+                        "text_pinyin": "tài hǎo le! xiànzài kěyǐ tán.",
+                        "text_en": "Great! We can talk now.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Excited and available. She'll walk through the details."
+                    },
+                    {
+                        "text_zh": "真的吗？我还以为没戏了。",
+                        "text_pinyin": "zhēn de ma? wǒ hái yǐwéi méi xì le.",
+                        "text_en": "Really? I thought I didn't get it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Xie laughs. Self-deprecation after an acceptance is a very human response, but confidence would serve you better right now."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "月薪是一万八千元，试用期三个月，试用期工资是正式工资的百分之八十。五险一金都有。年终奖根据绩效考核来定。入职日期我们定的是下个月一号，但如果你需要给现在的公司交接，可以推迟到十五号。",
+                "text_pinyin": "yuèxīn shì yí wàn bā qiān yuán, shìyòng qī sān gè yuè, shìyòng qī gōngzī shì zhèngshì gōngzī de bǎifēnzhī bāshí. wǔ xiǎn yì jīn dōu yǒu. niánzhōng jiǎng gēnjù jìxiào kǎohé lái dìng. rùzhí rìqī wǒmen dìng de shì xià gè yuè yī hào, dàn rúguǒ nǐ xūyào gěi xiànzài de gōngsī jiāojiē, kěyǐ tuīchí dào shíwǔ hào.",
+                "text_en": "Monthly salary is 18,000 yuan, three-month probation period at 80% of full salary. Full social insurance and housing fund included. Year-end bonus is performance-based. We've set the start date as the 1st of next month, but if you need transition time, we can push to the 15th."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the offer details.",
+                "options": [
+                    {
+                        "text_zh": "谢谢您详细的介绍。月薪一万八我基本可以接受。不过我想确认一下：试用期过后工资会自动调到全额对吗？还有，五险一金是从入职第一天就开始交吗？入职日期的话，十五号对我比较合适。",
+                        "text_pinyin": "xièxie nín xiángxì de jièshào. yuèxīn yí wàn bā wǒ jīběn kěyǐ jiēshòu. búguò wǒ xiǎng quèrèn yíxià: shìyòng qī guò hòu gōngzī huì zìdòng tiáo dào quán'é duì ma? hái yǒu, wǔ xiǎn yì jīn shì cóng rùzhí dì yī tiān jiù kāishǐ jiāo ma? rùzhí rìqī de huà, shíwǔ hào duì wǒ bǐjiào héshì.",
+                        "text_en": "Thank you for the detailed overview. I can basically accept 18,000. But I'd like to confirm: after probation, the salary automatically adjusts to full amount, correct? Also, does the social insurance start from day one? As for start date, the 15th works better for me.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Accepting with clarifying questions rather than blind agreement — Manager Xie confirms: yes to automatic adjustment, yes to day-one insurance, and the 15th is fine."
+                    },
+                    {
+                        "text_zh": "好的，可以。那就十五号入职。",
+                        "text_pinyin": "hǎo de, kěyǐ. nà jiù shíwǔ hào rùzhí.",
+                        "text_en": "OK, that works. I'll start on the 15th.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Quick acceptance. She'll send the formal offer letter for review."
+                    },
+                    {
+                        "text_zh": "试用期工资只有百分之八十啊……能不能谈一下？",
+                        "text_pinyin": "shìyòng qī gōngzī zhǐ yǒu bǎifēnzhī bāshí a……néng bu néng tán yíxià?",
+                        "text_en": "Probation salary is only 80%... can we negotiate that?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "80% during probation is standard in China and legally mandated as the minimum. Manager Xie explains this gently — it's not negotiable."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，试用期过后自动调整。五险一金从入职当月开始。好的，十五号入职没问题。我今天就把正式的录用通知书发到你的邮箱，你看完确认以后回复我就行。入职当天需要带的材料我也会一起发给你。",
+                "text_pinyin": "duì, shìyòng qī guò hòu zìdòng tiáozhěng. wǔ xiǎn yì jīn cóng rùzhí dāng yuè kāishǐ. hǎo de, shíwǔ hào rùzhí méi wèntí. wǒ jīntiān jiù bǎ zhèngshì de lùyòng tōngzhī shū fā dào nǐ de yóuxiāng, nǐ kàn wán quèrèn yǐhòu huífù wǒ jiù xíng. rùzhí dāngtiān xūyào dài de cáiliào wǒ yě huì yìqǐ fā gěi nǐ.",
+                "text_en": "Right, automatic adjustment after probation. Social insurance starts from the month of entry. OK, the 15th works. I'll email the formal offer letter today — just review and reply to confirm. I'll include the list of documents needed for your first day."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about first-day logistics.",
+                "options": [
+                    {
+                        "text_zh": "太好了，我会仔细看录用通知书然后尽快回复。请问入职当天需要带哪些材料？身份证和学历证书是必须的吧？还有，第一天是几点到公司？去哪个部门报到？",
+                        "text_pinyin": "tài hǎo le, wǒ huì zǐxì kàn lùyòng tōngzhī shū ránhòu jǐnkuài huífù. qǐngwèn rùzhí dāngtiān xūyào dài nǎxiē cáiliào? shēnfènzhèng hé xuélì zhèngshū shì bìxū de ba? hái yǒu, dì yī tiān shì jǐ diǎn dào gōngsī? qù nǎge bùmén bàodào?",
+                        "text_en": "Wonderful, I'll review the offer letter carefully and reply soon. What documents do I need on day one? ID and diploma are required, right? Also, what time should I arrive? Which department do I report to?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Forward-thinking questions about logistics — Manager Xie appreciates a new hire who plans ahead. She runs through the checklist efficiently."
+                    },
+                    {
+                        "text_zh": "好的，我等邮件。谢谢谢经理！",
+                        "text_pinyin": "hǎo de, wǒ děng yóujiàn. xièxie Xiè jīnglǐ!",
+                        "text_en": "OK, I'll wait for the email. Thank you, Manager Xie!",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Clean close. The email arrives within the hour."
+                    },
+                    {
+                        "text_zh": "好的好的。那我先挂了。",
+                        "text_pinyin": "hǎo de hǎo de. nà wǒ xiān guà le.",
+                        "text_en": "OK OK. I'll hang up then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Abrupt but understandable — you're probably already drafting your resignation letter in your head."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese employment offers typically include 五险一金 (wǔ xiǎn yì jīn) — five types of social insurance plus a housing fund. Probation periods (试用期) at 80% salary are standard and legally regulated. One month's notice (提前一个月辞职) is the standard resignation period in China. Formal offer letters (录用通知书) are legally binding once both parties confirm."
+    }
+}

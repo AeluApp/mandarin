@@ -1,0 +1,151 @@
+{
+    "title": "The Sound Collector",
+    "title_zh": "声音收集者",
+    "hsk_level": 7,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.7,
+    "tree": {
+        "setup": "You meet a young sound artist, Xiao He, in a quiet park near a Beijing hutong. She's holding a portable recorder and headphones, capturing ambient sounds. She explains she's building an audio archive of vanishing neighborhood soundscapes — the creak of old wooden doors, the calls of street vendors, the rhythm of mahjong tiles.",
+        "setup_zh": "你在北京胡同旁边一个安静的公园里遇到了一位年轻的声音艺术家小何。她手持便携录音机和耳机，正在采集环境声音。她解释说她在建立一个正在消失的社区声景音频档案——老木门的吱呀声、街头小贩的叫卖声、麻将牌碰撞的节奏。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你听——那个声音，是三轮车在石板路上颠簸的声音。再过几年，这条石板路大概率会被铺成柏油的。到时候这个声音就只存在于我的录音里了。很多人觉得我在做一件无聊的事，但我觉得声音比照片更能还原一个地方的灵魂。",
+                "text_pinyin": "Nǐ tīng — nàge shēngyīn, shì sānlúnchē zài shíbǎn lù shàng diānbǒ de shēngyīn. Zài guò jǐ nián, zhè tiáo shíbǎn lù dà gàilǜ huì bèi pū chéng bǎiyóu de. Dào shíhòu zhège shēngyīn jiù zhǐ cúnzài yú wǒ de lùyīn lǐ le. Hěn duō rén juéde wǒ zài zuò yī jiàn wúliáo de shì, dàn wǒ juéde shēngyīn bǐ zhàopiàn gèng néng huányuán yīge dìfang de línghún.",
+                "text_en": "Listen — that sound, it's a tricycle bumping along a flagstone road. In a few more years, this stone road will probably be paved over with asphalt. By then this sound will only exist in my recordings. Many people think what I'm doing is pointless, but I believe sound can restore a place's soul better than photographs."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her claim that sound preserves place better than images.",
+                "options": [
+                    {
+                        "text_zh": "我从来没有这样想过。但你说的有道理——我看老照片的时候会分析它，但是如果突然听到小时候巷子里的声音，我大概会直接愣住。声音好像比画面更难防备。",
+                        "text_pinyin": "Wǒ cónglái méiyǒu zhèyàng xiǎng guò. Dàn nǐ shuō de yǒu dàolǐ — wǒ kàn lǎo zhàopiàn de shíhou huì fēnxī tā, dànshì rúguǒ tūrán tīng dào xiǎo shíhou xiàngzi lǐ de shēngyīn, wǒ dàgài huì zhíjiē lèng zhù. Shēngyīn hǎoxiàng bǐ huàmiàn gèng nán fángbèi.",
+                        "text_en": "I never thought about it that way. But you're right — old photos I analyze, but if I suddenly heard sounds from the alley where I grew up, I'd freeze. Sound is harder to defend against than images.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She pulls off one headphone. 'Harder to defend against — that's exactly it. Nobody puts up walls against a sound.'"
+                    },
+                    {
+                        "text_zh": "你的录音机是什么牌子的？效果好吗？",
+                        "text_pinyin": "Nǐ de lùyīnjī shì shénme páizi de? Xiàoguǒ hǎo ma?",
+                        "text_en": "What brand is your recorder? Does it work well?",
+                        "score": 0.0,
+                        "feedback": "She answers — 'Zoom H5' — but her expression flattens a little. She was talking about the soul of a place."
+                    },
+                    {
+                        "text_zh": "我觉得照片也挺好的，可以发朋友圈。",
+                        "text_pinyin": "Wǒ juéde zhàopiàn yě tǐng hǎo de, kěyǐ fā péngyǒuquān.",
+                        "text_en": "I think photos are fine too — you can post them on WeChat Moments.",
+                        "score": 0.0,
+                        "feedback": "She smiles politely but doesn't respond. The conversation she wanted to have and the one you're having are two different conversations."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对，没有防备。我录过一段胡同里早晨的声音——自行车铃铛、有人倒洗脸水的声音、收废品的吆喝、远处学校的广播体操。单独听每一个声音都很普通，但混在一起的时候，它就变成了一种非常具体的「早上七点的北京胡同」。这个配方以后不会再有了。",
+                "text_pinyin": "Duì, méiyǒu fángbèi. Wǒ lù guò yī duàn hútòng lǐ zǎochén de shēngyīn — zìxíngchē língdāng, yǒu rén dào xǐliǎnshuǐ de shēngyīn, shōu fèipǐn de yāohè, yuǎnchù xuéxiào de guǎngbō tǐcāo. Dāndú tīng měi yīge shēngyīn dōu hěn pǔtōng, dàn hùn zài yīqǐ de shíhòu, tā jiù biàn chéng le yī zhǒng fēicháng jùtǐ de 'zǎoshang qī diǎn de Běijīng hútòng'. Zhège pèifāng yǐhòu bú huì zài yǒu le.",
+                "text_en": "Right, no defenses. I once recorded the sounds of a hutong morning — bicycle bells, someone pouring out wash water, the scrap collector's calls, school radio calisthenics in the distance. Each sound alone is ordinary, but mixed together they become a very specific 'seven a.m. in a Beijing hutong.' That recipe will never exist again."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She used the word 'recipe' — respond to that idea.",
+                "options": [
+                    {
+                        "text_zh": "「配方」——这个词用得好。少了收废品的那个声音，整个配方就变了。就像一道菜少了一味料，你吃得出来不对，但说不出哪里不对。",
+                        "text_pinyin": "'Pèifāng' — zhège cí yòng de hǎo. Shǎo le shōu fèipǐn de nàge shēngyīn, zhěnggè pèifāng jiù biàn le. Jiù xiàng yī dào cài shǎo le yī wèi liào, nǐ chī de chūlái bùduì, dàn shuō bù chū nǎlǐ bùduì.",
+                        "text_en": "'Recipe' — that's a good word for it. Take away the scrap collector's voice and the whole recipe changes. Like a dish missing one ingredient — you can taste that something's off, but you can't say what.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She nods slowly. 'That's the hardest thing to explain to people. It's not about any one sound. It's about what happens when they're all there at once.'"
+                    },
+                    {
+                        "text_zh": "你录了这么多，最后会做成什么？展览？播客？",
+                        "text_pinyin": "Nǐ lù le zhème duō, zuìhòu huì zuò chéng shénme? Zhǎnlǎn? Bōkè?",
+                        "text_en": "With all these recordings, what will you make from them? An exhibition? A podcast?",
+                        "score": 0.0,
+                        "feedback": "A reasonable question, but she was talking about loss, and you jumped to output. She answers — 'I haven't decided yet' — and goes quiet for a moment."
+                    },
+                    {
+                        "text_zh": "北京变化太大了，我都认不出来了。",
+                        "text_pinyin": "Běijīng biànhuà tài dà le, wǒ dōu rèn bu chūlái le.",
+                        "text_en": "Beijing has changed so much, I can barely recognize it.",
+                        "score": 0.0,
+                        "feedback": "True, but too general. She was being specific — a recipe, a particular combination — and you widened it into a cliché about change."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "其实最让我心疼的是那些正在消失的人声。比如磨刀师傅的吆喝，每个人的调子都不一样，像是一种个人签名。我录过五个不同的磨刀师傅，他们的吆喝里有方言的痕迹、有性格的色彩、有年龄的印记。但这个行业快消亡了，年轻人不会接手。",
+                "text_pinyin": "Qíshí zuì ràng wǒ xīnténg de shì nàxiē zhèngzài xiāoshī de rénshēng. Bǐrú mó dāo shīfu de yāohè, měige rén de diàozi dōu bù yīyàng, xiàng shì yī zhǒng gèrén qiānmíng. Wǒ lù guò wǔ ge bùtóng de mó dāo shīfu, tāmen de yāohè lǐ yǒu fāngyán de hénjì, yǒu xìnggé de sècǎi, yǒu niánlíng de yìnjì. Dàn zhège hángyè kuài xiāowáng le, niánqīngrén bú huì jiēshǒu.",
+                "text_en": "Actually what pains me most are the disappearing human voices. Like knife sharpeners' calls — each person's melody is different, like a personal signature. I've recorded five different knife sharpeners, and their calls carry traces of dialect, colors of personality, marks of age. But the profession is dying out, and no young people will take it over."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the loss of unique human voices.",
+                "options": [
+                    {
+                        "text_zh": "五个不同的磨刀师傅，五种不同的吆喝。如果你不录下来，这些声音就跟着他们一起走了——不是消失在某个地方，是彻底没了。连模仿都模仿不出来，因为别人的人生不一样。",
+                        "text_pinyin": "Wǔ ge bùtóng de mó dāo shīfu, wǔ zhǒng bùtóng de yāohè. Rúguǒ nǐ bù lù xiàlái, zhèxiē shēngyīn jiù gēnzhe tāmen yīqǐ zǒu le — bú shì xiāoshī zài mǒu ge dìfang, shì chèdǐ méi le. Lián mófǎng dōu mófǎng bù chūlái, yīnwèi biéren de rénshēng bù yīyàng.",
+                        "text_en": "Five different sharpeners, five different calls. If you don't record them, those sounds leave with them — not vanishing somewhere, just gone completely. You can't even imitate them, because someone else's life is different.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She looks at you for a long moment. 'Most people say \"that's sad\" and move on. You actually heard what I meant.'"
+                    },
+                    {
+                        "text_zh": "有人建议用AI模拟这些声音吗？技术上应该可以做到。",
+                        "text_pinyin": "Yǒu rén jiànyì yòng AI mónǐ zhèxiē shēngyīn ma? Jìshù shàng yīnggāi kěyǐ zuò dào.",
+                        "text_en": "Has anyone suggested using AI to simulate these sounds? Technically it should be possible.",
+                        "score": 0.0,
+                        "feedback": "She pauses. 'That's the question that bothers me most.' She was going to explain why, but you jumped to the solution before she finished describing the problem."
+                    },
+                    {
+                        "text_zh": "现在年轻人都不愿意做这种工作了，没办法。",
+                        "text_pinyin": "Xiànzài niánqīngrén dōu bú yuànyì zuò zhè zhǒng gōngzuò le, méi bànfǎ.",
+                        "text_en": "Young people today don't want to do this kind of work, nothing to be done.",
+                        "score": 0.0,
+                        "feedback": "She nods but doesn't continue. 'Nothing to be done' closes a door she was trying to open."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "有人建议我用AI合成这些声音来「保存」，但合成出来的声音没有灵魂。就像你可以用AI写一首诗，但那首诗里没有写诗的那个人的犹豫和挣扎。我录的不是声波数据，是一个具体的人在一个具体的下午发出的具体的声音。",
+                "text_pinyin": "Yǒu rén jiànyì wǒ yòng AI héchéng zhèxiē shēngyīn lái 'bǎocún', dàn héchéng chūlái de shēngyīn méiyǒu línghún. Jiù xiàng nǐ kěyǐ yòng AI xiě yī shǒu shī, dàn nà shǒu shī lǐ méiyǒu xiě shī de nàge rén de yóuyù hé zhēngzhá. Wǒ lù de bú shì shēngbō shùjù, shì yīge jùtǐ de rén zài yīge jùtǐ de xiàwǔ fāchū de jùtǐ de shēngyīn.",
+                "text_en": "Someone suggested I use AI to synthesize these sounds to 'preserve' them, but synthesized sound has no soul. Just like you can use AI to write a poem, but that poem doesn't contain the hesitation and struggle of the person who wrote it. What I record isn't sound wave data — it's a specific person making a specific sound on a specific afternoon."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "She's talking about the difference between data and lived sound.",
+                "options": [
+                    {
+                        "text_zh": "「一个具体的人，一个具体的下午」——这个说法让我想到，你录的其实不是声音本身，是那个下午。那个下午不会再来了。所以你做的事情不是保存，更像是……见证？",
+                        "text_pinyin": "'Yīge jùtǐ de rén, yīge jùtǐ de xiàwǔ' — zhège shuōfǎ ràng wǒ xiǎng dào, nǐ lù de qíshí bú shì shēngyīn běnshēn, shì nàge xiàwǔ. Nàge xiàwǔ bú huì zài lái le. Suǒyǐ nǐ zuò de shìqíng bú shì bǎocún, gèng xiàng shì…… jiànzhèng?",
+                        "text_en": "'A specific person, a specific afternoon' — that makes me think what you're really recording isn't the sound itself, but that afternoon. That afternoon won't come again. So what you're doing isn't preservation, it's more like... witnessing?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "She's quiet for several seconds. Then: 'Witnessing. I've been trying to find the right word for two years. That's it.'"
+                    },
+                    {
+                        "text_zh": "我觉得AI以后肯定会越来越好，也许有一天真的能完美复制。",
+                        "text_pinyin": "Wǒ juéde AI yǐhòu kěndìng huì yuè lái yuè hǎo, yěxǔ yǒu yī tiān zhēn de néng wánměi fùzhì.",
+                        "text_en": "I think AI will keep getting better — maybe one day it really can make a perfect copy.",
+                        "score": 0.0,
+                        "feedback": "She shakes her head slowly. 'You're still thinking about the copy. I'm talking about what can't be copied.' The gap between your wavelengths is showing."
+                    },
+                    {
+                        "text_zh": "这个项目应该去申请艺术基金，肯定有机构会感兴趣的。",
+                        "text_pinyin": "Zhège xiàngmù yīnggāi qù shēnqǐng yìshù jījīn, kěndìng yǒu jīgòu huì gǎn xìngqù de.",
+                        "text_en": "You should apply for art funding — there must be organizations interested in this.",
+                        "score": 0.0,
+                        "feedback": "She smiles. 'People always say that.' She puts her headphones back on. You offered logistics when she was offering philosophy."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Street vendor calls (吆喝 yāohè) are recognized as intangible cultural heritage in several Chinese cities. Each vendor developed a unique melodic call that served as both advertisement and neighborhood soundtrack. Sound preservation has become an emerging field in urban cultural conservation, as researchers recognize that the acoustic environment — from vendor calls to bicycle bells to the specific echo of narrow alleys — constitutes a layer of cultural identity that photographs alone cannot capture."
+    }
+}

@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "React to the photos and ask about their trip.",
                 "options": [
-                    {"text_zh": "哇，成都看起来很漂亮！你去了哪些地方？", "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?", "text_en": "Wow, Chengdu looks beautiful! What places did you visit?", "score": 1.0, "register": "casual", "feedback": "Enthusiastic and curious — complimenting the photos and asking for details is great conversation."},
-                    {"text_zh": "拍得真好看！你在那里待了几天？", "text_pinyin": "pāi de zhēn hǎokàn! nǐ zài nàlǐ dāi le jǐ tiān?", "text_en": "Great photos! How many days were you there?", "score": 0.8, "register": "casual", "feedback": "Compliments the photography and asks a practical question — keeps the conversation flowing."},
-                    {"text_zh": "成都在哪里？我不太了解那个地方。", "text_pinyin": "chéngdū zài nǎlǐ? wǒ bú tài liǎojiě nà ge dìfang.", "text_en": "Where is Chengdu? I don't know much about that place.", "score": 0.5, "register": "casual", "feedback": "Honest but misses the chance to react to the photos first — comment on what you see before asking general questions."}
+                    {
+                        "text_zh": "好主意！我们明天下午在图书馆见吧？",
+                        "text_pinyin": "hǎo zhǔyi! wǒmen míngtiān xiàwǔ zài túshūguǎn jiàn ba?",
+                        "text_en": "Good idea! Shall we meet at the library tomorrow afternoon?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to react to the photos and ask about their trip, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我去买吧，附近有没有超市？",
+                        "text_pinyin": "wǒ qù mǎi ba, fùjìn yǒu méiyǒu chāoshì?",
+                        "text_en": "I'll go buy them. Is there a supermarket nearby?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to react to the photos and ask about their trip, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "哇，成都看起来很漂亮！你去了哪些地方？",
+                        "text_pinyin": "wā, chéngdū kàn qǐlai hěn piàoliang! nǐ qù le nǎxiē dìfang?",
+                        "text_en": "Wow, Chengdu looks beautiful! What places did you visit?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and curious — complimenting the photos and asking for details is great conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Express interest and say you also want to go someday.",
                 "options": [
-                    {"text_zh": "我一直想去看大熊猫！火锅辣不辣？", "text_pinyin": "wǒ yīzhí xiǎng qù kàn dà xióngmāo! huǒguō là bú là?", "text_en": "I've always wanted to see the pandas! Was the hotpot spicy?", "score": 1.0, "register": "casual", "feedback": "Shows genuine excitement and asks a specific follow-up — makes your friend feel heard."},
-                    {"text_zh": "太好了！有机会的话我也想去看看。", "text_pinyin": "tài hǎo le! yǒu jīhuì dehuà wǒ yě xiǎng qù kànkan.", "text_en": "That's great! If I get the chance I'd like to visit too.", "score": 0.7, "register": "casual", "feedback": "Expresses interest but stays general — asking about their specific experience shows more engagement."},
-                    {"text_zh": "成都的火锅很有名，下次我们一起去吧。", "text_pinyin": "chéngdū de huǒguō hěn yǒumíng, xià cì wǒmen yīqǐ qù ba.", "text_en": "Chengdu hotpot is famous, let's go together next time.", "score": 0.6, "register": "casual", "feedback": "Friendly suggestion, but 下次一起去 can sound formulaic — respond to their experience first."}
+                    {
+                        "text_zh": "太贵了。三十块可以吗？",
+                        "text_pinyin": "tài guì le. sānshí kuài kěyǐ ma?",
+                        "text_en": "Too expensive. How about thirty?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to express interest and say you also want to go someday, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我一直想去看大熊猫！火锅辣不辣？",
+                        "text_pinyin": "wǒ yīzhí xiǎng qù kàn dà xióngmāo! huǒguō là bú là?",
+                        "text_en": "I've always wanted to see the pandas! Was the hotpot spicy?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Shows genuine excitement and asks a specific follow-up — makes your friend feel heard."
+                    },
+                    {
+                        "text_zh": "好啊！星期六可以。",
+                        "text_pinyin": "hǎo a! xīngqī liù kěyǐ.",
+                        "text_en": "Sure! Saturday works.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to express interest and say you also want to go someday, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

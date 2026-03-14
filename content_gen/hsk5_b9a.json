@@ -1,0 +1,282 @@
+[
+  {
+    "id": "j5_food_111",
+    "title": "Grandmother's Soup",
+    "title_zh": "奶奶的汤",
+    "hsk_level": 5,
+    "text_zh": "奶奶做的汤，我到现在还记得那个味道。她总是很早起来，先去菜市场买最新鲜的排骨和萝卜。回到家以后，她把排骨洗干净，放进一个很大的砂锅里，加满水，用小火慢慢煮。整个上午厨房里都是咕嘟咕嘟的声音，那个声音让人觉得很安心。中午的时候汤已经变成了白色，浓浓的，香气飘到了每一个房间。奶奶会用一个大勺子轻轻地搅一搅，然后尝一口，再决定要不要加盐。她说「好的汤不需要太多调料，食材本身的味道就是最好的味道」。那时候我不太理解这句话，觉得汤就是汤。可是后来离开家以后，在外面喝过很多汤，才明白奶奶说的是对的。那种简单的、慢慢熬出来的味道，是任何餐厅都做不出来的。",
+    "text_pinyin": "Nǎinai zuò de tāng, wǒ dào xiànzài hái jìde nàge wèidào. Tā zǒngshì hěn zǎo qǐlái, xiān qù càishìchǎng mǎi zuì xīnxiān de páigǔ hé luóbo. Huí dào jiā yǐhòu, tā bǎ páigǔ xǐ gānjìng, fàng jìn yí gè hěn dà de shāguō lǐ, jiā mǎn shuǐ, yòng xiǎo huǒ mànmàn zhǔ. Zhěng gè shàngwǔ chúfáng lǐ dōu shì gūdū gūdū de shēngyīn, nàge shēngyīn ràng rén juéde hěn ānxīn. Zhōngwǔ de shíhou tāng yǐjīng biàn chéng le báisè, nóng nóng de, xiāngqì piāo dào le měi yí gè fángjiān. Nǎinai huì yòng yí gè dà sháozi qīngqīng de jiǎo yì jiǎo, ránhòu cháng yì kǒu, zài juédìng yào bú yào jiā yán. Tā shuō「hǎo de tāng bù xūyào tài duō tiáoliào, shícái běnshēn de wèidào jiù shì zuì hǎo de wèidào」. Nà shíhou wǒ bú tài lǐjiě zhè jù huà, juéde tāng jiù shì tāng. Kěshì hòulái líkāi jiā yǐhòu, zài wàimiàn hē guò hěn duō tāng, cái míngbai nǎinai shuō de shì duì de. Nà zhǒng jiǎndān de, mànmàn áo chūlái de wèidào, shì rènhé cāntīng dōu zuò bù chūlái de.",
+    "text_en": "Grandmother's soup — I can still remember that taste today. She always got up very early, first going to the market to buy the freshest spare ribs and radish. Back home, she washed the ribs clean, put them in a large clay pot, filled it with water, and simmered slowly over low heat. All morning the kitchen was filled with a gentle bubbling sound, a sound that made you feel at ease. By noon the soup had turned white and thick, its fragrance drifting into every room. Grandmother would gently stir with a big ladle, take a sip, then decide whether to add salt. She said, 'Good soup doesn't need much seasoning — the natural flavor of the ingredients is the best flavor.' At the time I didn't really understand. Soup was just soup. But after leaving home and tasting many soups elsewhere, I finally understood she was right. That simple taste, slowly simmered out, is something no restaurant can replicate.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "奶奶做汤的时候用什么火？",
+        "q_en": "What heat did grandmother use to make the soup?",
+        "options": [
+          {"text": "大火", "pinyin": "dà huǒ", "text_en": "High heat", "correct": false},
+          {"text": "小火", "pinyin": "xiǎo huǒ", "text_en": "Low heat", "correct": true},
+          {"text": "中火", "pinyin": "zhōng huǒ", "text_en": "Medium heat", "correct": false},
+          {"text": "微波炉", "pinyin": "wēibōlú", "text_en": "Microwave", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "奶奶觉得好的汤需要什么？",
+        "q_en": "What did grandmother think good soup needs?",
+        "options": [
+          {"text": "很多调料", "pinyin": "hěn duō tiáoliào", "text_en": "Lots of seasoning", "correct": false},
+          {"text": "特别的做法", "pinyin": "tèbié de zuòfǎ", "text_en": "A special method", "correct": false},
+          {"text": "食材本身的味道", "pinyin": "shícái běnshēn de wèidào", "text_en": "The natural flavor of ingredients", "correct": true},
+          {"text": "进口的食材", "pinyin": "jìnkǒu de shícái", "text_en": "Imported ingredients", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_112",
+    "title": "The Morning Market",
+    "title_zh": "早市",
+    "hsk_level": 5,
+    "text_zh": "每个周末我都会去家附近的早市买菜。早市六点就开了，但最好的时间是七点左右，那时候摊位都摆好了，人也不算太多。卖菜的大多是附近农村来的老人，他们的菜是自己种的，品种不多，但特别新鲜。有一个卖豆腐的阿姨，每次看到我都会笑着说「小伙子，今天的豆腐特别嫩」。她的豆腐确实好吃，白白的，滑滑的，拿回家放点葱花和酱油就很好了。旁边有一个卖鸡蛋的大叔，鸡蛋都是散养的鸡下的，蛋黄的颜色比超市的深很多。我喜欢在早市慢慢走，不着急，看看今天有什么好的食材，再决定晚饭做什么。这个过程本身就让人开心。买完菜回去的路上，袋子里装着新鲜的蔬菜和豆腐，心里已经开始想象它们变成一道道菜的样子了。",
+    "text_pinyin": "Měi gè zhōumò wǒ dōu huì qù jiā fùjìn de zǎoshì mǎi cài. Zǎoshì liù diǎn jiù kāi le, dàn zuì hǎo de shíjiān shì qī diǎn zuǒyòu, nà shíhou tānwèi dōu bǎi hǎo le, rén yě bú suàn tài duō. Mài cài de dàduō shì fùjìn nóngcūn lái de lǎorén, tāmen de cài shì zìjǐ zhòng de, pǐnzhǒng bù duō, dàn tèbié xīnxiān. Yǒu yí gè mài dòufu de āyí, měi cì kàn dào wǒ dōu huì xiào zhe shuō「xiǎohuǒzi, jīntiān de dòufu tèbié nèn」. Tā de dòufu quèshí hǎochī, bái bái de, huá huá de, ná huí jiā fàng diǎn cōnghuā hé jiàngyóu jiù hěn hǎo le. Pángbiān yǒu yí gè mài jīdàn de dàshū, jīdàn dōu shì sǎn yǎng de jī xià de, dànhuáng de yánsè bǐ chāoshì de shēn hěn duō. Wǒ xǐhuan zài zǎoshì mànmàn zǒu, bù zhāojí, kànkan jīntiān yǒu shénme hǎo de shícái, zài juédìng wǎnfàn zuò shénme. Zhège guòchéng běnshēn jiù ràng rén kāixīn. Mǎi wán cài huíqù de lù shàng, dàizi lǐ zhuāng zhe xīnxiān de shūcài hé dòufu, xīnlǐ yǐjīng kāishǐ xiǎngxiàng tāmen biàn chéng yí dào dào cài de yàngzi le.",
+    "text_en": "Every weekend I go to the morning market near my home to buy groceries. It opens at six, but the best time is around seven — stalls are all set up and it's not too crowded yet. Most vendors are elderly people from nearby villages; their vegetables are home-grown, not many varieties, but exceptionally fresh. There's a tofu-selling auntie who smiles every time she sees me and says, 'Young man, today's tofu is especially tender.' Her tofu really is delicious — white and silky, just add some chopped scallions and soy sauce at home and it's perfect. Next to her is an uncle selling eggs, all from free-range chickens, the yolks much deeper in color than supermarket ones. I like to walk through the market slowly, unhurried, seeing what good ingredients are available today, then deciding what to cook for dinner. The process itself makes me happy. On the walk home, bag full of fresh vegetables and tofu, my mind already starts imagining them transformed into dish after dish.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "早市最好的时间是几点？",
+        "q_en": "What is the best time to visit the morning market?",
+        "options": [
+          {"text": "六点", "pinyin": "liù diǎn", "text_en": "Six o'clock", "correct": false},
+          {"text": "七点左右", "pinyin": "qī diǎn zuǒyòu", "text_en": "Around seven", "correct": true},
+          {"text": "八点以后", "pinyin": "bā diǎn yǐhòu", "text_en": "After eight", "correct": false},
+          {"text": "中午", "pinyin": "zhōngwǔ", "text_en": "Noon", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "大叔卖的鸡蛋有什么特别的？",
+        "q_en": "What is special about the uncle's eggs?",
+        "options": [
+          {"text": "个头特别大", "pinyin": "gètóu tèbié dà", "text_en": "They're especially large", "correct": false},
+          {"text": "价格很便宜", "pinyin": "jiàgé hěn piányi", "text_en": "They're very cheap", "correct": false},
+          {"text": "蛋黄颜色比超市的深", "pinyin": "dànhuáng yánsè bǐ chāoshì de shēn", "text_en": "The yolks are deeper colored than supermarket ones", "correct": true},
+          {"text": "都是双黄蛋", "pinyin": "dōu shì shuāng huáng dàn", "text_en": "They're all double-yolked", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_113",
+    "title": "Cooking for One",
+    "title_zh": "一个人做饭",
+    "hsk_level": 5,
+    "text_zh": "一个人住以后，我开始学做饭。一开始觉得给自己一个人做饭不值得花太多时间，所以经常随便煮碗面条就算了。后来有一天下班回来特别累，不想出门也不想叫外卖，冰箱里只剩下几个西红柿和两个鸡蛋。我就把西红柿切了，鸡蛋打散，先炒鸡蛋再炒西红柿，加了一点糖和盐。做好以后端到桌子上，配一碗白米饭，慢慢吃。那一刻我突然觉得，一个人做饭也可以是一件很温暖的事。从那以后我开始认真对待每一顿饭。买一棵好看的西兰花，把它切成小朵，焯水以后加点蒜泥。或者做一碗蛋炒饭，把米饭炒到粒粒分明。厨房里的声音、食物的香气、盘子里好看的颜色，这些都是给自己的小小礼物。",
+    "text_pinyin": "Yí gè rén zhù yǐhòu, wǒ kāishǐ xué zuòfàn. Yì kāishǐ juéde gěi zìjǐ yí gè rén zuòfàn bù zhídé huā tài duō shíjiān, suǒyǐ jīngcháng suíbiàn zhǔ wǎn miàntiáo jiù suàn le. Hòulái yǒu yì tiān xiàbān huílái tèbié lèi, bù xiǎng chūmén yě bù xiǎng jiào wàimài, bīngxiāng lǐ zhǐ shèng xià jǐ gè xīhóngshì hé liǎng gè jīdàn. Wǒ jiù bǎ xīhóngshì qiē le, jīdàn dǎ sàn, xiān chǎo jīdàn zài chǎo xīhóngshì, jiā le yìdiǎn táng hé yán. Zuò hǎo yǐhòu duān dào zhuōzi shàng, pèi yì wǎn bái mǐfàn, mànmàn chī. Nà yí kè wǒ tūrán juéde, yí gè rén zuòfàn yě kěyǐ shì yí jiàn hěn wēnnuǎn de shì. Cóng nà yǐhòu wǒ kāishǐ rènzhēn duìdài měi yí dùn fàn. Mǎi yì kē hǎokàn de xīlánhuā, bǎ tā qiē chéng xiǎo duǒ, chāo shuǐ yǐhòu jiā diǎn suànní. Huòzhě zuò yì wǎn dàn chǎo fàn, bǎ mǐfàn chǎo dào lì lì fēnmíng. Chúfáng lǐ de shēngyīn, shíwù de xiāngqì, pánzi lǐ hǎokàn de yánsè, zhèxiē dōu shì gěi zìjǐ de xiǎo xiǎo lǐwù.",
+    "text_en": "After living alone, I started learning to cook. At first I thought cooking just for myself wasn't worth much time, so I'd often just boil a bowl of noodles and call it done. Then one day I came home from work exhausted, didn't want to go out or order delivery, and only had a few tomatoes and two eggs left in the fridge. So I sliced the tomatoes, scrambled the eggs, fried the eggs first then the tomatoes, added a little sugar and salt. Brought it to the table with a bowl of white rice, ate slowly. In that moment I suddenly felt that cooking for one can also be something warm. From then on I started taking every meal seriously. Buying a nice-looking broccoli, cutting it into small florets, blanching it and adding garlic paste. Or making a bowl of egg fried rice, frying until every grain is separate. The sounds in the kitchen, the fragrance of food, the beautiful colors on the plate — these are all small gifts to yourself.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者以前一个人吃饭的时候经常吃什么？",
+        "q_en": "What did the author often eat when eating alone before?",
+        "options": [
+          {"text": "外卖", "pinyin": "wàimài", "text_en": "Takeout", "correct": false},
+          {"text": "面条", "pinyin": "miàntiáo", "text_en": "Noodles", "correct": true},
+          {"text": "炒饭", "pinyin": "chǎofàn", "text_en": "Fried rice", "correct": false},
+          {"text": "面包", "pinyin": "miànbāo", "text_en": "Bread", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "那天冰箱里剩下了什么？",
+        "q_en": "What was left in the fridge that day?",
+        "options": [
+          {"text": "排骨和萝卜", "pinyin": "páigǔ hé luóbo", "text_en": "Ribs and radish", "correct": false},
+          {"text": "西兰花和蒜", "pinyin": "xīlánhuā hé suàn", "text_en": "Broccoli and garlic", "correct": false},
+          {"text": "西红柿和鸡蛋", "pinyin": "xīhóngshì hé jīdàn", "text_en": "Tomatoes and eggs", "correct": true},
+          {"text": "豆腐和青菜", "pinyin": "dòufu hé qīngcài", "text_en": "Tofu and greens", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_114",
+    "title": "The Late-Night Noodle Shop",
+    "title_zh": "深夜面馆",
+    "hsk_level": 5,
+    "text_zh": "公司附近有一家面馆，开到凌晨两点。加班晚了的时候，我常常去那里吃一碗面。面馆很小，只有六张桌子，灯光是暖黄色的，墙上挂着一张旧旧的菜单。老板是个五十多岁的男人，话不多，但做面很认真。他的招牌是牛肉面，汤是每天早上熬的，用牛骨和好几种香料，要煮四五个小时。面条是手工做的，有嚼劲。碗端上来的时候，热气腾腾的，上面飘着几片牛肉和切碎的香菜。深夜的面馆里很安静，客人大多是加完班的人，大家都低着头默默地吃面，偶尔能听到吸面条的声音。没有人说话，但那种安静不让人觉得孤单。也许是因为大家都累了一天，在这碗面里找到了一点安慰。吃完以后暖暖的，走在回家的路上，夜风吹过来，觉得世界还是不错的。",
+    "text_pinyin": "Gōngsī fùjìn yǒu yì jiā miànguǎn, kāi dào língchén liǎng diǎn. Jiābān wǎn le de shíhou, wǒ chángcháng qù nàlǐ chī yì wǎn miàn. Miànguǎn hěn xiǎo, zhǐ yǒu liù zhāng zhuōzi, dēngguāng shì nuǎn huángsè de, qiáng shàng guà zhe yì zhāng jiù jiù de càidān. Lǎobǎn shì ge wǔshí duō suì de nánrén, huà bù duō, dàn zuò miàn hěn rènzhēn. Tā de zhāopái shì niúròu miàn, tāng shì měi tiān zǎoshang áo de, yòng niúgǔ hé hǎo jǐ zhǒng xiāngliào, yào zhǔ sì wǔ gè xiǎoshí. Miàntiáo shì shǒugōng zuò de, yǒu jiáojìn. Wǎn duān shànglái de shíhou, rèqì téngténg de, shàngmiàn piāo zhe jǐ piàn niúròu hé qiē suì de xiāngcài. Shēnyè de miànguǎn lǐ hěn ānjìng, kèrén dàduō shì jiā wán bān de rén, dàjiā dōu dī zhe tóu mòmò de chī miàn, ǒu'ěr néng tīng dào xī miàntiáo de shēngyīn. Méiyǒu rén shuōhuà, dàn nà zhǒng ānjìng bú ràng rén juéde gūdān. Yěxǔ shì yīnwèi dàjiā dōu lèi le yì tiān, zài zhè wǎn miàn lǐ zhǎo dào le yìdiǎn ānwèi. Chī wán yǐhòu nuǎn nuǎn de, zǒu zài huí jiā de lù shàng, yè fēng chuī guòlái, juéde shìjiè hái shì búcuò de.",
+    "text_en": "Near my office there's a noodle shop that stays open until 2 AM. When I work late, I often go there for a bowl of noodles. The shop is small — only six tables, warm yellow lighting, an old menu hanging on the wall. The owner is a man in his fifties, doesn't talk much, but takes his noodles seriously. His specialty is beef noodle soup, broth simmered every morning with beef bones and several spices for four or five hours. The noodles are handmade, with a nice chew. When the bowl arrives, steaming hot, a few slices of beef and chopped cilantro floating on top. The late-night noodle shop is quiet, most customers are people who just finished overtime, everyone heads down eating silently, occasionally you hear the sound of slurping noodles. Nobody talks, but that kind of quiet doesn't feel lonely. Maybe it's because everyone's been tired all day, finding a bit of comfort in this bowl of noodles. After eating, warm inside, walking home, the night breeze blowing past, you feel the world is still alright.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "牛肉面的汤需要煮多长时间？",
+        "q_en": "How long does the beef noodle broth need to cook?",
+        "options": [
+          {"text": "一两个小时", "pinyin": "yì liǎng gè xiǎoshí", "text_en": "One or two hours", "correct": false},
+          {"text": "四五个小时", "pinyin": "sì wǔ gè xiǎoshí", "text_en": "Four or five hours", "correct": true},
+          {"text": "半个小时", "pinyin": "bàn gè xiǎoshí", "text_en": "Half an hour", "correct": false},
+          {"text": "整整一天", "pinyin": "zhěng zhěng yì tiān", "text_en": "A whole day", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "深夜面馆的客人大多是什么人？",
+        "q_en": "What kind of people are most of the late-night noodle shop customers?",
+        "options": [
+          {"text": "学生", "pinyin": "xuéshēng", "text_en": "Students", "correct": false},
+          {"text": "加完班的人", "pinyin": "jiā wán bān de rén", "text_en": "People who just finished overtime", "correct": true},
+          {"text": "出租车司机", "pinyin": "chūzūchē sījī", "text_en": "Taxi drivers", "correct": false},
+          {"text": "旅游的人", "pinyin": "lǚyóu de rén", "text_en": "Tourists", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_115",
+    "title": "Tea on a Rainy Afternoon",
+    "title_zh": "雨天的下午茶",
+    "hsk_level": 5,
+    "text_zh": "下雨的下午，最适合泡一壶茶。我有一套很简单的茶具，是搬家的时候在旧货市场买的——一个小茶壶，两个小茶杯，放在一个竹子做的茶盘上。泡茶的步骤不复杂，但每一步都让人慢下来。先烧水，等水开了以后稍微放凉一点。把茶叶放进茶壶里，倒入热水，第一泡是洗茶，水倒掉。第二泡才是真正开始喝。看着茶叶在热水里慢慢展开，水的颜色渐渐变深，有一种时间被拉长的感觉。窗外的雨声和茶的香气混在一起，让整个房间都变得很柔软。我不是什么懂茶的人，不会像茶艺师那样讲究，但我喜欢泡茶这个过程。它让我的手有事情做，让我的心安静下来。一杯茶，一本书，一个下雨的下午，这已经足够了。",
+    "text_pinyin": "Xià yǔ de xiàwǔ, zuì shìhé pào yì hú chá. Wǒ yǒu yí tào hěn jiǎndān de chájù, shì bānjiā de shíhou zài jiùhuò shìchǎng mǎi de — yí gè xiǎo cháhú, liǎng gè xiǎo chábēi, fàng zài yí gè zhúzi zuò de chápán shàng. Pào chá de bùzhòu bù fùzá, dàn měi yí bù dōu ràng rén màn xiàlái. Xiān shāo shuǐ, děng shuǐ kāi le yǐhòu shāowēi fàng liáng yìdiǎn. Bǎ cháyè fàng jìn cháhú lǐ, dào rù rè shuǐ, dì yī pào shì xǐ chá, shuǐ dào diào. Dì èr pào cái shì zhēnzhèng kāishǐ hē. Kàn zhe cháyè zài rè shuǐ lǐ mànmàn zhǎnkāi, shuǐ de yánsè jiànjiàn biàn shēn, yǒu yì zhǒng shíjiān bèi lā cháng de gǎnjué. Chuāng wài de yǔ shēng hé chá de xiāngqì hùn zài yìqǐ, ràng zhěng gè fángjiān dōu biàn de hěn róuruǎn. Wǒ bú shì shénme dǒng chá de rén, bú huì xiàng cháyì shī nàyàng jiǎngjiū, dàn wǒ xǐhuan pào chá zhège guòchéng. Tā ràng wǒ de shǒu yǒu shìqing zuò, ràng wǒ de xīn ānjìng xiàlái. Yì bēi chá, yì běn shū, yí gè xià yǔ de xiàwǔ, zhè yǐjīng zúgòu le.",
+    "text_en": "A rainy afternoon is perfect for brewing a pot of tea. I have a simple tea set, bought at a flea market when I was moving — a small teapot, two small cups, placed on a bamboo tea tray. The steps for brewing tea aren't complicated, but each one makes you slow down. First boil the water, let it cool slightly after boiling. Put tea leaves in the teapot, pour in hot water — the first steep is for rinsing the leaves, pour that water out. The second steep is when you actually start drinking. Watching the tea leaves slowly unfurl in hot water, the color gradually deepening, there's a feeling of time being stretched. The rain outside and the tea's fragrance blend together, making the whole room feel soft. I'm not someone who really understands tea — I can't be as particular as a tea ceremony master — but I love the process of brewing tea. It gives my hands something to do, and lets my heart quiet down. A cup of tea, a book, a rainy afternoon — that's enough.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "茶具是在哪里买的？",
+        "q_en": "Where was the tea set bought?",
+        "options": [
+          {"text": "网上", "pinyin": "wǎng shàng", "text_en": "Online", "correct": false},
+          {"text": "旧货市场", "pinyin": "jiùhuò shìchǎng", "text_en": "A flea market", "correct": true},
+          {"text": "商场", "pinyin": "shāngchǎng", "text_en": "A department store", "correct": false},
+          {"text": "朋友送的", "pinyin": "péngyou sòng de", "text_en": "A gift from a friend", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "第一泡茶的作用是什么？",
+        "q_en": "What is the purpose of the first steep?",
+        "options": [
+          {"text": "直接喝", "pinyin": "zhíjiē hē", "text_en": "To drink directly", "correct": false},
+          {"text": "洗茶", "pinyin": "xǐ chá", "text_en": "To rinse the tea", "correct": true},
+          {"text": "闻香气", "pinyin": "wén xiāngqì", "text_en": "To smell the aroma", "correct": false},
+          {"text": "看颜色", "pinyin": "kàn yánsè", "text_en": "To check the color", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_116",
+    "title": "Sharing Dumplings",
+    "title_zh": "一起包饺子",
+    "hsk_level": 5,
+    "text_zh": "冬至那天，同事们决定下班以后一起包饺子。办公室的会议室被收拾出来，桌子上铺了干净的塑料布。有人从家里带来了和好的面，有人负责准备馅儿——猪肉白菜馅和韭菜鸡蛋馅两种。大家围着桌子坐下来，开始包饺子。有些人包得很好看，皮薄馅大，形状整齐；有些人包得奇奇怪怪的，但大家都笑着说「没关系，煮出来都一样好吃」。我的同事小王是东北人，她包饺子的速度最快，一分钟能包好几个。她一边包一边教我们怎么捏褶子，还说小时候每到过年全家人都会坐在一起包饺子，一包就是一整天。饺子煮好以后，每个人端着一碗热腾腾的饺子，蘸着醋和酱油吃。大家一边吃一边聊天，平时工作中的压力好像都消失了。那天晚上回家的路上很冷，但心里是暖的。",
+    "text_pinyin": "Dōngzhì nà tiān, tóngshì men juédìng xiàbān yǐhòu yìqǐ bāo jiǎozi. Bàngōngshì de huìyìshì bèi shōushi chūlái, zhuōzi shàng pū le gānjìng de sùliào bù. Yǒu rén cóng jiā lǐ dài lái le huó hǎo de miàn, yǒu rén fùzé zhǔnbèi xiànr — zhūròu báicài xiànr hé jiǔcài jīdàn xiànr liǎng zhǒng. Dàjiā wéi zhe zhuōzi zuò xiàlái, kāishǐ bāo jiǎozi. Yǒuxiē rén bāo de hěn hǎokàn, pí báo xiàn dà, xíngzhuàng zhěngqí; yǒuxiē rén bāo de qí qí guài guài de, dàn dàjiā dōu xiào zhe shuō「méi guānxi, zhǔ chūlái dōu yíyàng hǎochī」. Wǒ de tóngshì Xiǎo Wáng shì dōngběi rén, tā bāo jiǎozi de sùdù zuì kuài, yì fēnzhōng néng bāo hǎo jǐ gè. Tā yìbiān bāo yìbiān jiāo wǒmen zěnme niē zhězi, hái shuō xiǎo shíhou měi dào guònián quán jiā rén dōu huì zuò zài yìqǐ bāo jiǎozi, yí bāo jiù shì yì zhěng tiān. Jiǎozi zhǔ hǎo yǐhòu, měi gè rén duān zhe yì wǎn rè téngténg de jiǎozi, zhàn zhe cù hé jiàngyóu chī. Dàjiā yìbiān chī yìbiān liáotiān, píngshí gōngzuò zhōng de yālì hǎoxiàng dōu xiāoshī le. Nà tiān wǎnshang huí jiā de lù shàng hěn lěng, dàn xīnlǐ shì nuǎn de.",
+    "text_en": "On the winter solstice, my colleagues decided to make dumplings together after work. The office meeting room was cleared out, the table covered with clean plastic sheeting. Someone brought pre-kneaded dough from home; others prepared the fillings — pork and cabbage, and chive and egg, two kinds. Everyone sat around the table and started wrapping dumplings. Some people's looked beautiful — thin skin, generous filling, neat shapes; some looked oddly shaped, but everyone laughed and said, 'It's fine, they'll taste the same once boiled.' My colleague Xiao Wang is from the northeast; she wraps the fastest, several per minute. While wrapping she taught us how to pinch the pleats, and said that when she was little, the whole family would sit together making dumplings every New Year, spending the entire day. After the dumplings were cooked, everyone held a bowl of steaming dumplings, dipping in vinegar and soy sauce. Eating and chatting, the pressures of daily work seemed to vanish. The walk home that night was cold, but my heart was warm.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "他们什么时候包饺子？",
+        "q_en": "When did they make dumplings?",
+        "options": [
+          {"text": "春节", "pinyin": "Chūnjié", "text_en": "Spring Festival", "correct": false},
+          {"text": "中秋节", "pinyin": "Zhōngqiūjié", "text_en": "Mid-Autumn Festival", "correct": false},
+          {"text": "冬至", "pinyin": "Dōngzhì", "text_en": "Winter solstice", "correct": true},
+          {"text": "元旦", "pinyin": "Yuándàn", "text_en": "New Year's Day", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "小王为什么包饺子包得特别快？",
+        "q_en": "Why is Xiao Wang especially fast at wrapping dumplings?",
+        "options": [
+          {"text": "她是厨师", "pinyin": "tā shì chúshī", "text_en": "She's a chef", "correct": false},
+          {"text": "她是东北人，从小就包", "pinyin": "tā shì dōngběi rén, cóng xiǎo jiù bāo", "text_en": "She's from the northeast, she's wrapped since childhood", "correct": true},
+          {"text": "她上过课", "pinyin": "tā shàng guò kè", "text_en": "She took a class", "correct": false},
+          {"text": "她看了视频", "pinyin": "tā kàn le shìpín", "text_en": "She watched a video", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_117",
+    "title": "The Taste of Homesickness",
+    "title_zh": "想家的味道",
+    "hsk_level": 5,
+    "text_zh": "在国外留学的第一个冬天，我特别想家。不是因为天气冷，也不是因为功课多，而是因为吃不到妈妈做的红烧肉。超市里的猪肉和国内的不太一样，酱油的牌子也不同，但我还是决定试一试。我按照记忆中妈妈的做法，先把肉切成方块，用热水焯一下。然后在锅里放糖，等糖融化变成棕色，再把肉放进去翻炒。加入酱油、料酒、姜片和八角，最后加水，盖上锅盖，小火慢慢炖。一个多小时以后，厨房里终于飘出了那个熟悉的香味。我迫不及待地尝了一口，味道和妈妈做的不完全一样，但那个方向是对的。我把做好的红烧肉拍了照片发给妈妈，她回了一条语音消息，说「看起来不错啊，下次少放一点酱油会更好」。听到妈妈的声音，我的眼睛突然有点湿了。",
+    "text_pinyin": "Zài guówài liúxué de dì yí gè dōngtiān, wǒ tèbié xiǎng jiā. Bú shì yīnwèi tiānqì lěng, yě bú shì yīnwèi gōngkè duō, ér shì yīnwèi chī bú dào māma zuò de hóngshāo ròu. Chāoshì lǐ de zhūròu hé guónèi de bú tài yíyàng, jiàngyóu de páizi yě bù tóng, dàn wǒ háishi juédìng shì yí shì. Wǒ ànzhào jìyì zhōng māma de zuòfǎ, xiān bǎ ròu qiē chéng fāng kuài, yòng rè shuǐ chāo yíxià. Ránhòu zài guō lǐ fàng táng, děng táng rónghuà biàn chéng zōngsè, zài bǎ ròu fàng jìnqù fānchǎo. Jiā rù jiàngyóu, liàojiǔ, jiāng piàn hé bājiǎo, zuìhòu jiā shuǐ, gài shàng guō gài, xiǎo huǒ mànmàn dùn. Yí gè duō xiǎoshí yǐhòu, chúfáng lǐ zhōngyú piāo chū le nàge shúxī de xiāngwèi. Wǒ pòbùjídài de cháng le yì kǒu, wèidào hé māma zuò de bù wánquán yíyàng, dàn nàge fāngxiàng shì duì de. Wǒ bǎ zuò hǎo de hóngshāo ròu pāi le zhàopiàn fā gěi māma, tā huí le yì tiáo yǔyīn xiāoxi, shuō「kàn qǐlái búcuò a, xià cì shǎo fàng yìdiǎn jiàngyóu huì gèng hǎo」. Tīng dào māma de shēngyīn, wǒ de yǎnjing tūrán yǒudiǎn shī le.",
+    "text_en": "The first winter studying abroad, I missed home terribly. Not because of the cold, not because of heavy coursework, but because I couldn't eat my mom's braised pork. The pork at the supermarket was different from back home, the soy sauce brand was different too, but I decided to try anyway. Following my memory of mom's method, I first cut the meat into cubes, blanched in hot water. Then put sugar in the pan, waited until it melted to brown, then added the meat and stir-fried. Added soy sauce, cooking wine, ginger slices, and star anise, finally added water, covered the lid, simmered on low heat. After about an hour, the kitchen finally filled with that familiar aroma. I couldn't wait to take a bite — it wasn't exactly the same as mom's, but the direction was right. I took a photo of the finished braised pork and sent it to mom. She replied with a voice message: 'Looks pretty good — next time use a little less soy sauce and it'll be even better.' Hearing mom's voice, my eyes suddenly felt a bit wet.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者为什么想家？",
+        "q_en": "Why did the author feel homesick?",
+        "options": [
+          {"text": "天气太冷了", "pinyin": "tiānqì tài lěng le", "text_en": "The weather was too cold", "correct": false},
+          {"text": "功课太多了", "pinyin": "gōngkè tài duō le", "text_en": "Too much homework", "correct": false},
+          {"text": "吃不到妈妈做的红烧肉", "pinyin": "chī bú dào māma zuò de hóngshāo ròu", "text_en": "Couldn't eat mom's braised pork", "correct": true},
+          {"text": "没有朋友", "pinyin": "méiyǒu péngyou", "text_en": "No friends", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "妈妈给了什么建议？",
+        "q_en": "What advice did mom give?",
+        "options": [
+          {"text": "多放一点糖", "pinyin": "duō fàng yìdiǎn táng", "text_en": "Add more sugar", "correct": false},
+          {"text": "少放一点酱油", "pinyin": "shǎo fàng yìdiǎn jiàngyóu", "text_en": "Use a little less soy sauce", "correct": true},
+          {"text": "多炖一会儿", "pinyin": "duō dùn yíhuìr", "text_en": "Stew a bit longer", "correct": false},
+          {"text": "换一种肉", "pinyin": "huàn yì zhǒng ròu", "text_en": "Use a different meat", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_118",
+    "title": "Kitchen Sounds",
+    "title_zh": "厨房的声音",
+    "hsk_level": 5,
+    "text_zh": "我觉得厨房是家里最有生命力的地方，因为它总是充满各种各样的声音。早上烧水壶发出的咕噜声，是一天开始的信号。油锅里放入食材时「滋啦」一声，是最让人兴奋的声音。切菜的时候刀碰到案板发出的「哒哒哒」声，有一种稳定的节奏。炖汤的时候锅盖被蒸汽顶起来又落下去，发出轻轻的碰撞声。甚至连洗碗的水声，也有一种让人放松的效果。小时候放学回家，还没进门就能听到厨房里的声音，那些声音告诉我妈妈在家，晚饭快好了，一切都是安全的。现在我自己做饭的时候，也慢慢学会了听这些声音。油的温度够不够，可以听它响不响。菜炒得差不多了，声音会变小。米饭快好的时候，电饭锅会发出特别的声音。厨房的声音就像一种语言，只要你愿意听，它会告诉你很多事情。",
+    "text_pinyin": "Wǒ juéde chúfáng shì jiā lǐ zuì yǒu shēngmìnglì de dìfāng, yīnwèi tā zǒngshì chōngmǎn gè zhǒng gè yàng de shēngyīn. Zǎoshang shāo shuǐ hú fāchū de gūlū shēng, shì yì tiān kāishǐ de xìnhào. Yóu guō lǐ fàng rù shícái shí「zī lā」yì shēng, shì zuì ràng rén xīngfèn de shēngyīn. Qiē cài de shíhou dāo pèng dào ànbǎn fāchū de「dā dā dā」shēng, yǒu yì zhǒng wěndìng de jiézòu. Dùn tāng de shíhou guō gài bèi zhēngqì dǐng qǐlái yòu luò xiàqù, fāchū qīngqīng de pèngzhuàng shēng. Shènzhì lián xǐ wǎn de shuǐ shēng, yě yǒu yì zhǒng ràng rén fàngsōng de xiàoguǒ. Xiǎo shíhou fàngxué huí jiā, hái méi jìn mén jiù néng tīng dào chúfáng lǐ de shēngyīn, nàxiē shēngyīn gàosu wǒ māma zài jiā, wǎnfàn kuài hǎo le, yíqiè dōu shì ānquán de. Xiànzài wǒ zìjǐ zuòfàn de shíhou, yě mànmàn xuéhuì le tīng zhèxiē shēngyīn. Yóu de wēndù gòu bú gòu, kěyǐ tīng tā xiǎng bù xiǎng. Cài chǎo de chàbuduō le, shēngyīn huì biàn xiǎo. Mǐfàn kuài hǎo de shíhou, diànfànguō huì fāchū tèbié de shēngyīn. Chúfáng de shēngyīn jiù xiàng yì zhǒng yǔyán, zhǐyào nǐ yuànyì tīng, tā huì gàosu nǐ hěn duō shìqing.",
+    "text_en": "I think the kitchen is the most alive place in a home, because it's always full of all kinds of sounds. The gurgling of the kettle in the morning signals the start of a new day. The sizzle when ingredients hit the oil pan — that's the most exciting sound. The tapping of a knife on the cutting board while chopping vegetables has a steady rhythm. When simmering soup, the lid gets pushed up by steam then falls back down with a soft clink. Even the sound of dishwater has a relaxing effect. When I was little, coming home from school, I could hear the kitchen sounds before even opening the door — those sounds told me mom was home, dinner was almost ready, everything was safe. Now when I cook myself, I've gradually learned to listen to these sounds. Whether the oil is hot enough — you can tell by how it sounds. When the stir-fry is nearly done, the sound gets softer. When the rice is almost ready, the rice cooker makes a special sound. Kitchen sounds are like a language — as long as you're willing to listen, they'll tell you many things.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者觉得厨房里最让人兴奋的声音是什么？",
+        "q_en": "What does the author think is the most exciting kitchen sound?",
+        "options": [
+          {"text": "烧水壶的声音", "pinyin": "shāo shuǐ hú de shēngyīn", "text_en": "The kettle boiling", "correct": false},
+          {"text": "食材放入油锅的声音", "pinyin": "shícái fàng rù yóu guō de shēngyīn", "text_en": "Ingredients hitting the oil", "correct": true},
+          {"text": "切菜的声音", "pinyin": "qiē cài de shēngyīn", "text_en": "Chopping vegetables", "correct": false},
+          {"text": "洗碗的声音", "pinyin": "xǐ wǎn de shēngyīn", "text_en": "Washing dishes", "correct": false}
+        ],
+        "difficulty": 3
+      },
+      {
+        "type": "mc",
+        "q_zh": "小时候听到厨房的声音，作者有什么感觉？",
+        "q_en": "How did the author feel hearing kitchen sounds as a child?",
+        "options": [
+          {"text": "很饿", "pinyin": "hěn è", "text_en": "Very hungry", "correct": false},
+          {"text": "安全", "pinyin": "ānquán", "text_en": "Safe", "correct": true},
+          {"text": "想帮忙", "pinyin": "xiǎng bāngmáng", "text_en": "Wanting to help", "correct": false},
+          {"text": "有点烦", "pinyin": "yǒudiǎn fán", "text_en": "A bit annoyed", "correct": false}
+        ],
+        "difficulty": 3
+      }
+    ]
+  }
+]

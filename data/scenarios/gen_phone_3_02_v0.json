@@ -1,0 +1,124 @@
+{
+    "title": "The Customer Service Labyrinth",
+    "title_zh": "客服迷宫",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_3_02_v0",
+    "tree": {
+        "setup": "Your internet has been down for two days. You're calling the telecom company's customer service line. After navigating an automated menu (press 1 for Mandarin, press 2 for billing...), you finally reach a human -- Xiao Jiang, a customer service representative who speaks at the speed of an auctioneer but is genuinely trying to help. She has clearly had a long day.",
+        "setup_zh": "你的网断了两天了。你打电信公司客服电话。按了一堆自动菜单（普通话按1，账单按2……）之后终于接通了人工客服——小蒋，说话速度像拍卖师但真心想帮忙。她今天显然很累了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，工号2847，请问有什么可以帮您？",
+                "text_pinyin": "nín hǎo, gōnghào èr bā sì qī, qǐngwèn yǒu shénme kěyǐ bāng nín?",
+                "text_en": "Hello, agent number 2847, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain your internet problem.",
+                "options": [
+                    {
+                        "text_zh": "你好，我家的网络断了两天了。我已经重启了路由器好几次，还是不行。",
+                        "text_pinyin": "nǐ hǎo, wǒ jiā de wǎngluò duàn le liǎng tiān le. wǒ yǐjīng chóngqǐ le lùyóuqì hǎo jǐ cì, háishi bù xíng.",
+                        "text_en": "Hello, my home internet has been down for two days. I've already restarted the router several times and it still doesn't work.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Jiang sounds impressed.「您已经重启过了？那我帮您查一下线路。」Mentioning you've already tried the basics saves her from asking. 断了 means 'cut off.' 好几次 is 'quite a few times.'"
+                    },
+                    {
+                        "text_zh": "我的网不能用了！怎么回事？",
+                        "text_pinyin": "wǒ de wǎng bù néng yòng le! zěnme huí shì?",
+                        "text_en": "My internet doesn't work! What's going on?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「请问断了多长时间了？」Xiao Jiang needs details. 怎么回事 is 'what's going on' -- expresses frustration but she needs specifics to help you."
+                    },
+                    {
+                        "text_zh": "我想投诉。我交了钱但是没有网络。",
+                        "text_pinyin": "wǒ xiǎng tóusù. wǒ jiāo le qián dànshì méiyǒu wǎngluò.",
+                        "text_en": "I want to file a complaint. I've paid but there's no internet.",
+                        "score": 0.3,
+                        "register": "neutral",
+                        "feedback": "Xiao Jiang's voice stays calm.「我理解您的心情。我先帮您排查一下问题好吗？」投诉 is 'file a complaint.' Starting with complaints makes solving the problem harder."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我查到了。您那个小区这两天在维修线路，预计明天下午恢复。给您造成不便，非常抱歉。",
+                "text_pinyin": "hǎo de, wǒ chá dào le. nín nà ge xiǎoqū zhè liǎng tiān zài wéixiū xiànlù, yùjì míngtiān xiàwǔ huīfù. gěi nín zàochéng bú biàn, fēicháng bàoqiàn.",
+                "text_en": "OK, I found it. Your neighborhood has been undergoing line maintenance these past two days. It's expected to be restored tomorrow afternoon. We sincerely apologize for the inconvenience."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about compensation or a more specific timeline.",
+                "options": [
+                    {
+                        "text_zh": "明天下午大概几点？我在家工作，需要网络。可以减免这两天的费用吗？",
+                        "text_pinyin": "míngtiān xiàwǔ dàgài jǐ diǎn? wǒ zài jiā gōngzuò, xūyào wǎngluò. kěyǐ jiǎnmiǎn zhè liǎng tiān de fèiyòng ma?",
+                        "text_en": "Around what time tomorrow afternoon? I work from home and need internet. Can the fees for these two days be waived?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「我帮您申请减免，两天的费用会在下个月的账单里扣除。预计明天三点左右恢复。」减免 is 'reduce/waive.' 费用 is 'fees.' Asking for compensation is completely reasonable."
+                    },
+                    {
+                        "text_zh": "为什么没有提前通知我们？",
+                        "text_pinyin": "wèishénme méiyǒu tíqián tōngzhī wǒmen?",
+                        "text_en": "Why weren't we notified in advance?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「这个确实是我们的问题，应该提前通知的。我帮您记录下来。」提前通知 is 'notify in advance.' A fair question -- Xiao Jiang agrees."
+                    },
+                    {
+                        "text_zh": "好吧，那我只能等了。",
+                        "text_pinyin": "hǎo ba, nà wǒ zhǐnéng děng le.",
+                        "text_en": "OK, I guess I can only wait then.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Jiang pauses.「其实您可以申请费用减免的……」只能 is 'can only.' You're leaving compensation on the table."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "减免已经帮您申请了。还有别的问题吗？如果明天下午还没恢复，您可以再打这个电话。",
+                "text_pinyin": "jiǎnmiǎn yǐjīng bāng nín shēnqǐng le. hái yǒu bié de wèntí ma? rúguǒ míngtiān xiàwǔ hái méi huīfù, nín kěyǐ zài dǎ zhè ge diànhuà.",
+                "text_en": "The fee waiver has been submitted for you. Any other questions? If it's still not restored tomorrow afternoon, you can call this number again."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and wrap up the call.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你帮忙！请问你的工号是多少？万一明天没恢复我好说明情况。",
+                        "text_pinyin": "xièxie nǐ bāngmáng! qǐngwèn nǐ de gōnghào shì duōshao? wànyī míngtiān méi huīfù wǒ hǎo shuōmíng qíngkuàng.",
+                        "text_en": "Thanks for your help! What's your agent number? Just in case it's not restored tomorrow so I can explain the situation.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "「2847。希望明天就好了！」Noting the agent number is smart for follow-up calls. 万一 means 'just in case.' 说明情况 is 'explain the situation.' Xiao Jiang appreciates being acknowledged."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！辛苦你了。",
+                        "text_pinyin": "hǎo de, xièxie! xīnkǔ nǐ le.",
+                        "text_en": "OK, thanks! You've worked hard.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "辛苦你了 is 'you've worked hard' -- a thoughtful phrase that acknowledges the person's effort. Xiao Jiang's day just got slightly better. Customer service reps rarely hear this."
+                    },
+                    {
+                        "text_zh": "知道了，再见。",
+                        "text_pinyin": "zhīdào le, zàijiàn.",
+                        "text_en": "Got it, bye.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Functional but cold. Xiao Jiang moves on to her next call. A little warmth goes a long way with people who field complaints all day."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese customer service calls start with the agent's 工号 (gōnghào, agent number) for accountability. 辛苦了 (xīnkǔ le, 'you've worked hard') is a powerful phrase that shows appreciation. When disputing bills, 减免 (jiǎnmiǎn) is the key word for fee waiver/reduction."
+    }
+}

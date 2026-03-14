@@ -1,0 +1,130 @@
+{
+    "title": "The Doctor Who Draws Diagrams",
+    "title_zh": "画图的医生",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "A community hospital consultation room. Dr. Yang explains every diagnosis with hand-drawn diagrams. He once drew a full anatomical sketch of the digestive system to explain a stomachache. His desk drawer contains more colored markers than a kindergarten classroom. He believes understanding prevents fear.",
+        "setup_zh": "（画图的医生场景）",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请坐。先说说你最近的身体情况。",
+                "text_pinyin": "nǐ hǎo, qǐng zuò. xiān shuōshuō nǐ zuìjìn de shēntǐ qíngkuàng.",
+                "text_en": "Hello, please sit. First tell me about your recent health."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your health concern.",
+                "options": [
+                    {
+                        "text_zh": "最近总是觉得很累，而且睡眠质量不太好。晚上经常醒。",
+                        "text_pinyin": "zuìjìn zǒngshì juéde hěn lèi, érqiě shuìmián zhìliàng bú tài hǎo. wǎnshang jīngcháng xǐng.",
+                        "text_en": "I've been feeling tired lately, and my sleep quality isn't great. I often wake up at night.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A thorough symptom description. 睡眠质量 means 'sleep quality.' 经常 means 'often.' Doctors appreciate specific details."
+                    },
+                    {
+                        "text_zh": "我想做一个全面的检查，已经一年没体检了。",
+                        "text_pinyin": "wǒ xiǎng zuò yí gè quánmiàn de jiǎnchá, yǐjīng yì nián méi tǐjiǎn le.",
+                        "text_en": "I'd like a comprehensive checkup. It's been a year since my last one.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Proactive health management. 全面的检查 means 'comprehensive checkup.' 体检 is the common word for health examination."
+                    },
+                    {
+                        "text_zh": "我不太确定哪里不舒服，就是感觉不太对。",
+                        "text_pinyin": "wǒ bú tài quèdìng nǎlǐ bù shūfu, jiùshì gǎnjué bú tài duì.",
+                        "text_en": "I'm not sure what's wrong, I just feel off.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Vague but honest. 感觉不太对 means 'doesn't feel right.' The doctor will ask follow-up questions to narrow it down."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我知道了。我先给你量一下血压，然后听一下心跳。",
+                "text_pinyin": "wǒ zhīdào le. wǒ xiān gěi nǐ liáng yíxià xuèyā, ránhòu tīng yíxià xīntiào.",
+                "text_en": "I see. Let me take your blood pressure first, then listen to your heartbeat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the results.",
+                "options": [
+                    {
+                        "text_zh": "血压正常吗？我爸爸有高血压的问题。",
+                        "text_pinyin": "xuèyā zhèngcháng ma? wǒ bàba yǒu gāo xuèyā de wèntí.",
+                        "text_en": "Is the blood pressure normal? My father has high blood pressure.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Mentioning family history is medically relevant. 高血压 means 'high blood pressure.' Doctors appreciate this context."
+                    },
+                    {
+                        "text_zh": "有什么问题吗？",
+                        "text_pinyin": "yǒu shénme wèntí ma?",
+                        "text_en": "Is there a problem?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct and natural. The doctor will explain the findings."
+                    },
+                    {
+                        "text_zh": "我需要吃药吗？",
+                        "text_pinyin": "wǒ xūyào chī yào ma?",
+                        "text_en": "Do I need to take medicine?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A bit premature -- let the doctor finish examining first. But it's a natural concern."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "血压有点偏高。我建议你做一个血液检查，然后注意饮食和休息。",
+                "text_pinyin": "xuèyā yǒudiǎn piān gāo. wǒ jiànyì nǐ zuò yí gè xuèyè jiǎnchá, ránhòu zhùyì yǐnshí hé xiūxi.",
+                "text_en": "Blood pressure is a bit high. I suggest a blood test, and pay attention to diet and rest."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the recommendation.",
+                "options": [
+                    {
+                        "text_zh": "好的。血液检查什么时候做比较好？需要空腹吗？",
+                        "text_pinyin": "hǎo de. xuèyè jiǎnchá shénme shíhou zuò bǐjiào hǎo? xūyào kōngfù ma?",
+                        "text_en": "OK. When is the best time for the blood test? Do I need to fast?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "空腹 means 'on an empty stomach.' Most blood tests require fasting. Asking practical questions shows engagement with your health."
+                    },
+                    {
+                        "text_zh": "我会注意的。饮食方面有什么建议吗？",
+                        "text_pinyin": "wǒ huì zhùyì de. yǐnshí fāngmiàn yǒu shénme jiànyì ma?",
+                        "text_en": "I'll be careful. Any dietary suggestions?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "方面 means 'in terms of' or 'regarding.' Asking for specific advice shows you plan to follow through."
+                    },
+                    {
+                        "text_zh": "好的，谢谢医生。",
+                        "text_pinyin": "hǎo de, xièxie yīshēng.",
+                        "text_en": "OK, thank you, doctor.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Polite and accepting. Sometimes simple acknowledgment is all that's needed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "明天早上空腹来抽血。结果三天以后出来。不用太担心，先调整一下生活习惯。",
+                "text_pinyin": "míngtiān zǎoshang kōngfù lái chōu xuè. jiéguǒ sān tiān yǐhòu chūlái. bú yòng tài dānxīn, xiān tiáozhěng yíxià shēnghuó xíguàn.",
+                "text_en": "Come tomorrow morning on an empty stomach for a blood draw. Results in three days. Don't worry too much, first adjust your lifestyle habits."
+            }
+        ],
+        "cultural_note": "Chinese doctors often combine Western and traditional approaches. 体检 (tǐjiǎn) annual checkups are common, especially through employers. Blood tests (血液检查) are a standard diagnostic tool. 生活习惯 (shēnghuó xíguàn, lifestyle habits) are considered as important as medicine."
+    },
+    "id": "gen_doctor_3_00_v0"
+}

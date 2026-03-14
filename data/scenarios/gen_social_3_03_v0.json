@@ -1,0 +1,124 @@
+{
+    "title": "The Art of Being Fashionably Late",
+    "title_zh": "迟到的艺术",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_3_03_v0",
+    "tree": {
+        "setup": "You're twenty minutes late to a dinner gathering at a Sichuan restaurant. Your friend Xiao Yun has been waiting with three other friends who have already ordered appetizers. She's sent you five increasingly creative WeChat messages tracking your lateness. When you arrive, she greets you with the warm fury of someone who has been defending your empty chair from the waiter.",
+        "setup_zh": "你迟到了二十分钟，聚会在一家川菜馆。你的朋友小云和其他三个朋友已经点了凉菜等你。她在微信上发了五条越来越有创意的消息追踪你的迟到进度。你到的时候，她用替你守了二十分钟空椅子的温暖怒火迎接你。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "终于来了！我以为你迷路了。我们都快把凉菜吃完了。来来来，坐这里。",
+                "text_pinyin": "zhōngyú lái le! wǒ yǐwéi nǐ mí lù le. wǒmen dōu kuài bǎ liángcài chī wán le. lái lái lái, zuò zhèlǐ.",
+                "text_en": "You're finally here! I thought you got lost. We almost finished all the appetizers. Come come, sit here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Apologize for being late and explain.",
+                "options": [
+                    {
+                        "text_zh": "对不起对不起！地铁突然停了十分钟，没有信号发不了消息。来，凉菜我再点一份补上。",
+                        "text_pinyin": "duìbuqǐ duìbuqǐ! dìtiě tūrán tíng le shí fēnzhōng, méiyǒu xìnhào fā bu liǎo xiāoxi. lái, liángcài wǒ zài diǎn yí fèn bǔ shàng.",
+                        "text_en": "Sorry sorry! The subway suddenly stopped for ten minutes, no signal so I couldn't send messages. Here, let me order another round of appetizers to make up for it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Yun's anger melts.「地铁停了？那没办法。补一份凉菜就原谅你！」突然 is 'suddenly.' 信号 is 'signal.' 补上 means 'make up for.' Explaining and offering to compensate is the right move."
+                    },
+                    {
+                        "text_zh": "不好意思，加班到七点才走。我下次一定准时。",
+                        "text_pinyin": "bù hǎoyìsi, jiābān dào qī diǎn cái zǒu. wǒ xià cì yídìng zhǔnshí.",
+                        "text_en": "Sorry, I worked overtime until 7 before I could leave. I'll definitely be on time next time.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「加班啊？你们公司也太狠了。来，先喝口水。」加班 is 'overtime.' 才走 is 'only then left.' In China, overtime is such a common excuse that friends accept it automatically."
+                    },
+                    {
+                        "text_zh": "哈哈，迟到二十分钟不算迟到吧？",
+                        "text_pinyin": "hāhā, chídào èrshí fēnzhōng bú suàn chídào ba?",
+                        "text_en": "Haha, twenty minutes late doesn't really count as late, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Yun stares at you.「不算迟到？我发了五条消息你看了吗？」不算 is 'doesn't count as.' Joking about lateness only works after you apologize first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "算了算了。来，我介绍一下——这是小周，我的高中同学。这是阿杰，我们一起打球的。你们互相加个微信吧。",
+                "text_pinyin": "suàn le suàn le. lái, wǒ jièshào yíxià — zhè shì xiǎo zhōu, wǒ de gāozhōng tóngxué. zhè shì ā jié, wǒmen yìqǐ dǎ qiú de. nǐmen hùxiāng jiā ge wēixìn ba.",
+                "text_en": "Forget it, forget it. Here, let me introduce -- this is Xiao Zhou, my high school classmate. This is Ah Jie, we play ball together. You guys should add each other on WeChat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Greet the new people and settle in.",
+                "options": [
+                    {
+                        "text_zh": "你好你好！我叫王明。小云经常说起你们。来，扫我的二维码。",
+                        "text_pinyin": "nǐ hǎo nǐ hǎo! wǒ jiào wáng míng. xiǎo yún jīngcháng shuō qǐ nǐmen. lái, sǎo wǒ de èrwéimǎ.",
+                        "text_en": "Hello hello! I'm Wang Ming. Xiao Yun talks about you guys a lot. Here, scan my QR code.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Phones appear instantly. Three QR codes are scanned in under ten seconds. 扫二维码 is 'scan QR code.' 说起你们 is 'talks about you.' WeChat adding is the modern handshake in Chinese social settings."
+                    },
+                    {
+                        "text_zh": "你好！打什么球？我也喜欢打球。",
+                        "text_pinyin": "nǐ hǎo! dǎ shénme qiú? wǒ yě xǐhuan dǎ qiú.",
+                        "text_en": "Hi! What kind of ball? I like playing too.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「羽毛球！每周六早上。你要一起来吗？」Ah Jie's face lights up. 打什么球 is 'what sport.' Finding shared activities with new people fast-tracks friendship."
+                    },
+                    {
+                        "text_zh": "大家好！不好意思来晚了。今天我请喝的，算是赔罪。",
+                        "text_pinyin": "dàjiā hǎo! bù hǎoyìsi lái wǎn le. jīntiān wǒ qǐng hē de, suàn shì péizuì.",
+                        "text_en": "Hi everyone! Sorry I'm late. Drinks are on me today, to make amends.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「赔罪就赔罪！来，给我们点几瓶啤酒！」Xiao Yun is officially over it. 赔罪 is 'make amends.' 请喝的 is 'treat for drinks.' Generosity erases lateness."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，人齐了。点菜！这家的水煮鱼和回锅肉最好吃。你能吃辣吗？不能吃辣的话也有不辣的。",
+                "text_pinyin": "hǎo le, rén qí le. diǎn cài! zhè jiā de shuǐzhǔ yú hé huíguō ròu zuì hǎochī. nǐ néng chī là ma? bù néng chī là de huà yě yǒu bú là de.",
+                "text_en": "OK, everyone's here. Let's order! The boiled fish and twice-cooked pork here are the best. Can you eat spicy? If not, there are non-spicy options too."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Help with the group order.",
+                "options": [
+                    {
+                        "text_zh": "我能吃一点辣。水煮鱼来一份吧。再来个蒜泥白肉？这是几个人点的够吗？",
+                        "text_pinyin": "wǒ néng chī yìdiǎn là. shuǐzhǔ yú lái yí fèn ba. zài lái ge suànní báiròu? zhè shì jǐ ge rén diǎn de gòu ma?",
+                        "text_en": "I can eat a little spicy. One boiled fish. And a garlic white pork? Is this enough for everyone?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「五个人的话再加两个青菜就差不多了。」Xiao Yun calculates. Checking portion count shows group dining awareness. 够不够 is about making sure everyone eats well."
+                    },
+                    {
+                        "text_zh": "你们点吧，我吃什么都行。就是不要太辣的。",
+                        "text_pinyin": "nǐmen diǎn ba, wǒ chī shénme dōu xíng. jiùshì búyào tài là de.",
+                        "text_en": "You guys order, I eat anything. Just not too spicy.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Yun orders for the table.「放心，至少有一两个不辣的菜。」什么都行 plus a restriction is fine -- at least you stated your limit."
+                    },
+                    {
+                        "text_zh": "回锅肉！我太爱回锅肉了。每次吃川菜必点。",
+                        "text_pinyin": "huíguō ròu! wǒ tài ài huíguō ròu le. měi cì chī chuāncài bì diǎn.",
+                        "text_en": "Twice-cooked pork! I love it. I order it every time I eat Sichuan.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「遇到知音了！」Xiao Zhou high-fives you. 必点 is 'must order.' 知音 is 'kindred spirit.' Bonding over food preferences is the fast lane to friendship."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Group dinners in China involve ordering for the table, not individually. The person who arrives last often treats (请客) as a lateness penalty. 扫二维码 (sǎo èrwéimǎ, scan QR code) for adding WeChat contacts is standard. 赔罪 (péizuì) means making amends -- usually by paying for drinks or ordering extra dishes."
+    }
+}

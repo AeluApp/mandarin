@@ -1,0 +1,87 @@
+{
+    "title": "The Friendly Taxi Driver",
+    "title_zh": "友好的出租车司机",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You get into a taxi. The driver is cheerful and curious about where you're from.",
+        "setup_zh": "你上了一辆出租车。司机很开朗，对你从哪里来很好奇。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！去哪里？",
+                "text_pinyin": "Nǐ hǎo! Qù nǎlǐ?",
+                "text_en": "Hello! Where to?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell the driver where you want to go.",
+                "options": [
+                    {
+                        "text_zh": "你好！请去火车站。",
+                        "text_pinyin": "Nǐ hǎo! Qǐng qù huǒchē zhàn.",
+                        "text_en": "Hello! Please go to the train station.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Greets the driver and gives a clear destination -- exactly what a taxi driver needs to hear."
+                    },
+                    {
+                        "text_zh": "火车站。远不远？",
+                        "text_pinyin": "Huǒchē zhàn. Yuǎn bu yuǎn?",
+                        "text_en": "Train station. Is it far?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Gives the destination but skips the greeting -- a little abrupt for getting into someone's car."
+                    },
+                    {
+                        "text_zh": "去火车站要多少钱？",
+                        "text_pinyin": "Qù huǒchē zhàn yào duōshǎo qián?",
+                        "text_en": "How much to the train station?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Asks about price before even saying hello -- comes across as transactional when the driver greeted you warmly."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！你是哪国人？你的中文说得很好！",
+                "text_pinyin": "Hǎo de! Nǐ shì nǎ guó rén? Nǐ de Zhōngwén shuō de hěn hǎo!",
+                "text_en": "Okay! Where are you from? Your Chinese is really good!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him where you're from and respond to the compliment.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！我是美国人。我在学中文。",
+                        "text_pinyin": "Xièxie! Wǒ shì Měiguó rén. Wǒ zài xué Zhōngwén.",
+                        "text_en": "Thanks! I'm American. I'm studying Chinese.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Thanks him for the compliment and answers both questions -- warm and open."
+                    },
+                    {
+                        "text_zh": "我是美国人。",
+                        "text_pinyin": "Wǒ shì Měiguó rén.",
+                        "text_en": "I'm American.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers where you're from but doesn't acknowledge his compliment about your Chinese -- a missed connection."
+                    },
+                    {
+                        "text_zh": "我的中文不好。",
+                        "text_pinyin": "Wǒ de Zhōngwén bù hǎo.",
+                        "text_en": "My Chinese isn't good.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Deflects his compliment without answering where you're from -- he was being genuinely friendly, not testing you."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Taxi drivers in China are famous for being talkative and curious. The compliment 你的中文说得很好 is one of the most common phrases foreigners hear in China — it's genuine friendliness, a way of welcoming you into the language."
+    }
+}

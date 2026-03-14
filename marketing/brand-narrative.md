@@ -1,6 +1,6 @@
-# Brand Narrative -- Mandarin
+# Brand Narrative -- Aelu
 
-This is the emotional identity document for Mandarin. It defines who the brand is at the level of feeling, archetype, and belief -- not features and pricing. Every other marketing document should be emotionally consistent with what is written here. If a landing page, email, or social post contradicts the tone, values, or emotional positioning described below, this document wins.
+This is the emotional identity document for Aelu. It defines who the brand is at the level of feeling, archetype, and belief -- not features and pricing. Every other marketing document should be emotionally consistent with what is written here. If a landing page, email, or social post contradicts the tone, values, or emotional positioning described below, this document wins.
 
 Last updated: 2026-02-17
 
@@ -12,7 +12,7 @@ Last updated: 2026-02-17
 
 The Sage seeks truth above all else. Not truth as a slogan -- truth as a practice. The Sage would rather show you an unflattering diagnostic than let you walk around believing you are further along than you are. The Sage respects knowledge too much to cheapen it with false encouragement.
 
-This is the archetype that fits Mandarin because the entire product is built around the principle that honest data serves the learner better than comfortable fiction. The app does not tell you "Great job!" when you get 14 out of 22 correct. It tells you: 14/22. 63.6%. Your tones need work. Here is what you are drilling tomorrow.
+This is the archetype that fits Aelu because the entire product is built around the principle that honest data serves the learner better than comfortable fiction. The app does not tell you "Great job!" when you get 14 out of 22 correct. It tells you: 14/22. 63.6%. Your tones need work. Here is what you are drilling tomorrow.
 
 **How the Sage manifests in the product:**
 
@@ -29,7 +29,7 @@ This is the archetype that fits Mandarin because the entire product is built aro
 
 The Creator builds things that did not exist before. Not for the sake of building, but because the thing that was needed was not available and nobody else was making it.
 
-Mandarin was born from a real learning gap. Every existing tool was tried. None of them connected the experience of reading Chinese to the discipline of drilling vocabulary. So a text editor was opened and the building began. Not a startup -- a tool. For one learner's own use first, and then for anyone else who shared the frustration.
+Aelu was born from a real learning gap. Every existing tool was tried. None of them connected the experience of reading Chinese to the discipline of drilling vocabulary. So a text editor was opened and the building began. Not a startup -- a tool. For one learner's own use first, and then for anyone else who shared the frustration.
 
 **How the Creator manifests in the brand:**
 
@@ -65,7 +65,7 @@ This is not a failure of effort. It is a failure of design. The apps that domina
 
 There is a gap in Chinese learning that nobody talks about directly, probably because it is bad for marketing. The gap is between studying and knowing. Between the controlled environment of an app and the uncontrolled environment of real Chinese -- a WeChat message, a restaurant menu, a news headline, a conversation that moves faster than your recall. Studying happens in one place. Knowing happens in another. And for most learners, those two places are barely connected.
 
-We built Mandarin to close that gap. Not by making studying feel more like real life -- that is the gamification approach and it does not work -- but by making real encounters feed directly into study. When you read Chinese in the app and look up a word you do not know, that word becomes practice. Not a flashcard -- actual multi-skill practice. Tone discrimination. Cloze deletion. Audio matching. Sentence construction. The word you encountered in context gets drilled across twenty-seven different exercise types, scheduled by an algorithm adapted from memory science research, at intervals calibrated to your personal forgetting curve.
+We built Aelu to close that gap. Not by making studying feel more like real life -- that is the gamification approach and it does not work -- but by making real encounters feed directly into study. When you read Chinese in the app and look up a word you do not know, that word becomes practice. Not a flashcard -- actual multi-skill practice. Tone discrimination. Cloze deletion. Audio matching. Sentence construction. The word you encountered in context gets drilled across twenty-seven different exercise types, scheduled by an algorithm adapted from memory science research, at intervals calibrated to your personal forgetting curve.
 
 This is not the only thing the app does, but it is the thing that matters most, because it addresses the structural problem that no amount of polish or gamification can solve: the disconnection between what you read and what you drill.
 
@@ -73,7 +73,7 @@ We built this for a specific person. Not a demographic -- a disposition. The per
 
 This person does not want to be entertained. They want to be effective. They do not want encouragement. They want evidence. They do not want a learning journey. They want a learning system that works, that respects their time, that tells them the truth, and that does not waste a single minute of their evening on anything that does not produce real, measurable, lasting improvement.
 
-We built Mandarin for that person. We know that person well, because the person who built it is that person.
+We built Aelu for that person. We know that person well, because the person who built it is that person.
 
 The app is quiet. The metrics are real. The design assumes you are an adult. The sessions are short and focused, and when they end, there is no confetti and no celebration -- just an honest accounting of what you did and what comes next. It is not exciting. It is not addictive. It is not a game.
 
@@ -85,7 +85,7 @@ It is a tool. And it works.
 
 ### The 3-Minute Version
 
-Mandarin began the way most useful tools begin: someone needed it and it did not exist.
+Aelu began the way most useful tools begin: someone needed it and it did not exist.
 
 The problem was simple and specific. Every Chinese learning tool separated two activities that should have been connected: reading Chinese and drilling vocabulary. You would study words in one place and encounter Chinese in another, and the gap between those two experiences was enormous. Nothing linked what you were studying to what you were encountering. Looking up a word during reading and drilling vocabulary were separate activities, happening in separate tools, with no feedback loop between them.
 
@@ -101,7 +101,7 @@ And then the core feature, the one that solved the original problem: the cleanup
 
 The diagnostics came next, because knowing where you actually stand matters -- not a single blended score, but per-skill tracking. Vocabulary at one level, listening at another, reading at a third, tones at a fourth. The imbalance was obvious once measured: reading ahead of listening by two full HSK levels. No other tool had ever surfaced this. Once the gap was visible, it became actionable.
 
-Today, Mandarin is a complete adaptive drilling and reading system. Two hundred ninety-nine seed items across HSK 1-3. Twenty-seven drill types. Per-skill diagnostics with HSK projection. A graded reader with the cleanup loop. Speaking drills with tone grading. An aesthetic -- warm stone, bougainvillea rose, cypress olive -- designed to feel like sitting in a good library, not logging into a game.
+Today, Aelu is a complete adaptive drilling and reading system. Two hundred ninety-nine seed items across HSK 1-3. Twenty-seven drill types. Per-skill diagnostics with HSK projection. A graded reader with the cleanup loop. Speaking drills with tone grading. An aesthetic -- warm stone, bougainvillea rose, cypress olive -- designed to feel like sitting in a good library, not logging into a game.
 
 Zero AI tokens at runtime. Every drill, every score, every recommendation is deterministic. The app works offline, responds instantly, and never generates content on the fly. Every sentence has been verified. Every number is defensible.
 
@@ -111,7 +111,7 @@ The philosophy is simple: honest metrics, no praise inflation, respect for the l
 
 ### The 30-Second Version
 
-Mandarin was born from a gap every serious Chinese learner hits: studying vocabulary and reading Chinese were separate experiences with no connection between them. Mandarin is an adaptive drilling and reading system where every word you look up during reading automatically becomes multi-skill practice. Twenty-seven drill types, honest per-skill diagnostics, spaced repetition scheduling from memory science research, and zero AI tokens at runtime. Built by one person who uses it every day for their own study. Free for HSK 1-2. Full access for twelve dollars a month.
+Aelu was born from a gap every serious Chinese learner hits: studying vocabulary and reading Chinese were separate experiences with no connection between them. Aelu is an adaptive drilling and reading system where every word you look up during reading automatically becomes multi-skill practice. Twenty-seven drill types, honest per-skill diagnostics, spaced repetition scheduling from memory science research, and zero AI tokens at runtime. Built by one person who uses it every day for their own study. Free for HSK 1-2. Full access for twelve dollars a month.
 
 ### The One-Line Version
 
@@ -145,9 +145,9 @@ The Chinese study tool that did not exist, built by a learner who needed it -- w
 
 **Definition:** Master Chinese deeply rather than dabble in fifty languages.
 
-**In the product:** Mandarin does one language, with twenty-seven drill types, per-skill diagnostics, a graded reader with the cleanup loop, speaking drills with tone grading, and HSK-aligned curriculum through level 9. Every feature is designed specifically for the challenges of learning Chinese -- tone discrimination, character recognition, the gap between formal and colloquial register. This is not a generic language-learning platform with Chinese bolted on. The tone pair drills exist because Mandarin has tones. The register-aware drills exist because written and spoken Chinese diverge more than most languages. Every feature earns its place by addressing something specific about this language.
+**In the product:** Aelu does one language, with twenty-seven drill types, per-skill diagnostics, a graded reader with the cleanup loop, speaking drills with tone grading, and HSK-aligned curriculum through level 9. Every feature is designed specifically for the challenges of learning Chinese -- tone discrimination, character recognition, the gap between formal and colloquial register. This is not a generic language-learning platform with Chinese bolted on. The tone pair drills exist because Mandarin has tones. The register-aware drills exist because written and spoken Chinese diverge more than most languages. Every feature earns its place by addressing something specific about this language.
 
-**In communication:** The product is always called "Mandarin," not "a language learning app." Copy refers to specific Chinese learning challenges -- tones, characters, HSK levels -- not generic "language learning" problems. Comparison pages explain exactly how the app handles Chinese-specific challenges that general tools miss.
+**In communication:** The product is always called "Aelu," not "a language learning app." Copy refers to specific Chinese learning challenges -- tones, characters, HSK levels -- not generic "language learning" problems. Comparison pages explain exactly how the app handles Chinese-specific challenges that general tools miss.
 
 **Violating this value:** Adding a second language. Building a "Spanish mode" because the market is bigger. Generalizing the UI so it works for any language, at the cost of losing the Chinese-specific features that make it effective. Marketing the app as "a language learning platform" to broaden the addressable market.
 
@@ -169,7 +169,7 @@ The Chinese study tool that did not exist, built by a learner who needed it -- w
 
 **In communication:** The app speaks for itself. Marketing does not rely on superlatives ("the best," "the most advanced," "revolutionary"). It describes what the app does and lets the reader decide. The blog posts are personal essays, not press releases. The social media presence is infrequent but substantive -- one thoughtful post is worth more than five content-calendar fillers. The brand does not chase trends, jump on memes, or adopt whatever voice is performing well on social this week.
 
-**Violating this value:** Adding animation for the sake of animation. Using a neon color palette because it "pops." Posting daily on social media with thin content just to maintain algorithmic visibility. Writing a blog post titled "10 Reasons Mandarin Will Change How You Learn Chinese!" Using exclamation marks in feature descriptions.
+**Violating this value:** Adding animation for the sake of animation. Using a neon color palette because it "pops." Posting daily on social media with thin content just to maintain algorithmic visibility. Writing a blog post titled "10 Reasons Aelu Will Change How You Learn Chinese!" Using exclamation marks in feature descriptions.
 
 ---
 
@@ -348,7 +348,7 @@ A library reading room with tall windows. Not a modern library with fluorescent 
 
 ### Light
 
-Golden hour, always. The light in the app -- the colors, the contrast, the warmth -- should feel like the hour before sunset, when the light is low and warm and makes everything look better than it does at noon. Never fluorescent. Fluorescent light is the light of obligation, of offices and waiting rooms. Never noon harsh -- that is the light of exposure, of seeing too clearly, of being scrutinized. The light in Mandarin is the light of late afternoon: warm, forgiving, focused. Shadows exist but they are soft, not dramatic. They suggest depth without creating tension.
+Golden hour, always. The light in the app -- the colors, the contrast, the warmth -- should feel like the hour before sunset, when the light is low and warm and makes everything look better than it does at noon. Never fluorescent. Fluorescent light is the light of obligation, of offices and waiting rooms. Never noon harsh -- that is the light of exposure, of seeing too clearly, of being scrutinized. The light in Aelu is the light of late afternoon: warm, forgiving, focused. Shadows exist but they are soft, not dramatic. They suggest depth without creating tension.
 
 ### Type
 
@@ -366,6 +366,6 @@ This document defines who the brand is, not what the product does. The product w
 
 If a future feature or communication feels inconsistent with this document, the question is not "should we update the brand narrative?" The question is "should we ship this feature or send this communication?" The brand is the filter. Everything passes through it.
 
-The emotional identity of Mandarin can be stated simply: we built an honest tool for serious learners, and we believe that honesty, quiet craft, and respect for the learner's time and intelligence are not just design choices but moral commitments. We would rather have a small number of users who trust the product completely than a large number of users who feel vaguely good about an app that is secretly wasting their time.
+The emotional identity of Aelu can be stated simply: we built an honest tool for serious learners, and we believe that honesty, quiet craft, and respect for the learner's time and intelligence are not just design choices but moral commitments. We would rather have a small number of users who trust the product completely than a large number of users who feel vaguely good about an app that is secretly wasting their time.
 
 That is the brand. Everything else follows from it.

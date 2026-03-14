@@ -1,9 +1,9 @@
-# Email Sequences — Mandarin
+# Email Sequences — Aelu
 
-All lifecycle emails for the Mandarin app. Every email is written in full: subject line, preview text, body, CTA. Copy-paste ready for email tool setup.
+All lifecycle emails for the Aelu app. Every email is written in full: subject line, preview text, body, CTA. Copy-paste ready for email tool setup.
 
-**From:** Mandarin <hello@mandarinapp.com>
-**Reply-to:** hello@mandarinapp.com (real inbox, not a void)
+**From:** Aelu <hello@aeluapp.com>
+**Reply-to:** hello@aeluapp.com (real inbox, not a void)
 **Format:** Plain text or minimal HTML. Mobile-friendly. One CTA per email.
 **Voice:** First person singular. Calm, honest, personal. No hype, no guilt.
 **Footer (every email):** One-click unsubscribe. No friction.
@@ -27,7 +27,7 @@ Last updated: 2026-02-17
 
 Hey —
 
-Welcome to Mandarin. This app was built for our own Mandarin study, and we're glad you're trying it.
+Welcome to Aelu. This app was built for our own Mandarin study, and we're glad you're trying it.
 
 Here's what to expect:
 
@@ -41,7 +41,7 @@ Your free account includes all HSK 1-2 content with no time limit. Not a trial. 
 
 [Start your first session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -60,7 +60,7 @@ If 10 minutes feels like a lot right now, try 5. Open the app, answer a few ques
 
 [Start a quick session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -81,7 +81,7 @@ If your first session was vocabulary-focused, a listening drill will work a comp
 
 [Try a listening drill →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -106,7 +106,7 @@ Try this: spend 10 minutes drilling tone pairs specifically. Not passively liste
 
 This works with any tool. It's just a good way to study.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -117,7 +117,7 @@ This works with any tool. It's just a good way to study.
 
 Hey —
 
-You've been on Mandarin for a week. Here's your summary:
+You've been on Aelu for a week. Here's your summary:
 
 **Sessions completed:** {{sessions_completed}}
 **Words practiced:** {{words_practiced}}
@@ -142,7 +142,7 @@ Your progress is saved. You can pick up exactly where you left off.
 [Start this week strong →]
 {{/if}}
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -173,7 +173,7 @@ If you haven't tried the graded reader yet, try it this week. Read one passage. 
 
 [Open the graded reader →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -184,7 +184,7 @@ If you haven't tried the graded reader yet, try it this week. Read one passage. 
 
 Hey —
 
-You've been using Mandarin for two weeks. I wanted to check in.
+You've been using Aelu for two weeks. I wanted to check in.
 
 Is the app working for you? Is there something that's confusing, or missing, or not quite right?
 
@@ -194,7 +194,7 @@ If something is working well, I'd like to know that too. But I'm especially inte
 
 Hit reply. I read every response and I'll write back.
 
-— Mandarin
+— Aelu
 
 P.S. No sales pitch in this email. Just a genuine question from the team that built the thing you're using.
 
@@ -215,7 +215,7 @@ P.S. No sales pitch in this email. Just a genuine question from the team that bu
 
 Hey —
 
-Your Mandarin account is ready. I wanted to walk you through exactly what happens when you start your first session, so there's no guesswork.
+Your Aelu account is ready. I wanted to walk you through exactly what happens when you start your first session, so there's no guesswork.
 
 **Minutes 0-1:** The system gives you a few vocabulary items at the HSK 1 level. Simple characters, pinyin displayed. You're just matching meanings. This is the baseline.
 
@@ -229,7 +229,7 @@ No Chinese knowledge required. No preparation. Just open it and start.
 
 [Start now →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -248,11 +248,11 @@ While I have your attention, here's a study tip you can use regardless of what a
 
 **Review new words within 24 hours of first encountering them.** Research on the forgetting curve shows you lose roughly 60% of new material within 48 hours without review. That first review — even just once — dramatically flattens the decay. If you learned 5 new words today from a textbook, podcast, or conversation, quiz yourself on them tomorrow.
 
-Your Mandarin account is waiting whenever you're ready. One session, 5-10 minutes.
+Your Aelu account is waiting whenever you're ready. One session, 5-10 minutes.
 
 [Try one session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -263,7 +263,7 @@ Your Mandarin account is waiting whenever you're ready. One session, 5-10 minute
 
 Hey —
 
-You signed up for Mandarin 10 days ago but haven't started a session yet. I don't want to keep filling your inbox if you're not interested.
+You signed up for Aelu 10 days ago but haven't started a session yet. I don't want to keep filling your inbox if you're not interested.
 
 **If you want to try it:** Your account is active and ready. One session takes 5-10 minutes. Here's a direct link:
 
@@ -275,7 +275,7 @@ You signed up for Mandarin 10 days ago but haven't started a session yet. I don'
 
 I'll stop sending nudge emails after this one. If you do start studying later, you'll still get useful content like study tips and progress summaries — but no more "hey, you haven't started yet" messages.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -303,15 +303,15 @@ Here's what HSK 3 looks like:
 - **More complex grammar** — complement structures, conditional sentences, comparison patterns
 - **Listening at natural speed** — passages assume you can follow conversational-pace audio
 
-The full Mandarin system covers all of this: HSK 3-6 content, advanced diagnostics, HSK projection, context notes for every word, and all 27 drill types adapted to intermediate content.
+The full Aelu system covers all of this: HSK 3-6 content, advanced diagnostics, HSK projection, context notes for every word, and all 27 drill types adapted to intermediate content.
 
-When you're ready, full access is $12/month. Cancel anytime.
+When you're ready, full access is $14.99/month. Cancel anytime.
 
 No rush. Your HSK 1-2 progress is yours permanently, and the free tier never expires.
 
 [See what HSK 3 includes →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -338,20 +338,20 @@ The diagnostics exist to tell you exactly where you stand — even when the answ
 
 [Unlock full diagnostics →]
 
-— Mandarin
+— Aelu
 
 ---
 
 ### Email 3: Day +10 (social proof + value framing)
 
-**Subject:** What $12/month actually gets you
+**Subject:** What $14.99/month actually gets you
 **Preview text:** A breakdown of what the subscription includes — and what it costs per day.
 
 Hey —
 
 I want to be straightforward about what the paid tier includes and what it costs.
 
-**What you get for $12/month:**
+**What you get for $14.99/month:**
 
 - HSK 3-6 content (4,700+ additional words, graded passages, dialogue scenarios)
 - Full multi-skill diagnostics with HSK projection
@@ -363,22 +363,22 @@ I want to be straightforward about what the paid tier includes and what it costs
 
 **What it costs in context:**
 
-- $12/month = $0.40/day
+- $14.99/month = $0.50/day
 - Less than a single baozi
 - Less than 15 minutes of iTalki tutoring
 - One price. No annual upsell. No "premium plus." No hidden tiers.
 
 **What I can tell you from the data:** learners who practice consistently at HSK 3 and above — 15 minutes a day, 5 days a week — see measurable progress within 3-4 weeks. The subscription pays for itself if it keeps you studying regularly, because consistency matters more than method.
 
-[Get full access — $12/month →]
+[Get full access — $14.99/month →]
 
-— Mandarin
+— Aelu
 
 ---
 
 ### Email 4: Day +16 (objection handling)
 
-**Subject:** Not sure you'll use it enough to justify $12/month?
+**Subject:** Not sure you'll use it enough to justify $14.99/month?
 **Preview text:** Here's what the data says about 15 minutes a day.
 
 Hey —
@@ -399,30 +399,30 @@ Fair concern. Here's what I can tell you:
 
 [Try full access risk-free →]
 
-— Mandarin
+— Aelu
 
 ---
 
 ### Email 5: Day +21 (discount offer)
 
 **Subject:** 20% off your first 3 months — if you want it
-**Preview text:** $9.60/month for 3 months. Offer good for 7 days.
+**Preview text:** $12/month for 3 months. Offer good for 7 days.
 
 Hey —
 
 You've been studying consistently on the free tier, and you're close to outgrowing HSK 2. I'd like to offer you a discount to try the full system:
 
-**20% off for your first 3 months: $9.60/month instead of $12.**
+**20% off for your first 3 months: $12/month instead of $14.99.**
 
 This offer is good for 7 days. After that, the standard price applies. I'm not going to pretend it's "the last chance ever" — it's just a one-time offer for new subscribers who've shown they're serious about studying.
 
 **What you get:** Everything. HSK 3-6, diagnostics, projection, context notes, speaking drills, all 27 drill types. Cancel anytime.
 
-**If $12/month (or $9.60/month) isn't right for you:** The free tier is yours forever. HSK 1-2, full features, no expiration. No hard feelings.
+**If $14.99/month (or $12/month) isn't right for you:** The free tier is yours forever. HSK 1-2, full features, no expiration. No hard feelings.
 
 [Claim your discount →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -459,7 +459,7 @@ Don't be surprised if the numbers are uneven. Almost everyone has a gap between 
 
 [Run your first diagnostic →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -487,7 +487,7 @@ Try it: open one passage, read for 5 minutes, look up whatever you need. Then do
 
 [Open the graded reader →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -523,7 +523,7 @@ You haven't run the diagnostics yet. I'd recommend it this week — it gives the
 
 [Start this week's first session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -546,7 +546,7 @@ One more feature to know about: adaptive day profiles. The system adjusts your s
 
 [View your HSK projection →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -582,7 +582,7 @@ Also: if you're looking for other learners to connect with, there's a Discord co
 
 [View your full diagnostics →]
 
-— Mandarin
+— Aelu
 
 P.S. Your next billing date is {{billing_date}}. If you ever need to cancel or pause, there's a link in your account settings. One click. No hoops.
 
@@ -622,7 +622,7 @@ Your session is ready whenever you are.
 
 [Resume studying →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -649,7 +649,7 @@ Perfectionism kills language study. "I'll study when I have a real block of time
 
 [Start a 10-minute session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -674,7 +674,7 @@ Life gets busy. Chinese will be here when you're ready.
 
 [Continue from where you left off →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -703,7 +703,7 @@ I'd rather you make the right call for yourself than pay for something you're no
 
 If something specific isn't working — the content, the drill types, the interface, anything — reply to this email and tell us. We built this app and we fix things quickly. We'd rather solve the problem than lose a learner.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -742,9 +742,9 @@ One question, if you have a moment — it helps me improve:
 
 No guilt, no "are you sure?" — just trying to understand what didn't work.
 
-Thanks for trying Mandarin. I hope the time you spent studying was genuinely useful.
+Thanks for trying Aelu. I hope the time you spent studying was genuinely useful.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -770,7 +770,7 @@ You can reply to this email with a sentence. Or a word. Or just hit one of these
 
 Either way, good luck with your Chinese studies. Your free account is active whenever you want it.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -784,7 +784,7 @@ Either way, good luck with your Chinese studies. Your free account is active whe
 
 ### Email 1: Day 30 post-cancellation
 
-**Subject:** What's new in Mandarin since you left
+**Subject:** What's new in Aelu since you left
 **Preview text:** A few real improvements since your last session.
 
 Hey —
@@ -799,24 +799,24 @@ These aren't cosmetic changes — each one came from feedback from learners like
 
 Your account still has all your progress data. Every word you drilled, every diagnostic score, every accuracy record. You can pick up exactly where you left off.
 
-The free tier is still active if you want to check things out without resubscribing. And if you want full access again, it's the same $12/month.
+The free tier is still active if you want to check things out without resubscribing. And if you want full access again, it's the same $14.99/month.
 
 [Come back and see what's new →]
 
-— Mandarin
+— Aelu
 
 ---
 
 ### Email 2: Day 45 (only if they haven't returned)
 
 **Subject:** 20% off if you want to give it another try
-**Preview text:** $9.60/month for 3 months. Your progress is still saved.
+**Preview text:** $12/month for 3 months. Your progress is still saved.
 
 Hey —
 
 If you've been thinking about picking your Chinese study back up, I'd like to offer:
 
-**20% off for 3 months: $9.60/month instead of $12.**
+**20% off for 3 months: $12/month instead of $14.99.**
 
 Your progress data is still saved. You wouldn't start over — you'd continue from exactly where you stopped. The system remembers your skill levels, your weak spots, and your review history.
 
@@ -824,7 +824,7 @@ If you've found something that works better for you, I'm genuinely happy for you
 
 [Reactivate with discount →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -843,7 +843,7 @@ I'll still send the occasional newsletter with study tips and Chinese learning i
 
 Good luck with your Chinese. 加油.
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -869,7 +869,7 @@ A suggestion: try a second session within 24 hours. Research on the forgetting c
 
 [Start your second session →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -890,7 +890,7 @@ One thing to watch: don't let the streak become pressure. If you miss a day, not
 
 [Keep studying →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -909,7 +909,7 @@ Your HSK 1 words will continue appearing in review at expanding intervals. They'
 
 [Continue to HSK 2 →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -924,13 +924,13 @@ Hey —
 
 What's different about HSK 3: the vocabulary gets more abstract, the grammar introduces complement structures and conditional sentences, and reading passages become multi-paragraph. It's a real step up.
 
-HSK 3-6 is available with full access ($12/month). Your progress carries over — nothing resets.
+HSK 3-6 is available with full access ($14.99/month). Your progress carries over — nothing resets.
 
 If you're not ready to upgrade, your HSK 1-2 content and review schedule remain active on the free tier. No expiration.
 
 [See what HSK 3 includes →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -949,7 +949,7 @@ Your diagnostics can show you exactly which skills need attention for HSK 4. Che
 
 [View your HSK 4 readiness →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -968,7 +968,7 @@ One reading tip: read the same passage twice. First time, look up everything you
 
 [Read another passage →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -987,7 +987,7 @@ The system will increase your listening drill frequency if your accuracy is belo
 
 [Try another listening drill →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -1006,7 +1006,7 @@ For perspective: 100 sessions at 15 minutes each is 25 hours of focused practice
 
 [View your diagnostics →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -1027,7 +1027,7 @@ This is the core of the app. The more you read, the better it works.
 
 [Continue reading →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -1055,7 +1055,7 @@ Thank you for using the app. I'll check in again in a month.
 
 [View your full diagnostics →]
 
-— Mandarin
+— Aelu
 
 ---
 
@@ -1105,7 +1105,7 @@ Tones         {{tone_accuracy}}%  {{tone_bar}}
 
 [Start this week's first session →]
 
-— Mandarin
+— Aelu
 
 [View full progress dashboard →]
 
@@ -1187,7 +1187,7 @@ Cleanup loop words {{cleanup_words}}
 
 [View full diagnostics →]
 
-— Mandarin
+— Aelu
 
 {{#if paid_user}}
 Your next billing date is {{billing_date}}. [Manage subscription →]
@@ -1200,9 +1200,9 @@ Your next billing date is {{billing_date}}. [Manage subscription →]
 ### Technical Specs
 
 - **Format:** Plain text or minimal HTML (no heavy templates, no image-heavy layouts)
-- **From name:** Mandarin
-- **From address:** hello@mandarinapp.com
-- **Reply-to:** hello@mandarinapp.com (real inbox — replies go to the team, not a void)
+- **From name:** Aelu
+- **From address:** hello@aeluapp.com
+- **Reply-to:** hello@aeluapp.com (real inbox — replies go to the team, not a void)
 - **Unsubscribe:** One-click, in every email footer, no friction, no "are you sure?" confirmation
 - **Mobile:** All emails readable on a phone without zooming or horizontal scrolling
 - **Width:** Max 600px for HTML emails
@@ -1211,7 +1211,7 @@ Your next billing date is {{billing_date}}. [Manage subscription →]
 
 ### Voice Rules
 
-- **Brand voice.** Calm, direct, personal. This is from the Mandarin team, not a faceless corporation.
+- **Brand voice.** Calm, direct, personal. This is from the Aelu team, not a faceless corporation.
 - **Short paragraphs.** 2-3 sentences max. White space is your friend.
 - **One CTA per email.** Never present competing actions. If the email is about the graded reader, the CTA goes to the graded reader — not to "start a session" or "view diagnostics."
 - **No exclamation marks in subject lines.** Period.

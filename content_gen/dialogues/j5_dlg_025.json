@@ -1,0 +1,89 @@
+{
+    "title": "The Burnt Rice",
+    "title_zh": "糊了的饭",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "Your roommate Xiaojie is sitting at the kitchen table, staring at a pot of badly burnt rice. She looks embarrassed but also a little amused.",
+        "setup_zh": "室友小洁坐在厨房桌前，盯着一锅烧糊了的饭。她看起来有点尴尬，但又有点想笑。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你别笑，这已经是我这个星期第三次把饭煮糊了。我真的不明白，明明按照教程做的，为什么每次结果都不一样？做饭这件事怎么这么难？",
+                "text_pinyin": "Nǐ bié xiào, zhè yǐjīng shì wǒ zhège xīngqī dì sān cì bǎ fàn zhǔ hú le. Wǒ zhēn de bù míngbai, míngmíng ànzhào jiàochéng zuò de, wèi shénme měi cì jiéguǒ dōu bù yíyàng? Zuòfàn zhè jiàn shì zěnme zhème nán?",
+                "text_en": "Don't laugh — this is the third time this week I've burnt the rice. I really don't understand. I followed the tutorial exactly, so why is the result different every time? How can cooking be this hard?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her frustration with warmth.",
+                "options": [
+                    {
+                        "text_zh": "做饭不是考试，没有标准答案。每个炉子的火力不同，每次放的水也不一样。失败几次很正常，说明你在学。你敢自己做饭，已经比很多人强了。",
+                        "text_pinyin": "Zuòfàn bú shì kǎoshì, méiyǒu biāozhǔn dá'àn. Měi ge lúzi de huǒlì bù tóng, měi cì fàng de shuǐ yě bù yíyàng. Shībài jǐ cì hěn zhèngcháng, shuōmíng nǐ zài xué. Nǐ gǎn zìjǐ zuòfàn, yǐjīng bǐ hěn duō rén qiáng le.",
+                        "text_en": "Cooking isn't an exam — no standard answer. Every stove has different heat, and the water amount is never the same. Failing a few times is normal, it means you're learning. Daring to cook on your own already puts you ahead of many.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Encouraging and grounded — normalizes failure and reframes her effort positively."
+                    },
+                    {
+                        "text_zh": "为什么不用电饭锅？很简单的。",
+                        "text_pinyin": "Wèi shénme bú yòng diànfànguō? Hěn jiǎndān de.",
+                        "text_en": "Why don't you use a rice cooker? It's really simple.",
+                        "score": 0.0,
+                        "feedback": "Problem-solving before empathy — she needs encouragement first."
+                    },
+                    {
+                        "text_zh": "你应该去上一个做饭的课。",
+                        "text_pinyin": "Nǐ yīnggāi qù shàng yīge zuòfàn de kè.",
+                        "text_en": "You should take a cooking class.",
+                        "score": 0.0,
+                        "feedback": "Suggesting she needs formal training — adds pressure rather than support."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你这么一说我好像好受一点了。我从小都是吃妈妈做的饭，来大城市以后才发现自己什么都不会做。每次做糊了就会想她，觉得她做饭的样子那么轻松，其实背后一定也练了很久。",
+                "text_pinyin": "Nǐ zhème yī shuō wǒ hǎoxiàng hǎo shòu yīdiǎn le. Wǒ cóng xiǎo dōu shì chī māma zuò de fàn, lái dà chéngshì yǐhòu cái fāxiàn zìjǐ shénme dōu bú huì zuò. Měi cì zuò hú le jiù huì xiǎng tā, juéde tā zuòfàn de yàngzi nàme qīngsōng, qíshí bèihòu yídìng yě liàn le hěn jiǔ.",
+                "text_en": "Hearing you say that makes me feel a bit better. Growing up I always ate my mom's cooking. It wasn't until I came to the big city that I realized I couldn't cook anything. Every time I burn something, I think of her — how effortless she made it look. She must have practiced for a long time behind the scenes."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her thoughts about her mother.",
+                "options": [
+                    {
+                        "text_zh": "你妈妈做饭看起来轻松，是因为做了几十年。每道菜都是从烧糊开始的。你现在经历的就是她当年经历的。下次做饭前给她打个电话让她教你，她一定很高兴。",
+                        "text_pinyin": "Nǐ māma zuòfàn kàn qǐlái qīngsōng, shì yīnwèi zuò le jǐ shí nián. Měi dào cài dōu shì cóng shāo hú kāishǐ de. Nǐ xiànzài jīnglì de jiù shì tā dāngnián jīnglì de. Xià cì zuòfàn qián gěi tā dǎ ge diànhuà ràng tā jiāo nǐ, tā yídìng hěn gāoxìng.",
+                        "text_en": "Your mom makes it look easy because she's been doing it for decades. Every dish started from burnt attempts. What you're going through now is what she went through. Call her before cooking next time and let her teach you — she'd love it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and connective — links her struggle to her mother's journey and suggests a beautiful reconnection."
+                    },
+                    {
+                        "text_zh": "你可以叫外卖啊，不用自己做。",
+                        "text_pinyin": "Nǐ kěyǐ jiào wàimài a, bú yòng zìjǐ zuò.",
+                        "text_en": "You can just order delivery, no need to cook yourself.",
+                        "score": 0.0,
+                        "feedback": "Gives up on her behalf — dismisses her desire to learn."
+                    },
+                    {
+                        "text_zh": "我也不太会做饭，但我觉得没什么大不了的。",
+                        "text_pinyin": "Wǒ yě bú tài huì zuòfàn, dàn wǒ juéde méi shénme dà bùliǎo de.",
+                        "text_en": "I can't cook well either, but I don't think it's a big deal.",
+                        "score": 0.0,
+                        "feedback": "Minimizes what she's feeling — she's connecting cooking to missing her mother."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "给她打个电话……嗯，好主意。也许下次我一边跟她视频一边做，就算做糊了，两个人一起笑也很好。",
+                "text_pinyin": "Gěi tā dǎ ge diànhuà…… en, hǎo zhǔyì. Yěxǔ xià cì wǒ yībiān gēn tā shìpín yībiān zuò, jiùsuàn zuò hú le, liǎng ge rén yīqǐ xiào yě hěn hǎo.",
+                "text_en": "Call her... yeah, good idea. Maybe next time I'll video call her while cooking. Even if I burn it again, laughing together would be nice."
+            }
+        ],
+        "cultural_note": "For many young Chinese who move to big cities for work, learning to cook is a rite of passage that often triggers homesickness. The ability to cook was traditionally a valued skill in Chinese culture, especially for women, though modern urban life has made delivery apps (外卖) a common replacement. Video-calling parents during cooking has become a heartwarming trend on Chinese social media."
+    }
+}

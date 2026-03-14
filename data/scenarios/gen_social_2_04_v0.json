@@ -1,0 +1,94 @@
+{
+    "title": "The Rainy Day Backup Plan",
+    "title_zh": "下雨天的备用计划",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_social_2_04_v0",
+    "tree": {
+        "setup": "Saturday morning. You had plans to go hiking with your friend Xiao Han, but it's pouring rain. Your phone buzzes with a message from her. She's the kind of person who always has a Plan B, C, and D ready. She has already researched three indoor alternatives and ranked them by distance from your apartment.",
+        "setup_zh": "周六早上。你和朋友小韩计划去爬山，但下大雨了。手机响了，是她的消息。她是那种永远有备用计划B、C和D的人。她已经查了三个室内替代方案，按离你家的距离排了名。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "下雨了！爬山去不了了。你想去看电影还是去博物馆？",
+                "text_pinyin": "xià yǔ le! pá shān qù bu liǎo le. nǐ xiǎng qù kàn diànyǐng háishì qù bówùguǎn?",
+                "text_en": "It's raining! We can't go hiking. Want to see a movie or go to a museum?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose an alternative plan.",
+                "options": [
+                    {
+                        "text_zh": "看电影吧！有什么好看的？",
+                        "text_pinyin": "kàn diànyǐng ba! yǒu shénme hǎokàn de?",
+                        "text_en": "Let's see a movie! Anything good showing?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Han sends three movie options with ratings, showtimes, and a brief review of each within thirty seconds. She was prepared.「新出的那部科幻片评价很好！」有什么好看的 is 'is there anything good.'"
+                    },
+                    {
+                        "text_zh": "博物馆好啊！门票贵不贵？",
+                        "text_pinyin": "bówùguǎn hǎo a! ménpiào guì bu guì?",
+                        "text_en": "Museum sounds good! Are tickets expensive?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「免费的！周六都免费。」Xiao Han has already checked.「但是要提前预约。」贵不贵 uses the A不A form for yes-or-no questions."
+                    },
+                    {
+                        "text_zh": "我们就在家待着吧。出门太麻烦了。",
+                        "text_pinyin": "wǒmen jiù zài jiā dāizhe ba. chūmén tài máfan le.",
+                        "text_en": "Let's just stay home. Going out is too much hassle.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Han's typing dots appear, disappear, appear again. She has four backup plans and you want to stay home.「好吧……那我去你家，带零食来。」在家待着 means 'stay at home.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！两点在地铁站见。别忘了带伞！",
+                "text_pinyin": "hǎo! liǎng diǎn zài dìtiě zhàn jiàn. bié wàng le dài sǎn!",
+                "text_en": "OK! Meet at the subway station at 2. Don't forget to bring an umbrella!"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and add a suggestion.",
+                "options": [
+                    {
+                        "text_zh": "好的！看完电影我们去吃饭？",
+                        "text_pinyin": "hǎo de! kàn wán diànyǐng wǒmen qù chī fàn?",
+                        "text_en": "OK! Shall we eat after the movie?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Han has already picked a restaurant near the cinema.「我知道旁边有一家面馆很好吃！」看完 means 'after finishing watching' -- the 完 complement is very useful."
+                    },
+                    {
+                        "text_zh": "两点见！雨天注意安全。",
+                        "text_pinyin": "liǎng diǎn jiàn! yǔ tiān zhùyì ānquán.",
+                        "text_en": "See you at 2! Be careful in the rain.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Han sends a thumbs-up emoji.「你也是！」注意安全 is 'be careful' or 'pay attention to safety' -- a caring thing to say in bad weather."
+                    },
+                    {
+                        "text_zh": "如果雨停了，我们还可以去爬山。",
+                        "text_pinyin": "rúguǒ yǔ tíng le, wǒmen hái kěyǐ qù pá shān.",
+                        "text_en": "If the rain stops, we could still go hiking.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Han checks the weather app.「下午三点可能停。看看再说吧。」如果...就/还可以 is the 'if...then' conditional -- very useful for flexible planning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！下雨天也可以很开心。两点见！",
+                "text_pinyin": "tài hǎo le! xià yǔ tiān yě kěyǐ hěn kāixīn. liǎng diǎn jiàn!",
+                "text_en": "Great! Rainy days can be fun too. See you at 2!"
+            }
+        ],
+        "cultural_note": "Chinese friends often adjust plans fluidly based on weather. Movies and museums are popular rainy-day alternatives. 也可以 (yě kěyǐ, 'also can') reflects the flexibility that's natural in Chinese social planning."
+    }
+}

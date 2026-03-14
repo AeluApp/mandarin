@@ -1,0 +1,294 @@
+"""Product Intelligence Engine — shared constants, helpers, scoring.
+
+All constants and utility functions used across the intelligence package.
+"""
+
+import json
+import logging
+import sqlite3
+
+logger = logging.getLogger(__name__)
+
+# Severity ordering for sort
+_SEVERITY_ORDER = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+
+# Severity penalty for dimension scoring — nonlinear (see _dimension_score)
+_SEVERITY_PENALTY = {"critical": 25, "high": 15, "medium": 8, "low": 3}
+
+# Grade thresholds
+_GRADE_THRESHOLDS = [(90, "A"), (75, "B"), (60, "C"), (40, "D"), (0, "F")]
+
+# Dimensions weighted 1.5x for overall score (growth drivers)
+_WEIGHTED_DIMENSIONS = {"retention", "ux", "onboarding"}
+
+# Minimum data thresholds for confident analysis
+_MIN_DATA_THRESHOLDS = {
+    "users": 5,
+    "sessions": 10,
+    "reviews": 50,
+    "client_events": 20,
+    "requests": 30,
+}
+
+# Confidence levels based on data volume
+_CONFIDENCE_LEVELS = {
+    "high": "sufficient data for reliable analysis",
+    "medium": "limited data — findings are directional, not definitive",
+    "low": "insufficient data — cannot draw conclusions",
+    "none": "no data available",
+}
+
+# Verification windows: dimension → days before measuring outcome
+_VERIFICATION_WINDOWS = {
+    "ux": 3,
+    "retention": 30,
+    "engagement": 14,
+    "onboarding": 7,
+    "profitability": 30,
+    "engineering": 7,
+    "security": 7,
+    "frustration": 7,
+    "drill_quality": 14,
+    "flow": 7,
+    "content": 14,
+    "srs_funnel": 14,
+    "tone_phonology": 14,
+    "scheduler_audit": 7,
+    "encounter_loop": 14,
+    "output_production": 14,
+    "tutor_integration": 14,
+    "tone_quality": 14,
+    "pm": 14,
+    "timing": 7,
+    "platform": 7,
+    "ui": 7,
+    "competitive": 30,
+    "marketing": 30,
+    "copy": 14,
+    "tonal_vibe": 14,
+    "visual_vibe": 30,
+    "feature_usage": 14,
+    "engineering_health": 7,
+    "strategic": 30,
+    "governance": 7,
+    "data_quality": 7,
+    "genai_governance": 7,
+    "memory_model": 14,
+    "learner_model": 14,
+    "genai": 7,
+    "rag": 14,
+    "native_speaker_validation": 14,
+    "curriculum": 14,
+    "input_layer": 14,
+    "accountability": 7,
+    "commercial": 30,
+    "agentic": 7,
+}
+
+# Correlated dimension pairs for RCA graph edges
+_CORRELATED_DIMENSIONS = {
+    ("retention", "ux"),
+    ("retention", "frustration"),
+    ("retention", "onboarding"),
+    ("ux", "flow"),
+    ("ux", "frustration"),
+    ("drill_quality", "srs_funnel"),
+    ("drill_quality", "error_taxonomy"),
+    ("content", "curriculum"),
+    ("content", "hsk_cliff"),
+    ("engineering", "timing"),
+    ("engineering", "platform"),
+    ("tone_phonology", "drill_quality"),
+    ("scheduler_audit", "srs_funnel"),
+    ("encounter_loop", "content"),
+    ("tone_phonology", "output_production"),
+    ("tutor_integration", "content"),
+    ("output_production", "drill_quality"),
+    ("tonal_vibe", "copy"),
+    ("visual_vibe", "ui"),
+    ("feature_usage", "engagement"),
+    ("engineering_health", "engineering"),
+    ("strategic", "competitive"),
+    ("strategic", "marketing"),
+    ("strategic", "profitability"),
+    ("governance", "security"),
+    ("data_quality", "engineering"),
+}
+
+# Rule-based learner archetype definitions
+# Each rule: (name, condition_description, {criteria})
+_ARCHETYPE_RULES = {
+    "sprint": {
+        "sessions_per_week_min": 5,
+        "accuracy_min": 0.7,
+        "description": "High-frequency learner, sessions most days",
+    },
+    "steady": {
+        "sessions_per_week_min": 2,
+        "sessions_per_week_max": 4,
+        "accuracy_min": 0.6,
+        "description": "Consistent moderate-frequency learner",
+    },
+    "weekend_warrior": {
+        "weekend_pct_min": 0.6,
+        "sessions_per_week_min": 1,
+        "description": "Primarily learns on weekends",
+    },
+    "struggling": {
+        "accuracy_max": 0.5,
+        "sessions_per_week_min": 1,
+        "description": "Active but low accuracy — needs support",
+    },
+    "lapsed": {
+        "days_since_last_min": 14,
+        "description": "No activity for 14+ days",
+    },
+}
+
+# ── File map: logical areas → actual file paths ──────────────────────────
+_FILE_MAP = {
+    "routes": "mandarin/web/routes.py",
+    "dashboard_routes": "mandarin/web/dashboard_routes.py",
+    "session_routes": "mandarin/web/session_routes.py",
+    "payment_routes": "mandarin/web/payment_routes.py",
+    "auth_routes": "mandarin/web/auth_routes.py",
+    "admin_routes": "mandarin/web/admin_routes.py",
+    "onboarding_routes": "mandarin/web/onboarding_routes.py",
+    "marketing_routes": "mandarin/web/marketing_routes.py",
+    "landing_routes": "mandarin/web/landing_routes.py",
+    "exposure_routes": "mandarin/web/exposure_routes.py",
+    "settings_routes": "mandarin/web/settings_routes.py",
+    "scheduler": "mandarin/scheduler.py",
+    "email": "mandarin/email.py",
+    "settings": "mandarin/settings.py",
+    "security": "mandarin/security.py",
+    "middleware": "mandarin/web/middleware.py",
+    "app_js": "mandarin/web/static/app.js",
+    "style_css": "mandarin/web/static/style.css",
+    "bridge": "mandarin/web/bridge.py",
+    "drills": "mandarin/drills/",
+    "schema": "schema.sql",
+    "pricing_template": "mandarin/web/templates/pricing.html",
+    "dashboard_template": "mandarin/web/templates/dashboard.html",
+    "admin_template": "mandarin/web/templates/admin.html",
+}
+
+
+def _f(*keys):
+    """Resolve file keys to actual paths."""
+    return [_FILE_MAP.get(k, k) for k in keys]
+
+
+def _score_to_grade(score: float) -> str:
+    """Convert a 0-100 score to a letter grade."""
+    for threshold, grade in _GRADE_THRESHOLDS:
+        if score >= threshold:
+            return grade
+    return "F"
+
+
+def _dimension_score(findings: list[dict], dimension: str, confidence: str = "high") -> tuple[float, str]:
+    """Calculate score (0-100) and grade for a dimension based on its findings.
+
+    Nonlinear scoring rules:
+    - One critical finding caps the dimension at C (max 65)
+    - Two+ critical findings cap at D (max 45)
+    - One critical + one high caps at D (max 45)
+    - "no data" confidence caps at B (max 80) — can't get an A without evidence
+    """
+    dim_findings = [f for f in findings if f.get("dimension") == dimension]
+    score = 100.0
+    for f in dim_findings:
+        penalty = _SEVERITY_PENALTY.get(f.get("severity", "low"), 3)
+        score -= penalty
+    score = max(0.0, min(100.0, score))
+
+    # Nonlinear caps
+    critical_count = sum(1 for f in dim_findings if f.get("severity") == "critical")
+    high_count = sum(1 for f in dim_findings if f.get("severity") == "high")
+
+    if critical_count >= 2 or (critical_count >= 1 and high_count >= 1):
+        score = min(score, 45.0)  # Capped at D
+    elif critical_count >= 1:
+        score = min(score, 65.0)  # Capped at C
+
+    # No data = can't claim A — cap at B
+    if confidence in ("none", "low"):
+        score = min(score, 80.0)
+
+    return round(score, 1), _score_to_grade(score)
+
+
+def _overall_score(dimension_scores: dict) -> tuple[float, str]:
+    """Weighted average across dimensions. Growth drivers weighted 1.5x.
+
+    Nonlinear: any dimension with F grade caps overall at D.
+    Any dimension with D grade caps overall at C.
+    """
+    if not dimension_scores:
+        return 80.0, "B"  # No data = B at best, not A
+    total_weight = 0.0
+    weighted_sum = 0.0
+    for dim, info in dimension_scores.items():
+        weight = 1.5 if dim in _WEIGHTED_DIMENSIONS else 1.0
+        weighted_sum += info["score"] * weight
+        total_weight += weight
+    score = round(weighted_sum / total_weight, 1) if total_weight > 0 else 80.0
+
+    # Nonlinear caps: worst dimensions drag the overall down
+    grades = [info["grade"] for info in dimension_scores.values()]
+    if "F" in grades:
+        score = min(score, 45.0)
+    elif "D" in grades:
+        score = min(score, 65.0)
+
+    return score, _score_to_grade(score)
+
+
+def _safe_query(conn, sql, params=(), default=None):
+    """Execute a query, returning default on any error."""
+    try:
+        return conn.execute(sql, params).fetchone()
+    except (sqlite3.OperationalError, sqlite3.Error):
+        return default
+
+
+def _safe_query_all(conn, sql, params=(), default=None):
+    """Execute a query returning all rows, with fallback."""
+    try:
+        return conn.execute(sql, params).fetchall()
+    except (sqlite3.OperationalError, sqlite3.Error):
+        return default or []
+
+
+def _safe_scalar(conn, sql, params=(), default=0):
+    """Execute a query and return the first column of the first row."""
+    row = _safe_query(conn, sql, params)
+    if row is None:
+        return default
+    try:
+        return row[0] if row[0] is not None else default
+    except (IndexError, KeyError):
+        return default
+
+
+def _finding(dimension, severity, title, analysis, recommendation, claude_prompt, impact, files):
+    """Create a standardized finding dict."""
+    return {
+        "dimension": dimension,
+        "severity": severity,
+        "title": title,
+        "analysis": analysis,
+        "recommendation": recommendation,
+        "claude_prompt": claude_prompt,
+        "impact": impact,
+        "files": files,
+    }
+
+
+def _count_by(findings, key):
+    counts = {}
+    for f in findings:
+        v = f.get(key, "unknown")
+        counts[v] = counts.get(v, 0) + 1
+    return counts

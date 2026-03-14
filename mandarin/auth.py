@@ -65,7 +65,8 @@ def _validate_password(password: str) -> None:
 
 
 def create_user(conn: sqlite3.Connection, email: str, password: str,
-                display_name: str = "", invite_code: str = None) -> dict:
+                display_name: str = "", invite_code: str = None,
+                role: str = "student") -> dict:
     """Create a new user + learner_profile row.
 
     Returns the user dict on success.
@@ -76,23 +77,36 @@ def create_user(conn: sqlite3.Connection, email: str, password: str,
         raise ValueError("Invalid email address")
     _validate_password(password)
 
+    # Check feature flag: require_invite_code
+    invite_required = False
+    try:
+        flag_row = conn.execute(
+            "SELECT enabled FROM feature_flag WHERE name = 'require_invite_code'"
+        ).fetchone()
+        if flag_row and flag_row["enabled"]:
+            invite_required = True
+    except Exception:
+        pass
+
+    if invite_required and not invite_code:
+        raise ValueError("An invite code is required to register during the beta period")
+
     # Validate invite code if provided
     invited_by = None
     if invite_code:
         invite_code = invite_code.strip()
         row = conn.execute(
-            "SELECT code, max_uses, use_count FROM invite_code WHERE code = ? AND used_at IS NULL",
+            "SELECT code, max_uses, use_count, expires_at FROM invite_code WHERE code = ?",
             (invite_code,)
         ).fetchone()
         if not row:
-            # Check if it exists but is fully used
-            row2 = conn.execute(
-                "SELECT code, max_uses, use_count FROM invite_code WHERE code = ?",
-                (invite_code,)
-            ).fetchone()
-            if row2 and row2["use_count"] >= (row2["max_uses"] or 1):
-                raise ValueError("This invite code has already been used")
             raise ValueError("Invalid invite code")
+        # Check expiration
+        if row["expires_at"]:
+            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            if now_str > row["expires_at"]:
+                raise ValueError("This invite code has expired")
+        # Check usage limit
         if row["max_uses"] and row["use_count"] >= row["max_uses"]:
             raise ValueError("This invite code has reached its usage limit")
         invited_by = invite_code
@@ -105,12 +119,15 @@ def create_user(conn: sqlite3.Connection, email: str, password: str,
     verify_token = secrets.token_urlsafe(32)
     verify_expires = (datetime.now(timezone.utc) + timedelta(hours=24)).strftime("%Y-%m-%d %H:%M:%S")
 
+    if role not in ("student", "teacher"):
+        role = "student"
+
     try:
         cursor = conn.execute(
             """INSERT INTO user (email, password_hash, display_name, invited_by,
-                                 email_verify_token, email_verify_expires, created_at, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-            (email, password_hash, display_name, invited_by, verify_token, verify_expires, now, now)
+                                 email_verify_token, email_verify_expires, role, created_at, updated_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (email, password_hash, display_name, invited_by, verify_token, verify_expires, role, now, now)
         )
         user_id = cursor.lastrowid
 
@@ -147,7 +164,7 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
     email = email.strip().lower()
     row = conn.execute(
         """SELECT id, email, password_hash, display_name, subscription_tier,
-                  is_active, is_admin, failed_login_attempts, locked_until
+                  is_active, is_admin, failed_login_attempts, locked_until, role
            FROM user WHERE email = ?""",
         (email,)
     ).fetchone()
@@ -174,7 +191,11 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
                                    severity=Severity.WARNING)
                 return None
         except (ValueError, TypeError):
-            pass
+            # Malformed locked_until — treat as still locked (fail-safe)
+            logger.warning("Malformed locked_until value for user id=%d: %r", row["id"], locked_until)
+            log_security_event(conn, SecurityEvent.LOGIN_LOCKED, user_id=row["id"],
+                               severity=Severity.WARNING)
+            return None
 
     if not check_password_hash(row["password_hash"], password):
         # Increment failed attempts
@@ -217,13 +238,14 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
         "display_name": row["display_name"],
         "subscription_tier": row["subscription_tier"],
         "is_admin": bool(row["is_admin"]) if row["is_admin"] is not None else False,
+        "role": row["role"] if row["role"] else "student",
     }
 
 
 def get_user_by_id(conn: sqlite3.Connection, user_id: int) -> dict | None:
     """Load a user by ID. Returns dict or None."""
     row = conn.execute(
-        "SELECT id, email, display_name, subscription_tier, is_active, is_admin FROM user WHERE id = ?",
+        "SELECT id, email, display_name, subscription_tier, is_active, is_admin, role FROM user WHERE id = ?",
         (user_id,)
     ).fetchone()
 
@@ -236,6 +258,7 @@ def get_user_by_id(conn: sqlite3.Connection, user_id: int) -> dict | None:
         "display_name": row["display_name"],
         "subscription_tier": row["subscription_tier"],
         "is_admin": bool(row["is_admin"]) if row["is_admin"] is not None else False,
+        "role": row["role"] or "student",
     }
 
 

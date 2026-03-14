@@ -1,0 +1,83 @@
+{
+  "title": "The New Café",
+  "title_zh": "新开的咖啡店",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "A new café opened in your neighborhood. You go in to try it. The barista greets you warmly.",
+    "setup_zh": "你的小区新开了一家咖啡店。你走进去尝尝。咖啡师热情地跟你打招呼。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "欢迎光临！我们刚开的。今天所有咖啡打八折。你想喝什么？",
+        "text_pinyin": "Huānyíng guānglín! Wǒmen gāng kāi de. Jīntiān suǒyǒu kāfēi dǎ bā zhé. Nǐ xiǎng hē shénme?",
+        "text_en": "Welcome! We just opened. All coffee is 20% off today. What would you like?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Order something.",
+        "options": [
+          {
+            "text_zh": "那我要一杯热的拿铁。这个地方看起来很舒服。",
+            "text_pinyin": "Nà wǒ yào yī bēi rè de ná tiě. Zhège dìfang kàn qǐlái hěn shūfu.",
+            "text_en": "I'll have a hot latte then. This place looks really cozy.",
+            "score": 1.0,
+            "feedback": "Friendly and complimentary — good first impression.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "以前这里是什么？",
+            "text_pinyin": "Yǐqián zhèlǐ shì shénme?",
+            "text_en": "What was here before?",
+            "score": 0.0,
+            "feedback": "She asked what you'd like to drink."
+          },
+          {
+            "text_zh": "我不喜欢打折。",
+            "text_pinyin": "Wǒ bù xǐhuan dǎzhé.",
+            "text_en": "I don't like discounts.",
+            "score": 0.0,
+            "feedback": "An odd thing to say about a promotional offer."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "好的！你是住在附近吗？希望你以后经常来。",
+        "text_pinyin": "Hǎo de! Nǐ shì zhù zài fùjìn ma? Xīwàng nǐ yǐhòu jīngcháng lái.",
+        "text_en": "Okay! Do you live nearby? I hope you'll come often."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell her about yourself.",
+        "options": [
+          {
+            "text_zh": "对，我就住在旁边。走路两分钟就到了。以后一定常来。",
+            "text_pinyin": "Duì, wǒ jiù zhù zài pángbiān. Zǒu lù liǎng fēnzhōng jiù dào le. Yǐhòu yīdìng cháng lái.",
+            "text_en": "Yes, I live right next door. Two-minute walk. I'll definitely come often.",
+            "score": 1.0,
+            "feedback": "Warm and encouraging — supports a new local business.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你这里有WiFi吗？",
+            "text_pinyin": "Nǐ zhèlǐ yǒu WiFi ma?",
+            "text_en": "Do you have WiFi?",
+            "score": 0.0,
+            "feedback": "She asked where you live and hoped you'd return."
+          },
+          {
+            "text_zh": "我不太出门。",
+            "text_pinyin": "Wǒ bú tài chūmén.",
+            "text_en": "I don't go out much.",
+            "score": 0.0,
+            "feedback": "Contradicts the fact that you just came in."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "New neighborhood cafés in China work hard to build regular customers. The personal touch — chatting, discounts, remembering orders — makes them feel like extensions of home. 打八折 means 80% of the original price (20% off)."
+  }
+}

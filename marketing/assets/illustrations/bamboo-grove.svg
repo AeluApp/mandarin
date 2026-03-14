@@ -1,19 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
   <!-- ground -->
-  <line x1="0" y1="56" x2="120" y2="56" stroke-width="0.5"/>
-  <!-- stalks -->
-  <line x1="25" y1="56" x2="25" y2="12" stroke-width="0.6"/>
-  <line x1="42" y1="56" x2="42" y2="8" stroke-width="0.6"/>
-  <line x1="58" y1="56" x2="58" y2="16" stroke-width="0.6"/>
-  <line x1="75" y1="56" x2="75" y2="10" stroke-width="0.6"/>
-  <line x1="90" y1="56" x2="90" y2="18" stroke-width="0.6"/>
-  <!-- leaves -->
-  <line x1="25" y1="22" x2="20" y2="18" stroke-width="0.4"/>
-  <line x1="25" y1="22" x2="30" y2="19" stroke-width="0.4"/>
-  <line x1="42" y1="18" x2="36" y2="14" stroke-width="0.4"/>
-  <line x1="42" y1="28" x2="48" y2="25" stroke-width="0.4"/>
-  <line x1="58" y1="26" x2="52" y2="22" stroke-width="0.4"/>
-  <line x1="75" y1="20" x2="80" y2="16" stroke-width="0.4"/>
-  <line x1="75" y1="30" x2="70" y2="27" stroke-width="0.4"/>
-  <line x1="90" y1="28" x2="95" y2="24" stroke-width="0.4"/>
+  <path d="M0 90 Q50 86 100 90 Q150 86 200 90" stroke="#2a2a2a" stroke-width="0.4" opacity="0.3"/>
+  <!-- bamboo stalk 1 — leftmost, slightly curved -->
+  <path d="M28 90 Q26 60 28 10" stroke="#2a2a2a" stroke-width="1.2"/>
+  <!-- nodes -->
+  <ellipse cx="28" cy="30" rx="1.8" ry="0.6" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="27.5" cy="50" rx="1.8" ry="0.6" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="27.8" cy="70" rx="1.8" ry="0.6" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- leaves from stalk 1 -->
+  <path d="M28 28 Q18 22 12 18" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M28 26 Q20 20 16 14" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M28 48 Q36 42 42 38" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M28 46 Q34 40 38 34" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- bamboo stalk 2 — tallest -->
+  <path d="M58 90 Q56 50 58 4" stroke="#2a2a2a" stroke-width="1.1"/>
+  <ellipse cx="57.5" cy="24" rx="1.6" ry="0.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="57.2" cy="46" rx="1.6" ry="0.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <ellipse cx="57.8" cy="68" rx="1.6" ry="0.5" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M58 22 Q48 16 42 12" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M58 24 Q50 20 46 16" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M58 44 Q66 38 72 34" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M58 66 Q50 60 44 56" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- bamboo stalk 3 — medium -->
+  <path d="M88 90 Q90 55 88 16" stroke="#2a2a2a" stroke-width="1"/>
+  <ellipse cx="88.5" cy="34" rx="1.5" ry="0.5" stroke="#2a2a2a" stroke-width="0.45"/>
+  <ellipse cx="89" cy="56" rx="1.5" ry="0.5" stroke="#2a2a2a" stroke-width="0.45"/>
+  <path d="M88 32 Q80 26 74 22" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M88 54 Q96 48 102 44" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M88 56 Q94 52 100 50" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- bamboo stalk 4 -->
+  <path d="M118 90 Q120 58 118 12" stroke="#2a2a2a" stroke-width="0.9"/>
+  <ellipse cx="118.5" cy="28" rx="1.4" ry="0.5" stroke="#2a2a2a" stroke-width="0.4"/>
+  <ellipse cx="119" cy="52" rx="1.4" ry="0.5" stroke="#2a2a2a" stroke-width="0.4"/>
+  <ellipse cx="118.5" cy="74" rx="1.4" ry="0.5" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M118 26 Q128 20 134 16" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M118 50 Q110 44 104 40" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M118 72 Q126 66 132 62" stroke="#2a2a2a" stroke-width="0.35"/>
+  <!-- bamboo stalk 5 — slightly behind -->
+  <path d="M148 90 Q146 62 148 18" stroke="#2a2a2a" stroke-width="0.8" opacity="0.7"/>
+  <ellipse cx="147.5" cy="36" rx="1.2" ry="0.4" stroke="#2a2a2a" stroke-width="0.4" opacity="0.7"/>
+  <ellipse cx="147" cy="58" rx="1.2" ry="0.4" stroke="#2a2a2a" stroke-width="0.4" opacity="0.7"/>
+  <path d="M148 34 Q140 28 134 24" stroke="#2a2a2a" stroke-width="0.35" opacity="0.6"/>
+  <path d="M148 56 Q156 50 162 46" stroke="#2a2a2a" stroke-width="0.35" opacity="0.6"/>
+  <!-- bamboo stalk 6 — far right -->
+  <path d="M174 90 Q176 60 174 8" stroke="#2a2a2a" stroke-width="0.7" opacity="0.6"/>
+  <ellipse cx="175" cy="26" rx="1" ry="0.4" stroke="#2a2a2a" stroke-width="0.35" opacity="0.6"/>
+  <ellipse cx="175.5" cy="50" rx="1" ry="0.4" stroke="#2a2a2a" stroke-width="0.35" opacity="0.6"/>
+  <path d="M174 24 Q182 18 188 14" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <path d="M174 48 Q166 42 160 38" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <!-- light filtering through — subtle vertical rays -->
+  <line x1="42" y1="4" x2="44" y2="88" stroke="#2a2a2a" stroke-width="0.15" opacity="0.06"/>
+  <line x1="72" y1="2" x2="74" y2="86" stroke="#2a2a2a" stroke-width="0.15" opacity="0.06"/>
+  <line x1="104" y1="6" x2="106" y2="88" stroke="#2a2a2a" stroke-width="0.15" opacity="0.06"/>
+  <line x1="134" y1="4" x2="136" y2="86" stroke="#2a2a2a" stroke-width="0.15" opacity="0.06"/>
+  <line x1="162" y1="6" x2="164" y2="88" stroke="#2a2a2a" stroke-width="0.15" opacity="0.06"/>
+  <!-- fallen leaves on ground -->
+  <path d="M40 88 Q42 86 44 88" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <path d="M95 89 Q97 87 99 89" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <path d="M155 88 Q157 86 159 88" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
 </svg>

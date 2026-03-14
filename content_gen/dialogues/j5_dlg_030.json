@@ -1,0 +1,89 @@
+{
+    "title": "The Taste of Home",
+    "title_zh": "家乡的味道",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You notice your colleague Xiaodong eating a simple bowl of noodles at his desk during lunch, staring out the window. He seems far away in thought.",
+        "setup_zh": "午餐时你看到同事小东在桌前吃一碗简单的面条，望着窗外发呆。他好像在想很远的事。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天食堂没有我想吃的，就自己煮了一碗面。味道差远了。我妈做的手擀面，从揉面到切面都是自己来的。那个味道，在这个城市里怎么找都找不到。",
+                "text_pinyin": "Jīntiān shítáng méiyǒu wǒ xiǎng chī de, jiù zìjǐ zhǔ le yī wǎn miàn. Wèidào chà yuǎn le. Wǒ mā zuò de shǒugǎn miàn, cóng róu miàn dào qiē miàn dōu shì zìjǐ lái de. Nàge wèidào, zài zhège chéngshì lǐ zěnme zhǎo dōu zhǎo bú dào.",
+                "text_en": "The cafeteria didn't have what I wanted today, so I cooked a bowl of noodles myself. The taste is nowhere close. My mom's handmade noodles — she does everything from kneading the dough to cutting the noodles herself. That flavor, I can't find it anywhere in this city."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his homesickness.",
+                "options": [
+                    {
+                        "text_zh": "找不到的味道其实不是面的味道，是家的味道。不管做多少次，调料放得再像，差的那一点永远是距离和思念。你离家多久了？",
+                        "text_pinyin": "Zhǎo bú dào de wèidào qíshí bú shì miàn de wèidào, shì jiā de wèidào. Bùguǎn zuò duōshǎo cì, tiáoliào fàng de zài xiàng, chà de nà yīdiǎn yǒngyuǎn shì jùlí hé sīniàn. Nǐ lí jiā duō jiǔ le?",
+                        "text_en": "What you can't find isn't the taste of the noodles — it's the taste of home. No matter how similar the seasonings, what's missing is the distance and the longing. How long have you been away?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perceptive and tender — names what he can't articulate."
+                    },
+                    {
+                        "text_zh": "你可以让你妈妈把做法写下来发给你。",
+                        "text_pinyin": "Nǐ kěyǐ ràng nǐ māma bǎ zuòfǎ xiě xiàlái fā gěi nǐ.",
+                        "text_en": "You could ask your mom to write down the recipe and send it to you.",
+                        "score": 0.0,
+                        "feedback": "Practical but misses the emotional core — it's not about the recipe."
+                    },
+                    {
+                        "text_zh": "附近有一家面馆味道不错，下次我带你去。",
+                        "text_pinyin": "Fùjìn yǒu yī jiā miànguǎn wèidào búcuò, xià cì wǒ dài nǐ qù.",
+                        "text_en": "There's a noodle shop nearby that's pretty good, I'll take you next time.",
+                        "score": 0.0,
+                        "feedback": "Tries to solve the unsolvable — no restaurant can replace his mother's noodles."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "快三年了。回去的次数越来越少，每次回去待的时间也越来越短。有时候觉得我在这个城市越来越像一个本地人了，但一碗面就能让我想起我不是。",
+                "text_pinyin": "Kuài sān nián le. Huí qù de cìshù yuè lái yuè shǎo, měi cì huí qù dāi de shíjiān yě yuè lái yuè duǎn. Yǒu shíhou juéde wǒ zài zhège chéngshì yuè lái yuè xiàng yīge běndì rén le, dàn yī wǎn miàn jiù néng ràng wǒ xiǎng qǐ wǒ bú shì.",
+                "text_en": "Almost three years. I go back less and less often, and each visit is shorter. Sometimes I feel like I'm becoming more and more like a local in this city, but a single bowl of noodles reminds me I'm not."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer comfort about belonging and identity.",
+                "options": [
+                    {
+                        "text_zh": "你不需要选择做哪里的人。在这个城市生活，心里还留着家乡的位置就好。想家不是软弱，是证明你有值得想念的地方。每次做面的努力，都是在跟家保持连接。",
+                        "text_pinyin": "Nǐ bù xūyào xuǎnzé zuò nǎlǐ de rén. Zài zhège chéngshì shēnghuó, xīn lǐ hái liú zhe jiāxiāng de wèizhì jiù hǎo. Xiǎng jiā bú shì ruǎnruò, shì zhèngmíng nǐ yǒu zhíde xiǎngniàn de dìfang. Měi cì zuò miàn de nǔlì, dōu shì zài gēn jiā bǎochí liánjiē.",
+                        "text_en": "You don't have to choose where you belong. Live in this city while keeping a place for home in your heart. Missing home isn't weakness — it proves you have somewhere worth missing. Every time you try to make noodles, you're staying connected to home.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Compassionate and wise — reframes homesickness as a sign of roots rather than rootlessness."
+                    },
+                    {
+                        "text_zh": "三年不算久，以后你会习惯的。",
+                        "text_pinyin": "Sān nián bú suàn jiǔ, yǐhòu nǐ huì xíguàn de.",
+                        "text_en": "Three years isn't that long, you'll get used to it.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — minimizes his feelings of displacement."
+                    },
+                    {
+                        "text_zh": "你为什么不考虑回老家工作？",
+                        "text_pinyin": "Nǐ wèi shénme bù kǎolǜ huí lǎojiā gōngzuò?",
+                        "text_en": "Why don't you consider going back to work in your hometown?",
+                        "score": 0.0,
+                        "feedback": "Oversimplified — doesn't account for the complexity of his situation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "跟家保持连接……谢谢你。也许今晚我给我妈打个电话，让她在视频那边陪我再煮一次面。就算味道还是不一样，至少能听到她的声音。",
+                "text_pinyin": "Gēn jiā bǎochí liánjiē…… xièxie nǐ. Yěxǔ jīn wǎn wǒ gěi wǒ mā dǎ ge diànhuà, ràng tā zài shìpín nà biān péi wǒ zài zhǔ yī cì miàn. Jiùsuàn wèidào háishì bù yíyàng, zhìshǎo néng tīng dào tā de shēngyīn.",
+                "text_en": "Staying connected to home... thank you. Maybe tonight I'll call my mom and have her keep me company on video while I cook noodles again. Even if the taste is still different, at least I'll hear her voice."
+            }
+        ],
+        "cultural_note": "China's internal migration has created hundreds of millions of「异乡人」(yìxiāng rén, people living away from home). Food is the most powerful trigger for homesickness — the phrase「家乡的味道」(the taste of hometown) carries enormous emotional weight. Hand-pulled and hand-cut noodles (手擀面) represent the irreplaceable personal touch of a mother's cooking. Video-calling parents while cooking has become a bittersweet modern ritual of maintaining family bonds across distance."
+    }
+}

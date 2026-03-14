@@ -1,0 +1,130 @@
+{
+    "title": "The Interview With Tea",
+    "title_zh": "面试与茶",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "A tech company's interview room on the 14th floor. The interviewer, Manager Shen, is younger than you expected -- she's in her early thirties and wearing sneakers with a blazer. She offers you tea before a single question and spends the first minute arranging cups with careful attention. Her interview style is conversational rather than interrogative. A whiteboard behind her has the company values written in colorful markers.",
+        "setup_zh": "一家科技公司的面试间，在14楼。面试官沈经理比你想象的年轻——三十出头，穿着西装外套配运动鞋。她问第一个问题之前先给你倒茶，用了一分钟认真摆好杯子。她的面试风格是对话式的，不是审问式的。她身后的白板上用彩色马克笔写着公司价值观。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "先喝点茶，别紧张。能不能先简单介绍一下你自己？",
+                "text_pinyin": "xiān hē diǎn chá, bié jǐnzhāng. néng bu néng xiān jiǎndān jièshào yíxià nǐ zìjǐ?",
+                "text_en": "Have some tea first, don't be nervous. Could you briefly introduce yourself?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself.",
+                "options": [
+                    {
+                        "text_zh": "我叫……在XX大学学的是国际商务。毕业以后在一家贸易公司工作了两年。",
+                        "text_pinyin": "wǒ jiào... zài XX dàxué xué de shì guójì shāngwù. bìyè yǐhòu zài yì jiā màoyì gōngsī gōngzuò le liǎng nián.",
+                        "text_en": "My name is... I studied international business at XX University. After graduation I worked at a trading company for two years.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Shen nods and takes a sip of tea.「国际商务很好。你为什么想换工作？」Clear, structured self-introduction. 毕业以后 means 'after graduation.'"
+                    },
+                    {
+                        "text_zh": "我对你们公司很感兴趣，所以来面试了。我之前做过市场营销。",
+                        "text_pinyin": "wǒ duì nǐmen gōngsī hěn gǎn xìngqù, suǒyǐ lái miànshì le. wǒ zhīqián zuò guo shìchǎng yíngxiāo.",
+                        "text_en": "I'm very interested in your company, so I came for the interview. I've done marketing before.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Shen smiles.「兴趣是最好的老师。跟我说说你的营销经验？」对...感兴趣 means 'interested in.'"
+                    },
+                    {
+                        "text_zh": "说实话我有点紧张。这是我第一次用中文面试。",
+                        "text_pinyin": "shuō shíhuà wǒ yǒudiǎn jǐnzhāng. zhè shì wǒ dì yī cì yòng zhōngwén miànshì.",
+                        "text_en": "To be honest, I'm a bit nervous. This is my first interview in Chinese.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Manager Shen's expression softens.「能用中文面试已经很厉害了。放松，就当聊天。」Honesty wins points. 说实话 means 'to be honest.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你之前的工作经验跟这个岗位有关系吗？你觉得自己最大的优势是什么？",
+                "text_pinyin": "nǐ zhīqián de gōngzuò jīngyàn gēn zhè ge gǎngwèi yǒu guānxi ma? nǐ juéde zìjǐ zuì dà de yōushì shì shénme?",
+                "text_en": "Is your previous experience related to this position? What do you think is your biggest strength?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your strengths.",
+                "options": [
+                    {
+                        "text_zh": "我觉得我最大的优势是学东西比较快，而且我喜欢解决问题。",
+                        "text_pinyin": "wǒ juéde wǒ zuì dà de yōushì shì xué dōngxi bǐjiào kuài, érqiě wǒ xǐhuan jiějué wèntí.",
+                        "text_en": "I think my biggest strength is learning quickly, and I enjoy solving problems.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Shen writes something down.「学习能力强很重要。你能举一个例子吗？」优势 means 'advantage/strength.' Supporting with examples makes it real."
+                    },
+                    {
+                        "text_zh": "我很认真，做事情比较有条理。同事们说我很靠谱。",
+                        "text_pinyin": "wǒ hěn rènzhēn, zuò shìqing bǐjiào yǒu tiáolǐ. tóngshìmen shuō wǒ hěn kàopǔ.",
+                        "text_en": "I'm very conscientious and organized. Colleagues say I'm reliable.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Shen nods.「靠谱很重要。我们团队需要这样的人。」有条理 means 'organized.' 靠谱 means 'reliable' -- colloquial but valued."
+                    },
+                    {
+                        "text_zh": "我中文说得不错？",
+                        "text_pinyin": "wǒ zhōngwén shuō de búcuò?",
+                        "text_en": "My Chinese is pretty good?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Shen laughs.「是不错！但是我们还需要其他技能。」A charming answer but she needs more substance. 不错 means 'not bad.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "最后一个问题：你对我们公司有什么了解？你有什么想问我的吗？",
+                "text_pinyin": "zuìhòu yí gè wèntí: nǐ duì wǒmen gōngsī yǒu shénme liǎojiě? nǐ yǒu shénme xiǎng wèn wǒ de ma?",
+                "text_en": "Last question: what do you know about our company? Do you have anything you'd like to ask me?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show you've researched the company and ask a thoughtful question.",
+                "options": [
+                    {
+                        "text_zh": "我了解到你们公司去年在海外市场增长很快。我想问一下，新员工有没有培训的机会？",
+                        "text_pinyin": "wǒ liǎojiě dào nǐmen gōngsī qùnián zài hǎiwài shìchǎng zēngzhǎng hěn kuài. wǒ xiǎng wèn yíxià, xīn yuángōng yǒu méiyǒu péixùn de jīhuì?",
+                        "text_en": "I learned that your company grew quickly in overseas markets last year. I'd like to ask, are there training opportunities for new employees?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Manager Shen is impressed.「做了功课！培训当然有。我们每个季度都有培训项目。」了解到 means 'learned/found out.' Asking about growth and training shows genuine interest."
+                    },
+                    {
+                        "text_zh": "我看了你们的网站，觉得产品很有意思。公司的工作氛围怎么样？",
+                        "text_pinyin": "wǒ kàn le nǐmen de wǎngzhàn, juéde chǎnpǐn hěn yǒu yìsi. gōngsī de gōngzuò fēnwéi zěnmeyàng?",
+                        "text_en": "I looked at your website and think the products are interesting. What's the work atmosphere like?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Manager Shen gestures at her sneakers.「你看我穿的就知道了。」She's making a point about casual culture. 工作氛围 means 'work atmosphere.'"
+                    },
+                    {
+                        "text_zh": "薪资大概是多少？",
+                        "text_pinyin": "xīnzī dàgài shì duōshao?",
+                        "text_en": "What's the salary roughly?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Manager Shen pauses.「这个我们通常在第二轮讨论。」Not wrong to ask, but timing matters. In Chinese interviews, salary questions usually come later."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢你今天来面试。我们会在一周之内通知你结果。期待合作！",
+                "text_pinyin": "xièxie nǐ jīntiān lái miànshì. wǒmen huì zài yì zhōu zhī nèi tōngzhī nǐ jiéguǒ. qīdài hézuò!",
+                "text_en": "Thank you for coming today. We'll notify you of the result within a week. Looking forward to working together!"
+            }
+        ],
+        "cultural_note": "Chinese job interviews often start with tea and small talk to ease tension. 自我介绍 (zìwǒ jièshào, self-introduction) is always expected. Asking about company culture and training shows engagement. Salary discussion usually happens in later rounds."
+    },
+    "id": "gen_business_3_00_v0"
+}

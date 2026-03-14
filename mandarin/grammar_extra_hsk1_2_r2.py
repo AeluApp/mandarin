@@ -1,0 +1,223 @@
+"""Extra HSK 1-2 grammar points, round 2 — filling remaining gaps."""
+
+EXTRA_GRAMMAR_HSK1_2_R2 = [
+    # =========================================================================
+    # HSK 1 — 15 additional grammar points
+    # =========================================================================
+
+    {"name": "怎么 how", "name_zh": "怎么", "hsk_level": 1, "category": "structure",
+     "description": "Question word asking 'how' or 'how come': 你怎么去学校？", "difficulty": 0.2,
+     "examples": [
+         {"zh": "你怎么去学校？", "pinyin": "Nǐ zěnme qù xuéxiào?", "en": "How do you get to school?"},
+         {"zh": "这个字怎么写？", "pinyin": "Zhège zì zěnme xiě?", "en": "How do you write this character?"},
+         {"zh": "你怎么知道的？", "pinyin": "Nǐ zěnme zhīdào de?", "en": "How did you find out?"},
+     ]},
+    {"name": "为什么 why", "name_zh": "为什么", "hsk_level": 1, "category": "structure",
+     "description": "Question word asking 'why': 你为什么不吃？", "difficulty": 0.2,
+     "examples": [
+         {"zh": "你为什么不吃？", "pinyin": "Nǐ wèishénme bù chī?", "en": "Why aren't you eating?"},
+         {"zh": "他为什么没来？", "pinyin": "Tā wèishénme méi lái?", "en": "Why didn't he come?"},
+         {"zh": "你为什么学中文？", "pinyin": "Nǐ wèishénme xué Zhōngwén?", "en": "Why are you studying Chinese?"},
+     ]},
+    {"name": "在+V progressive", "name_zh": "在+动词", "hsk_level": 1, "category": "aspect",
+     "description": "在 before a verb to indicate an action in progress: 我在看书 (distinct from 在 as location marker)", "difficulty": 0.3,
+     "examples": [
+         {"zh": "我在看书。", "pinyin": "Wǒ zài kàn shū.", "en": "I am reading."},
+         {"zh": "他在吃饭。", "pinyin": "Tā zài chīfàn.", "en": "He is eating."},
+         {"zh": "你在做什么？", "pinyin": "Nǐ zài zuò shénme?", "en": "What are you doing?"},
+     ]},
+    {"name": "到 arrive/to", "name_zh": "到", "hsk_level": 1, "category": "structure",
+     "description": "Verb meaning 'arrive' or preposition meaning 'to (a place)': 我到了、到北京", "difficulty": 0.2,
+     "examples": [
+         {"zh": "我到了。", "pinyin": "Wǒ dào le.", "en": "I've arrived."},
+         {"zh": "你什么时候到北京？", "pinyin": "Nǐ shénme shíhou dào Běijīng?", "en": "When do you arrive in Beijing?"},
+         {"zh": "他还没到。", "pinyin": "Tā hái méi dào.", "en": "He hasn't arrived yet."},
+     ]},
+    {"name": "从 from", "name_zh": "从", "hsk_level": 1, "category": "structure",
+     "description": "Preposition meaning 'from' (origin of place or time): 我从中国来", "difficulty": 0.2,
+     "examples": [
+         {"zh": "我从中国来。", "pinyin": "Wǒ cóng Zhōngguó lái.", "en": "I come from China."},
+         {"zh": "他从家里出来了。", "pinyin": "Tā cóng jiā lǐ chūlái le.", "en": "He came out from home."},
+         {"zh": "从九点开始上课。", "pinyin": "Cóng jiǔ diǎn kāishǐ shàngkè.", "en": "Class starts from nine o'clock."},
+     ]},
+    {"name": "Location words 上/下/里/旁边", "name_zh": "方位词", "hsk_level": 1, "category": "structure",
+     "description": "Location words placed after a noun to specify position: 桌子上、房间里、旁边", "difficulty": 0.3,
+     "examples": [
+         {"zh": "书在桌子上。", "pinyin": "Shū zài zhuōzi shàng.", "en": "The book is on the table."},
+         {"zh": "猫在椅子下面。", "pinyin": "Māo zài yǐzi xiàmian.", "en": "The cat is under the chair."},
+         {"zh": "他在房间里。", "pinyin": "Tā zài fángjiān lǐ.", "en": "He is in the room."},
+     ]},
+    {"name": "Duration complement V+了+time", "name_zh": "时量补语", "hsk_level": 1, "category": "complement",
+     "description": "Expressing how long an action has been done: V + 了 + duration: 我学了两年中文", "difficulty": 0.3,
+     "examples": [
+         {"zh": "我学了两年中文。", "pinyin": "Wǒ xuéle liǎng nián Zhōngwén.", "en": "I have studied Chinese for two years."},
+         {"zh": "他等了半个小时。", "pinyin": "Tā děngle bàn gè xiǎoshí.", "en": "He waited for half an hour."},
+         {"zh": "我们走了很长时间。", "pinyin": "Wǒmen zǒule hěn cháng shíjiān.", "en": "We walked for a long time."},
+     ]},
+    {"name": "每 every", "name_zh": "每", "hsk_level": 1, "category": "structure",
+     "description": "Determiner meaning 'every/each', often paired with 都: 我每天跑步", "difficulty": 0.2,
+     "examples": [
+         {"zh": "我每天跑步。", "pinyin": "Wǒ měitiān pǎobù.", "en": "I run every day."},
+         {"zh": "每个人都来了。", "pinyin": "Měi gè rén dōu lái le.", "en": "Everyone came."},
+         {"zh": "她每天早上喝咖啡。", "pinyin": "Tā měitiān zǎoshang hē kāfēi.", "en": "She drinks coffee every morning."},
+     ]},
+    {"name": "一些 some", "name_zh": "一些", "hsk_level": 1, "category": "structure",
+     "description": "Indefinite quantity meaning 'some/a few': 给我一些水", "difficulty": 0.2,
+     "examples": [
+         {"zh": "给我一些水。", "pinyin": "Gěi wǒ yìxiē shuǐ.", "en": "Give me some water."},
+         {"zh": "我买了一些水果。", "pinyin": "Wǒ mǎile yìxiē shuǐguǒ.", "en": "I bought some fruit."},
+         {"zh": "他有一些问题。", "pinyin": "Tā yǒu yìxiē wèntí.", "en": "He has some questions."},
+     ]},
+    {"name": "很多 many/much", "name_zh": "很多", "hsk_level": 1, "category": "structure",
+     "description": "Expressing large quantity: 很多人、他有很多书", "difficulty": 0.1,
+     "examples": [
+         {"zh": "很多人都喜欢吃中国菜。", "pinyin": "Hěn duō rén dōu xǐhuan chī Zhōngguó cài.", "en": "Many people like Chinese food."},
+         {"zh": "他有很多书。", "pinyin": "Tā yǒu hěn duō shū.", "en": "He has many books."},
+         {"zh": "北京有很多好吃的。", "pinyin": "Běijīng yǒu hěn duō hǎochī de.", "en": "Beijing has a lot of good food."},
+     ]},
+    {"name": "真 really/truly", "name_zh": "真", "hsk_level": 1, "category": "particle",
+     "description": "Adverb emphasizing sincerity or degree: 你真好、真的吗", "difficulty": 0.2,
+     "examples": [
+         {"zh": "你真好！", "pinyin": "Nǐ zhēn hǎo!", "en": "You're really nice!"},
+         {"zh": "真的吗？", "pinyin": "Zhēn de ma?", "en": "Really?"},
+         {"zh": "今天真冷。", "pinyin": "Jīntiān zhēn lěng.", "en": "It's really cold today."},
+     ]},
+    {"name": "可能 maybe/possibly", "name_zh": "可能", "hsk_level": 1, "category": "structure",
+     "description": "Expressing possibility or likelihood: 他可能不来了", "difficulty": 0.3,
+     "examples": [
+         {"zh": "他可能不来了。", "pinyin": "Tā kěnéng bù lái le.", "en": "He might not come."},
+         {"zh": "明天可能下雨。", "pinyin": "Míngtiān kěnéng xiàyǔ.", "en": "It might rain tomorrow."},
+         {"zh": "这个可能是他的。", "pinyin": "Zhège kěnéng shì tā de.", "en": "This might be his."},
+     ]},
+    {"name": "应该 should/ought to", "name_zh": "应该", "hsk_level": 1, "category": "structure",
+     "description": "Modal verb expressing obligation or expectation: 你应该早点睡觉", "difficulty": 0.2,
+     "examples": [
+         {"zh": "你应该早点睡觉。", "pinyin": "Nǐ yīnggāi zǎodiǎn shuìjiào.", "en": "You should go to bed earlier."},
+         {"zh": "我们应该多练习。", "pinyin": "Wǒmen yīnggāi duō liànxí.", "en": "We should practice more."},
+         {"zh": "他应该到了吧。", "pinyin": "Tā yīnggāi dào le ba.", "en": "He should have arrived by now."},
+     ]},
+    {"name": "得 (děi) must/have to", "name_zh": "得(děi)", "hsk_level": 1, "category": "structure",
+     "description": "Modal verb (pronounced děi) meaning 'must/have to': 我得走了", "difficulty": 0.3,
+     "examples": [
+         {"zh": "我得走了。", "pinyin": "Wǒ děi zǒu le.", "en": "I have to go."},
+         {"zh": "明天得早起。", "pinyin": "Míngtiān děi zǎoqǐ.", "en": "I have to get up early tomorrow."},
+         {"zh": "你得自己做。", "pinyin": "Nǐ děi zìjǐ zuò.", "en": "You have to do it yourself."},
+     ]},
+    {"name": "到...去 go to (a place)", "name_zh": "到…去", "hsk_level": 1, "category": "structure",
+     "description": "Pattern meaning 'go to (a destination)': 到学校去、到那儿去", "difficulty": 0.2,
+     "examples": [
+         {"zh": "我到学校去。", "pinyin": "Wǒ dào xuéxiào qù.", "en": "I'm going to school."},
+         {"zh": "你到哪儿去？", "pinyin": "Nǐ dào nǎr qù?", "en": "Where are you going?"},
+         {"zh": "他到北京去了。", "pinyin": "Tā dào Běijīng qù le.", "en": "He went to Beijing."},
+     ]},
+
+    # =========================================================================
+    # HSK 2 — 15 additional grammar points
+    # =========================================================================
+
+    {"name": "更 even more", "name_zh": "更", "hsk_level": 2, "category": "comparison",
+     "description": "Comparative adverb meaning 'even more/still more': 他更高", "difficulty": 0.3,
+     "examples": [
+         {"zh": "他更高。", "pinyin": "Tā gèng gāo.", "en": "He is even taller."},
+         {"zh": "这个更好吃。", "pinyin": "Zhège gèng hǎochī.", "en": "This one is even tastier."},
+         {"zh": "明天会更冷。", "pinyin": "Míngtiān huì gèng lěng.", "en": "Tomorrow will be even colder."},
+     ]},
+    {"name": "或者 or (statements)", "name_zh": "或者", "hsk_level": 2, "category": "connector",
+     "description": "Conjunction 'or' used in statements (not questions — use 还是 for questions): 喝茶或者咖啡都行", "difficulty": 0.3,
+     "examples": [
+         {"zh": "喝茶或者喝咖啡都行。", "pinyin": "Hē chá huòzhě hē kāfēi dōu xíng.", "en": "Tea or coffee, either is fine."},
+         {"zh": "你可以坐公交或者地铁。", "pinyin": "Nǐ kěyǐ zuò gōngjiāo huòzhě dìtiě.", "en": "You can take the bus or the subway."},
+         {"zh": "周末我去跑步或者游泳。", "pinyin": "Zhōumò wǒ qù pǎobù huòzhě yóuyǒng.", "en": "On weekends I go running or swimming."},
+     ]},
+    {"name": "离 distance from", "name_zh": "离", "hsk_level": 2, "category": "structure",
+     "description": "Preposition expressing distance between two points: 学校离我家很近", "difficulty": 0.3,
+     "examples": [
+         {"zh": "学校离我家很近。", "pinyin": "Xuéxiào lí wǒ jiā hěn jìn.", "en": "The school is very close to my home."},
+         {"zh": "这里离火车站不远。", "pinyin": "Zhèlǐ lí huǒchēzhàn bù yuǎn.", "en": "It's not far from here to the train station."},
+         {"zh": "我家离公司很远。", "pinyin": "Wǒ jiā lí gōngsī hěn yuǎn.", "en": "My home is very far from the company."},
+     ]},
+    {"name": "对 towards/regarding", "name_zh": "对", "hsk_level": 2, "category": "structure",
+     "description": "Preposition meaning 'towards/to/regarding': 他对我很好", "difficulty": 0.4,
+     "examples": [
+         {"zh": "他对我很好。", "pinyin": "Tā duì wǒ hěn hǎo.", "en": "He is very good to me."},
+         {"zh": "这对身体不好。", "pinyin": "Zhè duì shēntǐ bù hǎo.", "en": "This is not good for the body."},
+         {"zh": "老师对学生很有耐心。", "pinyin": "Lǎoshī duì xuéshēng hěn yǒu nàixīn.", "en": "The teacher is very patient with students."},
+     ]},
+    {"name": "左右 approximately", "name_zh": "左右", "hsk_level": 2, "category": "structure",
+     "description": "Placed after a number/time to mean 'approximately/around': 三点左右", "difficulty": 0.3,
+     "examples": [
+         {"zh": "三点左右到。", "pinyin": "Sān diǎn zuǒyòu dào.", "en": "Arriving around three o'clock."},
+         {"zh": "大概五十块左右。", "pinyin": "Dàgài wǔshí kuài zuǒyòu.", "en": "About fifty yuan or so."},
+         {"zh": "他二十岁左右。", "pinyin": "Tā èrshí suì zuǒyòu.", "en": "He is around twenty years old."},
+     ]},
+    {"name": "以前 before/in the past", "name_zh": "以前", "hsk_level": 2, "category": "structure",
+     "description": "Time word meaning 'before' or 'in the past': 以前我住在北京", "difficulty": 0.3,
+     "examples": [
+         {"zh": "以前我住在北京。", "pinyin": "Yǐqián wǒ zhù zài Běijīng.", "en": "I used to live in Beijing."},
+         {"zh": "吃饭以前要洗手。", "pinyin": "Chīfàn yǐqián yào xǐshǒu.", "en": "Wash your hands before eating."},
+         {"zh": "他以前不喜欢运动。", "pinyin": "Tā yǐqián bù xǐhuan yùndòng.", "en": "He didn't used to like sports."},
+     ]},
+    {"name": "以后 after/in the future", "name_zh": "以后", "hsk_level": 2, "category": "structure",
+     "description": "Time word meaning 'after' or 'in the future': 毕业以后", "difficulty": 0.3,
+     "examples": [
+         {"zh": "毕业以后我想去中国。", "pinyin": "Bìyè yǐhòu wǒ xiǎng qù Zhōngguó.", "en": "After graduation I want to go to China."},
+         {"zh": "吃完饭以后去散步吧。", "pinyin": "Chīwán fàn yǐhòu qù sànbù ba.", "en": "Let's go for a walk after dinner."},
+         {"zh": "以后再说吧。", "pinyin": "Yǐhòu zài shuō ba.", "en": "Let's talk about it later."},
+     ]},
+    {"name": "一定 definitely/certainly", "name_zh": "一定", "hsk_level": 2, "category": "particle",
+     "description": "Adverb expressing certainty or determination: 我一定来", "difficulty": 0.3,
+     "examples": [
+         {"zh": "我一定来。", "pinyin": "Wǒ yídìng lái.", "en": "I will definitely come."},
+         {"zh": "你一定要小心。", "pinyin": "Nǐ yídìng yào xiǎoxīn.", "en": "You must be careful."},
+         {"zh": "明天一定会更好。", "pinyin": "Míngtiān yídìng huì gèng hǎo.", "en": "Tomorrow will definitely be better."},
+     ]},
+    {"name": "必须 must", "name_zh": "必须", "hsk_level": 2, "category": "structure",
+     "description": "Modal verb expressing strong obligation: 你必须做完", "difficulty": 0.4,
+     "examples": [
+         {"zh": "你必须做完。", "pinyin": "Nǐ bìxū zuòwán.", "en": "You must finish it."},
+         {"zh": "我们必须准时到。", "pinyin": "Wǒmen bìxū zhǔnshí dào.", "en": "We must arrive on time."},
+         {"zh": "学中文必须多练习。", "pinyin": "Xué Zhōngwén bìxū duō liànxí.", "en": "Learning Chinese requires lots of practice."},
+     ]},
+    {"name": "可是 but/however", "name_zh": "可是", "hsk_level": 2, "category": "connector",
+     "description": "Conjunction meaning 'but/however' (colloquial alternative to 但是): 我想去，可是没时间", "difficulty": 0.3,
+     "examples": [
+         {"zh": "我想去，可是没时间。", "pinyin": "Wǒ xiǎng qù, kěshì méi shíjiān.", "en": "I want to go, but I don't have time."},
+         {"zh": "他很聪明，可是不努力。", "pinyin": "Tā hěn cōngming, kěshì bù nǔlì.", "en": "He is smart, but not hardworking."},
+         {"zh": "天气很好，可是我不想出去。", "pinyin": "Tiānqì hěn hǎo, kěshì wǒ bù xiǎng chūqù.", "en": "The weather is nice, but I don't want to go out."},
+     ]},
+    {"name": "所以 so/therefore", "name_zh": "所以", "hsk_level": 2, "category": "connector",
+     "description": "Conjunction meaning 'so/therefore', often paired with 因为: 因为下雨，所以没去", "difficulty": 0.3,
+     "examples": [
+         {"zh": "因为下雨，所以没去。", "pinyin": "Yīnwèi xiàyǔ, suǒyǐ méi qù.", "en": "Because it rained, I didn't go."},
+         {"zh": "他生病了，所以没来上课。", "pinyin": "Tā shēngbìng le, suǒyǐ méi lái shàngkè.", "en": "He was sick, so he didn't come to class."},
+         {"zh": "太晚了，所以我打车回家。", "pinyin": "Tài wǎn le, suǒyǐ wǒ dǎchē huíjiā.", "en": "It was too late, so I took a taxi home."},
+     ]},
+    {"name": "虽然...但是 although (HSK2 intro)", "name_zh": "虽然(初级)", "hsk_level": 2, "category": "connector",
+     "description": "Basic concessive pattern: 虽然贵，但是好吃", "difficulty": 0.4,
+     "examples": [
+         {"zh": "虽然贵，但是好吃。", "pinyin": "Suīrán guì, dànshì hǎochī.", "en": "Although expensive, it's delicious."},
+         {"zh": "虽然很忙，但是我很开心。", "pinyin": "Suīrán hěn máng, dànshì wǒ hěn kāixīn.", "en": "Although busy, I'm very happy."},
+         {"zh": "虽然下雨了，但是我们还是去了。", "pinyin": "Suīrán xiàyǔ le, dànshì wǒmen háishi qù le.", "en": "Although it rained, we still went."},
+     ]},
+    {"name": "刚 just (recently)", "name_zh": "刚", "hsk_level": 2, "category": "particle",
+     "description": "Adverb indicating something just happened: 他刚走", "difficulty": 0.3,
+     "examples": [
+         {"zh": "他刚走。", "pinyin": "Tā gāng zǒu.", "en": "He just left."},
+         {"zh": "我刚吃完饭。", "pinyin": "Wǒ gāng chīwán fàn.", "en": "I just finished eating."},
+         {"zh": "她刚到北京。", "pinyin": "Tā gāng dào Běijīng.", "en": "She just arrived in Beijing."},
+     ]},
+    {"name": "一直 continuously/all along", "name_zh": "一直", "hsk_level": 2, "category": "particle",
+     "description": "Adverb meaning 'continuously/always/all along': 我一直在等你", "difficulty": 0.4,
+     "examples": [
+         {"zh": "我一直在等你。", "pinyin": "Wǒ yìzhí zài děng nǐ.", "en": "I've been waiting for you all along."},
+         {"zh": "他一直很忙。", "pinyin": "Tā yìzhí hěn máng.", "en": "He has been busy the whole time."},
+         {"zh": "一直往前走。", "pinyin": "Yìzhí wǎng qián zǒu.", "en": "Keep going straight ahead."},
+     ]},
+    {"name": "马上 immediately/right away", "name_zh": "马上", "hsk_level": 2, "category": "particle",
+     "description": "Adverb meaning 'immediately/right away/soon': 他马上来", "difficulty": 0.3,
+     "examples": [
+         {"zh": "他马上来。", "pinyin": "Tā mǎshàng lái.", "en": "He's coming right away."},
+         {"zh": "我马上就好。", "pinyin": "Wǒ mǎshàng jiù hǎo.", "en": "I'll be ready in a moment."},
+         {"zh": "电影马上要开始了。", "pinyin": "Diànyǐng mǎshàng yào kāishǐ le.", "en": "The movie is about to start."},
+     ]},
+]

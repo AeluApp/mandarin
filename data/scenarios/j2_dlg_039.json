@@ -1,0 +1,83 @@
+{
+  "title": "The Starry Night",
+  "title_zh": "星星的夜晚",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're on the rooftop of your apartment building. Your neighbor is already there, looking up at the stars.",
+    "setup_zh": "你在公寓楼的天台上。你的邻居已经在那里了，正在看星星。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也上来了？今天晚上星星好多。在城市里很少能看到这么多星星。",
+        "text_pinyin": "Nǐ yě shàng lái le? Jīntiān wǎnshang xīngxing hǎo duō. Zài chéngshì lǐ hěn shǎo néng kàn dào zhème duō xīngxing.",
+        "text_en": "You came up too? So many stars tonight. It's rare to see this many in the city."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Share your feelings about the stars.",
+        "options": [
+          {
+            "text_zh": "真的好美。平时都在看手机，忘了抬头看看天。今天晚上真好。",
+            "text_pinyin": "Zhēn de hǎo měi. Píngshí dōu zài kàn shǒujī, wàng le táitóu kànkan tiān. Jīntiān wǎnshang zhēn hǎo.",
+            "text_en": "It's really beautiful. Usually I'm looking at my phone and forget to look up at the sky. Tonight is wonderful.",
+            "score": 1.0,
+            "feedback": "Honest and reflective — the stars remind us to look up.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我上来吹风的。",
+            "text_pinyin": "Wǒ shàng lái chuī fēng de.",
+            "text_en": "I came up for some air.",
+            "score": 0.0,
+            "feedback": "Misses the star-gazing moment."
+          },
+          {
+            "text_zh": "是啊，不过城市的空气不好，看不到多少星星。",
+            "text_pinyin": "Shì a, búguò chéngshì de kōngqì bù hǎo, kàn bú dào duōshao xīngxing.",
+            "text_en": "Yeah, but the city air is bad — you can't really see many stars.",
+            "score": 0.0,
+            "feedback": "He looks at you, then back up. You're both looking at a sky full of stars right now."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "是啊。我小时候在农村，每天晚上都能看到星星。那时候觉得很平常，现在觉得是最珍贵的。",
+        "text_pinyin": "Shì a. Wǒ xiǎo shíhou zài nóngcūn, měi tiān wǎnshang dōu néng kàn dào xīngxing. Nà shíhou juéde hěn píngcháng, xiànzài juéde shì zuì zhēnguì de.",
+        "text_en": "Yeah. When I was little in the countryside, I could see stars every night. Back then it felt ordinary — now I realize it was the most precious thing."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to his realization about what's precious.",
+        "options": [
+          {
+            "text_zh": "最珍贵的东西，往往是我们以为很平常的。等我们发现的时候，有时候已经不容易看到了。",
+            "text_pinyin": "Zuì zhēnguì de dōngxi, wǎngwǎng shì wǒmen yǐwéi hěn píngcháng de. Děng wǒmen fāxiàn de shíhou, yǒu shíhou yǐjīng bù róngyì kàn dào le.",
+            "text_en": "The most precious things are often what we thought were ordinary. By the time we realize it, sometimes they're already hard to find.",
+            "score": 1.0,
+            "feedback": "Quiet wisdom — the ordinary becomes precious in hindsight.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "你可以回农村看啊。",
+            "text_pinyin": "Nǐ kěyǐ huí nóngcūn kàn a.",
+            "text_en": "You can go back to the countryside to see them.",
+            "score": 0.0,
+            "feedback": "Offers a simple solution to a deeper reflection."
+          },
+          {
+            "text_zh": "城市的灯光太亮了。",
+            "text_pinyin": "Chéngshì de dēngguāng tài liàng le.",
+            "text_en": "The city lights are too bright.",
+            "score": 0.0,
+            "feedback": "A factual explanation instead of emotional connection."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Many Chinese city-dwellers grew up in rural areas and carry deep nostalgia for the night sky of their childhood. The phrase 觉得很平常 (it felt ordinary) speaks to a universal human experience: not knowing the value of something until it's gone. Rooftop stargazing in cities has become a quiet counter-movement among young people seeking reconnection."
+  }
+}

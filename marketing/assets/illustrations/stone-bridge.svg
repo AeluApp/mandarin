@@ -1,12 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- hills in background -->
-  <path d="M0 40 Q30 28 60 40" stroke-width="0.4"/>
-  <path d="M60 40 Q90 30 120 40" stroke-width="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- distant mountains -->
+  <path d="M0 52 Q25 32 50 44 Q65 28 85 38 Q100 22 120 36 Q140 26 165 40 Q180 32 200 48" stroke="#2a2a2a" stroke-width="0.5" fill="#2a2a2a" fill-opacity="0.06"/>
+  <path d="M0 56 Q30 42 55 50 Q75 38 100 46 Q130 34 160 46 Q185 40 200 52" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.04"/>
+  <!-- willow tree left -->
+  <path d="M22 62 L22 32" stroke="#2a2a2a" stroke-width="1"/>
+  <path d="M22 32 Q18 28 20 24" stroke="#2a2a2a" stroke-width="0.7"/>
+  <path d="M22 36 Q14 42 10 54" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M22 34 Q12 40 8 50" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M22 33 Q16 44 14 56" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M22 35 Q28 44 30 52" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M22 34 Q30 42 32 50" stroke="#2a2a2a" stroke-width="0.3"/>
   <!-- bridge arch -->
-  <path d="M30 48 Q60 30 90 48" stroke-width="0.75"/>
-  <!-- bridge deck -->
-  <line x1="28" y1="48" x2="92" y2="48" stroke-width="0.6"/>
-  <!-- water dashes -->
-  <line x1="48" y1="53" x2="54" y2="53" stroke-width="0.4"/>
-  <line x1="64" y1="55" x2="70" y2="55" stroke-width="0.4"/>
+  <path d="M55 68 Q72 38 90 48 Q108 38 125 68" stroke="#2a2a2a" stroke-width="1.2"/>
+  <!-- bridge deck surface -->
+  <path d="M50 66 Q72 44 90 50 Q108 44 130 66" stroke="#2a2a2a" stroke-width="0.8" fill="#2a2a2a" fill-opacity="0.05"/>
+  <!-- bridge railing posts -->
+  <line x1="62" y1="56" x2="62" y2="50" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="72" y1="49" x2="72" y2="43" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="82" y1="46" x2="82" y2="40" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="92" y1="46" x2="92" y2="40" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="102" y1="48" x2="102" y2="42" stroke="#2a2a2a" stroke-width="0.6"/>
+  <line x1="112" y1="52" x2="112" y2="46" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- railing rail -->
+  <path d="M58 52 Q72 42 90 42 Q108 42 122 52" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- stone texture on bridge -->
+  <path d="M66 60 Q70 58 74 60" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <path d="M84 52 Q88 50 92 52" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <path d="M100 56 Q104 54 108 56" stroke="#2a2a2a" stroke-width="0.3" opacity="0.5"/>
+  <!-- water surface -->
+  <line x1="0" y1="72" x2="200" y2="72" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <!-- reflection of bridge arch -->
+  <path d="M60 72 Q72 82 90 78 Q108 82 120 72" stroke="#2a2a2a" stroke-width="0.4" opacity="0.2"/>
+  <!-- water ripples -->
+  <path d="M35 76 Q42 74 48 76" stroke="#2a2a2a" stroke-width="0.3" opacity="0.25"/>
+  <path d="M70 80 Q80 78 90 80" stroke="#2a2a2a" stroke-width="0.25" opacity="0.2"/>
+  <path d="M110 78 Q118 76 126 78" stroke="#2a2a2a" stroke-width="0.3" opacity="0.2"/>
+  <path d="M140 76 Q148 74 156 76" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <path d="M50 84 Q58 82 66 84" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <path d="M120 84 Q130 82 140 84" stroke="#2a2a2a" stroke-width="0.25" opacity="0.15"/>
+  <!-- small figure on bridge -->
+  <circle cx="88" cy="40" r="1.2" stroke="#2a2a2a" stroke-width="0.5"/>
+  <line x1="88" y1="41.2" x2="88" y2="46" stroke="#2a2a2a" stroke-width="0.5"/>
+  <!-- willow tree right -->
+  <path d="M165 64 L165 36" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M165 36 Q162 32 163 28" stroke="#2a2a2a" stroke-width="0.6"/>
+  <path d="M165 38 Q158 46 156 56" stroke="#2a2a2a" stroke-width="0.35"/>
+  <path d="M165 37 Q160 44 158 54" stroke="#2a2a2a" stroke-width="0.3"/>
+  <path d="M165 39 Q172 46 174 54" stroke="#2a2a2a" stroke-width="0.3"/>
+  <!-- foreground grass -->
+  <path d="M0 70 Q5 66 8 70" stroke="#2a2a2a" stroke-width="0.4" opacity="0.4"/>
+  <path d="M4 70 Q8 64 12 70" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
+  <path d="M180 70 Q184 66 188 70" stroke="#2a2a2a" stroke-width="0.4" opacity="0.4"/>
+  <path d="M186 70 Q190 65 194 70" stroke="#2a2a2a" stroke-width="0.35" opacity="0.35"/>
 </svg>

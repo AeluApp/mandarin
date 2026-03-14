@@ -4,8 +4,10 @@ import logging
 import random
 import sqlite3
 import time
+import traceback
 from dataclasses import dataclass, field, replace
-from datetime import date
+from datetime import date, datetime, timezone
+from pathlib import Path
 from statistics import mean
 from typing import Callable, List, Optional
 
@@ -20,6 +22,78 @@ from .media import get_media_entry, run_media_comprehension
 from .milestones import get_growth_summary
 
 _STAGE_LABELS = display.STAGE_LABELS
+
+_DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+_DRILL_LOG = _DATA_DIR / "drill_errors.log"
+_SESSION_TRACE = _DATA_DIR / "session_trace.jsonl"
+
+# Dedicated rotating loggers for drill errors and session trace.
+# propagate=False keeps them out of the root logger (no duplicates).
+_drill_error_logger = logging.getLogger("mandarin.drill_errors")
+_drill_error_logger.propagate = False
+
+_trace_logger = logging.getLogger("mandarin.session_trace")
+_trace_logger.propagate = False
+
+_rotating_loggers_initialized = False
+
+
+def _ensure_rotating_loggers():
+    """Lazily attach rotating handlers (avoids import-time file creation)."""
+    global _rotating_loggers_initialized
+    if _rotating_loggers_initialized:
+        return
+    from .log_config import get_rotating_handler
+    _DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    # These loggers format their own content (human-readable text / raw JSONL),
+    # so use a message-only formatter instead of JSONFormatter to avoid
+    # double-wrapping.
+    raw_fmt = logging.Formatter("%(message)s")
+
+    _drill_error_logger.setLevel(logging.DEBUG)
+    _drill_error_logger.addHandler(get_rotating_handler(_DRILL_LOG, formatter=raw_fmt))
+
+    _trace_logger.setLevel(logging.DEBUG)
+    _trace_logger.addHandler(get_rotating_handler(_SESSION_TRACE, formatter=raw_fmt))
+
+    _rotating_loggers_initialized = True
+
+
+def _log_drill_error(drill_type: str, item_id, exc: Exception, context: dict = None):
+    """Append a drill-level error to drill_errors.log with full reproduction context.
+
+    context should include everything needed to reproduce: item data, drill
+    metadata, scaffold level, session state counts, etc.
+    """
+    import json
+    from .log_config import utc_now_iso
+    _ensure_rotating_loggers()
+    tb = traceback.format_exc()
+    ctx_str = ""
+    if context:
+        ctx_str = "\n--- context ---\n" + json.dumps(
+            context, ensure_ascii=False, indent=2, default=str)
+    _drill_error_logger.error(
+        "\n%s\n%s  drill_type=%s  item_id=%s\n%s%s",
+        "=" * 60, utc_now_iso(), drill_type, item_id, tb, ctx_str,
+    )
+    logger.error("drill %s (item %s) crashed: %s", drill_type, item_id, exc)
+
+
+def _trace(session_id: int, event: str, **kwargs):
+    """Append a structured event to session_trace.jsonl — flight recorder for debugging."""
+    import json
+    from .log_config import utc_now_iso
+    _ensure_rotating_loggers()
+    entry = {
+        "ts": utc_now_iso(),
+        "session": session_id,
+        "event": event,
+    }
+    entry.update(kwargs)
+    _trace_logger.info("%s", json.dumps(entry, ensure_ascii=False))
+
 
 _DRILL_DESCRIPTIONS = {
     "mc": "What does this mean?",
@@ -46,6 +120,9 @@ _DRILL_DESCRIPTIONS = {
     "speaking": "Speak the phrase aloud",
     "transfer": "Apply in a new context",
     "measure_word": "Which measure word?",
+    "measure_word_cloze": "Fill in the measure word",
+    "measure_word_production": "Type the measure word",
+    "measure_word_disc": "Which noun uses this MW?",
     "word_order": "Arrange the words",
     "sentence_build": "Build the sentence",
     "particle_disc": "Which particle?",
@@ -56,6 +133,14 @@ _DRILL_DESCRIPTIONS = {
     "synonym_disc": "Which synonym fits?",
     "listening_passage": "Listen to the passage",
     "dictation_sentence": "Write the full sentence",
+    "number_system": "Express this in Chinese",
+    "tone_sandhi": "How is this pronounced?",
+    "complement": "Fill in the complement",
+    "ba_bei": "把 or 被?",
+    "collocation": "Which verb fits?",
+    "radical": "Identify the radical",
+    "error_correction": "Find the error",
+    "chengyu": "Four-character idiom",
 }
 
 
@@ -91,11 +176,16 @@ class SessionState:
 
 def run_session(conn, plan: SessionPlan,
                 show_fn: Callable, input_fn: Callable,
-                user_id: int = 1) -> SessionState:
+                user_id: int = 1,
+                progress_fn: Optional[Callable] = None,
+                drill_meta_fn: Optional[Callable] = None,
+                client_platform: str = "cli") -> SessionState:
     """Run a complete session from a plan.
 
     show_fn(text): display text to user
     input_fn(prompt) -> str: get user input
+    progress_fn(session_id, drill_index, drill_total, correct, completed, session_type):
+        optional callback after each drill for progress checkpointing
 
     Returns the final SessionState with all results.
     """
@@ -108,6 +198,8 @@ def run_session(conn, plan: SessionPlan,
         session_type=plan.session_type,
         items_planned=len(plan.drills),
         user_id=user_id,
+        client_platform=client_platform,
+        experiment_variant=getattr(plan, 'experiment_variant', None),
         plan_snapshot={
             "type": plan.session_type,
             "n_drills": len(plan.drills),
@@ -131,6 +223,12 @@ def run_session(conn, plan: SessionPlan,
 
     state = SessionState(session_id=session_id, plan=plan)
 
+    _trace(session_id, "session_start",
+           n_drills=len(plan.drills),
+           session_type=plan.session_type,
+           micro_plan=plan.micro_plan,
+           drill_types=[d.drill_type for d in plan.drills])
+
     # Cross-session interleaving: store mapping groups used
     if hasattr(plan, '_mapping_groups_used') and plan._mapping_groups_used:
         try:
@@ -151,9 +249,17 @@ def run_session(conn, plan: SessionPlan,
     avg_level = mean(profile.get(k, 1.0) or 1.0 for k in level_keys)
     prominent = avg_level < 6.0
 
+    # Speaking level for tone leniency scaling
+    speaking_level = profile.get("level_speaking", 1.0) or 1.0
+
     # Audio: default ON on macOS; profile setting overrides only if explicitly 0
-    from .audio import is_audio_available
+    from .audio import is_audio_available, get_tts_rate, set_default_rate
     audio_enabled = profile.get("audio_enabled", 1) != 0 and is_audio_available()
+    if audio_enabled:
+        listening_level = profile.get("level_listening", 1.0) or 1.0
+        # Adaptive TTS: slower for beginners, natural speed for advanced
+        base_rate = get_tts_rate("sample", listening_level)
+        set_default_rate(base_rate)
 
     # ── Session opening: the mark, then context ──
     show_fn("\n  [dim]漫[/dim]")
@@ -187,7 +293,15 @@ def run_session(conn, plan: SessionPlan,
 
     if start_input == "Q":
         state.early_exit = True
-        _finalize(conn, state, show_fn, input_fn=input_fn, pre_milestones=pre_milestones, user_id=user_id)
+        try:
+            _finalize(conn, state, show_fn, input_fn=input_fn, pre_milestones=pre_milestones, user_id=user_id)
+        except Exception as exc:
+            _log_drill_error("_finalize", state.session_id, exc, context={
+                "items_completed": state.items_completed,
+                "phase": "early_quit",
+            })
+            show_fn(f"\n  Session saved: {state.items_correct}/{state.items_completed}")
+            show_fn(f"  (summary error logged to data/drill_errors.log)")
         return state
 
     if start_input == "M":
@@ -209,9 +323,13 @@ def run_session(conn, plan: SessionPlan,
     confidence_builders_used = 0
     MAX_CONFIDENCE_BUILDERS = 2
 
+    # Per-item miss count for failure escalation (Doctrine §3: tiered feedback)
+    _item_miss_count = {}  # content_item_id -> int
+
     # Phase 10: Within-session difficulty adaptation
     scaffold_adjusted = False
     seen_drill_types = set()  # Session-scoped for first-encounter hints
+    pending_insertions = []  # (offset_from_i, drill) pairs queued during the loop
     i = 0
     while i < len(plan.drills):
         drill = plan.drills[i]
@@ -227,7 +345,7 @@ def run_session(conn, plan: SessionPlan,
                 if mid_pct >= 0.8:
                     show_fn("\n  ── Halfway through. ──")
                 elif mid_pct < 0.5:
-                    show_fn("\n  ── Difficult stretch. ──")
+                    show_fn("\n  ── Halfway through. ──")
 
         # Modality transition — subtle visual break on mode switch
         if last_modality and drill.modality != last_modality:
@@ -254,32 +372,49 @@ def run_session(conn, plan: SessionPlan,
         if drill.drill_type == "dialogue":
             scenario_id = drill.metadata.get("scenario_id")
             if not scenario_id:
-                show_fn("  (scenario unavailable, skipping)")
+                show_fn("  Moving on\u2026")
                 i += 1
                 continue
             scenario = get_scenario_by_id(conn, scenario_id)
             if not scenario:
-                show_fn("  (scenario not found, skipping)")
+                show_fn("  Moving on\u2026")
                 i += 1
                 continue
             support_level = drill.metadata.get("support_level", "full_support")
-            result = run_dialogue_drill(scenario, show_fn, input_fn, support_level=support_level, conn=conn)
+            try:
+                result = run_dialogue_drill(scenario, show_fn, input_fn, support_level=support_level, conn=conn)
+            except Exception as exc:
+                _log_drill_error("dialogue", scenario_id, exc, context={
+                    "scenario_id": scenario_id,
+                    "scenario_title": scenario.get("title", "?"),
+                    "support_level": support_level,
+                    "n_turns": len(scenario.get("tree", {}).get("turns", [])),
+                    "metadata": drill.metadata,
+                    "session_index": i,
+                })
+                show_fn("  Moving on\u2026")
+                i += 1
+                continue
             if result.score is not None:
                 record_scenario_attempt(conn, scenario_id, result.score)
 
             if result.skipped and result.user_answer.upper() == "Q":
                 state.early_exit = True
                 state.results.append(result)
+                _trace(session_id, "drill_quit", index=i, drill_type="dialogue")
                 break
             if result.skipped and result.user_answer.upper() == "B":
                 state.boredom_flags += 1
                 show_fn("  (Noted)")
+                _trace(session_id, "drill_skip", index=i, drill_type="dialogue")
                 i += 1
                 continue
 
             state.results.append(result)
-            if result.correct:
-                show_fn("  ✓")
+            _trace(session_id, "drill_done", index=i, drill_type="dialogue",
+                   correct=result.correct, score=result.score,
+                   user_answer=result.user_answer[:80])
+            # Dialogue already shows "Dialogue score: N%" — no need for a separate ✓
             i += 1
             continue
 
@@ -287,27 +422,43 @@ def run_session(conn, plan: SessionPlan,
         if drill.drill_type == "media_comprehension":
             mid = drill.metadata.get("media_id")
             if not mid:
-                show_fn("  (media entry unavailable, skipping)")
+                show_fn("  Moving on\u2026")
                 i += 1
                 continue
             entry = get_media_entry(mid)
             if not entry:
-                show_fn("  (media entry not found, skipping)")
+                show_fn("  Moving on\u2026")
                 i += 1
                 continue
-            result = run_media_comprehension(entry, show_fn, input_fn, conn=conn)
+            try:
+                result = run_media_comprehension(entry, show_fn, input_fn, conn=conn)
+            except Exception as exc:
+                _log_drill_error("media_comprehension", mid, exc, context={
+                    "media_id": mid,
+                    "entry": dict(entry) if entry else None,
+                    "metadata": drill.metadata,
+                    "session_index": i,
+                })
+                show_fn("  Moving on\u2026")
+                i += 1
+                continue
 
             if result.skipped and result.user_answer.upper() == "Q":
                 state.early_exit = True
                 state.results.append(result)
+                _trace(session_id, "drill_quit", index=i, drill_type="media_comprehension")
                 break
             if result.skipped and result.user_answer.upper() == "B":
                 state.boredom_flags += 1
                 show_fn("  (Noted)")
+                _trace(session_id, "drill_skip", index=i, drill_type="media_comprehension")
                 i += 1
                 continue
 
             state.results.append(result)
+            _trace(session_id, "drill_done", index=i, drill_type="media_comprehension",
+                   correct=result.correct, score=result.score,
+                   user_answer=result.user_answer[:80])
             if result.correct:
                 show_fn("  ✓")
             i += 1
@@ -320,15 +471,20 @@ def run_session(conn, plan: SessionPlan,
         ).fetchone()
 
         if not item:
-            show_fn("  (item unavailable, skipping)")
+            show_fn("  Moving on\u2026")
             i += 1
             continue
 
         item = dict(item)
 
+        # Inject drill metadata into item dict for drills that need it
+        if drill.drill_type == "contrastive" and "contrastive_partner_id" in drill.metadata:
+            item["contrastive_partner_id"] = drill.metadata["contrastive_partner_id"]
+
         # Run the drill with timing and gradient scaffold
         drill_start = time.monotonic()
         scaffold_level = drill.metadata.get("scaffold_level", "none")
+        english_level = drill.metadata.get("english_level", "full")
         show_pinyin = scaffold_level == "full_pinyin"
 
         # Phase 10: Within-session difficulty adaptation
@@ -336,13 +492,17 @@ def run_session(conn, plan: SessionPlan,
             non_skipped = [r for r in state.results if not r.skipped]
             if non_skipped:
                 running_acc = sum(1 for r in non_skipped if r.correct) / len(non_skipped)
-                from .config import SCAFFOLD_ORDER
+                from .config import SCAFFOLD_ORDER, ENGLISH_ORDER
                 if running_acc < 0.5 and len(non_skipped) >= 4:
                     # Upgrade scaffold: more support
                     idx = SCAFFOLD_ORDER.index(scaffold_level) if scaffold_level in SCAFFOLD_ORDER else 0
                     if idx < len(SCAFFOLD_ORDER) - 1:
                         scaffold_level = SCAFFOLD_ORDER[idx + 1]
                         show_pinyin = scaffold_level == "full_pinyin"
+                    # Upgrade english: more support
+                    eng_idx = ENGLISH_ORDER.index(english_level) if english_level in ENGLISH_ORDER else 0
+                    if eng_idx < len(ENGLISH_ORDER) - 1:
+                        english_level = ENGLISH_ORDER[eng_idx + 1]
                     scaffold_adjusted = True
                     logger.debug("scaffold upgraded mid-session, accuracy=%.0f%%", running_acc * 100)
                 elif running_acc > 0.9 and len(non_skipped) >= 6:
@@ -351,6 +511,10 @@ def run_session(conn, plan: SessionPlan,
                     if idx > 0:
                         scaffold_level = SCAFFOLD_ORDER[idx - 1]
                         show_pinyin = scaffold_level == "full_pinyin"
+                    # Downgrade english: less support
+                    eng_idx = ENGLISH_ORDER.index(english_level) if english_level in ENGLISH_ORDER else 0
+                    if eng_idx > 0:
+                        english_level = ENGLISH_ORDER[eng_idx - 1]
                     scaffold_adjusted = True
                     logger.debug("scaffold downgraded mid-session, accuracy=%.0f%%", running_acc * 100)
 
@@ -361,11 +525,11 @@ def run_session(conn, plan: SessionPlan,
                 running_acc = sum(1 for r in non_skipped if r.correct) / len(non_skipped)
                 if running_acc < 0.4:
                     state._struggle_pivoted = True
-                    show_fn("\n  ── Shifting to review. ──")
+                    show_fn("\n  ── A few familiar faces next. ──")
                     # Replace remaining drills with confidence wins (high-streak items)
                     remaining_count = len(plan.drills) - i
                     if remaining_count > 3:
-                        # Keep only 3 more drills, all confidence wins
+                        # Keep only 3 more drills, preferring confidence wins
                         conf_drills = [d for d in plan.drills[i:] if d.is_confidence_win]
                         if len(conf_drills) < 3:
                             # Also include items the learner got right this session
@@ -377,22 +541,56 @@ def run_session(conn, plan: SessionPlan,
                                         break
                         if conf_drills:
                             plan.drills[i:] = conf_drills[:3]
+                        else:
+                            # No confidence wins available — keep next 3 original drills
+                            plan.drills[i:] = plan.drills[i:i + 3]
+                    _trace(session_id, "struggle_pivot", index=i,
+                           accuracy=round(running_acc, 2),
+                           remaining_after=len(plan.drills) - i)
                     logger.debug("struggle pivot at item %d, accuracy=%.0f%%", i, running_acc * 100)
 
-        result = run_drill(drill.drill_type, item, conn, show_fn, input_fn,
-                          prominent=prominent, audio_enabled=audio_enabled,
-                          show_pinyin=show_pinyin, scaffold_level=scaffold_level)
+        try:
+            result = run_drill(drill.drill_type, item, conn, show_fn, input_fn,
+                              prominent=prominent, audio_enabled=audio_enabled,
+                              show_pinyin=show_pinyin, scaffold_level=scaffold_level,
+                              english_level=english_level,
+                              speaking_level=speaking_level)
+        except Exception as exc:
+            _log_drill_error(drill.drill_type, drill.content_item_id, exc, context={
+                "item": item,
+                "drill_type": drill.drill_type,
+                "modality": drill.modality,
+                "hanzi": drill.hanzi,
+                "metadata": drill.metadata,
+                "scaffold_level": scaffold_level,
+                "english_level": english_level,
+                "show_pinyin": show_pinyin,
+                "audio_enabled": audio_enabled,
+                "session_index": i,
+                "items_completed": state.items_completed,
+                "items_correct": state.items_correct,
+            })
+            show_fn("  Moving on\u2026")
+            _trace(session_id, "drill_crash", index=i,
+                   drill_type=drill.drill_type, item_id=drill.content_item_id,
+                   hanzi=drill.hanzi, error=str(exc)[:200])
+            i += 1
+            continue
         drill_ms = int((time.monotonic() - drill_start) * 1000)
 
         # Check for special commands
         if result.skipped and result.user_answer.upper() == "Q":
             state.early_exit = True
             state.results.append(result)
+            _trace(session_id, "drill_quit", index=i,
+                   drill_type=drill.drill_type, hanzi=drill.hanzi)
             break
 
         if result.skipped and result.user_answer.upper() == "B":
             state.boredom_flags += 1
             show_fn("  (Noted)")
+            _trace(session_id, "drill_skip", index=i,
+                   drill_type=drill.drill_type, hanzi=drill.hanzi)
             i += 1
             continue
 
@@ -408,32 +606,66 @@ def run_session(conn, plan: SessionPlan,
             correct=result.correct,
             session_id=session_id,
             error_type=result.error_type,
+            error_cause=getattr(result, "error_cause", None),
             user_answer=result.user_answer,
             expected_answer=result.expected_answer,
             drill_type=drill.drill_type,
             confidence=result.confidence,
             response_ms=drill_ms,
             user_id=user_id,
+            metadata=result.metadata,
         )
 
         state.results.append(result)
+
+        # Send drill metadata to web UI for override support
+        if drill_meta_fn:
+            try:
+                drill_meta_fn(
+                    content_item_id=drill.content_item_id,
+                    modality=record_modality,
+                    correct=result.correct,
+                    hanzi=drill.hanzi or "",
+                    error_type=result.error_type or "",
+                    requirement_ref=result.requirement_ref,
+                )
+            except Exception:
+                logger.debug("drill_meta_fn callback failed", exc_info=True)
+
+        _trace(session_id, "drill_done", index=i,
+               drill_type=drill.drill_type, hanzi=drill.hanzi,
+               item_id=drill.content_item_id,
+               correct=result.correct, confidence=result.confidence,
+               user_answer=result.user_answer[:80],
+               expected=result.expected_answer[:80],
+               error_type=result.error_type,
+               ms=drill_ms)
 
         # Incremental save — persist progress after each drill
         db.update_session_progress(conn, session_id,
                                    state.items_completed, state.items_correct)
 
+        # Notify client for checkpoint persistence
+        if progress_fn:
+            try:
+                progress_fn(session_id, i + 1, len(plan.drills),
+                            state.items_correct, state.items_completed,
+                            plan.session_type)
+            except Exception:
+                logger.debug("progress_fn callback failed", exc_info=True)
+
         # Within-session re-insertion: re-present failed items after a short delay
         # (Landauer & Bjork 1978 expanding retrieval practice)
+        # Queued for insertion after index advances to avoid mid-loop mutation.
         if (not result.correct and not result.skipped
                 and result.confidence == "full"
                 and not drill.metadata.get("retry")
                 and retry_insertions < MAX_RETRY_INSERTIONS):
             retry_drill = replace(drill, metadata={**drill.metadata, "retry": True})
-            insert_pos = min(i + 4, len(plan.drills))
-            plan.drills.insert(insert_pos, retry_drill)
+            pending_insertions.append((4, retry_drill))
             retry_insertions += 1
-            logger.debug("re-inserted %s at position %d (%d/%d retries)",
-                         drill.hanzi, insert_pos, retry_insertions, MAX_RETRY_INSERTIONS)
+            logger.debug("queued retry for %s (%d/%d retries)",
+                         drill.hanzi, retry_insertions, MAX_RETRY_INSERTIONS)
 
         # Phase 2: Frustration detection
         if not result.skipped:
@@ -460,8 +692,7 @@ def run_session(conn, plan: SessionPlan,
                             **best_drill.metadata,
                             "confidence_builder": True,
                         })
-                        insert_at = min(i + 2, len(plan.drills))
-                        plan.drills.insert(insert_at, builder)
+                        pending_insertions.append((2, builder))
                         show_fn(display.dim("Quick checkpoint —"))
                         confidence_builders_used += 1
                         consecutive_wrong = 0
@@ -476,10 +707,18 @@ def run_session(conn, plan: SessionPlan,
             if result.feedback:
                 show_fn(result.feedback)
 
-            # Phase 3a: Elaborative interrogation (~15% of correct, non-skipped)
+            # Phase 3a: Elaborative interrogation (generation effect)
+            # Doctrine §1: new items get reflective prompts to build deeper encoding
+            # Higher rate for new items (seen/passed_once: 40%), lower for established (5%)
+            _elab_row = conn.execute(
+                "SELECT mastery_stage FROM progress WHERE content_item_id = ? AND modality = ? AND user_id = ?",
+                (drill.content_item_id, drill.modality, user_id),
+            ).fetchone()
+            _elab_stage = (_elab_row["mastery_stage"] if _elab_row else "seen") or "seen"
+            _elab_rate = 0.40 if _elab_stage in ("seen", "passed_once") else 0.05
             if (not result.skipped
                     and not drill.metadata.get("confidence_builder")
-                    and random.random() < 0.15):
+                    and random.random() < _elab_rate):
                 from .drills import ELABORATIVE_PROMPTS
                 prompt_template = ELABORATIVE_PROMPTS.get(drill.drill_type)
                 if prompt_template:
@@ -491,18 +730,79 @@ def run_session(conn, plan: SessionPlan,
                         )
                         show_fn(display.elaborative_prompt(prompt))
                     except (KeyError, IndexError):
-                        pass
+                        logger.debug("elaborative prompt format failed", exc_info=True)
         else:
+            # Track per-item miss count for escalation
+            _item_miss_count[drill.content_item_id] = _item_miss_count.get(drill.content_item_id, 0) + 1
+            miss_n = _item_miss_count[drill.content_item_id]
+
             if result.feedback:
                 show_fn(f"  → {result.feedback}")
             else:
-                # Fallback: always show something useful on miss
-                fallback = result.expected_answer or item.get("hanzi", "")
-                show_fn(f"  → {item.get('hanzi', '')} = {fallback}")
+                # Fallback: show correction + distinction (doctrine §3: never just the answer)
+                hanzi = item.get("hanzi", "")
+                pinyin = item.get("pinyin", "")
+                expected = result.expected_answer or hanzi
+                user_ans = result.user_answer or ""
+                if user_ans and user_ans != expected:
+                    show_fn(f"  → {hanzi} ({pinyin}) = {expected}. You chose: {user_ans}")
+                else:
+                    show_fn(f"  → {hanzi} ({pinyin}) = {expected}")
+
+            # Failure escalation tiers (Doctrine §3)
+            # Tier 2: 2nd miss — show context note if available
+            if miss_n >= 2:
+                ctx_note = item.get("context_note")
+                if not ctx_note:
+                    from .context_notes import CONTEXT_NOTES
+                    ctx_note = CONTEXT_NOTES.get(item.get("hanzi", ""))
+                if ctx_note:
+                    show_fn(display.dim_italic(f"  Context: {ctx_note}"))
+            # Tier 3: 3rd+ miss — show full breakdown (hanzi + pinyin + english)
+            if miss_n >= 3:
+                show_fn(display.dim(f"  Full: {item.get('hanzi','')} [{item.get('pinyin','')}] = {item.get('english','')}"))
 
         # Mastery stage indicator — show after each non-skipped drill
         if not result.skipped:
             _show_mastery_stage(conn, drill.content_item_id, drill.modality, show_fn, user_id=user_id)
+
+        # AI error explanation for persistent mistakes
+        if not result.correct and not result.skipped:
+            try:
+                from .ai.error_explanation import generate_error_explanation
+                # Count how many times this item has been wrong
+                times_wrong_row = conn.execute(
+                    "SELECT COUNT(*) as cnt FROM error_log WHERE content_item_id = ?",
+                    (drill.content_item_id,),
+                ).fetchone()
+                times_wrong = (times_wrong_row["cnt"] if times_wrong_row else 0) or 0
+                explanation = generate_error_explanation(
+                    conn,
+                    item_id=str(drill.content_item_id),
+                    correct_answer=result.expected_answer,
+                    wrong_answer=result.user_answer,
+                    item_content=dict(item),
+                    error_type=result.error_type or "",
+                    times_wrong=times_wrong,
+                    learner_hsk_level=max(int(profile.get("level_reading", 1) or 1), 1),
+                )
+                if explanation:
+                    result.feedback = f"{result.feedback}\n\n{explanation}" if result.feedback else explanation
+                    # Mark the most recent review event for this item as explanation-shown
+                    try:
+                        conn.execute("""
+                            UPDATE review_event SET explanation_shown = 1
+                            WHERE id = (
+                                SELECT id FROM review_event
+                                WHERE content_item_id = ? AND user_id = ?
+                                ORDER BY created_at DESC LIMIT 1
+                            )
+                        """, (drill.content_item_id, user_id))
+                        conn.commit()
+                    except Exception:
+                        pass
+            except Exception:
+                pass  # Never block drill flow for AI
 
         # Audio: speak correct answer after miss
         if audio_enabled and not result.correct and not result.skipped:
@@ -551,6 +851,13 @@ def run_session(conn, plan: SessionPlan,
             state.early_exit = True
             break
 
+        # Apply queued insertions now that this drill is done
+        # Sort by offset descending so later inserts don't shift earlier ones
+        for offset, queued_drill in sorted(pending_insertions, key=lambda x: -x[0]):
+            insert_at = min(i + offset, len(plan.drills))
+            plan.drills.insert(insert_at, queued_drill)
+        pending_insertions.clear()
+
         i += 1
 
     # ── In-session error retry: revisit missed items ──
@@ -560,8 +867,7 @@ def run_session(conn, plan: SessionPlan,
         if not r.correct and not r.skipped and r.confidence == "full"
     ]
     if missed and not state.early_exit:
-        show_fn("\n  ─────────────────────────")
-        show_fn("  Revisiting missed items.\n")
+        show_fn("\n  ── One more look ──\n")
         retry_count = 0
         for orig_result, drill in missed:
             if retry_count >= 3:
@@ -580,8 +886,19 @@ def run_session(conn, plan: SessionPlan,
             _show_drill_label(drill, show_fn, seen_drill_types)
 
             retry_start = time.monotonic()
-            result = run_drill(drill.drill_type, item, conn, show_fn, input_fn,
-                              prominent=prominent, audio_enabled=audio_enabled)
+            try:
+                result = run_drill(drill.drill_type, item, conn, show_fn, input_fn,
+                                  prominent=prominent, audio_enabled=audio_enabled)
+            except Exception as exc:
+                _log_drill_error(drill.drill_type, drill.content_item_id, exc, context={
+                    "item": item,
+                    "drill_type": drill.drill_type,
+                    "modality": drill.modality,
+                    "hanzi": drill.hanzi,
+                    "phase": "retry",
+                })
+                show_fn("  Moving on\u2026")
+                continue
             retry_ms = int((time.monotonic() - retry_start) * 1000)
 
             if result.skipped:
@@ -600,17 +917,40 @@ def run_session(conn, plan: SessionPlan,
                 confidence=result.confidence,
                 response_ms=retry_ms,
                 user_id=user_id,
+                metadata=result.metadata,
             )
 
             state.results.append(result)
             if result.correct:
-                show_fn("  ✓  (got it this time)")
+                show_fn("  ✓  (solid)")
             elif result.feedback:
                 show_fn(f"  → {result.feedback}")
 
             retry_count += 1
 
-    _finalize(conn, state, show_fn, input_fn=input_fn, pre_milestones=pre_milestones, user_id=user_id)
+    try:
+        _finalize(conn, state, show_fn, input_fn=input_fn, pre_milestones=pre_milestones, user_id=user_id)
+    except Exception as exc:
+        _log_drill_error("_finalize", state.session_id, exc, context={
+            "items_completed": state.items_completed,
+            "items_correct": state.items_correct,
+            "early_exit": state.early_exit,
+            "n_results": len(state.results),
+            "drill_types_seen": list({r.drill_type for r in state.results}),
+        })
+        total = state.items_completed
+        correct = state.items_correct
+        show_fn(f"\n  Session saved: {correct}/{total}")
+        show_fn(f"  (summary error logged to data/drill_errors.log)")
+
+    elapsed_s = time.monotonic() - session_start
+    _trace(session_id, "session_end",
+           completed=state.items_completed,
+           correct=state.items_correct,
+           planned=len(plan.drills),
+           early_exit=state.early_exit,
+           boredom_flags=state.boredom_flags,
+           elapsed_s=round(elapsed_s, 1))
 
     # ── Session metrics (observability) ──
     try:
@@ -624,7 +964,38 @@ def run_session(conn, plan: SessionPlan,
         logger.warning("session metrics failed for session %d: %s", state.session_id, e)
         show_fn(display.hint("session metrics unavailable"))
 
+    # ── Update interference pair drill timestamps for cross-session spacing ──
+    try:
+        drilled_ids = [r.content_item_id for r in state.results]
+        if drilled_ids:
+            _update_interference_drill_times(conn, drilled_ids)
+    except Exception:
+        logger.debug("interference pair timestamp update failed", exc_info=True)
+
+    # ── Post-session anomaly summary ──
+    _show_anomaly_summary(state, plan, elapsed_s, session_id, show_fn)
+
     return state
+
+
+def _update_interference_drill_times(conn, drilled_item_ids: list) -> None:
+    """Update interference_pairs timestamps after a session for cross-session spacing."""
+    if not drilled_item_ids:
+        return
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    placeholders = ",".join("?" * len(drilled_item_ids))
+    try:
+        conn.execute(f"""
+            UPDATE interference_pairs SET last_item_a_drilled = ?
+            WHERE item_id_a IN ({placeholders})
+        """, [now] + drilled_item_ids)
+        conn.execute(f"""
+            UPDATE interference_pairs SET last_item_b_drilled = ?
+            WHERE item_id_b IN ({placeholders})
+        """, [now] + drilled_item_ids)
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass  # Columns not yet migrated
 
 
 def _get_cadence(conn, user_id: int = 1) -> Optional[int]:
@@ -737,8 +1108,56 @@ def _show_drill_label(drill: DrillItem, show_fn: Callable,
         show_fn(display.hint(desc))
 
 
-def _finalize(conn, state: SessionState, show_fn: Callable,
-              input_fn: Callable = None, pre_milestones: set = None,
+def _show_anomaly_summary(state: SessionState, plan: SessionPlan,
+                          elapsed_s: float, session_id: int,
+                          show_fn: Callable) -> None:
+    """Print a visible debug summary if anything unusual happened during the session."""
+    anomalies = []
+
+    # Check for drill crashes (logged to drill_errors.log)
+    try:
+        if _DRILL_LOG.exists():
+            import json as _json
+            # Check session_trace for crash events from this session
+            if _SESSION_TRACE.exists():
+                with open(_SESSION_TRACE) as f:
+                    crashes = [
+                        _json.loads(line) for line in f
+                        if line.strip()
+                        and _json.loads(line).get("session") == session_id
+                        and _json.loads(line).get("event") == "drill_crash"
+                    ]
+                if crashes:
+                    anomalies.append(f"{len(crashes)} drill(s) crashed — see data/drill_errors.log")
+    except (OSError, ValueError):
+        pass
+
+    # Skips
+    skipped = sum(1 for r in state.results if r.skipped)
+    if skipped:
+        anomalies.append(f"{skipped} drill(s) skipped")
+
+    # Struggle pivot
+    if getattr(state, '_struggle_pivoted', False):
+        anomalies.append("struggle pivot triggered (accuracy < 40%)")
+
+    # Session shorter than planned
+    planned = len(plan.drills)
+    completed = state.items_completed
+    if planned > 0 and completed < planned * 0.7 and not state.early_exit:
+        anomalies.append(f"only {completed}/{planned} drills completed")
+
+    # Unusually long session
+    if elapsed_s > 900:  # 15+ minutes
+        anomalies.append(f"session took {int(elapsed_s // 60)} minutes")
+
+    if anomalies:
+        show_fn(display.dim(f"\n  [debug] {' · '.join(anomalies)}"))
+
+
+def _finalize(conn: sqlite3.Connection, state: SessionState,
+              show_fn: Callable, input_fn: Callable = None,
+              pre_milestones: set = None,
               user_id: int = 1) -> None:
     """End the session and show summary.
 
@@ -796,8 +1215,7 @@ def _finalize(conn, state: SessionState, show_fn: Callable,
     # ── Core line 3: Cadence ──
     cadence = _get_cadence(conn, user_id=user_id)
     if cadence is not None and cadence > 0:
-        cadence_display = "7+" if cadence > 7 else str(cadence)
-        show_fn(f"  Practicing ~{cadence_display}x/week")
+        show_fn(f"  Practicing ~{cadence}x/week")
 
     # ── Confidence calibration — metacognitive feedback ──
     _show_confidence_calibration(state, show_fn)
@@ -819,14 +1237,25 @@ def _finalize(conn, state: SessionState, show_fn: Callable,
     # ── Early exit message ──
     if state.early_exit:
         show_fn(f"\n  Short session — {correct}/{total} saved.")
+        # Lifecycle: drill_abandonment
+        try:
+            from .marketing_hooks import log_lifecycle_event
+            last_type = state.results[-1].get("drill_type", "unknown") if state.results else "unknown"
+            log_lifecycle_event("drill_abandonment", user_id=str(user_id), conn=conn,
+                                last_drill_type=last_type,
+                                completed=state.items_completed,
+                                planned=len(state.plan.drills) if state.plan else 0)
+        except Exception:
+            pass
 
     # ── HSK progression prompt — actionable, show immediately ──
     next_hsk = db.should_suggest_next_hsk(conn)
     if next_hsk:
         mastery = db.get_mastery_by_hsk(conn, user_id=user_id)
-        max_level = max(mastery.keys())
-        pct = mastery[max_level]["pct"]
-        show_fn(f"\n  HSK 1-{max_level}: {pct:.0f}% mastered.")
+        if mastery:
+            max_level = max(mastery.keys())
+            pct = mastery[max_level]["pct"]
+            show_fn(f"\n  HSK 1-{max_level}: {pct:.0f}% progress.")
         show_fn(f"  Load HSK {next_hsk}: mandarin add-hsk {next_hsk}")
 
     # ── Calibration prompt (sessions 3-5, and periodically if uncalibrated) ──
@@ -854,17 +1283,12 @@ def _finalize(conn, state: SessionState, show_fn: Callable,
             parts.append(f"{t['hanzi']} ({from_l} → {to_l})")
         show_fn(display.dim(f"Strengthened: {', '.join(parts)}"))
 
-    # ── Collapsible details — secondary signals behind [d] prompt ──
+    # ── Session details — show automatically ──
     detail_lines = _build_detail_lines(conn, state, cadence, user_id=user_id)
-    if detail_lines and input_fn:
+    if detail_lines:
         show_fn("")
-        try:
-            d_input = input_fn("  Enter to finish, d for details: ").strip().lower()
-        except (EOFError, KeyboardInterrupt):
-            d_input = ""
-        if d_input == "d":
-            for line in detail_lines:
-                show_fn(line)
+        for line in detail_lines:
+            show_fn(line)
 
     # ── Monthly snapshot (every 30 sessions) ──
     if total_sessions > 0 and total_sessions % 30 == 0:
@@ -874,8 +1298,8 @@ def _finalize(conn, state: SessionState, show_fn: Callable,
     if total > 0:
         _show_real_world_task(conn, state, show_fn)
 
-    # ── Post-session behavioral nudges ──
-    if input_fn and total > 0:
+    # ── Post-session behavioral nudges (skip on early exit — user wants to stop) ──
+    if input_fn and total > 0 and not state.early_exit:
         _post_session_nudges(conn, show_fn, input_fn, user_id=user_id)
 
     show_fn("")
@@ -985,15 +1409,8 @@ def _build_detail_lines(conn, state: SessionState, cadence, user_id: int = 1) ->
         resolved_parts = [r['hanzi'] for r in resolved]
         lines.append(f"  Resolved: {', '.join(resolved_parts)}")
 
-    # Stage transitions
-    transitions = db.get_stage_transitions(conn, state.session_id, user_id=user_id)
-    if transitions:
-        parts = []
-        for t in transitions[:5]:
-            from_l = _STAGE_LABELS.get(t["from"], t["from"])
-            to_l = _STAGE_LABELS.get(t["to"], t["to"])
-            parts.append(f"{t['hanzi']} ({from_l} → {to_l})")
-        lines.append(f"  Strengthened: {', '.join(parts)}")
+    # Stage transitions — already shown in main _finalize flow (line ~1166),
+    # so omit here to avoid duplicate "Strengthened:" lines.
 
     # Consistency messaging
     profile = db.get_profile(conn, user_id=user_id)

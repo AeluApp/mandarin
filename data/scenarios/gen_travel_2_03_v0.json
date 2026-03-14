@@ -1,0 +1,88 @@
+{
+    "title": "The Gate Change Sprint",
+    "title_zh": "换登机口",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_2_03_v0",
+    "tree": {
+        "setup": "An airport terminal. You're sitting at Gate 12 when an announcement says your flight has moved to Gate 28 -- at the opposite end of the terminal. An airline staff member, Xiao Song, is standing near the gate with a walkie-talkie and the calm composure of someone who has redirected thousands of confused passengers.",
+        "setup_zh": "机场航站楼。你坐在12号登机口，广播说航班换到28号登机口——在航站楼另一头。航空公司的工作人员小宋拿着对讲机站在登机口旁边，一脸从容，引导过上千个困惑的旅客。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，去北京的航班换到28号登机口了。往那边走。",
+                "text_pinyin": "nín hǎo, qù běijīng de hángbān huàn dào èrshíbā hào dēngjīkǒu le. wǎng nàbiān zǒu.",
+                "text_en": "Hello, the Beijing flight has moved to Gate 28. Walk that way."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about the change.",
+                "options": [
+                    {
+                        "text_zh": "28号登机口远不远？飞机几点起飞？",
+                        "text_pinyin": "èrshíbā hào dēngjīkǒu yuǎn bu yuǎn? fēijī jǐ diǎn qǐfēi?",
+                        "text_en": "Is Gate 28 far? What time does the plane depart?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Song checks her list.「走路大概十分钟。起飞时间没变，还是三点半。不用跑。」远不远 asks about distance. 起飞 is 'take off.'"
+                    },
+                    {
+                        "text_zh": "为什么换登机口了？",
+                        "text_pinyin": "wèishénme huàn dēngjīkǒu le?",
+                        "text_en": "Why was the gate changed?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Song smiles with polished diplomacy.「机场调整。」She doesn't know the real reason either. Nobody ever does. 为什么 is 'why.'"
+                    },
+                    {
+                        "text_zh": "航班会不会晚点？",
+                        "text_pinyin": "hángbān huì bu huì wǎndiǎn?",
+                        "text_en": "Will the flight be delayed?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「目前没有延误。」Xiao Song says this with the cautious optimism of someone who has seen things change at the last minute. 会不会 asks about possibility."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "别担心，时间够的。您慢慢走过去就行。",
+                "text_pinyin": "bié dānxīn, shíjiān gòu de. nín mànman zǒu guòqù jiù xíng.",
+                "text_en": "Don't worry, there's enough time. Just walk over at your own pace."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and head to the new gate.",
+                "options": [
+                    {
+                        "text_zh": "谢谢！28号往右走对吧？",
+                        "text_pinyin": "xièxie! èrshíbā hào wǎng yòu zǒu duì ba?",
+                        "text_en": "Thanks! Gate 28 is to the right, correct?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Song points right and nods.「对，一直走，跟着指示牌就行。」Confirming direction before walking prevents another detour. 跟着 means 'follow.'"
+                    },
+                    {
+                        "text_zh": "好的，谢谢你！",
+                        "text_pinyin": "hǎo de, xièxie nǐ!",
+                        "text_en": "OK, thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Song nods and turns to the next confused passenger. She'll be doing this for another three hours."
+                    },
+                    {
+                        "text_zh": "可以帮我看一下行李吗？我去找咖啡。",
+                        "text_pinyin": "kěyǐ bāng wǒ kàn yíxià xíngli ma? wǒ qù zhǎo kāfēi.",
+                        "text_en": "Can you watch my luggage? I need to find coffee.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Song blinks. Your flight leaves in 90 minutes and you just changed gates and now you want coffee.「先去登机口吧，那边也有咖啡。」Priorities."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Gate changes (换登机口) are common in Chinese airports. Announcements are made in Chinese and English. Always check the departure screens (航班信息屏). 指示牌 (zhǐshìpái) are the directional signs -- follow them."
+    }
+}

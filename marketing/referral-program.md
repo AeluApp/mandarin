@@ -1,7 +1,7 @@
 # Referral Program Design
 
 **Program type:** User-to-user referrals (regular learners inviting friends)
-**Distinct from:** [Affiliate Program](affiliate-program.md) (content creator/partner affiliates, 30% recurring commission)
+**Distinct from:** [Affiliate Program](affiliate-program.md) (content creator/partner affiliates, 25% recurring commission capped at 24 months; 35% for teachers and top partners)
 
 ---
 
@@ -28,7 +28,7 @@ If someone never refers a single person, that is completely fine. The app works 
 Every user with an account gets a unique referral link:
 
 ```
-mandarin.app/r/ABC123
+aelu.app/r/ABC123
 ```
 
 The code is auto-generated at account creation. Users do not choose or customize it. The link is accessible from the Settings page.
@@ -189,7 +189,7 @@ rewarded         Both accounts credited
 
 **POST /api/referral/generate**
 - Called at account creation to generate the user's referral code.
-- Returns: `{ "referral_code": "ABC123", "referral_url": "mandarin.app/r/ABC123" }`
+- Returns: `{ "referral_code": "ABC123", "referral_url": "aelu.app/r/ABC123" }`
 - Idempotent: if the user already has a code, returns the existing one.
 
 **GET /api/referral/status**
@@ -198,7 +198,7 @@ rewarded         Both accounts credited
 ```json
 {
     "referral_code": "ABC123",
-    "referral_url": "mandarin.app/r/ABC123",
+    "referral_url": "aelu.app/r/ABC123",
     "successful_referrals": 3,
     "banked_months": 2,
     "pending_referrals": 1,
@@ -214,7 +214,7 @@ rewarded         Both accounts credited
 
 ### Attribution
 
-When a user visits `mandarin.app/r/ABC123`:
+When a user visits `aelu.app/r/ABC123`:
 
 1. The referral code `ABC123` is stored in `localStorage` under key `ref_code`.
 2. A first-party cookie `ref` is also set with the same value, expiring in 30 days.
@@ -225,7 +225,7 @@ When a user visits `mandarin.app/r/ABC123`:
 
 **First-click attribution.** Consistent with the affiliate program: the first referral link clicked gets credit.
 
-**No conflict with affiliate attribution.** If a user clicks both an affiliate link and a referral link, the affiliate link takes precedence (because the affiliate has a commercial relationship and commission obligations). The referral is not created.
+**No conflict with affiliate attribution.** If a user clicks both an affiliate link and a referral link, the affiliate link takes precedence (because the affiliate has a commercial relationship and commission obligations at 25% recurring, capped at 24 months). The referral is not created.
 
 ---
 
@@ -234,7 +234,7 @@ When a user visits `mandarin.app/r/ABC123`:
 ### Share Message (Pre-Filled for Copy)
 
 ```
-I've been using Mandarin to study Chinese. It's the most honest learning tool
+I've been using Aelu to study Chinese. It's the most honest learning tool
 I've found -- no streaks, no games, just real progress tracking. Try it:
 [referral_url]
 ```
@@ -255,7 +255,7 @@ Banked months: [count]
 
 No action needed.
 
-— Mandarin
+— Aelu
 ```
 
 ### Qualification Email to Referred User
@@ -274,11 +274,11 @@ You now have 30 days of full Pro access. Here's what that includes:
 
 Your trial runs through [date]. After that, you'll have
 free access to HSK 1-2 content, or you can subscribe to Pro
-for $12/month.
+for $14.99/month.
 
 No rush. Study at your own pace.
 
-— Mandarin
+— Aelu
 ```
 
 ### One-Time Referral Reminder
@@ -303,7 +303,7 @@ of Pro.
 
 That's the whole pitch. No pressure.
 
-— Mandarin
+— Aelu
 ```
 
 This message is sent **once.** If the user ignores it, we do not follow up. We do not send a second reminder at 60 days, 90 days, or ever.
@@ -326,12 +326,12 @@ This message is sent **once.** If the user ignores it, we do not follow up. We d
 
 ### Financial Model (Rough)
 
-- Cost per qualified referral to the referrer: 1 month of Pro = $12 in forgone revenue.
-- Cost per qualified referral to the referred user: 30 days of Pro trial = ~$12 in forgone revenue.
-- Total cost per qualified referral: ~$24.
-- If 30% of referred users convert to paid after their trial, each referral generates $12/month ongoing.
+- Cost per qualified referral to the referrer: 1 month of Pro = $14.99 in forgone revenue.
+- Cost per qualified referral to the referred user: 30 days of Pro trial = ~$14.99 in forgone revenue.
+- Total cost per qualified referral: ~$30.
+- If 30% of referred users convert to paid after their trial, each referral generates $14.99/month ongoing.
 - Breakeven: ~2 months of paid subscription per referred user who converts.
-- At 30% conversion, expected value per referral: 0.30 x $12/month x 12 months = $43.20/year, against a $24 cost. Net positive within the first year.
+- At 30% conversion, expected value per referral: 0.30 x $14.99/month x 12 months = $53.96/year, against a $30 cost. Net positive within the first year.
 
 ---
 
@@ -348,7 +348,7 @@ Reasons:
 
 ### How to Announce
 
-1. **In-app notification** to all active users: "You can now invite friends to Mandarin. Find your referral link in Settings."
+1. **In-app notification** to all active users: "You can now invite friends to Aelu. Find your referral link in Settings."
 2. **One email** to all registered users with the same message.
 3. No blog post. No social media campaign. No "launch event."
 

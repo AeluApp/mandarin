@@ -1,0 +1,232 @@
+{
+    "title": "The Return Policy Theologian",
+    "title_zh": "退货神学家",
+    "hsk_level": 6,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 4,
+    "id": "gen_shopping_6_01_v0",
+    "tree": {
+        "setup": "The customer service counter at a department store on the fourth floor, where the afternoon light catches the dust motes drifting between racks of marked-down winter coats. Behind the counter sits Ms. Peng, a woman who has elevated the processing of returns to something approaching liturgy. She examines receipts the way a conservator examines oil paintings — with magnification, reverence, and an eye for forgery. The jacket you bought last week has a zipper that separates from itself like a couple in counseling. You have the receipt. You have the tags. You are, for once, prepared.",
+        "setup_zh": "百货商场四楼的客服柜台，午后的光线照亮了打折冬装货架间飘浮的尘埃。柜台后面坐着彭姐，一位将退货处理提升到近乎宗教仪式高度的女士。她审视收据的方式就像文物修复师审视油画——用放大镜，带着敬畏，还有一双识别伪造的眼睛。你上周买的夹克拉链分离得像正在做婚姻咨询的夫妻。你带了收据，带了吊牌。你这次，难得地，有备而来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问有什么需要帮忙的？",
+                "text_pinyin": "nǐ hǎo, qǐngwèn yǒu shénme xūyào bāngmáng de?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain you want to return a defective jacket.",
+                "options": [
+                    {
+                        "text_zh": "你好，我上周在你们这里买了一件夹克，但是拉链有质量问题，拉上去之后自己会裂开。我想办理退货。这是收据和吊牌。",
+                        "text_pinyin": "nǐ hǎo, wǒ shàng zhōu zài nǐmen zhèlǐ mǎi le yí jiàn jiákè, dànshì lāliàn yǒu zhìliàng wèntí, lā shàngqù zhīhòu zìjǐ huì liè kāi. wǒ xiǎng bànlǐ tuìhuò. zhè shì shōujù hé diàopái.",
+                        "text_en": "Hello, I bought a jacket here last week, but the zipper has a quality issue — it splits open on its own after zipping up. I'd like to process a return. Here's the receipt and tags.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Receipt, tags, specific defect description — Ms. Peng's eyes widen with what can only be described as professional pleasure. A prepared customer is her favorite kind of miracle."
+                    },
+                    {
+                        "text_zh": "我要退这件夹克，拉链坏了。",
+                        "text_pinyin": "wǒ yào tuì zhè jiàn jiákè, lāliàn huài le.",
+                        "text_en": "I want to return this jacket — the zipper's broken.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct and sufficient. She'll ask for the receipt next — the sacred document of retail theology."
+                    },
+                    {
+                        "text_zh": "这件衣服有问题，我不想要了。",
+                        "text_pinyin": "zhè jiàn yīfu yǒu wèntí, wǒ bù xiǎng yào le.",
+                        "text_en": "This clothing has a problem — I don't want it anymore.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Peng needs specifics. 「什么问题？」she asks, pen poised over her form like a doctor awaiting symptoms."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我看一下。收据日期是上周三，还在七天无理由退货期内。不过质量问题的话，即使过了七天也可以处理。我先检查一下拉链。",
+                "text_pinyin": "hǎo de, wǒ kàn yíxià. shōujù rìqī shì shàng zhōusān, hái zài qī tiān wú lǐyóu tuìhuò qī nèi. búguò zhìliàng wèntí de huà, jíshǐ guò le qī tiān yě kěyǐ chǔlǐ. wǒ xiān jiǎnchá yíxià lāliàn.",
+                "text_en": "OK, let me look. The receipt date is last Wednesday — still within the 7-day no-questions-asked return period. But for quality issues, we can process it even after seven days. Let me check the zipper first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Demonstrate the zipper problem.",
+                "options": [
+                    {
+                        "text_zh": "您看，我拉到这里的时候还好，但是一拉到胸口的位置就会自动裂开。我试了好几次都是这样，不是使用不当的问题。",
+                        "text_pinyin": "nín kàn, wǒ lā dào zhèlǐ de shíhòu hái hǎo, dànshì yì lā dào xiōngkǒu de wèizhì jiù huì zìdòng liè kāi. wǒ shì le hǎo jǐ cì dōu shì zhèyàng, búshì shǐyòng bùdāng de wèntí.",
+                        "text_en": "Look — it's fine up to here, but once I zip it to chest height it splits open on its own. I've tried multiple times and it's the same. It's not a usage issue.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Demonstrating the defect while preemptively addressing the 'user error' defense — Ms. Peng nods with the gravity of someone witnessing evidence in court. The zipper obliges by splitting on cue."
+                    },
+                    {
+                        "text_zh": "你拉一下就知道了，拉链根本拉不好。",
+                        "text_pinyin": "nǐ lā yíxià jiù zhīdào le, lāliàn gēnběn lā bù hǎo.",
+                        "text_en": "Just try zipping it — you'll see it doesn't work at all.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She tries it herself. The zipper cooperates with your complaint — it splits at exactly the same spot."
+                    },
+                    {
+                        "text_zh": "反正拉链有问题，你们看着办吧。",
+                        "text_pinyin": "fǎnzhèng lāliàn yǒu wèntí, nǐmen kàn zhe bàn ba.",
+                        "text_en": "Anyway, the zipper has a problem — you figure it out.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Peng's expression doesn't change, but she writes something in her notebook that takes slightly longer than necessary."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "确实是质量问题。我们可以给你两个选择：一是全额退款，退到你的支付账户；二是换同款的另一件，我们会重新检查拉链。你想选哪个？",
+                "text_pinyin": "quèshí shì zhìliàng wèntí. wǒmen kěyǐ gěi nǐ liǎng gè xuǎnzé: yī shì quán'é tuìkuǎn, tuì dào nǐ de zhīfù zhànghù; èr shì huàn tóng kuǎn de lìng yí jiàn, wǒmen huì chóngxīn jiǎnchá lāliàn. nǐ xiǎng xuǎn nǎge?",
+                "text_en": "It's definitely a quality issue. We can offer two options: full refund to your payment account, or exchange for the same item — we'll re-inspect the zipper. Which would you prefer?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose between refund and exchange, and ask about the timeline.",
+                "options": [
+                    {
+                        "text_zh": "我还是想要这件夹克的，款式我很喜欢，所以选换货吧。请问换货需要多长时间？另外，新的那件能不能当面检查一下拉链再拿走？",
+                        "text_pinyin": "wǒ háishi xiǎng yào zhè jiàn jiákè de, kuǎnshì wǒ hěn xǐhuan, suǒyǐ xuǎn huànhuò ba. qǐngwèn huànhuò xūyào duō cháng shíjiān? lìngwài, xīn de nà jiàn néng bu néng dāngmiàn jiǎnchá yíxià lāliàn zài ná zǒu?",
+                        "text_en": "I still want this jacket — I love the style — so I'll go with the exchange. How long will it take? Also, can I inspect the zipper on the new one before taking it?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Requesting an on-the-spot inspection — Ms. Peng approves. 「当然可以，」she says, already reaching for the phone to call the stockroom. A customer who learns from experience."
+                    },
+                    {
+                        "text_zh": "那就退款吧。退款多久能到账？",
+                        "text_pinyin": "nà jiù tuìkuǎn ba. tuìkuǎn duōjiǔ néng dào zhàng?",
+                        "text_en": "I'll take the refund then. How long until it arrives?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean exit. She processes refunds the way some people fold origami — with meditative precision."
+                    },
+                    {
+                        "text_zh": "随便哪个都行，快点就好。",
+                        "text_pinyin": "suíbiàn nǎge dōu xíng, kuài diǎn jiù hǎo.",
+                        "text_en": "Either one is fine — just be quick about it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Peng does not do 'quick.' She does 'thorough.' These are, in her worldview, incompatible virtues."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，换货的话我现在就让仓库拿一件新的上来。大概十分钟。你在这边稍等一下。对了，你用的是微信支付还是支付宝？我需要登记一下支付方式。",
+                "text_pinyin": "hǎo de, huànhuò de huà wǒ xiànzài jiù ràng cāngkù ná yí jiàn xīn de shànglái. dàgài shí fēnzhōng. nǐ zài zhèbiān shāo děng yíxià. duìle, nǐ yòng de shì Wēixìn zhīfù háishi Zhīfùbǎo? wǒ xūyào dēngjì yíxià zhīfù fāngshì.",
+                "text_en": "OK, for the exchange I'll have the warehouse bring up a new one. About ten minutes. Please wait here. Oh — did you pay with WeChat Pay or Alipay? I need to log the payment method."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Answer about payment method and ask about the exchange warranty.",
+                "options": [
+                    {
+                        "text_zh": "我用的是微信支付。请问换的这件新的，保修期是从今天开始算还是从原来购买的日期算？",
+                        "text_pinyin": "wǒ yòng de shì Wēixìn zhīfù. qǐngwèn huàn de zhè jiàn xīn de, bǎoxiū qī shì cóng jīntiān kāishǐ suàn háishi cóng yuánlái gòumǎi de rìqī suàn?",
+                        "text_en": "I used WeChat Pay. For the replacement, does the warranty start from today or from the original purchase date?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A warranty question — Ms. Peng pauses, genuinely surprised. Most customers never ask. 「从今天重新算，」she says, making a note. The warranty resets. You've just gained seven extra days."
+                    },
+                    {
+                        "text_zh": "微信支付的。",
+                        "text_pinyin": "Wēixìn zhīfù de.",
+                        "text_en": "WeChat Pay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She logs it. The form grows another line of her careful handwriting."
+                    },
+                    {
+                        "text_zh": "我忘了，可能是微信吧。",
+                        "text_pinyin": "wǒ wàng le, kěnéng shì Wēixìn ba.",
+                        "text_en": "I forgot — maybe WeChat?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She checks the receipt. It's WeChat. Ms. Peng's filing system never forgets what customers do."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "从今天重新算七天。新的拿上来了，你检查一下拉链。",
+                "text_pinyin": "cóng jīntiān chóngxīn suàn qī tiān. xīn de ná shànglái le, nǐ jiǎnchá yíxià lāliàn.",
+                "text_en": "Seven days starting from today. Here's the new one — please check the zipper."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Inspect the new jacket and confirm satisfaction.",
+                "options": [
+                    {
+                        "text_zh": "我试一下……拉链很顺滑，拉到顶也没有问题。这件没问题，我很满意。谢谢彭姐，麻烦你了！",
+                        "text_pinyin": "wǒ shì yíxià……lāliàn hěn shùnhuá, lā dào dǐng yě méiyǒu wèntí. zhè jiàn méi wèntí, wǒ hěn mǎnyì. xièxie Péng jiě, máfan nǐ le!",
+                        "text_en": "Let me try... the zipper is smooth, no issue even zipped all the way up. This one's perfect — I'm satisfied. Thanks, Ms. Peng, sorry for the trouble!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Testing it on the spot and confirming — Ms. Peng stamps the exchange form with the quiet satisfaction of a notary sealing a treaty. The zipper holds. The liturgy is complete."
+                    },
+                    {
+                        "text_zh": "看起来没问题，谢谢。",
+                        "text_pinyin": "kàn qǐlái méi wèntí, xièxie.",
+                        "text_en": "Looks fine, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She hands you the new receipt. The old one is filed in a folder that will outlive most governments."
+                    },
+                    {
+                        "text_zh": "行，就这件吧。",
+                        "text_pinyin": "xíng, jiù zhè jiàn ba.",
+                        "text_en": "Fine, I'll take this one.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Ms. Peng watches you leave without testing the zipper and makes a small, knowing sound. Some lessons require a second visit."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不客气。这是新的收据，请收好。如果还有任何问题，七天内都可以来找我。",
+                "text_pinyin": "bú kèqi. zhè shì xīn de shōujù, qǐng shōu hǎo. rúguǒ hái yǒu rènhé wèntí, qī tiān nèi dōu kěyǐ lái zhǎo wǒ.",
+                "text_en": "You're welcome. Here's the new receipt — keep it safe. If there are any more issues, come find me within seven days."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and close the interaction.",
+                "options": [
+                    {
+                        "text_zh": "好的，收据我拍个照存手机里。彭姐你处理事情真专业，以后买东西还来你们这层。再见！",
+                        "text_pinyin": "hǎo de, shōujù wǒ pāi gè zhào cún shǒujī lǐ. Péng jiě nǐ chǔlǐ shìqing zhēn zhuānyè, yǐhòu mǎi dōngxi hái lái nǐmen zhè céng. zàijiàn!",
+                        "text_en": "Great, I'll take a photo of the receipt for my phone. Ms. Peng, you're really professional — I'll keep shopping on this floor. Goodbye!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Photographing the receipt — the digital age's version of keeping the sacred text. Ms. Peng allows herself a smile. Professionalism recognized is professionalism rewarded."
+                    },
+                    {
+                        "text_zh": "谢谢，再见！",
+                        "text_pinyin": "xièxie, zàijiàn!",
+                        "text_en": "Thanks, bye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She waves. The next customer approaches. The liturgy begins again."
+                    },
+                    {
+                        "text_zh": "嗯，走了。",
+                        "text_pinyin": "ǹg, zǒu le.",
+                        "text_en": "Mm, I'm off.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Ms. Peng watches you go and straightens her stamp pad. The receipt will be there if you need it. She always is."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese consumer protection law (消费者权益保护法) guarantees a 7-day no-questions-asked return period (七天无理由退货) for most online and in-store purchases. Quality defects (质量问题, zhìliàng wèntí) can often be returned or exchanged beyond this window. Always keep receipts (收据) and tags (吊牌) — they are the liturgical texts of Chinese retail."
+    }
+}

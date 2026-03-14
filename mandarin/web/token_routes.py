@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 
 from flask import Blueprint, request, jsonify
@@ -21,6 +22,7 @@ from ..security import log_security_event, SecurityEvent, Severity
 from ..settings import JWT_ACCESS_EXPIRY_HOURS
 from .api_errors import (
     api_error,
+    api_error_handler,
     AUTH_CREDENTIALS_INVALID,
     AUTH_REFRESH_INVALID,
     AUTH_REQUIRED,
@@ -31,11 +33,14 @@ logger = logging.getLogger(__name__)
 
 token_bp = Blueprint("token", __name__, url_prefix="/api/auth")
 
-# Short-lived MFA tokens: {token_str: (user_id, expiry_timestamp)}
-_mfa_tokens: dict = {}
+
+def _hash_token(token: str) -> str:
+    """Return SHA-256 hex digest of a token string."""
+    return hashlib.sha256(token.encode()).hexdigest()
 
 
 @token_bp.route("/token", methods=["POST"])
+@api_error_handler("Token obtain")
 def obtain_token():
     """Exchange email + password for access + refresh tokens.
 
@@ -64,14 +69,16 @@ def obtain_token():
             ).fetchone()
             if mfa_row and mfa_row["totp_enabled"]:
                 # Issue short-lived MFA token instead of full access
-                import secrets, time
+                import secrets
                 mfa_token = secrets.token_urlsafe(32)
-                _mfa_tokens[mfa_token] = (user_id, time.time() + 300)  # 5 min expiry
-                # Clean expired tokens
-                now = time.time()
-                expired = [k for k, v in _mfa_tokens.items() if v[1] < now]
-                for k in expired:
-                    del _mfa_tokens[k]
+                token_hash = _hash_token(mfa_token)
+                conn.execute(
+                    "INSERT INTO mfa_challenge (user_id, token_hash, expires_at) VALUES (?, ?, datetime('now', '+5 minutes'))",
+                    (user_id, token_hash),
+                )
+                # Clean expired challenges
+                conn.execute("DELETE FROM mfa_challenge WHERE expires_at < datetime('now')")
+                conn.commit()
                 return jsonify({"mfa_required": True, "mfa_token": mfa_token})
 
             access_token = create_access_token(user_id)
@@ -96,6 +103,7 @@ def obtain_token():
 
 
 @token_bp.route("/token/mfa", methods=["POST"])
+@api_error_handler("Token MFA verify")
 def mfa_token():
     """Complete MFA challenge for JWT flow.
 
@@ -103,8 +111,6 @@ def mfa_token():
     Body: {"mfa_token": "...", "code": "..."}
     Returns: full access + refresh tokens on success.
     """
-    import time
-
     data = request.get_json(silent=True) or {}
     mfa_token_str = data.get("mfa_token") or ""
     code = (data.get("code") or "").strip()
@@ -112,15 +118,20 @@ def mfa_token():
     if not mfa_token_str or not code:
         return api_error(VALIDATION_ERROR, "mfa_token and code are required.")
 
-    entry = _mfa_tokens.get(mfa_token_str)
-    if not entry or entry[1] < time.time():
-        _mfa_tokens.pop(mfa_token_str, None)
-        return api_error(AUTH_CREDENTIALS_INVALID, "MFA token expired or invalid.", 401)
-
-    user_id = entry[0]
-
     try:
         with db.connection() as conn:
+            token_hash = _hash_token(mfa_token_str)
+            entry = conn.execute(
+                "SELECT user_id, expires_at FROM mfa_challenge WHERE token_hash = ? AND expires_at > datetime('now')",
+                (token_hash,),
+            ).fetchone()
+            if not entry:
+                # Clean up expired row if it existed
+                conn.execute("DELETE FROM mfa_challenge WHERE token_hash = ?", (token_hash,))
+                conn.commit()
+                return api_error(AUTH_CREDENTIALS_INVALID, "MFA token expired or invalid.", 401)
+
+            user_id = entry["user_id"]
             row = conn.execute(
                 "SELECT totp_secret, totp_backup_codes FROM user WHERE id = ?",
                 (user_id,),
@@ -148,8 +159,8 @@ def mfa_token():
                                    severity=Severity.WARNING)
                 return api_error(AUTH_CREDENTIALS_INVALID, "Invalid MFA code.", 401)
 
-            # MFA passed — issue full tokens
-            _mfa_tokens.pop(mfa_token_str, None)
+            # MFA passed — consume the challenge token
+            conn.execute("DELETE FROM mfa_challenge WHERE token_hash = ?", (token_hash,))
             access_token = create_access_token(user_id)
             raw_refresh, refresh_hash = create_refresh_token()
             store_refresh_token(conn, user_id, refresh_hash)
@@ -175,6 +186,7 @@ def mfa_token():
 
 
 @token_bp.route("/token/refresh", methods=["POST"])
+@api_error_handler("Token refresh")
 def refresh_token():
     """Exchange a refresh token for a new access token.
 
@@ -206,6 +218,7 @@ def refresh_token():
 
 
 @token_bp.route("/token/revoke", methods=["POST"])
+@api_error_handler("Token revoke")
 def revoke_token():
     """Revoke the current user's refresh token (logout).
 
@@ -218,6 +231,7 @@ def revoke_token():
     try:
         with db.connection() as conn:
             revoke_refresh_token(conn, current_user.id)
+            log_security_event(conn, SecurityEvent.LOGOUT, user_id=current_user.id)
             log_security_event(conn, SecurityEvent.TOKEN_REVOKED, user_id=current_user.id)
             return jsonify({"status": "ok"})
     except (ValueError, TypeError, OSError) as e:

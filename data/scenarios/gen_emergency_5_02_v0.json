@@ -1,0 +1,160 @@
+{
+    "title": "The Lost Wallet Odyssey",
+    "title_zh": "钱包漂流记",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_emergency_5_02_v0",
+    "tree": {
+        "setup": "The lobby of the neighborhood police station at 3 PM on a Tuesday, where the afternoon sun streams through windows that haven't been cleaned since the last National Day holiday. You've lost your wallet somewhere between the morning market and the subway station — a distance of roughly 800 meters that now feels like the Silk Road. Officer Ding handles lost-item cases with the methodical determination of an archaeologist on a dig. He has a whiteboard behind his desk tracking the week's lost-and-found items with different colored markers.",
+        "setup_zh": "星期二下午三点，社区派出所的大厅，午后的阳光透过上次国庆假期以来就没擦过的窗户照进来。你在早市和地铁站之间的某个地方丢了钱包——大约八百米的距离，现在感觉像丝绸之路一样漫长。丁警官处理遗失物品的案件带着考古学家般的系统决心。他桌子后面有一块白板，用不同颜色的马克笔记录着本周的失物招领情况。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请坐。什么情况？",
+                "text_pinyin": "nǐ hǎo, qǐng zuò. shénme qíngkuàng?",
+                "text_en": "Hello, please sit. What's the situation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Report your lost wallet.",
+                "options": [
+                    {
+                        "text_zh": "丁警官，您好。我今天上午的钱包丢了。大概十点左右我在和平路的早市买了东西，付完钱以后把钱包放回了口袋。但是到地铁站的时候发现钱包不在了。里面有身份证、银行卡、还有大概五百块现金。",
+                        "text_pinyin": "Dīng jǐngguān, nín hǎo. wǒ jīntiān shàngwǔ de qiánbāo diū le. dàgài shí diǎn zuǒyòu wǒ zài Hépíng Lù de zǎoshì mǎi le dōngxi, fù wán qián yǐhòu bǎ qiánbāo fàng huí le kǒudài. dànshì dào dìtiě zhàn de shíhòu fāxiàn qiánbāo bú zài le. lǐmiàn yǒu shēnfènzhèng, yínháng kǎ, hái yǒu dàgài wǔbǎi kuài xiànjīn.",
+                        "text_en": "Officer Ding, hello. I lost my wallet this morning. Around 10 AM I bought things at the Heping Road morning market and put my wallet back in my pocket after paying. But when I reached the subway station, I noticed it was gone. It had my ID card, bank cards, and about 500 yuan in cash.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Timeline, location, last confirmed sighting, and contents — Officer Ding picks up a green marker. This case is going on the whiteboard."
+                    },
+                    {
+                        "text_zh": "我的钱包丢了，里面有身份证和银行卡。",
+                        "text_pinyin": "wǒ de qiánbāo diū le, lǐmiàn yǒu shēnfènzhèng hé yínháng kǎ.",
+                        "text_en": "I lost my wallet — it had my ID card and bank cards.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Key items mentioned. He'll ask for the details."
+                    },
+                    {
+                        "text_zh": "钱包不见了！",
+                        "text_pinyin": "qiánbāo bújiàn le!",
+                        "text_en": "My wallet's gone!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Ding reaches for his notepad. The investigation begins from scratch."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，先别着急。你已经冻结银行卡了吗？这是第一步。身份证的话我们可以帮你开一个临时证明。钱包是什么样子的？什么颜色、什么材质？",
+                "text_pinyin": "hǎo de, xiān bié zháojí. nǐ yǐjīng dòngjié yínháng kǎ le ma? zhè shì dì yī bù. shēnfènzhèng de huà wǒmen kěyǐ bāng nǐ kāi yí gè línshí zhèngmíng. qiánbāo shì shénme yàngzi de? shénme yánsè, shénme cáizhì?",
+                "text_en": "OK, don't worry yet. Have you already frozen your bank cards? That's step one. For the ID card, we can issue you a temporary certificate. What does your wallet look like? Color, material?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the wallet and your card status.",
+                "options": [
+                    {
+                        "text_zh": "银行卡我来之前已经打电话冻结了。钱包是棕色的皮夹，比较旧了，上面有一个小划痕。里面除了身份证和两张银行卡，还有一张地铁充值卡和一张我女儿的照片。",
+                        "text_pinyin": "yínháng kǎ wǒ lái zhīqián yǐjīng dǎ diànhuà dòngjié le. qiánbāo shì zōngsè de píjiá, bǐjiào jiù le, shàngmiàn yǒu yí gè xiǎo huáhén. lǐmiàn chúle shēnfènzhèng hé liǎng zhāng yínháng kǎ, hái yǒu yì zhāng dìtiě chōngzhí kǎ hé yì zhāng wǒ nǚ'ér de zhàopiàn.",
+                        "text_en": "I already called to freeze my bank cards before coming here. The wallet is a brown leather bifold, fairly worn, with a small scratch on it. Besides the ID and two bank cards, it also has a transit card and a photo of my daughter.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Cards frozen proactively, detailed physical description, and the daughter's photo — Officer Ding writes「棕色皮夹，有划痕」on the whiteboard. The photo detail makes the wallet easier to identify if found."
+                    },
+                    {
+                        "text_zh": "卡已经冻结了。钱包是棕色的，皮的。",
+                        "text_pinyin": "kǎ yǐjīng dòngjié le. qiánbāo shì zōngsè de, pí de.",
+                        "text_en": "Cards are frozen. Wallet is brown, leather.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Basics covered. He'll ask for distinguishing features."
+                    },
+                    {
+                        "text_zh": "银行卡……啊，我忘了冻结了！",
+                        "text_pinyin": "yínháng kǎ……à, wǒ wàng le dòngjié le!",
+                        "text_en": "Bank cards... oh no, I forgot to freeze them!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Ding points to the phone on the desk.「先打银行电话。」First things first."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "棕色皮夹，有划痕，好的。我查一下今天的失物招领记录。另外，和平路早市有监控摄像头，我可以调一下监控看看。你还记得最后一次用钱包是在哪个摊位吗？",
+                "text_pinyin": "zōngsè píjiá, yǒu huáhén, hǎo de. wǒ chá yíxià jīntiān de shīwù zhāolǐng jìlù. lìngwài, Hépíng Lù zǎoshì yǒu jiānkòng shèxiàngtóu, wǒ kěyǐ diào yíxià jiānkòng kàn kan. nǐ hái jìde zuìhòu yí cì yòng qiánbāo shì zài nǎge tānwèi ma?",
+                "text_en": "Brown leather wallet with a scratch, noted. Let me check today's lost-and-found records. Also, the Heping Road market has surveillance cameras — I can pull the footage. Do you remember which stall you last used the wallet at?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide more location details.",
+                "options": [
+                    {
+                        "text_zh": "最后用钱包是在一个卖水果的摊位，在市场东边入口进去第三家。老板娘是一个戴红帽子的阿姨。我买了十块钱的橘子，付的现金。",
+                        "text_pinyin": "zuìhòu yòng qiánbāo shì zài yí gè mài shuǐguǒ de tānwèi, zài shìchǎng dōngbiān rùkǒu jìnqù dì sān jiā. lǎobǎnniáng shì yí gè dài hóng màozi de āyí. wǒ mǎi le shí kuài qián de júzi, fù de xiànjīn.",
+                        "text_en": "The last time I used the wallet was at a fruit stall — third one from the east entrance of the market. The owner is a lady wearing a red hat. I bought ten yuan worth of oranges, paid cash.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Specific stall, identifiable vendor, exact purchase — this is the kind of detail that turns a lost item into a found one. Officer Ding can work with this."
+                    },
+                    {
+                        "text_zh": "在一个水果摊，但我不记得具体位置了。",
+                        "text_pinyin": "zài yí gè shuǐguǒ tān, dàn wǒ bú jìde jùtǐ wèizhi le.",
+                        "text_en": "At a fruit stall, but I don't remember the exact location.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Partial info. He'll check the surveillance footage around the fruit stalls."
+                    },
+                    {
+                        "text_zh": "不太记得了，那个市场太大了。",
+                        "text_pinyin": "bú tài jìde le, nàge shìchǎng tài dà le.",
+                        "text_en": "I don't really remember — the market is too big.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Ding notes the time range and will scan the footage. More work, but not impossible."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我知道那个摊位。我会调监控确认一下。现在我帮你填报案单，身份证临时证明也一起办了。你的手机号留一下，如果有人捡到来交的话，我第一时间通知你。",
+                "text_pinyin": "hǎo de, wǒ zhīdào nàge tānwèi. wǒ huì diào jiānkòng quèrèn yíxià. xiànzài wǒ bāng nǐ tián bào àn dān, shēnfènzhèng línshí zhèngmíng yě yìqǐ bàn le. nǐ de shǒujī hào liú yíxià, rúguǒ yǒu rén jiǎn dào lái jiāo de huà, wǒ dì yī shíjiān tōngzhī nǐ.",
+                "text_en": "OK, I know that stall. I'll check the footage. Now let me help you fill out the report — I'll also handle the temporary ID certificate. Leave your phone number — if someone turns it in, I'll notify you immediately."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your phone number and ask about the temporary ID.",
+                "options": [
+                    {
+                        "text_zh": "我的手机号是138-xxxx-xxxx。临时身份证明有效期是多久？我下周三要坐高铁出差，需要身份证买票和进站。",
+                        "text_pinyin": "wǒ de shǒujī hào shì yāo sān bā-xxxx-xxxx. línshí shēnfènzhèng zhèngmíng yǒuxiào qī shì duō jiǔ? wǒ xià zhōu sān yào zuò gāotiě chūchāi, xūyào shēnfènzhèng mǎi piào hé jìn zhàn.",
+                        "text_en": "My number is 138-xxxx-xxxx. How long is the temporary ID valid? I need to take the high-speed rail for a business trip next Wednesday — I need an ID for tickets and station entry.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Anticipating a practical need — Officer Ding explains the temporary certificate is valid for one month and accepted for train travel. He also suggests applying for a replacement ID."
+                    },
+                    {
+                        "text_zh": "电话号码是这个。临时证明什么时候能拿到？",
+                        "text_pinyin": "diànhuà hàomǎ shì zhège. línshí zhèngmíng shénme shíhòu néng ná dào?",
+                        "text_en": "Here's my number. When can I get the temporary certificate?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He answers: today, right now. It takes about ten minutes."
+                    },
+                    {
+                        "text_zh": "给你号码。这些手续好麻烦……",
+                        "text_pinyin": "gěi nǐ hàomǎ. zhèxiē shǒuxù hǎo máfan……",
+                        "text_en": "Here's my number. All this paperwork is such a hassle...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Officer Ding nods sympathetically. Lost wallets create an administrative ripple effect that rivals the original loss."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Losing your ID card (身份证, shēnfènzhèng) in China requires a police report and a temporary certificate (临时证明, línshí zhèngmíng). Most police stations can issue these on the spot. Markets often have surveillance cameras (监控摄像头, jiānkòng shèxiàngtóu) that police can access. Freezing bank cards (冻结银行卡) should be done immediately by calling the bank's customer service hotline."
+    }
+}

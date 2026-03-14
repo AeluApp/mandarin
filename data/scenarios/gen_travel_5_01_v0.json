@@ -1,0 +1,196 @@
+{
+    "title": "The Platform Choreographer",
+    "title_zh": "站台编舞师",
+    "hsk_level": 5,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_travel_5_01_v0",
+    "tree": {
+        "setup": "The main hall of a high-speed rail station, soaring concrete arches overhead and the rumble of departures echoing through marble floors. The information desk is staffed by Xiao Luo, a young woman who knows every train schedule the way some people know song lyrics — by heart and slightly ahead of the beat. Her headset microphone is perpetually on, her voice carrying the calm authority of someone who has redirected ten thousand confused travelers to the correct platform.",
+        "setup_zh": "高铁站的主大厅，头顶是高耸的混凝土拱顶，出发的隆隆声在大理石地板上回荡。信息台由小罗负责，一位年轻女性，她熟悉每趟列车时刻表的方式就像有些人熟悉歌词——倒背如流，而且总是快半拍。她的耳机麦克风永远开着，声音带着一种平静的权威感——那是引导过上万名迷路旅客到正确站台的人才有的从容。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好，请问需要什么帮助？",
+                "text_pinyin": "nǐ hǎo, qǐngwèn xūyào shénme bāngzhù?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask about buying a ticket.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想买一张明天去上海的高铁票。最好是上午出发的，二等座就行。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng mǎi yì zhāng míngtiān qù Shànghǎi de gāotiě piào. zuìhǎo shì shàngwǔ chūfā de, èr děng zuò jiù xíng.",
+                        "text_en": "Hello, I'd like to buy a high-speed rail ticket to Shanghai for tomorrow. Preferably a morning departure, second class is fine.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Destination, date, time preference, and class — Xiao Luo's fingers are already on the keyboard before you finish speaking."
+                    },
+                    {
+                        "text_zh": "我想买去上海的票。",
+                        "text_pinyin": "wǒ xiǎng mǎi qù Shànghǎi de piào.",
+                        "text_en": "I want to buy a ticket to Shanghai.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She'll need the date, time, and class. Her questions come in rapid, efficient bursts."
+                    },
+                    {
+                        "text_zh": "怎么去上海？",
+                        "text_pinyin": "zěnme qù Shànghǎi?",
+                        "text_en": "How do I get to Shanghai?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A philosophical question in a train station. She assumes you mean by rail and starts there."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "明天上午去上海的……有八点十五的G7502次，到上海虹桥站，全程两个半小时。还有九点四十的G7518次，到上海站，三个小时。您选哪一趟？",
+                "text_pinyin": "míngtiān shàngwǔ qù Shànghǎi de……yǒu bā diǎn shíwǔ de G qī wǔ líng èr cì, dào Shànghǎi Hóngqiáo zhàn, quánchéng liǎng gè bàn xiǎoshí. hái yǒu jiǔ diǎn sìshí de G qī wǔ yāo bā cì, dào Shànghǎi zhàn, sān gè xiǎoshí. nín xuǎn nǎ yí tàng?",
+                "text_en": "Tomorrow morning to Shanghai... there's the 8:15 G7502 to Shanghai Hongqiao, two and a half hours. Also a 9:40 G7518 to Shanghai Station, three hours. Which one?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a train and ask about seating.",
+                "options": [
+                    {
+                        "text_zh": "八点十五那趟吧，到虹桥站比较方便。能不能选靠窗的位子？",
+                        "text_pinyin": "bā diǎn shíwǔ nà tàng ba, dào Hóngqiáo zhàn bǐjiào fāngbiàn. néng bu néng xuǎn kào chuāng de wèizi?",
+                        "text_en": "The 8:15 one — Hongqiao is more convenient. Can I get a window seat?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Reasoning plus a seat preference — Xiao Luo checks the seating chart with the focus of someone arranging a dinner party."
+                    },
+                    {
+                        "text_zh": "第一趟吧。",
+                        "text_pinyin": "dì yī tàng ba.",
+                        "text_en": "The first one.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Selected. She'll assign whatever seat is available."
+                    },
+                    {
+                        "text_zh": "哪个便宜？",
+                        "text_pinyin": "nǎge piányi?",
+                        "text_en": "Which is cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Same class, same price. The difference is time and destination station. She explains patiently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "靠窗的……A座和F座都是靠窗。A座这边有个，七号车厢。二等座一百五十三块。需要您的身份证或者护照。",
+                "text_pinyin": "kào chuāng de……A zuò hé F zuò dōu shì kào chuāng. A zuò zhè biān yǒu gè, qī hào chēxiāng. èr děng zuò yìbǎi wǔshísān kuài. xūyào nín de shēnfènzhèng huòzhě hùzhào.",
+                "text_en": "Window seat... A and F are both window. There's an A seat available, car 7. Second class is 153 yuan. I'll need your ID or passport."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide your passport and ask about luggage.",
+                "options": [
+                    {
+                        "text_zh": "好的，这是我的护照。我有一个大行李箱，高铁上有地方放吗？",
+                        "text_pinyin": "hǎo de, zhè shì wǒ de hùzhào. wǒ yǒu yí gè dà xíngli xiāng, gāotiě shàng yǒu dìfāng fàng ma?",
+                        "text_en": "Here's my passport. I have a large suitcase — is there space on the train?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical foresight. She explains the luggage rack situation with the spatial awareness of an architect."
+                    },
+                    {
+                        "text_zh": "护照在这里。",
+                        "text_pinyin": "hùzhào zài zhèlǐ.",
+                        "text_en": "Passport's here.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She processes it quickly. You'll discover the luggage situation on board."
+                    },
+                    {
+                        "text_zh": "等一下，我找找护照……在哪里呢……",
+                        "text_pinyin": "děng yíxià, wǒ zhǎozhao hùzhào……zài nǎlǐ ne……",
+                        "text_en": "Hold on, let me find my passport... where is it...",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Luo waits with the patience of someone who has seen this particular drama play out six hundred times."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "每节车厢前后都有行李架，大箱子放得下。早点上车的话位置比较充裕。对了，明天记得提前半小时到站过安检。",
+                "text_pinyin": "měi jié chēxiāng qiánhòu dōu yǒu xíngli jià, dà xiāngzi fàng de xià. zǎo diǎn shàng chē de huà wèizhì bǐjiào chōngyù. duì le, míngtiān jìde tíqián bàn xiǎoshí dào zhàn guò ānjiǎn.",
+                "text_en": "Each car has luggage racks at both ends — big suitcases fit. Boarding early means better rack space. Oh, remember to arrive half an hour early tomorrow for security."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about the platform.",
+                "options": [
+                    {
+                        "text_zh": "明白了，提前半小时。请问在哪个检票口？我第一次坐高铁，不太熟悉流程。",
+                        "text_pinyin": "míngbai le, tíqián bàn xiǎoshí. qǐngwèn zài nǎge jiǎn piào kǒu? wǒ dì yī cì zuò gāotiě, bú tài shúxī liúchéng.",
+                        "text_en": "Got it, half hour early. Which ticket gate? It's my first time on high-speed rail — I'm not familiar with the process.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Admitting unfamiliarity takes courage in a train station. Xiao Luo shifts into guide mode — her favorite mode."
+                    },
+                    {
+                        "text_zh": "好的，谢谢提醒。",
+                        "text_pinyin": "hǎo de, xièxie tíxǐng.",
+                        "text_en": "OK, thanks for the reminder.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She nods. You'll figure out the gates tomorrow — they're well-signed."
+                    },
+                    {
+                        "text_zh": "半小时？那么早？",
+                        "text_pinyin": "bàn xiǎoshí? nàme zǎo?",
+                        "text_en": "Half an hour? That early?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Chinese train station security is thorough. Half an hour is optimistic, she implies gently."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "七号车厢的话，走B检票口。进站以后跟着地上的标志走就行了。票上都写着呢。这是您的票，请收好。",
+                "text_pinyin": "qī hào chēxiāng de huà, zǒu B jiǎn piào kǒu. jìn zhàn yǐhòu gēn zhe dì shàng de biāozhì zǒu jiù xíng le. piào shàng dōu xiě zhe ne. zhè shì nín de piào, qǐng shōu hǎo.",
+                "text_en": "For car 7, use gate B. After entering, just follow the floor signs. It's all on your ticket. Here's your ticket — keep it safe."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank her and confirm the details.",
+                "options": [
+                    {
+                        "text_zh": "太感谢了！明天八点十五，七号车厢A座，B检票口。我记住了。",
+                        "text_pinyin": "tài gǎnxiè le! míngtiān bā diǎn shíwǔ, qī hào chēxiāng A zuò, B jiǎn piào kǒu. wǒ jì zhù le.",
+                        "text_en": "Thank you so much! Tomorrow 8:15, car 7 seat A, gate B. Got it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Repeating the details back — the sign of a traveler who will arrive at the correct platform. Xiao Luo gives a satisfied nod."
+                    },
+                    {
+                        "text_zh": "谢谢你！",
+                        "text_pinyin": "xièxie nǐ!",
+                        "text_en": "Thank you!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She's already looking at the next person in line. Her headset crackles with a platform announcement."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Brief. She hopes you read the ticket carefully — it contains everything you need to know."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese high-speed rail (高铁, gāotiě) seats are labeled A-F, with A and F being window seats, C and D aisle seats. Security screening (安检, ānjiǎn) is required at every station. Arrive at least 30 minutes early — ticket gates close 5 minutes before departure."
+    }
+}

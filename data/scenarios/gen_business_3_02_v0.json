@@ -1,0 +1,130 @@
+{
+    "title": "The Client Who Loves Details",
+    "title_zh": "喜欢细节的客户",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "tree": {
+        "setup": "A presentation room with a projector and a nervous energy. Your colleague Xiao Feng is presenting to a client, Director Liu, who is known for asking very specific questions about very small numbers. He once paused a presentation to ask about a font choice. He's not unkind -- he simply believes excellence lives in details.",
+        "setup_zh": "（喜欢细节的客户场景）",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我们开始吧。今天的议题是什么？",
+                "text_pinyin": "hǎo de, wǒmen kāishǐ ba. jīntiān de yìtí shì shénme?",
+                "text_en": "OK, let's begin. What's on the agenda today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Present your topic or respond.",
+                "options": [
+                    {
+                        "text_zh": "我想汇报一下上周的项目进度。总体来说比较顺利。",
+                        "text_pinyin": "wǒ xiǎng huìbào yíxià shàng zhōu de xiàngmù jìndù. zǒngtǐ lái shuō bǐjiào shùnlì.",
+                        "text_en": "I'd like to report on last week's project progress. Overall it went smoothly.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A clear, confident opening. 汇报 means 'to report.' 总体来说 is 'overall' -- a useful framing phrase for summaries."
+                    },
+                    {
+                        "text_zh": "我遇到了一些问题，想跟大家讨论一下解决方案。",
+                        "text_pinyin": "wǒ yùdào le yìxiē wèntí, xiǎng gēn dàjiā tǎolùn yíxià jiějué fāng'àn.",
+                        "text_en": "I've run into some problems and want to discuss solutions with everyone.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Bringing problems to the group shows maturity. 解决方案 means 'solution.' Collaborative problem-solving is valued."
+                    },
+                    {
+                        "text_zh": "我还没准备好，能不能下次再说？",
+                        "text_pinyin": "wǒ hái méi zhǔnbèi hǎo, néng bu néng xià cì zài shuō?",
+                        "text_en": "I'm not prepared yet. Can I present next time?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "An honest admission, but try to avoid this in meetings. 还没准备好 means 'not yet prepared.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "说得很好。还有什么需要支持的吗？",
+                "text_pinyin": "shuō de hěn hǎo. hái yǒu shénme xūyào zhīchí de ma?",
+                "text_en": "Well said. Do you need any support?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for support or resources.",
+                "options": [
+                    {
+                        "text_zh": "如果可以的话，我希望能多一个人帮忙处理数据。",
+                        "text_pinyin": "rúguǒ kěyǐ de huà, wǒ xīwàng néng duō yí gè rén bāngmáng chǔlǐ shùjù.",
+                        "text_en": "If possible, I'd like one more person to help process data.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "如果可以的话 is a polite conditional. Specific resource requests are easier to fulfill than vague ones."
+                    },
+                    {
+                        "text_zh": "目前还好，我自己能处理。",
+                        "text_pinyin": "mùqián hái hǎo, wǒ zìjǐ néng chǔlǐ.",
+                        "text_en": "It's fine for now, I can handle it myself.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Self-reliance is respected, but don't be afraid to ask for help. 目前 means 'currently.'"
+                    },
+                    {
+                        "text_zh": "我不太确定，我再想想。",
+                        "text_pinyin": "wǒ bú tài quèdìng, wǒ zài xiǎngxiang.",
+                        "text_en": "I'm not sure, let me think about it.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Meetings are the time to ask. 再想想 is fine but less decisive than having a specific request ready."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，辛苦了。大家还有别的要讨论的吗？",
+                "text_pinyin": "hǎo de, xīnkǔ le. dàjiā hái yǒu bié de yào tǎolùn de ma?",
+                "text_en": "OK, good work. Does anyone else have anything to discuss?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Wrap up or add a point.",
+                "options": [
+                    {
+                        "text_zh": "我有一个建议。我们可以每周发一个简报，让大家了解各组的进度。",
+                        "text_pinyin": "wǒ yǒu yí gè jiànyì. wǒmen kěyǐ měi zhōu fā yí gè jiǎnbào, ràng dàjiā liǎojiě gè zǔ de jìndù.",
+                        "text_en": "I have a suggestion. We could send a weekly brief so everyone knows each team's progress.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "建议 means 'suggestion.' Proposing process improvements in meetings shows initiative and leadership."
+                    },
+                    {
+                        "text_zh": "没有了，谢谢大家。",
+                        "text_pinyin": "méiyǒu le, xièxie dàjiā.",
+                        "text_en": "Nothing else, thanks everyone.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clean and respectful. Sometimes the best meeting contribution is knowing when to stop."
+                    },
+                    {
+                        "text_zh": "下次会议是什么时候？",
+                        "text_pinyin": "xià cì huìyì shì shénme shíhou?",
+                        "text_en": "When's the next meeting?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "A practical close. 下次会议 is 'next meeting.'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，今天就到这里。大家加油！",
+                "text_pinyin": "hǎo de, jīntiān jiù dào zhèlǐ. dàjiā jiāyóu!",
+                "text_en": "OK, that's all for today. Keep up the good work!"
+            }
+        ],
+        "cultural_note": "Chinese business meetings often blend formal and informal elements. 辛苦了 (xīnkǔ le) is said to acknowledge effort. Suggestions (建议) are welcomed in modern Chinese companies. Meeting efficiency is increasingly valued."
+    },
+    "id": "gen_business_3_02_v0"
+}

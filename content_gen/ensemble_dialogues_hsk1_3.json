@@ -1,0 +1,1292 @@
+[
+  {
+    "title": "The Welcome Sign",
+    "title_zh": "欢迎牌",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+      "setup": "The community center needs a new welcome sign. Old Zhou has volunteered to write it. Auntie Fang and Xiao Mei are watching.",
+      "setup_zh": "社区中心要做一个新的欢迎牌。老周要写。方阿姨和小梅在看。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我来写！我的字很好！",
+          "text_pinyin": "Wǒ lái xiě! Wǒ de zì hěn hǎo!",
+          "text_en": "I'll write it! My handwriting is great!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "...嗯。",
+          "text_pinyin": "...Ǹg.",
+          "text_en": "...Mm."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "你们看！“欢迎大家”！好不好？",
+          "text_pinyin": "Nǐmen kàn! 'Huānyíng dàjiā'! Hǎo bù hǎo?",
+          "text_en": "Look! 'Welcome everyone'! How is it?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "“大”写反了。",
+          "text_pinyin": "'Dà' xiě fǎn le.",
+          "text_en": "The character 'big' is backwards."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Zhou asks you what you think of his sign.",
+          "options": [
+            {
+              "text_zh": "字很大，大家都能看到。",
+              "text_pinyin": "Zì hěn dà, dàjiā dōu néng kàn dào.",
+              "text_en": "The characters are big — everyone can see them.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Nice diplomacy — you found something true and positive to say without lying."
+            },
+            {
+              "text_zh": "很好！没问题！",
+              "text_pinyin": "Hěn hǎo! Méi wèntí!",
+              "text_en": "Great! No problem!",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Enthusiastic, but there IS a problem — the character is backwards."
+            },
+            {
+              "text_zh": "你写错了。",
+              "text_pinyin": "Nǐ xiě cuò le.",
+              "text_en": "You wrote it wrong.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "True, but blunt. Xiao Mei already pointed it out — no need to pile on."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "大好！大家都能看到！",
+          "text_pinyin": "Dà hǎo! Dàjiā dōu néng kàn dào!",
+          "text_en": "Big is good! Everyone can see it!"
+        }
+      ],
+      "cultural_note": "In Chinese social settings, directly pointing out mistakes can cause loss of face (丢面子). Finding something genuinely positive to say is a valued social skill."
+    }
+  },
+  {
+    "title": "Who Brings the Water",
+    "title_zh": "谁去买水",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+      "setup": "It's a hot day. Teacher Luo, Uncle Bai, and you are sitting outside. Someone needs to go buy water. Nobody wants to go.",
+      "setup_zh": "天很热。罗老师、老白和你坐在外面。要有人去买水。没有人想去。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "我们要买水！现在！很热！",
+          "text_pinyin": "Wǒmen yào mǎi shuǐ! Xiànzài! Hěn rè!",
+          "text_en": "We need to buy water! Now! It's very hot!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "热...是吗？我觉得还好。",
+          "text_pinyin": "Rè... shì ma? Wǒ juéde hái hǎo.",
+          "text_en": "Hot... is it? I think it's fine."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "三十八度！三十八！",
+          "text_pinyin": "Sānshíbā dù! Sānshíbā!",
+          "text_en": "Thirty-eight degrees! Thirty-eight!"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Teacher Luo wants someone to go buy water. What do you say?",
+          "options": [
+            {
+              "text_zh": "我去吧。你们要喝什么？",
+              "text_pinyin": "Wǒ qù ba. Nǐmen yào hē shénme?",
+              "text_en": "I'll go. What do you want to drink?",
+              "score": 3,
+              "register": "casual",
+              "feedback": "You just volunteered — Teacher Luo is visibly relieved, Uncle Bai nods wisely as if this was his plan all along."
+            },
+            {
+              "text_zh": "老白，你去吧。",
+              "text_pinyin": "Lǎo Bái, nǐ qù ba.",
+              "text_en": "Uncle Bai, you go.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Direct delegation. Uncle Bai will find a reason why he shouldn't — but it's a fair try."
+            },
+            {
+              "text_zh": "我不热。",
+              "text_pinyin": "Wǒ bú rè.",
+              "text_en": "I'm not hot.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just accidentally joined Uncle Bai's side. Teacher Luo's eye is twitching."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "很好。我在这里等。",
+          "text_pinyin": "Hěn hǎo. Wǒ zài zhèlǐ děng.",
+          "text_en": "Good. I'll wait here."
+        }
+      ],
+      "cultural_note": "Volunteering for small tasks is a way to build social goodwill (人情) in Chinese communities."
+    }
+  },
+  {
+    "title": "Auntie Fang's Baozi",
+    "title_zh": "方阿姨的包子",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.15,
+    "tree": {
+      "setup": "Old Zhou made baozi and is offering them to everyone. Auntie Fang has tasted one.",
+      "setup_zh": "老周做了包子，给大家吃。方阿姨吃了一个。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我做的包子！好吃吗？好吃吧？",
+          "text_pinyin": "Wǒ zuò de bāozi! Hǎo chī ma? Hǎo chī ba?",
+          "text_en": "My baozi! Delicious, right? Delicious, right?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "很特别。",
+          "text_pinyin": "Hěn tèbié.",
+          "text_en": "Very... unique."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "对！我放了很多东西！",
+          "text_pinyin": "Duì! Wǒ fàng le hěn duō dōngxi!",
+          "text_en": "Yes! I put a lot of things in them!"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Zhou offers you a baozi. What do you say?",
+          "options": [
+            {
+              "text_zh": "谢谢！我吃一个。",
+              "text_pinyin": "Xièxie! Wǒ chī yí gè.",
+              "text_en": "Thanks! I'll try one.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Brave and polite. Auntie Fang gives you a look that might be respect. Or sympathy."
+            },
+            {
+              "text_zh": "我不饿。",
+              "text_pinyin": "Wǒ bú è.",
+              "text_en": "I'm not hungry.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "A safe retreat. Zhou looks briefly disappointed, then offers one to someone else."
+            },
+            {
+              "text_zh": "方阿姨觉得好吃吗？",
+              "text_pinyin": "Fāng āyí juéde hǎo chī ma?",
+              "text_en": "Does Auntie Fang think they're good?",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Clever deflection, but you just put Auntie Fang in an awkward position. She already said 'unique' — that was her answer."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "他很高兴。",
+          "text_pinyin": "Tā hěn gāoxìng.",
+          "text_en": "He's very happy."
+        }
+      ],
+      "cultural_note": "说'很特别' (very unique) is a classic Chinese way to say something is bad without saying it directly."
+    }
+  },
+  {
+    "title": "The New Rule",
+    "title_zh": "新规定",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+      "setup": "Manager Qin has put up a new sign: 'Please do not eat in the meeting room.' Teacher Luo is pleased. Old Zhou is confused.",
+      "setup_zh": "秦经理贴了一个新的通知：请不要在会议室吃东西。罗老师很高兴。老周不明白。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "请看。新的规定。",
+          "text_pinyin": "Qǐng kàn. Xīn de guīdìng.",
+          "text_en": "Please look. New rule."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "很好！这很重要！",
+          "text_pinyin": "Hěn hǎo! Zhè hěn zhòngyào!",
+          "text_en": "Very good! This is important!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "可是...我带了包子。",
+          "text_pinyin": "Kěshì... wǒ dài le bāozi.",
+          "text_en": "But... I brought baozi."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Zhou looks at you with his baozi. What do you suggest?",
+          "options": [
+            {
+              "text_zh": "我们去外面吃吧。",
+              "text_pinyin": "Wǒmen qù wàimiàn chī ba.",
+              "text_en": "Let's eat outside.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Perfect — you follow the rule AND save Zhou's baozi. Manager Qin nods approvingly."
+            },
+            {
+              "text_zh": "你可以问秦经理。",
+              "text_pinyin": "Nǐ kěyǐ wèn Qín jīnglǐ.",
+              "text_en": "You can ask Manager Qin.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Procedurally correct. Qin will say no, but at least it went through channels."
+            },
+            {
+              "text_zh": "快吃！",
+              "text_pinyin": "Kuài chī!",
+              "text_en": "Eat it quick!",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Teacher Luo is already looking at you. The sign is right there."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "...规定就是规定。",
+          "text_pinyin": "...Guīdìng jiù shì guīdìng.",
+          "text_en": "...Rules are rules."
+        }
+      ],
+      "cultural_note": "Chinese workplaces often post written notices (通知) for rules. The formality of a posted rule carries more weight than a verbal request."
+    }
+  },
+  {
+    "title": "Two Chairs",
+    "title_zh": "两把椅子",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+      "setup": "There are two chairs and three people: you, Auntie Fang, and Teacher Luo. Someone has to stand.",
+      "setup_zh": "有两把椅子，三个人：你、方阿姨和罗老师。一个人要站着。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "只有两把椅子！两把！",
+          "text_pinyin": "Zhǐ yǒu liǎng bǎ yǐzi! Liǎng bǎ!",
+          "text_en": "Only two chairs! Two!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "我可以站着。",
+          "text_pinyin": "Wǒ kěyǐ zhàn zhe.",
+          "text_en": "I can stand."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "What do you do about the chair situation?",
+          "options": [
+            {
+              "text_zh": "方阿姨，您坐。我站着。",
+              "text_pinyin": "Fāng āyí, nín zuò. Wǒ zhàn zhe.",
+              "text_en": "Auntie Fang, please sit. I'll stand.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Respectful to an elder. Auntie Fang sits without protest — she was testing you."
+            },
+            {
+              "text_zh": "我去找一把椅子。",
+              "text_pinyin": "Wǒ qù zhǎo yì bǎ yǐzi.",
+              "text_en": "I'll go find another chair.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Problem-solver approach. Good, but Teacher Luo wants this resolved NOW."
+            },
+            {
+              "text_zh": "我先坐吧。",
+              "text_pinyin": "Wǒ xiān zuò ba.",
+              "text_en": "I'll sit first.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "With an elder standing? Auntie Fang says nothing, which says everything."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "嗯。",
+          "text_pinyin": "Ǹg.",
+          "text_en": "Mm."
+        }
+      ],
+      "cultural_note": "Offering your seat to elders (让座) is a deeply ingrained social expectation in Chinese culture."
+    }
+  },
+  {
+    "title": "The Lost Cat Notice",
+    "title_zh": "找猫通知",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.25,
+    "tree": {
+      "setup": "Someone in the neighborhood lost a cat. Manager Qin is posting a notice. Old Zhou wants to help.",
+      "setup_zh": "小区里有人丢了猫。秦经理在贴通知。老周想帮忙。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "这是找猫的通知。请大家看看。",
+          "text_pinyin": "Zhè shì zhǎo māo de tōngzhī. Qǐng dàjiā kàn kan.",
+          "text_en": "This is a lost cat notice. Please everyone take a look."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我帮你找！我很会找东西！",
+          "text_pinyin": "Wǒ bāng nǐ zhǎo! Wǒ hěn huì zhǎo dōngxi!",
+          "text_en": "I'll help you find it! I'm great at finding things!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "...你知道猫长什么样吗？",
+          "text_pinyin": "...Nǐ zhīdào māo zhǎng shénme yàng ma?",
+          "text_en": "...Do you know what the cat looks like?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "...是猫。",
+          "text_pinyin": "...Shì māo.",
+          "text_en": "...It's a cat."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "How do you help the situation?",
+          "options": [
+            {
+              "text_zh": "通知上有猫的照片吗？",
+              "text_pinyin": "Tōngzhī shàng yǒu māo de zhàopiàn ma?",
+              "text_en": "Is there a photo of the cat on the notice?",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Practical question. Manager Qin points to the notice — there is indeed a photo. Zhou studies it intently."
+            },
+            {
+              "text_zh": "老周，加油！",
+              "text_pinyin": "Lǎo Zhōu, jiā yóu!",
+              "text_en": "Old Zhou, you can do it!",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Supportive but unhelpful. Zhou beams. The cat remains lost."
+            },
+            {
+              "text_zh": "我没有看到猫。",
+              "text_pinyin": "Wǒ méi yǒu kàn dào māo.",
+              "text_en": "I haven't seen the cat.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "True but not particularly helpful. Manager Qin was hoping for a bit more engagement."
+            }
+          ]
+        }
+      ],
+      "cultural_note": "Chinese residential communities (小区) often have a manager or committee that handles shared notices and community matters."
+    }
+  },
+  {
+    "title": "The Broken Air Conditioner",
+    "title_zh": "空调坏了",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+      "setup": "The office air conditioner is broken. Teacher Luo thinks this is a crisis. Xiao Mei disagrees — quietly.",
+      "setup_zh": "办公室的空调坏了。罗老师觉得这是大问题。小梅不同意——但她什么也没说。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "空调坏了！已经坏了两个小时了！两个小时！",
+          "text_pinyin": "Kōngtiáo huài le! Yǐjīng huài le liǎng gè xiǎoshí le! Liǎng gè xiǎoshí!",
+          "text_en": "The AC is broken! It's been broken for two hours! Two hours!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "今天二十度。",
+          "text_pinyin": "Jīntiān èrshí dù.",
+          "text_en": "It's twenty degrees today."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "这不是温度的问题！这是原则的问题！",
+          "text_pinyin": "Zhè bú shì wēndù de wèntí! Zhè shì yuánzé de wèntí!",
+          "text_en": "This isn't about the temperature! It's about the principle!"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "How do you respond to Teacher Luo?",
+          "options": [
+            {
+              "text_zh": "你说得对，我去告诉秦经理。",
+              "text_pinyin": "Nǐ shuō de duì, wǒ qù gàosu Qín jīnglǐ.",
+              "text_en": "You're right, I'll go tell Manager Qin.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "You validated her concern AND took action through proper channels. Teacher Luo is satisfied. Xiao Mei looks at you with something approaching approval."
+            },
+            {
+              "text_zh": "可是今天不热啊。",
+              "text_pinyin": "Kěshì jīntiān bú rè a.",
+              "text_en": "But it's not hot today.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just said the same thing Xiao Mei said. Teacher Luo was already annoyed about that. Now she's annoyed at two people."
+            },
+            {
+              "text_zh": "我们可以开窗户。",
+              "text_pinyin": "Wǒmen kěyǐ kāi chuānghù.",
+              "text_en": "We can open the windows.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Practical solution, but Teacher Luo didn't want a workaround. She wanted someone to care that the system is broken."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...嗯。",
+          "text_pinyin": "...Ǹg.",
+          "text_en": "...Mm."
+        }
+      ],
+      "cultural_note": "原则 (principles) matter in Chinese professional culture — sometimes the issue isn't the inconvenience itself but whether standards are being maintained."
+    }
+  },
+  {
+    "title": "Zhou's Great Idea",
+    "title_zh": "老周的好主意",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+      "setup": "Old Zhou has an idea for the community garden. He wants to grow watermelons. Auntie Fang has concerns.",
+      "setup_zh": "老周有一个关于社区花园的想法。他想种西瓜。方阿姨有一些想法。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "我想在花园里种西瓜！大家夏天都可以吃！",
+          "text_pinyin": "Wǒ xiǎng zài huāyuán lǐ zhòng xīguā! Dàjiā xiàtiān dōu kěyǐ chī!",
+          "text_en": "I want to grow watermelons in the garden! Everyone can eat them in summer!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "花园很小。",
+          "text_pinyin": "Huāyuán hěn xiǎo.",
+          "text_en": "The garden is small."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "小的西瓜也很好吃！",
+          "text_pinyin": "Xiǎo de xīguā yě hěn hǎo chī!",
+          "text_en": "Small watermelons are also delicious!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "花园只有两个平方。",
+          "text_pinyin": "Huāyuán zhǐ yǒu liǎng gè píngfāng.",
+          "text_en": "The garden is only two square meters."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "What do you think of Zhou's watermelon plan?",
+          "options": [
+            {
+              "text_zh": "可以先种一个试试。",
+              "text_pinyin": "Kěyǐ xiān zhòng yí gè shì shi.",
+              "text_en": "We could try growing one first.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Diplomatic. You didn't kill Zhou's dream but set realistic expectations. Fang gives a small nod."
+            },
+            {
+              "text_zh": "好主意！我们种吧！",
+              "text_pinyin": "Hǎo zhǔyì! Wǒmen zhòng ba!",
+              "text_en": "Great idea! Let's grow them!",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Zhou is thrilled. Fang looks at you the way she looks at Zhou."
+            },
+            {
+              "text_zh": "两个平方种不了西瓜。",
+              "text_pinyin": "Liǎng gè píngfāng zhòng bù liǎo xīguā.",
+              "text_en": "You can't grow watermelons in two square meters.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Factually correct. But Fang already said this more gently. Zhou's face falls."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "好！试试！我明天就开始！",
+          "text_pinyin": "Hǎo! Shì shi! Wǒ míngtiān jiù kāishǐ!",
+          "text_en": "Good! Let's try! I'll start tomorrow!"
+        }
+      ],
+      "cultural_note": "先...试试 (try first) is a common Chinese diplomatic move — it neither commits to a plan nor rejects it."
+    }
+  },
+  {
+    "title": "The Complaint Form",
+    "title_zh": "投诉表",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+      "setup": "Teacher Luo wants to file a complaint about noise. Manager Qin has a form for that. Uncle Bai has opinions.",
+      "setup_zh": "罗老师想投诉噪音的问题。秦经理有一张表要填。老白有自己的看法。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "楼上太吵了！每天晚上！我要投诉！",
+          "text_pinyin": "Lóu shàng tài chǎo le! Měi tiān wǎnshang! Wǒ yào tóusù!",
+          "text_en": "Upstairs is too noisy! Every evening! I want to file a complaint!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "好的。请先填这个表。",
+          "text_pinyin": "Hǎo de. Qǐng xiān tián zhè ge biǎo.",
+          "text_en": "Okay. Please fill out this form first."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "我觉得吧...楼上的人也不容易。",
+          "text_pinyin": "Wǒ juéde ba... lóu shàng de rén yě bù róngyì.",
+          "text_en": "I think... the people upstairs have it hard too."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "你住在楼上！",
+          "text_pinyin": "Nǐ zhù zài lóu shàng!",
+          "text_en": "You live upstairs!"
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The situation is getting tense. What do you do?",
+          "options": [
+            {
+              "text_zh": "我们先看看表上写什么吧。",
+              "text_pinyin": "Wǒmen xiān kàn kan biǎo shàng xiě shénme ba.",
+              "text_en": "Let's first look at what the form says.",
+              "score": 3,
+              "register": "neutral",
+              "feedback": "Redirecting to procedure — Manager Qin approves. The form becomes neutral ground."
+            },
+            {
+              "text_zh": "老白，你晚上在做什么？",
+              "text_pinyin": "Lǎo Bái, nǐ wǎnshang zài zuò shénme?",
+              "text_en": "Uncle Bai, what are you doing in the evenings?",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Direct investigation. Uncle Bai says '锻炼身体' (exercising). At 11pm. Teacher Luo's eye twitches."
+            },
+            {
+              "text_zh": "楼上确实很吵。",
+              "text_pinyin": "Lóu shàng quèshí hěn chǎo.",
+              "text_en": "Upstairs is indeed very noisy.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just took sides in front of Uncle Bai. He looks betrayed. Manager Qin sighs."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "表要两天才能处理。这是规定。",
+          "text_pinyin": "Biǎo yào liǎng tiān cái néng chǔlǐ. Zhè shì guīdìng.",
+          "text_en": "The form takes two days to process. That's the rule."
+        }
+      ],
+      "cultural_note": "Noise complaints between floors (楼上楼下) are one of the most common neighbor disputes in Chinese apartment buildings."
+    }
+  },
+  {
+    "title": "Who Cleans the Kitchen",
+    "title_zh": "谁来打扫厨房",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.3,
+    "tree": {
+      "setup": "The shared kitchen is dirty. Xiao Mei, Old Zhou, and you are the only ones who used it today. Someone should clean it.",
+      "setup_zh": "公用厨房很脏。小梅、老周和你是今天用过厨房的人。有人应该打扫。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "厨房有点脏。但是！我做了很好吃的菜！",
+          "text_pinyin": "Chúfáng yǒu diǎn zāng. Dànshì! Wǒ zuò le hěn hǎo chī de cài!",
+          "text_en": "The kitchen is a bit dirty. But! I made really delicious food!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "我用了一个杯子。",
+          "text_pinyin": "Wǒ yòng le yí gè bēizi.",
+          "text_en": "I used one cup."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The kitchen needs cleaning. What do you suggest?",
+          "options": [
+            {
+              "text_zh": "我们三个人一起打扫吧。",
+              "text_pinyin": "Wǒmen sān gè rén yìqǐ dǎsǎo ba.",
+              "text_en": "Let's all three clean together.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Fair solution. Zhou agrees enthusiastically (he'll do 20% of the work while talking the whole time). Mei nods once."
+            },
+            {
+              "text_zh": "老周，你做了饭，你打扫。",
+              "text_pinyin": "Lǎo Zhōu, nǐ zuò le fàn, nǐ dǎsǎo.",
+              "text_en": "Zhou, you cooked, you clean.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Logical but blunt. Zhou's smile freezes. Mei's cup suddenly becomes very interesting to examine."
+            },
+            {
+              "text_zh": "明天再说吧。",
+              "text_pinyin": "Míngtiān zài shuō ba.",
+              "text_en": "Let's talk about it tomorrow.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "The kitchen will not clean itself. And by tomorrow there will be a notice from Manager Qin."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "我洗我的杯子。",
+          "text_pinyin": "Wǒ xǐ wǒ de bēizi.",
+          "text_en": "I'll wash my cup."
+        }
+      ],
+      "cultural_note": "Shared kitchen etiquette is a common tension point in Chinese dorms and shared apartments. 一起 (together) is often the safest diplomatic approach."
+    }
+  },
+  {
+    "title": "Auntie Fang's Birthday",
+    "title_zh": "方阿姨的生日",
+    "hsk_level": 2,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.35,
+    "tree": {
+      "setup": "It's Auntie Fang's birthday. Old Zhou has planned a surprise. Xiao Mei was supposed to keep it secret.",
+      "setup_zh": "今天是方阿姨的生日。老周准备了一个惊喜。小梅应该保密。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "都准备好了吗？方阿姨不知道吧？",
+          "text_pinyin": "Dōu zhǔnbèi hǎo le ma? Fāng āyí bù zhīdào ba?",
+          "text_en": "Is everything ready? Auntie Fang doesn't know, right?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "她问我了。我说了‘没什么’。",
+          "text_pinyin": "Tā wèn wǒ le. Wǒ shuō le 'méi shénme'.",
+          "text_en": "She asked me. I said 'nothing.'"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "很好！她一定不知道！",
+          "text_pinyin": "Hěn hǎo! Tā yīdìng bù zhīdào!",
+          "text_en": "Great! She definitely doesn't know!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...她买了蛋糕。",
+          "text_pinyin": "...Tā mǎi le dàngāo.",
+          "text_en": "...She bought a cake."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Fang clearly knows about the surprise. What do you say to Zhou?",
+          "options": [
+            {
+              "text_zh": "没关系，我们还是可以一起吃蛋糕。",
+              "text_pinyin": "Méi guānxi, wǒmen háishì kěyǐ yìqǐ chī dàngāo.",
+              "text_en": "It's okay, we can still eat cake together.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "You saved the party by reframing it. Zhou is only briefly disappointed before pivoting to cake."
+            },
+            {
+              "text_zh": "我觉得方阿姨已经知道了。",
+              "text_pinyin": "Wǒ juéde Fāng āyí yǐjīng zhīdào le.",
+              "text_en": "I think Auntie Fang already knows.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Honest. Zhou's face falls, then brightens: '那她一定很高兴！' Zhou's optimism is unbreakable."
+            },
+            {
+              "text_zh": "小梅！你说了！",
+              "text_pinyin": "Xiǎo Méi! Nǐ shuō le!",
+              "text_en": "Xiao Mei! You told her!",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Mei blinks once. '我说了没什么。' Technically true. Mei did say 'nothing.' Fang figured it out herself."
+            }
+          ]
+        }
+      ],
+      "cultural_note": "Chinese people often express surprise even when they already know (假装惊喜) — it's a social courtesy to honor the effort of the person who planned it."
+    }
+  },
+  {
+    "title": "The Tree Should Stay",
+    "title_zh": "这棵树不能砍",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+      "setup": "An old tree in the courtyard blocks light to some apartments. Manager Qin has received complaints. Uncle Bai thinks the tree must stay.",
+      "setup_zh": "院子里有一棵老树，挡住了一些住户的光线。秦经理收到了投诉。老白觉得树不能砍。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "楼上有三家说树挡了光线。按规定，可以申请把树砍掉。",
+          "text_pinyin": "Lóu shàng yǒu sān jiā shuō shù dǎng le guāngxiàn. Àn guīdìng, kěyǐ shēnqǐng bǎ shù kǎn diào.",
+          "text_en": "Three families upstairs say the tree blocks their light. According to regulations, they can apply to have it cut down."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "这棵树比他们都早来。树比人先到，凭什么人说了算？",
+          "text_pinyin": "Zhè kē shù bǐ tāmen dōu zǎo lái. Shù bǐ rén xiān dào, píng shénme rén shuō le suàn?",
+          "text_en": "This tree was here before all of them. The tree arrived first — why do people get to decide?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "因为树不填表。",
+          "text_pinyin": "Yīnwèi shù bù tián biǎo.",
+          "text_en": "Because the tree doesn't fill out forms."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Both sides have a point. What do you think?",
+          "options": [
+            {
+              "text_zh": "能不能修剪一下，不用砍掉？",
+              "text_pinyin": "Néng bù néng xiūjiǎn yíxià, bú yòng kǎn diào?",
+              "text_en": "Could we trim it instead of cutting it down?",
+              "score": 3,
+              "register": "neutral",
+              "feedback": "A compromise both sides can live with. Qin checks his regulations. Bai nods as if this was his idea."
+            },
+            {
+              "text_zh": "树在这里这么久了，不应该砍。",
+              "text_pinyin": "Shù zài zhèlǐ zhème jiǔ le, bù yīnggāi kǎn.",
+              "text_en": "The tree has been here so long, we shouldn't cut it.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Emotional appeal. Bai agrees loudly. But the three families still have dark apartments."
+            },
+            {
+              "text_zh": "三家都说要砍，那就砍吧。",
+              "text_pinyin": "Sān jiā dōu shuō yào kǎn, nà jiù kǎn ba.",
+              "text_en": "If three families want it cut, then cut it.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Majority rules, but you just dismissed something that matters to the community's character. Bai looks at you with genuine disappointment."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "修剪...也行。但是谁来剪？这个树不是随便能剪的。",
+          "text_pinyin": "Xiūjiǎn... yě xíng. Dànshì shéi lái jiǎn? Zhè ge shù bú shì suíbiàn néng jiǎn de.",
+          "text_en": "Trimming... okay. But who does the trimming? This tree can't be trimmed by just anyone."
+        }
+      ],
+      "cultural_note": "Old trees in Chinese communities often have emotional significance. 砍树 (cutting a tree) can feel symbolic of destroying shared history."
+    }
+  },
+  {
+    "title": "Xiao Mei's Review",
+    "title_zh": "小梅的评价",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+      "setup": "Old Zhou opened a small noodle stand for the community fair. He asks Xiao Mei and Auntie Fang for their honest opinions.",
+      "setup_zh": "老周在社区集市开了一个小面摊。他问小梅和方阿姨的意见。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "大家觉得我的面怎么样？我觉得非常好！",
+          "text_pinyin": "Dàjiā juéde wǒ de miàn zěnmeyàng? Wǒ juéde fēicháng hǎo!",
+          "text_en": "What does everyone think of my noodles? I think they're fantastic!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "面有点硬。汤有点咸。",
+          "text_pinyin": "Miàn yǒu diǎn yìng. Tāng yǒu diǎn xián.",
+          "text_en": "The noodles are a bit hard. The soup is a bit salty."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "那是因为有嚼劲！汤是浓的！",
+          "text_pinyin": "Nà shì yīnwèi yǒu jiáo jìn! Tāng shì nóng de!",
+          "text_en": "That's because they're chewy! The soup is rich!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "老周的面...有自己的风格。",
+          "text_pinyin": "Lǎo Zhōu de miàn... yǒu zìjǐ de fēnggé.",
+          "text_en": "Old Zhou's noodles... have their own style."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Zhou turns to you for your opinion. The noodles are indeed hard and salty.",
+          "options": [
+            {
+              "text_zh": "下次可以煮久一点，会更好吃。",
+              "text_pinyin": "Xià cì kěyǐ zhǔ jiǔ yì diǎn, huì gèng hǎo chī.",
+              "text_en": "Next time try cooking them a bit longer — they'll be even better.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Constructive without crushing. The 更好吃 (even better) implies they're already okay. Zhou nods — he heard 'even better,' not 'not done.'"
+            },
+            {
+              "text_zh": "挺好的！",
+              "text_pinyin": "Tǐng hǎo de!",
+              "text_en": "Pretty good!",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Kind but unhelpful. Zhou's noodles won't improve. Fang gives you a look."
+            },
+            {
+              "text_zh": "小梅说得对，太硬了。",
+              "text_pinyin": "Xiǎo Méi shuō de duì, tài yìng le.",
+              "text_en": "Xiao Mei is right, they're too hard.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "True, but now you're piling on. Mei already said it — she didn't need backup. Zhou's smile finally wavers."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "下次让我来放盐。",
+          "text_pinyin": "Xià cì ràng wǒ lái fàng yán.",
+          "text_en": "Next time let me handle the salt."
+        }
+      ],
+      "cultural_note": "有自己的风格 (has its own style) is a classic Chinese diplomatic phrase that sounds positive but is actually neutral — a way to acknowledge effort without endorsing quality."
+    }
+  },
+  {
+    "title": "The Group Photo",
+    "title_zh": "集体照",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+      "setup": "The community wants to take a group photo. Teacher Luo is directing. Getting everyone in position is proving difficult.",
+      "setup_zh": "社区想拍一张集体照。罗老师在指挥。让大家站好很难。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "大家站好！高的站后面，矮的站前面！这不难吧？",
+          "text_pinyin": "Dàjiā zhàn hǎo! Gāo de zhàn hòumiàn, ǎi de zhàn qiánmiàn! Zhè bù nán ba?",
+          "text_en": "Everyone stand properly! Tall in back, short in front! This isn't hard, is it?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "我站中间吧。中间比较重要。",
+          "text_pinyin": "Wǒ zhàn zhōngjiān ba. Zhōngjiān bǐjiào zhòngyào.",
+          "text_en": "I'll stand in the middle. The middle is more important."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "你不高也不矮。",
+          "text_pinyin": "Nǐ bù gāo yě bù ǎi.",
+          "text_en": "You're neither tall nor short."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "所以我应该站中间。",
+          "text_pinyin": "Suǒyǐ wǒ yīnggāi zhàn zhōngjiān.",
+          "text_en": "So I should stand in the middle."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "中间是给谁的？中间是给——算了，你就站那儿吧。",
+          "text_pinyin": "Zhōngjiān shì gěi shéi de? Zhōngjiān shì gěi — suàn le, nǐ jiù zhàn nàr ba.",
+          "text_en": "The middle is for who? The middle is for — forget it, just stand there."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Teacher Luo asks where you want to stand.",
+          "options": [
+            {
+              "text_zh": "罗老师，你说我站哪儿就站哪儿。",
+              "text_pinyin": "Luó lǎoshī, nǐ shuō wǒ zhàn nǎr jiù zhàn nǎr.",
+              "text_en": "Teacher Luo, I'll stand wherever you say.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Perfect — you gave the director her authority back. Luo places you precisely and is satisfied at last."
+            },
+            {
+              "text_zh": "我站老白旁边吧。",
+              "text_pinyin": "Wǒ zhàn Lǎo Bái pángbiān ba.",
+              "text_en": "I'll stand next to Uncle Bai.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Teacher Luo sighs but allows it. At least someone is standing still."
+            },
+            {
+              "text_zh": "我不想拍照。",
+              "text_pinyin": "Wǒ bù xiǎng pāi zhào.",
+              "text_en": "I don't want to take a photo.",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Teacher Luo's reaction: '不行！这是集体照！集体！' You're in the photo whether you like it or not."
+            }
+          ]
+        }
+      ],
+      "cultural_note": "集体照 (group photos) are taken seriously in Chinese communities and workplaces. Standing position reflects status — center and front are for important people."
+    }
+  },
+  {
+    "title": "Quiet Hours",
+    "title_zh": "安静时间",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+      "setup": "Manager Qin has proposed quiet hours from 10pm-7am. Teacher Luo supports it enthusiastically. Uncle Bai thinks the concept of quiet hours is philosophically questionable.",
+      "setup_zh": "秦经理提议晚上十点到早上七点是安静时间。罗老师非常支持。老白觉得'安静时间'这个概念值得讨论。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "我建议每天晚上十点到早上七点是安静时间。大家同意吗？",
+          "text_pinyin": "Wǒ jiànyì měi tiān wǎnshang shí diǎn dào zǎoshang qī diǎn shì ānjìng shíjiān. Dàjiā tóngyì ma?",
+          "text_en": "I suggest 10pm to 7am as quiet hours every day. Does everyone agree?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "非常同意！终于！应该早就有了！",
+          "text_pinyin": "Fēicháng tóngyì! Zhōngyú! Yīnggāi zǎo jiù yǒu le!",
+          "text_en": "Absolutely agree! Finally! This should have existed long ago!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "可是...什么叫'安静'？这个标准是谁定的？",
+          "text_pinyin": "Kěshì... shénme jiào 'ānjìng'? Zhè ge biāozhǔn shì shéi dìng de?",
+          "text_en": "But... what counts as 'quiet'? Who decides the standard?"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "秦经理",
+          "text_zh": "不吵就是安静。",
+          "text_pinyin": "Bù chǎo jiù shì ānjìng.",
+          "text_en": "Not being noisy is quiet."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "但是一个人觉得安静，另一个人不一定觉得安静。",
+          "text_pinyin": "Dànshì yí gè rén juéde ānjìng, lìng yí gè rén bù yīdìng juéde ānjìng.",
+          "text_en": "But what one person considers quiet, another person might not."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "Bai's philosophical objection is stalling the vote. How do you move things along?",
+          "options": [
+            {
+              "text_zh": "老白说得有道理。但是我们可以先试一个月，看看效果。",
+              "text_pinyin": "Lǎo Bái shuō de yǒu dàolǐ. Dànshì wǒmen kěyǐ xiān shì yí gè yuè, kàn kan xiàoguǒ.",
+              "text_en": "Uncle Bai has a point. But we could try it for a month and see how it goes.",
+              "score": 3,
+              "register": "neutral",
+              "feedback": "You acknowledged his concern without letting it derail the vote. A trial period satisfies everyone: Luo gets her rules, Bai gets his philosophical wiggle room, Qin gets a process."
+            },
+            {
+              "text_zh": "我同意秦经理的建议。",
+              "text_pinyin": "Wǒ tóngyì Qín jīnglǐ de jiànyì.",
+              "text_en": "I agree with Manager Qin's suggestion.",
+              "score": 2,
+              "register": "neutral",
+              "feedback": "Simple and clear, but Bai feels unheard. He'll bring up the philosophy of quietness again next meeting."
+            },
+            {
+              "text_zh": "老白，你晚上十点以后在干什么？",
+              "text_pinyin": "Lǎo Bái, nǐ wǎnshang shí diǎn yǐhòu zài gàn shénme?",
+              "text_en": "Uncle Bai, what are you doing after 10pm?",
+              "score": 1,
+              "register": "casual",
+              "feedback": "You just made it personal. Bai's philosophical defense was theoretical — now he has to justify himself. Awkward silence from Qin."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老白",
+          "text_zh": "试一个月...也行。但是这个问题本身值得深入讨论。",
+          "text_pinyin": "Shì yí gè yuè... yě xíng. Dànshì zhè ge wèntí běnshēn zhíde shēnrù tǎolùn.",
+          "text_en": "One month trial... fine. But this question itself deserves deeper discussion."
+        }
+      ],
+      "cultural_note": "Chinese community decisions often use a 试行 (trial period) approach as a compromise between immediate action and deliberation."
+    }
+  },
+  {
+    "title": "The Lunch Debate",
+    "title_zh": "午饭的讨论",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.35,
+    "tree": {
+      "setup": "Four people need to decide where to eat lunch. It has been thirty minutes and no one can agree.",
+      "setup_zh": "四个人要决定去哪里吃午饭。已经讨论了三十分钟，还没有决定。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "那家新开的火锅店！我听说很好吃！",
+          "text_pinyin": "Nà jiā xīn kāi de huǒguō diàn! Wǒ tīngshuō hěn hǎo chī!",
+          "text_en": "That new hotpot place! I heard it's really good!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "你上次听说的那家店，我们排了一个小时的队。",
+          "text_pinyin": "Nǐ shàng cì tīngshuō de nà jiā diàn, wǒmen pái le yí gè xiǎoshí de duì.",
+          "text_en": "The last place you 'heard was good,' we waited in line for an hour."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "但是味道不错啊！",
+          "text_pinyin": "Dànshì wèidào búcuò a!",
+          "text_en": "But the food was good!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "方阿姨",
+          "text_zh": "你点了两份一样的菜。",
+          "text_pinyin": "Nǐ diǎn le liǎng fèn yíyàng de cài.",
+          "text_en": "You ordered two of the same dish."
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "随便。",
+          "text_pinyin": "Suíbiàn.",
+          "text_en": "Whatever."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "The group needs a decision. What do you suggest?",
+          "options": [
+            {
+              "text_zh": "我们去楼下那家面馆吧，近又快。",
+              "text_pinyin": "Wǒmen qù lóu xià nà jiā miànguǎn ba, jìn yòu kuài.",
+              "text_en": "Let's go to the noodle shop downstairs — close and fast.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Decisive and practical. Mei stands up immediately. Fang nods. Zhou agrees but is already planning next time."
+            },
+            {
+              "text_zh": "大家都想吃什么？",
+              "text_pinyin": "Dàjiā dōu xiǎng chī shénme?",
+              "text_en": "What does everyone want to eat?",
+              "score": 1,
+              "register": "casual",
+              "feedback": "That's what they've been discussing for thirty minutes. Mei's expression doesn't change but she is judging you."
+            },
+            {
+              "text_zh": "老周想去就去吧。",
+              "text_pinyin": "Lǎo Zhōu xiǎng qù jiù qù ba.",
+              "text_en": "If Zhou wants to go, let's go.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "You broke the deadlock by siding with Zhou. Fang accepts this without enthusiasm. Mei says '随便' again."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "讨论了四十分钟。吃什么都一样。",
+          "text_pinyin": "Tǎolùn le sìshí fēnzhōng. Chī shénme dōu yíyàng.",
+          "text_en": "Forty minutes of discussion. It's all the same."
+        }
+      ],
+      "cultural_note": "说'随便' (whatever) when asked about food is extremely common in China — it sounds easygoing but often makes decisions harder for everyone else."
+    }
+  },
+  {
+    "title": "The Umbrella Problem",
+    "title_zh": "伞的问题",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.4,
+    "tree": {
+      "setup": "It's raining. There are two umbrellas and four people: you, Zhou, Mei, and Luo. Someone needs to share or get wet.",
+      "setup_zh": "下雨了。有两把伞，四个人：你、老周、小梅和罗老师。有人要合用或者淋雨。",
+      "turns": [
+        {
+          "speaker": "npc",
+          "speaker_name": "罗老师",
+          "text_zh": "只有两把伞！两把！下这么大的雨！",
+          "text_pinyin": "Zhǐ yǒu liǎng bǎ sǎn! Liǎng bǎ! Xià zhème dà de yǔ!",
+          "text_en": "Only two umbrellas! Two! And it's raining this hard!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "老周",
+          "text_zh": "没关系！我不怕淋雨！",
+          "text_pinyin": "Méi guānxi! Wǒ bú pà lín yǔ!",
+          "text_en": "No problem! I'm not afraid of rain!"
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...一把是我的。",
+          "text_pinyin": "...Yì bǎ shì wǒ de.",
+          "text_en": "...One is mine."
+        },
+        {
+          "speaker": "player",
+          "prompt_en": "How do you handle the umbrella situation?",
+          "options": [
+            {
+              "text_zh": "罗老师，我们可以一起打一把伞。老周和小梅一把。",
+              "text_pinyin": "Luó lǎoshī, wǒmen kěyǐ yìqǐ dǎ yì bǎ sǎn. Lǎo Zhōu hé Xiǎo Méi yì bǎ.",
+              "text_en": "Teacher Luo, we can share one umbrella. Zhou and Mei share the other.",
+              "score": 3,
+              "register": "casual",
+              "feedback": "Everyone covered. Luo accepts with dignity. Mei holds her umbrella and lets Zhou stand under it. Barely."
+            },
+            {
+              "text_zh": "老周说他不怕，让他淋雨吧。",
+              "text_pinyin": "Lǎo Zhōu shuō tā bú pà, ràng tā lín yǔ ba.",
+              "text_en": "Zhou said he's not afraid — let him get wet.",
+              "score": 2,
+              "register": "casual",
+              "feedback": "Zhou did say that. He walks in the rain, smiling. He gets completely soaked and is cheerful about it. You feel a tiny bit guilty."
+            },
+            {
+              "text_zh": "我跑回去！",
+              "text_pinyin": "Wǒ pǎo huíqù!",
+              "text_en": "I'll run back!",
+              "score": 1,
+              "register": "casual",
+              "feedback": "Brave but impractical. You arrive soaked. Teacher Luo shakes her head. She's taking attendance of who solved this and who didn't."
+            }
+          ]
+        },
+        {
+          "speaker": "npc",
+          "speaker_name": "小梅",
+          "text_zh": "...别碰我的伞。",
+          "text_pinyin": "...Bié pèng wǒ de sǎn.",
+          "text_en": "...Don't touch my umbrella."
+        }
+      ],
+      "cultural_note": "Sharing an umbrella (合打一把伞) in China is normal among friends and colleagues. It's a practical, natural gesture."
+    }
+  }
+]

@@ -70,7 +70,15 @@ def api_error_handler(label: str, status: int = 500):
             try:
                 return fn(*args, **kwargs)
             except (*_SERVER_EXCEPTIONS, *_CLIENT_EXCEPTIONS) as e:
-                logger.error("%s API error: %s", label, e)
+                logger.error("%s API error: %s", label, e, exc_info=True)
+                return jsonify({"error": f"{label} unavailable"}), status
+            except Exception as e:
+                logger.error("%s API error (unexpected): %s", label, e, exc_info=True)
+                try:
+                    from mandarin.web import _log_crash
+                    _log_crash(e)
+                except Exception:
+                    pass
                 return jsonify({"error": f"{label} unavailable"}), status
         return wrapper
     return decorator

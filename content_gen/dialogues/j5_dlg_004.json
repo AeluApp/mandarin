@@ -1,0 +1,89 @@
+{
+    "title": "A Documentary Worth Watching",
+    "title_zh": "一部值得看的纪录片",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're sitting with your friend Xiaomei in a quiet bookshop café. She just watched a documentary about traditional craftspeople in rural China and can't stop thinking about it.",
+        "setup_zh": "你和朋友小美坐在一家安静的书店咖啡馆里。她刚看了一部关于中国农村传统手艺人的纪录片，一直在回味。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我昨晚看了一部纪录片，讲的是贵州山里做蓝染布的老奶奶。她八十多岁了，还每天自己种靛草、染布。看完以后我心里特别安静。",
+                "text_pinyin": "Wǒ zuó wǎn kàn le yī bù jìlùpiàn, jiǎng de shì Guìzhōu shān lǐ zuò lán rǎn bù de lǎo nǎinai. Tā bāshí duō suì le, hái měi tiān zìjǐ zhòng diàn cǎo, rǎn bù. Kàn wán yǐhòu wǒ xīn lǐ tèbié ānjìng.",
+                "text_en": "I watched a documentary last night about an elderly grandmother in the mountains of Guizhou who makes indigo-dyed cloth. She's over eighty and still grows the indigo plants and dyes cloth every day. After watching it, I felt incredibly peaceful."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to Xiaomei's description of the documentary.",
+                "options": [
+                    {
+                        "text_zh": "听起来很美。一个人一辈子专注做一件事，那种坚持本身就是一种艺术。你觉得是什么让你看了以后感到安静？",
+                        "text_pinyin": "Tīng qǐlái hěn měi. Yīge rén yíbèizi zhuānzhù zuò yī jiàn shì, nà zhǒng jiānchí běnshēn jiù shì yī zhǒng yìshù. Nǐ juéde shì shénme ràng nǐ kàn le yǐhòu gǎndào ānjìng?",
+                        "text_en": "That sounds beautiful. A person spending a whole lifetime focused on one thing — that persistence itself is a kind of art. What do you think made you feel peaceful after watching it?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Engages with the feeling she's describing."
+                    },
+                    {
+                        "text_zh": "纪录片在哪个平台上？要不要会员？",
+                        "text_pinyin": "Jìlùpiàn zài nǎge píngtái shàng? Yào bú yào huìyuán?",
+                        "text_en": "Which platform is the documentary on? Do you need a membership?",
+                        "score": 0.0,
+                        "feedback": "Jumps to logistics instead of connecting emotionally."
+                    },
+                    {
+                        "text_zh": "贵州的天气怎么样？我一直想去旅游。",
+                        "text_pinyin": "Guìzhōu de tiānqì zěnmeyàng? Wǒ yīzhí xiǎng qù lǚyóu.",
+                        "text_en": "What's the weather like in Guizhou? I've been wanting to travel there.",
+                        "score": 0.0,
+                        "feedback": "Derails into travel planning."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我想可能是因为她做这件事不是为了赚钱，也不是为了出名。她只是觉得这是她应该做的事。在我们这个什么都讲效率的时代，这种态度反而让人感动。",
+                "text_pinyin": "Wǒ xiǎng kěnéng shì yīnwèi tā zuò zhè jiàn shì bú shì wèile zhuàn qián, yě bú shì wèile chūmíng. Tā zhǐ shì juéde zhè shì tā yīnggāi zuò de shì. Zài wǒmen zhège shénme dōu jiǎng xiàolǜ de shídài, zhè zhǒng tàidù fǎn'ér ràng rén gǎndòng.",
+                "text_en": "I think maybe it's because she does it not for money or fame. She just feels it's what she's meant to do. In our era where everything is about efficiency, that kind of attitude is actually moving."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your thoughts on craftsmanship and modern life.",
+                "options": [
+                    {
+                        "text_zh": "也许我们被效率绑住了。什么都要快，什么都要有结果。但有些事情的价值不在于结果，而在于做的过程。就像她染布，每一块布都是时间慢慢积累出来的。",
+                        "text_pinyin": "Yěxǔ wǒmen bèi xiàolǜ bǎng zhù le. Shénme dōu yào kuài, shénme dōu yào yǒu jiéguǒ. Dàn yǒuxiē shìqíng de jiàzhí bú zàiyú jiéguǒ, ér zàiyú zuò de guòchéng. Jiù xiàng tā rǎn bù, měi yī kuài bù dōu shì shíjiān mànman jīlěi chūlái de.",
+                        "text_en": "Maybe we've been bound by efficiency. Everything fast, everything with results. But some things' value is in the process, not the outcome. Like her dyeing cloth — every piece is time slowly accumulated.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Connects the documentary's message to broader modern anxieties."
+                    },
+                    {
+                        "text_zh": "我觉得手工的东西太贵了，不实用。",
+                        "text_pinyin": "Wǒ juéde shǒugōng de dōngxi tài guì le, bù shíyòng.",
+                        "text_en": "I think handmade things are too expensive and not practical.",
+                        "score": 0.0,
+                        "feedback": "Applies a consumer mindset to a conversation about meaning."
+                    },
+                    {
+                        "text_zh": "你平时看纪录片多吗？",
+                        "text_pinyin": "Nǐ píngshí kàn jìlùpiàn duō ma?",
+                        "text_en": "Do you watch documentaries often?",
+                        "score": 0.0,
+                        "feedback": "Generic question that doesn't engage with the depth of the discussion."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "时间慢慢积累出来的……你说得真好。我有时候觉得我们的生活跑得太快了，连停下来想一想都觉得是在浪费时间。也许我应该学她，找一件能让自己安静下来的事。",
+                "text_pinyin": "Shíjiān mànman jīlěi chūlái de…… nǐ shuō de zhēn hǎo. Wǒ yǒu shíhou juéde wǒmen de shēnghuó pǎo de tài kuài le, lián tíng xiàlái xiǎng yī xiǎng dōu juéde shì zài làngfèi shíjiān. Yěxǔ wǒ yīnggāi xué tā, zhǎo yī jiàn néng ràng zìjǐ ānjìng xiàlái de shì.",
+                "text_en": "Time slowly accumulated... that's beautifully put. Sometimes I feel our lives move too fast — even stopping to think feels like wasting time. Maybe I should learn from her and find something that can make me feel still."
+            }
+        ],
+        "cultural_note": "China has a rich tradition of artisanal crafts, many of which are disappearing as younger generations move to cities. Documentaries like「了不起的匠人」(The Great Shokunin) and「舌尖上的中国」(A Bite of China) have sparked renewed interest in traditional craftsmanship. Indigo dyeing (蓝染) is particularly significant in Guizhou's Miao and Dong ethnic minority communities, where the craft has been passed down for centuries."
+    }
+}

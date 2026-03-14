@@ -1,0 +1,83 @@
+{
+  "title": "The Autumn Leaf",
+  "title_zh": "秋天的叶子",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.35,
+  "tree": {
+    "setup": "You're walking on a tree-lined road in autumn. A little girl and her grandmother are collecting fallen leaves.",
+    "setup_zh": "秋天，你在一条两边都是树的路上走。一个小女孩和她的奶奶在捡落叶。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你看这些叶子的颜色！红的、黄的、橙色的——每一片都不一样。我孙女说要带回去画画。",
+        "text_pinyin": "Nǐ kàn zhèxiē yèzi de yánsè! Hóng de, huáng de, chéngsè de — měi yī piàn dōu bù yīyàng. Wǒ sūnnǚ shuō yào dài huíqù huàhuà.",
+        "text_en": "Look at the colors of these leaves! Red, yellow, orange — each one is different. My granddaughter says she wants to take them home to paint."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to the grandmother and her granddaughter's activity.",
+        "options": [
+          {
+            "text_zh": "每一片都不一样——真的好美。你孙女有一双好眼睛，能看到叶子的美。",
+            "text_pinyin": "Měi yī piàn dōu bù yīyàng — zhēn de hǎo měi. Nǐ sūnnǚ yǒu yī shuāng hǎo yǎnjing, néng kàn dào yèzi de měi.",
+            "text_en": "Each one different — it's really beautiful. Your granddaughter has good eyes to see the beauty in leaves.",
+            "score": 1.0,
+            "feedback": "Appreciates the child's eye for natural beauty.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "叶子掉了就是死了。",
+            "text_pinyin": "Yèzi diào le jiù shì sǐ le.",
+            "text_en": "Fallen leaves are dead.",
+            "score": 0.0,
+            "feedback": "Grim observation that spoils a gentle moment."
+          },
+          {
+            "text_zh": "你们家住在附近吗？",
+            "text_pinyin": "Nǐmen jiā zhù zài fùjìn ma?",
+            "text_en": "Do you live nearby?",
+            "score": 0.0,
+            "feedback": "An unrelated question during leaf-collecting."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "她的眼睛里什么都是美的。小孩子就是这样——他们觉得世界上什么都好玩，什么都好看。我们大人有时候忘了怎么看。",
+        "text_pinyin": "Tā de yǎnjing lǐ shénme dōu shì měi de. Xiǎo háizi jiù shì zhèyàng — tāmen juéde shìjiè shàng shénme dōu hǎowán, shénme dōu hǎokàn. Wǒmen dàrén yǒu shíhou wàng le zěnme kàn.",
+        "text_en": "In her eyes, everything is beautiful. Children are like that — they think everything in the world is fun and lovely. We adults sometimes forget how to look."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Respond to her observation about children and adults.",
+        "options": [
+          {
+            "text_zh": "你说得对。今天跟你们一起看这些叶子，我也想起了小时候的感觉。谢谢你们。",
+            "text_pinyin": "Nǐ shuō de duì. Jīntiān gēn nǐmen yīqǐ kàn zhèxiē yèzi, wǒ yě xiǎng qǐ le xiǎo shíhou de gǎnjué. Xièxie nǐmen.",
+            "text_en": "You're right. Looking at these leaves with you today, I remembered what it felt like when I was little. Thank you.",
+            "score": 1.0,
+            "feedback": "The grandmother and child helped them remember how to see.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "大人太忙了。",
+            "text_pinyin": "Dàrén tài máng le.",
+            "text_en": "Adults are too busy.",
+            "score": 0.0,
+            "feedback": "A generic excuse rather than genuine reflection."
+          },
+          {
+            "text_zh": "她画画画得好吗？",
+            "text_pinyin": "Tā huàhuà huà de hǎo ma?",
+            "text_en": "Is she good at painting?",
+            "score": 0.0,
+            "feedback": "Evaluates skill instead of appreciating wonder."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Collecting autumn leaves with grandchildren is a common scene in Chinese parks. The grandmother's insight — that adults forget how to see — echoes a Buddhist and Daoist idea about beginner's mind. Children's fresh perception is considered a kind of wisdom that adults spend their lives trying to recover."
+  }
+}

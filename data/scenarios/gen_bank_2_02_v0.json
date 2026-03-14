@@ -1,0 +1,124 @@
+{
+    "title": "The Lost Card Drama",
+    "title_zh": "银行卡丢了",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_2_02_v0",
+    "tree": {
+        "setup": "The bank's customer service desk. You've lost your bank card -- probably somewhere between the subway and the convenience store. The service rep, Xiao He, is calm in the way that people who deal with panicking customers all day learn to be. She has a bowl of wrapped candies on her desk for exactly these situations.",
+        "setup_zh": "银行的客服台。你的银行卡丢了——大概掉在地铁和便利店之间。客服小何很平静，那种每天应对慌张客户练出来的平静。她桌上有一碗糖果，专门给这种时候准备的。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问有什么可以帮您的？",
+                "text_pinyin": "nín hǎo, qǐngwèn yǒu shénme kěyǐ bāng nín de?",
+                "text_en": "Hello, how can I help you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain that you lost your bank card.",
+                "options": [
+                    {
+                        "text_zh": "我的银行卡丢了，想挂失。",
+                        "text_pinyin": "wǒ de yínháng kǎ diū le, xiǎng guà shī.",
+                        "text_en": "I lost my bank card and want to report it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao He nods reassuringly and pushes the candy bowl toward you.「别担心，我们先把卡冻结。」挂失 (guà shī) is 'to report a loss' -- the official term for freezing a card."
+                    },
+                    {
+                        "text_zh": "我找不到我的卡了！",
+                        "text_pinyin": "wǒ zhǎo bu dào wǒ de kǎ le!",
+                        "text_en": "I can't find my card!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao He's calm is unshakable.「没关系，我帮你处理。」找不到 (zhǎo bu dào) is the potential complement for 'can't find' -- very natural here."
+                    },
+                    {
+                        "text_zh": "怎么办？我很着急。",
+                        "text_pinyin": "zěnme bàn? wǒ hěn zháojí.",
+                        "text_en": "What should I do? I'm very worried.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao He offers you a candy with the gravity of a doctor offering sedation.「先坐下来，我们慢慢说。」怎么办 is the universal 'what do I do' -- useful in any crisis."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。您还记得卡号吗？",
+                "text_pinyin": "hǎo de. nín hái jìde kǎ hào ma?",
+                "text_en": "OK. Do you remember your card number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try to recall your card number.",
+                "options": [
+                    {
+                        "text_zh": "不记得了。但是我有身份证。",
+                        "text_pinyin": "bú jìde le. dànshì wǒ yǒu shēnfènzhèng.",
+                        "text_en": "I don't remember. But I have my ID.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao He takes your ID with both hands -- proper bank etiquette.「没问题，我用身份证查。」但是 introduces the saving grace. Nobody memorizes card numbers."
+                    },
+                    {
+                        "text_zh": "记得一部分……后面四个是五六七八。",
+                        "text_pinyin": "jìde yí bùfen... hòumiàn sì gè shì wǔ liù qī bā.",
+                        "text_en": "I remember part of it... the last four are 5678.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao He types it in.「找到了。」Partial information plus ID is usually enough. 一部分 means 'part of' -- useful in many contexts."
+                    },
+                    {
+                        "text_zh": "完全不记得了。",
+                        "text_pinyin": "wánquán bú jìde le.",
+                        "text_en": "I don't remember at all.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao He is unfazed. She's handled worse.「没关系，用身份证就可以查到。」完全不 is 'completely not' -- emphatic negation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "卡已经冻结了。您要补办新卡吗？大概五个工作日。",
+                "text_pinyin": "kǎ yǐjīng dòngjié le. nín yào bǔ bàn xīn kǎ ma? dàgài wǔ gè gōngzuò rì.",
+                "text_en": "The card has been frozen. Would you like a replacement? About five business days."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Decide about the replacement card.",
+                "options": [
+                    {
+                        "text_zh": "好的，请帮我补办。谢谢！",
+                        "text_pinyin": "hǎo de, qǐng bāng wǒ bǔ bàn. xièxie!",
+                        "text_en": "OK, please help me get a replacement. Thanks!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao He fills out the form and stamps it -- a single, clean impression. She slides the candy bowl one final inch closer.「五天以后来取。」补办 means 'to reissue' or 'to replace.'"
+                    },
+                    {
+                        "text_zh": "要多少钱？",
+                        "text_pinyin": "yào duōshao qián?",
+                        "text_en": "How much does it cost?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「十块钱工本费。」Xiao He says this the way a dentist says 'a small pinch.' It's practically nothing. 工本费 is 'processing fee.'"
+                    },
+                    {
+                        "text_zh": "我先想想。",
+                        "text_pinyin": "wǒ xiān xiǎngxiang.",
+                        "text_en": "Let me think about it first.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao He tilts her head slightly. Your card is frozen. You kind of need a new one. But she'll wait. She's very good at waiting."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "If you lose a bank card in China, go to the branch immediately and 挂失 (guà shī, report the loss). They'll freeze the card and issue a new one. Always bring your ID (身份证 or passport). The process is bureaucratic but straightforward."
+    }
+}

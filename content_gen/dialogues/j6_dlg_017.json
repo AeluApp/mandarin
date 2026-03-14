@@ -1,0 +1,117 @@
+{
+    "title": "The Night Baker",
+    "title_zh": "夜间面包师",
+    "hsk_level": 6,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.6,
+    "tree": {
+        "setup": "You stumble upon a small bakery at 3 AM in Shanghai. The baker, Mrs. Tang, is shaping dough alone under warm lights. She has been baking through the night for twenty-two years so that people can have fresh bread in the morning.",
+        "setup_zh": "凌晨三点，你在上海偶然发现了一家小面包店。面包师唐姐正在暖灯下独自揉面团。她已经连续二十二年在夜里烤面包，让人们早上能吃到新鲜的面包。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "凌晨三点是最安静的时候。整个城市都在睡觉，只有我在揉面。你知道吗——面团是有温度的。如果今天冷一点，它发得慢，我就得多等。如果今天湿一点，它粘手，我就得多加面粉。每天晚上的面团都不一样。有人觉得做面包很机械——每天重复同样的步骤。但不是。每一个晚上都是一次新的谈判——和温度谈、和湿度谈、和面粉的状态谈。面团不听你的。你必须听它的。",
+                "text_pinyin": "Língchén sān diǎn shì zuì ānjìng de shíhou. Zhěnggè chéngshì dōu zài shuìjiào, zhǐyǒu wǒ zài róu miàn. Nǐ zhīdào ma — miàntuán shì yǒu wēndù de. Rúguǒ jīntiān lěng yīdiǎn, tā fā de màn, wǒ jiù děi duō děng. Rúguǒ jīntiān shī yīdiǎn, tā zhān shǒu, wǒ jiù děi duō jiā miànfěn. Měi tiān wǎnshang de miàntuán dōu bù yīyàng. Yǒu rén juéde zuò miànbāo hěn jīxiè — měi tiān chóngfù tóngyàng de bùzhòu. Dàn bú shì. Měi yī ge wǎnshang dōu shì yī cì xīn de tánpàn — hé wēndù tán, hé shīdù tán, hé miànfěn de zhuàngtài tán. Miàntuán bù tīng nǐ de. Nǐ bìxū tīng tā de.",
+                "text_en": "Three AM is the quietest hour. The whole city sleeps, only I'm kneading. Dough has temperature. Colder days, it rises slower — I wait longer. More humid, it sticks — more flour. Every night's dough is different. Some think baking is mechanical. It's not. Every night is a new negotiation — with temperature, humidity, the flour. The dough doesn't listen to you. You must listen to it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to baking as nightly negotiation rather than mechanical repetition.",
+                "options": [
+                    {
+                        "text_zh": "面团不听你的，你必须听它的——这颠覆了我们对'制作'的想象。我们以为做东西是强加意志，但您说的相反：是面团在告诉您今天怎么做。这不是执行配方，是即兴对话。",
+                        "text_pinyin": "Miàntuán bù tīng nǐ de, nǐ bìxū tīng tā de — zhè diānfù le wǒmen duì 'zhìzuò' de xiǎngxiàng. Wǒmen yǐwéi zuò dōngxi shì qiángjiā yìzhì, dàn nín shuō de xiāngfǎn: shì miàntuán zài gàosu nín jīntiān zěnme zuò. Zhè bú shì zhíxíng pèifāng, shì jíxìng duìhuà.",
+                        "text_en": "The dough doesn't listen to you, you listen to it — that overturns our idea of 'making.' We think creating means imposing our will, but you're saying the opposite: the dough tells you what to do today. Not following a recipe — an improvised conversation.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Baking as improvised conversation — reading dough's nightly personality."
+                    },
+                    {
+                        "text_zh": "你用什么牌子的面粉？",
+                        "text_pinyin": "Nǐ yòng shénme páizi de miànfěn?",
+                        "text_en": "What brand of flour do you use?",
+                        "score": 0.0,
+                        "feedback": "Ingredient brand question during a meditation on craft."
+                    },
+                    {
+                        "text_zh": "你不累吗？每天熬夜。",
+                        "text_pinyin": "Nǐ bú lèi ma? Měi tiān áo yè.",
+                        "text_en": "Aren't you tired? Staying up every night.",
+                        "score": 0.0,
+                        "feedback": "Fatigue question misses the philosophical depth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "即兴的对话——对。但这个对话有一个很特别的观众：早上来买面包的人。他们不知道今天晚上我和面团之间发生了什么谈判。他们只是拿起一个面包，咬一口，觉得好吃。他们不知道这个面包好吃是因为今天晚上的湿度比昨天高了百分之五，我多加了一点水、少放了一点糖。他们吃到的是结果。但结果背后是整晚的判断、调整和等待。也许这就是所有好的手艺的特点——使用者看到的是简单，但简单背后是无数看不见的复杂。",
+                "text_pinyin": "Jíxīng de duìhuà — duì. Dàn zhège duìhuà yǒu yī ge hěn tèbié de guānzhòng: zǎoshang lái mǎi miànbāo de rén. Tāmen bù zhīdào jīntiān wǎnshang wǒ hé miàntuán zhī jiān fāshēng le shénme tánpàn. Tāmen zhǐ shì ná qǐ yī ge miànbāo, yǎo yī kǒu, juéde hǎochī. Tāmen bù zhīdào zhège miànbāo hǎochī shì yīnwèi jīntiān wǎnshang de shīdù bǐ zuótiān gāo le bǎi fēn zhī wǔ, wǒ duō jiā le yīdiǎn shuǐ, shǎo fàng le yīdiǎn táng. Tāmen chī dào de shì jiéguǒ. Dàn jiéguǒ bèihòu shì zhěng wǎn de pànduàn, tiáozhěng hé děngdài. Yěxǔ zhè jiù shì suǒyǒu hǎo de shǒuyì de tèdiǎn — shǐyòngzhě kàn dào de shì jiǎndān, dàn jiǎndān bèihòu shì wúshù kàn bú jiàn de fùzá.",
+                "text_en": "Improvised conversation — yes. But with a special audience: people buying bread in the morning. They don't know tonight's negotiation. They pick up bread, take a bite, think it's good. They don't know it's because tonight's humidity was five percent higher, so I adjusted water and sugar. They eat the result. Behind the result is a whole night of judgment, adjustment, and waiting. Perhaps good craftsmanship means the user sees simplicity, but behind it lies invisible complexity."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the invisible complexity behind apparent simplicity.",
+                "options": [
+                    {
+                        "text_zh": "使用者看到的是简单——这几乎定义了所有伟大的工作。最好的设计让你觉得'当然如此'，最好的翻译让你忘了它是翻译。手艺人做得越好，别人越觉得'这有什么难的'。",
+                        "text_pinyin": "Shǐyòngzhě kàn dào de shì jiǎndān — zhè jīhū dìngyì le suǒyǒu wěidà de gōngzuò. Zuì hǎo de shèjì ràng nǐ juéde 'dāngrán rúcǐ', zuì hǎo de fānyì ràng nǐ wàng le tā shì fānyì. Shǒuyìrén zuò de yuè hǎo, biérén yuè juéde 'zhè yǒu shénme nán de'.",
+                        "text_en": "The user sees simplicity — that almost defines all great work. The best design makes you think 'of course.' The best translation makes you forget it's translated. The better the craftsman, the more people think 'what's so hard about that.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The paradox of mastery — excellence becomes invisible and therefore undervalued."
+                    },
+                    {
+                        "text_zh": "你考虑过开连锁店吗？",
+                        "text_pinyin": "Nǐ kǎolǜ guò kāi liánsuǒ diàn ma?",
+                        "text_en": "Have you considered opening a chain?",
+                        "score": 0.0,
+                        "feedback": "Business scaling during a meditation on invisible craft."
+                    },
+                    {
+                        "text_zh": "你的面包比超市的贵吗？",
+                        "text_pinyin": "Nǐ de miànbāo bǐ chāoshì de guì ma?",
+                        "text_en": "Is your bread more expensive than supermarket bread?",
+                        "score": 0.0,
+                        "feedback": "Price comparison during a philosophical exchange."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "做得越好，别人越觉得不难——你说到了我心里最痛的地方。但我不在意了。因为我发现了一件事：凌晨三点，当整个城市都在睡觉的时候，我一个人在揉面——那个时刻本身就是奖励。没有人看，没有人评价，没有人知道。只有面团和我。这种安静是白天找不到的。我不是在为了早上的顾客而工作——我是在享受凌晨三点只属于我和面团的那几个小时。如果你问我为什么能做二十二年，答案不是坚持——是享受。坚持是痛苦的。享受是自然的。",
+                "text_pinyin": "Zuò de yuè hǎo, biérén yuè juéde bù nán — nǐ shuō dào le wǒ xīnlǐ zuì tòng de dìfang. Dàn wǒ bú zàiyì le. Yīnwèi wǒ fāxiàn le yī jiàn shì: língchén sān diǎn, dāng zhěnggè chéngshì dōu zài shuìjiào de shíhou, wǒ yī ge rén zài róu miàn — nàge shíkè běnshēn jiù shì jiǎnglì. Méiyǒu rén kàn, méiyǒu rén píngjià, méiyǒu rén zhīdào. Zhǐyǒu miàntuán hé wǒ. Zhè zhǒng ānjìng shì báitiān zhǎo bú dào de. Wǒ bú shì zài wèi le zǎoshang de gùkè ér gōngzuò — wǒ shì zài xiǎngshòu língchén sān diǎn zhǐ shǔyú wǒ hé miàntuán de nà jǐ ge xiǎoshí. Rúguǒ nǐ wèn wǒ wèishéme néng zuò èrshí'èr nián, dá'àn bú shì jiānchí — shì xiǎngshòu. Jiānchí shì tòngkǔ de. Xiǎngshòu shì zìrán de.",
+                "text_en": "The better you do, the less others think it's hard — you've touched my sorest point. But I don't mind anymore. At 3 AM, the whole city sleeps, I'm alone kneading — that moment is the reward. No one watching, no one judging. Just dough and me. This quiet can't be found in daytime. If you ask why twenty-two years, the answer isn't perseverance — it's enjoyment. Perseverance is painful. Enjoyment is natural."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to enjoyment being sustainable where perseverance is not.",
+                "options": [
+                    {
+                        "text_zh": "坚持是痛苦的，享受是自然的——两种持续方式。坚持靠意志力，而意志力有限。享受不需要意志力，它自己会生长。二十二年不是因为意志坚强，是因为凌晨三点和面团就是您想要的生活。",
+                        "text_pinyin": "Jiānchí shì tòngkǔ de, xiǎngshòu shì zìrán de — liǎng zhǒng chíxù fāngshì. Jiānchí kào yìzhìlì, ér yìzhìlì yǒuxiàn. Xiǎngshòu bù xūyào yìzhìlì, tā zìjǐ huì shēngzhǎng. Èrshí'èr nián bú shì yīnwèi yìzhì jiānqiáng, shì yīnwèi língchén sān diǎn hé miàntuán jiù shì nín xiǎng yào de shēnghuó.",
+                        "text_en": "Perseverance is painful, enjoyment is natural — two modes of sustaining. Perseverance runs on willpower, which is finite. Enjoyment needs no willpower — it grows itself. Twenty-two years isn't strong will — 3 AM and dough are the life you want.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Enjoyment as self-sustaining — love expressing itself naturally looks like hardship from outside."
+                    },
+                    {
+                        "text_zh": "你有没有想过换一份工作？",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò huàn yī fèn gōngzuò?",
+                        "text_en": "Have you ever thought about changing jobs?",
+                        "score": 0.0,
+                        "feedback": "Career change question after a declaration of love for the work."
+                    },
+                    {
+                        "text_zh": "你的面包最受欢迎的是哪种？",
+                        "text_pinyin": "Nǐ de miànbāo zuì shòu huānyíng de shì nǎ zhǒng?",
+                        "text_en": "Which bread is your most popular?",
+                        "score": 0.0,
+                        "feedback": "Product question at the philosophical climax."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Night bakers represent a tradition of invisible labor (看不见的劳动) that sustains daily life across Chinese cities. The concept of listening to materials rather than commanding them — 'the dough doesn't listen to you' — reflects the Daoist principle of 顺势而为 (shùnshì ér wéi, acting in accordance with natural tendencies). The distinction between 坚持 (jiānchí, perseverance through willpower) and 享受 (xiǎngshòu, sustaining through enjoyment) connects to broader Chinese philosophical discussions about whether virtuous behavior should require effort (Confucian self-cultivation) or flow naturally (Daoist wu-wei)."
+    }
+}

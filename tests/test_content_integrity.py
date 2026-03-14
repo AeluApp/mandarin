@@ -20,7 +20,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 PASSAGE_FILE = DATA_DIR / "reading_passages.json"
 REQUIRED_FIELDS = {"id", "title", "title_zh", "hsk_level", "text_zh",
                    "text_pinyin", "text_en", "questions"}
-QUESTION_FIELDS = {"q_zh", "q_en", "answer"}
+QUESTION_FIELDS = {"q_zh", "q_en", "type", "options", "difficulty"}
 
 
 def test_passage_file_exists():
@@ -81,9 +81,9 @@ def test_example_fields():
             assert "pinyin" in ex, f"Example in '{gp['name']}' missing 'pinyin'"
 
 
-def test_62_grammar_points():
+def test_grammar_points_minimum():
     from mandarin.grammar_seed import GRAMMAR_POINTS
-    assert len(GRAMMAR_POINTS) == 62
+    assert len(GRAMMAR_POINTS) >= 300, f"Expected >=300 grammar points, got {len(GRAMMAR_POINTS)}"
 
 
 # ---- TestPersonalizationCoverage ----

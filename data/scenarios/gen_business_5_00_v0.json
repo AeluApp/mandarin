@@ -1,0 +1,196 @@
+{
+    "title": "The Interview as Conversation",
+    "title_zh": "面试即对话",
+    "hsk_level": 5,
+    "register": "formal",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_business_5_00_v0",
+    "tree": {
+        "setup": "A glass-walled conference room on the thirty-second floor, where the city stretches out below like a circuit board. Director Xue conducts interviews the way a chess player opens a game — the first three moves reveal everything. She has a pot of Iron Goddess tea steeping on a side table and offers you a cup before starting, which is either a courtesy or a test of how you handle unexpected hospitality under pressure.",
+        "setup_zh": "三十二楼的玻璃会议室，脚下的城市像一块电路板一样铺展开来。薛主任面试人的方式就像棋手的开局——前三步就能看出一切。她旁边的小桌上泡着一壶铁观音，开始前给你倒了一杯，这要么是客气，要么是测试你在压力下如何应对意外的善意。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "请坐。先喝杯茶，不用紧张。你简历上写的工作经历很丰富，能不能用自己的话介绍一下？",
+                "text_pinyin": "qǐng zuò. xiān hē bēi chá, bú yòng jǐnzhāng. nǐ jiǎnlì shàng xiě de gōngzuò jīnglì hěn fēngfù, néng bu néng yòng zìjǐ de huà jièshào yíxià?",
+                "text_en": "Please sit. Have some tea first — no need to be nervous. Your resume shows rich work experience. Can you describe it in your own words?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce your work background.",
+                "options": [
+                    {
+                        "text_zh": "谢谢薛主任。我之前在一家国际贸易公司工作了三年，主要负责跟海外客户沟通和合同谈判。去年开始带一个五人的小团队。我觉得这些经验跟贵公司的需求比较匹配。",
+                        "text_pinyin": "xièxie Xuē zhǔrèn. wǒ zhīqián zài yì jiā guójì màoyì gōngsī gōngzuò le sān nián, zhǔyào fùzé gēn hǎiwài kèhù gōutōng hé hétong tánpàn. qùnián kāishǐ dài yí gè wǔ rén de xiǎo tuánduì. wǒ juéde zhèxiē jīngyàn gēn guì gōngsī de xūqiú bǐjiào pǐpèi.",
+                        "text_en": "Thank you, Director Xue. I worked at an international trade company for three years, mainly handling overseas client communication and contract negotiations. Last year I started leading a five-person team. I think these experiences match your company's needs well.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Structured, specific, and ending with a connection to the role — Director Xue takes a sip of tea. Her first move has been answered well."
+                    },
+                    {
+                        "text_zh": "我做过国际贸易方面的工作，有三年经验。",
+                        "text_pinyin": "wǒ zuò guò guójì màoyì fāngmiàn de gōngzuò, yǒu sān nián jīngyàn.",
+                        "text_en": "I've worked in international trade — three years of experience.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "True but skeletal. She'll probe for details — and she's very good at probing."
+                    },
+                    {
+                        "text_zh": "简历上都写了，您看过了吧？",
+                        "text_pinyin": "jiǎnlì shàng dōu xiě le, nín kàn guò le ba?",
+                        "text_en": "It's all on my resume — you've read it, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Director Xue's expression doesn't change, but the temperature in the room drops half a degree. She has read it — she wants to hear how you tell your own story."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "带团队的经验很好。那你觉得管理团队最大的挑战是什么？能不能举一个具体的例子？",
+                "text_pinyin": "dài tuánduì de jīngyàn hěn hǎo. nà nǐ juéde guǎnlǐ tuánduì zuì dà de tiǎozhàn shì shénme? néng bu néng jǔ yí gè jùtǐ de lìzi?",
+                "text_en": "Team leadership experience is good. What do you think is the biggest challenge in managing a team? Can you give a specific example?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss a team management challenge.",
+                "options": [
+                    {
+                        "text_zh": "最大的挑战是让不同性格的人合作。有一次我们团队里两个同事因为项目方案意见不一致，几乎不说话了。我分别跟他们聊了以后，发现其实他们的想法可以结合起来。最后的方案比原来任何一个都好。",
+                        "text_pinyin": "zuì dà de tiǎozhàn shì ràng bùtóng xìnggé de rén hézuò. yǒu yí cì wǒmen tuánduì lǐ liǎng gè tóngshì yīnwèi xiàngmù fāng'àn yìjiàn bù yízhì, jīhū bù shuōhuà le. wǒ fēnbié gēn tāmen liáo le yǐhòu, fāxiàn qíshí tāmen de xiǎngfǎ kěyǐ jiéhé qǐlái. zuìhòu de fāng'àn bǐ yuánlái rènhé yí gè dōu hǎo.",
+                        "text_en": "The biggest challenge is getting people with different personalities to collaborate. Once, two colleagues on my team almost stopped speaking because they disagreed on a project plan. After talking with each of them separately, I realized their ideas could actually be combined. The final plan was better than either original.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "A concrete story with a resolution — Director Xue sets down her teacup. This is the kind of answer that moves a candidate from「maybe」to「probably.」"
+                    },
+                    {
+                        "text_zh": "最大的挑战就是沟通吧。每个人想法不一样。",
+                        "text_pinyin": "zuì dà de tiǎozhàn jiùshì gōutōng ba. měi gè rén xiǎngfǎ bù yíyàng.",
+                        "text_en": "The biggest challenge is communication, I guess. Everyone thinks differently.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Generic but not wrong. She was hoping for a story — she'll give you one more chance."
+                    },
+                    {
+                        "text_zh": "说实话，带团队没什么特别大的挑战。",
+                        "text_pinyin": "shuō shíhuà, dài tuánduì méi shénme tèbié dà de tiǎozhàn.",
+                        "text_en": "Honestly, managing a team hasn't been that challenging.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Director Xue's pen stops moving. Either you're extraordinarily talented or insufficiently self-aware — she suspects the latter."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "很好的例子。那关于我们公司，你了解多少？为什么想加入我们？",
+                "text_pinyin": "hěn hǎo de lìzi. nà guānyú wǒmen gōngsī, nǐ liǎojiě duōshǎo? wèishénme xiǎng jiārù wǒmen?",
+                "text_en": "Great example. So what do you know about our company? Why do you want to join us?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain why you want this job.",
+                "options": [
+                    {
+                        "text_zh": "我了解到贵公司去年在东南亚市场的业务增长了百分之三十，而且正在组建新的海外业务部门。我在国际贸易方面的经验和语言能力正好适合这个方向。而且我很认同贵公司重视团队合作的企业文化。",
+                        "text_pinyin": "wǒ liǎojiě dào guì gōngsī qùnián zài Dōngnán Yà shìchǎng de yèwù zēngzhǎng le bǎifēnzhī sānshí, érqiě zhèngzài zǔjiàn xīn de hǎiwài yèwù bùmén. wǒ zài guójì màoyì fāngmiàn de jīngyàn hé yǔyán nénglì zhènghǎo shìhé zhège fāngxiàng. érqiě wǒ hěn rèntóng guì gōngsī zhòngshì tuánduì hézuò de qǐyè wénhuà.",
+                        "text_en": "I know your company's Southeast Asian operations grew 30% last year, and you're building a new overseas business division. My international trade experience and language skills align well with that direction. I also appreciate your company's team-oriented culture.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Research, alignment, and cultural fit in one answer — Director Xue makes a note. In chess terms, you've reached the middle game in good position."
+                    },
+                    {
+                        "text_zh": "我听说贵公司发展得很快，待遇也不错。",
+                        "text_pinyin": "wǒ tīngshuō guì gōngsī fāzhǎn de hěn kuài, dàiyù yě búcuò.",
+                        "text_en": "I've heard your company is growing fast and the compensation is good.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest, at least. Director Xue appreciates transparency, though she'd prefer more substance."
+                    },
+                    {
+                        "text_zh": "我觉得这个职位挺适合我的。",
+                        "text_pinyin": "wǒ juéde zhège zhíwèi tǐng shìhé wǒ de.",
+                        "text_en": "I think this position suits me well.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "She waits for the「因为……」that never comes. A missed opportunity to show preparation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "看来你做了不少功课。最后一个问题：你对薪资有什么期望？我们可以开诚布公地谈。",
+                "text_pinyin": "kànlái nǐ zuò le bù shǎo gōngkè. zuìhòu yí gè wèntí: nǐ duì xīnzī yǒu shénme qīwàng? wǒmen kěyǐ kāichéngbùgōng de tán.",
+                "text_en": "It seems you've done your homework. Last question: what are your salary expectations? We can discuss this openly."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "State your salary expectations.",
+                "options": [
+                    {
+                        "text_zh": "根据这个职位的市场水平和我自己的经验，我期望的月薪在一万五到两万之间。当然，如果公司有完善的晋升机制和培训机会，我在薪资上可以灵活一些。",
+                        "text_pinyin": "gēnjù zhège zhíwèi de shìchǎng shuǐpíng hé wǒ zìjǐ de jīngyàn, wǒ qīwàng de yuèxīn zài yí wàn wǔ dào liǎng wàn zhī jiān. dāngrán, rúguǒ gōngsī yǒu wánshàn de jìnshēng jīzhì hé péixùn jīhuì, wǒ zài xīnzī shàng kěyǐ línghuó yìxiē.",
+                        "text_en": "Based on market rates for this position and my experience, I'm looking at 15,000 to 20,000 per month. Of course, if the company offers good advancement and training opportunities, I can be flexible on salary.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "A range grounded in research, with room to negotiate — Director Xue respects the preparation. The tea is getting cold, but the conversation is warm."
+                    },
+                    {
+                        "text_zh": "看贵公司的安排吧，我比较灵活。",
+                        "text_pinyin": "kàn guì gōngsī de ānpái ba, wǒ bǐjiào línghuó.",
+                        "text_en": "I'll go with whatever the company offers — I'm flexible.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Diplomatic but directionless. She'll offer the lower end of the range."
+                    },
+                    {
+                        "text_zh": "越多越好呗。",
+                        "text_pinyin": "yuè duō yuè hǎo bei.",
+                        "text_en": "The more the better, right?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Director Xue's smile is the kind that means the interview has taken a turn. Honesty is valued; flippancy less so."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这个范围跟我们的预算差不多。我们会在一周内通知你结果。还有什么问题想问我吗？",
+                "text_pinyin": "zhège fànwéi gēn wǒmen de yùsuàn chàbuduō. wǒmen huì zài yì zhōu nèi tōngzhī nǐ jiéguǒ. hái yǒu shénme wèntí xiǎng wèn wǒ ma?",
+                "text_en": "That range is close to our budget. We'll notify you of the result within a week. Do you have any questions for me?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask a final question.",
+                "options": [
+                    {
+                        "text_zh": "请问这个职位的日常工作节奏是怎样的？团队现在面临的最大挑战是什么？我想提前了解一下。",
+                        "text_pinyin": "qǐngwèn zhège zhíwèi de rìcháng gōngzuò jiézòu shì zěnyàng de? tuánduì xiànzài miànlín de zuì dà tiǎozhàn shì shénme? wǒ xiǎng tíqián liǎojiě yíxià.",
+                        "text_en": "What's the daily work rhythm for this position? What's the team's biggest current challenge? I'd like to understand in advance.",
+                        "score": 1.0,
+                        "register": "formal",
+                        "feedback": "Asking about challenges shows you're already thinking like a team member. Director Xue's answer is detailed — a good sign. The endgame looks promising."
+                    },
+                    {
+                        "text_zh": "没有了，谢谢薛主任。期待您的通知。",
+                        "text_pinyin": "méiyǒu le, xièxie Xuē zhǔrèn. qīdài nín de tōngzhī.",
+                        "text_en": "No more questions. Thank you, Director Xue. I look forward to hearing from you.",
+                        "score": 0.7,
+                        "register": "formal",
+                        "feedback": "Polite close. She shakes your hand — a firm handshake, as expected."
+                    },
+                    {
+                        "text_zh": "加班多不多？",
+                        "text_pinyin": "jiābān duō bù duō?",
+                        "text_en": "Is there a lot of overtime?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A legitimate question asked at the wrong moment. Director Xue answers honestly, but your priorities have been noted."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese job interviews often begin with tea (铁观音, tiěguānyīn, Iron Goddess oolong is popular) as an icebreaker. Using 贵公司 (guì gōngsī, 'your esteemed company') shows appropriate formality. Salary discussions in China are increasingly direct, though some candidates still defer to the company's offer. Asking questions at the end signals genuine interest."
+    }
+}

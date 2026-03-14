@@ -1,0 +1,87 @@
+{
+    "title": "A New Neighbor",
+    "title_zh": "新邻居",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "Someone has moved into the apartment next door. You see them in the hallway carrying boxes. They look tired but friendly.",
+        "setup_zh": "有人搬到了你隔壁。你在走廊里看到他们在搬箱子。他们看起来很累但很友好。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！我是你的新邻居。我叫小李。",
+                "text_pinyin": "Nǐ hǎo! Wǒ shì nǐ de xīn línjū. Wǒ jiào Xiǎo Lǐ.",
+                "text_en": "Hello! I'm your new neighbor. My name is Xiao Li."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Introduce yourself to your new neighbor.",
+                "options": [
+                    {
+                        "text_zh": "你好，小李！我叫杰森。欢迎！",
+                        "text_pinyin": "Nǐ hǎo, Xiǎo Lǐ! Wǒ jiào Jiésēn. Huānyíng!",
+                        "text_en": "Hi, Xiao Li! My name is Jason. Welcome!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Mirrors her introduction and adds a welcome -- exactly the right warmth for a new neighbor."
+                    },
+                    {
+                        "text_zh": "你好！你从哪里来？",
+                        "text_pinyin": "Nǐ hǎo! Nǐ cóng nǎlǐ lái?",
+                        "text_en": "Hello! Where are you from?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Greets her but jumps straight to a personal question without introducing yourself first."
+                    },
+                    {
+                        "text_zh": "你搬了很多箱子啊。",
+                        "text_pinyin": "Nǐ bān le hěn duō xiāngzi a.",
+                        "text_en": "You've moved a lot of boxes.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Observes the obvious instead of introducing yourself -- she just told you her name and you didn't respond in kind."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢！你在这里住了多久了？",
+                "text_pinyin": "Xièxie! Nǐ zài zhèlǐ zhù le duō jiǔ le?",
+                "text_en": "Thanks! How long have you lived here?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell them how long you've lived here.",
+                "options": [
+                    {
+                        "text_zh": "我在这里住了两年了。这里很好。",
+                        "text_pinyin": "Wǒ zài zhèlǐ zhù le liǎng nián le. Zhèlǐ hěn hǎo.",
+                        "text_en": "I've lived here for two years. It's nice here.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Answers her question and reassures her about the neighborhood -- she'll feel good hearing that."
+                    },
+                    {
+                        "text_zh": "不太久。",
+                        "text_pinyin": "Bú tài jiǔ.",
+                        "text_en": "Not too long.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers the question but too brief -- doesn't help the new neighbor feel welcomed."
+                    },
+                    {
+                        "text_zh": "你需要帮忙搬箱子吗？",
+                        "text_pinyin": "Nǐ xūyào bāngmáng bān xiāngzi ma?",
+                        "text_en": "Do you need help moving boxes?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Helpful instinct, but she asked how long you've lived here -- jumping to the boxes skips her question."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "In Chinese apartment buildings, neighbors often develop close relationships over time. A warm first meeting sets the tone. The phrase 欢迎 (welcome) is a small gesture that means a lot to someone starting fresh in a new home."
+    }
+}

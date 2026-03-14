@@ -1,0 +1,124 @@
+{
+    "title": "The Rental Car Sage",
+    "title_zh": "租车智者",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_travel_4_04_v0",
+    "tree": {
+        "setup": "A small car rental office near the Kunming airport, where the afternoon sun warms the waiting area and a ceiling fan turns with hypnotic laziness. The rental agent, Lao Peng, has been renting cars for twenty years and can assess a driver's skill level from the way they hold a car key. He keeps a small notebook of scenic routes that he shares only with customers he considers worthy.",
+        "setup_zh": "昆明机场附近的小租车行，午后的阳光温暖着等候区，吊扇以催眠般的懒散转动。租车经纪老彭租了二十年的车，能从一个人拿车钥匙的方式判断他的驾驶水平。他有一本小笔记本，记录着风景路线，只分享给他认为值得的客户。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎！你要租车？开几天？去哪里？",
+                "text_pinyin": "huānyíng! nǐ yào zū chē? kāi jǐ tiān? qù nǎlǐ?",
+                "text_en": "Welcome! Renting a car? How many days? Where are you headed?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "State your rental needs.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想租三天。打算开去大理，然后再回昆明还车。有什么推荐的车型？",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng zū sān tiān. dǎsuàn kāi qù Dàlǐ, ránhòu zài huí Kūnmíng huán chē. yǒu shénme tuījiàn de chēxíng?",
+                        "text_en": "Hello, I'd like to rent for three days. Plan to drive to Dali, then return the car back in Kunming. Any car recommendations?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Duration, route, and return plan — Lao Peng opens his notebook. The Kunming-Dali route is one of his favorites."
+                    },
+                    {
+                        "text_zh": "租三天，去大理。",
+                        "text_pinyin": "zū sān tiān, qù Dàlǐ.",
+                        "text_en": "Three days, going to Dali.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods and starts pulling up available cars."
+                    },
+                    {
+                        "text_zh": "最便宜的车多少钱？",
+                        "text_pinyin": "zuì piányi de chē duōshǎo qián?",
+                        "text_en": "What's the cheapest car?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Peng winces slightly. For mountain roads, cheapest is not the criterion he'd recommend."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "去大理啊，路上有山路。我推荐这款SUV，开山路比较稳。三天一共六百块，包保险。需要看一下你的驾照。",
+                "text_pinyin": "qù Dàlǐ a, lù shàng yǒu shān lù. wǒ tuījiàn zhè kuǎn SUV, kāi shān lù bǐjiào wěn. sān tiān yígòng liùbǎi kuài, bāo bǎoxiǎn. xūyào kàn yíxià nǐ de jiàzhào.",
+                "text_en": "Going to Dali — there are mountain roads. I recommend this SUV, more stable on mountain roads. Three days total 600 yuan, insurance included. I'll need to see your driver's license."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show your license and ask about the route.",
+                "options": [
+                    {
+                        "text_zh": "好的，驾照在这里。去大理大概要开多久？路上有什么要注意的吗？",
+                        "text_pinyin": "hǎo de, jiàzhào zài zhèlǐ. qù Dàlǐ dàgài yào kāi duō jiǔ? lù shàng yǒu shénme yào zhùyì de ma?",
+                        "text_en": "OK, here's my license. How long is the drive to Dali? Anything I should watch out for on the road?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about road conditions — Lao Peng's notebook opens. He's about to share twenty years of route wisdom."
+                    },
+                    {
+                        "text_zh": "驾照给你。六百块可以。",
+                        "text_pinyin": "jiàzhào gěi nǐ. liùbǎi kuài kěyǐ.",
+                        "text_en": "Here's my license. 600 is fine.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Straightforward. He processes the rental."
+                    },
+                    {
+                        "text_zh": "能不能便宜一点？",
+                        "text_pinyin": "néng bu néng piányi yìdiǎn?",
+                        "text_en": "Can you go cheaper?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Peng's price includes insurance. He explains this with the patience of a man who values safety over savings."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "大概四五个小时。山路弯多，慢一点开。到了楚雄可以休息一下。对了，我有一条风景特别好的小路，经过一个很漂亮的湖。你要不要试试？",
+                "text_pinyin": "dàgài sì wǔ gè xiǎoshí. shān lù wān duō, màn yìdiǎn kāi. dào le Chǔxióng kěyǐ xiūxi yíxià. duìle, wǒ yǒu yì tiáo fēngjǐng tèbié hǎo de xiǎo lù, jīngguò yí gè hěn piàoliang de hú. nǐ yào búyào shìshi?",
+                "text_en": "About four or five hours. Mountain roads have lots of curves — drive slow. You can rest at Chuxiong. Oh, I have a scenic side road that passes a beautiful lake. Want to try it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Accept his scenic route suggestion.",
+                "options": [
+                    {
+                        "text_zh": "当然想试试！能不能把路线画给我？或者发个定位给我？",
+                        "text_pinyin": "dāngrán xiǎng shìshi! néng bu néng bǎ lùxiàn huà gěi wǒ? huòzhě fā gè dìngwèi gěi wǒ?",
+                        "text_en": "Definitely! Can you draw the route for me? Or send me a GPS pin?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Peng tears a page from his notebook and draws a map with the care of a calligrapher. You've been judged worthy."
+                    },
+                    {
+                        "text_zh": "好啊，谢谢推荐。",
+                        "text_pinyin": "hǎo a, xièxie tuījiàn.",
+                        "text_en": "Sure, thanks for the recommendation.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He jots down the key turn on the rental agreement. A small gift from a man who loves his roads."
+                    },
+                    {
+                        "text_zh": "还是走高速吧，快一点。",
+                        "text_pinyin": "háishì zǒu gāosù ba, kuài yìdiǎn.",
+                        "text_en": "I'll take the highway — it's faster.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Lao Peng closes his notebook with the gentleness of someone putting a child to bed. The scenic route will wait for the next worthy customer."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Renting a car in China requires a Chinese driver's license (驾照, jiàzhào) — international licenses are not valid. For the Kunming-Dali route, an SUV is genuinely recommended for the mountain roads. Insurance (保险, bǎoxiǎn) should always be included."
+    }
+}

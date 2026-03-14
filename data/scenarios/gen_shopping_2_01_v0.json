@@ -1,0 +1,94 @@
+{
+    "title": "The Refund Negotiation",
+    "title_zh": "退货的艺术",
+    "hsk_level": 2,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_2_01_v0",
+    "tree": {
+        "setup": "A clothing store in a shopping mall. You bought a jacket yesterday but the zipper is already stuck. The sales clerk, Xiao Qing, examines the zipper with the intensity of a forensic investigator. She jiggles it twice, frowns, jiggles it again. Her professional pride demands she attempt a fix before authorizing a return.",
+        "setup_zh": "商场里的服装店。你昨天买了一件夹克，拉链已经卡住了。销售员小青像法医一样检查拉链。她拉了两下，皱眉，又拉了一下。她的职业尊严要求她先试着修好，再同意退货。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，请问有什么问题？",
+                "text_pinyin": "nín hǎo, qǐngwèn yǒu shénme wèntí?",
+                "text_en": "Hello, what seems to be the problem?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the problem with the jacket.",
+                "options": [
+                    {
+                        "text_zh": "我昨天买的这件夹克，拉链坏了。我想退货。",
+                        "text_pinyin": "wǒ zuótiān mǎi de zhè jiàn jiákè, lāliàn huài le. wǒ xiǎng tuì huò.",
+                        "text_en": "This jacket I bought yesterday -- the zipper is broken. I'd like to return it.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Qing takes the jacket and tests the zipper herself.「确实坏了。有收据吗？」Clear explanation + 退货 (tuì huò, 'return goods') gets things moving. 坏了 means 'broken.'"
+                    },
+                    {
+                        "text_zh": "这个拉链不好用。可以换一件吗？",
+                        "text_pinyin": "zhè ge lāliàn bù hǎo yòng. kěyǐ huàn yí jiàn ma?",
+                        "text_en": "This zipper doesn't work well. Can I exchange it?",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "Xiao Qing nods.「可以换，也可以退。您要哪个？」换 means 'exchange' -- a good middle-ground option."
+                    },
+                    {
+                        "text_zh": "这件衣服有问题！",
+                        "text_pinyin": "zhè jiàn yīfu yǒu wèntí!",
+                        "text_en": "There's a problem with this clothing!",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Qing waits for you to specify what the problem actually is.「什么问题呢？」Being specific saves everyone time. 有问题 is vague but at least it opens the conversation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我看了，确实是质量问题。您有收据吗？",
+                "text_pinyin": "hǎo de, wǒ kàn le, quèshí shì zhìliàng wèntí. nín yǒu shōujù ma?",
+                "text_en": "OK, I've checked, it is indeed a quality issue. Do you have the receipt?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Show your receipt.",
+                "options": [
+                    {
+                        "text_zh": "有，给你。可以退钱吗？",
+                        "text_pinyin": "yǒu, gěi nǐ. kěyǐ tuì qián ma?",
+                        "text_en": "Yes, here. Can I get a refund?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Xiao Qing processes the return with a few taps.「可以，退到你的手机支付账户上。」退钱 is 'refund' -- literally 'return money.'"
+                    },
+                    {
+                        "text_zh": "收据在手机上，我找一下。",
+                        "text_pinyin": "shōujù zài shǒujī shàng, wǒ zhǎo yíxià.",
+                        "text_en": "The receipt is on my phone, let me find it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Qing waits while you scroll. Digital receipts are normal now -- she's used to watching customers search through their photos."
+                    },
+                    {
+                        "text_zh": "收据丢了……没有收据不行吗？",
+                        "text_pinyin": "shōujù diū le... méiyǒu shōujù bù xíng ma?",
+                        "text_en": "I lost the receipt... can't I return without it?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Qing's expression becomes complicated. Without a receipt, things get difficult.「我帮你查查电脑记录。」Keep your receipts -- 收据 is your best friend when returning items."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了，退款已经处理好了。不好意思给您添麻烦了。",
+                "text_pinyin": "hǎo le, tuìkuǎn yǐjīng chǔlǐ hǎo le. bù hǎoyìsi gěi nín tiān máfan le.",
+                "text_en": "Done, the refund has been processed. Sorry for the trouble."
+            }
+        ],
+        "cultural_note": "Returns (退货) in China are usually smooth if you have the receipt and the item is within the return period (usually 7-15 days). Mobile payment makes refunds quick. 收据 (shōujù) is the receipt -- always keep it."
+    }
+}

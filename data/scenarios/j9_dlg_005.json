@@ -1,0 +1,152 @@
+{
+    "title": "The Sound of Old Wood",
+    "title_zh": "老木头的声音",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You visit an ancient guqin maker, Master Xu, in his workshop in Yangzhou. He is tapping a plank of 500-year-old tung wood salvaged from a demolished temple. He listens to the resonance with his eyes closed, as if the wood is speaking to him.",
+        "setup_zh": "你在扬州拜访古琴制作师徐师傅的工作室。他正在敲一块从拆毁的寺庙中抢救出来的五百年桐木板。他闭着眼睛听木头的共鸣，好像木头在对他说话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你听——敲这里，「咚」。敲那里，「咚」。听起来一样？不一样。这块木头在这个位置经历过一根梁——承重的地方，木纤维被压得更紧，声音就更沉。那边是靠近窗户的位置——阳光晒过的地方，木头更干、更松，声音就更清亮。这块木头在寺庙里活了五百年。五百年的风、雨、阳光、僧人念经的振动——全部储存在木纤维里。我不是在做一把新琴——我是在释放这块木头五百年来积累的声音。这些声音一直在里面，只是没有人来把它们放出来。",
+                "text_pinyin": "Nǐ tīng — qiāo zhèlǐ, 'dōng'. Qiāo nàlǐ, 'dōng'. Tīng qǐlái yīyàng? Bù yīyàng. Zhè kuài mùtou zài zhège wèizhì jīnglì guò yī gēn liáng — chéngzhòng de dìfang, mù xiānwéi bèi yā de gèng jǐn, shēngyīn jiù gèng chén. Nàbiān shì kàojìn chuānghù de wèizhì — yángguāng shài guò de dìfang, mùtou gèng gān, gèng sōng, shēngyīn jiù gèng qīngliàng. Zhè kuài mùtou zài sìmiào lǐ huó le wǔbǎi nián. Wǔbǎi nián de fēng, yǔ, yángguāng, sēngrén niànjīng de zhèndòng — quánbù chǔcún zài mù xiānwéi lǐ. Wǒ bú shì zài zuò yī bǎ xīn qín — wǒ shì zài shìfàng zhè kuài mùtou wǔbǎi nián lái jīlěi de shēngyīn. Zhèxiē shēngyīn yīzhí zài lǐmiàn, zhǐ shì méiyǒu rén lái bǎ tāmen fàng chūlái.",
+                "text_en": "Listen — tap here, 'dong.' Tap there, 'dong.' Sound the same? They don't. At this spot, the wood bore a beam — where weight pressed, wood fibers compressed tighter, so the sound is deeper. Over there was near a window — where sunlight reached, the wood is drier, looser, the sound brighter. This wood lived in a temple for five hundred years."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea of releasing stored sounds rather than creating new ones.",
+                "options": [
+                    {
+                        "text_zh": "所以您不是在创造声音——声音已经在这里了。您是在找到一种方式把它们释放出来？那对您来说，您的工作更像是——倾听，而不是制作？",
+                        "text_pinyin": "Suǒyǐ nín bú shì zài chuàngzào shēngyīn — shēngyīn yǐjīng zài zhèlǐ le. Nín shì zài zhǎo dào yī zhǒng fāngshì bǎ tāmen shìfàng chūlái? Nà duì nín lái shuō, nín de gōngzuò gèng xiàng shì — qīngtīng, ér bú shì zhìzuò?",
+                        "text_en": "So you're not creating sound — the sound is already here. You're finding a way to release it? Then for you, your work is more like — listening, rather than making?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "徐师傅睁开眼，看了你一眼。「对。大多数人来了半天，都没问到这里。」他重新闭上眼睛，继续敲。"
+                    },
+                    {
+                        "text_zh": "这个理念很美。但说实话，新木头加上现代声学技术，应该也能做出很好的琴吧？",
+                        "text_pinyin": "Zhège lǐniàn hěn měi. Dàn shuō shíhuà, xīn mùtou jiā shàng xiàndài shēngxué jìshù, yīnggāi yě néng zuò chū hěn hǎo de qín ba?",
+                        "text_en": "That's a beautiful concept. But honestly, new wood plus modern acoustic technology should be able to produce a great qin too, right?",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "徐师傅停下来，慢慢地把木槌放在桌上。他看了你一眼，然后看向那块木头。「你刚才有没有在听？」他问，语气没有生气，只是确认。"
+                    },
+                    {
+                        "text_zh": "这个寺庙为什么被拆了？",
+                        "text_pinyin": "Zhège sìmiào wèishéme bèi chāi le?",
+                        "text_en": "Why was the temple demolished?",
+                        "score": 0.0,
+                        "feedback": "徐师傅微微皱眉，没有停下来。「那是另一个故事。你刚才有没有听出两声「咚」的区别？」"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "木头的自传——这个说法我要记下来。但我还要告诉你一个秘密：最好的琴音，不是来自木头最完美的部分——恰恰来自它的伤痕。你看这里——一道裂纹。这是一百多年前地震留下的。大多数制琴师看到裂纹会避开它。但我不会。因为裂纹改变了这个位置的振动方式——它创造了一种不规则的共鸣。这种不规则才是声音里最动人的部分。完美的振动是数学——不完美的振动是音乐。如果你把所有的伤痕、所有的不规则都磨掉，你得到的是一块完美的木板——但它发出的声音会很无聊。因为它没有故事了。",
+                "text_pinyin": "Mùtou de zìzhuàn — zhège shuōfǎ wǒ yào jì xiàlái. Dàn wǒ hái yào gàosu nǐ yī ge mìmì: zuì hǎo de qín yīn, bú shì lái zì mùtou zuì wánměi de bùfen — qiàqià lái zì tā de shānghén. Nǐ kàn zhèlǐ — yī dào lièwén. Zhè shì yībǎi duō nián qián dìzhèn liú xià de. Dàduōshù zhì qín shī kàn dào lièwén huì bìkāi tā. Dàn wǒ bú huì. Yīnwèi lièwén gǎibiàn le zhège wèizhì de zhèndòng fāngshì — tā chuàngzào le yī zhǒng bù guīzé de gòngmíng. Zhè zhǒng bù guīzé cái shì shēngyīn lǐ zuì dòngrén de bùfen. Wánměi de zhèndòng shì shùxué — bù wánměi de zhèndòng shì yīnyuè. Rúguǒ nǐ bǎ suǒyǒu de shānghén, suǒyǒu de bù guīzé dōu mó diào, nǐ dédào de shì yī kuài wánměi de mùbǎn — dàn tā fāchū de shēngyīn huì hěn wúliáo. Yīnwèi tā méiyǒu gùshì le.",
+                "text_en": "The wood's autobiography — I need to write that down. But let me tell you a secret: the finest tone doesn't come from the wood's most perfect parts — it comes precisely from its scars. See here — a crack. Left by an earthquake over a century ago. Most instrument makers would avoid the crack. But I won't."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the idea that imperfection makes music, not mathematics.",
+                "options": [
+                    {
+                        "text_zh": "我能摸一下那道裂纹吗？……我在想，弹到那个位置的时候，演奏者能感觉到它吗？还是只在声音里？",
+                        "text_pinyin": "Wǒ néng mō yīxià nà dào lièwén ma? …… Wǒ zài xiǎng, tán dào nàge wèizhì de shíhou, yǎnzòu zhě néng gǎnjué dào tā ma? Háishì zhǐ zài shēngyīn lǐ?",
+                        "text_en": "Can I touch that crack? ... I'm wondering — when you play across that spot, does the player feel it? Or is it only in the sound?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "徐师傅把木板轻轻递过来。「摸摸看。」等你摸完，他说：「手指感觉不到。但耳朵感觉得到。」"
+                    },
+                    {
+                        "text_zh": "您做一把琴要多长时间？",
+                        "text_pinyin": "Nín zuò yī bǎ qín yào duō cháng shíjiān?",
+                        "text_en": "How long does it take you to make one guqin?",
+                        "score": 0.0,
+                        "feedback": "徐师傅点点头，像是在回答一个不同的问题。「三年。有时候更长。」然后继续看那道裂纹，没有再说话。"
+                    },
+                    {
+                        "text_zh": "现代声学能模拟这种效果吗？",
+                        "text_pinyin": "Xiàndài shēngxué néng mónǐ zhè zhǒng xiàoguǒ ma?",
+                        "text_en": "Can modern acoustics simulate this effect?",
+                        "score": 0.0,
+                        "feedback": "徐师傅淡淡地笑了一下。「你去问问那些人吧。」他把木板转了个方向，没再提这个话题。"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "裂纹让声音独一无二——你听到了最重要的部分。但还有更深的一层。你知道为什么我用寺庙的木头而不是新木头吗？新木头也可以做琴，声音也不错。但寺庙木头有一样东西新木头没有：它被声音泡过了。五百年的念经声、木鱼声、钟声——这些声音的振动改变了木纤维的微观结构。木头记住了声音。所以当我把它做成琴，弹第一个音的时候——那个音不只是琴弦的振动。它是琴弦的振动加上木头五百年的声音记忆。两种振动叠加在一起，产生了一种你在新琴上永远听不到的深度。这不是技术——这是时间。没有任何技术可以替代五百年。",
+                "text_pinyin": "Lièwén ràng shēngyīn dúyīwú'èr — nǐ tīng dào le zuì zhòngyào de bùfen. Dàn hái yǒu gèng shēn de yī céng. Nǐ zhīdào wèishéme wǒ yòng sìmiào de mùtou ér bú shì xīn mùtou ma? Xīn mùtou yě kěyǐ zuò qín, shēngyīn yě búcuò. Dàn sìmiào mùtou yǒu yī yàng dōngxi xīn mùtou méiyǒu: tā bèi shēngyīn pào guò le. Wǔbǎi nián de niànjīng shēng, mùyú shēng, zhōng shēng — zhèxiē shēngyīn de zhèndòng gǎibiàn le mù xiānwéi de wēiguān jiégòu. Mùtou jì zhù le shēngyīn. Suǒyǐ dāng wǒ bǎ tā zuò chéng qín, tán dì yī ge yīn de shíhou — nàge yīn bù zhǐ shì qínxián de zhèndòng. Tā shì qínxián de zhèndòng jiā shàng mùtou wǔbǎi nián de shēngyīn jìyì. Liǎng zhǒng zhèndòng diéjiā zài yīqǐ, chǎnshēng le yī zhǒng nǐ zài xīn qín shàng yǒngyuǎn tīng bú dào de shēndù. Zhè bú shì jìshù — zhè shì shíjiān. Méiyǒu rènhé jìshù kěyǐ tìdài wǔbǎi nián.",
+                "text_en": "Cracks making sound unique — you heard the most important part. But there's a deeper layer. Do why I use temple wood instead of new wood? New wood can make a qin too, and it sounds fine. But temple wood has something new wood doesn't: it has been soaked in sound."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to wood that remembers five hundred years of sound.",
+                "options": [
+                    {
+                        "text_zh": "所以听的人——他们不知道为什么这把琴感觉不一样，但那种感觉是真实的。他们在听五百年，只是不知道。",
+                        "text_pinyin": "Suǒyǐ tīng de rén — tāmen bù zhīdào wèishéme zhè bǎ qín gǎnjué bù yīyàng, dàn nà zhǒng gǎnjué shì zhēnshí de. Tāmen zài tīng wǔbǎi nián, zhǐ shì bù zhīdào.",
+                        "text_en": "So the people listening — they don't know why this qin feels different, but that feeling is real. They're hearing five hundred years. They just don't know it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "徐师傅停下来，转过身看你。沉默了一会儿。「对。就是这样。」他说，声音很轻，像是自己在确认什么。"
+                    },
+                    {
+                        "text_zh": "这种木头现在还能找到吗？",
+                        "text_pinyin": "Zhè zhǒng mùtou xiànzài hái néng zhǎo dào ma?",
+                        "text_en": "Can this kind of wood still be found?",
+                        "score": 0.0,
+                        "feedback": "徐师傅叹了口气。「越来越难了。」他说完就停了，没有再展开。"
+                    },
+                    {
+                        "text_zh": "科学家研究过这种现象吗？",
+                        "text_pinyin": "Kēxuéjiā yánjiū guò zhè zhǒng xiànxiàng ma?",
+                        "text_en": "Have scientists studied this phenomenon?",
+                        "score": 0.0,
+                        "feedback": "徐师傅没有不高兴，只是平静地说：「也许有研究过。我没看过。」然后继续做他的事。"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "尊重时间的智慧——你说到了我最在意的事情。我再跟你分享最后一个想法。每次我完成一把琴，第一次弹它的时候，我都会有一种奇怪的感觉：不是我在弹它——是它在通过我发出声音。五百年的风雨、地震的裂纹、僧人的声音——这些全部通过我的手指，在这一刻变成了音乐。我只是一个通道。这块木头等了五百年，等一个人来理解它、倾听它、把它变成琴。也许我等了一辈子，也是为了遇到这块木头。我们之间的相遇不是偶然——是两种等待在同一个时刻交汇了。制琴不是技术——是缘分。",
+                "text_pinyin": "Zūnzhòng shíjiān de zhìhuì — nǐ shuō dào le wǒ zuì zàiyì de shìqíng. Wǒ zài gēn nǐ fēnxiǎng zuìhòu yī ge xiǎngfǎ. Měi cì wǒ wánchéng yī bǎ qín, dì yī cì tán tā de shíhou, wǒ dōu huì yǒu yī zhǒng qíguài de gǎnjué: bú shì wǒ zài tán tā — shì tā zài tōngguò wǒ fāchū shēngyīn. Wǔbǎi nián de fēngyǔ, dìzhèn de lièwén, sēngrén de shēngyīn — zhèxiē quánbù tōngguò wǒ de shǒuzhǐ, zài zhè yī kè biàn chéng le yīnyuè. Wǒ zhǐ shì yī ge tōngdào. Zhè kuài mùtou děng le wǔbǎi nián, děng yī ge rén lái lǐjiě tā, qīngtīng tā, bǎ tā biàn chéng qín. Yěxǔ wǒ děng le yī bèizi, yě shì wèi le yù dào zhè kuài mùtou. Wǒmen zhī jiān de xiāngyù bú shì ǒurán — shì liǎng zhǒng děngdài zài tóng yī ge shíkè jiāohuì le. Zhì qín bú shì jìshù — shì yuánfèn.",
+                "text_en": "The wisdom to respect time — you've touched on what I care about most. Let me share one final thought. Every time I finish a qin, when I play it for the first time, I have a strange feeling: it's not me playing it — it's the wood sounding through me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the convergence of two forms of waiting.",
+                "options": [
+                    {
+                        "text_zh": "那第一次弹它的时候——您能感觉出来吗？那种「找到了」的感觉？还是只有事后才明白？",
+                        "text_pinyin": "Nà dì yī cì tán tā de shíhou — nín néng gǎnjué chūlái ma? Nà zhǒng 'zhǎo dào le' de gǎnjué? Háishì zhǐyǒu shìhòu cái míngbái?",
+                        "text_en": "That first time you play it — can you feel it in the moment? That sense of 'found it'? Or does it only become clear afterward?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "徐师傅抬起头，看着窗外，想了很久。「在那一刻。」他最后说。「就在第一个音里。」"
+                    },
+                    {
+                        "text_zh": "您一共做过多少把琴？",
+                        "text_pinyin": "Nín yīgòng zuò guò duōshǎo bǎ qín?",
+                        "text_en": "How many qin have you made in total?",
+                        "score": 0.0,
+                        "feedback": "徐师傅报了一个数字，平静地，像是在说今天的天气。然后他重新低下头，摸了摸那道裂纹。"
+                    },
+                    {
+                        "text_zh": "我可以试弹一下吗？",
+                        "text_pinyin": "Wǒ kěyǐ shì tán yīxià ma?",
+                        "text_en": "Can I try playing it?",
+                        "score": 0.0,
+                        "feedback": "徐师傅轻轻地笑了。「还没做好。」他说，语气没有任何责备，只是陈述一个事实。"
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The guqin (古琴) is China's oldest stringed instrument, with a history spanning over 3,000 years. It is revered not merely as a musical instrument but as a vehicle for philosophical contemplation. The tradition of using aged wood — especially wood from temples, old boats, or ancient buildings — reflects the belief that wood absorbs and retains the vibrational history of its environment. The concept of 缘分 (yuánfèn) describes a predestined affinity between people, objects, or events — a meeting made possible by accumulated conditions across time. In guqin culture, the relationship between maker, player, and instrument is considered a form of yuanfen."
+    }
+}

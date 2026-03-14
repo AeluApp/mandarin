@@ -1,0 +1,83 @@
+{
+    "title": "The Repair Shop",
+    "title_zh": "修理铺",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.45,
+    "tree": {
+        "setup": "You've brought a broken watch to a tiny repair shop run by Master Qian, an elderly watchmaker. His shop is barely bigger than a closet, filled with tiny tools and ticking clocks.",
+        "setup_zh": "你带着一块坏了的手表来到钱师傅的小修理铺。他是一位年迈的修表匠。他的店比一个柜子大不了多少，里面满是小工具和滴答作响的钟表。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "放这儿吧。我先看看。现在很少有人修表了，都说买新的更便宜。但有些东西的价值不在于多少钱，而在于它跟了你多少年。",
+                "text_pinyin": "Fàng zhèr ba. Wǒ xiān kàn kàn. Xiànzài hěn shǎo yǒu rén xiū biǎo le, dōu shuō mǎi xīn de gèng piányi. Dàn yǒuxiē dōngxi de jiàzhí bú zàiyú duōshǎo qián, ér zàiyú tā gēn le nǐ duōshǎo nián.",
+                "text_en": "Set it down here. Let me take a look. Few people repair watches anymore — they all say buying new is cheaper. But some things' value isn't about money, it's about how many years they've been with you."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the value of old things.",
+                "options": [
+                    {
+                        "text_zh": "是的，这块表是我爸爸给我的。虽然不贵，但每次看到它，我就想到他。这种东西买新的代替不了。",
+                        "text_pinyin": "Shì de, zhè kuài biǎo shì wǒ bàba gěi wǒ de. Suīrán bú guì, dàn měi cì kàn dào tā, wǒ jiù xiǎng dào tā. Zhè zhǒng dōngxi mǎi xīn de dàitì bù liǎo.",
+                        "text_en": "Yes, this watch was from my father. It's not expensive, but every time I see it, I think of him. This kind of thing can't be replaced by buying new.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Personal and genuine — connects the watch to emotional meaning."
+                    },
+                    {
+                        "text_zh": "不过说实话，修好了也不一定走得准。现在的电子表又便宜又准，功能也多。也许买个新的更实际。",
+                        "text_pinyin": "Búguò shuō shíhuà, xiū hǎo le yě bù yīdìng zǒu de zhǔn. Xiànzài de diànzǐ biǎo yòu piányi yòu zhǔn, gōngnéng yě duō. Yěxǔ mǎi ge xīn de gèng shíjì.",
+                        "text_en": "But honestly, even repaired it might not keep good time. Digital watches today are cheap, accurate, and full of features. Maybe buying new is more practical.",
+                        "score": 0.0,
+                        "feedback": "Master Qian sets down his loupe and looks at you: 'If you only wanted accuracy, you wouldn't have walked into my shop.'"
+                    },
+                    {
+                        "text_zh": "现在大家都用手机看时间了。",
+                        "text_pinyin": "Xiànzài dàjiā dōu yòng shǒujī kàn shíjiān le.",
+                        "text_en": "Everyone uses their phone to check time now.",
+                        "score": 0.0,
+                        "feedback": "Technology observation that dismisses both the watch and his craft."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你爸爸给你的……那我一定帮你修好。我也有这样的东西。这把小工具是我师傅留给我的，用了四十年了。他走了以后，我每天还是用它，好像他还在教我一样。",
+                "text_pinyin": "Nǐ bàba gěi nǐ de…… nà wǒ yīdìng bāng nǐ xiū hǎo. Wǒ yě yǒu zhèyàng de dōngxi. Zhè bǎ xiǎo gōngjù shì wǒ shīfu liú gěi wǒ de, yòng le sìshí nián le. Tā zǒu le yǐhòu, wǒ měi tiān háishì yòng tā, hǎoxiàng tā hái zài jiāo wǒ yīyàng.",
+                "text_en": "From your father... then I'll definitely fix it for you. I have things like that too. This small tool was left to me by my master, I've used it for forty years. After he passed, I still use it every day — as if he's still teaching me."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his connection to his master.",
+                "options": [
+                    {
+                        "text_zh": "挡风板是好主意，我去问问。陈姐，咱俩为了两度温差谈了十分钟，这效率才是真正需要研究的。",
+                        "text_pinyin": "Dǎngfēng bǎn shì hǎo zhǔyì, wǒ qù wènwen. Chén jiě, zánmen liǎ wèile liǎng dù wēnchā tán le shí fēnzhōng, zhè xiàolǜ cái shì zhēnzhèng xūyào yánjiū de.",
+                        "text_en": "The wind deflector is a good idea, I'll ask about it. Sister Chen, we spent ten minutes negotiating over two degrees — now that's the efficiency worth studying.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Moving and true — frames craftsmanship as living memory."
+                    },
+                    {
+                        "text_zh": "你收过徒弟吗？",
+                        "text_pinyin": "Nǐ shōu guò túdì ma?",
+                        "text_en": "Have you ever taken on apprentices?",
+                        "score": 0.0,
+                        "feedback": "Succession question that shifts from the emotional moment."
+                    },
+                    {
+                        "text_zh": "修表难不难学？",
+                        "text_pinyin": "Xiū biǎo nán bù nán xué?",
+                        "text_en": "Is watch repair hard to learn?",
+                        "score": 0.0,
+                        "feedback": "Vocational question during a tender exchange."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Traditional repair shops (修理铺) are disappearing from Chinese cities as disposable consumer culture takes hold. The master-apprentice (师徒) relationship in Chinese crafts is deeply personal, with tools and techniques passed down as both professional knowledge and emotional inheritance. The concept of 手艺 (shǒuyì, handicraft) carries moral weight — it represents dedication, patience, and a form of identity."
+    }
+}

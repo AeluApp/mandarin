@@ -1,0 +1,121 @@
+{
+  "name": "Aelu Review Queue Poll",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {"field": "minutes", "minutesInterval": 30}
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/review-queue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "fetch-queue",
+      "name": "Fetch Review Queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-items",
+              "leftValue": "={{ $json.items.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "has-pending",
+      "name": "Has Pending Items?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/notify",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "={{ JSON.stringify({ message: $json.summary + '\\n\\nReply /review to see items.' }) }}"
+        },
+        "contentType": "application/json"
+      },
+      "id": "send-alert",
+      "name": "Send Review Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [{"node": "Fetch Review Queue", "type": "main", "index": 0}]
+      ]
+    },
+    "Fetch Review Queue": {
+      "main": [
+        [{"node": "Has Pending Items?", "type": "main", "index": 0}]
+      ]
+    },
+    "Has Pending Items?": {
+      "main": [
+        [{"node": "Send Review Alert", "type": "main", "index": 0}],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{"name": "openclaw"}]
+}

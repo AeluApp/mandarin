@@ -1,0 +1,151 @@
+{
+    "title": "The Silence Between Words",
+    "title_zh": "字与字之间的沉默",
+    "hsk_level": 9,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.8,
+    "tree": {
+        "setup": "You sit with a retired literary translator, Professor Meng, in a quiet teahouse in Nanjing. She spent forty years translating classical Chinese poetry into English. On the table between you is her final translation — a single Li Bai poem that took her three years to complete.",
+        "setup_zh": "你和退休的文学翻译家孟教授坐在南京一家安静的茶馆里。她花了四十年把中国古典诗歌翻译成英文。你们之间的桌上放着她最后的翻译——一首李白的诗，花了她三年才完成。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "三年翻译一首诗——很多人觉得不可思议。但我告诉你：不是翻译文字花了三年——翻译文字只需要一天。花三年的是翻译文字之间的沉默。你看李白这首诗——五个字一行，四行，二十个字。但这首诗真正说的话，有一半不在这二十个字里——在字与字之间的空白里。中文古诗的力量不在于它说了什么——在于它没说什么。它故意留了空白，让读者自己去填。但英语不允许空白——英语要求你把一切都说出来。所以翻译的真正难题不是找到对应的词——是在一种不允许沉默的语言里重新创造沉默。",
+                "text_pinyin": "Sān nián fānyì yī shǒu shī — hěn duō rén juéde bù kě sīyì. Dàn wǒ gàosu nǐ: bú shì fānyì wénzì huā le sān nián — fānyì wénzì zhǐ xūyào yī tiān. Huā sān nián de shì fānyì wénzì zhī jiān de chénmò. Nǐ kàn Lǐ Bái zhè shǒu shī — wǔ ge zì yī háng, sì háng, èrshí ge zì. Dàn zhè shǒu shī zhēnzhèng shuō de huà, yǒu yībàn bú zài zhè èrshí ge zì lǐ — zài zì yǔ zì zhī jiān de kòngbái lǐ. Zhōngwén gǔshī de lìliàng bú zài yú tā shuō le shénme — zài yú tā méi shuō shénme. Tā gùyì liú le kòngbái, ràng dúzhě zìjǐ qù tián. Dàn Yīngyǔ bù yǔnxǔ kòngbái — Yīngyǔ yāoqiú nǐ bǎ yīqiè dōu shuō chūlái. Suǒyǐ fānyì de zhēnzhèng nántí bú shì zhǎo dào duìyìng de cí — shì zài yī zhǒng bù yǔnxǔ chénmò de yǔyán lǐ chóngxīn chuàngzào chénmò.",
+                "text_en": "Three years to translate one poem — many find it inconceivable. But translating the words takes a day. Three years went to translating the silence between words. Look at this Li Bai poem — five characters per line, four lines, twenty characters. But half of what it says isn't in those twenty characters. It's in the spaces."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the challenge of translating silence.",
+                "options": [
+                    {
+                        "text_zh": "在不允许沉默的语言里重新创造沉默——中文说「月」「人」「远」三个字，之间没有语法连接，但读者在空白里自动感受到孤独、距离、思念。这种感受不是字给的，是空白给的。英语要求主语谓语宾语，空白被填满，诗就死了。您的三年，是在寻找用英文的字来制造中文的空白。",
+                        "text_pinyin": "Zài bù yǔnxǔ chénmò de yǔyán lǐ chóngxīn chuàngzào chénmò — Zhōngwén shuō 'yuè' 'rén' 'yuǎn' sān ge zì, zhī jiān méiyǒu yǔfǎ liánjiē, dàn dúzhě zài kòngbái lǐ zìdòng gǎnshòu dào gūdú, jùlí, sīniàn. Zhè zhǒng gǎnshòu bú shì zì gěi de, shì kòngbái gěi de. Yīngyǔ yāoqiú zhǔyǔ wèiyǔ bīnyǔ, kòngbái bèi tián mǎn, shī jiù sǐ le. Nín de sān nián, shì zài xúnzhǎo yòng Yīngwén de zì lái zhìzào Zhōngwén de kòngbái.",
+                        "text_en": "Recreating silence in a language that forbids it — Chinese says 'moon,' 'person,' 'far,' three characters with no grammar connecting them, yet readers automatically feel loneliness, distance, longing in the gaps. That feeling comes from blankness, not words. English demands subject, verb, object — blankness fills in, the poem dies. Your three years were spent finding how to manufacture Chinese blankness with English words.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Using words to manufacture absence — the paradox of translating what exists between words."
+                    },
+                    {
+                        "text_zh": "您最喜欢李白的哪首诗？",
+                        "text_pinyin": "Nín zuì xǐhuan Lǐ Bái de nǎ shǒu shī?",
+                        "text_en": "Which Li Bai poem is your favorite?",
+                        "score": 0.0,
+                        "feedback": "A preference question during a meditation on untranslatable silence."
+                    },
+                    {
+                        "text_zh": "AI翻译能做到这种程度吗？",
+                        "text_pinyin": "AI fānyì néng zuò dào zhè zhǒng chéngdù ma?",
+                        "text_en": "Can AI translation achieve this level?",
+                        "score": 0.0,
+                        "feedback": "Introduces technology comparison during a meditation on linguistic philosophy."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "用字来制造空白——你说得很准确。这就是我花三年做的事。但我还要告诉你一个更深的困难：每一种语言不只是一套词汇和语法——它是一种思维方式。中文允许模糊，因为中文的世界观认为世界本身就是模糊的——界限不清的、流动的、不需要被精确定义的。英文要求清晰，因为英文的世界观认为世界是可以被精确描述的——每一样东西都有边界、有定义、有分类。所以当你翻译一首中国古诗，你不只是在两种语言之间翻译——你是在两种看世界的方式之间翻译。模糊翻译成清晰，就像把水翻译成冰——你保留了H₂O，但失去了流动性。",
+                "text_pinyin": "Yòng zì lái zhìzào kòngbái — nǐ shuō de hěn zhǔnquè. Zhè jiù shì wǒ huā sān nián zuò de shì. Dàn wǒ hái yào gàosu nǐ yī ge gèng shēn de kùnnán: měi yī zhǒng yǔyán bù zhǐ shì yī tào cíhuì hé yǔfǎ — tā shì yī zhǒng sīwéi fāngshì. Zhōngwén yǔnxǔ móhu, yīnwèi Zhōngwén de shìjièguān rènwéi shìjiè běnshēn jiù shì móhu de — jièxiàn bù qīng de, liúdòng de, bù xūyào bèi jīngquè dìngyì de. Yīngwén yāoqiú qīngxī, yīnwèi Yīngwén de shìjièguān rènwéi shìjiè shì kěyǐ bèi jīngquè miáoshù de — měi yī yàng dōngxi dōu yǒu biānjiè, yǒu dìngyì, yǒu fēnlèi. Suǒyǐ dāng nǐ fānyì yī shǒu Zhōngguó gǔshī, nǐ bù zhǐ shì zài liǎng zhǒng yǔyán zhī jiān fānyì — nǐ shì zài liǎng zhǒng kàn shìjiè de fāngshì zhī jiān fānyì. Móhu fānyì chéng qīngxī, jiù xiàng bǎ shuǐ fānyì chéng bīng — nǐ bǎoliú le H₂O, dàn shīqù le liúdòngxìng.",
+                "text_en": "Using words to manufacture blankness — precisely put. That's what I spent three years doing. But there's a deeper difficulty: each language isn't a set of vocabulary and grammar — it's a way of thinking. Chinese permits ambiguity because the Chinese worldview sees the world as inherently ambiguous — boundaries unclear, flowing, not needing precise definition."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to translation as converting between worldviews, like water into ice.",
+                "options": [
+                    {
+                        "text_zh": "水翻译成冰——保留了物质，失去了状态。李白写「月」，说的是所有的月亮——你的、我的、一千年前的。这个「月」是液态的，流向每个读者。但英语说the moon，加了冠词，液态凝固了。不是英语的错——是两种语言的物理状态不同。您的工作是在冰的语言里保留水的记忆。",
+                        "text_pinyin": "Shuǐ fānyì chéng bīng — bǎoliú le wùzhì, shīqù le zhuàngtài. Lǐ Bái xiě 'yuè', shuō de shì suǒyǒu de yuèliang — nǐ de, wǒ de, yī qiān nián qián de. Zhège 'yuè' shì yètài de, liú xiàng měi ge dúzhě. Dàn Yīngyǔ shuō the moon, jiā le guàncí, yètài nínggù le. Bú shì Yīngyǔ de cuò — shì liǎng zhǒng yǔyán de wùlǐ zhuàngtài bùtóng. Nín de gōngzuò shì zài bīng de yǔyán lǐ bǎoliú shuǐ de jìyì.",
+                        "text_en": "Water translated into ice — substance preserved, state lost. When Li Bai writes 'moon,' he means every moon — yours, mine, a thousand years ago. That 'moon' is liquid, flowing toward each reader. But English says 'the moon' — add an article, the liquid solidifies. Not English's fault — the two languages exist in different physical states. Your work is preserving water's memory in a language of ice.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Languages as different states of matter — preserving water's memory in a language of ice."
+                    },
+                    {
+                        "text_zh": "您出版过多少本译著？",
+                        "text_pinyin": "Nín chūbǎn guò duōshǎo běn yìzhù?",
+                        "text_en": "How many translated works have you published?",
+                        "score": 0.0,
+                        "feedback": "Asks about publication count during a meditation on linguistic impossibility."
+                    },
+                    {
+                        "text_zh": "那日语是不是翻译中文诗更容易？",
+                        "text_pinyin": "Nà Rìyǔ shì bú shì fānyì Zhōngwén shī gèng róngyì?",
+                        "text_en": "Is Japanese better for translating Chinese poetry?",
+                        "score": 0.0,
+                        "feedback": "Compares languages instead of engaging the philosophical insight."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "在冰的语言里保留水的记忆——这就是我做了四十年的事。但最后，我要告诉你我三年翻译之后的结论：完美的翻译是不可能的。不是因为我不够好——是因为翻译本身的逻辑就包含了一种结构性的失败。你永远无法在一种语言里完整地再现另一种语言——因为语言不是工具，语言是世界。换一种语言不是换一套工具——是换一个世界。但——这个「但」很重要——失败不是没有价值的。恰恰相反。我翻译的每一个版本都是一次不完美的尝试——但每一次不完美的尝试都照亮了原诗的某一个面。就像你围着一座雕塑转圈——每一个角度都不是全貌，但所有角度加在一起，你会比从任何单一角度看得更完整。我的翻译不是原诗——是原诗的一个影子。但影子也有它的美。",
+                "text_pinyin": "Zài bīng de yǔyán lǐ bǎoliú shuǐ de jìyì — zhè jiù shì wǒ zuò le sìshí nián de shì. Dàn zuìhòu, wǒ yào gàosu nǐ wǒ sān nián fānyì zhīhòu de jiélùn: wánměi de fānyì shì bù kěnéng de. Bú shì yīnwèi wǒ bú gòu hǎo — shì yīnwèi fānyì běnshēn de luójí jiù bāohán le yī zhǒng jiégòuxìng de shībài. Nǐ yǒngyuǎn wúfǎ zài yī zhǒng yǔyán lǐ wánzhěng de zàixiàn lìng yī zhǒng yǔyán — yīnwèi yǔyán bú shì gōngjù, yǔyán shì shìjiè. Huàn yī zhǒng yǔyán bú shì huàn yī tào gōngjù — shì huàn yī ge shìjiè. Dàn — zhège 'dàn' hěn zhòngyào — shībài bú shì méiyǒu jiàzhí de. Qiàqià xiāngfǎn. Wǒ fānyì de měi yī ge bǎnběn dōu shì yī cì bù wánměi de chángshì — dàn měi yī cì bù wánměi de chángshì dōu zhào liàng le yuán shī de mǒu yī ge miàn. Jiù xiàng nǐ wéi zhe yī zuò diāosù zhuǎn quān — měi yī ge jiǎodù dōu bú shì quánmào, dàn suǒyǒu jiǎodù jiā zài yīqǐ, nǐ huì bǐ cóng rènhé dānyī jiǎodù kàn de gèng wánzhěng. Wǒ de fānyì bú shì yuán shī — shì yuán shī de yī ge yǐngzi. Dàn yǐngzi yě yǒu tā de měi.",
+                "text_en": "Preserving water's memory in a language of ice — that's what I've done for forty years. But finally, my conclusion after three years of translation: perfect translation is impossible. Not because I'm not good enough — because translation's own logic contains structural failure. You can never fully reproduce one language in another — because language isn't a tool, language is a world."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to translation as a beautiful shadow — structural failure with value.",
+                "options": [
+                    {
+                        "text_zh": "影子也有它的美——您的翻译不是李白，是「孟教授理解的李白」，这个理解本身就是新的创造。影子不是原物的失败，是光和物体之间的关系——您就是那道光。四十年的影子加在一起，不是复制品，是两个世界之间持续了四十年的对话。",
+                        "text_pinyin": "Yǐngzi yě yǒu tā de měi — nín de fānyì bú shì Lǐ Bái, shì 'Mèng jiàoshòu lǐjiě de Lǐ Bái', zhège lǐjiě běnshēn jiù shì xīn de chuàngzào. Yǐngzi bú shì yuánwù de shībài, shì guāng hé wùtǐ zhī jiān de guānxi — nín jiù shì nà dào guāng. Sìshí nián de yǐngzi jiā zài yīqǐ, bú shì fùzhìpǐn, shì liǎng ge shìjiè zhī jiān chíxù le sìshí nián de duìhuà.",
+                        "text_en": "Shadows have their own beauty — your translation isn't Li Bai, it's 'Professor Meng's understanding of Li Bai,' and that understanding is itself a new creation. A shadow isn't the original's failure — it's the relationship between light and object. You are that light. Forty years of shadows together aren't a replica — they're a forty-year conversation between two worlds.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The translator as light creating shadows — forty years of impossible attempts becoming a conversation between worlds."
+                    },
+                    {
+                        "text_zh": "那其他翻译家的版本您看过吗？",
+                        "text_pinyin": "Nà qítā fānyìjiā de bǎnběn nín kàn guò ma?",
+                        "text_en": "Have you seen other translators' versions?",
+                        "score": 0.0,
+                        "feedback": "Asks about competitors during a meditation on translation as existential act."
+                    },
+                    {
+                        "text_zh": "中国学生学英语也有这个问题吗？",
+                        "text_pinyin": "Zhōngguó xuéshēng xué Yīngyǔ yě yǒu zhège wèntí ma?",
+                        "text_en": "Do Chinese students learning English face this problem too?",
+                        "score": 0.0,
+                        "feedback": "Pivots to language education instead of engaging the philosophical depth."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "两个世界之间的对话——你让我四十年的工作有了一个我从未想到过的名字。最后，我想让你看一看这个：这是我翻译的最后一个版本。你看——我在英文里留了一些空行。不是打印错误——是我故意留的。三年以后我明白了：我不能用英文的字来制造中文的空白——但我可以用英文的空白来致敬中文的空白。那些空行是我对李白的一种鞠躬——我承认：这里有些东西我翻译不了。这些空行就是我的诚实。它们说的是：「到这里为止，语言到不了了。剩下的，请你自己感受。」也许翻译的最高境界不是完美——是知道哪里该停下来。",
+                "text_pinyin": "Liǎng ge shìjiè zhī jiān de duìhuà — nǐ ràng wǒ sìshí nián de gōngzuò yǒu le yī ge wǒ cóng wèi xiǎng dào guò de míngzì. Zuìhòu, wǒ xiǎng ràng nǐ kàn yī kàn zhège: zhè shì wǒ fānyì de zuìhòu yī ge bǎnběn. Nǐ kàn — wǒ zài Yīngwén lǐ liú le yīxiē kōng háng. Bú shì dǎyìn cuòwù — shì wǒ gùyì liú de. Sān nián yǐhòu wǒ míngbai le: wǒ bù néng yòng Yīngwén de zì lái zhìzào Zhōngwén de kòngbái — dàn wǒ kěyǐ yòng Yīngwén de kòngbái lái zhìjìng Zhōngwén de kòngbái. Nàxiē kōng háng shì wǒ duì Lǐ Bái de yī zhǒng jūgōng — wǒ chéngrèn: zhèlǐ yǒuxiē dōngxi wǒ fānyì bù liǎo. Zhèxiē kōng háng jiù shì wǒ de chéngshí. Tāmen shuō de shì: 'dào zhèlǐ wéizhǐ, yǔyán dào bù liǎo le. Shèng xià de, qǐng nǐ zìjǐ gǎnshòu.' Yěxǔ fānyì de zuìgāo jìngjiè bú shì wánměi — shì zhīdào nǎlǐ gāi tíng xiàlái.",
+                "text_en": "A conversation between two worlds — you've given my forty years of work a name I'd never thought of. Finally, look at this: my last version. See — I left blank lines in the English. Not a printing error — deliberate. After three years I understood: I can't use English words to manufacture Chinese blankness — but I can use English blankness to pay homage to Chinese blankness."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the blank lines as honesty — knowing where to stop.",
+                "options": [
+                    {
+                        "text_zh": "知道哪里该停下来——这些空行是您四十年功力的结晶。它们需要您拥有足够的技术去填满，同时拥有足够的智慧去选择不填。李白留了空白给一千年后的中国读者，您留了空行给今天的英文读者。你们在做同一件事——信任读者。相信沉默比语言说得更多。",
+                        "text_pinyin": "Zhīdào nǎlǐ gāi tíng xiàlái — zhèxiē kōng háng shì nín sìshí nián gōnglì de jiéjīng. Tāmen xūyào nín yōngyǒu zúgòu de jìshù qù tián mǎn, tóngshí yōngyǒu zúgòu de zhìhuì qù xuǎnzé bù tián. Lǐ Bái liú le kòngbái gěi yī qiān nián hòu de Zhōngguó dúzhě, nín liú le kōng háng gěi jīntiān de Yīngwén dúzhě. Nǐmen zài zuò tóng yī jiàn shì — xìnrèn dúzhě. Xiāngxìn chénmò bǐ yǔyán shuō de gèng duō.",
+                        "text_en": "Knowing where to stop — these blank lines are the crystallization of your forty years. They require enough skill to fill them, and enough wisdom to choose not to. Li Bai left blankness for Chinese readers a thousand years later. You left blank lines for today's English readers. You're doing the same thing — trusting the reader. Believing silence says more than language.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Trusting the reader — the blank lines as technique and wisdom crystallized into honesty."
+                    },
+                    {
+                        "text_zh": "这首诗我可以拍一张照片吗？",
+                        "text_pinyin": "Zhè shǒu shī wǒ kěyǐ pāi yī zhāng zhàopiàn ma?",
+                        "text_en": "Can I take a photo of this poem?",
+                        "score": 0.0,
+                        "feedback": "Tries to capture the artifact instead of engaging the philosophy."
+                    },
+                    {
+                        "text_zh": "您退休以后还会继续翻译吗？",
+                        "text_pinyin": "Nín tuìxiū yǐhòu hái huì jìxù fānyì ma?",
+                        "text_en": "Will you continue translating after retirement?",
+                        "score": 0.0,
+                        "feedback": "A career question at the philosophical culmination."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Classical Chinese poetry (古诗) is characterized by extreme compression — five or seven characters per line with no grammatical markers, pronouns, or tense indicators. This creates a radical openness that allows multiple simultaneous readings. The Sapir-Whorf hypothesis, which Professor Meng's observations echo, suggests that language shapes thought and perception. The Chinese philosophical tradition of 留白 (liúbái, 'leaving white/blank') — the deliberate use of empty space in painting, poetry, and music — reflects the Daoist principle that emptiness is not absence but pregnant potential (虚中有实, the solid within the empty)."
+    }
+}

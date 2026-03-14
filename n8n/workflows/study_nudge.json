@@ -1,0 +1,121 @@
+{
+  "name": "Aelu Study Nudge",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {"field": "hours", "hoursInterval": 1}
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "fetch-status",
+      "name": "Fetch Learner Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-due",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "0 items due",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "has-due-items",
+      "name": "Has Due Items?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.AELU_BASE_URL }}/api/openclaw/notify",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 10000
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-OpenClaw-Key",
+              "value": "={{ $env.OPENCLAW_API_KEY }}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "={{ JSON.stringify({ message: $json.status }) }}"
+        },
+        "contentType": "application/json"
+      },
+      "id": "send-nudge",
+      "name": "Send Study Nudge",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [{"node": "Fetch Learner Status", "type": "main", "index": 0}]
+      ]
+    },
+    "Fetch Learner Status": {
+      "main": [
+        [{"node": "Has Due Items?", "type": "main", "index": 0}]
+      ]
+    },
+    "Has Due Items?": {
+      "main": [
+        [{"node": "Send Study Nudge", "type": "main", "index": 0}],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{"name": "openclaw"}]
+}

@@ -1,0 +1,117 @@
+{
+    "title": "Sharing Homemade Dumplings",
+    "title_zh": "分享自己做的饺子",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You just finished making dumplings at home and have too many. You decide to bring some to your neighbor, Xiao Wang, who recently moved in and doesn't know many people yet.",
+        "setup_zh": "你刚在家包完饺子，包得太多了。你决定送一些给刚搬来的邻居小王，他还不太认识附近的人。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Knock on your neighbor's door and offer the dumplings.",
+                "options": [
+                    {
+                        "text_zh": "小王，你好！我刚包了一些饺子，包多了。你要不要尝尝？",
+                        "text_pinyin": "Xiǎo Wáng, nǐ hǎo! Wǒ gāng bāo le yīxiē jiǎozi, bāo duō le. Nǐ yào bú yào chángchang?",
+                        "text_en": "Xiao Wang, hi! I just made some dumplings — made too many. Would you like to try some?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Friendly and natural — the 'made too many' framing takes pressure off the neighbor."
+                    },
+                    {
+                        "text_zh": "这是给你的饺子。",
+                        "text_pinyin": "Zhè shì gěi nǐ de jiǎozi.",
+                        "text_en": "These dumplings are for you.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Direct but a bit abrupt — no warmth or context."
+                    },
+                    {
+                        "text_zh": "你吃饭了吗？我做了饺子。",
+                        "text_pinyin": "Nǐ chīfàn le ma? Wǒ zuò le jiǎozi.",
+                        "text_en": "Have you eaten? I made dumplings.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Classic Chinese greeting that leads naturally to the offer."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "哎，太客气了！闻起来好香啊。你自己包的？里面是什么馅儿的？",
+                "text_pinyin": "Āi, tài kèqi le! Wén qǐlái hǎo xiāng a. Nǐ zìjǐ bāo de? Lǐmiàn shì shénme xiànr de?",
+                "text_en": "Oh, you're too kind! They smell amazing. Did you make them yourself? What filling is it?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him about the filling.",
+                "options": [
+                    {
+                        "text_zh": "是猪肉白菜的，我妈妈教我的做法。你要是不吃猪肉的话，我下次可以包素的。",
+                        "text_pinyin": "Shì zhūròu báicài de, wǒ māma jiāo wǒ de zuòfǎ. Nǐ yàoshi bù chī zhūròu dehuà, wǒ xià cì kěyǐ bāo sù de.",
+                        "text_en": "They're pork and cabbage — my mom's recipe. If you don't eat pork, I can make vegetarian ones next time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And considerate — shows cultural awareness about dietary preferences."
+                    },
+                    {
+                        "text_zh": "猪肉白菜的。",
+                        "text_pinyin": "Zhūròu báicài de.",
+                        "text_en": "Pork and cabbage.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Answers the question but doesn't build the conversation."
+                    },
+                    {
+                        "text_zh": "你自己看吧，我不记得了。",
+                        "text_pinyin": "Nǐ zìjǐ kàn ba, wǒ bú jìde le.",
+                        "text_en": "See for yourself, I don't remember.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Odd — you just made them; not remembering seems disconnected."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "猪肉白菜是我最喜欢的！太好了。你做饭很厉害啊。我一个人住，平时都是点外卖，很少自己做饭。",
+                "text_pinyin": "Zhūròu báicài shì wǒ zuì xǐhuan de! Tài hǎo le. Nǐ zuòfàn hěn lìhai a. Wǒ yī ge rén zhù, píngshí dōu shì diǎn wàimài, hěn shǎo zìjǐ zuòfàn.",
+                "text_en": "Pork and cabbage is my favorite! Great. You're really good at cooking. I live alone and usually just order delivery — I rarely cook myself."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his comment about always ordering delivery.",
+                "options": [
+                    {
+                        "text_zh": "下次我包饺子的时候叫你一起来包吧！很简单的，我可以教你。",
+                        "text_pinyin": "Xià cì wǒ bāo jiǎozi de shíhou jiào nǐ yīqǐ lái bāo ba! Hěn jiǎndān de, wǒ kěyǐ jiāo nǐ.",
+                        "text_en": "Next time I make dumplings, come join me! It's simple — I can teach you.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Warm and inclusive — turns a gift into a friendship."
+                    },
+                    {
+                        "text_zh": "你应该学做饭，总吃外卖不健康。",
+                        "text_pinyin": "Nǐ yīnggāi xué zuòfàn, zǒng chī wàimài bù jiànkāng.",
+                        "text_en": "You should learn to cook — always ordering delivery isn't healthy.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Preachy and unsolicited advice — dampens the friendly mood."
+                    },
+                    {
+                        "text_zh": "是啊，自己做比外卖好吃多了。",
+                        "text_pinyin": "Shì a, zìjǐ zuò bǐ wàimài hǎochī duō le.",
+                        "text_en": "Yeah, homemade food is much tastier than delivery.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Agreeable but doesn't extend the connection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Sharing homemade food with neighbors — especially dumplings — is one of the most common and meaningful gestures of community in China. The phrase 「包多了」 (made too many) is a polite way to offer food without making the other person feel like they owe you anything."
+    },
+    "hsk_level": 3
+}

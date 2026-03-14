@@ -1,11 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none" stroke="black">
-  <!-- horizon -->
-  <line x1="0" y1="38" x2="120" y2="38" stroke-width="0.4"/>
-  <!-- mountains -->
-  <polyline points="30,38 45,18 60,38" stroke-width="0.6"/>
-  <polyline points="55,38 72,22 88,38" stroke-width="0.6"/>
-  <polyline points="75,38 85,26 95,38" stroke-width="0.5"/>
-  <!-- converging path -->
-  <line x1="35" y1="58" x2="55" y2="38" stroke-width="0.6"/>
-  <line x1="85" y1="58" x2="65" y2="38" stroke-width="0.6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- far mountain range — layered depth -->
+  <path d="M0 50 Q15 38 30 44 Q45 30 65 40 Q80 22 100 34 Q115 20 135 32 Q155 24 175 38 Q190 30 200 42" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- mid mountain range -->
+  <path d="M0 58 Q20 42 45 50 Q60 36 80 44 Q100 30 120 42 Q140 34 160 46 Q180 38 200 50" stroke="#2a2a2a" stroke-width="0.6" fill="#2a2a2a" fill-opacity="0.05"/>
+  <!-- snow caps on tallest peaks -->
+  <path d="M96 32 Q100 30 104 34" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M112 22 Q115 20 118 24" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <!-- mist bands between ranges -->
+  <path d="M0 54 Q30 50 60 54 Q90 50 120 54 Q150 50 180 54 Q190 52 200 54" stroke="#2a2a2a" stroke-width="0.2" opacity="0.12"/>
+  <!-- near hills -->
+  <path d="M0 66 Q25 54 50 60 Q70 50 90 58 Q110 48 130 56 Q150 50 170 60 Q190 54 200 62" stroke="#2a2a2a" stroke-width="0.7" fill="#2a2a2a" fill-opacity="0.06"/>
+  <!-- trees on near hills — varied sizes -->
+  <line x1="35" y1="58" x2="35" y2="52" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M32 54 Q35 48 38 54" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.04"/>
+  <line x1="50" y1="60" x2="50" y2="54" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M47.5 56 Q50 50 52.5 56" stroke="#2a2a2a" stroke-width="0.35" fill="#2a2a2a" fill-opacity="0.03"/>
+  <line x1="115" y1="54" x2="115" y2="48" stroke="#2a2a2a" stroke-width="0.5"/>
+  <path d="M112 50 Q115 44 118 50" stroke="#2a2a2a" stroke-width="0.4" fill="#2a2a2a" fill-opacity="0.04"/>
+  <line x1="155" y1="58" x2="155" y2="52" stroke="#2a2a2a" stroke-width="0.4"/>
+  <path d="M152.5 54 Q155 48 157.5 54" stroke="#2a2a2a" stroke-width="0.35" fill="#2a2a2a" fill-opacity="0.03"/>
+  <!-- winding path — S-curve through landscape -->
+  <path d="M80 96 Q72 88 76 80 Q82 72 90 68 Q98 64 100 58 Q102 52 108 48" stroke="#2a2a2a" stroke-width="0.8"/>
+  <path d="M120 96 Q112 88 116 80 Q120 74 112 68 Q106 64 106 58 Q106 54 108 48" stroke="#2a2a2a" stroke-width="0.6"/>
+  <!-- path texture -->
+  <path d="M88 78 Q92 76 96 78" stroke="#2a2a2a" stroke-width="0.25" opacity="0.3"/>
+  <path d="M98 70 Q102 68 106 70" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <!-- small figure on path -->
+  <circle cx="94" cy="72" r="1" stroke="#2a2a2a" stroke-width="0.4"/>
+  <line x1="94" y1="73" x2="94" y2="76" stroke="#2a2a2a" stroke-width="0.4"/>
+  <!-- foreground wildflowers -->
+  <path d="M10 86 Q12 82 14 86" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <circle cx="12" cy="82" r="0.8" stroke="#2a2a2a" stroke-width="0.3" opacity="0.4"/>
+  <path d="M22 84 Q24 80 26 84" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
+  <circle cx="24" cy="80" r="0.6" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
+  <path d="M170 82 Q172 78 174 82" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
+  <circle cx="172" cy="78" r="0.7" stroke="#2a2a2a" stroke-width="0.3" opacity="0.35"/>
+  <!-- birds in distance -->
+  <path d="M60 16 Q62 14 64 16" stroke="#2a2a2a" stroke-width="0.3" opacity="0.3"/>
+  <path d="M68 18 Q70 16 72 18" stroke="#2a2a2a" stroke-width="0.25" opacity="0.25"/>
+  <path d="M64 20 Q66 18 68 20" stroke="#2a2a2a" stroke-width="0.2" opacity="0.2"/>
 </svg>

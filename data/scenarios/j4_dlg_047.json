@@ -1,0 +1,83 @@
+{
+    "title": "The Seed Keeper",
+    "title_zh": "留种子的人",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You visit a village market and find an old woman selling small paper bags of seeds. She has dozens of varieties, each labeled in careful handwriting.",
+        "setup_zh": "你在村子的集市上看到一位老人在卖一小袋一小袋的种子。她有几十种，每种上面都用工整的字写着标签。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这些种子都是我自己留的，不是买的。每年收成以后，我把最好的果实留下来取种子。这个习惯是我妈妈教我的，她的妈妈教她的。一代一代留下来的种子，比种子公司的好。",
+                "text_pinyin": "Zhèxiē zhǒngzi dōu shì wǒ zìjǐ liú de, bú shì mǎi de. Měi nián shōuchéng yǐhòu, wǒ bǎ zuì hǎo de guǒshí liú xiàlái qǔ zhǒngzi. Zhège xíguàn shì wǒ māma jiāo wǒ de, tā de māma jiāo tā de. Yī dài yī dài liú xiàlái de zhǒngzi, bǐ zhǒngzi gōngsī de hǎo.",
+                "text_en": "These seeds are all saved by me, not store-bought. Each year after harvest, I save seeds from the best fruit. My mother taught me this habit, and her mother taught her. Seeds passed down through generations are better than seed company ones."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the tradition of seed-saving.",
+                "options": [
+                    {
+                        "text_zh": "一代一代留下来——这些不只是种子，是您家里几代人的记忆。每一颗种子都连着您妈妈、您外婆。种下去的时候，是在种她们的选择和智慧。",
+                        "text_pinyin": "Yī dài yī dài liú xiàlái — zhèxiē bù zhǐ shì zhǒngzi, shì nín jiālǐ jǐ dài rén de jìyì. Měi yī kē zhǒngzi dōu lián zhe nín māma, nín wàipó. Zhǒng xiàqù de shíhou, shì zài zhǒng tāmen de xuǎnzé hé zhìhuì.",
+                        "text_en": "Passed down generation by generation — these aren't just seeds, they're your family's memories across generations. Each seed is connected to your mother, your grandmother. When you plant them, you're planting their choices and wisdom.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Seeds as memory capsules — each one carries ancestral wisdom."
+                    },
+                    {
+                        "text_zh": "种子公司的品种不好吗？",
+                        "text_pinyin": "Zhǒngzi gōngsī de pǐnzhǒng bù hǎo ma?",
+                        "text_en": "Are seed company varieties not good?",
+                        "score": 0.0,
+                        "feedback": "Debates commercial vs. saved seeds instead of honoring the tradition."
+                    },
+                    {
+                        "text_zh": "不过现在种子公司的品种产量更高，抗病能力也更强。科学培育的种子应该比老品种更好吧？",
+                        "text_pinyin": "Búguò xiànzài zhǒngzi gōngsī de pǐnzhǒng chǎnliàng gèng gāo, kàng bìng nénglì yě gèng qiáng. Kēxué péiyù de zhǒngzi yīnggāi bǐ lǎo pǐnzhǒng gèng hǎo ba?",
+                        "text_en": "But seed company varieties have higher yields and better disease resistance. Scientifically bred seeds should be better than old varieties, right?",
+                        "score": 0.0,
+                        "feedback": "She holds up a small paper bag: 'Higher yield? My grandmother's tomatoes made people close their eyes when they tasted them. Can your science do that?'"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得好。我最怕的就是这些种子断了。村里的年轻人都去城里了，没人种地了。如果我不留种子，这些品种就没有了——不是去超市买不到的那种「没有」，是从世界上消失了的「没有」。",
+                "text_pinyin": "Nǐ shuō de hǎo. Wǒ zuì pà de jiù shì zhèxiē zhǒngzi duàn le. Cūn lǐ de niánqīng rén dōu qù chéng lǐ le, méi rén zhòng dì le. Rúguǒ wǒ bù liú zhǒngzi, zhèxiē pǐnzhǒng jiù méiyǒu le — bú shì qù chāoshì mǎi bú dào de nà zhǒng 'méiyǒu', shì cóng shìjiè shàng xiāoshī le de 'méiyǒu'.",
+                "text_en": "Well said. What I fear most is these seeds being lost. The village young people have all gone to the city, nobody farms anymore. If I don't save seeds, these varieties will be gone — not 'gone' as in you can't find them at the supermarket, but 'gone' as in disappeared from the world."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the permanent loss she describes.",
+                "options": [
+                    {
+                        "text_zh": "从世界上消失——这种「没有」不能接受。您不只是种菜，是在保护记忆和基因。每留一颗种子，就是在对未来说「这值得继续存在」。",
+                        "text_pinyin": "Cóng shìjiè shàng xiāoshī — zhè zhǒng 'méiyǒu' bù néng jiēshòu. Nín bù zhǐ shì zhòng cài, shì zài bǎohù jìyì hé jīyīn. Měi liú yī kē zhǒngzi, jiù shì zài duì wèilái shuō 'zhè zhíde jìxù cúnzài'.",
+                        "text_en": "Disappeared from the world — that kind of 'gone' is unacceptable. You're not just gardening, you're protecting memory and genes. Every seed saved says to the future: 'This deserves to continue.'",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Seed-saving as a declaration to the future — existence is worth preserving."
+                    },
+                    {
+                        "text_zh": "有没有种子银行可以保存？",
+                        "text_pinyin": "Yǒu méiyǒu zhǒngzi yínháng kěyǐ bǎocún?",
+                        "text_en": "Is there a seed bank that could preserve them?",
+                        "score": 0.0,
+                        "feedback": "Institutional solution when she's talking about personal guardianship."
+                    },
+                    {
+                        "text_zh": "年轻人为什么不回来种地？",
+                        "text_pinyin": "Niánqīng rén wèishéme bù huílái zhòng dì?",
+                        "text_en": "Why don't the young people come back to farm?",
+                        "score": 0.0,
+                        "feedback": "Sociological question during an emotional revelation."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Seed-saving (留种) is one of humanity's oldest agricultural practices and remains alive in Chinese villages. As younger generations leave for cities, the continuity of local seed varieties is genuinely threatened. Each lost variety represents irreversible genetic and cultural loss. Village seed keepers are often elderly women who see themselves as guardians of living heritage."
+    }
+}

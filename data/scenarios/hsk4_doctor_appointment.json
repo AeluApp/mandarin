@@ -19,9 +19,30 @@
                 "speaker": "player",
                 "prompt_en": "Tell the receptionist about your symptoms and ask which department to see.",
                 "options": [
-                    {"text_zh": "你好，我最近头疼、嗓子疼，还有一点发烧，已经好几天了。我应该挂内科还是耳鼻喉科？今天下午还有号吗？", "text_pinyin": "nǐ hǎo, wǒ zuìjìn tóuténg, sǎngzi téng, hái yǒu yīdiǎn fāshāo, yǐjīng hǎo jǐ tiān le. wǒ yīnggāi guà nèikē háishi ěrbíhóu kē? jīntiān xiàwǔ hái yǒu hào ma?", "text_en": "Hello, I've had a headache, sore throat, and slight fever for several days now. Should I register for internal medicine or ENT? Are there still slots available this afternoon?", "score": 1.0, "register": "neutral", "feedback": "Thorough -- lists all symptoms, asks the right question about departments, and checks availability. 挂号 and 有号 are essential medical vocabulary."},
-                    {"text_zh": "我不舒服，想看医生。今天能挂号吗？", "text_pinyin": "wǒ bù shūfu, xiǎng kàn yīshēng. jīntiān néng guàhào ma?", "text_en": "I'm not feeling well, I'd like to see a doctor. Can I register today?", "score": 0.5, "register": "casual", "feedback": "Too vague -- the receptionist needs to know your symptoms to direct you to the right department. Specifying 头疼, 发烧, or 嗓子疼 helps."},
-                    {"text_zh": "我要看病，给我挂个号。", "text_pinyin": "wǒ yào kànbìng, gěi wǒ guà gè hào.", "text_en": "I need to see a doctor, give me a number.", "score": 0.3, "register": "blunt", "feedback": "Demanding tone and no symptom details. Clinic staff need basic information to help you -- being polite and specific makes everything smoother."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "你好，我最近头疼、嗓子疼，还有一点发烧，已经好几天了。我应该挂内科还是耳鼻喉科？今天下午还有号吗？",
+                        "text_pinyin": "nǐ hǎo, wǒ zuìjìn tóuténg, sǎngzi téng, hái yǒu yīdiǎn fāshāo, yǐjīng hǎo jǐ tiān le. wǒ yīnggāi guà nèikē háishi ěrbíhóu kē? jīntiān xiàwǔ hái yǒu hào ma?",
+                        "text_en": "Hello, I've had a headache, sore throat, and slight fever for several days now. Should I register for internal medicine or ENT? Are there still slots available this afternoon?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Thorough -- lists all symptoms, asks the right question about departments, and checks availability. 挂号 and 有号 are essential medical vocabulary."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             },
             {
@@ -34,9 +55,30 @@
                 "speaker": "player",
                 "prompt_en": "Confirm the appointment.",
                 "options": [
-                    {"text_zh": "好的，那就挂下午三点张医生的号。请问我需要带什么？医保卡可以用吗？", "text_pinyin": "hǎo de, nà jiù guà xiàwǔ sān diǎn zhāng yīshēng de hào. qǐngwèn wǒ xūyào dài shénme? yībǎo kǎ kěyǐ yòng ma?", "text_en": "OK, I'll take the 3 PM slot with Dr. Zhang. What do I need to bring? Can I use my medical insurance card?", "score": 1.0, "register": "neutral", "feedback": "Smart follow-up -- asking about required documents and insurance shows practical thinking. 医保卡 is an important term for healthcare in China."},
-                    {"text_zh": "好，三点我过去。谢谢。", "text_pinyin": "hǎo, sān diǎn wǒ guòqù. xièxie.", "text_en": "OK, I'll be there at three. Thanks.", "score": 0.7, "register": "casual", "feedback": "Confirms the appointment clearly. Asking about what to bring would be even more practical."},
-                    {"text_zh": "挂号费能不能便宜点？", "text_pinyin": "guàhào fèi néng bù néng piányi diǎn?", "text_en": "Can the registration fee be cheaper?", "score": 0.2, "register": "casual", "feedback": "Registration fees at clinics are fixed and not negotiable. This question wastes time and sounds odd in a medical setting."}
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    },
+                    {
+                        "text_zh": "好的，那就挂下午三点张医生的号。请问我需要带什么？医保卡可以用吗？",
+                        "text_pinyin": "hǎo de, nà jiù guà xiàwǔ sān diǎn zhāng yīshēng de hào. qǐngwèn wǒ xūyào dài shénme? yībǎo kǎ kěyǐ yòng ma?",
+                        "text_en": "OK, I'll take the 3 PM slot with Dr. Zhang. What do I need to bring? Can I use my medical insurance card?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Smart follow-up -- asking about required documents and insurance shows practical thinking. 医保卡 is an important term for healthcare in China."
+                    }
                 ]
             },
             {
@@ -49,9 +91,30 @@
                 "speaker": "player",
                 "prompt_en": "Describe your symptoms in detail to the doctor.",
                 "options": [
-                    {"text_zh": "张医生您好。大概五天前开始头疼，然后嗓子也开始疼，吞口水都不舒服。昨天量了一下体温，三十七度八。另外，晚上睡觉的时候会咳嗽，白天稍微好一些。我自己吃了一些感冒药，但是没什么效果。", "text_pinyin": "zhāng yīshēng nín hǎo. dàgài wǔ tiān qián kāishǐ tóuténg, ránhòu sǎngzi yě kāishǐ téng, tūn kǒushuǐ dōu bù shūfu. zuótiān liáng le yīxià tǐwēn, sānshíqī dù bā. lìngwài, wǎnshang shuìjiào de shíhou huì késou, báitiān shāowēi hǎo yīxiē. wǒ zìjǐ chī le yīxiē gǎnmào yào, dànshì méi shénme xiàoguǒ.", "text_en": "Hello Dr. Zhang. About five days ago I started getting headaches, then my throat started hurting too -- even swallowing water is uncomfortable. I took my temperature yesterday, 37.8 degrees. Also, I cough when sleeping at night, slightly better during the day. I took some cold medicine on my own, but it hasn't helped.", "score": 1.0, "register": "neutral", "feedback": "Excellent -- provides timeline, specific symptoms, temperature reading, pattern (night vs. day), and what you've already tried. This is exactly what doctors need to hear."},
-                    {"text_zh": "头疼、嗓子疼、发烧，五天了。吃了感冒药没用。", "text_pinyin": "tóuténg, sǎngzi téng, fāshāo, wǔ tiān le. chī le gǎnmào yào méi yòng.", "text_en": "Headache, sore throat, fever, five days. Took cold medicine, didn't work.", "score": 0.6, "register": "casual", "feedback": "Covers the basics but too telegraphic. Adding details like temperature, when symptoms worsen, and which medicine you took helps the doctor diagnose faster."},
-                    {"text_zh": "就是感冒了，浑身不舒服。您看着开药就行。", "text_pinyin": "jiùshì gǎnmào le, húnshēn bù shūfu. nín kànzhe kāi yào jiù xíng.", "text_en": "It's just a cold, uncomfortable all over. Just prescribe whatever you think.", "score": 0.3, "register": "casual", "feedback": "Self-diagnosing and being vague doesn't help. Let the doctor determine what it is -- describe specific symptoms so they can make an accurate diagnosis."}
+                    {
+                        "text_zh": "张医生您好。大概五天前开始头疼，然后嗓子也开始疼，吞口水都不舒服。昨天量了一下体温，三十七度八。另外，晚上睡觉的时候会咳嗽，白天稍微好一些。我自己吃了一些感冒药，但是没什么效果。",
+                        "text_pinyin": "zhāng yīshēng nín hǎo. dàgài wǔ tiān qián kāishǐ tóuténg, ránhòu sǎngzi yě kāishǐ téng, tūn kǒushuǐ dōu bù shūfu. zuótiān liáng le yīxià tǐwēn, sānshíqī dù bā. lìngwài, wǎnshang shuìjiào de shíhou huì késou, báitiān shāowēi hǎo yīxiē. wǒ zìjǐ chī le yīxiē gǎnmào yào, dànshì méi shénme xiàoguǒ.",
+                        "text_en": "Hello Dr. Zhang. About five days ago I started getting headaches, then my throat started hurting too -- even swallowing water is uncomfortable. I took my temperature yesterday, 37.8 degrees. Also, I cough when sleeping at night, slightly better during the day. I took some cold medicine on my own, but it hasn't helped.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Excellent -- provides timeline, specific symptoms, temperature reading, pattern (night vs. day), and what you've already tried. This is exactly what doctors need to hear."
+                    },
+                    {
+                        "text_zh": "这个问题很复杂，我需要更多时间考虑。",
+                        "text_pinyin": "Zhège wèntí hěn fùzá, wǒ xūyào gèng duō shíjiān kǎolǜ.",
+                        "text_en": "This question is very complex; I need more time to consider it.",
+                        "score": 0.3,
+                        "register": "evasive",
+                        "feedback": "Avoids engaging with the specific question at hand."
+                    },
+                    {
+                        "text_zh": "我觉得这不是最重要的问题。",
+                        "text_pinyin": "Wǒ juéde zhè bú shì zuì zhòngyào de wèntí.",
+                        "text_en": "I don't think this is the most important question.",
+                        "score": 0.3,
+                        "register": "dismissive",
+                        "feedback": "Redirects rather than addressing the topic directly."
+                    }
                 ]
             }
         ],

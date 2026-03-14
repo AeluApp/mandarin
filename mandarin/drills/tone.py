@@ -1,6 +1,7 @@
 """Tone drill implementations."""
 
 import random
+import unicodedata
 
 from .base import (
     DrillResult, format_hanzi, format_hanzi_inline,
@@ -91,20 +92,23 @@ def _generate_tone_options(correct_pinyin: str, n_options: int = 4) -> list:
 # ── Tone drill ──────────────────────────────
 
 def run_tone_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True,
-                   audio_enabled: bool = False) -> DrillResult:
-    """Tone discrimination: show hanzi+english, pick correct toned pinyin."""
+                   audio_enabled: bool = False, english_level: str = "full") -> DrillResult:
+    """Tone discrimination: show hanzi (+ english when not faded), pick correct toned pinyin."""
     correct_pinyin = item["pinyin"]
     options = _generate_tone_options(correct_pinyin)
 
-    # Play audio BEFORE showing options (same pattern as listening_gist)
+    # Play audio BEFORE showing options
     if audio_enabled:
         from ..audio import speak_and_wait
-        show_fn(f"\n  Listen, then pick the correct tone:")
         speak_and_wait(item["hanzi"])
+        show_fn(f"\n  Listen, then pick the correct tone:")
     else:
         show_fn(f"\n  What's the correct tone for:")
 
     show_fn(format_hanzi(item['hanzi'], prominent))
+    # Show English hint only when not faded
+    if english_level == "full":
+        show_fn(f"  ({item.get('english', '')})")
     for i, opt in enumerate(options, 1):
         show_fn(f"  {i}. {opt}")
 
@@ -113,9 +117,15 @@ def run_tone_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True,
         return result
     user_picked = result
 
+    # Normalize Unicode to NFC to avoid false mismatches on composed vs decomposed diacritics
+    user_picked = unicodedata.normalize('NFC', user_picked)
+    correct_pinyin = unicodedata.normalize('NFC', correct_pinyin)
+
     correct = user_picked == correct_pinyin
     feedback = ""
     error_type = None
+    cause = None
+    tone_meta = None
     if not correct:
         feedback = f"  \u2192 {format_hanzi_inline(item['hanzi'])} = {correct_pinyin}"
         # Error-cause analysis
@@ -131,8 +141,17 @@ def run_tone_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True,
             feedback += "\n  " + ", ".join(contours)
         error_type = cause_to_error_type(cause, "tone")
 
+        # Extract tone numbers for confusion tracking
+        user_tones = pinyin_to_tones(user_picked)
+        if user_tones and expected_tones:
+            tone_meta = {
+                "tone_user": user_tones[0],
+                "tone_expected": expected_tones[0],
+            }
+
     return DrillResult(
         content_item_id=item["id"], modality="reading", drill_type="tone",
         correct=correct, user_answer=user_picked, expected_answer=correct_pinyin,
-        error_type=error_type, feedback=feedback,
+        error_type=error_type, error_cause=cause, feedback=feedback,
+        metadata=tone_meta,
     )

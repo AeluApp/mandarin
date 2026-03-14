@@ -3,7 +3,7 @@
 ## Core Fields
 
 **App Name** (30 char max):
-`Mandarin` (8 chars)
+`Aelu` (4 chars)
 
 **Subtitle** (30 char max):
 `Patient Chinese Study` (21 chars)
@@ -26,10 +26,10 @@
 > Hand-curated Mandarin study built by a real learner. HSK 1-9 coverage, 12 drill types, honest progress tracking. No AI gimmicks. No streak anxiety. Just serious study.
 
 **Variant B (Differentiator-led):**
-> No streaks. No hearts. No cartoon owls. Mandarin is a calm, honest study tool for adults learning Chinese seriously. HSK 1-9, 12 drill types, real progress data.
+> No streaks. No hearts. No cartoon owls. Aelu is a calm, honest study tool for adults learning Chinese seriously. HSK 1-9, 12 drill types, real progress data.
 
 **Variant C (Feature-led):**
-> 299 curated vocabulary items. 26 grammar points. 12 drill types. Graded reading. Extensive listening. One app that respects your time and tracks what actually matters.
+> 10,000+ vocabulary items across HSK 1-9. 26 grammar points. 12 drill types. Graded reading. Extensive listening. One app that respects your time and tracks what actually matters.
 
 **Variant D (Audience-led):**
 > Built for adults who study Chinese seriously. Heritage learners, professionals, HSK prep. Deterministic algorithms, honest metrics, and zero artificial urgency.
@@ -41,11 +41,11 @@
 
 ## Description (4000 char max)
 
-Mandarin is a focused Chinese study app built by a real learner for real learners. No AI-generated content. No gamification theater. No streak anxiety. Every feature is hand-curated, every metric is defensible, and every algorithm is deterministic.
+Aelu is a focused Chinese study app built by a real learner for real learners. No AI-generated content. No gamification theater. No streak anxiety. Every feature is hand-curated, every metric is defensible, and every algorithm is deterministic.
 
 WHAT YOU GET
 
-- 299 curated vocabulary items spanning HSK 1-9
+- 10,000+ curated vocabulary items spanning HSK 1-9
 - 26 grammar points with contextual notes
 - 12 drill types: pinyin recall, tone identification, character recognition, listening comprehension, context matching, register drills, and more
 - Graded reading passages calibrated to your level
@@ -55,13 +55,13 @@ WHAT YOU GET
 
 HOW IT WORKS
 
-Mandarin uses spaced repetition and adaptive difficulty — not to manipulate your behavior, but to serve your memory. The scheduler tracks mastery across multiple dimensions: tone accuracy, character recognition, contextual usage, and recall speed. When you struggle with something, the system narrows focus. When you're ready, it opens up.
+Aelu uses spaced repetition and adaptive difficulty — not to manipulate your behavior, but to serve your memory. The scheduler tracks mastery across multiple dimensions: tone accuracy, character recognition, contextual usage, and recall speed. When you struggle with something, the system narrows focus. When you're ready, it opens up.
 
 There is no AI running at study time. Every drill, every scheduling decision, every difficulty adjustment is deterministic. You can trace exactly why you're seeing what you're seeing.
 
 WHAT MAKES IT DIFFERENT
 
-Most language apps optimize for engagement metrics — daily streaks, XP points, leaderboards, notification pressure. Mandarin optimizes for one thing: whether you are actually learning Chinese.
+Most language apps optimize for engagement metrics — daily streaks, XP points, leaderboards, notification pressure. Aelu optimizes for one thing: whether you are actually learning Chinese.
 
 - No streaks. Your worth as a learner is not measured by consecutive days.
 - No hearts or lives. Mistakes are data, not punishment.
@@ -84,15 +84,15 @@ FREE TIER
 
 HSK levels 1-2 with all 12 drill types, graded reading, listening practice, and full progress tracking. No feature gates on free content — you get every tool, just at the introductory levels.
 
-PRO ($12/MONTH)
+PRO ($14.99/MONTH)
 
 Unlock HSK levels 1-9, advanced grammar, extended reading library, and the complete drill catalog. No annual lock-in. Cancel anytime.
 
 THE AESTHETIC
 
-Mandarin looks and feels like a place you want to spend time. Warm stone backgrounds, calm typography, no visual clutter. A dark mode that is actually warm. Sound design that marks beginnings and completions without demanding attention. The interface was designed to feel like a good library — quiet, well-lit, and built for focus.
+Aelu looks and feels like a place you want to spend time. Warm stone backgrounds, calm typography, no visual clutter. A dark mode that is actually warm. Sound design that marks beginnings and completions without demanding attention. The interface was designed to feel like a good library — quiet, well-lit, and built for focus.
 
-Built with care in California.
+Built with care.
 
 ---
 
@@ -123,9 +123,9 @@ Study well.
 
 ## URLs
 
-- **Support URL:** https://mandarin.app/support
-- **Marketing URL:** https://mandarin.app
-- **Privacy Policy URL:** https://mandarin.app/privacy
+- **Support URL:** https://aelu.app/support
+- **Marketing URL:** https://aelu.app
+- **Privacy Policy URL:** https://aelu.app/privacy
 
 ---
 

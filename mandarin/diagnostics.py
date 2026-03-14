@@ -9,6 +9,7 @@ Every output answers:
 import json
 import logging
 import random
+import re
 import sqlite3
 from datetime import date, timedelta
 from pathlib import Path
@@ -192,7 +193,7 @@ def _compute_modality_stats(conn, user_id: int = 1) -> dict:
 def _estimate_levels(conn, modality_stats: dict, user_id: int = 1) -> dict:
     """Estimate HSK levels per modality using band-based measurement.
 
-    Walks HSK bands 1-6. A band is "complete" when:
+    Walks HSK bands 1-9. A band is "complete" when:
     - Mastery (streak_correct >= 3) >= 80% of items in that band
     - Accuracy >= 75% across attempts in that band
 
@@ -325,11 +326,11 @@ def _identify_bottlenecks(conn, modality_stats: dict, user_id: int = 1) -> list:
         ime_pct = error_summary["ime_confusable"] / max(total_errors, 1) * 100
         if ime_pct >= 15:
             bottlenecks.append({
-                "area": "IME confusables",
+                "area": "Typing confusables",
                 "severity": "medium",
                 "action": "When typing pinyin, pause and say it aloud before hitting enter.",
-                "test": "IME confusable errors drop by half within 5 sessions.",
-                "data": f"{ime_pct:.0f}% of recent errors are IME confusables",
+                "test": "Typing confusable errors drop by half within 5 sessions.",
+                "data": f"{ime_pct:.0f}% of recent errors are typing confusables",
             })
 
     # Check modality imbalances
@@ -581,6 +582,84 @@ def _compute_core_stability(conn, user_id: int = 1) -> dict:
         "stable_count": stable,
         "pct": round(pct, 1),
         "description": f"{pct:.0f}% of seen items stable",
+    }
+
+
+def compute_false_mastery_rate(conn, user_id: int = 1) -> dict:
+    """System health metric: rate at which mastered items subsequently fail.
+
+    Tracks items that ever reached stable/durable but are now decayed.
+    If >10%, mastery threshold is too low (doctrine §2).
+    """
+    try:
+        row = conn.execute("""
+            SELECT
+                COUNT(DISTINCT CASE WHEN mastery_stage IN ('stable', 'durable')
+                                      OR stable_since_date IS NOT NULL
+                                    THEN content_item_id END) as ever_mastered,
+                COUNT(DISTINCT CASE WHEN mastery_stage = 'decayed'
+                                      AND stable_since_date IS NOT NULL
+                                    THEN content_item_id END) as now_decayed
+            FROM progress
+            WHERE total_attempts > 0 AND user_id = ?
+        """, (user_id,)).fetchone()
+    except sqlite3.OperationalError:
+        # Fallback for DBs without stable_since_date column
+        row = conn.execute("""
+            SELECT
+                COUNT(DISTINCT CASE WHEN mastery_stage IN ('stable', 'durable')
+                                    THEN content_item_id END) as ever_mastered,
+                COUNT(DISTINCT CASE WHEN mastery_stage = 'decayed'
+                                    THEN content_item_id END) as now_decayed
+            FROM progress
+            WHERE total_attempts > 0 AND user_id = ?
+        """, (user_id,)).fetchone()
+    ever_mastered = row["ever_mastered"] or 0
+    now_decayed = row["now_decayed"] or 0
+    rate = (now_decayed / ever_mastered * 100) if ever_mastered > 0 else 0.0
+    healthy = rate <= 10.0
+
+    return {
+        "ever_mastered": ever_mastered,
+        "now_decayed": now_decayed,
+        "false_mastery_pct": round(rate, 1),
+        "healthy": healthy,
+        "description": (
+            f"{rate:.1f}% post-mastery failure rate "
+            f"({now_decayed}/{ever_mastered})"
+            + ("" if healthy else " — mastery threshold may be too low")
+        ),
+    }
+
+
+def compute_graduation_rate(conn, user_id: int = 1, days: int = 30) -> dict:
+    """KPI: items graduating to stable per period (Doctrine §12).
+
+    Counts item.graduated events in the last N days.
+    """
+    try:
+        row = conn.execute("""
+            SELECT COUNT(*) as cnt FROM client_event
+            WHERE user_id = ? AND event_type = 'item.graduated'
+              AND created_at >= datetime('now', ?)
+        """, (user_id, f"-{days} days")).fetchone()
+        graduated = row["cnt"] if row else 0
+    except sqlite3.OperationalError:
+        graduated = 0
+
+    total_seen = conn.execute(
+        "SELECT COUNT(DISTINCT content_item_id) as cnt FROM progress WHERE total_attempts > 0 AND user_id = ?",
+        (user_id,),
+    ).fetchone()
+    seen = total_seen["cnt"] if total_seen else 0
+    rate = (graduated / seen * 100) if seen > 0 else 0.0
+
+    return {
+        "graduated_last_period": graduated,
+        "period_days": days,
+        "total_seen": seen,
+        "graduation_rate_pct": round(rate, 1),
+        "description": f"{graduated} items graduated in last {days} days ({rate:.1f}% of seen)",
     }
 
 
@@ -1132,6 +1211,7 @@ def plan_calibrate_session(conn, user_id: int = 1) -> SessionPlan:
             rows = conn.execute("""
                 SELECT ci.* FROM content_item ci
                 WHERE ci.status = 'drill_ready'
+                  AND ci.review_status = 'approved'
                   AND ci.is_mined_out = 0
                   AND ci.hsk_level = ?
                 ORDER BY RANDOM() LIMIT 3
@@ -1160,6 +1240,7 @@ def plan_calibrate_session(conn, user_id: int = 1) -> SessionPlan:
         rows = conn.execute("""
             SELECT ci.* FROM content_item ci
             WHERE ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
               AND ci.is_mined_out = 0
               AND ci.hsk_level = ?
               AND ci.pinyin != ''
@@ -1258,7 +1339,6 @@ def get_tone_confusion_matrix(conn, user_id: int = 1) -> dict:
         "summary": str,
     }
     """
-    import re
     rows = conn.execute("""
         SELECT user_answer, expected_answer FROM error_log
         WHERE error_type = 'tone' AND user_answer IS NOT NULL AND expected_answer IS NOT NULL
@@ -1334,6 +1414,106 @@ def get_tone_confusion_matrix(conn, user_id: int = 1) -> dict:
         "total_tone_errors": total,
         "summary": summary,
     }
+
+
+def get_error_pattern_analysis(conn, user_id: int = 1) -> dict:
+    """Identify systematic error patterns across items using error_shape_summary.
+
+    Detects recurring patterns like "all tone errors are tone 2→3" or
+    "visual confusion clusters on characters with shared radicals."
+
+    Returns:
+        {
+            "tone_patterns": [{"pattern": "tone_2_as_3", "count": 12, "items": [...]}],
+            "phonetic_patterns": [{"pattern": "phonetic_similar", "count": N}],
+            "top_shapes": [{"shape": str, "count": int, "items": int}],
+            "top_pattern": str or None,
+            "total_active_shapes": int,
+            "interference_pairs": int,
+            "summary": str,
+        }
+    """
+    result = {
+        "tone_patterns": [],
+        "phonetic_patterns": [],
+        "top_shapes": [],
+        "top_pattern": None,
+        "total_active_shapes": 0,
+        "interference_pairs": 0,
+        "summary": "No error shape data yet",
+    }
+
+    try:
+        # Aggregate unresolved error shapes
+        shapes = conn.execute("""
+            SELECT error_shape, SUM(occurrence_count) as total,
+                   COUNT(DISTINCT content_item_id) as item_count
+            FROM error_shape_summary
+            WHERE user_id = ? AND resolved = 0
+            GROUP BY error_shape
+            ORDER BY total DESC
+        """, (user_id,)).fetchall()
+    except sqlite3.OperationalError:
+        return result
+
+    if not shapes:
+        return result
+
+    tone_re = re.compile(r'^tone_(\d)_as_(\d)$')
+    tone_patterns = []
+    top_shapes = []
+
+    for row in shapes:
+        shape = row["error_shape"]
+        total = row["total"]
+        items = row["item_count"]
+        top_shapes.append({"shape": shape, "count": total, "items": items})
+
+        m = tone_re.match(shape)
+        if m:
+            tone_patterns.append({
+                "pattern": shape,
+                "expected_tone": int(m.group(1)),
+                "guessed_tone": int(m.group(2)),
+                "count": total,
+                "items": items,
+            })
+
+    # Count phonetic patterns
+    phonetic_shapes = [s for s in top_shapes if "phonetic" in s["shape"]]
+
+    # Count active interference pairs
+    try:
+        pair_count = conn.execute("""
+            SELECT COUNT(*) as cnt FROM interference_pairs
+            WHERE interference_strength IN ('high', 'medium')
+        """).fetchone()["cnt"]
+    except (sqlite3.OperationalError, TypeError):
+        pair_count = 0
+
+    total_active = sum(s["count"] for s in top_shapes)
+    top_pattern = top_shapes[0]["shape"] if top_shapes else None
+
+    if tone_patterns:
+        top_tone = tone_patterns[0]
+        summary = (f"Top error pattern: tone {top_tone['expected_tone']}→"
+                   f"{top_tone['guessed_tone']} ({top_tone['count']} errors across "
+                   f"{top_tone['items']} items)")
+    elif top_shapes:
+        summary = f"Top error pattern: {top_shapes[0]['shape']} ({top_shapes[0]['count']} errors)"
+    else:
+        summary = "No error shape data yet"
+
+    result.update({
+        "tone_patterns": sorted(tone_patterns, key=lambda x: x["count"], reverse=True),
+        "phonetic_patterns": phonetic_shapes,
+        "top_shapes": top_shapes[:10],
+        "top_pattern": top_pattern,
+        "total_active_shapes": total_active,
+        "interference_pairs": pair_count,
+        "summary": summary,
+    })
+    return result
 
 
 def get_speed_trend(conn, modality: str = None, user_id: int = 1) -> dict:
@@ -1603,7 +1783,7 @@ def compute_readiness(conn, user_id: int = 1) -> dict:
     focus_actions = {
         "Scenario practice": "Try a dialogue scenario — they build real-world skills.",
         "Item stability": "Keep reviewing — items need repetition to solidify.",
-        "Modality breadth": "Listening or IME drills would broaden coverage.",
+        "Modality breadth": "Listening or typing drills would broaden coverage.",
         "Practice consistency": "Aim for one more session this week.",
     }
     focus = focus_actions[weakest[0]]
@@ -1631,4 +1811,103 @@ def compute_readiness(conn, user_id: int = 1) -> dict:
             "practice_consistency": {"score": round(consistency_score, 1), "weight": 0.10, "detail": consistency_detail},
         },
         "total_sessions": total_sessions,
+    }
+
+
+# ── Queue Saturation Forecast ──────────────────────────────
+
+def queue_saturation_forecast(conn: sqlite3.Connection, user_id: int = 1,
+                               session_length: int = 12) -> dict:
+    """Predict sessions until review queue overflows.
+
+    Model:
+      arrival_rate = new items introduced per session (from session_log)
+      service_rate = items graduating to stable per session
+      overflow = items_due > 2 * session_length
+
+    Returns dict with arrival_rate, service_rate, current_due,
+    sessions_until_overflow, status.
+    """
+    # Arrival rate: new items introduced per session (last 30 sessions)
+    try:
+        rows = conn.execute("""
+            SELECT sl.id AS session_id,
+                   COUNT(DISTINCT p.content_item_id) AS new_items
+            FROM session_log sl
+            LEFT JOIN progress p ON p.user_id = sl.user_id
+                AND p.repetitions = 1
+                AND date(p.last_review_date) = date(sl.started_at)
+            WHERE sl.user_id = ?
+            ORDER BY sl.started_at DESC
+            LIMIT 30
+        """, (user_id,)).fetchall()
+    except sqlite3.OperationalError:
+        rows = []
+
+    if rows:
+        new_per_session = [float(r["new_items"] or 0) for r in rows]
+        arrival_rate = sum(new_per_session) / len(new_per_session) if new_per_session else 1.0
+    else:
+        arrival_rate = 1.0
+
+    # Service rate: items graduating to stable per session
+    try:
+        stable_rows = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM progress
+            WHERE user_id = ?
+              AND mastery_stage = 'stable'
+              AND stable_since_date >= date('now', '-30 days')
+        """, (user_id,)).fetchone()
+        stable_count = (stable_rows["cnt"] if stable_rows else 0) or 0
+
+        session_count_row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM session_log
+            WHERE user_id = ? AND started_at >= date('now', '-30 days')
+        """, (user_id,)).fetchone()
+        recent_sessions = (session_count_row["cnt"] if session_count_row else 0) or 1
+        service_rate = stable_count / recent_sessions
+    except sqlite3.OperationalError:
+        service_rate = 0.5
+
+    # Current queue size: items due for review
+    try:
+        due_row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM progress
+            WHERE user_id = ?
+              AND next_review_date IS NOT NULL
+              AND next_review_date <= date('now', '+1 day')
+              AND mastery_stage != 'stable'
+        """, (user_id,)).fetchone()
+        current_due = (due_row["cnt"] if due_row else 0) or 0
+    except sqlite3.OperationalError:
+        current_due = 0
+
+    overflow_threshold = 2 * session_length
+    net_growth = arrival_rate - service_rate
+
+    if net_growth <= 0:
+        sessions_until_overflow = -1  # Queue is shrinking, no overflow
+        status = "healthy"
+    elif current_due >= overflow_threshold:
+        sessions_until_overflow = 0
+        status = "overflowed"
+    else:
+        remaining = overflow_threshold - current_due
+        sessions_until_overflow = int(remaining / net_growth) if net_growth > 0 else -1
+        if sessions_until_overflow > 50:
+            status = "healthy"
+        elif sessions_until_overflow > 20:
+            status = "caution"
+        else:
+            status = "warning"
+
+    return {
+        "arrival_rate": round(arrival_rate, 2),
+        "service_rate": round(service_rate, 2),
+        "net_growth_per_session": round(net_growth, 2),
+        "current_due": current_due,
+        "overflow_threshold": overflow_threshold,
+        "sessions_until_overflow": sessions_until_overflow,
+        "status": status,
+        "session_length": session_length,
     }

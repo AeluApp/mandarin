@@ -1,0 +1,45 @@
+# OpenClaw configuration for Aelu
+# MCP server connection via stdio
+
+mcp:
+  command: python
+  args:
+    - -m
+    - mandarin.openclaw.mcp_server
+
+agents:
+  study_reminder:
+    schedule: "0 8,12,18 * * *"  # 8am, 12pm, 6pm daily
+    personality: "calm, supportive Mandarin study companion"
+    tools:
+      - get_due_items
+      - queue_session
+      - get_streak_status
+      - get_commitment_status
+
+  review_queue:
+    trigger: "polling"
+    interval_minutes: 60
+    personality: "efficient content review assistant"
+    tools:
+      - get_review_queue_summary
+      - approve_review_item
+      - reject_review_item
+
+  audit_briefing:
+    trigger: "event"
+    event: "audit_complete"
+    personality: "analytical quality advisor"
+    tools:
+      - get_latest_audit_summary
+
+  tutor_prep:
+    trigger: "manual"
+    keywords:
+      - "prep for italki"
+      - "tutor briefing"
+      - "tutor prep"
+    personality: "organized study prep assistant"
+    tools:
+      - get_learner_briefing
+      - get_due_items

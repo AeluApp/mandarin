@@ -1,0 +1,117 @@
+{
+    "title": "Admiring a Neighbor's Garden",
+    "title_zh": "欣赏邻居的花园",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You're walking through your neighborhood and notice that Uncle Sun's small garden is looking particularly beautiful today. He's outside watering his vegetables and flowers.",
+        "setup_zh": "你在小区里散步，发现孙叔叔的小花园今天特别漂亮。他正在外面给蔬菜和花浇水。",
+        "turns": [
+            {
+                "speaker": "player",
+                "prompt_en": "Compliment Uncle Sun's garden.",
+                "options": [
+                    {
+                        "text_zh": "孙叔叔，您的花园真漂亮！那些花是什么时候种的？颜色好鲜艳。",
+                        "text_pinyin": "Sūn shūshu, nín de huāyuán zhēn piàoliang! Nàxiē huā shì shénme shíhou zhòng de? Yánsè hǎo xiānyàn.",
+                        "text_en": "Uncle Sun, your garden is so beautiful! When did you plant those flowers? The colors are so vibrant.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Specific and genuine — shows you're really looking at the garden."
+                    },
+                    {
+                        "text_zh": "花不错啊。",
+                        "text_pinyin": "Huā búcuò a.",
+                        "text_en": "Nice flowers.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Brief — could be more engaging."
+                    },
+                    {
+                        "text_zh": "孙叔叔，您每天都在这里浇水吗？不累吗？",
+                        "text_pinyin": "Sūn shūshu, nín měi tiān dōu zài zhèlǐ jiāo shuǐ ma? Bú lèi ma?",
+                        "text_en": "Uncle Sun, do you water every day? Doesn't it tire you out?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Focuses on effort rather than beauty — slightly negative framing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "谢谢！这些花是去年秋天种的，今年春天才开。你看这个，是月季，一年能开好几次。那边还有我种的黄瓜和西红柿，快可以吃了。",
+                "text_pinyin": "Xièxie! Zhèxiē huā shì qùnián qiūtiān zhòng de, jīnnián chūntiān cái kāi. Nǐ kàn zhège, shì yuèjì, yī nián néng kāi hǎo jǐ cì. Nàbiān hái yǒu wǒ zhòng de huángguā hé xīhóngshì, kuài kěyǐ chī le.",
+                "text_en": "Thank you! These flowers were planted last autumn and just bloomed this spring. Look at this one — it's a Chinese rose, blooms several times a year. Over there I've got cucumbers and tomatoes I planted — they're almost ready to eat."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his garden tour.",
+                "options": [
+                    {
+                        "text_zh": "自己种的蔬菜一定特别新鲜！孙叔叔，您能教教我怎么种吗？我也想在阳台上种一点。",
+                        "text_pinyin": "Zìjǐ zhòng de shūcài yīdìng tèbié xīnxiān! Sūn shūshu, nín néng jiāojiao wǒ zěnme zhòng ma? Wǒ yě xiǎng zài yángtái shàng zhòng yīdiǎn.",
+                        "text_en": "Homegrown vegetables must be so fresh! Uncle Sun, could you teach me how? I'd like to grow some on my balcony too.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Respectful and eager to learn — elders love sharing their expertise."
+                    },
+                    {
+                        "text_zh": "不错不错。",
+                        "text_pinyin": "Búcuò búcuò.",
+                        "text_en": "Not bad, not bad.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Vague — doesn't engage deeply."
+                    },
+                    {
+                        "text_zh": "种菜很辛苦吧？",
+                        "text_pinyin": "Zhòng cài hěn xīnkǔ ba?",
+                        "text_en": "Growing vegetables must be hard work, right?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Focuses on difficulty rather than enjoyment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你要学种菜？好啊！阳台上种西红柿最合适，又好看又好吃。我下次给你几颗种子。种菜最重要的是耐心，不能着急。",
+                "text_pinyin": "Nǐ yào xué zhòng cài? Hǎo a! Yángtái shàng zhòng xīhóngshì zuì héshì, yòu hǎokàn yòu hǎochī. Wǒ xià cì gěi nǐ jǐ kē zhǒngzi. Zhòng cài zuì zhòngyào de shì nàixīn, bù néng zháojí.",
+                "text_en": "You want to learn gardening? Great! Tomatoes are perfect for balconies — both pretty and tasty. I'll give you some seeds next time. The most important thing about growing vegetables is patience — you can't rush it."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his offer and advice.",
+                "options": [
+                    {
+                        "text_zh": "谢谢孙叔叔！我一定好好学。等我的西红柿长出来了，请您来尝尝。",
+                        "text_pinyin": "Xièxie Sūn shūshu! Wǒ yīdìng hǎohǎo xué. Děng wǒ de xīhóngshì zhǎng chūlái le, qǐng nín lái chángchang.",
+                        "text_en": "Thank you, Uncle Sun! I'll study hard. When my tomatoes grow, I'll invite you to try them.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Grateful and promises reciprocity — perfect neighborly spirit."
+                    },
+                    {
+                        "text_zh": "好的，谢谢。",
+                        "text_pinyin": "Hǎo de, xièxie.",
+                        "text_en": "Okay, thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but brief."
+                    },
+                    {
+                        "text_zh": "我怕我没耐心。",
+                        "text_pinyin": "Wǒ pà wǒ méi nàixīn.",
+                        "text_en": "I'm afraid I don't have the patience.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Self-defeating — he just offered encouragement."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Small gardens and balcony vegetable patches are treasured in Chinese urban life. Retired neighbors like Uncle Sun often become informal gardening teachers. Sharing seeds and produce strengthens community bonds. The advice about patience (耐心) in gardening often carries deeper life wisdom."
+    },
+    "hsk_level": 3
+}

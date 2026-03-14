@@ -1,0 +1,94 @@
+{
+    "title": "The Tea Egg Debate",
+    "title_zh": "茶叶蛋的选择",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_restaurant_1_01_v0",
+    "tree": {
+        "setup": "A convenience store attached to a bus station. The air smells of tea eggs simmering in their dark broth -- they've been going since dawn. Uncle Chen runs the counter. He takes the tea eggs very seriously and has opinions about which ones are 'ready' and which need another hour.",
+        "setup_zh": "公共汽车站旁边的小卖部。空气中弥漫着茶叶蛋的香味——从早上就开始煮了。陈叔叔在柜台后面，他对茶叶蛋非常认真，觉得有些蛋「还没好」，还要再煮一个小时。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你想吃什么？",
+                "text_pinyin": "nǐ hǎo! nǐ xiǎng chī shénme?",
+                "text_en": "Hello! What would you like to eat?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for a tea egg.",
+                "options": [
+                    {
+                        "text_zh": "我想吃一个茶叶蛋。",
+                        "text_pinyin": "wǒ xiǎng chī yí gè cháyè dàn.",
+                        "text_en": "I'd like a tea egg.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Chen peers into the pot with the focus of a jeweler selecting a diamond. He picks one out with tongs, examines it, puts it back, picks another.「这个好，」he announces."
+                    },
+                    {
+                        "text_zh": "有没有吃的？",
+                        "text_pinyin": "yǒu méiyǒu chī de?",
+                        "text_en": "Do you have anything to eat?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Chen looks mildly offended -- there is a pot of perfect eggs RIGHT THERE. But 有没有 is a great pattern for asking about availability."
+                    },
+                    {
+                        "text_zh": "这是什么？",
+                        "text_pinyin": "zhè shì shénme?",
+                        "text_en": "What is this?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Chen launches into a five-minute history of tea eggs with the gravity of a museum docent. 这是什么 is useful, but be prepared for enthusiastic answers."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一个两块钱。你要几个？",
+                "text_pinyin": "yí gè liǎng kuài qián. nǐ yào jǐ gè?",
+                "text_en": "Two yuan each. How many do you want?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him how many you want.",
+                "options": [
+                    {
+                        "text_zh": "两个，谢谢。",
+                        "text_pinyin": "liǎng gè, xièxie.",
+                        "text_en": "Two, please.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Uncle Chen nods with deep approval -- two is the correct number, in his view. One is lonely. Three is greedy. Two is harmony. 两 (liǎng) is used instead of 二 before measure words."
+                    },
+                    {
+                        "text_zh": "一个。",
+                        "text_pinyin": "yí gè.",
+                        "text_en": "One.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Uncle Chen looks slightly wounded, as though you've underestimated his eggs. But he wraps it carefully in a napkin anyway."
+                    },
+                    {
+                        "text_zh": "不要了。",
+                        "text_pinyin": "bú yào le.",
+                        "text_en": "Never mind.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Uncle Chen stares at the rejected egg in his tongs. A long silence. He gently returns it to the pot. 不要了 works for declining, but the emotional cost here was high."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，四块钱。慢慢吃！",
+                "text_pinyin": "hǎo, sì kuài qián. mànman chī!",
+                "text_en": "OK, four yuan. Eat slowly!"
+            }
+        ],
+        "cultural_note": "茶叶蛋 (cháyè dàn) are eggs simmered for hours in tea, soy sauce, and spices. They're a ubiquitous snack at convenience stores and train stations across China. 慢慢吃 (mànman chī, 'eat slowly') is a warm way of saying 'enjoy your food.'"
+    }
+}

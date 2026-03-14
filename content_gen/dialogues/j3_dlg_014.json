@@ -1,0 +1,123 @@
+{
+    "title": "A Local Festival",
+    "title_zh": "社区的节日活动",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your neighborhood is holding a Mid-Autumn Festival celebration in the community park. Your friend Xiao Zhang invites you to go together.",
+        "setup_zh": "你们小区在社区公园举办中秋节活动。你的朋友小张邀请你一起去。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天晚上社区有中秋节活动，听说有猜灯谜、吃月饼，还可以一起赏月。你想去吗？",
+                "text_pinyin": "Jīntiān wǎnshang shèqū yǒu Zhōngqiū Jié huódòng, tīngshuō yǒu cāi dēngmí, chī yuèbǐng, hái kěyǐ yīqǐ shǎng yuè. Nǐ xiǎng qù ma?",
+                "text_en": "There's a Mid-Autumn Festival event in the community tonight — I heard there'll be lantern riddles, mooncakes, and moon-watching. Want to go?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the festival invitation.",
+                "options": [
+                    {
+                        "text_zh": "当然想去！我最喜欢猜灯谜了。你知道几点开始吗？",
+                        "text_pinyin": "Dāngrán xiǎng qù! Wǒ zuì xǐhuan cāi dēngmí le. Nǐ zhīdào jǐ diǎn kāishǐ ma?",
+                        "text_en": "Of course! I love lantern riddles. Do you know what time it starts?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and asks a practical follow-up."
+                    },
+                    {
+                        "text_zh": "好吧，去看看。",
+                        "text_pinyin": "Hǎo ba, qù kànkan.",
+                        "text_en": "Okay, let's check it out.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Lukewarm — she's excited; matching her energy would be better."
+                    },
+                    {
+                        "text_zh": "我不太喜欢人多的活动。",
+                        "text_pinyin": "Wǒ bú tài xǐhuan rén duō de huódòng.",
+                        "text_en": "I don't really like crowded events.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Declines a cultural experience with a friend."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "七点开始！我们早点去吧，好的月饼很快就被拿完了。去年的豆沙月饼特别好吃。你喜欢什么口味的月饼？",
+                "text_pinyin": "Qī diǎn kāishǐ! Wǒmen zǎo diǎn qù ba, hǎo de yuèbǐng hěn kuài jiù bèi ná wán le. Qùnián de dòushā yuèbǐng tèbié hǎochī. Nǐ xǐhuan shénme kǒuwèi de yuèbǐng?",
+                "text_en": "It starts at seven! Let's go early — the good mooncakes get taken quickly. Last year's red bean paste ones were especially good. What flavor mooncakes do you like?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Share your mooncake preference.",
+                "options": [
+                    {
+                        "text_zh": "我喜欢莲蓉蛋黄的，甜甜的，里面还有咸蛋黄，味道很特别。豆沙的也不错！",
+                        "text_pinyin": "Wǒ xǐhuan liánróng dànhuáng de, tiántián de, lǐmiàn hái yǒu xián dànhuáng, wèidào hěn tèbié. Dòushā de yě búcuò!",
+                        "text_en": "I like lotus paste with egg yolk — sweet with a salty yolk inside, really unique flavor. Red bean paste is good too!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Descriptive and enthusiastic — shows genuine enjoyment."
+                    },
+                    {
+                        "text_zh": "都行，我不挑。",
+                        "text_pinyin": "Dōu xíng, wǒ bù tiāo.",
+                        "text_en": "Any flavor, I'm not picky.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Easy-going but doesn't share a preference."
+                    },
+                    {
+                        "text_zh": "我不太喜欢吃月饼，太甜了。",
+                        "text_pinyin": "Wǒ bú tài xǐhuan chī yuèbǐng, tài tián le.",
+                        "text_en": "I don't really like mooncakes — too sweet.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Negative about a central part of the festival."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "莲蓉蛋黄是经典！好，我们六点半出发，先去拿月饼，然后找个好位置赏月。今天天气很好，月亮一定很圆很亮。",
+                "text_pinyin": "Liánróng dànhuáng shì jīngdiǎn! Hǎo, wǒmen liù diǎn bàn chūfā, xiān qù ná yuèbǐng, ránhòu zhǎo ge hǎo wèizhi shǎng yuè. Jīntiān tiānqì hěn hǎo, yuèliang yīdìng hěn yuán hěn liàng.",
+                "text_en": "Lotus paste with egg yolk is a classic! Okay, let's leave at six thirty — get mooncakes first, then find a good spot for moon-watching. The weather's nice today, so the moon should be full and bright."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Express excitement about the evening.",
+                "options": [
+                    {
+                        "text_zh": "太好了！吃着月饼看月亮，这就是中秋节最美的部分。我们走吧！",
+                        "text_pinyin": "Tài hǎo le! Chī zhe yuèbǐng kàn yuèliang, zhè jiù shì Zhōngqiū Jié zuì měi de bùfen. Wǒmen zǒu ba!",
+                        "text_en": "Wonderful! Eating mooncakes while watching the moon — that's the most beautiful part of Mid-Autumn Festival. Let's go!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Captures the festive spirit beautifully."
+                    },
+                    {
+                        "text_zh": "好的，走吧。",
+                        "text_pinyin": "Hǎo de, zǒu ba.",
+                        "text_en": "Okay, let's go.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Fine but doesn't match the festive mood."
+                    },
+                    {
+                        "text_zh": "希望人不要太多。",
+                        "text_pinyin": "Xīwàng rén bú yào tài duō.",
+                        "text_en": "Hope it's not too crowded.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Focuses on a negative before it happens."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "The Mid-Autumn Festival (中秋节) is one of China's most important holidays, centered on family reunion, mooncakes, and moon-watching. Community celebrations bring neighbors together. Lantern riddles (猜灯谜) are a traditional activity. The full moon symbolizes family togetherness."
+    },
+    "hsk_level": 3
+}

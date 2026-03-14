@@ -1,0 +1,196 @@
+{
+    "title": "The Savings Account Philosopher",
+    "title_zh": "存款哲学家",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_bank_4_00_v0",
+    "tree": {
+        "setup": "The afternoon light falls across the marble counter of a neighborhood bank branch. Behind the glass sits Mr. Qian, a teller who treats every deposit like a small ceremony. He has arranged his stamp pad, his receipt book, and a tiny potted succulent with the care of someone setting a table for honored guests.",
+        "setup_zh": "午后的阳光照在社区银行的大理石柜台上。玻璃后面坐着钱先生，一位把每笔存款都当作小仪式的柜员。他把印泥、收据本和一盆小多肉植物摆得整整齐齐，像是在为贵客摆设餐桌。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "欢迎光临！您今天想办什么业务？请慢慢说，我这里不赶时间。",
+                "text_pinyin": "huānyíng guānglín! nín jīntiān xiǎng bàn shénme yèwù? qǐng mànmàn shuō, wǒ zhèlǐ bù gǎn shíjiān.",
+                "text_en": "Welcome! What business would you like to handle today? Take your time — I'm in no rush here."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him you'd like to open a savings account.",
+                "options": [
+                    {
+                        "text_zh": "你好，我想开一个储蓄账户。",
+                        "text_pinyin": "nǐ hǎo, wǒ xiǎng kāi yí gè chǔxù zhànghù.",
+                        "text_en": "Hello, I'd like to open a savings account.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear and direct. Mr. Qian nods approvingly — he appreciates someone who knows what they want."
+                    },
+                    {
+                        "text_zh": "我想存一点钱。",
+                        "text_pinyin": "wǒ xiǎng cún yìdiǎn qián.",
+                        "text_en": "I'd like to save some money.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He understands your meaning, though he'll need to ask a follow-up about which type of account. Still, a fine start."
+                    },
+                    {
+                        "text_zh": "我不太清楚，你们有什么账户？",
+                        "text_pinyin": "wǒ bú tài qīngchǔ, nǐmen yǒu shénme zhànghù?",
+                        "text_en": "I'm not really sure — what kinds of accounts do you have?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Honest, but Mr. Qian's eyes light up a little too eagerly — you've just invited a twenty-minute lecture on interest rates."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "储蓄账户！非常好的选择。您知道吗，储蓄就像种树——今天种下一棵小树，明天就能乘凉。请把您的身份证给我。",
+                "text_pinyin": "chǔxù zhànghù! fēicháng hǎo de xuǎnzé. nín zhīdào ma, chǔxù jiù xiàng zhòng shù — jīntiān zhǒng xià yì kē xiǎo shù, míngtiān jiù néng chéng liáng. qǐng bǎ nín de shēnfènzhèng gěi wǒ.",
+                "text_en": "A savings account! An excellent choice. You know, saving money is like planting a tree — plant a small one today, and tomorrow you'll have shade. Please give me your ID card."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Hand over your ID and ask about interest rates.",
+                "options": [
+                    {
+                        "text_zh": "给你，这是我的身份证。请问现在的利率是多少？",
+                        "text_pinyin": "gěi nǐ, zhè shì wǒ de shēnfènzhèng. qǐngwèn xiànzài de lìlǜ shì duōshǎo?",
+                        "text_en": "Here you go, this is my ID. What's the current interest rate?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Well done — asking about interest rates shows financial literacy. Mr. Qian practically beams."
+                    },
+                    {
+                        "text_zh": "好的，身份证在这里。",
+                        "text_pinyin": "hǎo de, shēnfènzhèng zài zhèlǐ.",
+                        "text_en": "OK, here's my ID.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Efficient. Mr. Qian accepts it, though he seems a touch disappointed you didn't ask about rates — his favorite topic."
+                    },
+                    {
+                        "text_zh": "等一下，我找一下身份证……在这儿呢。",
+                        "text_pinyin": "děng yíxià, wǒ zhǎo yíxià shēnfènzhèng……zài zhèr ne.",
+                        "text_en": "Wait a moment, let me find my ID... here it is.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "A bit flustered, but Mr. Qian waits with the patience of a man who has seen a thousand people dig through their bags."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "目前一年期的利率是百分之二点一。不算高，但是稳定。您想存多少？",
+                "text_pinyin": "mùqián yì nián qī de lìlǜ shì bǎi fēn zhī èr diǎn yī. bú suàn gāo, dànshì wěndìng. nín xiǎng cún duōshǎo?",
+                "text_en": "The current one-year rate is 2.1%. Not high, but stable. How much would you like to deposit?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him how much you want to deposit.",
+                "options": [
+                    {
+                        "text_zh": "我先存五千块吧。以后每个月再存一点。",
+                        "text_pinyin": "wǒ xiān cún wǔqiān kuài ba. yǐhòu měi gè yuè zài cún yìdiǎn.",
+                        "text_en": "I'll deposit five thousand yuan first. Then I'll add a bit each month.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Mr. Qian nods with deep respect. 「有计划的人，」 he murmurs, 「才是真正富有的人。」"
+                    },
+                    {
+                        "text_zh": "一千块可以吗？",
+                        "text_pinyin": "yìqiān kuài kěyǐ ma?",
+                        "text_en": "Is one thousand yuan OK?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Every journey starts with a single step — or in this case, a single thousand yuan. Mr. Qian approves."
+                    },
+                    {
+                        "text_zh": "我还没想好，先开户可以吗？",
+                        "text_pinyin": "wǒ hái méi xiǎng hǎo, xiān kāi hù kěyǐ ma?",
+                        "text_en": "I haven't decided yet — can I just open the account first?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Qian's succulent seems to droop slightly. But he nods — an empty account is still an account."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，我帮您办理。您要不要设一个密码？六位数字的。",
+                "text_pinyin": "hǎo de, wǒ bāng nín bànlǐ. nín yào búyào shè yí gè mìmǎ? liù wèi shùzì de.",
+                "text_en": "OK, I'll process that for you. Would you like to set a password? Six digits."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about setting a password.",
+                "options": [
+                    {
+                        "text_zh": "好的，我设一个密码。请问在哪里输入？",
+                        "text_pinyin": "hǎo de, wǒ shè yí gè mìmǎ. qǐngwèn zài nǎlǐ shūrù?",
+                        "text_en": "OK, I'll set a password. Where do I enter it?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Practical and security-conscious. Mr. Qian slides the keypad toward you with the solemnity of a chess grandmaster offering the first move."
+                    },
+                    {
+                        "text_zh": "要，我要设密码。",
+                        "text_pinyin": "yào, wǒ yào shè mìmǎ.",
+                        "text_en": "Yes, I want to set a password.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Short and sure. He nods and pushes the keypad your way."
+                    },
+                    {
+                        "text_zh": "不用密码可以吗？",
+                        "text_pinyin": "búyòng mìmǎ kěyǐ ma?",
+                        "text_en": "Can I skip the password?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Mr. Qian's left eye twitches almost imperceptibly. He recommends a password the way a doctor recommends breathing."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "都办好了。这是您的存折和银行卡。请您收好。有什么问题随时来找我。",
+                "text_pinyin": "dōu bàn hǎo le. zhè shì nín de cúnzhé hé yínháng kǎ. qǐng nín shōu hǎo. yǒu shénme wèntí suíshí lái zhǎo wǒ.",
+                "text_en": "All done. Here are your passbook and bank card. Please keep them safe. Come find me anytime if you have questions."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and say goodbye.",
+                "options": [
+                    {
+                        "text_zh": "谢谢你，钱先生！你解释得很清楚。再见！",
+                        "text_pinyin": "xièxie nǐ, Qián xiānshēng! nǐ jiěshì de hěn qīngchǔ. zàijiàn!",
+                        "text_en": "Thank you, Mr. Qian! Your explanation was very clear. Goodbye!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Using his name and complimenting his clarity — Mr. Qian will remember you fondly. His succulent seems to perk up."
+                    },
+                    {
+                        "text_zh": "谢谢，再见！",
+                        "text_pinyin": "xièxie, zàijiàn!",
+                        "text_en": "Thanks, goodbye!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief but polite. Mr. Qian waves gently, already straightening his stamp pad for the next customer."
+                    },
+                    {
+                        "text_zh": "好的。",
+                        "text_pinyin": "hǎo de.",
+                        "text_en": "OK.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "A bit abrupt. Mr. Qian watches you leave with the faint sadness of a man whose philosophical moment was cut short."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese banks require a 身份证 (shēnfènzhèng, national ID card) or passport for nearly all transactions. The 存折 (cúnzhé, passbook) is still commonly used alongside bank cards — many people, especially older generations, prefer the tangible record of a passbook."
+    }
+}

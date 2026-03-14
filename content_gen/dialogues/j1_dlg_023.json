@@ -1,0 +1,87 @@
+{
+    "title": "Lost in the Park",
+    "title_zh": "在公园迷路了",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.1,
+    "tree": {
+        "setup": "You're walking in a park and realize you don't know which way is the exit. A jogger stops nearby.",
+        "setup_zh": "你在公园散步，发现不知道出口在哪里。一个跑步的人停下来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "你好！你在找什么吗？",
+                "text_pinyin": "Nǐ hǎo! Nǐ zài zhǎo shénme ma?",
+                "text_en": "Hello! Are you looking for something?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Ask for directions to the exit.",
+                "options": [
+                    {
+                        "text_zh": "你好！请问出口在哪里？",
+                        "text_pinyin": "Nǐ hǎo! Qǐngwèn chūkǒu zài nǎlǐ?",
+                        "text_en": "Hello! Could you tell me where the exit is?",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Politely asks for directions using 请问 -- direct and respectful to a stranger who stopped to help."
+                    },
+                    {
+                        "text_zh": "对，我在找出口。",
+                        "text_pinyin": "Duì, wǒ zài zhǎo chūkǒu.",
+                        "text_en": "Yes, I'm looking for the exit.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Answers honestly but doesn't actually ask for help -- she offered, so ask clearly."
+                    },
+                    {
+                        "text_zh": "你经常在这里跑步吗？",
+                        "text_pinyin": "Nǐ jīngcháng zài zhèlǐ pǎobù ma?",
+                        "text_en": "Do you jog here often?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She stopped to help and you started chatting about her exercise routine -- you're lost, remember?"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "出口啊？你往前走，然后往左，就到了。很近。",
+                "text_pinyin": "Chūkǒu a? Nǐ wǎng qián zǒu, ránhòu wǎng zuǒ, jiù dào le. Hěn jìn.",
+                "text_en": "The exit? Walk forward, then turn left, and you're there. Very close."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank them for the help.",
+                "options": [
+                    {
+                        "text_zh": "太好了，谢谢你！这个公园很大。",
+                        "text_pinyin": "Tài hǎo le, xièxie nǐ! Zhège gōngyuán hěn dà.",
+                        "text_en": "Great, thank you! This park is really big.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Thanks her for the directions and adds a light comment explaining why you got lost."
+                    },
+                    {
+                        "text_zh": "谢谢。",
+                        "text_pinyin": "Xièxie.",
+                        "text_en": "Thanks.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Grateful but brief -- she stopped her jog to help you, a little more warmth would be nice."
+                    },
+                    {
+                        "text_zh": "往前走多远？",
+                        "text_pinyin": "Wǎng qián zǒu duō yuǎn?",
+                        "text_en": "How far forward?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "She said it's very close and gave clear directions, but you asked for more detail without thanking her first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese parks are often large and maze-like by design, with winding paths meant to encourage wandering. Getting a little lost is part of the experience. People are generally very willing to help with directions."
+    }
+}

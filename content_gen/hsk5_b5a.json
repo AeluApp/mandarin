@@ -1,0 +1,425 @@
+[
+  {
+    "id": "j5_observe_015",
+    "title": "The Bench Between Two Buildings",
+    "title_zh": "两栋楼之间的长椅",
+    "hsk_level": 5,
+    "text_zh": "小区里有一张长椅放在两栋楼之间的空地上。不知道是谁放的，也不知道放了多少年。它是木头做的，漆已经掉了大半，但坐起来还很结实。早上，退休的老人坐在上面晒太阳，有的闭着眼睛，有的看着不远处的孩子在玩。中午，外卖骑手会在那里坐一会儿，吃完一个面包就骑车走了。下午，年轻的妈妈推着婴儿车经过会停下来歇一歇，给孩子喂一口水。傍晚，下班回来的人偶尔会坐在那里接完一个电话再上楼。到了晚上，长椅终于安静了下来，只有路灯照着它。这张长椅不属于任何人，所以它属于所有人。它什么也不做，只是提供一个可以坐下来的地方。但有时候，一个可以坐下来的地方就是一个人最需要的东西。",
+    "text_pinyin": "Xiǎoqū lǐ yǒu yì zhāng chángyǐ fàng zài liǎng dòng lóu zhī jiān de kòngdì shàng. Bù zhīdào shì shéi fàng de, yě bù zhīdào fàng le duōshao nián. Tā shì mùtou zuò de, qī yǐjīng diào le dà bàn, dàn zuò qǐlái hái hěn jiēshi. Zǎoshang, tuìxiū de lǎorén zuò zài shàngmiàn shài tàiyáng, yǒu de bì zhe yǎnjing, yǒu de kàn zhe bù yuǎn chù de háizi zài wán. Zhōngwǔ, wàimài qíshǒu huì zài nàlǐ zuò yíhuìr, chī wán yí gè miànbāo jiù qí chē zǒu le. Xiàwǔ, niánqīng de māma tuī zhe yīng'ér chē jīngguò huì tíng xiàlái xiē yì xiē, gěi háizi wèi yì kǒu shuǐ. Bàngwǎn, xiàbān huílái de rén ǒu'ěr huì zuò zài nàlǐ jiē wán yí gè diànhuà zài shàng lóu. Dào le wǎnshang, chángyǐ zhōngyú ānjìng le xiàlái, zhǐ yǒu lùdēng zhào zhe tā. Zhè zhāng chángyǐ bù shǔyú rènhé rén, suǒyǐ tā shǔyú suǒyǒu rén. Tā shénme yě bú zuò, zhǐ shì tígōng yí gè kěyǐ zuò xiàlái de dìfāng. Dàn yǒu shíhou, yí gè kěyǐ zuò xiàlái de dìfāng jiù shì yí gè rén zuì xūyào de dōngxi.",
+    "text_en": "In our compound there's a bench placed on the open ground between two buildings. Nobody knows who put it there or how many years ago. It's made of wood, most of the paint has flaked off, but it's still sturdy to sit on. In the morning, retired elderly sit on it sunbathing, some with eyes closed, some watching children play nearby. At noon, food delivery riders sit there briefly, eat a bread roll and ride off. In the afternoon, young mothers pushing strollers stop to rest, giving their children a sip of water. In the evening, people coming home from work occasionally sit to finish a phone call before going upstairs. At night, the bench finally falls quiet, with only a streetlight shining on it. This bench belongs to no one, so it belongs to everyone. It does nothing, just provides a place to sit down. But sometimes a place to sit down is exactly what a person needs most.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "中午谁会用这张长椅？",
+        "q_en": "Who uses the bench at noon?",
+        "options": [
+          {"text": "退休老人", "pinyin": "tuìxiū lǎorén", "text_en": "Retired elderly", "correct": false},
+          {"text": "外卖骑手", "pinyin": "wàimài qíshǒu", "text_en": "Food delivery riders", "correct": true},
+          {"text": "年轻妈妈", "pinyin": "niánqīng māma", "text_en": "Young mothers", "correct": false},
+          {"text": "学生", "pinyin": "xuéshēng", "text_en": "Students", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "长椅的外观是什么样的？",
+        "q_en": "What does the bench look like?",
+        "options": [
+          {"text": "崭新的金属椅子", "pinyin": "zhǎnxīn de jīnshǔ yǐzi", "text_en": "A brand-new metal chair", "correct": false},
+          {"text": "木头做的，漆掉了大半但很结实", "pinyin": "mùtou zuò de, qī diào le dà bàn dàn hěn jiēshi", "text_en": "Made of wood, paint mostly gone but sturdy", "correct": true},
+          {"text": "塑料做的", "pinyin": "sùliào zuò de", "text_en": "Made of plastic", "correct": false},
+          {"text": "石头做的", "pinyin": "shítou zuò de", "text_en": "Made of stone", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者对长椅有什么看法？",
+        "q_en": "What is the author's view of the bench?",
+        "options": [
+          {"text": "应该换一把新的", "pinyin": "yīnggāi huàn yì bǎ xīn de", "text_en": "Should be replaced with a new one", "correct": false},
+          {"text": "不属于任何人所以属于所有人", "pinyin": "bù shǔyú rènhé rén suǒyǐ shǔyú suǒyǒu rén", "text_en": "Belongs to no one so belongs to everyone", "correct": true},
+          {"text": "放的位置不好", "pinyin": "fàng de wèizhi bù hǎo", "text_en": "Poorly positioned", "correct": false},
+          {"text": "只有老人才用", "pinyin": "zhǐ yǒu lǎorén cái yòng", "text_en": "Only used by elderly", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_comedy_004",
+    "title": "The Office Plant Nobody Waters",
+    "title_zh": "没人浇的办公室植物",
+    "hsk_level": 5,
+    "text_zh": "办公室角落有一盆绿萝，不知道谁买来的，也不知道放了多久。神奇的是，它一直活着。我仔细观察了一个月，终于发现了秘密：不是没有人浇水，而是每个人都以为只有自己在浇。小王周一浇，因为他觉得「周末两天没人管它」。小李周三浇，因为那天她心情好。老张每天下班前都倒一点剩茶水进去。实习生小陈甚至买了植物营养液，每周偷偷滴几滴。结果这盆可怜的绿萝被浇了太多水，叶子开始发黄。我把这个发现告诉了大家，所有人都惊讶地说「原来你也在浇？」后来我们建了一个小群，规定只有周一和周四浇水，每次由一个人负责。现在绿萝长得比以前好多了。有时候太多的关心和没有关心一样危险——关键不是付出多少，而是有没有沟通。",
+    "text_pinyin": "Bàngōngshì jiǎoluò yǒu yì pén lǜluó, bù zhīdào shéi mǎi lái de, yě bù zhīdào fàng le duō jiǔ. Shénqí de shì, tā yìzhí huó zhe. Wǒ zǐxì guānchá le yí gè yuè, zhōngyú fāxiàn le mìmì: bú shì méiyǒu rén jiāo shuǐ, ér shì měi gè rén dōu yǐwéi zhǐ yǒu zìjǐ zài jiāo. Xiǎo Wáng zhōuyī jiāo, yīnwèi tā juéde「zhōumò liǎng tiān méi rén guǎn tā」. Xiǎo Lǐ zhōusān jiāo, yīnwèi nà tiān tā xīnqíng hǎo. Lǎo Zhāng měi tiān xiàbān qián dōu dào yìdiǎn shèng cháishuǐ jìnqù. Shíxíshēng Xiǎo Chén shènzhì mǎi le zhíwù yíngyǎng yè, měi zhōu tōutōu dī jǐ dī. Jiéguǒ zhè pén kělián de lǜluó bèi jiāo le tài duō shuǐ, yèzi kāishǐ fā huáng. Wǒ bǎ zhège fāxiàn gàosu le dàjiā, suǒyǒu rén dōu jīngyà de shuō「yuánlái nǐ yě zài jiāo?」Hòulái wǒmen jiàn le yí gè xiǎo qún, guīdìng zhǐ yǒu zhōuyī hé zhōusì jiāo shuǐ, měi cì yóu yí gè rén fùzé. Xiànzài lǜluó zhǎng de bǐ yǐqián hǎo duō le. Yǒu shíhou tài duō de guānxīn hé méiyǒu guānxīn yíyàng wēixiǎn — guānjiàn bú shì fùchū duōshao, ér shì yǒu méiyǒu gōutōng.",
+    "text_en": "In the office corner there's a pothos plant — nobody knows who bought it or how long it's been there. Miraculously, it's still alive. I observed carefully for a month and finally discovered the secret: it's not that nobody waters it, but that everyone thinks only they are watering it. Xiao Wang waters it Monday because 'nobody takes care of it over the weekend.' Xiao Li waters it Wednesday because she's in a good mood that day. Old Zhang pours in leftover tea before leaving work every day. Even the intern Xiao Chen bought plant nutrient solution and secretly adds drops each week. As a result the poor pothos was overwatered and its leaves started yellowing. When I told everyone about my discovery, they all said in surprise 'you water it too?' We then created a small group chat, establishing that watering happens only Monday and Thursday, one person responsible each time. Now the pothos is growing much better than before. Sometimes too much care is as dangerous as no care at all — what matters isn't how much you give, but whether you communicate.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "绿萝的叶子为什么发黄？",
+        "q_en": "Why did the pothos leaves turn yellow?",
+        "options": [
+          {"text": "没有人浇水", "pinyin": "méiyǒu rén jiāo shuǐ", "text_en": "Nobody watered it", "correct": false},
+          {"text": "被浇了太多水", "pinyin": "bèi jiāo le tài duō shuǐ", "text_en": "It was overwatered", "correct": true},
+          {"text": "阳光不够", "pinyin": "yángguāng bú gòu", "text_en": "Not enough sunlight", "correct": false},
+          {"text": "温度太低", "pinyin": "wēndù tài dī", "text_en": "Temperature too low", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "他们后来怎么解决了这个问题？",
+        "q_en": "How did they solve the problem?",
+        "options": [
+          {"text": "不再浇水了", "pinyin": "bú zài jiāo shuǐ le", "text_en": "Stopped watering entirely", "correct": false},
+          {"text": "换了一盆假花", "pinyin": "huàn le yì pén jiǎ huā", "text_en": "Replaced it with a fake plant", "correct": false},
+          {"text": "建了群，规定浇水的时间和人", "pinyin": "jiàn le qún, guīdìng jiāo shuǐ de shíjiān hé rén", "text_en": "Created a group chat with a watering schedule", "correct": true},
+          {"text": "请了专业的园丁", "pinyin": "qǐng le zhuānyè de yuándīng", "text_en": "Hired a professional gardener", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者从这件事学到了什么？",
+        "q_en": "What did the author learn from this?",
+        "options": [
+          {"text": "植物很难养", "pinyin": "zhíwù hěn nán yǎng", "text_en": "Plants are hard to keep", "correct": false},
+          {"text": "关键不是付出多少而是有没有沟通", "pinyin": "guānjiàn bú shì fùchū duōshao ér shì yǒu méiyǒu gōutōng", "text_en": "What matters isn't how much you give but whether you communicate", "correct": true},
+          {"text": "办公室不应该放植物", "pinyin": "bàngōngshì bù yīnggāi fàng zhíwù", "text_en": "Offices shouldn't have plants", "correct": false},
+          {"text": "实习生最用心", "pinyin": "shíxíshēng zuì yòngxīn", "text_en": "Interns are the most dedicated", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_identity_004",
+    "title": "The Name I Never Use",
+    "title_zh": "我从来不用的名字",
+    "hsk_level": 5,
+    "text_zh": "我有一个英文名叫David，是上初中的时候英语老师给取的。她给全班每个人都取了英文名，男生不是David就是Tom，女生不是Lucy就是Amy。我用了三年以后就再也没有用过。上大学的时候有外教问我英文名是什么，我说了David，他点点头但看起来并没有觉得这个名字跟我有什么关系。后来去国外出差，外国同事叫我David的时候，我总是要停顿一秒才反应过来——因为那个名字在我心里不连接任何记忆或者情感。我的中文名是爸爸花了一个月才决定的，每个字都有特别的含义。它跟着我经历了所有重要的时刻——上学、毕业、工作、恋爱。一个名字不仅仅是一个符号，它是一个人身份的入口。当别人叫我中文名的时候，我知道他们叫的是真正的我。David只是一件我偶尔穿上的外套，脱下来以后我还是原来的自己。",
+    "text_pinyin": "Wǒ yǒu yí gè yīngwén míng jiào David, shì shàng chūzhōng de shíhou yīngyǔ lǎoshī gěi qǔ de. Tā gěi quán bān měi gè rén dōu qǔ le yīngwén míng, nánshēng bú shì David jiù shì Tom, nǚshēng bú shì Lucy jiù shì Amy. Wǒ yòng le sān nián yǐhòu jiù zài yě méiyǒu yòng guò. Shàng dàxué de shíhou yǒu wàijiào wèn wǒ yīngwén míng shì shénme, wǒ shuō le David, tā diǎndiǎn tóu dàn kàn qǐlái bìng méiyǒu juéde zhège míngzi gēn wǒ yǒu shénme guānxi. Hòulái qù guówài chūchāi, wàiguó tóngshì jiào wǒ David de shíhou, wǒ zǒng shì yào tíngdùn yì miǎo cái fǎnyìng guòlái — yīnwèi nàge míngzi zài wǒ xīn lǐ bù liánjiē rènhé jìyì huòzhě qínggǎn. Wǒ de zhōngwén míng shì bàba huā le yí gè yuè cái juédìng de, měi gè zì dōu yǒu tèbié de hányì. Tā gēn zhe wǒ jīnglì le suǒyǒu zhòngyào de shíkè — shàngxué, bìyè, gōngzuò, liàn'ài. Yí gè míngzi bù jǐnjǐn shì yí gè fúhào, tā shì yí gè rén shēnfèn de rùkǒu. Dāng biérén jiào wǒ zhōngwén míng de shíhou, wǒ zhīdào tāmen jiào de shì zhēnzhèng de wǒ. David zhǐ shì yí jiàn wǒ ǒu'ěr chuān shàng de wàitào, tuō xiàlái yǐhòu wǒ háishi yuánlái de zìjǐ.",
+    "text_en": "I have an English name, David, given to me by my English teacher in middle school. She gave everyone in the class English names — boys were either David or Tom, girls either Lucy or Amy. I used it for three years and never again after that. In college when a foreign teacher asked my English name, I said David; he nodded but didn't seem to feel the name had anything to do with me. Later on business trips abroad, when foreign colleagues called me David I always needed a one-second pause to react — because that name connects to no memories or emotions in my heart. My Chinese name took my father a month to decide, every character carrying special meaning. It's been with me through every important moment — school, graduation, work, love. A name isn't just a symbol; it's the entrance to a person's identity. When someone calls my Chinese name, I know they're calling the real me. David is just a coat I occasionally put on; after taking it off, I'm still my original self.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "英文名是谁取的？",
+        "q_en": "Who gave the English name?",
+        "options": [
+          {"text": "爸爸", "pinyin": "bàba", "text_en": "Father", "correct": false},
+          {"text": "初中英语老师", "pinyin": "chūzhōng yīngyǔ lǎoshī", "text_en": "Middle school English teacher", "correct": true},
+          {"text": "自己选的", "pinyin": "zìjǐ xuǎn de", "text_en": "Chose it themselves", "correct": false},
+          {"text": "外国朋友", "pinyin": "wàiguó péngyou", "text_en": "A foreign friend", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "外国同事叫David的时候作者有什么反应？",
+        "q_en": "How does the author react when foreign colleagues call them David?",
+        "options": [
+          {"text": "很开心", "pinyin": "hěn kāixīn", "text_en": "Very happy", "correct": false},
+          {"text": "要停顿一秒才反应过来", "pinyin": "yào tíngdùn yì miǎo cái fǎnyìng guòlái", "text_en": "Needs a one-second pause to react", "correct": true},
+          {"text": "马上纠正他们", "pinyin": "mǎshàng jiūzhèng tāmen", "text_en": "Immediately corrects them", "correct": false},
+          {"text": "完全没有反应", "pinyin": "wánquán méiyǒu fǎnyìng", "text_en": "No reaction at all", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者把英文名比作什么？",
+        "q_en": "What does the author compare the English name to?",
+        "options": [
+          {"text": "一个面具", "pinyin": "yí gè miànjù", "text_en": "A mask", "correct": false},
+          {"text": "一件偶尔穿的外套", "pinyin": "yí jiàn ǒu'ěr chuān de wàitào", "text_en": "A coat occasionally worn", "correct": true},
+          {"text": "一个玩笑", "pinyin": "yí gè wánxiào", "text_en": "A joke", "correct": false},
+          {"text": "一把钥匙", "pinyin": "yì bǎ yàoshi", "text_en": "A key", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_urban_010",
+    "title": "The Last Bus Home",
+    "title_zh": "最后一班公交车",
+    "hsk_level": 5,
+    "text_zh": "晚上十点半的末班公交车和白天的完全不同。白天挤满了人，大家都赶时间，推来推去，很吵。末班车上只有几个人，每个人之间隔着好几个座位。车里的灯光有点暗，窗外的城市也开始安静下来。司机开得比白天慢，好像也不那么赶了。乘客们各自做着自己的事：有一个穿工装的年轻人靠在窗户上睡着了，手里还握着安全帽。有一个女孩戴着耳机在看手机，屏幕的光照在她的脸上。后排坐着一对老夫妻，老太太把头靠在老先生的肩膀上，两个人都闭着眼睛。我坐在中间，听着公交车晃动的声音和偶尔的刹车声。到站了，报站的声音在安静的车厢里格外清晰。我下车的时候回头看了一眼——车窗里那几个亮着的身影，很快就被夜色吞没了。末班车就像城市的一声叹息：一天就要结束了，大家都要回家了。",
+    "text_pinyin": "Wǎnshang shí diǎn bàn de mòbān gōngjiāo chē hé báitiān de wánquán bùtóng. Báitiān jǐ mǎn le rén, dàjiā dōu gǎn shíjiān, tuī lái tuī qù, hěn chǎo. Mòbān chē shàng zhǐ yǒu jǐ gè rén, měi gè rén zhī jiān gé zhe hǎo jǐ gè zuòwèi. Chē lǐ de dēngguāng yǒudiǎn àn, chuāng wài de chéngshì yě kāishǐ ānjìng xiàlái. Sījī kāi de bǐ báitiān màn, hǎoxiàng yě bú nàme gǎn le. Chéngkèmen gèzì zuò zhe zìjǐ de shì: yǒu yí gè chuān gōngzhuāng de niánqīngrén kào zài chuānghu shàng shuì zháo le, shǒu lǐ hái wò zhe ānquán mào. Yǒu yí gè nǚhái dài zhe ěrjī zài kàn shǒujī, píngmù de guāng zhào zài tā de liǎn shàng. Hòu pái zuò zhe yí duì lǎo fūqī, lǎo tàitai bǎ tóu kào zài lǎo xiānsheng de jiānbǎng shàng, liǎng gè rén dōu bì zhe yǎnjing. Wǒ zuò zài zhōngjiān, tīng zhe gōngjiāo chē huàngdòng de shēngyīn hé ǒu'ěr de shāchē shēng. Dào zhàn le, bào zhàn de shēngyīn zài ānjìng de chēxiāng lǐ géwài qīngxī. Wǒ xià chē de shíhou huítóu kàn le yì yǎn — chē chuāng lǐ nà jǐ gè liàng zhe de shēnyǐng, hěn kuài jiù bèi yèsè tūnmò le. Mòbān chē jiù xiàng chéngshì de yì shēng tànxī: yì tiān jiù yào jiéshù le, dàjiā dōu yào huí jiā le.",
+    "text_en": "The last bus at 10:30 PM is completely different from the daytime one. During the day it's packed, everyone rushing, pushing, noisy. The last bus has only a few people, several empty seats between each person. The interior lights are slightly dim, the city outside growing quiet too. The driver goes slower than in daytime, as if not in a rush anymore either. The passengers each do their own thing: a young man in work clothes has fallen asleep against the window, still holding his hard hat. A girl wearing earphones watches her phone, the screen lighting her face. An elderly couple sits in the back row, the wife resting her head on her husband's shoulder, both with eyes closed. I sit in the middle, listening to the bus's swaying sounds and occasional braking. A stop arrives, the announcement especially clear in the quiet bus. Getting off, I look back — those few lit silhouettes in the bus windows are quickly swallowed by the night. The last bus is like the city's sigh: the day is ending, everyone is going home.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "末班车和白天的公交车有什么不同？",
+        "q_en": "How is the last bus different from daytime buses?",
+        "options": [
+          {"text": "更挤", "pinyin": "gèng jǐ", "text_en": "More crowded", "correct": false},
+          {"text": "人很少，很安静", "pinyin": "rén hěn shǎo, hěn ānjìng", "text_en": "Few people, very quiet", "correct": true},
+          {"text": "票价更贵", "pinyin": "piàojià gèng guì", "text_en": "More expensive", "correct": false},
+          {"text": "路线不一样", "pinyin": "lùxiàn bù yíyàng", "text_en": "Different route", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "穿工装的年轻人在做什么？",
+        "q_en": "What is the young man in work clothes doing?",
+        "options": [
+          {"text": "打电话", "pinyin": "dǎ diànhuà", "text_en": "Making a phone call", "correct": false},
+          {"text": "靠在窗户上睡着了", "pinyin": "kào zài chuānghu shàng shuì zháo le", "text_en": "Fell asleep against the window", "correct": true},
+          {"text": "看书", "pinyin": "kàn shū", "text_en": "Reading", "correct": false},
+          {"text": "吃东西", "pinyin": "chī dōngxi", "text_en": "Eating", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者觉得末班车像什么？",
+        "q_en": "What does the author think the last bus is like?",
+        "options": [
+          {"text": "一首歌", "pinyin": "yì shǒu gē", "text_en": "A song", "correct": false},
+          {"text": "一个梦", "pinyin": "yí gè mèng", "text_en": "A dream", "correct": false},
+          {"text": "城市的一声叹息", "pinyin": "chéngshì de yì shēng tànxī", "text_en": "The city's sigh", "correct": true},
+          {"text": "一部电影", "pinyin": "yí bù diànyǐng", "text_en": "A movie", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_explain_003",
+    "title": "Why We Keep Old Phone Numbers",
+    "title_zh": "为什么我们留着旧号码",
+    "hsk_level": 5,
+    "text_zh": "我的手机通讯录里有三百多个联系人。我仔细看了一遍，发现至少有一半我已经不联系了：大学同学、以前的同事、某次旅行认识的人、帮我修过电脑的人。有些人我连名字都想不起来了，只剩下一个号码和一个模糊的备注。但我从来没有删除过任何一个。为什么呢？我想了想，也许是因为每一个号码都代表我人生里的一个瞬间——当我存下这个号码的时候，我们之间至少有一些联系，那个联系在那个时刻是真实的。删除一个号码就像是否认那个瞬间存在过。还有一种可能：我们留着旧号码是为了给自己一种安全感——万一有一天我们需要联系他们呢？虽然那一天大概永远不会来，但「可以联系」这件事本身就是一种安慰。通讯录就像一个人的社交化石层，每一层都记录了某个时期的生活。",
+    "text_pinyin": "Wǒ de shǒujī tōngxùnlù lǐ yǒu sān bǎi duō gè liánxì rén. Wǒ zǐxì kàn le yí biàn, fāxiàn zhìshǎo yǒu yí bàn wǒ yǐjīng bù liánxì le: dàxué tóngxué, yǐqián de tóngshì, mǒu cì lǚxíng rènshi de rén, bāng wǒ xiū guò diànnǎo de rén. Yǒuxiē rén wǒ lián míngzi dōu xiǎng bù qǐlái le, zhǐ shèng xià yí gè hàomǎ hé yí gè móhu de bèizhù. Dàn wǒ cónglái méiyǒu shānchú guò rènhé yí gè. Wèi shénme ne? Wǒ xiǎng le xiǎng, yěxǔ shì yīnwèi měi yí gè hàomǎ dōu dàibiǎo wǒ rénshēng lǐ de yí gè shùnjiān — dāng wǒ cún xià zhège hàomǎ de shíhou, wǒmen zhī jiān zhìshǎo yǒu yìxiē liánxì, nàge liánxì zài nàge shíkè shì zhēnshí de. Shānchú yí gè hàomǎ jiù xiàng shì fǒurèn nàge shùnjiān cúnzài guò. Hái yǒu yì zhǒng kěnéng: wǒmen liú zhe jiù hàomǎ shì wèi le gěi zìjǐ yì zhǒng ānquángǎn — wànyī yǒu yì tiān wǒmen xūyào liánxì tāmen ne? Suīrán nà yì tiān dàgài yǒngyuǎn bú huì lái, dàn「kěyǐ liánxì」zhè jiàn shì běnshēn jiù shì yì zhǒng ānwèi. Tōngxùnlù jiù xiàng yí gè rén de shèjiāo huàshí céng, měi yì céng dōu jìlù le mǒu gè shíqī de shēnghuó.",
+    "text_en": "My phone contacts list has over three hundred people. I looked through it carefully and found at least half I no longer contact: college classmates, former colleagues, someone from a trip, someone who fixed my computer once. Some I can't even remember by name — just a number and a vague note remain. But I've never deleted any of them. Why? I thought about it — maybe because each number represents a moment in my life. When I saved that number, there was at least some connection between us, and that connection was real in that moment. Deleting a number feels like denying that moment existed. There's another possibility: we keep old numbers for a sense of security — what if one day we need to reach them? Though that day will probably never come, the fact that 'I could contact them' is itself a comfort. The contacts list is like a person's social fossil layer, each stratum recording a period of life.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者的通讯录里有多少联系人？",
+        "q_en": "How many contacts does the author have?",
+        "options": [
+          {"text": "一百多个", "pinyin": "yì bǎi duō gè", "text_en": "Over a hundred", "correct": false},
+          {"text": "三百多个", "pinyin": "sān bǎi duō gè", "text_en": "Over three hundred", "correct": true},
+          {"text": "五十个", "pinyin": "wǔshí gè", "text_en": "Fifty", "correct": false},
+          {"text": "一千个", "pinyin": "yì qiān gè", "text_en": "A thousand", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者为什么不删除旧号码？",
+        "q_en": "Why doesn't the author delete old numbers?",
+        "options": [
+          {"text": "手机内存够大", "pinyin": "shǒujī nèicún gòu dà", "text_en": "Phone has enough storage", "correct": false},
+          {"text": "每个号码代表人生的一个瞬间", "pinyin": "měi gè hàomǎ dàibiǎo rénshēng de yí gè shùnjiān", "text_en": "Each number represents a moment in life", "correct": true},
+          {"text": "不知道怎么删除", "pinyin": "bù zhīdào zěnme shānchú", "text_en": "Doesn't know how to delete", "correct": false},
+          {"text": "怕被别人发现", "pinyin": "pà bèi biérén fāxiàn", "text_en": "Afraid of being found out", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者把通讯录比作什么？",
+        "q_en": "What does the author compare the contacts list to?",
+        "options": [
+          {"text": "一本日记", "pinyin": "yì běn rìjì", "text_en": "A diary", "correct": false},
+          {"text": "一张地图", "pinyin": "yì zhāng dìtú", "text_en": "A map", "correct": false},
+          {"text": "社交化石层", "pinyin": "shèjiāo huàshí céng", "text_en": "A social fossil layer", "correct": true},
+          {"text": "一棵大树", "pinyin": "yì kē dà shù", "text_en": "A big tree", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_food_003",
+    "title": "The Breakfast Stall Couple",
+    "title_zh": "早餐摊的夫妻",
+    "hsk_level": 5,
+    "text_zh": "学校门口有一对卖煎饼的夫妻。每天早上五点半他们就到了，推着那辆改装过的三轮车，开始支起摊位。丈夫负责做煎饼——摊面糊、打鸡蛋、撒葱花、刷酱、加脆饼、折叠，整个过程不到两分钟，动作行云流水。妻子负责收钱和打包，顺便和客人聊几句。他们之间几乎不用说话就能配合：妻子收到扫码付款就轻轻敲一下台面，丈夫就知道开始做下一个了。忙的时候他们能同时应对十几个客人，一个人做、一个人卖、一个人收拾，两个人做三个人的工作。最让我感动的是有一次下大雨，客人比平时少了一半，妻子趁着空闲给丈夫递了一杯热水。他接过来喝了一口，什么也没说，继续摊下一个煎饼。那个动作里有一种无声的关心，比任何甜言蜜语都真实。",
+    "text_pinyin": "Xuéxiào ménkǒu yǒu yí duì mài jiānbing de fūqī. Měi tiān zǎoshang wǔ diǎn bàn tāmen jiù dào le, tuī zhe nà liàng gǎizhuāng guò de sānlún chē, kāishǐ zhī qǐ tānwèi. Zhàngfu fùzé zuò jiānbing — tān miànhú, dǎ jīdàn, sā cōnghuā, shuā jiàng, jiā cuìbǐng, zhédié, zhěnggè guòchéng bú dào liǎng fēnzhōng, dòngzuò xíngyúnliúshuǐ. Qīzi fùzé shōu qián hé dǎbāo, shùnbiàn hé kèrén liáo jǐ jù. Tāmen zhī jiān jīhū bú yòng shuōhuà jiù néng pèihé: qīzi shōu dào sǎo mǎ fùkuǎn jiù qīngqīng qiāo yíxià táimiàn, zhàngfu jiù zhīdào kāishǐ zuò xià yí gè le. Máng de shíhou tāmen néng tóngshí yìngduì shí jǐ gè kèrén, yí gè rén zuò, yí gè rén mài, yí gè rén shōushi, liǎng gè rén zuò sān gè rén de gōngzuò. Zuì ràng wǒ gǎndòng de shì yǒu yí cì xià dà yǔ, kèrén bǐ píngshí shǎo le yí bàn, qīzi chèn zhe kòngxián gěi zhàngfu dì le yì bēi rè shuǐ. Tā jiē guòlái hē le yì kǒu, shénme yě méi shuō, jìxù tān xià yí gè jiānbing. Nàge dòngzuò lǐ yǒu yì zhǒng wú shēng de guānxīn, bǐ rènhé tiányánmìyǔ dōu zhēnshí.",
+    "text_en": "At the school entrance there's a couple selling jianbing. Every morning at 5:30 they arrive, pushing their converted three-wheeler, setting up the stall. The husband makes the jianbing — spreading batter, cracking an egg, scattering scallions, brushing sauce, adding a crispy cracker, folding — the whole process under two minutes, movements flowing like water. The wife handles money and packaging, chatting briefly with customers. They coordinate almost without speaking: when the wife receives a mobile payment she lightly taps the counter, and the husband knows to start the next one. When busy they handle over a dozen customers simultaneously — one making, one selling, one cleaning up — two people doing three people's work. What moved me most was during a heavy rain when customers were half the usual number. The wife took advantage of the lull to hand her husband a cup of hot water. He took it, drank a sip, said nothing, and continued making the next jianbing. In that gesture was a silent caring more real than any sweet words.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "丈夫做一个煎饼需要多长时间？",
+        "q_en": "How long does it take the husband to make one jianbing?",
+        "options": [
+          {"text": "五分钟", "pinyin": "wǔ fēnzhōng", "text_en": "Five minutes", "correct": false},
+          {"text": "不到两分钟", "pinyin": "bú dào liǎng fēnzhōng", "text_en": "Under two minutes", "correct": true},
+          {"text": "十分钟", "pinyin": "shí fēnzhōng", "text_en": "Ten minutes", "correct": false},
+          {"text": "三十秒", "pinyin": "sānshí miǎo", "text_en": "Thirty seconds", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "妻子怎么告诉丈夫做下一个？",
+        "q_en": "How does the wife signal the husband to make the next one?",
+        "options": [
+          {"text": "大声喊", "pinyin": "dàshēng hǎn", "text_en": "Shouts loudly", "correct": false},
+          {"text": "轻轻敲一下台面", "pinyin": "qīngqīng qiāo yíxià táimiàn", "text_en": "Lightly taps the counter", "correct": true},
+          {"text": "发微信", "pinyin": "fā wēixìn", "text_en": "Sends a WeChat message", "correct": false},
+          {"text": "点头", "pinyin": "diǎntóu", "text_en": "Nods", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "下大雨的时候妻子做了什么让作者感动？",
+        "q_en": "What did the wife do during the heavy rain that moved the author?",
+        "options": [
+          {"text": "收拾摊位回家", "pinyin": "shōushi tānwèi huí jiā", "text_en": "Packed up and went home", "correct": false},
+          {"text": "给丈夫递了一杯热水", "pinyin": "gěi zhàngfu dì le yì bēi rè shuǐ", "text_en": "Handed her husband a cup of hot water", "correct": true},
+          {"text": "给客人打折", "pinyin": "gěi kèrén dǎzhé", "text_en": "Gave customers a discount", "correct": false},
+          {"text": "帮丈夫做煎饼", "pinyin": "bāng zhàngfu zuò jiānbing", "text_en": "Helped husband make jianbing", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j5_observe_016",
+    "title": "The Laundry on the Line",
+    "title_zh": "晾衣绳上的衣服",
+    "hsk_level": 5,
+    "text_zh": "从我家阳台看出去，能看到对面好几栋楼的阳台。每一个阳台上都挂着晾晒的衣服，像是一面面彩色的旗帜。仔细看就能猜到每家的生活：有小孩子衣服的那家，一定有年幼的孩子，衣服小小的，颜色都很鲜艳。旁边那家挂着很多衬衫和西裤，看起来是一个上班族的家。再旁边那家的衣服都很大，颜色深，应该是一个单身的大个子男人。最上面一层的阳台有很多床单和被套在随风飘动——今天天气好，有人在晒被子。有一个阳台最有意思：上面同时挂着老年人的棉衣和婴儿的小袜子，中间是几件年轻女性的裙子。三代同堂的家庭，一根晾衣绳就能看出来。风吹过来的时候，所有的衣服一起摆动，大的小的、厚的薄的、鲜艳的朴素的，好像在一起跳一支慢慢的舞。这是城市里最朴实的风景——每个人的生活被晒在阳光下，没有任何隐藏。",
+    "text_pinyin": "Cóng wǒ jiā yángtái kàn chūqù, néng kàn dào duìmiàn hǎo jǐ dòng lóu de yángtái. Měi yí gè yángtái shàng dōu guà zhe liàngshài de yīfu, xiàng shì yí miànmiàn cǎisè de qízhì. Zǐxì kàn jiù néng cāi dào měi jiā de shēnghuó: yǒu xiǎo háizi yīfu de nà jiā, yídìng yǒu niányòu de háizi, yīfu xiǎoxiǎo de, yánsè dōu hěn xiānyàn. Pángbiān nà jiā guà zhe hěn duō chènshān hé xīkù, kàn qǐlái shì yí gè shàngbānzú de jiā. Zài pángbiān nà jiā de yīfu dōu hěn dà, yánsè shēn, yīnggāi shì yí gè dānshēn de dà gèzi nánrén. Zuì shàngmiàn yì céng de yángtái yǒu hěn duō chuángdān hé bèitào zài suí fēng piāodòng — jīntiān tiānqì hǎo, yǒu rén zài shài bèizi. Yǒu yí gè yángtái zuì yǒu yìsi: shàngmiàn tóngshí guà zhe lǎoniánrén de miányī hé yīng'ér de xiǎo wàzi, zhōngjiān shì jǐ jiàn niánqīng nǚxìng de qúnzi. Sān dài tóngtáng de jiātíng, yì gēn liàngyī shéng jiù néng kàn chūlái. Fēng chuī guòlái de shíhou, suǒyǒu de yīfu yìqǐ bǎidòng, dà de xiǎo de, hòu de báo de, xiānyàn de pǔsù de, hǎoxiàng zài yìqǐ tiào yì zhī mànmàn de wǔ. Zhè shì chéngshì lǐ zuì pǔshí de fēngjǐng — měi gè rén de shēnghuó bèi shài zài yángguāng xià, méiyǒu rènhé yǐncáng.",
+    "text_en": "Looking out from my balcony I can see the balconies of several buildings across the way. Each one has laundry hanging to dry, like colorful flags. Looking carefully you can guess each family's life: the one with children's clothes must have young kids — tiny garments in bright colors. The one next to it has many dress shirts and trousers, probably an office worker's home. The next one over has clothes that are all large and dark-colored — probably a single tall man. The top-floor balcony has bed sheets and duvet covers billowing in the wind — the weather's nice today, someone's sunning their quilts. The most interesting balcony has elderly cotton coats and baby socks hanging simultaneously, with young women's dresses in between. Three generations under one roof — you can tell from a single clothesline. When the wind blows, all the clothes sway together — large and small, thick and thin, bright and plain — as if dancing a slow dance together. This is the city's most unpretentious scenery — everyone's life hung out in the sunlight, nothing hidden.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "怎么猜出有小孩子的家庭？",
+        "q_en": "How can you tell which home has small children?",
+        "options": [
+          {"text": "阳台很大", "pinyin": "yángtái hěn dà", "text_en": "The balcony is large", "correct": false},
+          {"text": "有小小的、颜色鲜艳的衣服", "pinyin": "yǒu xiǎoxiǎo de, yánsè xiānyàn de yīfu", "text_en": "Small, brightly colored clothes", "correct": true},
+          {"text": "有很多玩具", "pinyin": "yǒu hěn duō wánjù", "text_en": "Many toys", "correct": false},
+          {"text": "能听到小孩的声音", "pinyin": "néng tīng dào xiǎohái de shēngyīn", "text_en": "Can hear children's voices", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "最有意思的阳台有什么特点？",
+        "q_en": "What's special about the most interesting balcony?",
+        "options": [
+          {"text": "衣服最多", "pinyin": "yīfu zuì duō", "text_en": "The most clothes", "correct": false},
+          {"text": "同时有老人、婴儿和年轻女性的衣服", "pinyin": "tóngshí yǒu lǎorén, yīng'ér hé niánqīng nǚxìng de yīfu", "text_en": "Clothes for elderly, baby, and young woman simultaneously", "correct": true},
+          {"text": "衣服最贵", "pinyin": "yīfu zuì guì", "text_en": "The most expensive clothes", "correct": false},
+          {"text": "阳台最大", "pinyin": "yángtái zuì dà", "text_en": "The largest balcony", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者觉得这是什么样的风景？",
+        "q_en": "What kind of scenery does the author think this is?",
+        "options": [
+          {"text": "不好看的", "pinyin": "bù hǎokàn de", "text_en": "Unattractive", "correct": false},
+          {"text": "最朴实的——每个人的生活晒在阳光下", "pinyin": "zuì pǔshí de — měi gè rén de shēnghuó shài zài yángguāng xià", "text_en": "The most unpretentious — everyone's life in the sunlight", "correct": true},
+          {"text": "需要改善的", "pinyin": "xūyào gǎishàn de", "text_en": "Something that needs improvement", "correct": false},
+          {"text": "只有中国才有的", "pinyin": "zhǐ yǒu zhōngguó cái yǒu de", "text_en": "Only found in China", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_mystery_006",
+    "title": "The Bookshop's Hidden Shelf",
+    "title_zh": "书店的隐藏书架",
+    "hsk_level": 5,
+    "text_zh": "我家附近有一家独立书店，不大，但书的选择很好。我去了好几次以后才发现一个秘密：在最里面的角落有一个不起眼的书架，上面放的书没有分类标签，也没有价格标签。我问老板这些是什么书。他笑了笑说「这是交换书架——你可以带一本自己读完的书来，换走一本你想读的」。我仔细看了看，上面有各种各样的书：小说、散文、漫画、甚至还有一本旧的英语字典。有些书里面夹着小纸条，上面写着读者的感想。有一本小说的第一页写着「这本书陪我度过了一段很难的日子，希望它也能陪你」。另一本诗集里夹着一张书签，上面画了一朵小花。这个书架就像一个安静的对话空间——你不知道谁留下了这本书，但通过一本书，两个陌生人之间建立了一种看不见的联系。",
+    "text_pinyin": "Wǒ jiā fùjìn yǒu yì jiā dúlì shūdiàn, bú dà, dàn shū de xuǎnzé hěn hǎo. Wǒ qù le hǎo jǐ cì yǐhòu cái fāxiàn yí gè mìmì: zài zuì lǐmiàn de jiǎoluò yǒu yí gè bù qǐyǎn de shūjià, shàngmiàn fàng de shū méiyǒu fēnlèi biāoqiān, yě méiyǒu jiàgé biāoqiān. Wǒ wèn lǎobǎn zhèxiē shì shénme shū. Tā xiào le xiào shuō「zhè shì jiāohuàn shūjià — nǐ kěyǐ dài yì běn zìjǐ dú wán de shū lái, huàn zǒu yì běn nǐ xiǎng dú de」. Wǒ zǐxì kàn le kàn, shàngmiàn yǒu gè zhǒng gè yàng de shū: xiǎoshuō, sǎnwén, mànhuà, shènzhì hái yǒu yì běn jiù de yīngyǔ zìdiǎn. Yǒuxiē shū lǐmiàn jiā zhe xiǎo zhǐtiáo, shàngmiàn xiě zhe dúzhě de gǎnxiǎng. Yǒu yì běn xiǎoshuō de dì yī yè xiě zhe「zhè běn shū péi wǒ dùguò le yí duàn hěn nán de rìzi, xīwàng tā yě néng péi nǐ」. Lìng yì běn shījí lǐ jiā zhe yì zhāng shūqiān, shàngmiàn huà le yì duǒ xiǎo huā. Zhège shūjià jiù xiàng yí gè ānjìng de duìhuà kōngjiān — nǐ bù zhīdào shéi liú xià le zhè běn shū, dàn tōngguò yì běn shū, liǎng gè mòshēngrén zhī jiān jiànlì le yì zhǒng kàn bú jiàn de liánxì.",
+    "text_en": "Near my home there's an independent bookshop — small but with good selection. It was only after visiting several times that I discovered a secret: in the furthest corner is an unremarkable shelf with books that have no category labels or price tags. I asked the owner what these books were. He smiled and said 'this is the exchange shelf — you can bring a book you've finished and take one you want to read.' I looked carefully: there were all kinds of books — novels, essays, comics, even an old English dictionary. Some books had little notes tucked inside with readers' thoughts. On the first page of one novel someone had written 'this book got me through a really hard time, I hope it can accompany you too.' A poetry collection had a bookmark with a small flower drawn on it. This shelf is like a quiet conversation space — you don't know who left the book, but through it two strangers form an invisible connection.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这个书架的书有什么特别？",
+        "q_en": "What's special about the books on this shelf?",
+        "options": [
+          {"text": "都是新书", "pinyin": "dōu shì xīn shū", "text_en": "They're all new", "correct": false},
+          {"text": "没有分类和价格标签", "pinyin": "méiyǒu fēnlèi hé jiàgé biāoqiān", "text_en": "No category or price labels", "correct": true},
+          {"text": "都是外文书", "pinyin": "dōu shì wàiwén shū", "text_en": "All foreign language books", "correct": false},
+          {"text": "都是老板写的", "pinyin": "dōu shì lǎobǎn xiě de", "text_en": "All written by the owner", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "小说第一页写的是什么？",
+        "q_en": "What was written on the first page of the novel?",
+        "options": [
+          {"text": "作者的签名", "pinyin": "zuòzhě de qiānmíng", "text_en": "The author's signature", "correct": false},
+          {"text": "这本书陪我度过了很难的日子", "pinyin": "zhè běn shū péi wǒ dùguò le hěn nán de rìzi", "text_en": "This book got me through hard times", "correct": true},
+          {"text": "不要弄脏这本书", "pinyin": "bú yào nòng zāng zhè běn shū", "text_en": "Don't dirty this book", "correct": false},
+          {"text": "这本书是假的", "pinyin": "zhè běn shū shì jiǎ de", "text_en": "This book is fake", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者认为书架像什么？",
+        "q_en": "What does the author think the shelf is like?",
+        "options": [
+          {"text": "一个图书馆", "pinyin": "yí gè túshūguǎn", "text_en": "A library", "correct": false},
+          {"text": "一个安静的对话空间", "pinyin": "yí gè ānjìng de duìhuà kōngjiān", "text_en": "A quiet conversation space", "correct": true},
+          {"text": "一个垃圾站", "pinyin": "yí gè lājī zhàn", "text_en": "A garbage dump", "correct": false},
+          {"text": "一个博物馆", "pinyin": "yí gè bówùguǎn", "text_en": "A museum", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_urban_011",
+    "title": "The Sound of the City at Dawn",
+    "title_zh": "城市黎明的声音",
+    "hsk_level": 5,
+    "text_zh": "有一次失眠，我在凌晨四点半的时候打开了窗户。那是我第一次听到城市从沉睡中醒来的过程。最先出现的声音是环卫工人的扫帚声——沙沙沙，节奏很稳定，从远到近，从近到远。然后是早班公交车发动的声音——低沉的轰鸣，在空旷的街道上格外清楚。接着是早起的鸟叫，叽叽喳喳的，好像在互相通报「天快亮了」。大约五点钟的时候，远处传来第一声铁门拉开的声音——某个早餐店开始营业了。五点半，零星的脚步声出现在人行道上。六点，汽车的发动机声逐渐多了起来。六点半，整个城市已经完全醒了——喇叭声、说话声、施工声混在一起，变成了那种我们每天都习以为常的背景噪音。但在那之前的两个小时里，城市是温柔的。它不是突然醒来的，而是一层一层慢慢地亮起来的。",
+    "text_pinyin": "Yǒu yí cì shīmián, wǒ zài língchén sì diǎn bàn de shíhou dǎkāi le chuānghu. Nà shì wǒ dì yī cì tīng dào chéngshì cóng chénshuì zhōng xǐng lái de guòchéng. Zuì xiān chūxiàn de shēngyīn shì huánwèi gōngrén de sàozhou shēng — shāshāshā, jiézòu hěn wěndìng, cóng yuǎn dào jìn, cóng jìn dào yuǎn. Ránhòu shì zǎo bān gōngjiāo chē fādòng de shēngyīn — dīchén de hōngmíng, zài kōngkuàng de jiēdào shàng géwài qīngchu. Jiē zhe shì zǎo qǐ de niǎo jiào, jījī zhāzhā de, hǎoxiàng zài hùxiāng tōngbào「tiān kuài liàng le」. Dàyuē wǔ diǎnzhōng de shíhou, yuǎnchù chuán lái dì yī shēng tiě mén lā kāi de shēngyīn — mǒu gè zǎocān diàn kāishǐ yíngyè le. Wǔ diǎn bàn, língxīng de jiǎobù shēng chūxiàn zài rénxíngdào shàng. Liù diǎn, qìchē de fādòngjī shēng zhújiàn duō le qǐlái. Liù diǎn bàn, zhěnggè chéngshì yǐjīng wánquán xǐng le — lǎba shēng, shuōhuà shēng, shīgōng shēng hùn zài yìqǐ, biàn chéng le nà zhǒng wǒmen měi tiān dōu xíyǐwéicháng de bèijǐng zàoyīn. Dàn zài nà zhīqián de liǎng gè xiǎoshí lǐ, chéngshì shì wēnróu de. Tā bú shì tūrán xǐng lái de, ér shì yì céng yì céng mànmàn de liàng qǐlái de.",
+    "text_en": "Once during insomnia I opened my window at 4:30 AM. It was my first time hearing the city wake from sleep. The first sound was the sanitation workers' brooms — swish swish swish, steady rhythm, far to near, near to far. Then the early bus starting up — a low rumble, especially clear on the empty streets. Next came the early birds chirping, as if announcing to each other 'dawn is coming.' Around five, from afar came the first sound of a metal gate sliding open — some breakfast shop starting business. At five-thirty, scattered footsteps appeared on sidewalks. By six, engine sounds gradually multiplied. By six-thirty the whole city was fully awake — horns, voices, and construction blending into the background noise we take for granted every day. But in those two hours before, the city was gentle. It didn't wake suddenly, but lit up layer by layer, slowly.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "最先出现的声音是什么？",
+        "q_en": "What was the first sound?",
+        "options": [
+          {"text": "公交车", "pinyin": "gōngjiāo chē", "text_en": "Bus", "correct": false},
+          {"text": "鸟叫", "pinyin": "niǎo jiào", "text_en": "Birdsong", "correct": false},
+          {"text": "环卫工人的扫帚声", "pinyin": "huánwèi gōngrén de sàozhou shēng", "text_en": "Sanitation workers' brooms", "correct": true},
+          {"text": "汽车发动机", "pinyin": "qìchē fādòngjī", "text_en": "Car engines", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "大约几点钟城市完全醒了？",
+        "q_en": "Around what time was the city fully awake?",
+        "options": [
+          {"text": "五点", "pinyin": "wǔ diǎn", "text_en": "5:00", "correct": false},
+          {"text": "六点半", "pinyin": "liù diǎn bàn", "text_en": "6:30", "correct": true},
+          {"text": "七点", "pinyin": "qī diǎn", "text_en": "7:00", "correct": false},
+          {"text": "四点半", "pinyin": "sì diǎn bàn", "text_en": "4:30", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者说黎明前的城市有什么特点？",
+        "q_en": "What does the author say about the pre-dawn city?",
+        "options": [
+          {"text": "很可怕", "pinyin": "hěn kěpà", "text_en": "Scary", "correct": false},
+          {"text": "完全安静", "pinyin": "wánquán ānjìng", "text_en": "Completely silent", "correct": false},
+          {"text": "温柔的，一层一层慢慢亮起来", "pinyin": "wēnróu de, yì céng yì céng mànmàn liàng qǐlái", "text_en": "Gentle, lighting up layer by layer", "correct": true},
+          {"text": "和白天一样吵", "pinyin": "hé báitiān yíyàng chǎo", "text_en": "As noisy as daytime", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  }
+]

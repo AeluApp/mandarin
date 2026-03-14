@@ -1,0 +1,94 @@
+{
+    "title": "The Supermarket Self-Checkout",
+    "title_zh": "超市买东西",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_shopping_1_04_v0",
+    "tree": {
+        "setup": "A neighborhood supermarket, fluorescent-lit and familiar. You're grabbing a few things for dinner. Auntie Qian works the checkout. She scans items at superhuman speed but always pauses to comment on what you're buying -- she has opinions about everyone's dinner choices.",
+        "setup_zh": "社区超市，日光灯照着，很熟悉。你在买晚饭的东西。钱阿姨在收银台工作。她扫码速度超快，但总要停下来评论你买了什么——她对每个人的晚饭都有意见。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "就买这些吗？",
+                "text_pinyin": "jiù mǎi zhèxiē ma?",
+                "text_en": "Just these?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your purchase.",
+                "options": [
+                    {
+                        "text_zh": "是的，就这些。",
+                        "text_pinyin": "shì de, jiù zhèxiē.",
+                        "text_en": "Yes, just these.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Qian scans your items while providing unsolicited dinner commentary.「鸡蛋不错。可是你没买菜啊！」就 means 'just' or 'only' here."
+                    },
+                    {
+                        "text_zh": "等一下，我还要一个。",
+                        "text_pinyin": "děng yíxià, wǒ hái yào yí gè.",
+                        "text_en": "Wait, I need one more thing.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Qian waits with arms folded. She's seen this before -- the forgotten item dash. 还要 means 'also need.'"
+                    },
+                    {
+                        "text_zh": "多少钱？",
+                        "text_pinyin": "duōshao qián?",
+                        "text_en": "How much?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Auntie Qian points at the screen without pausing her scanning rhythm. The total is building."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "一共三十二块。要袋子吗？",
+                "text_pinyin": "yígòng sānshí èr kuài. yào dàizi ma?",
+                "text_en": "Thirty-two yuan total. Do you need a bag?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about the bag.",
+                "options": [
+                    {
+                        "text_zh": "不要，我有袋子。",
+                        "text_pinyin": "bú yào, wǒ yǒu dàizi.",
+                        "text_en": "No, I have a bag.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Auntie Qian gives you an approving look -- she respects someone who comes prepared. She saves each unused bag in a drawer for reasons she's never explained."
+                    },
+                    {
+                        "text_zh": "要一个袋子。",
+                        "text_pinyin": "yào yí gè dàizi.",
+                        "text_en": "I'll take a bag.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "She pulls one from under the counter.「加两毛钱。」Plastic bags cost extra now -- China's environmental policy at work."
+                    },
+                    {
+                        "text_zh": "袋子多少钱？",
+                        "text_pinyin": "dàizi duōshao qián?",
+                        "text_en": "How much is a bag?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「两毛钱。」Auntie Qian answers this fifty times a day. She could answer it in her sleep. She may have."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好了！回去做饭吧。别忘了买菜！",
+                "text_pinyin": "hǎo le! huíqù zuò fàn ba. bié wàng le mǎi cài!",
+                "text_en": "All done! Go make dinner. Don't forget to buy vegetables!"
+            }
+        ],
+        "cultural_note": "Chinese supermarket cashiers (收银员) are famously fast and often chatty. Plastic bags now cost extra as part of environmental regulations. Bringing your own bag (自己带袋子) is increasingly common."
+    }
+}

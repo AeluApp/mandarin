@@ -1,0 +1,123 @@
+{
+    "title": "At the Tea House",
+    "title_zh": "在茶馆",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You walk into a small neighborhood tea house on a rainy afternoon. The owner, Uncle Zhang, is sitting behind the counter, arranging tea leaves. The room smells of oolong.",
+        "setup_zh": "一个下雨的下午，你走进一家小茶馆。老板张叔叔坐在柜台后面，正在整理茶叶。屋子里弥漫着乌龙茶的香味。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "外面雨下得不小吧？快进来坐。你想喝什么茶？我们有绿茶、红茶，还有今年新到的龙井。",
+                "text_pinyin": "Wàimiàn yǔ xià de bù xiǎo ba? Kuài jìnlái zuò. Nǐ xiǎng hē shénme chá? Wǒmen yǒu lǜchá, hóngchá, hái yǒu jīnnián xīn dào de Lóngjǐng.",
+                "text_en": "It's raining pretty hard out there, isn't it? Come in, sit down. What tea would you like? We have green tea, black tea, and this year's new Longjing."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a tea and respond to Uncle Zhang.",
+                "options": [
+                    {
+                        "text_zh": "下雨天喝龙井一定很舒服。我想试试新到的龙井。",
+                        "text_pinyin": "Xià yǔ tiān hē Lóngjǐng yīdìng hěn shūfu. Wǒ xiǎng shìshi xīn dào de Lóngjǐng.",
+                        "text_en": "Drinking Longjing on a rainy day must be wonderful. I'd like to try the new Longjing.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Shows appreciation for the moment — connects the weather to the tea choice."
+                    },
+                    {
+                        "text_zh": "给我一杯绿茶吧。",
+                        "text_pinyin": "Gěi wǒ yī bēi lǜchá ba.",
+                        "text_en": "Give me a cup of green tea.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Simple and fine, but misses the chance to engage with his recommendation."
+                    },
+                    {
+                        "text_zh": "你们有咖啡吗？",
+                        "text_pinyin": "Nǐmen yǒu kāfēi ma?",
+                        "text_en": "Do you have coffee?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Asking for coffee in a tea house misses the atmosphere."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好眼光！这个龙井是杭州西湖边上的，朋友寄过来的。你闻一闻——有没有闻到一点花香？",
+                "text_pinyin": "Hǎo yǎnguāng! Zhège Lóngjǐng shì Hángzhōu Xīhú biān shàng de, péngyou jì guòlái de. Nǐ wén yī wén — yǒu méiyǒu wén dào yīdiǎn huāxiāng?",
+                "text_en": "Good eye! This Longjing is from near West Lake in Hangzhou — a friend sent it to me. Smell it — can you catch a hint of floral fragrance?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond after smelling the tea.",
+                "options": [
+                    {
+                        "text_zh": "嗯，真的有一点花香！还有一点……像草地的味道？很清新。",
+                        "text_pinyin": "En, zhēn de yǒu yīdiǎn huāxiāng! Hái yǒu yīdiǎn…… xiàng cǎodì de wèidào? Hěn qīngxīn.",
+                        "text_en": "Mm, there really is a floral note! And also a bit like... fresh grass? Very refreshing.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Engaging and curious — shows you're paying attention to the experience."
+                    },
+                    {
+                        "text_zh": "嗯，不错，挺香的。",
+                        "text_pinyin": "En, búcuò, tǐng xiāng de.",
+                        "text_en": "Mm, not bad, smells nice.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Polite but generic — doesn't explore the moment."
+                    },
+                    {
+                        "text_zh": "我分不出来，我对茶不太了解。",
+                        "text_pinyin": "Wǒ fēn bù chūlái, wǒ duì chá bú tài liǎojiě.",
+                        "text_en": "I can't tell, I don't know much about tea.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Honest but closes the door on learning more."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "没错！好的龙井就是这样——清新、自然。你慢慢喝，不着急。下雨天，最适合坐在这里喝茶，看看外面的雨。",
+                "text_pinyin": "Méi cuò! Hǎo de Lóngjǐng jiù shì zhèyàng — qīngxīn, zìrán. Nǐ mànmàn hē, bù zháojí. Xià yǔ tiān, zuì shìhé zuò zài zhèlǐ hē chá, kànkan wàimiàn de yǔ.",
+                "text_en": "Exactly! Good Longjing is just like that — fresh and natural. Take your time, no rush. Rainy days are perfect for sitting here, drinking tea, and watching the rain outside."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his invitation to slow down.",
+                "options": [
+                    {
+                        "text_zh": "是啊，平时太忙了，很少有时间这样安静地坐一坐。谢谢张叔叔，这里很舒服。",
+                        "text_pinyin": "Shì a, píngshí tài máng le, hěn shǎo yǒu shíjiān zhèyàng ānjìng de zuò yi zuò. Xièxie Zhāng shūshu, zhèlǐ hěn shūfu.",
+                        "text_en": "Yeah, I'm usually so busy, rarely have time to sit quietly like this. Thank you, Uncle Zhang — it's very comfortable here.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Reflective and grateful — matches the quiet atmosphere perfectly."
+                    },
+                    {
+                        "text_zh": "这个茶多少钱一杯？",
+                        "text_pinyin": "Zhège chá duōshǎo qián yī bēi?",
+                        "text_en": "How much is this tea per cup?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Abrupt shift to money during a peaceful moment."
+                    },
+                    {
+                        "text_zh": "我一会儿还有事，先走了。",
+                        "text_pinyin": "Wǒ yīhuìr hái yǒu shì, xiān zǒu le.",
+                        "text_en": "I have things to do later, I'll head out first.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Rushing away when he's inviting you to slow down."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tea houses are quiet havens in Chinese daily life. The ritual of smelling tea before drinking, and the practice of sitting quietly on rainy days, reflect the Chinese appreciation for slowness and presence. Uncle Zhang sharing a friend's gift tea is a sign of warmth and trust."
+    },
+    "hsk_level": 3
+}

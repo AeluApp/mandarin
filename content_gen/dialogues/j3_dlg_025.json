@@ -1,0 +1,123 @@
+{
+  "title": "The Helpful Stranger",
+  "title_zh": "热心的路人",
+  "hsk_level": 3,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.4,
+  "tree": {
+    "setup": "You're standing on a street corner looking at your phone map, trying to find a post office. A middle-aged man, Uncle Zhang, stops and insists on helping you with directions. He is very confident. He is also very wrong.",
+    "setup_zh": "你站在路口看手机地图，想找邮局。一个中年大叔——张叔——停下来非要帮你指路。他很自信。他也完全错了。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "小伙子，找什么呢？邮局？我知道我知道！往前走，到红绿灯右转，再走五分钟就到了。我在这儿住了二十年了，闭着眼睛都能找到。",
+        "text_pinyin": "Xiǎohuǒzi, zhǎo shénme ne? Yóujú? Wǒ zhīdào wǒ zhīdào! Wǎng qián zǒu, dào hónglǜdēng yòu zhuǎn, zài zǒu wǔ fēnzhōng jiù dào le. Wǒ zài zhèr zhù le èrshí nián le, bì zhe yǎnjīng dōu néng zhǎodào.",
+        "text_en": "Hey kid, what are you looking for? Post office? I know, I know! Walk straight, turn right at the traffic light, five more minutes and you're there. I've lived here twenty years, I could find it with my eyes closed."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Your map says the post office is to the LEFT. But he's very sure of himself.",
+        "options": [
+          {
+            "text_zh": "谢谢张叔！但是我的地图说邮局在左边……会不会是搬了？",
+            "text_pinyin": "Xièxie Zhāng shū! Dànshì wǒ de dìtú shuō yóujú zài zuǒbiān ... huì bú huì shì bān le?",
+            "text_en": "Thanks Uncle Zhang! But my map says the post office is to the left... could it have moved?",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "Gives him an exit by suggesting the post office moved, rather than saying he's wrong. He can save face."
+          },
+          {
+            "text_zh": "不对，你说错了，地图上是往左走。",
+            "text_pinyin": "Bú duì, nǐ shuō cuò le, dìtú shàng shì wǎng zuǒ zǒu.",
+            "text_en": "That's wrong, you're mistaken, the map says go left.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He stopped to help you. Telling him he's flat-out wrong makes the kindness feel punished."
+          },
+          {
+            "text_zh": "好的好的，右转，走五分钟。我记住了，谢谢！",
+            "text_pinyin": "Hǎo de hǎo de, yòu zhuǎn, zǒu wǔ fēnzhōng. Wǒ jì zhù le, xièxie!",
+            "text_en": "Okay okay, turn right, five minutes. Got it, thanks!",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "You know it's wrong but you're accepting it anyway. You'll walk ten minutes in the wrong direction to avoid a two-second awkwardness."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "搬了？不可能！那个邮局一直在那儿的。你那个地图不准的，手机地图经常出错。你听我的，右转，走到一个卖水果的店，旁边就是。",
+        "text_pinyin": "Bān le? Bù kěnéng! Nàge yóujú yīzhí zài nàr de. Nǐ nàge dìtú bù zhǔn de, shǒujī dìtú jīngcháng chū cuò. Nǐ tīng wǒ de, yòu zhuǎn, zǒu dào yīge mài shuǐguǒ de diàn, pángbiān jiù shì.",
+        "text_en": "Moved? Impossible! That post office has always been there. Your map is wrong, phone maps make mistakes all the time. Listen to me — turn right, walk until you see a fruit shop, it's right next to it."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "He's adding specific details now, which makes him sound even more confident. But the details might be from a different place entirely.",
+        "options": [
+          {
+            "text_zh": "水果店旁边的……张叔，那个会不会是快递站？我找的是邮局，绿色牌子的那种。",
+            "text_pinyin": "Shuǐguǒ diàn pángbiān de ... Zhāng shū, nàge huì bú huì shì kuàidì zhàn? Wǒ zhǎo de shì yóujú, lǜsè páizi de nà zhǒng.",
+            "text_en": "The one next to the fruit shop... Uncle Zhang, could that be a courier pickup point? I'm looking for the post office, the kind with the green sign.",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "You've found the source of the confusion without calling him wrong. He might be thinking of a completely different place."
+          },
+          {
+            "text_zh": "张叔，我还是看地图吧，不麻烦你了。",
+            "text_pinyin": "Zhāng shū, wǒ háishì kàn dìtú ba, bù máfan nǐ le.",
+            "text_en": "Uncle Zhang, I'll just use the map, don't want to trouble you.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He's invested now. Dismissing his help this directly feels like 'thanks but I don't trust you,' which is exactly what you mean but probably shouldn't say."
+          },
+          {
+            "text_zh": "好，那我先去右边看看，如果找不到再回来。",
+            "text_pinyin": "Hǎo, nà wǒ xiān qù yòubiān kànkan, rúguǒ zhǎo bú dào zài huílái.",
+            "text_en": "Okay, I'll try going right first, if I can't find it I'll come back.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "You're committing to a wrong direction as a compromise. Being polite is costing you twenty minutes of walking."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "快递站？……嗯……也许吧。哎呀，可能我记的是以前的。对对对，邮局好像去年搬到左边那条街了！你看，我就说我知道吧？左转，五分钟就到了。",
+        "text_pinyin": "Kuàidì zhàn? ... Ēn ... yěxǔ ba. Āiyā, kěnéng wǒ jì de shì yǐqián de. Duì duì duì, yóujú hǎoxiàng qùnián bān dào zuǒbiān nà tiáo jiē le! Nǐ kàn, wǒ jiù shuō wǒ zhīdào ba? Zuǒ zhuǎn, wǔ fēnzhōng jiù dào le.",
+        "text_en": "Courier station? ... Hmm... maybe. Oh, I might be thinking of the old one. Right right right, the post office moved to the street on the left last year! See, I told you I know? Turn left, five minutes and you're there."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "He's just done a full reversal and still claims he was right all along.",
+        "options": [
+          {
+            "text_zh": "张叔，你太厉害了，连搬家以后的地址都知道。谢谢你！",
+            "text_pinyin": "Zhāng shū, nǐ tài lìhai le, lián bānjiā yǐhòu de dìzhǐ dōu zhīdào. Xièxie nǐ!",
+            "text_en": "Uncle Zhang, you're amazing, you even know the address after it moved. Thank you!",
+            "score": 1.0,
+            "register": "casual",
+            "feedback": "You let him land the plane with dignity intact. He walks away feeling helpful, you walk left. Everyone wins."
+          },
+          {
+            "text_zh": "张叔，你刚才不是说右转吗？怎么变成左转了？",
+            "text_pinyin": "Zhāng shū, nǐ gāngcái bú shì shuō yòu zhuǎn ma? Zěnme biàn chéng zuǒ zhuǎn le?",
+            "text_en": "Uncle Zhang, didn't you just say turn right? How did it become turn left?",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "You're right about the contradiction, but pointing it out corners him. He was trying to help. Now he has to defend the inconsistency."
+          },
+          {
+            "text_zh": "没关系，我自己用地图找吧，不用麻烦你了。",
+            "text_pinyin": "Méi guānxi, wǒ zìjǐ yòng dìtú zhǎo ba, bú yòng máfan nǐ le.",
+            "text_en": "It's fine, I'll find it myself with the map, no need to trouble you.",
+            "score": 0.0,
+            "register": "casual",
+            "feedback": "He just corrected himself to the right answer. Brushing him off now, after he finally got it right, misses the comic landing."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "Giving directions to strangers is a common social reflex in China, especially among older generations. The desire to help often outweighs the accuracy of the information. Admitting 'I don't know' can feel like losing face, so confident wrong answers are surprisingly common. The polite way to navigate this is to let the helper arrive at the right answer on their own terms, preserving their sense of being useful."
+  }
+}

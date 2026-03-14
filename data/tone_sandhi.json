@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "entries": [
+    {"word": "你好", "pinyin_base": "nǐ hǎo", "pinyin_sandhi": "ní hǎo", "rule": "third_tone", "hsk_level": 1, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "你早", "pinyin_base": "nǐ zǎo", "pinyin_sandhi": "ní zǎo", "rule": "third_tone", "hsk_level": 2, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "很好", "pinyin_base": "hěn hǎo", "pinyin_sandhi": "hén hǎo", "rule": "third_tone", "hsk_level": 1, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "可以", "pinyin_base": "kě yǐ", "pinyin_sandhi": "ké yǐ", "rule": "third_tone", "hsk_level": 1, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "哪里", "pinyin_base": "nǎ lǐ", "pinyin_sandhi": "ná lǐ", "rule": "third_tone", "hsk_level": 1, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "水果", "pinyin_base": "shuǐ guǒ", "pinyin_sandhi": "shuí guǒ", "rule": "third_tone", "hsk_level": 2, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "小姐", "pinyin_base": "xiǎo jiě", "pinyin_sandhi": "xiáo jiě", "rule": "third_tone", "hsk_level": 2, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "洗澡", "pinyin_base": "xǐ zǎo", "pinyin_sandhi": "xí zǎo", "rule": "third_tone", "hsk_level": 2, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "打扫", "pinyin_base": "dǎ sǎo", "pinyin_sandhi": "dá sǎo", "rule": "third_tone", "hsk_level": 3, "explanation": "Third tone before third tone becomes second tone"},
+    {"word": "展览", "pinyin_base": "zhǎn lǎn", "pinyin_sandhi": "zhán lǎn", "rule": "third_tone", "hsk_level": 4, "explanation": "Third tone before third tone becomes second tone"},
+
+    {"word": "一个", "pinyin_base": "yī gè", "pinyin_sandhi": "yí gè", "rule": "yi_before_4th", "hsk_level": 1, "explanation": "一 becomes 2nd tone before 4th tone"},
+    {"word": "一次", "pinyin_base": "yī cì", "pinyin_sandhi": "yí cì", "rule": "yi_before_4th", "hsk_level": 1, "explanation": "一 becomes 2nd tone before 4th tone"},
+    {"word": "一半", "pinyin_base": "yī bàn", "pinyin_sandhi": "yí bàn", "rule": "yi_before_4th", "hsk_level": 2, "explanation": "一 becomes 2nd tone before 4th tone"},
+    {"word": "一样", "pinyin_base": "yī yàng", "pinyin_sandhi": "yí yàng", "rule": "yi_before_4th", "hsk_level": 2, "explanation": "一 becomes 2nd tone before 4th tone"},
+    {"word": "一些", "pinyin_base": "yī xiē", "pinyin_sandhi": "yì xiē", "rule": "yi_before_1st", "hsk_level": 1, "explanation": "一 becomes 4th tone before 1st, 2nd, or 3rd tone"},
+    {"word": "一天", "pinyin_base": "yī tiān", "pinyin_sandhi": "yì tiān", "rule": "yi_before_1st", "hsk_level": 1, "explanation": "一 becomes 4th tone before 1st tone"},
+    {"word": "一起", "pinyin_base": "yī qǐ", "pinyin_sandhi": "yì qǐ", "rule": "yi_before_3rd", "hsk_level": 1, "explanation": "一 becomes 4th tone before 3rd tone"},
+    {"word": "一直", "pinyin_base": "yī zhí", "pinyin_sandhi": "yì zhí", "rule": "yi_before_2nd", "hsk_level": 2, "explanation": "一 becomes 4th tone before 2nd tone"},
+    {"word": "一点", "pinyin_base": "yī diǎn", "pinyin_sandhi": "yì diǎn", "rule": "yi_before_3rd", "hsk_level": 1, "explanation": "一 becomes 4th tone before 3rd tone"},
+
+    {"word": "不对", "pinyin_base": "bù duì", "pinyin_sandhi": "bú duì", "rule": "bu_before_4th", "hsk_level": 1, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不是", "pinyin_base": "bù shì", "pinyin_sandhi": "bú shì", "rule": "bu_before_4th", "hsk_level": 1, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不要", "pinyin_base": "bù yào", "pinyin_sandhi": "bú yào", "rule": "bu_before_4th", "hsk_level": 1, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不去", "pinyin_base": "bù qù", "pinyin_sandhi": "bú qù", "rule": "bu_before_4th", "hsk_level": 1, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不会", "pinyin_base": "bù huì", "pinyin_sandhi": "bú huì", "rule": "bu_before_4th", "hsk_level": 1, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不错", "pinyin_base": "bù cuò", "pinyin_sandhi": "bú cuò", "rule": "bu_before_4th", "hsk_level": 2, "explanation": "不 becomes 2nd tone before 4th tone"},
+    {"word": "不过", "pinyin_base": "bù guò", "pinyin_sandhi": "bú guò", "rule": "bu_before_4th", "hsk_level": 3, "explanation": "不 becomes 2nd tone before 4th tone"},
+
+    {"word": "不好", "pinyin_base": "bù hǎo", "pinyin_sandhi": "bù hǎo", "rule": "bu_no_change", "hsk_level": 1, "explanation": "不 stays 4th tone before non-4th tones"},
+    {"word": "不能", "pinyin_base": "bù néng", "pinyin_sandhi": "bù néng", "rule": "bu_no_change", "hsk_level": 1, "explanation": "不 stays 4th tone before 2nd tone"},
+    {"word": "不知道", "pinyin_base": "bù zhī dào", "pinyin_sandhi": "bù zhī dào", "rule": "bu_no_change", "hsk_level": 1, "explanation": "不 stays 4th tone before 1st tone"},
+
+    {"word": "想一想", "pinyin_base": "xiǎng yī xiǎng", "pinyin_sandhi": "xiǎng yi xiǎng", "rule": "yi_neutral", "hsk_level": 2, "explanation": "一 in verb reduplication (V一V) becomes neutral tone"},
+    {"word": "看一看", "pinyin_base": "kàn yī kàn", "pinyin_sandhi": "kàn yi kàn", "rule": "yi_neutral", "hsk_level": 2, "explanation": "一 in verb reduplication (V一V) becomes neutral tone"},
+    {"word": "试一试", "pinyin_base": "shì yī shì", "pinyin_sandhi": "shì yi shì", "rule": "yi_neutral", "hsk_level": 2, "explanation": "一 in verb reduplication (V一V) becomes neutral tone"},
+
+    {"word": "谢谢", "pinyin_base": "xiè xiè", "pinyin_sandhi": "xiè xie", "rule": "reduplication_neutral", "hsk_level": 1, "explanation": "Second syllable in reduplication often becomes neutral tone"},
+    {"word": "妈妈", "pinyin_base": "mā mā", "pinyin_sandhi": "mā ma", "rule": "reduplication_neutral", "hsk_level": 1, "explanation": "Second syllable in kinship reduplication becomes neutral tone"},
+    {"word": "爸爸", "pinyin_base": "bà bà", "pinyin_sandhi": "bà ba", "rule": "reduplication_neutral", "hsk_level": 1, "explanation": "Second syllable in kinship reduplication becomes neutral tone"}
+  ]
+}

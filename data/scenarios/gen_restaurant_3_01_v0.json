@@ -1,0 +1,124 @@
+{
+    "title": "The Bill-Splitting Showdown",
+    "title_zh": "抢着买单",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_restaurant_3_01_v0",
+    "tree": {
+        "setup": "Dinner is ending at a Hunan restaurant. The table is covered in empty plates, crumpled napkins, and the warm aftermath of a good meal. Your Chinese colleague Lao Xu reaches for the bill with the practiced speed of a man who has fought this battle a thousand times. His hand is already on his phone before the waiter has even placed the check down.",
+        "setup_zh": "湘菜馆的晚餐快结束了。桌上满是空盘子、揉成团的纸巾和一顿好饭的温暖余韵。你的中国同事老徐以久经沙场的速度去拿账单。服务员还没把账单放下，他的手已经在手机上了。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天我请客！你是客人，哪有让客人付钱的道理。",
+                "text_pinyin": "jīntiān wǒ qǐngkè! nǐ shì kèrén, nǎ yǒu ràng kèrén fù qián de dàoli.",
+                "text_en": "My treat today! You're the guest, there's no reason to let the guest pay."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Offer to pay or split the bill.",
+                "options": [
+                    {
+                        "text_zh": "不行不行，今天应该我来。你上次已经请过了。",
+                        "text_pinyin": "bù xíng bù xíng, jīntiān yīnggāi wǒ lái. nǐ shàng cì yǐjīng qǐng guo le.",
+                        "text_en": "No way, it should be my turn today. You already treated last time.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Xu blocks your hand from reaching the bill.「上次是上次！今天是今天！」Referencing the last time he paid shows you're keeping track -- this is how the dance works. 应该我来 is 'it should be my turn.'"
+                    },
+                    {
+                        "text_zh": "我们AA吧，这样谁都不用客气。",
+                        "text_pinyin": "wǒmen AA ba, zhèyàng shéi dōu bú yòng kèqi.",
+                        "text_en": "Let's split it, that way nobody needs to be polite.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Xu looks mildly offended.「AA？跟我还AA？」Among close colleagues in China, going Dutch (AA制) can feel cold. The expectation is that people take turns treating. 客气 means 'polite/formal.'"
+                    },
+                    {
+                        "text_zh": "那太不好意思了。下次一定我请。",
+                        "text_pinyin": "nà tài bù hǎoyìsi le. xià cì yídìng wǒ qǐng.",
+                        "text_en": "That's too kind. Next time I'll definitely treat.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Xu beams. This is the ideal response -- gracious acceptance with a firm promise to reciprocate.「好好好！下次你请！」一定 adds emphasis to the promise. The social contract is maintained."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "算了，别跟我争了。对了，你觉得今天的菜怎么样？那个剁椒鱼头够不够辣？",
+                "text_pinyin": "suàn le, bié gēn wǒ zhēng le. duì le, nǐ juéde jīntiān de cài zěnmeyàng? nà ge duòjiāo yútóu gòu bu gòu là?",
+                "text_en": "Forget it, stop arguing with me. By the way, how did you find today's dishes? Was the chopped pepper fish head spicy enough?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Comment on the food.",
+                "options": [
+                    {
+                        "text_zh": "太好吃了！剁椒鱼头够辣，但是不是那种只有辣没有味道的。鱼肉也很嫩。",
+                        "text_pinyin": "tài hǎochī le! duòjiāo yútóu gòu là, dànshì bú shì nà zhǒng zhǐyǒu là méiyǒu wèidao de. yú ròu yě hěn nèn.",
+                        "text_en": "Delicious! The fish head was spicy enough, but not the kind of spicy that has no other flavor. The fish was tender too.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Xu slaps the table.「说得好！这就是好的湘菜——辣得有层次！」嫩 means 'tender.' Distinguishing between mindless spice and layered flavor shows sophisticated taste. 有层次 means 'has layers.'"
+                    },
+                    {
+                        "text_zh": "都很好吃。就是有点太辣了，我明天可能会后悔。",
+                        "text_pinyin": "dōu hěn hǎochī. jiùshì yǒudiǎn tài là le, wǒ míngtiān kěnéng huì hòuhuǐ.",
+                        "text_en": "Everything was delicious. Just a bit too spicy, I might regret it tomorrow.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Lao Xu laughs.「吃湘菜就是这样，今天爽，明天痛！」后悔 is 'regret.' Honest humor about spicy food consequences."
+                    },
+                    {
+                        "text_zh": "我最喜欢那个小炒肉。你们湖南人果然会做辣的菜。",
+                        "text_pinyin": "wǒ zuì xǐhuan nà ge xiǎochǎo ròu. nǐmen húnánrén guǒrán huì zuò là de cài.",
+                        "text_en": "My favorite was the stir-fried pork. You Hunanese people really do know how to make spicy food.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「小炒肉是湘菜的灵魂！」Lao Xu says reverently. 果然 means 'as expected/sure enough.' 小炒肉 is a classic Hunan stir-fry. Complimenting someone's regional cuisine is always a winner."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "下次带你去一家更地道的。那家连菜单都没有，老板看你的样子决定给你做什么。",
+                "text_pinyin": "xià cì dài nǐ qù yì jiā gèng dìdao de. nà jiā lián càidān dōu méiyǒu, lǎobǎn kàn nǐ de yàngzi juédìng gěi nǐ zuò shénme.",
+                "text_en": "Next time I'll take you to an even more authentic one. That place doesn't even have a menu -- the owner looks at you and decides what to cook."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his suggestion.",
+                "options": [
+                    {
+                        "text_zh": "听起来很有意思！但那次一定要我请客。说好了啊。",
+                        "text_pinyin": "tīng qǐlai hěn yǒu yìsi! dàn nà cì yídìng yào wǒ qǐngkè. shuō hǎo le a.",
+                        "text_en": "That sounds really interesting! But that time I'm definitely treating. It's a deal.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Lao Xu narrows his eyes.「好，说好了。但我会点最贵的！」说好了 is 'it's agreed/it's a deal.' Circling back to the payment promise is socially deft -- you haven't forgotten."
+                    },
+                    {
+                        "text_zh": "没有菜单？那怎么知道多少钱？",
+                        "text_pinyin": "méiyǒu càidān? nà zěnme zhīdào duōshao qián?",
+                        "text_en": "No menu? Then how do you know the price?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「吃完了老板说多少就多少。放心，不贵。」Lao Xu waves away your concern. No-menu restaurants operate on trust and regulars get better deals. 说多少就多少 is 'whatever he says, that's it.'"
+                    },
+                    {
+                        "text_zh": "好啊，什么时候去？我周末有空。",
+                        "text_pinyin": "hǎo a, shénme shíhou qù? wǒ zhōumò yǒu kòng.",
+                        "text_en": "Sure, when? I'm free this weekend.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「这周末可能订不到。那家要提前三天预约。」Lao Xu says this as if it's perfectly normal for a menu-less restaurant to require advance booking. 提前三天 is 'three days in advance.'"
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Fighting over the bill (抢着买单, qiǎngzhe mǎidān) is a deeply embedded social ritual in China. The expectation is that one person pays and the other promises to pay next time. Going Dutch (AA制) is more common among younger friends but can feel cold among colleagues. 请客 (qǐngkè) means 'to treat someone.'"
+    }
+}

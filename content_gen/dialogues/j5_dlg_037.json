@@ -1,0 +1,90 @@
+{
+    "title": "The Slow Season",
+    "title_zh": "慢下来的季节",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're visiting your friend Lao Zhang at his pottery studio. He's working on a piece that has taken him three months to finish.",
+        "setup_zh": "你去朋友老张的陶艺工作室拜访他。他正在做一件花了三个月的作品。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "这个杯子我做了三个月。不是因为复杂，是因为每做一步都要等——等泥干、等窑温、等釉色慢慢出来。做陶最重要的不是技术，是耐心。",
+                "text_pinyin": "Zhège bēizi wǒ zuò le sān ge yuè. Bú shì yīnwèi fùzá, shì yīnwèi měi zuò yī bù dōu yào děng — děng ní gān, děng yáo wēn, děng yòu sè mànman chūlái. Zuò táo zuì zhòngyào de bú shì jìshù, shì nàixīn.",
+                "text_en": "This cup took me three months. Not because it's complex, but because every step requires waiting — waiting for the clay to dry, for the kiln temperature, for the glaze color to emerge slowly. The most important thing in pottery isn't technique, it's patience."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to his philosophy of patience.",
+                "options": [
+                    {
+                        "text_zh": "三个月做一个杯子。在现在这个什么都要快的世界里，这本身就是一种态度。你没有催它，而是等它准备好。也许最好的东西都不能被催出来。",
+                        "text_pinyin": "Sān ge yuè zuò yīge bēizi. Zài xiànzài zhège shénme dōu yào kuài de shìjiè lǐ, zhè běnshēn jiù shì yī zhǒng tàidù. Nǐ méiyǒu cuī tā, ér shì děng tā zhǔnbèi hǎo. Yěxǔ zuì hǎo de dōngxi dōu bù néng bèi cuī chūlái.",
+                        "text_en": "Three months for one cup. In a world where everything has to be fast, that's a statement in itself. You didn't rush it, you waited until it was ready. Maybe the best things can't be hurried.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Resonant — connects his craft philosophy to a broader life truth."
+                    },
+                    {
+                        "text_zh": "三个月？你一个月能做几个？",
+                        "text_pinyin": "Sān ge yuè? Nǐ yīge yuè néng zuò jǐ ge?",
+                        "text_en": "Three months? How many can you make in a month?",
+                        "score": 0.0,
+                        "feedback": "Quantifies artistry — applies production metrics to a craft."
+                    },
+                    {
+                        "text_zh": "我觉得用机器做更快，效果也差不多。",
+                        "text_pinyin": "Wǒ juéde yòng jīqì zuò gèng kuài, xiàoguǒ yě chàbuduō.",
+                        "text_en": "I think machine-made ones are faster and look about the same.",
+                        "score": 0.0,
+                        "feedback": "Dismissive — equates handcraft with industrial production."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "不能被催出来……对。每次我想赶的时候，作品就会出问题。泥没干就上釉，釉会裂。火候不够就开窑，颜色不对。陶在教我一件事：有些事就是需要时间，急不来。",
+                "text_pinyin": "Bù néng bèi cuī chūlái…… duì. Měi cì wǒ xiǎng gǎn de shíhou, zuòpǐn jiù huì chū wèntí. Ní méi gān jiù shàng yòu, yòu huì liè. Huǒhòu bú gòu jiù kāi yáo, yánsè bú duì. Táo zài jiāo wǒ yī jiàn shì: yǒuxiē shì jiù shì xūyào shíjiān, jí bù lái.",
+                "text_en": "Can't be hurried... right. Every time I try to rush, the piece goes wrong. Apply glaze before the clay is dry and it cracks. Open the kiln too early and the color is off. Pottery teaches me something: some things simply need time, you can't rush them."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Extend the metaphor to life.",
+                "options": [
+                    {
+                        "text_zh": "人也是一样的。有时候我们对自己太急了——想赶快成功、赶快弄清楚自己要什么。但也许我们也需要「等泥干」的过程。给自己时间，让事情自然地发生。",
+                        "text_pinyin": "Rén yě shì yíyàng de. Yǒu shíhou wǒmen duì zìjǐ tài jí le — xiǎng gǎnkuài chénggōng, gǎnkuài nòng qīngchǔ zìjǐ yào shénme. Dàn yěxǔ wǒmen yě xūyào 'děng ní gān' de guòchéng. Gěi zìjǐ shíjiān, ràng shìqíng zìrán de fāshēng.",
+                        "text_en": "People are the same. We're too impatient with ourselves — wanting to succeed quickly, figure things out fast. But maybe we need the 'waiting for clay to dry' process. Give ourselves time. Let things happen naturally.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Perfect metaphor extension — makes the pottery lesson personal and universal."
+                    },
+                    {
+                        "text_zh": "你有没有想过开陶艺课？很多人会感兴趣的。",
+                        "text_pinyin": "Nǐ yǒu méiyǒu xiǎng guò kāi táoyì kè? Hěn duō rén huì gǎn xìngqù de.",
+                        "text_en": "Have you thought about teaching pottery classes? A lot of people would be interested.",
+                        "score": 0.0,
+                        "feedback": "Entrepreneurial thinking — misses the contemplative moment."
+                    },
+                    {
+                        "text_zh": "道理是这样，但现实中谁有这个时间慢慢等呢？工作压力那么大。",
+                        "text_pinyin": "Dàolǐ shì zhèyàng, dàn xiànshí zhōng shéi yǒu zhège shíjiān mànman děng ne? Gōngzuò yālì nàme dà.",
+                        "text_en": "That makes sense in theory, but who has time to wait slowly in real life? Work pressure is so intense.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Lao Zhang just offered a metaphor for patience in life, and you dismiss it as impractical. That's exactly the mindset the metaphor was trying to soften."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "等泥干的过程……你说得好。来，这个杯子送给你。下次喝茶的时候，记住这三个月——提醒自己不用那么急。",
+                "text_pinyin": "Děng ní gān de guòchéng…… nǐ shuō de hǎo. Lái, zhège bēizi sòng gěi nǐ. Xià cì hē chá de shíhou, jìzhù zhè sān ge yuè — tíxǐng zìjǐ bú yòng nàme jí.",
+                "text_en": "The 'waiting for clay to dry' process... well said. Here, this cup is for you. Next time you drink tea, remember these three months — a reminder not to rush."
+            }
+        ],
+        "cultural_note": "Pottery (陶艺) has experienced a renaissance in Chinese urban culture as young professionals seek hands-on, meditative activities. Traditional Chinese ceramics, from Jingdezhen porcelain to Yixing clay teapots, represent centuries of patient craftsmanship. The concept of「急不来」(can't be rushed) connects to the Daoist principle of「无为」(wúwéi, non-forcing) — allowing things to unfold at their natural pace."
+    }
+}

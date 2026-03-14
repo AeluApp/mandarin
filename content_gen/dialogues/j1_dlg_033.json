@@ -1,0 +1,87 @@
+{
+    "title": "A Warm Bowl of Noodles",
+    "title_zh": "一碗热面条",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.2,
+    "tree": {
+        "setup": "You sit down at a tiny noodle shop on a cold day. The owner comes to take your order.",
+        "setup_zh": "天气很冷，你走进一家很小的面馆坐下。老板来问你要吃什么。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "外面好冷吧？来碗热面？我们有牛肉面和鸡蛋面。",
+                "text_pinyin": "Wàimiàn hǎo lěng ba? Lái wǎn rè miàn? Wǒmen yǒu niúròu miàn hé jīdàn miàn.",
+                "text_en": "It's cold outside, right? How about a hot bowl of noodles? We have beef noodles and egg noodles."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Order your noodles.",
+                "options": [
+                    {
+                        "text_zh": "我要一碗牛肉面，谢谢！",
+                        "text_pinyin": "Wǒ yào yī wǎn niúròu miàn, xièxie!",
+                        "text_en": "I'll have a bowl of beef noodles, thanks!",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Orders from his menu and thanks him -- he noticed you were cold and offered warmth."
+                    },
+                    {
+                        "text_zh": "牛肉面吧。",
+                        "text_pinyin": "Niúròu miàn ba.",
+                        "text_en": "Beef noodles, I guess.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Picks a choice but sounds halfhearted -- he warmly welcomed you in from the cold."
+                    },
+                    {
+                        "text_zh": "哪个好吃？",
+                        "text_pinyin": "Nǎge hǎochī?",
+                        "text_en": "Which one is good?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "He offered two options and you asked which is better -- he owns the shop, both are his. Just pick one."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的！很快。你第一次来我们这里吗？",
+                "text_pinyin": "Hǎo de! Hěn kuài. Nǐ dì yī cì lái wǒmen zhèlǐ ma?",
+                "text_en": "Okay! It'll be quick. Is this your first time here?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell him about your visit.",
+                "options": [
+                    {
+                        "text_zh": "是第一次。朋友说这里的面很好吃。",
+                        "text_pinyin": "Shì dì yī cì. Péngyou shuō zhèlǐ de miàn hěn hǎochī.",
+                        "text_en": "Yes, first time. A friend said the noodles here are really good.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Answers honestly and pays a compliment -- a friend's recommendation will make the owner proud."
+                    },
+                    {
+                        "text_zh": "对，第一次来。",
+                        "text_pinyin": "Duì, dì yī cì lái.",
+                        "text_en": "Yes, first time.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Confirms but doesn't add anything -- he's making friendly conversation and this doesn't give much back."
+                    },
+                    {
+                        "text_zh": "你这个店开了多久了？",
+                        "text_pinyin": "Nǐ zhège diàn kāi le duō jiǔ le?",
+                        "text_en": "How long has your shop been open?",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "He asked if this is your first time and you asked about his business history -- answer his question first."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Tiny noodle shops (面馆) are the soul of Chinese street food culture. Owners often chat with customers like old friends. Coming in from the cold for a bowl of hot noodles is one of life's simple comforts."
+    }
+}

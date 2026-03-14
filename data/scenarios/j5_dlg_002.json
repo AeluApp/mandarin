@@ -1,0 +1,90 @@
+{
+    "title": "A Friend Who Moved Away",
+    "title_zh": "搬走的朋友",
+    "hsk_level": 5,
+    "register": "casual",
+    "scenario_type": "dialogue",
+    "difficulty": 0.5,
+    "tree": {
+        "setup": "You're sitting on a park bench with your friend Mingming. He just found out that his close friend Ahua has moved to another city for work.",
+        "setup_zh": "你和朋友明明坐在公园的长椅上。他刚得知好朋友阿华因为工作搬到了另一个城市。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "阿华上个月搬去深圳了，你知道吗？他走之前也没怎么告别，就发了条朋友圈。",
+                "text_pinyin": "Ā Huá shàng ge yuè bān qù Shēnzhèn le, nǐ zhīdào ma? Tā zǒu zhīqián yě méi zěnme gàobié, jiù fā le tiáo péngyouquān.",
+                "text_en": "Ahua moved to Shenzhen last month, did you know? He didn't really say goodbye before he left, just posted on WeChat Moments."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "React to the news about Ahua leaving.",
+                "options": [
+                    {
+                        "text_zh": "我看到了那条朋友圈，当时还以为他是出差。搬走了啊……好像这几年身边的朋友一个一个都离开了。",
+                        "text_pinyin": "Wǒ kàn dào le nà tiáo péngyouquān, dāngshí hái yǐwéi tā shì chūchāi. Bān zǒu le a…… hǎoxiàng zhè jǐ nián shēnbiān de péngyou yīge yīge dōu líkāi le.",
+                        "text_en": "I saw that post, I thought he was just on a business trip. So he moved... It feels like over the past few years, friends around us have left one by one.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Honest and relatable — acknowledges the gradual loss and connects it to a broader pattern."
+                    },
+                    {
+                        "text_zh": "其实搬去深圳也挺好的，那边机会多，发展快。他肯定会过得不错的。",
+                        "text_pinyin": "Qíshí bān qù Shēnzhèn yě tǐng hǎo de, nàbiān jīhuì duō, fāzhǎn kuài. Tā kěndìng huì guò de búcuò de.",
+                        "text_en": "Actually moving to Shenzhen is pretty good — lots of opportunities, fast development. He'll definitely do well.",
+                        "score": 0.0,
+                        "register": "casual",
+                        "feedback": "Mingming isn't worried about Ahua's career prospects — he's grieving the distance. Jumping to optimism skips the feeling."
+                    },
+                    {
+                        "text_zh": "他工资涨了吗？",
+                        "text_pinyin": "Tā gōngzī zhǎng le ma?",
+                        "text_en": "Did he get a raise?",
+                        "score": 0.0,
+                        "feedback": "Focuses on money instead of the friendship."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "是啊。大学毕业那年我们五个人说好要留在同一个城市，结果现在只剩我们两个了。我不怪他们，每个人都有自己的路要走。只是有时候会突然想起以前一起吃夜宵的日子。",
+                "text_pinyin": "Shì a. Dàxué bìyè nà nián wǒmen wǔ ge rén shuō hǎo yào liú zài tóng yīge chéngshì, jiéguǒ xiànzài zhǐ shèng wǒmen liǎng ge le. Wǒ bú guài tāmen, měi ge rén dōu yǒu zìjǐ de lù yào zǒu. Zhǐ shì yǒu shíhou huì tūrán xiǎng qǐ yǐqián yīqǐ chī yèxiāo de rìzi.",
+                "text_en": "Yeah. The year we graduated, the five of us promised to stay in the same city. Now it's just us two. I don't blame them — everyone has their own path. I just sometimes suddenly remember the days we used to eat late-night snacks together."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Reflect on how friendship changes with distance.",
+                "options": [
+                    {
+                        "text_zh": "距离确实会改变一些东西。联系越来越少，话题也不一样了。但我觉得好的友谊不一定要天天见面，有些朋友就算很久不联系，见面的时候还是跟以前一样。",
+                        "text_pinyin": "Jùlí quèshí huì gǎibiàn yīxiē dōngxi. Liánxì yuè lái yuè shǎo, huàtí yě bù yíyàng le. Dàn wǒ juéde hǎo de yǒuyì bú yídìng yào tiāntiān jiànmiàn, yǒuxiē péngyou jiùsuàn hěn jiǔ bù liánxì, jiànmiàn de shíhou háishì gēn yǐqián yíyàng.",
+                        "text_en": "Distance changes some things — less contact, different topics. But real friendship doesn't require seeing each other daily. Some friends, even after ages apart, still feel the same when you meet.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Balanced and comforting — acknowledges the loss while affirming what endures."
+                    },
+                    {
+                        "text_zh": "你想吃什么？我饿了。",
+                        "text_pinyin": "Nǐ xiǎng chī shénme? Wǒ è le.",
+                        "text_en": "What do you want to eat? I'm hungry.",
+                        "score": 0.0,
+                        "feedback": "Interrupts a heartfelt moment."
+                    },
+                    {
+                        "text_zh": "你可以加他微信群聊啊。",
+                        "text_pinyin": "Nǐ kěyǐ jiā tā Wēixìn qún liáo a.",
+                        "text_en": "You can add him to a WeChat group chat.",
+                        "score": 0.0,
+                        "feedback": "Too shallow — treats deep nostalgia as a tech problem to solve."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "你说得对。也许友谊不是看见面多少次，而是看心里有没有那个位置。走吧，今晚我请你吃夜宵，就当替阿华的那份也吃了。",
+                "text_pinyin": "Nǐ shuō de duì. Yěxǔ yǒuyì bú shì kàn jiànmiàn duōshǎo cì, ér shì kàn xīn lǐ yǒu méiyǒu nàge wèizhì. Zǒu ba, jīn wǎn wǒ qǐng nǐ chī yèxiāo, jiù dāng tì Ā Huá de nà fèn yě chī le.",
+                "text_en": "You're right. Maybe friendship isn't about how often you meet, but whether there's still a place in your heart. Come on, tonight I'll treat you to late-night snacks — consider it eating Ahua's share too."
+            }
+        ],
+        "cultural_note": "In China, the massive internal migration for work opportunities means close friend groups from university often scatter across the country after graduation. WeChat Moments (朋友圈) has become the primary way dispersed friends stay loosely connected, though many people note the difference between scrolling past someone's posts and actually sharing a meal together. Late-night snacks (夜宵) remain a symbol of close friendship in Chinese culture."
+    }
+}

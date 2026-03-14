@@ -1,58 +1,58 @@
 [
   {
     "situation": "Your boss asks how your weekend was",
-    "situation_zh": "\u8001\u677f\u95ee\u4f60\u5468\u672b\u600e\u4e48\u6837",
+    "situation_zh": "老板问你周末怎么样",
     "options": [
       {
-        "text": "\u8fd8\u884c\u5427\uff0c\u6ca1\u5e72\u5565\u3002",
+        "text": "还行吧，没干啥。",
         "register": "casual",
         "score": 0.3,
-        "feedback": "Too casual for a boss \u2014 \u8fd8\u884c is fine among friends."
+        "feedback": "Too casual for a boss \u2014 还行 is fine among friends."
       },
       {
-        "text": "\u8fd8\u4e0d\u9519\uff0c\u8c22\u8c22\u5173\u5fc3\u3002",
+        "text": "还不错，谢谢关心。",
         "register": "neutral",
         "score": 1.0,
         "feedback": "Perfect \u2014 polite but not stiff."
       },
       {
-        "text": "\u631a\u597d\u7684\uff01\u6211\u53bb\u722c\u5c71\u4e86\u3002",
+        "text": "挺好的！我去爬山了。",
         "register": "neutral",
         "score": 0.8,
         "feedback": "Good \u2014 sharing a detail shows engagement."
       },
       {
-        "text": "\u6258\u60a8\u7684\u798f\uff0c\u8fc7\u5f97\u4e0d\u9519\u3002",
+        "text": "托您的福，过得不错。",
         "register": "professional",
         "score": 0.6,
-        "feedback": "A bit formal \u2014 \u6258\u60a8\u7684\u798f is more suited to older generation."
+        "feedback": "A bit formal \u2014 托您的福 is more suited to older generation."
       }
     ]
   },
   {
     "situation": "A friend introduces you to someone new",
-    "situation_zh": "\u670b\u53cb\u7ed9\u4f60\u4ecb\u7ecd\u65b0\u8ba4\u8bc6\u7684\u4eba",
+    "situation_zh": "朋友给你介绍新认识的人",
     "options": [
       {
-        "text": "\u4f60\u597d\u4f60\u597d\uff01",
+        "text": "你好你好！",
         "register": "casual",
         "score": 0.9,
-        "feedback": "Natural \u2014 the doubled \u4f60\u597d is warm and casual."
+        "feedback": "Natural \u2014 the doubled 你好 is warm and casual."
       },
       {
-        "text": "\u60a8\u597d\uff0c\u5f88\u9ad8\u5174\u8ba4\u8bc6\u60a8\u3002",
+        "text": "您好，很高兴认识您。",
         "register": "professional",
         "score": 0.7,
         "feedback": "A bit formal for a friend's friend, but not wrong."
       },
       {
-        "text": "\u55e8\uff01",
+        "text": "嗨！",
         "register": "casual",
         "score": 0.5,
         "feedback": "Very casual \u2014 fine for young people, might seem flippant to others."
       },
       {
-        "text": "\u5e78\u4f1a\u5e78\u4f1a\u3002",
+        "text": "幸会幸会。",
         "register": "professional",
         "score": 0.4,
         "feedback": "Literary/formal \u2014 sounds like a business card exchange."
@@ -61,88 +61,88 @@
   },
   {
     "situation": "You need to decline a dinner invitation from a colleague",
-    "situation_zh": "\u540c\u4e8b\u8bf7\u4f60\u5403\u996d\uff0c\u4f60\u9700\u8981\u62d2\u7edd",
+    "situation_zh": "同事请你吃饭，你需要拒绝",
     "options": [
       {
-        "text": "\u4e0d\u53bb\u4e86\u3002",
+        "text": "不去了。",
         "register": "casual",
         "score": 0.2,
         "feedback": "Too blunt \u2014 even friends would expect a reason."
       },
       {
-        "text": "\u8c22\u8c22\u4f60\uff0c\u4f46\u662f\u4eca\u5929\u6709\u70b9\u4e8b\uff0c\u4e0b\u6b21\u5427\u3002",
+        "text": "谢谢你，但是今天有点事，下次吧。",
         "register": "neutral",
         "score": 1.0,
-        "feedback": "Classic Chinese soft decline \u2014 reason + \u4e0b\u6b21 promise."
+        "feedback": "Classic Chinese soft decline \u2014 reason + 下次 promise."
       },
       {
-        "text": "\u4e0d\u597d\u610f\u601d\uff0c\u6211\u4eca\u5929\u6709\u5b89\u6392\u4e86\uff0c\u6539\u5929\u4e00\u5b9a\u3002",
+        "text": "不好意思，我今天有安排了，改天一定。",
         "register": "neutral",
         "score": 0.9,
-        "feedback": "Excellent \u2014 \u6539\u5929\u4e00\u5b9a adds warmth to the decline."
+        "feedback": "Excellent \u2014 改天一定 adds warmth to the decline."
       },
       {
-        "text": "\u6211\u4e0d\u60f3\u53bb\u3002",
+        "text": "我不想去。",
         "register": "casual",
         "score": 0.1,
-        "feedback": "\u76f4\u63a5 (direct) in a way that damages the relationship."
+        "feedback": "直接 (direct) in a way that damages the relationship."
       }
     ]
   },
   {
     "situation": "Asking a stranger for directions on the street",
-    "situation_zh": "\u5728\u8857\u4e0a\u95ee\u964c\u751f\u4eba\u600e\u4e48\u8d70",
+    "situation_zh": "在街上问陌生人怎么走",
     "options": [
       {
-        "text": "\u5582\uff0cXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "text": "喂，XX路怎么走？",
         "register": "casual",
         "score": 0.2,
-        "feedback": "\u5582 to a stranger is rude. Save it for phone calls."
+        "feedback": "喂 to a stranger is rude. Save it for phone calls."
       },
       {
-        "text": "\u8bf7\u95ee\uff0cXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "text": "请问，XX路怎么走？",
         "register": "neutral",
         "score": 1.0,
-        "feedback": "\u8bf7\u95ee is the magic word for approaching strangers politely."
+        "feedback": "请问 is the magic word for approaching strangers politely."
       },
       {
-        "text": "\u4f60\u597d\uff0c\u9ebb\u70e6\u95ee\u4e00\u4e0b\uff0cXX\u8def\u5728\u54ea\uff1f",
+        "text": "你好，麻烦问一下，XX路在哪？",
         "register": "neutral",
         "score": 0.9,
-        "feedback": "\u9ebb\u70e6 adds extra politeness \u2014 good instinct."
+        "feedback": "麻烦 adds extra politeness \u2014 good instinct."
       },
       {
-        "text": "\u52b3\u9a7e\uff0c\u8bf7\u95eeXX\u8def\u600e\u4e48\u8d70\uff1f",
+        "text": "劳驾，请问XX路怎么走？",
         "register": "professional",
         "score": 0.7,
-        "feedback": "\u52b3\u9a7e is old-fashioned polite \u2014 charming but a bit much for directions."
+        "feedback": "劳驾 is old-fashioned polite \u2014 charming but a bit much for directions."
       }
     ]
   },
   {
     "situation": "Thanking a waiter after a meal",
-    "situation_zh": "\u5403\u5b8c\u996d\u611f\u8c22\u670d\u52a1\u5458",
+    "situation_zh": "吃完饭感谢服务员",
     "options": [
       {
-        "text": "\u8c22\u8c22\uff01",
+        "text": "谢谢！",
         "register": "neutral",
         "score": 0.8,
         "feedback": "Simple and effective. Most common choice."
       },
       {
-        "text": "\u9ebb\u70e6\u4f60\u4e86\uff0c\u8c22\u8c22\u3002",
+        "text": "麻烦你了，谢谢。",
         "register": "neutral",
         "score": 1.0,
-        "feedback": "\u9ebb\u70e6\u4f60\u4e86 acknowledges their effort \u2014 a nice touch."
+        "feedback": "麻烦你了 acknowledges their effort \u2014 a nice touch."
       },
       {
-        "text": "\u8f9b\u82e6\u4e86\u3002",
+        "text": "辛苦了。",
         "register": "neutral",
         "score": 0.6,
-        "feedback": "\u8f9b\u82e6\u4e86 works but is more common from boss to employee."
+        "feedback": "辛苦了 works but is more common from boss to employee."
       },
       {
-        "text": "\u6ca1\u4e8b\u4e86\u3002",
+        "text": "没事了。",
         "register": "casual",
         "score": 0.3,
         "feedback": "This means 'that's all' \u2014 not really a thank you."
@@ -151,31 +151,211 @@
   },
   {
     "situation": "Your teacher asks if you have questions",
-    "situation_zh": "\u8001\u5e08\u95ee\u4f60\u6709\u6ca1\u6709\u95ee\u9898",
+    "situation_zh": "老师问你有没有问题",
     "options": [
       {
-        "text": "\u6ca1\u6709\u3002",
+        "text": "没有。",
         "register": "casual",
         "score": 0.5,
         "feedback": "Technically fine but feels curt to a teacher."
       },
       {
-        "text": "\u6ca1\u6709\uff0c\u8c22\u8c22\u8001\u5e08\u3002",
+        "text": "没有，谢谢老师。",
         "register": "neutral",
         "score": 1.0,
-        "feedback": "Adding \u8c22\u8c22\u8001\u5e08 shows respect \u2014 the standard."
+        "feedback": "Adding 谢谢老师 shows respect \u2014 the standard."
       },
       {
-        "text": "\u6682\u65f6\u6ca1\u6709\uff0c\u8c22\u8c22\u3002",
+        "text": "暂时没有，谢谢。",
         "register": "neutral",
         "score": 0.9,
-        "feedback": "\u6682\u65f6 (for now) leaves the door open \u2014 thoughtful."
+        "feedback": "暂时 (for now) leaves the door open \u2014 thoughtful."
       },
       {
-        "text": "\u8001\u5e08\u8bb2\u5f97\u5f88\u6e05\u695a\uff0c\u8c22\u8c22\u3002",
+        "text": "老师讲得很清楚，谢谢。",
         "register": "professional",
         "score": 0.8,
         "feedback": "Complimenting the teaching is flattering \u2014 sincere or strategic, both work."
+      }
+    ]
+  },
+  {
+    "situation": "秦经理 is briefing your team on a new policy. 老周, who is your colleague, keeps interrupting with enthusiastic but off-topic suggestions. 秦经理 pauses and looks at you. You need to address both of them appropriately.",
+    "situation_zh": "秦经理在跟团队讲新政策，老周不断插嘴提热情但跑题的建议。秦经理停下来看着你，你需要同时面对两个人。",
+    "options": [
+      {
+        "text": "秦经理，我理解这个政策的重点。老周，你的想法不错，我们散会后可以单聊。",
+        "register": "professional",
+        "score": 1.0,
+        "feedback": "Formal acknowledgment up to 秦经理, warm redirect to 老周. You validate both people at their appropriate register without taking sides. This is dual-register mastery."
+      },
+      {
+        "text": "老周，别说了，让秦经理先讲完。",
+        "register": "casual",
+        "score": 0.3,
+        "feedback": "Shutting down a colleague bluntly in front of a manager makes 老周 lose face. Even if 秦经理 agrees with you, she won't respect the method."
+      },
+      {
+        "text": "秦经理，老周说得也有道理，要不我们讨论一下？",
+        "register": "neutral",
+        "score": 0.4,
+        "feedback": "Siding with the interruption against the manager's briefing undermines 秦经理's authority. She paused for a reason \u2014 she wants order restored, not a debate."
+      },
+      {
+        "text": "秦经理您继续，老周的建议我们记下来，回头再讨论。",
+        "register": "professional",
+        "score": 0.9,
+        "feedback": "Very close to perfect. Deferent to 秦经理, diplomatic to 老周. The 记下来 gives 老周 face by treating his input as worth preserving."
+      }
+    ]
+  },
+  {
+    "situation": "You're in a formal planning meeting. 罗老师, invited as an outside consultant, stands up dramatically and declares \u201c如果这个项目失败，那就是文化的终结！\u201d (If this project fails, it's the end of culture!) The client across the table looks confused.",
+    "situation_zh": "正式策划会上，作为外部顾问的罗老师站起来夸张地宣布\u201c如果这个项目失败，那就是文化的终结！\u201d对面的客户一脸困惑。",
+    "options": [
+      {
+        "text": "罗老师说得对，这个项目确实很重要。我们来看一下具体方案吧。",
+        "register": "professional",
+        "score": 1.0,
+        "feedback": "Validates 罗老师 with a scaled-down restatement (重要, not 终结), then pivots to substance. The client sees you as the reasonable one without anyone losing face. Perfect bridge between theatrical and professional registers."
+      },
+      {
+        "text": "罗老师，您太夸张了，没那么严重。",
+        "register": "casual",
+        "score": 0.2,
+        "feedback": "Calling a consultant exaggerated in front of a client is a double disaster: 罗老师 loses face AND the client questions why you invited him."
+      },
+      {
+        "text": "对对对，文化的终结！我们必须成功！",
+        "register": "casual",
+        "score": 0.3,
+        "feedback": "Matching his theatricality in a formal meeting makes you both look unserious. The client came for a plan, not a performance."
+      },
+      {
+        "text": "罗老师对这个领域非常有热情。我来补充一下具体数据。",
+        "register": "professional",
+        "score": 0.8,
+        "feedback": "Reframing drama as 热情 is elegant. Slightly risks sounding like you're managing 罗老师, which the client might notice."
+      }
+    ]
+  },
+  {
+    "situation": "You're at a neighborhood gathering. 方阿姨 makes a pointed comment about your landlord being cheap. A stranger next to you, who turns out to be the landlord's cousin, stiffens. You need to smooth this over.",
+    "situation_zh": "小区聚会上，方阿姨尖锐地说你房东小气。旁边的陌生人是房东的表亲，脸色变了。你需要化解。",
+    "options": [
+      {
+        "text": "哈哈，方阿姨开玩笑的。您好，我是楼上的住户，请多关照。",
+        "register": "neutral",
+        "score": 1.0,
+        "feedback": "Reframe 方阿姨's sharpness as humor (she won't mind), then pivot to a polite self-introduction to the stranger. Register shifts cleanly: casual with 方阿姨, formal-polite with the stranger. Damage controlled."
+      },
+      {
+        "text": "方阿姨，不要这样说人家。",
+        "register": "neutral",
+        "score": 0.4,
+        "feedback": "Correcting 方阿姨 publicly is brave but futile. She'll say something sharper. And the stranger still feels awkward."
+      },
+      {
+        "text": "嗯……其实房东人挺好的。",
+        "register": "casual",
+        "score": 0.6,
+        "feedback": "Mild contradiction of 方阿姨 that defends the landlord. Decent instinct, but you haven't addressed the stranger or managed the social tension."
+      },
+      {
+        "text": "方阿姨就是心直口快，别介意。对了，您是第一次来参加吧？",
+        "register": "neutral",
+        "score": 0.9,
+        "feedback": "心直口快 (speaks frankly) reframes sharpness as personality trait. Redirecting attention to the stranger with a new topic is smooth. Very natural recovery."
+      }
+    ]
+  },
+  {
+    "situation": "You're on a video call with an important client. 老白, who wandered into the meeting room, casually says to the client \u201c哥们儿，你那边天气怎么样？\u201d (Buddy, how's the weather over there?) The client is a senior executive.",
+    "situation_zh": "你在和重要客户视频通话，老白晃进会议室，随口跟客户说\u201c哥们儿，你那边天气怎么样？\u201d客户是高层管理人员。",
+    "options": [
+      {
+        "text": "不好意思，这是我们的老白，人特别热情。王总，我们继续讨论刚才的方案。",
+        "register": "professional",
+        "score": 1.0,
+        "feedback": "Quick, warm framing of 老白 (热情 repackages 随意), formal pivot back to the client with title. You've covered the register gap without embarrassing 老白 or losing the client's confidence."
+      },
+      {
+        "text": "老白！出去！这是正式会议！",
+        "register": "casual",
+        "score": 0.1,
+        "feedback": "Scolding a colleague on camera in front of a client is worse than the original problem. Now the client sees internal chaos."
+      },
+      {
+        "text": "哈哈，我们公司氛围比较轻松。王总，请继续。",
+        "register": "neutral",
+        "score": 0.8,
+        "feedback": "Reframing as company culture (轻松) is clever. Slightly risky if the client values formality, but recovers the moment well."
+      },
+      {
+        "text": "王总，抱歉打扰了。老白不是项目组的。",
+        "register": "professional",
+        "score": 0.5,
+        "feedback": "Distancing from 老白 (不是项目组的) protects professionalism but throws him under the bus. 老白 is still in the room hearing this."
+      }
+    ]
+  },
+  {
+    "situation": "At a formal company dinner, the VP asks 小梅 for her opinion on the new marketing strategy. She says \u201c还行。\u201d (It's okay.) Silence follows. The VP looks expectant. You need to bridge the gap.",
+    "situation_zh": "公司正式晚宴上，副总问小梅对新营销策略的看法，她说\u201c还行。\u201d全场沉默，副总还在等下文。你需要打圆场。",
+    "options": [
+      {
+        "text": "小梅一直对细节要求很高，她说还行，说明基本方向是对的。不过小梅，你觉得哪个部分最有潜力？",
+        "register": "professional",
+        "score": 1.0,
+        "feedback": "Masterful bridge. You reframe 还行 as high-standards praise (face for 小梅 AND the strategy), then toss back a concrete question she can answer with facts, not opinions. Register is formal to the room, warm to 小梅."
+      },
+      {
+        "text": "小梅就是这样，话不多。副总，要不我来说说我的看法？",
+        "register": "neutral",
+        "score": 0.5,
+        "feedback": "Labeling 小梅's communication style in public is awkward. Volunteering your own opinion is helpful but doesn't solve the VP's question about HER view."
+      },
+      {
+        "text": "小梅，你能说具体一点吗？",
+        "register": "neutral",
+        "score": 0.3,
+        "feedback": "Putting 小梅 on the spot in front of a VP is the opposite of bridging. She gave you 还行 \u2014 she's not going to give you a TED talk under pressure."
+      },
+      {
+        "text": "小梅的意思是整体不错。我们团队都觉得第三部分的方案特别有亮点。",
+        "register": "professional",
+        "score": 0.8,
+        "feedback": "Good save \u2014 you translate her minimalism and add substance. Slightly presumes to speak for 小梅, which she might not appreciate later."
+      }
+    ]
+  },
+  {
+    "situation": "A group chat with your team. 秦经理 just posted a formal announcement about schedule changes. 老周 responds with a string of thumbs-up emojis and \u201c收到收到！！！\u201d 小梅 responds with \u201c嗯。\u201d You need to respond in a way that works for everyone reading.",
+    "situation_zh": "团队群聊里，秦经理刚发了一条关于调整日程的正式通知。老周回了一堆大拇指和\u201c收到收到！！！\u201d小梅回了\u201c嗯。\u201d你需要发一条大家看了都合适的消息。",
+    "options": [
+      {
+        "text": "收到，谢谢秦经理通知。有变动我提前调整。",
+        "register": "professional",
+        "score": 1.0,
+        "feedback": "收到 confirms receipt (matches the group norm), 谢谢秦经理 gives face to the manager, and the last sentence shows you'll act on it. Lands perfectly between 老周's enthusiasm and 小梅's minimalism. This is the register sweet spot for mixed-audience group chats."
+      },
+      {
+        "text": "收到！！！👍👍👍",
+        "register": "casual",
+        "score": 0.4,
+        "feedback": "Matching 老周's energy is fun but in a chat where 秦经理 just posted something formal, it reads as not taking the announcement seriously."
+      },
+      {
+        "text": "嗯。",
+        "register": "casual",
+        "score": 0.3,
+        "feedback": "小梅 can get away with 嗯 because that's her known style. You doing it looks disengaged. In group chats with management, bare minimum acknowledgment reads as reluctance."
+      },
+      {
+        "text": "秦经理，请问新时间是从下周一开始执行吗？",
+        "register": "professional",
+        "score": 0.7,
+        "feedback": "Asking a relevant question shows engagement and is appropriately formal. Good, but if the answer was already in the announcement, you'll look like you didn't read it carefully."
       }
     ]
   }

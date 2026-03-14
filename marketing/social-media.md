@@ -133,7 +133,7 @@ The hardest part of building a language learning app isn't the code.
 
 It's the content. Every word needs: pinyin, translation, HSK level, context notes, usage examples, common collocations, register information.
 
-299 items done. Thousands to go.
+10,000+ items done. HSK 1-9 complete.
 
 **18.**
 Zero AI tokens used at runtime in my Chinese learning app.
@@ -439,7 +439,7 @@ The product lesson: measure the outcome your users actually want, not the proxy 
 Building a SaaS product as a solo developer:
 
 Infrastructure cost: $50-100/month (hosting, domain, email)
-Revenue from 200 users at $12/month: $2,400
+Revenue from 200 users at $14.99/month: $2,998
 Profit margin: 96%
 
 The economics of solo developer SaaS are almost unreasonably good — if you can get to 200 paying users.

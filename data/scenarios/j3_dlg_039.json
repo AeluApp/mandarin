@@ -1,0 +1,87 @@
+{
+    "title": "Catching Fireflies",
+    "title_zh": "看萤火虫",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "On a warm summer evening, you and your neighbor Xiao Yu discover fireflies in the community garden.",
+        "setup_zh": "温暖的夏天晚上，你和邻居小雨在小区花园里发现了萤火虫。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "快看！那边有萤火虫！好久没看到了，城市里越来越少了。",
+                "text_pinyin": "Kuài kàn! Nàbiān yǒu yínghuǒchóng! Hǎojiǔ méi kàndào le, chéngshì lǐ yuè lái yuè shǎo le.",
+                "text_en": "Quick, look! Fireflies over there! It's been so long — you see fewer and fewer in the city."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to seeing the fireflies.",
+                "options": [
+                    {
+                        "text_zh": "真的！好漂亮，像会飞的小星星。我小时候在乡下见过很多。",
+                        "text_pinyin": "Zhēn de! Hǎo piàoliang, xiàng huì fēi de xiǎo xīngxing. Wǒ xiǎo shíhou zài xiāngxià jiàn guò hěn duō.",
+                        "text_en": "Really! So pretty, like little flying stars. I saw tons in the countryside as a kid.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "And nostalgic — connects the moment to childhood memories."
+                    },
+                    {
+                        "text_zh": "嗯，看到了。",
+                        "text_pinyin": "En, kàndào le.",
+                        "text_en": "Yeah, I see them.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Flat response to a magical moment."
+                    },
+                    {
+                        "text_zh": "别碰，萤火虫可能有毒。",
+                        "text_pinyin": "Bié pèng, yínghuǒchóng kěnéng yǒu dú.",
+                        "text_en": "Don't touch them, fireflies might be poisonous.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Kills the wonder."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "会飞的小星星，说得真好！我们小声一点，别吓到它们。坐在这里看一会儿吧？",
+                "text_pinyin": "Huì fēi de xiǎo xīngxing, shuō de zhēn hǎo! Wǒmen xiǎo shēng yīdiǎn, bié xià dào tāmen. Zuò zài zhèlǐ kàn yīhuìr ba?",
+                "text_en": "Tiny flying stars — what a lovely way to put it! Let's be quiet so we don't scare them. Sit here and watch for a while?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to the quiet watching.",
+                "options": [
+                    {
+                        "text_zh": "好，就在这里安静地坐一会儿。这种时刻不需要说话，看着就够了。",
+                        "text_pinyin": "Hǎo, jiù zài zhèlǐ ānjìng de zuò yīhuìr. Zhè zhǒng shíkè bù xūyào shuōhuà, kàn zhe jiù gòu le.",
+                        "text_en": "Yes, let's just sit here quietly. Moments like these don't need words — just watching is enough.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Understands the value of shared silence in a beautiful moment."
+                    },
+                    {
+                        "text_zh": "好。",
+                        "text_pinyin": "Hǎo.",
+                        "text_en": "Okay.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief but appropriate."
+                    },
+                    {
+                        "text_zh": "我们拍个照片吧！",
+                        "text_pinyin": "Wǒmen pāi ge zhàopiàn ba!",
+                        "text_en": "Let's take a photo!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Natural reaction but disrupts the quiet moment."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Fireflies (萤火虫) are a powerful symbol of summer nostalgia in East Asian culture. Their decline in cities is often seen as a metaphor for lost innocence and nature. Sharing a quiet moment watching them reflects the Chinese aesthetic of 「静美」 — beauty in stillness."
+    },
+    "hsk_level": 3
+}

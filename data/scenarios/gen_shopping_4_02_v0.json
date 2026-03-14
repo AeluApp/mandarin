@@ -1,0 +1,160 @@
+{
+    "title": "The Size Sommelier",
+    "title_zh": "尺码品鉴师",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_shopping_4_02_v0",
+    "tree": {
+        "setup": "A clothing store in a shopping mall, racks of jackets and shirts organized by color like a paint gradient. The shop assistant, Xiao Peng, has developed the ability to guess a customer's size from across the room — a talent he compares to a wine sommelier's ability to identify a vintage by scent. He approaches with a measuring tape draped over his shoulder like a stethoscope.",
+        "setup_zh": "商场里的服装店，衣架上的夹克和衬衫按颜色排列，像渐变色卡。店员小彭练出了隔着房间猜客人尺码的能力——他把这比作侍酒师凭气味鉴别年份的本事。他走过来，卷尺搭在肩上，像听诊器一样。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "帅哥，看看衣服？你穿L号的对不对？",
+                "text_pinyin": "shuàigē, kànkan yīfu? nǐ chuān L hào de duì bú duì?",
+                "text_en": "Hey handsome, looking at clothes? You wear a large, right?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond about your size.",
+                "options": [
+                    {
+                        "text_zh": "你怎么知道！确实是L号。我想找一件休闲的外套。",
+                        "text_pinyin": "nǐ zěnme zhīdào! quèshí shì L hào. wǒ xiǎng zhǎo yí jiàn xiūxián de wàitào.",
+                        "text_en": "How'd you know! It is a large. I'm looking for a casual jacket.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Confirming his talent fuels his enthusiasm. Xiao Peng is already pulling three options from the rack."
+                    },
+                    {
+                        "text_zh": "我不确定。我试试L号吧。",
+                        "text_pinyin": "wǒ bú quèdìng. wǒ shìshi L hào ba.",
+                        "text_en": "I'm not sure. I'll try a large.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll bring both L and M to be safe. A sommelier always offers options."
+                    },
+                    {
+                        "text_zh": "我只是看看。",
+                        "text_pinyin": "wǒ zhǐshì kànkan.",
+                        "text_en": "Just looking.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The phrase that haunts every shop assistant. Xiao Peng nods and retreats to a respectful distance."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "休闲外套我推荐这三件。这件深蓝色的很百搭，这件灰色的比较正式一点。你先试试？",
+                "text_pinyin": "xiūxián wàitào wǒ tuījiàn zhè sān jiàn. zhè jiàn shēn lánsè de hěn bǎidā, zhè jiàn huīsè de bǐjiào zhèngshì yìdiǎn. nǐ xiān shìshi?",
+                "text_en": "For casual jackets I recommend these three. This navy one goes with everything, this gray one is a bit more formal. Want to try them on?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose which to try on.",
+                "options": [
+                    {
+                        "text_zh": "深蓝色的看起来不错，我先试这件。试衣间在哪里？",
+                        "text_pinyin": "shēn lánsè de kàn qǐlái búcuò, wǒ xiān shì zhè jiàn. shì yī jiān zài nǎlǐ?",
+                        "text_en": "The navy looks good — I'll try that first. Where's the fitting room?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Decisive choice plus asking for the fitting room. Xiao Peng escorts you like a sommelier leading you to the tasting room."
+                    },
+                    {
+                        "text_zh": "都试试吧。",
+                        "text_pinyin": "dōu shìshi ba.",
+                        "text_en": "I'll try them all.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He gathers all three and leads you to the fitting room with visible satisfaction."
+                    },
+                    {
+                        "text_zh": "这个颜色我不太喜欢。有没有黑色的？",
+                        "text_pinyin": "zhège yánsè wǒ bú tài xǐhuān. yǒu méiyǒu hēisè de?",
+                        "text_en": "I don't really like these colors. Do you have black?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Peng pivots without missing a beat. He was testing you with the first three — the black one was his real recommendation."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "怎么样？合适吗？肩膀那里刚好，袖子长度也不错。",
+                "text_pinyin": "zěnmeyàng? héshì ma? jiānbǎng nàlǐ gānghǎo, xiùzi chángdù yě búcuò.",
+                "text_en": "How is it? Does it fit? The shoulders are just right, and the sleeve length looks good."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Give feedback on the fit.",
+                "options": [
+                    {
+                        "text_zh": "肩膀合适，但是腰那里有点紧。有没有稍微宽松一点的？",
+                        "text_pinyin": "jiānbǎng héshì, dànshì yāo nàlǐ yǒudiǎn jǐn. yǒu méiyǒu shāowēi kuānsōng yìdiǎn de?",
+                        "text_en": "Shoulders fit, but it's a bit tight around the waist. Anything slightly looser?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Specific body-part feedback — Xiao Peng's diagnostic skills activate. He reaches for a different cut in the same color."
+                    },
+                    {
+                        "text_zh": "还行，就是有点紧。",
+                        "text_pinyin": "hái xíng, jiùshì yǒudiǎn jǐn.",
+                        "text_en": "It's OK, just a bit tight.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He'll suggest the next size up or a different style."
+                    },
+                    {
+                        "text_zh": "不太合适。",
+                        "text_pinyin": "bú tài héshì.",
+                        "text_en": "Doesn't really fit.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Peng's professional pride takes a micro-hit, but he has backup options ready."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "这件试试，同样的颜色，版型稍微宽松。打八折的话三百二十块。",
+                "text_pinyin": "zhè jiàn shìshi, tóngyàng de yánsè, bǎnxíng shāowēi kuānsōng. dǎ bā zhé de huà sānbǎi èrshí kuài.",
+                "text_en": "Try this one — same color, slightly looser cut. With the 20% off discount it's 320 yuan."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Try it and decide.",
+                "options": [
+                    {
+                        "text_zh": "这件好多了！很舒服。三百二十可以接受。我买了。",
+                        "text_pinyin": "zhè jiàn hǎo duō le! hěn shūfu. sānbǎi èrshí kěyǐ jiēshòu. wǒ mǎi le.",
+                        "text_en": "This one's much better! Very comfortable. 320 is fine. I'll take it.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "The sommelier has matched the perfect vintage. Xiao Peng folds the jacket with the reverence of someone wrapping a gift."
+                    },
+                    {
+                        "text_zh": "我再想想。",
+                        "text_pinyin": "wǒ zài xiǎngxiǎng.",
+                        "text_en": "Let me think about it.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He nods. He'll be here when you decide — the jacket will be on hold."
+                    },
+                    {
+                        "text_zh": "能不能再便宜一点？",
+                        "text_pinyin": "néng bu néng zài piányi yìdiǎn?",
+                        "text_en": "Can you go lower?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "In a mall store, prices are usually fixed. Xiao Peng explains that 八折 is already the best he can do."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese clothing sizes often use S/M/L/XL but can run smaller than Western sizes. 打折 (dǎzhé) means discount — 打八折 (dǎ bā zhé) is 80% of original price (i.e., 20% off). Mall stores have fixed prices; bargaining is for markets."
+    }
+}

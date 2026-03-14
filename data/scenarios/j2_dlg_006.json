@@ -1,0 +1,83 @@
+{
+  "title": "The Hospital Waiting Room",
+  "title_zh": "医院的候诊室",
+  "hsk_level": 2,
+  "register": "casual",
+  "scenario_type": "dialogue",
+  "difficulty": 0.3,
+  "tree": {
+    "setup": "You're at a small clinic with a minor cold. An elderly man next to you starts chatting.",
+    "setup_zh": "你因为小感冒去了一家小诊所。旁边的一位老人开始跟你聊天。",
+    "turns": [
+      {
+        "speaker": "npc",
+        "text_zh": "你也感冒了吗？最近很多人都生病了。",
+        "text_pinyin": "Nǐ yě gǎnmào le ma? Zuìjìn hěn duō rén dōu shēngbìng le.",
+        "text_en": "You caught a cold too? A lot of people have been getting sick lately."
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Tell him about how you feel.",
+        "options": [
+          {
+            "text_zh": "是啊，有点咳嗽。不太严重，但是想让医生看看。",
+            "text_pinyin": "Shì a, yǒudiǎn késou. Bú tài yánzhòng, dànshì xiǎng ràng yīshēng kànkan.",
+            "text_en": "Yes, a bit of a cough. Not too serious, but I want the doctor to check.",
+            "score": 1.0,
+            "feedback": "Calm and reasonable — not overdramatic.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不喜欢医院。",
+            "text_pinyin": "Wǒ bù xǐhuan yīyuàn.",
+            "text_en": "I don't like hospitals.",
+            "score": 0.0,
+            "feedback": "He asked about your symptoms."
+          },
+          {
+            "text_zh": "你的衣服很好看。",
+            "text_pinyin": "Nǐ de yīfu hěn hǎokàn.",
+            "text_en": "Your clothes look nice.",
+            "score": 0.0,
+            "feedback": "A strange thing to say in a clinic waiting room."
+          }
+        ]
+      },
+      {
+        "speaker": "npc",
+        "text_zh": "多喝热水，好好休息，很快就会好的。你一个人来的？",
+        "text_pinyin": "Duō hē rè shuǐ, hǎohāo xiūxi, hěn kuài jiù huì hǎo de. Nǐ yī ge rén lái de?",
+        "text_en": "Drink more hot water, rest well, and you'll recover soon. Did you come alone?"
+      },
+      {
+        "speaker": "player",
+        "prompt_en": "Answer his question.",
+        "options": [
+          {
+            "text_zh": "是一个人来的。谢谢您的关心，我会多喝水的。",
+            "text_pinyin": "Shì yī ge rén lái de. Xièxie nín de guānxīn, wǒ huì duō hē shuǐ de.",
+            "text_en": "Yes, I came alone. Thank you for your concern — I'll drink more water.",
+            "score": 1.0,
+            "feedback": "Grateful and polite — accepts his care gracefully.",
+            "register": "casual"
+          },
+          {
+            "text_zh": "我不想喝水。",
+            "text_pinyin": "Wǒ bù xiǎng hē shuǐ.",
+            "text_en": "I don't want to drink water.",
+            "score": 0.0,
+            "feedback": "Dismisses his sincere advice."
+          },
+          {
+            "text_zh": "这个诊所很小。",
+            "text_pinyin": "Zhège zhěnsuǒ hěn xiǎo.",
+            "text_en": "This clinic is very small.",
+            "score": 0.0,
+            "feedback": "He asked if you came alone."
+          }
+        ]
+      }
+    ],
+    "cultural_note": "「多喝热水」(drink more hot water) is the quintessential Chinese health advice, given for nearly every ailment. It reflects a deeply caring culture where strangers offer unsolicited but well-meaning health tips. Accepting the advice graciously is the polite response."
+  }
+}

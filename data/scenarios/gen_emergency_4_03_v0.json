@@ -1,0 +1,160 @@
+{
+    "title": "The Roadside Mechanic Philosopher",
+    "title_zh": "路边修车哲学家",
+    "hsk_level": 4,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_4_03_v0",
+    "tree": {
+        "setup": "A two-lane highway outside the city, afternoon heat shimmering off the asphalt. Your rental car has decided to stop working in a location that is, at best, scenic — rice paddies on both sides, a single tree providing shade, and no other cars in sight. You call roadside assistance and reach Master Deng, a mechanic who believes cars have personalities and that most breakdowns are the car's way of telling you to slow down.",
+        "setup_zh": "城外的双车道公路，午后的热气从柏油路面上升腾。你租的车决定在一个最多只能说是风景优美的地方抛锚——两边都是稻田，只有一棵树提供阴凉，前后看不到别的车。你打电话给道路救援，接通了邓师傅——一位认为汽车有性格的修车师傅，觉得大多数故障都是车在告诉你慢下来。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "道路救援，你好。车出什么问题了？",
+                "text_pinyin": "dàolù jiùyuán, nǐ hǎo. chē chū shénme wèntí le?",
+                "text_en": "Roadside assistance, hello. What's wrong with the car?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe the car problem.",
+                "options": [
+                    {
+                        "text_zh": "你好，我的车突然打不着火了。仪表盘上有一个红灯亮着，我不知道是什么意思。",
+                        "text_pinyin": "nǐ hǎo, wǒ de chē tūrán dǎ bù zháo huǒ le. yíbiǎopán shàng yǒu yí gè hóng dēng liàng zhe, wǒ bù zhīdào shì shénme yìsi.",
+                        "text_en": "Hello, my car suddenly won't start. There's a red light on the dashboard — I don't know what it means.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Symptom plus detail — Master Deng is already forming a diagnosis.「红灯的话……可能是电瓶的问题，」he murmurs."
+                    },
+                    {
+                        "text_zh": "车坏了，走不了了。",
+                        "text_pinyin": "chē huài le, zǒu bù liǎo le.",
+                        "text_en": "The car broke down — can't move.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Clear enough to dispatch help. He'll diagnose the rest when he arrives."
+                    },
+                    {
+                        "text_zh": "车不动了！",
+                        "text_pinyin": "chē bú dòng le!",
+                        "text_en": "The car won't move!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Master Deng pauses.「不动」covers a wide range of possibilities. He'll need more to go on."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "红灯啊，那可能是电瓶没电了。你现在在哪里？能不能告诉我附近有什么标志？",
+                "text_pinyin": "hóng dēng a, nà kěnéng shì diànpíng méi diàn le. nǐ xiànzài zài nǎlǐ? néng bu néng gàosu wǒ fùjìn yǒu shénme biāozhì?",
+                "text_en": "Red light — might be a dead battery. Where are you? Can you tell me any nearby landmarks?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Describe your location.",
+                "options": [
+                    {
+                        "text_zh": "我在去西湖的路上，经过了一个加油站大概五公里以后。两边都是稻田，路边有一棵大树。",
+                        "text_pinyin": "wǒ zài qù Xī Hú de lù shàng, jīngguò le yí gè jiāyóu zhàn dàgài wǔ gōnglǐ yǐhòu. liǎng biān dōu shì dàotián, lù biān yǒu yì kē dà shù.",
+                        "text_en": "I'm on the road to West Lake, about 5 km past a gas station. Rice paddies on both sides, a big tree by the road.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Distance from a known landmark plus visual details — Master Deng knows exactly which tree you mean."
+                    },
+                    {
+                        "text_zh": "在去西湖的路上。周围什么都没有。",
+                        "text_pinyin": "zài qù Xī Hú de lù shàng. zhōuwéi shénme dōu méiyǒu.",
+                        "text_en": "On the road to West Lake. Nothing around.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "General direction helps. He'll ask more questions to narrow it down."
+                    },
+                    {
+                        "text_zh": "我不知道这是哪里。到处都是田。",
+                        "text_pinyin": "wǒ bù zhīdào zhè shì nǎlǐ. dàochù dōu shì tián.",
+                        "text_en": "I don't know where this is. There are fields everywhere.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "The universal description of Chinese countryside. Master Deng sighs — he's used to playing navigator."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我知道那个地方。大概四十分钟能到。你先别着急，车停在路边没关系。打开双闪灯。",
+                "text_pinyin": "wǒ zhīdào nàge dìfāng. dàgài sìshí fēnzhōng néng dào. nǐ xiān bié zháojí, chē tíng zài lù biān méi guānxi. dǎkāi shuāng shǎn dēng.",
+                "text_en": "I know that spot. About 40 minutes to get there. Don't worry — it's fine parked on the roadside. Turn on your hazard lights."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and ask about costs.",
+                "options": [
+                    {
+                        "text_zh": "好的，双闪灯已经开了。请问救援大概要多少钱？",
+                        "text_pinyin": "hǎo de, shuāng shǎn dēng yǐjīng kāi le. qǐngwèn jiùyuán dàgài yào duōshǎo qián?",
+                        "text_en": "OK, hazard lights are on. How much does the rescue cost?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Asking about cost upfront shows awareness. Master Deng gives a fair estimate — he charges by distance, not by desperation."
+                    },
+                    {
+                        "text_zh": "好的，我等你。",
+                        "text_pinyin": "hǎo de, wǒ děng nǐ.",
+                        "text_en": "OK, I'll wait for you.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Patient. He'll be there. The rice paddies are decent company in the meantime."
+                    },
+                    {
+                        "text_zh": "四十分钟？不能更快吗？",
+                        "text_pinyin": "sìshí fēnzhōng? bù néng gèng kuài ma?",
+                        "text_en": "Forty minutes? Can't you be faster?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Master Deng chuckles.「你的车让你慢下来，你也让我慢下来。」Your car told you to slow down; now you're telling him to speed up."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "如果是换电瓶的话，大概三百块，包括新电瓶。拖车的话贵一点。我先看看情况再说。",
+                "text_pinyin": "rúguǒ shì huàn diànpíng de huà, dàgài sānbǎi kuài, bāokuò xīn diànpíng. tuō chē de huà guì yìdiǎn. wǒ xiān kànkan qíngkuàng zài shuō.",
+                "text_en": "If it's a battery replacement, about 300 yuan including the new battery. Towing is more. Let me see the situation first."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Thank him and confirm you'll wait.",
+                "options": [
+                    {
+                        "text_zh": "好的，谢谢邓师傅。我在树下面等你。开车注意安全。",
+                        "text_pinyin": "hǎo de, xièxie Dèng shīfu. wǒ zài shù xiàmian děng nǐ. kāi chē zhùyì ānquán.",
+                        "text_en": "OK, thanks Master Deng. I'll wait under the tree. Drive safe.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Telling the rescuer to drive safe — that kind of consideration is what makes Master Deng arrive in thirty-five minutes instead of forty."
+                    },
+                    {
+                        "text_zh": "好的，谢谢！",
+                        "text_pinyin": "hǎo de, xièxie!",
+                        "text_en": "OK, thanks!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "He hangs up. You and the tree begin your forty-minute companionship."
+                    },
+                    {
+                        "text_zh": "快点来。",
+                        "text_pinyin": "kuài diǎn lái.",
+                        "text_en": "Come quickly.",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Master Deng is already driving. The car chose a beautiful spot to break down, at least."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Chinese roadside mechanics (修车师傅) are remarkably skilled and often respond quickly even in rural areas. 双闪灯 (shuāng shǎn dēng, hazard lights) is essential on Chinese roads. Many rental cars include basic roadside assistance (道路救援, dàolù jiùyuán)."
+    }
+}

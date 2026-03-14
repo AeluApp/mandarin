@@ -1,0 +1,160 @@
+{
+    "title": "The Calm Voice on the Line",
+    "title_zh": "电话那头的平静声音",
+    "hsk_level": 4,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "id": "gen_emergency_4_00_v0",
+    "tree": {
+        "setup": "Evening on a quiet residential street. A neighbor's kitchen is filling with smoke — not a fire exactly, more of a very ambitious cooking experiment gone wrong. Old Mr. Zheng from next door is standing outside coughing and looking bewildered, holding a spatula like a flag of surrender. You need to call for help.",
+        "setup_zh": "安静的住宅街道上的傍晚。邻居的厨房里烟雾弥漫——不完全算火灾，更像是一次过于有野心的烹饪实验失败了。隔壁的郑大爷站在外面咳嗽，一脸茫然，举着一把锅铲像举着投降的白旗。你需要打电话求助。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "119，消防。请问什么情况？",
+                "text_pinyin": "yāo yāo jiǔ, xiāofáng. qǐngwèn shénme qíngkuàng?",
+                "text_en": "119, fire department. What's the situation?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Explain the emergency.",
+                "options": [
+                    {
+                        "text_zh": "你好，我邻居家厨房着火了，有很多烟。他已经出来了，人没事，但是烟越来越大。",
+                        "text_pinyin": "nǐ hǎo, wǒ línjū jiā chúfáng zháo huǒ le, yǒu hěn duō yān. tā yǐjīng chūlái le, rén méi shì, dànshì yān yuè lái yuè dà.",
+                        "text_en": "Hello, my neighbor's kitchen caught fire — there's a lot of smoke. He's already out and OK, but the smoke is getting worse.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear, organized, covering the essentials: what happened, is anyone hurt, is it getting worse. The dispatcher sounds relieved to get a coherent report."
+                    },
+                    {
+                        "text_zh": "有火！我邻居家着火了！",
+                        "text_pinyin": "yǒu huǒ! wǒ línjū jiā zháo huǒ le!",
+                        "text_en": "Fire! My neighbor's house is on fire!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Urgent and clear enough. The dispatcher will ask follow-up questions to fill in the details."
+                    },
+                    {
+                        "text_zh": "快来！有烟！",
+                        "text_pinyin": "kuài lái! yǒu yān!",
+                        "text_en": "Come quick! There's smoke!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "The urgency is clear, but the dispatcher needs more: where, how bad, anyone inside? She'll walk you through it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的。请告诉我地址。在哪个小区？几号楼？",
+                "text_pinyin": "hǎo de. qǐng gàosu wǒ dìzhǐ. zài nǎge xiǎoqū? jǐ hào lóu?",
+                "text_en": "OK. Please tell me the address. Which residential compound? Which building number?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Provide the address.",
+                "options": [
+                    {
+                        "text_zh": "在和平路十八号院，三号楼，一楼。门口有一棵很大的银杏树。",
+                        "text_pinyin": "zài Hépíng Lù shíbā hào yuàn, sān hào lóu, yī lóu. ménkǒu yǒu yì kē hěn dà de yínxìng shù.",
+                        "text_en": "18 Heping Road compound, building 3, first floor. There's a big ginkgo tree at the entrance.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Precise address plus a landmark — the ginkgo tree is an excellent detail for the fire truck."
+                    },
+                    {
+                        "text_zh": "和平路十八号院。",
+                        "text_pinyin": "Hépíng Lù shíbā hào yuàn.",
+                        "text_en": "18 Heping Road compound.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "The compound name is enough to start — she'll ask for the building number next."
+                    },
+                    {
+                        "text_zh": "我不记得具体地址了，就在和平路附近。",
+                        "text_pinyin": "wǒ bú jìde jùtǐ dìzhǐ le, jiù zài Hépíng Lù fùjìn.",
+                        "text_en": "I don't remember the exact address — it's near Heping Road.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "In an emergency, approximate is better than nothing. The dispatcher will work with it."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "收到。消防车马上出发。请问楼里还有没有其他人？",
+                "text_pinyin": "shōu dào. xiāofáng chē mǎshàng chūfā. qǐngwèn lóu lǐ hái yǒu méiyǒu qítā rén?",
+                "text_en": "Received. Fire truck is on its way. Are there other people still in the building?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Tell her about the other residents.",
+                "options": [
+                    {
+                        "text_zh": "楼里应该还有几户人家。我去叫他们出来。",
+                        "text_pinyin": "lóu lǐ yīnggāi hái yǒu jǐ hù rénjiā. wǒ qù jiào tāmen chūlái.",
+                        "text_en": "There should be a few other families. I'll go tell them to come out.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Proactive and helpful. She adds:「注意安全，不要进到有烟的地方。」"
+                    },
+                    {
+                        "text_zh": "我不太确定。",
+                        "text_pinyin": "wǒ bú tài quèdìng.",
+                        "text_en": "I'm not sure.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest. The team will check when they arrive."
+                    },
+                    {
+                        "text_zh": "郑大爷已经出来了，其他人我不知道。",
+                        "text_pinyin": "Zhèng dàyé yǐjīng chūlái le, qítā rén wǒ bù zhīdào.",
+                        "text_en": "Old Mr. Zheng is already out — I don't know about the others.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Partial info is still useful. She notes Mr. Zheng's name."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，注意安全。消防车大概五分钟到。请在安全的地方等着，不要回到楼里去。",
+                "text_pinyin": "hǎo de, zhùyì ānquán. xiāofáng chē dàgài wǔ fēnzhōng dào. qǐng zài ānquán de dìfāng děng zhe, búyào huí dào lóu lǐ qù.",
+                "text_en": "OK, stay safe. Fire truck in about five minutes. Wait somewhere safe and don't go back inside."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and thank her.",
+                "options": [
+                    {
+                        "text_zh": "好的，我们在门口等。谢谢你！",
+                        "text_pinyin": "hǎo de, wǒmen zài ménkǒu děng. xièxie nǐ!",
+                        "text_en": "OK, we'll wait at the entrance. Thank you!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Calm and compliant. Mr. Zheng is still holding his spatula, but at least everyone is safe."
+                    },
+                    {
+                        "text_zh": "知道了，谢谢。",
+                        "text_pinyin": "zhīdào le, xièxie.",
+                        "text_en": "Got it, thanks.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Brief and understood. The sirens are already faintly audible."
+                    },
+                    {
+                        "text_zh": "五分钟太慢了！",
+                        "text_pinyin": "wǔ fēnzhōng tài màn le!",
+                        "text_en": "Five minutes is too slow!",
+                        "score": 0.3,
+                        "register": "informal",
+                        "feedback": "Understandable panic. Five minutes feels like an hour when smoke is rising."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "China's emergency numbers: 119 for fire (消防), 120 for ambulance (急救), 110 for police (报警). Chinese addresses go from largest to smallest: road, compound number, building, floor, apartment."
+    }
+}

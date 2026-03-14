@@ -1,0 +1,566 @@
+[
+  {
+    "id": "j5_observe_001",
+    "title": "The Last Bench in the Park",
+    "title_zh": "公园里最后一张长椅",
+    "hsk_level": 5,
+    "text_zh": "公园的角落有一张长椅，漆已经剥落了大半，木头露出灰白色的纹理。每天下午三点左右，一个穿深色外套的老人会来坐一会儿。他不看手机，不跟人聊天，只是坐着，偶尔抬头看看树梢。有时候他带一个保温杯，但很少喝。我在对面的长椅上注意到他，纯粹是因为他是唯一一个坐下来什么都不做的人。公园里其他人都在锻炼、遛狗、刷短视频。他的静止反而成了一种引人注目的存在。",
+    "text_pinyin": "Gōngyuán de jiǎoluò yǒu yì zhāng chángyǐ, qī yǐjīng bōluò le dà bàn, mùtou lùchū huībái sè de wénlǐ. Měi tiān xiàwǔ sān diǎn zuǒyòu, yí gè chuān shēn sè wàitào de lǎorén huì lái zuò yíhuìr. Tā bú kàn shǒujī, bù gēn rén liáotiān, zhǐ shì zuò zhe, ǒu'ěr táitóu kànkan shùshāo. Yǒu shíhou tā dài yí gè bǎowēn bēi, dàn hěn shǎo hē. Wǒ zài duìmiàn de chángyǐ shàng zhùyì dào tā, chúncuì shì yīnwèi tā shì wéiyī yí gè zuò xiàlái shénme dōu bú zuò de rén. Gōngyuán lǐ qítā rén dōu zài duànliàn, liú gǒu, shuā duǎn shìpín. Tā de jìngzhǐ fǎn'ér chéng le yì zhǒng yǐn rén zhùmù de cúnzài.",
+    "text_en": "In the corner of the park there's a bench, its paint mostly peeled away, the wood showing pale gray grain. Every day around three in the afternoon, an old man in a dark jacket comes and sits for a while. He doesn't look at his phone, doesn't chat with anyone — he just sits, occasionally glancing up at the treetops. Sometimes he brings a thermos, but rarely drinks from it. I noticed him from the bench across the way, purely because he's the only person who sits down and does nothing. Everyone else in the park is exercising, walking dogs, scrolling through short videos. His stillness has become a kind of conspicuous presence.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者为什么注意到这个老人？",
+        "q_en": "Why did the author notice the old man?",
+        "options": [
+          {"text": "因为他穿的衣服很特别", "pinyin": "yīnwèi tā chuān de yīfu hěn tèbié", "text_en": "Because his clothes were unusual", "correct": false},
+          {"text": "因为他是唯一什么都不做的人", "pinyin": "yīnwèi tā shì wéiyī shénme dōu bú zuò de rén", "text_en": "Because he was the only one doing nothing", "correct": true},
+          {"text": "因为他每天都跟作者打招呼", "pinyin": "yīnwèi tā měi tiān dōu gēn zuòzhě dǎ zhāohu", "text_en": "Because he greeted the author every day", "correct": false},
+          {"text": "因为他的保温杯很漂亮", "pinyin": "yīnwèi tā de bǎowēn bēi hěn piàoliang", "text_en": "Because his thermos was beautiful", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "公园里其他人在做什么？",
+        "q_en": "What are other people in the park doing?",
+        "options": [
+          {"text": "看书和画画", "pinyin": "kàn shū hé huàhuà", "text_en": "Reading and painting", "correct": false},
+          {"text": "锻炼、遛狗、刷短视频", "pinyin": "duànliàn, liú gǒu, shuā duǎn shìpín", "text_en": "Exercising, walking dogs, scrolling videos", "correct": true},
+          {"text": "聊天和喝茶", "pinyin": "liáotiān hé hē chá", "text_en": "Chatting and drinking tea", "correct": false},
+          {"text": "跟老人一起坐着", "pinyin": "gēn lǎorén yìqǐ zuò zhe", "text_en": "Sitting with the old man", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "这篇文章的主题是什么？",
+        "q_en": "What is the theme of this passage?",
+        "options": [
+          {"text": "公园需要更多长椅", "pinyin": "gōngyuán xūyào gèng duō chángyǐ", "text_en": "Parks need more benches", "correct": false},
+          {"text": "老人应该多运动", "pinyin": "lǎorén yīnggāi duō yùndòng", "text_en": "Elderly people should exercise more", "correct": false},
+          {"text": "在忙碌中，静止本身变得引人注目", "pinyin": "zài mánglù zhōng, jìngzhǐ běnshēn biàn de yǐn rén zhùmù", "text_en": "Amid busyness, stillness itself becomes conspicuous", "correct": true},
+          {"text": "手机让人失去了与自然的联系", "pinyin": "shǒujī ràng rén shīqù le yǔ zìrán de liánxì", "text_en": "Phones disconnect people from nature", "correct": false}
+        ],
+        "difficulty": 0.4
+      }
+    ]
+  },
+  {
+    "id": "j5_observe_002",
+    "title": "The Sound of the Elevator",
+    "title_zh": "电梯的声音",
+    "hsk_level": 5,
+    "text_zh": "住了三年以后，我才意识到我们楼的电梯有一种独特的声音。不是机械的嗡嗡声——每部电梯都有那个。我说的是它到达每一层时发出的那一声轻响，像是金属在叹气。搬来的第一年我完全没注意到。第二年，有一天深夜等电梯的时候突然听见了。从那以后就再也无法忽略。现在每次听到那个声音，我就知道有人到家了，或者有人正在离开。整栋楼的生活节奏都藏在这个声音里。",
+    "text_pinyin": "Zhù le sān nián yǐhòu, wǒ cái yìshí dào wǒmen lóu de diàntī yǒu yì zhǒng dútè de shēngyīn. Bú shì jīxiè de wēngwēng shēng — měi bù diàntī dōu yǒu nàge. Wǒ shuō de shì tā dàodá měi yì céng shí fāchū de nà yì shēng qīng xiǎng, xiàng shì jīnshǔ zài tànqì. Bān lái de dì yī nián wǒ wánquán méi zhùyì dào. Dì èr nián, yǒu yì tiān shēnyè děng diàntī de shíhou tūrán tīngjiàn le. Cóng nà yǐhòu jiù zài yě wúfǎ hūlüè. Xiànzài měi cì tīng dào nàge shēngyīn, wǒ jiù zhīdào yǒu rén dào jiā le, huòzhě yǒu rén zhèngzài líkāi. Zhěng dòng lóu de shēnghuó jiézòu dōu cáng zài zhège shēngyīn lǐ.",
+    "text_en": "After living here three years, I finally realized our building's elevator has a distinctive sound. Not the mechanical hum — every elevator has that. I mean the soft sound it makes arriving at each floor, like metal sighing. My first year here I didn't notice it at all. In the second year, one late night while waiting for the elevator, I suddenly heard it. After that I could never unhear it. Now every time I hear that sound, I know someone has come home, or someone is leaving. The whole building's rhythm of life is hidden in that sound.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者什么时候第一次注意到电梯的声音？",
+        "q_en": "When did the author first notice the elevator sound?",
+        "options": [
+          {"text": "搬来的第一天", "pinyin": "bān lái de dì yī tiān", "text_en": "The first day after moving in", "correct": false},
+          {"text": "住了大约两年后的一个深夜", "pinyin": "zhù le dàyuē liǎng nián hòu de yí gè shēnyè", "text_en": "One late night about two years after moving in", "correct": true},
+          {"text": "电梯坏了的那一天", "pinyin": "diàntī huài le de nà yì tiān", "text_en": "The day the elevator broke", "correct": false},
+          {"text": "邻居告诉他以后", "pinyin": "línjū gàosu tā yǐhòu", "text_en": "After a neighbor told him", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者把电梯的声音比作什么？",
+        "q_en": "What does the author compare the elevator sound to?",
+        "options": [
+          {"text": "风吹过窗户", "pinyin": "fēng chuī guò chuānghù", "text_en": "Wind blowing through a window", "correct": false},
+          {"text": "金属在叹气", "pinyin": "jīnshǔ zài tànqì", "text_en": "Metal sighing", "correct": true},
+          {"text": "猫在叫", "pinyin": "māo zài jiào", "text_en": "A cat meowing", "correct": false},
+          {"text": "钟在响", "pinyin": "zhōng zài xiǎng", "text_en": "A bell ringing", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者认为这个声音代表什么？",
+        "q_en": "What does the author think the sound represents?",
+        "options": [
+          {"text": "电梯需要修理", "pinyin": "diàntī xūyào xiūlǐ", "text_en": "The elevator needs repair", "correct": false},
+          {"text": "整栋楼的生活节奏", "pinyin": "zhěng dòng lóu de shēnghuó jiézòu", "text_en": "The whole building's rhythm of life", "correct": true},
+          {"text": "城市太吵了", "pinyin": "chéngshì tài chǎo le", "text_en": "The city is too noisy", "correct": false},
+          {"text": "他住的时间太长了", "pinyin": "tā zhù de shíjiān tài cháng le", "text_en": "He's lived there too long", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_observe_003",
+    "title": "The Closing Ritual",
+    "title_zh": "关门的仪式",
+    "hsk_level": 5,
+    "text_zh": "我家楼下的水果店每天晚上九点半关门。老板不是直接拉下卷帘门，而是有一套完整的流程。先把门口的水果一箱一箱搬进去，每搬一箱都会低头看一眼，好像在跟它们确认今天的表现。然后用一块湿布擦秤台，再把塑料袋整理好。最后站在门口抽一根烟，看看街上还有没有人经过。这整个过程大概需要二十分钟。我有时候从窗户往下看，觉得这不像是在关店，更像是一个人在结束自己的一天——缓慢、认真、带着一种不急不慢的尊严。",
+    "text_pinyin": "Wǒ jiā lóuxià de shuǐguǒ diàn měi tiān wǎnshang jiǔ diǎn bàn guān mén. Lǎobǎn bú shì zhíjiē lā xià juǎnlián mén, ér shì yǒu yí tào wánzhěng de liúchéng. Xiān bǎ ménkǒu de shuǐguǒ yì xiāng yì xiāng bān jìnqù, měi bān yì xiāng dōu huì dītóu kàn yì yǎn, hǎoxiàng zài gēn tāmen quèrèn jīntiān de biǎoxiàn. Ránhòu yòng yí kuài shī bù cā chèng tái, zài bǎ sùliào dài zhěnglǐ hǎo. Zuìhòu zhàn zài ménkǒu chōu yì gēn yān, kànkan jiē shàng hái yǒu méiyǒu rén jīngguò. Zhè zhěng gè guòchéng dàgài xūyào èrshí fēnzhōng. Wǒ yǒu shíhou cóng chuānghù wǎng xià kàn, juéde zhè bú xiàng shì zài guān diàn, gèng xiàng shì yí gè rén zài jiéshù zìjǐ de yì tiān — huǎnmàn, rènzhēn, dài zhe yì zhǒng bù jí bú màn de zūnyán.",
+    "text_en": "The fruit shop downstairs from my apartment closes at 9:30 every night. The owner doesn't just pull down the rolling shutter — he has a complete routine. First he carries the fruit crates in from the doorway one by one, glancing down at each one as if confirming how it performed today. Then he wipes the scale with a damp cloth and tidies up the plastic bags. Finally he stands in the doorway smoking a cigarette, checking if anyone's still passing by on the street. The whole process takes about twenty minutes. Sometimes I watch from my window and feel it's not like closing a shop — it's more like a person finishing their day: slow, deliberate, with an unhurried dignity.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "水果店老板关门的第一步是什么？",
+        "q_en": "What is the shop owner's first step in closing?",
+        "options": [
+          {"text": "抽烟", "pinyin": "chōu yān", "text_en": "Smoking a cigarette", "correct": false},
+          {"text": "把水果搬进去", "pinyin": "bǎ shuǐguǒ bān jìnqù", "text_en": "Carrying the fruit inside", "correct": true},
+          {"text": "擦秤台", "pinyin": "cā chèng tái", "text_en": "Wiping the scale", "correct": false},
+          {"text": "拉下卷帘门", "pinyin": "lā xià juǎnlián mén", "text_en": "Pulling down the shutter", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "整个关门过程大概需要多长时间？",
+        "q_en": "How long does the whole closing process take?",
+        "options": [
+          {"text": "五分钟", "pinyin": "wǔ fēnzhōng", "text_en": "Five minutes", "correct": false},
+          {"text": "十分钟", "pinyin": "shí fēnzhōng", "text_en": "Ten minutes", "correct": false},
+          {"text": "二十分钟", "pinyin": "èrshí fēnzhōng", "text_en": "Twenty minutes", "correct": true},
+          {"text": "一个小时", "pinyin": "yí gè xiǎoshí", "text_en": "One hour", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者觉得这个过程像什么？",
+        "q_en": "What does the author feel the process resembles?",
+        "options": [
+          {"text": "一场表演", "pinyin": "yì chǎng biǎoyǎn", "text_en": "A performance", "correct": false},
+          {"text": "一个人在结束自己的一天", "pinyin": "yí gè rén zài jiéshù zìjǐ de yì tiān", "text_en": "A person finishing their day", "correct": true},
+          {"text": "一种浪费时间的习惯", "pinyin": "yì zhǒng làngfèi shíjiān de xíguàn", "text_en": "A time-wasting habit", "correct": false},
+          {"text": "一个无聊的工作", "pinyin": "yí gè wúliáo de gōngzuò", "text_en": "A boring job", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_observe_004",
+    "title": "The Regulars at the Noodle Shop",
+    "title_zh": "面馆的常客们",
+    "hsk_level": 5,
+    "text_zh": "我常去的那家面馆很小，只有六张桌子。去的次数多了以后，我开始认出一些常客。早上七点半左右会来一个穿制服的中年男人，每次都点牛肉面加一个鸡蛋，吃得很快，从不看手机。中午有一对老夫妻，两个人共享一碗面和一盘凉菜，吃得很慢，偶尔说几句话。下午三点会来一个年轻女生，戴着耳机，点最便宜的素面，在那儿坐很久，好像在写什么东西。我不知道他们的名字，但我知道他们的习惯。这种了解算不算一种认识？我们在同一个空间里各自生活，彼此之间只有一种无声的默契。",
+    "text_pinyin": "Wǒ cháng qù de nà jiā miànguǎn hěn xiǎo, zhǐ yǒu liù zhāng zhuōzi. Qù de cìshù duō le yǐhòu, wǒ kāishǐ rèn chū yìxiē chángkè. Zǎoshang qī diǎn bàn zuǒyòu huì lái yí gè chuān zhìfú de zhōngnián nánrén, měi cì dōu diǎn niúròu miàn jiā yí gè jīdàn, chī de hěn kuài, cóng bú kàn shǒujī. Zhōngwǔ yǒu yí duì lǎo fūqī, liǎng gè rén gòngxiǎng yì wǎn miàn hé yì pán liángcài, chī de hěn màn, ǒu'ěr shuō jǐ jù huà. Xiàwǔ sān diǎn huì lái yí gè niánqīng nǚshēng, dài zhe ěrjī, diǎn zuì piányi de sùmiàn, zài nàr zuò hěn jiǔ, hǎoxiàng zài xiě shénme dōngxi. Wǒ bù zhīdào tāmen de míngzi, dàn wǒ zhīdào tāmen de xíguàn. Zhè zhǒng liǎojiě suàn bú suàn yì zhǒng rènshi? Wǒmen zài tóng yí gè kōngjiān lǐ gèzì shēnghuó, bǐcǐ zhī jiān zhǐ yǒu yì zhǒng wúshēng de mòqì.",
+    "text_en": "The noodle shop I frequent is small — only six tables. After going enough times, I started recognizing the regulars. Around 7:30 AM, a middle-aged man in uniform comes in, always orders beef noodles with an egg, eats quickly, never looks at his phone. At noon there's an elderly couple who share one bowl of noodles and a plate of cold dishes, eating slowly, exchanging a few words now and then. At 3 PM a young woman comes in wearing earbuds, orders the cheapest vegetarian noodles, sits for a long time, apparently writing something. I don't know their names, but I know their habits. Does this kind of understanding count as knowing someone? We each live our lives in the same space, connected only by a silent, unspoken accord.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "穿制服的男人有什么特点？",
+        "q_en": "What is distinctive about the man in uniform?",
+        "options": [
+          {"text": "他吃得很慢，喜欢聊天", "pinyin": "tā chī de hěn màn, xǐhuan liáotiān", "text_en": "He eats slowly and likes to chat", "correct": false},
+          {"text": "他吃得很快，从不看手机", "pinyin": "tā chī de hěn kuài, cóng bú kàn shǒujī", "text_en": "He eats quickly, never looks at his phone", "correct": true},
+          {"text": "他每次都换不同的菜", "pinyin": "tā měi cì dōu huàn bùtóng de cài", "text_en": "He orders something different each time", "correct": false},
+          {"text": "他总是跟老板聊天", "pinyin": "tā zǒngshì gēn lǎobǎn liáotiān", "text_en": "He always chats with the owner", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者提出了什么问题？",
+        "q_en": "What question does the author raise?",
+        "options": [
+          {"text": "面馆为什么这么小", "pinyin": "miànguǎn wèishénme zhème xiǎo", "text_en": "Why is the noodle shop so small", "correct": false},
+          {"text": "知道一个人的习惯算不算认识他", "pinyin": "zhīdào yí gè rén de xíguàn suàn bú suàn rènshi tā", "text_en": "Whether knowing someone's habits counts as knowing them", "correct": true},
+          {"text": "常客们为什么不互相说话", "pinyin": "chángkè men wèishénme bù hùxiāng shuōhuà", "text_en": "Why the regulars don't talk to each other", "correct": false},
+          {"text": "这家面馆的面好不好吃", "pinyin": "zhè jiā miànguǎn de miàn hǎo bù hǎochī", "text_en": "Whether this shop's noodles are good", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "下午来的年轻女生在做什么？",
+        "q_en": "What does the young woman in the afternoon do?",
+        "options": [
+          {"text": "跟朋友聊天", "pinyin": "gēn péngyou liáotiān", "text_en": "Chatting with friends", "correct": false},
+          {"text": "看手机视频", "pinyin": "kàn shǒujī shìpín", "text_en": "Watching phone videos", "correct": false},
+          {"text": "好像在写什么东西", "pinyin": "hǎoxiàng zài xiě shénme dōngxi", "text_en": "Apparently writing something", "correct": true},
+          {"text": "吃很多东西", "pinyin": "chī hěn duō dōngxi", "text_en": "Eating a lot of food", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j5_urban_001",
+    "title": "The Map That Keeps Changing",
+    "title_zh": "一直在变的地图",
+    "hsk_level": 5,
+    "text_zh": "我手机里有一张三年前截屏的地图，上面标着我当时常去的地方：一家独立书店、一个很好的咖啡馆、一条适合散步的小巷。现在打开实时地图再看，三个地方都不在了。书店变成了奶茶店，咖啡馆变成了连锁药房，小巷被围起来正在施工。城市就是这样——它不会通知你它在改变。你只是某一天按照记忆走过去，发现路还在，但目的地已经消失了。地图可以更新，但记忆里的那个版本会一直留着。有时候我会想，我真正怀念的不是那些地方本身，而是我在那些地方时的自己。",
+    "text_pinyin": "Wǒ shǒujī lǐ yǒu yì zhāng sān nián qián jiépíng de dìtú, shàngmiàn biāo zhe wǒ dāngshí cháng qù de dìfāng: yì jiā dúlì shūdiàn, yí gè hěn hǎo de kāfēiguǎn, yì tiáo shìhé sànbù de xiǎo xiàng. Xiànzài dǎkāi shíshí dìtú zài kàn, sān gè dìfāng dōu bú zài le. Shūdiàn biàn chéng le nǎichá diàn, kāfēiguǎn biàn chéng le liánsuǒ yàofáng, xiǎo xiàng bèi wéi qǐlái zhèngzài shīgōng. Chéngshì jiù shì zhèyàng — tā bú huì tōngzhī nǐ tā zài gǎibiàn. Nǐ zhǐ shì mǒu yì tiān ànzhào jìyì zǒu guòqù, fāxiàn lù hái zài, dàn mùdìdì yǐjīng xiāoshī le. Dìtú kěyǐ gēngxīn, dàn jìyì lǐ de nàge bǎnběn huì yìzhí liú zhe. Yǒu shíhou wǒ huì xiǎng, wǒ zhēnzhèng huáiniàn de bú shì nàxiē dìfāng běnshēn, ér shì wǒ zài nàxiē dìfāng shí de zìjǐ.",
+    "text_en": "On my phone there's a screenshot of a map from three years ago, marking places I used to frequent: an independent bookstore, a great café, an alley perfect for walking. Opening the live map now, all three are gone. The bookstore became a milk tea shop, the café became a chain pharmacy, the alley is fenced off for construction. That's how cities work — they don't notify you they're changing. You just walk somewhere one day following memory, and find the road is still there but the destination has vanished. Maps can be updated, but the version in your memory stays forever. Sometimes I think what I truly miss isn't those places themselves, but who I was when I was in them.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "书店变成了什么？",
+        "q_en": "What did the bookstore become?",
+        "options": [
+          {"text": "药房", "pinyin": "yàofáng", "text_en": "A pharmacy", "correct": false},
+          {"text": "奶茶店", "pinyin": "nǎichá diàn", "text_en": "A milk tea shop", "correct": true},
+          {"text": "餐厅", "pinyin": "cāntīng", "text_en": "A restaurant", "correct": false},
+          {"text": "健身房", "pinyin": "jiànshēnfáng", "text_en": "A gym", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者说城市改变时会怎样？",
+        "q_en": "What does the author say about how cities change?",
+        "options": [
+          {"text": "会先通知居民", "pinyin": "huì xiān tōngzhī jūmín", "text_en": "They notify residents first", "correct": false},
+          {"text": "变化很慢，可以适应", "pinyin": "biànhuà hěn màn, kěyǐ shìyìng", "text_en": "Changes are slow and adaptable", "correct": false},
+          {"text": "不会通知你它在改变", "pinyin": "bú huì tōngzhī nǐ tā zài gǎibiàn", "text_en": "They don't notify you they're changing", "correct": true},
+          {"text": "只在晚上改变", "pinyin": "zhǐ zài wǎnshang gǎibiàn", "text_en": "They only change at night", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者真正怀念的是什么？",
+        "q_en": "What does the author truly miss?",
+        "options": [
+          {"text": "那些地方的食物", "pinyin": "nàxiē dìfāng de shíwù", "text_en": "The food at those places", "correct": false},
+          {"text": "在那些地方时的自己", "pinyin": "zài nàxiē dìfāng shí de zìjǐ", "text_en": "Who they were when in those places", "correct": true},
+          {"text": "三年前的手机", "pinyin": "sān nián qián de shǒujī", "text_en": "Their phone from three years ago", "correct": false},
+          {"text": "那条小巷的风景", "pinyin": "nà tiáo xiǎo xiàng de fēngjǐng", "text_en": "The scenery of that alley", "correct": false}
+        ],
+        "difficulty": 0.4
+      }
+    ]
+  },
+  {
+    "id": "j5_urban_002",
+    "title": "The Construction Sound Calendar",
+    "title_zh": "施工声日历",
+    "hsk_level": 5,
+    "text_zh": "搬到这个小区以后，我发现可以通过施工的声音来判断时间和季节。早上七点，打桩机开始响，比闹钟准。中午十二点到一点，安静一个小时——工人们在吃饭。下午的声音会变，从打桩变成切割，最后变成收拾工具的零碎声。到了冬天，开工时间推迟半小时；夏天则提前。节假日完全安静，安静得让人有些不习惯。有一次春节放了十五天假，等施工声重新响起来的那个早晨，我竟然觉得有一种奇怪的安心感——好像城市的心跳恢复了。",
+    "text_pinyin": "Bān dào zhège xiǎoqū yǐhòu, wǒ fāxiàn kěyǐ tōngguò shīgōng de shēngyīn lái pànduàn shíjiān hé jìjié. Zǎoshang qī diǎn, dǎ zhuāng jī kāishǐ xiǎng, bǐ nàozhōng zhǔn. Zhōngwǔ shí'èr diǎn dào yì diǎn, ānjìng yí gè xiǎoshí — gōngrén men zài chīfàn. Xiàwǔ de shēngyīn huì biàn, cóng dǎ zhuāng biàn chéng qiēgē, zuìhòu biàn chéng shōushi gōngjù de língsuì shēng. Dào le dōngtiān, kāigōng shíjiān tuīchí bàn xiǎoshí; xiàtiān zé tíqián. Jiéjiàrì wánquán ānjìng, ānjìng de ràng rén yǒuxiē bù xíguàn. Yǒu yí cì Chūnjié fàng le shíwǔ tiān jiǎ, děng shīgōng shēng chóngxīn xiǎng qǐlái de nàge zǎochen, wǒ jìngrán juéde yǒu yì zhǒng qíguài de ānxīn gǎn — hǎoxiàng chéngshì de xīntiào huīfù le.",
+    "text_en": "After moving to this neighborhood, I discovered I could tell the time and season by construction sounds. At 7 AM, the pile driver starts — more reliable than an alarm clock. From noon to one, an hour of quiet — the workers are eating. The afternoon sounds shift, from pile driving to cutting, finally to the scattered sounds of packing up tools. In winter, the start time pushes back half an hour; in summer it moves earlier. Holidays are completely silent, so silent it feels strange. Once during a fifteen-day Spring Festival break, the morning the construction sounds resumed, I felt an oddly reassuring sensation — as if the city's heartbeat had returned.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "中午为什么安静一个小时？",
+        "q_en": "Why is it quiet for an hour at noon?",
+        "options": [
+          {"text": "机器坏了", "pinyin": "jīqì huài le", "text_en": "The machines broke down", "correct": false},
+          {"text": "工人们在吃饭", "pinyin": "gōngrén men zài chīfàn", "text_en": "The workers are eating", "correct": true},
+          {"text": "法律规定不能施工", "pinyin": "fǎlǜ guīdìng bù néng shīgōng", "text_en": "The law prohibits construction", "correct": false},
+          {"text": "天气太热了", "pinyin": "tiānqì tài rè le", "text_en": "It's too hot", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "春节以后施工声重新响起时，作者有什么感觉？",
+        "q_en": "How did the author feel when construction resumed after Spring Festival?",
+        "options": [
+          {"text": "非常生气", "pinyin": "fēicháng shēngqì", "text_en": "Very angry", "correct": false},
+          {"text": "一种奇怪的安心感", "pinyin": "yì zhǒng qíguài de ānxīn gǎn", "text_en": "A strange sense of reassurance", "correct": true},
+          {"text": "想搬家", "pinyin": "xiǎng bānjiā", "text_en": "Wanted to move", "correct": false},
+          {"text": "完全没有感觉", "pinyin": "wánquán méiyǒu gǎnjué", "text_en": "Felt nothing at all", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者把施工声比作什么？",
+        "q_en": "What does the author compare the construction sound to?",
+        "options": [
+          {"text": "一种噪音污染", "pinyin": "yì zhǒng zàoyīn wūrǎn", "text_en": "A kind of noise pollution", "correct": false},
+          {"text": "城市的心跳", "pinyin": "chéngshì de xīntiào", "text_en": "The city's heartbeat", "correct": true},
+          {"text": "一首音乐", "pinyin": "yì shǒu yīnyuè", "text_en": "A piece of music", "correct": false},
+          {"text": "一个闹钟", "pinyin": "yí gè nàozhōng", "text_en": "An alarm clock", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_inst_001",
+    "title": "The Hospital Cafeteria at Midnight",
+    "title_zh": "午夜的医院食堂",
+    "hsk_level": 5,
+    "text_zh": "我陪家人住院的那一周，每天深夜都去医院食堂吃饭。白天的食堂很普通，跟任何单位食堂没什么区别。但凌晨的食堂完全是另一个世界。灯光调得很暗，只有角落几张桌子坐着人——有穿手术服出来的医生，有守了一夜的家属，偶尔还有几个穿着病号服的病人。没人说话，或者说话声音很低。每个人面前都有一碗面或者一份简单的炒饭。在那个时间、那个地方吃东西，食物的味道变得不一样了。不是更好吃或者更难吃，而是每一口都显得格外真实。那是人在疲惫和担忧之后，对自己最基本的照顾。",
+    "text_pinyin": "Wǒ péi jiārén zhùyuàn de nà yì zhōu, měi tiān shēnyè dōu qù yīyuàn shítáng chīfàn. Báitiān de shítáng hěn pǔtōng, gēn rènhé dānwèi shítáng méi shénme qūbié. Dàn língchén de shítáng wánquán shì lìng yí gè shìjiè. Dēngguāng diào de hěn àn, zhǐ yǒu jiǎoluò jǐ zhāng zhuōzi zuò zhe rén — yǒu chuān shǒushù fú chūlái de yīshēng, yǒu shǒu le yí yè de jiāshǔ, ǒu'ěr hái yǒu jǐ gè chuān zhe bìnghào fú de bìngrén. Méi rén shuōhuà, huòzhě shuōhuà shēngyīn hěn dī. Měi gè rén miànqián dōu yǒu yì wǎn miàn huòzhě yí fèn jiǎndān de chǎofàn. Zài nàge shíjiān, nàge dìfāng chī dōngxi, shíwù de wèidào biàn de bù yíyàng le. Bú shì gèng hǎochī huòzhě gèng nánchī, ér shì měi yì kǒu dōu xiǎnde géwài zhēnshí. Nà shì rén zài píbèi hé dānyōu zhīhòu, duì zìjǐ zuì jīběn de zhàogù.",
+    "text_en": "The week I stayed with a family member at the hospital, I went to the hospital cafeteria every night. During the day it's ordinary, no different from any institutional cafeteria. But at dawn it's a completely different world. The lights are dimmed, only a few tables in the corners are occupied — doctors still in surgical scrubs, family members who've been up all night, occasionally a few patients in hospital gowns. No one talks, or they speak very softly. Everyone has a bowl of noodles or a simple fried rice in front of them. Eating at that hour, in that place, food tastes different. Not better or worse, but every bite feels extraordinarily real. It's the most basic act of caring for yourself after exhaustion and worry.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "凌晨的食堂和白天有什么不同？",
+        "q_en": "How is the cafeteria at dawn different from daytime?",
+        "options": [
+          {"text": "菜单完全不同", "pinyin": "càidān wánquán bùtóng", "text_en": "The menu is completely different", "correct": false},
+          {"text": "灯光暗，人少，很安静", "pinyin": "dēngguāng àn, rén shǎo, hěn ānjìng", "text_en": "Dim lights, fewer people, very quiet", "correct": true},
+          {"text": "食物更贵", "pinyin": "shíwù gèng guì", "text_en": "Food is more expensive", "correct": false},
+          {"text": "不允许病人进入", "pinyin": "bù yǔnxǔ bìngrén jìnrù", "text_en": "Patients aren't allowed in", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者说食物的味道「变得不一样」是什么意思？",
+        "q_en": "What does the author mean by food tasting 'different'?",
+        "options": [
+          {"text": "食物做得不好", "pinyin": "shíwù zuò de bù hǎo", "text_en": "The food is poorly made", "correct": false},
+          {"text": "深夜的食材不新鲜", "pinyin": "shēnyè de shícái bù xīnxiān", "text_en": "Late-night ingredients aren't fresh", "correct": false},
+          {"text": "每一口都显得格外真实", "pinyin": "měi yì kǒu dōu xiǎnde géwài zhēnshí", "text_en": "Every bite feels extraordinarily real", "correct": true},
+          {"text": "医院的空气影响了味道", "pinyin": "yīyuàn de kōngqì yǐngxiǎng le wèidào", "text_en": "Hospital air affects the flavor", "correct": false}
+        ],
+        "difficulty": 0.4
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者为什么每天深夜去食堂？",
+        "q_en": "Why does the author go to the cafeteria every night?",
+        "options": [
+          {"text": "他在医院工作", "pinyin": "tā zài yīyuàn gōngzuò", "text_en": "He works at the hospital", "correct": false},
+          {"text": "他喜欢那里的食物", "pinyin": "tā xǐhuan nàlǐ de shíwù", "text_en": "He likes the food there", "correct": false},
+          {"text": "他在陪家人住院", "pinyin": "tā zài péi jiārén zhùyuàn", "text_en": "He's staying with a hospitalized family member", "correct": true},
+          {"text": "他失眠了", "pinyin": "tā shīmián le", "text_en": "He has insomnia", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j5_mystery_001",
+    "title": "The Light in Apartment 1402",
+    "title_zh": "1402的灯",
+    "hsk_level": 5,
+    "text_zh": "对面楼十四层第二间公寓的灯总是在凌晨两点到三点之间亮着。我注意到这件事完全是偶然——失眠的时候站在阳台上发现的。后来我开始留意，连续观察了两个星期，发现规律非常稳定：两点左右亮，三点左右灭。窗帘是拉上的，只能看到一层暖黄色的光透出来。我开始猜测：是夜班回来的人？是照顾婴儿的父母？是写论文的研究生？还是跟我一样睡不着的人？这个问题没有答案，但想的过程本身让失眠变得没那么难受了。我们各自在自己的窗户后面，共享同一片夜色。",
+    "text_pinyin": "Duìmiàn lóu shísì céng dì èr jiān gōngyù de dēng zǒngshì zài língchén liǎng diǎn dào sān diǎn zhī jiān liàng zhe. Wǒ zhùyì dào zhè jiàn shì wánquán shì ǒurán — shīmián de shíhou zhàn zài yángtái shàng fāxiàn de. Hòulái wǒ kāishǐ liúyì, liánxù guānchá le liǎng gè xīngqī, fāxiàn guīlǜ fēicháng wěndìng: liǎng diǎn zuǒyòu liàng, sān diǎn zuǒyòu miè. Chuānglián shì lā shàng de, zhǐ néng kàndào yì céng nuǎn huáng sè de guāng tòu chūlái. Wǒ kāishǐ cāicè: shì yèbān huílái de rén? Shì zhàogù yīng'ér de fùmǔ? Shì xiě lùnwén de yánjiūshēng? Háishì gēn wǒ yíyàng shuì bù zháo de rén? Zhège wèntí méiyǒu dá'àn, dàn xiǎng de guòchéng běnshēn ràng shīmián biàn de méi nàme nánshòu le. Wǒmen gèzì zài zìjǐ de chuānghù hòumiàn, gòngxiǎng tóng yí piàn yèsè.",
+    "text_en": "The light in the second apartment on the fourteenth floor of the building across from mine is always on between 2 and 3 AM. I noticed this entirely by accident — standing on my balcony during a bout of insomnia. Later I started paying attention, observing for two consecutive weeks, and found the pattern remarkably stable: on around two, off around three. The curtains are drawn, showing only a layer of warm yellow light filtering through. I began to speculate: someone coming home from a night shift? Parents caring for an infant? A grad student writing a thesis? Or someone who, like me, simply can't sleep? There's no answer to this question, but the process of wondering itself made insomnia less miserable. Each of us behind our own windows, sharing the same night sky.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "作者怎么发现这盏灯的？",
+        "q_en": "How did the author discover this light?",
+        "options": [
+          {"text": "邻居告诉他的", "pinyin": "línjū gàosu tā de", "text_en": "A neighbor told him", "correct": false},
+          {"text": "他特意观察的", "pinyin": "tā tèyì guānchá de", "text_en": "He deliberately looked for it", "correct": false},
+          {"text": "失眠时站在阳台上偶然发现的", "pinyin": "shīmián shí zhàn zài yángtái shàng ǒurán fāxiàn de", "text_en": "By chance while standing on the balcony during insomnia", "correct": true},
+          {"text": "从网上看到的", "pinyin": "cóng wǎngshàng kàn dào de", "text_en": "He read about it online", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "灯的规律是什么？",
+        "q_en": "What is the pattern of the light?",
+        "options": [
+          {"text": "整夜都亮着", "pinyin": "zhěng yè dōu liàng zhe", "text_en": "On all night", "correct": false},
+          {"text": "两点左右亮，三点左右灭", "pinyin": "liǎng diǎn zuǒyòu liàng, sān diǎn zuǒyòu miè", "text_en": "On around 2, off around 3", "correct": true},
+          {"text": "每隔一个小时闪一次", "pinyin": "měi gé yí gè xiǎoshí shǎn yí cì", "text_en": "Flashes once every hour", "correct": false},
+          {"text": "只有周末才亮", "pinyin": "zhǐ yǒu zhōumò cái liàng", "text_en": "Only on weekends", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "猜测1402住户的过程对作者有什么影响？",
+        "q_en": "How did speculating about the resident affect the author?",
+        "options": [
+          {"text": "让他更焦虑了", "pinyin": "ràng tā gèng jiāolǜ le", "text_en": "Made him more anxious", "correct": false},
+          {"text": "让失眠变得没那么难受", "pinyin": "ràng shīmián biàn de méi nàme nánshòu", "text_en": "Made insomnia less miserable", "correct": true},
+          {"text": "让他决定搬家", "pinyin": "ràng tā juédìng bānjiā", "text_en": "Made him decide to move", "correct": false},
+          {"text": "让他去敲门问", "pinyin": "ràng tā qù qiāo mén wèn", "text_en": "Made him go knock and ask", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_identity_001",
+    "title": "The Language I Dream In",
+    "title_zh": "我做梦时用的语言",
+    "hsk_level": 5,
+    "text_zh": "有人问我，你做梦的时候说什么语言？这个问题比听起来复杂得多。在国内的时候，梦里自然都是中文。出国以后的头几年，梦还是中文的。后来慢慢变了——有时候梦里的人说英文，有时候说一种根本不存在的语言，我听得懂但醒来以后完全想不起来。最奇怪的是，偶尔会梦到自己在说一种带口音的中文，那个口音不是我的，也不是我认识的任何人的。语言学家说，梦里的语言反映的是身份认同的深层状态。如果这是真的，那我的身份认同大概正处于一种混合和重组的过程中——还没有定型，也许永远不会。",
+    "text_pinyin": "Yǒu rén wèn wǒ, nǐ zuòmèng de shíhou shuō shénme yǔyán? Zhège wèntí bǐ tīng qǐlái fùzá de duō. Zài guónèi de shíhou, mèng lǐ zìrán dōu shì Zhōngwén. Chūguó yǐhòu de tóu jǐ nián, mèng háishì Zhōngwén de. Hòulái mànmàn biàn le — yǒu shíhou mèng lǐ de rén shuō Yīngwén, yǒu shíhou shuō yì zhǒng gēnběn bù cúnzài de yǔyán, wǒ tīng de dǒng dàn xǐng lái yǐhòu wánquán xiǎng bù qǐlái. Zuì qíguài de shì, ǒu'ěr huì mèng dào zìjǐ zài shuō yì zhǒng dài kǒuyīn de Zhōngwén, nàge kǒuyīn bú shì wǒ de, yě bú shì wǒ rènshi de rènhé rén de. Yǔyán xuéjiā shuō, mèng lǐ de yǔyán fǎnyìng de shì shēnfèn rèntóng de shēncéng zhuàngtài. Rúguǒ zhè shì zhēn de, nà wǒ de shēnfèn rèntóng dàgài zhèng chǔyú yì zhǒng hùnhé hé chóngzǔ de guòchéng zhōng — hái méiyǒu dìngxíng, yěxǔ yǒngyuǎn bú huì.",
+    "text_en": "Someone asked me what language I dream in. The question is far more complicated than it sounds. When I was still in China, dreams were naturally all in Chinese. The first few years after going abroad, dreams were still in Chinese. Then gradually things changed — sometimes people in my dreams speak English, sometimes a language that doesn't exist at all, one I understand but can't recall after waking. The strangest part is occasionally dreaming of myself speaking Chinese with an accent that isn't mine, and isn't anyone I know's either. Linguists say the language of dreams reflects the deep state of identity. If that's true, then my identity is probably in a process of mixing and recombining — not yet settled, and perhaps never will be.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "出国以后，作者梦里的语言怎么变了？",
+        "q_en": "How did the author's dream language change after going abroad?",
+        "options": [
+          {"text": "完全变成了英文", "pinyin": "wánquán biàn chéng le Yīngwén", "text_en": "Completely became English", "correct": false},
+          {"text": "有时英文，有时不存在的语言", "pinyin": "yǒu shí Yīngwén, yǒu shí bù cúnzài de yǔyán", "text_en": "Sometimes English, sometimes a nonexistent language", "correct": true},
+          {"text": "只说日语", "pinyin": "zhǐ shuō Rìyǔ", "text_en": "Only Japanese", "correct": false},
+          {"text": "完全不说话", "pinyin": "wánquán bù shuōhuà", "text_en": "Stopped speaking entirely", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者梦里最奇怪的现象是什么？",
+        "q_en": "What's the strangest phenomenon in the author's dreams?",
+        "options": [
+          {"text": "听不懂别人说的话", "pinyin": "tīng bù dǒng biérén shuō de huà", "text_en": "Not understanding what others say", "correct": false},
+          {"text": "说一种带陌生口音的中文", "pinyin": "shuō yì zhǒng dài mòshēng kǒuyīn de Zhōngwén", "text_en": "Speaking Chinese with an unfamiliar accent", "correct": true},
+          {"text": "在梦里写字", "pinyin": "zài mèng lǐ xiě zì", "text_en": "Writing in dreams", "correct": false},
+          {"text": "梦里没有声音", "pinyin": "mèng lǐ méiyǒu shēngyīn", "text_en": "Dreams without sound", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者对自己的身份认同怎么看？",
+        "q_en": "How does the author view their own identity?",
+        "options": [
+          {"text": "已经完全确定了", "pinyin": "yǐjīng wánquán quèdìng le", "text_en": "Completely settled", "correct": false},
+          {"text": "正在混合和重组中", "pinyin": "zhèngzài hùnhé hé chóngzǔ zhōng", "text_en": "In a process of mixing and recombining", "correct": true},
+          {"text": "完全失去了", "pinyin": "wánquán shīqù le", "text_en": "Completely lost", "correct": false},
+          {"text": "跟以前一样没变", "pinyin": "gēn yǐqián yíyàng méi biàn", "text_en": "Same as before, unchanged", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  },
+  {
+    "id": "j5_comedy_001",
+    "title": "The Meeting That Could Have Been an Email",
+    "title_zh": "一封邮件就能解决的会议",
+    "hsk_level": 5,
+    "text_zh": "今天开了一个两小时的会。议题是讨论下次会议的时间。我没有在开玩笑。先是部门主管花了十五分钟解释为什么需要开这个会来讨论下次会议的时间——因为上次用邮件讨论没有达成一致。然后每个人依次发言，说自己哪天有空。有两个同事的时间完全对不上，于是大家开始讨论是不是可以分成两组开。讨论分组又花了四十分钟。最后决定：下次会议的时间，再发一封邮件确认。散会的时候，坐我旁边的同事小声说：「我觉得我的灵魂刚才离开了身体大约四十五分钟。」我看了一眼他的笔记本，上面画满了小鱼。",
+    "text_pinyin": "Jīntiān kāi le yí gè liǎng xiǎoshí de huì. Yìtí shì tǎolùn xià cì huìyì de shíjiān. Wǒ méiyǒu zài kāi wánxiào. Xiān shì bùmén zhǔguǎn huā le shíwǔ fēnzhōng jiěshì wèishénme xūyào kāi zhège huì lái tǎolùn xià cì huìyì de shíjiān — yīnwèi shàng cì yòng yóujiàn tǎolùn méiyǒu dáchéng yízhì. Ránhòu měi gè rén yīcì fāyán, shuō zìjǐ nǎ tiān yǒu kòng. Yǒu liǎng gè tóngshì de shíjiān wánquán duì bú shàng, yúshì dàjiā kāishǐ tǎolùn shì bú shì kěyǐ fēn chéng liǎng zǔ kāi. Tǎolùn fēnzǔ yòu huā le sìshí fēnzhōng. Zuìhòu juédìng: xià cì huìyì de shíjiān, zài fā yì fēng yóujiàn quèrèn. Sànhuì de shíhou, zuò wǒ pángbiān de tóngshì xiǎoshēng shuō:「Wǒ juéde wǒ de línghún gāngcái líkāi le shēntǐ dàyuē sìshíwǔ fēnzhōng.」Wǒ kàn le yì yǎn tā de bǐjìběn, shàngmiàn huà mǎn le xiǎo yú.",
+    "text_en": "Today we had a two-hour meeting. The agenda was to discuss the time of the next meeting. I am not joking. First the department head spent fifteen minutes explaining why we needed a meeting to discuss the time of the next meeting — because the last email discussion hadn't reached consensus. Then everyone took turns saying which days they were free. Two colleagues' schedules were completely incompatible, so the group started discussing whether to split into two sub-meetings. Discussing the split took another forty minutes. The final decision: the time of the next meeting would be confirmed by another email. As the meeting ended, my colleague sitting next to me whispered: 'I think my soul left my body for about forty-five minutes.' I glanced at his notebook — it was covered in little fish drawings.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "这次会议的议题是什么？",
+        "q_en": "What was this meeting's agenda?",
+        "options": [
+          {"text": "讨论新的项目方案", "pinyin": "tǎolùn xīn de xiàngmù fāng'àn", "text_en": "Discussing a new project plan", "correct": false},
+          {"text": "讨论下次会议的时间", "pinyin": "tǎolùn xià cì huìyì de shíjiān", "text_en": "Discussing the time of the next meeting", "correct": true},
+          {"text": "讨论部门预算", "pinyin": "tǎolùn bùmén yùsuàn", "text_en": "Discussing the department budget", "correct": false},
+          {"text": "讨论员工考核", "pinyin": "tǎolùn yuángōng kǎohé", "text_en": "Discussing employee reviews", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "会议最后的决定是什么？",
+        "q_en": "What was the final decision?",
+        "options": [
+          {"text": "确定了下次会议的时间", "pinyin": "quèdìng le xià cì huìyì de shíjiān", "text_en": "Set the time for the next meeting", "correct": false},
+          {"text": "取消了下次会议", "pinyin": "qǔxiāo le xià cì huìyì", "text_en": "Canceled the next meeting", "correct": false},
+          {"text": "再发一封邮件确认", "pinyin": "zài fā yì fēng yóujiàn quèrèn", "text_en": "Send another email to confirm", "correct": true},
+          {"text": "让主管自己决定", "pinyin": "ràng zhǔguǎn zìjǐ juédìng", "text_en": "Let the manager decide alone", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "同事的笔记本上画了什么？",
+        "q_en": "What was drawn on the colleague's notebook?",
+        "options": [
+          {"text": "会议笔记", "pinyin": "huìyì bǐjì", "text_en": "Meeting notes", "correct": false},
+          {"text": "小鱼", "pinyin": "xiǎo yú", "text_en": "Little fish", "correct": true},
+          {"text": "小花", "pinyin": "xiǎo huā", "text_en": "Little flowers", "correct": false},
+          {"text": "日历", "pinyin": "rìlì", "text_en": "A calendar", "correct": false}
+        ],
+        "difficulty": 0.2
+      }
+    ]
+  },
+  {
+    "id": "j5_food_001",
+    "title": "Grandmother's Dumplings",
+    "title_zh": "奶奶的饺子",
+    "hsk_level": 5,
+    "text_zh": "我奶奶包饺子从来不看食谱，也不量任何东西。面粉加多少水，全凭手感。馅儿的调味也是——一把盐、几滴酱油、一点姜末，她的「一把」「几滴」「一点」每次都不完全一样，但最后的味道却总是对的。我试过让她教我，她站在旁边说：「面粉不够，再加一点。」我问：多少算一点？她说：「你摸一下面团就知道了。」我摸了，完全不知道。这种知识没法用语言传递，只能通过几十年的重复来获得。现在奶奶手不太稳了，包出来的饺子有大有小，形状也不太规则。但味道还是一样的。也许味道是最后消失的东西。",
+    "text_pinyin": "Wǒ nǎinai bāo jiǎozi cónglái bú kàn shípǔ, yě bú liáng rènhé dōngxi. Miànfěn jiā duōshǎo shuǐ, quán píng shǒugǎn. Xiànr de tiáowèi yě shì — yì bǎ yán, jǐ dī jiàngyóu, yìdiǎn jiāng mò, tā de「yì bǎ」「jǐ dī」「yìdiǎn」měi cì dōu bù wánquán yíyàng, dàn zuìhòu de wèidào què zǒngshì duì de. Wǒ shì guò ràng tā jiāo wǒ, tā zhàn zài pángbiān shuō:「Miànfěn bú gòu, zài jiā yìdiǎn.」Wǒ wèn: duōshǎo suàn yìdiǎn? Tā shuō:「Nǐ mō yíxià miàntuán jiù zhīdào le.」Wǒ mō le, wánquán bù zhīdào. Zhè zhǒng zhīshi méi fǎ yòng yǔyán chuándì, zhǐ néng tōngguò jǐ shí nián de chóngfù lái huòdé. Xiànzài nǎinai shǒu bú tài wěn le, bāo chūlái de jiǎozi yǒu dà yǒu xiǎo, xíngzhuàng yě bú tài guīzé. Dàn wèidào háishì yíyàng de. Yěxǔ wèidào shì zuìhòu xiāoshī de dōngxi.",
+    "text_en": "My grandmother never looks at a recipe or measures anything when making dumplings. How much water to add to the flour — all by feel. Seasoning the filling too: a handful of salt, a few drops of soy sauce, a bit of minced ginger. Her 'handful,' 'few drops,' and 'a bit' are never exactly the same, but the final taste is always right. I once asked her to teach me. She stood beside me and said: 'Not enough flour, add a little more.' I asked: how much is a little? She said: 'Feel the dough and you'll know.' I felt it. I had no idea. This kind of knowledge can't be transmitted through language — it can only be acquired through decades of repetition. Now grandmother's hands aren't so steady, and her dumplings come out different sizes, not quite regular in shape. But the taste is still the same. Perhaps taste is the last thing to disappear.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "奶奶包饺子的特点是什么？",
+        "q_en": "What is distinctive about grandmother's dumpling-making?",
+        "options": [
+          {"text": "严格按照食谱", "pinyin": "yángé ànzhào shípǔ", "text_en": "Strictly follows a recipe", "correct": false},
+          {"text": "用精确的量杯量", "pinyin": "yòng jīngquè de liáng bēi liáng", "text_en": "Uses precise measuring cups", "correct": false},
+          {"text": "全凭手感，不量任何东西", "pinyin": "quán píng shǒugǎn, bú liáng rènhé dōngxi", "text_en": "All by feel, never measures anything", "correct": true},
+          {"text": "每次都看视频学习", "pinyin": "měi cì dōu kàn shìpín xuéxí", "text_en": "Watches videos to learn each time", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者学包饺子的结果怎样？",
+        "q_en": "How did the author's dumpling-learning go?",
+        "options": [
+          {"text": "马上学会了", "pinyin": "mǎshàng xuéhuì le", "text_en": "Learned immediately", "correct": false},
+          {"text": "摸了面团但完全不知道", "pinyin": "mō le miàntuán dàn wánquán bù zhīdào", "text_en": "Felt the dough but had no idea", "correct": true},
+          {"text": "做得比奶奶还好", "pinyin": "zuò de bǐ nǎinai hái hǎo", "text_en": "Made them better than grandmother", "correct": false},
+          {"text": "放弃了", "pinyin": "fàngqì le", "text_en": "Gave up", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "文章最后一句话的意思是什么？",
+        "q_en": "What does the last sentence mean?",
+        "options": [
+          {"text": "饺子的味道在变差", "pinyin": "jiǎozi de wèidào zài biàn chà", "text_en": "The dumpling taste is getting worse", "correct": false},
+          {"text": "即使身体衰老，烹饪的味道是最持久的", "pinyin": "jíshǐ shēntǐ shuāilǎo, pēngrèn de wèidào shì zuì chíjiǔ de", "text_en": "Even as the body ages, the taste of cooking endures longest", "correct": true},
+          {"text": "奶奶不再包饺子了", "pinyin": "nǎinai bú zài bāo jiǎozi le", "text_en": "Grandmother stopped making dumplings", "correct": false},
+          {"text": "饺子需要冷冻保存", "pinyin": "jiǎozi xūyào lěngdòng bǎocún", "text_en": "Dumplings need to be frozen to preserve", "correct": false}
+        ],
+        "difficulty": 0.4
+      }
+    ]
+  },
+  {
+    "id": "j5_explain_001",
+    "title": "Why Escalators Have Brushes",
+    "title_zh": "自动扶梯为什么有刷子",
+    "hsk_level": 5,
+    "text_zh": "你有没有注意过自动扶梯两侧底部那一排黑色的刷子？大多数人以为它们是用来清洁鞋子的。其实不是。那些刷子的真正作用是安全防护。自动扶梯的台阶和侧板之间有一条很窄的缝隙，如果鞋子、衣服或者包的带子被卷进去，后果可能很严重。刷子的存在是为了让你的脚本能地跟缝隙保持距离——当你感到刷子碰到鞋子或裤腿的时候，会不自觉地把脚往中间移。这是一种不需要文字说明的设计语言。好的公共设施设计就是这样：你甚至不知道它在保护你，但它确实在保护你。",
+    "text_pinyin": "Nǐ yǒu méiyǒu zhùyì guò zìdòng fútī liǎng cè dǐbù nà yì pái hēisè de shuāzi? Dàduōshù rén yǐwéi tāmen shì yòng lái qīngjié xiézi de. Qíshí bú shì. Nàxiē shuāzi de zhēnzhèng zuòyòng shì ānquán fánghù. Zìdòng fútī de táijiē hé cèbǎn zhī jiān yǒu yì tiáo hěn zhǎi de fèngxì, rúguǒ xiézi, yīfu huòzhě bāo de dàizi bèi juǎn jìnqù, hòuguǒ kěnéng hěn yánzhòng. Shuāzi de cúnzài shì wèi le ràng nǐ de jiǎo běnnéng de gēn fèngxì bǎochí jùlí — dāng nǐ gǎndào shuāzi pèng dào xiézi huò kùtuǐ de shíhou, huì bù zìjué de bǎ jiǎo wǎng zhōngjiān yí. Zhè shì yì zhǒng bù xūyào wénzì shuōmíng de shèjì yǔyán. Hǎo de gōnggòng shèshī shèjì jiù shì zhèyàng: nǐ shènzhì bù zhīdào tā zài bǎohù nǐ, dàn tā quèshí zài bǎohù nǐ.",
+    "text_en": "Have you ever noticed the row of black brushes at the bottom of escalator sides? Most people think they're for cleaning shoes. They're not. The real purpose of those brushes is safety. There's a very narrow gap between the escalator steps and the side panel — if shoes, clothing, or bag straps get pulled in, the consequences can be serious. The brushes exist to make your feet instinctively keep their distance from the gap — when you feel the brush touching your shoe or pant leg, you unconsciously move your foot toward the center. It's a design language that needs no written instructions. Good public infrastructure design works exactly this way: you don't even know it's protecting you, but it is.",
+    "questions": [
+      {
+        "type": "mc",
+        "q_zh": "自动扶梯的刷子真正的作用是什么？",
+        "q_en": "What is the real purpose of escalator brushes?",
+        "options": [
+          {"text": "清洁鞋子", "pinyin": "qīngjié xiézi", "text_en": "Cleaning shoes", "correct": false},
+          {"text": "装饰作用", "pinyin": "zhuāngshì zuòyòng", "text_en": "Decoration", "correct": false},
+          {"text": "安全防护", "pinyin": "ānquán fánghù", "text_en": "Safety protection", "correct": true},
+          {"text": "减少噪音", "pinyin": "jiǎnshǎo zàoyīn", "text_en": "Noise reduction", "correct": false}
+        ],
+        "difficulty": 0.2
+      },
+      {
+        "type": "mc",
+        "q_zh": "刷子怎样起到保护作用？",
+        "q_en": "How do the brushes provide protection?",
+        "options": [
+          {"text": "挡住危险的缝隙", "pinyin": "dǎng zhù wēixiǎn de fèngxì", "text_en": "Block the dangerous gap", "correct": false},
+          {"text": "发出警报声", "pinyin": "fāchū jǐngbào shēng", "text_en": "Sound an alarm", "correct": false},
+          {"text": "让人本能地把脚往中间移", "pinyin": "ràng rén běnnéng de bǎ jiǎo wǎng zhōngjiān yí", "text_en": "Make people instinctively move their feet to the center", "correct": true},
+          {"text": "让鞋子不会打滑", "pinyin": "ràng xiézi bú huì dǎhuá", "text_en": "Prevent shoes from slipping", "correct": false}
+        ],
+        "difficulty": 0.3
+      },
+      {
+        "type": "mc",
+        "q_zh": "作者认为好的公共设施设计是怎样的？",
+        "q_en": "What does the author think good public infrastructure design is like?",
+        "options": [
+          {"text": "需要很多文字说明", "pinyin": "xūyào hěn duō wénzì shuōmíng", "text_en": "Requires lots of written instructions", "correct": false},
+          {"text": "越贵越好", "pinyin": "yuè guì yuè hǎo", "text_en": "The more expensive the better", "correct": false},
+          {"text": "你不知道它在保护你，但它确实在保护你", "pinyin": "nǐ bù zhīdào tā zài bǎohù nǐ, dàn tā quèshí zài bǎohù nǐ", "text_en": "You don't know it's protecting you, but it is", "correct": true},
+          {"text": "让人害怕不敢靠近", "pinyin": "ràng rén hàipà bù gǎn kàojìn", "text_en": "Makes people afraid to approach", "correct": false}
+        ],
+        "difficulty": 0.3
+      }
+    ]
+  }
+]

@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Explain it's for your teacher and describe what you're looking for.",
                 "options": [
-                    {"text_zh": "是送给我的中文老师的，我想买一个实用又好看的礼物。", "text_pinyin": "shì sòng gěi wǒ de zhōngwén lǎoshī de, wǒ xiǎng mǎi yī ge shíyòng yòu hǎokàn de lǐwù.", "text_en": "It's for my Chinese teacher. I'd like something both practical and nice-looking.", "score": 1.0, "register": "neutral", "feedback": "Clear context and criteria — 实用又好看 gives the assistant something to work with."},
-                    {"text_zh": "送给老师的，不知道买什么好，你有什么建议吗？", "text_pinyin": "sòng gěi lǎoshī de, bù zhīdào mǎi shénme hǎo, nǐ yǒu shénme jiànyì ma?", "text_en": "It's for a teacher, I don't know what to buy, do you have any suggestions?", "score": 0.7, "register": "neutral", "feedback": "Honest and open to suggestions — though giving some criteria narrows the search."},
-                    {"text_zh": "是给老师买的，想要有中国特色的东西。", "text_pinyin": "shì gěi lǎoshī mǎi de, xiǎng yào yǒu zhōngguó tèsè de dōngxi.", "text_en": "It's for a teacher, I want something with Chinese characteristics.", "score": 0.6, "register": "neutral", "feedback": "Interesting angle, but a Chinese teacher might prefer something practical over something 'Chinese' — they already live in that culture."}
+                    {
+                        "text_zh": "可以换大一号的吗？",
+                        "text_pinyin": "kěyǐ huàn dà yī hào de ma?",
+                        "text_en": "Can I exchange for one size bigger?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain it's for your teacher and describe what you're looking for, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "是送给我的中文老师的，我想买一个实用又好看的礼物。",
+                        "text_pinyin": "shì sòng gěi wǒ de zhōngwén lǎoshī de, wǒ xiǎng mǎi yī ge shíyòng yòu hǎokàn de lǐwù.",
+                        "text_en": "It's for my Chinese teacher. I'd like something both practical and nice-looking.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Clear context and criteria — 实用又好看 gives the assistant something to work with."
+                    },
+                    {
+                        "text_zh": "三千三可以吗？没有电梯，六楼搬东西确实不太方便。",
+                        "text_pinyin": "sān qiān sān kěyǐ ma? méiyǒu diàntī, liù lóu bān dōngxi quèshí bú tài fāngbiàn.",
+                        "text_en": "How about 3,300? No elevator, and moving things to the 6th floor is really inconvenient.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to explain it's for your teacher and describe what you're looking for, but this doesn't fit the conversation."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond to the suggestion and ask about the price.",
                 "options": [
-                    {"text_zh": "茶叶礼盒挺好的。请问这个多少钱？可以帮我包装一下吗？", "text_pinyin": "cháyè lǐhé tǐng hǎo de. qǐngwèn zhè ge duōshao qián? kěyǐ bāng wǒ bāozhuāng yīxià ma?", "text_en": "The tea gift box looks nice. How much is it? Can you gift-wrap it for me?", "score": 1.0, "register": "neutral", "feedback": "Decisive and thorough — picks one, asks the price, and requests wrapping. Efficient shopping."},
-                    {"text_zh": "看起来不错，但是我的预算大概两百块左右。", "text_pinyin": "kàn qǐlai búcuò, dànshì wǒ de yùsuàn dàgài liǎng bǎi kuài zuǒyòu.", "text_en": "Looks nice, but my budget is around 200 yuan.", "score": 0.8, "register": "neutral", "feedback": "Smart to state your budget — saves time if the gift box is much more expensive."},
-                    {"text_zh": "有没有其他选择？我想多看看再决定。", "text_pinyin": "yǒu méiyǒu qítā xuǎnzé? wǒ xiǎng duō kànkan zài juédìng.", "text_en": "Are there other options? I'd like to look around more before deciding.", "score": 0.5, "register": "neutral", "feedback": "Reasonable but can slow things down — the assistant gave good suggestions, engaging with them is more productive."}
+                    {
+                        "text_zh": "有的，在这里。",
+                        "text_pinyin": "yǒu de, zài zhèlǐ.",
+                        "text_en": "Yes, here it is.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the suggestion and ask about the price, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "茶叶礼盒挺好的。请问这个多少钱？可以帮我包装一下吗？",
+                        "text_pinyin": "cháyè lǐhé tǐng hǎo de. qǐngwèn zhè ge duōshao qián? kěyǐ bāng wǒ bāozhuāng yīxià ma?",
+                        "text_en": "The tea gift box looks nice. How much is it? Can you gift-wrap it for me?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Decisive and thorough — picks one, asks the price, and requests wrapping. Efficient shopping."
+                    },
+                    {
+                        "text_zh": "好香啊！铁观音是什么类型的茶？每次泡多长时间？",
+                        "text_pinyin": "hǎo xiāng a! tiěguānyīn shì shénme lèixíng de chá? měi cì pào duō cháng shíjiān?",
+                        "text_en": "It smells wonderful! What type of tea is Tie Guan Yin? How long do you brew it each time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond to the suggestion and ask about the price, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],

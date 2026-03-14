@@ -1,0 +1,94 @@
+{
+    "title": "Saturday Morning Plans",
+    "title_zh": "周六早上的计划",
+    "hsk_level": 1,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 1,
+    "id": "gen_social_1_04_v0",
+    "tree": {
+        "setup": "Saturday morning. Your phone buzzes with a message from Xiao Fang. She's the kind of friend who plans weekends like military campaigns -- every hour accounted for, backup restaurants in case the first one is full, and an umbrella in her bag regardless of the forecast.",
+        "setup_zh": "周六早上。手机响了，小芳发来消息。她是那种把周末当战役来计划的朋友——每个小时都安排好，备选餐厅以防第一家满了，不管天气预报怎么说包里都有伞。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "今天你想出去玩吗？",
+                "text_pinyin": "jīntiān nǐ xiǎng chūqù wán ma?",
+                "text_en": "Do you want to go out and have fun today?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her invitation.",
+                "options": [
+                    {
+                        "text_zh": "好啊！去哪里？",
+                        "text_pinyin": "hǎo a! qù nǎlǐ?",
+                        "text_en": "Sure! Where to?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Fang sends a detailed itinerary within seconds. She has been waiting for this response since 6 AM. 去哪里 is the essential 'where to' question."
+                    },
+                    {
+                        "text_zh": "什么时候？",
+                        "text_pinyin": "shénme shíhou?",
+                        "text_en": "When?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「十点！」Xiao Fang replies instantly. She has clearly been planning this. 什么时候 covers all time-related questions."
+                    },
+                    {
+                        "text_zh": "今天我想在家。",
+                        "text_pinyin": "jīntiān wǒ xiǎng zài jiā.",
+                        "text_en": "Today I'd like to stay home.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Fang sends three sad-face emojis, then a photo of the beautiful weather outside, then a restaurant menu. She's not giving up that easily."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我们去公园走走，然后去吃饭，好不好？",
+                "text_pinyin": "wǒmen qù gōngyuán zǒuzou, ránhòu qù chī fàn, hǎo bu hǎo?",
+                "text_en": "Let's walk in the park, then go eat. Sound good?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Agree to the plan.",
+                "options": [
+                    {
+                        "text_zh": "好的！十点见！",
+                        "text_pinyin": "hǎo de! shí diǎn jiàn!",
+                        "text_en": "OK! See you at ten!",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "Xiao Fang sends a thumbs-up and starts packing her bag. It will contain: an umbrella, snacks, a portable charger, and a backup plan. 十点见 is clean and committed."
+                    },
+                    {
+                        "text_zh": "听你的！",
+                        "text_pinyin": "tīng nǐ de!",
+                        "text_en": "I'll follow your lead!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Music to Xiao Fang's ears. She was born to lead weekend outings. 听你的 literally means 'listen to yours' -- a natural way to let someone else decide."
+                    },
+                    {
+                        "text_zh": "太早了吧？",
+                        "text_pinyin": "tài zǎo le ba?",
+                        "text_en": "Isn't that too early?",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "Xiao Fang considers 10 AM to be sleeping in. She sends you a lecture about morning sunlight and productivity that reads like a wellness blog. 太早了 is grammatically perfect, though."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "太好了！记得穿舒服的鞋！",
+                "text_pinyin": "tài hǎo le! jìde chuān shūfu de xié!",
+                "text_en": "Great! Remember to wear comfortable shoes!"
+            }
+        ],
+        "cultural_note": "Weekend outings with friends often combine parks, shopping, and food in China. It's common for one person to take the lead in planning (做计划, zuò jìhuà). Parks are popular meeting spots, especially in the morning."
+    }
+}

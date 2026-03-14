@@ -1,0 +1,87 @@
+{
+    "title": "Planting a Tree Together",
+    "title_zh": "一起种树",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "Your neighborhood is holding a tree-planting event for Arbor Day. You're paired with a friendly retiree, Auntie Luo.",
+        "setup_zh": "小区在植树节举办种树活动。你和一位友好的退休阿姨——罗阿姨分到了一组。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "我们一起种这棵桂花树吧！你先挖坑，我来扶着树苗，好不好？",
+                "text_pinyin": "Wǒmen yīqǐ zhòng zhè kē guìhuā shù ba! Nǐ xiān wā kēng, wǒ lái fú zhe shùmiáo, hǎo bù hǎo?",
+                "text_en": "Let's plant this osmanthus tree together! You dig the hole, I'll hold the sapling — okay?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond and start working.",
+                "options": [
+                    {
+                        "text_zh": "好的！桂花树秋天开花一定很香。几年以后这里就变成小树林了。",
+                        "text_pinyin": "Hǎo de! Guìhuā shù qiūtiān kāihuā yīdìng hěn xiāng. Jǐ nián yǐhòu zhèlǐ jiù biàn chéng xiǎo shùlín le.",
+                        "text_en": "Okay! The osmanthus blooming in autumn will smell wonderful. In a few years this will be a little grove.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic and forward-looking — sees the future beauty."
+                    },
+                    {
+                        "text_zh": "好，我来挖。",
+                        "text_pinyin": "Hǎo, wǒ lái wā.",
+                        "text_en": "Okay, I'll dig.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Helpful but no conversation."
+                    },
+                    {
+                        "text_zh": "坑要挖多深？",
+                        "text_pinyin": "Kēng yào wā duō shēn?",
+                        "text_en": "How deep should the hole be?",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Practical question but misses the heart of the moment."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "对！到时候秋天来这里散步，闻着桂花香，多美啊。我年轻的时候也种过很多树，现在那些树都长大了。种树就是这样——你种下去的时候是小苗，等你老了它就变成大树了。",
+                "text_pinyin": "Duì! Dào shíhou qiūtiān lái zhèlǐ sànbù, wén zhe guìhuā xiāng, duō měi a. Wǒ niánqīng de shíhou yě zhòng guò hěn duō shù, xiànzài nàxiē shù dōu zhǎng dà le. Zhòng shù jiù shì zhèyàng — nǐ zhòng xiàqù de shíhou shì xiǎo miáo, děng nǐ lǎo le tā jiù biàn chéng dà shù le.",
+                "text_en": "Right! Walking here in autumn, the osmanthus fragrance — how beautiful. When I was young I planted many trees too — they've all grown big now. That's how tree-planting works — you plant a seedling, and by the time you're old, it's become a big tree."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her reflection on time and trees.",
+                "options": [
+                    {
+                        "text_zh": "种树就是给未来的礼物。罗阿姨，您以前种的树，我们都在享受呢。",
+                        "text_pinyin": "Zhòng shù jiù shì gěi wèilái de lǐwù. Luó āyí, nín yǐqián zhòng de shù, wǒmen dōu zài xiǎngshòu ne.",
+                        "text_en": "Planting trees is a gift for the future. Auntie Luo, the trees you planted — we're all enjoying them now.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Connects her past effort to present benefit — deeply respectful."
+                    },
+                    {
+                        "text_zh": "是啊，时间过得真快。",
+                        "text_pinyin": "Shì a, shíjiān guò de zhēn kuài.",
+                        "text_en": "Yeah, time really flies.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Generic response."
+                    },
+                    {
+                        "text_zh": "种好了！下一棵吧。",
+                        "text_pinyin": "Zhòng hǎo le! Xià yī kē ba.",
+                        "text_en": "Done! On to the next one.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Task-focused but misses the reflection."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Arbor Day (植树节, March 12th) is widely celebrated in China with community planting events. Osmanthus (桂花) is cherished for its sweet autumn fragrance. The metaphor of trees growing with time reflects Chinese values of long-term thinking and leaving something for future generations."
+    },
+    "hsk_level": 3
+}

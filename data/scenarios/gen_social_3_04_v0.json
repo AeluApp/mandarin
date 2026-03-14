@@ -1,0 +1,124 @@
+{
+    "title": "The Long Weekend Plan",
+    "title_zh": "小长假计划",
+    "hsk_level": 3,
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_social_3_04_v0",
+    "tree": {
+        "setup": "A cafe on a Wednesday afternoon. The National Day holiday is next week -- seven glorious days off. Your friend Xiao Nan has pulled up a travel app and is scrolling through destinations with the energy of a mission planner. She wants to take a trip together but you haven't decided whether to travel or just rest at home. Xiao Nan considers 'resting at home' a moral failing during a long holiday.",
+        "setup_zh": "周三下午的咖啡厅。下周就是国庆节——整整七天假。你的朋友小南打开了旅游App，像任务规划师一样滚动浏览目的地。她想一起去旅行，但你还没决定是出去玩还是在家休息。小南认为长假在家休息是一种道德过失。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "国庆七天假你不会真的打算在家待着吧？来，我们一起去旅游！我找了几个地方。",
+                "text_pinyin": "guóqìng qī tiān jià nǐ bú huì zhēn de dǎsuàn zài jiā dāi zhe ba? lái, wǒmen yìqǐ qù lǚyóu! wǒ zhǎo le jǐ ge dìfang.",
+                "text_en": "You're not really planning to stay home for the seven-day National Day holiday, are you? Come on, let's travel together! I've found a few places."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her travel proposal.",
+                "options": [
+                    {
+                        "text_zh": "想去是想去，但是国庆到处都是人啊。你找了什么地方？有没有不那么热门的？",
+                        "text_pinyin": "xiǎng qù shì xiǎng qù, dànshì guóqìng dàochù dōu shì rén a. nǐ zhǎo le shénme dìfang? yǒu méiyǒu bú nàme rèmén de?",
+                        "text_en": "I do want to go, but everywhere is crowded during National Day. What places did you find? Anything not so popular?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「我就知道你会这么说！所以我找了一些小众的地方。」Xiao Nan swipes to her secret list. 到处都是人 is 'people everywhere.' 热门 is 'popular/trending.' 小众 means 'niche/off the beaten path.'"
+                    },
+                    {
+                        "text_zh": "我本来打算在家休息。最近工作太累了。",
+                        "text_pinyin": "wǒ běnlái dǎsuàn zài jiā xiūxi. zuìjìn gōngzuò tài lèi le.",
+                        "text_en": "I was planning to rest at home. Work has been too tiring recently.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Nan looks at you with deep concern.「累了才更要出去啊！换个环境比待在家里更能放松。」本来打算 is 'originally planned.' 换个环境 is 'change of scenery.' She has a point, philosophically."
+                    },
+                    {
+                        "text_zh": "好啊！预算大概多少？我不想花太多钱。",
+                        "text_pinyin": "hǎo a! yùsuàn dàgài duōshao? wǒ bù xiǎng huā tài duō qián.",
+                        "text_en": "Sure! What's the rough budget? I don't want to spend too much.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「放心！有便宜的方案。住青旅、坐高铁，三四天的话两三千够了。」预算 is 'budget.' 方案 is 'plan/option.' 青旅 is 'youth hostel.' Setting financial expectations early prevents awkwardness later."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "我找了三个地方：一是去云南大理，风景好但是机票贵。二是去安徽黄山，高铁能到。三是去浙江莫干山，近、便宜、人少。你对哪个最感兴趣？",
+                "text_pinyin": "wǒ zhǎo le sān ge dìfang: yī shì qù yúnnán dàlǐ, fēngjǐng hǎo dànshì jīpiào guì. èr shì qù ānhuī huángshān, gāotiě néng dào. sān shì qù zhèjiāng mògānshān, jìn, piányi, rén shǎo. nǐ duì nǎ ge zuì gǎn xìngqù?",
+                "text_en": "I found three places: one is Dali in Yunnan, beautiful but expensive flights. Two is Huangshan in Anhui, accessible by high-speed train. Three is Moganshan in Zhejiang, close, cheap, and not crowded. Which interests you most?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Discuss the options and share your preference.",
+                "options": [
+                    {
+                        "text_zh": "莫干山听起来最合适。近、人少、价格也合理。我们可以住民宿，周围有什么可以玩的？",
+                        "text_pinyin": "mògānshān tīng qǐlai zuì héshì. jìn, rén shǎo, jiàgé yě hélǐ. wǒmen kěyǐ zhù mínsu, zhōuwéi yǒu shénme kěyǐ wán de?",
+                        "text_en": "Moganshan sounds most suitable. Close, not crowded, reasonable price. We could stay at a guesthouse, what's there to do around there?",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「竹林徒步、泡温泉、还有很多特色民宿！我已经看了几家，发照片给你。」民宿 is 'guesthouse/B&B.' 合理 is 'reasonable.' 竹林 is 'bamboo forest.' Xiao Nan has clearly pre-researched this option."
+                    },
+                    {
+                        "text_zh": "大理我一直想去。国庆机票多少钱？如果不太贵的话我想去大理。",
+                        "text_pinyin": "dàlǐ wǒ yìzhí xiǎng qù. guóqìng jīpiào duōshao qián? rúguǒ bú tài guì de huà wǒ xiǎng qù dàlǐ.",
+                        "text_en": "I've always wanted to go to Dali. How much are National Day flights? If they're not too expensive I'd like to go there.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Xiao Nan checks.「单程一千八……往返三千多。」She winces. 一直想去 is 'have always wanted to go.' National Day flight prices are notoriously inflated."
+                    },
+                    {
+                        "text_zh": "黄山吧。爬山可以锻炼身体，而且我想看日出。",
+                        "text_pinyin": "huángshān ba. pá shān kěyǐ duànliàn shēntǐ, érqiě wǒ xiǎng kàn rìchū.",
+                        "text_en": "Huangshan. Hiking is good exercise, and I want to see the sunrise.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「黄山日出确实很美！但是国庆人会很多，山上住宿要提前订。」锻炼身体 is 'exercise.' 日出 is 'sunrise.' Huangshan during National Day is spectacular but packed."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好，就去莫干山！我负责订民宿和查交通。你负责查那边有什么好吃的和好玩的。出发前我们再碰一次头确认。",
+                "text_pinyin": "hǎo, jiù qù mògānshān! wǒ fùzé dìng mínsu hé chá jiāotōng. nǐ fùzé chá nàbiān yǒu shénme hǎochī de hé hǎowán de. chūfā qián wǒmen zài pèng yí cì tóu quèrèn.",
+                "text_en": "OK, Moganshan it is! I'll handle booking the guesthouse and checking transport. You research what's good to eat and do there. We'll meet again before departure to confirm."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm your role and finalize plans.",
+                "options": [
+                    {
+                        "text_zh": "没问题！我去查攻略。对了，还有谁一起去？人多的话可以包一辆车。",
+                        "text_pinyin": "méi wèntí! wǒ qù chá gōnglüè. duì le, hái yǒu shéi yìqǐ qù? rén duō de huà kěyǐ bāo yí liàng chē.",
+                        "text_en": "No problem! I'll research travel guides. By the way, who else is going? If there are more people we could charter a car.",
+                        "score": 1.0,
+                        "register": "casual",
+                        "feedback": "「小周和阿杰也想去！五个人刚好一辆车！」攻略 is 'travel guide/strategy.' 包车 is 'charter a car' -- often cheaper than individual transport for groups. Thinking about logistics helps."
+                    },
+                    {
+                        "text_zh": "好！需要带什么？爬山的话要准备什么装备？",
+                        "text_pinyin": "hǎo! xūyào dài shénme? pá shān de huà yào zhǔnbèi shénme zhuāngbèi?",
+                        "text_en": "Great! What do I need to bring? What gear do we need for hiking?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「舒服的鞋子最重要。防晒霜、水壶、薄外套——山上比较凉。」装备 is 'gear/equipment.' Practical preparation shows commitment to the plan."
+                    },
+                    {
+                        "text_zh": "三天够玩吗？要不要多待一天？反正放七天假。",
+                        "text_pinyin": "sān tiān gòu wán ma? yào bu yào duō dāi yì tiān? fǎnzhèng fàng qī tiān jià.",
+                        "text_en": "Is three days enough? Should we stay an extra day? We have seven days off after all.",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「三天差不多。留几天在家休息也好，不然假期比上班还累。」够玩 is 'enough to enjoy.' 反正 is 'anyway/after all.' Balancing travel and rest is mature planning."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "National Day (国庆节, guóqìng jié, October 1-7) is China's longest holiday besides Spring Festival. 黄金周 (huángjīn zhōu, 'Golden Week') brings massive travel crowds. 攻略 (gōnglüè, travel strategy/guide) is essential for planning. 民宿 (mínsù) are increasingly popular alternatives to hotels. 小众 (xiǎozhòng, niche/off-beaten-path) destinations are prized."
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "title": "Choosing a Movie",
+    "title_zh": "选电影",
+    "register": "casual",
+    "scenario_type": "daily_life",
+    "difficulty": 2,
+    "tree": {
+        "setup": "You and your friend Xiao Hua are at the cinema, trying to decide which movie to watch.",
+        "setup_zh": "你和朋友小华在电影院，正在纠结看哪部电影。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "有一部新的动画片，听说很好看。还有一部爱情片。你想看哪个？",
+                "text_pinyin": "Yǒu yī bù xīn de dònghuà piàn, tīngshuō hěn hǎokàn. Hái yǒu yī bù àiqíng piàn. Nǐ xiǎng kàn nǎge?",
+                "text_en": "There's a new animated film that's supposed to be great. And a romance. Which one do you want?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose a movie.",
+                "options": [
+                    {
+                        "text_zh": "我投动画片！好的动画片大人看也很感动。而且我们可以放松一下，不用想太多。",
+                        "text_pinyin": "Wǒ tóu dònghuà piàn! Hǎo de dònghuà piàn dàrén kàn yě hěn gǎndòng. Érqiě wǒmen kěyǐ fàngsōng yīxià, bú yòng xiǎng tài duō.",
+                        "text_en": "I vote animated! Good animation is moving even for adults. Plus we can relax without thinking too much.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Enthusiastic choice with good reasoning."
+                    },
+                    {
+                        "text_zh": "都行，你选吧。",
+                        "text_pinyin": "Dōu xíng, nǐ xuǎn ba.",
+                        "text_en": "Either is fine, you choose.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Deferring."
+                    },
+                    {
+                        "text_zh": "我其实不太想看电影。",
+                        "text_pinyin": "Wǒ qíshí bú tài xiǎng kàn diànyǐng.",
+                        "text_en": "I don't really want to watch a movie.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Why are you at the cinema then?"
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好！动画片就动画片。我去买爆米花和饮料，你去占座位。要甜的还是咸的爆米花？",
+                "text_pinyin": "Hǎo! Dònghuà piàn jiù dònghuà piàn. Wǒ qù mǎi bàomǐhuā hé yǐnliào, nǐ qù zhàn zuòwèi. Yào tián de háishi xián de bàomǐhuā?",
+                "text_en": "Okay! Animated it is. I'll get popcorn and drinks, you grab seats. Sweet or salty popcorn?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Choose popcorn and respond.",
+                "options": [
+                    {
+                        "text_zh": "甜的！然后再来一杯可乐。我先去找好座位，中间的位子看电影最舒服。",
+                        "text_pinyin": "Tián de! Ránhòu zài lái yī bēi kělè. Wǒ xiān qù zhǎo hǎo zuòwèi, zhōngjiān de wèizi kàn diànyǐng zuì shūfu.",
+                        "text_en": "Sweet! And a cola. I'll find good seats — the middle ones are best for watching.",
+                        "score": 3,
+                        "register": "casual",
+                        "feedback": "Practical and fun — good teamwork."
+                    },
+                    {
+                        "text_zh": "随便。",
+                        "text_pinyin": "Suíbiàn.",
+                        "text_en": "Whatever.",
+                        "score": 1,
+                        "register": "casual",
+                        "feedback": "Disengaged."
+                    },
+                    {
+                        "text_zh": "我不吃爆米花。",
+                        "text_pinyin": "Wǒ bù chī bàomǐhuā.",
+                        "text_en": "I don't eat popcorn.",
+                        "score": 2,
+                        "register": "casual",
+                        "feedback": "Fine but doesn't add to the fun."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Going to the cinema is one of the most popular friend activities in Chinese cities. The sweet vs. salty popcorn debate is a universal conversation starter. Animated films are increasingly appreciated by adult audiences in China."
+    },
+    "hsk_level": 3
+}

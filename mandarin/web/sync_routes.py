@@ -9,8 +9,10 @@ import sqlite3
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 
+from datetime import datetime, timezone
+
 from .. import db
-from .api_errors import api_error, AUTH_REQUIRED, VALIDATION_ERROR
+from .api_errors import api_error, api_error_handler, AUTH_REQUIRED, VALIDATION_ERROR
 
 logger = logging.getLogger(__name__)
 
@@ -24,52 +26,58 @@ def require_auth():
 
 
 @sync_bp.route("/push", methods=["POST"])
+@api_error_handler("Sync push")
 def sync_push():
     """Accept batched actions from the offline queue.
 
     POST /api/sync/push
     Body: {"actions": [{"type": "drill_result", "data": {...}, "timestamp": "..."}]}
     """
-    data = request.get_json(silent=True) or {}
-    actions = data.get("actions", [])
+    try:
+        data = request.get_json(silent=True) or {}
+        actions = data.get("actions", [])
 
-    if not isinstance(actions, list):
-        return api_error(VALIDATION_ERROR, "actions must be a list.")
+        if not isinstance(actions, list):
+            return api_error(VALIDATION_ERROR, "actions must be a list.")
 
-    user_id = current_user.id
-    processed = 0
-    errors = []
+        user_id = current_user.id
+        processed = 0
+        errors = []
 
-    with db.connection() as conn:
-        for i, action in enumerate(actions):
-            action_type = action.get("type", "")
-            action_data = action.get("data", {})
-            timestamp = action.get("timestamp", "")
+        with db.connection() as conn:
+            for i, action in enumerate(actions):
+                action_type = action.get("type", "")
+                action_data = action.get("data", {})
+                timestamp = action.get("timestamp", "")
 
-            try:
-                if action_type == "drill_result":
-                    _process_drill_result(conn, user_id, action_data, timestamp)
-                    processed += 1
-                elif action_type == "vocab_encounter":
-                    _process_vocab_encounter(conn, user_id, action_data)
-                    processed += 1
-                elif action_type == "media_watched":
-                    _process_media_watched(conn, action_data)
-                    processed += 1
-                else:
-                    errors.append({"index": i, "error": f"Unknown action type: {action_type}"})
-            except (sqlite3.Error, KeyError, TypeError, ValueError) as e:
-                logger.warning("sync push action %d failed: %s", i, e)
-                errors.append({"index": i, "error": str(e)})
+                try:
+                    if action_type == "drill_result":
+                        _process_drill_result(conn, user_id, action_data, timestamp)
+                        processed += 1
+                    elif action_type == "vocab_encounter":
+                        _process_vocab_encounter(conn, user_id, action_data)
+                        processed += 1
+                    elif action_type == "media_watched":
+                        _process_media_watched(conn, action_data)
+                        processed += 1
+                    else:
+                        errors.append({"index": i, "error": f"Unknown action type: {action_type}"})
+                except (sqlite3.Error, KeyError, TypeError, ValueError) as e:
+                    logger.warning("sync push action %d failed: %s", i, e)
+                    errors.append({"index": i, "error": str(e)})
 
-    return jsonify({
-        "processed": processed,
-        "errors": errors,
-        "total": len(actions),
-    })
+        return jsonify({
+            "processed": processed,
+            "errors": errors,
+            "total": len(actions),
+        })
+    except (sqlite3.Error, OSError, KeyError, TypeError) as e:
+        logger.error("sync push error: %s", e, exc_info=True)
+        return api_error(VALIDATION_ERROR, "Sync push failed.", 500)
 
 
 @sync_bp.route("/pull")
+@api_error_handler("Sync pull")
 def sync_pull():
     """Return new content/progress since a timestamp.
 
@@ -117,6 +125,7 @@ def sync_pull():
 
 
 @sync_bp.route("/state")
+@api_error_handler("Sync state")
 def sync_state():
     """Return a state hash for quick client-side comparison.
 
@@ -167,18 +176,19 @@ def _process_drill_result(conn, user_id, data, timestamp):
     ).fetchone()
 
     if row:
+        ts = timestamp or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         if correct:
             conn.execute(
                 "UPDATE progress SET streak_correct = streak_correct + 1, streak_incorrect = 0, "
                 "total_attempts = total_attempts + 1, total_correct = total_correct + 1, "
                 "last_review_date = ? WHERE id = ?",
-                (timestamp or "datetime('now')", row["id"]),
+                (ts, row["id"]),
             )
         else:
             conn.execute(
                 "UPDATE progress SET streak_incorrect = streak_incorrect + 1, streak_correct = 0, "
                 "total_attempts = total_attempts + 1, last_review_date = ? WHERE id = ?",
-                (timestamp or "datetime('now')", row["id"]),
+                (ts, row["id"]),
             )
         conn.commit()
 

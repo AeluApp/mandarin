@@ -1,0 +1,124 @@
+{
+    "title": "The Voicemail Artist",
+    "title_zh": "语音留言艺术家",
+    "hsk_level": 3,
+    "register": "neutral",
+    "scenario_type": "daily_life",
+    "difficulty": 3,
+    "id": "gen_phone_3_01_v0",
+    "tree": {
+        "setup": "You're calling your Chinese tutor, Teacher Gao, to reschedule tomorrow's lesson. She doesn't pick up. Her voicemail greeting is a thirty-second poem about the beauty of leaving messages. After the beep, you need to leave a clear voicemail. Later, she calls you back while you're in a noisy cafe.",
+        "setup_zh": "你打电话给中文家教高老师，想改明天的课。她没接。她的语音信箱问候语是一首三十秒的诗，关于留言的美好。滴声之后，你要留一条清楚的语音。后来她在你在嘈杂的咖啡厅时回了电话。",
+        "turns": [
+            {
+                "speaker": "npc",
+                "text_zh": "您好，我是高老师。我现在不方便接电话，请留言，我会尽快回复您。",
+                "text_pinyin": "nín hǎo, wǒ shì gāo lǎoshī. wǒ xiànzài bù fāngbiàn jiē diànhuà, qǐng liúyán, wǒ huì jǐnkuài huífù nín.",
+                "text_en": "Hello, this is Teacher Gao. I can't take calls right now, please leave a message and I'll get back to you soon."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Leave a voicemail explaining you need to reschedule.",
+                "options": [
+                    {
+                        "text_zh": "高老师您好，我是王明。明天的课我有事来不了，可以改到后天吗？请您回电话，谢谢。",
+                        "text_pinyin": "gāo lǎoshī nín hǎo, wǒ shì wáng míng. míngtiān de kè wǒ yǒu shì lái bu liǎo, kěyǐ gǎi dào hòutiān ma? qǐng nín huí diànhuà, xièxie.",
+                        "text_en": "Hello Teacher Gao, I'm Wang Ming. I can't make tomorrow's class due to something coming up. Can we move it to the day after? Please call me back, thanks.",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect voicemail: name, reason, proposed new time, request for callback. 有事来不了 is 'have something and can't come.' 改到 means 'reschedule to.' Teacher Gao would approve of this structure."
+                    },
+                    {
+                        "text_zh": "高老师，明天的课我想改一下时间。您有空的时候给我回电话。",
+                        "text_pinyin": "gāo lǎoshī, míngtiān de kè wǒ xiǎng gǎi yíxià shíjiān. nín yǒu kòng de shíhou gěi wǒ huí diànhuà.",
+                        "text_en": "Teacher Gao, I'd like to change the time for tomorrow's class. Call me back when you're free.",
+                        "score": 0.7,
+                        "register": "neutral",
+                        "feedback": "「改一下时间」is clear but no name and no proposed alternative leaves Teacher Gao guessing. 有空的时候 is 'when you're free.' A good voicemail identifies who you are."
+                    },
+                    {
+                        "text_zh": "老师，是我！明天不行了，回头再说吧。",
+                        "text_pinyin": "lǎoshī, shì wǒ! míngtiān bù xíng le, huítóu zài shuō ba.",
+                        "text_en": "Teacher, it's me! Tomorrow doesn't work, let's talk about it later.",
+                        "score": 0.3,
+                        "register": "casual",
+                        "feedback": "「是我」-- but who is 'me'? Teacher Gao has many students. 回头再说 means 'we'll talk later' -- too vague for a voicemail. Always say your name."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "王明你好！刚才看到你的留言。后天下午可以，但是只有两点到三点有空。你那个时间方便吗？",
+                "text_pinyin": "wáng míng nǐ hǎo! gāngcái kàndào nǐ de liúyán. hòutiān xiàwǔ kěyǐ, dànshì zhǐyǒu liǎng diǎn dào sān diǎn yǒu kòng. nǐ nà ge shíjiān fāngbiàn ma?",
+                "text_en": "Wang Ming, hi! Just saw your message. The day after tomorrow works, but I only have 2 to 3 PM free. Does that time work for you?"
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Respond to her callback -- you're in a noisy cafe.",
+                "options": [
+                    {
+                        "text_zh": "高老师，不好意思，我这边有点吵。两点到三点没问题！地点还是老地方吗？",
+                        "text_pinyin": "gāo lǎoshī, bù hǎoyìsi, wǒ zhèbiān yǒudiǎn chǎo. liǎng diǎn dào sān diǎn méi wèntí! dìdiǎn háishi lǎo dìfang ma?",
+                        "text_en": "Teacher Gao, sorry, it's a bit noisy on my end. 2 to 3 is no problem! Same place as usual?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Acknowledging the noise is polite and practical. 老地方 is 'the usual place' -- it implies established rapport. Teacher Gao appreciates students who confirm details."
+                    },
+                    {
+                        "text_zh": "好的！后天两点见。对了，我们上次学到哪里了？",
+                        "text_pinyin": "hǎo de! hòutiān liǎng diǎn jiàn. duì le, wǒmen shàng cì xué dào nǎlǐ le?",
+                        "text_en": "OK! See you at 2 the day after tomorrow. By the way, where did we leave off last time?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "「学到哪里了」is 'where did we get to in studying' -- a great question but maybe not ideal over a noisy phone call. 对了 is 'by the way' or 'oh right.'"
+                    },
+                    {
+                        "text_zh": "什么？听不清楚！我在咖啡厅，等一下我出去再打给你！",
+                        "text_pinyin": "shénme? tīng bu qīngchu! wǒ zài kāfēitīng, děng yíxià wǒ chūqù zài dǎ gěi nǐ!",
+                        "text_en": "What? I can't hear clearly! I'm in a cafe, let me go outside and call you back!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Honest and practical. 听不清楚 is 'can't hear clearly.' 出去再打给你 is 'go outside and call you again.' Better than pretending to hear and getting the time wrong."
+                    }
+                ]
+            },
+            {
+                "speaker": "npc",
+                "text_zh": "好的，后天两点老地方见！记得带上次的作业。这次我们学第七课。",
+                "text_pinyin": "hǎo de, hòutiān liǎng diǎn lǎo dìfang jiàn! jìde dài shàng cì de zuòyè. zhè cì wǒmen xué dì qī kè.",
+                "text_en": "OK, see you at 2 the day after tomorrow at the usual place! Remember to bring last time's homework. This time we'll study Lesson 7."
+            },
+            {
+                "speaker": "player",
+                "prompt_en": "Confirm and end the call.",
+                "options": [
+                    {
+                        "text_zh": "好的，作业我一定带。谢谢高老师，后天见！",
+                        "text_pinyin": "hǎo de, zuòyè wǒ yídìng dài. xièxie gāo lǎoshī, hòutiān jiàn!",
+                        "text_en": "OK, I'll definitely bring the homework. Thank you Teacher Gao, see you the day after tomorrow!",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "一定 adds emphasis -- 'I'll definitely bring it.' Confirming the homework detail shows you were listening carefully even in the noisy cafe. Teacher Gao hangs up satisfied."
+                    },
+                    {
+                        "text_zh": "收到！后天见！",
+                        "text_pinyin": "shōu dào! hòutiān jiàn!",
+                        "text_en": "Got it! See you the day after tomorrow!",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "收到 literally means 'received' -- very common in Chinese phone/text communication, like 'roger that.' Brief but clear."
+                    },
+                    {
+                        "text_zh": "等等，第七课？我以为是第六课。我是不是落了一课？",
+                        "text_pinyin": "děng děng, dì qī kè? wǒ yǐwéi shì dì liù kè. wǒ shì bu shì là le yì kè?",
+                        "text_en": "Wait, Lesson 7? I thought it was Lesson 6. Did I miss a lesson?",
+                        "score": 0.7,
+                        "register": "casual",
+                        "feedback": "Teacher Gao pauses.「上次我们已经学了第六课啊。你没看笔记吗？」以为 is 'I thought/assumed.' 落了 means 'missed/fell behind.' Clarifying is better than showing up to the wrong lesson."
+                    }
+                ]
+            }
+        ],
+        "cultural_note": "Phone etiquette in China: always identify yourself when leaving a voicemail (说你是谁). 收到 (shōu dào, 'received') is the most common brief phone/WeChat acknowledgment. When you can't hear clearly, saying 听不清楚 and offering to call back is more polite than shouting."
+    }
+}

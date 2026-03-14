@@ -19,9 +19,28 @@
                 "speaker": "player",
                 "prompt_en": "Tell them you want to exchange money.",
                 "options": [
-                    {"text_zh": "我想换一些人民币，请问汇率是多少？", "text_pinyin": "wǒ xiǎng huàn yīxiē rénmínbì, qǐngwèn huìlǜ shì duōshao?", "text_en": "I'd like to exchange some RMB. What's the exchange rate?", "score": 1.0, "register": "neutral", "feedback": "Excellent — 换 for exchange, 汇率 for rate, polite with 请问."},
-                    {"text_zh": "换钱。", "text_pinyin": "huàn qián.", "text_en": "Exchange money.", "score": 0.5, "register": "blunt", "feedback": "Grammatically fine but too abrupt for a bank. Adding 我想 and 请问 makes it appropriate."},
-                    {"text_zh": "我要办理换钱的手续。", "text_pinyin": "wǒ yào bànlǐ huàn qián de shǒuxù.", "text_en": "I want to handle the money exchange procedures.", "score": 0.7, "register": "formal", "feedback": "Good use of 办理 and 手续, but a bit overly formal. 我想换钱 is more natural here."}
+                    {
+                        "text_zh": "谢谢！我喝过一些，但是不太了解茶艺，今天想好好学一学。",
+                        "text_pinyin": "xièxie! wǒ hē guò yīxiē, dànshì bú tài liǎojiě cháyì, jīntiān xiǎng hǎohǎo xué yī xué.",
+                        "text_en": "Thanks! I've had some, but I don't know much about tea ceremony. I'd like to learn properly today.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them you want to exchange money, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "好香啊！铁观音是什么类型的茶？每次泡多长时间？",
+                        "text_pinyin": "hǎo xiāng a! tiěguānyīn shì shénme lèixíng de chá? měi cì pào duō cháng shíjiān?",
+                        "text_en": "It smells wonderful! What type of tea is Tie Guan Yin? How long do you brew it each time?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to tell them you want to exchange money, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "我想换一些人民币，请问汇率是多少？",
+                        "text_pinyin": "wǒ xiǎng huàn yīxiē rénmínbì, qǐngwèn huìlǜ shì duōshao?",
+                        "text_en": "I'd like to exchange some RMB. What's the exchange rate?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Excellent — 换 for exchange, 汇率 for rate, polite with 请问."
+                    }
                 ]
             },
             {
@@ -34,9 +53,28 @@
                 "speaker": "player",
                 "prompt_en": "Respond and ask about the process.",
                 "options": [
-                    {"text_zh": "给您。请问大概需要多长时间？", "text_pinyin": "gěi nín. qǐngwèn dàgài xūyào duō cháng shíjiān?", "text_en": "Here you go. About how long will it take?", "score": 1.0, "register": "neutral", "feedback": "Perfect — polite handoff with 给您 and a natural follow-up question."},
-                    {"text_zh": "这是我的护照。", "text_pinyin": "zhè shì wǒ de hùzhào.", "text_en": "This is my passport.", "score": 0.7, "register": "neutral", "feedback": "Fine, but you missed a chance to ask about timing with 多长时间."},
-                    {"text_zh": "在这里。还要别的吗？", "text_pinyin": "zài zhèlǐ. hái yào biéde ma?", "text_en": "Here. Need anything else?", "score": 0.4, "register": "casual", "feedback": "Reversed the dynamic — you're the customer, not the teller. Let them guide the process."}
+                    {
+                        "text_zh": "给您。请问大概需要多长时间？",
+                        "text_pinyin": "gěi nín. qǐngwèn dàgài xūyào duō cháng shíjiān?",
+                        "text_en": "Here you go. About how long will it take?",
+                        "score": 1.0,
+                        "register": "neutral",
+                        "feedback": "Perfect — polite handoff with 给您 and a natural follow-up question."
+                    },
+                    {
+                        "text_zh": "我们可以坐高铁去，虽然时间长一点，但是便宜很多。",
+                        "text_pinyin": "wǒmen kěyǐ zuò gāotiě qù, suīrán shíjiān cháng yīdiǎn, dànshì piányi hěn duō.",
+                        "text_en": "We can take the high-speed train. It takes longer, but it's much cheaper.",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond and ask about the process, but this doesn't fit the conversation."
+                    },
+                    {
+                        "text_zh": "不好意思，我房间的空调好像坏了，能不能帮我解决一下？",
+                        "text_pinyin": "bù hǎoyìsi, wǒ fángjiān de kōngtiáo hǎoxiàng huài le, néng bù néng bāng wǒ jiějué yīxià?",
+                        "text_en": "Excuse me, the AC in my room seems broken. Could you help me fix this?",
+                        "score": 0.0,
+                        "feedback": "Off-topic — you were asked to respond and ask about the process, but this doesn't fit the conversation."
+                    }
                 ]
             }
         ],
