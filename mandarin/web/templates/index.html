@@ -376,8 +376,11 @@
               </span>
             </div>
             <div id="change-password-form" class="settings-inline-form hidden">
+              <label for="cp-old" class="sr-only">Current password</label>
               <input type="password" id="cp-old" placeholder="Current password" class="input-field" autocomplete="current-password">
+              <label for="cp-new" class="sr-only">New password</label>
               <input type="password" id="cp-new" placeholder="New password" class="input-field" autocomplete="new-password">
+              <label for="cp-confirm" class="sr-only">Confirm new password</label>
               <input type="password" id="cp-confirm" placeholder="Confirm new password" class="input-field" autocomplete="new-password">
               <div class="settings-form-actions">
                 <button id="cp-submit" class="btn-primary btn-sm" type="button">Update password</button>

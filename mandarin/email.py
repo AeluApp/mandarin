@@ -203,7 +203,7 @@ def send_subscription_confirmed(to_email: str, display_name: str) -> bool:
     return _send(to_email, "Your Aelu subscription is active", html)
 
 
-def send_activation_nudge(to: str, name: str, n: int) -> bool:
+def send_activation_nudge(to: str, name: str, n: int, user_id: int = None) -> bool:
     """Activation nudge sequence (users who signed up but haven't started).
 
     n=1: 24h "Account ready", n=2: 5d "5 min to start", n=3: 10d "Still interested?"
@@ -248,12 +248,12 @@ def send_activation_nudge(to: str, name: str, n: int) -> bool:
     }
     v = variants.get(n, variants[1])
     body = v["body"] + _button(BASE_URL + "/", v["cta"])
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html(v["heading"], body)
     return _send(to, v["subject"], html)
 
 
-def send_onboarding_tip(to: str, name: str, n: int) -> bool:
+def send_onboarding_tip(to: str, name: str, n: int, user_id: int = None) -> bool:
     """Onboarding drip sequence (users who have started).
 
     n=3: feature discovery, n=4: study tip, n=5: progress summary,
@@ -320,12 +320,12 @@ def send_onboarding_tip(to: str, name: str, n: int) -> bool:
     }
     v = variants.get(n, variants[3])
     body = v["body"] + _button(BASE_URL + "/", "Open Aelu")
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html(v["heading"], body)
     return _send(to, v["subject"], html)
 
 
-def send_churn_prevention(to: str, name: str, n: int, days: int = 0) -> bool:
+def send_churn_prevention(to: str, name: str, n: int, days: int = 0, user_id: int = None) -> bool:
     """Churn prevention sequence for inactive paid users.
 
     n=1: gentle (5d), n=2: direct (8d), n=3: honest + pause (12d), n=4: final (19d).
@@ -389,12 +389,12 @@ def send_churn_prevention(to: str, name: str, n: int, days: int = 0) -> bool:
     }
     v = variants.get(n, variants[1])
     body = v["body"] + _button(BASE_URL + "/", v["cta"])
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html(v["heading"], body)
     return _send(to, v["subject"], html)
 
 
-def send_milestone_reached(to: str, name: str, milestone: str, data: dict = None) -> bool:
+def send_milestone_reached(to: str, name: str, milestone: str, data: dict = None, user_id: int = None) -> bool:
     """Milestone celebration email."""
     name = name or "there"
     data = data or {}
@@ -419,7 +419,7 @@ def send_milestone_reached(to: str, name: str, milestone: str, data: dict = None
         f"This is real progress. Keep going.</p>"
     )
     body += _button(BASE_URL + "/", "See Your Progress")
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html("Milestone Reached", body)
     return _send(to, f"Milestone: {label}", html)
 
@@ -441,15 +441,24 @@ def send_classroom_invite(to: str, teacher_name: str, class_name: str, invite_co
     return _send(to, f"You're invited to {class_name} on Aelu", html)
 
 
-def _unsubscribe_footer() -> str:
-    """Render a small unsubscribe link."""
+def _unsubscribe_footer(user_id: int = None) -> str:
+    """Render a small unsubscribe link with HMAC token for one-click opt-out."""
+    if user_id is not None:
+        import hmac as _hmac
+        import hashlib as _hashlib
+        from .settings import SECRET_KEY as _sk
+        uid_str = str(user_id)
+        token = _hmac.new(_sk.encode(), uid_str.encode(), _hashlib.sha256).hexdigest()[:32]
+        url = f"{BASE_URL}/auth/unsubscribe?uid={uid_str}&token={token}"
+    else:
+        url = f"{BASE_URL}/auth/unsubscribe"
     return (
         f'<p style="font-size:12px;color:#999;margin-top:24px;text-align:center;">'
-        f'<a href="{BASE_URL}/auth/unsubscribe" style="color:#999;">Unsubscribe from marketing emails</a></p>'
+        f'<a href="{url}" style="color:#999;">Unsubscribe from marketing emails</a></p>'
     )
 
 
-def send_winback(to: str, name: str, n: int) -> bool:
+def send_winback(to: str, name: str, n: int, user_id: int = None) -> bool:
     """Win-back sequence for cancelled users.
 
     n=1: 7d post-cancel (gentle), n=2: 30d (progress reminder), n=3: 60d (final).
@@ -502,7 +511,7 @@ def send_winback(to: str, name: str, n: int) -> bool:
     }
     v = variants.get(n, variants[1])
     body = v["body"] + _button(BASE_URL + "/", v["cta"])
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html(v["heading"], body)
     return _send(to, v["subject"], html)
 
@@ -525,7 +534,7 @@ def send_subscription_cancelled(to_email: str, display_name: str, access_until: 
     return _send(to_email, "Your Aelu subscription has been cancelled", html)
 
 
-def send_weekly_progress(to: str, name: str, stats: dict) -> bool:
+def send_weekly_progress(to: str, name: str, stats: dict, user_id: int = None) -> bool:
     """Weekly progress digest — sent every Monday.
 
     stats keys:
@@ -580,6 +589,6 @@ def send_weekly_progress(to: str, name: str, stats: dict) -> bool:
         f'</table>'
     )
     body += _button(BASE_URL + "/", "Continue Studying")
-    body += _unsubscribe_footer()
+    body += _unsubscribe_footer(user_id)
     html = _wrap_html("Your Week", body)
     return _send(to, f"Your Aelu week: {sessions} sessions, {items} items reviewed", html)

@@ -99,13 +99,13 @@ def _send_trigger(trigger: dict, conn) -> bool:
                 if word.isdigit():
                     days = int(word)
                     break
-            sent = template_fn(to, name, email_number, days=days)
+            sent = template_fn(to, name, email_number, days=days, user_id=user_id)
         elif sequence == "milestone":
             reason = trigger.get("reason", "")
             milestone = reason.replace("Milestone reached: ", "") if "Milestone reached:" in reason else "unknown"
-            sent = template_fn(to, name, milestone)
+            sent = template_fn(to, name, milestone, user_id=user_id)
         else:
-            sent = template_fn(to, name, email_number)
+            sent = template_fn(to, name, email_number, user_id=user_id)
 
         return sent
     except Exception:
@@ -319,7 +319,7 @@ def _send_weekly_progress_emails():
                     "sessions_to_milestone": sessions_to,
                 }
 
-                if send_weekly_progress(row["email"], row["display_name"], stats):
+                if send_weekly_progress(row["email"], row["display_name"], stats, user_id=uid):
                     log_lifecycle_event(
                         "email_triggered",
                         user_id=str(uid),
