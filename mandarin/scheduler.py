@@ -2246,7 +2246,7 @@ def _plan_injections(conn: sqlite3.Connection, drills: list, seen_ids: set, user
                         english=sent.get("english", ""),
                         modality="reading",
                         drill_type="mc",
-                        metadata={"reason": "personalized", "domain": domain},
+                        metadata={"reason": "personalized", "domain": domain, "ai_generated": True, "source": "qwen2.5-7b"},
                     ))
     except (ImportError, sqlite3.Error, KeyError, TypeError, ValueError) as e:
         logger.debug("personalization injection skipped: %s", e)
