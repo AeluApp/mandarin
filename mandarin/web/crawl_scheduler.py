@@ -65,6 +65,16 @@ def _run_loop():
         except Exception:
             logger.exception("Crawl scheduler: research discovery failed")
 
+        try:
+            _run_teacher_scoring()
+        except Exception:
+            logger.exception("Crawl scheduler: teacher scoring failed")
+
+        try:
+            _run_content_quality_audit()
+        except Exception:
+            logger.exception("Crawl scheduler: content quality audit failed")
+
         # Release lock
         try:
             with db.connection() as conn:
@@ -117,3 +127,62 @@ def _run_research_discovery():
             logger.info("Research discovery: %d papers found", len(papers))
         except Exception as e:
             logger.warning("Research discovery failed: %s", e)
+
+        # Synthesize applications for high-relevance papers
+        try:
+            from ..ai.research_synthesis import synthesize_application
+            high_relevance = conn.execute("""
+                SELECT id FROM research_paper
+                WHERE relevance_score >= 0.7
+                AND application_synthesized_at IS NULL
+                LIMIT 5
+            """).fetchall()
+            for paper in high_relevance:
+                synthesize_application(conn, paper["id"])
+            if high_relevance:
+                logger.info("Research synthesis: %d papers synthesized", len(high_relevance))
+        except Exception as e:
+            logger.debug("Research synthesis failed: %s", e)
+
+
+def _run_teacher_scoring():
+    """Score unscored teacher leads (weekly)."""
+    from ..ai.teacher_qualification import score_candidate
+
+    with db.connection() as conn:
+        try:
+            unscored = conn.execute("""
+                SELECT id FROM teacher_lead
+                WHERE qualification_score IS NULL
+                LIMIT 10
+            """).fetchall()
+            for lead in unscored:
+                score_candidate(conn, lead["id"])
+            if unscored:
+                logger.info("Teacher scoring: %d leads scored", len(unscored))
+        except Exception as e:
+            logger.debug("Teacher scoring skipped: %s", e)
+
+
+def _run_content_quality_audit():
+    """Assess quality of recently generated AI content (weekly)."""
+    from ..ai.content_quality import assess_pronunciation_quality as assess_drill_item_quality
+
+    with db.connection() as conn:
+        try:
+            # Find AI-generated items without quality assessment
+            unassessed = conn.execute("""
+                SELECT id FROM content_item
+                WHERE source = 'ai_generated'
+                AND id NOT IN (
+                    SELECT DISTINCT content_id FROM quality_metric
+                    WHERE content_id IS NOT NULL
+                )
+                LIMIT 20
+            """).fetchall()
+            for item in unassessed:
+                assess_drill_item_quality(conn, item["id"])
+            if unassessed:
+                logger.info("Content quality audit: %d items assessed", len(unassessed))
+        except Exception as e:
+            logger.debug("Content quality audit skipped: %s", e)

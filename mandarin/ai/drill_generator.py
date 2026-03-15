@@ -59,14 +59,34 @@ def generate_drill_from_encounter(
     """Generate a drill item from a vocab encounter. Returns None on failure."""
     prompt = _build_drill_prompt(target_word, source_sentence, learner_hsk_level, language_notes)
 
-    response = generate(
-        prompt=prompt,
-        system=DRILL_GENERATION_SYSTEM,
-        temperature=0.6,
-        use_cache=True,
-        conn=conn,
-        task_type="drill_generation",
-    )
+    # Use RAG-augmented generation for HSK 6+ words
+    if learner_hsk_level >= 6:
+        try:
+            from .rag_layer import generate_with_rag
+            rag_result = generate_with_rag(
+                conn, hanzi_list=[target_word], prompt_key="drill_generation",
+                base_prompt=prompt, hsk_level=learner_hsk_level, temperature=0.6,
+            )
+            if rag_result and rag_result.get("text"):
+                # Use RAG-augmented response
+                response = OllamaResponse(success=True, text=rag_result["text"])
+            else:
+                response = None
+        except Exception:
+            logger.debug("RAG generation failed, falling back to standard", exc_info=True)
+            response = None
+    else:
+        response = None
+
+    if response is None:
+        response = generate(
+            prompt=prompt,
+            system=DRILL_GENERATION_SYSTEM,
+            temperature=0.6,
+            use_cache=True,
+            conn=conn,
+            task_type="drill_generation",
+        )
 
     if not response.success:
         _mark_encounter_failed(conn, encounter_id, response.error or "generation_failed")
@@ -76,6 +96,15 @@ def generate_drill_from_encounter(
     if item is None:
         _mark_encounter_failed(conn, encounter_id, "parse_failed")
         return None
+
+    # Dedup: skip if we already have an AI-generated item for this word
+    existing = conn.execute(
+        "SELECT id FROM content_item WHERE hanzi = ? AND source = 'ai_generated' LIMIT 1",
+        (item.hanzi,),
+    ).fetchone()
+    if existing:
+        _mark_encounter_generated(conn, encounter_id, str(existing["id"]))
+        return item
 
     # Validate
     content = validate_generated_content("drill", {
@@ -92,9 +121,18 @@ def generate_drill_from_encounter(
         _mark_encounter_failed(conn, encounter_id, "needs_review")
         return item
 
-    # Persist directly
+    # Persist directly — auto-approve since all validation passed
     item_id = _persist_drill_item(conn, item)
+    conn.execute(
+        "UPDATE content_item SET review_status = 'approved' WHERE id = ?",
+        (int(item_id),),
+    )
+    conn.commit()
     _mark_encounter_generated(conn, encounter_id, item_id)
+
+    # ── Post-generation quality gates ──
+    _run_post_generation_gates(conn, item, item_id, learner_hsk_level)
+
     return item
 
 
@@ -111,6 +149,24 @@ def _build_drill_prompt(
     return "\n".join(parts)
 
 
+def _repair_json(text: str) -> str:
+    """Best-effort repair of common LLM JSON mistakes."""
+    # Missing commas between string array elements: "foo"\n    "bar" → "foo",\n    "bar"
+    text = re.sub(r'"\s*\n(\s*")', r'",\n\1', text)
+    # Missing commas between object/array elements: }\n  { or ]\n  [
+    text = re.sub(r'(\})\s*\n(\s*\{)', r'\1,\n\2', text)
+    text = re.sub(r'(\])\s*\n(\s*\[)', r'\1,\n\2', text)
+    # Missing comma after number before newline + key: 5\n  "key" → 5,\n  "key"
+    text = re.sub(r'(\d)\s*\n(\s*")', r'\1,\n\2', text)
+    # Trailing commas before closing brackets: ,] → ] and ,} → }
+    text = re.sub(r',\s*(\])', r'\1', text)
+    text = re.sub(r',\s*(\})', r'\1', text)
+    # Single quotes → double quotes (but not inside strings — best effort)
+    if "'" in text and '"' not in text[:20]:
+        text = text.replace("'", '"')
+    return text
+
+
 def _parse_drill_response(content: str, encounter_id: str) -> Optional[GeneratedDrillItem]:
     """Parse JSON from LLM response. Strips markdown fences if present."""
     text = content.strip()
@@ -122,7 +178,20 @@ def _parse_drill_response(content: str, encounter_id: str) -> Optional[Generated
     try:
         data = json.loads(text)
     except (json.JSONDecodeError, ValueError):
-        logger.warning("Failed to parse drill response as JSON: %s", text[:200])
+        # Try lightweight repair before giving up
+        try:
+            data = json.loads(_repair_json(text))
+        except (json.JSONDecodeError, ValueError):
+            logger.warning("Failed to parse drill response as JSON: %s", text[:200])
+            return None
+
+    # LLM sometimes returns a JSON array instead of object — unwrap it
+    if isinstance(data, list):
+        if len(data) == 0:
+            return None
+        data = data[0]
+    if not isinstance(data, dict):
+        logger.warning("Drill response is not a JSON object: %s", type(data).__name__)
         return None
 
     # Check required fields
@@ -171,18 +240,18 @@ def _persist_drill_item(conn, item: GeneratedDrillItem) -> str:
     Sets review_status='pending_review' so AI-generated items must be
     approved before being served to users. Returns item id.
     """
-    item_id = str(uuid.uuid4())
-    conn.execute(
+    cursor = conn.execute(
         """INSERT INTO content_item
-           (id, hanzi, pinyin, english, hsk_level, status, source,
+           (hanzi, pinyin, english, hsk_level, status, source,
             example_sentence_hanzi, example_sentence_pinyin, example_sentence_english,
-            review_status)
-           VALUES (?, ?, ?, ?, ?, 'drill_ready', 'ai_generated', ?, ?, ?,
-                   'pending_review')""",
-        (item_id, item.hanzi, item.pinyin, item.english, item.hsk_level,
+            review_status, is_ai_generated, generated_by_prompt)
+           VALUES (?, ?, ?, ?, 'drill_ready', 'ai_generated', ?, ?, ?,
+                   'pending_review', 1, 'drill_generation')""",
+        (item.hanzi, item.pinyin, item.english, item.hsk_level,
          item.example_sentence_hanzi, item.example_sentence_pinyin,
          item.example_sentence_english),
     )
+    item_id = str(cursor.lastrowid)
     conn.commit()
     return item_id
 
@@ -227,6 +296,59 @@ def _enqueue_for_review(conn, item: GeneratedDrillItem, issues: list[str], encou
         (str(uuid.uuid4()), content_json, json.dumps(issues), encounter_id),
     )
     conn.commit()
+
+
+def _run_post_generation_gates(conn, item: GeneratedDrillItem, item_id: str, hsk_level: int) -> None:
+    """Run quality gates on a newly generated drill item. Never blocks pipeline."""
+    # 1. Content quality assessment (pronunciation quality check on the item)
+    try:
+        from .content_quality import assess_pronunciation_quality
+        quality = assess_pronunciation_quality(conn, int(item_id) if item_id.isdigit() else 0)
+        logger.info("Quality assessment for %s: %s", item.hanzi, quality.get("grade", "?"))
+    except Exception:
+        logger.debug("Content quality gate skipped", exc_info=True)
+
+    # 2. Adversarial debate for HSK 5+ items (worth the extra Qwen calls)
+    if hsk_level >= 5:
+        try:
+            from .adversarial import run_adversarial_debate
+            content_data = {
+                "hanzi": item.hanzi, "pinyin": item.pinyin,
+                "english": item.english, "drill_type": item.drill_type,
+                "hsk_level": item.hsk_level,
+                "example_sentence": item.example_sentence_hanzi,
+            }
+            debate = run_adversarial_debate(conn, content_data, "drill", int(item_id) if item_id.isdigit() else None)
+            if debate.get("status") == "completed":
+                logger.info("Adversarial debate for %s: %s (score %.2f)",
+                            item.hanzi, debate["verdict"], debate["overall_score"])
+                if not debate["passed"]:
+                    # Route to native speaker validation
+                    _queue_for_native_review(conn, item, item_id, "systematic_review")
+        except Exception:
+            logger.debug("Adversarial debate gate skipped", exc_info=True)
+
+    # 3. Queue HSK 6+ items for native speaker validation
+    if hsk_level >= 6:
+        _queue_for_native_review(conn, item, item_id, "hsk_high_level")
+
+
+def _queue_for_native_review(conn, item: GeneratedDrillItem, item_id: str, reason: str) -> None:
+    """Queue generated item for native speaker review."""
+    try:
+        from .native_speaker_validation import queue_for_native_speaker_review
+        queue_for_native_speaker_review(
+            conn,
+            content_hanzi=item.hanzi,
+            content_type="drill_sentence",
+            queue_reason=reason,
+            content_item_id=int(item_id) if item_id.isdigit() else None,
+            hsk_level=item.hsk_level,
+            target_vocabulary=item.hanzi,
+        )
+        logger.info("Queued %s for native speaker review (reason: %s)", item.hanzi, reason)
+    except Exception:
+        logger.debug("Native speaker queue failed", exc_info=True)
 
 
 def process_pending_encounters(conn, max_batch: int = 20) -> dict:

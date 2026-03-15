@@ -104,11 +104,11 @@ class TestContentProvenance:
         ).fetchone()
         assert row["is_ai_generated"] == 0
 
-    def test_schema_version_is_100(self, test_db):
+    def test_schema_version_is_102(self, test_db):
         conn, _ = test_db
         from mandarin.db.core import _get_schema_version
         assert _get_schema_version(conn) == SCHEMA_VERSION
-        assert SCHEMA_VERSION == 100
+        assert SCHEMA_VERSION == 102
 
 
 # ---------------------------------------------------------------------------

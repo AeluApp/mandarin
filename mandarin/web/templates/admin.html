@@ -122,18 +122,19 @@
       <button class="admin-tab" data-tab="intelligence" id="intelligence-tab-btn">Intelligence <span id="intel-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
       <button class="admin-tab" data-tab="notifications" id="notifications-tab-btn">Notifications <span id="notif-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
       <button class="admin-tab" data-tab="ai-review" id="ai-review-tab-btn">AI Review <span id="ai-review-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
+      <button class="admin-tab" data-tab="openclaw">OpenClaw Bots</button>
     </div>
 
     <!-- Overview -->
     <div class="admin-tab-content active" id="tab-overview">
-      <p class="tab-description">Key numbers at a glance. Check this daily.</p>
+      <p class="tab-description">Your daily snapshot. How many people signed up, how many are actually using the app, and how the business is doing.</p>
       <div id="health-summary" class="health-summary" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-4);border-left:4px solid var(--color-text-dim);font-family:var(--font-body);font-size:var(--text-sm);">Checking system health...</div>
       <div class="admin-section">
         <h2>Metrics</h2>
         <div class="metrics-grid" id="metrics-grid">Loading...</div>
       </div>
       <div class="admin-section">
-        <h2>Funnel</h2>
+        <h2>User Journey</h2>
         <div id="funnel-content" class="tab-loading">Loading...</div>
       </div>
       <div class="admin-section">
@@ -152,13 +153,13 @@
 
     <!-- Issues (consolidated: crashes + client errors + error patterns) -->
     <div class="admin-tab-content" id="tab-issues">
-      <p class="tab-description">Crashes, errors, and patterns. Copy-paste any row if you need to report a bug.</p>
+      <p class="tab-description">Things that broke. If something looks wrong in the app, check here first. You can copy-paste any row to report a bug.</p>
       <div class="admin-section">
-        <h2>Server Crashes</h2>
+        <h2>App Crashes</h2>
         <div id="crashes-content" class="tab-loading">Loading...</div>
       </div>
       <div class="admin-section">
-        <h2>Client-Side Errors</h2>
+        <h2>Browser Errors</h2>
         <div id="client-errors-content" class="tab-loading">Loading...</div>
       </div>
       <div class="admin-section">
@@ -169,7 +170,7 @@
 
     <!-- Sessions -->
     <div class="admin-tab-content" id="tab-sessions">
-      <p class="tab-description">Every study session. Useful for checking if the app is being used.</p>
+      <p class="tab-description">Every study session anyone has done. Shows who studied, when, for how long, and how they did.</p>
       <div class="admin-section">
         <h2>Sessions</h2>
         <div id="sessions-content" class="tab-loading">Loading...</div>
@@ -178,7 +179,7 @@
 
     <!-- Security -->
     <div class="admin-tab-content" id="tab-security">
-      <p class="tab-description">Login attempts, access denials. Usually empty = good.</p>
+      <p class="tab-description">Login attempts, failed logins, and anything suspicious. If this is mostly empty, that's good.</p>
       <div class="admin-section">
         <h2>Security Scans</h2>
         <div id="security-scans-content" class="tab-loading">Loading...</div>
@@ -191,7 +192,7 @@
 
     <!-- Revenue -->
     <div class="admin-tab-content" id="tab-revenue">
-      <p class="tab-description">Money. MRR is the headline number.</p>
+      <p class="tab-description">How much money you're making. The monthly revenue number is the one that matters most.</p>
       <div class="admin-section">
         <h2>Revenue</h2>
         <div id="revenue-content" class="tab-loading">Loading...</div>
@@ -200,38 +201,38 @@
 
     <!-- Retention Cohorts -->
     <div class="admin-tab-content" id="tab-retention">
-      <p class="tab-description">Are users coming back? Green cells = good, red = losing people.</p>
+      <p class="tab-description">Are users coming back after they sign up? Each row is a group of users who joined the same week. Green = they're still using the app. Red = they stopped.</p>
       <div class="admin-section">
-        <h2>Retention Cohorts</h2>
+        <h2>Who's Sticking Around</h2>
         <div id="retention-content" class="tab-loading">Loading...</div>
       </div>
     </div>
 
     <!-- Engagement -->
     <div class="admin-tab-content" id="tab-engagement">
-      <p class="tab-description">How often and how much people study. The bar chart shows daily volume.</p>
+      <p class="tab-description">How often and how much people are studying. The bar chart shows how many sessions happen each day.</p>
       <div class="admin-section">
         <h2>Engagement</h2>
         <div id="engagement-content" class="tab-loading">Loading...</div>
       </div>
       <div class="admin-section">
-        <h2>Session Completion Segments</h2>
+        <h2>How Much of Each Session People Finish</h2>
         <div id="completion-segments-content" class="tab-loading">Loading...</div>
       </div>
     </div>
 
     <!-- Partners -->
     <div class="admin-tab-content" id="tab-partners">
-      <p class="tab-description">Affiliate and referral tracking.</p>
+      <p class="tab-description">People who are sending you users (teachers, affiliates, referral links). Shows who referred whom and what they've earned.</p>
       <div class="admin-section">
-        <h2>Partner Attribution</h2>
+        <h2>Who's Sending You Users</h2>
         <div id="partners-content" class="tab-loading">Loading...</div>
       </div>
     </div>
 
     <!-- Content Ingestion -->
     <div class="admin-tab-content" id="tab-content">
-      <p class="tab-description">Add verified content to the media catalog. Every entry here was reviewed by a human.</p>
+      <p class="tab-description">Add Chinese-language videos, podcasts, and articles to the app. Everything here has been checked by a real person before users see it.</p>
       <div class="admin-section">
         <h2>Add Content</h2>
         <form id="content-ingest-form" style="max-width:600px;">
@@ -375,7 +376,7 @@
 
     <!-- Quality -->
     <div class="admin-tab-content" id="tab-quality">
-      <p class="tab-description">DPMO, SPC control charts, process capability, retention survival, flow metrics, risk register, experiments.</p>
+      <p class="tab-description">Is the app working well? Error rates, consistency checks, how long users stay, work tracking, risks to watch, and experiments you're running.</p>
 
       <div class="admin-section">
         <h2>A/B Experiments</h2>
@@ -383,12 +384,12 @@
       </div>
 
       <div class="admin-section">
-        <h2>DPMO &amp; Sigma Level</h2>
+        <h2>Error Rate</h2>
         <div id="quality-dpmo-content" class="tab-loading">Loading...</div>
       </div>
 
       <div class="admin-section">
-        <h2>SPC Control Charts</h2>
+        <h2>Quality Over Time</h2>
         <div style="margin-bottom:var(--space-2);">
           <select id="spc-chart-select" style="padding:4px 8px;font-family:var(--font-body);font-size:var(--text-sm);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
             <option value="drill_accuracy">Drill Accuracy</option>
@@ -400,17 +401,17 @@
       </div>
 
       <div class="admin-section">
-        <h2>Process Capability</h2>
+        <h2>How Consistent Is the App</h2>
         <div id="quality-capability-content" class="tab-loading">Loading...</div>
       </div>
 
       <div class="admin-section">
-        <h2>Retention Survival Analysis</h2>
+        <h2>How Long Do Users Stay</h2>
         <div id="quality-retention-content" class="tab-loading">Loading...</div>
       </div>
 
       <div class="admin-section">
-        <h2>Flow Metrics</h2>
+        <h2>Work Speed</h2>
         <div id="quality-flow-content" class="tab-loading">Loading...</div>
       </div>
 
@@ -458,7 +459,7 @@
       </div>
 
       <div class="admin-section">
-        <h2>Work Items (Kanban)</h2>
+        <h2>To-Do Tracker</h2>
         <button onclick="showAddWorkItemForm()" style="margin-bottom:var(--space-2);padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">+ Add Item</button>
         <div id="add-work-item-form" style="display:none;margin-bottom:var(--space-3);padding:var(--space-3);background:var(--color-surface);max-width:500px;">
           <div style="margin-bottom:var(--space-2);">
@@ -468,10 +469,10 @@
           <div style="margin-bottom:var(--space-2);">
             <label style="display:block;font-size:var(--text-xs);color:var(--color-text-dim);">Type</label>
             <select id="work-item-type" style="width:100%;padding:4px;font-family:var(--font-body);border:1px solid var(--color-divider);background:var(--color-surface);color:var(--color-text);">
-              <option value="standard">Standard</option>
-              <option value="expedite">Expedite</option>
-              <option value="fixed_date">Fixed Date</option>
-              <option value="intangible">Intangible</option>
+              <option value="standard">Normal</option>
+              <option value="expedite">Urgent</option>
+              <option value="fixed_date">Has a Deadline</option>
+              <option value="intangible">Background / No Rush</option>
             </select>
           </div>
           <button onclick="submitWorkItem()" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Save</button>
@@ -483,7 +484,7 @@
 
     <!-- Product Intelligence -->
     <div class="admin-tab-content" id="tab-intelligence">
-      <p class="tab-description">Self-diagnosing product audit. Scans every dimension and generates prioritized Claude Code prompts.</p>
+      <p class="tab-description">Automatic health check for the whole product. Finds problems, ranks them by importance, and tells you what to fix first.</p>
       <div style="margin-bottom:var(--space-3);display:flex;gap:var(--space-2);align-items:center;">
         <button id="intel-run-audit" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Run Audit</button>
         <span id="intel-status" style="font-family:var(--font-body);font-size:var(--text-xs);color:var(--color-text-dim);"></span>
@@ -539,7 +540,7 @@
 
     <!-- Notifications -->
     <div class="admin-tab-content" id="tab-notifications">
-      <p class="tab-description">Actionable alerts across all systems. Items auto-clear when resolved.</p>
+      <p class="tab-description">Things that need your attention. These clear themselves once the issue is fixed.</p>
       <div style="margin-bottom:var(--space-3);">
         <button id="notif-mark-all-read" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">Mark all read</button>
       </div>
@@ -548,8 +549,117 @@
 
     <!-- AI Review Queue -->
     <div class="admin-tab-content" id="tab-ai-review">
-      <p class="tab-description">AI-generated content awaiting human review. Verify provenance before approving.</p>
+      <p class="tab-description">Content the AI created that needs you to check it before users see it. Make sure it's accurate and sounds natural before approving.</p>
       <div id="ai-review-content" class="tab-loading">Loading...</div>
+    </div>
+
+    <!-- OpenClaw Bots -->
+    <div class="admin-tab-content" id="tab-openclaw">
+      <p class="tab-description">Your personal admin bots. Get status updates, approve content, and manage aelu from Telegram, Discord, or iMessage without opening this dashboard.</p>
+
+      <div class="admin-section">
+        <h2>What Are These?</h2>
+        <p style="font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text);line-height:1.6;max-width:640px;">
+          OpenClaw bots let you manage aelu from apps you already use. Instead of logging into this admin dashboard,
+          you can send a Telegram message like "how are my users doing?" or "show me the review queue" and get an
+          instant answer. You can also approve or reject AI-generated content right from your phone.
+        </p>
+      </div>
+
+      <div class="admin-section">
+        <h2>Available Channels</h2>
+        <div id="openclaw-channels" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-3);">
+
+          <div style="background:var(--color-surface);padding:var(--space-4);border-radius:var(--radius-lg,0);">
+            <div style="font-weight:600;font-family:var(--font-body);margin-bottom:var(--space-2);font-size:var(--text-base);">Telegram</div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-2);">Best option. Fast, supports voice messages, works on any device.</p>
+            <div style="font-size:var(--text-xs);color:var(--color-text-faint);font-family:var(--font-body);">
+              <strong>Setup:</strong>
+              <ol style="margin:var(--space-1) 0 0 var(--space-4);padding:0;">
+                <li>Message <a href="https://t.me/BotFather" style="color:var(--color-accent);">@BotFather</a> on Telegram and create a new bot</li>
+                <li>Copy the bot token it gives you</li>
+                <li>Find your Telegram user ID (message <a href="https://t.me/userinfobot" style="color:var(--color-accent);">@userinfobot</a>)</li>
+                <li>Set two environment variables:
+                  <code style="display:block;background:var(--color-surface);padding:var(--space-2);margin:var(--space-1) 0;font-size:var(--text-xs);word-break:break-all;">OPENCLAW_TELEGRAM_TOKEN=your-bot-token<br>OPENCLAW_TELEGRAM_OWNER_ID=your-user-id</code>
+                </li>
+                <li>Run: <code>./run telegram</code></li>
+              </ol>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);padding:var(--space-4);border-radius:var(--radius-lg,0);">
+            <div style="font-weight:600;font-family:var(--font-body);margin-bottom:var(--space-2);font-size:var(--text-base);">Discord</div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-2);">Good if you already use Discord. Text only.</p>
+            <div style="font-size:var(--text-xs);color:var(--color-text-faint);font-family:var(--font-body);">
+              <strong>Setup:</strong>
+              <ol style="margin:var(--space-1) 0 0 var(--space-4);padding:0;">
+                <li>Go to <a href="https://discord.com/developers/applications" style="color:var(--color-accent);">Discord Developer Portal</a> and create an app</li>
+                <li>Under "Bot", create a bot and copy its token</li>
+                <li>Enable "Message Content Intent" in the bot settings</li>
+                <li>Find your Discord user ID (enable Developer Mode in Discord settings, right-click yourself, Copy ID)</li>
+                <li>Set two environment variables:
+                  <code style="display:block;background:var(--color-surface);padding:var(--space-2);margin:var(--space-1) 0;font-size:var(--text-xs);word-break:break-all;">OPENCLAW_DISCORD_TOKEN=your-bot-token<br>OPENCLAW_DISCORD_OWNER_ID=your-user-id</code>
+                </li>
+                <li>Run: <code>./run discord</code></li>
+              </ol>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);padding:var(--space-4);border-radius:var(--radius-lg,0);">
+            <div style="font-weight:600;font-family:var(--font-body);margin-bottom:var(--space-2);font-size:var(--text-base);">iMessage</div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-2);">Mac only. Works through the Messages app on your computer.</p>
+            <div style="font-size:var(--text-xs);color:var(--color-text-faint);font-family:var(--font-body);">
+              <strong>Setup:</strong>
+              <ol style="margin:var(--space-1) 0 0 var(--space-4);padding:0;">
+                <li>Grant Full Disk Access to your terminal (System Settings &rarr; Privacy &amp; Security &rarr; Full Disk Access)</li>
+                <li>Set your phone number or Apple ID:
+                  <code style="display:block;background:var(--color-surface);padding:var(--space-2);margin:var(--space-1) 0;font-size:var(--text-xs);">OPENCLAW_IMESSAGE_OWNER_ID=+1234567890</code>
+                </li>
+                <li>Run: <code>./run imessage</code></li>
+              </ol>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);padding:var(--space-4);border-radius:var(--radius-lg,0);">
+            <div style="font-weight:600;font-family:var(--font-body);margin-bottom:var(--space-2);font-size:var(--text-base);">WhatsApp</div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-2);">Requires a Meta Business account. More involved setup.</p>
+            <div style="font-size:var(--text-xs);color:var(--color-text-faint);font-family:var(--font-body);">
+              <strong>Setup:</strong>
+              <ol style="margin:var(--space-1) 0 0 var(--space-4);padding:0;">
+                <li>Create a Meta Business account and WhatsApp Business app</li>
+                <li>Set environment variables:
+                  <code style="display:block;background:var(--color-surface);padding:var(--space-2);margin:var(--space-1) 0;font-size:var(--text-xs);word-break:break-all;">OPENCLAW_WHATSAPP_TOKEN=your-token<br>OPENCLAW_WHATSAPP_PHONE_ID=your-phone-id<br>OPENCLAW_WHATSAPP_VERIFY_TOKEN=any-random-string<br>OPENCLAW_WHATSAPP_OWNER_NUMBER=+1234567890</code>
+                </li>
+                <li>Set your webhook URL in Meta dashboard to:<br><code>https://your-domain/api/openclaw/webhook/whatsapp</code></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>What You Can Ask</h2>
+        <div style="font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text);max-width:640px;">
+          <p style="margin-bottom:var(--space-2);">You can type commands or just ask naturally. These all work:</p>
+          <table class="admin-table" style="max-width:500px;">
+            <thead><tr><th>Command</th><th>What It Does</th></tr></thead>
+            <tbody>
+              <tr><td><code>/status</code></td><td>How many items are due, your streak, weekly progress</td></tr>
+              <tr><td><code>/review</code></td><td>How many AI-generated items need your approval</td></tr>
+              <tr><td><code>/audit</code></td><td>Latest product health check results</td></tr>
+              <tr><td><code>/briefing</code></td><td>Summary of recent errors and grammar gaps</td></tr>
+              <tr><td><code>/errors</code></td><td>Recurring mistake patterns and confusing word pairs</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:var(--space-2);color:var(--color-text-dim);">Or just type things like "how am I doing?", "anything to review?", or "what's breaking?" — the bot will figure out what you mean.</p>
+          <p style="margin-top:var(--space-2);color:var(--color-text-dim);">On Telegram, you can also send voice messages — the bot will transcribe and respond.</p>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Bot Activity</h2>
+        <div id="openclaw-activity" class="tab-loading">Loading...</div>
+      </div>
     </div>
   </div>
 
@@ -602,9 +712,9 @@
       html += '<div class="metric-card" title="Total study sessions started in the last 7 days"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
       // Retention cohorts
       if (d.d1_eligible > 0 || d.d7_eligible > 0 || d.d30_eligible > 0) {
-        html += '<div class="metric-card" title="% of users who came back after 1 day. Higher = better retention."><div class="metric-value">' + d.d1 + '%</div><div class="metric-label">D1 (' + d.d1_eligible + ' eligible)</div></div>';
-        html += '<div class="metric-card" title="% of users who came back after 7 days. Higher = better retention."><div class="metric-value">' + d.d7 + '%</div><div class="metric-label">D7 (' + d.d7_eligible + ' eligible)</div></div>';
-        html += '<div class="metric-card" title="% of users who came back after 30 days. Higher = better retention."><div class="metric-value">' + d.d30 + '%</div><div class="metric-label">D30 (' + d.d30_eligible + ' eligible)</div></div>';
+        html += '<div class="metric-card" title="Of users who signed up at least 1 day ago, what % came back the next day"><div class="metric-value">' + d.d1 + '%</div><div class="metric-label">Came back after 1 day (' + d.d1_eligible + ' users)</div></div>';
+        html += '<div class="metric-card" title="Of users who signed up at least 7 days ago, what % came back within a week"><div class="metric-value">' + d.d7 + '%</div><div class="metric-label">Came back within a week (' + d.d7_eligible + ' users)</div></div>';
+        html += '<div class="metric-card" title="Of users who signed up at least 30 days ago, what % came back within a month"><div class="metric-value">' + d.d30 + '%</div><div class="metric-label">Came back within a month (' + d.d30_eligible + ' users)</div></div>';
       }
       var tiers = d.tier_distribution || {};
       for (var t in tiers) {
@@ -682,8 +792,8 @@
       // UTM source breakdown
       var sources = d.by_source || [];
       if (sources.length > 0) {
-        html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Funnel by UTM Source</h3>';
-        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Source</th><th>Signups</th><th>1st Session</th><th>Activated</th><th>Paid</th><th>Signup-to-Paid</th></tr></thead><tbody>';
+        html += '<h3 style="margin-top:var(--space-4);font-family:var(--font-heading);font-size:var(--text-base);color:var(--color-text-dim);">Where Your Users Came From</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Source</th><th>Signups</th><th>Started Learning</th><th>Got Hooked</th><th>Paid</th><th>% Who Paid</th></tr></thead><tbody>';
         sources.forEach(function(s) {
           html += '<tr><td>' + esc(s.source) + '</td><td>' + s.signups + '</td><td>' + s.first_session + '</td><td>' + s.activated + '</td><td>' + s.paid + '</td><td>' + s.signup_to_paid_pct + '%</td></tr>';
         });
@@ -734,6 +844,7 @@
         "intelligence": loadIntelligence,
         "notifications": loadNotifications,
         "ai-review": loadAiReview,
+        "openclaw": loadOpenClaw,
       };
       if (loaders[tab]) loaders[tab]();
     }
@@ -909,14 +1020,14 @@
         var el = document.getElementById("revenue-content");
         if (d.error) { el.innerHTML = '<p class="tab-empty">' + esc(d.error) + '</p>'; return; }
         var html = '<div class="metrics-grid">';
-        html += '<div class="metric-card" title="Monthly Recurring Revenue \u2014 what you\'d earn this month if nothing changed"><div class="metric-value">$' + (d.mrr || 0).toLocaleString() + '</div><div class="metric-label">MRR</div></div>';
-        html += '<div class="metric-card" title="Annual Recurring Revenue \u2014 MRR \u00d7 12"><div class="metric-value">$' + (d.arr || 0).toLocaleString() + '</div><div class="metric-label">ARR</div></div>';
+        html += '<div class="metric-card" title="What you\'d earn this month if nothing changed"><div class="metric-value">$' + (d.mrr || 0).toLocaleString() + '</div><div class="metric-label">Monthly Revenue</div></div>';
+        html += '<div class="metric-card" title="Monthly revenue \u00d7 12 — your annual run rate"><div class="metric-value">$' + (d.arr || 0).toLocaleString() + '</div><div class="metric-label">Yearly Revenue (projected)</div></div>';
         html += '<div class="metric-card"><div class="metric-value">' + (d.paid_users || 0) + '</div><div class="metric-label">Paid Users</div></div>';
         html += '<div class="metric-card"><div class="metric-value">' + (d.teacher_users || 0) + '</div><div class="metric-label">Teacher Users</div></div>';
-        html += '<div class="metric-card" title="% of free users who upgraded to paid"><div class="metric-value">' + (d.conversion_rate || 0) + '%</div><div class="metric-label">Conversion Rate</div></div>';
-        html += '<div class="metric-card" title="% of paid users who cancelled in the last 30 days. Lower = better."><div class="metric-value">' + (d.churn_rate || 0) + '%</div><div class="metric-label">Churn Rate (30d)</div></div>';
+        html += '<div class="metric-card" title="% of free users who upgraded to paid"><div class="metric-value">' + (d.conversion_rate || 0) + '%</div><div class="metric-label">% Who Upgraded</div></div>';
+        html += '<div class="metric-card" title="% of paying users who cancelled in the last 30 days. Lower is better."><div class="metric-value">' + (d.churn_rate || 0) + '%</div><div class="metric-label">% Who Cancelled (30d)</div></div>';
         html += '<div class="metric-card"><div class="metric-value">' + (d.churn_count_30d || 0) + '</div><div class="metric-label">Cancellations (30d)</div></div>';
-        html += '<div class="metric-card" title="Estimated total revenue per user over their lifetime"><div class="metric-value">$' + (d.estimated_ltv || 0).toLocaleString() + '</div><div class="metric-label">Est. LTV</div></div>';
+        html += '<div class="metric-card" title="How much revenue you\'ll earn from an average user over their whole time using the app"><div class="metric-value">$' + (d.estimated_ltv || 0).toLocaleString() + '</div><div class="metric-label">Avg. Revenue Per User (lifetime)</div></div>';
         html += '</div>';
 
         // Channel breakdown
@@ -1866,6 +1977,19 @@
     });
 
     /* ── AI Review Queue ── */
+    function loadOpenClaw() {
+      adminFetch("/api/openclaw/health").then(function(d) {
+        var el = document.getElementById("openclaw-activity");
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value" style="color:' + (d.status === 'ok' ? 'var(--color-correct)' : 'var(--color-text-dim)') + '">' + (d.status === 'ok' ? 'Online' : 'Offline') + '</div><div class="metric-label">Bot Status</div></div>';
+        html += '</div>';
+        el.innerHTML = html;
+      }).catch(function() {
+        var el = document.getElementById("openclaw-activity");
+        el.innerHTML = '<p style="font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text-dim);">Bots aren\'t running right now. Follow the setup instructions above to get started. Once you set the environment variables and run the bot, this section will show activity.</p>';
+      });
+    }
+
     function loadAiReview() {
       adminFetch("/api/admin/ai/review-queue").then(function(d) {
         var el = document.getElementById("ai-review-content");
@@ -1997,19 +2121,19 @@
     function loadDPMO() {
       adminFetch("/api/admin/quality/dpmo").then(function(d) {
         var el = document.getElementById("quality-dpmo-content");
-        if (!d.current) { el.innerHTML = '<p class="tab-empty">No DPMO data yet. Metrics are calculated daily.</p>'; return; }
+        if (!d.current) { el.innerHTML = '<p class="tab-empty">No error rate data yet. This updates daily.</p>'; return; }
         var c = d.current;
         var html = '<div class="metrics-grid">';
-        html += '<div class="metric-card"><div class="metric-value">' + (c.dpmo || 0).toLocaleString() + '</div><div class="metric-label">DPMO (30d)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (c.sigma_level || 0).toFixed(2) + 'σ</div><div class="metric-label">Sigma Level</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (c.total_opportunities || 0).toLocaleString() + '</div><div class="metric-label">Opportunities</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (c.total_defects || 0).toLocaleString() + '</div><div class="metric-label">Defects</div></div>';
+        html += '<div class="metric-card" title="Wrong answers per million drill attempts. Lower is better."><div class="metric-value">' + (c.dpmo || 0).toLocaleString() + '</div><div class="metric-label">Errors per million (30d)</div></div>';
+        html += '<div class="metric-card" title="Quality score from 0\u20136. Higher is better. 4+ is good, 6 is near-perfect."><div class="metric-value">' + (c.sigma_level || 0).toFixed(2) + '</div><div class="metric-label">Quality Score (0\u20136)</div></div>';
+        html += '<div class="metric-card" title="Total drill attempts measured"><div class="metric-value">' + (c.total_opportunities || 0).toLocaleString() + '</div><div class="metric-label">Total Attempts</div></div>';
+        html += '<div class="metric-card" title="Total wrong answers"><div class="metric-value">' + (c.total_defects || 0).toLocaleString() + '</div><div class="metric-label">Wrong Answers</div></div>';
         html += '</div>';
         if (d.trend && d.trend.length > 0) {
-          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">DPMO Trend (Weekly)</h3>';
-          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Period</th><th>DPMO</th><th>Sigma</th><th>Opportunities</th></tr></thead><tbody>';
+          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Error Rate Over Time</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Week</th><th>Errors/Million</th><th>Quality Score</th><th>Total Attempts</th></tr></thead><tbody>';
           d.trend.forEach(function(t) {
-            html += '<tr><td>' + esc(t.period_end || '') + '</td><td>' + (t.dpmo || 0).toLocaleString() + '</td><td>' + (t.sigma_level || 0).toFixed(2) + 'σ</td><td>' + (t.total_opportunities || 0).toLocaleString() + '</td></tr>';
+            html += '<tr><td>' + esc(t.period_end || '') + '</td><td>' + (t.dpmo || 0).toLocaleString() + '</td><td>' + (t.sigma_level || 0).toFixed(2) + '</td><td>' + (t.total_opportunities || 0).toLocaleString() + '</td></tr>';
           });
           html += '</tbody></table></div></div>';
         }
@@ -2024,10 +2148,10 @@
         if (!d.observations || d.observations.length === 0) { el.innerHTML = '<p class="tab-empty">No SPC data yet.</p>'; return; }
         var cl = d.control_limits || {};
         var html = '<div class="metrics-grid">';
-        html += '<div class="metric-card"><div class="metric-value">' + (cl.center_line || 0).toFixed(3) + '</div><div class="metric-label">Center Line</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (cl.ucl || 0).toFixed(3) + '</div><div class="metric-label">UCL (3σ)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (cl.lcl || 0).toFixed(3) + '</div><div class="metric-label">LCL (3σ)</div></div>';
-        var statusBadge = d.status === 'in_control' ? '<span class="badge badge-info">In Control</span>' : '<span class="badge badge-error">Out of Control</span>';
+        html += '<div class="metric-card" title="The average — where things normally are"><div class="metric-value">' + (cl.center_line || 0).toFixed(3) + '</div><div class="metric-label">Average</div></div>';
+        html += '<div class="metric-card" title="Upper boundary — anything above this is unusually high"><div class="metric-value">' + (cl.ucl || 0).toFixed(3) + '</div><div class="metric-label">Upper Limit</div></div>';
+        html += '<div class="metric-card" title="Lower boundary — anything below this is unusually low"><div class="metric-value">' + (cl.lcl || 0).toFixed(3) + '</div><div class="metric-label">Lower Limit</div></div>';
+        var statusBadge = d.status === 'in_control' ? '<span class="badge badge-info">Normal</span>' : '<span class="badge badge-error">Something\'s Off</span>';
         html += '<div class="metric-card"><div class="metric-value">' + statusBadge + '</div><div class="metric-label">Status</div></div>';
         html += '</div>';
         if (d.violations && d.violations.length > 0) {
@@ -2056,11 +2180,11 @@
       adminFetch("/api/admin/quality/capability").then(function(d) {
         var el = document.getElementById("quality-capability-content");
         var processes = d.processes || [];
-        if (processes.length === 0) { el.innerHTML = '<p class="tab-empty">No capability data yet.</p>'; return; }
-        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Process</th><th>Mean</th><th>Std</th><th>Cpk</th><th>n</th><th>Status</th></tr></thead><tbody>';
+        if (processes.length === 0) { el.innerHTML = '<p class="tab-empty">No consistency data yet.</p>'; return; }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>What\'s Measured</th><th>Average</th><th>Spread</th><th>Consistency Score</th><th>Sample Size</th><th>Verdict</th></tr></thead><tbody>';
         processes.forEach(function(p) {
           var cpk = p.cpk || 0;
-          var badge = cpk >= 1.33 ? '<span class="badge badge-info">Capable</span>' : cpk >= 1.0 ? '<span class="badge badge-warning">Marginal</span>' : '<span class="badge badge-error">Incapable</span>';
+          var badge = cpk >= 1.33 ? '<span class="badge badge-info">Consistent</span>' : cpk >= 1.0 ? '<span class="badge badge-warning">Okay</span>' : '<span class="badge badge-error">Inconsistent</span>';
           html += '<tr><td>' + esc(p.name || '') + '</td><td>' + (p.mean || 0).toFixed(2) + '</td><td>' + (p.std || 0).toFixed(2) + '</td><td>' + cpk.toFixed(3) + '</td><td>' + (p.n || 0) + '</td><td>' + badge + '</td></tr>';
         });
         html += '</tbody></table></div>';
@@ -2074,20 +2198,20 @@
         var km = d.survival || {};
         if (!km.time_points || km.time_points.length === 0) { el.innerHTML = '<p class="tab-empty">No retention data yet.</p>'; return; }
         var html = '<div class="metrics-grid">';
-        html += '<div class="metric-card"><div class="metric-value">' + (km.median_survival || 'N/A') + '</div><div class="metric-label">Median Survival (days)</div></div>';
+        html += '<div class="metric-card" title="Half your users stay at least this many days"><div class="metric-value">' + (km.median_survival || 'N/A') + '</div><div class="metric-label">Typical User Stays (days)</div></div>';
         html += '</div>';
-        html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Survival Curve</h3>';
-        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Day</th><th>Survival %</th><th>At Risk</th><th>Events</th></tr></thead><tbody>';
+        html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">How Long Users Stay</h3>';
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Day</th><th>% Still Active</th><th>Users Tracked</th><th>Users Who Left</th></tr></thead><tbody>';
         km.time_points.forEach(function(t, i) {
           html += '<tr><td>' + t + '</td><td>' + ((km.survival_probabilities[i] || 0) * 100).toFixed(1) + '%</td><td>' + (km.n_at_risk[i] || 0) + '</td><td>' + (km.n_events[i] || 0) + '</td></tr>';
         });
         html += '</tbody></table></div></div>';
         if (d.risk_factors) {
-          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">Churn Risk Factors</h3>';
-          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Factor</th><th>Correlation</th><th>Direction</th></tr></thead><tbody>';
+          html += '<div style="margin-top:var(--space-3);"><h3 style="font-family:var(--font-heading);font-size:var(--text-base);margin-bottom:var(--space-2);">What Makes Users Leave or Stay</h3>';
+          html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Factor</th><th>How Strong</th><th>Effect</th></tr></thead><tbody>';
           var factors = d.risk_factors.factors || [];
           factors.forEach(function(f) {
-            var dir = f.correlation > 0 ? '<span style="color:var(--color-correct)">Protective</span>' : '<span style="color:var(--color-incorrect)">Risk</span>';
+            var dir = f.correlation > 0 ? '<span style="color:var(--color-correct)">Keeps them</span>' : '<span style="color:var(--color-incorrect)">Drives them away</span>';
             html += '<tr><td>' + esc(f.name || '') + '</td><td>' + Math.abs(f.correlation || 0).toFixed(3) + '</td><td>' + dir + '</td></tr>';
           });
           html += '</tbody></table></div></div>';
@@ -2104,9 +2228,9 @@
         var ct = s.cycle_time || {};
         var lt = s.lead_time || {};
         var tp = s.throughput || {};
-        html += '<div class="metric-card"><div class="metric-value">' + (ct.median || 0).toFixed(1) + 'h</div><div class="metric-label">Cycle Time (median)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (lt.median || 0).toFixed(1) + 'h</div><div class="metric-label">Lead Time (median)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (tp.weekly_avg || 0).toFixed(1) + '</div><div class="metric-label">Throughput/week</div></div>';
+        html += '<div class="metric-card" title="How long it takes to finish a task once you start working on it"><div class="metric-value">' + (ct.median || 0).toFixed(1) + 'h</div><div class="metric-label">Time to Complete (typical)</div></div>';
+        html += '<div class="metric-card" title="Total time from when a task is created to when it\'s done"><div class="metric-value">' + (lt.median || 0).toFixed(1) + 'h</div><div class="metric-label">Total Wait + Work Time</div></div>';
+        html += '<div class="metric-card" title="How many tasks you finish per week"><div class="metric-value">' + (tp.weekly_avg || 0).toFixed(1) + '</div><div class="metric-label">Tasks Done / Week</div></div>';
         html += '</div>';
         el.innerHTML = html;
       }).catch(function(e) { document.getElementById("quality-flow-content").innerHTML = '<p class="tab-empty">Flow metrics unavailable: ' + esc(e.message) + '</p>'; });
@@ -2133,7 +2257,7 @@
       adminFetch("/api/admin/risks").then(function(d) {
         var el = document.getElementById("quality-risks-content");
         if (!d.risks || d.risks.length === 0) { el.innerHTML = '<p class="tab-empty">No risks registered. Add risks to track them.</p>'; return; }
-        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Score</th><th>Category</th><th>Title</th><th>P</th><th>I</th><th>Status</th><th>Mitigation</th></tr></thead><tbody>';
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Severity</th><th>Category</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Status</th><th>What You\'re Doing About It</th></tr></thead><tbody>';
         d.risks.forEach(function(r) {
           var score = (r.probability || 0) * (r.impact || 0);
           var scoreBadge = score >= 15 ? '<span class="badge badge-error">' + score + '</span>' : score >= 8 ? '<span class="badge badge-warning">' + score + '</span>' : '<span class="badge badge-info">' + score + '</span>';

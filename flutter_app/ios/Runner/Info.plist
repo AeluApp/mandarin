@@ -38,8 +38,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<!--
-		  Allow localhost for debug builds.
-		  Remove this in production by using Xcode build configurations.
+		  TODO: REMOVE before App Store submission.
+		  Dev-only: allows HTTP connections to localhost for local API testing.
+		  For production, delete the entire NSExceptionDomains block below.
+		  Alternatively, use a separate Info-Release.plist via Xcode build
+		  configurations (Build Settings > Info.plist File) so that release
+		  builds never include this exception.
 		-->
 		<key>NSExceptionDomains</key>
 		<dict>

@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 100  # Increment when adding migrations
+SCHEMA_VERSION = 102  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6056,6 +6056,35 @@ def _migrate_v99_to_v100(conn):
     conn.commit()
 
 
+def _migrate_v100_to_v101(conn):
+    """Add example_sentence columns to content_item for AI-generated drills."""
+    ci_cols = _col_set(conn, "content_item")
+    if "example_sentence_hanzi" not in ci_cols:
+        conn.execute("ALTER TABLE content_item ADD COLUMN example_sentence_hanzi TEXT")
+    if "example_sentence_pinyin" not in ci_cols:
+        conn.execute("ALTER TABLE content_item ADD COLUMN example_sentence_pinyin TEXT")
+    if "example_sentence_english" not in ci_cols:
+        conn.execute("ALTER TABLE content_item ADD COLUMN example_sentence_english TEXT")
+    conn.commit()
+
+
+def _migrate_v101_to_v102(conn):
+    """Add password_history table for password reuse prevention."""
+    tables = _table_set(conn)
+    if "password_history" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS password_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+                password_hash TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+            );
+            CREATE INDEX IF NOT EXISTS idx_password_history_user ON password_history(user_id);
+        """)
+        conn.commit()
+
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6157,6 +6186,8 @@ MIGRATIONS = {
     97: _migrate_v97_to_v98,
     98: _migrate_v98_to_v99,
     99: _migrate_v99_to_v100,
+    100: _migrate_v100_to_v101,
+    101: _migrate_v101_to_v102,
 }
 
 

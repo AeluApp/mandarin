@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+import '../config.dart';
 import '../core/animations/drift_up.dart';
 import '../core/animations/content_switcher.dart';
 import '../core/animations/pressable_scale.dart';
@@ -17,9 +18,6 @@ import '../shared/widgets/skeleton.dart';
 import '../theme/aelu_colors.dart';
 import '../theme/hanzi_style.dart';
 import 'grammar_provider.dart';
-
-const _apiUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
 
 class GrammarDetailScreen extends ConsumerStatefulWidget {
   final int pointId;
@@ -49,7 +47,7 @@ class _GrammarDetailScreenState extends ConsumerState<GrammarDetailScreen> {
     unawaited(HapticFeedback.selectionClick());
     try {
       final encoded = Uri.encodeQueryComponent(chinese);
-      await _player.play(UrlSource('$_apiUrl/api/tts?text=$encoded'));
+      await _player.play(UrlSource('${AppConfig.apiUrl}/api/tts?text=$encoded'));
     } catch (e, st) {
       ErrorHandler.log('Grammar play example', e, st);
     }

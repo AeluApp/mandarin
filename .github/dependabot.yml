@@ -4,10 +4,14 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
+    groups:
+      patch-updates:
+        update-types:
+          - "patch"
     labels:
       - "dependencies"
-      - "security"
+      - "auto-merge-patch"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "docker"
     directory: "/"
@@ -15,4 +19,3 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
-      - "security"

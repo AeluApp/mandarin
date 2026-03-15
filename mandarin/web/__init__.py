@@ -92,19 +92,26 @@ def create_app(testing=False):
 
     # ── Secret key ────────────────────────────────────────
     app.config["SECRET_KEY"] = SECRET_KEY
-    if IS_PRODUCTION and SECRET_KEY == "mandarin-local-only":
-        raise RuntimeError("SECRET_KEY must be set in production (not the default)")
 
-    # Validate JWT_SECRET in production (Zero Trust: explicit credential verification)
-    from ..settings import JWT_SECRET
-    if IS_PRODUCTION and JWT_SECRET == "mandarin-local-only":
-        raise RuntimeError("JWT_SECRET must be set in production (not the default)")
-
-    # Validate all production env vars and log warnings for missing ones
+    # ── Production config validation (categorized by severity) ──
     if IS_PRODUCTION:
         from ..settings import validate_production_config
-        for warning in validate_production_config():
-            logger.warning("Production config: %s", warning)
+        issues = validate_production_config()
+
+        # CRITICAL — prevent startup entirely
+        if issues["critical"]:
+            msg = "FATAL: production startup blocked by missing critical config:\n"
+            msg += "\n".join(f"  - {m}" for m in issues["critical"])
+            logger.critical(msg)
+            raise RuntimeError(msg)
+
+        # IMPORTANT — log as ERROR, allow startup
+        for message in issues["important"]:
+            logger.error("Production config: %s", message)
+
+        # OPTIONAL — log as WARNING, allow startup
+        for message in issues["optional"]:
+            logger.warning("Production config: %s", message)
 
     # ── Cookie security ───────────────────────────────────
     app.config["REMEMBER_COOKIE_DURATION"] = REMEMBER_COOKIE_DURATION_SECONDS
@@ -112,6 +119,9 @@ def create_app(testing=False):
     app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
     app.config["REMEMBER_COOKIE_SECURE"] = IS_PRODUCTION
     app.config["SESSION_COOKIE_SECURE"] = IS_PRODUCTION
+
+    # ── Request size limit ────────────────────────────────
+    app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB max request size
 
     # ── Logging ───────────────────────────────────────────
     # Only configure logging if not in test mode (tests set their own config).
@@ -204,7 +214,17 @@ def create_app(testing=False):
     # _storage attribute is the supported extension point.
     limiter._storage = _sqlite_storage
 
+    # ── Flask-Login ───────────────────────────────────────
+    login_manager = LoginManager()
+    login_manager.login_view = "auth.login"
+    login_manager.login_message_category = "info"
+    login_manager.init_app(app)
+
+    from .auth_routes import load_user, User, _is_native_request
+    login_manager.user_loader(load_user)
+
     # ── Idle session timeout (Item 22) ────────────────────
+    # Registered AFTER Flask-Login init so current_user is loaded before this runs.
     @app.before_request
     def _check_idle_timeout():
         from flask_login import current_user as _cu
@@ -221,21 +241,11 @@ def create_app(testing=False):
                 return {"error": "Session expired due to inactivity"}, 401
             from flask import redirect, url_for, flash
             flash("Session expired due to inactivity. Please log in again.", "info")
-            from .auth_routes import _is_native_request as _is_native
-            if _is_native():
+            if _is_native_request():
                 return render_template("login.html", email="")
             return redirect(url_for("auth.login"))
         _session["last_activity"] = now
         return None
-
-    # ── Flask-Login ───────────────────────────────────────
-    login_manager = LoginManager()
-    login_manager.login_view = "auth.login"
-    login_manager.login_message_category = "info"
-    login_manager.init_app(app)
-
-    from .auth_routes import load_user, User, _is_native_request
-    login_manager.user_loader(load_user)
 
     @login_manager.unauthorized_handler
     def _unauthorized():
@@ -602,6 +612,9 @@ def create_app(testing=False):
 
         from .experiment_daemon import start as _start_experiment_daemon
         _start_experiment_daemon()
+
+        from .openclaw_scheduler import start as _start_openclaw
+        _start_openclaw()
 
     return app
 

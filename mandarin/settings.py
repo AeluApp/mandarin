@@ -4,6 +4,7 @@ DB path is configurable via DATA_DIR env var.
 JSON data (passages, scenarios, media) ships with code — always code-relative.
 """
 
+import json
 import os
 from pathlib import Path
 
@@ -100,7 +101,7 @@ FLASK_ENV = os.environ.get("FLASK_ENV", "")
 # ── OpenClaw (messaging-first admin) ──────────────
 OPENCLAW_SIGNAL_NUMBER = os.environ.get("OPENCLAW_SIGNAL_NUMBER", "")
 OPENCLAW_API_KEY = os.environ.get("OPENCLAW_API_KEY", "")
-OPENCLAW_REMINDER_HOURS = [8, 12, 18]
+OPENCLAW_REMINDER_HOURS = json.loads(os.environ.get("OPENCLAW_REMINDER_HOURS", "[8, 12, 18]"))
 OPENCLAW_REVIEW_DEBOUNCE_SECONDS = 3600
 try:
     OPENCLAW_PIPECAT_PORT = int(os.environ.get("OPENCLAW_PIPECAT_PORT", "8765"))
@@ -130,29 +131,90 @@ ESTIMATE_POINTS = {"S": 1, "M": 3, "L": 5, "XL": 8}
 
 # ── Ollama (local LLM) ─────────────────────────────────
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_PRIMARY_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:7b")
-OLLAMA_FALLBACK_MODEL = os.environ.get("OLLAMA_FALLBACK_MODEL", "qwen2.5:1.5b")
+
+# Model tier auto-selection: picks best Qwen model for available system memory.
+# Override with OLLAMA_MODEL env var to pin a specific model.
+# Tiers: <=8GB → 1.5b, <=16GB → 7b, >16GB → 14b
+_QWEN_TIERS = [
+    (8,  "qwen2.5:1.5b"),   # 8GB RAM (e.g. M2 MacBook Air)
+    (16, "qwen2.5:7b"),     # 16GB RAM
+    (99, "qwen2.5:14b"),    # 32GB+ RAM or cloud GPU
+]
+
+def _auto_select_model() -> tuple[str, str]:
+    """Pick primary + fallback Qwen model based on system memory."""
+    try:
+        import subprocess
+        mem_bytes = int(subprocess.check_output(["sysctl", "-n", "hw.memsize"]).strip())
+        mem_gb = mem_bytes / (1024 ** 3)
+    except Exception:
+        mem_gb = 8  # conservative default
+    primary = "qwen2.5:1.5b"
+    for threshold, model in _QWEN_TIERS:
+        if mem_gb <= threshold:
+            primary = model
+            break
+    # Fallback is one tier down, or same if already smallest
+    fallback = "qwen2.5:1.5b"
+    for threshold, model in _QWEN_TIERS:
+        if model == primary:
+            break
+        fallback = model
+    return primary, fallback
+
+_auto_primary, _auto_fallback = _auto_select_model()
+OLLAMA_PRIMARY_MODEL = os.environ.get("OLLAMA_MODEL", _auto_primary)
+OLLAMA_FALLBACK_MODEL = os.environ.get("OLLAMA_FALLBACK_MODEL", _auto_fallback)
+
 try:
-    OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "30"))
+    OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "60"))
 except (ValueError, TypeError):
-    OLLAMA_TIMEOUT = 30
+    OLLAMA_TIMEOUT = 60
 
 
-def validate_production_config() -> list[str]:
+def validate_production_config() -> dict[str, list[str]]:
     """Check that all required production env vars are set.
 
-    Returns a list of warning messages (empty = all good).
+    Returns a dict with three keys — ``critical``, ``important``, ``optional`` —
+    each mapping to a list of human-readable problem descriptions.
+
+    * **critical** – secrets that must never use defaults in production.
+      The app MUST NOT start if any of these are missing.
+    * **important** – service keys whose absence degrades major features
+      (payments, email) but does not compromise security.
+    * **optional** – observability / analytics integrations that are
+      nice-to-have but not essential.
+
     Called at startup in create_app() when IS_PRODUCTION is True.
     """
-    warnings = []
+    issues: dict[str, list[str]] = {"critical": [], "important": [], "optional": []}
+
+    # ── CRITICAL: app must not start without these ───────
+    if SECRET_KEY == "mandarin-local-only":
+        issues["critical"].append(
+            "SECRET_KEY is still the default — must be set to a unique secret in production"
+        )
+    if JWT_SECRET == "mandarin-local-only":
+        issues["critical"].append(
+            "JWT_SECRET is still the default — must be set to a unique secret in production"
+        )
+
+    # ── IMPORTANT: feature-critical but not a security emergency ──
     if not STRIPE_SECRET_KEY:
-        warnings.append("STRIPE_SECRET_KEY is empty — payment features will fail")
+        issues["important"].append("STRIPE_SECRET_KEY is empty — payment features will fail")
     if not STRIPE_WEBHOOK_SECRET:
-        warnings.append("STRIPE_WEBHOOK_SECRET is empty — webhook signature verification disabled")
+        issues["important"].append("STRIPE_WEBHOOK_SECRET is empty — webhook signature verification disabled")
     if not RESEND_API_KEY:
-        warnings.append("RESEND_API_KEY is empty — transactional emails will fail")
+        issues["important"].append("RESEND_API_KEY is empty — transactional emails will fail")
     if not VAPID_PRIVATE_KEY:
-        warnings.append("VAPID_PRIVATE_KEY is empty — push notifications disabled")
+        issues["important"].append("VAPID_PRIVATE_KEY is empty — push notifications disabled")
+
+    # ── OPTIONAL: observability / analytics ───────────────
     if not SENTRY_DSN:
-        warnings.append("SENTRY_DSN is empty — error monitoring disabled")
-    return warnings
+        issues["optional"].append("SENTRY_DSN is empty — error monitoring disabled")
+    if not PLAUSIBLE_DOMAIN:
+        issues["optional"].append("PLAUSIBLE_DOMAIN is empty — Plausible analytics disabled")
+    if not GA4_MEASUREMENT_ID:
+        issues["optional"].append("GA4_MEASUREMENT_ID is empty — Google Analytics disabled")
+
+    return issues

@@ -9,6 +9,7 @@ the theme/moral already embodied in the preceding scene.
 import json
 import re
 import sys
+from pathlib import Path
 
 # --- Thesis-coda detection patterns ---
 # Each is (pattern, description) for reporting
@@ -385,7 +386,7 @@ def process_file(filepath, originals_by_id):
 
 def main():
     # Load originals from reading_passages.json
-    originals_path = '/Users/jasongerson/mandarin/data/reading_passages.json'
+    originals_path = str(Path(__file__).parent.parent / "data" / "reading_passages.json")
     with open(originals_path, 'r', encoding='utf-8') as f:
         all_passages = json.load(f)
     originals_by_id = {p['id']: p['text_en'] for p in all_passages if p.get('text_en')}

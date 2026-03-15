@@ -27,6 +27,18 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            val keystoreFile = System.getenv("AELU_KEYSTORE_FILE") ?: findProperty("AELU_KEYSTORE_FILE")?.toString()
+            if (keystoreFile != null) {
+                storeFile = file(keystoreFile)
+                storePassword = System.getenv("AELU_KEYSTORE_PASSWORD") ?: findProperty("AELU_KEYSTORE_PASSWORD")?.toString() ?: ""
+                keyAlias = System.getenv("AELU_KEY_ALIAS") ?: findProperty("AELU_KEY_ALIAS")?.toString() ?: ""
+                keyPassword = System.getenv("AELU_KEY_PASSWORD") ?: findProperty("AELU_KEY_PASSWORD")?.toString() ?: ""
+            }
+        }
+    }
+
     buildTypes {
         release {
             // SECURITY: Enable R8/ProGuard minification and shrinking (OWASP M9, CIS 7.1).
@@ -36,8 +48,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // TODO: Add your own signing config for the release build.
-            signingConfig = signingConfigs.getByName("debug")
+            // Use release signing config when a keystore is configured;
+            // fall back to debug signing for local development builds.
+            signingConfig = if (signingConfigs.findByName("release")?.storeFile != null) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }

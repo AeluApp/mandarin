@@ -7,6 +7,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 import '../api/api_client.dart';
 import '../api/api_response.dart';
+import '../config.dart';
 import '../core/error_handler.dart';
 import '../core/animations/content_switcher.dart';
 import '../core/animations/drift_up.dart';
@@ -18,9 +19,6 @@ import '../shared/widgets/skeleton.dart';
 import '../theme/aelu_colors.dart';
 import 'widgets/audio_progress.dart';
 import 'widgets/speed_control.dart';
-
-const _apiUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
 
 class ListeningScreen extends ConsumerStatefulWidget {
   const ListeningScreen({super.key});
@@ -110,7 +108,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen> {
         if (_position > Duration.zero) {
           await _player.resume();
         } else {
-          await _player.play(UrlSource('$_apiUrl$audioUrl'));
+          await _player.play(UrlSource('${AppConfig.apiUrl}$audioUrl'));
         }
         await _player.setPlaybackRate(_speed);
         if (mounted) setState(() => _playing = true);

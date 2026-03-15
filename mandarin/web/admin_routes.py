@@ -21,6 +21,16 @@ from .middleware import paginate_params
 _MONTHLY_PRICE = float(PRICING["monthly_display"])
 _STRIPE_FEE_FIXED = STRIPE_FEE_FIXED_CENTS / 100.0
 
+# Allowed fields for dynamic SQL SET-clause construction (security audit hardening)
+_RISK_ALLOWED_FIELDS = frozenset({
+    "category", "title", "description", "probability", "impact",
+    "mitigation", "contingency", "status", "owner",
+})
+_WORK_ITEM_ALLOWED_FIELDS = frozenset({
+    "category", "title", "description", "size", "effort",
+    "status", "priority", "acceptance_criteria", "owner",
+})
+
 logger = logging.getLogger(__name__)
 
 admin_bp = Blueprint("admin", __name__)
@@ -785,7 +795,7 @@ def admin_update_risk(risk_id):
         values = []
         for col in ("category", "title", "description", "probability", "impact",
                      "mitigation", "contingency", "status", "owner"):
-            if col in data:
+            if col in data and col in _RISK_ALLOWED_FIELDS:
                 fields.append(f"{col} = ?")
                 values.append(data[col])
         if not fields:
@@ -982,7 +992,7 @@ def admin_update_work_item(item_id):
 
             for col in ("title", "description", "item_type", "status",
                          "service_class", "estimate", "implementation_type"):
-                if col in data:
+                if col in data and col in _WORK_ITEM_ALLOWED_FIELDS:
                     updates.append(f"{col} = ?")
                     values.append(data[col])
 
@@ -4742,6 +4752,10 @@ def admin_quality_sensitivity():
     user_id = request.args.get("user_id", 1, type=int)
     from ..quality.sensitivity import sensitivity_analysis as run_sensitivity
     with db.connection() as conn:
+        if user_id != current_user.id:
+            log_security_event(conn, SecurityEvent.ADMIN_ACCESS,
+                               user_id=current_user.id,
+                               details=f"Inspected user {user_id} data via {request.path}")
         result = run_sensitivity(conn, user_id=user_id)
     return jsonify(result)
 
@@ -4754,6 +4768,10 @@ def admin_quality_queue_model():
     user_id = request.args.get("user_id", 1, type=int)
     from ..quality.queue_model import queue_model
     with db.connection() as conn:
+        if user_id != current_user.id:
+            log_security_event(conn, SecurityEvent.ADMIN_ACCESS,
+                               user_id=current_user.id,
+                               details=f"Inspected user {user_id} data via {request.path}")
         result = queue_model(conn, user_id=user_id)
     return jsonify(result)
 
@@ -4768,6 +4786,10 @@ def admin_quality_optimization():
     minutes = max(1, min(60, minutes))
     from ..quality.optimization import optimize_session
     with db.connection() as conn:
+        if user_id != current_user.id:
+            log_security_event(conn, SecurityEvent.ADMIN_ACCESS,
+                               user_id=current_user.id,
+                               details=f"Inspected user {user_id} data via {request.path}")
         result = optimize_session(conn, user_id=user_id,
                                   time_budget_minutes=minutes)
     return jsonify(result)
@@ -4781,6 +4803,10 @@ def admin_quality_decision_table():
     user_id = request.args.get("user_id", 1, type=int)
     from ..quality.optimization import decision_table
     with db.connection() as conn:
+        if user_id != current_user.id:
+            log_security_event(conn, SecurityEvent.ADMIN_ACCESS,
+                               user_id=current_user.id,
+                               details=f"Inspected user {user_id} data via {request.path}")
         result = decision_table(conn, user_id=user_id)
     return jsonify(result)
 
@@ -4793,6 +4819,10 @@ def admin_quality_pareto():
     user_id = request.args.get("user_id", 1, type=int)
     from ..quality.optimization import pareto_frontier
     with db.connection() as conn:
+        if user_id != current_user.id:
+            log_security_event(conn, SecurityEvent.ADMIN_ACCESS,
+                               user_id=current_user.id,
+                               details=f"Inspected user {user_id} data via {request.path}")
         result = pareto_frontier(conn, user_id=user_id)
     return jsonify(result)
 

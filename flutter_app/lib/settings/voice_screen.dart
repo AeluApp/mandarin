@@ -7,14 +7,12 @@ import 'package:audioplayers/audioplayers.dart';
 
 import '../api/api_client.dart';
 import '../api/api_response.dart';
+import '../config.dart';
 import '../core/animations/drift_up.dart';
 import '../core/animations/pressable_scale.dart';
 import '../core/error_handler.dart';
 import '../shared/widgets/aelu_snackbar.dart';
 import '../theme/aelu_colors.dart';
-
-const _apiUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
 
 /// Voice option from the backend.
 class _VoiceOption {
@@ -108,7 +106,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
     try {
       final text = Uri.encodeQueryComponent('你好，我是你的中文老师。');
       await _player.play(
-          UrlSource('$_apiUrl/api/tts?text=$text&voice=$voiceKey'));
+          UrlSource('${AppConfig.apiUrl}/api/tts?text=$text&voice=$voiceKey'));
     } catch (e, st) {
       ErrorHandler.log('Voice preview', e, st);
     }

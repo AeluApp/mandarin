@@ -34,7 +34,7 @@ _INJECTION_PATTERNS = [
     re.compile(r"(print|show|reveal|output|display|repeat)\s+(your\s+)?(system\s+)?(prompt|instructions?|rules?)", re.I),
     re.compile(r"what\s+(are|is)\s+your\s+(system\s+)?(prompt|instructions?|rules?)", re.I),
     # Role hijacking
-    re.compile(r"you\s+are\s+now\s+", re.I),
+    re.compile(r"you\s+are\s+now\s+(a\s+|an\s+|my\s+|the\s+)", re.I),
     re.compile(r"pretend\s+(to\s+be|you\s+are)", re.I),
     re.compile(r"act\s+as\s+(if\s+you|a\s+)", re.I),
     re.compile(r"new\s+(persona|role|identity|character)", re.I),
@@ -46,6 +46,40 @@ _INJECTION_PATTERNS = [
     re.compile(r"(DROP|DELETE|UPDATE|INSERT|ALTER)\s+TABLE", re.I),
     re.compile(r";\s*(DROP|DELETE|UPDATE|INSERT|ALTER)\s+", re.I),
 ]
+
+
+# ── Normalization for evasion defense ────────────────────
+
+def _normalize_for_injection_check(text: str) -> str:
+    """Normalize text to catch evasion attempts (leetspeak, Unicode, etc.)."""
+    import unicodedata
+    # Normalize Unicode (e.g., fullwidth chars -> ASCII)
+    text = unicodedata.normalize("NFKC", text)
+    # Common leetspeak substitutions
+    subs = {"0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a", "$": "s"}
+    normalized = "".join(subs.get(c, c) for c in text.lower())
+    return normalized
+
+
+# ── Rate limiting ────────────────────────────────────────
+
+_message_counts: dict[str, list[float]] = {}
+_RATE_WINDOW = 60  # seconds
+_RATE_LIMIT = 20   # messages per window
+
+
+def check_rate_limit(channel: str) -> bool:
+    """Return True if within rate limit, False if exceeded."""
+    import time
+    now = time.time()
+    if channel not in _message_counts:
+        _message_counts[channel] = []
+    # Prune old entries
+    _message_counts[channel] = [t for t in _message_counts[channel] if now - t < _RATE_WINDOW]
+    if len(_message_counts[channel]) >= _RATE_LIMIT:
+        return False
+    _message_counts[channel].append(now)
+    return True
 
 
 def sanitize_input(text: str) -> str:
@@ -68,8 +102,9 @@ def check_prompt_injection(text: str) -> tuple[bool, Optional[str]]:
     if not text:
         return True, None
 
+    normalized = _normalize_for_injection_check(text)
     for pattern in _INJECTION_PATTERNS:
-        match = pattern.search(text)
+        match = pattern.search(normalized)
         if match:
             return False, f"injection_pattern: {match.group()[:50]}"
 

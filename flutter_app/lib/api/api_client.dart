@@ -6,11 +6,9 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../config.dart';
 import '../core/error_handler.dart';
 import '../core/security/security_config.dart';
-
-const _baseUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
 
 /// Simple circuit breaker to prevent cascading failures.
 ///
@@ -78,7 +76,7 @@ class ApiClient {
 
   ApiClient() {
     _dio = Dio(BaseOptions(
-      baseUrl: _baseUrl,
+      baseUrl: AppConfig.apiUrl,
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 15),
       sendTimeout: const Duration(seconds: 15),
@@ -245,7 +243,7 @@ class ApiClient {
 
       // Use a separate Dio instance for refresh — no interceptors.
       final refreshDio = Dio(BaseOptions(
-        baseUrl: _baseUrl,
+        baseUrl: AppConfig.apiUrl,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
       ));

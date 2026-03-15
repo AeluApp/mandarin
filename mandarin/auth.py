@@ -64,6 +64,41 @@ def _validate_password(password: str) -> None:
         raise ValueError("This password is too common. Please choose a more unique password.")
 
 
+def _check_password_reuse(conn: sqlite3.Connection, user_id: int,
+                          new_password: str, limit: int = 5) -> bool:
+    """Return True if password was recently used (should be rejected).
+
+    Checks the current password hash and the last ``limit`` entries in
+    password_history.
+    """
+    # Check current password first
+    current = conn.execute(
+        "SELECT password_hash FROM user WHERE id = ?", (user_id,)
+    ).fetchone()
+    if current and check_password_hash(current["password_hash"], new_password):
+        return True
+
+    # Check historical passwords
+    rows = conn.execute(
+        "SELECT password_hash FROM password_history WHERE user_id = ? "
+        "ORDER BY created_at DESC LIMIT ?",
+        (user_id, limit),
+    ).fetchall()
+    for row in rows:
+        if check_password_hash(row["password_hash"], new_password):
+            return True
+    return False
+
+
+def _save_password_history(conn: sqlite3.Connection, user_id: int,
+                           old_password_hash: str) -> None:
+    """Save a password hash to the history table."""
+    conn.execute(
+        "INSERT INTO password_history (user_id, password_hash) VALUES (?, ?)",
+        (user_id, old_password_hash),
+    )
+
+
 def create_user(conn: sqlite3.Connection, email: str, password: str,
                 display_name: str = "", invite_code: str = None,
                 role: str = "student") -> dict:
@@ -296,6 +331,8 @@ def reset_password(conn: sqlite3.Connection, token: str, new_password: str) -> b
 
     Also invalidates all existing sessions (refresh tokens) for the user
     to prevent continued access with compromised credentials.
+
+    Raises ValueError if the new password was recently used.
     """
     _validate_password(new_password)
 
@@ -303,7 +340,7 @@ def reset_password(conn: sqlite3.Connection, token: str, new_password: str) -> b
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
     row = conn.execute(
-        """SELECT id FROM user
+        """SELECT id, password_hash FROM user
            WHERE reset_token_hash = ? AND reset_token_expires > ? AND is_active = 1""",
         (token_hash, now)
     ).fetchone()
@@ -311,6 +348,11 @@ def reset_password(conn: sqlite3.Connection, token: str, new_password: str) -> b
     if not row:
         return False
 
+    # Password reuse prevention — check last 5 passwords
+    if _check_password_reuse(conn, row["id"], new_password):
+        raise ValueError("Please choose a password you haven't used recently.")
+
+    old_hash = row["password_hash"]
     password_hash = generate_password_hash(new_password, method="pbkdf2:sha256")
     # Clear password reset token, refresh token (invalidate JWT sessions),
     # failed login attempts, and account lockout
@@ -321,6 +363,7 @@ def reset_password(conn: sqlite3.Connection, token: str, new_password: str) -> b
            locked_until = NULL, updated_at = ? WHERE id = ?""",
         (password_hash, now, row["id"])
     )
+    _save_password_history(conn, row["id"], old_hash)
     conn.commit()
 
     logger.info("Password reset for user id=%d", row["id"])

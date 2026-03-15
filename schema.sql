@@ -185,6 +185,11 @@ CREATE TABLE IF NOT EXISTS content_item (
     -- Image association (for image_association drill)
     image_url TEXT,
 
+    -- Example sentences (AI-generated drill items)
+    example_sentence_hanzi TEXT,
+    example_sentence_pinyin TEXT,
+    example_sentence_english TEXT,
+
     -- Staleness tracking
     times_shown INTEGER NOT NULL DEFAULT 0,
     times_correct INTEGER NOT NULL DEFAULT 0,
@@ -542,6 +547,23 @@ CREATE TABLE IF NOT EXISTS vocab_encounter (
 CREATE INDEX IF NOT EXISTS idx_encounter_hanzi ON vocab_encounter(hanzi);
 CREATE INDEX IF NOT EXISTS idx_encounter_source ON vocab_encounter(source_type, source_id);
 CREATE INDEX IF NOT EXISTS idx_vocab_encounter_user ON vocab_encounter(user_id, hanzi);
+
+-- ────────────────────────────────
+-- PASSAGE-VOCAB MAP (V100+)
+-- ────────────────────────────────
+-- Pre-computed index: which content_item vocab words appear in each passage.
+-- Built by scripts/build_passage_vocab_index.py via jieba segmentation.
+CREATE TABLE IF NOT EXISTS passage_vocab_map (
+    passage_id TEXT NOT NULL,
+    content_item_id INTEGER NOT NULL,
+    hanzi TEXT NOT NULL,
+    occurrence_count INTEGER NOT NULL DEFAULT 1,
+    PRIMARY KEY (passage_id, content_item_id),
+    FOREIGN KEY (content_item_id) REFERENCES content_item(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pvm_content_item ON passage_vocab_map(content_item_id);
+CREATE INDEX IF NOT EXISTS idx_pvm_hanzi ON passage_vocab_map(hanzi);
 
 -- ────────────────────────────────
 -- GRAMMAR PROGRESS (V31+)

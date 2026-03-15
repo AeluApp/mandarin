@@ -16,6 +16,16 @@ from .api_errors import api_error, api_error_handler, AUTH_REQUIRED, VALIDATION_
 
 logger = logging.getLogger(__name__)
 
+# Action type translation: Flutter offline queue sends generic names,
+# but the backend expects specific internal types.
+_ACTION_TYPE_MAP: dict[str, str] = {
+    "submit_answer": "drill_result",
+    "mark_watched": "media_watched",
+    "mark_complete": "media_complete",
+    "lookup": "vocab_encounter",
+    "encounter": "vocab_encounter",
+}
+
 sync_bp = Blueprint("sync", __name__, url_prefix="/api/sync")
 
 
@@ -46,8 +56,12 @@ def sync_push():
 
         with db.connection() as conn:
             for i, action in enumerate(actions):
-                action_type = action.get("type", "")
-                action_data = action.get("data", {})
+                # Support both key conventions:
+                #   Backend canonical: {"type": ..., "data": ..., "timestamp": ...}
+                #   Flutter offline queue: {"action": ..., "payload": ..., "timestamp": ...}
+                raw_type = action.get("type") or action.get("action", "")
+                action_type = _ACTION_TYPE_MAP.get(raw_type, raw_type)
+                action_data = action.get("data") or action.get("payload", {})
                 timestamp = action.get("timestamp", "")
 
                 try:

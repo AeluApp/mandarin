@@ -69,15 +69,44 @@ def _run_loop():
 
 
 def _process():
-    """Run encounter→drill batch processing."""
+    """Run encounter→drill batch processing + quality checks."""
     from ..ai.ollama_client import is_ollama_available
 
     if not is_ollama_available():
-        logger.debug("AI feedback: Ollama not available, skipping")
-        return
+        logger.debug("AI feedback: Ollama not available, skipping drill generation")
+    else:
+        from ..ai.drill_generator import process_pending_encounters
+        with db.connection() as conn:
+            result = process_pending_encounters(conn, max_batch=20)
+            logger.info("AI feedback drill generation: %s", result)
 
-    from ..ai.drill_generator import process_pending_encounters
+    # Audio coherence: batch-check unchecked items (runs even without Ollama)
+    try:
+        from ..ai.audio_coherence import batch_check_coherence
+        with db.connection() as conn:
+            coherence_results = batch_check_coherence(conn, limit=20)
+            passed = sum(1 for r in coherence_results if r.get("passed"))
+            logger.info("AI feedback audio coherence: %d/%d passed",
+                        passed, len(coherence_results))
+    except Exception:
+        logger.debug("Audio coherence batch check skipped", exc_info=True)
 
-    with db.connection() as conn:
-        result = process_pending_encounters(conn, max_batch=20)
-        logger.info("AI feedback: %s", result)
+    # RAG enrichment: add example sentences to knowledge base entries
+    try:
+        from ..ai.rag_layer import enrich_with_example_sentences
+        with db.connection() as conn:
+            enrich_result = enrich_with_example_sentences(conn, min_hsk_level=5)
+            if enrich_result.get("enriched", 0) > 0:
+                logger.info("AI feedback RAG enrichment: %s", enrich_result)
+    except Exception:
+        logger.debug("RAG enrichment skipped", exc_info=True)
+
+    # Stale workflow detection: find and retry stuck workflows
+    try:
+        from ..ai.workflow_engine import get_stale_workflows
+        with db.connection() as conn:
+            stale = get_stale_workflows(conn, max_age_hours=12)
+            if stale:
+                logger.warning("AI feedback: %d stale workflows found", len(stale))
+    except Exception:
+        logger.debug("Stale workflow check skipped", exc_info=True)

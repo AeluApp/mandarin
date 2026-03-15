@@ -107,7 +107,7 @@ def _send_critical_alert(
             }, timeout=5)
             webhook_ok = True
         except Exception as e:
-            logger.error("Alert webhook failed: %s", e)
+            logger.critical("Alert webhook failed: %s", e)
 
     # Send admin email
     admin_email = ADMIN_EMAIL
@@ -117,7 +117,7 @@ def _send_critical_alert(
             send_alert(admin_email, f"[CRITICAL] {event_type}", alert_msg)
             email_ok = True
         except Exception as e:
-            logger.error("Alert email failed: %s", e)
+            logger.critical("Alert email failed: %s", e)
 
     # If ALL delivery channels failed, escalate so the failure isn't silent
     if not webhook_ok and not email_ok:
@@ -137,8 +137,19 @@ def _send_critical_alert(
                      "CRITICAL"),
                 )
                 conn.commit()
-            except sqlite3.Error:
-                pass  # Table may not exist or DB may be in error state
+            except sqlite3.Error as db_err:
+                logger.critical("DB audit write also failed: %s", db_err)
+
+        # Last-resort fallback: append to local file so the alert is never lost
+        try:
+            fallback_ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            with open("/tmp/aelu_critical_alerts.log", "a") as f:
+                f.write(
+                    f"{fallback_ts} ALERT_DELIVERY_FAILURE "
+                    f"event={event_type} user={user_id} details={details}\n"
+                )
+        except OSError as file_err:
+            logger.critical("Local alert file fallback also failed: %s", file_err)
 
 
 def _redact_pii(text: str) -> str:

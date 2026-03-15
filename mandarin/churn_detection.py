@@ -54,7 +54,12 @@ def _table_exists(conn: sqlite3.Connection, table: str) -> bool:
 
 
 def _col_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
-    # Safe: table is always a literal from internal callers (never user input)
+    # Validate table name against known schema tables before PRAGMA
+    existing = {r[0] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    ).fetchall()}
+    if table not in existing:
+        return False
     cols = {r[1] for r in conn.execute(f"PRAGMA table_info({table})").fetchall()}
     return column in cols
 

@@ -1,59 +1,332 @@
 {
-    "domain": "civic",
-    "sentences": [
-        {"hanzi": "这个社区有很多公园。", "pinyin": "zhège shèqū yǒu hěn duō gōngyuán.", "english": "This community has many parks.", "hsk_level": 2},
-        {"hanzi": "大家一起打扫公共区域。", "pinyin": "dàjiā yīqǐ dǎsǎo gōnggòng qūyù.", "english": "Everyone cleans the public areas together.", "hsk_level": 3},
-        {"hanzi": "我们可以去社区中心借书。", "pinyin": "wǒmen kěyǐ qù shèqū zhōngxīn jiè shū.", "english": "We can borrow books at the community center.", "hsk_level": 2},
-        {"hanzi": "请不要在公共场所大声说话。", "pinyin": "qǐng bùyào zài gōnggòng chǎngsuǒ dà shēng shuōhuà.", "english": "Please don't speak loudly in public places.", "hsk_level": 3},
-        {"hanzi": "这儿的邻居都挺好相处的。", "pinyin": "zhèr de línjū dōu tǐng hǎo xiāngchǔ de.", "english": "The neighbors here are all pretty easy to get along with.", "hsk_level": 2},
-        {"hanzi": "小区里有一个篮球场。", "pinyin": "xiǎoqū lǐ yǒu yīgè lánqiúchǎng.", "english": "There's a basketball court in the residential complex.", "hsk_level": 2},
-        {"hanzi": "你关注那个拆迁的事了吗？", "pinyin": "nǐ guānzhù nàge chāiqiān de shì le ma?", "english": "Have you been following that demolition issue?", "hsk_level": 3},
-        {"hanzi": "你做过志愿者吗？", "pinyin": "nǐ zuò guò zhìyuànzhě ma?", "english": "Have you ever volunteered?", "hsk_level": 3},
-        {"hanzi": "这条路需要修一修。", "pinyin": "zhè tiáo lù xūyào xiū yī xiū.", "english": "This road needs to be repaired.", "hsk_level": 2},
-        {"hanzi": "图书馆对所有人开放。", "pinyin": "túshūguǎn duì suǒyǒu rén kāifàng.", "english": "The library is open to everyone.", "hsk_level": 2},
-        {"hanzi": "社区组织了一次环保活动。", "pinyin": "shèqū zǔzhī le yī cì huánbǎo huódòng.", "english": "The community organized an environmental event.", "hsk_level": 3},
-        {"hanzi": "垃圾别乱扔，这是基本的吧。", "pinyin": "lājī bié luàn rēng, zhè shì jīběn de ba.", "english": "Don't litter — that's basic, right?", "hsk_level": 3},
-        {"hanzi": "公共交通很方便。", "pinyin": "gōnggòng jiāotōng hěn fāngbiàn.", "english": "Public transportation is very convenient.", "hsk_level": 2},
-        {"hanzi": "我们小区刚建了一个新的花园。", "pinyin": "wǒmen xiǎoqū gāng jiàn le yīgè xīn de huāyuán.", "english": "Our complex just built a new garden.", "hsk_level": 3},
-        {"hanzi": "楼下张大爷腿不好，他每次都帮着拎东西上楼。", "pinyin": "lóuxià zhāng dàyé tuǐ bù hǎo, tā měi cì dōu bāng zhe līn dōngxi shàng lóu.", "english": "Grandpa Zhang downstairs has bad legs — he always helps carry his things upstairs.", "hsk_level": 2},
-        {"hanzi": "这个公园很大。", "pinyin": "zhège gōngyuán hěn dà.", "english": "This park is very big.", "hsk_level": 1},
-        {"hanzi": "学校里有很多学生。", "pinyin": "xuéxiào lǐ yǒu hěn duō xuéshēng.", "english": "The school has many students.", "hsk_level": 1},
-        {"hanzi": "那个商店在前面。", "pinyin": "nàge shāngdiàn zài qiánmiàn.", "english": "That shop is up ahead.", "hsk_level": 1},
-        {"hanzi": "居民对小区的物业管理不太满意。", "pinyin": "jūmín duì xiǎoqū de wùyè guǎnlǐ bù tài mǎnyì.", "english": "Residents are not very satisfied with the property management of the complex.", "hsk_level": 4},
-        {"hanzi": "社区举办了一场关于垃圾分类的讲座。", "pinyin": "shèqū jǔbàn le yī chǎng guānyú lājī fēnlèi de jiǎngzuò.", "english": "The community held a lecture on waste sorting.", "hsk_level": 4},
-        {"hanzi": "这个城市在推广公共自行车服务。", "pinyin": "zhège chéngshì zài tuīguǎng gōnggòng zìxíngchē fúwù.", "english": "This city is promoting public bicycle services.", "hsk_level": 4},
-        {"hanzi": "新开的那个老年活动中心挺受欢迎的，天天都有人去。", "pinyin": "xīn kāi de nàge lǎonián huódòng zhōngxīn tǐng shòu huānyíng de, tiāntiān dōu yǒu rén qù.", "english": "That new senior center is pretty popular — people go there every day.", "hsk_level": 4},
-        {"hanzi": "邻里之间，声音别太大，互相体谅一下。", "pinyin": "línlǐ zhījiān, shēngyīn bié tài dà, hùxiāng tǐliàng yīxià.", "english": "Between neighbors, keep the noise down — show a little consideration.", "hsk_level": 4},
-        {"hanzi": "小区那些健身器材都该修了，好几个都坏了。", "pinyin": "xiǎoqū nàxiē jiànshēn qìcái dōu gāi xiū le, hǎo jǐ ge dōu huài le.", "english": "The fitness equipment in the complex needs fixing — several are broken.", "hsk_level": 4},
-        {"hanzi": "为了改善空气质量，政府限制了私家车的使用。", "pinyin": "wèile gǎishàn kōngqì zhìliàng, zhèngfǔ xiànzhì le sījiāchē de shǐyòng.", "english": "To improve air quality, the government restricted the use of private cars.", "hsk_level": 5},
-        {"hanzi": "社区志愿者在疫情期间发挥了重要作用。", "pinyin": "shèqū zhìyuànzhě zài yìqíng qījiān fāhuī le zhòngyào zuòyòng.", "english": "Community volunteers played an important role during the pandemic.", "hsk_level": 5},
-        {"hanzi": "居委会正在征集居民对公共设施改造的意见。", "pinyin": "jūwěihuì zhèngzài zhēngjí jūmín duì gōnggòng shèshī gǎizào de yìjiàn.", "english": "The neighborhood committee is soliciting residents' opinions on renovating public facilities.", "hsk_level": 5},
-        {"hanzi": "无障碍设施的建设体现了一个城市的文明程度。", "pinyin": "wú zhàng'ài shèshī de jiànshè tǐxiàn le yīgè chéngshì de wénmíng chéngdù.", "english": "The construction of barrier-free facilities reflects a city's level of civilization.", "hsk_level": 5},
-        {"hanzi": "养老服务体系的完善需要政府和社会力量的共同参与。", "pinyin": "yǎnglǎo fúwù tǐxì de wánshàn xūyào zhèngfǔ hé shèhuì lìliàng de gòngtóng cānyù.", "english": "Improving the elderly care service system requires the joint participation of government and social forces.", "hsk_level": 5},
-        {"hanzi": "社区图书馆的借阅量逐年上升，说明居民的阅读意识在增强。", "pinyin": "shèqū túshūguǎn de jièyuèliàng zhúnián shàngshēng, shuōmíng jūmín de yuèdú yìshí zài zēngqiáng.", "english": "The annual increase in community library loans shows that residents' reading awareness is growing.", "hsk_level": 5},
-        {"hanzi": "基层治理的核心在于调动居民参与公共事务的积极性。", "pinyin": "jīcéng zhìlǐ de héxīn zàiyú diàodòng jūmín cānyù gōnggòng shìwù de jījíxìng.", "english": "The core of grassroots governance lies in mobilizing residents' enthusiasm for participating in public affairs.", "hsk_level": 6},
-        {"hanzi": "社会组织在弥补政府公共服务不足方面起到了桥梁作用。", "pinyin": "shèhuì zǔzhī zài míbǔ zhèngfǔ gōnggòng fúwù bùzú fāngmiàn qǐdào le qiáoliáng zuòyòng.", "english": "Social organizations serve as a bridge in compensating for gaps in government public services.", "hsk_level": 6},
-        {"hanzi": "城市精细化管理需要依靠大数据和智能技术。", "pinyin": "chéngshì jīngxìhuà guǎnlǐ xūyào yīkào dà shùjù hé zhìnéng jìshù.", "english": "Refined urban management needs to rely on big data and smart technology.", "hsk_level": 6},
-        {"hanzi": "公民社会的成熟程度取决于公众参与公共决策的深度与广度。", "pinyin": "gōngmín shèhuì de chéngshú chéngdù qǔjué yú gōngzhòng cānyù gōnggòng juécè de shēndù yǔ guǎngdù.", "english": "The maturity of civil society depends on the depth and breadth of public participation in public decision-making.", "hsk_level": 6},
-        {"hanzi": "公共安全事件的应急响应能力直接反映了基层组织的动员效率。", "pinyin": "gōnggòng ānquán shìjiàn de yìngjí xiǎngyìng nénglì zhíjiē fǎnyìng le jīcéng zǔzhī de dòngyuán xiàolǜ.", "english": "The emergency response capability for public safety incidents directly reflects the mobilization efficiency of grassroots organizations.", "hsk_level": 6},
-        {"hanzi": "居民议事会制度为社区矛盾的化解提供了制度化的协商平台。", "pinyin": "jūmín yìshìhuì zhìdù wèi shèqū máodùn de huàjiě tígōng le zhìdùhuà de xiéshāng píngtái.", "english": "The residents' council system provides an institutionalized deliberation platform for resolving community disputes.", "hsk_level": 6},
-        {"hanzi": "社区自治机制的完善有赖于居民法治意识的普遍提升。", "pinyin": "shèqū zìzhì jīzhì de wánshàn yǒulài yú jūmín fǎzhì yìshí de pǔbiàn tíshēng.", "english": "Improving community self-governance mechanisms depends on a general increase in residents' awareness of the rule of law.", "hsk_level": 7},
-        {"hanzi": "非营利组织在推动社会公平方面承担着不可替代的职能。", "pinyin": "fēi yínglì zǔzhī zài tuīdòng shèhuì gōngpíng fāngmiàn chéngdān zhe bùkě tìdài de zhínéng.", "english": "Non-profit organizations bear irreplaceable functions in promoting social equity.", "hsk_level": 7},
-        {"hanzi": "公共资源的合理配置是缩小城乡差距的关键所在。", "pinyin": "gōnggòng zīyuán de hélǐ pèizhì shì suōxiǎo chéngxiāng chājù de guānjiàn suǒzài.", "english": "The rational allocation of public resources is the key to narrowing the urban-rural gap.", "hsk_level": 7},
-        {"hanzi": "社区网格化管理模式有效提升了公共服务的精准性和覆盖面。", "pinyin": "shèqū wǎnggéhuà guǎnlǐ móshì yǒuxiào tíshēng le gōnggòng fúwù de jīngzhǔnxìng hé fùgàimiàn.", "english": "The community grid management model has effectively improved the precision and coverage of public services.", "hsk_level": 7},
-        {"hanzi": "公益诉讼制度的推广拓宽了公民维护公共利益的法律途径。", "pinyin": "gōngyì sùsòng zhìdù de tuīguǎng tuòkuān le gōngmín wéihù gōnggòng lìyì de fǎlǜ tújìng.", "english": "The promotion of the public interest litigation system has broadened the legal channels for citizens to protect public interests.", "hsk_level": 7},
-        {"hanzi": "志愿服务的制度化建设要求在激励机制与公益精神之间保持适度张力。", "pinyin": "zhìyuàn fúwù de zhìdùhuà jiànshè yāoqiú zài jīlì jīzhì yǔ gōngyì jīngshén zhījiān bǎochí shìdù zhānglì.", "english": "The institutionalization of volunteer services requires maintaining moderate tension between incentive mechanisms and the spirit of public service.", "hsk_level": 7},
-        {"hanzi": "数字化治理平台的搭建旨在构建政府与居民之间高效的沟通渠道。", "pinyin": "shùzìhuà zhìlǐ píngtái de dājiàn zhǐzài gòujiàn zhèngfǔ yǔ jūmín zhījiān gāoxiào de gōutōng qúdào.", "english": "The establishment of digital governance platforms aims to build efficient communication channels between the government and residents.", "hsk_level": 8},
-        {"hanzi": "在多元共治的框架下，各利益相关方应当就公共议题形成协商共识。", "pinyin": "zài duōyuán gòngzhì de kuàngjià xià, gè lìyì xiāngguān fāng yīngdāng jiù gōnggòng yìtí xíngchéng xiéshāng gòngshí.", "english": "Under a framework of pluralistic co-governance, all stakeholders should form consultative consensus on public issues.", "hsk_level": 8},
-        {"hanzi": "社会信用体系的建设引发了关于个人隐私与公共利益之间张力的广泛讨论。", "pinyin": "shèhuì xìnyòng tǐxì de jiànshè yǐnfā le guānyú gèrén yǐnsī yǔ gōnggòng lìyì zhījiān zhānglì de guǎngfàn tǎolùn.", "english": "The construction of the social credit system has sparked widespread discussion about the tension between personal privacy and the public interest.", "hsk_level": 8},
-        {"hanzi": "公共卫生应急体系的韧性取决于跨层级信息传导机制的畅通程度。", "pinyin": "gōnggòng wèishēng yìngjí tǐxì de rènxìng qǔjué yú kuà céngjí xìnxī chuándǎo jīzhì de chàngtōng chéngdù.", "english": "The resilience of the public health emergency system depends on the smoothness of cross-level information transmission mechanisms.", "hsk_level": 8},
-        {"hanzi": "社区赋权理论强调将决策权下沉至最贴近居民日常生活的治理单元。", "pinyin": "shèqū fùquán lǐlùn qiángdiào jiāng juécèquán xiàchén zhì zuì tiējìn jūmín rìcháng shēnghuó de zhìlǐ dānyuán.", "english": "Community empowerment theory emphasizes devolving decision-making power to the governance units closest to residents' daily lives.", "hsk_level": 8},
-        {"hanzi": "算法驱动的公共资源分配机制虽提升了效率，却引发了关于程序正义的深层隐忧。", "pinyin": "suànfǎ qūdòng de gōnggòng zīyuán fēnpèi jīzhì suī tíshēng le xiàolǜ, què yǐnfā le guānyú chéngxù zhèngyì de shēncéng yǐnyōu.", "english": "Algorithm-driven public resource allocation mechanisms, while improving efficiency, have raised deep concerns about procedural justice.", "hsk_level": 8},
-        {"hanzi": "基层民主协商制度的深化改革，须在法治轨道上平衡多元诉求与集体决策之间的内在矛盾。", "pinyin": "jīcéng mínzhǔ xiéshāng zhìdù de shēnhuà gǎigé, xū zài fǎzhì guǐdào shàng pínghéng duōyuán sùqiú yǔ jítǐ juécè zhījiān de nèizài máodùn.", "english": "The deepening reform of grassroots democratic consultation systems must balance the inherent tensions between diverse demands and collective decision-making within the framework of rule of law.", "hsk_level": 9},
-        {"hanzi": "公共治理现代化的核心命题在于如何在效率与公正之间寻求动态均衡。", "pinyin": "gōnggòng zhìlǐ xiàndàihuà de héxīn mìngtí zàiyú rúhé zài xiàolǜ yǔ gōngzhèng zhījiān xúnqiú dòngtài jūnhéng.", "english": "The core proposition of modernizing public governance lies in how to seek a dynamic equilibrium between efficiency and justice.", "hsk_level": 9},
-        {"hanzi": "市民社会的培育不能脱离对公共理性与个体权利边界的持续反思。", "pinyin": "shìmín shèhuì de péiyù bùnéng tuōlí duì gōnggòng lǐxìng yǔ gètǐ quánlì biānjiè de chíxù fǎnsī.", "english": "The cultivation of civil society cannot be separated from ongoing reflection on the boundaries of public rationality and individual rights.", "hsk_level": 9},
-        {"hanzi": "社会契约论视角下的公共服务供给，其正当性根基在于全体成员对共同福祉的理性认同。", "pinyin": "shèhuì qìyuē lùn shìjiǎo xià de gōnggòng fúwù gōngjǐ, qí zhèngdāngxìng gēnjī zàiyú quántǐ chéngyuán duì gòngtóng fúzhǐ de lǐxìng rèntóng.", "english": "From the perspective of social contract theory, the legitimacy of public service provision is rooted in all members' rational acceptance of the common welfare.", "hsk_level": 9},
-        {"hanzi": "公共空间的民主化实践揭示了物质环境塑造与社会关系再生产之间的辩证关联。", "pinyin": "gōnggòng kōngjiān de mínzhǔhuà shíjiàn jiēshì le wùzhì huánjìng sùzào yǔ shèhuì guānxì zài shēngchǎn zhījiān de biànzhèng guānlián.", "english": "The democratization of public space reveals the dialectical relationship between the shaping of the material environment and the reproduction of social relations.", "hsk_level": 9},
-        {"hanzi": "当代公民身份的内涵已超越法律地位的形式界定，延伸至对公共生活实质性参与权的深层诉求。", "pinyin": "dāngdài gōngmín shēnfèn de nèihán yǐ chāoyuè fǎlǜ dìwèi de xíngshì jièdìng, yánshēn zhì duì gōnggòng shēnghuó shízhìxìng cānyùquán de shēncéng sùqiú.", "english": "The meaning of contemporary citizenship has transcended the formal definition of legal status, extending to deeper claims for substantive participation rights in public life.", "hsk_level": 9}
-    ]
+  "domain": "civic",
+  "sentences": [
+    {
+      "hanzi": "这个社区有很多公园。",
+      "pinyin": "zhège shèqū yǒu hěn duō gōngyuán.",
+      "english": "This community has many parks.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "大家一起打扫公共区域。",
+      "pinyin": "dàjiā yīqǐ dǎsǎo gōnggòng qūyù.",
+      "english": "Everyone cleans the public areas together.",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "我们可以去社区中心借书。",
+      "pinyin": "wǒmen kěyǐ qù shèqū zhōngxīn jiè shū.",
+      "english": "We can borrow books at the community center.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "请不要在公共场所大声说话。",
+      "pinyin": "qǐng bùyào zài gōnggòng chǎngsuǒ dà shēng shuōhuà.",
+      "english": "Please don't speak loudly in public places.",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "这儿的邻居都挺好相处的。",
+      "pinyin": "zhèr de línjū dōu tǐng hǎo xiāngchǔ de.",
+      "english": "The neighbors here are all pretty easy to get along with.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "小区里有一个篮球场。",
+      "pinyin": "xiǎoqū lǐ yǒu yīgè lánqiúchǎng.",
+      "english": "There's a basketball court in the residential complex.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "你关注那个拆迁的事了吗？",
+      "pinyin": "nǐ guānzhù nàge chāiqiān de shì le ma?",
+      "english": "Have you been following that demolition issue?",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "你做过志愿者吗？",
+      "pinyin": "nǐ zuò guò zhìyuànzhě ma?",
+      "english": "Have you ever volunteered?",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "这条路需要修一修。",
+      "pinyin": "zhè tiáo lù xūyào xiū yī xiū.",
+      "english": "This road needs to be repaired.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "图书馆对所有人开放。",
+      "pinyin": "túshūguǎn duì suǒyǒu rén kāifàng.",
+      "english": "The library is open to everyone.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "社区组织了一次环保活动。",
+      "pinyin": "shèqū zǔzhī le yī cì huánbǎo huódòng.",
+      "english": "The community organized an environmental event.",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "垃圾别乱扔，这是基本的吧。",
+      "pinyin": "lājī bié luàn rēng, zhè shì jīběn de ba.",
+      "english": "Don't litter — that's basic, right?",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "公共交通很方便。",
+      "pinyin": "gōnggòng jiāotōng hěn fāngbiàn.",
+      "english": "Public transportation is very convenient.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "我们小区刚建了一个新的花园。",
+      "pinyin": "wǒmen xiǎoqū gāng jiàn le yīgè xīn de huāyuán.",
+      "english": "Our complex just built a new garden.",
+      "hsk_level": 3
+    },
+    {
+      "hanzi": "楼下张大爷腿不好，他每次都帮着拎东西上楼。",
+      "pinyin": "lóuxià zhāng dàyé tuǐ bù hǎo, tā měi cì dōu bāng zhe līn dōngxi shàng lóu.",
+      "english": "Grandpa Zhang downstairs has bad legs — he always helps carry his things upstairs.",
+      "hsk_level": 2
+    },
+    {
+      "hanzi": "这个公园很大。",
+      "pinyin": "zhège gōngyuán hěn dà.",
+      "english": "This park is very big.",
+      "hsk_level": 1
+    },
+    {
+      "hanzi": "学校里有很多学生。",
+      "pinyin": "xuéxiào lǐ yǒu hěn duō xuéshēng.",
+      "english": "The school has many students.",
+      "hsk_level": 1
+    },
+    {
+      "hanzi": "那个商店在前面。",
+      "pinyin": "nàge shāngdiàn zài qiánmiàn.",
+      "english": "That shop is up ahead.",
+      "hsk_level": 1
+    },
+    {
+      "hanzi": "居民对小区的物业管理不太满意。",
+      "pinyin": "jūmín duì xiǎoqū de wùyè guǎnlǐ bù tài mǎnyì.",
+      "english": "Residents are not very satisfied with the property management of the complex.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "社区举办了一场关于垃圾分类的讲座。",
+      "pinyin": "shèqū jǔbàn le yī chǎng guānyú lājī fēnlèi de jiǎngzuò.",
+      "english": "The community held a lecture on waste sorting.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "这个城市在推广公共自行车服务。",
+      "pinyin": "zhège chéngshì zài tuīguǎng gōnggòng zìxíngchē fúwù.",
+      "english": "This city is promoting public bicycle services.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "新开的那个老年活动中心挺受欢迎的，天天都有人去。",
+      "pinyin": "xīn kāi de nàge lǎonián huódòng zhōngxīn tǐng shòu huānyíng de, tiāntiān dōu yǒu rén qù.",
+      "english": "That new senior center is pretty popular — people go there every day.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "邻里之间，声音别太大，互相体谅一下。",
+      "pinyin": "línlǐ zhījiān, shēngyīn bié tài dà, hùxiāng tǐliàng yīxià.",
+      "english": "Between neighbors, keep the noise down — show a little consideration.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "小区那些健身器材都该修了，好几个都坏了。",
+      "pinyin": "xiǎoqū nàxiē jiànshēn qìcái dōu gāi xiū le, hǎo jǐ ge dōu huài le.",
+      "english": "The fitness equipment in the complex needs fixing — several are broken.",
+      "hsk_level": 4
+    },
+    {
+      "hanzi": "为了改善空气质量，政府限制了私家车的使用。",
+      "pinyin": "wèile gǎishàn kōngqì zhìliàng, zhèngfǔ xiànzhì le sījiāchē de shǐyòng.",
+      "english": "To improve air quality, the government restricted the use of private cars.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "社区志愿者在疫情期间发挥了重要作用。",
+      "pinyin": "shèqū zhìyuànzhě zài yìqíng qījiān fāhuī le zhòngyào zuòyòng.",
+      "english": "Community volunteers played an important role during the pandemic.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "居委会正在征集居民对公共设施改造的意见。",
+      "pinyin": "jūwěihuì zhèngzài zhēngjí jūmín duì gōnggòng shèshī gǎizào de yìjiàn.",
+      "english": "The neighborhood committee is soliciting residents' opinions on renovating public facilities.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "无障碍设施的建设体现了一个城市的文明程度。",
+      "pinyin": "wú zhàng'ài shèshī de jiànshè tǐxiàn le yīgè chéngshì de wénmíng chéngdù.",
+      "english": "The construction of barrier-free facilities reflects a city's level of civilization.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "养老服务体系的完善需要政府和社会力量的共同参与。",
+      "pinyin": "yǎnglǎo fúwù tǐxì de wánshàn xūyào zhèngfǔ hé shèhuì lìliàng de gòngtóng cānyù.",
+      "english": "Improving the elderly care service system requires the joint participation of government and social forces.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "社区图书馆的借阅量逐年上升，说明居民的阅读意识在增强。",
+      "pinyin": "shèqū túshūguǎn de jièyuèliàng zhúnián shàngshēng, shuōmíng jūmín de yuèdú yìshí zài zēngqiáng.",
+      "english": "The annual increase in community library loans shows that residents' reading awareness is growing.",
+      "hsk_level": 5
+    },
+    {
+      "hanzi": "基层治理的核心在于调动居民参与公共事务的积极性。",
+      "pinyin": "jīcéng zhìlǐ de héxīn zàiyú diàodòng jūmín cānyù gōnggòng shìwù de jījíxìng.",
+      "english": "The core of grassroots governance lies in mobilizing residents' enthusiasm for participating in public affairs.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "社会组织在弥补政府公共服务不足方面起到了桥梁作用。",
+      "pinyin": "shèhuì zǔzhī zài míbǔ zhèngfǔ gōnggòng fúwù bùzú fāngmiàn qǐdào le qiáoliáng zuòyòng.",
+      "english": "Social organizations serve as a bridge in compensating for gaps in government public services.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "城市精细化管理需要依靠大数据和智能技术。",
+      "pinyin": "chéngshì jīngxìhuà guǎnlǐ xūyào yīkào dà shùjù hé zhìnéng jìshù.",
+      "english": "Refined urban management needs to rely on big data and smart technology.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "公民社会的成熟程度取决于公众参与公共决策的深度与广度。",
+      "pinyin": "gōngmín shèhuì de chéngshú chéngdù qǔjué yú gōngzhòng cānyù gōnggòng juécè de shēndù yǔ guǎngdù.",
+      "english": "The maturity of civil society depends on the depth and breadth of public participation in public decision-making.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "公共安全事件的应急响应能力直接反映了基层组织的动员效率。",
+      "pinyin": "gōnggòng ānquán shìjiàn de yìngjí xiǎngyìng nénglì zhíjiē fǎnyìng le jīcéng zǔzhī de dòngyuán xiàolǜ.",
+      "english": "The emergency response capability for public safety incidents directly reflects the mobilization efficiency of grassroots organizations.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "居民议事会制度为社区矛盾的化解提供了制度化的协商平台。",
+      "pinyin": "jūmín yìshìhuì zhìdù wèi shèqū máodùn de huàjiě tígōng le zhìdùhuà de xiéshāng píngtái.",
+      "english": "The residents' council system provides an institutionalized deliberation platform for resolving community disputes.",
+      "hsk_level": 6
+    },
+    {
+      "hanzi": "社区自治机制的完善有赖于居民法治意识的普遍提升。",
+      "pinyin": "shèqū zìzhì jīzhì de wánshàn yǒulài yú jūmín fǎzhì yìshí de pǔbiàn tíshēng.",
+      "english": "Improving community self-governance mechanisms depends on a general increase in residents' awareness of the rule of law.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "非营利组织在推动社会公平方面承担着不可替代的职能。",
+      "pinyin": "fēi yínglì zǔzhī zài tuīdòng shèhuì gōngpíng fāngmiàn chéngdān zhe bùkě tìdài de zhínéng.",
+      "english": "Non-profit organizations bear irreplaceable functions in promoting social equity.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "公共资源的合理配置是缩小城乡差距的关键所在。",
+      "pinyin": "gōnggòng zīyuán de hélǐ pèizhì shì suōxiǎo chéngxiāng chājù de guānjiàn suǒzài.",
+      "english": "The rational allocation of public resources is the key to narrowing the urban-rural gap.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "社区网格化管理模式有效提升了公共服务的精准性和覆盖面。",
+      "pinyin": "shèqū wǎnggéhuà guǎnlǐ móshì yǒuxiào tíshēng le gōnggòng fúwù de jīngzhǔnxìng hé fùgàimiàn.",
+      "english": "The community grid management model has effectively improved the precision and coverage of public services.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "公益诉讼制度的推广拓宽了公民维护公共利益的法律途径。",
+      "pinyin": "gōngyì sùsòng zhìdù de tuīguǎng tuòkuān le gōngmín wéihù gōnggòng lìyì de fǎlǜ tújìng.",
+      "english": "The promotion of the public interest litigation system has broadened the legal channels for citizens to protect public interests.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "志愿服务的制度化建设要求在激励机制与公益精神之间保持适度张力。",
+      "pinyin": "zhìyuàn fúwù de zhìdùhuà jiànshè yāoqiú zài jīlì jīzhì yǔ gōngyì jīngshén zhījiān bǎochí shìdù zhānglì.",
+      "english": "The institutionalization of volunteer services requires maintaining moderate tension between incentive mechanisms and the spirit of public service.",
+      "hsk_level": 7
+    },
+    {
+      "hanzi": "数字化治理平台的搭建旨在构建政府与居民之间高效的沟通渠道。",
+      "pinyin": "shùzìhuà zhìlǐ píngtái de dājiàn zhǐzài gòujiàn zhèngfǔ yǔ jūmín zhījiān gāoxiào de gōutōng qúdào.",
+      "english": "The establishment of digital governance platforms aims to build efficient communication channels between the government and residents.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "在多元共治的框架下，各利益相关方应当就公共议题形成协商共识。",
+      "pinyin": "zài duōyuán gòngzhì de kuàngjià xià, gè lìyì xiāngguān fāng yīngdāng jiù gōnggòng yìtí xíngchéng xiéshāng gòngshí.",
+      "english": "Under a framework of pluralistic co-governance, all stakeholders should form consultative consensus on public issues.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "社会信用体系的建设引发了关于个人隐私与公共利益之间张力的广泛讨论。",
+      "pinyin": "shèhuì xìnyòng tǐxì de jiànshè yǐnfā le guānyú gèrén yǐnsī yǔ gōnggòng lìyì zhījiān zhānglì de guǎngfàn tǎolùn.",
+      "english": "The construction of the social credit system has sparked widespread discussion about the tension between personal privacy and the public interest.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "公共卫生应急体系的韧性取决于跨层级信息传导机制的畅通程度。",
+      "pinyin": "gōnggòng wèishēng yìngjí tǐxì de rènxìng qǔjué yú kuà céngjí xìnxī chuándǎo jīzhì de chàngtōng chéngdù.",
+      "english": "The resilience of the public health emergency system depends on the smoothness of cross-level information transmission mechanisms.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "社区赋权理论强调将决策权下沉至最贴近居民日常生活的治理单元。",
+      "pinyin": "shèqū fùquán lǐlùn qiángdiào jiāng juécèquán xiàchén zhì zuì tiējìn jūmín rìcháng shēnghuó de zhìlǐ dānyuán.",
+      "english": "Community empowerment theory emphasizes devolving decision-making power to the governance units closest to residents' daily lives.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "算法驱动的公共资源分配机制虽提升了效率，却引发了关于程序正义的深层隐忧。",
+      "pinyin": "suànfǎ qūdòng de gōnggòng zīyuán fēnpèi jīzhì suī tíshēng le xiàolǜ, què yǐnfā le guānyú chéngxù zhèngyì de shēncéng yǐnyōu.",
+      "english": "Algorithm-driven public resource allocation mechanisms, while improving efficiency, have raised deep concerns about procedural justice.",
+      "hsk_level": 8
+    },
+    {
+      "hanzi": "基层民主协商制度的深化改革，须在法治轨道上平衡多元诉求与集体决策之间的内在矛盾。",
+      "pinyin": "jīcéng mínzhǔ xiéshāng zhìdù de shēnhuà gǎigé, xū zài fǎzhì guǐdào shàng pínghéng duōyuán sùqiú yǔ jítǐ juécè zhījiān de nèizài máodùn.",
+      "english": "The deepening reform of grassroots democratic consultation systems must balance the inherent tensions between diverse demands and collective decision-making within the framework of rule of law.",
+      "hsk_level": 9
+    },
+    {
+      "hanzi": "公共治理现代化的核心命题在于如何在效率与公正之间寻求动态均衡。",
+      "pinyin": "gōnggòng zhìlǐ xiàndàihuà de héxīn mìngtí zàiyú rúhé zài xiàolǜ yǔ gōngzhèng zhījiān xúnqiú dòngtài jūnhéng.",
+      "english": "The core proposition of modernizing public governance lies in how to seek a dynamic equilibrium between efficiency and justice.",
+      "hsk_level": 9
+    },
+    {
+      "hanzi": "市民社会的培育不能脱离对公共理性与个体权利边界的持续反思。",
+      "pinyin": "shìmín shèhuì de péiyù bùnéng tuōlí duì gōnggòng lǐxìng yǔ gètǐ quánlì biānjiè de chíxù fǎnsī.",
+      "english": "The cultivation of civil society cannot be separated from ongoing reflection on the boundaries of public rationality and individual rights.",
+      "hsk_level": 9
+    },
+    {
+      "hanzi": "社会契约论视角下的公共服务供给，其正当性根基在于全体成员对共同福祉的理性认同。",
+      "pinyin": "shèhuì qìyuē lùn shìjiǎo xià de gōnggòng fúwù gōngjǐ, qí zhèngdāngxìng gēnjī zàiyú quántǐ chéngyuán duì gòngtóng fúzhǐ de lǐxìng rèntóng.",
+      "english": "From the perspective of social contract theory, the legitimacy of public service provision is rooted in all members' rational acceptance of the common welfare.",
+      "hsk_level": 9
+    },
+    {
+      "hanzi": "公共空间的民主化实践揭示了物质环境塑造与社会关系再生产之间的辩证关联。",
+      "pinyin": "gōnggòng kōngjiān de mínzhǔhuà shíjiàn jiēshì le wùzhì huánjìng sùzào yǔ shèhuì guānxì zài shēngchǎn zhījiān de biànzhèng guānlián.",
+      "english": "The democratization of public space reveals the dialectical relationship between the shaping of the material environment and the reproduction of social relations.",
+      "hsk_level": 9
+    },
+    {
+      "hanzi": "当代公民身份的内涵已超越法律地位的形式界定，延伸至对公共生活实质性参与权的深层诉求。",
+      "pinyin": "dāngdài gōngmín shēnfèn de nèihán yǐ chāoyuè fǎlǜ dìwèi de xíngshì jièdìng, yánshēn zhì duì gōnggòng shēnghuó shízhìxìng cānyùquán de shēncéng sùqiú.",
+      "english": "The meaning of contemporary citizenship has transcended the formal definition of legal status, extending to deeper claims for substantive participation rights in public life.",
+      "hsk_level": 9
+    }
+  ],
+  "source": "ai_generated",
+  "generated_by": "qwen2.5-7b",
+  "human_reviewed": false
 }

@@ -26,16 +26,34 @@
         <domain includeSubdomains="true">aeluapp.com</domain>
         <pin-set expiration="2027-01-01">
             <!--
-              SHA-256 SPKI hashes of the server certificate chain.
-              Generate with:
-                openssl s_client -servername aeluapp.com -connect aeluapp.com:443 </dev/null 2>/dev/null | \
-                openssl x509 -pubkey -noout | openssl pkey -pubin -outform DER | \
-                openssl dgst -sha256 -binary | openssl enc -base64
+              BEFORE APP STORE RELEASE: Replace pin-set digests below with actual
+              SHA-256 SPKI hashes from the production certificate chain.
 
-              Replace these with actual production cert hashes before release.
+              To generate the primary pin (leaf certificate):
+                openssl s_client -servername aeluapp.com -connect aeluapp.com:443 \
+                  </dev/null 2>/dev/null | \
+                  openssl x509 -pubkey -noout | \
+                  openssl pkey -pubin -outform DER | \
+                  openssl dgst -sha256 -binary | \
+                  openssl enc -base64
+
+              To generate the backup pin (intermediate/root CA certificate):
+                openssl s_client -servername aeluapp.com -connect aeluapp.com:443 \
+                  -showcerts </dev/null 2>/dev/null | \
+                  openssl x509 -pubkey -noout | \
+                  openssl pkey -pubin -outform DER | \
+                  openssl dgst -sha256 -binary | \
+                  openssl enc -base64
+
+              You need at least 2 pins: the primary (leaf) cert and a backup
+              (intermediate CA or a separately issued backup cert) so the app
+              continues to work during certificate rotation.
+
+              Until real hashes are added, certificate pinning will not be
+              enforced (the placeholder values will never match).
             -->
             <pin digest="SHA-256">CONFIGURE_BEFORE_RELEASE=</pin>
-            <!-- Backup pin (for cert rotation). -->
+            <!-- Backup pin (intermediate CA or backup cert for rotation). -->
             <pin digest="SHA-256">CONFIGURE_BEFORE_RELEASE_BACKUP=</pin>
         </pin-set>
     </domain-config>

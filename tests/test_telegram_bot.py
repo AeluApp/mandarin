@@ -102,7 +102,7 @@ class TestCmdStart(unittest.TestCase):
         call_text = update.message.reply_text.call_args[0][0]
         self.assertIn("/status", call_text)
         self.assertIn("/review", call_text)
-        self.assertIn("OpenClaw", call_text)
+        self.assertIn("Aelu", call_text)
 
     @patch("mandarin.openclaw.telegram_bot._check_owner", new_callable=AsyncMock, return_value=False)
     def test_start_blocked_for_non_owner(self, mock_owner):
@@ -221,12 +221,23 @@ class TestHandleVoice(unittest.TestCase):
     """Tests for handle_voice."""
 
     @patch("mandarin.openclaw.telegram_bot._check_owner", new_callable=AsyncMock, return_value=True)
-    def test_voice_sends_placeholder(self, mock_owner):
+    @patch("mandarin.openclaw.telegram_bot._HAS_WHISPER", False)
+    def test_voice_without_whisper_gives_helpful_message(self, mock_owner):
         from mandarin.openclaw.telegram_bot import handle_voice
         update = _make_update()
         _run(handle_voice(update, _make_context()))
         call_text = update.message.reply_text.call_args[0][0]
-        self.assertIn("Voice", call_text)
+        self.assertIn("type your message", call_text.lower())
+
+    @patch("mandarin.openclaw.telegram_bot._check_owner", new_callable=AsyncMock, return_value=True)
+    @patch("mandarin.openclaw.telegram_bot._HAS_WHISPER", True)
+    @patch("mandarin.openclaw.telegram_bot.is_whisper_available", return_value=False)
+    def test_voice_without_backend_gives_setup_hint(self, mock_avail, mock_owner):
+        from mandarin.openclaw.telegram_bot import handle_voice
+        update = _make_update()
+        _run(handle_voice(update, _make_context()))
+        call_text = update.message.reply_text.call_args[0][0]
+        self.assertIn("backend", call_text.lower())
 
     @patch("mandarin.openclaw.telegram_bot._check_owner", new_callable=AsyncMock, return_value=False)
     def test_voice_blocked_for_non_owner(self, mock_owner):

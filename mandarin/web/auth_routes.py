@@ -12,7 +12,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash
 
 from .. import db
-from ..auth import create_user, authenticate, get_user_by_id, create_reset_token, reset_password, verify_email, _validate_password
+from ..auth import create_user, authenticate, get_user_by_id, create_reset_token, reset_password, verify_email, _validate_password, _check_password_reuse, _save_password_history
 from ..email import send_welcome, send_password_reset, send_email_verification
 from ..mfa import verify_totp, verify_backup_code
 from ..security import log_security_event, SecurityEvent, Severity
@@ -483,6 +483,17 @@ def change_password():
             # Validate new password
             _validate_password(new_password)
 
+            # Password reuse prevention — check last 5 passwords
+            if _check_password_reuse(conn, current_user.id, new_password):
+                return jsonify({"error": "Please choose a password you haven't used recently."}), 400
+
+            # Fetch old hash before overwriting
+            old_row = conn.execute(
+                "SELECT password_hash FROM user WHERE id = ?",
+                (current_user.id,),
+            ).fetchone()
+            old_hash = old_row["password_hash"] if old_row else None
+
             # Update hash and revoke all refresh tokens (force re-login)
             password_hash = generate_password_hash(new_password, method="pbkdf2:sha256")
             conn.execute(
@@ -491,6 +502,9 @@ def change_password():
                    WHERE id = ?""",
                 (password_hash, current_user.id),
             )
+            # Save old hash to password history
+            if old_hash:
+                _save_password_history(conn, current_user.id, old_hash)
             conn.commit()
             log_security_event(conn, SecurityEvent.PASSWORD_CHANGED, user_id=current_user.id)
 

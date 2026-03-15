@@ -4,16 +4,14 @@ import 'dart:math';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../config.dart';
 import '../core/error_handler.dart';
-
-const _apiUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
 
 /// Derive WebSocket URL from the HTTP API_URL.
 /// SECURITY: Token is NOT included in the URL (OWASP M3).
 /// Auth is performed via first-message after connect.
 String _wsUrl(String path) {
-  var base = _apiUrl;
+  var base = AppConfig.apiUrl;
   if (base.startsWith('https')) {
     base = 'wss${base.substring(5)}';
   } else if (base.startsWith('http')) {

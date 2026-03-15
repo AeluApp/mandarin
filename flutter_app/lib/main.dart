@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'config.dart';
 import 'core/app_lifecycle.dart';
 import 'core/error_handler.dart';
 import 'core/notification_scheduler.dart';
@@ -12,15 +13,12 @@ import 'core/theme_controller.dart';
 import 'router.dart';
 import 'theme/aelu_theme.dart';
 
-const _apiUrl =
-    String.fromEnvironment('API_URL', defaultValue: 'http://localhost:5173');
-
 void main() {
   runZonedGuarded(() {
     WidgetsFlutterBinding.ensureInitialized();
 
     // Initialize error handler with API URL.
-    ErrorHandler.init(_apiUrl);
+    ErrorHandler.init(AppConfig.apiUrl);
 
     FlutterError.onError = ErrorHandler.onFlutterError;
 
