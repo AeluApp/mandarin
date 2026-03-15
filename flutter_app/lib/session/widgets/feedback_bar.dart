@@ -27,7 +27,7 @@ class _FeedbackBarState extends State<FeedbackBar>
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: AeluTiming.fast)
+        AnimationController(vsync: this, duration: AeluTiming.snappy)
           ..forward();
     _slide = Tween<Offset>(
       begin: const Offset(0, 0.15),

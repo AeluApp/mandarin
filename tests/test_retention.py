@@ -514,3 +514,48 @@ def test_retention_constants():
     assert MIN_HALF_LIFE <= INITIAL_HALF_LIFE <= MAX_HALF_LIFE
 
 
+# ── Wilson CI Tests ─────────────────────────────────────────────────────────
+
+from mandarin.retention import wilson_ci
+
+
+def test_wilson_ci_zero_total():
+    assert wilson_ci(0, 0) == (0.0, 0.0)
+
+
+def test_wilson_ci_all_success():
+    low, high = wilson_ci(100, 100)
+    assert high == 1.0
+    assert low > 0.9
+
+
+def test_wilson_ci_no_success():
+    low, high = wilson_ci(0, 100)
+    assert low == 0.0
+    assert high > 0.0
+    assert high < 0.1
+
+
+def test_wilson_ci_half():
+    low, high = wilson_ci(50, 100)
+    assert low < 0.5 < high
+    # Roughly symmetric around 0.5
+    assert abs((low + high) / 2 - 0.5) < 0.05
+
+
+def test_wilson_ci_small_sample_wider():
+    low_small, high_small = wilson_ci(1, 2)
+    low_large, high_large = wilson_ci(50, 100)
+    width_small = high_small - low_small
+    width_large = high_large - low_large
+    assert width_small > width_large
+
+
+def test_wilson_ci_bounds_always_valid():
+    """Lower and upper must satisfy 0 <= lower <= p <= upper <= 1."""
+    test_cases = [(0, 10), (3, 10), (10, 10), (1, 1), (7, 15), (50, 100)]
+    for s, t in test_cases:
+        low, high = wilson_ci(s, t)
+        assert 0.0 <= low <= high <= 1.0, f"Failed for ({s}, {t}): ({low}, {high})"
+
+

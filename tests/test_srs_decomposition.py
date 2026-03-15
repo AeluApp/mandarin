@@ -321,3 +321,97 @@ def test_p_recall_in_range():
     result = _compute_retention_update(row, True, "full")
     assert result["p_recall"] > 0.0
     assert result["p_recall"] <= 1.0
+
+
+# ---- Interference Density Tests ----
+
+
+def test_interference_density_shortens_interval():
+    """High interference density should reduce the correct-answer interval."""
+    row_base = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3)
+    row_dense = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3,
+                          interference_density=1.0)
+    result_base = _compute_srs_update(row_base, True, "full", None, "seen")
+    result_dense = _compute_srs_update(row_dense, True, "full", None, "seen")
+    assert result_dense["interval"] < result_base["interval"]
+
+
+def test_interference_density_max_30_pct_reduction():
+    """At max density (1.0), interval should be 70% of base (30% reduction)."""
+    row = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3,
+                    interference_density=1.0)
+    result = _compute_srs_update(row, True, "full", None, "seen")
+    base_interval = 10.0 * 2.5  # standard reps=2 formula
+    assert result["interval"] == pytest.approx(base_interval * 0.7, rel=0.01)
+
+
+def test_interference_density_zero_no_effect():
+    """Zero density should not affect interval."""
+    row_zero = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3,
+                         interference_density=0.0)
+    row_none = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3)
+    result_zero = _compute_srs_update(row_zero, True, "full", None, "seen")
+    result_none = _compute_srs_update(row_none, True, "full", None, "seen")
+    assert result_zero["interval"] == pytest.approx(result_none["interval"])
+
+
+def test_interference_density_no_effect_on_wrong():
+    """Interference density should not affect wrong-answer intervals."""
+    row = _base_row(repetitions=5, streak_correct=5, ease_factor=2.5,
+                    interference_density=1.0)
+    result = _compute_srs_update(row, False, "full", None, "seen")
+    assert result["interval"] == INTERVAL_WRONG
+
+
+def test_interference_density_clamped_above_1():
+    """Density > 1 should be clamped to 1 (30% max reduction)."""
+    row = _base_row(repetitions=2, interval_days=10.0, ease_factor=2.5, streak_correct=3,
+                    interference_density=5.0)
+    result = _compute_srs_update(row, True, "full", None, "seen")
+    base_interval = 10.0 * 2.5
+    assert result["interval"] == pytest.approx(base_interval * 0.7, rel=0.01)
+
+
+# ---- Boundary Condition Tests ----
+
+
+def test_exact_passed_once_threshold():
+    """Streak exactly at PROMOTE_PASSED_ONCE_STREAK should promote."""
+    from mandarin.config import PROMOTE_PASSED_ONCE_STREAK
+    row = _base_row()
+    result = _compute_mastery_transition(
+        row, True, "full", streak_correct=PROMOTE_PASSED_ONCE_STREAK, streak_incorrect=0,
+        drill_type="mc", distinct_days=1, total_after=PROMOTE_PASSED_ONCE_STREAK, drill_type_count=1,
+    )
+    assert result["mastery_stage"] == "passed_once"
+
+
+def test_one_below_passed_once_threshold():
+    """Streak one below threshold should NOT promote."""
+    from mandarin.config import PROMOTE_PASSED_ONCE_STREAK
+    if PROMOTE_PASSED_ONCE_STREAK <= 1:
+        return  # Can't test below 1
+    row = _base_row()
+    result = _compute_mastery_transition(
+        row, True, "full", streak_correct=PROMOTE_PASSED_ONCE_STREAK - 1, streak_incorrect=0,
+        drill_type="mc", distinct_days=1, total_after=PROMOTE_PASSED_ONCE_STREAK - 1, drill_type_count=1,
+    )
+    assert result["mastery_stage"] == "seen"
+
+
+def test_narrowed_confidence_blocks_promotion():
+    """Narrowed confidence should not trigger mastery promotion."""
+    row = _base_row()
+    result = _compute_mastery_transition(
+        row, True, "narrowed", streak_correct=5, streak_incorrect=0,
+        drill_type="mc", distinct_days=3, total_after=10, drill_type_count=2,
+    )
+    # Narrowed is not in ("full", None), so no promotion
+    assert result["mastery_stage"] == "seen"
+
+
+def test_narrowed_wrong_resets_interval():
+    """narrowed_wrong confidence should reset interval to INTERVAL_INITIAL."""
+    row = _base_row(repetitions=5, interval_days=30.0)
+    result = _compute_srs_update(row, False, "narrowed_wrong", None, "seen")
+    assert result["interval"] == INTERVAL_INITIAL

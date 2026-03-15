@@ -106,3 +106,75 @@ jobs:
           echo "OK: $ACTUAL_TABLES tables, $ACTUAL_TESTS test files — docs match"
       - name: Check doc drift (schema version + tables)
         run: python scripts/check_doc_drift.py
+
+  performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Start dev server
+        run: python -m mandarin.web &
+
+      - name: Wait for server
+        run: sleep 5
+
+      - name: Run Lighthouse CI
+        continue-on-error: true
+        run: |
+          lhci autorun --collect.url=http://localhost:5000/ \
+            --assert.preset=lighthouse:no-pwa \
+            --assert.assertions.categories:performance=warn \
+            --assert.assertions.categories:accessibility=warn \
+            --assert.assertions.categories:best-practices=warn \
+            --assert.assertions.categories:seo=warn || true
+
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pa11y
+        run: npm install -g pa11y
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Start dev server
+        run: python -m mandarin.web &
+
+      - name: Wait for server
+        run: sleep 5
+
+      - name: Run pa11y accessibility audit
+        continue-on-error: true
+        run: pa11y http://localhost:5000/ --standard WCAG2AA

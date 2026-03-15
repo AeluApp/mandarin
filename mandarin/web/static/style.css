@@ -109,6 +109,7 @@
 
   /* Motion */
   --duration-press: 0.1s;       /* button press feedback — near-instant */
+  --duration-snappy: 0.15s;     /* feedback bar — snappier confirmation */
   --duration-fast: 0.2s;
   --duration-base: 0.4s;
   --duration-slow: 0.5s;
@@ -871,11 +872,11 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 @keyframes drillEnter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(8px) scale(1.02);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -883,6 +884,16 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.95; }
 }
+
+/* Stagger-cascade: messages within a drill group enter 50ms apart */
+.drill-group:not(.past) > .msg {
+  animation-fill-mode: backwards;  /* stay invisible until delay passes */
+}
+.drill-group:not(.past) > .msg:nth-child(2) { animation-delay: 50ms; }
+.drill-group:not(.past) > .msg:nth-child(3) { animation-delay: 100ms; }
+.drill-group:not(.past) > .msg:nth-child(4) { animation-delay: 150ms; }
+.drill-group:not(.past) > .msg:nth-child(5) { animation-delay: 200ms; }
+.drill-group:not(.past) > .msg:nth-child(6) { animation-delay: 250ms; }
 
 .msg-correct {
   color: var(--color-correct);
@@ -5508,7 +5519,7 @@ html[data-theme="dark"] .empty-state::before {
   border-top: 1px solid var(--color-divider);
   padding: var(--space-3) var(--space-4);
   padding-bottom: max(var(--space-3), env(safe-area-inset-bottom, 0px));
-  animation: feedbackSlideUp var(--duration-base) var(--ease-upward);
+  animation: feedbackSlideUp var(--duration-snappy) var(--ease-upward);
 }
 
 @keyframes feedbackSlideUp {
@@ -5971,6 +5982,109 @@ body.in-session { overscroll-behavior-y: contain; }
 
 #disconnect-banner button:active {
   transform: scale(0.98);
+}
+
+/* Fetch error toast */
+#fetch-error-toast {
+  position: fixed;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-divider);
+  font-size: var(--text-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  animation: feedbackSlideUp var(--duration-fast) var(--ease-upward);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+#fetch-error-toast button {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: 4px 12px;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+#fetch-error-toast .toast-dismiss {
+  border: none;
+  background: none;
+  padding: 2px 6px;
+  color: var(--color-text-dim);
+  font-size: var(--text-base);
+}
+
+/* Keyboard shortcut overlay */
+#shortcut-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--duration-fast) var(--ease-default);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.shortcut-overlay-inner {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 24px);
+  max-width: 380px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.shortcut-overlay-inner h3 {
+  margin: 0 0 var(--space-3) 0;
+  font-size: var(--text-lg);
+  color: var(--color-text);
+}
+.shortcut-section { margin-bottom: var(--space-3); }
+.shortcut-section h4 {
+  margin: 0 0 var(--space-1) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.shortcut-overlay-inner dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+}
+.shortcut-overlay-inner dt { text-align: right; }
+.shortcut-overlay-inner dd { margin: 0; color: var(--color-text-dim); font-size: var(--text-sm); }
+.shortcut-overlay-inner kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--color-divider);
+  border-radius: 4px;
+  background: var(--color-base);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  min-width: 1.5em;
+  text-align: center;
+}
+.shortcut-overlay-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  border: none;
+  background: none;
+  font-size: var(--text-lg);
+  color: var(--color-text-dim);
+  cursor: pointer;
+  padding: var(--space-1);
+  line-height: 1;
 }
 
 /* #26 — Panel error with retry */

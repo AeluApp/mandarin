@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 99  # Increment when adding migrations
+SCHEMA_VERSION = 100  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6001,6 +6001,61 @@ def _migrate_v98_to_v99(conn):
     conn.commit()
 
 
+def _migrate_v99_to_v100(conn):
+    """Autonomous A/B testing: experiment proposals and graduated rollouts."""
+    tables = {r[0] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    ).fetchall()}
+
+    if "experiment_proposal" not in tables:
+        conn.execute("""
+            CREATE TABLE experiment_proposal (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                description TEXT,
+                hypothesis TEXT NOT NULL,
+                source TEXT NOT NULL,
+                source_detail TEXT,
+                variants TEXT NOT NULL,
+                traffic_pct REAL DEFAULT 50.0,
+                guardrail_metrics TEXT,
+                min_sample_size INTEGER DEFAULT 100,
+                priority INTEGER DEFAULT 0,
+                status TEXT DEFAULT 'pending',
+                created_at TEXT DEFAULT (datetime('now')),
+                reviewed_at TEXT,
+                started_experiment_id INTEGER,
+                FOREIGN KEY (started_experiment_id) REFERENCES experiment(id)
+            )
+        """)
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_experiment_proposal_status "
+            "ON experiment_proposal(status)"
+        )
+
+    if "experiment_rollout" not in tables:
+        conn.execute("""
+            CREATE TABLE experiment_rollout (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER NOT NULL,
+                winner_variant TEXT NOT NULL,
+                rollout_stage TEXT DEFAULT 'pending',
+                current_pct INTEGER DEFAULT 0,
+                stage_started_at TEXT,
+                next_stage_at TEXT,
+                feature_flag_name TEXT,
+                created_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            )
+        """)
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_experiment_rollout_stage "
+            "ON experiment_rollout(rollout_stage)"
+        )
+
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6101,6 +6156,7 @@ MIGRATIONS = {
     96: _migrate_v96_to_v97,
     97: _migrate_v97_to_v98,
     98: _migrate_v98_to_v99,
+    99: _migrate_v99_to_v100,
 }
 
 

@@ -1275,6 +1275,44 @@ CREATE INDEX IF NOT EXISTS idx_experiment_assignment_exp ON experiment_assignmen
 CREATE INDEX IF NOT EXISTS idx_experiment_exposure_exp ON experiment_exposure(experiment_id, user_id);
 
 -- ────────────────────────────────
+-- EXPERIMENT PROPOSALS (V99+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS experiment_proposal (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    hypothesis TEXT NOT NULL,
+    source TEXT NOT NULL,              -- 'churn_signal', 'manual', 'anomaly'
+    source_detail TEXT,                -- JSON context from signal
+    variants TEXT NOT NULL,            -- JSON array
+    traffic_pct REAL DEFAULT 50.0,
+    guardrail_metrics TEXT,            -- JSON array
+    min_sample_size INTEGER DEFAULT 100,
+    priority INTEGER DEFAULT 0,        -- higher = more important
+    status TEXT DEFAULT 'pending',     -- pending, approved, rejected, started
+    created_at TEXT DEFAULT (datetime('now')),
+    reviewed_at TEXT,
+    started_experiment_id INTEGER,
+    FOREIGN KEY (started_experiment_id) REFERENCES experiment(id)
+);
+
+CREATE TABLE IF NOT EXISTS experiment_rollout (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    experiment_id INTEGER NOT NULL,
+    winner_variant TEXT NOT NULL,
+    rollout_stage TEXT DEFAULT 'pending', -- pending, 25pct, 50pct, 100pct, complete
+    current_pct INTEGER DEFAULT 0,
+    stage_started_at TEXT,
+    next_stage_at TEXT,
+    feature_flag_name TEXT,              -- linked flag for rollout
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_experiment_proposal_status ON experiment_proposal(status);
+CREATE INDEX IF NOT EXISTS idx_experiment_rollout_stage ON experiment_rollout(rollout_stage);
+
+-- ────────────────────────────────
 -- PASSAGE COMMENTS (V48+)
 -- ────────────────────────────────
 CREATE TABLE IF NOT EXISTS passage_comment (

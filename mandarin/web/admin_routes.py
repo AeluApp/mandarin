@@ -4795,3 +4795,45 @@ def admin_quality_pareto():
     with db.connection() as conn:
         result = pareto_frontier(conn, user_id=user_id)
     return jsonify(result)
+
+
+@admin_bp.route("/api/admin/churn-dashboard")
+@admin_required
+@api_error_handler("Churn dashboard")
+def admin_churn_dashboard():
+    """At-risk users dashboard for churn analytics.
+
+    Returns a JSON list of users whose churn risk score meets the
+    minimum threshold (default 40).  Each entry includes risk_score,
+    churn_type, user_id, and days_since_last_session.
+
+    Query params:
+        min_risk (int): minimum score to include (default 40)
+    """
+    min_risk = request.args.get("min_risk", 40, type=int)
+
+    from ..churn_detection import compute_churn_risk, _days_since_last_session
+
+    with db.connection() as conn:
+        rows = conn.execute("SELECT id FROM user").fetchall()
+        at_risk = []
+        for row in rows:
+            uid = row["id"]
+            try:
+                risk = compute_churn_risk(conn, user_id=uid)
+            except Exception as e:
+                logger.debug("churn_risk skipped for user %s: %s", uid, e)
+                continue
+            if risk["score"] < min_risk:
+                continue
+            days = _days_since_last_session(conn, user_id=uid)
+            at_risk.append({
+                "user_id": uid,
+                "risk_score": risk["score"],
+                "churn_type": risk.get("churn_type", "unknown"),
+                "days_since_last_session": round(days, 1) if days is not None else None,
+            })
+
+        at_risk.sort(key=lambda u: u["risk_score"], reverse=True)
+
+    return jsonify({"at_risk_users": at_risk, "count": len(at_risk)})

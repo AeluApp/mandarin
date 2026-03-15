@@ -600,6 +600,9 @@ def create_app(testing=False):
         from .interference_scheduler import start as _start_interference
         _start_interference()
 
+        from .experiment_daemon import start as _start_experiment_daemon
+        _start_experiment_daemon()
+
     return app
 
 

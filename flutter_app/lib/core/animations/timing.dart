@@ -7,6 +7,7 @@ class AeluTiming {
   // ── Durations ──
   static const press = Duration(milliseconds: 100);
   static const micro = Duration(milliseconds: 120);
+  static const snappy = Duration(milliseconds: 150);
   static const fast = Duration(milliseconds: 200);
   static const nav = Duration(milliseconds: 300);
   static const base = Duration(milliseconds: 400);

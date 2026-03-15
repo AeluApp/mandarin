@@ -5,8 +5,8 @@
 **Date:** 2026-02-28
 **Content library:** HSK 1-9 canonical word lists (10,000+ items via `add-hsk`), context notes, 134 auto-tagged, 30 dialogue scenarios
 **Grammar/skills:** 26 grammar points (HSK 1-3), 14 language skills seeded
-**Schema:** V42 (56 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure)
-**Tests:** 1531 tests across 73 suites
+**Schema:** V100 (70 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure, experiment proposals, graduated rollouts)
+**Tests:** 4060 tests across 159 suites
 **Mobile:** Capacitor shell staged, JWT auth, offline sync, native plugin bridge
 
 ### Mobile Readiness (2026-02-21)
@@ -53,7 +53,7 @@
 
 #### Modified files
 - `mandarin/settings.py` — JWT_SECRET, JWT_ACCESS_EXPIRY_HOURS, JWT_REFRESH_EXPIRY_DAYS
-- `mandarin/db/core.py` — SCHEMA_VERSION=26 (was 17 at Phase F)
+- `mandarin/db/core.py` — SCHEMA_VERSION=100 (experiment_proposal + experiment_rollout tables)
 - `mandarin/web/__init__.py` — V1PrefixMiddleware, JWT request_loader, blueprint registration
 - `mandarin/web/routes.py` — public prefixes, CORS Authorization header, push endpoints
 - `mandarin/web/static/app.js` — Capacitor bridge init, haptics, JWT WS token, touch gestures, offline indicator
@@ -278,7 +278,7 @@
 
 ---
 
-## Schema (43 tables, V28)
+## Schema (70 tables, V100)
 
 | Table | Purpose |
 |---|---|
@@ -315,6 +315,8 @@
 | client_error_log | Client-side JS error reports |
 | mfa_challenge | Short-lived MFA challenge tokens (DB-backed, multi-worker safe) |
 | grade_appeal | Grade appeal workflow for disputed drill results |
+| experiment_proposal | Daemon-generated experiment proposals (from churn signals) |
+| experiment_rollout | Graduated rollout tracking (pending→25%→50%→100%→complete) |
 
 ---
 
@@ -378,7 +380,7 @@ mandarin/
 ├── jwt_auth.py          # JWT access + refresh token management
 ├── db/                  # Database package
 │   ├── __init__.py      # Re-exports (get_connection, init_db, etc.)
-│   ├── core.py          # Schema, migrations (V24), connection management
+│   ├── core.py          # Schema, migrations (V100), connection management
 │   ├── content.py       # Content item queries, context notes
 │   ├── progress.py      # SRS engine, 6-stage mastery, retention model integration
 │   └── session.py       # Session lifecycle
@@ -404,6 +406,7 @@ mandarin/
     ├── api_errors.py    # Structured error codes for mobile API
     ├── token_routes.py  # JWT token obtain/refresh/revoke
     ├── sync_routes.py   # Offline sync push/pull/state
+    ├── experiment_daemon.py  # Autonomous A/B testing daemon (6-hour cycle)
     ├── bridge.py        # Show/input bridge with correlation IDs
     ├── static/app.js    # WebSocket client + Capacitor + offline queue
     ├── static/capacitor-bridge.js  # Native plugin wrappers
@@ -412,9 +415,9 @@ mandarin/
     └── templates/index.html
 mobile/                  # Capacitor shell (iOS/Android)
 run                      # Bash launcher (./run, ./run menu, ./run app, ./run help)
-schema.sql               # Full schema (43 tables, V28)
+schema.sql               # Full schema (70 tables, V100)
 learner_profile.json     # Persona configuration
-tests/                       # 1343 tests across 59 suites
+tests/                       # 4060 tests across 159 suites
 data/
 ├── mandarin.db          # SQLite database
 ├── hsk/                 # HSK 4-9 vocabulary JSON
@@ -478,7 +481,7 @@ data/
 - [x] Stage-aware core stability (mastery_stage IN stable/durable)
 - [x] Honest UI labels: no "learned"/"mastered" below stable
 - [x] 6-stage breakdown in status, menu, runner, reports
-- [x] 1343 tests across 59 suites — all passing
+- [x] 4060 tests across 159 suites — all passing
 
 ---
 

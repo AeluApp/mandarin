@@ -3517,11 +3517,45 @@ function showPermanentReloadBanner() {
     progressSpan.textContent = "(" + drillCount + " of " + drillTotal + " completed) ";
     banner.appendChild(progressSpan);
   }
+  var retryBtn = document.createElement("button");
+  retryBtn.textContent = "Retry";
+  retryBtn.addEventListener("click", function() {
+    reconnectAttempts = 0;
+    hideDisconnectBanner();
+    if (lastSessionType) connectWebSocket(lastSessionType);
+  });
+  banner.appendChild(retryBtn);
   var reloadBtn2 = document.createElement("button");
-  reloadBtn2.textContent = "Reload to continue";
+  reloadBtn2.textContent = "Reload";
   reloadBtn2.addEventListener("click", function() { location.reload(); });
   banner.appendChild(reloadBtn2);
   banner.classList.remove("hidden");
+}
+
+/* ── Fetch error toast with retry ── */
+function showFetchError(action, retryFn) {
+  var existing = document.getElementById("fetch-error-toast");
+  if (existing) existing.remove();
+  var toast = document.createElement("div");
+  toast.id = "fetch-error-toast";
+  toast.setAttribute("role", "alert");
+  toast.textContent = (action || "Request") + " failed. ";
+  if (typeof retryFn === "function") {
+    var btn = document.createElement("button");
+    btn.textContent = "Retry";
+    btn.addEventListener("click", function() {
+      toast.remove();
+      retryFn();
+    });
+    toast.appendChild(btn);
+  }
+  var dismiss = document.createElement("button");
+  dismiss.textContent = "\u00d7";
+  dismiss.className = "toast-dismiss";
+  dismiss.addEventListener("click", function() { toast.remove(); });
+  toast.appendChild(dismiss);
+  (document.getElementById("app") || document.body).appendChild(toast);
+  setTimeout(function() { if (toast.parentNode) toast.remove(); }, 8000);
 }
 
 function hideDisconnectBanner() {
@@ -3574,6 +3608,9 @@ function showSessionError(message) {
 document.addEventListener("keydown", function(e) {
   // Escape — close modals, open panels, tooltips (works from any context)
   if (e.key === "Escape") {
+    // Close shortcut overlay
+    var shortcutOverlay = document.getElementById("shortcut-overlay");
+    if (shortcutOverlay) { shortcutOverlay.remove(); e.preventDefault(); return; }
     // Close upgrade modal
     var upgradeModal = document.getElementById("upgrade-modal");
     if (upgradeModal) {
@@ -3670,6 +3707,13 @@ document.addEventListener("keydown", function(e) {
     return;
   }
 
+  // ? key on dashboard — show keyboard shortcut overlay
+  if (e.key === "?" && !sessionActive && !e.ctrlKey && !e.metaKey) {
+    e.preventDefault();
+    toggleShortcutOverlay();
+    return;
+  }
+
   // Session-only shortcuts (only when prompt is active)
   if (!sessionActive || !currentPromptId) return;
 
@@ -3748,6 +3792,43 @@ function handleHintShortcut() {
   }
   if (AeluSound.instance) AeluSound.instance.hintReveal();
   quickAnswer("?");
+}
+
+/* ── Keyboard shortcut help overlay ── */
+function toggleShortcutOverlay() {
+  var existing = document.getElementById("shortcut-overlay");
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement("div");
+  overlay.id = "shortcut-overlay";
+  overlay.innerHTML =
+    '<div class="shortcut-overlay-inner">' +
+    '<h3>Keyboard Shortcuts</h3>' +
+    '<div class="shortcut-section"><h4>Dashboard</h4>' +
+    '<dl>' +
+    '<dt><kbd>Enter</kbd></dt><dd>Start review session</dd>' +
+    '<dt><kbd>M</kbd></dt><dd>Start mini session</dd>' +
+    '<dt><kbd>?</kbd></dt><dd>Toggle this overlay</dd>' +
+    '</dl></div>' +
+    '<div class="shortcut-section"><h4>During Session</h4>' +
+    '<dl>' +
+    '<dt><kbd>1</kbd>\u2013<kbd>4</kbd></dt><dd>Select MC option</dd>' +
+    '<dt><kbd>Enter</kbd></dt><dd>Submit answer</dd>' +
+    '<dt><kbd>N</kbd></dt><dd>Skip drill</dd>' +
+    '<dt><kbd>B</kbd></dt><dd>Show breakdown</dd>' +
+    '<dt><kbd>?</kbd></dt><dd>Get a hint</dd>' +
+    '<dt><kbd>Q</kbd></dt><dd>End session</dd>' +
+    '</dl></div>' +
+    '<div class="shortcut-section"><h4>Anywhere</h4>' +
+    '<dl>' +
+    '<dt><kbd>Esc</kbd></dt><dd>Close modal / panel</dd>' +
+    '</dl></div>' +
+    '<button class="shortcut-overlay-close">\u00d7</button>' +
+    '</div>';
+  overlay.addEventListener("click", function(e) {
+    if (e.target === overlay || e.target.classList.contains("shortcut-overlay-close"))
+      overlay.remove();
+  });
+  (document.getElementById("app") || document.body).appendChild(overlay);
 }
 
 /* End session button is now inside the shortcuts bar with data-quick="Q",

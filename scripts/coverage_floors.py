@@ -26,6 +26,8 @@ FLOORS = {
     "mandarin/security.py": 88, # Security events — critical, currently 91%
     "mandarin/scheduler.py": 75,# Scheduler — core learning algorithm, currently 77%
     "mandarin/conversation.py": 88, # Conversation — user-facing, currently 90%
+    "mandarin/experiments.py": 70,  # A/B testing — product-critical, new tests added
+    "mandarin/retention.py": 80,    # Retention model — core learning, wilson_ci tested
 }
 
 
