@@ -616,6 +616,9 @@ def create_app(testing=False):
         from .openclaw_scheduler import start as _start_openclaw
         _start_openclaw()
 
+        from .counter_metrics_scheduler import start as _start_counter_metrics
+        _start_counter_metrics()
+
     return app
 
 

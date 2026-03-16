@@ -115,7 +115,16 @@ def format_scaffold_hint(pinyin: str, level: str) -> str:
 # ── Progressive hints for free-text drills ──────────────────────────────
 
 def get_progressive_hint(item: dict, hint_stage: int) -> tuple:
-    """Return (hint_text, next_stage). Stages: 0=first char, 1=tone marks, 2=full pinyin."""
+    """Return (hint_text, next_stage). Progressive — never reveals the full answer.
+
+    Stages:
+      0 — first letter of first syllable
+      1 — tone pattern (numbers only)
+      2 — number of syllables + initials only (NOT full pinyin)
+
+    Anti-Goodhart: hints must help recall, not replace it. If the hint
+    gives away the answer, the drill result is meaningless.
+    """
     pinyin = item.get("pinyin", "")
     if hint_stage == 0:
         first = pinyin[0] if pinyin else "?"
@@ -126,7 +135,13 @@ def get_progressive_hint(item: dict, hint_stage: int) -> tuple:
         tone_str = " ".join('·' if t == 0 else str(t) for t in tones) if tones else ""
         return (f"  Hint: tones are {tone_str}", 2)
     else:
-        return (f"  Hint: {pinyin}", 3)
+        # Stage 2: show syllable count + initials only — NEVER the full pinyin
+        import re
+        syllables = re.findall(r'[a-zA-ZüÜ]+\d?', pinyin)
+        n = len(syllables) if syllables else 1
+        initials = [s[0] for s in syllables] if syllables else []
+        initial_str = " ".join(initials) if initials else pinyin[0] if pinyin else "?"
+        return (f"  Hint: {n} syllable{'s' if n != 1 else ''}, initials: {initial_str}", 3)
 
 
 # ── English-aware feedback formatting ──────────────────────────────

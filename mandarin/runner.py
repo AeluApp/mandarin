@@ -600,22 +600,53 @@ def run_session(conn, plan: SessionPlan,
         if record_modality == "listening" and not audio_enabled:
             record_modality = "reading"  # text-only listening drills are really reading
 
-        db.record_attempt(
-            conn,
-            content_item_id=drill.content_item_id,
-            modality=record_modality,
-            correct=result.correct,
-            session_id=session_id,
-            error_type=result.error_type,
-            error_cause=getattr(result, "error_cause", None),
-            user_answer=result.user_answer,
-            expected_answer=result.expected_answer,
-            drill_type=drill.drill_type,
-            confidence=result.confidence,
-            response_ms=drill_ms,
-            user_id=user_id,
-            metadata=result.metadata,
-        )
+        # Holdout probes go to counter_metric_holdout, NOT to SRS progress
+        if drill.metadata.get("is_holdout"):
+            try:
+                from .holdout_probes import record_holdout_result
+                record_holdout_result(
+                    conn,
+                    user_id=user_id,
+                    content_item_id=drill.content_item_id,
+                    modality=record_modality,
+                    drill_type=drill.drill_type,
+                    correct=result.correct,
+                    response_ms=drill_ms,
+                    session_id=session_id,
+                    holdout_set=drill.metadata.get("holdout_set", "standard"),
+                )
+            except Exception:
+                logger.debug("holdout result recording failed", exc_info=True)
+        elif drill.metadata.get("is_delayed_validation"):
+            try:
+                from .delayed_validation import record_validation_result
+                record_validation_result(
+                    conn,
+                    validation_id=drill.metadata["validation_id"],
+                    correct=result.correct,
+                    response_ms=drill_ms,
+                    session_id=session_id,
+                    drill_type=drill.drill_type,
+                )
+            except Exception:
+                logger.debug("delayed validation result recording failed", exc_info=True)
+        else:
+            db.record_attempt(
+                conn,
+                content_item_id=drill.content_item_id,
+                modality=record_modality,
+                correct=result.correct,
+                session_id=session_id,
+                error_type=result.error_type,
+                error_cause=getattr(result, "error_cause", None),
+                user_answer=result.user_answer,
+                expected_answer=result.expected_answer,
+                drill_type=drill.drill_type,
+                confidence=result.confidence,
+                response_ms=drill_ms,
+                user_id=user_id,
+                metadata=result.metadata,
+            )
 
         state.results.append(result)
 

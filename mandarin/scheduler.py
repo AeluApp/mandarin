@@ -661,6 +661,34 @@ def _bandit_drill_selection(conn: sqlite3.Connection, item: dict,
     return best_type
 
 
+_RECOGNITION_DRILL_TYPES = {"mc", "reverse_mc", "tone", "measure_word", "measure_word_disc",
+                            "number_system", "radical", "error_correction", "chengyu",
+                            "listening_gist", "listening_tone"}
+
+
+def _item_has_production_history(conn: sqlite3.Connection,
+                                  content_item_id: int,
+                                  user_id: int = 1) -> bool:
+    """Check if an item has ever been correctly answered with a production drill type.
+
+    Used by the anti-Goodhart production bias: items that have only been tested
+    with recognition drills are forced onto production drills.
+    """
+    try:
+        row = conn.execute("""
+            SELECT 1 FROM review_event
+            WHERE user_id = ? AND content_item_id = ?
+              AND correct = 1
+              AND drill_type NOT IN ('mc', 'reverse_mc', 'tone', 'measure_word',
+                  'measure_word_disc', 'number_system', 'radical', 'error_correction',
+                  'chengyu', 'listening_gist', 'listening_tone')
+            LIMIT 1
+        """, (user_id, content_item_id)).fetchone()
+        return row is not None
+    except Exception:
+        return True  # Assume production history exists on error (safe default)
+
+
 def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[str]],
                      allowed_types: set[str] | None = None, mastery_stage: str = "seen",
                      conn: sqlite3.Connection | None = None,
@@ -691,6 +719,10 @@ def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[
 
     # Transfer scaffolding: bias drill type by mastery stage
     # Recognition first -> production -> context/transfer
+    PRODUCTION_TYPES = {"transfer", "word_order", "sentence_build",
+                        "translation", "english_to_pinyin", "hanzi_to_pinyin", "particle_disc",
+                        "synonym_disc", "cloze_context", "measure_word_cloze", "measure_word_production",
+                        "tone_sandhi", "complement", "ba_bei", "collocation"}
     if mastery_stage in ("seen", "passed_once") and modality == "reading":
         # Prefer recognition drills for early-stage items
         recognition = [t for t in options if t in ("mc", "reverse_mc", "tone", "measure_word", "measure_word_disc", "number_system", "radical", "error_correction", "chengyu")]
@@ -698,12 +730,23 @@ def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[
             options = recognition
     elif mastery_stage in ("stabilizing", "stable", "durable") and modality == "reading":
         # Prefer production/transfer drills for established items
-        production = [t for t in options if t in ("transfer", "word_order", "sentence_build",
-                      "translation", "english_to_pinyin", "hanzi_to_pinyin", "particle_disc",
-                      "synonym_disc", "cloze_context", "measure_word_cloze", "measure_word_production",
-                      "tone_sandhi", "complement", "ba_bei", "collocation")]
+        production = [t for t in options if t in PRODUCTION_TYPES]
         if production:
             options = production
+
+    # Anti-Goodhart: force production drills for items that have only been
+    # tested with recognition types. This prevents recognition-only advancement.
+    if (conn is not None and modality == "reading"
+            and mastery_stage in ("stabilizing", "stable", "durable")):
+        production_options = [t for t in options if t in PRODUCTION_TYPES]
+        if production_options:
+            try:
+                has_production = _item_has_production_history(
+                    conn, item.get("id", 0), user_id)
+                if not has_production:
+                    options = production_options
+            except Exception:
+                pass
 
     # Filter by allowed_types if provided
     if allowed_types:
@@ -1324,12 +1367,109 @@ def _apply_metrics_feedback(conn: sqlite3.Connection, user_id: int, plan: dict) 
         # Recompute distribution with reduced target
         plan["distribution"] = _pick_modality_distribution(plan["target_items"], plan["weights"])
 
+    # ── Counter-metric scheduler adjustments ──
+    # Read recent scheduler_adjust lifecycle events from the counter-metrics daemon
+    cm_adjustments = _apply_counter_metric_adjustments(conn, user_id, plan)
+    adjustments.extend(cm_adjustments)
+
     if adjustments:
         logger.info("metrics feedback adjustments for user %d: %s", user_id, "; ".join(adjustments))
 
     plan["_metrics_snapshot"] = snapshot
     plan["_metrics_adjustments"] = adjustments
     return plan
+
+
+def _apply_counter_metric_adjustments(conn: sqlite3.Connection, user_id: int,
+                                       plan: dict) -> list[str]:
+    """Read counter_metric_scheduler_adjust lifecycle events and apply them to the plan.
+
+    Returns list of adjustment descriptions for logging.
+    """
+    import json as _json
+
+    adjustments = []
+
+    try:
+        rows = conn.execute("""
+            SELECT metadata FROM lifecycle_event
+            WHERE event_type = 'counter_metric_scheduler_adjust'
+              AND user_id = ?
+              AND created_at >= datetime('now', '-24 hours')
+            ORDER BY created_at DESC
+        """, (user_id,)).fetchall()
+    except Exception:
+        return adjustments
+
+    # Deduplicate: only apply the most recent action of each type
+    seen_actions = set()
+    for row in rows:
+        try:
+            data = _json.loads(row["metadata"]) if isinstance(row["metadata"], str) else row["metadata"]
+        except (TypeError, ValueError):
+            continue
+
+        action = data.get("action")
+        if not action or action in seen_actions:
+            continue
+        seen_actions.add(action)
+        params = data.get("params", {})
+
+        if action == "reduce_new_item_budget":
+            mult = params.get("multiplier", 0.7)
+            old = plan["new_budget"]
+            plan["new_budget"] = max(0, round(old * mult))
+            adjustments.append(f"CM:{action}: new_budget {old} -> {plan['new_budget']}")
+
+        elif action == "pause_new_items":
+            plan["new_budget"] = 0
+            adjustments.append(f"CM:{action}: new_budget -> 0 (paused)")
+
+        elif action == "increase_spacing_multiplier":
+            # Store on plan so modality drill planner can read it
+            plan["_cm_spacing_factor"] = params.get("factor", 0.85)
+            adjustments.append(f"CM:{action}: spacing factor {plan['_cm_spacing_factor']}")
+
+        elif action == "shorten_sessions":
+            mult = params.get("multiplier", params.get("factor", 0.75))
+            old_target = plan["target_items"]
+            plan["target_items"] = max(MIN_SESSION_ITEMS, round(old_target * mult))
+            plan["distribution"] = _pick_modality_distribution(
+                plan["target_items"], plan["weights"])
+            adjustments.append(f"CM:{action}: target {old_target} -> {plan['target_items']}")
+
+        elif action == "switch_to_minimal_mode":
+            plan["target_items"] = MIN_SESSION_ITEMS
+            plan["new_budget"] = 0
+            plan["distribution"] = _pick_modality_distribution(
+                plan["target_items"], plan["weights"])
+            adjustments.append("CM:switch_to_minimal_mode: target -> minimal, new_budget -> 0")
+
+        elif action == "boost_production_drills":
+            plan["_cm_production_boost"] = params.get("production_weight", 2.0)
+            adjustments.append(f"CM:{action}: production weight {plan['_cm_production_boost']}x")
+
+        elif action == "enforce_production_gate":
+            plan["_cm_production_gate"] = True
+            adjustments.append("CM:enforce_production_gate: block recognition-only promotion")
+
+        elif action == "increase_drill_diversity":
+            plan["_cm_min_drill_types"] = params.get("min_types", 3)
+            adjustments.append(f"CM:{action}: min {plan['_cm_min_drill_types']} drill types per item")
+
+        elif action == "increase_difficulty_floor":
+            plan["_cm_difficulty_floor"] = params.get("min_difficulty", 0.3)
+            adjustments.append(f"CM:{action}: min difficulty {plan['_cm_difficulty_floor']}")
+
+        elif action == "increase_long_term_reviews":
+            plan["_cm_lt_review_boost"] = params.get("boost_factor", 1.3)
+            adjustments.append(f"CM:{action}: long-term review boost {plan['_cm_lt_review_boost']}x")
+
+        elif action == "add_response_floor":
+            plan["_cm_response_floor_ms"] = params.get("floor_ms", 800)
+            adjustments.append(f"CM:{action}: response floor {plan['_cm_response_floor_ms']}ms")
+
+    return adjustments
 
 
 def _plan_error_focus_items(conn: sqlite3.Connection, seen_ids: set, user_id: int) -> list:
@@ -2346,6 +2486,91 @@ def _build_focus_insights(drills: list, params: dict, conn: sqlite3.Connection, 
     return insights[:1]  # One insight per session (doctrine: max one personalized suggestion)
 
 
+def _plan_holdout_probes(conn: sqlite3.Connection, drills: list,
+                         seen_ids: set, user_id: int) -> None:
+    """Inject holdout probes into the session (anti-Goodhart Rule 4).
+
+    Holdout probes are hidden benchmark items presented in novel drill formats.
+    Results are recorded in counter_metric_holdout, NEVER in the main progress
+    table, so the SRS optimizer cannot see them.
+    """
+    try:
+        from .holdout_probes import get_session_probes
+    except ImportError:
+        return
+
+    probes = get_session_probes(conn, user_id=user_id,
+                                session_item_count=len(drills))
+    for probe in probes:
+        cid = probe["content_item_id"]
+        if cid in seen_ids:
+            continue
+        if not _item_is_drillable_by_fields(
+            probe.get("hanzi"), probe.get("pinyin"), probe.get("english"),
+            probe["drill_type"]
+        ):
+            continue
+        seen_ids.add(cid)
+        drills.append(DrillItem(
+            content_item_id=cid,
+            hanzi=probe.get("hanzi", ""),
+            pinyin=probe.get("pinyin", ""),
+            english=probe.get("english", ""),
+            modality=probe.get("modality", "reading"),
+            drill_type=probe["drill_type"],
+            metadata={"is_holdout": True, "holdout_set": "standard"},
+        ))
+
+
+def _plan_delayed_validations(conn: sqlite3.Connection, drills: list,
+                              seen_ids: set, user_id: int) -> None:
+    """Inject delayed recall validation probes into the session.
+
+    These are integrity checks for items that recently reached mastery.
+    Results feed counter-metrics only, NEVER the SRS.
+    """
+    try:
+        from .delayed_validation import get_session_validations
+    except ImportError:
+        return
+
+    validations = get_session_validations(conn, user_id=user_id)
+    for v in validations:
+        cid = v["content_item_id"]
+        if cid in seen_ids:
+            continue
+        if not _item_is_drillable_by_fields(
+            v.get("hanzi"), v.get("pinyin"), v.get("english"),
+            v["drill_type"]
+        ):
+            continue
+        seen_ids.add(cid)
+        drills.append(DrillItem(
+            content_item_id=cid,
+            hanzi=v.get("hanzi", ""),
+            pinyin=v.get("pinyin", ""),
+            english=v.get("english", ""),
+            modality=v.get("modality", "reading"),
+            drill_type=v["drill_type"],
+            metadata={
+                "is_delayed_validation": True,
+                "validation_id": v["validation_id"],
+                "delay_days": v["delay_days"],
+            },
+        ))
+
+
+def _item_is_drillable_by_fields(hanzi: str | None, pinyin: str | None,
+                                  english: str | None, drill_type: str) -> bool:
+    """Check if item fields are sufficient for a given drill type (no DB row needed)."""
+    if drill_type in ("mc", "reverse_mc", "tone", "intuition", "listening_gist",
+                       "listening_detail", "sentence_build"):
+        return bool(hanzi and english)
+    if drill_type in ("english_to_pinyin", "hanzi_to_pinyin", "pinyin_to_hanzi"):
+        return bool(hanzi and pinyin and english)
+    return bool(hanzi and pinyin and english)
+
+
 def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> SessionPlan:
     """Finalize drills: interleave, build micro-plan, tier-gate, create SessionPlan."""
     drills = _interleave(drills)
@@ -2447,6 +2672,14 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
     # Inject supplementary drills (core lexicon, scenarios, personalization, media)
     if not is_long_gap:
         _plan_injections(conn, drills, seen_ids, user_id)
+
+    # Inject holdout probes (anti-Goodhart Rule 4: hidden benchmark tasks)
+    if not is_long_gap:
+        _plan_holdout_probes(conn, drills, seen_ids, user_id)
+
+    # Inject delayed recall validations (anti-Goodhart Layer 2: integrity checks)
+    if not is_long_gap:
+        _plan_delayed_validations(conn, drills, seen_ids, user_id)
 
     # First-session scaffolding: recognition drills first for brand-new users
     profile = db.get_profile(conn, user_id=user_id)

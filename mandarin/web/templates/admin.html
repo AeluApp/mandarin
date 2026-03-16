@@ -123,6 +123,7 @@
       <button class="admin-tab" data-tab="notifications" id="notifications-tab-btn">Notifications <span id="notif-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
       <button class="admin-tab" data-tab="ai-review" id="ai-review-tab-btn">AI Review <span id="ai-review-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
       <button class="admin-tab" data-tab="openclaw">OpenClaw Bots</button>
+      <button class="admin-tab" data-tab="counter-metrics" id="counter-metrics-tab-btn">Anti-Goodhart <span id="cm-badge" style="display:none;background:var(--color-incorrect,#c0392b);color:#fff;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;min-width:16px;text-align:center;vertical-align:middle;"></span></button>
     </div>
 
     <!-- Overview -->
@@ -661,6 +662,86 @@
         <div id="openclaw-activity" class="tab-loading">Loading...</div>
       </div>
     </div>
+
+    <!-- Anti-Goodhart Counter-Metrics -->
+    <div class="admin-tab-content" id="tab-counter-metrics">
+      <p class="tab-description">Honesty checks for the learning system. For every headline metric (accuracy, streaks, mastery), a shadow metric watches whether that number actually means anything. When something looks off, the system acts automatically.</p>
+
+      <div id="cm-health-banner" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-4);border-left:4px solid var(--color-text-dim);font-family:var(--font-body);font-size:var(--text-sm);">Checking learning health...</div>
+
+      <div style="margin-bottom:var(--space-4);">
+        <button onclick="runCounterMetrics()" style="background:var(--color-accent);color:#fff;border:none;padding:var(--space-2) var(--space-3);cursor:pointer;font-family:var(--font-body);font-size:var(--text-sm);">Run Health Check Now</button>
+      </div>
+
+      <!-- Alerts -->
+      <div class="admin-section">
+        <h2>Problems Found</h2>
+        <div id="cm-alerts" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Product Rule Violations -->
+      <div class="admin-section">
+        <h2>Product Rules</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Five rules the product must follow: (1) Every metric has a shadow metric (2) No feature that hurts real memory gets called "successful" (3) Progress bars reflect reality (4) Secret quizzes test real knowledge (5) Growth experiments can't hurt learning</p>
+        <div id="cm-rules" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Layer 2: Integrity -->
+      <div class="admin-section">
+        <h2>Is Learning Real?</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">These metrics check whether "mastery" actually sticks when tested later, in new formats, or without hints.</p>
+        <div id="cm-integrity" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Layer 3: Cost -->
+      <div class="admin-section">
+        <h2>Hidden Costs</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Good headline numbers can hide problems: burnout, growing backlogs, inefficiency, or fragile progress that crumbles after a break.</p>
+        <div id="cm-cost" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Layer 4: Distortion -->
+      <div class="admin-section">
+        <h2>Gaming and Shortcuts</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Signs that the user or the product itself is taking shortcuts that inflate metrics without real learning.</p>
+        <div id="cm-distortion" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Layer 5: Outcome -->
+      <div class="admin-section">
+        <h2>Does the App Actually Work?</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Secret quizzes and honesty checks that test whether app progress maps to real Mandarin ability.</p>
+        <div id="cm-outcome" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Delayed Validation -->
+      <div class="admin-section">
+        <h2>Memory Checks</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Items that reached mastery are retested at 7, 14, and 30 days. These results never touch the learning system — they're a separate honesty check.</p>
+        <div id="cm-delayed-validation" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- KPI Mapping Table -->
+      <div class="admin-section">
+        <h2>What Could Go Wrong</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">For every headline metric, the specific way it could become misleading and what's watching for it.</p>
+        <div id="cm-map" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Action History -->
+      <div class="admin-section">
+        <h2>Automatic Responses</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Actions the system took automatically when it detected problems. This is an audit log — every automated decision is recorded here.</p>
+        <div id="cm-actions" class="tab-loading">Loading...</div>
+      </div>
+
+      <!-- Holdout Probes -->
+      <div class="admin-section">
+        <h2>Secret Quiz Results</h2>
+        <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">During sessions, 1-2 items are tested in a different format than usual. The learning system never sees these results — they're a reality check on whether practice actually transfers.</p>
+        <div id="cm-holdout" class="tab-loading">Loading...</div>
+      </div>
+    </div>
   </div>
 
   <script nonce="{{ csp_nonce }}">
@@ -845,6 +926,7 @@
         "notifications": loadNotifications,
         "ai-review": loadAiReview,
         "openclaw": loadOpenClaw,
+        "counter-metrics": loadCounterMetrics,
       };
       if (loaders[tab]) loaders[tab]();
     }
@@ -2606,6 +2688,330 @@
       ctx.fillText("Risk Score Over Time", w / 2, pad.top - 4);
 
       return canvas;
+    }
+
+    /* ═══ Anti-Goodhart Counter-Metrics Tab ═══ */
+
+    function cmBadge(severity) {
+      if (severity === "critical") return '<span style="background:#c0392b;color:#fff;font-size:10px;padding:1px 6px;font-weight:700;">SERIOUS</span>';
+      if (severity === "warn") return '<span style="background:#e67e22;color:#fff;font-size:10px;padding:1px 6px;font-weight:700;">WATCH</span>';
+      return '<span style="background:#27ae60;color:#fff;font-size:10px;padding:1px 6px;font-weight:700;">OK</span>';
+    }
+
+    function cmHealthBanner(health, alertSummary) {
+      var colors = {healthy: "var(--color-correct,#27ae60)", caution: "#e67e22", warning: "#e67e22", critical: "var(--color-incorrect,#c0392b)"};
+      var msgs = {
+        healthy: "Everything looks honest. The learning system is working as intended.",
+        caution: "A few things to keep an eye on. See details below.",
+        warning: "Multiple concerns detected. The system is responding automatically.",
+        critical: "Serious problems found. The system has already taken corrective action."
+      };
+      var el = document.getElementById("cm-health-banner");
+      el.style.borderLeftColor = colors[health] || "var(--color-text-dim)";
+      var statusLabel = {healthy: "HEALTHY", caution: "HEADS UP", warning: "CONCERNS", critical: "PROBLEMS"}[health] || health;
+      el.innerHTML = '<strong>' + esc(statusLabel) + '</strong> — ' + esc(msgs[health] || health) + ' <span style="font-size:var(--text-xs);color:var(--color-text-dim);">(' + (alertSummary.critical || 0) + ' serious, ' + (alertSummary.warn || 0) + ' to watch)</span>';
+      var badge = document.getElementById("cm-badge");
+      if (alertSummary.total > 0) { badge.style.display = "inline"; badge.textContent = alertSummary.total; } else { badge.style.display = "none"; }
+    }
+
+    function renderMetricCard(label, value, unit, severity) {
+      var color = severity === "critical" ? "var(--color-incorrect,#c0392b)" : severity === "warn" ? "#e67e22" : "var(--color-text)";
+      var display = value === null || value === undefined ? "—" : (typeof value === "number" ? (unit === "%" ? (value * 100).toFixed(1) + "%" : value.toFixed ? value.toFixed(2) : value) : value);
+      return '<div style="background:var(--color-surface);padding:var(--space-3);min-width:160px;"><div style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-1);">' + esc(label) + '</div><div style="font-size:var(--text-lg);font-weight:700;color:' + color + ';">' + esc(String(display)) + '</div>' + (severity ? '<div style="margin-top:2px;">' + cmBadge(severity) + '</div>' : '') + '</div>';
+    }
+
+    // Plain-English labels for metric names
+    var cmPlainLabels = {
+      "delayed_recall_7d": "Remember after 1 week?",
+      "delayed_recall_14d": "Remember after 2 weeks?",
+      "delayed_recall_30d": "Remember after 1 month?",
+      "transfer_accuracy": "Works in new formats?",
+      "production_accuracy": "Can produce (not just recognize)?",
+      "recognition_production_gap": "Gap: recognize vs. produce",
+      "mastery_reversal_rate": "Mastery that falls apart",
+      "mastery_survival_30d": "Mastery still holding after 30 days?",
+      "hint_dependence_rate": "Needs hints to get it right?",
+      "fatigue_score": "Session exhaustion level",
+      "early_exit_rate": "Quit before finishing",
+      "overdue_rate": "Reviews piling up",
+      "suspicious_fast_rate": "Suspiciously fast answers",
+      "recognition_only_rate": "Advancing without production practice",
+      "low_challenge_rate": "Too many easy items",
+      "holdout_accuracy": "Score on secret quizzes",
+      "progress_honesty_score": "Are progress labels honest?",
+      "trend_delayed_recall_7d": "Trending: memory getting worse",
+      "trend_transfer_accuracy": "Trending: transfer declining",
+      "trend_mastery_reversal_rate": "Trending: more mastery failures",
+      "trend_fatigue_score": "Trending: increasing fatigue",
+      "trend_overdue_rate": "Trending: backlog growing",
+      "trend_holdout_accuracy": "Trending: secret quiz scores dropping"
+    };
+
+    var cmPlainSeverity = {
+      "critical": "Serious problem",
+      "warn": "Worth watching"
+    };
+
+    var cmPlainDirection = {
+      "below": "too low",
+      "above": "too high"
+    };
+
+    function cmLabel(metric) {
+      return cmPlainLabels[metric] || metric.replace(/_/g, ' ');
+    }
+
+    // Plain-English labels for action types
+    var cmActionLabels = {
+      "scheduler_adjust": "Changed session settings",
+      "experiment_propose": "Proposed A/B test",
+      "notification": "Sent alert",
+      "feature_flag": "Toggled feature"
+    };
+
+    // Plain-English labels for drill types
+    var cmDrillLabels = {
+      "reverse_mc": "English to Hanzi (multiple choice)",
+      "english_to_pinyin": "English to Pinyin (typing)",
+      "listening_detail": "Listening comprehension",
+      "sentence_build": "Build a sentence",
+      "mc": "Hanzi to English (multiple choice)",
+      "ime_type": "Type the characters"
+    };
+
+    function loadCounterMetrics() {
+      adminFetch("/api/admin/counter-metrics").then(function(d) {
+        cmHealthBanner(d.overall_health, d.alert_summary || {});
+        renderCmAlerts(d.alerts || []);
+        renderCmIntegrity(d.integrity || {});
+        renderCmCost(d.cost || {});
+        renderCmDistortion(d.distortion || {});
+        renderCmOutcome(d.outcome || {});
+        renderCmDelayedValidation(d.delayed_validation || {});
+      }).catch(function() {
+        document.getElementById("cm-alerts").innerHTML = '<p class="tab-empty">Failed to load health checks.</p>';
+      });
+      adminFetch("/api/admin/counter-metrics/product-rules").then(function(d) {
+        renderCmRules(d.violations || []);
+      }).catch(function() {
+        document.getElementById("cm-rules").innerHTML = '<p class="tab-empty">Failed to check product rules.</p>';
+      });
+      adminFetch("/api/admin/counter-metrics/actions").then(function(d) {
+        renderCmActions(d.actions || []);
+      }).catch(function() {
+        document.getElementById("cm-actions").innerHTML = '<p class="tab-empty">Failed to load action history.</p>';
+      });
+      adminFetch("/api/admin/counter-metrics/holdout").then(function(d) {
+        renderCmHoldout(d);
+      }).catch(function() {
+        document.getElementById("cm-holdout").innerHTML = '<p class="tab-empty">No secret quiz data yet.</p>';
+      });
+      adminFetch("/api/admin/counter-metrics/map").then(function(d) {
+        renderCmMap(d.map || {});
+      }).catch(function() {
+        document.getElementById("cm-map").innerHTML = '<p class="tab-empty">Failed to load risk map.</p>';
+      });
+    }
+
+    function renderCmAlerts(alerts) {
+      var el = document.getElementById("cm-alerts");
+      if (!alerts.length) { el.innerHTML = '<p class="tab-empty">No problems found. All honesty checks are passing.</p>'; return; }
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>What</th><th>Current value</th><th>Threshold</th><th>Severity</th></tr></thead><tbody>';
+      alerts.forEach(function(a) {
+        var valStr = typeof a.value === "number" ? (a.value < 1 && a.value > 0 ? (a.value * 100).toFixed(1) + "%" : a.value.toFixed ? a.value.toFixed(1) : a.value) : String(a.value);
+        var threshStr = typeof a.threshold === "number" ? (a.threshold < 1 && a.threshold > 0 ? (a.threshold * 100).toFixed(1) + "%" : a.threshold) : String(a.threshold);
+        var dirLabel = a.direction === "below" ? "should be higher" : "should be lower";
+        html += '<tr><td>' + esc(cmLabel(a.metric)) + '</td><td>' + esc(valStr) + ' <span style="color:var(--color-text-dim);font-size:var(--text-xs);">(' + dirLabel + ')</span></td><td>' + esc(String(threshStr)) + '</td><td>' + cmBadge(a.severity) + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmIntegrity(data) {
+      var el = document.getElementById("cm-integrity");
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);">';
+      var dr7 = data.delayed_recall_7d || {};
+      var dr14 = data.delayed_recall_14d || {};
+      var dr30 = data.delayed_recall_30d || {};
+      var transfer = data.transfer_accuracy || {};
+      var gap = data.production_vs_recognition_gap || {};
+      var rev = data.mastery_reversal_rate || {};
+      var hint = data.hint_dependence_rate || {};
+      var surv = data.mastery_survival_curve || {};
+      var s30 = (surv.checkpoints || {})["30d"] || {};
+      html += renderMetricCard("Remember after 1 week?", dr7.accuracy, "%", null);
+      html += renderMetricCard("Remember after 2 weeks?", dr14.accuracy, "%", null);
+      html += renderMetricCard("Remember after 1 month?", dr30.accuracy, "%", null);
+      html += renderMetricCard("Works in new formats?", transfer.accuracy, "%", null);
+      html += renderMetricCard("Recognize it?", gap.recognition_accuracy, "%", null);
+      html += renderMetricCard("Can produce it?", gap.production_accuracy, "%", null);
+      html += renderMetricCard("Recognize vs. produce gap", gap.gap, "%", null);
+      html += renderMetricCard("Mastery that fell apart", rev.reversal_rate, "%", null);
+      html += renderMetricCard("Still mastered at 30 days?", s30.survival_rate, "%", null);
+      html += renderMetricCard("Needed hints to pass?", hint.dependence_rate, "%", null);
+      html += '</div>';
+      html += '<div style="margin-top:var(--space-2);font-size:var(--text-xs);color:var(--color-text-faint);">Based on: ' + (dr7.sample_size||0) + ' delayed reviews, ' + (transfer.sample_size||0) + ' transfer tests, ' + (gap.production_sample||0) + ' production attempts, ' + (rev.reversals||0) + ' of ' + (rev.mastered_ever||0) + ' mastered items reversed</div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmCost(data) {
+      var el = document.getElementById("cm-cost");
+      var fat = data.session_fatigue || {};
+      var bl = data.backlog_burden || {};
+      var eff = data.learning_efficiency || {};
+      var rec = data.post_break_recovery || {};
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);">';
+      html += renderMetricCard("Session exhaustion (0-100)", fat.fatigue_score, "", null);
+      html += renderMetricCard("Quit before finishing", fat.early_exit_rate, "%", null);
+      html += renderMetricCard("Stopped mid-session", fat.quit_mid_session_rate, "%", null);
+      html += renderMetricCard("Flagged as boring", fat.boredom_rate, "%", null);
+      html += renderMetricCard("Overdue review items", bl.overdue_items, "", null);
+      html += renderMetricCard("Reviews piling up", bl.overdue_rate, "%", null);
+      html += renderMetricCard("How overdue (avg days)", bl.avg_overdue_days, "", null);
+      html += renderMetricCard("Mastery gains per minute", eff.promotions_per_minute, "", null);
+      html += renderMetricCard("Accuracy after a break", rec.post_break_accuracy, "%", null);
+      html += '</div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmDistortion(data) {
+      var el = document.getElementById("cm-distortion");
+      var lat = data.answer_latency_suspiciousness || {};
+      var easy = data.easy_overuse_collapse || {};
+      var rec = data.recognition_only_progress || {};
+      var diff = data.difficulty_avoidance || {};
+      var rep = data.repeated_exposure_dependence || {};
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);">';
+      html += renderMetricCard("Suspiciously fast answers", lat.suspicious_fast_rate, "%", null);
+      html += renderMetricCard("Typical response time", lat.median_response_ms, "ms", null);
+      html += renderMetricCard("Easy items that failed", easy.collapse_rate, "%", null);
+      html += renderMetricCard("Advancing without producing", rec.recognition_only_rate, "%", null);
+      html += renderMetricCard("Avoiding hard items", diff.low_challenge_rate, "%", null);
+      html += renderMetricCard("Easy item accuracy", diff.easy_correct_pct, "", null);
+      html += renderMetricCard("Items needing too many reps", rep.high_rep_rate, "%", null);
+      html += renderMetricCard("Typical attempts to mastery", rep.median_attempts_to_mastery, "", null);
+      html += '</div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmOutcome(data) {
+      var el = document.getElementById("cm-outcome");
+      var ho = data.holdout_probe_performance || {};
+      var hon = data.progress_honesty_score || {};
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);">';
+      html += renderMetricCard("Secret quiz accuracy", ho.holdout_accuracy, "%", null);
+      html += renderMetricCard("Secret quizzes taken", ho.sample_size, "", null);
+      html += renderMetricCard("Progress honesty (0-100)", hon.honesty_score, "/100", null);
+      html += renderMetricCard("\"Mastered\" items on secret quiz", hon.mastered_holdout_accuracy, "%", null);
+      html += renderMetricCard("\"Not mastered\" items on secret quiz", hon.unmastered_holdout_accuracy, "%", null);
+      html += '</div>';
+      if (ho.sample_size < 10) {
+        html += '<div style="margin-top:var(--space-2);padding:var(--space-2);background:#fef3cd;font-size:var(--text-xs);color:#856404;">Not enough secret quiz data yet (' + (ho.sample_size||0) + ' quizzes). Need at least 10 for meaningful results. These happen automatically during sessions.</div>';
+      }
+      el.innerHTML = html;
+    }
+
+    function renderCmDelayedValidation(data) {
+      var el = document.getElementById("cm-delayed-validation");
+      if (!data || !data.sample_size) {
+        el.innerHTML = '<p class="tab-empty">No memory check data yet. Items are automatically retested at 7, 14, and 30 days after reaching mastery.</p>';
+        return;
+      }
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);margin-bottom:var(--space-3);">';
+      html += renderMetricCard("Overall memory check accuracy", data.accuracy, "%", null);
+      html += renderMetricCard("Total checks completed", data.sample_size, "", null);
+      html += '</div>';
+      var bd = data.by_delay || {};
+      if (Object.keys(bd).length) {
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Retest delay</th><th>Accuracy</th><th>Checks</th></tr></thead><tbody>';
+        Object.keys(bd).forEach(function(k) {
+          html += '<tr><td>' + esc(k) + ' later</td><td>' + (bd[k].accuracy !== null ? (bd[k].accuracy * 100).toFixed(1) + '%' : 'Not enough data') + '</td><td>' + bd[k].sample_size + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+      }
+      el.innerHTML = html;
+    }
+
+    function renderCmRules(violations) {
+      var el = document.getElementById("cm-rules");
+      if (!violations.length) { el.innerHTML = '<div style="padding:var(--space-2);background:#d4edda;font-size:var(--text-sm);color:#155724;">All 5 product rules are being followed. No violations.</div>'; return; }
+      var ruleNames = {
+        1: "Every metric has a watchdog",
+        2: "No feature hurts real memory",
+        3: "Progress bars reflect reality",
+        4: "Secret quizzes are running",
+        5: "Growth experiments pass integrity"
+      };
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Rule</th><th>Problem</th><th>What to do</th></tr></thead><tbody>';
+      violations.forEach(function(v) {
+        var ruleName = ruleNames[v.rule] || ("Rule " + v.rule);
+        html += '<tr style="background:rgba(192,57,43,0.08);"><td><strong>' + esc(ruleName) + '</strong></td><td>' + esc(v.description) + '</td><td>' + esc(v.action) + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmActions(actions) {
+      var el = document.getElementById("cm-actions");
+      if (!actions.length) { el.innerHTML = '<p class="tab-empty">No automatic actions taken yet. When the system detects a problem, it acts and logs it here.</p>'; return; }
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>When</th><th>What it did</th><th>Why</th><th>Severity</th></tr></thead><tbody>';
+      actions.slice(0, 20).forEach(function(a) {
+        var what = cmActionLabels[a.action_type] || a.action_type;
+        var why = "";
+        try { var d = JSON.parse(a.details_json || "{}"); why = d.result && d.result.reason ? d.result.reason : (d.action || d.message || cmLabel(a.metric_name)); } catch(e) { why = a.metric_name || ""; }
+        html += '<tr><td>' + shortDate(a.created_at) + '</td><td>' + esc(what) + '</td><td style="font-size:var(--text-xs);">' + esc(why) + '</td><td>' + cmBadge(a.severity) + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+      el.innerHTML = html;
+    }
+
+    function renderCmHoldout(data) {
+      var el = document.getElementById("cm-holdout");
+      if (!data || data.sample_size === 0) { el.innerHTML = '<p class="tab-empty">No secret quiz data yet. During each session, 1-2 items are tested in a different format than usual. Results accumulate automatically.</p>'; return; }
+      var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);margin-bottom:var(--space-3);">';
+      html += renderMetricCard("Overall accuracy", data.accuracy, "%", null);
+      html += renderMetricCard("Total secret quizzes", data.sample_size, "", null);
+      html += '</div>';
+      var bt = data.by_drill_type || {};
+      if (Object.keys(bt).length) {
+        html += '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Quiz format</th><th>Accuracy</th><th>Times tested</th></tr></thead><tbody>';
+        Object.keys(bt).forEach(function(k) {
+          var label = cmDrillLabels[k] || k.replace(/_/g, ' ');
+          html += '<tr><td>' + esc(label) + '</td><td>' + (bt[k].accuracy !== null ? (bt[k].accuracy * 100).toFixed(1) + '%' : 'Not enough data') + '</td><td>' + bt[k].sample_size + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+      }
+      el.innerHTML = html;
+    }
+
+    function renderCmMap(map) {
+      var el = document.getElementById("cm-map");
+      var kpiLabels = {
+        "review_accuracy": "Review accuracy",
+        "streak_length": "Streak length",
+        "items_mastered": "Items mastered",
+        "session_completion": "Session completion",
+        "time_spent": "Time spent",
+        "conversion": "Conversion rate"
+      };
+      var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Headline metric</th><th>How it could become misleading</th><th>What\'s watching for it</th></tr></thead><tbody>';
+      Object.keys(map).forEach(function(kpi) {
+        var m = map[kpi];
+        var watchers = [].concat(m.integrity || [], m.distortion || [], m.cost || []).map(function(w) { return cmLabel(w) || w.replace(/_/g, ' '); });
+        html += '<tr><td><strong>' + esc(kpiLabels[kpi] || kpi.replace(/_/g, ' ')) + '</strong></td><td style="font-size:var(--text-xs);color:var(--color-text-dim);">' + esc(m.likely_failure) + '</td>';
+        html += '<td style="font-size:var(--text-xs);">' + watchers.join(', ') + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+      el.innerHTML = html;
+    }
+
+    function runCounterMetrics() {
+      document.getElementById("cm-health-banner").innerHTML = "Running health check...";
+      adminFetch("/api/admin/counter-metrics/run", {method: "POST"}).then(function(d) {
+        loadCounterMetrics();
+      }).catch(function() {
+        document.getElementById("cm-health-banner").innerHTML = "Health check failed.";
+      });
     }
   </script>
 </body>

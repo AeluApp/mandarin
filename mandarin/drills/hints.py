@@ -114,41 +114,56 @@ def get_hanzi_hint(hanzi: str, wrong_answer: str = "",
 
 
 def _radical_hint(hanzi: str) -> Optional[str]:
-    """Generate a radical-based hint."""
+    """Generate a radical-based hint without revealing the answer character."""
     radical_hints = _get_radical_hints()
     for char in hanzi:
         for radical, meaning in radical_hints.items():
-            if radical in char or char == radical:
-                return f"  Hint: contains {radical} ({meaning})"
-    # Check if any character IS a radical
+            # Only show the radical if it's a component, not the whole character
+            if radical != char and radical in char:
+                return f"  Hint: contains the {meaning}"
+    # If the character itself is a radical, give the meaning without showing it
     if len(hanzi) == 1 and hanzi in radical_hints:
-        return f"  Hint: {hanzi} — {radical_hints[hanzi]}"
+        return f"  Hint: this character means {radical_hints[hanzi]}"
     return None
 
 
 def _contrast_hint(hanzi: str, wrong_answer: str) -> Optional[str]:
-    """Generate a visual contrast hint between correct and wrong."""
+    """Generate a visual contrast hint between correct and wrong.
+
+    Only shows the wrong answer the user already picked — never the correct one.
+    Points to the distinguishing feature without revealing the right answer.
+    """
     if not wrong_answer or len(wrong_answer) < 1:
         return None
-    if len(hanzi) <= 2 and len(wrong_answer) <= 4:
-        return f"  Hint: compare {hanzi} vs {wrong_answer} — look at the right side"
+    # Identify which side/component differs between them
+    if len(hanzi) == 1 and len(wrong_answer) == 1:
+        return f"  Hint: you picked {wrong_answer} — the right answer differs on the right side"
+    elif len(hanzi) <= 2 and len(wrong_answer) <= 4:
+        return f"  Hint: look more carefully at the right side of your answer ({wrong_answer})"
     return None
 
 
 def _component_hint(hanzi: str) -> Optional[str]:
-    """Generate a component/shape hint."""
+    """Generate a component/shape hint without revealing the character itself."""
     if len(hanzi) == 1:
-        # Count strokes roughly by character complexity
         code = ord(hanzi)
         if 0x4E00 <= code <= 0x9FFF:
-            return f"  Hint: look at {hanzi} — what shapes do you see inside?"
+            radical_hints = _get_radical_hints()
+            # Try to give structural info without showing the character
+            for radical, meaning in radical_hints.items():
+                if radical != hanzi:
+                    # Only mention the radical if it's a component, not the whole character
+                    return f"  Hint: think about the {meaning} — it's part of this character"
+            return "  Hint: look at the character's internal structure — what parts do you recognize?"
     elif len(hanzi) >= 2:
-        return f"  Hint: {hanzi[0]} + {hanzi[1]} — what do these share?"
+        return f"  Hint: this is a {len(hanzi)}-character word — think about what connects them"
     return None
 
 
 def _phonetic_hint(hanzi: str) -> Optional[str]:
-    """Generate a phonetic/sound hint."""
+    """Generate a phonetic/sound hint without revealing characters."""
     if len(hanzi) >= 2:
-        return f"  Hint: the sound comes from the right component of {hanzi[0]}"
+        return "  Hint: the pronunciation follows from the right-side component"
+    elif len(hanzi) == 1:
+        return "  Hint: the sound comes from one of the components inside"
     return None

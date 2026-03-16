@@ -4868,3 +4868,104 @@ def admin_churn_dashboard():
         at_risk.sort(key=lambda u: u["risk_score"], reverse=True)
 
     return jsonify({"at_risk_users": at_risk, "count": len(at_risk)})
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# Anti-Goodhart Counter-Metrics Admin Routes
+# ═══════════════════════════════════════════════════════════════════════
+
+@admin_bp.route("/api/admin/counter-metrics")
+@admin_required
+@api_error_handler("Counter-metrics assessment")
+def admin_counter_metrics():
+    """Full counter-metric assessment — all 5 layers with alerts."""
+    from ..counter_metrics import compute_full_assessment
+
+    user_id = request.args.get("user_id", 1, type=int)
+    with db.connection() as conn:
+        assessment = compute_full_assessment(conn, user_id=user_id)
+    return jsonify(assessment)
+
+
+@admin_bp.route("/api/admin/counter-metrics/snapshot-history")
+@admin_required
+@api_error_handler("Counter-metrics history")
+def admin_counter_metrics_history():
+    """Counter-metric snapshot history for trend charts."""
+    from ..counter_metrics import get_snapshot_history
+
+    user_id = request.args.get("user_id", 1, type=int)
+    limit = request.args.get("limit", 30, type=int)
+    with db.connection() as conn:
+        history = get_snapshot_history(conn, user_id=user_id, limit=limit)
+    return jsonify({"snapshots": history, "count": len(history)})
+
+
+@admin_bp.route("/api/admin/counter-metrics/run", methods=["POST"])
+@admin_required
+@api_error_handler("Counter-metrics manual run")
+def admin_counter_metrics_run():
+    """Manually trigger a counter-metrics assessment + actioning cycle."""
+    from .counter_metrics_scheduler import run_once
+
+    with db.connection() as conn:
+        result = run_once(conn)
+    return jsonify(result)
+
+
+@admin_bp.route("/api/admin/counter-metrics/actions")
+@admin_required
+@api_error_handler("Counter-metrics action log")
+def admin_counter_metrics_actions():
+    """Action log — what the system has done in response to alerts."""
+    from ..counter_metrics_actions import get_action_history
+
+    limit = request.args.get("limit", 50, type=int)
+    with db.connection() as conn:
+        actions = get_action_history(conn, limit=limit)
+    return jsonify({"actions": actions, "count": len(actions)})
+
+
+@admin_bp.route("/api/admin/counter-metrics/product-rules")
+@admin_required
+@api_error_handler("Counter-metrics product rules")
+def admin_counter_metrics_rules():
+    """Check product rule compliance against latest assessment."""
+    from ..counter_metrics import compute_full_assessment
+    from ..counter_metrics_actions import enforce_product_rules
+
+    user_id = request.args.get("user_id", 1, type=int)
+    with db.connection() as conn:
+        assessment = compute_full_assessment(conn, user_id=user_id)
+    violations = enforce_product_rules(assessment)
+    return jsonify({
+        "violations": violations,
+        "violation_count": len(violations),
+        "overall_health": assessment.get("overall_health"),
+    })
+
+
+@admin_bp.route("/api/admin/counter-metrics/holdout")
+@admin_required
+@api_error_handler("Counter-metrics holdout probes")
+def admin_counter_metrics_holdout():
+    """Holdout probe performance summary."""
+    from ..holdout_probes import get_holdout_summary
+
+    user_id = request.args.get("user_id", 1, type=int)
+    window_days = request.args.get("window_days", 30, type=int)
+    with db.connection() as conn:
+        summary = get_holdout_summary(conn, user_id=user_id, window_days=window_days)
+    return jsonify(summary)
+
+
+@admin_bp.route("/api/admin/counter-metrics/map")
+@admin_required
+@api_error_handler("Counter-metrics mapping")
+def admin_counter_metrics_map():
+    """Return the KPI → counter-metric mapping table."""
+    from ..counter_metrics import COUNTER_METRIC_MAP, ALERT_THRESHOLDS
+    return jsonify({
+        "map": COUNTER_METRIC_MAP,
+        "thresholds": ALERT_THRESHOLDS,
+    })

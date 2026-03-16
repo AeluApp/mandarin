@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 102  # Increment when adding migrations
+SCHEMA_VERSION = 104  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6085,6 +6085,89 @@ def _migrate_v101_to_v102(conn):
 
 
 
+def _migrate_v102_to_v103(conn):
+    """Add anti-Goodhart counter-metric tables: snapshot storage + holdout probes."""
+    tables = _table_set(conn)
+    if "counter_metric_snapshot" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_snapshot (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL DEFAULT 1,
+                computed_at TEXT NOT NULL,
+                overall_health TEXT NOT NULL DEFAULT 'unknown',
+                alert_count INTEGER NOT NULL DEFAULT 0,
+                critical_count INTEGER NOT NULL DEFAULT 0,
+                integrity_json TEXT,
+                cost_json TEXT,
+                distortion_json TEXT,
+                outcome_json TEXT,
+                alerts_json TEXT
+            );
+            CREATE INDEX IF NOT EXISTS idx_cm_snapshot_user_date
+                ON counter_metric_snapshot(user_id, computed_at);
+        """)
+    if "counter_metric_holdout" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_holdout (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL DEFAULT 1,
+                content_item_id INTEGER NOT NULL,
+                modality TEXT NOT NULL DEFAULT 'reading',
+                drill_type TEXT,
+                correct INTEGER NOT NULL DEFAULT 0,
+                response_ms INTEGER,
+                administered_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+                session_id INTEGER,
+                holdout_set TEXT NOT NULL DEFAULT 'standard'
+            );
+            CREATE INDEX IF NOT EXISTS idx_cm_holdout_user_date
+                ON counter_metric_holdout(user_id, administered_at);
+            CREATE INDEX IF NOT EXISTS idx_cm_holdout_item
+                ON counter_metric_holdout(content_item_id);
+        """)
+    if "counter_metric_action_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_action_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                action_type TEXT NOT NULL,
+                metric_name TEXT NOT NULL,
+                severity TEXT NOT NULL,
+                details_json TEXT,
+                created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+            );
+        """)
+    conn.commit()
+
+
+def _migrate_v103_to_v104(conn):
+    """Add delayed recall validation table for counter-metric integrity checks."""
+    tables = _table_set(conn)
+    if "counter_metric_delayed_validation" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_delayed_validation (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL DEFAULT 1,
+                content_item_id INTEGER NOT NULL,
+                modality TEXT NOT NULL DEFAULT 'reading',
+                scheduled_at TEXT NOT NULL,
+                delay_days INTEGER NOT NULL,
+                status TEXT NOT NULL DEFAULT 'pending',
+                administered_at TEXT,
+                correct INTEGER,
+                response_ms INTEGER,
+                session_id INTEGER,
+                drill_type TEXT,
+                mastery_at_schedule TEXT,
+                created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+            );
+            CREATE INDEX IF NOT EXISTS idx_cm_dv_user_status
+                ON counter_metric_delayed_validation(user_id, status, scheduled_at);
+            CREATE INDEX IF NOT EXISTS idx_cm_dv_item
+                ON counter_metric_delayed_validation(content_item_id);
+        """)
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6188,6 +6271,8 @@ MIGRATIONS = {
     99: _migrate_v99_to_v100,
     100: _migrate_v100_to_v101,
     101: _migrate_v101_to_v102,
+    102: _migrate_v102_to_v103,
+    103: _migrate_v103_to_v104,
 }
 
 

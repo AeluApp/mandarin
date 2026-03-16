@@ -89,10 +89,11 @@ def test_radical_hint_no_match():
 
 
 def test_contrast_hint_with_wrong_answer():
-    """Contrast hint needs hanzi + wrong_answer."""
+    """Contrast hint needs hanzi + wrong_answer. Should NOT reveal correct answer."""
     hint = _contrast_hint("大", "太")
     assert hint is not None
-    assert "compare" in hint.lower()
+    assert "太" in hint  # Shows the wrong answer the user picked
+    assert "大" not in hint  # Must NOT reveal the correct answer
 
 
 def test_contrast_hint_no_wrong_answer():
@@ -106,17 +107,19 @@ def test_contrast_hint_long_strings_none():
 
 
 def test_component_hint_single_char():
-    """Single CJK character gets component hint."""
+    """Single CJK character gets component hint without revealing the character."""
     hint = _component_hint("明")
     assert hint is not None
-    assert "shapes" in hint.lower()
+    # Must NOT contain the answer character
+    assert "明" not in hint
 
 
 def test_component_hint_multi_char():
-    """Multi-character string gets a shared-component hint."""
+    """Multi-character string gets a hint without revealing characters."""
     hint = _component_hint("你好")
     assert hint is not None
-    assert "share" in hint.lower()
+    assert "你" not in hint
+    assert "好" not in hint
 
 
 def test_component_hint_empty():
@@ -125,12 +128,15 @@ def test_component_hint_empty():
 
 
 def test_phonetic_hint_multi_char():
-    """Multi-char hanzi gets phonetic hint."""
+    """Multi-char hanzi gets phonetic hint without revealing characters."""
     hint = _phonetic_hint("妈妈")
     assert hint is not None
-    assert "sound" in hint.lower()
+    assert "pronunciation" in hint.lower() or "sound" in hint.lower()
+    assert "妈" not in hint  # Must NOT reveal the answer
 
 
-def test_phonetic_hint_single_char_none():
-    """Single char has no phonetic hint (needs >= 2)."""
-    assert _phonetic_hint("马") is None
+def test_phonetic_hint_single_char():
+    """Single char gets a safe phonetic hint."""
+    hint = _phonetic_hint("马")
+    assert hint is not None
+    assert "马" not in hint  # Must NOT reveal the answer
