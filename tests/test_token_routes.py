@@ -454,19 +454,14 @@ class TestRefreshToken:
         _create_test_user(conn)
 
         tokens = _obtain_token(client).get_json()
-        original_access = tokens["access_token"]
         refresh_token = tokens["refresh_token"]
-
-        # Small sleep to ensure a new iat timestamp — PyJWT encodes seconds
-        import time
-        time.sleep(1.1)
 
         new_data = client.post(
             "/api/auth/token/refresh",
             data=json.dumps({"refresh_token": refresh_token}),
             headers=_JSON_HEADERS,
         ).get_json()
-        # The new token should be a valid JWT string (we just verify it's non-empty)
+        # The new token should be a valid JWT string
         assert isinstance(new_data["access_token"], str)
         assert len(new_data["access_token"]) > 10
 

@@ -398,11 +398,11 @@ def _derive_data_driven_weights(conn: sqlite3.Connection, base_weights: dict[str
     """, (user_id,)).fetchall()
 
     if not rows:
-        return base_weights
+        return dict(base_weights)
 
     total_attempts = sum(r["attempts"] for r in rows)
     if total_attempts < 20:
-        return base_weights
+        return dict(base_weights)
 
     # Compute per-modality accuracy; invert to get "need" weights
     accuracy = {}
@@ -1102,7 +1102,7 @@ def _plan_session_params(conn: sqlite3.Connection, target_items: int | None, use
         target_items = min(target_items, 12)
 
     base_weights = GAP_WEIGHTS if is_long_gap else DEFAULT_WEIGHTS
-    weights = _adjust_weights_for_errors(conn, base_weights, user_id=user_id) if not is_long_gap else base_weights
+    weights = _adjust_weights_for_errors(conn, base_weights, user_id=user_id) if not is_long_gap else dict(base_weights)
 
     # Boost speaking weight when recent tone accuracy is low
     try:

@@ -162,9 +162,10 @@ class TestTonalVibe(unittest.TestCase):
         from mandarin.intelligence.vibe_marketing_eng import _audit_copy_against_voice_standard
         conn = _make_db()
         # With no Ollama available, should fall back to pattern matching
-        result = _audit_copy_against_voice_standard(conn, {
-            "copy_text": "Keep practicing every day.",
-        })
+        with patch("mandarin.ai.ollama_client.is_ollama_available", return_value=False):
+            result = _audit_copy_against_voice_standard(conn, {
+                "copy_text": "Keep practicing every day.",
+            })
         self.assertIn("voice_score", result)
         self.assertIsInstance(result["voice_score"], (int, float))
         self.assertIn("violations", result)

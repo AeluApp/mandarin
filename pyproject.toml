@@ -32,7 +32,10 @@ audio = [
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
+    "pytest-xdist>=3.0.0",
     "hypothesis>=6.0.0",
+    "pydantic>=2.0.0",
+    "beautifulsoup4>=4.12.0",
 ]
 
 [project.scripts]
@@ -44,6 +47,14 @@ include = ["mandarin*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--strict-markers -q"
+markers = [
+    "slow: tests that take >2s individually (SRS property, E2E)",
+    "t2: tier-2 informational/gap-analysis tests (run nightly, not pre-commit)",
+]
+
+[tool.hypothesis]
+# CI profile: 30 examples for speed; nightly can override via HYPOTHESIS_PROFILE=default
+ci_max_examples = 30
 
 [tool.coverage.run]
 source = ["mandarin"]

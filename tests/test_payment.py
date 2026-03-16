@@ -294,14 +294,19 @@ class TestBillingPortal:
 class TestStripeWebhook:
 
     def _post_webhook(self, client, event_dict, sig="valid_sig"):
-        """Helper: POST a JSON-serialised event to the webhook endpoint."""
+        """Helper: POST a JSON-serialised event to the webhook endpoint.
+
+        Patches STRIPE_WEBHOOK_SECRET so the guard clause in handle_webhook()
+        doesn't reject the request before construct_event is reached.
+        """
         payload = json.dumps(event_dict).encode()
-        return client.post(
-            "/api/webhook/stripe",
-            data=payload,
-            content_type="application/json",
-            headers={"Stripe-Signature": sig},
-        )
+        with patch("mandarin.payment.STRIPE_WEBHOOK_SECRET", "whsec_test"):
+            return client.post(
+                "/api/webhook/stripe",
+                data=payload,
+                content_type="application/json",
+                headers={"Stripe-Signature": sig},
+            )
 
     def test_checkout_completed_upgrades_user_to_paid(self, app_client):
         client, conn = app_client

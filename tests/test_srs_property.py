@@ -58,6 +58,8 @@ from mandarin.config import (
 )
 from mandarin import db
 from mandarin.db.core import init_db, _migrate
+
+pytestmark = pytest.mark.slow
 from mandarin.db.content import insert_content_item
 
 
@@ -152,7 +154,7 @@ attempt_sequence = st.lists(st.booleans(), min_size=1, max_size=50)
     correct=st.booleans(),
     drill_type=drill_type_strategy,
 )
-@settings(max_examples=50, deadline=None)
+@settings(deadline=None)
 def test_initial_stage_is_seen(correct, drill_type):
     """A brand-new progress row should start at 'seen' stage."""
     conn, path = _fresh_db()
@@ -180,7 +182,7 @@ def test_initial_stage_is_seen(correct, drill_type):
     attempts=st.lists(st.booleans(), min_size=1, max_size=30),
     drill_type=drill_type_strategy,
 )
-@settings(max_examples=100, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_stage_always_valid(attempts, drill_type):
     """After any sequence of attempts, mastery_stage must be one of 6 valid stages."""
     conn, path = _fresh_db()
@@ -201,7 +203,7 @@ def test_stage_always_valid(attempts, drill_type):
     initial_streak=st.integers(min_value=0, max_value=20),
     reps=st.integers(min_value=0, max_value=20),
 )
-@settings(max_examples=200)
+@settings()
 def test_correct_never_decreases_streak(initial_streak, reps):
     """A correct answer with full confidence must increment streak_correct."""
     row = _base_row(streak_correct=initial_streak, repetitions=reps)
@@ -215,7 +217,7 @@ def test_correct_never_decreases_streak(initial_streak, reps):
     initial_streak=st.integers(min_value=0, max_value=50),
     reps=st.integers(min_value=0, max_value=20),
 )
-@settings(max_examples=200)
+@settings()
 def test_wrong_resets_streak_to_zero(initial_streak, reps):
     """A wrong answer with full confidence must reset streak_correct to 0."""
     row = _base_row(streak_correct=initial_streak, repetitions=reps)
@@ -235,7 +237,7 @@ def test_wrong_resets_streak_to_zero(initial_streak, reps):
     total_after=st.integers(min_value=1, max_value=50),
     drill_type_count=st.integers(min_value=1, max_value=5),
 )
-@settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 def test_stage_transitions_valid(stage, correct, confidence, streak_c, streak_i,
                                   distinct_days, total_after, drill_type_count):
     """Each transition must be to a valid next stage -- no skipping."""
@@ -276,7 +278,7 @@ def _reachable_stages(start):
 
 # 6. Multiple correct answers eventually promote (passed_once -> stabilizing -> stable)
 
-@settings(max_examples=20, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 @given(st.data())
 def test_correct_streak_eventually_promotes(data):
     """Enough correct answers in a row must promote through the stages."""
@@ -300,7 +302,7 @@ def test_correct_streak_eventually_promotes(data):
 @given(
     total_correct=st.integers(min_value=0, max_value=9),  # low history -> threshold=3
 )
-@settings(max_examples=50)
+@settings()
 def test_wrong_streak_demotes_stable(total_correct):
     """Enough consecutive wrong answers must demote stable to decayed."""
     row = _base_row(
@@ -376,7 +378,7 @@ def test_durable_not_reachable_quickly():
     confidence=confidence_strategy,
     mastery=stage_strategy,
 )
-@settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 def test_interval_always_positive(ease, interval, reps, streak_c, correct,
                                    confidence, mastery):
     """Interval must always be > 0 regardless of inputs."""
@@ -395,7 +397,7 @@ def test_interval_always_positive(ease, interval, reps, streak_c, correct,
     correct=st.booleans(),
     predicted_p=st.floats(min_value=0.0, max_value=1.0),
 )
-@settings(max_examples=200)
+@settings()
 def test_difficulty_bounded(difficulty, correct, predicted_p):
     """update_difficulty output must stay in [0.05, 0.95]."""
     result = update_difficulty(difficulty, correct, predicted_p)
@@ -413,7 +415,7 @@ def test_difficulty_bounded(difficulty, correct, predicted_p):
     confidence=confidence_strategy,
     mastery=stage_strategy,
 )
-@settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 def test_ease_factor_bounded_below(ease, interval, reps, streak_c, correct,
                                     confidence, mastery):
     """Ease factor must never drop below EASE_FLOOR."""
@@ -432,7 +434,7 @@ def test_ease_factor_bounded_below(ease, interval, reps, streak_c, correct,
     interval=st.floats(min_value=1.0, max_value=50.0),
     streak_c=st.integers(min_value=0, max_value=8),  # below streak cap thresholds
 )
-@settings(max_examples=200)
+@settings()
 def test_correct_full_increases_interval(ease, interval, streak_c):
     """A correct answer with full confidence and reps >= 2 must increase interval."""
     row = _base_row(
@@ -455,7 +457,7 @@ def test_correct_full_increases_interval(ease, interval, streak_c):
     interval=st.floats(min_value=0.5, max_value=200.0),
     reps=st.integers(min_value=0, max_value=20),
 )
-@settings(max_examples=200)
+@settings()
 def test_wrong_resets_interval(ease, interval, reps):
     """A wrong answer with full confidence must reset interval to INTERVAL_WRONG."""
     row = _base_row(ease_factor=ease, interval_days=interval, repetitions=reps)
@@ -471,7 +473,7 @@ def test_wrong_resets_interval(ease, interval, reps):
     difficulty_hard=st.floats(min_value=0.6, max_value=1.0),
     days_since=st.floats(min_value=0.5, max_value=30.0),
 )
-@settings(max_examples=200)
+@settings()
 def test_easy_item_gets_longer_half_life(half_life, difficulty_easy, difficulty_hard,
                                           days_since):
     """Correct answer on easy item should yield longer half-life than hard item."""
@@ -538,7 +540,7 @@ def test_difficulty_converges_toward_hard():
     drill_type=drill_type_strategy,
     modality=modality_strategy,
 )
-@settings(max_examples=50, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_record_attempt_no_crash(correct, confidence, drill_type, modality):
     """record_attempt should never raise for valid inputs."""
     conn, path = _fresh_db()
@@ -590,7 +592,7 @@ def test_mass_correct_converges():
 @given(
     attempts=st.lists(st.booleans(), min_size=5, max_size=40),
 )
-@settings(max_examples=100, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_random_sequence_valid_state(attempts):
     """Any random sequence of correct/wrong should leave the DB in a valid state."""
     conn, path = _fresh_db()
@@ -639,7 +641,7 @@ def test_random_sequence_valid_state(attempts):
     days_since=st.floats(min_value=0.0, max_value=365.0),
     difficulty=st.floats(min_value=0.0, max_value=1.0),
 )
-@settings(max_examples=200)
+@settings()
 def test_half_life_always_bounded(half_life, correct, days_since, difficulty):
     """update_half_life must return value in [MIN_HALF_LIFE, MAX_HALF_LIFE]."""
     result = update_half_life(half_life, correct, days_since, difficulty)
@@ -657,7 +659,7 @@ def test_half_life_always_bounded(half_life, correct, days_since, difficulty):
     streak_c=st.integers(min_value=15, max_value=30),
     mastery=stage_strategy,
 )
-@settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 def test_interval_capped(ease, interval, reps, streak_c, mastery):
     """Interval must never exceed MAX_INTERVAL."""
     row = _base_row(
@@ -675,7 +677,7 @@ def test_interval_capped(ease, interval, reps, streak_c, mastery):
 @given(
     streak_correct=st.integers(min_value=0, max_value=RECOVERY_STREAK_CORRECT - 1),
 )
-@settings(max_examples=50)
+@settings()
 def test_decayed_no_premature_recovery(streak_correct):
     """Decayed items should not recover until streak_correct >= RECOVERY_STREAK_CORRECT."""
     row = _base_row(mastery_stage="decayed")
@@ -700,7 +702,7 @@ def test_decayed_no_premature_recovery(streak_correct):
     confidence=st.sampled_from(["narrowed", "half", "unknown", "narrowed_wrong"]),
     streak_correct=st.integers(min_value=2, max_value=10),
 )
-@settings(max_examples=100)
+@settings()
 def test_non_full_confidence_blocks_promotion(confidence, streak_correct):
     """Non-full confidence should not trigger promotion from seen to passed_once."""
     row = _base_row(mastery_stage="seen")
@@ -724,7 +726,7 @@ def test_non_full_confidence_blocks_promotion(confidence, streak_correct):
 @given(
     initial_cycles=st.integers(min_value=0, max_value=10),
 )
-@settings(max_examples=50)
+@settings()
 def test_weak_cycle_count_increases_on_demotion(initial_cycles):
     """When stabilizing demotes to seen, weak_cycle_count must increase by 1."""
     row = _base_row(mastery_stage="stabilizing", weak_cycle_count=initial_cycles)
@@ -746,7 +748,7 @@ def test_weak_cycle_count_increases_on_demotion(initial_cycles):
 @given(
     half_life=st.floats(min_value=0.1, max_value=365.0),
 )
-@settings(max_examples=200)
+@settings()
 def test_p_recall_at_half_life_is_fifty_pct(half_life):
     """At elapsed == half_life, recall probability must be exactly 0.5."""
     p = predict_recall(half_life, half_life)
@@ -760,7 +762,7 @@ def test_p_recall_at_half_life_is_fifty_pct(half_life):
     days_since=st.floats(min_value=0.5, max_value=30.0),
     difficulty=st.floats(min_value=0.0, max_value=1.0),
 )
-@settings(max_examples=200)
+@settings()
 def test_wrong_decreases_half_life(half_life, days_since, difficulty):
     """A wrong answer must decrease the half-life (or hit the floor)."""
     new_hl = update_half_life(half_life, False, days_since, difficulty)
@@ -778,7 +780,7 @@ def test_wrong_decreases_half_life(half_life, days_since, difficulty):
     days_since=st.floats(min_value=0.5, max_value=30.0),
     difficulty=st.floats(min_value=0.0, max_value=0.9),
 )
-@settings(max_examples=200)
+@settings()
 def test_correct_increases_half_life(half_life, days_since, difficulty):
     """A correct answer must increase the half-life (or hit the ceiling)."""
     new_hl = update_half_life(half_life, True, days_since, difficulty)
@@ -792,7 +794,7 @@ def test_correct_increases_half_life(half_life, days_since, difficulty):
 @given(
     attempts=st.lists(st.booleans(), min_size=1, max_size=30),
 )
-@settings(max_examples=100, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_attempt_counters_consistent(attempts):
     """total_attempts == len(attempts), total_correct == sum(attempts)."""
     conn, path = _fresh_db()
@@ -813,7 +815,7 @@ def test_attempt_counters_consistent(attempts):
 @given(
     attempts=st.lists(st.booleans(), min_size=1, max_size=30),
 )
-@settings(max_examples=100, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_streak_consistency(attempts):
     """After any sequence, exactly one of streak_correct or streak_incorrect > 0
     (or both are 0 if sequence is empty, which it won't be here)."""
@@ -840,7 +842,7 @@ def test_streak_consistency(attempts):
 @given(
     attempts=st.lists(st.booleans(), min_size=1, max_size=20),
 )
-@settings(max_examples=50, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_content_item_counters(attempts):
     """content_item.times_shown == len(attempts), times_correct == sum(attempts)."""
     conn, path = _fresh_db()
@@ -867,7 +869,7 @@ def test_content_item_counters(attempts):
     ),
     correct=st.booleans(),
 )
-@settings(max_examples=50, suppress_health_check=[HealthCheck.too_slow], deadline=None)
+@settings(deadline=None)
 def test_modalities_independent(modalities, correct):
     """Each modality should have its own independent progress row."""
     conn, path = _fresh_db()
@@ -898,7 +900,7 @@ def test_modalities_independent(modalities, correct):
     confidence=confidence_strategy,
     days_ago=st.integers(min_value=0, max_value=30),
 )
-@settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
+@settings()
 def test_retention_p_recall_bounded(half_life, difficulty, correct, confidence, days_ago):
     """_compute_retention_update p_recall must be in [0, 1]."""
     review_date = (date.today() - timedelta(days=days_ago)).isoformat()

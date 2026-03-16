@@ -10,6 +10,10 @@ import sqlite3
 import unittest
 from datetime import datetime, timezone
 
+import pytest
+
+pytestmark = pytest.mark.t2
+
 
 def _make_db():
     """Create an in-memory SQLite DB with tables needed for coverage audit."""

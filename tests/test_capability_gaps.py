@@ -11,6 +11,11 @@ import os
 import sqlite3
 import sys
 import unittest
+import unittest.mock
+
+import pytest
+
+pytestmark = pytest.mark.t2
 
 # Ensure project root is on path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -174,10 +179,19 @@ def _create_test_db():
 # ── Phase 1: Grammar Teaching Tests ────────────────────────
 
 class TestGrammarTutor(unittest.TestCase):
-    """Tests for mandarin.ai.grammar_tutor module."""
+    """Tests for mandarin.ai.grammar_tutor module.
+
+    Ollama is mocked as unavailable so these tests validate the deterministic
+    DB-fallback path, not LLM behaviour.
+    """
 
     def setUp(self):
         self.conn = _create_test_db()
+        patcher = unittest.mock.patch(
+            "mandarin.ai.grammar_tutor.is_ollama_available", return_value=False,
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     def tearDown(self):
         self.conn.close()
@@ -263,10 +277,19 @@ class TestGrammarTutor(unittest.TestCase):
 # ── Phase 3: Conversation Drill Tests ──────────────────────
 
 class TestConversationDrill(unittest.TestCase):
-    """Tests for mandarin.ai.conversation_drill module."""
+    """Tests for mandarin.ai.conversation_drill module.
+
+    Ollama is mocked as unavailable so these tests validate the deterministic
+    fallback path, not LLM behaviour.
+    """
 
     def setUp(self):
         self.conn = _create_test_db()
+        patcher = unittest.mock.patch(
+            "mandarin.ai.conversation_drill.is_ollama_available", return_value=False,
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     def tearDown(self):
         self.conn.close()

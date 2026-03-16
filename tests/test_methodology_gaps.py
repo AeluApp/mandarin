@@ -21,6 +21,8 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
+pytestmark = pytest.mark.t2
+
 from mandarin.web.auth_routes import User
 
 

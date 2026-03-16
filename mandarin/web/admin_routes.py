@@ -29,6 +29,7 @@ _RISK_ALLOWED_FIELDS = frozenset({
 _WORK_ITEM_ALLOWED_FIELDS = frozenset({
     "category", "title", "description", "size", "effort",
     "status", "priority", "acceptance_criteria", "owner",
+    "estimate", "service_class", "implementation_type",
 })
 
 logger = logging.getLogger(__name__)

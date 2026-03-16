@@ -19,6 +19,8 @@ from pathlib import Path
 
 import pytest
 
+pytestmark = pytest.mark.t2
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from conftest import make_test_db

@@ -4,6 +4,10 @@ If any constant changes, a test here will fail. That is intentional.
 Update these values ONLY when you deliberately change a constant in config.py.
 """
 
+import pytest
+
+pytestmark = pytest.mark.t2
+
 
 # ---- Retention model ----
 

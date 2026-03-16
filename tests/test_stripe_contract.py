@@ -101,16 +101,21 @@ def _webhook_payload(event_type, data_object):
 
 
 def _post_webhook(client, event_type, data_object):
-    """Post a mock webhook to the Stripe endpoint with bypassed signature."""
+    """Post a mock webhook to the Stripe endpoint with bypassed signature.
+
+    Patches STRIPE_WEBHOOK_SECRET so the guard clause in handle_webhook()
+    doesn't reject the request before construct_event is reached.
+    """
     payload = json.dumps(_webhook_payload(event_type, data_object))
-    with patch("mandarin.payment.stripe.Webhook.construct_event") as mock_construct:
-        mock_construct.return_value = _webhook_payload(event_type, data_object)
-        resp = client.post(
-            "/api/webhook/stripe",
-            data=payload,
-            content_type="application/json",
-            headers={"Stripe-Signature": "t=123,v1=fake_sig"},
-        )
+    with patch("mandarin.payment.STRIPE_WEBHOOK_SECRET", "whsec_test"):
+        with patch("mandarin.payment.stripe.Webhook.construct_event") as mock_construct:
+            mock_construct.return_value = _webhook_payload(event_type, data_object)
+            resp = client.post(
+                "/api/webhook/stripe",
+                data=payload,
+                content_type="application/json",
+                headers={"Stripe-Signature": "t=123,v1=fake_sig"},
+            )
     return resp
 
 

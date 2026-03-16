@@ -68,8 +68,8 @@ class TestInstructorIntegration(unittest.TestCase):
         if not OUTPUT_SCHEMA_REGISTRY:
             self.skipTest("Pydantic not available")
 
-        with patch("mandarin.ai.agentic.generate_structured", return_value=None):
-            with patch("mandarin.ai.agentic.ollama_generate") as mock_gen:
+        with patch("mandarin.ai.ollama_client.generate_structured", return_value=None):
+            with patch("mandarin.ai.ollama_client.generate") as mock_gen:
                 import json
                 mock_gen.return_value = MagicMock(
                     success=True,
