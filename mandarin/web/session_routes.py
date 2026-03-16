@@ -210,7 +210,11 @@ def _handle_ws_session(ws, planner_fn, label):
     bridge._send({"type": "session_init", "resume_token": resume_token})
 
     def _show_reading_opener(conn, show_fn, input_fn, user_id):
-        """Show a brief level-appropriate reading passage before drills begin."""
+        """Show a scaffolded reading passage after drills.
+
+        Unknown words get pinyin/english annotations so the passage
+        feels supportive rather than confrontational.
+        """
         try:
             from ..media import load_reading_passages
             # Determine user's effective HSK level
@@ -231,14 +235,57 @@ def _handle_ws_session(ws, planner_fn, label):
             if not text:
                 return
 
-            # Truncate long passages for the opener (max ~80 chars)
-            if len(text) > 80:
-                # Cut at sentence boundary
-                cut = text[:80].rfind("。")
-                if cut > 20:
+            # Truncate long passages for the opener (max ~120 chars)
+            if len(text) > 120:
+                cut = text[:120].rfind("。")
+                if cut > 30:
                     text = text[:cut + 1]
                 else:
-                    text = text[:80] + "…"
+                    text = text[:120] + "…"
+
+            # Build per-character scaffolding: look up which chars the
+            # user knows vs doesn't, and provide pinyin+english for unknown ones.
+            import re
+            cjk_chars = list(set(re.findall(r'[\u4e00-\u9fff\u3400-\u4dbf]', text)))
+            char_scaffold = {}
+            if cjk_chars:
+                placeholders = ",".join("?" for _ in cjk_chars)
+                # Check which characters the user has seen/mastered
+                known_rows = conn.execute(f"""
+                    SELECT ci.hanzi, p.mastery_stage, ci.pinyin, ci.english
+                    FROM progress p
+                    JOIN content_item ci ON p.content_item_id = ci.id
+                    WHERE p.user_id = ?
+                      AND ci.hanzi IN ({placeholders})
+                      AND p.times_correct > 0
+                """, [user_id] + cjk_chars).fetchall()
+                known_chars = {r["hanzi"] for r in known_rows}
+
+                # For unknown chars, look up pinyin + english from content_item
+                unknown = [c for c in cjk_chars if c not in known_chars]
+                if unknown:
+                    unk_placeholders = ",".join("?" for _ in unknown)
+                    lookup_rows = conn.execute(f"""
+                        SELECT hanzi, pinyin, english
+                        FROM content_item
+                        WHERE hanzi IN ({unk_placeholders})
+                        LIMIT 100
+                    """, unknown).fetchall()
+                    for r in lookup_rows:
+                        char_scaffold[r["hanzi"]] = {
+                            "pinyin": r["pinyin"] or "",
+                            "english": r["english"] or "",
+                            "known": False,
+                        }
+
+                # Mark known chars (no scaffold needed, but include for context)
+                for r in known_rows:
+                    if r["hanzi"] not in char_scaffold:
+                        char_scaffold[r["hanzi"]] = {
+                            "pinyin": r["pinyin"] or "",
+                            "english": r["english"] or "",
+                            "known": True,
+                        }
 
             bridge._send({
                 "type": "reading_opener",
@@ -246,11 +293,13 @@ def _handle_ws_session(ws, planner_fn, label):
                 "text_zh": text,
                 "passage_id": passage.get("id", ""),
                 "hsk_level": passage.get("hsk_level", 1),
+                "scaffold": char_scaffold,
+                "position": "post_drills",
             })
             # Wait for user to dismiss the reading opener
             bridge.input_fn("")
         except Exception as e:
-            logger.debug("reading opener skipped: %s", e)
+            logger.warning("reading opener skipped: %s", e, exc_info=True)
 
     def _run():
         logger.info("[%s] %s thread started user=%d", bridge.session_uuid, label, user_id)
@@ -266,10 +315,6 @@ def _handle_ws_session(ws, planner_fn, label):
 
         try:
             with db.connection() as conn:
-                # Show a brief reading passage before drills (standard sessions only)
-                if label == "session":
-                    _show_reading_opener(conn, bridge.show_fn, bridge.input_fn, user_id)
-
                 plan = planner_fn(conn, user_id=user_id)
                 logger.info("[%s] %s planned: %d drills", bridge.session_uuid, label, len(plan.drills))
 
@@ -358,6 +403,12 @@ def _handle_ws_session(ws, planner_fn, label):
                         conn.commit()
                 except Exception:
                     pass
+
+                # Show reading passage AFTER drills as cool-down (standard sessions only).
+                # Show it even after time-cap exits — the user engaged and deserves
+                # the reward.  Only skip if zero items completed (immediate quit).
+                if label == "session" and state.items_completed > 0:
+                    _show_reading_opener(conn, bridge.show_fn, bridge.input_fn, user_id)
 
                 bridge.send_done(done_data)
                 logger.info("[%s] %s complete: %d/%d", bridge.session_uuid, label, state.items_correct, state.items_completed)

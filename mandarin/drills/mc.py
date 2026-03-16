@@ -62,16 +62,39 @@ def _normalize_english(text: str) -> str:
     return t.strip()
 
 
+def _split_synonyms(text: str) -> set:
+    """Split semicolon/comma-separated synonym lists into individual terms."""
+    import re
+    parts = re.split(r'[;,]', text)
+    terms = set()
+    for p in parts:
+        p = p.strip().lower()
+        if p:
+            # Strip articles
+            for prefix in ("a ", "an ", "the ", "to "):
+                if p.startswith(prefix):
+                    p = p[len(prefix):]
+            if p:
+                terms.add(p.strip())
+    return terms
+
+
 def _english_overlap(a: str, b: str) -> bool:
-    """Return True if a and b overlap significantly (one contains the other's core word)."""
+    """Return True if a and b overlap significantly (shared synonyms or core words)."""
     if not a or not b:
         return False
     # Direct containment
     if a in b or b in a:
         return True
+    # Split on semicolons/commas — if any synonym segment matches, it's overlap.
+    # e.g. "mother; mom" vs "ma; mom; mother" share "mom" and "mother"
+    syns_a = _split_synonyms(a)
+    syns_b = _split_synonyms(b)
+    if syns_a & syns_b:
+        return True
     # Check if primary word (longest word) matches
-    words_a = sorted(a.split(), key=len, reverse=True)
-    words_b = sorted(b.split(), key=len, reverse=True)
+    words_a = sorted(a.replace(";", " ").replace(",", " ").split(), key=len, reverse=True)
+    words_b = sorted(b.replace(";", " ").replace(",", " ").split(), key=len, reverse=True)
     if words_a and words_b and len(words_a[0]) >= 3 and words_a[0] == words_b[0]:
         return True
     return False

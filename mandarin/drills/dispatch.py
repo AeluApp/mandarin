@@ -219,9 +219,9 @@ def run_drill(drill_type: str, item: dict, conn, show_fn, input_fn,
     if scaffold_level and scaffold_level != "none":
         hint = format_scaffold_hint(item.get("pinyin", ""), scaffold_level)
         if hint:
-            # Scaffold hint already shows pinyin after the hanzi — don't also
-            # set show_pinyin=True which would cause the MC drill to display
-            # pinyin a second time (the duplicate-pinyin bug).
+            # Scaffold hint already shows pinyin after the hanzi — suppress
+            # the drill's own show_pinyin to avoid displaying it twice.
+            effective_show_pinyin = False
             # Wrap show_fn to inject scaffold hint for MC-type drills
             original_show = show_fn
             _hint_shown = [False]

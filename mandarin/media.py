@@ -463,7 +463,7 @@ def _run_tone_practice(vocab_preview: list, show_fn, input_fn,
 
         if audio is None:
             show_fn(display.hint("Recording failed — skipping"))
-            continue
+            break  # Don't keep trying if mic isn't working
 
         show_fn(display.dim("Analyzing..."))
         result = grade_tones(audio, expected_tones)
@@ -645,16 +645,17 @@ def run_media_comprehension(entry: dict, show_fn, input_fn,
     # Ask liked
     liked = None
     if conn:
-        like_input = input_fn("\n  Liked? (y/n/Enter to skip) ").strip().lower()
+        like_input = input_fn("\n  Was this helpful? (y/n/Enter to skip) ").strip().lower()
         if like_input == "y":
             liked = True
         elif like_input == "n":
             liked = False
 
-    # Calculate score
+    # Calculate score — only display if there were actual questions
     score = correct / total if total > 0 else 0.0
 
-    show_fn(f"\n  Score: {correct}/{total} ({score:.0%})")
+    if total > 0:
+        show_fn(f"\n  Score: {correct}/{total} ({score:.0%})")
     if tone_scores:
         avg_tone = sum(t["score"] for t in tone_scores) / len(tone_scores)
         show_fn(f"  Tone accuracy: {avg_tone:.0%}")

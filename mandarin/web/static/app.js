@@ -1241,11 +1241,12 @@ function startSession(type) {
   hideDisconnectBanner();
   setStatus("loading", "Preparing session");
 
-  // #3 — Start session timer
-  _sessionStartTime = Date.now();
+  // #3 — Session timer (deferred until first drill renders in showInput)
+  _sessionStartTime = null;
   if (_sessionTimerInterval) clearInterval(_sessionTimerInterval);
-  _sessionTimerInterval = setInterval(updateSessionTimer, 1000);
-  updateSessionTimer();
+  _sessionTimerInterval = null;
+  var _timerEl = document.getElementById("session-timer");
+  if (_timerEl) _timerEl.textContent = "";
 
   // Hide keyboard shortcuts for first 3 sessions to reduce overload
   if (window._totalSessionsBefore != null && window._totalSessionsBefore < 3) {
@@ -1568,29 +1569,49 @@ function showReadingOpener(data) {
   _readingOpenerActive = true;
   _currentPassageId = data.passage_id || null;
   hideInput();  // Ensure input area is hidden — opener has its own Continue button
-  var html = '<div class="reading-opener">';
-  html += '<div class="reading-opener-label">Today\'s passage</div>';
+
+  var isPostDrills = data.position === "post_drills";
+  var scaffold = data.scaffold || {};
+
+  var html = '<div class="reading-opener' + (isPostDrills ? ' reading-opener-post' : '') + '">';
+  html += '<div class="reading-opener-label">' + (isPostDrills ? 'Reading practice' : 'Today\'s passage') + '</div>';
+  if (isPostDrills) {
+    html += '<div class="reading-opener-intro">Nice work on the drills. Try reading this — words you haven\'t learned yet have hints.</div>';
+  }
   if (data.title) html += '<div class="reading-opener-title">' + escapeHtml(data.title) + '</div>';
   html += '<div class="reading-opener-text">';
   var text = data.text_zh || "";
   for (var i = 0; i < text.length; i++) {
     var ch = text[i];
     if (/[\u4e00-\u9fff\u3400-\u4dbf]/.test(ch)) {
-      html += '<span class="reading-word" data-char="' + escapeHtml(ch) + '">' + escapeHtml(ch) + '</span>';
+      var info = scaffold[ch];
+      var isUnknown = info && !info.known;
+      if (isUnknown && info.pinyin) {
+        // Ruby annotation: pinyin above unknown characters
+        html += '<ruby class="reading-word reading-word-unknown" data-char="' + escapeHtml(ch) + '"'
+          + (info.english ? ' data-english="' + escapeHtml(info.english) + '"' : '')
+          + '>' + escapeHtml(ch) + '<rp>(</rp><rt>' + escapeHtml(info.pinyin) + '</rt><rp>)</rp></ruby>';
+      } else {
+        html += '<span class="reading-word' + (info && info.known ? ' reading-word-known' : '') + '" data-char="' + escapeHtml(ch) + '">' + escapeHtml(ch) + '</span>';
+      }
     } else {
       html += escapeHtml(ch);
     }
   }
   html += '</div>';
   html += '<div class="reading-opener-hint">Tap any character to look it up</div>';
-  html += '<button class="btn btn-primary reading-opener-continue">Continue to drills</button>';
+  html += '<button class="btn btn-primary reading-opener-continue">' + (isPostDrills ? 'Finish session' : 'Continue to drills') + '</button>';
   html += '</div>';
   area.innerHTML = html;
 
+  // Scroll to top of passage
+  area.scrollIntoView({behavior: 'smooth', block: 'start'});
+
   // Attach lookup handlers
-  area.querySelectorAll(".reading-word").forEach(function(span) {
-    span.addEventListener("click", function(e) {
-      lookupWord(span.dataset.char, e);
+  area.querySelectorAll(".reading-word, ruby.reading-word-unknown").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      var ch = el.dataset.char;
+      lookupWord(ch, e);
     });
   });
 
@@ -1654,8 +1675,8 @@ function displayShow(data) {
     return;
   }
 
-  // Detect progress indicator like [3/12]
-  const progressMatch = text.match(/\[(\d+)\/(\d+)\]/);
+  // Detect progress indicator like [3/12] or [3/12 <1min]
+  const progressMatch = text.match(/\[(\d+)\/(\d+)(?:\s[^\]]*)?\]/);
   if (progressMatch) {
     drillCount = parseInt(progressMatch[1]);
     drillTotal = parseInt(progressMatch[2]);
@@ -1806,9 +1827,9 @@ function displayShow(data) {
     }
   }
 
-  // "Why this item?" provenance tag — shows HSK requirement source
+  // "Why this item?" provenance tag — only on wrong answers to reduce clutter
   if (_lastDrillMeta && _lastDrillMeta.requirement_ref &&
-      (cls.indexOf("msg-correct") !== -1 || cls.indexOf("msg-wrong") !== -1)) {
+      cls.indexOf("msg-wrong") !== -1) {
     var ref = _lastDrillMeta.requirement_ref;
     var refDiv = document.createElement("div");
     refDiv.className = "requirement-ref";
@@ -1876,6 +1897,8 @@ function showInput(prompt, id) {
   // ── Drill micro-timing: mark when this drill was shown ──
   var now = Date.now();
   _drillShownAt = now;
+
+  // Timer is started in updateProgress() when first drill progress [X/Y] arrives
 
   // First-drill latency: time from WS open to first drill render
   if (_wsOpenedAt && !_firstDrillLogged) {
@@ -2337,7 +2360,12 @@ function showComplete(summary) {
   html += '</div>';
 
   if (summary.early_exit) {
-    html += '<div class="complete-message">Session ended early. Drill progress saved.</div>';
+    // If the user completed a good chunk, soften the message
+    if (total > 0 && correct / total >= 0.5) {
+      html += '<div class="complete-message">Good stopping point. Drill progress saved.</div>';
+    } else {
+      html += '<div class="complete-message">Session ended early. Drill progress saved.</div>';
+    }
   }
 
   // Session message — describe system response, not learner performance
@@ -2815,6 +2843,12 @@ function fetchCompleteDetails(contentEl, baseHtml, summary) {
 }
 
 function updateProgress(current, total) {
+  // Start session timer on first progress update (actual drills, not preview screen)
+  if (!_sessionStartTime && total > 0) {
+    _sessionStartTime = Date.now();
+    _sessionTimerInterval = setInterval(updateSessionTimer, 1000);
+    updateSessionTimer();
+  }
   const pct = total > 0 ? (current / total * 100) : 0;
   const bar = document.getElementById("progress-bar");
   document.getElementById("progress-fill").style.width = pct + "%";
@@ -4652,6 +4686,8 @@ function backToDashboardFrom(viewId) {
   var dashEl = document.getElementById("dashboard");
   if (viewEl) viewEl.classList.add("hidden");
   if (dashEl) dashEl.classList.remove("hidden");
+  // Restore full header when returning to main dashboard
+  document.getElementById("app").classList.remove("subview-active");
 }
 
 /* ── Reading View ──────────────────────────────── */
@@ -8709,6 +8745,8 @@ var _teacherStudentsData = [];
 
 function openTeacherDashboard() {
   transitionTo("dashboard", "teacher-dashboard");
+  // Compact the global header in sub-views
+  document.getElementById("app").classList.add("subview-active");
 
   if (_isAdminTeacher) {
     // Admin mode: skip classroom list, show students directly
@@ -8726,11 +8764,9 @@ function openTeacherDashboard() {
     if (backBtn) backBtn.classList.add("hidden");
     if (codeDisplay) codeDisplay.classList.add("hidden");
     document.getElementById("class-detail-name").textContent = "";
-    // Only show students tab
-    document.querySelectorAll(".class-tab").forEach(function(btn) {
-      var tab = btn.getAttribute("data-tab");
-      if (tab !== "students") btn.classList.add("hidden");
-    });
+    // Hide all tabs in admin mode (no need for tab bar with single tab)
+    var tabBar = document.querySelector(".class-detail-tabs");
+    if (tabBar) tabBar.classList.add("hidden");
     switchClassTab("students");
     loadAdminStudents();
     return;
@@ -8855,6 +8891,33 @@ function loadClassStudents(classId) {
     });
 }
 
+function _studentSummaryCards(students) {
+  var totalSessions = 0, accSum = 0, accCount = 0, activeCount = 0, atRiskCount = 0;
+  var now = new Date();
+  for (var i = 0; i < students.length; i++) {
+    var s = students[i];
+    totalSessions += (s.total_sessions || 0);
+    if (s.avg_accuracy != null) { accSum += s.avg_accuracy; accCount++; }
+    if (s.last_session) {
+      var diff = Math.floor((now - new Date(s.last_session)) / 86400000);
+      if (diff <= 7) activeCount++;
+    }
+    if (s.churn_risk_level === "high" || s.churn_risk_level === "critical") atRiskCount++;
+  }
+  var avgAcc = accCount > 0 ? Math.round(accSum / accCount) : null;
+
+  var html = '<div class="teacher-summary-cards">';
+  html += '<div class="teacher-summary-card"><div class="teacher-summary-value">' + students.length + '</div><div class="teacher-summary-label">Students</div></div>';
+  html += '<div class="teacher-summary-card"><div class="teacher-summary-value">' + activeCount + '</div><div class="teacher-summary-label">Active this week</div></div>';
+  html += '<div class="teacher-summary-card"><div class="teacher-summary-value">' + (avgAcc != null ? avgAcc + '%' : '—') + '</div><div class="teacher-summary-label">Avg accuracy</div></div>';
+  html += '<div class="teacher-summary-card"><div class="teacher-summary-value">' + totalSessions + '</div><div class="teacher-summary-label">Total sessions</div></div>';
+  if (atRiskCount > 0) {
+    html += '<div class="teacher-summary-card teacher-summary-alert"><div class="teacher-summary-value">' + atRiskCount + '</div><div class="teacher-summary-label">At risk</div></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
 function renderStudentTable() {
   var tableEl = document.getElementById("class-student-table");
   if (!tableEl) return;
@@ -8886,11 +8949,16 @@ function renderStudentTable() {
     return '<span class="sort-arrow"><svg class="icon icon-sm"><use href="' + (_teacherStudentSortAsc ? "#icon-chart-up" : "#icon-chart-down") + '"/></svg></span>';
   };
 
-  var html = '<table><thead><tr>'
+  // Summary cards
+  var html = _studentSummaryCards(students);
+
+  // Table
+  html += '<table><thead><tr>'
     + '<th data-sort="name">Name' + arrow("name") + '</th>'
     + '<th data-sort="last_active">Last Active' + arrow("last_active") + '</th>'
     + '<th data-sort="accuracy">Accuracy' + arrow("accuracy") + '</th>'
     + '<th data-sort="sessions">Sessions' + arrow("sessions") + '</th>'
+    + '<th>Status</th>'
     + '</tr></thead><tbody>';
 
   for (var i = 0; i < students.length; i++) {
@@ -8898,14 +8966,34 @@ function renderStudentTable() {
     var name = escapeHtml(s.display_name || s.email || "Student " + s.id);
     var lastActive = s.last_session ? formatRelativeDate(s.last_session) : "Never";
     var accuracy = s.avg_accuracy != null ? Math.round(s.avg_accuracy) + "%" : "—";
+    var status = "";
+    if (s.churn_risk_level === "critical" || s.churn_risk_level === "high") {
+      status = '<span class="student-status student-status-risk">At risk</span>';
+    } else if (s.last_session) {
+      var daysSince = Math.floor((new Date() - new Date(s.last_session)) / 86400000);
+      if (daysSince <= 2) status = '<span class="student-status student-status-active">Active</span>';
+      else if (daysSince <= 7) status = '<span class="student-status student-status-ok">This week</span>';
+      else status = '<span class="student-status student-status-idle">Idle</span>';
+    } else {
+      status = '<span class="student-status student-status-idle">New</span>';
+    }
     html += '<tr data-student-id="' + s.id + '">'
       + '<td>' + name + '</td>'
       + '<td>' + lastActive + '</td>'
       + '<td>' + accuracy + '</td>'
       + '<td>' + (s.total_sessions || 0) + '</td>'
+      + '<td>' + status + '</td>'
       + '</tr>';
   }
   html += '</tbody></table>';
+
+  // #4: Contextual tip for small rosters
+  if (students.length <= 2) {
+    html += '<div class="teacher-tip">';
+    html += '<p>Click a student row to see detailed progress, drill accuracy, and learning trajectory.</p>';
+    html += '</div>';
+  }
+
   tableEl.innerHTML = html;
 
   // Sort handlers on headers

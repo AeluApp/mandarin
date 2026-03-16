@@ -598,8 +598,14 @@
         <!-- Messages and drills appear here -->
       </div>
 
-      <!-- Input area -->
+      <!-- Input area with integrated progress -->
       <div id="input-area" class="hidden">
+        <div id="input-progress-row">
+          <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Session progress">
+            <div id="progress-fill"></div>
+          </div>
+          <span id="progress-label" aria-hidden="true"></span>
+        </div>
         <div id="prompt-text" aria-live="assertive"></div>
         <div class="input-row">
           <label for="answer-input" class="sr-only">Your answer</label>
@@ -613,12 +619,6 @@
           <button id="btn-end-session" class="btn-shortcut btn-shortcut-end" data-quick="Q" aria-label="End session">done</button>
         </div>
       </div>
-
-      <!-- Progress bar -->
-      <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Session progress">
-        <div id="progress-fill"></div>
-      </div>
-      <div id="progress-label" aria-hidden="true"></div>
     </section>
 
     <!-- Session complete overlay -->

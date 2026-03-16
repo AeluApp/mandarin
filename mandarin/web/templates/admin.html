@@ -777,8 +777,11 @@
     /* ── Overview tab (load immediately) ── */
     loadedTabs["overview"] = true;
 
-    function adminFetch(url) {
-      return fetch(url, {credentials: "same-origin"}).then(function(r) {
+    function adminFetch(url, opts) {
+      opts = opts || {};
+      opts.credentials = "same-origin";
+      opts.headers = Object.assign({"X-Requested-With": "XMLHttpRequest"}, opts.headers || {});
+      return fetch(url, opts).then(function(r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       });
@@ -1202,12 +1205,18 @@
           var maxSPU = Math.max.apply(null, days.map(function(x) { return x.sessions_per_user; }));
           if (maxSPU === 0) maxSPU = 1;
           html += '<svg width="100%" viewBox="0 0 ' + svgW + ' 80" style="max-width:' + svgW + 'px;display:block;margin:var(--space-2) 0;">';
+          var pointCoords = [];
           var points = days.map(function(day, i) {
             var x = 30 + i * ((svgW - 60) / Math.max(1, days.length - 1));
             var y = 70 - (day.sessions_per_user / maxSPU) * 60;
+            pointCoords.push({x: x, y: y, day: day});
             return x + ',' + y;
           }).join(' ');
           html += '<polyline points="' + points + '" fill="none" stroke="var(--color-accent)" stroke-width="2" />';
+          pointCoords.forEach(function(p) {
+            html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="var(--color-accent)" opacity="0" style="cursor:pointer"><title>' + esc(p.day.date) + ': ' + p.day.sessions_per_user.toFixed(1) + ' sessions/user</title></circle>';
+            html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" style="cursor:pointer"><title>' + esc(p.day.date) + ': ' + p.day.sessions_per_user.toFixed(1) + ' sessions/user</title></circle>';
+          });
           html += '</svg>';
         }
 
@@ -2139,10 +2148,10 @@
             fetch("/api/admin/ai/review-queue/" + id + "/approve", {
               method: "POST",
               credentials: "same-origin",
-              headers: {"Content-Type": "application/json"},
+              headers: {"Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest"},
               body: JSON.stringify({provenance_checked: 1})
             }).then(function(r) { return r.json(); }).then(function(d) {
-              if (d.error) { alert(d.error); btn.disabled = false; btn.textContent = "Approve"; return; }
+              if (d.error) { alert(typeof d.error === "string" ? d.error : (d.error.message || JSON.stringify(d.error))); btn.disabled = false; btn.textContent = "Approve"; return; }
               card.style.borderLeftColor = "var(--color-correct,#27ae60)";
               card.style.opacity = "0.5";
               btn.textContent = "Approved";
@@ -2163,10 +2172,10 @@
             fetch("/api/admin/ai/review-queue/" + id + "/reject", {
               method: "POST",
               credentials: "same-origin",
-              headers: {"Content-Type": "application/json"},
+              headers: {"Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest"},
               body: JSON.stringify({notes: notes})
             }).then(function(r) { return r.json(); }).then(function(d) {
-              if (d.error) { alert(d.error); btn.disabled = false; btn.textContent = "Reject"; return; }
+              if (d.error) { alert(typeof d.error === "string" ? d.error : (d.error.message || JSON.stringify(d.error))); btn.disabled = false; btn.textContent = "Reject"; return; }
               card.style.borderLeftColor = "var(--color-incorrect,#c0392b)";
               card.style.opacity = "0.5";
               btn.textContent = "Rejected";
@@ -2390,6 +2399,47 @@
       }).catch(function(e) { document.getElementById("quality-work-items-content").innerHTML = '<p class="tab-empty">Work items unavailable: ' + esc(e.message) + '</p>'; });
     }
     /* ═══════════════════════════════════════════════════════════════
+       Shared chart tooltip
+       ═══════════════════════════════════════════════════════════════ */
+    var _chartTooltip = null;
+    function getChartTooltip() {
+      if (!_chartTooltip) {
+        _chartTooltip = document.createElement("div");
+        _chartTooltip.style.cssText = "position:fixed;z-index:9999;background:var(--color-surface,#fff);border:1px solid var(--color-divider,#ccc);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--color-text,#333);pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 2px 8px rgba(0,0,0,.12);max-width:240px;line-height:1.4;";
+        document.body.appendChild(_chartTooltip);
+      }
+      return _chartTooltip;
+    }
+    function showChartTooltip(e, html) {
+      var tip = getChartTooltip();
+      tip.innerHTML = html;
+      tip.style.opacity = "1";
+      var x = e.clientX + 12, y = e.clientY - 10;
+      if (x + 250 > window.innerWidth) x = e.clientX - 250;
+      if (y + tip.offsetHeight > window.innerHeight) y = e.clientY - tip.offsetHeight - 10;
+      tip.style.left = x + "px";
+      tip.style.top = y + "px";
+    }
+    function hideChartTooltip() {
+      var tip = getChartTooltip();
+      tip.style.opacity = "0";
+    }
+    function addCanvasTooltip(canvas, hitTestFn) {
+      canvas.style.cursor = "crosshair";
+      canvas.addEventListener("mousemove", function(e) {
+        var rect = canvas.getBoundingClientRect();
+        var scaleX = canvas.width / rect.width;
+        var scaleY = canvas.height / rect.height;
+        var mx = (e.clientX - rect.left) * scaleX;
+        var my = (e.clientY - rect.top) * scaleY;
+        var html = hitTestFn(mx, my);
+        if (html) showChartTooltip(e, html);
+        else hideChartTooltip();
+      });
+      canvas.addEventListener("mouseleave", hideChartTooltip);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
        Cumulative Flow Diagram (CFD)
        Stacked area chart: X = dates, Y = cumulative item counts
        per work_item status (ready, in_progress, done, blocked)
@@ -2491,6 +2541,26 @@
         ctx.fillText(statuses[si].replace("_", " "), legendX + 13, 12);
         legendX += 72;
       }
+
+      // Hover tooltips
+      addCanvasTooltip(canvas, function(mx, my) {
+        // Find closest date column
+        var closestIdx = -1, closestDist = Infinity;
+        for (var i = 0; i < n; i++) {
+          var dist = Math.abs(mx - xPos(i));
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        }
+        if (closestIdx < 0 || closestDist > plotW / n + 10) return null;
+        var row = stacked[closestIdx];
+        var html = "<strong>" + esc(dates[closestIdx]) + "</strong>";
+        for (var si = 0; si < statuses.length; si++) {
+          var s = statuses[si];
+          var val = (row[s + "_top"] || 0) - (row[s + "_base"] || 0);
+          html += "<br><span style='color:" + colors[s] + "'>\u25cf</span> " + s.replace("_", " ") + ": <strong>" + val + "</strong>";
+        }
+        html += "<br>Total: <strong>" + row.total + "</strong>";
+        return html;
+      });
 
       return canvas;
     }
@@ -2598,6 +2668,23 @@
       ctx.stroke();
       ctx.fillText("Actual", pad.left + 80, 10);
 
+      // Hover tooltips
+      addCanvasTooltip(canvas, function(mx, my) {
+        var closestIdx = -1, closestDist = Infinity;
+        for (var i = 0; i < days.length; i++) {
+          var dx = mx - xPos(days[i].day || i);
+          var dy = my - yPos(days[i].remaining || 0);
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        }
+        if (closestIdx < 0 || closestDist > 30) return null;
+        var d = days[closestIdx];
+        var ideal = planned - (planned * (d.day || closestIdx) / totalDays);
+        return "<strong>Day " + (d.day || closestIdx) + "</strong>" +
+          "<br>Remaining: <strong>" + (d.remaining || 0) + "</strong> pts" +
+          "<br>Ideal: <strong>" + Math.round(ideal) + "</strong> pts";
+      });
+
       return canvas;
     }
 
@@ -2686,6 +2773,21 @@
       ctx.font = "bold 11px sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("Risk Score Over Time", w / 2, pad.top - 4);
+
+      // Hover tooltips
+      addCanvasTooltip(canvas, function(mx, my) {
+        var closestIdx = -1, closestDist = Infinity;
+        for (var i = 0; i < n; i++) {
+          var dx = mx - xPos(i);
+          var dy = my - yPos(scores[i]);
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        }
+        if (closestIdx < 0 || closestDist > 30) return null;
+        var r = reviews[closestIdx];
+        return "<strong>" + esc(r.date || "") + "</strong>" +
+          "<br>Risk score: <strong>" + Math.round(r.aggregate_score || 0) + "</strong>";
+      });
 
       return canvas;
     }
