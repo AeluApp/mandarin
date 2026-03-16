@@ -39,7 +39,7 @@
   /* Typography */
   --font-heading: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
   --font-body: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
-  --font-hanzi: 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
+  --font-hanzi: 'Noto Serif SC', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
   --font-mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
 
   /* Spacing (8px base) */
@@ -1140,46 +1140,36 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 
 /* ── Progress ────────────────────────── */
 
-/* Faint horizon motif above progress — the session is a passage through a place */
-#progress-bar::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 16px;
-  margin: 0 auto var(--space-2);
-  background-color: var(--color-illustration);
-  opacity: 0.3;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 16' fill='none'%3E%3Cline x1='4' y1='12' x2='28' y2='12' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M18 6 L20 4 L22 6' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 16' fill='none'%3E%3Cline x1='4' y1='12' x2='28' y2='12' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M18 6 L20 4 L22 6' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+/* Progress row integrated into input area bottom bar */
+#input-progress-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 #progress-bar {
-  height: 8px;
+  flex: 1;
+  height: 10px;
   background: var(--color-divider);
-  border-radius: 4px;
-  margin-top: var(--space-3);
+  border-radius: 5px;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
 }
 
 #progress-fill {
   height: 100%;
   background: var(--color-accent);
-  border-radius: 4px;
+  border-radius: 5px;
   width: 0%;
   transition: width var(--duration-slow) var(--ease-default);
 }
 
 #progress-label {
-  text-align: center;
   font-size: var(--text-xs);
   color: var(--color-text-dim);
-  margin-top: var(--space-1);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ── Complete ────────────────────────── */
@@ -3738,6 +3728,40 @@ html[data-theme="dark"] .empty-state-illustration {
   margin-top: var(--space-3);
 }
 
+/* Post-drills reading opener — scaffolded */
+.reading-opener-intro {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+  margin-bottom: var(--space-4);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ruby annotations for unknown characters */
+.reading-opener-text ruby {
+  ruby-position: over;
+}
+
+.reading-opener-text ruby rt {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.reading-word-unknown {
+  color: var(--color-text);
+  cursor: pointer;
+  border-bottom: 1px dotted var(--color-accent);
+}
+
+.reading-word-known {
+  cursor: pointer;
+}
+
 .reading-text {
   font-family: var(--font-hanzi);
   font-size: var(--text-2xl);
@@ -4571,6 +4595,363 @@ html[data-theme="dark"] .empty-state-illustration {
 }
 
 /* ── Classroom / teacher view ────────────────────────── */
+
+/* Compact header when inside a sub-view */
+#app.subview-active > header {
+  padding: var(--space-1) 0 var(--space-2);
+}
+
+#app.subview-active .logo-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: var(--space-1);
+}
+
+#app.subview-active .logo-text {
+  font-size: var(--text-base);
+  margin-bottom: 0;
+}
+
+#app.subview-active .account-bar {
+  font-size: var(--text-xs);
+  margin-bottom: 0;
+}
+
+#app.subview-active .horizon,
+#app.subview-active .session-info {
+  display: none;
+}
+
+.teacher-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.teacher-header h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+/* #1: Lighter back button in teacher view */
+#teacher-dashboard .btn-back-nav {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  padding: 0;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+#teacher-dashboard .btn-back-nav:hover {
+  color: var(--color-accent-dim);
+  text-decoration: underline;
+}
+
+.teacher-actions {
+  margin-bottom: var(--space-5);
+}
+
+.teacher-create-form {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-divider);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.teacher-create-form .field {
+  margin-bottom: var(--space-3);
+}
+
+.teacher-create-btns {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.class-detail-header {
+  margin-bottom: var(--space-4);
+}
+
+.class-detail-header h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.class-code-display {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+  margin-top: var(--space-1);
+}
+
+.class-detail-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--color-divider);
+  margin-bottom: var(--space-5);
+}
+
+.class-tab {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+  background: none;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default);
+}
+
+.class-tab:hover {
+  color: var(--color-text);
+}
+
+.class-tab.active {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Summary cards */
+.teacher-summary-cards {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.teacher-summary-card {
+  flex: 1;
+  min-width: 100px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-divider);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  border-top: 3px solid var(--color-divider);
+}
+
+/* #5: Color-differentiated summary cards */
+.teacher-summary-card:nth-child(1) { border-top-color: var(--color-accent); }
+.teacher-summary-card:nth-child(2) { border-top-color: var(--color-secondary); }
+.teacher-summary-card:nth-child(3) { border-top-color: var(--color-mastery-stabilizing); }
+.teacher-summary-card:nth-child(4) { border-top-color: var(--color-text-dim); }
+
+.teacher-summary-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: var(--lh-tight);
+}
+
+.teacher-summary-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  margin-top: var(--space-1);
+  letter-spacing: var(--tracking-normal);
+}
+
+.teacher-summary-alert {
+  border-top-color: var(--color-incorrect) !important;
+}
+
+.teacher-summary-alert .teacher-summary-value {
+  color: var(--color-incorrect);
+}
+
+/* Student status badges */
+.student-status {
+  font-size: var(--text-xs);
+  font-family: var(--font-body);
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: var(--tracking-normal);
+}
+
+.student-status-active {
+  color: var(--color-correct);
+  background: color-mix(in srgb, var(--color-correct) 10%, transparent);
+}
+
+.student-status-ok {
+  color: var(--color-text-dim);
+  background: color-mix(in srgb, var(--color-text-dim) 8%, transparent);
+}
+
+.student-status-idle {
+  color: var(--color-text-faint);
+  background: color-mix(in srgb, var(--color-text-faint) 8%, transparent);
+}
+
+.student-status-risk {
+  color: var(--color-incorrect);
+  background: color-mix(in srgb, var(--color-incorrect) 10%, transparent);
+}
+
+/* Student table */
+.class-student-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+}
+
+.class-student-table thead th {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-dim);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-divider);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.class-student-table thead th:hover {
+  color: var(--color-text);
+}
+
+.class-student-table tbody tr {
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
+}
+
+.class-student-table tbody tr:hover {
+  background: color-mix(in srgb, var(--color-surface-alt) 80%, var(--color-accent) 5%);
+}
+
+.class-student-table tbody td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-divider);
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.class-student-table tbody td:first-child {
+  font-weight: 600;
+}
+
+.class-student-table tbody td:nth-child(2) {
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+}
+
+.class-student-table tbody td:nth-child(3),
+.class-student-table tbody td:nth-child(4) {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+}
+
+/* #3: Row click affordance — chevron on last cell */
+.class-student-table tbody td:last-child {
+  position: relative;
+  padding-right: calc(var(--space-3) + 16px);
+}
+
+.class-student-table tbody td:last-child::after {
+  content: "\203A";
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-lg);
+  color: var(--color-text-faint);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+
+.class-student-table tbody tr:hover td:last-child::after {
+  opacity: 1;
+}
+
+/* Contextual tip for small rosters */
+.teacher-tip {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+}
+
+.teacher-tip p { margin: 0; }
+
+/* Invite section */
+.invite-section {
+  max-width: 480px;
+}
+
+.invite-code-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.invite-code-big {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.2em;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-divider);
+}
+
+.invite-bulk-section {
+  border-top: 1px solid var(--color-divider);
+  padding-top: var(--space-4);
+}
+
+.invite-bulk-section h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.invite-bulk-section textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: var(--space-2);
+  border: 1px solid var(--color-divider);
+  background: var(--color-base);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+  resize: vertical;
+}
+
+/* Student detail panel */
+.student-detail-panel {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-divider);
+  padding: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.student-detail-panel h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  margin-bottom: var(--space-4);
+}
 
 .class-card {
   background: var(--color-surface-alt);
@@ -8161,13 +8542,9 @@ html, body {
     min-height: 44px;
   }
 
-  /* Progress bar */
-  #progress-bar {
-    margin-top: var(--space-2);
-  }
-
-  #progress-bar::before {
-    display: none; /* Hide decorative motif on small screens */
+  /* Progress bar (now inside input-area) */
+  #input-progress-row {
+    margin-bottom: var(--space-2);
   }
 
   /* Complete screen: compact */
