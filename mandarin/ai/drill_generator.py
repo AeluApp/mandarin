@@ -54,10 +54,30 @@ class GeneratedDrillItem:
 def generate_drill_from_encounter(
     conn, encounter_id: str, target_word: str,
     source_sentence: str = "", learner_hsk_level: int = 1,
-    language_notes: str = "",
+    language_notes: str = "", user_id: int = 0,
 ) -> Optional[GeneratedDrillItem]:
     """Generate a drill item from a vocab encounter. Returns None on failure."""
-    prompt = _build_drill_prompt(target_word, source_sentence, learner_hsk_level, language_notes, conn=conn)
+    # A/B experiment: corpus-aware prompts for HSK 3-5
+    use_corpus_aware = learner_hsk_level >= 6  # default: always for HSK 6+
+    if 3 <= learner_hsk_level <= 5 and user_id:
+        try:
+            from ..experiments import get_variant, log_exposure
+            variant = get_variant(conn, "corpus_aware_drill_quality", user_id)
+            if variant == "corpus_aware":
+                use_corpus_aware = True
+                log_exposure(conn, "corpus_aware_drill_quality", user_id,
+                             context=f"drill_gen:hsk{learner_hsk_level}:{target_word}")
+            elif variant == "standard":
+                use_corpus_aware = False
+                log_exposure(conn, "corpus_aware_drill_quality", user_id,
+                             context=f"drill_gen:hsk{learner_hsk_level}:{target_word}")
+        except Exception:
+            logger.debug("Experiment variant lookup failed", exc_info=True)
+
+    prompt = _build_drill_prompt(
+        target_word, source_sentence, learner_hsk_level, language_notes,
+        conn=conn if use_corpus_aware else None,
+    )
 
     # Use RAG-augmented generation for HSK 6+ words
     if learner_hsk_level >= 6:

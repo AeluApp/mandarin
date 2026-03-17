@@ -288,6 +288,9 @@ def _analyze_timing_friction(conn) -> list[dict]:
     """)
     for ep in (endpoints_with_volume or []):
         path = ep["path"]
+        # Skip admin-only internal endpoints — expected to be slow (full audit runs)
+        if path.startswith("/api/admin/"):
+            continue
         cnt = ep["cnt"]
         offset_95 = max(0, int(cnt * 0.05))
         p95_row = _safe_query(conn, """

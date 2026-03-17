@@ -77,12 +77,22 @@ def _collect_metrics():
     with db.connection() as conn:
         # DPMO metrics
         try:
-            dpmo_value = dpmo.calculate(conn)
+            dpmo_result = dpmo.calculate_dpmo(conn)
+            dpmo_value = dpmo_result.get("dpmo", 0.0)
+            sigma_level = dpmo_result.get("sigma_level", 0.0)
+            total_opps = dpmo_result.get("total_opportunities", 0)
             conn.execute(
                 "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
                 ("dpmo", dpmo_value),
             )
-            logger.info("Quality metrics: DPMO = %.1f", dpmo_value)
+            conn.execute(
+                "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
+                ("sigma_level", sigma_level),
+            )
+            logger.info(
+                "Quality metrics: DPMO = %.1f (sigma %.2f, %d opportunities)",
+                dpmo_value, sigma_level, total_opps,
+            )
         except Exception:
             logger.exception("Quality metrics: DPMO calculation failed")
 

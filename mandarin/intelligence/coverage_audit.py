@@ -43,7 +43,7 @@ COVERAGE_MAP = [
     {"domain": "content", "component": "media_shelf_quality", "status": "gap", "document": None, "notes": "Media ingest exists but quality/engagement not measured"},
     {"domain": "content", "component": "graded_reader_passages", "status": "gap", "document": None, "notes": "Passages served but readability/engagement not tracked"},
     {"domain": "content", "component": "seed_item_balance", "status": "covered", "document": "Doc 2 (Domain Analyzers)", "notes": "HSK level distribution analyzed"},
-    {"domain": "content", "component": "content_freshness", "status": "gap", "document": None, "notes": "No staleness detection for content items"},
+    {"domain": "content", "component": "content_freshness", "status": "covered", "document": "Doc 6 (Coverage Audit)", "notes": "Staleness detection + content_freshness quality_metric tracked"},
     {"domain": "content", "component": "register_pragmatic_coverage", "status": "partial", "document": "Doc 2 (Domain Analyzers)", "notes": "Drill types exist but register balance not measured"},
 
     # ── AI Components Domain ──
