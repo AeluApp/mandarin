@@ -15,8 +15,6 @@ import logging
 import os
 import re
 import sqlite3
-import subprocess
-import uuid
 
 from ._base import _finding, _safe_query_all, _safe_scalar, _safe_query, _f
 
@@ -575,80 +573,25 @@ def analyze_feature_usage(conn):
 # ── Part D: Engineering Health ─────────────────────────────────────────────
 
 def analyze_test_coverage(conn):
-    """Run pytest with coverage, store results, flag low coverage / failing tests."""
+    """Check last engineering snapshot for test coverage / failure data.
+
+    Uses cached snapshot data rather than running pytest/coverage live,
+    which can take minutes and block the audit UI.
+    """
     findings = []
 
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    last_snap = _safe_query(conn, """
+        SELECT test_coverage_pct, tests_passing, tests_failing
+        FROM pi_engineering_snapshots
+        ORDER BY snapshot_date DESC LIMIT 1
+    """)
+    if not last_snap:
+        return findings
 
-    # Try running pytest --co (collect only) + coverage
-    try:
-        result = subprocess.run(
-            ["python", "-m", "pytest", "--co", "-q", "--tb=no"],
-            capture_output=True, text=True, timeout=30,
-            cwd=project_root,
-        )
-        test_lines = [l for l in result.stdout.strip().split("\n") if l.strip() and "::" in l]
-        test_count = len(test_lines)
-    except (subprocess.TimeoutExpired, OSError) as e:
-        logger.warning("Test collection failed: %s", e)
-        test_count = None
+    coverage_pct = last_snap[0]
+    tests_passing = last_snap[1]
+    tests_failing = last_snap[2]
 
-    # Try coverage report
-    coverage_pct = None
-    try:
-        result = subprocess.run(
-            ["python", "-m", "coverage", "report", "--format=total"],
-            capture_output=True, text=True, timeout=30,
-            cwd=project_root,
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            try:
-                coverage_pct = float(result.stdout.strip())
-            except ValueError:
-                pass
-    except (subprocess.TimeoutExpired, OSError):
-        pass
-
-    # Try getting test pass/fail from last pytest run
-    tests_passing = None
-    tests_failing = None
-    try:
-        result = subprocess.run(
-            ["python", "-m", "pytest", "--tb=no", "-q", "--no-header"],
-            capture_output=True, text=True, timeout=120,
-            cwd=project_root,
-        )
-        # Parse "X passed, Y failed" from last line
-        last_line = result.stdout.strip().split("\n")[-1] if result.stdout.strip() else ""
-        import re as _re
-        passed_match = _re.search(r'(\d+) passed', last_line)
-        failed_match = _re.search(r'(\d+) failed', last_line)
-        tests_passing = int(passed_match.group(1)) if passed_match else 0
-        tests_failing = int(failed_match.group(1)) if failed_match else 0
-    except (subprocess.TimeoutExpired, OSError) as e:
-        logger.warning("Test run failed: %s", e)
-
-    # Store snapshot
-    if coverage_pct is not None or tests_passing is not None:
-        try:
-            table_count = _safe_scalar(conn, """
-                SELECT COUNT(*) FROM sqlite_master WHERE type='table'
-            """, default=0)
-            db_path = str(conn.execute("PRAGMA database_list").fetchone()[2])
-            db_size_mb = os.path.getsize(db_path) / (1024 * 1024) if os.path.exists(db_path) else 0
-
-            conn.execute("""
-                INSERT OR REPLACE INTO pi_engineering_snapshots
-                (id, snapshot_date, test_coverage_pct, tests_passing, tests_failing,
-                 table_count, db_size_mb)
-                VALUES (?, date('now'), ?, ?, ?, ?, ?)
-            """, (str(uuid.uuid4()), coverage_pct, tests_passing, tests_failing,
-                  table_count, round(db_size_mb, 2)))
-            conn.commit()
-        except sqlite3.Error as e:
-            logger.warning("Engineering snapshot save failed: %s", e)
-
-    # Generate findings
     if coverage_pct is not None and coverage_pct < 60:
         findings.append(_finding(
             "engineering_health", "high",
@@ -678,50 +621,26 @@ def analyze_test_coverage(conn):
 
 
 def analyze_dependency_health(conn):
-    """Check for outdated pip dependencies, flag critical ML packages."""
+    """Check last engineering snapshot for outdated dependency data.
+
+    Uses cached snapshot data rather than running pip live.
+    """
     findings = []
 
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-    critical_packages = {"flask", "numpy", "httpx", "librosa", "sentry-sdk", "cryptography"}
-
-    try:
-        result = subprocess.run(
-            ["pip", "list", "--outdated", "--format=json"],
-            capture_output=True, text=True, timeout=30,
-            cwd=project_root,
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            import json
-            outdated = json.loads(result.stdout)
-            outdated_critical = [p for p in outdated if p["name"].lower() in critical_packages]
-
-            if outdated_critical:
-                names = [f"{p['name']} ({p['version']}→{p['latest_version']})"
-                         for p in outdated_critical]
-                findings.append(_finding(
-                    "engineering_health", "medium",
-                    f"{len(outdated_critical)} critical packages outdated",
-                    f"Outdated critical packages: {', '.join(names)}.",
-                    "Update critical dependencies to get security patches and bug fixes.",
-                    f"Run `pip install --upgrade {' '.join(p['name'] for p in outdated_critical)}` "
-                    f"and run the full test suite.",
-                    "Security and stability",
-                    ["requirements.txt"],
-                ))
-
-            # Store count in latest snapshot
-            try:
-                conn.execute("""
-                    UPDATE pi_engineering_snapshots SET outdated_dependencies = ?
-                    WHERE snapshot_date = date('now')
-                """, (len(outdated),))
-                conn.commit()
-            except sqlite3.Error:
-                pass
-
-    except (subprocess.TimeoutExpired, OSError) as e:
-        logger.warning("Dependency check failed: %s", e)
+    last_snap = _safe_query(conn, """
+        SELECT outdated_dependencies FROM pi_engineering_snapshots
+        ORDER BY snapshot_date DESC LIMIT 1
+    """)
+    if last_snap and last_snap[0] is not None and last_snap[0] > 10:
+        findings.append(_finding(
+            "engineering_health", "medium",
+            f"{last_snap[0]} packages outdated",
+            f"{last_snap[0]} pip packages are outdated (from last snapshot).",
+            "Update critical dependencies to get security patches and bug fixes.",
+            "Run `pip list --outdated` to see details, then update critical packages.",
+            "Security and stability",
+            ["requirements.txt"],
+        ))
 
     return findings
 

@@ -292,3 +292,172 @@ def _count_by(findings, key):
         v = f.get(key, "unknown")
         counts[v] = counts.get(v, 0) + 1
     return counts
+
+
+# ── Product lifecycle phases & real-user filtering ─────────────────────
+#
+# Scoring adapts to three lifecycle phases:
+#
+#   PRE_LAUNCH  (0 real users)
+#     Solo-dev / admin-only.  User-behavior dimensions suppressed entirely.
+#     Process-maturity (methodology) and commercial-readiness (strategic)
+#     suppressed.  GenAI governance downgraded.  Only code/infra findings
+#     (engineering, security, etc.) score at full weight.
+#
+#   EARLY       (1–29 real users)
+#     Public but not yet statistically significant.  User-behavior and
+#     strategic findings are kept but downgraded.  Methodology starts
+#     contributing at reduced severity.  GenAI governance scored normally.
+#
+#   ESTABLISHED (30+ real users)
+#     Full scoring — no suppression, all dimensions at full weight.
+#
+
+_REAL_USER_WHERE = "is_admin = 0 AND first_session_at IS NOT NULL"
+
+_PHASE_THRESHOLDS = {
+    "early": 1,        # first real user → early
+    "established": 30,  # statistical significance → full scoring
+}
+
+# Dimensions whose signal depends on real user behavior — suppressed
+# pre-launch (admin-only data pollutes metrics), downgraded early.
+_USER_BEHAVIOR_DIMENSIONS = {
+    "profitability",    # conversion rates meaningless with admin-only
+    "retention",        # retention needs real cohorts
+    "onboarding",       # completion rates polluted by admin testing
+    "ux",               # bounce/completion rates reflect admin debugging, not UX
+    "flow",             # session flow metrics need real users
+    "engagement",       # engagement metrics need real users
+    "drill_quality",    # drill accuracy/completion rates from admin testing
+    "frustration",      # frustration signals from admin debugging
+    "platform",         # platform usage distribution needs real users
+    "encounter_loop",   # lookup-to-drill funnel needs real learner behavior
+    "scheduler_audit",  # session completion % polluted by admin bouncing on bugs
+    "srs_funnel",       # SRS progression metrics need real learners
+    "error_taxonomy",   # error pattern distribution needs real usage
+    "hsk_cliff",        # level transition analysis needs real progression data
+}
+
+# Dimensions assessable from code, content, and data — always scored.
+# Findings are valid pre-launch (they examine the codebase/corpus, not
+# user behavior), but severity is downgraded since they're aspirational.
+_CODE_DATA_DIMENSIONS = {
+    "content",          # content gaps (review queue, comprehension coverage)
+    "cross_modality",   # modality mastery gaps in corpus data
+    "curriculum",       # grammar pattern coverage gaps
+    "marketing",        # page quality, analytics setup, strategy reviews
+    "tone_phonology",   # tone drill volume, phonology content gaps
+}
+
+# System/infra/process dimensions — always at full weight
+_SYSTEM_DIMENSIONS = {
+    "engineering", "security", "methodology", "agentic",
+    "governance", "data_quality", "genai_governance",
+}
+
+# Dimensions that are assessable from code/infra but whose findings are
+# aspirational pre-launch (solo-dev can't have Six Sigma DPMO or monetization
+# metrics).  Downgraded to low pre-launch, medium early, full established.
+_CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS = {
+    "methodology",       # process-maturity coverage is real but not critical pre-launch
+    "strategic",         # content/competitive gaps are real insights, not emergencies
+    "genai_governance",  # "unreviewed" findings are schema artifacts pre-launch
+}
+
+
+def _real_user_count(conn) -> int:
+    """Count non-admin users who have started at least one session."""
+    return _safe_scalar(conn, f"SELECT COUNT(*) FROM user WHERE {_REAL_USER_WHERE}", default=0)
+
+
+def _real_user_session_count(conn) -> int:
+    """Count sessions from real (non-admin) users."""
+    return _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM session_log
+        WHERE user_id IN (SELECT id FROM user WHERE {_REAL_USER_WHERE})
+    """, default=0)
+
+
+def _lifecycle_phase(conn) -> str:
+    """Determine the current product lifecycle phase."""
+    real_users = _real_user_count(conn)
+    if real_users >= _PHASE_THRESHOLDS["established"]:
+        return "established"
+    if real_users >= _PHASE_THRESHOLDS["early"]:
+        return "early"
+    return "pre_launch"
+
+
+def suppress_low_sample_findings(conn, findings: list[dict]) -> list[dict]:
+    """Adapt finding severity and visibility to the product lifecycle phase.
+
+    PRE_LAUNCH (0 real users):
+      - User-behavior dimensions: suppressed (no signal possible)
+      - Code-assessable dimensions (methodology, strategic, genai_governance):
+        downgraded to low — the gaps are real but not emergencies for solo-dev
+      - Other system/infra (engineering, security): full weight
+
+    EARLY (1–29 real users):
+      - User-behavior dimensions: downgraded, tagged [EARLY]
+      - Code-assessable dimensions: downgraded to medium (10+) or low (<10)
+      - Other system/infra: full weight
+
+    ESTABLISHED (30+ real users):
+      - No suppression — full scoring
+    """
+    phase = _lifecycle_phase(conn)
+    real_users = _real_user_count(conn)
+
+    if phase == "established":
+        return findings
+
+    filtered = []
+    for f in findings:
+        dim = f.get("dimension", "")
+
+        # ── Code-assessable dimensions: always keep, downgrade severity ──
+        if dim in _CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS:
+            f = dict(f)
+            if phase == "pre_launch":
+                if f.get("severity") in ("critical", "high", "medium"):
+                    f["severity"] = "low"
+                tag = "[PRE-LAUNCH]"
+            else:  # early
+                if f.get("severity") in ("critical", "high"):
+                    f["severity"] = "medium" if real_users >= 10 else "low"
+                elif f.get("severity") == "medium" and real_users < 10:
+                    f["severity"] = "low"
+                tag = "[EARLY]"
+            if not f.get("title", "").startswith(tag):
+                f["title"] = f"{tag} {f['title']}"
+            filtered.append(f)
+            continue
+
+        # ── User-behavior dimensions: suppress pre-launch, downgrade early ──
+        if dim in _USER_BEHAVIOR_DIMENSIONS:
+            if phase == "pre_launch":
+                # No real users → no signal → suppress entirely
+                continue
+
+            # Early: downgrade + annotate
+            f = dict(f)
+            if f.get("severity") in ("critical", "high"):
+                f["severity"] = "medium" if real_users >= 10 else "low"
+            elif f.get("severity") == "medium" and real_users < 10:
+                f["severity"] = "low"
+            tag = "[EARLY]"
+            if not f.get("title", "").startswith(tag):
+                f["title"] = f"{tag} {f['title']}"
+            f["analysis"] = (
+                f"Early phase: {real_users} real user(s) — findings are "
+                f"directional, not yet statistically significant. "
+                f"{f.get('analysis', '')}"
+            )
+            filtered.append(f)
+            continue
+
+        # ── Everything else (system/infra, unknown dimensions): full weight ──
+        filtered.append(f)
+
+    return filtered

@@ -485,11 +485,16 @@
 
     <!-- Product Intelligence -->
     <div class="admin-tab-content" id="tab-intelligence">
-      <p class="tab-description">Automatic health check for the whole product. Finds problems, ranks them by importance, and tells you what to fix first.</p>
-      <div style="margin-bottom:var(--space-3);display:flex;gap:var(--space-2);align-items:center;">
-        <button id="intel-run-audit" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Run Audit</button>
-        <span id="intel-status" style="font-family:var(--font-body);font-size:var(--text-xs);color:var(--color-text-dim);"></span>
+      <!-- Status bar: status text + re-run button -->
+      <div id="intel-status-bar" style="margin-bottom:var(--space-3);display:flex;gap:var(--space-2);align-items:center;font-family:var(--font-body);font-size:var(--text-sm);">
+        <span id="intel-status" style="color:var(--color-text-dim);"></span>
+        <span id="intel-spinner" style="display:none;width:14px;height:14px;border:2px solid var(--color-divider);border-top-color:var(--color-accent);border-radius:50%;animation:intel-spin .8s linear infinite;flex-shrink:0;"></span>
+        <button id="intel-run-audit" style="display:none;padding:4px 12px;font-family:var(--font-body);font-size:var(--text-xs);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">Re-run</button>
       </div>
+      <style>@keyframes intel-spin{to{transform:rotate(360deg)}}
+#intel-queue-cards details summary::-webkit-details-marker{display:none;}
+#intel-queue-cards details[open] summary .dq-chevron{transform:rotate(180deg);}
+</style>
 
       <!-- Overall health card -->
       <div id="intel-overall" style="display:none;margin-bottom:var(--space-4);padding:var(--space-4);background:var(--color-surface);border-left:4px solid var(--color-accent);"></div>
@@ -498,12 +503,11 @@
       <div id="intel-scorecard" style="display:none;margin-bottom:var(--space-4);"></div>
 
       <div id="intel-summary" style="display:none;margin-bottom:var(--space-4);"></div>
-      <div id="intel-filter" style="display:none;margin-bottom:var(--space-3);gap:var(--space-1);flex-wrap:wrap;"></div>
 
       <!-- Copy all critical prompts button -->
       <div id="intel-copy-all" style="display:none;margin-bottom:var(--space-3);"></div>
 
-      <div id="intelligence-content" class="tab-loading" style="font-family:var(--font-body);color:var(--color-text-dim);padding:var(--space-4);">Click "Run Audit" to analyze the product.</div>
+      <div id="intelligence-content" class="tab-loading" style="font-family:var(--font-body);color:var(--color-text-dim);padding:var(--space-4);"></div>
 
       <!-- Audit history -->
       <div id="intel-history" style="display:none;margin-top:var(--space-4);"></div>
@@ -511,7 +515,7 @@
       <!-- V4: Decision Queue -->
       <div id="intel-decision-queue" style="display:none;margin-top:var(--space-4);">
         <h3 style="font-family:var(--font-heading);font-size:var(--text-lg);margin-bottom:var(--space-2);">Decision Queue</h3>
-        <div id="intel-queue-cards" style="display:flex;flex-direction:column;gap:var(--space-2);"></div>
+        <div id="intel-queue-cards" style="display:flex;flex-direction:column;gap:2px;"></div>
       </div>
 
       <!-- V4: Finding Lifecycle Kanban -->
@@ -1588,22 +1592,81 @@
 
     /* ── Product Intelligence ── */
     var _intelData = null;
+    var _intelPromise = null;
+    var _intelRendered = false;
     var _gradeColors = {A: "#27ae60", B: "#2ecc71", C: "#e67e22", D: "#e74c3c", F: "#c0392b"};
+
+    function _gradeSummary(grade, dimLabel, score) {
+      if (grade === "A") return "Performing well. No issues detected across all analyzers for " + dimLabel + ". The intelligence engine checks multiple signals including metrics, patterns, and trends — all are healthy.";
+      if (grade === "B") return "Good overall with minor areas to watch. " + dimLabel + " is above target thresholds with no urgent concerns.";
+      if (grade === "C") return "Needs attention. " + dimLabel + " has issues that should be addressed to prevent degradation.";
+      if (grade === "D") return "Significant issues detected in " + dimLabel + ". Review findings below and prioritize fixes.";
+      if (grade === "F") return "Critical problems in " + dimLabel + " requiring immediate action.";
+      return "";
+    }
+
+    // Pre-fetch audit as soon as admin page loads (before tab click)
+    _intelPromise = adminFetch("/api/admin/product-intelligence").then(function(d) {
+      _intelData = d;
+      return d;
+    });
+
     function loadIntelligence() {
-      // Don't auto-load — wait for button click, but load history
+      if (_intelData && !_intelRendered) {
+        // Data already arrived — render instantly
+        _renderAuditResults(_intelData, false);
+      } else if (!_intelRendered) {
+        // Still loading — show spinner, render when ready
+        var status = document.getElementById("intel-status");
+        var spinner = document.getElementById("intel-spinner");
+        var el = document.getElementById("intelligence-content");
+        status.textContent = "Loading audit\u2026";
+        spinner.style.display = "inline-block";
+        el.innerHTML = '';
+        _intelPromise.then(function(d) {
+          _renderAuditResults(d, false);
+        }).catch(function(e) {
+          el.innerHTML = '<p class="tab-empty">Audit failed: ' + esc(e.message) + '</p>';
+          status.textContent = "Error";
+          spinner.style.display = "none";
+        });
+      }
       loadIntelHistory();
     }
+    var _intelActiveDim = "all";
     function runIntelligenceAudit() {
+      // Re-run: show spinner overlay on existing results, fetch fresh data
+      var status = document.getElementById("intel-status");
+      var spinner = document.getElementById("intel-spinner");
+      var rerunBtn = document.getElementById("intel-run-audit");
+      status.textContent = "Refreshing\u2026";
+      spinner.style.display = "inline-block";
+      rerunBtn.style.display = "none";
+      _intelPromise = adminFetch("/api/admin/product-intelligence").then(function(d) {
+        _intelData = d;
+        _renderAuditResults(d, true);
+        return d;
+      }).catch(function(e) {
+        status.textContent = "Refresh failed";
+        spinner.style.display = "none";
+        rerunBtn.style.display = "inline-block";
+      });
+    }
+
+    function _renderAuditResults(d, isRefresh) {
+      _intelRendered = true;
       var el = document.getElementById("intelligence-content");
       var status = document.getElementById("intel-status");
       var summary = document.getElementById("intel-summary");
-      el.innerHTML = '<p class="tab-loading">Running product audit across all dimensions...</p>';
-      status.textContent = "Analyzing...";
-      adminFetch("/api/admin/product-intelligence").then(function(d) {
-        _intelData = d;
-        status.textContent = "Audit complete. " + (d.total || 0) + " findings.";
+      var spinner = document.getElementById("intel-spinner");
+      var rerunBtn = document.getElementById("intel-run-audit");
+      var bySev = d.by_severity || {};
+      var critHigh = (bySev.critical || 0) + (bySev.high || 0);
+      status.textContent = (d.total || 0) + " findings" + (critHigh > 0 ? " \u00b7 " + critHigh + " need attention" : "") + (isRefresh ? " \u00b7 Updated" : "");
+      spinner.style.display = "none";
+      rerunBtn.style.display = "inline-block";
 
-        // Overall health card
+        // ── Overall health card ──
         var overallEl = document.getElementById("intel-overall");
         if (d.overall) {
           var gc = _gradeColors[d.overall.grade] || "var(--color-text-dim)";
@@ -1614,65 +1677,62 @@
             overHtml += '<div style="font-size:var(--text-sm);color:var(--color-text-dim);margin-top:4px;">' + esc(d.synthesis.summary) + '</div>';
           }
           if (d.synthesis && d.synthesis.data_gaps && d.synthesis.data_gaps.length > 0) {
-            overHtml += '<div style="font-size:var(--text-xs);color:#e67e22;margin-top:4px;">&#x26A0; ' + d.synthesis.data_gaps.length + ' dimension' + (d.synthesis.data_gaps.length !== 1 ? 's' : '') + ' lack sufficient data for confident grading</div>';
+            overHtml += '<div style="font-size:var(--text-xs);color:#e67e22;margin-top:4px;">' + d.synthesis.data_gaps.length + ' dimension' + (d.synthesis.data_gaps.length !== 1 ? 's' : '') + ' lack sufficient data</div>';
+          }
+          // Lifecycle phase indicator
+          if (d.lifecycle_phase) {
+            var phaseLabels = {
+              "pre_launch": "Pre-launch (admin only)",
+              "early": "Early (" + (d.real_user_count || 0) + " real user" + ((d.real_user_count || 0) !== 1 ? "s" : "") + ")",
+              "established": "Established (" + (d.real_user_count || 0) + " users)"
+            };
+            var phaseColors = {"pre_launch": "#9b59b6", "early": "#e67e22", "established": "#27ae60"};
+            var pl = phaseLabels[d.lifecycle_phase] || d.lifecycle_phase;
+            var pc = phaseColors[d.lifecycle_phase] || "var(--color-text-dim)";
+            overHtml += '<div style="font-size:var(--text-xs);color:' + pc + ';margin-top:4px;">Scoring mode: ' + esc(pl) + '</div>';
           }
           overHtml += '</div></div>';
           overallEl.innerHTML = overHtml;
           overallEl.style.display = "block";
         }
 
-        // Dimension scorecard
+        // ── Dimension scorecard (clickable) ──
         var scorecardEl = document.getElementById("intel-scorecard");
         if (d.dimension_scores) {
-          var scHtml = '<div class="metrics-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));">';
-          var dims = Object.keys(d.dimension_scores).sort();
-          dims.forEach(function(dim) {
-            var info = d.dimension_scores[dim];
-            var gColor = _gradeColors[info.grade] || "var(--color-text-dim)";
-            var trend = info.trend || "\u2192";
-            var trendColor = trend === "\u2191" ? "#27ae60" : trend === "\u2193" ? "#e74c3c" : "var(--color-text-dim)";
-            scHtml += '<div class="metric-card" style="border-top:3px solid ' + gColor + ';text-align:center;padding:var(--space-2);">';
-            scHtml += '<div style="font-size:28px;font-weight:700;color:' + gColor + ';font-family:var(--font-heading);">' + esc(info.grade) + '</div>';
-            scHtml += '<div style="font-size:var(--text-xs);color:var(--color-text-dim);">' + info.score + '/100 <span style="color:' + trendColor + ';">' + trend + '</span></div>';
-            scHtml += '<div style="font-size:var(--text-xs);font-weight:600;margin-top:2px;">' + esc(dim.charAt(0).toUpperCase() + dim.slice(1)) + '</div>';
-            if (info.finding_count > 0) {
-              scHtml += '<div style="font-size:10px;color:var(--color-text-dim);">' + info.finding_count + ' finding' + (info.finding_count !== 1 ? 's' : '') + '</div>';
-            }
-            var confColors = {high: "#27ae60", medium: "#e67e22", low: "#e74c3c", none: "#95a5a6"};
-            var conf = info.confidence || "high";
-            scHtml += '<div style="font-size:9px;color:' + (confColors[conf] || "#95a5a6") + ';margin-top:1px;">' + conf + ' data</div>';
-            scHtml += '</div>';
-          });
-          scHtml += '</div>';
-          scorecardEl.innerHTML = scHtml;
-          scorecardEl.style.display = "block";
+          _renderScorecard(d, "all");
         }
 
-        // Summary cards (severity breakdown)
-        var bySev = d.by_severity || {};
-        var sumHtml = '<div class="metrics-grid">';
+        // ── Summary: severity breakdown ──
         var sevColors = {critical: "var(--color-incorrect)", high: "#e67e22", medium: "var(--color-mastery-stabilizing)", low: "var(--color-text-dim)"};
-        var sevOrder = ["critical", "high", "medium", "low"];
-        sevOrder.forEach(function(s) {
+        var sumHtml = '<div class="metrics-grid">';
+        ["critical", "high", "medium", "low"].forEach(function(s) {
           var cnt = bySev[s] || 0;
           if (cnt > 0) {
-            sumHtml += '<div class="metric-card" style="border-top:3px solid ' + sevColors[s] + '"><div class="metric-value" style="color:' + sevColors[s] + '">' + cnt + '</div><div class="metric-label">' + s.charAt(0).toUpperCase() + s.slice(1) + '</div></div>';
+            sumHtml += '<div class="metric-card" style="border-top:3px solid ' + sevColors[s] + ';cursor:pointer;" data-sev="' + s + '"><div class="metric-value" style="color:' + sevColors[s] + '">' + cnt + '</div><div class="metric-label">' + s.charAt(0).toUpperCase() + s.slice(1) + '</div></div>';
           }
         });
-        sumHtml += '<div class="metric-card"><div class="metric-value">' + (d.total || 0) + '</div><div class="metric-label">Total Findings</div></div>';
         sumHtml += '</div>';
         summary.innerHTML = sumHtml;
         summary.style.display = "block";
+        // Click severity cards to filter
+        summary.querySelectorAll("[data-sev]").forEach(function(card) {
+          card.addEventListener("click", function() {
+            _intelActiveDim = "all";
+            _renderScorecard(d, "all");
+            renderIntelFindings(d.findings || [], "all", card.dataset.sev);
+            document.getElementById("intelligence-content").scrollIntoView({behavior:"smooth", block:"start"});
+          });
+        });
 
-        // Copy all critical prompts button
+        // ── Copy all critical prompts ──
         var critFindings = (d.findings || []).filter(function(f) { return f.severity === "critical" || f.severity === "high"; });
         var copyAllEl = document.getElementById("intel-copy-all");
         if (critFindings.length > 0) {
-          copyAllEl.innerHTML = '<button id="intel-copy-all-btn" style="padding:6px 16px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;border-radius:3px;">Copy all critical/high prompts (' + critFindings.length + ')</button>';
+          copyAllEl.innerHTML = '<button id="intel-copy-all-btn" style="padding:6px 16px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;">Copy all critical/high prompts (' + critFindings.length + ')</button>';
           copyAllEl.style.display = "block";
           document.getElementById("intel-copy-all-btn").addEventListener("click", function() {
             var allPrompts = critFindings.map(function(f) {
-              return "## " + f.title + " [" + f.severity + "]\n\n" + (f.claude_prompt || "");
+              return "## " + f.title + " [" + f.severity + "]\n\n" + (f.claude_prompt || f.recommendation || f.analysis);
             }).join("\n\n---\n\n");
             if (navigator.clipboard) {
               navigator.clipboard.writeText(allPrompts).then(function() {
@@ -1685,49 +1745,83 @@
           });
         }
 
-        // Dimension filter buttons
-        var byDim = d.by_dimension || {};
-        var filterEl = document.getElementById("intel-filter");
-        var filterHtml = '<button class="intel-dim-btn admin-tab active" data-dim="all" style="padding:4px 10px;font-size:var(--text-xs);">All (' + (d.total || 0) + ')</button>';
-        for (var dim in byDim) {
-          filterHtml += '<button class="intel-dim-btn admin-tab" data-dim="' + esc(dim) + '" style="padding:4px 10px;font-size:var(--text-xs);">' + esc(dim.charAt(0).toUpperCase() + dim.slice(1)) + ' (' + byDim[dim] + ')</button>';
-        }
-        filterEl.innerHTML = filterHtml;
-        filterEl.style.display = "flex";
-        filterEl.querySelectorAll(".intel-dim-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            filterEl.querySelectorAll(".intel-dim-btn").forEach(function(b) { b.classList.remove("active"); });
-            btn.classList.add("active");
-            renderIntelFindings(d.findings || [], btn.dataset.dim);
-          });
-        });
-
-        renderIntelFindings(d.findings || [], "all");
+        // Show findings (default: critical+high only)
+        renderIntelFindings(d.findings || [], "all", critHigh > 0 ? "_urgent" : null);
 
         // Update badge
         var badge = document.getElementById("intel-badge");
-        var critHigh = (bySev.critical || 0) + (bySev.high || 0);
         if (badge && critHigh > 0) {
           badge.textContent = critHigh;
           badge.style.display = "inline";
         }
 
-        // Refresh history
+        // Refresh history + V4 panels
         loadIntelHistory();
-
-        // V4: Render decision queue
         renderDecisionQueue(d.decision_queue || []);
-        // V4: Render sprint plan
         renderSprintPlan(d.sprint_plan || {});
-        // V4: Load feedback and meta dashboards
         loadFeedbackDash();
         loadEngineMeta();
-        // V4: Load finding lifecycle kanban
         loadFindingKanban();
-      }).catch(function(e) {
-        el.innerHTML = '<p class="tab-empty">Audit failed: ' + esc(e.message) + '</p>';
-        status.textContent = "Error";
+    }
+
+    function _renderScorecard(d, activeDim) {
+      var scorecardEl = document.getElementById("intel-scorecard");
+      var dims = Object.keys(d.dimension_scores).sort(function(a,b) {
+        return d.dimension_scores[a].score - d.dimension_scores[b].score;
       });
+      var scHtml = '<div class="metrics-grid" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;">';
+      dims.forEach(function(dim) {
+        var info = d.dimension_scores[dim];
+        var gColor = _gradeColors[info.grade] || "var(--color-text-dim)";
+        var trend = info.trend || "";
+        var trendColor = trend === "\u2191" ? "#27ae60" : trend === "\u2193" ? "#e74c3c" : "var(--color-text-dim)";
+        var isActive = activeDim === dim;
+        var border = isActive ? "2px solid " + gColor : "1px solid var(--color-divider)";
+        var bg = isActive ? "var(--color-surface)" : "transparent";
+        scHtml += '<div class="intel-dim-card" data-dim="' + esc(dim) + '" style="cursor:pointer;border:' + border + ';background:' + bg + ';text-align:center;padding:8px 4px;transition:border .15s;">';
+        var isSuppressed = info.suppressed || false;
+        var isDowngraded = info.downgraded || false;
+        var cardOpacity = isSuppressed ? '0.5' : '1';
+        scHtml += '<div style="font-size:22px;font-weight:700;color:' + gColor + ';font-family:var(--font-heading);line-height:1;opacity:' + cardOpacity + ';">' + (isSuppressed ? '—' : esc(info.grade)) + '</div>';
+        scHtml += '<div style="font-size:10px;color:var(--color-text-dim);margin-top:2px;opacity:' + cardOpacity + ';">' + (isSuppressed ? 'n/a' : info.score) + '<span style="color:' + trendColor + ';margin-left:3px;">' + trend + '</span></div>';
+        scHtml += '<div style="font-size:11px;font-weight:600;margin-top:2px;color:var(--color-text);">' + esc(dim.replace(/_/g, " ")) + '</div>';
+        if (isSuppressed) {
+          scHtml += '<div style="font-size:9px;color:#9b59b6;">pre-launch</div>';
+        } else if (info.finding_count > 0) {
+          scHtml += '<div style="font-size:9px;color:var(--color-text-dim);">' + info.finding_count + ' finding' + (info.finding_count !== 1 ? 's' : '') + '</div>';
+        }
+        scHtml += '</div>';
+      });
+      scHtml += '</div>';
+      if (activeDim !== "all") {
+        scHtml += '<div style="margin-top:6px;"><button id="intel-show-all" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">Show all findings</button></div>';
+      }
+      scorecardEl.innerHTML = scHtml;
+      scorecardEl.style.display = "block";
+      // Wire click on each card
+      scorecardEl.querySelectorAll(".intel-dim-card").forEach(function(card) {
+        card.addEventListener("click", function() {
+          var dim = card.dataset.dim;
+          if (_intelActiveDim === dim) {
+            _intelActiveDim = "all";
+            _renderScorecard(d, "all");
+            renderIntelFindings(d.findings || [], "all", null);
+          } else {
+            _intelActiveDim = dim;
+            _renderScorecard(d, dim);
+            renderIntelFindings(d.findings || [], dim, null);
+          }
+          document.getElementById("intelligence-content").scrollIntoView({behavior:"smooth", block:"start"});
+        });
+      });
+      var showAllBtn = document.getElementById("intel-show-all");
+      if (showAllBtn) {
+        showAllBtn.addEventListener("click", function() {
+          _intelActiveDim = "all";
+          _renderScorecard(d, "all");
+          renderIntelFindings(d.findings || [], "all", null);
+        });
+      }
     }
 
     function loadIntelHistory() {
@@ -1759,91 +1853,118 @@
       });
     }
 
-    function renderIntelFindings(findings, dimFilter) {
+    function renderIntelFindings(findings, dimFilter, sevFilter) {
       var el = document.getElementById("intelligence-content");
       var filtered = dimFilter === "all" ? findings : findings.filter(function(f) { return f.dimension === dimFilter; });
+      // _urgent = critical + high only (default view)
+      if (sevFilter === "_urgent") {
+        filtered = filtered.filter(function(f) { return f.severity === "critical" || f.severity === "high"; });
+      } else if (sevFilter) {
+        filtered = filtered.filter(function(f) { return f.severity === sevFilter; });
+      }
       if (filtered.length === 0) {
-        el.innerHTML = '<p class="tab-empty">No findings for this dimension.</p>';
+        if (dimFilter !== "all" && _intelData && _intelData.dimension_scores && _intelData.dimension_scores[dimFilter]) {
+          var ds = _intelData.dimension_scores[dimFilter];
+          var gColor = _gradeColors[ds.grade] || "var(--color-text-dim)";
+          var dimLabel = dimFilter.replace(/_/g, " ");
+          var confNote = ds.confidence === "low" || ds.confidence === "none"
+            ? '<div style="margin-top:6px;font-size:var(--text-xs);color:var(--color-text-dim);">Limited data available for this dimension.</div>'
+            : '';
+          var desc = _gradeSummary(ds.grade, dimLabel, ds.score);
+          el.innerHTML = '<div style="padding:var(--space-4);font-family:var(--font-body);text-align:center;">'
+            + '<div style="font-size:48px;font-weight:700;color:' + gColor + ';font-family:var(--font-heading);">' + esc(ds.grade) + '</div>'
+            + '<div style="font-size:var(--text-lg);font-weight:600;margin-top:4px;">' + esc(dimLabel) + ' — ' + ds.score + '/100</div>'
+            + '<div style="margin-top:8px;font-size:var(--text-sm);color:var(--color-text);max-width:500px;margin-left:auto;margin-right:auto;">' + desc + '</div>'
+            + confNote
+            + '<div style="margin-top:12px;font-size:var(--text-xs);color:var(--color-text-dim);">No issues detected by the intelligence engine.</div>'
+            + '</div>';
+        } else {
+          el.innerHTML = '<p class="tab-empty" style="padding:var(--space-4);font-family:var(--font-body);">' + (dimFilter === "all" ? "No findings." : "No findings for " + dimFilter.replace(/_/g, " ") + ".") + '</p>';
+        }
         return;
       }
       var sevColors = {critical: "var(--color-incorrect)", high: "#e67e22", medium: "var(--color-mastery-stabilizing)", low: "var(--color-text-dim)"};
-      var sevIcons = {critical: "\u26a0", high: "\u25cf", medium: "\u25cb", low: "\u2139"};
-      var html = '<div style="display:flex;flex-direction:column;gap:var(--space-2);">';
-      filtered.forEach(function(f, idx) {
-        var color = sevColors[f.severity] || "var(--color-text-dim)";
-        var icon = sevIcons[f.severity] || "";
-        html += '<div style="padding:var(--space-3);background:var(--color-surface);border-left:4px solid ' + color + ';font-family:var(--font-body);font-size:var(--text-sm);">';
-        html += '<div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:var(--space-1);">';
-        html += '<div style="flex:1;min-width:200px;">';
-        html += '<span style="color:' + color + ';margin-right:6px;font-size:var(--text-base);">' + icon + '</span>';
-        html += '<strong>' + esc(f.title) + '</strong>';
-        html += ' <span class="badge badge-info" style="font-size:10px;margin-left:6px;">' + esc(f.dimension) + '</span>';
-        html += '</div>';
-        html += '<span class="badge" style="background:' + color + ';color:#fff;font-size:10px;">' + esc(f.severity) + '</span>';
-        html += '</div>';
-
-        // Analysis
-        html += '<div style="margin-top:6px;color:var(--color-text);">' + esc(f.analysis) + '</div>';
-
-        // Recommendation
-        html += '<div style="margin-top:4px;color:var(--color-text-dim);font-size:var(--text-xs);"><strong>Recommendation:</strong> ' + esc(f.recommendation) + '</div>';
-
-        // Impact
-        if (f.impact) {
-          html += '<div style="margin-top:2px;color:var(--color-text-faint,var(--color-text-dim));font-size:var(--text-xs);"><strong>Impact:</strong> ' + esc(f.impact) + '</div>';
-        }
-
-        // Files
-        if (f.files && f.files.length > 0) {
-          html += '<div style="margin-top:2px;color:var(--color-text-faint,var(--color-text-dim));font-size:var(--text-xs);"><strong>Files:</strong> ' + esc(f.files.join(", ")) + '</div>';
-        }
-
-        // Claude Code prompt buttons
-        if (f.claude_prompt) {
-          html += '<div style="margin-top:8px;display:flex;gap:8px;">';
-          html += '<button class="intel-copy-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:#fff;border:none;cursor:pointer;border-radius:3px;">Copy Claude Code prompt</button>';
-          html += '<button class="intel-expand-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;border-radius:3px;">View prompt</button>';
-          html += '</div>';
-          html += '<pre class="intel-prompt-preview" id="intel-prompt-' + idx + '" style="display:none;margin-top:8px;padding:var(--space-2);background:var(--color-base);font-size:var(--text-xs);white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;border:1px solid var(--color-divider);color:var(--color-text);">' + esc(f.claude_prompt) + '</pre>';
-        }
+      var sevLabels = {critical: "Critical", high: "High", medium: "Medium", low: "Low"};
+      // Group by severity for display
+      var grouped = {};
+      filtered.forEach(function(f) {
+        var s = f.severity || "low";
+        if (!grouped[s]) grouped[s] = [];
+        grouped[s].push(f);
+      });
+      var html = '';
+      var globalIdx = 0;
+      ["critical", "high", "medium", "low"].forEach(function(sev) {
+        if (!grouped[sev]) return;
+        var color = sevColors[sev];
+        html += '<div style="margin-bottom:var(--space-3);">';
+        html += '<div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:600;color:' + color + ';text-transform:uppercase;letter-spacing:0.05em;padding:var(--space-1) 0;border-bottom:1px solid var(--color-divider);margin-bottom:6px;">' + sevLabels[sev] + ' (' + grouped[sev].length + ')</div>';
+        grouped[sev].forEach(function(f) {
+          var idx = globalIdx++;
+          var rec = f.recommendation || f.claude_prompt || "";
+          var hasPrompt = f.claude_prompt && f.claude_prompt.length > 0;
+          html += '<details class="intel-finding" style="margin-bottom:4px;background:var(--color-surface);border-left:3px solid ' + color + ';">';
+          html += '<summary style="padding:10px 12px;cursor:pointer;font-family:var(--font-body);font-size:var(--text-sm);display:flex;align-items:baseline;gap:8px;list-style:none;">';
+          html += '<span style="flex:1;font-weight:500;color:var(--color-text);">' + esc(f.title) + '</span>';
+          if (dimFilter === "all") {
+            html += '<span style="font-size:10px;color:var(--color-text-dim);white-space:nowrap;">' + esc(f.dimension.replace(/_/g, " ")) + '</span>';
+          }
+          html += '</summary>';
+          html += '<div style="padding:0 12px 12px;font-family:var(--font-body);font-size:var(--text-sm);">';
+          // Analysis
+          html += '<div style="color:var(--color-text);margin-bottom:8px;">' + esc(f.analysis) + '</div>';
+          // Recommendation (always show — fall back to claude_prompt or analysis)
+          if (rec) {
+            html += '<div style="background:var(--color-base);padding:8px 10px;margin-bottom:8px;font-size:var(--text-xs);color:var(--color-text);">';
+            html += '<strong style="color:' + color + ';">Recommendation:</strong> ' + esc(rec);
+            html += '</div>';
+          }
+          // Impact + Files on one line
+          var meta = [];
+          if (f.impact) meta.push(esc(f.impact));
+          if (f.files && f.files.length > 0) meta.push(esc(f.files.join(", ")));
+          if (meta.length > 0) {
+            html += '<div style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:8px;">' + meta.join(" \u00b7 ") + '</div>';
+          }
+          // Action button: copy prompt
+          if (hasPrompt) {
+            html += '<div style="display:flex;gap:8px;align-items:center;">';
+            html += '<button class="intel-copy-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Copy prompt</button>';
+            html += '<button class="intel-expand-btn" data-idx="' + idx + '" style="padding:4px 12px;font-size:var(--text-xs);font-family:var(--font-body);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">View</button>';
+            html += '</div>';
+            html += '<pre class="intel-prompt-preview" id="intel-prompt-' + idx + '" style="display:none;margin-top:8px;padding:8px;background:var(--color-base);font-size:var(--text-xs);white-space:pre-wrap;word-break:break-word;max-height:180px;overflow-y:auto;border:1px solid var(--color-divider);color:var(--color-text);">' + esc(f.claude_prompt) + '</pre>';
+          }
+          html += '</div></details>';
+        });
         html += '</div>';
       });
-      html += '</div>';
       el.innerHTML = html;
 
       // Wire copy buttons
       el.querySelectorAll(".intel-copy-btn").forEach(function(btn) {
-        btn.addEventListener("click", function() {
+        btn.addEventListener("click", function(e) {
+          e.stopPropagation();
           var i = parseInt(btn.dataset.idx);
-          var prompt = filtered[i].claude_prompt;
-          if (navigator.clipboard) {
+          var prompt = filtered[i] ? filtered[i].claude_prompt : "";
+          if (navigator.clipboard && prompt) {
             navigator.clipboard.writeText(prompt).then(function() {
               btn.textContent = "Copied!";
-              setTimeout(function() { btn.textContent = "Copy Claude Code prompt"; }, 2000);
+              setTimeout(function() { btn.textContent = "Copy prompt"; }, 1500);
             });
-          } else {
-            var ta = document.createElement("textarea");
-            ta.value = prompt;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-            btn.textContent = "Copied!";
-            setTimeout(function() { btn.textContent = "Copy Claude Code prompt"; }, 2000);
           }
         });
       });
-
       // Wire expand buttons
       el.querySelectorAll(".intel-expand-btn").forEach(function(btn) {
-        btn.addEventListener("click", function() {
+        btn.addEventListener("click", function(e) {
+          e.stopPropagation();
           var pre = document.getElementById("intel-prompt-" + btn.dataset.idx);
           if (pre.style.display === "none") {
             pre.style.display = "block";
-            btn.textContent = "Hide prompt";
+            btn.textContent = "Hide";
           } else {
             pre.style.display = "none";
-            btn.textContent = "View prompt";
+            btn.textContent = "View";
           }
         });
       });
@@ -1856,18 +1977,88 @@
       if (!queue || queue.length === 0) { wrap.style.display = "none"; return; }
       wrap.style.display = "block";
       var escColors = {emergency:"#c0392b",escalate:"#e74c3c",alert:"#e67e22",nudge:"#f39c12",quiet:"var(--color-text-dim)"};
-      var classIcons = {auto_fix:"\u2699",informed_fix:"\u2139",judgment_call:"\u2696",values_decision:"\u2764",investigation:"\ud83d\udd0d"};
+      var classIcons = {auto_fix:"\u2699\ufe0f",informed_fix:"\u2139\ufe0f",judgment_call:"\u2696\ufe0f",values_decision:"\u2764\ufe0f",investigation:"\ud83d\udd0d"};
       var html = '';
       queue.slice(0,15).forEach(function(item) {
         var ec = escColors[item.escalation_level] || "var(--color-text-dim)";
         var ci = classIcons[item.decision_class] || "";
-        html += '<div style="padding:var(--space-2) var(--space-3);background:var(--color-surface);border-left:4px solid '+ec+';font-family:var(--font-body);font-size:var(--text-sm);display:flex;align-items:center;gap:var(--space-2);">';
-        html += '<span style="font-size:18px;" title="'+esc(item.decision_class)+'">'+ci+'</span>';
-        html += '<div style="flex:1;"><strong>'+esc(item.title)+'</strong>';
+        var ctx = item.context || {};
+        var f = item.finding || {};
+
+        html += '<details style="background:var(--color-surface);border-left:4px solid '+ec+';font-family:var(--font-body);font-size:var(--text-sm);">';
+        html += '<summary style="padding:var(--space-2) var(--space-3);cursor:pointer;display:flex;align-items:center;gap:var(--space-2);list-style:none;">';
+        html += '<span style="font-size:18px;flex-shrink:0;" title="'+esc(item.decision_class)+'">'+ci+'</span>';
+        html += '<div style="flex:1;min-width:0;"><strong>'+esc(item.title)+'</strong>';
         html += ' <span class="badge badge-info" style="font-size:9px;">'+esc(item.dimension)+'</span></div>';
-        html += '<span class="badge" style="background:'+ec+';color:#fff;font-size:10px;">'+esc(item.escalation_level)+'</span>';
-        html += '<span class="badge" style="font-size:9px;border:1px solid var(--color-divider);color:var(--color-text-dim);">'+esc(item.decision_class)+'</span>';
+        html += '<span class="badge" style="background:'+ec+';color:#fff;font-size:10px;flex-shrink:0;">'+esc(item.escalation_level)+'</span>';
+        html += '<span class="badge" style="font-size:9px;border:1px solid var(--color-divider);color:var(--color-text-dim);flex-shrink:0;">'+esc(item.decision_class.replace(/_/g," "))+'</span>';
+        html += '<span class="dq-chevron" style="font-size:10px;color:var(--color-text-dim);flex-shrink:0;transition:transform .2s;">&#9660;</span>';
+        html += '</summary>';
+
+        /* Expanded content */
+        html += '<div style="padding:var(--space-2) var(--space-3);padding-top:0;border-top:1px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--text-xs);">';
+
+        /* Why now */
+        if (ctx.why_now) {
+          html += '<div style="margin-top:var(--space-2);"><strong style="color:var(--color-text-dim);">Why now:</strong> '+esc(ctx.why_now)+'</div>';
+        }
+
+        /* Severity + approval */
+        html += '<div>';
+        if (item.severity) {
+          var sevC = {critical:"var(--color-incorrect)",high:"#e67e22",medium:"var(--color-mastery-stabilizing)",low:"var(--color-text-dim)"}[item.severity] || "var(--color-text-dim)";
+          html += '<span style="color:'+sevC+';font-weight:600;text-transform:uppercase;">'+esc(item.severity)+'</span>';
+        }
+        if (item.requires_approval) html += ' &middot; <span style="color:var(--color-text-dim);">Requires approval</span>';
+        else html += ' &middot; <span style="color:var(--color-correct);">Auto-fixable</span>';
         html += '</div>';
+
+        /* Recommendation */
+        var rec = f.recommendation || f.claude_prompt || "";
+        if (rec) {
+          html += '<div><strong style="color:var(--color-text-dim);">Recommendation:</strong><br>'+esc(rec)+'</div>';
+        }
+
+        /* Benchmarks */
+        if (ctx.benchmarks && ctx.benchmarks.length > 0) {
+          html += '<div><strong style="color:var(--color-text-dim);">Benchmarks:</strong>';
+          ctx.benchmarks.forEach(function(b) {
+            var val = Array.isArray(b.value) ? b.value.join(", ") : b.value;
+            html += '<br>&bull; '+esc(b.label)+': '+esc(String(val));
+            if (b.source) html += ' <span style="color:var(--color-text-dim);">('+esc(b.source)+')</span>';
+            if (b.stale) html += ' <span style="color:#e67e22;">[stale]</span>';
+          });
+          html += '</div>';
+        }
+
+        /* Cohort breakdowns */
+        if (ctx.cohort_breakdowns && ctx.cohort_breakdowns.length > 0) {
+          html += '<div><strong style="color:var(--color-text-dim);">Cohorts:</strong>';
+          ctx.cohort_breakdowns.forEach(function(c) {
+            html += '<br>&bull; '+esc(c.label || c.cohort || "")+': '+esc(String(c.value != null ? c.value : c.metric || ""));
+          });
+          html += '</div>';
+        }
+
+        /* Correlations */
+        if (ctx.correlations && ctx.correlations.length > 0) {
+          html += '<div><strong style="color:var(--color-text-dim);">Related findings:</strong>';
+          ctx.correlations.forEach(function(c) {
+            html += '<br>&bull; '+esc(c.title || c);
+          });
+          html += '</div>';
+        }
+
+        /* Options */
+        if (ctx.options && ctx.options.length > 0) {
+          html += '<div><strong style="color:var(--color-text-dim);">Options:</strong>';
+          ctx.options.forEach(function(o) {
+            html += '<br>&bull; '+esc(o.label || o.description || o);
+          });
+          html += '</div>';
+        }
+
+        html += '</div></details>';
       });
       el.innerHTML = html;
     }

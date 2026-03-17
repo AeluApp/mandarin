@@ -15,7 +15,6 @@ import json
 import logging
 import math
 import sqlite3
-import uuid
 from datetime import datetime, timezone
 
 from ._base import _safe_scalar, _safe_query, _safe_query_all
@@ -283,9 +282,9 @@ def _upsert_metric(conn, metric_type, value, measured_at, details=None):
     """Insert a quality_metric row."""
     try:
         conn.execute(
-            """INSERT INTO quality_metric (id, metric_type, value, details, measured_at)
-               VALUES (?, ?, ?, ?, ?)""",
-            (str(uuid.uuid4()), metric_type, value, details, measured_at))
+            """INSERT INTO quality_metric (metric_type, value, details, measured_at)
+               VALUES (?, ?, ?, ?)""",
+            (metric_type, value, details, measured_at))
     except sqlite3.OperationalError:
         pass
 
@@ -298,9 +297,9 @@ def _insert_spc_observation(conn, chart_type, value, observed_at):
             (chart_type, observed_at)).fetchone()
         if not existing:
             conn.execute(
-                """INSERT INTO spc_observation (id, chart_type, value, subgroup_size, observed_at)
-                   VALUES (?, ?, ?, 1, ?)""",
-                (str(uuid.uuid4()), chart_type, value, observed_at))
+                """INSERT INTO spc_observation (chart_type, value, subgroup_size, observed_at)
+                   VALUES (?, ?, 1, ?)""",
+                (chart_type, value, observed_at))
     except sqlite3.OperationalError:
         pass
 

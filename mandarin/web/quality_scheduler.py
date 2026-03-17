@@ -218,6 +218,10 @@ def _collect_metrics():
 
         conn.commit()
 
+    # ── Intelligence automation loop ──
+    # Runs after quality metrics are collected so audit has fresh data.
+    _run_intelligence_loop()
+
 
 def _auto_identify_risks(conn):
     """Check system metrics and auto-create risk_item entries.
@@ -441,3 +445,128 @@ def _link_spc_to_risk(conn, chart_type, violations, obs_id):
             logger.info("SPC-to-risk: created risk item for %s violation", chart_type)
     except Exception:
         logger.debug("SPC-to-risk linking failed for %s", chart_type)
+
+
+def _run_intelligence_loop():
+    """Run the full intelligence automation loop.
+
+    1. Run product audit (which generates findings, advisors, work orders internally)
+    2. Auto-execute safe prescriptions on the new work order
+    3. Score past predictions and auto-verify/close work orders + findings
+    """
+    from .. import db
+
+    try:
+        with db.connection() as conn:
+            # 1. Run product audit (includes work order generation internally)
+            from ..intelligence import run_product_audit
+            audit_result = run_product_audit(conn)
+            work_order_data = audit_result.get("work_order")
+
+            logger.info(
+                "Intelligence loop: audit complete — %d findings, overall %s",
+                len(audit_result.get("findings", [])),
+                audit_result.get("overall", {}).get("score", "?"),
+            )
+
+            # 2. Auto-execute safe prescriptions on the new work order
+            if work_order_data and work_order_data.get("id"):
+                wo_id = work_order_data["id"]
+                try:
+                    from ..ai.agentic import execute_prescription
+                    exec_result = execute_prescription(conn, wo_id)
+                    if exec_result.get("status") == "executed":
+                        logger.info(
+                            "Intelligence loop: auto-executed prescription for WO #%d — %s",
+                            wo_id, exec_result,
+                        )
+                        # Auto-advance finding lifecycle for executed prescriptions
+                        from ..intelligence.prescription import mark_work_order_implemented
+                        mark_work_order_implemented(
+                            conn, wo_id,
+                            notes=f"Auto-executed by intelligence loop: {exec_result}",
+                        )
+                    elif exec_result.get("status") == "requires_human":
+                        logger.info(
+                            "Intelligence loop: WO #%d requires human action", wo_id,
+                        )
+                except Exception:
+                    logger.debug("Intelligence loop: prescription execution failed", exc_info=True)
+
+            # 3. Score past predictions + auto-verify work orders
+            try:
+                from ..intelligence.feedback_loops import record_prediction_outcomes
+                outcomes = record_prediction_outcomes(conn)
+                if outcomes:
+                    logger.info("Intelligence loop: scored %d predictions", len(outcomes))
+                    _auto_verify_work_orders(conn, outcomes)
+            except Exception:
+                logger.debug("Intelligence loop: prediction scoring failed", exc_info=True)
+
+    except Exception:
+        logger.exception("Intelligence automation loop failed")
+
+
+def _auto_verify_work_orders(conn, prediction_outcomes):
+    """Auto-transition work orders based on prediction outcomes.
+
+    When a prediction is scored:
+    - correct / directionally_correct → work order 'succeeded', finding → 'verified' → 'resolved'
+    - wrong → work order 'failed', finding stays at 'implemented'
+    """
+    from datetime import datetime as _dt, timezone as _tz
+    from ..intelligence._base import _safe_query
+    from ..intelligence.finding_lifecycle import transition_finding
+
+    for outcome in prediction_outcomes:
+        prediction_id = outcome.get("prediction_id")
+        outcome_class = outcome.get("outcome_class")
+        if not prediction_id or outcome_class in ("insufficient_data",):
+            continue
+
+        # Find the work order linked to this prediction
+        wo = _safe_query(conn, """
+            SELECT id, finding_id, status FROM pi_work_order
+            WHERE prediction_id = ? AND status = 'verifying'
+        """, (prediction_id,))
+        if not wo:
+            continue
+
+        now_str = _dt.now(_tz.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+        if outcome_class in ("correct", "directionally_correct"):
+            # Success: mark work order succeeded + auto-close finding
+            try:
+                conn.execute("""
+                    UPDATE pi_work_order SET status = 'succeeded', verified_at = ?,
+                           outcome_notes = ?
+                    WHERE id = ?
+                """, (now_str, f"Auto-verified: prediction {outcome_class}", wo["id"]))
+
+                # Advance finding: implemented → verified → resolved
+                transition_finding(conn, wo["finding_id"], "verified")
+                transition_finding(conn, wo["finding_id"], "resolved",
+                                   notes=f"Auto-resolved: prediction {outcome_class}")
+                conn.commit()
+                logger.info(
+                    "Intelligence loop: WO #%d auto-verified (%s), finding #%d resolved",
+                    wo["id"], outcome_class, wo["finding_id"],
+                )
+            except Exception:
+                logger.debug("Auto-verify failed for WO #%d", wo["id"], exc_info=True)
+
+        elif outcome_class == "wrong":
+            # Failure: mark work order failed, finding stays for re-investigation
+            try:
+                conn.execute("""
+                    UPDATE pi_work_order SET status = 'failed', verified_at = ?,
+                           outcome_notes = ?
+                    WHERE id = ?
+                """, (now_str, "Auto-failed: prediction was wrong", wo["id"]))
+                conn.commit()
+                logger.info(
+                    "Intelligence loop: WO #%d auto-failed (prediction wrong)",
+                    wo["id"],
+                )
+            except Exception:
+                logger.debug("Auto-fail update failed for WO #%d", wo["id"], exc_info=True)

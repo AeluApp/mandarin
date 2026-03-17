@@ -476,10 +476,13 @@ _AUTO_EXECUTABLE_ACTIONS = {
     "recalibrate_fsrs",     # Run FSRS calibration
     "refresh_rag",          # Refresh RAG knowledge base
     "update_difficulty",    # Adjust difficulty parameters
+    "apply_parameter",      # Auto-apply parameter change (high-confidence influence model)
 }
 
 
-def classify_prescription(instruction: str, target_parameter: str = None) -> str:
+def classify_prescription(instruction: str, target_parameter: str = None,
+                          confidence_label: str = None,
+                          instruction_source: str = None) -> str:
     """Classify whether a prescription is auto-executable or requires human judgment."""
     instruction_lower = (instruction or "").lower()
 
@@ -491,6 +494,12 @@ def classify_prescription(instruction: str, target_parameter: str = None) -> str
         return "refresh_rag"
     if "difficulty" in instruction_lower and ("adjust" in instruction_lower or "update" in instruction_lower):
         return "update_difficulty"
+
+    # High-confidence parameter changes from the influence model can be auto-applied
+    if (instruction_source == "influence_model"
+            and confidence_label == "high"
+            and target_parameter):
+        return "apply_parameter"
 
     return "requires_human"
 
@@ -516,7 +525,19 @@ def execute_prescription(conn: sqlite3.Connection, work_order_id: int) -> dict:
         target_param = wo["target_parameter"]
     except (IndexError, KeyError):
         target_param = None
-    action_type = classify_prescription(instruction, target_param)
+    try:
+        confidence_label = wo["confidence_label"]
+    except (IndexError, KeyError):
+        confidence_label = None
+    try:
+        instruction_source = wo["instruction_source"]
+    except (IndexError, KeyError):
+        instruction_source = None
+    action_type = classify_prescription(
+        instruction, target_param,
+        confidence_label=confidence_label,
+        instruction_source=instruction_source,
+    )
 
     if action_type not in _AUTO_EXECUTABLE_ACTIONS:
         return {"status": "requires_human", "action_type": action_type}
@@ -574,7 +595,73 @@ def _execute_action(conn: sqlite3.Connection, action_type: str, work_order) -> d
     elif action_type == "update_difficulty":
         return {"status": "executed", "note": "difficulty update requires specific parameters"}
 
+    elif action_type == "apply_parameter":
+        return _execute_parameter_change(conn, work_order)
+
     return {"status": "unknown_action"}
+
+
+def _execute_parameter_change(conn: sqlite3.Connection, work_order) -> dict:
+    """Auto-apply a parameter change from a high-confidence influence model recommendation.
+
+    Parses the instruction for the recommended value and records the change
+    via the parameter registry so the influence model can learn from it.
+    """
+    try:
+        target_file = work_order["target_file"]
+        target_param = work_order["target_parameter"]
+        direction = work_order["direction"]
+
+        if not target_param:
+            return {"status": "error", "reason": "no target_parameter specified"}
+
+        # Use the change generator to get the specific recommended value
+        from ..intelligence.change_generator import generate_specific_change
+        finding_id = work_order["finding_id"]
+
+        finding_row = conn.execute(
+            "SELECT * FROM pi_finding WHERE id = ?", (finding_id,)
+        ).fetchone()
+        if not finding_row:
+            return {"status": "error", "reason": "finding not found"}
+
+        change = generate_specific_change(conn, {
+            "dimension": finding_row["dimension"],
+            "title": finding_row["title"],
+            "severity": finding_row["severity"],
+            "id": finding_id,
+        })
+
+        if not change or change.influence_confidence < 0.70:
+            return {"status": "error", "reason": "influence model confidence too low for auto-apply"}
+
+        # Record the parameter change so the influence model learns
+        from ..intelligence.parameter_registry import record_parameter_change
+        record_parameter_change(
+            conn,
+            parameter_name=change.parameter_name,
+            old_value=str(change.current_value),
+            new_value=str(change.recommended_value),
+            changed_by="auto_intelligence_loop",
+            work_order_id=work_order["id"],
+        )
+
+        return {
+            "status": "executed",
+            "parameter": change.parameter_name,
+            "file": change.file_path,
+            "old_value": change.current_value,
+            "new_value": change.recommended_value,
+            "direction": change.direction,
+            "confidence": change.influence_confidence,
+            "note": f"Auto-applied: {change.specific_change}",
+        }
+
+    except (ImportError, AttributeError) as e:
+        return {"status": "error", "reason": f"change generator unavailable: {e}"}
+    except Exception as e:
+        logger.warning("Auto parameter change failed: %s", e)
+        return {"status": "error", "reason": str(e)}
 
 
 # ─────────────────────────────────────────────
