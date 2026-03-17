@@ -13,6 +13,15 @@ from .validation import validate_generated_content
 
 logger = logging.getLogger(__name__)
 
+# HSK 4-5 produce medium-complexity passages that need more output tokens than
+# low HSK (short) or high HSK (cached from prior runs).  Scale token budget by
+# level so Qwen doesn't truncate mid-JSON.
+_MAX_TOKENS_BY_HSK = {
+    1: 2048, 2: 2048, 3: 2048,
+    4: 4096, 5: 4096,
+    6: 4096, 7: 4096, 8: 4096, 9: 4096,
+}
+
 READING_CONTENT_SYSTEM = """You are a skilled Mandarin Chinese content writer. Generate a graded reading passage.
 
 Output ONLY valid JSON with these fields:
@@ -49,11 +58,13 @@ def generate_reading_passage(
         target_hsk_level, target_vocabulary or [], topic, length_characters, content_lens,
     )
 
+    max_tokens = _MAX_TOKENS_BY_HSK.get(target_hsk_level, 4096)
+
     response = generate(
         prompt=prompt,
         system=READING_CONTENT_SYSTEM,
         temperature=0.8,
-        max_tokens=2048,
+        max_tokens=max_tokens,
         use_cache=True,
         conn=conn,
         task_type="reading_generation",
@@ -63,6 +74,22 @@ def generate_reading_passage(
         return None
 
     passage = _parse_passage_response(response.text)
+
+    # Retry once with higher token budget + lower temperature on parse failure
+    if passage is None and max_tokens < 6144:
+        logger.info("Reading passage parse failed for HSK %d, retrying with more tokens", target_hsk_level)
+        response = generate(
+            prompt=prompt + "\n\nIMPORTANT: Output complete, valid JSON. Close all brackets.",
+            system=READING_CONTENT_SYSTEM,
+            temperature=0.6,
+            max_tokens=6144,
+            use_cache=False,  # Don't use the cached truncated response
+            conn=conn,
+            task_type="reading_generation_retry",
+        )
+        if response.success:
+            passage = _parse_passage_response(response.text)
+
     if passage is None:
         return None
 
@@ -82,28 +109,115 @@ def _build_reading_prompt(
 ) -> str:
     parts = [f"Generate a reading passage for HSK level {hsk_level}."]
     parts.append(f"Target length: approximately {length} characters.")
+
+    # Constrain output size to reduce truncation risk at mid-levels
+    if hsk_level <= 3:
+        parts.append("Include 5-8 vocabulary items and 2-3 comprehension questions.")
+    elif hsk_level <= 5:
+        parts.append("Include 6-10 vocabulary items and 2-3 comprehension questions.")
+        parts.append("Keep vocabulary entries concise — one-line English translations.")
+    else:
+        parts.append("Include 8-12 vocabulary items and 3-4 comprehension questions.")
+
     if vocabulary:
         parts.append(f"Include these words: {', '.join(vocabulary)}")
     if topic:
         parts.append(f"Topic: {topic}")
     if content_lens:
         parts.append(f"Content approach: {content_lens}")
-    parts.append("Output JSON only, no markdown fences.")
+    parts.append("Output JSON only, no markdown fences. Ensure all brackets and braces are closed.")
     return "\n".join(parts)
 
 
+def _repair_json(text: str) -> str:
+    """Best-effort repair of common LLM JSON mistakes."""
+    # Missing commas between string array elements
+    text = re.sub(r'"\s*\n(\s*")', r'",\n\1', text)
+    # Missing commas between object/array elements
+    text = re.sub(r'(\})\s*\n(\s*\{)', r'\1,\n\2', text)
+    text = re.sub(r'(\])\s*\n(\s*\[)', r'\1,\n\2', text)
+    # Missing comma after number before key
+    text = re.sub(r'(\d)\s*\n(\s*")', r'\1,\n\2', text)
+    # Trailing commas before closing brackets
+    text = re.sub(r',\s*(\])', r'\1', text)
+    text = re.sub(r',\s*(\})', r'\1', text)
+    # Single quotes → double quotes (best effort)
+    if "'" in text and '"' not in text[:20]:
+        text = text.replace("'", '"')
+    return text
+
+
+def _recover_truncated_json(text: str) -> Optional[str]:
+    """Attempt to close truncated JSON by balancing brackets/braces.
+
+    Works for the common case where Qwen output is cut mid-value or
+    mid-array.  Strips back to the last complete value, then closes
+    all open delimiters.
+    """
+    # Strip trailing partial string value (cut mid-word)
+    text = re.sub(r',\s*"[^"]*$', '', text)       # trailing key with no value
+    text = re.sub(r':\s*"[^"]*$', ': ""', text)    # key: "partial  → key: ""
+    text = re.sub(r',\s*$', '', text)               # trailing comma
+
+    # Count unmatched delimiters
+    opens = []
+    in_string = False
+    escape = False
+    for ch in text:
+        if escape:
+            escape = False
+            continue
+        if ch == '\\' and in_string:
+            escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch in ('{', '['):
+            opens.append(ch)
+        elif ch == '}' and opens and opens[-1] == '{':
+            opens.pop()
+        elif ch == ']' and opens and opens[-1] == '[':
+            opens.pop()
+
+    if not opens:
+        return text  # Already balanced
+
+    # Close in reverse order
+    closers = {'[': ']', '{': '}'}
+    suffix = ''.join(closers[o] for o in reversed(opens))
+    return text + suffix
+
+
 def _parse_passage_response(content: str) -> Optional[dict]:
-    """Parse JSON from LLM response."""
+    """Parse JSON from LLM response with repair and truncation recovery."""
     text = content.strip()
     text = re.sub(r'^```(?:json)?\s*', '', text)
     text = re.sub(r'\s*```$', '', text)
     text = text.strip()
 
+    # Attempt 1: direct parse
     try:
         data = json.loads(text)
     except (json.JSONDecodeError, ValueError):
-        logger.warning("Failed to parse reading response as JSON: %s", text[:200])
-        return None
+        # Attempt 2: lightweight repair
+        try:
+            data = json.loads(_repair_json(text))
+        except (json.JSONDecodeError, ValueError):
+            # Attempt 3: truncation recovery
+            recovered = _recover_truncated_json(_repair_json(text))
+            if recovered:
+                try:
+                    data = json.loads(recovered)
+                    logger.info("Recovered truncated reading passage JSON")
+                except (json.JSONDecodeError, ValueError):
+                    logger.warning("Failed to parse reading response as JSON (even after repair): %s", text[:200])
+                    return None
+            else:
+                logger.warning("Failed to parse reading response as JSON: %s", text[:200])
+                return None
 
     for field in ("title", "body", "pinyin_body"):
         if not data.get(field):
@@ -114,20 +228,45 @@ def _parse_passage_response(content: str) -> Optional[dict]:
 
 
 def _persist_reading_passage(conn, passage: dict, hsk_level: int, content_lens: str) -> None:
-    """Append passage to reading_passages.json (existing flat-file pattern)."""
+    """Persist passage to reading_texts table and reading_passages.json."""
+    passage["source"] = "ai_generated"
+    passage["hsk_level"] = hsk_level
+    if content_lens:
+        passage["content_lens"] = content_lens
+
+    # Primary: insert into reading_texts table (what the analyzer checks)
     try:
-        passages = []
+        title = passage.get("title", "")
+        body = passage.get("body", "")
+        pinyin = passage.get("pinyin_body", "")
+        word_count = len(body)
+
+        conn.execute("""
+            INSERT INTO reading_texts
+            (title, content_hanzi, content_pinyin, word_count, hsk_ceiling,
+             source, approved, approved_at)
+            VALUES (?, ?, ?, ?, ?, 'ai_generated', 0, NULL)
+        """, (title, body, pinyin, word_count, hsk_level))
+        conn.commit()
+    except Exception:
+        logger.debug("Failed to persist reading passage to DB", exc_info=True)
+
+    # Secondary: append to flat file (backward compat)
+    try:
+        data = {"passages": []}
         if _READING_PASSAGES_PATH.exists():
             with open(_READING_PASSAGES_PATH, "r", encoding="utf-8") as f:
-                passages = json.load(f)
+                raw = json.load(f)
+                if isinstance(raw, dict):
+                    data = raw
+                    if "passages" not in data:
+                        data["passages"] = []
+                elif isinstance(raw, list):
+                    data = {"passages": raw}
 
-        passage["source"] = "ai_generated"
-        passage["hsk_level"] = hsk_level
-        if content_lens:
-            passage["content_lens"] = content_lens
-        passages.append(passage)
+        data["passages"].append(passage)
 
         with open(_READING_PASSAGES_PATH, "w", encoding="utf-8") as f:
-            json.dump(passages, f, ensure_ascii=False, indent=2)
+            json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception:
-        logger.debug("Failed to persist reading passage", exc_info=True)
+        logger.debug("Failed to persist reading passage to JSON", exc_info=True)

@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 104  # Increment when adding migrations
+SCHEMA_VERSION = 105  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6168,6 +6168,43 @@ def _migrate_v103_to_v104(conn):
     conn.commit()
 
 
+def _migrate_v104_to_v105(conn):
+    """Add content_reaudit_log table for post-approval quality monitoring."""
+    tables = _table_set(conn)
+    if "content_reaudit_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS content_reaudit_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                content_item_id INTEGER NOT NULL,
+                audited_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+                audit_type TEXT NOT NULL DEFAULT 'scheduled',
+                passed INTEGER NOT NULL DEFAULT 1,
+                issues_found TEXT,
+                learner_accuracy REAL,
+                attempt_count INTEGER,
+                action_taken TEXT,
+                notes TEXT
+            );
+            CREATE INDEX IF NOT EXISTS idx_reaudit_item
+                ON content_reaudit_log(content_item_id);
+            CREATE INDEX IF NOT EXISTS idx_reaudit_passed
+                ON content_reaudit_log(passed, audited_at);
+        """)
+
+    # Add created_at to pi_ai_review_queue if missing (needed for latency calculation)
+    cols = _col_set(conn, "pi_ai_review_queue")
+    if "created_at" not in cols and "queued_at" not in cols:
+        try:
+            conn.execute("""
+                ALTER TABLE pi_ai_review_queue
+                ADD COLUMN created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+            """)
+        except sqlite3.OperationalError:
+            pass  # Column may already exist under different name
+
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6273,6 +6310,7 @@ MIGRATIONS = {
     101: _migrate_v101_to_v102,
     102: _migrate_v102_to_v103,
     103: _migrate_v103_to_v104,
+    104: _migrate_v104_to_v105,
 }
 
 

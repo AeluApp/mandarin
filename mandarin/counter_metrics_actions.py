@@ -335,6 +335,89 @@ ACTION_RULES = {
              "reason": "Sustained decline in real-world learning signal"},
         ],
     },
+
+    # ── Content quality alerts ──
+    "content_duplicate_rate": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "30%+ of generated items are duplicates of existing corpus. Generation prompts lack corpus awareness."},
+             "reason": "Wasting compute generating content that already exists"},
+        ],
+        "critical": [
+            {"type": "scheduler_adjust", "action": "pause_content_generation",
+             "params": {},
+             "reason": "Majority of generated items are duplicates — pause until prompts are improved"},
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "CONTENT WASTE: 50%+ of generated items are duplicates. Generation paused."},
+             "reason": "Critical waste of generation capacity"},
+        ],
+    },
+    "content_rejection_rate": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "20%+ of reviewed AI content is rejected. Check generation prompts for quality degradation."},
+             "reason": "High rejection rate indicates prompt or model quality issues"},
+        ],
+        "critical": [
+            {"type": "scheduler_adjust", "action": "pause_content_generation",
+             "params": {},
+             "reason": "35%+ rejection rate — prompts need revision before generating more"},
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "CONTENT QUALITY CRITICAL: 35%+ rejection rate. Generation paused pending prompt revision."},
+             "reason": "Generation quality below acceptable threshold"},
+        ],
+    },
+    "content_review_queue_depth": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "30+ items in AI review queue. Review backlog building up."},
+             "reason": "Governance throughput falling behind generation"},
+        ],
+        "critical": [
+            {"type": "scheduler_adjust", "action": "pause_content_generation",
+             "params": {},
+             "reason": "50+ items in review queue — pause generation to let governance catch up"},
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "REVIEW BACKLOG CRITICAL: 50+ items awaiting review. AI generation paused."},
+             "reason": "Governance cannot keep pace with generation"},
+        ],
+    },
+    "content_approval_latency_days": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "Median content review latency >7 days. Items may be going stale."},
+             "reason": "Slow reviews reduce content freshness and governance responsiveness"},
+        ],
+        "critical": [
+            {"type": "scheduler_adjust", "action": "pause_content_generation",
+             "params": {},
+             "reason": "Content sitting 14+ days without review — no point generating more"},
+        ],
+    },
+    "content_reaudit_failure_rate": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "10%+ of reaudited approved items fail. Initial review quality may be insufficient."},
+             "reason": "Approved content is not holding up under reaudit"},
+        ],
+        "critical": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "REVIEW INTEGRITY ALERT: 25%+ reaudit failure rate. Approved content contains significant errors."},
+             "reason": "Initial approval process is not catching quality problems"},
+        ],
+    },
+    "content_rubber_stamp_rate": {
+        "warn": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "30%+ of reviews completed in <5 seconds. Reviewer may not be reading content carefully."},
+             "reason": "Fast reviews indicate rubber-stamping rather than genuine quality review"},
+        ],
+        "critical": [
+            {"type": "notification", "action": "admin_alert",
+             "params": {"message": "REVIEW QUALITY ALERT: 50%+ of reviews are under 5 seconds. Approval is likely rubber-stamping."},
+             "reason": "Review process is not meaningful at this speed"},
+        ],
+    },
 }
 
 
@@ -546,13 +629,16 @@ def _action_feature_flag(conn: sqlite3.Connection, params: Dict,
 # ═══════════════════════════════════════════════════════════════════════
 
 def enforce_product_rules(assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """Check the 5 product rules and return any violations.
+    """Check the 6 product rules and return any violations.
 
     Rule 1: No learning KPI ships alone.
     Rule 2: No feature succeeds if it degrades delayed recall/transfer/trust.
     Rule 3: User-visible progress must be anchored to time-surviving evidence.
     Rule 4: Benchmark sets must include holdout tasks.
     Rule 5: Growth experiments must pass educational integrity check.
+    Rule 6: No AI-generated content enters the learner-facing corpus without
+             structural validation, semantic dedup, and human review (or
+             demonstrated prompt-type trust).
     """
     violations = []
 
@@ -612,6 +698,37 @@ def enforce_product_rules(assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
             "metric": "mastery_reversal_rate",
             "value": reversal,
             "action": "Tighten mastery promotion gates; add post-promotion review checkpoints",
+        })
+
+    # Rule 6: AI content governance
+    cq = assessment.get("content_quality", {})
+    rejection_rate = cq.get("content_rejection_rate", {}).get("rejection_rate")
+    reaudit_rate = cq.get("content_reaudit_failure_rate", {}).get("failure_rate")
+    rubber_rate = cq.get("approval_rubber_stamping", {}).get("rubber_stamp_rate")
+
+    if rejection_rate is not None and rejection_rate > 0.35:
+        violations.append({
+            "rule": 6,
+            "description": f"AI content rejection rate {rejection_rate:.0%} — generation quality below standard",
+            "metric": "content_rejection_rate",
+            "value": rejection_rate,
+            "action": "Pause AI content generation; revise prompts before resuming",
+        })
+    if reaudit_rate is not None and reaudit_rate > 0.25:
+        violations.append({
+            "rule": 6,
+            "description": f"Reaudit failure rate {reaudit_rate:.0%} — approved content contains errors",
+            "metric": "content_reaudit_failure_rate",
+            "value": reaudit_rate,
+            "action": "Route all approved AI content back through review; audit approval process",
+        })
+    if rubber_rate is not None and rubber_rate > 0.50:
+        violations.append({
+            "rule": 6,
+            "description": f"Review rubber-stamp rate {rubber_rate:.0%} — reviews are not meaningful",
+            "metric": "approval_rubber_stamping",
+            "value": rubber_rate,
+            "action": "Add minimum review time gate; require content-specific verification checkbox",
         })
 
     return violations

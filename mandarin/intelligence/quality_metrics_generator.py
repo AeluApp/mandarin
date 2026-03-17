@@ -15,6 +15,7 @@ import json
 import logging
 import math
 import sqlite3
+import uuid
 from datetime import datetime, timezone
 
 from ._base import _safe_scalar, _safe_query, _safe_query_all
@@ -29,9 +30,9 @@ def generate_quality_metrics(conn):
     # ── DPMO: Defects Per Million Opportunities ──
     # Defect = incorrect drill answer; opportunity = every drill attempt
     total_attempts = _safe_scalar(conn,
-        "SELECT COUNT(*) FROM review_event WHERE created_at > datetime('now', '-30 days')")
+        "SELECT COUNT(*) FROM review_event WHERE created_at > datetime('now', '-90 days')")
     total_errors = _safe_scalar(conn,
-        "SELECT COUNT(*) FROM review_event WHERE correct = 0 AND created_at > datetime('now', '-30 days')")
+        "SELECT COUNT(*) FROM review_event WHERE correct = 0 AND created_at > datetime('now', '-90 days')")
     if total_attempts > 0:
         dpmo = (total_errors / total_attempts) * 1_000_000
         _upsert_metric(conn, "dpmo", dpmo, now,
@@ -50,12 +51,12 @@ def generate_quality_metrics(conn):
     # Measure wasted time from: bounced sessions, early exits, error focus items
     bounced = _safe_scalar(conn,
         """SELECT COUNT(*) FROM session_log
-           WHERE session_outcome = 'bounced' AND started_at > datetime('now', '-30 days')""")
+           WHERE session_outcome = 'bounced' AND started_at > datetime('now', '-90 days')""")
     early_exits = _safe_scalar(conn,
         """SELECT COUNT(*) FROM session_log
-           WHERE early_exit = 1 AND started_at > datetime('now', '-30 days')""")
+           WHERE early_exit = 1 AND started_at > datetime('now', '-90 days')""")
     total_sessions = _safe_scalar(conn,
-        "SELECT COUNT(*) FROM session_log WHERE started_at > datetime('now', '-30 days')")
+        "SELECT COUNT(*) FROM session_log WHERE started_at > datetime('now', '-90 days')")
     error_focus_items = _safe_scalar(conn,
         "SELECT COUNT(*) FROM error_focus WHERE resolved = 0", default=0)
 
@@ -74,7 +75,7 @@ def generate_quality_metrics(conn):
     accuracy_rows = _safe_query_all(conn, """
         SELECT CAST(items_correct AS REAL) / NULLIF(items_completed, 0) as acc
         FROM session_log
-        WHERE items_completed > 0 AND started_at > datetime('now', '-30 days')
+        WHERE items_completed > 0 AND started_at > datetime('now', '-90 days')
     """)
     if len(accuracy_rows) >= 5:
         accuracies = [r[0] for r in accuracy_rows if r[0] is not None]
@@ -94,7 +95,7 @@ def generate_quality_metrics(conn):
     rt_rows = _safe_query_all(conn, """
         SELECT AVG(response_ms)
         FROM review_event
-        WHERE response_ms > 0 AND created_at > datetime('now', '-30 days')
+        WHERE response_ms > 0 AND created_at > datetime('now', '-90 days')
         GROUP BY date(created_at)
     """)
     if len(rt_rows) >= 5:
@@ -108,6 +109,27 @@ def generate_quality_metrics(conn):
                 _upsert_metric(conn, "capability_response_time", cpu_rt, now,
                                json.dumps({"mean_ms": round(mean_rt, 1), "std_ms": round(std_rt, 1),
                                            "n": len(rt_values)}))
+
+    # ── Content Freshness metrics ──
+    # Tracks staleness of content items for PM intelligence coverage
+    stale_count = _safe_scalar(conn,
+        """SELECT COUNT(*) FROM content_item
+           WHERE status = 'drill_ready'
+           AND (updated_at IS NULL OR updated_at < datetime('now', '-365 days'))
+           AND created_at < datetime('now', '-365 days')""", default=0)
+    total_content = _safe_scalar(conn,
+        "SELECT COUNT(*) FROM content_item WHERE status = 'drill_ready'", default=0)
+    if total_content > 0:
+        freshness_pct = 1.0 - (stale_count / total_content)
+        _upsert_metric(conn, "content_freshness", freshness_pct, now,
+                       json.dumps({"stale": stale_count, "total": total_content,
+                                   "freshness_pct": round(freshness_pct * 100, 1)}))
+
+    # Content creation velocity (items created in last 30 days)
+    recent_content = _safe_scalar(conn,
+        "SELECT COUNT(*) FROM content_item WHERE created_at > datetime('now', '-30 days')", default=0)
+    _upsert_metric(conn, "content_creation_velocity", recent_content, now,
+                   json.dumps({"items_last_30d": recent_content}))
 
     # ── Queue saturation metrics ──
     backlog = _safe_scalar(conn,
@@ -134,7 +156,7 @@ def generate_spc_observations(conn):
         SELECT date(started_at) as d,
                AVG(CAST(items_correct AS REAL) / NULLIF(items_completed, 0)) as acc
         FROM session_log
-        WHERE items_completed > 0 AND started_at > datetime('now', '-30 days')
+        WHERE items_completed > 0 AND started_at > datetime('now', '-90 days')
         GROUP BY date(started_at)
         ORDER BY d
     """)
@@ -146,7 +168,7 @@ def generate_spc_observations(conn):
     daily_rt = _safe_query_all(conn, """
         SELECT date(created_at) as d, AVG(response_ms) as avg_rt
         FROM review_event
-        WHERE response_ms > 0 AND created_at > datetime('now', '-30 days')
+        WHERE response_ms > 0 AND created_at > datetime('now', '-90 days')
         GROUP BY date(created_at)
         ORDER BY d
     """)
@@ -159,13 +181,37 @@ def generate_spc_observations(conn):
         SELECT date(started_at) as d,
                AVG(CAST(items_completed AS REAL) / NULLIF(items_planned, 0)) as comp
         FROM session_log
-        WHERE items_planned > 0 AND started_at > datetime('now', '-30 days')
+        WHERE items_planned > 0 AND started_at > datetime('now', '-90 days')
         GROUP BY date(started_at)
         ORDER BY d
     """)
     for row in daily_completion:
         if row[1] is not None:
             _insert_spc_observation(conn, "session_completion", row[1], row[0])
+
+    # Content pipeline SPC: daily review queue depth
+    daily_queue = _safe_query_all(conn, """
+        SELECT date(queued_at) as d, COUNT(*) as depth
+        FROM pi_ai_review_queue
+        WHERE queued_at > datetime('now', '-90 days')
+        GROUP BY date(queued_at)
+        ORDER BY d
+    """)
+    for row in daily_queue:
+        if row[1] is not None:
+            _insert_spc_observation(conn, "content_queue_depth", float(row[1]), row[0])
+
+    # Content pipeline SPC: daily generation volume
+    daily_gen = _safe_query_all(conn, """
+        SELECT date(queued_at) as d, COUNT(*) as volume
+        FROM pi_ai_review_queue
+        WHERE queued_at > datetime('now', '-90 days')
+        GROUP BY date(queued_at)
+        ORDER BY d
+    """)
+    for row in daily_gen:
+        if row[1] is not None:
+            _insert_spc_observation(conn, "content_generation_volume", float(row[1]), row[0])
 
     conn.commit()
 
@@ -245,6 +291,86 @@ def enrich_rag_examples(conn):
             logger.info("RAG enrichment: %d items enriched", result["enriched"])
             conn.commit()
     except (ImportError, sqlite3.OperationalError):
+        pass
+
+
+def create_dmaic_entry_from_audit(conn, findings, dimension_scores, overall):
+    """Write DMAIC log entries from a completed audit cycle.
+
+    Maps the existing audit pipeline to the Define→Measure→Analyze→Improve→Control
+    framework so methodology_coverage detects DMAIC activity.
+    """
+    now = datetime.now(timezone.utc).isoformat()
+
+    # Group findings by dimension
+    dims_with_findings = {}
+    for f in findings:
+        dim = f.get("dimension", "unknown")
+        dims_with_findings.setdefault(dim, []).append(f)
+
+    # Only log DMAIC for dimensions that have findings (something to improve)
+    for dim, dim_findings in dims_with_findings.items():
+        dim_score = dimension_scores.get(dim, {})
+        score = dim_score.get("score", 0)
+        grade = dim_score.get("grade", "?")
+
+        define_json = json.dumps({
+            "dimension": dim,
+            "finding_count": len(dim_findings),
+            "severities": [f.get("severity", "low") for f in dim_findings],
+            "titles": [f.get("title", "")[:100] for f in dim_findings[:5]],
+            "current_score": score,
+            "current_grade": grade,
+        })
+
+        measure_json = json.dumps({
+            "dimension_score": score,
+            "overall_score": overall.get("score", 0),
+            "finding_count": len(dim_findings),
+            "confidence": dim_score.get("confidence", "low"),
+            "measured_at": now,
+        })
+
+        analyze_json = json.dumps({
+            "root_causes": [
+                f.get("analysis", "")[:200] for f in dim_findings[:3]
+            ],
+            "severity_distribution": {
+                s: sum(1 for f in dim_findings if f.get("severity") == s)
+                for s in ("critical", "high", "medium", "low")
+                if any(f.get("severity") == s for f in dim_findings)
+            },
+        })
+
+        improve_json = json.dumps({
+            "recommendations": [
+                f.get("recommendation", "")[:200] for f in dim_findings[:3]
+            ],
+            "target_files": list(set(
+                fp for f in dim_findings for fp in (f.get("files") or [])
+            ))[:5],
+        })
+
+        control_json = json.dumps({
+            "trend": dim_score.get("trend", "→"),
+            "monitoring": "continuous_audit",
+            "next_check": "next_audit_cycle",
+        })
+
+        try:
+            conn.execute("""
+                INSERT INTO pi_dmaic_log
+                (dimension, define_json, measure_json, analyze_json,
+                 improve_json, control_json, run_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (dim, define_json, measure_json, analyze_json,
+                  improve_json, control_json, now))
+        except sqlite3.OperationalError:
+            pass
+
+    try:
+        conn.commit()
+    except Exception:
         pass
 
 

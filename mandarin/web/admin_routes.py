@@ -4031,6 +4031,68 @@ def admin_ai_review_edit(item_id):
         return jsonify({"status": "edited", "content_item_id": new_id})
 
 
+@admin_bp.route("/api/admin/ai/review-queue/batch", methods=["POST"])
+@admin_required
+@api_error_handler("AI Review Batch")
+def admin_ai_review_batch():
+    """Batch approve/reject review queue items.
+
+    Body: {action: "approve"|"reject", item_ids: [...], notes: "", provenance_checked: 1}
+    For approve, provenance_checked=1 is required.
+    """
+    data = request.get_json(silent=True) or {}
+    action = data.get("action", "")
+    item_ids = data.get("item_ids", [])
+    notes = data.get("notes", "batch review")
+    provenance_checked = data.get("provenance_checked", 0)
+
+    if action not in ("approve", "reject"):
+        return jsonify({"error": "action must be 'approve' or 'reject'"}), 400
+    if not item_ids:
+        return jsonify({"error": "item_ids required"}), 400
+    if action == "approve" and not provenance_checked:
+        return jsonify({"error": "provenance_checked required for batch approve"}), 400
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    results = {"approved": 0, "rejected": 0, "errors": 0}
+
+    with db.connection() as conn:
+        for item_id in item_ids:
+            try:
+                row = conn.execute(
+                    "SELECT * FROM pi_ai_review_queue WHERE id = ? AND reviewed_at IS NULL",
+                    (item_id,),
+                ).fetchone()
+                if not row:
+                    results["errors"] += 1
+                    continue
+
+                if action == "reject":
+                    conn.execute(
+                        """UPDATE pi_ai_review_queue
+                           SET reviewed_at = ?, reviewed_by = 'admin',
+                               review_decision = 'rejected', review_notes = ?
+                           WHERE id = ?""",
+                        (now, notes, item_id),
+                    )
+                    results["rejected"] += 1
+                else:
+                    conn.execute(
+                        """UPDATE pi_ai_review_queue
+                           SET reviewed_at = ?, reviewed_by = 'admin',
+                               review_decision = 'approved', review_notes = ?,
+                               provenance_checked = 1
+                           WHERE id = ?""",
+                        (now, notes, item_id),
+                    )
+                    results["approved"] += 1
+            except Exception:
+                results["errors"] += 1
+
+        conn.commit()
+    return jsonify({"status": "ok", "results": results})
+
+
 # ── ML endpoints ─────────────────────────────────────────────────────
 
 

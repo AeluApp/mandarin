@@ -110,6 +110,74 @@ def find_semantic_duplicate(
     return None
 
 
+def find_content_duplicate(
+    conn: sqlite3.Connection,
+    hanzi: str,
+    english: str,
+    hsk_level: int = 1,
+    similarity_threshold: float = 0.85,
+) -> Optional[dict]:
+    """Find an existing content item semantically equivalent to a generated one.
+
+    Compares the english meaning + hanzi against existing items at the same
+    HSK level (+/- 1). Returns dict with id, english, similarity if found,
+    None otherwise.
+    """
+    model = _get_model()
+    if model is None:
+        return None
+
+    # Fetch candidate items at nearby HSK levels
+    try:
+        candidates = conn.execute("""
+            SELECT id, hanzi, english, hsk_level
+            FROM content_item
+            WHERE status = 'drill_ready'
+              AND hsk_level BETWEEN ? AND ?
+            ORDER BY hsk_level
+            LIMIT 500
+        """, (max(1, hsk_level - 1), hsk_level + 1)).fetchall()
+    except Exception:
+        return None
+
+    if not candidates:
+        return None
+
+    # Build comparison text: combine hanzi + english for richer matching
+    new_text = f"{hanzi} {english}"
+    candidate_texts = [f"{c['hanzi']} {c['english']}" for c in candidates]
+
+    all_texts = [new_text] + candidate_texts
+    embeddings = model.encode(all_texts, convert_to_numpy=True, show_progress_bar=False)
+
+    new_emb = embeddings[0]
+    new_norm = np.linalg.norm(new_emb)
+    if new_norm == 0:
+        return None
+
+    best_match, best_sim = None, 0.0
+    for i, (row, emb) in enumerate(zip(candidates, embeddings[1:])):
+        # Skip exact same hanzi — that's caught by exact dedup
+        if row['hanzi'] == hanzi:
+            continue
+        emb_norm = np.linalg.norm(emb)
+        if emb_norm == 0:
+            continue
+        sim = float(np.dot(new_emb, emb) / (new_norm * emb_norm))
+        if sim > best_sim:
+            best_sim = sim
+            best_match = row
+
+    if best_sim >= similarity_threshold and best_match:
+        return {
+            "id": best_match['id'],
+            "hanzi": best_match['hanzi'],
+            "english": best_match['english'],
+            "similarity": best_sim,
+        }
+    return None
+
+
 def cache_embedding(conn: sqlite3.Connection, finding_id: int, title: str) -> None:
     """Cache a finding's title embedding for faster future comparisons."""
     model = _get_model()

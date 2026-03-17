@@ -917,6 +917,180 @@ def progress_honesty_score(conn: sqlite3.Connection,
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# LAYER 6: CONTENT QUALITY METRICS
+# ═══════════════════════════════════════════════════════════════════════
+
+def content_duplicate_rate(conn: sqlite3.Connection,
+                           window_days: int = 30) -> Dict[str, Any]:
+    """Rate of generated items caught as duplicates.
+
+    Counter-metric for: corpus expansion.
+    Detects: generation prompts wasting compute on items the corpus already has.
+    """
+    if not _table_exists(conn, "pi_ai_review_queue"):
+        return {"duplicate_rate": None, "total_generated": 0, "duplicates_caught": 0}
+
+    total = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE queued_at >= datetime('now', '-{window_days} days')
+    """, default=0) or 0
+
+    dupes = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE queued_at >= datetime('now', '-{window_days} days')
+          AND validation_issues LIKE '%duplicate%'
+    """, default=0) or 0
+
+    return {
+        "duplicate_rate": round(dupes / total, 4) if total > 0 else None,
+        "total_generated": total,
+        "duplicates_caught": dupes,
+    }
+
+
+def content_rejection_rate(conn: sqlite3.Connection,
+                           window_days: int = 30) -> Dict[str, Any]:
+    """Rate of reviewed items rejected by human reviewer.
+
+    Counter-metric for: generation quality.
+    Detects: LLM prompts producing low-quality output that fails human review.
+    """
+    if not _table_exists(conn, "pi_ai_review_queue"):
+        return {"rejection_rate": None, "reviewed": 0, "rejected": 0}
+
+    reviewed = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE reviewed_at IS NOT NULL
+          AND reviewed_at >= datetime('now', '-{window_days} days')
+    """, default=0) or 0
+
+    rejected = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE review_decision = 'rejected'
+          AND reviewed_at >= datetime('now', '-{window_days} days')
+    """, default=0) or 0
+
+    return {
+        "rejection_rate": round(rejected / reviewed, 4) if reviewed > 0 else None,
+        "reviewed": reviewed,
+        "rejected": rejected,
+    }
+
+
+def content_review_queue_depth(conn: sqlite3.Connection) -> Dict[str, Any]:
+    """Number of items awaiting human review.
+
+    Counter-metric for: governance throughput.
+    Detects: generation outpacing review capacity — content governance bottleneck.
+    """
+    if not _table_exists(conn, "pi_ai_review_queue"):
+        return {"queue_depth": 0}
+
+    depth = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE reviewed_at IS NULL
+    """, default=0) or 0
+
+    return {"queue_depth": depth}
+
+
+def content_approval_latency(conn: sqlite3.Connection,
+                             window_days: int = 60) -> Dict[str, Any]:
+    """Median days from generation to review decision.
+
+    Counter-metric for: governance responsiveness.
+    Detects: review backlog growing stale.
+    """
+    if not _table_exists(conn, "pi_ai_review_queue"):
+        return {"median_latency_days": None, "sample_size": 0}
+
+    # pi_ai_review_queue uses `queued_at` for creation timestamp
+    rows = conn.execute(f"""
+        SELECT julianday(reviewed_at) - julianday(queued_at) as latency_days
+        FROM pi_ai_review_queue
+        WHERE reviewed_at IS NOT NULL
+          AND reviewed_at >= datetime('now', '-{window_days} days')
+    """).fetchall()
+
+    if not rows:
+        return {"median_latency_days": None, "sample_size": 0}
+
+    latencies = [r["latency_days"] for r in rows if r["latency_days"] is not None]
+    return {
+        "median_latency_days": round(_safe_median(latencies), 1) if latencies else None,
+        "sample_size": len(latencies),
+    }
+
+
+def content_reaudit_failure_rate(conn: sqlite3.Connection,
+                                 window_days: int = 90) -> Dict[str, Any]:
+    """Rate of previously approved items that fail reaudit.
+
+    Counter-metric for: initial approval quality.
+    Detects: rubber-stamping in the review process.
+    """
+    if not _table_exists(conn, "content_reaudit_log"):
+        return {"failure_rate": None, "reaudited": 0, "failed": 0}
+
+    reaudited = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM content_reaudit_log
+        WHERE audited_at >= datetime('now', '-{window_days} days')
+    """, default=0) or 0
+
+    failed = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM content_reaudit_log
+        WHERE audited_at >= datetime('now', '-{window_days} days')
+          AND passed = 0
+    """, default=0) or 0
+
+    return {
+        "failure_rate": round(failed / reaudited, 4) if reaudited > 0 else None,
+        "reaudited": reaudited,
+        "failed": failed,
+    }
+
+
+def approval_rubber_stamping(conn: sqlite3.Connection,
+                             window_days: int = 60) -> Dict[str, Any]:
+    """Rate of reviews completed in under 5 seconds.
+
+    Counter-metric for: review quality.
+    Detects: reviewer not actually reading content before approving.
+    """
+    if not _table_exists(conn, "pi_ai_review_queue"):
+        return {"rubber_stamp_rate": None, "total_reviews": 0}
+
+    total = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE reviewed_at IS NOT NULL
+          AND reviewed_at >= datetime('now', '-{window_days} days')
+    """, default=0) or 0
+
+    # Reviews where reviewed_at - queued_at < 5 seconds
+    fast = _safe_scalar(conn, f"""
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE reviewed_at IS NOT NULL
+          AND reviewed_at >= datetime('now', '-{window_days} days')
+          AND (julianday(reviewed_at) - julianday(queued_at)) * 86400 < 5
+    """, default=0) or 0
+
+    return {
+        "rubber_stamp_rate": round(fast / total, 4) if total > 0 else None,
+        "total_reviews": total,
+        "fast_reviews": fast,
+    }
+
+
+def _safe_scalar(conn, sql, params=(), default=None):
+    """Execute a query returning a single scalar value."""
+    try:
+        row = conn.execute(sql, params).fetchone()
+        return row[0] if row else default
+    except (sqlite3.OperationalError, sqlite3.Error):
+        return default
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # COUNTER-METRIC MAPPING TABLE
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -960,6 +1134,12 @@ COUNTER_METRIC_MAP = {
         "distortion": [],
         "cost": [],
     },
+    "corpus_expansion": {
+        "likely_failure": "Duplicate/low-quality AI content, rubber-stamped reviews",
+        "integrity": ["content_rejection_rate", "content_reaudit_failure_rate"],
+        "distortion": ["content_duplicate_rate", "approval_rubber_stamping"],
+        "cost": ["content_review_queue_depth", "content_approval_latency"],
+    },
 }
 
 
@@ -991,6 +1171,14 @@ ALERT_THRESHOLDS = {
     # Outcome
     "holdout_accuracy": {"warn": 0.60, "critical": 0.45, "direction": "below"},
     "progress_honesty_score": {"warn": 50, "critical": 30, "direction": "below"},
+
+    # Content quality
+    "content_duplicate_rate": {"warn": 0.30, "critical": 0.50, "direction": "above"},
+    "content_rejection_rate": {"warn": 0.20, "critical": 0.35, "direction": "above"},
+    "content_review_queue_depth": {"warn": 30, "critical": 50, "direction": "above"},
+    "content_approval_latency_days": {"warn": 7, "critical": 14, "direction": "above"},
+    "content_reaudit_failure_rate": {"warn": 0.10, "critical": 0.25, "direction": "above"},
+    "content_rubber_stamp_rate": {"warn": 0.30, "critical": 0.50, "direction": "above"},
 }
 
 
@@ -1119,6 +1307,30 @@ def compute_full_assessment(conn: sqlite3.Connection,
     _check_alert(alerts, "holdout_accuracy", holdout.get("holdout_accuracy"))
     _check_alert(alerts, "progress_honesty_score", honesty.get("honesty_score"))
 
+    # ── Layer 6: Content quality ──
+    cq_dup = content_duplicate_rate(conn)
+    cq_reject = content_rejection_rate(conn)
+    cq_queue = content_review_queue_depth(conn)
+    cq_latency = content_approval_latency(conn)
+    cq_reaudit = content_reaudit_failure_rate(conn)
+    cq_rubber = approval_rubber_stamping(conn)
+
+    content_quality = {
+        "content_duplicate_rate": cq_dup,
+        "content_rejection_rate": cq_reject,
+        "content_review_queue_depth": cq_queue,
+        "content_approval_latency": cq_latency,
+        "content_reaudit_failure_rate": cq_reaudit,
+        "approval_rubber_stamping": cq_rubber,
+    }
+
+    _check_alert(alerts, "content_duplicate_rate", cq_dup.get("duplicate_rate"))
+    _check_alert(alerts, "content_rejection_rate", cq_reject.get("rejection_rate"))
+    _check_alert(alerts, "content_review_queue_depth", cq_queue.get("queue_depth"))
+    _check_alert(alerts, "content_approval_latency_days", cq_latency.get("median_latency_days"))
+    _check_alert(alerts, "content_reaudit_failure_rate", cq_reaudit.get("failure_rate"))
+    _check_alert(alerts, "content_rubber_stamp_rate", cq_rubber.get("rubber_stamp_rate"))
+
     # ── Overall health ──
     critical_count = sum(1 for a in alerts if a["severity"] == "critical")
     warn_count = sum(1 for a in alerts if a["severity"] == "warn")
@@ -1166,6 +1378,7 @@ def compute_full_assessment(conn: sqlite3.Connection,
         "cost": cost,
         "distortion": distortion,
         "outcome": outcome,
+        "content_quality": content_quality,
         "alerts": alerts,
         "alert_summary": {
             "critical": critical_count,

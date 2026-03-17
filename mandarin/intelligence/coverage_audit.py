@@ -43,7 +43,7 @@ COVERAGE_MAP = [
     {"domain": "content", "component": "media_shelf_quality", "status": "gap", "document": None, "notes": "Media ingest exists but quality/engagement not measured"},
     {"domain": "content", "component": "graded_reader_passages", "status": "gap", "document": None, "notes": "Passages served but readability/engagement not tracked"},
     {"domain": "content", "component": "seed_item_balance", "status": "covered", "document": "Doc 2 (Domain Analyzers)", "notes": "HSK level distribution analyzed"},
-    {"domain": "content", "component": "content_freshness", "status": "gap", "document": None, "notes": "No staleness detection for content items"},
+    {"domain": "content", "component": "content_freshness", "status": "covered", "document": "Doc 6 (Coverage Audit)", "notes": "Staleness detection + content_freshness quality_metric tracked"},
     {"domain": "content", "component": "register_pragmatic_coverage", "status": "partial", "document": "Doc 2 (Domain Analyzers)", "notes": "Drill types exist but register balance not measured"},
 
     # ── AI Components Domain ──
@@ -174,9 +174,17 @@ def get_gap_closure_priority() -> list[dict]:
 
 
 def generate_coverage_findings(conn) -> list[dict]:
-    """Emit findings for coverage gaps that are actionable now (priority 1-3)."""
+    """Emit findings for coverage gaps that are actionable now (top 3 uncovered)."""
     findings = []
-    for item in _GAP_CLOSURE_PRIORITY[:3]:
+    # Build set of covered components from the matrix
+    covered = {item["component"] for item in COVERAGE_MAP if item["status"] == "covered"}
+
+    emitted = 0
+    for item in _GAP_CLOSURE_PRIORITY:
+        if emitted >= 3:
+            break
+        if item["component"] in covered:
+            continue  # Already has coverage — skip
         findings.append(_finding(
             dimension="pm",
             severity="medium",
@@ -187,6 +195,7 @@ def generate_coverage_findings(conn) -> list[dict]:
             impact=f"Closes intelligence gap in {item['domain']} domain",
             files=["mandarin/intelligence/coverage_audit.py"],
         ))
+        emitted += 1
     return findings
 
 

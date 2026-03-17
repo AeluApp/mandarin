@@ -54,10 +54,30 @@ class GeneratedDrillItem:
 def generate_drill_from_encounter(
     conn, encounter_id: str, target_word: str,
     source_sentence: str = "", learner_hsk_level: int = 1,
-    language_notes: str = "",
+    language_notes: str = "", user_id: int = 0,
 ) -> Optional[GeneratedDrillItem]:
     """Generate a drill item from a vocab encounter. Returns None on failure."""
-    prompt = _build_drill_prompt(target_word, source_sentence, learner_hsk_level, language_notes)
+    # A/B experiment: corpus-aware prompts for HSK 3-5
+    use_corpus_aware = learner_hsk_level >= 6  # default: always for HSK 6+
+    if 3 <= learner_hsk_level <= 5 and user_id:
+        try:
+            from ..experiments import get_variant, log_exposure
+            variant = get_variant(conn, "corpus_aware_drill_quality", user_id)
+            if variant == "corpus_aware":
+                use_corpus_aware = True
+                log_exposure(conn, "corpus_aware_drill_quality", user_id,
+                             context=f"drill_gen:hsk{learner_hsk_level}:{target_word}")
+            elif variant == "standard":
+                use_corpus_aware = False
+                log_exposure(conn, "corpus_aware_drill_quality", user_id,
+                             context=f"drill_gen:hsk{learner_hsk_level}:{target_word}")
+        except Exception:
+            logger.debug("Experiment variant lookup failed", exc_info=True)
+
+    prompt = _build_drill_prompt(
+        target_word, source_sentence, learner_hsk_level, language_notes,
+        conn=conn if use_corpus_aware else None,
+    )
 
     # Use RAG-augmented generation for HSK 6+ words
     if learner_hsk_level >= 6:
@@ -97,14 +117,17 @@ def generate_drill_from_encounter(
         _mark_encounter_failed(conn, encounter_id, "parse_failed")
         return None
 
-    # Dedup: skip if we already have an AI-generated item for this word
+    # Dedup: skip if ANY corpus item already exists for this word (not just AI-generated)
     existing = conn.execute(
-        "SELECT id FROM content_item WHERE hanzi = ? AND source = 'ai_generated' LIMIT 1",
+        "SELECT id FROM content_item WHERE hanzi = ? AND status = 'drill_ready' LIMIT 1",
         (item.hanzi,),
     ).fetchone()
     if existing:
         _mark_encounter_generated(conn, encounter_id, str(existing["id"]))
         return item
+
+    # Semantic dedup: check for near-duplicate meanings in corpus
+    semantic_issues = _check_semantic_duplicate(conn, item)
 
     # Validate
     content = validate_generated_content("drill", {
@@ -114,21 +137,19 @@ def generate_drill_from_encounter(
 
     validation_issues = _validate_drill_item(item, target_word, learner_hsk_level)
     content["validation_issues"].extend(validation_issues)
+    content["validation_issues"].extend(semantic_issues)
 
+    # ALL AI-generated items go through human review — no auto-approval.
+    # Structural validation passing is necessary but not sufficient for quality.
+    item_id = _persist_drill_item(conn, item)
     if content["validation_issues"]:
-        # Route to review queue instead of direct insertion
+        # Route to review queue with explicit issues
         _enqueue_for_review(conn, item, content["validation_issues"], encounter_id)
         _mark_encounter_failed(conn, encounter_id, "needs_review")
-        return item
-
-    # Persist directly — auto-approve since all validation passed
-    item_id = _persist_drill_item(conn, item)
-    conn.execute(
-        "UPDATE content_item SET review_status = 'approved' WHERE id = ?",
-        (int(item_id),),
-    )
-    conn.commit()
-    _mark_encounter_generated(conn, encounter_id, item_id)
+    else:
+        # Still route to review queue — no auto-approval
+        _enqueue_for_review(conn, item, ["awaiting_human_review"], encounter_id)
+        _mark_encounter_generated(conn, encounter_id, item_id)
 
     # ── Post-generation quality gates ──
     _run_post_generation_gates(conn, item, item_id, learner_hsk_level)
@@ -138,6 +159,7 @@ def generate_drill_from_encounter(
 
 def _build_drill_prompt(
     target_word: str, source_sentence: str, hsk_level: int, language_notes: str,
+    conn=None,
 ) -> str:
     parts = [f"Create a drill item for the word: {target_word}"]
     parts.append(f"Learner HSK level: {hsk_level}")
@@ -145,6 +167,39 @@ def _build_drill_prompt(
         parts.append(f"Original context: {source_sentence}")
     if language_notes:
         parts.append(f"Notes: {language_notes}")
+
+    # Corpus awareness: show what already exists for this word
+    if conn is not None:
+        try:
+            existing = conn.execute(
+                """SELECT english, drill_type FROM content_item
+                   WHERE hanzi = ? AND status = 'drill_ready'
+                   ORDER BY id LIMIT 10""",
+                (target_word,),
+            ).fetchall()
+            if existing:
+                parts.append(f"\nAlready in corpus for {target_word}:")
+                for row in existing:
+                    parts.append(f'  - "{row["english"]}" ({row["drill_type"]})')
+                parts.append("DO NOT duplicate these meanings or drill types.")
+
+            # Show underrepresented drill types at this HSK level
+            type_counts = conn.execute(
+                """SELECT drill_type, COUNT(*) as cnt FROM content_item
+                   WHERE hsk_level = ? AND status = 'drill_ready'
+                     AND drill_type IS NOT NULL
+                   GROUP BY drill_type""",
+                (hsk_level,),
+            ).fetchall()
+            if type_counts:
+                all_types = {"mcq", "fill_blank", "translate_to_chinese", "translate_to_english"}
+                covered = {r["drill_type"]: r["cnt"] for r in type_counts}
+                missing = all_types - set(covered.keys())
+                if missing:
+                    parts.append(f"Target drill type: {missing.pop()} (underrepresented at HSK {hsk_level})")
+        except Exception:
+            pass  # Non-critical; fall back to unaware prompt
+
     parts.append("Output JSON only, no markdown fences or explanation.")
     return "\n".join(parts)
 
@@ -223,14 +278,37 @@ def _validate_drill_item(item: GeneratedDrillItem, target_word: str, hsk_level: 
     if item.example_sentence_hanzi and target_word not in item.example_sentence_hanzi:
         issues.append(f"target word '{target_word}' not in example sentence")
 
-    # Low confidence flag
-    if item.confidence < 0.80:
+    # Low confidence flag — threshold 0.90 to route marginal items to review
+    if item.confidence < 0.90:
         issues.append(f"low confidence: {item.confidence:.2f}")
 
     # HSK level sanity check
     if item.hsk_level > hsk_level + 2:
         issues.append(f"generated HSK {item.hsk_level} too high for learner level {hsk_level}")
 
+    return issues
+
+
+def _check_semantic_duplicate(conn, item: GeneratedDrillItem) -> list[str]:
+    """Check for semantically similar items already in corpus.
+
+    Uses sentence-transformer embeddings (all-MiniLM-L6-v2) from fuzzy_dedup.
+    Returns list of validation issues if near-duplicate found.
+    """
+    issues = []
+    try:
+        from ..ml.fuzzy_dedup import find_content_duplicate
+        dup = find_content_duplicate(
+            conn, hanzi=item.hanzi, english=item.english,
+            hsk_level=item.hsk_level,
+        )
+        if dup:
+            issues.append(
+                f"semantic_duplicate: similar to existing item id={dup['id']} "
+                f"'{dup['english']}' (similarity {dup['similarity']:.2f})"
+            )
+    except (ImportError, Exception):
+        pass  # Graceful degradation if model unavailable
     return issues
 
 

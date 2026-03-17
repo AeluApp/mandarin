@@ -413,6 +413,17 @@ def run_product_audit(conn) -> dict:
     # Save for trending
     _save_audit(conn, grade, score_val, dimension_scores, findings)
 
+    # ── DMAIC Logging ──
+    # Record Define→Measure→Analyze→Improve→Control entries for each
+    # dimension with findings, so methodology_coverage detects DMAIC activity.
+    try:
+        from .quality_metrics_generator import create_dmaic_entry_from_audit
+        create_dmaic_entry_from_audit(conn, findings, dimension_scores, overall)
+    except (ImportError, AttributeError):
+        pass
+    except Exception as e:
+        logger.warning("DMAIC logging failed: %s", e)
+
     # ── Prescription Layer ──
     work_order = None
     try:
