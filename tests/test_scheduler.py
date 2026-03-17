@@ -375,9 +375,13 @@ def test_reading_returns_valid_type():
     valid_reading = {"mc", "reverse_mc", "tone", "intuition",
                      "english_to_pinyin", "hanzi_to_pinyin",
                      "pinyin_to_hanzi", "transfer", "measure_word",
+                     "measure_word_cloze", "measure_word_production",
+                     "measure_word_disc",
                      "word_order", "sentence_build", "particle_disc",
                      "homophone", "translation", "cloze_context",
-                     "synonym_disc"}
+                     "synonym_disc", "number_system", "tone_sandhi",
+                     "complement", "ba_bei", "collocation", "radical",
+                     "error_correction", "chengyu"}
     result = _pick_drill_type("reading", item, tracker)
     assert result in valid_reading
 

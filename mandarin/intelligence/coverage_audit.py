@@ -190,4 +190,148 @@ def generate_coverage_findings(conn) -> list[dict]:
     return findings
 
 
-ANALYZERS = [generate_coverage_findings]
+def analyze_reading_comprehension(conn):
+    """Measure reading comprehension quality from graded reader sessions."""
+    findings = []
+    # Check if graded reader sessions exist
+    reader_sessions = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM session_log
+        WHERE session_type = 'reading' AND started_at > datetime('now', '-30 days')
+    """, default=0)
+    reader_lookups = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM vocab_encounter
+        WHERE source = 'reader' AND created_at > datetime('now', '-30 days')
+    """, default=0)
+
+    if reader_sessions == 0:
+        findings.append(_finding(
+            dimension="content",
+            severity="medium",
+            title="No reading comprehension data in last 30 days",
+            analysis="No graded reader sessions recorded. Reading comprehension quality cannot be assessed.",
+            recommendation="Encourage reading sessions to generate comprehension data.",
+            claude_prompt="Check graded reader availability and session routing for reading type sessions.",
+            impact="Closes reading_comprehension intelligence gap",
+            files=["mandarin/web/reader_routes.py", "mandarin/intelligence/coverage_audit.py"],
+        ))
+    elif reader_sessions > 0 and reader_lookups > 0:
+        lookup_rate = reader_lookups / max(1, reader_sessions)
+        if lookup_rate > 20:
+            findings.append(_finding(
+                dimension="content",
+                severity="medium",
+                title=f"High lookup rate in reading sessions ({lookup_rate:.0f}/session)",
+                analysis=f"Readers look up {lookup_rate:.0f} words per session on average, "
+                         "suggesting texts may be above current level.",
+                recommendation="Review graded reader level assignment; consider easier texts.",
+                claude_prompt="Check reader text HSK level assignment vs. user proficiency.",
+                impact="Reading comprehension quality",
+                files=["mandarin/web/reader_routes.py"],
+            ))
+    return findings
+
+
+def analyze_listening_comprehension(conn):
+    """Measure listening comprehension from media shelf and audio drill data."""
+    findings = []
+    audio_drills = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM review_event
+        WHERE drill_type IN ('dictation', 'listening_mc', 'tone_pair')
+        AND created_at > datetime('now', '-30 days')
+    """, default=0)
+    media_views = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM media_event
+        WHERE created_at > datetime('now', '-30 days')
+    """, default=0)
+
+    if audio_drills == 0 and media_views == 0:
+        findings.append(_finding(
+            dimension="content",
+            severity="medium",
+            title="No listening comprehension data in last 30 days",
+            analysis="No audio drill attempts or media consumption recorded. "
+                     "Listening comprehension quality cannot be assessed.",
+            recommendation="Ensure audio drills are being scheduled and media shelf is accessible.",
+            claude_prompt="Check audio drill scheduling in scheduler.py and media shelf availability.",
+            impact="Closes listening_comprehension intelligence gap",
+            files=["mandarin/scheduler.py", "mandarin/media_ingest.py"],
+        ))
+    elif audio_drills > 0:
+        audio_accuracy = _safe_scalar(conn, """
+            SELECT AVG(CASE WHEN correct = 1 THEN 1.0 ELSE 0.0 END)
+            FROM review_event
+            WHERE drill_type IN ('dictation', 'listening_mc', 'tone_pair')
+            AND created_at > datetime('now', '-30 days')
+        """, default=0)
+        if audio_accuracy is not None and audio_accuracy < 0.5:
+            findings.append(_finding(
+                dimension="content",
+                severity="medium",
+                title=f"Low listening drill accuracy ({audio_accuracy:.0%})",
+                analysis=f"Audio drill accuracy is {audio_accuracy:.0%} over the last 30 days. "
+                         "This may indicate listening comprehension difficulties or drill difficulty miscalibration.",
+                recommendation="Review audio drill difficulty levels and consider scaffolding.",
+                claude_prompt="Check audio drill difficulty calibration and consider adding easier listening exercises.",
+                impact="Listening comprehension quality",
+                files=["mandarin/scheduler.py"],
+            ))
+    return findings
+
+
+def analyze_content_freshness(conn):
+    """Detect stale content items that haven't been updated in a long time."""
+    findings = []
+    stale_count = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM content_item
+        WHERE status = 'drill_ready'
+        AND (updated_at IS NULL OR updated_at < datetime('now', '-365 days'))
+        AND created_at < datetime('now', '-365 days')
+    """, default=0)
+    total_items = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM content_item WHERE status = 'drill_ready'
+    """, default=0)
+
+    if total_items > 0 and stale_count > 0:
+        stale_pct = stale_count / total_items * 100
+        if stale_pct > 20:
+            findings.append(_finding(
+                dimension="content",
+                severity="low",
+                title=f"{stale_count} content items unchanged for >1 year ({stale_pct:.0f}%)",
+                analysis=f"{stale_count} of {total_items} drill-ready items have not been updated "
+                         "in over a year. While vocabulary is stable, context notes and example "
+                         "sentences may benefit from periodic review.",
+                recommendation="Review oldest content items for accuracy and freshness.",
+                claude_prompt="Query content_item WHERE updated_at < datetime('now', '-365 days') "
+                             "and review context notes and example sentences for staleness.",
+                impact="Closes content_freshness intelligence gap",
+                files=["mandarin/db/core.py"],
+            ))
+
+    # Check for items with no context notes
+    no_context = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM content_item
+        WHERE status = 'drill_ready' AND (context_notes IS NULL OR context_notes = '')
+    """, default=0)
+    if total_items > 0 and no_context > 100:
+        findings.append(_finding(
+            dimension="content",
+            severity="low",
+            title=f"{no_context} items missing context notes",
+            analysis=f"{no_context} drill-ready items have no context notes. Context notes "
+                     "improve learning by providing usage examples and cultural context.",
+            recommendation="Generate context notes for items missing them, starting with HSK 1-3.",
+            claude_prompt="Add context notes to content items missing them: "
+                         "SELECT id, hanzi FROM content_item WHERE context_notes IS NULL AND hsk_level <= 3.",
+            impact="Content quality improvement",
+            files=["mandarin/ai/rag_layer.py"],
+        ))
+    return findings
+
+
+ANALYZERS = [
+    generate_coverage_findings,
+    analyze_reading_comprehension,
+    analyze_listening_comprehension,
+    analyze_content_freshness,
+]

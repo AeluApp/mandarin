@@ -124,7 +124,7 @@ def _handle_ws_session(ws, planner_fn, label):
 
     # ── Resume path ──────────────────────────────────────
     if first_data.get("type") == "resume" and first_data.get("resume_token"):
-        token = first_data["resume_token"]
+        token = first_data.get("resume_token")
         active = session_store.claim_for_resume(token, user_id)
         if active:
             logger.info("[%s] resuming %s via token %s", active.bridge.session_uuid, label, token)

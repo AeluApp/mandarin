@@ -394,7 +394,7 @@ def test_adaptive_length_constants():
     assert ADAPTIVE_LENGTH_MIN_SESSIONS == 3
     assert ADAPTIVE_LENGTH_RECENT_SESSIONS == 5
     assert ADAPTIVE_LENGTH_LOW_COMPLETION == 0.8
-    assert ADAPTIVE_LENGTH_SHRINK_FACTOR == 0.8
+    assert ADAPTIVE_LENGTH_SHRINK_FACTOR == 0.7  # Reduced from 0.8 for better completion rate
     assert ADAPTIVE_LENGTH_MIN_ITEMS == 4
     assert ADAPTIVE_LENGTH_HIGH_COMPLETION == 0.95
     assert ADAPTIVE_LENGTH_HIGH_MIN_SESSIONS == 5

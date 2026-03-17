@@ -6,6 +6,8 @@ Falls back to the existing ToC dimension-score analysis when no cross-domain
 constraint is detected.
 """
 
+from __future__ import annotations
+
 import json
 import logging
 from datetime import datetime, timezone
