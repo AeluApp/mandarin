@@ -1898,6 +1898,11 @@ function showInput(prompt, id) {
   var now = Date.now();
   _drillShownAt = now;
 
+  // Clear drill transition loader (next drill has arrived)
+  if (_drillTransitionTimer) { clearTimeout(_drillTransitionTimer); _drillTransitionTimer = null; }
+  var loaders = document.querySelectorAll(".drill-transition-loader");
+  for (var li = 0; li < loaders.length; li++) { loaders[li].parentNode.removeChild(loaders[li]); }
+
   // Timer is started in updateProgress() when first drill progress [X/Y] arrives
 
   // First-drill latency: time from WS open to first drill render
@@ -2239,7 +2244,18 @@ function submitAnswer() {
   sendAnswer(value);
 }
 
+var _lastQuickAnswerTime = 0;
+var _drillTransitionTimer = null;
 function quickAnswer(value, displayText) {
+  // Debounce: prevent rage-click double-submit on MC options (300ms)
+  var now = Date.now();
+  if (now - _lastQuickAnswerTime < 300) return;
+  _lastQuickAnswerTime = now;
+  // Disable all option buttons after selection to prevent re-clicks
+  var allBtns = document.querySelectorAll(".btn-option");
+  for (var i = 0; i < allBtns.length; i++) {
+    allBtns[i].disabled = true;
+  }
   sendAnswer(value, displayText);
 }
 
@@ -2281,6 +2297,21 @@ function sendAnswer(value, displayText) {
     value: value
   }));
   hideInput();
+
+  // Show loading indicator after 1.5s if next drill hasn't arrived yet
+  // This addresses >5s gaps between drills where user sees no feedback
+  if (_drillTransitionTimer) clearTimeout(_drillTransitionTimer);
+  _drillTransitionTimer = setTimeout(function() {
+    if (sessionActive && !currentPromptId) {
+      var area = document.getElementById("drill-area");
+      var loader = document.createElement("div");
+      loader.className = "msg msg-dim drill-transition-loader";
+      loader.textContent = "Preparing next item\u2026";
+      loader.style.opacity = "0.6";
+      area.appendChild(loader);
+      area.scrollTop = area.scrollHeight;
+    }
+  }, 1500);
 
   // Show what user typed — append to current drill group to preserve grouping
   var echoText = displayText || value;
@@ -7144,11 +7175,26 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener("keydown", function(e) { panelKeyHandler(e, panelId); });
   });
 
-  // Session start buttons
+  // Session start buttons (debounced to prevent rage-click double-start)
   var btnStart = document.getElementById("btn-start");
   var btnMini = document.getElementById("btn-mini");
-  if (btnStart) btnStart.addEventListener("click", function() { startSession("standard"); });
-  if (btnMini) btnMini.addEventListener("click", function() { startSession("mini"); });
+  var _sessionStarting = false;
+  if (btnStart) btnStart.addEventListener("click", function() {
+    if (_sessionStarting) return;
+    _sessionStarting = true;
+    btnStart.disabled = true;
+    if (btnMini) btnMini.disabled = true;
+    startSession("standard");
+    setTimeout(function() { _sessionStarting = false; }, 2000);
+  });
+  if (btnMini) btnMini.addEventListener("click", function() {
+    if (_sessionStarting) return;
+    _sessionStarting = true;
+    if (btnStart) btnStart.disabled = true;
+    btnMini.disabled = true;
+    startSession("mini");
+    setTimeout(function() { _sessionStarting = false; }, 2000);
+  });
 
   // #13 — Disable Begin until items confirmed via status check
   // Also uses status response to show role-based UI + new-user progressive disclosure
@@ -7186,6 +7232,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (btnMini) {
           btnMini.textContent = "Quick session (~" + miniMins + " min)";
         }
+      }
+
+      // Pre-fetch session preview to warm the scheduler cache and reduce
+      // first-drill latency — helps reduce bounce rate by making session
+      // start feel instant. Uses low-priority fetch to avoid blocking UI.
+      if (count > 0) {
+        try {
+          fetch("/api/session-preview", {priority: "low"}).catch(function() {});
+        } catch (e) {}
       }
 
       // Progressive disclosure: hide advanced panels for new users, group for all

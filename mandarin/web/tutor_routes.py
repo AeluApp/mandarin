@@ -163,29 +163,34 @@ def process_session(session_id):
 def tutor_stats():
     """Summary stats for tutor integration."""
     with db.connection() as conn:
-        total_sessions = conn.execute(
+        row = conn.execute(
             "SELECT COUNT(*) FROM tutor_sessions WHERE user_id = ?",
             (current_user.id,),
-        ).fetchone()[0]
-        total_corrections = conn.execute("""
+        ).fetchone()
+        total_sessions = row[0] if row else 0
+        row = conn.execute("""
             SELECT COUNT(*) FROM tutor_corrections tc
             JOIN tutor_sessions ts ON tc.tutor_session_id = ts.id
             WHERE ts.user_id = ?
-        """, (current_user.id,)).fetchone()[0]
-        matched_corrections = conn.execute("""
+        """, (current_user.id,)).fetchone()
+        total_corrections = row[0] if row else 0
+        row = conn.execute("""
             SELECT COUNT(*) FROM tutor_corrections tc
             JOIN tutor_sessions ts ON tc.tutor_session_id = ts.id
             WHERE ts.user_id = ? AND tc.linked_content_item_id IS NOT NULL
-        """, (current_user.id,)).fetchone()[0]
-        total_flags = conn.execute("""
+        """, (current_user.id,)).fetchone()
+        matched_corrections = row[0] if row else 0
+        row = conn.execute("""
             SELECT COUNT(*) FROM tutor_vocabulary_flags tvf
             JOIN tutor_sessions ts ON tvf.tutor_session_id = ts.id
             WHERE ts.user_id = ?
-        """, (current_user.id,)).fetchone()[0]
-        last_session = conn.execute(
+        """, (current_user.id,)).fetchone()
+        total_flags = row[0] if row else 0
+        row = conn.execute(
             "SELECT MAX(session_date) FROM tutor_sessions WHERE user_id = ?",
             (current_user.id,),
-        ).fetchone()[0]
+        ).fetchone()
+        last_session = row[0] if row else None
 
         return jsonify({
             "total_sessions": total_sessions,

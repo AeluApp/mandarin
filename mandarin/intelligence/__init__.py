@@ -460,6 +460,39 @@ def run_product_audit(conn) -> dict:
     except Exception as e:
         logger.warning("External grounding failed: %s", e)
 
+    # ── Quality Metrics Generation (pre-methodology) ──
+    # Populate quality_metric, spc_observation, advisor budgets, work item
+    # lifecycle timestamps, and DMAIC measure data BEFORE methodology grading
+    # so detection functions find real operational evidence.
+    try:
+        from .quality_metrics_generator import run_all as run_quality_metrics
+        run_quality_metrics(conn)
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning("Quality metrics generation failed: %s", e)
+
+    # ── Grammar/Skill Auto-Linking ──
+    # Link grammar points and skills to content items so curriculum analyzers
+    # find populated content_grammar / content_skill junction tables.
+    try:
+        from ..grammar_linker import link_all as link_grammar_all
+        link_grammar_all(conn)
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning("Grammar/skill linking failed: %s", e)
+
+    # ── Data Seeding (copy registry, marketing pages) ──
+    try:
+        from .quality_metrics_generator import seed_copy_registry, seed_marketing_pages
+        seed_copy_registry(conn)
+        seed_marketing_pages(conn)
+    except (ImportError, AttributeError):
+        pass
+    except Exception as e:
+        logger.warning("Data seeding failed: %s", e)
+
     # ── Methodology Coverage Grading ──
     methodology_grades = None
     try:

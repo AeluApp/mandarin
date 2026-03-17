@@ -80,6 +80,26 @@ def admin_dashboard():
     return render_template("admin.html")
 
 
+@admin_bp.route("/api/admin/mfa-compliance")
+@admin_required
+@api_error_handler("MFA Compliance")
+def admin_mfa_compliance():
+    """Check admin accounts without MFA — CIS 6.5 compliance."""
+    with db.connection() as conn:
+        non_compliant = conn.execute(
+            "SELECT id, email FROM user WHERE is_admin = 1 AND totp_enabled = 0"
+        ).fetchall()
+        compliant = conn.execute(
+            "SELECT id, email FROM user WHERE is_admin = 1 AND totp_enabled = 1"
+        ).fetchall()
+        return jsonify({
+            "compliant_count": len(compliant),
+            "non_compliant_count": len(non_compliant),
+            "non_compliant": [{"id": r["id"], "email": r["email"]} for r in non_compliant],
+            "all_compliant": len(non_compliant) == 0,
+        })
+
+
 @admin_bp.route("/api/admin/metrics")
 @admin_required
 @api_error_handler("Metrics")
@@ -149,19 +169,22 @@ def admin_metrics():
 
                 # Encounter→drill pipeline (magic moment) metrics
                 try:
-                    first_lookup_count = conn.execute(
+                    row = conn.execute(
                         """SELECT COUNT(DISTINCT user_id) FROM lifecycle_event
                            WHERE event_type = 'first_lookup'"""
-                    ).fetchone()[0]
-                    magic_moment_count = conn.execute(
+                    ).fetchone()
+                    first_lookup_count = row[0] if row else 0
+                    row = conn.execute(
                         """SELECT COUNT(DISTINCT user_id) FROM lifecycle_event
                            WHERE event_type = 'first_encounter_drilled'"""
-                    ).fetchone()[0]
-                    total_encounter_drills = conn.execute(
+                    ).fetchone()
+                    magic_moment_count = row[0] if row else 0
+                    row = conn.execute(
                         """SELECT COUNT(*) FROM lifecycle_event
                            WHERE event_type = 'encounter_drilled'
                            AND created_at >= datetime('now', '-30 days')"""
-                    ).fetchone()[0]
+                    ).fetchone()
+                    total_encounter_drills = row[0] if row else 0
                     activation["users_first_lookup"] = first_lookup_count
                     activation["users_magic_moment"] = magic_moment_count
                     activation["encounter_drill_events_30d"] = total_encounter_drills
@@ -2040,7 +2063,8 @@ def admin_onboarding_funnel():
     """Onboarding funnel: registered → level set → goal set → placement → complete → first session."""
     try:
         with db.connection() as conn:
-            total_users = conn.execute("SELECT COUNT(*) as cnt FROM user WHERE is_active = 1").fetchone()["cnt"]
+            row = conn.execute("SELECT COUNT(*) as cnt FROM user WHERE is_active = 1").fetchone()
+            total_users = row["cnt"] if row else 0
 
             # Count users at each stage via lifecycle events
             stages = []
@@ -2163,9 +2187,10 @@ def _gather_admin_notifications(conn):
 
     # 1. Crashes in last 24h
     try:
-        crash_count = conn.execute(
+        row = conn.execute(
             "SELECT COUNT(*) as cnt FROM crash_log WHERE created_at >= datetime('now', '-24 hours')"
-        ).fetchone()["cnt"]
+        ).fetchone()
+        crash_count = row["cnt"] if row else 0
         if crash_count > 0:
             notifs.append({
                 "id": "crashes_24h",
@@ -2180,9 +2205,10 @@ def _gather_admin_notifications(conn):
 
     # 2. Client errors in last 24h
     try:
-        client_errors = conn.execute(
+        row = conn.execute(
             "SELECT COUNT(*) as cnt FROM client_error_log WHERE created_at >= datetime('now', '-24 hours')"
-        ).fetchone()["cnt"]
+        ).fetchone()
+        client_errors = row["cnt"] if row else 0
         if client_errors >= 10:
             notifs.append({
                 "id": "client_errors_24h",
@@ -2197,12 +2223,13 @@ def _gather_admin_notifications(conn):
 
     # 3. Churn risk — users at high risk
     try:
-        high_risk = conn.execute("""
+        row = conn.execute("""
             SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
             WHERE event_type = 'churn_risk_detected'
               AND created_at >= datetime('now', '-7 days')
               AND json_extract(metadata, '$.risk_level') IN ('high', 'critical')
-        """).fetchone()["cnt"]
+        """).fetchone()
+        high_risk = row["cnt"] if row else 0
         if high_risk > 0:
             notifs.append({
                 "id": "churn_risk",
@@ -2217,11 +2244,12 @@ def _gather_admin_notifications(conn):
 
     # 4. NPS detractors (score 0-6) in last 7 days
     try:
-        detractors = conn.execute("""
+        row = conn.execute("""
             SELECT COUNT(*) as cnt FROM user_feedback
             WHERE feedback_type = 'nps' AND rating <= 6
               AND created_at >= datetime('now', '-7 days')
-        """).fetchone()["cnt"]
+        """).fetchone()
+        detractors = row["cnt"] if row else 0
         if detractors > 0:
             notifs.append({
                 "id": "nps_detractors",
@@ -2236,11 +2264,12 @@ def _gather_admin_notifications(conn):
 
     # 5. Interview volunteers waiting
     try:
-        volunteers = conn.execute("""
+        row = conn.execute("""
             SELECT COUNT(DISTINCT user_id) as cnt FROM lifecycle_event
             WHERE event_type = 'interview_volunteered'
               AND created_at >= datetime('now', '-14 days')
-        """).fetchone()["cnt"]
+        """).fetchone()
+        volunteers = row["cnt"] if row else 0
         if volunteers > 0:
             notifs.append({
                 "id": "interview_volunteers",
@@ -2255,11 +2284,12 @@ def _gather_admin_notifications(conn):
 
     # 6. Security events in last 24h
     try:
-        sec_events = conn.execute("""
+        row = conn.execute("""
             SELECT COUNT(*) as cnt FROM security_audit_log
             WHERE severity IN ('ERROR', 'CRITICAL')
               AND created_at >= datetime('now', '-24 hours')
-        """).fetchone()["cnt"]
+        """).fetchone()
+        sec_events = row["cnt"] if row else 0
         if sec_events > 0:
             notifs.append({
                 "id": "security_events",
@@ -2336,9 +2366,10 @@ def _gather_admin_notifications(conn):
 
     # 9. Grade appeals pending
     try:
-        appeals = conn.execute(
+        row = conn.execute(
             "SELECT COUNT(*) as cnt FROM grade_appeal WHERE status = 'pending'"
-        ).fetchone()["cnt"]
+        ).fetchone()
+        appeals = row["cnt"] if row else 0
         if appeals > 0:
             notifs.append({
                 "id": "grade_appeals",
@@ -2353,11 +2384,12 @@ def _gather_admin_notifications(conn):
 
     # 10. Slow API responses
     try:
-        slow = conn.execute("""
+        row = conn.execute("""
             SELECT COUNT(*) as cnt FROM request_timing
             WHERE duration_ms > 2000
               AND recorded_at >= datetime('now', '-24 hours')
-        """).fetchone()["cnt"]
+        """).fetchone()
+        slow = row["cnt"] if row else 0
         if slow >= 5:
             notifs.append({
                 "id": "slow_api",
@@ -2372,9 +2404,10 @@ def _gather_admin_notifications(conn):
 
     # 11. Kanban WIP limit breach
     try:
-        wip_count = conn.execute(
+        row = conn.execute(
             "SELECT COUNT(*) as cnt FROM work_item WHERE status = 'in_progress'"
-        ).fetchone()["cnt"]
+        ).fetchone()
+        wip_count = row["cnt"] if row else 0
         if wip_count > 5:
             notifs.append({
                 "id": "wip_exceeded",

@@ -458,14 +458,27 @@ def api_progress():
         })
 
 
+_session_preview_cache = {}  # {user_id: (timestamp, data)}
+_SESSION_PREVIEW_TTL = 30  # Cache for 30 seconds
+
 @dashboard_bp.route("/api/session-preview")
 @api_error_handler("Session preview")
 def api_session_preview():
     """Lightweight preview of what the next session will focus on.
 
     Shows adaptive intelligence without running the full planner.
+    Cached per-user for 30s to reduce p95 tail latency on repeated calls.
     """
+    import time
     user_id = _get_user_id()
+
+    # Check cache
+    cached = _session_preview_cache.get(user_id)
+    if cached:
+        cache_ts, cache_data = cached
+        if time.time() - cache_ts < _SESSION_PREVIEW_TTL:
+            return jsonify(cache_data)
+
     with db.connection() as conn:
         preview = {}
 
@@ -551,6 +564,8 @@ def api_session_preview():
         except (sqlite3.Error, KeyError, TypeError) as e:
             logger.debug("session preview: last session failed: %s", e)
 
+        # Cache result
+        _session_preview_cache[user_id] = (time.time(), preview)
         return jsonify(preview)
 
 

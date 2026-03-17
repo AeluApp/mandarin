@@ -40,6 +40,10 @@ from .config import (
     ADAPTIVE_LENGTH_LOW_COMPLETION, ADAPTIVE_LENGTH_SHRINK_FACTOR,
     ADAPTIVE_LENGTH_MIN_ITEMS, ADAPTIVE_LENGTH_HIGH_COMPLETION,
     ADAPTIVE_LENGTH_HIGH_MIN_SESSIONS, ADAPTIVE_LENGTH_GROW_FACTOR,
+    SESSION_PLAN_REDUCTION_FACTOR,
+    ENCOUNTER_BOOST_RATIO, ENCOUNTER_PRIORITY_WINDOW_DAYS, ENCOUNTER_FULL_WINDOW_DAYS,
+    TONE_SANDHI_BOOST_WEIGHT,
+    CROSS_MODALITY_BOOST_LIMIT,
 )
 
 logger = logging.getLogger(__name__)
@@ -767,15 +771,32 @@ def _pick_drill_type(modality: str, item: dict, variety_tracker: dict[str, list[
             variety_tracker.setdefault(modality, []).append(bandit_pick)
             return bandit_pick
 
-    # Prefer types not recently used
+    # Prefer types not recently used — with tone_sandhi weight boost
     recent = variety_tracker.get(modality, [])
+    # Build weighted candidates for random fallback
+    weighted_options = []
     for opt in options:
-        if opt not in recent[-2:]:  # Not used in last 2 drills of this modality
-            variety_tracker.setdefault(modality, []).append(opt)
-            return opt
+        if opt not in recent[-2:]:
+            w = TONE_SANDHI_BOOST_WEIGHT if opt == "tone_sandhi" else 1.0
+            weighted_options.append((opt, w))
+    if weighted_options:
+        # Weighted random selection among non-recent options
+        total_w = sum(w for _, w in weighted_options)
+        r = random.random() * total_w
+        cumulative = 0.0
+        for opt, w in weighted_options:
+            cumulative += w
+            if r <= cumulative:
+                variety_tracker.setdefault(modality, []).append(opt)
+                return opt
+        # Fallback
+        choice = weighted_options[0][0]
+        variety_tracker.setdefault(modality, []).append(choice)
+        return choice
 
-    # All recently used — pick randomly
-    choice = random.choice(options)
+    # All recently used — pick randomly with tone_sandhi boost
+    weights = [TONE_SANDHI_BOOST_WEIGHT if o == "tone_sandhi" else 1.0 for o in options]
+    choice = random.choices(options, weights=weights, k=1)[0]
     variety_tracker.setdefault(modality, []).append(choice)
     return choice
 
@@ -1135,7 +1156,9 @@ def _plan_session_params(conn: sqlite3.Connection, target_items: int | None, use
         pass
 
     day_profile = get_day_profile(conn, user_id=user_id)
-    target_items = max(MIN_SESSION_ITEMS, round(target_items * day_profile["length_mult"]))
+    target_items = max(MIN_SESSION_ITEMS, round(
+        target_items * day_profile["length_mult"] * SESSION_PLAN_REDUCTION_FACTOR
+    ))
 
     days_gap = db.get_days_since_last_session(conn, user_id=user_id)
     is_long_gap = days_gap is not None and days_gap >= LONG_GAP_DAYS
@@ -1660,29 +1683,37 @@ def _plan_encounter_boost_items(conn: sqlite3.Connection, seen_ids: set,
                                  target_items: int, drills: list, user_id: int) -> None:
     """Inject priority review items from recent reading/listening lookups.
 
-    Scales with session length (up to 25% of target), uses a 14-day window,
-    and varies drill types based on item mastery stage.
+    Scales with session length (up to ENCOUNTER_BOOST_RATIO of target).
+    Prioritizes items within ENCOUNTER_PRIORITY_WINDOW_DAYS (3 days) to
+    consolidate within the optimal 24-48 hour window, then falls back to
+    the full ENCOUNTER_FULL_WINDOW_DAYS (14 days) window.
     """
     try:
-        boost_limit = max(4, target_items // 4)  # Up to 25% of session
+        boost_limit = max(4, int(target_items * ENCOUNTER_BOOST_RATIO))
+        # Priority: recent lookups first (within 3 days), then older (up to 14 days)
         encounter_items = conn.execute("""
             SELECT DISTINCT ve.content_item_id, ci.hanzi, ci.pinyin, ci.english,
                    ci.hsk_level, COUNT(*) as lookup_count,
                    COALESCE(p.mastery_stage, 'unseen') as stage,
-                   COALESCE(p.total_attempts, 0) as attempts
+                   COALESCE(p.total_attempts, 0) as attempts,
+                   MAX(ve.created_at) as last_lookup
             FROM vocab_encounter ve
             JOIN content_item ci ON ve.content_item_id = ci.id
             LEFT JOIN progress p ON p.content_item_id = ci.id
                 AND p.modality = 'reading' AND p.user_id = ?
             WHERE ve.looked_up = 1
-              AND ve.created_at >= datetime('now', '-14 days')
+              AND ve.created_at >= datetime('now', ? || ' days')
               AND ci.status = 'drill_ready'
               AND ci.review_status = 'approved'
               AND ve.user_id = ?
             GROUP BY ve.content_item_id
-            ORDER BY lookup_count DESC
+            ORDER BY
+                CASE WHEN MAX(ve.created_at) >= datetime('now', ? || ' days')
+                     THEN 0 ELSE 1 END,
+                lookup_count DESC
             LIMIT ?
-        """, (user_id, user_id, boost_limit)).fetchall()
+        """, (user_id, f"-{ENCOUNTER_FULL_WINDOW_DAYS}", user_id,
+              f"-{ENCOUNTER_PRIORITY_WINDOW_DAYS}", boost_limit)).fetchall()
         for ei in encounter_items:
             if ei["content_item_id"] in seen_ids:
                 continue
@@ -1794,6 +1825,90 @@ def _plan_reading_struggle_boost(conn: sqlite3.Connection, seen_ids: set,
             added += 1
     except (sqlite3.Error, KeyError, TypeError) as e:
         logger.debug("reading struggle boost skipped: %s", e)
+
+
+def _plan_cross_modality_boost_items(conn: sqlite3.Connection, seen_ids: set,
+                                      target_items: int, drills: list, user_id: int) -> None:
+    """Boost items mastered in one modality but weak in another.
+
+    The cross-modality audit found items where reading is 'stable'/'durable'
+    but listening (or vice versa) is still 'seen'/'passed_once'. These items
+    are low-hanging fruit: the learner already knows the vocabulary, they just
+    need practice in the weak modality to close the gap.
+
+    Injects up to CROSS_MODALITY_BOOST_LIMIT items per session, drilled in
+    the weak modality.
+    """
+    try:
+        # Find items with a strong modality (stable/durable) and a weak one (seen/passed_once)
+        gap_items = conn.execute("""
+            SELECT strong.content_item_id,
+                   strong.modality AS strong_modality,
+                   weak.modality AS weak_modality,
+                   weak.mastery_stage AS weak_stage,
+                   ci.hanzi, ci.pinyin, ci.english
+            FROM progress strong
+            JOIN progress weak
+                ON strong.content_item_id = weak.content_item_id
+                AND strong.user_id = weak.user_id
+                AND strong.modality != weak.modality
+            JOIN content_item ci ON ci.id = strong.content_item_id
+            WHERE strong.user_id = ?
+              AND strong.mastery_stage IN ('stable', 'durable')
+              AND weak.mastery_stage IN ('seen', 'passed_once')
+              AND ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
+            ORDER BY
+                -- Prioritise bigger gaps (durable vs seen > stable vs passed_once)
+                CASE strong.mastery_stage WHEN 'durable' THEN 2 ELSE 1 END
+                + CASE weak.mastery_stage WHEN 'seen' THEN 2 ELSE 1 END
+                DESC
+            LIMIT ?
+        """, (user_id, CROSS_MODALITY_BOOST_LIMIT * 3)).fetchall()
+
+        added = 0
+        for row in gap_items:
+            if added >= CROSS_MODALITY_BOOST_LIMIT:
+                break
+            if row["content_item_id"] in seen_ids:
+                continue
+            if len(drills) >= target_items:
+                break
+
+            weak_modality = row["weak_modality"]
+            weak_stage = row["weak_stage"]
+
+            # Pick an appropriate drill type for the weak modality + stage
+            if weak_modality == "listening":
+                drill_type = "listening_gist" if weak_stage == "seen" else "listening_detail"
+            elif weak_modality == "speaking":
+                drill_type = "speaking"
+            elif weak_modality == "ime":
+                drill_type = "ime_type"
+            else:
+                # reading
+                drill_type = "mc" if weak_stage == "seen" else "reverse_mc"
+
+            seen_ids.add(row["content_item_id"])
+            drills.append(DrillItem(
+                content_item_id=row["content_item_id"],
+                hanzi=row["hanzi"],
+                pinyin=row["pinyin"],
+                english=row["english"],
+                modality=weak_modality,
+                drill_type=drill_type,
+                metadata={
+                    "cross_modality_boost": True,
+                    "strong_modality": row["strong_modality"],
+                    "weak_modality": weak_modality,
+                },
+            ))
+            added += 1
+
+        if added:
+            logger.debug("cross-modality boost: injected %d items", added)
+    except (sqlite3.Error, KeyError, TypeError) as e:
+        logger.debug("cross-modality boost skipped: %s", e)
 
 
 # ── Operations Research: Formal Objective Function ──────────────────────
@@ -2665,6 +2780,7 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
         _plan_encounter_boost_items(conn, seen_ids, params["target_items"], drills, user_id)
         _plan_reading_struggle_boost(conn, seen_ids, params["target_items"], drills, user_id)
         _plan_grammar_boost_items(conn, seen_ids, params["target_items"], drills, user_id)
+        _plan_cross_modality_boost_items(conn, seen_ids, params["target_items"], drills, user_id)
 
     # Fill modality drills (due items + new items)
     params["new_budget"] = _plan_modality_drills(conn, params, drills, seen_ids, user_id)

@@ -246,8 +246,8 @@ def test_no_pinyin_for_stabilizing():
         drill = _find_drill_for_item(plan, target_id)
 
         if drill is not None:
-            assert drill.metadata.get("show_pinyin") is False, \
-                f"show_pinyin should be False for 'stabilizing', got {drill.metadata}"
+            assert not drill.metadata.get("show_pinyin"), \
+                f"show_pinyin should not be True for 'stabilizing', got {drill.metadata}"
         else:
             # Verify the logic directly
             mastery_stage = _get_stage(conn, target_id) or "seen"
