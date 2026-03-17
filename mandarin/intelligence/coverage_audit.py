@@ -174,9 +174,17 @@ def get_gap_closure_priority() -> list[dict]:
 
 
 def generate_coverage_findings(conn) -> list[dict]:
-    """Emit findings for coverage gaps that are actionable now (priority 1-3)."""
+    """Emit findings for coverage gaps that are actionable now (top 3 uncovered)."""
     findings = []
-    for item in _GAP_CLOSURE_PRIORITY[:3]:
+    # Build set of covered components from the matrix
+    covered = {item["component"] for item in COVERAGE_MAP if item["status"] == "covered"}
+
+    emitted = 0
+    for item in _GAP_CLOSURE_PRIORITY:
+        if emitted >= 3:
+            break
+        if item["component"] in covered:
+            continue  # Already has coverage — skip
         findings.append(_finding(
             dimension="pm",
             severity="medium",
@@ -187,6 +195,7 @@ def generate_coverage_findings(conn) -> list[dict]:
             impact=f"Closes intelligence gap in {item['domain']} domain",
             files=["mandarin/intelligence/coverage_audit.py"],
         ))
+        emitted += 1
     return findings
 
 
