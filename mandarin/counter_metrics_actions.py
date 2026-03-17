@@ -161,6 +161,9 @@ ACTION_RULES = {
             {"type": "scheduler_adjust", "action": "disable_hints_temporarily",
              "params": {"sessions": 5},
              "reason": "Critical hint dependence — force unassisted practice"},
+            {"type": "feature_flag", "action": "toggle",
+             "params": {"flag_name": "hints_enabled", "enabled": False},
+             "reason": "Critical hint dependence — disable hints until rate recovers"},
         ],
     },
 
@@ -218,6 +221,9 @@ ACTION_RULES = {
             {"type": "notification", "action": "admin_alert",
              "params": {"message": "High rate of suspiciously fast answers. Possible click-through gaming."},
              "reason": "Gaming behavior detected"},
+            {"type": "feature_flag", "action": "toggle",
+             "params": {"flag_name": "streak_rewards", "enabled": False},
+             "reason": "Streak rewards may incentivize gaming — disable while fast-tap rate is critical"},
         ],
     },
 
@@ -258,6 +264,9 @@ ACTION_RULES = {
                         "variants": ["control", "diverse_practice"],
                         "hypothesis": "More diverse practice improves holdout performance"},
              "reason": "Real-world outcomes not matching dashboard claims"},
+            {"type": "feature_flag", "action": "toggle",
+             "params": {"flag_name": "adaptive_difficulty", "enabled": False},
+             "reason": "Adaptive difficulty may be over-fitting to easy items — disable to broaden exposure"},
         ],
     },
 
@@ -266,6 +275,9 @@ ACTION_RULES = {
             {"type": "notification", "action": "admin_alert",
              "params": {"message": "PRODUCT HONESTY ALERT: mastered items perform similar to unmastered on holdouts. Progress display is misleading."},
              "reason": "The product is lying about user progress"},
+            {"type": "feature_flag", "action": "toggle",
+             "params": {"flag_name": "show_mastery_badges", "enabled": False},
+             "reason": "Mastery badges are misleading — hide until progress honesty recovers"},
         ],
     },
 

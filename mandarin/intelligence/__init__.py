@@ -40,6 +40,11 @@ _DOMAIN_DIMS = [
     "hsk_cliff", "tone_phonology", "scheduler_audit", "encounter_loop",
 ]
 
+# System/process dimensions (always shown even when findings are suppressed)
+_SYSTEM_PROCESS_DIMS = [
+    "methodology", "strategic", "genai_governance",
+]
+
 
 def run_product_audit(conn) -> dict:
     """Run comprehensive product audit across all dimensions.
@@ -232,26 +237,48 @@ def run_product_audit(conn) -> dict:
 
     findings.sort(key=lambda f: _SEVERITY_ORDER.get(f.get("severity", "low"), 9))
 
+    # Suppress false signals based on product lifecycle phase
+    from ._base import suppress_low_sample_findings, _lifecycle_phase, _real_user_count
+    lifecycle_phase = _lifecycle_phase(conn)
+    lifecycle_real_users = _real_user_count(conn)
+    findings = suppress_low_sample_findings(conn, findings)
+
     # Assess data confidence per dimension
     data_confidence = _assess_data_confidence(conn)
 
-    # Dimension scoring — only score dimensions that have analyzers
+    # Dimension scoring — score all known dimensions
     all_dimensions = sorted(set(
-        _STANDARD_DIMS + _DOMAIN_DIMS +
+        _STANDARD_DIMS + _DOMAIN_DIMS + _SYSTEM_PROCESS_DIMS +
         [f.get("dimension", "unknown") for f in findings]
     ))
+
+    # Track which dimensions had findings suppressed by lifecycle phase
+    from ._base import (
+        _CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS, _USER_BEHAVIOR_DIMENSIONS,
+        _CODE_DATA_DIMENSIONS,
+    )
 
     dimension_scores = {}
     for dim in all_dimensions:
         conf = data_confidence.get(dim, "low")
         score, grade = _dimension_score(findings, dim, confidence=conf)
         dim_findings = [f for f in findings if f.get("dimension") == dim]
-        dimension_scores[dim] = {
+        entry = {
             "score": score,
             "grade": grade,
             "finding_count": len(dim_findings),
             "confidence": conf,
         }
+        # Mark dimensions whose severity was adjusted by lifecycle phase
+        if lifecycle_phase != "established":
+            if dim in _CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS:
+                entry["downgraded"] = True
+                entry["suppression_reason"] = lifecycle_phase
+            elif dim in _USER_BEHAVIOR_DIMENSIONS and lifecycle_phase == "pre_launch":
+                entry["suppressed"] = True
+                entry["suppression_reason"] = "pre_launch"
+            # Code/data dimensions are NOT suppressed or downgraded
+        dimension_scores[dim] = entry
 
     # Trends from previous audits (needs >=3 data points)
     # New format: {dim: {arrow, smoothed, days_to_boundary, slope_per_audit}}
@@ -528,6 +555,9 @@ def run_product_audit(conn) -> dict:
         "external_grounding": external_grounding,
         "release_regressions": release_regressions,
         "methodology_grades": methodology_grades,
+        # Lifecycle context
+        "lifecycle_phase": lifecycle_phase,
+        "real_user_count": lifecycle_real_users,
         # Backward compat
         "total": len(findings),
         "by_severity": _count_by(findings, "severity"),
