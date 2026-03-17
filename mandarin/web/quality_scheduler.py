@@ -218,6 +218,19 @@ def _collect_metrics():
 
         conn.commit()
 
+    # ── Content reaudit ──
+    # Sample approved AI items and verify quality post-approval.
+    try:
+        with db.connection() as conn:
+            from ..ai.content_reaudit import run_scheduled_reaudit, check_learner_accuracy_flags
+            reaudit_result = run_scheduled_reaudit(conn, sample_size=10)
+            logger.info("Content reaudit: %s", reaudit_result)
+            accuracy_result = check_learner_accuracy_flags(conn)
+            if accuracy_result.get("flagged", 0) > 0:
+                logger.info("Content accuracy flags: %s", accuracy_result)
+    except Exception:
+        logger.debug("Content reaudit failed", exc_info=True)
+
     # ── Intelligence automation loop ──
     # Runs after quality metrics are collected so audit has fresh data.
     _run_intelligence_loop()

@@ -15,6 +15,7 @@ import json
 import logging
 import math
 import sqlite3
+import uuid
 from datetime import datetime, timezone
 
 from ._base import _safe_scalar, _safe_query, _safe_query_all
@@ -166,6 +167,30 @@ def generate_spc_observations(conn):
     for row in daily_completion:
         if row[1] is not None:
             _insert_spc_observation(conn, "session_completion", row[1], row[0])
+
+    # Content pipeline SPC: daily review queue depth
+    daily_queue = _safe_query_all(conn, """
+        SELECT date(queued_at) as d, COUNT(*) as depth
+        FROM pi_ai_review_queue
+        WHERE queued_at > datetime('now', '-30 days')
+        GROUP BY date(queued_at)
+        ORDER BY d
+    """)
+    for row in daily_queue:
+        if row[1] is not None:
+            _insert_spc_observation(conn, "content_queue_depth", float(row[1]), row[0])
+
+    # Content pipeline SPC: daily generation volume
+    daily_gen = _safe_query_all(conn, """
+        SELECT date(queued_at) as d, COUNT(*) as volume
+        FROM pi_ai_review_queue
+        WHERE queued_at > datetime('now', '-30 days')
+        GROUP BY date(queued_at)
+        ORDER BY d
+    """)
+    for row in daily_gen:
+        if row[1] is not None:
+            _insert_spc_observation(conn, "content_generation_volume", float(row[1]), row[0])
 
     conn.commit()
 

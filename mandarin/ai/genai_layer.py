@@ -232,17 +232,21 @@ def analyze_corpus_coverage(conn) -> dict:
 
     total_items = sum(hsk_dist.values())
 
-    # Unreviewed items per HSK level
+    # Unreviewed AI-generated items per HSK level (governance review, not learner activity)
     unreviewed = {}
-    rows = conn.execute("""
-        SELECT ci.hsk_level, COUNT(*) as cnt
-        FROM content_item ci
-        LEFT JOIN review_event re ON re.content_item_id = ci.id
-        WHERE ci.status = 'drill_ready' AND re.id IS NULL
-        GROUP BY ci.hsk_level
-    """).fetchall()
-    for r in rows:
-        unreviewed[r["hsk_level"]] = r["cnt"]
+    try:
+        rows = conn.execute("""
+            SELECT ci.hsk_level, COUNT(*) as cnt
+            FROM content_item ci
+            WHERE ci.status = 'drill_ready'
+              AND ci.is_ai_generated = 1
+              AND ci.review_status = 'pending_review'
+            GROUP BY ci.hsk_level
+        """).fetchall()
+        for r in rows:
+            unreviewed[r["hsk_level"]] = r["cnt"]
+    except sqlite3.OperationalError:
+        pass  # is_ai_generated column may not exist yet
 
     # Usage map population
     usage_map_count = 0

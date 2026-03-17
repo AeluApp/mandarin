@@ -33,16 +33,16 @@ def analyze_corpus_coverage_findings(conn) -> list[dict]:
 
     for level, count in hsk_dist.items():
         unreview_count = unreviewed.get(level, 0)
-        if count > 0 and unreview_count / count > 0.3:
-            pct = round(unreview_count / count * 100, 1)
+        if unreview_count > 0:
+            pct = round(unreview_count / count * 100, 1) if count > 0 else 100.0
             findings.append(_finding(
                 "genai_governance", "medium",
-                f"HSK {level}: {pct}% items unreviewed",
-                f"{unreview_count} of {count} HSK {level} items have never been reviewed.",
-                f"Schedule review sessions targeting HSK {level} content.",
-                f"Focus next 3 sessions on HSK {level} items — {pct}% unreviewed.",
-                "unreviewed items reduce curriculum effectiveness",
-                ["mandarin/scheduler.py"],
+                f"HSK {level}: {unreview_count} AI-generated items pending review",
+                f"{unreview_count} AI-generated HSK {level} items await governance review.",
+                f"Review pending AI-generated content in the AI Review Queue.",
+                f"Review {unreview_count} pending AI items at HSK {level} in admin > AI Review Queue.",
+                "unreviewed AI content may contain errors or duplicates",
+                ["mandarin/web/admin_routes.py"],
             ))
 
     usage_pct = report.get("usage_map_pct", 0)
