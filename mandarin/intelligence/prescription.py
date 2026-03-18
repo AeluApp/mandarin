@@ -139,6 +139,13 @@ _FINDING_TO_ACTION = {
     ("pm", ""): ("mandarin/settings.py", "pm_process", "improve"),
     ("competitive", ""): ("mandarin/content_gen/", "competitive_features", "improve"),
     ("ui", ""): ("mandarin/web/static/style.css", "ui_design", "improve"),
+    # OR-system findings (analyzers_or.py)
+    ("engineering", "spc"): ("mandarin/quality/spc.py", "spc_violation", "investigate"),
+    ("engineering", "queue"): ("mandarin/settings.py", "new_item_ceiling", "reduce"),
+    ("engineering", "monte carlo"): ("mandarin/settings.py", "capacity", "plan"),
+    ("marketing", "viral"): ("mandarin/web/marketing_hooks.py", "referral_ux", "improve"),
+    ("marketing", "price"): ("mandarin/settings.py", "pricing", "update"),
+    ("retention", "ltv"): ("mandarin/web/session_routes.py", "retention_features", "improve"),
 }
 
 # Error-type dimensions where improvement means metric goes DOWN
