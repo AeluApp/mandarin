@@ -248,6 +248,20 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import UX health analyzers
+    try:
+        from .analyzers_ux import ANALYZERS as UX_ANALYZERS
+        all_analyzers = all_analyzers + UX_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import UI visual design analyzers
+    try:
+        from .analyzers_ui import ANALYZERS as UI_ANALYZERS
+        all_analyzers = all_analyzers + UI_ANALYZERS
+    except ImportError:
+        pass
+
     # Import Operations Research analyzers (SPC, queue, CLV, Monte Carlo, etc.)
     try:
         from .analyzers_or import ANALYZERS as OR_ANALYZERS

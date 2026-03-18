@@ -1370,8 +1370,8 @@ function connectWebSocket(type) {
       data = JSON.parse(event.data);
     } catch (e) {
       _debugLog.error("[ws] invalid JSON from server:", e);
-      setStatus("disconnected", "Something went wrong");
-      addMessage("Something went wrong. Please reload the page.", "msg msg-wrong");
+      setStatus("disconnected", getUserFriendlyError("server"));
+      addMessage(getUserFriendlyError("server"), "msg msg-wrong");
       return;
     }
     _debugLog.log("[ws] recv:", data.type, data.type === "show" ? (data.text || "").substring(0, 60) : "");
@@ -1384,7 +1384,7 @@ function connectWebSocket(type) {
     if (sessionActive && event.code !== 1000) {
       attemptReconnect();
     } else if (sessionActive) {
-      setStatus("disconnected", "Disconnected");
+      setStatus("disconnected", getUserFriendlyError("ws_closed"));
       showDisconnectBanner();
       hideInput();
     } else {
@@ -1619,7 +1619,7 @@ function handleMessage(data) {
         transitionTo("session", "dashboard", function() { loadDashboardPanels(); });
         showUpgradePrompt("unlimited_sessions");
       } else {
-        showSessionError(data.message || "Something went wrong.");
+        showSessionError(data.message || getUserFriendlyError("server"));
       }
       break;
   }
@@ -2552,13 +2552,18 @@ function displayShow(data) {
     if (_lastDrillMeta && _lastDrillMeta.error_type) {
       var _errorElabMap = {
         "tone": "Tone \u2014 the pitch shape was off here",
+        "tone_confusion": "Tone mix-up \u2014 listen for the pitch pattern.",
         "segment": "Syllable \u2014 close, but one sound shifted",
+        "segmentation": "Word boundary issue \u2014 2-character pairs are common.",
         "vocab": "Meaning \u2014 this word looks similar to the right one",
+        "wrong_meaning": "Different meaning \u2014 try a vivid mental image.",
         "ime_confusable": "Similar characters \u2014 easy to confuse these two",
+        "similar_chars": "Similar-looking characters \u2014 focus on the radical.",
         "grammar": "Word order \u2014 your meaning came through, the structure needs adjusting",
         "register_mismatch": "Register \u2014 right word, different formality level",
         "particle_misuse": "Particle \u2014 tricky one, these are subtle",
-        "measure_word": "Measure word \u2014 different objects use different classifiers"
+        "measure_word": "Measure word \u2014 specific measure word needed for this noun.",
+        "pinyin_error": "Pinyin spelling \u2014 check vowels and initials."
       };
       var elaboration = _errorElabMap[_lastDrillMeta.error_type];
       if (elaboration) {
@@ -2737,6 +2742,16 @@ function showInput(prompt, id) {
       rBtn.addEventListener("click", function() { quickAnswer("R"); });
       optDiv.appendChild(rBtn);
     }
+
+    // Skip button — lets user skip drill without guessing
+    var skipWrap = document.createElement("div");
+    skipWrap.className = "drill-skip-wrap";
+    var skipBtn = document.createElement("button");
+    skipBtn.className = "btn btn-link drill-skip";
+    skipBtn.textContent = "Skip";
+    skipBtn.addEventListener("click", function() { skipDrill(); });
+    skipWrap.appendChild(skipBtn);
+    optDiv.appendChild(skipWrap);
 
     // Arrow key navigation for MC options (roving tabindex per ARIA radiogroup)
     optDiv.addEventListener("keydown", function(e) {
@@ -3000,6 +3015,12 @@ function quickAnswer(value, displayText) {
     allBtns[i].disabled = true;
   }
   sendAnswer(value, displayText);
+}
+
+function skipDrill() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({type: "answer", value: "__skip__", id: ""}));
+  }
 }
 
 function sendAnswer(value, displayText) {
@@ -4416,6 +4437,16 @@ function hideDisconnectBanner() {
   }
 })();
 
+function getUserFriendlyError(type) {
+  return {
+    "timeout": "Server took too long. Try again.",
+    "offline": "You're offline. Work saved for later.",
+    "auth": "Session expired. Please log in.",
+    "server": "Server problem \u2014 reported automatically.",
+    "ws_closed": "Connection lost. Reconnecting\u2026"
+  }[type] || "Something unexpected. Try refreshing.";
+}
+
 function showSessionError(message) {
   /* Show a fatal session error with a "Back to dashboard" button. */
   if (AeluSound.instance) AeluSound.instance.errorAlert();
@@ -4586,22 +4617,25 @@ document.addEventListener("keydown", function(e) {
 /* ── #8 Done confirmation + #29 Hint first-use ────────────────────────── */
 
 function handleDoneShortcut() {
-  var doneBtn = document.querySelector('.btn-shortcut[data-quick="Q"]');
-  if (_doneConfirmPending) {
-    // Second tap — actually quit
-    _doneConfirmPending = false;
-    if (_doneConfirmTimer) { clearTimeout(_doneConfirmTimer); _doneConfirmTimer = null; }
-    if (doneBtn) { doneBtn.classList.remove("confirm-tap"); doneBtn.textContent = 'done'; }
-    quickAnswer("Q");
-    return;
-  }
-  // First tap — show confirmation
-  _doneConfirmPending = true;
-  if (doneBtn) { doneBtn.classList.add("confirm-tap"); doneBtn.textContent = 'end session?'; }
-  _doneConfirmTimer = setTimeout(function() {
-    _doneConfirmPending = false;
-    if (doneBtn) { doneBtn.classList.remove("confirm-tap"); doneBtn.textContent = 'done'; }
-  }, 3000);
+  confirmEndSession();
+}
+
+function confirmEndSession() {
+  var m = document.querySelector(".confirm-modal");
+  if (m) m.remove();
+  m = document.createElement("div");
+  m.className = "confirm-modal";
+  m.innerHTML = '<div class="confirm-modal-content">' +
+    '<p style="font-weight:600">End this session?</p>' +
+    '<p class="confirm-detail">Your progress is saved.</p>' +
+    '<div style="display:flex;gap:0.5rem;justify-content:center">' +
+    '<button class="btn btn-primary" id="cey">End session</button>' +
+    '<button class="btn btn-secondary" id="cen">Keep going</button>' +
+    '</div></div>';
+  document.body.appendChild(m);
+  document.getElementById("cey").onclick = function() { m.remove(); quickAnswer("Q"); };
+  document.getElementById("cen").onclick = function() { m.remove(); };
+  m.onclick = function(e) { if (e.target === m) m.remove(); };
 }
 
 function handleHintShortcut() {
@@ -4625,6 +4659,25 @@ function handleHintShortcut() {
   if (AeluSound.instance) AeluSound.instance.hintReveal();
   quickAnswer("?");
 }
+
+/* ── Dark mode toggle ── */
+function toggleDarkMode() {
+  var t = document.documentElement.getAttribute("data-theme");
+  var next = t === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  document.documentElement.style.backgroundColor = next === "dark" ? "#1C2028" : "#F2EBE0";
+  var m = document.getElementById("meta-theme-color");
+  if (m) m.setAttribute("content", next === "dark" ? "#1C2028" : "#F2EBE0");
+  try { localStorage.setItem("aelu-theme", next); } catch (e) {}
+  _updateDarkModeIcon();
+}
+function _updateDarkModeIcon() {
+  var icon = document.getElementById("dark-mode-icon");
+  if (!icon) return;
+  var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  icon.textContent = isDark ? "\u2600\uFE0F" : "\uD83C\uDF19";
+}
+document.addEventListener("DOMContentLoaded", function() { _updateDarkModeIcon(); });
 
 /* ── Keyboard shortcut help overlay ── */
 function toggleShortcutOverlay() {

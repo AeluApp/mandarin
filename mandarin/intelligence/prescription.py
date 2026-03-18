@@ -133,11 +133,21 @@ _FINDING_TO_ACTION = {
     # cross_modality / error_taxonomy
     ("cross_modality", ""): ("mandarin/drills/", "modality_balance", "improve"),
     ("error_taxonomy", ""): ("mandarin/drills/", "error_classification", "improve"),
+    # ux (detailed, from UX analyzer)
+    ("ux", "session"): ("mandarin/scheduler.py", "session_length", "reduce"),
+    ("ux", "skip"): ("mandarin/web/static/app.js", "drill_ux", "improve"),
+    ("ux", "error"): ("mandarin/web/static/app.js", "error_feedback", "improve"),
+    ("ux", "duration"): ("mandarin/scheduler.py", "block_budgets", "reduce"),
+    ("onboarding", ""): ("mandarin/web/static/app.js", "onboarding_flow", "improve"),
     # marketing / copy / pm / competitive / ui
     ("marketing", ""): ("mandarin/web/marketing_routes.py", "marketing_effectiveness", "improve"),
     ("copy", ""): ("mandarin/web/templates/", "copy_quality", "improve"),
     ("pm", ""): ("mandarin/settings.py", "pm_process", "improve"),
     ("competitive", ""): ("mandarin/content_gen/", "competitive_features", "improve"),
+    ("ui", "padding"): ("mandarin/web/static/style.css", "spacing_tokens", "fix"),
+    ("ui", "table"): ("mandarin/web/templates/admin.html", "table_wrap", "add"),
+    ("ui", "aria"): ("mandarin/web/templates/index.html", "aria_labels", "add"),
+    ("ui", "accent"): ("mandarin/web/static/style.css", "color_system", "improve"),
     ("ui", ""): ("mandarin/web/static/style.css", "ui_design", "improve"),
     # OR-system findings (analyzers_or.py)
     ("engineering", "spc"): ("mandarin/quality/spc.py", "spc_violation", "investigate"),

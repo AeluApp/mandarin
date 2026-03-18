@@ -20,7 +20,10 @@
   <meta property="og:type" content="website">
   <!-- Theme detection BEFORE CSS to prevent dark-mode flash -->
   <script nonce="{{ csp_nonce }}">
-    (function(){var h=new Date().getHours(),d=h>=19||h<7;
+    (function(){var savedTheme=null;
+    try{savedTheme=localStorage.getItem("aelu-theme")}catch(e){}
+    var d;
+    if(savedTheme){d=savedTheme==="dark"}else{var h=new Date().getHours();d=h>=19||h<7}
     document.documentElement.setAttribute("data-theme",d?"dark":"light");
     document.documentElement.style.backgroundColor=d?"#1C2028":"#F2EBE0";
     var m=document.getElementById("meta-theme-color");
@@ -495,6 +498,14 @@
             </div>
 
             <!-- Preferences -->
+            <div class="settings-row">
+              <span class="settings-label">Dark mode</span>
+              <span class="settings-value">
+                <button class="dark-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                  <span id="dark-mode-icon" aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
             <div class="settings-row">
               <span class="settings-label">Streak reminders</span>
               <span class="settings-value">

@@ -9308,3 +9308,68 @@ html, body {
   .mp-option.selected, .sandhi-option.selected { background: #1a237e; border-color: #64b5f6; }
   .char-decomposition { background: var(--color-surface-alt); border-color: var(--color-divider); }
 }
+
+/* === UI Fixes === */
+
+/* Form error states */
+.input-field[aria-invalid="true"], .input-field.input-error {
+    border-color: var(--color-incorrect) !important;
+    box-shadow: 0 0 0 2px rgba(180, 80, 70, 0.15);
+}
+.input-error-message { font-size: var(--text-sm); color: var(--color-incorrect); margin-top: var(--space-1); }
+
+/* Responsive tables */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+.admin-table thead th { position: sticky; top: 0; background: var(--color-surface); z-index: 1; }
+@media (max-width: 768px) {
+    .admin-table { font-size: var(--text-sm); }
+    .admin-table td, .admin-table th { padding: 6px 8px; white-space: nowrap; }
+}
+
+/* Admin semantic metric colors */
+.metric-value-revenue { color: var(--color-correct); }
+.metric-value-users { color: var(--color-accent); }
+.metric-value-warning { color: #E6A23C; }
+.metric-value-danger { color: var(--color-incorrect); }
+
+/* Base card */
+.card { background: var(--color-surface); border-radius: 12px; padding: var(--space-3) var(--space-4); border: 1px solid rgba(0,0,0,0.06); }
+.card-elevated { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* Measure */
+:root { --measure: 65ch; }
+
+/* Placeholder contrast */
+::placeholder { color: var(--color-text-dim); opacity: 0.7; }
+
+/* Drill skip */
+.drill-skip-wrap { text-align: center; margin-top: 0.75rem; }
+.drill-skip { font-size: 0.8rem; color: var(--color-text-faint); }
+
+/* Error explanation */
+.error-explanation { font-size: 0.85rem; color: var(--color-text-dim); margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,0,0,0.03); border-radius: 6px; font-style: italic; }
+
+/* Confirm modal */
+.confirm-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.confirm-modal-content { background: var(--color-surface); border-radius: 12px; padding: 1.5rem; text-align: center; max-width: 300px; }
+.confirm-detail { font-size: 0.85rem; color: var(--color-text-dim); margin: 0.5rem 0 1rem; }
+
+/* Dark mode toggle */
+.dark-toggle { font-size: 1.2rem; padding: 4px 8px; cursor: pointer; background: none; border: none; }
+
+/* Complete reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode overrides for new UI components */
+@media (prefers-color-scheme: dark) {
+    .error-explanation { background: rgba(255,255,255,0.05); }
+    .card { border-color: rgba(255,255,255,0.08); }
+    .confirm-modal-content { background: var(--color-base); }
+}
