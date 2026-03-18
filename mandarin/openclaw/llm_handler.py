@@ -63,14 +63,14 @@ class IntentResult:
     from_llm: bool = False
 
 
-def classify_intent(text: str, conn=None) -> IntentResult:
+def classify_intent(text: str, conn=None, user_id: str = "") -> IntentResult:
     """Classify user message into an intent.
 
     Tries Ollama first, falls back to keyword matching.
     """
     # Try LLM classification if available
     if is_ollama_available():
-        result = _classify_with_llm(text, conn)
+        result = _classify_with_llm(text, conn, user_id=user_id)
         if result is not None:
             return result
 
@@ -78,10 +78,23 @@ def classify_intent(text: str, conn=None) -> IntentResult:
     return _classify_with_keywords(text)
 
 
-def _classify_with_llm(text: str, conn=None) -> Optional[IntentResult]:
+def _classify_with_llm(text: str, conn=None, user_id: str = "") -> Optional[IntentResult]:
     """Use Ollama to classify intent."""
     intents_str = "\n".join(f"- {k}: {v}" for k, v in INTENTS.items())
     system = SYSTEM_PROMPT.format(intents=intents_str)
+
+    # Prepend conversation memory context if available
+    try:
+        from ..ai.memory import search_memory
+        if user_id and text:
+            memories = search_memory(user_id, text, limit=3)
+            if memories:
+                memory_context = "\n".join(
+                    m.get("memory", m.get("text", "")) for m in memories
+                )
+                system = f"Previous context about this user:\n{memory_context}\n\n{system}"
+    except (ImportError, Exception):
+        pass
 
     response = generate(
         prompt=text,
@@ -184,20 +197,35 @@ def _extract_args(cmd: str, arg_text: str) -> dict:
     return args
 
 
-def generate_chat_response(text: str, conn=None) -> str:
+def generate_chat_response(text: str, conn=None, user_id: str = "") -> str:
     """Generate a conversational response for non-tool messages."""
     if not is_ollama_available():
         return "I can help with: /status, /review, /audit, /briefing, /errors. What would you like?"
 
+    system = (
+        "You are the Aelu assistant — calm, helpful, concise. "
+        "You help manage a Mandarin learning system. "
+        "If the user seems to want a specific action, suggest the relevant command. "
+        "Available: /status, /review, /audit, /briefing, /errors, /session. "
+        "Keep responses under 3 sentences."
+    )
+
+    # Prepend conversation memory context if available
+    try:
+        from ..ai.memory import search_memory
+        if user_id and text:
+            memories = search_memory(user_id, text, limit=3)
+            if memories:
+                memory_context = "\n".join(
+                    m.get("memory", m.get("text", "")) for m in memories
+                )
+                system = f"Previous context about this user:\n{memory_context}\n\n{system}"
+    except (ImportError, Exception):
+        pass
+
     response = generate(
         prompt=text,
-        system=(
-            "You are the Aelu assistant — calm, helpful, concise. "
-            "You help manage a Mandarin learning system. "
-            "If the user seems to want a specific action, suggest the relevant command. "
-            "Available: /status, /review, /audit, /briefing, /errors, /session. "
-            "Keep responses under 3 sentences."
-        ),
+        system=system,
         temperature=0.7,
         max_tokens=256,
         use_cache=False,

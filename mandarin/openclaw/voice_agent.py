@@ -105,7 +105,8 @@ class AeluCommandProcessor(FrameProcessor if _HAS_PIPECAT else object):
                 return
 
             # Classify and execute
-            intent_result = llm_handler.classify_intent(clean, conn=conn)
+            voice_user_id = "voice_owner"
+            intent_result = llm_handler.classify_intent(clean, conn=conn, user_id=voice_user_id)
             response = self._execute_intent(intent_result, conn)
 
             # Log
@@ -115,6 +116,13 @@ class AeluCommandProcessor(FrameProcessor if _HAS_PIPECAT else object):
                 tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
                 tool_result=response[:500],
             ) if conn else None
+
+            # Store conversation turn in memory
+            try:
+                from ..ai.memory import add_memory
+                add_memory(voice_user_id, clean, response, channel="voice")
+            except (ImportError, Exception):
+                pass
 
             # Speak response
             safe_response = security.sanitize_output(response)

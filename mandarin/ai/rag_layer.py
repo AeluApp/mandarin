@@ -231,6 +231,65 @@ def retrieve_context_for_generation(
             prompt_key=prompt_key,
         )
 
+    # --- Supplement with LanceDB vector search for missing items ---
+    vector_supplemented = 0
+    if missing:
+        try:
+            from .genai_layer import _get_lance_db, _get_multilingual_model
+            db = _get_lance_db()
+            if db is not None:
+                table = db.open_table("item_embeddings")
+                model = _get_multilingual_model()
+                # Build a query from the missing hanzi
+                query_text = " ".join(missing)
+                query_emb = model.encode([query_text], show_progress_bar=False)[0].tolist()
+                vector_results = table.search(query_emb).limit(3).to_pandas()
+
+                found_ids = {item["hanzi"] for item in found}
+                for _, vrow in vector_results.iterrows():
+                    v_hanzi = vrow.get("hanzi", "")
+                    if v_hanzi and v_hanzi not in found_ids:
+                        # Try to get full context from KB
+                        entry = conn.execute(
+                            "SELECT * FROM rag_knowledge_base WHERE hanzi=?",
+                            (v_hanzi,),
+                        ).fetchone()
+                        if entry:
+                            entry = dict(entry)
+                            definitions = json.loads(entry["cc_cedict_definitions"] or "[]")
+                            examples = json.loads(entry["example_sentences"] or "[]")
+                            synonyms = json.loads(entry["near_synonyms"] or "[]")
+                            errors = json.loads(entry["learner_errors"] or "[]")
+                            item_context = {
+                                "hanzi": v_hanzi,
+                                "pinyin": entry["pinyin"],
+                                "definitions": definitions[:3],
+                                "examples": examples[:max_examples_per_item] if include_examples else [],
+                                "near_synonyms": synonyms[:2],
+                                "learner_errors": errors[:2],
+                                "drift_risk": entry["drift_risk"],
+                            }
+                            found.append(item_context)
+                            found_ids.add(v_hanzi)
+                            vector_supplemented += 1
+                        else:
+                            # No KB entry, but we have embedding metadata
+                            found.append({
+                                "hanzi": v_hanzi,
+                                "pinyin": vrow.get("pinyin", ""),
+                                "definitions": [vrow.get("english", "")],
+                                "examples": [],
+                                "near_synonyms": [],
+                                "learner_errors": [],
+                                "drift_risk": None,
+                            })
+                            found_ids.add(v_hanzi)
+                            vector_supplemented += 1
+                # Remove vector-found items from missing list
+                missing = [h for h in missing if h not in found_ids]
+        except Exception:
+            pass  # Vector search is supplementary — never block retrieval
+
     context_text = _format_context_for_prompt(found, missing)
 
     return {
@@ -238,6 +297,7 @@ def retrieve_context_for_generation(
         "items_found": found,
         "items_missing": missing,
         "retrieval_logged": True,
+        "vector_supplemented": vector_supplemented,
     }
 
 

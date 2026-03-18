@@ -376,7 +376,8 @@ class TestEmbeddingLayer(unittest.TestCase):
         _seed_items(conn, count=3)
         mock_model = MagicMock()
         mock_model.encode.return_value = np.random.rand(3, 768).astype(np.float32)
-        with patch("mandarin.ai.genai_layer._get_multilingual_model", return_value=mock_model):
+        with patch("mandarin.ai.genai_layer._get_multilingual_model", return_value=mock_model), \
+             patch("mandarin.ai.genai_layer._get_lance_db", return_value=None):
             result = compute_item_embeddings(conn, content_item_ids=[1, 2, 3])
         self.assertEqual(result["status"], "complete")
         self.assertEqual(result["computed"], 3)
@@ -389,7 +390,8 @@ class TestEmbeddingLayer(unittest.TestCase):
         mock_model = MagicMock()
         embeddings = np.random.rand(3, 768).astype(np.float32)
         mock_model.encode.return_value = embeddings
-        with patch("mandarin.ai.genai_layer._get_multilingual_model", return_value=mock_model):
+        with patch("mandarin.ai.genai_layer._get_multilingual_model", return_value=mock_model), \
+             patch("mandarin.ai.genai_layer._get_lance_db", return_value=None):
             compute_item_embeddings(conn, content_item_ids=[1, 2, 3])
             # For query, return single embedding
             mock_model.encode.return_value = embeddings[:1]

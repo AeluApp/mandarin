@@ -1500,6 +1500,86 @@ function handleMessage(data) {
     case "reading_opener":
       showReadingOpener(data);
       break;
+    // ── Reading block (in-session comprehension) ──
+    case "reading_block":
+      showReadingBlock(data);
+      break;
+    case "reading_question":
+      showReadingQuestion(data);
+      break;
+    case "reading_feedback":
+      showReadingBlockFeedback(data);
+      break;
+    case "reading_summary":
+      showReadingBlockSummary(data);
+      break;
+    // ── Conversation block (in-session dialogue) ──
+    case "conversation_block":
+      showConversationBlock(data);
+      break;
+    case "conversation_feedback":
+      showConversationFeedback(data);
+      break;
+    case "conversation_prompt":
+      showConversationPrompt(data);
+      break;
+    case "conversation_summary":
+      showConversationSummary(data);
+      break;
+    // ── Listening block (in-session comprehension) ──
+    case "listening_block":
+      showListeningBlock(data);
+      break;
+    case "listening_question":
+      showListeningQuestion(data);
+      break;
+    case "listening_feedback":
+      showListeningBlockFeedback(data);
+      break;
+    case "listening_transcript":
+      showListeningTranscript(data);
+      break;
+    case "listening_summary":
+      showListeningSummary(data);
+      break;
+    // ── Minimal pair drills ──
+    case "minimal_pair":
+      showMinimalPair(data);
+      break;
+    case "minimal_pair_feedback":
+      showMinimalPairFeedback(data);
+      break;
+    // ── Tone sandhi drills ──
+    case "sandhi_contrast":
+      showSandhiContrast(data);
+      break;
+    case "sandhi_feedback":
+      showSandhiFeedback(data);
+      break;
+    // ── Character decomposition ──
+    case "character_decomposition":
+      showCharacterDecomposition(data);
+      break;
+    // ── Metacognitive prompts ──
+    case "confidence_prompt":
+      showConfidencePrompt(data);
+      break;
+    case "error_reflection":
+      showErrorReflection(data);
+      break;
+    case "session_assessment":
+      showSessionAssessment(data);
+      break;
+    // ── SDT Motivation ──
+    case "session_choice":
+      showSessionChoice(data);
+      break;
+    case "competence_feedback":
+      showCompetenceFeedback(data);
+      break;
+    case "prerequisite_notice":
+      showPrerequisiteNotice(data);
+      break;
     case "focus_insight":
       showFocusInsight(data);
       break;
@@ -1625,6 +1705,653 @@ function showReadingOpener(data) {
   });
 }
 
+// ── Reading Block Handlers (cleanup loop: exposure → drills → re-read) ──
+
+function showReadingBlock(data) {
+  var mode = data.mode || "exposure";
+  if (mode === "reread") {
+    _showReadingReread(data);
+  } else {
+    _showReadingExposure(data);
+  }
+}
+
+function _showReadingExposure(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  hideInput();
+  var p = data.passage || {};
+  var scaffold = data.scaffold || {};
+  var text = p.content_hanzi || "";
+
+  var html = '<div class="reading-block reading-block-exposure">';
+  html += '<div class="reading-block-label">Read at your pace</div>';
+  if (p.title) html += '<div class="reading-block-title">' + escapeHtml(p.title) + '</div>';
+
+  // Render passage with per-character tap-to-gloss (same pattern as reading opener)
+  html += '<div class="reading-block-text">';
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    if (/[\u4e00-\u9fff\u3400-\u4dbf]/.test(ch)) {
+      var info = scaffold[ch];
+      var isUnknown = info && !info.known;
+      if (isUnknown && info.pinyin) {
+        html += '<ruby class="reading-word reading-word-unknown" data-char="' + escapeHtml(ch) + '"'
+          + (info.english ? ' data-english="' + escapeHtml(info.english) + '"' : '')
+          + '>' + escapeHtml(ch) + '<rp>(</rp><rt>' + escapeHtml(info.pinyin) + '</rt><rp>)</rp></ruby>';
+      } else {
+        html += '<span class="reading-word' + (info && info.known ? ' reading-word-known' : '') + '" data-char="' + escapeHtml(ch) + '">' + escapeHtml(ch) + '</span>';
+      }
+    } else {
+      html += escapeHtml(ch);
+    }
+  }
+  html += '</div>';
+
+  html += '<div class="reading-block-hint">Tap any character to look it up</div>';
+  html += '<button class="btn btn-primary reading-block-ready">Done reading</button>';
+  html += '</div>';
+  area.innerHTML = html;
+  area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  // Attach tap-to-gloss + word_lookup notification
+  area.querySelectorAll(".reading-word, ruby.reading-word-unknown").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      var ch = el.dataset.char;
+      lookupWord(ch, e);
+      // Notify server this word was looked up (for cleanup drill injection)
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({type: "word_lookup", hanzi: ch}));
+      }
+    });
+  });
+
+  // "Done reading" signals server to proceed
+  area.querySelector(".reading-block-ready").addEventListener("click", function() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({type: "answer", value: "reading_done", id: ""}));
+    }
+  });
+}
+
+function _showReadingReread(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  hideInput();
+  var p = data.passage || {};
+  var drilledWords = data.drilled_words || [];
+  var drilledSet = {};
+  for (var d = 0; d < drilledWords.length; d++) {
+    drilledSet[drilledWords[d]] = true;
+  }
+  var text = p.content_hanzi || "";
+
+  var html = '<div class="reading-block reading-block-reread">';
+  html += '<div class="reading-block-label">Read again — see what you learned</div>';
+  if (p.title) html += '<div class="reading-block-title">' + escapeHtml(p.title) + '</div>';
+
+  // Render passage with drilled words highlighted
+  html += '<div class="reading-block-text">';
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    if (/[\u4e00-\u9fff\u3400-\u4dbf]/.test(ch)) {
+      var isDrilled = drilledSet[ch];
+      html += '<span class="reading-word' + (isDrilled ? ' reading-word-drilled' : '') + '" data-char="' + escapeHtml(ch) + '">' + escapeHtml(ch) + '</span>';
+    } else {
+      html += escapeHtml(ch);
+    }
+  }
+  html += '</div>';
+
+  if (drilledWords.length > 0) {
+    html += '<div class="reading-block-hint">Words you just drilled are highlighted</div>';
+  }
+  html += '<button class="btn btn-primary reading-block-ready">Continue</button>';
+  html += '</div>';
+  area.innerHTML = html;
+  area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  // Tap-to-gloss still works on re-read (but no word_lookup events sent)
+  area.querySelectorAll(".reading-word").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      var ch = el.dataset.char;
+      lookupWord(ch, e);
+    });
+  });
+
+  // "Continue" advances the session
+  area.querySelector(".reading-block-ready").addEventListener("click", function() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({type: "answer", value: "", id: ""}));
+    }
+  });
+}
+
+function showReadingQuestion(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="reading-question">';
+  html += '<div class="reading-question-label">Question ' + (data.index + 1) + ' of ' + (data.total || "?") + '</div>';
+  html += '<div class="reading-question-text">' + escapeHtml(data.question) + '</div>';
+  html += '<div class="reading-question-options">';
+  var options = data.options || [];
+  for (var i = 0; i < options.length; i++) {
+    html += '<button class="btn reading-option" data-index="' + i + '">' + escapeHtml(options[i]) + '</button>';
+  }
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".reading-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({type: "answer", value: btn.dataset.index, id: ""}));
+      }
+      area.querySelectorAll(".reading-option").forEach(function(b) { b.disabled = true; });
+      btn.classList.add("selected");
+    });
+  });
+}
+
+function showReadingBlockFeedback(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var existing = area.querySelector(".reading-question");
+  if (existing) {
+    var fb = document.createElement("div");
+    fb.className = "reading-feedback " + (data.correct ? "correct" : "incorrect");
+    fb.innerHTML = (data.correct ? "Correct!" : "Incorrect — " + escapeHtml(data.correct_answer || ""))
+      + (data.explanation ? '<div class="reading-explanation">' + escapeHtml(data.explanation) + '</div>' : '');
+    existing.appendChild(fb);
+  }
+  // Auto-advance after 2s
+  setTimeout(function() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      // Server sends next question automatically
+    }
+  }, 2000);
+}
+
+function showReadingBlockSummary(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="reading-summary">';
+  html += '<div class="reading-summary-label">Reading Complete</div>';
+  if (data.passage_title) html += '<div class="reading-summary-title">' + escapeHtml(data.passage_title) + '</div>';
+
+  // Show words looked up (cleanup loop) or question score (legacy)
+  var parts = [];
+  if (data.words_looked_up > 0) {
+    parts.push(data.words_looked_up + ' word' + (data.words_looked_up === 1 ? '' : 's') + ' looked up');
+  }
+  if (data.total > 0) {
+    parts.push((data.correct || 0) + '/' + data.total + ' questions correct');
+  }
+  if (data.reading_seconds > 0) {
+    var mins = Math.floor(data.reading_seconds / 60);
+    var secs = data.reading_seconds % 60;
+    parts.push((mins > 0 ? mins + 'm ' : '') + secs + 's reading');
+  }
+  if (parts.length > 0) {
+    html += '<div class="reading-summary-score">' + escapeHtml(parts.join(' · ')) + '</div>';
+  }
+
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+// ── Conversation Block Handlers (in-session dialogue) ──────────────
+
+function showConversationBlock(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="conversation-block">';
+  html += '<div class="conversation-block-label">Conversation Practice</div>';
+  html += '<div class="conversation-scenario">' + escapeHtml(data.scenario_title || "") + '</div>';
+  html += '<div class="conversation-situation">' + escapeHtml(data.situation || "") + '</div>';
+  html += '<div class="conversation-messages" id="conv-messages">';
+  html += '<div class="conv-msg conv-msg-tutor">';
+  html += '<div class="conv-msg-zh">' + escapeHtml(data.prompt_zh || "") + '</div>';
+  if (data.prompt_pinyin) html += '<div class="conv-msg-pinyin">' + escapeHtml(data.prompt_pinyin) + '</div>';
+  if (data.prompt_en) html += '<div class="conv-msg-en">' + escapeHtml(data.prompt_en) + '</div>';
+  html += '</div></div>';
+  html += '<div class="conversation-input-area">';
+  html += '<textarea id="conv-input" class="conv-input" rows="2" placeholder="Type your response in Chinese..."></textarea>';
+  html += '<button class="btn btn-primary conv-send" id="conv-send">Send</button>';
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  document.getElementById("conv-send").addEventListener("click", function() {
+    var input = document.getElementById("conv-input");
+    var text = (input ? input.value : "").trim();
+    if (!text) return;
+    // Show user message
+    var msgs = document.getElementById("conv-messages");
+    if (msgs) msgs.innerHTML += '<div class="conv-msg conv-msg-user">' + escapeHtml(text) + '</div>';
+    if (input) input.value = "";
+    // Send to server
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({type: "answer", value: text, id: ""}));
+    }
+  });
+
+  // Allow Enter to submit (Shift+Enter for newline)
+  var convInput = document.getElementById("conv-input");
+  if (convInput) {
+    convInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        document.getElementById("conv-send").click();
+      }
+    });
+  }
+}
+
+function showConversationFeedback(data) {
+  var msgs = document.getElementById("conv-messages");
+  if (!msgs) return;
+  var html = '<div class="conv-feedback">';
+  var score = data.score || 0;
+  html += '<div class="conv-feedback-score">Score: ' + Math.round(score * 100) + '%</div>';
+  if (data.feedback) html += '<div class="conv-feedback-text">' + escapeHtml(data.feedback) + '</div>';
+  if (data.patterns_used && data.patterns_used.length) {
+    html += '<div class="conv-patterns">Patterns used: ' + data.patterns_used.map(escapeHtml).join(", ") + '</div>';
+  }
+  if (data.suggestions && data.suggestions.length) {
+    html += '<div class="conv-suggestions">Try: ' + data.suggestions.map(escapeHtml).join("; ") + '</div>';
+  }
+  html += '</div>';
+  msgs.innerHTML += html;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showConversationPrompt(data) {
+  var msgs = document.getElementById("conv-messages");
+  if (!msgs) return;
+  var html = '<div class="conv-msg conv-msg-tutor">';
+  html += '<div class="conv-msg-zh">' + escapeHtml(data.prompt_zh || "") + '</div>';
+  if (data.prompt_pinyin) html += '<div class="conv-msg-pinyin">' + escapeHtml(data.prompt_pinyin) + '</div>';
+  if (data.prompt_en) html += '<div class="conv-msg-en">' + escapeHtml(data.prompt_en) + '</div>';
+  html += '</div>';
+  msgs.innerHTML += html;
+  msgs.scrollTop = msgs.scrollHeight;
+  // Re-enable input
+  var input = document.getElementById("conv-input");
+  if (input) { input.disabled = false; input.focus(); }
+}
+
+function showConversationSummary(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var pct = Math.round((data.avg_score || 0) * 100);
+  var html = '<div class="conversation-summary">';
+  html += '<div class="conversation-summary-label">Conversation Complete</div>';
+  if (data.scenario_title) html += '<div class="conversation-summary-title">' + escapeHtml(data.scenario_title) + '</div>';
+  html += '<div class="conversation-summary-score">Average: ' + pct + '% (' + (data.turns_completed || 0) + ' turns)</div>';
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+// ── Listening Block Handlers (in-session audio comprehension) ───────
+
+function showListeningBlock(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  hideInput();
+  var html = '<div class="listening-block">';
+  html += '<div class="listening-block-label">Listening Comprehension</div>';
+  html += '<div class="listening-block-hint">Listen to the passage, then answer comprehension questions.<br>You may replay and adjust speed. The transcript is hidden until after questions.</div>';
+  html += '<div class="listening-audio-controls">';
+  html += '<audio id="listening-audio" preload="auto"><source src="' + escapeHtml(data.audio_url || "") + '" type="audio/mpeg"></audio>';
+  html += '<div class="listening-btn-row">';
+  html += '<button class="btn listening-play" id="listening-play-btn">Play</button>';
+  html += '<button class="btn listening-replay" id="listening-replay-btn">Replay</button>';
+  html += '</div>';
+  html += '<div class="listening-speed-row">';
+  html += '<label>Speed: </label>';
+  html += '<button class="btn btn-sm listening-speed-btn" data-speed="0.6">0.6x</button>';
+  html += '<button class="btn btn-sm listening-speed-btn" data-speed="0.8">0.8x</button>';
+  html += '<button class="btn btn-sm listening-speed-btn selected" data-speed="1.0">1.0x</button>';
+  html += '<button class="btn btn-sm listening-speed-btn" data-speed="1.2">1.2x</button>';
+  html += '</div>';
+  html += '</div>';
+  html += '<button class="btn btn-primary listening-block-ready" id="listening-ready-btn">Ready for questions (' + (data.question_count || 0) + ')</button>';
+  html += '</div>';
+  area.innerHTML = html;
+  area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  var audioEl = document.getElementById("listening-audio");
+  var playBtn = document.getElementById("listening-play-btn");
+  var replayBtn = document.getElementById("listening-replay-btn");
+
+  playBtn.addEventListener("click", function() {
+    if (audioEl) {
+      if (audioEl.paused) {
+        audioEl.play();
+        playBtn.textContent = "Pause";
+      } else {
+        audioEl.pause();
+        playBtn.textContent = "Play";
+      }
+    }
+  });
+
+  replayBtn.addEventListener("click", function() {
+    if (audioEl) {
+      audioEl.currentTime = 0;
+      audioEl.play();
+      playBtn.textContent = "Pause";
+    }
+  });
+
+  if (audioEl) {
+    audioEl.addEventListener("ended", function() {
+      playBtn.textContent = "Play";
+    });
+  }
+
+  area.querySelectorAll(".listening-speed-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var speed = parseFloat(btn.dataset.speed) || 1.0;
+      if (audioEl) audioEl.playbackRate = speed;
+      area.querySelectorAll(".listening-speed-btn").forEach(function(b) { b.classList.remove("selected"); });
+      btn.classList.add("selected");
+    });
+  });
+
+  document.getElementById("listening-ready-btn").addEventListener("click", function() {
+    if (audioEl) { try { audioEl.pause(); } catch (e) {} }
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({type: "answer", value: "listening_done", id: ""}));
+    }
+  });
+}
+
+function showListeningQuestion(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="listening-question">';
+  html += '<div class="listening-question-label">Question ' + (data.index + 1) + ' of ' + (data.total || "?") + '</div>';
+  html += '<div class="listening-question-text">' + escapeHtml(data.question) + '</div>';
+  html += '<div class="listening-question-options">';
+  var options = data.options || [];
+  for (var i = 0; i < options.length; i++) {
+    html += '<button class="btn listening-option" data-index="' + i + '">' + escapeHtml(options[i]) + '</button>';
+  }
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".listening-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({type: "answer", value: btn.dataset.index, id: ""}));
+      }
+      area.querySelectorAll(".listening-option").forEach(function(b) { b.disabled = true; });
+      btn.classList.add("selected");
+    });
+  });
+}
+
+function showListeningBlockFeedback(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var existing = area.querySelector(".listening-question");
+  if (existing) {
+    var fb = document.createElement("div");
+    fb.className = "listening-feedback " + (data.correct ? "correct" : "incorrect");
+    fb.innerHTML = (data.correct ? "Correct!" : "Incorrect \u2014 " + escapeHtml(data.correct_answer || ""))
+      + (data.explanation ? '<div class="listening-explanation">' + escapeHtml(data.explanation) + '</div>' : '');
+    existing.appendChild(fb);
+  }
+}
+
+function showListeningTranscript(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="listening-transcript">';
+  html += '<div class="listening-transcript-label">Transcript</div>';
+  html += '<div class="listening-transcript-zh">';
+  // Render each character as a tappable span for gloss (reuse reading word pattern)
+  var text = data.transcript_zh || "";
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    // CJK character range check
+    var code = ch.charCodeAt(0);
+    if ((code >= 0x4e00 && code <= 0x9fff) || (code >= 0x3400 && code <= 0x4dbf)) {
+      html += '<span class="listening-word" data-char="' + escapeHtml(ch) + '">' + escapeHtml(ch) + '</span>';
+    } else {
+      html += escapeHtml(ch);
+    }
+  }
+  html += '</div>';
+  if (data.transcript_pinyin) {
+    html += '<div class="listening-transcript-pinyin" style="display:none;">' + escapeHtml(data.transcript_pinyin) + '</div>';
+    html += '<button class="btn btn-sm listening-toggle-pinyin">Show pinyin</button>';
+  }
+  html += '</div>';
+  area.innerHTML = html;
+  area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  // Toggle pinyin
+  var toggleBtn = area.querySelector(".listening-toggle-pinyin");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", function() {
+      var py = area.querySelector(".listening-transcript-pinyin");
+      if (py) { py.style.display = py.style.display === "none" ? "block" : "none"; }
+      toggleBtn.textContent = py && py.style.display === "none" ? "Show pinyin" : "Hide pinyin";
+    });
+  }
+
+  // Tap-to-gloss: look up character via existing API
+  area.querySelectorAll(".listening-word").forEach(function(span) {
+    span.addEventListener("click", function() {
+      var ch = span.dataset.char;
+      if (!ch) return;
+      // Toggle existing popup
+      var existingPopup = span.querySelector(".word-popup");
+      if (existingPopup) {
+        existingPopup.remove();
+        return;
+      }
+      // Close other popups
+      area.querySelectorAll(".word-popup").forEach(function(p) { p.remove(); });
+      // Fetch definition
+      apiFetch("/api/lookup?q=" + encodeURIComponent(ch))
+        .then(function(resp) { return resp.json(); })
+        .then(function(info) {
+          var popup = document.createElement("div");
+          popup.className = "word-popup";
+          popup.innerHTML = '<b>' + escapeHtml(info.pinyin || "") + '</b><br>' + escapeHtml(info.english || info.definition || "");
+          span.appendChild(popup);
+          // Auto-dismiss after 4s
+          setTimeout(function() { if (popup.parentNode) popup.remove(); }, 4000);
+        })
+        .catch(function() {});
+    });
+  });
+}
+
+function showListeningSummary(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var pct = Math.round((data.score || 0) * 100);
+  var html = '<div class="listening-summary">';
+  html += '<div class="listening-summary-label">Listening Complete</div>';
+  html += '<div class="listening-summary-score">' + (data.correct || 0) + '/' + (data.total || 0) + ' (' + pct + '%)</div>';
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+// ── Minimal Pair Handlers (Flege 1995) ─────────────────────────────
+
+function showMinimalPair(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="minimal-pair">';
+  html += '<div class="mp-label">Which one is correct?</div>';
+  html += '<div class="mp-question">' + escapeHtml(data.question || "") + '</div>';
+  html += '<div class="mp-options">';
+  html += '<button class="btn mp-option" data-choice="a"><div class="mp-hanzi">' + escapeHtml((data.item_a || {}).hanzi || "") + '</div><div class="mp-pinyin">' + escapeHtml((data.item_a || {}).pinyin || "") + '</div></button>';
+  html += '<button class="btn mp-option" data-choice="b"><div class="mp-hanzi">' + escapeHtml((data.item_b || {}).hanzi || "") + '</div><div class="mp-pinyin">' + escapeHtml((data.item_b || {}).pinyin || "") + '</div></button>';
+  html += '</div>';
+  var typeLabel = (data.interference_type === "near_homophone") ? "These sound similar" : (data.interference_type === "visual_similarity") ? "These look similar" : "Easy to confuse";
+  html += '<div class="mp-hint">' + typeLabel + '</div>';
+  html += '</div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".mp-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.choice, id: ""}));
+      area.querySelectorAll(".mp-option").forEach(function(b) { b.disabled = true; });
+      btn.classList.add("selected");
+    });
+  });
+}
+
+function showMinimalPairFeedback(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var mp = area.querySelector(".minimal-pair");
+  if (mp) {
+    var fb = document.createElement("div");
+    fb.className = "mp-feedback " + (data.correct ? "correct" : "incorrect");
+    fb.textContent = data.correct ? "Correct!" : "Not quite — look at the difference.";
+    mp.appendChild(fb);
+  }
+}
+
+// ── Tone Sandhi Handlers (Chen 2000) ───────────────────────────────
+
+function showSandhiContrast(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="sandhi-drill">';
+  html += '<div class="sandhi-label">Tone Sandhi</div>';
+  html += '<div class="sandhi-hanzi">' + escapeHtml(data.hanzi || "") + '</div>';
+  html += '<div class="sandhi-question">' + escapeHtml(data.question || "") + '</div>';
+  html += '<div class="sandhi-options">';
+  var opts = [{v: "correct", t: data.correct_answer || ""}, {v: "wrong", t: data.distractor || ""}];
+  if (Math.random() > 0.5) opts.reverse();
+  for (var i = 0; i < opts.length; i++) {
+    html += '<button class="btn sandhi-option" data-value="' + opts[i].v + '">' + escapeHtml(opts[i].t) + '</button>';
+  }
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".sandhi-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.value, id: ""}));
+      area.querySelectorAll(".sandhi-option").forEach(function(b) { b.disabled = true; });
+      btn.classList.add("selected");
+    });
+  });
+}
+
+function showSandhiFeedback(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var drill = area.querySelector(".sandhi-drill");
+  if (drill) {
+    var fb = document.createElement("div");
+    fb.className = "sandhi-feedback " + (data.correct ? "correct" : "incorrect");
+    fb.innerHTML = (data.correct ? "Correct!" : "Not quite.") + '<div class="sandhi-explanation">' + escapeHtml(data.explanation || "") + '</div>';
+    drill.appendChild(fb);
+  }
+}
+
+// ── Character Decomposition Handler (Shen 2005) ────────────────────
+
+function showCharacterDecomposition(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var overlay = document.createElement("div");
+  overlay.className = "char-decomposition";
+  var html = '<div class="char-decomp-main">' + escapeHtml(data.character || "") + '</div>';
+  if (data.radical) html += '<div class="char-decomp-radical"><span class="char-decomp-radical-char">' + escapeHtml(data.radical) + '</span> <span class="char-decomp-radical-meaning">' + escapeHtml(data.radical_meaning || "") + '</span></div>';
+  if (data.phonetic_hint) html += '<div class="char-decomp-phonetic">Sound hint: ' + escapeHtml(data.phonetic_hint) + '</div>';
+  if (data.family_examples && data.family_examples.length) html += '<div class="char-decomp-family">Family: ' + data.family_examples.map(escapeHtml).join(" ") + '</div>';
+  html += '<div class="char-decomp-dismiss">Tap to continue</div>';
+  overlay.innerHTML = html;
+  area.prepend(overlay);
+  var timer = setTimeout(function() { overlay.remove(); }, 4000);
+  overlay.addEventListener("click", function() { clearTimeout(timer); overlay.remove(); });
+}
+
+// ── Metacognitive Handlers (Dunlosky 2013) ─────────────────────────
+
+function showConfidencePrompt(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="meta-prompt"><div class="meta-label">Before you answer...</div><div class="meta-question">How confident are you?</div><div class="meta-options">';
+  html += '<button class="btn meta-option" data-value="high">Confident</button>';
+  html += '<button class="btn meta-option" data-value="medium">Somewhat</button>';
+  html += '<button class="btn meta-option" data-value="low">Guessing</button>';
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".meta-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.value, id: "confidence"}));
+    });
+  });
+}
+
+function showErrorReflection(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="meta-prompt"><div class="meta-label">What tripped you up?</div><div class="meta-options meta-options-col">';
+  html += '<button class="btn meta-option" data-value="similar_chars">Similar-looking characters</button>';
+  html += '<button class="btn meta-option" data-value="tone_confusion">Tone confusion</button>';
+  html += '<button class="btn meta-option" data-value="forgot_meaning">Forgot the meaning</button>';
+  html += '<button class="btn meta-option" data-value="guessed">Just guessed</button>';
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".meta-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.value, id: "reflection"}));
+    });
+  });
+}
+
+function showSessionAssessment(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var html = '<div class="meta-prompt session-assessment"><div class="meta-label">How was this session?</div><div class="meta-options">';
+  html += '<button class="btn meta-option" data-value="too_easy">Too easy</button>';
+  html += '<button class="btn meta-option" data-value="about_right">About right</button>';
+  html += '<button class="btn meta-option" data-value="too_hard">Too hard</button>';
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".meta-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.value, id: "assessment"}));
+    });
+  });
+}
+
+// ── SDT Motivation Handlers (Ryan & Deci 2000) ────────────────────
+
+function showSessionChoice(data) {
+  var area = document.getElementById("drill-area");
+  if (!area) return;
+  var opts = data.options || [];
+  var html = '<div class="session-choice"><div class="session-choice-label">What would you like to focus on?</div><div class="session-choice-options">';
+  for (var i = 0; i < opts.length; i++) {
+    html += '<button class="btn session-choice-option" data-value="' + (opts[i].value || "") + '">' + escapeHtml(opts[i].label || "") + '</button>';
+  }
+  html += '</div></div>';
+  area.innerHTML = html;
+  area.querySelectorAll(".session-choice-option").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: "answer", value: btn.dataset.value, id: "session_choice"}));
+    });
+  });
+}
+
+function showCompetenceFeedback(data) {
+  var toast = document.createElement("div");
+  toast.className = "competence-toast";
+  toast.textContent = data.message || "";
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.classList.add("visible"); }, 50);
+  setTimeout(function() { toast.classList.remove("visible"); setTimeout(function() { toast.remove(); }, 300); }, 4000);
+}
+
 function showFocusInsight(data) {
   var area = document.getElementById("drill-area");
   if (!area || !data.insights || data.insights.length === 0) return;
@@ -1648,6 +2375,22 @@ function showFocusInsight(data) {
       setTimeout(function() { if (card.parentNode) card.parentNode.removeChild(card); }, 400);
     }
   }, 8000);
+}
+
+function showPrerequisiteNotice(data) {
+  if (!data.message) return;
+  var toast = document.createElement("div");
+  toast.className = "prereq-notice";
+  toast.setAttribute("role", "status");
+  toast.setAttribute("aria-live", "polite");
+  toast.textContent = data.message;
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.classList.add("prereq-visible"); }, 50);
+  setTimeout(function() {
+    toast.classList.remove("prereq-visible");
+    toast.classList.add("prereq-exit");
+    setTimeout(function() { if (toast.parentNode) toast.remove(); }, 400);
+  }, 4000);
 }
 
 function displayShow(data) {
@@ -2767,6 +3510,11 @@ function fetchCompleteDetails(contentEl, baseHtml, summary) {
       html += '<div id="complete-encounters" class="complete-encounters"></div>';
     }
 
+    // Share / referral button
+    html += '<div class="share-section">';
+    html += '<button class="btn btn-outline share-btn" onclick="shareReferral()">Share with a friend</button>';
+    html += '</div>';
+
     contentEl.innerHTML = html;
     contentEl.classList.add("content-enter");
     setTimeout(function() { contentEl.classList.remove("content-enter"); }, DURATION_FAST);
@@ -2871,6 +3619,25 @@ function fetchCompleteDetails(contentEl, baseHtml, summary) {
       setTimeout(function() { MilestoneToast.checkMilestones(status.milestones); }, 1500);
     }
   });
+}
+
+function shareReferral() {
+  var referralUrl = window.location.origin + "?ref=" + (window._userReferralCode || "aelu");
+  if (navigator.share) {
+    navigator.share({
+      title: "Aelu \u2014 Learn Chinese",
+      text: "I've been learning Chinese with Aelu. Try it!",
+      url: referralUrl,
+    }).catch(function() {});
+  } else {
+    navigator.clipboard.writeText(referralUrl).then(function() {
+      var toast = document.createElement("div");
+      toast.className = "competence-toast visible";
+      toast.textContent = "Referral link copied!";
+      document.body.appendChild(toast);
+      setTimeout(function() { toast.remove(); }, 3000);
+    });
+  }
 }
 
 function updateProgress(current, total) {

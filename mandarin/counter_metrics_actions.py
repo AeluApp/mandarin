@@ -542,11 +542,12 @@ def _action_experiment_propose(conn: sqlite3.Connection, params: Dict,
     now = datetime.now(timezone.utc).isoformat()
     hypothesis = params.get("hypothesis", reason)
 
+    scope = params.get("scope", "parameter")
     conn.execute("""
         INSERT INTO experiment_proposal
         (name, description, hypothesis, source, source_detail, variants,
-         traffic_pct, priority, status)
-        VALUES (?, ?, ?, 'counter_metric', ?, ?, 50.0, ?, 'pending')
+         traffic_pct, priority, scope, status)
+        VALUES (?, ?, ?, 'counter_metric', ?, ?, 50.0, ?, ?, 'pending')
     """, (
         name,
         f"Auto-proposed from counter-metric alert: {alert.get('metric')}",
@@ -555,6 +556,7 @@ def _action_experiment_propose(conn: sqlite3.Connection, params: Dict,
                      "severity": alert.get("severity")}),
         json.dumps(variants),
         80,  # High priority — counter-metric alerts are serious
+        scope,
     ))
     conn.commit()
 

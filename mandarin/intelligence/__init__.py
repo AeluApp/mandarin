@@ -227,6 +227,27 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import discipline analyzers (visual design, animation, sound, copy, etc.)
+    try:
+        from .analyzers_discipline import ANALYZERS as DISCIPLINE_ANALYZERS
+        all_analyzers = all_analyzers + DISCIPLINE_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import cross-platform analyzers (Phase 5)
+    try:
+        from .analyzers_platform import ANALYZERS as PLATFORM_ANALYZERS
+        all_analyzers = all_analyzers + PLATFORM_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import AI/GenAI/agentic technology analyzers (Phase 7)
+    try:
+        from .analyzers_ai import ANALYZERS as AI_ANALYZERS
+        all_analyzers = all_analyzers + AI_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:
@@ -423,6 +444,36 @@ def run_product_audit(conn) -> dict:
         pass
     except Exception as e:
         logger.warning("DMAIC logging failed: %s", e)
+
+    # ── Meta-Intelligence: GenAI validates the intelligence system itself ──
+    try:
+        from .meta_intelligence import (
+            meta_validate_dimensions, meta_validate_findings,
+            meta_validate_scoring, meta_suggest_criteria,
+        )
+        meta_findings = []
+        meta_findings.extend(meta_validate_dimensions(conn, dimension_scores))
+        meta_findings.extend(meta_validate_findings(conn, findings))
+        meta_findings.extend(meta_validate_scoring(conn, dimension_scores))
+        # Suggest criteria for dimensions scoring 100/A with 0 findings
+        for dim, info in dimension_scores.items():
+            if info.get("score", 0) >= 95 and info.get("finding_count", 0) == 0:
+                meta_findings.extend(meta_suggest_criteria(conn, dim, findings))
+        if meta_findings:
+            findings.extend(meta_findings)
+            # Re-score 'meta' dimension (uses top-level import)
+            m_score, m_grade = _dimension_score(meta_findings, "meta", confidence="medium")
+            dimension_scores["meta"] = {
+                "score": m_score, "grade": m_grade,
+                "finding_count": len(meta_findings), "confidence": "medium",
+            }
+            # Update overall score
+            score_val, grade = _overall_score(dimension_scores)
+            overall = {"score": score_val, "grade": grade}
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.debug("Meta-intelligence failed: %s", e)
 
     # ── Prescription Layer ──
     work_order = None

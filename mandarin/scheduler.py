@@ -326,17 +326,88 @@ ERROR_DRILL_PREFERENCE = {
 
 
 @dataclass
+class DrillBlock:
+    """Sequence of atomic drills (existing behavior, wrapped in a block)."""
+    block_type: str = "drills"
+    items: List[DrillItem] = field(default_factory=list)
+    target_seconds: int = 180
+
+
+@dataclass
+class ReadingBlock:
+    """A reading passage — exposure (tap unknowns) or re-read (see progress).
+
+    Cleanup loop: exposure → drills → re-read same passage.
+    """
+    block_type: str = "reading"
+    passage_id: int = 0
+    passage: dict = field(default_factory=dict)
+    questions: list = field(default_factory=list)
+    target_seconds: int = 240
+    is_reread: bool = False
+    looked_up_words: list = field(default_factory=list)  # populated at runtime
+
+
+@dataclass
+class ConversationBlock:
+    """A guided conversation scenario with multi-turn dialogue."""
+    block_type: str = "conversation"
+    scenario_id: str = ""
+    scenario: dict = field(default_factory=dict)
+    max_turns: int = 3
+    target_seconds: int = 180
+
+
+@dataclass
+class ListeningBlock:
+    """A listening comprehension block -- audio plays, user answers MC questions."""
+    block_type: str = "listening"
+    passage_id: int = 0
+    audio_url: str = ""
+    transcript_zh: str = ""
+    transcript_pinyin: str = ""
+    questions: list = field(default_factory=list)
+    playback_speed: float = 1.0
+    target_seconds: int = 180
+
+
+@dataclass
 class SessionPlan:
-    """A complete session plan ready for the runner."""
+    """A complete session plan ready for the runner.
+
+    Sessions are organized as blocks: DrillBlock (atomic drills),
+    ReadingBlock (passage + comprehension), ConversationBlock (dialogue),
+    ListeningBlock (audio + comprehension questions).
+    The planner allocates by time budget, not item count.
+    """
     session_type: str           # 'standard', 'minimal', 'catchup'
-    drills: List[DrillItem] = field(default_factory=list)
+    blocks: list = field(default_factory=list)  # [DrillBlock, ReadingBlock, ConversationBlock, ListeningBlock, ...]
     micro_plan: str = ""        # One-line summary shown at start
     estimated_seconds: int = 0
     days_since_last: Optional[int] = None
     gap_message: Optional[str] = None
-    day_label: Optional[str] = None  # Day-of-week profile name
-    focus_insights: List[str] = field(default_factory=list)  # Why the system chose this plan
-    experiment_variant: Optional[str] = None  # A/B experiment variant assigned for this session
+    day_label: Optional[str] = None
+    focus_insights: List[str] = field(default_factory=list)
+    experiment_variant: Optional[str] = None
+
+    @property
+    def drills(self) -> List[DrillItem]:
+        """Backward compat: flat list of DrillItems from all DrillBlocks."""
+        items = []
+        for block in self.blocks:
+            if isinstance(block, DrillBlock):
+                items.extend(block.items)
+        return items
+
+    @drills.setter
+    def drills(self, value):
+        """Backward compat: set drills by wrapping in a DrillBlock."""
+        # Find existing DrillBlock or create one
+        for block in self.blocks:
+            if isinstance(block, DrillBlock):
+                block.items = value
+                return
+        self.blocks.insert(0, DrillBlock(items=value))
 
 
 # ── Gap messages (humane, not shaming) ──────────────
@@ -609,20 +680,82 @@ def _pick_mapping_groups(n: int = 3, exclude_groups: set[str] | None = None,
 
 # ── Drill type variety ──────────────────────────────
 
+def _thompson_sample_drill_type(conn, user_id: int, item_id: int, eligible_types: list[str]) -> str:
+    """Select drill type via Thompson Sampling (Beta-Bernoulli bandit).
+
+    Each (user, item, drill_type) has Beta(alpha, beta) posterior.
+    Sample from each, pick highest. Textbook MAB solution.
+    """
+    if not eligible_types:
+        return "mc"
+
+    try:
+        rows = conn.execute("""
+            SELECT drill_type, alpha, beta FROM drill_type_posterior
+            WHERE user_id = ? AND content_item_id = ?
+        """, (user_id, item_id)).fetchall()
+        posteriors = {r["drill_type"]: (r["alpha"], r["beta"]) for r in rows}
+    except Exception:
+        posteriors = {}
+
+    best_type = eligible_types[0]
+    best_sample = -1.0
+    for dt in eligible_types:
+        a, b = posteriors.get(dt, (1.0, 1.0))
+        sample = random.betavariate(a, b)
+        if sample > best_sample:
+            best_sample = sample
+            best_type = dt
+    return best_type
+
+
+def _update_drill_type_posterior(conn, user_id: int, item_id: int, drill_type: str, correct: bool):
+    """Update Beta posterior after a drill attempt."""
+    try:
+        conn.execute("""
+            INSERT INTO drill_type_posterior (user_id, content_item_id, drill_type, alpha, beta)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT (user_id, content_item_id, drill_type)
+            DO UPDATE SET
+                alpha = alpha + ?,
+                beta = beta + ?,
+                updated_at = datetime('now')
+        """, (user_id, item_id, drill_type,
+              2.0 if correct else 1.0, 1.0 if correct else 2.0,
+              1.0 if correct else 0.0, 0.0 if correct else 1.0))
+        conn.commit()
+    except Exception:
+        pass
+
+
 def _bandit_drill_selection(conn: sqlite3.Connection, item: dict,
                             mastery_stage: str, user_id: int = 1,
                             eligible_types: list[str] | None = None) -> str | None:
-    """Thompson Sampling bandit: pick drill type with highest sampled learning gain.
+    """Thompson Sampling bandit: pick drill type using per-item Beta posteriors.
 
-    For each (drill_type, mastery_stage), tracks successes (correct after review)
-    vs failures from review_event data.  Computes Beta posterior, samples, picks
-    drill type with highest sample.
+    Delegates to _thompson_sample_drill_type which uses the drill_type_posterior
+    table for per-(user, item, drill_type) Beta(alpha, beta) posteriors.
 
-    Returns None when < 30 observations per arm (falls back to heuristic).
+    Falls back to aggregate review_event stats when the posterior table is empty
+    and there are at least 30 observations per arm.
     """
     if not eligible_types or len(eligible_types) < 2:
         return None  # Need at least 2 arms to make a choice
 
+    item_id = item.get("id", 0)
+
+    # Try per-item Thompson Sampling from drill_type_posterior table first
+    try:
+        row_count = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM drill_type_posterior
+            WHERE user_id = ? AND content_item_id = ?
+        """, (user_id, item_id)).fetchone()
+        if row_count and (row_count["cnt"] or 0) >= 2:
+            return _thompson_sample_drill_type(conn, user_id, item_id, list(eligible_types))
+    except Exception:
+        pass
+
+    # Fallback: aggregate stats from review_event (original approach)
     MIN_OBS_PER_ARM = 30
 
     try:
@@ -1395,6 +1528,42 @@ def _apply_metrics_feedback(conn: sqlite3.Connection, user_id: int, plan: dict) 
     cm_adjustments = _apply_counter_metric_adjustments(conn, user_id, plan)
     adjustments.extend(cm_adjustments)
 
+    # ── Metacognitive data integration (Dunlosky 2013) ──
+    # Adjust new item budget based on last session's self-assessment
+    try:
+        recent_assessment = conn.execute("""
+            SELECT difficulty_rating FROM session_self_assessment
+            WHERE user_id = ? ORDER BY created_at DESC LIMIT 1
+        """, (user_id,)).fetchone()
+        if recent_assessment:
+            old_budget = plan["new_budget"]
+            if recent_assessment["difficulty_rating"] == "too_hard":
+                plan["new_budget"] = max(2, plan["new_budget"] - 1)
+                if plan["new_budget"] != old_budget:
+                    adjustments.append(f"metacog:too_hard: new_budget {old_budget} -> {plan['new_budget']}")
+            elif recent_assessment["difficulty_rating"] == "too_easy":
+                plan["new_budget"] = min(8, plan["new_budget"] + 1)
+                if plan["new_budget"] != old_budget:
+                    adjustments.append(f"metacog:too_easy: new_budget {old_budget} -> {plan['new_budget']}")
+    except Exception:
+        pass
+
+    # Identify overconfident items (high confidence + wrong, 2+ times in 14 days)
+    # These are stored on the plan dict so the modality drill planner can boost them
+    try:
+        rows = conn.execute("""
+            SELECT item_id FROM confidence_calibration
+            WHERE user_id = ? AND confidence = 'high' AND was_correct = 0
+            AND created_at >= datetime('now', '-14 days')
+            GROUP BY item_id HAVING COUNT(*) >= 2
+        """, (user_id,)).fetchall()
+        overconfident_ids = {r["item_id"] for r in rows}
+        if overconfident_ids:
+            plan["_overconfident_ids"] = overconfident_ids
+            adjustments.append(f"metacog:overconfident: {len(overconfident_ids)} items flagged for priority review")
+    except Exception:
+        pass
+
     if adjustments:
         logger.info("metrics feedback adjustments for user %d: %s", user_id, "; ".join(adjustments))
 
@@ -1577,6 +1746,52 @@ def _plan_contrastive_drills(conn, seen_ids, user_id=1):
     return drills
 
 
+def _plan_minimal_pair_drills(conn, drills, seen_ids, user_id=1):
+    """Inject minimal-pair contrast drills at ~30% probability.
+
+    Queries high-interference pairs where both items are known by the learner,
+    then creates 'minimal_pair' drill items that show both items side-by-side
+    and ask the learner to distinguish them.
+    """
+    try:
+        from .ai.memory_model import get_active_contrast_pairs
+        contrast_pairs = get_active_contrast_pairs(conn, user_id, limit=3)
+    except Exception:
+        return
+
+    for pair in contrast_pairs:
+        if random.random() >= 0.3:
+            continue
+        id_a, id_b = pair["item_id_a"], pair["item_id_b"]
+        if id_a in seen_ids and id_b in seen_ids:
+            continue
+        seen_ids.add(id_a)
+        seen_ids.add(id_b)
+        drills.append(DrillItem(
+            content_item_id=id_a,
+            hanzi=pair["hanzi_a"],
+            pinyin=pair["pinyin_a"],
+            english=pair["english_a"],
+            modality="reading",
+            drill_type="minimal_pair",
+            metadata={
+                "item_a": {
+                    "id": id_a,
+                    "hanzi": pair["hanzi_a"],
+                    "pinyin": pair["pinyin_a"],
+                    "english": pair["english_a"],
+                },
+                "item_b": {
+                    "id": id_b,
+                    "hanzi": pair["hanzi_b"],
+                    "pinyin": pair["pinyin_b"],
+                    "english": pair["english_b"],
+                },
+                "interference_type": pair["interference_type"],
+            },
+        ))
+
+
 def _apply_cross_session_interference_penalty(conn, due_items):
     """Soft-deprioritize items whose interference partner was drilled in the last session.
 
@@ -1620,6 +1835,59 @@ def _apply_cross_session_interference_penalty(conn, due_items):
         due_items.sort(key=lambda x: 1 if x["id"] in penalized else 0)
 
 
+def _check_grammar_prerequisite(conn: sqlite3.Connection, user_id: int,
+                                 grammar_point_id: int) -> dict | None:
+    """Check if a grammar point's prerequisites are met; return substitution info if not.
+
+    Returns None if prerequisites are met (or checking fails).
+    Returns {'substitute_id': int, 'original_name': str, 'blocking_name': str}
+    if a prerequisite is blocking.
+    """
+    try:
+        from .ai.grammar_tutor import check_prerequisites
+        result = check_prerequisites(conn, user_id, grammar_point_id)
+        if result['all_met'] or not result['blocking']:
+            return None
+        blocker = result['blocking'][0]
+        # Get original grammar point name
+        orig = conn.execute(
+            "SELECT name FROM grammar_point WHERE id = ?", (grammar_point_id,)
+        ).fetchone()
+        orig_name = orig['name'] if orig else ''
+        return {
+            'substitute_id': blocker['id'],
+            'original_name': orig_name,
+            'blocking_name': blocker['title'],
+            'blocking_mastery': blocker['mastery_score'],
+        }
+    except Exception:
+        return None
+
+
+def _get_substitute_drill_items(conn: sqlite3.Connection, substitute_grammar_id: int,
+                                 user_id: int, seen_ids: set, limit: int = 2) -> list:
+    """Get content items linked to a substitute grammar point for prerequisite drills."""
+    try:
+        rows = conn.execute("""
+            SELECT DISTINCT ci.id, ci.hanzi, ci.pinyin, ci.english,
+                   gp.name as grammar_name,
+                   COALESCE(p.mastery_stage, 'unseen') as stage
+            FROM content_grammar cg
+            JOIN content_item ci ON ci.id = cg.content_item_id
+            JOIN grammar_point gp ON gp.id = cg.grammar_point_id
+            LEFT JOIN progress p ON p.content_item_id = ci.id
+                AND p.modality = 'reading' AND p.user_id = ?
+            WHERE cg.grammar_point_id = ?
+              AND ci.status = 'drill_ready'
+              AND ci.review_status = 'approved'
+            ORDER BY RANDOM()
+            LIMIT ?
+        """, (user_id, substitute_grammar_id, limit)).fetchall()
+        return [dict(r) for r in rows]
+    except Exception:
+        return []
+
+
 def _plan_grammar_boost_items(conn: sqlite3.Connection, seen_ids: set,
                                target_items: int, drills: list, user_id: int) -> None:
     """Boost scheduling weight for items linked to recently-studied grammar points.
@@ -1627,13 +1895,17 @@ def _plan_grammar_boost_items(conn: sqlite3.Connection, seen_ids: set,
     When a user studies a grammar point, the linked vocabulary items get
     priority in the next few sessions, reinforcing both grammar understanding
     and vocabulary mastery simultaneously.
+
+    Prerequisite gating: before boosting items for a grammar point, checks
+    whether prerequisites are met. If not, substitutes drills for the
+    blocking prerequisite instead (Pienemann's Processability Theory).
     """
     try:
         boost_limit = max(2, target_items // 6)  # Up to ~16% of session
         # Find content items linked to grammar points studied in last 3 days
         grammar_items = conn.execute("""
             SELECT DISTINCT ci.id, ci.hanzi, ci.pinyin, ci.english, ci.hsk_level,
-                   gp.name as grammar_name,
+                   gp.name as grammar_name, gp.id as grammar_point_id,
                    COALESCE(p.mastery_stage, 'unseen') as stage
             FROM grammar_progress gpr
             JOIN content_grammar cg ON cg.grammar_point_id = gpr.grammar_point_id
@@ -1650,11 +1922,50 @@ def _plan_grammar_boost_items(conn: sqlite3.Connection, seen_ids: set,
         """, (user_id, user_id, boost_limit * 2)).fetchall()
 
         added = 0
+        checked_grammar_ids = {}  # Cache prerequisite checks per grammar_point_id
         for gi in grammar_items:
             if gi["id"] in seen_ids or added >= boost_limit:
                 break
             if len(drills) >= target_items:
                 break
+
+            # ── Prerequisite gate ──
+            gp_id = gi["grammar_point_id"]
+            if gp_id not in checked_grammar_ids:
+                checked_grammar_ids[gp_id] = _check_grammar_prerequisite(
+                    conn, user_id, gp_id
+                )
+            sub_info = checked_grammar_ids[gp_id]
+
+            if sub_info:
+                # Substitute with prerequisite drills instead
+                sub_items = _get_substitute_drill_items(
+                    conn, sub_info['substitute_id'], user_id, seen_ids, limit=1
+                )
+                for si in sub_items:
+                    if si["id"] in seen_ids or added >= boost_limit:
+                        break
+                    seen_ids.add(si["id"])
+                    stage = si.get("stage", "unseen")
+                    drill_type = "mc" if stage in ("unseen", "seen") else "reverse_mc"
+                    drills.append(DrillItem(
+                        content_item_id=si["id"],
+                        hanzi=si["hanzi"],
+                        pinyin=si["pinyin"],
+                        english=si["english"],
+                        modality="reading",
+                        drill_type=drill_type,
+                        metadata={
+                            "grammar_boost": True,
+                            "grammar_name": si.get("grammar_name", ""),
+                            "prerequisite_substitute": True,
+                            "original_grammar": sub_info['original_name'],
+                            "blocking_grammar": sub_info['blocking_name'],
+                        },
+                    ))
+                    added += 1
+                continue  # Skip the original item
+
             seen_ids.add(gi["id"])
             # Drill type based on mastery stage
             stage = gi["stage"]
@@ -2315,6 +2626,11 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
         if is_consolidation:
             due_items = [i for i in due_items if (i.get("difficulty") or 0.5) <= 0.6] or due_items
 
+        # Boost overconfident items to front of queue (metacognitive calibration)
+        overconfident_ids = params.get("_overconfident_ids", set())
+        if overconfident_ids:
+            due_items.sort(key=lambda x: 0 if x["id"] in overconfident_ids else 1)
+
         items_added = 0
         # Interference-aware filtering (within-session + cross-session)
         try:
@@ -2347,6 +2663,25 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                                               allowed_types=allowed_types,
                                               mastery_stage=mastery_stage,
                                               conn=conn)
+
+            # Generation effect (Slamecka & Graf 1978): mastered items switch
+            # to production-type drills to force deeper retrieval processing.
+            # Items with half_life > 14 days have a 50% chance of override.
+            item_half_life = item.get("half_life_days") or 0
+            if item_half_life > 14 and random.random() < 0.5:
+                _GENERATION_PROD_TYPES = (
+                    'ime_type', 'english_to_pinyin', 'hanzi_to_pinyin',
+                    'pinyin_to_hanzi', 'translation', 'word_order',
+                    'sentence_build', 'cloze_context',
+                )
+                gen_candidates = [
+                    t for t in _GENERATION_PROD_TYPES
+                    if (not allowed_types or t in allowed_types)
+                    and _item_is_drillable(item, t)
+                ]
+                if gen_candidates:
+                    drill_type = random.choice(gen_candidates)
+
             if not _item_is_drillable(item, drill_type):
                 continue
 
@@ -2354,6 +2689,10 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
             levels = SCAFFOLD_LEVELS.get(mastery_stage, {"pinyin": "none", "english": "full"})
             scaffold_level = levels["pinyin"]
             english_level = levels["english"]
+
+            # Annotate difficulty data for difficulty interleaving (Phase 4)
+            item_difficulty = item.get("item_difficulty") or item.get("difficulty")
+            ml_acc = item.get("_ml_predicted_accuracy")
 
             seen_ids.add(item["id"])
             drill = DrillItem(
@@ -2367,6 +2706,8 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                     "scaffold_level": scaffold_level,
                     "english_level": english_level,
                     "hsk_level": item.get("hsk_level", 0),
+                    "item_difficulty": item_difficulty,
+                    "_ml_predicted_accuracy": ml_acc,
                 },
             )
 
@@ -2730,11 +3071,88 @@ def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, us
         logger.debug("focus insights skipped: %s", e)
         focus_insights = []
 
+    # Build blocks using the cleanup loop pattern:
+    #   ReadingBlock(exposure) -> DrillBlock -> ReadingBlock(reread) -> ConversationBlock
+    # The exposure reading collects unknown words; drills reinforce them;
+    # the re-read lets the user see their progress on the same passage.
+    drill_seconds = len(drills) * SECONDS_PER_DRILL + conv_count * SECONDS_PER_CONVERSATION
+
+    profile = db.get_profile(conn, user_id=user_id)
+    hsk_level = profile.get("hsk_level", 1) if profile else 1
+
+    # Alternate reading and listening by session: odd sessions get reading,
+    # even sessions get listening. Falls back to the other if one is unavailable.
+    total_sessions = (profile.get("total_sessions") or 0) if profile else 0
+    is_listening_session = total_sessions % 2 == 0  # even = listening, odd = reading
+
+    reading_block = None
+    listening_block = None
+
+    if drill_seconds >= 180:
+        if is_listening_session:
+            listening_block = _pick_listening_block(conn, user_id, hsk_level)
+            if not listening_block:
+                # Fallback to reading if no listening passage available
+                reading_block = _pick_reading_block(conn, user_id, hsk_level)
+        else:
+            reading_block = _pick_reading_block(conn, user_id, hsk_level)
+            if not reading_block:
+                # Fallback to listening if no reading passage available
+                listening_block = _pick_listening_block(conn, user_id, hsk_level)
+
+    if reading_block:
+        # Cleanup loop: exposure -> drills -> re-read
+        exposure_block = reading_block  # is_reread=False by default
+        exposure_block.target_seconds = 180  # exposure is exploratory, not timed test
+
+        reread_block = ReadingBlock(
+            passage_id=reading_block.passage_id,
+            passage=reading_block.passage,
+            questions=[],  # no questions on re-read
+            target_seconds=75,  # short reinforcement (~60-90s)
+            is_reread=True,
+        )
+
+        blocks = [
+            exposure_block,
+            DrillBlock(items=drills, target_seconds=drill_seconds),
+            reread_block,
+        ]
+        micro_plan += " · 1 reading"
+
+        conv_block = _pick_conversation_block(conn, user_id, hsk_level)
+        if conv_block:
+            blocks.append(conv_block)
+            micro_plan += " · 1 conversation"
+    elif listening_block:
+        # Listening block: drills first, then listening comprehension
+        blocks = [DrillBlock(items=drills, target_seconds=drill_seconds)]
+        blocks.append(listening_block)
+        micro_plan += " · 1 listening"
+
+        conv_block = _pick_conversation_block(conn, user_id, hsk_level)
+        if conv_block:
+            blocks.append(conv_block)
+            micro_plan += " · 1 conversation"
+    else:
+        # No reading or listening available — drills only (+ conversation if eligible)
+        blocks = [DrillBlock(items=drills, target_seconds=drill_seconds)]
+        remaining = max(0, params.get("target_items", 12) * SECONDS_PER_DRILL - drill_seconds)
+        if remaining >= 120 or drill_seconds >= 180:
+            conv_block = _pick_conversation_block(conn, user_id, hsk_level)
+            if conv_block:
+                blocks.append(conv_block)
+                micro_plan += " · 1 conversation"
+
+    total_seconds = sum(
+        getattr(b, "target_seconds", 0) for b in blocks
+    )
+
     plan = SessionPlan(
         session_type="standard",
-        drills=drills,
+        blocks=blocks,
         micro_plan=micro_plan,
-        estimated_seconds=len(drills) * SECONDS_PER_DRILL + conv_count * SECONDS_PER_CONVERSATION,
+        estimated_seconds=total_seconds,
         days_since_last=days_gap,
         gap_message=get_gap_message(days_gap) if days_gap else None,
         day_label=day_profile["name"],
@@ -2788,6 +3206,10 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
     # Inject supplementary drills (core lexicon, scenarios, personalization, media)
     if not is_long_gap:
         _plan_injections(conn, drills, seen_ids, user_id)
+
+    # Inject minimal pair drills for high-interference items (~30% probability each)
+    if not is_long_gap:
+        _plan_minimal_pair_drills(conn, drills, seen_ids, user_id)
 
     # Inject holdout probes (anti-Goodhart Rule 4: hidden benchmark tasks)
     if not is_long_gap:
@@ -2999,6 +3421,241 @@ from .drills import DRILL_REGISTRY
 _VALID_DRILL_TYPES = set(DRILL_REGISTRY.keys()) | {"dialogue", "media_comprehension"}
 
 
+def _pick_reading_block(conn, user_id: int, hsk_level: int) -> Optional[ReadingBlock]:
+    """Pick a reading passage using vocabulary coverage (Krashen's i+1).
+
+    Target: user knows 85-95% of unique characters in the passage.
+    Falls back to HSK ceiling matching if coverage scoring isn't possible.
+    """
+    if hsk_level < 3:
+        return None
+    try:
+        # Get candidate passages not completed recently
+        candidates = conn.execute("""
+            SELECT rt.id, rt.title, rt.content_hanzi, rt.content_pinyin,
+                   rt.hsk_ceiling, rt.word_count
+            FROM reading_texts rt
+            LEFT JOIN reading_progress rp
+                ON rt.id = rp.passage_id AND rp.user_id = ?
+            WHERE rt.hsk_ceiling <= ? + 1
+            AND (rp.id IS NULL OR rp.completed_at < datetime('now', '-7 days'))
+            ORDER BY RANDOM() LIMIT 10
+        """, (user_id, hsk_level)).fetchall()
+        if not candidates:
+            return None
+
+        # Build the user's known character set efficiently (single query)
+        known_chars = set()
+        try:
+            known_rows = conn.execute("""
+                SELECT DISTINCT ci.hanzi
+                FROM progress p
+                JOIN content_item ci ON p.content_item_id = ci.id
+                WHERE p.user_id = ?
+                  AND (p.retention >= 0.7
+                       OR p.last_review_date >= date('now', '-30 days'))
+                  AND LENGTH(ci.hanzi) = 1
+            """, (user_id,)).fetchall()
+            # Filter to CJK characters in Python (more reliable than SQLite GLOB)
+            known_chars = {r["hanzi"] for r in known_rows
+                           if re.match(r'[\u4e00-\u9fff\u3400-\u4dbf]', r["hanzi"])}
+        except Exception:
+            pass
+
+        # Score each candidate by vocabulary coverage (Nation 2006)
+        # Prefer word-level (jieba) coverage; fall back to character-level
+        best_row = None
+        best_score = -1.0
+        _vocab_profile_fn = None
+        try:
+            from mandarin.ai.reading_content import compute_vocabulary_profile
+            _vocab_profile_fn = compute_vocabulary_profile
+        except ImportError:
+            pass
+
+        for row in candidates:
+            text = row["content_hanzi"] or ""
+            if not text:
+                continue
+
+            # Word-level coverage via Nation's vocabulary profile
+            if _vocab_profile_fn and known_chars:
+                profile = _vocab_profile_fn(text, known_chars)
+                coverage = profile["token_coverage"]
+                verdict = profile["verdict"]
+                density = profile["new_word_density"]
+
+                # Hard reject: too hard or too easy
+                if verdict == "too_hard":
+                    continue  # < 85% — even glossing won't save it
+                if verdict == "too_easy" and len(candidates) > 3:
+                    score = 0.2  # > 98% — nothing new to learn
+
+                # Optimal: 90-95% with glossing (Nation's sweet spot)
+                elif verdict == "optimal":
+                    score = 2.0 - abs(coverage - 0.92) * 10  # peaks at 92%
+                    # Bonus if density is within Nation's threshold (≤1 new word per 20 tokens)
+                    if density <= 1.2:
+                        score += 0.3
+                elif verdict == "challenging":
+                    score = 0.6  # 85-90% — harder but acceptable with glossing
+                else:
+                    score = 0.2
+            elif known_chars:
+                # Fallback: character-level coverage
+                unique_chars = set(re.findall(r'[\u4e00-\u9fff\u3400-\u4dbf]', text))
+                if not unique_chars:
+                    continue
+                coverage = len(unique_chars & known_chars) / len(unique_chars)
+                if 0.85 <= coverage <= 0.95:
+                    score = 1.0 - abs(coverage - 0.90) * 10
+                elif coverage > 0.95:
+                    score = 0.3
+                elif coverage >= 0.70:
+                    score = 0.2
+                else:
+                    continue
+            else:
+                # No known chars — HSK ceiling proximity
+                score = 0.9 if row["hsk_ceiling"] <= hsk_level else 0.5
+
+            # Small random jitter
+            score += random.random() * 0.1
+
+            if score > best_score:
+                best_score = score
+                best_row = row
+
+        if not best_row:
+            # Fallback: just use the first candidate (HSK ceiling match)
+            best_row = candidates[0]
+
+        row = best_row
+
+        # Load comprehension questions if stored
+        import json as _json
+        questions = []
+        try:
+            q_rows = conn.execute("""
+                SELECT question_json FROM reading_comprehension_questions
+                WHERE passage_id = ? ORDER BY question_order
+            """, (row["id"],)).fetchall()
+            for qr in q_rows:
+                questions.append(_json.loads(qr["question_json"]))
+        except Exception:
+            pass
+
+        return ReadingBlock(
+            passage_id=row["id"],
+            passage={
+                "id": row["id"],
+                "title": row["title"],
+                "content_hanzi": row["content_hanzi"],
+                "content_pinyin": row["content_pinyin"],
+                "hsk_ceiling": row["hsk_ceiling"],
+                "word_count": row["word_count"],
+            },
+            questions=questions,
+            target_seconds=240,
+        )
+    except Exception:
+        logger.debug("_pick_reading_block failed", exc_info=True)
+        return None
+
+
+def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> Optional[ConversationBlock]:
+    """Pick a conversation scenario matching user's HSK level."""
+    try:
+        from .ai.conversation_drill import SCENARIOS
+        level_key = min(hsk_level, max(SCENARIOS.keys())) if SCENARIOS else 1
+        available = SCENARIOS.get(level_key, [])
+        if not available:
+            # Try one level down
+            for lvl in range(level_key - 1, 0, -1):
+                available = SCENARIOS.get(lvl, [])
+                if available:
+                    break
+        if not available:
+            return None
+
+        scenario = random.choice(available)
+        return ConversationBlock(
+            scenario_id=scenario.get("id", scenario.get("title", "")),
+            scenario=scenario,
+            max_turns=3,
+            target_seconds=180,
+        )
+    except Exception:
+        logger.debug("_pick_conversation_block failed", exc_info=True)
+        return None
+
+
+def _pick_listening_block(conn, user_id: int, hsk_level: int) -> Optional[ListeningBlock]:
+    """Pick a listening passage the user hasn't heard recently (HSK 2+).
+
+    Reuses reading_texts passages but checks against listening_progress
+    to avoid repeats. Generates an audio URL via the existing TTS endpoint
+    and loads comprehension questions from reading_comprehension_questions.
+    """
+    if hsk_level < 2:
+        return None
+    try:
+        row = conn.execute("""
+            SELECT rt.id, rt.title, rt.content_hanzi, rt.content_pinyin,
+                   rt.hsk_ceiling, rt.word_count
+            FROM reading_texts rt
+            LEFT JOIN listening_progress lp
+                ON CAST(rt.id AS TEXT) = lp.passage_id AND lp.user_id = ?
+            WHERE rt.hsk_ceiling <= ?
+              AND rt.approved = 1
+              AND (lp.id IS NULL OR lp.completed_at < datetime('now', '-7 days'))
+            ORDER BY RANDOM() LIMIT 1
+        """, (user_id, hsk_level)).fetchone()
+        if not row:
+            # Fallback: try without the approved filter
+            row = conn.execute("""
+                SELECT rt.id, rt.title, rt.content_hanzi, rt.content_pinyin,
+                       rt.hsk_ceiling, rt.word_count
+                FROM reading_texts rt
+                LEFT JOIN listening_progress lp
+                    ON CAST(rt.id AS TEXT) = lp.passage_id AND lp.user_id = ?
+                WHERE rt.hsk_ceiling <= ?
+                  AND (lp.id IS NULL OR lp.completed_at < datetime('now', '-7 days'))
+                ORDER BY RANDOM() LIMIT 1
+            """, (user_id, hsk_level)).fetchone()
+        if not row:
+            return None
+
+        # Load comprehension questions
+        import json as _json
+        questions = []
+        try:
+            q_rows = conn.execute("""
+                SELECT question_json FROM reading_comprehension_questions
+                WHERE passage_id = ? ORDER BY question_order
+            """, (row["id"],)).fetchall()
+            for qr in q_rows:
+                questions.append(_json.loads(qr["question_json"]))
+        except Exception:
+            pass
+
+        from urllib.parse import quote
+        audio_url = f"/api/tts?text={quote(row['content_hanzi'][:500])}"
+
+        return ListeningBlock(
+            passage_id=row["id"],
+            audio_url=audio_url,
+            transcript_zh=row["content_hanzi"] or "",
+            transcript_pinyin=row["content_pinyin"] or "",
+            questions=questions,
+            playback_speed=1.0,
+            target_seconds=180,
+        )
+    except Exception:
+        logger.debug("_pick_listening_block failed", exc_info=True)
+        return None
+
+
 def _validate_plan(plan: SessionPlan) -> SessionPlan:
     """Validate invariants on a completed session plan. Returns the plan unchanged.
 
@@ -3049,11 +3706,12 @@ def _validate_plan(plan: SessionPlan) -> SessionPlan:
 
 
 def _interleave(drills: list[DrillItem]) -> list[DrillItem]:
-    """Interleave drills with thematic micro-clustering.
+    """Interleave drills with thematic micro-clustering and difficulty alternation.
 
     Phase 1: Group by HSK level into micro-clusters of 2-3 items.
     Phase 2: Interleave clusters (not individual items) for thematic coherence.
     Phase 3: Break same drill_type adjacencies (desirable difficulty).
+    Phase 4: Difficulty interleaving (Rohrer & Taylor) — alternate easy/hard items.
     """
     if len(drills) <= 2:
         return drills
@@ -3086,4 +3744,65 @@ def _interleave(drills: list[DrillItem]) -> list[DrillItem]:
                         result[i], result[j] = result[j], result[i]
                         break
 
+    # Phase 4: Difficulty interleaving (Rohrer & Taylor 2007)
+    # Alternate easy and hard items to maximize the interleaving effect.
+    # Uses ML-predicted accuracy or item difficulty as the difficulty proxy.
+    try:
+        result = _difficulty_interleave(result)
+    except Exception:
+        pass  # Graceful degradation — keep Phase 3 ordering
+
     return result
+
+
+def _difficulty_interleave(drills: list[DrillItem]) -> list[DrillItem]:
+    """Reorder drills to alternate easy and hard items.
+
+    Rohrer & Taylor (2007): interleaving different difficulty levels
+    during practice improves long-term retention vs. blocked practice.
+
+    Uses _ml_predicted_accuracy (if annotated) or item difficulty metadata
+    as the difficulty proxy. Items without difficulty data stay in place.
+    """
+    if len(drills) <= 3:
+        return drills
+
+    def _difficulty_score(drill: DrillItem) -> float:
+        """Lower score = harder item."""
+        # Prefer ML prediction if available
+        ml_acc = drill.metadata.get("_ml_predicted_accuracy")
+        if ml_acc is not None:
+            return ml_acc
+        # Fall back to item difficulty (higher difficulty = harder = lower score)
+        item_diff = drill.metadata.get("item_difficulty")
+        if item_diff is not None:
+            return 1.0 - min(1.0, item_diff)
+        # Fall back to HSK level as rough proxy (higher HSK = harder)
+        hsk = drill.metadata.get("hsk_level", 3)
+        return max(0.0, 1.0 - hsk / 10.0)
+
+    # Sort by difficulty score
+    scored = sorted(drills, key=_difficulty_score)
+
+    # Split into easy pile (top half) and hard pile (bottom half)
+    mid = len(scored) // 2
+    hard_pile = scored[:mid]       # low scores = hard
+    easy_pile = scored[mid:]       # high scores = easy
+
+    # Interleave: alternate easy, hard, easy, hard...
+    interleaved = []
+    ei, hi = 0, 0
+    pick_easy = True
+    while ei < len(easy_pile) or hi < len(hard_pile):
+        if pick_easy and ei < len(easy_pile):
+            interleaved.append(easy_pile[ei])
+            ei += 1
+        elif hi < len(hard_pile):
+            interleaved.append(hard_pile[hi])
+            hi += 1
+        elif ei < len(easy_pile):
+            interleaved.append(easy_pile[ei])
+            ei += 1
+        pick_easy = not pick_easy
+
+    return interleaved

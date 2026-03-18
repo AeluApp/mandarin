@@ -57,6 +57,66 @@ def register_marketing_routes(app):
             "variant_index": variant_index,
         })
 
+    # ── Price Display Experiment ────────────────────────────────────────
+
+    @app.route("/api/experiment/price-variant")
+    @api_error_handler("PriceVariant")
+    def api_price_variant():
+        """Return active price_display_test variant for the visitor.
+
+        Checks for a running experiment named 'price_display_test' and assigns
+        the visitor to a variant using the same cookie-hash approach as the
+        landing headline test.  Falls back to default pricing if no experiment
+        is active.
+        """
+        from ..settings import PRICING
+
+        default_price = f"${PRICING['monthly_display']}/mo"
+
+        try:
+            with db.connection() as conn:
+                # Check for running price experiment
+                exp = conn.execute(
+                    "SELECT id, name, variants FROM experiment WHERE name = 'price_display_test' AND status = 'running'"
+                ).fetchone()
+
+                if not exp:
+                    return jsonify({"price_display": default_price, "variant": "default"})
+
+                visitor_id = request.cookies.get("aelu_vid", "")
+                if not visitor_id:
+                    return jsonify({"price_display": default_price, "variant": "default"})
+
+                # Deterministic assignment
+                from ..web.experiment_daemon import _MARKETING_EXPERIMENT_TEMPLATES
+                template = _MARKETING_EXPERIMENT_TEMPLATES.get("price_display_test", {})
+
+                assign_key = f"price_display_test:{visitor_id}"
+                variant_index = int(hashlib.sha256(assign_key.encode()).hexdigest()[:8], 16) % 2
+
+                if variant_index == 0:
+                    price_display = template.get("variant_a_config", {}).get("price_display", default_price)
+                    variant_name = template.get("variant_a_name", "control")
+                else:
+                    price_display = template.get("variant_b_config", {}).get("price_display", default_price)
+                    variant_name = template.get("variant_b_name", "treatment")
+
+                # Log exposure
+                try:
+                    from .. import experiments
+                    pseudo_user_id = int(hashlib.sha256(visitor_id.encode()).hexdigest()[:8], 16) % 1000000
+                    experiments.log_exposure(conn, "price_display_test", pseudo_user_id, context="landing_pricing")
+                except Exception:
+                    pass
+
+                return jsonify({
+                    "price_display": price_display,
+                    "variant": variant_name,
+                })
+        except Exception as e:
+            logger.debug("Price variant lookup failed: %s", e)
+            return jsonify({"price_display": default_price, "variant": "default"})
+
     # ── Referral Tracking ─────────────────────────────────────────────────
 
     @app.route("/api/referral/track")

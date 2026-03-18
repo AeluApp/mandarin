@@ -1,4 +1,9 @@
-"""Ollama HTTP client — local LLM generation with caching and fallback."""
+"""LLM client — unified generation via LiteLLM with caching and fallback.
+
+Uses LiteLLM as the routing layer so any model (Ollama, OpenAI, Anthropic,
+etc.) can be used without changing call sites.  Falls back to direct httpx
+calls when LiteLLM is not installed.
+"""
 
 from __future__ import annotations
 
@@ -19,6 +24,10 @@ from ..settings import (
 
 logger = logging.getLogger(__name__)
 
+# Suppress litellm's verbose logging
+logging.getLogger("LiteLLM").setLevel(logging.WARNING)
+logging.getLogger("litellm").setLevel(logging.WARNING)
+
 
 @dataclass
 class OllamaResponse:
@@ -32,6 +41,10 @@ class OllamaResponse:
     error: Optional[str] = None
 
 
+# Alias for gradual migration — new code should prefer LLMResponse
+LLMResponse = OllamaResponse
+
+
 def is_ollama_available() -> bool:
     """Check if Ollama is running. Returns False gracefully on any error."""
     try:
@@ -39,6 +52,69 @@ def is_ollama_available() -> bool:
         return resp.status_code == 200
     except Exception:
         return False
+
+
+def _get_task_model(conn, task_type: str) -> str | None:
+    """Look up the best benchmarked model for this task type from pi_model_registry."""
+    if conn is None:
+        return None
+    try:
+        row = conn.execute("""
+            SELECT model_name FROM pi_model_registry
+            WHERE task_type = ? AND is_active = 1
+            ORDER BY quality_score DESC LIMIT 1
+        """, (task_type,)).fetchone()
+        return row["model_name"] if row else None
+    except Exception:
+        return None
+
+
+def _auto_score_quality(conn, task_type: str, result: "OllamaResponse") -> None:
+    """Score output quality and write to prompt_trace. Lightweight structural checks."""
+    if not result.success or not result.text:
+        return
+    score = None
+    if task_type in ("drill_generation", "reading_generation", "error_explanation",
+                     "conversation_eval", "teacher_comms", "research_synthesis"):
+        try:
+            json.loads(result.text.strip())
+            score = 0.8  # valid JSON
+        except (json.JSONDecodeError, ValueError):
+            # Check for JSON in code blocks
+            import re
+            if re.search(r"```(?:json)?\s*[\[\{]", result.text):
+                score = 0.6  # JSON in code block (usable but messy)
+            else:
+                score = 0.2  # expected JSON, got freetext
+    elif task_type in ("classify_prescription", "openclaw_intent"):
+        # Classification: short, clean output = good
+        text = result.text.strip()
+        if len(text) < 50 and "\n" not in text:
+            score = 0.9
+        else:
+            score = 0.4
+    if score is not None:
+        try:
+            conn.execute("""
+                UPDATE prompt_trace SET output_quality_score = ?
+                WHERE prompt_key = ? AND output_quality_score IS NULL
+                ORDER BY created_at DESC LIMIT 1
+            """, (score, task_type))
+            conn.commit()
+        except Exception:
+            pass
+
+
+def is_model_capable(task_type: str) -> bool:
+    """Check if the current model is large enough for this task type.
+
+    Compares MODEL_SIZE_B (extracted from model name at startup) against
+    the minimum required for the task in _TASK_COMPLEXITY.  Unknown tasks
+    default to tier 1 (any model).
+    """
+    from ..settings import _TASK_COMPLEXITY, MODEL_SIZE_B
+    min_size = _TASK_COMPLEXITY.get(task_type, 1.0)
+    return MODEL_SIZE_B >= min_size
 
 
 def generate(
@@ -50,7 +126,23 @@ def generate(
     conn=None,
     task_type: str = "unknown",
 ) -> OllamaResponse:
-    """Generate text via Ollama. Tries primary model, falls back to smaller model."""
+    """Generate text via LLM. Tries primary model, falls back to smaller model.
+
+    Skips the call entirely if the model is too small for the task_type,
+    returning a failure so callers hit their rule-based fallback.
+    """
+    # Capability gate: skip if model is too small for this task
+    if not is_model_capable(task_type):
+        from ..settings import MODEL_SIZE_B, _TASK_COMPLEXITY
+        min_size = _TASK_COMPLEXITY.get(task_type, 1.0)
+        logger.info(
+            "Skipping task '%s': model %s (%.1fb) below minimum %.1fb",
+            task_type, OLLAMA_PRIMARY_MODEL, MODEL_SIZE_B, min_size,
+        )
+        return OllamaResponse(
+            success=False, model_used=OLLAMA_PRIMARY_MODEL,
+            error=f"Model too small for task '{task_type}' (have {MODEL_SIZE_B:.1f}b, need {min_size:.0f}b)",
+        )
 
     # Check cache first
     if use_cache and conn is not None:
@@ -59,16 +151,27 @@ def generate(
             _log_generation(conn, task_type, cached)
             return cached
 
-    # Try primary model, then fallback
-    for model in [OLLAMA_PRIMARY_MODEL, OLLAMA_FALLBACK_MODEL]:
-        result = _call_ollama(prompt, system, model, temperature, max_tokens)
+    # Task-specific model routing (from benchmark results in pi_model_registry)
+    task_model = _get_task_model(conn, task_type)
+    if task_model:
+        models_to_try = [task_model, OLLAMA_PRIMARY_MODEL]
+    else:
+        models_to_try = [OLLAMA_PRIMARY_MODEL, OLLAMA_FALLBACK_MODEL]
+
+    # Try models in order
+    for model in models_to_try:
+        result = _call_llm(prompt, system, model, temperature, max_tokens)
         if result.success:
             if conn is not None:
                 if use_cache:
                     _write_cache(conn, prompt, system, result)
                 _log_generation(conn, task_type, result)
+                # Auto-score quality for structured tasks
+                _auto_score_quality(conn, task_type, result)
+                # Log LLM cost
+                _log_cost(conn, model, task_type, result)
             return result
-        logger.warning("Ollama %s failed: %s — trying next", model, result.error)
+        logger.warning("LLM %s failed: %s — trying next", model, result.error)
 
     # Both models failed
     failed = OllamaResponse(success=False, error=result.error if result else "all models failed")
@@ -77,10 +180,68 @@ def generate(
     return failed
 
 
-def _call_ollama(
+def _call_llm(
     prompt: str, system: str, model: str, temperature: float, max_tokens: int,
 ) -> OllamaResponse:
-    """POST to Ollama /api/generate. Returns OllamaResponse."""
+    """Route LLM call through LiteLLM (falls back to direct httpx if unavailable)."""
+    try:
+        import litellm
+        return _call_via_litellm(litellm, prompt, system, model, temperature, max_tokens)
+    except ImportError:
+        return _call_ollama_direct(prompt, system, model, temperature, max_tokens)
+
+
+def _call_via_litellm(litellm, prompt, system, model, temperature, max_tokens):
+    """LiteLLM-based call — supports any model provider via unified API."""
+    from ..settings import IS_CLOUD_MODEL
+
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
+    # Cloud models use their name directly; local Ollama models need the prefix
+    if IS_CLOUD_MODEL or "/" in model:
+        litellm_model = model
+        extra_kwargs = {}
+    else:
+        litellm_model = f"ollama/{model}"
+        extra_kwargs = {"api_base": OLLAMA_URL}
+
+    start = time.monotonic()
+    try:
+        resp = litellm.completion(
+            model=litellm_model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            timeout=float(OLLAMA_TIMEOUT),
+            **extra_kwargs,
+        )
+        elapsed_ms = int((time.monotonic() - start) * 1000)
+
+        content = resp.choices[0].message.content if resp.choices else ""
+        usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
+        return OllamaResponse(
+            success=True,
+            text=content or "",
+            model_used=model,
+            prompt_tokens=getattr(usage, "prompt_tokens", 0) or 0,
+            completion_tokens=getattr(usage, "completion_tokens", 0) or 0,
+            generation_time_ms=elapsed_ms,
+        )
+    except Exception as e:
+        elapsed_ms = int((time.monotonic() - start) * 1000)
+        return OllamaResponse(
+            success=False, model_used=model, generation_time_ms=elapsed_ms,
+            error=str(e),
+        )
+
+
+def _call_ollama_direct(
+    prompt: str, system: str, model: str, temperature: float, max_tokens: int,
+) -> OllamaResponse:
+    """Direct httpx fallback when LiteLLM is not installed."""
     payload = {
         "model": model,
         "prompt": prompt,
@@ -126,6 +287,33 @@ def _call_ollama(
             success=False, model_used=model, generation_time_ms=elapsed_ms,
             error=str(e),
         )
+
+
+# Backward compat alias
+_call_ollama = _call_ollama_direct
+
+
+def _log_cost(conn, model: str, task_type: str, result: OllamaResponse) -> None:
+    """Log per-call LLM cost for spend tracking."""
+    try:
+        # Estimate cost from token counts
+        pt = result.prompt_tokens or 0
+        ct = result.completion_tokens or 0
+        # Local Ollama: ~$0 (electricity only), Cloud: varies by provider
+        # Use conservative estimate; actual cost comes from LiteLLM response_cost
+        from ..settings import IS_CLOUD_MODEL
+        if IS_CLOUD_MODEL:
+            cost = (pt * 0.000003 + ct * 0.000015)  # ~GPT-4o rates as default
+        else:
+            cost = 0.0  # Local is free
+
+        conn.execute("""
+            INSERT INTO llm_cost_log (model, task_type, prompt_tokens, completion_tokens, cost_usd, created_at)
+            VALUES (?, ?, ?, ?, ?, datetime('now'))
+        """, (result.model_used, task_type, pt, ct, cost))
+        conn.commit()
+    except Exception:
+        pass
 
 
 def _prompt_hash(prompt: str, system: str) -> str:
@@ -186,24 +374,32 @@ def generate_structured(
     conn=None,
     task_type: str = "unknown",
 ):
-    """Generate structured output via Instructor + Ollama's OpenAI-compatible endpoint.
+    """Generate structured output via Instructor + LiteLLM.
 
     Uses instructor library to enforce JSON schema at the sampling level.
-    Falls back to standard generate() + post-hoc validation if Instructor unavailable.
+    Prefers LiteLLM backend; falls back to direct OpenAI-compat if unavailable.
     """
     try:
         import instructor
-        from openai import OpenAI
     except ImportError:
-        # Fallback: use standard generate
         return None
 
     start = time.monotonic()
     try:
-        client = instructor.from_openai(
-            OpenAI(base_url=f"{OLLAMA_URL}/v1", api_key="ollama"),
-            mode=instructor.Mode.JSON,
-        )
+        # Prefer LiteLLM backend for unified model routing
+        try:
+            import litellm
+            client = instructor.from_litellm(
+                litellm.completion,
+                mode=instructor.Mode.JSON,
+            )
+        except ImportError:
+            # Fallback: direct OpenAI-compatible endpoint
+            from openai import OpenAI
+            client = instructor.from_openai(
+                OpenAI(base_url=f"{OLLAMA_URL}/v1", api_key="ollama"),
+                mode=instructor.Mode.JSON,
+            )
 
         messages = []
         if system:
@@ -211,11 +407,12 @@ def generate_structured(
         messages.append({"role": "user", "content": prompt})
 
         result = client.chat.completions.create(
-            model=OLLAMA_PRIMARY_MODEL,
+            model=f"ollama/{OLLAMA_PRIMARY_MODEL}",
             messages=messages,
             response_model=response_model,
             temperature=temperature,
             max_tokens=max_tokens,
+            api_base=OLLAMA_URL,
         )
 
         elapsed_ms = int((time.monotonic() - start) * 1000)

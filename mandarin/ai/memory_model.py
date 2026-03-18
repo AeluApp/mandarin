@@ -64,6 +64,79 @@ def compute_next_interval(stability: float, target_retention: float = 0.90) -> i
 
 
 # ─────────────────────────────────────────────
+# DESIRABLE DIFFICULTY (Bjork & Bjork 2011)
+# ─────────────────────────────────────────────
+
+def desirable_difficulty_adjustment(stability: float, retrievability: float) -> dict:
+    """Apply Bjork's desirable difficulty principles to FSRS scheduling.
+
+    Desirable difficulties are encoding conditions that slow initial learning
+    but improve long-term retention.  The optimal retrieval zone is 70-85%
+    retrievability -- hard enough to strengthen memory, not so hard that
+    retrieval fails entirely (Bjork & Bjork 2011, Kornell & Bjork 2008).
+
+    Key insight from the research: hints REDUCE difficulty, which contradicts
+    the goal.  For hard items we maintain the challenge but switch to
+    recognition drills (lower production demand, same retrieval effort).
+
+    Returns adjustment dict:
+        interval_multiplier: float -- scale factor for the computed interval
+        drill_type_override: str | None -- force drill type change
+        context_variation: bool -- use different context for mastered items
+    """
+    result = {
+        "interval_multiplier": 1.0,
+        "drill_type_override": None,
+        "context_variation": False,
+    }
+
+    try:
+        # Zone 1: Too easy (R > 0.95) -- item is over-practiced
+        # Bjork: "conditions that make performance appear smooth and steady
+        # often fail to support long-term retention"
+        # Fix: schedule earlier AND force production (harder retrieval)
+        if retrievability > 0.95:
+            result["interval_multiplier"] = 0.75  # 25% shorter interval
+            if stability > 7:
+                result["drill_type_override"] = "production"
+
+        # Zone 2: Optimal difficulty (0.70-0.85) -- Bjork's sweet spot
+        # Leave FSRS interval alone -- this is where learning happens
+        elif 0.70 <= retrievability <= 0.85:
+            pass  # no adjustment
+
+        # Zone 3: Slightly easy (0.85-0.95) -- could be harder
+        elif 0.85 < retrievability < 0.95:
+            result["interval_multiplier"] = 0.90  # 10% shorter
+
+        # Zone 4: Hard but productive (0.50-0.70)
+        # This IS desirable difficulty -- do NOT add hints.
+        # Switch to recognition drill so retrieval still succeeds
+        # but requires effortful memory search.
+        elif 0.50 <= retrievability < 0.70:
+            result["drill_type_override"] = "recognition"
+
+        # Zone 5: Too hard (R < 0.50) -- retrieval will likely fail
+        # Shorten interval so next review is sooner; use recognition
+        elif retrievability < 0.50:
+            result["interval_multiplier"] = 0.60
+            result["drill_type_override"] = "recognition"
+
+        # Mastered items (stability > 30 days): contextual variation
+        # Slamecka & Graf 1978 "generation effect"
+        if stability > 30:
+            result["drill_type_override"] = "production"
+            result["context_variation"] = True
+        elif stability > 14 and result["drill_type_override"] is None:
+            result["drill_type_override"] = "production"
+
+    except (TypeError, ValueError):
+        pass
+
+    return result
+
+
+# ─────────────────────────────────────────────
 # STABILITY UPDATE
 # ─────────────────────────────────────────────
 
@@ -187,6 +260,14 @@ def process_review(
             compute_next_interval(new_stability),
             FSRS_DEFAULTS["maximum_interval"],
         )
+
+        # Apply desirable difficulty adjustment (Bjork & Bjork 2011)
+        try:
+            dd = desirable_difficulty_adjustment(new_stability, current_r)
+            if dd["interval_multiplier"] != 1.0:
+                next_days = max(1, round(next_days * dd["interval_multiplier"]))
+        except Exception:
+            pass  # Graceful degradation
 
     next_due = now + timedelta(days=next_days)
     new_lapses = state["lapses"] + (
@@ -737,6 +818,47 @@ def analyze_memory_model(conn: sqlite3.Connection) -> list[dict]:
         pass
 
     return findings
+
+
+# ─────────────────────────────────────────────
+# ACTIVE CONTRAST PAIRS (minimal-pair drilling)
+# ─────────────────────────────────────────────
+
+def get_active_contrast_pairs(conn: sqlite3.Connection, user_id: int, limit: int = 10) -> list[dict]:
+    """Find high-interference pairs where both items are known but frequently confused.
+
+    Candidates for explicit minimal-pair contrast drilling. Both items must
+    have a memory_states row (i.e. the learner has encountered them), and
+    the pair must have high or medium interference strength.
+    """
+    try:
+        rows = conn.execute("""
+            SELECT ip.item_id_a, ip.item_id_b, ip.interference_type,
+                   ip.interference_strength,
+                   ca.hanzi AS hanzi_a, ca.pinyin AS pinyin_a, ca.english AS english_a,
+                   cb.hanzi AS hanzi_b, cb.pinyin AS pinyin_b, cb.english AS english_b
+            FROM interference_pairs ip
+            JOIN content_item ca ON ip.item_id_a = ca.id
+            JOIN content_item cb ON ip.item_id_b = cb.id
+            WHERE ip.interference_strength IN ('high', 'medium')
+              AND EXISTS (
+                  SELECT 1 FROM memory_states ms
+                  WHERE ms.content_item_id = ip.item_id_a AND ms.user_id = ?
+              )
+              AND EXISTS (
+                  SELECT 1 FROM memory_states ms
+                  WHERE ms.content_item_id = ip.item_id_b AND ms.user_id = ?
+              )
+            ORDER BY CASE ip.interference_strength
+                         WHEN 'high' THEN 1 ELSE 2
+                     END,
+                     COALESCE(ip.error_co_occurrence, 0) DESC
+            LIMIT ?
+        """, (user_id, user_id, limit)).fetchall()
+        return [dict(r) for r in rows] if rows else []
+    except sqlite3.OperationalError:
+        # Table may not exist yet — graceful degradation
+        return []
 
 
 # ─────────────────────────────────────────────

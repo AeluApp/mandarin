@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import sqlite3
 import uuid
@@ -17,6 +18,29 @@ from datetime import datetime, timezone
 from typing import Optional
 
 logger = logging.getLogger(__name__)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LanceDB Connection Singleton
+# ═══════════════════════════════════════════════════════════════════════════════
+
+_lance_db = None
+
+
+def _get_lance_db():
+    """Get or create LanceDB connection at DATA_DIR/lancedb."""
+    global _lance_db
+    if _lance_db is None:
+        try:
+            import lancedb
+            from ..settings import DATA_DIR
+            db_path = os.path.join(str(DATA_DIR), "lancedb")
+            os.makedirs(db_path, exist_ok=True)
+            _lance_db = lancedb.connect(db_path)
+        except ImportError:
+            logger.debug("LanceDB not installed, falling back to SQLite embeddings")
+            return None
+    return _lance_db
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -333,7 +357,36 @@ def populate_usage_maps(conn, batch_size: int = 10) -> dict:
 
 def generate_thematic_passage(conn, theme: str, hsk_level: int,
                               target_items: list[str] | None = None) -> Optional[dict]:
-    """Thin wrapper over existing reading_content.generate_reading_passage()."""
+    """Generate a thematic reading passage. Tries DSPy first, falls back to reading_content."""
+    # ── DSPy path (preferred) ──────────────────────────────
+    try:
+        from .dspy_modules import configure_dspy, reading_generator
+        if reading_generator is not None and configure_dspy():
+            target_vocab = ", ".join(target_items) if target_items else ""
+            result = reading_generator(
+                target_vocabulary=target_vocab,
+                hsk_level=hsk_level,
+                topic=theme,
+            )
+            # Convert DSPy result to expected passage format
+            questions = result.comprehension_questions
+            if isinstance(questions, str):
+                questions = json.loads(questions)
+
+            passage = {
+                "body": result.passage_zh,
+                "english_body": result.passage_en,
+                "comprehension_questions": questions,
+                "estimated_hsk_level": hsk_level,
+                "topic": theme,
+            }
+            if passage["body"] and len(passage["body"]) > 10:
+                logger.debug("thematic_passage generated via DSPy")
+                return passage
+    except (ImportError, Exception) as exc:
+        logger.debug("DSPy thematic_passage failed, falling back: %s", exc)
+
+    # ── Fallback: existing reading_content module ──────────
     try:
         from .reading_content import generate_reading_passage
         return generate_reading_passage(
@@ -354,6 +407,7 @@ def generate_thematic_passage(conn, theme: str, hsk_level: int,
 def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) -> Optional[dict]:
     """Weekly LLM insight about error patterns.
 
+    Tries DSPy optimized module first, falls back to direct Ollama.
     Gated on >= 20 reviews + is_ollama_available().
     """
     review_count = conn.execute("""
@@ -365,15 +419,7 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
     if review_count < 20:
         return None
 
-    try:
-        from .ollama_client import generate, is_ollama_available
-    except ImportError:
-        return None
-
-    if not is_ollama_available():
-        return None
-
-    # Gather error summary
+    # Gather error summary (shared by both DSPy and fallback paths)
     errors = conn.execute("""
         SELECT ci.hanzi, ci.english, ci.hsk_level, re.given_answer, re.correct_answer
         FROM review_event re
@@ -391,6 +437,37 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
         f"- {e['hanzi']} ({e['english']}): answered \"{e['given_answer']}\" instead of \"{e['correct_answer']}\""
         for e in errors
     )
+
+    # ── DSPy path (preferred) ──────────────────────────────
+    try:
+        from .dspy_modules import configure_dspy, insight_generator
+        if insight_generator is not None and configure_dspy():
+            result = insight_generator(
+                error_summary=error_summary,
+                lookback_days=lookback_days,
+            )
+            # Convert DSPy result to expected dict format
+            parsed = {
+                "patterns": json.loads(result.patterns) if isinstance(result.patterns, str) else result.patterns,
+                "advice": json.loads(result.advice) if isinstance(result.advice, str) else result.advice,
+                "focus_areas": json.loads(result.focus_areas) if isinstance(result.focus_areas, str) else result.focus_areas,
+            }
+            # Validate: must have non-empty lists
+            if parsed["patterns"] and isinstance(parsed["patterns"], list):
+                _log_session_analysis(conn, 0, user_id, "learning_insight", parsed)
+                logger.debug("learning_insight generated via DSPy")
+                return parsed
+    except (ImportError, Exception) as exc:
+        logger.debug("DSPy learning_insight failed, falling back to Ollama: %s", exc)
+
+    # ── Fallback: direct Ollama path ───────────────────────
+    try:
+        from .ollama_client import generate, is_ollama_available
+    except ImportError:
+        return None
+
+    if not is_ollama_available():
+        return None
 
     resp = generate(
         prompt=(
@@ -416,16 +493,32 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
 
 
 def explain_error_batch(conn, item_ids: list[int], user_id: int = 1) -> list[dict]:
-    """Batch wrapper over existing error_explanation.generate_error_explanation().
+    """Batch wrapper: DSPy-first error explanation with fallback to error_explanation module.
 
     Returns list of {item_id, explanation} dicts.
     """
+    results = []
+
+    # Check DSPy availability once for the batch
+    dspy_ok = False
+    try:
+        from .dspy_modules import configure_dspy, error_explainer
+        if error_explainer is not None and configure_dspy():
+            dspy_ok = True
+    except (ImportError, Exception):
+        pass
+
+    # Fallback module import
+    fallback_available = False
     try:
         from .error_explanation import generate_error_explanation
+        fallback_available = True
     except ImportError:
+        pass
+
+    if not dspy_ok and not fallback_available:
         return []
 
-    results = []
     for item_id in item_ids:
         row = conn.execute("""
             SELECT ci.hanzi, ci.pinyin, ci.english, ci.hsk_level,
@@ -439,22 +532,48 @@ def explain_error_batch(conn, item_ids: list[int], user_id: int = 1) -> list[dic
         if not row:
             continue
 
-        item_content = {
-            "hanzi": row["hanzi"],
-            "pinyin": row["pinyin"],
-            "english": row["english"],
-        }
-        explanation = generate_error_explanation(
-            conn,
-            item_id=str(item_id),
-            correct_answer=row["correct_answer"] or "",
-            wrong_answer=row["given_answer"] or "",
-            item_content=item_content,
-            times_wrong=3,
-            learner_hsk_level=row["hsk_level"] or 1,
-        )
-        if explanation:
-            results.append({"item_id": item_id, "explanation": explanation})
+        hanzi = row["hanzi"] or ""
+        correct = row["correct_answer"] or ""
+        wrong = row["given_answer"] or ""
+
+        # ── DSPy path ─────────────────────────────────
+        if dspy_ok:
+            try:
+                from .dspy_modules import error_explainer as _explainer
+                result = _explainer(
+                    hanzi=hanzi,
+                    correct_answer=correct,
+                    wrong_answer=wrong,
+                )
+                explanation_text = result.explanation
+                if explanation_text and len(explanation_text.strip()) > 10:
+                    # Build richer explanation with mnemonic
+                    full_explanation = explanation_text.strip()
+                    if hasattr(result, "mnemonic") and result.mnemonic:
+                        full_explanation += f"\n\nMemory aid: {result.mnemonic}"
+                    results.append({"item_id": item_id, "explanation": full_explanation})
+                    continue
+            except Exception:
+                pass  # Fall through to fallback
+
+        # ── Fallback: existing error_explanation module ──
+        if fallback_available:
+            item_content = {
+                "hanzi": hanzi,
+                "pinyin": row["pinyin"],
+                "english": row["english"],
+            }
+            explanation = generate_error_explanation(
+                conn,
+                item_id=str(item_id),
+                correct_answer=correct,
+                wrong_answer=wrong,
+                item_content=item_content,
+                times_wrong=3,
+                learner_hsk_level=row["hsk_level"] or 1,
+            )
+            if explanation:
+                results.append({"item_id": item_id, "explanation": explanation})
 
     return results
 
@@ -616,29 +735,72 @@ def _get_multilingual_model():
 
 def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
                             batch_size: int = 50) -> dict:
-    """Compute and store embeddings in genai_item_embeddings."""
+    """Compute and store embeddings. Uses LanceDB when available, falls back to SQLite BLOBs."""
     try:
         import numpy as np
         model = _get_multilingual_model()
     except ImportError:
         return {"status": "skipped", "reason": "sentence-transformers not installed"}
 
+    # --- Determine which items need embeddings ---
+    # Try LanceDB first to check what's already embedded
+    lance_db = _get_lance_db()
+    existing_lance_ids = set()
+    if lance_db is not None:
+        try:
+            table = lance_db.open_table("item_embeddings")
+            existing_df = table.to_pandas()
+            existing_lance_ids = set(existing_df["content_item_id"].tolist())
+        except Exception:
+            pass  # Table doesn't exist yet, all items need embedding
+
     if content_item_ids:
-        placeholders = ",".join("?" * len(content_item_ids))
-        rows = conn.execute(f"""
-            SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
-            FROM content_item ci
-            LEFT JOIN genai_item_embeddings ge ON ge.content_item_id = ci.id
-            WHERE ci.id IN ({placeholders}) AND ge.id IS NULL
-        """, content_item_ids).fetchall()
+        if lance_db is not None and existing_lance_ids:
+            # Filter to items not already in LanceDB
+            needed_ids = [i for i in content_item_ids if i not in existing_lance_ids]
+            if not needed_ids:
+                return {"status": "complete", "computed": 0}
+            placeholders = ",".join("?" * len(needed_ids))
+            rows = conn.execute(f"""
+                SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                FROM content_item ci
+                WHERE ci.id IN ({placeholders})
+            """, needed_ids).fetchall()
+        else:
+            placeholders = ",".join("?" * len(content_item_ids))
+            rows = conn.execute(f"""
+                SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                FROM content_item ci
+                LEFT JOIN genai_item_embeddings ge ON ge.content_item_id = ci.id
+                WHERE ci.id IN ({placeholders}) AND ge.id IS NULL
+            """, content_item_ids).fetchall()
     else:
-        rows = conn.execute("""
-            SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
-            FROM content_item ci
-            LEFT JOIN genai_item_embeddings ge ON ge.content_item_id = ci.id
-            WHERE ci.status = 'drill_ready' AND ge.id IS NULL
-            LIMIT ?
-        """, (batch_size,)).fetchall()
+        if lance_db is not None:
+            # Exclude items already in LanceDB
+            if existing_lance_ids:
+                id_list = ",".join(str(i) for i in existing_lance_ids)
+                rows = conn.execute(f"""
+                    SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                    FROM content_item ci
+                    WHERE ci.status = 'drill_ready'
+                      AND ci.id NOT IN ({id_list})
+                    LIMIT ?
+                """, (batch_size,)).fetchall()
+            else:
+                rows = conn.execute("""
+                    SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                    FROM content_item ci
+                    WHERE ci.status = 'drill_ready'
+                    LIMIT ?
+                """, (batch_size,)).fetchall()
+        else:
+            rows = conn.execute("""
+                SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                FROM content_item ci
+                LEFT JOIN genai_item_embeddings ge ON ge.content_item_id = ci.id
+                WHERE ci.status = 'drill_ready' AND ge.id IS NULL
+                LIMIT ?
+            """, (batch_size,)).fetchall()
 
     if not rows:
         return {"status": "complete", "computed": 0}
@@ -646,6 +808,34 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
     texts = [f"{r['hanzi']} {r['pinyin']} {r['english']}" for r in rows]
     embeddings = model.encode(texts, show_progress_bar=False)
 
+    # --- Write to LanceDB (primary) ---
+    if lance_db is not None:
+        try:
+            records = []
+            for idx, (row, emb) in enumerate(zip(rows, embeddings)):
+                records.append({
+                    "content_item_id": row["id"],
+                    "hanzi": row["hanzi"] or "",
+                    "pinyin": row["pinyin"] or "",
+                    "english": row["english"] or "",
+                    "text": texts[idx],
+                    "vector": emb.tolist(),
+                })
+
+            try:
+                table = lance_db.open_table("item_embeddings")
+                table.add(records)
+            except Exception:
+                # Table doesn't exist yet — create it
+                lance_db.create_table("item_embeddings", records)
+
+            logger.debug("Wrote %d embeddings to LanceDB", len(records))
+            return {"status": "complete", "computed": len(records), "backend": "lancedb"}
+        except Exception as e:
+            logger.warning("LanceDB write failed, falling back to SQLite: %s", e)
+            # Fall through to SQLite fallback
+
+    # --- Fallback: write to SQLite BLOBs ---
     computed = 0
     for row, emb in zip(rows, embeddings):
         try:
@@ -659,11 +849,11 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
             break
 
     conn.commit()
-    return {"status": "complete", "computed": computed}
+    return {"status": "complete", "computed": computed, "backend": "sqlite"}
 
 
 def find_similar_items(conn, query_hanzi: str, top_k: int = 5) -> list[dict]:
-    """Cosine similarity search against stored embeddings."""
+    """Vector similarity search. Uses LanceDB when available, falls back to SQLite BLOBs."""
     try:
         import numpy as np
         model = _get_multilingual_model()
@@ -672,6 +862,31 @@ def find_similar_items(conn, query_hanzi: str, top_k: int = 5) -> list[dict]:
 
     query_emb = model.encode([query_hanzi], show_progress_bar=False)[0]
 
+    # --- Try LanceDB (primary) ---
+    lance_db = _get_lance_db()
+    if lance_db is not None:
+        try:
+            table = lance_db.open_table("item_embeddings")
+            results_df = table.search(query_emb.tolist()).limit(top_k).to_pandas()
+            results = []
+            for _, row in results_df.iterrows():
+                # LanceDB returns _distance (L2); convert to a similarity score
+                # For cosine metric the distance is already 1 - cosine_sim
+                distance = row.get("_distance", 0.0)
+                similarity = round(1.0 - float(distance), 4)
+                results.append({
+                    "content_item_id": int(row["content_item_id"]),
+                    "hanzi": row.get("hanzi", ""),
+                    "pinyin": row.get("pinyin", ""),
+                    "english": row.get("english", ""),
+                    "similarity": similarity,
+                })
+            return results
+        except Exception as e:
+            logger.debug("LanceDB search failed, falling back to SQLite: %s", e)
+            # Fall through to SQLite fallback
+
+    # --- Fallback: brute-force cosine similarity over SQLite BLOBs ---
     try:
         rows = conn.execute("""
             SELECT ge.content_item_id, ge.embedding, ci.hanzi, ci.pinyin, ci.english

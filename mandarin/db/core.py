@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 105  # Increment when adding migrations
+SCHEMA_VERSION = 113  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6021,6 +6021,7 @@ def _migrate_v99_to_v100(conn):
                 guardrail_metrics TEXT,
                 min_sample_size INTEGER DEFAULT 100,
                 priority INTEGER DEFAULT 0,
+                scope TEXT DEFAULT 'parameter',
                 status TEXT DEFAULT 'pending',
                 created_at TEXT DEFAULT (datetime('now')),
                 reviewed_at TEXT,
@@ -6032,6 +6033,11 @@ def _migrate_v99_to_v100(conn):
             "CREATE INDEX IF NOT EXISTS idx_experiment_proposal_status "
             "ON experiment_proposal(status)"
         )
+    else:
+        # Migration: add scope column if missing
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(experiment_proposal)").fetchall()}
+        if "scope" not in cols:
+            conn.execute("ALTER TABLE experiment_proposal ADD COLUMN scope TEXT DEFAULT 'parameter'")
 
     if "experiment_rollout" not in tables:
         conn.execute("""
@@ -6205,6 +6211,453 @@ def _migrate_v104_to_v105(conn):
     conn.commit()
 
 
+def _migrate_v105_to_v106(conn):
+    """Add platform_status to work orders + ensure prescription_execution_log exists."""
+    # Add platform_status column for cross-platform change tracking
+    cols = _col_set(conn, "pi_work_order")
+    if "platform_status" not in cols:
+        try:
+            conn.execute("""
+                ALTER TABLE pi_work_order
+                ADD COLUMN platform_status TEXT DEFAULT '{}'
+            """)
+        except sqlite3.OperationalError:
+            pass
+
+    # Ensure prescription_execution_log has all needed columns
+    tables = _table_set(conn)
+    if "prescription_execution_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS prescription_execution_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                work_order_id INTEGER NOT NULL,
+                action_type TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'queued',
+                result_data TEXT,
+                pre_audit_score REAL,
+                post_audit_score REAL,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                completed_at TEXT
+            );
+            CREATE INDEX IF NOT EXISTS idx_pel_status
+                ON prescription_execution_log(status);
+            CREATE INDEX IF NOT EXISTS idx_pel_wo
+                ON prescription_execution_log(work_order_id);
+        """)
+    else:
+        # Add columns if table already exists but lacks them
+        cols = _col_set(conn, "prescription_execution_log")
+        for col, default in [
+            ("pre_audit_score", "NULL"),
+            ("post_audit_score", "NULL"),
+            ("completed_at", "NULL"),
+        ]:
+            if col not in cols:
+                try:
+                    conn.execute(
+                        f"ALTER TABLE prescription_execution_log ADD COLUMN {col} REAL DEFAULT {default}"
+                        if "score" in col else
+                        f"ALTER TABLE prescription_execution_log ADD COLUMN {col} TEXT DEFAULT {default}"
+                    )
+                except sqlite3.OperationalError:
+                    pass
+
+    conn.commit()
+
+
+def _migrate_v106_to_v107(conn):
+    """Add pi_model_registry for agentic model selection."""
+    tables = _table_set(conn)
+    if "pi_model_registry" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS pi_model_registry (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task_type TEXT NOT NULL,
+                model_name TEXT NOT NULL,
+                provider TEXT NOT NULL DEFAULT 'ollama',
+                quality_score REAL,
+                latency_p50_ms INTEGER,
+                latency_p95_ms INTEGER,
+                cost_per_1k_tokens REAL,
+                sample_count INTEGER DEFAULT 0,
+                is_active INTEGER DEFAULT 0,
+                benchmarked_at TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                UNIQUE(task_type, model_name)
+            );
+            CREATE INDEX IF NOT EXISTS idx_model_reg_task
+                ON pi_model_registry(task_type, is_active);
+        """)
+    conn.commit()
+
+
+def _migrate_v107_to_v108(conn):
+    """v107->v108: Add pattern, explanation, examples columns to grammar_point.
+
+    These columns are referenced by grammar_tutor.py, grammar_routes.py, and
+    exposure_routes.py but were never added to the schema.  This caused 500
+    errors on /api/grammar/ask, /api/grammar/point/<id>/teach, and related
+    grammar endpoints.
+    """
+    gp_cols = _col_set(conn, "grammar_point")
+    if "pattern" not in gp_cols:
+        conn.execute("ALTER TABLE grammar_point ADD COLUMN pattern TEXT")
+    if "explanation" not in gp_cols:
+        conn.execute("ALTER TABLE grammar_point ADD COLUMN explanation TEXT")
+    if "examples" not in gp_cols:
+        conn.execute("ALTER TABLE grammar_point ADD COLUMN examples TEXT")
+    conn.commit()
+
+
+def _migrate_v108_to_v109(conn):
+    """v108->v109: Add listening block columns to listening_progress.
+
+    The ListeningBlock feature needs listening_time_seconds, playback_speed,
+    and replays columns for tracking in-session listening comprehension.
+    Also adds an index on (user_id, completed_at) for efficient lookups.
+    """
+    tables = _table_set(conn)
+    if "listening_progress" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS listening_progress (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL DEFAULT 1,
+                passage_id TEXT NOT NULL,
+                completed_at TEXT NOT NULL DEFAULT (datetime('now')),
+                comprehension_score REAL DEFAULT 0.0,
+                questions_correct INTEGER DEFAULT 0,
+                questions_total INTEGER DEFAULT 0,
+                words_looked_up INTEGER DEFAULT 0,
+                hsk_level INTEGER DEFAULT 1,
+                listening_time_seconds INTEGER DEFAULT 0,
+                playback_speed REAL DEFAULT 1.0,
+                replays INTEGER DEFAULT 0
+            );
+            CREATE INDEX IF NOT EXISTS idx_listening_progress_user
+                ON listening_progress(user_id, completed_at);
+        """)
+    else:
+        lp_cols = _col_set(conn, "listening_progress")
+        if "listening_time_seconds" not in lp_cols:
+            conn.execute(
+                "ALTER TABLE listening_progress ADD COLUMN listening_time_seconds INTEGER DEFAULT 0"
+            )
+        if "playback_speed" not in lp_cols:
+            conn.execute(
+                "ALTER TABLE listening_progress ADD COLUMN playback_speed REAL DEFAULT 1.0"
+            )
+        if "replays" not in lp_cols:
+            conn.execute(
+                "ALTER TABLE listening_progress ADD COLUMN replays INTEGER DEFAULT 0"
+            )
+        # Add index if missing
+        idx_rows = conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='index' AND name='idx_listening_progress_user'"
+        ).fetchall()
+        if not idx_rows:
+            conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_listening_progress_user "
+                "ON listening_progress(user_id, completed_at)"
+            )
+    conn.commit()
+
+
+def _find_grammar_id(points: dict, pattern: str) -> int | None:
+    """Fuzzy-match a grammar point by name/pattern key.
+
+    Tries exact match, then substring, then prefix match.
+    """
+    key = pattern.lower().strip()
+    if key in points:
+        return points[key]
+    # Substring match
+    for k, v in points.items():
+        if key in k or k in key:
+            return v
+    return None
+
+
+def _seed_grammar_prerequisites(conn):
+    """Seed core grammar prerequisite relationships based on Pienemann's Processability Theory.
+
+    Hierarchy (each level requires mastery of the previous):
+      1. Lemma access: 是, 有, 在, 不
+      2. Category procedure: 的 modification, adjective predicates, measure words
+      3. Phrasal procedure: SVO order, 在+location, time expressions
+      4. S-procedure: 了 completion, 过 experience, 把 construction
+      5. Subordinate clause: 因为...所以, 虽然...但是, 如果...就
+    """
+    points = {}
+    for row in conn.execute("SELECT id, name FROM grammar_point").fetchall():
+        key = (row["name"] or "").lower().strip()
+        if key:
+            points[key] = row["id"]
+
+    if not points:
+        return
+
+    # (grammar_name_fragment, prerequisite_name_fragment, relationship)
+    prerequisites = [
+        # ── Level 2 (category procedure) requires Level 1 (lemma access) ──
+        ("的 possession", "是", "requires"),
+        ("很 + adjective", "是", "requires"),
+        ("measure words", "有", "requires"),
+        ("不 negation", "是", "requires"),
+        ("没 negation", "有", "requires"),
+
+        # ── Level 3 (phrasal) requires Level 2 (category) ──
+        ("svo basic", "是", "requires"),
+        ("svo basic", "不 negation", "requires"),
+        ("在 location", "是", "requires"),
+        ("time word placement", "svo basic", "requires"),
+        ("number + measure", "measure words", "requires"),
+        ("adjective predicate", "很 + adjective", "requires"),
+
+        # ── Question forms require basic sentence structure ──
+        ("吗 yes/no", "svo basic", "requires"),
+        ("呢 follow-up", "吗 yes/no", "requires"),
+        ("question words", "svo basic", "requires"),
+        ("几/多少", "question words", "requires"),
+        ("是不是", "是", "requires"),
+        ("v不v", "不 negation", "requires"),
+
+        # ── Desire/ability verbs require SVO ──
+        ("想/要 expressing", "svo basic", "requires"),
+        ("会 can", "svo basic", "requires"),
+        ("可以/能", "会 can", "requires"),
+
+        # ── Level 4 (S-procedure) requires Level 3 (phrasal) ──
+        ("了 completed", "svo basic", "requires"),
+        ("了 completed", "不 negation", "requires"),
+        ("了 perfective", "了 completed", "extends"),
+        ("过 experience", "了 completed", "requires"),
+        ("正在 ongoing", "在 location", "requires"),
+        ("在+v progressive", "正在 ongoing", "extends"),
+        ("着 continuous", "正在 ongoing", "requires"),
+
+        # ── Comparison requires adjective predicates ──
+        ("比 comparison", "adjective predicate", "requires"),
+        ("比 comparison", "很 + adjective", "requires"),
+        ("最 superlative", "比 comparison", "requires"),
+        ("更 even more", "比 comparison", "requires"),
+        ("比+adj+一点", "比 comparison", "extends"),
+
+        # ── Complement constructions require basic verbs + 了 ──
+        ("得 complement", "了 completed", "requires"),
+        ("duration complement", "了 completed", "requires"),
+        ("v+到 result", "了 completed", "requires"),
+        ("v+完 result", "了 completed", "requires"),
+        ("v+见 result", "了 completed", "requires"),
+        ("v+懂 result", "了 completed", "requires"),
+
+        # ── Causative/passive require transitive sentence mastery ──
+        ("让/叫 causative", "svo basic", "requires"),
+        ("让/叫 causative", "了 completed", "recommended"),
+        ("给 for/give", "svo basic", "requires"),
+        ("double object", "给 for/give", "requires"),
+
+        # ── Level 5 (subordinate clause) requires Level 4 ──
+        ("虽然", "了 completed", "requires"),
+        ("所以", "了 completed", "requires"),
+        ("要是", "了 completed", "requires"),
+        ("...的话", "了 completed", "requires"),
+
+        # ── Adverb ordering ──
+        ("就 then", "svo basic", "requires"),
+        ("就 then", "time word placement", "requires"),
+        ("才 only then", "就 then", "requires"),
+        ("先...再", "就 then", "requires"),
+        ("已经...了", "了 completed", "requires"),
+        ("又 again", "了 completed", "requires"),
+        ("再 again", "不 negation", "requires"),
+        ("一直", "在+v progressive", "recommended"),
+
+        # ── Direction/location requires 在 ──
+        ("从...到", "在 location", "requires"),
+        ("从 from", "在 location", "requires"),
+        ("向/往", "从 from", "requires"),
+        ("到 arrive", "在 location", "requires"),
+        ("location words", "在 location", "requires"),
+        ("到...去", "到 arrive", "extends"),
+
+        # ── Other common patterns ──
+        ("也 also", "svo basic", "requires"),
+        ("都 all", "也 also", "requires"),
+        ("还是 or", "吗 yes/no", "requires"),
+        ("verb reduplication", "svo basic", "requires"),
+        ("一下 briefly", "verb reduplication", "requires"),
+        ("快要...了", "了 completed", "requires"),
+        ("太...了", "很 + adjective", "requires"),
+        ("有点儿", "很 + adjective", "requires"),
+        ("一点儿", "比 comparison", "recommended"),
+        ("别 don't", "不 negation", "requires"),
+    ]
+
+    inserted = 0
+    for point_pattern, prereq_pattern, rel in prerequisites:
+        point_id = _find_grammar_id(points, point_pattern)
+        prereq_id = _find_grammar_id(points, prereq_pattern)
+        if point_id and prereq_id and point_id != prereq_id:
+            try:
+                conn.execute("""
+                    INSERT OR IGNORE INTO grammar_prerequisites
+                    (grammar_point_id, prerequisite_id, relationship)
+                    VALUES (?, ?, ?)
+                """, (point_id, prereq_id, rel))
+                inserted += 1
+            except Exception:
+                pass
+    conn.commit()
+    logger.info("Seeded %d grammar prerequisite relationships", inserted)
+
+
+def _migrate_v109_to_v110(conn):
+    """v109->v110: Add grammar_prerequisites table for Pienemann's Processability Theory DAG.
+
+    Creates the prerequisite graph table and seeds ~50 core relationships
+    encoding the natural acquisition order for Mandarin grammar points.
+    """
+    tables = _table_set(conn)
+    if "grammar_prerequisites" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS grammar_prerequisites (
+                grammar_point_id INTEGER NOT NULL,
+                prerequisite_id INTEGER NOT NULL,
+                relationship TEXT DEFAULT 'requires',
+                PRIMARY KEY (grammar_point_id, prerequisite_id),
+                FOREIGN KEY (grammar_point_id) REFERENCES grammar_point(id),
+                FOREIGN KEY (prerequisite_id) REFERENCES grammar_point(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_grammar_prereq_point
+                ON grammar_prerequisites(grammar_point_id);
+            CREATE INDEX IF NOT EXISTS idx_grammar_prereq_prereq
+                ON grammar_prerequisites(prerequisite_id);
+        """)
+    conn.commit()
+
+    # Seed prerequisite relationships (idempotent via INSERT OR IGNORE)
+    _seed_grammar_prerequisites(conn)
+
+
+def _migrate_v110_to_v111(conn):
+    """v110->v111: Metacognitive prompts (Dunlosky 2013) and SDT motivation (Ryan & Deci 2000).
+
+    Creates tables for confidence calibration, error reflection, and
+    session self-assessment. Adds user_choice column to session_log for
+    SDT autonomy support.
+    """
+    tables = _table_set(conn)
+
+    if "confidence_calibration" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS confidence_calibration (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                session_id TEXT,
+                item_id INTEGER,
+                confidence TEXT NOT NULL,
+                was_correct INTEGER NOT NULL,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.commit()
+
+    if "error_reflection" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS error_reflection (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                item_id INTEGER,
+                reflection_type TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.commit()
+
+    if "session_self_assessment" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS session_self_assessment (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                session_id TEXT,
+                difficulty_rating TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.commit()
+
+    # Add user_choice column to session_log for SDT autonomy
+    session_cols = _col_set(conn, "session_log")
+    if "user_choice" not in session_cols:
+        conn.execute("ALTER TABLE session_log ADD COLUMN user_choice TEXT")
+        conn.commit()
+
+
+def _migrate_v111_to_v112(conn):
+    """v111->v112: drill_type_posterior table for per-item Thompson Sampling (Beta-Bernoulli bandit).
+
+    Each (user, item, drill_type) triple maintains a Beta(alpha, beta) posterior
+    updated after each drill attempt. Used by _thompson_sample_drill_type in scheduler.
+    """
+    tables = _table_set(conn)
+
+    if "drill_type_posterior" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS drill_type_posterior (
+                user_id INTEGER NOT NULL,
+                content_item_id INTEGER NOT NULL,
+                drill_type TEXT NOT NULL,
+                alpha REAL NOT NULL DEFAULT 1.0,
+                beta REAL NOT NULL DEFAULT 1.0,
+                updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+                PRIMARY KEY (user_id, content_item_id, drill_type)
+            )
+        """)
+        conn.commit()
+
+
+def _migrate_v112_to_v113(conn):
+    """v112->v113: LLM cost metering and referral tracking tables.
+
+    llm_cost_log tracks per-call LLM spend for cost analytics.
+    referral_log tracks user-to-user referrals for viral coefficient.
+    """
+    tables = _table_set(conn)
+
+    if "llm_cost_log" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS llm_cost_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                model TEXT NOT NULL,
+                task_type TEXT NOT NULL,
+                prompt_tokens INTEGER DEFAULT 0,
+                completion_tokens INTEGER DEFAULT 0,
+                cost_usd REAL DEFAULT 0.0,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_llm_cost_log_day ON llm_cost_log(date(created_at))
+        """)
+        conn.commit()
+
+    if "referral_log" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS referral_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                referrer_id INTEGER,
+                referred_id INTEGER,
+                channel TEXT DEFAULT 'link',
+                referral_code TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_referral_log_referrer ON referral_log(referrer_id)
+        """)
+        conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6311,6 +6764,14 @@ MIGRATIONS = {
     102: _migrate_v102_to_v103,
     103: _migrate_v103_to_v104,
     104: _migrate_v104_to_v105,
+    105: _migrate_v105_to_v106,
+    106: _migrate_v106_to_v107,
+    107: _migrate_v107_to_v108,
+    108: _migrate_v108_to_v109,
+    109: _migrate_v109_to_v110,
+    110: _migrate_v110_to_v111,
+    111: _migrate_v111_to_v112,
+    112: _migrate_v112_to_v113,
 }
 
 

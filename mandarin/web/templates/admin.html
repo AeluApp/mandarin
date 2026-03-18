@@ -86,6 +86,15 @@
     .segment-card-title { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); text-transform: capitalize; }
     .segment-card-value { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-accent); }
     .segment-card-sub { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); margin-top: var(--space-1); }
+
+    /* SPC visual charts */
+    .spc-chart-wrapper { margin-bottom: 1rem; }
+    .spc-chart-wrapper canvas { width: 100%; border-radius: 8px; border: 1px solid var(--color-divider); }
+
+    /* Cohort retention heatmap */
+    .retention-high { background: rgba(76, 175, 80, 0.2); color: #2e7d32; }
+    .retention-mid { background: rgba(255, 152, 0, 0.2); color: #e65100; }
+    .retention-low { background: rgba(244, 67, 54, 0.2); color: #c62828; }
   </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
   {% if ga4_id %}
@@ -197,6 +206,21 @@
       <div class="admin-section">
         <h2>Revenue</h2>
         <div id="revenue-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Customer Analytics</h2>
+        <div id="clv-container" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Cohort Retention</h2>
+        <div id="cohort-retention-container" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h2>LLM Costs</h2>
+        <div id="llm-costs-container" class="tab-loading">Loading...</div>
       </div>
     </div>
 
@@ -399,6 +423,7 @@
           </select>
         </div>
         <div id="quality-spc-content" class="tab-loading">Loading...</div>
+        <div id="spc-charts-container" class="admin-section" style="margin-top:var(--space-3);"></div>
       </div>
 
       <div class="admin-section">
@@ -923,7 +948,7 @@
         "issues": loadIssues,
         "sessions": loadSessions,
         "security": function() { loadSecurityScans(); loadSecurity(); },
-        "revenue": loadRevenue,
+        "revenue": function() { loadRevenue(); loadCLV(); loadCohortRetention(); loadLLMCosts(); },
         "retention": loadRetention,
         "engagement": function() { loadEngagement(); loadCompletionSegments(); },
         "partners": loadPartners,
@@ -1490,6 +1515,7 @@
     function loadQuality() {
       loadDPMO();
       loadSPC();
+      loadSPCCharts();
       loadCapability();
       loadRetentionAnalysis();
       loadFlowMetrics();
@@ -3304,6 +3330,196 @@
         loadCounterMetrics();
       }).catch(function() {
         document.getElementById("cm-health-banner").innerHTML = "Health check failed.";
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SPC Visual Control Charts (canvas-based)
+       ═══════════════════════════════════════════════════════════════ */
+
+    function renderSPCChart(canvasId, chartData) {
+      var canvas = document.getElementById(canvasId);
+      if (!canvas || !chartData || !chartData.data || chartData.data.length < 2) return;
+      var ctx = canvas.getContext("2d");
+      var w = canvas.width = canvas.parentElement.clientWidth;
+      var h = canvas.height = 200;
+      var cs = getComputedStyle(document.documentElement);
+
+      // Clear
+      ctx.fillStyle = cs.getPropertyValue("--color-surface").trim() || "#fff";
+      ctx.fillRect(0, 0, w, h);
+
+      var data = chartData.data;
+      var limits = chartData.limits;
+      var violations = chartData.violations || [];
+      var violationSet = new Set(violations.map(function(v) { return v.index; }));
+
+      // Compute scale
+      var minVal = Math.min(limits.lcl, Math.min.apply(null, data)) - 2;
+      var maxVal = Math.max(limits.ucl, Math.max.apply(null, data)) + 2;
+      var range = maxVal - minVal || 1;
+      var pad = {left: 50, right: 20, top: 15, bottom: 25};
+      var plotW = w - pad.left - pad.right;
+      var plotH = h - pad.top - pad.bottom;
+
+      function x(i) { return pad.left + (i / Math.max(1, data.length - 1)) * plotW; }
+      function y(v) { return pad.top + plotH - ((v - minVal) / range) * plotH; }
+
+      // Draw UCL/LCL bands (light red fill between)
+      ctx.fillStyle = "rgba(244, 67, 54, 0.05)";
+      ctx.fillRect(pad.left, y(limits.ucl), plotW, y(limits.lcl) - y(limits.ucl));
+
+      // Draw limit lines
+      [["ucl", "#ef5350", [5, 5]], ["cl", "#2196F3", []], ["lcl", "#ef5350", [5, 5]]].forEach(function(spec) {
+        ctx.beginPath();
+        ctx.setLineDash(spec[2]);
+        ctx.strokeStyle = spec[1];
+        ctx.lineWidth = 1;
+        ctx.moveTo(pad.left, y(limits[spec[0]]));
+        ctx.lineTo(w - pad.right, y(limits[spec[0]]));
+        ctx.stroke();
+        ctx.setLineDash([]);
+        // Label
+        ctx.fillStyle = spec[1];
+        ctx.font = "10px system-ui";
+        ctx.fillText(spec[0].toUpperCase() + ": " + limits[spec[0]].toFixed(1), 2, y(limits[spec[0]]) + 3);
+      });
+
+      // Draw data line
+      ctx.beginPath();
+      ctx.strokeStyle = cs.getPropertyValue("--color-text").trim() || "#333";
+      ctx.lineWidth = 1.5;
+      for (var i = 0; i < data.length; i++) {
+        if (i === 0) ctx.moveTo(x(i), y(data[i]));
+        else ctx.lineTo(x(i), y(data[i]));
+      }
+      ctx.stroke();
+
+      // Draw points (orange for violations, blue for normal)
+      for (var i = 0; i < data.length; i++) {
+        ctx.beginPath();
+        ctx.arc(x(i), y(data[i]), violationSet.has(i) ? 5 : 3, 0, Math.PI * 2);
+        ctx.fillStyle = violationSet.has(i) ? "#FF9800" : "#2196F3";
+        ctx.fill();
+      }
+
+      // Title
+      ctx.fillStyle = cs.getPropertyValue("--color-text").trim() || "#333";
+      ctx.font = "bold 12px system-ui";
+      ctx.fillText(chartData.title || "", pad.left, 12);
+    }
+
+    function loadSPCCharts() {
+      adminFetch("/api/admin/spc/charts").then(function(data) {
+        var container = document.getElementById("spc-charts-container");
+        if (!container) return;
+        container.innerHTML = "";
+        var chartTypes = ["session_completion", "accuracy", "rejection_rate", "llm_latency"];
+        var hasAny = false;
+        chartTypes.forEach(function(ct) {
+          if (data[ct]) {
+            hasAny = true;
+            var div = document.createElement("div");
+            div.className = "spc-chart-wrapper";
+            div.innerHTML = '<canvas id="spc-' + ct + '"></canvas>';
+            container.appendChild(div);
+            // Render after DOM insert
+            setTimeout(function() { renderSPCChart("spc-" + ct, data[ct]); }, 50);
+          }
+        });
+        if (!hasAny) {
+          container.innerHTML = '<p class="tab-empty">No SPC chart data available yet.</p>';
+        }
+      }).catch(function(e) {
+        var container = document.getElementById("spc-charts-container");
+        if (container) container.innerHTML = '<p class="tab-empty">SPC charts unavailable: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       Customer Analytics: CLV + Cohort Retention
+       ═══════════════════════════════════════════════════════════════ */
+
+    function loadCohortRetention() {
+      adminFetch("/api/admin/analytics/cohort-retention").then(function(data) {
+        var container = document.getElementById("cohort-retention-container");
+        if (!container) return;
+        if (!data.cohorts || !data.cohorts.length) {
+          container.innerHTML = '<p class="tab-empty">No cohort data yet (need users).</p>';
+          return;
+        }
+        var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Cohort</th><th>Users</th><th>D1</th><th>D7</th><th>D14</th><th>D30</th><th>D60</th><th>D90</th></tr></thead><tbody>';
+        data.cohorts.forEach(function(c) {
+          html += '<tr><td>' + esc(c.cohort) + '</td><td>' + c.users + '</td>';
+          ["day_1","day_7","day_14","day_30","day_60","day_90"].forEach(function(d) {
+            var val = c[d] || 0;
+            var cls = val > 50 ? "retention-high" : val > 20 ? "retention-mid" : "retention-low";
+            html += '<td class="' + cls + '">' + val + '%</td>';
+          });
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+      }).catch(function(e) {
+        var container = document.getElementById("cohort-retention-container");
+        if (container) container.innerHTML = '<p class="tab-empty">Cohort retention unavailable: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    function loadCLV() {
+      adminFetch("/api/admin/analytics/clv").then(function(data) {
+        var container = document.getElementById("clv-container");
+        if (!container) return;
+        if (data.error) {
+          container.innerHTML = '<p class="tab-empty">' + esc(data.error) + '</p>';
+          return;
+        }
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card" title="Estimated lifetime value per user"><div class="metric-value">$' + (data.estimated_ltv || 0).toFixed(2) + '</div><div class="metric-label">Est. LTV</div></div>';
+        html += '<div class="metric-card" title="Average revenue per user"><div class="metric-value">$' + (data.arpu || 0).toFixed(2) + '</div><div class="metric-label">ARPU</div></div>';
+        html += '<div class="metric-card" title="Average active months per user"><div class="metric-value">' + (data.avg_lifetime_months || 0).toFixed(1) + '</div><div class="metric-label">Avg Months</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + (data.total_users || 0) + '</div><div class="metric-label">Paying Users</div></div>';
+        html += '</div>';
+        container.innerHTML = html;
+      }).catch(function(e) {
+        var container = document.getElementById("clv-container");
+        if (container) container.innerHTML = '<p class="tab-empty">CLV unavailable: ' + esc(e.message) + '</p>';
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LLM Cost Tracking
+       ═══════════════════════════════════════════════════════════════ */
+
+    function loadLLMCosts() {
+      adminFetch("/api/admin/analytics/llm-costs").then(function(data) {
+        var container = document.getElementById("llm-costs-container");
+        if (!container) return;
+        var costs = data.daily_costs || [];
+        if (!costs.length) {
+          container.innerHTML = '<p class="tab-empty">No LLM cost data yet.</p>';
+          return;
+        }
+        // Compute totals
+        var totalCost = costs.reduce(function(s, r) { return s + (r.total_cost || 0); }, 0);
+        var totalCalls = costs.reduce(function(s, r) { return s + (r.call_count || 0); }, 0);
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card" title="Total LLM spend over the last 30 days"><div class="metric-value">$' + totalCost.toFixed(4) + '</div><div class="metric-label">30-Day Total</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">' + totalCalls + '</div><div class="metric-label">Total Calls</div></div>';
+        html += '<div class="metric-card" title="Average cost per LLM call"><div class="metric-value">$' + (totalCalls > 0 ? (totalCost / totalCalls).toFixed(6) : "0") + '</div><div class="metric-label">Avg Cost/Call</div></div>';
+        html += '</div>';
+        // Table breakdown
+        html += '<div class="table-wrap" style="margin-top:var(--space-3);"><table class="admin-table"><thead><tr><th>Day</th><th>Model</th><th>Task</th><th>Calls</th><th>Tokens</th><th>Cost</th></tr></thead><tbody>';
+        costs.slice(0, 50).forEach(function(r) {
+          html += '<tr><td>' + esc(r.day) + '</td><td>' + esc(r.model || '') + '</td><td>' + esc(r.task_type || '') + '</td>';
+          html += '<td>' + r.call_count + '</td><td>' + ((r.total_prompt_tokens || 0) + (r.total_completion_tokens || 0)) + '</td>';
+          html += '<td>$' + (r.total_cost || 0).toFixed(6) + '</td></tr>';
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+      }).catch(function(e) {
+        var container = document.getElementById("llm-costs-container");
+        if (container) container.innerHTML = '<p class="tab-empty">LLM costs unavailable: ' + esc(e.message) + '</p>';
       });
     }
   </script>

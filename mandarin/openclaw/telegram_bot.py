@@ -215,7 +215,8 @@ async def handle_message(update: Update, context: Any) -> None:
             return
 
         # Classify intent
-        intent_result = llm_handler.classify_intent(clean_text, conn=conn)
+        user_id_short = str(update.effective_chat.id)[:20]
+        intent_result = llm_handler.classify_intent(clean_text, conn=conn, user_id=user_id_short)
 
         # Route to appropriate command
         response = _execute_intent(intent_result, conn)
@@ -227,6 +228,13 @@ async def handle_message(update: Update, context: Any) -> None:
             tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
             tool_result=response[:500],
         ) if conn else None
+
+        # Store conversation turn in memory
+        try:
+            from ..ai.memory import add_memory
+            add_memory(user_id_short, clean_text, response, channel="telegram")
+        except (ImportError, Exception):
+            pass
 
         # Sanitize and send
         safe_response = security.sanitize_output(response)
@@ -335,7 +343,8 @@ async def handle_voice(update: Update, context: Any) -> None:
             )
             return
 
-        intent_result = llm_handler.classify_intent(clean_text, conn=conn)
+        voice_user_id = str(update.effective_chat.id)[:20]
+        intent_result = llm_handler.classify_intent(clean_text, conn=conn, user_id=voice_user_id)
         response = _execute_intent(intent_result, conn)
 
         security.log_message(
@@ -344,6 +353,13 @@ async def handle_voice(update: Update, context: Any) -> None:
             tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
             tool_result=response[:500],
         ) if conn else None
+
+        # Store conversation turn in memory
+        try:
+            from ..ai.memory import add_memory
+            add_memory(voice_user_id, clean_text, response, channel="telegram_voice")
+        except (ImportError, Exception):
+            pass
 
         safe_response = security.sanitize_output(response)
         await update.message.reply_text(safe_response or "I'm not sure how to help with that. Try /help.")

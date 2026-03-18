@@ -407,6 +407,20 @@ CREATE TABLE IF NOT EXISTS grammar_point (
 CREATE INDEX IF NOT EXISTS idx_grammar_hsk ON grammar_point(hsk_level);
 
 -- ────────────────────────────────
+-- GRAMMAR PREREQUISITES (Pienemann's Processability Theory DAG, V110+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS grammar_prerequisites (
+    grammar_point_id INTEGER NOT NULL,
+    prerequisite_id INTEGER NOT NULL,
+    relationship TEXT DEFAULT 'requires',
+    PRIMARY KEY (grammar_point_id, prerequisite_id),
+    FOREIGN KEY (grammar_point_id) REFERENCES grammar_point(id),
+    FOREIGN KEY (prerequisite_id) REFERENCES grammar_point(id)
+);
+CREATE INDEX IF NOT EXISTS idx_grammar_prereq_point ON grammar_prerequisites(grammar_point_id);
+CREATE INDEX IF NOT EXISTS idx_grammar_prereq_prereq ON grammar_prerequisites(prerequisite_id);
+
+-- ────────────────────────────────
 -- SKILLS (shared)
 -- ────────────────────────────────
 CREATE TABLE IF NOT EXISTS skill (
@@ -608,8 +622,13 @@ CREATE TABLE IF NOT EXISTS listening_progress (
     questions_correct INTEGER DEFAULT 0,
     questions_total INTEGER DEFAULT 0,
     words_looked_up INTEGER DEFAULT 0,
-    hsk_level INTEGER DEFAULT 1
+    hsk_level INTEGER DEFAULT 1,
+    listening_time_seconds INTEGER DEFAULT 0,
+    playback_speed REAL DEFAULT 1.0,
+    replays INTEGER DEFAULT 0
 );
+
+CREATE INDEX IF NOT EXISTS idx_listening_progress_user ON listening_progress(user_id, completed_at);
 
 -- ────────────────────────────────
 -- SCHEDULER LOCK (V34+)
@@ -1304,13 +1323,14 @@ CREATE TABLE IF NOT EXISTS experiment_proposal (
     name TEXT NOT NULL,
     description TEXT,
     hypothesis TEXT NOT NULL,
-    source TEXT NOT NULL,              -- 'churn_signal', 'manual', 'anomaly'
+    source TEXT NOT NULL,              -- 'churn_signal', 'intelligence', 'counter_metric', 'manual'
     source_detail TEXT,                -- JSON context from signal
     variants TEXT NOT NULL,            -- JSON array
     traffic_pct REAL DEFAULT 50.0,
     guardrail_metrics TEXT,            -- JSON array
     min_sample_size INTEGER DEFAULT 100,
     priority INTEGER DEFAULT 0,        -- higher = more important
+    scope TEXT DEFAULT 'parameter',    -- parameter, ui, content, business, marketing, architecture
     status TEXT DEFAULT 'pending',     -- pending, approved, rejected, started
     created_at TEXT DEFAULT (datetime('now')),
     reviewed_at TEXT,

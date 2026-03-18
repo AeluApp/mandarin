@@ -171,6 +171,88 @@ try:
 except (ValueError, TypeError):
     OLLAMA_TIMEOUT = 60
 
+# ── LiteLLM (unified LLM gateway) ────────────────────
+LITELLM_MODEL = f"ollama/{OLLAMA_PRIMARY_MODEL}"
+LITELLM_FALLBACK = f"ollama/{OLLAMA_FALLBACK_MODEL}"
+
+# ── Task-to-model capability gating ──────────────────
+# Minimum billion parameters for reliable output per task type.
+# Tasks below their tier skip the LLM → callers hit rule-based fallback.
+_TASK_COMPLEXITY = {
+    # Tier 1: Simple extraction/classification — any model
+    "openclaw_intent": 1.0,
+    "openclaw_chat": 1.0,
+    "classify_prescription": 1.0,
+    "error_explanation": 1.0,
+    "drill_generation": 1.0,
+    "voice_audit": 1.0,
+    "interference_detection": 1.0,
+    "unknown": 1.0,
+
+    # Tier 2: Structured generation — needs 7b+
+    "reading_generation": 5.0,
+    "reading_generation_retry": 5.0,
+    "conversation_eval": 5.0,
+    "conversation_followup": 5.0,
+    "teacher_comms": 5.0,
+    "rag_faithfulness": 5.0,
+    "research_synthesis": 5.0,
+    "teacher_qualification": 5.0,
+
+    # Tier 3: Complex reasoning — needs 14b+
+    "experiment_design": 10.0,
+    "meta_intelligence": 10.0,
+    "agent_plan": 10.0,
+    "editorial_critic": 10.0,
+}
+
+
+def _extract_model_size_b(model_name: str) -> float:
+    """Extract effective parameter count in billions from model name.
+
+    Local models: parses 'qwen2.5:14b' → 14.0
+    Cloud models: assigns effective capability based on known model families.
+    """
+    import re
+    name = model_name.lower()
+
+    # Check mid/small BEFORE frontier (gpt-4o-mini must not match gpt-4o)
+    _CLOUD_SMALL = ("mistral-small", "mistral-tiny")
+    if any(f in name for f in _CLOUD_SMALL):
+        return 5.0
+
+    _CLOUD_MID = ("gpt-4o-mini", "gpt-3.5", "claude-3-haiku", "claude-haiku",
+                  "gemini-1.5-flash", "gemini-flash", "mistral-large",
+                  "deepseek-chat", "deepseek-reasoner")
+    if any(f in name for f in _CLOUD_MID):
+        return 20.0
+
+    # Cloud frontier — capable of everything
+    _CLOUD_FRONTIER = ("gpt-4", "claude-3-opus", "claude-3.5-sonnet",
+                       "claude-sonnet-4", "claude-opus-4",
+                       "gemini-1.5-pro", "gemini-2", "deepseek-r1")
+    if any(f in name for f in _CLOUD_FRONTIER):
+        return 200.0
+
+    # Local model with explicit size (e.g. qwen2.5:14b, llama3:70b)
+    match = re.search(r"(\d+(?:\.\d+)?)\s*[bB]", model_name)
+    if match:
+        return float(match.group(1))
+
+    return 7.0  # assume 7b if unparseable
+
+
+def _is_cloud_model(model_name: str) -> bool:
+    """Check if the model routes through a cloud provider (not local Ollama)."""
+    name = model_name.lower()
+    _CLOUD_PREFIXES = ("gpt-", "claude-", "gemini", "anthropic/", "openai/",
+                       "mistral/", "deepseek", "together_ai/", "groq/")
+    return any(name.startswith(p) or f"/{p.rstrip('/')}" in name for p in _CLOUD_PREFIXES)
+
+
+IS_CLOUD_MODEL = _is_cloud_model(OLLAMA_PRIMARY_MODEL)
+MODEL_SIZE_B = _extract_model_size_b(OLLAMA_PRIMARY_MODEL)
+
 
 def validate_production_config() -> dict[str, list[str]]:
     """Check that all required production env vars are set.

@@ -209,7 +209,8 @@ def _process_message(text: str, owner_id: str) -> str:
                 )
             return "I couldn't process that. Try /status or /review."
 
-        intent_result = llm_handler.classify_intent(clean_text, conn=conn)
+        user_id_short = owner_id[:20]
+        intent_result = llm_handler.classify_intent(clean_text, conn=conn, user_id=user_id_short)
         response = _execute_intent(intent_result, conn)
 
         if conn:
@@ -220,6 +221,13 @@ def _process_message(text: str, owner_id: str) -> str:
                 tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
                 tool_result=response[:500],
             )
+
+        # Store conversation turn in memory
+        try:
+            from ..ai.memory import add_memory
+            add_memory(user_id_short, clean_text, response, channel="imessage")
+        except (ImportError, Exception):
+            pass
 
         return security.sanitize_output(response) or "Try /help."
 

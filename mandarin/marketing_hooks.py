@@ -10,6 +10,7 @@ trigger checker returns a list of dicts describing which emails to queue;
 the actual sending is handled by a separate worker or cron job.
 """
 
+import hashlib
 import json
 import logging
 import sqlite3
@@ -459,3 +460,76 @@ def check_email_triggers(db_path=None):
         conn.close()
 
     return triggers
+
+
+# ── Referral / Viral Coefficient ──────────────────────────────────────────
+
+
+def generate_referral_code(user_id: int) -> str:
+    """Generate a unique referral code for a user."""
+    return f"aelu-{hashlib.md5(str(user_id).encode()).hexdigest()[:8]}"
+
+
+def track_referral(conn, referrer_code: str, new_user_id: int, channel: str = "link") -> bool:
+    """Log a referral when a new user signs up with a referral code."""
+    try:
+        # Look up referrer from code
+        # Code format: aelu-{hash8} where hash is md5(user_id)[:8]
+        # We need to search all users (not ideal but works for small scale)
+        users = conn.execute("SELECT id FROM user").fetchall()
+        referrer_id = None
+        for u in users:
+            if generate_referral_code(u["id"]) == referrer_code:
+                referrer_id = u["id"]
+                break
+
+        if referrer_id is None:
+            return False
+
+        conn.execute("""
+            INSERT INTO referral_log (referrer_id, referred_id, channel, referral_code)
+            VALUES (?, ?, ?, ?)
+        """, (referrer_id, new_user_id, channel, referrer_code))
+        conn.commit()
+        return True
+    except Exception:
+        return False
+
+
+def compute_viral_coefficient(conn, days: int = 30) -> dict:
+    """Compute viral k-factor: k = invites x conversion_rate."""
+    try:
+        # Count referrals in period
+        referrals = conn.execute("""
+            SELECT COUNT(*) as cnt FROM referral_log
+            WHERE created_at >= datetime('now', ? || ' days')
+        """, (f"-{days}",)).fetchone()
+
+        # Count total users in period
+        total_users = conn.execute("""
+            SELECT COUNT(*) as cnt FROM user
+            WHERE created_at >= datetime('now', ? || ' days')
+        """, (f"-{days}",)).fetchone()
+
+        # Count unique referrers
+        referrers = conn.execute("""
+            SELECT COUNT(DISTINCT referrer_id) as cnt FROM referral_log
+            WHERE created_at >= datetime('now', ? || ' days')
+        """, (f"-{days}",)).fetchone()
+
+        ref_count = referrals["cnt"] if referrals else 0
+        user_count = total_users["cnt"] if total_users else 1
+        referrer_count = referrers["cnt"] if referrers else 0
+
+        # k = (referrals / users) -- simplified viral coefficient
+        k = ref_count / max(1, user_count)
+
+        return {
+            "k_factor": round(k, 3),
+            "referrals": ref_count,
+            "total_users": user_count,
+            "unique_referrers": referrer_count,
+            "period_days": days,
+        }
+    except Exception as e:
+        return {"k_factor": 0.0, "error": str(e)}

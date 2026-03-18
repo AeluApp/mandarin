@@ -62,6 +62,23 @@ _CHURN_EXPERIMENT_TEMPLATES = {
     },
 }
 
+# Marketing experiment templates (scope = "marketing")
+_MARKETING_EXPERIMENT_TEMPLATES = {
+    "price_display_test": {
+        "template_id": "price_display_test",
+        "type": "marketing",
+        "hypothesis": "Lower displayed price increases signup conversion",
+        "variant_a_name": "control_14.99",
+        "variant_a_config": {"price_display": "$14.99/mo"},
+        "variant_b_name": "lower_9.99",
+        "variant_b_config": {"price_display": "$9.99/mo"},
+        "metric": "signup_conversion_rate",
+        "guardrail_metrics": ["session_completion_rate"],
+        "duration_days": 30,
+        "scope": "marketing",
+    },
+}
+
 _stop_event = threading.Event()
 _thread = None
 
@@ -249,40 +266,83 @@ def _daemon_tick(conn):
             if count < 5:
                 continue  # Not enough signal
             template = _CHURN_EXPERIMENT_TEMPLATES.get(churn_type)
-            if not template:
-                continue
 
-            # Check for existing proposal or running experiment with this name
-            existing = conn.execute(
-                "SELECT id FROM experiment_proposal WHERE name = ? AND status IN ('pending', 'started')",
-                (template["name"],)
-            ).fetchone()
-            if existing:
-                continue
-            existing_exp = conn.execute(
-                "SELECT id FROM experiment WHERE name = ? AND status IN ('draft', 'running')",
-                (template["name"],)
-            ).fetchone()
-            if existing_exp:
-                continue
+            if template:
+                # Check for existing proposal or running experiment with this name
+                existing = conn.execute(
+                    "SELECT id FROM experiment_proposal WHERE name = ? AND status IN ('pending', 'started')",
+                    (template["name"],)
+                ).fetchone()
+                if existing:
+                    continue
+                existing_exp = conn.execute(
+                    "SELECT id FROM experiment WHERE name = ? AND status IN ('draft', 'running')",
+                    (template["name"],)
+                ).fetchone()
+                if existing_exp:
+                    continue
 
-            conn.execute("""
-                INSERT INTO experiment_proposal
-                (name, description, hypothesis, source, source_detail, variants,
-                 traffic_pct, priority, status)
-                VALUES (?, ?, ?, 'churn_signal', ?, ?, 50.0, ?, 'pending')
-            """, (
-                template["name"],
-                template["description"],
-                template["hypothesis"],
-                json.dumps({"churn_type": churn_type, "at_risk_count": count}),
-                json.dumps(template["variants"]),
-                count,  # priority = number of affected users
-            ))
-            conn.commit()
-            msg = f"PROPOSED {template['name']}: {churn_type} signal from {count} users"
-            logger.info(msg)
-            digest_entries.append(msg)
+                scope = "parameter"  # churn templates default to parameter scope
+                conn.execute("""
+                    INSERT INTO experiment_proposal
+                    (name, description, hypothesis, source, source_detail, variants,
+                     traffic_pct, priority, scope, status)
+                    VALUES (?, ?, ?, 'churn_signal', ?, ?, 50.0, ?, ?, 'pending')
+                """, (
+                    template["name"],
+                    template["description"],
+                    template["hypothesis"],
+                    json.dumps({"churn_type": churn_type, "at_risk_count": count}),
+                    json.dumps(template["variants"]),
+                    count,  # priority = number of affected users
+                    scope,
+                ))
+                conn.commit()
+                msg = f"PROPOSED {template['name']}: {churn_type} signal from {count} users"
+                logger.info(msg)
+                digest_entries.append(msg)
+            else:
+                # No template — try LLM-generative experiment design
+                try:
+                    from ..intelligence.experiment_proposer import propose_experiment
+                    finding = {
+                        "dimension": "retention",
+                        "title": f"Churn signal: {churn_type}",
+                        "analysis": f"{count} at-risk users showing {churn_type} churn pattern",
+                        "recommendation": f"Investigate and mitigate {churn_type} churn",
+                        "severity": "high",
+                    }
+                    proposal = propose_experiment(conn, finding, source="churn_signal")
+                    if proposal:
+                        # Dedup check
+                        existing = conn.execute(
+                            "SELECT id FROM experiment_proposal WHERE name = ? AND status IN ('pending', 'started')",
+                            (proposal["name"],)
+                        ).fetchone()
+                        if existing:
+                            continue
+
+                        conn.execute("""
+                            INSERT INTO experiment_proposal
+                            (name, description, hypothesis, source, source_detail, variants,
+                             traffic_pct, priority, scope, status)
+                            VALUES (?, ?, ?, ?, ?, ?, 50.0, ?, ?, 'pending')
+                        """, (
+                            proposal["name"],
+                            proposal["description"],
+                            proposal["hypothesis"],
+                            proposal.get("source", "churn_signal"),
+                            proposal.get("source_detail", json.dumps({"churn_type": churn_type})),
+                            json.dumps(proposal["variants"]),
+                            count,
+                            proposal.get("scope", "parameter"),
+                        ))
+                        conn.commit()
+                        msg = f"PROPOSED (LLM) {proposal['name']}: {churn_type} signal from {count} users"
+                        logger.info(msg)
+                        digest_entries.append(msg)
+                except Exception:
+                    logger.debug("LLM experiment proposal failed for churn type %s", churn_type)
 
     except Exception:
         logger.exception("Error in churn-based experiment proposal")

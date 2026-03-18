@@ -270,3 +270,73 @@ def _persist_reading_passage(conn, passage: dict, hsk_level: int, content_lens: 
             json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception:
         logger.debug("Failed to persist reading passage to JSON", exc_info=True)
+
+
+# ── Vocabulary Profile (Nation 2006, Krashen i+1) ──────────────────
+
+def compute_vocabulary_profile(passage_text: str, known_hanzi: set) -> dict:
+    """Compute Nation's vocabulary coverage profile for a passage.
+
+    Uses jieba word segmentation for token-level (not character-level) analysis.
+    Nation (2006): 95-98% coverage for unassisted reading, 90-95% with glossing.
+    Aelu has glossing → target 90-95%.
+
+    Returns:
+        token_coverage: float (0-1) — % of running tokens that are known
+        unique_coverage: float (0-1) — % of unique word types that are known
+        new_word_count: int — number of unique unknown words
+        new_word_density: float — unknown words per 20 tokens
+        verdict: 'too_easy' | 'optimal' | 'challenging' | 'too_hard'
+    """
+    try:
+        import jieba
+    except ImportError:
+        # Fallback to character-level if jieba unavailable
+        chars = [c for c in passage_text if '\u4e00' <= c <= '\u9fff']
+        if not chars:
+            return {"token_coverage": 1.0, "unique_coverage": 1.0,
+                    "new_word_count": 0, "new_word_density": 0.0, "verdict": "too_easy"}
+        known = sum(1 for c in chars if c in known_hanzi)
+        cov = known / len(chars)
+        unique = set(chars)
+        unique_known = sum(1 for c in unique if c in known_hanzi)
+        verdict = "too_easy" if cov > 0.98 else "optimal" if cov >= 0.90 else "challenging" if cov >= 0.85 else "too_hard"
+        return {"token_coverage": round(cov, 3), "unique_coverage": round(unique_known / len(unique), 3) if unique else 1.0,
+                "new_word_count": len(unique) - unique_known, "new_word_density": 0.0, "verdict": verdict}
+
+    tokens = list(jieba.cut(passage_text))
+    # Filter to tokens containing at least one CJK character
+    meaningful = [t for t in tokens if any('\u4e00' <= c <= '\u9fff' for c in t)]
+
+    if not meaningful:
+        return {"token_coverage": 1.0, "unique_coverage": 1.0,
+                "new_word_count": 0, "new_word_density": 0.0, "verdict": "too_easy"}
+
+    # A word is "known" if ALL its characters are in the known set
+    known_count = sum(1 for t in meaningful if all(c in known_hanzi for c in t if '\u4e00' <= c <= '\u9fff'))
+    coverage = known_count / len(meaningful)
+
+    unique_tokens = set(meaningful)
+    unique_known = sum(1 for t in unique_tokens if all(c in known_hanzi for c in t if '\u4e00' <= c <= '\u9fff'))
+    unique_coverage = unique_known / len(unique_tokens) if unique_tokens else 1.0
+
+    new_words = len(unique_tokens) - unique_known
+    # Nation's threshold: max 1 new word per 20 running tokens
+    density = new_words / max(1, len(meaningful) / 20)
+
+    if coverage > 0.98:
+        verdict = "too_easy"
+    elif coverage >= 0.90:
+        verdict = "optimal"      # Nation's 90-95% with glossing support
+    elif coverage >= 0.85:
+        verdict = "challenging"  # Acceptable with heavy glossing
+    else:
+        verdict = "too_hard"
+
+    return {
+        "token_coverage": round(coverage, 3),
+        "unique_coverage": round(unique_coverage, 3),
+        "new_word_count": new_words,
+        "new_word_density": round(density, 2),
+        "verdict": verdict,
+    }

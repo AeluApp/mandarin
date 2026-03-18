@@ -661,6 +661,14 @@ def record_attempt(conn: sqlite3.Connection, content_item_id: int,
     except Exception:
         logger.debug("Learner model pattern update skipped", exc_info=True)
 
+    # 6a4. Thompson Sampling posterior update for drill type selection
+    if drill_type:
+        try:
+            from ..scheduler import _update_drill_type_posterior
+            _update_drill_type_posterior(conn, user_id, content_item_id, drill_type, correct)
+        except Exception:
+            logger.debug("Drill type posterior update skipped", exc_info=True)
+
     # 6b. Item graduation event (Doctrine §12: graduation rate KPI)
     old_stage = (row.get("mastery_stage") or "seen")
     new_stage = mastery["mastery_stage"]

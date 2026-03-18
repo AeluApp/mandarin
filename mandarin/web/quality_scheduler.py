@@ -484,17 +484,41 @@ def _run_intelligence_loop():
             # 1. Run product audit (includes work order generation internally)
             from ..intelligence import run_product_audit
             audit_result = run_product_audit(conn)
-            work_order_data = audit_result.get("work_order")
+            # Collect all work orders (batch of up to 3)
+            all_work_orders = audit_result.get("work_orders", [])
+            if not all_work_orders:
+                # Backward compat: single work_order key
+                wo = audit_result.get("work_order")
+                if wo and wo.get("id"):
+                    all_work_orders = [wo]
 
             logger.info(
-                "Intelligence loop: audit complete — %d findings, overall %s",
+                "Intelligence loop: audit complete — %d findings, %d work orders, overall %s",
                 len(audit_result.get("findings", [])),
+                len(all_work_orders),
                 audit_result.get("overall", {}).get("score", "?"),
             )
 
-            # 2. Auto-execute safe prescriptions on the new work order
-            if work_order_data and work_order_data.get("id"):
-                wo_id = work_order_data["id"]
+            # 1b. Meta-review: LLM risk-scores work orders before execution
+            try:
+                from ..intelligence.meta_intelligence import meta_review_work_orders
+                all_work_orders = meta_review_work_orders(conn, all_work_orders)
+                # Skip high-risk work orders
+                risky = [wo for wo in all_work_orders if wo.get("llm_risk", 0) > 0.7]
+                if risky:
+                    logger.info(
+                        "Intelligence loop: skipping %d high-risk work orders",
+                        len(risky),
+                    )
+                all_work_orders = [wo for wo in all_work_orders if wo.get("llm_risk", 0) <= 0.7]
+            except (ImportError, Exception):
+                pass  # Meta-review is optional
+
+            # 2. Auto-execute safe prescriptions on ALL work orders
+            for work_order_data in all_work_orders:
+                wo_id = work_order_data.get("id")
+                if not wo_id:
+                    continue
                 try:
                     from ..ai.agentic import execute_prescription
                     exec_result = execute_prescription(conn, wo_id)
@@ -503,18 +527,65 @@ def _run_intelligence_loop():
                             "Intelligence loop: auto-executed prescription for WO #%d — %s",
                             wo_id, exec_result,
                         )
-                        # Auto-advance finding lifecycle for executed prescriptions
                         from ..intelligence.prescription import mark_work_order_implemented
                         mark_work_order_implemented(
                             conn, wo_id,
                             notes=f"Auto-executed by intelligence loop: {exec_result}",
+                        )
+                    elif exec_result.get("status") == "queued_for_agent":
+                        logger.info(
+                            "Intelligence loop: WO #%d queued for LangGraph agent", wo_id,
                         )
                     elif exec_result.get("status") == "requires_human":
                         logger.info(
                             "Intelligence loop: WO #%d requires human action", wo_id,
                         )
                 except Exception:
-                    logger.debug("Intelligence loop: prescription execution failed", exc_info=True)
+                    logger.debug("Intelligence loop: prescription execution failed for WO #%d",
+                                 wo_id, exc_info=True)
+
+            # 2b. Run LangGraph prescription executor for code-level changes
+            try:
+                from ..ai.llm_agent import execute_queued_prescriptions
+                agent_results = execute_queued_prescriptions(conn)
+                if agent_results:
+                    logger.info(
+                        "Intelligence loop: LangGraph agent processed %d prescriptions",
+                        len(agent_results),
+                    )
+            except ImportError:
+                pass  # LangGraph not installed
+            except Exception:
+                logger.debug("Intelligence loop: LangGraph agent failed", exc_info=True)
+
+            # 2d. Agentic model selection (weekly benchmark + routing)
+            try:
+                from ..ai.model_selector import run_model_selection_cycle
+                sel_result = run_model_selection_cycle(conn)
+                if sel_result.get("tasks_routed"):
+                    logger.info(
+                        "Intelligence loop: model selection routed %d tasks",
+                        sel_result["tasks_routed"],
+                    )
+            except ImportError:
+                pass
+            except Exception:
+                logger.debug("Intelligence loop: model selection failed", exc_info=True)
+
+            # 2c. Send proactive notification via OpenClaw
+            try:
+                from ..openclaw import notify_owner
+                summary = (
+                    f"Audit: {len(audit_result.get('findings', []))} findings, "
+                    f"{len(all_work_orders)} work orders"
+                )
+                for wo in all_work_orders[:5]:
+                    dim = wo.get("constraint_dimension", "?")
+                    instr = (wo.get("instruction") or "")[:80]
+                    summary += f"\n• [{dim}] {instr}"
+                notify_owner(summary)
+            except (ImportError, Exception):
+                pass
 
             # 3. Score past predictions + auto-verify work orders
             try:

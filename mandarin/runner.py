@@ -464,6 +464,72 @@ def run_session(conn, plan: SessionPlan,
             i += 1
             continue
 
+        # Handle minimal pair drills (side-by-side interference contrast)
+        if drill.drill_type == "minimal_pair":
+            item_a = drill.metadata.get("item_a", {})
+            item_b = drill.metadata.get("item_b", {})
+            interference_type = drill.metadata.get("interference_type", "")
+            if not item_a or not item_b:
+                show_fn("  Moving on\u2026")
+                i += 1
+                continue
+            # Present the minimal pair via show_fn/input_fn
+            type_label = (
+                "These sound similar" if interference_type == "near_homophone"
+                else "These look similar" if interference_type == "visual_similarity"
+                else "Easy to confuse"
+            )
+            show_fn(f"\n  {type_label}")
+            show_fn(f"  Which one means '{item_a['english']}'?")
+            show_fn(f"    a) {item_a['hanzi']}  {item_a['pinyin']}")
+            show_fn(f"    b) {item_b['hanzi']}  {item_b['pinyin']}")
+            answer = input_fn("  > ").strip().lower()
+            correct = answer == "a"
+            from .drills.base import DrillResult as _DR
+            result = _DR(
+                content_item_id=drill.content_item_id,
+                modality="reading",
+                drill_type="minimal_pair",
+                correct=correct,
+                user_answer=answer,
+                expected_answer="a",
+                error_type=None if correct else "vocab",
+            )
+            if result.skipped and answer.upper() == "Q":
+                state.early_exit = True
+                state.results.append(result)
+                _trace(session_id, "drill_quit", index=i, drill_type="minimal_pair")
+                break
+            state.results.append(result)
+            # Record both items in the pair to progress
+            try:
+                db.record_attempt(
+                    conn,
+                    content_item_id=item_a["id"],
+                    modality="reading",
+                    correct=correct,
+                    session_id=session_id,
+                    error_type=None if correct else "vocab",
+                    drill_type="minimal_pair",
+                    user_id=user_id,
+                )
+                db.record_attempt(
+                    conn,
+                    content_item_id=item_b["id"],
+                    modality="reading",
+                    correct=not correct,  # if user chose 'a' correctly, 'b' was the wrong choice
+                    session_id=session_id,
+                    error_type=None if not correct else "vocab",
+                    drill_type="minimal_pair",
+                    user_id=user_id,
+                )
+            except Exception:
+                pass
+            _trace(session_id, "drill_done", index=i, drill_type="minimal_pair",
+                   correct=correct, hanzi=item_a.get("hanzi", ""))
+            i += 1
+            continue
+
         # Get the content item from DB for full data
         item = conn.execute(
             "SELECT * FROM content_item WHERE id = ?",
