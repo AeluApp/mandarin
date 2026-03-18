@@ -71,6 +71,11 @@
     /* Metric tooltips */
     .metric-card[title] { cursor: help; }
 
+    /* KPI status thresholds */
+    .kpi-good .metric-value { color: var(--color-correct); }
+    .kpi-warn .metric-value { color: var(--color-mastery-stabilizing); }
+    .kpi-bad .metric-value { color: var(--color-incorrect); }
+
     /* Funnel visualization */
     .funnel-stages { display: flex; flex-direction: column; gap: var(--space-2); max-width: 600px; }
     .funnel-stage { display: flex; align-items: center; gap: var(--space-3); }
@@ -221,16 +226,6 @@
       <div class="admin-section">
         <h2>LLM Costs</h2>
         <div id="llm-costs-container" class="tab-loading">Loading...</div>
-      </div>
-
-      <div class="admin-section">
-        <h3>Viral Growth</h3>
-        <div id="viral-container" class="admin-section"></div>
-      </div>
-
-      <div class="admin-section">
-        <h3>Price Sensitivity</h3>
-        <div id="price-sensitivity-container" class="admin-section"></div>
       </div>
     </div>
 
@@ -516,27 +511,6 @@
         </div>
         <div id="quality-work-items-content" class="tab-loading">Loading...</div>
       </div>
-
-      <div class="admin-section">
-        <h3>Thompson Sampling</h3>
-        <div id="thompson-sampling-container" class="admin-section"></div>
-      </div>
-
-      <div class="admin-section">
-        <h3>Decision Optimization</h3>
-        <div id="decision-table-container" class="admin-section"></div>
-        <div id="pareto-container" class="admin-section"></div>
-      </div>
-
-      <div class="admin-section">
-        <h3>Queue Forecasting</h3>
-        <div id="queue-forecast-container" class="admin-section"></div>
-      </div>
-
-      <div class="admin-section">
-        <h3>Scenario Analysis</h3>
-        <div id="monte-carlo-container" class="admin-section"></div>
-      </div>
     </div>
 
     <!-- Product Intelligence -->
@@ -808,6 +782,30 @@
     /* ── Helpers ── */
     function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
     function shortDate(s) { return s ? esc(s).substring(0, 19) : "—"; }
+
+    /**
+     * kpiStatus — return a CSS class for a metric card based on thresholds.
+     *
+     * @param {number} value         The metric value
+     * @param {number} goodThreshold Boundary for good/warn (or warn/good if invert)
+     * @param {number} badThreshold  Boundary for warn/bad  (or bad/warn if invert)
+     * @param {boolean} invert       If true, lower is better (e.g. churn rate)
+     * @returns {string}             "kpi-good", "kpi-warn", or "kpi-bad"
+     */
+    function kpiStatus(value, goodThreshold, badThreshold, invert) {
+      if (value == null || isNaN(value)) return "";
+      if (invert) {
+        // Lower is better: below good = good, above bad = bad
+        if (value <= goodThreshold) return "kpi-good";
+        if (value >= badThreshold) return "kpi-bad";
+        return "kpi-warn";
+      }
+      // Higher is better: above good = good, below bad = bad
+      if (value >= goodThreshold) return "kpi-good";
+      if (value <= badThreshold) return "kpi-bad";
+      return "kpi-warn";
+    }
+
     function severityBadge(s) {
       var cls = "badge-info";
       if (s === "ERROR" || s === "CRITICAL") cls = "badge-error";
@@ -852,13 +850,13 @@
       _metricsData = d;
       var html = '';
       html += '<div class="metric-card" title="Total accounts created since launch"><div class="metric-value">' + d.total_signups + '</div><div class="metric-label">Total Signups</div></div>';
-      html += '<div class="metric-card" title="Users who completed at least 1 session in the last 7 days"><div class="metric-value">' + d.active_users_7d + '</div><div class="metric-label">Active (7d)</div></div>';
-      html += '<div class="metric-card" title="Total study sessions started in the last 7 days"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
+      html += '<div class="metric-card ' + kpiStatus(d.active_users_7d, 5, 1) + '" title="Users who completed at least 1 session in the last 7 days"><div class="metric-value">' + d.active_users_7d + '</div><div class="metric-label">Active (7d)</div></div>';
+      html += '<div class="metric-card ' + kpiStatus(d.sessions_7d, 20, 5) + '" title="Total study sessions started in the last 7 days"><div class="metric-value">' + d.sessions_7d + '</div><div class="metric-label">Sessions (7d)</div></div>';
       // Retention cohorts
       if (d.d1_eligible > 0 || d.d7_eligible > 0 || d.d30_eligible > 0) {
-        html += '<div class="metric-card" title="Of users who signed up at least 1 day ago, what % came back the next day"><div class="metric-value">' + d.d1 + '%</div><div class="metric-label">Came back after 1 day (' + d.d1_eligible + ' users)</div></div>';
-        html += '<div class="metric-card" title="Of users who signed up at least 7 days ago, what % came back within a week"><div class="metric-value">' + d.d7 + '%</div><div class="metric-label">Came back within a week (' + d.d7_eligible + ' users)</div></div>';
-        html += '<div class="metric-card" title="Of users who signed up at least 30 days ago, what % came back within a month"><div class="metric-value">' + d.d30 + '%</div><div class="metric-label">Came back within a month (' + d.d30_eligible + ' users)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.d1, 40, 15) + '" title="Of users who signed up at least 1 day ago, what % came back the next day"><div class="metric-value">' + d.d1 + '%</div><div class="metric-label">Came back after 1 day (' + d.d1_eligible + ' users)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.d7, 30, 10) + '" title="Of users who signed up at least 7 days ago, what % came back within a week"><div class="metric-value">' + d.d7 + '%</div><div class="metric-label">Came back within a week (' + d.d7_eligible + ' users)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.d30, 20, 5) + '" title="Of users who signed up at least 30 days ago, what % came back within a month"><div class="metric-value">' + d.d30 + '%</div><div class="metric-label">Came back within a month (' + d.d30_eligible + ' users)</div></div>';
       }
       var tiers = d.tier_distribution || {};
       for (var t in tiers) {
@@ -979,7 +977,7 @@
         "issues": loadIssues,
         "sessions": loadSessions,
         "security": function() { loadSecurityScans(); loadSecurity(); },
-        "revenue": function() { loadRevenue(); loadCLV(); loadCohortRetention(); loadLLMCosts(); loadViralMetrics(); loadPriceSensitivity(); },
+        "revenue": function() { loadRevenue(); loadCLV(); loadCohortRetention(); loadLLMCosts(); },
         "retention": loadRetention,
         "engagement": function() { loadEngagement(); loadCompletionSegments(); },
         "partners": loadPartners,
@@ -1165,14 +1163,14 @@
         var el = document.getElementById("revenue-content");
         if (d.error) { el.innerHTML = '<p class="tab-empty">' + esc(d.error) + '</p>'; return; }
         var html = '<div class="metrics-grid">';
-        html += '<div class="metric-card" title="What you\'d earn this month if nothing changed"><div class="metric-value">$' + (d.mrr || 0).toLocaleString() + '</div><div class="metric-label">Monthly Revenue</div></div>';
-        html += '<div class="metric-card" title="Monthly revenue \u00d7 12 — your annual run rate"><div class="metric-value">$' + (d.arr || 0).toLocaleString() + '</div><div class="metric-label">Yearly Revenue (projected)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (d.paid_users || 0) + '</div><div class="metric-label">Paid Users</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.mrr || 0, 100, 0) + '" title="What you\'d earn this month if nothing changed"><div class="metric-value">$' + (d.mrr || 0).toLocaleString() + '</div><div class="metric-label">Monthly Revenue</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.arr || 0, 1200, 0) + '" title="Monthly revenue \u00d7 12 — your annual run rate"><div class="metric-value">$' + (d.arr || 0).toLocaleString() + '</div><div class="metric-label">Yearly Revenue (projected)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.paid_users || 0, 5, 1) + '"><div class="metric-value">' + (d.paid_users || 0) + '</div><div class="metric-label">Paid Users</div></div>';
         html += '<div class="metric-card"><div class="metric-value">' + (d.teacher_users || 0) + '</div><div class="metric-label">Teacher Users</div></div>';
-        html += '<div class="metric-card" title="% of free users who upgraded to paid"><div class="metric-value">' + (d.conversion_rate || 0) + '%</div><div class="metric-label">% Who Upgraded</div></div>';
-        html += '<div class="metric-card" title="% of paying users who cancelled in the last 30 days. Lower is better."><div class="metric-value">' + (d.churn_rate || 0) + '%</div><div class="metric-label">% Who Cancelled (30d)</div></div>';
-        html += '<div class="metric-card"><div class="metric-value">' + (d.churn_count_30d || 0) + '</div><div class="metric-label">Cancellations (30d)</div></div>';
-        html += '<div class="metric-card" title="How much revenue you\'ll earn from an average user over their whole time using the app"><div class="metric-value">$' + (d.estimated_ltv || 0).toLocaleString() + '</div><div class="metric-label">Avg. Revenue Per User (lifetime)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.conversion_rate || 0, 5, 1) + '" title="% of free users who upgraded to paid"><div class="metric-value">' + (d.conversion_rate || 0) + '%</div><div class="metric-label">% Who Upgraded</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.churn_rate || 0, 5, 10, true) + '" title="% of paying users who cancelled in the last 30 days. Lower is better."><div class="metric-value">' + (d.churn_rate || 0) + '%</div><div class="metric-label">% Who Cancelled (30d)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.churn_count_30d || 0, 1, 5, true) + '"><div class="metric-value">' + (d.churn_count_30d || 0) + '</div><div class="metric-label">Cancellations (30d)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.estimated_ltv || 0, 20, 5) + '" title="How much revenue you\'ll earn from an average user over their whole time using the app"><div class="metric-value">$' + (d.estimated_ltv || 0).toLocaleString() + '</div><div class="metric-label">Avg. Revenue Per User (lifetime)</div></div>';
         html += '</div>';
 
         // Channel breakdown
@@ -1228,12 +1226,12 @@
 
         // Metric cards
         html += '<div class="metrics-grid">';
-        html += '<div class="metric-card"><div class="metric-value">' + (d.avg_sessions_per_active_user || 0) + '</div><div class="metric-label">Avg Sessions / Active User / Day</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.avg_sessions_per_active_user || 0, 1.5, 0.5) + '"><div class="metric-value">' + (d.avg_sessions_per_active_user || 0) + '</div><div class="metric-label">Avg Sessions / Active User / Day</div></div>';
         var totalSessions30d = (d.daily_sessions || []).reduce(function(s, x) { return s + x.total_sessions; }, 0);
-        html += '<div class="metric-card"><div class="metric-value">' + totalSessions30d + '</div><div class="metric-label">Total Sessions (30d)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(totalSessions30d, 30, 5) + '"><div class="metric-value">' + totalSessions30d + '</div><div class="metric-label">Total Sessions (30d)</div></div>';
         var totalUniqueUsers30d = new Set();
         (d.daily_sessions || []).forEach(function(x) { totalUniqueUsers30d.add(x.date); });
-        html += '<div class="metric-card"><div class="metric-value">' + (d.daily_sessions || []).length + '</div><div class="metric-label">Active Days (30d)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus((d.daily_sessions || []).length, 20, 7) + '"><div class="metric-value">' + (d.daily_sessions || []).length + '</div><div class="metric-label">Active Days (30d)</div></div>';
         html += '</div>';
 
         // Daily session volume bar chart (SVG)
@@ -1553,11 +1551,6 @@
       loadRisks();
       loadWorkItems();
       loadExperiments();
-      loadThompsonSampling();
-      loadDecisionTable();
-      loadParetoFrontier();
-      loadQueueForecast();
-      loadMonteCarloForecasts();
     }
 
     function loadExperiments() {
@@ -3557,160 +3550,6 @@
         var container = document.getElementById("llm-costs-container");
         if (container) container.innerHTML = '<p class="tab-empty">LLM costs unavailable: ' + esc(e.message) + '</p>';
       });
-    }
-
-    // Thompson Sampling Posteriors
-    function loadThompsonSampling() {
-        adminFetch("/api/admin/analytics/thompson-sampling").then(function(data) {
-            var c = document.getElementById("thompson-sampling-container");
-            if (!c) return;
-            if (!data.posteriors || !data.posteriors.length) {
-                c.innerHTML = '<p class="admin-empty">No drill type learning data yet (need user sessions)</p>';
-                return;
-            }
-            var html = '<div class="metrics-grid"><div class="metric-card"><div class="metric-value">' + data.total_tracked + '</div><div class="metric-label">Items Tracked</div></div></div>';
-            html += '<table class="admin-table"><thead><tr><th>Item</th><th>Drill Type</th><th>Win Rate</th><th>Samples</th></tr></thead><tbody>';
-            data.posteriors.slice(0, 30).forEach(function(p) {
-                var pct = Math.round((p.win_rate || 0) * 100);
-                var cls = pct > 70 ? 'retention-high' : pct > 40 ? 'retention-mid' : 'retention-low';
-                html += '<tr><td>' + esc(p.hanzi || '?') + ' <small>' + esc(p.pinyin || '') + '</small></td>';
-                html += '<td>' + esc(p.drill_type) + '</td>';
-                html += '<td class="' + cls + '">' + pct + '%</td>';
-                html += '<td>' + (p.samples || 0) + '</td></tr>';
-            });
-            html += '</tbody></table>';
-            c.innerHTML = html;
-        });
-    }
-
-    // Viral Coefficient
-    function loadViralMetrics() {
-        adminFetch("/api/admin/analytics/viral").then(function(data) {
-            var c = document.getElementById("viral-container");
-            if (!c) return;
-            var html = '<div class="metrics-grid">';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.k_factor || 0).toFixed(3) + '</div><div class="metric-label">Viral k-factor</div></div>';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.referrals || 0) + '</div><div class="metric-label">Referrals (30d)</div></div>';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.unique_referrers || 0) + '</div><div class="metric-label">Unique Referrers</div></div>';
-            html += '</div>';
-            if (data.top_referrers && data.top_referrers.length) {
-                html += '<table class="admin-table"><thead><tr><th>Referrer ID</th><th>Conversions</th></tr></thead><tbody>';
-                data.top_referrers.forEach(function(r) {
-                    html += '<tr><td>' + r.referrer_id + '</td><td>' + r.referral_count + '</td></tr>';
-                });
-                html += '</tbody></table>';
-            }
-            c.innerHTML = html;
-        });
-    }
-
-    // Decision Table
-    function loadDecisionTable() {
-        adminFetch("/api/admin/quality/decision-table").then(function(data) {
-            var c = document.getElementById("decision-table-container");
-            if (!c) return;
-            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
-            var matrix = data.matrix || data;
-            var html = '<h4>Decision Matrix (Return Prob x Queue State)</h4>';
-            html += '<pre style="font-size:11px;overflow-x:auto;">' + JSON.stringify(matrix, null, 2).substring(0, 2000) + '</pre>';
-            c.innerHTML = html;
-        }).catch(function() {
-            var c = document.getElementById("decision-table-container");
-            if (c) c.innerHTML = '<p class="admin-empty">Decision table unavailable</p>';
-        });
-    }
-
-    // Pareto Frontier
-    function loadParetoFrontier() {
-        adminFetch("/api/admin/quality/pareto").then(function(data) {
-            var c = document.getElementById("pareto-container");
-            if (!c) return;
-            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
-            var points = data.frontier || data.points || [];
-            var html = '<h4>Pareto Frontier (Retention vs Breadth vs Time)</h4>';
-            if (points.length) {
-                html += '<table class="admin-table"><thead><tr><th>Retention</th><th>Breadth</th><th>Time (min)</th></tr></thead><tbody>';
-                points.forEach(function(p) {
-                    html += '<tr><td>' + (p.retention || p[0] || 0).toFixed(2) + '</td>';
-                    html += '<td>' + (p.breadth || p[1] || 0).toFixed(2) + '</td>';
-                    html += '<td>' + (p.time || p[2] || 0).toFixed(1) + '</td></tr>';
-                });
-                html += '</tbody></table>';
-            } else {
-                html += '<p class="admin-empty">No Pareto data available</p>';
-            }
-            c.innerHTML = html;
-        }).catch(function() {
-            var c = document.getElementById("pareto-container");
-            if (c) c.innerHTML = '<p class="admin-empty">Pareto frontier unavailable</p>';
-        });
-    }
-
-    // Queue Model Forecast
-    function loadQueueForecast() {
-        adminFetch("/api/admin/quality/queue-model").then(function(data) {
-            var c = document.getElementById("queue-forecast-container");
-            if (!c) return;
-            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
-            var html = '<div class="metrics-grid">';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.queue_length || data.avg_queue_length || 0) + '</div><div class="metric-label">Current Queue</div></div>';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.utilization || 0).toFixed(2) + '</div><div class="metric-label">Utilization (rho)</div></div>';
-            html += '<div class="metric-card"><div class="metric-value">' + (data.avg_wait_days || 0).toFixed(1) + 'd</div><div class="metric-label">Avg Wait</div></div>';
-            html += '</div>';
-            c.innerHTML = html;
-        }).catch(function() {
-            var c = document.getElementById("queue-forecast-container");
-            if (c) c.innerHTML = '<p class="admin-empty">Queue model unavailable</p>';
-        });
-    }
-
-    // Monte Carlo Forecasts
-    function loadMonteCarloForecasts() {
-        adminFetch("/api/admin/quality/monte-carlo").then(function(data) {
-            var c = document.getElementById("monte-carlo-container");
-            if (!c) return;
-            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
-            var html = '<h4>30-Day Projections</h4><div class="metrics-grid">';
-            if (data.user_growth) {
-                var ug = data.user_growth;
-                html += '<div class="metric-card"><div class="metric-value">' + (ug.p50 || 0) + '</div><div class="metric-label">Users (median)</div></div>';
-                html += '<div class="metric-card"><div class="metric-value">' + (ug.p5 || 0) + '–' + (ug.p95 || 0) + '</div><div class="metric-label">Users (90% CI)</div></div>';
-            }
-            if (data.review_queue) {
-                var rq = data.review_queue;
-                html += '<div class="metric-card"><div class="metric-value">' + (rq.p50 || 0) + '</div><div class="metric-label">Queue (median)</div></div>';
-            }
-            html += '</div>';
-            c.innerHTML = html;
-        }).catch(function() {
-            var c = document.getElementById("monte-carlo-container");
-            if (c) c.innerHTML = '<p class="admin-empty">Monte Carlo unavailable</p>';
-        });
-    }
-
-    // Price Sensitivity
-    function loadPriceSensitivity() {
-        adminFetch("/api/admin/analytics/price-sensitivity").then(function(data) {
-            var c = document.getElementById("price-sensitivity-container");
-            if (!c) return;
-            if (data.status === "no_experiment") {
-                c.innerHTML = '<p class="admin-empty">No price experiment running. Start one from the Quality tab.</p>';
-                return;
-            }
-            var html = '<h4>Price Sensitivity</h4>';
-            if (data.variants && data.variants.length) {
-                html += '<table class="admin-table"><thead><tr><th>Variant</th><th>Exposures</th><th>Conversions</th><th>Rate</th></tr></thead><tbody>';
-                data.variants.forEach(function(v) {
-                    var rate = v.exposures > 0 ? (v.conversions / v.exposures * 100).toFixed(1) : '0';
-                    html += '<tr><td>' + esc(v.variant) + '</td><td>' + v.exposures + '</td><td>' + v.conversions + '</td><td>' + rate + '%</td></tr>';
-                });
-                html += '</tbody></table>';
-            }
-            c.innerHTML = html;
-        }).catch(function() {
-            var c = document.getElementById("price-sensitivity-container");
-            if (c) c.innerHTML = '<p class="admin-empty">Price sensitivity unavailable</p>';
-        });
     }
   </script>
 </body>
