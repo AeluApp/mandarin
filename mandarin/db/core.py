@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 113  # Increment when adding migrations
+SCHEMA_VERSION = 114  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -6665,6 +6665,74 @@ def _migrate_v112_to_v113(conn):
         conn.commit()
 
 
+def _migrate_v113_to_v114(conn):
+    """v113->v114: Design for Six Sigma (DFSS) tables.
+
+    pi_voc_capture — Voice of Customer signals from learner feedback.
+    pi_design_spec — CTQ design specifications for new features.
+    pi_dmadv_log — DMADV cycle audit log (Define-Measure-Analyze-Design-Verify).
+    """
+    tables = _table_set(conn)
+
+    if "pi_voc_capture" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS pi_voc_capture (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                customer_need TEXT NOT NULL,
+                ctq_metric TEXT,
+                source TEXT DEFAULT 'auto',
+                source_detail TEXT,
+                priority INTEGER DEFAULT 0,
+                captured_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_voc_capture_need ON pi_voc_capture(customer_need)
+        """)
+        conn.commit()
+
+    if "pi_design_spec" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS pi_design_spec (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                feature_name TEXT NOT NULL,
+                spec_description TEXT NOT NULL,
+                target_value TEXT,
+                verification_method TEXT DEFAULT 'manual',
+                status TEXT DEFAULT 'draft',
+                verified_at TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                UNIQUE(feature_name, spec_description)
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_design_spec_feature ON pi_design_spec(feature_name)
+        """)
+        conn.commit()
+
+    if "pi_dmadv_log" not in tables:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS pi_dmadv_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                feature_name TEXT NOT NULL,
+                define_json TEXT,
+                measure_json TEXT,
+                analyze_json TEXT,
+                design_json TEXT,
+                verify_json TEXT,
+                gate_blocked TEXT,
+                gate_reason TEXT,
+                design_fmea_max_rpn INTEGER DEFAULT 0,
+                approved INTEGER DEFAULT 0,
+                run_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_dmadv_log_feature ON pi_dmadv_log(feature_name)
+        """)
+        conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -6779,6 +6847,7 @@ MIGRATIONS = {
     110: _migrate_v110_to_v111,
     111: _migrate_v111_to_v112,
     112: _migrate_v112_to_v113,
+    113: _migrate_v113_to_v114,
 }
 
 

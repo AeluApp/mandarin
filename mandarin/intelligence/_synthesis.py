@@ -337,6 +337,118 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
     return dmaic_result
 
 
+def run_dmadv_cycle(conn, feature_name: str, feature_description: str = "") -> dict:
+    """Run DMADV (Design for Six Sigma) cycle for a new feature.
+
+    Define → Measure → Analyze → Design → Verify.
+    Returns: {approved: 0/1/2, design_fmea_max_rpn: int, gate_blocked: str|None, ...}
+    """
+    result = {"feature_name": feature_name, "approved": 0, "design_fmea_max_rpn": 0}
+
+    # DEFINE: What is this feature? Who needs it?
+    define_data = {}
+    try:
+        voc_rows = conn.execute("""
+            SELECT * FROM pi_voc_capture
+            WHERE customer_need LIKE ? OR ctq_metric LIKE ?
+            ORDER BY captured_at DESC LIMIT 5
+        """, (f"%{feature_name}%", f"%{feature_name}%")).fetchall()
+        define_data["voc_signals"] = len(voc_rows)
+        define_data["feature_name"] = feature_name
+        define_data["description"] = feature_description
+    except Exception:
+        define_data["voc_signals"] = 0
+
+    # MEASURE: What are the success metrics?
+    measure_data = {}
+    try:
+        # Default CTQ targets for any new feature
+        measure_data["targets"] = [
+            {"metric": "session_completion_rate", "spec": ">85%"},
+            {"metric": "error_rate", "spec": "<15%"},
+            {"metric": "user_satisfaction", "spec": ">70% 'about_right'"},
+        ]
+    except Exception:
+        pass
+
+    # ANALYZE: What could go wrong? (Design FMEA)
+    analyze_data = {}
+    try:
+        from ..quality.fmea import design_fmea
+        failure_modes = design_fmea(conn, feature_description or feature_name)
+        analyze_data["failure_modes"] = len(failure_modes)
+        if failure_modes:
+            rpns = [m.get("rpn", 0) for m in failure_modes]
+            max_rpn = max(rpns)
+            analyze_data["max_rpn"] = max_rpn
+            analyze_data["critical_modes"] = [m for m in failure_modes if m.get("rpn", 0) > 100]
+            result["design_fmea_max_rpn"] = max_rpn
+        else:
+            analyze_data["max_rpn"] = 0
+            analyze_data["note"] = "Design FMEA unavailable (LLM not capable or offline)"
+    except Exception:
+        analyze_data["error"] = "design_fmea failed"
+
+    # DESIGN: Approval decision based on risk
+    design_data = {}
+    max_rpn = result.get("design_fmea_max_rpn", 0)
+    if max_rpn > 150:
+        design_data["decision"] = "blocked_high_risk"
+        design_data["reason"] = f"Design FMEA max RPN={max_rpn} exceeds threshold (150). Requires human approval."
+        result["approved"] = 0
+        result["gate_blocked"] = "design"
+        result["gate_reason"] = design_data["reason"]
+    elif max_rpn > 100:
+        design_data["decision"] = "caution_medium_risk"
+        design_data["reason"] = f"Design FMEA max RPN={max_rpn}. Auto-approved with enhanced monitoring."
+        result["approved"] = 1
+    else:
+        design_data["decision"] = "approved_low_risk"
+        design_data["reason"] = f"Design FMEA max RPN={max_rpn}. Safe to proceed."
+        result["approved"] = 1
+
+    # VERIFY: Schedule post-launch verification
+    verify_data = {}
+    if result["approved"] > 0:
+        verify_data["verification_scheduled"] = True
+        verify_data["verify_after_days"] = 14
+        verify_data["metrics_to_check"] = measure_data.get("targets", [])
+        # Create design specs for verification
+        try:
+            for target in measure_data.get("targets", []):
+                conn.execute("""
+                    INSERT OR IGNORE INTO pi_design_spec
+                    (feature_name, spec_description, target_value, verification_method, status)
+                    VALUES (?, ?, ?, 'automated_spc', 'draft')
+                """, (feature_name, target["metric"], target["spec"]))
+        except Exception:
+            pass
+
+    # Persist DMADV log
+    try:
+        conn.execute("""
+            INSERT INTO pi_dmadv_log
+            (feature_name, define_json, measure_json, analyze_json, design_json, verify_json,
+             gate_blocked, gate_reason, design_fmea_max_rpn, approved)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            feature_name,
+            json.dumps(define_data), json.dumps(measure_data),
+            json.dumps(analyze_data), json.dumps(design_data), json.dumps(verify_data),
+            result.get("gate_blocked"), result.get("gate_reason"),
+            result.get("design_fmea_max_rpn", 0), result["approved"],
+        ))
+        conn.commit()
+    except Exception:
+        pass
+
+    result.update({
+        "define": define_data, "measure": measure_data,
+        "analyze": analyze_data, "design": design_data, "verify": verify_data,
+    })
+    return result
+
+
 def compute_cycle_times(conn) -> dict:
     """Lean cycle time analysis for finding lifecycle.
 

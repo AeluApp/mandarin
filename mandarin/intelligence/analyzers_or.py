@@ -556,6 +556,168 @@ def _analyze_piv_failures(conn) -> list[dict]:
     return findings
 
 
+# ── 11. DFSS Maturity ────────────────────────────────────────────────────────
+
+def _analyze_dfss_maturity(conn) -> list[dict]:
+    """Check DFSS adoption: VOC coverage and design review compliance."""
+    findings = []
+    try:
+        # VOC coverage check
+        voc_count = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_voc_capture")
+        recent_voc = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_voc_capture WHERE captured_at >= datetime('now', '-30 days')")
+
+        if voc_count == 0:
+            findings.append(_finding(
+                "pm", "medium",
+                "DFSS: No Voice of Customer signals captured",
+                (
+                    "The pi_voc_capture table is empty. Voice of Customer signals "
+                    "are the foundation of Design for Six Sigma — without them, "
+                    "new features lack validated customer needs."
+                ),
+                (
+                    "Enable VOC auto-capture in the quality scheduler, or manually "
+                    "capture learner feedback signals into pi_voc_capture."
+                ),
+                (
+                    "No VOC signals captured.\n\n"
+                    "1. Verify quality_scheduler VOC capture is running\n"
+                    "2. Check session_self_assessment and error_reflection tables have data\n"
+                    "3. Consider adding manual VOC capture for feature requests"
+                ),
+                "DFSS: features without VOC validation risk building the wrong thing",
+                ["mandarin/web/quality_scheduler.py"],
+            ))
+        elif recent_voc == 0:
+            findings.append(_finding(
+                "pm", "low",
+                f"DFSS: VOC capture stale ({voc_count} total, 0 in last 30 days)",
+                (
+                    f"There are {voc_count} VOC signals total but none captured in the "
+                    f"last 30 days. Stale VOC data means new features may not reflect "
+                    f"current learner needs."
+                ),
+                "Investigate why VOC auto-capture has stopped producing new signals.",
+                (
+                    f"VOC capture stale: {voc_count} total, 0 recent.\n\n"
+                    f"1. Check quality_scheduler logs for VOC capture errors\n"
+                    f"2. Verify session_self_assessment data is being generated\n"
+                    f"3. Run manual VOC capture cycle"
+                ),
+                "DFSS: stale VOC data leads to features based on outdated needs",
+                ["mandarin/web/quality_scheduler.py"],
+            ))
+
+        # Design review compliance: check if experiments launched without DMADV
+        total_experiments = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM experiment WHERE status IN ('running', 'concluded')")
+        reviewed_experiments = _safe_scalar(conn,
+            "SELECT COUNT(DISTINCT feature_name) FROM pi_dmadv_log")
+
+        if total_experiments > 0 and reviewed_experiments == 0:
+            findings.append(_finding(
+                "pm", "medium",
+                f"DFSS: {total_experiments} experiment(s) launched without DMADV design review",
+                (
+                    f"There are {total_experiments} experiments that have been run, "
+                    f"but zero DMADV design reviews on record. Features are launching "
+                    f"without a structured quality gate."
+                ),
+                (
+                    "Enable the DMADV design gate in experiment_daemon.py to require "
+                    "design review before experiment launch."
+                ),
+                (
+                    f"{total_experiments} experiments without DMADV review.\n\n"
+                    f"1. Verify DFSS design gate is active in experiment_daemon\n"
+                    f"2. Run retroactive DMADV cycles for active experiments\n"
+                    f"3. Document design review policy"
+                ),
+                "DFSS: unreviewed experiments may introduce quality problems",
+                ["mandarin/web/experiment_daemon.py"],
+            ))
+    except Exception as e:
+        logger.debug("DFSS maturity analysis failed: %s", e)
+    return findings
+
+
+# ── 12. Design Risk ─────────────────────────────────────────────────────────
+
+def _analyze_design_risk(conn) -> list[dict]:
+    """Check for high-RPN features that were auto-approved without mitigation."""
+    findings = []
+    try:
+        # Features approved with medium-high RPN (100-150 range)
+        risky_approved = _safe_query_all(conn, """
+            SELECT feature_name, design_fmea_max_rpn, approved, run_at
+            FROM pi_dmadv_log
+            WHERE approved = 1 AND design_fmea_max_rpn > 100
+            ORDER BY design_fmea_max_rpn DESC
+            LIMIT 5
+        """)
+
+        for row in (risky_approved or []):
+            findings.append(_finding(
+                "engineering", "medium",
+                (
+                    f"Design risk: '{row['feature_name']}' auto-approved with "
+                    f"RPN={row['design_fmea_max_rpn']}"
+                ),
+                (
+                    f"Feature '{row['feature_name']}' passed the DMADV gate with a "
+                    f"Design FMEA max RPN of {row['design_fmea_max_rpn']}. While below "
+                    f"the blocking threshold (150), this indicates medium risk that "
+                    f"warrants enhanced post-launch monitoring."
+                ),
+                (
+                    f"Set up enhanced SPC monitoring for '{row['feature_name']}'. "
+                    f"Verify design specs are being tracked in pi_design_spec."
+                ),
+                (
+                    f"Medium-risk auto-approval: {row['feature_name']} "
+                    f"(RPN={row['design_fmea_max_rpn']}).\n\n"
+                    f"1. Check pi_design_spec for verification targets\n"
+                    f"2. Monitor session_completion_rate and error_rate post-launch\n"
+                    f"3. Re-run Design FMEA after mitigation actions"
+                ),
+                "DFSS: medium-risk features need enhanced monitoring to catch problems early",
+                ["mandarin/quality/fmea.py", "mandarin/intelligence/_synthesis.py"],
+            ))
+
+        # Features blocked at design gate (informational — gate is working)
+        blocked_count = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_dmadv_log WHERE gate_blocked = 'design'")
+        if blocked_count > 0:
+            # Positive signal — gate is working. Only flag if ALL are blocked (gate too strict)
+            total_cycles = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_dmadv_log")
+            if total_cycles > 0 and blocked_count == total_cycles:
+                findings.append(_finding(
+                    "pm", "low",
+                    f"DFSS design gate blocking all features ({blocked_count}/{total_cycles})",
+                    (
+                        f"All {blocked_count} DMADV cycles were blocked at the design gate. "
+                        f"This may indicate the RPN threshold is too strict, or that the "
+                        f"LLM is consistently generating high-severity failure modes."
+                    ),
+                    (
+                        "Review the Design FMEA RPN threshold (currently 150). Consider "
+                        "whether it should be adjusted for the app's risk appetite."
+                    ),
+                    (
+                        f"All {blocked_count} features blocked by design gate.\n\n"
+                        f"1. Review pi_dmadv_log analyze_json for RPN distribution\n"
+                        f"2. Check if LLM is overestimating failure mode severity\n"
+                        f"3. Consider adjusting RPN threshold in _synthesis.py"
+                    ),
+                    "DFSS: overly strict gates prevent all experimentation",
+                    ["mandarin/intelligence/_synthesis.py"],
+                ))
+    except Exception as e:
+        logger.debug("Design risk analysis failed: %s", e)
+    return findings
+
+
 # ── Export ────────────────────────────────────────────────────────────────────
 
 ANALYZERS = [
@@ -569,4 +731,6 @@ ANALYZERS = [
     _analyze_fmea_risks,
     _analyze_dmaic_stalls,
     _analyze_piv_failures,
+    _analyze_dfss_maturity,
+    _analyze_design_risk,
 ]

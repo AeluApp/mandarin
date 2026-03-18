@@ -215,6 +215,12 @@ def _collect_metrics():
         except Exception:
             logger.exception("Quality metrics: retention calculation failed")
 
+        # VOC auto-capture: harvest learner feedback as Voice of Customer signals
+        try:
+            _capture_voc_signals(conn)
+        except Exception:
+            logger.debug("VOC auto-capture failed")
+
         # Risk appetite enforcement: auto-create work items for high-risk items
         try:
             high_risks = conn.execute("""
@@ -290,6 +296,72 @@ def _collect_metrics():
     # ── Intelligence automation loop ──
     # Runs after quality metrics are collected so audit has fresh data.
     _run_intelligence_loop()
+
+
+def _capture_voc_signals(conn):
+    """Harvest Voice of Customer signals from session self-assessments and error reflections.
+
+    Inserts into pi_voc_capture for use by DFSS DMADV cycles.
+    Deduplicates on (customer_need, source) within the last 7 days.
+    """
+    # 1. Session self-assessments: learner difficulty ratings
+    try:
+        assessments = conn.execute("""
+            SELECT assessment, COUNT(*) as cnt
+            FROM session_self_assessment
+            WHERE created_at >= datetime('now', '-1 day')
+            GROUP BY assessment
+            HAVING cnt >= 2
+        """).fetchall()
+        for row in (assessments or []):
+            assessment = row["assessment"]
+            count = row["cnt"]
+            need = f"session_difficulty:{assessment}"
+            # Dedup: skip if already captured this week
+            existing = conn.execute("""
+                SELECT id FROM pi_voc_capture
+                WHERE customer_need = ? AND source = 'session_self_assessment'
+                  AND captured_at >= datetime('now', '-7 days')
+            """, (need,)).fetchone()
+            if not existing:
+                priority = 3 if assessment in ("too_hard", "too_easy") else 1
+                conn.execute("""
+                    INSERT INTO pi_voc_capture
+                    (customer_need, ctq_metric, source, source_detail, priority)
+                    VALUES (?, ?, 'session_self_assessment', ?, ?)
+                """, (need, "session_difficulty_balance",
+                      f"{count} reports in last day", priority))
+    except Exception:
+        logger.debug("VOC: session_self_assessment capture failed")
+
+    # 2. Error reflections: learner-reported confusion or errors
+    try:
+        reflections = conn.execute("""
+            SELECT error_type, COUNT(*) as cnt
+            FROM error_reflection
+            WHERE created_at >= datetime('now', '-1 day')
+            GROUP BY error_type
+            HAVING cnt >= 2
+        """).fetchall()
+        for row in (reflections or []):
+            error_type = row["error_type"]
+            count = row["cnt"]
+            need = f"error_pattern:{error_type}"
+            existing = conn.execute("""
+                SELECT id FROM pi_voc_capture
+                WHERE customer_need = ? AND source = 'error_reflection'
+                  AND captured_at >= datetime('now', '-7 days')
+            """, (need,)).fetchone()
+            if not existing:
+                conn.execute("""
+                    INSERT INTO pi_voc_capture
+                    (customer_need, ctq_metric, source, source_detail, priority)
+                    VALUES (?, ?, 'error_reflection', ?, ?)
+                """, (need, "error_rate", f"{count} reports in last day", 2))
+    except Exception:
+        logger.debug("VOC: error_reflection capture failed")
+
+    conn.commit()
 
 
 def _auto_identify_risks(conn):

@@ -1049,6 +1049,135 @@ def check_experiment_health(conn) -> DetectionResult:
                            evidence, gaps, min(score, 100), min(1.0, score / 100))
 
 
+# ── Design for Six Sigma (DFSS) ──
+
+def check_voc_capture(conn) -> DetectionResult:
+    """Check Voice of Customer signal capture."""
+    score, evidence, gaps = 0.0, [], []
+    total = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_voc_capture")
+    if total > 0:
+        score += 40
+        evidence.append(f"{total} VOC signals captured")
+        recent = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_voc_capture WHERE captured_at >= datetime('now', '-30 days')")
+        if recent > 0:
+            score += 30
+            evidence.append(f"{recent} VOC signals in last 30 days")
+        else:
+            gaps.append("No VOC signals captured in last 30 days")
+        sources = _safe_scalar(conn,
+            "SELECT COUNT(DISTINCT source) FROM pi_voc_capture")
+        if sources >= 2:
+            score += 30
+            evidence.append(f"{sources} distinct VOC sources")
+        else:
+            gaps.append("VOC signals from only one source (need diversity)")
+    else:
+        gaps.append("No Voice of Customer signals captured")
+    return DetectionResult("VOC capture", "dfss", score > 0, min(score, 100),
+                           evidence, gaps, min(score, 100), min(1.0, score / 100))
+
+
+def check_design_fmea_usage(conn) -> DetectionResult:
+    """Check Design FMEA usage in DMADV cycles."""
+    score, evidence, gaps = 0.0, [], []
+    total = _safe_scalar(conn,
+        "SELECT COUNT(*) FROM pi_dmadv_log WHERE design_fmea_max_rpn > 0")
+    if total > 0:
+        score += 50
+        evidence.append(f"{total} DMADV cycle(s) with Design FMEA scores")
+        blocked = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_dmadv_log WHERE gate_blocked = 'design'")
+        if blocked > 0:
+            score += 25
+            evidence.append(f"{blocked} feature(s) blocked by design gate (gate is enforced)")
+        else:
+            evidence.append("No features blocked (all passed or FMEA returned low risk)")
+        recent = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_dmadv_log WHERE run_at >= datetime('now', '-30 days')")
+        if recent > 0:
+            score += 25
+            evidence.append(f"{recent} DMADV cycle(s) in last 30 days")
+        else:
+            gaps.append("No DMADV cycles in last 30 days")
+    else:
+        # Check if cycles exist but without FMEA
+        any_cycles = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_dmadv_log")
+        if any_cycles > 0:
+            score += 20
+            evidence.append(f"{any_cycles} DMADV cycle(s) exist but without Design FMEA scores")
+            gaps.append("Design FMEA not producing RPN scores (LLM may be offline)")
+        else:
+            gaps.append("No DMADV cycles recorded — Design FMEA not used")
+    return DetectionResult("Design FMEA", "dfss", score > 0, min(score, 100),
+                           evidence, gaps, min(score, 100), min(1.0, score / 100))
+
+
+def check_dmadv_implementation(conn) -> DetectionResult:
+    """Check DMADV cycle implementation completeness."""
+    score, evidence, gaps = 0.0, [], []
+    total = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_dmadv_log")
+    if total > 0:
+        score += 30
+        evidence.append(f"{total} DMADV cycle(s) recorded")
+        # Check phase completeness: all 5 phases should have data
+        complete = _safe_scalar(conn, """
+            SELECT COUNT(*) FROM pi_dmadv_log
+            WHERE define_json IS NOT NULL AND define_json != '{}'
+              AND measure_json IS NOT NULL AND measure_json != '{}'
+              AND analyze_json IS NOT NULL AND analyze_json != '{}'
+              AND design_json IS NOT NULL AND design_json != '{}'
+              AND verify_json IS NOT NULL AND verify_json != '{}'
+        """)
+        if complete > 0:
+            score += 40
+            evidence.append(f"{complete} cycle(s) with all 5 DMADV phases complete")
+        else:
+            gaps.append("No DMADV cycles with all 5 phases completed")
+        approved = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_dmadv_log WHERE approved = 1")
+        if approved > 0:
+            score += 30
+            evidence.append(f"{approved} feature(s) approved through DMADV gate")
+        else:
+            gaps.append("No features have passed the DMADV approval gate")
+    else:
+        gaps.append("No DMADV cycles recorded — DFSS not yet active")
+    return DetectionResult("DMADV cycle", "dfss", score > 0, min(score, 100),
+                           evidence, gaps, min(score, 100), min(1.0, score / 100))
+
+
+def check_design_verification(conn) -> DetectionResult:
+    """Check post-launch design specification verification."""
+    score, evidence, gaps = 0.0, [], []
+    total = _safe_scalar(conn, "SELECT COUNT(*) FROM pi_design_spec")
+    if total > 0:
+        score += 30
+        evidence.append(f"{total} design spec(s) defined")
+        verified = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_design_spec WHERE status = 'verified'")
+        if verified > 0:
+            pct = round(verified / total * 100, 1)
+            score += 40
+            evidence.append(f"{verified}/{total} spec(s) verified ({pct}%)")
+        else:
+            gaps.append("No design specs have been verified post-launch")
+        active = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM pi_design_spec WHERE status IN ('draft', 'active')")
+        if active > 0:
+            score += 30
+            evidence.append(f"{active} spec(s) awaiting verification")
+        else:
+            if verified == total:
+                score += 30
+                evidence.append("All specs verified")
+            else:
+                gaps.append("No active specs pending verification")
+    else:
+        gaps.append("No design specifications created — post-launch verification not tracked")
+    return DetectionResult("Design verification", "dfss", score > 0, min(score, 100),
+                           evidence, gaps, min(score, 100), min(1.0, score / 100))
+
+
 # ── Detection function registry ─────────────────────────────────────────────
 
 DETECTION_FUNCTIONS = {
@@ -1101,6 +1230,11 @@ DETECTION_FUNCTIONS = {
     "check_significance_testing": check_significance_testing,
     "check_effect_size": check_effect_size,
     "check_experiment_health": check_experiment_health,
+    # DFSS
+    "check_voc_capture": check_voc_capture,
+    "check_design_fmea_usage": check_design_fmea_usage,
+    "check_dmadv_implementation": check_dmadv_implementation,
+    "check_design_verification": check_design_verification,
 }
 
 

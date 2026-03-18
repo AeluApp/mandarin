@@ -359,25 +359,53 @@ def _daemon_tick(conn):
         if top_proposal:
             top_proposal = dict(top_proposal)
             try:
-                variants = json.loads(top_proposal["variants"])
-                exp_id = create_experiment(
-                    conn,
-                    name=top_proposal["name"],
-                    description=top_proposal["description"],
-                    variants=variants,
-                    traffic_pct=top_proposal["traffic_pct"],
-                    min_sample_size=top_proposal["min_sample_size"],
-                )
-                start_experiment(conn, top_proposal["name"])
-                conn.execute("""
-                    UPDATE experiment_proposal SET
-                        status = 'started', reviewed_at = ?, started_experiment_id = ?
-                    WHERE id = ?
-                """, (now_str, exp_id, top_proposal["id"]))
-                conn.commit()
-                msg = f"AUTO-STARTED {top_proposal['name']} from proposal (priority={top_proposal['priority']})"
-                logger.info(msg)
-                digest_entries.append(msg)
+                # ── DFSS design gate: run DMADV before launching ──
+                dmadv_approved = True
+                try:
+                    from ..intelligence._synthesis import run_dmadv_cycle
+                    dmadv = run_dmadv_cycle(
+                        conn,
+                        feature_name=top_proposal["name"],
+                        feature_description=top_proposal.get("description", ""),
+                    )
+                    if dmadv.get("approved", 0) == 0 and dmadv.get("gate_blocked"):
+                        dmadv_approved = False
+                        conn.execute("""
+                            UPDATE experiment_proposal SET
+                                status = 'blocked', reviewed_at = ?
+                            WHERE id = ?
+                        """, (now_str, top_proposal["id"]))
+                        conn.commit()
+                        msg = (
+                            f"DFSS BLOCKED {top_proposal['name']}: "
+                            f"{dmadv.get('gate_reason', 'design gate failed')}"
+                        )
+                        logger.warning(msg)
+                        digest_entries.append(msg)
+                except Exception:
+                    logger.debug("DMADV gate check failed for %s — proceeding anyway",
+                                 top_proposal["name"])
+
+                if dmadv_approved:
+                    variants = json.loads(top_proposal["variants"])
+                    exp_id = create_experiment(
+                        conn,
+                        name=top_proposal["name"],
+                        description=top_proposal["description"],
+                        variants=variants,
+                        traffic_pct=top_proposal["traffic_pct"],
+                        min_sample_size=top_proposal["min_sample_size"],
+                    )
+                    start_experiment(conn, top_proposal["name"])
+                    conn.execute("""
+                        UPDATE experiment_proposal SET
+                            status = 'started', reviewed_at = ?, started_experiment_id = ?
+                        WHERE id = ?
+                    """, (now_str, exp_id, top_proposal["id"]))
+                    conn.commit()
+                    msg = f"AUTO-STARTED {top_proposal['name']} from proposal (priority={top_proposal['priority']})"
+                    logger.info(msg)
+                    digest_entries.append(msg)
             except Exception:
                 logger.exception("Error auto-starting proposal %s", top_proposal["name"])
 
