@@ -462,6 +462,100 @@ def _analyze_viral_health(conn) -> list[dict]:
         return []
 
 
+# ── 8. FMEA Risks ───────────────────────────────────────────────────────────
+
+def _analyze_fmea_risks(conn) -> list[dict]:
+    """Emit findings for high-RPN failure modes from FMEA."""
+    findings = []
+    try:
+        from ..quality.fmea import get_critical_fmeas
+        critical = get_critical_fmeas(conn, threshold=100)
+        for f in critical[:5]:  # Top 5 by RPN
+            findings.append(_finding(
+                "engineering", "high" if f["rpn"] > 200 else "medium",
+                f"FMEA: {f['failure_mode']} (RPN={f['rpn']})",
+                f"Process: {f['process']}. Cause: {f.get('cause', '?')}. "
+                f"Effect: {f.get('effect', '?')}. "
+                f"S={f['severity']} O={f['occurrence']} D={f['detection']}.",
+                f"Reduce RPN by improving detection or reducing occurrence. Target RPN < 100.",
+                f"Investigate failure mode '{f['failure_mode']}' in {f['process']} and implement controls.",
+                "FMEA risk management",
+                [],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
+# ── 9. DMAIC Stalls ─────────────────────────────────────────────────────────
+
+def _analyze_dmaic_stalls(conn) -> list[dict]:
+    """Emit findings for DMAIC cycles stuck at a tollgate."""
+    findings = []
+    try:
+        stalled = conn.execute("""
+            SELECT dimension, gate_blocked, gate_reason, run_at
+            FROM pi_dmaic_log
+            WHERE gate_blocked IS NOT NULL
+            AND run_at >= datetime('now', '-7 days')
+            ORDER BY run_at DESC
+        """).fetchall()
+
+        seen_dims = set()
+        for row in (stalled or []):
+            dim = row["dimension"]
+            if dim in seen_dims:
+                continue
+            seen_dims.add(dim)
+            findings.append(_finding(
+                "pm", "medium",
+                f"DMAIC stalled at {row['gate_blocked']} gate for '{dim}'",
+                f"DMAIC cycle for dimension '{dim}' is blocked at the {row['gate_blocked']} phase. "
+                f"Reason: {row.get('gate_reason', 'unknown')}.",
+                f"Address the blocking condition to advance the DMAIC cycle.",
+                f"Resolve DMAIC {row['gate_blocked']} gate blocker for dimension '{dim}'.",
+                "Six Sigma DMAIC governance",
+                [],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
+# ── 10. Post-Improvement Verification Failures ─────────────────────────────
+
+def _analyze_piv_failures(conn) -> list[dict]:
+    """Emit findings for post-improvement verifications that failed."""
+    findings = []
+    try:
+        failed = conn.execute("""
+            SELECT wo.id, wo.instruction, pf.dimension, pf.title as finding_title
+            FROM pi_work_order wo
+            JOIN pi_finding pf ON wo.finding_id = pf.id
+            WHERE wo.status = 'implemented'
+            AND wo.implemented_at <= datetime('now', '-21 days')
+            AND wo.id NOT IN (
+                SELECT work_order_id FROM prescription_execution_log
+                WHERE status IN ('verified', 'succeeded')
+            )
+        """).fetchall()
+
+        for wo in (failed or [])[:3]:
+            findings.append(_finding(
+                wo.get("dimension", "engineering"), "high",
+                f"Post-improvement verification overdue: {wo.get('finding_title', '?')[:50]}",
+                f"Work order #{wo['id']} was implemented 21+ days ago but has not been verified. "
+                f"The original issue may not have been resolved.",
+                "Re-audit the dimension and verify the improvement actually worked.",
+                f"Check if work order #{wo['id']} actually fixed the underlying issue.",
+                "Six Sigma Control phase -- post-improvement verification",
+                [],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
 # ── Export ────────────────────────────────────────────────────────────────────
 
 ANALYZERS = [
@@ -472,4 +566,7 @@ ANALYZERS = [
     _analyze_price_experiments,
     _analyze_curriculum_drift,
     _analyze_viral_health,
+    _analyze_fmea_risks,
+    _analyze_dmaic_stalls,
+    _analyze_piv_failures,
 ]

@@ -263,6 +263,15 @@ def run_product_audit(conn) -> dict:
         except Exception as e:
             logger.warning("Product intelligence analyzer %s failed: %s", analyzer.__name__, e)
 
+    # VOC alignment: compare session self-assessments against CTQ specs
+    try:
+        from ..quality.flow_metrics import check_voc_alignment
+        voc_findings = check_voc_alignment(conn)
+        if voc_findings:
+            findings.extend(voc_findings)
+    except Exception:
+        pass
+
     findings.sort(key=lambda f: _SEVERITY_ORDER.get(f.get("severity", "low"), 9))
 
     # Suppress false signals based on product lifecycle phase

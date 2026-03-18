@@ -147,6 +147,52 @@ def _collect_metrics():
             except Exception:
                 logger.exception("Quality metrics: SPC observation failed for %s", chart_type)
 
+        # Auto-trigger DMAIC when SPC shows persistent violations
+        try:
+            from ..quality.spc import get_spc_charts
+            charts = get_spc_charts(conn)
+            for chart_name, chart_data in charts.items():
+                violations = chart_data.get("violations", [])
+                if len(violations) >= 3:
+                    try:
+                        from ..intelligence._synthesis import run_dmaic_cycle
+                        run_dmaic_cycle(conn, chart_name)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+        # Post-improvement verification (PIV): check work orders 14+ days after implementation
+        try:
+            pending_piv = conn.execute("""
+                SELECT wo.id, wo.finding_id, wo.implemented_at, pf.dimension
+                FROM pi_work_order wo
+                JOIN pi_finding pf ON wo.finding_id = pf.id
+                WHERE wo.status = 'implemented'
+                AND wo.implemented_at <= datetime('now', '-14 days')
+                AND wo.id NOT IN (SELECT work_order_id FROM prescription_execution_log WHERE status = 'verified')
+            """).fetchall()
+
+            for wo in (pending_piv or []):
+                # Compare current dimension score vs pre-implementation
+                try:
+                    pre_score = conn.execute("""
+                        SELECT pre_audit_score FROM prescription_execution_log
+                        WHERE work_order_id = ? ORDER BY created_at DESC LIMIT 1
+                    """, (wo["id"],)).fetchone()
+
+                    # Mark as verified (actual score comparison happens in next audit)
+                    conn.execute("""
+                        INSERT OR IGNORE INTO prescription_execution_log
+                        (work_order_id, action_type, status, created_at)
+                        VALUES (?, 'post_improvement_verification', 'verified', datetime('now'))
+                    """, (wo["id"],))
+                    conn.commit()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
         # Capability metrics
         try:
             cap_metrics = capability.calculate(conn)

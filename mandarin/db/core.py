@@ -2644,6 +2644,13 @@ def _migrate_v55_to_v56(conn: sqlite3.Connection) -> None:
         """)
         conn.execute("CREATE INDEX IF NOT EXISTS idx_pi_dmaic_dim ON pi_dmaic_log(dimension)")
 
+    # Add gate_blocked and gate_reason to pi_dmaic_log (Six Sigma tollgates)
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(pi_dmaic_log)").fetchall()}
+    if "gate_blocked" not in cols:
+        conn.execute("ALTER TABLE pi_dmaic_log ADD COLUMN gate_blocked TEXT")
+    if "gate_reason" not in cols:
+        conn.execute("ALTER TABLE pi_dmaic_log ADD COLUMN gate_reason TEXT")
+
     # Add verification_window_days to pi_threshold_calibration
     cols = {r[1] for r in conn.execute("PRAGMA table_info(pi_threshold_calibration)").fetchall()}
     if "verification_window_days" not in cols:

@@ -620,6 +620,58 @@ def get_flow_summary(conn) -> Dict[str, Any]:
     }
 
 
+def check_voc_alignment(conn) -> list[dict]:
+    """Compare VOC signals (session self-assessments) against CTQ specs."""
+    findings = []
+    try:
+        from ..intelligence._base import _finding
+
+        # Count recent session assessments
+        assessments = conn.execute("""
+            SELECT difficulty_rating, COUNT(*) as cnt
+            FROM session_self_assessment
+            WHERE created_at >= datetime('now', '-14 days')
+            GROUP BY difficulty_rating
+        """).fetchall()
+
+        total = sum(r["cnt"] for r in assessments) if assessments else 0
+        if total < 5:
+            return []  # Not enough data
+
+        ratings = {r["difficulty_rating"]: r["cnt"] for r in assessments}
+        too_hard_pct = (ratings.get("too_hard", 0) / total) * 100
+        too_easy_pct = (ratings.get("too_easy", 0) / total) * 100
+
+        # CTQ: "No frustration" -> <15% say "too_hard"
+        if too_hard_pct > 15:
+            findings.append(_finding(
+                "ux", "high",
+                f"VOC violation: {too_hard_pct:.0f}% of sessions rated 'too hard' (CTQ limit: 15%)",
+                f"{ratings.get('too_hard', 0)} of {total} recent session assessments rated difficulty as 'too hard'. "
+                f"CTQ spec requires <15%. Current: {too_hard_pct:.1f}%.",
+                "Reduce new_item_ceiling or adjust difficulty parameters. Review Bjork difficulty zones.",
+                "Lower session difficulty: reduce new items per session or increase review ratio.",
+                "Voice of Customer -> CTQ alignment",
+                ["mandarin/scheduler.py", "mandarin/settings.py"],
+            ))
+
+        # CTQ: "Optimal spacing" -> <20% say "too_easy"
+        if too_easy_pct > 20:
+            findings.append(_finding(
+                "scheduler_audit", "medium",
+                f"VOC signal: {too_easy_pct:.0f}% of sessions rated 'too easy'",
+                f"{ratings.get('too_easy', 0)} of {total} sessions rated as 'too easy'. "
+                f"Consider increasing difficulty or introducing more new items.",
+                "Increase new_item_ceiling or reduce review ratio for mastered items.",
+                "Increase session difficulty to match learner's growing ability.",
+                "Voice of Customer -> CTQ alignment",
+                ["mandarin/scheduler.py"],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
 def get_cfd_data(conn, days: int = 30) -> Dict[str, Any]:
     """Cumulative flow diagram data: daily counts by status.
 

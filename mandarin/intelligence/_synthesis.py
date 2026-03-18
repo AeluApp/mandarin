@@ -188,15 +188,42 @@ def identify_system_constraint(conn, dimension_scores: dict) -> dict:
     }
 
 
+def _persist_dmaic(conn, dimension, dmaic_result):
+    """Persist a (possibly partial) DMAIC cycle to pi_dmaic_log."""
+    try:
+        conn.execute("""
+            INSERT INTO pi_dmaic_log
+                (dimension, define_json, measure_json, analyze_json, improve_json,
+                 control_json, gate_blocked, gate_reason)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            dimension,
+            json.dumps(dmaic_result.get("define", {})),
+            json.dumps(dmaic_result.get("measure", {})),
+            json.dumps(dmaic_result.get("analyze", {})),
+            json.dumps(dmaic_result.get("improve", {})),
+            json.dumps(dmaic_result.get("control", {})),
+            dmaic_result.get("gate_blocked"),
+            dmaic_result.get("gate_reason"),
+        ))
+        conn.commit()
+    except (sqlite3.OperationalError, sqlite3.Error):
+        pass
+
+
 def run_dmaic_cycle(conn, dimension: str) -> dict:
     """Run a Six Sigma DMAIC cycle for a given dimension.
 
     Define → Measure → Analyze → Improve → Control.
+    Each phase has a tollgate: if the gate condition is not met, the cycle
+    stops and records which gate blocked it and why.
     Persists cycle to pi_dmaic_log table.
     """
     from .feedback_loops import _measure_current_metric
 
-    # Define: pull latest finding titles + severities
+    dmaic_result = {"dimension": dimension}
+
+    # ── Define: pull latest finding titles + severities ──
     findings = _safe_query_all(conn, """
         SELECT title, severity, times_seen, status
         FROM pi_finding
@@ -210,12 +237,28 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
                            "times_seen": f["times_seen"] or 1} for f in (findings or [])],
         "problem_count": len(findings or []),
     }
+    dmaic_result["define"] = define
 
-    # Measure: current metric value
+    # Gate: Define → must have findings
+    if not define.get("open_findings"):
+        dmaic_result["gate_blocked"] = "define"
+        dmaic_result["gate_reason"] = "No open findings for this dimension"
+        _persist_dmaic(conn, dimension, dmaic_result)
+        return dmaic_result
+
+    # ── Measure: current metric value ──
     current = _measure_current_metric(conn, dimension, dimension)
     measure = {"current_value": current, "metric_name": dimension}
+    dmaic_result["measure"] = measure
 
-    # Analyze: root cause tags
+    # Gate: Measure → must have a baseline value
+    if current is None:
+        dmaic_result["gate_blocked"] = "measure"
+        dmaic_result["gate_reason"] = "No baseline metric value available for this dimension"
+        _persist_dmaic(conn, dimension, dmaic_result)
+        return dmaic_result
+
+    # ── Analyze: root cause tags ──
     root_causes = _safe_query_all(conn, """
         SELECT title, root_cause_tag, linked_finding_id
         FROM pi_finding
@@ -227,8 +270,16 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
                         for r in (root_causes or [])],
         "root_cause_count": len(root_causes or []),
     }
+    dmaic_result["analyze"] = analyze
 
-    # Improve: pull recommendations with highest priority from advisors
+    # Gate: Analyze → must have at least one root cause
+    if not analyze.get("root_causes"):
+        dmaic_result["gate_blocked"] = "analyze"
+        dmaic_result["gate_reason"] = "No root cause tags identified for open findings"
+        _persist_dmaic(conn, dimension, dmaic_result)
+        return dmaic_result
+
+    # ── Improve: pull recommendations with highest priority from advisors ──
     recommendations = _safe_query_all(conn, """
         SELECT ao.recommendation, ao.priority_score, ao.advisor
         FROM pi_advisor_opinion ao
@@ -243,8 +294,16 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
                                   "advisor": r["advisor"]}
                                  for r in (recommendations or [])],
     }
+    dmaic_result["improve"] = improve
 
-    # Control: SPC status + threshold calibration
+    # Gate: Improve → must have at least one recommendation (prescription)
+    if not improve.get("top_recommendations"):
+        dmaic_result["gate_blocked"] = "improve"
+        dmaic_result["gate_reason"] = "No advisor recommendations available for this dimension"
+        _persist_dmaic(conn, dimension, dmaic_result)
+        return dmaic_result
+
+    # ── Control: SPC status + threshold calibration ──
     spc_status = _safe_query_all(conn, """
         SELECT chart_type, value, ucl, lcl, rule_violated
         FROM spc_observation
@@ -263,30 +322,19 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
             not (s.get("rule_violated")) for s in (spc_status or [])
         ),
     }
+    dmaic_result["control"] = control
 
-    # Persist to pi_dmaic_log
-    try:
-        conn.execute("""
-            INSERT INTO pi_dmaic_log
-                (dimension, define_json, measure_json, analyze_json, improve_json, control_json)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (
-            dimension,
-            json.dumps(define), json.dumps(measure), json.dumps(analyze),
-            json.dumps(improve), json.dumps(control),
-        ))
-        conn.commit()
-    except (sqlite3.OperationalError, sqlite3.Error):
-        pass
+    # Gate: Control → must have SPC monitoring in place
+    if not spc_status:
+        dmaic_result["gate_blocked"] = "control"
+        dmaic_result["gate_reason"] = "No SPC observations found for this dimension"
+        _persist_dmaic(conn, dimension, dmaic_result)
+        return dmaic_result
 
-    return {
-        "dimension": dimension,
-        "define": define,
-        "measure": measure,
-        "analyze": analyze,
-        "improve": improve,
-        "control": control,
-    }
+    # All gates passed — persist full cycle
+    _persist_dmaic(conn, dimension, dmaic_result)
+
+    return dmaic_result
 
 
 def compute_cycle_times(conn) -> dict:
