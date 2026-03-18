@@ -248,24 +248,17 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
-    # Import UX health analyzers
-    try:
-        from .analyzers_ux import ANALYZERS as UX_ANALYZERS
-        all_analyzers = all_analyzers + UX_ANALYZERS
-    except ImportError:
-        pass
-
-    # Import UI visual design analyzers
-    try:
-        from .analyzers_ui import ANALYZERS as UI_ANALYZERS
-        all_analyzers = all_analyzers + UI_ANALYZERS
-    except ImportError:
-        pass
-
     # Import Operations Research analyzers (SPC, queue, CLV, Monte Carlo, etc.)
     try:
         from .analyzers_or import ANALYZERS as OR_ANALYZERS
         all_analyzers = all_analyzers + OR_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import strategy framework analyzers (TAM/SAM/SOM, Three Horizons, Porter, BCG, etc.)
+    try:
+        from .analyzers_strategy import ANALYZERS as STRATEGY_ANALYZERS
+        all_analyzers = all_analyzers + STRATEGY_ANALYZERS
     except ImportError:
         pass
 
@@ -276,15 +269,6 @@ def run_product_audit(conn) -> dict:
             findings.extend(results)
         except Exception as e:
             logger.warning("Product intelligence analyzer %s failed: %s", analyzer.__name__, e)
-
-    # VOC alignment: compare session self-assessments against CTQ specs
-    try:
-        from ..quality.flow_metrics import check_voc_alignment
-        voc_findings = check_voc_alignment(conn)
-        if voc_findings:
-            findings.extend(voc_findings)
-    except Exception:
-        pass
 
     findings.sort(key=lambda f: _SEVERITY_ORDER.get(f.get("severity", "low"), 9))
 
