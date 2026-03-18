@@ -658,7 +658,7 @@ def estimate_false_negatives(conn, lookback_days: int = 30) -> dict:
             SELECT id, name as signal_id, 'pm' as dimension
             FROM experiment
             WHERE status = 'concluded'
-              AND updated_at >= datetime('now', ? || ' days')
+              AND concluded_at >= datetime('now', ? || ' days')
         """),
     ]
 

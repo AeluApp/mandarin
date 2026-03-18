@@ -338,9 +338,134 @@ def analyze_content_freshness(conn):
     return findings
 
 
+def generate_waste_findings(conn) -> list[dict]:
+    """Detect genuine operational waste from content pipeline data.
+
+    Identifies four Lean waste types:
+    - Waiting: items stuck in review queue
+    - Overprocessing: duplicate items generated before dedup
+    - Staleness: unused content items
+    - Defects: rejected or low-quality items
+    """
+    findings = []
+
+    # Waiting waste: items in review queue > 24h
+    stale_queue = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE review_decision IS NULL
+        AND created_at < datetime('now', '-1 day')
+    """, default=0)
+    if stale_queue > 0:
+        findings.append(_finding(
+            dimension="methodology", severity="low",
+            title=f"Waiting waste: {stale_queue} items in review queue > 24h",
+            analysis=f"{stale_queue} content items have been waiting in the review queue "
+                     "for more than 24 hours without a decision.",
+            recommendation="Process review queue items regularly to reduce waiting waste.",
+            claude_prompt="Check pi_ai_review_queue for stale items and process them via batch review endpoint.",
+            impact="Lean waste reduction: waiting",
+            files=["mandarin/web/admin_routes.py"],
+        ))
+
+    # Overprocessing/excess waste: items that were deduped (generated unnecessarily)
+    dedup_count = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM content_item WHERE status = 'deduped'
+    """, default=0)
+    if dedup_count > 0:
+        findings.append(_finding(
+            dimension="methodology", severity="low",
+            title=f"Excess production waste: {dedup_count} items deduped after generation",
+            analysis=f"{dedup_count} content items were generated but later identified as "
+                     "duplicates. This overproduction represents wasted generation effort.",
+            recommendation="Improve pre-generation dedup checks to avoid generating duplicates.",
+            claude_prompt="Review fuzzy_dedup.py and drill_generator.py for pre-generation dedup.",
+            impact="Lean waste reduction: overprocessing",
+            files=["mandarin/ml/fuzzy_dedup.py", "mandarin/ai/drill_generator.py"],
+        ))
+
+    # Staleness waste: items never used in drills (skip in pre-launch)
+    total_reviews = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM review_event
+    """, default=0)
+    if total_reviews > 0:
+        # Only check for unused items when there are actual drill sessions
+        unused = _safe_scalar(conn, """
+            SELECT COUNT(*) FROM content_item ci
+            WHERE ci.status = 'drill_ready'
+            AND ci.created_at < datetime('now', '-30 days')
+            AND NOT EXISTS (
+                SELECT 1 FROM review_event re WHERE re.content_item_id = ci.id
+            )
+        """, default=0)
+        if unused > 100:
+            findings.append(_finding(
+                dimension="methodology", severity="low",
+                title=f"Staleness waste: {unused} drill-ready items unused in 30d",
+                analysis=f"{unused} content items are marked drill_ready but have never "
+                         "appeared in a drill session. They may need scheduling attention.",
+                recommendation="Review content scheduling to ensure all drill-ready items are reachable.",
+                claude_prompt="Check scheduler.py to ensure content items are being scheduled for drills.",
+                impact="Lean waste reduction: unused inventory",
+                files=["mandarin/scheduler.py"],
+            ))
+
+    return findings
+
+
+def generate_queue_findings(conn) -> list[dict]:
+    """Monitor review queue depth and emit saturation alerts.
+
+    Implements Operations Research queuing theory monitoring.
+    """
+    findings = []
+
+    # Queue depth check
+    pending = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE review_decision IS NULL
+    """, default=0)
+    approved = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE review_decision = 'approved'
+    """, default=0)
+    rejected = _safe_scalar(conn, """
+        SELECT COUNT(*) FROM pi_ai_review_queue
+        WHERE review_decision = 'rejected'
+    """, default=0)
+    total = pending + approved + rejected
+
+    if pending > 50:
+        findings.append(_finding(
+            dimension="methodology", severity="medium",
+            title=f"Queue saturation: {pending} items pending review",
+            analysis=f"The content review queue has {pending} items awaiting review "
+                     f"({total} total, {approved} approved, {rejected} rejected). "
+                     "Queue depth exceeds saturation threshold (50).",
+            recommendation="Increase review throughput or batch-approve validated items.",
+            claude_prompt="Process review queue via POST /api/admin/ai/review-queue/batch.",
+            impact="Operations research: queue stability",
+            files=["mandarin/web/admin_routes.py"],
+        ))
+    elif pending > 20:
+        findings.append(_finding(
+            dimension="methodology", severity="low",
+            title=f"Queue depth: {pending} items pending review ({total} total)",
+            analysis=f"The content review queue has {pending} pending items. "
+                     f"Throughput: {approved} approved, {rejected} rejected.",
+            recommendation="Monitor queue depth and process items before saturation.",
+            claude_prompt="Check review queue trends and processing rate.",
+            impact="Operations research: queue monitoring",
+            files=["mandarin/web/admin_routes.py"],
+        ))
+
+    return findings
+
+
 ANALYZERS = [
     generate_coverage_findings,
     analyze_reading_comprehension,
     analyze_listening_comprehension,
     analyze_content_freshness,
+    generate_waste_findings,
+    generate_queue_findings,
 ]

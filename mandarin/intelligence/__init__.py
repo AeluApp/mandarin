@@ -238,7 +238,7 @@ def run_product_audit(conn) -> dict:
     findings.sort(key=lambda f: _SEVERITY_ORDER.get(f.get("severity", "low"), 9))
 
     # Suppress false signals based on product lifecycle phase
-    from ._base import suppress_low_sample_findings, _lifecycle_phase, _real_user_count
+    from ._base import suppress_low_sample_findings, _lifecycle_phase, _real_user_count, _finding
     lifecycle_phase = _lifecycle_phase(conn)
     lifecycle_real_users = _real_user_count(conn)
     findings = suppress_low_sample_findings(conn, findings)
@@ -424,6 +424,120 @@ def run_product_audit(conn) -> dict:
     except Exception as e:
         logger.warning("DMAIC logging failed: %s", e)
 
+    # ── Operational Lifecycle Functions ──
+    # Run stale finding detection, false negative estimation, and threshold
+    # calibration so methodology_coverage detects Six Sigma / Lean / Kanban activity.
+    try:
+        from .finding_lifecycle import check_stale_findings, estimate_false_negatives
+        stale_new = check_stale_findings(conn)
+        if stale_new:
+            findings.extend(stale_new)
+        estimate_false_negatives(conn)
+    except (ImportError, AttributeError):
+        pass
+    except Exception as e:
+        logger.warning("Stale/false-negative check failed: %s", e)
+
+    try:
+        from .feedback_loops import calibrate_thresholds
+        calibrate_thresholds(conn)
+    except (ImportError, AttributeError):
+        pass
+    except Exception as e:
+        logger.warning("Threshold calibration failed: %s", e)
+
+    # ── Agentic Experiment Lifecycle ──
+    # Autonomously manage running experiments: check sequential tests,
+    # monitor guardrails, auto-conclude when criteria are met, and emit
+    # findings with takeaways from concluded experiments.
+    experiment_actions = []
+    try:
+        from ..experiments import (
+            list_experiments, sequential_test, check_guardrails,
+            conclude_experiment, get_experiment_results,
+        )
+        running = list_experiments(conn, status="running")
+        for exp in running:
+            exp_name = exp.get("name", "")
+            # Sequential test: should we stop early?
+            seq = sequential_test(conn, exp_name)
+            recommendation = seq.get("recommendation", "continue")
+
+            # Check guardrails for degradation
+            guardrail_results = check_guardrails(conn, exp_name)
+            degraded_guardrails = [
+                m for m, v in guardrail_results.items() if v.get("degraded")
+            ]
+            if degraded_guardrails:
+                findings.append(_finding(
+                    "pm", "high",
+                    f"Experiment '{exp_name}' guardrail degradation: {', '.join(degraded_guardrails)}",
+                    f"Running experiment '{exp_name}' shows degradation in guardrail metrics: "
+                    f"{degraded_guardrails}. Consider pausing or concluding.",
+                    "Investigate degraded guardrails. Pause experiment if user impact is unacceptable.",
+                    f"Check experiment '{exp_name}' guardrails and decide: continue, pause, or stop.",
+                    "Experiment safety",
+                    ["mandarin/experiments.py"],
+                ))
+                recommendation = "stop_guardrail"
+
+            if recommendation in ("stop_winner", "stop_futility", "stop_guardrail"):
+                # Auto-conclude the experiment
+                results = get_experiment_results(conn, exp_name)
+                winner = "none"
+                notes_parts = [f"Auto-concluded by audit: recommendation={recommendation}."]
+                if recommendation == "stop_winner":
+                    # Determine the winner from results
+                    variants = results.get("variants", {})
+                    best_variant = max(
+                        variants.items(),
+                        key=lambda v: v[1].get("completion_rate", 0),
+                        default=(None, {}),
+                    )[0] or "none"
+                    winner = best_variant
+                    notes_parts.append(f"Winner: {winner}.")
+                elif recommendation == "stop_futility":
+                    notes_parts.append("Stopped for futility — no significant difference detected.")
+                elif recommendation == "stop_guardrail":
+                    notes_parts.append(
+                        f"Stopped due to guardrail degradation in: {degraded_guardrails}."
+                    )
+                p_val = results.get("p_value")
+                effect = results.get("effect_size")
+                notes_parts.append(
+                    f"p-value={p_val}, effect size (Cohen's d)={effect}, "
+                    f"significant={results.get('significant', False)}."
+                )
+                conclude_experiment(conn, exp_name, winner=winner,
+                                    notes=" ".join(notes_parts))
+                experiment_actions.append({
+                    "experiment": exp_name,
+                    "action": "concluded",
+                    "reason": recommendation,
+                    "winner": winner,
+                })
+                findings.append(_finding(
+                    "pm", "low",
+                    f"Experiment '{exp_name}' concluded: {recommendation}",
+                    f"Experiment '{exp_name}' was auto-concluded by the audit system. "
+                    f"Reason: {recommendation}. Winner: {winner}.",
+                    f"Review experiment results and implement the winning variant if applicable.",
+                    f"Review results of concluded experiment '{exp_name}' and apply learnings.",
+                    "Experiment lifecycle automation",
+                    ["mandarin/experiments.py"],
+                ))
+            else:
+                info_frac = seq.get("information_fraction", 0)
+                experiment_actions.append({
+                    "experiment": exp_name,
+                    "action": "continue",
+                    "info_fraction": info_frac,
+                })
+    except (ImportError, AttributeError):
+        pass
+    except Exception as e:
+        logger.warning("Experiment lifecycle management failed: %s", e)
+
     # ── Prescription Layer ──
     work_order = None
     try:
@@ -566,6 +680,7 @@ def run_product_audit(conn) -> dict:
         "external_grounding": external_grounding,
         "release_regressions": release_regressions,
         "methodology_grades": methodology_grades,
+        "experiment_actions": experiment_actions,
         # Lifecycle context
         "lifecycle_phase": lifecycle_phase,
         "real_user_count": lifecycle_real_users,
