@@ -3306,6 +3306,20 @@ def admin_intelligence_work_order_current():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@admin_bp.route("/api/admin/intelligence/work-orders/active")
+@admin_required
+@api_error_handler("IntelligenceWorkOrdersActive")
+def admin_intelligence_work_orders_active():
+    """Returns ALL active (non-terminal) work orders."""
+    try:
+        from ..intelligence.prescription import get_active_work_orders
+        with db.connection() as conn:
+            orders = get_active_work_orders(conn)
+            return jsonify({"work_orders": orders, "count": len(orders)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @admin_bp.route("/api/admin/intelligence/work-order/<int:wo_id>/implement", methods=["POST"])
 @admin_required
 @api_error_handler("IntelligenceWorkOrderImplement")
@@ -5040,6 +5054,26 @@ def admin_counter_metrics_rules():
     })
 
 
+@admin_bp.route("/api/admin/analytics/llm-costs")
+@admin_required
+@api_error_handler("LLM Costs")
+def admin_llm_costs():
+    """Daily LLM cost breakdown for the last 30 days."""
+    with db.connection() as conn:
+        daily = conn.execute("""
+            SELECT date(created_at) as day, model, task_type,
+                   SUM(prompt_tokens) as total_prompt_tokens,
+                   SUM(completion_tokens) as total_completion_tokens,
+                   SUM(cost_usd) as total_cost,
+                   COUNT(*) as call_count
+            FROM llm_cost_log
+            WHERE created_at >= datetime('now', '-30 days')
+            GROUP BY day, model, task_type
+            ORDER BY day DESC
+        """).fetchall()
+        return jsonify({"daily_costs": [dict(r) for r in (daily or [])]})
+
+
 @admin_bp.route("/api/admin/counter-metrics/holdout")
 @admin_required
 @api_error_handler("Counter-metrics holdout probes")
@@ -5064,3 +5098,30 @@ def admin_counter_metrics_map():
         "map": COUNTER_METRIC_MAP,
         "thresholds": ALERT_THRESHOLDS,
     })
+
+
+@admin_bp.route("/api/admin/spc/charts")
+@admin_required
+def admin_spc_charts():
+    from ..quality.spc import get_spc_charts
+    with db.connection() as conn:
+        charts = get_spc_charts(conn)
+        return jsonify(charts)
+
+
+@admin_bp.route("/api/admin/analytics/cohort-retention")
+@admin_required
+def admin_cohort_retention():
+    from ..analytics.clv import compute_cohort_retention
+    with db.connection() as conn:
+        cohorts = compute_cohort_retention(conn)
+        return jsonify({"cohorts": cohorts})
+
+
+@admin_bp.route("/api/admin/analytics/clv")
+@admin_required
+def admin_clv():
+    from ..analytics.clv import compute_ltv
+    with db.connection() as conn:
+        ltv = compute_ltv(conn)
+        return jsonify(ltv)

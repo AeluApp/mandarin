@@ -83,6 +83,7 @@ _VERIFICATION_WINDOWS = {
     "accountability": 7,
     "commercial": 30,
     "agentic": 7,
+    "cross_platform": 14,
 }
 
 # Correlated dimension pairs for RCA graph edges
@@ -113,6 +114,7 @@ _CORRELATED_DIMENSIONS = {
     ("strategic", "profitability"),
     ("governance", "security"),
     ("data_quality", "engineering"),
+    ("platform", "cross_platform"),
 }
 
 # Rule-based learner archetype definitions
@@ -331,7 +333,7 @@ _USER_BEHAVIOR_DIMENSIONS = {
     "engagement",       # engagement metrics need real users
     "drill_quality",    # drill accuracy/completion rates from admin testing
     "frustration",      # frustration signals from admin debugging
-    "platform",         # platform usage distribution needs real users
+    # "platform" moved to _CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS (code-inspectable)
     "encounter_loop",   # lookup-to-drill funnel needs real learner behavior
     "scheduler_audit",  # session completion % polluted by admin bouncing on bugs
     "srs_funnel",       # SRS progression metrics need real learners
@@ -363,6 +365,7 @@ _CODE_ASSESSABLE_DOWNGRADE_DIMENSIONS = {
     "methodology",       # process-maturity coverage is real but not critical pre-launch
     "strategic",         # content/competitive gaps are real insights, not emergencies
     "genai_governance",  # "unreviewed" findings are schema artifacts pre-launch
+    "platform",          # code-inspectable (Flutter parity, config health) even pre-launch
 }
 
 
@@ -387,6 +390,34 @@ def _lifecycle_phase(conn) -> str:
     if real_users >= _PHASE_THRESHOLDS["early"]:
         return "early"
     return "pre_launch"
+
+
+def _check_phase_transition(conn) -> list[dict]:
+    """Emit a finding when the product lifecycle phase changes."""
+    current_phase = _lifecycle_phase(conn)
+    try:
+        last_row = conn.execute(
+            "SELECT dimension_scores FROM product_audit ORDER BY run_at DESC LIMIT 1"
+        ).fetchone()
+        if last_row and last_row[0]:
+            import json as _json
+            scores = _json.loads(last_row[0])
+            last_phase = scores.get("_lifecycle_phase")
+            if last_phase and last_phase != current_phase:
+                return [_finding(
+                    "pm", "low",
+                    f"Lifecycle phase transition: {last_phase} → {current_phase}",
+                    f"Product transitioned from {last_phase} to {current_phase}. "
+                    f"Scoring weights have been adjusted automatically. "
+                    f"Previously suppressed user-behavior dimensions are now active.",
+                    "Review dimension scores — previously suppressed dimensions are now active.",
+                    "Run product audit and review all dimensions that were previously suppressed.",
+                    "Product lifecycle",
+                    [],
+                )]
+    except Exception:
+        pass
+    return []
 
 
 def suppress_low_sample_findings(conn, findings: list[dict]) -> list[dict]:

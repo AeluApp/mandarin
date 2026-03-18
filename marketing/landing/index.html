@@ -752,7 +752,7 @@
         <div class="pricing-card featured">
           <div class="pricing-label">Full access</div>
           <h3>Learner</h3>
-          <div class="pricing-price">$14.99 <span>/month</span></div>
+          <div class="pricing-price" id="price-display">$14.99 <span>/month</span></div>
           <ul class="pricing-features">
             <li>HSK 1-9 full curriculum</li>
             <li>All 44 drill types</li>
@@ -808,6 +808,26 @@
   </footer>
 
   <script src="/marketing.js"></script>
+  <script>
+    // Price display experiment — fetch variant and update if active
+    (function() {
+      try {
+        fetch("/api/experiment/price-variant").then(function(r) {
+          return r.json();
+        }).then(function(data) {
+          if (data && data.price_display) {
+            var el = document.getElementById("price-display");
+            if (el) {
+              var parts = data.price_display.split("/");
+              var amount = parts[0] || data.price_display;
+              var period = parts[1] ? "<span>/" + parts[1] + "</span>" : "<span>/month</span>";
+              el.innerHTML = amount + " " + period;
+            }
+          }
+        }).catch(function() {});
+      } catch (e) {}
+    })();
+  </script>
 
 </body>
 </html>

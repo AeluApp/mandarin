@@ -477,31 +477,136 @@ _AUTO_EXECUTABLE_ACTIONS = {
     "refresh_rag",          # Refresh RAG knowledge base
     "update_difficulty",    # Adjust difficulty parameters
     "apply_parameter",      # Auto-apply parameter change (high-confidence influence model)
+    "fix_css",              # CSS/design fixes — queued for LangGraph agent
+    "fix_template",         # Template/HTML fixes — queued for LangGraph agent
+    "fix_config",           # Config/threshold changes — queued for LangGraph agent
+    "fix_security",         # Security hardening — queued for LangGraph agent
+    "sync_platform",        # Platform sync — queued for LangGraph agent
+    "fix_code",             # Bug fixes, slow endpoints, error handling — LangGraph
+    "schedule_task",        # Set up recurring jobs, audit schedules — LangGraph
 }
 
 
-def classify_prescription(instruction: str, target_parameter: str = None,
-                          confidence_label: str = None,
-                          instruction_source: str = None) -> str:
-    """Classify whether a prescription is auto-executable or requires human judgment."""
+def _classify_keywords(instruction: str, target_parameter: str = None,
+                       confidence_label: str = None,
+                       instruction_source: str = None) -> str:
+    """Fast keyword-based classification (no LLM call)."""
     instruction_lower = (instruction or "").lower()
 
-    if "generate" in instruction_lower and "content" in instruction_lower:
-        return "generate_content"
+    # Content generation — broad matching
+    if any(kw in instruction_lower for kw in ("generate", "create", "produce", "populate")):
+        if any(kw in instruction_lower for kw in
+               ("content", "drill", "reading", "passage", "example", "sentence",
+                "tone", "exercise", "item", "text")):
+            return "generate_content"
+    if "review queue" in instruction_lower or "pending" in instruction_lower:
+        if any(kw in instruction_lower for kw in ("approve", "review", "process", "clear")):
+            return "generate_content"
+
     if "calibrat" in instruction_lower and ("fsrs" in instruction_lower or "parameter" in instruction_lower):
         return "recalibrate_fsrs"
-    if "rag" in instruction_lower and ("refresh" in instruction_lower or "update" in instruction_lower):
-        return "refresh_rag"
+
+    # RAG knowledge base
+    if any(kw in instruction_lower for kw in ("rag", "knowledge base", "cedict")):
+        if any(kw in instruction_lower for kw in ("refresh", "update", "import", "add", "populate")):
+            return "refresh_rag"
+
     if "difficulty" in instruction_lower and ("adjust" in instruction_lower or "update" in instruction_lower):
         return "update_difficulty"
 
-    # High-confidence parameter changes from the influence model can be auto-applied
+    # High-confidence influence model parameter changes
     if (instruction_source == "influence_model"
             and confidence_label == "high"
             and target_parameter):
         return "apply_parameter"
 
+    # Platform sync (specific keywords first)
+    if any(kw in instruction_lower for kw in ("capacitor", "tauri", "flutter", "cap sync")):
+        return "sync_platform"
+    # Security hardening
+    if any(kw in instruction_lower for kw in ("security", "rate limit", "harden", "csrf", "xss")):
+        return "fix_security"
+    # Bug fixes, crashes, slow endpoints
+    if any(kw in instruction_lower for kw in ("crash", "slow endpoint", "bug", "error rate", "fix the")):
+        return "fix_code"
+    # Scheduling/cron/audit scheduling
+    if any(kw in instruction_lower for kw in ("schedule", "cron", "recurring", "periodic", "audit overdue",
+                                               "conduct", "run audit", "overdue")):
+        return "schedule_task"
+    # CSS/design fixes
+    if any(kw in instruction_lower for kw in ("css", "style", "color", "font", "spacing", "animation")):
+        return "fix_css"
+    # Template/HTML fixes
+    if any(kw in instruction_lower for kw in ("template", "html", "meta", "favicon", "viewport")):
+        return "fix_template"
+    # Config/threshold/performance tuning
+    if any(kw in instruction_lower for kw in
+           ("config", "threshold", "latency", "timeout", "performance", "endpoint",
+            "flag", "interference", "retrain", "model version")):
+        return "fix_config"
+
     return "requires_human"
+
+
+def _classify_via_llm(instruction: str, conn=None) -> str:
+    """Use LLM to classify prescriptions that keywords missed."""
+    if conn is None:
+        return "requires_human"
+    try:
+        from .ollama_client import generate
+
+        prompt = (
+            "Classify this work order instruction into exactly one category.\n\n"
+            f"INSTRUCTION: {instruction[:500]}\n\n"
+            "CATEGORIES:\n"
+            "- generate_content: Create drills, readings, passages, examples, sentences, fill content gaps\n"
+            "- recalibrate_fsrs: Calibrate spaced repetition parameters\n"
+            "- refresh_rag: Import or update RAG knowledge base entries, add example sentences\n"
+            "- update_difficulty: Adjust difficulty thresholds or prediction parameters\n"
+            "- fix_css: Modify CSS styles, colors, fonts, spacing, design tokens\n"
+            "- fix_template: Modify HTML templates, meta tags, page structure\n"
+            "- fix_config: Change config values, thresholds, timeouts, performance tuning\n"
+            "- fix_security: Harden security, rate limiting, CSRF, XSS\n"
+            "- sync_platform: Capacitor/Tauri/Flutter sync or platform-specific changes\n"
+            "- fix_code: Fix bugs, slow endpoints, crashes, error handling (Python/JS)\n"
+            "- schedule_task: Set up recurring jobs, audit schedules, cron tasks\n"
+            "- requires_human: Strategic decisions, business model choices, competitive positioning\n\n"
+            "Respond with ONLY the category name, nothing else."
+        )
+        resp = generate(
+            prompt=prompt,
+            system="You are a classification engine. Output only the category name.",
+            temperature=0.0, max_tokens=30, use_cache=True,
+            conn=conn, task_type="classify_prescription",
+        )
+        if not resp.success:
+            return "requires_human"
+
+        category = resp.text.strip().lower().replace(" ", "_").replace("-", "_")
+        # Strip any surrounding quotes or punctuation
+        category = category.strip("\"'`.,;:")
+        return category if category in _AUTO_EXECUTABLE_ACTIONS else "requires_human"
+
+    except Exception:
+        return "requires_human"
+
+
+def classify_prescription(instruction: str, target_parameter: str = None,
+                          confidence_label: str = None,
+                          instruction_source: str = None,
+                          conn=None) -> str:
+    """Classify whether a prescription is auto-executable or requires human judgment.
+
+    Tries fast keyword matching first. If that returns requires_human and a DB
+    connection is available, falls back to LLM classification.
+    """
+    # Fast path: keyword matching
+    result = _classify_keywords(instruction, target_parameter, confidence_label, instruction_source)
+    if result != "requires_human":
+        return result
+
+    # Slow path: LLM classification for anything keywords missed
+    return _classify_via_llm(instruction, conn)
 
 
 def execute_prescription(conn: sqlite3.Connection, work_order_id: int) -> dict:
@@ -537,6 +642,7 @@ def execute_prescription(conn: sqlite3.Connection, work_order_id: int) -> dict:
         instruction, target_param,
         confidence_label=confidence_label,
         instruction_source=instruction_source,
+        conn=conn,
     )
 
     if action_type not in _AUTO_EXECUTABLE_ACTIONS:
@@ -598,7 +704,31 @@ def _execute_action(conn: sqlite3.Connection, action_type: str, work_order) -> d
     elif action_type == "apply_parameter":
         return _execute_parameter_change(conn, work_order)
 
+    elif action_type in ("fix_css", "fix_template", "fix_config", "fix_security",
+                         "sync_platform", "fix_code", "schedule_task"):
+        return _queue_for_langgraph(conn, action_type, work_order)
+
     return {"status": "unknown_action"}
+
+
+def _queue_for_langgraph(conn, action_type: str, work_order) -> dict:
+    """Queue a prescription for the LangGraph autonomous agent."""
+    try:
+        conn.execute("""
+            INSERT INTO prescription_execution_log
+            (work_order_id, action_type, status, result_data)
+            VALUES (?, ?, 'queued_for_agent', ?)
+        """, (
+            work_order["id"],
+            action_type,
+            json.dumps({"instruction": work_order["instruction"],
+                        "target_file": work_order.get("target_file", ""),
+                        "finding_id": work_order.get("finding_id")}),
+        ))
+        conn.commit()
+        return {"status": "queued_for_agent", "action_type": action_type}
+    except Exception as e:
+        return {"status": "error", "reason": str(e)}
 
 
 def _execute_parameter_change(conn: sqlite3.Connection, work_order) -> dict:

@@ -28,3 +28,41 @@ Business automation:
 - financial_monitor: Revenue metrics, churn analysis, payment anomaly detection
 - compliance_monitor: AI regulatory monitoring (EU AI Act, GDPR, FERPA, COPPA, 10 surfaces)
 """
+
+import logging
+
+_logger = logging.getLogger(__name__)
+
+
+def notify_owner(message: str) -> bool:
+    """Send a proactive notification to the product owner via the best available channel.
+
+    Tries channels in priority order: iMessage (macOS-native) → Telegram → Discord.
+    Returns True if any channel delivered successfully.
+    """
+    # Try iMessage first (macOS only, zero deps)
+    try:
+        from .imessage_bot import send_imessage_notification
+        if send_imessage_notification(message):
+            return True
+    except (ImportError, Exception):
+        pass
+
+    # Try Telegram
+    try:
+        from .telegram_bot import send_telegram_notification
+        if send_telegram_notification(message):
+            return True
+    except (ImportError, Exception):
+        pass
+
+    # Try Discord
+    try:
+        from .discord_bot import send_discord_notification
+        if send_discord_notification(message):
+            return True
+    except (ImportError, Exception):
+        pass
+
+    _logger.debug("notify_owner: no channel available for message: %s", message[:100])
+    return False

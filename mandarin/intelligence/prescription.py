@@ -108,7 +108,22 @@ _FINDING_TO_ACTION = {
     # encounter_loop
     ("encounter_loop", ""): ("mandarin/scheduler.py", "encounter_cleanup", "improve"),
     # platform
-    ("platform", ""): ("mandarin/web/routes.py", "cross_platform", "improve"),
+    ("platform", "capacitor"): ("mobile/capacitor.config.ts", "cap_config", "fix"),
+    ("platform", "flutter"): ("flutter_app/lib/api/api_client.dart", "flutter_parity", "improve"),
+    ("platform", "tauri"): ("desktop/tauri-app/src-tauri/tauri.conf.json", "tauri_config", "fix"),
+    ("platform", ""): ("mandarin/web/static/", "cross_platform", "improve"),
+    # genai
+    ("genai", "model"): ("mandarin/ai/ollama_client.py", "model_selection", "improve"),
+    ("genai", "streaming"): ("mandarin/ai/ollama_client.py", "streaming", "add"),
+    ("genai", "quality"): ("mandarin/ai/genai_layer.py", "output_quality", "improve"),
+    ("genai", "failure"): ("mandarin/ai/ollama_client.py", "error_handling", "fix"),
+    ("genai", "latency"): ("mandarin/ai/ollama_client.py", "performance", "improve"),
+    ("genai", ""): ("mandarin/ai/genai_layer.py", "genai_pipeline", "improve"),
+    # agentic
+    ("agentic", "memory"): ("mandarin/ai/memory.py", "conversation_memory", "add"),
+    ("agentic", "notification"): ("mandarin/openclaw/__init__.py", "notifications", "add"),
+    ("agentic", "coverage"): ("mandarin/ai/agentic.py", "action_types", "expand"),
+    ("agentic", ""): ("mandarin/ai/agentic.py", "agentic_pipeline", "improve"),
     # flow
     ("flow", ""): ("mandarin/web/session_routes.py", "session_flow", "improve"),
     # curriculum
@@ -627,6 +642,46 @@ def get_current_work_order(conn):
         "finding_severity": row["finding_severity"],
         "finding_status": row["finding_status"],
     }
+
+
+def get_active_work_orders(conn) -> list:
+    """Return ALL non-terminal work orders with finding details."""
+    rows = _safe_query_all(conn, """
+        SELECT wo.*, pf.title as finding_title, pf.dimension as finding_dimension,
+               pf.severity as finding_severity, pf.status as finding_status
+        FROM pi_work_order wo
+        JOIN pi_finding pf ON wo.finding_id = pf.id
+        WHERE wo.status NOT IN ('succeeded', 'failed', 'stale', 'superseded')
+        ORDER BY wo.created_at DESC
+    """)
+    if not rows:
+        return []
+
+    result = []
+    for row in rows:
+        wo = {
+            "id": row["id"],
+            "audit_cycle_id": row["audit_cycle_id"],
+            "finding_id": row["finding_id"],
+            "constraint_dimension": row["constraint_dimension"],
+            "instruction": row["instruction"],
+            "target_file": row["target_file"],
+            "status": row["status"],
+            "finding_title": row["finding_title"],
+            "finding_dimension": row["finding_dimension"],
+            "finding_severity": row["finding_severity"],
+        }
+        # Include slot and platform_status if available
+        try:
+            wo["slot"] = row["slot"]
+        except (IndexError, KeyError):
+            pass
+        try:
+            wo["platform_status"] = row["platform_status"]
+        except (IndexError, KeyError):
+            pass
+        result.append(wo)
+    return result
 
 
 def get_work_order_history(conn, limit: int = 20) -> list:

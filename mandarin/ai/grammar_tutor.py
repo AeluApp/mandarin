@@ -235,6 +235,69 @@ def generate_mini_lesson(conn, grammar_point_id: int) -> dict:
     }
 
 
+# ── Prerequisite checking (Pienemann's Processability Theory) ──────
+
+def check_prerequisites(conn, user_id: int, grammar_point_id: int) -> dict:
+    """Check if prerequisites for a grammar point are met.
+
+    Uses the grammar_prerequisites DAG to determine whether the learner
+    has sufficient mastery of prerequisite grammar points before advancing.
+
+    Returns:
+        {
+            'all_met': bool,
+            'blocking': list of {id, title, mastery_score, relationship},
+            'met': list of {id, title, mastery_score, relationship},
+        }
+    """
+    try:
+        prereqs = conn.execute("""
+            SELECT gp_req.grammar_point_id, gp_req.prerequisite_id,
+                   gp_req.relationship,
+                   g.name as prereq_title
+            FROM grammar_prerequisites gp_req
+            JOIN grammar_point g ON gp_req.prerequisite_id = g.id
+            WHERE gp_req.grammar_point_id = ?
+        """, (grammar_point_id,)).fetchall()
+    except Exception:
+        # Table may not exist yet (pre-migration)
+        return {'all_met': True, 'blocking': [], 'met': []}
+
+    if not prereqs:
+        return {'all_met': True, 'blocking': [], 'met': []}
+
+    blocking = []
+    met = []
+    for prereq in prereqs:
+        # Check learner's mastery of this prerequisite via grammar_progress
+        mastery = conn.execute("""
+            SELECT mastery_score FROM grammar_progress
+            WHERE user_id = ? AND grammar_point_id = ?
+        """, (user_id, prereq['prerequisite_id'])).fetchone()
+
+        score = mastery['mastery_score'] if mastery else 0.0
+        info = {
+            'id': prereq['prerequisite_id'],
+            'title': prereq['prereq_title'],
+            'mastery_score': score,
+            'relationship': prereq['relationship'],
+        }
+
+        # Threshold depends on relationship type
+        if prereq['relationship'] == 'requires' and score < 0.7:
+            blocking.append(info)
+        elif prereq['relationship'] == 'recommended' and score < 0.5:
+            blocking.append(info)
+        else:
+            met.append(info)
+
+    return {
+        'all_met': len(blocking) == 0,
+        'blocking': blocking,
+        'met': met,
+    }
+
+
 # ── Helpers ───────────────────────────────────────────────
 
 def _get_grammar_point(conn, grammar_point_id: int) -> Optional[dict]:

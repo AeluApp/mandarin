@@ -1718,6 +1718,36 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   font-family: var(--font-body);
 }
 
+/* ── Prerequisite notice toast ────────────────── */
+
+.prereq-notice {
+  position: fixed;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: opacity 0.4s var(--ease-upward), transform 0.4s var(--ease-upward);
+  pointer-events: none;
+  max-width: 90vw;
+}
+.prereq-notice.prereq-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.prereq-notice.prereq-exit {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-10px);
+}
+
 /* ── Disconnect banner ────────────────────────── */
 
 #disconnect-banner.banner-exit {
@@ -3805,6 +3835,62 @@ html[data-theme="dark"] .empty-state-illustration {
 /* Adaptive script — known vs unknown word styling */
 .reading-word.unknown {
   border-bottom-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* ── Reading block (cleanup loop: exposure → drills → re-read) ──── */
+
+.reading-block {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.reading-block-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.reading-block-title {
+  font-family: var(--font-hanzi);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-3);
+}
+
+.reading-block-text {
+  font-family: var(--font-hanzi);
+  font-size: var(--text-2xl);
+  line-height: 2;
+  text-align: left;
+  margin-bottom: var(--space-4);
+}
+
+.reading-block-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-3);
+}
+
+.reading-block-ready {
+  margin-top: var(--space-3);
+}
+
+/* Re-read mode: drilled words get a subtle green glow */
+.reading-word-drilled {
+  background: rgba(76, 175, 80, 0.15);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+/* Exposure label styling */
+.reading-block-exposure .reading-block-label {
+  color: var(--color-accent);
+}
+
+/* Re-read label styling */
+.reading-block-reread .reading-block-label {
+  color: var(--color-correct);
 }
 
 .reading-text ruby {
@@ -9150,4 +9236,75 @@ html, body {
     font-size: 14px;
     padding: 4px;
   }
+}
+
+/* ── Academic Features (Learning Science) ──────────────────────────── */
+
+/* Minimal Pair Drills */
+.minimal-pair { text-align: center; padding: 1.5rem; }
+.mp-label { font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; }
+.mp-question { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; }
+.mp-options { display: flex; gap: 1rem; justify-content: center; }
+.mp-option { flex: 1; max-width: 180px; padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid #e0e0e0; background: #fff; cursor: pointer; transition: all 0.2s; }
+.mp-option:hover { border-color: #2196F3; }
+.mp-option.selected { border-color: #2196F3; background: #e3f2fd; }
+.mp-hanzi { font-size: 2rem; margin-bottom: 0.5rem; }
+.mp-pinyin { font-size: 0.9rem; color: #888; }
+.mp-hint { font-size: 0.8rem; color: #999; margin-top: 1rem; font-style: italic; }
+.mp-feedback { margin-top: 1rem; padding: 0.75rem; border-radius: 8px; }
+.mp-feedback.correct { background: rgba(76, 175, 80, 0.1); color: #2e7d32; }
+.mp-feedback.incorrect { background: rgba(244, 67, 54, 0.1); color: #c62828; }
+
+/* Tone Sandhi Drills */
+.sandhi-drill { text-align: center; padding: 1.5rem; }
+.sandhi-label { font-size: 0.8rem; color: #2196F3; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.sandhi-hanzi { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.sandhi-question { font-size: 1rem; color: #666; margin-bottom: 1.5rem; }
+.sandhi-options { display: flex; gap: 0.75rem; justify-content: center; }
+.sandhi-option { padding: 1rem 2rem; border-radius: 10px; border: 2px solid #e0e0e0; background: #fff; font-size: 1rem; cursor: pointer; transition: all 0.2s; }
+.sandhi-option:hover { border-color: #2196F3; }
+.sandhi-option.selected { border-color: #2196F3; background: #e3f2fd; }
+.sandhi-feedback { margin-top: 1rem; padding: 0.75rem; border-radius: 8px; }
+.sandhi-feedback.correct { background: rgba(76, 175, 80, 0.1); color: #2e7d32; }
+.sandhi-feedback.incorrect { background: rgba(244, 67, 54, 0.1); color: #c62828; }
+.sandhi-explanation { font-size: 0.85rem; margin-top: 0.5rem; color: #555; }
+
+/* Character Decomposition (Shen 2005, Taft & Zhu 1997) */
+.char-decomposition { position: relative; background: var(--color-surface-alt, #EAE2D6); border-radius: 12px; padding: var(--space-5); margin-bottom: var(--space-4); text-align: center; border: 1px solid var(--color-divider, #D8D0C4); animation: fadeIn 0.3s ease; cursor: pointer; }
+.char-decomp-main { font-size: var(--text-display, 3rem); font-family: var(--font-hanzi); margin-bottom: var(--space-3); line-height: var(--lh-display, 1.1); }
+.char-decomp-radical { display: flex; align-items: center; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+.char-decomp-radical-char { font-size: var(--text-xl, 1.5rem); font-family: var(--font-hanzi); color: var(--color-accent, #946070); }
+.char-decomp-radical-meaning { font-size: var(--text-sm, 0.9rem); color: var(--color-text-dim, #5A6678); }
+.char-decomp-phonetic { font-size: var(--text-sm, 0.85rem); color: var(--color-text-dim, #5A6678); margin-bottom: var(--space-2); }
+.char-decomp-family { font-size: var(--text-lg, 1.1rem); font-family: var(--font-hanzi); letter-spacing: 0.3em; color: var(--color-text-faint, #6A7080); margin-bottom: var(--space-2); }
+.char-decomp-dismiss { font-size: var(--text-xs, 0.75rem); color: var(--color-text-faint, #6A7080); margin-top: var(--space-2); }
+
+/* Metacognitive Prompts */
+.meta-prompt { text-align: center; padding: 1.5rem; }
+.meta-label { font-size: 0.9rem; color: #888; margin-bottom: 0.75rem; }
+.meta-question { font-size: 1rem; margin-bottom: 1rem; }
+.meta-options { display: flex; gap: 0.5rem; justify-content: center; }
+.meta-options-col { flex-direction: column; max-width: 280px; margin: 0 auto; }
+.meta-option { padding: 0.75rem 1.25rem; border-radius: 8px; border: 2px solid #e0e0e0; background: #fff; cursor: pointer; transition: all 0.2s; }
+.meta-option:hover { border-color: #2196F3; }
+
+/* Session Choice (SDT Autonomy) */
+.session-choice { text-align: center; padding: 2rem; }
+.session-choice-label { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; }
+.session-choice-options { display: flex; flex-direction: column; gap: 0.75rem; max-width: 300px; margin: 0 auto; }
+.session-choice-option { padding: 1rem; border-radius: 10px; border: 2px solid #e0e0e0; background: #fff; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+.session-choice-option:hover { border-color: #2196F3; transform: translateY(-1px); }
+
+/* Competence Toast (SDT) */
+.competence-toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: #2196F3; color: white; padding: 0.75rem 1.5rem; border-radius: 10px; font-size: 0.9rem; opacity: 0; transition: all 0.3s; z-index: 1000; }
+.competence-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Dark mode overrides for academic features */
+@media (prefers-color-scheme: dark) {
+  .mp-option, .sandhi-option, .meta-option, .session-choice-option { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+  .mp-option:hover, .sandhi-option:hover, .meta-option:hover, .session-choice-option:hover { border-color: #64b5f6; }
+  .mp-option.selected, .sandhi-option.selected { background: #1a237e; border-color: #64b5f6; }
+  .char-decomposition { background: var(--color-surface-alt); border-color: var(--color-divider); }
 }

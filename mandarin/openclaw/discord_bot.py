@@ -179,7 +179,8 @@ async def _handle_natural_language(message) -> None:
             await message.reply("I couldn't process that. Try `!help`.")
             return
 
-        intent_result = llm_handler.classify_intent(clean_text, conn=conn)
+        discord_user_id = str(message.author.id)[:20]
+        intent_result = llm_handler.classify_intent(clean_text, conn=conn, user_id=discord_user_id)
         response = _execute_intent(intent_result, conn)
 
         if conn:
@@ -190,6 +191,13 @@ async def _handle_natural_language(message) -> None:
                 tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
                 tool_result=response[:500],
             )
+
+        # Store conversation turn in memory
+        try:
+            from ..ai.memory import add_memory
+            add_memory(discord_user_id, clean_text, response, channel="discord")
+        except (ImportError, Exception):
+            pass
 
         safe = security.sanitize_output(response)
         for chunk in _chunk_message(safe or "Try `!help`.", 2000):

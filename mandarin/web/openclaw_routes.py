@@ -122,60 +122,85 @@ def notify():
 
     safe_message = security.sanitize_output(message)
     channel = data.get("channel", "all")
+
+    # Pre-check which channels are actually configured to avoid
+    # pointless send attempts and noisy 503 responses.
+    available = {}
+    if channel in ("whatsapp", "all"):
+        available["whatsapp"] = whatsapp_bot.is_configured()
+    if channel in ("imessage", "all"):
+        try:
+            from ..openclaw.imessage_bot import is_configured as imessage_configured
+            available["imessage"] = imessage_configured()
+        except ImportError:
+            available["imessage"] = False
+    if channel in ("telegram", "all"):
+        telegram_ok = bool(OPENCLAW_TELEGRAM_TOKEN and security.OWNER_CHAT_ID)
+        try:
+            import telegram as _tg_mod  # noqa: F401
+            available["telegram"] = telegram_ok
+        except ImportError:
+            available["telegram"] = False
+
+    configured = [ch for ch, ok in available.items() if ok]
+    if not configured:
+        # Return 200 (not 503) so callers like n8n don't retry endlessly.
+        return jsonify({
+            "status": "skipped",
+            "reason": "no channels configured",
+            "checked": list(available.keys()),
+        })
+
     sent_via = []
+    errors = []
 
     # WhatsApp
-    if channel in ("whatsapp", "all"):
+    if "whatsapp" in configured:
         try:
             if whatsapp_bot.send_to_owner(safe_message):
                 sent_via.append("whatsapp")
         except Exception as e:
             logger.debug("WhatsApp notify failed: %s", e)
+            errors.append("whatsapp")
 
     # iMessage
-    if channel in ("imessage", "all"):
+    if "imessage" in configured:
         try:
             from ..openclaw.imessage_bot import send_to_owner as imessage_send
             if imessage_send(safe_message):
                 sent_via.append("imessage")
         except Exception as e:
             logger.debug("iMessage notify failed: %s", e)
+            errors.append("imessage")
 
     # Telegram
-    if channel in ("telegram", "all"):
+    if "telegram" in configured:
         try:
             import asyncio
+            from telegram import Bot
 
             async def _send_telegram():
-                from telegram import Bot
-                if not OPENCLAW_TELEGRAM_TOKEN:
-                    return False
                 bot = Bot(token=OPENCLAW_TELEGRAM_TOKEN)
-                owner_id = security.OWNER_CHAT_ID
-                if not owner_id:
-                    return False
-                await bot.send_message(chat_id=owner_id, text=safe_message)
+                await bot.send_message(
+                    chat_id=security.OWNER_CHAT_ID, text=safe_message,
+                )
                 return True
 
-            try:
-                loop = asyncio.get_event_loop()
-                if loop.is_running():
-                    import concurrent.futures
-                    with concurrent.futures.ThreadPoolExecutor() as pool:
-                        ok = pool.submit(lambda: asyncio.run(_send_telegram())).result(timeout=10)
-                else:
-                    ok = loop.run_until_complete(_send_telegram())
-            except RuntimeError:
-                ok = asyncio.run(_send_telegram())
-
+            ok = asyncio.run(_send_telegram())
             if ok:
                 sent_via.append("telegram")
-        except (ImportError, Exception) as e:
+        except Exception as e:
             logger.debug("Telegram notify failed: %s", e)
+            errors.append("telegram")
 
     if sent_via:
         return jsonify({"status": "sent", "channels": sent_via})
-    return jsonify({"error": "no channels available or configured"}), 503
+    return jsonify({
+        "status": "failed",
+        "error": "all configured channels failed to send",
+        "configured": configured,
+        "failed": errors,
+    }), 502
 
 
 # ── WhatsApp webhook ──────────────────────────────────────

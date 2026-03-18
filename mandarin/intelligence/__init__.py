@@ -227,6 +227,27 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import discipline analyzers (visual design, animation, sound, copy, etc.)
+    try:
+        from .analyzers_discipline import ANALYZERS as DISCIPLINE_ANALYZERS
+        all_analyzers = all_analyzers + DISCIPLINE_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import cross-platform analyzers (Phase 5)
+    try:
+        from .analyzers_platform import ANALYZERS as PLATFORM_ANALYZERS
+        all_analyzers = all_analyzers + PLATFORM_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import AI/GenAI/agentic technology analyzers (Phase 7)
+    try:
+        from .analyzers_ai import ANALYZERS as AI_ANALYZERS
+        all_analyzers = all_analyzers + AI_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:
@@ -425,8 +446,6 @@ def run_product_audit(conn) -> dict:
         logger.warning("DMAIC logging failed: %s", e)
 
     # ── Operational Lifecycle Functions ──
-    # Run stale finding detection, false negative estimation, and threshold
-    # calibration so methodology_coverage detects Six Sigma / Lean / Kanban activity.
     try:
         from .finding_lifecycle import check_stale_findings, estimate_false_negatives
         stale_new = check_stale_findings(conn)
@@ -447,9 +466,6 @@ def run_product_audit(conn) -> dict:
         logger.warning("Threshold calibration failed: %s", e)
 
     # ── Agentic Experiment Lifecycle ──
-    # Autonomously manage running experiments: check sequential tests,
-    # monitor guardrails, auto-conclude when criteria are met, and emit
-    # findings with takeaways from concluded experiments.
     experiment_actions = []
     try:
         from ..experiments import (
@@ -459,11 +475,8 @@ def run_product_audit(conn) -> dict:
         running = list_experiments(conn, status="running")
         for exp in running:
             exp_name = exp.get("name", "")
-            # Sequential test: should we stop early?
             seq = sequential_test(conn, exp_name)
             recommendation = seq.get("recommendation", "continue")
-
-            # Check guardrails for degradation
             guardrail_results = check_guardrails(conn, exp_name)
             degraded_guardrails = [
                 m for m, v in guardrail_results.items() if v.get("degraded")
@@ -480,14 +493,11 @@ def run_product_audit(conn) -> dict:
                     ["mandarin/experiments.py"],
                 ))
                 recommendation = "stop_guardrail"
-
             if recommendation in ("stop_winner", "stop_futility", "stop_guardrail"):
-                # Auto-conclude the experiment
                 results = get_experiment_results(conn, exp_name)
                 winner = "none"
                 notes_parts = [f"Auto-concluded by audit: recommendation={recommendation}."]
                 if recommendation == "stop_winner":
-                    # Determine the winner from results
                     variants = results.get("variants", {})
                     best_variant = max(
                         variants.items(),
@@ -511,32 +521,54 @@ def run_product_audit(conn) -> dict:
                 conclude_experiment(conn, exp_name, winner=winner,
                                     notes=" ".join(notes_parts))
                 experiment_actions.append({
-                    "experiment": exp_name,
-                    "action": "concluded",
-                    "reason": recommendation,
-                    "winner": winner,
+                    "experiment": exp_name, "action": "concluded",
+                    "reason": recommendation, "winner": winner,
                 })
                 findings.append(_finding(
                     "pm", "low",
                     f"Experiment '{exp_name}' concluded: {recommendation}",
-                    f"Experiment '{exp_name}' was auto-concluded by the audit system. "
-                    f"Reason: {recommendation}. Winner: {winner}.",
+                    f"Experiment '{exp_name}' was auto-concluded. Reason: {recommendation}. Winner: {winner}.",
                     f"Review experiment results and implement the winning variant if applicable.",
                     f"Review results of concluded experiment '{exp_name}' and apply learnings.",
                     "Experiment lifecycle automation",
                     ["mandarin/experiments.py"],
                 ))
             else:
-                info_frac = seq.get("information_fraction", 0)
                 experiment_actions.append({
-                    "experiment": exp_name,
-                    "action": "continue",
-                    "info_fraction": info_frac,
+                    "experiment": exp_name, "action": "continue",
+                    "info_fraction": seq.get("information_fraction", 0),
                 })
     except (ImportError, AttributeError):
         pass
     except Exception as e:
         logger.warning("Experiment lifecycle management failed: %s", e)
+
+    # ── Meta-Intelligence: GenAI validates the intelligence system itself ──
+    try:
+        from .meta_intelligence import (
+            meta_validate_dimensions, meta_validate_findings,
+            meta_validate_scoring, meta_suggest_criteria,
+        )
+        meta_findings = []
+        meta_findings.extend(meta_validate_dimensions(conn, dimension_scores))
+        meta_findings.extend(meta_validate_findings(conn, findings))
+        meta_findings.extend(meta_validate_scoring(conn, dimension_scores))
+        for dim, info in dimension_scores.items():
+            if info.get("score", 0) >= 95 and info.get("finding_count", 0) == 0:
+                meta_findings.extend(meta_suggest_criteria(conn, dim, findings))
+        if meta_findings:
+            findings.extend(meta_findings)
+            m_score, m_grade = _dimension_score(meta_findings, "meta", confidence="medium")
+            dimension_scores["meta"] = {
+                "score": m_score, "grade": m_grade,
+                "finding_count": len(meta_findings), "confidence": "medium",
+            }
+            score_val, grade = _overall_score(dimension_scores)
+            overall = {"score": score_val, "grade": grade}
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.debug("Meta-intelligence failed: %s", e)
 
     # ── Prescription Layer ──
     work_order = None

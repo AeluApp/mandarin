@@ -113,7 +113,8 @@ def _process_message(msg: dict, cfg: dict) -> None:
             return
 
         # Classify and execute
-        intent_result = llm_handler.classify_intent(clean_text, conn=conn)
+        wa_user_id = sender[:20]
+        intent_result = llm_handler.classify_intent(clean_text, conn=conn, user_id=wa_user_id)
         response = _execute_intent(intent_result, conn)
 
         # Log
@@ -125,6 +126,13 @@ def _process_message(msg: dict, cfg: dict) -> None:
                 tool_called=f"cmd_{intent_result.intent}" if intent_result.intent != "chat" else "",
                 tool_result=response[:500],
             )
+
+        # Store conversation turn in memory
+        try:
+            from ..ai.memory import add_memory
+            add_memory(wa_user_id, clean_text, response, channel="whatsapp")
+        except (ImportError, Exception):
+            pass
 
         # Send response
         safe_response = security.sanitize_output(response)

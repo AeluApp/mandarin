@@ -51,6 +51,8 @@ class WebBridge:
         self._last_prompt = None   # (prompt_text, prompt_id) for re-send on resume
         self._prompt_sent_at = None  # monotonic time when last prompt was sent
         self._roundtrip_times = []   # WS roundtrip durations in ms
+        self._word_lookups = []      # hanzi strings accumulated during reading exposure
+        self._word_lookups_lock = threading.Lock()
         logger.info("[%s] WebBridge created", self.session_uuid)
 
     def show_fn(self, text: str, end="\n"):
@@ -159,6 +161,19 @@ class WebBridge:
             self._roundtrip_times.append(rt_ms)
             self._prompt_sent_at = None
         self._answer_queue.put(value)
+
+    def receive_word_lookup(self, hanzi: str):
+        """Called when the browser sends a word_lookup during reading exposure."""
+        with self._word_lookups_lock:
+            if hanzi and hanzi not in self._word_lookups:
+                self._word_lookups.append(hanzi)
+
+    def drain_word_lookups(self) -> list:
+        """Return and clear accumulated word lookups. Thread-safe."""
+        with self._word_lookups_lock:
+            result = list(self._word_lookups)
+            self._word_lookups.clear()
+            return result
 
     def receive_audio_data(self, data, transcript=None):
         """Called when the browser sends recorded audio data (base64 WAV or None).

@@ -550,6 +550,21 @@ def _assess_data_confidence(conn) -> dict:
         else:
             confidence[dim] = "none"
 
+    # Code-inspection dimensions: confidence is based on whether analyzers
+    # actually found something.  If a code-inspection dimension has 0 findings,
+    # confidence should be "low" (not "high") — 0 findings means "we might not
+    # be looking hard enough", not "everything is perfect".
+    _CODE_INSPECTION_DIMS = {
+        "visual_design", "animation", "sound_design", "copywriting",
+        "branding", "mobile_perf", "behavioral_econ", "strategic",
+        "genai", "agentic", "genai_governance", "cross_platform",
+    }
+    for dim in _CODE_INSPECTION_DIMS:
+        if dim not in confidence:
+            # These dimensions rely on static code analyzers, not user data.
+            # Default to "medium" — they produce findings from code inspection.
+            confidence[dim] = "medium"
+
     return confidence
 
 
