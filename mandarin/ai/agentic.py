@@ -591,6 +591,86 @@ def _classify_via_llm(instruction: str, conn=None) -> str:
         return "requires_human"
 
 
+def _design_fix_via_llm(conn, work_order, instruction: str) -> dict | None:
+    """Use LLM to design a specific, executable fix for a finding.
+
+    When keyword + LLM classification both return 'requires_human', this function
+    asks the LLM to translate the abstract recommendation into a concrete action:
+    a parameter change, a config adjustment, or a code fix.
+
+    Returns: {action_type, specific_fix, safe_to_auto_execute, reasoning}
+    or None if the LLM can't design a safe fix.
+    """
+    try:
+        from .ollama_client import generate, is_model_capable
+        if not is_model_capable("experiment_design"):
+            return None
+
+        # Gather context about what parameters are adjustable
+        finding_id = work_order.get("finding_id") or work_order["finding_id"]
+        finding = conn.execute(
+            "SELECT * FROM pi_finding WHERE id = ?", (finding_id,)
+        ).fetchone()
+
+        prompt = f"""You are a Six Sigma Black Belt fixing a problem in a Mandarin learning app.
+
+PROBLEM: {instruction[:400]}
+DIMENSION: {finding['dimension'] if finding else 'unknown'}
+SEVERITY: {finding['severity'] if finding else 'unknown'}
+
+SAFE AUTO-EXECUTABLE ACTIONS (pick one):
+- fix_config: Change a threshold, timeout, or numeric parameter in settings.py
+- recalibrate_fsrs: Re-run spaced repetition calibration
+- generate_content: Create missing drills, passages, or content
+- refresh_rag: Update the knowledge base
+- update_difficulty: Adjust difficulty scaling parameters
+- fix_code: Modify Python/JS code to fix a bug or add a guard
+
+RULES:
+- If the fix is a numeric parameter change, specify the exact parameter name, current value estimate, and new value
+- If the fix requires code changes, describe the specific file and function to modify
+- If the fix is genuinely strategic (pricing, positioning, business model), say "requires_human"
+- Prefer the simplest fix that addresses the root cause
+
+Respond in JSON:
+{{"action_type": "fix_config", "specific_fix": "Reduce NEW_ITEMS_PER_SESSION from 5 to 4 in settings.py to reduce queue pressure", "parameter": "NEW_ITEMS_PER_SESSION", "safe_to_auto_execute": true, "reasoning": "Queue utilization is >85%, reducing new items is safe and reversible"}}"""
+
+        resp = generate(
+            prompt=prompt,
+            system="You are a Six Sigma improvement agent. Output only valid JSON.",
+            temperature=0.2, max_tokens=300, use_cache=True,
+            conn=conn, task_type="experiment_design",
+        )
+        if not resp.success:
+            return None
+
+        import json as _json
+        result = _json.loads(resp.text.strip())
+
+        # Safety check: only auto-execute if the LLM says it's safe
+        if not result.get("safe_to_auto_execute", False):
+            # Log the recommendation for human review but don't execute
+            try:
+                conn.execute("""
+                    INSERT INTO prescription_execution_log
+                    (work_order_id, action_type, status, result_data)
+                    VALUES (?, ?, 'pending_approval', ?)
+                """, (
+                    work_order["id"],
+                    result.get("action_type", "requires_human"),
+                    _json.dumps(result, ensure_ascii=False),
+                ))
+                conn.commit()
+            except Exception:
+                pass
+            return None
+
+        return result
+
+    except Exception:
+        return None
+
+
 def classify_prescription(instruction: str, target_parameter: str = None,
                           confidence_label: str = None,
                           instruction_source: str = None,
@@ -646,7 +726,22 @@ def execute_prescription(conn: sqlite3.Connection, work_order_id: int) -> dict:
     )
 
     if action_type not in _AUTO_EXECUTABLE_ACTIONS:
-        return {"status": "requires_human", "action_type": action_type}
+        # Last resort: ask LLM to design a specific, executable fix
+        designed = _design_fix_via_llm(conn, wo, instruction)
+        if designed and designed.get("action_type") in _AUTO_EXECUTABLE_ACTIONS:
+            action_type = designed["action_type"]
+            # Enrich work order instruction with the LLM's specific fix
+            instruction = designed.get("specific_fix", instruction)
+            try:
+                conn.execute(
+                    "UPDATE pi_work_order SET instruction = ? WHERE id = ?",
+                    (instruction, work_order_id),
+                )
+                conn.commit()
+            except Exception:
+                pass
+        else:
+            return {"status": "requires_human", "action_type": action_type}
 
     # Execute the action
     result = _execute_action(conn, action_type, wo)
