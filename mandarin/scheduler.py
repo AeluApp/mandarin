@@ -2717,7 +2717,7 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
             drills.append(drill)
             items_added += 1
 
-        # Fill remaining with new items
+        # Fill remaining with new items — Dijkstra-guided then HSK fallback
         if items_added < count and not is_long_gap and new_budget > 0:
             new_limit = min(count - items_added, new_budget)
             hsk_max = _get_hsk_prerequisite_cap(conn, user_id=user_id)
@@ -2725,7 +2725,28 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                 mastery = db.get_mastery_by_hsk(conn, user_id=user_id)
                 if mastery:
                     hsk_max = max(hsk_max, max(mastery.keys()) + 1)
-            new_items = db.get_new_items(conn, modality, limit=new_limit + 5, hsk_max=hsk_max, user_id=user_id)
+
+            # Try Dijkstra-guided selection first (shortest path to next HSK level)
+            dijkstra_items = []
+            try:
+                from mandarin.quality.curriculum_graph import suggest_next_items
+                path_ids = suggest_next_items(conn, user_id, goal=None, n=new_limit + 5)
+                if path_ids:
+                    placeholders = ",".join("?" * len(path_ids))
+                    rows = conn.execute(
+                        f"SELECT * FROM content_item WHERE id IN ({placeholders}) AND drill_ready=1",
+                        path_ids,
+                    ).fetchall()
+                    dijkstra_items = [dict(r) for r in rows] if rows else []
+            except Exception:
+                pass
+
+            # HSK-level fallback
+            hsk_items = db.get_new_items(conn, modality, limit=new_limit + 5, hsk_max=hsk_max, user_id=user_id)
+
+            # Merge: Dijkstra first, then HSK items not already in Dijkstra set
+            dijkstra_ids = {i["id"] for i in dijkstra_items}
+            new_items = dijkstra_items + [i for i in hsk_items if i["id"] not in dijkstra_ids]
             if bounce_levels:
                 new_items = [i for i in new_items if i.get("hsk_level") not in bounce_levels] or new_items
             for item in new_items:
@@ -3028,7 +3049,21 @@ def _item_is_drillable_by_fields(hanzi: str | None, pinyin: str | None,
 
 
 def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> SessionPlan:
-    """Finalize drills: interleave, build micro-plan, tier-gate, create SessionPlan."""
+    """Finalize drills: LP-optimize, interleave, build micro-plan, tier-gate, create SessionPlan."""
+    # LP optimization: reorder drills for maximum retention gain per minute
+    try:
+        from mandarin.quality.optimization import optimize_session
+        lp_result = optimize_session(conn, user_id, drills, params.get("session_length_minutes", 10) * 60)
+        if lp_result and lp_result.get("success") and lp_result.get("order"):
+            id_order = lp_result["order"]
+            id_to_drill = {d.item_id: d for d in drills}
+            reordered = [id_to_drill[i] for i in id_order if i in id_to_drill]
+            remaining = [d for d in drills if d.item_id not in {i for i in id_order}]
+            if reordered:
+                drills = reordered + remaining
+    except Exception:
+        pass  # Keep heuristic ordering
+
     drills = _interleave(drills)
     drills = _add_listen_produce_pairs(drills)
 

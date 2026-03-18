@@ -222,6 +222,16 @@
         <h2>LLM Costs</h2>
         <div id="llm-costs-container" class="tab-loading">Loading...</div>
       </div>
+
+      <div class="admin-section">
+        <h3>Viral Growth</h3>
+        <div id="viral-container" class="admin-section"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Price Sensitivity</h3>
+        <div id="price-sensitivity-container" class="admin-section"></div>
+      </div>
     </div>
 
     <!-- Retention Cohorts -->
@@ -505,6 +515,27 @@
           <button onclick="document.getElementById('add-work-item-form').style.display='none'" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;color:var(--color-text-dim);border:1px solid var(--color-divider);cursor:pointer;margin-left:var(--space-1);">Cancel</button>
         </div>
         <div id="quality-work-items-content" class="tab-loading">Loading...</div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Thompson Sampling</h3>
+        <div id="thompson-sampling-container" class="admin-section"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Decision Optimization</h3>
+        <div id="decision-table-container" class="admin-section"></div>
+        <div id="pareto-container" class="admin-section"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Queue Forecasting</h3>
+        <div id="queue-forecast-container" class="admin-section"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Scenario Analysis</h3>
+        <div id="monte-carlo-container" class="admin-section"></div>
       </div>
     </div>
 
@@ -948,7 +979,7 @@
         "issues": loadIssues,
         "sessions": loadSessions,
         "security": function() { loadSecurityScans(); loadSecurity(); },
-        "revenue": function() { loadRevenue(); loadCLV(); loadCohortRetention(); loadLLMCosts(); },
+        "revenue": function() { loadRevenue(); loadCLV(); loadCohortRetention(); loadLLMCosts(); loadViralMetrics(); loadPriceSensitivity(); },
         "retention": loadRetention,
         "engagement": function() { loadEngagement(); loadCompletionSegments(); },
         "partners": loadPartners,
@@ -1522,6 +1553,11 @@
       loadRisks();
       loadWorkItems();
       loadExperiments();
+      loadThompsonSampling();
+      loadDecisionTable();
+      loadParetoFrontier();
+      loadQueueForecast();
+      loadMonteCarloForecasts();
     }
 
     function loadExperiments() {
@@ -3521,6 +3557,160 @@
         var container = document.getElementById("llm-costs-container");
         if (container) container.innerHTML = '<p class="tab-empty">LLM costs unavailable: ' + esc(e.message) + '</p>';
       });
+    }
+
+    // Thompson Sampling Posteriors
+    function loadThompsonSampling() {
+        adminFetch("/api/admin/analytics/thompson-sampling").then(function(data) {
+            var c = document.getElementById("thompson-sampling-container");
+            if (!c) return;
+            if (!data.posteriors || !data.posteriors.length) {
+                c.innerHTML = '<p class="admin-empty">No drill type learning data yet (need user sessions)</p>';
+                return;
+            }
+            var html = '<div class="metrics-grid"><div class="metric-card"><div class="metric-value">' + data.total_tracked + '</div><div class="metric-label">Items Tracked</div></div></div>';
+            html += '<table class="admin-table"><thead><tr><th>Item</th><th>Drill Type</th><th>Win Rate</th><th>Samples</th></tr></thead><tbody>';
+            data.posteriors.slice(0, 30).forEach(function(p) {
+                var pct = Math.round((p.win_rate || 0) * 100);
+                var cls = pct > 70 ? 'retention-high' : pct > 40 ? 'retention-mid' : 'retention-low';
+                html += '<tr><td>' + esc(p.hanzi || '?') + ' <small>' + esc(p.pinyin || '') + '</small></td>';
+                html += '<td>' + esc(p.drill_type) + '</td>';
+                html += '<td class="' + cls + '">' + pct + '%</td>';
+                html += '<td>' + (p.samples || 0) + '</td></tr>';
+            });
+            html += '</tbody></table>';
+            c.innerHTML = html;
+        });
+    }
+
+    // Viral Coefficient
+    function loadViralMetrics() {
+        adminFetch("/api/admin/analytics/viral").then(function(data) {
+            var c = document.getElementById("viral-container");
+            if (!c) return;
+            var html = '<div class="metrics-grid">';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.k_factor || 0).toFixed(3) + '</div><div class="metric-label">Viral k-factor</div></div>';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.referrals || 0) + '</div><div class="metric-label">Referrals (30d)</div></div>';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.unique_referrers || 0) + '</div><div class="metric-label">Unique Referrers</div></div>';
+            html += '</div>';
+            if (data.top_referrers && data.top_referrers.length) {
+                html += '<table class="admin-table"><thead><tr><th>Referrer ID</th><th>Conversions</th></tr></thead><tbody>';
+                data.top_referrers.forEach(function(r) {
+                    html += '<tr><td>' + r.referrer_id + '</td><td>' + r.referral_count + '</td></tr>';
+                });
+                html += '</tbody></table>';
+            }
+            c.innerHTML = html;
+        });
+    }
+
+    // Decision Table
+    function loadDecisionTable() {
+        adminFetch("/api/admin/quality/decision-table").then(function(data) {
+            var c = document.getElementById("decision-table-container");
+            if (!c) return;
+            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
+            var matrix = data.matrix || data;
+            var html = '<h4>Decision Matrix (Return Prob x Queue State)</h4>';
+            html += '<pre style="font-size:11px;overflow-x:auto;">' + JSON.stringify(matrix, null, 2).substring(0, 2000) + '</pre>';
+            c.innerHTML = html;
+        }).catch(function() {
+            var c = document.getElementById("decision-table-container");
+            if (c) c.innerHTML = '<p class="admin-empty">Decision table unavailable</p>';
+        });
+    }
+
+    // Pareto Frontier
+    function loadParetoFrontier() {
+        adminFetch("/api/admin/quality/pareto").then(function(data) {
+            var c = document.getElementById("pareto-container");
+            if (!c) return;
+            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
+            var points = data.frontier || data.points || [];
+            var html = '<h4>Pareto Frontier (Retention vs Breadth vs Time)</h4>';
+            if (points.length) {
+                html += '<table class="admin-table"><thead><tr><th>Retention</th><th>Breadth</th><th>Time (min)</th></tr></thead><tbody>';
+                points.forEach(function(p) {
+                    html += '<tr><td>' + (p.retention || p[0] || 0).toFixed(2) + '</td>';
+                    html += '<td>' + (p.breadth || p[1] || 0).toFixed(2) + '</td>';
+                    html += '<td>' + (p.time || p[2] || 0).toFixed(1) + '</td></tr>';
+                });
+                html += '</tbody></table>';
+            } else {
+                html += '<p class="admin-empty">No Pareto data available</p>';
+            }
+            c.innerHTML = html;
+        }).catch(function() {
+            var c = document.getElementById("pareto-container");
+            if (c) c.innerHTML = '<p class="admin-empty">Pareto frontier unavailable</p>';
+        });
+    }
+
+    // Queue Model Forecast
+    function loadQueueForecast() {
+        adminFetch("/api/admin/quality/queue-model").then(function(data) {
+            var c = document.getElementById("queue-forecast-container");
+            if (!c) return;
+            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
+            var html = '<div class="metrics-grid">';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.queue_length || data.avg_queue_length || 0) + '</div><div class="metric-label">Current Queue</div></div>';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.utilization || 0).toFixed(2) + '</div><div class="metric-label">Utilization (rho)</div></div>';
+            html += '<div class="metric-card"><div class="metric-value">' + (data.avg_wait_days || 0).toFixed(1) + 'd</div><div class="metric-label">Avg Wait</div></div>';
+            html += '</div>';
+            c.innerHTML = html;
+        }).catch(function() {
+            var c = document.getElementById("queue-forecast-container");
+            if (c) c.innerHTML = '<p class="admin-empty">Queue model unavailable</p>';
+        });
+    }
+
+    // Monte Carlo Forecasts
+    function loadMonteCarloForecasts() {
+        adminFetch("/api/admin/quality/monte-carlo").then(function(data) {
+            var c = document.getElementById("monte-carlo-container");
+            if (!c) return;
+            if (data.error) { c.innerHTML = '<p class="admin-empty">' + esc(data.error) + '</p>'; return; }
+            var html = '<h4>30-Day Projections</h4><div class="metrics-grid">';
+            if (data.user_growth) {
+                var ug = data.user_growth;
+                html += '<div class="metric-card"><div class="metric-value">' + (ug.p50 || 0) + '</div><div class="metric-label">Users (median)</div></div>';
+                html += '<div class="metric-card"><div class="metric-value">' + (ug.p5 || 0) + '–' + (ug.p95 || 0) + '</div><div class="metric-label">Users (90% CI)</div></div>';
+            }
+            if (data.review_queue) {
+                var rq = data.review_queue;
+                html += '<div class="metric-card"><div class="metric-value">' + (rq.p50 || 0) + '</div><div class="metric-label">Queue (median)</div></div>';
+            }
+            html += '</div>';
+            c.innerHTML = html;
+        }).catch(function() {
+            var c = document.getElementById("monte-carlo-container");
+            if (c) c.innerHTML = '<p class="admin-empty">Monte Carlo unavailable</p>';
+        });
+    }
+
+    // Price Sensitivity
+    function loadPriceSensitivity() {
+        adminFetch("/api/admin/analytics/price-sensitivity").then(function(data) {
+            var c = document.getElementById("price-sensitivity-container");
+            if (!c) return;
+            if (data.status === "no_experiment") {
+                c.innerHTML = '<p class="admin-empty">No price experiment running. Start one from the Quality tab.</p>';
+                return;
+            }
+            var html = '<h4>Price Sensitivity</h4>';
+            if (data.variants && data.variants.length) {
+                html += '<table class="admin-table"><thead><tr><th>Variant</th><th>Exposures</th><th>Conversions</th><th>Rate</th></tr></thead><tbody>';
+                data.variants.forEach(function(v) {
+                    var rate = v.exposures > 0 ? (v.conversions / v.exposures * 100).toFixed(1) : '0';
+                    html += '<tr><td>' + esc(v.variant) + '</td><td>' + v.exposures + '</td><td>' + v.conversions + '</td><td>' + rate + '%</td></tr>';
+                });
+                html += '</tbody></table>';
+            }
+            c.innerHTML = html;
+        }).catch(function() {
+            var c = document.getElementById("price-sensitivity-container");
+            if (c) c.innerHTML = '<p class="admin-empty">Price sensitivity unavailable</p>';
+        });
     }
   </script>
 </body>

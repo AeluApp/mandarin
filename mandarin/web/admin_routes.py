@@ -5125,3 +5125,97 @@ def admin_clv():
     with db.connection() as conn:
         ltv = compute_ltv(conn)
         return jsonify(ltv)
+
+
+@admin_bp.route("/api/admin/analytics/thompson-sampling")
+@admin_required
+def admin_thompson_sampling():
+    with db.connection() as conn:
+        try:
+            rows = conn.execute("""
+                SELECT dtp.content_item_id, ci.hanzi, ci.pinyin,
+                       dtp.drill_type, dtp.alpha, dtp.beta,
+                       ROUND(dtp.alpha / (dtp.alpha + dtp.beta), 3) as win_rate,
+                       CAST(dtp.alpha + dtp.beta - 2 AS INTEGER) as samples
+                FROM drill_type_posterior dtp
+                LEFT JOIN content_item ci ON dtp.content_item_id = ci.id
+                WHERE dtp.alpha + dtp.beta > 3
+                ORDER BY samples DESC
+                LIMIT 100
+            """).fetchall()
+            items = [dict(r) for r in rows] if rows else []
+            total = conn.execute("SELECT COUNT(*) FROM drill_type_posterior").fetchone()[0]
+        except Exception:
+            items = []
+            total = 0
+        return jsonify({"posteriors": items, "total_tracked": total})
+
+
+@admin_bp.route("/api/admin/analytics/curriculum-path")
+@admin_required
+def admin_curriculum_path():
+    from ..quality.curriculum_graph import suggest_next_items, build_curriculum_graph
+    user_id = request.args.get("user_id", 1, type=int)
+    with db.connection() as conn:
+        try:
+            path = suggest_next_items(conn, user_id, goal=None, n=20)
+            graph = build_curriculum_graph(conn, user_id)
+            items = []
+            for item_id in path:
+                row = conn.execute(
+                    "SELECT id, hanzi, pinyin, english, hsk_level FROM content_item WHERE id=?",
+                    (item_id,),
+                ).fetchone()
+                if row:
+                    items.append(dict(row))
+        except Exception:
+            items = []
+            graph = {}
+        return jsonify({"path": items, "graph_nodes": len(graph), "path_length": len(items)})
+
+
+@admin_bp.route("/api/admin/analytics/viral")
+@admin_required
+def admin_viral():
+    from ..marketing_hooks import compute_viral_coefficient
+    with db.connection() as conn:
+        metrics = compute_viral_coefficient(conn, days=30)
+        # Top referrers
+        try:
+            top = conn.execute("""
+                SELECT referrer_id, COUNT(*) as referral_count
+                FROM referral_log
+                GROUP BY referrer_id
+                ORDER BY referral_count DESC LIMIT 10
+            """).fetchall()
+            metrics["top_referrers"] = [dict(r) for r in top] if top else []
+        except Exception:
+            metrics["top_referrers"] = []
+        return jsonify(metrics)
+
+
+@admin_bp.route("/api/admin/analytics/price-sensitivity")
+@admin_required
+def admin_price_sensitivity():
+    with db.connection() as conn:
+        try:
+            # Check for price_display_test experiment
+            exp = conn.execute("""
+                SELECT * FROM experiment WHERE name LIKE '%price%' ORDER BY created_at DESC LIMIT 1
+            """).fetchone()
+            if not exp:
+                return jsonify({"status": "no_experiment", "message": "No price experiment running"})
+
+            # Get variant results
+            variants = conn.execute("""
+                SELECT variant, COUNT(*) as exposures,
+                       SUM(CASE WHEN converted = 1 THEN 1 ELSE 0 END) as conversions
+                FROM experiment_exposure
+                WHERE experiment_id = ?
+                GROUP BY variant
+            """, (exp["id"],)).fetchall()
+
+            result = {"experiment": dict(exp) if exp else None, "variants": [dict(v) for v in variants] if variants else []}
+            return jsonify(result)
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
