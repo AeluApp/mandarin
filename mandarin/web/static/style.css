@@ -89,10 +89,25 @@
   --btn-padding: 14px 32px;
   --btn-radius: var(--radius);
 
-  /* Shadow tokens */
-  --shadow-sm: 0 1px 2px var(--color-shadow);
-  --shadow-md: 0 2px 6px var(--color-shadow);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  /* Shadow tokens — 6-level depth system */
+  --shadow-xs: 0 1px 1px var(--color-shadow);
+  --shadow-sm: 0 1px 3px var(--color-shadow), 0 1px 2px var(--color-shadow);
+  --shadow-md: 0 2px 6px var(--color-shadow), 0 1px 3px var(--color-shadow);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px var(--color-shadow);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.14), 0 8px 24px rgba(0, 0, 0, 0.06);
+
+  /* Glass tokens */
+  --glass-bg: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  --glass-bg-dense: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  --glass-border: 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent);
+  --glass-blur: blur(20px) saturate(1.2);
+
+  /* Gradient mesh tokens — animated background */
+  --mesh-color-1: var(--color-sky-top);
+  --mesh-color-2: color-mix(in srgb, var(--color-accent) 6%, var(--color-base));
+  --mesh-color-3: color-mix(in srgb, var(--color-secondary) 4%, var(--color-base));
+  --mesh-color-4: var(--color-base);
 
   /* Overlay */
   --color-overlay: rgba(0, 0, 0, 0.45);
@@ -149,6 +164,25 @@
     --color-divider: #3A3530;
     --color-shadow: rgba(0, 0, 0, 0.12);
 
+    /* Dark mode shadow depth */
+    --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.18);
+
+    /* Dark mode glass — slightly lighter glass for contrast against dark bg */
+    --glass-bg: color-mix(in srgb, var(--color-surface-alt) 72%, transparent);
+    --glass-bg-dense: color-mix(in srgb, var(--color-surface-alt) 85%, transparent);
+    --glass-border: 1px solid color-mix(in srgb, var(--color-divider) 30%, transparent);
+
+    /* Dark mode gradient mesh */
+    --mesh-color-1: var(--color-sky-top);
+    --mesh-color-2: color-mix(in srgb, var(--color-accent) 4%, var(--color-base));
+    --mesh-color-3: color-mix(in srgb, var(--color-secondary) 3%, var(--color-base));
+    --mesh-color-4: var(--color-base);
+
     --color-flash-error-bg: #3A2828;
     --color-flash-info-bg: #283A28;
     --color-text-faintest: #A0A8B8;  /* 4.6:1 on #1C2028 — WCAG AA small text */
@@ -187,6 +221,21 @@ html[data-theme="dark"] {
   --color-border: transparent;
   --color-divider: #3A3530;
   --color-shadow: rgba(0, 0, 0, 0.12);
+
+  /* Dark mode depth & glass */
+  --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.18);
+  --glass-bg: color-mix(in srgb, var(--color-surface-alt) 72%, transparent);
+  --glass-bg-dense: color-mix(in srgb, var(--color-surface-alt) 85%, transparent);
+  --glass-border: 1px solid color-mix(in srgb, var(--color-divider) 30%, transparent);
+  --mesh-color-1: var(--color-sky-top);
+  --mesh-color-2: color-mix(in srgb, var(--color-accent) 4%, var(--color-base));
+  --mesh-color-3: color-mix(in srgb, var(--color-secondary) 3%, var(--color-base));
+  --mesh-color-4: var(--color-base);
 
   --color-mastery-durable: #5A8A5A;
   --color-mastery-stable: #7AAA6A;
@@ -287,9 +336,12 @@ body {
      Single-element approach — no pseudo-element stacking-context issues. */
   background-color: var(--color-base);
   background-image:
+    radial-gradient(ellipse at 20% 0%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 10%, var(--mesh-color-3) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 60%, var(--mesh-color-2) 0%, transparent 55%),
     linear-gradient(180deg, var(--color-sky-top) 0%, var(--color-sky-bottom) var(--sky-height), var(--color-base) var(--sky-height)),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-  background-blend-mode: normal, soft-light;
+  background-blend-mode: normal, normal, normal, normal, soft-light;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -9518,27 +9570,70 @@ html, body {
    Backdrop blur, view transitions, spring animations, color shifts
    ══════════════════════════════════════════════════════════════════ */
 
-/* ── 1a. Backdrop blur / glass panels ────────────────────────── */
-/* Subtle frosted-glass effect on panels and stat cards.
-   Uses color-mix for semi-transparent background + backdrop blur. */
+/* ── 1a. Frosted glass system ────────────────────────── */
+/* Layered glass: semi-transparent background + backdrop blur + subtle border.
+   Three densities: light (cards), standard (panels), dense (overlays). */
 
 @supports (backdrop-filter: blur(1px)) {
+  /* Reusable glass utility */
+  .surface-glass {
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+  }
+
+  .surface-glass-dense {
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg-dense);
+    border: var(--glass-border);
+  }
+
   .stat {
     backdrop-filter: blur(16px) saturate(1.15);
     -webkit-backdrop-filter: blur(16px) saturate(1.15);
-    background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    transition: transform var(--duration-fast) var(--ease-default),
+                box-shadow var(--duration-fast) var(--ease-default);
+  }
+
+  .stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 
   .panel {
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
-    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+    border: var(--glass-border);
   }
 
   .msg {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    background: var(--glass-bg-dense);
+  }
+
+  /* Glass cards for reading, media, grammar */
+  .reading-list .passage-card,
+  .media-grid .media-card,
+  .grammar-list .grammar-card {
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    transition: transform var(--duration-fast) var(--ease-default),
+                box-shadow var(--duration-fast) var(--ease-default);
+  }
+
+  .reading-list .passage-card:hover,
+  .media-grid .media-card:hover,
+  .grammar-list .grammar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 }
 
@@ -9623,6 +9718,151 @@ body {
 
 .horizon {
   will-change: transform;
+}
+
+/* ── 1f2. Typography as graphic element ────────────────────────── */
+/* Oversized hanzi watermarks, animated text reveals, display-scale type. */
+
+/* Hero hanzi watermark — massive background character behind content */
+.hanzi-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-hanzi);
+  font-size: clamp(8rem, 20vw, 16rem);
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+html[data-theme="dark"] .hanzi-watermark {
+  mix-blend-mode: screen;
+  opacity: 0.04;
+}
+
+/* Animated text reveal — characters slide in via clip-path */
+.text-reveal-char {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  animation: charReveal 0.4s var(--ease-upward) forwards;
+}
+
+@keyframes charReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+/* Stagger delay applied via inline style: animation-delay: calc(var(--char-index) * 30ms) */
+
+/* Section heading — animated underline draw-in on entry */
+.heading-reveal {
+  position: relative;
+  display: inline-block;
+}
+
+.heading-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.8s var(--ease-upward);
+}
+
+.heading-reveal.is-visible::after {
+  width: 60px;
+}
+
+/* Display-scale typography for hero moments */
+.text-display-hero {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 300;
+}
+
+.text-display-hanzi {
+  font-family: var(--font-hanzi);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+/* ── 1f3. Scroll-driven reveals ────────────────────────── */
+/* Elements with [data-reveal] fade/slide in when scrolled into view.
+   Children with [data-reveal-child] stagger with delay set by JS. */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-upward), transform 0.6s var(--ease-upward);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-child] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease-upward), transform 0.5s var(--ease-upward);
+}
+
+[data-reveal-child].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Native CSS scroll-driven animations (progressive enhancement) */
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: scrollRevealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  @keyframes scrollRevealUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Stagger animation for lists of items */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s var(--ease-upward), transform 0.4s var(--ease-upward);
+}
+
+.stagger-children.is-revealed > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-revealed > *:nth-child(n+7) { transition-delay: 360ms; opacity: 1; transform: translateY(0); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-child],
+  .stagger-children > *,
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ── 1h. Interactive data viz ────────────────────────── */

@@ -21,12 +21,18 @@ RESEND_SEND_URL = "https://api.resend.com/emails"
 
 _STYLE = {
     "bg": "#F2EBE0",
-    "accent": "#6B9B8E",
-    "terracotta": "#B07156",
-    "text": "#3A3A3A",
+    "accent": "#946070",
+    "text": "#2A3650",
+    "text_dim": "#5A6678",
     "divider": "#D8D0C4",
     "heading_font": "'Cormorant Garamond', Georgia, serif",
-    "body_font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+    "body_font": "'Source Serif 4', Georgia, 'Times New Roman', serif",
+    # Dark mode
+    "dark_bg": "#1C2028",
+    "dark_accent": "#B07888",
+    "dark_text": "#E4DDD0",
+    "dark_text_dim": "#A09888",
+    "dark_divider": "#3A3530",
 }
 
 
@@ -36,24 +42,40 @@ def _wrap_html(heading: str, body_html: str) -> str:
     return f"""\
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @media (prefers-color-scheme: dark) {{
+    body, .email-bg {{ background-color: {s['dark_bg']} !important; }}
+    .email-card {{ background-color: {s['dark_bg']} !important; }}
+    .email-header {{ background-color: {s['dark_accent']} !important; }}
+    .email-body, .email-body p, .email-body li {{ color: {s['dark_text']} !important; }}
+    .email-body td {{ color: {s['dark_text']} !important; }}
+    .email-footer p {{ color: {s['dark_text_dim']} !important; }}
+    .email-footer a {{ color: {s['dark_text_dim']} !important; }}
+    .email-divider {{ border-color: {s['dark_divider']} !important; }}
+  }}
+</style>
+</head>
 <body style="margin:0;padding:0;background-color:{s['bg']};font-family:{s['body_font']};color:{s['text']};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:{s['bg']};">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="email-bg" style="background-color:{s['bg']};">
 <tr><td align="center" style="padding:40px 20px;">
-<table role="presentation" width="560" cellpadding="0" cellspacing="0"
-       style="background-color:#FFFFFF;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-  <tr><td style="background-color:{s['accent']};padding:28px 32px;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" class="email-card"
+       style="background-color:{s['bg']};overflow:hidden;">
+  <tr><td class="email-header" style="background-color:{s['accent']};padding:28px 32px;">
     <p style="margin:0 0 8px 0;font-family:'Noto Serif SC',serif;font-size:32px;color:rgba(255,255,255,0.7);line-height:1;">漫</p>
     <h1 style="margin:0;font-family:{s['heading_font']};font-size:24px;font-weight:600;color:#FFFFFF;">
       {heading}
     </h1>
   </td></tr>
-  <tr><td style="padding:32px;">
+  <tr><td class="email-body" style="padding:32px;">
     {body_html}
   </td></tr>
-  <tr><td style="padding:20px 32px;border-top:1px solid #E8E0D5;text-align:center;">
-    <p style="margin:0;font-size:13px;color:#999;">Aelu</p>
-    <p style="margin:4px 0 0;font-size:11px;color:#BBB;">{MAILING_ADDRESS}</p>
+  <tr><td class="email-footer" style="padding:20px 32px;border-top:1px solid {s['divider']};text-align:center;">
+    <p style="margin:0;font-size:13px;color:{s['text_dim']};">Aelu</p>
+    <p style="margin:4px 0 0;font-size:11px;color:{s['text_dim']};">{MAILING_ADDRESS}</p>
   </td></tr>
 </table>
 </td></tr>
@@ -63,13 +85,14 @@ def _wrap_html(heading: str, body_html: str) -> str:
 
 
 def _button(url: str, label: str) -> str:
-    """Render a CTA button in terracotta."""
+    """Render a CTA button in brand accent."""
     s = _STYLE
     return (
         f'<p style="text-align:center;margin:28px 0;">'
-        f'<a href="{url}" style="display:inline-block;padding:12px 28px;'
-        f"background-color:{s['terracotta']};color:#FFFFFF;text-decoration:none;"
-        f'border-radius:6px;font-family:{s["body_font"]};font-size:15px;font-weight:600;">'
+        f'<a href="{url}" style="display:inline-block;padding:14px 32px;'
+        f"background-color:{s['accent']};color:#FFFFFF;text-decoration:none;"
+        f'border-radius:4px;font-family:{s["heading_font"]};font-size:16px;'
+        f'font-weight:600;letter-spacing:0.03em;">'
         f"{label}</a></p>"
     )
 
@@ -146,10 +169,10 @@ def send_unsubscribe_confirmation(to_email: str) -> bool:
 def send_alert(to_email: str, subject: str, details: str) -> bool:
     """Send critical security alert to admin."""
     body = (
-        f'<p style="font-size:16px;line-height:1.6;font-weight:600;color:#B07156;">'
+        f'<p style="font-size:16px;line-height:1.6;font-weight:600;color:{_STYLE["accent"]};">'
         f"Critical security event detected:</p>"
         f'<p style="font-size:14px;line-height:1.6;font-family:monospace;'
-        f'background:#F5F5F5;padding:12px;border-radius:4px;">{details}</p>'
+        f'background:{_STYLE["bg"]};padding:12px;">{details}</p>'
     )
     html = _wrap_html("Security Alert", body)
     return _send(to_email, subject, html)
@@ -433,7 +456,7 @@ def send_classroom_invite(to: str, teacher_name: str, class_name: str, invite_co
         f'<p style="font-size:16px;line-height:1.6;">'
         f"Use the code below when you sign up or in your settings:</p>"
         f'<p style="text-align:center;font-size:24px;font-family:monospace;'
-        f'letter-spacing:4px;padding:16px;background:#F5F5F5;border-radius:8px;">'
+        f'letter-spacing:4px;padding:16px;background:{_STYLE["bg"]};">'
         f"<strong>{invite_code}</strong></p>"
     )
     body += _button(BASE_URL + "/auth/register", "Join Classroom")

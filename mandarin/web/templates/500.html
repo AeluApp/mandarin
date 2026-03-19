@@ -10,15 +10,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
   <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .error-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: var(--space-6);
+      position: relative;
+    }
+    .error-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-4);
+    }
+    .error-sub {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-4);
+    }
+    .error-link {
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      text-decoration: none;
+    }
+    .error-link:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="login" aria-hidden="true"></div>
   <div id="app" role="main">
-    <section style="text-align:center;padding:var(--space-8) 0;">
+    <div class="error-wrap">
       <div class="illustration-stars"></div>
-      <h1 style="font-family:var(--font-heading);font-size:var(--text-xl);font-weight:400;color:var(--color-text-dim);letter-spacing:0.05em;margin-bottom:var(--space-4);">Something went wrong.</h1>
-      <p style="font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-4);">We're looking into it.</p>
-      <a href="/" style="color:var(--color-accent);font-size:var(--text-sm);text-decoration:none;">Return to the dashboard</a>
-    </section>
+      <h1 class="error-title">Something went wrong.</h1>
+      <p class="error-sub">We're looking into it.</p>
+      <a href="/" class="error-link">Return to the dashboard</a>
+    </div>
   </div>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 </body>
 </html>

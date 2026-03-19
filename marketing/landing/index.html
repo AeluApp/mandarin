@@ -97,7 +97,11 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background: var(--color-base);
+      background-color: var(--color-base);
+      background-image:
+        radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--color-secondary) 4%, var(--color-base)) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 55%);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -123,24 +127,60 @@
     .hero {
       text-align: center;
       padding: var(--space-8) 0 var(--space-6);
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Giant watermark character behind hero */
+    .hero::before {
+      content: '学';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      font-family: var(--font-hanzi);
+      font-size: clamp(16rem, 30vw, 24rem);
+      color: var(--color-accent);
+      opacity: 0.035;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+      line-height: 1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .hero::before { mix-blend-mode: screen; opacity: 0.025; }
+    }
+
+    .hero .container { position: relative; z-index: 1; }
 
     .hero-hanzi {
       font-family: var(--font-hanzi);
-      font-size: 3.5rem;
+      font-size: clamp(2.5rem, 6vw, 4rem);
       color: var(--color-accent);
       letter-spacing: 0.15em;
       margin-bottom: var(--space-3);
       opacity: 0.9;
+      animation: heroFadeUp 0.8s var(--ease-upward) 0.1s backwards;
     }
 
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: var(--text-display, clamp(2.2rem, 5vw, 2.8rem));
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 600;
-      line-height: 1.15;
+      line-height: 1.1;
       margin-bottom: var(--space-3);
       color: var(--color-text);
+      animation: heroFadeUp 0.8s var(--ease-upward) 0.25s backwards;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-hanzi, .hero h1, .hero-sub, .hero-promise, .cta-group { animation: none !important; }
     }
 
     .hero-sub {
@@ -149,6 +189,11 @@
       max-width: 520px;
       margin: 0 auto var(--space-5);
       line-height: 1.65;
+      animation: heroFadeUp 0.8s var(--ease-upward) 0.45s backwards;
+    }
+
+    .cta-group {
+      animation: heroFadeUp 0.8s var(--ease-upward) 0.6s backwards;
     }
 
     /* ── CTA ── */
@@ -196,6 +241,7 @@
     }
 
     .btn-primary:hover { opacity: 0.85; }
+    .btn-primary:active { transform: scale(0.97); }
 
     .cta-note {
       font-size: 0.85rem;
@@ -718,6 +764,7 @@
   </style>
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <!-- Nav -->
   <nav aria-label="Main navigation">
@@ -1032,6 +1079,8 @@
       }
     })();
   </script>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 
 </body>
 </html>

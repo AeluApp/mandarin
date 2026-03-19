@@ -16,9 +16,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 70vh;
+      min-height: 100vh;
       text-align: center;
       padding: var(--space-6);
+      position: relative;
     }
     .not-found-hanzi {
       font-family: 'Noto Serif SC', 'Songti SC', serif;
@@ -58,6 +59,7 @@
   </style>
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="login" aria-hidden="true"></div>
   <div id="app" role="main">
     <div class="not-found-wrap">
       <div class="not-found-hanzi">迷</div>
@@ -66,5 +68,7 @@
       <a href="/" class="not-found-link">Back to dashboard</a>
     </div>
   </div>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 </body>
 </html>

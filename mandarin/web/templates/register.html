@@ -11,21 +11,23 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
   <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
   <style nonce="{{ csp_nonce }}">
-    .auth-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: var(--space-4); background: url('/static/login-bg.jpg') center/cover no-repeat fixed; }
-    [data-theme="dark"] .auth-page { background-image: url('/static/login-bg-dark.jpg'); }
-    .auth-page::before { content: ''; position: absolute; inset: 0; background: var(--color-base); opacity: 0.82; }
-    .auth-card { width: 100%; max-width: 400px; position: relative; z-index: 1; }
+    .auth-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: var(--space-4); position: relative; overflow: hidden; }
+    .auth-page::before { content: '漫'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); font-family: var(--font-hanzi); font-size: clamp(14rem, 35vw, 22rem); color: var(--color-accent); opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0; line-height: 1; }
+    [data-theme="dark"] .auth-page::before { mix-blend-mode: screen; opacity: 0.03; }
+    .auth-card { width: 100%; max-width: 400px; position: relative; z-index: 1; padding: var(--space-6) var(--space-5); backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 78%, transparent)); border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent)); box-shadow: var(--shadow-xl); animation: authCardEnter 0.6s var(--ease-upward) backwards; }
+    @keyframes authCardEnter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .auth-logo { text-align: center; margin-bottom: var(--space-6); }
-    .auth-logo .logo-mark { font-size: var(--text-display); font-family: var(--font-hanzi); color: var(--color-accent); }
-    .auth-logo .logo-text { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); margin-top: var(--space-1); letter-spacing: var(--tracking-wide); }
+    .auth-logo .logo-mark { font-size: var(--text-display); font-family: var(--font-hanzi); color: var(--color-accent); animation: logoFadeIn 0.8s var(--ease-upward) 0.1s backwards; }
+    @keyframes logoFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .auth-logo .logo-text { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); margin-top: var(--space-1); letter-spacing: var(--tracking-wide); animation: logoFadeIn 0.8s var(--ease-upward) 0.2s backwards; }
     .auth-form { display: flex; flex-direction: column; gap: var(--space-4); }
     .auth-field label { display: block; font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin-bottom: var(--space-1); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
-    .auth-field input { width: 100%; padding: 12px 16px; font-family: var(--font-body); font-size: var(--text-base); border: 1px solid var(--color-divider); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text); transition: border-color 0.2s; box-sizing: border-box; }
-    .auth-field input:focus { border-color: var(--color-accent); outline: 2px solid var(--color-accent); outline-offset: 1px; }
-    .auth-field input:focus:not(:focus-visible) { outline: none; }
+    .auth-field input { width: 100%; padding: 12px 16px; font-family: var(--font-body); font-size: var(--text-base); border: none; border-bottom: 2px solid var(--color-divider); border-radius: 0; background: transparent; color: var(--color-text); transition: border-color 0.3s var(--ease-default); box-sizing: border-box; }
+    .auth-field input:focus { border-bottom-color: var(--color-accent); outline: none; }
     .auth-submit:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-    .auth-submit { padding: var(--btn-padding); font-family: var(--font-heading); font-size: var(--text-lg); background: var(--color-accent); color: var(--color-on-accent); border: none; border-radius: var(--radius); cursor: pointer; transition: opacity 0.2s; letter-spacing: var(--tracking-normal); }
+    .auth-submit { padding: var(--btn-padding); font-family: var(--font-heading); font-size: var(--text-lg); background: var(--color-accent); color: var(--color-on-accent); border: none; border-radius: var(--radius); cursor: pointer; transition: transform 0.1s ease, opacity 0.2s; letter-spacing: var(--tracking-normal); }
     .auth-submit:hover { opacity: 0.9; }
+    .auth-submit:active { transform: scale(0.97); }
     .auth-links { text-align: center; margin-top: var(--space-4); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); }
     .auth-links a { color: var(--color-accent); text-decoration: none; }
     .auth-links a:hover { text-decoration: underline; }
@@ -34,6 +36,9 @@
     .flash-error { background: var(--color-flash-error-bg); color: var(--color-incorrect); }
     .flash-info { background: var(--color-flash-info-bg); color: var(--color-correct); }
     .auth-hint { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-faint); margin-top: var(--space-1); }
+    @media (prefers-reduced-motion: reduce) {
+      .auth-card, .auth-logo .logo-mark, .auth-logo .logo-text { animation: none; }
+    }
   </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
   {% if ga4_id %}
@@ -57,6 +62,7 @@
   {% endif %}
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="login" aria-hidden="true"></div>
   <div class="auth-page">
     <div class="auth-card">
       <div class="auth-logo">
@@ -150,5 +156,7 @@
       });
     })();
   </script>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 </body>
 </html>

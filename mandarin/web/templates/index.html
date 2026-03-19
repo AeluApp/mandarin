@@ -92,6 +92,8 @@
   {% endif %}
 </head>
 <body>
+  <!-- WebGL atmosphere layer -->
+  <div id="webgl-atmosphere" data-scene="dashboard" aria-hidden="true"></div>
   {% include "ui-icons.svg" %}
   <a href="#app" class="skip-link">Skip to content</a>
   <!-- Cookie consent banner -->
@@ -145,7 +147,7 @@
 
     <!-- Dashboard (visible before session starts) -->
     <section id="dashboard" aria-label="Dashboard">
-      <div class="stats-row" role="list" aria-label="Quick stats">
+      <div class="stats-row stagger-children" role="list" aria-label="Quick stats">
         <div class="stat" role="listitem">
           <div class="stat-value">{{ items_learning|default(0) }}</div>
           <div class="stat-label">Learning</div>
@@ -182,15 +184,15 @@
       <!-- Next session preview — populated by JS -->
       <div id="next-session-preview" class="next-session-preview hidden" aria-label="Next session preview"></div>
 
-      <div class="actions">
-        <button id="btn-start" class="btn-primary" aria-label="Start full session">Begin</button>
-        <button id="btn-mini" class="btn-secondary" aria-label="Start mini session">Quick session</button>
+      <div class="actions" data-reveal>
+        <button id="btn-start" class="btn-primary" data-magnetic="0.2" aria-label="Start full session">Begin</button>
+        <button id="btn-mini" class="btn-secondary" data-magnetic="0.15" aria-label="Start mini session">Quick session</button>
       </div>
-      <div class="actions actions-exposure">
-        <button id="btn-read" class="btn-secondary" aria-label="Open graded reader">Read</button>
-        <button id="btn-watch" class="btn-secondary" aria-label="Browse media shelf">Watch</button>
-        <button id="btn-listen" class="btn-secondary" aria-label="Start listening practice">Listen</button>
-        <button id="btn-grammar" class="btn-secondary" aria-label="Study grammar points"><span class="btn-grammar-icon" aria-hidden="true">文</span> Grammar</button>
+      <div class="actions actions-exposure" data-reveal>
+        <button id="btn-read" class="btn-secondary" data-magnetic="0.15" aria-label="Open graded reader">Read</button>
+        <button id="btn-watch" class="btn-secondary" data-magnetic="0.15" aria-label="Browse media shelf">Watch</button>
+        <button id="btn-listen" class="btn-secondary" data-magnetic="0.15" aria-label="Start listening practice">Listen</button>
+        <button id="btn-grammar" class="btn-secondary" data-magnetic="0.15" aria-label="Study grammar points"><span class="btn-grammar-icon" aria-hidden="true">文</span> Grammar</button>
       </div>
       <div id="session-explain" class="session-explain hidden">
         <button id="btn-explain" class="btn-link btn-sm" type="button" aria-expanded="false" aria-controls="session-explain-content">Why these drills?</button>
@@ -268,7 +270,7 @@
       {% endif %}
 
       <!-- Learner Intelligence Panel (Move 2) -->
-      <div class="panel collapsible" id="intelligence-panel" aria-label="Your learning brain">
+      <div class="panel collapsible surface-glass" id="intelligence-panel" aria-label="Your learning brain" data-reveal>
         <button class="panel-toggle" type="button" aria-expanded="false" aria-controls="intelligence-panel-body">
           <h3>Your Learning</h3>
         </button>
@@ -321,16 +323,16 @@
       {% endif %}
 
       <!-- Panels group -->
-      <div class="panels-group">
+      <div class="panels-group stagger-children">
 
       <!-- Weekly summary panel -->
-      <div id="weekly-panel" class="panel collapsible">
+      <div id="weekly-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="weekly-summary" data-panel="weekly-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> This Week</button>
         <div class="panel-body panel-closed" id="weekly-summary" aria-label="This week's activity"></div>
       </div>
 
       <!-- Forecast panel -->
-      <div id="forecast-panel" class="panel collapsible">
+      <div id="forecast-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="forecast-content" data-panel="forecast-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Forecast</button>
         <div class="panel-body panel-closed" id="forecast-content">
           <div class="panel-skeleton" aria-label="Loading forecast">
@@ -341,7 +343,7 @@
       </div>
 
       <!-- Retention panel -->
-      <div id="retention-panel" class="panel collapsible">
+      <div id="retention-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="retention-content" data-panel="retention-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Memory</button>
         <div class="panel-body panel-closed" id="retention-content">
           <div class="panel-skeleton" aria-label="Loading memory stats">
@@ -352,7 +354,7 @@
       </div>
 
       <!-- Skill Balance (per-modality diagnostics) -->
-      <div id="diagnostics-panel" class="panel collapsible">
+      <div id="diagnostics-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="diagnostics-content" data-panel="diagnostics-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Skill Balance</button>
         <div class="panel-body panel-closed" id="diagnostics-content">
           <div class="panel-skeleton" aria-label="Assessing skill balance">
@@ -363,7 +365,7 @@
       </div>
 
       <!-- Session history -->
-      <div id="sessions-panel" class="panel collapsible">
+      <div id="sessions-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="sessions-content" data-panel="sessions-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Recent Sessions</button>
         <div class="panel-body panel-closed" id="sessions-content">
           <div class="panel-skeleton" aria-label="Loading sessions">
@@ -374,7 +376,7 @@
       </div>
 
       <!-- Account panel -->
-      <div id="account-panel" class="panel collapsible">
+      <div id="account-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="account-content" data-panel="account-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Account</button>
         <div class="panel-body panel-closed" id="account-content">
           <div class="settings-section">
@@ -559,7 +561,7 @@
       </div>
 
       <!-- Referral panel -->
-      <div id="referral-panel" class="panel collapsible">
+      <div id="referral-panel" class="panel collapsible surface-glass" data-reveal-child>
         <button class="panel-toggle" aria-expanded="false" aria-controls="referral-content" data-panel="referral-panel"><span class="toggle-icon" aria-hidden="true"><svg class="icon"><use href="#icon-plus"/></svg></span> Invite a Friend</button>
         <div class="panel-body panel-closed" id="referral-content">
           <div class="referral-section">
@@ -923,6 +925,11 @@
     })();
   </script>
   <script nonce="{{ csp_nonce }}">window.IS_PRODUCTION={{ is_production|tojson }};window.AELU_CANONICAL_URL={{ canonical_url|tojson }};window.AELU_PRICING={{ pricing_display|tojson }};</script>
+  <script src="/static/ambient-particles.js?v={{ static_hash('ambient-particles.js') }}" defer></script>
+  <script src="/static/visual-elevation.js?v={{ static_hash('visual-elevation.js') }}" defer></script>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
+  <script src="/static/webgl/celebrations.js" defer></script>
   <script src="/static/offline-queue.js?v={{ static_hash('offline-queue.js') }}" defer></script>
   <script src="/static/capacitor-bridge.js?v={{ static_hash('capacitor-bridge.js') }}" defer></script>
   <script src="/static/app.js?v={{ static_hash('app.js') }}" defer></script>

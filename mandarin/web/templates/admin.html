@@ -13,9 +13,9 @@
     .admin-header h1 { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); }
     .admin-back { display: inline-block; margin-bottom: var(--space-4); color: var(--color-accent); text-decoration: none; font-family: var(--font-body); }
 
-    /* Tab bar */
-    .admin-tabs { display: flex; gap: var(--space-1); border-bottom: 2px solid var(--color-divider); margin-bottom: var(--space-5); flex-wrap: wrap; }
-    .admin-tab { padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s; }
+    /* Tab bar — animated underline */
+    .admin-tabs { display: flex; gap: var(--space-1); border-bottom: 2px solid var(--color-divider); margin-bottom: var(--space-5); flex-wrap: wrap; position: relative; }
+    .admin-tab { padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.25s var(--ease-default), border-color 0.25s var(--ease-default); }
     .admin-tab:hover { color: var(--color-text); }
     .admin-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 
@@ -27,14 +27,16 @@
     .admin-section { margin-bottom: var(--space-6); }
     .admin-section h2 { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); }
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); }
-    .metric-card { background: var(--color-surface); padding: var(--space-4); border-radius: var(--radius-lg, 0); text-align: center; }
+    .metric-card { padding: var(--space-4); border-radius: 8px; text-align: center; backdrop-filter: blur(16px) saturate(1.15); -webkit-backdrop-filter: blur(16px) saturate(1.15); background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 78%, transparent)); border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent)); transition: transform 0.2s var(--ease-default), box-shadow 0.2s var(--ease-default); }
+    .metric-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
     .metric-value { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-accent); }
     .metric-label { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin-top: var(--space-1); }
     .admin-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: var(--text-sm); }
     .admin-table th, .admin-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-divider); }
     .admin-table th { color: var(--color-text-dim); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--text-xs); }
     .admin-table td { color: var(--color-text); }
-    .admin-table tr:hover td { background: var(--color-surface); }
+    .admin-table tr { transition: background-color 0.15s var(--ease-default); }
+    .admin-table tr:hover td { background: color-mix(in srgb, var(--color-accent) 3%, var(--color-surface)); }
 
     /* Expandable traceback */
     .tb-toggle { cursor: pointer; color: var(--color-accent); text-decoration: underline; font-size: var(--text-xs); }
@@ -43,7 +45,7 @@
     .tb-content pre { background: var(--color-surface); padding: var(--space-3); border-radius: var(--radius); font-size: var(--text-xs); overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 300px; overflow-y: auto; color: var(--color-text); }
 
     /* Severity badges */
-    .badge { display: inline-block; padding: 1px 6px; border-radius: var(--radius); font-size: var(--text-xs); font-weight: 600; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: var(--text-xs); font-weight: 600; }
     .badge-error { background: var(--color-incorrect); color: var(--color-on-accent); }
     .badge-warning { background: var(--color-mastery-stabilizing); color: var(--color-on-accent); }
     .badge-info { background: var(--color-accent); color: var(--color-on-accent); }
@@ -93,7 +95,8 @@
 
     /* Segment cards grid */
     .segment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3); }
-    .segment-card { background: var(--color-surface); padding: var(--space-3); border-radius: var(--radius-lg, 0); }
+    .segment-card { padding: var(--space-3); border-radius: 8px; backdrop-filter: blur(12px) saturate(1.1); -webkit-backdrop-filter: blur(12px) saturate(1.1); background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 78%, transparent)); border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent)); transition: transform 0.2s var(--ease-default), box-shadow 0.2s var(--ease-default); }
+    .segment-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
     .segment-card-title { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); text-transform: capitalize; }
     .segment-card-value { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-accent); }
     .segment-card-sub { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); margin-top: var(--space-1); }
@@ -133,6 +136,7 @@
   {% endif %}
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="admin" aria-hidden="true"></div>
   <div class="admin-page">
     <a href="/" class="admin-back"><svg class="icon" style="display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M19 12H5M5 12l6-6M5 12l6 6"/></svg> Back to app</a>
     <div class="admin-header">
@@ -3586,5 +3590,7 @@
       });
     }
   </script>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 </body>
 </html>

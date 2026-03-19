@@ -2520,6 +2520,10 @@ function displayShow(data) {
     AeluSound.correct();
     if (typeof CapacitorBridge !== 'undefined') CapacitorBridge.hapticFeedback('correct');
     _hapticFeedback('correct');
+    // Ink bloom visual feedback
+    if (window.AeluCelebrations && el) {
+      AeluCelebrations.inkBloom(el);
+    }
   } else if (cls.indexOf("msg-wrong") !== -1) {
     AeluSound.wrong();
     if (typeof CapacitorBridge !== 'undefined') CapacitorBridge.hapticFeedback('incorrect');
@@ -3129,6 +3133,11 @@ function showComplete(summary) {
   const total = summary.items_completed || 0;
   const correct = summary.items_correct || 0;
   const pct = total > 0 ? Math.round(correct / total * 100) : 0;
+
+  // Paper lantern celebration for strong sessions
+  if (pct >= 80 && total >= 3 && window.AeluCelebrations) {
+    setTimeout(function() { AeluCelebrations.paperLanterns(); }, 300);
+  }
 
   trackEvent('session_complete', {items_completed: total, accuracy: pct});
 
