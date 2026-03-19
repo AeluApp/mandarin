@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 117  # Increment when adding migrations
+SCHEMA_VERSION = 118  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7025,6 +7025,103 @@ def _migrate_v116_to_v117(conn):
         pass
 
 
+def _migrate_v117_to_v118(conn):
+    """v117->v118: Experiment assignment architecture — eligibility, stratification,
+    balance monitoring, audit logging, governance, holdout groups."""
+    tables = _table_set(conn)
+
+    # Extend experiment table with governance/stratification columns
+    exp_cols = _col_set(conn, "experiment") if "experiment" in tables else set()
+    new_exp_cols = {
+        "salt": "TEXT",
+        "hypothesis": "TEXT",
+        "primary_metric": "TEXT",
+        "secondary_metrics": "TEXT",
+        "outcome_window_days": "INTEGER DEFAULT 7",
+        "outcome_horizon": "TEXT DEFAULT 'short'",
+        "mde": "REAL",
+        "eligibility_rules": "TEXT",
+        "stratification_config": "TEXT",
+        "predeclared_subgroups": "TEXT",
+        "goodhart_risks": "TEXT",
+        "contamination_risks": "TEXT",
+        "pre_registration": "TEXT",
+        "config_frozen_at": "TEXT",
+        "randomization_unit": "TEXT DEFAULT 'user'",
+    }
+    for col, typedef in new_exp_cols.items():
+        if col not in exp_cols:
+            try:
+                conn.execute(f"ALTER TABLE experiment ADD COLUMN {col} {typedef}")
+            except Exception:
+                pass
+
+    # Extend experiment_assignment table
+    assign_cols = _col_set(conn, "experiment_assignment") if "experiment_assignment" in tables else set()
+    for col, typedef in {"stratum": "TEXT", "hash_value": "TEXT",
+                         "eligibility_version": "TEXT", "pre_period_data": "TEXT"}.items():
+        if col not in assign_cols:
+            try:
+                conn.execute(f"ALTER TABLE experiment_assignment ADD COLUMN {col} {typedef}")
+            except Exception:
+                pass
+
+    if "experiment_audit_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_audit_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER,
+                event_type TEXT NOT NULL,
+                user_id INTEGER,
+                data TEXT NOT NULL,
+                created_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_exp_audit_experiment ON experiment_audit_log(experiment_id);
+        """)
+
+    if "experiment_balance_check" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_balance_check (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER NOT NULL,
+                check_type TEXT NOT NULL,
+                passed INTEGER NOT NULL,
+                details TEXT NOT NULL,
+                created_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_exp_balance_experiment ON experiment_balance_check(experiment_id);
+        """)
+
+    if "experiment_eligibility_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_eligibility_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                eligible INTEGER NOT NULL,
+                reasons TEXT,
+                checked_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_exp_eligibility_experiment ON experiment_eligibility_log(experiment_id);
+        """)
+
+    if "experiment_holdout" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_holdout (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL UNIQUE,
+                assigned_at TEXT DEFAULT (datetime('now')),
+                holdout_group TEXT DEFAULT 'global'
+            );
+            CREATE INDEX IF NOT EXISTS idx_exp_holdout_user ON experiment_holdout(user_id);
+        """)
+
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7143,6 +7240,7 @@ MIGRATIONS = {
     114: _migrate_v114_to_v115,
     115: _migrate_v115_to_v116,
     116: _migrate_v116_to_v117,
+    117: _migrate_v117_to_v118,
 }
 
 
