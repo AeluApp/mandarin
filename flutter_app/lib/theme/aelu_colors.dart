@@ -48,6 +48,39 @@ class AeluColors {
   // ── Overlay ──
   static const Color overlay = Color(0xFF1C2028);         // matches baseDark
 
+  // ── Glass tokens (semi-transparent surfaces for BackdropFilter) ──
+  // Light: surface at 78% opacity, dense at 88%
+  static final Color glassBgLight = surfaceLight.withValues(alpha: 0.78);
+  static final Color glassBgDenseLight = surfaceLight.withValues(alpha: 0.88);
+  static final Color glassBorderLight = divider.withValues(alpha: 0.40);
+
+  // Dark: surfaceAlt at 72% opacity, dense at 85%
+  static final Color glassBgDark = surfaceAltDark.withValues(alpha: 0.72);
+  static final Color glassBgDenseDark = surfaceAltDark.withValues(alpha: 0.85);
+  static final Color glassBorderDark = dividerDark.withValues(alpha: 0.30);
+
+  // ── Shadow depth colors ──
+  // Light mode: slate-blue tinted shadow (matches --color-shadow: rgba(42,54,80,0.04))
+  static const Color shadowLight = Color(0x0A2A3650);     // rgba(42,54,80,0.04)
+  static const Color shadowMedLight = Color(0x14000000);   // rgba(0,0,0,0.08) for lg+
+  static const Color shadowHeavyLight = Color(0x1A000000); // rgba(0,0,0,0.10) for xl
+  static const Color shadowDeepLight = Color(0x24000000);  // rgba(0,0,0,0.14) for 2xl
+
+  // Dark mode: deeper blacks for layered depth
+  static const Color shadowDark = Color(0x33000000);       // rgba(0,0,0,0.20)
+  static const Color shadowMedDark = Color(0x26000000);    // rgba(0,0,0,0.15)
+  static const Color shadowHeavyDark = Color(0x40000000);  // rgba(0,0,0,0.25)
+  static const Color shadowDeepDark = Color(0x4D000000);   // rgba(0,0,0,0.30)
+
+  // ── Mesh gradient colors (animated background tints) ──
+  // Light: subtle accent/secondary washes over base
+  static final Color meshAccentLight = accent.withValues(alpha: 0.06);
+  static final Color meshSecondaryLight = secondary.withValues(alpha: 0.04);
+
+  // Dark: subtler washes
+  static final Color meshAccentDark = accentDark.withValues(alpha: 0.04);
+  static final Color meshSecondaryDark = secondaryDark.withValues(alpha: 0.03);
+
   // ── Mastery stage colors ──
   static const Color masteryDurable = Color(0xFF4A7A4A);
   static const Color masteryStable = Color(0xFF5A8A5A);
@@ -80,4 +113,23 @@ class AeluColors {
 
   static Color mutedOf(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark ? mutedDark : muted;
+
+  // ── Glass theme-aware resolvers ──
+
+  static Color glassBgOf(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? glassBgDark : glassBgLight;
+
+  static Color glassBgDenseOf(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? glassBgDenseDark : glassBgDenseLight;
+
+  static Color glassBorderOf(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? glassBorderDark : glassBorderLight;
+
+  // ── Mesh gradient theme-aware resolvers ──
+
+  static Color meshAccentOf(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? meshAccentDark : meshAccentLight;
+
+  static Color meshSecondaryOf(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? meshSecondaryDark : meshSecondaryLight;
 }

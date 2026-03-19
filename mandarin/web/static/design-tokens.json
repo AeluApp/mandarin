@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Aelu Civic Sanctuary design tokens — single source of truth for all platforms"
+  },
+  "color": {
+    "light": {
+      "base": "#F2EBE0",
+      "surface": "#F2EBE0",
+      "surfaceAlt": "#EAE2D6",
+      "text": "#2A3650",
+      "textDim": "#5A6678",
+      "textFaint": "#6A7080",
+      "textFaintest": "#707A8A",
+      "accent": "#946070",
+      "accentDim": "#7A5060",
+      "onAccent": "#FFFFFF",
+      "secondary": "#6A7A5A",
+      "correct": "#5A7A5A",
+      "incorrect": "#806058",
+      "border": "transparent",
+      "divider": "#D8D0C4",
+      "shadow": "rgba(42, 54, 80, 0.04)",
+      "flashErrorBg": "#F0E0DD",
+      "flashInfoBg": "#DDE8DD",
+      "masteryDurable": "#4A6A4A",
+      "masteryStable": "#6A8A5A",
+      "masteryStabilizing": "#B8A050",
+      "skyTop": "#E4E0D6",
+      "skyBottom": "#F2EBE0"
+    },
+    "dark": {
+      "base": "#1C2028",
+      "surface": "#1C2028",
+      "surfaceAlt": "#242A34",
+      "text": "#E4DDD0",
+      "textDim": "#A09888",
+      "textFaint": "#A8A090",
+      "textFaintest": "#A0A8B8",
+      "accent": "#B07888",
+      "accentDim": "#946070",
+      "onAccent": "#FFFFFF",
+      "secondary": "#8AAA7A",
+      "correct": "#7A9A7A",
+      "incorrect": "#A8988E",
+      "border": "transparent",
+      "divider": "#3A3530",
+      "shadow": "rgba(0, 0, 0, 0.12)",
+      "flashErrorBg": "#3A2828",
+      "flashInfoBg": "#283A28",
+      "masteryDurable": "#5A8A5A",
+      "masteryStable": "#7AAA6A",
+      "masteryStabilizing": "#D4B060",
+      "skyTop": "#222838",
+      "skyBottom": "#1C2028"
+    }
+  },
+  "typography": {
+    "fontHeading": "'Cormorant Garamond', 'Noto Serif SC', Georgia, serif",
+    "fontBody": "'Source Serif 4', 'Noto Serif SC', Georgia, serif",
+    "fontHanzi": "'Noto Serif SC', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif",
+    "fontMono": "'SF Mono', 'Menlo', 'Consolas', monospace",
+    "scale": {
+      "xs": "0.694rem",
+      "sm": "0.833rem",
+      "base": "1rem",
+      "lg": "1.2rem",
+      "xl": "clamp(1.2rem, 2vw, 1.44rem)",
+      "2xl": "clamp(1.4rem, 2.8vw, 1.728rem)",
+      "3xl": "clamp(1.6rem, 3.5vw, 2.074rem)",
+      "display": "clamp(2.2rem, 5vw, 3.2rem)"
+    },
+    "lineHeight": {
+      "display": 1.1,
+      "3xl": 1.2,
+      "xl": 1.3,
+      "lg": 1.3,
+      "base": 1.6,
+      "sm": 1.5,
+      "xs": 1.4,
+      "tight": 1.2,
+      "relaxed": 1.8
+    },
+    "tracking": {
+      "tight": "0.01em",
+      "normal": "0.03em",
+      "wide": "0.15em"
+    }
+  },
+  "spacing": {
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.5rem",
+    "6": "2rem",
+    "7": "3rem",
+    "8": "4rem"
+  },
+  "shadow": {
+    "light": {
+      "xs": "0 1px 1px rgba(42, 54, 80, 0.04)",
+      "sm": "0 1px 3px rgba(42, 54, 80, 0.04), 0 1px 2px rgba(42, 54, 80, 0.04)",
+      "md": "0 2px 6px rgba(42, 54, 80, 0.04), 0 1px 3px rgba(42, 54, 80, 0.04)",
+      "lg": "0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(42, 54, 80, 0.04)",
+      "xl": "0 16px 48px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.05)",
+      "2xl": "0 24px 64px rgba(0, 0, 0, 0.14), 0 8px 24px rgba(0, 0, 0, 0.06)"
+    },
+    "dark": {
+      "xs": "0 1px 1px rgba(0, 0, 0, 0.2)",
+      "sm": "0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15)",
+      "md": "0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15)",
+      "lg": "0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12)",
+      "xl": "0 16px 48px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15)",
+      "2xl": "0 24px 64px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.18)"
+    }
+  },
+  "motion": {
+    "duration": {
+      "press": "0.1s",
+      "snappy": "0.15s",
+      "fast": "0.2s",
+      "base": "0.4s",
+      "slow": "0.5s",
+      "ambient": "1.8s",
+      "float": "3s"
+    },
+    "easing": {
+      "default": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "upward": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "exit": "cubic-bezier(0.4, 0, 1, 1)",
+      "spring": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+    }
+  },
+  "shape": {
+    "radius": 0,
+    "radiusSm": 0,
+    "radiusLg": 0,
+    "adminRadius": 8
+  },
+  "glass": {
+    "blur": "blur(20px) saturate(1.2)",
+    "bgOpacity": 0.78,
+    "bgDenseOpacity": 0.88,
+    "borderOpacity": 0.4
+  }
+}

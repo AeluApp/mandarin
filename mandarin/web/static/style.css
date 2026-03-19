@@ -10149,6 +10149,177 @@ html[data-theme="dark"] .hanzi-watermark {
   50% { opacity: 0; }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   Non-core feature elevation — reading, listening, grammar, media, teacher
+   Glass cards, hover lift, animated interactions, polished empty states
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Reading list items — hover lift + accent bar ── */
+.reading-list-item {
+  transition: background var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+
+@media (hover: hover) {
+  .reading-list-item:hover {
+    transform: translateX(4px);
+    background: color-mix(in srgb, var(--color-accent) 4%, var(--color-surface));
+  }
+}
+
+/* ── Reading passage — generous typography ── */
+.reading-passage { animation: driftUp 0.4s var(--ease-upward) backwards; }
+.reading-text { font-size: var(--text-lg); line-height: var(--lh-relaxed, 1.8); }
+@keyframes driftUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Reading gloss tooltip — glass ── */
+@supports (backdrop-filter: blur(1px)) {
+  .reading-gloss {
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 85%, transparent));
+    border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent));
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ── Media grid cards — glass + hover ── */
+.media-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .media-type-chips button {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background var(--duration-fast) var(--ease-default),
+                color var(--duration-fast) var(--ease-default),
+                transform var(--duration-fast) var(--ease-default);
+  }
+
+  .media-type-chips button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* ── Listening — waveform area + mode tabs ── */
+.listening-mode-tab {
+  transition: color 0.25s var(--ease-default), border-color 0.25s var(--ease-default);
+}
+
+.listening-mode-tab.active {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.dictation-input {
+  transition: border-color 0.3s var(--ease-default);
+}
+
+.dictation-input:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+/* ── Grammar cards — glass + stagger ── */
+.grammar-mastery-summary {
+  animation: driftUp 0.4s var(--ease-upward) backwards;
+}
+
+/* ── Grammar level tabs — animated underline ── */
+.grammar-level-tabs [role="tab"] {
+  transition: color 0.25s var(--ease-default), border-color 0.25s var(--ease-default);
+}
+
+/* ── Teacher dashboard — class cards ── */
+@supports (backdrop-filter: blur(1px)) {
+  .classroom-card {
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 78%, transparent));
+    border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent));
+    transition: transform var(--duration-fast) var(--ease-default),
+                box-shadow var(--duration-fast) var(--ease-default);
+  }
+
+  .classroom-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ── Empty states — centered with illustration float ── */
+.empty-state {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  animation: driftUp 0.5s var(--ease-upward) backwards;
+}
+
+.empty-state-illustration {
+  transition: transform var(--duration-float, 3s) var(--ease-default);
+}
+
+@media (hover: hover) {
+  .empty-state-illustration:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ── Session complete — enhanced completion screen ── */
+.complete-illustration {
+  animation: gentleBloom 0.8s var(--ease-upward) backwards;
+}
+
+#complete-content h2 {
+  animation: driftUp 0.5s var(--ease-upward) 0.2s backwards;
+}
+
+.complete-score {
+  animation: driftUp 0.5s var(--ease-upward) 0.3s backwards;
+}
+
+.complete-pct {
+  animation: driftUp 0.5s var(--ease-upward) 0.4s backwards;
+}
+
+/* ── Onboarding wizard — enhanced transitions ── */
+.onboarding-wizard-card {
+  animation: authCardEnter 0.5s var(--ease-upward) backwards;
+}
+
+.onboarding-intro-slide {
+  animation: driftUp 0.5s var(--ease-upward) backwards;
+}
+
+.onboarding-opt {
+  transition: transform var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+
+@media (hover: hover) {
+  .onboarding-opt:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ── Settings rows — smooth expand ── */
+.settings-inline-form {
+  animation: driftUp 0.3s var(--ease-upward) backwards;
+}
+
+/* ── Next session preview — glass card ── */
+@supports (backdrop-filter: blur(1px)) {
+  .next-session-preview {
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    background: var(--glass-bg, color-mix(in srgb, var(--color-surface) 78%, transparent));
+    border: var(--glass-border, 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent));
+  }
+}
+
 /* Respect reduced motion for all 2026 additions */
 @media (prefers-reduced-motion: reduce) {
   html, body { transition: none !important; }
@@ -10159,4 +10330,7 @@ html[data-theme="dark"] .hanzi-watermark {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none !important; }
   .ptr-indicator { transition: none !important; animation: none !important; }
+  .reading-passage, .grammar-mastery-summary, .empty-state,
+  .complete-illustration, #complete-content h2, .complete-score, .complete-pct,
+  .onboarding-wizard-card, .onboarding-intro-slide, .settings-inline-form { animation: none !important; }
 }

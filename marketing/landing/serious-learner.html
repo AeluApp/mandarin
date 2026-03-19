@@ -62,7 +62,7 @@
       }
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-base); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); color: var(--color-text); background-color: var(--color-base); background-image: radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 50%), radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--color-secondary) 4%, var(--color-base)) 0%, transparent 45%), radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 55%); line-height: 1.7; -webkit-font-smoothing: antialiased; }
     .container { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-4); }
 
     .hero { text-align: center; padding: var(--space-8) 0 var(--space-6); }
@@ -77,6 +77,7 @@
     .cta-email input::placeholder { color: var(--color-text-faint); }
     .btn-primary { padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-base); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
     .btn-primary:hover { opacity: 0.85; }
+    .btn-primary:active { transform: scale(0.97); }
     .cta-note { font-size: 0.85rem; color: var(--color-text-faint); }
     .cta-success { padding: var(--space-3) var(--space-4); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); border-radius: var(--radius); color: var(--color-accent); font-size: 0.95rem; display: none; }
 
@@ -136,6 +137,7 @@
     footer { padding: var(--space-5) 0; text-align: center; font-size: 0.85rem; color: var(--color-text-faint); }
     footer a { color: var(--color-text-faint); text-decoration: underline; }
 
+    @keyframes heroFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes drift-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .hero-hanzi, .hero h1, .hero-sub, .cta-group { animation: drift-up 0.6s ease-out both; }
     .hero h1 { animation-delay: 0.1s; } .hero-sub { animation-delay: 0.2s; } .cta-group { animation-delay: 0.3s; }
@@ -186,6 +188,7 @@
   </style>
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <!-- Nav -->
   <nav aria-label="Main navigation">
@@ -348,5 +351,8 @@
   </footer>
 
   <script src="/marketing.js"></script>
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
+
 </body>
 </html>

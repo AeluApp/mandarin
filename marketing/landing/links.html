@@ -48,7 +48,11 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background: var(--color-base);
+      background-color: var(--color-base);
+      background-image:
+        radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--color-secondary) 4%, var(--color-base)) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 55%);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
@@ -149,6 +153,7 @@
   </style>
 </head>
 <body>
+  <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <div class="links-page">
     <div class="brand">
@@ -173,6 +178,9 @@
 
     <p class="tagline">Adaptive Mandarin study. Honest data, no theatrics.</p>
   </div>
+
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
 
 </body>
 </html>
