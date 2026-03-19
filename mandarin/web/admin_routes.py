@@ -2949,6 +2949,112 @@ def admin_product_intelligence_history():
     except sqlite3.OperationalError:
         return jsonify({"history": []})
 
+# ── Nudge Dashboard ──────────────────────────────────────────────
+@admin_bp.route("/api/admin/nudge-dashboard")
+@admin_required
+@api_error_handler("NudgeDashboard")
+def admin_nudge_dashboard():
+    """Behavioral economics nudge dashboard — all nudges with conversion stats.
+
+    Shows per-nudge exposure/conversion, DOCTRINE compliance scores,
+    A/B test status. Used by admin to monitor nudge health and ethics.
+    """
+    try:
+        from ..nudge_registry import get_all_nudge_stats
+        with db.connection() as conn:
+            stats = get_all_nudge_stats(conn)
+            # Summary metrics
+            total = len(stats)
+            active = sum(1 for s in stats if s["status"] == "active")
+            review = sum(1 for s in stats if s["status"] == "review")
+            avg_doctrine = (
+                sum(s["doctrine_score"] or 0 for s in stats) / total
+                if total > 0 else 0
+            )
+            return jsonify({
+                "nudges": stats,
+                "summary": {
+                    "total_registered": total,
+                    "active": active,
+                    "needs_review": review,
+                    "avg_doctrine_score": round(avg_doctrine, 2),
+                },
+            })
+    except Exception as e:
+        logger.error("Nudge dashboard error: %s", e)
+        return jsonify({"nudges": [], "summary": {}})
+
+
+# ── Consulting Frameworks ────────────────────────────────────────
+@admin_bp.route("/api/admin/executive-summary")
+@admin_required
+@api_error_handler("ExecutiveSummary")
+def admin_executive_summary():
+    """One-page state of the business — all firms require this."""
+    try:
+        from ..intelligence.executive_summary import generate_executive_summary
+        with db.connection() as conn:
+            summary = generate_executive_summary(conn)
+            return jsonify(summary)
+    except Exception as e:
+        logger.error("Executive summary error: %s", e)
+        return jsonify({"error": str(e)})
+
+
+@admin_bp.route("/api/admin/balanced-scorecard")
+@admin_required
+@api_error_handler("BalancedScorecard")
+def admin_balanced_scorecard():
+    """Kaplan & Norton BSC — financial, customer, internal, learning perspectives."""
+    try:
+        from ..intelligence.balanced_scorecard import compute_balanced_scorecard
+        with db.connection() as conn:
+            bsc = compute_balanced_scorecard(conn)
+            return jsonify(bsc)
+    except Exception as e:
+        logger.error("BSC error: %s", e)
+        return jsonify({"error": str(e)})
+
+
+@admin_bp.route("/api/admin/revenue/waterfall")
+@admin_required
+@api_error_handler("RevenueWaterfall")
+def admin_revenue_waterfall():
+    """McKinsey revenue waterfall — monthly MRR decomposition."""
+    try:
+        with db.connection() as conn:
+            rows = conn.execute("""
+                SELECT month, new_mrr, expansion_mrr, reactivation_mrr,
+                       contraction_mrr, churn_mrr, net_new_mrr, ending_mrr
+                FROM pi_revenue_waterfall
+                ORDER BY month DESC LIMIT 12
+            """).fetchall()
+            return jsonify({
+                "waterfall": [dict(r) for r in rows],
+            })
+    except Exception as e:
+        logger.error("Revenue waterfall error: %s", e)
+        return jsonify({"waterfall": []})
+
+
+@admin_bp.route("/api/admin/growth-accounting")
+@admin_required
+@api_error_handler("GrowthAccounting")
+def admin_growth_accounting():
+    """Bain growth accounting — Quick Ratio and MRR components."""
+    try:
+        from ..intelligence.executive_summary import generate_executive_summary
+        with db.connection() as conn:
+            summary = generate_executive_summary(conn)
+            return jsonify({
+                "quick_ratio": summary.get("quick_ratio"),
+                "headline_metrics": summary.get("headline_metrics", {}),
+            })
+    except Exception as e:
+        logger.error("Growth accounting error: %s", e)
+        return jsonify({"quick_ratio": None})
+
+
 # ── Intelligence Engine V4 Endpoints ─────────────────────────────
 @admin_bp.route("/api/admin/intelligence/findings")
 @admin_required

@@ -1254,6 +1254,74 @@ def _show_anomaly_summary(state: SessionState, plan: SessionPlan,
         show_fn(display.dim(f"\n  [debug] {' · '.join(anomalies)}"))
 
 
+def _show_peak_moment(conn: sqlite3.Connection, state: SessionState,
+                      show_fn: Callable, user_id: int = 1) -> None:
+    """Show the peak moment of the session (Kahneman peak-end rule).
+
+    Finds items that were previously errored but answered correctly this
+    session — the most satisfying moment. Shows the best one.
+    """
+    if not state.results or state.items_correct == 0:
+        return
+
+    # Find items answered correctly this session
+    correct_ids = [
+        r.content_item_id for r in state.results
+        if hasattr(r, "correct") and r.correct and hasattr(r, "content_item_id")
+    ]
+    if not correct_ids:
+        return
+
+    # Find which of these had recent errors (last 14 days)
+    placeholders = ",".join("?" * len(correct_ids))
+    try:
+        rows = conn.execute(
+            f"""SELECT re.content_item_id, ci.hanzi, ci.pinyin, ci.english,
+                       MAX(re.reviewed_at) as last_error
+                FROM review_event re
+                JOIN content_item ci ON re.content_item_id = ci.id
+                WHERE re.user_id = ?
+                  AND re.content_item_id IN ({placeholders})
+                  AND re.correct = 0
+                  AND re.reviewed_at >= datetime('now', '-14 days')
+                GROUP BY re.content_item_id
+                ORDER BY last_error DESC
+                LIMIT 1""",
+            [user_id] + correct_ids,
+        ).fetchone()
+
+        if rows:
+            hanzi = rows["hanzi"]
+            english = rows["english"]
+            show_fn(display.dim(f"  Best moment: recalled {hanzi} ({english}) correctly"))
+    except Exception:
+        pass
+
+
+def _show_next_session_preview(conn: sqlite3.Connection, show_fn: Callable,
+                                user_id: int = 1) -> None:
+    """Preview upcoming items for next session (Zeigarnik effect).
+
+    Showing what's coming next creates anticipation and a natural bridge
+    to the next session. DOCTRINE §5: "the learner exits with something."
+    """
+    try:
+        from .scheduler import preview_next_session
+        preview = preview_next_session(conn, user_id, n=3)
+        if preview:
+            review_count = sum(1 for p in preview if not p["is_new"])
+            new_count = sum(1 for p in preview if p["is_new"])
+            words = " · ".join(p["hanzi"] for p in preview)
+            parts = []
+            if review_count:
+                parts.append(f"{review_count} review")
+            if new_count:
+                parts.append(f"{new_count} new")
+            show_fn(display.dim(f"  Coming up: {words} ({', '.join(parts)})"))
+    except Exception:
+        pass
+
+
 def _finalize(conn: sqlite3.Connection, state: SessionState,
               show_fn: Callable, input_fn: Callable = None,
               pre_milestones: set = None,
@@ -1372,6 +1440,14 @@ def _finalize(conn: sqlite3.Connection, state: SessionState,
         show_fn(f"\n{display.dim('Calibrate: ./run calibrate')}")
         show_fn(display.dim("Estimates current level across modalities."))
 
+    # ── Peak moment (Kahneman peak-end rule) ──
+    # Find the most notable correct answer this session — an item that
+    # was previously difficult but answered correctly today.
+    try:
+        _show_peak_moment(conn, state, show_fn, user_id)
+    except Exception:
+        pass
+
     # ── Stage transitions — top 3 in main flow ──
     transitions = db.get_stage_transitions(conn, state.session_id, user_id=user_id)
     if transitions:
@@ -1396,6 +1472,13 @@ def _finalize(conn: sqlite3.Connection, state: SessionState,
     # ── Real-world task surfacing (relatedness grounding) ──
     if total > 0:
         _show_real_world_task(conn, state, show_fn)
+
+    # ── Zeigarnik preview — show upcoming items to create return anticipation ──
+    if total > 0 and not state.early_exit:
+        try:
+            _show_next_session_preview(conn, show_fn, user_id)
+        except Exception:
+            pass
 
     # ── Post-session behavioral nudges (skip on early exit — user wants to stop) ──
     if input_fn and total > 0 and not state.early_exit:

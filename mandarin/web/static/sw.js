@@ -157,7 +157,7 @@ self.addEventListener('fetch', function(event) {
 
   /* ── API calls: network-first, cache safe read-only endpoints ── */
   if (url.pathname.startsWith('/api/')) {
-    var safeToCacheAPIs = ['/api/health', '/api/reading/', '/api/media/'];
+    var safeToCacheAPIs = ['/api/health', '/api/reading/', '/api/media/', '/api/listening/', '/api/grammar/'];
     var isSafeToCache = safeToCacheAPIs.some(function(prefix) {
       return url.pathname.startsWith(prefix);
     });

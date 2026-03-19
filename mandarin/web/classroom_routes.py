@@ -839,6 +839,9 @@ def create_assignment():
     data = request.get_json(silent=True) or {}
     classroom_id = data.get("classroom_id")
     title = (data.get("title") or "").strip()
+    assignment_type = data.get("assignment_type", "drill")
+    if assignment_type not in ("drill", "reading", "listening", "conversation", "grammar"):
+        assignment_type = "drill"
     hsk_level = data.get("hsk_level")
     content_item_ids = data.get("content_item_ids", [])
     drill_types = data.get("drill_types", [])
@@ -875,12 +878,12 @@ def create_assignment():
             cursor = conn.execute("""
                 INSERT INTO classroom_assignment
                 (classroom_id, teacher_user_id, title, hsk_level,
-                 content_item_ids, drill_types, due_date, notes)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                 content_item_ids, drill_types, due_date, notes, assignment_type)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (classroom_id, current_user.id, title, hsk_level,
                   _json.dumps(content_item_ids),
                   _json.dumps(drill_types) if drill_types else None,
-                  due_date, notes))
+                  due_date, notes, assignment_type))
             assignment_id = cursor.lastrowid
             conn.commit()
 

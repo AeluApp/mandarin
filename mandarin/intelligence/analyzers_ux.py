@@ -169,10 +169,88 @@ def _analyze_session_duration(conn) -> list[dict]:
     return findings
 
 
+def _analyze_modality_ux_breakdown(conn) -> list[dict]:
+    """UX breakdown by modality — reading, listening, conversation, grammar, media.
+
+    The other UX analyzers aggregate across all drills. This one splits
+    by modality to catch modality-specific UX problems invisible in aggregates.
+    """
+    findings = []
+    try:
+        # Group accuracy and skip rate by modality bucket
+        rows = _safe_query_all(conn, """
+            SELECT
+                CASE
+                    WHEN drill_type IN ('mc', 'reverse_mc') THEN 'recognition'
+                    WHEN drill_type LIKE 'listening%' THEN 'listening'
+                    WHEN drill_type = 'dialogue' THEN 'conversation'
+                    WHEN drill_type IN ('intuition', 'complement', 'ba_bei',
+                         'error_correction', 'measure_word', 'measure_word_cloze') THEN 'grammar'
+                    WHEN drill_type = 'media_comprehension' THEN 'media'
+                    WHEN drill_type IN ('ime_type', 'hanzi_to_pinyin',
+                         'english_to_pinyin') THEN 'production'
+                    ELSE 'other'
+                END as modality_group,
+                COUNT(*) as total,
+                SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END) as correct_count,
+                SUM(CASE WHEN skipped = 1 THEN 1 ELSE 0 END) as skip_count
+            FROM review_event
+            WHERE reviewed_at >= datetime('now', '-14 days')
+            GROUP BY modality_group
+            HAVING total >= 10
+        """)
+
+        if not rows or len(rows) < 2:
+            return findings
+
+        # Compute overall average for comparison
+        overall_accuracy = sum(r["correct_count"] for r in rows) / max(1, sum(r["total"] for r in rows))
+
+        for r in rows:
+            accuracy = r["correct_count"] / r["total"]
+            skip_rate = r["skip_count"] / r["total"]
+            modality = r["modality_group"]
+
+            # Flag modality with accuracy >20pp below overall
+            if accuracy < overall_accuracy - 0.20 and r["total"] >= 20:
+                findings.append(_finding(
+                    "ux", "medium",
+                    f"{modality.title()} accuracy {accuracy*100:.0f}% — 20pp+ below overall {overall_accuracy*100:.0f}%",
+                    f"{modality.title()} drills: {accuracy*100:.0f}% accuracy vs "
+                    f"{overall_accuracy*100:.0f}% overall ({r['total']} drills in 14 days). "
+                    f"This modality is significantly harder for learners.",
+                    f"Review {modality} drill difficulty. Consider easier scaffolding, "
+                    f"better hints, or lower-level content for {modality} drills.",
+                    f"Investigate {modality} drill accuracy gap.",
+                    f"{modality.title()} is a UX pain point — disproportionately hard.",
+                    ["mandarin/drills/", "mandarin/scheduler.py"],
+                ))
+
+            # Flag modality with >20% skip rate
+            if skip_rate > 0.20 and r["total"] >= 20:
+                findings.append(_finding(
+                    "ux", "medium",
+                    f"{modality.title()} skip rate {skip_rate*100:.0f}% — learners avoiding this modality",
+                    f"{modality.title()} drills: {skip_rate*100:.0f}% skip rate "
+                    f"({r['skip_count']}/{r['total']} in 14 days). High skip rate "
+                    f"suggests learners find this modality frustrating or confusing.",
+                    f"Reduce {modality} difficulty or improve instructions. High "
+                    f"skip rate means learners are voting with their feet.",
+                    f"Investigate why learners skip {modality} drills.",
+                    f"High skip rate in {modality} signals a usability problem.",
+                    ["mandarin/drills/", "mandarin/scheduler.py"],
+                ))
+
+    except Exception:
+        pass
+    return findings
+
+
 ANALYZERS = [
     _analyze_session_abandonment,
     _analyze_drill_skip_rate,
     _analyze_repeated_errors,
     _analyze_onboarding_completion,
     _analyze_session_duration,
+    _analyze_modality_ux_breakdown,
 ]

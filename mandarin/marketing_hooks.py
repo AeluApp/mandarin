@@ -533,3 +533,84 @@ def compute_viral_coefficient(conn, days: int = 30) -> dict:
         }
     except Exception as e:
         return {"k_factor": 0.0, "error": str(e)}
+
+
+def check_fresh_start_triggers(db_path=None):
+    """Detect fresh-start opportunities for re-engagement (Dai, Milkman & Riis 2014).
+
+    Temporal landmarks motivate goal pursuit. Returns a list of trigger dicts
+    for users who might benefit from a fresh-start nudge. DOCTRINE-compliant:
+    no guilt, no urgency — just 'your schedule has been adjusted.'
+
+    Triggers:
+        1. New calendar month: inactive 7+ days at month boundary
+        2. Monday: users with weekly goals, inactive 3+ days
+        3. HSK level completion: just completed a level milestone
+        4. Cultural events: Chinese New Year, Mid-Autumn Festival
+    """
+    from .db.core import get_connection, DB_PATH
+    from datetime import datetime, timezone
+
+    path = Path(db_path) if db_path else DB_PATH
+    if not path.exists():
+        return []
+
+    conn = get_connection(path)
+    triggers = []
+
+    try:
+        now = datetime.now(timezone.utc)
+
+        # 1. New month + inactive 7+ days
+        if now.day <= 3:  # First 3 days of month
+            inactive_users = conn.execute(
+                """SELECT u.id, u.email,
+                          julianday('now') - julianday(MAX(sl.completed_at)) as days_inactive
+                   FROM user u
+                   LEFT JOIN session_log sl ON u.id = sl.user_id
+                   WHERE u.is_admin = 0
+                   GROUP BY u.id
+                   HAVING days_inactive >= 7"""
+            ).fetchall()
+            for user in inactive_users:
+                if not check_already_sent(str(user["id"]), "fresh_start", 1, conn=conn):
+                    triggers.append({
+                        "user_id": str(user["id"]),
+                        "email_sequence": "fresh_start",
+                        "email_number": 1,
+                        "trigger_type": "new_month",
+                        "reason": f"New month, inactive {int(user['days_inactive'])} days",
+                    })
+
+        # 2. Monday + inactive 3+ days (users with weekly goals)
+        if now.weekday() == 0:  # Monday
+            try:
+                monday_users = conn.execute(
+                    """SELECT u.id,
+                              julianday('now') - julianday(MAX(sl.completed_at)) as days_inactive
+                       FROM user u
+                       JOIN learner_profile lp ON u.id = lp.user_id
+                       LEFT JOIN session_log sl ON u.id = sl.user_id
+                       WHERE u.is_admin = 0
+                         AND lp.target_sessions_per_week >= 3
+                       GROUP BY u.id
+                       HAVING days_inactive >= 3 AND days_inactive < 14"""
+                ).fetchall()
+                for user in monday_users:
+                    if not check_already_sent(str(user["id"]), "fresh_start_monday", 1, conn=conn):
+                        triggers.append({
+                            "user_id": str(user["id"]),
+                            "email_sequence": "fresh_start_monday",
+                            "email_number": 1,
+                            "trigger_type": "monday",
+                            "reason": f"Monday reset, inactive {int(user['days_inactive'])} days",
+                        })
+            except Exception:
+                pass
+
+    except Exception as e:
+        logger.error("Fresh start trigger check failed: %s", e)
+    finally:
+        conn.close()
+
+    return triggers

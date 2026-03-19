@@ -1,9 +1,12 @@
-"""Landing page routes — serve static marketing pages."""
+"""Landing page routes — serve static marketing pages + social proof API."""
 
+import logging
 import os
 import re
 
-from flask import Blueprint, send_from_directory, abort
+from flask import Blueprint, send_from_directory, abort, jsonify
+
+logger = logging.getLogger(__name__)
 
 _ILLUSTRATIONS_DIR = os.path.normpath(
     os.path.join(os.path.dirname(__file__), "..", "..", "marketing", "assets", "illustrations")
@@ -159,6 +162,57 @@ def landing_og_image(filename):
     if not re.match(r'^[a-zA-Z0-9._-]+$', safe_name):
         abort(404)
     return send_from_directory(os.path.join(_LANDING_DIR, "og"), safe_name)
+
+
+@landing_bp.route("/api/social-proof")
+def api_social_proof():
+    """Factual social proof stats for landing page (Cialdini 1984).
+
+    Returns real, auto-computed stats. Only displays data when thresholds
+    are met (user count > 100, etc.) to avoid fabrication.
+    DOCTRINE §8: factual, verifiable claims only.
+    """
+    try:
+        from .. import db
+        with db.connection() as conn:
+            # Total non-admin users who completed at least one session
+            user_count = conn.execute(
+                """SELECT COUNT(*) FROM user
+                   WHERE is_admin = 0 AND first_session_at IS NOT NULL"""
+            ).fetchone()[0]
+
+            # Average words mastered in first 30 days (stable + durable)
+            avg_words = None
+            if user_count >= 10:
+                row = conn.execute(
+                    """SELECT AVG(word_count) as avg_words FROM (
+                         SELECT p.user_id, COUNT(*) as word_count
+                         FROM progress p
+                         JOIN user u ON p.user_id = u.id
+                         WHERE u.is_admin = 0
+                           AND p.mastery_stage IN ('stable', 'durable')
+                           AND u.first_session_at >= datetime('now', '-60 days')
+                         GROUP BY p.user_id
+                         HAVING word_count >= 5
+                       )"""
+                ).fetchone()
+                if row and row["avg_words"]:
+                    avg_words = round(row["avg_words"])
+
+            result = {
+                "show_user_count": user_count >= 100,
+                "user_count": user_count if user_count >= 100 else None,
+                "show_outcome_stat": avg_words is not None and avg_words >= 20,
+                "avg_words_first_month": avg_words,
+                "outcome_message": (
+                    f"Average learner masters {avg_words} words in their first month"
+                    if avg_words and avg_words >= 20 else None
+                ),
+            }
+            return jsonify(result)
+    except Exception as e:
+        logger.debug("Social proof API error: %s", e)
+        return jsonify({"show_user_count": False, "show_outcome_stat": False})
 
 
 @landing_bp.route("/illustrations/<path:filename>")

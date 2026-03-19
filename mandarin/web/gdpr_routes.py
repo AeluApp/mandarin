@@ -139,6 +139,7 @@ def _export_data_impl():
             "improvement_log", "media_watch", "speaker_calibration",
             "crash_log", "client_error_log", "client_event", "mfa_challenge",
             "grade_appeal", "classroom_student", "data_deletion_request",
+            "reading_progress", "listening_progress", "grammar_progress",
         })
         from ..db.core import _table_set, _col_set
         _already_exported = {
@@ -226,6 +227,7 @@ def _request_deletion_impl():
             "push_token", "speaker_calibration", "crash_log",
             "client_error_log", "client_event", "mfa_challenge",
             "grade_appeal", "classroom_student",
+            "reading_progress", "listening_progress", "grammar_progress",
         })
         from ..db.core import _table_set
         for table in sorted(_GDPR_DELETE_TABLES & _table_set(conn)):

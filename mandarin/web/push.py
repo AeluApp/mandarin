@@ -84,3 +84,52 @@ def send_push_to_user(conn: sqlite3.Connection, user_id: int,
         if send_push(row["token"], title, body, url):
             sent += 1
     return sent
+
+
+def build_modality_aware_notification(conn, user_id: int) -> tuple[str, str]:
+    """Build push notification content that mentions modalities awaiting review.
+
+    Instead of generic "X items ready for review (~Y minutes)", includes
+    modality context: "8 items + 1 reading passage ready (~6 minutes)."
+    DOCTRINE §6: one notification per day, informational, never guilt.
+
+    Returns (title, body).
+    """
+    try:
+        # Core drill items due
+        items_due = conn.execute(
+            """SELECT COUNT(*) FROM progress
+               WHERE user_id = ? AND next_review <= datetime('now')
+               AND mastery_stage NOT IN ('durable')""",
+            (user_id,)
+        ).fetchone()[0]
+
+        # Reading passages available (check if reading block would be picked)
+        reading_available = conn.execute(
+            """SELECT COUNT(*) FROM reading_texts
+               WHERE hsk_level <= (
+                   SELECT COALESCE(level_reading, 1) FROM learner_profile WHERE user_id = ?
+               )""",
+            (user_id,)
+        ).fetchone()[0]
+
+        # Estimate time
+        minutes = max(1, round(items_due * 35 / 60))
+
+        parts = []
+        if items_due > 0:
+            parts.append(f"{items_due} item{'s' if items_due != 1 else ''}")
+        if reading_available > 0:
+            parts.append("1 reading passage")
+
+        if not parts:
+            return ("Review ready", "Your study session is ready when you are.")
+
+        content = " + ".join(parts)
+        body = f"{content} ready (~{minutes} min)"
+
+        return ("Study session ready", body)
+
+    except Exception:
+        # Fallback to generic
+        return ("Review ready", "Items ready for review.")

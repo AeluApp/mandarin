@@ -83,6 +83,46 @@ _PROCESS_FMEAS = [
     {"process": "session_planning", "failure_mode": "SDT choice ignored in block allocation",
      "cause": "User choice not wired to block weights", "effect": "Autonomy promise broken",
      "severity": 6, "occurrence": 2, "detection": 4},
+
+    # ── Non-Core Modality Failure Modes ──────────────────────────────
+    # Listening
+    {"process": "listening_comprehension", "failure_mode": "Listening passage too fast for learner level",
+     "cause": "Playback speed hardcoded at 1.0x, no adaptive speed", "effect": "Learner replays excessively or abandons",
+     "severity": 6, "occurrence": 4, "detection": 5,
+     "data_query": "SELECT COUNT(*) FROM listening_progress WHERE replays >= 4 AND completed_at >= datetime('now', '-7 days')"},
+    {"process": "listening_comprehension", "failure_mode": "No listening content for learner's HSK level",
+     "cause": "Listening passages not generated for all levels", "effect": "Listening block skipped, modality gap grows",
+     "severity": 5, "occurrence": 3, "detection": 3},
+    {"process": "listening_comprehension", "failure_mode": "Listening comprehension questions too easy",
+     "cause": "Questions test surface details, not understanding", "effect": "False sense of listening mastery",
+     "severity": 5, "occurrence": 3, "detection": 6},
+
+    # Grammar
+    {"process": "grammar_integration", "failure_mode": "Grammar drilled in isolation (no prior context)",
+     "cause": "Scheduler doesn't gate grammar on contextual encounters", "effect": "Violates DOCTRINE §1 Focus on Form; grammar feels arbitrary",
+     "severity": 7, "occurrence": 4, "detection": 6},
+    {"process": "grammar_integration", "failure_mode": "Grammar mastery 2x+ slower than vocabulary",
+     "cause": "Grammar drills disconnected from meaning-focused input", "effect": "Grammar becomes a bottleneck, learner avoids grammar features",
+     "severity": 6, "occurrence": 3, "detection": 5},
+
+    # Conversation
+    {"process": "conversation_practice", "failure_mode": "Conversation too easy — learner only selects from options",
+     "cause": "Dialogue format is receptive (MC) not productive (free text)", "effect": "No pushed output; speaking fluency doesn't develop (Swain 1985)",
+     "severity": 6, "occurrence": 4, "detection": 5},
+    {"process": "conversation_practice", "failure_mode": "Learner abandons conversation due to difficulty anxiety",
+     "cause": "No difficulty-normalizing language before/after conversation", "effect": "Avoidance of production practice, skill atrophy",
+     "severity": 7, "occurrence": 3, "detection": 6},
+
+    # Media
+    {"process": "media_comprehension", "failure_mode": "Media shelf has content but zero engagement",
+     "cause": "Media not surfaced in scheduler or behind restrictive paywall", "effect": "Authentic input (Gilmore 2007) benefit lost entirely",
+     "severity": 4, "occurrence": 3, "detection": 3},
+
+    # Cross-modality
+    {"process": "cross_modality", "failure_mode": "Items stuck in single modality — no cross-modal transfer",
+     "cause": "Scheduler doesn't rotate items across modalities within 5 sessions", "effect": "Violates DOCTRINE §4; mono-modal learning limits retention (Rohrer & Taylor 2007)",
+     "severity": 7, "occurrence": 4, "detection": 5,
+     "data_query": None},
 ]
 
 

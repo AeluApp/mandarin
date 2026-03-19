@@ -441,6 +441,20 @@ def _handle_ws_session(ws, planner_fn, label):
         except Exception:
             pass
 
+        # Lifecycle event for analytics
+        try:
+            from ..marketing_hooks import log_lifecycle_event
+            log_lifecycle_event(
+                "reading_passage_complete", user_id=str(user_id), conn=conn,
+                passage_id=block.passage_id,
+                questions_correct=sum(results),
+                questions_total=len(results),
+                reading_time_seconds=int(read_elapsed),
+                words_looked_up=len(looked_up),
+            )
+        except Exception:
+            pass
+
         # Send block summary
         bridge._send({
             "type": "reading_summary",
@@ -558,6 +572,18 @@ def _handle_ws_session(ws, planner_fn, label):
             "scenario_title": scenario.get("title", ""),
         })
 
+        # Lifecycle event for analytics
+        try:
+            from ..marketing_hooks import log_lifecycle_event
+            log_lifecycle_event(
+                "conversation_drill_complete", user_id=str(user_id), conn=conn,
+                scenario_id=block.scenario_id,
+                avg_score=round(avg_score, 2),
+                turns_completed=len(scores),
+            )
+        except Exception:
+            pass
+
     def _run_listening_block(bridge, block, conn, user_id):
         """Run a listening comprehension block as a session block.
 
@@ -620,6 +646,20 @@ def _handle_ws_session(ws, planner_fn, label):
             """, (user_id, str(block.passage_id), sum(results), len(results),
                   round(score, 2), block.playback_speed))
             conn.commit()
+        except Exception:
+            pass
+
+        # Lifecycle event for analytics
+        try:
+            from ..marketing_hooks import log_lifecycle_event
+            log_lifecycle_event(
+                "listening_exercise_complete", user_id=str(user_id), conn=conn,
+                passage_id=str(block.passage_id),
+                comprehension_score=round(score, 2),
+                questions_correct=sum(results),
+                questions_total=len(results),
+                playback_speed=block.playback_speed,
+            )
         except Exception:
             pass
 

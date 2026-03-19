@@ -91,6 +91,205 @@ def _compute_milestones(mastery, streak_days, total_sessions):
     return milestones
 
 
+def _compute_modality_milestones(conn, user_id=1):
+    """Compute milestones for non-core modalities (reading, listening, conversation, grammar).
+
+    Extends the core milestones (vocabulary, streak, sessions) with
+    modality-specific achievements. DOCTRINE §6: progress visibility
+    should cover ALL learning features, not just vocabulary.
+    """
+    milestones = []
+
+    try:
+        # Reading passages completed
+        reading_count = conn.execute(
+            "SELECT COUNT(*) FROM reading_progress WHERE user_id = ?",
+            (user_id,)
+        ).fetchone()[0]
+
+        _READING_MESSAGES = {
+            5: "You've read your first 5 passages",
+            10: "You can follow short written Chinese",
+            25: "You're building real reading fluency",
+            50: "You can read extended Chinese text with confidence",
+        }
+        for t in [5, 10, 25, 50]:
+            if reading_count >= t:
+                milestones.append({
+                    "type": "reading_progress",
+                    "threshold": t,
+                    "value": reading_count,
+                    "message": _READING_MESSAGES.get(t, f"{t} reading passages completed"),
+                })
+
+        # Listening sessions completed
+        listening_count = conn.execute(
+            "SELECT COUNT(*) FROM listening_progress WHERE user_id = ?",
+            (user_id,)
+        ).fetchone()[0]
+
+        _LISTENING_MESSAGES = {
+            5: "You've completed your first 5 listening exercises",
+            10: "Your ear is tuning in to spoken Mandarin",
+            25: "You can follow conversational-speed Chinese",
+            50: "You have strong listening comprehension",
+        }
+        for t in [5, 10, 25, 50]:
+            if listening_count >= t:
+                milestones.append({
+                    "type": "listening_progress",
+                    "threshold": t,
+                    "value": listening_count,
+                    "message": _LISTENING_MESSAGES.get(t, f"{t} listening exercises completed"),
+                })
+
+        # Conversation sessions
+        conv_count = conn.execute(
+            "SELECT COUNT(*) FROM review_event WHERE user_id = ? AND drill_type = 'dialogue'",
+            (user_id,)
+        ).fetchone()[0]
+
+        for t in [5, 10, 25, 50]:
+            if conv_count >= t:
+                milestones.append({
+                    "type": "conversation_progress",
+                    "threshold": t,
+                    "value": conv_count,
+                    "message": f"{t} conversation practice sessions",
+                })
+
+        # Grammar points mastered (mastery_score >= 0.7)
+        grammar_mastered = conn.execute(
+            "SELECT COUNT(*) FROM grammar_progress WHERE user_id = ? AND mastery_score >= 0.7",
+            (user_id,)
+        ).fetchone()[0]
+
+        for t in [10, 25, 50]:
+            if grammar_mastered >= t:
+                milestones.append({
+                    "type": "grammar_progress",
+                    "threshold": t,
+                    "value": grammar_mastered,
+                    "message": f"{t} grammar patterns mastered",
+                })
+
+        # First-encounter milestones (symmetric across all modalities)
+        _FIRST_ENCOUNTERS = [
+            ("first_reading", "SELECT COUNT(*) FROM reading_progress WHERE user_id = ?",
+             "First reading passage completed"),
+            ("first_listening", "SELECT COUNT(*) FROM listening_progress WHERE user_id = ?",
+             "First listening exercise completed"),
+            ("first_conversation",
+             "SELECT COUNT(*) FROM review_event WHERE user_id = ? AND drill_type = 'dialogue'",
+             "First conversation practice completed"),
+            ("first_grammar",
+             "SELECT COUNT(*) FROM grammar_progress WHERE user_id = ? AND drill_attempts > 0",
+             "First grammar lesson studied"),
+        ]
+        for milestone_key, sql, message in _FIRST_ENCOUNTERS:
+            count = conn.execute(sql, (user_id,)).fetchone()[0]
+            if count >= 1:
+                milestones.append({
+                    "type": milestone_key,
+                    "threshold": 1,
+                    "value": count,
+                    "message": message,
+                })
+
+    except Exception:
+        pass
+
+    return milestones
+
+
+def _compute_upcoming_modality_milestones(conn, user_id=1):
+    """Goal gradient for modality milestones — show proximity to next achievement."""
+    upcoming = []
+
+    try:
+        checks = [
+            ("reading_progress", "SELECT COUNT(*) FROM reading_progress WHERE user_id = ?",
+             [5, 10, 25, 50], "reading passage"),
+            ("listening_progress", "SELECT COUNT(*) FROM listening_progress WHERE user_id = ?",
+             [5, 10, 25, 50], "listening exercise"),
+            ("conversation_progress",
+             "SELECT COUNT(*) FROM review_event WHERE user_id = ? AND drill_type = 'dialogue'",
+             [5, 10, 25, 50], "conversation session"),
+        ]
+
+        for milestone_type, sql, thresholds, label in checks:
+            current = conn.execute(sql, (user_id,)).fetchone()[0]
+            for t in thresholds:
+                if current < t:
+                    remaining = t - current
+                    pct = current / t * 100
+                    if pct >= 80:  # Within 20% (more generous for modalities)
+                        upcoming.append({
+                            "type": milestone_type,
+                            "threshold": t,
+                            "current": current,
+                            "remaining": remaining,
+                            "message": f"You're {remaining} {label}{'s' if remaining != 1 else ''} from {t}",
+                        })
+                    break
+    except Exception:
+        pass
+
+    return upcoming
+
+
+def _compute_upcoming_milestones(mastery, streak_days, total_sessions):
+    """Compute milestones the learner is close to reaching (goal gradient).
+
+    Kivetz et al. (2006): effort accelerates as people approach goals.
+    Returns milestones within 10% of the threshold, showing proximity
+    to encourage continued effort. DOCTRINE §6: progress visibility.
+    """
+    upcoming = []
+
+    # Words approaching next threshold
+    long_term = 0
+    for level_data in (mastery or {}).values():
+        long_term += (level_data.get("stable") or 0) + (level_data.get("durable") or 0)
+
+    word_thresholds = [25, 50, 100, 150, 200, 300, 500]
+    for t in word_thresholds:
+        if long_term < t:
+            remaining = t - long_term
+            pct_complete = long_term / t * 100
+            if pct_complete >= 90:  # Within 10%
+                upcoming.append({
+                    "type": "words_learned",
+                    "threshold": t,
+                    "current": long_term,
+                    "remaining": remaining,
+                    "message": f"You're {remaining} word{'s' if remaining != 1 else ''} from {t} in long-term memory",
+                })
+            break  # Only show the nearest upcoming word milestone
+
+    # HSK level approaching completion
+    for level, data in sorted((mastery or {}).items()):
+        pct = data.get("pct") or 0
+        total = data.get("total") or 0
+        if total == 0:
+            continue
+        mastered = data.get("stable", 0) + data.get("durable", 0)
+        for p in [50, 75, 100]:
+            if pct < p and pct >= p * 0.9:  # Within 10% of threshold
+                items_needed = max(1, round(total * p / 100) - mastered)
+                upcoming.append({
+                    "type": "hsk_progress",
+                    "threshold": p,
+                    "level": level,
+                    "current_pct": round(pct),
+                    "remaining_items": items_needed,
+                    "message": f"HSK {level}: {round(pct)}% — {items_needed} item{'s' if items_needed != 1 else ''} from {p}%",
+                })
+                break
+
+    return upcoming
+
+
 @dashboard_bp.route("/api/status")
 @api_error_handler("Status")
 def api_status():
@@ -106,6 +305,9 @@ def api_status():
         total_sessions = profile.get("total_sessions") or 0
         streak_days = _compute_streak(conn, user_id=user_id)
         milestones = _compute_milestones(mastery, streak_days, total_sessions)
+        milestones += _compute_modality_milestones(conn, user_id=user_id)
+        upcoming_milestones = _compute_upcoming_milestones(mastery, streak_days, total_sessions)
+        upcoming_milestones += _compute_upcoming_modality_milestones(conn, user_id=user_id)
 
         # Next session estimate (items_due × 35s ÷ 60, capped to session_length)
         next_session_mins = min(
@@ -295,6 +497,7 @@ def api_status():
             "session_length": session_length,
             "streak_days": streak_days,
             "milestones": milestones,
+            "upcoming_milestones": upcoming_milestones,
             "next_session_mins": next_session_mins,
             "sessions_this_week": sessions_this_week,
             "items_reviewed_week": items_reviewed_week,

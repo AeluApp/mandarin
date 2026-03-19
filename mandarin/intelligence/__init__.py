@@ -262,6 +262,69 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import behavioral economics analyzers (DOCTRINE-aware nudge evaluation)
+    try:
+        from .analyzers_behavioral_econ import ANALYZERS as BEHAV_ECON_ANALYZERS
+        all_analyzers = all_analyzers + BEHAV_ECON_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import growth & business health analyzers (Bain/McKinsey frameworks)
+    try:
+        from .analyzers_growth import ANALYZERS as GROWTH_ANALYZERS
+        all_analyzers = all_analyzers + GROWTH_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import consulting analyzers (NPS, CES, journey, JTBD, Kano, brand health)
+    try:
+        from .analyzers_consulting import ANALYZERS as CONSULTING_ANALYZERS
+        all_analyzers = all_analyzers + CONSULTING_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import balanced scorecard analyzer (Kaplan & Norton)
+    try:
+        from .balanced_scorecard import ANALYZERS as BSC_ANALYZERS
+        all_analyzers = all_analyzers + BSC_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import executive summary analyzer (freshness check)
+    try:
+        from .executive_summary import ANALYZERS as EXEC_ANALYZERS
+        all_analyzers = all_analyzers + EXEC_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import OR modality analyzers (SPC, queue, process capability per modality)
+    try:
+        from .analyzers_or_modality import ANALYZERS as OR_MOD_ANALYZERS
+        all_analyzers = all_analyzers + OR_MOD_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import behavioral economics modality analyzers (nudges, choice, framing)
+    try:
+        from .analyzers_behav_econ_modality import ANALYZERS as BE_MOD_ANALYZERS
+        all_analyzers = all_analyzers + BE_MOD_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import learning science analyzers (Krashen, Swain, Long, Bjork, Gilmore)
+    try:
+        from .analyzers_learning_science import ANALYZERS as LS_ANALYZERS
+        all_analyzers = all_analyzers + LS_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import modality adaptation layer (core-loop analyzers extended to non-core features)
+    try:
+        from .analyzers_modality_adaptation import ANALYZERS as MOD_ADAPT_ANALYZERS
+        all_analyzers = all_analyzers + MOD_ADAPT_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:

@@ -821,8 +821,156 @@ def _analyze_mobile_performance(conn) -> list[dict]:
 # ── 7. Behavioral Economics ──────────────────────────────────────────
 
 
-def _analyze_behavioral_economics(conn) -> list[dict]:
-    """Check templates and JS for nudge/behavioral design patterns."""
+def _analyze_behavioral_econ_violations(conn) -> list[dict]:
+    """Detect anti-DOCTRINE behavioral patterns (guilt, urgency, streak anxiety).
+
+    DOCTRINE §6 forbids manipulation: no guilt, no urgency, no "streak at risk".
+    Any such language in templates, JS, or email templates is a critical finding.
+    """
+    findings = []
+    templates = _read_templates()
+    js = _read_file(_APP_JS) or ""
+    all_template_content = "\n".join(templates.values())
+    all_content = all_template_content + "\n" + js
+
+    # Also scan email templates
+    email_dir = os.path.join(_PROJECT_ROOT, "marketing", "email-templates")
+    email_content = ""
+    if os.path.isdir(email_dir):
+        for fname in os.listdir(email_dir):
+            ec = _read_file(os.path.join(email_dir, fname))
+            if ec:
+                email_content += "\n" + ec
+
+    scan_content = all_content + "\n" + email_content
+
+    if not templates and not email_content:
+        return findings
+
+    # --- Guilt language (DOCTRINE §6: "Never guilt") ---
+    guilt_patterns = re.findall(
+        r"\b(?:you\s+haven'?t|we\s+miss\s+you|falling\s+behind|"
+        r"you'?re\s+letting|don'?t\s+give\s+up|disappointed)\b",
+        scan_content, re.IGNORECASE,
+    )
+    if guilt_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "critical",
+            f"DOCTRINE violation: guilt language detected ({len(guilt_patterns)} instances)",
+            f"Found guilt-based copy: {guilt_patterns[:3]}. DOCTRINE §6 forbids "
+            f"guilt-based messaging. Guilt increases short-term engagement but "
+            f"corrodes the learner-tool relationship.",
+            "Replace guilt language with progress-framed alternatives. "
+            "E.g., 'Your schedule has been adjusted. Pick up whenever you're ready.' "
+            "(DOCTRINE §6 example).",
+            (
+                "Guilt language found in user-facing content.\n\n"
+                "1. Search templates, JS, and email templates for guilt patterns\n"
+                "2. Replace each with DOCTRINE-compliant alternative:\n"
+                "   - 'you haven't...' → 'Your review queue is ready when you are'\n"
+                "   - 'falling behind' → 'Your schedule adjusts to your pace'\n"
+                "   - 'we miss you' → factual status update only"
+            ),
+            "Guilt language violates DOCTRINE §6 and erodes learner trust.",
+            _f("app_js") + [f"mandarin/web/templates/{n}" for n in _TEMPLATE_NAMES[:2]]
+            + ["marketing/email-templates/"],
+        ))
+
+    # --- Streak anxiety (DOCTRINE §6: streaks are trailing indicators, not goals) ---
+    streak_anxiety = re.findall(
+        r"\b(?:streak\s+(?:is\s+)?at\s+risk|(?:don'?t\s+)?lose\s+your\s+streak|"
+        r"streak\s+(?:is\s+)?about\s+to\s+break|keep\s+your\s+streak\s+alive|"
+        r"streak\s+will\s+(?:be\s+)?(?:lost|broken|reset))\b",
+        scan_content, re.IGNORECASE,
+    )
+    if streak_anxiety:
+        findings.append(_finding(
+            "behavioral_econ", "critical",
+            f"DOCTRINE violation: streak anxiety detected ({len(streak_anxiety)} instances)",
+            f"Found streak-pressure copy: {streak_anxiety[:3]}. DOCTRINE §6: "
+            f"'A study streak is a trailing indicator, not a goal.' and "
+            f"'Never make breaking it feel like failure.'",
+            "Remove all streak-loss pressure. Streaks may be displayed as a "
+            "trailing metric but never framed as something to protect.",
+            (
+                "Streak anxiety language found.\n\n"
+                "1. Search all user-facing content for streak-loss warnings\n"
+                "2. Remove or reframe:\n"
+                "   - 'streak at risk' → remove entirely\n"
+                "   - 'keep your streak alive' → remove entirely\n"
+                "   - Streak display is OK; streak pressure is not"
+            ),
+            "Streak anxiety violates DOCTRINE §6 — the Duolingo anti-pattern.",
+            _f("app_js") + ["marketing/email-templates/"],
+        ))
+
+    # --- Manufactured urgency (DOCTRINE §6: "Never urgency") ---
+    urgency_patterns = re.findall(
+        r"\b(?:hurry|limited\s+time|only\s+\d+\s+left|expires?\s+soon|"
+        r"last\s+chance|act\s+now|don'?t\s+miss\s+out|running\s+out)\b",
+        scan_content, re.IGNORECASE,
+    )
+    if urgency_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "critical",
+            f"DOCTRINE violation: manufactured urgency ({len(urgency_patterns)} instances)",
+            f"Found urgency language: {urgency_patterns[:3]}. DOCTRINE §6 and §8 "
+            f"require warm-but-honest communication. Manufactured urgency is "
+            f"manipulation, not information.",
+            "Remove all urgency language. Replace with factual, time-neutral "
+            "information. E.g., 'X items ready for review (~Y minutes).'",
+            (
+                "Manufactured urgency found.\n\n"
+                "1. Search all user-facing content for urgency patterns\n"
+                "2. Replace with factual alternatives:\n"
+                "   - 'limited time' → remove or state actual deadline\n"
+                "   - 'hurry' → remove entirely\n"
+                "   - 'last chance' → remove entirely"
+            ),
+            "Manufactured urgency violates DOCTRINE §6 and §8.",
+            _f("app_js") + ["marketing/email-templates/"],
+        ))
+
+    # --- FOMO / normative social pressure ---
+    fomo_patterns = re.findall(
+        r"\b(?:others?\s+are\s+(?:already|ahead)|your\s+friends?\s+(?:are|have)|"
+        r"everyone\s+(?:is|else)|don'?t\s+(?:miss|fall\s+behind)|"
+        r"people\s+like\s+you\s+are)\b",
+        scan_content, re.IGNORECASE,
+    )
+    if fomo_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "high",
+            f"Normative social pressure detected ({len(fomo_patterns)} instances)",
+            f"Found FOMO/comparison language: {fomo_patterns[:3]}. DOCTRINE §8 "
+            f"requires humility and honesty. Comparing users to others creates "
+            f"anxiety, not motivation. Informational social proof (factual stats) "
+            f"is fine; normative pressure (you should do what others do) is not.",
+            "Replace normative comparisons with informational social proof. "
+            "E.g., 'Trusted by N learners' (factual) not 'Others are ahead of you' "
+            "(pressure).",
+            (
+                "Normative social pressure found.\n\n"
+                "1. Search for comparison/FOMO language\n"
+                "2. Replace with factual alternatives:\n"
+                "   - 'others are ahead' → remove entirely\n"
+                "   - User counts are OK if factual and unforced"
+            ),
+            "Normative social pressure undermines learner autonomy.",
+            _f("app_js") + ["marketing/email-templates/"],
+        ))
+
+    return findings
+
+
+def _analyze_behavioral_econ_opportunities(conn) -> list[dict]:
+    """Detect missing DOCTRINE-compliant behavioral economics patterns.
+
+    Checks for absence of ethical nudges that research supports and DOCTRINE
+    permits: capability framing, endowed progress, choice architecture,
+    implementation intentions, peak-end design, goal gradient, fresh starts,
+    informational social proof.
+    """
     findings = []
     templates = _read_templates()
     js = _read_file(_APP_JS) or ""
@@ -832,114 +980,280 @@ def _analyze_behavioral_economics(conn) -> list[dict]:
     if not templates:
         return findings
 
-    # --- Loss aversion ---
-    loss_patterns = re.findall(
-        r"\b(?:lose|don'?t\s+lose|streak|losing)\b", all_content, re.IGNORECASE
-    )
-    if not loss_patterns:
-        findings.append(_finding(
-            "behavioral_econ", "low",
-            "No loss-aversion language detected",
-            "Templates and JS contain no loss-aversion triggers (streak loss "
-            "warnings, 'don't lose your progress'). Loss aversion is the "
-            "strongest behavioral nudge for retention — people work 2x harder "
-            "to avoid losing than to gain.",
-            "Add streak-loss warnings ('Your 5-day streak is at risk!'), "
-            "progress-loss reminders before leaving, and re-engagement copy "
-            "emphasizing what they'll lose.",
-            (
-                "No loss-aversion language found.\n\n"
-                "1. Read mandarin/web/static/app.js and templates\n"
-                "2. Add streak-at-risk notifications\n"
-                "3. Add exit-intent warnings for mid-session abandonment\n"
-                "4. Use loss framing in re-engagement emails"
-            ),
-            "Missing loss-aversion cues reduce daily return rate.",
-            _f("app_js") + [f"mandarin/web/templates/{n}" for n in _TEMPLATE_NAMES[:2]],
-        ))
+    # Also scan Python route files for server-side behavioral patterns
+    route_files = [
+        "dashboard_routes.py", "session_routes.py", "onboarding_routes.py",
+        "payment_routes.py", "landing_routes.py",
+    ]
+    py_content = ""
+    for rf in route_files:
+        rc = _read_file(os.path.join(_PROJECT_ROOT, "mandarin", "web", rf))
+        if rc:
+            py_content += "\n" + rc
 
-    # --- Social proof ---
-    social_proof_patterns = re.findall(
-        r"\b(?:learners?|students?|users?)\s+(?:have|are|already|joined|learning)\b",
-        all_content, re.IGNORECASE,
-    )
-    social_proof_counts = re.findall(
-        r"\b\d+[,.]?\d*\s*(?:learners?|students?|users?)\b",
-        all_content, re.IGNORECASE,
-    )
-    if not social_proof_patterns and not social_proof_counts:
-        findings.append(_finding(
-            "behavioral_econ", "low",
-            "No social proof patterns detected",
-            "No social proof language found (e.g., '1,000 learners', "
-            "'students are already...'). Social proof reduces uncertainty "
-            "and increases conversion during onboarding.",
-            "Add user count displays, testimonials, or 'X learners studied "
-            "this today' nudges on the landing page and drill screens.",
-            (
-                "No social proof found.\n\n"
-                "1. Read mandarin/web/templates/index.html\n"
-                "2. Add social proof to landing/onboarding:\n"
-                "   - User count badges\n"
-                "   - 'Join X learners' CTAs\n"
-                "   - Community activity indicators"
-            ),
-            "Lack of social proof increases signup friction.",
-            ["mandarin/web/templates/index.html"] + _f("landing_routes"),
-        ))
+    scheduler_content = _read_file(
+        os.path.join(_PROJECT_ROOT, "mandarin", "scheduler.py")
+    ) or ""
+    runner_content = _read_file(
+        os.path.join(_PROJECT_ROOT, "mandarin", "runner.py")
+    ) or ""
 
-    # --- Progress visualization ---
-    progress_patterns = re.findall(
-        r"\b(?:progress|level|mastery|badge|achievement|rank)\b",
-        all_content, re.IGNORECASE,
+    # --- Capability framing (DOCTRINE §6: "show what learner can do") ---
+    capability_patterns = re.findall(
+        r"(?:you\s+can\s+now|you(?:'re|'re)\s+able\s+to|you(?:'ve|'ve)\s+learned\s+to|"
+        r"you\s+now\s+(?:know|understand|recognize))",
+        all_content + py_content, re.IGNORECASE,
     )
-    has_progress_bar = bool(re.search(
-        r"(?:progress[_-]?bar|progressbar|role=[\"']progressbar)", all_content, re.IGNORECASE
-    ))
-    if not progress_patterns and not has_progress_bar:
+    if not capability_patterns:
         findings.append(_finding(
             "behavioral_econ", "medium",
-            "No progress visualization detected",
-            "No progress-related UI elements (progress bars, levels, mastery "
-            "indicators) found in templates or JS. Progress visualization is "
-            "the #1 gamification element for learning app retention.",
-            "Add visible progress tracking: XP bar, level indicator, mastery "
-            "percentages per HSK level, and session completion progress.",
+            "No capability-framed progress language detected",
+            "DOCTRINE §6 mandates progress visibility framed as capability: "
+            "'You can now understand basic restaurant conversations.' No such "
+            "framing found in templates or route responses. Capability framing "
+            "is the DOCTRINE-approved alternative to streak-based motivation.",
+            "Add capability-framed milestone messages. Reference DOCTRINE §6 "
+            "example: 'Last week you knew 45 words. This week: 62. You can now "
+            "understand basic restaurant conversations.'",
             (
-                "No progress visualization found.\n\n"
-                "1. Read mandarin/web/templates/index.html and app.js\n"
-                "2. Add progress bar component for session progress\n"
-                "3. Add mastery indicator for vocabulary items\n"
-                "4. Add level/XP display in the header"
+                "No capability framing detected.\n\n"
+                "1. Read dashboard_routes.py milestone computation\n"
+                "2. Add capability messages keyed to word-count thresholds:\n"
+                "   - 25 words: 'recognize basic greetings'\n"
+                "   - 50 words: 'handle simple daily exchanges'\n"
+                "   - 100 words: 'follow basic conversational Mandarin'\n"
+                "3. Surface in dashboard and session summary"
             ),
-            "Without visible progress, learners cannot see improvement and churn.",
-            _f("app_js") + ["mandarin/web/templates/index.html"],
+            "Missing capability framing leaves learners without progress context.",
+            _f("dashboard_routes", "session_routes"),
         ))
 
-    # --- Commitment devices ---
-    commitment_patterns = re.findall(
-        r"\b(?:goal|target|daily\s+(?:goal|target)|commit|pledge|reminder)\b",
+    # --- Informational social proof (Cialdini — factual, not normative) ---
+    social_proof_patterns = re.findall(
+        r"\b(?:trusted\s+by|learners?\s+(?:use|study|choose)|"
+        r"rated\s+\d|average\s+learner)\b",
         all_content, re.IGNORECASE,
     )
-    if not commitment_patterns:
+    if not social_proof_patterns:
         findings.append(_finding(
             "behavioral_econ", "low",
-            "No commitment device patterns detected",
-            "No goal-setting or commitment language found. Commitment devices "
-            "(daily goals, study pledges, reminder opt-ins) leverage consistency "
-            "bias to increase daily active usage.",
-            "Add daily goal setting during onboarding, study reminders, and "
-            "'set your target' prompts in settings.",
+            "No informational social proof on landing page",
+            "No factual social proof found (user counts, outcome stats, ratings). "
+            "Informational social proof reduces signup uncertainty without "
+            "manipulation. DOCTRINE §8 permits factual, verifiable claims.",
+            "Add factual social proof to landing page: real user count (if >100), "
+            "average learning outcome stat, app store rating. All must be "
+            "verifiable and auto-computed from real data.",
             (
-                "No commitment devices found.\n\n"
-                "1. Read mandarin/web/templates/ and route files\n"
-                "2. Add daily goal selector in onboarding flow\n"
-                "3. Add study reminder scheduling\n"
-                "4. Add 'Set your daily target' prompt in settings"
+                "No informational social proof found.\n\n"
+                "1. Read mandarin/web/landing_routes.py\n"
+                "2. Add /api/social-proof endpoint computing real stats\n"
+                "3. Add to landing page: user count, outcome stat, rating\n"
+                "4. Only display when data thresholds are met (N>100)"
             ),
-            "Without commitment devices, users have no self-imposed accountability.",
-            _f("onboarding_routes", "settings_routes")
-            + ["mandarin/web/templates/index.html"],
+            "Missing social proof increases visitor-to-signup friction.",
+            _f("landing_routes") + ["mandarin/web/templates/index.html"],
+        ))
+
+    # --- Choice architecture (Thaler & Sunstein — smart defaults) ---
+    choice_patterns = re.findall(
+        r"(?:session[_\s]?(?:focus|preference|type)|review[_\s]focus|"
+        r"new[_\s]words[_\s]focus|mixed[_\s]session)",
+        all_content + py_content + scheduler_content, re.IGNORECASE,
+    )
+    if not choice_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "low",
+            "No session choice architecture detected",
+            "Learners have no choice over session composition (review vs new "
+            "material ratio). Choice architecture (Thaler & Sunstein) increases "
+            "autonomy and engagement. DOCTRINE §7: 'Adapt what matters.'",
+            "Before each session, offer 2-3 focus options (Review, New Words, "
+            "Mixed) with the scheduler's recommendation pre-selected as default.",
+            (
+                "No session choice architecture.\n\n"
+                "1. Read mandarin/scheduler.py plan_standard_session()\n"
+                "2. Add plan_session_with_preference() accepting focus param\n"
+                "3. Add pre-session selector UI with smart default\n"
+                "4. A/B test via experiments.py"
+            ),
+            "Lack of choice reduces learner autonomy (DOCTRINE §7).",
+            _f("scheduler") + _f("session_routes"),
+        ))
+
+    # --- Implementation intentions (Gollwitzer — when/where commitment) ---
+    intention_patterns = re.findall(
+        r"(?:preferred[_\s]study[_\s]time|when[_\s](?:do\s+you|will\s+you)\s+study|"
+        r"study[_\s]time[_\s]preference|morning|evening|lunch)\b",
+        all_content + py_content, re.IGNORECASE,
+    )
+    # Only flag if no when-to-study mechanism exists
+    has_time_pref = bool(re.search(
+        r"preferred_study_time", py_content + scheduler_content
+    ))
+    if not intention_patterns and not has_time_pref:
+        findings.append(_finding(
+            "behavioral_econ", "medium",
+            "No implementation intentions mechanism",
+            "No study-time preference capture found. Gollwitzer's research "
+            "shows 'when X, I will Y' intentions are 2-3x more effective than "
+            "goals alone. DOCTRINE §6 allows one notification per day — timing "
+            "it to the learner's stated preference maximizes effectiveness.",
+            "After onboarding or session 3, ask 'When do you usually have 5 "
+            "free minutes?' Store the answer. Time notifications to match.",
+            (
+                "No implementation intentions.\n\n"
+                "1. Add preferred_study_time to learner_profile\n"
+                "2. Add onboarding step: 'When do you usually study?'\n"
+                "3. Use preference to time the daily notification\n"
+                "4. A/B test: timed vs default notification schedule"
+            ),
+            "Without implementation intentions, habit formation relies on "
+            "willpower alone.",
+            _f("onboarding_routes", "settings_routes"),
+        ))
+
+    # --- Peak-end rule (Kahneman — sessions should end on a high note) ---
+    peak_end_patterns = re.findall(
+        r"(?:peak[_\s]end|high[_\s]?confidence[_\s](?:item|drill)|"
+        r"end[_\s](?:on|with)[_\s](?:easy|confident|strong)|best[_\s]moment)",
+        scheduler_content + runner_content, re.IGNORECASE,
+    )
+    if not peak_end_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "medium",
+            "No peak-end session design",
+            "Session drill ordering does not apply Kahneman's peak-end rule. "
+            "Memory of an experience is dominated by its best moment and "
+            "ending. Sessions should end with high-confidence items.",
+            "Reorder the last 2 session slots to items the learner is likely "
+            "to get correct. Identify a mid-session 'peak' (error→correct "
+            "transition). Show peak moment in session summary.",
+            (
+                "No peak-end ordering.\n\n"
+                "1. Read mandarin/scheduler.py plan_standard_session()\n"
+                "2. Add _apply_peak_end_ordering() post-processing step\n"
+                "3. Move last 2 slots to high-confidence items\n"
+                "4. Track peak moment in session summary\n"
+                "5. A/B test: metric = D1 session return rate"
+            ),
+            "Without peak-end design, session endings are random — missed "
+            "opportunity for positive memory formation.",
+            _f("scheduler") + ["mandarin/runner.py"],
+        ))
+
+    # --- Endowed progress (Nunes & Dreze — show initial credit) ---
+    endowed_patterns = re.findall(
+        r"(?:endowed[_\s]progress|already\s+(?:know|started|learned|completed)|"
+        r"you(?:'ve|'ve)\s+already|journey\s+is\s+\d+%\s+complete|"
+        r"(?:placement|quiz)\s+(?:shows?|found|detected))",
+        all_content + py_content, re.IGNORECASE,
+    )
+    if not endowed_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "low",
+            "No endowed progress at signup",
+            "After placement quiz, existing knowledge is not framed as progress "
+            "toward a goal. Nunes & Dreze (2006) showed endowed progress "
+            "significantly increases goal completion. DOCTRINE §5: 'The learner "
+            "exits with something they didn't have before.'",
+            "After placement, show: 'Based on your placement, you already know "
+            "~N words. Your journey to [next milestone] is already X% complete.' "
+            "All data must be real, from placement results.",
+            (
+                "No endowed progress.\n\n"
+                "1. Read mandarin/web/onboarding_routes.py placement_submit()\n"
+                "2. Compute endowed_progress from placement score\n"
+                "3. Show progress visualization post-placement\n"
+                "4. A/B test: metric = D7 retention"
+            ),
+            "Without endowed progress, learners start from zero — lower "
+            "motivation to continue.",
+            _f("onboarding_routes", "dashboard_routes"),
+        ))
+
+    # --- Goal gradient (Kivetz et al. — accelerate near milestones) ---
+    goal_gradient_patterns = re.findall(
+        r"(?:goal[_\s]gradient|upcoming[_\s]milestone|near[_\s]milestone|"
+        r"words?\s+(?:from|away\s+from|until)\s+(?:completing|reaching)|"
+        r"within\s+\d+%\s+of)",
+        all_content + py_content, re.IGNORECASE,
+    )
+    if not goal_gradient_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "low",
+            "No goal gradient acceleration near milestones",
+            "When learners are close to a milestone (e.g., 92% of HSK 1), "
+            "the proximity is not surfaced. Kivetz et al. (2006) showed "
+            "effort accelerates as people approach goals. DOCTRINE §6: "
+            "'Show what the learner can do.'",
+            "When within 10% of a milestone, show proximity: 'You're 8 words "
+            "from completing HSK 1.' Optionally bias scheduler toward "
+            "milestone-contributing items.",
+            (
+                "No goal gradient.\n\n"
+                "1. Read dashboard_routes.py _compute_milestones()\n"
+                "2. Add upcoming_milestones for thresholds within 10%\n"
+                "3. Show proximity on dashboard pre-session\n"
+                "4. Optionally bias scheduler toward near-milestone items"
+            ),
+            "Missing goal gradient leaves acceleration potential unused.",
+            _f("dashboard_routes", "scheduler"),
+        ))
+
+    # --- Near-miss feedback (targeted feedback for almost-correct answers) ---
+    near_miss_patterns = re.findall(
+        r"(?:near[_\s]miss|almost[_\s]correct|close[_\s]answer|"
+        r"NearMiss|tone[_\s]error[_\s](?:only|specific))",
+        runner_content + py_content, re.IGNORECASE,
+    )
+    if not near_miss_patterns:
+        findings.append(_finding(
+            "behavioral_econ", "medium",
+            "No near-miss feedback system",
+            "When a learner is almost correct (right character, wrong tone; "
+            "right meaning, wrong measure word), the system gives the same "
+            "binary incorrect feedback. Near-miss feedback is more motivating "
+            "and more instructive. DOCTRINE §3: 'Tell the learner exactly "
+            "what was wrong.'",
+            "Add near-miss detection (tone error, pinyin close, meaning "
+            "adjacent). Show targeted feedback: 'Almost — right character, "
+            "just the tone was off.'",
+            (
+                "No near-miss feedback.\n\n"
+                "1. Read mandarin/drills/base.py\n"
+                "2. Add NearMissType enum and detect_near_miss()\n"
+                "3. Add near-miss feedback templates per type\n"
+                "4. A/B test: metric = item-level subsequent accuracy"
+            ),
+            "Binary correct/incorrect misses a teaching opportunity.",
+            ["mandarin/drills/base.py", "mandarin/runner.py"],
+        ))
+
+    # --- Nudge registry (centralized tracking) ---
+    nudge_registry = _read_file(
+        os.path.join(_PROJECT_ROOT, "mandarin", "nudge_registry.py")
+    )
+    if not nudge_registry:
+        findings.append(_finding(
+            "behavioral_econ", "medium",
+            "No centralized nudge registry",
+            "Nudges (upgrade prompts, email triggers, milestone messages, "
+            "notifications) are scattered across files with no central tracking. "
+            "Without a registry, nudge effectiveness can't be measured, "
+            "ethics can't be scored, and the LLM agent can't manage them.",
+            "Create mandarin/nudge_registry.py with NudgeType enum, "
+            "register_nudge(), log_nudge_exposure(), log_nudge_outcome(), "
+            "and evaluate_nudge_ethics() using Qwen for DOCTRINE scoring.",
+            (
+                "No nudge registry.\n\n"
+                "1. Create mandarin/nudge_registry.py\n"
+                "2. Add nudge_registry, nudge_exposure, nudge_outcome tables\n"
+                "3. Implement DOCTRINE ethics evaluation via Ollama\n"
+                "4. Wire existing nudges into the registry"
+            ),
+            "Without a registry, nudge effectiveness is unmeasurable.",
+            ["mandarin/nudge_registry.py"],
         ))
 
     return findings
@@ -1375,7 +1689,8 @@ ANALYZERS = [
     _analyze_copywriting,
     _analyze_branding,
     _analyze_mobile_performance,
-    _analyze_behavioral_economics,
+    _analyze_behavioral_econ_violations,
+    _analyze_behavioral_econ_opportunities,
     _analyze_consulting_strategy,
     _analyze_qa_reliability,
     _analyze_ops_research,

@@ -1401,3 +1401,160 @@ CREATE TABLE IF NOT EXISTS webhook_event (
 
 CREATE INDEX IF NOT EXISTS idx_webhook_event_id ON webhook_event(event_id);
 
+-- ────────────────────────────────
+-- NUDGE REGISTRY (V115+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS nudge_registry (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nudge_key TEXT NOT NULL UNIQUE,
+    nudge_type TEXT NOT NULL DEFAULT 'informational',
+    copy_template TEXT NOT NULL,
+    doctrine_score REAL,
+    doctrine_evaluation TEXT,
+    status TEXT NOT NULL DEFAULT 'draft',
+    platforms TEXT DEFAULT 'web,ios,android,macos',
+    experiment_id INTEGER,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_nudge_registry_key ON nudge_registry(nudge_key);
+CREATE INDEX IF NOT EXISTS idx_nudge_registry_status ON nudge_registry(status);
+
+CREATE TABLE IF NOT EXISTS nudge_exposure (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nudge_id INTEGER NOT NULL REFERENCES nudge_registry(id),
+    user_id INTEGER NOT NULL,
+    context TEXT DEFAULT '',
+    variant TEXT DEFAULT 'control',
+    exposed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_nudge_exposure_nudge ON nudge_exposure(nudge_id);
+CREATE INDEX IF NOT EXISTS idx_nudge_exposure_user ON nudge_exposure(user_id);
+
+CREATE TABLE IF NOT EXISTS nudge_outcome (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nudge_exposure_id INTEGER NOT NULL REFERENCES nudge_exposure(id),
+    outcome_type TEXT NOT NULL,
+    outcome_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_nudge_outcome_exposure ON nudge_outcome(nudge_exposure_id);
+
+-- ────────────────────────────────
+-- CONSULTING FRAMEWORKS (V116+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS pi_balanced_scorecard (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    perspective TEXT NOT NULL,
+    metric_key TEXT NOT NULL UNIQUE,
+    metric_name TEXT NOT NULL,
+    indicator_type TEXT NOT NULL,
+    current_value REAL,
+    target_value REAL,
+    status TEXT,
+    linked_lead_metric TEXT,
+    data_source_sql TEXT,
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_bsc_perspective ON pi_balanced_scorecard(perspective);
+
+CREATE TABLE IF NOT EXISTS pi_revenue_waterfall (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    month TEXT NOT NULL UNIQUE,
+    new_mrr REAL NOT NULL DEFAULT 0,
+    expansion_mrr REAL NOT NULL DEFAULT 0,
+    reactivation_mrr REAL NOT NULL DEFAULT 0,
+    contraction_mrr REAL NOT NULL DEFAULT 0,
+    churn_mrr REAL NOT NULL DEFAULT 0,
+    net_new_mrr REAL NOT NULL DEFAULT 0,
+    ending_mrr REAL NOT NULL DEFAULT 0,
+    computed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS pi_journey_touchpoints (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    stage TEXT NOT NULL,
+    touchpoint TEXT NOT NULL,
+    channel TEXT NOT NULL DEFAULT 'web',
+    emotion_proxy TEXT,
+    drop_off_rate REAL,
+    avg_time_in_stage_hours REAL,
+    computed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_journey_stage ON pi_journey_touchpoints(stage);
+
+CREATE TABLE IF NOT EXISTS pi_kano_classification (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    feature_key TEXT NOT NULL UNIQUE,
+    feature_name TEXT NOT NULL,
+    category TEXT NOT NULL DEFAULT 'indifferent',
+    evidence_type TEXT DEFAULT 'behavioral',
+    satisfaction_if_present REAL,
+    dissatisfaction_if_absent REAL,
+    usage_rate REAL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS pi_jtbd_map (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_statement TEXT NOT NULL,
+    job_category TEXT NOT NULL DEFAULT 'functional',
+    user_segment TEXT,
+    feature_mapping TEXT,
+    evidence_source TEXT DEFAULT 'behavioral',
+    evidence_strength TEXT DEFAULT 'weak',
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS pi_okr_objective (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    quarter TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'on_track',
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS pi_okr_key_result (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    objective_id INTEGER NOT NULL REFERENCES pi_okr_objective(id),
+    description TEXT NOT NULL,
+    metric_key TEXT,
+    baseline REAL NOT NULL DEFAULT 0,
+    target REAL NOT NULL,
+    current_value REAL NOT NULL DEFAULT 0,
+    unit TEXT DEFAULT '',
+    confidence REAL DEFAULT 0.5,
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_okr_kr_obj ON pi_okr_key_result(objective_id);
+
+CREATE TABLE IF NOT EXISTS pi_flywheel_snapshot (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    snapshot_date TEXT NOT NULL UNIQUE,
+    content_velocity REAL,
+    engagement_multiplier REAL,
+    referral_multiplier REAL,
+    growth_multiplier REAL,
+    total_velocity REAL,
+    bottleneck_node TEXT,
+    computed_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS acquisition_cost (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel TEXT NOT NULL,
+    month TEXT NOT NULL,
+    spend_cents INTEGER NOT NULL DEFAULT 0,
+    users_acquired INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(channel, month)
+);
+

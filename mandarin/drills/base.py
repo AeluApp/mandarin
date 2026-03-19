@@ -1,5 +1,6 @@
 """Base drill types, helpers, and formatting utilities."""
 
+import enum
 import random
 import re
 from dataclasses import dataclass
@@ -63,6 +64,98 @@ class DrillResult:
     requirement_ref: Optional[dict] = None  # HSK provenance: {type, name, hsk_level, source}
     distractor_tier: Optional[int] = None  # 0=phonetic, 1=same HSK, 2=nearby, 3=fallback
     metadata: Optional[dict] = None  # Arbitrary metadata (e.g. media_id, tone_scores)
+    near_miss_type: Optional[str] = None  # Set by detect_near_miss() if almost correct
+
+
+# ── Near-miss detection (behavioral economics: targeted feedback) ──────
+
+
+class NearMissType(enum.Enum):
+    """Types of near-miss errors for targeted feedback (DOCTRINE §3)."""
+    TONE_ERROR = "tone_error"          # Right character/pinyin, wrong tone
+    PINYIN_CLOSE = "pinyin_close"      # Off by one letter (sh vs s, zh vs z)
+    MEANING_ADJACENT = "meaning_adjacent"  # Close meaning but wrong word
+    WORD_ORDER = "word_order"          # Right words, wrong order
+    MEASURE_WORD = "measure_word"      # Wrong measure word for the noun
+
+
+# Near-miss feedback templates (DOCTRINE §3: "exact, warm, brief")
+NEAR_MISS_FEEDBACK = {
+    NearMissType.TONE_ERROR: "Almost — right pinyin, just the tone was off ({detail}).",
+    NearMissType.PINYIN_CLOSE: "Close — the sounds are similar ({detail}).",
+    NearMissType.MEANING_ADJACENT: "Nearly — that's a related meaning ({detail}).",
+    NearMissType.WORD_ORDER: "Right words, just in a different order.",
+    NearMissType.MEASURE_WORD: "Right noun — just a different measure word ({detail}).",
+}
+
+
+def detect_near_miss(
+    user_answer: str,
+    expected_answer: str,
+    drill_type: str,
+    error_type: Optional[str] = None,
+) -> Optional[tuple[NearMissType, str]]:
+    """Detect if an incorrect answer is a near-miss (almost correct).
+
+    Returns (NearMissType, detail_string) if near-miss detected, None otherwise.
+    Only called when correct=False. Enables DOCTRINE §3 targeted feedback:
+    "tell the learner exactly what was wrong."
+    """
+    if not user_answer or not expected_answer:
+        return None
+
+    user_lower = user_answer.strip().lower()
+    expected_lower = expected_answer.strip().lower()
+
+    # Same answer (edge case — shouldn't happen with correct=False)
+    if user_lower == expected_lower:
+        return None
+
+    # --- Tone error: same base pinyin, different tone number ---
+    if drill_type in ("tone", "hanzi_to_pinyin", "english_to_pinyin", "ime_type"):
+        user_base = re.sub(r"[1-5]", "", user_lower)
+        expected_base = re.sub(r"[1-5]", "", expected_lower)
+        if user_base and user_base == expected_base:
+            # Extract tone numbers for detail
+            user_tones = re.findall(r"[1-5]", user_lower)
+            expected_tones = re.findall(r"[1-5]", expected_lower)
+            if user_tones and expected_tones:
+                detail = f"tone {user_tones[0]} instead of {expected_tones[0]}"
+            else:
+                detail = "tone mark differs"
+            return (NearMissType.TONE_ERROR, detail)
+
+    # Also detect tone error from error_type metadata
+    if error_type == "tone":
+        return (NearMissType.TONE_ERROR, "tone differs from expected")
+
+    # --- Pinyin close: edit distance of 1 (one letter off) ---
+    if drill_type in ("ime_type", "hanzi_to_pinyin", "english_to_pinyin"):
+        if len(user_lower) == len(expected_lower) and len(user_lower) >= 2:
+            diffs = sum(1 for a, b in zip(user_lower, expected_lower) if a != b)
+            if diffs == 1:
+                diff_pos = next(
+                    i for i, (a, b) in enumerate(zip(user_lower, expected_lower))
+                    if a != b
+                )
+                detail = (f"'{user_lower[diff_pos]}' instead of "
+                          f"'{expected_lower[diff_pos]}'")
+                return (NearMissType.PINYIN_CLOSE, detail)
+
+    # --- Measure word error ---
+    if error_type == "measure_word" or drill_type in ("measure_word", "measure_word_cloze"):
+        if user_lower != expected_lower:
+            detail = f"expected {expected_answer}"
+            return (NearMissType.MEASURE_WORD, detail)
+
+    return None
+
+
+def format_near_miss_feedback(near_miss: tuple[NearMissType, str]) -> str:
+    """Format near-miss feedback using DOCTRINE §3 templates."""
+    nm_type, detail = near_miss
+    template = NEAR_MISS_FEEDBACK.get(nm_type, "Almost — close but not quite.")
+    return template.format(detail=detail)
 
 
 # ── Confidence states ──────────────────────────────

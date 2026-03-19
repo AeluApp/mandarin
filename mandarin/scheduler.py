@@ -3066,6 +3066,7 @@ def _build_session_plan(drills: list, params: dict, conn: sqlite3.Connection, us
 
     drills = _interleave(drills)
     drills = _add_listen_produce_pairs(drills)
+    drills = _apply_peak_end_ordering(drills, conn, user_id)
 
     # Build micro-plan
     modality_summary = {}
@@ -3210,6 +3211,129 @@ def _scaffold_first_session(drills: list) -> list:
     production = [d for d in drills if d.drill_type not in RECOGNITION_TYPES]
     # Put recognition first, then production
     return recognition + production
+
+
+def _apply_peak_end_ordering(drills: list[DrillItem], conn: sqlite3.Connection, user_id: int = 1) -> list[DrillItem]:
+    """Reorder drills so the session ends on a high note (Kahneman peak-end rule).
+
+    Memory of an experience is dominated by its peak moment and its ending.
+    This moves 2 high-confidence items to the end of the drill list so the
+    learner finishes with items they're likely to get correct.
+
+    High-confidence = mastery_stage >= 'stable' or streak >= 3 consecutive correct.
+    Only rearranges if there are 6+ drills (small sessions stay as-is).
+    """
+    if len(drills) < 6:
+        return drills
+
+    try:
+        # Get mastery data for items in this session
+        item_ids = [d.content_item_id for d in drills]
+        placeholders = ",".join("?" * len(item_ids))
+        rows = conn.execute(
+            f"""SELECT content_item_id, mastery_stage, streak
+                FROM progress
+                WHERE user_id = ? AND content_item_id IN ({placeholders})""",
+            [user_id] + item_ids,
+        ).fetchall()
+
+        mastery = {r["content_item_id"]: r for r in rows}
+
+        # Find high-confidence drills (stable/durable OR streak >= 3)
+        high_conf_indices = []
+        for i, d in enumerate(drills):
+            m = mastery.get(d.content_item_id)
+            if m and (
+                m["mastery_stage"] in ("stable", "durable")
+                or (m["streak"] or 0) >= 3
+            ):
+                high_conf_indices.append(i)
+
+        if len(high_conf_indices) < 2:
+            return drills
+
+        # Move 2 high-confidence items to the last 2 positions
+        # Pick from the middle of the session (not already at the end)
+        end_candidates = [
+            i for i in high_conf_indices
+            if i < len(drills) - 2
+        ]
+        if len(end_candidates) < 2:
+            return drills
+
+        # Take the first 2 candidates (closest to middle)
+        mid = len(drills) // 2
+        end_candidates.sort(key=lambda i: abs(i - mid))
+        to_move = end_candidates[:2]
+
+        # Rebuild: everything except the 2 chosen, then append them at end
+        remaining = [d for i, d in enumerate(drills) if i not in to_move]
+        peak_end = [drills[i] for i in to_move]
+        return remaining + peak_end
+
+    except Exception as e:
+        logger.debug("peak-end ordering skipped: %s", e)
+        return drills
+
+
+def preview_next_session(conn: sqlite3.Connection, user_id: int = 1, n: int = 3) -> list[dict]:
+    """Preview the top N items that would appear in the next session.
+
+    Used for Zeigarnik effect — showing upcoming words at session end
+    creates anticipation to return. Returns a list of dicts with hanzi,
+    pinyin, english, and is_new flag.
+    """
+    try:
+        # Get items due for review with highest urgency
+        rows = conn.execute(
+            """SELECT ci.id, ci.hanzi, ci.pinyin, ci.english,
+                      p.mastery_stage, p.next_review
+               FROM progress p
+               JOIN content_item ci ON p.content_item_id = ci.id
+               WHERE p.user_id = ?
+                 AND p.mastery_stage NOT IN ('durable')
+                 AND p.next_review IS NOT NULL
+               ORDER BY p.next_review ASC
+               LIMIT ?""",
+            (user_id, n + 5),  # Fetch extra to filter
+        ).fetchall()
+
+        preview = []
+        for r in rows:
+            if len(preview) >= n:
+                break
+            preview.append({
+                "hanzi": r["hanzi"],
+                "pinyin": r["pinyin"],
+                "english": r["english"],
+                "is_new": r["mastery_stage"] == "seen",
+            })
+
+        # If not enough review items, check for new items
+        if len(preview) < n:
+            new_rows = conn.execute(
+                """SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
+                   FROM content_item ci
+                   WHERE ci.id NOT IN (
+                       SELECT content_item_id FROM progress WHERE user_id = ?
+                   )
+                   ORDER BY ci.hsk_level, ci.frequency_rank
+                   LIMIT ?""",
+                (user_id, n - len(preview)),
+            ).fetchall()
+            for r in new_rows:
+                preview.append({
+                    "hanzi": r["hanzi"],
+                    "pinyin": r["pinyin"],
+                    "english": r["english"],
+                    "is_new": True,
+                })
+
+        return preview[:n]
+
+    except Exception as e:
+        logger.debug("next session preview failed: %s", e)
+        return []
 
 
 def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = None, user_id: int = 1) -> SessionPlan:
@@ -3677,13 +3801,22 @@ def _pick_listening_block(conn, user_id: int, hsk_level: int) -> Optional[Listen
         from urllib.parse import quote
         audio_url = f"/api/tts?text={quote(row['content_hanzi'][:500])}"
 
+        # Use learner's preferred playback speed (choice architecture)
+        speed = 1.0
+        try:
+            profile = db.get_profile(conn, user_id=user_id)
+            speed = float(profile.get("preferred_playback_speed") or 1.0)
+            speed = max(0.5, min(2.0, speed))  # Clamp to safe range
+        except Exception:
+            pass
+
         return ListeningBlock(
             passage_id=row["id"],
             audio_url=audio_url,
             transcript_zh=row["content_hanzi"] or "",
             transcript_pinyin=row["content_pinyin"] or "",
             questions=questions,
-            playback_speed=1.0,
+            playback_speed=speed,
             target_seconds=180,
         )
     except Exception:

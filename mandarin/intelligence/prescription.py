@@ -152,6 +152,50 @@ _FINDING_TO_ACTION = {
     ("competitive", "blue ocean"): ("mandarin/web/static/app.js", "differentiation", "improve"),
     ("profitability", "unit"): ("mandarin/analytics/clv.py", "unit_economics", "improve"),
     ("profitability", "cac"): ("mandarin/marketing_hooks.py", "acquisition_cost", "track"),
+    # Behavioral economics (behavioral_econ dimension)
+    ("behavioral_econ", "doctrine"): ("mandarin/web/static/app.js", "nudge_copy", "fix"),
+    ("behavioral_econ", "nudge"): ("mandarin/nudge_registry.py", "nudge_coverage", "expand"),
+    ("behavioral_econ", "progress"): ("mandarin/web/dashboard_routes.py", "progress_framing", "improve"),
+    ("behavioral_econ", ""): ("mandarin/nudge_registry.py", "behavioral_econ", "improve"),
+    # Growth accounting
+    ("growth_accounting", "quick"): ("mandarin/payment.py", "revenue_health", "monitor"),
+    ("growth_accounting", "waterfall"): ("mandarin/payment.py", "mrr_composition", "track"),
+    ("growth_accounting", "cohort"): ("mandarin/analytics/clv.py", "cohort_retention", "improve"),
+    ("growth_accounting", ""): ("mandarin/payment.py", "growth_accounting", "improve"),
+    # Customer journey
+    ("journey", "drop"): ("mandarin/web/onboarding_routes.py", "funnel_conversion", "improve"),
+    ("journey", ""): ("mandarin/web/onboarding_routes.py", "customer_journey", "improve"),
+    # Brand health
+    ("brand_health", "nps"): ("mandarin/web/session_routes.py", "nps_collection", "add"),
+    ("brand_health", ""): ("mandarin/marketing_hooks.py", "brand_health", "improve"),
+    # Learning science — non-core modality coverage
+    ("learning_science", "extensive"): ("mandarin/scheduler.py", "reading_coverage_threshold", "increase"),
+    ("learning_science", "narrow"): ("mandarin/scheduler.py", "listening_topic_grouping", "add"),
+    ("learning_science", "output"): ("mandarin/conversation.py", "production_difficulty", "increase"),
+    ("learning_science", "form"): ("mandarin/scheduler.py", "grammar_context_gate", "add"),
+    ("learning_science", "interleav"): ("mandarin/scheduler.py", "cross_modality_rotation", "increase"),
+    ("learning_science", "difficult"): ("mandarin/scheduler.py", "listening_speed_progression", "add"),
+    ("learning_science", "media"): ("mandarin/media.py", "media_content", "expand"),
+    ("learning_science", ""): ("mandarin/scheduler.py", "learning_science_compliance", "improve"),
+    # Modality-specific drill quality
+    ("drill_quality", "reading"): ("mandarin/scheduler.py", "reading_difficulty", "calibrate"),
+    ("drill_quality", "listening"): ("mandarin/scheduler.py", "listening_difficulty", "calibrate"),
+    ("drill_quality", "conversation"): ("mandarin/conversation.py", "conversation_quality", "improve"),
+    ("drill_quality", "grammar"): ("mandarin/scheduler.py", "grammar_integration", "improve"),
+    ("drill_quality", "spc"): ("mandarin/quality/spc.py", "modality_spc", "investigate"),
+    # Behavioral economics per modality
+    ("behavioral_econ", "reading"): ("mandarin/web/dashboard_routes.py", "reading_milestones", "add"),
+    ("behavioral_econ", "listening"): ("mandarin/scheduler.py", "playback_speed_choice", "add"),
+    ("behavioral_econ", "conversation"): ("mandarin/conversation.py", "encouragement_messages", "add"),
+    ("behavioral_econ", "grammar"): ("mandarin/scheduler.py", "grammar_encounter_gate", "improve"),
+    ("behavioral_econ", "modality"): ("mandarin/nudge_registry.py", "modality_nudge", "add"),
+    ("behavioral_econ", "exploration"): ("mandarin/nudge_registry.py", "modality_nudge", "add"),
+    # Modality-specific engagement/retention
+    ("engagement", "reading"): ("mandarin/scheduler.py", "reading_scheduling", "increase"),
+    ("engagement", "listening"): ("mandarin/scheduler.py", "listening_scheduling", "increase"),
+    ("engagement", "modality"): ("mandarin/scheduler.py", "modality_balance", "improve"),
+    ("retention", "modality"): ("mandarin/scheduler.py", "modality_onboarding", "improve"),
+    ("retention", "mono"): ("mandarin/nudge_registry.py", "exploration_nudge", "add"),
 }
 
 # Error-type dimensions where improvement means metric goes DOWN

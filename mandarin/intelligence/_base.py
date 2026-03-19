@@ -84,6 +84,11 @@ _VERIFICATION_WINDOWS = {
     "commercial": 30,
     "agentic": 7,
     "cross_platform": 14,
+    "behavioral_econ": 14,
+    "growth_accounting": 30,
+    "journey": 14,
+    "brand_health": 30,
+    "learning_science": 14,
 }
 
 # Correlated dimension pairs for RCA graph edges
@@ -115,6 +120,18 @@ _CORRELATED_DIMENSIONS = {
     ("governance", "security"),
     ("data_quality", "engineering"),
     ("platform", "cross_platform"),
+    ("behavioral_econ", "retention"),
+    ("behavioral_econ", "onboarding"),
+    ("behavioral_econ", "ux"),
+    ("growth_accounting", "profitability"),
+    ("growth_accounting", "retention"),
+    ("journey", "onboarding"),
+    ("journey", "retention"),
+    ("brand_health", "marketing"),
+    ("brand_health", "retention"),
+    ("learning_science", "drill_quality"),
+    ("learning_science", "curriculum"),
+    ("learning_science", "retention"),
 }
 
 # Rule-based learner archetype definitions

@@ -170,3 +170,59 @@ These 11 standards define what Aelu is:
 11. A founder who **builds in blocks and reviews honestly**
 
 Every feature, every design choice, every piece of content should be defensible against one of these standards. If it isn't, it doesn't belong in Aelu.
+
+---
+
+## Appendix: Non-Core Modality Standards
+
+The 11 standards above govern the entire product. This appendix clarifies how they apply specifically to the five learning features outside the core SRS drill loop: reading passages, listening comprehension, conversation practice, grammar study, and media shelf.
+
+### Reading Passages
+
+**Standard: Comprehensible input that builds fluency, not just decoding.**
+
+- **Extensive vs. intensive**: Aelu serves both. Intensive reading (85-95% vocabulary coverage, Nation 2006) builds word knowledge. Extensive reading (98%+ coverage, Krashen 2004) builds fluency and enjoyment. The scheduler should offer both modes.
+- **Integration**: Every reading passage connects to the vocabulary the learner is studying. Words looked up during reading become drill candidates within 2 sessions. Reading is not a standalone feature — it feeds the SRS loop.
+- **Difficulty**: Passages must match the learner's current vocabulary coverage. A passage where the learner looks up more than 10 words is too hard for that learner at that moment.
+- **Assessment**: Comprehension questions test understanding of meaning, not surface recall. Questions should require inference, not just pattern matching.
+
+### Listening Comprehension
+
+**Standard: Train the ear through graduated exposure, not passive consumption.**
+
+- **Narrow listening (Krashen)**: Repeated exposure to the same topic or speaker builds comprehension faster than varied listening. The system should group passages topically.
+- **Speed progression (Bjork desirable difficulty)**: Start at a comfortable speed. As comprehension scores stabilize, gradually increase playback speed. Never force speed — offer choice (0.75x / 1.0x / 1.25x).
+- **Testing effect**: Every listening exercise should include post-listening retrieval (comprehension questions, not just "did you hear it?"). Retrieval after listening cements the comprehension (Roediger & Karpicke 2006).
+- **Replay is information**: High replay rates signal difficulty mismatch, not failure. The system should track replays as a process signal, not a negative metric.
+
+### Conversation Practice
+
+**Standard: Push productive output, normalize difficulty, scaffold success.**
+
+- **Pushed output (Swain 1985, 2005)**: Conversation must require the learner to produce language, not just select from options. As mastery grows, conversations should demand more open-ended production. Target success rate: 60-80% (challenging enough to learn from, not so hard as to frustrate).
+- **Difficulty normalization (DOCTRINE §3)**: Conversation is inherently harder than recognition. Every conversation interface should include language like "Conversations are the hardest part — every attempt builds fluency." This is not cheerleading; it is calibrating expectations.
+- **Scaffolding**: Provide contextual hints (vocabulary the learner knows, sentence patterns from drills) without making the conversation a fill-in-the-blank exercise.
+
+### Grammar Study
+
+**Standard: Focus on Form — grammar through context, never isolation.**
+
+- **Long (1991)**: Grammar should be noticed in meaning-focused input before it is explicitly taught. A grammar point should appear in at least 3 reading or listening contexts before the learner sees a grammar drill for it.
+- **Integration gate**: The scheduler must check whether a learner has encountered the grammar pattern in context before scheduling a grammar drill. Drilling grammar in isolation violates DOCTRINE §1.
+- **Cross-modality reinforcement**: A grammar pattern learned in a reading context should later appear in a listening context and a conversation context. Grammar is not a modality — it is a dimension that cross-cuts all modalities.
+
+### Media Shelf
+
+**Standard: Authentic input for pragmatic competence — a delighter, not a requirement.**
+
+- **Gilmore (2007)**: Authentic materials (real Chinese video, audio, text) develop pragmatic competence that textbook materials cannot. The media shelf serves this function.
+- **Kano classification**: Media is a delighter feature — low adoption is expected and acceptable. Track whether media users have higher retention, but do not pressure non-users.
+- **Quality bar**: All media content must be screened for appropriateness, accuracy, and cultural sensitivity before learners access it.
+
+### Cross-Modality Principle (DOCTRINE §4 Extension)
+
+**Standard: Every vocabulary item should cross at least 2 modalities within 5 sessions.**
+
+- **Interleaving (Rohrer & Taylor 2007)**: Items practiced across modalities (reading → listening → production → conversation) are retained better than items drilled in a single modality.
+- **The scheduler enforces this**: When an item has been reviewed 5+ times in one modality, prioritize it for a different modality in the next session.
+- **Measurement**: Track cross-modality coverage. Items stuck in a single modality are at risk of shallow mastery — the learner recognizes the word in one context but not others.

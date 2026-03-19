@@ -78,6 +78,74 @@ def _has_tone_marks(pinyin: str) -> bool:
     return False
 
 
+def screen_for_inappropriate_content(text: str, context: str = "reading") -> dict:
+    """Screen AI-generated content for inappropriate material.
+
+    Checks for offensive patterns, stereotypes, and factual red flags.
+    Uses Qwen LLM if available, else keyword heuristic.
+
+    Returns: {"safe": bool, "issues": list[str], "method": "llm"|"heuristic"}
+    """
+    issues = []
+
+    # Heuristic check: keywords/patterns that should never appear in educational content
+    lower = text.lower()
+
+    # Offensive/inappropriate content patterns
+    _OFFENSIVE_PATTERNS = [
+        r"\b(?:damn|hell|shit|fuck|bitch|ass(?:hole)?|crap)\b",
+        r"\b(?:stupid|idiot|dumb|loser|ugly|fat|retard)\b",
+        r"\b(?:kill|murder|suicide|die|death|blood|weapon|gun|knife)\b",
+        r"\b(?:sex(?:ual)?|porn|naked|nude|breast|genital)\b",
+        r"\b(?:drug|cocaine|heroin|marijuana|meth)\b",
+    ]
+
+    for pattern in _OFFENSIVE_PATTERNS:
+        matches = re.findall(pattern, lower)
+        if matches:
+            issues.append(f"inappropriate content detected: {matches[:2]}")
+
+    # Stereotyping patterns (cultural sensitivity for Chinese content)
+    _STEREOTYPE_PATTERNS = [
+        r"\b(?:all\s+chinese\s+people|chinese\s+always|typical\s+chinese)\b",
+        r"\b(?:oriental|chinaman|ching\s+chong)\b",
+    ]
+
+    for pattern in _STEREOTYPE_PATTERNS:
+        if re.search(pattern, lower):
+            issues.append("potential cultural stereotype detected")
+
+    # Try LLM screening if available and text is substantial
+    if not issues and len(text) > 100:
+        try:
+            from .ollama_client import generate, is_ollama_available
+            if is_ollama_available():
+                resp = generate(
+                    prompt=(
+                        f"Is this {context} content appropriate for a language learning app "
+                        f"used by adults and students? Check for: offensive language, "
+                        f"stereotypes, factual errors, bias. Reply ONLY 'safe' or "
+                        f"'unsafe: [reason]'.\n\nContent: {text[:500]}"
+                    ),
+                    system="You are a content safety reviewer. Be brief.",
+                    temperature=0.1,
+                    max_tokens=50,
+                    task_type="content_moderation",
+                )
+                if resp.success and "unsafe" in resp.text.lower():
+                    issues.append(f"LLM flagged: {resp.text.strip()}")
+                    return {"safe": False, "issues": issues, "method": "llm"}
+                return {"safe": True, "issues": [], "method": "llm"}
+        except Exception:
+            pass
+
+    return {
+        "safe": len(issues) == 0,
+        "issues": issues,
+        "method": "heuristic",
+    }
+
+
 def _contains_traditional_only_chars(text: str) -> bool:
     """Check for characters that are traditional-only (not used in simplified).
 
