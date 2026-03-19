@@ -267,6 +267,20 @@
       </div>
       {% endif %}
 
+      <!-- Learner Intelligence Panel (Move 2) -->
+      <div class="panel collapsible" id="intelligence-panel" aria-label="Your learning brain">
+        <button class="panel-toggle" type="button" aria-expanded="false" aria-controls="intelligence-panel-body">
+          <h3>Your Learning</h3>
+        </button>
+        <div class="panel-body panel-closed" id="intelligence-panel-body">
+          <div id="intelligence-content" aria-live="polite">
+            <div class="skeleton skeleton-text skeleton-text-long"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text skeleton-text-short"></div>
+          </div>
+        </div>
+      </div>
+
       {% if errors %}
       <div class="error-summary" aria-label="Error patterns">
         <h3>Recent error patterns</h3>
@@ -871,6 +885,31 @@
 
   <!-- Global tooltip for mastery bars -->
   <div id="mastery-tooltip" class="mastery-tooltip" aria-hidden="true"></div>
+
+  <!-- Onboarding walkthrough overlay (Move 4) -->
+  <div id="onboarding-walkthrough" class="walkthrough-overlay hidden" role="dialog" aria-label="Welcome walkthrough" aria-modal="true">
+    <div class="walkthrough-backdrop"></div>
+    <div class="walkthrough-card" id="walkthrough-card">
+      <div class="walkthrough-step-indicator" id="walkthrough-dots"></div>
+      <h3 class="walkthrough-title" id="walkthrough-title"></h3>
+      <p class="walkthrough-text" id="walkthrough-text"></p>
+      <div class="walkthrough-actions">
+        <button id="walkthrough-skip" class="btn-link btn-sm" type="button">Skip</button>
+        <button id="walkthrough-next" class="btn-primary btn-sm" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Streaming session analysis container (Move 3) -->
+  <div id="session-analysis" class="session-analysis hidden" aria-label="Session analysis" aria-live="polite">
+    <div class="session-analysis-header">
+      <h3>Session Analysis</h3>
+      <button id="analysis-close" class="btn-link btn-sm" type="button" aria-label="Close analysis">Close</button>
+    </div>
+    <div id="analysis-content" class="session-analysis-content">
+      <div class="analysis-typing" id="analysis-typing"></div>
+    </div>
+  </div>
 
   <noscript><div style="padding:2rem;text-align:center;font-family:sans-serif;">Aelu requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
   <script nonce="{{ csp_nonce }}">

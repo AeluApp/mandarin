@@ -36,15 +36,22 @@
   </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
   {% if ga4_id %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ ga4_id }}', {
-      send_page_view: true,
-      cookie_flags: 'SameSite=Lax;Secure'
-    });
+    window._ga4Id = '{{ ga4_id }}';
+    function _loadGA4() {
+      if (window._ga4Loaded) return;
+      window._ga4Loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._ga4Id;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', window._ga4Id, { send_page_view: true, cookie_flags: 'SameSite=Lax;Secure' });
+    }
+    if (localStorage.getItem('aelu_cookie_consent') === 'accepted') _loadGA4();
   </script>
   {% endif %}
 </head>
@@ -90,6 +97,37 @@
     if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.SplashScreen) {
       try { window.Capacitor.Plugins.SplashScreen.hide(); } catch(e) {}
     }
+
+    /* Inline validation — shows hints on blur, not while typing */
+    (function() {
+      var emailInput = document.getElementById('email');
+      var form = document.querySelector('.auth-form');
+      var submitted = false;
+
+      function showHint(input, msg) {
+        var existing = input.parentNode.querySelector('.auth-validation');
+        if (existing) existing.remove();
+        if (!msg) { input.style.borderColor = ''; return; }
+        var hint = document.createElement('div');
+        hint.className = 'auth-validation';
+        hint.textContent = msg;
+        hint.setAttribute('role', 'alert');
+        hint.style.cssText = 'font-family:var(--font-body);font-size:var(--text-xs);color:var(--color-incorrect);margin-top:var(--space-1);';
+        input.parentNode.appendChild(hint);
+        input.style.borderColor = 'var(--color-incorrect)';
+      }
+
+      emailInput.addEventListener('blur', function() {
+        if (!submitted && !emailInput.value) return;
+        if (emailInput.value && !emailInput.validity.valid) {
+          showHint(emailInput, 'Please enter a valid email address.');
+        } else {
+          showHint(emailInput, '');
+        }
+      });
+
+      form.addEventListener('submit', function() { submitted = true; });
+    })();
   </script>
 </body>
 </html>

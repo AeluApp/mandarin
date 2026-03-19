@@ -1228,6 +1228,7 @@ function startSession(type) {
   drillArea.textContent = "";
   sessionActive = true;
   document.body.classList.add('in-session');
+  if (typeof setSessionColorState === 'function') setSessionColorState('active');
   EventLog.record("session", "start", {type: type});
   trackEvent('session_start', {session_type: type});
   lastSessionType = type;
@@ -1488,6 +1489,9 @@ function handleMessage(data) {
       }
       sessionActive = false;
       document.body.classList.remove('in-session');
+      if (typeof setSessionColorState === 'function') setSessionColorState('complete');
+      // Reset to idle after 10s
+      setTimeout(function() { if (typeof setSessionColorState === 'function') setSessionColorState('idle'); }, 10000);
       resumeToken = null;
       SessionCheckpoint.clear();
       try { sessionStorage.removeItem("resumeToken"); } catch (e) {}
@@ -11152,3 +11156,344 @@ var PodcastPlayer = (function() {
 
   return PodcastPlayer;
 })();
+
+/* ── Mobile swipe handler for drill navigation ────────────────────────── */
+/* Swipe left on a drill to submit/advance. Only activates on touch devices.
+   Does not interfere with text inputs, select elements, or horizontal scrolling.
+   Calls CapacitorBridge.hapticFeedback if available. */
+(function() {
+  if (!('ontouchstart' in window)) return;
+
+  var drillArea = document.getElementById("drill-area");
+  if (!drillArea) return;
+
+  var startX = 0, startY = 0, startTime = 0;
+  var MIN_SWIPE = 50;   // px
+  var MAX_TIME = 300;    // ms
+  var MAX_Y_RATIO = 0.8; // reject diagonal swipes
+
+  drillArea.addEventListener("touchstart", function(e) {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+    if (e.target.isContentEditable) return;
+    var t = e.changedTouches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    startTime = Date.now();
+  }, { passive: true });
+
+  drillArea.addEventListener("touchmove", function(e) {
+    if (startTime === 0) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - startX;
+    var group = drillArea.querySelector(".drill-group:not(.past)");
+    if (!group) return;
+    if (Math.abs(dx) > 10) {
+      group.classList.remove("swipe-settle");
+      group.style.transform = "translateX(" + Math.max(-40, Math.min(40, dx * 0.3)) + "px)";
+    }
+  }, { passive: true });
+
+  drillArea.addEventListener("touchend", function(e) {
+    if (startTime === 0) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - startX;
+    var dy = t.clientY - startY;
+    var elapsed = Date.now() - startTime;
+    startTime = 0;
+
+    var group = drillArea.querySelector(".drill-group:not(.past)");
+    if (group) {
+      group.style.transform = "";
+      group.classList.add("swipe-settle");
+      setTimeout(function() { group.classList.remove("swipe-settle"); }, 400);
+    }
+
+    // Reject: too slow, too short, too diagonal, or upward swipe
+    if (elapsed > MAX_TIME) return;
+    if (Math.abs(dx) < MIN_SWIPE) return;
+    if (Math.abs(dy) / Math.abs(dx) > MAX_Y_RATIO) return;
+
+    // Swipe left = advance/submit
+    if (dx < -MIN_SWIPE) {
+      if (typeof CapacitorBridge !== "undefined" && CapacitorBridge.hapticFeedback) {
+        CapacitorBridge.hapticFeedback("light");
+      }
+      // Find and click the current submit/continue button
+      var submitBtn = document.querySelector("#input-area .btn-primary:not([disabled])");
+      if (submitBtn) {
+        submitBtn.click();
+      } else {
+        // If no submit button visible, try sending empty answer (continue/skip)
+        var continueBtn = drillArea.querySelector(".btn-primary:not([disabled])");
+        if (continueBtn) continueBtn.click();
+      }
+    }
+  }, { passive: true });
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   2026 Visual Design Modernization — JavaScript
+   View transitions, animated counters, parallax, color shifts,
+   panel stagger, pull-to-refresh
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1b. View Transitions wrapper ────────────────────────── */
+/* Wraps screen transitions in the View Transitions API when supported.
+   Falls back to immediate swap in older browsers. */
+function viewTransition(callback) {
+  if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.startViewTransition(callback);
+  } else {
+    callback();
+  }
+}
+
+/* ── 1c. Animated number counters ────────────────────────── */
+/* Counts up stat values from 0 on dashboard load. Spring-decelerated. */
+function animateCounter(el, target, duration) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = target;
+    return;
+  }
+  duration = duration || 800;
+  var isPercent = el.textContent.indexOf('%') >= 0;
+  el.setAttribute('data-animate', '1');
+  var startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var p = Math.min((ts - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - p, 3);  // cubic deceleration
+    var val = Math.round(target * ease);
+    el.textContent = val + (isPercent ? '%' : '');
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target + (isPercent ? '%' : '');
+  }
+  requestAnimationFrame(step);
+}
+
+/* Auto-animate stat values on page load */
+document.addEventListener('DOMContentLoaded', function() {
+  var statValues = document.querySelectorAll('.stat-value');
+  statValues.forEach(function(el, i) {
+    var text = el.textContent.trim();
+    var num = parseInt(text, 10);
+    if (isNaN(num) || num <= 0) return;
+    el.textContent = '0' + (text.indexOf('%') >= 0 ? '%' : '');
+    setTimeout(function() {
+      animateCounter(el, num, 800 + i * 100);
+    }, 200 + i * 80);  // stagger start
+  });
+
+  /* ── Panel stagger entrance ────────────────────────── */
+  var panels = document.querySelectorAll('.panel');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    panels.forEach(function(p) { p.classList.add('panel-stagger-enter'); });
+  }
+});
+
+/* ── 1e. Parallax depth on scroll ────────────────────────── */
+/* Sky gradient and horizon line respond to scroll for depth perception. */
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var horizon = document.querySelector('.horizon');
+  var sky = document.querySelector('.sky-bg');
+  if (!horizon && !sky) return;
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var y = window.scrollY;
+      if (sky) sky.style.transform = 'translateY(' + (y * 0.3) + 'px)';
+      if (horizon) horizon.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+/* ── 1g. Contextual color temperature ────────────────────────── */
+/* Sets data-session-state on <html> so CSS shifts the background color. */
+function setSessionColorState(state) {
+  if (state === 'active' || state === 'complete' || state === 'idle') {
+    document.documentElement.setAttribute('data-session-state', state);
+  } else {
+    document.documentElement.removeAttribute('data-session-state');
+  }
+}
+
+/* ── Move 5: Pull-to-refresh (mobile) ────────────────────────── */
+(function() {
+  if (!('ontouchstart' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var indicator = document.createElement('div');
+  indicator.className = 'ptr-indicator';
+  document.body.prepend(indicator);
+
+  var startY = 0, pulling = false;
+  var THRESHOLD = 80;
+
+  document.addEventListener('touchstart', function(e) {
+    if (window.scrollY > 5) return;
+    if (typeof sessionActive !== 'undefined' && sessionActive) return;
+    startY = e.touches[0].clientY;
+    pulling = true;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function(e) {
+    if (!pulling) return;
+    var dy = e.touches[0].clientY - startY;
+    if (dy < 0) { pulling = false; return; }
+    var progress = Math.min(dy / THRESHOLD, 1);
+    indicator.classList.add('ptr-active');
+    indicator.style.setProperty('--ptr-progress', progress);
+  }, { passive: true });
+
+  document.addEventListener('touchend', function() {
+    if (!pulling) return;
+    pulling = false;
+    var progress = parseFloat(indicator.style.getPropertyValue('--ptr-progress') || '0');
+    indicator.classList.remove('ptr-active');
+    if (progress >= 1) {
+      indicator.classList.add('ptr-refreshing');
+      if (typeof fetchDashboardData === 'function') {
+        fetchDashboardData().then(function() {
+          indicator.classList.remove('ptr-refreshing');
+        }).catch(function() {
+          indicator.classList.remove('ptr-refreshing');
+        });
+      } else {
+        setTimeout(function() {
+          indicator.classList.remove('ptr-refreshing');
+          location.reload();
+        }, 800);
+      }
+    }
+  }, { passive: true });
+})();
+
+/* ── Move 2: Learner Intelligence Panel ────────────────────────── */
+(function() {
+  var panel = document.getElementById('intelligence-content');
+  if (!panel) return;
+
+  function fetchIntelligence() {
+    apiFetch('/api/learner-intelligence').then(function(r) { return r.json(); }).then(function(data) {
+      if (!data || data.error) {
+        panel.innerHTML = '<p class="intelligence-note">Not enough data yet. Complete a few sessions first.</p>';
+        return;
+      }
+      var html = '';
+      if (data.optimal_zone_count != null) {
+        html += '<div class="intelligence-stat"><span class="intelligence-stat-label">Items in optimal learning zone</span><span class="intelligence-stat-value">' + data.optimal_zone_count + '</span></div>';
+      }
+      if (data.velocity != null) {
+        html += '<div class="intelligence-stat"><span class="intelligence-stat-label">Items mastered per session</span><span class="intelligence-stat-value">' + data.velocity.toFixed(1) + '</span></div>';
+      }
+      if (data.total_items_learning) {
+        html += '<div class="intelligence-stat"><span class="intelligence-stat-label">Items being tracked</span><span class="intelligence-stat-value">' + data.total_items_learning + '</span></div>';
+      }
+      if (data.top_errors && data.top_errors.length > 0) {
+        html += '<div class="intelligence-stat"><span class="intelligence-stat-label">Top challenge this week</span><span class="intelligence-stat-value">' + esc(data.top_errors[0].type) + ' (' + data.top_errors[0].count + ')</span></div>';
+      }
+      if (data.forecast) html += '<p class="intelligence-note">' + esc(data.forecast) + '</p>';
+      if (data.difficulty_note) html += '<p class="intelligence-note">' + esc(data.difficulty_note) + '</p>';
+      panel.innerHTML = html || '<p class="intelligence-note">Complete a few sessions to see learning insights.</p>';
+    }).catch(function() {
+      panel.innerHTML = '<p class="intelligence-note">Insights will appear after your first few sessions.</p>';
+    });
+  }
+
+  setTimeout(fetchIntelligence, 1500);
+})();
+
+/* ── Move 4: Onboarding walkthrough ────────────────────────── */
+(function() {
+  var WALKTHROUGH_KEY = 'aelu_walkthrough_done';
+  if (localStorage.getItem(WALKTHROUGH_KEY)) return;
+
+  var steps = [
+    { title: 'Your dashboard', text: 'This shows what you know. The numbers update after each session.' },
+    { title: 'Start studying', text: 'Press Begin for a full session, or Quick for a shorter one. Drills adapt to what you need.' },
+    { title: 'Read, listen, practice', text: 'Beyond drills, you can read Chinese texts, listen to audio, and study grammar.' },
+    { title: 'Track your memory', text: 'The mastery bars show how securely each word lives in your long-term memory.' }
+  ];
+
+  var overlay = document.getElementById('onboarding-walkthrough');
+  var titleEl = document.getElementById('walkthrough-title');
+  var textEl = document.getElementById('walkthrough-text');
+  var dotsEl = document.getElementById('walkthrough-dots');
+  var nextBtn = document.getElementById('walkthrough-next');
+  var skipBtn = document.getElementById('walkthrough-skip');
+  if (!overlay || !titleEl) return;
+
+  var currentStep = 0;
+
+  function renderStep() {
+    titleEl.textContent = steps[currentStep].title;
+    textEl.textContent = steps[currentStep].text;
+    nextBtn.textContent = currentStep === steps.length - 1 ? 'Got it' : 'Next';
+    dotsEl.innerHTML = '';
+    for (var i = 0; i < steps.length; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'walkthrough-dot' + (i === currentStep ? ' active' : '');
+      dotsEl.appendChild(dot);
+    }
+  }
+
+  function dismiss() {
+    overlay.classList.add('hidden');
+    localStorage.setItem(WALKTHROUGH_KEY, '1');
+  }
+
+  nextBtn.addEventListener('click', function() {
+    currentStep++;
+    if (currentStep >= steps.length) { dismiss(); return; }
+    renderStep();
+  });
+
+  skipBtn.addEventListener('click', dismiss);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !overlay.classList.contains('hidden')) dismiss();
+  });
+
+  setTimeout(function() {
+    renderStep();
+    overlay.classList.remove('hidden');
+  }, 1200);
+})();
+
+/* ── Move 3: Streaming session analysis ────────────────────────── */
+function showSessionAnalysis(sessionId) {
+  var container = document.getElementById('session-analysis');
+  var content = document.getElementById('analysis-typing');
+  var closeBtn = document.getElementById('analysis-close');
+  if (!container || !content) return;
+
+  container.classList.remove('hidden');
+  content.textContent = '';
+  content.classList.remove('done');
+
+  if (typeof EventSource !== 'undefined' && sessionId) {
+    var es = new EventSource('/api/session/' + sessionId + '/analyze-stream');
+    es.onmessage = function(e) {
+      var data = JSON.parse(e.data);
+      if (data.text) content.textContent += data.text;
+      if (data.done) { content.classList.add('done'); es.close(); }
+    };
+    es.onerror = function() {
+      es.close();
+      if (!content.textContent) {
+        content.textContent = 'Session analysis will be available after more sessions.';
+      }
+      content.classList.add('done');
+    };
+  } else {
+    content.textContent = 'Session analysis will be available after more sessions.';
+    content.classList.add('done');
+  }
+
+  closeBtn.addEventListener('click', function() { container.classList.add('hidden'); });
+}

@@ -63,6 +63,7 @@
       --color-accent: #946070;
       --color-secondary: #6A7A5A;
       --color-border: #D8D0C4;
+      --color-on-accent: #FFFFFF;
       --font-heading: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Source Serif 4', Georgia, serif;
       --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
@@ -74,6 +75,11 @@
       --space-5: 2rem;
       --space-6: 3rem;
       --space-8: 5rem;
+      /* 2026 fluid typography */
+      --text-display: clamp(2.2rem, 5vw, 3.5rem);
+      --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-upward: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -130,7 +136,7 @@
 
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: 2.8rem;
+      font-size: var(--text-display, clamp(2.2rem, 5vw, 2.8rem));
       font-weight: 600;
       line-height: 1.15;
       margin-bottom: var(--space-3);
@@ -266,6 +272,22 @@
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
       padding: var(--space-4);
+      transition: transform 0.3s var(--ease-default), box-shadow 0.3s var(--ease-default);
+    }
+
+    @supports (backdrop-filter: blur(1px)) {
+      .feature-card {
+        backdrop-filter: blur(16px) saturate(1.15);
+        -webkit-backdrop-filter: blur(16px) saturate(1.15);
+        background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+      }
+    }
+
+    @media (hover: hover) {
+      .feature-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
     }
 
     .feature-card h3 {
@@ -395,6 +417,22 @@
       border-radius: var(--radius);
       padding: var(--space-4);
       text-align: center;
+      transition: transform 0.3s var(--ease-default), box-shadow 0.3s var(--ease-default);
+    }
+
+    @supports (backdrop-filter: blur(1px)) {
+      .pricing-card {
+        backdrop-filter: blur(16px) saturate(1.15);
+        -webkit-backdrop-filter: blur(16px) saturate(1.15);
+        background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+      }
+    }
+
+    @media (hover: hover) {
+      .pricing-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
     }
 
     .pricing-card.featured {
@@ -500,6 +538,81 @@
       .hero-hanzi, .hero h1, .hero-sub, .cta-group {
         animation: none;
         opacity: 1;
+      }
+      .scroll-reveal { opacity: 1 !important; transform: none !important; }
+      .sticky-cta { transition: none; }
+    }
+
+    /* ── Scroll-triggered section reveals ── */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger feature cards */
+    .feature-card.scroll-reveal { transition-delay: 0s; }
+    .feature-card.scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+    .feature-card.scroll-reveal:nth-child(3) { transition-delay: 0.2s; }
+    .feature-card.scroll-reveal:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ── Sticky CTA ── */
+    .sticky-cta {
+      position: fixed;
+      bottom: var(--space-4);
+      right: var(--space-4);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-accent);
+      color: var(--color-base);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .sticky-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .sticky-cta:hover { opacity: 0.9; }
+
+    .sticky-cta-dismiss {
+      background: none;
+      border: none;
+      color: var(--color-base);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0 0 0 var(--space-2);
+      opacity: 0.7;
+      line-height: 1;
+    }
+
+    .sticky-cta-dismiss:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .sticky-cta {
+        left: var(--space-3);
+        right: var(--space-3);
+        bottom: var(--space-3);
+        justify-content: center;
       }
     }
 
@@ -645,8 +758,8 @@
   <!-- Trust bar -->
   <section class="trust-bar" style="padding:var(--space-4) 0;text-align:center;border-bottom:1px solid var(--color-border);">
     <div class="container" style="display:flex;justify-content:center;gap:var(--space-5);flex-wrap:wrap;font-size:0.9rem;color:var(--color-text-faint);">
-      <span>10,000+ vocabulary items</span>
-      <span>44 drill types</span>
+      <span><strong class="trust-counter" data-target="10000">10,000</strong>+ vocabulary items</span>
+      <span><strong class="trust-counter" data-target="44">44</strong> drill types</span>
       <span>HSK 1-9 aligned</span>
       <span>Works offline</span>
       <span>30-day money-back guarantee</span>
@@ -807,6 +920,12 @@
     </div>
   </footer>
 
+  <!-- Sticky CTA (appears after scrolling past hero) -->
+  <div class="sticky-cta" id="sticky-cta" role="complementary" aria-label="Sign up prompt">
+    <a href="/auth/register" style="color:inherit;text-decoration:none;">Start learning free</a>
+    <button class="sticky-cta-dismiss" id="sticky-cta-dismiss" aria-label="Dismiss">&times;</button>
+  </div>
+
   <script src="/marketing.js"></script>
   <script>
     // Price display experiment — fetch variant and update if active
@@ -826,6 +945,91 @@
           }
         }).catch(function() {});
       } catch (e) {}
+    })();
+
+    // Animated trust-bar counters
+    (function() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var counters = document.querySelectorAll('.trust-counter');
+      if (!counters.length) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          if (isNaN(target)) return;
+          observer.unobserve(el);
+          var start = 0, startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / 1200, 1);
+            var ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * ease).toLocaleString();
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function(c) { observer.observe(c); });
+    })();
+
+    // Scroll-triggered section reveals
+    (function() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Mark sections and feature cards as scroll-reveal targets
+      var sections = document.querySelectorAll('section:not(.hero)');
+      sections.forEach(function(s) { s.classList.add('scroll-reveal'); });
+
+      var featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach(function(c) { c.classList.add('scroll-reveal'); });
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+          observer.observe(el);
+        });
+      } else {
+        // Fallback: just show everything
+        document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+          el.classList.add('revealed');
+        });
+      }
+    })();
+
+    // Sticky CTA — appears after scrolling past hero
+    (function() {
+      var cta = document.getElementById('sticky-cta');
+      var hero = document.querySelector('.hero');
+      var dismissed = false;
+
+      document.getElementById('sticky-cta-dismiss').addEventListener('click', function(e) {
+        e.preventDefault();
+        dismissed = true;
+        cta.classList.remove('visible');
+      });
+
+      if ('IntersectionObserver' in window && hero) {
+        var heroObserver = new IntersectionObserver(function(entries) {
+          if (dismissed) return;
+          if (!entries[0].isIntersecting) {
+            cta.classList.add('visible');
+          } else {
+            cta.classList.remove('visible');
+          }
+        }, { threshold: 0 });
+        heroObserver.observe(hero);
+      }
     })();
   </script>
 

@@ -465,6 +465,10 @@ def create_app(testing=False):
     from .tutor_routes import tutor_bp
     app.register_blueprint(tutor_bp)
 
+    # ── Learner intelligence routes ─────────────────────
+    from .intelligence_routes import intelligence_bp
+    app.register_blueprint(intelligence_bp)
+
     # ── LTI 1.3 routes (Item 14) ─────────────────────
     try:
         from .lti_routes import lti_bp
