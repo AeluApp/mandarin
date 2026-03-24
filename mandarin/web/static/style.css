@@ -119,20 +119,23 @@
   --color-sky-top: #E4E0D6;
   --color-sky-bottom: #F2EBE0;
 
-  /* Shape — continuous surface: no rounded corners */
+  /* Shape — strategic rounding for human warmth */
   --radius: 0;
-  --radius-sm: 0;
-  --radius-lg: 0;
+  --radius-sm: 2px;
+  --radius-lg: 6px;
+  --radius-card: 8px;
+  --radius-illustration: 12px;
   --focus-ring-color: var(--color-accent);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
 
   /* Motion */
-  --duration-press: 0.1s;       /* button press feedback — near-instant */
-  --duration-snappy: 0.15s;     /* feedback bar — snappier confirmation */
-  --duration-fast: 0.2s;
-  --duration-base: 0.4s;
-  --duration-slow: 0.5s;
-  --duration-ambient: 1.8s;     /* shimmer, ambient loops */
-  --duration-float: 3s;         /* illustration hover */
+  --duration-press: 0.08s;      /* button press feedback — near-instant */
+  --duration-snappy: 0.12s;     /* feedback bar — snappier confirmation */
+  --duration-fast: 0.18s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.4s;
+  --duration-ambient: 0.8s;     /* shimmer, ambient loops */
+  --duration-float: 1.5s;       /* illustration hover */
   --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-upward: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);  /* ease-in — things leaving accelerate out */
@@ -142,6 +145,92 @@
   --horizon-width: 48px;
   --status-gap: 6px;
   --skeleton-height: 14px;
+}
+
+/* ── Awwwards-tier animation enrichment ──────────────── */
+
+/* Input focus glow — soft accent ring on all text inputs */
+input:focus, textarea:focus, select:focus {
+  box-shadow: var(--focus-ring) !important;
+  border-color: var(--color-accent) !important;
+  outline: none;
+  transition: box-shadow 0.2s var(--ease-default), border-color 0.2s;
+}
+
+/* Scroll-driven reveal — CSS states for visual-elevation.js .is-revealed */
+[data-reveal], .stagger-children > [data-reveal-child] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-upward), transform 0.6s var(--ease-upward);
+}
+[data-reveal].is-revealed, .stagger-children.is-revealed > [data-reveal-child].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Empty-state illustration float/breathe loop */
+@keyframes illustrationFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.empty-state-illustration {
+  animation: gentleBloom 0.6s var(--ease-upward) 0.1s forwards,
+             illustrationFloat 4s ease-in-out 0.8s infinite;
+}
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-line {
+  background: linear-gradient(90deg,
+    var(--color-surface-alt) 25%,
+    color-mix(in srgb, var(--color-surface-alt) 60%, var(--color-base)) 50%,
+    var(--color-surface-alt) 75%) !important;
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Session complete — enhanced celebration sequence */
+@keyframes scoreReveal {
+  0% { opacity: 0; transform: scale(0.8); }
+  60% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes pctSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#complete-content h2 {
+  animation: scoreReveal 0.6s var(--ease-spring) 0.4s backwards;
+}
+.complete-score {
+  animation: scoreReveal 0.5s var(--ease-spring) 0.6s backwards;
+}
+.complete-pct {
+  animation: pctSlideUp 0.5s var(--ease-upward) 0.8s backwards;
+}
+
+/* Stat cards — hover lift with shadow depth change */
+@media (hover: hover) {
+  .stat {
+    transition: transform 0.3s var(--ease-default), box-shadow 0.3s var(--ease-default);
+  }
+  .stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Card components — strategic border radius */
+.panel, .panel-body, .metric-card {
+  border-radius: var(--radius-card);
+}
+
+/* Link hover transition */
+a {
+  transition: color 0.15s var(--ease-default);
 }
 
 /* ── Warm dark mode ────────────────────────── */
@@ -670,6 +759,54 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 
 /* ── Dashboard ────────────────────────── */
 
+/* Dashboard hero — welcoming illustration for new/returning users */
+.dashboard-hero {
+  position: relative;
+  text-align: center;
+  margin-bottom: var(--space-5);
+  opacity: 0;
+  animation: gentleBloom 0.8s var(--ease-upward) 0.1s forwards;
+}
+
+.dashboard-hero-img {
+  display: block;
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="dark"] .dashboard-hero-img {
+  box-shadow: var(--shadow-lg);
+}
+
+.dashboard-hero-dismiss {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-text-dim);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s;
+  opacity: 0.6;
+}
+
+.dashboard-hero-dismiss:hover {
+  opacity: 1;
+}
+
 .stats-row {
   display: flex;
   gap: var(--space-3);
@@ -795,20 +932,37 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   color: var(--color-on-accent);
   border: none;
   padding: var(--btn-padding);
-  border-radius: var(--btn-radius);
+  border-radius: var(--radius-lg);
   font-family: var(--font-body);
   font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
-  transition: opacity var(--duration-fast) var(--ease-default), transform var(--duration-press) var(--ease-default);
+  transition: opacity var(--duration-fast) var(--ease-default),
+              transform var(--duration-press) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
   min-height: 44px;
   min-width: 44px;
   letter-spacing: var(--tracking-tight);
 }
 
-@media (hover: hover) { .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); } }
-.btn-primary:active { opacity: 1; transform: scale(0.98) translateY(0); }
-.btn-primary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+@media (hover: hover) {
+  .btn-primary:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+}
+.btn-primary:active {
+  opacity: 1;
+  transform: scale(0.95) translateY(0);
+  transition: transform 0.06s ease;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+/* Spring bounce back after press */
+.btn-primary:not(:active) {
+  transition: transform 0.4s var(--ease-spring), opacity 0.2s, box-shadow 0.3s;
+}
+.btn-primary:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
 .btn-secondary {
@@ -816,18 +970,29 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   color: var(--color-accent);
   border: 1px solid var(--color-accent-dim);
   padding: 14px 24px;
-  border-radius: var(--btn-radius);
+  border-radius: var(--radius-lg);
   font-family: var(--font-body);
   font-size: var(--text-base);
   cursor: pointer;
-  transition: opacity var(--duration-fast) var(--ease-default), transform var(--duration-press) var(--ease-default);
+  transition: opacity var(--duration-fast) var(--ease-default),
+              transform var(--duration-press) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default),
+              background var(--duration-fast) var(--ease-default);
   min-height: 44px;
   min-width: 44px;
 }
 
-@media (hover: hover) { .btn-secondary:hover { opacity: 0.88; transform: translateY(-1px); } }
-.btn-secondary:active { transform: scale(0.98) translateY(0); }
-.btn-secondary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+@media (hover: hover) {
+  .btn-secondary:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+}
+.btn-secondary:active { transform: scale(0.95) translateY(0); transition: transform 0.06s ease; }
+.btn-secondary:not(:active) { transition: transform 0.4s var(--ease-spring), opacity 0.2s, box-shadow 0.3s, background 0.2s; }
+.btn-secondary:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 .btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
 /* ── Session area ────────────────────────── */
@@ -1242,13 +1407,18 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
 
 .complete-illustration {
   display: block;
-  max-width: 340px;
-  max-height: 280px;
-  width: 80%;
-  margin: 0 auto var(--space-4);
-  border-radius: var(--radius);
+  max-width: 400px;
+  max-height: 320px;
+  width: 85%;
+  margin: 0 auto var(--space-5);
+  border-radius: 8px;
   opacity: 0;
   animation: gentleBloom 0.8s cubic-bezier(0.2, 0, 0.2, 1) 0.15s forwards;
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="dark"] .complete-illustration {
+  box-shadow: var(--shadow-lg);
 }
 
 @keyframes gentleBloom {
@@ -2521,18 +2691,20 @@ svg.icon {
 
 .empty-state-illustration {
   display: block;
-  max-width: 200px;
+  max-width: 340px;
+  width: 100%;
   height: auto;
-  margin: 0 auto var(--space-3);
-  opacity: 0.5;
+  margin: 0 auto var(--space-4);
+  border-radius: 8px;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  opacity: 0;
+  animation: gentleBloom 0.6s var(--ease-upward) 0.1s forwards;
+  box-shadow: var(--shadow-md);
 }
 
+/* Dedicated dark images — no filter/invert needed */
 html[data-theme="dark"] .empty-state-illustration {
-  filter: invert(1) hue-rotate(180deg);
-  mix-blend-mode: screen;
-  opacity: 0.35;
+  box-shadow: var(--shadow-lg);
 }
 
 /* ── Section horizon dividers ────────────────────────── */

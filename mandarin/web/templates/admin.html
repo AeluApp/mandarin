@@ -19,9 +19,10 @@
     .admin-tab:hover { color: var(--color-text); }
     .admin-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 
-    /* Tab content */
-    .admin-tab-content { display: none; }
-    .admin-tab-content.active { display: block; }
+    /* Tab content — fade/slide transition */
+    .admin-tab-content { display: none; opacity: 0; transform: translateY(8px); }
+    .admin-tab-content.active { display: block; animation: adminTabReveal 0.35s var(--ease-upward) forwards; }
+    @keyframes adminTabReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Shared styles */
     .admin-section { margin-bottom: var(--space-6); }
@@ -38,10 +39,10 @@
     .admin-table tr { transition: background-color 0.15s var(--ease-default); }
     .admin-table tr:hover td { background: color-mix(in srgb, var(--color-accent) 3%, var(--color-surface)); }
 
-    /* Expandable traceback */
+    /* Expandable traceback — smooth accordion */
     .tb-toggle { cursor: pointer; color: var(--color-accent); text-decoration: underline; font-size: var(--text-xs); }
-    .tb-content { display: none; margin-top: var(--space-2); }
-    .tb-content.open { display: block; }
+    .tb-content { max-height: 0; overflow: hidden; margin-top: 0; transition: max-height 0.35s var(--ease-default), margin-top 0.35s; }
+    .tb-content.open { max-height: 400px; margin-top: var(--space-2); }
     .tb-content pre { background: var(--color-surface); padding: var(--space-3); border-radius: var(--radius); font-size: var(--text-xs); overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 300px; overflow-y: auto; color: var(--color-text); }
 
     /* Severity badges */
@@ -50,8 +51,19 @@
     .badge-warning { background: var(--color-mastery-stabilizing); color: var(--color-on-accent); }
     .badge-info { background: var(--color-accent); color: var(--color-on-accent); }
 
-    /* Loading state */
-    .tab-loading { color: var(--color-text-dim); font-family: var(--font-body); padding: var(--space-4); }
+    /* Loading state — with pulse animation */
+    .tab-loading { color: var(--color-text-dim); font-family: var(--font-body); padding: var(--space-4); animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+    /* Table row entrance */
+    .admin-table tbody tr { animation: rowSlideIn 0.3s var(--ease-upward) backwards; }
+    .admin-table tbody tr:nth-child(1) { animation-delay: 0s; }
+    .admin-table tbody tr:nth-child(2) { animation-delay: 0.03s; }
+    .admin-table tbody tr:nth-child(3) { animation-delay: 0.06s; }
+    .admin-table tbody tr:nth-child(4) { animation-delay: 0.09s; }
+    .admin-table tbody tr:nth-child(5) { animation-delay: 0.12s; }
+    .admin-table tbody tr:nth-child(n+6) { animation-delay: 0.15s; }
+    @keyframes rowSlideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
 
     /* Empty state */
     .tab-empty { color: var(--color-text-dim); font-family: var(--font-body); font-style: italic; padding: var(--space-4); }

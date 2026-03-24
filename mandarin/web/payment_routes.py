@@ -25,7 +25,19 @@ def checkout():
         plan = data.get("plan", "monthly")
         if plan not in ("monthly", "annual"):
             return jsonify({"error": "Invalid plan. Use 'monthly' or 'annual'."}), 400
-        url = create_checkout_session(current_user.id, current_user.email, plan=plan)
+        # Look up user's price experiment variant (if any)
+        price_variant = None
+        try:
+            with db.connection() as conn:
+                row = conn.execute(
+                    "SELECT price_variant FROM user WHERE id = ?", (current_user.id,)
+                ).fetchone()
+                if row and row[0]:
+                    price_variant = row[0]
+        except Exception:
+            pass  # fall back to default pricing
+        url = create_checkout_session(current_user.id, current_user.email, plan=plan,
+                                      price_variant=price_variant)
         return jsonify({"url": url})
     except (sqlite3.Error, KeyError, ValueError, OSError) as e:
         logger.error("Checkout error (%s): %s", type(e).__name__, e)

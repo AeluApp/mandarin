@@ -397,22 +397,27 @@
     }
 
     /* -- Section illustrations -- */
+    .section-illustration-wrap {
+      display: block;
+      max-width: 520px;
+      width: 80%;
+      margin: var(--space-4) auto;
+    }
     .section-illustration {
       display: block;
-      max-width: 460px;
-      width: 70%;
+      width: 100%;
       height: auto;
-      margin: 0 auto;
-      padding: var(--space-4) 0;
-      opacity: 0.5;
-      mix-blend-mode: multiply;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      animation: illustFadeIn 0.8s ease-out 0.2s forwards;
     }
+    @keyframes illustFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* Dark mode — dedicated dark images via <picture> source, no filter needed */
     @media (prefers-color-scheme: dark) {
       .section-illustration {
-        filter: invert(1) hue-rotate(180deg);
-        mix-blend-mode: screen;
-        opacity: 0.4;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
       }
     }
     .nav-brand-icon {
@@ -520,7 +525,12 @@
     </div>
   </section>
 
-  <img src="/illustrations/reading-lamp.png" alt="" class="section-illustration">
+  <picture class="section-illustration-wrap">
+    <source srcset="/illustrations/empty-passages-dark.webp" media="(prefers-color-scheme: dark)" type="image/webp">
+    <source srcset="/illustrations/empty-passages.webp" type="image/webp">
+    <source srcset="/illustrations/empty-passages-dark.jpg" media="(prefers-color-scheme: dark)" type="image/jpeg">
+    <img src="/illustrations/empty-passages.jpg" alt="" class="section-illustration" loading="lazy" width="1024" height="1024">
+  </picture>
 
   <!-- Philosophy -->
   <section class="philosophy">
@@ -551,7 +561,12 @@
     </div>
   </section>
 
-  <img src="/illustrations/stone-bridge.png" alt="" class="section-illustration">
+  <picture class="section-illustration-wrap">
+    <source srcset="/illustrations/onboarding-1-dark.webp" media="(prefers-color-scheme: dark)" type="image/webp">
+    <source srcset="/illustrations/onboarding-1.webp" type="image/webp">
+    <source srcset="/illustrations/onboarding-1-dark.jpg" media="(prefers-color-scheme: dark)" type="image/jpeg">
+    <img src="/illustrations/onboarding-1.jpg" alt="" class="section-illustration" loading="lazy" width="1024" height="1024">
+  </picture>
 
   <!-- What Makes This Different -->
   <section class="different">
@@ -611,7 +626,12 @@
     </div>
   </section>
 
-  <img src="/illustrations/mountain-path.png" alt="" class="section-illustration">
+  <picture class="section-illustration-wrap">
+    <source srcset="/illustrations/login-bg-dark.webp" media="(prefers-color-scheme: dark)" type="image/webp">
+    <source srcset="/illustrations/login-bg.webp" type="image/webp">
+    <source srcset="/illustrations/login-bg-dark.jpg" media="(prefers-color-scheme: dark)" type="image/jpeg">
+    <img src="/illustrations/login-bg.jpg" alt="" class="section-illustration" loading="lazy" width="1024" height="1024">
+  </picture>
 
   <!-- Credits & Attribution -->
   <section class="credits">

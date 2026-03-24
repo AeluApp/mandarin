@@ -45,6 +45,37 @@ PRICING = {
     "student_upgrade_cents": 499,  # $4.99/mo
 }
 
+# ── A/B pricing variants ────────────────────────────
+# Maps experiment variant names to price overrides.
+# Only monthly/annual individual plans are A/B-testable;
+# classroom and student-upgrade prices are fixed.
+PRICING_VARIANTS = {
+    "control_14.99": {
+        "monthly_cents": 1499,
+        "annual_cents": 14900,
+        "monthly_display": "14.99",
+        "annual_display": "149",
+        "annual_monthly_equiv": "12.42",
+        "annual_savings": "30",
+    },
+    "lower_9.99": {
+        "monthly_cents": 999,
+        "annual_cents": 9900,
+        "monthly_display": "9.99",
+        "annual_display": "99",
+        "annual_monthly_equiv": "8.25",
+        "annual_savings": "21",
+    },
+}
+
+def get_variant_pricing(variant_name: str) -> dict:
+    """Return pricing dict for a given experiment variant, falling back to defaults."""
+    if variant_name and variant_name in PRICING_VARIANTS:
+        merged = dict(PRICING)
+        merged.update(PRICING_VARIANTS[variant_name])
+        return merged
+    return PRICING
+
 # ── Stripe fee model ─────────────────────────────────
 STRIPE_FEE_PERCENT = 0.029        # 2.9%
 STRIPE_FEE_FIXED_CENTS = 30       # $0.30 per transaction

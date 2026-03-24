@@ -56,18 +56,42 @@
       transition: opacity 0.15s;
     }
     .not-found-link:hover { opacity: 0.85; }
+    .error-illustration {
+      display: block;
+      max-width: 280px;
+      width: 60%;
+      height: auto;
+      margin: 0 auto var(--space-5);
+      border-radius: 8px;
+      opacity: 0;
+      animation: gentleBloom 0.8s cubic-bezier(0.2, 0, 0.2, 1) 0.15s forwards;
+      box-shadow: var(--shadow-md);
+    }
+    html[data-theme="dark"] .error-illustration { box-shadow: var(--shadow-lg); }
+    @keyframes gentleBloom { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
   </style>
 </head>
 <body>
   <div id="webgl-atmosphere" data-scene="login" aria-hidden="true"></div>
   <div id="app" role="main">
     <div class="not-found-wrap">
+      <img src="/static/illustrations/error-page.webp" alt="" class="error-illustration" aria-hidden="true">
       <div class="not-found-hanzi">迷</div>
       <h1 class="not-found-title">Page not found</h1>
       <p class="not-found-sub">This page doesn't exist or may have moved.</p>
       <a href="/" class="not-found-link">Back to dashboard</a>
     </div>
   </div>
+  <script>
+    (function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.querySelectorAll('.error-illustration').forEach(function(img) {
+          img.src = img.src.replace(/\.webp$/, '-dark.webp');
+        });
+      }
+    })();
+  </script>
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/ink-atmosphere.js" defer></script>
 </body>

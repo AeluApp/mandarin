@@ -147,6 +147,16 @@
 
     <!-- Dashboard (visible before session starts) -->
     <section id="dashboard" aria-label="Dashboard">
+      <!-- Dashboard hero — shown for new or returning users, dismissible -->
+      {% if profile.total_sessions < 5 %}
+      <div class="dashboard-hero" id="dashboard-hero">
+        <img src="/static/illustrations/dashboard-hero.webp"
+             data-dark-src="/static/illustrations/dashboard-hero-dark.webp"
+             data-light-src="/static/illustrations/dashboard-hero.webp"
+             alt="" class="dashboard-hero-img themed-img" aria-hidden="true">
+        <button class="dashboard-hero-dismiss" id="dashboard-hero-dismiss" aria-label="Dismiss" title="Dismiss">&times;</button>
+      </div>
+      {% endif %}
       <div class="stats-row stagger-children" role="list" aria-label="Quick stats">
         <div class="stat" role="listitem">
           <div class="stat-value">{{ items_learning|default(0) }}</div>

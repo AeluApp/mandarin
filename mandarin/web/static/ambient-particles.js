@@ -11,8 +11,8 @@
   if (mql.matches) return;
 
   var canvas, ctx, particles, raf, paused, dpr, w, h;
-  var PARTICLE_COUNT = 18;
-  var MOBILE_PARTICLE_COUNT = 10;
+  var PARTICLE_COUNT = 50;
+  var MOBILE_PARTICLE_COUNT = 25;
   var isMobile = window.innerWidth < 768;
 
   function getAccentColor() {
@@ -34,19 +34,29 @@
     return { r: r, g: g, b: b };
   }
 
+  function getDividerColor() {
+    var style = getComputedStyle(document.documentElement);
+    return style.getPropertyValue('--color-divider').trim() || '#D8D0C4';
+  }
+
   function createParticle() {
-    var colors = [getAccentColor(), getSecondaryColor()];
+    var colors = [getAccentColor(), getSecondaryColor(), getDividerColor(), getAccentColor()];
     var color = hexToRgb(colors[Math.floor(Math.random() * colors.length)]);
+    // Mixed sizes: 70% small (5-20px), 30% medium-large (25-60px)
+    var isSmall = Math.random() < 0.7;
+    var radius = isSmall ? (5 + Math.random() * 15) : (25 + Math.random() * 35);
     return {
       x: Math.random() * w,
       y: Math.random() * h,
-      radius: 30 + Math.random() * 60,
-      opacity: 0.02 + Math.random() * 0.04,
+      radius: radius,
+      opacity: 0.04 + Math.random() * 0.10,
       vx: (Math.random() - 0.5) * 0.15,
       vy: (Math.random() - 0.5) * 0.1 - 0.02,  // slight upward drift
       color: color,
       phase: Math.random() * Math.PI * 2,
-      phaseSpeed: 0.001 + Math.random() * 0.002
+      phaseSpeed: 0.001 + Math.random() * 0.002,
+      breathePhase: Math.random() * Math.PI * 2,
+      breatheSpeed: 0.003 + Math.random() * 0.005
     };
   }
 
@@ -107,6 +117,7 @@
       var p = particles[i];
       // Gentle sinusoidal drift
       p.phase += p.phaseSpeed;
+      p.breathePhase += p.breatheSpeed;
       p.x += p.vx + Math.sin(p.phase) * 0.05;
       p.y += p.vy;
 
@@ -116,9 +127,13 @@
       if (p.y < -p.radius) p.y = h + p.radius;
       if (p.y > h + p.radius) p.y = -p.radius;
 
+      // Breathing opacity — particles pulse gently
+      var breathe = 0.7 + Math.sin(p.breathePhase) * 0.3;
+      var curOpacity = p.opacity * breathe;
+
       // Draw soft circle
       var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-      gradient.addColorStop(0, 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + p.opacity + ')');
+      gradient.addColorStop(0, 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + curOpacity + ')');
       gradient.addColorStop(1, 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',0)');
       ctx.fillStyle = gradient;
       ctx.beginPath();

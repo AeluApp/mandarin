@@ -146,6 +146,7 @@
     initParallax();
     initMagneticHover();
     initPressEffects();
+    initCardTilt();
 
     // Auto-split any element with [data-split-text]
     document.querySelectorAll('[data-split-text]').forEach(splitText);
@@ -157,6 +158,25 @@
     init();
   }
 
+  // ── Stat card tilt on hover (3D perspective) ──
+  function initCardTilt() {
+    if ('ontouchstart' in window) return;
+    var cards = document.querySelectorAll('.stat, .metric-card, .panel');
+    cards.forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'perspective(600px) rotateY(' + (x * 4) + 'deg) rotateX(' + (-y * 4) + 'deg) translateY(-2px)';
+        card.style.transition = 'transform 0.1s ease';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        card.style.transform = 'perspective(600px) rotateY(0) rotateX(0) translateY(0)';
+      });
+    });
+  }
+
   // Re-init on dynamic content (for SPA section switches)
   var _observer = new MutationObserver(function(mutations) {
     var hasNew = mutations.some(function(m) { return m.addedNodes.length > 0; });
@@ -164,6 +184,7 @@
       initMagneticHover();
       initPressEffects();
       initHeadingReveals();
+      initCardTilt();
     }
   });
   _observer.observe(document.getElementById('app') || document.body, { childList: true, subtree: true });

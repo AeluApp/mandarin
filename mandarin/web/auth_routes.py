@@ -68,6 +68,10 @@ class User:
         return self._data.get("role", "student")
 
     @property
+    def price_variant(self):
+        return self._data.get("price_variant")
+
+    @property
     def is_authenticated(self):
         return True
 
@@ -234,6 +238,22 @@ def register():
                             (utm_source or None, utm_medium or None, utm_campaign or None, user_dict["id"])
                         )
                         conn.commit()
+                except Exception:
+                    pass
+                # Persist A/B price variant from visitor cookie (if active experiment)
+                try:
+                    import hashlib as _hl
+                    visitor_id = request.cookies.get("aelu_vid", "")
+                    if visitor_id:
+                        from ..web.experiment_daemon import _MARKETING_EXPERIMENT_TEMPLATES
+                        template = _MARKETING_EXPERIMENT_TEMPLATES.get("price_display_test", {})
+                        assign_key = f"price_display_test:{visitor_id}"
+                        vidx = int(_hl.sha256(assign_key.encode()).hexdigest()[:8], 16) % 2
+                        vname = template.get("variant_a_name" if vidx == 0 else "variant_b_name", "")
+                        if vname:
+                            conn.execute("UPDATE user SET price_variant = ? WHERE id = ?",
+                                         (vname, user_dict["id"]))
+                            conn.commit()
                 except Exception:
                     pass
                 # Lifecycle: signup

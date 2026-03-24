@@ -21,7 +21,7 @@ function trackEvent(name, params) {
 function themedIllustration(basePath) {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   if (!isDark) return basePath;
-  return basePath.replace('.png', '-dark.png');
+  return basePath.replace(/\.(png|webp|jpg)$/, '-dark.$1');
 }
 
 /* ── Session checkpoint (localStorage persistence for crash resume) ────── */
@@ -3160,7 +3160,7 @@ function showComplete(summary) {
   const scoreClass = pct >= 80 ? "score-high" : pct >= 50 ? "score-mid" : "score-low";
   const scoreLabel = "session summary";
 
-  let html = '<img src="' + themedIllustration('/static/illustrations/session-complete.png') + '" alt="" class="complete-illustration" aria-hidden="true">';
+  let html = '<img src="' + themedIllustration('/static/illustrations/session-complete.webp') + '" alt="" class="complete-illustration" aria-hidden="true">';
   html += '<h2>Session complete.</h2>';
   html += '<div class="complete-score ' + scoreClass + '">' + correct + ' of ' + total + '<span class="sr-only"> — ' + scoreLabel + '</span></div>';
   html += '<div class="complete-pct">' + pct + '% recalled';
@@ -3183,7 +3183,7 @@ function showComplete(summary) {
 
   // #4 — Show loading skeleton while fetching details
   content.innerHTML = html + '<div class="complete-skeleton"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div>';
-  handleImgErrors(content, '/static/illustrations/session-complete.png');
+  handleImgErrors(content, '/static/illustrations/session-complete.webp');
 
   // Fetch additional session data for the complete screen
   fetchCompleteDetails(content, html, summary);
@@ -3711,7 +3711,10 @@ function handleImgErrors(container, fallbackSrc) {
   for (var i = 0; i < imgs.length; i++) {
     (function(img) {
       img.addEventListener("error", function() {
-        if (fallbackSrc && img.src !== fallbackSrc) {
+        // Try WebP → JPG fallback first
+        if (img.src.match(/\.webp($|\?)/)) {
+          img.src = img.src.replace(/\.webp($|\?)/, '.jpg$1');
+        } else if (fallbackSrc && img.src !== fallbackSrc) {
           img.src = fallbackSrc;
         } else {
           img.style.display = "none";
@@ -5446,7 +5449,7 @@ function showPanelError(contentId, message) {
   var panelName = panelNameMap[contentId] || "panel";
   var retryLabel = "Retry loading " + panelName;
   var retryHtml = retryFn ? ' <button class="panel-retry-btn" data-retry="' + contentId + '">' + retryLabel + '</button>' : '';
-  replaceContent(contentId, '<div class="empty-state"><img src="/static/illustrations/courtyard-rain.svg" alt="" class="empty-state-illustration">' + escapeHtml(message) + retryHtml + '</div>');
+  replaceContent(contentId, '<div class="empty-state"><img src="' + themedIllustration('/static/illustrations/empty-generic.webp') + '" alt="" class="empty-state-illustration">' + escapeHtml(message) + retryHtml + '</div>');
   var _pEl = document.getElementById(contentId);
   if (_pEl) handleImgErrors(_pEl);
   if (retryFn) {
@@ -5478,6 +5481,25 @@ document.addEventListener("DOMContentLoaded", loadDashboardPanels);
 document.addEventListener("DOMContentLoaded", function() {
   // Graceful image fallback for static illustrations
   handleImgErrors(document.getElementById("dashboard"));
+
+  // Dashboard hero dismiss
+  var heroEl = document.getElementById("dashboard-hero");
+  var heroDismiss = document.getElementById("dashboard-hero-dismiss");
+  if (heroEl && heroDismiss) {
+    // Check if previously dismissed
+    try {
+      if (localStorage.getItem("aelu-dashboard-hero-dismissed") === "1") {
+        heroEl.remove();
+      }
+    } catch (e) {}
+    heroDismiss.addEventListener("click", function() {
+      heroEl.style.transition = "opacity 0.3s, transform 0.3s";
+      heroEl.style.opacity = "0";
+      heroEl.style.transform = "translateY(-8px)";
+      setTimeout(function() { heroEl.remove(); }, 300);
+      try { localStorage.setItem("aelu-dashboard-hero-dismissed", "1"); } catch (e) {}
+    });
+  }
 });
 
 /* ── Time-of-day theme switching ────────────────────────── */
@@ -5706,7 +5728,7 @@ function loadPassageList() {
 
     if (_readingPassages.length === 0) {
       listEl.textContent = "";
-      { const _es = document.createElement("div"); _es.className = "empty-state"; _es.innerHTML = '<img src="/static/illustrations/reading-lamp.svg" alt="" class="empty-state-illustration">No passages at this level.'; listEl.appendChild(_es); handleImgErrors(_es); }
+      { const _es = document.createElement("div"); _es.className = "empty-state"; _es.innerHTML = '<img src="' + themedIllustration('/static/illustrations/empty-passages.webp') + '" alt="" class="empty-state-illustration">No passages at this level.'; listEl.appendChild(_es); handleImgErrors(_es); }
       return;
     }
     var html = "";
@@ -5741,7 +5763,7 @@ function loadPassageList() {
       });
     });
   }).catch(function() {
-    { const _rl = document.getElementById("reading-list"); _rl.textContent = ""; const _es2 = document.createElement("div"); _es2.className = "empty-state"; _es2.innerHTML = '<img src="/static/illustrations/courtyard-rain.svg" alt="" class="empty-state-illustration">Failed to load passages.'; _rl.appendChild(_es2); handleImgErrors(_es2); }
+    { const _rl = document.getElementById("reading-list"); _rl.textContent = ""; const _es2 = document.createElement("div"); _es2.className = "empty-state"; _es2.innerHTML = '<img src="' + themedIllustration('/static/illustrations/empty-passages.webp') + '" alt="" class="empty-state-illustration">Failed to load passages.'; _rl.appendChild(_es2); handleImgErrors(_es2); }
   });
 }
 
@@ -6811,7 +6833,7 @@ function loadMediaRecommendations() {
 
       if (recs.length === 0) {
         grid.textContent = "";
-        { const _es3 = document.createElement("div"); _es3.className = "empty-state"; _es3.innerHTML = '<img src="/static/illustrations/evening-sky.svg" alt="" class="empty-state-illustration">No recommendations available.'; grid.appendChild(_es3); handleImgErrors(_es3); }
+        { const _es3 = document.createElement("div"); _es3.className = "empty-state"; _es3.innerHTML = '<img src="' + themedIllustration('/static/illustrations/empty-recommendations.webp') + '" alt="" class="empty-state-illustration">No recommendations available.'; grid.appendChild(_es3); handleImgErrors(_es3); }
         return;
       }
       var html = "";
@@ -6891,7 +6913,7 @@ function loadMediaRecommendations() {
         });
       });
     }).catch(function() {
-      { const _mg = document.getElementById("media-grid"); _mg.textContent = ""; const _es4 = document.createElement("div"); _es4.className = "empty-state"; _es4.innerHTML = '<img src="/static/illustrations/courtyard-rain.svg" alt="" class="empty-state-illustration">Failed to load recommendations.'; _mg.appendChild(_es4); handleImgErrors(_es4); }
+      { const _mg = document.getElementById("media-grid"); _mg.textContent = ""; const _es4 = document.createElement("div"); _es4.className = "empty-state"; _es4.innerHTML = '<img src="' + themedIllustration('/static/illustrations/empty-recommendations.webp') + '" alt="" class="empty-state-illustration">Failed to load recommendations.'; _mg.appendChild(_es4); handleImgErrors(_es4); }
     });
 }
 
@@ -6915,7 +6937,7 @@ function loadMediaHistory() {
       var stats = data.stats || {};
       if (hist.length === 0) {
         listEl.textContent = "";
-        { const _es5 = document.createElement("div"); _es5.className = "empty-state"; _es5.innerHTML = '<img src="/static/illustrations/morning-tea.svg" alt="" class="empty-state-illustration">No watch history yet.'; listEl.appendChild(_es5); handleImgErrors(_es5); }
+        { const _es5 = document.createElement("div"); _es5.className = "empty-state"; _es5.innerHTML = '<img src="' + themedIllustration('/static/illustrations/empty-history.webp') + '" alt="" class="empty-state-illustration">No watch history yet.'; listEl.appendChild(_es5); handleImgErrors(_es5); }
         return;
       }
       var html = '<div class="media-stats">'
@@ -7741,7 +7763,7 @@ function showOnboardingWizard() {
 
       // Intro slides — shown before the level/goal picker
       '<div id="onboarding-intro-0" class="onboarding-step onboarding-intro-slide">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.png') + '" alt="" />' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.webp') + '" alt="" />' +
         '<div class="onboarding-intro-body">' +
           '<p class="onboarding-intro-heading">Every language lives in memory</p>' +
           '<p class="onboarding-intro-text">When you learn a new word, your brain begins forgetting it almost immediately. ' +
@@ -7754,7 +7776,7 @@ function showOnboardingWizard() {
       '</div>' +
 
       '<div id="onboarding-intro-1" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.png') + '" alt="" />' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.webp') + '" alt="" />' +
         '<div class="onboarding-intro-body">' +
           '<p class="onboarding-intro-heading">Short sessions, real progress</p>' +
           '<p class="onboarding-intro-text">Each session is a few minutes of focused practice \u2014 ' +
@@ -7767,7 +7789,7 @@ function showOnboardingWizard() {
       '</div>' +
 
       '<div id="onboarding-intro-2" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.png') + '" alt="" />' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.webp') + '" alt="" />' +
         '<div class="onboarding-intro-body">' +
           '<p class="onboarding-intro-heading">Be patient with yourself</p>' +
           '<p class="onboarding-intro-text">Learning Mandarin is a long journey, and some days will feel slower than others. ' +
@@ -9694,7 +9716,7 @@ function loadTeacherClasses() {
     .then(function(data) {
       var classes = data.classrooms || [];
       if (classes.length === 0) {
-        listEl.innerHTML = '<div class="empty-state"><img src="/static/illustrations/lantern-path.svg" alt="" class="empty-state-illustration"><p>No classes yet. Create one to get started.</p></div>';
+        listEl.innerHTML = '<div class="empty-state"><img src="' + themedIllustration('/static/illustrations/empty-classes.webp') + '" alt="" class="empty-state-illustration"><p>No classes yet. Create one to get started.</p></div>';
         handleImgErrors(listEl);
         return;
       }
@@ -9723,7 +9745,7 @@ function loadTeacherClasses() {
       });
     })
     .catch(function() {
-      listEl.innerHTML = '<div class="empty-state"><img src="/static/illustrations/courtyard-rain.svg" alt="" class="empty-state-illustration"><p>Failed to load classes.</p></div>';
+      listEl.innerHTML = '<div class="empty-state"><img src="' + themedIllustration('/static/illustrations/empty-classes.webp') + '" alt="" class="empty-state-illustration"><p>Failed to load classes.</p></div>';
       handleImgErrors(listEl);
     });
 }
@@ -9812,7 +9834,7 @@ function renderStudentTable() {
 
   var students = _teacherStudentsData.slice();
   if (students.length === 0) {
-    tableEl.innerHTML = '<div class="empty-state"><img src="/static/illustrations/moon-gate.svg" alt="" class="empty-state-illustration"><p>No students have joined yet. Share the invite code above.</p></div>';
+    tableEl.innerHTML = '<div class="empty-state"><img src="' + themedIllustration('/static/illustrations/empty-students.webp') + '" alt="" class="empty-state-illustration"><p>No students have joined yet. Share the invite code above.</p></div>';
     handleImgErrors(tableEl);
     return;
   }

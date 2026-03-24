@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 118  # Increment when adding migrations
+SCHEMA_VERSION = 119  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7122,6 +7122,14 @@ def _migrate_v117_to_v118(conn):
     conn.commit()
 
 
+def _migrate_v118_to_v119(conn):
+    """v118->v119: Add price_variant column to user table for A/B pricing experiments."""
+    user_cols = _col_set(conn, "user")
+    if "price_variant" not in user_cols:
+        conn.execute("ALTER TABLE user ADD COLUMN price_variant TEXT")
+        conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7241,6 +7249,7 @@ MIGRATIONS = {
     115: _migrate_v115_to_v116,
     116: _migrate_v116_to_v117,
     117: _migrate_v117_to_v118,
+    118: _migrate_v118_to_v119,
 }
 
 

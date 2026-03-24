@@ -299,11 +299,22 @@ def create_app(testing=False):
         def static_hash(filename):
             return _hashes.get(filename, "0") + "." + _SERVER_START_TIME
         # Pricing subset for client-side display (no secrets)
+        # Respect user's A/B price variant if assigned
+        _psrc = PRICING
+        try:
+            from flask_login import current_user as _cu
+            if hasattr(_cu, 'is_authenticated') and _cu.is_authenticated:
+                _pv = getattr(_cu, 'price_variant', None)
+                if _pv:
+                    from ..settings import get_variant_pricing
+                    _psrc = get_variant_pricing(_pv)
+        except Exception:
+            pass
         _pricing_display = {
-            "monthly": PRICING["monthly_display"],
-            "annual": PRICING["annual_display"],
-            "annual_monthly": PRICING["annual_monthly_equiv"],
-            "annual_savings": PRICING["annual_savings"],
+            "monthly": _psrc.get("monthly_display", PRICING["monthly_display"]),
+            "annual": _psrc.get("annual_display", PRICING["annual_display"]),
+            "annual_monthly": _psrc.get("annual_monthly_equiv", PRICING["annual_monthly_equiv"]),
+            "annual_savings": _psrc.get("annual_savings", PRICING["annual_savings"]),
         }
         return {
             "static_hash": static_hash,

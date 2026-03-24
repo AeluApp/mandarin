@@ -162,18 +162,24 @@ def _calculate_teacher_student_commission(conn: sqlite3.Connection,
     }
 
 
-def create_checkout_session(user_id: int, email: str, plan: str = "monthly") -> str:
+def create_checkout_session(user_id: int, email: str, plan: str = "monthly",
+                            price_variant: str = None) -> str:
     """Create a Stripe Checkout session. Returns the checkout URL.
 
     Args:
-        plan: "monthly" ($14.99/mo) or "annual" ($149/year — save $30.88).
+        plan: "monthly" or "annual".
+        price_variant: experiment variant name (e.g. "lower_9.99") to use
+            variant-specific pricing. Falls back to default PRICING if None.
     """
+    from .settings import get_variant_pricing
+    pricing = get_variant_pricing(price_variant)
+
     if plan == "annual":
-        unit_amount = PRICING["annual_cents"]
+        unit_amount = pricing["annual_cents"]
         interval = "year"
         product_name = "Aelu — Full Access (Annual)"
     else:
-        unit_amount = PRICING["monthly_cents"]
+        unit_amount = pricing["monthly_cents"]
         interval = "month"
         product_name = "Aelu — Full Access"
 
@@ -192,7 +198,10 @@ def create_checkout_session(user_id: int, email: str, plan: str = "monthly") -> 
         mode="subscription",
         success_url=BASE_URL + "/?payment=success",
         cancel_url=BASE_URL + "/?payment=cancelled",
-        metadata={"user_id": str(user_id)},
+        metadata={
+            "user_id": str(user_id),
+            "price_variant": price_variant or "default",
+        },
     )
     return session.url
 

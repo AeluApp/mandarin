@@ -74,6 +74,7 @@
     'uniform vec3 uColor3;',
     'uniform vec3 uColorBase;',
     'uniform float uIntensity;',
+    'uniform vec2 uMouse;',
     '',
     '// Simplex-like noise',
     'vec3 mod289(vec3 x) { return x - floor(x * (1.0/289.0)) * 289.0; }',
@@ -102,10 +103,10 @@
     '}',
     '',
     'void main() {',
-    '  float t = uTime * 0.015;',
+    '  float t = uTime * 0.07;',
     '  ',
-    '  // Animated gradient control points',
-    '  vec2 p1 = vec2(0.2 + sin(t * 0.7) * 0.1, 0.15 + cos(t * 0.5) * 0.1);',
+    '  // Animated gradient control points — mouse gently biases p1',
+    '  vec2 p1 = vec2(0.2 + sin(t * 0.7) * 0.1 + uMouse.x * 0.08, 0.15 + cos(t * 0.5) * 0.1 + uMouse.y * 0.06);',
     '  vec2 p2 = vec2(0.8 + cos(t * 0.6) * 0.1, 0.3 + sin(t * 0.8) * 0.1);',
     '  vec2 p3 = vec2(0.5 + sin(t * 0.4) * 0.15, 0.7 + cos(t * 0.3) * 0.1);',
     '  ',
@@ -115,7 +116,7 @@
     '  float d3 = 1.0 - smoothstep(0.0, 0.65, distance(vUv, p3));',
     '  ',
     '  // Add noise for organic feel',
-    '  float n = snoise(vUv * 3.0 + t * 0.2) * 0.15;',
+    '  float n = snoise(vUv * 3.0 + t * 0.2) * 0.3;',
     '  ',
     '  vec3 color = uColorBase;',
     '  color = mix(color, uColor1, d1 * uIntensity + n * 0.02);',
@@ -132,10 +133,10 @@
 
   // ── Scene configs ──
   var sceneConfigs = {
-    marketing: { intensity: 0.18, fps: 30 },
-    login:     { intensity: 0.12, fps: 24 },
-    dashboard: { intensity: 0.06, fps: 20 },
-    admin:     { intensity: 0.05, fps: 20 }
+    marketing: { intensity: 0.32, fps: 30 },
+    login:     { intensity: 0.22, fps: 30 },
+    dashboard: { intensity: 0.18, fps: 24 },
+    admin:     { intensity: 0.12, fps: 20 }
   };
 
   // ── Main ──
@@ -180,7 +181,8 @@
         uColor2: { value: hexToVec3(secondary) },
         uColor3: { value: hexToVec3(accent) },
         uColorBase: { value: hexToVec3(base) },
-        uIntensity: { value: config.intensity }
+        uIntensity: { value: config.intensity },
+        uMouse: { value: new THREE.Vector2(0.5, 0.5) }
       }
     });
 
@@ -190,6 +192,33 @@
     // Events
     window.addEventListener('resize', onResize);
     document.addEventListener('visibilitychange', onVisibility);
+
+    // Mouse tracking — smoothly follows cursor for organic gradient shifts
+    var mouseTarget = { x: 0.5, y: 0.5 };
+    var mouseCurrent = { x: 0.5, y: 0.5 };
+    document.addEventListener('mousemove', function(e) {
+      mouseTarget.x = e.clientX / window.innerWidth;
+      mouseTarget.y = 1.0 - (e.clientY / window.innerHeight);
+    }, { passive: true });
+    // Smooth lerp in render loop
+    var _origAnimate = animate;
+    var _mouseSmooth = function(now) {
+      mouseCurrent.x += (mouseTarget.x - mouseCurrent.x) * 0.02;
+      mouseCurrent.y += (mouseTarget.y - mouseCurrent.y) * 0.02;
+      if (material && material.uniforms.uMouse) {
+        material.uniforms.uMouse.value.set(mouseCurrent.x, mouseCurrent.y);
+      }
+    };
+    var origAnimateRef = animate;
+    animate = function(now) {
+      if (paused) return;
+      raf = requestAnimationFrame(animate);
+      if (now - lastFrame < frameInterval) return;
+      lastFrame = now;
+      _mouseSmooth(now);
+      material.uniforms.uTime.value = now * 0.001;
+      renderer.render(scene, camera);
+    };
 
     // Listen for theme changes to update colors
     var themeObserver = new MutationObserver(function() {
@@ -233,17 +262,7 @@
     }
   }
 
-  function animate(now) {
-    if (paused) return;
-    raf = requestAnimationFrame(animate);
-
-    // Frame rate limiting
-    if (now - lastFrame < frameInterval) return;
-    lastFrame = now;
-
-    material.uniforms.uTime.value = now * 0.001;
-    renderer.render(scene, camera);
-  }
+  // animate is defined dynamically in init() with mouse tracking
 
   function destroy() {
     paused = true;

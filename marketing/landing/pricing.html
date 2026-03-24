@@ -1177,5 +1177,43 @@
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/ink-atmosphere.js" defer></script>
 
+  <!-- Dynamic pricing: fetch A/B variant and update visible prices -->
+  <script>
+  (function() {
+    fetch('/api/experiment/price-variant')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data || data.variant === 'default' || !data.price_display) return;
+        // Parse the variant price (e.g. "$9.99/mo" → "9.99")
+        var match = data.price_display.match(/\$?([\d.]+)/);
+        if (!match) return;
+        var monthly = match[1];
+        var annualMultiplied = (parseFloat(monthly) * 12).toFixed(0);
+        var annualPrice = Math.round(parseFloat(monthly) * 10); // ~10 months = annual discount
+        var annualPerMonth = (annualPrice / 12).toFixed(2);
+        var savings = (annualMultiplied - annualPrice).toString();
+        // Update visible monthly price
+        var priceMonthly = document.getElementById('price-monthly');
+        if (priceMonthly) priceMonthly.innerHTML = '$' + monthly + ' <span>/month</span>';
+        // Update visible annual price
+        var priceAnnual = document.getElementById('price-annual');
+        if (priceAnnual) priceAnnual.innerHTML = '$' + annualPrice + ' <span>/year</span>';
+        // Update savings note
+        var noteAnnual = document.getElementById('note-annual');
+        if (noteAnnual) noteAnnual.textContent = 'Save $' + savings + '/year. Cancel anytime.';
+        // Update annual CTA
+        var ctaAnnual = document.getElementById('cta-annual');
+        if (ctaAnnual) ctaAnnual.textContent = 'Start learning — $' + annualPrice + '/year';
+        // Update any "What $X/month gets you" headings
+        document.querySelectorAll('h2').forEach(function(h) {
+          if (h.textContent.indexOf('$14.99/month') !== -1) {
+            h.textContent = h.textContent.replace('$14.99/month', '$' + monthly + '/month');
+          }
+        });
+      })
+      .catch(function() { /* silently fail — show default prices */ });
+  })();
+  </script>
+
 </body>
 </html>

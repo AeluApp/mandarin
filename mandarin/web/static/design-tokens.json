@@ -117,13 +117,13 @@
   },
   "motion": {
     "duration": {
-      "press": "0.1s",
-      "snappy": "0.15s",
-      "fast": "0.2s",
-      "base": "0.4s",
-      "slow": "0.5s",
-      "ambient": "1.8s",
-      "float": "3s"
+      "press": "0.08s",
+      "snappy": "0.12s",
+      "fast": "0.18s",
+      "base": "0.3s",
+      "slow": "0.4s",
+      "ambient": "0.8s",
+      "float": "1.5s"
     },
     "easing": {
       "default": "cubic-bezier(0.25, 0.1, 0.25, 1)",
@@ -134,8 +134,10 @@
   },
   "shape": {
     "radius": 0,
-    "radiusSm": 0,
-    "radiusLg": 0,
+    "radiusSm": 2,
+    "radiusLg": 6,
+    "radiusCard": 8,
+    "radiusIllustration": 12,
     "adminRadius": 8
   },
   "glass": {
