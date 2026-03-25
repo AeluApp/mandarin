@@ -5,8 +5,8 @@
 **Date:** 2026-03-15
 **Content library:** HSK 1-9 canonical word lists (10,000+ items via `add-hsk`), context notes, 134 auto-tagged, 30 dialogue scenarios
 **Grammar/skills:** 26 grammar points (HSK 1-3), 14 language skills seeded
-**Schema:** V102 (71 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure, experiment proposals, graduated rollouts, openclaw scheduler)
-**Tests:** 4061 passed, 2 skipped, 0 failed across 159 suites (~5m08s runtime)
+**Schema:** V119 (84 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure, experiment proposals, graduated rollouts, openclaw scheduler)
+**Tests:** 4061 passed, 2 skipped, 0 failed across 169 suites (~5m08s runtime)
 **Skips:** 2 E2E (Playwright not installed — requires browser binary, runs in separate CI job)
 **Warnings:** 48 (InsecureKeyLengthWarning from test JWT secrets — cosmetic, not blocking)
 **Mobile:** Capacitor shell staged, JWT auth, offline sync, native plugin bridge
@@ -55,7 +55,7 @@
 
 #### Modified files
 - `mandarin/settings.py` — JWT_SECRET, JWT_ACCESS_EXPIRY_HOURS, JWT_REFRESH_EXPIRY_DAYS
-- `mandarin/db/core.py` — SCHEMA_VERSION=100 (experiment_proposal + experiment_rollout tables)
+- `mandarin/db/core.py` — SCHEMA_VERSION=119 (experiment_proposal + experiment_rollout tables)
 - `mandarin/web/__init__.py` — V1PrefixMiddleware, JWT request_loader, blueprint registration
 - `mandarin/web/routes.py` — public prefixes, CORS Authorization header, push endpoints
 - `mandarin/web/static/app.js` — Capacitor bridge init, haptics, JWT WS token, touch gestures, offline indicator
@@ -280,7 +280,7 @@
 
 ---
 
-## Schema (71 tables, V102)
+## Schema (84 tables, V119)
 
 | Table | Purpose |
 |---|---|
@@ -417,9 +417,9 @@ mandarin/
     └── templates/index.html
 mobile/                  # Capacitor shell (iOS/Android)
 run                      # Bash launcher (./run, ./run menu, ./run app, ./run help)
-schema.sql               # Full schema (71 tables, V102)
+schema.sql               # Full schema (84 tables, V119)
 learner_profile.json     # Persona configuration
-tests/                       # 4061 tests across 159 suites
+tests/                       # 4061 tests across 169 suites
 data/
 ├── mandarin.db          # SQLite database
 ├── hsk/                 # HSK 4-9 vocabulary JSON
