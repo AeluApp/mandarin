@@ -798,12 +798,14 @@ CREATE TABLE IF NOT EXISTS affiliate_partner (
     partner_code TEXT UNIQUE NOT NULL,
     partner_name TEXT NOT NULL,
     partner_email TEXT,
-    commission_rate REAL NOT NULL DEFAULT 0.20,
+    commission_rate REAL NOT NULL DEFAULT 0.25,
     tier TEXT NOT NULL DEFAULT 'standard',
     status TEXT NOT NULL DEFAULT 'active',
+    stripe_connect_id TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
-    CHECK (tier IN ('standard', 'upgrade')),
-    CHECK (status IN ('active', 'inactive'))
+    updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    CHECK (tier IN ('standard', 'upgrade', 'teacher')),
+    CHECK (status IN ('active', 'inactive', 'pending_onboarding'))
 );
 
 CREATE TABLE IF NOT EXISTS referral_tracking (
