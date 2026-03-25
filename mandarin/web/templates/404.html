@@ -73,10 +73,6 @@
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Particle canvas for dissolve effect */
-    .dissolve-canvas {
-      position: fixed; inset: 0; z-index: 10; pointer-events: none;
-    }
     .error-illustration {
       display: block;
       max-width: 280px;
@@ -93,7 +89,6 @@
   </style>
 </head>
 <body>
-  <div id="webgl-atmosphere" data-scene="login" aria-hidden="true"></div>
   <div id="app" role="main">
     <div class="not-found-wrap">
       <img src="/static/illustrations/error-page.webp" alt="" class="error-illustration" aria-hidden="true">
@@ -112,101 +107,6 @@
         });
       }
     })();
-
-    // Character dissolve: 迷 dissolves into particles drifting toward the home link
-    (function() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      var hanzi = document.querySelector('.not-found-hanzi');
-      var link = document.querySelector('.not-found-link');
-      if (!hanzi || !link) return;
-
-      // After entrance animation completes + hold, dissolve
-      setTimeout(function() {
-        var rect = hanzi.getBoundingClientRect();
-        var linkRect = link.getBoundingClientRect();
-        var cx = rect.left + rect.width / 2;
-        var cy = rect.top + rect.height / 2;
-        var tx = linkRect.left + linkRect.width / 2;
-        var ty = linkRect.top + linkRect.height / 2;
-
-        var canvas = document.createElement('canvas');
-        canvas.className = 'dissolve-canvas';
-        canvas.setAttribute('aria-hidden', 'true');
-        document.body.appendChild(canvas);
-
-        var ctx = canvas.getContext('2d');
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        var accent = isDark ? { r: 176, g: 120, b: 136 } : { r: 148, g: 96, b: 112 };
-
-        var count = 18;
-        var particles = [];
-        for (var i = 0; i < count; i++) {
-          var angle = (Math.PI * 2 * i) / count;
-          var spread = 15 + Math.random() * 25;
-          particles.push({
-            x: cx + Math.cos(angle) * spread * Math.random(),
-            y: cy + Math.sin(angle) * spread * Math.random(),
-            size: 2 + Math.random() * 3,
-            delay: Math.random() * 300
-          });
-        }
-
-        // Fade out the character
-        hanzi.style.transition = 'opacity 0.6s ease, filter 0.6s ease';
-        hanzi.style.opacity = '0';
-        hanzi.style.filter = 'blur(4px)';
-
-        var startTime = performance.now();
-        var duration = 1200;
-
-        function animate(now) {
-          var elapsed = now - startTime;
-          if (elapsed > duration) {
-            canvas.parentNode.removeChild(canvas);
-            // Pulse the link
-            link.style.transition = 'box-shadow 0.4s ease';
-            link.style.boxShadow = '0 0 0 4px color-mix(in srgb, var(--color-accent) 20%, transparent)';
-            setTimeout(function() { link.style.boxShadow = ''; }, 800);
-            return;
-          }
-
-          ctx.clearRect(0, 0, w, h);
-
-          for (var j = 0; j < particles.length; j++) {
-            var p = particles[j];
-            var t = Math.max(0, elapsed - p.delay) / (duration - p.delay);
-            if (t <= 0 || t > 1) continue;
-
-            var ease = 1 - Math.pow(1 - t, 2);
-            var px = p.x + (tx - p.x) * ease;
-            var py = p.y + (ty - p.y) * ease;
-            var alpha = (1 - t) * 0.6;
-            var size = p.size * (1 - t * 0.5);
-
-            ctx.beginPath();
-            ctx.arc(px, py, size, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + alpha + ')';
-            ctx.fill();
-          }
-
-          requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-      }, 3000); // Hold for 3 seconds after page load, then dissolve
-    })();
   </script>
-  <script src="/static/webgl/three.min.js" async></script>
-  <script src="/static/webgl/scene-manager.js" defer></script>
 </body>
 </html>
