@@ -303,6 +303,104 @@ def create_student_upgrade_checkout(student_user_id: int, email: str,
     return session.url
 
 
+# ── Stripe Connect: Partner Onboarding & Payouts ──
+
+
+def create_partner_connect_account(conn: sqlite3.Connection, partner_code: str,
+                                    email: str) -> str:
+    """Create a Stripe Connect Express account for a partner and return the onboarding URL.
+
+    The partner clicks the URL, enters their bank details on Stripe's hosted form,
+    and Stripe handles identity verification and compliance. No sensitive data touches our servers.
+    """
+    account = stripe.Account.create(
+        type="express",
+        email=email,
+        metadata={"partner_code": partner_code},
+        capabilities={
+            "transfers": {"requested": True},
+        },
+    )
+
+    # Store the Connect account ID
+    conn.execute(
+        "UPDATE affiliate_partner SET stripe_connect_id = ?, updated_at = datetime('now') WHERE partner_code = ?",
+        (account.id, partner_code),
+    )
+    conn.commit()
+    logger.info("Connect account %s created for partner %s", account.id, partner_code)
+
+    # Generate onboarding link
+    link = stripe.AccountLink.create(
+        account=account.id,
+        refresh_url=BASE_URL + "/partners/onboarding?refresh=1",
+        return_url=BASE_URL + "/partners/onboarding?complete=1",
+        type="account_onboarding",
+    )
+    return link.url
+
+
+def get_partner_connect_status(conn: sqlite3.Connection, partner_code: str) -> dict:
+    """Check if a partner's Connect account is fully set up for payouts."""
+    row = conn.execute(
+        "SELECT stripe_connect_id FROM affiliate_partner WHERE partner_code = ?",
+        (partner_code,),
+    ).fetchone()
+
+    if not row or not row["stripe_connect_id"]:
+        return {"status": "not_started", "payouts_enabled": False}
+
+    try:
+        account = stripe.Account.retrieve(row["stripe_connect_id"])
+        return {
+            "status": "complete" if account.details_submitted else "incomplete",
+            "payouts_enabled": account.payouts_enabled,
+            "charges_enabled": account.charges_enabled,
+            "connect_id": account.id,
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def pay_out_partner(conn: sqlite3.Connection, partner_code: str,
+                    amount_cents: int, description: str = "Aelu affiliate commission") -> dict:
+    """Transfer pending commission to a partner's Connect account.
+
+    Call this from the admin payout flow or a scheduled job.
+    """
+    row = conn.execute(
+        "SELECT stripe_connect_id FROM affiliate_partner WHERE partner_code = ?",
+        (partner_code,),
+    ).fetchone()
+
+    if not row or not row["stripe_connect_id"]:
+        return {"error": "Partner has no Connect account"}
+
+    try:
+        transfer = stripe.Transfer.create(
+            amount=amount_cents,
+            currency="usd",
+            destination=row["stripe_connect_id"],
+            description=description,
+            metadata={"partner_code": partner_code},
+        )
+
+        # Mark commissions as paid
+        conn.execute(
+            """UPDATE affiliate_commission SET status = 'paid', paid_out_at = datetime('now')
+               WHERE partner_code = ? AND status = 'pending'""",
+            (partner_code,),
+        )
+        conn.commit()
+
+        logger.info("Paid $%.2f to partner %s (transfer %s)",
+                     amount_cents / 100, partner_code, transfer.id)
+        return {"status": "paid", "transfer_id": transfer.id, "amount": amount_cents / 100}
+    except Exception as e:
+        logger.error("Payout failed for partner %s: %s", partner_code, e)
+        return {"error": str(e)}
+
+
 def create_billing_portal_session(stripe_customer_id: str) -> str:
     """Create a Stripe Billing Portal session. Returns the portal URL."""
     session = stripe.billing_portal.Session.create(
