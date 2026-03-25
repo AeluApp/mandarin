@@ -17,8 +17,8 @@ stripe.api_key = STRIPE_SECRET_KEY
 # ── Commission structure ──
 # Standard partner rate (pilot — escalate to 0.30 after 6-month review if metrics hit)
 COMMISSION_RATE_STANDARD = 0.25
-# Upgrade tier (50+ paying referrals) and Teacher Partner track
-COMMISSION_RATE_UPGRADE = 0.35
+# All partner tiers use the same rate
+COMMISSION_RATE_UPGRADE = 0.25
 # Maximum months a partner earns commission per referred user
 COMMISSION_CAP_MONTHS = 24
 # Optional partner discount (opt-in, not standard)
