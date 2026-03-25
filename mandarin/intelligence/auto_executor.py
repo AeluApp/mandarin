@@ -23,6 +23,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
@@ -331,12 +332,16 @@ def _query_auto_fix_candidates(conn) -> list:
     - Classified as auto_fix by human_loop
     - Not already processed by auto_executor
     - Low severity (auto_fix gate in human_loop requires low severity)
+    - OR runtime_health findings with auto-fixable patterns (any severity)
     """
     candidates = _safe_query_all(conn, """
         SELECT pf.id, pf.dimension, pf.severity, pf.title, pf.analysis, pf.status
         FROM pi_finding pf
         WHERE pf.status NOT IN ('resolved', 'rejected', 'implemented', 'verified')
-          AND pf.severity = 'low'
+          AND (
+              pf.severity = 'low'
+              OR (pf.dimension = 'runtime_health' AND pf.severity IN ('low', 'medium'))
+          )
           AND pf.id NOT IN (
               SELECT finding_id FROM auto_fix_execution
               WHERE status IN ('applied', 'escalated')
@@ -377,6 +382,14 @@ def _resolve_target(finding_dict: dict) -> tuple:
     dimension = finding_dict.get("dimension", "")
     title = finding_dict.get("title", "")
 
+    # runtime_health: extract file paths from analysis (Sentry stacktraces)
+    if dimension == "runtime_health":
+        analysis = finding_dict.get("analysis", "")
+        target_file = _extract_runtime_target_file(analysis)
+        if target_file:
+            error_pattern = _detect_runtime_error_pattern(title, analysis)
+            return target_file, error_pattern, "fix"
+
     # Try keyword match first
     for (dim, keyword), (f, p, d) in _FINDING_TO_ACTION.items():
         if dim != dimension:
@@ -390,6 +403,63 @@ def _resolve_target(finding_dict: dict) -> tuple:
         return fallback
 
     return None, None, None
+
+
+def _extract_runtime_target_file(analysis: str) -> str | None:
+    """Extract the most relevant file path from runtime_health analysis.
+
+    Looks for mandarin/ paths in stacktrace or affected files sections.
+    Returns the first (most relevant) file under mandarin/.
+    """
+    if not analysis:
+        return None
+
+    # Look for "Affected files:" section first
+    affected_match = re.search(r"Affected files?:\s*(.+?)(?:\n|$)", analysis)
+    if affected_match:
+        files_str = affected_match.group(1)
+        for f in files_str.split(","):
+            f = f.strip()
+            if f.startswith("mandarin/") and not f.endswith("/"):
+                return f
+
+    # Fall back to stacktrace file references
+    # Match patterns like File "mandarin/web/routes.py", line 42
+    file_refs = re.findall(r'[Ff]ile\s+"?(mandarin/\S+\.py)"?', analysis)
+    if file_refs:
+        # Return the last one (innermost frame, most relevant)
+        return file_refs[-1]
+
+    # Try bare mandarin/ paths
+    bare_paths = re.findall(r'(mandarin/\S+\.py)', analysis)
+    if bare_paths:
+        return bare_paths[-1]
+
+    return None
+
+
+def _detect_runtime_error_pattern(title: str, analysis: str) -> str:
+    """Detect the specific error pattern for targeted fix generation.
+
+    Returns a pattern identifier used by the LLM prompt to generate
+    more targeted fixes.
+    """
+    combined = (title + " " + analysis).lower()
+
+    if "nameerror" in combined:
+        return "add_missing_import"
+    if "importerror" in combined or "modulenotfounderror" in combined:
+        return "fix_import_path"
+    if "'nonetype'" in combined and "attributeerror" in combined:
+        return "add_none_check"
+    if "keyerror" in combined:
+        return "add_dict_get_default"
+    if "zerodivisionerror" in combined:
+        return "add_zero_check"
+    if "typeerror" in combined:
+        return "fix_type_mismatch"
+
+    return "general_error_fix"
 
 
 # ── LLM fix generation ────────────────────────────────────────────────────
@@ -428,13 +498,19 @@ def _generate_fix(
         if truncated else ""
     )
 
+    # Runtime health findings get pattern-specific guidance for higher confidence
+    runtime_guidance = ""
+    if finding.get("dimension") == "runtime_health" and target_parameter:
+        runtime_guidance = _get_runtime_fix_guidance(target_parameter)
+
     prompt = (
         f"Fix the following issue in `{target_file}`:\n\n"
         f"**Issue:** {finding['title']}\n"
         f"**Analysis:** {finding.get('analysis', 'N/A')}\n"
         f"**Parameter:** {target_parameter}\n"
         f"**Direction:** {direction}\n"
-        f"**Severity:** {finding['severity']}\n\n"
+        f"**Severity:** {finding['severity']}\n"
+        f"{runtime_guidance}\n\n"
         f"Current file content:\n```\n{display_content}\n```{truncation_note}\n\n"
         f"Return ONLY the complete fixed file content. No markdown fences. "
         f"No explanations. Make minimal, targeted changes."
@@ -470,6 +546,52 @@ def _generate_fix(
         "prompt": prompt[:2000],
         "error": None,
     }
+
+
+def _get_runtime_fix_guidance(error_pattern: str) -> str:
+    """Return pattern-specific fix guidance for runtime_health errors.
+
+    These patterns are highly auto-fixable and produce higher-confidence fixes
+    when the LLM has explicit instructions for the fix pattern.
+    """
+    guidance_map = {
+        "add_missing_import": (
+            "\n**Fix pattern:** NameError — a name is not defined. "
+            "Find the undefined name in the traceback and add the correct import "
+            "statement at the top of the file. Check other files in the project for "
+            "where this name is defined. Do NOT remove any existing code."
+        ),
+        "fix_import_path": (
+            "\n**Fix pattern:** ImportError/ModuleNotFoundError — a module cannot be found. "
+            "Check the import path for typos, verify the module exists, and fix the "
+            "import statement. If the module was renamed or moved, update the path. "
+            "If it is a third-party dependency, note it but fix any local path issues."
+        ),
+        "add_none_check": (
+            "\n**Fix pattern:** AttributeError: 'NoneType' — a variable is None when "
+            "an object was expected. Add a None check (guard clause) before the "
+            "attribute access. Use 'if variable is None: return/continue/default' "
+            "or 'if variable is not None:' pattern. Preserve the existing logic flow."
+        ),
+        "add_dict_get_default": (
+            "\n**Fix pattern:** KeyError — a dictionary key is missing. "
+            "Replace dict[key] with dict.get(key, default_value) where the default "
+            "is appropriate for the context (None, empty string, 0, empty list, etc.). "
+            "Do NOT change the surrounding logic."
+        ),
+        "add_zero_check": (
+            "\n**Fix pattern:** ZeroDivisionError — division by zero. "
+            "Add a check for zero before the division. Use 'if denominator != 0:' "
+            "or 'if denominator:' and provide a sensible default when zero."
+        ),
+        "fix_type_mismatch": (
+            "\n**Fix pattern:** TypeError — wrong argument type. "
+            "Check the function signature and the types being passed. Add type "
+            "conversion or validation as appropriate. Common fixes: str() wrapping, "
+            "int() conversion, or handling None values."
+        ),
+    }
+    return guidance_map.get(error_pattern, "")
 
 
 def _clean_llm_output(raw_output: str, original_content: str) -> str:

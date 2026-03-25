@@ -106,6 +106,37 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
             return "informed_fix"
         return "judgment_call"
 
+    # runtime_health: Sentry errors and runtime issue findings
+    if dim == "runtime_health":
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Unhandled exceptions with clear fix (missing import, typo, None check) -> auto_fix
+        if any(kw in analysis_lower for kw in ("nameerror", "importerror",
+                                                  "modulenotfounderror",
+                                                  "nonetype", "keyerror",
+                                                  "zerodivisionerror",
+                                                  "auto_fixable")):
+            return "auto_fix"
+        # Performance issues (slow queries, endpoint latency) -> informed_fix
+        if any(kw in analysis_lower for kw in ("slow endpoint", "response time",
+                                                  "duration_ms", "performance",
+                                                  "timeout", "latency")):
+            return "informed_fix"
+        # Security-related errors -> values_decision
+        if any(kw in analysis_lower for kw in ("permission", "forbidden", "security",
+                                                  "unauthorized", "csrf", "xss",
+                                                  "injection")):
+            return "values_decision"
+        # Recurring errors with unclear cause -> judgment_call
+        if any(kw in analysis_lower for kw in ("recurring", "[llm]", "root cause",
+                                                  "spike", "database integrity")):
+            return "judgment_call"
+        # Default for runtime_health based on severity
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
     # auto_fix: low severity, single file, all advisors agree
     if severity == "low" and len(files) <= 1 and not has_conflict:
         return "auto_fix"
@@ -329,7 +360,7 @@ def build_context_frame(conn, finding: dict) -> dict:
     retention_dims = {"retention", "ux", "flow", "engagement", "frustration"}
     learning_dims = {"drill_quality", "content", "srs_funnel", "error_taxonomy",
                      "cross_modality", "curriculum", "hsk_cliff", "tone_phonology"}
-    engineering_dims = {"engineering", "security", "timing", "platform"}
+    engineering_dims = {"engineering", "security", "timing", "platform", "runtime_health"}
 
     if dim in retention_dims:
         frame["options"] = [

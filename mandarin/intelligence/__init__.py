@@ -94,6 +94,13 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import runtime health analyzers (error spikes, slow endpoints, webhooks, DB health)
+    try:
+        from .analyzers_runtime import ANALYZERS as RUNTIME_ANALYZERS
+        all_analyzers = all_analyzers + RUNTIME_ANALYZERS
+    except ImportError:
+        pass
+
     # Import AI outcome measurement analyzers
     try:
         from .ai_outcome import ANALYZERS as AI_OUTCOME_ANALYZERS

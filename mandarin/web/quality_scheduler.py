@@ -88,6 +88,19 @@ def _collect_metrics():
     except Exception:
         logger.debug("CI findings import failed", exc_info=True)
 
+    # ── Sentry issue ingestion ──
+    # Import unresolved issues from Sentry API as runtime_health findings
+    try:
+        from ..intelligence.sentry_ingest import import_sentry_issues
+        with db.connection() as conn:
+            new_sentry = import_sentry_issues(conn)
+            if new_sentry:
+                logger.info("Imported %d new Sentry issues", new_sentry)
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning("Sentry import failed: %s", e)
+
     with db.connection() as conn:
         # DPMO metrics
         try:
@@ -766,6 +779,13 @@ def _run_intelligence_loop():
                 pass
             except Exception:
                 logger.debug("Intelligence loop: auto-executor failed", exc_info=True)
+
+            # 5. Send daily intelligence digest email
+            try:
+                from ..email import send_daily_intelligence_digest
+                send_daily_intelligence_digest(conn)
+            except Exception:
+                logger.debug("Intelligence loop: daily digest email failed", exc_info=True)
 
     except Exception:
         logger.exception("Intelligence automation loop failed")
