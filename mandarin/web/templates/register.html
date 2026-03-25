@@ -70,12 +70,22 @@
 </head>
 <body>
   <div class="auth-bg" aria-hidden="true">
-    <video autoplay muted loop playsinline poster="/static/assets/phase2/videos/login-mountains-poster.jpg">
+    <video id="auth-video" autoplay muted playsinline poster="/static/assets/phase2/videos/login-mountains-poster.jpg">
       <source src="/static/assets/phase2/videos/login-mountains.webm" type="video/webm">
       <source src="/static/assets/phase2/videos/login-mountains.mp4" type="video/mp4">
     </video>
     <div class="auth-bg-fallback"></div>
   </div>
+  <script>
+    (function() {
+      var video = document.getElementById('auth-video');
+      if (!video) return;
+      video.addEventListener('ended', function() {
+        video.style.opacity = '0';
+        video.style.transition = 'opacity 0.8s ease';
+      });
+    })();
+  </script>
   <div class="auth-page">
     <a href="/" class="auth-home">&larr; Aelu</a>
     <div class="auth-card">
