@@ -22,7 +22,7 @@ tutor_bp = Blueprint("tutor", __name__)
 @api_error_handler("Tutor session create")
 def create_tutor_session():
     """Log a new tutor session."""
-    data = flask_request.get_json(force=True)
+    data = flask_request.get_json()
     with db.connection() as conn:
         cursor = conn.execute("""
             INSERT INTO tutor_sessions
@@ -73,7 +73,7 @@ def list_tutor_sessions():
 @api_error_handler("Tutor corrections")
 def add_corrections(session_id):
     """Add corrections for a tutor session."""
-    data = flask_request.get_json(force=True)
+    data = flask_request.get_json()
     corrections = data.get("corrections", [])
     with db.connection() as conn:
         # Verify session belongs to user
@@ -109,7 +109,7 @@ def add_corrections(session_id):
 @api_error_handler("Tutor vocabulary flags")
 def add_vocabulary_flags(session_id):
     """Add vocabulary flags for a tutor session."""
-    data = flask_request.get_json(force=True)
+    data = flask_request.get_json()
     flags = data.get("flags", [])
     with db.connection() as conn:
         # Verify session belongs to user

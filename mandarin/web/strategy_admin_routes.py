@@ -58,7 +58,7 @@ def strategy_thesis():
 @api_error_handler("Override thesis")
 def override_thesis():
     """Override a thesis component."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     field = data.get("field")
     value = data.get("value")
     rationale = data.get("rationale", "")
@@ -130,7 +130,7 @@ def commercial_readiness():
 @api_error_handler("Update readiness condition")
 def update_readiness_condition(condition_name):
     """Update a commercial readiness condition status."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     status = data.get("status")
     evidence = data.get("evidence", "")
 
@@ -189,7 +189,7 @@ def competitive_scorecard():
 @api_error_handler("Update competitor score")
 def update_competitor_score(competitor_name):
     """Update a competitor dimension score."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     dimension = data.get("dimension")
     score = data.get("score")
     evidence = data.get("evidence", "")
@@ -219,7 +219,7 @@ def update_competitor_score(competitor_name):
 @api_error_handler("Log competitive signal")
 def log_competitive_signal():
     """Log a competitive signal."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     competitor_id = data.get("competitor_id")
     signal_type = data.get("signal_type")
     description = data.get("description", "")

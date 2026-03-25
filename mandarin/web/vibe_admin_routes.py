@@ -96,7 +96,7 @@ def visual_vibe():
 @api_error_handler("Log vibe audit")
 def log_vibe_audit():
     """Log a completed vibe audit."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     audit_type = data.get("audit_type", "visual")
     audit_category = data.get("audit_category", "")
     overall_pass = data.get("overall_pass", True)
@@ -136,7 +136,7 @@ def marketing_pages():
 @api_error_handler("Update page analytics")
 def update_page_analytics(page_id):
     """Update conversion/visitor data for a marketing page."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     with db.connection() as conn:
         conn.execute("""
             UPDATE pi_marketing_pages
@@ -208,7 +208,7 @@ def strategy_checklist():
 @api_error_handler("Log strategy review")
 def log_strategy_review(check_name):
     """Log a strategy checklist review."""
-    data = request.get_json(force=True) if request.data else {}
+    data = request.get_json() if request.data else {}
     with db.connection() as conn:
         audit_id = str(uuid.uuid4())
         conn.execute("""
@@ -240,7 +240,7 @@ def feature_usage():
 @api_error_handler("Log feature event")
 def log_feature_event(feature_name):
     """Log a feature event (start, complete, etc.)."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     user_id = data.get("user_id", "admin")
     event_type = data.get("event_type", "use")
 
