@@ -2,12 +2,22 @@
 
 ALL Reddit posts require human approval before posting. Posts are queued
 in the marketing_approval_queue table and must be approved via admin UI
-or iMessage before the scheduler will post them.
+or email before the scheduler will post them.
+
+Dual-account strategy:
+- REDDIT_USERNAME / REDDIT_PASSWORD: official brand account (u/aeluapp or similar)
+  Used for: launch announcements, product updates, official support
+- REDDIT_ALT_USERNAME / REDDIT_ALT_PASSWORD: pseudonymous community account
+  Used for: value posts, study tips, "hey guys here's what worked for me"
+  This account should have established karma from genuine participation
+
+The scheduler tags each post with which account to use based on content type.
+Both accounts require approval before posting.
 
 Uses raw httpx (no PRAW dependency). OAuth2 "script" app type.
 
 Exports:
-    queue_reddit_post(conn, subreddit, title, body, content_id) -> int  # queue ID
+    queue_reddit_post(conn, subreddit, title, body, content_id, account) -> int
     post_approved(conn, queue_id) -> PostResult
     get_post_metrics(post_id) -> dict | None
     is_reddit_configured() -> bool
@@ -47,8 +57,18 @@ class PostResult:
     data: dict = field(default_factory=dict)
 
 
-def is_reddit_configured() -> bool:
-    """Check if Reddit API credentials are configured."""
+def is_reddit_configured(account: str = "official") -> bool:
+    """Check if Reddit API credentials are configured for the specified account.
+
+    account: "official" (brand account) or "community" (pseudonymous account)
+    """
+    if account == "community":
+        return bool(
+            os.environ.get("REDDIT_CLIENT_ID")
+            and os.environ.get("REDDIT_CLIENT_SECRET")
+            and os.environ.get("REDDIT_ALT_USERNAME")
+            and os.environ.get("REDDIT_ALT_PASSWORD")
+        )
     return bool(
         os.environ.get("REDDIT_CLIENT_ID")
         and os.environ.get("REDDIT_CLIENT_SECRET")

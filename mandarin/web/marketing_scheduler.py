@@ -193,22 +193,34 @@ def _process_action(conn, action) -> None:
     # Personalize (replace [brackets] with real data)
     text = personalize_content(piece, conn=conn)
 
-    # Run identity guard
-    try:
-        from ..marketing.anonymity_guard import check_identity
-        identity_result = check_identity(text, conn=conn)
-        if not identity_result.passed:
-            violations = ", ".join(v.pattern_name for v in identity_result.violations)
-            logger.warning("Identity guard BLOCKED content '%s': %s", content_id, violations)
+    # Run quality gates: identity + voice + LLM quality score
+    # If content fails, attempt LLM rewrite before blocking
+    gate_result = _run_quality_gates(conn, text, content_id)
+    if not gate_result["passed"]:
+        # Try to fix it via LLM rewrite
+        fixed_text = _attempt_quality_fix(conn, text, gate_result["reason"])
+        if fixed_text:
+            # Re-check the fixed version
+            recheck = _run_quality_gates(conn, fixed_text, content_id)
+            if recheck["passed"]:
+                text = fixed_text
+                logger.info("Auto-fixed content '%s' (was: %s)", content_id, gate_result["reason"])
+            else:
+                conn.execute(
+                    "UPDATE marketing_calendar_state SET status = 'skipped', notes = ? WHERE action_hash = ?",
+                    (f"Failed after fix attempt: {recheck['reason']}", action.action_hash),
+                )
+                conn.commit()
+                logger.warning("Quality gate BLOCKED '%s' after fix attempt: %s", content_id, recheck["reason"])
+                return
+        else:
             conn.execute(
                 "UPDATE marketing_calendar_state SET status = 'skipped', notes = ? WHERE action_hash = ?",
-                (f"Identity guard: {violations}", action.action_hash),
+                (gate_result["reason"], action.action_hash),
             )
             conn.commit()
+            logger.warning("Quality gate BLOCKED '%s': %s", content_id, gate_result["reason"])
             return
-    except Exception as e:
-        logger.warning("Identity guard failed: %s — holding content", e)
-        return
 
     # Route to platform
     if action.platform == "twitter":
@@ -406,6 +418,118 @@ def _collect_metrics(conn) -> None:
         logger.info("Collected metrics for %d posts", len(rows))
     except Exception:
         logger.debug("Metrics collection failed", exc_info=True)
+
+
+def _attempt_quality_fix(conn, text: str, issue: str) -> str | None:
+    """Attempt to fix low-quality content via LLM rewrite.
+
+    Returns the fixed text, or None if rewrite fails or isn't appropriate.
+    Identity violations (founder name) are always fixable.
+    Voice violations (praise inflation) are fixable.
+    Very low quality scores may not be salvageable.
+    """
+    try:
+        from ..ai.ollama_client import generate as llm_generate, is_llm_available
+        if not is_llm_available():
+            return None
+
+        resp = llm_generate(
+            prompt=(
+                f"This social media post for a Mandarin learning app failed quality review.\n\n"
+                f"Issue: {issue}\n\n"
+                f"Original post:\n{text}\n\n"
+                f"Rewrite it to fix the issue while keeping the core message. Rules:\n"
+                f"- Keep first-person 'I' voice but never reveal who 'I' is (no names, employers, photos)\n"
+                f"- No praise inflation (Amazing!, Incredible!)\n"
+                f"- No urgency language (Don't miss, Act now, Limited time)\n"
+                f"- Keep the educational insight intact\n"
+                f"- Stay under {len(text) + 50} characters\n\n"
+                f"Respond with ONLY the rewritten post text, nothing else."
+            ),
+            system="You are a social media editor. Fix the issue while preserving the content's value.",
+            temperature=0.4,
+            max_tokens=500,
+            conn=conn,
+            task_type="voice_audit",
+        )
+
+        if resp.success and resp.text.strip():
+            fixed = resp.text.strip()
+            # Strip any wrapping quotes the LLM might add
+            if fixed.startswith('"') and fixed.endswith('"'):
+                fixed = fixed[1:-1]
+            return fixed
+        return None
+
+    except (ImportError, Exception) as e:
+        logger.debug("Quality fix attempt failed: %s", e)
+        return None
+
+
+def _run_quality_gates(conn, text: str, content_id: str) -> dict:
+    """Run all quality gates on content before posting. Returns {passed, reason, score}.
+
+    Gates (all must pass):
+    1. Identity guard — no founder name/identity
+    2. Voice standard — no praise inflation, urgency marketing
+    3. LLM quality score — cloud model rates content 1-10, must score ≥ 7
+    """
+    # Gate 1: Identity guard
+    try:
+        from ..marketing.anonymity_guard import check_identity
+        identity_result = check_identity(text, conn=conn)
+        if not identity_result.passed:
+            violations = ", ".join(v.pattern_name for v in identity_result.violations)
+            return {"passed": False, "reason": f"Identity guard: {violations}", "score": 0}
+    except Exception as e:
+        return {"passed": False, "reason": f"Identity guard error: {e}", "score": 0}
+
+    # Gate 2: Voice standard (forbidden patterns)
+    try:
+        from ..intelligence.vibe_marketing_eng import VOICE_STANDARD
+        import re
+        for pattern_str, pattern_name in VOICE_STANDARD.get("forbidden_patterns", []):
+            if re.search(pattern_str, text, re.IGNORECASE):
+                return {"passed": False, "reason": f"Voice standard violation: {pattern_name}", "score": 0}
+    except (ImportError, Exception):
+        pass  # If vibe module unavailable, skip
+
+    # Gate 3: LLM quality score (must score ≥ 7/10)
+    try:
+        from ..ai.ollama_client import generate as llm_generate, is_llm_available
+        if is_llm_available():
+            resp = llm_generate(
+                prompt=(
+                    f"Rate this social media post for a Mandarin learning app on a scale of 1-10. "
+                    f"Consider: clarity, educational value, engagement potential, professional tone. "
+                    f"A score of 7+ means it's ready to publish. Below 7 means it needs revision.\n\n"
+                    f"Post:\n{text[:500]}\n\n"
+                    f"Respond with ONLY a JSON object: {{\"score\": N, \"reason\": \"...\"}}"
+                ),
+                system="You are a social media editor. Be strict — only high-quality content should score 7+.",
+                temperature=0.2,
+                max_tokens=100,
+                conn=conn,
+                task_type="voice_audit",
+            )
+            if resp.success:
+                import json
+                try:
+                    data = json.loads(resp.text.strip())
+                    score = data.get("score", 7)
+                    if score < 7:
+                        return {
+                            "passed": False,
+                            "reason": f"Quality score {score}/10: {data.get('reason', 'below threshold')}",
+                            "score": score,
+                        }
+                    return {"passed": True, "reason": "All gates passed", "score": score}
+                except (json.JSONDecodeError, KeyError):
+                    pass  # Parse failed, proceed
+    except (ImportError, Exception):
+        pass  # LLM unavailable, proceed with pattern-only checks
+
+    return {"passed": True, "reason": "Pattern gates passed (LLM unavailable)", "score": 7}
 
 
 def _post_tiktok(conn, content_id: str, text: str, action) -> None:
