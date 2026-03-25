@@ -5324,3 +5324,128 @@ def admin_price_sensitivity():
             return jsonify(result)
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
+
+
+# ── Marketing Approval Queue ─────────────────────────────────────────────
+
+@admin_bp.route("/api/admin/marketing/queue")
+@admin_required
+def admin_marketing_queue():
+    """Get pending marketing posts that need approval."""
+    with db.connection() as conn:
+        try:
+            rows = conn.execute("""
+                SELECT id, content_id, variant_id, platform, content_text,
+                       reason, status, submitted_at, reviewed_at, reviewer_note
+                FROM marketing_approval_queue
+                WHERE status = 'pending'
+                ORDER BY submitted_at DESC
+                LIMIT 50
+            """).fetchall()
+            return jsonify({"queue": [dict(r) for r in rows], "count": len(rows)})
+        except Exception as e:
+            return jsonify({"queue": [], "count": 0, "error": str(e)})
+
+
+@admin_bp.route("/api/admin/marketing/queue/all")
+@admin_required
+def admin_marketing_queue_all():
+    """Get all marketing queue items (including approved/rejected)."""
+    with db.connection() as conn:
+        try:
+            rows = conn.execute("""
+                SELECT id, content_id, variant_id, platform, content_text,
+                       reason, status, submitted_at, reviewed_at, reviewer_note
+                FROM marketing_approval_queue
+                ORDER BY submitted_at DESC
+                LIMIT 100
+            """).fetchall()
+            return jsonify({"queue": [dict(r) for r in rows], "count": len(rows)})
+        except Exception as e:
+            return jsonify({"queue": [], "count": 0, "error": str(e)})
+
+
+@admin_bp.route("/api/admin/marketing/queue/<int:queue_id>/approve", methods=["POST"])
+@admin_required
+def admin_marketing_approve(queue_id):
+    """Approve a queued marketing post."""
+    with db.connection() as conn:
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
+        note = request.json.get("note", "") if request.is_json else ""
+        conn.execute("""
+            UPDATE marketing_approval_queue
+            SET status = 'approved', reviewed_at = ?, reviewer_note = ?
+            WHERE id = ? AND status = 'pending'
+        """, (now, note, queue_id))
+        conn.commit()
+        return jsonify({"status": "approved", "queue_id": queue_id})
+
+
+@admin_bp.route("/api/admin/marketing/queue/<int:queue_id>/reject", methods=["POST"])
+@admin_required
+def admin_marketing_reject(queue_id):
+    """Reject a queued marketing post."""
+    with db.connection() as conn:
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
+        note = request.json.get("note", "") if request.is_json else ""
+        conn.execute("""
+            UPDATE marketing_approval_queue
+            SET status = 'rejected', reviewed_at = ?, reviewer_note = ?
+            WHERE id = ? AND status = 'pending'
+        """, (now, note, queue_id))
+        conn.commit()
+        return jsonify({"status": "rejected", "queue_id": queue_id})
+
+
+@admin_bp.route("/api/admin/marketing/posts")
+@admin_required
+def admin_marketing_posts():
+    """Get recent marketing post log with metrics."""
+    with db.connection() as conn:
+        try:
+            rows = conn.execute("""
+                SELECT pl.id, pl.content_id, pl.variant_id, pl.platform,
+                       pl.platform_post_id, pl.posted_at, pl.status, pl.error,
+                       pl.utm_campaign
+                FROM marketing_post_log pl
+                ORDER BY pl.posted_at DESC
+                LIMIT 50
+            """).fetchall()
+            return jsonify({"posts": [dict(r) for r in rows]})
+        except Exception as e:
+            return jsonify({"posts": [], "error": str(e)})
+
+
+@admin_bp.route("/api/admin/marketing/metrics")
+@admin_required
+def admin_marketing_metrics():
+    """Get marketing performance metrics summary."""
+    with db.connection() as conn:
+        try:
+            # Posts by platform
+            platform_stats = conn.execute("""
+                SELECT platform, COUNT(*) as total,
+                       SUM(CASE WHEN status = 'posted' THEN 1 ELSE 0 END) as successful
+                FROM marketing_post_log
+                GROUP BY platform
+            """).fetchall()
+
+            # Pending approvals count
+            pending = conn.execute(
+                "SELECT COUNT(*) as count FROM marketing_approval_queue WHERE status = 'pending'"
+            ).fetchone()
+
+            # LLM spend this month
+            llm_spend = conn.execute("""
+                SELECT COALESCE(SUM(cost_usd), 0) as total
+                FROM llm_cost_log
+                WHERE created_at > datetime('now', 'start of month')
+            """).fetchone()
+
+            return jsonify({
+                "platform_stats": [dict(r) for r in platform_stats] if platform_stats else [],
+                "pending_approvals": pending["count"] if pending else 0,
+                "llm_spend_this_month": round(llm_spend["total"], 2) if llm_spend else 0,
+            })
+        except Exception as e:
+            return jsonify({"error": str(e)})

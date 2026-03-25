@@ -217,6 +217,11 @@ def _process_action(conn, action) -> None:
         _queue_reddit(conn, content_id, text, action)
     elif action.platform == "newsletter":
         _send_newsletter(conn, content_id, text, action)
+    elif action.platform == "youtube":
+        # YouTube/TikTok/Reels — cross-post as TikTok carousel
+        _post_tiktok(conn, content_id, text, action)
+        # Also generate XHS bilingual version
+        _generate_xhs(conn, content_id, text)
     else:
         logger.debug("Platform '%s' not yet automated", action.platform)
 
@@ -403,10 +408,187 @@ def _collect_metrics(conn) -> None:
         logger.debug("Metrics collection failed", exc_info=True)
 
 
+def _post_tiktok(conn, content_id: str, text: str, action) -> None:
+    """Post to TikTok as a photo carousel (auto-generated from text)."""
+    try:
+        from ..marketing.social_tiktok import is_tiktok_configured, generate_carousel_from_text, post_carousel
+        if not is_tiktok_configured():
+            logger.debug("TikTok not configured, skipping")
+            return
+
+        image_urls = generate_carousel_from_text(text, conn=conn)
+        if not image_urls:
+            logger.debug("TikTok carousel generation failed for '%s'", content_id)
+            return
+
+        result = post_carousel(
+            title=content_id,
+            image_urls=image_urls,
+            description=text[:500],
+            hashtags=["LearnChinese", "MandarinChinese", "HSK", "ChineseLanguage"],
+        )
+        _log_post(conn, content_id, "tiktok", result.post_id if result.success else "",
+                  "posted" if result.success else "failed", result.error)
+    except Exception as e:
+        logger.debug("TikTok posting error: %s", e)
+
+
+def _generate_xhs(conn, content_id: str, text: str) -> None:
+    """Generate bilingual XHS post and queue for manual posting."""
+    try:
+        from ..marketing.social_xhs import generate_xhs_post
+        queue_id = generate_xhs_post(conn, text, content_id=content_id)
+        if queue_id:
+            _notify_approval_needed(conn, queue_id, "xhs", content_id)
+    except Exception as e:
+        logger.debug("XHS generation error: %s", e)
+
+
 def _run_weekly_optimization(conn) -> None:
-    """Weekly optimization cycle — extract patterns, generate variants."""
+    """Weekly optimization cycle — extract patterns, generate variants, evaluate channels."""
     try:
         from ..marketing.content_optimizer import run_optimization_cycle
         run_optimization_cycle(conn)
     except (ImportError, Exception) as e:
         logger.debug("Weekly optimization skipped: %s", e)
+
+    # Run channel strategy evaluation
+    try:
+        _evaluate_channel_strategy(conn)
+    except (ImportError, Exception) as e:
+        logger.debug("Channel strategy evaluation skipped: %s", e)
+
+
+def _evaluate_channel_strategy(conn) -> None:
+    """Use LLM to evaluate if current channel mix is optimal.
+
+    Analyzes performance data and recommends:
+    - New channels to try
+    - Channels to stop (low ROI)
+    - Whether paid social/search has a business case
+    - Emerging platforms relevant to Mandarin learners
+
+    Results queued as an email digest to the admin.
+    """
+    try:
+        from ..ai.ollama_client import generate as llm_generate
+    except ImportError:
+        return
+
+    # Gather performance data
+    try:
+        channel_data = conn.execute("""
+            SELECT
+                platform,
+                COUNT(*) as posts,
+                SUM(CASE WHEN status = 'posted' THEN 1 ELSE 0 END) as successful,
+                MAX(posted_at) as last_post
+            FROM marketing_post_log
+            GROUP BY platform
+        """).fetchall()
+
+        metrics_data = conn.execute("""
+            SELECT
+                pl.platform,
+                cm.metric_type,
+                AVG(cm.metric_value) as avg_value
+            FROM marketing_content_metrics cm
+            JOIN marketing_post_log pl ON pl.id = cm.post_log_id
+            GROUP BY pl.platform, cm.metric_type
+        """).fetchall()
+    except Exception:
+        channel_data = []
+        metrics_data = []
+
+    channel_summary = "\n".join(
+        f"- {r['platform']}: {r['posts']} posts, {r['successful']} successful, last: {r['last_post']}"
+        for r in channel_data
+    ) if channel_data else "No posts yet."
+
+    metrics_summary = "\n".join(
+        f"- {r['platform']} {r['metric_type']}: avg {r['avg_value']:.1f}"
+        for r in metrics_data
+    ) if metrics_data else "No metrics yet."
+
+    resp = llm_generate(
+        prompt=(
+            f"You are a marketing strategist for Aelu, a Mandarin Chinese learning app. "
+            f"Analyze the current channel performance and recommend optimizations.\n\n"
+            f"Current channels and performance:\n{channel_summary}\n\n"
+            f"Engagement metrics:\n{metrics_summary}\n\n"
+            f"Currently active: Twitter, Reddit, Newsletter, TikTok, Xiaohongshu (manual)\n"
+            f"Pricing: $14.99/month, free tier for HSK 1-2\n"
+            f"Target audience: Self-study adults (25-45) learning Mandarin\n\n"
+            f"Evaluate:\n"
+            f"1. Are we on the right platforms? What should we add/drop?\n"
+            f"2. Should we consider paid social or paid search? Make the business case with estimated CAC vs LTV.\n"
+            f"3. Any emerging platforms or communities we're missing?\n"
+            f"4. Specific tactical recommendations for next week.\n\n"
+            f"Respond with JSON: {{"
+            f"\"channel_recommendations\": [{{\"action\": \"add/keep/drop/test\", \"channel\": \"...\", \"reason\": \"...\", \"priority\": \"high/medium/low\"}}],"
+            f"\"paid_recommendation\": {{\"should_test\": true/false, \"estimated_cac\": \"$X\", \"reasoning\": \"...\"}},"
+            f"\"tactical_actions\": [\"...\"]"
+            f"}}"
+        ),
+        system="You are a data-driven marketing strategist. Be specific and actionable.",
+        temperature=0.4,
+        max_tokens=1024,
+        conn=conn,
+        task_type="experiment_design",
+    )
+
+    if not resp.success:
+        return
+
+    # Email the strategy digest
+    try:
+        import resend
+        resend.api_key = os.environ.get("RESEND_API_KEY", "")
+        notify_email = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
+        from_email = os.environ.get("FROM_EMAIL", "")
+
+        if resend.api_key and notify_email and from_email:
+            # Format nicely
+            import json
+            try:
+                data = json.loads(resp.text.strip())
+                channels = data.get("channel_recommendations", [])
+                paid = data.get("paid_recommendation", {})
+                tactics = data.get("tactical_actions", [])
+
+                channels_html = "".join(
+                    f"<li><strong>{c.get('action', '').upper()}</strong> {c.get('channel', '')}: "
+                    f"{c.get('reason', '')} (priority: {c.get('priority', '')})</li>"
+                    for c in channels
+                )
+                tactics_html = "".join(f"<li>{t}</li>" for t in tactics)
+                paid_html = (
+                    f"<p><strong>Should test paid?</strong> {'Yes' if paid.get('should_test') else 'No'}<br>"
+                    f"Estimated CAC: {paid.get('estimated_cac', 'N/A')}<br>"
+                    f"Reasoning: {paid.get('reasoning', 'N/A')}</p>"
+                )
+
+                resend.Emails.send({
+                    "from": from_email,
+                    "to": [notify_email],
+                    "subject": "[Aelu] Weekly Marketing Strategy Digest",
+                    "html": (
+                        f"<h2>Weekly Channel Strategy Review</h2>"
+                        f"<h3>Channel Recommendations</h3><ul>{channels_html}</ul>"
+                        f"<h3>Paid Media Assessment</h3>{paid_html}"
+                        f"<h3>Tactical Actions for Next Week</h3><ul>{tactics_html}</ul>"
+                        f"<hr><p><em>Auto-generated by Aelu marketing intelligence. "
+                        f"Review approval queue at <a href='https://aeluapp.com/admin'>admin</a>.</em></p>"
+                    ),
+                })
+                logger.info("Channel strategy digest sent")
+            except (json.JSONDecodeError, Exception):
+                # Send raw text if JSON parse fails
+                resend.Emails.send({
+                    "from": from_email,
+                    "to": [notify_email],
+                    "subject": "[Aelu] Weekly Marketing Strategy Digest",
+                    "html": f"<pre>{resp.text[:3000]}</pre>",
+                })
+    except (ImportError, Exception) as e:
+        logger.debug("Strategy digest email failed: %s", e)
