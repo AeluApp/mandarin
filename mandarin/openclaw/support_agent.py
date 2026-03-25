@@ -12,7 +12,7 @@ import json
 import logging
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ class SupportContext:
     recent_client_errors: int = 0
 
     @classmethod
-    def from_user(cls, conn, user_id: int) -> "SupportContext":
+    def from_user(cls, conn, user_id: int) -> SupportContext:
         user = conn.execute(
             "SELECT email, subscription_tier, created_at FROM user WHERE id = ?",
             (user_id,),
@@ -46,7 +46,7 @@ class SupportContext:
         if user["created_at"]:
             try:
                 created = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
-                age = (datetime.now(timezone.utc) - created).days
+                age = (datetime.now(UTC) - created).days
             except (ValueError, TypeError):
                 pass
 
@@ -104,7 +104,7 @@ class SupportResponse:
     confidence: float
     category: str
     escalate: bool = False
-    context: Optional[SupportContext] = None
+    context: SupportContext | None = None
     suggested_actions: list[str] = field(default_factory=list)
 
 
@@ -223,7 +223,7 @@ class SupportKnowledge:
             for e in self.entries
         ]
 
-    def find_match(self, message: str) -> tuple[Optional[dict], float]:
+    def find_match(self, message: str) -> tuple[dict | None, float]:
         """Find best FAQ match. Returns (entry, confidence) or (None, 0)."""
         best_match = None
         best_score = 0.0
@@ -266,11 +266,11 @@ class SupportKnowledge:
 class SupportAgent:
     """Automated customer support with escalation."""
 
-    def __init__(self, knowledge: Optional[SupportKnowledge] = None):
+    def __init__(self, knowledge: SupportKnowledge | None = None):
         self.knowledge = knowledge or SupportKnowledge()
 
     def handle_request(
-        self, message: str, user_id: Optional[int] = None, conn=None
+        self, message: str, user_id: int | None = None, conn=None
     ) -> SupportResponse:
         context = None
         if user_id and conn:
@@ -304,7 +304,7 @@ class SupportAgent:
 
         return response
 
-    def _personalize(self, answer: str, context: Optional[SupportContext]) -> str:
+    def _personalize(self, answer: str, context: SupportContext | None) -> str:
         if not context:
             return answer
         # Add context-specific notes
@@ -312,7 +312,7 @@ class SupportAgent:
             answer += "\n\nYou're currently on the free tier."
         return answer
 
-    def _suggest_actions(self, match: dict, context: Optional[SupportContext]) -> list[str]:
+    def _suggest_actions(self, match: dict, context: SupportContext | None) -> list[str]:
         actions = []
         cat = match["category"]
         if cat == "technical" and context and context.recent_crashes > 0:
@@ -324,7 +324,7 @@ class SupportAgent:
         return actions
 
     def _should_escalate(
-        self, message: str, response: SupportResponse, context: Optional[SupportContext]
+        self, message: str, response: SupportResponse, context: SupportContext | None
     ) -> bool:
         if response.confidence < 0.5:
             return True

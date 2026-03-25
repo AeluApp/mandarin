@@ -6,7 +6,7 @@ Tables used: content_item, review_event, error_log, session_log, learner_profile
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 import numpy as np
@@ -97,7 +97,7 @@ def extract_learner_state_features(conn: sqlite3.Connection, user_id: int = 1) -
         return sum(r['correct'] for r in subset) / len(subset) if subset else 0.5
 
     # Session fatigue
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     today = now.strftime("%Y-%m-%d")
     today_row = conn.execute("""
         SELECT COUNT(*) as cnt,
@@ -160,7 +160,7 @@ def extract_item_learner_features(
     if history['last_reviewed_at']:
         try:
             last_dt = datetime.fromisoformat(history['last_reviewed_at'])
-            days_since = max(0, (datetime.now(timezone.utc) - last_dt).days)
+            days_since = max(0, (datetime.now(UTC) - last_dt).days)
         except (ValueError, TypeError):
             pass
 
@@ -204,7 +204,7 @@ def extract_session_context_features(
         WHERE session_id = ?
     """, (session_id,)).fetchone()
 
-    hour = datetime.now(timezone.utc).hour
+    hour = datetime.now(UTC).hour
 
     if 6 <= hour <= 10:
         tod_factor = 1.0

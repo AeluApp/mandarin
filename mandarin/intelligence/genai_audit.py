@@ -34,7 +34,7 @@ def analyze_corpus_coverage_findings(conn) -> list[dict]:
     for level, count in hsk_dist.items():
         unreview_count = unreviewed.get(level, 0)
         if unreview_count > 0:
-            pct = round(unreview_count / count * 100, 1) if count > 0 else 100.0
+            round(unreview_count / count * 100, 1) if count > 0 else 100.0
             findings.append(_finding(
                 "genai_governance", "medium",
                 f"HSK {level}: {unreview_count} AI-generated items pending review",

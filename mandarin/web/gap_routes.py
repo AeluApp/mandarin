@@ -11,6 +11,7 @@ from flask_login import current_user
 from .. import db
 from .api_errors import api_error_handler
 from .middleware import _get_user_id, _compute_streak
+from datetime import UTC
 
 logger = logging.getLogger(__name__)
 
@@ -146,9 +147,9 @@ def api_widget_data():
                 from datetime import datetime, timezone
                 try:
                     next_dt = datetime.fromisoformat(next_row["next_due"])
-                    now = datetime.now(timezone.utc)
+                    now = datetime.now(UTC)
                     if next_dt.tzinfo is None:
-                        next_dt = next_dt.replace(tzinfo=timezone.utc)
+                        next_dt = next_dt.replace(tzinfo=UTC)
                     diff = (next_dt - now).total_seconds() / 60
                     next_review_minutes = max(0, round(diff))
                 except (ValueError, TypeError):

@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 import logging
 import math
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # SCRUM: Sprint Management
 # ═══════════════════════════════════════════════════════════════════════
 
-def get_current_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
+def get_current_sprint(conn, user_id: int = 1) -> dict[str, Any] | None:
     """Get the current active sprint for a user."""
     try:
         row = conn.execute("""
@@ -34,7 +34,7 @@ def get_current_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
         return None
 
 
-def get_sprint_history(conn, user_id: int = 1, limit: int = 10) -> List[Dict[str, Any]]:
+def get_sprint_history(conn, user_id: int = 1, limit: int = 10) -> list[dict[str, Any]]:
     """Get completed sprints for velocity tracking."""
     try:
         rows = conn.execute("""
@@ -47,7 +47,7 @@ def get_sprint_history(conn, user_id: int = 1, limit: int = 10) -> List[Dict[str
         return []
 
 
-def auto_create_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
+def auto_create_sprint(conn, user_id: int = 1) -> dict[str, Any] | None:
     """Auto-create a sprint when a new week (Monday) starts.
 
     Sprint goal is computed from current queue state:
@@ -161,7 +161,7 @@ def estimate_item_points(item: dict) -> int:
         return 8
 
 
-def complete_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
+def complete_sprint(conn, user_id: int = 1) -> dict[str, Any] | None:
     """Complete the current sprint with a review summary.
 
     Computes:
@@ -189,9 +189,9 @@ def complete_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
         sessions = (session_row["sessions"] or 0) if session_row else 0
         completed = (session_row["completed"] or 0) if session_row else 0
         correct = (session_row["correct"] or 0) if session_row else 0
-        planned_sessions = (session_row["planned"] or 0) if session_row else 0
+        (session_row["planned"] or 0) if session_row else 0
     except Exception:
-        sessions = completed = correct = planned_sessions = 0
+        sessions = completed = correct = 0
 
     velocity = round(completed / max(sessions, 1), 1)
     accuracy = round(correct / max(completed, 1), 4)
@@ -231,7 +231,7 @@ def complete_sprint(conn, user_id: int = 1) -> Optional[Dict[str, Any]]:
     return retro
 
 
-def get_sprint_velocity(conn, user_id: int = 1, sprints: int = 6) -> Dict[str, Any]:
+def get_sprint_velocity(conn, user_id: int = 1, sprints: int = 6) -> dict[str, Any]:
     """Compute velocity trend from completed sprints."""
     history = get_sprint_history(conn, user_id, limit=sprints)
     if not history:
@@ -261,7 +261,7 @@ def get_sprint_velocity(conn, user_id: int = 1, sprints: int = 6) -> Dict[str, A
 # ═══════════════════════════════════════════════════════════════════════
 
 def generate_session_retrospective(conn, session_id: int,
-                                   user_id: int = 1) -> Dict[str, Any]:
+                                   user_id: int = 1) -> dict[str, Any]:
     """Generate a mini-retrospective after a session.
 
     Agile: What went well, what didn't, what to change.
@@ -334,7 +334,7 @@ def generate_session_retrospective(conn, session_id: int,
         "went_well": went_well,
         "didnt_go_well": didnt_go_well,
         "changes": changes,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
     }
 
     # Store on session_log
@@ -404,7 +404,7 @@ def calculate_wsjf(item: dict) -> float:
     return round(wsjf, 2)
 
 
-def rank_content_backlog(conn, user_id: int = 1, limit: int = 50) -> List[Dict[str, Any]]:
+def rank_content_backlog(conn, user_id: int = 1, limit: int = 50) -> list[dict[str, Any]]:
     """Rank the content backlog by WSJF priority.
 
     Returns items sorted by WSJF score (descending) — highest priority first.
@@ -485,12 +485,12 @@ RISK_TAXONOMY = {
 }
 
 
-def get_risk_taxonomy() -> Dict[str, Any]:
+def get_risk_taxonomy() -> dict[str, Any]:
     """Return the risk taxonomy definition."""
     return RISK_TAXONOMY
 
 
-def run_risk_review(conn, user_id: int = 1) -> List[Dict[str, Any]]:
+def run_risk_review(conn, user_id: int = 1) -> list[dict[str, Any]]:
     """Run an automated risk assessment using system data.
 
     Spiral: After every N sessions, identify items with:
@@ -659,7 +659,7 @@ def run_risk_review(conn, user_id: int = 1) -> List[Dict[str, Any]]:
     return risks
 
 
-def get_risk_summary(conn, user_id: int = 1, days: int = 30) -> Dict[str, Any]:
+def get_risk_summary(conn, user_id: int = 1, days: int = 30) -> dict[str, Any]:
     """Summarize risk events for the admin dashboard."""
     try:
         rows = conn.execute("""

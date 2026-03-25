@@ -4,13 +4,13 @@ from __future__ import annotations
 import logging
 import math
 import random
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
 
-def _percentiles(values: List[float], ps: List[int]) -> Dict[str, float]:
+def _percentiles(values: list[float], ps: list[int]) -> dict[str, float]:
     """Compute percentiles from a sorted-able list."""
     if not values:
         return {f"p{p}": 0.0 for p in ps}
@@ -40,16 +40,16 @@ def _normal_sample(mean: float, std: float, rng: random.Random) -> float:
 
 def simulate_user_growth(
     conn, months: int = 12, n_simulations: int = 10000
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Monte Carlo simulation of user growth over future months.
 
     Uses current monthly signup rate and observed variance.
     Applies monthly churn rate based on recent data.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Gather monthly signup counts for the last 6 months
-    monthly_signups: List[float] = []
+    monthly_signups: list[float] = []
     for i in range(6, 0, -1):
         start = (now - timedelta(days=30 * i)).isoformat()
         end = (now - timedelta(days=30 * (i - 1))).isoformat()
@@ -98,9 +98,9 @@ def simulate_user_growth(
     rng = random.Random(42)
 
     # Run simulations
-    final_totals: List[float] = []
+    final_totals: list[float] = []
     # Store monthly projections for percentile bands
-    monthly_totals: List[List[float]] = [[] for _ in range(months)]
+    monthly_totals: list[list[float]] = [[] for _ in range(months)]
 
     for _ in range(n_simulations):
         current = float(total_users)
@@ -134,13 +134,13 @@ def simulate_user_growth(
 
 def simulate_server_load(
     conn, target_users: int, n_simulations: int = 10000
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Simulate concurrent session load for a target user count.
 
     Models concurrent sessions based on current usage patterns.
     SQLite practical limit ~100 concurrent connections.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     cutoff = (now - timedelta(days=30)).isoformat()
 
     # Average sessions per user per day
@@ -160,14 +160,14 @@ def simulate_server_load(
     avg_duration_s = (row["avg_dur"] if row else 0) or 600  # Default 10 min
 
     sessions_per_user_per_day = (total_sessions / distinct_users / 30.0) if distinct_users > 0 else 1.0
-    avg_duration_hours = avg_duration_s / 3600.0
+    avg_duration_s / 3600.0
 
     # Active hours in a day (assume 16-hour window)
     active_hours = 16.0
 
     rng = random.Random(42)
-    max_concurrent_list: List[float] = []
-    avg_concurrent_list: List[float] = []
+    max_concurrent_list: list[float] = []
+    avg_concurrent_list: list[float] = []
 
     for _ in range(n_simulations):
         # Each user starts a session with probability sessions_per_user_per_day
@@ -192,8 +192,8 @@ def simulate_server_load(
         dur_hours = [d / 3600.0 for d in durations]
 
         # Sweep to find max concurrent
-        events: List[tuple[float, int]] = []
-        for s, d in zip(starts, dur_hours):
+        events: list[tuple[float, int]] = []
+        for s, d in zip(starts, dur_hours, strict=False):
             events.append((s, 1))
             events.append((s + d, -1))
         events.sort()
@@ -233,15 +233,15 @@ def simulate_server_load(
 
 def simulate_review_queue(
     conn,
-    user_id: Optional[int] = None,
+    user_id: int | None = None,
     days: int = 30,
     n_simulations: int = 1000,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Simulate daily review queue sizes based on current SRS patterns.
 
     Uses recent review rates and half-lives to project daily due items.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     cutoff = (now - timedelta(days=30)).isoformat()
 
     # Get current queue characteristics
@@ -292,11 +292,11 @@ def simulate_review_queue(
     rng = random.Random(42)
 
     # Simulate daily review counts over the projection period
-    daily_projections: List[List[float]] = [[] for _ in range(days)]
+    daily_projections: list[list[float]] = [[] for _ in range(days)]
 
     for _ in range(n_simulations):
         # Slight growth factor: items accumulate over time
-        base_items = float(unique_items) if unique_items > 0 else 10.0
+        float(unique_items) if unique_items > 0 else 10.0
         for d in range(days):
             # Growth: ~1 new item every 2 days
             growth = d * 0.5

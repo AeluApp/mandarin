@@ -6,7 +6,7 @@ import hashlib
 import logging
 import secrets
 import sqlite3
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 import jwt
 
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 def create_access_token(user_id: int) -> str:
     """Create a signed JWT access token (HS256, configurable expiry)."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     payload = {
         "sub": str(user_id),
         "iat": now,
@@ -70,7 +70,7 @@ def create_refresh_token() -> tuple[str, str]:
 
 def store_refresh_token(conn: sqlite3.Connection, user_id: int, token_hash: str) -> None:
     """Store a refresh token hash for a user. Replaces any existing token."""
-    expires = (datetime.now(timezone.utc) + timedelta(days=JWT_REFRESH_EXPIRY_DAYS)).strftime(
+    expires = (datetime.now(UTC) + timedelta(days=JWT_REFRESH_EXPIRY_DAYS)).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
     conn.execute(
@@ -98,8 +98,8 @@ def validate_refresh_token(conn: sqlite3.Connection, raw_token: str) -> int | No
     expires_str = row["refresh_token_expires"]
     if expires_str:
         try:
-            expires = datetime.strptime(expires_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-            if datetime.now(timezone.utc) > expires:
+            expires = datetime.strptime(expires_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=UTC)
+            if datetime.now(UTC) > expires:
                 logger.info("Refresh token expired for user_id=%d", row["id"])
                 return None
         except (ValueError, TypeError):

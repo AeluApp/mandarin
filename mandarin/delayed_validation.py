@@ -17,7 +17,7 @@ from __future__ import annotations
 import logging
 import random
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ def schedule_validation_checks(conn: sqlite3.Connection,
     if mastery_stage not in PROMOTION_STAGES:
         return 0
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     scheduled = 0
 
     for delay in VALIDATION_DELAYS:
@@ -122,7 +122,7 @@ def schedule_validations_for_recent_promotions(conn: sqlite3.Connection,
 
 def get_due_validations(conn: sqlite3.Connection,
                         user_id: int = 1,
-                        limit: int = 3) -> List[Dict[str, Any]]:
+                        limit: int = 3) -> list[dict[str, Any]]:
     """Get validation checks that are due for administration.
 
     Returns validation records enriched with content_item data.
@@ -130,7 +130,7 @@ def get_due_validations(conn: sqlite3.Connection,
     if not _table_exists(conn, "counter_metric_delayed_validation"):
         return []
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     rows = conn.execute("""
         SELECT dv.*, ci.hanzi, ci.pinyin, ci.english, ci.difficulty
         FROM counter_metric_delayed_validation dv
@@ -145,7 +145,7 @@ def get_due_validations(conn: sqlite3.Connection,
     return [dict(r) for r in rows]
 
 
-def pick_validation_drill_type(item: Dict[str, Any], delay_days: int) -> str:
+def pick_validation_drill_type(item: dict[str, Any], delay_days: int) -> str:
     """Pick a drill type for a validation check.
 
     Uses harder drills for longer delays — if you truly mastered it,
@@ -160,7 +160,7 @@ def pick_validation_drill_type(item: Dict[str, Any], delay_days: int) -> str:
 
 
 def get_session_validations(conn: sqlite3.Connection,
-                            user_id: int = 1) -> List[Dict[str, Any]]:
+                            user_id: int = 1) -> list[dict[str, Any]]:
     """Get validation probes to inject into a session.
 
     Returns a list of validation specs ready for the drill runner:
@@ -194,9 +194,9 @@ def get_session_validations(conn: sqlite3.Connection,
 def record_validation_result(conn: sqlite3.Connection,
                               validation_id: int,
                               correct: bool,
-                              response_ms: Optional[int] = None,
-                              session_id: Optional[int] = None,
-                              drill_type: Optional[str] = None) -> None:
+                              response_ms: int | None = None,
+                              session_id: int | None = None,
+                              drill_type: str | None = None) -> None:
     """Record the result of a delayed validation check.
 
     IMPORTANT: This writes to counter_metric_delayed_validation only.
@@ -205,7 +205,7 @@ def record_validation_result(conn: sqlite3.Connection,
     if not _table_exists(conn, "counter_metric_delayed_validation"):
         return
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     conn.execute("""
         UPDATE counter_metric_delayed_validation
         SET status = 'completed',
@@ -222,7 +222,7 @@ def record_validation_result(conn: sqlite3.Connection,
 
 def get_validation_summary(conn: sqlite3.Connection,
                            user_id: int = 1,
-                           window_days: int = 90) -> Dict[str, Any]:
+                           window_days: int = 90) -> dict[str, Any]:
     """Summarize delayed validation performance for a user.
 
     Returns accuracy overall and by delay bracket.
@@ -244,7 +244,7 @@ def get_validation_summary(conn: sqlite3.Connection,
     total = len(rows)
     correct = sum(1 for r in rows if r["correct"])
 
-    by_delay: Dict[int, Dict[str, int]] = {}
+    by_delay: dict[int, dict[str, int]] = {}
     for r in rows:
         d = r["delay_days"]
         if d not in by_delay:

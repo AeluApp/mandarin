@@ -7,7 +7,7 @@
 
 import logging
 import threading
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .. import db
 from ..scheduler_lock import acquire_lock, release_lock
@@ -41,7 +41,7 @@ def stop():
 
 def _seconds_until_next_run(target_hour: int = 3) -> int:
     """Seconds until the next occurrence of target_hour UTC."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     target = now.replace(hour=target_hour, minute=0, second=0, microsecond=0)
     if now >= target:
         target = target.replace(day=target.day + 1)
@@ -87,7 +87,7 @@ def _run_loop():
 
 def _intelligence_tick(conn):
     """Single nightly tick."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
     actions = []
 

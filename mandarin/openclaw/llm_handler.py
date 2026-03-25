@@ -78,7 +78,7 @@ def classify_intent(text: str, conn=None, user_id: str = "") -> IntentResult:
     return _classify_with_keywords(text)
 
 
-def _classify_with_llm(text: str, conn=None, user_id: str = "") -> Optional[IntentResult]:
+def _classify_with_llm(text: str, conn=None, user_id: str = "") -> IntentResult | None:
     """Use Ollama to classify intent."""
     intents_str = "\n".join(f"- {k}: {v}" for k, v in INTENTS.items())
     system = SYSTEM_PROMPT.format(intents=intents_str)

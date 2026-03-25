@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, date, timezone
+from datetime import datetime, date, timezone, UTC
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -139,7 +139,7 @@ def _compute_srs_update(row: dict, correct: bool, confidence: str,
     # Cap interval to MAX_INTERVAL to prevent unbounded scheduling
     interval = min(interval, MAX_INTERVAL)
 
-    next_review = (datetime.now(timezone.utc) + timedelta(days=interval)).date().isoformat()
+    next_review = (datetime.now(UTC) + timedelta(days=interval)).date().isoformat()
 
     return {
         "ease": ease,

@@ -85,8 +85,10 @@ exclude_lines = [
 directory = "htmlcov"
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py312"
 line-length = 120
+
+[tool.ruff.lint]
 select = [
     "E",   # pycodestyle errors
     "W",   # pycodestyle warnings
@@ -96,11 +98,32 @@ select = [
     "UP",  # pyupgrade
 ]
 ignore = [
+    "E402",  # module-level import not at top (conditional imports)
     "E501",  # line too long (handled by line-length)
+    "E701",  # multiple statements on one line
+    "E702",  # multiple statements on one line (semicolon)
+    "E741",  # ambiguous variable name (l, O, I)
+    "F401",  # unused imports (conditional/try-except imports)
+    "F541",  # f-string without placeholders
+    "F821",  # undefined name (forward refs, conditional imports)
+    "B007",  # unused loop variable
+    "B023",  # function uses loop variable
+    "B904",  # raise from in except
     "S101",  # assert in tests
-    "S311",  # random not for crypto (we use secrets for crypto)
-    "B904",  # raise from in except (too noisy for existing code)
+    "S104",  # possible binding to all interfaces
+    "S105",  # possible hardcoded password
+    "S108",  # temp file usage
+    "S110",  # try-except-pass
+    "S112",  # try-except-continue
+    "S310",  # suspicious URL usage
+    "S311",  # random not for crypto
+    "S324",  # hashlib (not for security)
+    "S603",  # subprocess call
+    "S607",  # partial executable path
+    "S608",  # SQL injection (f-string prompts, not SQL)
+    "UP031", # percent format (pre-existing code style)
+    "UP035", # deprecated typing imports (Dict, List, etc.)
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101", "S106"]

@@ -11,7 +11,7 @@ import logging
 import re
 import subprocess
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 from typing import Optional
 
@@ -199,7 +199,7 @@ class ChangelogDrafter:
     ) -> ChangelogEntry:
         sections: dict[str, list[str]] = {}
 
-        for commit, cat in zip(commits, classifications):
+        for commit, cat in zip(commits, classifications, strict=False):
             if not ChangeClassifier.is_user_facing(cat):
                 continue
             human = self._humanize_commit(commit, cat)
@@ -210,7 +210,7 @@ class ChangelogDrafter:
             sections[key] = list(dict.fromkeys(sections[key]))
 
         summary = self._generate_summary(sections)
-        date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        date = datetime.now(UTC).strftime("%Y-%m-%d")
 
         return ChangelogEntry(
             date=date, version_hint="", sections=sections,
@@ -299,7 +299,7 @@ class ChangelogManager:
         self.drafter = ChangelogDrafter()
         self.formatter = ChangelogFormatter()
 
-    def generate(self, since: str = "1 week ago") -> Optional[ChangelogEntry]:
+    def generate(self, since: str = "1 week ago") -> ChangelogEntry | None:
         commits = self.parser.parse_recent(self.repo_path, since)
         if not commits:
             return None

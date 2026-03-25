@@ -3,7 +3,7 @@
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
@@ -271,7 +271,7 @@ def api_grammar_progress():
     if not grammar_point_id or not isinstance(grammar_point_id, int):
         return jsonify({"error": "grammar_point_id (integer) is required"}), 400
 
-    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     with db.connection() as conn:
         # Verify the grammar point exists
@@ -330,7 +330,7 @@ def api_grammar_practice():
             return jsonify({"error": "Grammar point not found"}), 404
 
         # Ensure grammar_progress row exists
-        now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO grammar_progress (user_id, grammar_point_id, studied_at)
             VALUES (?, ?, ?)

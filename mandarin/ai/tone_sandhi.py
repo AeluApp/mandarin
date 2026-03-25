@@ -120,7 +120,7 @@ def _split_pinyin_syllables(pinyin_str: str) -> list[str]:
     return syllables if syllables else [pinyin_str]
 
 
-def _get_tone_sequence(hanzi: str, pinyin_str: Optional[str] = None) -> list[int]:
+def _get_tone_sequence(hanzi: str, pinyin_str: str | None = None) -> list[int]:
     """Get a list of tone numbers for each syllable.
 
     Uses the provided pinyin if available, otherwise falls back to pypinyin.
@@ -195,7 +195,7 @@ def classify_sandhi_context(hanzi: str, pinyin_str: str = "") -> list[dict]:
             tone_i = tones[i]
             next_tone = tones[i + 1] if i + 1 < len(tones) else None
             syl = syllables[i] if i < len(syllables) else ""
-            next_syl = syllables[i + 1] if i + 1 < len(syllables) else ""
+            syllables[i + 1] if i + 1 < len(syllables) else ""
 
             # Rule 1: 3rd + 3rd -> 2nd + 3rd
             if tone_i == 3 and next_tone == 3:
@@ -373,7 +373,7 @@ def generate_sandhi_drill(
             "rule_name": "",
         }
 
-    original = primary["original_pinyin"]
+    primary["original_pinyin"]
     actual = primary["actual_pinyin"]
     rule_info = SANDHI_RULES.get(rule_name, {})
 

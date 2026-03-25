@@ -48,7 +48,7 @@ def detect_out_of_control(data_points: list[float], limits: dict) -> list[dict]:
     if sigma <= 0:
         return violations
 
-    n = len(data_points)
+    len(data_points)
 
     for i, x in enumerate(data_points):
         z = (x - cl) / sigma
@@ -209,15 +209,15 @@ def get_spc_charts(conn) -> dict:
 # methodology modules that import the legacy API.
 # ---------------------------------------------------------------------------
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List
 
 _D2 = 1.128
 
 
-def collect_observations(conn, chart_type: str, days: int = 30) -> List[float]:
+def collect_observations(conn, chart_type: str, days: int = 30) -> list[float]:
     """Collect daily observations for the given chart type (legacy API)."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     if chart_type == "drill_accuracy":
         rows = conn.execute(
@@ -281,8 +281,8 @@ def collect_observations(conn, chart_type: str, days: int = 30) -> List[float]:
 
 
 def calculate_control_limits(
-    values: List[float], subgroup_size: int = 1
-) -> Dict[str, Any]:
+    values: list[float], subgroup_size: int = 1
+) -> dict[str, Any]:
     """Calculate control limits for an individuals (I-MR) chart (legacy API)."""
     if not values:
         return {
@@ -313,13 +313,13 @@ def calculate_control_limits(
 
 
 def _legacy_detect_ooc(
-    values: List[float], center_line: float, ucl: float, lcl: float,
-) -> List[Dict[str, Any]]:
+    values: list[float], center_line: float, ucl: float, lcl: float,
+) -> list[dict[str, Any]]:
     """Legacy out-of-control detection (rules 1-4 with original signatures)."""
     if len(values) < 2:
         return []
 
-    violations: List[Dict[str, Any]] = []
+    violations: list[dict[str, Any]] = []
     sigma = (ucl - center_line) / 3.0 if ucl != center_line else 0.0
 
     for i, v in enumerate(values):
@@ -377,7 +377,7 @@ def _legacy_detect_ooc(
     return violations
 
 
-def get_spc_chart_data(conn, chart_type: str, days: int = 30) -> Dict[str, Any]:
+def get_spc_chart_data(conn, chart_type: str, days: int = 30) -> dict[str, Any]:
     """Full SPC chart data for a given metric (legacy API)."""
     observations = collect_observations(conn, chart_type, days)
     limits = calculate_control_limits(observations)
@@ -391,14 +391,14 @@ def get_spc_chart_data(conn, chart_type: str, days: int = 30) -> Dict[str, Any]:
     }
 
 
-def compute_spc_chart(conn, chart_type: str, days: int = 30) -> Dict[str, Any]:
+def compute_spc_chart(conn, chart_type: str, days: int = 30) -> dict[str, Any]:
     """Alias for get_spc_chart_data (legacy API)."""
     result = get_spc_chart_data(conn, chart_type, days)
     result["out_of_control"] = result["status"] == "out_of_control"
     return result
 
 
-def observe(conn, chart_type: str, days: int = 30) -> Optional[float]:
+def observe(conn, chart_type: str, days: int = 30) -> float | None:
     """Return the latest observation value for chart_type (legacy API)."""
     observations = collect_observations(conn, chart_type, days)
     return observations[-1] if observations else None

@@ -12,7 +12,7 @@ import logging
 import math
 import sqlite3
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from uuid import uuid4
 
 from ._base import (
@@ -73,7 +73,7 @@ def verify_recommendation_outcomes(conn) -> list[dict]:
             try:
                 # Check if enough time has passed for this dimension
                 created_dt = _dt.datetime.fromisoformat(created.replace("Z", "+00:00"))
-                now = _dt.datetime.now(_dt.timezone.utc)
+                now = _dt.datetime.now(_dt.UTC)
                 if (now - created_dt).days >= window_days:
                     filtered.append(row)
             except (ValueError, TypeError):
@@ -546,7 +546,6 @@ def compute_power_analysis(conn, experiment_id: int) -> dict:
     Reports current power and additional assignments needed.
     """
     MDE = 0.05  # minimum detectable effect = 5 percentage points
-    ALPHA = 0.05
     POWER_TARGET = 0.80
     Z_ALPHA = 1.96  # two-tailed
     Z_BETA = 0.84   # 80% power
@@ -650,7 +649,7 @@ def emit_prediction(conn, finding_id, model_id: str, dimension: str,
         )
 
     prediction_id = str(uuid4())
-    due_at = (datetime.now(timezone.utc) + timedelta(days=window_days)).strftime("%Y-%m-%d %H:%M:%S")
+    due_at = (datetime.now(UTC) + timedelta(days=window_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     if predicted_delta > 0:
         claim_type = "metric_will_improve"
@@ -689,7 +688,7 @@ def record_prediction_outcomes(conn) -> list[dict]:
 
     Returns list of outcome dicts.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     results = []
 
     due = _safe_query_all(conn, """
@@ -806,7 +805,7 @@ def expire_stale_predictions(conn) -> int:
     Increments measurement_failure_count on the model.
     Returns count of expired predictions.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     expired = _safe_query_all(conn, """
         SELECT id, model_id, dimension FROM pi_prediction_ledger
@@ -914,7 +913,7 @@ def _compute_override_accuracy(conn, lookback_days: int = 30) -> dict:
     - human += 1 when override was applied and prediction was wrong (human was right)
     - engine += 1 when override was applied but prediction was correct (engine was right)
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     overrides = _safe_query_all(conn, """
         SELECT dl.finding_id, pf.dimension,
@@ -945,7 +944,7 @@ def generate_self_audit_report(conn, lookback_days: int = 30) -> dict:
     Produces accurate counts, model rankings, constraint info,
     measurement health, and human override analysis.
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     # Prediction counts
     total = _safe_scalar(conn, """
@@ -1064,7 +1063,7 @@ def generate_self_audit_report(conn, lookback_days: int = 30) -> dict:
     engine_better = [d for d, v in override_data.items() if v["engine"] > v["human"]]
 
     report = {
-        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+        "generated_at": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
         "lookback_days": lookback_days,
         "prediction_accuracy": {
             "total": total,

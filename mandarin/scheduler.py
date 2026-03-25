@@ -329,7 +329,7 @@ ERROR_DRILL_PREFERENCE = {
 class DrillBlock:
     """Sequence of atomic drills (existing behavior, wrapped in a block)."""
     block_type: str = "drills"
-    items: List[DrillItem] = field(default_factory=list)
+    items: list[DrillItem] = field(default_factory=list)
     target_seconds: int = 180
 
 
@@ -384,14 +384,14 @@ class SessionPlan:
     blocks: list = field(default_factory=list)  # [DrillBlock, ReadingBlock, ConversationBlock, ListeningBlock, ...]
     micro_plan: str = ""        # One-line summary shown at start
     estimated_seconds: int = 0
-    days_since_last: Optional[int] = None
-    gap_message: Optional[str] = None
-    day_label: Optional[str] = None
-    focus_insights: List[str] = field(default_factory=list)
-    experiment_variant: Optional[str] = None
+    days_since_last: int | None = None
+    gap_message: str | None = None
+    day_label: str | None = None
+    focus_insights: list[str] = field(default_factory=list)
+    experiment_variant: str | None = None
 
     @property
-    def drills(self) -> List[DrillItem]:
+    def drills(self) -> list[DrillItem]:
         """Backward compat: flat list of DrillItems from all DrillBlocks."""
         items = []
         for block in self.blocks:
@@ -656,7 +656,7 @@ def _pick_mapping_groups(n: int = 3, exclude_groups: set[str] | None = None,
         # Weighted sampling: excluded groups get reduced weight (deprioritized, not banned)
         weights = [weight if g in exclude_groups else 1.0 for g in all_groups]
         groups = []
-        pool = list(zip(all_groups, weights))
+        pool = list(zip(all_groups, weights, strict=False))
         for _ in range(min(n, len(all_groups))):
             if not pool:
                 break
@@ -2608,7 +2608,7 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
             due_items = [i for i in due_items
                          if i.get("register") != "professional"] or due_items
 
-        for i, item in enumerate(due_items):
+        for _i, item in enumerate(due_items):
             if _has_confusable(item.get("hanzi", "")):
                 item["_confusable_boost"] = True
 
@@ -2888,7 +2888,7 @@ def _plan_injections(conn: sqlite3.Connection, drills: list, seen_ids: set, user
         logger.debug("media comprehension injection skipped: %s", e)
 
 
-def _build_focus_insights(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> List[str]:
+def _build_focus_insights(drills: list, params: dict, conn: sqlite3.Connection, user_id: int) -> list[str]:
     """Build human-readable insights explaining why the session is composed this way.
 
     Returns up to 3 short insight strings showing the adaptive intelligence at work.
@@ -2948,7 +2948,7 @@ def _build_focus_insights(drills: list, params: dict, conn: sqlite3.Connection, 
 
     # 7. Long gap (already shown via gap_message, but add context)
     if params.get("is_long_gap"):
-        days = params.get("days_gap", 0)
+        params.get("days_gap", 0)
         insights.append(f"Welcome back — starting with familiar items to rebuild confidence")
 
     # 8. WIP limit (Kanban enforcement transparency)
@@ -3580,7 +3580,7 @@ from .drills import DRILL_REGISTRY
 _VALID_DRILL_TYPES = set(DRILL_REGISTRY.keys()) | {"dialogue", "media_comprehension"}
 
 
-def _pick_reading_block(conn, user_id: int, hsk_level: int) -> Optional[ReadingBlock]:
+def _pick_reading_block(conn, user_id: int, hsk_level: int) -> ReadingBlock | None:
     """Pick a reading passage using vocabulary coverage (Krashen's i+1).
 
     Target: user knows 85-95% of unique characters in the passage.
@@ -3722,7 +3722,7 @@ def _pick_reading_block(conn, user_id: int, hsk_level: int) -> Optional[ReadingB
         return None
 
 
-def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> Optional[ConversationBlock]:
+def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> ConversationBlock | None:
     """Pick a conversation scenario matching user's HSK level."""
     try:
         from .ai.conversation_drill import SCENARIOS
@@ -3749,7 +3749,7 @@ def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> Optional[Con
         return None
 
 
-def _pick_listening_block(conn, user_id: int, hsk_level: int) -> Optional[ListeningBlock]:
+def _pick_listening_block(conn, user_id: int, hsk_level: int) -> ListeningBlock | None:
     """Pick a listening passage the user hasn't heard recently (HSK 2+).
 
     Reuses reading_texts passages but checks against listening_progress

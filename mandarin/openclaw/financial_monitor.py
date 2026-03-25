@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ class RevenueSnapshot:
 
     def __post_init__(self):
         if not self.computed_at:
-            self.computed_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            self.computed_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
 
 @dataclass
@@ -59,7 +59,7 @@ class Anomaly:
 
     def __post_init__(self):
         if not self.detected_at:
-            self.detected_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            self.detected_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
 
 @dataclass
@@ -300,7 +300,7 @@ class FinancialDigest:
             if a.severity in ("high", "critical"):
                 action_items.append(f"[{a.severity.upper()}] {a.detail}")
 
-        period = datetime.now(timezone.utc).strftime("Week of %Y-%m-%d")
+        period = datetime.now(UTC).strftime("Week of %Y-%m-%d")
 
         return WeeklyDigest(
             period=period, revenue=revenue, churn=churn,

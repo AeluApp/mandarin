@@ -64,7 +64,7 @@ def _read_file(path: str) -> str | None:
     """Read a source file. Only allowed within project root."""
     try:
         abs_path = _resolve_path(path)
-        with open(abs_path, "r", encoding="utf-8", errors="replace") as f:
+        with open(abs_path, encoding="utf-8", errors="replace") as f:
             return f.read()
     except (PermissionError, FileNotFoundError, OSError) as e:
         logger.debug("Agent read_file failed for %s: %s", path, e)

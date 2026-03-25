@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -91,12 +91,12 @@ CTQ_TREE = {
 }
 
 
-def get_ctq_tree() -> Dict[str, Any]:
+def get_ctq_tree() -> dict[str, Any]:
     """Return the CTQ tree definition."""
     return CTQ_TREE
 
 
-def assess_ctq_metrics(conn) -> Dict[str, Any]:
+def assess_ctq_metrics(conn) -> dict[str, Any]:
     """Measure current performance against each CTQ spec."""
     results = {}
 
@@ -146,13 +146,13 @@ def assess_ctq_metrics(conn) -> Dict[str, Any]:
     return {"tree": CTQ_TREE, "measurements": results}
 
 
-def calculate_error_pareto(conn, days: int = 30) -> Dict[str, Any]:
+def calculate_error_pareto(conn, days: int = 30) -> dict[str, Any]:
     """Pareto analysis of error types — rank by frequency, show cumulative %.
 
     Identifies the 20% of error types causing 80% of errors.
     Lean Six Sigma: vital few vs. trivial many.
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     try:
         rows = conn.execute("""
@@ -196,7 +196,7 @@ def calculate_error_pareto(conn, days: int = 30) -> Dict[str, Any]:
     }
 
 
-def generate_five_why_template(chart_type: str, violation_detail: str = "") -> Dict[str, Any]:
+def generate_five_why_template(chart_type: str, violation_detail: str = "") -> dict[str, Any]:
     """Generate a structured 5-Why root cause analysis template.
 
     Called when SPC detects an out-of-control point. Provides a framework
@@ -272,12 +272,12 @@ def generate_five_why_template(chart_type: str, violation_detail: str = "") -> D
     })
 
     template["chart_type"] = chart_type
-    template["generated_at"] = datetime.now(timezone.utc).isoformat()
+    template["generated_at"] = datetime.now(UTC).isoformat()
 
     return template
 
 
-def _safe_median(values: List[float]) -> float:
+def _safe_median(values: list[float]) -> float:
     """Median of a sorted-able list. Returns 0.0 if empty."""
     if not values:
         return 0.0
@@ -288,7 +288,7 @@ def _safe_median(values: List[float]) -> float:
     return (s[n // 2 - 1] + s[n // 2]) / 2.0
 
 
-def _percentile(values: List[float], p: float) -> float:
+def _percentile(values: list[float], p: float) -> float:
     """Single percentile from a list. p in [0, 100]."""
     if not values:
         return 0.0
@@ -310,7 +310,7 @@ def _table_exists(conn, table_name: str) -> bool:
     return (row["cnt"] if row else 0) > 0
 
 
-def calculate_cycle_time(conn, days: int = 90) -> Dict[str, Any]:
+def calculate_cycle_time(conn, days: int = 90) -> dict[str, Any]:
     """Cycle time analysis from work_item table.
 
     cycle_time = completed_at - started_at (in hours) for completed items.
@@ -327,7 +327,7 @@ def calculate_cycle_time(conn, days: int = 90) -> Dict[str, Any]:
             "by_type": {},
         }
 
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     rows = conn.execute(
         """
@@ -355,8 +355,8 @@ def calculate_cycle_time(conn, days: int = 90) -> Dict[str, Any]:
     all_times = [float(r["cycle_hours"]) for r in rows if r["cycle_hours"] is not None]
 
     # By service class
-    by_type: Dict[str, Dict[str, Any]] = {}
-    type_groups: Dict[str, List[float]] = {}
+    by_type: dict[str, dict[str, Any]] = {}
+    type_groups: dict[str, list[float]] = {}
     for r in rows:
         if r["cycle_hours"] is None:
             continue
@@ -380,7 +380,7 @@ def calculate_cycle_time(conn, days: int = 90) -> Dict[str, Any]:
     }
 
 
-def calculate_lead_time(conn, days: int = 90) -> Dict[str, Any]:
+def calculate_lead_time(conn, days: int = 90) -> dict[str, Any]:
     """Lead time analysis from work_item table.
 
     lead_time = completed_at - ready_at (in hours) for completed items.
@@ -389,7 +389,7 @@ def calculate_lead_time(conn, days: int = 90) -> Dict[str, Any]:
         logger.info("work_item table does not exist yet")
         return {"mean": 0.0, "median": 0.0, "p85": 0.0, "p95": 0.0, "count": 0}
 
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     rows = conn.execute(
         """
@@ -416,7 +416,7 @@ def calculate_lead_time(conn, days: int = 90) -> Dict[str, Any]:
     }
 
 
-def calculate_throughput(conn, days: int = 30) -> Dict[str, Any]:
+def calculate_throughput(conn, days: int = 30) -> dict[str, Any]:
     """Throughput: items completed per day and per week.
 
     Returns daily_avg, weekly_avg, by_type breakdown.
@@ -425,7 +425,7 @@ def calculate_throughput(conn, days: int = 30) -> Dict[str, Any]:
         logger.info("work_item table does not exist yet")
         return {"daily_avg": 0.0, "weekly_avg": 0.0, "by_type": {}}
 
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     rows = conn.execute(
         """
@@ -444,8 +444,8 @@ def calculate_throughput(conn, days: int = 30) -> Dict[str, Any]:
         return {"daily_avg": 0.0, "weekly_avg": 0.0, "by_type": {}}
 
     # Daily totals
-    daily_totals: Dict[str, int] = {}
-    type_totals: Dict[str, int] = {}
+    daily_totals: dict[str, int] = {}
+    type_totals: dict[str, int] = {}
     for r in rows:
         day = r["day"]
         daily_totals[day] = daily_totals.get(day, 0) + r["cnt"]
@@ -480,7 +480,7 @@ SERVICE_CLASS_TARGETS = {
 }
 
 
-def assess_service_class_compliance(conn, days: int = 90) -> Dict[str, Any]:
+def assess_service_class_compliance(conn, days: int = 90) -> dict[str, Any]:
     """Check cycle time compliance against service class targets.
 
     Returns per-class stats: count, avg_cycle_hours, target_hours, violations.
@@ -488,7 +488,7 @@ def assess_service_class_compliance(conn, days: int = 90) -> Dict[str, Any]:
     if not _table_exists(conn, "work_item"):
         return {"classes": {}, "overall_compliance": 1.0}
 
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     try:
         rows = conn.execute(
@@ -506,7 +506,7 @@ def assess_service_class_compliance(conn, days: int = 90) -> Dict[str, Any]:
     except Exception:
         return {"classes": {}, "overall_compliance": 1.0}
 
-    classes: Dict[str, Dict[str, Any]] = {}
+    classes: dict[str, dict[str, Any]] = {}
     total_items = 0
     total_compliant = 0
 
@@ -550,7 +550,7 @@ def assess_service_class_compliance(conn, days: int = 90) -> Dict[str, Any]:
     }
 
 
-def calculate_velocity(conn, weeks: int = 12) -> Dict[str, Any]:
+def calculate_velocity(conn, weeks: int = 12) -> dict[str, Any]:
     """Compute items completed per week over last N weeks.
 
     Solo-adapted Scrum velocity tracking.
@@ -559,8 +559,8 @@ def calculate_velocity(conn, weeks: int = 12) -> Dict[str, Any]:
     if not _table_exists(conn, "work_item"):
         return {"weekly": [], "average": 0.0, "trend": "stable"}
 
-    now = datetime.now(timezone.utc)
-    weekly: List[Dict[str, Any]] = []
+    now = datetime.now(UTC)
+    weekly: list[dict[str, Any]] = []
 
     for i in range(weeks - 1, -1, -1):
         week_end = now - timedelta(weeks=i)
@@ -609,7 +609,7 @@ def calculate_velocity(conn, weeks: int = 12) -> Dict[str, Any]:
     }
 
 
-def get_flow_summary(conn) -> Dict[str, Any]:
+def get_flow_summary(conn) -> dict[str, Any]:
     """Combined flow metrics."""
     return {
         "cycle_time": calculate_cycle_time(conn),
@@ -672,7 +672,7 @@ def check_voc_alignment(conn) -> list[dict]:
     return findings
 
 
-def get_cfd_data(conn, days: int = 30) -> Dict[str, Any]:
+def get_cfd_data(conn, days: int = 30) -> dict[str, Any]:
     """Cumulative flow diagram data: daily counts by status.
 
     Statuses: backlog, ready, in_progress, review, done.
@@ -682,18 +682,18 @@ def get_cfd_data(conn, days: int = 30) -> Dict[str, Any]:
         logger.info("work_item table does not exist yet")
         return {"dates": [], "series": {}}
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     start = now - timedelta(days=days)
 
     # Generate date range
-    dates: List[str] = []
+    dates: list[str] = []
     current = start
     while current <= now:
         dates.append(current.strftime("%Y-%m-%d"))
         current += timedelta(days=1)
 
     statuses = ["backlog", "ready", "in_progress", "review", "done"]
-    series: Dict[str, List[int]] = {s: [] for s in statuses}
+    series: dict[str, list[int]] = {s: [] for s in statuses}
 
     for date_str in dates:
         # End of the given day

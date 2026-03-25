@@ -344,7 +344,7 @@ def process_tutor_session(conn, session_id):
 
     matched = 0
     for corr in (corrections or []):
-        corr_id, correct_form, wrong_form = corr[0], corr[1], corr[2]
+        corr_id, correct_form, _wrong_form = corr[0], corr[1], corr[2]
         # Try to match by hanzi
         item = conn.execute("""
             SELECT id FROM content_item WHERE hanzi = ? LIMIT 1

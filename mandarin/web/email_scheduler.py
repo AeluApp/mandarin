@@ -24,6 +24,7 @@ from ..email import (
     send_winback,
     send_weekly_progress,
 )
+from datetime import UTC
 
 logger = logging.getLogger(__name__)
 
@@ -220,7 +221,7 @@ def _check_streak_reminders():
 def _send_weekly_progress_emails():
     """Send weekly progress digest every Monday at ~9am UTC."""
     from datetime import datetime, timezone
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     # Only run on Mondays (weekday=0), roughly between 8-10 UTC
     if now.weekday() != 0 or now.hour < 8 or now.hour > 10:
         return

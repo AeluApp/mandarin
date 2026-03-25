@@ -34,7 +34,7 @@ import json
 import logging
 import math
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,7 @@ def _safe_ratio(numerator: float, denominator: float, default: float = 0.0) -> f
     return numerator / denominator if denominator > 0 else default
 
 
-def _safe_median(values: List[float]) -> float:
+def _safe_median(values: list[float]) -> float:
     if not values:
         return 0.0
     s = sorted(values)
@@ -69,7 +69,7 @@ def _safe_median(values: List[float]) -> float:
     return s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2.0
 
 
-def _percentile(values: List[float], p: float) -> float:
+def _percentile(values: list[float], p: float) -> float:
     if not values:
         return 0.0
     s = sorted(values)
@@ -86,8 +86,8 @@ def _percentile(values: List[float], p: float) -> float:
 # ═══════════════════════════════════════════════════════════════════════
 
 def delayed_recall_accuracy(conn: sqlite3.Connection, delay_days: int = 7,
-                            user_id: Optional[int] = None,
-                            window_days: int = 90) -> Dict[str, Any]:
+                            user_id: int | None = None,
+                            window_days: int = 90) -> dict[str, Any]:
     """Accuracy on items reviewed after ≥delay_days since last review.
 
     Counter-metric for: review accuracy.
@@ -137,8 +137,8 @@ def delayed_recall_accuracy(conn: sqlite3.Connection, delay_days: int = 7,
 
 
 def transfer_accuracy(conn: sqlite3.Connection,
-                      user_id: Optional[int] = None,
-                      window_days: int = 60) -> Dict[str, Any]:
+                      user_id: int | None = None,
+                      window_days: int = 60) -> dict[str, Any]:
     """Accuracy on items in drill types NOT previously seen for that item.
 
     Counter-metric for: review accuracy, items mastered.
@@ -179,8 +179,8 @@ def transfer_accuracy(conn: sqlite3.Connection,
 
 
 def production_vs_recognition_gap(conn: sqlite3.Connection,
-                                  user_id: Optional[int] = None,
-                                  window_days: int = 60) -> Dict[str, Any]:
+                                  user_id: int | None = None,
+                                  window_days: int = 60) -> dict[str, Any]:
     """Gap between recognition drill accuracy and production drill accuracy.
 
     Counter-metric for: review accuracy, items mastered.
@@ -237,8 +237,8 @@ def production_vs_recognition_gap(conn: sqlite3.Connection,
 
 
 def mastery_reversal_rate(conn: sqlite3.Connection,
-                          user_id: Optional[int] = None,
-                          window_days: int = 90) -> Dict[str, Any]:
+                          user_id: int | None = None,
+                          window_days: int = 90) -> dict[str, Any]:
     """Percentage of items promoted to stable/durable that later got demoted.
 
     Counter-metric for: items mastered.
@@ -287,7 +287,7 @@ def mastery_reversal_rate(conn: sqlite3.Connection,
 
 
 def mastery_survival_curve(conn: sqlite3.Connection,
-                           user_id: Optional[int] = None) -> Dict[str, Any]:
+                           user_id: int | None = None) -> dict[str, Any]:
     """Survival rate of mastered items at 7, 14, 30, 60 day checkpoints.
 
     Counter-metric for: items mastered.
@@ -311,7 +311,7 @@ def mastery_survival_curve(conn: sqlite3.Connection,
     if not rows:
         return {"checkpoints": {}, "sample_size": 0}
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     checkpoints = {7: {"eligible": 0, "survived": 0},
                    14: {"eligible": 0, "survived": 0},
                    30: {"eligible": 0, "survived": 0},
@@ -321,7 +321,7 @@ def mastery_survival_curve(conn: sqlite3.Connection,
         try:
             stable_dt = datetime.fromisoformat(r["stable_since_date"])
             if stable_dt.tzinfo is None:
-                stable_dt = stable_dt.replace(tzinfo=timezone.utc)
+                stable_dt = stable_dt.replace(tzinfo=UTC)
         except (ValueError, TypeError):
             continue
 
@@ -347,8 +347,8 @@ def mastery_survival_curve(conn: sqlite3.Connection,
 
 
 def hint_dependence_rate(conn: sqlite3.Connection,
-                         user_id: Optional[int] = None,
-                         window_days: int = 60) -> Dict[str, Any]:
+                         user_id: int | None = None,
+                         window_days: int = 60) -> dict[str, Any]:
     """Proportion of correct answers that relied on partial confidence.
 
     Counter-metric for: review accuracy.
@@ -386,8 +386,8 @@ def hint_dependence_rate(conn: sqlite3.Connection,
 # ═══════════════════════════════════════════════════════════════════════
 
 def session_fatigue_signals(conn: sqlite3.Connection,
-                            user_id: Optional[int] = None,
-                            window_days: int = 30) -> Dict[str, Any]:
+                            user_id: int | None = None,
+                            window_days: int = 30) -> dict[str, Any]:
     """Burnout/fatigue signals from session data.
 
     Counter-metric for: session completion, streaks, engagement.
@@ -453,7 +453,7 @@ def session_fatigue_signals(conn: sqlite3.Connection,
 
 
 def backlog_burden(conn: sqlite3.Connection,
-                   user_id: Optional[int] = None) -> Dict[str, Any]:
+                   user_id: int | None = None) -> dict[str, Any]:
     """Review backlog size and growth rate.
 
     Counter-metric for: items mastered, session completion.
@@ -467,7 +467,7 @@ def backlog_burden(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
 
     overdue = conn.execute(f"""
         SELECT COUNT(*) as cnt,
@@ -499,8 +499,8 @@ def backlog_burden(conn: sqlite3.Connection,
 
 
 def learning_efficiency(conn: sqlite3.Connection,
-                        user_id: Optional[int] = None,
-                        window_days: int = 30) -> Dict[str, Any]:
+                        user_id: int | None = None,
+                        window_days: int = 30) -> dict[str, Any]:
     """Learning per minute: mastery promotions per minute of study.
 
     Counter-metric for: time spent.
@@ -545,9 +545,9 @@ def learning_efficiency(conn: sqlite3.Connection,
 
 
 def post_break_recovery(conn: sqlite3.Connection,
-                        user_id: Optional[int] = None,
+                        user_id: int | None = None,
                         min_break_days: int = 3,
-                        window_days: int = 90) -> Dict[str, Any]:
+                        window_days: int = 90) -> dict[str, Any]:
     """Accuracy in first session after a break of N+ days.
 
     Counter-metric for: streaks.
@@ -601,8 +601,8 @@ def post_break_recovery(conn: sqlite3.Connection,
 # ═══════════════════════════════════════════════════════════════════════
 
 def answer_latency_suspiciousness(conn: sqlite3.Connection,
-                                  user_id: Optional[int] = None,
-                                  window_days: int = 30) -> Dict[str, Any]:
+                                  user_id: int | None = None,
+                                  window_days: int = 30) -> dict[str, Any]:
     """Detect suspiciously fast answers suggesting click-through gaming.
 
     Counter-metric for: review accuracy.
@@ -645,8 +645,8 @@ def answer_latency_suspiciousness(conn: sqlite3.Connection,
 
 
 def easy_overuse_collapse(conn: sqlite3.Connection,
-                          user_id: Optional[int] = None,
-                          window_days: int = 60) -> Dict[str, Any]:
+                          user_id: int | None = None,
+                          window_days: int = 60) -> dict[str, Any]:
     """Items rated 'easy' repeatedly that later collapsed in accuracy.
 
     Counter-metric for: review accuracy, items mastered.
@@ -687,7 +687,7 @@ def easy_overuse_collapse(conn: sqlite3.Connection,
 
 
 def recognition_only_progress(conn: sqlite3.Connection,
-                              user_id: Optional[int] = None) -> Dict[str, Any]:
+                              user_id: int | None = None) -> dict[str, Any]:
     """Items advancing in mastery without any production drills.
 
     Counter-metric for: items mastered.
@@ -731,8 +731,8 @@ def recognition_only_progress(conn: sqlite3.Connection,
 
 
 def difficulty_avoidance(conn: sqlite3.Connection,
-                         user_id: Optional[int] = None,
-                         window_days: int = 30) -> Dict[str, Any]:
+                         user_id: int | None = None,
+                         window_days: int = 30) -> dict[str, Any]:
     """Percentage of progress earned from low-challenge items.
 
     Counter-metric for: items mastered, session completion.
@@ -775,8 +775,8 @@ def difficulty_avoidance(conn: sqlite3.Connection,
 
 
 def repeated_exposure_dependence(conn: sqlite3.Connection,
-                                 user_id: Optional[int] = None,
-                                 window_days: int = 60) -> Dict[str, Any]:
+                                 user_id: int | None = None,
+                                 window_days: int = 60) -> dict[str, Any]:
     """Items that succeed only through very high repetition.
 
     Counter-metric for: review accuracy, items mastered.
@@ -822,8 +822,8 @@ def repeated_exposure_dependence(conn: sqlite3.Connection,
 # ═══════════════════════════════════════════════════════════════════════
 
 def holdout_probe_performance(conn: sqlite3.Connection,
-                              user_id: Optional[int] = None,
-                              window_days: int = 90) -> Dict[str, Any]:
+                              user_id: int | None = None,
+                              window_days: int = 90) -> dict[str, Any]:
     """Performance on holdout probes — hidden benchmark items outside
     the main optimization loop.
 
@@ -856,7 +856,7 @@ def holdout_probe_performance(conn: sqlite3.Connection,
 
 
 def progress_honesty_score(conn: sqlite3.Connection,
-                           user_id: Optional[int] = None) -> Dict[str, Any]:
+                           user_id: int | None = None) -> dict[str, Any]:
     """Correlation between user-visible mastery claims and holdout performance.
 
     Counter-metric for: product honesty.
@@ -921,7 +921,7 @@ def progress_honesty_score(conn: sqlite3.Connection,
 # ═══════════════════════════════════════════════════════════════════════
 
 def content_duplicate_rate(conn: sqlite3.Connection,
-                           window_days: int = 30) -> Dict[str, Any]:
+                           window_days: int = 30) -> dict[str, Any]:
     """Rate of generated items caught as duplicates.
 
     Counter-metric for: corpus expansion.
@@ -949,7 +949,7 @@ def content_duplicate_rate(conn: sqlite3.Connection,
 
 
 def content_rejection_rate(conn: sqlite3.Connection,
-                           window_days: int = 30) -> Dict[str, Any]:
+                           window_days: int = 30) -> dict[str, Any]:
     """Rate of reviewed items rejected by human reviewer.
 
     Counter-metric for: generation quality.
@@ -977,7 +977,7 @@ def content_rejection_rate(conn: sqlite3.Connection,
     }
 
 
-def content_review_queue_depth(conn: sqlite3.Connection) -> Dict[str, Any]:
+def content_review_queue_depth(conn: sqlite3.Connection) -> dict[str, Any]:
     """Number of items awaiting human review.
 
     Counter-metric for: governance throughput.
@@ -995,7 +995,7 @@ def content_review_queue_depth(conn: sqlite3.Connection) -> Dict[str, Any]:
 
 
 def content_approval_latency(conn: sqlite3.Connection,
-                             window_days: int = 60) -> Dict[str, Any]:
+                             window_days: int = 60) -> dict[str, Any]:
     """Median days from generation to review decision.
 
     Counter-metric for: governance responsiveness.
@@ -1023,7 +1023,7 @@ def content_approval_latency(conn: sqlite3.Connection,
 
 
 def content_reaudit_failure_rate(conn: sqlite3.Connection,
-                                 window_days: int = 90) -> Dict[str, Any]:
+                                 window_days: int = 90) -> dict[str, Any]:
     """Rate of previously approved items that fail reaudit.
 
     Counter-metric for: initial approval quality.
@@ -1051,7 +1051,7 @@ def content_reaudit_failure_rate(conn: sqlite3.Connection,
 
 
 def approval_rubber_stamping(conn: sqlite3.Connection,
-                             window_days: int = 60) -> Dict[str, Any]:
+                             window_days: int = 60) -> dict[str, Any]:
     """Rate of reviews completed in under 5 seconds.
 
     Counter-metric for: review quality.
@@ -1182,7 +1182,7 @@ ALERT_THRESHOLDS = {
 }
 
 
-def evaluate_threshold(metric_name: str, value) -> Optional[str]:
+def evaluate_threshold(metric_name: str, value) -> str | None:
     """Return 'critical', 'warn', or None for a given metric value."""
     if value is None:
         return None
@@ -1208,7 +1208,7 @@ def evaluate_threshold(metric_name: str, value) -> Optional[str]:
 # ═══════════════════════════════════════════════════════════════════════
 
 def compute_full_assessment(conn: sqlite3.Connection,
-                            user_id: Optional[int] = None) -> Dict[str, Any]:
+                            user_id: int | None = None) -> dict[str, Any]:
     """Run all counter-metric computations and return a layered report.
 
     Returns:
@@ -1223,7 +1223,7 @@ def compute_full_assessment(conn: sqlite3.Connection,
             "counter_metric_map": {...},
         }
     """
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     alerts = []
 
     # ── Layer 2: Integrity ──
@@ -1422,7 +1422,7 @@ def _extract_nested(data: dict, keys: list):
 
 
 def _detect_trend_drift(conn: sqlite3.Connection,
-                        user_id: Optional[int] = None) -> List[Dict[str, Any]]:
+                        user_id: int | None = None) -> list[dict[str, Any]]:
     """Detect multi-cycle declining trends in counter-metric snapshots.
 
     Returns list of trend-based alerts. A trend alert fires when a metric
@@ -1517,7 +1517,7 @@ def _check_alert(alerts: list, metric_name: str, value) -> None:
 # SNAPSHOT STORAGE — persist assessments to DB for trend tracking
 # ═══════════════════════════════════════════════════════════════════════
 
-def save_snapshot(conn: sqlite3.Connection, assessment: Dict[str, Any],
+def save_snapshot(conn: sqlite3.Connection, assessment: dict[str, Any],
                   user_id: int = 1) -> int:
     """Persist a counter-metric assessment snapshot to the database.
 
@@ -1526,7 +1526,7 @@ def save_snapshot(conn: sqlite3.Connection, assessment: Dict[str, Any],
     if not _table_exists(conn, "counter_metric_snapshot"):
         return -1
 
-    now = assessment.get("computed_at", datetime.now(timezone.utc).isoformat())
+    now = assessment.get("computed_at", datetime.now(UTC).isoformat())
     overall = assessment.get("overall_health", "unknown")
     alert_count = assessment.get("alert_summary", {}).get("total", 0)
     critical_count = assessment.get("alert_summary", {}).get("critical", 0)
@@ -1550,7 +1550,7 @@ def save_snapshot(conn: sqlite3.Connection, assessment: Dict[str, Any],
 
 def get_snapshot_history(conn: sqlite3.Connection,
                          user_id: int = 1,
-                         limit: int = 30) -> List[Dict[str, Any]]:
+                         limit: int = 30) -> list[dict[str, Any]]:
     """Return recent counter-metric snapshots for trend analysis."""
     if not _table_exists(conn, "counter_metric_snapshot"):
         return []

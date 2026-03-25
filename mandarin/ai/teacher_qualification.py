@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 def discover_candidates(
     conn: sqlite3.Connection,
-    platforms: Optional[list[str]] = None,
+    platforms: list[str] | None = None,
 ) -> list[dict]:
     """Crawl public teacher listings to discover candidates.
 
@@ -50,13 +50,13 @@ def add_lead(
     conn: sqlite3.Connection,
     name: str,
     platform: str,
-    profile_url: Optional[str] = None,
+    profile_url: str | None = None,
     language_pair: str = "zh-en",
-    teaching_style_tags: Optional[list[str]] = None,
-    platform_rating: Optional[float] = None,
-    estimated_students: Optional[int] = None,
-    source_crawl_id: Optional[int] = None,
-) -> Optional[int]:
+    teaching_style_tags: list[str] | None = None,
+    platform_rating: float | None = None,
+    estimated_students: int | None = None,
+    source_crawl_id: int | None = None,
+) -> int | None:
     """Add a teacher lead to the database."""
     try:
         tags_json = json.dumps(teaching_style_tags) if teaching_style_tags else None
@@ -78,7 +78,7 @@ def add_lead(
 def score_candidate(
     conn: sqlite3.Connection,
     lead_id: int,
-) -> Optional[float]:
+) -> float | None:
     """Multi-criteria scoring via Qwen.
 
     Scores: teaching style alignment, HSK experience, ratings, tech comfort.
@@ -205,7 +205,7 @@ def get_qualified_leads(
 
 def get_all_leads(
     conn: sqlite3.Connection,
-    status: Optional[str] = None,
+    status: str | None = None,
     limit: int = 50,
 ) -> list[dict]:
     """Retrieve all teacher leads, optionally filtered by status."""

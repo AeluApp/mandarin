@@ -25,7 +25,7 @@ Usage:
 import argparse
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -68,7 +68,7 @@ def _col_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
 # Signal detection queries — single-user adapted
 # ---------------------------------------------------------------------------
 
-def _days_since_last_session(conn: sqlite3.Connection, user_id: int = 1) -> Optional[float]:
+def _days_since_last_session(conn: sqlite3.Connection, user_id: int = 1) -> float | None:
     """Return days since most recent session, or None if no sessions."""
     if not _table_exists(conn, "session_log"):
         return None
@@ -83,7 +83,7 @@ def _days_since_last_session(conn: sqlite3.Connection, user_id: int = 1) -> Opti
         last_dt = datetime.fromisoformat(last_at)
     except ValueError:
         return None
-    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    now = datetime.now(UTC).replace(tzinfo=None)
     return (now - last_dt).total_seconds() / 86400
 
 
@@ -181,7 +181,7 @@ def _accuracy_plateau(conn: sqlite3.Connection, user_id: int = 1) -> bool:
     return abs(buckets["recent"] - buckets["older"]) < 5.0
 
 
-def _drill_type_diversity(conn: sqlite3.Connection, user_id: int = 1) -> Tuple[int, Optional[float]]:
+def _drill_type_diversity(conn: sqlite3.Connection, user_id: int = 1) -> tuple[int, float | None]:
     """Return (unique_types_used, dominant_type_pct) over the last 21 days.
 
     dominant_type_pct is the percentage of errors for the most-used drill type.
@@ -226,7 +226,7 @@ def _drill_type_diversity(conn: sqlite3.Connection, user_id: int = 1) -> Tuple[i
     return (len(rows), dominant_pct)
 
 
-def _reading_listening_usage(conn: sqlite3.Connection, user_id: int = 1) -> Dict[str, bool]:
+def _reading_listening_usage(conn: sqlite3.Connection, user_id: int = 1) -> dict[str, bool]:
     """Return dict with 'reading' and 'listening' booleans for last 30 days."""
     result = {"reading": False, "listening": False}
     if not _table_exists(conn, "session_log"):
@@ -258,7 +258,7 @@ def _reading_listening_usage(conn: sqlite3.Connection, user_id: int = 1) -> Dict
 # Composite churn risk score
 # ---------------------------------------------------------------------------
 
-def compute_churn_risk(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def compute_churn_risk(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Compute composite churn risk score (0-100) with signal details.
 
     Weights (adapted from churn-prevention.md):
@@ -475,7 +475,7 @@ def _classify_churn_type(signals: list, days_gap, freq_decline, dur_decline,
 # ---------------------------------------------------------------------------
 
 def get_at_risk_users(db_path: str = None, min_risk: int = 60,
-                      user_id: int = 1) -> List[Dict]:
+                      user_id: int = 1) -> list[dict]:
     """Return a list of user risk profiles where score >= min_risk.
 
     For the current single-user system, returns a list with 0 or 1 entries.
@@ -520,7 +520,7 @@ def get_at_risk_users(db_path: str = None, min_risk: int = 60,
 # Report generation
 # ---------------------------------------------------------------------------
 
-def _format_report_rich(risk: Dict) -> None:
+def _format_report_rich(risk: dict) -> None:
     """Print a formatted churn report using Rich."""
     from rich.console import Console
     from rich.table import Table
@@ -597,7 +597,7 @@ def _format_report_rich(risk: Dict) -> None:
     console.print()
 
 
-def _format_report_plain(risk: Dict) -> str:
+def _format_report_plain(risk: dict) -> str:
     """Format a plain-text churn report."""
     lines = []
     score = risk["score"]
@@ -636,7 +636,7 @@ def _format_report_plain(risk: Dict) -> str:
 
 
 def run_report(db_path: str = None, output_format: str = "rich",
-               user_id: int = 1) -> Dict:
+               user_id: int = 1) -> dict:
     """Run the full churn detection report.
 
     Args:

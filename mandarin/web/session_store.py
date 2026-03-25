@@ -22,7 +22,7 @@ RESUME_TIMEOUT = 60  # seconds to wait for a reconnect before giving up
 @dataclass
 class ActiveSession:
     resume_token: str
-    bridge: "WebBridge"  # noqa: F821  — forward ref, avoid circular import
+    bridge: WebBridge  # noqa: F821  — forward ref, avoid circular import
     session_thread: threading.Thread
     created_at: float  # time.monotonic()
     user_id: int = 1
@@ -51,7 +51,7 @@ class SessionStore:
         with self._lock:
             return self._sessions.get(token)
 
-    def claim_for_resume(self, token: str, user_id: int) -> Optional[ActiveSession]:
+    def claim_for_resume(self, token: str, user_id: int) -> ActiveSession | None:
         """Atomically look up and claim a session for resume.
 
         Returns the ActiveSession if:
@@ -84,7 +84,7 @@ class SessionStore:
             if session:
                 session._resuming = False
 
-    def find_by_user(self, user_id: int) -> Optional[ActiveSession]:
+    def find_by_user(self, user_id: int) -> ActiveSession | None:
         """Find an active session for the given user."""
         with self._lock:
             for sess in self._sessions.values():

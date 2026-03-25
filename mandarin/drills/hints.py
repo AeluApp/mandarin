@@ -113,7 +113,7 @@ def get_hanzi_hint(hanzi: str, wrong_answer: str = "",
     return None, None
 
 
-def _radical_hint(hanzi: str) -> Optional[str]:
+def _radical_hint(hanzi: str) -> str | None:
     """Generate a radical-based hint without revealing the answer character."""
     radical_hints = _get_radical_hints()
     for char in hanzi:
@@ -127,7 +127,7 @@ def _radical_hint(hanzi: str) -> Optional[str]:
     return None
 
 
-def _contrast_hint(hanzi: str, wrong_answer: str) -> Optional[str]:
+def _contrast_hint(hanzi: str, wrong_answer: str) -> str | None:
     """Generate a visual contrast hint between correct and wrong.
 
     Only shows the wrong answer the user already picked — never the correct one.
@@ -143,7 +143,7 @@ def _contrast_hint(hanzi: str, wrong_answer: str) -> Optional[str]:
     return None
 
 
-def _component_hint(hanzi: str) -> Optional[str]:
+def _component_hint(hanzi: str) -> str | None:
     """Generate a component/shape hint without revealing the character itself."""
     if len(hanzi) == 1:
         code = ord(hanzi)
@@ -160,7 +160,7 @@ def _component_hint(hanzi: str) -> Optional[str]:
     return None
 
 
-def _phonetic_hint(hanzi: str) -> Optional[str]:
+def _phonetic_hint(hanzi: str) -> str | None:
     """Generate a phonetic/sound hint without revealing characters."""
     if len(hanzi) >= 2:
         return "  Hint: the pronunciation follows from the right-side component"

@@ -935,7 +935,7 @@ def _project_milestones(conn, levels: dict, velocity: dict, user_id: int = 1) ->
     target_vocab = HSK_CUMULATIVE.get(target_int, target_int * 500)
 
     # 1. Vocab criterion
-    vocab_gap = max(0, target_vocab - current_mastered)
+    max(0, target_vocab - current_mastered)
     vocab_pct = min(100, (current_mastered / target_vocab * 100) if target_vocab > 0 else 100)
 
     # 2. Grammar criterion
@@ -1387,7 +1387,7 @@ def get_tone_confusion_matrix(conn, user_id: int = 1) -> dict:
         expected_tones = _extract_tones(expected)
 
         # Match tone-by-tone where lengths match
-        for et, ut in zip(expected_tones, user_tones):
+        for et, ut in zip(expected_tones, user_tones, strict=False):
             ei, ui = int(et), int(ut)
             if ei != ui:
                 matrix[ei][ui] += 1

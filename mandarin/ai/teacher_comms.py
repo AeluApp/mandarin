@@ -7,7 +7,7 @@ All drafts require explicit human approval before sending — no automated sendi
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ def draft_teacher_outreach(
     conn: sqlite3.Connection,
     lead_id: int,
     purpose: str,
-) -> Optional[int]:
+) -> int | None:
     """Generate a personalized email draft for a teacher lead.
 
     Returns draft ID or None on failure.
@@ -73,7 +73,7 @@ def draft_teacher_outreach(
 def draft_pilot_invitation(
     conn: sqlite3.Connection,
     lead_id: int,
-) -> Optional[int]:
+) -> int | None:
     """Specific template for pilot program invitations."""
     return draft_teacher_outreach(conn, lead_id, purpose="pilot_invitation")
 
@@ -82,7 +82,7 @@ def _create_template_draft(
     conn: sqlite3.Connection,
     lead,
     purpose: str,
-) -> Optional[int]:
+) -> int | None:
     """Create a basic template-based draft without LLM."""
     name = lead["name"]
     platform = lead["platform"]
@@ -116,7 +116,7 @@ def _store_draft(
     subject: str,
     body_text: str,
     purpose: str,
-) -> Optional[int]:
+) -> int | None:
     """Store an email draft in the database."""
     try:
         cursor = conn.execute("""
@@ -152,7 +152,7 @@ def approve_draft(
     approved_by: int,
 ) -> bool:
     """Approve a draft. Does NOT auto-send."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         cursor = conn.execute("""
             UPDATE email_draft
@@ -186,8 +186,8 @@ def reject_draft(
 def edit_draft(
     conn: sqlite3.Connection,
     draft_id: int,
-    subject: Optional[str] = None,
-    body_text: Optional[str] = None,
+    subject: str | None = None,
+    body_text: str | None = None,
 ) -> bool:
     """Edit a draft's subject and/or body."""
     try:
@@ -216,7 +216,7 @@ def mark_sent(
     draft_id: int,
 ) -> bool:
     """Mark a draft as sent (separate step from approve)."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         cursor = conn.execute("""
             UPDATE email_draft

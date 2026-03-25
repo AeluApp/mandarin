@@ -36,7 +36,7 @@ _preferred_voice = "female"
 
 # ── Paths ────────────────────────────────────────────────────────────
 _TTS_HELPER = str(Path(__file__).resolve().parent.parent / "tools" / "tts")
-_tts_helper_available: Optional[bool] = None
+_tts_helper_available: bool | None = None
 
 # Persistent cache (pre-generated audio survives restarts)
 _PERSISTENT_AUDIO_DIR = str(Path(__file__).resolve().parent.parent / "data" / "audio_cache")
@@ -50,7 +50,7 @@ os.makedirs(_TEMP_AUDIO_DIR, exist_ok=True)
 _edge_loop = None
 _edge_thread = None
 _edge_lock = threading.Lock()
-_edge_available: Optional[bool] = None
+_edge_available: bool | None = None
 
 
 def _ensure_edge_loop():
@@ -109,7 +109,7 @@ def _has_tts_helper() -> bool:
 _chinese_voice = None
 
 
-def _detect_best_chinese_voice() -> Optional[str]:
+def _detect_best_chinese_voice() -> str | None:
     if platform.system() != "Darwin":
         return None
     try:
@@ -228,7 +228,7 @@ def _cache_key(text: str, rate: int, voice: str = "") -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:12]
 
 
-def _find_cached(key: str) -> Optional[str]:
+def _find_cached(key: str) -> str | None:
     """Check persistent and temp cache for existing audio file."""
     for ext in (".mp3", ".wav"):
         fname = key + ext
@@ -243,7 +243,7 @@ def _find_cached(key: str) -> Optional[str]:
     return None
 
 
-def _generate_edge_tts(text: str, rate: int, voice_key: str = "") -> Optional[str]:
+def _generate_edge_tts(text: str, rate: int, voice_key: str = "") -> str | None:
     """Generate MP3 via edge-tts. Returns filename or None."""
     if not _is_edge_available():
         return None
@@ -280,7 +280,7 @@ def _generate_edge_tts(text: str, rate: int, voice_key: str = "") -> Optional[st
         return None
 
 
-def _generate_macos_tts(text: str, rate: int) -> Optional[str]:
+def _generate_macos_tts(text: str, rate: int) -> str | None:
     """Generate WAV via macOS say + afconvert. Returns filename or None."""
     if platform.system() != "Darwin":
         return None
@@ -320,7 +320,7 @@ def _generate_macos_tts(text: str, rate: int) -> Optional[str]:
         return None
 
 
-def generate_audio_file(text: str, rate: int = None, voice: str = "") -> Optional[str]:
+def generate_audio_file(text: str, rate: int = None, voice: str = "") -> str | None:
     """Generate an audio file for Chinese text.
 
     Tries edge-tts first (MP3, neural quality, cross-platform),

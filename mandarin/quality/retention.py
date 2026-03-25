@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import logging
 import math
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 _CHURN_THRESHOLD_DAYS = 14
 
 
-def _pearson_r(xs: List[float], ys: List[float]) -> Optional[float]:
+def _pearson_r(xs: list[float], ys: list[float]) -> float | None:
     """Basic Pearson correlation coefficient. Returns None if undefined."""
     n = len(xs)
     if n < 3 or len(ys) != n:
@@ -21,7 +21,7 @@ def _pearson_r(xs: List[float], ys: List[float]) -> Optional[float]:
     mean_x = sum(xs) / n
     mean_y = sum(ys) / n
 
-    cov = sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys))
+    cov = sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys, strict=False))
     var_x = sum((x - mean_x) ** 2 for x in xs)
     var_y = sum((y - mean_y) ** 2 for y in ys)
 
@@ -31,14 +31,14 @@ def _pearson_r(xs: List[float], ys: List[float]) -> Optional[float]:
     return cov / denom
 
 
-def _build_user_timelines(conn, days: int) -> List[Dict[str, Any]]:
+def _build_user_timelines(conn, days: int) -> list[dict[str, Any]]:
     """Build per-user timeline data for survival analysis.
 
     Returns list of dicts: user_id, first_session, last_session,
     observation_time (days), event (1=churned, 0=censored).
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-    now = datetime.now(timezone.utc)
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
+    now = datetime.now(UTC)
 
     rows = conn.execute(
         """
@@ -78,9 +78,9 @@ def _build_user_timelines(conn, days: int) -> List[Dict[str, Any]]:
 
         # Make both offset-aware for comparison
         if first_dt.tzinfo is None:
-            first_dt = first_dt.replace(tzinfo=timezone.utc)
+            first_dt = first_dt.replace(tzinfo=UTC)
         if last_dt.tzinfo is None:
-            last_dt = last_dt.replace(tzinfo=timezone.utc)
+            last_dt = last_dt.replace(tzinfo=UTC)
 
         days_since_last = (now - last_dt).total_seconds() / 86400
         churned = days_since_last >= _CHURN_THRESHOLD_DAYS
@@ -106,8 +106,8 @@ def _build_user_timelines(conn, days: int) -> List[Dict[str, Any]]:
 
 
 def _kaplan_meier_from_timelines(
-    timelines: List[Dict[str, Any]],
-) -> Dict[str, Any]:
+    timelines: list[dict[str, Any]],
+) -> dict[str, Any]:
     """Compute Kaplan-Meier survival curve from timeline data."""
     if not timelines:
         return {
@@ -120,23 +120,23 @@ def _kaplan_meier_from_timelines(
         }
 
     # Collect event times, sorted
-    events: List[Tuple[float, int]] = []  # (time, event_flag)
+    events: list[tuple[float, int]] = []  # (time, event_flag)
     for t in timelines:
         events.append((t["observation_time"], t["event"]))
 
     events.sort(key=lambda x: x[0])
 
     # Distinct time points where events (churns) occur
-    event_times: List[float] = sorted(set(
+    event_times: list[float] = sorted(set(
         time for time, event in events if event == 1
     ))
 
     n_total = len(events)
-    time_points: List[float] = []
-    survival_probs: List[float] = []
-    n_at_risk_list: List[int] = []
-    n_events_list: List[int] = []
-    n_censored_list: List[int] = []
+    time_points: list[float] = []
+    survival_probs: list[float] = []
+    n_at_risk_list: list[int] = []
+    n_events_list: list[int] = []
+    n_censored_list: list[int] = []
 
     survival = 1.0
     idx = 0  # pointer into sorted events
@@ -152,7 +152,7 @@ def _kaplan_meier_from_timelines(
         # n at risk at time t
         n_at_risk = n_total
         # Subtract those who had events or were censored before time t
-        for time_val, event_flag in events:
+        for time_val, _event_flag in events:
             if time_val < t:
                 n_at_risk -= 1
 
@@ -171,7 +171,7 @@ def _kaplan_meier_from_timelines(
 
     # Median survival = first time where survival <= 0.5
     median = None
-    for tp, sp in zip(time_points, survival_probs):
+    for tp, sp in zip(time_points, survival_probs, strict=False):
         if sp <= 0.5:
             median = tp
             break
@@ -186,7 +186,7 @@ def _kaplan_meier_from_timelines(
     }
 
 
-def kaplan_meier(conn, days: int = 90) -> Dict[str, Any]:
+def kaplan_meier(conn, days: int = 90) -> dict[str, Any]:
     """Kaplan-Meier survival analysis for learner retention.
 
     Event = user churns (no session for 14+ consecutive days).
@@ -199,7 +199,7 @@ def kaplan_meier(conn, days: int = 90) -> Dict[str, Any]:
 
 def retention_by_cohort(
     conn, cohort_type: str = "weekly"
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Separate Kaplan-Meier curves grouped by signup cohort.
 
     cohort_type: 'weekly' groups by ISO week of first_session_at.
@@ -212,7 +212,7 @@ def retention_by_cohort(
         return []
 
     # Group by cohort
-    cohorts: Dict[str, List[Dict[str, Any]]] = {}
+    cohorts: dict[str, list[dict[str, Any]]] = {}
     for t in timelines:
         first = t["first_session"]
         try:
@@ -238,7 +238,7 @@ def retention_by_cohort(
     return results
 
 
-def churn_risk_factors(conn) -> Dict[str, Any]:
+def churn_risk_factors(conn) -> dict[str, Any]:
     """Analyze correlations between user behavior features and churn.
 
     Features: avg sessions per week, avg drill accuracy,
@@ -249,13 +249,13 @@ def churn_risk_factors(conn) -> Dict[str, Any]:
     if len(timelines) < 5:
         return {"n_users": len(timelines), "factors": {}}
 
-    user_ids = [t["user_id"] for t in timelines]
+    [t["user_id"] for t in timelines]
     churn_flags = [float(t["event"]) for t in timelines]
 
     # Feature 1: sessions per week
-    sessions_per_week: List[float] = []
+    sessions_per_week: list[float] = []
     # Feature 2: avg accuracy
-    avg_accuracy: List[float] = []
+    avg_accuracy: list[float] = []
 
     for t in timelines:
         uid = t["user_id"]
@@ -279,7 +279,7 @@ def churn_risk_factors(conn) -> Dict[str, Any]:
         sessions_per_week.append(cnt / obs_weeks)
         avg_accuracy.append(acc if acc is not None else 0.0)
 
-    factors: Dict[str, Any] = {}
+    factors: dict[str, Any] = {}
 
     r_spw = _pearson_r(sessions_per_week, churn_flags)
     if r_spw is not None:

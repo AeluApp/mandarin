@@ -22,7 +22,7 @@ import json
 import logging
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -240,7 +240,7 @@ def register_nudge(
     copy_template: str,
     context: str = "in-app",
     platforms: str = "web,ios,android,macos",
-    experiment_id: Optional[int] = None,
+    experiment_id: int | None = None,
     auto_evaluate: bool = True,
 ) -> int:
     """Register a nudge in the registry. Returns the nudge ID.
@@ -248,7 +248,7 @@ def register_nudge(
     If auto_evaluate is True, runs DOCTRINE ethics evaluation and stores
     the score. Nudges with score < 0.7 are set to REVIEW status.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Evaluate ethics
     doctrine_score = None
@@ -296,9 +296,9 @@ def log_nudge_exposure(
     user_id: int,
     context: str = "",
     variant: str = "control",
-) -> Optional[int]:
+) -> int | None:
     """Log that a user was shown a nudge. Returns exposure ID."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         # Look up nudge_id
         row = conn.execute(
@@ -326,7 +326,7 @@ def log_nudge_outcome(
     outcome: OutcomeType,
 ) -> None:
     """Log the outcome of a nudge exposure."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT INTO nudge_outcome (nudge_exposure_id, outcome_type, outcome_at)

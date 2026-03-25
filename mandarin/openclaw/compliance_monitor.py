@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 from typing import Optional
 
@@ -55,7 +55,7 @@ class ActionItem:
     description: str
     framework: RegulatoryFramework
     urgency: str  # low, medium, high, critical
-    deadline: Optional[str] = None
+    deadline: str | None = None
     assigned_to: str = "owner"
 
 
@@ -76,7 +76,7 @@ class ComplianceReport:
 
     def __post_init__(self):
         if not self.last_checked:
-            self.last_checked = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            self.last_checked = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
 
 @dataclass

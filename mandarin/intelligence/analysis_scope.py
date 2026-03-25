@@ -15,8 +15,8 @@ from typing import Optional
 class AnalysisScope:
     """Defines the scope of an intelligence analysis query."""
 
-    user_id: Optional[int] = None
-    classroom_id: Optional[int] = None
+    user_id: int | None = None
+    classroom_id: int | None = None
     user_ids: list[int] = field(default_factory=list)
 
     @property

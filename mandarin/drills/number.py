@@ -24,7 +24,7 @@ def _get_number_drills():
 
 
 def run_number_system_drill(item: dict, conn, show_fn, input_fn,
-                            prominent: bool = True) -> Optional[DrillResult]:
+                            prominent: bool = True) -> DrillResult | None:
     """Show an arabic number/value → pick the correct Chinese expression (MC).
 
     Filters entries by hsk_level <= item's level. Returns None if no suitable

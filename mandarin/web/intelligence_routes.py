@@ -2,7 +2,7 @@
 
 import logging
 import math
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone, UTC
 
 from flask import Blueprint, jsonify
 from flask_login import login_required
@@ -53,7 +53,7 @@ def api_learner_intelligence():
             (user_id,),
         ).fetchall()
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         optimal_zone_count = 0
         total_items_learning = len(rows)
 
@@ -61,7 +61,7 @@ def api_learner_intelligence():
             try:
                 last_review = datetime.fromisoformat(r["last_review_date"])
                 if last_review.tzinfo is None:
-                    last_review = last_review.replace(tzinfo=timezone.utc)
+                    last_review = last_review.replace(tzinfo=UTC)
                 elapsed = max(0.0, (now - last_review).total_seconds() / 86400)
                 ret = compute_retrievability(r["half_life_days"], elapsed)
                 if 0.70 <= ret <= 0.85:

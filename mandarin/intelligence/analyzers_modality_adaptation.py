@@ -430,7 +430,7 @@ def _analyze_flow_by_modality(conn) -> list[dict]:
         # Count sessions with/without reading and listening blocks
         has_reading = sum(1 for s in sessions
                          if s["modality_counts"] and "reading" in str(s["modality_counts"]))
-        has_listening = sum(1 for s in sessions
+        sum(1 for s in sessions
                            if s["modality_counts"] and "listening" in str(s["modality_counts"]))
         early_exits = sum(1 for s in sessions if s["early_exit"])
 

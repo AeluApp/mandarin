@@ -13,7 +13,7 @@ def _none_to_empty(val):
     return val if val is not None else ""
 
 
-def export_progress_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]]:
+def export_progress_csv(conn: sqlite3.Connection) -> tuple[list[str], list[list]]:
     """Query progress data and return (header, rows) for CSV export."""
     rows = conn.execute("""
         SELECT ci.id AS item_id, ci.hanzi, ci.pinyin, ci.english,
@@ -48,7 +48,7 @@ def export_progress_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]
     return header, data
 
 
-def export_sessions_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]]:
+def export_sessions_csv(conn: sqlite3.Connection) -> tuple[list[str], list[list]]:
     """Query session history and return (header, rows) for CSV export."""
     rows = conn.execute("""
         SELECT id AS session_id, started_at, session_type,
@@ -78,7 +78,7 @@ def export_sessions_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]
     return header, data
 
 
-def export_errors_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]]:
+def export_errors_csv(conn: sqlite3.Connection) -> tuple[list[str], list[list]]:
     """Query error log and return (header, rows) for CSV export."""
     rows = conn.execute("""
         SELECT el.id, el.content_item_id, ci.hanzi,
@@ -103,7 +103,7 @@ def export_errors_csv(conn: sqlite3.Connection) -> Tuple[List[str], List[List]]:
     return header, data
 
 
-def to_csv_string(header: List[str], data: List[List]) -> str:
+def to_csv_string(header: list[str], data: list[list]) -> str:
     """Convert header + data rows to a CSV string."""
     buf = io.StringIO()
     writer = csv.writer(buf)

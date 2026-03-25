@@ -231,7 +231,6 @@ def _analyze_listening_process_capability(conn) -> list[dict]:
         std_score = statistics.stdev(scores) if len(scores) > 1 else 0.1
 
         # Cpk: target = 0.7, USL = 1.0, LSL = 0.4
-        target = 0.7
         usl, lsl = 1.0, 0.4
         cpu = (usl - mean_score) / (3 * max(std_score, 0.01))
         cpl = (mean_score - lsl) / (3 * max(std_score, 0.01))

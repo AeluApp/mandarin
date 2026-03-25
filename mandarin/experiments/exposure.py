@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def log_exposure(
         if not assignment:
             return
 
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             """INSERT INTO experiment_exposure
                (experiment_id, user_id, variant, context, exposed_at)

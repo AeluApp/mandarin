@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 from . import db
@@ -26,7 +26,7 @@ VERBS = {
 ACTIVITY_BASE = f"{CANONICAL_URL}/activities"
 
 
-def _make_actor(user_id: int, email: Optional[str] = None) -> Dict[str, Any]:
+def _make_actor(user_id: int, email: str | None = None) -> dict[str, Any]:
     """Create an xAPI actor (Agent) from user info."""
     actor = {
         "objectType": "Agent",
@@ -40,7 +40,7 @@ def _make_actor(user_id: int, email: Optional[str] = None) -> Dict[str, Any]:
     return actor
 
 
-def _make_verb(verb_key: str) -> Dict[str, Any]:
+def _make_verb(verb_key: str) -> dict[str, Any]:
     """Create an xAPI verb object."""
     return {
         "id": VERBS.get(verb_key, VERBS["attempted"]),
@@ -49,7 +49,7 @@ def _make_verb(verb_key: str) -> Dict[str, Any]:
 
 
 def _make_object(item_id: int, item_type: str = "drill",
-                 name: Optional[str] = None) -> Dict[str, Any]:
+                 name: str | None = None) -> dict[str, Any]:
     """Create an xAPI activity object."""
     obj = {
         "objectType": "Activity",
@@ -68,20 +68,20 @@ def generate_statement(
     verb: str,
     item_id: int,
     item_type: str = "drill",
-    name: Optional[str] = None,
-    score: Optional[float] = None,
-    success: Optional[bool] = None,
-    duration_seconds: Optional[float] = None,
-    email: Optional[str] = None,
-    context: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
+    name: str | None = None,
+    score: float | None = None,
+    success: bool | None = None,
+    duration_seconds: float | None = None,
+    email: str | None = None,
+    context: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Generate a single xAPI statement."""
     stmt = {
         "id": str(uuid.uuid4()),
         "actor": _make_actor(user_id, email),
         "verb": _make_verb(verb),
         "object": _make_object(item_id, item_type, name),
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
     }
 
     if score is not None or success is not None or duration_seconds is not None:
@@ -102,9 +102,9 @@ def generate_statement(
 
 
 def get_statements(
-    conn, user_id: int, since: Optional[str] = None, until: Optional[str] = None,
+    conn, user_id: int, since: str | None = None, until: str | None = None,
     limit: int = 100,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Generate xAPI statements from error log and session log history.
 
     Converts stored error_log rows into xAPI "answered" statements and

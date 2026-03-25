@@ -83,7 +83,7 @@ def load_scenario_file(conn, file_path: str, update_existing: bool = False) -> d
 
     Returns {"added": bool, "updated": bool, "title": str, "reason": str}.
     """
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError as e:

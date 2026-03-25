@@ -24,9 +24,9 @@ def trace_prompt_call(
     success: bool,
     input_tokens: int = 0,
     output_tokens: int = 0,
-    error_type: Optional[str] = None,
-    output_quality_score: Optional[float] = None,
-) -> Optional[int]:
+    error_type: str | None = None,
+    output_quality_score: float | None = None,
+) -> int | None:
     """Log a prompt call to the prompt_trace table."""
     prompt_hash = hashlib.sha256(prompt_text.encode("utf-8")).hexdigest()[:16]
     try:

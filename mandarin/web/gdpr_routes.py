@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from flask import Blueprint, jsonify, Response
 from flask_login import login_required, current_user
@@ -52,7 +52,7 @@ def _export_data_impl():
     with db.connection() as conn:
         log_security_event(conn, SecurityEvent.DATA_EXPORT_REQUESTED, user_id=user_id)
 
-        export = {"exported_at": datetime.now(timezone.utc).isoformat(), "user_id": user_id}
+        export = {"exported_at": datetime.now(UTC).isoformat(), "user_id": user_id}
 
         # User profile — may be None for a deleted/orphaned auth session
         user_row = conn.execute(
@@ -198,7 +198,7 @@ def _request_deletion_impl():
 
         log_security_event(conn, SecurityEvent.DATA_DELETION_REQUESTED, user_id=user_id)
 
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         # Record the deletion request (only if not already processing)
         if not existing or existing["status"] != "processing":

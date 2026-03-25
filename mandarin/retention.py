@@ -27,7 +27,7 @@ Dual-model architecture:
 
 import logging
 import math
-from datetime import date, timedelta
+from datetime import date, timedelta, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -429,7 +429,7 @@ def save_session_metrics(conn, session_id: int, metrics: dict, user_id: int = 1)
         metrics.get("items_strengthened", 0),
         metrics.get("items_weakened", 0),
         metrics.get("transfer_events", 0),
-        datetime.now(timezone.utc).isoformat(),
+        datetime.now(UTC).isoformat(),
     ))
     conn.commit()
 
@@ -461,7 +461,7 @@ def compute_calibration(conn, n_bins: int = 5, user_id: int = 1) -> dict:
         return {"bins": [], "brier_score": None, "n_items": 0, "calibration_error": None}
 
     # Bin by predicted recall
-    bin_edges = [i / n_bins for i in range(n_bins + 1)]
+    [i / n_bins for i in range(n_bins + 1)]
     bins = [{"predicted_sum": 0.0, "actual_sum": 0.0, "count": 0} for _ in range(n_bins)]
 
     brier_sum = 0.0
@@ -485,7 +485,7 @@ def compute_calibration(conn, n_bins: int = 5, user_id: int = 1) -> dict:
     result_bins = []
     calibration_error_sum = 0.0
     calibration_n = 0
-    for i, b in enumerate(bins):
+    for _i, b in enumerate(bins):
         if b["count"] > 0:
             pred_avg = round(b["predicted_sum"] / b["count"], 3)
             actual_avg = round(b["actual_sum"] / b["count"], 3)

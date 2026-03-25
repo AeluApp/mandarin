@@ -3,7 +3,7 @@
 import hashlib
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ def is_enabled(conn: sqlite3.Connection, flag_name: str, user_id: int = None) ->
 def set_flag(conn: sqlite3.Connection, flag_name: str, enabled: bool,
              rollout_pct: int = 100, description: str = None) -> None:
     """Create or update a feature flag."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO feature_flag (name, enabled, rollout_pct, description, updated_at)
         VALUES (?, ?, ?, ?, ?)

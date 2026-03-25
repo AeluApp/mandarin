@@ -8,7 +8,7 @@ A retention_days value of -1 means indefinite retention (no purge).
 import logging
 import re
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ def purge_expired(conn: sqlite3.Connection, dry_run: bool = False) -> dict:
         logger.warning("retention_policy table not found")
         return results
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Map table -> timestamp column to use for age check
     timestamp_columns = {

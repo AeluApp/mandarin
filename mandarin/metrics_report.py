@@ -24,7 +24,7 @@ import argparse
 import json
 import logging
 import sqlite3
-from datetime import datetime, date, timedelta, timezone
+from datetime import datetime, date, timedelta, timezone, UTC
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -64,7 +64,7 @@ def _safe_pct(a, b, default=0.0):
 # Business Health KPIs
 # ---------------------------------------------------------------------------
 
-def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Calculate business health metrics.
 
     For single-user: active_users is 0 or 1. Multi-user: COUNT(DISTINCT user_id).
@@ -109,7 +109,7 @@ def _business_health(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # Engagement KPIs
 # ---------------------------------------------------------------------------
 
-def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Calculate engagement metrics."""
     metrics = {}
 
@@ -263,7 +263,7 @@ def _engagement(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # Learning Outcomes KPIs
 # ---------------------------------------------------------------------------
 
-def _learning_outcomes(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _learning_outcomes(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Calculate learning outcome metrics."""
     metrics = {}
 
@@ -363,7 +363,7 @@ def _learning_outcomes(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # Funnel / activity pattern KPIs
 # ---------------------------------------------------------------------------
 
-def _funnel_metrics(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _funnel_metrics(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Calculate funnel and activity pattern metrics."""
     metrics = {}
 
@@ -442,7 +442,7 @@ def _funnel_metrics(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # North Star: Weekly Items Mastered per Active User
 # ---------------------------------------------------------------------------
 
-def _north_star(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _north_star(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Calculate the north star metric: weekly items mastered per active user.
 
     An item is 'mastered' when it has 3+ attempts and 85%+ accuracy.
@@ -482,7 +482,7 @@ def _north_star(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # False Mastery Health Metric (Doctrine §2)
 # ---------------------------------------------------------------------------
 
-def _false_mastery_rate(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _false_mastery_rate(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Rate at which mastered items subsequently fail. Healthy if ≤10%."""
     from .diagnostics import compute_false_mastery_rate
     return compute_false_mastery_rate(conn, user_id=user_id)
@@ -492,7 +492,7 @@ def _false_mastery_rate(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # Completion Rate by Segment
 # ---------------------------------------------------------------------------
 
-def _completion_by_segment(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _completion_by_segment(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Session completion rate broken out by session_type and HSK level band."""
     metrics = {"by_session_type": {}, "by_hsk_band": {}}
 
@@ -568,7 +568,7 @@ def _completion_by_segment(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
 # D1/D7/D30 Retention Cohorts (multi-user ready)
 # ---------------------------------------------------------------------------
 
-def _retention_cohorts(conn: sqlite3.Connection) -> Dict:
+def _retention_cohorts(conn: sqlite3.Connection) -> dict:
     """Calculate D1, D7, D30 retention rates across all users.
 
     For each user who signed up in the trailing 30 days, check if they had
@@ -608,7 +608,7 @@ def _retention_cohorts(conn: sqlite3.Connection) -> Dict:
         except (ValueError, TypeError):
             continue
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         days_since = (now - signup_dt).days
 
         # D1: had session on day 0-1 (within 48h of signup)
@@ -672,7 +672,7 @@ def _retention_cohorts(conn: sqlite3.Connection) -> Dict:
 # Growth Accounting (multi-user ready)
 # ---------------------------------------------------------------------------
 
-def _growth_accounting(conn: sqlite3.Connection) -> Dict:
+def _growth_accounting(conn: sqlite3.Connection) -> dict:
     """Break active users into new, retained, resurrected, and churned.
 
     - New: session this week, no session in any prior week
@@ -751,7 +751,7 @@ def _growth_accounting(conn: sqlite3.Connection) -> Dict:
 # Crash Rate
 # ---------------------------------------------------------------------------
 
-def _crash_rate(conn: sqlite3.Connection) -> Dict:
+def _crash_rate(conn: sqlite3.Connection) -> dict:
     """Calculate server crash rate: crashes / total sessions this week."""
     metrics = {"crashes": 0, "sessions": 0, "rate_pct": 0.0, "top_errors": []}
 
@@ -794,7 +794,7 @@ def _crash_rate(conn: sqlite3.Connection) -> Dict:
 # Week-over-week comparison
 # ---------------------------------------------------------------------------
 
-def _week_comparison(conn: sqlite3.Connection, user_id: int = 1) -> Dict:
+def _week_comparison(conn: sqlite3.Connection, user_id: int = 1) -> dict:
     """Compare this week vs. last week on key metrics."""
     comp = {}
 
@@ -857,13 +857,13 @@ def _delta_str(val, suffix=""):
 
 
 def _generate_report_text(
-    biz: Dict,
-    eng: Dict,
-    learn: Dict,
-    funnel: Dict,
-    wow: Dict,
+    biz: dict,
+    eng: dict,
+    learn: dict,
+    funnel: dict,
+    wow: dict,
     report_date: str,
-    extra: Optional[Dict] = None,
+    extra: dict | None = None,
 ) -> str:
     """Generate the weekly report as plain text."""
     extra = extra or {}
@@ -1030,13 +1030,13 @@ def _generate_report_text(
 
 
 def _generate_report_md(
-    biz: Dict,
-    eng: Dict,
-    learn: Dict,
-    funnel: Dict,
-    wow: Dict,
+    biz: dict,
+    eng: dict,
+    learn: dict,
+    funnel: dict,
+    wow: dict,
     report_date: str,
-    extra: Optional[Dict] = None,
+    extra: dict | None = None,
 ) -> str:
     """Generate the weekly report as Markdown."""
     extra = extra or {}
@@ -1238,13 +1238,13 @@ def _generate_report_md(
 
 
 def _print_report_rich(
-    biz: Dict,
-    eng: Dict,
-    learn: Dict,
-    funnel: Dict,
-    wow: Dict,
+    biz: dict,
+    eng: dict,
+    learn: dict,
+    funnel: dict,
+    wow: dict,
     report_date: str,
-    extra: Optional[Dict] = None,
+    extra: dict | None = None,
 ) -> None:
     """Print the report using Rich tables."""
     from rich.console import Console
@@ -1456,7 +1456,7 @@ def _print_report_rich(
 # ---------------------------------------------------------------------------
 
 def generate_report(db_path: str = None, output_format: str = "rich",
-                    save: bool = True, user_id: int = 1) -> Dict:
+                    save: bool = True, user_id: int = 1) -> dict:
     """Generate the weekly metrics report.
 
     Args:

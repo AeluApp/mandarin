@@ -13,7 +13,7 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 _dspy_configured = False
-_dspy_available: Optional[bool] = None
+_dspy_available: bool | None = None
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # DSPy Configuration
@@ -149,10 +149,10 @@ except ImportError:
 # Module Instances (ChainOfThought wrappers)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-drill_generator: Optional[object] = None
-error_explainer: Optional[object] = None
-insight_generator: Optional[object] = None
-reading_generator: Optional[object] = None
+drill_generator: object | None = None
+error_explainer: object | None = None
+insight_generator: object | None = None
+reading_generator: object | None = None
 
 if _HAS_DSPY:
     try:
@@ -342,7 +342,7 @@ def _get_output_field_names(module_name: str) -> list[str]:
 
 def _build_example_from_cache(
     module_name: str, prompt_text: str, response_text: str,
-) -> Optional[object]:
+) -> object | None:
     """Parse a cached prompt/response pair into a dspy.Example.
 
     Extracts input fields from the prompt text and output fields from
@@ -375,7 +375,7 @@ def _build_example_from_cache(
     return None
 
 
-def _build_drill_example(prompt_text: str, response: dict) -> Optional[object]:
+def _build_drill_example(prompt_text: str, response: dict) -> object | None:
     """Build a DSPy Example for drill generation."""
     import dspy
 
@@ -407,7 +407,7 @@ def _build_drill_example(prompt_text: str, response: dict) -> Optional[object]:
     ).with_inputs("hanzi", "pinyin", "english", "hsk_level")
 
 
-def _build_error_example(prompt_text: str, response: dict) -> Optional[object]:
+def _build_error_example(prompt_text: str, response: dict) -> object | None:
     """Build a DSPy Example for error explanation."""
     import dspy
 
@@ -452,7 +452,7 @@ def _build_error_example(prompt_text: str, response: dict) -> Optional[object]:
     ).with_inputs("hanzi", "correct_answer", "wrong_answer")
 
 
-def _build_insight_example(prompt_text: str, response: dict) -> Optional[object]:
+def _build_insight_example(prompt_text: str, response: dict) -> object | None:
     """Build a DSPy Example for learning insight."""
     import dspy
 
@@ -486,7 +486,7 @@ def _build_insight_example(prompt_text: str, response: dict) -> Optional[object]
     ).with_inputs("error_summary", "lookback_days")
 
 
-def _build_reading_example(prompt_text: str, response: dict) -> Optional[object]:
+def _build_reading_example(prompt_text: str, response: dict) -> object | None:
     """Build a DSPy Example for reading passage generation."""
     import dspy
 

@@ -16,7 +16,7 @@ import logging
 import math
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import _safe_scalar, _safe_query, _safe_query_all
 
@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 def generate_quality_metrics(conn):
     """Compute and store DPMO, COPQ, sigma, capability metrics from session data."""
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # ── DPMO: Defects Per Million Opportunities ──
     # Defect = incorrect drill answer; opportunity = every drill attempt
@@ -149,7 +149,7 @@ def generate_spc_observations(conn):
     Populates spc_observation with chart_type in (drill_accuracy, response_time,
     session_completion) — the three types that check_control_charts() looks for.
     """
-    now = datetime.now(timezone.utc).isoformat()
+    datetime.now(UTC).isoformat()
 
     # Daily accuracy observations (last 30 days)
     daily_acc = _safe_query_all(conn, """
@@ -271,7 +271,7 @@ def ensure_dmaic_measure_phase(conn):
             "total_errors": total_errors,
             "error_rate": round(total_errors / max(1, total_reviews), 4),
             "dpmo": dpmo_val,
-            "measurement_date": datetime.now(timezone.utc).isoformat(),
+            "measurement_date": datetime.now(UTC).isoformat(),
         }
         for row in rows:
             conn.execute(
@@ -300,7 +300,7 @@ def create_dmaic_entry_from_audit(conn, findings, dimension_scores, overall):
     Maps the existing audit pipeline to the Define→Measure→Analyze→Improve→Control
     framework so methodology_coverage detects DMAIC activity.
     """
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # Group findings by dimension
     dims_with_findings = {}

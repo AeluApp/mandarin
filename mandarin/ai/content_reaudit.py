@@ -194,11 +194,11 @@ def _reaudit_single_item(conn: sqlite3.Connection, item) -> dict:
 
 def _log_reaudit(conn, content_item_id: int, passed: bool,
                  audit_type: str = "scheduled",
-                 issues: Optional[str] = None,
-                 learner_accuracy: Optional[float] = None,
-                 attempt_count: Optional[int] = None,
-                 action: Optional[str] = None,
-                 notes: Optional[str] = None) -> None:
+                 issues: str | None = None,
+                 learner_accuracy: float | None = None,
+                 attempt_count: int | None = None,
+                 action: str | None = None,
+                 notes: str | None = None) -> None:
     """Log a reaudit result."""
     try:
         conn.execute("""

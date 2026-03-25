@@ -419,7 +419,7 @@ def _execute_intent(intent_result: llm_handler.IntentResult, conn) -> str:
 
 # ── Bot factory ───────────────────────────────────────────
 
-def create_bot() -> Optional["Application"]:
+def create_bot() -> Application | None:
     """Create and configure the Telegram bot application.
 
     Returns None if python-telegram-bot is not installed or token is missing.
@@ -453,7 +453,7 @@ def create_bot() -> Optional["Application"]:
     return app
 
 
-async def set_bot_commands(app: "Application") -> None:
+async def set_bot_commands(app: Application) -> None:
     """Register command menu with Telegram."""
     await app.bot.set_my_commands([
         BotCommand("status", "How your learning is going"),

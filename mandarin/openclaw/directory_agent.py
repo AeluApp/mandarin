@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -280,7 +280,7 @@ class SubmissionTracker:
     def record_submission(self, directory_name: str, status: str, notes: str = ""):
         if not self.conn:
             return
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         self.conn.execute("""
             INSERT INTO directory_submission (directory_name, status, notes, submitted_at)
             VALUES (?, ?, ?, ?)
@@ -291,7 +291,7 @@ class SubmissionTracker:
     def update_status(self, directory_name: str, status: str, listing_url: str = ""):
         if not self.conn:
             return
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         self.conn.execute("""
             UPDATE directory_submission SET status = ?, listing_url = ?, listed_at = ?
             WHERE directory_name = ?

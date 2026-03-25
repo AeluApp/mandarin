@@ -14,7 +14,7 @@ import hashlib
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ def log_lifecycle_event(event_type: str, user_id: str = None, conn: sqlite3.Conn
         **metadata: Arbitrary key-value pairs stored as JSON in the metadata column.
     """
     metadata_json = json.dumps(metadata) if metadata else None
-    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     owns_conn = conn is None
     if owns_conn:
@@ -549,7 +549,7 @@ def check_fresh_start_triggers(db_path=None):
         4. Cultural events: Chinese New Year, Mid-Autumn Festival
     """
     from .db.core import get_connection, DB_PATH
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     path = Path(db_path) if db_path else DB_PATH
     if not path.exists():
@@ -559,7 +559,7 @@ def check_fresh_start_triggers(db_path=None):
     triggers = []
 
     try:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         # 1. New month + inactive 7+ days
         if now.day <= 3:  # First 3 days of month

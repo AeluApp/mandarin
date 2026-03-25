@@ -6,7 +6,7 @@ import logging
 import sqlite3
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import Optional
 
@@ -30,7 +30,7 @@ def save_model(model, path: Path, metrics: dict, conn: sqlite3.Connection) -> No
     path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     model_id = str(uuid.uuid4())
     model_name = path.stem
 
@@ -67,7 +67,7 @@ def load_model(path: Path):
         return None
 
 
-def load_model_metadata(conn: sqlite3.Connection, model_name: str) -> Optional[ModelMetadata]:
+def load_model_metadata(conn: sqlite3.Connection, model_name: str) -> ModelMetadata | None:
     """Load metadata for the active version of a model."""
     row = conn.execute("""
         SELECT model_name, trained_at, sample_count, val_accuracy,

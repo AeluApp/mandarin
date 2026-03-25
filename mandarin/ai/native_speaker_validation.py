@@ -10,7 +10,7 @@ naturalness, register appropriateness, drift-risk vocabulary.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -84,7 +84,7 @@ def get_validation_batch(
 
 def export_validation_sheet(conn: sqlite3.Connection, batch: list[dict]) -> str:
     """Export validation batch as structured plain text for tutor session."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     lines = [
         "# Aelu Native Speaker Validation Sheet",
         f"# Generated: {now}",

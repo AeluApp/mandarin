@@ -34,9 +34,9 @@ _TEMPLATE_NAMES = [
 def _read_file(path: str) -> str | None:
     """Read a file, returning None on any error."""
     try:
-        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        with open(path, encoding="utf-8", errors="replace") as fh:
             return fh.read()
-    except (OSError, IOError):
+    except OSError:
         return None
 
 
@@ -543,7 +543,7 @@ def _analyze_branding(conn) -> list[dict]:
     """Check index.html and style.css for brand consistency markers."""
     findings = []
     index_html = _read_file(os.path.join(_TEMPLATE_DIR, "index.html"))
-    css = _read_file(_STYLE_CSS)
+    _read_file(_STYLE_CSS)
 
     if index_html is None:
         findings.append(_finding(

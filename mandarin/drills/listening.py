@@ -128,7 +128,7 @@ def run_listening_gist_drill(item: dict, conn, show_fn, input_fn,
         if len(hanzi) >= 2:
             syllables = re.split(r"[\s\u2018\u2019]+", pinyin_str.strip())
             if len(syllables) == len(hanzi):
-                pairs = [f"{h} {p}" for h, p in zip(hanzi, syllables)]
+                pairs = [f"{h} {p}" for h, p in zip(hanzi, syllables, strict=False)]
                 feedback += "\n  " + " \u00b7 ".join(pairs)
         error_type = cause_to_error_type(cause, "vocab")
 
@@ -264,7 +264,7 @@ def run_listening_dictation_drill(item: dict, conn, show_fn, input_fn,
     if not correct:
         # Character-by-character comparison
         comparison = []
-        for i, (exp_ch, usr_ch) in enumerate(zip(expected, answer)):
+        for _i, (exp_ch, usr_ch) in enumerate(zip(expected, answer, strict=False)):
             if exp_ch == usr_ch:
                 comparison.append(f"[green]{exp_ch}[/green]")
             else:

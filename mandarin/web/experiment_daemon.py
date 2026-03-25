@@ -15,7 +15,7 @@ The admin receives a digest, not a decision queue.
 import json
 import logging
 import threading
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 from .. import db
 from ..experiments import (
@@ -134,7 +134,7 @@ def _run_loop():
 
 def _daemon_tick(conn):
     """Single daemon cycle — the core autonomous loop."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
     digest_entries = []
 

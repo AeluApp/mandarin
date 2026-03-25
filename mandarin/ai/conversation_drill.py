@@ -272,7 +272,7 @@ Output ONLY valid JSON:
 
 def get_scenario(
     conn, hsk_level: int = 2, exclude_ids: list[str] = None,
-) -> Optional[dict]:
+) -> dict | None:
     """Pick a conversation scenario appropriate for the learner's level."""
     exclude_ids = exclude_ids or []
 
@@ -448,7 +448,7 @@ def list_scenarios(hsk_level: int = None) -> list[dict]:
 
 # ── Helpers ─────────────────────────────────────────
 
-def _parse_evaluation(text: str) -> Optional[dict]:
+def _parse_evaluation(text: str) -> dict | None:
     """Parse JSON evaluation from LLM response."""
     import re
     text = text.strip()
@@ -464,7 +464,7 @@ def _parse_evaluation(text: str) -> Optional[dict]:
     return None
 
 
-def _parse_json_safe(text: str) -> Optional[dict]:
+def _parse_json_safe(text: str) -> dict | None:
     """Parse JSON from LLM response, tolerating markdown fences."""
     import re
     text = text.strip()

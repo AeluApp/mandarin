@@ -12,7 +12,7 @@ import json
 import logging
 import sqlite3
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .ollama_client import generate, is_ollama_available
 
@@ -615,7 +615,7 @@ def propose_ai_hypotheses(conn: sqlite3.Connection) -> list[dict]:
             continue
 
         # Create proposal record
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         variants = hypothesis.get("variants", ["control", "treatment"])
 
         try:

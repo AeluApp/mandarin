@@ -11,7 +11,7 @@ automatically so a crashed instance doesn't hold the lock forever.
 import logging
 import os
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from . import db
 
@@ -30,7 +30,7 @@ def acquire_lock(conn: sqlite3.Connection, name: str, ttl_seconds: int) -> bool:
     The lock auto-expires after ttl_seconds, so a crashed instance doesn't
     block others permanently.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Try to take the lock: INSERT if missing, or UPDATE if expired
     try:
@@ -80,7 +80,7 @@ def release_lock(conn: sqlite3.Connection, name: str) -> None:
 
 def extend_lock(conn: sqlite3.Connection, name: str, ttl_seconds: int) -> bool:
     """Extend the TTL of a lock we own. Returns True if successful."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         cur = conn.execute(
             """UPDATE scheduler_lock

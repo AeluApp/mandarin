@@ -622,7 +622,7 @@ def _run_watch(conn, user_id: int = 1):
         console.print("\n  No recommendations available for current level.\n")
         return
 
-    for entry, watch in recs:
+    for entry, _watch in recs:
         console.print()
         console.print(f"  [bold bright_cyan]{entry.get('title_zh', '')}[/bold bright_cyan]")
         console.print(f"  {entry.get('title', '')}  ({entry.get('year', '')})")

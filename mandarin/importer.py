@@ -28,7 +28,7 @@ def import_csv(conn, file_path: str, *,
                hsk_level: int = None,
                register: str = "neutral",
                content_lens: str = None,
-               source_name: str = None) -> Tuple[int, int]:
+               source_name: str = None) -> tuple[int, int]:
     """Import vocabulary from a CSV file.
 
     Supports two formats:
@@ -53,7 +53,7 @@ def import_csv_text(conn, text: str, *,
                     hsk_level: int = None,
                     register: str = "neutral",
                     content_lens: str = None,
-                    source_name: str = "csv_import") -> Tuple[int, int]:
+                    source_name: str = "csv_import") -> tuple[int, int]:
     """Import vocabulary from CSV text content.
 
     Runs the entire import inside one transaction — rolls back on error
@@ -182,7 +182,7 @@ def _detect_columns(header: list) -> dict:
     return col_map if "hanzi" in col_map or "english" in col_map else None
 
 
-def _extract_from_mapped(row: list, col_map: dict) -> Optional[Tuple[str, str, str]]:
+def _extract_from_mapped(row: list, col_map: dict) -> tuple[str, str, str] | None:
     """Extract hanzi, pinyin, english from a row with known columns."""
     hanzi = row[col_map["hanzi"]].strip() if "hanzi" in col_map and col_map["hanzi"] < len(row) else ""
     pinyin = row[col_map.get("pinyin", -1)].strip() if "pinyin" in col_map and col_map["pinyin"] < len(row) else ""
@@ -193,7 +193,7 @@ def _extract_from_mapped(row: list, col_map: dict) -> Optional[Tuple[str, str, s
     return hanzi, pinyin, english
 
 
-def _extract_from_two_col(row: list) -> Optional[Tuple[str, str, str]]:
+def _extract_from_two_col(row: list) -> tuple[str, str, str] | None:
     """Extract from Quizlet two-column format (term, definition).
 
     Quizlet format: "八(bā)" or "八 (bā)" in term, "eight" in definition.
@@ -235,7 +235,7 @@ def import_srt(conn, file_path: str, *,
                content_lens: str = None,
                source_name: str = None,
                min_chars: int = 2,
-               max_chars: int = 40) -> Tuple[int, int]:
+               max_chars: int = 40) -> tuple[int, int]:
     """Import sentences from an SRT subtitle file.
 
     Extracts Chinese text lines, deduplicates, and imports as sentence items.
@@ -302,7 +302,7 @@ def import_srt(conn, file_path: str, *,
         raise
 
 
-def _parse_srt(text: str, min_chars: int = 2, max_chars: int = 40) -> List[str]:
+def _parse_srt(text: str, min_chars: int = 2, max_chars: int = 40) -> list[str]:
     """Parse SRT text and extract unique Chinese sentences."""
     # Remove SRT timing lines and sequence numbers
     lines = text.split("\n")
@@ -361,7 +361,7 @@ def _estimate_sentence_difficulty(hanzi: str) -> float:
 # ── HSK Level Import ──────────────────────────────
 
 def _validate_content_row(hanzi: str, pinyin: str, english: str,
-                          hsk_level: int = None) -> Optional[str]:
+                          hsk_level: int = None) -> str | None:
     """Validate a content item before import.
 
     Returns an error message string if invalid, None if valid.
@@ -376,7 +376,7 @@ def _validate_content_row(hanzi: str, pinyin: str, english: str,
     return None
 
 
-def import_hsk_level(conn, level: int, dry_run: bool = False) -> Tuple[int, int]:
+def import_hsk_level(conn, level: int, dry_run: bool = False) -> tuple[int, int]:
     """Import vocabulary from an HSK level JSON file.
 
     Reads data/hsk/hskN.json, inserts items with hsk_level=N, source="hskN",
@@ -444,7 +444,7 @@ def add_item(conn, hanzi: str, pinyin: str, english: str, *,
              item_type: str = "vocab",
              hsk_level: int = None,
              register: str = "neutral",
-             content_lens: str = None) -> Optional[int]:
+             content_lens: str = None) -> int | None:
     """Add a single content item manually.
 
     Returns the item ID, or None if it's a duplicate.
@@ -551,7 +551,7 @@ def _record_source(conn, source_type: str, name: str, *,
                    register: str = None,
                    content_lens: str = None,
                    url: str = None,
-                   file_path: str = None) -> Optional[int]:
+                   file_path: str = None) -> int | None:
     """Record a content source in the database."""
     try:
         cur = conn.execute("""

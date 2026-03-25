@@ -15,6 +15,7 @@ import logging
 import sqlite3
 
 from ._base import _finding, _safe_scalar, _safe_query, _safe_query_all
+from datetime import UTC
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def generate_executive_summary(conn: sqlite3.Connection) -> dict:
 
     try:
         from datetime import datetime, timezone
-        summary["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        summary["generated_at"] = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     except Exception:
         pass
 

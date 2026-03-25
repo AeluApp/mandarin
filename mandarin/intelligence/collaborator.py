@@ -12,7 +12,7 @@ import json
 import logging
 import sqlite3
 from collections import Counter, defaultdict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from uuid import uuid4
 
 from ._base import _safe_query, _safe_query_all, _safe_scalar
@@ -34,7 +34,7 @@ def log_interaction(
 
     Only called from admin route handlers — never from analyzers or background jobs.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     day_of_week = now.weekday()
     hour_of_day = now.hour
 
@@ -47,7 +47,7 @@ def log_interaction(
         if wo and wo["created_at"]:
             try:
                 created = datetime.strptime(wo["created_at"], "%Y-%m-%d %H:%M:%S")
-                days_since = (now - created.replace(tzinfo=timezone.utc)).days
+                days_since = (now - created.replace(tzinfo=UTC)).days
             except (ValueError, TypeError):
                 pass
 
@@ -410,7 +410,7 @@ def _describe_significant_change(old_model: dict, new_model: dict) -> str:
 
 def _write_model(conn, model: dict):
     """Upsert the singleton collaborator model row."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Check if exists
     existing = _safe_query(conn, "SELECT id FROM pi_collaborator_model WHERE id = 'singleton'")
@@ -508,7 +508,7 @@ def _write_model(conn, model: dict):
 
 def _snapshot_model(conn, model: dict, obs: int, change: str):
     """Save a snapshot of the model for history."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             INSERT INTO pi_collaborator_model_history
@@ -631,7 +631,7 @@ def build_adaptive_presentation(conn, work_order: dict) -> dict:
     if (model.get("timing_confidence") or 0) >= 0.60:
         preferred_day = model.get("preferred_day_of_week")
         if preferred_day is not None:
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             days_until = (preferred_day - now.weekday()) % 7
             if days_until > 0:  # not today
                 surface_at = now + timedelta(days=days_until)
@@ -705,7 +705,7 @@ def update_domain_trust(conn, dimension: str, was_correct: bool) -> dict:
         override_requires_reason = 0
         persistence = "normal"
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             UPDATE pi_domain_trust

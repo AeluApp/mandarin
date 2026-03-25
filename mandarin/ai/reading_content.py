@@ -49,7 +49,7 @@ def generate_reading_passage(
     topic: str = "",
     length_characters: int = 200,
     content_lens: str = "",
-) -> Optional[dict]:
+) -> dict | None:
     """Generate a graded reading passage. Returns passage dict or None."""
     if not is_ollama_available():
         return None
@@ -147,7 +147,7 @@ def _repair_json(text: str) -> str:
     return text
 
 
-def _recover_truncated_json(text: str) -> Optional[str]:
+def _recover_truncated_json(text: str) -> str | None:
     """Attempt to close truncated JSON by balancing brackets/braces.
 
     Works for the common case where Qwen output is cut mid-value or
@@ -191,7 +191,7 @@ def _recover_truncated_json(text: str) -> Optional[str]:
     return text + suffix
 
 
-def _parse_passage_response(content: str) -> Optional[dict]:
+def _parse_passage_response(content: str) -> dict | None:
     """Parse JSON from LLM response with repair and truncation recovery."""
     text = content.strip()
     text = re.sub(r'^```(?:json)?\s*', '', text)
@@ -255,7 +255,7 @@ def _persist_reading_passage(conn, passage: dict, hsk_level: int, content_lens: 
     try:
         data = {"passages": []}
         if _READING_PASSAGES_PATH.exists():
-            with open(_READING_PASSAGES_PATH, "r", encoding="utf-8") as f:
+            with open(_READING_PASSAGES_PATH, encoding="utf-8") as f:
                 raw = json.load(f)
                 if isinstance(raw, dict):
                     data = raw

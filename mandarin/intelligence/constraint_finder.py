@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from uuid import uuid4
 
 from ._base import _safe_query, _safe_query_all, _safe_scalar
@@ -63,7 +63,7 @@ def identify_cross_domain_constraint(conn, dimension_scores=None) -> dict:
     result = {
         **primary,
         "all_constraints": all_constraints,
-        "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+        "checked_at": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
     }
 
     # Persist if a real constraint was found
@@ -253,7 +253,7 @@ def _persist_constraint(conn, constraint: dict) -> None:
             VALUES (?, ?, ?, ?, ?, ?)
         """, (
             str(uuid4()),
-            datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+            datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
             constraint.get("constraint", "unknown"),
             constraint.get("domain", "unknown"),
             constraint.get("severity", "medium"),

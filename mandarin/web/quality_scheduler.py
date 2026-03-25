@@ -5,6 +5,7 @@ import threading
 import time
 
 from .. import db
+from datetime import UTC
 
 logger = logging.getLogger(__name__)
 
@@ -176,7 +177,7 @@ def _collect_metrics():
             for wo in (pending_piv or []):
                 # Compare current dimension score vs pre-implementation
                 try:
-                    pre_score = conn.execute("""
+                    conn.execute("""
                         SELECT pre_audit_score FROM prescription_execution_log
                         WHERE work_order_id = ? ORDER BY created_at DESC LIMIT 1
                     """, (wo["id"],)).fetchone()
@@ -529,7 +530,7 @@ def _collect_design_metrics(conn):
         from ..intelligence.analyzers_design_quality import ANALYZERS as DESIGN_ANALYZERS
         for analyzer in DESIGN_ANALYZERS:
             try:
-                findings = analyzer(conn)
+                analyzer(conn)
                 # findings flow into the standard pipeline via the audit system
             except Exception:
                 logger.exception("Design quality analyzer %s failed", analyzer.__name__)
@@ -764,7 +765,7 @@ def _auto_verify_work_orders(conn, prediction_outcomes):
         if not wo:
             continue
 
-        now_str = _dt.now(_tz.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = _dt.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         if outcome_class in ("correct", "directionally_correct"):
             # Success: mark work order succeeded + auto-close finding

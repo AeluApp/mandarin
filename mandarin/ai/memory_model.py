@@ -11,7 +11,7 @@ import json
 import logging
 import math
 import sqlite3
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -226,7 +226,7 @@ def process_review(
         (user_id, content_item_id),
     ).fetchone()
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     if not state_row:
         return _initialize_memory_state(conn, user_id, content_item_id, rating, now)
@@ -238,7 +238,7 @@ def process_review(
     )
     # Handle naive datetimes from DB
     if last_reviewed.tzinfo is None:
-        last_reviewed = last_reviewed.replace(tzinfo=timezone.utc)
+        last_reviewed = last_reviewed.replace(tzinfo=UTC)
     elapsed_days = max(0, (now - last_reviewed).total_seconds() / 86400)
 
     current_r = compute_retrievability(state["stability"], elapsed_days)
@@ -865,7 +865,7 @@ def get_active_contrast_pairs(conn: sqlite3.Connection, user_id: int, limit: int
 # CALIBRATION
 # ─────────────────────────────────────────────
 
-def calibrate_fsrs_parameters(conn: sqlite3.Connection, user_id: int = 1) -> Optional[dict]:
+def calibrate_fsrs_parameters(conn: sqlite3.Connection, user_id: int = 1) -> dict | None:
     """Fit FSRS parameters to individual learner's review history.
 
     Requires 200+ reviews. Returns calibrated parameters or None.

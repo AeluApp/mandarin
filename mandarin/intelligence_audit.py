@@ -15,7 +15,7 @@ import json
 import logging
 import math
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -86,8 +86,8 @@ def compute_brier_score(conn: sqlite3.Connection, lookback_days: int = 90) -> di
             # No subsequent session found — check if enough time has passed
             try:
                 pred_dt = datetime.fromisoformat(pred_time.replace("Z", "+00:00"))
-                now = datetime.now(timezone.utc)
-                days_since = (now - pred_dt.replace(tzinfo=timezone.utc if pred_dt.tzinfo is None else pred_dt.tzinfo)).total_seconds() / 86400
+                now = datetime.now(UTC)
+                days_since = (now - pred_dt.replace(tzinfo=UTC if pred_dt.tzinfo is None else pred_dt.tzinfo)).total_seconds() / 86400
                 if days_since < 14:
                     continue  # Not enough time to judge
                 actual_churn = 1.0
@@ -380,7 +380,7 @@ def run_monthly_audit(conn: sqlite3.Connection, period: str | None = None) -> di
 
     Returns the complete audit metrics dict and logs it to intelligence_audit table.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     if period is None:
         period = now.strftime("%Y-%m")
 

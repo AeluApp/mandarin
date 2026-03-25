@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import _finding, _safe_query, _safe_query_all, _safe_scalar
 from .engagement import compute_abandonment_risk
@@ -26,7 +26,7 @@ def generate_cohort_snapshot(
     detects trend vs previous snapshot.
     """
     if snapshot_date is None:
-        snapshot_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
     # Get all active students in this classroom
     students = _safe_query_all(conn, """

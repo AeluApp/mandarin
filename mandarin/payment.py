@@ -2,7 +2,7 @@
 
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 import stripe
@@ -30,7 +30,7 @@ TEACHER_STUDENT_UPGRADE_RATE = 0.25  # Teacher earns 25% of student upgrades
 
 
 def calculate_commission(conn: sqlite3.Connection, partner_code: str,
-                         user_id: int, payment_amount: float) -> Optional[dict]:
+                         user_id: int, payment_amount: float) -> dict | None:
     """Calculate affiliate commission for a payment, respecting the 24-month cap.
 
     Returns a dict with commission details, or None if the commission window
@@ -47,10 +47,10 @@ def calculate_commission(conn: sqlite3.Connection, partner_code: str,
         (partner_code, user_id)
     ).fetchone()
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     if row and row[0]:
-        first_payment = datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+        first_payment = datetime.fromisoformat(row[0]).replace(tzinfo=UTC)
         months_elapsed = (now.year - first_payment.year) * 12 + (now.month - first_payment.month)
         if months_elapsed >= COMMISSION_CAP_MONTHS:
             logger.info("Commission cap reached for partner %s / user %s (%d months)",
@@ -123,7 +123,7 @@ def record_commission(conn: sqlite3.Connection, commission: dict) -> None:
 def _calculate_teacher_student_commission(conn: sqlite3.Connection,
                                           teacher_user_id: int,
                                           student_user_id: int,
-                                          payment_amount: float) -> Optional[dict]:
+                                          payment_amount: float) -> dict | None:
     """Calculate teacher commission from a student's premium upgrade payment.
 
     Teachers earn 25% of student upgrade payments for up to 24 months.
@@ -131,7 +131,7 @@ def _calculate_teacher_student_commission(conn: sqlite3.Connection,
     of 'teacher_{teacher_user_id}'.
     """
     partner_code = f"teacher_{teacher_user_id}"
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Check commission window
     row = conn.execute(
@@ -142,7 +142,7 @@ def _calculate_teacher_student_commission(conn: sqlite3.Connection,
     ).fetchone()
 
     if row and row[0]:
-        first_payment = datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+        first_payment = datetime.fromisoformat(row[0]).replace(tzinfo=UTC)
         months_elapsed = (now.year - first_payment.year) * 12 + (now.month - first_payment.month)
         if months_elapsed >= COMMISSION_CAP_MONTHS:
             logger.info("Teacher commission cap reached: teacher %s / student %s (%d months)",
@@ -319,7 +319,7 @@ def handle_webhook(payload: bytes, sig_header: str, conn: sqlite3.Connection) ->
     event_type = event["type"]
     event_id = event.get("id", "")
     data = event["data"]["object"]
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Idempotency: skip already-processed events
     if event_id:
@@ -515,7 +515,7 @@ def handle_webhook(payload: bytes, sig_header: str, conn: sqlite3.Connection) ->
                 # current_period_end from the Stripe subscription object
                 period_end = data.get("current_period_end")
                 if period_end:
-                    access_until = datetime.fromtimestamp(period_end, tz=timezone.utc).strftime("%B %d, %Y")
+                    access_until = datetime.fromtimestamp(period_end, tz=UTC).strftime("%B %d, %Y")
                 else:
                     access_until = "the end of your billing period"
                 send_subscription_cancelled(row[0], row[1] or "", access_until)

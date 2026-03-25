@@ -347,7 +347,7 @@ def _analyze_scenario_model(conn) -> list[dict]:
                 mrr = mrr * (1 + g - c)
             scenarios[name] = round(mrr, 2)
 
-        spread = scenarios["bull"] - scenarios["bear"]
+        scenarios["bull"] - scenarios["bear"]
         analysis = (
             f"12-month ARR projections — Bull: ${scenarios['bull']*12:.0f}, "
             f"Base: ${scenarios['base']*12:.0f}, Bear: ${scenarios['bear']*12:.0f}. "

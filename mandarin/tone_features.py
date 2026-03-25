@@ -31,13 +31,13 @@ class ToneFeatures:
     mean_f0_hz: float
     norm_method: str       # "speaker" or "syllable"
     # Voice quality extras (None when librosa unavailable)
-    hnr_mean: Optional[float] = None       # harmonics-to-noise ratio (dB)
-    intensity_mean: Optional[float] = None # mean intensity (dB)
-    intensity_slope: Optional[float] = None # intensity contour slope (stress)
-    f1_mean: Optional[float] = None        # mean F1 (vowel openness)
-    f2_mean: Optional[float] = None        # mean F2 (vowel frontness)
-    jitter: Optional[float] = None         # period perturbation
-    shimmer: Optional[float] = None        # amplitude perturbation
+    hnr_mean: float | None = None       # harmonics-to-noise ratio (dB)
+    intensity_mean: float | None = None # mean intensity (dB)
+    intensity_slope: float | None = None # intensity contour slope (stress)
+    f1_mean: float | None = None        # mean F1 (vowel openness)
+    f2_mean: float | None = None        # mean F2 (vowel frontness)
+    jitter: float | None = None         # period perturbation
+    shimmer: float | None = None        # amplitude perturbation
     f0_source: str = "yin"                 # "praat" or "yin"
 
 
@@ -46,12 +46,12 @@ class ToneResult:
     """Rich classification result from the V2 engine."""
     tone: int
     confidence: float
-    scores: Dict[int, float]         # {1: 0.8, 2: 0.3, ...}
-    features: Optional[ToneFeatures]
+    scores: dict[int, float]         # {1: 0.8, 2: 0.3, ...}
+    features: ToneFeatures | None
     ambiguous: bool
     runner_up: int
     margin: float
-    diagnostics: List[str]
+    diagnostics: list[str]
     surface_tone: int                # what speaker should produce (post-sandhi)
     underlying_tone: int             # citation/dictionary form
     family_matched: str = ""
@@ -103,8 +103,8 @@ def _linear_slope(y: np.ndarray) -> float:
     return float(num / den) * n
 
 
-def extract_tone_features(f0_contour: List[float],
-                          calibration: dict = None) -> Optional[ToneFeatures]:
+def extract_tone_features(f0_contour: list[float],
+                          calibration: dict = None) -> ToneFeatures | None:
     """Extract a rich feature vector from an F0 contour.
 
     Args:
@@ -389,7 +389,7 @@ def _check_constraint(features: ToneFeatures, feat_name: str,
 
 
 def score_against_families(features: ToneFeatures,
-                           mode: str = "connected") -> Dict[int, Tuple[float, str]]:
+                           mode: str = "connected") -> dict[int, tuple[float, str]]:
     """Score features against all tone families.
 
     Returns {tone: (best_score, family_name)} for tones 1-4.
@@ -432,7 +432,7 @@ def score_against_families(features: ToneFeatures,
 # ── Syllable segmentation ─────────────────────────────────────────
 
 def segment_syllable_nuclei(audio: np.ndarray, n_syllables: int,
-                            sr: int = 16000) -> List[Tuple[int, int]]:
+                            sr: int = 16000) -> list[tuple[int, int]]:
     """Segment audio into syllable regions using short-time energy.
 
     Returns list of (start_sample, end_sample) tuples.
@@ -504,7 +504,7 @@ def segment_syllable_nuclei(audio: np.ndarray, n_syllables: int,
     return segments
 
 
-def _find_energy_peaks(energy: np.ndarray, n_expected: int) -> List[int]:
+def _find_energy_peaks(energy: np.ndarray, n_expected: int) -> list[int]:
     """Find n_expected peaks in energy contour."""
     if len(energy) < n_expected:
         return []
@@ -538,7 +538,7 @@ def _find_energy_peaks(energy: np.ndarray, n_expected: int) -> List[int]:
     return merged if len(merged) == n_expected else []
 
 
-def _even_split(total_len: int, n: int) -> List[Tuple[int, int]]:
+def _even_split(total_len: int, n: int) -> list[tuple[int, int]]:
     """Even-split fallback."""
     seg_len = total_len // n if n > 0 else total_len
     segments = []
@@ -554,7 +554,7 @@ def _even_split(total_len: int, n: int) -> List[Tuple[int, int]]:
 # Keyed by (expected_tone, condition_fn) → diagnostic label
 # condition_fn takes ToneFeatures, returns bool
 
-DIAGNOSTIC_RULES: List[Tuple[int, str, object, str]] = [
+DIAGNOSTIC_RULES: list[tuple[int, str, object, str]] = [
     # (expected_tone, feature_name, condition_fn, label)
     (1, "overall_slope", lambda f: f.overall_slope > 0.05, "pitch_drifted_up"),
     (1, "overall_slope", lambda f: f.overall_slope < -0.05, "pitch_drifted_down"),
@@ -579,7 +579,7 @@ DIAGNOSTIC_TIPS = {
 
 
 def generate_diagnostics(features: ToneFeatures,
-                         expected_tone: int) -> List[str]:
+                         expected_tone: int) -> list[str]:
     """Generate diagnostic labels for a syllable based on features vs expected tone."""
     if features is None or expected_tone < 1 or expected_tone > 4:
         return []
@@ -595,7 +595,7 @@ def generate_diagnostics(features: ToneFeatures,
     return labels
 
 
-def classify_tone_v2(f0_contour: List[float],
+def classify_tone_v2(f0_contour: list[float],
                      calibration: dict = None,
                      mode: str = "connected",
                      expected_tone: int = 0,

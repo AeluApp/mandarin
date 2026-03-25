@@ -20,7 +20,7 @@ import platform
 import subprocess
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import Optional
 
@@ -40,12 +40,12 @@ AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 @dataclass
 class AudioOutput:
     """Result of a TTS generation attempt."""
-    audio_path: Optional[str] = None
+    audio_path: str | None = None
     duration_seconds: float = 0.0
     tts_engine: str = ""
     tonal_accuracy_validated: bool = False
     success: bool = False
-    error: Optional[str] = None
+    error: str | None = None
 
 
 # ── Cache table management ───────────────────────────────────────────────
@@ -77,7 +77,7 @@ def _cache_key(text: str, speed: float) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _check_cache(conn, key: str) -> Optional[AudioOutput]:
+def _check_cache(conn, key: str) -> AudioOutput | None:
     """Look up cached audio by key. Returns AudioOutput or None."""
     try:
         row = conn.execute(
@@ -104,7 +104,7 @@ def _check_cache(conn, key: str) -> Optional[AudioOutput]:
         return None
 
     # Update hit count
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             "UPDATE pi_audio_cache SET hit_count = hit_count + 1, last_hit_at = ? WHERE cache_key = ?",
@@ -125,7 +125,7 @@ def _check_cache(conn, key: str) -> Optional[AudioOutput]:
 
 def _write_cache(conn, key: str, text: str, result: AudioOutput) -> None:
     """Persist a generation result to the cache table."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT OR REPLACE INTO pi_audio_cache
@@ -162,7 +162,7 @@ def _generate_with_kokoro(text: str, speed: float, cache_key: str) -> AudioOutpu
             capture_output=True,
             timeout=30,
         )
-        elapsed = time.monotonic() - start
+        time.monotonic() - start
 
         if proc.returncode != 0:
             stderr = proc.stderr.decode("utf-8", errors="replace")[:200]
@@ -301,7 +301,7 @@ def _generate_with_macos_tts(text: str, speed: float, cache_key: str) -> AudioOu
         wpm = int(120 * speed)
         wpm = max(80, min(200, wpm))
 
-        start = time.monotonic()
+        time.monotonic()
         proc = subprocess.run(
             ["say", "-v", voice, "-r", str(wpm), "-o", out_path, text],
             capture_output=True,
@@ -376,7 +376,7 @@ def speak(
     text_zh: str,
     pinyin: str = "",
     conn=None,
-    speed_override: Optional[float] = None,
+    speed_override: float | None = None,
     validate_tones: bool = False,
 ) -> AudioOutput:
     """Generate TTS audio for Chinese text.
@@ -444,7 +444,7 @@ def speak(
 
 
 def _validate_tonal_accuracy(
-    audio_path: Optional[str], text_zh: str, pinyin: str,
+    audio_path: str | None, text_zh: str, pinyin: str,
 ) -> bool:
     """Validate that generated audio has correct tonal contours.
 

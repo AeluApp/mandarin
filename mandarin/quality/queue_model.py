@@ -83,7 +83,7 @@ def _compute_service_rate(conn: sqlite3.Connection, user_id: int,
         if s.get("started_at"):
             dates_seen.add(s["started_at"][:10])
 
-    active_days = max(len(dates_seen), 1)
+    max(len(dates_seen), 1)
     total_items = sum(items_per_session)
     mu = total_items / max(lookback_days, 1)  # items/day averaged over window
 

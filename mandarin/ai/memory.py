@@ -10,8 +10,8 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-_memory_instance: Optional[object] = None
-_mem0_available: Optional[bool] = None
+_memory_instance: object | None = None
+_mem0_available: bool | None = None
 
 
 def _get_memory():

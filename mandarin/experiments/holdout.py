@@ -13,7 +13,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ def assign_holdout(
     in_holdout = bucket < holdout_rate * 10000
 
     if in_holdout:
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         try:
             conn.execute(
                 "INSERT OR IGNORE INTO experiment_holdout (user_id, assigned_at) VALUES (?, ?)",

@@ -16,16 +16,16 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class ChangeRecommendation:
-    parameter_name: Optional[str]
-    file_path: Optional[str]
-    current_value: Optional[float]
-    recommended_value: Optional[float]
-    direction: Optional[str]
+    parameter_name: str | None
+    file_path: str | None
+    current_value: float | None
+    recommended_value: float | None
+    direction: str | None
     direction_source: str  # 'learned_from_data', 'partially_learned', 'prior_knowledge_only', 'no_data'
     influence_weight: float
     influence_confidence: float
     observation_count: int
-    mean_effect_size: Optional[float]
+    mean_effect_size: float | None
     specific_change: str  # Human-readable instruction
     alternative_parameters: list = field(default_factory=list)
     confidence_note: str = ""

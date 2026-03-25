@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 def _qti_item_xml(item_id: int, hanzi: str, pinyin: str,
-                  english: str, distractors: List[str]) -> str:
+                  english: str, distractors: list[str]) -> str:
     """Generate QTI 2.1 XML for a single vocabulary assessment item."""
     root = ET.Element("assessmentItem", {
         "xmlns": "http://www.imsglobal.org/xsd/imsqti_v2p1",
@@ -58,14 +58,14 @@ def _qti_item_xml(item_id: int, hanzi: str, pinyin: str,
         choice.text = d
 
     # Response processing
-    processing = ET.SubElement(root, "responseProcessing", {
+    ET.SubElement(root, "responseProcessing", {
         "template": "http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct",
     })
 
     return ET.tostring(root, encoding="unicode", xml_declaration=True)
 
 
-def _manifest_xml(resource_ids: List[str]) -> str:
+def _manifest_xml(resource_ids: list[str]) -> str:
     """Generate imsmanifest.xml for the Common Cartridge package."""
     ns = "http://www.imsglobal.org/xsd/imsccv1p3/imscp_v1p1"
     root = ET.Element("manifest", {
@@ -102,7 +102,7 @@ def _manifest_xml(resource_ids: List[str]) -> str:
     return ET.tostring(root, encoding="unicode", xml_declaration=True)
 
 
-def export_cc(conn, user_id: int, hsk_level: Optional[int] = None) -> bytes:
+def export_cc(conn, user_id: int, hsk_level: int | None = None) -> bytes:
     """Export vocabulary content as a Common Cartridge ZIP.
 
     Args:

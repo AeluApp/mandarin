@@ -88,10 +88,10 @@ def _is_diffusers_available() -> bool:
 
 def generate_illustration(
     prompt: str,
-    size: Tuple[int, int] = (600, 400),
+    size: tuple[int, int] = (600, 400),
     style: str = "civic_sanctuary",
-    output_path: Optional[str | Path] = None,
-) -> Optional[Path]:
+    output_path: str | Path | None = None,
+) -> Path | None:
     """Generate an illustration using a local Stable Diffusion backend.
 
     Tries ComfyUI API first, falls back to ``diffusers`` if available.
@@ -147,9 +147,9 @@ def generate_illustration(
 def generate_video_loop(
     prompt: str,
     duration_s: float = 4,
-    size: Tuple[int, int] = (1280, 720),
-    output_path: Optional[str | Path] = None,
-) -> Optional[Path]:
+    size: tuple[int, int] = (1280, 720),
+    output_path: str | Path | None = None,
+) -> Path | None:
     """Generate a short looping video background.
 
     Returns the path to the generated video, or ``None`` when no backend
@@ -475,7 +475,7 @@ def _generate_via_diffusers(
 # ── Helpers ──────────────────────────────────────────────────
 
 def _resolve_output_path(
-    user_path: Optional[str | Path],
+    user_path: str | Path | None,
     prefix: str,
     ext: str,
 ) -> Path:

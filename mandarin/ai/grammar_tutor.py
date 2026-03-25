@@ -48,8 +48,8 @@ Be encouraging but honest. No fluff. Include one example sentence.
 def answer_grammar_question(
     conn,
     question: str,
-    grammar_point_id: Optional[int] = None,
-    content_item_id: Optional[int] = None,
+    grammar_point_id: int | None = None,
+    content_item_id: int | None = None,
     user_hsk_level: int = 2,
 ) -> dict:
     """Answer a free-form grammar question.
@@ -117,7 +117,7 @@ def explain_in_context(
     expected_answer: str = "",
     error_count: int = 1,
     user_hsk_level: int = 2,
-) -> Optional[dict]:
+) -> dict | None:
     """Generate a contextual explanation after a drill error.
 
     Only triggers when the learner has gotten this grammar pattern wrong 2+ times.
@@ -300,7 +300,7 @@ def check_prerequisites(conn, user_id: int, grammar_point_id: int) -> dict:
 
 # ── Helpers ───────────────────────────────────────────────
 
-def _get_grammar_point(conn, grammar_point_id: int) -> Optional[dict]:
+def _get_grammar_point(conn, grammar_point_id: int) -> dict | None:
     row = conn.execute("""
         SELECT id, name, name_zh, hsk_level, category, pattern,
                description, explanation, examples_json, examples
@@ -309,7 +309,7 @@ def _get_grammar_point(conn, grammar_point_id: int) -> Optional[dict]:
     return dict(row) if row else None
 
 
-def _get_grammar_for_item(conn, content_item_id: int) -> Optional[dict]:
+def _get_grammar_for_item(conn, content_item_id: int) -> dict | None:
     row = conn.execute("""
         SELECT gp.id, gp.name, gp.name_zh, gp.hsk_level, gp.category,
                gp.pattern, gp.description, gp.explanation,
@@ -322,7 +322,7 @@ def _get_grammar_for_item(conn, content_item_id: int) -> Optional[dict]:
     return dict(row) if row else None
 
 
-def _search_grammar_point(conn, question: str) -> Optional[dict]:
+def _search_grammar_point(conn, question: str) -> dict | None:
     """Simple keyword search for a relevant grammar point."""
     # Try exact name match first
     keywords = question.lower().split()
@@ -342,7 +342,7 @@ def _search_grammar_point(conn, question: str) -> Optional[dict]:
     return None
 
 
-def _get_content_item(conn, content_item_id: int) -> Optional[dict]:
+def _get_content_item(conn, content_item_id: int) -> dict | None:
     row = conn.execute(
         "SELECT id, hanzi, pinyin, english FROM content_item WHERE id = ?",
         (content_item_id,),

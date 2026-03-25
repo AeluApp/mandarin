@@ -5,7 +5,7 @@ import logging
 import os
 import re
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from functools import wraps
 
 from flask import Blueprint, jsonify, render_template, abort, request, redirect, url_for, flash
@@ -923,7 +923,7 @@ def admin_work_items():
                     try:
                         from datetime import datetime as _dt
                         started = _dt.fromisoformat(item["started_at"])
-                        age = (_dt.now(timezone.utc) - started.replace(tzinfo=timezone.utc)).days
+                        age = (_dt.now(UTC) - started.replace(tzinfo=UTC)).days
                         item["age_days"] = age
                     except Exception:
                         item["age_days"] = None
@@ -969,7 +969,6 @@ def admin_create_work_item():
 def admin_update_work_item(item_id):
     """Update work item status (auto-sets timestamps, enforces WIP limits)."""
     WIP_LIMIT_IN_PROGRESS = 5
-    ESTIMATE_POINTS = {"S": 1, "M": 3, "L": 5, "XL": 8}
 
     data = request.get_json()
     if not data:
@@ -1695,7 +1694,7 @@ def _load_catalog():
     path = _get_catalog_path()
     if not os.path.exists(path):
         return {"entries": []}
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -1753,9 +1752,9 @@ def admin_content_ingest():
             return jsonify({"error": "This URL is already in the catalog"}), 409
 
     # Build the new entry
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     slug = re.sub(r"[^a-z0-9]+", "_", title.lower())[:40]
-    entry_id = f"m_admin_{slug}_{int(datetime.now(timezone.utc).timestamp())}"
+    entry_id = f"m_admin_{slug}_{int(datetime.now(UTC).timestamp())}"
 
     new_entry = {
         "id": entry_id,
@@ -2183,7 +2182,7 @@ def admin_interview_volunteers():
 def _gather_admin_notifications(conn):
     """Scan all systems for actionable alerts. Returns list of notification dicts."""
     notifs = []
-    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # 1. Crashes in last 24h
     try:
@@ -2469,7 +2468,7 @@ def _gather_admin_notifications(conn):
         if latest_risk and latest_risk["last_updated"]:
             from datetime import datetime as _dt, timedelta as _td
             last = _dt.fromisoformat(latest_risk["last_updated"])
-            if (_dt.now(timezone.utc) - last.replace(tzinfo=timezone.utc)) > _td(days=30):
+            if (_dt.now(UTC) - last.replace(tzinfo=UTC)) > _td(days=30):
                 notifs.append({
                     "id": "risk_register_stale",
                     "title": "Risk register stale: no updates in 30+ days",
@@ -4013,7 +4012,7 @@ def admin_ai_review_approve(item_id):
             return jsonify({"error": "not found"}), 404
 
         content = json.loads(row["content_json"])
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         # Insert into content_item (approved — admin has reviewed)
         new_id = str(uuid.uuid4())
@@ -4060,7 +4059,7 @@ def admin_ai_review_reject(item_id):
     """Reject a review item with notes."""
     data = request.get_json(silent=True) or {}
     notes = data.get("notes", "")
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     with db.connection() as conn:
         row = conn.execute(
@@ -4104,7 +4103,7 @@ def admin_ai_review_edit(item_id):
                      "appear to be from a published source before approving."
         }), 400
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     with db.connection() as conn:
         row = conn.execute(
@@ -4173,7 +4172,7 @@ def admin_ai_review_batch():
     if action == "approve" and not provenance_checked:
         return jsonify({"error": "provenance_checked required for batch approve"}), 400
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     results = {"approved": 0, "rejected": 0, "errors": 0}
 
     with db.connection() as conn:
@@ -4476,7 +4475,7 @@ def create_invite_code():
         expires_at = None
 
     label = (str(data.get("label") or "")).strip()
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     with db.connection() as conn:
         # Check for duplicate

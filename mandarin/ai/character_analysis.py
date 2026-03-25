@@ -255,7 +255,7 @@ def _build_reverse_indices() -> None:
     global _CHAR_TO_RADICAL, _CHAR_TO_PHONETIC
 
     # Build character -> radical mapping
-    for radical, (meaning, pinyin) in _RADICAL_MEANINGS.items():
+    for radical, (meaning, _pinyin) in _RADICAL_MEANINGS.items():
         # Find characters that contain this radical.
         # We check all characters referenced in phonetic families and
         # also scan _PHONETIC_FAMILIES values for known characters.
@@ -373,7 +373,7 @@ _build_reverse_indices()
 
 # ── Public API ────────────────────────────────────────────────────
 
-def decompose(hanzi: str) -> Optional[dict]:
+def decompose(hanzi: str) -> dict | None:
     """Decompose a single character into radical + phonetic components.
 
     Returns a dict with keys:
@@ -438,7 +438,7 @@ def get_phonetic_family(phonetic: str) -> dict[str, str]:
     return dict(_PHONETIC_FAMILIES.get(phonetic, {}))
 
 
-def get_radical_for_character(hanzi: str) -> Optional[tuple[str, str, str]]:
+def get_radical_for_character(hanzi: str) -> tuple[str, str, str] | None:
     """Get (radical, radical_meaning, radical_pinyin) for a character.
 
     Returns None if the character is not in the decomposition database.
@@ -446,7 +446,7 @@ def get_radical_for_character(hanzi: str) -> Optional[tuple[str, str, str]]:
     return _CHAR_TO_RADICAL.get(hanzi)
 
 
-def generate_decomposition_overlay(hanzi: str) -> Optional[dict]:
+def generate_decomposition_overlay(hanzi: str) -> dict | None:
     """Generate a decomposition display for first-exposure teaching moment.
 
     Returns a dict suitable for sending to the frontend as a

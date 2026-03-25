@@ -187,7 +187,7 @@ class EdgeTTSService:
     def __init__(self, voice: str = "zh-CN-XiaoxiaoNeural"):
         self.voice = voice
 
-    async def synthesize(self, text: str) -> Optional[bytes]:
+    async def synthesize(self, text: str) -> bytes | None:
         """Synthesize text to audio bytes (MP3)."""
         if not _HAS_EDGE_TTS:
             return None

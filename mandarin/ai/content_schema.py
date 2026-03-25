@@ -185,7 +185,7 @@ def _classify_question_type(q_zh: str, q_en: str | None) -> str:
     texts = [q_zh]
     if q_en:
         texts.append(q_en)
-    combined = " ".join(texts)
+    " ".join(texts)
 
     if _CULTURAL_KEYWORDS_ZH.search(q_zh) or (
         q_en and _CULTURAL_KEYWORDS_EN.search(q_en)
@@ -241,7 +241,7 @@ def migrate_passages_to_db(
     if not path.exists():
         raise FileNotFoundError(f"Passages file not found: {path}")
 
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
 
     passages = data.get("passages", [])

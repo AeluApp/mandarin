@@ -16,6 +16,7 @@ from ..auth import create_user, authenticate, get_user_by_id, create_reset_token
 from ..email import send_welcome, send_password_reset, send_email_verification
 from ..mfa import verify_totp, verify_backup_code
 from ..security import log_security_event, SecurityEvent, Severity
+from datetime import UTC
 # IS_PRODUCTION no longer needed — invite code enforcement uses feature_flag table
 
 logger = logging.getLogger(__name__)
@@ -139,11 +140,11 @@ def login():
                         last_login = user_dict.get("last_login_at")
                         if last_login:
                             from datetime import datetime, timezone, timedelta
-                            last_dt = datetime.strptime(last_login, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-                            if datetime.now(timezone.utc) - last_dt > timedelta(hours=24):
+                            last_dt = datetime.strptime(last_login, "%Y-%m-%d %H:%M:%S").replace(tzinfo=UTC)
+                            if datetime.now(UTC) - last_dt > timedelta(hours=24):
                                 from ..marketing_hooks import log_lifecycle_event
                                 log_lifecycle_event("user_returned", user_id=str(user_dict["id"]), conn=conn,
-                                                    days_away=round((datetime.now(timezone.utc) - last_dt).total_seconds() / 86400, 1))
+                                                    days_away=round((datetime.now(UTC) - last_dt).total_seconds() / 86400, 1))
                     except Exception:
                         pass
                     next_page = request.args.get("next")

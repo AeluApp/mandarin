@@ -40,7 +40,7 @@ def is_configured() -> bool:
     return bool(cfg["token"] and cfg["phone_id"])
 
 
-def verify_webhook(mode: str, token: str, challenge: str) -> Optional[str]:
+def verify_webhook(mode: str, token: str, challenge: str) -> str | None:
     """Verify Meta webhook subscription.
 
     Returns the challenge string if valid, None if not.

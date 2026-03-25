@@ -3,7 +3,7 @@
 import logging
 import re
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 from ..settings import (
@@ -94,7 +94,7 @@ def sanitize_input(text: str) -> str:
     return cleaned[:MAX_MESSAGE_LENGTH]
 
 
-def check_prompt_injection(text: str) -> tuple[bool, Optional[str]]:
+def check_prompt_injection(text: str) -> tuple[bool, str | None]:
     """Check for prompt injection patterns.
 
     Returns (is_safe, matched_pattern_description).
@@ -137,7 +137,7 @@ def log_message(
     Returns the message_id (UUID).
     """
     msg_id = str(uuid.uuid4())
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT INTO openclaw_message_log

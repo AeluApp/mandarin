@@ -25,7 +25,7 @@ VALID_SCOPES = {
 # Each template must include: name, description, hypothesis, variants, scope.
 # Templates are checked in order; first match wins.
 
-_TEMPLATES: List[Dict[str, Any]] = [
+_TEMPLATES: list[dict[str, Any]] = [
     # Churn-type templates (migrated from experiment_daemon)
     {
         "match": {"dimension": "retention", "keywords": ["boredom"]},
@@ -155,10 +155,10 @@ _TEMPLATES: List[Dict[str, Any]] = [
 
 def propose_experiment(
     conn: sqlite3.Connection,
-    finding: Dict[str, Any],
+    finding: dict[str, Any],
     *,
     source: str = "intelligence",
-) -> Optional[Dict[str, Any]]:
+) -> dict[str, Any] | None:
     """Propose an A/B experiment for a product-intelligence finding.
 
     Tries template matching first, then falls back to LLM-generative design.
@@ -198,7 +198,7 @@ def propose_experiment(
     return proposal
 
 
-def _match_template(finding: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+def _match_template(finding: dict[str, Any]) -> dict[str, Any] | None:
     """Try to match a finding against the template registry.
 
     Matching rules:
@@ -242,8 +242,8 @@ def _match_template(finding: Dict[str, Any]) -> Optional[Dict[str, Any]]:
 
 def _generate_experiment_llm(
     conn: sqlite3.Connection,
-    finding: Dict[str, Any],
-) -> Optional[Dict[str, Any]]:
+    finding: dict[str, Any],
+) -> dict[str, Any] | None:
     """Use the LLM to design an A/B experiment when no template matches.
 
     Sends a structured prompt to the LLM asking it to design a 2-variant
@@ -336,8 +336,8 @@ Respond in JSON only, no other text:
 
 def _parse_llm_experiment(
     raw_text: str,
-    finding: Dict[str, Any],
-) -> Optional[Dict[str, Any]]:
+    finding: dict[str, Any],
+) -> dict[str, Any] | None:
     """Parse and validate LLM JSON response into a proposal dict.
 
     Handles common LLM quirks: markdown fences, trailing commas, extra text.
@@ -443,11 +443,11 @@ def _parse_llm_experiment(
 
 def propose_experiments_for_findings(
     conn: sqlite3.Connection,
-    findings: List[Dict[str, Any]],
+    findings: list[dict[str, Any]],
     *,
     max_proposals: int = 3,
     source: str = "intelligence",
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Batch-propose experiments for a list of findings.
 
     Skips findings that already have pending/active proposals or experiments.

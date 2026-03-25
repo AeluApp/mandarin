@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 from typing import Optional
 
@@ -36,7 +36,7 @@ class RiskSignal:
 
     def __post_init__(self):
         if not self.detected_at:
-            self.detected_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            self.detected_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
 
 @dataclass
@@ -55,7 +55,7 @@ class UserContext:
     subscription_tier: str = "free"
 
     @classmethod
-    def from_db(cls, conn, user_id: int) -> "UserContext":
+    def from_db(cls, conn, user_id: int) -> UserContext:
         user = conn.execute(
             "SELECT email, display_name, created_at, subscription_tier, streak_days FROM user WHERE id = ?",
             (user_id,),
@@ -67,7 +67,7 @@ class UserContext:
         if user["created_at"]:
             try:
                 created = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
-                age = (datetime.now(timezone.utc) - created).days
+                age = (datetime.now(UTC) - created).days
             except (ValueError, TypeError):
                 pass
 
@@ -236,8 +236,8 @@ class LifecycleDetector:
         try:
             dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
             if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            return (datetime.now(timezone.utc) - dt).days
+                dt = dt.replace(tzinfo=UTC)
+            return (datetime.now(UTC) - dt).days
         except (ValueError, TypeError):
             return 999
 
@@ -303,7 +303,7 @@ class InterventionEngine:
 
     def plan_intervention(
         self, stage: UserLifecycleStage, signals: list[RiskSignal], context: UserContext
-    ) -> Optional[Intervention]:
+    ) -> Intervention | None:
         if not signals and stage in (
             UserLifecycleStage.EXPLORING,
             UserLifecycleStage.ESTABLISHING,
@@ -363,7 +363,7 @@ class OnboardingScheduler:
         self.detector = LifecycleDetector()
         self.engine = InterventionEngine()
 
-    def check_user(self, conn, user_id: int) -> Optional[Intervention]:
+    def check_user(self, conn, user_id: int) -> Intervention | None:
         if not self._cooldown_check(conn, user_id):
             return None
 

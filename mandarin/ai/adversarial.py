@@ -64,7 +64,7 @@ def run_adversarial_debate(
     conn: sqlite3.Connection,
     content_data: dict,
     content_type: str,
-    content_id: Optional[int] = None,
+    content_id: int | None = None,
 ) -> dict:
     """Run Critic → Defender → Judge debate on content.
 
@@ -205,7 +205,7 @@ def batch_debate(
 
 def get_debate_results(
     conn: sqlite3.Connection,
-    content_type: Optional[str] = None,
+    content_type: str | None = None,
     passed_only: bool = False,
     limit: int = 50,
 ) -> list[dict]:
