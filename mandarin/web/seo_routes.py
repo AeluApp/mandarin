@@ -11,6 +11,7 @@ from flask import Blueprint, render_template_string, abort, jsonify
 
 from .. import db
 from ..settings import CANONICAL_URL
+from .api_errors import api_error_handler
 
 logger = logging.getLogger(__name__)
 

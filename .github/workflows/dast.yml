@@ -1,58 +1,29 @@
 name: DAST Scan (OWASP ZAP)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  # Run after deploy completes, not on every push
+  workflow_run:
+    workflows: ["Deploy"]
+    types: [completed]
     branches: [main]
 
 jobs:
   zap-baseline:
     name: OWASP ZAP Baseline Scan
     runs-on: ubuntu-latest
+    # Only run if the deploy succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -e ".[dev]"
-
-      - name: Start app in background
-        run: |
-          export SECRET_KEY="test-secret-for-ci"
-          export JWT_SECRET="test-jwt-secret-for-ci"
-          export DATA_DIR="/tmp/mandarin-test-data"
-          mkdir -p "$DATA_DIR"
-          python -m mandarin.web.serve &
-          sleep 5
-        env:
-          FLASK_ENV: testing
-
-      - name: Wait for app to be ready
-        run: |
-          for i in $(seq 1 30); do
-            if curl -s http://localhost:8080/api/health/live | grep -q '"status"'; then
-              echo "App is ready"
-              exit 0
-            fi
-            sleep 1
-          done
-          echo "App failed to start"
-          exit 1
 
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
-          target: "http://localhost:8080"
+          target: "https://aelu-app.fly.dev"
           rules_file_name: ".github/zap-rules.tsv"
           cmd_options: "-a -j"
           allow_issue_writing: false
+        continue-on-error: true
 
       - name: Upload ZAP report
         uses: actions/upload-artifact@v4

@@ -103,10 +103,12 @@ def compute_ltv(conn, user_id: int = None) -> dict:
         """).fetchone()
 
         avg_lifetime = conn.execute("""
-            SELECT AVG(julianday(MAX(started_at)) - julianday(MIN(started_at))) / 30.0 as avg_months
-            FROM session_log
-            GROUP BY user_id
-            HAVING COUNT(*) > 1
+            SELECT AVG(span_days) / 30.0 as avg_months FROM (
+                SELECT julianday(MAX(started_at)) - julianday(MIN(started_at)) as span_days
+                FROM session_log
+                GROUP BY user_id
+                HAVING COUNT(*) > 1
+            )
         """).fetchone()
 
         users = stats["total_users"] or 1

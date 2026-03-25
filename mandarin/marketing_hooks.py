@@ -467,7 +467,7 @@ def check_email_triggers(db_path=None):
 
 def generate_referral_code(user_id: int) -> str:
     """Generate a unique referral code for a user."""
-    return f"aelu-{hashlib.md5(str(user_id).encode()).hexdigest()[:8]}"
+    return f"aelu-{hashlib.md5(str(user_id).encode(), usedforsecurity=False).hexdigest()[:8]}"
 
 
 def track_referral(conn, referrer_code: str, new_user_id: int, channel: str = "link") -> bool:

@@ -122,6 +122,7 @@ ignore = [
     "S607",  # partial executable path
     "S608",  # SQL injection (f-string prompts, not SQL)
     "UP031", # percent format (pre-existing code style)
+    "UP032", # .format() for SQL placeholders
     "UP035", # deprecated typing imports (Dict, List, etc.)
 ]
 
