@@ -58,7 +58,7 @@ def governance_component_detail(component):
 @api_error_handler("Log validation")
 def governance_validate_component(component):
     """Log completed validation."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     verdict = data.get("verdict", "validated")
     notes = data.get("notes", "")
 
@@ -101,7 +101,7 @@ def governance_incidents():
 @api_error_handler("Log incident")
 def governance_log_incident():
     """Log a new incident."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     severity = data.get("severity", "P2")
     incident_type = data.get("incident_type", "other")
     description = data.get("description", "")
@@ -129,7 +129,7 @@ def governance_log_incident():
 @api_error_handler("Resolve incident")
 def governance_resolve_incident(incident_id):
     """Resolve an incident."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     with db.connection() as conn:
         conn.execute("""
             UPDATE ai_incident_log
@@ -162,7 +162,7 @@ def governance_policies():
 @api_error_handler("Review policy")
 def governance_review_policy(key):
     """Log policy review, update next_review_due."""
-    request.get_json(force=True) if request.data else {}
+    request.get_json() if request.data else {}
     with db.connection() as conn:
         conn.execute("""
             UPDATE ai_policy_documents
@@ -199,7 +199,7 @@ def governance_data_requests():
 @api_error_handler("Create data request")
 def governance_create_data_request():
     """Create a data subject request."""
-    data = request.get_json(force=True)
+    data = request.get_json()
     user_id = data.get("user_id")
     request_type = data.get("request_type")
 
