@@ -616,3 +616,181 @@ def send_weekly_progress(to: str, name: str, stats: dict, user_id: int = None) -
     body += _unsubscribe_footer(user_id)
     html = _wrap_html("Your Week", body)
     return _send(to, f"Your Aelu week: {sessions} sessions, {items} items reviewed", html)
+
+
+# ---------------------------------------------------------------------------
+# Daily intelligence digest (admin)
+# ---------------------------------------------------------------------------
+
+def send_daily_intelligence_digest(conn) -> bool:
+    """Send a daily digest of intelligence findings to the admin.
+
+    Sections:
+      1. Auto-fixed today (resolved today, green)
+      2. Needs your approval (investigating/diagnosed/recommended with
+         decision_class in informed_fix/judgment_call/values_decision)
+      3. New findings from today
+
+    Skips sending if all three sections are empty. Sends to FROM_EMAIL
+    (forwarded to admin inbox).
+    """
+    s = _STYLE
+
+    # 1. Auto-fixed today: resolved today
+    auto_fixed = []
+    try:
+        auto_fixed = conn.execute("""
+            SELECT id, dimension, severity, title, analysis, resolved_at
+            FROM pi_finding
+            WHERE status = 'resolved'
+              AND resolved_at >= date('now')
+            ORDER BY resolved_at DESC
+        """).fetchall()
+    except Exception:
+        pass
+
+    # 2. Needs approval: open findings with decision_class requiring human input
+    needs_approval = []
+    try:
+        needs_approval = conn.execute("""
+            SELECT DISTINCT pf.id, pf.dimension, pf.severity, pf.title, pf.analysis,
+                   pf.status, dl.decision_class, dl.escalation_level
+            FROM pi_finding pf
+            JOIN pi_decision_log dl ON dl.finding_id = pf.id
+            WHERE pf.status IN ('investigating', 'diagnosed', 'recommended')
+              AND dl.decision_class IN ('informed_fix', 'judgment_call', 'values_decision')
+              AND dl.approved_at IS NULL
+              AND (dl.decision IS NULL OR dl.decision = '')
+            ORDER BY
+                CASE dl.escalation_level
+                    WHEN 'emergency' THEN 0
+                    WHEN 'escalate' THEN 1
+                    WHEN 'alert' THEN 2
+                    WHEN 'nudge' THEN 3
+                    ELSE 4
+                END,
+                CASE pf.severity
+                    WHEN 'critical' THEN 0
+                    WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2
+                    ELSE 3
+                END
+        """).fetchall()
+    except Exception:
+        pass
+
+    # 3. New findings created today
+    new_findings = []
+    try:
+        new_findings = conn.execute("""
+            SELECT id, dimension, severity, title, analysis
+            FROM pi_finding
+            WHERE created_at >= date('now')
+              AND status != 'resolved'
+            ORDER BY
+                CASE severity
+                    WHEN 'critical' THEN 0
+                    WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2
+                    ELSE 3
+                END
+        """).fetchall()
+    except Exception:
+        pass
+
+    # Skip if nothing to report
+    if not auto_fixed and not needs_approval and not new_findings:
+        logger.debug("Intelligence digest: nothing to report, skipping email")
+        return True
+
+    # Build email body
+    body_parts = []
+
+    body_parts.append(
+        f'<p style="font-size:16px;line-height:1.6;color:{s["text"]};">'
+        f"Daily intelligence summary for your product.</p>"
+    )
+
+    # ── Auto-fixed section (green) ──
+    if auto_fixed:
+        body_parts.append(
+            f'<div style="margin:24px 0 8px 0;border-top:1px solid {s["divider"]};padding-top:16px;">'
+            f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+            f'color:#5A7A5A;margin:0 0 12px 0;">Auto-fixed ({len(auto_fixed)})</h2></div>'
+        )
+        for row in auto_fixed:
+            title = row["title"] or "Untitled"
+            dim = row["dimension"] or ""
+            body_parts.append(
+                f'<p style="font-size:14px;line-height:1.5;margin:4px 0;">'
+                f'<span style="color:#5A7A5A;font-weight:600;">{_esc(dim)}</span>'
+                f' &mdash; {_esc(title)}</p>'
+            )
+
+    # ── Needs approval section (accent/rose) ──
+    if needs_approval:
+        body_parts.append(
+            f'<div style="margin:24px 0 8px 0;border-top:1px solid {s["divider"]};padding-top:16px;">'
+            f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+            f'color:{s["accent"]};margin:0 0 12px 0;">Needs your approval ({len(needs_approval)})</h2></div>'
+        )
+        dashboard_url = BASE_URL + "/admin/intelligence"
+        for row in needs_approval:
+            title = row["title"] or "Untitled"
+            dim = row["dimension"] or ""
+            severity = row["severity"] or "low"
+            analysis = (row["analysis"] or "")[:120]
+            sev_weight = "700" if severity in ("critical", "high") else "400"
+            body_parts.append(
+                f'<div style="margin:8px 0;padding:12px;border-left:3px solid {s["accent"]};">'
+                f'<p style="font-size:15px;line-height:1.4;margin:0;font-weight:{sev_weight};">'
+                f'{_esc(title)}</p>'
+                f'<p style="font-size:13px;color:{s["text_dim"]};margin:4px 0 0 0;">'
+                f'{_esc(dim)} &middot; {_esc(severity)}'
+                f'{" &mdash; " + _esc(analysis) if analysis else ""}</p>'
+                f'</div>'
+            )
+        body_parts.append(_button(dashboard_url, "Review in Dashboard"))
+
+    # ── New findings section (neutral) ──
+    if new_findings:
+        body_parts.append(
+            f'<div style="margin:24px 0 8px 0;border-top:1px solid {s["divider"]};padding-top:16px;">'
+            f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+            f'color:{s["text"]};margin:0 0 12px 0;">New findings ({len(new_findings)})</h2></div>'
+        )
+        for row in new_findings:
+            title = row["title"] or "Untitled"
+            dim = row["dimension"] or ""
+            severity = row["severity"] or "low"
+            body_parts.append(
+                f'<p style="font-size:14px;line-height:1.5;margin:4px 0;">'
+                f'<span style="color:{s["text_dim"]};">{_esc(dim)}</span>'
+                f' &middot; <span style="font-weight:{"600" if severity in ("critical", "high") else "400"};">'
+                f'{_esc(title)}</span></p>'
+            )
+
+    body_html = "\n".join(body_parts)
+
+    # Subject line with counts
+    parts = []
+    if needs_approval:
+        parts.append(f"{len(needs_approval)} awaiting approval")
+    if auto_fixed:
+        parts.append(f"{len(auto_fixed)} auto-fixed")
+    if new_findings:
+        parts.append(f"{len(new_findings)} new")
+    subject = f"Intelligence digest: {', '.join(parts)}"
+
+    html = _wrap_html("Intelligence Digest", body_html)
+    return _send(FROM_EMAIL, subject, html)
+
+
+def _esc(text: str) -> str:
+    """Minimal HTML escaping for email content."""
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )

@@ -137,6 +137,233 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
             return "informed_fix"
         return "judgment_call"
 
+    # ── Learning dimensions ──────────────────────────────────────────
+    # drill_quality, content, srs_funnel, curriculum, tone_phonology,
+    # learning_science, error_taxonomy, cross_modality, hsk_cliff
+    if dim in ("drill_quality", "content", "srs_funnel", "curriculum",
+               "tone_phonology", "learning_science", "error_taxonomy",
+               "cross_modality", "hsk_cliff"):
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Simple curriculum gaps, accuracy fixes, interval tuning → auto_fix
+        if any(kw in analysis_lower for kw in ("missing content", "coverage gap",
+                                                  "accuracy low", "interval too long",
+                                                  "interval too short", "stuck items",
+                                                  "leech count", "stale content",
+                                                  "broken audio", "missing audio")):
+            return "auto_fix"
+        # Content quality improvements, scaffolding adjustments → informed_fix
+        if any(kw in analysis_lower for kw in ("scaffolding", "hint", "difficulty",
+                                                  "quality score", "distractor",
+                                                  "sentence complexity", "vocab level")):
+            return "informed_fix"
+        # Complex pedagogical changes: new modalities, learning theory → judgment_call
+        if any(kw in analysis_lower for kw in ("pedagog", "new modality", "learning theory",
+                                                  "spaced repetition algorithm",
+                                                  "acquisition order", "comprehensible input",
+                                                  "interleav", "desirable difficult",
+                                                  "curriculum redesign", "hsk transition")):
+            return "judgment_call"
+        # Default: simple issues auto_fix, complex ones informed_fix
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    # ── Engineering dimensions ───────────────────────────────────────
+    # engineering, engineering_health, platform, data_quality, timing
+    if dim in ("engineering", "engineering_health", "platform",
+               "data_quality", "timing", "cross_platform"):
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Bug-like issues: clear fix, single root cause → auto_fix
+        if any(kw in analysis_lower for kw in ("bug", "crash", "error rate",
+                                                  "null pointer", "missing index",
+                                                  "broken migration", "stale cache",
+                                                  "timeout config", "data integrity",
+                                                  "orphan record", "duplicate")):
+            return "auto_fix"
+        # Performance, monitoring, config changes → informed_fix
+        if any(kw in analysis_lower for kw in ("latency", "slow query", "monitoring",
+                                                  "alert threshold", "capacity",
+                                                  "platform parity", "cross-platform",
+                                                  "build", "deploy", "migration")):
+            return "informed_fix"
+        # Architecture, infrastructure decisions → judgment_call
+        if any(kw in analysis_lower for kw in ("architecture", "refactor", "redesign",
+                                                  "infrastructure", "database schema",
+                                                  "queue system", "caching strategy",
+                                                  "scaling", "service boundary")):
+            return "judgment_call"
+        # Default based on severity
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    # ── Business dimensions ──────────────────────────────────────────
+    # profitability, commercial, marketing, growth_accounting, brand_health
+    if dim in ("profitability", "commercial", "marketing",
+               "growth_accounting", "brand_health"):
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Pricing copy, stale numbers, marketing copy fixes → informed_fix
+        if any(kw in analysis_lower for kw in ("pricing copy", "stale price",
+                                                  "conversion copy", "cta text",
+                                                  "landing page copy", "referral link",
+                                                  "email template", "signup copy",
+                                                  "marketing copy")):
+            return "informed_fix"
+        # Metrics tracking, analytics setup → informed_fix
+        if any(kw in analysis_lower for kw in ("tracking", "analytics", "attribution",
+                                                  "funnel metric", "cohort", "ltv",
+                                                  "mrr", "churn rate")):
+            return "informed_fix"
+        # Strategy: pricing model, new plans, brand identity → values_decision
+        if any(kw in analysis_lower for kw in ("pricing model", "pricing strategy",
+                                                  "new plan", "freemium",
+                                                  "brand identity", "brand voice",
+                                                  "market positioning", "competitive",
+                                                  "partnership", "acquisition strategy",
+                                                  "monetization", "revenue model")):
+            return "values_decision"
+        # Default: informed_fix for low/medium, values_decision for high+
+        if severity in ("low", "medium"):
+            return "informed_fix"
+        return "values_decision"
+
+    # ── AI dimensions ────────────────────────────────────────────────
+    # genai, genai_governance, rag, memory_model, learner_model, agentic
+    if dim in ("genai", "genai_governance", "rag", "memory_model",
+               "learner_model", "agentic"):
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Model config: temperature, prompt tuning, context window → informed_fix
+        if any(kw in analysis_lower for kw in ("temperature", "prompt", "context window",
+                                                  "token limit", "system prompt",
+                                                  "cache hit", "embedding", "chunking",
+                                                  "retrieval", "memory decay",
+                                                  "model config", "timeout",
+                                                  "batch size", "rate limit")):
+            return "informed_fix"
+        # Model selection, new capabilities, governance policy → judgment_call
+        if any(kw in analysis_lower for kw in ("model selection", "model swap",
+                                                  "new model", "fine-tune",
+                                                  "capability", "agent action",
+                                                  "autonomous", "guardrail",
+                                                  "safety filter", "bias",
+                                                  "hallucination", "governance policy")):
+            return "judgment_call"
+        # Governance violations always escalate → values_decision
+        if dim == "genai_governance":
+            if any(kw in analysis_lower for kw in ("violation", "policy breach",
+                                                      "data leak", "pii",
+                                                      "compliance")):
+                return "values_decision"
+        # Default: informed_fix for config issues
+        if severity == "low":
+            return "informed_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    # ── Governance dimensions ────────────────────────────────────────
+    # governance, accountability, security — never auto-fix
+    if dim in ("governance", "accountability", "security"):
+        # All governance findings require human values decisions
+        return "values_decision"
+
+    # ── UX dimensions ────────────────────────────────────────────────
+    # ux, flow, onboarding, frustration, journey, behavioral_econ, feature_usage
+    if dim in ("ux", "flow", "onboarding", "frustration", "journey",
+               "behavioral_econ", "feature_usage"):
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Simple UX fixes: broken links, missing labels, layout bugs → informed_fix
+        if any(kw in analysis_lower for kw in ("broken link", "missing label",
+                                                  "layout bug", "z-index",
+                                                  "overflow", "truncat",
+                                                  "accessibility", "aria",
+                                                  "contrast ratio", "tap target",
+                                                  "rage click", "dead click")):
+            return "informed_fix"
+        # Behavioral / flow changes: nudges, journey redesign → judgment_call
+        if any(kw in analysis_lower for kw in ("nudge", "behavioral", "journey",
+                                                  "funnel redesign", "onboarding flow",
+                                                  "session flow", "habit loop",
+                                                  "progress framing", "loss aversion",
+                                                  "anchoring", "default effect",
+                                                  "choice architecture")):
+            return "judgment_call"
+        # Default: informed_fix for low/medium, judgment_call for high+
+        if severity in ("low", "medium"):
+            return "informed_fix"
+        return "judgment_call"
+
+    # ── Remaining dimensions with sensible defaults ──────────────────
+    # strategic, tonal_vibe, native_speaker_validation, encounter_loop,
+    # scheduler_audit, output_production, tutor_integration, tone_quality,
+    # input_layer, pm, ui, competitive, copy, engagement
+    if dim in ("strategic",):
+        return "values_decision"  # strategy changes always need human judgment
+
+    if dim in ("tonal_vibe",):
+        # Aesthetic tonal decisions similar to visual_vibe
+        if severity == "low":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("native_speaker_validation",):
+        # Validation pipeline issues
+        if severity == "low":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("encounter_loop", "scheduler_audit"):
+        # Algorithm tuning
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("output_production", "tutor_integration", "tone_quality", "input_layer"):
+        # Drill/tutor subsystem findings
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("pm",):
+        # Process findings
+        if severity in ("low", "medium"):
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("ui",):
+        # UI-specific (distinct from ux)
+        if severity == "low":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("competitive",):
+        # Competitive analysis
+        if severity in ("low", "medium"):
+            return "informed_fix"
+        return "values_decision"
+
+    if dim in ("copy",):
+        # Copy quality
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
+    if dim in ("engagement",):
+        # Engagement metrics
+        if severity == "low":
+            return "informed_fix"
+        return "judgment_call"
+
     # auto_fix: low severity, single file, all advisors agree
     if severity == "low" and len(files) <= 1 and not has_conflict:
         return "auto_fix"

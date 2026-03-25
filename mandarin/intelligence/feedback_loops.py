@@ -136,7 +136,7 @@ def verify_recommendation_outcomes(conn) -> list[dict]:
 def _measure_current_metric(conn, dimension: str, metric_name: str):
     """Measure the current value of a metric based on dimension.
 
-    Returns a float or None if unmeasurable. Covers 21 dimensions.
+    Returns a float or None if unmeasurable. Covers all 48+ dimensions.
     """
     metric_queries = {
         "retention": "SELECT COUNT(DISTINCT user_id) * 100.0 / NULLIF((SELECT COUNT(*) FROM user WHERE created_at <= datetime('now', '-7 days')), 0) FROM session_log s JOIN user u ON s.user_id = u.id WHERE u.created_at <= datetime('now', '-7 days') AND s.started_at >= datetime(u.created_at, '+7 days')",
@@ -160,6 +160,37 @@ def _measure_current_metric(conn, dimension: str, metric_name: str):
         "competitive": "SELECT COUNT(*) FROM content_item WHERE hsk_level IS NOT NULL",
         "marketing": "SELECT COUNT(DISTINCT u.id) FROM user u WHERE u.created_at >= datetime('now', '-30 days')",
         "copy": "SELECT COUNT(*) FROM client_event WHERE category = 'copy' AND created_at >= datetime('now', '-14 days')",
+        # ── Additional dimensions ──────────────────────────────────────
+        "visual_vibe": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'visual_vibe' AND status NOT IN ('resolved', 'rejected')",
+        "copy_drift": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'copy_drift' AND status NOT IN ('resolved', 'rejected')",
+        "runtime_health": "SELECT COUNT(*) FROM crash_log WHERE timestamp >= datetime('now', '-7 days')",
+        "tonal_vibe": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'tonal_vibe' AND status NOT IN ('resolved', 'rejected')",
+        "feature_usage": "SELECT COUNT(DISTINCT event) FROM client_event WHERE created_at >= datetime('now', '-14 days')",
+        "engineering_health": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'engineering_health' AND status NOT IN ('resolved', 'rejected')",
+        "strategic": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'strategic' AND status NOT IN ('resolved', 'rejected')",
+        "governance": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'governance' AND status NOT IN ('resolved', 'rejected')",
+        "data_quality": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'data_quality' AND status NOT IN ('resolved', 'rejected')",
+        "genai_governance": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'genai_governance' AND status NOT IN ('resolved', 'rejected')",
+        "memory_model": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'memory_model' AND status NOT IN ('resolved', 'rejected')",
+        "learner_model": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'learner_model' AND status NOT IN ('resolved', 'rejected')",
+        "genai": "SELECT COUNT(*) FROM crash_log WHERE timestamp >= datetime('now', '-7 days') AND request_path LIKE '%/ai/%'",
+        "rag": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'rag' AND status NOT IN ('resolved', 'rejected')",
+        "native_speaker_validation": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'native_speaker_validation' AND status NOT IN ('resolved', 'rejected')",
+        "input_layer": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'input_layer' AND status NOT IN ('resolved', 'rejected')",
+        "accountability": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'accountability' AND status NOT IN ('resolved', 'rejected')",
+        "commercial": "SELECT COUNT(CASE WHEN subscription_tier = 'paid' THEN 1 END) FROM user",
+        "agentic": "SELECT COUNT(*) FROM pi_work_order WHERE status IN ('succeeded') AND created_at >= datetime('now', '-30 days')",
+        "cross_platform": "SELECT COUNT(DISTINCT client_platform) FROM session_log WHERE started_at >= datetime('now', '-14 days')",
+        "behavioral_econ": "SELECT COUNT(*) * 100.0 / NULLIF((SELECT COUNT(*) FROM session_log WHERE started_at >= datetime('now', '-14 days')), 0) FROM session_log WHERE items_completed > 0 AND started_at >= datetime('now', '-14 days')",
+        "growth_accounting": "SELECT COUNT(DISTINCT u.id) FROM user u WHERE u.created_at >= datetime('now', '-30 days')",
+        "journey": "SELECT COUNT(DISTINCT CASE WHEN s.id IS NOT NULL THEN u.id END) * 100.0 / NULLIF(COUNT(DISTINCT u.id), 0) FROM user u LEFT JOIN session_log s ON u.id = s.user_id WHERE u.created_at >= datetime('now', '-30 days')",
+        "brand_health": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'brand_health' AND status NOT IN ('resolved', 'rejected')",
+        "learning_science": "SELECT AVG(CASE WHEN correct = 1 THEN 100.0 ELSE 0.0 END) FROM review_event WHERE created_at >= datetime('now', '-14 days')",
+        "output_production": "SELECT COUNT(*) FROM review_event WHERE drill_type IN ('production', 'speaking', 'writing') AND created_at >= datetime('now', '-14 days')",
+        "tutor_integration": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'tutor_integration' AND status NOT IN ('resolved', 'rejected')",
+        "tone_quality": "SELECT AVG(CASE WHEN tone_scores_json IS NOT NULL THEN 1 ELSE 0 END) * 100 FROM audio_recording WHERE created_at >= datetime('now', '-14 days')",
+        "timing": "SELECT AVG(julianday(started_at, '+' || CAST(duration_seconds AS TEXT) || ' seconds') - julianday(started_at)) * 86400 FROM session_log WHERE started_at >= datetime('now', '-14 days') AND duration_seconds IS NOT NULL",
+        "ui": "SELECT COUNT(*) FROM pi_finding WHERE dimension = 'ui' AND status NOT IN ('resolved', 'rejected')",
     }
 
     sql = metric_queries.get(dimension)

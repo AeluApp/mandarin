@@ -68,9 +68,9 @@ _FINDING_TO_ACTION = {
     ("ux", "error"): ("mandarin/web/routes.py", "error_handling", "fix"),
     ("ux", ""): ("mandarin/web/routes.py", "ux_flow", "improve"),
     # drill_quality
-    ("drill_quality", "accuracy"): ("mandarin/drills/", "drill_accuracy", "increase"),
-    ("drill_quality", "scaffolding"): ("mandarin/drills/", "scaffolding_level", "increase"),
-    ("drill_quality", ""): ("mandarin/drills/", "drill_design", "improve"),
+    ("drill_quality", "accuracy"): ("mandarin/drills/dispatch.py", "drill_accuracy", "increase"),
+    ("drill_quality", "scaffolding"): ("mandarin/drills/hints.py", "scaffolding_level", "increase"),
+    ("drill_quality", ""): ("mandarin/drills/dispatch.py", "drill_design", "improve"),
     # srs_funnel
     ("srs_funnel", "stuck"): ("mandarin/scheduler.py", "STUCK_THRESHOLD", "decrease"),
     ("srs_funnel", "leech"): ("mandarin/scheduler.py", "LEECH_THRESHOLD", "decrease"),
@@ -85,9 +85,9 @@ _FINDING_TO_ACTION = {
     ("onboarding", "first session"): ("mandarin/web/onboarding_routes.py", "first_session_rate", "increase"),
     ("onboarding", ""): ("mandarin/web/onboarding_routes.py", "onboarding_flow", "improve"),
     # content
-    ("content", "coverage"): ("mandarin/content_gen/", "vocab_coverage", "increase"),
-    ("content", "gap"): ("mandarin/content_gen/", "content_gaps", "fill"),
-    ("content", ""): ("mandarin/content_gen/", "content_library", "expand"),
+    ("content", "coverage"): ("mandarin/scheduler.py", "vocab_coverage", "increase"),
+    ("content", "gap"): ("mandarin/web/gap_routes.py", "content_gaps", "fill"),
+    ("content", ""): ("mandarin/scheduler.py", "content_library", "expand"),
     # frustration
     ("frustration", "rage"): ("mandarin/web/static/app.js", "click_handlers", "fix"),
     ("frustration", ""): ("mandarin/web/static/app.js", "ux_friction", "reduce"),
@@ -111,7 +111,7 @@ _FINDING_TO_ACTION = {
     ("platform", "capacitor"): ("mobile/capacitor.config.ts", "cap_config", "fix"),
     ("platform", "flutter"): ("flutter_app/lib/api/api_client.dart", "flutter_parity", "improve"),
     ("platform", "tauri"): ("desktop/tauri-app/src-tauri/tauri.conf.json", "tauri_config", "fix"),
-    ("platform", ""): ("mandarin/web/static/", "cross_platform", "improve"),
+    ("platform", ""): ("mandarin/web/static/app.js", "cross_platform", "improve"),
     # genai
     ("genai", "model"): ("mandarin/ai/ollama_client.py", "model_selection", "improve"),
     ("genai", "streaming"): ("mandarin/ai/ollama_client.py", "streaming", "add"),
@@ -127,17 +127,17 @@ _FINDING_TO_ACTION = {
     # flow
     ("flow", ""): ("mandarin/web/session_routes.py", "session_flow", "improve"),
     # curriculum
-    ("curriculum", ""): ("mandarin/content_gen/", "curriculum_coverage", "expand"),
+    ("curriculum", ""): ("mandarin/scheduler.py", "curriculum_coverage", "expand"),
     # hsk_cliff
-    ("hsk_cliff", ""): ("mandarin/content_gen/", "hsk_cliff_mitigation", "improve"),
+    ("hsk_cliff", ""): ("mandarin/scheduler.py", "hsk_cliff_mitigation", "improve"),
     # cross_modality / error_taxonomy
-    ("cross_modality", ""): ("mandarin/drills/", "modality_balance", "improve"),
-    ("error_taxonomy", ""): ("mandarin/drills/", "error_classification", "improve"),
+    ("cross_modality", ""): ("mandarin/drills/dispatch.py", "modality_balance", "improve"),
+    ("error_taxonomy", ""): ("mandarin/drills/dispatch.py", "error_classification", "improve"),
     # marketing / copy / pm / competitive / ui
     ("marketing", ""): ("mandarin/web/marketing_routes.py", "marketing_effectiveness", "improve"),
-    ("copy", ""): ("mandarin/web/templates/", "copy_quality", "improve"),
+    ("copy", ""): ("mandarin/web/templates/index.html", "copy_quality", "improve"),
     ("pm", ""): ("mandarin/settings.py", "pm_process", "improve"),
-    ("competitive", ""): ("mandarin/content_gen/", "competitive_features", "improve"),
+    ("competitive", ""): ("mandarin/scheduler.py", "competitive_features", "improve"),
     ("ui", ""): ("mandarin/web/static/style.css", "ui_design", "improve"),
     # OR-system findings (analyzers_or.py)
     ("engineering", "spc"): ("mandarin/quality/spc.py", "spc_violation", "investigate"),
@@ -196,6 +196,80 @@ _FINDING_TO_ACTION = {
     ("engagement", "modality"): ("mandarin/scheduler.py", "modality_balance", "improve"),
     ("retention", "modality"): ("mandarin/scheduler.py", "modality_onboarding", "improve"),
     ("retention", "mono"): ("mandarin/nudge_registry.py", "exploration_nudge", "add"),
+    # output_production
+    ("output_production", "speaking"): ("mandarin/drills/production.py", "speaking_output", "improve"),
+    ("output_production", "writing"): ("mandarin/drills/production.py", "writing_output", "improve"),
+    ("output_production", ""): ("mandarin/drills/production.py", "production_quality", "improve"),
+    # tutor_integration
+    ("tutor_integration", "grammar"): ("mandarin/ai/grammar_tutor.py", "grammar_feedback", "improve"),
+    ("tutor_integration", "explanation"): ("mandarin/ai/grammar_tutor.py", "explanation_quality", "improve"),
+    ("tutor_integration", ""): ("mandarin/ai/grammar_tutor.py", "tutor_pipeline", "improve"),
+    # tone_quality
+    ("tone_quality", "sandhi"): ("mandarin/ai/tone_sandhi.py", "sandhi_rules", "fix"),
+    ("tone_quality", "accuracy"): ("mandarin/ai/tone_sandhi.py", "tone_accuracy", "improve"),
+    ("tone_quality", ""): ("mandarin/ai/tone_sandhi.py", "tone_quality", "improve"),
+    # feature_usage
+    ("feature_usage", "adoption"): ("mandarin/web/routes.py", "feature_adoption", "increase"),
+    ("feature_usage", "discovery"): ("mandarin/web/routes.py", "feature_discovery", "improve"),
+    ("feature_usage", ""): ("mandarin/web/routes.py", "feature_usage", "track"),
+    # engineering_health
+    ("engineering_health", "test"): ("mandarin/web/quality_scheduler.py", "test_coverage", "increase"),
+    ("engineering_health", "debt"): ("mandarin/web/quality_scheduler.py", "tech_debt", "reduce"),
+    ("engineering_health", ""): ("mandarin/web/quality_scheduler.py", "engineering_health", "improve"),
+    # data_quality
+    ("data_quality", "integrity"): ("mandarin/db/core.py", "data_integrity", "fix"),
+    ("data_quality", "orphan"): ("mandarin/db/core.py", "orphan_records", "clean"),
+    ("data_quality", ""): ("mandarin/db/core.py", "data_quality", "improve"),
+    # genai_governance
+    ("genai_governance", "policy"): ("mandarin/ai/ollama_client.py", "governance_policy", "enforce"),
+    ("genai_governance", "safety"): ("mandarin/ai/ollama_client.py", "safety_filter", "tighten"),
+    ("genai_governance", ""): ("mandarin/ai/ollama_client.py", "genai_governance", "improve"),
+    # memory_model
+    ("memory_model", "decay"): ("mandarin/ai/memory.py", "memory_decay", "tune"),
+    ("memory_model", "context"): ("mandarin/ai/memory.py", "context_window", "expand"),
+    ("memory_model", ""): ("mandarin/ai/memory.py", "memory_model", "improve"),
+    # learner_model
+    ("learner_model", "proficiency"): ("mandarin/ai/learner_model.py", "proficiency_estimation", "improve"),
+    ("learner_model", "calibration"): ("mandarin/ai/learner_model.py", "model_calibration", "tune"),
+    ("learner_model", ""): ("mandarin/ai/learner_model.py", "learner_model", "improve"),
+    # rag
+    ("rag", "retrieval"): ("mandarin/ai/rag_layer.py", "retrieval_quality", "improve"),
+    ("rag", "embedding"): ("mandarin/ai/rag_layer.py", "embedding_quality", "improve"),
+    ("rag", ""): ("mandarin/ai/rag_layer.py", "rag_pipeline", "improve"),
+    # native_speaker_validation
+    ("native_speaker_validation", "coverage"): ("mandarin/ai/native_speaker_validation.py", "validation_coverage", "increase"),
+    ("native_speaker_validation", "accuracy"): ("mandarin/ai/native_speaker_validation.py", "validation_accuracy", "improve"),
+    ("native_speaker_validation", ""): ("mandarin/ai/native_speaker_validation.py", "native_validation", "improve"),
+    # input_layer
+    ("input_layer", "recognition"): ("mandarin/drills/base.py", "input_recognition", "improve"),
+    ("input_layer", "feedback"): ("mandarin/drills/base.py", "input_feedback", "improve"),
+    ("input_layer", ""): ("mandarin/drills/base.py", "input_layer", "improve"),
+    # accountability
+    ("accountability", "audit"): ("mandarin/ai/accountability.py", "audit_trail", "improve"),
+    ("accountability", "transparency"): ("mandarin/ai/accountability.py", "decision_transparency", "improve"),
+    ("accountability", ""): ("mandarin/ai/accountability.py", "accountability", "improve"),
+    # commercial
+    ("commercial", "pricing"): ("mandarin/payment.py", "pricing_model", "optimize"),
+    ("commercial", "subscription"): ("mandarin/payment.py", "subscription_flow", "improve"),
+    ("commercial", ""): ("mandarin/payment.py", "commercial_model", "improve"),
+    # timing
+    ("timing", "schedule"): ("mandarin/scheduler.py", "session_timing", "optimize"),
+    ("timing", "notification"): ("mandarin/scheduler.py", "notification_timing", "tune"),
+    ("timing", ""): ("mandarin/scheduler.py", "timing_policy", "improve"),
+    # governance
+    ("governance", "compliance"): ("mandarin/intelligence/governance.py", "compliance_check", "enforce"),
+    ("governance", "policy"): ("mandarin/intelligence/governance.py", "governance_policy", "update"),
+    ("governance", ""): ("mandarin/intelligence/governance.py", "governance", "improve"),
+    # tonal_vibe
+    ("tonal_vibe", "warmth"): ("mandarin/web/static/style.css", "color_warmth", "increase"),
+    ("tonal_vibe", "serif"): ("mandarin/web/static/style.css", "typography", "improve"),
+    ("tonal_vibe", ""): ("mandarin/web/static/style.css", "tonal_vibe", "improve"),
+    # strategic (fallback)
+    ("strategic", ""): ("mandarin/intelligence/prescription.py", "strategic_priority", "reassess"),
+    # copy_drift
+    ("copy_drift", "price"): ("marketing/landing/index.html", "pricing_copy", "fix"),
+    ("copy_drift", "feature"): ("marketing/landing/index.html", "feature_claims", "fix"),
+    ("copy_drift", ""): ("marketing/landing/index.html", "copy_accuracy", "fix"),
 }
 
 # Error-type dimensions where improvement means metric goes DOWN
