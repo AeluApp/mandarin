@@ -122,38 +122,31 @@ def test_ollama_unavailable_returns_false(mock_get):
     assert is_ollama_available() is False
 
 
-# ── Test 2: generate falls back to 1.5B when 7B unavailable ──
+# ── Test 2: generate falls back to smaller model when primary unavailable ──
 
-@patch("mandarin.ai.ollama_client.httpx.post")
-@patch("mandarin.ai.ollama_client.is_ollama_available", return_value=True)
-def test_generate_fallback(mock_avail, mock_post, conn):
-    # First call (7B) fails, second call (1.5B) succeeds
-    fail_resp = MagicMock()
-    fail_resp.status_code = 500
-    fail_resp.text = "model not found"
-
-    ok_resp = MagicMock()
-    ok_resp.status_code = 200
-    ok_resp.json.return_value = {
-        "response": "hello",
-        "prompt_eval_count": 10,
-        "eval_count": 5,
-    }
-
-    mock_post.side_effect = [fail_resp, ok_resp]
+@patch("mandarin.ai.ollama_client._call_llm")
+def test_generate_fallback(mock_call_llm, conn):
+    # First call (primary) fails, second call (fallback) succeeds
+    fail_result = OllamaResponse(success=False, error="model not found", model_used="qwen2.5:7b")
+    ok_result = OllamaResponse(
+        success=True, text="hello", model_used="qwen2.5:1.5b",
+        prompt_tokens=10, completion_tokens=5, generation_time_ms=100,
+    )
+    mock_call_llm.side_effect = [fail_result, ok_result]
 
     result = generate("test prompt", conn=conn, task_type="test")
     assert result.success is True
     assert result.text == "hello"
-    assert mock_post.call_count == 2
+    assert mock_call_llm.call_count == 2
 
 
 # ── Test 3: generate returns success=False on timeout ──
 
-@patch("mandarin.ai.ollama_client.httpx.post")
-def test_generate_timeout(mock_post, conn):
-    import httpx
-    mock_post.side_effect = httpx.TimeoutException("timeout")
+@patch("mandarin.ai.ollama_client._call_llm")
+def test_generate_timeout(mock_call_llm, conn):
+    mock_call_llm.return_value = OllamaResponse(
+        success=False, error="timeout", model_used="qwen2.5:7b",
+    )
 
     result = generate("test", conn=conn, task_type="test")
     assert result.success is False
@@ -296,15 +289,15 @@ def test_review_queue_on_validation_failure(mock_avail, mock_gen, conn):
 
 # ── Test 14: Generation log populated for every call ──
 
-@patch("mandarin.ai.ollama_client.httpx.post")
-def test_generation_log_always_populated(mock_post, conn):
-    import httpx
-    mock_post.side_effect = httpx.TimeoutException("timeout")
+@patch("mandarin.ai.ollama_client._call_llm")
+def test_generation_log_always_populated(mock_call_llm, conn):
+    mock_call_llm.return_value = OllamaResponse(
+        success=False, error="timeout", model_used="qwen2.5:7b",
+    )
 
     generate("test prompt", conn=conn, task_type="test_task")
 
-    # Both models fail = 2 log entries (one per model attempt) — but actually
-    # the log is written once at the end by generate()
+    # Both models fail = log is written once at the end by generate()
     rows = conn.execute("SELECT * FROM pi_ai_generation_log").fetchall()
     assert len(rows) >= 1
     assert rows[0]["task_type"] == "test_task"

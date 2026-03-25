@@ -692,6 +692,10 @@ def run_product_audit(conn) -> dict:
     except Exception as e:
         logger.warning("Methodology coverage grading failed: %s", e)
 
+    # Final re-sort: findings may have been added after the initial sort
+    # (stale, regressions, overrides, meta, release regressions)
+    findings.sort(key=lambda f: _SEVERITY_ORDER.get(f.get("severity", "low"), 9))
+
     return {
         "findings": findings,
         "dimension_scores": dimension_scores,

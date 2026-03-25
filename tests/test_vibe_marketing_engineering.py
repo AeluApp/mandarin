@@ -2,7 +2,7 @@
 
 import sqlite3
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from datetime import datetime, timedelta
 
 
@@ -332,75 +332,64 @@ class TestFeatureUsage(unittest.TestCase):
 
 
 class TestEngineeringHealth(unittest.TestCase):
-    """Tests for engineering health analyzers."""
+    """Tests for engineering health analyzers.
 
-    @patch("mandarin.intelligence.vibe_marketing_eng.subprocess.run")
-    def test_low_coverage_high_finding(self, mock_run):
+    These analyzers now use cached snapshot data from pi_engineering_snapshots
+    rather than running subprocess commands live.
+    """
+
+    def test_low_coverage_high_finding(self):
         """13. Coverage < 60% generates high finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_test_coverage
         conn = _make_db()
 
-        # Mock pytest --co
-        collect_result = MagicMock()
-        collect_result.stdout = "tests/test_a.py::test1\ntests/test_a.py::test2\n"
-        collect_result.returncode = 0
-
-        # Mock coverage report
-        coverage_result = MagicMock()
-        coverage_result.stdout = "45.2"
-        coverage_result.returncode = 0
-
-        # Mock pytest run
-        test_result = MagicMock()
-        test_result.stdout = "2 passed"
-        test_result.returncode = 0
-
-        mock_run.side_effect = [collect_result, coverage_result, test_result]
+        # Insert a snapshot with low coverage
+        conn.execute("""
+            INSERT INTO pi_engineering_snapshots
+            (id, snapshot_date, test_coverage_pct, tests_passing, tests_failing)
+            VALUES ('1', date('now'), 45.2, 2, 0)
+        """)
+        conn.commit()
 
         results = analyze_test_coverage(conn)
         coverage_findings = [f for f in results if "coverage" in f["title"].lower()]
         self.assertTrue(len(coverage_findings) >= 1)
         self.assertEqual(coverage_findings[0]["severity"], "high")
 
-    @patch("mandarin.intelligence.vibe_marketing_eng.subprocess.run")
-    def test_failing_tests_high_finding(self, mock_run):
+    def test_failing_tests_high_finding(self):
         """14. Failing tests generate high finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_test_coverage
         conn = _make_db()
 
-        collect_result = MagicMock()
-        collect_result.stdout = ""
-        collect_result.returncode = 0
-
-        coverage_result = MagicMock()
-        coverage_result.stdout = "80.0"
-        coverage_result.returncode = 0
-
-        test_result = MagicMock()
-        test_result.stdout = "18 passed, 3 failed"
-        test_result.returncode = 1
-
-        mock_run.side_effect = [collect_result, coverage_result, test_result]
+        # Insert a snapshot with failing tests
+        conn.execute("""
+            INSERT INTO pi_engineering_snapshots
+            (id, snapshot_date, test_coverage_pct, tests_passing, tests_failing)
+            VALUES ('1', date('now'), 80.0, 18, 3)
+        """)
+        conn.commit()
 
         results = analyze_test_coverage(conn)
         fail_findings = [f for f in results if "failing" in f["title"].lower()]
         self.assertTrue(len(fail_findings) >= 1)
         self.assertEqual(fail_findings[0]["severity"], "high")
 
-    @patch("mandarin.intelligence.vibe_marketing_eng.subprocess.run")
-    def test_outdated_critical_deps(self, mock_run):
-        """15. Outdated critical packages flagged."""
+    def test_outdated_deps_flagged(self):
+        """15. Many outdated packages flagged."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_dependency_health
         conn = _make_db()
 
-        result = MagicMock()
-        result.stdout = '[{"name": "flask", "version": "2.3.0", "latest_version": "3.0.0"}]'
-        result.returncode = 0
-        mock_run.return_value = result
+        # Insert a snapshot with many outdated dependencies
+        conn.execute("""
+            INSERT INTO pi_engineering_snapshots
+            (id, snapshot_date, outdated_dependencies)
+            VALUES ('1', date('now'), 15)
+        """)
+        conn.commit()
 
         results = analyze_dependency_health(conn)
         self.assertTrue(len(results) >= 1)
-        self.assertIn("critical", results[0]["title"].lower())
+        self.assertIn("outdated", results[0]["title"].lower())
 
     def test_schema_high_table_count(self):
         """16. Table count > 80 generates low finding."""

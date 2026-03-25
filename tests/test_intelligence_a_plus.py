@@ -566,7 +566,12 @@ class TestDMAIC(unittest.TestCase):
         from mandarin.intelligence._synthesis import run_dmaic_cycle
         conn = _make_db()
 
-        conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('retention', 'high', 'Churn rising', 'investigating')")
+        # Insert finding with root_cause_tag so the Analyze gate passes
+        conn.execute("INSERT INTO pi_finding (id, dimension, severity, title, status, root_cause_tag) VALUES (1, 'retention', 'high', 'Churn rising', 'investigating', 'root_cause')")
+        # Insert advisor opinion so the Improve gate passes
+        conn.execute("INSERT INTO pi_advisor_opinion (finding_id, advisor, recommendation, priority_score) VALUES (1, 'retention', 'Fix churn', 0.9)")
+        # Insert SPC observation so the Control gate passes
+        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl) VALUES ('retention_accuracy', 0.7, 0.9, 0.5)")
         conn.commit()
 
         result = run_dmaic_cycle(conn, "retention")
@@ -581,7 +586,8 @@ class TestDMAIC(unittest.TestCase):
     def test_dmaic_persists_to_db(self):
         from mandarin.intelligence._synthesis import run_dmaic_cycle
         conn = _make_db()
-        conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('ux', 'medium', 'test', 'investigating')")
+        # Insert finding with root_cause_tag so the Analyze gate passes
+        conn.execute("INSERT INTO pi_finding (id, dimension, severity, title, status, root_cause_tag) VALUES (1, 'ux', 'medium', 'test', 'investigating', 'root_cause')")
         conn.commit()
 
         run_dmaic_cycle(conn, "ux")

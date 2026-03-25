@@ -297,7 +297,9 @@ def test_scheduler_produces_drills():
 def test_mini_session_shorter_than_standard():
     """Mini session should have fewer drills than standard."""
     conn, path = _make_test_db()
-    _seed_items(conn, 50)
+    # Seed enough items so that the standard session can fill its target
+    # (standard needs more items to populate multiple modality buckets)
+    _seed_items(conn, 200)
 
     std = plan_standard_session(conn)
     mini = plan_minimal_session(conn)

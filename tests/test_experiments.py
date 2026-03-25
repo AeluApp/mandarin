@@ -111,6 +111,9 @@ class TestExperimentLifecycle:
 
         # Seed some data so conclude can gather results
         users = _seed_users(exp_db, 4)
+        # Seed a completed session for each user so they pass eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         for uid in users[:2]:
             get_variant(exp_db, "conclude_test", uid)
             _seed_sessions(exp_db, uid, n=3, variant="control")
@@ -147,10 +150,15 @@ class TestExperimentLifecycle:
 class TestAssignment:
     def test_deterministic_assignment(self, exp_db):
         """Same user gets same variant across repeated calls."""
+        # Use a non-admin user (user 1 is admin and excluded by eligibility)
+        users = _seed_users(exp_db, 2)
+        uid = users[0]
+        # Seed a completed session so the user passes min_sessions eligibility
+        _seed_sessions(exp_db, uid, n=1, completed=True)
         create_experiment(exp_db, "det_test", "Test", ["A", "B"])
         start_experiment(exp_db, "det_test")
-        v1 = get_variant(exp_db, "det_test", 1)
-        v2 = get_variant(exp_db, "det_test", 1)
+        v1 = get_variant(exp_db, "det_test", uid)
+        v2 = get_variant(exp_db, "det_test", uid)
         assert v1 == v2
         assert v1 in ("A", "B")
 
@@ -159,6 +167,9 @@ class TestAssignment:
         create_experiment(exp_db, "dist_test", "Test", ["A", "B"], traffic_pct=100.0)
         start_experiment(exp_db, "dist_test")
         users = _seed_users(exp_db, 200)
+        # Seed a completed session for each user so they pass min_sessions eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         counts = {"A": 0, "B": 0}
         for uid in users:
             v = get_variant(exp_db, "dist_test", uid)
@@ -182,6 +193,9 @@ class TestAssignment:
         start_experiment(exp_db, "traffic_test")
         # With 0.01% traffic, virtually no one should be assigned
         users = _seed_users(exp_db, 50)
+        # Seed a completed session for each user so they pass eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         assigned = sum(1 for uid in users if get_variant(exp_db, "traffic_test", uid) is not None)
         # At 0.01%, expect ~0 of 50 users (allow some)
         assert assigned < 10
@@ -192,13 +206,17 @@ class TestAssignment:
 
 class TestExposure:
     def test_log_exposure_creates_row(self, exp_db):
+        # Use a non-admin user with a session for eligibility
+        users = _seed_users(exp_db, 1)
+        uid = users[0]
+        _seed_sessions(exp_db, uid, n=1, completed=True)
         create_experiment(exp_db, "exposure_test", "Test", ["A", "B"])
         start_experiment(exp_db, "exposure_test")
-        get_variant(exp_db, "exposure_test", 1)
-        log_exposure(exp_db, "exposure_test", 1, context="session_planning")
+        get_variant(exp_db, "exposure_test", uid)
+        log_exposure(exp_db, "exposure_test", uid, context="session_planning")
 
         row = exp_db.execute(
-            "SELECT * FROM experiment_exposure WHERE user_id = 1"
+            "SELECT * FROM experiment_exposure WHERE user_id = ?", (uid,)
         ).fetchone()
         assert row is not None
         assert row["context"] == "session_planning"
@@ -227,6 +245,9 @@ class TestResults:
         start_experiment(exp_db, "results_test")
 
         users = _seed_users(exp_db, 20)
+        # Seed a completed session for each user so they pass eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         for uid in users[:10]:
             get_variant(exp_db, "results_test", uid)
             _seed_sessions(exp_db, uid, n=5, variant="control", completed=True)
@@ -375,6 +396,9 @@ class TestSequentialTest:
         start_experiment(exp_db, "seq_data")
 
         users = _seed_users(exp_db, 20)
+        # Seed a completed session for each user so they pass eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         for uid in users[:10]:
             get_variant(exp_db, "seq_data", uid)
             _seed_sessions(exp_db, uid, n=5, variant="control", completed=True)
@@ -398,6 +422,9 @@ class TestGuardrails:
         start_experiment(exp_db, "guard_ok")
 
         users = _seed_users(exp_db, 10)
+        # Seed a completed session for each user so they pass eligibility
+        for uid in users:
+            _seed_sessions(exp_db, uid, n=1, completed=True)
         for uid in users[:5]:
             get_variant(exp_db, "guard_ok", uid)
             _seed_sessions(exp_db, uid, n=5, variant="control", completed=True)
