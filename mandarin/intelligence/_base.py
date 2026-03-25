@@ -90,6 +90,7 @@ _VERIFICATION_WINDOWS = {
     "brand_health": 30,
     "learning_science": 14,
     "copy_drift": 7,
+    "runtime_health": 3,
 }
 
 # Correlated dimension pairs for RCA graph edges
@@ -135,6 +136,8 @@ _CORRELATED_DIMENSIONS = {
     ("learning_science", "retention"),
     ("copy_drift", "marketing"),
     ("copy_drift", "copy"),
+    ("runtime_health", "engineering"),
+    ("runtime_health", "security"),
 }
 
 # Rule-based learner archetype definitions
@@ -377,7 +380,7 @@ _CODE_DATA_DIMENSIONS = {
 # System/infra/process dimensions — always at full weight
 _SYSTEM_DIMENSIONS = {
     "engineering", "security", "methodology", "agentic",
-    "governance", "data_quality", "genai_governance",
+    "governance", "data_quality", "genai_governance", "runtime_health",
 }
 
 # Dimensions that are assessable from code/infra but whose findings are
