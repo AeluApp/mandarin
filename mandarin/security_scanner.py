@@ -13,6 +13,10 @@ _PROJECT_ROOT = Path(__file__).parent.parent
 
 def run_sast_scan(conn):
     """Run bandit SAST scan, store findings, return summary dict."""
+    import shutil
+    if not shutil.which("bandit"):
+        logger.info("bandit not installed — skipping SAST scan (CI-only tool)")
+        return {"high": 0, "medium": 0, "low": 0, "total": 0, "skipped": True}
     scan_id = _create_scan(conn, "sast")
     start = time.monotonic()
     try:
@@ -50,6 +54,10 @@ def run_sast_scan(conn):
 
 def run_dependency_scan(conn):
     """Run pip-audit dependency scan, store findings, return summary dict."""
+    import shutil
+    if not shutil.which("pip-audit"):
+        logger.info("pip-audit not installed — skipping dependency scan (CI-only tool)")
+        return {"high": 0, "medium": 0, "low": 0, "total": 0, "skipped": True}
     scan_id = _create_scan(conn, "dependency")
     start = time.monotonic()
     try:
