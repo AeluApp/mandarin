@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application
 COPY pyproject.toml .
 COPY mandarin/ mandarin/
+COPY marketing/ marketing/
 COPY schema.sql .
 COPY learner_profile.json .
 COPY data/ data/
