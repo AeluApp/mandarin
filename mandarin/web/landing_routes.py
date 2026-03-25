@@ -4,7 +4,7 @@ import logging
 import os
 import re
 
-from flask import Blueprint, send_from_directory, abort, jsonify
+from flask import Blueprint, send_from_directory, abort, jsonify, request
 
 logger = logging.getLogger(__name__)
 
@@ -213,6 +213,45 @@ def api_social_proof():
     except Exception as e:
         logger.debug("Social proof API error: %s", e)
         return jsonify({"show_user_count": False, "show_outcome_stat": False})
+
+
+@landing_bp.route("/api/newsletter/subscribe", methods=["POST"])
+def newsletter_subscribe():
+    """Add email to Resend audience for newsletter delivery."""
+    import requests as http_requests
+    from ..settings import RESEND_API_KEY
+
+    data = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
+
+    if not email or "@" not in email or "." not in email.split("@")[-1]:
+        return jsonify({"error": "Valid email required"}), 400
+
+    RESEND_AUDIENCE_ID = os.environ.get("RESEND_AUDIENCE_ID", "")
+
+    if not RESEND_API_KEY or not RESEND_AUDIENCE_ID:
+        logger.info("[newsletter dev-mode] subscribe: %s", email)
+        return jsonify({"status": "subscribed"})
+
+    try:
+        resp = http_requests.post(
+            f"https://api.resend.com/audiences/{RESEND_AUDIENCE_ID}/contacts",
+            headers={
+                "Authorization": f"Bearer {RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={"email": email},
+            timeout=10,
+        )
+        if resp.status_code in (200, 201):
+            logger.info("Newsletter subscribe: %s", email)
+            return jsonify({"status": "subscribed"})
+        else:
+            logger.error("Resend audience error %s: %s", resp.status_code, resp.text)
+            return jsonify({"error": "Subscription failed, try again later"}), 502
+    except Exception as e:
+        logger.exception("Newsletter subscribe error: %s", e)
+        return jsonify({"error": "Subscription failed, try again later"}), 502
 
 
 @landing_bp.route("/illustrations/<path:filename>")
