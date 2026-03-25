@@ -366,7 +366,7 @@
   <div class="newsletter">
     <h3>Get new posts by email</h3>
     <p>One or two emails a month on learning Chinese. No spam.</p>
-    <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="newsletter-form" data-newsletter>
       <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
       <button type="submit" class="btn-primary">Subscribe</button>
     </form>
@@ -381,14 +381,26 @@
   </footer>
 
   <script>
-  document.querySelectorAll('form').forEach(function(form) {
+  document.querySelectorAll('[data-newsletter]').forEach(function(form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       var email = form.querySelector('input[type="email"]').value;
-      console.log('Newsletter signup:', email);
-      form.style.display = 'none';
-      var success = form.parentElement.querySelector('.newsletter-success');
-      if (success) success.style.display = 'block';
+      var btn = form.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Subscribing\u2026';
+      fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email})
+      }).then(function(r) { return r.json(); }).then(function() {
+        form.style.display = 'none';
+        var success = form.parentElement.querySelector('.newsletter-success');
+        if (success) success.style.display = 'block';
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+        alert('Something went wrong. Please try again.');
+      });
     });
   });
   </script>
