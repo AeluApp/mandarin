@@ -96,14 +96,6 @@
       },
       {
         "@type": "Question",
-        "name": "Do you offer student discounts?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Email hello@aeluapp.com. If you are a student learning Chinese, we will work something out."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "Can I get a refund?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -116,14 +108,6 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Payments are processed through Stripe. You can pay with any major credit or debit card. Apple Pay and Google Pay are also supported."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is my data safe? Where is it stored?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your learning data is stored securely and is never sold or shared with third parties. Your study data stays on our servers and is never sent to external services."
         }
       },
       {
@@ -155,7 +139,7 @@
         "name": "How is this different from Duolingo or HelloChinese?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Those apps are built to maximize daily engagement. Aelu is built to maximize how much Chinese you retain. 44 drill types, encounter-based scheduling, graded reading with real passages. No gamification, no social pressure, no auto-generated content."
+          "text": "Those apps are built to maximize daily engagement. Aelu is built to maximize how much Chinese you retain. 44 drill types, encounter-based scheduling, graded reading with real passages. No gamification, no social pressure."
         }
       },
       {
@@ -851,7 +835,6 @@
             <li>Graded reading (HSK 1-2 passages)</li>
             <li>Listening practice</li>
             <li>Basic progress tracking</li>
-            <li>Works offline</li>
           </ul>
           <a href="/signup" class="btn-secondary" role="button">Start here</a>
           <p class="pricing-cta-note">Use it forever. Really.</p>
@@ -864,7 +847,7 @@
             <button id="btn-monthly" class="plan-toggle plan-active" type="button">Monthly</button>
             <button id="btn-annual" class="plan-toggle" type="button">Annual</button>
           </div>
-          <div id="price-monthly" class="pricing-price">$14.99 <span>/month</span></div>
+          <div id="price-display" class="pricing-price">$14.99 <span>/month</span></div>
           <div id="price-annual" class="pricing-price" style="display:none;">$149 <span>/year</span></div>
           <p id="note-monthly" class="pricing-note">Cancel anytime. No contracts.</p>
           <p id="note-annual" class="pricing-note" style="display:none;">Save $30/year. Cancel anytime.</p>
@@ -1047,14 +1030,6 @@
         </div>
 
         <div class="faq-item" role="listitem">
-          <input type="checkbox" class="faq-toggle" id="faq-4" aria-hidden="true">
-          <label class="faq-question" for="faq-4" role="button" aria-expanded="false">Do you offer student discounts?</label>
-          <div class="faq-answer" role="region">
-            <p><a href="mailto:hello@aeluapp.com">Email us</a>. If you are a student learning Chinese, we will work something out.</p>
-          </div>
-        </div>
-
-        <div class="faq-item" role="listitem">
           <input type="checkbox" class="faq-toggle" id="faq-5" aria-hidden="true">
           <label class="faq-question" for="faq-5" role="button" aria-expanded="false">Can I get a refund?</label>
           <div class="faq-answer" role="region">
@@ -1067,14 +1042,6 @@
           <label class="faq-question" for="faq-6" role="button" aria-expanded="false">What payment methods do you accept?</label>
           <div class="faq-answer" role="region">
             <p>Payments are processed through Stripe. You can pay with any major credit or debit card (Visa, Mastercard, American Express). Apple Pay and Google Pay are also supported where available.</p>
-          </div>
-        </div>
-
-        <div class="faq-item" role="listitem">
-          <input type="checkbox" class="faq-toggle" id="faq-7" aria-hidden="true">
-          <label class="faq-question" for="faq-7" role="button" aria-expanded="false">Is my data safe? Where is it stored?</label>
-          <div class="faq-answer" role="region">
-            <p>Your learning data is stored securely and is never sold or shared with third parties. Your study data is not sent to any external service. Your practice history, scores, and progress belong to you.</p>
           </div>
         </div>
 
@@ -1106,7 +1073,7 @@
           <input type="checkbox" class="faq-toggle" id="faq-11" aria-hidden="true">
           <label class="faq-question" for="faq-11" role="button" aria-expanded="false">How is this different from Duolingo or HelloChinese?</label>
           <div class="faq-answer" role="region">
-            <p>Those apps are built to maximize daily engagement. Aelu is built to maximize how much Chinese you retain. There are 44 drill types instead of matching exercises, encounter-based scheduling instead of fixed repetition, and graded reading with real passages instead of fabricated sentences. The system tracks what you actually struggle with and adjusts. No gamification, no social pressure, no auto-generated content.</p>
+            <p>Those apps are built to maximize daily engagement. Aelu is built to maximize how much Chinese you retain. There are 44 drill types instead of matching exercises, encounter-based scheduling instead of fixed repetition, and graded reading with real passages instead of fabricated sentences. The system tracks what you actually struggle with and adjusts. No gamification, no social pressure.</p>
           </div>
         </div>
 
@@ -1148,7 +1115,7 @@
   <script>
     function setPlan(plan) {
       var isAnnual = plan === 'annual';
-      document.getElementById('price-monthly').style.display = isAnnual ? 'none' : '';
+      document.getElementById('price-display').style.display = isAnnual ? 'none' : '';
       document.getElementById('price-annual').style.display = isAnnual ? '' : 'none';
       document.getElementById('note-monthly').style.display = isAnnual ? 'none' : '';
       document.getElementById('note-annual').style.display = isAnnual ? '' : 'none';
@@ -1193,7 +1160,7 @@
         var annualPerMonth = (annualPrice / 12).toFixed(2);
         var savings = (annualMultiplied - annualPrice).toString();
         // Update visible monthly price
-        var priceMonthly = document.getElementById('price-monthly');
+        var priceMonthly = document.getElementById('price-display');
         if (priceMonthly) priceMonthly.innerHTML = '$' + monthly + ' <span>/month</span>';
         // Update visible annual price
         var priceAnnual = document.getElementById('price-annual');

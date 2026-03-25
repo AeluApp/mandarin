@@ -296,7 +296,7 @@
     <div class="container">
 
       <h1>Privacy Policy</h1>
-      <p class="effective-date">Effective: February 1, 2026</p>
+      <p class="effective-date">Effective: March 24, 2026</p>
 
       <p>This policy explains what data Aelu collects, what it does not collect, and how your information is handled. It is written in plain language because privacy policies should be readable, not endurable.</p>
 
@@ -304,7 +304,7 @@
 
       <p><strong>Account information:</strong> If you create an account, we collect your email address and a password (stored as a salted hash -- we cannot see your password). If you sign up for the paid tier, your name and billing information are collected by Stripe, our payment processor.</p>
 
-      <p><strong>Study progress:</strong> Your learning data -- drill scores, session history, reading activity, vocabulary progress, diagnostic results -- is stored locally on your device. This data powers the adaptive scheduling algorithm and your per-skill diagnostics.</p>
+      <p><strong>Study progress:</strong> Your learning data -- drill scores, session history, reading activity, vocabulary progress, diagnostic results -- is collected to power the adaptive scheduling algorithm and your per-skill diagnostics.</p>
 
       <p><strong>Payment information:</strong> If you subscribe to Full Access, payment is handled entirely by Stripe. We receive confirmation of your subscription status, but we never see or store your credit card number, CVC, or full billing details. Stripe's privacy policy governs how they handle your payment data.</p>
 
@@ -314,17 +314,13 @@
 
       <p>This section matters as much as the one above.</p>
       <ul>
-        <li>We do not sell your data to anyone. Not now, not ever.</li>
         <li>We do not run third-party advertising networks or display ads.</li>
         <li>We do not use tracking pixels from social media platforms.</li>
-        <li>We do not send your study data to any external service. All processing happens locally or on our servers.</li>
-        <li>We do not create advertising profiles based on your behavior.</li>
-        <li>We do not share your data with data brokers.</li>
       </ul>
 
       <h2>3. How Data Is Stored</h2>
 
-      <p><strong>Learning data:</strong> Your study progress, drill scores, and reading history are stored locally on your device using browser storage. This means your data stays with you and is available offline. It also means that if you clear your browser data, your study history may be lost (export functionality is available).</p>
+      <p><strong>Learning data:</strong> Your study progress, drill scores, and reading history are stored using a combination of browser storage and our servers. This data powers the adaptive scheduling algorithm and your per-skill diagnostics.</p>
 
       <p><strong>Account data:</strong> If you create an account, your email and hashed password are stored on our servers. This data is used only for authentication and account management.</p>
 
@@ -342,38 +338,27 @@
 
       <h2>5. Analytics</h2>
 
-      <p>We use Google Analytics 4 (GA4) for basic website analytics. This helps us understand how people find and use the site -- not to build profiles or target advertising.</p>
-      <p>What GA4 tracks for us:</p>
-      <ul>
-        <li>Page views and navigation patterns on the marketing site.</li>
-        <li>General geographic region (country level, not precise location).</li>
-        <li>Device type and browser (to ensure compatibility).</li>
-        <li>Referral sources (how you found us).</li>
-      </ul>
-      <p>What GA4 does not track for us:</p>
-      <ul>
-        <li>Your study sessions, drill scores, or learning data.</li>
-        <li>The content of graded reading passages you view.</li>
-        <li>Any personally identifiable information beyond what Google collects by default.</li>
-      </ul>
-      <p>GA4 data is used for aggregate analytics only. We use it to understand which pages people visit, where they come from, and whether the site works on their device. If you use a browser extension like uBlock Origin to block Google Analytics, the app will function normally.</p>
+      <p>We use Plausible Analytics for aggregate usage metrics. Plausible does not use cookies and does not track individual users across sites. It tells us things like page views, referral sources, and general device and browser information.</p>
+      <p>We use Sentry for error monitoring and crash reporting, which may include technical details about your device, browser, and the state of the application when an error occurred.</p>
+      <p>We analyze aggregate learning metrics to improve the product. This may include patterns in how users interact with drills, reading passages, and other features -- but always in aggregate, not tied to individual profiles.</p>
 
       <h2>6. Third Parties</h2>
 
-      <p>We use four external services. That is the complete list.</p>
+      <p>We use the following external services:</p>
       <ul>
-        <li><strong>Stripe</strong> -- processes payments for Full Access subscriptions. Stripe receives your payment information directly. <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe Privacy Policy</a> · <a href="https://stripe.com/legal/dpa" rel="noopener noreferrer" target="_blank">Stripe DPA</a>.</li>
+        <li><strong>Stripe</strong> -- processes payments for Full Access subscriptions. Stripe receives your payment information directly. <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">Stripe Privacy Policy</a>.</li>
+        <li><strong>Plausible Analytics</strong> -- provides privacy-focused website analytics. Plausible does not use cookies and does not collect personal data. <a href="https://plausible.io/data-policy" rel="noopener noreferrer" target="_blank">Plausible Data Policy</a>.</li>
+        <li><strong>Sentry</strong> -- monitors errors and application crashes. Sentry may receive technical information about your device, browser, and the state of the app when an error occurs. <a href="https://sentry.io/privacy/" rel="noopener noreferrer" target="_blank">Sentry Privacy Policy</a>.</li>
         <li><strong>Formspree</strong> -- processes contact form submissions. Formspree receives your email address and message content. <a href="https://formspree.io/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Formspree Privacy Policy</a>.</li>
-        <li><strong>Google Analytics 4</strong> -- provides website analytics as described above. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a> · <a href="https://business.safety.google/adsprocessorterms/" rel="noopener noreferrer" target="_blank">Google DPA</a>.</li>
-        <li><strong>Resend</strong> -- delivers transactional email (account verification, password resets, weekly progress updates). Resend receives your email address and the content of system-generated messages. <a href="https://resend.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Resend Privacy Policy</a> · <a href="https://resend.com/legal/dpa" rel="noopener noreferrer" target="_blank">Resend DPA</a>.</li>
+        <li><strong>Resend</strong> -- delivers transactional email (account verification, password resets, progress updates). Resend receives your email address and the content of system-generated messages. <a href="https://resend.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Resend Privacy Policy</a>.</li>
+        <li><strong>Firebase Cloud Messaging</strong> -- delivers push notifications on mobile devices. Firebase receives a device token to route notifications. <a href="https://firebase.google.com/support/privacy" rel="noopener noreferrer" target="_blank">Firebase Privacy</a>.</li>
       </ul>
-      <p>We have Data Processing Agreements in place with each of these providers. Links to their DPA documentation are provided above for transparency.</p>
-      <p>We do not use any other third-party services that receive your data. No ad networks. No social login providers. No third-party analytics beyond GA4.</p>
+      <p>Content generation features may use AI models (including local models via Ollama) at build time. These do not process your personal data.</p>
 
       <h2>7. Data Retention</h2>
 
-      <p><strong>Learning data:</strong> Stored locally on your device until you clear it or export/delete it. We do not have access to your local learning data.</p>
-      <p><strong>Account data:</strong> Retained until you delete your account. When you request account deletion, we delete your email, hashed password, and any server-side data within 30 days.</p>
+      <p><strong>Learning data:</strong> Retained while your account is active. You can request deletion at any time.</p>
+      <p><strong>Account data:</strong> Retained until you delete your account. When you request account deletion, we delete your email, hashed password, and any associated server-side data.</p>
       <p><strong>Payment history:</strong> Stripe retains transaction records as required by financial regulations. We retain only your subscription status (active/inactive) and general payment history (dates and amounts) for customer service purposes.</p>
       <p><strong>Contact form messages:</strong> Retained indefinitely for customer support reference unless you ask us to delete them.</p>
 
@@ -381,9 +366,9 @@
 
       <p>You have the right to:</p>
       <ul>
-        <li><strong>Access:</strong> See what data we have about you. Email us and we will send you everything within 30 days.</li>
+        <li><strong>Access:</strong> See what data we have about you. Email us and we will provide it in a reasonable timeframe.</li>
         <li><strong>Export:</strong> Export your learning data from the app at any time.</li>
-        <li><strong>Delete:</strong> Request deletion of your account and all associated data. Learning data stored locally on your device is under your control -- you can delete it by clearing browser storage.</li>
+        <li><strong>Delete:</strong> Request deletion of your account and all associated data.</li>
         <li><strong>Correct:</strong> Update your email address or other account information at any time.</li>
         <li><strong>Object:</strong> If you have concerns about how your data is being used, email us and we will address it.</li>
       </ul>
@@ -395,21 +380,15 @@
 
       <h2>10. International Users</h2>
 
-      <p>Aelu is operated from the United States. If you are using the service from outside the US, your account data (email, hashed password) may be stored on servers in the United States. Your learning data is stored locally on your device regardless of where you are located. By using the service, you consent to the transfer of account data to the United States.</p>
+      <p>Aelu is operated from the United States. If you are using the service from outside the US, your data may be stored on servers in the United States. By using the service, you consent to the transfer of data to the United States.</p>
 
       <h2>11. Changes to This Policy</h2>
 
-      <p>If we change this privacy policy, we will:</p>
-      <ul>
-        <li>Post the updated policy on this page with a new effective date.</li>
-        <li>Notify existing users by email at least 30 days before material changes take effect.</li>
-        <li>Never retroactively reduce your privacy protections without your consent.</li>
-      </ul>
-      <p>If a change meaningfully affects how your data is handled, we will ask for your explicit consent before applying it to data collected under the previous policy.</p>
+      <p>We may update this policy from time to time. Material changes will be posted on this page with a new effective date. Continued use of Aelu after changes constitutes acceptance.</p>
 
       <h2>12. Contact</h2>
 
-      <p>For privacy-related questions, concerns, or requests, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. Every email gets read and we will respond within a few business days. If you have a data access or deletion request, we will fulfill it within 30 days.</p>
+      <p>For privacy-related questions, concerns, or requests, email <a href="mailto:hello@aeluapp.com">hello@aeluapp.com</a>. You may request access to or deletion of your personal data by contacting us. We will process requests in a reasonable timeframe.</p>
 
     </div>
   </main>
