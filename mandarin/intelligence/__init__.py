@@ -332,6 +332,13 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import copy/content truth-drift analyzers (pricing, features, privacy, legal)
+    try:
+        from .analyzers_copy_drift import ANALYZERS as COPY_DRIFT_ANALYZERS
+        all_analyzers = all_analyzers + COPY_DRIFT_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:

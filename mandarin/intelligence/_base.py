@@ -89,6 +89,7 @@ _VERIFICATION_WINDOWS = {
     "journey": 14,
     "brand_health": 30,
     "learning_science": 14,
+    "copy_drift": 7,
 }
 
 # Correlated dimension pairs for RCA graph edges
@@ -132,6 +133,8 @@ _CORRELATED_DIMENSIONS = {
     ("learning_science", "drill_quality"),
     ("learning_science", "curriculum"),
     ("learning_science", "retention"),
+    ("copy_drift", "marketing"),
+    ("copy_drift", "copy"),
 }
 
 # Rule-based learner archetype definitions
@@ -190,6 +193,8 @@ _FILE_MAP = {
     "pricing_template": "mandarin/web/templates/pricing.html",
     "dashboard_template": "mandarin/web/templates/dashboard.html",
     "admin_template": "mandarin/web/templates/admin.html",
+    "marketing_landing": "marketing/landing/",
+    "email_templates": "marketing/email-templates/",
 }
 
 
