@@ -32,7 +32,7 @@ Use whichever of these resonate with your audience:
 - "Free for HSK 1-2. Full access is $14.99/month."
 
 ### For SRS-savvy audiences (Anki users, etc.):
-- "Modified FSRS algorithm with bayesian confidence dampening and interleaving enforcement."
+- "Adaptive spaced repetition algorithm with confidence-weighted scheduling and interleaving enforcement."
 - "44 drill types targeting different cognitive skills — recognition, production, auditory discrimination, sentence-level comprehension."
 - "The cleanup loop turns reading exposure into SRS input. Every word you look up during graded reading feeds back into your drill queue."
 

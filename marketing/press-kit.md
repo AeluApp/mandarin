@@ -16,7 +16,7 @@ Aelu was built by a solo developer who started learning Chinese as an adult and 
 
 ### Expanded Boilerplate
 
-Aelu is an adaptive Chinese learning application built for adults who treat language study as a serious, long-term project. The app tracks learner progress across vocabulary, listening, reading, tone accuracy, and grammar as separate skills -- not a single blended score -- and uses a modified FSRS scheduling algorithm with Bayesian confidence dampening to ensure that mastery is earned, not inflated by a few lucky sessions.
+Aelu is an adaptive Chinese learning application built for adults who treat language study as a serious, long-term project. The app tracks learner progress across vocabulary, listening, reading, tone accuracy, and grammar as separate skills -- not a single blended score -- and uses a adaptive spaced repetition scheduling algorithm with confidence-weighted scheduling to ensure that mastery is earned, not inflated by a few lucky sessions.
 
 The product's defining feature is its "cleanup loop": words encountered during graded reading flow directly into drill sessions across 12 exercise types, including tone discrimination, cloze deletion, audio matching, sentence construction, and speaking drills with tone grading. This closes the gap between passive reading and active recall that most language apps leave open.
 
@@ -44,7 +44,7 @@ The app runs as a web application and a desktop application (via Tauri), with al
 | **Vocabulary items** | 10,000+ items (HSK 1-9) with hand-written context notes |
 | **Reading passages** | 45+ graded passages |
 | **Dialogue scenarios** | 30+ |
-| **Scheduling algorithm** | Modified FSRS with Bayesian confidence dampening |
+| **Scheduling algorithm** | Adaptive spaced repetition with confidence-weighted scheduling |
 | **Data storage** | Local, on-device. No cloud account required. |
 | **Offline support** | Yes |
 | **Team size** | 1 |
@@ -150,7 +150,7 @@ All logo files are located in `marketing/assets/`. The following files are avail
 
 **[CITY], [DATE]** -- Aelu, a Chinese learning application built by a solo developer, launches today as a desktop and web tool for adult learners studying HSK levels 1 through 9. The app offers 12 drill types, a graded reader, extensive listening practice, and per-skill diagnostics -- with zero artificial intelligence at runtime.
 
-Unlike gamified language apps that blend progress metrics into a single encouraging score, Aelu tracks vocabulary, listening, reading, and tone accuracy as separate skills, each with its own HSK-level estimate. The system uses a modified FSRS scheduling algorithm to determine review timing based on each learner's actual recall data, and applies Bayesian confidence dampening to prevent premature mastery ratings.
+Unlike gamified language apps that blend progress metrics into a single encouraging score, Aelu tracks vocabulary, listening, reading, and tone accuracy as separate skills, each with its own HSK-level estimate. The system uses a adaptive spaced repetition scheduling algorithm to determine review timing based on each learner's actual recall data, and applies confidence-weighted scheduling to prevent premature mastery ratings.
 
 The app's core mechanism -- what the developer calls the "cleanup loop" -- connects reading directly to drilling. Words looked up during graded reading passages automatically appear in subsequent drill sessions across multiple exercise types. The intent is to close the gap between encountering a word in context and being able to recall, produce, and hear it reliably.
 

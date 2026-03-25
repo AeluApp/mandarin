@@ -637,6 +637,20 @@ def create_app(testing=False):
         from .counter_metrics_scheduler import start as _start_counter_metrics
         _start_counter_metrics()
 
+        from .marketing_scheduler import start as _start_marketing
+        _start_marketing()
+
+        # Log LLM health at startup
+        try:
+            from ..ai.ollama_client import is_llm_available
+            from ..settings import LITELLM_MODEL, IS_CLOUD_MODEL, MODEL_SIZE_B
+            if is_llm_available():
+                logger.info("LLM ready: %s (cloud=%s, %.0fb)", LITELLM_MODEL, IS_CLOUD_MODEL, MODEL_SIZE_B)
+            else:
+                logger.warning("LLM unavailable at startup — check API keys and Ollama")
+        except Exception:
+            pass
+
     return app
 
 

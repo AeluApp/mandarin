@@ -40,7 +40,7 @@ Last updated: 2026-02-17
 
 **What frustrates them:** Deck management is a second job. Card formatting is inconsistent across community decks. No built-in audio, listening, or speaking practice. No diagnostics beyond "cards due." Anki tells you nothing about your skill balance — you could be great at recognition and terrible at production and never know. The learning curve for new users is brutal, and even experienced users spend time on settings and plugins that should be spent studying.
 
-**What would make them switch:** An app that keeps the SRS rigor (we use FSRS, the same algorithm family) but removes the deck-management overhead, adds multiple drill types beyond flashcards, and provides skill-level diagnostics. They will not switch to anything that feels dumbed down. They need to see the algorithm is serious. "Modified FSRS with bayesian confidence dampening" is a selling point for this audience specifically.
+**What would make them switch:** An app that keeps the SRS rigor (we use FSRS, the same algorithm family) but removes the deck-management overhead, adds multiple drill types beyond flashcards, and provides skill-level diagnostics. They will not switch to anything that feels dumbed down. They need to see the algorithm is serious. "Adaptive spaced repetition with confidence-weighted scheduling" is a selling point for this audience specifically.
 
 **Switching trigger:** They see the 44 drill types, recognize the FSRS lineage, and realize they can get Anki-quality scheduling without building their own curriculum.
 
@@ -96,7 +96,7 @@ For **self-study adults working through HSK levels**, who **are frustrated by th
 - Per-skill HSK readiness scores (vocabulary, listening, reading, tones tracked independently)
 - HSK projection with confidence intervals, not a single optimistic date
 - No streak anxiety mechanics — streaks are tracked but never weaponized
-- Bayesian confidence dampening means scores stabilize slowly; a few good sessions don't create false confidence
+- confidence-weighted scheduling means scores stabilize slowly; a few good sessions don't create false confidence
 
 **How it shows up in copy:**
 - "Your listening is HSK 2. Your reading is HSK 4. Now you know where to focus."
@@ -108,7 +108,7 @@ For **self-study adults working through HSK levels**, who **are frustrated by th
 **Definition:** The system adjusts not just timing (when to review) but type (how to review) and focus (what to prioritize) — all deterministically, without AI token calls, based on your demonstrated performance across multiple skill dimensions.
 
 **Proof points:**
-- Modified FSRS with bayesian confidence dampening schedules review timing
+- Adaptive spaced repetition with confidence-weighted scheduling schedules review timing
 - Interleaving enforcement mixes drill types within sessions for stronger retention
 - Day profile adaptation adjusts session composition based on time of day and available duration
 - The system narrows focus to weak areas automatically — if your tones are lagging, you get more tone drills
@@ -172,7 +172,7 @@ This is the message that should appear, in some form, on the landing page hero, 
 
 These support the secondary messages and appear in feature pages, comparison tables, and detailed content:
 
-- Modified FSRS algorithm with bayesian confidence dampening
+- Adaptive spaced repetition algorithm with confidence-weighted scheduling
 - 44 drill types across 6 skill categories
 - HSK 1-6 aligned content, HSK 7-9 in preparation
 - Graded reader with inline glosses
@@ -199,7 +199,7 @@ These support the secondary messages and appear in feature pages, comparison tab
 
 ### 60-second (detailed, for someone who asks "tell me more")
 
-"Aelu was built because existing tools didn't bridge the gap between studying vocabulary and actually reading Chinese. The core of the app is the cleanup loop. You read graded Chinese passages at your level. When you tap a word you don't know, you get the definition inline — and that word automatically enters your spaced repetition queue. Your next practice session drills those exact words, not through flashcards alone, but through 27 different drill types: tone discrimination, cloze deletion, audio-to-character matching, sentence construction, register-aware drills, and more. The scheduling algorithm — a modified FSRS with bayesian confidence dampening — decides what to drill, when, and how, based on your demonstrated performance across each skill.
+"Aelu was built because existing tools didn't bridge the gap between studying vocabulary and actually reading Chinese. The core of the app is the cleanup loop. You read graded Chinese passages at your level. When you tap a word you don't know, you get the definition inline — and that word automatically enters your spaced repetition queue. Your next practice session drills those exact words, not through flashcards alone, but through 27 different drill types: tone discrimination, cloze deletion, audio-to-character matching, sentence construction, register-aware drills, and more. The scheduling algorithm — a adaptive spaced repetition with confidence-weighted scheduling — decides what to drill, when, and how, based on your demonstrated performance across each skill.
 
 The diagnostics are honest. It tracks vocabulary, listening, reading, and tone accuracy independently, so you can see that your reading might be HSK 4 while your listening is HSK 2 — and the system adjusts your practice to close that gap. No AI tokens at runtime, no external API calls. Everything runs deterministically and works offline.
 

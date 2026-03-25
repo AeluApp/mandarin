@@ -28,7 +28,7 @@ The Chinese learning app market splits roughly into six categories:
 |---------|----------|-------------|------|----------|-------------|---------|-------|-----------|-------------------|---------------------|---------------|----------|-------------|
 | **Price (free tier)** | HSK 1-2 | Trial only | Free (full) | Limited (ads+hearts) | Limited lessons | Guest decks | Free (full dictionary) | Some free lessons | 14-day trial | Free intro course | None | Limited courses | 7-day trial, then 1 lesson/12hr |
 | **Price (paid)** | $14.99/mo | $12/mo ($8/mo annual) | Free desktop+Android; $25 iOS one-time | $7/mo (annual) to $13/mo | $12/mo ($6/mo annual) | $15/mo ($8/mo annual) | $30-$60 one-time bundles | $15/mo ($10/mo annual) | $1,499 lifetime or ~$149/mo installments | ~$129 lifetime per bundle | $11/mo ($7/mo annual) | $13/mo ($6/mo annual); $120 lifetime | $10/mo ($7/mo annual) |
-| **SRS method** | Modified FSRS + bayesian confidence + interleaving | SRS (proprietary) | FSRS (or SM-2) | Minimal internal scheduling | Basic SRS | SRS per character | SRS flashcards (paid add-on) | Basic flashcard review | Anki-based (Traverse) | None | Basic flashcard SRS | None (lesson progression) | SRS-like review scheduling |
+| **SRS method** | Adaptive spaced repetition + bayesian confidence + interleaving | SRS (proprietary) | FSRS (or SM-2) | Minimal internal scheduling | Basic SRS | SRS per character | SRS flashcards (paid add-on) | Basic flashcard review | Anki-based (Traverse) | None | Basic flashcard SRS | None (lesson progression) | SRS-like review scheduling |
 | **Drill/exercise types** | 27 types | 1 (flashcard + oral mode) | 1 (flashcard) | ~4 (translate, match, tap, speak) | ~8 (translate, fill, speak, write, listen, match, video, reading) | ~3 (write, tone, meaning) | ~4 (flashcard, fill-in, tone, multiple-choice) | 1 (reading + tap-to-translate) | Video lessons + Anki flashcards | Video lessons + quizzes | Reading + comprehension questions | ~6 (translate, fill, match, listen, speak, write) | ~4 (reading, writing, ordering, gap-fill) |
 | **Reading component** | Graded reader with cleanup loop | No | No (DIY via shared decks) | Sentence-level only | 1,000+ graded stories | No | Document reader (paid) | Core feature: 1,000+ graded stories | Sentence/passage progression | Lesson transcripts | Core feature: 9,500+ news articles | Sentence-level | Video subtitles + reading exercises |
 | **Listening component** | Speed-controlled audio, listening drills | Audio pronunciation per word | Audio per card (if added) | Basic sentence audio | Native speaker videos, listening drills | Audio per character | Audio pronunciation (paid TTS) | Native audio per lesson | Video-based | Video-based | Audio per article | Sentence audio, listening exercises | Video-based listening |
@@ -117,7 +117,7 @@ The Chinese learning app market splits roughly into six categories:
 
 **Switching barrier:** This is the biggest one. Anki users have invested enormous time in their decks -- sometimes thousands of cards with custom media. They have review history spanning years. Walking away from that feels like abandoning work. And Anki is free. Asking someone to pay $14.99/month to replace something free requires a strong value proposition.
 
-**Our honest weakness vs. them:** Anki is free. Anki has FSRS (we use modified FSRS, but theirs is the canonical implementation). Anki's ecosystem is vastly larger. Anki works for any language and any subject -- it is a general-purpose tool. If someone is technically proficient and willing to invest setup time, Anki + a good deck + supplementary reading tools can replicate much of what we do, for free. Our advantage is integration and ease-of-use, not raw capability.
+**Our honest weakness vs. them:** Anki is free. Anki has FSRS (we use adaptive spaced repetition, but theirs is the canonical implementation). Anki's ecosystem is vastly larger. Anki works for any language and any subject -- it is a general-purpose tool. If someone is technically proficient and willing to invest setup time, Anki + a good deck + supplementary reading tools can replicate much of what we do, for free. Our advantage is integration and ease-of-use, not raw capability.
 
 ---
 
@@ -185,7 +185,7 @@ The Chinese learning app market splits roughly into six categories:
 - Praise: "Best app for starting Chinese." "Way better than Duolingo for Chinese." "The speech recognition actually works." "I love the graded stories."
 - Complaints: "I outgrew it after 6 months." "The paywall snuck up on me." "Video speakers are sometimes hard to understand." "Review system feels random."
 
-**How we're different:** Our SRS is substantially more sophisticated (modified FSRS with bayesian confidence dampening vs. their basic interval scheduling). Our cleanup loop connects reading directly to drill scheduling -- theirs does not. We have 44 drill types vs. their ~8. Our diagnostics track per-skill readiness. We are designed for the full HSK 1-6+ journey; they taper off around HSK 4.
+**How we're different:** Our SRS is substantially more sophisticated (adaptive spaced repetition with confidence-weighted scheduling vs. their basic interval scheduling). Our cleanup loop connects reading directly to drill scheduling -- theirs does not. We have 44 drill types vs. their ~8. Our diagnostics track per-skill readiness. We are designed for the full HSK 1-6+ journey; they taper off around HSK 4.
 
 **When someone should use BOTH:** HelloChinese for the first 1-3 months of absolute beginner study (their pinyin and basic character introduction is excellent), then Aelu for the structured HSK progression with deeper SRS.
 
@@ -565,7 +565,7 @@ This is the hardest question we face because Anki is free and extremely capable.
 This is our closest competition for structured Chinese learners. Both offer structured courses, drills, reading, listening, and speaking practice.
 
 **Where we win:**
-- SRS quality: Modified FSRS with bayesian confidence dampening vs. basic interval scheduling. Our scheduling is measurably more efficient.
+- SRS quality: Adaptive spaced repetition with confidence-weighted scheduling vs. basic interval scheduling. Our scheduling is measurably more efficient.
 - Drill variety: 27 types vs. ~8. More cognitive skills targeted.
 - Cleanup loop: Our reading feeds directly into SRS. Theirs does not.
 - Multi-skill diagnostics: Per-skill tracking with HSK projection. They lack this.

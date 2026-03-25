@@ -191,7 +191,7 @@ Every platform is ranked by four criteria:
 - Check HN daily for relevant threads (use RSS or HN search for keywords: "Chinese," "Mandarin," "SRS," "spaced repetition," "language learning")
 
 **What content works:**
-- Technical deep-dives: "How I implemented FSRS with bayesian confidence dampening"
+- Technical deep-dives: "How I implemented FSRS with confidence-weighted scheduling"
 - Honest retrospectives: "What we got wrong building a language learning app as an independent team"
 - Data-backed posts: specific numbers about retention rates, scheduling performance, user behavior
 - The origin story: "We're learning Mandarin and nothing worked the way we wanted, so we built our own tool"
@@ -629,7 +629,7 @@ Best for: Reddit (r/languagelearning), Hacker News, Twitter/X, Quora
 What the team is learning, building, and discovering as an independent team making a language learning tool. Technical depth for HN, learning-focused for Reddit, process-focused for Twitter.
 
 Examples:
-- "What I learned implementing FSRS with bayesian confidence dampening"
+- "What I learned implementing FSRS with confidence-weighted scheduling"
 - "The hardest part of building a Chinese learning app isn't the code — it's the content"
 - "Choosing SQLite over Postgres for a language learning app: 6 months later"
 

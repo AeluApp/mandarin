@@ -1049,7 +1049,7 @@ It's been one month since you upgraded. Here's what the data shows:
 
 If your progress feels slow, look at where you started versus where you are now. A month of consistent practice — even 15 minutes a day — moves the numbers. The system has adjusted to your patterns and is targeting your weakest areas.
 
-If your progress feels fast, don't get overconfident. The Bayesian dampening means the system won't promote words to "mastered" until it has multiple data points. What feels easy now will be tested again at longer intervals.
+If your progress feels fast, don't get overconfident. The confidence-weighted scheduling means the system won't promote words to "mastered" until it has multiple data points. What feels easy now will be tested again at longer intervals.
 
 Thank you for using the app. I'll check in again in a month.
 

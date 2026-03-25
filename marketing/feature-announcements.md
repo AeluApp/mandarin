@@ -1177,7 +1177,7 @@ These rules apply to every piece of announcement content. Print this section and
 - **No artificial urgency.** "Try it now" is a fine CTA. "Don't miss out!" is not. "Limited time" is never used. "Act now" is never used.
 - **No praise inflation.** The app doesn't tell users "Great job!" and the announcements don't tell users "You're going to love this!" Respect the reader's ability to evaluate for themselves.
 - **Keep it direct.** "We built this" not "We're thrilled to announce." The independent team voice is a strength — personal, not corporate.
-- **No jargon in user-facing content without explanation.** "Spaced repetition" is fine -- most of the audience knows it. "FSRS with bayesian confidence dampening" belongs in technical-audience content only, and always with a plain-language explanation alongside it.
+- **No jargon in user-facing content without explanation.** "Spaced repetition" is fine -- most of the audience knows it. "FSRS with confidence-weighted scheduling" belongs in technical-audience content only, and always with a plain-language explanation alongside it.
 
 ### Brand voice summary
 

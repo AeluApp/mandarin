@@ -18,8 +18,8 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 |---|---------|-------------------|-------------------|--------------|
 | 1 | 44 drill types (recognition, production, cloze, tone pair, sentence construction, etc.) | Tests multiple cognitive skills — not just "do you recognize this character?" but "can you hear it, produce it, use it in a sentence?" | Confidence that you actually know a word, not just recognize it on a flashcard | "44 drill types because knowing a word means more than recognizing it on a card." |
 | 2 | Cleanup loop (reading feeds drills) | The words you look up during reading become your next drill session. No manual deck building. No guessing what to study next. | Relief — the system notices your real gaps so you don't have to | "Every word you look up becomes practice. Real gaps, real drills." |
-| 3 | Modified FSRS algorithm | Optimized review intervals based on your actual recall data, not fixed schedules. You review at the moment forgetting is most likely. | Trust that your time is being spent on the right words at the right time | "Your review schedule is calculated from your data, not a generic formula." |
-| 4 | Bayesian confidence dampening | New items don't get promoted too fast. The system needs multiple data points before it trusts your mastery of a word. | Safety — you won't be blindsided by "mastered" words you actually forgot | "The system waits until it's sure you know a word. One lucky guess doesn't count." |
+| 3 | Adaptive spaced repetition algorithm | Optimized review intervals based on your actual recall data, not fixed schedules. You review at the moment forgetting is most likely. | Trust that your time is being spent on the right words at the right time | "Your review schedule is calculated from your data, not a generic formula." |
+| 4 | confidence-weighted scheduling | New items don't get promoted too fast. The system needs multiple data points before it trusts your mastery of a word. | Safety — you won't be blindsided by "mastered" words you actually forgot | "The system waits until it's sure you know a word. One lucky guess doesn't count." |
 | 5 | Interleaving enforcement | Drill types are mixed within sessions, not blocked. You switch between recognition, production, listening, and tone tasks. | Alertness — sessions stay engaging because the next question is always a different type | "Mixed practice, not repetitive grinding. Your brain stays engaged." |
 | 6 | Graded reader with inline glosses | Read Chinese passages at your HSK level. Tap any word for instant pinyin and definition without leaving the page. | Agency — you're reading real Chinese from day one, not just drilling isolated words | "Read real Chinese at your level. Tap any word you don't know." |
 | 7 | Listening practice with speed control | Listen to native-speed audio, then slow it down to 0.5x, 0.75x, or any speed. Work up gradually. | Reduced anxiety — natural-speed Chinese is intimidating; adjustable speed makes it approachable | "Start at 0.5x. Work up to natural speed. No shame in slowing down." |
@@ -84,14 +84,14 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **Their #1 concern:** "I've spent more time building decks than studying them."
 
-**Message that resonates:** The SRS you trust, without the overhead. Modified FSRS, Bayesian dampening, interleaving — with a curriculum that builds itself.
+**Message that resonates:** The SRS you trust, without the overhead. Adaptive spaced repetition, confidence-weighted scheduling, interleaving — with a curriculum that builds itself.
 
 **Proof point:** The cleanup loop eliminates deck building entirely. You read, you tap, the system builds your queue. Plus: 44 drill types instead of one flashcard template.
 
 **CTA that converts:** "Try the SRS that builds itself."
 
 **Example headline:** Like Anki, but you never build a deck again.
-**Example subhead:** Modified FSRS with Bayesian confidence dampening and interleaving enforcement. 44 drill types. Graded reading that feeds your review queue automatically.
+**Example subhead:** Adaptive spaced repetition with confidence-weighted scheduling and interleaving enforcement. 44 drill types. Graded reading that feeds your review queue automatically.
 
 **Example ad copy:** You know SRS works. You also know that finding decks, vetting content, and managing suspended cards eats half your study time. Aelu gives you FSRS-level scheduling with a curriculum that builds itself from your actual reading gaps. Same rigor. None of the overhead.
 
@@ -152,16 +152,16 @@ Every feature exists to solve a real problem. Map it through the chain: what it 
 
 **Their #1 concern:** "Does the methodology actually hold up? I've seen too many apps with bad science."
 
-**Message that resonates:** Modified FSRS, Bayesian dampening, interleaving enforcement, cleanup loop. The methodology is legible, the scheduling is deterministic, and everything is measurable.
+**Message that resonates:** Adaptive spaced repetition, confidence-weighted scheduling, interleaving enforcement, cleanup loop. The methodology is legible, the scheduling is deterministic, and everything is measurable.
 
 **Proof point:** Zero AI at runtime — every scheduling decision is computed from explicit algorithms, not black-box models. The system is inspectable.
 
 **CTA that converts:** "See the algorithm. Try the method."
 
-**Example headline:** SRS done right. 44 drill types. Bayesian confidence dampening. No black boxes.
-**Example subhead:** Modified FSRS with interleaving enforcement and a cleanup loop that turns reading exposure into SRS input. Deterministic. Measurable. Transparent.
+**Example headline:** SRS done right. 44 drill types. confidence-weighted scheduling. No black boxes.
+**Example subhead:** Adaptive spaced repetition with interleaving enforcement and a cleanup loop that turns reading exposure into SRS input. Deterministic. Measurable. Transparent.
 
-**Example ad copy:** If you know what FSRS is, you'll appreciate this: modified scheduling with Bayesian confidence dampening, interleaving enforcement across 44 drill types, and a cleanup loop that feeds graded reading into your review queue. All deterministic — zero AI at runtime. Free tier available.
+**Example ad copy:** If you know what FSRS is, you'll appreciate this: modified scheduling with confidence-weighted scheduling, interleaving enforcement across 44 drill types, and a cleanup loop that feeds graded reading into your review queue. All deterministic — zero AI at runtime. Free tier available.
 
 ---
 
@@ -488,7 +488,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 ### Subheadlines
 
 1. Adaptive drills that focus on your weakest skill. Graded reading that feeds your next session. Progress you can measure.
-2. Modified FSRS scheduling, 44 drill types, and a cleanup loop that turns reading into review.
+2. Adaptive spaced repetition scheduling, 44 drill types, and a cleanup loop that turns reading into review.
 3. No streaks, no hearts, no XP. Study because you want to, and stop when you're done.
 4. Read Chinese at your level. Tap any word. It becomes a drill tomorrow.
 5. Vocabulary, listening, reading, tones — tracked separately so you know where to focus.
@@ -503,7 +503,7 @@ For each objection: what they say, why they think it, the honest answer, and how
 14. Listening practice at any speed. Transcript reveal when you're ready.
 15. Tone grading on your actual voice. Not a simulation.
 16. Grammar through practice, not through textbook explanations.
-17. Bayesian confidence dampening means one lucky guess doesn't fool the system.
+17. confidence-weighted scheduling means one lucky guess doesn't fool the system.
 18. Interleaved drill types keep your brain engaged. No repetitive grinding.
 19. The app that respects your time, your intelligence, and your evening.
 20. For learners who already know that learning Chinese is hard. And are doing it anyway.

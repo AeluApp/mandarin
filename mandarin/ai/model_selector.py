@@ -22,9 +22,12 @@ from typing import Optional
 import httpx
 
 from ..settings import (
-    OLLAMA_URL, OLLAMA_PRIMARY_MODEL, IS_CLOUD_MODEL,
+    OLLAMA_URL, LITELLM_MODEL, IS_CLOUD_MODEL,
     _TASK_COMPLEXITY, _extract_model_size_b,
 )
+
+# Backward-compat alias
+OLLAMA_PRIMARY_MODEL = LITELLM_MODEL
 
 logger = logging.getLogger(__name__)
 
@@ -34,9 +37,33 @@ _MIN_QUALITY_THRESHOLD = 0.6
 _MIN_SAMPLES_FOR_ROUTING = 5
 _REBENCHMARK_DAYS = 7
 
-# Known open-source models available on major cloud providers
-# Expanded as providers add models; LiteLLM handles routing
+# Provider → API key env var mapping
+_PROVIDER_KEY_MAP = {
+    "groq": "GROQ_API_KEY",
+    "together": "TOGETHER_API_KEY",
+    "fireworks": "FIREWORKS_API_KEY",
+    "siliconflow": "SILICONFLOW_API_KEY",
+    "deepseek": "DEEPSEEK_API_KEY",
+    "mistral": "MISTRAL_API_KEY",
+}
+
+def _provider_has_key(provider: str) -> bool:
+    """Check if a cloud provider has an API key configured."""
+    import os
+    key_name = _PROVIDER_KEY_MAP.get(provider, "")
+    return bool(os.environ.get(key_name))
+
+# Known open-source models available on major cloud providers.
+# model_selector auto-discovers new models weekly; this is the seed list.
+# LiteLLM handles routing based on the model string prefix.
 _CLOUD_OSS_MODELS = [
+    # Groq — ultra-fast inference via custom LPU hardware
+    {"name": "groq/llama-3.3-70b-versatile", "provider": "groq", "size_b": 70.0},
+    {"name": "groq/llama-3.1-8b-instant", "provider": "groq", "size_b": 8.0},
+    {"name": "groq/mixtral-8x7b-32768", "provider": "groq", "size_b": 47.0},
+    {"name": "groq/gemma2-9b-it", "provider": "groq", "size_b": 9.0},
+
+    # Together AI — widest model selection
     {"name": "together_ai/meta-llama/Llama-3-70b-chat-hf", "provider": "together", "size_b": 70.0},
     {"name": "together_ai/meta-llama/Llama-3-8b-chat-hf", "provider": "together", "size_b": 8.0},
     {"name": "together_ai/mistralai/Mixtral-8x7B-Instruct-v0.1", "provider": "together", "size_b": 47.0},
@@ -44,59 +71,80 @@ _CLOUD_OSS_MODELS = [
     {"name": "together_ai/Qwen/Qwen2.5-7B-Instruct", "provider": "together", "size_b": 7.0},
     {"name": "together_ai/deepseek-ai/DeepSeek-V3", "provider": "together", "size_b": 671.0},
     {"name": "together_ai/google/gemma-2-27b-it", "provider": "together", "size_b": 27.0},
-    {"name": "groq/llama-3.3-70b-versatile", "provider": "groq", "size_b": 70.0},
-    {"name": "groq/llama-3.1-8b-instant", "provider": "groq", "size_b": 8.0},
-    {"name": "groq/mixtral-8x7b-32768", "provider": "groq", "size_b": 47.0},
-    {"name": "groq/gemma2-9b-it", "provider": "groq", "size_b": 9.0},
+
+    # Fireworks AI — fast long-context inference
+    {"name": "fireworks_ai/accounts/fireworks/models/llama-v3p1-70b-instruct", "provider": "fireworks", "size_b": 70.0},
+
+    # DeepSeek — best cost/quality ratio
+    {"name": "deepseek/deepseek-chat", "provider": "deepseek", "size_b": 200.0},
+
+    # Mistral — strong Mistral/Mixtral models, EU data residency
+    {"name": "mistral/mistral-large-latest", "provider": "mistral", "size_b": 123.0},
+    {"name": "mistral/mistral-small-latest", "provider": "mistral", "size_b": 22.0},
 ]
 
 
 # ─── Discovery ──────────────────────────────────────────────────
 
 def discover_available_models(conn=None) -> list[dict]:
-    """Discover models available on the current provider."""
-    models = []
+    """Discover models available across all configured providers.
 
-    # Always check local Ollama
+    Cloud-first: checks which provider API keys are configured and includes
+    their models. Also checks local Ollama as fallback. Runs daily via
+    the model selection scheduler.
+    """
+    models = []
+    seen_names = set()
+
+    # 1. Cloud models: only include from providers that have API keys configured
+    for m in _CLOUD_OSS_MODELS:
+        provider = m["provider"]
+        if _provider_has_key(provider) and m["name"] not in seen_names:
+            models.append({**m, "local": False})
+            seen_names.add(m["name"])
+
+    # 2. Try LiteLLM model list for dynamic discovery of new models
+    try:
+        import litellm
+        provider_models = getattr(litellm, "models", None)
+        if isinstance(provider_models, (list, tuple)):
+            for name in provider_models[:100]:
+                if isinstance(name, str) and name not in seen_names:
+                    models.append({
+                        "name": name,
+                        "provider": "litellm",
+                        "size_b": _extract_model_size_b(name),
+                        "local": False,
+                    })
+                    seen_names.add(name)
+    except Exception:
+        pass
+
+    # 3. Local Ollama fallback — always check for availability
     try:
         resp = httpx.get(f"{OLLAMA_URL}/api/tags", timeout=5.0)
         if resp.status_code == 200:
             for m in resp.json().get("models", []):
                 name = m.get("name", "")
-                models.append({
-                    "name": name,
-                    "provider": "ollama",
-                    "size_b": _extract_model_size_b(name),
-                    "local": True,
-                })
+                if name and name not in seen_names:
+                    models.append({
+                        "name": name,
+                        "provider": "ollama",
+                        "size_b": _extract_model_size_b(name),
+                        "local": True,
+                    })
+                    seen_names.add(name)
     except Exception:
         pass
 
-    # If cloud mode, add known OSS models
-    if IS_CLOUD_MODEL:
-        for m in _CLOUD_OSS_MODELS:
-            models.append({**m, "local": False})
-
-        # Try LiteLLM model list for the configured provider
-        try:
-            import litellm
-            provider_models = litellm.models
-            if isinstance(provider_models, (list, tuple)):
-                for name in provider_models[:50]:
-                    if isinstance(name, str) and name not in {m["name"] for m in models}:
-                        models.append({
-                            "name": name,
-                            "provider": "litellm",
-                            "size_b": _extract_model_size_b(name),
-                            "local": False,
-                        })
-        except Exception:
-            pass
-
-    logger.info("Model discovery: found %d models (%d local, %d cloud)",
-                len(models),
-                sum(1 for m in models if m.get("local")),
-                sum(1 for m in models if not m.get("local")))
+    cloud_count = sum(1 for m in models if not m.get("local"))
+    local_count = sum(1 for m in models if m.get("local"))
+    logger.info("Model discovery: found %d models (%d cloud, %d local)",
+                len(models), cloud_count, local_count)
+    if cloud_count == 0 and local_count == 0:
+        logger.error("Model discovery: NO models available — check API keys and Ollama")
+    elif cloud_count == 0:
+        logger.warning("Model discovery: no cloud models — using local Ollama only")
     return models
 
 

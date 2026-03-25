@@ -291,7 +291,7 @@ If you're building an HSK study plan, build for the new standard, not the old on
 
 1/ The app runs locally. Your data is in a SQLite file on your machine. No account needed. No server costs. No latency.
 
-2/ The scheduling algorithm (modified FSRS) runs in milliseconds. It doesn't need a server. It needs to read your history and compute intervals. SQLite does this instantly.
+2/ The scheduling algorithm (adaptive spaced repetition) runs in milliseconds. It doesn't need a server. It needs to read your history and compute intervals. SQLite does this instantly.
 
 3/ Python because I'm one person. Not a team. Rapid prototyping > architecture astronautics.
 

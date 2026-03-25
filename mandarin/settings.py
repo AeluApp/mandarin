@@ -92,6 +92,16 @@ FROM_EMAIL = os.environ.get("FROM_EMAIL", f"Aelu <noreply@{CANONICAL_DOMAIN}>")
 MAILING_ADDRESS = os.environ.get("MAILING_ADDRESS", "Aelu")
 
 PLAUSIBLE_DOMAIN = os.environ.get("PLAUSIBLE_DOMAIN", "")  # e.g. "aeluapp.com"
+
+# ── LLM spend cap ─────────────────────────────────────
+# Monthly USD cap for cloud LLM token spend. Once reached, all non-critical
+# LLM calls return failure (callers hit rule-based fallback). Critical tasks
+# (user-facing drill generation, error explanation) are exempt.
+# Set to 0 for unlimited. Default: $25/month.
+try:
+    LLM_MONTHLY_SPEND_CAP_USD = float(os.environ.get("LLM_MONTHLY_SPEND_CAP_USD", "25.0"))
+except (ValueError, TypeError):
+    LLM_MONTHLY_SPEND_CAP_USD = 25.0
 PLAUSIBLE_SCRIPT_URL = os.environ.get("PLAUSIBLE_SCRIPT_URL", "https://plausible.io/js/script.js")
 GA4_MEASUREMENT_ID = os.environ.get("GA4_MEASUREMENT_ID", "")  # e.g. "G-XXXXXXXXXX"
 
@@ -161,32 +171,43 @@ OPENCLAW_IMESSAGE_OWNER_ID = os.environ.get("OPENCLAW_IMESSAGE_OWNER_ID", "")
 WIP_LIMIT_IN_PROGRESS = 5
 ESTIMATE_POINTS = {"S": 1, "M": 3, "L": 5, "XL": 8}
 
-# ── Ollama (local LLM) ─────────────────────────────────
+# ── LLM (cloud-first via LiteLLM, local Ollama as fallback) ──
+# Cloud providers serve 70B+ open-source models (Llama, Qwen, DeepSeek).
+# model_selector.py auto-discovers and benchmarks — these are starting defaults.
+# Provider API keys: set GROQ_API_KEY, TOGETHER_API_KEY, FIREWORKS_API_KEY,
+# SILICONFLOW_API_KEY, DEEPSEEK_API_KEY, or MISTRAL_API_KEY as needed.
+
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 
-# Model tier auto-selection: picks best Qwen model for available system memory.
-# Override with OLLAMA_MODEL env var to pin a specific model.
-# Tiers: <=8GB → 1.5b, <=16GB → 7b, >16GB → 14b
+try:
+    OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "60"))
+except (ValueError, TypeError):
+    OLLAMA_TIMEOUT = 60
+
+# Cloud model defaults — override with env vars
+_DEFAULT_CLOUD_MODEL = "groq/llama-3.3-70b-versatile"
+_DEFAULT_CLOUD_FALLBACK = "together_ai/Qwen/Qwen2.5-72B-Instruct"
+
+# Local Ollama fallback (RAM-based auto-selection for when cloud is unavailable)
 _QWEN_TIERS = [
-    (8,  "qwen2.5:1.5b"),   # 8GB RAM (e.g. M2 MacBook Air)
+    (8,  "qwen2.5:1.5b"),   # 8GB RAM
     (16, "qwen2.5:7b"),     # 16GB RAM
-    (99, "qwen2.5:14b"),    # 32GB+ RAM or cloud GPU
+    (99, "qwen2.5:14b"),    # 32GB+
 ]
 
-def _auto_select_model() -> tuple[str, str]:
-    """Pick primary + fallback Qwen model based on system memory."""
+def _auto_select_local_model() -> tuple[str, str]:
+    """Pick local Ollama fallback model based on system memory."""
     try:
         import subprocess
         mem_bytes = int(subprocess.check_output(["sysctl", "-n", "hw.memsize"]).strip())
         mem_gb = mem_bytes / (1024 ** 3)
     except Exception:
-        mem_gb = 8  # conservative default
+        mem_gb = 8
     primary = "qwen2.5:1.5b"
     for threshold, model in _QWEN_TIERS:
         if mem_gb <= threshold:
             primary = model
             break
-    # Fallback is one tier down, or same if already smallest
     fallback = "qwen2.5:1.5b"
     for threshold, model in _QWEN_TIERS:
         if model == primary:
@@ -194,18 +215,36 @@ def _auto_select_model() -> tuple[str, str]:
         fallback = model
     return primary, fallback
 
-_auto_primary, _auto_fallback = _auto_select_model()
-OLLAMA_PRIMARY_MODEL = os.environ.get("OLLAMA_MODEL", _auto_primary)
-OLLAMA_FALLBACK_MODEL = os.environ.get("OLLAMA_FALLBACK_MODEL", _auto_fallback)
+_local_primary, _local_fallback = _auto_select_local_model()
 
-try:
-    OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "60"))
-except (ValueError, TypeError):
-    OLLAMA_TIMEOUT = 60
+def _has_cloud_api_key() -> bool:
+    """Check if any cloud LLM provider API key is configured."""
+    _CLOUD_KEY_NAMES = (
+        "GROQ_API_KEY", "TOGETHER_API_KEY", "FIREWORKS_API_KEY",
+        "SILICONFLOW_API_KEY", "DEEPSEEK_API_KEY", "MISTRAL_API_KEY",
+        "OPENAI_API_KEY", "ANTHROPIC_API_KEY",
+    )
+    return any(os.environ.get(k) for k in _CLOUD_KEY_NAMES)
 
-# ── LiteLLM (unified LLM gateway) ────────────────────
-LITELLM_MODEL = f"ollama/{OLLAMA_PRIMARY_MODEL}"
-LITELLM_FALLBACK = f"ollama/{OLLAMA_FALLBACK_MODEL}"
+# Primary model: cloud if any provider key is set, else local Ollama
+if os.environ.get("LITELLM_MODEL"):
+    LITELLM_MODEL = os.environ["LITELLM_MODEL"]
+elif _has_cloud_api_key():
+    LITELLM_MODEL = os.environ.get("OLLAMA_MODEL", _DEFAULT_CLOUD_MODEL)
+else:
+    LITELLM_MODEL = f"ollama/{os.environ.get('OLLAMA_MODEL', _local_primary)}"
+
+# Fallback model
+if os.environ.get("LITELLM_FALLBACK"):
+    LITELLM_FALLBACK = os.environ["LITELLM_FALLBACK"]
+elif _has_cloud_api_key():
+    LITELLM_FALLBACK = _DEFAULT_CLOUD_FALLBACK
+else:
+    LITELLM_FALLBACK = f"ollama/{_local_fallback}"
+
+# Backward-compat: OLLAMA_PRIMARY_MODEL still used by some call sites
+OLLAMA_PRIMARY_MODEL = LITELLM_MODEL
+OLLAMA_FALLBACK_MODEL = LITELLM_FALLBACK
 
 # ── Task-to-model capability gating ──────────────────
 # Minimum billion parameters for reliable output per task type.
@@ -244,34 +283,55 @@ _TASK_COMPLEXITY = {
 def _extract_model_size_b(model_name: str) -> float:
     """Extract effective parameter count in billions from model name.
 
+    Cloud OSS models: parses size from name (llama-3.3-70b → 70, Qwen2.5-72B → 72)
+    Cloud proprietary: assigns effective capability based on known model families.
     Local models: parses 'qwen2.5:14b' → 14.0
-    Cloud models: assigns effective capability based on known model families.
     """
     import re
     name = model_name.lower()
 
+    # Strip provider prefix for matching (groq/, together_ai/, fireworks_ai/, etc.)
+    base_name = name.split("/")[-1] if "/" in name else name
+
     # Check mid/small BEFORE frontier (gpt-4o-mini must not match gpt-4o)
     _CLOUD_SMALL = ("mistral-small", "mistral-tiny")
-    if any(f in name for f in _CLOUD_SMALL):
+    if any(f in base_name for f in _CLOUD_SMALL):
         return 5.0
 
     _CLOUD_MID = ("gpt-4o-mini", "gpt-3.5", "claude-3-haiku", "claude-haiku",
-                  "gemini-1.5-flash", "gemini-flash", "mistral-large",
-                  "deepseek-chat", "deepseek-reasoner")
-    if any(f in name for f in _CLOUD_MID):
+                  "gemini-1.5-flash", "gemini-flash",
+                  "deepseek-reasoner")
+    if any(f in base_name for f in _CLOUD_MID):
         return 20.0
 
     # Cloud frontier — capable of everything
     _CLOUD_FRONTIER = ("gpt-4", "claude-3-opus", "claude-3.5-sonnet",
                        "claude-sonnet-4", "claude-opus-4",
-                       "gemini-1.5-pro", "gemini-2", "deepseek-r1")
-    if any(f in name for f in _CLOUD_FRONTIER):
+                       "gemini-1.5-pro", "gemini-2", "deepseek-r1",
+                       "deepseek-v3", "llama-4-maverick")
+    if any(f in base_name for f in _CLOUD_FRONTIER):
         return 200.0
 
-    # Local model with explicit size (e.g. qwen2.5:14b, llama3:70b)
-    match = re.search(r"(\d+(?:\.\d+)?)\s*[bB]", model_name)
+    # Mixtral special case: 8x7b = ~47b effective, 8x22b = ~141b
+    # Must check BEFORE generic size extraction to avoid matching "7b" in "8x7b"
+    if "mixtral" in base_name:
+        if "8x22b" in base_name:
+            return 141.0
+        if "8x7b" in base_name:
+            return 47.0
+
+    # Known large cloud models without size in name
+    _CLOUD_LARGE = ("mistral-large", "deepseek-chat")
+    if any(f in base_name for f in _CLOUD_LARGE):
+        return 123.0  # Mistral Large = 123b, DeepSeek Chat ≈ V3
+
+    # Extract explicit size from model name — handles both cloud OSS and local formats:
+    # "llama-3.3-70b-versatile" → 70, "Qwen2.5-72B-Instruct" → 72, "qwen2.5:14b" → 14
+    match = re.search(r"(\d+(?:\.\d+)?)\s*[bB](?:\b|-)", model_name)
     if match:
-        return float(match.group(1))
+        size = float(match.group(1))
+        if size > 0:
+            return size
 
     return 7.0  # assume 7b if unparseable
 
@@ -279,13 +339,19 @@ def _extract_model_size_b(model_name: str) -> float:
 def _is_cloud_model(model_name: str) -> bool:
     """Check if the model routes through a cloud provider (not local Ollama)."""
     name = model_name.lower()
-    _CLOUD_PREFIXES = ("gpt-", "claude-", "gemini", "anthropic/", "openai/",
-                       "mistral/", "deepseek", "together_ai/", "groq/")
+    _CLOUD_PREFIXES = (
+        "gpt-", "claude-", "gemini", "anthropic/", "openai/",
+        "mistral/", "deepseek", "together_ai/", "groq/",
+        "fireworks_ai/", "siliconflow/",
+    )
+    # Model is cloud if it matches a cloud prefix or doesn't have the ollama/ prefix
+    if name.startswith("ollama/"):
+        return False
     return any(name.startswith(p) or f"/{p.rstrip('/')}" in name for p in _CLOUD_PREFIXES)
 
 
-IS_CLOUD_MODEL = _is_cloud_model(OLLAMA_PRIMARY_MODEL)
-MODEL_SIZE_B = _extract_model_size_b(OLLAMA_PRIMARY_MODEL)
+IS_CLOUD_MODEL = _is_cloud_model(LITELLM_MODEL)
+MODEL_SIZE_B = _extract_model_size_b(LITELLM_MODEL)
 
 
 def validate_production_config() -> dict[str, list[str]]:

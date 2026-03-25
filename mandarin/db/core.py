@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 119  # Increment when adding migrations
+SCHEMA_VERSION = 120  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7130,6 +7130,114 @@ def _migrate_v118_to_v119(conn):
         conn.commit()
 
 
+def _migrate_v119_to_v120(conn):
+    """v119->v120: Marketing automation tables — content bank, variants, approval, posting, metrics."""
+    conn.executescript("""
+        -- Content bank registry (parsed from markdown source files)
+        CREATE TABLE IF NOT EXISTS marketing_content (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content_id TEXT NOT NULL UNIQUE,
+            platform TEXT NOT NULL,
+            content_type TEXT NOT NULL,
+            original_text TEXT NOT NULL,
+            source_file TEXT,
+            requires_personalization INTEGER DEFAULT 0,
+            identity_passed INTEGER,
+            voice_score REAL,
+            created_at TEXT DEFAULT (datetime('now')),
+            updated_at TEXT
+        );
+
+        -- A/B variant storage
+        CREATE TABLE IF NOT EXISTS marketing_content_variant (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content_id TEXT NOT NULL,
+            variant_id TEXT NOT NULL,
+            variant_text TEXT NOT NULL,
+            generation_model TEXT,
+            voice_score REAL,
+            identity_passed INTEGER DEFAULT 0,
+            copy_drift_passed INTEGER DEFAULT 0,
+            experiment_id INTEGER,
+            status TEXT DEFAULT 'draft'
+                CHECK(status IN ('draft', 'approved', 'rejected', 'posted', 'winner')),
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_mcv_content ON marketing_content_variant(content_id);
+        CREATE INDEX IF NOT EXISTS idx_mcv_status ON marketing_content_variant(status);
+
+        -- Approval queue for high-risk posts (Reddit, personalized content)
+        CREATE TABLE IF NOT EXISTS marketing_approval_queue (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content_id TEXT NOT NULL,
+            variant_id TEXT,
+            platform TEXT NOT NULL,
+            content_text TEXT NOT NULL,
+            reason TEXT,
+            status TEXT DEFAULT 'pending'
+                CHECK(status IN ('pending', 'approved', 'rejected', 'expired')),
+            submitted_at TEXT DEFAULT (datetime('now')),
+            reviewed_at TEXT,
+            reviewer_note TEXT
+        );
+
+        -- Post execution log (dedup + audit trail)
+        CREATE TABLE IF NOT EXISTS marketing_post_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content_id TEXT NOT NULL,
+            variant_id TEXT,
+            platform TEXT NOT NULL,
+            platform_post_id TEXT,
+            posted_at TEXT DEFAULT (datetime('now')),
+            status TEXT DEFAULT 'posted'
+                CHECK(status IN ('posted', 'failed', 'deleted')),
+            error TEXT,
+            utm_campaign TEXT,
+            utm_source TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_mpl_content ON marketing_post_log(content_id);
+        CREATE INDEX IF NOT EXISTS idx_mpl_platform ON marketing_post_log(platform, posted_at);
+
+        -- Performance metrics (pulled from platform APIs)
+        CREATE TABLE IF NOT EXISTS marketing_content_metrics (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_log_id INTEGER NOT NULL,
+            metric_type TEXT NOT NULL,
+            metric_value REAL NOT NULL,
+            measured_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (post_log_id) REFERENCES marketing_post_log(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_mcm_post ON marketing_content_metrics(post_log_id);
+
+        -- Calendar execution state (dedup)
+        CREATE TABLE IF NOT EXISTS marketing_calendar_state (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            calendar_week INTEGER NOT NULL,
+            calendar_day INTEGER NOT NULL,
+            action_hash TEXT NOT NULL UNIQUE,
+            status TEXT DEFAULT 'pending'
+                CHECK(status IN ('pending', 'queued', 'posted', 'skipped', 'manual')),
+            executed_at TEXT,
+            notes TEXT
+        );
+
+        -- Weekly optimization cycle log
+        CREATE TABLE IF NOT EXISTS marketing_optimizer_run (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_date TEXT NOT NULL,
+            top_performers TEXT,
+            patterns_extracted TEXT,
+            variants_generated INTEGER DEFAULT 0,
+            variants_approved INTEGER DEFAULT 0,
+            experiments_proposed INTEGER DEFAULT 0,
+            model_used TEXT,
+            created_at TEXT DEFAULT (datetime('now'))
+        );
+    """)
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7250,6 +7358,7 @@ MIGRATIONS = {
     116: _migrate_v116_to_v117,
     117: _migrate_v117_to_v118,
     118: _migrate_v118_to_v119,
+    119: _migrate_v119_to_v120,
 }
 
 

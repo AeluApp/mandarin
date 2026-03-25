@@ -681,7 +681,7 @@ The result is an app called Aelu. I want to share what it does and does not do, 
 
 The core idea is the "cleanup loop." You read a graded Chinese passage at your HSK level. When you tap a word you do not recognize, you get the definition inline -- and that word automatically enters your drill queue. Your next session does not drill random vocabulary. It drills the specific words you encountered and did not know.
 
-The drills go beyond flashcards. There are 27 types: tone pair discrimination, audio-to-character matching, cloze deletion, sentence construction, register awareness, listening at adjustable speed, and speaking drills with tone grading. The scheduling algorithm is a modified FSRS (same family as Anki's latest scheduler) with some dampening to prevent false confidence from a few good sessions.
+The drills go beyond flashcards. There are 27 types: tone pair discrimination, audio-to-character matching, cloze deletion, sentence construction, register awareness, listening at adjustable speed, and speaking drills with tone grading. The scheduling algorithm is a adaptive spaced repetition (same family as Anki's latest scheduler) with some dampening to prevent false confidence from a few good sessions.
 
 The diagnostics are the part I am most proud of. The app tracks vocabulary, listening, reading, and tone accuracy independently, and shows you where each skill stands relative to HSK levels. When I used this on myself, I discovered my vocabulary was solidly HSK 3 but my listening was barely HSK 2. I never would have known that from Anki alone.
 
@@ -774,7 +774,7 @@ This applies to any language. If you are reading French and look up a word, that
 
 **What the app is:**
 
-It is called Aelu. It is a drilling and reading system for Chinese, built on a modified FSRS algorithm (same family as Anki's scheduler), with 44 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $14.99/month for full access. Python + SQLite, runs locally, zero AI at runtime.
+It is called Aelu. It is a drilling and reading system for Chinese, built on a adaptive spaced repetition algorithm (same family as Anki's scheduler), with 44 drill types, graded reading, and per-skill HSK diagnostics. Free for HSK 1-2, $14.99/month for full access. Python + SQLite, runs locally, zero AI at runtime.
 
 I am one person, I use it daily for my own study, and I am happy to discuss the methodology, the technical decisions, or the learning science behind any of it.
 
@@ -792,7 +792,7 @@ I have been learning Mandarin Chinese for [X] months, and I started building my 
 
 - Python 3.9 + Flask for the web UI
 - SQLite for everything (user data, content, scheduling state)
-- Modified FSRS algorithm for spaced repetition scheduling
+- Adaptive spaced repetition algorithm for spaced repetition scheduling
 - macOS TTS for audio (no external API calls)
 - Zero AI tokens at runtime -- all deterministic logic
 
@@ -834,7 +834,7 @@ I built a Chinese learning system for my own Mandarin study. Python + SQLite + F
 
 Core features:
 
-- Modified FSRS algorithm (same family as Anki's scheduler) with bayesian confidence dampening to prevent false confidence from a few good sessions
+- Adaptive spaced repetition algorithm (same family as Anki's scheduler) with confidence-weighted scheduling to prevent false confidence from a few good sessions
 - 44 drill types: tone pair discrimination, cloze deletion, audio-to-character matching, sentence construction, register awareness, speaking drills with tone grading
 - "Cleanup loop": read graded Chinese passages, tap unknown words, those words enter your SRS queue across all drill types
 - Per-skill diagnostics tracking vocabulary, listening, reading, and tone accuracy independently, with HSK readiness projections
@@ -846,7 +846,7 @@ Technical decisions worth discussing:
 
 2. SQLite as the entire backend. 15 tables, one file. Scheduling state, content, user performance history, analytics -- all in SQLite. No ORM, raw SQL. The queries are fast enough that "optimization" has never been necessary.
 
-3. FSRS with confidence dampening. Raw FSRS schedules interval expansion based on recall success. My modification adds a bayesian dampening layer that prevents intervals from growing too aggressively after short sequences of correct answers. In practice, this means items need to be recalled correctly across multiple sessions before the system treats them as "known."
+3. FSRS with confidence dampening. Raw FSRS schedules interval expansion based on recall success. My modification adds a confidence-weighted scheduling layer that prevents intervals from growing too aggressively after short sequences of correct answers. In practice, this means items need to be recalled correctly across multiple sessions before the system treats them as "known."
 
 4. macOS TTS for audio instead of pre-recorded files or an API. Trade-off: lower quality than professional recordings, but zero per-use cost and works offline.
 

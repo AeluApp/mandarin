@@ -324,7 +324,7 @@ Your vocabulary, listening, reading, and tone accuracy are tracked independently
 Recognition, production, listening discrimination, tone pairs, cloze comprehension, register awareness, sentence construction, audio-to-character matching. The system picks the right drill type based on your demonstrated performance, not just the skill that's easiest to test.
 
 ADAPTIVE SCHEDULING
-Modified FSRS algorithm with bayesian confidence dampening. Review timing, drill type selection, and focus areas all adapt to your actual performance. Zero AI tokens at runtime — everything is deterministic, instant, and works offline.
+Adaptive spaced repetition algorithm with confidence-weighted scheduling. Review timing, drill type selection, and focus areas all adapt to your actual performance. Zero AI tokens at runtime — everything is deterministic, instant, and works offline.
 
 GRADED READER
 Chinese passages matched to your HSK level with inline glosses. Words you look up feed back into your drill queue. Reading and drilling are not separate activities.
