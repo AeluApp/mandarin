@@ -61,3 +61,6 @@ src-tauri/target/
 # Node
 node_modules/
 mandarin/web/static/illustrations/originals/
+
+# Tauri build artifacts (too large for GitHub)
+desktop/tauri-app/src-tauri/target/
