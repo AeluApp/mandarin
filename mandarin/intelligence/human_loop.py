@@ -79,6 +79,33 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
         # Default for visual_vibe: judgment_call (routes to A/B test)
         return "judgment_call"
 
+    # copy_drift: marketing/legal/email content accuracy findings
+    if dim == "copy_drift":
+        title_lower = (finding.get("title", "") + " " + finding.get("analysis", "")).lower()
+        # Number mismatches (price, drill count) — straightforward swap → auto_fix
+        if any(kw in title_lower for kw in ("drill count", "drill type count",
+                                              "pricing mismatch", "stale price",
+                                              "annual price mismatch")):
+            return "auto_fix"
+        # Removed feature still claimed, brand name mismatch → informed_fix
+        if any(kw in title_lower for kw in ("offline", "overclaim", "old brand",
+                                              "broken image", "brand name")):
+            return "informed_fix"
+        # Complex accuracy claims, LLM-identified issues → judgment_call
+        if any(kw in title_lower for kw in ("[llm]", "misleading", "potential issue",
+                                              "undisclosed")):
+            return "judgment_call"
+        # Legal text changes (privacy policy, terms of service) → values_decision
+        if any(kw in title_lower for kw in ("privacy", "terms", "legal", "gdpr",
+                                              "ccpa", "disclosure", "cookie")):
+            return "values_decision"
+        # Default for copy_drift number mismatches: auto_fix
+        if severity == "low":
+            return "auto_fix"
+        if severity == "medium":
+            return "informed_fix"
+        return "judgment_call"
+
     # auto_fix: low severity, single file, all advisors agree
     if severity == "low" and len(files) <= 1 and not has_conflict:
         return "auto_fix"
