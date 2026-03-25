@@ -296,7 +296,7 @@ def get_experiment_results(conn: sqlite3.Connection, experiment_name: str) -> di
         # Fall back to all sessions for users in the assignment if column missing
         try:
             user_stats = conn.execute(
-                f"""SELECT
+                """SELECT
                         user_id,
                         COUNT(*) as sessions,
                         SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) as completed,
@@ -304,15 +304,15 @@ def get_experiment_results(conn: sqlite3.Connection, experiment_name: str) -> di
                         SUM(items_completed) as total_items,
                         AVG(duration_seconds) as avg_duration
                     FROM session_log
-                    WHERE user_id IN ({placeholders})
+                    WHERE user_id IN ({})
                       AND experiment_variant = ?
-                    GROUP BY user_id""",
+                    GROUP BY user_id""".format(placeholders),
                 user_ids + [variant],
             ).fetchall()
         except sqlite3.OperationalError:
             # experiment_variant column may not exist yet — fall back
             user_stats = conn.execute(
-                f"""SELECT
+                """SELECT
                         user_id,
                         COUNT(*) as sessions,
                         SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) as completed,
@@ -320,8 +320,8 @@ def get_experiment_results(conn: sqlite3.Connection, experiment_name: str) -> di
                         SUM(items_completed) as total_items,
                         AVG(duration_seconds) as avg_duration
                     FROM session_log
-                    WHERE user_id IN ({placeholders})
-                    GROUP BY user_id""",
+                    WHERE user_id IN ({})
+                    GROUP BY user_id""".format(placeholders),
                 user_ids,
             ).fetchall()
 
@@ -486,10 +486,10 @@ def _compute_guardrail_metric(conn: sqlite3.Connection, metric: str, user_ids: l
 
     if metric == "session_completion_rate":
         row = conn.execute(
-            f"""SELECT
+            """SELECT
                     COUNT(*) as total,
                     SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) as completed
-                FROM session_log WHERE user_id IN ({placeholders})""",
+                FROM session_log WHERE user_id IN ({})""".format(placeholders),
             user_ids,
         ).fetchone()
         total = row["total"] or 0
@@ -500,15 +500,15 @@ def _compute_guardrail_metric(conn: sqlite3.Connection, metric: str, user_ids: l
         # Crashes tracked in error_log with error_type containing 'crash'
         try:
             row = conn.execute(
-                f"""SELECT COUNT(*) as cnt FROM error_log
+                """SELECT COUNT(*) as cnt FROM error_log
                     WHERE session_id IN (
-                        SELECT id FROM session_log WHERE user_id IN ({placeholders})
-                    ) AND error_type LIKE '%crash%'""",
+                        SELECT id FROM session_log WHERE user_id IN ({})
+                    ) AND error_type LIKE '%crash%'""".format(placeholders),
                 user_ids,
             ).fetchone()
             crashes = row["cnt"] or 0
             session_row = conn.execute(
-                f"SELECT COUNT(*) as cnt FROM session_log WHERE user_id IN ({placeholders})",
+                "SELECT COUNT(*) as cnt FROM session_log WHERE user_id IN ({})".format(placeholders),
                 user_ids,
             ).fetchone()
             sessions = session_row["cnt"] or 0
@@ -520,10 +520,10 @@ def _compute_guardrail_metric(conn: sqlite3.Connection, metric: str, user_ids: l
         # Average days since each user's last session
         try:
             row = conn.execute(
-                f"""SELECT AVG(julianday('now') - julianday(MAX(started_at))) as avg_gap
+                """SELECT AVG(julianday('now') - julianday(MAX(started_at))) as avg_gap
                     FROM session_log
-                    WHERE user_id IN ({placeholders})
-                    GROUP BY user_id""",
+                    WHERE user_id IN ({})
+                    GROUP BY user_id""".format(placeholders),
                 user_ids,
             ).fetchone()
             return float(row["avg_gap"]) if row and row["avg_gap"] else 0.0

@@ -75,17 +75,17 @@ def select_holdout_items(conn: sqlite3.Connection,
 
     today = datetime.now(UTC).strftime("%Y-%m-%d")
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT p.content_item_id, p.modality,
                ci.hanzi, ci.english, ci.pinyin, ci.difficulty
         FROM progress p
         JOIN content_item ci ON p.content_item_id = ci.id
         WHERE p.user_id = ?
-          AND p.mastery_stage IN ({placeholders})
+          AND p.mastery_stage IN ({})
           AND (p.suspended_until IS NULL OR p.suspended_until < ?)
           AND p.total_attempts >= 3
         ORDER BY p.content_item_id
-    """, [user_id] + eligible_stages + [today]).fetchall()
+    """.format(placeholders), [user_id] + eligible_stages + [today]).fetchall()
 
     if not rows:
         return []
