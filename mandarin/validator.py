@@ -17,7 +17,7 @@ from . import db
 HSK_DATA_DIR = Path(__file__).parent.parent / "data" / "hsk"
 
 
-def _load_canonical(level: int) -> List[dict]:
+def _load_canonical(level: int) -> list[dict]:
     """Load the canonical word list for one HSK level."""
     path = HSK_DATA_DIR / f"hsk{level}.json"
     if not path.exists():
@@ -122,7 +122,7 @@ def validate_level(conn, level: int) -> dict:
     }
 
 
-def validate_all(conn, levels: Optional[List[int]] = None) -> dict:
+def validate_all(conn, levels: list[int] | None = None) -> dict:
     """Validate all (or specified) HSK levels.
 
     Returns:
@@ -171,7 +171,7 @@ def validate_all(conn, levels: Optional[List[int]] = None) -> dict:
     }
 
 
-def fix_levels(conn, levels: Optional[List[int]] = None, dry_run: bool = False) -> dict:
+def fix_levels(conn, levels: list[int] | None = None, dry_run: bool = False) -> dict:
     """Fix HSK level assignments in DB to match canonical data.
 
     For each canonical level, finds items in the DB with matching hanzi
@@ -222,7 +222,7 @@ def fix_levels(conn, levels: Optional[List[int]] = None, dry_run: bool = False) 
     return {"fixed": len(details), "details": details}
 
 
-def find_duplicates(conn) -> List[dict]:
+def find_duplicates(conn) -> list[dict]:
     """Find content_item rows that share the same hanzi.
 
     Returns a list of dicts: {"hanzi": str, "count": int, "ids": [int, ...]}.

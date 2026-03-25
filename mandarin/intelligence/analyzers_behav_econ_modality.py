@@ -24,9 +24,9 @@ _MANDARIN_PKG = os.path.join(_PROJECT_ROOT, "mandarin")
 
 def _read(path: str) -> str:
     try:
-        with open(path, "r", encoding="utf-8", errors="replace") as f:
+        with open(path, encoding="utf-8", errors="replace") as f:
             return f.read()
-    except (OSError, IOError):
+    except OSError:
         return ""
 
 
@@ -74,7 +74,7 @@ def _analyze_modality_progress_framing(conn) -> list[dict]:
     }
 
     missing = []
-    for modality, (pattern, msg) in modality_messages.items():
+    for modality, (pattern, _msg) in modality_messages.items():
         if not re.search(pattern, source, re.IGNORECASE):
             missing.append(modality)
 

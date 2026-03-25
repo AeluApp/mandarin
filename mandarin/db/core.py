@@ -24,7 +24,7 @@ PROFILE_JSON_PATH = Path(__file__).parent.parent.parent / "learner_profile.json"
 def load_learner_profile_json() -> dict[str, object]:
     """Load learner_profile.json from repo root. Returns empty dict if missing."""
     if PROFILE_JSON_PATH.exists():
-        with open(PROFILE_JSON_PATH, "r", encoding="utf-8") as f:
+        with open(PROFILE_JSON_PATH, encoding="utf-8") as f:
             return json.load(f)
     return {}
 
@@ -5679,7 +5679,7 @@ def _migrate_v90_to_v91(conn: sqlite3.Connection) -> None:
     if "interference_pairs" not in _table_set(conn):
         return
 
-    with open(pairs_path, "r", encoding="utf-8") as f:
+    with open(pairs_path, encoding="utf-8") as f:
         pairs = _json.load(f)
 
     type_map = {"visual": "visual_similarity", "phonetic": "near_homophone"}

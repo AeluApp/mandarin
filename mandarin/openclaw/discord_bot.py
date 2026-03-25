@@ -229,7 +229,7 @@ def _chunk_message(text: str, limit: int) -> list[str]:
     return chunks
 
 
-def create_bot() -> Optional[object]:
+def create_bot() -> object | None:
     """Create the Discord bot client.
 
     Returns None if discord.py is not installed or token is missing.

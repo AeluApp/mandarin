@@ -10,7 +10,7 @@ from __future__ import annotations
 import logging
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import Optional
 
@@ -42,7 +42,7 @@ def should_retrain(conn: sqlite3.Connection) -> bool:
 
     try:
         trained_dt = datetime.fromisoformat(meta.trained_at)
-        days_since = (datetime.now(timezone.utc) - trained_dt).days
+        days_since = (datetime.now(UTC) - trained_dt).days
     except (ValueError, TypeError):
         return True
 
@@ -107,7 +107,7 @@ def train_difficulty_model(conn: sqlite3.Connection) -> dict:
         'improvement_over_baseline': val_accuracy - baseline_accuracy,
         'feature_importances': dict(zip(
             FEATURE_ORDER,
-            model.feature_importance(importance_type='gain').tolist(),
+            model.feature_importance(importance_type='gain').tolist(), strict=False,
         )),
     }
 

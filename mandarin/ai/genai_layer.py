@@ -14,7 +14,7 @@ import os
 import re
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -47,7 +47,7 @@ def _get_lance_db():
 # Shared Utilities
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def _parse_llm_json(text: str, conn=None, task_type: str | None = None) -> Optional[dict]:
+def _parse_llm_json(text: str, conn=None, task_type: str | None = None) -> dict | None:
     """Strip markdown fences and parse JSON. Logs failures via G6 column."""
     if not text:
         return None
@@ -295,7 +295,7 @@ def analyze_corpus_coverage(conn) -> dict:
             "total_items": total_items,
             "usage_map_pct": usage_map_pct,
             "hsk_levels_covered": len(hsk_dist),
-            "measured_at": datetime.now(timezone.utc).isoformat(),
+            "measured_at": datetime.now(UTC).isoformat(),
         },
     }
 
@@ -356,7 +356,7 @@ def populate_usage_maps(conn, batch_size: int = 10) -> dict:
 
 
 def generate_thematic_passage(conn, theme: str, hsk_level: int,
-                              target_items: list[str] | None = None) -> Optional[dict]:
+                              target_items: list[str] | None = None) -> dict | None:
     """Generate a thematic reading passage. Tries DSPy first, falls back to reading_content."""
     # ── DSPy path (preferred) ──────────────────────────────
     try:
@@ -404,7 +404,7 @@ def generate_thematic_passage(conn, theme: str, hsk_level: int,
 # Module 3: Generative Feedback
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) -> Optional[dict]:
+def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) -> dict | None:
     """Weekly LLM insight about error patterns.
 
     Tries DSPy optimized module first, falls back to direct Ollama.
@@ -671,7 +671,7 @@ def seed_prompt_registry(conn) -> int:
     return seeded
 
 
-def get_prompt(key: str) -> Optional[dict]:
+def get_prompt(key: str) -> dict | None:
     """Safe lookup from in-memory registry."""
     return PROMPT_REGISTRY.get(key)
 
@@ -812,7 +812,7 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
     if lance_db is not None:
         try:
             records = []
-            for idx, (row, emb) in enumerate(zip(rows, embeddings)):
+            for idx, (row, emb) in enumerate(zip(rows, embeddings, strict=False)):
                 records.append({
                     "content_item_id": row["id"],
                     "hanzi": row["hanzi"] or "",
@@ -837,7 +837,7 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
 
     # --- Fallback: write to SQLite BLOBs ---
     computed = 0
-    for row, emb in zip(rows, embeddings):
+    for row, emb in zip(rows, embeddings, strict=False):
         try:
             conn.execute("""
                 INSERT OR IGNORE INTO genai_item_embeddings
@@ -928,7 +928,7 @@ def find_similar_items(conn, query_hanzi: str, top_k: int = 5) -> list[dict]:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def generate_pronunciation_feedback(conn, session_id: int,
-                                    practice_session_id: int) -> Optional[dict]:
+                                    practice_session_id: int) -> dict | None:
     """Read speaking_practice_sessions.whisper_transcription, compare to target_zh,
     generate LLM feedback. Gated on overall_score < 0.8 and is_ollama_available().
 

@@ -248,7 +248,7 @@ def api_exam_readiness():
 
             # Use aspirational milestones if available
             aspirational = forecast.get("aspirational", {})
-            for key, asp in aspirational.items():
+            for _key, asp in aspirational.items():
                 if isinstance(asp, dict) and asp.get("hsk_target"):
                     target_str = str(asp["hsk_target"])
                     # Match level range like "4-5" or exact "6"
@@ -570,7 +570,7 @@ def api_content_import_csv():
 
     # Build column index map (case-insensitive)
     col_map = {}
-    for orig, lower in zip(fieldnames, fieldnames_lower):
+    for orig, lower in zip(fieldnames, fieldnames_lower, strict=False):
         col_map[lower] = orig
 
     imported = 0

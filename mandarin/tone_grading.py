@@ -11,7 +11,7 @@ import json
 import logging
 import threading
 import wave
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -148,10 +148,10 @@ def record_audio(duration: float = MAX_RECORD_SECONDS):
 
 
 def save_recording(audio: "np.ndarray", content_item_id: int,
-                   session_id: int) -> Optional[Path]:
+                   session_id: int) -> Path | None:
     """Save recording as WAV file. Returns path."""
     RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
-    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    ts = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     filename = f"{ts}_item{content_item_id}.wav"
     path = RECORDINGS_DIR / filename
 
@@ -169,7 +169,7 @@ def save_recording(audio: "np.ndarray", content_item_id: int,
 
 def extract_f0_pyin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
                     hop_ms: int = 10,
-                    fmin: float = 75.0, fmax: float = 500.0) -> List[float]:
+                    fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract F0 using librosa's pYIN (probabilistic YIN) pitch tracker.
 
     pYIN adds a hidden Markov model on top of YIN for smoother, more
@@ -300,7 +300,7 @@ def extract_voice_quality_extras(audio: "np.ndarray", sr: int = SAMPLE_RATE,
 
 def _extract_f0_autocorr(audio: "np.ndarray", sr: int = SAMPLE_RATE,
                          frame_ms: int = 30, hop_ms: int = 10,
-                         fmin: float = 75.0, fmax: float = 500.0) -> List[float]:
+                         fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract F0 using autocorrelation (legacy, kept as reference).
 
     Returns list of F0 values (Hz) per frame. 0.0 = unvoiced.
@@ -356,7 +356,7 @@ def _extract_f0_autocorr(audio: "np.ndarray", sr: int = SAMPLE_RATE,
 def extract_f0_yin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
                    frame_ms: int = 30, hop_ms: int = 10,
                    fmin: float = 75.0, fmax: float = 500.0,
-                   threshold: float = 0.15) -> List[float]:
+                   threshold: float = 0.15) -> list[float]:
     """Extract F0 using the YIN algorithm.
 
     YIN: a fundamental frequency estimator for speech and music
@@ -450,7 +450,7 @@ def extract_f0_yin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
 
 def extract_f0(audio: "np.ndarray", sr: int = SAMPLE_RATE,
                frame_ms: int = 30, hop_ms: int = 10,
-               fmin: float = 75.0, fmax: float = 500.0) -> List[float]:
+               fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract fundamental frequency contour.
 
     Tries librosa pYIN first for HMM-smoothed accuracy,
@@ -480,8 +480,8 @@ TONE_PATTERNS = {
 }
 
 
-def classify_tone(f0_contour: List[float],
-                  calibration: dict = None) -> Tuple[int, float]:
+def classify_tone(f0_contour: list[float],
+                  calibration: dict = None) -> tuple[int, float]:
     """Classify a single-syllable F0 contour into Mandarin tone 1-4.
 
     Args:
@@ -512,7 +512,7 @@ def classify_tone(f0_contour: List[float],
 
 # ── Speaker calibration ──────────────────────────────
 
-def run_tone_calibration(audio: "np.ndarray", sr: int = SAMPLE_RATE) -> Optional[dict]:
+def run_tone_calibration(audio: "np.ndarray", sr: int = SAMPLE_RATE) -> dict | None:
     """Extract speaker's F0 range from a calibration phrase (e.g. māmámǎmà).
 
     Returns dict with f0_min, f0_max, f0_mean (10th/90th percentile)
@@ -541,7 +541,7 @@ def save_speaker_calibration(conn, calibration: dict, user_id: int = 1) -> None:
     conn.commit()
 
 
-def get_speaker_calibration(conn, user_id: int = 1) -> Optional[dict]:
+def get_speaker_calibration(conn, user_id: int = 1) -> dict | None:
     """Load the most recent speaker calibration from the database.
 
     Returns dict with f0_min, f0_max, f0_mean or None if not calibrated.
@@ -563,7 +563,7 @@ def get_speaker_calibration(conn, user_id: int = 1) -> Optional[dict]:
     }
 
 
-def _apply_sandhi_rules(tones: List[int]) -> Tuple[List[int], List[int], List[bool]]:
+def _apply_sandhi_rules(tones: list[int]) -> tuple[list[int], list[int], list[bool]]:
     """Apply Mandarin tone sandhi rules to expected tones.
 
     Rules applied:
@@ -652,7 +652,7 @@ def get_tone_leniency(speaking_level: float) -> dict:
     return dict(bands[-1][1])
 
 
-def grade_tones(audio: "np.ndarray", expected_tones: List[int],
+def grade_tones(audio: "np.ndarray", expected_tones: list[int],
                 sr: int = SAMPLE_RATE, leniency: dict = None,
                 calibration: dict = None) -> dict:
     """Grade pronunciation against expected tone sequence.
@@ -868,7 +868,7 @@ _DETECTED_DESCRIPTIONS = {
 }
 
 
-def generate_tone_coaching(syllable_scores: List[dict]) -> List[dict]:
+def generate_tone_coaching(syllable_scores: list[dict]) -> list[dict]:
     """Generate actionable coaching tips for each syllable with incorrect tone.
 
     Returns a list of coaching dicts (one per incorrect syllable):
@@ -1012,7 +1012,7 @@ def get_tone_accuracy(conn, days: int = 30, user_id: int = 1) -> dict:
 
 _PINYIN_VOWELS = set("aeiouüAEIOUÜ")
 
-def pinyin_to_tones(pinyin: str) -> List[int]:
+def pinyin_to_tones(pinyin: str) -> list[int]:
     """Extract tone numbers from pinyin string, including neutral tones (0).
 
     'nǐ hǎo' → [3, 3]

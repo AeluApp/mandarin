@@ -529,7 +529,7 @@ def _build_noun_to_mw_map(mw_data: list) -> dict:
     return mapping
 
 
-def _find_correct_mw(item: dict, noun_map: dict) -> Optional[dict]:
+def _find_correct_mw(item: dict, noun_map: dict) -> dict | None:
     """Look up the correct measure word info for an item. Returns None if not found."""
     hanzi = item.get("hanzi", "").strip()
     correct_info = noun_map.get(hanzi)
@@ -541,7 +541,7 @@ def _find_correct_mw(item: dict, noun_map: dict) -> Optional[dict]:
     return correct_info
 
 
-def _get_mw_entry(mw: str, mw_data: list) -> Optional[dict]:
+def _get_mw_entry(mw: str, mw_data: list) -> dict | None:
     """Find the full entry for a measure word character."""
     for e in mw_data:
         if (e.get("classifier") or e.get("measure_word", "")) == mw:
@@ -1006,7 +1006,7 @@ def run_homophone_drill(item: dict, conn, show_fn, input_fn,
     # Find which homophone set contains a character from this item
     matched_set = None
     matched_char = None
-    for set_key, hset in _get_homophone_sets().items():
+    for _set_key, hset in _get_homophone_sets().items():
         for entry in hset["chars"]:
             if entry["hanzi"] in hanzi:
                 matched_set = hset
@@ -1281,7 +1281,7 @@ def _get_chengyu():
 # ── Tone Sandhi Drill ──────────────────────────────
 
 def run_tone_sandhi_drill(item: dict, conn, show_fn, input_fn,
-                          prominent: bool = True) -> Optional[DrillResult]:
+                          prominent: bool = True) -> DrillResult | None:
     """How is this word actually pronounced? Tests tone sandhi rules."""
     entries = _get_tone_sandhi()
     item_level = item.get("hsk_level") or 3
@@ -1294,7 +1294,7 @@ def run_tone_sandhi_drill(item: dict, conn, show_fn, input_fn,
     word = entry["word"]
     correct = entry["pinyin_sandhi"]
     base_pinyin = entry["pinyin_base"]
-    rule = entry.get("rule", "")
+    entry.get("rule", "")
 
     # Build options: correct sandhi + base form + 2 plausible alternatives
     options = [correct]
@@ -1350,7 +1350,7 @@ def run_tone_sandhi_drill(item: dict, conn, show_fn, input_fn,
 # ── Collocation Drill ──────────────────────────────
 
 def run_collocation_drill(item: dict, conn, show_fn, input_fn,
-                          prominent: bool = True) -> Optional[DrillResult]:
+                          prominent: bool = True) -> DrillResult | None:
     """Which verb goes with this object? Tests verb-object collocations."""
     entries = _get_collocations()
     item_level = item.get("hsk_level") or 3
@@ -1404,7 +1404,7 @@ def run_collocation_drill(item: dict, conn, show_fn, input_fn,
 # ── Radical Drill ──────────────────────────────
 
 def run_radical_drill(item: dict, conn, show_fn, input_fn,
-                      prominent: bool = True) -> Optional[DrillResult]:
+                      prominent: bool = True) -> DrillResult | None:
     """Radical identification — two sub-formats:
     1. Given a character, identify its radical
     2. Given a radical, identify which character contains it
@@ -1510,7 +1510,7 @@ def run_radical_drill(item: dict, conn, show_fn, input_fn,
 # ── Chengyu Drill ──────────────────────────────
 
 def run_chengyu_drill(item: dict, conn, show_fn, input_fn,
-                      prominent: bool = True) -> Optional[DrillResult]:
+                      prominent: bool = True) -> DrillResult | None:
     """Chengyu (4-character idiom) drill — two sub-formats:
     1. Meaning MC: show chengyu → pick meaning
     2. Fill-in-blank: show 3 of 4 characters → pick the missing one

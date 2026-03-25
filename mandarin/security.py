@@ -12,15 +12,15 @@ from __future__ import annotations
 import logging
 import re
 import sqlite3
-from datetime import datetime, timezone
-from enum import Enum
+from datetime import datetime, timezone, UTC
+from enum import Enum, StrEnum
 
 from flask import request as flask_request
 
 logger = logging.getLogger(__name__)
 
 
-class SecurityEvent(str, Enum):
+class SecurityEvent(StrEnum):
     """Security event types for audit logging."""
 
     # Authentication events
@@ -69,7 +69,7 @@ class SecurityEvent(str, Enum):
     OPEN_REDIRECT_BLOCKED = "open_redirect_blocked"
 
 
-class Severity(str, Enum):
+class Severity(StrEnum):
     """Log severity levels."""
     INFO = "INFO"
     WARNING = "WARNING"
@@ -127,7 +127,7 @@ def _send_critical_alert(
         )
         if conn is not None:
             try:
-                now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
                 conn.execute(
                     """INSERT INTO security_audit_log
                        (timestamp, event_type, user_id, details, severity)
@@ -142,7 +142,7 @@ def _send_critical_alert(
 
         # Last-resort fallback: append to local file so the alert is never lost
         try:
-            fallback_ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            fallback_ts = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
             with open("/tmp/aelu_critical_alerts.log", "a") as f:
                 f.write(
                     f"{fallback_ts} ALERT_DELIVERY_FAILURE "
@@ -187,7 +187,7 @@ def log_security_event(
     Captures IP address and user agent from the current Flask request context.
     Falls back gracefully if called outside a request context.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Get request context safely
     ip_address = None

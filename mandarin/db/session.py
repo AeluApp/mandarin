@@ -3,7 +3,7 @@
 import logging
 import sqlite3
 import json
-from datetime import datetime, date, timezone
+from datetime import datetime, date, timezone, UTC
 from typing import List, Optional
 
 logger = logging.getLogger(__name__)
@@ -52,7 +52,7 @@ def start_session(conn: sqlite3.Connection,
             log_lifecycle_event("first_session_started", user_id=str(user_id), conn=conn,
                                 session_type=session_type)
             # Stamp first_session_at on user record
-            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
             conn.execute(
                 "UPDATE user SET first_session_at = ? WHERE id = ? AND first_session_at IS NULL",
                 (now_str, user_id)
@@ -71,7 +71,7 @@ def end_session(conn: sqlite3.Connection, session_id: int,
                 boredom_flags: int = 0,
                 user_id: int = 1) -> None:
     """End a session and update profile."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     # Get start time for duration calc
     row = conn.execute(
         "SELECT started_at FROM session_log WHERE id = ?", (session_id,)
@@ -180,7 +180,7 @@ def update_session_progress(conn: sqlite3.Connection, session_id: int,
 
 
 def get_session_history(conn: sqlite3.Connection, limit: int = 20,
-                        user_id: int = 1) -> List[dict]:
+                        user_id: int = 1) -> list[dict]:
     """Get recent sessions. Excludes bounces with zero items completed."""
     rows = conn.execute("""
         SELECT * FROM session_log
@@ -191,7 +191,7 @@ def get_session_history(conn: sqlite3.Connection, limit: int = 20,
 
 
 def get_days_since_last_session(conn: sqlite3.Connection,
-                                user_id: int = 1) -> Optional[int]:
+                                user_id: int = 1) -> int | None:
     """Days since last session with any items completed. None if no sessions.
 
     Cross-checks both the profile's last_session_date and session_log to

@@ -10,7 +10,7 @@ import json
 import logging
 import math
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ def create_experiment(
     min_sample_size: int = 100,
 ) -> int:
     """Create a new experiment in draft status. Returns the experiment id."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     guardrails = guardrail_metrics or ["session_completion_rate", "crash_rate", "churn_days"]
     cur = conn.execute(
         """INSERT INTO experiment
@@ -51,7 +51,7 @@ def create_experiment(
 
 def start_experiment(conn: sqlite3.Connection, experiment_name: str) -> None:
     """Move an experiment from draft to running."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "UPDATE experiment SET status = 'running', started_at = ? WHERE name = ? AND status = 'draft'",
         (now, experiment_name),
@@ -75,7 +75,7 @@ def conclude_experiment(
     notes: str = "",
 ) -> None:
     """Conclude an experiment, recording the winner and decision metadata."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     # Gather final results for the conclusion record
     results = get_experiment_results(conn, experiment_name)
     conclusion = {
@@ -146,7 +146,7 @@ def get_variant(
     variant = variants[variant_index]
 
     # Persist assignment
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """INSERT OR IGNORE INTO experiment_assignment
            (experiment_id, user_id, variant, assigned_at)
@@ -184,7 +184,7 @@ def log_exposure(
         if not assignment:
             return
 
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             """INSERT INTO experiment_exposure
                (experiment_id, user_id, variant, context, exposed_at)

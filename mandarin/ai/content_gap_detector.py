@@ -264,7 +264,7 @@ def _analyze_reading_coverage() -> dict:
         with open(path) as f:
             data = json.load(f)
         passages = data if isinstance(data, list) else data.get("passages", [])
-    except (json.JSONDecodeError, IOError):
+    except (OSError, json.JSONDecodeError):
         return {"total": 0, "by_level": {}, "gaps": [], "score": 0.0}
 
     by_level = Counter()
@@ -301,7 +301,7 @@ def _analyze_media_coverage() -> dict:
         with open(path) as f:
             data = json.load(f)
         entries = data if isinstance(data, list) else data.get("catalog", [])
-    except (json.JSONDecodeError, IOError):
+    except (OSError, json.JSONDecodeError):
         return {"total": 0, "by_level": {}, "gaps": [], "score": 0.0}
 
     by_level = Counter()

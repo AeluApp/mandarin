@@ -151,7 +151,7 @@ for _key in DRILL_REGISTRY:
 DRILL_RUNNERS = {k: v["runner"] for k, v in DRILL_REGISTRY.items()}
 
 
-def _get_requirement_ref(item: dict, conn, drill_type: str) -> Optional[dict]:
+def _get_requirement_ref(item: dict, conn, drill_type: str) -> dict | None:
     """Build provenance ref for a drill item."""
     # Supplementary drills without HSK mapping
     if drill_type in ("register_choice", "pragmatic", "slang_exposure"):

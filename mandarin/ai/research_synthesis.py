@@ -29,7 +29,7 @@ _DEFAULT_QUERIES = [
 
 def discover_papers(
     conn: sqlite3.Connection,
-    query_terms: Optional[list[str]] = None,
+    query_terms: list[str] | None = None,
     max_results: int = 10,
 ) -> list[dict]:
     """Search arxiv + Semantic Scholar for SLA/CALL papers.
@@ -158,7 +158,7 @@ def _search_semantic_scholar(query: str, max_results: int = 5) -> list[dict]:
         return []
 
 
-def _store_paper(conn: sqlite3.Connection, paper: dict) -> Optional[int]:
+def _store_paper(conn: sqlite3.Connection, paper: dict) -> int | None:
     """Store paper in research_paper table. Skips duplicates by title."""
     try:
         existing = conn.execute(
@@ -189,7 +189,7 @@ def _store_paper(conn: sqlite3.Connection, paper: dict) -> Optional[int]:
 def score_relevance(
     conn: sqlite3.Connection,
     paper_id: int,
-    aelu_components: Optional[list[str]] = None,
+    aelu_components: list[str] | None = None,
 ) -> float:
     """Score a paper's relevance to Aelu's methodology.
 
@@ -242,7 +242,7 @@ def score_relevance(
 def synthesize_application(
     conn: sqlite3.Connection,
     paper_id: int,
-) -> Optional[dict]:
+) -> dict | None:
     """Use Qwen to synthesize how a paper could apply to Aelu.
 
     Returns application dict or None if LLM unavailable.

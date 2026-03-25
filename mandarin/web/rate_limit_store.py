@@ -5,7 +5,7 @@ Implements the flask_limiter Storage interface using the rate_limit table.
 
 import logging
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 from limits.storage import Storage
 
@@ -32,7 +32,7 @@ class SQLiteStorage(Storage):
     def incr(self, key: str, expiry: int, elastic_expiry: bool = False, amount: int = 1) -> int:
         """Increment the counter for the given key."""
         conn = self._get_conn()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         now_str = now.strftime("%Y-%m-%d %H:%M:%S")
         expires_str = (now + timedelta(seconds=expiry)).strftime("%Y-%m-%d %H:%M:%S")
 
@@ -70,7 +70,7 @@ class SQLiteStorage(Storage):
     def get(self, key: str) -> int:
         """Get the current counter value for the given key."""
         conn = self._get_conn()
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         row = conn.execute(
             "SELECT hits FROM rate_limit WHERE key = ? AND expires_at >= ? ORDER BY window_start DESC LIMIT 1",
             (key, now_str),
@@ -80,14 +80,14 @@ class SQLiteStorage(Storage):
     def get_expiry(self, key: str) -> int:
         """Get the expiry time for the given key as a Unix timestamp."""
         conn = self._get_conn()
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         row = conn.execute(
             "SELECT expires_at FROM rate_limit WHERE key = ? AND expires_at >= ? ORDER BY window_start DESC LIMIT 1",
             (key, now_str),
         ).fetchone()
         if row and row["expires_at"]:
             try:
-                exp = datetime.strptime(row["expires_at"], "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+                exp = datetime.strptime(row["expires_at"], "%Y-%m-%d %H:%M:%S").replace(tzinfo=UTC)
                 return int(exp.timestamp())
             except (ValueError, TypeError):
                 pass

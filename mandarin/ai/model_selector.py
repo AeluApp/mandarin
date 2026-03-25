@@ -16,7 +16,7 @@ import logging
 import re
 import statistics
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 import httpx
@@ -263,7 +263,7 @@ def select_best_model_per_task(conn) -> dict[str, str]:
 
 def apply_model_routing(conn, routing: dict[str, str]) -> None:
     """Activate the selected models in the registry."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Deactivate all
     try:
@@ -310,7 +310,7 @@ def run_model_selection_cycle(conn) -> dict:
     task_types = list(_TASK_COMPLEXITY.keys())
 
     # 3. Benchmark each (model, task) pair not benchmarked recently
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     benchmarks_run = 0
 
     for model_info in models:

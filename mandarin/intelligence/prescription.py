@@ -11,7 +11,7 @@ import json
 import logging
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Optional
 
 from ._base import (
@@ -28,22 +28,22 @@ class WorkOrder:
     id: int
     audit_cycle_id: int
     finding_id: int
-    prediction_id: Optional[str]
+    prediction_id: str | None
     constraint_dimension: str
     constraint_score: float
     marginal_improvement: float
     instruction: str
-    target_file: Optional[str]
-    target_parameter: Optional[str]
-    direction: Optional[str]
+    target_file: str | None
+    target_parameter: str | None
+    direction: str | None
     success_metric: str
     success_baseline: float
     success_threshold: float
     verification_window_days: int
     subordinated_count: int
     subordinated_finding_ids: list
-    confidence_label: Optional[str]
-    confidence_score: Optional[float]
+    confidence_label: str | None
+    confidence_score: float | None
     instruction_source: str = "legacy_lookup"  # 'influence_model', 'legacy_lookup', 'insufficient_data'
 
 
@@ -477,7 +477,7 @@ def generate_work_order(conn, audit_cycle_id: int) -> WorkOrder:
     constraint_score = constraint.get("constraint_score", 0.0)
     marginal_improvement = constraint.get("marginal_improvement", 0.0)
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     due_at = (now + timedelta(days=window_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     # 7. Persist
@@ -605,14 +605,14 @@ def mark_work_order_implemented(conn, work_order_id: int, parameter_name=None,
                 INSERT INTO pi_parameter_history
                     (id, parameter_id, changed_at, changed_by, work_order_id)
                 VALUES (?, 'structural_change', ?, 'human', ?)
-            """, (str(_uuid4()), datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+            """, (str(_uuid4()), datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
                   work_order_id))
             conn.commit()
         except Exception:
             pass  # non-fatal
 
     # Mark work order as verifying
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             UPDATE pi_work_order
@@ -628,7 +628,7 @@ def mark_work_order_implemented(conn, work_order_id: int, parameter_name=None,
 
 def check_stale_work_orders(conn) -> list:
     """Find pending work orders older than 2× verification_window_days, mark as stale."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     stale = []
     try:
         rows = conn.execute("""

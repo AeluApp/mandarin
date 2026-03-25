@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ def log_audit_event(
     balance_check, srm_check, guardrail_check, pause, resume,
     ramp_change, conclude, config_change, analysis_snapshot.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     payload = json.dumps(data or {})
     try:
         conn.execute(

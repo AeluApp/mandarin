@@ -8,7 +8,7 @@ Replaces the curated _FINDING_TO_ACTION table over time.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from uuid import uuid4
 
 from ._base import _VERIFICATION_WINDOWS, _safe_query, _safe_query_all, _safe_scalar
@@ -153,7 +153,7 @@ def record_parameter_change(
         return None
 
     history_id = str(uuid4())
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     try:
         conn.execute("""
@@ -293,7 +293,7 @@ def update_influence_edges(conn, work_order_id: int) -> bool:
         WHERE parameter_id = ? AND metric_name = ?
     """, (parameter_id, metric_name))
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     if not edge:
         # New edge discovered from data — start at 0, will be incremented below

@@ -13,7 +13,7 @@ import json
 import logging
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -390,7 +390,7 @@ def measure_performance_and_engineering(conn, component: str, window_days: int =
         if last_train and last_train['trained_at']:
             try:
                 trained_dt = datetime.fromisoformat(last_train['trained_at'])
-                days_since = (datetime.now(timezone.utc) - trained_dt).days
+                days_since = (datetime.now(UTC) - trained_dt).days
                 if days_since > 14:
                     measurements.append({
                         'metric_name': 'days_since_model_retrain',
@@ -511,7 +511,7 @@ def measure_ux_and_design(conn, component: str, window_days: int = 14) -> list[d
     """, (f'-{window_days} days',)).fetchall()
 
     if rejections:
-        design_cnt = sum(r['cnt'] for r in rejections
+        sum(r['cnt'] for r in rejections
                         if r['rejection_category'] in ('formatting_error', 'awkward_chinese'))
         accuracy_cnt = sum(r['cnt'] for r in rejections
                           if r['rejection_category'] in ('accuracy_error', 'tone_error'))
@@ -886,7 +886,7 @@ def _generate_recommendation(verdict, comp_verdicts, dim_scores, maint_hrs):
 
 
 def _persist_measurements(conn, measurements, audit_cycle_id):
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     for m in measurements:
         try:
             conn.execute("""
@@ -914,7 +914,7 @@ def _persist_measurements(conn, measurements, audit_cycle_id):
 
 
 def _persist_assessment(conn, data):
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Get prior verdict for trend
     prior = conn.execute("""

@@ -41,7 +41,7 @@ class TranscriptResult:
     confidence: float = 0.0
     backend: str = ""
     duration_ms: int = 0
-    error: Optional[str] = None
+    error: str | None = None
 
 
 def transcribe(
@@ -143,7 +143,7 @@ def transcribe_numpy(
 
 # ── Backends ─────────────────────────────────────────
 
-def _find_whisper_cpp() -> Optional[str]:
+def _find_whisper_cpp() -> str | None:
     """Find whisper.cpp binary on PATH or common locations."""
     for name in ("whisper-cpp", "whisper", "main"):
         try:
@@ -168,7 +168,7 @@ def _find_whisper_cpp() -> Optional[str]:
     return None
 
 
-def _find_whisper_model() -> Optional[str]:
+def _find_whisper_model() -> str | None:
     """Find a whisper.cpp model file."""
     model_dir = Path.home() / "whisper.cpp" / "models"
     if not model_dir.exists():
@@ -186,7 +186,7 @@ def _find_whisper_model() -> Optional[str]:
 
 def _try_whisper_cpp(
     audio_path: str, language: str, task: str,
-) -> Optional[TranscriptResult]:
+) -> TranscriptResult | None:
     """Try transcription via whisper.cpp binary."""
     binary = _find_whisper_cpp()
     if not binary:
@@ -259,7 +259,7 @@ def _try_whisper_cpp(
 
 def _try_openai_whisper(
     audio_path: str, language: str, task: str,
-) -> Optional[TranscriptResult]:
+) -> TranscriptResult | None:
     """Try transcription via OpenAI Whisper API."""
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
@@ -325,7 +325,7 @@ def _try_openai_whisper(
 
 def _try_whisper_python(
     audio_path: str, language: str, task: str,
-) -> Optional[TranscriptResult]:
+) -> TranscriptResult | None:
     """Try transcription via local openai-whisper Python package."""
     try:
         import whisper

@@ -92,7 +92,6 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
     # values_decision: involves retention vs learning tradeoff, or aesthetic
     learning_dims = {"drill_quality", "content", "srs_funnel", "error_taxonomy",
                      "cross_modality", "curriculum", "hsk_cliff", "tone_phonology"}
-    retention_dims = {"retention", "ux", "flow", "engagement", "frustration"}
 
     if has_conflict:
         conflict_advisors = set()
@@ -143,9 +142,9 @@ def compute_escalation(conn, finding: dict, history: list = None) -> str:
 
     if pi_row:
         times_seen = pi_row["times_seen"] or 1
-        age_days = pi_row["age_days"] or 0
+        pi_row["age_days"] or 0
     else:
-        age_days = 0
+        pass
 
     # Check if a prior recommendation was implemented but didn't help
     prior_ineffective = False
@@ -394,7 +393,6 @@ def record_override(
 ) -> bool:
     """Record a human override: 'stop flagging X.'"""
     try:
-        expires_at = f"datetime('now', '+{expires_in_days} days')"
         conn.execute("""
             INSERT INTO pi_decision_log
                 (finding_id, decision_class, escalation_level, presented_to,

@@ -25,9 +25,9 @@ _TEMPLATE_DIR = os.path.join(_PROJECT_ROOT, "mandarin", "web", "templates")
 
 def _read_file(path: str) -> str | None:
     try:
-        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        with open(path, encoding="utf-8", errors="replace") as fh:
             return fh.read()
-    except (OSError, IOError):
+    except OSError:
         return None
 
 
@@ -373,7 +373,7 @@ def _analyze_agentic_coverage(conn) -> list[dict]:
                 SELECT COUNT(*) FROM prescription_execution_log
                 WHERE created_at >= datetime('now', '-30 days') AND status = 'executed'
             """) or 0
-            errors = _safe_scalar(conn, """
+            _safe_scalar(conn, """
                 SELECT COUNT(*) FROM prescription_execution_log
                 WHERE created_at >= datetime('now', '-30 days') AND status = 'error'
             """) or 0

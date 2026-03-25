@@ -80,7 +80,7 @@ def seed_context_notes(conn: sqlite3.Connection, notes_dict: dict) -> int:
 _VALID_MODALITIES = {"reading", "listening", "speaking", "ime"}
 
 
-def _filter_unreviewed_ai_content(items: List[dict]) -> List[dict]:
+def _filter_unreviewed_ai_content(items: list[dict]) -> list[dict]:
     """NIST AI RMF: skip AI-generated content that hasn't been human-reviewed.
 
     If is_ai_generated=1 and human_reviewed_at is NULL, the item is excluded
@@ -101,7 +101,7 @@ def _filter_unreviewed_ai_content(items: List[dict]) -> List[dict]:
 
 def get_items_due(conn: sqlite3.Connection, modality: str,
                   limit: int = 20, today: str = None,
-                  user_id: int = 1) -> List[dict]:
+                  user_id: int = 1) -> list[dict]:
     """Get content items due for review in a given modality.
 
     Only returns drill_ready items. Uses half-life retention model
@@ -140,7 +140,7 @@ def get_items_due(conn: sqlite3.Connection, modality: str,
 
 def get_new_items(conn: sqlite3.Connection, modality: str,
                   limit: int = 5, hsk_max: int = 9,
-                  user_id: int = 1) -> List[dict]:
+                  user_id: int = 1) -> list[dict]:
     """Get content items never reviewed in a given modality.
 
     Only returns drill_ready items.

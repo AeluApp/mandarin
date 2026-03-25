@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .audit import log_audit_event
 
@@ -210,7 +210,7 @@ def _tenure_days(conn: sqlite3.Connection, user_id: int) -> float | None:
         if not row or not row["created_at"]:
             return None
         created = datetime.fromisoformat(row["created_at"])
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         return (now - created).total_seconds() / 86400
     except (sqlite3.OperationalError, ValueError):
         return None
@@ -257,7 +257,7 @@ def _days_since_last_session(conn: sqlite3.Connection, user_id: int) -> float | 
         if not row or not row["last_at"]:
             return None
         last = datetime.fromisoformat(row["last_at"])
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         return (now - last).total_seconds() / 86400
     except (sqlite3.OperationalError, ValueError):
         return None

@@ -7,7 +7,7 @@ suitable for sending to the user.
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -124,7 +124,7 @@ def cmd_review_items(limit: int = 5) -> list[dict]:
 
 def cmd_approve(item_id: int) -> str:
     """Approve a content generation queue item."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     with _get_conn() as conn:
         result = conn.execute("""
             UPDATE content_generation_queue
@@ -139,7 +139,7 @@ def cmd_approve(item_id: int) -> str:
 
 def cmd_reject(item_id: int, reason: str = "") -> str:
     """Reject a content generation queue item."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     with _get_conn() as conn:
         result = conn.execute("""
             UPDATE content_generation_queue

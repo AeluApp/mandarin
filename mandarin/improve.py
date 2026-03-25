@@ -11,7 +11,7 @@ Every recommendation must include:
 
 import json
 import logging
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timezone, UTC
 from . import db
 
 logger = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ def detect_patterns(conn, user_id: int = 1) -> list:
     """
     proposals = []
     sessions = db.get_session_history(conn, limit=20, user_id=user_id)
-    profile = db.get_profile(conn, user_id=user_id)
+    db.get_profile(conn, user_id=user_id)
 
     if len(sessions) < 5:
         return []
@@ -420,7 +420,7 @@ def apply_proposal(conn, proposal_id: int, user_id: int = 1):
     conn.execute("""
         UPDATE improvement_log SET status = 'approved', applied_at = ?
         WHERE id = ? AND user_id = ?
-    """, (datetime.now(timezone.utc).isoformat(), proposal_id, user_id))
+    """, (datetime.now(UTC).isoformat(), proposal_id, user_id))
     conn.commit()
 
 
@@ -462,7 +462,7 @@ def _execute_proposal(conn, trigger: str, proposal_data: dict, user_id: int = 1)
     elif trigger == "persistent_error_type":
         # Increase error_focus limit for that error type
         # Extract error type from proposal observation if available
-        obs = proposal_data.get("observation", "") if isinstance(proposal_data, dict) else ""
+        proposal_data.get("observation", "") if isinstance(proposal_data, dict) else ""
         # Set a session override: more error-focus items
         conn.execute(
             "UPDATE learner_profile SET preferred_session_length = "
@@ -502,7 +502,7 @@ def rollback_proposal(conn, proposal_id: int, user_id: int = 1):
     conn.execute("""
         UPDATE improvement_log SET status = 'rolled_back', rolled_back_at = ?
         WHERE id = ? AND user_id = ?
-    """, (datetime.now(timezone.utc).isoformat(), proposal_id, user_id))
+    """, (datetime.now(UTC).isoformat(), proposal_id, user_id))
     conn.commit()
 
 

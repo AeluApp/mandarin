@@ -19,6 +19,7 @@ from . import db
 from .cli_auth import get_cli_user_id
 from .scheduler import plan_standard_session, plan_minimal_session, plan_catchup_session
 from .runner import run_session
+from datetime import UTC
 
 app = typer.Typer(
     name="mandarin",
@@ -132,7 +133,7 @@ def _show_warm_start(conn, profile, user_id: int = 1):
     if intention and intention_at:
         try:
             set_dt = datetime.fromisoformat(intention_at)
-            age = datetime.now(timezone.utc) - set_dt
+            age = datetime.now(UTC) - set_dt
             if age < timedelta(days=3):
                 console.print(f"  [dim]You planned:[/dim] [italic]{intention}[/italic]")
         except (ValueError, TypeError):
@@ -1661,7 +1662,7 @@ def listen(
         hanzi = item["hanzi"]
         pinyin = item["pinyin"]
         english = item["english"]
-        hsk_level = item.get("hsk_level") or "?"
+        item.get("hsk_level") or "?"
         context = item.get("context_note")
 
         # Show item number
@@ -2185,7 +2186,7 @@ def watch(
                 record_media_skip(conn, media_id)
                 console.print("  Skipped.\n")
                 return
-            result = run_media_comprehension(entry, _show, _input, conn=conn)
+            run_media_comprehension(entry, _show, _input, conn=conn)
             return
 
         # Recommend — time-aware
@@ -2216,7 +2217,7 @@ def watch(
                 continue
 
             # Run comprehension
-            result = run_media_comprehension(entry, _show, _input, conn=conn)
+            run_media_comprehension(entry, _show, _input, conn=conn)
             return
 
 
@@ -2627,7 +2628,7 @@ def claim_account():
 
         display_name = console.input("  Display name (optional): ").strip() or email.split("@")[0]
 
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         password_hash = generate_password_hash(password, method="pbkdf2:sha256")
         conn.execute(
             """UPDATE user SET email = ?, password_hash = ?, display_name = ?,
@@ -2652,7 +2653,7 @@ def invite_create(
 
     with db.connection() as conn:
         codes = []
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         for _ in range(count):
             code = secrets.token_urlsafe(8)
             conn.execute(

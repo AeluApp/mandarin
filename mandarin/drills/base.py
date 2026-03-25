@@ -55,16 +55,16 @@ class DrillResult:
     correct: bool
     user_answer: str = ""
     expected_answer: str = ""
-    error_type: Optional[str] = None  # tone, segment, ime_confusable, grammar, vocab, other
-    error_cause: Optional[str] = None  # Detailed cause: tone_2_as_3, phonetic_similar, etc.
+    error_type: str | None = None  # tone, segment, ime_confusable, grammar, vocab, other
+    error_cause: str | None = None  # Detailed cause: tone_2_as_3, phonetic_similar, etc.
     skipped: bool = False
     feedback: str = ""  # Rich feedback string shown after answer
-    score: Optional[float] = None  # 0.0-1.0 for conversation drills
+    score: float | None = None  # 0.0-1.0 for conversation drills
     confidence: str = "full"  # full, half, unknown
-    requirement_ref: Optional[dict] = None  # HSK provenance: {type, name, hsk_level, source}
-    distractor_tier: Optional[int] = None  # 0=phonetic, 1=same HSK, 2=nearby, 3=fallback
-    metadata: Optional[dict] = None  # Arbitrary metadata (e.g. media_id, tone_scores)
-    near_miss_type: Optional[str] = None  # Set by detect_near_miss() if almost correct
+    requirement_ref: dict | None = None  # HSK provenance: {type, name, hsk_level, source}
+    distractor_tier: int | None = None  # 0=phonetic, 1=same HSK, 2=nearby, 3=fallback
+    metadata: dict | None = None  # Arbitrary metadata (e.g. media_id, tone_scores)
+    near_miss_type: str | None = None  # Set by detect_near_miss() if almost correct
 
 
 # ── Near-miss detection (behavioral economics: targeted feedback) ──────
@@ -93,8 +93,8 @@ def detect_near_miss(
     user_answer: str,
     expected_answer: str,
     drill_type: str,
-    error_type: Optional[str] = None,
-) -> Optional[tuple[NearMissType, str]]:
+    error_type: str | None = None,
+) -> tuple[NearMissType, str] | None:
     """Detect if an incorrect answer is a near-miss (almost correct).
 
     Returns (NearMissType, detail_string) if near-miss detected, None otherwise.
@@ -132,10 +132,10 @@ def detect_near_miss(
     # --- Pinyin close: edit distance of 1 (one letter off) ---
     if drill_type in ("ime_type", "hanzi_to_pinyin", "english_to_pinyin"):
         if len(user_lower) == len(expected_lower) and len(user_lower) >= 2:
-            diffs = sum(1 for a, b in zip(user_lower, expected_lower) if a != b)
+            diffs = sum(1 for a, b in zip(user_lower, expected_lower, strict=False) if a != b)
             if diffs == 1:
                 diff_pos = next(
-                    i for i, (a, b) in enumerate(zip(user_lower, expected_lower))
+                    i for i, (a, b) in enumerate(zip(user_lower, expected_lower, strict=False))
                     if a != b
                 )
                 detail = (f"'{user_lower[diff_pos]}' instead of "
@@ -162,7 +162,7 @@ def format_near_miss_feedback(near_miss: tuple[NearMissType, str]) -> str:
 # ? = "I'm 50/50" — award partial credit (0.5)
 # N = "I don't know this" — no credit but no penalty, log as still_unknown
 
-def check_confidence_input(answer: str) -> Optional[str]:
+def check_confidence_input(answer: str) -> str | None:
     """Check if input is a confidence signal. Returns 'half', 'unknown', or None."""
     stripped = answer.strip()
     if stripped == "?":
@@ -268,7 +268,7 @@ def _skip_result(item: dict, modality: str, drill_type: str, answer: str) -> Dri
 def _handle_confidence(answer: str, item: dict, modality: str, drill_type: str,
                        correct_answer: str, show_fn, options: list = None,
                        input_fn=None, english_level: str = "full",
-                       allow_hint: bool = False) -> Optional[DrillResult]:
+                       allow_hint: bool = False) -> DrillResult | None:
     """Handle ? (50/50) and N (still_unknown) inputs.
 
     When options are provided and user types N on an MC drill, narrows to 2 choices
@@ -409,7 +409,7 @@ def _handle_narrowed_choice(item: dict, modality: str, drill_type: str,
 
 def _run_mc_input(item: dict, options: list, correct_answer: str,
                   modality: str, drill_type: str,
-                  show_fn, input_fn, english_level: str = "full") -> Union[DrillResult, str]:
+                  show_fn, input_fn, english_level: str = "full") -> DrillResult | str:
     """Handle the common MC input pattern: prompt, skip, confidence, choice parsing.
 
     Returns either a DrillResult (for skip/confidence shortcuts) or the
@@ -464,7 +464,7 @@ def classify_error_cause(user_answer: str, expected_answer: str,
         exp_tones = re.findall(r'\d', exp_num)
         if user_tones and exp_tones and user_tones != exp_tones:
             # Find first differing tone
-            for u, e in zip(user_tones, exp_tones):
+            for u, e in zip(user_tones, exp_tones, strict=False):
                 if u != e:
                     return f"tone_{e}_as_{u}"
             return "tone_confusion"

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Optional
 
 
-def get_grammar_points(conn: sqlite3.Connection, hsk_max: int = 9) -> List[dict]:
+def get_grammar_points(conn: sqlite3.Connection, hsk_max: int = 9) -> list[dict]:
     """Get grammar points up to the given HSK level."""
     rows = conn.execute("""
         SELECT * FROM grammar_point WHERE hsk_level <= ?
@@ -14,7 +14,7 @@ def get_grammar_points(conn: sqlite3.Connection, hsk_max: int = 9) -> List[dict]
     return [dict(r) for r in rows]
 
 
-def get_skills(conn: sqlite3.Connection, category: str = None) -> List[dict]:
+def get_skills(conn: sqlite3.Connection, category: str = None) -> list[dict]:
     """Get skills, optionally filtered by category."""
     if category:
         rows = conn.execute(
@@ -67,7 +67,7 @@ def get_core_lexicon_coverage(conn: sqlite3.Connection, user_id: int = 1) -> dic
     return result
 
 
-def get_core_catchup_items(conn: sqlite3.Connection, limit: int = 3, user_id: int = 1) -> List[dict]:
+def get_core_catchup_items(conn: sqlite3.Connection, limit: int = 3, user_id: int = 1) -> list[dict]:
     """Get core lexicon items that haven't been reviewed in 3+ sessions."""
     rows = conn.execute("""
         SELECT ci.* FROM content_item ci
@@ -83,7 +83,7 @@ def get_core_catchup_items(conn: sqlite3.Connection, limit: int = 3, user_id: in
     return [dict(r) for r in rows]
 
 
-def get_skill_coverage(conn: sqlite3.Connection, user_id: int = 1) -> List[dict]:
+def get_skill_coverage(conn: sqlite3.Connection, user_id: int = 1) -> list[dict]:
     """Get skill categories with their practice coverage."""
     rows = conn.execute("""
         SELECT s.category,
@@ -107,7 +107,7 @@ def get_skill_coverage(conn: sqlite3.Connection, user_id: int = 1) -> List[dict]
     return result
 
 
-def should_suggest_next_hsk(conn: sqlite3.Connection, user_id: int = 1) -> Optional[int]:
+def should_suggest_next_hsk(conn: sqlite3.Connection, user_id: int = 1) -> int | None:
     """Check if the learner should be prompted to load the next HSK level.
 
     Returns the next level to suggest, or None.

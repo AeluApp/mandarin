@@ -16,7 +16,7 @@ import secrets
 import sqlite3
 import time
 from pathlib import Path
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -138,7 +138,7 @@ def create_user(conn: sqlite3.Connection, email: str, password: str,
             raise ValueError("Invalid invite code")
         # Check expiration
         if row["expires_at"]:
-            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
             if now_str > row["expires_at"]:
                 raise ValueError("This invite code has expired")
         # Check usage limit
@@ -148,11 +148,11 @@ def create_user(conn: sqlite3.Connection, email: str, password: str,
 
     password_hash = generate_password_hash(password, method="pbkdf2:sha256")
     display_name = (display_name or email.split("@")[0]).strip()
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Email verification token (Item 16)
     verify_token = secrets.token_urlsafe(32)
-    verify_expires = (datetime.now(timezone.utc) + timedelta(hours=24)).strftime("%Y-%m-%d %H:%M:%S")
+    verify_expires = (datetime.now(UTC) + timedelta(hours=24)).strftime("%Y-%m-%d %H:%M:%S")
 
     if role not in ("student", "teacher"):
         role = "student"
@@ -219,8 +219,8 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
     locked_until = row["locked_until"] if row["locked_until"] else None
     if locked_until:
         try:
-            lock_time = datetime.strptime(locked_until, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-            if datetime.now(timezone.utc) < lock_time:
+            lock_time = datetime.strptime(locked_until, "%Y-%m-%d %H:%M:%S").replace(tzinfo=UTC)
+            if datetime.now(UTC) < lock_time:
                 logger.warning("Login attempt on locked account id=%d", row["id"])
                 log_security_event(conn, SecurityEvent.LOGIN_LOCKED, user_id=row["id"],
                                    severity=Severity.WARNING)
@@ -235,9 +235,9 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
     if not check_password_hash(row["password_hash"], password):
         # Increment failed attempts
         attempts = (row["failed_login_attempts"] or 0) + 1
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         if attempts >= MAX_FAILED_ATTEMPTS:
-            lock_until = (datetime.now(timezone.utc) + timedelta(minutes=LOCKOUT_DURATION_MINUTES)).strftime(
+            lock_until = (datetime.now(UTC) + timedelta(minutes=LOCKOUT_DURATION_MINUTES)).strftime(
                 "%Y-%m-%d %H:%M:%S"
             )
             conn.execute(
@@ -259,7 +259,7 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
         return None
 
     # Success — reset failed attempts and update login time
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "UPDATE user SET last_login_at = ?, failed_login_attempts = 0, locked_until = NULL, updated_at = ? WHERE id = ?",
         (now, now, row["id"]),
@@ -309,7 +309,7 @@ def create_reset_token(conn: sqlite3.Connection, email: str) -> str | None:
     # Always generate a token to prevent timing side-channel
     token = secrets.token_urlsafe(32)
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    expires = (datetime.now(timezone.utc) + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")
+    expires = (datetime.now(UTC) + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")
 
     if not user:
         # Constant time: still do the hash work but don't store
@@ -337,7 +337,7 @@ def reset_password(conn: sqlite3.Connection, token: str, new_password: str) -> b
     _validate_password(new_password)
 
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     row = conn.execute(
         """SELECT id, password_hash FROM user
@@ -376,7 +376,7 @@ def verify_email(conn: sqlite3.Connection, token: str) -> bool:
 
     Returns True on success, False if token is invalid or expired.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     row = conn.execute(
         """SELECT id FROM user
            WHERE email_verify_token = ? AND email_verify_expires > ? AND is_active = 1""",

@@ -32,7 +32,7 @@ def generate_error_explanation(
     error_type: str = "",
     times_wrong: int = 1,
     learner_hsk_level: int = 1,
-) -> Optional[str]:
+) -> str | None:
     """Generate an explanation for a persistent mistake. Returns None if not applicable."""
     # Gate check
     if times_wrong < _MIN_TIMES_WRONG and error_type not in _ALWAYS_EXPLAIN_TYPES:
@@ -42,7 +42,6 @@ def generate_error_explanation(
         return None
 
     # Build cache-friendly prompt
-    cache_key = f"error:{item_id}:{wrong_answer}"
     prompt = _build_error_prompt(
         correct_answer, wrong_answer, item_content, error_type,
         times_wrong, learner_hsk_level,

@@ -7,7 +7,7 @@ Gives the engine UX-level signal it cannot otherwise see.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from uuid import uuid4
 
 from ._base import _finding, _safe_query, _safe_query_all, _safe_scalar
@@ -98,7 +98,7 @@ def ingest_events(conn, events: list) -> int:
         if event_type not in EVENT_TYPES:
             continue
 
-        occurred_at = event.get("occurred_at", datetime.now(timezone.utc).isoformat())
+        occurred_at = event.get("occurred_at", datetime.now(UTC).isoformat())
 
         try:
             conn.execute("""
@@ -141,7 +141,7 @@ def ingest_events(conn, events: list) -> int:
 def analyze_ux_feedback(conn) -> list:
     """Analyze UX feedback signals for findings."""
     findings = []
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
 
     # Session frustration trend
     frustration = _safe_query_all(conn, """
@@ -270,7 +270,7 @@ def analyze_ux_feedback(conn) -> list:
 def analyze_interaction_events(conn) -> list:
     """Analyze interaction events for UX/engineering findings."""
     findings = []
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
 
     # Rage click hotspots
     rage_clicks = _safe_query_all(conn, """
@@ -410,7 +410,7 @@ def register_release(conn, app_version: str, release_notes=None,
     Returns the release id.
     """
     release_id = str(uuid4())
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     metrics = _snapshot_all_metrics(conn)
 
     try:
@@ -457,7 +457,7 @@ def analyze_release_regressions(conn) -> list:
     for release in pending:
         # Take post-release snapshot
         post_metrics = _snapshot_all_metrics(conn)
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         try:
             conn.execute("""
@@ -563,7 +563,7 @@ def _infer_likely_cause(release, dimension):
 
 def get_ux_summary(conn, lookback_days=14) -> dict:
     """Aggregated UX signal: feedback trends, rage clicks, abandonment."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     # Session completion rate
     completion = _safe_query(conn, """
@@ -629,7 +629,7 @@ def get_ux_summary(conn, lookback_days=14) -> dict:
 
 def get_screen_health(conn, lookback_days=14) -> list:
     """Per-screen health: avg time, rage clicks, abandonment, friction score."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
+    cutoff = (datetime.now(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%d %H:%M:%S")
 
     screens = _safe_query_all(conn, """
         SELECT screen_name, COUNT(*) as visit_count

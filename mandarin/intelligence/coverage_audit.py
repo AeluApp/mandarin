@@ -6,7 +6,7 @@ Emits findings for actionable gaps.
 """
 
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from uuid import uuid4
 
 from ._base import _finding, _safe_scalar
@@ -148,7 +148,7 @@ def log_coverage_snapshot(conn) -> int:
 
     Returns the number of rows inserted.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     rows = 0
     for entry in COVERAGE_MAP:
         try:

@@ -15,7 +15,7 @@ Alerts trigger actions. Actions are logged. The admin sees a digest.
 import json
 import logging
 import threading
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 from .. import db
 from ..counter_metrics import compute_full_assessment, save_snapshot
@@ -85,7 +85,7 @@ def _run_loop():
 
 def _daemon_tick(conn):
     """Single daemon cycle — compute, store, action, enforce."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
     digest_entries = []
 
@@ -119,7 +119,7 @@ def _daemon_tick(conn):
             )
 
             # ── 3. Save snapshot ──
-            snapshot_id = save_snapshot(conn, assessment, user_id=user_id)
+            save_snapshot(conn, assessment, user_id=user_id)
             digest_entries.append(
                 f"ASSESSED user={user_id}: {overall} ({alert_count} alerts, {critical_count} critical)"
             )

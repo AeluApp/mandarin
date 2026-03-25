@@ -11,7 +11,7 @@ import json
 import logging
 import math
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .audit import log_audit_event
 
@@ -58,7 +58,7 @@ def check_srm(
 
     # Expected counts based on ratio
     expected = [total * expected_ratio, total * (1 - expected_ratio)]
-    chi2 = sum((obs - exp) ** 2 / exp for obs, exp in zip(n_values, expected) if exp > 0)
+    chi2 = sum((obs - exp) ** 2 / exp for obs, exp in zip(n_values, expected, strict=False) if exp > 0)
 
     # Chi-squared p-value approximation (1 df)
     p_value = _chi2_sf(chi2, df=1)
@@ -68,7 +68,7 @@ def check_srm(
         "passed": passed,
         "chi2": round(chi2, 4),
         "p_value": round(p_value, 6),
-        "n_per_variant": dict(zip(variant_names, n_values)),
+        "n_per_variant": dict(zip(variant_names, n_values, strict=False)),
         "total": total,
         "observed_ratio": round(n_values[0] / total, 4) if total > 0 else None,
         "expected_ratio": expected_ratio,
@@ -88,7 +88,7 @@ def check_srm(
     if not passed:
         logger.warning(
             "SRM DETECTED for experiment %d: chi2=%.4f, p=%.6f, counts=%s",
-            experiment_id, chi2, p_value, dict(zip(variant_names, n_values)),
+            experiment_id, chi2, p_value, dict(zip(variant_names, n_values, strict=False)),
         )
 
     return result
@@ -328,7 +328,7 @@ def _persist_balance_check(
                 check_type,
                 int(passed),
                 json.dumps(details),
-                datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+                datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
             ),
         )
         conn.commit()

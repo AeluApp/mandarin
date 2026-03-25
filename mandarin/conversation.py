@@ -258,7 +258,7 @@ def run_dialogue_drill(scenario: dict, show_fn, input_fn,
     assist_count = sum(1 for x in all_feedback if x[0] == "assist")
     feedback_parts = []
     if probe_results:
-        probe_pct = sum(1 for p in probe_results if p) / len(probe_results)
+        sum(1 for p in probe_results if p) / len(probe_results)
         feedback_parts.append(f"probes: {sum(1 for p in probe_results if p)}/{len(probe_results)}")
     if assist_count:
         feedback_parts.append(f"assist used: {assist_count}x")
@@ -281,7 +281,7 @@ _STOP_WORDS = {"the", "a", "is", "to", "in", "on", "of", "it", "i", "you",
 
 
 def _run_comprehension_probe(chosen: dict, options: list,
-                              show_fn, input_fn) -> Optional[bool]:
+                              show_fn, input_fn) -> bool | None:
     """Run a follow-up meaning probe after a dialogue selection.
 
     Always runs a brief MC meaning probe: "Which character is in your answer?"

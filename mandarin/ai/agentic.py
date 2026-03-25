@@ -17,7 +17,7 @@ import json
 import logging
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ if BaseModel is not None:
         usage_context: str = Field(description="Primary usage context")
         register: str = Field(description="Formal/neutral/casual register")
         example_sentence: str = Field(description="Natural example sentence")
-        notes: Optional[str] = Field(default=None, description="Additional usage notes")
+        notes: str | None = Field(default=None, description="Additional usage notes")
 
     class TutorAnalysisOutput(BaseModel):
         """Schema for tutor_analysis prompt output."""
@@ -72,7 +72,7 @@ if BaseModel is not None:
         """Schema for error_explanation prompt output."""
         explanation: str = Field(description="Why this error occurred")
         correct_usage: str = Field(description="Correct usage pattern")
-        mnemonic: Optional[str] = Field(default=None, description="Memory aid")
+        mnemonic: str | None = Field(default=None, description="Memory aid")
 
     # Registry mapping prompt keys to their Pydantic models
     OUTPUT_SCHEMA_REGISTRY = {
@@ -86,7 +86,7 @@ else:
     OUTPUT_SCHEMA_REGISTRY = {}
 
 
-def validate_structured_output(raw_json: dict, prompt_key: str) -> tuple[bool, Optional[str]]:
+def validate_structured_output(raw_json: dict, prompt_key: str) -> tuple[bool, str | None]:
     """Validate LLM output against Pydantic schema.
 
     Returns (is_valid, error_message).
@@ -115,7 +115,7 @@ def retry_with_structured_output(
     prompt_key: str,
     max_retries: int = 3,
     temperature: float = 0.7,
-) -> Optional[dict]:
+) -> dict | None:
     """Generate structured output with validation and retry.
 
     Tries Instructor (sampling-level enforcement) first, falls back to
@@ -194,10 +194,10 @@ def run_parallel_audit(conn: sqlite3.Connection, analyzers: list, max_workers: i
     node_results = []
 
     def _run_analyzer(analyzer):
-        start = datetime.now(timezone.utc)
+        start = datetime.now(UTC)
         try:
             results = analyzer(conn)
-            elapsed = (datetime.now(timezone.utc) - start).total_seconds()
+            elapsed = (datetime.now(UTC) - start).total_seconds()
             return {
                 "analyzer": analyzer.__name__,
                 "findings": results,
@@ -205,7 +205,7 @@ def run_parallel_audit(conn: sqlite3.Connection, analyzers: list, max_workers: i
                 "error": None,
             }
         except Exception as e:
-            elapsed = (datetime.now(timezone.utc) - start).total_seconds()
+            elapsed = (datetime.now(UTC) - start).total_seconds()
             logger.warning("Analyzer %s failed: %s", analyzer.__name__, e)
             return {
                 "analyzer": analyzer.__name__,
@@ -319,7 +319,7 @@ def queue_auto_generation(
     conn: sqlite3.Connection,
     gap: dict,
     generation_brief: str,
-) -> Optional[int]:
+) -> int | None:
     """Queue a content generation task from a detected gap."""
     if check_content_pipeline_circuit_breaker(conn):
         logger.info("Content pipeline circuit breaker is OPEN — skipping auto-generation")
@@ -431,7 +431,7 @@ def log_competitor_signal(
     title: str,
     detail: str,
     source_url: str = None,
-) -> Optional[int]:
+) -> int | None:
     """Log a competitor intelligence signal."""
     try:
         cursor = conn.execute("""
@@ -451,7 +451,7 @@ def log_research_signal(
     finding: str,
     applicability_score: float,
     doi: str = None,
-) -> Optional[int]:
+) -> int | None:
     """Log a research finding signal."""
     try:
         cursor = conn.execute("""
@@ -833,9 +833,9 @@ def _execute_parameter_change(conn: sqlite3.Connection, work_order) -> dict:
     via the parameter registry so the influence model can learn from it.
     """
     try:
-        target_file = work_order["target_file"]
+        work_order["target_file"]
         target_param = work_order["target_parameter"]
-        direction = work_order["direction"]
+        work_order["direction"]
 
         if not target_param:
             return {"status": "error", "reason": "no target_parameter specified"}

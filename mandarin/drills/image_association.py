@@ -52,7 +52,7 @@ def _get_same_level_distractors(conn, correct_item: dict, n: int = 3) -> list:
 
 def run_image_association_drill(item: dict, conn, show_fn, input_fn,
                                 prominent: bool = True,
-                                english_level: str = "full") -> Optional[DrillResult]:
+                                english_level: str = "full") -> DrillResult | None:
     """Run an image association drill: show image, pick matching hanzi.
 
     Returns None if the item has no image_url — caller should fall back to

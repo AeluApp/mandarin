@@ -49,7 +49,7 @@ def lti_login():
         issuer = request.values.get("iss", "")
         client_id = request.values.get("client_id", "")
         login_hint = request.values.get("login_hint", "")
-        target_link_uri = request.values.get("target_link_uri", "")
+        request.values.get("target_link_uri", "")
         lti_message_hint = request.values.get("lti_message_hint", "")
 
         with db.connection() as conn:
@@ -309,7 +309,7 @@ def lti_grade_passback():
     # POST score to line item
     import datetime as _dt
     score_payload = {
-        "timestamp": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+        "timestamp": _dt.datetime.now(_dt.UTC).isoformat(),
         "scoreGiven": score * 100,
         "scoreMaximum": 100,
         "activityProgress": "Completed",

@@ -30,7 +30,7 @@ _CEDICT_RE = re.compile(
 )
 
 
-def parse_cedict_line(line: str) -> Optional[dict]:
+def parse_cedict_line(line: str) -> dict | None:
     """Parse a single CC-CEDICT line into a dict.
 
     Returns None for comment lines or unparseable lines.
@@ -49,7 +49,7 @@ def parse_cedict_line(line: str) -> Optional[dict]:
     }
 
 
-def load_cedict_file(path: Optional[Path] = None) -> list[dict]:
+def load_cedict_file(path: Path | None = None) -> list[dict]:
     """Load and parse a CC-CEDICT file. Returns list of entry dicts."""
     path = path or CEDICT_PATH
     if not path.exists():
@@ -57,7 +57,7 @@ def load_cedict_file(path: Optional[Path] = None) -> list[dict]:
         return []
 
     entries = []
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             entry = parse_cedict_line(line)
             if entry:
@@ -66,7 +66,7 @@ def load_cedict_file(path: Optional[Path] = None) -> list[dict]:
     return entries
 
 
-def load_cedict_to_db(conn: sqlite3.Connection, path: Optional[Path] = None) -> int:
+def load_cedict_to_db(conn: sqlite3.Connection, path: Path | None = None) -> int:
     """Load CC-CEDICT entries into the dictionary_entry table.
 
     Returns the number of entries inserted. Skips entries already present

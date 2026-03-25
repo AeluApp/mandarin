@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import _finding, _safe_query, _safe_query_all, _safe_scalar
 
@@ -245,7 +245,7 @@ def generate_engagement_snapshot(
 ) -> dict:
     """Generate and upsert an engagement snapshot for a user."""
     if snapshot_date is None:
-        snapshot_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
     result = compute_abandonment_risk(conn, user_id)
     features = result["features"]

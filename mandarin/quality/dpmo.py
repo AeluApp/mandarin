@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import logging
 import math
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
 # Sigma lookup table: (lower_dpmo_bound, upper_dpmo_bound) -> sigma
 # Based on standard Six Sigma conversion tables.
-_SIGMA_TABLE: List[tuple[float, float, float]] = [
+_SIGMA_TABLE: list[tuple[float, float, float]] = [
     (933200, 1000000, 0.0),
     (841300, 933200, 0.5),
     (691500, 841300, 1.0),
@@ -48,7 +48,7 @@ def sigma_from_dpmo(dpmo: float) -> float:
     return 0.0
 
 
-def calculate_dpmo(conn, days: int = 30) -> Dict[str, Any]:
+def calculate_dpmo(conn, days: int = 30) -> dict[str, Any]:
     """Calculate DPMO from review_event data.
 
     Opportunity = each review_event row.
@@ -58,7 +58,7 @@ def calculate_dpmo(conn, days: int = 30) -> Dict[str, Any]:
     Returns dict with total_opportunities, total_defects, dpmo,
     sigma_level, period_days.
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
 
     row = conn.execute(
         """
@@ -90,14 +90,14 @@ def calculate_dpmo(conn, days: int = 30) -> Dict[str, Any]:
     }
 
 
-def get_dpmo_trend(conn, periods: int = 12, period_days: int = 7) -> List[Dict[str, Any]]:
+def get_dpmo_trend(conn, periods: int = 12, period_days: int = 7) -> list[dict[str, Any]]:
     """Return DPMO values for consecutive periods, most recent last.
 
     Each entry: {period_start, period_end, dpmo, sigma_level,
     total_opportunities, total_defects}.
     """
-    now = datetime.now(timezone.utc)
-    results: List[Dict[str, Any]] = []
+    now = datetime.now(UTC)
+    results: list[dict[str, Any]] = []
 
     for i in range(periods - 1, -1, -1):
         period_end = now - timedelta(days=i * period_days)

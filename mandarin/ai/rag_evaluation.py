@@ -9,7 +9,7 @@ Evaluates retrieval quality:
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ except ImportError:
 def build_faiss_index(
     conn: sqlite3.Connection,
     index_name: str = "content_items",
-    data_dir: Optional[str] = None,
+    data_dir: str | None = None,
 ) -> dict:
     """Build a FAISS IVF index from content_item + grammar_point embeddings.
 
@@ -109,7 +109,7 @@ def build_faiss_index(
         json.dump(ids, f)
 
     # Update DB metadata
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("DELETE FROM rag_faiss_index WHERE index_name = ?", (index_name,))
         conn.execute("""
@@ -242,7 +242,7 @@ def _faiss_retrieve(
     scores, indices = index.search(query_vec, min(top_k, index.ntotal))
 
     results = []
-    for score, idx in zip(scores[0], indices[0]):
+    for score, idx in zip(scores[0], indices[0], strict=False):
         if idx < 0 or idx >= len(id_map):
             continue
         item_type, item_id = id_map[idx]
@@ -284,8 +284,8 @@ def evaluate_retrieval(
     conn: sqlite3.Connection,
     query: str,
     retrieved_docs: list[dict],
-    generated_output: Optional[str] = None,
-    prompt_key: Optional[str] = None,
+    generated_output: str | None = None,
+    prompt_key: str | None = None,
 ) -> dict:
     """Compute RAGAS-inspired metrics for a retrieval result.
 
@@ -363,7 +363,7 @@ def _compute_faithfulness(
     query: str,
     retrieved_docs: list[dict],
     generated_output: str,
-) -> Optional[float]:
+) -> float | None:
     """Use Qwen to judge faithfulness of generated output to retrieved docs."""
     from .ollama_client import generate as ollama_generate, is_ollama_available
     from .genai_layer import _parse_llm_json

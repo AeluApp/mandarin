@@ -177,7 +177,7 @@ class ContentDrafter:
     """Draft blog posts targeting keywords."""
 
     def draft_blog_post(
-        self, topic: KeywordTarget, research: Optional[list[ForumThread]] = None
+        self, topic: KeywordTarget, research: list[ForumThread] | None = None
     ) -> BlogDraft:
         outline = self._generate_outline(topic)
         title, meta = self._generate_meta(topic)
@@ -215,7 +215,7 @@ class ContentDrafter:
 
     def _generate_body(
         self, topic: KeywordTarget, outline: list[str],
-        research: Optional[list[ForumThread]] = None,
+        research: list[ForumThread] | None = None,
     ) -> str:
         sections = []
         for heading in outline:
@@ -276,7 +276,7 @@ class SEOMetadataGenerator:
 class ContentCalendar:
     """Plan monthly content calendar."""
 
-    def plan_month(self, existing_posts: Optional[list[str]] = None) -> list[PlannedPost]:
+    def plan_month(self, existing_posts: list[str] | None = None) -> list[PlannedPost]:
         researcher = KeywordResearcher()
         gaps = researcher.find_content_gaps(existing_posts or [])
         prioritized = sorted(
@@ -323,7 +323,7 @@ class SEOManager:
     def generate_content_plan(self) -> list[PlannedPost]:
         return self.calendar.plan_month()
 
-    def draft_post(self, keyword: str) -> Optional[BlogDraft]:
+    def draft_post(self, keyword: str) -> BlogDraft | None:
         target = next((k for k in self.researcher.keywords if k.keyword == keyword), None)
         if not target:
             return None

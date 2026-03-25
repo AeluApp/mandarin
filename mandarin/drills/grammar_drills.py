@@ -48,7 +48,7 @@ def _get_error_sentences():
 # ── Complement Drill ──────────────────────────────
 
 def run_complement_drill(item: dict, conn, show_fn, input_fn,
-                         prominent: bool = True) -> Optional[DrillResult]:
+                         prominent: bool = True) -> DrillResult | None:
     """Fill-in-the-blank complement drill (MC).
 
     Covers result, potential, direction, and degree complements.
@@ -118,7 +118,7 @@ def run_complement_drill(item: dict, conn, show_fn, input_fn,
 # ── 把/被 Drill ──────────────────────────────
 
 def run_ba_bei_drill(item: dict, conn, show_fn, input_fn,
-                     prominent: bool = True) -> Optional[DrillResult]:
+                     prominent: bool = True) -> DrillResult | None:
     """把/被 pattern drill — rewrite, identify, or fill sub-formats."""
     entries = _get_ba_bei_patterns()
     item_level = item.get("hsk_level") or 4
@@ -201,7 +201,7 @@ def run_ba_bei_drill(item: dict, conn, show_fn, input_fn,
 # ── Error Correction Drill ──────────────────────────────
 
 def run_error_correction_drill(item: dict, conn, show_fn, input_fn,
-                               prominent: bool = True) -> Optional[DrillResult]:
+                               prominent: bool = True) -> DrillResult | None:
     """Show a sentence with an error → pick the error span (MC)."""
     entries = _get_error_sentences()
     item_level = item.get("hsk_level") or 3

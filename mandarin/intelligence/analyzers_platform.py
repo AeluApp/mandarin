@@ -23,9 +23,9 @@ _PROJECT_ROOT = os.path.dirname(
 def _read_file(path: str) -> str | None:
     """Read a file, returning None on any error."""
     try:
-        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        with open(path, encoding="utf-8", errors="replace") as fh:
             return fh.read()
-    except (OSError, IOError):
+    except OSError:
         return None
 
 
@@ -170,7 +170,7 @@ def _analyze_platform_health(conn) -> list[dict]:
         ),
     ]
     missing_assets = []
-    for asset_dir, platform_name, rel_path in asset_checks:
+    for asset_dir, platform_name, _rel_path in asset_checks:
         if not os.path.isdir(asset_dir):
             missing_assets.append(platform_name)
 
@@ -204,7 +204,6 @@ def _analyze_platform_health(conn) -> list[dict]:
         if rows:
             platform_sessions = {r["platform"]: r["cnt"] for r in rows}
             # Identify platforms with route definitions but zero sessions
-            known_platforms = {"web", "ios", "android", "flutter", "desktop"}
             defined_platforms = set()
 
             # Web always has routes
@@ -341,7 +340,7 @@ def _analyze_flutter_api_parity(conn) -> list[dict]:
     if flask_api_routes:
         total_flask = len(flask_api_routes)
         total_flutter = len(flutter_endpoints)
-        coverage_pct = (total_flutter / total_flask * 100) if total_flask > 0 else 0
+        (total_flutter / total_flask * 100) if total_flask > 0 else 0
 
         missing_in_flutter = flask_api_routes - flutter_endpoints
         # Also check by prefix match (Flutter may abbreviate)
@@ -405,7 +404,7 @@ def _analyze_flutter_api_parity(conn) -> list[dict]:
     flutter_lib = os.path.join(_PROJECT_ROOT, "flutter_app", "lib")
     flutter_screens: list[str] = []
     if os.path.isdir(flutter_lib):
-        for root, _dirs, files in os.walk(flutter_lib):
+        for _root, _dirs, files in os.walk(flutter_lib):
             for fname in files:
                 if fname.endswith("_screen.dart"):
                     flutter_screens.append(fname.replace("_screen.dart", ""))

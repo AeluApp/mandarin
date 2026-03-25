@@ -9,8 +9,9 @@ Each step's output is checkpointed to DB; resume/retry from failure point.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
-from typing import Callable, Optional
+from datetime import datetime, timezone, UTC
+from typing import Optional
+from collections.abc import Callable
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +28,7 @@ class DurableWorkflow:
         self,
         conn: sqlite3.Connection,
         workflow_type: str,
-        workflow_data: Optional[dict] = None,
+        workflow_data: dict | None = None,
         max_retries: int = 3,
     ):
         self.conn = conn
@@ -35,13 +36,13 @@ class DurableWorkflow:
         self.workflow_data = workflow_data or {}
         self.max_retries = max_retries
         self._steps: list[dict] = []
-        self._execution_id: Optional[int] = None
+        self._execution_id: int | None = None
 
     def add_step(
         self,
         name: str,
         fn: Callable,
-        rollback_fn: Optional[Callable] = None,
+        rollback_fn: Callable | None = None,
     ) -> "DurableWorkflow":
         """Add a step to the workflow. Returns self for chaining."""
         self._steps.append({
@@ -54,7 +55,7 @@ class DurableWorkflow:
 
     def execute(self) -> dict:
         """Run all steps, checkpointing after each. Returns result dict."""
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         # Create execution record
         cursor = self.conn.execute("""
@@ -142,7 +143,7 @@ class DurableWorkflow:
         for i in range(start_from, len(self._steps)):
             step = self._steps[i]
             step_name = step["name"]
-            now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
             # Mark step as running
             self.conn.execute("""
@@ -156,7 +157,7 @@ class DurableWorkflow:
 
             try:
                 result = step["fn"](self.conn, outputs)
-                now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
                 # Checkpoint success
                 output_json = json.dumps(result, ensure_ascii=False, default=str) if result else None
@@ -170,7 +171,7 @@ class DurableWorkflow:
                 outputs[step_name] = result
 
             except Exception as e:
-                now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
                 error_msg = str(e)
                 logger.warning("Workflow %s step '%s' failed: %s",
                                self.workflow_type, step_name, error_msg)
@@ -197,7 +198,7 @@ class DurableWorkflow:
                 }
 
         # All steps completed
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         self.conn.execute("""
             UPDATE workflow_execution SET status = 'completed', completed_at = ?
             WHERE id = ?
@@ -211,7 +212,7 @@ class DurableWorkflow:
         }
 
     @property
-    def execution_id(self) -> Optional[int]:
+    def execution_id(self) -> int | None:
         return self._execution_id
 
 
@@ -230,7 +231,7 @@ def get_stale_workflows(conn: sqlite3.Connection, max_age_hours: int = 24) -> li
         return []
 
 
-def get_workflow_status(conn: sqlite3.Connection, execution_id: int) -> Optional[dict]:
+def get_workflow_status(conn: sqlite3.Connection, execution_id: int) -> dict | None:
     """Get status of a workflow execution including all step details."""
     try:
         exe = conn.execute(

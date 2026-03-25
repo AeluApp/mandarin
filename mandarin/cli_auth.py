@@ -8,7 +8,7 @@ AUTH_DIR = Path.home() / ".mandarin"
 AUTH_FILE = AUTH_DIR / "auth.json"
 
 
-def get_cli_user_id() -> Optional[int]:
+def get_cli_user_id() -> int | None:
     """Read ~/.mandarin/auth.json and return user_id, or None if not logged in."""
     auth = get_cli_auth()
     if auth:
@@ -16,7 +16,7 @@ def get_cli_user_id() -> Optional[int]:
     return None
 
 
-def get_cli_auth() -> Optional[dict]:
+def get_cli_auth() -> dict | None:
     """Read ~/.mandarin/auth.json and return full dict {user_id, email}, or None."""
     if not AUTH_FILE.exists():
         return None

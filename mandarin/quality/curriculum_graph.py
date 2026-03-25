@@ -47,7 +47,7 @@ def build_curriculum_graph(conn, user_id: int = None) -> dict:
                 graph[p].append((c, _estimate_mastery_time(conn, user_id, c)))
 
     # Within-level edges: sequential ordering
-    for level, item_ids in by_level.items():
+    for _level, item_ids in by_level.items():
         for i in range(len(item_ids) - 1):
             weight = _estimate_mastery_time(conn, user_id, item_ids[i + 1])
             graph[item_ids[i]].append((item_ids[i + 1], weight))

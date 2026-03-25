@@ -11,7 +11,7 @@ Zero Claude tokens at runtime — all computations are deterministic.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -57,7 +57,7 @@ def _upsert_pattern_state(
         WHERE user_id=? AND grammar_point_id=?
     """, (user_id, grammar_point_id)).fetchone()
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     if not existing:
         conn.execute("""

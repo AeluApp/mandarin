@@ -18,7 +18,7 @@ Write operations limited to review approve/reject.
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -795,7 +795,7 @@ def create_mcp_server():
     def approve_review_item(item_id: int) -> str:
         """Approve a content generation queue item."""
         from .. import db
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         with db.connection() as conn:
             result = conn.execute("""
                 UPDATE content_generation_queue
@@ -811,7 +811,7 @@ def create_mcp_server():
     def reject_review_item(item_id: int, reason: str = "") -> str:
         """Reject a content generation queue item with reason."""
         from .. import db
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         with db.connection() as conn:
             result = conn.execute("""
                 UPDATE content_generation_queue

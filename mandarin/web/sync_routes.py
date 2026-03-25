@@ -9,7 +9,7 @@ import sqlite3
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .. import db
 from .api_errors import api_error, api_error_handler, AUTH_REQUIRED, VALIDATION_ERROR
@@ -190,7 +190,7 @@ def _process_drill_result(conn, user_id, data, timestamp):
     ).fetchone()
 
     if row:
-        ts = timestamp or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        ts = timestamp or datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         if correct:
             conn.execute(
                 "UPDATE progress SET streak_correct = streak_correct + 1, streak_incorrect = 0, "

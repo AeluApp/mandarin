@@ -1,7 +1,7 @@
 """Shared middleware helpers for route files."""
 
 import logging
-from datetime import date as dt_date, datetime, timedelta, timezone
+from datetime import date as dt_date, datetime, timedelta, timezone, UTC
 
 from flask import abort, request
 from flask_login import current_user
@@ -65,7 +65,7 @@ def _compute_streak(conn, user_id: int = 1) -> int:
     if not dates:
         return 0
     # Use UTC date to match SQLite's date() which operates in UTC
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(UTC).date()
     if dates[0] < today - timedelta(days=1):
         return 0
     streak = 1

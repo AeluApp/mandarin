@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
 
 def _log_action(conn: sqlite3.Connection, action_type: str,
                 metric_name: str, severity: str,
-                details: Optional[Dict] = None) -> None:
+                details: dict | None = None) -> None:
     """Record an action taken in response to a counter-metric alert."""
     if not _table_exists(conn, "counter_metric_action_log"):
         return
@@ -426,7 +426,7 @@ ACTION_RULES = {
 # ═══════════════════════════════════════════════════════════════════════
 
 def execute_actions_for_assessment(conn: sqlite3.Connection,
-                                   assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
+                                   assessment: dict[str, Any]) -> list[dict[str, Any]]:
     """Process all alerts from a counter-metric assessment and execute actions.
 
     Returns a list of actions taken.
@@ -456,8 +456,8 @@ def execute_actions_for_assessment(conn: sqlite3.Connection,
 
 
 def _execute_single_action(conn: sqlite3.Connection,
-                           action_spec: Dict[str, Any],
-                           alert: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+                           action_spec: dict[str, Any],
+                           alert: dict[str, Any]) -> dict[str, Any] | None:
     """Execute a single action from an action spec.
 
     Returns a result dict, or None if the action was skipped.
@@ -481,14 +481,14 @@ def _execute_single_action(conn: sqlite3.Connection,
 
 
 def _action_scheduler_adjust(conn: sqlite3.Connection, action_name: str,
-                              params: Dict, reason: str,
-                              alert: Dict) -> Dict[str, Any]:
+                              params: dict, reason: str,
+                              alert: dict) -> dict[str, Any]:
     """Apply a scheduler adjustment in response to a counter-metric alert.
 
     Rather than directly mutating the scheduler state, we write adjustment
     records that the scheduler reads on next session plan.
     """
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # Store adjustment as a lifecycle event for the scheduler to pick up
     if _table_exists(conn, "lifecycle_event"):
@@ -515,8 +515,8 @@ def _action_scheduler_adjust(conn: sqlite3.Connection, action_name: str,
     }
 
 
-def _action_experiment_propose(conn: sqlite3.Connection, params: Dict,
-                                reason: str, alert: Dict) -> Optional[Dict[str, Any]]:
+def _action_experiment_propose(conn: sqlite3.Connection, params: dict,
+                                reason: str, alert: dict) -> dict[str, Any] | None:
     """Propose an A/B experiment in response to a counter-metric alert."""
     if not _table_exists(conn, "experiment_proposal"):
         return None
@@ -539,7 +539,7 @@ def _action_experiment_propose(conn: sqlite3.Connection, params: Dict,
     if existing_exp:
         return {"type": "experiment_propose", "action": "skipped_running", "name": name}
 
-    now = datetime.now(timezone.utc).isoformat()
+    datetime.now(UTC).isoformat()
     hypothesis = params.get("hypothesis", reason)
 
     scope = params.get("scope", "parameter")
@@ -569,10 +569,10 @@ def _action_experiment_propose(conn: sqlite3.Connection, params: Dict,
 
 
 def _action_notification(conn: sqlite3.Connection, action_name: str,
-                          params: Dict, reason: str,
-                          alert: Dict) -> Dict[str, Any]:
+                          params: dict, reason: str,
+                          alert: dict) -> dict[str, Any]:
     """Create a notification/alert for admin review."""
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     message = params.get("message", reason)
 
     # Log as lifecycle event for admin dashboard
@@ -599,8 +599,8 @@ def _action_notification(conn: sqlite3.Connection, action_name: str,
     }
 
 
-def _action_feature_flag(conn: sqlite3.Connection, params: Dict,
-                          reason: str, alert: Dict) -> Optional[Dict[str, Any]]:
+def _action_feature_flag(conn: sqlite3.Connection, params: dict,
+                          reason: str, alert: dict) -> dict[str, Any] | None:
     """Toggle a feature flag in response to a counter-metric alert."""
     try:
         from .feature_flags import set_flag
@@ -630,7 +630,7 @@ def _action_feature_flag(conn: sqlite3.Connection, params: Dict,
 # PRODUCT RULE ENFORCEMENT
 # ═══════════════════════════════════════════════════════════════════════
 
-def enforce_product_rules(assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
+def enforce_product_rules(assessment: dict[str, Any]) -> list[dict[str, Any]]:
     """Check the 6 product rules and return any violations.
 
     Rule 1: No learning KPI ships alone.
@@ -648,7 +648,7 @@ def enforce_product_rules(assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
     integrity = assessment.get("integrity", {})
     dr_7 = integrity.get("delayed_recall_7d", {}).get("accuracy")
     transfer = integrity.get("transfer_accuracy", {}).get("accuracy")
-    prod_acc = integrity.get("production_vs_recognition_gap", {}).get("production_accuracy")
+    integrity.get("production_vs_recognition_gap", {}).get("production_accuracy")
 
     if dr_7 is not None and dr_7 < 0.50:
         violations.append({
@@ -737,7 +737,7 @@ def enforce_product_rules(assessment: Dict[str, Any]) -> List[Dict[str, Any]]:
 
 
 def get_action_history(conn: sqlite3.Connection,
-                       limit: int = 50) -> List[Dict[str, Any]]:
+                       limit: int = 50) -> list[dict[str, Any]]:
     """Return recent counter-metric actions for audit trail."""
     if not _table_exists(conn, "counter_metric_action_log"):
         return []

@@ -15,7 +15,7 @@ import io
 import logging
 import secrets
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
@@ -592,7 +592,7 @@ def bulk_invite(classroom_id):
 def _gather_teacher_notifications(conn, teacher_id):
     """Scan teacher-relevant systems for actionable alerts."""
     notifs = []
-    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Get teacher's classrooms
     classrooms = conn.execute(
@@ -1565,7 +1565,7 @@ def submit_assignment(assignment_id):
                 return jsonify({"error": "Already submitted"}), 400
 
             # Determine if late
-            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
             status = "completed"
             if assignment["due_date"] and now_str > assignment["due_date"]:
                 status = "late"

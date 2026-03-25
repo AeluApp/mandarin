@@ -663,7 +663,7 @@ def _analyze_modality_health(conn) -> list[dict]:
         """, default=0)
         conv_adoption = round(conv_users / max(1, active_users) * 100, 1)
 
-        conv_quality = _safe_query(conn, """
+        _safe_query(conn, """
             SELECT AVG(score) as avg_score, COUNT(*) as attempts
             FROM review_event
             WHERE drill_type = 'dialogue'
@@ -692,7 +692,7 @@ def _analyze_modality_health(conn) -> list[dict]:
         """, default=0)
         grammar_adoption = round(grammar_users / max(1, active_users) * 100, 1)
 
-        grammar_quality = _safe_query(conn, """
+        _safe_query(conn, """
             SELECT AVG(CAST(drill_correct AS REAL) / NULLIF(drill_attempts, 0)) as avg_accuracy,
                    COUNT(*) as learners
             FROM grammar_progress

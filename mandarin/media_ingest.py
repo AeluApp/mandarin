@@ -26,7 +26,7 @@ def parse_subtitles(subtitle_path: str) -> list[dict]:
     content = path.read_text(encoding="utf-8", errors="replace")
 
     segments = []
-    is_vtt = path.suffix.lower() == ".vtt" or content.strip().startswith("WEBVTT")
+    path.suffix.lower() == ".vtt" or content.strip().startswith("WEBVTT")
 
     # Split into blocks
     blocks = re.split(r"\n\s*\n", content.strip())

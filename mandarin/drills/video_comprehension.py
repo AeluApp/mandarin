@@ -27,7 +27,7 @@ _COMPREHENSION_TEMPLATES = [
 ]
 
 
-def _get_media_clip(conn, item: dict) -> Optional[dict]:
+def _get_media_clip(conn, item: dict) -> dict | None:
     """Look up a media clip associated with this content item.
 
     Checks media_watch for any clip whose vocab overlaps with the item's hanzi.
@@ -129,7 +129,7 @@ def _update_media_watch(conn, media_clip: dict, questions_correct: int,
 
 def run_video_comprehension_drill(item: dict, conn, show_fn, input_fn,
                                    prominent: bool = True,
-                                   english_level: str = "full") -> Optional[DrillResult]:
+                                   english_level: str = "full") -> DrillResult | None:
     """Run a video comprehension drill.
 
     Shows a video clip reference, then asks comprehension questions.

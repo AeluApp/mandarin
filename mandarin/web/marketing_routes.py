@@ -5,7 +5,7 @@ import json
 import logging
 import sqlite3
 import uuid
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 from flask import jsonify, request
 from flask_login import login_required, current_user
@@ -192,7 +192,7 @@ def register_marketing_routes(app):
             if not visitor_id or not partner_code:
                 return jsonify({"error": "visitor_id and partner_code are required"}), 400
 
-            now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
             with db.connection() as conn:
                 # Verify the referral record exists
@@ -369,7 +369,7 @@ def register_marketing_routes(app):
             if reason not in CANCELLATION_REASONS:
                 return jsonify({"error": "Invalid cancellation reason", "valid_reasons": sorted(CANCELLATION_REASONS)}), 400
 
-            now_utc = datetime.now(timezone.utc)
+            now_utc = datetime.now(UTC)
             # Access until end of current billing period (approximate: 30 days from now)
             access_until = (now_utc + timedelta(days=30)).strftime("%Y-%m-%d")
 
@@ -426,7 +426,7 @@ def register_marketing_routes(app):
             if duration_months not in (1, 2, 3):
                 return jsonify({"error": "duration_months must be 1, 2, or 3"}), 400
 
-            now_utc = datetime.now(timezone.utc)
+            now_utc = datetime.now(UTC)
             resume_date = (now_utc + timedelta(days=30 * duration_months)).strftime("%Y-%m-%d")
             reminder_date = (now_utc + timedelta(days=30 * duration_months - 7)).strftime("%Y-%m-%d")
 
@@ -579,7 +579,7 @@ def register_marketing_routes(app):
                 return jsonify({"error": "type must be nps, bug, or feature"}), 400
 
             rating = int(rating)
-            now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
             with db.connection() as conn:
                 # Ensure user_feedback table exists
@@ -614,7 +614,7 @@ def register_marketing_routes(app):
         try:
             user_id = str(current_user.id)
 
-            now_utc = datetime.now(timezone.utc)
+            now_utc = datetime.now(UTC)
             next_billing_date = (now_utc + timedelta(days=30)).strftime("%Y-%m-%d")
 
             with db.connection() as conn:
@@ -721,7 +721,7 @@ def register_marketing_routes(app):
                             created_at TEXT NOT NULL DEFAULT (datetime('now'))
                         )
                     """)
-                    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                    now_utc = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
                     conn.execute(
                         "INSERT INTO user_feedback (rating, comment, feedback_type, created_at) VALUES (?, ?, 'nps', ?)",
                         (score, comment, now_utc)

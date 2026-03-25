@@ -6,10 +6,11 @@ import sqlite3
 import time
 import traceback
 from dataclasses import dataclass, field, replace
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timezone, UTC
 from pathlib import Path
 from statistics import mean
-from typing import Callable, List, Optional
+from typing import List, Optional
+from collections.abc import Callable
 
 from . import db, display
 
@@ -149,7 +150,7 @@ class SessionState:
     """Mutable state for a running session."""
     session_id: int
     plan: SessionPlan
-    results: List[DrillResult] = field(default_factory=list)
+    results: list[DrillResult] = field(default_factory=list)
     current_index: int = 0
     boredom_flags: int = 0
     early_exit: bool = False
@@ -177,8 +178,8 @@ class SessionState:
 def run_session(conn, plan: SessionPlan,
                 show_fn: Callable, input_fn: Callable,
                 user_id: int = 1,
-                progress_fn: Optional[Callable] = None,
-                drill_meta_fn: Optional[Callable] = None,
+                progress_fn: Callable | None = None,
+                drill_meta_fn: Callable | None = None,
                 client_platform: str = "cli") -> SessionState:
     """Run a complete session from a plan.
 
@@ -967,7 +968,7 @@ def run_session(conn, plan: SessionPlan,
     if missed and not state.early_exit:
         show_fn("\n  ── One more look ──\n")
         retry_count = 0
-        for orig_result, drill in missed:
+        for _orig_result, drill in missed:
             if retry_count >= 3:
                 break
             if drill is None:
@@ -1081,7 +1082,7 @@ def _update_interference_drill_times(conn, drilled_item_ids: list) -> None:
     """Update interference_pairs timestamps after a session for cross-session spacing."""
     if not drilled_item_ids:
         return
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     placeholders = ",".join("?" * len(drilled_item_ids))
     try:
         conn.execute(f"""
@@ -1097,7 +1098,7 @@ def _update_interference_drill_times(conn, drilled_item_ids: list) -> None:
         pass  # Columns not yet migrated
 
 
-def _get_cadence(conn, user_id: int = 1) -> Optional[int]:
+def _get_cadence(conn, user_id: int = 1) -> int | None:
     """Sessions per week over the last 14 days, rounded to nearest int.
 
     Returns None if fewer than 2 sessions in the window.
@@ -1178,7 +1179,7 @@ def _show_mastery_stage(conn, content_item_id: int, modality: str,
 
 
 def _show_drill_label(drill: DrillItem, show_fn: Callable,
-                      seen_types: Optional[set] = None) -> None:
+                      seen_types: set | None = None) -> None:
     """Show a brief label for what kind of drill this is.
 
     Labels are derived from DRILL_REGISTRY — single source of truth.
@@ -1539,7 +1540,7 @@ def _show_real_world_task(conn, state: SessionState, show_fn: Callable) -> None:
             show_fn(f"\n{display.dim('Real-world practice: ' + task['task'])}")
 
 
-def _build_detail_lines(conn, state: SessionState, cadence, user_id: int = 1) -> List[str]:
+def _build_detail_lines(conn, state: SessionState, cadence, user_id: int = 1) -> list[str]:
     """Build secondary summary lines (shown only on [d] request)."""
     lines = []
     total = state.items_completed
@@ -1682,7 +1683,7 @@ _RELATEDNESS_NUDGES = [
 
 def _post_session_nudges(conn, show_fn, input_fn, user_id: int = 1):
     """Post-session behavioral nudges: intention, pre-commitment, relatedness."""
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     profile = db.get_profile(conn, user_id=user_id)
     total_sessions = profile.get("total_sessions", 0) or 0
@@ -1691,7 +1692,7 @@ def _post_session_nudges(conn, show_fn, input_fn, user_id: int = 1):
     try:
         resp = input_fn("\n  When's your next session? (e.g. 'tomorrow morning') ").strip()
         if resp and resp.upper() not in ("", "Q", "N"):
-            now = datetime.now(timezone.utc).isoformat()
+            now = datetime.now(UTC).isoformat()
             conn.execute(
                 "UPDATE learner_profile SET next_session_intention = ?, intention_set_at = ? WHERE user_id = ?",
                 (resp, now, user_id)

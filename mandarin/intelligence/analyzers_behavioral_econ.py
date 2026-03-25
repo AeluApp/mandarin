@@ -28,9 +28,9 @@ _EMAIL_DIR = os.path.join(_PROJECT_ROOT, "marketing", "email-templates")
 
 def _read(path: str) -> str:
     try:
-        with open(path, "r", encoding="utf-8", errors="replace") as f:
+        with open(path, encoding="utf-8", errors="replace") as f:
             return f.read()
-    except (OSError, IOError):
+    except OSError:
         return ""
 
 

@@ -31,7 +31,7 @@ def _load_confusable_pairs():
         return
     path = os.path.join(os.path.dirname(__file__), "..", "..", "data", "confusable_pairs.json")
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             pairs = json.load(f)
         _CONFUSABLE_PAIRS_RAW = pairs
         for entry in pairs:
@@ -164,16 +164,16 @@ def generate_mc_options(conn, correct_item: dict,
     if hsk and field in ("english", "hanzi"):
         correct_pinyin = (correct_item.get("pinyin") or "")[:2].lower()
         if correct_pinyin:
-            rows = conn.execute("""
-                SELECT DISTINCT ci.{f} FROM content_item ci
+            rows = conn.execute(f"""
+                SELECT DISTINCT ci.{field} FROM content_item ci
                 LEFT JOIN progress p ON ci.id = p.content_item_id
-                WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{f} != ? AND ci.{f} != ''
+                WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{field} != ? AND ci.{field} != ''
                   AND ci.review_status = 'approved'
                   AND (p.streak_correct IS NULL OR p.streak_correct < 5)
-                  AND LENGTH(ci.{f}) BETWEEN ? AND ?
+                  AND LENGTH(ci.{field}) BETWEEN ? AND ?
                   AND LOWER(SUBSTR(ci.pinyin, 1, 2)) = ?
                 ORDER BY RANDOM() LIMIT ?
-            """.format(f=field), (item_id, hsk, correct_val,
+            """, (item_id, hsk, correct_val,
                                    min_len, max_len, correct_pinyin,
                                    n_options - 1)).fetchall()
             if rows:
@@ -182,15 +182,15 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 1 (same HSK): Same HSK level, exclude mastered_strong items
     if len(rows) < n_options - 1 and hsk:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute("""
-            SELECT DISTINCT ci.{f} FROM content_item ci
+        more = conn.execute(f"""
+            SELECT DISTINCT ci.{field} FROM content_item ci
             LEFT JOIN progress p ON ci.id = p.content_item_id
-            WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{f} != ? AND ci.{f} != ''
+            WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{field} != ? AND ci.{field} != ''
               AND ci.review_status = 'approved'
               AND (p.streak_correct IS NULL OR p.streak_correct < 5)
-              AND LENGTH(ci.{f}) BETWEEN ? AND ?
+              AND LENGTH(ci.{field}) BETWEEN ? AND ?
             ORDER BY RANDOM() LIMIT ?
-        """.format(f=field), (item_id, hsk, correct_val,
+        """, (item_id, hsk, correct_val,
                                min_len, max_len, n_options - 1)).fetchall()
         for r in more:
             if r[0] not in existing_vals and len(rows) < n_options - 1:
@@ -200,14 +200,14 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 2 (nearby HSK): Nearby HSK levels
     if len(rows) < n_options - 1 and hsk:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute("""
-            SELECT DISTINCT ci.{f} FROM content_item ci
+        more = conn.execute(f"""
+            SELECT DISTINCT ci.{field} FROM content_item ci
             WHERE ci.id != ? AND ci.hsk_level BETWEEN ? AND ?
-              AND ci.{f} != ? AND ci.{f} != ''
+              AND ci.{field} != ? AND ci.{field} != ''
               AND ci.review_status = 'approved'
-              AND LENGTH(ci.{f}) BETWEEN ? AND ?
+              AND LENGTH(ci.{field}) BETWEEN ? AND ?
             ORDER BY RANDOM() LIMIT ?
-        """.format(f=field), (item_id, max(1, hsk - 1), hsk + 1, correct_val,
+        """, (item_id, max(1, hsk - 1), hsk + 1, correct_val,
                                min_len, max_len,
                                (n_options - 1 - len(rows)) * 2)).fetchall()
         for r in more:
@@ -218,12 +218,12 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 3 (fallback): Any items (relax length constraint)
     if len(rows) < n_options - 1:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute("""
-            SELECT DISTINCT {f} FROM content_item
-            WHERE id != ? AND {f} != ? AND {f} != ''
+        more = conn.execute(f"""
+            SELECT DISTINCT {field} FROM content_item
+            WHERE id != ? AND {field} != ? AND {field} != ''
               AND review_status = 'approved'
             ORDER BY RANDOM() LIMIT ?
-        """.format(f=field), (item_id, correct_val,
+        """, (item_id, correct_val,
                                (n_options - 1 - len(rows)) * 2)).fetchall()
         for r in more:
             if r[0] not in existing_vals and len(rows) < n_options - 1:
@@ -278,7 +278,7 @@ def _lookup_item_by_field(conn, field: str, value: str):
     if not value or not value.strip():
         return None
     row = conn.execute(
-        "SELECT hanzi, pinyin, english FROM content_item WHERE {f} = ? AND review_status = 'approved' LIMIT 1".format(f=field),
+        f"SELECT hanzi, pinyin, english FROM content_item WHERE {field} = ? AND review_status = 'approved' LIMIT 1",
         (value,),
     ).fetchone()
     return dict(row) if row else None
@@ -462,9 +462,9 @@ def run_contrastive_drill(item: dict, conn, show_fn, input_fn,
 
     # Randomly choose which item's meaning to ask about
     if random.random() < 0.5:
-        target, other = item, partner
+        target, _other = item, partner
     else:
-        target, other = partner, item
+        target, _other = partner, item
 
     english = target.get("english", "")
     option_a = f"{item['hanzi']} ({item.get('pinyin', '')})"

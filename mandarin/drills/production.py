@@ -149,7 +149,7 @@ def run_transfer_drill(item: dict, conn, show_fn, input_fn,
         options.append(f"{d['hanzi']} ({d['pinyin']}) \u2014 {d['english']}")
 
     random.shuffle(options)
-    correct_idx = options.index(correct_text)
+    options.index(correct_text)
 
     show_fn(f"\n  Which uses: [bold]{construction_name}[/bold]")
     if pattern:

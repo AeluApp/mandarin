@@ -195,7 +195,7 @@ def _build_summary(findings, key="issue_severity"):
 def _map_pip_audit_severity(vuln):
     """Map pip-audit vulnerability to HIGH/MEDIUM/LOW."""
     # pip-audit doesn't always include severity; use aliases/id heuristics
-    vuln_id = vuln.get("id", "")
+    vuln.get("id", "")
     desc = vuln.get("description", "").lower()
     if "critical" in desc or "remote code execution" in desc:
         return "HIGH"

@@ -10,7 +10,7 @@ Zero Claude tokens at runtime — all questions are pre-authored in the catalog.
 import json
 import logging
 import random
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import List, Optional
 
@@ -85,7 +85,7 @@ def load_media_catalog() -> list:
         logger.warning("media catalog not found at %s", CATALOG_PATH)
         _media_catalog_cache = []
         return _media_catalog_cache
-    with open(CATALOG_PATH, "r", encoding="utf-8") as f:
+    with open(CATALOG_PATH, encoding="utf-8") as f:
         data = json.load(f)
     # Support both bare list and {"entries": [...]} wrapper
     if isinstance(data, dict):
@@ -99,7 +99,7 @@ def load_media_catalog() -> list:
 
 _reading_passages_cache = None
 
-def load_reading_passages(hsk_level: Optional[int] = None) -> list:
+def load_reading_passages(hsk_level: int | None = None) -> list:
     """Load reading passages from JSON, optionally filtered by HSK level.
 
     Returns a list of passage dicts with text_zh, text_pinyin, text_en,
@@ -112,7 +112,7 @@ def load_reading_passages(hsk_level: Optional[int] = None) -> list:
             _reading_passages_cache = []
         else:
             try:
-                with open(PASSAGES_PATH, "r", encoding="utf-8") as f:
+                with open(PASSAGES_PATH, encoding="utf-8") as f:
                     data = json.load(f)
                 _reading_passages_cache = data.get("passages", [])
             except (json.JSONDecodeError, KeyError) as e:
@@ -175,7 +175,7 @@ def validate_media_urls(timeout: int = 10) -> list:
     return results
 
 
-def get_media_entry(media_id: str) -> Optional[dict]:
+def get_media_entry(media_id: str) -> dict | None:
     """Get a single catalog entry by ID."""
     for entry in load_media_catalog():
         if entry["id"] == media_id:
@@ -262,8 +262,8 @@ def _get_duration_minutes(entry: dict) -> int:
         return 5  # Default 5 min
 
 
-def recommend_media(conn, hsk_max: int = 9, lens_weights: Optional[dict] = None,
-                    limit: int = 3, time_budget: Optional[int] = None,
+def recommend_media(conn, hsk_max: int = 9, lens_weights: dict | None = None,
+                    limit: int = 3, time_budget: int | None = None,
                     user_id: int = 1) -> list:
     """Recommend media entries sorted by relevance.
 
@@ -686,7 +686,7 @@ def run_media_comprehension(entry: dict, show_fn, input_fn,
 
 def record_media_presentation(conn, media_id: str, user_id: int = 1):
     """Bump times_presented and set last_presented_at."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """UPDATE media_watch
            SET times_presented = times_presented + 1, last_presented_at = ?
@@ -699,7 +699,7 @@ def record_media_presentation(conn, media_id: str, user_id: int = 1):
 def record_media_watched(conn, media_id: str, score: float,
                          q_total: int, q_correct: int, user_id: int = 1):
     """Record a completed watch + comprehension attempt."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """UPDATE media_watch
            SET times_watched = times_watched + 1,
@@ -768,7 +768,7 @@ def get_watch_stats(conn, user_id: int = 1) -> dict:
     return dict(row) if row else {}
 
 
-def get_pending_comprehension(conn, user_id: int = 1) -> Optional[str]:
+def get_pending_comprehension(conn, user_id: int = 1) -> str | None:
     """Find a media_id that was presented but never watched (pending quiz).
 
     Returns media_id or None.
@@ -796,18 +796,18 @@ def generate_comprehension_questions(passage: dict) -> list:
       question, choices (list), answer (index), type, difficulty
     """
     questions = []
-    text_zh = passage.get("text_zh", "")
+    passage.get("text_zh", "")
     text_en = passage.get("text_en", "")
-    title = passage.get("title", "")
-    title_zh = passage.get("title_zh", "")
+    passage.get("title", "")
+    passage.get("title_zh", "")
     vocab = passage.get("vocab_preview", passage.get("key_vocab", []))
-    hsk_level = passage.get("hsk_level", 1)
+    passage.get("hsk_level", 1)
 
     # 1. Vocabulary check questions from key_vocab / vocab_preview
     for v in vocab[:3]:
         hanzi = v if isinstance(v, str) else v.get("hanzi", "")
         english = "" if isinstance(v, str) else v.get("english", "")
-        pinyin = "" if isinstance(v, str) else v.get("pinyin", "")
+        "" if isinstance(v, str) else v.get("pinyin", "")
         if not hanzi or not english:
             continue
 
@@ -894,7 +894,7 @@ def generate_comprehension_questions(passage: dict) -> list:
 
 
 def generate_listening_passage(conn, user_id: int = 1,
-                               hsk_level: Optional[int] = None) -> Optional[dict]:
+                               hsk_level: int | None = None) -> dict | None:
     """Pick a random reading passage for listening practice via browser TTS.
 
     Reuses reading passages — the listening view plays text_zh aloud and then

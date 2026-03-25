@@ -12,7 +12,7 @@ Knowledge entries can only be added by humans — hard constraint.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from uuid import uuid4
 
 from ._base import _safe_query, _safe_query_all, _safe_scalar
@@ -440,7 +440,7 @@ def detect_knowledge_conflicts(conn) -> list:
 
             # If engine defers, mark as resolved immediately
             if resolution == "engine_defers_to_literature":
-                now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+                now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
                 conn.execute("""
                     UPDATE pi_knowledge_conflicts
                     SET resolved_at = ?, resolved_by = 'engine'
@@ -973,7 +973,7 @@ def add_knowledge_entry(conn, entry: dict) -> str:
     Returns the entry id.
     """
     entry_id = str(uuid4())
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             INSERT INTO pi_pedagogical_knowledge
@@ -1030,7 +1030,7 @@ def get_knowledge_conflicts(conn, include_resolved=False) -> list:
 def resolve_conflict(conn, conflict_id: str, resolution: str,
                      rationale: str) -> bool:
     """Human resolves a knowledge conflict."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             UPDATE pi_knowledge_conflicts

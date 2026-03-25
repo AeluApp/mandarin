@@ -7,7 +7,7 @@ import logging
 import re
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 from .ollama_client import generate, is_ollama_available, OllamaResponse
@@ -55,7 +55,7 @@ def generate_drill_from_encounter(
     conn, encounter_id: str, target_word: str,
     source_sentence: str = "", learner_hsk_level: int = 1,
     language_notes: str = "", user_id: int = 0,
-) -> Optional[GeneratedDrillItem]:
+) -> GeneratedDrillItem | None:
     """Generate a drill item from a vocab encounter. Returns None on failure."""
     # A/B experiment: corpus-aware prompts for HSK 3-5
     use_corpus_aware = learner_hsk_level >= 6  # default: always for HSK 6+
@@ -222,7 +222,7 @@ def _repair_json(text: str) -> str:
     return text
 
 
-def _parse_drill_response(content: str, encounter_id: str) -> Optional[GeneratedDrillItem]:
+def _parse_drill_response(content: str, encounter_id: str) -> GeneratedDrillItem | None:
     """Parse JSON from LLM response. Strips markdown fences if present."""
     text = content.strip()
     # Strip markdown code fences
@@ -335,7 +335,7 @@ def _persist_drill_item(conn, item: GeneratedDrillItem) -> str:
 
 
 def _mark_encounter_generated(conn, encounter_id: str, item_id: str) -> None:
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """UPDATE vocab_encounter
            SET drill_generation_status = 'generated', generated_item_id = ?,
@@ -347,7 +347,7 @@ def _mark_encounter_generated(conn, encounter_id: str, item_id: str) -> None:
 
 
 def _mark_encounter_failed(conn, encounter_id: str, error: str) -> None:
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """UPDATE vocab_encounter
            SET drill_generation_status = 'failed', generation_error = ?,

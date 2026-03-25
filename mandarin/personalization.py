@@ -54,17 +54,17 @@ def _load_domain(domain: str) -> list:
         return []
 
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
         _context_cache[domain] = data.get("sentences", [])
         return _context_cache[domain]
-    except (json.JSONDecodeError, IOError):
+    except (OSError, json.JSONDecodeError):
         logger.warning("Failed to load personalization domain file: %s", path)
         return []
 
 
 def get_personalized_sentences(hsk_level: int, domain: str,
-                                n: int = 5) -> List[dict]:
+                                n: int = 5) -> list[dict]:
     """Get n sentences for a domain at or below the given HSK level.
 
     Returns list of dicts with keys: hanzi, pinyin, english, hsk_level, domain.
@@ -86,7 +86,7 @@ def get_all_domains() -> dict:
     return INTEREST_DOMAINS
 
 
-def get_available_domains() -> List[str]:
+def get_available_domains() -> list[str]:
     """Return domains that have data files present."""
     available = []
     for domain in INTEREST_DOMAINS:

@@ -10,7 +10,7 @@ import hashlib
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .audit import log_audit_event
 from .governance import validate_pre_registration, freeze_config
@@ -45,7 +45,7 @@ def create_experiment(
     Returns the experiment id.  The experiment must be started with
     ``start_experiment()`` before assignment begins.
     """
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     guardrails = guardrail_metrics or ["session_completion_rate", "crash_rate", "churn_days"]
 
     # Generate a unique salt for hash isolation
@@ -126,7 +126,7 @@ def start_experiment(conn: sqlite3.Connection, experiment_name: str) -> bool:
     freeze_config(conn, experiment_id)
 
     # Start
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "UPDATE experiment SET status = 'running', started_at = ? WHERE name = ? AND status = 'draft'",
         (now, experiment_name),
@@ -171,7 +171,7 @@ def conclude_experiment(
     """Conclude an experiment, recording the winner and decision metadata."""
     from .analysis import get_experiment_results
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     results = get_experiment_results(conn, experiment_name)
     conclusion = {
         "winner": winner,

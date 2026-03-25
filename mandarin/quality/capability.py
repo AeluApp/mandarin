@@ -3,17 +3,17 @@ from __future__ import annotations
 
 import logging
 import math
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
 
 def calculate_cpk(
-    values: List[float],
-    lsl: Optional[float] = None,
-    usl: Optional[float] = None,
-) -> Dict[str, Any]:
+    values: list[float],
+    lsl: float | None = None,
+    usl: float | None = None,
+) -> dict[str, Any]:
     """Calculate process capability indices Cp and Cpk.
 
     Cp  = (USL - LSL) / (6 * sigma)
@@ -24,7 +24,7 @@ def calculate_cpk(
     At least one of lsl/usl must be provided.
     Returns dict with mean, std, cp, cpk, cpu, cpl, n, lsl, usl.
     """
-    result: Dict[str, Any] = {
+    result: dict[str, Any] = {
         "mean": None,
         "std": None,
         "cp": None,
@@ -93,12 +93,12 @@ def calculate_cpk(
     return result
 
 
-def assess_api_latency(conn, days: int = 7) -> Dict[str, Any]:
+def assess_api_latency(conn, days: int = 7) -> dict[str, Any]:
     """Cpk analysis for response_ms with USL=500ms.
 
     Lower is better — we only care about an upper spec limit.
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
     rows = conn.execute(
         """
         SELECT response_ms FROM review_event
@@ -115,9 +115,9 @@ def assess_api_latency(conn, days: int = 7) -> Dict[str, Any]:
     return result
 
 
-def assess_session_load(conn, days: int = 7) -> Dict[str, Any]:
+def assess_session_load(conn, days: int = 7) -> dict[str, Any]:
     """Cpk analysis for session duration with USL=1800s (30 min)."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
     rows = conn.execute(
         """
         SELECT duration_seconds FROM session_log
@@ -134,12 +134,12 @@ def assess_session_load(conn, days: int = 7) -> Dict[str, Any]:
     return result
 
 
-def assess_drill_accuracy(conn, days: int = 7) -> Dict[str, Any]:
+def assess_drill_accuracy(conn, days: int = 7) -> dict[str, Any]:
     """Cpk analysis for drill accuracy with LSL=0.6 (60% minimum).
 
     Aggregates per-session accuracy rates.
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
     rows = conn.execute(
         """
         SELECT items_correct, items_completed FROM session_log
@@ -163,10 +163,10 @@ def assess_drill_accuracy(conn, days: int = 7) -> Dict[str, Any]:
 
 
 def calculate_process_performance(
-    values: List[float],
-    lsl: Optional[float] = None,
-    usl: Optional[float] = None,
-) -> Dict[str, Any]:
+    values: list[float],
+    lsl: float | None = None,
+    usl: float | None = None,
+) -> dict[str, Any]:
     """Calculate process PERFORMANCE indices Pp and Ppk.
 
     Unlike Cp/Cpk (which use within-subgroup variation), Pp/Ppk use
@@ -181,7 +181,7 @@ def calculate_process_performance(
         1.0 <= Ppk < 1.33 — marginally capable
         Ppk < 1.0 — not capable
     """
-    result: Dict[str, Any] = {
+    result: dict[str, Any] = {
         "pp": None, "ppk": None, "ppu": None, "ppl": None,
         "mean": None, "std_overall": None, "n": 0,
         "lsl": lsl, "usl": usl, "interpretation": "insufficient_data",
@@ -239,12 +239,12 @@ def calculate_process_performance(
     return result
 
 
-def assess_accuracy_performance(conn, days: int = 30) -> Dict[str, Any]:
+def assess_accuracy_performance(conn, days: int = 30) -> dict[str, Any]:
     """Pp/Ppk for drill accuracy: LSL=70% (target), USL=100%.
 
     Uses 30-day window for process performance (longer than Cpk's 7-day).
     """
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
     rows = conn.execute(
         """
         SELECT items_correct, items_completed FROM session_log
@@ -267,7 +267,7 @@ def assess_accuracy_performance(conn, days: int = 30) -> Dict[str, Any]:
     return result
 
 
-def get_capability_summary(conn) -> Dict[str, Any]:
+def get_capability_summary(conn) -> dict[str, Any]:
     """All capability assessments in a single dict."""
     return {
         "api_latency": assess_api_latency(conn),

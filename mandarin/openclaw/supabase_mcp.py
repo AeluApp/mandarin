@@ -236,7 +236,7 @@ def _sqlite_to_pg_type(sqlite_type: str) -> str:
     return "TEXT"
 
 
-def _convert_default(sqlite_default: str) -> Optional[str]:
+def _convert_default(sqlite_default: str) -> str | None:
     """Convert SQLite default to PostgreSQL equivalent."""
     if not sqlite_default:
         return None

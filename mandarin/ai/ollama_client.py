@@ -13,7 +13,7 @@ import logging
 import time
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 import httpx
@@ -38,7 +38,7 @@ class OllamaResponse:
     completion_tokens: int = 0
     generation_time_ms: int = 0
     from_cache: bool = False
-    error: Optional[str] = None
+    error: str | None = None
 
 
 # Alias for gradual migration — new code should prefer LLMResponse
@@ -69,7 +69,7 @@ def _get_task_model(conn, task_type: str) -> str | None:
         return None
 
 
-def _auto_score_quality(conn, task_type: str, result: "OllamaResponse") -> None:
+def _auto_score_quality(conn, task_type: str, result: OllamaResponse) -> None:
     """Score output quality and write to prompt_trace. Lightweight structural checks."""
     if not result.success or not result.text:
         return
@@ -325,7 +325,7 @@ def _prompt_hash(prompt: str, system: str) -> str:
     return h.hexdigest()
 
 
-def _check_cache(conn, prompt: str, system: str) -> Optional[OllamaResponse]:
+def _check_cache(conn, prompt: str, system: str) -> OllamaResponse | None:
     """Look up a cached generation by prompt hash."""
     ph = _prompt_hash(prompt, system)
     row = conn.execute(
@@ -335,7 +335,7 @@ def _check_cache(conn, prompt: str, system: str) -> Optional[OllamaResponse]:
     if row is None:
         return None
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "UPDATE pi_ai_generation_cache SET hit_count = hit_count + 1, last_hit_at = ? WHERE id = ?",
         (now, row["id"]),
@@ -351,7 +351,7 @@ def _check_cache(conn, prompt: str, system: str) -> Optional[OllamaResponse]:
 def _write_cache(conn, prompt: str, system: str, response: OllamaResponse) -> None:
     """Persist a generation to the cache table."""
     ph = _prompt_hash(prompt, system)
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT OR IGNORE INTO pi_ai_generation_cache
@@ -464,7 +464,7 @@ def _trace_prompt(conn, task_type: str, prompt: str, response: OllamaResponse) -
 
 def _log_generation(conn, task_type: str, response: OllamaResponse, **kwargs) -> None:
     """Persist every generation attempt to the log table."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT INTO pi_ai_generation_log

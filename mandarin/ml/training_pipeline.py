@@ -6,7 +6,7 @@ import json
 import logging
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +37,7 @@ def run_ml_pipeline(conn: sqlite3.Connection) -> dict:
         results['similarity_calibration'] = {'status': 'error', 'error': str(e)}
 
     # 3. Log results
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             INSERT INTO pi_ml_pipeline_runs (id, run_at, results_json)

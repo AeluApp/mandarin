@@ -20,7 +20,7 @@ import hashlib
 import logging
 import random
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
 def select_holdout_items(conn: sqlite3.Connection,
                          user_id: int = 1,
                          count: int = 20,
-                         holdout_set: str = "standard") -> List[Dict[str, Any]]:
+                         holdout_set: str = "standard") -> list[dict[str, Any]]:
     """Select items for the holdout benchmark set.
 
     Criteria:
@@ -73,7 +73,7 @@ def select_holdout_items(conn: sqlite3.Connection,
     eligible_stages = _MASTERY_ORDER[min_idx:]
     placeholders = ",".join("?" * len(eligible_stages))
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
 
     rows = conn.execute(f"""
         SELECT p.content_item_id, p.modality,
@@ -91,7 +91,7 @@ def select_holdout_items(conn: sqlite3.Connection,
         return []
 
     # Deterministic selection: hash user_id + rotation window
-    rotation_window = datetime.now(timezone.utc).strftime("%Y-%W")
+    rotation_window = datetime.now(UTC).strftime("%Y-%W")
     seed_str = f"{user_id}:{holdout_set}:{rotation_window}"
     seed = int(hashlib.sha256(seed_str.encode()).hexdigest()[:8], 16)
     rng = random.Random(seed)
@@ -103,7 +103,7 @@ def select_holdout_items(conn: sqlite3.Connection,
     return selected
 
 
-def pick_holdout_drill_type(item: Dict[str, Any],
+def pick_holdout_drill_type(item: dict[str, Any],
                             user_id: int = 1) -> str:
     """Pick a drill type for a holdout probe that's DIFFERENT from
     what the user normally trains on.
@@ -118,7 +118,7 @@ def pick_holdout_drill_type(item: Dict[str, Any],
 
 def get_session_probes(conn: sqlite3.Connection,
                        user_id: int = 1,
-                       session_item_count: int = 12) -> List[Dict[str, Any]]:
+                       session_item_count: int = 12) -> list[dict[str, Any]]:
     """Get holdout probes to inject into a session.
 
     Returns a list of probe specs ready for the drill runner:
@@ -157,8 +157,8 @@ def record_holdout_result(conn: sqlite3.Connection,
                           modality: str,
                           drill_type: str,
                           correct: bool,
-                          response_ms: Optional[int] = None,
-                          session_id: Optional[int] = None,
+                          response_ms: int | None = None,
+                          session_id: int | None = None,
                           holdout_set: str = "standard") -> int:
     """Record a holdout probe result.
 
@@ -170,7 +170,7 @@ def record_holdout_result(conn: sqlite3.Connection,
     if not _table_exists(conn, "counter_metric_holdout"):
         return -1
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     cursor = conn.execute("""
         INSERT INTO counter_metric_holdout
         (user_id, content_item_id, modality, drill_type, correct,
@@ -184,7 +184,7 @@ def record_holdout_result(conn: sqlite3.Connection,
 
 def get_holdout_summary(conn: sqlite3.Connection,
                         user_id: int = 1,
-                        window_days: int = 30) -> Dict[str, Any]:
+                        window_days: int = 30) -> dict[str, Any]:
     """Summarize holdout performance for a user.
 
     Returns accuracy overall and by drill type.
@@ -205,7 +205,7 @@ def get_holdout_summary(conn: sqlite3.Connection,
     total = len(rows)
     correct = sum(1 for r in rows if r["correct"])
 
-    by_type: Dict[str, Dict[str, int]] = {}
+    by_type: dict[str, dict[str, int]] = {}
     for r in rows:
         dt = r["drill_type"] or "unknown"
         if dt not in by_type:

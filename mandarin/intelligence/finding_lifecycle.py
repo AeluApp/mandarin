@@ -15,7 +15,7 @@ import math
 import re
 import sqlite3
 from difflib import SequenceMatcher
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import (
     _SEVERITY_ORDER, _CORRELATED_DIMENSIONS,
@@ -199,7 +199,7 @@ def transition_finding(conn, finding_id: int, new_status: str, notes: str = "") 
             )
             return False
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             UPDATE pi_finding

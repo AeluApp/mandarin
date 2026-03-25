@@ -6,7 +6,7 @@ Generates Caliper events from drill sessions for learning analytics interoperabi
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Any, Dict, List, Optional
 
 from . import db
@@ -34,7 +34,7 @@ ACTIONS = {
 }
 
 
-def _make_person(user_id: int) -> Dict[str, Any]:
+def _make_person(user_id: int) -> dict[str, Any]:
     """Create a Caliper Person entity."""
     return {
         "id": f"{CALIPER_BASE}/users/{user_id}",
@@ -42,7 +42,7 @@ def _make_person(user_id: int) -> Dict[str, Any]:
     }
 
 
-def _make_assessment(session_id: int) -> Dict[str, Any]:
+def _make_assessment(session_id: int) -> dict[str, Any]:
     """Create a Caliper Assessment entity for a drill session."""
     return {
         "id": f"{CALIPER_BASE}/sessions/{session_id}",
@@ -51,7 +51,7 @@ def _make_assessment(session_id: int) -> Dict[str, Any]:
     }
 
 
-def _make_assessment_item(item_id: int, name: Optional[str] = None) -> Dict[str, Any]:
+def _make_assessment_item(item_id: int, name: str | None = None) -> dict[str, Any]:
     """Create a Caliper AssessmentItem entity."""
     entity = {
         "id": f"{CALIPER_BASE}/items/{item_id}",
@@ -68,11 +68,11 @@ def generate_event(
     action: str,
     object_type: str = "assessment",
     object_id: int = 0,
-    object_name: Optional[str] = None,
-    score: Optional[float] = None,
-    duration_seconds: Optional[float] = None,
-    extensions: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
+    object_name: str | None = None,
+    score: float | None = None,
+    duration_seconds: float | None = None,
+    extensions: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Generate a single Caliper event."""
     event = {
         "@context": CALIPER_CONTEXT,
@@ -80,7 +80,7 @@ def generate_event(
         "type": EVENT_TYPES.get(event_type, "Event"),
         "action": ACTIONS.get(action, action),
         "actor": _make_person(user_id),
-        "eventTime": datetime.now(timezone.utc).isoformat(),
+        "eventTime": datetime.now(UTC).isoformat(),
     }
 
     if object_type == "assessment":
@@ -103,9 +103,9 @@ def generate_event(
 
 
 def get_events(
-    conn, user_id: int, since: Optional[str] = None, until: Optional[str] = None,
+    conn, user_id: int, since: str | None = None, until: str | None = None,
     limit: int = 100,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """Generate Caliper events from session log history."""
     events = []
 

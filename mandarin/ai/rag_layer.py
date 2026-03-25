@@ -52,7 +52,7 @@ def import_cc_cedict(conn: sqlite3.Connection, cedict_path: str) -> dict:
     errors = 0
     version = _get_cedict_version(cedict_path)
 
-    with open(cedict_path, "r", encoding="utf-8") as f:
+    with open(cedict_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith("#"):
@@ -117,7 +117,7 @@ def import_cc_cedict(conn: sqlite3.Connection, cedict_path: str) -> dict:
 
 def _get_cedict_version(cedict_path: str) -> str:
     try:
-        with open(cedict_path, "r", encoding="utf-8") as f:
+        with open(cedict_path, encoding="utf-8") as f:
             for line in f:
                 if line.startswith("#! version="):
                     return line.strip().split("=")[1]
@@ -357,9 +357,9 @@ def generate_with_rag(
     hanzi_list: list[str],
     prompt_key: str,
     base_prompt: str,
-    hsk_level: Optional[int] = None,
+    hsk_level: int | None = None,
     temperature: float = 0.7,
-) -> Optional[dict]:
+) -> dict | None:
     """Generate Qwen content with RAG augmentation for HSK 6+.
 
     If hsk_level < 6, calls Qwen without RAG.

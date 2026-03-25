@@ -8,7 +8,7 @@ import json
 import logging
 import sqlite3
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 from urllib.parse import urlparse
 
@@ -44,7 +44,7 @@ def crawl_source(conn: sqlite3.Connection, source_id: int) -> dict:
     if not source:
         return {"status": "error", "error": "source not found or inactive"}
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
     # Create crawl run record
     cursor = conn.execute("""
@@ -247,10 +247,10 @@ def _complete_run(
     status: str,
     items_found: int = 0,
     items_new: int = 0,
-    error: Optional[str] = None,
+    error: str | None = None,
 ) -> None:
     """Update crawl_run with completion status."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute("""
             UPDATE crawl_run

@@ -9,7 +9,7 @@ import json
 import logging
 import logging.handlers
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 
 _DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -23,7 +23,7 @@ APP_LOG = _DATA_DIR / "app.log"
 
 def utc_now_iso() -> str:
     """Return current UTC time as ISO-8601 with trailing Z."""
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 class UTCFormatter(logging.Formatter):

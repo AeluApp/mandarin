@@ -11,7 +11,7 @@ import json
 import logging
 import uuid
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import _finding, _f, _safe_query, _safe_query_all, _safe_scalar
 
@@ -389,7 +389,7 @@ def check_audit_frequency(conn) -> DetectionResult:
         from datetime import datetime as _dt
         try:
             last = _dt.fromisoformat(last_audit[0].replace("Z", "+00:00"))
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             days_ago = (now - last).days
             if days_ago <= 7:
                 score = 100
@@ -1401,7 +1401,7 @@ def grade_all_frameworks(conn, audit_cycle_id=None) -> dict:
         "overall_score": round(overall_score, 1),
         "overall_grade": overall_grade,
         "framework_count": len(results),
-        "graded_at": datetime.now(timezone.utc).isoformat(),
+        "graded_at": datetime.now(UTC).isoformat(),
     }
 
 

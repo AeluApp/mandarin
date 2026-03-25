@@ -109,7 +109,7 @@ def check_audio_coherence(
         return {"status": "error", "reason": "content item not found"}
 
     hanzi = item["hanzi"]
-    expected_pinyin_db = item["pinyin"] or ""
+    item["pinyin"] or ""
 
     # Convert expected hanzi to pinyin
     expected_pinyin = _hanzi_to_pinyin(hanzi)
@@ -179,7 +179,7 @@ def check_audio_coherence(
     }
 
 
-def _generate_tts(text: str) -> Optional[str]:
+def _generate_tts(text: str) -> str | None:
     """Generate TTS audio to a temp file using edge-tts."""
     import asyncio
 

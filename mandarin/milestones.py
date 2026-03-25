@@ -182,7 +182,7 @@ def _milestone_met(milestone: dict, stats: dict) -> bool:
     return True
 
 
-def get_unlocked_milestones(conn: sqlite3.Connection, user_id: int = 1) -> List[dict]:
+def get_unlocked_milestones(conn: sqlite3.Connection, user_id: int = 1) -> list[dict]:
     """Return all milestones the learner has currently unlocked."""
     stats = _get_growth_stats(conn, user_id=user_id)
     return [m for m in MILESTONES if _milestone_met(m, stats)]

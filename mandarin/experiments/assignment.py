@@ -17,7 +17,7 @@ import hashlib
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from .audit import log_audit_event
 from .eligibility import check_eligibility
@@ -121,7 +121,7 @@ def get_variant(
     pre_period = _capture_pre_period(conn, user_id)
 
     # ── Persist assignment ───────────────────────────────────────────────
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     try:
         conn.execute(
             """INSERT OR IGNORE INTO experiment_assignment

@@ -64,7 +64,7 @@ def find_semantic_duplicate(
     title: str,
     severity: str = "",
     similarity_threshold: float = 0.82,
-) -> Optional[int]:
+) -> int | None:
     """Find an existing open finding semantically equivalent to a new one.
 
     Returns finding_id of duplicate if found, None otherwise.
@@ -96,7 +96,7 @@ def find_semantic_duplicate(
         return None
 
     best_id, best_sim = None, 0.0
-    for i, (row, emb) in enumerate(zip(existing, embeddings[1:])):
+    for _i, (row, emb) in enumerate(zip(existing, embeddings[1:], strict=False)):
         emb_norm = np.linalg.norm(emb)
         if emb_norm == 0:
             continue
@@ -116,7 +116,7 @@ def find_content_duplicate(
     english: str,
     hsk_level: int = 1,
     similarity_threshold: float = 0.85,
-) -> Optional[dict]:
+) -> dict | None:
     """Find an existing content item semantically equivalent to a generated one.
 
     Compares the english meaning + hanzi against existing items at the same
@@ -156,7 +156,7 @@ def find_content_duplicate(
         return None
 
     best_match, best_sim = None, 0.0
-    for i, (row, emb) in enumerate(zip(candidates, embeddings[1:])):
+    for _i, (row, emb) in enumerate(zip(candidates, embeddings[1:], strict=False)):
         # Skip exact same hanzi — that's caught by exact dedup
         if row['hanzi'] == hanzi:
             continue

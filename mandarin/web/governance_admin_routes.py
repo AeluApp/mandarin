@@ -162,7 +162,7 @@ def governance_policies():
 @api_error_handler("Review policy")
 def governance_review_policy(key):
     """Log policy review, update next_review_due."""
-    data = request.get_json(force=True) if request.data else {}
+    request.get_json(force=True) if request.data else {}
     with db.connection() as conn:
         conn.execute("""
             UPDATE ai_policy_documents

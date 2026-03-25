@@ -115,7 +115,7 @@ def _classify_ime_error(user: str, expected: str) -> str:
     # Check edit distance for confusables
     if abs(len(user_stripped) - len(expected_stripped)) <= 1:
         diffs = 0
-        for a, b in zip(user_stripped, expected_stripped):
+        for a, b in zip(user_stripped, expected_stripped, strict=False):
             if a != b:
                 diffs += 1
         if diffs <= 2:

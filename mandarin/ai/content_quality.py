@@ -14,7 +14,7 @@ import json
 import logging
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 
 from .ollama_client import generate, is_ollama_available, OllamaResponse
@@ -162,7 +162,7 @@ def assess_passage_quality(conn, passage_id: str, user_id: int = 1) -> dict:
         from pathlib import Path
         passages_path = Path(__file__).parent.parent.parent / "data" / "reading_passages.json"
         if passages_path.exists():
-            with open(passages_path, "r", encoding="utf-8") as f:
+            with open(passages_path, encoding="utf-8") as f:
                 raw = json.load(f)
             # Handle both formats: list or {"passages": [...]}
             if isinstance(raw, dict):
@@ -808,7 +808,7 @@ def assess_media_shelf_health(conn, user_id: int = 1) -> dict:
         latest = max(last_dates)
         try:
             latest_dt = datetime.fromisoformat(latest.replace("Z", "+00:00"))
-            age_days = (datetime.now(timezone.utc) - latest_dt).days
+            age_days = (datetime.now(UTC) - latest_dt).days
             if age_days <= 7:
                 dimension_scores["staleness"] = 95
             elif age_days <= 30:
@@ -941,7 +941,7 @@ class ContentQualityAnalyzer:
             passages_path = Path(__file__).parent.parent.parent / "data" / "reading_passages.json"
             if not passages_path.exists():
                 return findings
-            with open(passages_path, "r", encoding="utf-8") as f:
+            with open(passages_path, encoding="utf-8") as f:
                 raw = json.load(f)
             # Handle both formats: list or {"passages": [...]}
             if isinstance(raw, dict):
@@ -1206,7 +1206,7 @@ def generate_corpus_audit_report(conn) -> dict:
         health_grade = "A"
 
     return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "corpus_size": total_count,
         "hsk_distribution": hsk_dist,
         "grammar_points": grammar_count,
