@@ -75,6 +75,19 @@ def _collect_metrics():
     """Calculate and store quality metrics."""
     from ..quality import dpmo, spc, capability, retention
 
+    # ── CI failure ingestion ──
+    # Import findings from ci_findings.json (produced by CI Feedback Loop workflow)
+    try:
+        from ..intelligence.ci_ingest import import_ci_findings
+        with db.connection() as conn:
+            imported = import_ci_findings(conn)
+            if imported:
+                logger.info("CI findings: imported %d new finding(s)", imported)
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("CI findings import failed", exc_info=True)
+
     with db.connection() as conn:
         # DPMO metrics
         try:
