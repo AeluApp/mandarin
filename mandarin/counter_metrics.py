@@ -51,7 +51,12 @@ def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
 
 def _col_exists(conn: sqlite3.Connection, table: str, col: str) -> bool:
     try:
-        cols = {r[1] for r in conn.execute(f"PRAGMA table_info({table})").fetchall()}
+        # Validate table name to prevent SQL injection (PRAGMA cannot use ? params)
+        if not table.isidentifier():
+            return False
+        cols = {r[1] for r in conn.execute(
+            "PRAGMA table_info({})".format(table)
+        ).fetchall()}
         return col in cols
     except Exception:
         return False
@@ -97,21 +102,22 @@ def delayed_recall_accuracy(conn: sqlite3.Connection, delay_days: int = 7,
         return {"accuracy": None, "sample_size": 0, "delay_days": delay_days}
 
     user_clause = "AND re.user_id = ?" if user_id else ""
-    params: list = []
+    window_offset = "-{} days".format(window_days)
+    params: list = [window_offset]
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT re.correct, re.created_at,
                p.last_review_date, p.half_life_days
         FROM review_event re
         JOIN progress p ON re.user_id = p.user_id
             AND re.content_item_id = p.content_item_id
             AND re.modality = p.modality
-        WHERE re.created_at >= datetime('now', '-{window_days} days')
-          {user_clause}
+        WHERE re.created_at >= datetime('now', ?)
+          {}
         ORDER BY re.created_at
-    """, params).fetchall()
+    """.format(user_clause), params).fetchall()
 
     correct = 0
     total = 0
@@ -148,20 +154,21 @@ def transfer_accuracy(conn: sqlite3.Connection,
         return {"accuracy": None, "sample_size": 0}
 
     user_clause = "AND re.user_id = ?" if user_id else ""
-    params: list = []
+    window_offset = "-{} days".format(window_days)
+    params: list = [window_offset]
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT re.user_id, re.content_item_id, re.modality,
                re.drill_type, re.correct, p.drill_types_seen
         FROM review_event re
         JOIN progress p ON re.user_id = p.user_id
             AND re.content_item_id = p.content_item_id
             AND re.modality = p.modality
-        WHERE re.created_at >= datetime('now', '-{window_days} days')
-          {user_clause}
-    """, params).fetchall()
+        WHERE re.created_at >= datetime('now', ?)
+          {}
+    """.format(user_clause), params).fetchall()
 
     correct = 0
     total = 0
