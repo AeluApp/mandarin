@@ -183,6 +183,7 @@ def register():
         confirm = request.form.get("confirm") or ""
         display_name = (request.form.get("display_name") or "").strip()[:255]
         invite_code = (request.form.get("invite_code") or "").strip()
+        promo_code = (request.form.get("promo_code") or "").strip()
 
         if not email or not password:
             flash("Email and password are required.", "error")
@@ -218,6 +219,17 @@ def register():
                 user_dict = create_user(conn, email, password, display_name,
                                         invite_code=invite_code if invite_code else None,
                                         role=role)
+                # Promo code: 加油 grants full paid access
+                if promo_code == "加油":
+                    try:
+                        conn.execute(
+                            "UPDATE user SET subscription_tier = 'paid' WHERE id = ?",
+                            (user_dict["id"],)
+                        )
+                        conn.commit()
+                        logger.info("Promo code applied: user %s upgraded to paid via 加油", user_dict["id"])
+                    except Exception:
+                        logger.exception("Failed to apply promo code for user %s", user_dict["id"])
                 # Session fixation protection: clear session before login
                 session.clear()
                 login_user(User(user_dict), remember=True)
