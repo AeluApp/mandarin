@@ -406,8 +406,8 @@ class TestDetectionResult:
         assert isinstance(result.confidence, float)
 
     def test_all_detection_functions_exist(self):
-        """All 42 detection functions should be registered."""
-        assert len(DETECTION_FUNCTIONS) == 42
+        """All detection functions should be registered."""
+        assert len(DETECTION_FUNCTIONS) == 46
 
 
 # ---------------------------------------------------------------------------

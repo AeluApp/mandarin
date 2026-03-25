@@ -598,23 +598,5 @@ class TestAdviseOnConcluded:
 
 
 # ── E6–E8 Audit Checks ─────────────────────────────────────────────────────
-
-
-class TestAuditChecks:
-    def test_e6_ai_advisor_module(self):
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
-        from audit_check import check_e6
-        result = check_e6()
-        assert result["status"] == "PASS"
-
-    def test_e7_daemon_wired(self):
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
-        from audit_check import check_e7
-        result = check_e7()
-        assert result["status"] == "PASS"
-
-    def test_e8_governance_flow(self):
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
-        from audit_check import check_e8
-        result = check_e8()
-        assert result["status"] == "PASS"
+# check_e6, check_e7, check_e8 were removed from scripts/audit_check.py
+# during the audit check consolidation. These tests are no longer applicable.

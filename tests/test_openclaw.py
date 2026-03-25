@@ -490,25 +490,30 @@ class TestMultiChannelNotify(unittest.TestCase):
         self.assertEqual(resp.status_code, 400)
 
     def test_notify_no_channels_configured(self):
-        """With no channels configured, returns 503."""
+        """With no channels configured, returns 200 with status=skipped."""
         resp = self.client.post(
             "/api/openclaw/notify",
             headers={"X-OpenClaw-Key": "test-key-123",
                       "Content-Type": "application/json"},
             json={"message": "test notification"},
         )
-        # No channels configured in test env, so 503
-        self.assertEqual(resp.status_code, 503)
+        # No channels configured in test env — route returns 200 (skipped)
+        # so callers like n8n don't retry endlessly.
+        self.assertEqual(resp.status_code, 200)
+        data = resp.get_json()
+        self.assertEqual(data["status"], "skipped")
 
     def test_notify_specific_channel(self):
-        """Requesting a specific unconfigured channel returns 503."""
+        """Requesting a specific unconfigured channel returns 200 with status=skipped."""
         resp = self.client.post(
             "/api/openclaw/notify",
             headers={"X-OpenClaw-Key": "test-key-123",
                       "Content-Type": "application/json"},
             json={"message": "test", "channel": "whatsapp"},
         )
-        self.assertEqual(resp.status_code, 503)
+        self.assertEqual(resp.status_code, 200)
+        data = resp.get_json()
+        self.assertEqual(data["status"], "skipped")
 
 
 class TestSchemaAndMigration(unittest.TestCase):

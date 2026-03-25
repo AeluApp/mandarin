@@ -111,10 +111,18 @@ def _split_pinyin_syllables(pinyin_str: str) -> list[str]:
     parts = pinyin_str.strip().split()
     if len(parts) > 1:
         return parts
-    # Run-together: split on tone marks or capital letters
-    # Use a regex that splits between a toned vowel and the next consonant
+    # Run-together: match pinyin syllable patterns.
+    # A pinyin syllable is: optional initial consonant(s) + vowel nucleus
+    # (possibly with tone mark) + optional final (n, ng, r, etc.) + optional
+    # tone digit.
+    # Initials: b p m f d t n l g k h j q x zh ch sh r z c s y w
+    # The regex matches greedy initials then a vowel core then optional final.
+    _VOWELS = "aeiouüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ"
+    _CONSONANTS = "bpmfdtnlgkhjqxrzcsyw"
+    # Pattern: optional consonant cluster, then vowel(s) with optional nasal
+    # ending, then optional tone digit
     syllables = re.findall(
-        r"[a-züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]+[0-4]?",
+        r"(?:[{c}]{{1,2}})?[{v}]+(?:ng|n|r)?[0-4]?".format(c=_CONSONANTS, v=_VOWELS),
         pinyin_str.lower(),
     )
     return syllables if syllables else [pinyin_str]
