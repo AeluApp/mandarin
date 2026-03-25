@@ -24,13 +24,15 @@ from mandarin.experiments import (
     check_guardrails,
     sequential_test,
     list_experiments,
+)
+from mandarin.experiments.analysis import (
     _z_test_proportions,
     _cohens_d,
     _confidence_interval_proportion,
-    _obrien_fleming_boundary,
     _ci_difference,
     _std,
 )
+from mandarin.experiments.sequential import _obrien_fleming_boundary
 
 
 @pytest.fixture
