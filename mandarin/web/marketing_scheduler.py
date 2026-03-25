@@ -331,20 +331,41 @@ def _process_approval_queue(conn) -> None:
 
 
 def _notify_approval_needed(conn, queue_id: int, platform: str, content_id: str) -> None:
-    """Send iMessage notification that a post needs approval."""
+    """Send email notification that a post needs approval."""
     try:
-        from ..openclaw.imessage_bot import send_message
-        owner_id = os.environ.get("OPENCLAW_IMESSAGE_OWNER_ID", "")
-        if owner_id:
-            send_message(
-                owner_id,
-                f"[Aelu Marketing] {platform.title()} post needs approval:\n"
-                f"Content: {content_id}\n"
-                f"Queue ID: {queue_id}\n"
-                f"Reply 'approve {queue_id}' to approve.",
-            )
-    except (ImportError, Exception):
-        pass  # iMessage not configured
+        import resend
+        resend.api_key = os.environ.get("RESEND_API_KEY", "")
+        notify_email = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
+        from_email = os.environ.get("FROM_EMAIL", "")
+
+        if not (resend.api_key and notify_email and from_email):
+            logger.debug("Marketing notification email not configured")
+            return
+
+        # Get the queued post text for context
+        row = conn.execute(
+            "SELECT content_text FROM marketing_approval_queue WHERE id = ?",
+            (queue_id,),
+        ).fetchone()
+        preview = row["content_text"][:300] if row else "(no preview)"
+
+        resend.Emails.send({
+            "from": from_email,
+            "to": [notify_email],
+            "subject": f"[Aelu] {platform.title()} post needs approval (#{queue_id})",
+            "html": (
+                f"<h3>Marketing post needs your approval</h3>"
+                f"<p><strong>Platform:</strong> {platform.title()}<br>"
+                f"<strong>Content ID:</strong> {content_id}<br>"
+                f"<strong>Queue ID:</strong> #{queue_id}</p>"
+                f"<p><strong>Preview:</strong></p>"
+                f"<pre style='background:#f5f0e8;padding:16px;border-radius:8px;'>{preview}</pre>"
+                f"<p>Approve at: <a href='https://aeluapp.com/admin'>aeluapp.com/admin</a></p>"
+            ),
+        })
+        logger.info("Approval notification sent to %s for queue_id=%d", notify_email, queue_id)
+    except (ImportError, Exception) as e:
+        logger.debug("Approval notification failed: %s", e)
 
 
 def _collect_metrics(conn) -> None:
