@@ -793,6 +793,31 @@
       <div id="listening-gloss" class="reading-gloss hidden" role="tooltip"></div>
     </section>
 
+    <!-- Conversation practice view -->
+    <section id="conversation" class="hidden" aria-label="Conversation practice">
+      <div class="conversation-header">
+        <button id="conversation-back" class="btn-secondary btn-back-nav" aria-label="Back to dashboard"><svg class="icon"><use href="#icon-arrow-left"/></svg> Back</button>
+        <select id="conversation-level" aria-label="HSK level filter">
+          <option value="">All levels</option>
+          <option value="1">HSK 1</option>
+          <option value="2">HSK 2</option>
+          <option value="3">HSK 3</option>
+          <option value="4">HSK 4</option>
+          <option value="5">HSK 5</option>
+          <option value="6">HSK 6</option>
+        </select>
+      </div>
+      <div id="conversation-scenarios" class="conversation-scenarios"></div>
+      <div id="conversation-active" class="conversation-active hidden">
+        <div id="conversation-situation" class="conversation-situation"></div>
+        <div id="conversation-messages" class="conversation-messages"></div>
+        <div class="conversation-input-area">
+          <textarea id="conversation-input" class="conversation-input" rows="2" placeholder="Type your response in Chinese..." aria-label="Your response"></textarea>
+          <button id="conversation-send" class="btn-primary">Send</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Grammar view -->
     <section id="grammar" class="hidden" aria-label="Grammar study">
       <div class="grammar-header">

@@ -7222,6 +7222,14 @@ def _migrate_v119_to_v120(conn):
             notes TEXT
         );
 
+        -- Newsletter subscribers (fallback when Resend audience not configured)
+        CREATE TABLE IF NOT EXISTS newsletter_subscriber (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL UNIQUE,
+            subscribed_at TEXT DEFAULT (datetime('now')),
+            unsubscribed_at TEXT
+        );
+
         -- Weekly optimization cycle log
         CREATE TABLE IF NOT EXISTS marketing_optimizer_run (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
