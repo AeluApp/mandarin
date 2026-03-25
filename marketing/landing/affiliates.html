@@ -240,6 +240,10 @@
             <li style="padding:var(--space-2) 0;">Students who upgrade personally generate commission for you</li>
             <li style="padding:var(--space-2) 0;">5 free student accounts (3 months each) to try first</li>
           </ul>
+          <p style="font-size:0.8rem;color:var(--color-text-faint);text-align:left;margin-top:var(--space-3);border-top:1px solid var(--color-border);padding-top:var(--space-2);">
+            <strong style="color:var(--color-text);">What upgraded students get:</strong>
+            priority scheduling, advanced analytics with forecasts and error trends, and CSV/JSON progress exports — on top of the full classroom access you already provide.
+          </p>
         </div>
 
       </div>
@@ -331,6 +335,14 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="track">Which partner track?</label>
+          <select id="track" name="track" required>
+            <option value="">Select...</option>
+            <option value="creator">Content Creator / Influencer (earn on referred subscriptions)</option>
+            <option value="teacher">Chinese Teacher (earn on student upgrades)</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="platform">Primary platform</label>
