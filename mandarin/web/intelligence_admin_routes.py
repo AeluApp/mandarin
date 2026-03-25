@@ -7,7 +7,7 @@ findings, plus JSON endpoints for approve/reject/defer actions.
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from flask import Blueprint, jsonify, render_template, request, abort
 
@@ -241,7 +241,7 @@ def defer_finding(finding_id):
             SET updated_at = datetime('now'),
                 resolution_notes = COALESCE(resolution_notes, '') || ?
             WHERE id = ?
-        """, (f"\n[Deferred {datetime.now(timezone.utc).strftime('%Y-%m-%d')}] {notes}", finding_id))
+        """, (f"\n[Deferred {datetime.now(UTC).strftime('%Y-%m-%d')}] {notes}", finding_id))
 
         # Log the deferral
         conn.execute("""

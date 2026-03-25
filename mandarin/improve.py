@@ -349,7 +349,7 @@ def _check_velocity_decline(conn, proposals: list, user_id: int = 1):
 
     def count_transitions(session_ids):
         placeholders = ",".join("?" * len(session_ids))
-        row = conn.execute(f"""
+        row = conn.execute("""
             SELECT COUNT(DISTINCT content_item_id) as cnt
             FROM progress
             WHERE user_id = ?
@@ -357,7 +357,7 @@ def _check_velocity_decline(conn, proposals: list, user_id: int = 1):
                 SELECT date(started_at) FROM session_log WHERE id IN ({placeholders})
             ) AND mastery_stage NOT IN ('seen', 'weak')
               AND streak_correct >= 2
-        """, (user_id,) + session_ids).fetchone()
+        """.format(placeholders=placeholders), (user_id,) + session_ids).fetchone()
         return row["cnt"] if row else 0
 
     recent_transitions = count_transitions(recent_session_ids)
@@ -452,11 +452,11 @@ def _execute_proposal(conn, trigger: str, proposal_data: dict, user_id: int = 1)
             bottom = min(scores, key=scores.get)
             assert top in _VALID_LENS_COLS and bottom in _VALID_LENS_COLS
             conn.execute(
-                f"UPDATE learner_profile SET {top} = MIN(1.0, {top} + 0.2) WHERE user_id = ?",
+                "UPDATE learner_profile SET {col} = MIN(1.0, {col} + 0.2) WHERE user_id = ?".format(col=top),
                 (user_id,)
             )
             conn.execute(
-                f"UPDATE learner_profile SET {bottom} = MAX(0.1, {bottom} - 0.2) WHERE user_id = ?",
+                "UPDATE learner_profile SET {col} = MAX(0.1, {col} - 0.2) WHERE user_id = ?".format(col=bottom),
                 (user_id,)
             )
     elif trigger == "persistent_error_type":
@@ -492,7 +492,7 @@ def _execute_proposal(conn, trigger: str, proposal_data: dict, user_id: int = 1)
             score = profile.get(col) or 0.5
             if score < 0.4:
                 conn.execute(
-                    f"UPDATE learner_profile SET {col} = MAX(0.1, {col} - 0.1) WHERE user_id = ?",
+                    "UPDATE learner_profile SET {col} = MAX(0.1, {col} - 0.1) WHERE user_id = ?".format(col=col),
                     (user_id,)
                 )
 

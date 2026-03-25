@@ -249,7 +249,7 @@ def _check_feature_claims(conn) -> list[dict]:
 
         hsk_claims = re.findall(r'HSK\s+(\d+)\s*[-–]\s*(\d+)', plain)
         for low, high in hsk_claims:
-            low_int, high_int = int(low), int(high)
+            _low_int, high_int = int(low), int(high)
             # Verify HSK levels exist in the database
             if conn is not None:
                 try:
@@ -290,7 +290,7 @@ def _check_feature_claims(conn) -> list[dict]:
             sw_path = os.path.join(_PROJECT_ROOT, "mandarin", "web", "static", "sw.js")
             manifest_path = os.path.join(_PROJECT_ROOT, "mandarin", "web", "static", "manifest.json")
             has_sw = os.path.isfile(sw_path)
-            has_manifest = os.path.isfile(manifest_path)
+            _has_manifest = os.path.isfile(manifest_path)
             if not has_sw:
                 line = _find_line_number(content.lower(), "offline")
                 findings.append(_finding(
@@ -522,7 +522,7 @@ def _check_email_accuracy(conn) -> list[dict]:
 
         # ── Brand name consistency ──
         # Check for old/wrong brand names
-        brand_names = re.findall(r'\b(aelu|Aelu|AELU)\b', content)
+        _brand_names = re.findall(r'\b(aelu|Aelu|AELU)\b', content)
         # Check for "Mandarin" used as the product name (old name)
         if re.search(r'(?<!\w)Mandarin(?:\s+app|\s+learning\s+app)', content):
             line = _find_line_number(content, "Mandarin")
