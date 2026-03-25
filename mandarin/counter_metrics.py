@@ -209,23 +209,23 @@ def production_vs_recognition_gap(conn: sqlite3.Connection,
         base_params.append(user_id)
 
     # Recognition accuracy
-    rec_row = conn.execute(f"""
+    rec_row = conn.execute("""
         SELECT COUNT(*) as total, SUM(CASE WHEN correct=1 THEN 1 ELSE 0 END) as correct
         FROM review_event
-        WHERE created_at >= datetime('now', '-{window_days} days')
-          AND drill_type NOT IN ({prod_placeholders})
+        WHERE created_at >= datetime('now', '-{} days')
+          AND drill_type NOT IN ({})
           AND drill_type IS NOT NULL
-          {user_clause}
-    """, list(production_types) + base_params).fetchone()
+          {}
+    """.format(window_days, prod_placeholders, user_clause), list(production_types) + base_params).fetchone()
 
     # Production accuracy
-    prod_row = conn.execute(f"""
+    prod_row = conn.execute("""
         SELECT COUNT(*) as total, SUM(CASE WHEN correct=1 THEN 1 ELSE 0 END) as correct
         FROM review_event
-        WHERE created_at >= datetime('now', '-{window_days} days')
-          AND drill_type IN ({prod_placeholders})
-          {user_clause}
-    """, list(production_types) + base_params).fetchone()
+        WHERE created_at >= datetime('now', '-{} days')
+          AND drill_type IN ({})
+          {}
+    """.format(window_days, prod_placeholders, user_clause), list(production_types) + base_params).fetchone()
 
     rec_acc = _safe_ratio(rec_row["correct"] or 0, rec_row["total"] or 0) if rec_row else None
     prod_acc = _safe_ratio(prod_row["correct"] or 0, prod_row["total"] or 0) if prod_row else None
@@ -260,29 +260,29 @@ def mastery_reversal_rate(conn: sqlite3.Connection,
         params.append(user_id)
 
     # Items that reached stable/durable
-    mastered = conn.execute(f"""
+    mastered = conn.execute("""
         SELECT COUNT(*) as cnt FROM progress
         WHERE (mastery_stage IN ('stable', 'durable')
                OR stable_since_date IS NOT NULL)
-          {user_clause}
-    """, params).fetchone()
+          {}
+    """.format(user_clause), params).fetchone()
     mastered_count = (mastered["cnt"] or 0) if mastered else 0
 
     # Items currently in decayed that had been stable
-    reversed_items = conn.execute(f"""
+    reversed_items = conn.execute("""
         SELECT COUNT(*) as cnt FROM progress
         WHERE mastery_stage = 'decayed'
           AND stable_since_date IS NOT NULL
-          {user_clause}
-    """, params).fetchone()
+          {}
+    """.format(user_clause), params).fetchone()
     reversal_count = (reversed_items["cnt"] or 0) if reversed_items else 0
 
     # Also count items with high weak_cycle_count
-    weak_cycles = conn.execute(f"""
+    weak_cycles = conn.execute("""
         SELECT COUNT(*) as cnt FROM progress
         WHERE weak_cycle_count >= 3
-          {user_clause}
-    """, params).fetchone()
+          {}
+    """.format(user_clause), params).fetchone()
     chronic_weak = (weak_cycles["cnt"] or 0) if weak_cycles else 0
 
     return {
@@ -308,12 +308,12 @@ def mastery_survival_curve(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT mastery_stage, stable_since_date, successes_while_stable
         FROM progress
         WHERE stable_since_date IS NOT NULL
-          {user_clause}
-    """, params).fetchall()
+          {}
+    """.format(user_clause), params).fetchall()
 
     if not rows:
         return {"checkpoints": {}, "sample_size": 0}
@@ -369,14 +369,14 @@ def hint_dependence_rate(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    row = conn.execute(f"""
+    row = conn.execute("""
         SELECT
             SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END) as total_correct,
             SUM(CASE WHEN correct = 1 AND confidence IN ('half', 'narrowed') THEN 1 ELSE 0 END) as hint_correct
         FROM review_event
-        WHERE created_at >= datetime('now', '-{window_days} days')
-          {user_clause}
-    """, params).fetchone()
+        WHERE created_at >= datetime('now', '-{} days')
+          {}
+    """.format(window_days, user_clause), params).fetchone()
 
     total_correct = (row["total_correct"] or 0) if row else 0
     hint_correct = (row["hint_correct"] or 0) if row else 0

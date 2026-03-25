@@ -6,6 +6,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from .admin_routes import admin_required
+from .api_errors import api_error_handler
 from .. import db
 
 logger = logging.getLogger(__name__)

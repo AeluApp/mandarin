@@ -17,6 +17,7 @@ from functools import wraps
 
 from flask import Blueprint, jsonify, request
 
+from .api_errors import api_error_handler
 from ..settings import OPENCLAW_TELEGRAM_TOKEN
 from ..openclaw import commands, security
 from ..openclaw import whatsapp_bot

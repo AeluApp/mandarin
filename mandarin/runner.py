@@ -1085,14 +1085,14 @@ def _update_interference_drill_times(conn, drilled_item_ids: list) -> None:
     now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     placeholders = ",".join("?" * len(drilled_item_ids))
     try:
-        conn.execute(f"""
+        conn.execute("""
             UPDATE interference_pairs SET last_item_a_drilled = ?
-            WHERE item_id_a IN ({placeholders})
-        """, [now] + drilled_item_ids)
-        conn.execute(f"""
+            WHERE item_id_a IN ({})
+        """.format(placeholders), [now] + drilled_item_ids)
+        conn.execute("""
             UPDATE interference_pairs SET last_item_b_drilled = ?
-            WHERE item_id_b IN ({placeholders})
-        """, [now] + drilled_item_ids)
+            WHERE item_id_b IN ({})
+        """.format(placeholders), [now] + drilled_item_ids)
         conn.commit()
     except sqlite3.OperationalError:
         pass  # Columns not yet migrated
@@ -1277,17 +1277,17 @@ def _show_peak_moment(conn: sqlite3.Connection, state: SessionState,
     placeholders = ",".join("?" * len(correct_ids))
     try:
         rows = conn.execute(
-            f"""SELECT re.content_item_id, ci.hanzi, ci.pinyin, ci.english,
+            """SELECT re.content_item_id, ci.hanzi, ci.pinyin, ci.english,
                        MAX(re.reviewed_at) as last_error
                 FROM review_event re
                 JOIN content_item ci ON re.content_item_id = ci.id
                 WHERE re.user_id = ?
-                  AND re.content_item_id IN ({placeholders})
+                  AND re.content_item_id IN ({})
                   AND re.correct = 0
                   AND re.reviewed_at >= datetime('now', '-14 days')
                 GROUP BY re.content_item_id
                 ORDER BY last_error DESC
-                LIMIT 1""",
+                LIMIT 1""".format(placeholders),
             [user_id] + correct_ids,
         ).fetchone()
 

@@ -410,6 +410,17 @@ class SessionPlan:
         self.blocks.insert(0, DrillBlock(items=value))
 
 
+# Backward compat: allow SessionPlan(drills=[...]) as __init__ kwarg
+_SessionPlan_orig_init = SessionPlan.__init__
+
+def _session_plan_init(self, *args, drills=None, **kwargs):
+    _SessionPlan_orig_init(self, *args, **kwargs)
+    if drills is not None:
+        self.drills = drills
+
+SessionPlan.__init__ = _session_plan_init
+
+
 # ── Gap messages (humane, not shaming) ──────────────
 
 GAP_MESSAGES = {
