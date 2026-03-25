@@ -1050,13 +1050,13 @@ def _get_core_injection_items(conn: sqlite3.Connection, seen_ids: set[int], limi
             # Get unseen items from this lens
             if seen_ids:
                 placeholders = ",".join("?" * len(seen_ids))
-                unseen = conn.execute(f"""
+                unseen = conn.execute("""
                     SELECT * FROM content_item
                     WHERE content_lens = ? AND times_shown = 0
                       AND status = 'drill_ready' AND review_status = 'approved'
                       AND id NOT IN ({placeholders})
                     ORDER BY RANDOM() LIMIT ?
-                """, (lens, *seen_ids, limit)).fetchall()
+                """.format(placeholders=placeholders), (lens, *seen_ids, limit)).fetchall()
             else:
                 unseen = conn.execute("""
                     SELECT * FROM content_item
@@ -1816,14 +1816,14 @@ def _apply_cross_session_interference_penalty(conn, due_items):
         return
     placeholders = ",".join("?" * len(item_ids))
     try:
-        recent_partners = conn.execute(f"""
+        recent_partners = conn.execute("""
             SELECT ip.item_id_a, ip.item_id_b
             FROM interference_pairs ip
             WHERE ip.interference_strength = 'high'
               AND (ip.item_id_a IN ({placeholders}) OR ip.item_id_b IN ({placeholders}))
               AND (ip.last_item_a_drilled >= datetime('now', '-1 day')
                    OR ip.last_item_b_drilled >= datetime('now', '-1 day'))
-        """, item_ids + item_ids).fetchall()
+        """.format(placeholders=placeholders), item_ids + item_ids).fetchall()
     except sqlite3.OperationalError:
         return
 
@@ -2745,7 +2745,7 @@ def _plan_modality_drills(conn: sqlite3.Connection, params: dict,
                 if path_ids:
                     placeholders = ",".join("?" * len(path_ids))
                     rows = conn.execute(
-                        f"SELECT * FROM content_item WHERE id IN ({placeholders}) AND drill_ready=1",
+                        "SELECT * FROM content_item WHERE id IN ({}) AND drill_ready=1".format(placeholders),
                         path_ids,
                     ).fetchall()
                     dijkstra_items = [dict(r) for r in rows] if rows else []
@@ -3242,9 +3242,9 @@ def _apply_peak_end_ordering(drills: list[DrillItem], conn: sqlite3.Connection, 
         item_ids = [d.content_item_id for d in drills]
         placeholders = ",".join("?" * len(item_ids))
         rows = conn.execute(
-            f"""SELECT content_item_id, mastery_stage, streak
+            """SELECT content_item_id, mastery_stage, streak
                 FROM progress
-                WHERE user_id = ? AND content_item_id IN ({placeholders})""",
+                WHERE user_id = ? AND content_item_id IN ({placeholders})""".format(placeholders=placeholders),
             [user_id] + item_ids,
         ).fetchall()
 

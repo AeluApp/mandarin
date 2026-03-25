@@ -409,7 +409,7 @@ def session_fatigue_signals(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT early_exit, boredom_flags, duration_seconds,
                items_planned, items_completed, items_correct,
                started_at
@@ -418,7 +418,7 @@ def session_fatigue_signals(conn: sqlite3.Connection,
           AND items_planned > 0
           {user_clause}
         ORDER BY started_at
-    """, params).fetchall()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchall()
 
     if not rows:
         return {"early_exit_rate": None, "boredom_rate": None,
@@ -476,7 +476,7 @@ def backlog_burden(conn: sqlite3.Connection,
 
     today = datetime.now(UTC).strftime("%Y-%m-%d")
 
-    overdue = conn.execute(f"""
+    overdue = conn.execute("""
         SELECT COUNT(*) as cnt,
                AVG(julianday('now') - julianday(next_review_date)) as avg_overdue
         FROM progress
@@ -484,14 +484,14 @@ def backlog_burden(conn: sqlite3.Connection,
           AND next_review_date < ?
           AND (suspended_until IS NULL OR suspended_until < ?)
           {user_clause}
-    """, [today, today] + params).fetchone()
+    """.format(user_clause=user_clause), [today, today] + params).fetchone()
 
-    total_active = conn.execute(f"""
+    total_active = conn.execute("""
         SELECT COUNT(*) as cnt FROM progress
         WHERE next_review_date IS NOT NULL
           AND (suspended_until IS NULL OR suspended_until < ?)
           {user_clause}
-    """, [today] + params).fetchone()
+    """.format(user_clause=user_clause), [today] + params).fetchone()
 
     overdue_count = (overdue["cnt"] or 0) if overdue else 0
     avg_overdue_days = round(overdue["avg_overdue"] or 0, 1) if overdue else 0
@@ -522,26 +522,27 @@ def learning_efficiency(conn: sqlite3.Connection,
         params.append(user_id)
 
     # Total study minutes
-    dur_row = conn.execute(f"""
+    dur_row = conn.execute("""
         SELECT SUM(duration_seconds) as total_secs
         FROM session_log
         WHERE started_at >= datetime('now', '-{window_days} days')
           AND duration_seconds > 0
           {user_clause}
-    """, params).fetchone()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchone()
     total_minutes = ((dur_row["total_secs"] or 0) / 60.0) if dur_row else 0
 
     # Count mastery promotions (items that moved UP in stage during the window)
     # We approximate via session_metrics if available, or count stable/durable items
     promotions = 0
     if _table_exists(conn, "session_metrics"):
-        prom_row = conn.execute(f"""
+        prom_row = conn.execute("""
             SELECT SUM(items_strengthened) as strengthened
             FROM session_metrics sm
             JOIN session_log sl ON sm.session_id = sl.id
             WHERE sl.started_at >= datetime('now', '-{window_days} days')
-              {user_clause.replace('user_id', 'sl.user_id')}
-        """, params).fetchone()
+              {user_clause}
+        """.format(window_days=int(window_days),
+                   user_clause=user_clause.replace('user_id', 'sl.user_id')), params).fetchone()
         promotions = (prom_row["strengthened"] or 0) if prom_row else 0
 
     return {
@@ -568,14 +569,14 @@ def post_break_recovery(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT started_at, items_correct, items_completed
         FROM session_log
         WHERE started_at >= datetime('now', '-{window_days} days')
           AND items_completed > 0
           {user_clause}
         ORDER BY started_at
-    """, params).fetchall()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchall()
 
     if len(rows) < 2:
         return {"post_break_accuracy": None, "break_count": 0}
@@ -623,13 +624,13 @@ def answer_latency_suspiciousness(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT response_ms, correct, drill_type
         FROM review_event
         WHERE created_at >= datetime('now', '-{window_days} days')
           AND response_ms IS NOT NULL AND response_ms > 0
           {user_clause}
-    """, params).fetchall()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchall()
 
     if not rows:
         return {"suspicious_fast_rate": None, "suspicious_count": 0,
@@ -668,12 +669,12 @@ def easy_overuse_collapse(conn: sqlite3.Connection,
         params.append(user_id)
 
     # Items with high ease_factor (was repeatedly easy) but now struggling
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT ease_factor, streak_incorrect, mastery_stage, total_attempts
         FROM progress
         WHERE total_attempts >= 5
           {user_clause}
-    """, params).fetchall()
+    """.format(user_clause=user_clause), params).fetchall()
 
     if not rows:
         return {"collapse_rate": None, "collapsed_count": 0, "total_items": 0}
@@ -713,12 +714,12 @@ def recognition_only_progress(conn: sqlite3.Connection,
         'speaking', 'word_order', 'sentence_build', 'shadowing',
     }
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT mastery_stage, drill_types_seen
         FROM progress
         WHERE mastery_stage IN ('stabilizing', 'stable', 'durable')
           {user_clause}
-    """, params).fetchall()
+    """.format(user_clause=user_clause), params).fetchall()
 
     if not rows:
         return {"recognition_only_rate": None, "recognition_only_count": 0,
@@ -753,7 +754,7 @@ def difficulty_avoidance(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    row = conn.execute(f"""
+    row = conn.execute("""
         SELECT
             COUNT(*) as total,
             SUM(CASE WHEN ci.difficulty < 0.3 AND re.correct = 1 THEN 1 ELSE 0 END) as easy_correct,
@@ -763,7 +764,7 @@ def difficulty_avoidance(conn: sqlite3.Connection,
         JOIN content_item ci ON re.content_item_id = ci.id
         WHERE re.created_at >= datetime('now', '-{window_days} days')
           {user_clause}
-    """, params).fetchone()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchone()
 
     if not row or not row["total_correct"]:
         return {"low_challenge_rate": None, "easy_correct_pct": None,
@@ -797,13 +798,13 @@ def repeated_exposure_dependence(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT total_attempts, total_correct, mastery_stage
         FROM progress
         WHERE mastery_stage IN ('stabilizing', 'stable', 'durable')
           AND total_attempts >= 3
           {user_clause}
-    """, params).fetchall()
+    """.format(user_clause=user_clause), params).fetchall()
 
     if not rows:
         return {"high_rep_rate": None, "high_rep_count": 0, "advanced_count": 0}
@@ -845,13 +846,13 @@ def holdout_probe_performance(conn: sqlite3.Connection,
     if user_id:
         params.append(user_id)
 
-    row = conn.execute(f"""
+    row = conn.execute("""
         SELECT COUNT(*) as total,
                SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END) as correct
         FROM counter_metric_holdout
         WHERE administered_at >= datetime('now', '-{window_days} days')
           {user_clause}
-    """, params).fetchone()
+    """.format(window_days=int(window_days), user_clause=user_clause), params).fetchone()
 
     total = (row["total"] or 0) if row else 0
     correct = (row["correct"] or 0) if row else 0
@@ -879,24 +880,24 @@ def progress_honesty_score(conn: sqlite3.Connection,
         params.append(user_id)
 
     # Holdout accuracy for items the user has "mastered" in the main loop
-    mastered_row = conn.execute(f"""
+    mastered_row = conn.execute("""
         SELECT COUNT(*) as total,
                SUM(CASE WHEN h.correct = 1 THEN 1 ELSE 0 END) as correct
         FROM counter_metric_holdout h
         JOIN progress p ON h.user_id = p.user_id AND h.content_item_id = p.content_item_id
         WHERE p.mastery_stage IN ('stable', 'durable')
           {user_clause}
-    """, params).fetchone()
+    """.format(user_clause=user_clause), params).fetchone()
 
     # Holdout accuracy for items NOT yet mastered
-    unmastered_row = conn.execute(f"""
+    unmastered_row = conn.execute("""
         SELECT COUNT(*) as total,
                SUM(CASE WHEN h.correct = 1 THEN 1 ELSE 0 END) as correct
         FROM counter_metric_holdout h
         JOIN progress p ON h.user_id = p.user_id AND h.content_item_id = p.content_item_id
         WHERE p.mastery_stage NOT IN ('stable', 'durable')
           {user_clause}
-    """, params).fetchone()
+    """.format(user_clause=user_clause), params).fetchone()
 
     m_total = (mastered_row["total"] or 0) if mastered_row else 0
     m_correct = (mastered_row["correct"] or 0) if mastered_row else 0
@@ -1012,12 +1013,12 @@ def content_approval_latency(conn: sqlite3.Connection,
         return {"median_latency_days": None, "sample_size": 0}
 
     # pi_ai_review_queue uses `queued_at` for creation timestamp
-    rows = conn.execute(f"""
+    rows = conn.execute("""
         SELECT julianday(reviewed_at) - julianday(queued_at) as latency_days
         FROM pi_ai_review_queue
         WHERE reviewed_at IS NOT NULL
           AND reviewed_at >= datetime('now', '-{window_days} days')
-    """).fetchall()
+    """.format(window_days=int(window_days))).fetchall()
 
     if not rows:
         return {"median_latency_days": None, "sample_size": 0}

@@ -295,6 +295,367 @@ _TEMPLATES: list[dict[str, Any]] = [
         "scope": "business",
         "duration_days": 30,
     },
+    # ── Remaining dimension templates ─────────────────────────────────
+    # Profitability templates
+    {
+        "match": {"dimension": "profitability", "keywords": ["cost", "revenue", "margin", "pricing"]},
+        "name": "auto_pricing_tier_test",
+        "description": "Test adjusted pricing tiers for better conversion-to-revenue balance",
+        "hypothesis": "A mid-price tier between free and premium increases total revenue per user",
+        "variants": ["control", "mid_tier"],
+        "scope": "business",
+        "duration_days": 30,
+    },
+    # Engineering templates
+    {
+        "match": {"dimension": "engineering", "keywords": ["latency", "performance", "load", "error"]},
+        "name": "auto_preload_strategy",
+        "description": "Test aggressive preloading of next drill vs lazy loading",
+        "hypothesis": "Preloading the next drill reduces inter-drill wait time and improves session flow",
+        "variants": ["control_lazy", "preloaded"],
+        "scope": "architecture",
+        "duration_days": 14,
+    },
+    # SRS funnel templates
+    {
+        "match": {"dimension": "srs_funnel", "keywords": ["lapse", "decay", "promotion", "stage"]},
+        "name": "auto_srs_lapse_recovery",
+        "description": "Test gentler lapse penalty vs standard SRS demotion",
+        "hypothesis": "Reducing lapse demotion severity improves long-term retention without inflating mastery",
+        "variants": ["control", "gentle_lapse"],
+        "scope": "parameter",
+        "duration_days": 30,
+    },
+    # Tone phonology templates
+    {
+        "match": {"dimension": "tone_phonology", "keywords": ["tone", "pinyin", "pronunciation", "phonology"]},
+        "name": "auto_tone_pair_drills",
+        "description": "Test dedicated tone-pair minimal-pair drills vs mixed tone practice",
+        "hypothesis": "Focused tone-pair contrast drills improve tone discrimination accuracy",
+        "variants": ["control_mixed", "tone_pair_focused"],
+        "scope": "content",
+        "duration_days": 21,
+    },
+    # Encounter loop templates
+    {
+        "match": {"dimension": "encounter_loop", "keywords": ["encounter", "exposure", "repeat", "frequency"]},
+        "name": "auto_encounter_spacing",
+        "description": "Test varied encounter spacing: more frequent short exposures vs fewer deep ones",
+        "hypothesis": "Higher-frequency shorter encounters improve recall better than fewer longer exposures",
+        "variants": ["control", "frequent_short"],
+        "scope": "parameter",
+        "duration_days": 21,
+    },
+    # Output production templates
+    {
+        "match": {"dimension": "output_production", "keywords": ["writing", "typing", "produce", "generate"]},
+        "name": "auto_guided_production",
+        "description": "Test guided character writing with stroke hints vs unguided production",
+        "hypothesis": "Stroke-order hints during production drills reduce errors without creating dependence",
+        "variants": ["control_unguided", "stroke_hints"],
+        "scope": "content",
+        "duration_days": 21,
+    },
+    # Tutor integration templates
+    {
+        "match": {"dimension": "tutor_integration", "keywords": ["tutor", "teacher", "instructor", "human"]},
+        "name": "auto_tutor_prep_summary",
+        "description": "Test pre-session tutor summaries showing learner weak areas",
+        "hypothesis": "Providing tutors with learner analytics before sessions improves session effectiveness",
+        "variants": ["control", "tutor_summary"],
+        "scope": "content",
+        "duration_days": 30,
+    },
+    # Tone quality templates
+    {
+        "match": {"dimension": "tone_quality", "keywords": ["tone", "accuracy", "sandhi", "contour"]},
+        "name": "auto_tone_feedback_mode",
+        "description": "Test visual tone contour feedback vs text-only tone correction",
+        "hypothesis": "Visual pitch contour display helps learners self-correct tones faster",
+        "variants": ["control_text", "visual_contour"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # PM templates
+    {
+        "match": {"dimension": "pm", "keywords": ["roadmap", "priority", "backlog", "feature"]},
+        "name": "auto_feature_request_voting",
+        "description": "Test in-app feature voting to prioritize roadmap by user demand",
+        "hypothesis": "User-voted features have higher adoption rates than internally-prioritized ones",
+        "variants": ["control", "user_voted"],
+        "scope": "business",
+        "duration_days": 30,
+    },
+    # Timing templates
+    {
+        "match": {"dimension": "timing", "keywords": ["response", "speed", "delay", "wait"]},
+        "name": "auto_feedback_delay",
+        "description": "Test immediate vs brief delayed feedback after drill answers",
+        "hypothesis": "A 500ms delay before showing correctness improves recall (desirable difficulty)",
+        "variants": ["control_immediate", "delayed_500ms"],
+        "scope": "parameter",
+        "duration_days": 14,
+    },
+    # UI templates (distinct from visual_vibe/ux)
+    {
+        "match": {"dimension": "ui", "keywords": ["layout", "component", "button", "interface"]},
+        "name": "auto_drill_layout_density",
+        "description": "Test compact vs spacious drill layout for answer options",
+        "hypothesis": "More spacious answer layouts reduce mis-taps and improve perceived quality",
+        "variants": ["control_compact", "spacious_layout"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # Competitive templates
+    {
+        "match": {"dimension": "competitive", "keywords": ["competitor", "benchmark", "market", "alternative"]},
+        "name": "auto_unique_value_highlight",
+        "description": "Test highlighting unique features vs standard onboarding for switchers",
+        "hypothesis": "Surfacing differentiated features to new users from competitors improves retention",
+        "variants": ["control", "differentiator_highlight"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Copy templates
+    {
+        "match": {"dimension": "copy", "keywords": ["text", "wording", "label", "copy", "message"]},
+        "name": "auto_encouragement_tone",
+        "description": "Test data-grounded feedback copy vs neutral phrasing",
+        "hypothesis": "Specific, data-backed feedback ('you improved X') outperforms generic encouragement",
+        "variants": ["control_neutral", "data_grounded"],
+        "scope": "content",
+        "duration_days": 14,
+    },
+    # Tonal vibe templates
+    {
+        "match": {"dimension": "tonal_vibe", "keywords": ["voice", "personality", "warm", "tone"]},
+        "name": "auto_app_voice_warmth",
+        "description": "Test warmer conversational tone vs current neutral instructional voice",
+        "hypothesis": "Slightly warmer app voice increases engagement without feeling patronizing",
+        "variants": ["control_neutral", "warm_voice"],
+        "scope": "content",
+        "duration_days": 21,
+    },
+    # Feature usage templates
+    {
+        "match": {"dimension": "feature_usage", "keywords": ["usage", "adoption", "discover", "underused"]},
+        "name": "auto_feature_discovery_nudge",
+        "description": "Test contextual feature hints for underused but valuable features",
+        "hypothesis": "Contextual nudges increase adoption of underused features without annoying users",
+        "variants": ["control", "contextual_hints"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # Engineering health templates
+    {
+        "match": {"dimension": "engineering_health", "keywords": ["debt", "test", "coverage", "build"]},
+        "name": "auto_error_recovery_ux",
+        "description": "Test graceful error recovery UI vs current error handling",
+        "hypothesis": "Friendly error recovery with retry options reduces user drop-off after errors",
+        "variants": ["control", "graceful_recovery"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # Strategic templates
+    {
+        "match": {"dimension": "strategic", "keywords": ["goal", "vision", "long-term", "strategy"]},
+        "name": "auto_learning_goal_setting",
+        "description": "Test explicit goal-setting during onboarding vs organic exploration",
+        "hypothesis": "Users who set explicit learning goals have higher 30-day retention",
+        "variants": ["control_organic", "goal_setting"],
+        "scope": "ui",
+        "duration_days": 30,
+    },
+    # Governance templates
+    {
+        "match": {"dimension": "governance", "keywords": ["policy", "compliance", "rule", "threshold"]},
+        "name": "auto_guardrail_sensitivity",
+        "description": "Test stricter vs relaxed content guardrails for user-generated input",
+        "hypothesis": "Slightly relaxed guardrails reduce false positives without increasing harmful content",
+        "variants": ["control_strict", "relaxed_guardrails"],
+        "scope": "parameter",
+        "duration_days": 21,
+    },
+    # Data quality templates
+    {
+        "match": {"dimension": "data_quality", "keywords": ["data", "quality", "consistency", "missing"]},
+        "name": "auto_data_validation_feedback",
+        "description": "Test user-facing data quality indicators for content items",
+        "hypothesis": "Showing content confidence indicators helps users trust and engage with material",
+        "variants": ["control", "confidence_indicators"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # GenAI governance templates
+    {
+        "match": {"dimension": "genai_governance", "keywords": ["ai_safety", "hallucination", "filter", "moderation"]},
+        "name": "auto_ai_confidence_display",
+        "description": "Test showing AI confidence scores alongside generated explanations",
+        "hypothesis": "Displaying AI confidence helps users calibrate trust in AI-generated content",
+        "variants": ["control", "confidence_shown"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Memory model templates
+    {
+        "match": {"dimension": "memory_model", "keywords": ["memory", "forgetting", "curve", "retention"]},
+        "name": "auto_forgetting_curve_calibration",
+        "description": "Test personalized vs population-average forgetting curve parameters",
+        "hypothesis": "Per-user forgetting curve calibration improves review scheduling accuracy",
+        "variants": ["control_population", "personalized_curve"],
+        "scope": "parameter",
+        "duration_days": 30,
+    },
+    # Learner model templates
+    {
+        "match": {"dimension": "learner_model", "keywords": ["learner", "profile", "model", "predict"]},
+        "name": "auto_learner_profile_transparency",
+        "description": "Test showing learners their model profile vs keeping it hidden",
+        "hypothesis": "Transparent learner profiles increase metacognitive engagement and study efficiency",
+        "variants": ["control_hidden", "profile_visible"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # RAG templates
+    {
+        "match": {"dimension": "rag", "keywords": ["retrieval", "context", "knowledge", "search"]},
+        "name": "auto_rag_context_depth",
+        "description": "Test deeper context retrieval (more chunks) vs current retrieval depth",
+        "hypothesis": "Deeper context retrieval improves AI explanation quality for complex grammar",
+        "variants": ["control", "deeper_context"],
+        "scope": "parameter",
+        "duration_days": 21,
+    },
+    # Native speaker validation templates
+    {
+        "match": {"dimension": "native_speaker_validation", "keywords": ["native", "validation", "naturalness", "authentic"]},
+        "name": "auto_native_validated_content",
+        "description": "Test native-speaker-validated example sentences vs AI-generated ones",
+        "hypothesis": "Native-validated examples improve learner naturalness scores in production drills",
+        "variants": ["control_ai", "native_validated"],
+        "scope": "content",
+        "duration_days": 30,
+    },
+    # Curriculum templates
+    {
+        "match": {"dimension": "curriculum", "keywords": ["curriculum", "sequence", "order", "syllabus"]},
+        "name": "auto_curriculum_flexibility",
+        "description": "Test flexible curriculum allowing learner-chosen topic order vs strict sequence",
+        "hypothesis": "Flexible topic ordering increases engagement without harming learning outcomes",
+        "variants": ["control_strict", "flexible_order"],
+        "scope": "content",
+        "duration_days": 30,
+    },
+    # Input layer templates
+    {
+        "match": {"dimension": "input_layer", "keywords": ["input", "keyboard", "ime", "entry"]},
+        "name": "auto_input_method_guidance",
+        "description": "Test inline IME guidance vs unguided character input for production drills",
+        "hypothesis": "Inline IME guidance reduces input friction and improves drill completion rates",
+        "variants": ["control_unguided", "ime_guidance"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # Accountability templates
+    {
+        "match": {"dimension": "accountability", "keywords": ["accountability", "commitment", "goal", "promise"]},
+        "name": "auto_study_commitment_device",
+        "description": "Test opt-in weekly study commitment vs no commitment device",
+        "hypothesis": "Voluntary weekly study commitments increase session frequency without coercion",
+        "variants": ["control", "weekly_commitment"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Commercial templates
+    {
+        "match": {"dimension": "commercial", "keywords": ["conversion", "upgrade", "premium", "subscription"]},
+        "name": "auto_premium_value_preview",
+        "description": "Test previewing premium features inline vs gated upgrade prompts",
+        "hypothesis": "Brief premium feature previews during free use increase conversion rate",
+        "variants": ["control_gated", "inline_preview"],
+        "scope": "business",
+        "duration_days": 21,
+    },
+    # Agentic templates
+    {
+        "match": {"dimension": "agentic", "keywords": ["agent", "autonomous", "proactive", "suggestion"]},
+        "name": "auto_proactive_study_suggestions",
+        "description": "Test AI agent proactively suggesting study topics vs user-initiated selection",
+        "hypothesis": "Proactive AI study suggestions reduce decision fatigue and improve session starts",
+        "variants": ["control_manual", "ai_suggestions"],
+        "scope": "parameter",
+        "duration_days": 14,
+    },
+    # Cross-platform templates
+    {
+        "match": {"dimension": "cross_platform", "keywords": ["sync", "device", "cross-device", "continuity"]},
+        "name": "auto_session_continuity",
+        "description": "Test cross-device session continuity prompts vs fresh starts",
+        "hypothesis": "Offering to resume last session on new device increases multi-device retention",
+        "variants": ["control_fresh", "continue_session"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Growth accounting templates
+    {
+        "match": {"dimension": "growth_accounting", "keywords": ["growth", "acquisition", "activation", "churn"]},
+        "name": "auto_reactivation_campaign",
+        "description": "Test personalized reactivation nudges for churned users vs generic reminders",
+        "hypothesis": "Personalized reactivation messages citing last progress increase return rate",
+        "variants": ["control_generic", "personalized_reactivation"],
+        "scope": "marketing",
+        "duration_days": 30,
+    },
+    # Journey templates
+    {
+        "match": {"dimension": "journey", "keywords": ["journey", "path", "progress", "milestone"]},
+        "name": "auto_learning_journey_map",
+        "description": "Test visible learning journey map vs hidden progress tracking",
+        "hypothesis": "A visible journey map showing overall progress increases long-term engagement",
+        "variants": ["control_hidden", "journey_visible"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Copy drift templates
+    {
+        "match": {"dimension": "copy_drift", "keywords": ["drift", "outdated", "stale", "mismatch"]},
+        "name": "auto_dynamic_copy_refresh",
+        "description": "Test dynamically updated marketing copy vs static copy",
+        "hypothesis": "Marketing copy reflecting real-time content stats reduces trust erosion",
+        "variants": ["control_static", "dynamic_copy"],
+        "scope": "marketing",
+        "duration_days": 14,
+    },
+    # Runtime health templates
+    {
+        "match": {"dimension": "runtime_health", "keywords": ["crash", "exception", "uptime", "stability"]},
+        "name": "auto_error_boundary_granularity",
+        "description": "Test fine-grained error boundaries per drill vs page-level error handling",
+        "hypothesis": "Per-drill error boundaries prevent one failing drill from crashing the session",
+        "variants": ["control_page", "per_drill_boundary"],
+        "scope": "architecture",
+        "duration_days": 14,
+    },
+    # Meta templates
+    {
+        "match": {"dimension": "meta", "keywords": ["meta", "self-improve", "intelligence", "system"]},
+        "name": "auto_feedback_loop_frequency",
+        "description": "Test more frequent intelligence audit cycles vs current cadence",
+        "hypothesis": "More frequent but lighter audit cycles catch issues earlier with less overhead",
+        "variants": ["control_cadence", "frequent_light"],
+        "scope": "parameter",
+        "duration_days": 30,
+    },
+    # Methodology templates
+    {
+        "match": {"dimension": "methodology", "keywords": ["method", "approach", "technique", "pedagogy"]},
+        "name": "auto_comprehensible_input_ratio",
+        "description": "Test higher ratio of comprehensible input (i+1) vs current difficulty mix",
+        "hypothesis": "More content at i+1 level improves acquisition rate per Krashen's input hypothesis",
+        "variants": ["control", "higher_i_plus_one"],
+        "scope": "parameter",
+        "duration_days": 30,
+    },
 ]
 
 
