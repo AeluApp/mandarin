@@ -53,4 +53,4 @@ jobs:
       - name: Post-deploy smoke test
         run: ./scripts/smoke_test.sh
         env:
-          BASE_URL: https://aelu.app
+          BASE_URL: https://aelu-app.fly.dev
