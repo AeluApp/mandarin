@@ -2728,6 +2728,14 @@ function showInput(prompt, id) {
       btn.setAttribute("aria-checked", "false");
       btn.setAttribute("tabindex", i === 0 ? "0" : "-1");
       btn.textContent = options[i].text;
+      // Keyboard hint pill (1-9)
+      if (i < 9) {
+        var hint = document.createElement("span");
+        hint.className = "key-hint";
+        hint.setAttribute("aria-hidden", "true");
+        hint.textContent = String(i + 1);
+        btn.appendChild(hint);
+      }
       btn.style.animationDelay = (i * OPTION_STAGGER) + "s";
       btn.addEventListener("click", (function(val, txt, btnRef) {
         return function() {

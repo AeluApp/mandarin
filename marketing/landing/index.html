@@ -57,38 +57,60 @@
   <style>
     :root {
       --color-base: #F2EBE0;
-      --color-surface: #F7F1E8;
+      --color-surface: #F2EBE0;
+      --color-surface-alt: #EAE2D6;
       --color-text: #2A3650;
-      --color-text-faint: #8B8680;
+      --color-text-dim: #5A6678;
+      --color-text-faint: #6A7080;
       --color-accent: #946070;
+      --color-accent-dim: #7A5060;
       --color-secondary: #6A7A5A;
+      --color-correct: #5A7A5A;
+      --color-incorrect: #806058;
       --color-border: #D8D0C4;
+      --color-divider: #D8D0C4;
       --color-on-accent: #FFFFFF;
-      --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-heading: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+      --font-body: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
       --font-hanzi: 'Noto Serif SC', 'Songti SC', serif;
       --radius: 0;
       --space-1: 0.25rem;
       --space-2: 0.5rem;
-      --space-3: 1rem;
-      --space-4: 1.5rem;
-      --space-5: 2rem;
-      --space-6: 3rem;
-      --space-8: 5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4rem;
       /* 2026 fluid typography */
       --text-display: clamp(2.2rem, 5vw, 3.5rem);
       --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
       --ease-upward: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* WebGL atmosphere fallback */
+      --mesh-color-2: color-mix(in srgb, var(--color-accent) 6%, var(--color-base));
+      --mesh-color-3: color-mix(in srgb, var(--color-secondary) 4%, var(--color-base));
+      --color-sky-top: #E4E0D6;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --color-base: #1C2028;
-        --color-surface: #242830;
+        --color-surface: #1C2028;
+        --color-surface-alt: #242830;
         --color-text: #E4DDD0;
-        --color-text-faint: #8B8680;
+        --color-text-dim: #A09888;
+        --color-text-faint: #A8A090;
+        --color-accent: #B07888;
+        --color-accent-dim: #9A6878;
+        --color-secondary: #8AAA7A;
+        --color-correct: #7A9A7A;
+        --color-incorrect: #A8988E;
         --color-border: #3A3530;
+        --color-divider: #3A3530;
+        --mesh-color-2: color-mix(in srgb, var(--color-accent) 4%, var(--color-base));
+        --mesh-color-3: color-mix(in srgb, var(--color-secondary) 3%, var(--color-base));
+        --color-sky-top: #242830;
       }
     }
 
@@ -125,73 +147,11 @@
       padding: var(--space-8) 0 var(--space-6);
       position: relative;
       overflow: hidden;
-    }
-
-    /* Hero video background */
-    .hero-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      opacity: 0;
-      animation: heroVideoReveal 2s ease-out 0.2s forwards;
-    }
-    @keyframes heroVideoReveal {
-      from { opacity: 0; transform: scale(1.03); }
-      to { opacity: 0.55; transform: scale(1); }
-    }
-    @media (prefers-color-scheme: dark) {
-      .hero-video { filter: brightness(0.4) saturate(0.8); }
-      @keyframes heroVideoReveal {
-        from { opacity: 0; transform: scale(1.03); }
-        to { opacity: 0.35; transform: scale(1); }
-      }
-    }
-    /* Gradient overlay for text readability */
-    .hero-video-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: linear-gradient(to bottom, var(--color-base) 0%, transparent 30%, transparent 70%, var(--color-base) 100%);
-      pointer-events: none;
-    }
-
-    /* Calligraphy watermark behind hero (replaces font glyph) */
-    .hero-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
-      width: clamp(16rem, 30vw, 24rem);
-      height: auto;
-      opacity: 0.06;
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @media (prefers-color-scheme: dark) {
-      .hero-watermark { mix-blend-mode: screen; opacity: 0.04; filter: invert(1); }
-    }
-
-    /* Parallax plant sprites */
-    .parallax-sprite {
-      position: absolute;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0;
-      animation: spriteReveal 1.5s ease-out 1.5s forwards;
-    }
-    .parallax-sprite--plum { right: 5%; bottom: 10%; width: 120px; }
-    .parallax-sprite--bamboo { left: 3%; bottom: 25%; width: 80px; }
-    @keyframes spriteReveal {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 0.4; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-video, .hero-watermark, .parallax-sprite { animation: none !important; opacity: 0.3 !important; }
+      min-height: min(85vh, 700px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero .container { position: relative; z-index: 1; }
@@ -213,12 +173,13 @@
 
     .hero-hanzi {
       font-family: var(--font-hanzi);
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(4rem, 15vw, 10rem);
       color: var(--color-accent);
-      letter-spacing: 0.15em;
-      margin-bottom: var(--space-3);
-      opacity: 0.9;
-      animation: heroFadeUp 0.8s var(--ease-upward) 0.1s backwards;
+      letter-spacing: calc(0.15em + var(--scroll-progress, 0) * 0.5em);
+      opacity: calc(0.9 - var(--scroll-progress, 0) * 0.8);
+      margin-bottom: var(--space-4);
+      line-height: 1.1;
+      transition: none;
     }
 
     .hero h1 {
@@ -237,7 +198,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-hanzi, .hero h1, .hero-sub, .hero-promise, .cta-group { animation: none !important; }
+      .hero-hanzi, .hero h1, .hero-sub, .cta-group { animation: none !important; }
+      .hero-hanzi { letter-spacing: 0.15em !important; opacity: 0.9 !important; }
     }
 
     /* ── Scroll-driven section animations ── */
@@ -245,16 +207,11 @@
       --progress: 0;
     }
 
-    /* Hero parallax: content lifts as you scroll, image recedes */
+    /* Hero parallax: content lifts as you scroll */
     .hero .container {
-      transform: translateY(calc(var(--scroll-progress, 0) * -30px));
-      opacity: calc(1 - var(--scroll-progress, 0) * 0.6);
+      transform: translateY(calc(var(--scroll-progress, 0) * -40px));
+      opacity: calc(1 - var(--scroll-progress, 0) * 0.5);
       transition: none;
-    }
-
-    /* Giant watermark character shifts with scroll */
-    .hero::before {
-      transform: translate(-50%, calc(-55% + var(--scroll-progress, 0) * -60px));
     }
 
     /* Feature cards stagger entrance with depth */
@@ -303,8 +260,8 @@
     .hero-hanzi .char-reveal {
       display: inline-block;
       opacity: 0;
-      transform: translateY(12px);
-      animation: charReveal 0.6s var(--ease-upward) forwards;
+      transform: translateY(24px);
+      animation: charReveal 0.8s var(--ease-upward) forwards;
     }
     @keyframes charReveal {
       to { opacity: 0.9; transform: translateY(0); }
@@ -347,6 +304,16 @@
       flex-direction: column;
       align-items: center;
       gap: var(--space-2);
+      background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+      backdrop-filter: blur(16px) saturate(1.15);
+      -webkit-backdrop-filter: blur(16px) saturate(1.15);
+      border: 1px solid color-mix(in srgb, var(--color-divider, #D8D0C4) 40%, transparent);
+      padding: var(--space-4) var(--space-4);
+      max-width: 520px;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-sizing: border-box;
     }
 
     .cta-email {
@@ -354,6 +321,10 @@
       gap: var(--space-2);
       width: 100%;
       max-width: 420px;
+    }
+    @media (max-width: 480px) {
+      .cta-email { flex-direction: column; }
+      .cta-email .btn-primary { width: 100%; }
     }
 
     .cta-email input {
@@ -372,7 +343,7 @@
     }
 
     .btn-primary {
-      padding: var(--space-2) var(--space-4);
+      padding: var(--space-3) var(--space-5);
       background: var(--color-accent);
       color: var(--color-base);
       border: none;
@@ -400,6 +371,119 @@
       color: var(--color-accent);
       font-size: 0.95rem;
       display: none;
+    }
+
+    /* ── Interactive Drill Demo ── */
+    .demo-drill {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: var(--space-6);
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--color-divider) 40%, transparent);
+      background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+      backdrop-filter: blur(16px) saturate(1.15);
+      -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    }
+    .demo-progress {
+      height: 4px;
+      background: var(--color-divider);
+      border-radius: 2px;
+      margin-bottom: var(--space-5);
+      overflow: hidden;
+    }
+    .demo-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, var(--color-accent), color-mix(in srgb, var(--color-accent) 40%, transparent));
+      border-radius: 2px;
+      transition: width 0.5s var(--ease-upward);
+    }
+    .demo-hanzi {
+      font-family: var(--font-hanzi);
+      font-size: clamp(4rem, 10vw, 6rem);
+      color: var(--color-accent);
+      text-align: center;
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+    }
+    .demo-prompt {
+      font-size: 1rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-4);
+      text-align: center;
+    }
+    .demo-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    .demo-option {
+      padding: var(--space-3);
+      border: 1px solid var(--color-divider);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, opacity 0.3s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .demo-option:hover { border-color: var(--color-accent); }
+    .demo-option:active { transform: scale(0.98); }
+    .demo-key-hint {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      border: 1px solid var(--color-divider);
+      padding: 1px 5px;
+      border-radius: 3px;
+      line-height: 1.3;
+      margin-left: 8px;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .demo-option.correct {
+      background: color-mix(in srgb, var(--color-correct) 10%, transparent);
+      border-color: var(--color-correct);
+      animation: demoInkSettle 0.5s var(--ease-spring) forwards;
+    }
+    @keyframes demoInkSettle {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    .demo-option.incorrect {
+      opacity: 0.4;
+      border-color: var(--color-incorrect);
+      pointer-events: none;
+    }
+    .demo-drill.correct-pulse {
+      animation: demoPulse 0.6s ease-out;
+    }
+    @keyframes demoPulse {
+      0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-correct) 20%, transparent); }
+      50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-correct) 5%, transparent); }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+    .demo-score {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+    .demo-score strong { color: var(--color-accent); }
+    @media (max-width: 480px) {
+      .demo-options { grid-template-columns: 1fr; }
+      .demo-drill { padding: var(--space-4); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .demo-option.correct { animation: none; }
+      .demo-drill.correct-pulse { animation: none; }
+      .demo-progress-fill { transition: none; }
     }
 
     /* ── Problem ── */
@@ -455,7 +539,7 @@
     @media (max-width: 600px) {
       .feature-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 2rem; }
-      .hero-hanzi { font-size: 2.5rem; }
+      .hero-hanzi { font-size: clamp(3rem, 12vw, 5rem); }
     }
 
     .feature-card {
@@ -916,8 +1000,7 @@
   </style>
 </head>
 <body>
-  <!-- WebGL atmosphere disabled on marketing — clean flat linen lets content breathe -->
-  <!-- <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div> -->
+  <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <!-- Nav -->
   <nav aria-label="Main navigation">
@@ -937,23 +1020,11 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero — typography-driven, Chinese characters ARE the design -->
   <section class="hero" data-scroll-section="hero">
-    <!-- Cinematic ink-dissolving video background -->
-    <video class="hero-video" autoplay muted loop playsinline poster="/static/assets/phase2/videos/hero-ink-poster.jpg" aria-hidden="true">
-      <source src="/static/assets/phase2/videos/hero-ink.webm" type="video/webm">
-      <source src="/static/assets/phase2/videos/hero-ink.mp4" type="video/mp4">
-    </video>
-    <div class="hero-video-overlay" aria-hidden="true"></div>
-    <!-- Calligraphy watermark (replaces font-rendered 学) -->
-    <img class="hero-watermark" src="/static/assets/phase2/calligraphy/xue.png" alt="" aria-hidden="true" loading="eager">
-    <!-- Parallax plant sprites -->
-    <img class="parallax-sprite parallax-sprite--plum" src="/static/assets/phase2/plants/plum-blossom.png" alt="" aria-hidden="true" data-speed="0.3" loading="lazy">
-    <img class="parallax-sprite parallax-sprite--bamboo" src="/static/assets/phase2/plants/bamboo.png" alt="" aria-hidden="true" data-speed="0.5" loading="lazy">
     <div class="container">
       <div class="hero-hanzi" aria-hidden="true">学而时习之</div>
       <h1>Learn Chinese the way your brain actually works</h1>
-      <p class="hero-promise" style="font-family:var(--font-heading);font-size:1.2rem;color:var(--color-secondary);margin-bottom:var(--space-2);">10 minutes a day. Every word you learn stays learned.</p>
       <p class="hero-sub">Adaptive drills that focus on what you struggle with. Read real Chinese with instant glosses. Every word you look up becomes practice.</p>
       <div class="cta-group">
         <form class="cta-email" id="signup-form" action="/register" method="post">
@@ -963,12 +1034,28 @@
         <p class="cta-note">Free to start. No credit card required.</p>
         <div class="cta-success" id="signup-success">Check your email to get started.</div>
       </div>
-      <picture>
-        <source srcset="/static/illustrations/marketing-hero-dark.webp" media="(prefers-color-scheme: dark)" type="image/webp">
-        <source srcset="/static/illustrations/marketing-hero.webp" type="image/webp">
-        <source srcset="/static/illustrations/marketing-hero-dark.jpg" media="(prefers-color-scheme: dark)" type="image/jpeg">
-        <img src="/static/illustrations/marketing-hero.jpg" alt="Calligraphy workspace with ink stone, brushes, and rice paper" class="hero-img" width="1024" height="1024" loading="eager">
-      </picture>
+    </div>
+  </section>
+
+  <!-- Interactive drill demo — try it without signing up -->
+  <section class="interactive-demo" data-scroll-section="demo" style="padding: var(--space-6) 0; text-align: center;">
+    <div class="container">
+      <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:600;margin-bottom:var(--space-5);color:var(--color-text);">Try it — no signup needed</h2>
+      <div class="demo-drill" id="landing-drill">
+        <div class="demo-progress">
+          <div class="demo-progress-fill" id="demo-progress-fill"></div>
+        </div>
+        <div id="demo-question">
+          <div class="demo-hanzi" id="demo-hanzi"></div>
+          <p class="demo-prompt" id="demo-prompt">What does this character mean?</p>
+          <div class="demo-options" id="demo-options"></div>
+        </div>
+        <div id="demo-complete" style="display:none;">
+          <p class="demo-score">You recognized <strong id="demo-score-count">0</strong> of 4 characters.</p>
+          <p style="font-size:1rem;color:var(--color-text-faint);margin-bottom:var(--space-4);">Imagine doing this every day.</p>
+          <a href="/auth/register" class="btn-primary" style="display:inline-block;text-decoration:none;">Start learning free</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1471,8 +1558,120 @@
         heroObserver.observe(hero);
       }
     })();
+
+    // Interactive drill demo — self-contained, no API calls
+    (function() {
+      'use strict';
+      var questions = [
+        { char: '\u5B66', answer: 'to study', options: ['to study', 'to teach', 'school', 'to ask'] },
+        { char: '\u597D', answer: 'good', options: ['good', 'big', 'small', 'bad'] },
+        { char: '\u4EBA', answer: 'person', options: ['person', 'big', 'enter', 'eight'] },
+        { char: '\u5927', answer: 'big', options: ['big', 'person', 'sky', 'dog'] }
+      ];
+      var current = 0, score = 0, answered = false, initialized = false;
+      var drill = document.getElementById('landing-drill');
+      var hanziEl = document.getElementById('demo-hanzi');
+      var promptEl = document.getElementById('demo-prompt');
+      var optionsEl = document.getElementById('demo-options');
+      var progressFill = document.getElementById('demo-progress-fill');
+      var questionEl = document.getElementById('demo-question');
+      var completeEl = document.getElementById('demo-complete');
+      var scoreCount = document.getElementById('demo-score-count');
+      if (!drill || !hanziEl || !optionsEl) return;
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      function render() {
+        if (current >= questions.length) { complete(); return; }
+        answered = false;
+        var q = questions[current];
+        hanziEl.textContent = q.char;
+        promptEl.textContent = 'What does this character mean?';
+        progressFill.style.width = (current / questions.length * 100) + '%';
+        var shuffled = shuffle(q.options);
+        optionsEl.innerHTML = '';
+        for (var i = 0; i < shuffled.length; i++) {
+          var btn = document.createElement('button');
+          btn.className = 'demo-option';
+          btn.type = 'button';
+          btn.setAttribute('data-value', shuffled[i]);
+          var textSpan = document.createElement('span');
+          textSpan.textContent = shuffled[i];
+          btn.appendChild(textSpan);
+          var hint = document.createElement('span');
+          hint.className = 'demo-key-hint';
+          hint.textContent = String(i + 1);
+          btn.appendChild(hint);
+          btn.addEventListener('click', (function(idx) {
+            return function() { answer(idx); };
+          })(i));
+          optionsEl.appendChild(btn);
+        }
+      }
+
+      function answer(selectedIndex) {
+        if (answered) return;
+        answered = true;
+        var q = questions[current];
+        var btns = optionsEl.querySelectorAll('.demo-option');
+        var selectedBtn = btns[selectedIndex];
+        var selectedValue = selectedBtn.getAttribute('data-value');
+        var isCorrect = selectedValue === q.answer;
+        if (isCorrect) {
+          score++;
+          selectedBtn.classList.add('correct');
+          drill.classList.remove('correct-pulse');
+          void drill.offsetWidth;
+          drill.classList.add('correct-pulse');
+          for (var i = 0; i < btns.length; i++) {
+            if (i !== selectedIndex) { btns[i].style.opacity = '0.4'; btns[i].style.pointerEvents = 'none'; }
+          }
+        } else {
+          selectedBtn.classList.add('incorrect');
+          for (var j = 0; j < btns.length; j++) {
+            if (btns[j].getAttribute('data-value') === q.answer) btns[j].classList.add('correct');
+            btns[j].style.pointerEvents = 'none';
+          }
+        }
+        setTimeout(function() { current++; render(); }, 1200);
+      }
+
+      function complete() {
+        questionEl.style.display = 'none';
+        completeEl.style.display = 'block';
+        scoreCount.textContent = String(score);
+        progressFill.style.width = '100%';
+        if (window.AeluMarketing && window.AeluMarketing.trackCTAClick) {
+          window.AeluMarketing.trackCTAClick('/', 'demo_completed_' + score);
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (answered || !initialized) return;
+        if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+        var key = parseInt(e.key, 10);
+        if (key >= 1 && key <= 4) { e.preventDefault(); answer(key - 1); }
+      });
+
+      var observer = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting && !initialized) {
+          initialized = true;
+          render();
+          observer.disconnect();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(drill);
+    })();
   </script>
-  <!-- Three.js not needed on marketing (no WebGL atmosphere) — saves 670KB -->
+  <script src="/static/webgl/three.min.js" async></script>
+  <script src="/static/webgl/ink-atmosphere.js" defer></script>
   <script src="/static/scroll-engine.js" defer></script>
 
 </body>

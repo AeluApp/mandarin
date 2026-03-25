@@ -70,6 +70,7 @@ def _wrap_html(heading: str, body_html: str) -> str:
       {heading}
     </h1>
   </td></tr>
+  <tr><td style="padding:0 32px;"><div class="email-divider" style="border-top:1px solid {s['divider']};margin:0;"></div></td></tr>
   <tr><td class="email-body" style="padding:32px;">
     {body_html}
   </td></tr>
@@ -91,7 +92,7 @@ def _button(url: str, label: str) -> str:
         f'<p style="text-align:center;margin:28px 0;">'
         f'<a href="{url}" style="display:inline-block;padding:14px 32px;'
         f"background-color:{s['accent']};color:#FFFFFF;text-decoration:none;"
-        f'border-radius:4px;font-family:{s["heading_font"]};font-size:16px;'
+        f'border-radius:6px;font-family:{s["heading_font"]};font-size:16px;'
         f'font-weight:600;letter-spacing:0.03em;">'
         f"{label}</a></p>"
     )

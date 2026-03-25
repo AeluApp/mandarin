@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../theme/aelu_colors.dart';
 
-/// Progress bar + item counter for session header.
+/// Drill / session progress bar — styled to match the web:
+///   4px height, 85% opacity, accent-color gradient fill.
 class SessionProgress extends StatelessWidget {
   final int completed;
   final int total;
@@ -18,11 +19,36 @@ class SessionProgress extends StatelessWidget {
       child: Column(
         children: [
           if (total > 0)
-            LinearProgressIndicator(
-              value: progress,
-              backgroundColor: Theme.of(context).dividerTheme.color,
-              valueColor: AlwaysStoppedAnimation(AeluColors.secondaryOf(context)),
-              minHeight: 3,
+            Opacity(
+              opacity: 0.85,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(2),
+                child: SizedBox(
+                  height: 4,
+                  child: Stack(
+                    children: [
+                      // Track background
+                      Container(
+                        color: Theme.of(context).dividerTheme.color,
+                      ),
+                      // Gradient fill
+                      FractionallySizedBox(
+                        widthFactor: progress,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                AeluColors.accentOf(context),
+                                AeluColors.secondaryOf(context),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
         ],
       ),

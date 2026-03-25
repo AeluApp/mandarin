@@ -1,7 +1,6 @@
 /**
- * Visual elevation utilities — typography effects, scroll-driven reveals,
- * interaction richness. Part of the 2026 aesthetic elevation.
- * Respects prefers-reduced-motion throughout.
+ * Visual elevation utilities — typography effects and scroll-driven reveals.
+ * Stripped to purposeful essentials. Respects prefers-reduced-motion.
  */
 (function() {
   'use strict';
@@ -67,7 +66,7 @@
     sections.forEach(function(s) { observer.observe(s); });
   }
 
-  // ── Parallax scroll tracking ──
+  // ── Parallax scroll tracking (marketing page only) ──
   function initParallax() {
     var parallaxEls = document.querySelectorAll('[data-parallax]');
     if (!parallaxEls.length) return;
@@ -89,64 +88,16 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // ── Magnetic hover on interactive elements ──
-  function initMagneticHover() {
-    if ('ontouchstart' in window) return; // skip on touch devices
-
-    var magnetics = document.querySelectorAll('[data-magnetic]');
-    magnetics.forEach(function(el) {
-      var strength = parseFloat(el.dataset.magnetic) || 0.3;
-
-      el.addEventListener('mousemove', function(e) {
-        var rect = el.getBoundingClientRect();
-        var cx = rect.left + rect.width / 2;
-        var cy = rect.top + rect.height / 2;
-        var dx = (e.clientX - cx) * strength;
-        var dy = (e.clientY - cy) * strength;
-        el.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
-      });
-
-      el.addEventListener('mouseleave', function() {
-        el.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        el.style.transform = 'translate(0, 0)';
-        setTimeout(function() { el.style.transition = ''; }, 400);
-      });
-    });
-  }
-
-  // ── Haptic press feedback ──
-  function initPressEffects() {
-    var buttons = document.querySelectorAll('.btn-primary, .btn-secondary, [data-press]');
-    buttons.forEach(function(btn) {
-      btn.addEventListener('mousedown', function() {
-        btn.style.transform = 'scale(0.97)';
-        btn.style.transition = 'transform 0.1s ease';
-      });
-      btn.addEventListener('mouseup', function() {
-        btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        btn.style.transform = 'scale(1)';
-      });
-      btn.addEventListener('mouseleave', function() {
-        btn.style.transition = 'transform 0.3s ease';
-        btn.style.transform = 'scale(1)';
-      });
-    });
-  }
-
   // ── Initialize ──
   function init() {
     if (reducedMotion) {
-      // Still apply static styles, skip animations
-      initHeadingReveals(); // underline still appears, just no transition
+      initHeadingReveals();
       return;
     }
 
     initHeadingReveals();
     initScrollReveals();
     initParallax();
-    initMagneticHover();
-    initPressEffects();
-    initCardTilt();
 
     // Auto-split any element with [data-split-text]
     document.querySelectorAll('[data-split-text]').forEach(splitText);
@@ -158,33 +109,11 @@
     init();
   }
 
-  // ── Stat card tilt on hover (3D perspective) ──
-  function initCardTilt() {
-    if ('ontouchstart' in window) return;
-    var cards = document.querySelectorAll('.stat, .metric-card, .panel');
-    cards.forEach(function(card) {
-      card.addEventListener('mousemove', function(e) {
-        var rect = card.getBoundingClientRect();
-        var x = (e.clientX - rect.left) / rect.width - 0.5;
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = 'perspective(600px) rotateY(' + (x * 4) + 'deg) rotateX(' + (-y * 4) + 'deg) translateY(-2px)';
-        card.style.transition = 'transform 0.1s ease';
-      });
-      card.addEventListener('mouseleave', function() {
-        card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        card.style.transform = 'perspective(600px) rotateY(0) rotateX(0) translateY(0)';
-      });
-    });
-  }
-
   // Re-init on dynamic content (for SPA section switches)
   var _observer = new MutationObserver(function(mutations) {
     var hasNew = mutations.some(function(m) { return m.addedNodes.length > 0; });
     if (hasNew) {
-      initMagneticHover();
-      initPressEffects();
       initHeadingReveals();
-      initCardTilt();
     }
   });
   _observer.observe(document.getElementById('app') || document.body, { childList: true, subtree: true });

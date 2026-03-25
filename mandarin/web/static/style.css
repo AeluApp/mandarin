@@ -219,7 +219,7 @@ input:focus, textarea:focus, select:focus {
   }
   .stat:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
   }
 }
 
@@ -776,6 +776,8 @@ html[data-theme="dark"] .dashboard-illustration[src*="-dark.png"] {
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: var(--shadow-md);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
 html[data-theme="dark"] .dashboard-hero-img {
@@ -859,10 +861,10 @@ html[data-theme="dark"] .dashboard-hero-img {
 
 .stat-value {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--text-display);
   font-weight: 600;
   color: var(--color-accent);
-  line-height: var(--lh-xl);
+  line-height: var(--lh-display);
 }
 
 /* Streak: quiet, same treatment as other stats — no special color */
@@ -1084,9 +1086,7 @@ html[data-theme="dark"] .dashboard-hero-img {
 }
 
 .drill-group:not(.past) {
-  animation: drillEnter var(--duration-base, 250ms) var(--ease-upward, ease-out),
-             breathe var(--duration-float) var(--ease-default) infinite;
-  animation-delay: 0s, 1s;
+  animation: drillEnter var(--duration-base, 250ms) var(--ease-upward, ease-out);
 }
 
 @keyframes drillEnter {
@@ -1100,9 +1100,11 @@ html[data-theme="dark"] .dashboard-hero-img {
   }
 }
 
-@keyframes breathe {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
+/* breathe animation removed — infinite opacity oscillation during active learning is distraction */
+
+/* Vertical rhythm: more breathing room between drill messages */
+.drill-group > .msg {
+  margin: 0.5rem 0;
 }
 
 /* Stagger-cascade: messages within a drill group enter 50ms apart */
@@ -1122,9 +1124,15 @@ html[data-theme="dark"] .dashboard-hero-img {
   background: color-mix(in srgb, var(--color-correct) 5%, transparent);
   padding-top: 4px;
   padding-bottom: 4px;
-  animation: feedbackIn var(--duration-fast) var(--ease-upward);
+  animation: feedbackIn var(--duration-fast) var(--ease-upward),
+             correctWarmPulse 1.5s ease-out forwards;
   position: relative;
   overflow: hidden;
+}
+
+@keyframes correctWarmPulse {
+  0% { background: color-mix(in srgb, var(--color-correct) 6%, var(--color-base)); }
+  100% { background: transparent; }
 }
 
 .msg-correct::after {
@@ -1155,15 +1163,14 @@ html[data-theme="dark"] .dashboard-hero-img {
   padding-top: 4px;
   padding-bottom: 4px;
   animation: feedbackIn var(--duration-fast) var(--ease-upward),
-             gentleShake 0.2s var(--ease-default) 0.2s;
+             softAcknowledge 0.4s var(--ease-default) 0.15s;
 }
 
-@keyframes gentleShake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-3px); }
-  40% { transform: translateX(3px); }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(1px); }
+/* Soft acknowledge — brief opacity dip, no shaking. "Acknowledges difficulty without framing it as failure." */
+@keyframes softAcknowledge {
+  0% { opacity: 1; }
+  30% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 @keyframes feedbackIn {
@@ -1201,15 +1208,9 @@ html[data-theme="dark"] .dashboard-hero-img {
   to { transform: scaleX(1); }
 }
 
-/* ── Ink Scatter: incorrect answer blur pulse ── */
+/* inkBlurPulse removed — blurring content during learning defocuses what the learner needs to read */
 .ink-scatter {
-  animation: inkBlurPulse 0.6s var(--ease-default, ease) forwards;
-}
-
-@keyframes inkBlurPulse {
-  0% { filter: blur(0px); }
-  30% { filter: blur(1.5px); }
-  100% { filter: blur(0px); }
+  /* class retained for JS compatibility, animation removed */
 }
 
 /* ── Drill group transitions: slide between drills ── */
@@ -1226,11 +1227,11 @@ html[data-theme="dark"] .dashboard-hero-img {
 
 /* ── Progress ink line: extends with each completed drill ── */
 .drill-progress-line {
-  height: 2px;
-  background: var(--color-accent);
+  height: 4px;
+  background: linear-gradient(to right, var(--color-accent), color-mix(in srgb, var(--color-accent) 40%, transparent));
   transform-origin: left;
-  transition: width 0.4s var(--ease-upward, ease-out);
-  opacity: 0.4;
+  transition: width 0.5s var(--ease-upward, ease-out);
+  opacity: 0.85;
   margin-bottom: var(--space-2);
 }
 
@@ -2798,11 +2799,7 @@ svg.icon {
   box-shadow: var(--shadow-md);
 }
 
-/* Gentle float animation — illustrations breathe subtly */
-@keyframes illustrationFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
+/* illustrationFloat defined in tokens section — no duplicate */
 
 /* Empty state invitation pulse — the SVG vignette gently pulses */
 .empty-state::before {
@@ -2834,7 +2831,7 @@ svg.icon {
   border-radius: 50%;
   background: var(--color-accent);
   opacity: 0;
-  animation: timelineDot 0.4s var(--ease-spring, ease) 1.2s forwards;
+  animation: timelineDot 0.4s var(--ease-upward, ease) 1.2s forwards;
 }
 @keyframes timelineDraw {
   from { transform: scaleX(0); }
@@ -3098,10 +3095,7 @@ html[data-theme="dark"] .empty-state-illustration {
   mask-position: center;
 }
 
-@keyframes illustrationFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-}
+/* illustrationFloat defined in tokens section — no duplicate */
 /* Shared illustration opacity — subtle but visible */
 .illustration-loading::before,
 .illustration-journey::before,
@@ -3824,6 +3818,21 @@ html[data-theme="dark"] .empty-state-illustration {
   color: var(--color-on-accent);
 }
 .btn-option:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Keyboard shortcut hint pill (1-9 next to MC options) */
+.key-hint {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: var(--text-xs);
+  color: var(--color-text-faintest, #707A8A);
+  border: 1px solid var(--color-divider, #D8D0C4);
+  padding: 1px 5px;
+  margin-left: 6px;
+  border-radius: 3px;
+  line-height: 1.3;
+  vertical-align: middle;
+  opacity: 0.6;
+}
 
 .btn-option-action {
   text-align: center;
@@ -5866,7 +5875,7 @@ html[data-theme="dark"] .empty-state::before {
     padding: var(--space-3) var(--space-4);
   }
   .stat-value {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
   }
   .msg-hanzi {
     font-size: var(--text-3xl);
@@ -5888,7 +5897,7 @@ html[data-theme="dark"] .empty-state::before {
     padding: var(--space-4) var(--space-5);
   }
   .stat-value {
-    font-size: var(--text-2xl);
+    font-size: var(--text-display);
   }
   .msg-hanzi {
     font-size: var(--text-3xl);
@@ -5966,7 +5975,7 @@ html[data-theme="dark"] .empty-state::before {
     font-size: var(--text-base);
   }
   .stat-value {
-    font-size: var(--text-2xl);
+    font-size: var(--text-display);
   }
   .cal-cell {
     width: 16px;
@@ -6710,7 +6719,7 @@ body.in-session { overscroll-behavior-y: contain; }
   height: var(--skeleton-height);
   background: var(--color-surface-alt);
   margin-bottom: var(--space-2);
-  animation: shimmer var(--duration-ambient) infinite;
+  animation: opacityPulse var(--duration-ambient) infinite;
 }
 
 .complete-skeleton .skeleton-line.short {
@@ -6718,7 +6727,7 @@ body.in-session { overscroll-behavior-y: contain; }
 }
 
 /* #7 — Input shake on blocked submission */
-@keyframes shimmer {
+@keyframes opacityPulse {
   0% { opacity: 0.5; }
   50% { opacity: 1; }
   100% { opacity: 0.5; }
@@ -6875,7 +6884,7 @@ body.in-session { overscroll-behavior-y: contain; }
   justify-content: center;
   animation: fadeIn var(--duration-fast) var(--ease-default);
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* fadeIn defined in tokens section above — no duplicate */
 .shortcut-overlay-inner {
   background: var(--color-surface);
   border-radius: var(--radius-lg, 12px);
@@ -9618,7 +9627,7 @@ html, body {
 
 /* Minimal Pair Drills */
 .minimal-pair { text-align: center; padding: 1.5rem; }
-.mp-label { font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; }
+.mp-label { font-size: 0.85rem; color: var(--color-text-faint); margin-bottom: 0.5rem; }
 .mp-question { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; }
 .mp-options { display: flex; gap: 1rem; justify-content: center; }
 .mp-option { flex: 1; max-width: 180px; padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid var(--color-divider); background: var(--color-base); cursor: pointer; transition: all 0.2s; }
@@ -9657,7 +9666,7 @@ html, body {
 
 /* Metacognitive Prompts */
 .meta-prompt { text-align: center; padding: 1.5rem; }
-.meta-label { font-size: 0.9rem; color: #888; margin-bottom: 0.75rem; }
+.meta-label { font-size: 0.9rem; color: var(--color-text-faint); margin-bottom: 0.75rem; }
 .meta-question { font-size: 1rem; margin-bottom: 1rem; }
 .meta-options { display: flex; gap: 0.5rem; justify-content: center; }
 .meta-options-col { flex-direction: column; max-width: 280px; margin: 0 auto; }
@@ -9675,15 +9684,13 @@ html, body {
 .competence-toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--color-accent); color: var(--color-base); padding: 0.75rem 1.5rem; border-radius: 10px; font-size: 0.9rem; opacity: 0; transition: all 0.3s; z-index: 1000; }
 .competence-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+/* fadeIn defined in tokens section — no duplicate needed */
 
 /* Dark mode overrides for academic features */
-@media (prefers-color-scheme: dark) {
-  .mp-option, .sandhi-option, .meta-option, .session-choice-option { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-  .mp-option:hover, .sandhi-option:hover, .meta-option:hover, .session-choice-option:hover { border-color: #64b5f6; }
-  .mp-option.selected, .sandhi-option.selected { background: #1a237e; border-color: #64b5f6; }
-  .char-decomposition { background: var(--color-surface-alt); border-color: var(--color-divider); }
-}
+[data-theme="dark"] .mp-option, [data-theme="dark"] .sandhi-option, [data-theme="dark"] .meta-option, [data-theme="dark"] .session-choice-option { background: var(--color-surface); border-color: var(--color-divider); color: var(--color-text); }
+[data-theme="dark"] .mp-option:hover, [data-theme="dark"] .sandhi-option:hover, [data-theme="dark"] .meta-option:hover, [data-theme="dark"] .session-choice-option:hover { border-color: var(--color-accent); }
+[data-theme="dark"] .mp-option.selected, [data-theme="dark"] .sandhi-option.selected { background: var(--color-accent-dim); border-color: var(--color-accent); }
+[data-theme="dark"] .char-decomposition { background: var(--color-surface-alt); border-color: var(--color-divider); }
 
 /* === UI Fixes === */
 
@@ -9978,14 +9985,14 @@ html, body {
   animation: vt-fade-in 0.25s var(--ease-default) forwards;
 }
 
-/* ── 1f. Mastery bar spring animation ────────────────────────── */
+/* ── 1f. Mastery bar animation ────────────────────────── */
 
 .bar-seg {
-  transition: width 0.8s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  transition: width 0.8s var(--ease-upward, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .bar-seg.bar-animate-in {
-  animation: barSpringIn 0.8s var(--ease-spring) backwards;
+  animation: barSpringIn 0.8s var(--ease-upward) backwards;
 }
 
 @keyframes barSpringIn {
@@ -10492,7 +10499,7 @@ html[data-theme="dark"] .hanzi-watermark {
 /* ── Reading passage — generous typography ── */
 .reading-passage { animation: driftUp 0.4s var(--ease-upward) backwards; }
 .reading-text { font-size: var(--text-lg); line-height: var(--lh-relaxed, 1.8); }
-@keyframes driftUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* driftUp defined in tokens section — no duplicate */
 
 /* ── Reading gloss tooltip — glass ── */
 @supports (backdrop-filter: blur(1px)) {

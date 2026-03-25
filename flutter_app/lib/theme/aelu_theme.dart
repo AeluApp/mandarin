@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'aelu_colors.dart';
 
 /// Civic Sanctuary theme — warm stone, olive, terracotta.
@@ -479,6 +480,31 @@ class AeluTheme {
       ),
     );
   }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Haptic feedback patterns aligned with brand: subtle, purposeful.
+// ════════════════════════════════════════════════════════════════════════════
+
+/// Brand-aligned haptic feedback patterns.
+///
+/// Each method maps to a distinct interaction type so that haptics feel
+/// intentional rather than noisy.  All calls delegate to [HapticFeedback]
+/// which is a no-op on platforms that lack a vibration motor.
+class AeluHaptics {
+  AeluHaptics._();
+
+  /// Correct answer -- light celebratory tap.
+  static void correct() => HapticFeedback.lightImpact();
+
+  /// Incorrect answer -- medium acknowledgment.
+  static void incorrect() => HapticFeedback.mediumImpact();
+
+  /// Option selection -- subtle tick.
+  static void select() => HapticFeedback.selectionClick();
+
+  /// Button press -- light feedback.
+  static void press() => HapticFeedback.lightImpact();
 }
 
 // ════════════════════════════════════════════════════════════════════════════

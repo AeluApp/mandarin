@@ -195,14 +195,14 @@
       <div id="next-session-preview" class="next-session-preview hidden" aria-label="Next session preview"></div>
 
       <div class="actions" data-reveal>
-        <button id="btn-start" class="btn-primary" data-magnetic="0.2" aria-label="Start full session">Begin</button>
-        <button id="btn-mini" class="btn-secondary" data-magnetic="0.15" aria-label="Start mini session">Quick session</button>
+        <button id="btn-start" class="btn-primary" aria-label="Start full session">Begin</button>
+        <button id="btn-mini" class="btn-secondary" aria-label="Start mini session">Quick session</button>
       </div>
       <div class="actions actions-exposure" data-reveal>
-        <button id="btn-read" class="btn-secondary" data-magnetic="0.15" aria-label="Open graded reader">Read</button>
-        <button id="btn-watch" class="btn-secondary" data-magnetic="0.15" aria-label="Browse media shelf">Watch</button>
-        <button id="btn-listen" class="btn-secondary" data-magnetic="0.15" aria-label="Start listening practice">Listen</button>
-        <button id="btn-grammar" class="btn-secondary" data-magnetic="0.15" aria-label="Study grammar points"><span class="btn-grammar-icon" aria-hidden="true">文</span> Grammar</button>
+        <button id="btn-read" class="btn-secondary" aria-label="Open graded reader">Read</button>
+        <button id="btn-watch" class="btn-secondary" aria-label="Browse media shelf">Watch</button>
+        <button id="btn-listen" class="btn-secondary" aria-label="Start listening practice">Listen</button>
+        <button id="btn-grammar" class="btn-secondary" aria-label="Study grammar points"><span class="btn-grammar-icon" aria-hidden="true">文</span> Grammar</button>
       </div>
       <div id="session-explain" class="session-explain hidden">
         <button id="btn-explain" class="btn-link btn-sm" type="button" aria-expanded="false" aria-controls="session-explain-content">Why these drills?</button>
@@ -935,7 +935,6 @@
     })();
   </script>
   <script nonce="{{ csp_nonce }}">window.IS_PRODUCTION={{ is_production|tojson }};window.AELU_CANONICAL_URL={{ canonical_url|tojson }};window.AELU_PRICING={{ pricing_display|tojson }};</script>
-  <script src="/static/ambient-particles.js?v={{ static_hash('ambient-particles.js') }}" defer></script>
   <script src="/static/visual-elevation.js?v={{ static_hash('visual-elevation.js') }}" defer></script>
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/scene-manager.js" defer></script>

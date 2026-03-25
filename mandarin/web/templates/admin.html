@@ -118,9 +118,40 @@
     .spc-chart-wrapper canvas { width: 100%; border-radius: 8px; border: 1px solid var(--color-divider); }
 
     /* Cohort retention heatmap */
-    .retention-high { background: rgba(76, 175, 80, 0.2); color: #2e7d32; }
-    .retention-mid { background: rgba(255, 152, 0, 0.2); color: #e65100; }
-    .retention-low { background: rgba(244, 67, 54, 0.2); color: #c62828; }
+    .retention-high { background: color-mix(in srgb, var(--color-correct) 20%, transparent); color: var(--color-correct); }
+    .retention-mid { background: color-mix(in srgb, var(--color-mastery-stabilizing) 20%, transparent); color: var(--color-mastery-stabilizing); }
+    .retention-low { background: color-mix(in srgb, var(--color-incorrect) 20%, transparent); color: var(--color-incorrect); }
+
+    /* Sub-tab nav (second-level navigation) */
+    .admin-subtabs {
+      display: flex;
+      gap: var(--space-1);
+      margin-bottom: var(--space-4);
+      padding-left: var(--space-2);
+    }
+    .admin-subtab {
+      padding: var(--space-1) var(--space-3);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .admin-subtab:hover { color: var(--color-text); }
+    .admin-subtab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+    .admin-subtab:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    /* Skeleton loading shimmer */
+    .skeleton-line {
+      background: linear-gradient(90deg, var(--color-divider) 25%, color-mix(in srgb, var(--color-divider) 60%, transparent) 50%, var(--color-divider) 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.5s ease-in-out infinite;
+      border-radius: 4px;
+    }
+    @keyframes skeletonShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   </style>
   {% if plausible_domain %}<script defer data-domain="{{ plausible_domain }}" src="{{ plausible_script_url }}"></script>{% endif %}
   {% if ga4_id %}
@@ -148,7 +179,7 @@
   {% endif %}
 </head>
 <body>
-  <div id="webgl-atmosphere" data-scene="admin" aria-hidden="true"></div>
+  <!-- WebGL atmosphere removed from admin — data-dense pages don't need ambient effects -->
   <div class="admin-page">
     <a href="/" class="admin-back"><svg class="icon" style="display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M19 12H5M5 12l6-6M5 12l6 6"/></svg> Back to app</a>
     <div class="admin-header">
@@ -156,46 +187,37 @@
     </div>
 
     <div class="admin-tabs" role="tablist" aria-label="Admin dashboard sections">
-      <button class="admin-tab active" data-tab="overview" role="tab" id="tab-btn-overview" aria-selected="true" aria-controls="tab-overview">Overview</button>
-      <button class="admin-tab" data-tab="issues" role="tab" id="tab-btn-issues" aria-selected="false" aria-controls="tab-issues">Issues</button>
-      <button class="admin-tab" data-tab="sessions" role="tab" id="tab-btn-sessions" aria-selected="false" aria-controls="tab-sessions">Sessions</button>
-      <button class="admin-tab" data-tab="security" role="tab" id="tab-btn-security" aria-selected="false" aria-controls="tab-security">Security</button>
-      <button class="admin-tab" data-tab="revenue" role="tab" id="tab-btn-revenue" aria-selected="false" aria-controls="tab-revenue">Revenue</button>
-      <button class="admin-tab" data-tab="retention" role="tab" id="tab-btn-retention" aria-selected="false" aria-controls="tab-retention">Retention</button>
-      <button class="admin-tab" data-tab="engagement" role="tab" id="tab-btn-engagement" aria-selected="false" aria-controls="tab-engagement">Engagement</button>
-      <button class="admin-tab" data-tab="partners" role="tab" id="tab-btn-partners" aria-selected="false" aria-controls="tab-partners">Partners</button>
-      <button class="admin-tab" data-tab="content" role="tab" id="tab-btn-content" aria-selected="false" aria-controls="tab-content">Content</button>
-      <button class="admin-tab" data-tab="quality" role="tab" id="tab-btn-quality" aria-selected="false" aria-controls="tab-quality">Quality</button>
-      <button class="admin-tab" data-tab="intelligence" role="tab" id="intelligence-tab-btn" aria-selected="false" aria-controls="tab-intelligence">Intelligence <span id="intel-badge" class="admin-badge" style="display:none;"></span></button>
-      <button class="admin-tab" data-tab="notifications" role="tab" id="notifications-tab-btn" aria-selected="false" aria-controls="tab-notifications">Notifications <span id="notif-badge" class="admin-badge" style="display:none;"></span></button>
-      <button class="admin-tab" data-tab="ai-review" role="tab" id="ai-review-tab-btn" aria-selected="false" aria-controls="tab-ai-review">AI Review <span id="ai-review-badge" class="admin-badge" style="display:none;"></span></button>
-      <button class="admin-tab" data-tab="openclaw" role="tab" id="tab-btn-openclaw" aria-selected="false" aria-controls="tab-openclaw">OpenClaw Bots</button>
-      <button class="admin-tab" data-tab="counter-metrics" role="tab" id="counter-metrics-tab-btn" aria-selected="false" aria-controls="tab-counter-metrics">Anti-Goodhart <span id="cm-badge" class="admin-badge" style="display:none;"></span></button>
+      <button class="admin-tab active" data-group="health" role="tab" aria-selected="true">Health <span id="cm-badge" class="admin-badge" style="display:none;"></span></button>
+      <button class="admin-tab" data-group="users" role="tab" aria-selected="false">Users</button>
+      <button class="admin-tab" data-group="revenue" role="tab" aria-selected="false">Revenue</button>
+      <button class="admin-tab" data-group="content" role="tab" aria-selected="false">Content <span id="ai-review-badge" class="admin-badge" style="display:none;"></span></button>
+      <button class="admin-tab" data-group="intel" role="tab" aria-selected="false">Intelligence <span id="intel-badge" class="admin-badge" style="display:none;"></span><span id="notif-badge" class="admin-badge" style="display:none;"></span></button>
     </div>
+    <div class="admin-subtabs" id="admin-subtabs" role="tablist" aria-label="Sub-sections"></div>
 
     <!-- Overview -->
-    <div class="admin-tab-content active" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+    <div class="admin-tab-content active" id="tab-overview" role="tabpanel">
       <p class="tab-description">Your daily snapshot. How many people signed up, how many are actually using the app, and how the business is doing.</p>
       <div id="health-summary" class="health-summary" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-4);border-left:4px solid var(--color-text-dim);font-family:var(--font-body);font-size:var(--text-sm);">Checking system health...</div>
       <div class="admin-section">
         <h2>Metrics</h2>
-        <div class="metrics-grid" id="metrics-grid">Loading...</div>
+        <div class="metrics-grid" id="metrics-grid"><div class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div></div>
       </div>
       <div class="admin-section">
         <h2>User Journey</h2>
-        <div id="funnel-content" class="tab-loading">Loading...</div>
+        <div id="funnel-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>Onboarding Funnel</h2>
-        <div id="onboarding-funnel-content" class="tab-loading">Loading...</div>
+        <div id="onboarding-funnel-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>Users</h2>
-        <div id="users-table">Loading...</div>
+        <div id="users-table"><div class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div></div>
       </div>
       <div class="admin-section">
         <h2>Feedback</h2>
-        <div id="feedback-table">Loading...</div>
+        <div id="feedback-table"><div class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div></div>
       </div>
     </div>
 
@@ -204,15 +226,15 @@
       <p class="tab-description">Things that broke. If something looks wrong in the app, check here first. You can copy-paste any row to report a bug.</p>
       <div class="admin-section">
         <h2>App Crashes</h2>
-        <div id="crashes-content" class="tab-loading">Loading...</div>
+        <div id="crashes-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>Browser Errors</h2>
-        <div id="client-errors-content" class="tab-loading">Loading...</div>
+        <div id="client-errors-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>Error Patterns</h2>
-        <div id="error-patterns-content" class="tab-loading">Loading...</div>
+        <div id="error-patterns-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -221,7 +243,7 @@
       <p class="tab-description">Every study session anyone has done. Shows who studied, when, for how long, and how they did.</p>
       <div class="admin-section">
         <h2>Sessions</h2>
-        <div id="sessions-content" class="tab-loading">Loading...</div>
+        <div id="sessions-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -230,11 +252,11 @@
       <p class="tab-description">Login attempts, failed logins, and anything suspicious. If this is mostly empty, that's good.</p>
       <div class="admin-section">
         <h2>Security Scans</h2>
-        <div id="security-scans-content" class="tab-loading">Loading...</div>
+        <div id="security-scans-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>Security Events</h2>
-        <div id="security-content" class="tab-loading">Loading...</div>
+        <div id="security-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -243,22 +265,22 @@
       <p class="tab-description">How much money you're making. The monthly revenue number is the one that matters most.</p>
       <div class="admin-section">
         <h2>Revenue</h2>
-        <div id="revenue-content" class="tab-loading">Loading...</div>
+        <div id="revenue-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>Customer Analytics</h2>
-        <div id="clv-container" class="tab-loading">Loading...</div>
+        <div id="clv-container" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>Cohort Retention</h2>
-        <div id="cohort-retention-container" class="tab-loading">Loading...</div>
+        <div id="cohort-retention-container" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>LLM Costs</h2>
-        <div id="llm-costs-container" class="tab-loading">Loading...</div>
+        <div id="llm-costs-container" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -267,7 +289,7 @@
       <p class="tab-description">Are users coming back after they sign up? Each row is a group of users who joined the same week. Green = they're still using the app. Red = they stopped.</p>
       <div class="admin-section">
         <h2>Who's Sticking Around</h2>
-        <div id="retention-content" class="tab-loading">Loading...</div>
+        <div id="retention-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -276,11 +298,11 @@
       <p class="tab-description">How often and how much people are studying. The bar chart shows how many sessions happen each day.</p>
       <div class="admin-section">
         <h2>Engagement</h2>
-        <div id="engagement-content" class="tab-loading">Loading...</div>
+        <div id="engagement-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
       <div class="admin-section">
         <h2>How Much of Each Session People Finish</h2>
-        <div id="completion-segments-content" class="tab-loading">Loading...</div>
+        <div id="completion-segments-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -289,7 +311,7 @@
       <p class="tab-description">People who are sending you users (teachers, affiliates, referral links). Shows who referred whom and what they've earned.</p>
       <div class="admin-section">
         <h2>Who's Sending You Users</h2>
-        <div id="partners-content" class="tab-loading">Loading...</div>
+        <div id="partners-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -433,7 +455,7 @@
       </div>
       <div class="admin-section">
         <h2>Catalog</h2>
-        <div id="catalog-table" class="tab-loading">Loading...</div>
+        <div id="catalog-table" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -443,12 +465,12 @@
 
       <div class="admin-section">
         <h2>A/B Experiments</h2>
-        <div id="experiments-content" class="tab-loading">Loading...</div>
+        <div id="experiments-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>Error Rate</h2>
-        <div id="quality-dpmo-content" class="tab-loading">Loading...</div>
+        <div id="quality-dpmo-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
@@ -460,23 +482,23 @@
             <option value="session_completion">Session Completion Rate</option>
           </select>
         </div>
-        <div id="quality-spc-content" class="tab-loading">Loading...</div>
+        <div id="quality-spc-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
         <div id="spc-charts-container" class="admin-section" style="margin-top:var(--space-3);"></div>
       </div>
 
       <div class="admin-section">
         <h2>How Consistent Is the App</h2>
-        <div id="quality-capability-content" class="tab-loading">Loading...</div>
+        <div id="quality-capability-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>How Long Do Users Stay</h2>
-        <div id="quality-retention-content" class="tab-loading">Loading...</div>
+        <div id="quality-retention-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
         <h2>Work Speed</h2>
-        <div id="quality-flow-content" class="tab-loading">Loading...</div>
+        <div id="quality-flow-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
@@ -519,7 +541,7 @@
           <button onclick="submitRisk()" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Save Risk</button>
           <button onclick="document.getElementById('add-risk-form').style.display='none'" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;color:var(--color-text-dim);border:1px solid var(--color-divider);cursor:pointer;margin-left:var(--space-1);">Cancel</button>
         </div>
-        <div id="quality-risks-content" class="tab-loading">Loading...</div>
+        <div id="quality-risks-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <div class="admin-section">
@@ -542,7 +564,7 @@
           <button onclick="submitWorkItem()" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:var(--color-accent);color:var(--color-on-accent);border:none;cursor:pointer;">Save</button>
           <button onclick="document.getElementById('add-work-item-form').style.display='none'" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;color:var(--color-text-dim);border:1px solid var(--color-divider);cursor:pointer;margin-left:var(--space-1);">Cancel</button>
         </div>
-        <div id="quality-work-items-content" class="tab-loading">Loading...</div>
+        <div id="quality-work-items-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -612,13 +634,13 @@
       <div style="margin-bottom:var(--space-3);">
         <button id="notif-mark-all-read" style="padding:6px 16px;font-family:var(--font-body);font-size:var(--text-sm);background:none;border:1px solid var(--color-divider);color:var(--color-text-dim);cursor:pointer;">Mark all read</button>
       </div>
-      <div id="notifications-content" class="tab-loading">Loading...</div>
+      <div id="notifications-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
     </div>
 
     <!-- AI Review Queue -->
     <div class="admin-tab-content" id="tab-ai-review">
       <p class="tab-description">Content the AI created that needs you to check it before users see it. Make sure it's accurate and sounds natural before approving.</p>
-      <div id="ai-review-content" class="tab-loading">Loading...</div>
+      <div id="ai-review-content" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
     </div>
 
     <!-- OpenClaw Bots -->
@@ -726,7 +748,7 @@
 
       <div class="admin-section">
         <h2>Bot Activity</h2>
-        <div id="openclaw-activity" class="tab-loading">Loading...</div>
+        <div id="openclaw-activity" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
 
@@ -743,70 +765,70 @@
       <!-- Alerts -->
       <div class="admin-section">
         <h2>Problems Found</h2>
-        <div id="cm-alerts" class="tab-loading">Loading...</div>
+        <div id="cm-alerts" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Product Rule Violations -->
       <div class="admin-section">
         <h2>Product Rules</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Five rules the product must follow: (1) Every metric has a shadow metric (2) No feature that hurts real memory gets called "successful" (3) Progress bars reflect reality (4) Secret quizzes test real knowledge (5) Growth experiments can't hurt learning</p>
-        <div id="cm-rules" class="tab-loading">Loading...</div>
+        <div id="cm-rules" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Layer 2: Integrity -->
       <div class="admin-section">
         <h2>Is Learning Real?</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">These metrics check whether "mastery" actually sticks when tested later, in new formats, or without hints.</p>
-        <div id="cm-integrity" class="tab-loading">Loading...</div>
+        <div id="cm-integrity" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Layer 3: Cost -->
       <div class="admin-section">
         <h2>Hidden Costs</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Good headline numbers can hide problems: burnout, growing backlogs, inefficiency, or fragile progress that crumbles after a break.</p>
-        <div id="cm-cost" class="tab-loading">Loading...</div>
+        <div id="cm-cost" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Layer 4: Distortion -->
       <div class="admin-section">
         <h2>Gaming and Shortcuts</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Signs that the user or the product itself is taking shortcuts that inflate metrics without real learning.</p>
-        <div id="cm-distortion" class="tab-loading">Loading...</div>
+        <div id="cm-distortion" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Layer 5: Outcome -->
       <div class="admin-section">
         <h2>Does the App Actually Work?</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Secret quizzes and honesty checks that test whether app progress maps to real Mandarin ability.</p>
-        <div id="cm-outcome" class="tab-loading">Loading...</div>
+        <div id="cm-outcome" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Delayed Validation -->
       <div class="admin-section">
         <h2>Memory Checks</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Items that reached mastery are retested at 7, 14, and 30 days. These results never touch the learning system — they're a separate honesty check.</p>
-        <div id="cm-delayed-validation" class="tab-loading">Loading...</div>
+        <div id="cm-delayed-validation" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- KPI Mapping Table -->
       <div class="admin-section">
         <h2>What Could Go Wrong</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">For every headline metric, the specific way it could become misleading and what's watching for it.</p>
-        <div id="cm-map" class="tab-loading">Loading...</div>
+        <div id="cm-map" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Action History -->
       <div class="admin-section">
         <h2>Automatic Responses</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">Actions the system took automatically when it detected problems. This is an audit log — every automated decision is recorded here.</p>
-        <div id="cm-actions" class="tab-loading">Loading...</div>
+        <div id="cm-actions" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
 
       <!-- Holdout Probes -->
       <div class="admin-section">
         <h2>Secret Quiz Results</h2>
         <p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-bottom:var(--space-2);">During sessions, 1-2 items are tested in a different format than usual. The learning system never sees these results — they're a reality check on whether practice actually transfers.</p>
-        <div id="cm-holdout" class="tab-loading">Loading...</div>
+        <div id="cm-holdout" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:70%;height:14px"></div></div>
       </div>
     </div>
   </div>
@@ -846,41 +868,106 @@
       return '<span class="badge ' + cls + '">' + esc(s) + '</span>';
     }
 
-    /* ── Tab switching ── */
+    /* ── Two-level tab switching ── */
     var loadedTabs = {};
-    var tabButtons = document.querySelectorAll(".admin-tab");
     var tabContents = document.querySelectorAll(".admin-tab-content");
 
-    function switchAdminTab(btn) {
-      var tab = btn.getAttribute("data-tab");
-      tabButtons.forEach(function(b) { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); b.setAttribute("tabindex", "-1"); });
+    /* Group definitions: group key -> ordered list of sub-tab ids */
+    var tabGroups = {
+      "health":  [{id: "overview", label: "Overview"}, {id: "issues", label: "Issues"}, {id: "security", label: "Security"}, {id: "counter-metrics", label: "Anti-Goodhart"}],
+      "users":   [{id: "sessions", label: "Sessions"}, {id: "retention", label: "Retention"}, {id: "engagement", label: "Engagement"}],
+      "revenue": [{id: "revenue", label: "Revenue"}, {id: "partners", label: "Partners"}],
+      "content": [{id: "content", label: "Content"}, {id: "quality", label: "Quality"}, {id: "ai-review", label: "AI Review"}, {id: "openclaw", label: "OpenClaw Bots"}],
+      "intel":   [{id: "intelligence", label: "Intelligence"}, {id: "notifications", label: "Notifications"}]
+    };
+
+    var primaryButtons = document.querySelectorAll(".admin-tab[data-group]");
+    var subtabBar = document.getElementById("admin-subtabs");
+    var activeGroup = "health";
+    var activeSubTab = "overview";
+
+    function renderSubTabs(group) {
+      var items = tabGroups[group] || [];
+      subtabBar.innerHTML = "";
+      items.forEach(function(item, i) {
+        var btn = document.createElement("button");
+        btn.className = "admin-subtab" + (item.id === activeSubTab ? " active" : "");
+        btn.setAttribute("data-tab", item.id);
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", item.id === activeSubTab ? "true" : "false");
+        btn.setAttribute("tabindex", item.id === activeSubTab ? "0" : "-1");
+        btn.textContent = item.label;
+        btn.addEventListener("click", function() { switchSubTab(item.id); });
+        subtabBar.appendChild(btn);
+      });
+    }
+
+    function switchGroup(group, subTabOverride) {
+      activeGroup = group;
+      /* Update primary tab buttons */
+      primaryButtons.forEach(function(b) {
+        var isActive = b.getAttribute("data-group") === group;
+        b.classList.toggle("active", isActive);
+        b.setAttribute("aria-selected", isActive ? "true" : "false");
+        b.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+      /* Default to first sub-tab in the group */
+      var items = tabGroups[group] || [];
+      activeSubTab = subTabOverride || (items[0] ? items[0].id : "");
+      renderSubTabs(group);
+      activatePanel(activeSubTab);
+    }
+
+    function switchSubTab(tabId) {
+      activeSubTab = tabId;
+      /* Update sub-tab buttons */
+      subtabBar.querySelectorAll(".admin-subtab").forEach(function(b) {
+        var isActive = b.getAttribute("data-tab") === tabId;
+        b.classList.toggle("active", isActive);
+        b.setAttribute("aria-selected", isActive ? "true" : "false");
+        b.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+      activatePanel(tabId);
+    }
+
+    function activatePanel(tabId) {
       tabContents.forEach(function(c) { c.classList.remove("active"); });
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      btn.setAttribute("tabindex", "0");
-      var panel = document.getElementById("tab-" + tab);
-      if (panel) { panel.classList.add("active"); panel.setAttribute("role", "tabpanel"); panel.setAttribute("aria-labelledby", btn.id); }
-      if (!loadedTabs[tab]) {
-        loadedTabs[tab] = true;
-        loadTab(tab);
+      var panel = document.getElementById("tab-" + tabId);
+      if (panel) { panel.classList.add("active"); }
+      if (!loadedTabs[tabId]) {
+        loadedTabs[tabId] = true;
+        loadTab(tabId);
       }
     }
 
-    tabButtons.forEach(function(btn, i) {
+    /* Wire up primary tabs */
+    primaryButtons.forEach(function(btn, i) {
       btn.setAttribute("tabindex", i === 0 ? "0" : "-1");
-      btn.addEventListener("click", function() { switchAdminTab(btn); });
+      btn.addEventListener("click", function() { switchGroup(btn.getAttribute("data-group")); });
     });
 
-    /* Arrow key navigation for tab bar */
+    /* Arrow key navigation for primary tab bar */
     document.querySelector(".admin-tabs").addEventListener("keydown", function(e) {
-      var tabs = Array.from(tabButtons);
+      var tabs = Array.from(primaryButtons);
       var idx = tabs.indexOf(document.activeElement);
       if (idx < 0) return;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); var next = tabs[(idx + 1) % tabs.length]; next.focus(); switchAdminTab(next); }
-      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); var prev = tabs[(idx - 1 + tabs.length) % tabs.length]; prev.focus(); switchAdminTab(prev); }
-      else if (e.key === "Home") { e.preventDefault(); tabs[0].focus(); switchAdminTab(tabs[0]); }
-      else if (e.key === "End") { e.preventDefault(); tabs[tabs.length - 1].focus(); switchAdminTab(tabs[tabs.length - 1]); }
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); var next = tabs[(idx + 1) % tabs.length]; next.focus(); switchGroup(next.getAttribute("data-group")); }
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); var prev = tabs[(idx - 1 + tabs.length) % tabs.length]; prev.focus(); switchGroup(prev.getAttribute("data-group")); }
+      else if (e.key === "Home") { e.preventDefault(); tabs[0].focus(); switchGroup(tabs[0].getAttribute("data-group")); }
+      else if (e.key === "End") { e.preventDefault(); tabs[tabs.length - 1].focus(); switchGroup(tabs[tabs.length - 1].getAttribute("data-group")); }
     });
+
+    /* Arrow key navigation for sub-tab bar */
+    subtabBar.addEventListener("keydown", function(e) {
+      var tabs = Array.from(subtabBar.querySelectorAll(".admin-subtab"));
+      var idx = tabs.indexOf(document.activeElement);
+      if (idx < 0) return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); var next = tabs[(idx + 1) % tabs.length]; next.focus(); switchSubTab(next.getAttribute("data-tab")); }
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); var prev = tabs[(idx - 1 + tabs.length) % tabs.length]; prev.focus(); switchSubTab(prev.getAttribute("data-tab")); }
+    });
+
+    /* Initialize: render sub-tabs for the default group */
+    renderSubTabs("health");
 
     /* ── Overview tab (load immediately) ── */
     loadedTabs["overview"] = true;
@@ -3444,12 +3531,18 @@
       function x(i) { return pad.left + (i / Math.max(1, data.length - 1)) * plotW; }
       function y(v) { return pad.top + plotH - ((v - minVal) / range) * plotH; }
 
-      // Draw UCL/LCL bands (light red fill between)
-      ctx.fillStyle = "rgba(244, 67, 54, 0.05)";
+      // Brand-aligned SPC colors from CSS tokens
+      var spcIncorrect = cs.getPropertyValue("--color-incorrect").trim() || "#806058";
+      var spcAccent = cs.getPropertyValue("--color-accent").trim() || "#946070";
+      var spcWarning = cs.getPropertyValue("--color-mastery-stabilizing").trim() || "#B8A050";
+      var spcSecondary = cs.getPropertyValue("--color-secondary").trim() || "#6A7A5A";
+
+      // Draw UCL/LCL bands (light fill between)
+      ctx.fillStyle = spcIncorrect + "0D"; // ~5% opacity hex
       ctx.fillRect(pad.left, y(limits.ucl), plotW, y(limits.lcl) - y(limits.ucl));
 
       // Draw limit lines
-      [["ucl", "#ef5350", [5, 5]], ["cl", "#2196F3", []], ["lcl", "#ef5350", [5, 5]]].forEach(function(spec) {
+      [["ucl", spcIncorrect, [5, 5]], ["cl", spcSecondary, []], ["lcl", spcIncorrect, [5, 5]]].forEach(function(spec) {
         ctx.beginPath();
         ctx.setLineDash(spec[2]);
         ctx.strokeStyle = spec[1];
@@ -3478,7 +3571,7 @@
       for (var i = 0; i < data.length; i++) {
         ctx.beginPath();
         ctx.arc(x(i), y(data[i]), violationSet.has(i) ? 5 : 3, 0, Math.PI * 2);
-        ctx.fillStyle = violationSet.has(i) ? "#FF9800" : "#2196F3";
+        ctx.fillStyle = violationSet.has(i) ? spcWarning : spcSecondary;
         ctx.fill();
       }
 
@@ -3602,7 +3695,5 @@
       });
     }
   </script>
-  <script src="/static/webgl/three.min.js" async></script>
-  <script src="/static/webgl/scene-manager.js" defer></script>
 </body>
 </html>
