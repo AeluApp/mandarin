@@ -584,6 +584,36 @@ def _handle_ws_session(ws, planner_fn, label):
         except Exception:
             pass
 
+    def _run_grammar_block(bridge, block, conn, user_id):
+        """Run a grammar mini-lesson block within a session.
+
+        Sends the grammar point data to the browser for display,
+        then waits for the user to mark it as studied.
+        """
+        gp = block.grammar_point
+        bridge._send({
+            "type": "grammar_block",
+            "grammar_point_id": block.grammar_point_id,
+            "name": gp.get("name", ""),
+            "name_zh": gp.get("name_zh", ""),
+            "description": gp.get("description", ""),
+            "examples": gp.get("examples", []),
+            "pattern": gp.get("pattern", ""),
+            "hsk_level": gp.get("hsk_level", 1),
+        })
+        # Wait for user to acknowledge
+        bridge.input_fn("")
+        # Record progress
+        try:
+            conn.execute("""
+                INSERT INTO grammar_progress (user_id, grammar_point_id, studied_at, drill_attempts, drill_correct, mastery_score)
+                VALUES (?, ?, datetime('now'), 0, 0, 0.1)
+                ON CONFLICT(user_id, grammar_point_id) DO UPDATE SET studied_at = datetime('now')
+            """, (user_id, block.grammar_point_id))
+            conn.commit()
+        except Exception:
+            pass
+
     def _run_listening_block(bridge, block, conn, user_id):
         """Run a listening comprehension block as a session block.
 
@@ -846,7 +876,7 @@ def _handle_ws_session(ws, planner_fn, label):
 
                 # ── Cleanup loop: exposure reading → drills → re-read ──
                 # Run exposure ReadingBlocks BEFORE drills to collect looked-up words
-                from ..scheduler import DrillBlock, ReadingBlock, ConversationBlock, ListeningBlock
+                from ..scheduler import DrillBlock, ReadingBlock, ConversationBlock, ListeningBlock, GrammarBlock
                 looked_up = []
                 if label == "session":
                     for block in plan.blocks:
@@ -933,6 +963,8 @@ def _handle_ws_session(ws, planner_fn, label):
                                 _run_conversation_block(bridge, block, conn, user_id)
                             elif isinstance(block, ListeningBlock) and block.audio_url:
                                 _run_listening_block(bridge, block, conn, user_id)
+                            elif hasattr(block, 'block_type') and block.block_type == "grammar" and block.grammar_point:
+                                _run_grammar_block(bridge, block, conn, user_id)
                         except Exception as e:
                             logger.debug("Block %s failed: %s", block.block_type, e)
 

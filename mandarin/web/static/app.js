@@ -8482,6 +8482,15 @@ document.addEventListener("DOMContentLoaded", function() {
   if (btnGrammar) btnGrammar.addEventListener("click", function() {
     if (AeluSound.instance) AeluSound.instance.navigate(); openGrammarView();
   });
+  var btnConversation = document.getElementById("btn-conversation");
+  if (btnConversation) btnConversation.addEventListener("click", function() {
+    isFreeTier().then(function(free) {
+      if (free) { showUpgradePrompt("conversation"); return; }
+      if (AeluSound.instance) AeluSound.instance.navigate();
+      lastSessionType = "standard";
+      transitionTo("dashboard", "session", function() { connectWebSocket("standard"); });
+    });
+  });
 
   // Back buttons for exposure views
   var readingBack = document.getElementById("reading-back");
