@@ -84,6 +84,7 @@ HOSTING_COST_MONTHLY = 7.00       # $/mo estimate
 # ── External services ────────────────────────────────
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_TAX_ENABLED = os.environ.get("STRIPE_TAX_ENABLED", "").lower() in ("1", "true", "yes")
 SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
 
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")

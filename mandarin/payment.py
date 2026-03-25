@@ -8,7 +8,7 @@ from typing import Optional
 import stripe
 
 from .email import send_subscription_confirmed, send_subscription_cancelled
-from .settings import STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, BASE_URL, PRICING
+from .settings import STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_TAX_ENABLED, BASE_URL, PRICING
 
 logger = logging.getLogger(__name__)
 
@@ -183,7 +183,7 @@ def create_checkout_session(user_id: int, email: str, plan: str = "monthly",
         interval = "month"
         product_name = "Aelu — Full Access"
 
-    session = stripe.checkout.Session.create(
+    checkout_kwargs = dict(
         customer_email=email,
         payment_method_types=["card"],
         line_items=[{
@@ -203,6 +203,9 @@ def create_checkout_session(user_id: int, email: str, plan: str = "monthly",
             "price_variant": price_variant or "default",
         },
     )
+    if STRIPE_TAX_ENABLED:
+        checkout_kwargs["automatic_tax"] = {"enabled": True}
+    session = stripe.checkout.Session.create(**checkout_kwargs)
     return session.url
 
 
@@ -213,6 +216,7 @@ def create_classroom_checkout(teacher_user_id: int, email: str,
     Args:
         billing: "per_student" ($8/student/mo, min 5) or "semester" ($200 flat, up to 30).
     """
+    tax_kwargs = {"automatic_tax": {"enabled": True}} if STRIPE_TAX_ENABLED else {}
     if billing == "semester":
         session = stripe.checkout.Session.create(
             customer_email=email,
@@ -234,6 +238,7 @@ def create_classroom_checkout(teacher_user_id: int, email: str,
                 "billing": "semester",
                 "student_count": str(min(student_count, PRICING["classroom_max_students_semester"])),
             },
+            **tax_kwargs,
         )
     else:
         # Per-student pricing, minimum students enforced
@@ -259,6 +264,7 @@ def create_classroom_checkout(teacher_user_id: int, email: str,
                 "billing": "per_student",
                 "student_count": str(qty),
             },
+            **tax_kwargs,
         )
     return session.url
 
@@ -270,7 +276,7 @@ def create_student_upgrade_checkout(student_user_id: int, email: str,
     The student pays $4.99/month. The teacher who referred them via classroom
     earns 25% commission for up to 24 months.
     """
-    session = stripe.checkout.Session.create(
+    upgrade_kwargs = dict(
         customer_email=email,
         payment_method_types=["card"],
         line_items=[{
@@ -291,6 +297,9 @@ def create_student_upgrade_checkout(student_user_id: int, email: str,
             "teacher_user_id": str(teacher_user_id),
         },
     )
+    if STRIPE_TAX_ENABLED:
+        upgrade_kwargs["automatic_tax"] = {"enabled": True}
+    session = stripe.checkout.Session.create(**upgrade_kwargs)
     return session.url
 
 
