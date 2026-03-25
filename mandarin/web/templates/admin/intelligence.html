@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligence Dashboard — Aelu</title>
+  <script nonce="{{ csp_nonce }}">(function(){var h=new Date().getHours(),d=h>=19||h<7;document.documentElement.setAttribute("data-theme",d?"dark":"light");document.documentElement.style.backgroundColor=d?"#1C2028":"#F2EBE0";})()</script>
+  <link rel="icon" href="/static/favicon.ico?v=2" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_hash('style.css') }}">
+  <style nonce="{{ csp_nonce }}">
+    .intel-page { max-width: 960px; margin: 0 auto; padding: var(--space-6); }
+    .intel-back { display: inline-block; margin-bottom: var(--space-4); color: var(--color-accent); text-decoration: none; font-family: var(--font-body); font-size: var(--text-sm); }
+    .intel-back:hover { text-decoration: underline; }
+    .intel-header h1 { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); margin: 0 0 var(--space-2) 0; }
+    .intel-header p { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin: 0 0 var(--space-5) 0; }
+
+    /* Summary stats */
+    .intel-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-6); }
+    .intel-stat { padding: var(--space-4); text-align: center; border-bottom: 1px solid var(--color-divider); }
+    .intel-stat-value { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text); }
+    .intel-stat-value.accent { color: var(--color-accent); }
+    .intel-stat-value.correct { color: var(--color-correct); }
+    .intel-stat-label { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); margin-top: var(--space-1); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+
+    /* Section dividers */
+    .intel-section { margin-bottom: var(--space-6); }
+    .intel-section-title { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-text); margin: 0 0 var(--space-3) 0; padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-divider); }
+    .intel-section-title .count { font-weight: 400; color: var(--color-text-dim); font-size: var(--text-sm); }
+
+    /* Decision class group headers */
+    .decision-group { margin-bottom: var(--space-5); }
+    .decision-group-title { font-family: var(--font-heading); font-size: var(--text-base); color: var(--color-accent); margin: 0 0 var(--space-3) 0; }
+
+    /* Finding cards */
+    .finding-card { padding: var(--space-4); margin-bottom: var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .finding-card:last-child { border-bottom: none; }
+    .finding-title { font-family: var(--font-body); font-size: var(--text-base); color: var(--color-text); margin: 0 0 var(--space-1) 0; line-height: 1.4; }
+    .finding-title.sev-critical,
+    .finding-title.sev-high { font-weight: 700; }
+    .finding-title.sev-medium { font-weight: 600; }
+    .finding-title.sev-low { font-weight: 400; }
+    .finding-meta { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-dim); margin: 0 0 var(--space-2) 0; }
+    .finding-analysis { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); margin: 0 0 var(--space-3) 0; line-height: 1.5; }
+
+    /* Action buttons */
+    .finding-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .btn-approve { background: var(--color-accent); color: #fff; border: none; padding: var(--space-1) var(--space-3); font-family: var(--font-body); font-size: var(--text-sm); cursor: pointer; border-radius: 4px; transition: opacity 0.2s; }
+    .btn-approve:hover { opacity: 0.85; }
+    .btn-approve:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    .btn-reject { background: none; color: var(--color-text-dim); border: 1px solid var(--color-divider); padding: var(--space-1) var(--space-3); font-family: var(--font-body); font-size: var(--text-sm); cursor: pointer; border-radius: 4px; transition: color 0.2s, border-color 0.2s; }
+    .btn-reject:hover { color: var(--color-text); border-color: var(--color-text-dim); }
+    .btn-defer { background: none; color: var(--color-text-dim); border: none; padding: var(--space-1) var(--space-3); font-family: var(--font-body); font-size: var(--text-sm); cursor: pointer; text-decoration: underline; }
+    .btn-defer:hover { color: var(--color-text); }
+
+    /* Action feedback */
+    .finding-card.actioned { opacity: 0.5; pointer-events: none; }
+    .finding-card .action-result { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-correct); margin-top: var(--space-2); }
+
+    /* Auto-fixed list */
+    .autofixed-item { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text); }
+    .autofixed-item:last-child { border-bottom: none; }
+    .autofixed-dim { color: var(--color-correct); font-weight: 600; }
+    .autofixed-date { color: var(--color-text-dim); font-size: var(--text-xs); }
+
+    /* Empty state */
+    .intel-empty { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-dim); font-style: italic; padding: var(--space-4) 0; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .intel-page { padding: var(--space-4); }
+      .intel-stats { grid-template-columns: repeat(3, 1fr); }
+      .finding-actions { flex-direction: column; }
+      .btn-approve, .btn-reject, .btn-defer { width: 100%; text-align: center; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .finding-card, .intel-stat { transition: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="intel-page">
+  <a href="/admin/" class="intel-back">&larr; Back to Admin</a>
+
+  <header class="intel-header">
+    <h1>Intelligence Dashboard</h1>
+    <p>Review findings, approve recommendations, track auto-fixes.</p>
+  </header>
+
+  <!-- Summary stats -->
+  <div class="intel-stats">
+    <div class="intel-stat">
+      <div class="intel-stat-value">{{ total_findings }}</div>
+      <div class="intel-stat-label">Total Findings</div>
+    </div>
+    <div class="intel-stat">
+      <div class="intel-stat-value accent">{{ pending_approval }}</div>
+      <div class="intel-stat-label">Pending Approval</div>
+    </div>
+    <div class="intel-stat">
+      <div class="intel-stat-value correct">{{ auto_fixed_7d }}</div>
+      <div class="intel-stat-label">Auto-fixed (7d)</div>
+    </div>
+  </div>
+
+  <!-- Findings needing approval -->
+  <div class="intel-section">
+    <h2 class="intel-section-title">
+      Needs Your Approval
+      <span class="count">({{ pending_approval }})</span>
+    </h2>
+
+    {% if grouped_approval %}
+      {% for dc, findings in grouped_approval.items() %}
+      <div class="decision-group">
+        <h3 class="decision-group-title">{{ decision_class_labels.get(dc, dc) }}</h3>
+        {% for f in findings %}
+        <div class="finding-card" data-finding-id="{{ f.id }}">
+          <p class="finding-title sev-{{ f.severity }}">{{ f.title }}</p>
+          <p class="finding-meta">
+            {{ f.dimension }}
+            &middot; {{ f.severity }}
+            &middot; {{ f.status }}
+            {% if f.times_seen and f.times_seen > 1 %}
+              &middot; seen {{ f.times_seen }} times
+            {% endif %}
+            {% if f.escalation_level %}
+              &middot; {{ f.escalation_level }}
+            {% endif %}
+          </p>
+          {% if f.analysis %}
+          <p class="finding-analysis">{{ f.analysis[:200] }}{% if f.analysis|length > 200 %}&hellip;{% endif %}</p>
+          {% endif %}
+          <div class="finding-actions">
+            <button class="btn-approve" onclick="actionFinding({{ f.id }}, 'approve', this)">Approve</button>
+            <button class="btn-reject" onclick="actionFinding({{ f.id }}, 'reject', this)">Reject</button>
+            <button class="btn-defer" onclick="actionFinding({{ f.id }}, 'defer', this)">Defer</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="intel-empty">No findings awaiting approval.</p>
+    {% endif %}
+  </div>
+
+  <!-- Recently auto-fixed -->
+  <div class="intel-section">
+    <h2 class="intel-section-title">
+      Recently Auto-fixed
+      <span class="count">(last 7 days)</span>
+    </h2>
+
+    {% if recent_auto_fixed %}
+      {% for f in recent_auto_fixed %}
+      <div class="autofixed-item">
+        <span class="autofixed-dim">{{ f.dimension }}</span>
+        &mdash; {{ f.title }}
+        {% if f.resolved_at %}
+        <span class="autofixed-date">&middot; {{ f.resolved_at[:10] }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="intel-empty">No auto-fixed findings in the last 7 days.</p>
+    {% endif %}
+  </div>
+</div>
+
+<script nonce="{{ csp_nonce }}">
+function actionFinding(findingId, action, btn) {
+  var card = btn.closest('.finding-card');
+  var url = '/admin/intelligence/' + findingId + '/' + action;
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCsrfToken()
+    },
+    body: JSON.stringify({ notes: '' })
+  })
+  .then(function(resp) { return resp.json(); })
+  .then(function(data) {
+    card.classList.add('actioned');
+    var result = document.createElement('p');
+    result.className = 'action-result';
+    result.textContent = action.charAt(0).toUpperCase() + action.slice(1) + 'd successfully.';
+    card.appendChild(result);
+
+    // Update pending count
+    var countEl = document.querySelector('.intel-stat-value.accent');
+    if (countEl) {
+      var current = parseInt(countEl.textContent, 10);
+      if (!isNaN(current) && current > 0) {
+        countEl.textContent = current - 1;
+      }
+    }
+  })
+  .catch(function(err) {
+    btn.textContent = 'Error';
+    btn.disabled = true;
+  });
+}
+
+function getCsrfToken() {
+  var meta = document.querySelector('meta[name="csrf-token"]');
+  if (meta) return meta.getAttribute('content');
+  var cookie = document.cookie.split(';').find(function(c) { return c.trim().startsWith('csrf_token='); });
+  return cookie ? cookie.split('=')[1] : '';
+}
+</script>
+</body>
+</html>

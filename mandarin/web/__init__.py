@@ -444,6 +444,9 @@ def create_app(testing=False):
     from .genai_admin_routes import genai_admin_bp
     app.register_blueprint(genai_admin_bp)
 
+    from .intelligence_admin_routes import intelligence_admin_bp
+    app.register_blueprint(intelligence_admin_bp)
+
     # ── MFA routes (CSRF exempt for JSON API) ─────────────
     from .mfa_routes import mfa_bp
     app.register_blueprint(mfa_bp)
