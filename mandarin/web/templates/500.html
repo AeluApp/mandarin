@@ -21,6 +21,20 @@
       padding: var(--space-6);
       position: relative;
     }
+    .error-hanzi {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+      font-size: 3.5rem;
+      color: var(--color-accent);
+      opacity: 0;
+      margin-bottom: var(--space-3);
+      line-height: 1;
+      animation: hanziMaterialize 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+    @keyframes hanziMaterialize {
+      0% { opacity: 0; transform: scale(0.7); filter: blur(8px); }
+      60% { opacity: 0.5; filter: blur(0); }
+      100% { opacity: 0.5; transform: scale(1); filter: blur(0); }
+    }
     .error-title {
       font-family: var(--font-heading);
       font-size: var(--text-xl);
@@ -28,20 +42,30 @@
       color: var(--color-text-dim);
       letter-spacing: 0.05em;
       margin-bottom: var(--space-4);
+      opacity: 0;
+      animation: driftUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
     }
     .error-sub {
       font-family: var(--font-body);
       font-size: var(--text-sm);
       color: var(--color-text-dim);
       margin-bottom: var(--space-4);
+      opacity: 0;
+      animation: driftUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
     }
     .error-link {
       color: var(--color-accent);
       font-family: var(--font-body);
       font-size: var(--text-sm);
       text-decoration: none;
+      opacity: 0;
+      animation: driftUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
     }
     .error-link:hover { text-decoration: underline; }
+    @keyframes driftUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .error-illustration {
       display: block;
       max-width: 280px;
@@ -62,8 +86,9 @@
   <div id="app" role="main">
     <div class="error-wrap">
       <img src="/static/illustrations/error-page.webp" alt="" class="error-illustration" aria-hidden="true">
-      <h1 class="error-title">Something went wrong.</h1>
-      <p class="error-sub">We're looking into it.</p>
+      <div class="error-hanzi" aria-hidden="true">修</div>
+      <h1 class="error-title">Something broke. We're repairing it.</h1>
+      <p class="error-sub">This is temporary. Your data is safe.</p>
       <a href="/" class="error-link">Return to the dashboard</a>
     </div>
   </div>
@@ -78,6 +103,6 @@
     })();
   </script>
   <script src="/static/webgl/three.min.js" async></script>
-  <script src="/static/webgl/ink-atmosphere.js" defer></script>
+  <script src="/static/webgl/scene-manager.js" defer></script>
 </body>
 </html>

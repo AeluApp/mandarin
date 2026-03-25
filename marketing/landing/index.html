@@ -98,10 +98,6 @@
       font-family: var(--font-body);
       color: var(--color-text);
       background-color: var(--color-base);
-      background-image:
-        radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--color-secondary) 4%, var(--color-base)) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--color-accent) 6%, var(--color-base)) 0%, transparent 55%);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -131,25 +127,71 @@
       overflow: hidden;
     }
 
-    /* Giant watermark character behind hero */
-    .hero::before {
-      content: '学';
+    /* Hero video background */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      animation: heroVideoReveal 2s ease-out 0.2s forwards;
+    }
+    @keyframes heroVideoReveal {
+      from { opacity: 0; transform: scale(1.03); }
+      to { opacity: 0.55; transform: scale(1); }
+    }
+    @media (prefers-color-scheme: dark) {
+      .hero-video { filter: brightness(0.4) saturate(0.8); }
+      @keyframes heroVideoReveal {
+        from { opacity: 0; transform: scale(1.03); }
+        to { opacity: 0.35; transform: scale(1); }
+      }
+    }
+    /* Gradient overlay for text readability */
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(to bottom, var(--color-base) 0%, transparent 30%, transparent 70%, var(--color-base) 100%);
+      pointer-events: none;
+    }
+
+    /* Calligraphy watermark behind hero (replaces font glyph) */
+    .hero-watermark {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -55%);
-      font-family: var(--font-hanzi);
-      font-size: clamp(16rem, 30vw, 24rem);
-      color: var(--color-accent);
-      opacity: 0.035;
+      width: clamp(16rem, 30vw, 24rem);
+      height: auto;
+      opacity: 0.06;
       mix-blend-mode: multiply;
       pointer-events: none;
       z-index: 0;
-      line-height: 1;
+    }
+    @media (prefers-color-scheme: dark) {
+      .hero-watermark { mix-blend-mode: screen; opacity: 0.04; filter: invert(1); }
     }
 
-    @media (prefers-color-scheme: dark) {
-      .hero::before { mix-blend-mode: screen; opacity: 0.025; }
+    /* Parallax plant sprites */
+    .parallax-sprite {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      animation: spriteReveal 1.5s ease-out 1.5s forwards;
+    }
+    .parallax-sprite--plum { right: 5%; bottom: 10%; width: 120px; }
+    .parallax-sprite--bamboo { left: 3%; bottom: 25%; width: 80px; }
+    @keyframes spriteReveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 0.4; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video, .hero-watermark, .parallax-sprite { animation: none !important; opacity: 0.3 !important; }
     }
 
     .hero .container { position: relative; z-index: 1; }
@@ -196,6 +238,94 @@
 
     @media (prefers-reduced-motion: reduce) {
       .hero-hanzi, .hero h1, .hero-sub, .hero-promise, .cta-group { animation: none !important; }
+    }
+
+    /* ── Scroll-driven section animations ── */
+    [data-scroll-section] {
+      --progress: 0;
+    }
+
+    /* Hero parallax: content lifts as you scroll, image recedes */
+    .hero .container {
+      transform: translateY(calc(var(--scroll-progress, 0) * -30px));
+      opacity: calc(1 - var(--scroll-progress, 0) * 0.6);
+      transition: none;
+    }
+
+    /* Giant watermark character shifts with scroll */
+    .hero::before {
+      transform: translate(-50%, calc(-55% + var(--scroll-progress, 0) * -60px));
+    }
+
+    /* Feature cards stagger entrance with depth */
+    .feature-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s var(--ease-upward), transform 0.6s var(--ease-upward);
+    }
+    .feature-card:nth-child(1) { transition-delay: 0ms; }
+    .feature-card:nth-child(2) { transition-delay: 100ms; }
+    .feature-card:nth-child(3) { transition-delay: 200ms; }
+    .feature-card:nth-child(4) { transition-delay: 300ms; }
+    .features.scroll-in .feature-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Steps stagger */
+    .step {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.5s var(--ease-upward), transform 0.5s var(--ease-upward);
+    }
+    .step:nth-child(1) { transition-delay: 0ms; }
+    .step:nth-child(2) { transition-delay: 150ms; }
+    .step:nth-child(3) { transition-delay: 300ms; }
+    .how-it-works.scroll-in .step {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Pricing cards lift */
+    .pricing-card {
+      opacity: 0;
+      transform: translateY(20px) scale(0.97);
+      transition: opacity 0.6s var(--ease-upward), transform 0.6s var(--ease-spring);
+    }
+    .pricing-card:nth-child(1) { transition-delay: 0ms; }
+    .pricing-card:nth-child(2) { transition-delay: 120ms; }
+    .pricing.scroll-in .pricing-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Hero hanzi character-level animation */
+    .hero-hanzi .char-reveal {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: charReveal 0.6s var(--ease-upward) forwards;
+    }
+    @keyframes charReveal {
+      to { opacity: 0.9; transform: translateY(0); }
+    }
+
+    /* Forgetting curve visualization */
+    .forgetting-curve {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 120px;
+      margin: var(--space-4) auto;
+    }
+    .forgetting-curve canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Scroll-driven WebGL intensity connection */
+    .hero[data-scroll-section] {
+      will-change: transform;
     }
 
     .hero-sub {
@@ -786,7 +916,8 @@
   </style>
 </head>
 <body>
-  <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
+  <!-- WebGL atmosphere disabled on marketing — clean flat linen lets content breathe -->
+  <!-- <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div> -->
 
   <!-- Nav -->
   <nav aria-label="Main navigation">
@@ -807,7 +938,18 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" data-scroll-section="hero">
+    <!-- Cinematic ink-dissolving video background -->
+    <video class="hero-video" autoplay muted loop playsinline poster="/static/assets/phase2/videos/hero-ink-poster.jpg" aria-hidden="true">
+      <source src="/static/assets/phase2/videos/hero-ink.webm" type="video/webm">
+      <source src="/static/assets/phase2/videos/hero-ink.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay" aria-hidden="true"></div>
+    <!-- Calligraphy watermark (replaces font-rendered 学) -->
+    <img class="hero-watermark" src="/static/assets/phase2/calligraphy/xue.png" alt="" aria-hidden="true" loading="eager">
+    <!-- Parallax plant sprites -->
+    <img class="parallax-sprite parallax-sprite--plum" src="/static/assets/phase2/plants/plum-blossom.png" alt="" aria-hidden="true" data-speed="0.3" loading="lazy">
+    <img class="parallax-sprite parallax-sprite--bamboo" src="/static/assets/phase2/plants/bamboo.png" alt="" aria-hidden="true" data-speed="0.5" loading="lazy">
     <div class="container">
       <div class="hero-hanzi" aria-hidden="true">学而时习之</div>
       <h1>Learn Chinese the way your brain actually works</h1>
@@ -842,7 +984,7 @@
   </section>
 
   <!-- Problem -->
-  <section class="problem">
+  <section class="problem" data-scroll-section="problem">
     <div class="container">
       <h2>Most Chinese apps teach you to tap, not to think</h2>
       <ul class="problem-list">
@@ -855,7 +997,7 @@
   </section>
 
   <!-- Features -->
-  <section class="features">
+  <section class="features" data-scroll-section="features">
     <div class="container-wide">
       <h2>What makes this work</h2>
       <div class="feature-grid">
@@ -884,7 +1026,7 @@
   </section>
 
   <!-- How it works -->
-  <section class="how-it-works">
+  <section class="how-it-works" data-scroll-section="how-it-works">
     <div class="container">
       <h2>The cleanup loop</h2>
       <div class="steps">
@@ -913,6 +1055,18 @@
     </div>
   </section>
 
+  <!-- Forgetting Curve — interactive visualization -->
+  <section class="forgetting" data-scroll-section="forgetting" style="padding:var(--space-6) 0;text-align:center;">
+    <div class="container" style="max-width:640px;">
+      <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:600;margin-bottom:var(--space-2);">Memory fades. Review renews.</h2>
+      <p style="font-size:0.95rem;color:var(--color-text-faint);margin-bottom:var(--space-4);line-height:1.6;">Without review, a new word fades within days. Spaced repetition brings it back at the exact moment you'd forget.</p>
+      <div class="forgetting-curve" aria-label="Forgetting curve visualization showing how spaced repetition preserves memory">
+        <canvas id="forgetting-canvas" width="960" height="240"></canvas>
+      </div>
+      <p style="font-size:0.85rem;color:var(--color-text-faint);margin-top:var(--space-2);">Each pulse is a review session. The curve gets shallower every time.</p>
+    </div>
+  </section>
+
   <!-- Differentiator -->
   <section class="diff">
     <div class="container">
@@ -923,7 +1077,7 @@
   </section>
 
   <!-- Pricing -->
-  <section class="pricing">
+  <section class="pricing" data-scroll-section="pricing">
     <div class="container">
       <h2>Simple pricing</h2>
       <div class="pricing-grid">
@@ -974,7 +1128,7 @@
   </section>
 
   <!-- Final CTA -->
-  <section class="final-cta">
+  <section class="final-cta" data-scroll-section="final-cta">
     <div class="container">
       <h2>Start learning the way serious learners do</h2>
       <p>Free to start. No credit card required.</p>
@@ -1050,35 +1204,246 @@
       counters.forEach(function(c) { observer.observe(c); });
     })();
 
-    // Scroll-triggered section reveals
+    // Scroll-driven section reveals via scroll-engine.js
     (function() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Reduced motion: show everything immediately
+        document.querySelectorAll('.features, .how-it-works, .pricing').forEach(function(el) {
+          el.classList.add('scroll-in');
+        });
+        return;
+      }
+
+      // Character-level animation for hero hanzi
+      var heroHanzi = document.querySelector('.hero-hanzi');
+      if (heroHanzi) {
+        var text = heroHanzi.textContent;
+        var html = '';
+        for (var i = 0; i < text.length; i++) {
+          html += '<span class="char-reveal" style="animation-delay:' + (100 + i * 80) + 'ms">' + text[i] + '</span>';
+        }
+        heroHanzi.innerHTML = html;
+      }
+
+      // Use AeluScroll when available, fallback to IntersectionObserver
+      function initScrollReveals() {
+        if (window.AeluScroll) {
+          // Register scroll callbacks for sections with entrance animations
+          AeluScroll.onProgress('features', function(p) {
+            if (p > 0.15) document.querySelector('.features').classList.add('scroll-in');
+          });
+          AeluScroll.onProgress('how-it-works', function(p) {
+            if (p > 0.15) document.querySelector('.how-it-works').classList.add('scroll-in');
+          });
+          AeluScroll.onProgress('pricing', function(p) {
+            if (p > 0.15) document.querySelector('.pricing').classList.add('scroll-in');
+          });
+
+          // Hero scroll parallax tracked (CSS custom property drives the effect)
+        } else {
+          // Fallback: IntersectionObserver
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('scroll-in');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+          document.querySelectorAll('.features, .how-it-works, .pricing').forEach(function(el) {
+            observer.observe(el);
+          });
+        }
+      }
+
+      // Wait for scroll engine to load
+      if (window.AeluScroll) {
+        initScrollReveals();
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(initScrollReveals, 50);
+        });
+      }
+    })();
+
+    // Forgetting curve visualization — scroll-driven
+    (function() {
+      var canvas = document.getElementById('forgetting-canvas');
+      if (!canvas) return;
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      // Mark sections and feature cards as scroll-reveal targets
-      var sections = document.querySelectorAll('section:not(.hero)');
-      sections.forEach(function(s) { s.classList.add('scroll-reveal'); });
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = canvas.width;
+      var h = canvas.height;
+      canvas.style.width = w / 2 + 'px';
+      canvas.style.height = h / 2 + 'px';
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
 
-      var featureCards = document.querySelectorAll('.feature-card');
-      featureCards.forEach(function(c) { c.classList.add('scroll-reveal'); });
+      var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var accentColor = isDark ? '#B07888' : '#946070';
+      var textColor = isDark ? '#E4DDD0' : '#2A3650';
+      var faintColor = isDark ? 'rgba(228,221,208,0.15)' : 'rgba(42,54,80,0.1)';
+      var correctColor = isDark ? '#7A9A7A' : '#5A7A5A';
 
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              observer.unobserve(entry.target);
-            }
+      // Review points (x position 0-1, strength boost)
+      var reviews = [0.15, 0.35, 0.6, 0.85];
+
+      function forgettingCurve(x, reviewsDone) {
+        // Exponential decay that gets shallower with each review
+        var strength = 1;
+        var decayRate = 3.0; // Initial fast decay
+        var lastReview = 0;
+
+        for (var i = 0; i < reviewsDone; i++) {
+          var rp = reviews[i];
+          if (x < rp) break;
+          // At each review, reset strength and reduce decay
+          var timeSince = rp - lastReview;
+          strength = strength * Math.exp(-decayRate * timeSince);
+          strength = Math.min(1, strength + 0.4); // Boost from review
+          decayRate *= 0.65; // Decay slows each review
+          lastReview = rp;
+        }
+
+        var timeSinceLast = x - lastReview;
+        return strength * Math.exp(-decayRate * timeSinceLast);
+      }
+
+      var animProgress = 0;
+
+      function draw(progress) {
+        ctx.clearRect(0, 0, w, h);
+
+        var margin = { left: 40, right: 20, top: 15, bottom: 30 };
+        var plotW = w - margin.left - margin.right;
+        var plotH = h - margin.top - margin.bottom;
+
+        // Axis labels
+        ctx.font = '11px "Source Serif 4", Georgia, serif';
+        ctx.fillStyle = textColor;
+        ctx.globalAlpha = 0.5;
+        ctx.textAlign = 'left';
+        ctx.fillText('Memory', margin.left, margin.top - 3);
+        ctx.textAlign = 'right';
+        ctx.fillText('Time', w - margin.right, h - 5);
+        ctx.globalAlpha = 1;
+
+        // Horizontal grid lines
+        ctx.strokeStyle = faintColor;
+        ctx.lineWidth = 1;
+        for (var g = 0; g <= 4; g++) {
+          var gy = margin.top + plotH * (1 - g / 4);
+          ctx.beginPath();
+          ctx.moveTo(margin.left, gy);
+          ctx.lineTo(margin.left + plotW, gy);
+          ctx.stroke();
+        }
+
+        // Draw the "no review" decay (faint reference)
+        ctx.strokeStyle = faintColor;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (var i = 0; i <= 100; i++) {
+          var x = i / 100;
+          if (x > progress) break;
+          var y = Math.exp(-3 * x);
+          var px = margin.left + x * plotW;
+          var py = margin.top + (1 - y) * plotH;
+          if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+
+        // Label
+        if (progress > 0.3) {
+          ctx.font = '10px "Source Serif 4", Georgia, serif';
+          ctx.fillStyle = textColor;
+          ctx.globalAlpha = Math.min(1, (progress - 0.3) * 5) * 0.35;
+          ctx.textAlign = 'left';
+          ctx.fillText('Without review', margin.left + plotW * 0.4, margin.top + plotH * 0.85);
+          ctx.globalAlpha = 1;
+        }
+
+        // Draw the SRS curve (main line, with review boosts)
+        var reviewsDoneByProgress = 0;
+        for (var r = 0; r < reviews.length; r++) {
+          if (reviews[r] <= progress) reviewsDoneByProgress = r + 1;
+        }
+
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (var j = 0; j <= 200; j++) {
+          var xr = j / 200;
+          if (xr > progress) break;
+          var yr = forgettingCurve(xr, reviewsDoneByProgress);
+          var pxr = margin.left + xr * plotW;
+          var pyr = margin.top + (1 - yr) * plotH;
+          if (j === 0) ctx.moveTo(pxr, pyr); else ctx.lineTo(pxr, pyr);
+        }
+        ctx.stroke();
+
+        // Review pulse markers
+        for (var k = 0; k < reviews.length; k++) {
+          if (reviews[k] > progress) break;
+          var rpx = margin.left + reviews[k] * plotW;
+          var rpy = margin.top + (1 - forgettingCurve(reviews[k], k)) * plotH;
+          var boostY = margin.top + (1 - forgettingCurve(reviews[k], k + 1)) * plotH;
+
+          // Vertical pulse line
+          ctx.strokeStyle = correctColor;
+          ctx.lineWidth = 1;
+          ctx.setLineDash([3, 3]);
+          ctx.beginPath();
+          ctx.moveTo(rpx, rpy);
+          ctx.lineTo(rpx, boostY);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Dot at boost point
+          ctx.fillStyle = correctColor;
+          ctx.beginPath();
+          ctx.arc(rpx, boostY, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Drive animation from scroll progress
+      function initForgettingViz() {
+        if (window.AeluScroll) {
+          AeluScroll.onProgress('forgetting', function(p) {
+            // Map section progress 0.1-0.8 to animation 0-1
+            var mapped = Math.max(0, Math.min(1, (p - 0.1) / 0.7));
+            draw(mapped);
           });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        } else {
+          // Fallback: animate on intersection
+          var observer = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              observer.unobserve(canvas);
+              var start = performance.now();
+              function step(now) {
+                var p = Math.min(1, (now - start) / 2500);
+                draw(1 - Math.pow(1 - p, 2));
+                if (p < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            }
+          }, { threshold: 0.3 });
+          observer.observe(canvas);
+        }
 
-        document.querySelectorAll('.scroll-reveal').forEach(function(el) {
-          observer.observe(el);
-        });
+        // Initial empty state
+        draw(0);
+      }
+
+      if (window.AeluScroll) {
+        initForgettingViz();
       } else {
-        // Fallback: just show everything
-        document.querySelectorAll('.scroll-reveal').forEach(function(el) {
-          el.classList.add('revealed');
-        });
+        window.addEventListener('load', function() { setTimeout(initForgettingViz, 100); });
       }
     })();
 
@@ -1107,8 +1472,8 @@
       }
     })();
   </script>
-  <script src="/static/webgl/three.min.js" async></script>
-  <script src="/static/webgl/ink-atmosphere.js" defer></script>
+  <!-- Three.js not needed on marketing (no WebGL atmosphere) — saves 670KB -->
+  <script src="/static/scroll-engine.js" defer></script>
 
 </body>
 </html>

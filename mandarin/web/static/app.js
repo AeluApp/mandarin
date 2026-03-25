@@ -2520,14 +2520,19 @@ function displayShow(data) {
     AeluSound.correct();
     if (typeof CapacitorBridge !== 'undefined') CapacitorBridge.hapticFeedback('correct');
     _hapticFeedback('correct');
-    // Ink bloom visual feedback
+    // Ink bloom + settle visual feedback
     if (window.AeluCelebrations && el) {
       AeluCelebrations.inkBloom(el);
+      AeluCelebrations.inkSettle(el);
     }
   } else if (cls.indexOf("msg-wrong") !== -1) {
     AeluSound.wrong();
     if (typeof CapacitorBridge !== 'undefined') CapacitorBridge.hapticFeedback('incorrect');
     _hapticFeedback('incorrect');
+    // Ink scatter visual feedback
+    if (window.AeluCelebrations && el) {
+      AeluCelebrations.inkScatter(el);
+    }
     // Inject "I was right" override button
     if (_lastDrillMeta && !_lastDrillMeta.correct) {
       var overrideBtn = document.createElement("button");
@@ -3166,6 +3171,7 @@ function showComplete(summary) {
   html += '<div class="complete-pct">' + pct + '% recalled';
   if (elapsedStr) html += ' &middot; ' + elapsedStr;
   html += '</div>';
+  html += '<div class="complete-accuracy-bar"><div class="complete-accuracy-fill' + (pct >= 80 ? ' score-high' : '') + '" style="--accuracy-pct:' + pct + '%"></div></div>';
 
   if (summary.early_exit) {
     // If the user completed a good chunk, soften the message
@@ -3184,6 +3190,22 @@ function showComplete(summary) {
   // #4 — Show loading skeleton while fetching details
   content.innerHTML = html + '<div class="complete-skeleton"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div>';
   handleImgErrors(content, '/static/illustrations/session-complete.webp');
+
+  // Animated number counting on score
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var scoreEl = content.querySelector('.complete-score');
+    if (scoreEl && total > 0) {
+      scoreEl.textContent = '0 of ' + total;
+      var countStart = performance.now();
+      (function countUp(now) {
+        var p = Math.min(1, (now - countStart) / 800);
+        var ease = 1 - Math.pow(1 - p, 3);
+        var cur = Math.round(correct * ease);
+        scoreEl.innerHTML = cur + ' of ' + total + '<span class="sr-only"> — session summary</span>';
+        if (p < 1) requestAnimationFrame(countUp);
+      })(performance.now());
+    }
+  }
 
   // Fetch additional session data for the complete screen
   fetchCompleteDetails(content, html, summary);

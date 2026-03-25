@@ -180,9 +180,112 @@
     requestAnimationFrame(animate);
   }
 
+  // ── Ink Settle — character settles into place with underline ──
+  // Used for correct answer. Adds class + draws underline.
+  function inkSettle(el) {
+    if (reducedMotion || !el) return;
+    el.classList.add('ink-settle');
+    // Boost WebGL atmosphere momentarily
+    if (window.AeluScene && AeluScene.isInitialized()) {
+      AeluScene.boostIntensity(0.03, 0.92);
+    }
+  }
+
+  // ── Ink Scatter — particles disperse outward from incorrect answer ──
+  // Gentle: no alarm, no red. Character blurs momentarily.
+  function inkScatter(el) {
+    if (reducedMotion || !el) return;
+
+    // Add blur pulse class to element
+    el.classList.add('ink-scatter');
+    setTimeout(function() { el.classList.remove('ink-scatter'); }, 700);
+
+    // Dim WebGL atmosphere momentarily
+    if (window.AeluScene && AeluScene.isInitialized()) {
+      AeluScene.boostIntensity(-0.03, 0.92);
+    }
+
+    // Particle burst from element center
+    var rect = el.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+
+    var canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9997;pointer-events:none;';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Use brand colors (warm brown for incorrect, never red)
+    var colors = [
+      hexToRgb(getCSSColor('--color-incorrect') || '#8A7068'),
+      hexToRgb(getCSSColor('--color-text-faint') || '#8B8680')
+    ];
+
+    var count = 10;
+    var particles = [];
+    for (var i = 0; i < count; i++) {
+      var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
+      var speed = 1.5 + Math.random() * 2.5;
+      var c = colors[Math.floor(Math.random() * colors.length)];
+      particles.push({
+        x: cx, y: cy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size: 1.5 + Math.random() * 2.5,
+        color: c
+      });
+    }
+
+    var startTime = performance.now();
+    var duration = 500;
+
+    function animateScatter(now) {
+      var elapsed = now - startTime;
+      var progress = elapsed / duration;
+
+      if (progress >= 1) {
+        canvas.parentNode.removeChild(canvas);
+        return;
+      }
+
+      ctx.clearRect(0, 0, w, h);
+      var life = 1 - progress;
+
+      for (var j = 0; j < particles.length; j++) {
+        var p = particles[j];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.95; // decelerate into rest (brand principle)
+        p.vy *= 0.95;
+
+        var alpha = life * life * 0.5;
+        var size = p.size * life;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + alpha + ')';
+        ctx.fill();
+      }
+
+      requestAnimationFrame(animateScatter);
+    }
+
+    requestAnimationFrame(animateScatter);
+  }
+
   // ── Expose API ──
   window.AeluCelebrations = {
     paperLanterns: paperLanterns,
-    inkBloom: inkBloom
+    inkBloom: inkBloom,
+    inkSettle: inkSettle,
+    inkScatter: inkScatter
   };
 })();

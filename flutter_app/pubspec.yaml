@@ -65,6 +65,12 @@ flutter:
   assets:
     - assets/sounds/
     - assets/images/
+    - assets/images/calligraphy/
+    - assets/images/plants/
+    - assets/images/textures/
+
+  shaders:
+    - shaders/ink_atmosphere.frag
 
   fonts:
     - family: CormorantGaramond
