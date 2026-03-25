@@ -736,6 +736,24 @@ def _run_intelligence_loop():
             except Exception:
                 logger.debug("Intelligence loop: prediction scoring failed", exc_info=True)
 
+            # 4. Auto-execute safe fixes (guarded by EXECUTOR_ENABLED flag)
+            try:
+                from ..intelligence.auto_executor import EXECUTOR_ENABLED, execute_auto_fixes
+                if EXECUTOR_ENABLED:
+                    fix_results = execute_auto_fixes(conn)
+                    if fix_results:
+                        applied = sum(1 for r in fix_results if r.get("status") == "applied")
+                        escalated = sum(1 for r in fix_results if r.get("status") == "escalated")
+                        logger.info(
+                            "Intelligence loop: auto-executor processed %d fixes "
+                            "(%d applied, %d escalated)",
+                            len(fix_results), applied, escalated,
+                        )
+            except ImportError:
+                pass
+            except Exception:
+                logger.debug("Intelligence loop: auto-executor failed", exc_info=True)
+
     except Exception:
         logger.exception("Intelligence automation loop failed")
 
