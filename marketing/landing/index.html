@@ -67,7 +67,7 @@
       --color-secondary: #6A7A5A;
       --color-correct: #5A7A5A;
       --color-incorrect: #806058;
-      --color-border: #D8D0C4;
+      --color-border: transparent;
       --color-divider: #D8D0C4;
       --color-on-accent: #FFFFFF;
       --font-heading: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
@@ -97,20 +97,20 @@
       :root {
         --color-base: #1C2028;
         --color-surface: #1C2028;
-        --color-surface-alt: #242830;
+        --color-surface-alt: #242A34;
         --color-text: #E4DDD0;
         --color-text-dim: #A09888;
         --color-text-faint: #A8A090;
         --color-accent: #B07888;
-        --color-accent-dim: #9A6878;
+        --color-accent-dim: #946070;
         --color-secondary: #8AAA7A;
         --color-correct: #7A9A7A;
         --color-incorrect: #A8988E;
-        --color-border: #3A3530;
+        --color-border: transparent;
         --color-divider: #3A3530;
         --mesh-color-2: color-mix(in srgb, var(--color-accent) 4%, var(--color-base));
         --mesh-color-3: color-mix(in srgb, var(--color-secondary) 3%, var(--color-base));
-        --color-sky-top: #242830;
+        --color-sky-top: #222838;
       }
     }
 
@@ -283,6 +283,52 @@
     /* Scroll-driven WebGL intensity connection */
     .hero[data-scroll-section] {
       will-change: transform;
+    }
+
+    /* ── Depth storytelling — atmosphere deepens as user scrolls ── */
+    .hero {
+      --depth-opacity: calc(var(--scroll-progress, 0) * 0.15);
+    }
+
+    /* Veil overlay darkens the atmosphere as scroll progresses */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(42, 54, 80, 0.12));
+      opacity: var(--scroll-progress, 0);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Section depth markers — Chinese characters indicating journey depth */
+    .section-depth-marker {
+      font-family: var(--font-hanzi);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--color-accent);
+      opacity: 0.12;
+      position: absolute;
+      right: var(--space-4);
+      top: var(--space-4);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      transition: opacity 0.6s var(--ease-default);
+    }
+
+    /* Ensure sections have positioning context for depth markers */
+    [data-scroll-section] {
+      position: relative;
+    }
+
+    /* Progressive deepening: markers become slightly more visible as you scroll */
+    .features .section-depth-marker { opacity: 0.10; }
+    .how-it-works .section-depth-marker { opacity: 0.13; }
+    .pricing .section-depth-marker { opacity: 0.16; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-depth-marker { display: none; }
+      .hero::after { display: none; }
     }
 
     .hero-sub {
@@ -997,9 +1043,22 @@
       .nav-links.nav-open { display: flex; }
       nav .container { position: relative; }
     }
+
+    /* Scroll progress bar — thin accent line at top of page */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--color-accent);
+      width: 0%;
+      z-index: 9999;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+  <div class="scroll-progress-bar" aria-hidden="true"></div>
   <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <!-- Nav -->
@@ -1022,6 +1081,7 @@
 
   <!-- Hero — typography-driven, Chinese characters ARE the design -->
   <section class="hero" data-scroll-section="hero">
+    <span class="section-depth-marker" aria-hidden="true">浅</span>
     <div class="container">
       <div class="hero-hanzi" aria-hidden="true">学而时习之</div>
       <h1>Learn Chinese the way your brain actually works</h1>
@@ -1085,6 +1145,7 @@
 
   <!-- Features -->
   <section class="features" data-scroll-section="features">
+    <span class="section-depth-marker" aria-hidden="true">学</span>
     <div class="container-wide">
       <h2>What makes this work</h2>
       <div class="feature-grid">
@@ -1114,6 +1175,7 @@
 
   <!-- How it works -->
   <section class="how-it-works" data-scroll-section="how-it-works">
+    <span class="section-depth-marker" aria-hidden="true">练</span>
     <div class="container">
       <h2>The cleanup loop</h2>
       <div class="steps">
@@ -1165,6 +1227,7 @@
 
   <!-- Pricing -->
   <section class="pricing" data-scroll-section="pricing">
+    <span class="section-depth-marker" aria-hidden="true">深</span>
     <div class="container">
       <h2>Simple pricing</h2>
       <div class="pricing-grid">
@@ -1673,6 +1736,24 @@
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/ink-atmosphere.js" defer></script>
   <script src="/static/scroll-engine.js" defer></script>
+  <script src="/static/smooth-scroll.js" defer></script>
+  <script>
+    // Scroll progress bar — updates width based on total page scroll
+    (function() {
+      var bar = document.querySelector('.scroll-progress-bar');
+      if (!bar || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var ticking = false;
+      function update() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', function() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    })();
+  </script>
 
 </body>
 </html>

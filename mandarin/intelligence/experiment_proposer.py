@@ -104,6 +104,52 @@ _TEMPLATES: List[Dict[str, Any]] = [
         "scope": "parameter",
         "duration_days": 14,
     },
+    # Visual vibe templates — aesthetic A/B tests
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["color", "palette", "warmth", "accent"]},
+        "name": "auto_color_warmth_test",
+        "description": "Test warmer accent palette for improved visual harmony",
+        "hypothesis": "Warmer accent tones improve session completion and perceived quality",
+        "variants": ["control", "warmer_accent"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["typography", "size", "scale", "heading"]},
+        "name": "auto_type_scale_test",
+        "description": "Test adjusted type scale for better reading hierarchy",
+        "hypothesis": "Larger heading contrast improves content scanability and engagement",
+        "variants": ["control", "larger_headings"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["motion", "transition", "speed", "animation"]},
+        "name": "auto_motion_speed_test",
+        "description": "Test adjusted animation timing for smoother perceived quality",
+        "hypothesis": "Slightly slower transitions improve perceived craftsmanship",
+        "variants": ["control", "slower_motion"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["shadow", "depth", "elevation", "card"]},
+        "name": "auto_card_depth_test",
+        "description": "Test increased shadow depth for dimensional richness",
+        "hypothesis": "Deeper shadows improve visual hierarchy and perceived premium quality",
+        "variants": ["control", "deeper_shadows"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["texture", "grain", "surface", "noise"]},
+        "name": "auto_texture_intensity_test",
+        "description": "Test increased paper-grain texture for tactile warmth",
+        "hypothesis": "More visible grain texture improves warmth perception without distraction",
+        "variants": ["control", "heavier_grain"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
 ]
 
 
@@ -218,13 +264,39 @@ def _generate_experiment_llm(
     analysis = finding.get("analysis", "")
     recommendation = finding.get("recommendation", "")
 
+    # Build aesthetic context if this is a visual/aesthetic finding
+    aesthetic_ctx = ""
+    if dimension in ("visual_vibe", "ui", "brand_health"):
+        aesthetic_ctx = (
+            "\n\nAESTHETIC CONTEXT:\n"
+            "This is a visual/aesthetic finding. The experiment can test ANY visual aspect:\n"
+            "- Individual images, illustrations, or assets (swap for a generated alternative)\n"
+            "- Animation curves, durations, or easing functions\n"
+            "- Color temperature, saturation, or specific hex values\n"
+            "- Typography size, weight, line-height, or font choice\n"
+            "- Shadow depth, blur, or spread values\n"
+            "- Texture intensity (paper grain, noise overlay opacity)\n"
+            "- Layout spacing, padding, margins, or grid gaps\n"
+            "- Overall page gestalt (the holistic visual impression of a whole screen)\n"
+            "- Specific component styling (buttons, cards, inputs, headers)\n"
+            "- Dark mode specific adjustments\n"
+            "- Scroll-driven animation intensity or parallax speed\n"
+            "- WebGL atmosphere opacity, color blending, or mouse sensitivity\n"
+            "- AI-generated images vs. current illustrations\n"
+            "- Video backgrounds vs. static images\n"
+            "- Sound-to-visual synchronization timing\n"
+            "The app uses a 'Civic Sanctuary' aesthetic: warm Mediterranean, serif typography, "
+            "no decoration without function. Feature flags control variants via CSS custom "
+            "properties or JS conditionals.\n"
+        )
+
     prompt = f"""Design a 2-variant A/B experiment for this product finding:
 
 DIMENSION: {dimension}
 TITLE: {title}
 ANALYSIS: {analysis}
 RECOMMENDATION: {recommendation}
-
+{aesthetic_ctx}
 The experiment should:
 1. Have a clear hypothesis
 2. Define variant_a (control) and variant_b (the change)

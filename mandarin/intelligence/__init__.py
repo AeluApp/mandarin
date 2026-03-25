@@ -325,6 +325,13 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import design quality analyzers (visual_vibe: Awwwards-tier aesthetic self-improvement)
+    try:
+        from .analyzers_design_quality import ANALYZERS as DESIGN_QUALITY_ANALYZERS
+        all_analyzers = all_analyzers + DESIGN_QUALITY_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:

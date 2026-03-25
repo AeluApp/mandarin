@@ -25,6 +25,16 @@
     a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
     u + #body a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit; }
     #outlook a { padding: 0; }
+    /* Dark mode */
+    :root { color-scheme: light dark; supported-color-schemes: light dark; }
+    @media (prefers-color-scheme: dark) {
+      body, .email-body { background-color: #1C2028 !important; }
+      .email-content { background-color: #242A34 !important; }
+      h1, h2, h3, p, td, .email-text { color: #E4DDD0 !important; }
+      .email-text-dim { color: #A09888 !important; }
+      .email-divider { border-color: #3A3530 !important; }
+      .email-btn { background-color: #B07888 !important; }
+    }
   </style>
 </head>
 <body id="body" style="margin: 0; padding: 0; word-spacing: normal; background-color: #F2EBE0;">
@@ -101,7 +111,7 @@
                 <tr>
                   <td style="background-color: #EAE2D6; padding: 40px 24px; text-align: center; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; color: #8890A0;">
                     <!-- Replace this cell content with an <img> tag when a screenshot is available -->
-                    <!-- <img src="{{SCREENSHOT_URL}}" alt="{{FEATURE_TITLE}}" width="552" style="display: block; width: 100%; max-width: 552px; height: auto;"> -->
+                    <!-- <img src="{{SCREENSHOT_URL}}" alt="{{FEATURE_TITLE}}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"> -->
                     [Screenshot: {{FEATURE_TITLE}}]
                   </td>
                 </tr>

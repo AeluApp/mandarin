@@ -53,6 +53,32 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
         scores = [op.get("priority_score", 0) for op in opinions]
         has_conflict = (max(scores) - min(scores)) > 30
 
+    # visual_vibe: aesthetic design quality findings
+    if dim == "visual_vibe":
+        analysis_lower = (finding.get("analysis", "") + " " + finding.get("title", "")).lower()
+        # Token mismatches, missing dark mode, missing reduced-motion → auto-fix
+        if any(kw in analysis_lower for kw in ("token mismatch", "missing dark mode",
+                                                 "missing reduced-motion", "dark-mode",
+                                                 "reduced motion")):
+            return "auto_fix"
+        # Typography weight changes or new animation patterns → informed fix
+        if any(kw in analysis_lower for kw in ("font weight", "typography weight",
+                                                 "animation pattern", "new animation",
+                                                 "keyframe")):
+            return "informed_fix"
+        # Color shifts, spacing changes, motion timing → judgment call (A/B test)
+        if any(kw in analysis_lower for kw in ("color shift", "spacing", "motion timing",
+                                                 "palette", "transition speed",
+                                                 "accent color", "shadow depth")):
+            return "judgment_call"
+        # Fundamental design language, new fonts, asset generation → values decision
+        if any(kw in analysis_lower for kw in ("design language", "new font", "typeface",
+                                                 "asset generation", "brand identity",
+                                                 "illustration style")):
+            return "values_decision"
+        # Default for visual_vibe: judgment_call (routes to A/B test)
+        return "judgment_call"
+
     # auto_fix: low severity, single file, all advisors agree
     if severity == "low" and len(files) <= 1 and not has_conflict:
         return "auto_fix"

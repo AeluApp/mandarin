@@ -492,6 +492,8 @@ var _navTransitionCount = 0;       // view transitions per session
 /* These MUST match :root { --duration-fast, --duration-base } in style.css */
 var DURATION_FAST = 200;     // ms — matches --duration-fast: 0.2s
 var DURATION_BASE = 400;     // ms — matches --duration-base: 0.4s
+var DRILL_EXIT_MS = 150;     // ms — drill exit slide-up duration
+var DRILL_ENTER_MS = 200;    // ms — drill enter slide-up duration
 var FLASH_DURATION = 1500;   // ms — how long a temporary status message stays visible
 var FOCUS_DELAY = 50;        // ms — brief delay before focusing MC options (DOM needs to settle)
 
@@ -1265,6 +1267,18 @@ function startSession(type) {
   }).catch(function() { _preMastery = null; });
 
   transitionTo("dashboard", "session", function() {
+    // Session entry cinematic — brief curtain-rise animation (<800ms total)
+    var sessionEl = document.getElementById("session");
+    if (sessionEl) {
+      sessionEl.classList.add("session-entering");
+      // Session start sound — two bowl strikes, synced to curtain-rise visual
+      AeluSound.sessionStart();
+      setTimeout(function() { sessionEl.classList.remove("session-entering"); }, 700);
+    }
+    // WebGL atmospheric brightening — subtle intensity boost on session entry
+    if (window.AeluScene && AeluScene.isInitialized()) {
+      AeluScene.boostIntensity(0.06, 0.93);
+    }
     connectWebSocket(type);
   });
 }
@@ -1647,6 +1661,42 @@ function getCurrentDrillGroup() {
   return null;
 }
 
+/* ── Drill-to-drill transition helper ─────────────────────
+ * Animate the outgoing drill group out, then call renderFn to build the
+ * incoming content, and animate it in. Respects prefers-reduced-motion
+ * by skipping the animation and calling renderFn synchronously.
+ *
+ * @param {Element} outgoingEl  - The drill-group element that is leaving
+ * @param {Function} renderFn  - Callback that creates & appends new content
+ */
+function transitionDrill(outgoingEl, renderFn) {
+  // Skip animation when user prefers reduced motion
+  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!outgoingEl || prefersReduced) {
+    renderFn();
+    return;
+  }
+
+  // Exit: slide the outgoing group up and fade out
+  outgoingEl.classList.add("exiting");
+
+  // Brush sweep out as drill exits
+  AeluSound.transitionOut();
+
+  setTimeout(function() {
+    // Mark as past (dims it) after exit animation completes
+    outgoingEl.classList.remove("exiting");
+    outgoingEl.classList.add("past");
+
+    // Render the new drill content — the new .drill-group:not(.past) rule
+    // on the freshly appended group handles the enter animation via CSS
+    renderFn();
+
+    // Brush sweep in as new drill enters — coupled to the visual moment
+    AeluSound.transitionIn();
+  }, DRILL_EXIT_MS);
+}
+
 function showReadingOpener(data) {
   var area = document.getElementById("drill-area");
   if (!area) return;
@@ -2005,7 +2055,8 @@ function showListeningBlock(data) {
   html += '<div class="listening-block-label">Listening Comprehension</div>';
   html += '<div class="listening-block-hint">Listen to the passage, then answer comprehension questions.<br>You may replay and adjust speed. The transcript is hidden until after questions.</div>';
   html += '<div class="listening-audio-controls">';
-  html += '<audio id="listening-audio" preload="auto"><source src="' + escapeHtml(data.audio_url || "") + '" type="audio/mpeg"></audio>';
+  html += '<audio id="listening-audio" preload="auto" crossorigin="anonymous"><source src="' + escapeHtml(data.audio_url || "") + '" type="audio/mpeg"></audio>';
+  html += '<canvas class="listening-waveform" id="listening-waveform" width="320" height="48" aria-hidden="true"></canvas>';
   html += '<div class="listening-btn-row">';
   html += '<button class="btn listening-play" id="listening-play-btn">Play</button>';
   html += '<button class="btn listening-replay" id="listening-replay-btn">Replay</button>';
@@ -2061,6 +2112,61 @@ function showListeningBlock(data) {
       btn.classList.add("selected");
     });
   });
+
+  // Listening waveform visualization — connects Web Audio API to canvas
+  var wfCanvas = document.getElementById("listening-waveform");
+  if (wfCanvas && audioEl && window.AudioContext) {
+    try {
+      var wfCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var wfSource = wfCtx.createMediaElementSource(audioEl);
+      var wfAnalyser = wfCtx.createAnalyser();
+      wfAnalyser.fftSize = 128;
+      wfSource.connect(wfAnalyser);
+      wfAnalyser.connect(wfCtx.destination);
+      var wfData = new Uint8Array(wfAnalyser.frequencyBinCount);
+      var wfAnimFrame = null;
+      var wfAccent = getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim() || "#946070";
+
+      function drawListeningWaveform() {
+        if (!wfCanvas) return;
+        var c = wfCanvas.getContext("2d");
+        var w = wfCanvas.width, h = wfCanvas.height;
+        wfAnalyser.getByteFrequencyData(wfData);
+        c.clearRect(0, 0, w, h);
+        var barCount = 24;
+        var barW = Math.floor(w / barCount) - 2;
+        for (var i = 0; i < barCount; i++) {
+          var bin = Math.floor(i * wfData.length / barCount);
+          var val = wfData[bin] / 255;
+          var barH = Math.max(2, val * (h - 4));
+          var x = i * (barW + 2) + 1;
+          var y = (h - barH) / 2;
+          c.globalAlpha = 0.4 + val * 0.6;
+          c.fillStyle = wfAccent;
+          c.fillRect(x, y, barW, barH);
+        }
+        c.globalAlpha = 1;
+        wfAnimFrame = requestAnimationFrame(drawListeningWaveform);
+      }
+
+      audioEl.addEventListener("play", function() {
+        if (wfCtx.state === "suspended") wfCtx.resume();
+        drawListeningWaveform();
+      });
+      audioEl.addEventListener("pause", function() {
+        if (wfAnimFrame) { cancelAnimationFrame(wfAnimFrame); wfAnimFrame = null; }
+      });
+      audioEl.addEventListener("ended", function() {
+        if (wfAnimFrame) { cancelAnimationFrame(wfAnimFrame); wfAnimFrame = null; }
+        // Draw idle state
+        var c = wfCanvas.getContext("2d");
+        c.clearRect(0, 0, wfCanvas.width, wfCanvas.height);
+      });
+    } catch (e) {
+      // Web Audio API unavailable — hide canvas
+      wfCanvas.style.display = "none";
+    }
+  }
 
   document.getElementById("listening-ready-btn").addEventListener("click", function() {
     if (audioEl) { try { audioEl.pause(); } catch (e) {} }
@@ -2488,23 +2594,35 @@ function displayShow(data) {
 
   // Drill grouping: when a new label appears, close previous group and start new one
   if (cls.indexOf("msg-label") !== -1) {
-    // Mark all previous drill groups as past
-    var prevGroups = area.querySelectorAll(".drill-group:not(.past)");
-    for (var g = 0; g < prevGroups.length; g++) {
-      prevGroups[g].classList.add("past");
-    }
     // Clear stale audio from prior drill — prevents replay button from playing old audio
     if (currentAudio) {
       try { currentAudio.pause(); currentAudio.currentTime = 0; } catch (e) {}
       currentAudio = null;
     }
-    // Create new drill group
-    var group = document.createElement("div");
-    group.className = "drill-group";
-    // Announce drill label to screen readers
-    div.setAttribute("role", "status");
-    group.appendChild(div);
-    area.appendChild(group);
+
+    // Find the outgoing drill group (if any) for animated exit
+    var outgoing = getCurrentDrillGroup();
+
+    // The render callback creates the new group and appends it
+    var _createNewGroup = function() {
+      // Mark any remaining non-past groups as past (handles edge cases
+      // where multiple groups exist, e.g. reconnection)
+      var prevGroups = area.querySelectorAll(".drill-group:not(.past)");
+      for (var g = 0; g < prevGroups.length; g++) {
+        prevGroups[g].classList.add("past");
+      }
+      // Create new drill group
+      var group = document.createElement("div");
+      group.className = "drill-group";
+      // Announce drill label to screen readers
+      div.setAttribute("role", "status");
+      group.appendChild(div);
+      area.appendChild(group);
+      area.scrollTop = area.scrollHeight;
+    };
+
+    // Animate: exit outgoing group, then create new one with enter animation
+    transitionDrill(outgoing, _createNewGroup);
   } else {
     // Append to current drill group if one exists
     var currentGroup = getCurrentDrillGroup();

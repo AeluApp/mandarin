@@ -1,0 +1,606 @@
+# Visual QA Checklist — Aelu
+# Machine-readable verification points for AI agents
+# Run after any CSS, JS, or theme change
+#
+# Source of truth: mandarin/web/static/design-tokens.json
+# CSS: mandarin/web/static/style.css
+# Flutter: flutter_app/lib/theme/aelu_theme.dart, aelu_colors.dart
+# JS: mandarin/web/static/visual-elevation.js
+
+version: "1.0"
+last_updated: "2026-03-24"
+
+global:
+  tokens:
+    - check: "Light mode base/surface color"
+      expected: "#F2EBE0"
+      selector: ":root"
+      property: "--color-base"
+      note: "Warm linen — the continuous plaster surface"
+
+    - check: "Light mode surface-alt color"
+      expected: "#EAE2D6"
+      selector: ":root"
+      property: "--color-surface-alt"
+
+    - check: "Light mode text color"
+      expected: "#2A3650"
+      selector: ":root"
+      property: "--color-text"
+      note: "Coastal indigo — primary text"
+
+    - check: "Light mode accent color"
+      expected: "#946070"
+      selector: ":root"
+      property: "--color-accent"
+      note: "Bougainvillea rose"
+
+    - check: "Light mode secondary color"
+      expected: "#6A7A5A"
+      selector: ":root"
+      property: "--color-secondary"
+      note: "Cypress olive"
+
+    - check: "Light mode correct color"
+      expected: "#5A7A5A"
+      selector: ":root"
+      property: "--color-correct"
+      note: "Sage — earned, not celebrated"
+
+    - check: "Light mode incorrect color"
+      expected: "#806058"
+      selector: ":root"
+      property: "--color-incorrect"
+      note: "Warm brown — not red, not alarm"
+
+    - check: "Light mode divider color"
+      expected: "#D8D0C4"
+      selector: ":root"
+      property: "--color-divider"
+      note: "Horizon lines"
+
+    - check: "Heading font stack"
+      expected: "'Cormorant Garamond', 'Noto Serif SC', Georgia, serif"
+      selector: ":root"
+      property: "--font-heading"
+
+    - check: "Body font stack"
+      expected: "'Source Serif 4', 'Noto Serif SC', Georgia, serif"
+      selector: ":root"
+      property: "--font-body"
+
+    - check: "Hanzi font stack"
+      expected: "'Noto Serif SC', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif"
+      selector: ":root"
+      property: "--font-hanzi"
+
+    - check: "Display type scale is fluid"
+      expected: "clamp(2.2rem, 5vw, 3.2rem)"
+      selector: ":root"
+      property: "--text-display"
+
+    - check: "Base radius is zero"
+      expected: "0"
+      selector: ":root"
+      property: "--radius"
+      note: "Brand constraint: radius zero for structural elements"
+
+    - check: "Card radius for warmth"
+      expected: "8px"
+      selector: ":root"
+      property: "--radius-card"
+
+    - check: "Glass blur token"
+      expected: "blur(20px) saturate(1.2)"
+      selector: ":root"
+      property: "--glass-blur"
+
+    - check: "Glass background opacity (light)"
+      expected: "color-mix(in srgb, var(--color-surface) 78%, transparent)"
+      selector: ":root"
+      property: "--glass-bg"
+
+    - check: "Spring easing curve"
+      expected: "cubic-bezier(0.34, 1.56, 0.64, 1)"
+      selector: ":root"
+      property: "--ease-spring"
+
+    - check: "Upward easing curve"
+      expected: "cubic-bezier(0.16, 1, 0.3, 1)"
+      selector: ":root"
+      property: "--ease-upward"
+
+    - check: "Sky gradient top color (light)"
+      expected: "#E4E0D6"
+      selector: ":root"
+      property: "--color-sky-top"
+
+    - check: "Horizon width token"
+      expected: "48px"
+      selector: ":root"
+      property: "--horizon-width"
+
+  motion:
+    - check: "Global reduced-motion kills all animations"
+      verify: "Under @media (prefers-reduced-motion: reduce), all *, *::before, *::after have animation-duration: 0.01ms !important, animation-iteration-count: 1 !important, transition-duration: 0.01ms !important"
+      selector: "*, *::before, *::after"
+      media: "prefers-reduced-motion: reduce"
+
+    - check: "visual-elevation.js respects reduced motion"
+      verify: "When reducedMotion is true, initScrollReveals() and initParallax() are NOT called — only initHeadingReveals() runs"
+      file: "mandarin/web/static/visual-elevation.js"
+
+    - check: "Scroll reveal uses upward easing"
+      selector: "[data-reveal]"
+      verify: "transition uses var(--ease-upward) i.e. cubic-bezier(0.16, 1, 0.3, 1) with 0.6s duration"
+      expected_transition: "opacity 0.6s var(--ease-upward), transform 0.6s var(--ease-upward)"
+
+    - check: "Scroll reveal initial state is invisible and shifted down"
+      selector: "[data-reveal]"
+      verify: "opacity: 0 and transform: translateY(20px) before .is-revealed is added"
+
+    - check: "Scroll reveal final state is visible and at origin"
+      selector: "[data-reveal].is-revealed"
+      verify: "opacity: 1 and transform: translateY(0)"
+
+    - check: "Stagger children delay is 80ms per child"
+      verify: "In visual-elevation.js initScrollReveals(), each [data-reveal-child] gets transitionDelay = (i * 80) + 'ms'"
+      file: "mandarin/web/static/visual-elevation.js"
+
+    - check: "Button press feedback is near-instant"
+      expected: "0.08s"
+      selector: ":root"
+      property: "--duration-press"
+
+    - check: "Button hover lifts upward 2px"
+      selector: ".btn-primary:hover"
+      verify: "transform: translateY(-2px) — things arrive, they don't pop"
+      media: "hover: hover"
+
+    - check: "Button press scales down then springs back"
+      selector: ".btn-primary:active"
+      verify: "transform: scale(0.95) translateY(0) with 0.06s ease"
+      spring_return: ".btn-primary:not(:active) uses transition with var(--ease-spring) for 0.4s"
+
+    - check: "Session messages drift upward on entry"
+      selector: ".msg"
+      verify: "animation: driftUp — from translateY(6px) opacity 0 to translateY(0) opacity 1"
+
+    - check: "Drill stagger cascade has 50ms intervals"
+      selector: ".drill-group:not(.past) > .msg:nth-child(n)"
+      verify: "nth-child(2) delay 50ms, nth-child(3) delay 100ms, ..., nth-child(6) delay 250ms"
+
+    - check: "Ink settle reduced-motion override"
+      selector: ".ink-settle"
+      verify: "Under prefers-reduced-motion: reduce, animation: none !important and .ink-settle::after scaleX(1)"
+      media: "prefers-reduced-motion: reduce"
+
+    - check: "Parallax uses requestAnimationFrame throttling"
+      verify: "initParallax() uses a ticking flag to prevent rAF stacking"
+      file: "mandarin/web/static/visual-elevation.js"
+
+  accessibility:
+    - check: "Focus ring visible on all interactive elements"
+      selector: "*:focus-visible"
+      verify: "outline: 2px solid var(--focus-ring-color) with outline-offset: 2px"
+      expected_color: "var(--color-accent) i.e. #946070 light / #B07888 dark"
+
+    - check: "Focus ring color token exists"
+      selector: ":root"
+      property: "--focus-ring-color"
+      expected: "var(--color-accent)"
+
+    - check: "Skip link present and hidden until focused"
+      selector: ".skip-link"
+      verify: "position: absolute, left: -9999px normally; on :focus left: 0, top: 0, visible"
+
+    - check: "All buttons meet 44px minimum touch target"
+      selector: ".btn-primary, .btn-secondary, #btn-submit, .btn-shortcut"
+      verify: "min-height: 44px and min-width: 44px"
+
+    - check: "Text faint color meets WCAG AA on light base"
+      expected: "#6A7080"
+      note: "5.0:1 contrast ratio on #F2EBE0 — passes AA for large text"
+      selector: ":root"
+      property: "--color-text-faint"
+
+    - check: "Text faintest color meets WCAG AA for small text"
+      expected: "#707A8A"
+      note: "4.5:1 contrast ratio on #F2EBE0 — passes AA for small text"
+      selector: ":root"
+      property: "--color-text-faintest"
+
+    - check: "High contrast mode exists and strengthens all text"
+      selector: "html[data-contrast='high']"
+      verify: "--color-text becomes #1A1A2E (light) or #F5F0E8 (dark) for 7:1+ ratios"
+
+    - check: "Selection color uses warm accent tint"
+      selector: "::selection"
+      verify: "background: color-mix(in srgb, var(--color-accent) 25%, transparent), color: var(--color-text)"
+
+    - check: "Input focus glow provides clear focus indication"
+      selector: "input:focus, textarea:focus, select:focus"
+      verify: "box-shadow: var(--focus-ring) and border-color: var(--color-accent)"
+
+  typography:
+    - check: "Body font size"
+      selector: "body"
+      expected: "0.95rem"
+      property: "font-size"
+
+    - check: "Body line height"
+      selector: "body"
+      expected: "1.65"
+      property: "line-height"
+
+    - check: "Antialiasing enabled"
+      selector: "body"
+      verify: "-webkit-font-smoothing: antialiased and -moz-osx-font-smoothing: grayscale"
+
+    - check: "Heading font used on panel headings"
+      selector: ".panel h3"
+      verify: "font-family: var(--font-heading)"
+
+    - check: "Stat values use heading font"
+      selector: ".stat-value"
+      verify: "font-family: var(--font-heading), font-size: var(--text-display), font-weight: 600"
+
+    - check: "Hanzi inline uses sans-serif CJK for optical weight match"
+      selector: ".hanzi-inline"
+      verify: "font-family: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', sans-serif with font-size: 0.94em"
+
+    - check: "Letter spacing tracking tokens"
+      expected_tight: "0.01em"
+      expected_normal: "0.03em"
+      expected_wide: "0.15em"
+      selector: ":root"
+      properties:
+        - "--tracking-tight"
+        - "--tracking-normal"
+        - "--tracking-wide"
+
+pages:
+  dashboard:
+    - check: "Stats row is horizontally scrollable on mobile"
+      selector: ".stats-row"
+      verify: "overflow-x: auto with scrollbar-width: none, fade mask on edges"
+
+    - check: "Stats row wraps on desktop"
+      selector: ".stats-row"
+      verify: "At min-width: 1024px, flex-wrap: wrap and overflow-x: visible"
+      media: "min-width: 1024px"
+
+    - check: "Stat cards hover lift with shadow"
+      selector: ".stat:hover"
+      verify: "transform: translateY(-2px) and box-shadow: var(--shadow-lg)"
+      media: "hover: hover"
+
+    - check: "Stat values use accent color"
+      selector: ".stat-value"
+      verify: "color: var(--color-accent) i.e. #946070"
+
+    - check: "Streak stat value uses text color (no special treatment)"
+      selector: ".stat-streak .stat-value"
+      verify: "color: var(--color-text) — consecutive days are noted, not celebrated"
+
+    - check: "Dashboard hero image has fade-to-bottom mask"
+      selector: ".dashboard-hero-img"
+      verify: "mask-image: linear-gradient(to bottom, black 70%, transparent 100%)"
+
+    - check: "Dashboard illustrations use multiply blend in light mode"
+      selector: ".dashboard-illustration"
+      verify: "mix-blend-mode: multiply in light mode, normal in dark mode"
+
+    - check: "Begin button is the visual focal point"
+      selector: "#btn-start"
+      verify: "padding: 18px 48px, font-size: var(--text-lg), letter-spacing: var(--tracking-normal)"
+
+    - check: "Panel uses horizon-line top border, not card border"
+      selector: ".panel"
+      verify: "background: transparent, border: none, border-top: 1px solid var(--color-divider), border-radius: 0"
+      note: "Brand: continuous plaster surface, no card borders"
+
+    - check: "Horizon motif dimensions"
+      selector: ".horizon"
+      verify: "width: var(--horizon-width) i.e. 48px, height: 1px, background: var(--color-divider)"
+
+  session:
+    - check: "Session area fills viewport"
+      selector: "#session"
+      verify: "min-height: 60vh, display: flex, flex-direction: column"
+
+    - check: "Drill area max width"
+      selector: "#drill-area"
+      verify: "max-width: 960px, margin: 0 auto"
+
+    - check: "Hanzi prompt uses large serif with accent color"
+      selector: ".msg-hanzi"
+      verify: "font-family: var(--font-hanzi), font-size: var(--text-3xl), color: var(--color-accent), font-weight: 700, border-top and border-bottom: 1px solid var(--color-divider)"
+
+    - check: "Correct feedback has left border accent and warm pulse"
+      selector: ".msg-correct"
+      verify: "color: var(--color-correct), border-left: 2px solid var(--color-correct), background uses color-mix with 5% correct color, plus correctWarmPulse animation"
+
+    - check: "Wrong feedback uses warm brown — not red"
+      selector: ".msg-wrong"
+      verify: "color: var(--color-incorrect) i.e. #806058 (light), border-left: 2px solid var(--color-incorrect)"
+      note: "Brand: acknowledges difficulty without framing it as failure"
+
+    - check: "Past drill groups dim to 45% opacity"
+      selector: ".drill-group.past"
+      verify: "opacity: 0.45 with transition using var(--duration-slow)"
+
+    - check: "Answer input uses underline style, not box"
+      selector: "#answer-input"
+      verify: "border: none, border-bottom: 2px solid var(--color-divider), border-radius: 0, background: transparent"
+
+    - check: "Progress bar uses accent fill color"
+      selector: "#progress-fill"
+      verify: "background: var(--color-accent), transition: width var(--duration-slow)"
+
+    - check: "Input area has horizon-line top border"
+      selector: "#input-area"
+      verify: "border-top: 1px solid var(--color-divider), border-radius: 0"
+
+  session_complete:
+    - check: "Complete illustration has gentle bloom entrance"
+      selector: ".complete-illustration"
+      verify: "animation: gentleBloom 0.8s — from scale(0.92) opacity 0 to scale(1) opacity 1"
+
+    - check: "Score reveal animation sequence is staggered"
+      verify: "#complete-content h2 at 0.4s delay, .complete-score at 0.6s, .complete-pct at 0.8s"
+      selectors:
+        - "#complete-content h2"
+        - ".complete-score"
+        - ".complete-pct"
+
+    - check: "Accuracy bar fill respects reduced motion"
+      selector: ".complete-accuracy-fill"
+      verify: "Under prefers-reduced-motion: reduce, animation: none and width set directly to var(--accuracy-pct)"
+      media: "prefers-reduced-motion: reduce"
+
+    - check: "Score color reflects performance level"
+      verify: ".complete-score.score-high uses var(--color-correct), .score-mid and .score-low use var(--color-text-dim)"
+
+    - check: "Complete page centers content"
+      selector: "#complete"
+      verify: "text-align: center, padding includes var(--space-6) bottom"
+
+  auth:
+    - check: "Auth page is vertically centered"
+      selector: ".auth-page"
+      verify: "display: flex, align-items: center, justify-content: center, min-height: 100vh"
+
+    - check: "Auth card max width constrained"
+      selector: ".auth-card"
+      verify: "max-width: 400px, width: 100%"
+
+    - check: "Auth logo uses hanzi font with accent color"
+      selector: ".auth-logo .logo-mark"
+      verify: "font-family: var(--font-hanzi), font-size: var(--text-display), color: var(--color-accent)"
+
+    - check: "Auth input focus matches global focus pattern"
+      selector: ".auth-field input:focus"
+      verify: "border-color: var(--color-accent), outline: 2px solid var(--color-accent), outline-offset: 1px"
+
+    - check: "Auth submit button uses accent background"
+      selector: ".auth-submit"
+      verify: "background: var(--color-accent), color: var(--color-on-accent), font-family: var(--font-heading)"
+
+  settings:
+    - check: "Settings rows have divider between items"
+      selector: ".settings-row"
+      verify: "border-bottom: 1px solid color-mix(in srgb, var(--color-divider) 50%, transparent), last-child has border-bottom: none"
+
+    - check: "Settings labels use dim text"
+      selector: ".settings-label"
+      verify: "color: var(--color-text-dim)"
+
+    - check: "Danger button uses incorrect color"
+      selector: ".btn-danger"
+      verify: "background or color references var(--color-incorrect), focus-visible uses outline: 2px solid var(--color-incorrect)"
+
+  upgrade:
+    - check: "Pricing cards use divider border"
+      selector: ".upgrade-plan"
+      verify: "border: 1px solid var(--color-divider), border-radius: var(--radius-sm)"
+
+    - check: "Selected pricing card highlights with accent"
+      selector: ".upgrade-plan-selected"
+      verify: "border-color: var(--color-accent), background uses 8% accent mix"
+
+    - check: "Pricing numbers use heading font"
+      selector: ".upgrade-plan-price"
+      verify: "font-family: var(--font-heading), font-size: 1.4rem, font-weight: 600"
+
+    - check: "Save badge uses correct color on accent text"
+      selector: ".upgrade-plan-badge"
+      verify: "background: var(--color-correct), color: var(--color-on-accent), font-size: 0.65rem"
+
+  empty_states:
+    - check: "Empty state illustration floats with gentle animation"
+      selector: ".empty-state-illustration"
+      verify: "animation includes illustrationFloat 4s ease-in-out infinite (after initial gentleBloom)"
+
+    - check: "Empty state illustration reduced-motion override"
+      selector: ".empty-state-illustration"
+      verify: "Under prefers-reduced-motion: reduce, only gentleBloom runs (no infinite float)"
+      media: "prefers-reduced-motion: reduce"
+
+    - check: "Empty state illustration inverts in dark mode"
+      selector: "html[data-theme='dark'] .empty-state-illustration"
+      verify: "Appropriate filter or color adjustment for dark background"
+
+dark_mode:
+  - check: "Dark mode base color"
+    expected: "#1C2028"
+    selector: "html[data-theme='dark']"
+    property: "--color-base"
+    note: "Deep indigo — warm dark, not pure black"
+
+  - check: "Dark mode text color"
+    expected: "#E4DDD0"
+    selector: "html[data-theme='dark']"
+    property: "--color-text"
+    note: "Warm cream — not pure white"
+
+  - check: "Dark mode accent shifts warmer"
+    expected: "#B07888"
+    selector: "html[data-theme='dark']"
+    property: "--color-accent"
+
+  - check: "Dark mode divider color"
+    expected: "#3A3530"
+    selector: "html[data-theme='dark']"
+    property: "--color-divider"
+
+  - check: "Dark mode shadows are deeper"
+    expected: "0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12)"
+    selector: "html[data-theme='dark']"
+    property: "--shadow-lg"
+
+  - check: "Dark mode glass uses surfaceAlt at 72% opacity"
+    expected: "color-mix(in srgb, var(--color-surface-alt) 72%, transparent)"
+    selector: "html[data-theme='dark']"
+    property: "--glass-bg"
+
+  - check: "Dark mode PNG illustrations invert and screen blend"
+    selector: "html[data-theme='dark'] .dashboard-illustration[src$='.png']"
+    verify: "filter: invert(0.88) sepia(0.2) hue-rotate(180deg) brightness(0.9), mix-blend-mode: screen"
+
+  - check: "Dark mode sky gradient"
+    expected_top: "#222838"
+    expected_bottom: "#1C2028"
+    selector: "html[data-theme='dark']"
+    properties:
+      - "--color-sky-top"
+      - "--color-sky-bottom"
+
+  - check: "Time-of-day theme override takes cascade precedence"
+    verify: "html[data-theme='dark'] and html[data-theme='light'] selectors appear AFTER @media (prefers-color-scheme: dark) in CSS cascade"
+
+  - check: "Dark mode high contrast strengthens further"
+    selector: "html[data-theme='dark'][data-contrast='high']"
+    verify: "--color-text becomes #F5F0E8, --color-base becomes #141820"
+
+  - check: "Dark mode mastery colors adjust for contrast"
+    verify: "--color-mastery-durable: #5A8A5A, --color-mastery-stable: #7AAA6A, --color-mastery-stabilizing: #D4B060"
+    selector: "html[data-theme='dark']"
+
+shadows:
+  - check: "6-level shadow depth system exists (xs through 2xl)"
+    verify: "All six shadow tokens defined: --shadow-xs, --shadow-sm, --shadow-md, --shadow-lg, --shadow-xl, --shadow-2xl"
+    selector: ":root"
+
+  - check: "Light shadow color is slate-blue tinted"
+    expected: "rgba(42, 54, 80, 0.04)"
+    selector: ":root"
+    property: "--color-shadow"
+
+  - check: "Shadow-lg includes both depth layers"
+    expected: "0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px var(--color-shadow)"
+    selector: ":root"
+    property: "--shadow-lg"
+
+responsive:
+  - check: "App container max width"
+    selector: "#app"
+    verify: "max-width: clamp(360px, 100%, 1600px)"
+
+  - check: "Small phone adjustments at 360px"
+    media: "max-width: 360px"
+    verify: "Logo shrinks to 48x48, stat values use --text-lg, actions stack vertically"
+
+  - check: "Wide screen horizontal padding"
+    media: "min-width: 1200px"
+    verify: "#app gets padding-left/right: var(--space-8, 3rem)"
+
+  - check: "iOS safe area insets respected"
+    selector: "#app"
+    verify: "padding-top includes env(safe-area-inset-top), padding-bottom includes env(safe-area-inset-bottom)"
+
+  - check: "Scrollbar gutter stable to prevent layout shift"
+    selector: "html"
+    verify: "scrollbar-gutter: stable"
+
+platform_parity:
+  flutter:
+    - check: "Flutter light base matches web"
+      expected_flutter: "Color(0xFFF2EBE0)"
+      expected_web: "#F2EBE0"
+      flutter_file: "flutter_app/lib/theme/aelu_colors.dart"
+      flutter_const: "AeluColors.baseLight"
+
+    - check: "Flutter dark base matches web"
+      expected_flutter: "Color(0xFF1C2028)"
+      expected_web: "#1C2028"
+      flutter_const: "AeluColors.baseDark"
+
+    - check: "Flutter accent matches web"
+      expected_flutter: "Color(0xFF946070)"
+      expected_web: "#946070"
+      flutter_const: "AeluColors.accent"
+
+    - check: "Flutter spring curve matches web"
+      expected_flutter: "Cubic(0.34, 1.56, 0.64, 1)"
+      expected_web: "cubic-bezier(0.34, 1.56, 0.64, 1)"
+      flutter_const: "AeluTheme.springCurve"
+
+    - check: "Flutter glass blur sigma matches web 20px"
+      expected_flutter: "ImageFilter.blur(sigmaX: 20, sigmaY: 20)"
+      expected_web: "blur(20px)"
+      flutter_const: "AeluTheme.glassBlur"
+
+    - check: "Flutter glass opacity matches web 78%/88%"
+      expected_light: "0.78 opacity"
+      expected_dense: "0.88 opacity"
+      flutter_const: "AeluColors.glassBgLight / glassBgDenseLight"
+
+    - check: "Flutter heading font is Cormorant Garamond"
+      expected: "CormorantGaramond"
+      flutter_file: "flutter_app/lib/theme/aelu_theme.dart"
+      verify: "displayLarge, displayMedium, headlineLarge, headlineMedium all use CormorantGaramond"
+
+    - check: "Flutter body font is Source Serif 4"
+      expected: "SourceSerif4"
+      verify: "titleLarge, titleMedium use SourceSerif4"
+
+    - check: "Flutter 6-level shadow scale matches web"
+      verify: "shadowsLight and shadowsDark arrays each have 6 entries (xs through 2xl) with matching blur radii and offsets"
+      flutter_file: "flutter_app/lib/theme/aelu_theme.dart"
+
+    - check: "Flutter interactive radius is 12px"
+      expected: "BorderRadius.all(Radius.circular(12))"
+      flutter_const: "AeluTheme._interactiveRadius"
+
+    - check: "Flutter press scale matches web"
+      expected: "0.98"
+      flutter_const: "AeluTheme.pressScale"
+      note: "Web uses scale(0.95) on .btn-primary:active but 0.98 on #btn-submit:active"
+
+brand_constraints:
+  - check: "No card borders on structural elements"
+    verify: ".panel has border: none (only border-top for horizon line). No box or card-style borders on dashboard panels."
+    note: "Brand: continuous plaster surface"
+
+  - check: "Radius zero on structural/decorative elements"
+    verify: "--radius: 0 used on .panel, .stat, .msg-hanzi, #answer-input, .error-tag"
+    note: "Brand: radius zero. Only interactive elements get radius (buttons get --radius-lg: 6px, cards get --radius-card: 8px)"
+
+  - check: "No praise inflation in color semantics"
+    verify: "Correct feedback uses muted sage (#5A7A5A), not bright green. Streak stat-value uses --color-text, not gold/accent."
+    note: "Brand: data-grounded, no theatrics"
+
+  - check: "Motion decelerates into rest"
+    verify: "Primary easing --ease-upward uses cubic-bezier(0.16, 1, 0.3, 1) — fast start, gentle settle. No bounce except spring on button release."
+    note: "Brand: things arrive, they don't pop"
+
+  - check: "Borders are transparent by default"
+    expected: "transparent"
+    selector: ":root"
+    property: "--color-border"
+    note: "Brand: continuous surface, borders only via divider horizon lines"
+
+  - check: "Incorrect is warm brown, never red"
+    verify: "Light: #806058, Dark: #A8988E — warm earth tone, not alarm"
+    note: "Brand: acknowledges difficulty without framing it as failure"

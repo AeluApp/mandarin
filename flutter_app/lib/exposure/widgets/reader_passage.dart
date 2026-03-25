@@ -9,11 +9,26 @@ import '../../theme/hanzi_style.dart';
 ///
 /// Performance: TapGestureRecognizers are cached and reused across rebuilds.
 /// They are only recreated when the text changes, and properly disposed.
+///
+/// Typography elevation:
+/// - Chinese text uses line-height 2.0 and subtle letter-spacing for vertical
+///   breathing room (mirrors the web `.reading-text[lang="zh"]` rule).
+/// - The first hanzi character is rendered as a drop cap: larger font size in
+///   the accent color, matching the web `.reading-dropcap::first-letter` style.
 class ReaderPassage extends StatefulWidget {
   final String text;
   final ValueChanged<String> onWordTap;
 
-  const ReaderPassage({super.key, required this.text, required this.onWordTap});
+  /// When true, the first hanzi character is rendered as a decorative drop cap
+  /// (larger size, accent color). Defaults to true.
+  final bool showDropCap;
+
+  const ReaderPassage({
+    super.key,
+    required this.text,
+    required this.onWordTap,
+    this.showDropCap = true,
+  });
 
   @override
   State<ReaderPassage> createState() => _ReaderPassageState();
@@ -38,10 +53,30 @@ class _ReaderPassageState extends State<ReaderPassage> {
     _recognizers.clear();
   }
 
+  /// Elevated reader style: line-height 2.0 and subtle letter-spacing for
+  /// generous vertical breathing room on Chinese text.
+  static const _readerElevated = TextStyle(
+    fontFamily: 'NotoSerifSC',
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    height: 2.0,
+    letterSpacing: 0.05 * 22, // 0.05em at 22px
+  );
+
+  /// Drop-cap style: 3.2x base size, accent color, no underline.
+  static TextStyle _dropCapStyle(Color accentColor) => TextStyle(
+        fontFamily: 'NotoSerifSC',
+        fontSize: 22 * 3.2, // 3.2em — mirrors web .reading-dropcap::first-letter
+        fontWeight: FontWeight.w400,
+        height: 0.8,
+        color: accentColor,
+      );
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDark ? AeluColors.textDark : AeluColors.textLight;
+    final accentColor = AeluColors.accentOf(context);
     final underlineColor = isDark
         ? AeluColors.accent.withValues(alpha: 0.45)
         : AeluColors.muted.withValues(alpha: 0.5);
@@ -55,6 +90,7 @@ class _ReaderPassageState extends State<ReaderPassage> {
     final chars = widget.text.characters.toList();
     final spans = <InlineSpan>[];
     var recognizerIndex = 0;
+    var firstHanziSeen = false;
 
     for (var i = 0; i < chars.length; i++) {
       final char = chars[i];
@@ -74,21 +110,33 @@ class _ReaderPassageState extends State<ReaderPassage> {
         recognizer.onTap = () => _handleTap(chars, tapIndex);
         recognizerIndex++;
 
-        spans.add(TextSpan(
-          text: char,
-          style: HanziStyle.reader.copyWith(
-            color: textColor,
-            decoration: TextDecoration.underline,
-            decorationStyle: TextDecorationStyle.dotted,
-            decorationColor: underlineColor,
-            decorationThickness: isDark ? 1.5 : 1.0,
-          ),
-          recognizer: recognizer,
-        ));
+        // Drop cap: first hanzi character rendered large in accent color.
+        final isDropCap = widget.showDropCap && !firstHanziSeen;
+        if (isHanzi) firstHanziSeen = true;
+
+        if (isDropCap) {
+          spans.add(TextSpan(
+            text: char,
+            style: _dropCapStyle(accentColor),
+            recognizer: recognizer,
+          ));
+        } else {
+          spans.add(TextSpan(
+            text: char,
+            style: _readerElevated.copyWith(
+              color: textColor,
+              decoration: TextDecoration.underline,
+              decorationStyle: TextDecorationStyle.dotted,
+              decorationColor: underlineColor,
+              decorationThickness: isDark ? 1.5 : 1.0,
+            ),
+            recognizer: recognizer,
+          ));
+        }
       } else {
         spans.add(TextSpan(
           text: char,
-          style: HanziStyle.reader.copyWith(color: textColor),
+          style: _readerElevated.copyWith(color: textColor),
         ));
       }
     }

@@ -229,6 +229,7 @@ _TASK_COMPLEXITY = {
     "rag_faithfulness": 5.0,
     "research_synthesis": 5.0,
     "teacher_qualification": 5.0,
+    "aesthetic_quality_evaluation": 5.0,
 
     # Tier 3: Complex reasoning — needs 14b+
     "experiment_design": 10.0,

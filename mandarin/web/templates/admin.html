@@ -91,6 +91,11 @@
     /* Metric tooltips */
     .metric-card[title] { cursor: help; }
 
+    /* Sparkline within metric card — tiny inline SVG trend line */
+    .sparkline { display: block; margin: var(--space-1) auto 0; }
+    .sparkline polyline { fill: none; stroke: var(--color-accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .sparkline .sparkline-area { fill: color-mix(in srgb, var(--color-accent) 10%, transparent); stroke: none; }
+
     /* KPI status thresholds */
     .kpi-good .metric-value { color: var(--color-correct); }
     .kpi-warn .metric-value { color: var(--color-mastery-stabilizing); }
@@ -861,6 +866,25 @@
       return "kpi-warn";
     }
 
+    // Sparkline SVG helper — renders inline trend line for metric cards
+    // data: array of numbers, opts: { width, height, color }
+    function sparklineSVG(data, opts) {
+      if (!data || data.length < 2) return '';
+      var w = (opts && opts.width) || 80, h = (opts && opts.height) || 24;
+      var mn = Math.min.apply(null, data), mx = Math.max.apply(null, data);
+      var range = mx - mn || 1;
+      var pts = data.map(function(v, i) {
+        var x = (i / (data.length - 1)) * w;
+        var y = h - 2 - ((v - mn) / range) * (h - 4);
+        return x.toFixed(1) + ',' + y.toFixed(1);
+      });
+      // Area fill path (close along bottom)
+      var areaPath = 'M0,' + h + ' L' + pts.join(' L') + ' L' + w + ',' + h + ' Z';
+      return '<svg class="sparkline" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
+        '<polygon class="sparkline-area" points="0,' + h + ' ' + pts.join(' ') + ' ' + w + ',' + h + '"/>' +
+        '<polyline points="' + pts.join(' ') + '"/></svg>';
+    }
+
     function severityBadge(s) {
       var cls = "badge-info";
       if (s === "ERROR" || s === "CRITICAL") cls = "badge-error";
@@ -1361,14 +1385,17 @@
         var el = document.getElementById("engagement-content");
         var html = '';
 
-        // Metric cards
+        // Metric cards (with inline sparklines from daily_sessions trend data)
+        var days = d.daily_sessions || [];
+        var sessionTrend = days.map(function(x) { return x.total_sessions; });
+        var userTrend = days.map(function(x) { return x.unique_users; });
         html += '<div class="metrics-grid">';
-        html += '<div class="metric-card ' + kpiStatus(d.avg_sessions_per_active_user || 0, 1.5, 0.5) + '"><div class="metric-value">' + (d.avg_sessions_per_active_user || 0) + '</div><div class="metric-label">Avg Sessions / Active User / Day</div></div>';
-        var totalSessions30d = (d.daily_sessions || []).reduce(function(s, x) { return s + x.total_sessions; }, 0);
-        html += '<div class="metric-card ' + kpiStatus(totalSessions30d, 30, 5) + '"><div class="metric-value">' + totalSessions30d + '</div><div class="metric-label">Total Sessions (30d)</div></div>';
+        html += '<div class="metric-card ' + kpiStatus(d.avg_sessions_per_active_user || 0, 1.5, 0.5) + '"><div class="metric-value">' + (d.avg_sessions_per_active_user || 0) + '</div>' + sparklineSVG(sessionTrend) + '<div class="metric-label">Avg Sessions / Active User / Day</div></div>';
+        var totalSessions30d = days.reduce(function(s, x) { return s + x.total_sessions; }, 0);
+        html += '<div class="metric-card ' + kpiStatus(totalSessions30d, 30, 5) + '"><div class="metric-value">' + totalSessions30d + '</div>' + sparklineSVG(sessionTrend) + '<div class="metric-label">Total Sessions (30d)</div></div>';
         var totalUniqueUsers30d = new Set();
-        (d.daily_sessions || []).forEach(function(x) { totalUniqueUsers30d.add(x.date); });
-        html += '<div class="metric-card ' + kpiStatus((d.daily_sessions || []).length, 20, 7) + '"><div class="metric-value">' + (d.daily_sessions || []).length + '</div><div class="metric-label">Active Days (30d)</div></div>';
+        days.forEach(function(x) { totalUniqueUsers30d.add(x.date); });
+        html += '<div class="metric-card ' + kpiStatus(days.length, 20, 7) + '"><div class="metric-value">' + days.length + '</div>' + sparklineSVG(userTrend) + '<div class="metric-label">Active Days (30d)</div></div>';
         html += '</div>';
 
         // Daily session volume bar chart (SVG)

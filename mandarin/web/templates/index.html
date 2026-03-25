@@ -935,6 +935,8 @@
     })();
   </script>
   <script nonce="{{ csp_nonce }}">window.IS_PRODUCTION={{ is_production|tojson }};window.AELU_CANONICAL_URL={{ canonical_url|tojson }};window.AELU_PRICING={{ pricing_display|tojson }};</script>
+  <script src="/static/smooth-scroll.js?v={{ static_hash('smooth-scroll.js') }}" defer></script>
+  <script src="/static/hanzi-stroke.js?v={{ static_hash('hanzi-stroke.js') }}" defer></script>
   <script src="/static/visual-elevation.js?v={{ static_hash('visual-elevation.js') }}" defer></script>
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/scene-manager.js" defer></script>

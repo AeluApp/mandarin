@@ -12,3 +12,4 @@ export 'pressable_scale.dart';
 export 'confetti.dart';
 export 'content_switcher.dart';
 export 'staggered_column.dart';
+export 'scroll_reveal.dart';

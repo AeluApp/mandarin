@@ -278,6 +278,12 @@ def _collect_metrics():
         except Exception:
             logger.debug("Data-driven risk identification failed")
 
+        # Design quality metrics (aesthetic self-improvement loop)
+        try:
+            _collect_design_metrics(conn)
+        except Exception:
+            logger.debug("Design quality metrics collection failed")
+
         conn.commit()
 
     # ── Content reaudit ──
@@ -515,6 +521,20 @@ def _auto_identify_risks(conn):
                  risk["probability"], risk["impact"]),
             )
             logger.info("Auto-created risk: %s", risk["title"])
+
+
+def _collect_design_metrics(conn):
+    """Run visual quality analysis and store findings."""
+    try:
+        from ..intelligence.analyzers_design_quality import ANALYZERS as DESIGN_ANALYZERS
+        for analyzer in DESIGN_ANALYZERS:
+            try:
+                findings = analyzer(conn)
+                # findings flow into the standard pipeline via the audit system
+            except Exception:
+                logger.exception("Design quality analyzer %s failed", analyzer.__name__)
+    except ImportError:
+        logger.debug("Design quality analyzers not available")
 
 
 def _link_spc_to_risk(conn, chart_type, violations, obs_id):

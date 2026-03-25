@@ -1086,17 +1086,17 @@ html[data-theme="dark"] .dashboard-hero-img {
 }
 
 .drill-group:not(.past) {
-  animation: drillEnter var(--duration-base, 250ms) var(--ease-upward, ease-out);
+  animation: drillEnter 0.2s var(--ease-upward) forwards;
 }
 
 @keyframes drillEnter {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(1.02);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -1215,14 +1215,13 @@ html[data-theme="dark"] .dashboard-hero-img {
 
 /* ── Drill group transitions: slide between drills ── */
 .drill-group.exiting {
-  animation: drillExit 0.3s var(--ease-default, ease) forwards;
+  animation: drillExit 0.15s var(--ease-exit) forwards;
+  pointer-events: none;
 }
 
 @keyframes drillExit {
-  to {
-    opacity: 0;
-    transform: translateX(-16px);
-  }
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-12px); }
 }
 
 /* ── Progress ink line: extends with each completed drill ── */
@@ -1236,8 +1235,9 @@ html[data-theme="dark"] .dashboard-hero-img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ink-settle, .ink-scatter, .drill-group.exiting { animation: none !important; }
+  .ink-settle, .ink-scatter, .drill-group.exiting, .drill-group:not(.past) { animation: none !important; }
   .ink-settle::after { animation: none !important; transform: scaleX(1); }
+  .drill-exit, .drill-enter { animation: none !important; }
 }
 
 .msg-dim {
@@ -7979,6 +7979,64 @@ textarea[aria-invalid="true"] {
   margin-top: var(--space-1);
 }
 
+/* ── Grammar visual annotations — color-coded sentence structure ── */
+
+/* Annotated sentence: highlights subject/verb/object in brand palette tones */
+.grammar-annotated {
+  font-family: var(--font-hanzi);
+  font-size: var(--text-xl);
+  line-height: 2.2;
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-3) 0;
+  background: color-mix(in srgb, var(--color-surface-alt) 50%, transparent);
+  border-radius: var(--radius-card);
+}
+
+/* Individual word/phrase annotation spans */
+.grammar-ann-subject {
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 2px;
+}
+
+.grammar-ann-verb {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+
+.grammar-ann-object {
+  border-bottom: 2px solid var(--color-mastery-stabilizing);
+  padding-bottom: 2px;
+}
+
+.grammar-ann-particle {
+  border-bottom: 2px dashed var(--color-text-dim);
+  padding-bottom: 2px;
+}
+
+/* Annotation legend — small inline key */
+.grammar-ann-legend {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.grammar-ann-legend span::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.grammar-ann-legend .legend-subject::before { background: var(--color-secondary); }
+.grammar-ann-legend .legend-verb::before { background: var(--color-accent); }
+.grammar-ann-legend .legend-object::before { background: var(--color-mastery-stabilizing); }
+.grammar-ann-legend .legend-particle::before { background: var(--color-text-dim); border-style: dashed; }
+
 /* Linked vocabulary */
 .grammar-linked-vocab {
   margin-bottom: var(--space-5);
@@ -9985,6 +10043,22 @@ html, body {
   animation: vt-fade-in 0.25s var(--ease-default) forwards;
 }
 
+/* ── Shared-element view transitions ── */
+/* Cards morph into detail views; progress rings morph into score displays */
+.passage-card { view-transition-name: reading-card; }
+.grammar-card { view-transition-name: grammar-card; }
+#progress-bar { view-transition-name: session-progress; }
+.complete-score { view-transition-name: session-score; }
+
+/* Morph animation for shared elements */
+::view-transition-group(reading-card),
+::view-transition-group(grammar-card),
+::view-transition-group(session-progress),
+::view-transition-group(session-score) {
+  animation-duration: 0.3s;
+  animation-timing-function: var(--ease-upward);
+}
+
 /* ── 1f. Mastery bar animation ────────────────────────── */
 
 .bar-seg {
@@ -10501,6 +10575,64 @@ html[data-theme="dark"] .hanzi-watermark {
 .reading-text { font-size: var(--text-lg); line-height: var(--lh-relaxed, 1.8); }
 /* driftUp defined in tokens section — no duplicate */
 
+/* ── Reading typography elevation — drop cap, generous Chinese line-height, pull quotes ── */
+
+/* Chinese text needs more vertical breathing room */
+.reading-text[lang="zh"],
+.reading-text .passage-hanzi,
+.reading-text .hanzi {
+  line-height: 2.0;
+  letter-spacing: 0.05em;
+}
+
+/* Drop cap — first character of each passage rendered large */
+.reading-dropcap::first-letter {
+  font-family: var(--font-hanzi);
+  font-size: 3.2em;
+  float: left;
+  line-height: 0.8;
+  padding-right: 0.1em;
+  padding-top: 0.05em;
+  color: var(--color-accent);
+}
+
+/* Pull quote — key vocabulary sentence highlighted */
+.reading-pullquote {
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-4) 0;
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  font-style: italic;
+  background: color-mix(in srgb, var(--color-accent) 3%, transparent);
+}
+
+/* Two-column layout on wide screens */
+@media (min-width: 820px) {
+  .reading-text-columns {
+    column-count: 2;
+    column-gap: var(--space-6);
+    column-rule: 1px solid var(--color-divider);
+  }
+}
+
+/* Passage title — Cormorant heading */
+.reading-passage-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--lh-3xl, 1.2);
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+/* Passage metadata — dim, small */
+.reading-passage-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+  margin-bottom: var(--space-4);
+}
+
 /* ── Reading gloss tooltip — glass ── */
 @supports (backdrop-filter: blur(1px)) {
   .reading-gloss {
@@ -10530,6 +10662,17 @@ html[data-theme="dark"] .hanzi-watermark {
   .media-type-chips button:hover {
     transform: translateY(-1px);
   }
+}
+
+/* ── Listening — playback waveform visualization ── */
+.listening-waveform {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 48px;
+  margin: var(--space-2) auto;
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-surface-alt) 50%, transparent);
 }
 
 /* ── Listening — waveform area + mode tabs ── */
@@ -10648,6 +10791,156 @@ html[data-theme="dark"] .hanzi-watermark {
   }
 }
 
+/* ── 2026-03 Aesthetic elevation: card hover depth, section texture, scroll progress ── */
+
+/* Card image zoom on hover — images inside cards gently scale within overflow:hidden boundary */
+.passage-card, .media-card, .grammar-card, .classroom-card, .class-card {
+  overflow: hidden;
+}
+
+.passage-card img, .media-card img, .grammar-card img,
+.classroom-card img, .class-card img {
+  transition: transform 0.4s var(--ease-upward);
+}
+
+@media (hover: hover) {
+  .passage-card:hover img, .media-card:hover img, .grammar-card:hover img,
+  .classroom-card:hover img, .class-card:hover img {
+    transform: scale(1.03);
+  }
+
+  /* Warm background tint on card hover (subtle accent bleed) */
+  .reading-list .passage-card:hover,
+  .media-grid .media-card:hover,
+  .grammar-list .grammar-card:hover {
+    background: color-mix(in srgb, var(--color-accent) 3%, var(--glass-bg, var(--color-surface)));
+  }
+}
+
+/* Section-level texture variation — per-section grain overlays for physical depth.
+   Uses same SVG noise pattern as body but at varying intensities per section. */
+.hero::after,
+#dashboard::after,
+#complete-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+  z-index: 0;
+}
+
+/* Hero gets heavier grain — "different paper weight" */
+.hero { position: relative; }
+.hero::after { opacity: 0.7; }
+
+/* Dashboard and complete screens get lighter grain */
+#dashboard { position: relative; }
+#dashboard::after { opacity: 0.4; }
+#complete-content { position: relative; }
+#complete-content::after { opacity: 0.5; }
+
+/* Ensure content sits above grain overlay */
+.hero > *, #dashboard > *, #complete-content > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Scroll progress bar (marketing pages inject .scroll-progress-bar) ── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-accent);
+  width: 0%;
+  z-index: 9999;
+  transition: none;
+  will-change: width;
+  pointer-events: none;
+}
+
+/* ── Hanzi stroke animation container ── */
+.hanzi-stroke-target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-3) auto;
+}
+
+.hanzi-stroke-target svg {
+  display: block;
+}
+
+/* ── Drill-to-drill transitions — cinematic flow between questions ── */
+.drill-exit {
+  animation: drillExit 0.15s var(--ease-exit) forwards;
+  pointer-events: none;
+}
+
+.drill-enter {
+  animation: drillEnter 0.2s var(--ease-upward) forwards;
+}
+
+/* ── Session entry cinematic — brief curtain-rise when session starts ── */
+@keyframes sessionCurtainRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.session-entering #drill-area {
+  animation: sessionCurtainRise 0.6s var(--ease-upward) 0.1s backwards;
+}
+
+.session-entering #progress-bar {
+  animation: sessionCurtainRise 0.5s var(--ease-upward) backwards;
+}
+
+.session-entering .session-header {
+  animation: sessionCurtainRise 0.4s var(--ease-upward) backwards;
+}
+
+.session-entering #input-area {
+  animation: sessionCurtainRise 0.55s var(--ease-upward) 0.15s backwards;
+}
+
+/* ── Scroll-scrubbed animations — elements transform proportionally to scroll ── */
+
+/* Heading scale: grows from 95% to 100% as section scrolls in */
+[data-scroll-section] h2,
+[data-scroll-section] h3 {
+  transform: scale(calc(0.95 + var(--scroll-progress, 0) * 0.05));
+  opacity: calc(0.6 + var(--scroll-progress, 0) * 0.4);
+  transition: none; /* driven by scroll, not time */
+}
+
+/* Image parallax depth — images move at 80% of scroll speed */
+[data-scroll-section] .parallax-img {
+  transform: translateY(calc(var(--scroll-progress, 0) * -20px));
+  transition: none;
+}
+
+/* Accent line reveal — dividers expand from center with scroll */
+[data-scroll-section] .scroll-reveal-line {
+  width: calc(var(--scroll-progress, 0) * 100%);
+  max-width: 100%;
+  transition: none;
+}
+
+/* Stat counter opacity — numbers become fully visible as section enters */
+[data-scroll-section] .stat .metric-value,
+[data-scroll-section] .stat .stat-value {
+  opacity: calc(0.3 + var(--scroll-progress, 0) * 0.7);
+  transition: none;
+}
+
+/* Panel depth shift — panels gain shadow as they scroll into view */
+[data-scroll-section] .panel {
+  box-shadow: 0 calc(var(--scroll-progress, 0) * 8px) calc(var(--scroll-progress, 0) * 24px) var(--color-shadow);
+  transition: none;
+}
+
 /* Respect reduced motion for all 2026 additions */
 @media (prefers-reduced-motion: reduce) {
   html, body { transition: none !important; }
@@ -10661,4 +10954,14 @@ html[data-theme="dark"] .hanzi-watermark {
   .reading-passage, .grammar-mastery-summary, .empty-state,
   .complete-illustration, #complete-content h2, .complete-score, .complete-pct,
   .onboarding-wizard-card, .onboarding-intro-slide, .settings-inline-form { animation: none !important; }
+  .passage-card img, .media-card img, .grammar-card img,
+  .classroom-card img, .class-card img { transition: none !important; }
+  .drill-exit, .drill-enter { animation: none !important; }
+  .session-entering #drill-area, .session-entering #progress-bar,
+  .session-entering .session-header, .session-entering #input-area { animation: none !important; }
+  /* Scroll-scrubbed: flatten to static state */
+  [data-scroll-section] h2, [data-scroll-section] h3 { transform: none !important; opacity: 1 !important; }
+  [data-scroll-section] .parallax-img { transform: none !important; }
+  [data-scroll-section] .stat .metric-value, [data-scroll-section] .stat .stat-value { opacity: 1 !important; }
+  [data-scroll-section] .panel { box-shadow: var(--shadow-md) !important; }
 }
