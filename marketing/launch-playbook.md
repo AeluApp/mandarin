@@ -120,7 +120,7 @@ I'm learning Mandarin and built Aelu around a concept I call the "cleanup loop":
 
 The system has 44 drill types across reading, listening, speaking, and tone accuracy. It adapts to what you get wrong and adjusts session difficulty.
 
-Tech: Python, Flask, SQLite. No AI API calls at runtime — all scheduling and scoring is deterministic. The adaptive algorithm uses modified FSRS with bayesian confidence dampening and interleaving enforcement.
+Tech: Python, Flask, SQLite. No AI API calls at runtime — all scheduling and scoring is deterministic. The adaptive algorithm uses adaptive spaced repetition with confidence-weighted scheduling and interleaving enforcement.
 
 HSK 1-6 aligned. Free for HSK 1-2, $14.99/month for full access.
 

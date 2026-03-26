@@ -17,7 +17,7 @@ This is the archetype that fits Aelu because the entire product is built around 
 **How the Sage manifests in the product:**
 
 - Per-skill HSK diagnostics that show you where each ability actually stands, even when the imbalance is uncomfortable. Your vocabulary might be HSK 4 while your listening is HSK 2. The product will not blend those into a flattering average.
-- Bayesian confidence dampening in the scheduling algorithm. A few good sessions do not inflate your score. Confidence is earned slowly, because that is how real competence develops.
+- confidence-weighted scheduling in the scheduling algorithm. A few good sessions do not inflate your score. Confidence is earned slowly, because that is how real competence develops.
 - Projections with confidence intervals, not optimistic single dates. "HSK 4 by August at your current pace" is a grounded estimate, not a motivational poster.
 - No XP, no gems, no hearts, no leaderboards. These are mechanisms for manufacturing a feeling of progress. The Sage does not manufacture feelings. The Sage shows you the data and trusts you to respond like an adult.
 
@@ -125,7 +125,7 @@ The Chinese study tool that did not exist, built by a learner who needed it -- w
 
 **Definition:** Metrics tell the truth, even when it is discouraging.
 
-**In the product:** When a user's diagnostic shows their listening at HSK 2 and their vocabulary at HSK 4, the app displays both numbers clearly, without softening or reframing. No "Your listening is almost there!" -- just the number. The bayesian confidence dampening means scores do not jump after a lucky session. They move slowly, reflecting real change, not statistical noise.
+**In the product:** When a user's diagnostic shows their listening at HSK 2 and their vocabulary at HSK 4, the app displays both numbers clearly, without softening or reframing. No "Your listening is almost there!" -- just the number. The confidence-weighted scheduling means scores do not jump after a lucky session. They move slowly, reflecting real change, not statistical noise.
 
 **In communication:** Blog posts and social content acknowledge what the product does not do well yet. The development blog covers past mistakes openly -- over-engineering the audio system, optimizing the algorithm before there was data, underestimating curriculum design. Marketing copy never claims the app is "the best" or "revolutionary." It describes what the app does and lets the reader evaluate.
 

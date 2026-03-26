@@ -10,14 +10,14 @@ Covers:
 7. AI risks appear in compliance monitor
 """
 
+import pytest
+np = pytest.importorskip("numpy")
+
 import json
 import sqlite3
 import tempfile
 from pathlib import Path
 from unittest.mock import patch, MagicMock
-
-import numpy as np
-import pytest
 
 from mandarin import db
 from mandarin.db.core import _migrate, _col_set, SCHEMA_VERSION

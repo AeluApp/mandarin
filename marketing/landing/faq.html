@@ -50,7 +50,7 @@
         "name": "How is this different from Duolingo, Anki, or HelloChinese?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Aelu has 44 drill types, a graded reader with the cleanup loop (every word you look up becomes practice), per-skill diagnostics tracking vocabulary, listening, reading, and tones independently, and FSRS-based scheduling with Bayesian confidence dampening. No gamification, no XP, no streaks."
+          "text": "Aelu has 44 drill types, a graded reader with the cleanup loop (every word you look up becomes practice), per-skill diagnostics tracking vocabulary, listening, reading, and tones independently, and FSRS-based scheduling with confidence-weighted scheduling. No gamification, no XP, no streaks."
         }
       },
       {
@@ -82,7 +82,7 @@
         "name": "How does the SRS algorithm work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Aelu uses a modified FSRS (Free Spaced Repetition Scheduler) algorithm with Bayesian confidence dampening, which means the system needs multiple data points before trusting your mastery of a word. Review intervals are calculated from your actual recall data, not a fixed schedule."
+          "text": "Aelu uses a adaptive spaced repetition (Free Spaced Repetition Scheduler) algorithm with confidence-weighted scheduling, which means the system needs multiple data points before trusting your mastery of a word. Review intervals are calculated from your actual recall data, not a fixed schedule."
         }
       },
       {
@@ -525,7 +525,7 @@
           <label class="faq-question" for="faq-gs-4" role="button" aria-expanded="false">How is this different from Duolingo, Anki, or HelloChinese?</label>
           <div class="faq-answer" role="region">
             <p>Duolingo has roughly 3 exercise formats and optimizes for daily engagement. Anki is a powerful blank SRS engine where you build your own curriculum. HelloChinese is a solid guided app with about 6 drill types.</p>
-            <p>Aelu has 44 drill types, a graded reader with the cleanup loop (every word you look up becomes practice), per-skill diagnostics tracking vocabulary, listening, reading, and tones independently, and FSRS-based scheduling with Bayesian confidence dampening. No gamification, no XP, no streaks. The system targets what you are weakest at, not what is easiest to test.</p>
+            <p>Aelu has 44 drill types, a graded reader with the cleanup loop (every word you look up becomes practice), per-skill diagnostics tracking vocabulary, listening, reading, and tones independently, and FSRS-based scheduling with confidence-weighted scheduling. No gamification, no XP, no streaks. The system targets what you are weakest at, not what is easiest to test.</p>
           </div>
         </div>
 
@@ -642,7 +642,7 @@
           <input type="checkbox" class="faq-toggle" style="display:none" id="faq-lf-2" aria-hidden="true">
           <label class="faq-question" for="faq-lf-2" role="button" aria-expanded="false">How does the SRS algorithm work?</label>
           <div class="faq-answer" role="region">
-            <p>Aelu uses a modified FSRS (Free Spaced Repetition Scheduler) algorithm -- the same family used by Anki. On top of that, it applies Bayesian confidence dampening, which means the system needs multiple data points before trusting your mastery of a word. A few lucky guesses do not inflate your score. Review intervals are calculated from your actual recall data, not a fixed schedule.</p>
+            <p>Aelu uses a adaptive spaced repetition (Free Spaced Repetition Scheduler) algorithm -- the same family used by Anki. On top of that, it applies confidence-weighted scheduling, which means the system needs multiple data points before trusting your mastery of a word. A few lucky guesses do not inflate your score. Review intervals are calculated from your actual recall data, not a fixed schedule.</p>
           </div>
         </div>
 

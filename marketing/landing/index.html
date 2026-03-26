@@ -1261,7 +1261,7 @@
   <section class="methodology" style="padding:var(--space-6) 0;background:var(--color-surface);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
     <div class="container" style="max-width:640px;">
       <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:600;text-align:center;margin-bottom:var(--space-4);">Built on research, not guesswork</h2>
-      <p style="font-size:0.95rem;color:var(--color-text-faint);line-height:1.65;margin-bottom:var(--space-3);">Aelu's scheduling algorithm is based on FSRS (Free Spaced Repetition Scheduler) with Bayesian confidence dampening — the same family of algorithms used in peer-reviewed spaced repetition research. Every drill, every interval, every difficulty rating is computed deterministically. No variable quality.</p>
+      <p style="font-size:0.95rem;color:var(--color-text-faint);line-height:1.65;margin-bottom:var(--space-3);">Aelu's scheduling algorithm is based on FSRS (Free Spaced Repetition Scheduler) with confidence-weighted scheduling — the same family of algorithms used in peer-reviewed spaced repetition research. Every drill, every interval, every difficulty rating is computed deterministically. No variable quality.</p>
     </div>
   </section>
 
@@ -1749,6 +1749,21 @@
       }, { passive: true });
       update();
     })();
+  </script>
+  <script>
+    // Newsletter subscribe on signup form submission
+    document.querySelectorAll('#signup-form, #signup-form-bottom').forEach(function(form) {
+      form.addEventListener('submit', function() {
+        var email = form.querySelector('input[name="email"]').value;
+        if (email) {
+          fetch('/api/newsletter/subscribe', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email})
+          }).catch(function() {});
+        }
+      });
+    });
   </script>
 
 </body>

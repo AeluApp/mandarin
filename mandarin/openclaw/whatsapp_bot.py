@@ -15,7 +15,10 @@ import logging
 import os
 from typing import Optional
 
-import httpx
+try:
+    import httpx
+except ImportError:
+    httpx = None
 
 from . import commands, llm_handler, security
 

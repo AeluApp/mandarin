@@ -129,8 +129,8 @@ class TestClassifyDecision:
     def test_informed_fix_medium_severity_multiple_files(self):
         assert classify_decision(_f(severity="medium", files=["a.py", "b.py"])) == "informed_fix"
 
-    def test_informed_fix_high_severity_no_conflict_non_learning(self):
-        assert classify_decision(_f(severity="high", dimension="profitability")) == "informed_fix"
+    def test_values_decision_high_severity_profitability(self):
+        assert classify_decision(_f(severity="high", dimension="profitability")) == "values_decision"
 
     def test_judgment_call_high_severity_learning_dimension(self):
         assert classify_decision(_f(severity="high", dimension="drill_quality")) == "judgment_call"
@@ -145,8 +145,8 @@ class TestClassifyDecision:
         }
         assert classify_decision(f, opinions) == "judgment_call"
 
-    def test_values_decision_copy_dimension(self):
-        assert classify_decision(_f(dimension="copy", severity="medium", files=["a.py", "b.py"])) == "values_decision"
+    def test_informed_fix_copy_dimension(self):
+        assert classify_decision(_f(dimension="copy", severity="medium", files=["a.py", "b.py"])) == "informed_fix"
 
     def test_values_decision_aesthetic_in_analysis(self):
         f = _f(severity="medium", analysis="This is an aesthetic concern", files=["a.py", "b.py"])
@@ -160,7 +160,7 @@ class TestClassifyDecision:
                 {"advisor": "retention", "priority_score": 21},
             ]
         }
-        assert classify_decision(f, opinions) == "values_decision"
+        assert classify_decision(f, opinions) == "informed_fix"
 
     def test_investigation_insufficient_data(self):
         f = _f(severity="medium", analysis="There is insufficient data", files=["a.py", "b.py"])

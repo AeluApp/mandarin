@@ -390,6 +390,34 @@ def _build_instruction(conn, candidate) -> tuple:
     except (ImportError, Exception) as e:
         logger.debug("Influence model unavailable, falling back to legacy: %s", e)
 
+    # ── Try prescription_memory (learned from past outcomes) ──
+    try:
+        from .prescription_memory import suggest_prescription
+        memory_suggestions = suggest_prescription(conn, context={
+            "dimension": dimension,
+            "severity": candidate["severity"],
+            "metric_name": candidate.get("metric_name", dimension),
+        })
+        if memory_suggestions:
+            best = memory_suggestions[0]
+            if best.get("success_rate", 0) > 0.5:
+                instruction_source = "prescription_memory"
+                target_file = best.get("target_file")
+                target_parameter = best.get("target_parameter")
+                direction = best.get("direction")
+                if target_file:
+                    advisor_text = _get_advisor_text(conn, candidate["id"])
+                    instruction = (
+                        f"In {target_file}, {direction} {target_parameter}. "
+                        f"Finding: {title}. "
+                        f"Severity: {candidate['severity']}. "
+                        f"(Learned: {best['success_rate']:.0%} success rate "
+                        f"over {best.get('sample_size', 0)} prior actions){advisor_text}"
+                    )
+                    return instruction, target_file, target_parameter, direction, instruction_source
+    except (ImportError, Exception) as e:
+        logger.debug("Prescription memory unavailable: %s", e)
+
     # ── Legacy fallback: _FINDING_TO_ACTION ──
     target_file = None
     target_parameter = None

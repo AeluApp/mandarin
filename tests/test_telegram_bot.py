@@ -5,6 +5,12 @@ import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock, AsyncMock
 
+# Python 3.14 removed implicit event loop creation in main thread
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 
 def _make_db():
     """In-memory SQLite with the audit log table."""

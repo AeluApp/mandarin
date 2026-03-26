@@ -346,6 +346,20 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import core loop monitor analyzer
+    try:
+        from .core_loop_monitor import ANALYZERS as CORE_LOOP_ANALYZERS
+        all_analyzers = all_analyzers + CORE_LOOP_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import analytics auto-executor analyzer (reverts, pending actions)
+    try:
+        from .analytics_auto_executor import ANALYZERS as ANALYTICS_EXEC_ANALYZERS
+        all_analyzers = all_analyzers + ANALYTICS_EXEC_ANALYZERS
+    except ImportError:
+        pass
+
     # Run all analyzers
     for analyzer in all_analyzers:
         try:
@@ -468,6 +482,12 @@ def run_product_audit(conn) -> dict:
         record_prediction_outcomes(conn)
         expire_stale_predictions(conn)
         verify_recommendation_outcomes(conn)
+        # Verify action_ledger entries (self_healing, return_monitor, auto_executor, etc.)
+        try:
+            from .action_ledger import verify_pending_actions
+            verify_pending_actions(conn)
+        except Exception as exc:
+            logger.debug("Action ledger verification skipped: %s", exc)
         calibration = calibrate_thresholds(conn)
         feedback_summary = get_loop_closure_summary(conn)
         feedback_summary["calibration_adjustments"] = len(calibration)

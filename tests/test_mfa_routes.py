@@ -17,11 +17,12 @@ Covers:
 
 from __future__ import annotations
 
+import pytest
+pyotp = pytest.importorskip("pyotp")
+
 import json
 from unittest.mock import patch
 
-import pyotp
-import pytest
 from werkzeug.security import generate_password_hash as _orig_gen
 
 from mandarin.auth import create_user

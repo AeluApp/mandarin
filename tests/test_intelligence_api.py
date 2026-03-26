@@ -841,11 +841,11 @@ class TestClassifyAndEscalate:
         result = classify_and_escalate_all(conn, [finding])
         assert result[0]["escalation_level"] == "emergency"
 
-    def test_low_severity_single_file_is_auto_fix(self, conn):
+    def test_low_severity_single_file_is_informed_fix(self, conn):
         finding = self._make_finding("ux", "low", "Minor layout tweak",
                                      files=["mandarin/web/static/style.css"])
         result = classify_and_escalate_all(conn, [finding])
-        assert result[0]["decision_class"] == "auto_fix"
+        assert result[0]["decision_class"] == "informed_fix"
 
     def test_insufficient_data_returns_investigation(self, conn):
         finding = self._make_finding(
@@ -924,13 +924,13 @@ class TestClassifyDecision:
             "title": f"{dimension} finding",
         }
 
-    def test_low_single_file_no_conflict_is_auto_fix(self):
+    def test_low_single_file_no_conflict_is_informed_fix(self):
         f = self._finding("low", "ux", files=["style.css"])
-        assert classify_decision(f) == "auto_fix"
+        assert classify_decision(f) == "informed_fix"
 
-    def test_medium_no_files_is_auto_fix(self):
+    def test_medium_no_files_is_informed_fix(self):
         f = self._finding("medium", "ux", files=[])
-        assert classify_decision(f) == "auto_fix"
+        assert classify_decision(f) == "informed_fix"
 
     def test_medium_multiple_files_is_informed_fix(self):
         f = self._finding("medium", "retention", files=["routes.py", "scheduler.py"])
@@ -947,10 +947,10 @@ class TestClassifyDecision:
         # With no advisor opinions, has_conflict=False, so high+learning_dim = judgment_call
         assert result in ("judgment_call", "informed_fix")
 
-    def test_high_severity_no_conflict_is_informed_fix(self):
+    def test_high_severity_profitability_is_values_decision(self):
         f = self._finding("high", "profitability", files=["routes.py"])
         result = classify_decision(f)
-        assert result == "informed_fix"
+        assert result == "values_decision"
 
 
 # ---------------------------------------------------------------------------

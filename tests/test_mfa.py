@@ -1,9 +1,9 @@
 """Tests for TOTP MFA — setup, verify, login, backup codes, disable."""
 
-from unittest.mock import patch
-
-import pyotp
 import pytest
+pyotp = pytest.importorskip("pyotp")
+
+from unittest.mock import patch
 
 from mandarin.mfa import (
     generate_totp_secret,

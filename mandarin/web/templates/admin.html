@@ -197,6 +197,7 @@
       <button class="admin-tab" data-group="revenue" role="tab" aria-selected="false">Revenue</button>
       <button class="admin-tab" data-group="content" role="tab" aria-selected="false">Content <span id="ai-review-badge" class="admin-badge" style="display:none;"></span></button>
       <button class="admin-tab" data-group="intel" role="tab" aria-selected="false">Intelligence <span id="intel-badge" class="admin-badge" style="display:none;"></span><span id="notif-badge" class="admin-badge" style="display:none;"></span></button>
+      <button class="admin-tab" data-group="marketing" role="tab" aria-selected="false">Marketing <span id="mktg-badge" class="admin-badge" style="display:none;"></span></button>
     </div>
     <div class="admin-subtabs" id="admin-subtabs" role="tablist" aria-label="Sub-sections"></div>
 
@@ -757,6 +758,27 @@
       </div>
     </div>
 
+    <!-- Marketing Automation -->
+    <div class="admin-tab-content" id="tab-marketing">
+      <p class="tab-description">Your autonomous marketing system. Review queued posts, track what's been published, and monitor performance across channels.</p>
+
+      <div class="admin-section">
+        <h2>Approval Queue <span id="mktg-queue-count" style="font-size:var(--text-sm);color:var(--color-text-dim);font-weight:400;"></span></h2>
+        <p style="font-size:var(--text-sm);color:var(--color-text-dim);margin-bottom:var(--space-3);">Reddit and XHS posts require your approval before posting. Review and approve or reject below.</p>
+        <div id="mktg-queue" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px"></div></div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Recent Posts</h2>
+        <div id="mktg-posts" class="tab-loading"><div class="skeleton-line" style="width:80%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:60%;height:14px"></div></div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Performance</h2>
+        <div id="mktg-metrics" class="tab-loading"><div class="skeleton-line" style="width:60%;height:14px;margin-bottom:12px"></div><div class="skeleton-line" style="width:40%;height:14px"></div></div>
+      </div>
+    </div>
+
     <!-- Anti-Goodhart Counter-Metrics -->
     <div class="admin-tab-content" id="tab-counter-metrics">
       <p class="tab-description">Honesty checks for the learning system. For every headline metric (accuracy, streaks, mastery), a shadow metric watches whether that number actually means anything. When something looks off, the system acts automatically.</p>
@@ -1149,6 +1171,7 @@
         "ai-review": loadAiReview,
         "openclaw": loadOpenClaw,
         "counter-metrics": loadCounterMetrics,
+        "marketing": loadMarketing,
       };
       if (loaders[tab]) loaders[tab]();
     }
@@ -2478,6 +2501,75 @@
     });
 
     /* ── AI Review Queue ── */
+    function loadMarketing() {
+      // Load approval queue
+      adminFetch("/api/admin/marketing/queue").then(function(d) {
+        var el = document.getElementById("mktg-queue");
+        var items = d.queue || [];
+        var badge = document.getElementById("mktg-badge");
+        var countEl = document.getElementById("mktg-queue-count");
+        if (countEl) countEl.textContent = items.length > 0 ? "(" + items.length + " pending)" : "";
+        if (badge && items.length > 0) { badge.textContent = items.length; badge.style.display = "inline"; }
+        if (items.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No posts awaiting approval.</p>';
+        } else {
+          var html = '';
+          items.forEach(function(item) {
+            html += '<div style="padding:var(--space-3);background:var(--color-surface);border-left:4px solid var(--color-accent);margin-bottom:var(--space-3);font-family:var(--font-body);font-size:var(--text-sm);">';
+            html += '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:var(--space-2);">';
+            html += '<div><strong style="text-transform:uppercase;letter-spacing:var(--tracking-wide);font-size:var(--text-xs);color:var(--color-text-dim);">' + esc(item.platform) + '</strong>';
+            html += ' <span style="color:var(--color-text-dim);font-size:var(--text-xs);">' + shortDate(item.submitted_at) + '</span></div>';
+            html += '<div style="display:flex;gap:var(--space-2);">';
+            html += '<button onclick="approveMktgPost(' + item.id + ')" style="background:var(--color-correct);color:#fff;border:none;padding:4px 12px;cursor:pointer;font-size:var(--text-xs);">Approve</button>';
+            html += '<button onclick="rejectMktgPost(' + item.id + ')" style="background:var(--color-incorrect);color:#fff;border:none;padding:4px 12px;cursor:pointer;font-size:var(--text-xs);">Reject</button>';
+            html += '</div></div>';
+            html += '<pre style="white-space:pre-wrap;word-break:break-word;background:color-mix(in srgb,var(--color-surface) 90%,var(--color-text) 10%);padding:var(--space-2);font-size:var(--text-xs);max-height:200px;overflow:auto;">' + esc(item.content_text) + '</pre>';
+            if (item.reason) html += '<p style="font-size:var(--text-xs);color:var(--color-text-dim);margin-top:var(--space-1);">' + esc(item.reason) + '</p>';
+            html += '</div>';
+          });
+          el.innerHTML = html;
+        }
+      }).catch(function() { document.getElementById("mktg-queue").innerHTML = '<p class="tab-empty">Could not load queue.</p>'; });
+
+      // Load recent posts
+      adminFetch("/api/admin/marketing/posts").then(function(d) {
+        var el = document.getElementById("mktg-posts");
+        var posts = d.posts || [];
+        if (posts.length === 0) {
+          el.innerHTML = '<p class="tab-empty">No posts yet. Set MARKETING_LAUNCH_DATE to start the content calendar.</p>';
+        } else {
+          var html = '<div class="table-wrap"><table class="admin-table"><thead><tr><th>Content</th><th>Platform</th><th>Status</th><th>Posted</th></tr></thead><tbody>';
+          posts.forEach(function(p) {
+            html += '<tr><td>' + esc(p.content_id) + '</td><td>' + esc(p.platform) + '</td><td>' + esc(p.status) + '</td><td>' + shortDate(p.posted_at) + '</td></tr>';
+          });
+          html += '</tbody></table></div>';
+          el.innerHTML = html;
+        }
+      }).catch(function() { document.getElementById("mktg-posts").innerHTML = '<p class="tab-empty">Could not load posts.</p>'; });
+
+      // Load metrics
+      adminFetch("/api/admin/marketing/metrics").then(function(d) {
+        var el = document.getElementById("mktg-metrics");
+        var html = '<div class="metrics-grid">';
+        html += '<div class="metric-card"><div class="metric-value">' + (d.pending_approvals || 0) + '</div><div class="metric-label">Pending Approvals</div></div>';
+        html += '<div class="metric-card"><div class="metric-value">$' + (d.llm_spend_this_month || 0).toFixed(2) + '</div><div class="metric-label">LLM Spend (month)</div></div>';
+        (d.platform_stats || []).forEach(function(s) {
+          html += '<div class="metric-card"><div class="metric-value">' + s.total + '</div><div class="metric-label">' + esc(s.platform) + ' posts</div></div>';
+        });
+        html += '</div>';
+        el.innerHTML = html;
+      }).catch(function() { document.getElementById("mktg-metrics").innerHTML = '<p class="tab-empty">Could not load metrics.</p>'; });
+    }
+
+    function approveMktgPost(id) {
+      adminFetch("/api/admin/marketing/queue/" + id + "/approve", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({})})
+        .then(function() { loadMarketing(); });
+    }
+    function rejectMktgPost(id) {
+      adminFetch("/api/admin/marketing/queue/" + id + "/reject", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({})})
+        .then(function() { loadMarketing(); });
+    }
+
     function loadOpenClaw() {
       adminFetch("/api/openclaw/health").then(function(d) {
         var el = document.getElementById("openclaw-activity");

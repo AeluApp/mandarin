@@ -372,12 +372,25 @@ class ListeningBlock:
 
 
 @dataclass
+class GrammarBlock:
+    """A grammar mini-lesson triggered by encountered grammar patterns.
+
+    Shown when a user encounters a grammar pattern in drills that they
+    haven't studied yet, or when their mastery is low.
+    """
+    block_type: str = "grammar"
+    grammar_point_id: int = 0
+    grammar_point: dict = field(default_factory=dict)
+    target_seconds: int = 120
+
+
+@dataclass
 class SessionPlan:
     """A complete session plan ready for the runner.
 
     Sessions are organized as blocks: DrillBlock (atomic drills),
     ReadingBlock (passage + comprehension), ConversationBlock (dialogue),
-    ListeningBlock (audio + comprehension questions).
+    ListeningBlock (audio + comprehension questions), GrammarBlock (mini-lesson).
     The planner allocates by time budget, not item count.
     """
     session_type: str           # 'standard', 'minimal', 'catchup'

@@ -7391,6 +7391,96 @@ var _listeningPlayed = false;
 
 var _listeningMode = "listen"; // "listen" or "dictation"
 
+// ── Standalone Conversation Practice ──────────────────────
+var _convoScenarios = [];
+var _convoActive = null;
+
+function openConversationView() {
+  EventLog.record("view", "conversation");
+  transitionTo("dashboard", "conversation");
+  loadConversationScenarios();
+  showFeatureTooltip("conversation", "Practice real conversations at your level. The system evaluates your grammar and vocabulary.");
+}
+
+function loadConversationScenarios() {
+  var level = document.getElementById("conversation-level").value;
+  var url = "/api/conversation/scenarios" + (level ? "?hsk_level=" + level : "");
+  apiFetch(url).then(function(r) { return r.json(); }).then(function(data) {
+    _convoScenarios = data.scenarios || [];
+    var el = document.getElementById("conversation-scenarios");
+    if (_convoScenarios.length === 0) {
+      el.innerHTML = '<p style="color:var(--color-text-dim);font-family:var(--font-body);">No scenarios available.</p>';
+      return;
+    }
+    var html = '<div style="display:grid;gap:var(--space-3);">';
+    _convoScenarios.forEach(function(s) {
+      html += '<button class="conversation-scenario-card" onclick="startConversation(\'' + escapeHtml(s.id) + '\')" style="text-align:left;padding:var(--space-3);background:var(--color-surface);border:none;cursor:pointer;font-family:var(--font-body);">';
+      html += '<div style="font-weight:600;margin-bottom:4px;">' + escapeHtml(s.title || s.situation || s.id) + '</div>';
+      html += '<div style="font-size:var(--text-sm);color:var(--color-text-dim);">HSK ' + (s.hsk_level || '?') + '</div>';
+      html += '</button>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+    document.getElementById("conversation-active").classList.add("hidden");
+  }).catch(function() {
+    document.getElementById("conversation-scenarios").innerHTML = '<p style="color:var(--color-text-dim);">Could not load scenarios.</p>';
+  });
+
+  var levelSelect = document.getElementById("conversation-level");
+  if (levelSelect) {
+    levelSelect.removeEventListener("change", loadConversationScenarios);
+    levelSelect.addEventListener("change", loadConversationScenarios);
+  }
+}
+
+function startConversation(scenarioId) {
+  apiFetch("/api/conversation/start", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({scenario_id: scenarioId})
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    _convoActive = data;
+    document.getElementById("conversation-scenarios").classList.add("hidden");
+    var activeEl = document.getElementById("conversation-active");
+    activeEl.classList.remove("hidden");
+    document.getElementById("conversation-situation").innerHTML =
+      '<div style="font-weight:600;margin-bottom:var(--space-2);">' + escapeHtml(data.situation || "") + '</div>';
+    var msgsEl = document.getElementById("conversation-messages");
+    msgsEl.innerHTML = '<div class="convo-msg convo-system"><span class="hanzi">' + escapeHtml(data.prompt_zh || "") + '</span><br><span style="font-size:var(--text-sm);color:var(--color-text-dim);">' + escapeHtml(data.prompt_pinyin || "") + '</span><br><span style="font-size:var(--text-sm);color:var(--color-text-dim);">' + escapeHtml(data.prompt_en || "") + '</span></div>';
+    document.getElementById("conversation-input").focus();
+  }).catch(function() {});
+
+  var sendBtn = document.getElementById("conversation-send");
+  if (sendBtn) sendBtn.onclick = sendConversationResponse;
+}
+
+function sendConversationResponse() {
+  var input = document.getElementById("conversation-input");
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = "";
+
+  var msgsEl = document.getElementById("conversation-messages");
+  msgsEl.innerHTML += '<div class="convo-msg convo-user"><span class="hanzi">' + escapeHtml(text) + '</span></div>';
+
+  apiFetch("/api/conversation/respond", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({response: text, scenario_id: _convoActive ? _convoActive.scenario_id : ""})
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    var html = '<div class="convo-msg convo-system">';
+    if (data.follow_up_zh) html += '<span class="hanzi">' + escapeHtml(data.follow_up_zh) + '</span><br>';
+    if (data.follow_up_pinyin) html += '<span style="font-size:var(--text-sm);color:var(--color-text-dim);">' + escapeHtml(data.follow_up_pinyin) + '</span><br>';
+    if (data.feedback) html += '<div style="margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-secondary);">' + escapeHtml(data.feedback) + '</div>';
+    html += '</div>';
+    msgsEl.innerHTML += html;
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    input.focus();
+  }).catch(function() {
+    msgsEl.innerHTML += '<div class="convo-msg convo-system" style="color:var(--color-text-dim);">Could not evaluate response.</div>';
+  });
+}
+
 function openListeningView() {
   EventLog.record("view", "listening");
   transitionTo("dashboard", "listening");
@@ -8482,6 +8572,16 @@ document.addEventListener("DOMContentLoaded", function() {
   if (btnGrammar) btnGrammar.addEventListener("click", function() {
     if (AeluSound.instance) AeluSound.instance.navigate(); openGrammarView();
   });
+  var btnConversation = document.getElementById("btn-conversation");
+  if (btnConversation) btnConversation.addEventListener("click", function() {
+    isFreeTier().then(function(free) {
+      if (free) { showUpgradePrompt("conversation"); return; }
+      if (AeluSound.instance) AeluSound.instance.navigate();
+      openConversationView();
+    });
+  });
+  var convoBack = document.getElementById("conversation-back");
+  if (convoBack) convoBack.addEventListener("click", function() { backToDashboardFrom("conversation"); });
 
   // Back buttons for exposure views
   var readingBack = document.getElementById("reading-back");

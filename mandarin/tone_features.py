@@ -7,7 +7,10 @@ with rich feature vectors scored against contour family templates.
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
 
 
 # ── Feature vector ────────────────────────────────────────────────

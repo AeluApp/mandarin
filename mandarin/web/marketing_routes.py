@@ -732,3 +732,60 @@ def register_marketing_routes(app):
         except (sqlite3.Error, OSError, KeyError, TypeError, ValueError) as e:
             logger.error("nps prompted error: %s", e)
             return jsonify({"error": "NPS recording failed"}), 500
+
+    # ── Newsletter Subscription ─────────────────────────────────────────
+
+    @app.route("/api/newsletter/subscribe", methods=["POST"])
+    @api_error_handler("NewsletterSubscribe")
+    def api_newsletter_subscribe():
+        """Subscribe an email to the newsletter via Resend Audiences API."""
+        data = request.get_json(silent=True) or {}
+        email = (data.get("email") or "").strip().lower()
+
+        if not email or "@" not in email:
+            return jsonify({"error": "Valid email required"}), 400
+
+        try:
+            import resend
+            resend.api_key = os.environ.get("RESEND_API_KEY", "")
+            audience_id = os.environ.get("RESEND_AUDIENCE_ID", "")
+
+            if not resend.api_key:
+                # Fallback: store in DB for later sync
+                with db.connection() as conn:
+                    conn.execute("""
+                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
+                        VALUES (?, datetime('now'))
+                    """, (email,))
+                    conn.commit()
+                return jsonify({"subscribed": True, "method": "db"})
+
+            if audience_id:
+                resend.Contacts.create({
+                    "audience_id": audience_id,
+                    "email": email,
+                })
+            else:
+                # No audience configured — store in DB
+                with db.connection() as conn:
+                    conn.execute("""
+                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
+                        VALUES (?, datetime('now'))
+                    """, (email,))
+                    conn.commit()
+
+            return jsonify({"subscribed": True})
+
+        except Exception as e:
+            logger.warning("Newsletter subscribe failed: %s", e)
+            # Fallback to DB
+            try:
+                with db.connection() as conn:
+                    conn.execute("""
+                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
+                        VALUES (?, datetime('now'))
+                    """, (email,))
+                    conn.commit()
+            except Exception:
+                pass
+            return jsonify({"subscribed": True, "method": "db"})

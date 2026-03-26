@@ -5,6 +5,7 @@ inputs gracefully, and maps scores correctly for exact/wrong matches.
 """
 
 import pytest
+np = pytest.importorskip("numpy")
 
 
 # ---- classify_tone: valid outputs ----

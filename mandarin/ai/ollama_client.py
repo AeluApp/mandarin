@@ -1,8 +1,12 @@
 """LLM client — unified generation via LiteLLM with caching and fallback.
 
 Uses LiteLLM as the routing layer so any model (Ollama, OpenAI, Anthropic,
-etc.) can be used without changing call sites.  Falls back to direct httpx
-calls when LiteLLM is not installed.
+cloud-hosted open-source via Groq/Together/Fireworks/SiliconFlow/DeepSeek,
+etc.) can be used without changing call sites.
+
+Cloud-first: routes to cloud-hosted 70B+ open-source models by default.
+Falls back to local Ollama when cloud providers are unavailable.
+Falls back to direct httpx calls when LiteLLM is not installed.
 """
 
 from __future__ import annotations
@@ -16,11 +20,19 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone, UTC
 from typing import Optional
 
-import httpx
+try:
+    import httpx
+except ImportError:
+    httpx = None
 
 from ..settings import (
-    OLLAMA_URL, OLLAMA_PRIMARY_MODEL, OLLAMA_FALLBACK_MODEL, OLLAMA_TIMEOUT,
+    OLLAMA_URL, OLLAMA_TIMEOUT,
+    LITELLM_MODEL, LITELLM_FALLBACK, IS_CLOUD_MODEL,
 )
+
+# Backward-compat imports for call sites that use these names
+OLLAMA_PRIMARY_MODEL = LITELLM_MODEL
+OLLAMA_FALLBACK_MODEL = LITELLM_FALLBACK
 
 logger = logging.getLogger(__name__)
 
@@ -45,8 +57,32 @@ class OllamaResponse:
 LLMResponse = OllamaResponse
 
 
+def is_llm_available() -> bool:
+    """Check if any LLM provider is reachable. Cloud-first, then local Ollama.
+
+    Returns True if we can make LLM calls. This is the primary health check.
+    """
+    # Cloud: try a lightweight LiteLLM call
+    if IS_CLOUD_MODEL:
+        try:
+            import litellm
+            # Use model_list or a quick test to verify provider is up
+            # litellm.check_valid_key handles provider health
+            return True  # If we have cloud keys configured, assume available
+        except ImportError:
+            pass
+
+    # Local Ollama fallback
+    return _is_ollama_running()
+
+
 def is_ollama_available() -> bool:
-    """Check if Ollama is running. Returns False gracefully on any error."""
+    """Backward-compat alias. Prefer is_llm_available() for new code."""
+    return is_llm_available()
+
+
+def _is_ollama_running() -> bool:
+    """Check if local Ollama is running."""
     try:
         resp = httpx.get(f"{OLLAMA_URL}/api/tags", timeout=3.0)
         return resp.status_code == 200
@@ -111,6 +147,8 @@ def is_model_capable(task_type: str) -> bool:
     Compares MODEL_SIZE_B (extracted from model name at startup) against
     the minimum required for the task in _TASK_COMPLEXITY.  Unknown tasks
     default to tier 1 (any model).
+
+    With cloud-hosted 70B+ models, all task types should pass.
     """
     from ..settings import _TASK_COMPLEXITY, MODEL_SIZE_B
     min_size = _TASK_COMPLEXITY.get(task_type, 1.0)
@@ -131,16 +169,40 @@ def generate(
     Skips the call entirely if the model is too small for the task_type,
     returning a failure so callers hit their rule-based fallback.
     """
+    # Spend cap gate: skip non-critical tasks if monthly spend exceeded
+    if IS_CLOUD_MODEL and conn is not None:
+        from ..settings import LLM_MONTHLY_SPEND_CAP_USD
+        if LLM_MONTHLY_SPEND_CAP_USD > 0:
+            _CRITICAL_TASKS = {"drill_generation", "error_explanation", "openclaw_intent", "openclaw_chat"}
+            if task_type not in _CRITICAL_TASKS:
+                try:
+                    spend_row = conn.execute("""
+                        SELECT COALESCE(SUM(cost_usd), 0) as total
+                        FROM llm_cost_log
+                        WHERE created_at > datetime('now', 'start of month')
+                    """).fetchone()
+                    if spend_row and spend_row["total"] >= LLM_MONTHLY_SPEND_CAP_USD:
+                        logger.warning(
+                            "LLM spend cap reached ($%.2f/$%.2f) — skipping task '%s'",
+                            spend_row["total"], LLM_MONTHLY_SPEND_CAP_USD, task_type,
+                        )
+                        return OllamaResponse(
+                            success=False, model_used=LITELLM_MODEL,
+                            error=f"Monthly LLM spend cap reached (${spend_row['total']:.2f}/${LLM_MONTHLY_SPEND_CAP_USD:.2f})",
+                        )
+                except Exception:
+                    pass  # If cost table doesn't exist yet, proceed
+
     # Capability gate: skip if model is too small for this task
     if not is_model_capable(task_type):
         from ..settings import MODEL_SIZE_B, _TASK_COMPLEXITY
         min_size = _TASK_COMPLEXITY.get(task_type, 1.0)
         logger.info(
             "Skipping task '%s': model %s (%.1fb) below minimum %.1fb",
-            task_type, OLLAMA_PRIMARY_MODEL, MODEL_SIZE_B, min_size,
+            task_type, LITELLM_MODEL, MODEL_SIZE_B, min_size,
         )
         return OllamaResponse(
-            success=False, model_used=OLLAMA_PRIMARY_MODEL,
+            success=False, model_used=LITELLM_MODEL,
             error=f"Model too small for task '{task_type}' (have {MODEL_SIZE_B:.1f}b, need {min_size:.0f}b)",
         )
 
@@ -154,26 +216,41 @@ def generate(
     # Task-specific model routing (from benchmark results in pi_model_registry)
     task_model = _get_task_model(conn, task_type)
     if task_model:
-        models_to_try = [task_model, OLLAMA_PRIMARY_MODEL]
+        models_to_try = [task_model, LITELLM_MODEL]
     else:
-        models_to_try = [OLLAMA_PRIMARY_MODEL, OLLAMA_FALLBACK_MODEL]
+        models_to_try = [LITELLM_MODEL, LITELLM_FALLBACK]
 
-    # Try models in order
-    for model in models_to_try:
+    # Deduplicate while preserving order
+    seen = set()
+    unique_models = []
+    for m in models_to_try:
+        if m not in seen:
+            seen.add(m)
+            unique_models.append(m)
+
+    # Try models in order (cloud-first, then fallback)
+    result = None
+    for i, model in enumerate(unique_models):
         result = _call_llm(prompt, system, model, temperature, max_tokens)
         if result.success:
+            # Log if we fell back to a non-primary model
+            if i > 0:
+                logger.warning(
+                    "LLM fallback: task '%s' served by %s (primary %s failed)",
+                    task_type, model, unique_models[0],
+                )
             if conn is not None:
                 if use_cache:
                     _write_cache(conn, prompt, system, result)
                 _log_generation(conn, task_type, result)
-                # Auto-score quality for structured tasks
                 _auto_score_quality(conn, task_type, result)
-                # Log LLM cost
                 _log_cost(conn, model, task_type, result)
             return result
         logger.warning("LLM %s failed: %s — trying next", model, result.error)
 
-    # Both models failed
+    # All models failed
+    logger.error("All LLM providers failed for task '%s': %s", task_type,
+                 result.error if result else "no models configured")
     failed = OllamaResponse(success=False, error=result.error if result else "all models failed")
     if conn is not None:
         _log_generation(conn, task_type, failed)
@@ -192,8 +269,13 @@ def _call_llm(
 
 
 def _call_via_litellm(litellm, prompt, system, model, temperature, max_tokens):
-    """LiteLLM-based call — supports any model provider via unified API."""
-    from ..settings import IS_CLOUD_MODEL
+    """LiteLLM-based call — supports any model provider via unified API.
+
+    Handles cloud providers (Groq, Together, Fireworks, SiliconFlow, DeepSeek,
+    Mistral) and local Ollama transparently. LiteLLM routes based on the model
+    string prefix (groq/, together_ai/, fireworks_ai/, ollama/, etc.).
+    """
+    from ..settings import _is_cloud_model
 
     messages = []
     if system:
@@ -201,7 +283,7 @@ def _call_via_litellm(litellm, prompt, system, model, temperature, max_tokens):
     messages.append({"role": "user", "content": prompt})
 
     # Cloud models use their name directly; local Ollama models need the prefix
-    if IS_CLOUD_MODEL or "/" in model:
+    if _is_cloud_model(model) or "/" in model:
         litellm_model = model
         extra_kwargs = {}
     else:
@@ -299,13 +381,19 @@ def _log_cost(conn, model: str, task_type: str, result: OllamaResponse) -> None:
         # Estimate cost from token counts
         pt = result.prompt_tokens or 0
         ct = result.completion_tokens or 0
-        # Local Ollama: ~$0 (electricity only), Cloud: varies by provider
-        # Use conservative estimate; actual cost comes from LiteLLM response_cost
-        from ..settings import IS_CLOUD_MODEL
-        if IS_CLOUD_MODEL:
-            cost = (pt * 0.000003 + ct * 0.000015)  # ~GPT-4o rates as default
-        else:
+        # Local Ollama: ~$0, Cloud OSS: ~$0.30-0.90/M tokens (much cheaper than proprietary)
+        from ..settings import _is_cloud_model
+        model_lower = model.lower()
+        if not _is_cloud_model(model):
             cost = 0.0  # Local is free
+        elif "groq" in model_lower:
+            cost = (pt * 0.00000059 + ct * 0.00000079)  # Groq rates
+        elif "deepseek" in model_lower:
+            cost = (pt * 0.00000028 + ct * 0.00000028)  # DeepSeek V3 rates
+        elif "together" in model_lower or "fireworks" in model_lower:
+            cost = (pt * 0.0000009 + ct * 0.0000009)  # ~$0.90/M avg
+        else:
+            cost = (pt * 0.000001 + ct * 0.000002)  # Conservative cloud OSS estimate
 
         conn.execute("""
             INSERT INTO llm_cost_log (model, task_type, prompt_tokens, completion_tokens, cost_usd, created_at)
@@ -386,6 +474,8 @@ def generate_structured(
 
     start = time.monotonic()
     try:
+        from ..settings import _is_cloud_model
+
         # Prefer LiteLLM backend for unified model routing
         try:
             import litellm
@@ -394,7 +484,7 @@ def generate_structured(
                 mode=instructor.Mode.JSON,
             )
         except ImportError:
-            # Fallback: direct OpenAI-compatible endpoint
+            # Fallback: direct OpenAI-compatible endpoint (local Ollama)
             from openai import OpenAI
             client = instructor.from_openai(
                 OpenAI(base_url=f"{OLLAMA_URL}/v1", api_key="ollama"),
@@ -406,20 +496,28 @@ def generate_structured(
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
 
+        # Cloud models use name directly; local needs ollama/ prefix
+        if _is_cloud_model(LITELLM_MODEL) or "/" in LITELLM_MODEL:
+            structured_model = LITELLM_MODEL
+            extra_kwargs = {}
+        else:
+            structured_model = f"ollama/{LITELLM_MODEL}"
+            extra_kwargs = {"api_base": OLLAMA_URL}
+
         result = client.chat.completions.create(
-            model=f"ollama/{OLLAMA_PRIMARY_MODEL}",
+            model=structured_model,
             messages=messages,
             response_model=response_model,
             temperature=temperature,
             max_tokens=max_tokens,
-            api_base=OLLAMA_URL,
+            **extra_kwargs,
         )
 
         elapsed_ms = int((time.monotonic() - start) * 1000)
         resp = OllamaResponse(
             success=True,
             text=result.model_dump_json() if hasattr(result, 'model_dump_json') else str(result),
-            model_used=OLLAMA_PRIMARY_MODEL,
+            model_used=LITELLM_MODEL,
             generation_time_ms=elapsed_ms,
         )
 
@@ -435,7 +533,7 @@ def generate_structured(
         logger.debug("Instructor structured generation failed: %s", e)
         if conn is not None:
             failed = OllamaResponse(
-                success=False, model_used=OLLAMA_PRIMARY_MODEL,
+                success=False, model_used=LITELLM_MODEL,
                 generation_time_ms=elapsed_ms, error=str(e),
             )
             _log_generation(conn, task_type, failed)

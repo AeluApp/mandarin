@@ -856,7 +856,7 @@ For my use case — an adaptive SRS system with 44 drill types — these tradeof
 - SQLite (single file, 16 tables)
 - Vanilla JS + CSS (no framework, no build step)
 - macOS TTS for audio (no external TTS API)
-- FSRS-based scheduler (modified with bayesian confidence dampening)
+- FSRS-based scheduler (modified with confidence-weighted scheduling)
 
 Would love to hear from other solo devs building educational tools. What stack are you using and why?
 
@@ -870,7 +870,7 @@ I spent three months implementing a spaced repetition scheduler for my Chinese l
 
 **Memory isn't a single thing.** When you "know" a Chinese word, you actually have multiple memories: the visual memory of the character, the audio memory of the pronunciation, the semantic memory of the meaning, the motor memory of writing it, and the contextual memory of sentences you've seen it in. These decay at different rates. You can recognize a character (visual) but fail to recall its pronunciation (audio). An SRS that only tests recognition misses half the picture.
 
-**Confidence should decay with uncertainty.** Early SRS implementations treated every successful review equally. But a word you've reviewed twice is not "known" the same way as a word you've reviewed twenty times. I added bayesian confidence dampening: the system's belief in your knowledge of an item is weighted by how many data points it has. New items get scheduled more conservatively even after a correct answer.
+**Confidence should decay with uncertainty.** Early SRS implementations treated every successful review equally. But a word you've reviewed twice is not "known" the same way as a word you've reviewed twenty times. I added confidence-weighted scheduling: the system's belief in your knowledge of an item is weighted by how many data points it has. New items get scheduled more conservatively even after a correct answer.
 
 **Interleaving beats blocking.** Reviewing all your tone pairs, then all your vocabulary, then all your grammar is less effective than mixing them together. The effort of switching between types creates "desirable difficulty" that strengthens memory. I enforce interleaving in the drill queue — you never get more than 3 items of the same type in a row.
 
@@ -930,9 +930,9 @@ Every new language learning app launches with "powered by GPT-4" or "AI tutor in
 
 ---
 
-### BIP 5: Bayesian Confidence Dampening
+### BIP 5: confidence-weighted scheduling
 
-**Title:** Bayesian confidence dampening — a simple tweak that made my SRS dramatically better
+**Title:** confidence-weighted scheduling — a simple tweak that made my SRS dramatically better
 
 Standard SRS algorithms have a confidence problem: after two successful reviews, they assume you "know" a word and push it to a long interval. But two data points aren't enough to be confident.
 
@@ -1152,7 +1152,7 @@ Yes — the free tier starts at HSK 1 (the very beginning). It assumes zero Chin
 No plans for that. The app is deeply specialized for Chinese — the tone drills, character system, HSK alignment, and graded reading are all Chinese-specific. Building a multi-language platform would mean doing everything less well. I'd rather be the best Chinese practice tool than a mediocre everything tool.
 
 **19. "How does the SRS algorithm work?"**
-It's based on FSRS (Free Spaced Repetition Scheduler) — the same algorithm family used in recent Anki updates. I've added two modifications: bayesian confidence dampening (the system is more conservative with items it has less data on) and interleaving enforcement (you never get more than 3 items of the same drill type in a row). The result: better retention than standard SM-2 with less total review time.
+It's based on FSRS (Free Spaced Repetition Scheduler) — the same algorithm family used in recent Anki updates. I've added two modifications: confidence-weighted scheduling (the system is more conservative with items it has less data on) and interleaving enforcement (you never get more than 3 items of the same drill type in a row). The result: better retention than standard SM-2 with less total review time.
 
 **20. "Is there a community or study group?"**
 Yes — there's a Discord server (Mandarin Study Hall) where learners share progress, ask questions, and participate in weekly study challenges. It's not huge yet, but it's active and friendly. Link: [Discord invite link]. There's also r/ChineseLanguage on Reddit where I'm active and where a lot of the Chinese learning community hangs out.

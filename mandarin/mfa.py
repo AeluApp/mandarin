@@ -12,24 +12,38 @@ import logging
 import secrets
 import string
 
-import pyotp
+try:
+    import pyotp
+except ImportError:
+    pyotp = None  # MFA functions will raise when called if pyotp is missing
 
 logger = logging.getLogger(__name__)
 
 
+def _require_pyotp():
+    """Raise ImportError at call time if pyotp is not installed."""
+    if pyotp is None:
+        raise ImportError(
+            "pyotp is required for MFA. Install with: pip install pyotp"
+        )
+
+
 def generate_totp_secret() -> str:
     """Generate a base32-encoded TOTP secret."""
+    _require_pyotp()
     return pyotp.random_base32()
 
 
 def get_provisioning_uri(secret: str, email: str) -> str:
     """Return an otpauth:// URI for QR code generation."""
+    _require_pyotp()
     totp = pyotp.TOTP(secret)
     return totp.provisioning_uri(name=email, issuer_name="Aelu")
 
 
 def verify_totp(secret: str, code: str) -> bool:
     """Verify a TOTP code with 1-step window for clock skew."""
+    _require_pyotp()
     totp = pyotp.TOTP(secret)
     result = totp.verify(code, valid_window=1)
     if not result:
