@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 120  # Increment when adding migrations
+SCHEMA_VERSION = 121  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7246,6 +7246,28 @@ def _migrate_v119_to_v120(conn):
     conn.commit()
 
 
+def _migrate_v120_to_v121(conn):
+    """v120->v121: Add experiment_approval_queue for governance of AI-proposed experiments."""
+    tables = _table_set(conn)
+    if "experiment_approval_queue" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_approval_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                action_type TEXT NOT NULL,
+                experiment_name TEXT NOT NULL,
+                proposed_by TEXT NOT NULL DEFAULT 'daemon',
+                proposal_data TEXT,
+                status TEXT NOT NULL DEFAULT 'pending',
+                reviewed_by TEXT,
+                reviewed_at TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+            CREATE INDEX IF NOT EXISTS idx_approval_queue_status
+                ON experiment_approval_queue(status);
+        """)
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7367,6 +7389,7 @@ MIGRATIONS = {
     117: _migrate_v117_to_v118,
     118: _migrate_v118_to_v119,
     119: _migrate_v119_to_v120,
+    120: _migrate_v120_to_v121,
 }
 
 

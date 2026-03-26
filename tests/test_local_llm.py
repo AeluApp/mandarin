@@ -70,7 +70,8 @@ def conn():
                 review_decision IN ('approved', 'rejected', 'edited')
             ),
             edited_content_json TEXT,
-            review_notes TEXT
+            review_notes TEXT,
+            provenance_checked INTEGER DEFAULT 0
         );
 
         CREATE TABLE vocab_encounter (
@@ -95,6 +96,8 @@ def conn():
             hsk_level INTEGER DEFAULT 1,
             status TEXT DEFAULT 'drill_ready',
             review_status TEXT DEFAULT 'approved',
+            is_ai_generated INTEGER DEFAULT 0,
+            generated_by_prompt TEXT,
             source TEXT,
             example_sentence_hanzi TEXT,
             example_sentence_pinyin TEXT,
