@@ -17,10 +17,11 @@ Covers:
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+import pytest
+stripe = pytest.importorskip("stripe")
+
 import json
 from unittest.mock import patch, MagicMock
-
-import pytest
 from werkzeug.security import generate_password_hash as _orig_gen
 
 from mandarin.auth import create_user

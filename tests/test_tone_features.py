@@ -1,6 +1,7 @@
 """Tests for the V2 tone feature extraction engine."""
 
 import pytest
+np = pytest.importorskip("numpy")
 
 
 # ── Feature extraction ────────────────────────────────────────────

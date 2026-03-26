@@ -9,10 +9,11 @@ Routes under test (mandarin/web/payment_routes.py):
   GET  /api/subscription/status
 """
 
+import pytest
+stripe = pytest.importorskip("stripe")
+
 import json
 from unittest.mock import patch, MagicMock
-
-import pytest
 from werkzeug.security import generate_password_hash as _orig_gen
 
 from mandarin.auth import create_user

@@ -43,6 +43,7 @@ import time
 from unittest.mock import patch, MagicMock
 
 import pytest
+pytest.importorskip("pylti1p3", reason="LTI dependencies not installed")
 
 from mandarin.auth import create_user
 
