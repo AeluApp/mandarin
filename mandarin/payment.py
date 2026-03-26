@@ -470,10 +470,14 @@ def handle_webhook(payload: bytes, sig_header: str, conn: sqlite3.Connection) ->
             )
             # Store stripe_subscription_id on the teacher's most recent classroom
             if sub_id:
+                # Use subquery — ORDER BY LIMIT in UPDATE not always supported
                 conn.execute(
                     """UPDATE classroom SET stripe_subscription_id = ?, updated_at = ?
-                       WHERE teacher_user_id = ? AND stripe_subscription_id IS NULL
-                       ORDER BY created_at DESC LIMIT 1""",
+                       WHERE id = (
+                           SELECT id FROM classroom
+                           WHERE teacher_user_id = ? AND stripe_subscription_id IS NULL
+                           ORDER BY created_at DESC LIMIT 1
+                       )""",
                     (sub_id, now, int(user_id))
                 )
             conn.commit()

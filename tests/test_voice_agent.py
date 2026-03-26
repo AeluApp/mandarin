@@ -6,6 +6,12 @@ import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock, AsyncMock
 
+# Python 3.14 removed implicit event loop creation in main thread
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 
 def _make_db():
     """In-memory SQLite with the audit log table."""
@@ -240,7 +246,7 @@ class TestEdgeTTSService(unittest.TestCase):
         self.assertIsNone(result)
 
     @patch("mandarin.openclaw.voice_agent._HAS_EDGE_TTS", True)
-    @patch("mandarin.openclaw.voice_agent.edge_tts")
+    @patch("mandarin.openclaw.voice_agent.edge_tts", create=True)
     def test_synthesize_collects_audio_chunks(self, mock_edge):
         from mandarin.openclaw.voice_agent import EdgeTTSService
 
@@ -258,7 +264,7 @@ class TestEdgeTTSService(unittest.TestCase):
         self.assertEqual(result, b"chunk1chunk2")
 
     @patch("mandarin.openclaw.voice_agent._HAS_EDGE_TTS", True)
-    @patch("mandarin.openclaw.voice_agent.edge_tts")
+    @patch("mandarin.openclaw.voice_agent.edge_tts", create=True)
     def test_synthesize_error_returns_none(self, mock_edge):
         from mandarin.openclaw.voice_agent import EdgeTTSService
         mock_edge.Communicate.side_effect = Exception("TTS error")

@@ -94,6 +94,7 @@ def conn():
             english TEXT,
             hsk_level INTEGER DEFAULT 1,
             status TEXT DEFAULT 'drill_ready',
+            review_status TEXT DEFAULT 'approved',
             source TEXT,
             example_sentence_hanzi TEXT,
             example_sentence_pinyin TEXT,
@@ -125,12 +126,14 @@ def test_ollama_unavailable_returns_false(mock_get):
 
 # ── Test 2: generate falls back to smaller model when primary unavailable ──
 
+@patch("mandarin.ai.ollama_client.LITELLM_FALLBACK", "ollama/qwen2.5:0.5b")
 @patch("mandarin.ai.ollama_client._call_llm")
 def test_generate_fallback(mock_call_llm, conn):
     # First call (primary) fails, second call (fallback) succeeds
+    # Patch LITELLM_FALLBACK to differ from primary so dedup keeps both
     fail_result = OllamaResponse(success=False, error="model not found", model_used="qwen2.5:7b")
     ok_result = OllamaResponse(
-        success=True, text="hello", model_used="qwen2.5:1.5b",
+        success=True, text="hello", model_used="qwen2.5:0.5b",
         prompt_tokens=10, completion_tokens=5, generation_time_ms=100,
     )
     mock_call_llm.side_effect = [fail_result, ok_result]

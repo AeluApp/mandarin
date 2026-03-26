@@ -319,7 +319,7 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
         "spc_observations": [dict(s) for s in (spc_status or [])],
         "calibration": dict(calibration) if calibration else None,
         "in_control": all(
-            not (s.get("rule_violated")) for s in (spc_status or [])
+            not (dict(s).get("rule_violated")) for s in (spc_status or [])
         ),
     }
     dmaic_result["control"] = control
