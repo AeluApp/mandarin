@@ -5,14 +5,18 @@ import sqlite3
 from datetime import datetime, timezone, UTC
 from typing import Optional
 
-import stripe
+try:
+    import stripe
+except ImportError:
+    stripe = None
 
 from .email import send_subscription_confirmed, send_subscription_cancelled
 from .settings import STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_TAX_ENABLED, BASE_URL, PRICING
 
 logger = logging.getLogger(__name__)
 
-stripe.api_key = STRIPE_SECRET_KEY
+if stripe is not None:
+    stripe.api_key = STRIPE_SECRET_KEY
 
 # ── Commission structure ──
 # Standard partner rate (pilot — escalate to 0.30 after 6-month review if metrics hit)

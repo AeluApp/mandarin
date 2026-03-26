@@ -6,8 +6,14 @@ import threading
 
 from flask import request
 from flask_login import current_user
-from flask_sock import Sock
-from simple_websocket import ConnectionClosed
+try:
+    from flask_sock import Sock
+    from simple_websocket import ConnectionClosed
+    _HAS_WEBSOCKET = True
+except ImportError:
+    Sock = None
+    ConnectionClosed = Exception
+    _HAS_WEBSOCKET = False
 
 import random
 
@@ -1043,6 +1049,10 @@ def _handle_ws_session(ws, planner_fn, label):
 
 def register_session_routes(app):
     """Register WebSocket session routes on the Flask app."""
+    if not _HAS_WEBSOCKET:
+        logger.warning("flask_sock not installed — WebSocket session routes disabled")
+        return
+
     sock = Sock(app)
 
     @sock.route("/ws/session")

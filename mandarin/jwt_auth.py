@@ -8,7 +8,10 @@ import secrets
 import sqlite3
 from datetime import datetime, timezone, timedelta, UTC
 
-import jwt
+try:
+    import jwt
+except ImportError:
+    jwt = None
 
 from .settings import JWT_SECRET, JWT_ACCESS_EXPIRY_HOURS, JWT_REFRESH_EXPIRY_DAYS
 

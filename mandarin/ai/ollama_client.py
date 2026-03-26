@@ -20,7 +20,10 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone, UTC
 from typing import Optional
 
-import httpx
+try:
+    import httpx
+except ImportError:
+    httpx = None
 
 from ..settings import (
     OLLAMA_URL, OLLAMA_TIMEOUT,
