@@ -1,11 +1,12 @@
 """Tests for content quality analyzer — all DB via in-memory SQLite, LLM mocked."""
 
+import pytest
+pytest.importorskip("httpx")
+
 import json
 import sqlite3
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
-
-import pytest
 
 from mandarin.ai.content_quality import (
     _score_to_grade,

@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
+import pytest
+jwt = pytest.importorskip("jwt")
+
 import hashlib
 import time
 from datetime import datetime, timezone, timedelta
 from unittest.mock import patch
-
-import jwt
-import pytest
 
 from mandarin.jwt_auth import (
     create_access_token,

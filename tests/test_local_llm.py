@@ -1,12 +1,13 @@
 """Tests for local LLM (Ollama) integration — all HTTP mocked."""
 
+import pytest
+pytest.importorskip("httpx")
+
 import json
 import sqlite3
 import uuid
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
-
-import pytest
 
 # Ensure ai package is importable
 from mandarin.ai.ollama_client import (

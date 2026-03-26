@@ -1,5 +1,8 @@
 """Tests for Doc 23 1A: Instructor Structured Output via Ollama."""
 
+import pytest
+pytest.importorskip("httpx")
+
 import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock

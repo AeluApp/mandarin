@@ -1,13 +1,13 @@
 """Tests for traditional ML — difficulty prediction + fuzzy dedup."""
 
+import pytest
+np = pytest.importorskip("numpy")
+
 import json
 import sqlite3
 import uuid
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
-
-import numpy as np
-import pytest
 
 from mandarin.ml.feature_engineering import (
     build_feature_vector, FEATURE_ORDER,

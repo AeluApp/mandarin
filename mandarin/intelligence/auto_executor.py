@@ -311,6 +311,20 @@ def execute_single_fix(conn, finding_id: int) -> dict:
     _log_execution(conn, result, llm_response=fix_result,
                    validation_passed=True, smoke_test_passed=True)
 
+    # Record to action_ledger for outcome verification and calibration
+    try:
+        from .action_ledger import record_action
+        record_action(
+            conn, "auto_executor", "apply_auto_fix", target_file,
+            f"Auto-fixed finding #{finding_id}: {finding_dict['title'][:80]}",
+            {"finding_severity": finding_dict["severity"],
+             "finding_dimension": finding_dict["dimension"],
+             "target_parameter": target_parameter or ""},
+            verification_hours=48,
+        )
+    except Exception as exc:
+        logger.debug("Auto-fix: action_ledger record failed: %s", exc)
+
     # Advance finding lifecycle: investigating -> diagnosed -> recommended -> implemented
     _advance_finding(conn, finding_id)
 
