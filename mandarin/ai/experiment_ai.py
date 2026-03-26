@@ -603,7 +603,10 @@ def propose_ai_hypotheses(conn: sqlite3.Connection) -> list[dict]:
             ).fetchone()
             if existing_proposal:
                 continue
+        except sqlite3.OperationalError:
+            continue
 
+        try:
             existing_queue = conn.execute(
                 """SELECT id FROM experiment_approval_queue
                    WHERE experiment_name = ? AND status = 'pending'""",
@@ -612,7 +615,7 @@ def propose_ai_hypotheses(conn: sqlite3.Connection) -> list[dict]:
             if existing_queue:
                 continue
         except sqlite3.OperationalError:
-            continue
+            pass  # Table may not exist yet; proceed with submission
 
         # Create proposal record
         datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")

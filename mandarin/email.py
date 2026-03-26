@@ -9,7 +9,7 @@ import logging
 
 import requests
 
-from .settings import RESEND_API_KEY, FROM_EMAIL, BASE_URL, MAILING_ADDRESS
+from .settings import RESEND_API_KEY, FROM_EMAIL, BASE_URL, MAILING_ADDRESS, ADMIN_EMAIL
 
 logger = logging.getLogger(__name__)
 
@@ -783,7 +783,7 @@ def send_daily_intelligence_digest(conn) -> bool:
     subject = f"Intelligence digest: {', '.join(parts)}"
 
     html = _wrap_html("Intelligence Digest", body_html)
-    return _send(FROM_EMAIL, subject, html)
+    return _send(ADMIN_EMAIL or FROM_EMAIL, subject, html)
 
 
 def _esc(text: str) -> str:

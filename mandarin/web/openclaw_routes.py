@@ -182,10 +182,13 @@ def notify():
 
             async def _send_telegram():
                 bot = Bot(token=OPENCLAW_TELEGRAM_TOKEN)
-                await bot.send_message(
-                    chat_id=security.OWNER_CHAT_ID, text=safe_message,
-                )
-                return True
+                try:
+                    await bot.send_message(
+                        chat_id=security.OWNER_CHAT_ID, text=safe_message,
+                    )
+                    return True
+                finally:
+                    await bot.shutdown()
 
             ok = asyncio.run(_send_telegram())
             if ok:
