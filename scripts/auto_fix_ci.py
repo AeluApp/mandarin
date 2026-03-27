@@ -272,13 +272,11 @@ def create_fix_pr(files_modified: list[str], diagnosis: str, run_id: str) -> str
 
     {short_diagnosis}
 
-    ## Should you merge this?
+    ## What happens next
 
-    - **If all the checks below show green checkmarks** — it's safe to merge.
-      Click the green "Merge pull request" button.
-    - **If any check shows a red X** — the bot's fix didn't fully work.
-      Close this PR (click "Close pull request") and a human will need to look at it.
-    - **If you're not sure** — leave it open. It won't affect your live app until you merge.
+    This PR will **merge itself automatically** if all tests pass.
+    You'll get an email confirming what changed. If any test fails,
+    it stays open for a human to look at.
 
     ---
     🤖 *Created automatically by the CI Auto-Fix Agent*
@@ -288,7 +286,12 @@ def create_fix_pr(files_modified: list[str], diagnosis: str, run_id: str) -> str
     body_file = Path("/tmp/pr_body.md")
     body_file.write_text(pr_body)
 
-    pr_url = run(f'gh pr create --title "Auto-fix: CI failure from run {run_id}" --body-file /tmp/pr_body.md --reviewer AeluApp')
+    pr_url = run(f'gh pr create --title "Auto-fix: CI failure from run {run_id}" --body-file /tmp/pr_body.md')
+
+    # Enable auto-merge so it merges itself when checks pass
+    if pr_url:
+        run("gh pr merge --auto --squash", check=False)
+
     return pr_url
 
 
