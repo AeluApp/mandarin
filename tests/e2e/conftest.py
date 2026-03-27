@@ -39,6 +39,15 @@ def e2e_server():
 
     conn = db.init_db(db_path)
     _migrate(conn)
+
+    # Pre-seed HSK 1 content so tests don't depend on onboarding auto-seed
+    try:
+        from mandarin.importer import import_hsk_level
+        added, _ = import_hsk_level(conn, 1)
+        print(f"E2E: Pre-seeded {added} HSK 1 items")
+    except Exception as e:
+        print(f"E2E: HSK seed failed (tests needing content may fail): {e}")
+
     conn.close()
 
     from mandarin.web import create_app

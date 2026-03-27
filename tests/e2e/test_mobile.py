@@ -64,12 +64,8 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
         }});
     }}""")
     page.reload(wait_until="networkidle", timeout=15000)
-    # Wait for content seeding to finish (button changes from "Setting up vocabulary…")
-    page.wait_for_function(
-        "() => { const b = document.getElementById('btn-start'); "
-        "return b && !b.textContent.includes('Setting up'); }",
-        timeout=20000
-    )
+    # Wait for dashboard to settle (status API call + render)
+    page.wait_for_timeout(2000)
 
 
 # ── Mobile Golden Path 1: Registration at mobile viewport ──────

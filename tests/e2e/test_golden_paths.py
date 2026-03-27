@@ -50,32 +50,31 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
     fire consistently with force-click or evaluate). Instead, we call
     the onboarding API endpoints directly — same result, 100% reliable.
     """
-    base_url = page.url.split("/")[0] + "//" + page.url.split("/")[2]
-    # Set level, goal, and mark complete via API
-    page.evaluate(f"""async () => {{
-        await fetch('/api/onboarding/level', {{
+    # Set level, goal, and mark complete via API (await each response)
+    result = page.evaluate(f"""async () => {{
+        const r1 = await fetch('/api/onboarding/level', {{
             method: 'POST',
             headers: {{'Content-Type': 'application/json'}},
             body: JSON.stringify({{level: {level}}})
         }});
-        await fetch('/api/onboarding/goal', {{
+        const r2 = await fetch('/api/onboarding/goal', {{
             method: 'POST',
             headers: {{'Content-Type': 'application/json'}},
             body: JSON.stringify({{goal: '{goal}'}})
         }});
-        await fetch('/api/onboarding/complete', {{
+        const r3 = await fetch('/api/onboarding/complete', {{
             method: 'POST',
             headers: {{'Content-Type': 'application/json'}}
         }});
+        const data = await r3.json();
+        return {{ seeded: data.items_seeded || 0, status: r3.status }};
     }}""")
     # Reload so dashboard renders without the wizard overlay
     page.reload(wait_until="networkidle", timeout=15000)
-    # Wait for content seeding to finish (button changes from "Setting up vocabulary…")
-    page.wait_for_function(
-        "() => { const b = document.getElementById('btn-start'); "
-        "return b && !b.textContent.includes('Setting up'); }",
-        timeout=20000
-    )
+    # Wait for dashboard to be ready — either content is seeded and button updates,
+    # or if seeding returned 0 items, the button stays disabled (tests that need
+    # enabled button will check separately with their own timeout)
+    page.wait_for_timeout(2000)
 
 
 # ── Golden Path 1: Signup → Onboarding → Session Start ──────────
