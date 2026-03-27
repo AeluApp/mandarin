@@ -7,7 +7,9 @@ on:
 
 jobs:
   ingest-failures:
-    if: github.event.workflow_run.conclusion == 'failure'
+    # Temporarily disabled — triggers on every failed workflow causing email storms.
+    # Re-enable once CI is green and stable.
+    if: false && github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
