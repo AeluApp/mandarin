@@ -70,11 +70,10 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
         return {{ seeded: data.items_seeded || 0, status: r3.status }};
     }}""")
     # Reload so dashboard renders without the wizard overlay
-    page.reload(wait_until="networkidle", timeout=30000)
-    # Wait for dashboard to be ready — either content is seeded and button updates,
-    # or if seeding returned 0 items, the button stays disabled (tests that need
-    # enabled button will check separately with their own timeout)
-    page.wait_for_timeout(2000)
+    page.reload(wait_until="load", timeout=30000)
+    page.wait_for_load_state("domcontentloaded")
+    # Wait for dashboard JS to make API calls and update the UI
+    page.wait_for_timeout(5000)
 
 
 # ── Golden Path 1: Signup → Onboarding → Session Start ──────────
