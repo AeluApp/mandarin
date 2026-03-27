@@ -31,6 +31,7 @@ def _register(page: Page, base_url: str, email: str = None):
     page.goto(f"{base_url}/auth/register")
     page.fill('input[name="email"]', email)
     page.fill('input[name="password"]', password)
+    page.fill('input[name="confirm"]', password)
     invite_field = page.locator('input[name="invite_code"]')
     if invite_field.count() > 0 and invite_field.is_visible():
         invite_field.fill("BETA")
