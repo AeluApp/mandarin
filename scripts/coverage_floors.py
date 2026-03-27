@@ -17,17 +17,17 @@ from pathlib import Path
 # These target real user-facing logic, not just infra.
 # Ratchet upward as coverage improves — never lower these.
 FLOORS = {
-    "mandarin/drills": 36,      # Drill logic — user-facing, currently 49%
-    "mandarin/web": 40,         # Web routes + bridge — user-facing, currently 41.9%
-    "mandarin/db": 70,          # Database layer — data integrity, currently 77.8%
-    "mandarin/auth.py": 95,     # Auth — security-critical, currently 96.6%
-    "mandarin/jwt_auth.py": 95, # JWT — security-critical, currently 96.9%
-    "mandarin/mfa.py": 92,      # MFA — security-critical, currently 93.5%
-    "mandarin/security.py": 88, # Security events — critical, currently 89.5%
-    "mandarin/scheduler.py": 60,# Scheduler — core learning algorithm, currently 61.5%
+    "mandarin/drills": 36,      # Drill logic — user-facing, currently 37%
+    "mandarin/web": 48,         # Web routes + bridge — user-facing, currently 49%
+    "mandarin/db": 70,          # Database layer — data integrity, currently 72%
+    "mandarin/auth.py": 95,     # Auth — security-critical, currently 100%
+    "mandarin/jwt_auth.py": 95, # JWT — security-critical, currently 100%
+    "mandarin/mfa.py": 95,      # MFA — security-critical, currently 100%
+    "mandarin/security.py": 88, # Security events — critical, currently 91%
+    "mandarin/scheduler.py": 75,# Scheduler — core learning algorithm, currently 77%
     "mandarin/conversation.py": 88, # Conversation — user-facing, currently 90%
-    "mandarin/experiments.py": 0,   # A/B testing — needs test coverage, currently 0%
-    "mandarin/retention.py": 75,    # Retention model — core learning, currently 77.2%
+    "mandarin/experiments": 70,     # A/B testing — product-critical (package, not monolithic)
+    "mandarin/retention.py": 80,    # Retention model — core learning, wilson_ci tested
 }
 
 

@@ -143,3 +143,5 @@ Prefer WebP with JPG fallback.
 - **No hardcoded hex colors** — always use `--color-*` tokens.
 - **No card borders** — surfaces are continuous plaster.
 - **No gamification** — no points, levels, streaks-as-celebration, or leaderboards.
+- **NEVER lower coverage floors** in `scripts/coverage_floors.py`. If a floor is not met, write tests to increase coverage — do not reduce the threshold. Coverage floors are a ratchet: they only go up.
+- **NEVER lower `--cov-fail-under`** in CI workflows or `fail_under` in `pyproject.toml`. Write tests instead.

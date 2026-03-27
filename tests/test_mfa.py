@@ -1,5 +1,7 @@
 """Tests for TOTP MFA — setup, verify, login, backup codes, disable."""
 
+import logging
+
 import pytest
 pyotp = pytest.importorskip("pyotp")
 
@@ -179,3 +181,59 @@ class TestMFADatabaseIntegration:
         result = authenticate(conn, TEST_EMAIL, TEST_PASSWORD)
         assert result is not None
         assert result["email"] == TEST_EMAIL
+
+
+# ---------------------------------------------------------------------------
+# Edge-case tests — coverage for defensive branches and logging
+# ---------------------------------------------------------------------------
+
+class TestMFAEdgeCases:
+    """Tests targeting uncovered branches in mandarin/mfa.py."""
+
+    def test_require_pyotp_raises_when_pyotp_is_none(self):
+        """Mock pyotp as None so _require_pyotp raises ImportError."""
+        with patch("mandarin.mfa.pyotp", None):
+            with pytest.raises(ImportError, match="pyotp is required for MFA"):
+                generate_totp_secret()
+
+    def test_verify_backup_code_empty_string_hashed_json(self):
+        """Empty string is falsy — triggers the `or '[]'` fallback on line 76."""
+        success, remaining = verify_backup_code("", "anycode")
+        assert success is False
+        # "" causes JSONDecodeError; fallback returns hashed_json or "[]"
+        # since hashed_json is "" (falsy), the result is "[]"
+        assert remaining == "[]"
+
+    def test_verify_backup_code_integer_input_triggers_type_error(self):
+        """Non-string hashed_json (int) triggers TypeError in json.loads."""
+        success, remaining = verify_backup_code(12345, "anycode")  # type: ignore[arg-type]
+        assert success is False
+        # TypeError is caught; hashed_json (12345) is truthy so returned as-is
+        assert remaining == 12345  # type: ignore[comparison-overlap]
+
+    def test_verify_totp_logs_on_failure(self, caplog):
+        """verify_totp logs an info message when the code is wrong."""
+        secret = generate_totp_secret()
+        with caplog.at_level(logging.INFO, logger="mandarin.mfa"):
+            result = verify_totp(secret, "000000")
+        assert result is False
+        assert "TOTP verification failed" in caplog.text
+
+    def test_verify_backup_code_logs_on_success(self, caplog):
+        """verify_backup_code logs 'redeemed' on a successful match."""
+        codes = generate_backup_codes()
+        hashed = hash_backup_codes(codes)
+        with caplog.at_level(logging.INFO, logger="mandarin.mfa"):
+            success, remaining = verify_backup_code(hashed, codes[0])
+        assert success is True
+        assert "Backup code redeemed" in caplog.text
+        assert f"{len(codes) - 1} remaining" in caplog.text
+
+    def test_verify_backup_code_logs_on_failure(self, caplog):
+        """verify_backup_code logs 'failed' when no code matches."""
+        codes = generate_backup_codes()
+        hashed = hash_backup_codes(codes)
+        with caplog.at_level(logging.INFO, logger="mandarin.mfa"):
+            success, _ = verify_backup_code(hashed, "wrongcode")
+        assert success is False
+        assert "Backup code verification failed" in caplog.text
