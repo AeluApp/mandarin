@@ -285,7 +285,7 @@ class TestListClassrooms:
 
     def test_list_includes_created_classroom(self, app_client):
         client, conn = app_client
-        teacher = _login_teacher(client, conn)
+        _login_teacher(client, conn)
         # Create one via the API
         client.post(
             "/api/classroom/create",

@@ -22,7 +22,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-import os
 import threading
 import time
 from datetime import date, datetime, UTC
@@ -40,7 +39,8 @@ _stop_event = threading.Event()
 _thread: threading.Thread | None = None
 _tick_count = 0
 
-ENABLED = os.environ.get("MARKETING_SCHEDULER_ENABLED", "").lower() in ("true", "1", "yes")
+from ..settings import MARKETING_SCHEDULER_ENABLED
+ENABLED = MARKETING_SCHEDULER_ENABLED
 
 
 def start() -> None:
@@ -351,9 +351,10 @@ def _notify_approval_needed(conn, queue_id: int, platform: str, content_id: str)
     """Send email notification that a post needs approval."""
     try:
         import resend
-        resend.api_key = os.environ.get("RESEND_API_KEY", "")
-        notify_email = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
-        from_email = os.environ.get("FROM_EMAIL", "")
+        from ..settings import RESEND_API_KEY, MARKETING_NOTIFY_EMAIL, FROM_EMAIL
+        resend.api_key = RESEND_API_KEY
+        notify_email = MARKETING_NOTIFY_EMAIL
+        from_email = FROM_EMAIL
 
         if not (resend.api_key and notify_email and from_email):
             logger.debug("Marketing notification email not configured")
@@ -667,9 +668,10 @@ def _evaluate_channel_strategy(conn) -> None:
     # Email the strategy digest
     try:
         import resend
-        resend.api_key = os.environ.get("RESEND_API_KEY", "")
-        notify_email = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
-        from_email = os.environ.get("FROM_EMAIL", "")
+        from ..settings import RESEND_API_KEY, MARKETING_NOTIFY_EMAIL, FROM_EMAIL
+        resend.api_key = RESEND_API_KEY
+        notify_email = MARKETING_NOTIFY_EMAIL
+        from_email = FROM_EMAIL
 
         if resend.api_key and notify_email and from_email:
             # Format nicely

@@ -778,14 +778,14 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
         if lance_db is not None:
             # Exclude items already in LanceDB
             if existing_lance_ids:
-                id_list = ",".join(str(i) for i in existing_lance_ids)
+                placeholders = ",".join("?" * len(existing_lance_ids))
                 rows = conn.execute(f"""
                     SELECT ci.id, ci.hanzi, ci.pinyin, ci.english
                     FROM content_item ci
                     WHERE ci.status = 'drill_ready'
-                      AND ci.id NOT IN ({id_list})
+                      AND ci.id NOT IN ({placeholders})
                     LIMIT ?
-                """, (batch_size,)).fetchall()
+                """, (*existing_lance_ids, batch_size)).fetchall()
             else:
                 rows = conn.execute("""
                     SELECT ci.id, ci.hanzi, ci.pinyin, ci.english

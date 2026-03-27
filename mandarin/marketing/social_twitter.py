@@ -16,7 +16,6 @@ Exports:
 from __future__ import annotations
 
 import logging
-import os
 import time
 from dataclasses import dataclass, field
 
@@ -40,11 +39,15 @@ class PostResult:
 
 def is_twitter_configured() -> bool:
     """Check if Twitter API credentials are configured."""
+    from ..settings import (
+        TWITTER_API_KEY, TWITTER_API_SECRET,
+        TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET,
+    )
     return bool(
-        os.environ.get("TWITTER_API_KEY")
-        and os.environ.get("TWITTER_API_SECRET")
-        and os.environ.get("TWITTER_ACCESS_TOKEN")
-        and os.environ.get("TWITTER_ACCESS_SECRET")
+        TWITTER_API_KEY
+        and TWITTER_API_SECRET
+        and TWITTER_ACCESS_TOKEN
+        and TWITTER_ACCESS_SECRET
     )
 
 
@@ -67,12 +70,16 @@ def _get_client():
     """Get authenticated Twitter API client via tweepy or httpx."""
     import httpx
     from requests_oauthlib import OAuth1
+    from ..settings import (
+        TWITTER_API_KEY, TWITTER_API_SECRET,
+        TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET,
+    )
 
     auth = OAuth1(
-        os.environ["TWITTER_API_KEY"],
-        os.environ["TWITTER_API_SECRET"],
-        os.environ["TWITTER_ACCESS_TOKEN"],
-        os.environ["TWITTER_ACCESS_SECRET"],
+        TWITTER_API_KEY,
+        TWITTER_API_SECRET,
+        TWITTER_ACCESS_TOKEN,
+        TWITTER_ACCESS_SECRET,
     )
     return auth
 
@@ -95,12 +102,16 @@ def post_tweet(text: str, reply_to_id: str | None = None) -> PostResult:
     try:
         # Use OAuth 1.0a User Context for tweet creation
         from requests_oauthlib import OAuth1Session
+        from ..settings import (
+            TWITTER_API_KEY, TWITTER_API_SECRET,
+            TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET,
+        )
 
         session = OAuth1Session(
-            os.environ["TWITTER_API_KEY"],
-            client_secret=os.environ["TWITTER_API_SECRET"],
-            resource_owner_key=os.environ["TWITTER_ACCESS_TOKEN"],
-            resource_owner_secret=os.environ["TWITTER_ACCESS_SECRET"],
+            TWITTER_API_KEY,
+            client_secret=TWITTER_API_SECRET,
+            resource_owner_key=TWITTER_ACCESS_TOKEN,
+            resource_owner_secret=TWITTER_ACCESS_SECRET,
         )
 
         resp = session.post(url, json=payload)
@@ -152,12 +163,16 @@ def get_tweet_metrics(tweet_id: str) -> dict | None:
 
     try:
         from requests_oauthlib import OAuth1Session
+        from ..settings import (
+            TWITTER_API_KEY, TWITTER_API_SECRET,
+            TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET,
+        )
 
         session = OAuth1Session(
-            os.environ["TWITTER_API_KEY"],
-            client_secret=os.environ["TWITTER_API_SECRET"],
-            resource_owner_key=os.environ["TWITTER_ACCESS_TOKEN"],
-            resource_owner_secret=os.environ["TWITTER_ACCESS_SECRET"],
+            TWITTER_API_KEY,
+            client_secret=TWITTER_API_SECRET,
+            resource_owner_key=TWITTER_ACCESS_TOKEN,
+            resource_owner_secret=TWITTER_ACCESS_SECRET,
         )
 
         url = f"https://api.twitter.com/2/tweets/{tweet_id}"

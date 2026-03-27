@@ -607,7 +607,7 @@ def _gather_teacher_notifications(conn, teacher_id):
 
     # 1. Students who haven't had a session in 5+ days
     try:
-        inactive = conn.execute(f"""
+        sql = f"""
             SELECT cs.user_id, u.display_name, c.name AS class_name,
                    CAST(julianday('now') - julianday(
                        COALESCE((SELECT MAX(created_at) FROM session_log WHERE user_id = cs.user_id), cs.joined_at)
@@ -619,7 +619,8 @@ def _gather_teacher_notifications(conn, teacher_id):
               AND cs.status = 'active'
             HAVING days_inactive >= 5
             ORDER BY days_inactive DESC
-        """, classroom_ids).fetchall()
+        """
+        inactive = conn.execute(sql, classroom_ids).fetchall()
         for row in inactive:
             sev = "warning" if row["days_inactive"] >= 10 else "info"
             notifs.append({
@@ -635,7 +636,7 @@ def _gather_teacher_notifications(conn, teacher_id):
 
     # 2. Students with accuracy below 50% in last 7 days
     try:
-        struggling = conn.execute(f"""
+        sql = f"""
             SELECT cs.user_id, u.display_name, c.name AS class_name,
                    ROUND(AVG(CASE WHEN re.correct THEN 1.0 ELSE 0.0 END) * 100, 1) AS accuracy
             FROM classroom_student cs
@@ -648,7 +649,8 @@ def _gather_teacher_notifications(conn, teacher_id):
             GROUP BY cs.user_id
             HAVING accuracy IS NOT NULL AND accuracy < 50
             ORDER BY accuracy ASC
-        """, classroom_ids).fetchall()
+        """
+        struggling = conn.execute(sql, classroom_ids).fetchall()
         for row in struggling:
             notifs.append({
                 "id": f"struggling_student_{row['user_id']}",
@@ -663,7 +665,7 @@ def _gather_teacher_notifications(conn, teacher_id):
 
     # 3. Student milestones in last 7 days
     try:
-        milestones = conn.execute(f"""
+        sql = f"""
             SELECT le.user_id, u.display_name, c.name AS class_name,
                    le.event_type, le.created_at
             FROM lifecycle_event le
@@ -675,7 +677,8 @@ def _gather_teacher_notifications(conn, teacher_id):
                   'first_session', 'streak_7', 'streak_30', 'words_100', 'words_500')
               AND le.created_at >= datetime('now', '-7 days')
             ORDER BY le.created_at DESC
-        """, classroom_ids).fetchall()
+        """
+        milestones = conn.execute(sql, classroom_ids).fetchall()
         labels = {
             "hsk1_complete": "completed HSK 1",
             "hsk2_complete": "completed HSK 2",
@@ -701,7 +704,7 @@ def _gather_teacher_notifications(conn, teacher_id):
 
     # 4. Grade appeals from teacher's students
     try:
-        appeals = conn.execute(f"""
+        sql = f"""
             SELECT ga.id, u.display_name, c.name AS class_name, ga.created_at
             FROM grade_appeal ga
             JOIN classroom_student cs ON cs.user_id = ga.user_id
@@ -709,7 +712,8 @@ def _gather_teacher_notifications(conn, teacher_id):
             JOIN classroom c ON c.id = cs.classroom_id
             WHERE cs.classroom_id IN ({placeholders})
               AND ga.status = 'pending'
-        """, classroom_ids).fetchall()
+        """
+        appeals = conn.execute(sql, classroom_ids).fetchall()
         for row in appeals:
             notifs.append({
                 "id": f"grade_appeal_{row['id']}",
@@ -1844,10 +1848,8 @@ def update_curriculum(classroom_id, path_id):
                 return jsonify({"error": "No fields to update"}), 400
 
             params.append(path_id)
-            conn.execute(
-                f"UPDATE curriculum_path SET {', '.join(updates)} WHERE id = ?",
-                params
-            )
+            sql = f"UPDATE curriculum_path SET {', '.join(updates)} WHERE id = ?"
+            conn.execute(sql, params)
             conn.commit()
 
             return jsonify({"updated": True, "id": path_id})

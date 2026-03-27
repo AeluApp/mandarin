@@ -365,9 +365,9 @@ def test_migration_backfill():
     conn, path = _fresh_db()
     try:
         # Insert items with old mastery stages
-        item1 = _add_item(conn, hanzi="旧一")
-        item2 = _add_item(conn, hanzi="旧二")
-        item3 = _add_item(conn, hanzi="旧三")
+        _add_item(conn, hanzi="旧一")
+        _add_item(conn, hanzi="旧二")
+        _add_item(conn, hanzi="旧三")
 
         # Insert progress rows directly with old-style stages
         # We need to test that the migration correctly remapped them.

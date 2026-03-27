@@ -6,7 +6,7 @@ check_regression — both positive and negative cases.
 """
 
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 import pytest
 
@@ -147,8 +147,8 @@ def _insert_finding(conn, **kwargs):
         last_seen_audit_id=None,
         resolved_at=None,
         resolution_notes=None,
-        created_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
-        updated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+        created_at=datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
+        updated_at=datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
     )
     defaults.update(kwargs)
     cur = conn.execute("""
@@ -636,7 +636,7 @@ class TestComputeEngineAccuracy:
 
     def test_lookback_excludes_old_findings(self, conn):
         """Findings older than lookback_days should not be counted."""
-        old_ts = (datetime.now(timezone.utc) - timedelta(days=200)).strftime("%Y-%m-%d %H:%M:%S")
+        old_ts = (datetime.now(UTC) - timedelta(days=200)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(conn, title="Old finding", status="rejected", created_at=old_ts, updated_at=old_ts)
         _insert_finding(conn, title="Recent finding", status="investigating")
 
@@ -650,8 +650,8 @@ class TestComputeEngineAccuracy:
 
     def test_avg_resolution_days_computed(self, conn):
         """Insert a resolved finding with explicit created/resolved timestamps."""
-        created = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
-        resolved = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        created = (datetime.now(UTC) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
+        resolved = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         fid = _insert_finding(conn, status="resolved", created_at=created, updated_at=resolved)
         conn.execute(
             "UPDATE pi_finding SET resolved_at=? WHERE id=?", (resolved, fid)
@@ -672,7 +672,7 @@ class TestComputeEngineAccuracy:
 
     def test_default_lookback_is_ninety_days(self, conn):
         """Default lookback_days=90 — old finding not counted."""
-        old_ts = (datetime.now(timezone.utc) - timedelta(days=100)).strftime("%Y-%m-%d %H:%M:%S")
+        old_ts = (datetime.now(UTC) - timedelta(days=100)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(conn, title="Old", status="verified", created_at=old_ts, updated_at=old_ts)
         result = compute_engine_accuracy(conn)
         assert result["total_findings"] == 0
@@ -694,8 +694,8 @@ class TestCheckStaleFindings:
 
     def test_stale_investigating_detected(self, conn):
         """An investigating finding not updated for 15 days is stale."""
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=15)).strftime("%Y-%m-%d %H:%M:%S")
-        fid = _insert_finding(
+        stale_ts = (datetime.now(UTC) - timedelta(days=15)).strftime("%Y-%m-%d %H:%M:%S")
+        _insert_finding(
             conn, status="investigating",
             title="Old bug", dimension="ux",
             updated_at=stale_ts, created_at=stale_ts,
@@ -709,7 +709,7 @@ class TestCheckStaleFindings:
 
     def test_stale_diagnosed_detected(self, conn):
         """A diagnosed finding not updated for 15 days is also stale."""
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
+        stale_ts = (datetime.now(UTC) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(
             conn, status="diagnosed",
             title="Diagnosed but stuck",
@@ -722,7 +722,7 @@ class TestCheckStaleFindings:
 
     def test_stale_recommended_not_detected(self, conn):
         """Only investigating/diagnosed are checked — recommended is not stale."""
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
+        stale_ts = (datetime.now(UTC) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(
             conn, status="recommended",
             title="Recommended but old",
@@ -733,7 +733,7 @@ class TestCheckStaleFindings:
         assert result == []
 
     def test_stale_resolved_not_detected(self, conn):
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        stale_ts = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(
             conn, status="resolved",
             title="Long resolved",
@@ -745,7 +745,7 @@ class TestCheckStaleFindings:
 
     def test_exactly_14_days_is_stale(self, conn):
         """The SQL uses <= datetime('now', '-14 days') — exactly 14 days old IS stale."""
-        boundary_ts = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+        boundary_ts = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(
             conn, status="investigating",
             title="Borderline finding",
@@ -756,7 +756,7 @@ class TestCheckStaleFindings:
         assert len(result) == 1
 
     def test_multiple_stale_findings_all_returned(self, conn):
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        stale_ts = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(3):
             _insert_finding(
                 conn, status="investigating",
@@ -768,7 +768,7 @@ class TestCheckStaleFindings:
         assert len(result) == 3
 
     def test_returns_finding_dicts_with_expected_keys(self, conn):
-        stale_ts = (datetime.now(timezone.utc) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
+        stale_ts = (datetime.now(UTC) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_finding(
             conn, status="investigating",
             title="Key check finding",
@@ -798,7 +798,7 @@ class TestCheckRegression:
 
     def test_resolved_with_no_recurrence_returns_empty(self, conn):
         """A resolved finding with no new investigating match should not trigger."""
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
         fid = _insert_finding(
             conn,
             title="Fixed bug",
@@ -815,8 +815,8 @@ class TestCheckRegression:
 
     def test_regression_detected_when_same_issue_reappears(self, conn):
         """Resolved finding + new investigating finding with matching dimension+title prefix → regression."""
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = (datetime.now(UTC) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,
@@ -848,8 +848,8 @@ class TestCheckRegression:
 
     def test_regression_reopens_resolved_finding(self, conn):
         """When regression is detected, the resolved finding's status is set to investigating."""
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = (datetime.now(UTC) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,
@@ -878,8 +878,8 @@ class TestCheckRegression:
         assert row["status"] == "investigating"
 
     def test_regression_appends_note_to_resolution_notes(self, conn):
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = (datetime.now(UTC) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,
@@ -911,8 +911,8 @@ class TestCheckRegression:
 
     def test_old_resolved_finding_outside_90_days_ignored(self, conn):
         """Resolved findings older than 90 days are not checked for regression."""
-        old_ts = (datetime.now(timezone.utc) - timedelta(days=95)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        old_ts = (datetime.now(UTC) - timedelta(days=95)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,
@@ -940,8 +940,8 @@ class TestCheckRegression:
 
     def test_resolved_finding_without_metric_name_ignored(self, conn):
         """Findings with no metric_name are excluded from regression detection."""
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,
@@ -968,8 +968,8 @@ class TestCheckRegression:
         assert result == []
 
     def test_regression_finding_dict_has_expected_keys(self, conn):
-        resolved_ts = (datetime.now(timezone.utc) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
-        recent_ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        resolved_ts = (datetime.now(UTC) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
+        recent_ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(
             conn,

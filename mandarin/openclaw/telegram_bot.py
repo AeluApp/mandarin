@@ -30,7 +30,7 @@ except ImportError:
 try:
     from ..settings import OPENCLAW_TELEGRAM_TOKEN
 except (ImportError, AttributeError):
-    OPENCLAW_TELEGRAM_TOKEN = os.environ.get("OPENCLAW_TELEGRAM_TOKEN", "")
+    OPENCLAW_TELEGRAM_TOKEN = ""
 
 from . import commands, security, llm_handler
 
@@ -270,7 +270,6 @@ async def handle_voice(update: Update, context: Any) -> None:
         )
         return
 
-    import os
     import tempfile
 
     conn = _get_conn()

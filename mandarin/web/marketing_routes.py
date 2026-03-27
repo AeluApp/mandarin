@@ -747,8 +747,9 @@ def register_marketing_routes(app):
 
         try:
             import resend
-            resend.api_key = os.environ.get("RESEND_API_KEY", "")
-            audience_id = os.environ.get("RESEND_AUDIENCE_ID", "")
+            from ..settings import RESEND_API_KEY, RESEND_AUDIENCE_ID
+            resend.api_key = RESEND_API_KEY
+            audience_id = RESEND_AUDIENCE_ID
 
             if not resend.api_key:
                 # Fallback: store in DB for later sync

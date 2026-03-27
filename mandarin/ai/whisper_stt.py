@@ -89,7 +89,8 @@ def is_whisper_available() -> bool:
     if _find_whisper_cpp():
         return True
     # Check OpenAI API key
-    if os.environ.get("OPENAI_API_KEY"):
+    from ..settings import OPENAI_API_KEY
+    if OPENAI_API_KEY:
         return True
     # Check local whisper package
     try:
@@ -261,7 +262,8 @@ def _try_openai_whisper(
     audio_path: str, language: str, task: str,
 ) -> TranscriptResult | None:
     """Try transcription via OpenAI Whisper API."""
-    api_key = os.environ.get("OPENAI_API_KEY")
+    from ..settings import OPENAI_API_KEY
+    api_key = OPENAI_API_KEY
     if not api_key:
         return None
 

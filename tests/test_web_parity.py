@@ -7,7 +7,7 @@ Tests verify:
 """
 
 import sqlite3
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone, UTC
 
 from mandarin.web.middleware import _compute_streak
 
@@ -16,7 +16,7 @@ from mandarin.web.middleware import _compute_streak
 
 def _utc_today():
     """Return today's date in UTC (matching _compute_streak's internal clock)."""
-    return datetime.now(timezone.utc).date()
+    return datetime.now(UTC).date()
 
 
 def _make_streak_db():

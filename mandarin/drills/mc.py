@@ -151,10 +151,8 @@ def generate_mc_options(conn, correct_item: dict,
         confusables = _CONFUSABLE_PAIRS.get(correct_val, [])
         if confusables:
             placeholders = ",".join("?" * len(confusables))
-            conf_rows = conn.execute(
-                f"SELECT DISTINCT hanzi FROM content_item WHERE hanzi IN ({placeholders}) AND id != ? AND review_status = 'approved'",
-                (*confusables, item_id),
-            ).fetchall()
+            sql = f"SELECT DISTINCT hanzi FROM content_item WHERE hanzi IN ({placeholders}) AND id != ? AND review_status = 'approved'"
+            conf_rows = conn.execute(sql, (*confusables, item_id)).fetchall()
             for r in conf_rows:
                 if r[0] and r[0] != correct_val and len(rows) < n_options - 1:
                     rows.append(r)
@@ -164,7 +162,7 @@ def generate_mc_options(conn, correct_item: dict,
     if hsk and field in ("english", "hanzi"):
         correct_pinyin = (correct_item.get("pinyin") or "")[:2].lower()
         if correct_pinyin:
-            rows = conn.execute(f"""
+            sql = f"""
                 SELECT DISTINCT ci.{field} FROM content_item ci
                 LEFT JOIN progress p ON ci.id = p.content_item_id
                 WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{field} != ? AND ci.{field} != ''
@@ -173,7 +171,8 @@ def generate_mc_options(conn, correct_item: dict,
                   AND LENGTH(ci.{field}) BETWEEN ? AND ?
                   AND LOWER(SUBSTR(ci.pinyin, 1, 2)) = ?
                 ORDER BY RANDOM() LIMIT ?
-            """, (item_id, hsk, correct_val,
+            """
+            rows = conn.execute(sql, (item_id, hsk, correct_val,
                                    min_len, max_len, correct_pinyin,
                                    n_options - 1)).fetchall()
             if rows:
@@ -182,7 +181,7 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 1 (same HSK): Same HSK level, exclude mastered_strong items
     if len(rows) < n_options - 1 and hsk:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute(f"""
+        sql = f"""
             SELECT DISTINCT ci.{field} FROM content_item ci
             LEFT JOIN progress p ON ci.id = p.content_item_id
             WHERE ci.id != ? AND ci.hsk_level = ? AND ci.{field} != ? AND ci.{field} != ''
@@ -190,7 +189,8 @@ def generate_mc_options(conn, correct_item: dict,
               AND (p.streak_correct IS NULL OR p.streak_correct < 5)
               AND LENGTH(ci.{field}) BETWEEN ? AND ?
             ORDER BY RANDOM() LIMIT ?
-        """, (item_id, hsk, correct_val,
+        """
+        more = conn.execute(sql, (item_id, hsk, correct_val,
                                min_len, max_len, n_options - 1)).fetchall()
         for r in more:
             if r[0] not in existing_vals and len(rows) < n_options - 1:
@@ -200,14 +200,15 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 2 (nearby HSK): Nearby HSK levels
     if len(rows) < n_options - 1 and hsk:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute(f"""
+        sql = f"""
             SELECT DISTINCT ci.{field} FROM content_item ci
             WHERE ci.id != ? AND ci.hsk_level BETWEEN ? AND ?
               AND ci.{field} != ? AND ci.{field} != ''
               AND ci.review_status = 'approved'
               AND LENGTH(ci.{field}) BETWEEN ? AND ?
             ORDER BY RANDOM() LIMIT ?
-        """, (item_id, max(1, hsk - 1), hsk + 1, correct_val,
+        """
+        more = conn.execute(sql, (item_id, max(1, hsk - 1), hsk + 1, correct_val,
                                min_len, max_len,
                                (n_options - 1 - len(rows)) * 2)).fetchall()
         for r in more:
@@ -218,12 +219,13 @@ def generate_mc_options(conn, correct_item: dict,
     # Tier 3 (fallback): Any items (relax length constraint)
     if len(rows) < n_options - 1:
         existing_vals = {r[0] for r in rows}
-        more = conn.execute(f"""
+        sql = f"""
             SELECT DISTINCT {field} FROM content_item
             WHERE id != ? AND {field} != ? AND {field} != ''
               AND review_status = 'approved'
             ORDER BY RANDOM() LIMIT ?
-        """, (item_id, correct_val,
+        """
+        more = conn.execute(sql, (item_id, correct_val,
                                (n_options - 1 - len(rows)) * 2)).fetchall()
         for r in more:
             if r[0] not in existing_vals and len(rows) < n_options - 1:
@@ -277,10 +279,8 @@ def _lookup_item_by_field(conn, field: str, value: str):
         return None
     if not value or not value.strip():
         return None
-    row = conn.execute(
-        f"SELECT hanzi, pinyin, english FROM content_item WHERE {field} = ? AND review_status = 'approved' LIMIT 1",
-        (value,),
-    ).fetchone()
+    sql = f"SELECT hanzi, pinyin, english FROM content_item WHERE {field} = ? AND review_status = 'approved' LIMIT 1"
+    row = conn.execute(sql, (value,)).fetchone()
     return dict(row) if row else None
 
 

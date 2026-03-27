@@ -364,9 +364,10 @@ def _restart_via_fly_api() -> dict:
     Requires FLY_API_TOKEN, FLY_APP_NAME, and FLY_MACHINE_ID environment vars.
     These are auto-set by Fly.io in the runtime environment.
     """
-    fly_token = os.environ.get("FLY_API_TOKEN", "")
-    fly_app = os.environ.get("FLY_APP_NAME", "")
-    fly_machine = os.environ.get("FLY_MACHINE_ID", "")
+    from ..settings import FLY_API_TOKEN, FLY_APP_NAME, FLY_MACHINE_ID
+    fly_token = FLY_API_TOKEN
+    fly_app = FLY_APP_NAME
+    fly_machine = FLY_MACHINE_ID
 
     if not all([fly_token, fly_app, fly_machine]):
         return {

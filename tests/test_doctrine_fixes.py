@@ -8,7 +8,7 @@
 import json
 import sqlite3
 import tempfile
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone, UTC
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
@@ -380,7 +380,7 @@ class TestMetricsSchedulerFeedback:
             """)
 
             # Insert session logs — this week decent, last week better (declining)
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             this_week = now.isoformat()
             last_week = (now - timedelta(days=8)).isoformat()
 

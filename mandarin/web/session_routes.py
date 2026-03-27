@@ -262,26 +262,28 @@ def _handle_ws_session(ws, planner_fn, label):
             if cjk_chars:
                 placeholders = ",".join("?" for _ in cjk_chars)
                 # Check which characters the user has seen/mastered
-                known_rows = conn.execute(f"""
+                sql = f"""
                     SELECT ci.hanzi, p.mastery_stage, ci.pinyin, ci.english
                     FROM progress p
                     JOIN content_item ci ON p.content_item_id = ci.id
                     WHERE p.user_id = ?
                       AND ci.hanzi IN ({placeholders})
                       AND p.times_correct > 0
-                """, [user_id] + cjk_chars).fetchall()
+                """
+                known_rows = conn.execute(sql, [user_id] + cjk_chars).fetchall()
                 known_chars = {r["hanzi"] for r in known_rows}
 
                 # For unknown chars, look up pinyin + english from content_item
                 unknown = [c for c in cjk_chars if c not in known_chars]
                 if unknown:
                     unk_placeholders = ",".join("?" for _ in unknown)
-                    lookup_rows = conn.execute(f"""
+                    sql = f"""
                         SELECT hanzi, pinyin, english
                         FROM content_item
                         WHERE hanzi IN ({unk_placeholders})
                         LIMIT 100
-                    """, unknown).fetchall()
+                    """
+                    lookup_rows = conn.execute(sql, unknown).fetchall()
                     for r in lookup_rows:
                         char_scaffold[r["hanzi"]] = {
                             "pinyin": r["pinyin"] or "",
@@ -350,26 +352,28 @@ def _handle_ws_session(ws, planner_fn, label):
         if cjk_chars:
             placeholders = ",".join("?" for _ in cjk_chars)
             try:
-                known_rows = conn.execute(f"""
+                sql = f"""
                     SELECT ci.hanzi, ci.pinyin, ci.english
                     FROM progress p
                     JOIN content_item ci ON p.content_item_id = ci.id
                     WHERE p.user_id = ?
                       AND ci.hanzi IN ({placeholders})
                       AND p.times_correct > 0
-                """, [user_id] + cjk_chars).fetchall()
+                """
+                known_rows = conn.execute(sql, [user_id] + cjk_chars).fetchall()
                 known_set = {r["hanzi"] for r in known_rows}
 
                 # Unknown chars: look up pinyin + english
                 unknown = [c for c in cjk_chars if c not in known_set]
                 if unknown:
                     unk_ph = ",".join("?" for _ in unknown)
-                    lookup_rows = conn.execute(f"""
+                    sql = f"""
                         SELECT hanzi, pinyin, english
                         FROM content_item
                         WHERE hanzi IN ({unk_ph})
                         LIMIT 100
-                    """, unknown).fetchall()
+                    """
+                    lookup_rows = conn.execute(sql, unknown).fetchall()
                     for r in lookup_rows:
                         scaffold[r["hanzi"]] = {
                             "pinyin": r["pinyin"] or "",

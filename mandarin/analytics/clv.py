@@ -42,7 +42,7 @@ def compute_cohort_retention(conn, cohort_month: str = None) -> list[dict]:
             for day in [1, 7, 14, 30, 60, 90]:
                 try:
                     placeholders = ",".join("?" * len(user_ids))
-                    active = conn.execute(f"""
+                    sql = f"""
                         SELECT COUNT(DISTINCT user_id) as cnt
                         FROM session_log
                         WHERE user_id IN ({placeholders})
@@ -54,7 +54,8 @@ def compute_cohort_retention(conn, cohort_month: str = None) -> list[dict]:
                             (SELECT created_at FROM user WHERE id = user_id),
                             '+{day + 1} days'
                         )
-                    """, user_ids).fetchone()
+                    """
+                    active = conn.execute(sql, user_ids).fetchone()
                     retention[f"day_{day}"] = round(active["cnt"] / n * 100, 1) if active else 0.0
                 except Exception:
                     retention[f"day_{day}"] = 0.0

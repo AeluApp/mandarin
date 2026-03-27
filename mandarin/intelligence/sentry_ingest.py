@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import re
 import sqlite3
 from datetime import datetime, timezone
@@ -33,9 +32,9 @@ logger = logging.getLogger(__name__)
 
 # ── Configuration ─────────────────────────────────────────────────────────
 
-SENTRY_AUTH_TOKEN = os.environ.get("SENTRY_AUTH_TOKEN", "")
-SENTRY_ORG = os.environ.get("SENTRY_ORG", "")
-SENTRY_PROJECT = os.environ.get("SENTRY_PROJECT", "")
+from ..settings import (
+    SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT,
+)
 
 _SENTRY_API_BASE = "https://sentry.io/api/0"
 _REQUEST_TIMEOUT = 30  # seconds

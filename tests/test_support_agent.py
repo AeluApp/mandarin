@@ -2,7 +2,7 @@
 
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import MagicMock, patch
 
 from mandarin.openclaw.support_agent import (
@@ -57,7 +57,7 @@ def _make_conn():
 
 def _seed_user(conn, user_id=1, email="test@aelu.app", tier="free",
                streak=0, days_ago=10):
-    created = (datetime.now(timezone.utc) - timedelta(days=days_ago)).isoformat()
+    created = (datetime.now(UTC) - timedelta(days=days_ago)).isoformat()
     conn.execute(
         "INSERT INTO user (id, email, subscription_tier, subscription_status, streak_days, created_at) "
         "VALUES (?, ?, ?, 'active', ?, ?)",
@@ -109,7 +109,7 @@ class TestSupportContextFromUser(unittest.TestCase):
     def test_session_count(self):
         conn = _make_conn()
         _seed_user(conn, 1)
-        now_str = datetime.now(timezone.utc).isoformat()
+        now_str = datetime.now(UTC).isoformat()
         for _ in range(3):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, ?)", (now_str,))
         conn.commit()
@@ -127,7 +127,7 @@ class TestSupportContextFromUser(unittest.TestCase):
     def test_crash_count(self):
         conn = _make_conn()
         _seed_user(conn, 1)
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
         conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
         conn.commit()
@@ -260,7 +260,7 @@ class TestSupportAgentHandleRequest(unittest.TestCase):
     def test_crash_with_many_recent_crashes_escalates(self):
         conn = _make_conn()
         _seed_user(conn, 1)
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         for _ in range(5):
             conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
         conn.commit()
@@ -273,7 +273,7 @@ class TestSuggestedActions(unittest.TestCase):
         agent = SupportAgent()
         conn = _make_conn()
         _seed_user(conn, 1)
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
         conn.commit()
         resp = agent.handle_request("The app keeps crashing", user_id=1, conn=conn)

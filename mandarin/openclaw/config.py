@@ -1,10 +1,10 @@
 """OpenClaw configuration — channel config, timing, agent settings."""
 
-import os
+from ..settings import OPENCLAW_SIGNAL_NUMBER, OPENCLAW_TELEGRAM_TOKEN
 
 # Channel configuration
-SIGNAL_NUMBER = os.environ.get("OPENCLAW_SIGNAL_NUMBER", "")
-TELEGRAM_BOT_TOKEN = os.environ.get("OPENCLAW_TELEGRAM_TOKEN", "")
+SIGNAL_NUMBER = OPENCLAW_SIGNAL_NUMBER
+TELEGRAM_BOT_TOKEN = OPENCLAW_TELEGRAM_TOKEN
 
 # Reminder schedule (hours in user's timezone)
 REMINDER_HOURS = [8, 12, 18]

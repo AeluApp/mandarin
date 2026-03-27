@@ -126,7 +126,7 @@ class TestRebuildIfStale(unittest.TestCase):
     def test_no_index_triggers_build(self):
         with patch("mandarin.ai.rag_evaluation.build_faiss_index") as mock_build:
             mock_build.return_value = {"status": "completed"}
-            result = rebuild_index_if_stale(self.conn)
+            rebuild_index_if_stale(self.conn)
             mock_build.assert_called_once()
 
 

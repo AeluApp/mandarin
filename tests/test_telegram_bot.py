@@ -279,7 +279,7 @@ class TestExecuteIntent(unittest.TestCase):
     def test_reject_dispatches_with_id_and_reason(self, mock_cmds):
         from mandarin.openclaw.llm_handler import IntentResult
         mock_cmds.cmd_reject.return_value = "Rejected 7"
-        result = self._fn(IntentResult(intent="reject", args={"item_id": 7, "reason": "bad"}))
+        self._fn(IntentResult(intent="reject", args={"item_id": 7, "reason": "bad"}))
         mock_cmds.cmd_reject.assert_called_once_with(item_id=7, reason="bad")
 
     def test_help_returns_commands_list(self):

@@ -46,13 +46,13 @@ def _make_chat_db():
 
 
 class TestGetConfig(unittest.TestCase):
-    @patch.dict("os.environ", {"OPENCLAW_IMESSAGE_OWNER_ID": "+15551234567"})
+    @patch("mandarin.settings.OPENCLAW_IMESSAGE_OWNER_ID", "+15551234567")
     def test_reads_env_var(self):
         from mandarin.openclaw.imessage_bot import _get_config
         cfg = _get_config()
         self.assertEqual(cfg["owner_id"], "+15551234567")
 
-    @patch.dict("os.environ", {}, clear=True)
+    @patch("mandarin.settings.OPENCLAW_IMESSAGE_OWNER_ID", "")
     def test_defaults_when_unset(self):
         from mandarin.openclaw.imessage_bot import _get_config
         cfg = _get_config()

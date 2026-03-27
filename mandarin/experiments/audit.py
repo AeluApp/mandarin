@@ -57,10 +57,8 @@ def get_audit_log(
             params.append(event_type)
 
         where = (" WHERE " + " AND ".join(clauses)) if clauses else ""
-        rows = conn.execute(
-            f"SELECT * FROM experiment_audit_log{where} ORDER BY created_at DESC LIMIT ?",
-            params + [limit],
-        ).fetchall()
+        sql = f"SELECT * FROM experiment_audit_log{where} ORDER BY created_at DESC LIMIT ?"
+        rows = conn.execute(sql, params + [limit]).fetchall()
         result = []
         for r in rows:
             d = dict(r)

@@ -362,14 +362,15 @@ def api_reading_passage(passage_id):
             if cjk_chars:
                 with db.connection() as conn:
                     placeholders = ",".join("?" for _ in cjk_chars)
-                    rows = conn.execute(f"""
+                    sql = f"""
                         SELECT ci.hanzi, ci.pinyin,
                                COALESCE(p.mastery_stage, 'unseen') as stage
                         FROM content_item ci
                         LEFT JOIN progress p ON ci.id = p.content_item_id
                             AND p.modality = 'reading' AND p.user_id = ?
                         WHERE ci.hanzi IN ({placeholders})
-                    """, [user_id] + cjk_chars).fetchall()
+                    """
+                    rows = conn.execute(sql, [user_id] + cjk_chars).fetchall()
                     for r in rows:
                         char_mastery[r["hanzi"]] = {
                             "stage": r["stage"],

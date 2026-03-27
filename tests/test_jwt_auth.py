@@ -7,7 +7,7 @@ jwt = pytest.importorskip("jwt")
 
 import hashlib
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from unittest.mock import patch
 
 from mandarin.jwt_auth import (
@@ -53,7 +53,7 @@ class TestDecodeAccessToken:
 
     def test_expired_token_returns_none(self, test_db):
         # Back-date exp to 2 seconds ago.
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         payload = {
             "sub": "1",
             "iat": now - timedelta(seconds=10),
@@ -72,7 +72,7 @@ class TestDecodeAccessToken:
         assert result is None
 
     def test_wrong_secret_returns_none(self, test_db):
-        token = jwt.encode({"sub": "1", "exp": datetime.now(timezone.utc) + timedelta(hours=1)},
+        token = jwt.encode({"sub": "1", "exp": datetime.now(UTC) + timedelta(hours=1)},
                            "wrong-secret", algorithm="HS256")
         result = decode_access_token(token)
         assert result is None
@@ -106,7 +106,7 @@ class TestIsTokenExpired:
         assert is_token_expired(token) is False
 
     def test_expired_token_is_expired(self, test_db):
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         payload = {
             "sub": "1",
             "iat": now - timedelta(seconds=10),
@@ -165,7 +165,7 @@ class TestValidateRefreshToken:
         conn, _ = test_db
         raw, token_hash = create_refresh_token()
         # Write token with an expiry in the past.
-        past = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             "UPDATE user SET refresh_token_hash = ?, refresh_token_expires = ? WHERE id = 1",
             (token_hash, past),

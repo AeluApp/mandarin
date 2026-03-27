@@ -1,6 +1,10 @@
 """Tests for UI improvements: menu hierarchy, status restructure, confirmation echoes, web state, reliability."""
 
-import sys, os, tempfile, queue, threading
+import sys
+import os
+import tempfile
+import queue
+import threading
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from pathlib import Path
@@ -53,7 +57,7 @@ def test_menu_has_grouped_sections():
     menu_mod._input = lambda p: "0"  # auto-quit
 
     try:
-        result = show_menu(expanded=True)
+        show_menu(expanded=True)
     finally:
         menu_mod.console = old_console
         menu_mod._input = old_input
@@ -178,7 +182,7 @@ def test_status_primary_signal_progress():
 def test_finalize_early_exit_message():
     """Early exit with 0 items should say 'Session saved. Continuing.'"""
     conn = _fresh_db()
-    ids = _add_items(conn, 5)
+    _add_items(conn, 5)
     session_id = start_session(conn)
 
     from mandarin.runner import _finalize, SessionState

@@ -123,7 +123,7 @@ def test_full_support_shows_pinyin_english():
     def input_fn(prompt):
         return "1"  # Always pick first option
 
-    result = run_dialogue_drill(scenario, show_fn, input_fn, support_level="full_support")
+    run_dialogue_drill(scenario, show_fn, input_fn, support_level="full_support")
 
     # Find the option lines (numbered 1. or 2.)
     option_lines = [l for l in output if l.strip().startswith(("1.", "2."))]
@@ -148,7 +148,7 @@ def test_hanzi_only_hides_pinyin_english():
 
     # Patch shuffle to preserve option order
     with patch("mandarin.conversation.random.shuffle"):
-        result = run_dialogue_drill(scenario, show_fn, input_fn, support_level="hanzi_only")
+        run_dialogue_drill(scenario, show_fn, input_fn, support_level="hanzi_only")
 
     # Find the option lines
     option_lines = [l for l in output if l.strip().startswith("1.")]
@@ -214,7 +214,7 @@ def test_wrong_answer_shows_better_option():
 
     # Patch shuffle to preserve option order (option 2 = low-score 嗯。)
     with patch("mandarin.conversation.random.shuffle"):
-        result = run_dialogue_drill(scenario, show_fn, input_fn, support_level="full_support")
+        run_dialogue_drill(scenario, show_fn, input_fn, support_level="full_support")
 
     # Should see "Better:" line
     better_lines = [l for l in output if "Better:" in l]

@@ -19,7 +19,7 @@ Covers:
 import json
 import sqlite3
 import tempfile
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from pathlib import Path
 
 import pytest
@@ -51,7 +51,7 @@ def conn():
 @pytest.fixture
 def populated_conn(conn):
     """DB with sample review data for counter-metric testing."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Add content items
     for i in range(1, 21):
@@ -740,7 +740,7 @@ class TestTrendDriftDetection:
     def _create_snapshots(self, conn, metric_path, values, json_col="integrity_json"):
         """Create a series of snapshots with declining values."""
         from mandarin.counter_metrics import save_snapshot
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for i, val in enumerate(values):
             # Older snapshots first
             ts = (now - timedelta(hours=(len(values) - i) * 4)).isoformat()
@@ -831,7 +831,7 @@ class TestTrendDriftDetection:
 class TestSchedulerAdjustmentWiring:
     def test_pause_new_items_adjustment(self, populated_conn):
         """Lifecycle event 'pause_new_items' should zero out new_budget."""
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         populated_conn.execute("""
             INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
             VALUES (1, 'counter_metric_scheduler_adjust', ?, ?)
@@ -851,7 +851,7 @@ class TestSchedulerAdjustmentWiring:
         assert any("pause_new_items" in a for a in adjustments)
 
     def test_reduce_new_item_budget_adjustment(self, populated_conn):
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         populated_conn.execute("""
             INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
             VALUES (1, 'counter_metric_scheduler_adjust', ?, ?)
@@ -863,11 +863,11 @@ class TestSchedulerAdjustmentWiring:
 
         from mandarin.scheduler import _apply_counter_metric_adjustments
         plan = {"new_budget": 10, "target_items": 12, "weights": {"reading": 0.5, "ime": 0.3, "listening": 0.2}}
-        adjustments = _apply_counter_metric_adjustments(populated_conn, 1, plan)
+        _apply_counter_metric_adjustments(populated_conn, 1, plan)
         assert plan["new_budget"] == 5
 
     def test_shorten_sessions_adjustment(self, populated_conn):
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         populated_conn.execute("""
             INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
             VALUES (1, 'counter_metric_scheduler_adjust', ?, ?)
@@ -887,7 +887,7 @@ class TestSchedulerAdjustmentWiring:
         assert plan["target_items"] == 9  # 12 * 0.75
 
     def test_boost_production_drills_flag(self, populated_conn):
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         populated_conn.execute("""
             INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
             VALUES (1, 'counter_metric_scheduler_adjust', ?, ?)
@@ -904,7 +904,7 @@ class TestSchedulerAdjustmentWiring:
 
     def test_deduplicates_actions(self, populated_conn):
         """Only the most recent action of each type should apply."""
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         for budget_mult in [0.5, 0.3]:
             populated_conn.execute("""
                 INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
@@ -920,14 +920,14 @@ class TestSchedulerAdjustmentWiring:
         _apply_counter_metric_adjustments(populated_conn, 1, plan)
         # Only the most recent (first in DESC order) should apply
         # So either 5 or 3, depending on which was newest — but NOT both
-        adjustments = [a for a in plan.get("_metrics_adjustments", [])
+        [a for a in plan.get("_metrics_adjustments", [])
                        if "reduce_new_item_budget" in a] if "_metrics_adjustments" in plan else []
         # The new_budget should have been multiplied only once
         assert plan["new_budget"] in (3, 5)
 
     def test_ignores_old_adjustments(self, populated_conn):
         """Adjustments older than 24 hours should be ignored."""
-        old_time = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
+        old_time = (datetime.now(UTC) - timedelta(hours=48)).isoformat()
         populated_conn.execute("""
             INSERT INTO lifecycle_event (user_id, event_type, metadata, created_at)
             VALUES (1, 'counter_metric_scheduler_adjust', ?, ?)

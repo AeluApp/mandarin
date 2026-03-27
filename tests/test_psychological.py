@@ -1,6 +1,8 @@
 """Tests for psychological features: milestones, growth trajectory, session narrative."""
 
-import sys, os, tempfile
+import sys
+import os
+import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from pathlib import Path
@@ -240,12 +242,12 @@ def test_new_items_available():
 def test_early_stage_framing():
     """Session opening should mention foundation when sessions < 5."""
     conn = _fresh_db()
-    ids = _add_items(conn, 12)
+    _add_items(conn, 12)
     conn.execute("UPDATE learner_profile SET total_sessions = 2 WHERE id = 1")
     conn.commit()
 
     from mandarin.scheduler import plan_standard_session
-    plan = plan_standard_session(conn)
+    plan_standard_session(conn)
 
     output_lines = []
     def show_fn(text, end="\n"):
@@ -384,7 +386,7 @@ def test_dialogue_empty_options_shows_message():
     }
     scenario = {"id": 1, "title": "test", "tree_json": json.dumps(tree)}
     output = []
-    result = run_dialogue_drill(scenario, lambda t, end="\n": output.append(t), lambda p: "Q")
+    run_dialogue_drill(scenario, lambda t, end="\n": output.append(t), lambda p: "Q")
     full = "\n".join(output)
     assert "no response options" in full, f"expected empty options message in:\n{full}"
 

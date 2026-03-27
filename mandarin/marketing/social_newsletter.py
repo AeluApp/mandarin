@@ -11,7 +11,6 @@ Exports:
 from __future__ import annotations
 
 import logging
-import os
 from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
@@ -28,10 +27,8 @@ class PostResult:
 
 def is_newsletter_configured() -> bool:
     """Check if newsletter sending is configured (Resend API key + from email)."""
-    return bool(
-        os.environ.get("RESEND_API_KEY")
-        and os.environ.get("FROM_EMAIL")
-    )
+    from ..settings import RESEND_API_KEY, FROM_EMAIL
+    return bool(RESEND_API_KEY and FROM_EMAIL)
 
 
 def send_newsletter(
@@ -50,8 +47,9 @@ def send_newsletter(
     try:
         import resend
 
-        resend.api_key = os.environ["RESEND_API_KEY"]
-        from_email = os.environ["FROM_EMAIL"]
+        from ..settings import RESEND_API_KEY, FROM_EMAIL
+        resend.api_key = RESEND_API_KEY
+        from_email = FROM_EMAIL
 
         # Add UTM tracking to links if campaign is set
         if utm_campaign:
@@ -64,7 +62,8 @@ def send_newsletter(
             )
 
         # Get newsletter audience ID or use broadcast
-        audience_id = os.environ.get("RESEND_AUDIENCE_ID", "")
+        from ..settings import RESEND_AUDIENCE_ID
+        audience_id = RESEND_AUDIENCE_ID
 
         if audience_id:
             # Broadcast to audience
@@ -77,7 +76,8 @@ def send_newsletter(
             msg_id = resp.get("id", "") if isinstance(resp, dict) else str(resp)
         else:
             # Fallback: send to a specific list email if no audience configured
-            newsletter_to = os.environ.get("NEWSLETTER_TO", "")
+            from ..settings import NEWSLETTER_TO
+            newsletter_to = NEWSLETTER_TO
             if not newsletter_to:
                 return PostResult(success=False, error="No RESEND_AUDIENCE_ID or NEWSLETTER_TO configured")
 

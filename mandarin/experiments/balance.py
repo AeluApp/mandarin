@@ -344,11 +344,9 @@ def _query_session_count(conn: sqlite3.Connection, user_ids: list[int]) -> list[
     if not user_ids:
         return []
     ph = ",".join("?" * len(user_ids))
-    rows = conn.execute(
-        f"""SELECT user_id, COUNT(*) as cnt FROM session_log
-            WHERE user_id IN ({ph}) GROUP BY user_id""",
-        user_ids,
-    ).fetchall()
+    sql = f"""SELECT user_id, COUNT(*) as cnt FROM session_log
+            WHERE user_id IN ({ph}) GROUP BY user_id"""
+    rows = conn.execute(sql, user_ids).fetchall()
     return [float(r["cnt"]) for r in rows]
 
 
@@ -357,14 +355,12 @@ def _query_avg_accuracy(conn: sqlite3.Connection, user_ids: list[int]) -> list[f
         return []
     ph = ",".join("?" * len(user_ids))
     try:
-        rows = conn.execute(
-            f"""SELECT user_id,
+        sql = f"""SELECT user_id,
                     SUM(items_correct) * 1.0 / NULLIF(SUM(items_completed), 0) as acc
                 FROM session_log
                 WHERE user_id IN ({ph})
-                GROUP BY user_id""",
-            user_ids,
-        ).fetchall()
+                GROUP BY user_id"""
+        rows = conn.execute(sql, user_ids).fetchall()
         return [float(r["acc"]) for r in rows if r["acc"] is not None]
     except sqlite3.OperationalError:
         return []
@@ -375,10 +371,8 @@ def _query_tenure_days(conn: sqlite3.Connection, user_ids: list[int]) -> list[fl
         return []
     ph = ",".join("?" * len(user_ids))
     try:
-        rows = conn.execute(
-            f"SELECT julianday('now') - julianday(created_at) as days FROM user WHERE id IN ({ph})",
-            user_ids,
-        ).fetchall()
+        sql = f"SELECT julianday('now') - julianday(created_at) as days FROM user WHERE id IN ({ph})"
+        rows = conn.execute(sql, user_ids).fetchall()
         return [float(r["days"]) for r in rows if r["days"] is not None]
     except sqlite3.OperationalError:
         return []

@@ -1,7 +1,7 @@
 """Tests for mandarin.data_retention — get_policies, purge_expired, _trim_crash_log."""
 
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 import pytest
@@ -59,7 +59,7 @@ def conn():
 
 def _days_ago(n: int) -> str:
     """Return an ISO timestamp n days in the past."""
-    return (datetime.now(timezone.utc) - timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+    return (datetime.now(UTC) - timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def _seed_policy(conn, table_name, retention_days, desc="test"):

@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-import os
 import re
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -201,7 +200,8 @@ def get_actions_for_date(
     If launch_date is not set, reads MARKETING_LAUNCH_DATE env var.
     """
     if launch_date is None:
-        env_date = os.environ.get("MARKETING_LAUNCH_DATE", "")
+        from ..settings import MARKETING_LAUNCH_DATE
+        env_date = MARKETING_LAUNCH_DATE
         if not env_date:
             logger.debug("MARKETING_LAUNCH_DATE not set, cannot map calendar to dates")
             return []

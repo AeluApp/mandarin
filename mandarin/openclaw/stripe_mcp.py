@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -29,10 +28,10 @@ def _get_stripe():
     """Import and configure stripe. Returns None if unavailable."""
     try:
         import stripe
-        key = os.environ.get("STRIPE_SECRET_KEY", "")
-        if not key:
+        from ..settings import STRIPE_SECRET_KEY
+        if not STRIPE_SECRET_KEY:
             return None
-        stripe.api_key = key
+        stripe.api_key = STRIPE_SECRET_KEY
         return stripe
     except ImportError:
         return None

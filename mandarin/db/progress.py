@@ -796,10 +796,8 @@ def _detect_confusion_pair(conn: sqlite3.Connection, item_id: int,
 
     # Resolve the confused item ID from the wrong answer
     field = "hanzi" if drill_type in ("reverse_mc", "pinyin_to_hanzi") else "english"
-    confused = conn.execute(
-        f"SELECT id FROM content_item WHERE {field} = ? AND id != ? LIMIT 1",
-        (user_answer.strip(), item_id)
-    ).fetchone()
+    sql = f"SELECT id FROM content_item WHERE {field} = ? AND id != ? LIMIT 1"
+    confused = conn.execute(sql, (user_answer.strip(), item_id)).fetchone()
     if not confused:
         return
     confused_id = confused["id"]

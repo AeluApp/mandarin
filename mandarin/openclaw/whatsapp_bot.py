@@ -12,7 +12,6 @@ Setup:
 """
 
 import logging
-import os
 from typing import Optional
 
 try:
@@ -29,11 +28,15 @@ WHATSAPP_API_URL = "https://graph.facebook.com/v21.0"
 
 def _get_config():
     """Read config at call time for testability."""
+    from ..settings import (
+        OPENCLAW_WHATSAPP_TOKEN, OPENCLAW_WHATSAPP_PHONE_ID,
+        OPENCLAW_WHATSAPP_VERIFY_TOKEN, OPENCLAW_WHATSAPP_OWNER_NUMBER,
+    )
     return {
-        "token": os.environ.get("OPENCLAW_WHATSAPP_TOKEN", ""),
-        "phone_id": os.environ.get("OPENCLAW_WHATSAPP_PHONE_ID", ""),
-        "verify_token": os.environ.get("OPENCLAW_WHATSAPP_VERIFY_TOKEN", ""),
-        "owner_number": os.environ.get("OPENCLAW_WHATSAPP_OWNER_NUMBER", ""),
+        "token": OPENCLAW_WHATSAPP_TOKEN,
+        "phone_id": OPENCLAW_WHATSAPP_PHONE_ID,
+        "verify_token": OPENCLAW_WHATSAPP_VERIFY_TOKEN,
+        "owner_number": OPENCLAW_WHATSAPP_OWNER_NUMBER,
     }
 
 

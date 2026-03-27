@@ -64,14 +64,14 @@ class TestStripeMCPImport(unittest.TestCase):
 
 class TestGetStripe(unittest.TestCase):
 
+    @patch("mandarin.settings.STRIPE_SECRET_KEY", "")
     def test_returns_none_without_key(self):
         from mandarin.openclaw.stripe_mcp import _get_stripe
-        with patch.dict("os.environ", {}, clear=True):
-            result = _get_stripe()
-            # Returns None if no STRIPE_SECRET_KEY set
-            # (may or may not have stripe package)
+        _get_stripe()
+        # Returns None if no STRIPE_SECRET_KEY set
+        # (may or may not have stripe package)
 
-    @patch.dict("os.environ", {"STRIPE_SECRET_KEY": ""})
+    @patch("mandarin.settings.STRIPE_SECRET_KEY", "")
     def test_returns_none_with_empty_key(self):
         from mandarin.openclaw.stripe_mcp import _get_stripe
         result = _get_stripe()

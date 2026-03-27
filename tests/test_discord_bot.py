@@ -60,14 +60,16 @@ def _make_message(author_id=12345, content="hello", is_dm=False):
 class TestGetConfig(unittest.TestCase):
     """Tests for _get_config."""
 
-    @patch.dict("os.environ", {"OPENCLAW_DISCORD_TOKEN": "tok123", "OPENCLAW_DISCORD_OWNER_ID": "999"})
+    @patch("mandarin.settings.OPENCLAW_DISCORD_TOKEN", "tok123")
+    @patch("mandarin.settings.OPENCLAW_DISCORD_OWNER_ID", "999")
     def test_reads_env_vars(self):
         from mandarin.openclaw.discord_bot import _get_config
         cfg = _get_config()
         self.assertEqual(cfg["token"], "tok123")
         self.assertEqual(cfg["owner_id"], 999)
 
-    @patch.dict("os.environ", {}, clear=True)
+    @patch("mandarin.settings.OPENCLAW_DISCORD_TOKEN", "")
+    @patch("mandarin.settings.OPENCLAW_DISCORD_OWNER_ID", "0")
     def test_defaults_when_unset(self):
         from mandarin.openclaw.discord_bot import _get_config
         # Clear any cached values by calling directly

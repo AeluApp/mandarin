@@ -11,7 +11,10 @@ Covers:
 - Session summary includes retention
 """
 
-import sys, os, tempfile, math
+import sys
+import os
+import tempfile
+import math
 from datetime import date, timedelta
 from pathlib import Path
 

@@ -1,6 +1,8 @@
 """Tests for teacher-grade features: listening rebalance, passive listen, speed surfacing, ambiguity comfort."""
 
-import sys, os, tempfile
+import sys
+import os
+import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from pathlib import Path

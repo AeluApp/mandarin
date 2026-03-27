@@ -266,7 +266,7 @@ def test_default_show_pinyin_for_new():
     'seen' in the scheduler. This should yield scaffold_level='full_pinyin'."""
     conn, path = _fresh_db()
     try:
-        ids = _seed_items(conn)
+        _seed_items(conn)
         _seed_session(conn)
 
         # Don't record any attempts -- items are brand new

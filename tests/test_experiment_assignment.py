@@ -137,7 +137,7 @@ class TestEligibility:
         users = _seed_users(exp_db, 2)
         _seed_sessions(exp_db, users[0], n=3)
 
-        exp_id_a = create_experiment(exp_db, "exp_a", "A", ["A1", "A2"])
+        create_experiment(exp_db, "exp_a", "A", ["A1", "A2"])
         start_experiment(exp_db, "exp_a")
         get_variant(exp_db, "exp_a", users[0], skip_eligibility=True)
 
@@ -491,7 +491,7 @@ class TestCUPED:
         theta = cov_xy / var_x
         mean_x = sum(x) / len(x)
 
-        y_adj = [yi - theta * (xi - mean_x) for xi, yi in zip(x, y)]
+        y_adj = [yi - theta * (xi - mean_x) for xi, yi in zip(x, y, strict=False)]
         adj_var = _var(y_adj)
 
         assert adj_var < raw_var, "CUPED should reduce variance"

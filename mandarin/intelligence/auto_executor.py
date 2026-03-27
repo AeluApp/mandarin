@@ -22,7 +22,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import re
 import shutil
 import sqlite3
@@ -40,7 +39,8 @@ logger = logging.getLogger(__name__)
 
 # ── Configuration ──────────────────────────────────────────────────────────
 
-EXECUTOR_ENABLED = os.environ.get("AUTO_FIX_ENABLED", "").lower() in ("true", "1", "yes")
+from ..settings import AUTO_FIX_ENABLED
+EXECUTOR_ENABLED = AUTO_FIX_ENABLED
 
 _MAX_FIXES_PER_CYCLE = 5
 _MAX_FILES_PER_FINDING = 3

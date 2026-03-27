@@ -8,7 +8,7 @@ stale detection, check_subordination, work order history.
 import json
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 
@@ -473,7 +473,7 @@ class TestStaleDetection(unittest.TestCase):
 
         # Backdate created_at to beyond 2x window
         window = wo.verification_window_days
-        old_date = (datetime.now(timezone.utc) - timedelta(days=window * 2 + 1)).strftime("%Y-%m-%d %H:%M:%S")
+        old_date = (datetime.now(UTC) - timedelta(days=window * 2 + 1)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("UPDATE pi_work_order SET created_at = ? WHERE id = ?", (old_date, wo.id))
         conn.commit()
 
@@ -491,7 +491,7 @@ class TestStaleDetection(unittest.TestCase):
                         title="Recent finding")
 
         from mandarin.intelligence.prescription import generate_work_order, check_stale_work_orders
-        wo = generate_work_order(conn, 1)
+        generate_work_order(conn, 1)
 
         stale_ids = check_stale_work_orders(conn)
         self.assertEqual(stale_ids, [])
@@ -511,7 +511,7 @@ class TestCheckSubordination(unittest.TestCase):
                                              title="UX issue")
 
         from mandarin.intelligence.prescription import generate_work_order, _check_subordination
-        wo = generate_work_order(conn, 1)
+        generate_work_order(conn, 1)
 
         warning = _check_subordination(conn, non_constraint_id)
         self.assertIsNotNone(warning)
@@ -525,7 +525,7 @@ class TestCheckSubordination(unittest.TestCase):
                                          title="Main constraint")
 
         from mandarin.intelligence.prescription import generate_work_order, _check_subordination
-        wo = generate_work_order(conn, 1)
+        generate_work_order(conn, 1)
 
         # The constraint finding itself should not be subordinated
         warning = _check_subordination(conn, constraint_id)

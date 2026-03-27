@@ -1,6 +1,6 @@
 """Tests for orphaned session cleanup and session outcome taxonomy."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 from mandarin.db.session import get_session_funnel, end_session
 
@@ -10,7 +10,7 @@ def test_orphaned_session_marked_interrupted(test_db):
     conn, _ = test_db
 
     # Insert an orphaned session (started 2 hours ago, never ended)
-    two_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
+    two_hours_ago = (datetime.now(UTC) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, session_type, items_planned, started_at,
                                  items_completed, items_correct)
@@ -40,7 +40,7 @@ def test_recent_session_not_cleaned_up(test_db):
     conn, _ = test_db
 
     # Insert a session started 10 minutes ago (still in progress)
-    ten_min_ago = (datetime.now(timezone.utc) - timedelta(minutes=10)).strftime("%Y-%m-%d %H:%M:%S")
+    ten_min_ago = (datetime.now(UTC) - timedelta(minutes=10)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, session_type, items_planned, started_at,
                                  items_completed, items_correct)
@@ -68,8 +68,8 @@ def test_completed_session_not_affected(test_db):
     """Already completed sessions should not be affected by cleanup."""
     conn, _ = test_db
 
-    two_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
-    one_hour_ago = (datetime.now(timezone.utc) - timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")
+    two_hours_ago = (datetime.now(UTC) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
+    one_hour_ago = (datetime.now(UTC) - timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, session_type, items_planned, started_at,
                                  ended_at, session_outcome, items_completed, items_correct)
@@ -113,7 +113,7 @@ def test_session_funnel_includes_interrupted(test_db):
     """get_session_funnel should include interrupted count."""
     conn, _ = test_db
 
-    two_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
+    two_hours_ago = (datetime.now(UTC) - timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, session_type, items_planned, started_at,
                                  ended_at, session_outcome, items_completed, items_correct, early_exit)

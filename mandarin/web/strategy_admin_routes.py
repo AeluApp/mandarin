@@ -85,10 +85,8 @@ def override_thesis():
             if value not in valid_models:
                 return jsonify({"error": f"Invalid revenue model: {value}"}), 400
 
-        conn.execute(
-            f"UPDATE pi_strategic_theses SET {field} = ?, notes = COALESCE(notes, '') || ? WHERE id = ?",
-            (value, f'\n[Override {field}] {rationale}', thesis['id']),
-        )
+        sql = f"UPDATE pi_strategic_theses SET {field} = ?, notes = COALESCE(notes, '') || ? WHERE id = ?"
+        conn.execute(sql, (value, f'\n[Override {field}] {rationale}', thesis['id']))
         conn.commit()
         return jsonify({"status": "overridden", "field": field})
 

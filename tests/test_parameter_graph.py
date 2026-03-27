@@ -414,7 +414,7 @@ class TestSeedInfluenceModel(unittest.TestCase):
         )
         conn = _make_db()
         sync_parameter_registry(conn)
-        count1 = seed_influence_model(conn)
+        seed_influence_model(conn)
         count2 = seed_influence_model(conn)
         self.assertEqual(count2, 0)  # No new edges on second call
 
@@ -476,7 +476,7 @@ class TestUpdateInfluenceEdgesCorrect(unittest.TestCase):
         old_edge = conn.execute(
             "SELECT weight FROM pi_influence_edges WHERE id = ?", (edge_id,)
         ).fetchone()
-        old_weight = old_edge["weight"]
+        old_edge["weight"]
 
         ok = update_influence_edges(conn, wo_id)
         self.assertTrue(ok)
@@ -702,7 +702,7 @@ class TestWorkOrderImplementWithParameter(unittest.TestCase):
         conn = _make_db()
 
         # Register a parameter
-        param_id = _register_test_param(conn, "RECALL_THRESHOLD", "retention", 0.85)
+        _register_test_param(conn, "RECALL_THRESHOLD", "retention", 0.85)
 
         _insert_audit(conn)
         _insert_finding(conn, dimension="retention", severity="high",

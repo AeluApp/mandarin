@@ -10,7 +10,7 @@ import json
 import math
 import sqlite3
 import unittest
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 
 def _make_db():
@@ -271,8 +271,8 @@ class TestCounterfactualCI(unittest.TestCase):
         conn = _make_db()
 
         # Create users and sessions
-        past = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
-        future = (datetime.now(timezone.utc) - timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+        future = (datetime.now(UTC) - timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 21):
             conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))
         # Affected: users 1-10 had early_exit sessions
@@ -409,7 +409,7 @@ class TestLearnerArchetypes(unittest.TestCase):
         conn = _make_db()
 
         # Create user with low accuracy
-        past = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("INSERT INTO user (id, created_at) VALUES (1, ?)", (past,))
         for i in range(20):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now', ? || ' days'))", (f"-{i}",))
@@ -418,7 +418,7 @@ class TestLearnerArchetypes(unittest.TestCase):
 
         findings = analyze_learner_archetypes(conn)
         # Should identify struggling user
-        struggling = [f for f in findings if "struggling" in f["title"].lower()]
+        [f for f in findings if "struggling" in f["title"].lower()]
         # May or may not fire depending on exact thresholds, but should not error
         self.assertIsInstance(findings, list)
 
@@ -626,7 +626,7 @@ class TestLearningWaste(unittest.TestCase):
         conn = _make_db()
 
         # Create items stuck in learning >60 days
-        past = (datetime.now(timezone.utc) - timedelta(days=90)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=90)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 16):
             conn.execute("INSERT INTO content_item (id, hanzi, english) VALUES (?, ?, ?)", (i, f"字{i}", f"word{i}"))
             conn.execute("INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?, 'learning', ?)", (i, past))
@@ -669,7 +669,7 @@ class TestValueStreamMapping(unittest.TestCase):
         from mandarin.intelligence.analyzers_domain import analyze_learner_value_stream
         conn = _make_db()
 
-        past = (datetime.now(timezone.utc) - timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S")
         # Create 20 users, only 5 have sessions (big drop-off)
         for i in range(1, 21):
             conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))

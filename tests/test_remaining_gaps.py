@@ -52,7 +52,6 @@ def test_db():
 
 def _seed_items(conn, n=5, hsk=1, with_image=False):
     """Seed n content items. Returns list of item dicts."""
-    items = []
     for i in range(n):
         image_url = f"https://img.example.com/{i}.png" if with_image and i < 3 else None
         conn.execute(
@@ -231,8 +230,6 @@ class TestWidgetEndpoint:
 
     def test_widget_data_structure(self):
         """Widget response has expected fields."""
-        expected_fields = {"due_count", "streak_days", "next_review_in_minutes",
-                          "accuracy_today", "authenticated"}
         # This validates the contract — actual endpoint testing requires Flask app
         from mandarin.web.gap_routes import api_widget_data
         assert callable(api_widget_data)

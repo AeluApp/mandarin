@@ -218,7 +218,8 @@ def test_validate_bad_hsk_level():
 
 def test_load_malformed_json():
     """Loading a malformed JSON file should return error, not crash."""
-    import tempfile, os
+    import tempfile
+    import os
     tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False)
     tmp.write("{broken json")
     tmp.close()
@@ -235,7 +236,8 @@ def test_load_malformed_json():
 
 def test_load_validation_failure():
     """Loading a JSON with missing required fields should return validation error."""
-    import tempfile, os
+    import tempfile
+    import os
     tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False)
     json.dump({"title": "Test", "tree": {}}, tmp)
     tmp.close()

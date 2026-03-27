@@ -43,7 +43,7 @@ class DurableWorkflow:
         name: str,
         fn: Callable,
         rollback_fn: Callable | None = None,
-    ) -> "DurableWorkflow":
+    ) -> DurableWorkflow:
         """Add a step to the workflow. Returns self for chaining."""
         self._steps.append({
             "name": name,

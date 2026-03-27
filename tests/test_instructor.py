@@ -58,7 +58,7 @@ class TestInstructorIntegration(unittest.TestCase):
         """generate_structured returns None when instructor not installed."""
         with patch.dict("sys.modules", {"instructor": None, "openai": None}):
             # Should return None gracefully, not raise
-            result = generate_structured(
+            generate_structured(
                 prompt="test",
                 response_model=MagicMock,
                 conn=self.conn,

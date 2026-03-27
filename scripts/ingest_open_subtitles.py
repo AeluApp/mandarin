@@ -246,7 +246,6 @@ def ingest_subtitle_file(
     groups = group_into_dialogue_turns(chinese_segments)
     counts["groups"] = len(groups)
 
-    file_source = f"subtitle:{filepath.name}"
 
     for i, group in enumerate(groups):
         # Combine text for HSK estimation

@@ -18,7 +18,8 @@ from . import db
 logger = logging.getLogger(__name__)
 
 # Unique instance identifier (PID + hostname for multi-machine deploys)
-_INSTANCE_ID = f"{os.getpid()}@{os.environ.get('FLY_MACHINE_ID', os.environ.get('HOSTNAME', 'local'))}"
+from .settings import FLY_MACHINE_ID, HOSTNAME
+_INSTANCE_ID = f"{os.getpid()}@{FLY_MACHINE_ID or HOSTNAME}"
 
 
 def acquire_lock(conn: sqlite3.Connection, name: str, ttl_seconds: int) -> bool:

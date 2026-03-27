@@ -35,7 +35,7 @@ def _tokenize_chinese(text: str) -> list[str]:
 
 def _load_passages(path: Path) -> list[dict]:
     """Load reading passages from JSON."""
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     return data.get("passages", data) if isinstance(data, dict) else data
 

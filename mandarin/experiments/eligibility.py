@@ -306,17 +306,13 @@ def _metric_count(
 ) -> int:
     try:
         if metric == "sessions":
-            row = conn.execute(
-                f"""SELECT COUNT(*) as cnt FROM session_log
-                    WHERE user_id = ? AND started_at >= datetime('now', '-{lookback_days} days')""",
-                (user_id,),
-            ).fetchone()
+            sql = f"""SELECT COUNT(*) as cnt FROM session_log
+                    WHERE user_id = ? AND started_at >= datetime('now', '-{lookback_days} days')"""
+            row = conn.execute(sql, (user_id,)).fetchone()
         elif metric == "review_events":
-            row = conn.execute(
-                f"""SELECT COUNT(*) as cnt FROM review_event
-                    WHERE user_id = ? AND created_at >= datetime('now', '-{lookback_days} days')""",
-                (user_id,),
-            ).fetchone()
+            sql = f"""SELECT COUNT(*) as cnt FROM review_event
+                    WHERE user_id = ? AND created_at >= datetime('now', '-{lookback_days} days')"""
+            row = conn.execute(sql, (user_id,)).fetchone()
         else:
             return 0
         return row["cnt"] if row else 0
@@ -327,10 +323,8 @@ def _metric_count(
 def _has_feature(conn: sqlite3.Connection, user_id: int, feature: str) -> bool:
     """Check a learner profile boolean flag."""
     try:
-        row = conn.execute(
-            f"SELECT {feature} FROM learner_profile WHERE user_id = ?",
-            (user_id,),
-        ).fetchone()
+        sql = f"SELECT {feature} FROM learner_profile WHERE user_id = ?"
+        row = conn.execute(sql, (user_id,)).fetchone()
         return bool(row and row[feature])
     except (sqlite3.OperationalError, IndexError):
         return False

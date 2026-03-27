@@ -29,8 +29,8 @@ openclaw_bp = Blueprint("openclaw", __name__, url_prefix="/api/openclaw")
 
 def _get_api_key():
     """Read API key at request time (not import time) for testability."""
-    import os
-    return os.environ.get("OPENCLAW_API_KEY", "")
+    from ..settings import OPENCLAW_API_KEY
+    return OPENCLAW_API_KEY
 
 
 def _require_api_key(f):

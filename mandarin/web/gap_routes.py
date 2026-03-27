@@ -225,10 +225,8 @@ def api_create_study_list():
             # Verify item_ids exist
             if item_ids:
                 placeholders = ",".join("?" * len(item_ids))
-                existing = conn.execute(
-                    f"SELECT id FROM content_item WHERE id IN ({placeholders})",
-                    item_ids,
-                ).fetchall()
+                sql = f"SELECT id FROM content_item WHERE id IN ({placeholders})"
+                existing = conn.execute(sql, item_ids).fetchall()
                 existing_ids = {r["id"] for r in existing}
                 item_ids = [i for i in item_ids if i in existing_ids]
 
@@ -323,11 +321,9 @@ def api_get_shared_list(code):
             items = []
             if ids:
                 placeholders = ",".join("?" * len(ids))
-                item_rows = conn.execute(
-                    f"""SELECT id, hanzi, pinyin, english, hsk_level
-                        FROM content_item WHERE id IN ({placeholders})""",
-                    ids,
-                ).fetchall()
+                sql = f"""SELECT id, hanzi, pinyin, english, hsk_level
+                        FROM content_item WHERE id IN ({placeholders})"""
+                item_rows = conn.execute(sql, ids).fetchall()
                 items = [dict(r) for r in item_rows]
 
             return jsonify({

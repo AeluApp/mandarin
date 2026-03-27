@@ -9,7 +9,7 @@ Covers:
 - robots.txt and sitemap.xml routes
 """
 
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from unittest.mock import patch
 
 import pytest
@@ -42,7 +42,7 @@ TEST_PASSWORD = "securepass1234545"
 
 def _insert_invite_code(conn, code="BETA2026", max_uses=1, expires_at=None):
     """Insert a test invite code."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         """INSERT INTO invite_code (code, created_at, max_uses, use_count, expires_at)
            VALUES (?, ?, ?, 0, ?)""",
@@ -152,7 +152,7 @@ class TestInviteCodeAuth:
 
     def test_expired_code_raises(self, test_db):
         conn, _ = test_db
-        past = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_invite_code(conn, "EXPIRED1", max_uses=5, expires_at=past)
         with pytest.raises(ValueError, match="expired"):
             create_user(conn, "a@b.com", TEST_PASSWORD, "Test", invite_code="EXPIRED1")
@@ -205,7 +205,7 @@ class TestInviteCodeAuth:
 
     def test_future_expiry_code_works(self, test_db):
         conn, _ = test_db
-        future = (datetime.now(timezone.utc) + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+        future = (datetime.now(UTC) + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
         _insert_invite_code(conn, "FUTURE1", max_uses=5, expires_at=future)
         user = create_user(conn, "a@b.com", TEST_PASSWORD, "Test", invite_code="FUTURE1")
         assert user["id"] > 0
