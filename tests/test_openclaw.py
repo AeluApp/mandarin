@@ -252,7 +252,7 @@ class TestWhatsAppBot(unittest.TestCase):
     def test_verify_webhook_valid(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
         import mandarin.settings
-        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"  # gitleaks:allow (test fixture)
         try:
             result = verify_webhook("subscribe", "test-verify-123", "challenge_abc")
             self.assertEqual(result, "challenge_abc")
@@ -262,7 +262,7 @@ class TestWhatsAppBot(unittest.TestCase):
     def test_verify_webhook_invalid_token(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
         import mandarin.settings
-        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"  # gitleaks:allow (test fixture)
         try:
             result = verify_webhook("subscribe", "wrong-token", "challenge_abc")
             self.assertIsNone(result)
@@ -272,7 +272,7 @@ class TestWhatsAppBot(unittest.TestCase):
     def test_verify_webhook_invalid_mode(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
         import mandarin.settings
-        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"  # gitleaks:allow (test fixture)
         try:
             result = verify_webhook("unsubscribe", "test-verify-123", "challenge_abc")
             self.assertIsNone(result)

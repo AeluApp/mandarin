@@ -52,7 +52,7 @@ def app_client(test_db):
 
 
 TEST_EMAIL = "exposure@example.com"
-TEST_PASSWORD = "exposuretest12345"
+TEST_PASSWORD = "exposuretest12345"  # gitleaks:allow (test fixture, not a real secret)
 
 
 def _create_and_login(client, conn, email=TEST_EMAIL, password=TEST_PASSWORD):
