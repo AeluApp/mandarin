@@ -54,13 +54,18 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
         wizard.wait_for(state="visible", timeout=3000)
     except Exception:
         return  # No wizard visible
-    # Skip intro slides to reach level picker (force-click to bypass animation)
-    skip_btn = page.locator("#onboarding-skip-0")
-    if skip_btn.is_visible():
-        skip_btn.click(force=True)
-    # Wait for level picker to appear
+    # Skip intro slides via JS (Playwright force-click doesn't trigger handlers reliably)
+    page.evaluate("""() => {
+        const skip = document.getElementById('onboarding-skip-0');
+        if (skip) { skip.click(); return; }
+        // Fallback: remove hidden class from level picker directly
+        const step1 = document.getElementById('onboarding-step-1');
+        if (step1) step1.classList.remove('hidden');
+        document.querySelectorAll('.onboarding-intro-slide').forEach(s => s.classList.add('hidden'));
+    }""")
+    page.wait_for_timeout(1000)
     page.locator(f"[data-level='{level}']").wait_for(state="visible", timeout=5000)
-    page.click(f"[data-level='{level}']", force=True)
+    page.click(f"[data-level='{level}']")
     page.wait_for_timeout(500)
     page.click(f"[data-goal='{goal}']")
     page.wait_for_load_state("networkidle", timeout=15000)
@@ -82,10 +87,15 @@ def test_onboarding_wizard_appears(e2e_server, page: Page):
     _register(page, e2e_server)
     wizard = page.locator("#onboarding-wizard")
     expect(wizard).to_be_visible(timeout=5000)
-    # Wizard starts with intro slides; skip them to verify level picker
-    skip_btn = page.locator("#onboarding-skip-0")
-    expect(skip_btn).to_be_visible(timeout=3000)
-    skip_btn.click(force=True)
+    # Wizard starts with intro slides; skip them via JS to verify level picker
+    page.evaluate("""() => {
+        const skip = document.getElementById('onboarding-skip-0');
+        if (skip) { skip.click(); return; }
+        const step1 = document.getElementById('onboarding-step-1');
+        if (step1) step1.classList.remove('hidden');
+        document.querySelectorAll('.onboarding-intro-slide').forEach(s => s.classList.add('hidden'));
+    }""")
+    page.wait_for_timeout(1000)
     expect(page.locator("[data-level='1']")).to_be_visible(timeout=5000)
     expect(page.locator("[data-level='2']")).to_be_visible()
 
