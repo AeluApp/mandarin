@@ -184,6 +184,7 @@ def _generate_tts(text: str) -> str | None:
     import asyncio
 
     async def _gen():
+        communicate = None
         try:
             import edge_tts
             tmp = tempfile.NamedTemporaryFile(suffix=".mp3", delete=False)
@@ -194,16 +195,36 @@ def _generate_tts(text: str) -> str | None:
         except Exception as e:
             logger.warning("TTS generation failed: %s", e)
             return None
+        finally:
+            if communicate is not None:
+                for attr in ("session", "_session"):
+                    sess = getattr(communicate, attr, None)
+                    if sess is not None and hasattr(sess, "close"):
+                        try:
+                            await sess.close()
+                        except Exception:
+                            pass
+
+    def _run_in_fresh_loop():
+        loop = asyncio.new_event_loop()
+        try:
+            return loop.run_until_complete(_gen())
+        finally:
+            try:
+                loop.run_until_complete(loop.shutdown_asyncgens())
+            except Exception:
+                pass
+            loop.close()
 
     try:
         loop = asyncio.get_event_loop()
         if loop.is_running():
             import concurrent.futures
             with concurrent.futures.ThreadPoolExecutor() as pool:
-                return pool.submit(lambda: asyncio.run(_gen())).result(timeout=30)
-        return loop.run_until_complete(_gen())
+                return pool.submit(_run_in_fresh_loop).result(timeout=30)
+        return _run_in_fresh_loop()
     except RuntimeError:
-        return asyncio.run(_gen())
+        return _run_in_fresh_loop()
 
 
 def _create_failure_work_item(
