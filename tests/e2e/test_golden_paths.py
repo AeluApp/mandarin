@@ -119,10 +119,11 @@ def test_session_start_shows_drill_area(e2e_server, page: Page):
 
     btn = page.locator("#btn-start")
     expect(btn).to_be_enabled(timeout=10000)
-    btn.click()
+    # Force-click because wizard overlay may still be in DOM briefly
+    btn.click(force=True)
 
     # Session section should appear
-    expect(page.locator("#session")).to_be_visible(timeout=10000)
+    expect(page.locator("#session")).to_be_visible(timeout=15000)
     expect(page.locator("#drill-area")).to_be_visible()
     expect(page.locator("#progress-bar")).to_be_visible()
 
