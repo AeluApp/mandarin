@@ -349,9 +349,16 @@ def create_app(testing=False):
 
     # Exempt health check endpoints from rate limiting — Fly.io probes
     # every 15s (240/hour) which exceeds the default 200/hour limit.
-    for ep in ("api_health_live", "api_health_ready"):
+    # Also exempt the full /api/health endpoint.
+    for ep in ("api_health_live", "api_health_ready", "api_health"):
         if ep in app.view_functions:
             limiter.exempt(app.view_functions[ep])
+
+    # Belt-and-suspenders: also raise limit on health paths via decorator
+    # in case exempt() doesn't stick with custom storage backends.
+    for ep in ("api_health_live", "api_health_ready", "api_health"):
+        if ep in app.view_functions:
+            limiter.limit("2000/hour")(app.view_functions[ep])
 
     from .session_routes import register_session_routes
     register_session_routes(app)

@@ -258,20 +258,46 @@ def _check_tts() -> tuple[str, int, str | None]:
                         return True
                 return False
             finally:
-                # Close aiohttp session to prevent resource leaks
-                if hasattr(communicate, 'session') and communicate.session:
-                    await communicate.session.close()
+                # Close internal aiohttp session to prevent "Unclosed client session"
+                # errors. edge_tts stores the session in different attributes depending
+                # on version; try all known locations.
+                for attr in ("session", "_session", "ws", "_ws"):
+                    sess = getattr(communicate, attr, None)
+                    if sess is not None and hasattr(sess, "close"):
+                        try:
+                            await sess.close()
+                        except Exception:
+                            pass
+                # Give the event loop a tick to finalize any pending callbacks
+                await asyncio.sleep(0)
+
+        def _run_in_fresh_loop():
+            loop = asyncio.new_event_loop()
+            try:
+                return loop.run_until_complete(_test())
+            finally:
+                # Properly shut down to avoid "Task was destroyed" warnings
+                try:
+                    pending = asyncio.all_tasks(loop)
+                    for task in pending:
+                        task.cancel()
+                    if pending:
+                        loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+                except Exception:
+                    pass
+                loop.run_until_complete(loop.shutdown_asyncgens())
+                loop.close()
 
         try:
             loop = asyncio.get_event_loop()
             if loop.is_running():
                 import concurrent.futures
                 with concurrent.futures.ThreadPoolExecutor() as pool:
-                    result = pool.submit(lambda: asyncio.run(_test())).result(timeout=10)
+                    result = pool.submit(_run_in_fresh_loop).result(timeout=10)
             else:
-                result = asyncio.run(_test())
+                result = _run_in_fresh_loop()
         except RuntimeError:
-            result = asyncio.run(_test())
+            result = _run_in_fresh_loop()
 
         latency_ms = int((time.monotonic() - start) * 1000)
 

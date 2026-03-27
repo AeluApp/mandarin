@@ -785,7 +785,7 @@ def _run_intelligence_loop():
                 from ..email import send_daily_intelligence_digest
                 send_daily_intelligence_digest(conn)
             except Exception:
-                logger.debug("Intelligence loop: daily digest email failed", exc_info=True)
+                logger.warning("Intelligence loop: daily digest email failed", exc_info=True)
 
     except Exception:
         logger.exception("Intelligence automation loop failed")
