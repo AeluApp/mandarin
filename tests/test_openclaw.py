@@ -142,11 +142,17 @@ class TestOpenClawRoutes(unittest.TestCase):
     """Test Flask blueprint endpoints."""
 
     def setUp(self):
-        os.environ["OPENCLAW_API_KEY"] = "test-key-123"
+        import mandarin.settings
+        self._orig_api_key = mandarin.settings.OPENCLAW_API_KEY
+        mandarin.settings.OPENCLAW_API_KEY = "test-key-123"
         from mandarin.web import create_app
         self.app = create_app()
         self.app.config["TESTING"] = True
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_API_KEY = self._orig_api_key
 
     def test_health_no_auth(self):
         resp = self.client.get("/api/openclaw/health")
@@ -245,30 +251,33 @@ class TestWhatsAppBot(unittest.TestCase):
 
     def test_verify_webhook_valid(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
-        os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"] = "test-verify-123"
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
         try:
             result = verify_webhook("subscribe", "test-verify-123", "challenge_abc")
             self.assertEqual(result, "challenge_abc")
         finally:
-            del os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"]
+            mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = ""
 
     def test_verify_webhook_invalid_token(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
-        os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"] = "test-verify-123"
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
         try:
             result = verify_webhook("subscribe", "wrong-token", "challenge_abc")
             self.assertIsNone(result)
         finally:
-            del os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"]
+            mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = ""
 
     def test_verify_webhook_invalid_mode(self):
         from mandarin.openclaw.whatsapp_bot import verify_webhook
-        os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"] = "test-verify-123"
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "test-verify-123"
         try:
             result = verify_webhook("unsubscribe", "test-verify-123", "challenge_abc")
             self.assertIsNone(result)
         finally:
-            del os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"]
+            mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = ""
 
     def test_send_message_unconfigured(self):
         from mandarin.openclaw.whatsapp_bot import send_message
@@ -286,12 +295,20 @@ class TestWhatsAppRoutes(unittest.TestCase):
     """Test WhatsApp webhook Flask endpoints."""
 
     def setUp(self):
-        os.environ["OPENCLAW_API_KEY"] = "test-key-123"
-        os.environ["OPENCLAW_WHATSAPP_VERIFY_TOKEN"] = "wa-verify-test"
+        import mandarin.settings
+        self._orig_api_key = mandarin.settings.OPENCLAW_API_KEY
+        self._orig_wa_verify = mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN
+        mandarin.settings.OPENCLAW_API_KEY = "test-key-123"
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = "wa-verify-test"
         from mandarin.web import create_app
         self.app = create_app()
         self.app.config["TESTING"] = True
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_API_KEY = self._orig_api_key
+        mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN = self._orig_wa_verify
 
     def test_whatsapp_verify_valid(self):
         resp = self.client.get(
@@ -474,11 +491,17 @@ class TestMultiChannelNotify(unittest.TestCase):
     """Test the multi-channel /notify endpoint."""
 
     def setUp(self):
-        os.environ["OPENCLAW_API_KEY"] = "test-key-123"
+        import mandarin.settings
+        self._orig_api_key = mandarin.settings.OPENCLAW_API_KEY
+        mandarin.settings.OPENCLAW_API_KEY = "test-key-123"
         from mandarin.web import create_app
         self.app = create_app()
         self.app.config["TESTING"] = True
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        import mandarin.settings
+        mandarin.settings.OPENCLAW_API_KEY = self._orig_api_key
 
     def test_notify_requires_message(self):
         resp = self.client.post(

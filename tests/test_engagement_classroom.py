@@ -2,7 +2,7 @@
 
 import json
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 import pytest
 
@@ -196,7 +196,7 @@ def test_extract_session_features_empty(conn):
 
 
 def test_extract_session_features_with_data(conn):
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
                                   duration_seconds, early_exit, boredom_flags)
@@ -235,8 +235,8 @@ def test_abandonment_risk_no_sessions(conn):
 
 def test_abandonment_risk_active_user(conn):
     conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
+    yesterday = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
     for ts in [now, yesterday]:
         conn.execute("""
             INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
@@ -244,7 +244,7 @@ def test_abandonment_risk_active_user(conn):
             VALUES (1, ?, 10, 8, 300, 0, 0)
         """, (ts,))
     # Also add some in prior week
-    prior = (datetime.now(timezone.utc) - timedelta(days=8)).strftime("%Y-%m-%d %H:%M:%S")
+    prior = (datetime.now(UTC) - timedelta(days=8)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
                                   duration_seconds, early_exit, boredom_flags)
@@ -264,7 +264,7 @@ def test_abandonment_risk_frequency_decline(conn):
     conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
     # 3 sessions in prior week, 0 in current week
     for i in range(3):
-        ts = (datetime.now(timezone.utc) - timedelta(days=8 + i)).strftime("%Y-%m-%d %H:%M:%S")
+        ts = (datetime.now(UTC) - timedelta(days=8 + i)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
                                       duration_seconds, early_exit, boredom_flags)
@@ -281,7 +281,7 @@ def test_abandonment_risk_frequency_decline(conn):
 
 def test_abandonment_risk_frustration(conn):
     conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
                                   duration_seconds, early_exit, boredom_flags)
@@ -300,7 +300,7 @@ def test_engagement_snapshot_idempotent(conn):
     conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
     conn.commit()
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
     r1 = generate_engagement_snapshot(conn, user_id=1, snapshot_date=today)
     r2 = generate_engagement_snapshot(conn, user_id=1, snapshot_date=today)
 
@@ -362,7 +362,7 @@ def test_analyze_engagement_risk_empty(conn):
 
 
 def test_analyze_engagement_risk_high(conn):
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
     # 5 users, 2 at high risk = 40%
     for uid in range(1, 6):
         level = "high" if uid <= 2 else "low"
@@ -419,8 +419,8 @@ def test_intervention_logging_and_scoring(conn):
     conn.commit()
 
     # Student now has sessions → lower risk
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
+    yesterday = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
     for ts in [now, yesterday]:
         conn.execute("""
             INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
@@ -428,7 +428,7 @@ def test_intervention_logging_and_scoring(conn):
             VALUES (1, ?, 10, 9, 300, 0, 0)
         """, (ts,))
     # Prior week sessions too (prevent frequency decline flag)
-    prior = (datetime.now(timezone.utc) - timedelta(days=8)).strftime("%Y-%m-%d %H:%M:%S")
+    prior = (datetime.now(UTC) - timedelta(days=8)).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
                                   duration_seconds, early_exit, boredom_flags)

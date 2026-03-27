@@ -120,7 +120,6 @@ def test_listening_tone_correct():
 
     # The drill shows numbered options; we need to find which number is correct.
     # Strategy: capture options from show_fn, then find the correct one.
-    call_count = [0]
     captured_options = []
 
     def show_fn_capture(text, end="\n"):
@@ -132,7 +131,6 @@ def test_listening_tone_correct():
 
     # We need a two-phase approach: first call to discover option order,
     # then provide the right answer. Use a closure that figures out the answer.
-    answer_given = [False]
     def input_fn(prompt):
         # Find which option matches the correct pinyin
         for opt in captured_options:

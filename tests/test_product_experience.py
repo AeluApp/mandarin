@@ -7,7 +7,7 @@ release regression detection, screen health, UX summary.
 import json
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from uuid import uuid4
 
 
@@ -178,7 +178,7 @@ def _insert_feedback(conn, feedback_type, response_value, screen_name=None,
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """, (
         str(uuid4()), user_id, session_id,
-        occurred_at or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+        occurred_at or datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S"),
         feedback_type, response_value, screen_name,
     ))
     conn.commit()
@@ -189,7 +189,7 @@ def _insert_event(conn, event_type, screen_name=None, element_id=None,
                   user_id="user1", session_id="sess1",
                   app_version="1.0.0", occurred_at=None):
     """Insert an interaction event."""
-    occ = occurred_at or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    occ = occurred_at or datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO pi_interaction_events
             (id, user_id, session_id, occurred_at, event_type,
@@ -254,13 +254,13 @@ class TestUXFeedbackAnalyzer(unittest.TestCase):
     def test_frustration_rising_generates_finding(self):
         conn = _make_db()
         # Baseline days: low frustration
-        base = datetime.now(timezone.utc) - timedelta(days=10)
+        base = datetime.now(UTC) - timedelta(days=10)
         for i in range(5):
             day = (base + timedelta(days=i)).strftime("%Y-%m-%d %H:%M:%S")
             _insert_feedback(conn, "session_frustration", 0.2, occurred_at=day)
 
         # Recent days: high frustration (well above 0.4 and >1.3× baseline)
-        recent = datetime.now(timezone.utc) - timedelta(days=4)
+        recent = datetime.now(UTC) - timedelta(days=4)
         for i in range(5):
             day = (recent + timedelta(days=i)).strftime("%Y-%m-%d %H:%M:%S")
             _insert_feedback(conn, "session_frustration", 1.5, occurred_at=day)
@@ -330,7 +330,7 @@ class TestInteractionEventAnalyzer(unittest.TestCase):
 
         from mandarin.intelligence.product_experience import analyze_interaction_events
         findings = analyze_interaction_events(conn)
-        time_findings = [f for f in findings if "excessive time" in f["title"].lower()]
+        [f for f in findings if "excessive time" in f["title"].lower()]
         # 15s vs avg of 10s = 1.5x, which is < 2.5x threshold
         # Need bigger gap: add a fast screen to lower the average
         # Actually avg = (5000+15000)/2 = 10000, settings = 15000 = 1.5x — not enough
@@ -381,7 +381,7 @@ class TestReleaseRegression(unittest.TestCase):
         conn = _make_db()
         # Register release 3 days ago (> 48h)
         release_id = str(uuid4())
-        three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
+        three_days_ago = (datetime.now(UTC) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_release_log (id, app_version, released_at, analysis_status)
             VALUES (?, '1.0.0', ?, 'pending')
@@ -395,7 +395,7 @@ class TestReleaseRegression(unittest.TestCase):
         conn.commit()
 
         from mandarin.intelligence.product_experience import analyze_release_regressions
-        findings = analyze_release_regressions(conn)
+        analyze_release_regressions(conn)
 
         release = conn.execute("SELECT * FROM pi_release_log WHERE id = ?", (release_id,)).fetchone()
         self.assertEqual(release["analysis_status"], "clean")
@@ -403,7 +403,7 @@ class TestReleaseRegression(unittest.TestCase):
     def test_regression_detected(self):
         conn = _make_db()
         release_id = str(uuid4())
-        three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
+        three_days_ago = (datetime.now(UTC) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_release_log
                 (id, app_version, released_at, analysis_status,
@@ -425,7 +425,7 @@ class TestReleaseRegression(unittest.TestCase):
         conn.commit()
 
         from mandarin.intelligence.product_experience import analyze_release_regressions
-        findings = analyze_release_regressions(conn)
+        analyze_release_regressions(conn)
 
         release = conn.execute("SELECT * FROM pi_release_log WHERE id = ?", (release_id,)).fetchone()
         # Current engagement = 0 (no users), pre = 80 → -100% regression
@@ -434,7 +434,7 @@ class TestReleaseRegression(unittest.TestCase):
     def test_regression_finding_includes_version(self):
         conn = _make_db()
         release_id = str(uuid4())
-        three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
+        three_days_ago = (datetime.now(UTC) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_release_log
                 (id, app_version, released_at, analysis_status, release_notes)

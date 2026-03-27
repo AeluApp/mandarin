@@ -207,27 +207,27 @@ class TestDraftClassReport(unittest.TestCase):
 
 class TestSendEmail(unittest.TestCase):
 
+    @patch("mandarin.settings.SMTP_USER", "")
+    @patch("mandarin.settings.SMTP_HOST", "")
     def test_no_smtp_configured(self):
         from mandarin.openclaw.email_mcp import send_email
-        with patch.dict("os.environ", {}, clear=True):
-            result = send_email("test@example.com", "Test", "Body")
-            self.assertEqual(result["status"], "not_sent")
-            self.assertIn("SMTP not configured", result["reason"])
+        result = send_email("test@example.com", "Test", "Body")
+        self.assertEqual(result["status"], "not_sent")
+        self.assertIn("SMTP not configured", result["reason"])
 
-    @patch.dict("os.environ", {"SMTP_HOST": "", "SMTP_USER": ""})
+    @patch("mandarin.settings.SMTP_HOST", "")
+    @patch("mandarin.settings.SMTP_USER", "")
     def test_empty_smtp_config(self):
         from mandarin.openclaw.email_mcp import send_email
         result = send_email("test@example.com", "Test", "Body")
         self.assertEqual(result["status"], "not_sent")
 
     @patch("smtplib.SMTP")
-    @patch.dict("os.environ", {
-        "SMTP_HOST": "smtp.test.com",
-        "SMTP_PORT": "587",
-        "SMTP_USER": "user@test.com",
-        "SMTP_PASSWORD": "pass123",
-        "SMTP_FROM": "noreply@aelu.app",
-    })
+    @patch("mandarin.settings.SMTP_FROM", "noreply@aelu.app")
+    @patch("mandarin.settings.SMTP_PASSWORD", "pass123")
+    @patch("mandarin.settings.SMTP_USER", "user@test.com")
+    @patch("mandarin.settings.SMTP_PORT", 587)
+    @patch("mandarin.settings.SMTP_HOST", "smtp.test.com")
     def test_successful_send(self, mock_smtp_class):
         from mandarin.openclaw.email_mcp import send_email
         mock_server = MagicMock()
@@ -239,11 +239,11 @@ class TestSendEmail(unittest.TestCase):
         self.assertEqual(result["to"], "student@example.com")
 
     @patch("smtplib.SMTP")
-    @patch.dict("os.environ", {
-        "SMTP_HOST": "smtp.test.com",
-        "SMTP_USER": "user@test.com",
-        "SMTP_PASSWORD": "pass123",
-    })
+    @patch("mandarin.settings.SMTP_FROM", "")
+    @patch("mandarin.settings.SMTP_PASSWORD", "pass123")
+    @patch("mandarin.settings.SMTP_USER", "user@test.com")
+    @patch("mandarin.settings.SMTP_PORT", 587)
+    @patch("mandarin.settings.SMTP_HOST", "smtp.test.com")
     def test_send_with_html(self, mock_smtp_class):
         from mandarin.openclaw.email_mcp import send_email
         mock_server = MagicMock()
@@ -257,11 +257,11 @@ class TestSendEmail(unittest.TestCase):
         self.assertEqual(result["status"], "sent")
 
     @patch("smtplib.SMTP")
-    @patch.dict("os.environ", {
-        "SMTP_HOST": "smtp.test.com",
-        "SMTP_USER": "user@test.com",
-        "SMTP_PASSWORD": "pass123",
-    })
+    @patch("mandarin.settings.SMTP_FROM", "")
+    @patch("mandarin.settings.SMTP_PASSWORD", "pass123")
+    @patch("mandarin.settings.SMTP_USER", "user@test.com")
+    @patch("mandarin.settings.SMTP_PORT", 587)
+    @patch("mandarin.settings.SMTP_HOST", "smtp.test.com")
     def test_send_failure(self, mock_smtp_class):
         from mandarin.openclaw.email_mcp import send_email
         mock_smtp_class.side_effect = Exception("Connection refused")
@@ -270,11 +270,11 @@ class TestSendEmail(unittest.TestCase):
         self.assertEqual(result["status"], "error")
         self.assertIn("Connection refused", result["error"])
 
-    @patch.dict("os.environ", {
-        "SMTP_HOST": "smtp.test.com",
-        "SMTP_USER": "user@test.com",
-        "SMTP_PASSWORD": "pass123",
-    })
+    @patch("mandarin.settings.SMTP_FROM", "")
+    @patch("mandarin.settings.SMTP_PASSWORD", "pass123")
+    @patch("mandarin.settings.SMTP_USER", "user@test.com")
+    @patch("mandarin.settings.SMTP_PORT", 587)
+    @patch("mandarin.settings.SMTP_HOST", "smtp.test.com")
     def test_from_defaults_to_smtp_user(self):
         from mandarin.openclaw.email_mcp import send_email
         # The from_addr should default to SMTP_USER when SMTP_FROM is not set

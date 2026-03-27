@@ -227,7 +227,7 @@ def newsletter_subscribe():
     if not email or "@" not in email or "." not in email.split("@")[-1]:
         return jsonify({"error": "Valid email required"}), 400
 
-    RESEND_AUDIENCE_ID = os.environ.get("RESEND_AUDIENCE_ID", "")
+    from ..settings import RESEND_AUDIENCE_ID
 
     if not RESEND_API_KEY or not RESEND_AUDIENCE_ID:
         logger.info("[newsletter dev-mode] subscribe: %s", email)

@@ -31,12 +31,10 @@ def _make_db():
 class TestGetConfig(unittest.TestCase):
     """Tests for _get_config."""
 
-    @patch.dict("os.environ", {
-        "OPENCLAW_WHATSAPP_TOKEN": "wa_token",
-        "OPENCLAW_WHATSAPP_PHONE_ID": "phone123",
-        "OPENCLAW_WHATSAPP_VERIFY_TOKEN": "verify_me",
-        "OPENCLAW_WHATSAPP_OWNER_NUMBER": "+15551234567",
-    })
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_OWNER_NUMBER", "+15551234567")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN", "verify_me")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_PHONE_ID", "phone123")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_TOKEN", "wa_token")
     def test_reads_all_env_vars(self):
         from mandarin.openclaw.whatsapp_bot import _get_config
         cfg = _get_config()
@@ -45,7 +43,10 @@ class TestGetConfig(unittest.TestCase):
         self.assertEqual(cfg["verify_token"], "verify_me")
         self.assertEqual(cfg["owner_number"], "+15551234567")
 
-    @patch.dict("os.environ", {}, clear=True)
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_OWNER_NUMBER", "")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_VERIFY_TOKEN", "")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_PHONE_ID", "")
+    @patch("mandarin.settings.OPENCLAW_WHATSAPP_TOKEN", "")
     def test_defaults_when_unset(self):
         from mandarin.openclaw.whatsapp_bot import _get_config
         cfg = _get_config()

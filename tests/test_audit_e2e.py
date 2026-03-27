@@ -1,7 +1,7 @@
 """End-to-end test for run_product_audit — validates return dict shape on a populated DB."""
 
 import unittest
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 from tests.conftest import make_test_db
 
@@ -9,7 +9,7 @@ from tests.conftest import make_test_db
 def _seed_activity(conn):
     """Seed enough data for analyzers to have signal without hitting noise guards."""
     conn.execute("PRAGMA foreign_keys = OFF")
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Users (20 total)
     for uid in range(2, 22):  # user 1 already exists from fixture

@@ -1,7 +1,7 @@
 # Security Policy
 
 **Platform:** Aelu Learning System
-**Version:** V2 (Schema V119)
+**Version:** V2 (Schema V121)
 **Last reviewed:** 2026-02-22
 **Owner:** Jason Gerson
 **Classification:** Internal / Compliance Reference

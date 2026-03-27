@@ -147,7 +147,7 @@ def record_audio(duration: float = MAX_RECORD_SECONDS):
         return (None, None)
 
 
-def save_recording(audio: "np.ndarray", content_item_id: int,
+def save_recording(audio: np.ndarray, content_item_id: int,
                    session_id: int) -> Path | None:
     """Save recording as WAV file. Returns path."""
     RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -167,7 +167,7 @@ def save_recording(audio: "np.ndarray", content_item_id: int,
 
 # ── Pitch extraction ──────────────────────────────
 
-def extract_f0_pyin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
+def extract_f0_pyin(audio: np.ndarray, sr: int = SAMPLE_RATE,
                     hop_ms: int = 10,
                     fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract F0 using librosa's pYIN (probabilistic YIN) pitch tracker.
@@ -198,7 +198,7 @@ def extract_f0_pyin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
         return []
 
 
-def extract_voice_quality_extras(audio: "np.ndarray", sr: int = SAMPLE_RATE,
+def extract_voice_quality_extras(audio: np.ndarray, sr: int = SAMPLE_RATE,
                                   fmin: float = 75.0, fmax: float = 500.0) -> dict:
     """Extract voice quality features using librosa and numpy.
 
@@ -298,7 +298,7 @@ def extract_voice_quality_extras(audio: "np.ndarray", sr: int = SAMPLE_RATE,
         return {}
 
 
-def _extract_f0_autocorr(audio: "np.ndarray", sr: int = SAMPLE_RATE,
+def _extract_f0_autocorr(audio: np.ndarray, sr: int = SAMPLE_RATE,
                          frame_ms: int = 30, hop_ms: int = 10,
                          fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract F0 using autocorrelation (legacy, kept as reference).
@@ -353,7 +353,7 @@ def _extract_f0_autocorr(audio: "np.ndarray", sr: int = SAMPLE_RATE,
     return f0_values
 
 
-def extract_f0_yin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
+def extract_f0_yin(audio: np.ndarray, sr: int = SAMPLE_RATE,
                    frame_ms: int = 30, hop_ms: int = 10,
                    fmin: float = 75.0, fmax: float = 500.0,
                    threshold: float = 0.15) -> list[float]:
@@ -448,7 +448,7 @@ def extract_f0_yin(audio: "np.ndarray", sr: int = SAMPLE_RATE,
     return f0_values
 
 
-def extract_f0(audio: "np.ndarray", sr: int = SAMPLE_RATE,
+def extract_f0(audio: np.ndarray, sr: int = SAMPLE_RATE,
                frame_ms: int = 30, hop_ms: int = 10,
                fmin: float = 75.0, fmax: float = 500.0) -> list[float]:
     """Extract fundamental frequency contour.
@@ -512,7 +512,7 @@ def classify_tone(f0_contour: list[float],
 
 # ── Speaker calibration ──────────────────────────────
 
-def run_tone_calibration(audio: "np.ndarray", sr: int = SAMPLE_RATE) -> dict | None:
+def run_tone_calibration(audio: np.ndarray, sr: int = SAMPLE_RATE) -> dict | None:
     """Extract speaker's F0 range from a calibration phrase (e.g. māmámǎmà).
 
     Returns dict with f0_min, f0_max, f0_mean (10th/90th percentile)
@@ -652,7 +652,7 @@ def get_tone_leniency(speaking_level: float) -> dict:
     return dict(bands[-1][1])
 
 
-def grade_tones(audio: "np.ndarray", expected_tones: list[int],
+def grade_tones(audio: np.ndarray, expected_tones: list[int],
                 sr: int = SAMPLE_RATE, leniency: dict = None,
                 calibration: dict = None) -> dict:
     """Grade pronunciation against expected tone sequence.

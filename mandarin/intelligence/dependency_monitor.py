@@ -210,7 +210,12 @@ def _check_llm() -> tuple[str, int, str | None]:
 
     Returns (status, latency_ms, error_message).
     """
-    from ..settings import OLLAMA_URL
+    from ..settings import OLLAMA_URL, IS_CLOUD_MODEL
+
+    # When using a cloud LLM provider and no custom Ollama URL is set,
+    # there is no local Ollama to check — report healthy.
+    if IS_CLOUD_MODEL and OLLAMA_URL == "http://localhost:11434":
+        return HEALTHY, 0, "Cloud model configured, local Ollama not expected"
 
     start = time.monotonic()
     try:

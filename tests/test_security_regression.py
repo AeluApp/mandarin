@@ -225,7 +225,7 @@ class TestSQLInjectionRegression:
         """Reading lookup hanzi uses parameterized queries."""
         client, conn = app_client
         _create_and_login(client, conn)
-        resp = client.post(
+        client.post(
             "/api/reading/lookup",
             data=json.dumps({"hanzi": "'; DROP TABLE user; --", "passage_id": "test"}),
             content_type="application/json",

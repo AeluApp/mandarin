@@ -26,7 +26,6 @@ Exports:
 from __future__ import annotations
 
 import logging
-import os
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, UTC
@@ -62,18 +61,22 @@ def is_reddit_configured(account: str = "official") -> bool:
 
     account: "official" (brand account) or "community" (pseudonymous account)
     """
+    from ..settings import (
+        REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD,
+        REDDIT_ALT_USERNAME, REDDIT_ALT_PASSWORD,
+    )
     if account == "community":
         return bool(
-            os.environ.get("REDDIT_CLIENT_ID")
-            and os.environ.get("REDDIT_CLIENT_SECRET")
-            and os.environ.get("REDDIT_ALT_USERNAME")
-            and os.environ.get("REDDIT_ALT_PASSWORD")
+            REDDIT_CLIENT_ID
+            and REDDIT_CLIENT_SECRET
+            and REDDIT_ALT_USERNAME
+            and REDDIT_ALT_PASSWORD
         )
     return bool(
-        os.environ.get("REDDIT_CLIENT_ID")
-        and os.environ.get("REDDIT_CLIENT_SECRET")
-        and os.environ.get("REDDIT_USERNAME")
-        and os.environ.get("REDDIT_PASSWORD")
+        REDDIT_CLIENT_ID
+        and REDDIT_CLIENT_SECRET
+        and REDDIT_USERNAME
+        and REDDIT_PASSWORD
     )
 
 
@@ -85,13 +88,16 @@ def _get_token() -> str | None:
         return _cached_token
 
     try:
+        from ..settings import (
+            REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD,
+        )
         resp = httpx.post(
             _TOKEN_URL,
-            auth=(os.environ["REDDIT_CLIENT_ID"], os.environ["REDDIT_CLIENT_SECRET"]),
+            auth=(REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET),
             data={
                 "grant_type": "password",
-                "username": os.environ["REDDIT_USERNAME"],
-                "password": os.environ["REDDIT_PASSWORD"],
+                "username": REDDIT_USERNAME,
+                "password": REDDIT_PASSWORD,
             },
             headers={"User-Agent": _USER_AGENT},
             timeout=10.0,

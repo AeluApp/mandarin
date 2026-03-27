@@ -155,7 +155,7 @@ def test_kokoro_success(mock_run):
         temp_path = f.name
 
     key = _cache_key("你好", KOKORO_SPEED)
-    expected_path = str(AUDIO_OUTPUT_DIR / f"{key}.wav")
+    str(AUDIO_OUTPUT_DIR / f"{key}.wav")
 
     with patch("os.path.exists", return_value=True), \
          patch("os.path.getsize", return_value=32044):

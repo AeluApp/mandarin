@@ -241,7 +241,7 @@ def _insert_threshold(conn, metric_name, threshold_value):
 class TestKnowledgeConflictDetection(unittest.TestCase):
     def test_conflict_detected_when_outside_range(self):
         conn = _make_db()
-        kid = _insert_knowledge(conn, applicable_dimension="srs_funnel",
+        _insert_knowledge(conn, applicable_dimension="srs_funnel",
                                 implied_threshold_low=1.0,
                                 implied_threshold_high=3.0)
         _insert_threshold(conn, "srs_funnel", 5.0)  # outside range
@@ -562,7 +562,7 @@ class TestKnowledgeBaseCRUD(unittest.TestCase):
 
     def test_resolve_conflict(self):
         conn = _make_db()
-        kid = _insert_knowledge(conn)
+        _insert_knowledge(conn)
         _insert_threshold(conn, "srs_funnel", 5.0)
 
         from mandarin.intelligence.external_grounding import detect_knowledge_conflicts, resolve_conflict

@@ -12,9 +12,7 @@ def test_start_idempotent():
     with patch("mandarin.web.retention_scheduler._run_loop"):
         start()
         import mandarin.web.retention_scheduler as mod
-        t1 = mod._thread
         start()
-        t2 = mod._thread
         # Same thread if still alive, or new if it finished
         stop()
 

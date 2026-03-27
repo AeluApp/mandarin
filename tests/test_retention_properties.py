@@ -12,7 +12,8 @@ Covers:
 - Half-life clamping between MIN_HALF_LIFE and MAX_HALF_LIFE
 """
 
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import math

@@ -827,7 +827,8 @@ def admin_update_risk(risk_id):
         fields.append("updated_at = datetime('now')")
         values.append(risk_id)
         with db.connection() as conn:
-            conn.execute(f"UPDATE risk_item SET {', '.join(fields)} WHERE id = ?", values)
+            sql = f"UPDATE risk_item SET {', '.join(fields)} WHERE id = ?"
+            conn.execute(sql, values)
             conn.commit()
         return jsonify({"status": "updated"})
     except (sqlite3.Error, KeyError, TypeError) as e:
@@ -1044,7 +1045,8 @@ def admin_update_work_item(item_id):
                 return jsonify({"error": "No fields to update"}), 400
 
             values.append(item_id)
-            conn.execute(f"UPDATE work_item SET {', '.join(updates)} WHERE id = ?", values)
+            sql = f"UPDATE work_item SET {', '.join(updates)} WHERE id = ?"
+            conn.execute(sql, values)
             conn.commit()
 
             # Pull system suggestion: after marking done, suggest next item to pull

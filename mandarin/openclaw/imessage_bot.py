@@ -15,7 +15,6 @@ Setup:
 from __future__ import annotations
 
 import logging
-import os
 import sqlite3
 import subprocess
 import time
@@ -33,8 +32,9 @@ POLL_INTERVAL = 5  # seconds
 
 def _get_config():
     """Read config at call time."""
+    from ..settings import OPENCLAW_IMESSAGE_OWNER_ID
     return {
-        "owner_id": os.environ.get("OPENCLAW_IMESSAGE_OWNER_ID", ""),
+        "owner_id": OPENCLAW_IMESSAGE_OWNER_ID,
     }
 
 

@@ -2,7 +2,7 @@
 
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 from mandarin.openclaw.onboarding_agent import (
@@ -54,7 +54,7 @@ def _make_conn():
 
 def _ts(days_ago=0, hours_ago=0):
     """Return ISO timestamp relative to now, with +00:00 suffix for fromisoformat compat."""
-    dt = datetime.now(timezone.utc) - timedelta(days=days_ago, hours=hours_ago)
+    dt = datetime.now(UTC) - timedelta(days=days_ago, hours=hours_ago)
     return dt.strftime("%Y-%m-%d %H:%M:%S+00:00")
 
 
@@ -142,7 +142,7 @@ class TestUserContext(unittest.TestCase):
     def test_from_db_items_due(self):
         conn = _make_conn()
         _seed_user(conn, 1)
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        today = datetime.now(UTC).strftime("%Y-%m-%d")
         conn.execute("INSERT INTO progress (user_id, next_review_date) VALUES (1, ?)", (today,))
         conn.commit()
         ctx = UserContext.from_db(conn, 1)
@@ -218,7 +218,7 @@ class TestLifecycleDetector(unittest.TestCase):
         self.assertEqual(result, 999)
 
     def test_days_since_valid(self):
-        yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+        yesterday = (datetime.now(UTC) - timedelta(days=1)).isoformat()
         result = LifecycleDetector._days_since(yesterday)
         self.assertIn(result, (0, 1))
 

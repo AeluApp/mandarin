@@ -97,7 +97,7 @@ def test_options_displayed_in_shuffled_order():
     for _ in range(20):
         output = OutputCapture()
         inputs = InputSequence(["1"])  # Always pick first displayed option
-        result = run_dialogue_drill(scenario, output, inputs, support_level="full_support")
+        run_dialogue_drill(scenario, output, inputs, support_level="full_support")
 
         # Extract the order of displayed options from output
         option_lines = [l for l in output.lines if l.strip().startswith(("1.", "2.", "3.", "4."))]
@@ -452,7 +452,7 @@ def test_at_least_12_files_exist():
 
 def test_all_scenarios_parse_and_have_fields():
     for path in sorted(SCENARIO_DIR.glob("*.json")):
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
 
         for field in REQUIRED_TOP:
@@ -477,7 +477,7 @@ def test_all_scenarios_parse_and_have_fields():
 
 def test_scores_in_valid_range():
     for path in sorted(SCENARIO_DIR.glob("*.json")):
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
 
         for turn in data["tree"]["turns"]:
@@ -494,7 +494,7 @@ def test_hsk3_scenarios_count():
     """Should have at least 5 HSK 3 scenarios (1 original + 4 new)."""
     hsk3_count = 0
     for path in sorted(SCENARIO_DIR.glob("*.json")):
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
         if data.get("hsk_level") == 3:
             hsk3_count += 1

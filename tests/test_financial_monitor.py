@@ -2,7 +2,7 @@
 
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 
 from mandarin.openclaw.financial_monitor import (
     Anomaly,
@@ -54,7 +54,7 @@ def _make_conn():
 
 
 def _ts(days_ago=0, hours_ago=0):
-    dt = datetime.now(timezone.utc) - timedelta(days=days_ago, hours=hours_ago)
+    dt = datetime.now(UTC) - timedelta(days=days_ago, hours=hours_ago)
     return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 

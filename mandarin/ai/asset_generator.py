@@ -44,7 +44,7 @@ NEGATIVE_PROMPT = (
     "glossy, plastic, photorealistic face, text, watermark, logo"
 )
 
-COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://localhost:8188")
+from ..settings import COMFYUI_URL
 
 _OUTPUT_DIR = Path(__file__).resolve().parent.parent / "web" / "static" / "generated"
 

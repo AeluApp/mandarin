@@ -11,6 +11,8 @@ primary_region = "ewr"
 # Required secrets (set via `fly secrets set`):
 #   SECRET_KEY, JWT_SECRET, STRIPE_SECRET_KEY, RESEND_API_KEY,
 #   LITESTREAM_S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+# Optional secrets:
+#   ADMIN_EMAIL, PLAUSIBLE_API_KEY, PLAUSIBLE_DOMAIN, SENTRY_DSN
 
 [http_service]
   internal_port = 8080

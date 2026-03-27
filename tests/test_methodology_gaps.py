@@ -16,7 +16,7 @@ Covers:
 import json
 import math
 from contextlib import contextmanager
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from unittest.mock import patch, MagicMock
 
 import pytest
@@ -201,7 +201,7 @@ class TestAgingAlerts:
     def test_expedite_aging_warning(self, test_db):
         """Expedite items >2d should trigger warning."""
         conn, _ = test_db
-        three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
+        three_days_ago = (datetime.now(UTC) - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
         _create_work_item(conn, title="Expedite aging",
                           status="in_progress", service_class="expedite",
                           started_at=three_days_ago)
@@ -214,7 +214,7 @@ class TestAgingAlerts:
     def test_expedite_aging_critical(self, test_db):
         """Expedite items >5d should trigger critical."""
         conn, _ = test_db
-        six_days_ago = (datetime.now(timezone.utc) - timedelta(days=6)).strftime("%Y-%m-%d %H:%M:%S")
+        six_days_ago = (datetime.now(UTC) - timedelta(days=6)).strftime("%Y-%m-%d %H:%M:%S")
         _create_work_item(conn, title="Expedite critical",
                           status="in_progress", service_class="expedite",
                           started_at=six_days_ago)
@@ -227,7 +227,7 @@ class TestAgingAlerts:
     def test_standard_aging_warning(self, test_db):
         """Standard items >14d should trigger warning."""
         conn, _ = test_db
-        fifteen_days_ago = (datetime.now(timezone.utc) - timedelta(days=15)).strftime("%Y-%m-%d %H:%M:%S")
+        fifteen_days_ago = (datetime.now(UTC) - timedelta(days=15)).strftime("%Y-%m-%d %H:%M:%S")
         _create_work_item(conn, title="Standard aging",
                           status="in_progress", service_class="standard",
                           started_at=fifteen_days_ago)
@@ -240,7 +240,7 @@ class TestAgingAlerts:
     def test_standard_aging_critical(self, test_db):
         """Standard items >21d should trigger critical."""
         conn, _ = test_db
-        twenty_two_days_ago = (datetime.now(timezone.utc) - timedelta(days=22)).strftime("%Y-%m-%d %H:%M:%S")
+        twenty_two_days_ago = (datetime.now(UTC) - timedelta(days=22)).strftime("%Y-%m-%d %H:%M:%S")
         _create_work_item(conn, title="Standard critical",
                           status="in_progress", service_class="standard",
                           started_at=twenty_two_days_ago)
@@ -253,7 +253,7 @@ class TestAgingAlerts:
     def test_no_alert_for_young_items(self, test_db):
         """Items within thresholds should not trigger alerts."""
         conn, _ = test_db
-        one_day_ago = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+        one_day_ago = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
         _create_work_item(conn, title="Young item",
                           status="in_progress", service_class="standard",
                           started_at=one_day_ago)
@@ -265,8 +265,8 @@ class TestAgingAlerts:
     def test_blocked_items_included(self, test_db):
         """Blocked items should also trigger aging alerts."""
         conn, _ = test_db
-        twenty_days_ago = (datetime.now(timezone.utc) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
-        item_id = _create_work_item(conn, title="Blocked aging",
+        twenty_days_ago = (datetime.now(UTC) - timedelta(days=20)).strftime("%Y-%m-%d %H:%M:%S")
+        _create_work_item(conn, title="Blocked aging",
                                     status="blocked", service_class="standard",
                                     started_at=twenty_days_ago)
 

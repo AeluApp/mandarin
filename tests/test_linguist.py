@@ -1,6 +1,8 @@
 """Tests for linguist-grade features: response time, constructions, variation, tone confusion."""
 
-import sys, os, tempfile
+import sys
+import os
+import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from pathlib import Path
@@ -562,7 +564,7 @@ def test_transfer_drill_with_construction():
 
     output = []
     from mandarin.drills import run_transfer_drill
-    result = run_transfer_drill(
+    run_transfer_drill(
         item, conn,
         show_fn=lambda t, end="\n": output.append(t),
         input_fn=lambda p: "1",
@@ -582,8 +584,8 @@ def test_cognitive_load_cap():
     conn = _fresh_db()
 
     # Add many items so there's a large new pool
-    ids = _add_items(conn, 50, hsk_level=1)
-    session_id = start_session(conn)
+    _add_items(conn, 50, hsk_level=1)
+    start_session(conn)
 
     plan = plan_standard_session(conn)
     new_count = sum(1 for d in plan.drills if d.is_new)

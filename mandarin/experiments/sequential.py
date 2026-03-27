@@ -149,12 +149,10 @@ def _count_mature_assignments(
 ) -> int:
     """Count assignments made at least *window_days* ago."""
     try:
-        row = conn.execute(
-            f"""SELECT COUNT(*) as n FROM experiment_assignment
+        sql = f"""SELECT COUNT(*) as n FROM experiment_assignment
                 WHERE experiment_id = ?
-                  AND assigned_at <= datetime('now', '-{window_days} days')""",
-            (experiment_id,),
-        ).fetchone()
+                  AND assigned_at <= datetime('now', '-{window_days} days')"""
+        row = conn.execute(sql, (experiment_id,)).fetchone()
         return row["n"] if row else 0
     except sqlite3.OperationalError:
         # Fallback: count all assignments

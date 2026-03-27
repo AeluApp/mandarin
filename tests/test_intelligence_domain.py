@@ -6,7 +6,7 @@ Tests use an in-memory SQLite database to avoid touching the real DB.
 
 import json
 import sqlite3
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 import pytest
 
@@ -35,7 +35,7 @@ def _make_conn():
 
 def _ago(days: int) -> str:
     """Return ISO datetime string for N days ago (UTC)."""
-    dt = datetime.now(timezone.utc) - timedelta(days=days)
+    dt = datetime.now(UTC) - timedelta(days=days)
     return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 

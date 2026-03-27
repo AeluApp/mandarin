@@ -49,9 +49,11 @@ _PROVIDER_KEY_MAP = {
 
 def _provider_has_key(provider: str) -> bool:
     """Check if a cloud provider has an API key configured."""
-    import os
+    from .. import settings as _settings
     key_name = _PROVIDER_KEY_MAP.get(provider, "")
-    return bool(os.environ.get(key_name))
+    if not key_name:
+        return False
+    return bool(getattr(_settings, key_name, None))
 
 # Known open-source models available on major cloud providers.
 # model_selector auto-discovers new models weekly; this is the seed list.

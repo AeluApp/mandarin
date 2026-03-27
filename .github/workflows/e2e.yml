@@ -30,8 +30,8 @@ jobs:
       - name: Run E2E tests
         run: pytest tests/e2e/ -v --tb=short --browser chromium
         env:
-          MANDARIN_SECRET_KEY: "ci-e2e-test-secret-key"
-          MANDARIN_PRODUCTION: "0"
+          SECRET_KEY: "ci-e2e-test-secret-key"
+          IS_PRODUCTION: "0"
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v4

@@ -19,7 +19,6 @@ Exports:
 from __future__ import annotations
 
 import logging
-import os
 import time
 from dataclasses import dataclass, field
 
@@ -47,18 +46,19 @@ class PostResult:
 
 def is_tiktok_configured() -> bool:
     """Check if TikTok API credentials are configured."""
+    from ..settings import TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_ACCESS_TOKEN
     return bool(
-        os.environ.get("TIKTOK_CLIENT_KEY")
-        and os.environ.get("TIKTOK_CLIENT_SECRET")
-        and os.environ.get("TIKTOK_ACCESS_TOKEN")
+        TIKTOK_CLIENT_KEY
+        and TIKTOK_CLIENT_SECRET
+        and TIKTOK_ACCESS_TOKEN
     )
 
 
 def _get_headers() -> dict:
     """Get auth headers for TikTok API."""
-    token = os.environ.get("TIKTOK_ACCESS_TOKEN", "")
+    from ..settings import TIKTOK_ACCESS_TOKEN
     return {
-        "Authorization": f"Bearer {token}",
+        "Authorization": f"Bearer {TIKTOK_ACCESS_TOKEN}",
         "Content-Type": "application/json",
     }
 

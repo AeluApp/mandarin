@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import os
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -33,9 +32,10 @@ from . import commands, llm_handler, security
 
 def _get_config():
     """Read config at call time."""
+    from ..settings import OPENCLAW_DISCORD_TOKEN, OPENCLAW_DISCORD_OWNER_ID
     return {
-        "token": os.environ.get("OPENCLAW_DISCORD_TOKEN", ""),
-        "owner_id": int(os.environ.get("OPENCLAW_DISCORD_OWNER_ID", "0")),
+        "token": OPENCLAW_DISCORD_TOKEN,
+        "owner_id": int(OPENCLAW_DISCORD_OWNER_ID),
     }
 
 

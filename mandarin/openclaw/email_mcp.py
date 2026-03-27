@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import json
 import logging
-import os
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -241,11 +241,12 @@ def send_email(
     This is the fallback when Gmail MCP is not available.
     Returns send status.
     """
-    smtp_host = os.environ.get("SMTP_HOST", "")
-    smtp_port = int(os.environ.get("SMTP_PORT", "587"))
-    smtp_user = os.environ.get("SMTP_USER", "")
-    smtp_pass = os.environ.get("SMTP_PASSWORD", "")
-    from_addr = os.environ.get("SMTP_FROM", smtp_user)
+    from ..settings import SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, SMTP_FROM
+    smtp_host = SMTP_HOST
+    smtp_port = SMTP_PORT
+    smtp_user = SMTP_USER
+    smtp_pass = SMTP_PASSWORD
+    from_addr = SMTP_FROM or smtp_user
 
     if not smtp_host or not smtp_user:
         return {

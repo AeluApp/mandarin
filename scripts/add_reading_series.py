@@ -419,7 +419,7 @@ SERIES_EPISODES = [
 
 def main():
     # Read existing data
-    with open(DATA_FILE, "r", encoding="utf-8") as f:
+    with open(DATA_FILE, encoding="utf-8") as f:
         data = json.load(f)
 
     # Check for duplicate IDs

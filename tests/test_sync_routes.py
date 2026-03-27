@@ -315,7 +315,7 @@ class TestSyncPushVocabEncounter:
     def test_valid_vocab_encounter_creates_row(self, app_client):
         """A vocab_encounter action should insert a row into vocab_encounter."""
         client, conn = app_client
-        user = _login(client, conn)
+        _login(client, conn)
         item_id = _insert_content_item(conn, hanzi="谢谢")
 
         resp = client.post(
@@ -435,7 +435,7 @@ class TestSyncPushMediaWatched:
         client, conn = app_client
         _login(client, conn)
 
-        with patch("mandarin.web.sync_routes._process_media_watched") as mock_proc:
+        with patch("mandarin.web.sync_routes._process_media_watched"):
             resp = client.post(
                 "/api/sync/push",
                 data=json.dumps({
@@ -667,7 +667,7 @@ class TestSyncPull:
     def test_pull_does_not_return_other_users_data(self, app_client):
         """Pull should only return data for the authenticated user, not others."""
         client, conn = app_client
-        user = _login(client, conn)
+        _login(client, conn)
         item_id = _insert_content_item(conn)
 
         # Create a second user and insert progress for them

@@ -511,10 +511,10 @@ def generate_screen_pillow(screen, width, height):
             if bold:
                 return ImageFont.truetype("/System/Library/Fonts/Supplemental/Georgia Bold.ttf", size)
             return ImageFont.truetype("/System/Library/Fonts/Supplemental/Georgia.ttf", size)
-        except (OSError, IOError):
+        except OSError:
             try:
                 return ImageFont.truetype("DejaVuSans.ttf", size)
-            except (OSError, IOError):
+            except OSError:
                 return ImageFont.load_default()
 
     font_large = _font(int(36 * scale), bold=True)
@@ -776,10 +776,10 @@ def generate_feature_graphic_pillow(width, height):
             if bold:
                 return ImageFont.truetype("/System/Library/Fonts/Supplemental/Georgia Bold.ttf", size)
             return ImageFont.truetype("/System/Library/Fonts/Supplemental/Georgia.ttf", size)
-        except (OSError, IOError):
+        except OSError:
             try:
                 return ImageFont.truetype("DejaVuSans.ttf", size)
-            except (OSError, IOError):
+            except OSError:
                 return ImageFont.load_default()
 
     # Large hanzi character (faint)

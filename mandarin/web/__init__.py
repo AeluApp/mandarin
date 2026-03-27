@@ -332,8 +332,8 @@ def create_app(testing=False):
     @app.route("/api/sw-status")
     def sw_status():
         """Returns SW status. Set SW_KILL=1 env var to force-unregister all SWs."""
-        kill = os.environ.get("SW_KILL", "0") == "1"
-        return jsonify({"active": not kill, "build_id": _build_id})
+        from ..settings import SW_KILL
+        return jsonify({"active": not SW_KILL, "build_id": _build_id})
 
     # ── Register blueprints ───────────────────────────────
     from .auth_routes import auth_bp

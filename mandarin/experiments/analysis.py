@@ -84,8 +84,7 @@ def get_experiment_results(
         placeholders = ",".join("?" * len(user_ids))
 
         try:
-            user_stats = conn.execute(
-                f"""SELECT
+            sql = f"""SELECT
                         user_id,
                         COUNT(*) as sessions,
                         SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) as completed,
@@ -95,12 +94,10 @@ def get_experiment_results(
                     FROM session_log
                     WHERE user_id IN ({placeholders})
                       AND experiment_variant = ?
-                    GROUP BY user_id""",
-                user_ids + [variant],
-            ).fetchall()
+                    GROUP BY user_id"""
+            user_stats = conn.execute(sql, user_ids + [variant]).fetchall()
         except sqlite3.OperationalError:
-            user_stats = conn.execute(
-                f"""SELECT
+            sql_fallback = f"""SELECT
                         user_id,
                         COUNT(*) as sessions,
                         SUM(CASE WHEN session_outcome = 'completed' THEN 1 ELSE 0 END) as completed,
@@ -109,9 +106,8 @@ def get_experiment_results(
                         AVG(duration_seconds) as avg_duration
                     FROM session_log
                     WHERE user_id IN ({placeholders})
-                    GROUP BY user_id""",
-                user_ids,
-            ).fetchall()
+                    GROUP BY user_id"""
+            user_stats = conn.execute(sql_fallback, user_ids).fetchall()
 
         user_data_by_variant[variant] = [dict(u) for u in user_stats]
 

@@ -16,7 +16,7 @@ import pytest
 pytest.importorskip("httpx")
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch, MagicMock
 
 import sys
@@ -43,7 +43,7 @@ def exp_db():
 def _insert_session(conn, user_id=1, days_ago=0, items=10, correct=8, duration=300,
                     outcome="completed", modality_counts=None):
     """Insert a session_log row."""
-    ts = (datetime.now(timezone.utc) - timedelta(days=days_ago)).strftime("%Y-%m-%d %H:%M:%S")
+    ts = (datetime.now(UTC) - timedelta(days=days_ago)).strftime("%Y-%m-%d %H:%M:%S")
     mc = json.dumps(modality_counts) if modality_counts else None
     conn.execute(
         """INSERT INTO session_log
@@ -59,7 +59,7 @@ def _create_experiment(conn, name="test_exp", status="running",
                        variants=None, traffic_pct=100.0):
     """Create a test experiment."""
     variants = variants or ["control", "treatment"]
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     cur = conn.execute(
         """INSERT INTO experiment
            (name, description, variants, traffic_pct, guardrail_metrics,

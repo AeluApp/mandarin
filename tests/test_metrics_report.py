@@ -4,7 +4,7 @@ and report formatters to bring the module up from 0% coverage.
 
 import sqlite3
 import tempfile
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from pathlib import Path
 
 import pytest
@@ -91,8 +91,8 @@ def conn():
         );
     """)
 
-    now = datetime.now(timezone.utc)
-    now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC)
+    now.strftime("%Y-%m-%d %H:%M:%S")
     yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
     three_days_ago = (now - timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
     ten_days_ago = (now - timedelta(days=10)).strftime("%Y-%m-%d %H:%M:%S")
@@ -491,7 +491,7 @@ class TestCrashRate:
         assert result["top_errors"] == []
 
     def test_with_crashes_positive_rate(self, conn):
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             "INSERT INTO crash_log (user_id, timestamp, error_type, error_message) "
             "VALUES (1, ?, 'ValueError', 'test crash')",
@@ -625,7 +625,7 @@ class TestGenerateReportMd:
 class TestGenerateReport:
     def test_with_real_db_file_returns_dict(self, conn):
         """Write the in-memory DB to a temp file, then call generate_report."""
-        import tempfile, shutil
+        import shutil
         tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
         tmp.close()
         tmp_path = Path(tmp.name)
@@ -665,7 +665,6 @@ class TestGenerateReport:
 
     def test_plain_format_prints(self, conn, capsys):
         """Ensure plain format writes to stdout."""
-        import tempfile
         tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
         tmp.close()
         tmp_path = Path(tmp.name)
@@ -686,7 +685,6 @@ class TestGenerateReport:
             tmp_path.unlink(missing_ok=True)
 
     def test_dict_includes_north_star_data(self, conn):
-        import tempfile
         tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
         tmp.close()
         tmp_path = Path(tmp.name)

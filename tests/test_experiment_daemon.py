@@ -11,7 +11,7 @@ Validates:
 """
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 import pytest
@@ -135,7 +135,7 @@ class TestDaemonTick:
         flag_name = "exp_rollout_test_rollout"
         set_flag(daemon_db, flag_name, enabled=True, rollout_pct=0)
 
-        past = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+        past = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
         daemon_db.execute("""
             INSERT INTO experiment_rollout
             (experiment_id, winner_variant, rollout_stage, current_pct,

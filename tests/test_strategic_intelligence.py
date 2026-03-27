@@ -459,7 +459,8 @@ class TestSeedData(unittest.TestCase):
     def test_competitor_seed_no_constraint_violations(self):
         """15. Competitor seed inserts without constraint violations."""
         from mandarin.db.core import _migrate_v70_to_v71, get_connection
-        import tempfile, os
+        import tempfile
+        import os
         from pathlib import Path
         tf = tempfile.NamedTemporaryFile(suffix='.db', delete=False)
         tf.close()
@@ -477,7 +478,8 @@ class TestSeedData(unittest.TestCase):
     def test_evaluation_dimensions_seed_no_violations(self):
         """16. Evaluation dimensions seed inserts without violations."""
         from mandarin.db.core import _migrate_v70_to_v71, get_connection
-        import tempfile, os
+        import tempfile
+        import os
         from pathlib import Path
         tf = tempfile.NamedTemporaryFile(suffix='.db', delete=False)
         tf.close()

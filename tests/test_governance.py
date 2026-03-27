@@ -265,7 +265,7 @@ class TestDeletionRequest(unittest.TestCase):
         conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 2, 0)")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
         conn.commit()
-        result = handle_deletion_request(conn, '1')
+        handle_deletion_request(conn, '1')
         remaining = conn.execute("SELECT COUNT(*) FROM review_event WHERE user_id = 1").fetchone()[0]
         self.assertEqual(remaining, 0)
 

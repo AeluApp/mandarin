@@ -14,7 +14,6 @@ Exports:
 from __future__ import annotations
 
 import logging
-import os
 import time
 from functools import lru_cache
 
@@ -29,10 +28,8 @@ _cache: dict[str, tuple[float, object]] = {}
 
 def is_plausible_configured() -> bool:
     """Check if Plausible API is configured."""
-    return bool(
-        os.environ.get("PLAUSIBLE_API_KEY")
-        and os.environ.get("PLAUSIBLE_DOMAIN")
-    )
+    from ..settings import PLAUSIBLE_API_KEY, PLAUSIBLE_DOMAIN
+    return bool(PLAUSIBLE_API_KEY and PLAUSIBLE_DOMAIN)
 
 
 def _api_get(endpoint: str, params: dict | None = None) -> dict | None:
@@ -40,8 +37,9 @@ def _api_get(endpoint: str, params: dict | None = None) -> dict | None:
     if not is_plausible_configured():
         return None
 
-    api_key = os.environ["PLAUSIBLE_API_KEY"]
-    domain = os.environ["PLAUSIBLE_DOMAIN"]
+    from ..settings import PLAUSIBLE_API_KEY, PLAUSIBLE_DOMAIN
+    api_key = PLAUSIBLE_API_KEY
+    domain = PLAUSIBLE_DOMAIN
 
     # Cache check
     cache_key = f"{endpoint}:{params}"

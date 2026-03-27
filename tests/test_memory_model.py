@@ -216,7 +216,7 @@ class TestProcessReview:
     def test_updates_stability_on_correct(self):
         conn = _make_db()
         _seed_items(conn, 1)
-        r1 = process_review(conn, 1, 1, RATING_GOOD)
+        process_review(conn, 1, 1, RATING_GOOD)
         r2 = process_review(conn, 1, 1, RATING_GOOD)
         # Second review in learning state — stability should update
         assert r2["new_stability"] > 0

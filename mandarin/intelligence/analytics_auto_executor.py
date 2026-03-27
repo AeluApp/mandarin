@@ -29,7 +29,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import re
 import sqlite3
 import time
@@ -46,9 +45,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # ── Configuration ──────────────────────────────────────────────────────────
 
-ANALYTICS_EXECUTOR_ENABLED = os.environ.get(
-    "ANALYTICS_EXECUTOR_ENABLED", ""
-).lower() in ("true", "1", "yes")
+from ..settings import ANALYTICS_EXECUTOR_ENABLED
 
 _MAX_ACTIONS_PER_DAY = 3
 _REVERT_WINDOW_HOURS = 48

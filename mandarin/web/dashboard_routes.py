@@ -572,21 +572,17 @@ def api_session_items():
         placeholders = ",".join("?" * len(id_list))
 
         # Content item data
-        content_rows = conn.execute(
-            f"""SELECT id, hanzi, pinyin, english, hsk_level
-                FROM content_item WHERE id IN ({placeholders})""",
-            id_list,
-        ).fetchall()
+        sql = f"""SELECT id, hanzi, pinyin, english, hsk_level
+                FROM content_item WHERE id IN ({placeholders})"""
+        content_rows = conn.execute(sql, id_list).fetchall()
         content_map = {r["id"]: dict(r) for r in content_rows}
 
         # Best mastery stage per item (across modalities)
         stage_order = ["seen", "passed_once", "stabilizing", "stable", "durable"]
-        progress_rows = conn.execute(
-            f"""SELECT content_item_id, mastery_stage
+        sql = f"""SELECT content_item_id, mastery_stage
                 FROM progress
-                WHERE user_id = ? AND content_item_id IN ({placeholders})""",
-            [user_id] + id_list,
-        ).fetchall()
+                WHERE user_id = ? AND content_item_id IN ({placeholders})"""
+        progress_rows = conn.execute(sql, [user_id] + id_list).fetchall()
         best_stage = {}
         for pr in progress_rows:
             cid = pr["content_item_id"]
@@ -599,14 +595,12 @@ def api_session_items():
 
         # Error data from this session — items the user got wrong
         session_id = session["id"]
-        error_rows = conn.execute(
-            f"""SELECT content_item_id, user_answer, expected_answer,
+        sql = f"""SELECT content_item_id, user_answer, expected_answer,
                        drill_type, error_type
                 FROM error_log
                 WHERE session_id = ? AND content_item_id IN ({placeholders})
-                ORDER BY created_at ASC""",
-            [session_id] + id_list,
-        ).fetchall()
+                ORDER BY created_at ASC"""
+        error_rows = conn.execute(sql, [session_id] + id_list).fetchall()
         # Map: content_item_id → first error (most relevant)
         error_map = {}
         for er in error_rows:

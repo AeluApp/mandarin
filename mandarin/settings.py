@@ -88,10 +88,14 @@ STRIPE_TAX_ENABLED = os.environ.get("STRIPE_TAX_ENABLED", "").lower() in ("1", "
 SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
 
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+RESEND_AUDIENCE_ID = os.environ.get("RESEND_AUDIENCE_ID", "")
 FROM_EMAIL = os.environ.get("FROM_EMAIL", f"Aelu <noreply@{CANONICAL_DOMAIN}>")
 MAILING_ADDRESS = os.environ.get("MAILING_ADDRESS", "Aelu")
+NEWSLETTER_TO = os.environ.get("NEWSLETTER_TO", "")
+MARKETING_NOTIFY_EMAIL = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
 
 PLAUSIBLE_DOMAIN = os.environ.get("PLAUSIBLE_DOMAIN", "")  # e.g. "aeluapp.com"
+PLAUSIBLE_API_KEY = os.environ.get("PLAUSIBLE_API_KEY", "")
 
 # ── LLM spend cap ─────────────────────────────────────
 # Monthly USD cap for cloud LLM token spend. Once reached, all non-critical
@@ -102,6 +106,16 @@ try:
     LLM_MONTHLY_SPEND_CAP_USD = float(os.environ.get("LLM_MONTHLY_SPEND_CAP_USD", "25.0"))
 except (ValueError, TypeError):
     LLM_MONTHLY_SPEND_CAP_USD = 25.0
+# ── SMTP (fallback email transport) ──────────────────
+SMTP_HOST = os.environ.get("SMTP_HOST", "")
+try:
+    SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+except (ValueError, TypeError):
+    SMTP_PORT = 587
+SMTP_USER = os.environ.get("SMTP_USER", "")
+SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
+SMTP_FROM = os.environ.get("SMTP_FROM", SMTP_USER)
+
 PLAUSIBLE_SCRIPT_URL = os.environ.get("PLAUSIBLE_SCRIPT_URL", "https://plausible.io/js/script.js")
 GA4_MEASUREMENT_ID = os.environ.get("GA4_MEASUREMENT_ID", "")  # e.g. "G-XXXXXXXXXX"
 
@@ -123,6 +137,28 @@ VAPID_CLAIMS_EMAIL = os.environ.get("VAPID_CLAIMS_EMAIL", f"mailto:admin@{CANONI
 
 ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "")
+
+# ── Sentry (error monitoring) ────────────────────────
+SENTRY_AUTH_TOKEN = os.environ.get("SENTRY_AUTH_TOKEN", "")
+SENTRY_ORG = os.environ.get("SENTRY_ORG", "")
+SENTRY_PROJECT = os.environ.get("SENTRY_PROJECT", "")
+
+# ── Fly.io / Infrastructure ─────────────────────────
+FLY_API_TOKEN = os.environ.get("FLY_API_TOKEN", "")
+FLY_APP_NAME = os.environ.get("FLY_APP_NAME", "")
+FLY_MACHINE_ID = os.environ.get("FLY_MACHINE_ID", "")
+HOSTNAME = os.environ.get("HOSTNAME", "local")
+
+# ── Service Worker ───────────────────────────────────
+SW_KILL = os.environ.get("SW_KILL", "0") == "1"
+
+# ── Intelligence auto-fixers ─────────────────────────
+AUTO_FIX_ENABLED = os.environ.get("AUTO_FIX_ENABLED", "").lower() in ("true", "1", "yes")
+ANALYTICS_EXECUTOR_ENABLED = os.environ.get("ANALYTICS_EXECUTOR_ENABLED", "").lower() in ("true", "1", "yes")
+
+# ── Marketing scheduler ─────────────────────────────
+MARKETING_SCHEDULER_ENABLED = os.environ.get("MARKETING_SCHEDULER_ENABLED", "").lower() in ("true", "1", "yes")
+MARKETING_LAUNCH_DATE = os.environ.get("MARKETING_LAUNCH_DATE", "")
 
 # ── Sentry ────────────────────────────────────────────
 SENTRY_TRACES_SAMPLE_RATE = 0.1
@@ -177,6 +213,37 @@ ESTIMATE_POINTS = {"S": 1, "M": 3, "L": 5, "XL": 8}
 # Provider API keys: set GROQ_API_KEY, TOGETHER_API_KEY, FIREWORKS_API_KEY,
 # SILICONFLOW_API_KEY, DEEPSEEK_API_KEY, or MISTRAL_API_KEY as needed.
 
+# ── Cloud LLM provider API keys ─────────────────────
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+TOGETHER_API_KEY = os.environ.get("TOGETHER_API_KEY", "")
+FIREWORKS_API_KEY = os.environ.get("FIREWORKS_API_KEY", "")
+SILICONFLOW_API_KEY = os.environ.get("SILICONFLOW_API_KEY", "")
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
+MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+
+# ── AI / ComfyUI ────────────────────────────────────
+COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://localhost:8188")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+
+# ── Social media API keys ────────────────────────────
+TWITTER_API_KEY = os.environ.get("TWITTER_API_KEY", "")
+TWITTER_API_SECRET = os.environ.get("TWITTER_API_SECRET", "")
+TWITTER_ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN", "")
+TWITTER_ACCESS_SECRET = os.environ.get("TWITTER_ACCESS_SECRET", "")
+
+TIKTOK_CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "")
+TIKTOK_CLIENT_SECRET = os.environ.get("TIKTOK_CLIENT_SECRET", "")
+TIKTOK_ACCESS_TOKEN = os.environ.get("TIKTOK_ACCESS_TOKEN", "")
+
+REDDIT_CLIENT_ID = os.environ.get("REDDIT_CLIENT_ID", "")
+REDDIT_CLIENT_SECRET = os.environ.get("REDDIT_CLIENT_SECRET", "")
+REDDIT_USERNAME = os.environ.get("REDDIT_USERNAME", "")
+REDDIT_PASSWORD = os.environ.get("REDDIT_PASSWORD", "")
+REDDIT_ALT_USERNAME = os.environ.get("REDDIT_ALT_USERNAME", "")
+REDDIT_ALT_PASSWORD = os.environ.get("REDDIT_ALT_PASSWORD", "")
+
+# ── Ollama / LLM ────────────────────────────────────
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 
 try:

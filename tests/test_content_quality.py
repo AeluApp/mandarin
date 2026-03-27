@@ -5,7 +5,7 @@ pytest.importorskip("httpx")
 
 import json
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from unittest.mock import patch, MagicMock
 
 from mandarin.ai.content_quality import (
@@ -451,7 +451,7 @@ def test_assess_media_shelf_health_empty(conn):
 
 
 def test_assess_media_shelf_health_with_data(conn):
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "INSERT INTO media_watch (media_id, title, media_type, hsk_level, times_watched, last_watched_at) "
         "VALUES ('m1', 'Test Video', 'video', 2, 3, ?)",
@@ -671,7 +671,7 @@ def test_question_answer_in_distractors():
 # ── Test 23: Media shelf diversity scoring ───────────────────────────────
 
 def test_media_shelf_diversity(conn):
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     for media_type in ("video", "podcast", "song"):
         conn.execute(
             "INSERT INTO media_watch (media_id, title, media_type, hsk_level, times_watched, last_watched_at) "

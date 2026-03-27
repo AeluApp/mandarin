@@ -62,7 +62,7 @@ def api_grammar_points():
     where_clause = ("WHERE " + " AND ".join(conditions)) if conditions else ""
 
     with db.connection() as conn:
-        rows = conn.execute(f"""
+        sql = f"""
             SELECT
                 gp.id,
                 gp.name,
@@ -78,7 +78,8 @@ def api_grammar_points():
                 ON gp.id = gr.grammar_point_id AND gr.user_id = ?
             {where_clause}
             ORDER BY gp.hsk_level ASC, gp.difficulty ASC, gp.id ASC
-        """, [user_id] + params).fetchall()
+        """
+        rows = conn.execute(sql, [user_id] + params).fetchall()
 
         points = [
             {

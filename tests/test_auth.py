@@ -10,7 +10,7 @@ Covers:
 """
 
 import hashlib
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from unittest.mock import patch
 
 import pytest
@@ -361,7 +361,7 @@ class TestPasswordReset:
         token = create_reset_token(conn, TEST_EMAIL)
 
         # Manually expire the token by setting expiry to the past
-        past = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime(
+        past = (datetime.now(UTC) - timedelta(hours=2)).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
         token_hash = hashlib.sha256(token.encode()).hexdigest()
@@ -458,7 +458,7 @@ class TestAccountLockout:
         created = _create_test_user(conn)
 
         # Manually lock the account with a future lockout time
-        future = (datetime.now(timezone.utc) + timedelta(minutes=30)).strftime(
+        future = (datetime.now(UTC) + timedelta(minutes=30)).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
         conn.execute(
@@ -476,7 +476,7 @@ class TestAccountLockout:
         created = _create_test_user(conn)
 
         # Set lockout to the past (already expired)
-        past = (datetime.now(timezone.utc) - timedelta(minutes=1)).strftime(
+        past = (datetime.now(UTC) - timedelta(minutes=1)).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
         conn.execute(
@@ -511,7 +511,7 @@ class TestAccountLockout:
 class TestInviteCodes:
 
     def _insert_invite_code(self, conn, code="TESTCODE", max_uses=1, use_count=0):
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             "INSERT INTO invite_code (code, created_at, max_uses, use_count) VALUES (?, ?, ?, ?)",
             (code, now, max_uses, use_count),
@@ -540,7 +540,7 @@ class TestInviteCodes:
     def test_fully_used_invite_code_raises(self, test_db):
         """An invite code that has been fully used (use_count >= max_uses) is rejected."""
         conn, _ = test_db
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute(
             "INSERT INTO invite_code (code, created_at, max_uses, use_count, used_at) VALUES (?, ?, ?, ?, ?)",
             ("USED1", now, 1, 1, now),
@@ -612,7 +612,7 @@ class TestEmailVerification:
         user = _create_test_user(conn)
 
         # Expire the verify token
-        past = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime(
+        past = (datetime.now(UTC) - timedelta(hours=2)).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
         conn.execute(

@@ -272,7 +272,7 @@ def _mc_explanation(q_en, correct, correct_hanzi, entry):
 
     # Check if the correct answer is in Chinese
     is_cn_answer = bool(re.search(r'[\u4e00-\u9fff]', correct))
-    is_cn_question = bool(re.search(r'[\u4e00-\u9fff]', q_en))
+    bool(re.search(r'[\u4e00-\u9fff]', q_en))
 
     # For Chinese answers, use the answer with context reference
     if is_cn_answer:
@@ -374,7 +374,7 @@ def _brief_desc(desc):
 
 
 def main():
-    with open(CATALOG_PATH, "r", encoding="utf-8") as f:
+    with open(CATALOG_PATH, encoding="utf-8") as f:
         data = json.load(f)
 
     if isinstance(data, dict) and "entries" in data:
@@ -410,7 +410,7 @@ def main():
     print(f"By type: {by_type}")
 
     # Verify
-    with open(CATALOG_PATH, "r", encoding="utf-8") as f:
+    with open(CATALOG_PATH, encoding="utf-8") as f:
         check = json.load(f)
     check_entries = check.get("entries", check) if isinstance(check, dict) else check
     missing = 0

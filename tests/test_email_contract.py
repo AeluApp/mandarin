@@ -16,7 +16,8 @@ Covers:
 - Email scheduler _send_trigger() dispatch logic
 """
 
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from unittest.mock import patch, MagicMock

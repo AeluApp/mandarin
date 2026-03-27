@@ -796,7 +796,7 @@ class TestMeasureEncounterEffectiveness:
         assert result["lift_pct"] is None
 
     def _seed_encounter_items(self, conn, item_ids, reps, looked_up=1):
-        for item_id, rep in zip(item_ids, reps):
+        for item_id, rep in zip(item_ids, reps, strict=False):
             conn.execute("""
                 INSERT INTO vocab_encounter (content_item_id, looked_up) VALUES (?, ?)
             """, (item_id, looked_up))
@@ -807,7 +807,7 @@ class TestMeasureEncounterEffectiveness:
         conn.commit()
 
     def _seed_control_items(self, conn, item_ids, reps):
-        for item_id, rep in zip(item_ids, reps):
+        for item_id, rep in zip(item_ids, reps, strict=False):
             conn.execute("""
                 INSERT INTO progress (content_item_id, user_id, mastery_stage, repetitions, ease_factor)
                 VALUES (?, 1, 'stable', ?, 2.5)

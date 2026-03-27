@@ -79,8 +79,8 @@ def app_client(test_db):
     app.config["WTF_CSRF_ENABLED"] = False
 
     fake = _FakeConn(conn)
-    fake_connection = lambda: fake
-    fake_ensure_db = lambda: conn
+    def fake_connection(): return fake
+    def fake_ensure_db(): return conn
 
     with patch("mandarin.db.connection", fake_connection), \
          patch("mandarin.web.auth_routes.db.connection", fake_connection), \

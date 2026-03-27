@@ -232,7 +232,8 @@ def _request_deletion_impl():
         from ..db.core import _table_set
         for table in sorted(_GDPR_DELETE_TABLES & _table_set(conn)):
             try:
-                conn.execute(f"DELETE FROM {table} WHERE user_id = ?", (user_id,))
+                sql = f"DELETE FROM {table} WHERE user_id = ?"
+                conn.execute(sql, (user_id,))
             except sqlite3.OperationalError:
                 pass
 

@@ -8,7 +8,7 @@ confidence-based finding labeling, enforcement gate, override accuracy.
 import json
 import sqlite3
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 
@@ -258,7 +258,7 @@ class TestRecordPredictionOutcomes(unittest.TestCase):
                          dimension="retention", baseline=20.0, delta=5.0,
                          due_offset="-1 days"):
         """Insert a prediction that is past its verification window."""
-        due_at = (datetime.now(timezone.utc) + timedelta(days=-1)).strftime("%Y-%m-%d %H:%M:%S")
+        due_at = (datetime.now(UTC) + timedelta(days=-1)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -303,7 +303,7 @@ class TestRecordPredictionOutcomes(unittest.TestCase):
         fid = _insert_finding(conn, dimension="retention")
 
         # Prediction without decision_log entry
-        due_at = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+        due_at = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -335,7 +335,7 @@ class TestExpireStalePredictions(unittest.TestCase):
         conn = _make_db()
         fid = _insert_finding(conn)
 
-        past_due = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
+        past_due = (datetime.now(UTC) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -357,7 +357,7 @@ class TestExpireStalePredictions(unittest.TestCase):
         conn = _make_db()
         fid = _insert_finding(conn)
 
-        past_due = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
+        past_due = (datetime.now(UTC) - timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -381,7 +381,7 @@ class TestExpireStalePredictions(unittest.TestCase):
         conn = _make_db()
         fid = _insert_finding(conn)
 
-        future = (datetime.now(timezone.utc) + timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
+        future = (datetime.now(UTC) + timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -605,7 +605,7 @@ class TestSelfAuditReport(unittest.TestCase):
 
         # Insert some predictions and outcomes
         fid = _insert_finding(conn)
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         conn.execute("""
             INSERT INTO pi_prediction_ledger
                 (id, finding_id, model_id, dimension, claim_type, metric_name,
@@ -670,7 +670,7 @@ class TestOverrideAccuracy(unittest.TestCase):
     def test_override_accuracy_computation(self):
         from mandarin.intelligence.feedback_loops import _compute_override_accuracy
         conn = _make_db()
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
         fid = _insert_finding(conn, dimension="retention")
         # Insert override decision

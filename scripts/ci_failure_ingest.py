@@ -23,7 +23,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -368,7 +368,7 @@ def build_finding(
         "workflow_run_id": run_id,
         "job_name": job_name,
         "failure_type": failure_type,
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(UTC).isoformat(),
     }
 
 
@@ -431,7 +431,7 @@ def main():
     output = {
         "workflow_name": WORKFLOW_NAME,
         "workflow_run_id": WORKFLOW_RUN_ID,
-        "ingested_at": datetime.now(timezone.utc).isoformat(),
+        "ingested_at": datetime.now(UTC).isoformat(),
         "findings": unique_findings,
     }
 
