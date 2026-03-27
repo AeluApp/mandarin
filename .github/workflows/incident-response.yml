@@ -1,0 +1,188 @@
+name: Incident Response
+
+on:
+  # Triggered by external webhooks (UptimeRobot, Sentry, manual)
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Alert source (uptimerobot, sentry, manual)"
+        required: true
+        type: choice
+        options:
+          - uptimerobot
+          - sentry
+          - manual
+      severity:
+        description: "Incident severity"
+        required: true
+        type: choice
+        options:
+          - critical
+          - high
+          - medium
+          - low
+      details:
+        description: "Incident details / alert body"
+        required: false
+        type: string
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      issues: write
+      contents: read
+    outputs:
+      needs_code_fix: ${{ steps.health.outputs.needs_code_fix }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check production health
+        id: health
+        run: |
+          echo "Checking production health..."
+          LIVE=$(curl -s -o /dev/null -w "%{http_code}" https://aelu-app.fly.dev/api/health/live || echo "000")
+          READY=$(curl -s -o /dev/null -w "%{http_code}" https://aelu-app.fly.dev/api/health/ready || echo "000")
+
+          echo "live_status=$LIVE" >> $GITHUB_OUTPUT
+          echo "ready_status=$READY" >> $GITHUB_OUTPUT
+
+          if [ "$LIVE" = "200" ] && [ "$READY" = "200" ]; then
+            echo "app_status=healthy" >> $GITHUB_OUTPUT
+            echo "needs_code_fix=false" >> $GITHUB_OUTPUT
+            echo "✅ App is healthy (live=$LIVE, ready=$READY)"
+          elif [ "$LIVE" = "200" ]; then
+            echo "app_status=degraded" >> $GITHUB_OUTPUT
+            echo "needs_code_fix=true" >> $GITHUB_OUTPUT
+            echo "⚠️ App is degraded (live=$LIVE, ready=$READY)"
+          else
+            echo "app_status=down" >> $GITHUB_OUTPUT
+            echo "needs_code_fix=true" >> $GITHUB_OUTPUT
+            echo "🔴 App is DOWN (live=$LIVE, ready=$READY)"
+          fi
+
+      - name: Attempt recovery if down
+        if: steps.health.outputs.app_status == 'down'
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          # Install flyctl
+          curl -L https://fly.io/install.sh | sh
+          export PATH="$HOME/.fly/bin:$PATH"
+
+          echo "Attempting machine restart..."
+          flyctl machines restart -a aelu-app --select || echo "Restart failed"
+
+          # Wait and re-check
+          sleep 30
+          LIVE=$(curl -s -o /dev/null -w "%{http_code}" https://aelu-app.fly.dev/api/health/live || echo "000")
+          if [ "$LIVE" = "200" ]; then
+            echo "✅ Recovery successful after restart"
+          else
+            echo "❌ Still down after restart — likely needs code fix or infrastructure change"
+          fi
+
+      - name: Create incident issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="🚨 Incident: ${{ inputs.source }} — ${{ inputs.severity }}"
+          BODY="## Production Incident
+
+          **Source:** ${{ inputs.source }}
+          **Severity:** ${{ inputs.severity }}
+          **Time:** $(date -u +%Y-%m-%dT%H:%M:%SZ)
+          **App status:** ${{ steps.health.outputs.app_status }}
+          **Health:** live=${{ steps.health.outputs.live_status }}, ready=${{ steps.health.outputs.ready_status }}
+
+          ### Details
+          ${{ inputs.details }}
+
+          ### Actions Taken
+          - [x] Health check performed
+          - [x] Auto-restart attempted (if app was down)
+          - [ ] Root cause identified
+          - [ ] Fix deployed
+          "
+
+          gh issue create \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --label "incident,${{ inputs.severity }}"
+
+  auto-fix:
+    needs: triage
+    if: needs.triage.outputs.needs_code_fix == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Configure git
+        run: |
+          git config user.name "aelu-ci-bot"
+          git config user.email "ci-bot@aeluapp.com"
+
+      - name: Diagnose and fix production issue
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INCIDENT_SOURCE: ${{ inputs.source }}
+          INCIDENT_SEVERITY: ${{ inputs.severity }}
+          INCIDENT_DETAILS: ${{ inputs.details }}
+        run: |
+          python -c "
+          import scripts.auto_fix_ci as agent
+          import os, textwrap
+
+          details = os.environ.get('INCIDENT_DETAILS', 'No details provided')
+          source = os.environ.get('INCIDENT_SOURCE', 'unknown')
+          severity = os.environ.get('INCIDENT_SEVERITY', 'unknown')
+
+          system_prompt = textwrap.dedent('''
+          You are an autonomous incident response agent for Aelu (Mandarin learning platform).
+          A production incident has been detected. Your job is to:
+          1. Diagnose the likely root cause from the incident details
+          2. Check relevant code, config, and health endpoints
+          3. If a code fix is possible, make the minimal change
+          4. If it is an infrastructure issue (OOM, DNS, etc.), explain what manual action is needed
+
+          Rules:
+          - NEVER lower test coverage thresholds. Always write tests instead.
+          - Keep fixes minimal and focused on the incident.
+          - Check fly.toml, Dockerfile, and settings.py for config issues.
+          - Check recent git log for recent changes that might have caused the issue.
+          ''')
+
+          user_message = f'''
+          Production incident detected:
+          Source: {source}
+          Severity: {severity}
+          Details: {details}
+
+          Check the production health endpoints and recent changes, then diagnose and fix.
+          '''
+
+          result = agent.call_claude(system_prompt, user_message)
+          print(result['text'])
+
+          if result['files_modified']:
+              agent.create_fix_pr(result['files_modified'], result['text'], f'incident-{source}')
+          "

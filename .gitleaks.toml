@@ -1,0 +1,8 @@
+# Gitleaks configuration — allowlist test fixture passwords
+# These are fake/test-only values, not real secrets.
+
+[allowlist]
+  description = "Test fixture passwords and tokens"
+  paths = [
+    '''tests/.*\.py''',
+  ]

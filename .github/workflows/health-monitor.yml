@@ -1,0 +1,62 @@
+name: Health Monitor
+
+on:
+  schedule:
+    # Check every 5 minutes
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      contents: read
+      actions: write
+
+    steps:
+      - name: Check production health
+        id: health
+        run: |
+          LIVE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://aelu-app.fly.dev/api/health/live || echo "000")
+          READY=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://aelu-app.fly.dev/api/health/ready || echo "000")
+
+          echo "live=$LIVE" >> $GITHUB_OUTPUT
+          echo "ready=$READY" >> $GITHUB_OUTPUT
+
+          if [ "$LIVE" = "200" ] && [ "$READY" = "200" ]; then
+            echo "status=healthy" >> $GITHUB_OUTPUT
+            echo "App is healthy"
+          else
+            echo "status=down" >> $GITHUB_OUTPUT
+            echo "APP IS DOWN — live=$LIVE ready=$READY"
+          fi
+
+      - name: Trigger incident response if down
+        if: steps.health.outputs.status == 'down'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if there's already an open incident issue (avoid spam)
+          OPEN=$(gh issue list --repo ${{ github.repository }} --label "incident" --state open --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ -n "$OPEN" ]; then
+            echo "Incident issue #$OPEN already open — skipping"
+            gh issue comment "$OPEN" --body "Health check still failing at $(date -u +%H:%M). live=${{ steps.health.outputs.live }} ready=${{ steps.health.outputs.ready }}"
+          else
+            gh issue create \
+              --title "App is down (health check failed)" \
+              --body "## Production Down
+
+          The health monitor detected that the app is not responding.
+
+          - **Live endpoint:** ${{ steps.health.outputs.live }}
+          - **Ready endpoint:** ${{ steps.health.outputs.ready }}
+          - **Time:** $(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          Fly.io should auto-restart the machine. If this keeps happening, there may be a code bug causing crashes — check Sentry for errors.
+
+          This issue was created automatically by the health monitor." \
+              --label "incident"
+          fi
