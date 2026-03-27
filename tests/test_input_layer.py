@@ -1,7 +1,6 @@
 """Tests for Doc 15: Input Acquisition Layer."""
 
 import json
-import sqlite3
 import unittest
 
 from mandarin.db.core import SCHEMA_VERSION
@@ -13,84 +12,7 @@ from mandarin.ai.input_layer import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            hsk_level INTEGER,
-            status TEXT DEFAULT 'drill_ready',
-            review_status TEXT NOT NULL DEFAULT 'approved'
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            stability REAL DEFAULT 0.4,
-            reps INTEGER DEFAULT 0,
-            state TEXT DEFAULT 'new'
-        );
-
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL UNIQUE,
-            vocab_hsk_estimate REAL,
-            composite_hsk_estimate REAL,
-            computed_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE reading_texts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            content_hanzi TEXT NOT NULL,
-            content_pinyin TEXT,
-            word_count INTEGER NOT NULL DEFAULT 0,
-            hsk_ceiling INTEGER NOT NULL DEFAULT 1,
-            above_ceiling_words TEXT,
-            content_lens TEXT,
-            source TEXT NOT NULL DEFAULT 'generated',
-            approved INTEGER NOT NULL DEFAULT 0,
-            difficulty_score REAL,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE reading_events (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            text_id INTEGER NOT NULL,
-            started_at TEXT DEFAULT (datetime('now')),
-            completed_at TEXT,
-            completion_pct REAL DEFAULT 0.0,
-            lookups TEXT,
-            comprehension_score REAL,
-            time_on_text_seconds INTEGER
-        );
-
-        CREATE TABLE pending_srs_additions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            encounter_source TEXT DEFAULT 'reading_lookup',
-            created_at TEXT DEFAULT (datetime('now')),
-            UNIQUE(user_id, content_item_id)
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT, score REAL, dimension_scores TEXT,
-            findings TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _seed_reading_text(conn, title="Test", hsk_ceiling=3, word_count=100,

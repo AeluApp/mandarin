@@ -1,7 +1,6 @@
 """Tests for Doc 23 C-03: Durable Workflow Engine."""
 
 import json
-import sqlite3
 import unittest
 
 from mandarin.ai.workflow_engine import (
@@ -11,36 +10,7 @@ from mandarin.ai.workflow_engine import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE workflow_execution (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            workflow_type TEXT NOT NULL,
-            workflow_data TEXT,
-            status TEXT NOT NULL DEFAULT 'running',
-            current_step TEXT,
-            max_retries INTEGER NOT NULL DEFAULT 3,
-            retry_count INTEGER NOT NULL DEFAULT 0,
-            started_at TEXT NOT NULL DEFAULT (datetime('now')),
-            completed_at TEXT,
-            error_detail TEXT
-        );
-        CREATE TABLE workflow_step (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            execution_id INTEGER NOT NULL,
-            step_name TEXT NOT NULL,
-            step_order INTEGER NOT NULL,
-            status TEXT NOT NULL DEFAULT 'pending',
-            input_data TEXT,
-            output_data TEXT,
-            started_at TEXT,
-            completed_at TEXT,
-            error_detail TEXT
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestDurableWorkflow(unittest.TestCase):

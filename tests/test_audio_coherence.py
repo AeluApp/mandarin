@@ -1,6 +1,5 @@
 """Tests for Doc 23 B-03: Audio Coherence Verification."""
 
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
@@ -13,33 +12,12 @@ from mandarin.ai.audio_coherence import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL, pinyin TEXT, english TEXT,
-            hsk_level INTEGER, status TEXT DEFAULT 'drill_ready'
-        );
-        CREATE TABLE audio_coherence_check (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER NOT NULL,
-            tts_engine TEXT NOT NULL DEFAULT 'edge-tts',
-            expected_pinyin TEXT,
-            transcribed_text TEXT,
-            transcribed_pinyin TEXT,
-            similarity_score REAL,
-            passed INTEGER,
-            checked_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE work_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT, description TEXT, item_type TEXT,
-            status TEXT DEFAULT 'ready', service_class TEXT,
-            ready_at TEXT
-        );
+from tests.shared_db import make_test_db
 
+
+def _make_db():
+    conn = make_test_db()
+    conn.executescript("""
         INSERT INTO content_item (hanzi, pinyin, english, hsk_level)
         VALUES ('你好', 'nǐ hǎo', 'hello', 1);
         INSERT INTO content_item (hanzi, pinyin, english, hsk_level)

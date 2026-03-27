@@ -119,7 +119,7 @@ def generate_placement_quiz(conn: sqlite3.Connection = None,
         ]
 
     # Flatten into a sequenced list
-    start_level = 3 if returning else 2
+    start_level = 3 if returning else 1
     questions = []
     current_level = start_level
     used_per_level = {l: 0 for l in range(1, max_level + 1)}
@@ -174,7 +174,8 @@ def score_placement(answers: list) -> dict:
         answers: List of dicts, each with:
             - hsk_level: int (1-9)
             - selected: str (user's answer)
-            - correct: str (correct answer)
+            - hanzi: str (the character shown — used to look up correct answer)
+            Optionally: correct: str (if provided by client, used as-is)
 
     Returns dict with:
         - estimated_level: int (1-9)
@@ -192,14 +193,29 @@ def score_placement(answers: list) -> dict:
             "total_questions": 0,
         }
 
+    # Build hanzi→english lookup so we can score server-side
+    # (client does not receive correct answers to prevent cheating)
+    questions_by_level = _load_questions()
+    hanzi_to_english = {}
+    for _lvl, items in questions_by_level.items():
+        for item in items:
+            hanzi_to_english[item.get("hanzi", "")] = item.get("english", "")
+
     # Tally per-level accuracy
     per_level = {}
     total_correct = 0
     total_questions = len(answers)
 
     for ans in answers:
+        if isinstance(ans, str):
+            # Legacy flat string format — cannot score, skip
+            continue
         level = ans.get("hsk_level", 1)
-        is_correct = ans.get("selected", "").strip() == ans.get("correct", "").strip()
+        selected = ans.get("selected", "").strip()
+        # Look up correct answer server-side from hanzi
+        hanzi = ans.get("hanzi", "")
+        correct = ans.get("correct", "").strip() or hanzi_to_english.get(hanzi, "")
+        is_correct = selected == correct
         if is_correct:
             total_correct += 1
 

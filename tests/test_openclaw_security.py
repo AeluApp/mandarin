@@ -1,31 +1,10 @@
 """Tests for mandarin.openclaw.security — prompt injection defense, input sanitization, audit trail."""
 
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
 
-def _make_db():
-    """Create an in-memory SQLite database with the openclaw_message_log table."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE openclaw_message_log (
-            id TEXT PRIMARY KEY,
-            created_at TEXT,
-            direction TEXT,
-            channel TEXT,
-            user_identifier TEXT,
-            message_text TEXT,
-            intent TEXT,
-            tool_called TEXT,
-            tool_result TEXT,
-            injection_detected INTEGER DEFAULT 0,
-            injection_detail TEXT DEFAULT ''
-        )
-    """)
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestSanitizeInput(unittest.TestCase):

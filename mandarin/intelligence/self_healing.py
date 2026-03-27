@@ -96,24 +96,29 @@ def _ensure_tables(conn: sqlite3.Connection) -> None:
 # ── Health metrics collection ──────────────────────────────────────────────
 
 def _get_memory_usage_mb() -> float:
-    """Get current process memory usage in MB."""
-    try:
-        import resource
-        # ru_maxrss is in bytes on Linux, KB on macOS
-        usage = resource.getrusage(resource.RUSAGE_SELF)
-        ru_maxrss = usage.ru_maxrss
-        if os.uname().sysname == "Darwin":
-            return ru_maxrss / (1024 * 1024)  # macOS: bytes → MB
-        return ru_maxrss / 1024  # Linux: KB → MB
-    except Exception:
-        pass
+    """Get current process memory usage in MB.
 
-    # Fallback: read /proc/self/status on Linux
+    Uses VmRSS (current resident set size) on Linux, ru_maxrss on macOS.
+    ru_maxrss is peak RSS and never decreases — unsuitable for ongoing
+    monitoring, but acceptable on macOS where /proc is unavailable.
+    """
+    # Primary: read /proc/self/status VmRSS on Linux (current RSS, not peak)
     try:
         with open("/proc/self/status") as f:
             for line in f:
                 if line.startswith("VmRSS:"):
                     return int(line.split()[1]) / 1024  # KB → MB
+    except Exception:
+        pass
+
+    # Fallback: resource.getrusage on macOS (peak RSS — best available)
+    try:
+        import resource
+        usage = resource.getrusage(resource.RUSAGE_SELF)
+        ru_maxrss = usage.ru_maxrss
+        if os.uname().sysname == "Darwin":
+            return ru_maxrss / (1024 * 1024)  # macOS: bytes → MB
+        return ru_maxrss / 1024  # Linux: KB → MB
     except Exception:
         pass
 

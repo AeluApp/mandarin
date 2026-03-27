@@ -1,146 +1,20 @@
 """Tests for the expanded Aelu MCP Server — 25 tools across 5 categories."""
 
 import json
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
+from tests.shared_db import make_test_db
+
 
 def _make_db():
-    """Create in-memory DB with all tables the MCP server queries."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
+    """Create test DB with seed data for MCP server tests."""
+    conn = make_test_db()
     conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            streak_days INTEGER DEFAULT 0,
-            streak_freezes_available INTEGER DEFAULT 0,
-            subscription_tier TEXT DEFAULT 'free',
-            stripe_customer_id TEXT,
-            subscription_status TEXT,
-            subscription_end_date TEXT
-        );
-        CREATE TABLE learner_profile (
-            user_id INTEGER UNIQUE,
-            target_sessions_per_week INTEGER DEFAULT 5
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL, pinyin TEXT, english TEXT,
-            hsk_level INTEGER, item_type TEXT DEFAULT 'vocab',
-            status TEXT DEFAULT 'drill_ready',
-            review_status TEXT DEFAULT 'approved'
-        );
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            next_review_date TEXT DEFAULT (date('now')),
-            total_attempts INTEGER DEFAULT 0,
-            total_correct INTEGER DEFAULT 0,
-            mastery_stage TEXT DEFAULT 'unseen'
-        );
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, started_at TEXT DEFAULT (datetime('now')),
-            ended_at TEXT, duration_seconds INTEGER,
-            session_type TEXT DEFAULT 'mixed',
-            items_planned INTEGER DEFAULT 10,
-            items_completed INTEGER DEFAULT 0, items_correct INTEGER DEFAULT 0,
-            session_outcome TEXT DEFAULT 'completed',
-            early_exit INTEGER DEFAULT 0,
-            client_platform TEXT DEFAULT 'web'
-        );
-        CREATE TABLE content_generation_queue (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            gap_type TEXT NOT NULL, gap_data TEXT,
-            generation_brief TEXT,
-            status TEXT DEFAULT 'pending',
-            generated_content TEXT, reviewer_note TEXT,
-            created_at TEXT DEFAULT (datetime('now')),
-            reviewed_at TEXT
-        );
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY, grade TEXT, score REAL,
-            dimension_scores_json TEXT, findings_json TEXT,
-            created_at TEXT DEFAULT (datetime('now')),
-            audit_timestamp TEXT
-        );
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            content_item_id INTEGER, error_type TEXT,
-            modality TEXT, session_id INTEGER,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL, name_zh TEXT,
-            hsk_level INTEGER, category TEXT
-        );
-        CREATE TABLE grammar_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, grammar_point_id INTEGER,
-            mastery_score REAL DEFAULT 0,
-            drill_attempts INTEGER DEFAULT 0,
-            drill_correct INTEGER DEFAULT 0,
-            studied_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE content_grammar (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER, grammar_point_id INTEGER
-        );
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            correct INTEGER, modality TEXT DEFAULT 'reading',
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER UNIQUE,
-            vocab_hsk_estimate REAL,
-            composite_hsk_estimate REAL,
-            computed_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE audio_recording (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            overall_score REAL, tone_scores_json TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE reading_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, passage_id TEXT,
-            comprehension_score REAL, words_looked_up INTEGER DEFAULT 0,
-            reading_time_seconds INTEGER, hsk_level INTEGER,
-            completed_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE listening_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, passage_id TEXT,
-            comprehension_score REAL, words_looked_up INTEGER DEFAULT 0,
-            hsk_level INTEGER,
-            completed_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE classroom_member (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            classroom_id INTEGER, user_id INTEGER,
-            role TEXT DEFAULT 'student'
-        );
-        CREATE TABLE error_focus (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            resolved INTEGER DEFAULT 0
-        );
-
-        -- Seed data
-        INSERT INTO user (id, email, display_name, streak_days, streak_freezes_available)
-        VALUES (1, 'test@aelu.app', 'Test User', 7, 2);
-        INSERT INTO user (id, email, display_name, streak_days, streak_freezes_available)
-        VALUES (2, 'student2@aelu.app', 'Student Two', 3, 0);
-
-        INSERT INTO learner_profile (user_id, target_sessions_per_week)
-        VALUES (1, 5);
+        -- Seed users
+        UPDATE user SET display_name='Test User', streak_freezes_available=2 WHERE id=1;
+        INSERT OR IGNORE INTO user (id, email, password_hash, display_name)
+        VALUES (2, 'student2@aelu.app', 'test_hash', 'Student Two');
 
         INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level)
         VALUES (1, '你好', 'nǐ hǎo', 'hello', 1);
@@ -150,9 +24,9 @@ def _make_db():
         VALUES (3, '学习', 'xué xí', 'to study', 2);
 
         INSERT INTO grammar_point (id, name, name_zh, hsk_level, category)
-        VALUES (1, 'Subject-Verb-Object', '主谓宾', 1, 'sentence_structure');
+        VALUES (1, 'Subject-Verb-Object', '主谓宾', 1, 'structure');
         INSERT INTO grammar_point (id, name, name_zh, hsk_level, category)
-        VALUES (2, 'Aspect particle 了', '了', 1, 'particles');
+        VALUES (2, 'Aspect particle 了', '了', 1, 'particle');
 
         INSERT INTO grammar_progress (user_id, grammar_point_id, mastery_score, drill_attempts, drill_correct)
         VALUES (1, 1, 0.85, 20, 17);
@@ -160,10 +34,10 @@ def _make_db():
         INSERT INTO content_grammar (content_item_id, grammar_point_id)
         VALUES (1, 1);
 
-        INSERT INTO progress (user_id, content_item_id, next_review_date, total_attempts, total_correct, mastery_stage)
-        VALUES (1, 1, date('now'), 10, 8, 'stable');
-        INSERT INTO progress (user_id, content_item_id, next_review_date, total_attempts, total_correct, mastery_stage)
-        VALUES (1, 2, date('now', '+3 days'), 5, 5, 'durable');
+        INSERT INTO progress (user_id, content_item_id, modality, next_review_date, total_attempts, total_correct, mastery_stage)
+        VALUES (1, 1, 'reading', date('now'), 10, 8, 'stable');
+        INSERT INTO progress (user_id, content_item_id, modality, next_review_date, total_attempts, total_correct, mastery_stage)
+        VALUES (1, 2, 'reading', date('now', '+3 days'), 5, 5, 'durable');
 
         INSERT INTO session_log (user_id, started_at, ended_at, duration_seconds, items_completed, items_correct, session_outcome, client_platform)
         VALUES (1, datetime('now', '-1 hour'), datetime('now'), 1200, 15, 12, 'completed', 'ios');
@@ -171,11 +45,11 @@ def _make_db():
         VALUES (1, datetime('now', '-2 days'), datetime('now', '-2 days', '+600 seconds'), 600, 5, 3, 'early_exit', 1, 'web');
 
         INSERT INTO error_log (user_id, content_item_id, error_type, modality)
-        VALUES (1, 1, 'tone_error', 'speaking');
+        VALUES (1, 1, 'tone', 'speaking');
         INSERT INTO error_log (user_id, content_item_id, error_type, modality)
-        VALUES (1, 1, 'tone_error', 'speaking');
+        VALUES (1, 1, 'tone', 'speaking');
         INSERT INTO error_log (user_id, content_item_id, error_type, modality)
-        VALUES (1, 2, 'meaning_error', 'reading');
+        VALUES (1, 2, 'vocab', 'reading');
 
         INSERT INTO review_event (user_id, content_item_id, correct, modality)
         VALUES (1, 1, 1, 'reading');
@@ -189,31 +63,26 @@ def _make_db():
         INSERT INTO audio_recording (user_id, content_item_id, overall_score, tone_scores_json)
         VALUES (1, 2, 0.85, '[{"expected": 4, "correct": true}, {"expected": 0, "correct": true}]');
 
-        INSERT INTO reading_progress (user_id, passage_id, comprehension_score, words_looked_up, reading_time_seconds, hsk_level)
-        VALUES (1, 'passage_1', 0.8, 3, 120, 1);
-        INSERT INTO reading_progress (user_id, passage_id, comprehension_score, words_looked_up, reading_time_seconds, hsk_level)
-        VALUES (1, 'passage_2', 0.65, 5, 180, 2);
+        INSERT INTO reading_progress (user_id, passage_id, words_looked_up, reading_time_seconds)
+        VALUES (1, 'passage_1', 3, 120);
+        INSERT INTO reading_progress (user_id, passage_id, words_looked_up, reading_time_seconds)
+        VALUES (1, 'passage_2', 5, 180);
 
         INSERT INTO listening_progress (user_id, passage_id, comprehension_score, words_looked_up, hsk_level)
         VALUES (1, 'listen_1', 0.9, 1, 1);
         INSERT INTO listening_progress (user_id, passage_id, comprehension_score, words_looked_up, hsk_level)
         VALUES (1, 'listen_2', 0.6, 4, 2);
 
-        INSERT INTO learner_proficiency_zones (id, user_id, vocab_hsk_estimate, composite_hsk_estimate)
-        VALUES (1, 1, 1.8, 1.5);
+        INSERT INTO learner_proficiency_zones (user_id, vocab_hsk_estimate, composite_hsk_estimate)
+        VALUES (1, 1.8, 1.5);
 
-        INSERT INTO error_focus (user_id, content_item_id, resolved) VALUES (1, 1, 0);
-        INSERT INTO error_focus (user_id, content_item_id, resolved) VALUES (1, 2, 0);
-        INSERT INTO error_focus (user_id, content_item_id, resolved) VALUES (1, 1, 0);
-        INSERT INTO error_focus (user_id, content_item_id, resolved) VALUES (1, 2, 1);
-
-        INSERT INTO classroom_member (classroom_id, user_id, role) VALUES (1, 1, 'student');
-        INSERT INTO classroom_member (classroom_id, user_id, role) VALUES (1, 2, 'student');
+        INSERT INTO error_focus (user_id, content_item_id, error_type, resolved) VALUES (1, 1, 'tone', 0);
+        INSERT INTO error_focus (user_id, content_item_id, error_type, resolved) VALUES (1, 2, 'tone', 0);
 
         INSERT INTO content_generation_queue (gap_type, status) VALUES ('grammar_pattern_no_items', 'pending');
         INSERT INTO content_generation_queue (gap_type, status) VALUES ('hsk_coverage_gap', 'pending');
 
-        INSERT INTO product_audit (id, grade, score, findings_json)
+        INSERT INTO product_audit (id, overall_grade, overall_score, findings_json)
         VALUES (1, 'B+', 83.2, '[{"title":"Grammar coverage thin","severity":"high"}]');
     """)
     return conn

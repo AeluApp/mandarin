@@ -669,6 +669,23 @@ def check_d2() -> dict:
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
+def check_t4() -> dict:
+    """T4: No inline CREATE TABLE in test files (use shared_db.make_test_db)."""
+    violations = []
+    for test_file in glob.glob(os.path.join(_TESTS_DIR, "test_*.py")):
+        content = _read(test_file)
+        if "CREATE TABLE" in content and "shared_db" not in content:
+            fname = os.path.basename(test_file)
+            violations.append(fname)
+    passed = len(violations) == 0
+    return {
+        "check": "T4",
+        "title": "No inline CREATE TABLE in tests",
+        "passed": passed,
+        "detail": f"Found inline schemas in: {', '.join(violations)}" if violations else "All tests use shared_db",
+    }
+
+
 ALL_CHECKS = [
     check_r1,
     check_r2,
@@ -681,6 +698,7 @@ ALL_CHECKS = [
     check_t1,
     check_t2,
     check_t3,
+    check_t4,
     check_d1,
     check_d2,
 ]

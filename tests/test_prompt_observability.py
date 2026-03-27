@@ -1,6 +1,5 @@
 """Tests for Doc 23 C-02: Prompt Observability."""
 
-import sqlite3
 import unittest
 
 from mandarin.ai.prompt_observability import (
@@ -12,36 +11,7 @@ from mandarin.ai.prompt_observability import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE prompt_trace (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prompt_key TEXT NOT NULL,
-            prompt_hash TEXT NOT NULL,
-            input_tokens INTEGER DEFAULT 0,
-            output_tokens INTEGER DEFAULT 0,
-            latency_ms INTEGER DEFAULT 0,
-            model_used TEXT,
-            success INTEGER NOT NULL DEFAULT 1,
-            error_type TEXT,
-            output_quality_score REAL,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE prompt_regression_run (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prompt_key TEXT NOT NULL,
-            baseline_hash TEXT,
-            current_hash TEXT,
-            metric TEXT NOT NULL,
-            baseline_value REAL,
-            current_value REAL,
-            drift_detected INTEGER NOT NULL DEFAULT 0,
-            run_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestTracePromptCall(unittest.TestCase):

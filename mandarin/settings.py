@@ -10,7 +10,7 @@ from pathlib import Path
 
 _project_root = Path(__file__).parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "mandarin-local-only")
+SECRET_KEY = os.environ.get("SECRET_KEY") or "mandarin-local-only"
 IS_PRODUCTION = os.environ.get("IS_PRODUCTION", "").lower() in ("1", "true", "yes")
 
 # ── Domain / URL ──────────────────────────────────────

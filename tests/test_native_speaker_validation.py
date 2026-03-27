@@ -1,6 +1,5 @@
 """Tests for Doc 22: Native Speaker Validation Protocol."""
 
-import sqlite3
 import unittest
 
 from mandarin.db.core import SCHEMA_VERSION
@@ -14,104 +13,7 @@ from mandarin.ai.native_speaker_validation import (
 )
 
 
-def _make_db():
-    """Create an in-memory DB with Doc 22 schema."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY,
-            email TEXT,
-            password_hash TEXT
-        );
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            item_type TEXT DEFAULT 'vocab',
-            hsk_level INTEGER,
-            content_lens TEXT,
-            status TEXT DEFAULT 'drill_ready',
-            difficulty REAL DEFAULT 0.5,
-            times_shown INTEGER DEFAULT 0,
-            times_correct INTEGER DEFAULT 0,
-            native_speaker_validated INTEGER DEFAULT 0,
-            native_speaker_note TEXT,
-            suspended_for_revision INTEGER DEFAULT 0,
-            rejected_native_speaker INTEGER DEFAULT 0
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            stability REAL DEFAULT 0.4,
-            difficulty REAL DEFAULT 0.5,
-            reps INTEGER DEFAULT 0,
-            lapses INTEGER DEFAULT 0,
-            last_review TEXT,
-            next_review TEXT,
-            state TEXT DEFAULT 'new',
-            created_at TEXT DEFAULT (datetime('now')),
-            updated_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE native_speaker_validation_queue (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_hanzi TEXT NOT NULL,
-            content_type TEXT NOT NULL,
-            queue_reason TEXT NOT NULL,
-            content_item_id INTEGER,
-            hsk_level INTEGER,
-            content_lens TEXT,
-            target_vocabulary TEXT,
-            intended_register TEXT,
-            queued_at TEXT DEFAULT (datetime('now')),
-            validated_at TEXT,
-            validated_by TEXT,
-            naturalness_score INTEGER,
-            register_correct INTEGER,
-            usage_current INTEGER,
-            verdict TEXT,
-            validator_note TEXT,
-            revised_content TEXT,
-            action_taken TEXT
-        );
-
-        CREATE TABLE native_speaker_validators (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            name TEXT NOT NULL,
-            native_dialect TEXT,
-            validation_count INTEGER DEFAULT 0,
-            avg_naturalness_given REAL,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE validation_sessions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            validator_id INTEGER,
-            session_date TEXT,
-            items_reviewed INTEGER DEFAULT 0,
-            avg_naturalness REAL,
-            notes TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT,
-            score REAL,
-            dimension_scores TEXT,
-            findings TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _seed_content_item(conn, hanzi="你好", hsk_level=1):

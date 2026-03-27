@@ -5,47 +5,11 @@ sequential fallback, and graceful ImportError handling for langgraph.
 """
 
 import os
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
 
-def _make_db():
-    """Create in-memory DB with tables needed by the agent."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.executescript("""
-        CREATE TABLE prescription_execution_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            work_order_id INTEGER,
-            action_type TEXT,
-            status TEXT DEFAULT 'queued_for_agent',
-            result_data TEXT,
-            pre_audit_score REAL,
-            post_audit_score REAL,
-            completed_at TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE pi_work_order (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            audit_cycle_id INTEGER,
-            finding_id INTEGER,
-            instruction TEXT,
-            target_file TEXT,
-            constraint_dimension TEXT,
-            slot TEXT,
-            status TEXT DEFAULT 'pending',
-            platform_status TEXT DEFAULT '{}'
-        );
-        CREATE TABLE pi_finding (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            files TEXT
-        );
-    """)
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestAgentStateShape(unittest.TestCase):

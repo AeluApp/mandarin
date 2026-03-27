@@ -7,6 +7,6 @@ dbs:
         region: ${AWS_REGION:-us-east-1}
         access-key-id: ${AWS_ACCESS_KEY_ID}
         secret-access-key: ${AWS_SECRET_ACCESS_KEY}
-        retention: 72h
+        retention: 720h
         snapshot-interval: 24h
         validation-interval: 6h

@@ -6,7 +6,6 @@ AI portfolio verdict, content quality, constraint persistence, priority order.
 """
 
 import json
-import sqlite3
 import unittest
 from datetime import datetime, timezone
 
@@ -15,70 +14,7 @@ import pytest
 pytestmark = pytest.mark.t2
 
 
-def _make_db():
-    """Create an in-memory SQLite DB with tables needed for coverage audit."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    # Core tables
-    conn.execute("""CREATE TABLE session_log (
-        id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT DEFAULT (datetime('now')),
-        items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 8,
-        early_exit INTEGER DEFAULT 0, client_platform TEXT DEFAULT 'web'
-    )""")
-    conn.execute("""CREATE TABLE product_audit (
-        id INTEGER PRIMARY KEY, run_at TEXT DEFAULT (datetime('now')),
-        overall_grade TEXT, overall_score REAL,
-        dimension_scores TEXT, findings_json TEXT,
-        findings_count INTEGER, critical_count INTEGER, high_count INTEGER
-    )""")
-
-    # Intelligence tables
-    conn.execute("""CREATE TABLE pi_coverage_audit_log (
-        id TEXT PRIMARY KEY,
-        logged_at TEXT NOT NULL DEFAULT (datetime('now')),
-        component TEXT NOT NULL,
-        domain TEXT NOT NULL,
-        coverage_status TEXT NOT NULL,
-        covering_document TEXT,
-        notes TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_system_constraint_history (
-        id TEXT PRIMARY KEY,
-        identified_at TEXT NOT NULL DEFAULT (datetime('now')),
-        constraint_type TEXT NOT NULL,
-        domain TEXT NOT NULL,
-        severity TEXT NOT NULL,
-        description TEXT NOT NULL,
-        resolved_at TEXT,
-        resolution TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_ai_review_queue (
-        id INTEGER PRIMARY KEY,
-        content_item_id INTEGER,
-        category TEXT,
-        review_decision TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_ai_portfolio_assessments (
-        id TEXT PRIMARY KEY,
-        assessed_at TEXT DEFAULT (datetime('now')),
-        overall_verdict TEXT,
-        component_count INTEGER,
-        healthy_count INTEGER,
-        degraded_count INTEGER,
-        critical_count INTEGER
-    )""")
-    conn.execute("""CREATE TABLE pi_framework_grades (
-        id TEXT PRIMARY KEY,
-        framework TEXT,
-        grade TEXT,
-        score REAL,
-        audit_cycle_id TEXT,
-        graded_at TEXT DEFAULT (datetime('now'))
-    )""")
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestCoverageMap(unittest.TestCase):

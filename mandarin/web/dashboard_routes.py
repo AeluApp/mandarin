@@ -319,7 +319,7 @@ def api_status():
         week_row = conn.execute(
             """SELECT COUNT(*) as cnt, COALESCE(SUM(items_completed), 0) as items
                FROM session_log
-               WHERE user_id = ? AND items_completed > 0
+               WHERE user_id = ?
                  AND started_at >= date('now', '-7 days')""",
             (user_id,)
         ).fetchone()

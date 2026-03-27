@@ -1,6 +1,5 @@
 """Tests for Doc 18: Social, Accountability, and Habit Architecture."""
 
-import sqlite3
 import unittest
 from datetime import date, timedelta
 
@@ -14,42 +13,7 @@ from mandarin.ai.accountability import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            started_at TEXT NOT NULL,
-            ended_at TEXT,
-            session_outcome TEXT DEFAULT 'completed'
-        );
-
-        CREATE TABLE study_commitments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            week_start TEXT NOT NULL,
-            target_sessions INTEGER NOT NULL DEFAULT 4,
-            target_new_items INTEGER NOT NULL DEFAULT 10,
-            completed_sessions INTEGER NOT NULL DEFAULT 0,
-            completed_new_items INTEGER NOT NULL DEFAULT 0,
-            commitment_met INTEGER,
-            created_at TEXT DEFAULT (datetime('now')),
-            UNIQUE(user_id, week_start)
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT, score REAL, dimension_scores TEXT,
-            findings TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestWeeklyCommitment(unittest.TestCase):

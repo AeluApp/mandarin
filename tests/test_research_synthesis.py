@@ -3,7 +3,6 @@
 import pytest
 pytest.importorskip("httpx")
 
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
@@ -16,54 +15,7 @@ from mandarin.ai.research_synthesis import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE research_paper (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source TEXT NOT NULL,
-            title TEXT NOT NULL,
-            authors TEXT,
-            abstract TEXT,
-            doi TEXT,
-            published_date TEXT,
-            relevance_score REAL,
-            applicability_analysis TEXT,
-            methodology_tags TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE research_application (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            paper_id INTEGER NOT NULL,
-            aelu_component TEXT NOT NULL,
-            proposed_change TEXT NOT NULL,
-            impact_estimate TEXT,
-            status TEXT NOT NULL DEFAULT 'proposed',
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE pi_ai_generation_cache (
-            id TEXT PRIMARY KEY, prompt_hash TEXT, prompt_text TEXT,
-            system_text TEXT, model_used TEXT, response_text TEXT,
-            generated_at TEXT, hit_count INTEGER DEFAULT 0, last_hit_at TEXT
-        );
-        CREATE TABLE pi_ai_generation_log (
-            id TEXT PRIMARY KEY, occurred_at TEXT, task_type TEXT,
-            model_used TEXT, prompt_tokens INTEGER DEFAULT 0,
-            completion_tokens INTEGER DEFAULT 0, generation_time_ms INTEGER DEFAULT 0,
-            from_cache INTEGER DEFAULT 0, success INTEGER DEFAULT 1,
-            error TEXT, json_parse_failure INTEGER DEFAULT 0,
-            finding_id TEXT, item_id TEXT
-        );
-        CREATE TABLE prompt_trace (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prompt_key TEXT, prompt_hash TEXT, input_tokens INTEGER DEFAULT 0,
-            output_tokens INTEGER DEFAULT 0, latency_ms INTEGER DEFAULT 0,
-            model_used TEXT, success INTEGER DEFAULT 1, error_type TEXT,
-            output_quality_score REAL, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestStorePaper(unittest.TestCase):

@@ -111,7 +111,7 @@ def onboarding_wizard():
             })
     except (sqlite3.Error, KeyError, TypeError) as e:
         logger.error("Onboarding status error (%s): %s", type(e).__name__, e)
-        return jsonify({"complete": True})  # Fail open — don't block existing users
+        return jsonify({"complete": False})  # Fail closed — force onboarding on error
 
 
 @onboarding_bp.route("/api/onboarding/level", methods=["POST"])

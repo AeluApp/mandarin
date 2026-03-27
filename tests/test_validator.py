@@ -7,31 +7,12 @@ Tests verify:
 - validate_all aggregates correctly
 """
 
-import sqlite3
 from pathlib import Path
 
 from mandarin.validator import _load_canonical, validate_level, validate_all
 
 
-def _make_db():
-    """Create an in-memory DB with content_item table."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT DEFAULT '',
-            english TEXT DEFAULT '',
-            hsk_level INTEGER,
-            status TEXT DEFAULT 'drill_ready'
-        )
-    """)
-    conn.commit()
-    return conn
-
-
-# ---- TestLoadCanonical ----
+from tests.shared_db import make_test_db as _make_db
 
 def test_loads_hsk1():
     items = _load_canonical(1)

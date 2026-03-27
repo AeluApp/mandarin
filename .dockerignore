@@ -12,3 +12,14 @@ venv/
 *.db-shm
 node_modules/
 .DS_Store
+tests/
+content_gen/
+tools/
+rewrite_*.py
+.github/
+.claude/
+docs/
+flutter_app/
+k8s/
+n8n/
+ADVERSARIAL_AUDIT.md

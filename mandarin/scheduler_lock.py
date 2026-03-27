@@ -32,16 +32,14 @@ def acquire_lock(conn: sqlite3.Connection, name: str, ttl_seconds: int) -> bool:
     """
     now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
 
-    # Try to take the lock: INSERT if missing, or UPDATE if expired
+    # Atomic lock acquisition: delete expired + insert in one transaction.
+    # SQLite serializes writers, so this is safe under WAL mode.
     try:
-        # First, clean up expired locks
         conn.execute(
             """DELETE FROM scheduler_lock
                WHERE name = ? AND expires_at < ?""",
             (name, now),
         )
-
-        # Try to insert our lock
         conn.execute(
             """INSERT OR IGNORE INTO scheduler_lock (name, locked_by, locked_at, expires_at)
                VALUES (?, ?, ?, datetime(?, '+' || ? || ' seconds'))""",
@@ -49,7 +47,8 @@ def acquire_lock(conn: sqlite3.Connection, name: str, ttl_seconds: int) -> bool:
         )
         conn.commit()
 
-        # Check if we got the lock
+        # Verify we hold the lock (INSERT OR IGNORE succeeds silently if
+        # another instance already holds it)
         row = conn.execute(
             "SELECT locked_by FROM scheduler_lock WHERE name = ?",
             (name,),

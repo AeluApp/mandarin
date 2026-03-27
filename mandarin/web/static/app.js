@@ -7944,6 +7944,85 @@ function fetchEncounterStats() {
 
 /* ── Event listeners (CSP-safe, no inline handlers) ────────────────────────── */
 
+/* ── Intro slides (shown on second dashboard visit, after first session) ── */
+function showIntroSlides() {
+  var overlay = document.createElement("div");
+  overlay.id = "intro-slides-overlay";
+  overlay.className = "onboarding-wizard";
+  overlay.innerHTML =
+    '<div class="onboarding-wizard-card">' +
+      '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
+      '<div class="logo-text">Aelu</div></div>' +
+
+      '<div id="intro-slide-0" class="onboarding-step onboarding-intro-slide">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Every language lives in memory</p>' +
+          '<p class="onboarding-intro-text">When you learn a new word, your brain begins forgetting it almost immediately. ' +
+            'This is not a flaw \u2014 it\u2019s how memory works. ' +
+            'Aelu brings words back at the moment you\u2019re about to forget them, ' +
+            'so each review strengthens the connection a little more.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-0">Continue</button>' +
+        '<button class="btn-link btn-sm onboarding-skip-btn" id="intro-skip">Skip</button>' +
+      '</div>' +
+
+      '<div id="intro-slide-1" class="onboarding-step onboarding-intro-slide hidden">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Short sessions, real progress</p>' +
+          '<p class="onboarding-intro-text">Each session is a few minutes of focused practice \u2014 ' +
+            'characters, tones, meanings, recall. ' +
+            'Aelu adapts to your strengths and where you need more practice, ' +
+            'so your time is spent where it matters most.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-1">Continue</button>' +
+        '<button class="btn-link btn-sm onboarding-skip-btn" id="intro-skip-1">Skip</button>' +
+      '</div>' +
+
+      '<div id="intro-slide-2" class="onboarding-step onboarding-intro-slide hidden">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Be patient with yourself</p>' +
+          '<p class="onboarding-intro-text">Learning Mandarin is a long journey, and some days will feel slower than others. ' +
+            'That\u2019s okay. Aelu tracks what you actually remember \u2014 not points or streaks \u2014 ' +
+            'so you always know where you truly stand.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-2">Got it</button>' +
+      '</div>' +
+    '</div>';
+  document.getElementById("app").appendChild(overlay);
+  handleImgErrors(overlay, '/static/illustrations/onboarding-1.png');
+
+  var slides = [
+    document.getElementById("intro-slide-0"),
+    document.getElementById("intro-slide-1"),
+    document.getElementById("intro-slide-2")
+  ];
+
+  function goSlide(idx) {
+    slides.forEach(function(el) { if (el) el.classList.add("hidden"); });
+    if (idx < slides.length && slides[idx]) {
+      slides[idx].classList.remove("hidden");
+    } else {
+      overlay.remove();
+    }
+  }
+
+  function dismiss() { overlay.remove(); }
+
+  for (var i = 0; i < 3; i++) {
+    (function(idx) {
+      var btn = document.getElementById("intro-next-" + idx);
+      if (btn) btn.addEventListener("click", function() { goSlide(idx + 1); });
+    })(i);
+  }
+  var skipBtn = document.getElementById("intro-skip");
+  if (skipBtn) skipBtn.addEventListener("click", dismiss);
+  var skipBtn1 = document.getElementById("intro-skip-1");
+  if (skipBtn1) skipBtn1.addEventListener("click", dismiss);
+}
+
 /* ── Onboarding wizard ───────────────────────────── */
 function checkOnboarding() {
   fetch("/api/onboarding/wizard").then(function(r) { return r.json(); }).then(function(data) {
@@ -7999,46 +8078,8 @@ function showOnboardingWizard() {
       '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
       '<div class="logo-text">Aelu</div></div>' +
 
-      // Intro slides — shown before the level/goal picker
-      '<div id="onboarding-intro-0" class="onboarding-step onboarding-intro-slide">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Every language lives in memory</p>' +
-          '<p class="onboarding-intro-text">When you learn a new word, your brain begins forgetting it almost immediately. ' +
-            'This is not a flaw \u2014 it\u2019s how memory works. ' +
-            'Aelu brings words back at the moment you\u2019re about to forget them, ' +
-            'so each review strengthens the connection a little more.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-0">Continue</button>' +
-        '<button class="btn-link btn-sm onboarding-skip-btn" id="onboarding-skip-0">Skip intro</button>' +
-      '</div>' +
-
-      '<div id="onboarding-intro-1" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Short sessions, real progress</p>' +
-          '<p class="onboarding-intro-text">Each session is a few minutes of focused practice \u2014 ' +
-            'characters, tones, meanings, recall. ' +
-            'Aelu adapts to your strengths and where you need more practice, ' +
-            'so your time is spent where it matters most.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-1">Continue</button>' +
-        '<button class="btn-link btn-sm onboarding-skip-btn" id="onboarding-skip-1">Skip intro</button>' +
-      '</div>' +
-
-      '<div id="onboarding-intro-2" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Be patient with yourself</p>' +
-          '<p class="onboarding-intro-text">Learning Mandarin is a long journey, and some days will feel slower than others. ' +
-            'That\u2019s okay. Aelu tracks what you actually remember \u2014 not points or streaks \u2014 ' +
-            'so you always know where you truly stand.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-2">Let\u2019s begin</button>' +
-      '</div>' +
-
-      // Step 1: level picker
-      '<div id="onboarding-step-1" class="onboarding-step hidden">' +
+      // Step 1: level picker (first screen — get to learning fast)
+      '<div id="onboarding-step-1" class="onboarding-step">' +
         '<p>What HSK level are you starting from?</p>' +
         '<div class="onboarding-options" id="onboarding-levels">' +
           '<button class="btn-secondary onboarding-opt" data-level="1">HSK 1 \u2014 Beginner<br><small>New to Mandarin. ~150 core words.</small></button>' +
@@ -8063,73 +8104,6 @@ function showOnboardingWizard() {
       '</div>' +
     '</div>';
   document.getElementById("app").appendChild(overlay);
-  handleImgErrors(overlay, '/static/illustrations/onboarding-1.png');
-
-  // Intro slide navigation
-  var introSteps = [
-    document.getElementById("onboarding-intro-0"),
-    document.getElementById("onboarding-intro-1"),
-    document.getElementById("onboarding-intro-2")
-  ];
-
-  var _introTransitioning = false;
-  function goToIntroSlide(idx) {
-    if (_introTransitioning) return;
-    // Find currently visible slide
-    var current = null;
-    introSteps.forEach(function(el) {
-      if (!el.classList.contains("hidden")) current = el;
-    });
-    var nextEl = idx < introSteps.length ? introSteps[idx] : document.getElementById("onboarding-step-1");
-
-    if (current && current !== nextEl) {
-      _introTransitioning = true;
-      current.classList.add("slide-out");
-      current.addEventListener("animationend", function handler() {
-        current.removeEventListener("animationend", handler);
-        current.classList.add("hidden");
-        current.classList.remove("slide-out");
-        nextEl.classList.remove("hidden");
-        _introTransitioning = false;
-      }, { once: true });
-      // Fallback if animationend doesn't fire
-      setTimeout(function() {
-        if (_introTransitioning) {
-          current.classList.add("hidden");
-          current.classList.remove("slide-out");
-          nextEl.classList.remove("hidden");
-          _introTransitioning = false;
-        }
-      }, 400);
-    } else {
-      introSteps.forEach(function(el) { el.classList.add("hidden"); });
-      nextEl.classList.remove("hidden");
-    }
-  }
-
-  function skipToLevelPicker() {
-    introSteps.forEach(function(el) { el.classList.add("hidden"); el.classList.remove("slide-out"); });
-    document.getElementById("onboarding-step-1").classList.remove("hidden");
-    _introTransitioning = false;
-    EventLog.queueClientEvent("onboarding", "step_view", {step_name: "level_picker"});
-  }
-
-  // Wire Continue / Skip buttons on each intro slide
-  for (var _si = 0; _si < introSteps.length; _si++) {
-    (function(idx) {
-      var nextBtn = document.getElementById("onboarding-next-" + idx);
-      var skipBtn = document.getElementById("onboarding-skip-" + idx);
-      if (nextBtn) nextBtn.addEventListener("click", function() {
-        AeluSound.onboardingStep();
-        EventLog.queueClientEvent("onboarding", "step_complete", {step_name: "intro_" + idx});
-        goToIntroSlide(idx + 1);
-      });
-      if (skipBtn) skipBtn.addEventListener("click", function() {
-        EventLog.queueClientEvent("onboarding", "step_skip", {step_name: "intro_" + idx});
-        skipToLevelPicker();
-      });
-    })(_si);
-  }
 
   // Placement quiz option
   var placementBtn = document.getElementById("onboarding-placement-btn");
@@ -8403,6 +8377,12 @@ document.addEventListener("DOMContentLoaded", function() {
         window._showFirstSessionModal = true;
       }
 
+      // Second-visit intro slides: show once after first session
+      if (totalSessions >= 1 && !localStorage.getItem("aelu_intro_seen")) {
+        localStorage.setItem("aelu_intro_seen", "1");
+        showIntroSlides();
+      }
+
       // HSK mastery bars are rendered server-side in the template (mastery-bars).
       // No JS duplicate needed.
 
@@ -8506,8 +8486,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var sources = enc.sources || {};
       var topWords = enc.top_words || [];
 
-      // Show if there's any weekly activity
-      if (sessionsWeek === 0 && total === 0 && topWords.length === 0) return;
+      // Always show weekly summary — even when empty, it frames the week
 
       var html = '<div class="weekly-summary-label">This week</div>';
 
@@ -10858,7 +10837,11 @@ function renderPlacementQuestions(wizardOverlay, questions, correctAnswers) {
 
     body.querySelectorAll("[data-answer]").forEach(function(btn) {
       btn.addEventListener("click", function() {
-        _placementAnswers.push(btn.getAttribute("data-answer"));
+        _placementAnswers.push({
+          hsk_level: q.hsk_level,
+          selected: btn.getAttribute("data-answer"),
+          hanzi: q.hanzi
+        });
         showQuestion(idx + 1);
       });
     });

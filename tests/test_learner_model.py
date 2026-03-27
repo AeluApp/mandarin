@@ -1,6 +1,5 @@
 """Tests for Doc 16: Learner Model and Personalization Engine."""
 
-import sqlite3
 import pytest
 
 from mandarin.ai.learner_model import (
@@ -20,127 +19,7 @@ from mandarin.ai.learner_model import (
 )
 
 
-def _make_db():
-    """Create an in-memory DB with Doc 16 schema."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, username TEXT);
-        INSERT INTO user (id, username) VALUES (1, 'test');
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            item_type TEXT DEFAULT 'vocab',
-            hsk_level INTEGER,
-            content_lens TEXT,
-            status TEXT DEFAULT 'drill_ready',
-            difficulty REAL DEFAULT 0.5,
-            times_shown INTEGER DEFAULT 0,
-            times_correct INTEGER DEFAULT 0,
-            is_mined_out INTEGER DEFAULT 0
-        );
-
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
-            name_zh TEXT,
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            category TEXT NOT NULL DEFAULT 'structure',
-            description TEXT,
-            examples_json TEXT DEFAULT '[]',
-            difficulty REAL NOT NULL DEFAULT 0.5,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE content_grammar (
-            content_item_id INTEGER NOT NULL,
-            grammar_point_id INTEGER NOT NULL,
-            PRIMARY KEY (content_item_id, grammar_point_id)
-        );
-
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            session_id INTEGER,
-            content_item_id INTEGER NOT NULL,
-            modality TEXT NOT NULL,
-            drill_type TEXT,
-            correct INTEGER NOT NULL,
-            confidence TEXT DEFAULT 'full',
-            response_ms INTEGER,
-            error_type TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER NOT NULL,
-            stability REAL NOT NULL DEFAULT 1.0,
-            retrievability REAL NOT NULL DEFAULT 0.0,
-            difficulty REAL NOT NULL DEFAULT 0.5,
-            state TEXT NOT NULL DEFAULT 'new',
-            last_reviewed_at TEXT,
-            next_review_due TEXT NOT NULL DEFAULT (datetime('now')),
-            scheduled_days INTEGER NOT NULL DEFAULT 1,
-            reps INTEGER NOT NULL DEFAULT 0,
-            lapses INTEGER NOT NULL DEFAULT 0,
-            encoding_quality TEXT DEFAULT 'unknown',
-            UNIQUE(user_id, content_item_id)
-        );
-
-        CREATE TABLE learner_pattern_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            grammar_point_id INTEGER NOT NULL,
-            status TEXT NOT NULL DEFAULT 'untouched',
-            encounters INTEGER NOT NULL DEFAULT 0,
-            correct_streak INTEGER NOT NULL DEFAULT 0,
-            error_count_30d INTEGER NOT NULL DEFAULT 0,
-            avg_stability REAL,
-            first_encountered_at TEXT,
-            last_updated_at TEXT NOT NULL DEFAULT (datetime('now')),
-            UNIQUE(user_id, grammar_point_id)
-        );
-
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL UNIQUE,
-            vocab_hsk_estimate REAL,
-            vocab_items_mastered INTEGER,
-            vocab_coverage_pct REAL,
-            grammar_hsk_estimate REAL,
-            grammar_patterns_mastered INTEGER,
-            grammar_coverage_pct REAL,
-            reading_hsk_estimate REAL,
-            reading_confidence TEXT DEFAULT 'insufficient_data',
-            listening_hsk_estimate REAL,
-            listening_confidence TEXT DEFAULT 'insufficient_data',
-            production_hsk_estimate REAL,
-            production_confidence TEXT DEFAULT 'insufficient_data',
-            composite_hsk_estimate REAL,
-            computed_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE learner_model_snapshots (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            snapshot TEXT NOT NULL,
-            generated_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _seed_items_and_grammar(conn):

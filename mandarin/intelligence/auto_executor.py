@@ -293,7 +293,7 @@ def execute_single_fix(conn, finding_id: int) -> dict:
         return result
 
     # 6b. Smoke test
-    smoke_ok, smoke_error = _smoke_test()
+    smoke_ok, smoke_error = _smoke_test(target_file)
     if not smoke_ok:
         _restore_file(backup_path, abs_path)
         result["status"] = "reverted"
@@ -476,6 +476,45 @@ def _detect_runtime_error_pattern(title: str, analysis: str) -> str:
     return "general_error_fix"
 
 
+# ── Input sanitization ─────────────────────────────────────────────────────
+
+def _sanitize_finding_text(text: str) -> str:
+    """Sanitize finding text before inserting into LLM prompts.
+
+    Defends against prompt injection by:
+    1. Stripping markdown code fences
+    2. Removing lines that look like LLM instructions
+    3. Truncating to 500 chars
+    4. Stripping non-printable characters
+    """
+    if not text:
+        return ""
+
+    # 1. Strip markdown code fences
+    text = re.sub(r"```[\s\S]*?```", "", text)
+
+    # 2. Remove lines that look like injected LLM instructions
+    _INJECTION_PATTERNS = re.compile(
+        r"^.*("
+        r"ignore previous|system:|you are|instead,"
+        r").*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    text = _INJECTION_PATTERNS.sub("", text)
+
+    # 3. Strip non-printable characters (keep newlines, tabs, normal printable)
+    text = re.sub(r"[^\x20-\x7E\n\t]", "", text)
+
+    # 4. Collapse excessive whitespace left by removals
+    text = re.sub(r"\n{3,}", "\n\n", text).strip()
+
+    # 5. Truncate to 500 chars
+    if len(text) > 500:
+        text = text[:500] + "..."
+
+    return text
+
+
 # ── LLM fix generation ────────────────────────────────────────────────────
 
 def _generate_fix(
@@ -499,7 +538,10 @@ def _generate_fix(
         "You are a code maintenance assistant. You fix low-severity issues in Python "
         "and web projects. You receive the current file content and a description of "
         "the issue. You return ONLY the complete fixed file content — no explanations, "
-        "no markdown code fences, no commentary. Just the raw file content."
+        "no markdown code fences, no commentary. Just the raw file content.\n\n"
+        "CONSTRAINTS: Do not add new import statements for os, subprocess, socket, "
+        "http, urllib, requests, or shutil. Do not add calls to os.system, "
+        "subprocess.run, eval, exec, or open() with write mode."
     )
 
     # Truncate file content if too large for context
@@ -517,10 +559,14 @@ def _generate_fix(
     if finding.get("dimension") == "runtime_health" and target_parameter:
         runtime_guidance = _get_runtime_fix_guidance(target_parameter)
 
+    # Sanitize finding text to defend against prompt injection
+    safe_title = _sanitize_finding_text(finding["title"])
+    safe_analysis = _sanitize_finding_text(finding.get("analysis", "N/A"))
+
     prompt = (
         f"Fix the following issue in `{target_file}`:\n\n"
-        f"**Issue:** {finding['title']}\n"
-        f"**Analysis:** {finding.get('analysis', 'N/A')}\n"
+        f"**Issue:** {safe_title}\n"
+        f"**Analysis:** {safe_analysis}\n"
         f"**Parameter:** {target_parameter}\n"
         f"**Direction:** {direction}\n"
         f"**Severity:** {finding['severity']}\n"
@@ -659,11 +705,12 @@ def _validate_syntax(file_path: Path) -> tuple[bool, str]:
         return False, str(exc)[:500]
 
 
-def _smoke_test() -> tuple[bool, str]:
-    """Run 'python -c \"import mandarin\"' as a basic import smoke test.
+def _smoke_test(target_file: str = "") -> tuple[bool, str]:
+    """Run import smoke test and, if possible, the target module's tests.
 
     Returns (passed, error_message).
     """
+    # 1. Basic import test
     try:
         result = subprocess.run(
             ["python", "-c", "import mandarin"],
@@ -675,11 +722,34 @@ def _smoke_test() -> tuple[bool, str]:
         if result.returncode != 0:
             error = result.stderr.strip() or result.stdout.strip()
             return False, error[:500]
-        return True, ""
     except subprocess.TimeoutExpired:
         return False, "Smoke test timed out"
     except Exception as exc:
         return False, str(exc)[:500]
+
+    # 2. If target_file provided, try to run its tests
+    if target_file and target_file.endswith(".py"):
+        module_name = target_file.replace("/", ".").replace(".py", "")
+        # Extract the leaf module name (e.g. "routes" from "mandarin.web.routes")
+        leaf_name = module_name.split(".")[-1] if "." in module_name else module_name
+        test_file = _PROJECT_ROOT / "tests" / f"test_{leaf_name}.py"
+        if test_file.exists():
+            try:
+                result = subprocess.run(
+                    ["python", "-m", "pytest", str(test_file), "-x", "--tb=short", "-q"],
+                    capture_output=True, text=True,
+                    timeout=60, cwd=str(_PROJECT_ROOT),
+                )
+                if result.returncode != 0:
+                    error = result.stdout.strip()[-500:] or result.stderr.strip()[-500:]
+                    return False, f"Module tests failed: {error}"
+            except subprocess.TimeoutExpired:
+                return False, "Module tests timed out"
+            except Exception as exc:
+                # Test runner unavailable — don't block on this
+                logger.warning("Could not run module tests: %s", exc)
+
+    return True, ""
 
 
 # ── File backup / restore ─────────────────────────────────────────────────
