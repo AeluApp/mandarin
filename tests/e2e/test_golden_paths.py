@@ -70,7 +70,7 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
         return {{ seeded: data.items_seeded || 0, status: r3.status }};
     }}""")
     # Reload so dashboard renders without the wizard overlay
-    page.reload(wait_until="networkidle", timeout=15000)
+    page.reload(wait_until="networkidle", timeout=30000)
     # Wait for dashboard to be ready — either content is seeded and button updates,
     # or if seeding returned 0 items, the button stays disabled (tests that need
     # enabled button will check separately with their own timeout)

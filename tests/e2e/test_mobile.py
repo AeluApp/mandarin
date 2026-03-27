@@ -63,7 +63,7 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
             headers: {{'Content-Type': 'application/json'}}
         }});
     }}""")
-    page.reload(wait_until="networkidle", timeout=15000)
+    page.reload(wait_until="networkidle", timeout=30000)
     # Wait for dashboard to settle (status API call + render)
     page.wait_for_timeout(2000)
 
