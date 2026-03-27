@@ -551,7 +551,7 @@ def run_check(conn: sqlite3.Connection) -> dict:
     actions_taken = []
 
     for dep_name, check_fn in _CHECK_FUNCTIONS.items():
-        dep_config = DEPENDENCIES[dep_name]
+        _dep_config = DEPENDENCIES[dep_name]  # noqa: F841
 
         # Run the health check
         try:

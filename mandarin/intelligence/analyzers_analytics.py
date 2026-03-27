@@ -181,7 +181,7 @@ def _analyze_analytics(conn) -> list[dict]:
     site_id = stats.get("site_id", "")
 
     total_visitors = aggregate.get("visitors", 0)
-    overall_bounce = aggregate.get("bounce_rate", 0)
+    _overall_bounce = aggregate.get("bounce_rate", 0)  # noqa: F841
 
     # ── 1. High bounce rate on specific pages (>80%) ─────────────────
     for page in pages:

@@ -784,7 +784,7 @@ def _propose_landing_page_tests(
         if "signup" in goal_name or "register" in goal_name:
             signup_events += goal.get("visitors", 0)
 
-    site_conversion_rate = signup_events / max(total_visitors, 1)
+    _site_conversion_rate = signup_events / max(total_visitors, 1)  # noqa: F841
 
     for page in page_metrics:
         if not _can_take_action(conn):

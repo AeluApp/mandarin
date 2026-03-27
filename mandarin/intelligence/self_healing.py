@@ -294,7 +294,7 @@ def _truncate_logs() -> dict:
                 size = os.path.getsize(log_path)
                 if size > 10 * 1024 * 1024:  # Only truncate files > 10MB
                     # Keep last 1000 lines
-                    with open(log_path, "r") as f:
+                    with open(log_path) as f:
                         lines = f.readlines()
                     with open(log_path, "w") as f:
                         f.writelines(lines[-1000:])

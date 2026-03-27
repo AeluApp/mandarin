@@ -149,7 +149,7 @@ def parse_newsletters(path: str | Path | None = None) -> list[ContentPiece]:
 
     pieces = []
     current_issue = 0
-    current_title = ""
+    _current_title = ""  # noqa: F841
     current_lines: list[str] = []
 
     def _flush():
@@ -177,7 +177,7 @@ def parse_newsletters(path: str | Path | None = None) -> list[ContentPiece]:
         if issue_match:
             _flush()
             current_issue = int(issue_match.group(1))
-            current_title = issue_match.group(2).strip()
+            _current_title = issue_match.group(2).strip()  # noqa: F841
             continue
 
         if current_issue > 0:

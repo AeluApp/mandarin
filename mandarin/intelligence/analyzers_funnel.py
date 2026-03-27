@@ -15,7 +15,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from ._base import _finding, _safe_scalar, _safe_query, _safe_query_all
 
@@ -680,7 +680,7 @@ def _save_funnel_snapshot(
     """Save a funnel snapshot for historical trending."""
     try:
         import uuid
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        today = datetime.now(UTC).strftime("%Y-%m-%d")
 
         # Calculate key conversion rates for the snapshot table
         visit_to_signup = _compute_conversion_rate(
