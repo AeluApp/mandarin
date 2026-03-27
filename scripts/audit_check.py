@@ -571,7 +571,7 @@ def check_t1() -> dict:
 
 
 def check_t2() -> dict:
-    """T2: fail_under in pyproject.toml >= 50."""
+    """T2: fail_under in pyproject.toml >= 53."""
     content = _read(_PYPROJECT)
     m = re.search(r"fail_under\s*=\s*(\d+)", content)
     if not m:
@@ -582,18 +582,18 @@ def check_t2() -> dict:
             "details": "fail_under not found in pyproject.toml",
         }
     value = int(m.group(1))
-    if value < 50:
+    if value < 53:
         return {
             "id": "T2",
             "name": "coverage fail_under threshold",
             "status": "FAIL",
-            "details": f"fail_under={value}, expected >= 50",
+            "details": f"fail_under={value}, expected >= 53",
         }
     return {
         "id": "T2",
         "name": "coverage fail_under threshold",
         "status": "PASS",
-        "details": f"fail_under={value} (>= 50)",
+        "details": f"fail_under={value} (>= 53)",
     }
 
 
