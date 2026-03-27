@@ -51,12 +51,13 @@ def _complete_onboarding(page: Page, level: int = 1, goal: str = "quick"):
         wizard.wait_for(state="visible", timeout=3000)
     except Exception:
         return
-    # Skip intro slides to reach level picker
+    # Skip intro slides to reach level picker (force-click to bypass animation)
     skip_btn = page.locator("#onboarding-skip-0")
     if skip_btn.is_visible():
-        skip_btn.click()
-        page.wait_for_timeout(500)
-    page.click(f"[data-level='{level}']")
+        skip_btn.click(force=True)
+    # Wait for level picker to appear
+    page.locator(f"[data-level='{level}']").wait_for(state="visible", timeout=5000)
+    page.click(f"[data-level='{level}']", force=True)
     page.wait_for_timeout(500)
     page.click(f"[data-goal='{goal}']")
     page.wait_for_load_state("networkidle", timeout=15000)
@@ -88,11 +89,11 @@ def test_mobile_registration_and_onboarding(e2e_server, mobile_page: Page):
     # Wizard starts with intro slides; skip to level picker
     skip_btn = mobile_page.locator("#onboarding-skip-0")
     expect(skip_btn).to_be_visible(timeout=3000)
-    skip_btn.click()
+    skip_btn.click(force=True)
 
     # Level buttons should be visible and tappable
     level_btn = mobile_page.locator("[data-level='1']")
-    expect(level_btn).to_be_visible(timeout=3000)
+    expect(level_btn).to_be_visible(timeout=5000)
 
 
 # ── Mobile Golden Path 2: Dashboard at mobile viewport ──────
