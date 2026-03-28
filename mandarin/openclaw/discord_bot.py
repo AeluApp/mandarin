@@ -78,9 +78,16 @@ def _execute_intent(intent_result, conn) -> str:
         "reject": lambda: commands.cmd_reject(
             item_id=args.get("item_id", 0), reason=args.get("reason", ""),
         ),
+        "findings": lambda: commands.cmd_findings(),
+        "approve_finding": lambda: commands.cmd_approve_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
+        "dismiss_finding": lambda: commands.cmd_dismiss_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
         "session": lambda: "Open the Aelu app or web interface to start a session.",
         "help": lambda: (
-            "Commands: `!status`, `!review`, `!audit`, `!briefing`, `!errors`\n"
+            "Commands: `!status`, `!review`, `!audit`, `!briefing`, `!errors`, `!findings`\n"
             "Or just type naturally in DMs."
         ),
     }
@@ -114,6 +121,11 @@ async def _handle_command(message, cmd_name: str, arg_text: str = "") -> None:
             "errors": lambda: commands.cmd_error_patterns(),
             "approve": lambda: commands.cmd_approve(item_id=int(arg_text)) if arg_text.isdigit() else "Usage: !approve <id>",
             "reject": lambda: commands.cmd_reject(item_id=int(arg_text.split()[0]), reason=" ".join(arg_text.split()[1:])) if arg_text else "Usage: !reject <id> [reason]",
+            "findings": lambda: commands.cmd_findings(),
+            "approve_finding": lambda: commands.cmd_approve_finding(
+                finding_number=int(arg_text)) if arg_text.isdigit() else "Usage: !approve_finding <number>",
+            "dismiss_finding": lambda: commands.cmd_dismiss_finding(
+                finding_number=int(arg_text)) if arg_text.isdigit() else "Usage: !dismiss_finding <number>",
             "help": lambda: (
                 "**Aelu OpenClaw**\n"
                 "`!status` — learning status + due items\n"
@@ -121,6 +133,9 @@ async def _handle_command(message, cmd_name: str, arg_text: str = "") -> None:
                 "`!audit` — latest audit results\n"
                 "`!briefing` — learner/tutor prep\n"
                 "`!errors` — error patterns\n"
+                "`!findings` — issues needing your review\n"
+                "`!approve_finding 1` — approve a fix\n"
+                "`!dismiss_finding 1` — dismiss a finding\n"
                 "`!help` — this message\n\n"
                 "Or DM me naturally."
             ),

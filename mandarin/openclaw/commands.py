@@ -280,3 +280,84 @@ def cmd_error_patterns() -> str:
             pass
 
         return "\n".join(lines) if lines else "No active error patterns."
+
+
+def cmd_findings(user_id: int = 1) -> str:
+    """Show open findings that need your review, in plain English."""
+    with _get_conn() as conn:
+        findings = conn.execute("""
+            SELECT id, severity, title, analysis, status
+            FROM pi_finding
+            WHERE status NOT IN ('resolved', 'rejected')
+            ORDER BY
+                CASE severity
+                    WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2 WHEN 'low' THEN 3
+                END,
+                updated_at DESC
+            LIMIT 10
+        """).fetchall()
+
+        if not findings:
+            return "No findings need your attention right now. Everything looks good."
+
+        lines = [f"{len(findings)} finding(s) need your review:\n"]
+        for i, f in enumerate(findings, 1):
+            severity_icon = {"critical": "!!!", "high": "!!", "medium": "!", "low": ""}.get(f["severity"], "")
+            lines.append(f"[{i}] {severity_icon} {f['title']}")
+            # Show the plain-English analysis
+            analysis = f["analysis"] or ""
+            for aline in analysis.split("\n"):
+                aline = aline.strip()
+                if aline and aline.startswith(("WHAT", "URGENCY", "DETAILS")):
+                    lines.append(f"    {aline}")
+            lines.append(f"    → Reply 'approve {i}' or 'dismiss {i}'")
+            lines.append("")
+
+        return "\n".join(lines)
+
+
+def cmd_approve_finding(finding_number: int, notes: str = "", user_id: int = 1) -> str:
+    """Approve a finding fix (mark as resolved)."""
+    return _transition_finding(finding_number, "resolved", notes)
+
+
+def cmd_dismiss_finding(finding_number: int, notes: str = "", user_id: int = 1) -> str:
+    """Dismiss a finding (mark as rejected)."""
+    return _transition_finding(finding_number, "rejected", notes)
+
+
+def _transition_finding(finding_number: int, status: str, notes: str = "") -> str:
+    """Transition the Nth open finding to the given status."""
+    with _get_conn() as conn:
+        findings = conn.execute("""
+            SELECT id, title FROM pi_finding
+            WHERE status NOT IN ('resolved', 'rejected')
+            ORDER BY
+                CASE severity
+                    WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2 WHEN 'low' THEN 3
+                END,
+                updated_at DESC
+            LIMIT 10
+        """).fetchall()
+
+        if finding_number < 1 or finding_number > len(findings):
+            return f"No finding #{finding_number}. Use 'findings' to see the list."
+
+        finding = findings[finding_number - 1]
+        action = "Approved" if status == "resolved" else "Dismissed"
+
+        try:
+            conn.execute("""
+                UPDATE pi_finding SET status = ?, updated_at = datetime('now')
+                WHERE id = ?
+            """, (status, finding["id"]))
+            if notes:
+                conn.execute("""
+                    UPDATE pi_finding SET analysis = analysis || ? WHERE id = ?
+                """, (f"\n\nOWNER NOTE: {notes}", finding["id"]))
+            conn.commit()
+            return f"{action}: {finding['title']}"
+        except Exception as e:
+            return f"Failed to update finding: {e}"
