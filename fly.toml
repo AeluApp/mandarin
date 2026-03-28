@@ -24,11 +24,11 @@ primary_region = "ewr"
   processes = ["app"]
 
   [[http_service.checks]]
-    grace_period = "10s"
+    grace_period = "120s"
     interval = "15s"
     method = "GET"
-    path = "/api/health/ready"
-    timeout = "5s"
+    path = "/api/health/live"
+    timeout = "10s"
 
 [[vm]]
   size = "shared-cpu-1x"
