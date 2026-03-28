@@ -376,6 +376,17 @@ def _update_attempt_counts(conn: sqlite3.Connection, item_id: int,
     else:
         new_avg_ms = old_avg_ms
 
+    # Update modality_history: record when each drill type was last practiced
+    import json as _json
+    existing_history_str = row.get("modality_history") or "{}"
+    try:
+        modality_history = _json.loads(existing_history_str)
+    except (_json.JSONDecodeError, TypeError):
+        modality_history = {}
+    if drill_type:
+        modality_history[drill_type] = today
+    modality_history_json = _json.dumps(modality_history)
+
     # Update content_item counters
     conn.execute("""
         UPDATE content_item SET
@@ -393,6 +404,7 @@ def _update_attempt_counts(conn: sqlite3.Connection, item_id: int,
         "drill_type_count": drill_type_count,
         "total_after": total_after,
         "new_avg_ms": new_avg_ms,
+        "modality_history_json": modality_history_json,
     }
 
 
@@ -575,6 +587,7 @@ def record_attempt(conn: sqlite3.Connection, content_item_id: int,
 
     # 5. Apply all updates to progress row
     new_types_str = ",".join(sorted(ctx["types_set"]))
+    modality_history_val = ctx.get("modality_history_json", "{}")
     conn.execute("""
         UPDATE progress SET
             ease_factor = ?, interval_days = ?, repetitions = ?,
@@ -593,7 +606,8 @@ def record_attempt(conn: sqlite3.Connection, content_item_id: int,
             difficulty = ?,
             last_p_recall = ?,
             stable_since_date = ?,
-            successes_while_stable = ?
+            successes_while_stable = ?,
+            modality_history = ?
         WHERE user_id = ? AND content_item_id = ? AND modality = ?
     """, (srs["ease"], srs["interval"], srs["reps"],
           srs["next_review"], ctx["today"],
@@ -605,6 +619,7 @@ def record_attempt(conn: sqlite3.Connection, content_item_id: int,
           ctx["new_avg_ms"], new_types_str, ctx["distinct_days"],
           ret["half_life"], ret["difficulty"], round(ret["p_recall"], 3),
           mastery["stable_since_date"], mastery["successes_while_stable"],
+          modality_history_val,
           user_id, content_item_id, modality))
 
     # 5b. Per-item tone tracking (Doctrine §2: tone mastery per item)

@@ -17,6 +17,7 @@ from . import db, display
 logger = logging.getLogger(__name__)
 from .scheduler import SessionPlan, DrillItem
 from .drills import run_drill, DrillResult, DRILL_REGISTRY
+from .drills.base import detect_near_miss, format_near_miss_feedback
 from .conversation import run_dialogue_drill
 from .scenario_loader import get_scenario_by_id, record_scenario_attempt
 from .media import get_media_entry, run_media_comprehension
@@ -717,6 +718,25 @@ def run_session(conn, plan: SessionPlan,
 
         state.results.append(result)
 
+        # Near-miss detection (behavioral economics: targeted feedback)
+        near_miss_info = None
+        if not result.correct and not result.skipped:
+            try:
+                nm = detect_near_miss(
+                    user_answer=result.user_answer,
+                    expected_answer=result.expected_answer,
+                    drill_type=drill.drill_type,
+                    error_type=result.error_type,
+                )
+                if nm:
+                    result.near_miss_type = nm[0].value
+                    near_miss_info = {
+                        "type": nm[0].value,
+                        "feedback": format_near_miss_feedback(nm),
+                    }
+            except Exception:
+                logger.debug("near-miss detection failed", exc_info=True)
+
         # Send drill metadata to web UI for override support
         if drill_meta_fn:
             try:
@@ -727,6 +747,7 @@ def run_session(conn, plan: SessionPlan,
                     hanzi=drill.hanzi or "",
                     error_type=result.error_type or "",
                     requirement_ref=result.requirement_ref,
+                    near_miss=near_miss_info,
                 )
             except Exception:
                 logger.debug("drill_meta_fn callback failed", exc_info=True)

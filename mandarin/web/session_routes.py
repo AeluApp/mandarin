@@ -528,6 +528,7 @@ def _handle_ws_session(ws, planner_fn, label):
             "prompt_pinyin": scenario.get("prompt_pinyin", scenario.get("prompt", {}).get("pinyin", "")),
             "prompt_en": scenario.get("prompt_en", scenario.get("prompt", {}).get("en", "")),
             "max_turns": block.max_turns,
+            "hsk_level": block.hsk_level,
         })
 
         # Multi-turn conversation loop

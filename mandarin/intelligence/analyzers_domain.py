@@ -34,7 +34,7 @@ def analyze_srs_funnel(conn) -> list[dict]:
     stuck_stabilizing = _safe_scalar(conn, """
         SELECT COUNT(*) FROM progress
         WHERE mastery_stage = 'stabilizing'
-          AND updated_at <= datetime('now', '-14 days')
+          AND last_review_date <= datetime('now', '-14 days')
     """)
     if stuck_stabilizing and total > 0:
         stuck_pct = round(stuck_stabilizing / total * 100, 1)
@@ -48,9 +48,9 @@ def analyze_srs_funnel(conn) -> list[dict]:
                 (
                     f"{stuck_stabilizing}/{total} items stuck at stabilizing.\n\n"
                     f"1. Check {_FILE_MAP['scheduler']} — interval calculation for stabilizing stage\n"
-                    "2. Query: SELECT content_item_id, ease_factor, interval_days, updated_at "
+                    "2. Query: SELECT content_item_id, ease_factor, interval_days, last_review_date "
                     "FROM progress WHERE mastery_stage = 'stabilizing' AND "
-                    "updated_at <= datetime('now', '-14 days') ORDER BY updated_at ASC LIMIT 20"
+                    "last_review_date <= datetime('now', '-14 days') ORDER BY last_review_date ASC LIMIT 20"
                 ),
                 "Learning: stuck items mean the SRS isn't working",
                 _f("scheduler"),
@@ -928,7 +928,7 @@ def analyze_learning_waste(conn) -> list[dict]:
     stuck_inventory = _safe_scalar(conn, """
         SELECT COUNT(*) FROM progress
         WHERE mastery_stage IN ('learning', 'stabilizing')
-          AND updated_at <= datetime('now', '-60 days')
+          AND last_review_date <= datetime('now', '-60 days')
     """)
     if stuck_inventory and stuck_inventory > 10:
         wastes.append(("inventory", stuck_inventory,
@@ -1029,7 +1029,7 @@ def analyze_session_queue(conn) -> list[dict]:
     queue_depth = _safe_scalar(conn, """
         SELECT COUNT(*) FROM progress
         WHERE mastery_stage IN ('learning', 'stabilizing')
-          AND next_review_at <= datetime('now')
+          AND next_review_date <= datetime('now')
     """)
 
     # Little's Law: L = λW → W = L/λ (avg wait time per item)

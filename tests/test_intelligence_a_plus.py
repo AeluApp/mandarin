@@ -8,175 +8,11 @@ Welch's t-test, DMAIC, cycle times, learning waste, queue model, VSM.
 
 import json
 import math
-import sqlite3
 import unittest
 from datetime import datetime, timezone, timedelta, UTC
 
 
-def _make_db():
-    """Create an in-memory SQLite DB with all required tables."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    # Core tables
-    conn.execute("""CREATE TABLE user (
-        id INTEGER PRIMARY KEY, email TEXT, created_at TEXT DEFAULT (datetime('now')),
-        subscription_tier TEXT DEFAULT 'free', streak_freezes_available INTEGER DEFAULT 0
-    )""")
-    conn.execute("""CREATE TABLE session_log (
-        id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT DEFAULT (datetime('now')),
-        items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 8,
-        early_exit INTEGER DEFAULT 0, plan_snapshot TEXT,
-        client_platform TEXT DEFAULT 'web'
-    )""")
-    conn.execute("""CREATE TABLE review_event (
-        id INTEGER PRIMARY KEY, user_id INTEGER, content_item_id INTEGER,
-        drill_type TEXT, correct INTEGER DEFAULT 1,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE content_item (
-        id INTEGER PRIMARY KEY, hanzi TEXT, english TEXT, hsk_level INTEGER
-    )""")
-    conn.execute("""CREATE TABLE progress (
-        id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1, content_item_id INTEGER,
-        mastery_stage TEXT DEFAULT 'learning', modality TEXT DEFAULT 'reading',
-        repetitions INTEGER DEFAULT 0, interval_days INTEGER DEFAULT 1,
-        ease_factor REAL DEFAULT 2.5, weak_cycle_count INTEGER DEFAULT 0,
-        historically_weak INTEGER DEFAULT 0, next_review_at TEXT,
-        created_at TEXT DEFAULT (datetime('now')), updated_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE grammar_point (id INTEGER PRIMARY KEY, name TEXT, category TEXT)""")
-    conn.execute("""CREATE TABLE grammar_progress (id INTEGER PRIMARY KEY, grammar_point_id INTEGER, user_id INTEGER DEFAULT 1)""")
-    conn.execute("""CREATE TABLE skill (id INTEGER PRIMARY KEY, name TEXT)""")
-    conn.execute("""CREATE TABLE content_skill (id INTEGER PRIMARY KEY, skill_id INTEGER, content_item_id INTEGER)""")
-    conn.execute("""CREATE TABLE audio_recording (
-        id INTEGER PRIMARY KEY, tone_scores_json TEXT, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE error_log (
-        id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1, error_type TEXT,
-        content_item_id INTEGER, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE crash_log (
-        id INTEGER PRIMARY KEY, traceback_hash TEXT, timestamp TEXT DEFAULT (datetime('now')),
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE client_error_log (
-        id INTEGER PRIMARY KEY, error_message TEXT, created_at TEXT DEFAULT (datetime('now')),
-        timestamp TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE client_event (
-        id INTEGER PRIMARY KEY, category TEXT, event TEXT, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE request_timing (
-        id INTEGER PRIMARY KEY, recorded_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE security_audit_log (
-        id INTEGER PRIMARY KEY, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE vocab_encounter (
-        id INTEGER PRIMARY KEY, content_item_id INTEGER, hanzi TEXT,
-        source_type TEXT, source_id INTEGER, looked_up INTEGER DEFAULT 0,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE improvement_log (
-        id INTEGER PRIMARY KEY, status TEXT DEFAULT 'proposed',
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE experiment (
-        id INTEGER PRIMARY KEY, name TEXT, status TEXT DEFAULT 'running',
-        min_sample_size INTEGER DEFAULT 100, created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE experiment_assignment (
-        id INTEGER PRIMARY KEY, experiment_id INTEGER, user_id INTEGER,
-        variant TEXT, assigned_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE lifecycle_event (
-        id INTEGER PRIMARY KEY, user_id INTEGER, event_type TEXT,
-        metadata TEXT, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE spc_observation (
-        id INTEGER PRIMARY KEY, chart_type TEXT, value REAL,
-        ucl REAL, lcl REAL, rule_violated TEXT,
-        observed_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE work_item (
-        id INTEGER PRIMARY KEY, title TEXT, status TEXT DEFAULT 'in_progress',
-        service_class TEXT, review_at TEXT, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE risk_item (
-        id INTEGER PRIMARY KEY, title TEXT, probability INTEGER DEFAULT 3,
-        impact INTEGER DEFAULT 3, status TEXT DEFAULT 'active'
-    )""")
-
-    # Intelligence tables
-    conn.execute("""CREATE TABLE product_audit (
-        id INTEGER PRIMARY KEY, run_at TEXT DEFAULT (datetime('now')),
-        overall_grade TEXT, overall_score REAL,
-        dimension_scores TEXT, findings_json TEXT,
-        findings_count INTEGER, critical_count INTEGER, high_count INTEGER
-    )""")
-    conn.execute("""CREATE TABLE pi_finding (
-        id INTEGER PRIMARY KEY, audit_id INTEGER,
-        dimension TEXT, severity TEXT, title TEXT, analysis TEXT,
-        status TEXT DEFAULT 'investigating',
-        hypothesis TEXT, falsification TEXT,
-        metric_name TEXT, metric_value_at_detection REAL,
-        root_cause_tag TEXT, linked_finding_id INTEGER,
-        times_seen INTEGER DEFAULT 1, last_seen_audit_id INTEGER,
-        created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now')),
-        resolved_at TEXT, resolution_notes TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_advisor_opinion (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        advisor TEXT, recommendation TEXT, priority_score REAL,
-        effort_estimate REAL, rationale TEXT, tradeoff_notes TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_advisor_resolution (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        winning_advisor TEXT, resolution_rationale TEXT,
-        tradeoff_summary TEXT, created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_recommendation_outcome (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        action_type TEXT, action_description TEXT,
-        files_changed TEXT, metric_before TEXT, metric_after TEXT,
-        verified_at TEXT, delta_pct REAL, effective INTEGER,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_threshold_calibration (
-        metric_name TEXT PRIMARY KEY, threshold_value REAL NOT NULL,
-        calibrated_at TEXT DEFAULT (datetime('now')),
-        sample_size INTEGER, false_positive_rate REAL,
-        false_negative_rate REAL, prior_threshold REAL,
-        notes TEXT, verification_window_days INTEGER
-    )""")
-    conn.execute("""CREATE TABLE pi_decision_log (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        decision_class TEXT, escalation_level TEXT,
-        presented_to TEXT, decision TEXT, decision_reason TEXT,
-        override_expires_at TEXT, outcome_notes TEXT,
-        requires_approval INTEGER DEFAULT 0, approved_at TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_false_negative_signal (
-        id INTEGER PRIMARY KEY, signal_source TEXT NOT NULL,
-        signal_id TEXT, dimension TEXT,
-        detected_at TEXT DEFAULT (datetime('now')),
-        had_finding INTEGER DEFAULT 0, notes TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_dmaic_log (
-        id INTEGER PRIMARY KEY, dimension TEXT NOT NULL,
-        define_json TEXT, measure_json TEXT, analyze_json TEXT,
-        improve_json TEXT, control_json TEXT,
-        run_at TEXT DEFAULT (datetime('now'))
-    )""")
-
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestFuzzyDedup(unittest.TestCase):
@@ -241,7 +77,7 @@ class TestFalseNegatives(unittest.TestCase):
         conn = _make_db()
 
         # Create SPC violation with no corresponding finding
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.commit()
 
         result = estimate_false_negatives(conn, lookback_days=1)
@@ -254,7 +90,7 @@ class TestFalseNegatives(unittest.TestCase):
         conn = _make_db()
 
         # Create SPC violation WITH corresponding finding
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('engineering', 'high', 'SPC violation', 'investigating')")
         conn.commit()
 
@@ -274,7 +110,7 @@ class TestCounterfactualCI(unittest.TestCase):
         past = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
         future = (datetime.now(UTC) - timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 21):
-            conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (?, 'test' || ? || '@test.com', 'hash', ?)", (i, i, past))
         # Affected: users 1-10 had early_exit sessions
         for i in range(1, 11):
             conn.execute("INSERT INTO session_log (user_id, started_at, early_exit) VALUES (?, ?, 1)", (i, past))
@@ -410,10 +246,11 @@ class TestLearnerArchetypes(unittest.TestCase):
 
         # Create user with low accuracy
         past = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
-        conn.execute("INSERT INTO user (id, created_at) VALUES (1, ?)", (past,))
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (1, 'test1@test.com', 'hash', ?)", (past,))
         for i in range(20):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now', ? || ' days'))", (f"-{i}",))
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, ?, ?)", (i, 0 if i < 15 else 1))
+            conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (?, 'test', 'test', 'test')", (i,))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, ?, ?, 'read')", (i, 0 if i < 15 else 1))
         conn.commit()
 
         findings = analyze_learner_archetypes(conn)
@@ -463,7 +300,7 @@ class TestCOPQ(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import estimate_copq
         conn = _make_db()
 
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
         conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('retention', 'critical', 'test', 'investigating')")
         conn.commit()
 
@@ -482,12 +319,13 @@ class TestPowerAnalysis(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import compute_power_analysis
         conn = _make_db()
 
-        conn.execute("INSERT INTO experiment (id, name, status) VALUES (1, 'test_exp', 'running')")
+        conn.execute("INSERT INTO experiment (id, name, status, variants) VALUES (1, 'test_exp', 'running', '[\"control\",\"treatment\"]')")
+        conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (1, 'test', 'test', 'test')")
         # Control variant with 200 users
         for i in range(1, 201):
-            conn.execute("INSERT INTO user (id) VALUES (?)", (i,))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (?, 'test' || ? || '@test.com', 'hash')", (i, i))
             conn.execute("INSERT INTO experiment_assignment (experiment_id, user_id, variant, assigned_at) VALUES (1, ?, 'control', datetime('now', '-7 days'))", (i,))
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (?, 1, ?, datetime('now', '-3 days'))", (i, 1 if i <= 140 else 0))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (?, 1, ?, 'read', datetime('now', '-3 days'))", (i, 1 if i <= 140 else 0))
         conn.commit()
 
         result = compute_power_analysis(conn, 1)
@@ -506,11 +344,11 @@ class TestExpandedMetrics(unittest.TestCase):
         conn = _make_db()
 
         # Seed minimal data
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
+        conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (1, '你好', 'nǐhǎo', 'hello', 1)")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO content_item (id, hanzi, english, hsk_level) VALUES (1, '你好', 'hello', 1)")
-        conn.execute("INSERT INTO progress (user_id, content_item_id, mastery_stage) VALUES (1, 1, 'stable')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO progress (user_id, content_item_id, modality, mastery_stage) VALUES (1, 1, 'reading', 'stable')")
         conn.commit()
 
         # These should all return a value (not None)
@@ -528,7 +366,7 @@ class TestSPCClosure(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import analyze_spc_closure
         conn = _make_db()
 
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.commit()
 
         findings = analyze_spc_closure(conn)
@@ -543,15 +381,16 @@ class TestWelchsTTest(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import analyze_experiments
         conn = _make_db()
 
-        conn.execute("INSERT INTO experiment (id, name, status, min_sample_size) VALUES (1, 'test', 'running', 50)")
+        conn.execute("INSERT INTO experiment (id, name, status, variants, min_sample_size) VALUES (1, 'test', 'running', '[\"control\",\"treatment\"]', 50)")
+        conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (1, 'test', 'test', 'test')")
         # Create 100 assignments with clear difference
         for i in range(1, 101):
-            conn.execute("INSERT INTO user (id) VALUES (?)", (i,))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (?, 'test' || ? || '@test.com', 'hash')", (i, i))
             variant = "control" if i <= 50 else "treatment"
             conn.execute("INSERT INTO experiment_assignment (experiment_id, user_id, variant, assigned_at) VALUES (1, ?, ?, datetime('now', '-7 days'))", (i, variant))
             # Control: 60% correct, Treatment: 80% correct
             correct = 1 if (i <= 50 and i <= 30) or (i > 50 and i <= 90) else 0
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (?, 1, ?, datetime('now', '-3 days'))", (i, correct))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (?, 1, ?, 'read', datetime('now', '-3 days'))", (i, correct))
         conn.commit()
 
         findings = analyze_experiments(conn)
@@ -571,7 +410,7 @@ class TestDMAIC(unittest.TestCase):
         # Insert advisor opinion so the Improve gate passes
         conn.execute("INSERT INTO pi_advisor_opinion (finding_id, advisor, recommendation, priority_score) VALUES (1, 'retention', 'Fix churn', 0.9)")
         # Insert SPC observation so the Control gate passes
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl) VALUES ('retention_accuracy', 0.7, 0.9, 0.5)")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('retention_accuracy', 0.7)")
         conn.commit()
 
         result = run_dmaic_cycle(conn, "retention")
@@ -628,8 +467,8 @@ class TestLearningWaste(unittest.TestCase):
         # Create items stuck in learning >60 days
         past = (datetime.now(UTC) - timedelta(days=90)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 16):
-            conn.execute("INSERT INTO content_item (id, hanzi, english) VALUES (?, ?, ?)", (i, f"字{i}", f"word{i}"))
-            conn.execute("INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?, 'learning', ?)", (i, past))
+            conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (?, ?, ?, ?)", (i, f"字{i}", f"zi{i}", f"word{i}"))
+            conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?, 'reading', 'learning', ?)", (i, past))
         conn.commit()
 
         findings = analyze_learning_waste(conn)
@@ -649,13 +488,13 @@ class TestSessionQueue(unittest.TestCase):
 
         # Create high arrival rate with low service rate
         for i in range(1, 101):
-            conn.execute("INSERT INTO content_item (id, hanzi, english) VALUES (?, ?, ?)", (i, f"字{i}", f"w{i}"))
-            conn.execute("INSERT INTO progress (content_item_id, mastery_stage, created_at, next_review_at) VALUES (?, 'learning', datetime('now', '-7 days'), datetime('now', '-1 days'))", (i,))
+            conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (?, ?, ?, ?)", (i, f"字{i}", f"zi{i}", f"w{i}"))
+            conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, next_review_date) VALUES (?, 'reading', 'learning', datetime('now', '-7 days'), datetime('now', '-1 days'))", (i,))
         # Only 10 reviews (service rate too low)
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
         for i in range(1, 11):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now', '-7 days'))")
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (1, ?, 1, datetime('now', '-7 days'))", (i,))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (1, ?, 1, 'read', datetime('now', '-7 days'))", (i,))
         conn.commit()
 
         findings = analyze_session_queue(conn)
@@ -672,7 +511,7 @@ class TestValueStreamMapping(unittest.TestCase):
         past = (datetime.now(UTC) - timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S")
         # Create 20 users, only 5 have sessions (big drop-off)
         for i in range(1, 21):
-            conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (?, 'test' || ? || '@test.com', 'hash', ?)", (i, i, past))
         for i in range(1, 6):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (?, ?)", (i, past))
         conn.commit()

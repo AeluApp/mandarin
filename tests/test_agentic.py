@@ -1,7 +1,6 @@
 """Tests for Doc 23: Agentic Technology Layer."""
 
 import json
-import sqlite3
 import unittest
 
 from mandarin.db.core import SCHEMA_VERSION
@@ -21,117 +20,7 @@ from mandarin.ai.agentic import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL, pinyin TEXT, english TEXT,
-            hsk_level INTEGER, status TEXT DEFAULT 'drill_ready',
-            content_lens TEXT
-        );
-
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
-            hsk_level INTEGER DEFAULT 1,
-            category TEXT DEFAULT 'structure'
-        );
-
-        CREATE TABLE content_grammar (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER, grammar_point_id INTEGER
-        );
-
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            correct INTEGER, created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER UNIQUE,
-            vocab_hsk_estimate REAL,
-            composite_hsk_estimate REAL,
-            computed_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE interference_pairs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi_a TEXT, hanzi_b TEXT, confusion_type TEXT
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            stability REAL DEFAULT 0.4, state TEXT DEFAULT 'new'
-        );
-
-        CREATE TABLE json_generation_failures (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            task_type TEXT, error_type TEXT, error_detail TEXT,
-            prompt_snippet TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE competitor_signals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source TEXT NOT NULL, signal_type TEXT NOT NULL,
-            title TEXT NOT NULL, detail TEXT, source_url TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE research_signals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source TEXT NOT NULL, title TEXT NOT NULL,
-            finding TEXT, applicability_score REAL, doi TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE prescription_execution_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            work_order_id INTEGER, action_type TEXT NOT NULL,
-            status TEXT DEFAULT 'pending', result_data TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE content_generation_queue (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            gap_type TEXT NOT NULL, gap_data TEXT,
-            generation_brief TEXT,
-            status TEXT DEFAULT 'pending',
-            generated_content TEXT, reviewer_note TEXT,
-            created_at TEXT DEFAULT (datetime('now')), reviewed_at TEXT
-        );
-
-        CREATE TABLE agent_task_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            task_type TEXT NOT NULL, task_data TEXT,
-            status TEXT DEFAULT 'pending', completed_at TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE pi_work_order (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            audit_cycle_id INTEGER, finding_id INTEGER,
-            instruction TEXT, target_file TEXT,
-            target_parameter TEXT, direction TEXT,
-            status TEXT DEFAULT 'pending',
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT, score REAL, dimension_scores TEXT,
-            findings TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestStructuredOutput(unittest.TestCase):
@@ -276,7 +165,7 @@ class TestFocusedLearnerContext(unittest.TestCase):
         ).lastrowid
         for _ in range(3):
             self.conn.execute(
-                "INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, ?, 0)",
+                "INSERT INTO review_event (user_id, content_item_id, modality, correct) VALUES (1, ?, 'reading', 0)",
                 (ci_id,),
             )
 
@@ -341,8 +230,12 @@ class TestPrescriptionExecution(unittest.TestCase):
 
     def test_execute_human_required(self):
         self.conn.execute("""
-            INSERT INTO pi_work_order (instruction, status)
-            VALUES ('Review and decide manually', 'pending')
+            INSERT INTO pi_work_order
+            (audit_cycle_id, finding_id, constraint_dimension, constraint_score,
+             marginal_improvement, instruction, success_metric, success_baseline,
+             success_threshold, verification_window_days, status)
+            VALUES (1, 1, 'content', 0.5, 0.1, 'Review and decide manually',
+                    'review_count', 0.0, 1.0, 7, 'pending')
         """)
         wo_id = self.conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         result = execute_prescription(self.conn, wo_id)
@@ -353,8 +246,12 @@ class TestPrescriptionExecution(unittest.TestCase):
             "INSERT INTO grammar_point (name, hsk_level) VALUES ('test_pattern', 2)"
         )
         self.conn.execute("""
-            INSERT INTO pi_work_order (instruction, status)
-            VALUES ('Generate content for uncovered patterns', 'pending')
+            INSERT INTO pi_work_order
+            (audit_cycle_id, finding_id, constraint_dimension, constraint_score,
+             marginal_improvement, instruction, success_metric, success_baseline,
+             success_threshold, verification_window_days, status)
+            VALUES (1, 1, 'content', 0.5, 0.1, 'Generate content for uncovered patterns',
+                    'pattern_coverage', 0.0, 1.0, 7, 'pending')
         """)
         wo_id = self.conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         result = execute_prescription(self.conn, wo_id)

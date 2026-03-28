@@ -7,6 +7,7 @@ primary_region = "ewr"
   IS_PRODUCTION = "true"
   PORT = "8080"
   DATA_DIR = "/data"
+  ADMIN_EMAIL = "jason.gerson@gmail.com"
 
 # Required secrets (set via `fly secrets set`):
 #   SECRET_KEY, JWT_SECRET, STRIPE_SECRET_KEY, RESEND_API_KEY,

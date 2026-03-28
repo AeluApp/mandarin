@@ -14,28 +14,7 @@ from mandarin.ai.tone_sandhi import (
 )
 
 
-def _make_db():
-    """Create in-memory DB with content_item table for sandhi tests."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL DEFAULT '',
-            english TEXT NOT NULL DEFAULT '',
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            status TEXT NOT NULL DEFAULT 'drill_ready',
-            review_status TEXT NOT NULL DEFAULT 'approved',
-            scale_level TEXT DEFAULT 'word',
-            content_type TEXT DEFAULT 'vocabulary',
-            audio_available INTEGER DEFAULT 0,
-            created_at TEXT DEFAULT (datetime('now'))
-        )
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestClassifySandhiContext(unittest.TestCase):

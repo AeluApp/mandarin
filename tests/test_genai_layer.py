@@ -7,125 +7,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 
 
-def _make_db():
-    """Create in-memory DB with GenAI tables + dependencies."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT, pinyin TEXT, english TEXT,
-            hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready',
-            usage_map TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER,
-            session_id INTEGER,
-            score INTEGER DEFAULT 0,
-            given_answer TEXT,
-            correct_answer TEXT,
-            response_ms INTEGER DEFAULT 1000,
-            drill_type TEXT DEFAULT 'hanzi_to_english',
-            reviewed_at TEXT NOT NULL DEFAULT (datetime('now')),
-            FOREIGN KEY (content_item_id) REFERENCES content_item(id)
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE tutor_corrections (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            tutor_session_id INTEGER NOT NULL,
-            wrong_form TEXT NOT NULL,
-            correct_form TEXT NOT NULL
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE speaking_practice_sessions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            session_id INTEGER,
-            prompt_type TEXT NOT NULL DEFAULT 'read_aloud',
-            target_zh TEXT NOT NULL,
-            expected_zh TEXT NOT NULL DEFAULT '',
-            whisper_transcription TEXT,
-            tone_accuracy REAL,
-            character_accuracy REAL,
-            overall_score REAL,
-            error_types TEXT,
-            audio_duration_seconds REAL,
-            whisper_confidence REAL,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE genai_prompt_registry (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prompt_key TEXT NOT NULL UNIQUE,
-            prompt_text TEXT NOT NULL,
-            version INTEGER NOT NULL DEFAULT 1,
-            category TEXT NOT NULL DEFAULT 'general',
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE genai_session_analysis (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            session_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            analysis_type TEXT NOT NULL,
-            result_json TEXT NOT NULL,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE genai_item_embeddings (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER NOT NULL UNIQUE,
-            embedding BLOB NOT NULL,
-            model_name TEXT NOT NULL,
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            FOREIGN KEY (content_item_id) REFERENCES content_item(id)
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_ai_generation_log (
-            id TEXT PRIMARY KEY,
-            occurred_at TEXT NOT NULL DEFAULT (datetime('now')),
-            task_type TEXT NOT NULL,
-            model_used TEXT NOT NULL DEFAULT 'test',
-            prompt_tokens INTEGER,
-            completion_tokens INTEGER,
-            generation_time_ms INTEGER,
-            from_cache INTEGER NOT NULL DEFAULT 0,
-            success INTEGER NOT NULL DEFAULT 1,
-            error TEXT,
-            finding_id TEXT,
-            item_id TEXT,
-            json_parse_failure INTEGER DEFAULT 0
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE schema_version (
-            version INTEGER NOT NULL,
-            applied_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _seed_items(conn, count=10):
@@ -142,12 +24,12 @@ def _seed_reviews(conn, session_id=1, correct=5, incorrect=5):
     """Seed review events."""
     conn.execute("INSERT INTO session_log (id) VALUES (?)", (session_id,))
     for i in range(1, correct + incorrect + 1):
-        score = 1 if i <= correct else 0
+        is_correct = 1 if i <= correct else 0
         conn.execute(
             """INSERT INTO review_event
-               (content_item_id, session_id, score, given_answer, correct_answer, response_ms, drill_type)
+               (content_item_id, session_id, correct, modality, error_type, response_ms, drill_type)
                VALUES (?,?,?,?,?,?,?)""",
-            (min(i, 10), session_id, score, f"ans{i}", f"correct{i}", 800 + i * 100, "hanzi_to_english"),
+            (min(i, 10), session_id, is_correct, "read", None if is_correct else "semantic_gap", 800 + i * 100, "hanzi_to_english"),
         )
     conn.commit()
 
@@ -417,8 +299,8 @@ class TestWhisperPronunciation(unittest.TestCase):
         conn = _make_db()
         conn.execute("""
             INSERT INTO speaking_practice_sessions
-            (id, session_id, prompt_type, target_zh, overall_score, tone_accuracy, character_accuracy)
-            VALUES (1, 1, 'read_aloud', '你好', 0.95, 0.9, 1.0)
+            (id, session_id, prompt_type, target_zh, expected_zh, overall_score, tone_accuracy, character_accuracy)
+            VALUES (1, 1, 'read_aloud', '你好', '你好', 0.95, 0.9, 1.0)
         """)
         conn.commit()
         result = generate_pronunciation_feedback(conn, session_id=1, practice_session_id=1)
@@ -449,8 +331,8 @@ class TestGenAIAudit(unittest.TestCase):
         import uuid
         for i in range(10):
             conn.execute(
-                "INSERT INTO pi_ai_generation_log (id, task_type, json_parse_failure) VALUES (?, ?, ?)",
-                (str(uuid.uuid4()), "test", 1 if i < 5 else 0),
+                "INSERT INTO pi_ai_generation_log (id, task_type, model_used, from_cache, success, json_parse_failure) VALUES (?, ?, ?, ?, ?, ?)",
+                (str(uuid.uuid4()), "test", "qwen2.5", 0, 1, 1 if i < 5 else 0),
             )
         conn.commit()
         findings = analyze_prompt_performance(conn)

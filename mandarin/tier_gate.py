@@ -2,6 +2,7 @@
 
 import logging
 import sqlite3
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
@@ -35,8 +36,48 @@ PREMIUM_FEATURES = {
 }
 
 
+def is_trial_active(conn: sqlite3.Connection, user_id: int) -> bool:
+    """Check if a user's free trial is still active.
+
+    Returns True if trial_ends_at is in the future.
+    """
+    row = conn.execute(
+        "SELECT trial_ends_at FROM user WHERE id = ?", (user_id,)
+    ).fetchone()
+    if not row or not row["trial_ends_at"]:
+        return False
+    try:
+        trial_end = datetime.strptime(
+            row["trial_ends_at"], "%Y-%m-%d %H:%M:%S"
+        ).replace(tzinfo=timezone.utc)
+        return datetime.now(timezone.utc) < trial_end
+    except (ValueError, TypeError):
+        return False
+
+
+def get_trial_days_remaining(conn: sqlite3.Connection, user_id: int) -> int:
+    """Return the number of days remaining in the free trial, or 0 if expired."""
+    row = conn.execute(
+        "SELECT trial_ends_at FROM user WHERE id = ?", (user_id,)
+    ).fetchone()
+    if not row or not row["trial_ends_at"]:
+        return 0
+    try:
+        trial_end = datetime.strptime(
+            row["trial_ends_at"], "%Y-%m-%d %H:%M:%S"
+        ).replace(tzinfo=timezone.utc)
+        delta = trial_end - datetime.now(timezone.utc)
+        remaining = delta.days + (1 if delta.seconds > 0 else 0)
+        return max(0, remaining)
+    except (ValueError, TypeError):
+        return 0
+
+
 def get_user_tier(conn: sqlite3.Connection, user_id: int) -> str:
-    """Return 'free', 'paid', or 'admin' for a user."""
+    """Return 'free', 'paid', 'trial', or 'admin' for a user.
+
+    Users with an active free trial are treated as 'paid' for feature access.
+    """
     row = conn.execute(
         "SELECT subscription_tier, is_admin FROM user WHERE id = ?", (user_id,)
     ).fetchone()
@@ -44,7 +85,11 @@ def get_user_tier(conn: sqlite3.Connection, user_id: int) -> str:
         return "free"
     if row["is_admin"]:
         return "admin"
-    return row["subscription_tier"] or "free"
+    tier = row["subscription_tier"] or "free"
+    # Active trial grants paid-tier access
+    if tier == "free" and is_trial_active(conn, user_id):
+        return "trial"
+    return tier
 
 
 def check_tier_access(conn: sqlite3.Connection, user_id: int, feature: str) -> bool:
@@ -53,7 +98,7 @@ def check_tier_access(conn: sqlite3.Connection, user_id: int, feature: str) -> b
     Returns True if access is allowed.
     """
     tier = get_user_tier(conn, user_id)
-    if tier in ("paid", "admin", "teacher", "premium"):
+    if tier in ("paid", "admin", "teacher", "premium", "trial"):
         return True
     # Free tier — check if feature requires payment
     allowed = feature not in PAID_FEATURES
@@ -68,6 +113,7 @@ def check_premium_access(conn: sqlite3.Connection, user_id: int, feature: str) -
     Premium features are available to 'premium', 'admin', and 'paid' tiers.
     Classroom students (teacher-enrolled, no individual subscription) do NOT
     get premium features — they must upgrade individually.
+    Trial users do NOT get premium features.
     """
     tier = get_user_tier(conn, user_id)
     if tier in ("premium", "admin", "paid"):
@@ -96,20 +142,20 @@ def check_session_limit(conn: sqlite3.Connection, user_id: int) -> bool:
     Returns True if allowed.
     """
     tier = get_user_tier(conn, user_id)
-    if tier in ("paid", "admin", "teacher", "premium"):
+    if tier in ("paid", "admin", "teacher", "premium", "trial"):
         return True
     return get_daily_session_count(conn, user_id) < FREE_SESSIONS_PER_DAY
 
 
 def filter_items_by_tier(items: list, tier: str) -> list:
     """Filter content items by tier HSK level restriction."""
-    if tier in ("paid", "admin", "teacher", "premium"):
+    if tier in ("paid", "admin", "teacher", "premium", "trial"):
         return items
     return [i for i in items if (i.get("hsk_level") or 1) <= FREE_HSK_MAX]
 
 
 def filter_drills_by_tier(drills: list, tier: str) -> list:
     """Filter drill items by tier drill type restriction."""
-    if tier in ("paid", "admin", "teacher", "premium"):
+    if tier in ("paid", "admin", "teacher", "premium", "trial"):
         return drills
     return [d for d in drills if d.drill_type in FREE_DRILL_TYPES]

@@ -98,20 +98,19 @@ def classify_error_shapes(conn, session_id: int, user_id: int = 1) -> dict:
     Returns: {shape_name: count, ...}
     """
     rows = conn.execute("""
-        SELECT re.correct_answer, re.given_answer, ci.english, ci.hanzi, ci.pinyin
+        SELECT re.error_type, ci.english, ci.hanzi, ci.pinyin
         FROM review_event re
         JOIN content_item ci ON ci.id = re.content_item_id
-        WHERE re.session_id = ? AND re.score = 0
+        WHERE re.session_id = ? AND re.correct = 0
     """, (session_id,)).fetchall()
 
     shapes = {k: 0 for k in _ERROR_SHAPES}
     shapes["other"] = 0
 
     for row in rows:
-        correct = row["correct_answer"] or ""
-        given = row["given_answer"] or ""
+        error_type = row["error_type"] or ""
         english = row["english"] or ""
-        context = f"{correct} {given} {english}"
+        context = f"{error_type} {english}"
 
         matched = False
         for shape_name, pattern in _ERROR_SHAPES.items():
@@ -120,11 +119,7 @@ def classify_error_shapes(conn, session_id: int, user_id: int = 1) -> dict:
                 matched = True
                 break
         if not matched:
-            # Check tonal: same base pinyin, different tone
-            if _is_tonal_confusion(correct, given):
-                shapes["tonal_confusion"] += 1
-            else:
-                shapes["other"] += 1
+            shapes["other"] += 1
 
     return shapes
 
@@ -146,7 +141,7 @@ def diagnose_session(conn, session_id: int, user_id: int = 1) -> dict:
     Deterministic — no LLM calls.
     """
     reviews = conn.execute("""
-        SELECT score, response_ms, drill_type
+        SELECT correct, response_ms, drill_type
         FROM review_event
         WHERE session_id = ?
     """, (session_id,)).fetchall()
@@ -155,7 +150,7 @@ def diagnose_session(conn, session_id: int, user_id: int = 1) -> dict:
         return {"total_reviews": 0, "accuracy": 0.0, "error_shapes": {}}
 
     total = len(reviews)
-    correct = sum(1 for r in reviews if r["score"] == 1)
+    correct = sum(1 for r in reviews if r["correct"] == 1)
     accuracy = correct / total if total else 0.0
 
     response_times = sorted([r["response_ms"] for r in reviews if r["response_ms"]])
@@ -413,7 +408,7 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
     review_count = conn.execute("""
         SELECT COUNT(*) FROM review_event
         WHERE user_id = ?
-          AND reviewed_at >= datetime('now', ?)
+          AND created_at >= datetime('now', ?)
     """, (user_id, f"-{lookback_days} days")).fetchone()[0]
 
     if review_count < 20:
@@ -421,12 +416,12 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
 
     # Gather error summary (shared by both DSPy and fallback paths)
     errors = conn.execute("""
-        SELECT ci.hanzi, ci.english, ci.hsk_level, re.given_answer, re.correct_answer
+        SELECT ci.hanzi, ci.english, ci.hsk_level, re.error_type
         FROM review_event re
         JOIN content_item ci ON ci.id = re.content_item_id
-        WHERE re.user_id = ? AND re.score = 0
-          AND re.reviewed_at >= datetime('now', ?)
-        ORDER BY re.reviewed_at DESC
+        WHERE re.user_id = ? AND re.correct = 0
+          AND re.created_at >= datetime('now', ?)
+        ORDER BY re.created_at DESC
         LIMIT 30
     """, (user_id, f"-{lookback_days} days")).fetchall()
 
@@ -434,7 +429,7 @@ def generate_learning_insight(conn, user_id: int = 1, lookback_days: int = 7) ->
         return None
 
     error_summary = "\n".join(
-        f"- {e['hanzi']} ({e['english']}): answered \"{e['given_answer']}\" instead of \"{e['correct_answer']}\""
+        f"- {e['hanzi']} ({e['english']}): error type \"{e['error_type'] or 'unknown'}\""
         for e in errors
     )
 
@@ -522,19 +517,18 @@ def explain_error_batch(conn, item_ids: list[int], user_id: int = 1) -> list[dic
     for item_id in item_ids:
         row = conn.execute("""
             SELECT ci.hanzi, ci.pinyin, ci.english, ci.hsk_level,
-                   re.given_answer, re.correct_answer
+                   re.error_type
             FROM review_event re
             JOIN content_item ci ON ci.id = re.content_item_id
-            WHERE ci.id = ? AND re.score = 0
-            ORDER BY re.reviewed_at DESC LIMIT 1
+            WHERE ci.id = ? AND re.correct = 0
+            ORDER BY re.created_at DESC LIMIT 1
         """, (item_id,)).fetchone()
 
         if not row:
             continue
 
         hanzi = row["hanzi"] or ""
-        correct = row["correct_answer"] or ""
-        wrong = row["given_answer"] or ""
+        error_type = row["error_type"] or ""
 
         # ── DSPy path ─────────────────────────────────
         if dspy_ok:
@@ -542,8 +536,8 @@ def explain_error_batch(conn, item_ids: list[int], user_id: int = 1) -> list[dic
                 from .dspy_modules import error_explainer as _explainer
                 result = _explainer(
                     hanzi=hanzi,
-                    correct_answer=correct,
-                    wrong_answer=wrong,
+                    correct_answer=hanzi,
+                    wrong_answer=error_type,
                 )
                 explanation_text = result.explanation
                 if explanation_text and len(explanation_text.strip()) > 10:
@@ -566,8 +560,8 @@ def explain_error_batch(conn, item_ids: list[int], user_id: int = 1) -> list[dic
             explanation = generate_error_explanation(
                 conn,
                 item_id=str(item_id),
-                correct_answer=correct,
-                wrong_answer=wrong,
+                correct_answer=hanzi,
+                wrong_answer=error_type,
                 item_content=item_content,
                 times_wrong=3,
                 learner_hsk_level=row["hsk_level"] or 1,

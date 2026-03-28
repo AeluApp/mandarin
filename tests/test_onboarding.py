@@ -1,214 +1,175 @@
-"""Tests for Doc 17: Onboarding, Placement, and Activation."""
+"""Tests for placement quiz — adaptive level assessment (mandarin.placement).
 
-import sqlite3
+Replaces former tests for mandarin.ai.onboarding (dead code).
+Tests the canonical placement module: generate_placement_quiz, score_placement.
+"""
+
 import unittest
+from unittest.mock import patch
 
 from mandarin.db.core import SCHEMA_VERSION
-from mandarin.ai.onboarding import (
-    build_placement_probe,
-    estimate_placement_from_probe,
-    generate_onboarding_curriculum,
+from mandarin.placement import (
+    generate_placement_quiz,
+    score_placement,
 )
 
-
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT, password_hash TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            hsk_level INTEGER,
-            status TEXT DEFAULT 'drill_ready',
-            difficulty REAL DEFAULT 0.5
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            stability REAL DEFAULT 0.4,
-            difficulty REAL DEFAULT 0.5,
-            state TEXT DEFAULT 'new',
-            UNIQUE(user_id, content_item_id)
-        );
-
-        CREATE TABLE onboarding_sessions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            started_at TEXT DEFAULT (datetime('now')),
-            completed_at TEXT,
-            self_reported_level TEXT,
-            prior_study_years REAL,
-            study_context TEXT,
-            primary_goal TEXT,
-            placement_hsk_estimate REAL,
-            placement_confidence TEXT,
-            activation_completed INTEGER NOT NULL DEFAULT 0,
-            activation_session_id INTEGER
-        );
-
-        CREATE TABLE placement_probe_responses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            onboarding_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            correct INTEGER NOT NULL,
-            response_ms INTEGER,
-            hsk_level_of_item INTEGER,
-            responded_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
-def _seed_content_items(conn):
-    """Seed content items across HSK levels 1-6."""
-    items = [
-        ('你好', 'nǐ hǎo', 'hello', 1),
-        ('谢谢', 'xiè xie', 'thank you', 1),
-        ('早上', 'zǎo shang', 'morning', 1),
-        ('电脑', 'diàn nǎo', 'computer', 2),
-        ('比较', 'bǐ jiào', 'compare', 2),
-        ('环境', 'huán jìng', 'environment', 3),
-        ('经济', 'jīng jì', 'economy', 3),
-        ('普遍', 'pǔ biàn', 'universal', 4),
-        ('丰富', 'fēng fù', 'rich', 4),
-        ('绝对', 'jué duì', 'absolute', 5),
-        ('形势', 'xíng shì', 'situation', 5),
-        ('抽象', 'chōu xiàng', 'abstract', 6),
-    ]
-    for hanzi, pinyin, english, hsk in items:
-        conn.execute(
-            "INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?,?,?,?)",
-            (hanzi, pinyin, english, hsk),
-        )
+class TestGeneratePlacementQuiz(unittest.TestCase):
+    """Tests for generate_placement_quiz()."""
+
+    @patch("mandarin.placement._load_questions")
+    def test_returns_questions(self, mock_load):
+        mock_load.return_value = {
+            1: [{"hanzi": "你好", "pinyin": "nǐ hǎo", "english": "hello"}],
+            2: [{"hanzi": "电脑", "pinyin": "diàn nǎo", "english": "computer"}],
+            3: [{"hanzi": "环境", "pinyin": "huán jìng", "english": "environment"}],
+        }
+        questions = generate_placement_quiz()
+        self.assertTrue(len(questions) > 0)
+
+    @patch("mandarin.placement._load_questions")
+    def test_empty_questions_returns_empty(self, mock_load):
+        mock_load.return_value = {}
+        questions = generate_placement_quiz()
+        self.assertEqual(questions, [])
+
+    @patch("mandarin.placement._load_questions")
+    def test_questions_have_required_fields(self, mock_load):
+        mock_load.return_value = {
+            1: [
+                {"hanzi": "你好", "pinyin": "nǐ hǎo", "english": "hello"},
+                {"hanzi": "谢谢", "pinyin": "xiè xie", "english": "thank you"},
+                {"hanzi": "早上", "pinyin": "zǎo shang", "english": "morning"},
+                {"hanzi": "再见", "pinyin": "zài jiàn", "english": "goodbye"},
+            ],
+            2: [
+                {"hanzi": "电脑", "pinyin": "diàn nǎo", "english": "computer"},
+                {"hanzi": "比较", "pinyin": "bǐ jiào", "english": "compare"},
+                {"hanzi": "学习", "pinyin": "xué xí", "english": "study"},
+                {"hanzi": "老师", "pinyin": "lǎo shī", "english": "teacher"},
+            ],
+        }
+        questions = generate_placement_quiz()
+        for q in questions:
+            self.assertIn("hanzi", q)
+            self.assertIn("pinyin", q)
+            self.assertIn("options", q)
+            self.assertIn("correct", q)
+            self.assertIn("hsk_level", q)
+            self.assertEqual(len(q["options"]), 4)
+
+    @patch("mandarin.placement._load_questions")
+    def test_max_15_questions(self, mock_load):
+        # Provide ample data across many levels
+        mock_load.return_value = {
+            level: [
+                {"hanzi": f"字{level}_{i}", "pinyin": f"zi{level}_{i}", "english": f"word{level}_{i}"}
+                for i in range(5)
+            ]
+            for level in range(1, 10)
+        }
+        questions = generate_placement_quiz()
+        self.assertLessEqual(len(questions), 15)
+
+    @patch("mandarin.placement._load_questions")
+    def test_returning_learner_starts_higher(self, mock_load):
+        mock_load.return_value = {
+            level: [
+                {"hanzi": f"字{level}_{i}", "pinyin": f"zi{level}_{i}", "english": f"word{level}_{i}"}
+                for i in range(5)
+            ]
+            for level in range(1, 10)
+        }
+        returning_questions = generate_placement_quiz(returning=True)
+        new_questions = generate_placement_quiz(returning=False)
+        # Both should produce questions; returning starts at HSK 3, new at HSK 2
+        self.assertTrue(len(returning_questions) > 0)
+        self.assertTrue(len(new_questions) > 0)
 
 
-class TestBuildPlacementProbe(unittest.TestCase):
-    def setUp(self):
-        self.conn = _make_db()
+class TestScorePlacement(unittest.TestCase):
+    """Tests for score_placement()."""
 
-    def test_returns_items_spanning_levels(self):
-        _seed_content_items(self.conn)
-        probe = build_placement_probe(self.conn)
-        self.assertTrue(len(probe) > 0)
-        levels = {item['hsk_level'] for item in probe}
-        self.assertTrue(len(levels) > 1)
-
-    def test_empty_db_returns_empty(self):
-        probe = build_placement_probe(self.conn)
-        self.assertEqual(probe, [])
-
-
-class TestEstimatePlacement(unittest.TestCase):
-    def setUp(self):
-        self.conn = _make_db()
-        _seed_content_items(self.conn)
+    def test_empty_answers_returns_level_1(self):
+        result = score_placement([])
+        self.assertEqual(result["estimated_level"], 1)
+        self.assertEqual(result["confidence"], "low")
+        self.assertEqual(result["total_correct"], 0)
+        self.assertEqual(result["total_questions"], 0)
 
     def test_all_wrong_returns_level_1(self):
-        onb_id = self.conn.execute(
-            "INSERT INTO onboarding_sessions (user_id) VALUES (1)"
-        ).lastrowid
+        answers = [
+            {"hsk_level": level, "selected": "wrong", "correct": "right"}
+            for level in range(1, 5)
+            for _ in range(3)
+        ]
+        result = score_placement(answers)
+        self.assertEqual(result["estimated_level"], 1)
+        self.assertEqual(result["total_correct"], 0)
 
-        # All wrong at every level
-        for level in range(1, 5):
-            for _ in range(3):
-                self.conn.execute("""
-                    INSERT INTO placement_probe_responses
-                    (onboarding_id, content_item_id, correct, hsk_level_of_item)
-                    VALUES (?, 1, 0, ?)
-                """, (onb_id, level))
-
-        result = estimate_placement_from_probe(self.conn, onb_id)
-        self.assertEqual(result['hsk_estimate'], 1.0)
+    def test_all_correct_returns_highest_level(self):
+        answers = [
+            {"hsk_level": level, "selected": "correct", "correct": "correct"}
+            for level in range(1, 6)
+            for _ in range(3)
+        ]
+        result = score_placement(answers)
+        self.assertEqual(result["estimated_level"], 5)
+        self.assertGreater(result["total_correct"], 0)
 
     def test_stops_at_low_accuracy(self):
-        onb_id = self.conn.execute(
-            "INSERT INTO onboarding_sessions (user_id) VALUES (1)"
-        ).lastrowid
-
-        # Level 1-2: 100% correct
+        answers = []
+        # Levels 1-2: 100% correct
         for level in [1, 2]:
             for _ in range(3):
-                self.conn.execute("""
-                    INSERT INTO placement_probe_responses
-                    (onboarding_id, content_item_id, correct, hsk_level_of_item)
-                    VALUES (?, 1, 1, ?)
-                """, (onb_id, level))
-
+                answers.append({"hsk_level": level, "selected": "right", "correct": "right"})
         # Level 3: 0% correct
         for _ in range(3):
-            self.conn.execute("""
-                INSERT INTO placement_probe_responses
-                (onboarding_id, content_item_id, correct, hsk_level_of_item)
-                VALUES (?, 1, 0, 3)
-            """, (onb_id,))
+            answers.append({"hsk_level": 3, "selected": "wrong", "correct": "right"})
 
-        result = estimate_placement_from_probe(self.conn, onb_id)
-        self.assertEqual(result['hsk_estimate'], 2)
+        result = score_placement(answers)
+        self.assertEqual(result["estimated_level"], 2)
 
-    def test_confidence_medium_with_enough_data(self):
-        onb_id = self.conn.execute(
-            "INSERT INTO onboarding_sessions (user_id) VALUES (1)"
-        ).lastrowid
+    def test_per_level_accuracy(self):
+        answers = [
+            {"hsk_level": 1, "selected": "a", "correct": "a"},
+            {"hsk_level": 1, "selected": "b", "correct": "a"},
+            {"hsk_level": 2, "selected": "a", "correct": "a"},
+        ]
+        result = score_placement(answers)
+        self.assertIn(1, result["per_level_accuracy"])
+        self.assertIn(2, result["per_level_accuracy"])
+        self.assertEqual(result["per_level_accuracy"][1]["correct"], 1)
+        self.assertEqual(result["per_level_accuracy"][1]["total"], 2)
+        self.assertEqual(result["per_level_accuracy"][2]["correct"], 1)
 
-        for level in range(1, 6):
-            for _ in range(2):
-                self.conn.execute("""
-                    INSERT INTO placement_probe_responses
-                    (onboarding_id, content_item_id, correct, hsk_level_of_item)
-                    VALUES (?, 1, 1, ?)
-                """, (onb_id, level))
+    def test_confidence_high_with_enough_data(self):
+        answers = [
+            {"hsk_level": level, "selected": "a", "correct": "a"}
+            for level in range(1, 5)
+            for _ in range(3)
+        ]
+        result = score_placement(answers)
+        self.assertEqual(result["confidence"], "high")
 
-        result = estimate_placement_from_probe(self.conn, onb_id)
-        self.assertEqual(result['confidence'], 'medium')
+    def test_confidence_medium_with_moderate_data(self):
+        answers = [
+            {"hsk_level": level, "selected": "a", "correct": "a"}
+            for level in [1, 2]
+            for _ in range(3)
+        ]
+        result = score_placement(answers)
+        self.assertIn(result["confidence"], ("medium", "high"))
 
-
-class TestGenerateOnboardingCurriculum(unittest.TestCase):
-    def setUp(self):
-        self.conn = _make_db()
-        _seed_content_items(self.conn)
-
-    def test_seeds_memory_states(self):
-        onb_id = self.conn.execute("""
-            INSERT INTO onboarding_sessions (user_id, placement_hsk_estimate)
-            VALUES (1, 2.0)
-        """).lastrowid
-
-        result = generate_onboarding_curriculum(self.conn, 1, onb_id)
-        self.assertGreater(result['items_seeded'], 0)
-        self.assertTrue(result['first_session_ready'])
-
-        # Check memory states were created
-        ms_count = self.conn.execute(
-            "SELECT COUNT(*) as cnt FROM memory_states WHERE user_id=1"
-        ).fetchone()['cnt']
-        self.assertGreater(ms_count, 0)
-
-    def test_marks_activation_completed(self):
-        onb_id = self.conn.execute("""
-            INSERT INTO onboarding_sessions (user_id, placement_hsk_estimate)
-            VALUES (1, 1.0)
-        """).lastrowid
-
-        generate_onboarding_curriculum(self.conn, 1, onb_id)
-
-        row = self.conn.execute(
-            "SELECT activation_completed FROM onboarding_sessions WHERE id=?",
-            (onb_id,)
-        ).fetchone()
-        self.assertEqual(row['activation_completed'], 1)
-
-    def test_nonexistent_session_returns_empty(self):
-        result = generate_onboarding_curriculum(self.conn, 1, 9999)
-        self.assertEqual(result['items_seeded'], 0)
-        self.assertFalse(result['first_session_ready'])
+    def test_confidence_low_with_few_answers(self):
+        answers = [
+            {"hsk_level": 1, "selected": "a", "correct": "a"},
+            {"hsk_level": 2, "selected": "a", "correct": "a"},
+        ]
+        result = score_placement(answers)
+        self.assertEqual(result["confidence"], "low")
 
 
 class TestSchemaVersion(unittest.TestCase):

@@ -1,135 +1,11 @@
 """Tests for vibe audit, marketing intelligence, feature usage, engineering health (Doc 9)."""
 
-import sqlite3
 import unittest
 from unittest.mock import patch
 from datetime import datetime, timedelta
 
 
-def _make_db():
-    """Create an in-memory DB with Doc 9 tables + dependencies."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-
-    # Core tables needed by analyzers
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-
-    # Doc 9 tables
-    conn.execute("""
-        CREATE TABLE pi_copy_registry (
-            id TEXT PRIMARY KEY,
-            string_key TEXT NOT NULL UNIQUE,
-            copy_text TEXT NOT NULL,
-            copy_context TEXT,
-            surface TEXT NOT NULL DEFAULT 'product_ui',
-            page_id TEXT,
-            last_audited_at TEXT,
-            voice_score REAL,
-            clarity_score REAL,
-            last_updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_marketing_pages (
-            id TEXT PRIMARY KEY,
-            page_slug TEXT NOT NULL UNIQUE,
-            page_title TEXT NOT NULL,
-            page_url TEXT,
-            primary_audience TEXT,
-            primary_cta TEXT,
-            last_copy_review_at TEXT,
-            copy_score REAL,
-            conversion_rate REAL,
-            monthly_visitors INTEGER,
-            last_analytics_update TEXT,
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_funnel_events (
-            id TEXT PRIMARY KEY,
-            user_id TEXT,
-            session_token TEXT,
-            occurred_at TEXT NOT NULL DEFAULT (datetime('now')),
-            event_type TEXT NOT NULL,
-            source TEXT,
-            landing_page TEXT,
-            device_type TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_funnel_snapshots (
-            id TEXT PRIMARY KEY,
-            snapshot_date TEXT NOT NULL UNIQUE,
-            signups_7d INTEGER,
-            activations_7d INTEGER,
-            d7_retention_rate REAL,
-            d30_retention_rate REAL,
-            teacher_signups_7d INTEGER,
-            conversion_visitor_to_signup REAL,
-            conversion_signup_to_activation REAL,
-            avg_time_to_first_drill_minutes REAL,
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_feature_registry (
-            id TEXT PRIMARY KEY,
-            feature_name TEXT NOT NULL UNIQUE,
-            feature_description TEXT NOT NULL,
-            launched_at TEXT,
-            expected_usage_frequency TEXT,
-            minimum_usage_rate_30d REAL,
-            current_usage_rate_30d REAL,
-            status TEXT DEFAULT 'new',
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_feature_events (
-            id TEXT PRIMARY KEY,
-            user_id TEXT NOT NULL,
-            occurred_at TEXT NOT NULL DEFAULT (datetime('now')),
-            feature_name TEXT NOT NULL,
-            event_type TEXT NOT NULL,
-            session_id TEXT,
-            metadata_json TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_engineering_snapshots (
-            id TEXT PRIMARY KEY,
-            snapshot_date TEXT NOT NULL UNIQUE,
-            test_coverage_pct REAL,
-            tests_passing INTEGER,
-            tests_failing INTEGER,
-            table_count INTEGER,
-            db_size_mb REAL,
-            outdated_dependencies INTEGER,
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE pi_vibe_audits (
-            id TEXT PRIMARY KEY,
-            audit_date TEXT NOT NULL,
-            audit_type TEXT NOT NULL,
-            audit_category TEXT NOT NULL,
-            overall_pass INTEGER NOT NULL DEFAULT 1,
-            findings_text TEXT,
-            auditor TEXT DEFAULT 'self',
-            notes TEXT
-        )
-    """)
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestTonalVibe(unittest.TestCase):
@@ -139,6 +15,8 @@ class TestTonalVibe(unittest.TestCase):
         """1. Empty copy registry produces medium finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_tonal_vibe
         conn = _make_db()
+        conn.execute("DELETE FROM pi_copy_registry")
+        conn.commit()
         results = analyze_tonal_vibe(conn)
         self.assertTrue(len(results) >= 1)
         self.assertEqual(results[0]["severity"], "medium")
@@ -193,6 +71,8 @@ class TestMarketingPageQuality(unittest.TestCase):
         """5. Empty marketing pages table produces medium finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_marketing_page_quality
         conn = _make_db()
+        conn.execute("DELETE FROM pi_marketing_pages")
+        conn.commit()
         results = analyze_marketing_page_quality(conn)
         self.assertTrue(len(results) >= 1)
         self.assertEqual(results[0]["severity"], "medium")
@@ -202,6 +82,7 @@ class TestMarketingPageQuality(unittest.TestCase):
         """6. Pages missing primary_audience generate a finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_marketing_page_quality
         conn = _make_db()
+        conn.execute("DELETE FROM pi_marketing_pages")
         conn.execute("""
             INSERT INTO pi_marketing_pages (id, page_slug, page_title, last_copy_review_at)
             VALUES ('1', 'landing', 'Landing Page', datetime('now'))
@@ -269,7 +150,7 @@ class TestFeatureUsage(unittest.TestCase):
         """Insert active users with recent sessions."""
         for i in range(count):
             conn.execute("""
-                INSERT INTO session_log (user_id, created_at)
+                INSERT INTO session_log (user_id, started_at)
                 VALUES (?, datetime('now', '-1 day'))
             """, (i + 1,))
         conn.commit()
@@ -295,13 +176,14 @@ class TestFeatureUsage(unittest.TestCase):
         conn = _make_db()
         self._seed_active_users(conn, 10)
         conn.execute("""
-            INSERT INTO pi_feature_registry
+            INSERT OR REPLACE INTO pi_feature_registry
             (id, feature_name, feature_description, launched_at, minimum_usage_rate_30d, status)
             VALUES ('1', 'new_feature', 'A new feature', datetime('now', '-5 days'), 0.10, 'active')
         """)
         conn.commit()
         results = analyze_feature_usage(conn)
-        self.assertEqual(len(results), 0)
+        new_findings = [f for f in results if "new_feature" in f.get("title", "").lower()]
+        self.assertEqual(len(new_findings), 0)
 
     def test_high_abandonment_medium_finding(self):
         """12. High abandonment rate (>40%) generates medium finding."""
@@ -477,10 +359,10 @@ class TestVibeAuditPersistence(unittest.TestCase):
         conn.commit()
 
         color_audits = conn.execute(
-            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'color_palette'"
+            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'color_palette' AND id = 'a1'"
         ).fetchall()
         typo_audits = conn.execute(
-            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'typography'"
+            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'typography' AND id = 'a2'"
         ).fetchall()
         self.assertEqual(len(color_audits), 1)
         self.assertEqual(len(typo_audits), 1)

@@ -1961,18 +1961,69 @@ function showConversationBlock(data) {
   html += '<div class="conversation-block-label">Conversation Practice</div>';
   html += '<div class="conversation-scenario">' + escapeHtml(data.scenario_title || "") + '</div>';
   html += '<div class="conversation-situation">' + escapeHtml(data.situation || "") + '</div>';
+
+  // Difficulty badge and normalizing language based on HSK level
+  var hskLevel = data.hsk_level || 0;
+  if (hskLevel) {
+    html += '<div class="conversation-difficulty-badge">HSK ' + hskLevel + ' dialogue</div>';
+  }
+  if (hskLevel >= 5) {
+    html += '<div class="conv-difficulty-hint">This is an advanced dialogue. Take your time \u2014 partial answers are fine.</div>';
+  } else if (hskLevel >= 3) {
+    html += '<div class="conv-difficulty-hint">Intermediate dialogue. Use what you know \u2014 simple responses count.</div>';
+  }
+
   html += '<div class="conversation-messages" id="conv-messages">';
   html += '<div class="conv-msg conv-msg-tutor">';
   html += '<div class="conv-msg-zh">' + escapeHtml(data.prompt_zh || "") + '</div>';
   if (data.prompt_pinyin) html += '<div class="conv-msg-pinyin">' + escapeHtml(data.prompt_pinyin) + '</div>';
   if (data.prompt_en) html += '<div class="conv-msg-en">' + escapeHtml(data.prompt_en) + '</div>';
   html += '</div></div>';
+  // Scaffold buttons: Hint and Simplify to reduce difficulty anxiety
+  html += '<div class="conv-scaffold-bar">';
+  html += '<button class="btn-secondary btn-scaffold" id="conv-hint-btn">Hint</button>';
+  html += '<button class="btn-secondary btn-scaffold" id="conv-simplify-btn">Simplify</button>';
+  html += '</div>';
   html += '<div class="conversation-input-area">';
   html += '<textarea id="conv-input" class="conv-input" rows="2" placeholder="Type your response in Chinese..."></textarea>';
   html += '<button class="btn btn-primary conv-send" id="conv-send">Send</button>';
   html += '</div></div>';
   area.innerHTML = html;
   area.scrollIntoView({behavior: "smooth", block: "start"});
+
+  // Wire up hint button — shows a suggested response structure
+  var hintBtn = document.getElementById("conv-hint-btn");
+  if (hintBtn) {
+    hintBtn.addEventListener("click", function() {
+      var msgs = document.getElementById("conv-messages");
+      if (!msgs) return;
+      // Build a contextual hint from the prompt data
+      var hintText = "Try a simple response: subject + verb + object.";
+      if (data.prompt_en) {
+        hintText = "Respond to: \"" + (data.prompt_en || "").substring(0, 60) + "\" \u2014 start with a subject, then the verb.";
+      }
+      msgs.innerHTML += '<div class="convo-hint-msg">Hint: ' + escapeHtml(hintText) + '</div>';
+      msgs.scrollTop = msgs.scrollHeight;
+      EventLog.record("conversation", "hint_used", {in_session: true});
+    });
+  }
+
+  // Wire up simplify button — shows pinyin+translation of the last tutor message
+  var simplifyBtn = document.getElementById("conv-simplify-btn");
+  if (simplifyBtn) {
+    simplifyBtn.addEventListener("click", function() {
+      var msgs = document.getElementById("conv-messages");
+      if (!msgs) return;
+      // Show full support (pinyin + English) for the initial prompt
+      var simplified = '';
+      if (data.prompt_zh) simplified += escapeHtml(data.prompt_zh);
+      if (data.prompt_pinyin) simplified += '<br><span style="color:var(--color-text-dim);">' + escapeHtml(data.prompt_pinyin) + '</span>';
+      if (data.prompt_en) simplified += '<br><span style="color:var(--color-text-dim);">' + escapeHtml(data.prompt_en) + '</span>';
+      msgs.innerHTML += '<div class="convo-simplified-msg">Simplified: ' + simplified + '</div>';
+      msgs.scrollTop = msgs.scrollHeight;
+      EventLog.record("conversation", "simplify_used", {in_session: true});
+    });
+  }
 
   document.getElementById("conv-send").addEventListener("click", function() {
     var input = document.getElementById("conv-input");
@@ -2679,8 +2730,16 @@ function displayShow(data) {
       });
       div.appendChild(overrideBtn);
     }
-    // Inject error_type elaboration tag below feedback
-    if (_lastDrillMeta && _lastDrillMeta.error_type) {
+    // Inject near-miss feedback (behavioral economics: targeted, warm feedback)
+    // Near-miss takes priority over generic error elaboration — it is more specific
+    if (_lastDrillMeta && _lastDrillMeta.near_miss && _lastDrillMeta.near_miss.feedback) {
+      var nearMissDiv = document.createElement("div");
+      nearMissDiv.className = "near-miss-feedback";
+      nearMissDiv.textContent = _lastDrillMeta.near_miss.feedback;
+      nearMissDiv.setAttribute("role", "status");
+      div.appendChild(nearMissDiv);
+    } else if (_lastDrillMeta && _lastDrillMeta.error_type) {
+      // Fallback: generic error_type elaboration tag below feedback
       var _errorElabMap = {
         "tone": "Tone \u2014 the pitch shape was off here",
         "tone_confusion": "Tone mix-up \u2014 listen for the pitch pattern.",
@@ -6734,6 +6793,7 @@ function _startGrammarPractice(grammarPointId, grammarName, linkedItems, example
     grammarName: grammarName,
     questions: questions,
     allItems: linkedItems,
+    allExamples: examples || [],
     current: 0,
     correct: 0,
     total: questions.length,
@@ -6757,6 +6817,30 @@ function _renderGrammarQuizQuestion(contentEl) {
   var isExample = q.type === "example";
   var html = '<div class="grammar-quiz">';
   html += '<div class="grammar-quiz-progress">' + (state.current + 1) + ' / ' + state.total + '</div>';
+
+  // Context sentence: show an example sentence using this grammar point before the question
+  // Pick a random example that is different from the current question's hanzi
+  var contextEx = null;
+  if (state.allExamples && state.allExamples.length > 0) {
+    var candidates = [];
+    for (var ci = 0; ci < state.allExamples.length; ci++) {
+      var ce = state.allExamples[ci];
+      if (ce.zh && ce.zh !== q.hanzi) candidates.push(ce);
+    }
+    if (candidates.length > 0) {
+      contextEx = candidates[Math.floor(Math.random() * candidates.length)];
+    } else if (state.allExamples[0] && state.allExamples[0].zh) {
+      contextEx = state.allExamples[0];
+    }
+  }
+  if (contextEx) {
+    html += '<div class="grammar-quiz-context" style="margin-bottom:var(--space-3);padding:var(--space-2);color:var(--color-text-dim);font-size:var(--text-sm);font-style:italic;">';
+    html += '<div>Context: <span style="font-style:normal;color:var(--color-text);">' + escapeHtml(contextEx.zh) + '</span></div>';
+    if (contextEx.pinyin) html += '<div>' + escapeHtml(contextEx.pinyin) + '</div>';
+    if (contextEx.en || contextEx.english) html += '<div>' + escapeHtml(contextEx.en || contextEx.english) + '</div>';
+    html += '</div>';
+  }
+
   html += '<div class="grammar-quiz-prompt">';
   html += '<span class="grammar-quiz-hanzi">' + escapeHtml(q.hanzi) + '</span>';
   html += '</div>';
@@ -7416,7 +7500,7 @@ function loadConversationScenarios() {
     _convoScenarios.forEach(function(s) {
       html += '<button class="conversation-scenario-card" onclick="startConversation(\'' + escapeHtml(s.id) + '\')" style="text-align:left;padding:var(--space-3);background:var(--color-surface);border:none;cursor:pointer;font-family:var(--font-body);">';
       html += '<div style="font-weight:600;margin-bottom:4px;">' + escapeHtml(s.title || s.situation || s.id) + '</div>';
-      html += '<div style="font-size:var(--text-sm);color:var(--color-text-dim);">HSK ' + (s.hsk_level || '?') + '</div>';
+      html += '<div class="conversation-difficulty-badge" style="display:inline-block;">HSK ' + (s.hsk_level || '?') + ' dialogue</div>';
       html += '</button>';
     });
     html += '</div>';
@@ -7433,6 +7517,53 @@ function loadConversationScenarios() {
   }
 }
 
+function _convoRequestHint() {
+  if (!_convoActive) return;
+  var msgsEl = document.getElementById("conversation-messages");
+  if (!msgsEl) return;
+  apiFetch("/api/conversation/hint", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({scenario_id: _convoActive.scenario_id || ""})
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    var hint = data.hint || "Try using a subject + verb + object structure.";
+    msgsEl.innerHTML += '<div class="convo-hint-msg">Hint: ' + escapeHtml(hint) + '</div>';
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }).catch(function() {
+    // Fallback hint when the API is unavailable
+    msgsEl.innerHTML += '<div class="convo-hint-msg">Hint: Start with the subject, then the verb, then the object. Use words you know.</div>';
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  });
+  EventLog.record("conversation", "hint_used");
+}
+
+function _convoRequestSimplify() {
+  if (!_convoActive) return;
+  var msgsEl = document.getElementById("conversation-messages");
+  if (!msgsEl) return;
+  // Find the last tutor/system message to simplify
+  var lastTutorMsg = msgsEl.querySelector(".convo-system:last-of-type .hanzi, .convo-msg:last-of-type .hanzi");
+  var lastText = lastTutorMsg ? lastTutorMsg.textContent : "";
+  apiFetch("/api/conversation/simplify", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({scenario_id: _convoActive.scenario_id || "", text: lastText})
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    var simplified = data.simplified || lastText;
+    var pinyin = data.pinyin || "";
+    var html = '<div class="convo-simplified-msg">';
+    html += 'Simplified: <span class="hanzi">' + escapeHtml(simplified) + '</span>';
+    if (pinyin) html += '<br><span style="font-size:var(--text-sm);color:var(--color-text-dim);">' + escapeHtml(pinyin) + '</span>';
+    html += '</div>';
+    msgsEl.innerHTML += html;
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }).catch(function() {
+    msgsEl.innerHTML += '<div class="convo-simplified-msg">Could not simplify. Try asking a simpler question.</div>';
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  });
+  EventLog.record("conversation", "simplify_used");
+}
+
 function startConversation(scenarioId) {
   apiFetch("/api/conversation/start", {
     method: "POST",
@@ -7443,6 +7574,19 @@ function startConversation(scenarioId) {
     document.getElementById("conversation-scenarios").classList.add("hidden");
     var activeEl = document.getElementById("conversation-active");
     activeEl.classList.remove("hidden");
+
+    // Show difficulty badge so learners know the expected level
+    var badge = document.getElementById("conversation-difficulty-badge");
+    if (badge) {
+      var hskLevel = data.hsk_level || "";
+      if (hskLevel) {
+        badge.textContent = "HSK " + hskLevel + " dialogue";
+        badge.style.display = "";
+      } else {
+        badge.style.display = "none";
+      }
+    }
+
     document.getElementById("conversation-situation").innerHTML =
       '<div style="font-weight:600;margin-bottom:var(--space-2);">' + escapeHtml(data.situation || "") + '</div>';
     var msgsEl = document.getElementById("conversation-messages");
@@ -7944,6 +8088,85 @@ function fetchEncounterStats() {
 
 /* ── Event listeners (CSP-safe, no inline handlers) ────────────────────────── */
 
+/* ── Intro slides (shown on second dashboard visit, after first session) ── */
+function showIntroSlides() {
+  var overlay = document.createElement("div");
+  overlay.id = "intro-slides-overlay";
+  overlay.className = "onboarding-wizard";
+  overlay.innerHTML =
+    '<div class="onboarding-wizard-card">' +
+      '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
+      '<div class="logo-text">Aelu</div></div>' +
+
+      '<div id="intro-slide-0" class="onboarding-step onboarding-intro-slide">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Every language lives in memory</p>' +
+          '<p class="onboarding-intro-text">When you learn a new word, your brain begins forgetting it almost immediately. ' +
+            'This is not a flaw \u2014 it\u2019s how memory works. ' +
+            'Aelu brings words back at the moment you\u2019re about to forget them, ' +
+            'so each review strengthens the connection a little more.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-0">Continue</button>' +
+        '<button class="btn-link btn-sm onboarding-skip-btn" id="intro-skip">Skip</button>' +
+      '</div>' +
+
+      '<div id="intro-slide-1" class="onboarding-step onboarding-intro-slide hidden">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Short sessions, real progress</p>' +
+          '<p class="onboarding-intro-text">Each session is a few minutes of focused practice \u2014 ' +
+            'characters, tones, meanings, recall. ' +
+            'Aelu adapts to your strengths and where you need more practice, ' +
+            'so your time is spent where it matters most.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-1">Continue</button>' +
+        '<button class="btn-link btn-sm onboarding-skip-btn" id="intro-skip-1">Skip</button>' +
+      '</div>' +
+
+      '<div id="intro-slide-2" class="onboarding-step onboarding-intro-slide hidden">' +
+        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.webp') + '" alt="" />' +
+        '<div class="onboarding-intro-body">' +
+          '<p class="onboarding-intro-heading">Be patient with yourself</p>' +
+          '<p class="onboarding-intro-text">Learning Mandarin is a long journey, and some days will feel slower than others. ' +
+            'That\u2019s okay. Aelu tracks what you actually remember \u2014 not points or streaks \u2014 ' +
+            'so you always know where you truly stand.</p>' +
+        '</div>' +
+        '<button class="btn-primary onboarding-next-btn" id="intro-next-2">Got it</button>' +
+      '</div>' +
+    '</div>';
+  document.getElementById("app").appendChild(overlay);
+  handleImgErrors(overlay, '/static/illustrations/onboarding-1.png');
+
+  var slides = [
+    document.getElementById("intro-slide-0"),
+    document.getElementById("intro-slide-1"),
+    document.getElementById("intro-slide-2")
+  ];
+
+  function goSlide(idx) {
+    slides.forEach(function(el) { if (el) el.classList.add("hidden"); });
+    if (idx < slides.length && slides[idx]) {
+      slides[idx].classList.remove("hidden");
+    } else {
+      overlay.remove();
+    }
+  }
+
+  function dismiss() { overlay.remove(); }
+
+  for (var i = 0; i < 3; i++) {
+    (function(idx) {
+      var btn = document.getElementById("intro-next-" + idx);
+      if (btn) btn.addEventListener("click", function() { goSlide(idx + 1); });
+    })(i);
+  }
+  var skipBtn = document.getElementById("intro-skip");
+  if (skipBtn) skipBtn.addEventListener("click", dismiss);
+  var skipBtn1 = document.getElementById("intro-skip-1");
+  if (skipBtn1) skipBtn1.addEventListener("click", dismiss);
+}
+
 /* ── Onboarding wizard ───────────────────────────── */
 function checkOnboarding() {
   fetch("/api/onboarding/wizard").then(function(r) { return r.json(); }).then(function(data) {
@@ -7999,46 +8222,8 @@ function showOnboardingWizard() {
       '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
       '<div class="logo-text">Aelu</div></div>' +
 
-      // Intro slides — shown before the level/goal picker
-      '<div id="onboarding-intro-0" class="onboarding-step onboarding-intro-slide">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-1.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Every language lives in memory</p>' +
-          '<p class="onboarding-intro-text">When you learn a new word, your brain begins forgetting it almost immediately. ' +
-            'This is not a flaw \u2014 it\u2019s how memory works. ' +
-            'Aelu brings words back at the moment you\u2019re about to forget them, ' +
-            'so each review strengthens the connection a little more.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-0">Continue</button>' +
-        '<button class="btn-link btn-sm onboarding-skip-btn" id="onboarding-skip-0">Skip intro</button>' +
-      '</div>' +
-
-      '<div id="onboarding-intro-1" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-2.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Short sessions, real progress</p>' +
-          '<p class="onboarding-intro-text">Each session is a few minutes of focused practice \u2014 ' +
-            'characters, tones, meanings, recall. ' +
-            'Aelu adapts to your strengths and where you need more practice, ' +
-            'so your time is spent where it matters most.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-1">Continue</button>' +
-        '<button class="btn-link btn-sm onboarding-skip-btn" id="onboarding-skip-1">Skip intro</button>' +
-      '</div>' +
-
-      '<div id="onboarding-intro-2" class="onboarding-step onboarding-intro-slide hidden">' +
-        '<img class="onboarding-intro-img" src="' + themedIllustration('/static/illustrations/onboarding-3.webp') + '" alt="" />' +
-        '<div class="onboarding-intro-body">' +
-          '<p class="onboarding-intro-heading">Be patient with yourself</p>' +
-          '<p class="onboarding-intro-text">Learning Mandarin is a long journey, and some days will feel slower than others. ' +
-            'That\u2019s okay. Aelu tracks what you actually remember \u2014 not points or streaks \u2014 ' +
-            'so you always know where you truly stand.</p>' +
-        '</div>' +
-        '<button class="btn-primary onboarding-next-btn" id="onboarding-next-2">Let\u2019s begin</button>' +
-      '</div>' +
-
-      // Step 1: level picker
-      '<div id="onboarding-step-1" class="onboarding-step hidden">' +
+      // Step 1: level picker (first screen — get to learning fast)
+      '<div id="onboarding-step-1" class="onboarding-step">' +
         '<p>What HSK level are you starting from?</p>' +
         '<div class="onboarding-options" id="onboarding-levels">' +
           '<button class="btn-secondary onboarding-opt" data-level="1">HSK 1 \u2014 Beginner<br><small>New to Mandarin. ~150 core words.</small></button>' +
@@ -8063,73 +8248,6 @@ function showOnboardingWizard() {
       '</div>' +
     '</div>';
   document.getElementById("app").appendChild(overlay);
-  handleImgErrors(overlay, '/static/illustrations/onboarding-1.png');
-
-  // Intro slide navigation
-  var introSteps = [
-    document.getElementById("onboarding-intro-0"),
-    document.getElementById("onboarding-intro-1"),
-    document.getElementById("onboarding-intro-2")
-  ];
-
-  var _introTransitioning = false;
-  function goToIntroSlide(idx) {
-    if (_introTransitioning) return;
-    // Find currently visible slide
-    var current = null;
-    introSteps.forEach(function(el) {
-      if (!el.classList.contains("hidden")) current = el;
-    });
-    var nextEl = idx < introSteps.length ? introSteps[idx] : document.getElementById("onboarding-step-1");
-
-    if (current && current !== nextEl) {
-      _introTransitioning = true;
-      current.classList.add("slide-out");
-      current.addEventListener("animationend", function handler() {
-        current.removeEventListener("animationend", handler);
-        current.classList.add("hidden");
-        current.classList.remove("slide-out");
-        nextEl.classList.remove("hidden");
-        _introTransitioning = false;
-      }, { once: true });
-      // Fallback if animationend doesn't fire
-      setTimeout(function() {
-        if (_introTransitioning) {
-          current.classList.add("hidden");
-          current.classList.remove("slide-out");
-          nextEl.classList.remove("hidden");
-          _introTransitioning = false;
-        }
-      }, 400);
-    } else {
-      introSteps.forEach(function(el) { el.classList.add("hidden"); });
-      nextEl.classList.remove("hidden");
-    }
-  }
-
-  function skipToLevelPicker() {
-    introSteps.forEach(function(el) { el.classList.add("hidden"); el.classList.remove("slide-out"); });
-    document.getElementById("onboarding-step-1").classList.remove("hidden");
-    _introTransitioning = false;
-    EventLog.queueClientEvent("onboarding", "step_view", {step_name: "level_picker"});
-  }
-
-  // Wire Continue / Skip buttons on each intro slide
-  for (var _si = 0; _si < introSteps.length; _si++) {
-    (function(idx) {
-      var nextBtn = document.getElementById("onboarding-next-" + idx);
-      var skipBtn = document.getElementById("onboarding-skip-" + idx);
-      if (nextBtn) nextBtn.addEventListener("click", function() {
-        AeluSound.onboardingStep();
-        EventLog.queueClientEvent("onboarding", "step_complete", {step_name: "intro_" + idx});
-        goToIntroSlide(idx + 1);
-      });
-      if (skipBtn) skipBtn.addEventListener("click", function() {
-        EventLog.queueClientEvent("onboarding", "step_skip", {step_name: "intro_" + idx});
-        skipToLevelPicker();
-      });
-    })(_si);
-  }
 
   // Placement quiz option
   var placementBtn = document.getElementById("onboarding-placement-btn");
@@ -8403,6 +8521,12 @@ document.addEventListener("DOMContentLoaded", function() {
         window._showFirstSessionModal = true;
       }
 
+      // Second-visit intro slides: show once after first session
+      if (totalSessions >= 1 && !localStorage.getItem("aelu_intro_seen")) {
+        localStorage.setItem("aelu_intro_seen", "1");
+        showIntroSlides();
+      }
+
       // HSK mastery bars are rendered server-side in the template (mastery-bars).
       // No JS duplicate needed.
 
@@ -8506,8 +8630,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var sources = enc.sources || {};
       var topWords = enc.top_words || [];
 
-      // Show if there's any weekly activity
-      if (sessionsWeek === 0 && total === 0 && topWords.length === 0) return;
+      // Always show weekly summary — even when empty, it frames the week
 
       var html = '<div class="weekly-summary-label">This week</div>';
 
@@ -8582,6 +8705,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   var convoBack = document.getElementById("conversation-back");
   if (convoBack) convoBack.addEventListener("click", function() { backToDashboardFrom("conversation"); });
+  var convoHint = document.getElementById("conversation-hint");
+  if (convoHint) convoHint.addEventListener("click", _convoRequestHint);
+  var convoSimplify = document.getElementById("conversation-simplify");
+  if (convoSimplify) convoSimplify.addEventListener("click", _convoRequestSimplify);
 
   // Back buttons for exposure views
   var readingBack = document.getElementById("reading-back");
@@ -10796,12 +10923,15 @@ function showPlacementQuiz(wizardOverlay) {
   var card = wizardOverlay.querySelector(".onboarding-wizard-card");
   if (!card) return;
 
+  // Reset answers for a fresh quiz
+  _placementAnswers = [];
+
   // Replace step 1 content with quiz loading state
   card.innerHTML =
     '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
     '<div class="logo-text">Placement Quiz</div></div>' +
     '<div class="onboarding-wizard-intro">Answer these questions so we can find your level. Don\'t worry about getting them all right.</div>' +
-    '<div id="placement-quiz-body"><span class="settings-hint">Loading questions…</span></div>';
+    '<div id="placement-quiz-body"><span class="settings-hint">Loading questions\u2026</span></div>';
 
   apiFetch("/api/onboarding/placement/start")
     .then(function(r) { return r.json(); })
@@ -10816,7 +10946,13 @@ function showPlacementQuiz(wizardOverlay) {
         });
         return;
       }
-      renderPlacementQuestions(wizardOverlay, data.questions, data._answers);
+      // Adaptive flow: server returns one question at a time
+      if (data.adaptive && data.question) {
+        renderAdaptiveQuestion(wizardOverlay, data.question, data.total_questions);
+      } else if (data.questions) {
+        // Legacy batch fallback
+        renderPlacementQuestions(wizardOverlay, data.questions, data._answers);
+      }
     })
     .catch(function() {
       document.getElementById("placement-quiz-body").innerHTML =
@@ -10830,6 +10966,69 @@ function showPlacementQuiz(wizardOverlay) {
 }
 
 var _placementAnswers = [];
+
+/* ── Adaptive placement: one question at a time ── */
+
+function renderAdaptiveQuestion(wizardOverlay, question, totalQuestions) {
+  var body = document.getElementById("placement-quiz-body");
+  if (!body || !question) return;
+
+  var q = question;
+  var html = '<div class="placement-progress">' + q.question_number + ' / ' + totalQuestions + '</div>';
+  html += '<div class="placement-question">';
+  html += '<div class="placement-hanzi">' + escapeHtml(q.hanzi) + '</div>';
+  if (q.pinyin) html += '<div class="placement-pinyin">' + escapeHtml(q.pinyin) + '</div>';
+  html += '<p>What does this mean?</p>';
+  html += '<div class="onboarding-options">';
+  for (var i = 0; i < q.options.length; i++) {
+    html += '<button class="btn-secondary onboarding-opt" data-answer="' + escapeHtml(q.options[i]) + '">' + escapeHtml(q.options[i]) + '</button>';
+  }
+  html += '</div></div>';
+  body.innerHTML = html;
+
+  body.querySelectorAll("[data-answer]").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var selected = btn.getAttribute("data-answer");
+
+      // Track client-side for the final submit
+      _placementAnswers.push({
+        hsk_level: q.hsk_level,
+        selected: selected,
+        hanzi: q.hanzi
+      });
+
+      // Disable buttons while waiting for server
+      body.querySelectorAll("[data-answer]").forEach(function(b) { b.disabled = true; });
+
+      // Send answer to server, get next adaptive question
+      apiFetch("/api/onboarding/placement/next", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({selected: selected, hanzi: q.hanzi})
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.error) {
+            body.innerHTML = '<p class="settings-hint">' + escapeHtml(data.error) + '</p>';
+            return;
+          }
+          if (data.complete || !data.question) {
+            // Quiz finished — submit for final scoring
+            submitPlacementQuiz(wizardOverlay);
+          } else {
+            // Render next adaptive question
+            renderAdaptiveQuestion(wizardOverlay, data.question, totalQuestions);
+          }
+        })
+        .catch(function() {
+          // On network error, submit what we have
+          submitPlacementQuiz(wizardOverlay);
+        });
+    });
+  });
+}
+
+/* ── Legacy batch rendering (fallback if server returns all questions) ── */
 
 function renderPlacementQuestions(wizardOverlay, questions, correctAnswers) {
   _placementAnswers = [];
@@ -10858,7 +11057,11 @@ function renderPlacementQuestions(wizardOverlay, questions, correctAnswers) {
 
     body.querySelectorAll("[data-answer]").forEach(function(btn) {
       btn.addEventListener("click", function() {
-        _placementAnswers.push(btn.getAttribute("data-answer"));
+        _placementAnswers.push({
+          hsk_level: q.hsk_level,
+          selected: btn.getAttribute("data-answer"),
+          hanzi: q.hanzi
+        });
         showQuestion(idx + 1);
       });
     });
@@ -10869,7 +11072,7 @@ function renderPlacementQuestions(wizardOverlay, questions, correctAnswers) {
 
 function submitPlacementQuiz(wizardOverlay) {
   var body = document.getElementById("placement-quiz-body");
-  if (body) body.innerHTML = '<span class="settings-hint">Calculating your level…</span>';
+  if (body) body.innerHTML = '<span class="settings-hint">Calculating your level\u2026</span>';
 
   apiFetch("/api/onboarding/placement/submit", {
     method: "POST",
@@ -10887,7 +11090,7 @@ function submitPlacementQuiz(wizardOverlay) {
         body.innerHTML =
           '<div class="placement-result">' +
             '<p>Your estimated level: <strong>HSK ' + level + '</strong></p>' +
-            '<p class="settings-hint">' + (data.correct || 0) + ' of ' + (data.total || 0) + ' correct</p>' +
+            '<p class="settings-hint">' + (data.total_correct || 0) + ' of ' + (data.total_questions || 0) + ' correct</p>' +
           '</div>';
       }
       // Go to goal step after a brief pause

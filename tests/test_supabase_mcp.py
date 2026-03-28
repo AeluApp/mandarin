@@ -1,55 +1,18 @@
 """Tests for Supabase MCP migration preparation module."""
 
 import json
-import sqlite3
 import unittest
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            streak_days INTEGER DEFAULT 0
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL, pinyin TEXT, english TEXT,
-            hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready'
-        );
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER REFERENCES user(id),
-            content_item_id INTEGER REFERENCES content_item(id),
-            next_review_date TEXT DEFAULT (date('now')),
-            total_attempts INTEGER DEFAULT 0,
-            total_correct INTEGER DEFAULT 0
-        );
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, started_at TEXT, session_outcome TEXT
-        );
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER REFERENCES content_item(id),
-            error_type TEXT
-        );
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY, name TEXT, hsk_level INTEGER
-        );
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY, grade TEXT
-        );
-        CREATE TABLE feature_flag (
-            id INTEGER PRIMARY KEY, name TEXT, enabled INTEGER
-        );
+from tests.shared_db import make_test_db
 
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
+
+def _make_db():
+    conn = make_test_db()
+    conn.executescript("""
         INSERT INTO content_item (hanzi, pinyin, english) VALUES ('你好', 'nǐ hǎo', 'hello');
         INSERT INTO content_item (hanzi, pinyin, english) VALUES ('谢谢', 'xiè xie', 'thanks');
-        INSERT INTO progress (user_id, content_item_id) VALUES (1, 1);
+        INSERT INTO progress (user_id, content_item_id, modality) VALUES (1, 1, 'reading');
         INSERT INTO session_log (user_id, started_at, session_outcome) VALUES (1, datetime('now'), 'completed');
     """)
     return conn

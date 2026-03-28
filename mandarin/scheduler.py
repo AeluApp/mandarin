@@ -356,6 +356,7 @@ class ConversationBlock:
     scenario: dict = field(default_factory=dict)
     max_turns: int = 3
     target_seconds: int = 180
+    hsk_level: int = 1
 
 
 @dataclass
@@ -2162,6 +2163,50 @@ def _plan_reading_struggle_boost(conn: sqlite3.Connection, seen_ids: set,
         logger.debug("reading struggle boost skipped: %s", e)
 
 
+def _pick_least_recent_drill_type(modality_history: dict, weak_modality: str,
+                                  weak_stage: str) -> str:
+    """Choose a drill type that hasn't been practiced recently for this item.
+
+    Uses the modality_history JSON (drill_type -> last_date) to pick the drill
+    type with the oldest (or missing) timestamp, ensuring variety.
+    """
+    import json as _json
+
+    # Candidate drill types per modality, ordered by stage progression
+    _MODALITY_DRILL_TYPES = {
+        "reading": ["mc", "reverse_mc", "hanzi_to_pinyin", "english_to_pinyin",
+                     "pinyin_to_hanzi", "translation", "contrastive"],
+        "listening": ["listening_gist", "listening_detail", "listening_tone",
+                      "listening_dictation"],
+        "speaking": ["speaking", "shadowing"],
+        "ime": ["ime_type"],
+    }
+
+    candidates = _MODALITY_DRILL_TYPES.get(weak_modality, ["mc"])
+    if not candidates:
+        return "mc"
+
+    if isinstance(modality_history, str):
+        try:
+            modality_history = _json.loads(modality_history)
+        except (_json.JSONDecodeError, TypeError):
+            modality_history = {}
+
+    # Sort candidates by their last practice date (oldest first, missing = highest priority)
+    def sort_key(dt):
+        return modality_history.get(dt, "")  # empty string sorts before any date
+
+    candidates_sorted = sorted(candidates, key=sort_key)
+
+    # For early stages, restrict to simpler drill types
+    if weak_stage == "seen":
+        simple = [c for c in candidates_sorted if c in ("mc", "listening_gist", "speaking", "ime_type")]
+        if simple:
+            return simple[0]
+
+    return candidates_sorted[0]
+
+
 def _plan_cross_modality_boost_items(conn: sqlite3.Connection, seen_ids: set,
                                       target_items: int, drills: list, user_id: int) -> None:
     """Boost items mastered in one modality but weak in another.
@@ -2170,6 +2215,9 @@ def _plan_cross_modality_boost_items(conn: sqlite3.Connection, seen_ids: set,
     but listening (or vice versa) is still 'seen'/'passed_once'. These items
     are low-hanging fruit: the learner already knows the vocabulary, they just
     need practice in the weak modality to close the gap.
+
+    Uses modality_history to prefer drill types the item hasn't been practiced
+    in recently, ensuring cross-modal variety.
 
     Injects up to CROSS_MODALITY_BOOST_LIMIT items per session, drilled in
     the weak modality.
@@ -2181,6 +2229,7 @@ def _plan_cross_modality_boost_items(conn: sqlite3.Connection, seen_ids: set,
                    strong.modality AS strong_modality,
                    weak.modality AS weak_modality,
                    weak.mastery_stage AS weak_stage,
+                   weak.modality_history AS modality_history,
                    ci.hanzi, ci.pinyin, ci.english
             FROM progress strong
             JOIN progress weak
@@ -2212,17 +2261,11 @@ def _plan_cross_modality_boost_items(conn: sqlite3.Connection, seen_ids: set,
 
             weak_modality = row["weak_modality"]
             weak_stage = row["weak_stage"]
+            history = row["modality_history"] if "modality_history" in row.keys() else "{}"
 
-            # Pick an appropriate drill type for the weak modality + stage
-            if weak_modality == "listening":
-                drill_type = "listening_gist" if weak_stage == "seen" else "listening_detail"
-            elif weak_modality == "speaking":
-                drill_type = "speaking"
-            elif weak_modality == "ime":
-                drill_type = "ime_type"
-            else:
-                # reading
-                drill_type = "mc" if weak_stage == "seen" else "reverse_mc"
+            # Pick a drill type the item hasn't been practiced in recently
+            drill_type = _pick_least_recent_drill_type(
+                history or "{}", weak_modality, weak_stage)
 
             seen_ids.add(row["content_item_id"])
             drills.append(DrillItem(
@@ -3751,12 +3794,14 @@ def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> Conversation
     try:
         from .ai.conversation_drill import SCENARIOS
         level_key = min(hsk_level, max(SCENARIOS.keys())) if SCENARIOS else 1
+        chosen_level = level_key
         available = SCENARIOS.get(level_key, [])
         if not available:
             # Try one level down
             for lvl in range(level_key - 1, 0, -1):
                 available = SCENARIOS.get(lvl, [])
                 if available:
+                    chosen_level = lvl
                     break
         if not available:
             return None
@@ -3767,6 +3812,7 @@ def _pick_conversation_block(conn, user_id: int, hsk_level: int) -> Conversation
             scenario=scenario,
             max_turns=3,
             target_seconds=180,
+            hsk_level=chosen_level,
         )
     except Exception:
         logger.debug("_pick_conversation_block failed", exc_info=True)

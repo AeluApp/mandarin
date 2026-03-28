@@ -42,9 +42,41 @@ def classify_decision(finding: dict, advisor_opinions: dict = None) -> str:
 
     Returns: 'auto_fix', 'informed_fix', 'judgment_call', 'values_decision', 'investigation'
     """
+    decision_class = _classify_decision_inner(finding, advisor_opinions)
+
+    # ── Tier 0 file safety ──────────────────────────────────────────────
+    # Never auto_fix files in auth, payment, persistence, or secrets paths.
+    _TIER_0_PATHS = (
+        "mandarin/auth", "mandarin/web/payment", "mandarin/db/core",
+        "mandarin/settings", "mandarin/security",
+    )
+    files = finding.get("files", [])
+    if decision_class == "auto_fix":
+        if any(f.startswith(p) for p in _TIER_0_PATHS for f in files):
+            return "informed_fix"
+
+    return decision_class
+
+
+def _classify_decision_inner(finding: dict, advisor_opinions: dict = None) -> str:
+    """Core classification logic (called by classify_decision)."""
     severity = finding.get("severity", "low")
     dim = finding.get("dimension", "")
     files = finding.get("files", [])
+
+    # ── Source-based classification ─────────────────────────────────────
+    # If finding specifies a source analyzer, use source-based classification.
+    # This is more reliable than keyword matching on free text.
+    source = finding.get("source", "")
+    if source:
+        # CI-ingested findings should never be auto_fix (external data)
+        if source in ("ci_ingest", "ci_feedback", "external"):
+            if severity in ("high", "critical"):
+                return "values_decision"
+            return "informed_fix"
+        # Internal design analyzers can proceed to keyword logic below
+        if source.startswith("analyzer_design"):
+            pass  # fall through to existing keyword logic for visual_vibe etc.
 
     # Check for advisor conflict
     opinions = advisor_opinions.get(finding.get("title", ""), []) if advisor_opinions else []

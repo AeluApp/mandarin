@@ -1,6 +1,5 @@
 """Tests for Doc 19: Commercial Intelligence and Go-to-Market."""
 
-import sqlite3
 import unittest
 
 from mandarin.db.core import SCHEMA_VERSION
@@ -11,64 +10,14 @@ from mandarin.ai.commercial import (
     analyze_commercial_intelligence,
 )
 
+from tests.shared_db import make_test_db
+
 
 def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
+    conn = make_test_db()
     conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-        INSERT INTO user (id, email) VALUES (2, 'student1@aelu.app');
-        INSERT INTO user (id, email) VALUES (3, 'student2@aelu.app');
-
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, content_item_id INTEGER,
-            correct INTEGER, created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            stability REAL DEFAULT 0.4,
-            state TEXT DEFAULT 'new'
-        );
-
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL UNIQUE,
-            composite_hsk_estimate REAL
-        );
-
-        CREATE TABLE cohorts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            active INTEGER DEFAULT 1,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE cohort_members (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cohort_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL,
-            active INTEGER DEFAULT 1,
-            UNIQUE(cohort_id, user_id)
-        );
-
-        CREATE TABLE pi_commercial_readiness (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            condition_name TEXT NOT NULL UNIQUE,
-            status TEXT DEFAULT 'pending',
-            confirmed_at TEXT, notes TEXT
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT, score REAL, dimension_scores TEXT,
-            findings TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
+        INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (2, 'student1@aelu.app', 'test_hash');
+        INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (3, 'student2@aelu.app', 'test_hash');
     """)
     return conn
 
@@ -128,12 +77,23 @@ class TestPricingRecommendation(unittest.TestCase):
 
     def test_b2c_ready_when_conditions_confirmed(self):
         self.conn.execute("""
-            INSERT INTO pi_commercial_readiness (condition_name, status)
-            VALUES ('teacher_dashboard_deployed', 'confirmed')
+            INSERT INTO pi_strategic_theses
+            (id, version, status, target_user, value_proposition,
+             revenue_model, price_point_rationale, primary_moat,
+             key_assumptions, disconfirming_conditions, confirming_conditions)
+            VALUES ('b2c', 1, 'active', 'individual_learner', 'Adaptive Mandarin',
+                    'b2c_subscription', '$12/mo', 'adaptive_engine',
+                    'test', 'test', 'test')
         """)
         self.conn.execute("""
-            INSERT INTO pi_commercial_readiness (condition_name, status)
-            VALUES ('student_onboarding_validated', 'confirmed')
+            INSERT INTO pi_commercial_readiness
+            (thesis_id, revenue_model, condition_name, condition_description, current_status)
+            VALUES ('b2c', 'b2c_subscription', 'teacher_dashboard_deployed', 'Dashboard deployed', 'met')
+        """)
+        self.conn.execute("""
+            INSERT INTO pi_commercial_readiness
+            (thesis_id, revenue_model, condition_name, condition_description, current_status)
+            VALUES ('b2c', 'b2c_subscription', 'student_onboarding_validated', 'Onboarding validated', 'met')
         """)
         rec = get_pricing_recommendation(self.conn)
         self.assertTrue(rec['b2c_recommendation']['ready'])

@@ -10,7 +10,7 @@ from pathlib import Path
 
 _project_root = Path(__file__).parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "mandarin-local-only")
+SECRET_KEY = os.environ.get("SECRET_KEY") or "mandarin-local-only"
 IS_PRODUCTION = os.environ.get("IS_PRODUCTION", "").lower() in ("1", "true", "yes")
 
 # ── Domain / URL ──────────────────────────────────────
@@ -289,7 +289,7 @@ def _has_cloud_api_key() -> bool:
     _CLOUD_KEY_NAMES = (
         "GROQ_API_KEY", "TOGETHER_API_KEY", "FIREWORKS_API_KEY",
         "SILICONFLOW_API_KEY", "DEEPSEEK_API_KEY", "MISTRAL_API_KEY",
-        "OPENAI_API_KEY", "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
     )
     return any(os.environ.get(k) for k in _CLOUD_KEY_NAMES)
 

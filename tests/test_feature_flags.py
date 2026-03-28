@@ -5,10 +5,12 @@ import sqlite3
 import pytest
 
 from mandarin.feature_flags import (
+    AI_FEATURE_FLAGS,
     FLAGGED_DRILLS,
     get_all_flags,
     is_drill_enabled,
     is_enabled,
+    is_flag_enabled,
     set_flag,
 )
 
@@ -242,3 +244,59 @@ class TestErrorHandling:
     def test_get_all_flags_missing_table_returns_empty(self, bare_conn):
         """OperationalError from a missing table makes get_all_flags return []."""
         assert get_all_flags(bare_conn) == []
+
+
+# ---------------------------------------------------------------------------
+# 7. is_flag_enabled alias
+# ---------------------------------------------------------------------------
+
+
+class TestIsFlagEnabled:
+    def test_alias_delegates_to_is_enabled(self, conn):
+        """is_flag_enabled returns the same result as is_enabled."""
+        set_flag(conn, "ai_conversation_mode", enabled=True, rollout_pct=100)
+        assert is_flag_enabled(conn, "ai_conversation_mode") is True
+        assert is_flag_enabled(conn, "ai_conversation_mode") == is_enabled(conn, "ai_conversation_mode")
+
+    def test_alias_respects_rollout(self, conn):
+        """is_flag_enabled uses the same deterministic rollout as is_enabled."""
+        set_flag(conn, "ai_grammar_explanation", enabled=True, rollout_pct=50)
+        for uid in range(50):
+            assert is_flag_enabled(conn, "ai_grammar_explanation", user_id=uid) == \
+                   is_enabled(conn, "ai_grammar_explanation", user_id=uid)
+
+    def test_alias_disabled_flag(self, conn):
+        """is_flag_enabled returns False for a disabled flag."""
+        set_flag(conn, "ai_pronunciation_feedback", enabled=False, rollout_pct=100)
+        assert is_flag_enabled(conn, "ai_pronunciation_feedback") is False
+
+    def test_alias_missing_flag(self, conn):
+        """is_flag_enabled returns False for a flag that does not exist."""
+        assert is_flag_enabled(conn, "nonexistent_ai_flag") is False
+
+    def test_alias_missing_table(self, bare_conn):
+        """is_flag_enabled returns False when the table does not exist."""
+        assert is_flag_enabled(bare_conn, "anything") is False
+
+
+# ---------------------------------------------------------------------------
+# 8. AI_FEATURE_FLAGS constant
+# ---------------------------------------------------------------------------
+
+
+class TestAIFeatureFlags:
+    def test_all_expected_flags_present(self):
+        """AI_FEATURE_FLAGS contains the five expected AI feature flags."""
+        expected = {
+            "ai_conversation_mode",
+            "ai_content_generation",
+            "ai_pronunciation_feedback",
+            "ai_grammar_explanation",
+            "ai_adaptive_difficulty",
+        }
+        assert set(AI_FEATURE_FLAGS.keys()) == expected
+
+    def test_all_flags_have_descriptions(self):
+        """Every AI feature flag has a non-empty description."""
+        for name, desc in AI_FEATURE_FLAGS.items():
+            assert isinstance(desc, str) and len(desc) > 0, f"{name} missing description"

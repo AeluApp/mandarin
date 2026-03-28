@@ -1,7 +1,6 @@
 """Tests for mandarin.openclaw.discord_bot — Discord bot handlers and factory."""
 
 import asyncio
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock, AsyncMock
 
@@ -12,27 +11,7 @@ except RuntimeError:
     asyncio.set_event_loop(asyncio.new_event_loop())
 
 
-def _make_db():
-    """In-memory SQLite with the audit log table."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE openclaw_message_log (
-            id TEXT PRIMARY KEY,
-            created_at TEXT,
-            direction TEXT,
-            channel TEXT,
-            user_identifier TEXT,
-            message_text TEXT,
-            intent TEXT,
-            tool_called TEXT,
-            tool_result TEXT,
-            injection_detected INTEGER DEFAULT 0,
-            injection_detail TEXT DEFAULT ''
-        )
-    """)
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _run(coro):

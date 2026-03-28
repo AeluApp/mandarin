@@ -7,12 +7,23 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 
 from .. import db
-from ..placement import generate_placement_quiz, score_placement
+from ..placement import (
+    generate_placement_quiz,
+    generate_next_question,
+    init_adaptive_state,
+    record_answer_and_adapt,
+    score_placement,
+    TOTAL_QUESTIONS,
+)
 from .api_errors import api_error_handler
 
 logger = logging.getLogger(__name__)
 
 onboarding_bp = Blueprint("onboarding", __name__)
+
+# In-memory adaptive quiz state keyed by user ID.
+# Ephemeral — lost on server restart (user simply restarts the quiz).
+_adaptive_sessions: dict[int, dict] = {}
 
 
 _HSK_WORD_COUNTS = {1: 150, 2: 300, 3: 600, 4: 1200, 5: 2500, 6: 5000}
@@ -111,7 +122,7 @@ def onboarding_wizard():
             })
     except (sqlite3.Error, KeyError, TypeError) as e:
         logger.error("Onboarding status error (%s): %s", type(e).__name__, e)
-        return jsonify({"complete": True})  # Fail open — don't block existing users
+        return jsonify({"complete": False})  # Fail closed — force onboarding on error
 
 
 @onboarding_bp.route("/api/onboarding/level", methods=["POST"])
@@ -221,26 +232,110 @@ def complete():
 @login_required
 @api_error_handler("PlacementStart")
 def placement_start():
-    """Generate a placement quiz for the current user."""
+    """Initialize an adaptive placement quiz and return the first question.
+
+    Response:
+        {
+            "adaptive": true,
+            "total_questions": 15,
+            "question": {question_number, hanzi, pinyin, hsk_level, options}
+        }
+    """
     try:
-        with db.connection() as conn:
-            questions = generate_placement_quiz(conn)
-            if not questions:
-                return jsonify({"error": "Could not generate placement quiz"}), 500
-            # Strip correct answers from response (client shouldn't see them)
-            client_questions = []
-            for q in questions:
-                client_questions.append({
-                    "question_number": q["question_number"],
-                    "hanzi": q["hanzi"],
-                    "pinyin": q["pinyin"],
-                    "hsk_level": q["hsk_level"],
-                    "options": q["options"],
-                })
-            return jsonify({"questions": client_questions})
-    except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
+        state = init_adaptive_state(returning=False)
+        if state.get("error"):
+            return jsonify({"error": "Could not generate placement quiz"}), 500
+
+        question = generate_next_question(state)
+        if question is None:
+            return jsonify({"error": "Could not generate placement quiz"}), 500
+
+        # Store state for this user
+        _adaptive_sessions[current_user.id] = state
+
+        # Strip correct answer from response (anti-cheat)
+        client_q = {
+            "question_number": question["question_number"],
+            "hanzi": question["hanzi"],
+            "pinyin": question["pinyin"],
+            "hsk_level": question["hsk_level"],
+            "options": question["options"],
+        }
+        return jsonify({
+            "adaptive": True,
+            "total_questions": TOTAL_QUESTIONS,
+            "question": client_q,
+        })
+    except (KeyError, ValueError, TypeError) as e:
         logger.error("Placement start error (%s): %s", type(e).__name__, e)
         return jsonify({"error": "Could not start placement quiz"}), 500
+
+
+@onboarding_bp.route("/api/onboarding/placement/next", methods=["POST"])
+@login_required
+@api_error_handler("PlacementNext")
+def placement_next():
+    """Accept the learner's answer, adapt difficulty, return the next question.
+
+    Request body:
+        {"selected": "the answer text", "hanzi": "the character shown"}
+
+    Response (next question available):
+        {
+            "is_correct": true/false,
+            "question": {question_number, hanzi, pinyin, hsk_level, options},
+            "complete": false
+        }
+
+    Response (quiz complete):
+        {
+            "is_correct": true/false,
+            "complete": true,
+            "question": null
+        }
+    """
+    try:
+        state = _adaptive_sessions.get(current_user.id)
+        if state is None:
+            return jsonify({"error": "No active placement quiz. Call /start first."}), 400
+
+        data = request.get_json(silent=True) or {}
+        selected = data.get("selected", "")
+        hanzi = data.get("hanzi", "")
+        if not selected or not hanzi:
+            return jsonify({"error": "selected and hanzi are required"}), 400
+
+        # Score the answer and adapt difficulty
+        is_correct = record_answer_and_adapt(state, selected, hanzi)
+
+        # Generate next question (or None if complete)
+        if state.get("complete"):
+            next_q = None
+        else:
+            next_q = generate_next_question(state)
+            if next_q is None:
+                state["complete"] = True
+
+        response = {
+            "is_correct": is_correct,
+            "complete": state.get("complete", False),
+        }
+
+        if next_q is not None:
+            response["question"] = {
+                "question_number": next_q["question_number"],
+                "hanzi": next_q["hanzi"],
+                "pinyin": next_q["pinyin"],
+                "hsk_level": next_q["hsk_level"],
+                "options": next_q["options"],
+            }
+        else:
+            response["question"] = None
+
+        return jsonify(response)
+    except (KeyError, ValueError, TypeError) as e:
+        logger.error("Placement next error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Could not get next question"}), 500
 
 
 @onboarding_bp.route("/api/onboarding/placement/submit", methods=["POST"])
@@ -252,10 +347,18 @@ def placement_submit():
     New flow: placement -> auto-seed content -> mark complete -> client starts
     first drill session immediately. Goal-setting is deferred until after the
     first session (optional, defaults to 5 sessions/week if skipped).
+
+    Supports both adaptive (server-side answers) and legacy (client-side answers).
     """
     try:
         data = request.get_json(silent=True) or {}
         answers = data.get("answers", [])
+
+        # Prefer server-side answers from adaptive session (more trustworthy)
+        state = _adaptive_sessions.pop(current_user.id, None)
+        if state and state.get("answers"):
+            answers = state["answers"]
+
         if not answers or not isinstance(answers, list):
             return jsonify({"error": "answers list required"}), 400
 

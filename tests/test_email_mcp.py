@@ -1,58 +1,23 @@
 """Tests for Email MCP integration module (teacher communication)."""
 
 import json
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
+from tests.shared_db import make_test_db
+
 
 def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
+    conn = make_test_db()
     conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            streak_days INTEGER DEFAULT 0
-        );
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            started_at TEXT DEFAULT (datetime('now')),
-            session_outcome TEXT DEFAULT 'completed',
-            items_completed INTEGER DEFAULT 0,
-            items_correct INTEGER DEFAULT 0,
-            duration_seconds INTEGER DEFAULT 0
-        );
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL
-        );
-        CREATE TABLE grammar_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER, grammar_point_id INTEGER,
-            mastery_score REAL DEFAULT 0,
-            studied_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE classroom (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            teacher_id INTEGER
-        );
-        CREATE TABLE classroom_member (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            classroom_id INTEGER, user_id INTEGER,
-            role TEXT DEFAULT 'student'
-        );
-
-        -- Seed data
-        INSERT INTO user (id, email, display_name, streak_days)
-        VALUES (1, 'student@aelu.app', 'Alice', 12);
-        INSERT INTO user (id, email, display_name, streak_days)
-        VALUES (2, 'teacher@aelu.app', 'Ms. Chen', 0);
-        INSERT INTO user (id, email, display_name)
-        VALUES (3, 'student2@aelu.app', 'Bob');
-        INSERT INTO user (id, email, display_name)
-        VALUES (4, 'inactive@aelu.app', NULL);
+        -- Seed users for email tests
+        UPDATE user SET email='student@aelu.app', display_name='Alice' WHERE id=1;
+        INSERT OR IGNORE INTO user (id, email, password_hash, display_name)
+        VALUES (2, 'teacher@aelu.app', 'test_hash', 'Ms. Chen');
+        INSERT OR IGNORE INTO user (id, email, password_hash, display_name)
+        VALUES (3, 'student2@aelu.app', 'test_hash', 'Bob');
+        INSERT OR IGNORE INTO user (id, email, password_hash, display_name)
+        VALUES (4, 'inactive@aelu.app', 'test_hash', NULL);
 
         INSERT INTO session_log (user_id, started_at, session_outcome, items_completed, items_correct, duration_seconds)
         VALUES (1, datetime('now', '-1 day'), 'completed', 20, 16, 900);
@@ -61,18 +26,18 @@ def _make_db():
         INSERT INTO session_log (user_id, started_at, session_outcome, items_completed, items_correct, duration_seconds)
         VALUES (3, datetime('now', '-2 days'), 'completed', 10, 3, 300);
 
-        INSERT INTO grammar_point (id, name) VALUES (1, 'Subject-Verb-Object');
-        INSERT INTO grammar_point (id, name) VALUES (2, 'Aspect particle 了');
+        INSERT INTO grammar_point (id, name, hsk_level) VALUES (1, 'Subject-Verb-Object', 1);
+        INSERT INTO grammar_point (id, name, hsk_level) VALUES (2, 'Aspect particle 了', 2);
 
         INSERT INTO grammar_progress (user_id, grammar_point_id, mastery_score)
         VALUES (1, 1, 0.85);
         INSERT INTO grammar_progress (user_id, grammar_point_id, mastery_score)
         VALUES (1, 2, 0.45);
 
-        INSERT INTO classroom (id, name, teacher_id) VALUES (1, 'HSK 1 Morning', 2);
-        INSERT INTO classroom_member (classroom_id, user_id, role) VALUES (1, 1, 'student');
-        INSERT INTO classroom_member (classroom_id, user_id, role) VALUES (1, 3, 'student');
-        INSERT INTO classroom_member (classroom_id, user_id, role) VALUES (1, 4, 'student');
+        INSERT INTO classroom (id, teacher_user_id, name, invite_code) VALUES (1, 2, 'HSK 1 Morning', 'TEST001');
+        INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 1);
+        INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 3);
+        INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 4);
     """)
     return conn
 
@@ -120,7 +85,7 @@ class TestDraftWeeklySummary(unittest.TestCase):
         result = draft_weekly_summary(conn, 1)
         self.assertEqual(result["metadata"]["user_id"], 1)
         self.assertEqual(result["metadata"]["session_count"], 2)
-        self.assertEqual(result["metadata"]["streak"], 12)
+        self.assertEqual(result["metadata"]["streak"], 1)
         # Accuracy: (16+10)/(20+15) = 26/35 = 74%
         self.assertEqual(result["metadata"]["accuracy"], 74)
 

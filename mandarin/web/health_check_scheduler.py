@@ -32,6 +32,14 @@ _stop_event = threading.Event()
 _thread = None
 
 
+class _TickCounter:
+    """Simple counter for spacing out periodic tasks across health check ticks."""
+    count = 0
+
+
+_self_healing_tick_counter = _TickCounter()
+
+
 def start():
     """Start the health check scheduler (idempotent)."""
     global _thread
@@ -204,3 +212,21 @@ def _health_check_tick(conn):
         pass
     except Exception:
         logger.debug("Health check: contract seeding failed", exc_info=True)
+
+    # Self-healing loop: run the full loop every ~4 ticks (hourly)
+    # Uses a simple counter stored in the module to avoid running every 15 min
+    try:
+        _self_healing_tick_counter.count += 1
+        if _self_healing_tick_counter.count >= 4:  # Every 4th tick = ~hourly
+            _self_healing_tick_counter.count = 0
+            from ..intelligence.self_healing import run_self_healing_loop
+            loop_result = run_self_healing_loop(conn)
+            if loop_result.get("total_actions", 0) > 0:
+                logger.info(
+                    "Health check: self-healing loop took %d action(s)",
+                    loop_result["total_actions"],
+                )
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("Health check: self-healing loop failed", exc_info=True)

@@ -57,11 +57,9 @@ def draft_weekly_summary(conn, user_id: int) -> dict:
     total_minutes = round((sessions["total_seconds"] or 0) / 60) if sessions else 0
     accuracy = round(items_correct / max(items_completed, 1) * 100)
 
-    # Streak
-    streak_row = conn.execute(
-        "SELECT streak_days FROM user WHERE id = ?", (user_id,),
-    ).fetchone()
-    streak = streak_row["streak_days"] if streak_row and "streak_days" in streak_row.keys() else 0
+    # Streak (computed from session_log, not stored as a column)
+    from mandarin.web.middleware import _compute_streak
+    streak = _compute_streak(conn, user_id=user_id)
 
     # Grammar progress
     grammar_rows = conn.execute("""
@@ -144,7 +142,7 @@ def draft_class_report(conn, class_id: int) -> dict:
     """
     # Get class info
     classroom = conn.execute(
-        "SELECT name, teacher_id FROM classroom WHERE id = ?",
+        "SELECT name, teacher_user_id FROM classroom WHERE id = ?",
         (class_id,),
     ).fetchone()
 
@@ -153,15 +151,15 @@ def draft_class_report(conn, class_id: int) -> dict:
 
     teacher = conn.execute(
         "SELECT email, display_name FROM user WHERE id = ?",
-        (classroom["teacher_id"],),
+        (classroom["teacher_user_id"],),
     ).fetchone()
 
     # Get student summaries
     students = conn.execute("""
-        SELECT cm.user_id, u.display_name, u.email
-        FROM classroom_member cm
-        JOIN user u ON u.id = cm.user_id
-        WHERE cm.classroom_id = ? AND cm.role = 'student'
+        SELECT cs.user_id, u.display_name, u.email
+        FROM classroom_student cs
+        JOIN user u ON u.id = cs.user_id
+        WHERE cs.classroom_id = ?
     """, (class_id,)).fetchall()
 
     summaries = []

@@ -452,28 +452,40 @@ def register_marketing_routes(app):
     # ── In-App Referral ────────────────────────────────────────────────
 
     @app.route("/api/referral/link")
+    @login_required
     @api_error_handler("ReferralLink")
     def api_referral_link():
-        """Generate/return a referral link for the current user.
+        """Return the current user's referral link using their stored referral code.
 
-        Uses a deterministic hash of the learner profile so the link is stable.
         Returns: {link, ref_code}
         """
         try:
             with db.connection() as conn:
-                profile = db.get_profile(conn)
-                # Deterministic referral code from profile creation date + total sessions
-                seed = "mandarin-ref-" + str(profile.get("created_at", "")) + "-" + str(profile.get("total_sessions", 0))
-                ref_code = hashlib.sha256(seed.encode()).hexdigest()[:10]
-                # Build the link relative to current host
+                row = conn.execute(
+                    "SELECT referral_code FROM user WHERE id = ?",
+                    (current_user.id,)
+                ).fetchone()
+                ref_code = row["referral_code"] if row and row["referral_code"] else None
+
+                # Backfill if missing (pre-migration user)
+                if not ref_code:
+                    import secrets as _secrets
+                    ref_code = _secrets.token_urlsafe(6)[:8]
+                    conn.execute(
+                        "UPDATE user SET referral_code = ? WHERE id = ?",
+                        (ref_code, current_user.id)
+                    )
+                    conn.commit()
+
                 base_url = request.host_url.rstrip("/")
-                link = base_url + "/?ref=" + ref_code
+                link = base_url + "/auth/register?ref=" + ref_code
                 return jsonify({"link": link, "ref_code": ref_code})
         except (sqlite3.Error, OSError, KeyError, TypeError) as e:
             logger.error("referral link error: %s", e)
             return jsonify({"error": "Could not generate referral link"}), 500
 
     @app.route("/api/referral/stats")
+    @login_required
     @api_error_handler("ReferralStats")
     def api_referral_stats():
         """Return referral count for this user.
@@ -482,19 +494,20 @@ def register_marketing_routes(app):
         """
         try:
             with db.connection() as conn:
-                profile = db.get_profile(conn)
-                seed = "mandarin-ref-" + str(profile.get("created_at", "")) + "-" + str(profile.get("total_sessions", 0))
-                ref_code = hashlib.sha256(seed.encode()).hexdigest()[:10]
+                row = conn.execute(
+                    "SELECT referral_code FROM user WHERE id = ?",
+                    (current_user.id,)
+                ).fetchone()
+                ref_code = row["referral_code"] if row and row["referral_code"] else ""
 
-                # Count signups through this ref code
+                # Count users referred by this user
                 try:
-                    row = conn.execute(
-                        "SELECT COUNT(*) as cnt FROM referral_tracking WHERE partner_code = ? AND signed_up = 1",
-                        (ref_code,)
+                    count_row = conn.execute(
+                        "SELECT COUNT(*) as cnt FROM user WHERE referred_by = ?",
+                        (current_user.id,)
                     ).fetchone()
-                    count = row["cnt"] if row else 0
+                    count = count_row["cnt"] if count_row else 0
                 except sqlite3.OperationalError:
-                    # Table may not exist yet
                     count = 0
 
                 return jsonify({"referral_count": count, "ref_code": ref_code})
@@ -511,18 +524,20 @@ def register_marketing_routes(app):
         """Combined referral link + stats for Flutter app."""
         try:
             with db.connection() as conn:
-                profile = db.get_profile(conn)
-                seed = "mandarin-ref-" + str(profile.get("created_at", "")) + "-" + str(profile.get("total_sessions", 0))
-                ref_code = hashlib.sha256(seed.encode()).hexdigest()[:10]
+                row = conn.execute(
+                    "SELECT referral_code FROM user WHERE id = ?",
+                    (current_user.id,)
+                ).fetchone()
+                ref_code = row["referral_code"] if row and row["referral_code"] else ""
                 base_url = request.host_url.rstrip("/")
-                link = base_url + "/?ref=" + ref_code
+                link = base_url + "/auth/register?ref=" + ref_code
 
                 try:
-                    row = conn.execute(
-                        "SELECT COUNT(*) as cnt FROM referral_tracking WHERE partner_code = ? AND signed_up = 1",
-                        (ref_code,)
+                    count_row = conn.execute(
+                        "SELECT COUNT(*) as cnt FROM user WHERE referred_by = ?",
+                        (current_user.id,)
                     ).fetchone()
-                    count = row["cnt"] if row else 0
+                    count = count_row["cnt"] if count_row else 0
                 except sqlite3.OperationalError:
                     count = 0
 
@@ -733,60 +748,5 @@ def register_marketing_routes(app):
             logger.error("nps prompted error: %s", e)
             return jsonify({"error": "NPS recording failed"}), 500
 
-    # ── Newsletter Subscription ─────────────────────────────────────────
-
-    @app.route("/api/newsletter/subscribe", methods=["POST"])
-    @api_error_handler("NewsletterSubscribe")
-    def api_newsletter_subscribe():
-        """Subscribe an email to the newsletter via Resend Audiences API."""
-        data = request.get_json(silent=True) or {}
-        email = (data.get("email") or "").strip().lower()
-
-        if not email or "@" not in email:
-            return jsonify({"error": "Valid email required"}), 400
-
-        try:
-            import resend
-            from ..settings import RESEND_API_KEY, RESEND_AUDIENCE_ID
-            resend.api_key = RESEND_API_KEY
-            audience_id = RESEND_AUDIENCE_ID
-
-            if not resend.api_key:
-                # Fallback: store in DB for later sync
-                with db.connection() as conn:
-                    conn.execute("""
-                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
-                        VALUES (?, datetime('now'))
-                    """, (email,))
-                    conn.commit()
-                return jsonify({"subscribed": True, "method": "db"})
-
-            if audience_id:
-                resend.Contacts.create({
-                    "audience_id": audience_id,
-                    "email": email,
-                })
-            else:
-                # No audience configured — store in DB
-                with db.connection() as conn:
-                    conn.execute("""
-                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
-                        VALUES (?, datetime('now'))
-                    """, (email,))
-                    conn.commit()
-
-            return jsonify({"subscribed": True})
-
-        except Exception as e:
-            logger.warning("Newsletter subscribe failed: %s", e)
-            # Fallback to DB
-            try:
-                with db.connection() as conn:
-                    conn.execute("""
-                        INSERT OR IGNORE INTO newsletter_subscriber (email, subscribed_at)
-                        VALUES (?, datetime('now'))
-                    """, (email,))
-                    conn.commit()
-            except Exception:
-                pass
-            return jsonify({"subscribed": True, "method": "db"})
+    # Note: Newsletter subscription endpoint is in landing_routes.py
+    # (landing blueprint) to avoid duplicate route registration.

@@ -39,8 +39,8 @@ jobs:
       - name: Install Bandit
         run: pip install bandit[toml]
 
-      - name: Run Bandit
-        run: bandit -r mandarin/ -c pyproject.toml --format json --output bandit-report.json || true
+      - name: Run Bandit (report generation)
+        run: bandit -r mandarin/ -c pyproject.toml --format json --output bandit-report.json --exit-zero
 
       - name: Upload Bandit report
         uses: actions/upload-artifact@v4
@@ -49,18 +49,22 @@ jobs:
           path: bandit-report.json
         if: always()
 
-      - name: Check for high-severity findings
+      - name: Fail on high-severity findings
         run: |
           python -c "
-          import json, sys
-          with open('bandit-report.json') as f:
+          import json, sys, os
+          report = 'bandit-report.json'
+          if not os.path.exists(report) or os.path.getsize(report) == 0:
+              print('FAIL: Bandit report missing or empty — scan may have crashed')
+              sys.exit(1)
+          with open(report) as f:
               data = json.load(f)
-          high = [r for r in data.get('results', []) if r.get('issue_severity') == 'HIGH']
+          high = [r for r in data.get('results', []) if r.get('issue_severity') in ('HIGH', 'CRITICAL')]
           if high:
               for r in high:
                   print(f\"HIGH: {r['filename']}:{r['line_number']} - {r['issue_text']}\")
               sys.exit(1)
-          print('No HIGH severity findings.')
+          print('No HIGH/CRITICAL severity findings.')
           "
 
   secrets:
@@ -93,7 +97,6 @@ jobs:
           pip install pip-audit
 
       - name: Run pip-audit
-        continue-on-error: true
         run: pip-audit --strict --desc on 2>&1 | tee pip-audit-report.txt
 
       - name: Upload pip-audit report
@@ -103,12 +106,16 @@ jobs:
           path: pip-audit-report.txt
         if: always()
 
-      - name: Check for critical vulnerabilities
+      - name: Fail on critical vulnerabilities
+        if: always()
         run: |
-          # Fail on any HIGH/CRITICAL vulnerabilities
-          if pip-audit --strict 2>&1 | grep -qi "CRITICAL\|HIGH"; then
+          if [ ! -s pip-audit-report.txt ]; then
+            echo "FAIL: pip-audit report missing or empty — audit may have failed"
+            exit 1
+          fi
+          if grep -qi "CRITICAL\|HIGH" pip-audit-report.txt; then
             echo "FAIL: Critical or high-severity dependency vulnerabilities found"
-            pip-audit --strict
+            cat pip-audit-report.txt
             exit 1
           fi
           echo "No critical dependency vulnerabilities found."

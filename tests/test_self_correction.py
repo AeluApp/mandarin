@@ -6,160 +6,12 @@ confidence-based finding labeling, enforcement gate, override accuracy.
 """
 
 import json
-import sqlite3
 import unittest
 from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
 
-def _make_db():
-    """Create an in-memory SQLite DB with all required tables."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-
-    # Core tables needed for self-correction
-    conn.execute("""CREATE TABLE user (
-        id INTEGER PRIMARY KEY, email TEXT, created_at TEXT DEFAULT (datetime('now')),
-        subscription_tier TEXT DEFAULT 'free', streak_freezes_available INTEGER DEFAULT 0
-    )""")
-    conn.execute("""CREATE TABLE session_log (
-        id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT DEFAULT (datetime('now')),
-        items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 8,
-        early_exit INTEGER DEFAULT 0, plan_snapshot TEXT,
-        client_platform TEXT DEFAULT 'web'
-    )""")
-    conn.execute("""CREATE TABLE review_event (
-        id INTEGER PRIMARY KEY, user_id INTEGER, content_item_id INTEGER,
-        drill_type TEXT, correct INTEGER DEFAULT 1,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE content_item (
-        id INTEGER PRIMARY KEY, hanzi TEXT, english TEXT, hsk_level INTEGER
-    )""")
-    conn.execute("""CREATE TABLE progress (
-        id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1, content_item_id INTEGER,
-        mastery_stage TEXT DEFAULT 'learning', modality TEXT DEFAULT 'reading',
-        repetitions INTEGER DEFAULT 0, interval_days INTEGER DEFAULT 1,
-        ease_factor REAL DEFAULT 2.5, weak_cycle_count INTEGER DEFAULT 0,
-        historically_weak INTEGER DEFAULT 0, next_review_at TEXT,
-        created_at TEXT DEFAULT (datetime('now')), updated_at TEXT DEFAULT (datetime('now'))
-    )""")
-
-    # Intelligence tables
-    conn.execute("""CREATE TABLE product_audit (
-        id INTEGER PRIMARY KEY, run_at TEXT DEFAULT (datetime('now')),
-        overall_grade TEXT, overall_score REAL,
-        dimension_scores TEXT, findings_json TEXT,
-        findings_count INTEGER, critical_count INTEGER, high_count INTEGER
-    )""")
-    conn.execute("""CREATE TABLE pi_finding (
-        id INTEGER PRIMARY KEY, audit_id INTEGER,
-        dimension TEXT, severity TEXT, title TEXT, analysis TEXT,
-        status TEXT DEFAULT 'investigating',
-        hypothesis TEXT, falsification TEXT,
-        metric_name TEXT, metric_value_at_detection REAL,
-        root_cause_tag TEXT, linked_finding_id INTEGER,
-        times_seen INTEGER DEFAULT 1, last_seen_audit_id INTEGER,
-        created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now')),
-        resolved_at TEXT, resolution_notes TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_recommendation_outcome (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        action_type TEXT, action_description TEXT,
-        files_changed TEXT, metric_before TEXT, metric_after TEXT,
-        verified_at TEXT, delta_pct REAL, effective INTEGER,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_decision_log (
-        id INTEGER PRIMARY KEY, finding_id INTEGER,
-        decision_class TEXT, escalation_level TEXT,
-        presented_to TEXT, decision TEXT, decision_reason TEXT,
-        override_expires_at TEXT, outcome_notes TEXT,
-        requires_approval INTEGER DEFAULT 0, approved_at TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE pi_threshold_calibration (
-        metric_name TEXT PRIMARY KEY, threshold_value REAL NOT NULL,
-        calibrated_at TEXT DEFAULT (datetime('now')),
-        sample_size INTEGER, false_positive_rate REAL,
-        false_negative_rate REAL, prior_threshold REAL,
-        notes TEXT, verification_window_days INTEGER
-    )""")
-
-    # Self-correction tables (v57)
-    conn.execute("""CREATE TABLE pi_prediction_ledger (
-        id TEXT PRIMARY KEY,
-        created_at TEXT NOT NULL DEFAULT (datetime('now')),
-        finding_id INTEGER NOT NULL,
-        model_id TEXT NOT NULL,
-        dimension TEXT NOT NULL,
-        claim_type TEXT NOT NULL,
-        metric_name TEXT NOT NULL,
-        metric_baseline REAL NOT NULL,
-        predicted_delta REAL NOT NULL,
-        predicted_delta_confidence REAL NOT NULL,
-        verification_window_days INTEGER NOT NULL,
-        verification_due_at TEXT NOT NULL,
-        outcome_id TEXT,
-        status TEXT NOT NULL DEFAULT 'pending'
-    )""")
-    conn.execute("""CREATE TABLE pi_prediction_outcomes (
-        id TEXT PRIMARY KEY,
-        prediction_id TEXT NOT NULL,
-        recorded_at TEXT NOT NULL DEFAULT (datetime('now')),
-        metric_actual REAL NOT NULL,
-        actual_delta REAL NOT NULL,
-        direction_correct INTEGER NOT NULL,
-        magnitude_error REAL NOT NULL,
-        outcome_class TEXT NOT NULL
-    )""")
-    conn.execute("""CREATE TABLE pi_model_confidence (
-        model_id TEXT PRIMARY KEY,
-        dimension TEXT NOT NULL,
-        correct_count INTEGER NOT NULL DEFAULT 0,
-        directionally_correct_count INTEGER NOT NULL DEFAULT 0,
-        wrong_count INTEGER NOT NULL DEFAULT 0,
-        insufficient_data_count INTEGER NOT NULL DEFAULT 0,
-        measurement_failure_count INTEGER NOT NULL DEFAULT 0,
-        current_confidence REAL NOT NULL DEFAULT 0.5,
-        last_updated TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_self_audit_report (
-        id TEXT PRIMARY KEY,
-        generated_at TEXT NOT NULL DEFAULT (datetime('now')),
-        lookback_days INTEGER NOT NULL,
-        total_predictions INTEGER,
-        correct_count INTEGER,
-        directionally_correct_count INTEGER,
-        wrong_count INTEGER,
-        expired_count INTEGER,
-        invalidated_count INTEGER,
-        insufficient_data_count INTEGER,
-        worst_models_json TEXT,
-        best_models_json TEXT,
-        current_constraint TEXT,
-        constraint_confidence REAL,
-        human_override_accuracy REAL,
-        engine_accuracy REAL,
-        override_domains_json TEXT,
-        report_json TEXT
-    )""")
-
-    # Tables needed for _measure_current_metric
-    conn.execute("""CREATE TABLE spc_observation (
-        id INTEGER PRIMARY KEY, chart_type TEXT, value REAL,
-        ucl REAL, lcl REAL, rule_violated TEXT,
-        observed_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE experiment (
-        id INTEGER PRIMARY KEY, name TEXT, status TEXT DEFAULT 'running',
-        min_sample_size INTEGER DEFAULT 100, created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now'))
-    )""")
-
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _insert_finding(conn, **kwargs):
@@ -190,7 +42,7 @@ class TestEmitPrediction(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import emit_prediction
         conn = _make_db()
         # Seed data so _measure_current_metric returns a value for retention
-        conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@b.com')")
+        # User 1 already exists via make_test_db()
         for i in range(5):
             conn.execute("""INSERT INTO session_log (user_id, started_at)
                 VALUES (1, datetime('now', ?))""", (f'-{i} days',))
@@ -212,7 +64,7 @@ class TestEmitPrediction(unittest.TestCase):
     def test_emit_prediction_negative_delta_claim_type(self):
         from mandarin.intelligence.feedback_loops import emit_prediction
         conn = _make_db()
-        conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@b.com')")
+        # User 1 already exists via make_test_db()
         for i in range(5):
             conn.execute("""INSERT INTO session_log (user_id, started_at)
                 VALUES (1, datetime('now', ?))""", (f'-{i} days',))
@@ -269,8 +121,8 @@ class TestRecordPredictionOutcomes(unittest.TestCase):
         """, (pred_id, finding_id, model_id, dimension, baseline, delta, due_at))
         # Mark finding as acted on
         conn.execute("""
-            INSERT INTO pi_decision_log (finding_id, decision)
-            VALUES (?, 'Implement fix')
+            INSERT INTO pi_decision_log (finding_id, decision_class, escalation_level, decision)
+            VALUES (?, 'auto_fix', 'quiet', 'Implement fix')
         """, (finding_id,))
         conn.commit()
 
@@ -284,7 +136,7 @@ class TestRecordPredictionOutcomes(unittest.TestCase):
         self._seed_prediction(conn, finding_id=fid, baseline=20.0, delta=5.0)
 
         # Seed data so retention metric returns ~25 (within 20%)
-        conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@b.com')")
+        # User 1 already exists via make_test_db()
         for i in range(7):
             conn.execute("""INSERT INTO session_log (user_id, started_at)
                 VALUES (1, datetime('now', ?))""", (f'-{i} days',))
@@ -675,8 +527,8 @@ class TestOverrideAccuracy(unittest.TestCase):
         fid = _insert_finding(conn, dimension="retention")
         # Insert override decision
         conn.execute("""
-            INSERT INTO pi_decision_log (finding_id, decision, created_at)
-            VALUES (?, 'Override: changed severity', ?)
+            INSERT INTO pi_decision_log (finding_id, decision_class, escalation_level, decision, created_at)
+            VALUES (?, 'judgment_call', 'quiet', 'Override: changed severity', ?)
         """, (fid, now))
         # Insert prediction + outcome showing engine was wrong
         conn.execute("""

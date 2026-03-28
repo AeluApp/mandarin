@@ -35,6 +35,22 @@ INTEREST_DOMAINS = {
         "label": "Culture",
         "description": "Literature, philosophy, art, reflection",
     },
+    "business": {
+        "label": "Business",
+        "description": "Commerce, meetings, professional communication",
+    },
+    "daily_life": {
+        "label": "Daily life",
+        "description": "Everyday conversation, errands, routines",
+    },
+    "food_culture": {
+        "label": "Food & culture",
+        "description": "Cuisine, dining, festivals, traditions",
+    },
+    "technology": {
+        "label": "Technology",
+        "description": "Internet, devices, apps, digital life",
+    },
 }
 
 

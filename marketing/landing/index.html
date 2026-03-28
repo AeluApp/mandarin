@@ -718,6 +718,46 @@
       line-height: 1.6;
     }
 
+    /* ── Social proof ── */
+    .social-proof {
+      text-align: center;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .social-proof-line {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-4);
+    }
+
+    .social-proof-details {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .social-proof-detail {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--color-text-faint);
+      line-height: 1.5;
+    }
+
+    .social-proof-detail strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
     /* ── Pricing ── */
     .pricing h2 {
       font-family: var(--font-heading);
@@ -847,6 +887,63 @@
     footer a {
       color: var(--color-text-faint);
       text-decoration: underline;
+    }
+
+    /* ── Newsletter ── */
+    .newsletter-section {
+      text-align: center;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .newsletter-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .newsletter-section p {
+      font-size: 0.95rem;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-4);
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: var(--space-2);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+
+    .newsletter-form input[type="email"]::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    .newsletter-success {
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-secondary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .newsletter-form {
+        flex-direction: column;
+      }
     }
 
     /* ── Subtle animation ── */
@@ -1222,6 +1319,27 @@
     </div>
   </section>
 
+  <!-- Social proof -->
+  <section class="social-proof" data-scroll-section="social-proof">
+    <div class="container">
+      <p class="social-proof-line">Join learners studying Mandarin with Aelu</p>
+      <div class="social-proof-details">
+        <div class="social-proof-detail">
+          <strong>44</strong>
+          drill types across reading, listening, speaking, and writing
+        </div>
+        <div class="social-proof-detail">
+          <strong>HSK 1 &ndash; 9</strong>
+          full curriculum aligned to the official standard
+        </div>
+        <div class="social-proof-detail">
+          <strong>Deterministic</strong>
+          no variable AI &mdash; the same right answer every time
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section class="pricing" data-scroll-section="pricing">
     <span class="section-depth-marker" aria-hidden="true">深</span>
@@ -1284,6 +1402,19 @@
           <button type="submit" class="btn-primary">Sign up free</button>
         </form>
       </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section" data-scroll-section="newsletter">
+    <div class="container" style="max-width:520px;">
+      <h2>Stay in the loop</h2>
+      <p>Occasional updates on Aelu, no spam.</p>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+      <div class="newsletter-success" id="newsletter-success">Subscribed. We will be in touch.</div>
     </div>
   </section>
 
@@ -1764,6 +1895,42 @@
         }
       });
     });
+
+    // Dedicated newsletter form
+    (function() {
+      var form = document.getElementById('newsletter-form');
+      if (!form) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailInput = form.querySelector('input[type="email"]');
+        var email = emailInput.value.trim();
+        if (!email) return;
+        var btn = form.querySelector('button');
+        btn.disabled = true;
+        btn.textContent = 'Subscribing\u2026';
+        fetch('/api/newsletter/subscribe', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email: email})
+        }).then(function(r) {
+          return r.json();
+        }).then(function(data) {
+          if (data.error) {
+            btn.disabled = false;
+            btn.textContent = 'Subscribe';
+            emailInput.setCustomValidity(data.error);
+            emailInput.reportValidity();
+            return;
+          }
+          form.style.display = 'none';
+          var success = document.getElementById('newsletter-success');
+          if (success) success.style.display = 'block';
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        });
+      });
+    })();
   </script>
 
 </body>

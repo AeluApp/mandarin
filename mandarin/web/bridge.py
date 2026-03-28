@@ -330,7 +330,8 @@ class WebBridge:
                         correct: bool, hanzi: str = "",
                         error_type: str = "",
                         requirement_ref: dict = None,
-                        error_explanation: str = ""):
+                        error_explanation: str = "",
+                        near_miss: dict = None):
         """Send drill result metadata to the browser for override support."""
         payload = {
             "type": "drill_meta",
@@ -345,6 +346,8 @@ class WebBridge:
             payload["requirement_ref"] = requirement_ref
         if error_explanation:
             payload["error_explanation"] = error_explanation
+        if near_miss:
+            payload["near_miss"] = near_miss
         self._send(payload)
 
 

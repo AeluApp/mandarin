@@ -3,7 +3,6 @@
 import pytest
 pytest.importorskip("httpx")
 
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
@@ -15,37 +14,7 @@ from mandarin.ai.agentic import (
 from mandarin.ai.ollama_client import generate_structured
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE pi_ai_generation_cache (
-            id TEXT PRIMARY KEY, prompt_hash TEXT, prompt_text TEXT,
-            system_text TEXT, model_used TEXT, response_text TEXT,
-            generated_at TEXT, hit_count INTEGER DEFAULT 0, last_hit_at TEXT
-        );
-        CREATE TABLE pi_ai_generation_log (
-            id TEXT PRIMARY KEY, occurred_at TEXT, task_type TEXT,
-            model_used TEXT, prompt_tokens INTEGER DEFAULT 0,
-            completion_tokens INTEGER DEFAULT 0, generation_time_ms INTEGER DEFAULT 0,
-            from_cache INTEGER DEFAULT 0, success INTEGER DEFAULT 1,
-            error TEXT, json_parse_failure INTEGER DEFAULT 0,
-            finding_id TEXT, item_id TEXT
-        );
-        CREATE TABLE json_generation_failures (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            task_type TEXT, error_type TEXT, error_detail TEXT,
-            prompt_snippet TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE prompt_trace (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prompt_key TEXT, prompt_hash TEXT, input_tokens INTEGER DEFAULT 0,
-            output_tokens INTEGER DEFAULT 0, latency_ms INTEGER DEFAULT 0,
-            model_used TEXT, success INTEGER DEFAULT 1, error_type TEXT,
-            output_quality_score REAL, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestInstructorIntegration(unittest.TestCase):

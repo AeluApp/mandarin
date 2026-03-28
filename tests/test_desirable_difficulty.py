@@ -4,18 +4,12 @@ Validates all 5 Bjork zones, mastered/well-learned overrides, and edge cases.
 Uses pytest + unittest.TestCase pattern with in-memory SQLite (row_factory).
 """
 
-import sqlite3
 import unittest
 
 from mandarin.ai.memory_model import desirable_difficulty_adjustment
 
 
-def _make_db():
-    """Lightweight in-memory DB (not needed for pure-function tests, but
-    included for pattern consistency with the rest of the test suite)."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestBjorkZone1TooEasy(unittest.TestCase):

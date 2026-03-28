@@ -1,196 +1,20 @@
 """Tests for AI governance & compliance (Doc 11)."""
 
-import sqlite3
 import unittest
 from datetime import date, timedelta
 
 
-def _make_db():
-    """Create in-memory DB with Doc 11 tables + dependencies."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
+from tests.shared_db import make_test_db as _make_db
 
-    # Core tables
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER,
-            session_id INTEGER,
-            is_correct INTEGER,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT, pinyin TEXT, english TEXT,
-            status TEXT DEFAULT 'drill_ready'
-        )
-    """)
 
-    # Cohort tables for FERPA
-    conn.execute("""
-        CREATE TABLE cohorts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            teacher_id TEXT NOT NULL,
-            name TEXT NOT NULL
+def _ensure_content_items(conn, *ids):
+    """Insert stub content_item rows for FK satisfaction."""
+    for cid in ids:
+        conn.execute(
+            "INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, item_type) "
+            "VALUES (?, 'test', 'test', 'test', 'vocab')",
+            (cid,),
         )
-    """)
-    conn.execute("""
-        CREATE TABLE cohort_members (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cohort_id INTEGER NOT NULL,
-            user_id TEXT NOT NULL,
-            active INTEGER NOT NULL DEFAULT 1
-        )
-    """)
-
-    # Doc 11 tables
-    conn.execute("""
-        CREATE TABLE ai_component_registry (
-            id TEXT PRIMARY KEY,
-            component_name TEXT NOT NULL UNIQUE,
-            component_description TEXT NOT NULL,
-            ai_type TEXT NOT NULL,
-            decision_type TEXT NOT NULL,
-            risk_tier TEXT NOT NULL,
-            risk_tier_rationale TEXT NOT NULL,
-            failure_mode TEXT NOT NULL,
-            failure_impact TEXT NOT NULL,
-            failure_detectability TEXT,
-            human_override_available INTEGER NOT NULL DEFAULT 1,
-            human_override_mechanism TEXT,
-            monitoring_function TEXT,
-            known_limitations TEXT NOT NULL,
-            performance_benchmarks TEXT,
-            component_owner TEXT NOT NULL DEFAULT 'jason_yee',
-            last_validated_at TEXT,
-            next_validation_due TEXT,
-            registered_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE ai_validation_log (
-            id TEXT PRIMARY KEY,
-            component_name TEXT NOT NULL,
-            validated_at TEXT NOT NULL DEFAULT (datetime('now')),
-            verdict TEXT NOT NULL,
-            prediction_accuracy_90d REAL,
-            monitoring_status TEXT,
-            conceptual_soundness TEXT,
-            limitations_acknowledged INTEGER NOT NULL DEFAULT 0,
-            override_available INTEGER NOT NULL DEFAULT 0,
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE ai_incident_log (
-            id TEXT PRIMARY KEY,
-            detected_at TEXT NOT NULL DEFAULT (datetime('now')),
-            severity TEXT NOT NULL,
-            incident_type TEXT NOT NULL,
-            affected_component TEXT,
-            affected_user_ids TEXT,
-            description TEXT NOT NULL,
-            immediate_actions_taken TEXT,
-            root_cause TEXT,
-            resolution TEXT,
-            resolved_at TEXT,
-            user_notification_sent INTEGER NOT NULL DEFAULT 0,
-            post_incident_review_notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE user_consent_records (
-            id TEXT PRIMARY KEY,
-            user_id TEXT NOT NULL,
-            consent_type TEXT NOT NULL,
-            consented INTEGER NOT NULL,
-            consent_version TEXT NOT NULL,
-            consented_at TEXT NOT NULL DEFAULT (datetime('now')),
-            withdrawn_at TEXT,
-            UNIQUE(user_id, consent_type)
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE data_subject_requests (
-            id TEXT PRIMARY KEY,
-            requested_at TEXT NOT NULL DEFAULT (datetime('now')),
-            user_id TEXT NOT NULL,
-            request_type TEXT NOT NULL,
-            status TEXT NOT NULL DEFAULT 'pending',
-            response_due_date TEXT NOT NULL DEFAULT (date('now', '+30 days')),
-            completed_at TEXT,
-            notes TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE user_age_classification (
-            user_id TEXT PRIMARY KEY,
-            is_minor INTEGER NOT NULL DEFAULT 0,
-            is_coppa_subject INTEGER NOT NULL DEFAULT 0,
-            parental_consent_obtained INTEGER NOT NULL DEFAULT 0,
-            parental_consent_at TEXT,
-            data_collection_restricted INTEGER NOT NULL DEFAULT 0
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE ferpa_access_audit (
-            id TEXT PRIMARY KEY,
-            accessed_at TEXT NOT NULL DEFAULT (datetime('now')),
-            requesting_user_id TEXT NOT NULL,
-            target_user_id TEXT NOT NULL,
-            data_table TEXT NOT NULL,
-            access_permitted INTEGER NOT NULL,
-            access_basis TEXT NOT NULL,
-            request_context TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE ai_policy_documents (
-            id TEXT PRIMARY KEY,
-            document_key TEXT NOT NULL UNIQUE,
-            title TEXT NOT NULL,
-            content TEXT,
-            version INTEGER NOT NULL DEFAULT 1,
-            status TEXT NOT NULL DEFAULT 'draft',
-            user_facing INTEGER NOT NULL DEFAULT 0,
-            last_reviewed_at TEXT,
-            next_review_due TEXT,
-            owner TEXT NOT NULL DEFAULT 'jason_yee'
-        )
-    """)
-    # Prediction ledger (dependency for validation)
-    conn.execute("""
-        CREATE TABLE pi_predictions (
-            id TEXT PRIMARY KEY,
-            prediction_domain TEXT,
-            prediction_made_at TEXT,
-            outcome_confirmed INTEGER,
-            outcome_observed_at TEXT
-        )
-    """)
-    # pi_findings for monitoring status
-    conn.execute("""
-        CREATE TABLE pi_findings (
-            id TEXT PRIMARY KEY,
-            dimension TEXT,
-            severity TEXT,
-            title TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.commit()
-    return conn
 
 
 class TestSeedComponentRegistry(unittest.TestCase):
@@ -229,10 +53,13 @@ class TestFerpaAccess(unittest.TestCase):
         """4. Teacher access to own student is permitted."""
         from mandarin.intelligence.governance import check_ferpa_access
         conn = _make_db()
-        conn.execute("INSERT INTO cohorts (id, teacher_id, name) VALUES (1, 'teacher1', 'Class A')")
-        conn.execute("INSERT INTO cohort_members (cohort_id, user_id, active) VALUES (1, 'student1', 1)")
+        # Create teacher and student users (teacher_id and user_id are INTEGER FKs)
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at, onboarding_complete) VALUES (100, 'teacher1@test.com', 'hash', datetime('now'), 0)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at, onboarding_complete) VALUES (101, 'student1@test.com', 'hash', datetime('now'), 0)")
+        conn.execute("INSERT INTO cohorts (id, teacher_id, name) VALUES (1, 100, 'Class A')")
+        conn.execute("INSERT INTO cohort_members (cohort_id, user_id, active) VALUES (1, 101, 1)")
         conn.commit()
-        result = check_ferpa_access(conn, 'teacher1', 'student1', 'review_event')
+        result = check_ferpa_access(conn, 100, 101, 'review_event')
         self.assertTrue(result['permitted'])
         self.assertEqual(result['basis'], 'legitimate_educational_interest')
 
@@ -261,8 +88,9 @@ class TestDeletionRequest(unittest.TestCase):
         """7. handle_deletion_request clears records from tables."""
         from mandarin.intelligence.governance import handle_deletion_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 2, 0)")
+        _ensure_content_items(conn, 1, 2)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 2, 0, 'read')")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
         conn.commit()
         handle_deletion_request(conn, '1')
@@ -273,8 +101,9 @@ class TestDeletionRequest(unittest.TestCase):
         """8. handle_deletion_request returns count of deleted records."""
         from mandarin.intelligence.governance import handle_deletion_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 2, 0)")
+        _ensure_content_items(conn, 1, 2)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 2, 0, 'read')")
         conn.commit()
         result = handle_deletion_request(conn, '1')
         self.assertEqual(result['status'], 'completed')
@@ -288,7 +117,8 @@ class TestAccessRequest(unittest.TestCase):
         """10. handle_access_request returns data from core tables."""
         from mandarin.intelligence.governance import handle_access_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
+        _ensure_content_items(conn, 1)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
         conn.commit()
         result = handle_access_request(conn, '1')
@@ -320,9 +150,10 @@ class TestTransparency(unittest.TestCase):
         """13. explain_item_scheduling returns days-since for reviewed items."""
         from mandarin.intelligence.governance import explain_item_scheduling
         conn = _make_db()
+        _ensure_content_items(conn, 42)
         conn.execute("""
-            INSERT INTO review_event (user_id, content_item_id, is_correct, created_at)
-            VALUES (1, 42, 1, datetime('now', '-3 days'))
+            INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at)
+            VALUES (1, 42, 1, 'read', datetime('now', '-3 days'))
         """)
         conn.commit()
         result = explain_item_scheduling(conn, '42', '1')
@@ -336,7 +167,7 @@ class TestDataQuality(unittest.TestCase):
         """14. Orphaned sessions generate high finding."""
         from mandarin.intelligence.governance import check_data_quality
         conn = _make_db()
-        conn.execute("INSERT INTO session_log (user_id, created_at) VALUES (1, datetime('now'))")
+        conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now'))")
         conn.commit()
         findings = check_data_quality(conn)
         orphan = [f for f in findings if 'no review events' in f['title'].lower()]
@@ -347,9 +178,10 @@ class TestDataQuality(unittest.TestCase):
         """15. Future timestamps generate medium finding."""
         from mandarin.intelligence.governance import check_data_quality
         conn = _make_db()
+        _ensure_content_items(conn, 1)
         conn.execute("""
-            INSERT INTO review_event (user_id, content_item_id, is_correct, created_at)
-            VALUES (1, 1, 1, datetime('now', '+2 days'))
+            INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at)
+            VALUES (1, 1, 1, 'read', datetime('now', '+2 days'))
         """)
         conn.commit()
         findings = check_data_quality(conn)
@@ -447,8 +279,8 @@ class TestModelValidation(unittest.TestCase):
         conn = _make_db()
         # Insert a critical finding for this component
         conn.execute("""
-            INSERT INTO pi_findings (id, dimension, severity, title)
-            VALUES ('f1', 'engagement', 'critical', 'Test critical')
+            INSERT INTO pi_finding (dimension, severity, title, status)
+            VALUES ('engagement', 'critical', 'Test critical', 'investigating')
         """)
         conn.commit()
         component = {

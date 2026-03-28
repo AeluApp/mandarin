@@ -3,7 +3,6 @@
 import pytest
 pytest.importorskip("httpx")
 
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
@@ -16,44 +15,7 @@ from mandarin.ai.web_crawler import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE crawl_source (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            url TEXT NOT NULL,
-            source_type TEXT NOT NULL,
-            crawl_interval_hours INTEGER NOT NULL DEFAULT 24,
-            last_crawl_at TEXT,
-            active INTEGER NOT NULL DEFAULT 1,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE crawl_run (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source_id INTEGER NOT NULL,
-            status TEXT NOT NULL DEFAULT 'running',
-            items_found INTEGER DEFAULT 0,
-            items_new INTEGER DEFAULT 0,
-            error_detail TEXT,
-            started_at TEXT NOT NULL DEFAULT (datetime('now')),
-            completed_at TEXT
-        );
-        CREATE TABLE competitor_signals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source TEXT NOT NULL, signal_type TEXT NOT NULL,
-            title TEXT NOT NULL, detail TEXT, source_url TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE research_signals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source TEXT NOT NULL, title TEXT NOT NULL,
-            finding TEXT, applicability_score REAL, doi TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestSeedCrawlSources(unittest.TestCase):

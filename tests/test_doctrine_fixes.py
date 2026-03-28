@@ -13,9 +13,6 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 import pytest
-
-from mandarin import db
-from mandarin.db.core import _migrate
 from mandarin.db.progress import (
     _compute_mastery_transition,
     PRODUCTION_DRILL_TYPES,
@@ -41,20 +38,19 @@ from mandarin.scheduler import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+from tests.shared_db import make_test_db
+
+
+class _NullPath:
+    """Placeholder for in-memory DBs so callers can still call path.unlink()."""
+    def unlink(self, missing_ok=False):
+        pass
+
+
 def _make_db():
-    """Create a fresh test database."""
-    tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
-    tmp.close()
-    path = Path(tmp.name)
-    conn = db.init_db(path)
-    _migrate(conn)
-    conn.execute("""
-        INSERT OR IGNORE INTO user (id, email, password_hash, display_name, subscription_tier)
-        VALUES (1, 'local@localhost', 'bootstrap_no_login', 'Local', 'admin')
-    """)
-    conn.execute("INSERT OR IGNORE INTO learner_profile (id, user_id) VALUES (1, 1)")
-    conn.commit()
-    return conn, path
+    """Create a fresh test database using the shared factory."""
+    conn = make_test_db()
+    return conn, _NullPath()
 
 
 def _seed_content_item(conn, item_id=1, hanzi="好", pinyin="hǎo", english="good"):

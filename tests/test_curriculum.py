@@ -1,6 +1,5 @@
 """Tests for Doc 14: Curriculum Architecture and HSK 9 Pathway."""
 
-import sqlite3
 import unittest
 
 from mandarin.db.core import SCHEMA_VERSION
@@ -14,86 +13,7 @@ from mandarin.ai.curriculum import (
 )
 
 
-def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript("""
-        CREATE TABLE user (id INTEGER PRIMARY KEY, email TEXT, password_hash TEXT);
-        INSERT INTO user (id, email) VALUES (1, 'test@aelu.app');
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            hsk_level INTEGER,
-            status TEXT DEFAULT 'drill_ready',
-            difficulty REAL DEFAULT 0.5,
-            content_lens TEXT
-        );
-
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
-            name_zh TEXT,
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            category TEXT NOT NULL DEFAULT 'structure',
-            description TEXT,
-            prerequisite_patterns TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE content_grammar (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER NOT NULL,
-            grammar_point_id INTEGER NOT NULL,
-            FOREIGN KEY (content_item_id) REFERENCES content_item(id),
-            FOREIGN KEY (grammar_point_id) REFERENCES grammar_point(id)
-        );
-
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            stability REAL DEFAULT 0.4,
-            difficulty REAL DEFAULT 0.5,
-            reps INTEGER DEFAULT 0,
-            state TEXT DEFAULT 'new'
-        );
-
-        CREATE TABLE learner_pattern_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            grammar_point_id INTEGER NOT NULL,
-            status TEXT NOT NULL DEFAULT 'untouched',
-            encounters INTEGER NOT NULL DEFAULT 0,
-            correct_streak INTEGER NOT NULL DEFAULT 0,
-            UNIQUE(user_id, grammar_point_id)
-        );
-
-        CREATE TABLE learner_proficiency_zones (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL UNIQUE,
-            vocab_hsk_estimate REAL,
-            vocab_items_mastered INTEGER,
-            vocab_coverage_pct REAL,
-            grammar_hsk_estimate REAL,
-            grammar_patterns_mastered INTEGER,
-            grammar_coverage_pct REAL,
-            reading_hsk_estimate REAL,
-            listening_hsk_estimate REAL,
-            composite_hsk_estimate REAL,
-            computed_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE product_audit (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grade TEXT, score REAL, dimension_scores TEXT,
-            findings TEXT, created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 class TestHSKMilestones(unittest.TestCase):

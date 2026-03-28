@@ -5,185 +5,11 @@ goal coherence checker, knowledge base constraints, self-audit integration.
 """
 
 import json
-import sqlite3
 import unittest
 from uuid import uuid4
 
 
-def _make_db():
-    """Create an in-memory SQLite DB with all required tables."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-
-    # Core tables
-    conn.execute("""CREATE TABLE user (
-        id INTEGER PRIMARY KEY, email TEXT, created_at TEXT DEFAULT (datetime('now')),
-        subscription_tier TEXT DEFAULT 'free', streak_freezes_available INTEGER DEFAULT 0
-    )""")
-    conn.execute("""CREATE TABLE session_log (
-        id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT DEFAULT (datetime('now')),
-        items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 8,
-        early_exit INTEGER DEFAULT 0, plan_snapshot TEXT,
-        client_platform TEXT DEFAULT 'web'
-    )""")
-    conn.execute("""CREATE TABLE review_event (
-        id INTEGER PRIMARY KEY, user_id INTEGER, content_item_id INTEGER,
-        drill_type TEXT, correct INTEGER DEFAULT 1,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    conn.execute("""CREATE TABLE content_item (
-        id INTEGER PRIMARY KEY, hanzi TEXT, english TEXT, hsk_level INTEGER
-    )""")
-    conn.execute("""CREATE TABLE progress (
-        id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1, content_item_id INTEGER,
-        mastery_stage TEXT DEFAULT 'learning', modality TEXT DEFAULT 'reading',
-        repetitions INTEGER DEFAULT 0, interval_days INTEGER DEFAULT 1,
-        ease_factor REAL DEFAULT 2.5, weak_cycle_count INTEGER DEFAULT 0,
-        historically_weak INTEGER DEFAULT 0, next_review_at TEXT,
-        created_at TEXT DEFAULT (datetime('now')), updated_at TEXT DEFAULT (datetime('now'))
-    )""")
-
-    # Intelligence tables
-    conn.execute("""CREATE TABLE product_audit (
-        id INTEGER PRIMARY KEY, run_at TEXT DEFAULT (datetime('now')),
-        overall_grade TEXT, overall_score REAL,
-        dimension_scores TEXT, findings_json TEXT,
-        findings_count INTEGER, critical_count INTEGER, high_count INTEGER
-    )""")
-    conn.execute("""CREATE TABLE pi_finding (
-        id INTEGER PRIMARY KEY, audit_id INTEGER,
-        dimension TEXT, severity TEXT, title TEXT, analysis TEXT,
-        status TEXT DEFAULT 'investigating',
-        hypothesis TEXT, falsification TEXT,
-        metric_name TEXT, metric_value_at_detection REAL,
-        root_cause_tag TEXT, linked_finding_id INTEGER,
-        times_seen INTEGER DEFAULT 1, last_seen_audit_id INTEGER,
-        created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now')),
-        resolved_at TEXT, resolution_notes TEXT
-    )""")
-    conn.execute("""CREATE TABLE pi_threshold_calibration (
-        metric_name TEXT PRIMARY KEY, threshold_value REAL NOT NULL,
-        calibrated_at TEXT DEFAULT (datetime('now')),
-        sample_size INTEGER, false_positive_rate REAL,
-        false_negative_rate REAL, prior_threshold REAL,
-        notes TEXT, verification_window_days INTEGER
-    )""")
-
-    # Pedagogical knowledge (v61)
-    conn.execute("""CREATE TABLE pi_pedagogical_knowledge (
-        id TEXT PRIMARY KEY,
-        domain TEXT NOT NULL,
-        finding_text TEXT NOT NULL,
-        source_author TEXT NOT NULL,
-        source_year INTEGER NOT NULL,
-        source_title TEXT NOT NULL,
-        evidence_quality TEXT NOT NULL CHECK (evidence_quality IN (
-            'meta_analysis', 'rct', 'longitudinal',
-            'cross_sectional', 'expert_consensus', 'theoretical'
-        )),
-        applicable_metric TEXT,
-        applicable_dimension TEXT,
-        implied_threshold_low REAL,
-        implied_threshold_high REAL,
-        implied_direction TEXT CHECK (
-            implied_direction IN ('higher_is_better', 'lower_is_better',
-                                  'range_optimal', 'context_dependent', 'unknown')
-        ),
-        applicability_notes TEXT,
-        applicability_confidence REAL,
-        encoded_at TEXT NOT NULL DEFAULT (datetime('now')),
-        encoded_by TEXT NOT NULL DEFAULT 'human',
-        last_reviewed TEXT,
-        superseded_by TEXT REFERENCES pi_pedagogical_knowledge(id),
-        active INTEGER NOT NULL DEFAULT 1
-    )""")
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_pk_domain ON pi_pedagogical_knowledge(domain)"
-    )
-
-    conn.execute("""CREATE TABLE pi_knowledge_conflicts (
-        id TEXT PRIMARY KEY,
-        detected_at TEXT NOT NULL DEFAULT (datetime('now')),
-        knowledge_id TEXT NOT NULL REFERENCES pi_pedagogical_knowledge(id),
-        dimension TEXT NOT NULL,
-        metric_name TEXT NOT NULL,
-        engine_threshold REAL,
-        engine_direction TEXT,
-        engine_confidence REAL,
-        literature_threshold_low REAL,
-        literature_threshold_high REAL,
-        literature_direction TEXT,
-        evidence_quality TEXT,
-        conflict_severity TEXT CHECK (
-            conflict_severity IN ('minor', 'moderate', 'significant', 'critical')
-        ),
-        resolution TEXT CHECK (
-            resolution IN (
-                'engine_defers_to_literature',
-                'literature_noted_engine_proceeds',
-                'human_review_required',
-                'unresolved'
-            )
-        ),
-        resolution_rationale TEXT,
-        resolved_at TEXT,
-        resolved_by TEXT
-    )""")
-
-    conn.execute("""CREATE TABLE pi_benchmark_registry (
-        id TEXT PRIMARY KEY,
-        benchmark_name TEXT NOT NULL UNIQUE,
-        description TEXT NOT NULL,
-        applicable_hsk_range_low INTEGER,
-        applicable_hsk_range_high INTEGER,
-        applicable_study_hours_min INTEGER,
-        applicable_study_hours_max INTEGER,
-        learner_profile TEXT,
-        population_median REAL,
-        population_p25 REAL,
-        population_p75 REAL,
-        population_n INTEGER,
-        aelu_metric_name TEXT,
-        aelu_dimension TEXT,
-        source TEXT NOT NULL,
-        source_year INTEGER,
-        evidence_quality TEXT NOT NULL,
-        encoded_at TEXT NOT NULL DEFAULT (datetime('now')),
-        last_reviewed TEXT,
-        review_interval_days INTEGER DEFAULT 365,
-        active INTEGER NOT NULL DEFAULT 1
-    )""")
-
-    conn.execute("""CREATE TABLE pi_benchmark_comparisons (
-        id TEXT PRIMARY KEY,
-        compared_at TEXT NOT NULL DEFAULT (datetime('now')),
-        benchmark_id TEXT NOT NULL REFERENCES pi_benchmark_registry(id),
-        your_value REAL NOT NULL,
-        population_median REAL NOT NULL,
-        your_percentile REAL,
-        interpretation TEXT NOT NULL,
-        finding_warranted INTEGER NOT NULL,
-        finding_id TEXT
-    )""")
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_bc_benchmark ON pi_benchmark_comparisons(benchmark_id)"
-    )
-
-    conn.execute("""CREATE TABLE pi_goal_coherence_check (
-        id TEXT PRIMARY KEY,
-        checked_at TEXT NOT NULL DEFAULT (datetime('now')),
-        estimated_hsk_level INTEGER NOT NULL,
-        stage_range_low INTEGER NOT NULL,
-        stage_range_high INTEGER NOT NULL,
-        coherent INTEGER NOT NULL,
-        issues_json TEXT,
-        message TEXT NOT NULL,
-        finding_id INTEGER
-    )""")
-
-    conn.commit()
-    return conn
+from tests.shared_db import make_test_db as _make_db
 
 
 def _insert_knowledge(conn, **kwargs):
@@ -274,7 +100,8 @@ class TestKnowledgeConflictDetection(unittest.TestCase):
 
     def test_superseded_entry_excluded(self):
         conn = _make_db()
-        new_id = str(uuid4())
+        # Insert the "new" entry first so the FK on superseded_by is satisfied
+        new_id = _insert_knowledge(conn, applicable_dimension="other_dim")
         _insert_knowledge(conn, applicable_dimension="srs_funnel",
                           superseded_by=new_id)
         _insert_threshold(conn, "srs_funnel", 5.0)
@@ -382,17 +209,30 @@ class TestBenchmarkComparison(unittest.TestCase):
         conn.commit()
         return bm_id
 
+    def _seed_content_items(self, conn, n=10):
+        """Create n content items and return their ids."""
+        ids = []
+        for i in range(n):
+            cid = conn.execute("""
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level)
+                VALUES (?, ?, ?, 1)
+            """, (f"测{i}", f"ce{i}", f"test{i}")).lastrowid
+            ids.append(cid)
+        conn.commit()
+        return ids
+
     def test_below_p25_low_percentile(self):
         conn = _make_db()
         self._seed_benchmark(conn, median=0.775, p25=0.70, p75=0.85)
+        cids = self._seed_content_items(conn)
         # Insert review events to get a measurable session accuracy
         # _measure_current_metric for drill_quality: AVG(correct) * 100
         # To get ~50% accuracy (below p25 of 0.70)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', ?)
-            """, (i + 1, 1 if i < 5 else 0))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', ?)
+            """, (cids[i], 1 if i < 5 else 0))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -403,12 +243,13 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_gap_under_15pct_no_finding(self):
         conn = _make_db()
         self._seed_benchmark(conn, median=0.775, p25=0.70, p75=0.85)
+        cids = self._seed_content_items(conn)
         # Get 70% accuracy (near p25, gap from median < 15%)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', ?)
-            """, (i + 1, 1 if i < 7 else 0))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', ?)
+            """, (cids[i], 1 if i < 7 else 0))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -419,11 +260,12 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_unknown_population_n_shows_note(self):
         conn = _make_db()
         self._seed_benchmark(conn, pop_n=None)
+        cids = self._seed_content_items(conn)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', 1)
-            """, (i + 1,))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', 1)
+            """, (cids[i],))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -434,11 +276,12 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_evidence_quality_in_result(self):
         conn = _make_db()
         self._seed_benchmark(conn)
+        cids = self._seed_content_items(conn)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', 1)
-            """, (i + 1,))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', 1)
+            """, (cids[i],))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -455,8 +298,8 @@ class TestGoalCoherence(unittest.TestCase):
         # Add content to establish HSK level
         for i in range(10):
             conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"字{i}", f"word{i}"))
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"字{i}", f"zi{i}", f"word{i}"))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import check_goal_coherence
@@ -472,17 +315,17 @@ class TestGoalCoherence(unittest.TestCase):
         for level in (1, 2, 3):
             for i in range(10):
                 cid = conn.execute("""
-                    INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, ?)
-                """, (f"字{level}{i}", f"word{level}{i}", level)).lastrowid
+                    INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, ?)
+                """, (f"字{level}{i}", f"zi{level}{i}", f"word{level}{i}", level)).lastrowid
                 conn.execute("""
-                    INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'stable')
+                    INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'stable')
                 """, (cid,))
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 4)
-            """, (f"四{i}", f"four{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 4)
+            """, (f"四{i}", f"si{i}", f"four{i}")).lastrowid
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'learning')
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'learning')
             """, (cid,))
         conn.commit()
 
@@ -504,8 +347,8 @@ class TestGoalCoherence(unittest.TestCase):
         conn = _make_db()
         for i in range(5):
             conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"字{i}", f"w{i}"))
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"字{i}", f"zi{i}", f"w{i}"))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import check_goal_coherence
@@ -621,18 +464,18 @@ class TestHSKEstimation(unittest.TestCase):
         # HSK1: all mastered, HSK2: half mastered
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"一{i}", f"one{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"一{i}", f"yi{i}", f"one{i}")).lastrowid
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'stable')
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'stable')
             """, (cid,))
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 2)
-            """, (f"二{i}", f"two{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 2)
+            """, (f"二{i}", f"er{i}", f"two{i}")).lastrowid
             stage = "stable" if i < 3 else "learning"
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, ?)
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', ?)
             """, (cid, stage))
         conn.commit()
 

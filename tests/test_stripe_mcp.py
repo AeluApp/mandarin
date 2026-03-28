@@ -1,27 +1,25 @@
 """Tests for Stripe MCP integration module."""
 
 import json
-import sqlite3
 import unittest
 from unittest.mock import patch, MagicMock
 
 
+from tests.shared_db import make_test_db
+
+
 def _make_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            subscription_tier TEXT DEFAULT 'free',
-            stripe_customer_id TEXT,
-            subscription_status TEXT,
-            subscription_end_date TEXT
-        );
-        INSERT INTO user (id, email, display_name, subscription_tier, stripe_customer_id, subscription_status)
-        VALUES (1, 'test@aelu.app', 'Test User', 'pro', 'cus_test123', 'active');
-        INSERT INTO user (id, email, display_name, subscription_tier)
-        VALUES (2, 'free@aelu.app', 'Free User', 'free');
-    """)
+    conn = make_test_db()
+    # Update user 1 for stripe tests and add user 2
+    conn.execute(
+        "UPDATE user SET display_name='Test User', subscription_tier='pro', "
+        "stripe_customer_id='cus_test123', subscription_status='active' WHERE id=1"
+    )
+    conn.execute(
+        "INSERT OR IGNORE INTO user (id, email, password_hash, display_name, subscription_tier) "
+        "VALUES (2, 'free@aelu.app', 'test_hash', 'Free User', 'free')"
+    )
+    conn.commit()
     return conn
 
 

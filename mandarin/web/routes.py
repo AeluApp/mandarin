@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 # Routes that don't require authentication
-_PUBLIC_PREFIXES = ("/auth/", "/api/health", "/api/health/live", "/api/health/ready", "/api/webhook/", "/api/auth/token", "/api/error-report", "/api/client-events", "/api/openclaw/", "/api/widget/data", "/api/study-lists/shared/", "/static/", "/lti/", "/robots.txt", "/sitemap.xml")
+_PUBLIC_PREFIXES = ("/auth/", "/api/health", "/api/health/live", "/api/health/ready", "/api/webhook/", "/api/webhooks/", "/api/auth/token", "/api/error-report", "/api/client-events", "/api/openclaw/", "/api/widget/data", "/api/study-lists/shared/", "/static/", "/lti/", "/robots.txt", "/sitemap.xml")
 
 # Landing-page paths served to unauthenticated visitors
 _LANDING_DIR = str(Path(__file__).resolve().parent.parent.parent / "marketing" / "landing")
@@ -170,6 +170,18 @@ def register_routes(app):
                 idx = min(7, max(0, round(pct / 100 * 7)))
                 accuracy_sparkline += spark_chars[idx]
 
+            # Trial and referral info for dashboard
+            from ..tier_gate import is_trial_active, get_trial_days_remaining
+            trial_active = is_trial_active(conn, user_id)
+            trial_days_remaining = get_trial_days_remaining(conn, user_id) if trial_active else 0
+            user_tier = current_user.subscription_tier or "free"
+
+            # Get referral code for share button
+            ref_row = conn.execute(
+                "SELECT referral_code FROM user WHERE id = ?", (user_id,)
+            ).fetchone()
+            referral_code = ref_row["referral_code"] if ref_row and ref_row["referral_code"] else ""
+
             return render_template("index.html",
                                    profile=profile,
                                    item_count=item_count,
@@ -181,7 +193,11 @@ def register_routes(app):
                                    streak_days=streak_days,
                                    accuracy_trend=accuracy_trend,
                                    accuracy_sparkline=accuracy_sparkline,
-                                   stage_labels=STAGE_LABELS)
+                                   stage_labels=STAGE_LABELS,
+                                   trial_active=trial_active,
+                                   trial_days_remaining=trial_days_remaining,
+                                   user_tier=user_tier,
+                                   referral_code=referral_code)
 
     # ── SRE Health Endpoints ──────────────────────────────────────────
 

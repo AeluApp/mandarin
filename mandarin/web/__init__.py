@@ -526,6 +526,11 @@ def create_app(testing=False):
     csrf.exempt(gap_bp)
     app.register_blueprint(gap_bp)
 
+    # ── Self-healing webhook routes (Sentry, UptimeRobot) ──────────
+    from .webhook_routes import webhook_bp
+    csrf.exempt(webhook_bp)
+    app.register_blueprint(webhook_bp)
+
     # CSRF protection for JSON API routes: require X-Requested-With header
     # instead of CSRF tokens. This header triggers CORS preflight, preventing
     # cross-origin POST attacks from simple forms. (Zero Trust: verify every request)
@@ -617,41 +622,48 @@ def create_app(testing=False):
 
     # ── Background schedulers (all with DB-backed multi-instance locks) ──
     if not app.config.get("TESTING"):
-        from .stale_session_scheduler import start as _start_stale_cleanup
-        _start_stale_cleanup()
+        from . import scheduler_health
+        from . import (
+            stale_session_scheduler,
+            retention_scheduler,
+            email_scheduler,
+            security_scan_scheduler,
+            quality_scheduler,
+            ai_feedback_scheduler,
+            crawl_scheduler,
+            interference_scheduler,
+            experiment_daemon,
+            openclaw_scheduler,
+            counter_metrics_scheduler,
+            marketing_scheduler,
+        )
 
-        from .retention_scheduler import start as _start_retention
-        _start_retention()
+        _scheduler_modules = [
+            ("stale-session-cleanup", stale_session_scheduler),
+            ("retention-purge", retention_scheduler),
+            ("email-scheduler", email_scheduler),
+            ("security-scan", security_scan_scheduler),
+            ("quality-scheduler", quality_scheduler),
+            ("ai-feedback", ai_feedback_scheduler),
+            ("crawl-scheduler", crawl_scheduler),
+            ("interference-scheduler", interference_scheduler),
+            ("experiment-daemon", experiment_daemon),
+            ("openclaw-scheduler", openclaw_scheduler),
+            ("counter-metrics", counter_metrics_scheduler),
+            ("marketing-scheduler", marketing_scheduler),
+        ]
 
-        from .email_scheduler import start as _start_email_scheduler
-        _start_email_scheduler()
+        for _name, _module in _scheduler_modules:
+            try:
+                _module.start()
+                _thread = getattr(_module, "_thread", None)
+                if _thread is not None:
+                    scheduler_health.register(_name, _thread, _module.start)
+            except Exception:
+                logger.exception("Failed to start scheduler '%s'", _name)
 
-        from .security_scan_scheduler import start as _start_security_scan
-        _start_security_scan()
-
-        from .quality_scheduler import start as _start_quality
-        _start_quality()
-
-        from .ai_feedback_scheduler import start as _start_ai_feedback
-        _start_ai_feedback()
-
-        from .crawl_scheduler import start as _start_crawl
-        _start_crawl()
-
-        from .interference_scheduler import start as _start_interference
-        _start_interference()
-
-        from .experiment_daemon import start as _start_experiment_daemon
-        _start_experiment_daemon()
-
-        from .openclaw_scheduler import start as _start_openclaw
-        _start_openclaw()
-
-        from .counter_metrics_scheduler import start as _start_counter_metrics
-        _start_counter_metrics()
-
-        from .marketing_scheduler import start as _start_marketing
-        _start_marketing()
+        # Start the scheduler health monitor (checks every 5 minutes)
+        scheduler_health.start_monitor()
 
         # Log LLM health at startup
         try:
@@ -663,6 +675,19 @@ def create_app(testing=False):
                 logger.warning("LLM unavailable at startup — check API keys and Ollama")
         except Exception:
             pass
+
+    # ── Ensure ADMIN_EMAIL user has is_admin flag ──────────
+    try:
+        from ..settings import ADMIN_EMAIL
+        if ADMIN_EMAIL:
+            with db.connection() as _conn:
+                _conn.execute(
+                    "UPDATE user SET is_admin = 1 WHERE email = ? AND (is_admin IS NULL OR is_admin = 0)",
+                    (ADMIN_EMAIL,),
+                )
+                _conn.commit()
+    except Exception:
+        pass
 
     return app
 

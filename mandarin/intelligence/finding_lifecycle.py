@@ -637,8 +637,7 @@ def estimate_false_negatives(conn, lookback_days: int = 30) -> dict:
         ("spc_violation", """
             SELECT id, chart_type as signal_id, 'engineering' as dimension
             FROM spc_observation
-            WHERE rule_violated IS NOT NULL
-              AND observed_at >= datetime('now', ? || ' days')
+            WHERE observed_at >= datetime('now', ? || ' days')
         """),
         ("crash_spike", """
             SELECT MIN(id) as id, traceback_hash as signal_id, 'engineering' as dimension
