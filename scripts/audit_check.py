@@ -721,11 +721,23 @@ ALL_CHECKS = [
 def main() -> int:
     results: list[dict] = []
     for check_fn in ALL_CHECKS:
-        result = check_fn()
+        try:
+            result = check_fn()
+        except Exception as exc:
+            result = {
+                "id": getattr(check_fn, "__name__", "unknown"),
+                "name": getattr(check_fn, "__name__", "unknown"),
+                "status": "FAIL",
+                "details": f"Check raised {type(exc).__name__}: {exc}",
+            }
+        # Ensure all results have a status key
+        if "status" not in result:
+            result["status"] = "FAIL"
+            result.setdefault("details", "Check returned no status")
         results.append(result)
 
-    passed = sum(1 for r in results if r["status"] == "PASS")
-    failed = sum(1 for r in results if r["status"] == "FAIL")
+    passed = sum(1 for r in results if r.get("status") == "PASS")
+    failed = sum(1 for r in results if r.get("status") == "FAIL")
     total = len(results)
 
     report = {
@@ -741,9 +753,9 @@ def main() -> int:
     print("  AUDIT CHECK RESULTS")
     print("=" * 60)
     for r in results:
-        icon = "OK" if r["status"] == "PASS" else "!!"
-        print(f"  [{icon}] {r['id']}: {r['name']}")
-        print(f"       {r['details']}")
+        icon = "OK" if r.get("status") == "PASS" else "!!"
+        print(f"  [{icon}] {r.get('id', '?')}: {r.get('name', '?')}")
+        print(f"       {r.get('details', 'no details')}")
     print("-" * 60)
     print(f"  TOTAL: {total}  PASSED: {passed}  FAILED: {failed}")
     if failed > 0:

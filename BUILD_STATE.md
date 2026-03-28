@@ -5,7 +5,7 @@
 **Date:** 2026-03-15
 **Content library:** HSK 1-9 canonical word lists (10,000+ items via `add-hsk`), context notes, 134 auto-tagged, 30 dialogue scenarios
 **Grammar/skills:** 26 grammar points (HSK 1-3), 14 language skills seeded
-**Schema:** V121 (84 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure, experiment proposals, graduated rollouts, openclaw scheduler)
+**Schema:** V121 (86 tables, 6-stage mastery lifecycle, observability, security audit, MFA challenge, grade appeal, activation tracking, security scans, quality infrastructure, experiment proposals, graduated rollouts, openclaw scheduler)
 **Tests:** 4061 passed, 2 skipped, 0 failed across 213 suites (~5m08s runtime)
 **Skips:** 2 E2E (Playwright not installed — requires browser binary, runs in separate CI job)
 **Warnings:** 48 (InsecureKeyLengthWarning from test JWT secrets — cosmetic, not blocking)
@@ -280,7 +280,7 @@
 
 ---
 
-## Schema (84 tables, V121)
+## Schema (86 tables, V121)
 
 | Table | Purpose |
 |---|---|
@@ -417,7 +417,7 @@ mandarin/
     └── templates/index.html
 mobile/                  # Capacitor shell (iOS/Android)
 run                      # Bash launcher (./run, ./run menu, ./run app, ./run help)
-schema.sql               # Full schema (84 tables, V121)
+schema.sql               # Full schema (86 tables, V121)
 learner_profile.json     # Persona configuration
 tests/                       # 4061 tests across 213 suites
 data/
