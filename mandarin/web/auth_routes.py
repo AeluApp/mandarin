@@ -73,6 +73,14 @@ class User:
         return self._data.get("price_variant")
 
     @property
+    def trial_ends_at(self):
+        return self._data.get("trial_ends_at")
+
+    @property
+    def referral_code(self):
+        return self._data.get("referral_code")
+
+    @property
     def is_authenticated(self):
         return True
 
@@ -186,13 +194,16 @@ def register():
         invite_code = (request.form.get("invite_code") or "").strip()
         promo_code = (request.form.get("promo_code") or "").strip()
 
+        # Preserve referral code across form resubmissions
+        ref_code_form = (request.args.get("ref") or request.form.get("ref") or "").strip()
+
         if not email or not password:
             flash("Email and password are required.", "error")
-            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
+            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code, ref_code=ref_code_form)
 
         if password != confirm:
             flash("Passwords do not match.", "error")
-            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
+            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code, ref_code=ref_code_form)
 
         # Check feature flag for invite code requirement
         invite_required = False
@@ -208,18 +219,35 @@ def register():
 
         if invite_required and not invite_code:
             flash("An invite code is required.", "error")
-            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
+            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code, ref_code=ref_code_form)
 
         # Teacher registration via ?role=teacher
         role = request.args.get("role", "student")
         if role not in ("student", "teacher"):
             role = "student"
 
+        # Referral code from ?ref= query param or hidden form field
+        ref_code = (request.args.get("ref") or request.form.get("ref") or "").strip()
+
         try:
             with db.connection() as conn:
+                # Resolve referral code to referrer user ID
+                referred_by_user_id = None
+                if ref_code:
+                    try:
+                        ref_row = conn.execute(
+                            "SELECT id FROM user WHERE referral_code = ?",
+                            (ref_code,)
+                        ).fetchone()
+                        if ref_row:
+                            referred_by_user_id = ref_row["id"]
+                    except Exception:
+                        pass
+
                 user_dict = create_user(conn, email, password, display_name,
                                         invite_code=invite_code if invite_code else None,
-                                        role=role)
+                                        role=role,
+                                        referred_by_user_id=referred_by_user_id)
                 # Promo code: 加油 grants full paid access
                 if promo_code == "加油":
                     try:
@@ -280,15 +308,16 @@ def register():
                 return redirect(url_for("index"))
         except ValueError as e:
             flash(str(e), "error")
-            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
+            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code, ref_code=ref_code)
         except (OSError, TypeError) as e:
             logger.error("Register error: %s", e)
             flash("An error occurred. Please try again.", "error")
-            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code)
+            return render_template("register.html", email=email, display_name=display_name, invite_code=invite_code, ref_code=ref_code)
 
     role = request.args.get("role", "student")
+    ref = request.args.get("ref", "")
     return render_template("register.html", email="", display_name="", invite_code="",
-                           teacher_mode=(role == "teacher"))
+                           teacher_mode=(role == "teacher"), ref_code=ref)
 
 
 @auth_bp.route("/mfa-verify", methods=["GET", "POST"])

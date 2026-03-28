@@ -898,3 +898,285 @@ def get_recent_actions(conn: sqlite3.Connection, limit: int = 20) -> list:
         ORDER BY created_at DESC
         LIMIT ?
     """, (limit,)) or []
+
+
+# ── Full self-healing loop ────────────────────────────────────────────────
+
+def run_self_healing_loop(conn: sqlite3.Connection, include_tests: bool = False) -> dict:
+    """Run the complete self-healing loop: ingest, classify, fix, review.
+
+    This is the top-level orchestrator that combines:
+    1. Infrastructure health check (existing SelfHealingEngine)
+    2. Alert ingestion from all sources (Sentry, UptimeRobot, GitHub, etc.)
+    3. Alert classification and auto-fixing
+    4. Human review queue for non-fixable issues
+    5. Existing auto_executor for LLM-based code fixes
+
+    Args:
+        conn: SQLite database connection.
+        include_tests: If True, also run pytest and include test failures.
+
+    Returns a summary dict with results from all phases.
+    """
+    from .alert_ingestion import ingest_all_alerts, ingest_test_results
+    from .auto_fixer import run_auto_fixes
+
+    results = {
+        "timestamp": datetime.now(UTC).isoformat(),
+        "phases": {},
+        "total_issues": 0,
+        "total_actions": 0,
+        "errors": [],
+    }
+
+    # ── Phase 1: Infrastructure health check ──────────────────────────
+    try:
+        health_result = run_health_check(conn)
+        results["phases"]["health_check"] = {
+            "issues_found": len(health_result.get("issues_found", [])),
+            "actions_taken": len(health_result.get("actions_taken", [])),
+            "metrics": health_result.get("metrics", {}),
+        }
+        results["total_issues"] += len(health_result.get("issues_found", []))
+        results["total_actions"] += len(health_result.get("actions_taken", []))
+    except Exception as exc:
+        logger.exception("Self-healing loop: health check failed: %s", exc)
+        results["errors"].append(f"health_check: {exc}")
+        results["phases"]["health_check"] = {"error": str(exc)}
+
+    # ── Phase 2: Alert ingestion ──────────────────────────────────────
+    try:
+        alerts = ingest_all_alerts(conn)
+
+        # Optionally include test results
+        if include_tests:
+            try:
+                test_alerts = ingest_test_results()
+                alerts.extend(test_alerts)
+            except Exception as exc:
+                logger.warning("Self-healing loop: test ingestion failed: %s", exc)
+                results["errors"].append(f"test_ingestion: {exc}")
+
+        results["phases"]["ingestion"] = {
+            "total_alerts": len(alerts),
+            "by_source": _count_by_key(alerts, "source"),
+            "by_severity": _count_by_key(alerts, "severity"),
+        }
+        results["total_issues"] += len(alerts)
+    except Exception as exc:
+        logger.exception("Self-healing loop: alert ingestion failed: %s", exc)
+        results["errors"].append(f"ingestion: {exc}")
+        results["phases"]["ingestion"] = {"error": str(exc)}
+        alerts = []
+
+    # ── Phase 3: Classify and auto-fix ────────────────────────────────
+    if alerts:
+        try:
+            fix_result = run_auto_fixes(conn, alerts)
+            results["phases"]["auto_fix"] = {
+                "total_classified": fix_result.get("total_alerts", 0),
+                "auto_fixable": fix_result.get("auto_fixable", 0),
+                "fixed": fix_result.get("fixed", 0),
+                "failed": fix_result.get("failed", 0),
+                "human_review_queued": fix_result.get("human_review_queued", 0),
+            }
+            results["total_actions"] += fix_result.get("fixed", 0)
+        except Exception as exc:
+            logger.exception("Self-healing loop: auto-fix failed: %s", exc)
+            results["errors"].append(f"auto_fix: {exc}")
+            results["phases"]["auto_fix"] = {"error": str(exc)}
+
+    # ── Phase 4: Run existing auto_executor for LLM-based fixes ───────
+    try:
+        from .auto_executor import execute_auto_fixes, EXECUTOR_ENABLED
+        if EXECUTOR_ENABLED:
+            executor_results = execute_auto_fixes(conn)
+            applied = sum(1 for r in executor_results if r.get("status") == "applied")
+            results["phases"]["auto_executor"] = {
+                "processed": len(executor_results),
+                "applied": applied,
+            }
+            results["total_actions"] += applied
+        else:
+            results["phases"]["auto_executor"] = {"status": "disabled"}
+    except Exception as exc:
+        logger.debug("Self-healing loop: auto_executor failed: %s", exc)
+        results["phases"]["auto_executor"] = {"error": str(exc)}
+
+    # ── Summary logging ───────────────────────────────────────────────
+    logger.info(
+        "Self-healing loop complete: %d issues found, %d actions taken, %d errors",
+        results["total_issues"], results["total_actions"], len(results["errors"]),
+    )
+
+    # Log the loop execution
+    try:
+        _ensure_tables(conn)
+        conn.execute("""
+            INSERT INTO self_healing_log
+                (action_type, issue_detected, action_taken, details, success)
+            VALUES ('self_healing_loop', ?, ?, ?, ?)
+        """, (
+            f"{results['total_issues']} issues found",
+            f"{results['total_actions']} actions taken",
+            json.dumps(results, default=str),
+            1 if not results["errors"] else 0,
+        ))
+        conn.commit()
+    except (sqlite3.OperationalError, sqlite3.Error) as exc:
+        logger.debug("Self-healing loop: failed to log execution: %s", exc)
+
+    # Send notification if actions were taken
+    if results["total_actions"] > 0:
+        _engine._notify_admin(
+            "self_healing_loop",
+            f"{results['total_issues']} issues found",
+            f"{results['total_actions']} actions taken",
+            results["phases"],
+            success=not results["errors"],
+        )
+
+    return results
+
+
+def _count_by_key(items: list[dict], key: str) -> dict:
+    """Count items by a key value."""
+    counts = {}
+    for item in items:
+        value = item.get(key, "unknown")
+        counts[value] = counts.get(value, 0) + 1
+    return counts
+
+
+# ── Webhook trigger ──────────────────────────────────────────────────────
+
+def run_self_healing_for_webhook(conn: sqlite3.Connection, source: str, payload: dict) -> dict:
+    """Run a targeted self-healing check triggered by a webhook.
+
+    Instead of running the full loop, this processes a single alert
+    from an external webhook (Sentry, UptimeRobot, etc.).
+
+    Args:
+        conn: SQLite database connection.
+        source: The alert source ("sentry", "uptime").
+        payload: The raw webhook payload.
+
+    Returns a summary dict.
+    """
+    from .auto_fixer import classify_alert, apply_fix, log_fix, queue_human_review
+
+    alert = _webhook_payload_to_alert(source, payload)
+    if not alert:
+        return {"status": "ignored", "reason": "Could not parse webhook payload"}
+
+    classification = classify_alert(alert)
+
+    result = {
+        "alert": alert["title"],
+        "source": source,
+        "classification": classification,
+        "action_taken": None,
+    }
+
+    if classification["auto_fixable"]:
+        fix_result = apply_fix(alert, classification["fix_strategy"])
+        result["action_taken"] = fix_result
+        log_fix(conn, alert, classification, fix_result)
+    else:
+        queue_human_review(conn, alert, classification)
+        result["action_taken"] = "queued_for_human_review"
+        log_fix(conn, alert, classification)
+
+    logger.info(
+        "Self-healing webhook [%s]: '%s' -> %s",
+        source, alert["title"][:80],
+        "auto-fixed" if classification["auto_fixable"] else "queued for review",
+    )
+
+    return result
+
+
+def _webhook_payload_to_alert(source: str, payload: dict) -> dict | None:
+    """Convert a raw webhook payload into a standardized alert dict."""
+    from .alert_ingestion import _alert
+
+    if source == "sentry":
+        # Sentry webhook payload format
+        # https://docs.sentry.io/product/integrations/integration-platform/webhooks/
+        event = payload.get("event", payload.get("data", {}).get("event", {}))
+        if not event and "data" in payload:
+            # Try the issue format
+            issue = payload.get("data", {}).get("issue", {})
+            if issue:
+                return _alert(
+                    source="sentry",
+                    external_id=f"sentry:webhook:{issue.get('id', '')}",
+                    title=f"Sentry: {issue.get('title', 'Unknown error')[:150]}",
+                    description=json.dumps(issue, default=str)[:2000],
+                    severity=_map_sentry_level(issue.get("level", "error")),
+                    category="code",
+                    raw_data=payload,
+                )
+
+        if not event:
+            return None
+
+        title = event.get("title", event.get("message", "Unknown error"))
+        level = event.get("level", "error")
+
+        return _alert(
+            source="sentry",
+            external_id=f"sentry:webhook:{event.get('event_id', '')}",
+            title=f"Sentry: {title[:150]}",
+            description=json.dumps(event, default=str)[:2000],
+            severity=_map_sentry_level(level),
+            category="code",
+            raw_data=payload,
+        )
+
+    elif source == "uptime":
+        # UptimeRobot webhook payload
+        # https://uptimerobot.com/api/
+        monitor_url = payload.get("monitorURL", "")
+        monitor_name = payload.get("monitorFriendlyName", monitor_url)
+        alert_type = payload.get("alertType", 0)
+
+        # alertType: 1 = down, 2 = up
+        if alert_type == 2:
+            # Monitor recovered — no action needed
+            return None
+
+        return _alert(
+            source="uptime",
+            external_id=f"uptime:webhook:{payload.get('monitorID', '')}",
+            title=f"Monitor DOWN: {monitor_name}",
+            description=(
+                f"Monitor '{monitor_name}' is down.\n"
+                f"URL: {monitor_url}\n"
+                f"Alert details: {payload.get('alertDetails', 'N/A')}"
+            ),
+            severity="critical",
+            category="infrastructure",
+            raw_data=payload,
+        )
+
+    return None
+
+
+def _map_sentry_level(level: str) -> str:
+    """Map Sentry event level to our severity scale."""
+    _MAP = {
+        "fatal": "critical",
+        "error": "high",
+        "warning": "medium",
+        "info": "low",
+        "debug": "low",
+    }
+    return _MAP.get(level, "medium")
+
+
+# ── CLI entry point ──────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    from .__main__ import main
+    main()

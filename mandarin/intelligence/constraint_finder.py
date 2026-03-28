@@ -86,8 +86,8 @@ def _check_pedagogical_safety(conn) -> dict | None:
     rejected = _safe_scalar(conn, """
         SELECT COUNT(*) FROM pi_ai_review_queue
         WHERE review_decision = 'rejected'
-        AND category = 'accuracy'
-        AND created_at >= datetime('now', '-30 days')
+        AND content_type = 'accuracy'
+        AND queued_at >= datetime('now', '-30 days')
     """, default=0)
 
     if rejected and rejected > 0:
@@ -172,13 +172,13 @@ def _get_content_quality_constraint(conn) -> dict | None:
     total_reviews = _safe_scalar(conn, """
         SELECT COUNT(*) FROM pi_ai_review_queue
         WHERE review_decision IS NOT NULL
-        AND created_at >= datetime('now', '-30 days')
+        AND queued_at >= datetime('now', '-30 days')
     """, default=0)
 
     rejected = _safe_scalar(conn, """
         SELECT COUNT(*) FROM pi_ai_review_queue
         WHERE review_decision = 'rejected'
-        AND created_at >= datetime('now', '-30 days')
+        AND queued_at >= datetime('now', '-30 days')
     """, default=0)
 
     if total_reviews and total_reviews >= 5:
@@ -199,23 +199,22 @@ def _get_content_quality_constraint(conn) -> dict | None:
 def _get_ai_portfolio_verdict(conn) -> dict | None:
     """Check latest AI portfolio assessment for degraded/critical status."""
     latest = _safe_query(conn, """
-        SELECT overall_verdict, assessed_at, component_count, healthy_count
+        SELECT net_verdict, assessed_at,
+               component_verdicts_json, dimension_scores_json
         FROM pi_ai_portfolio_assessments
         ORDER BY assessed_at DESC LIMIT 1
     """)
 
     if latest:
-        verdict = latest["overall_verdict"] if latest["overall_verdict"] else None
-        if verdict in ("degraded", "critical"):
-            healthy = latest["healthy_count"] or 0
-            total = latest["component_count"] or 0
+        verdict = latest["net_verdict"] if latest["net_verdict"] else None
+        if verdict in ("net_negative", "mixed"):
+            severity = "critical" if verdict == "net_negative" else "high"
             return {
                 "constraint": f"ai_portfolio_{verdict}",
                 "domain": "ai_health",
-                "severity": "critical" if verdict == "critical" else "high",
-                "description": f"AI portfolio verdict is '{verdict}'. "
-                              f"Only {healthy}/{total} components healthy.",
-                "metric_value": healthy,
+                "severity": severity,
+                "description": f"AI portfolio verdict is '{verdict}'.",
+                "metric_value": verdict,
             }
     return None
 

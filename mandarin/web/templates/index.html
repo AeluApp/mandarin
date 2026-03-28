@@ -147,13 +147,37 @@
 
     <!-- Dashboard (visible before session starts) -->
     <section id="dashboard" aria-label="Dashboard">
+      <!-- Trial countdown banner -->
+      {% if trial_active|default(false) and user_tier|default('free') == 'free' %}
+      <div class="trial-banner" role="status" aria-live="polite" style="padding:0.75rem 1.25rem;margin-bottom:var(--space-4);background:var(--color-surface-alt,#EAE2D6);border-left:3px solid var(--color-accent,#946070);font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text,#2A3650);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+        <span>
+          <strong>{{ trial_days_remaining|default(0) }} day{{ 's' if trial_days_remaining|default(0) != 1 else '' }}</strong> remaining in your free trial.
+          All features are unlocked.
+        </span>
+        <a href="/pricing" style="color:var(--color-accent,#946070);font-weight:600;text-decoration:none;white-space:nowrap;">View plans</a>
+      </div>
+      {% endif %}
+
+      <!-- Share Aelu / referral button -->
+      {% if referral_code|default('') %}
+      <div class="share-aelu" style="margin-bottom:var(--space-4);text-align:right;">
+        <button id="btn-share-aelu" class="btn-secondary" type="button"
+                data-ref-code="{{ referral_code }}"
+                aria-label="Copy referral link to share Aelu"
+                style="font-size:var(--text-sm);padding:0.4rem 1rem;">
+          Share Aelu
+        </button>
+        <span id="share-copied-msg" style="display:none;font-family:var(--font-body);font-size:var(--text-xs);color:var(--color-correct,#5A7A5A);margin-left:0.5rem;">Link copied</span>
+      </div>
+      {% endif %}
+
       <!-- Dashboard hero — shown for new or returning users, dismissible -->
       {% if profile.total_sessions < 5 %}
       <div class="dashboard-hero" id="dashboard-hero">
         <img src="/static/illustrations/dashboard-hero.webp"
              data-dark-src="/static/illustrations/dashboard-hero-dark.webp"
              data-light-src="/static/illustrations/dashboard-hero.webp"
-             alt="" class="dashboard-hero-img themed-img" aria-hidden="true">
+             alt="" class="dashboard-hero-img themed-img" aria-hidden="true" loading="lazy">
         <button class="dashboard-hero-dismiss" id="dashboard-hero-dismiss" aria-label="Dismiss" title="Dismiss">&times;</button>
       </div>
       {% endif %}
@@ -619,7 +643,7 @@
         <div id="feedback-comment-area" class="feedback-comment-area hidden">
           <label for="feedback-comment" class="feedback-comment-label">Any thoughts? (optional)</label>
           <textarea id="feedback-comment" class="feedback-comment-input" rows="2" maxlength="1000"></textarea>
-          <button id="feedback-submit-btn" class="btn-primary feedback-submit-btn">Submit</button>
+          <button id="feedback-submit-btn" class="btn-primary feedback-submit-btn">Send feedback</button>
         </div>
         <div id="feedback-thanks" class="feedback-thanks hidden">Thank you.</div>
         <button id="feedback-close" class="feedback-close" aria-label="Close feedback"><svg class="icon"><use href="#icon-close"/></svg></button>
@@ -809,8 +833,13 @@
       </div>
       <div id="conversation-scenarios" class="conversation-scenarios"></div>
       <div id="conversation-active" class="conversation-active hidden">
+        <div id="conversation-difficulty-badge" class="conversation-difficulty-badge" style="display:none;"></div>
         <div id="conversation-situation" class="conversation-situation"></div>
         <div id="conversation-messages" class="conversation-messages"></div>
+        <div class="conversation-scaffold-bar" id="conversation-scaffold-bar">
+          <button id="conversation-hint" class="btn-secondary btn-scaffold" aria-label="Get a hint">Hint</button>
+          <button id="conversation-simplify" class="btn-secondary btn-scaffold" aria-label="Simplify last message">Simplify</button>
+        </div>
         <div class="conversation-input-area">
           <textarea id="conversation-input" class="conversation-input" rows="2" placeholder="Type your response in Chinese..." aria-label="Your response"></textarea>
           <button id="conversation-send" class="btn-primary">Send</button>
@@ -970,6 +999,32 @@
   <script src="/static/offline-queue.js?v={{ static_hash('offline-queue.js') }}" defer></script>
   <script src="/static/capacitor-bridge.js?v={{ static_hash('capacitor-bridge.js') }}" defer></script>
   <script src="/static/app.js?v={{ static_hash('app.js') }}" defer></script>
+  <!-- Share Aelu button — copy referral link to clipboard -->
+  <script nonce="{{ csp_nonce }}">
+    (function() {
+      var btn = document.getElementById('btn-share-aelu');
+      if (!btn) return;
+      btn.addEventListener('click', function() {
+        var code = btn.getAttribute('data-ref-code');
+        var link = location.origin + '/auth/register?ref=' + encodeURIComponent(code);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(link).then(function() {
+            var msg = document.getElementById('share-copied-msg');
+            if (msg) { msg.style.display = 'inline'; setTimeout(function() { msg.style.display = 'none'; }, 2000); }
+          });
+        } else {
+          /* Fallback for older browsers */
+          var ta = document.createElement('textarea');
+          ta.value = link; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch(e) {}
+          document.body.removeChild(ta);
+          var msg = document.getElementById('share-copied-msg');
+          if (msg) { msg.style.display = 'inline'; setTimeout(function() { msg.style.display = 'none'; }, 2000); }
+        }
+      });
+    })();
+  </script>
   <!-- Global gloss tooltip — outside all sections so it works from any view -->
   <div id="global-gloss" class="reading-gloss hidden" role="tooltip"></div>
 

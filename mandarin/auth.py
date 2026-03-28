@@ -101,7 +101,7 @@ def _save_password_history(conn: sqlite3.Connection, user_id: int,
 
 def create_user(conn: sqlite3.Connection, email: str, password: str,
                 display_name: str = "", invite_code: str = None,
-                role: str = "student") -> dict:
+                role: str = "student", referred_by_user_id: int = None) -> dict:
     """Create a new user + learner_profile row.
 
     Returns the user dict on success.
@@ -157,12 +157,21 @@ def create_user(conn: sqlite3.Connection, email: str, password: str,
     if role not in ("student", "teacher"):
         role = "student"
 
+    # Free trial: 7 days from now
+    trial_ends_at = (datetime.now(UTC) + timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+
+    # Unique referral code (8-char URL-safe)
+    referral_code = secrets.token_urlsafe(6)[:8]
+
     try:
         cursor = conn.execute(
             """INSERT INTO user (email, password_hash, display_name, invited_by,
-                                 email_verify_token, email_verify_expires, role, created_at, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (email, password_hash, display_name, invited_by, verify_token, verify_expires, role, now, now)
+                                 email_verify_token, email_verify_expires, role,
+                                 trial_ends_at, referral_code, referred_by,
+                                 created_at, updated_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (email, password_hash, display_name, invited_by, verify_token, verify_expires, role,
+             trial_ends_at, referral_code, referred_by_user_id, now, now)
         )
         user_id = cursor.lastrowid
 
@@ -280,7 +289,9 @@ def authenticate(conn: sqlite3.Connection, email: str, password: str) -> dict | 
 def get_user_by_id(conn: sqlite3.Connection, user_id: int) -> dict | None:
     """Load a user by ID. Returns dict or None."""
     row = conn.execute(
-        "SELECT id, email, display_name, subscription_tier, is_active, is_admin, role FROM user WHERE id = ?",
+        """SELECT id, email, display_name, subscription_tier, is_active, is_admin, role,
+                  trial_ends_at, referral_code
+           FROM user WHERE id = ?""",
         (user_id,)
     ).fetchone()
 
@@ -294,6 +305,8 @@ def get_user_by_id(conn: sqlite3.Connection, user_id: int) -> dict | None:
         "subscription_tier": row["subscription_tier"],
         "is_admin": bool(row["is_admin"]) if row["is_admin"] is not None else False,
         "role": row["role"] or "student",
+        "trial_ends_at": row["trial_ends_at"],
+        "referral_code": row["referral_code"],
     }
 
 

@@ -7,6 +7,16 @@ from datetime import date, timedelta
 from tests.shared_db import make_test_db as _make_db
 
 
+def _ensure_content_items(conn, *ids):
+    """Insert stub content_item rows for FK satisfaction."""
+    for cid in ids:
+        conn.execute(
+            "INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, item_type) "
+            "VALUES (?, 'test', 'test', 'test', 'vocab')",
+            (cid,),
+        )
+
+
 class TestSeedComponentRegistry(unittest.TestCase):
     """Tests for component registry seeding."""
 
@@ -43,10 +53,13 @@ class TestFerpaAccess(unittest.TestCase):
         """4. Teacher access to own student is permitted."""
         from mandarin.intelligence.governance import check_ferpa_access
         conn = _make_db()
-        conn.execute("INSERT INTO cohorts (id, teacher_id, name) VALUES (1, 'teacher1', 'Class A')")
-        conn.execute("INSERT INTO cohort_members (cohort_id, user_id, active) VALUES (1, 'student1', 1)")
+        # Create teacher and student users (teacher_id and user_id are INTEGER FKs)
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at, onboarding_complete) VALUES (100, 'teacher1@test.com', 'hash', datetime('now'), 0)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at, onboarding_complete) VALUES (101, 'student1@test.com', 'hash', datetime('now'), 0)")
+        conn.execute("INSERT INTO cohorts (id, teacher_id, name) VALUES (1, 100, 'Class A')")
+        conn.execute("INSERT INTO cohort_members (cohort_id, user_id, active) VALUES (1, 101, 1)")
         conn.commit()
-        result = check_ferpa_access(conn, 'teacher1', 'student1', 'review_event')
+        result = check_ferpa_access(conn, 100, 101, 'review_event')
         self.assertTrue(result['permitted'])
         self.assertEqual(result['basis'], 'legitimate_educational_interest')
 
@@ -75,8 +88,9 @@ class TestDeletionRequest(unittest.TestCase):
         """7. handle_deletion_request clears records from tables."""
         from mandarin.intelligence.governance import handle_deletion_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 2, 0)")
+        _ensure_content_items(conn, 1, 2)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 2, 0, 'read')")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
         conn.commit()
         result = handle_deletion_request(conn, '1')
@@ -87,8 +101,9 @@ class TestDeletionRequest(unittest.TestCase):
         """8. handle_deletion_request returns count of deleted records."""
         from mandarin.intelligence.governance import handle_deletion_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 2, 0)")
+        _ensure_content_items(conn, 1, 2)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 2, 0, 'read')")
         conn.commit()
         result = handle_deletion_request(conn, '1')
         self.assertEqual(result['status'], 'completed')
@@ -102,7 +117,8 @@ class TestAccessRequest(unittest.TestCase):
         """10. handle_access_request returns data from core tables."""
         from mandarin.intelligence.governance import handle_access_request
         conn = _make_db()
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, is_correct) VALUES (1, 1, 1)")
+        _ensure_content_items(conn, 1)
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
         conn.commit()
         result = handle_access_request(conn, '1')
@@ -134,9 +150,10 @@ class TestTransparency(unittest.TestCase):
         """13. explain_item_scheduling returns days-since for reviewed items."""
         from mandarin.intelligence.governance import explain_item_scheduling
         conn = _make_db()
+        _ensure_content_items(conn, 42)
         conn.execute("""
-            INSERT INTO review_event (user_id, content_item_id, is_correct, created_at)
-            VALUES (1, 42, 1, datetime('now', '-3 days'))
+            INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at)
+            VALUES (1, 42, 1, 'read', datetime('now', '-3 days'))
         """)
         conn.commit()
         result = explain_item_scheduling(conn, '42', '1')
@@ -150,7 +167,7 @@ class TestDataQuality(unittest.TestCase):
         """14. Orphaned sessions generate high finding."""
         from mandarin.intelligence.governance import check_data_quality
         conn = _make_db()
-        conn.execute("INSERT INTO session_log (user_id, created_at) VALUES (1, datetime('now'))")
+        conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now'))")
         conn.commit()
         findings = check_data_quality(conn)
         orphan = [f for f in findings if 'no review events' in f['title'].lower()]
@@ -161,9 +178,10 @@ class TestDataQuality(unittest.TestCase):
         """15. Future timestamps generate medium finding."""
         from mandarin.intelligence.governance import check_data_quality
         conn = _make_db()
+        _ensure_content_items(conn, 1)
         conn.execute("""
-            INSERT INTO review_event (user_id, content_item_id, is_correct, created_at)
-            VALUES (1, 1, 1, datetime('now', '+2 days'))
+            INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at)
+            VALUES (1, 1, 1, 'read', datetime('now', '+2 days'))
         """)
         conn.commit()
         findings = check_data_quality(conn)
@@ -261,8 +279,8 @@ class TestModelValidation(unittest.TestCase):
         conn = _make_db()
         # Insert a critical finding for this component
         conn.execute("""
-            INSERT INTO pi_findings (id, dimension, severity, title)
-            VALUES ('f1', 'engagement', 'critical', 'Test critical')
+            INSERT INTO pi_finding (dimension, severity, title, status)
+            VALUES ('engagement', 'critical', 'Test critical', 'investigating')
         """)
         conn.commit()
         component = {

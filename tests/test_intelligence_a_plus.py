@@ -77,7 +77,7 @@ class TestFalseNegatives(unittest.TestCase):
         conn = _make_db()
 
         # Create SPC violation with no corresponding finding
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.commit()
 
         result = estimate_false_negatives(conn, lookback_days=1)
@@ -90,7 +90,7 @@ class TestFalseNegatives(unittest.TestCase):
         conn = _make_db()
 
         # Create SPC violation WITH corresponding finding
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('engineering', 'high', 'SPC violation', 'investigating')")
         conn.commit()
 
@@ -110,7 +110,7 @@ class TestCounterfactualCI(unittest.TestCase):
         past = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
         future = (datetime.now(timezone.utc) - timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 21):
-            conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (?, 'test' || ? || '@test.com', 'hash', ?)", (i, i, past))
         # Affected: users 1-10 had early_exit sessions
         for i in range(1, 11):
             conn.execute("INSERT INTO session_log (user_id, started_at, early_exit) VALUES (?, ?, 1)", (i, past))
@@ -246,10 +246,11 @@ class TestLearnerArchetypes(unittest.TestCase):
 
         # Create user with low accuracy
         past = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
-        conn.execute("INSERT INTO user (id, created_at) VALUES (1, ?)", (past,))
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (1, 'test1@test.com', 'hash', ?)", (past,))
         for i in range(20):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now', ? || ' days'))", (f"-{i}",))
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, ?, ?)", (i, 0 if i < 15 else 1))
+            conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (?, 'test', 'test', 'test')", (i,))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, ?, ?, 'read')", (i, 0 if i < 15 else 1))
         conn.commit()
 
         findings = analyze_learner_archetypes(conn)
@@ -299,7 +300,7 @@ class TestCOPQ(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import estimate_copq
         conn = _make_db()
 
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
         conn.execute("INSERT INTO pi_finding (dimension, severity, title, status) VALUES ('retention', 'critical', 'test', 'investigating')")
         conn.commit()
 
@@ -318,12 +319,13 @@ class TestPowerAnalysis(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import compute_power_analysis
         conn = _make_db()
 
-        conn.execute("INSERT INTO experiment (id, name, status) VALUES (1, 'test_exp', 'running')")
+        conn.execute("INSERT INTO experiment (id, name, status, variants) VALUES (1, 'test_exp', 'running', '[\"control\",\"treatment\"]')")
+        conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (1, 'test', 'test', 'test')")
         # Control variant with 200 users
         for i in range(1, 201):
-            conn.execute("INSERT INTO user (id) VALUES (?)", (i,))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (?, 'test' || ? || '@test.com', 'hash')", (i, i))
             conn.execute("INSERT INTO experiment_assignment (experiment_id, user_id, variant, assigned_at) VALUES (1, ?, 'control', datetime('now', '-7 days'))", (i,))
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (?, 1, ?, datetime('now', '-3 days'))", (i, 1 if i <= 140 else 0))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (?, 1, ?, 'read', datetime('now', '-3 days'))", (i, 1 if i <= 140 else 0))
         conn.commit()
 
         result = compute_power_analysis(conn, 1)
@@ -342,11 +344,11 @@ class TestExpandedMetrics(unittest.TestCase):
         conn = _make_db()
 
         # Seed minimal data
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
+        conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (1, '你好', 'nǐhǎo', 'hello', 1)")
         conn.execute("INSERT INTO session_log (user_id) VALUES (1)")
-        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, 1, 1)")
-        conn.execute("INSERT INTO content_item (id, hanzi, english, hsk_level) VALUES (1, '你好', 'hello', 1)")
-        conn.execute("INSERT INTO progress (user_id, content_item_id, mastery_stage) VALUES (1, 1, 'stable')")
+        conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality) VALUES (1, 1, 1, 'read')")
+        conn.execute("INSERT INTO progress (user_id, content_item_id, modality, mastery_stage) VALUES (1, 1, 'reading', 'stable')")
         conn.commit()
 
         # These should all return a value (not None)
@@ -364,7 +366,7 @@ class TestSPCClosure(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import analyze_spc_closure
         conn = _make_db()
 
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl, rule_violated) VALUES ('accuracy', 0.3, 0.9, 0.5, 'below_lcl')")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('accuracy', 0.3)")
         conn.commit()
 
         findings = analyze_spc_closure(conn)
@@ -379,15 +381,16 @@ class TestWelchsTTest(unittest.TestCase):
         from mandarin.intelligence.feedback_loops import analyze_experiments
         conn = _make_db()
 
-        conn.execute("INSERT INTO experiment (id, name, status, min_sample_size) VALUES (1, 'test', 'running', 50)")
+        conn.execute("INSERT INTO experiment (id, name, status, variants, min_sample_size) VALUES (1, 'test', 'running', '[\"control\",\"treatment\"]', 50)")
+        conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (1, 'test', 'test', 'test')")
         # Create 100 assignments with clear difference
         for i in range(1, 101):
-            conn.execute("INSERT INTO user (id) VALUES (?)", (i,))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (?, 'test' || ? || '@test.com', 'hash')", (i, i))
             variant = "control" if i <= 50 else "treatment"
             conn.execute("INSERT INTO experiment_assignment (experiment_id, user_id, variant, assigned_at) VALUES (1, ?, ?, datetime('now', '-7 days'))", (i, variant))
             # Control: 60% correct, Treatment: 80% correct
             correct = 1 if (i <= 50 and i <= 30) or (i > 50 and i <= 90) else 0
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (?, 1, ?, datetime('now', '-3 days'))", (i, correct))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (?, 1, ?, 'read', datetime('now', '-3 days'))", (i, correct))
         conn.commit()
 
         findings = analyze_experiments(conn)
@@ -407,7 +410,7 @@ class TestDMAIC(unittest.TestCase):
         # Insert advisor opinion so the Improve gate passes
         conn.execute("INSERT INTO pi_advisor_opinion (finding_id, advisor, recommendation, priority_score) VALUES (1, 'retention', 'Fix churn', 0.9)")
         # Insert SPC observation so the Control gate passes
-        conn.execute("INSERT INTO spc_observation (chart_type, value, ucl, lcl) VALUES ('retention_accuracy', 0.7, 0.9, 0.5)")
+        conn.execute("INSERT INTO spc_observation (chart_type, value) VALUES ('retention_accuracy', 0.7)")
         conn.commit()
 
         result = run_dmaic_cycle(conn, "retention")
@@ -464,8 +467,8 @@ class TestLearningWaste(unittest.TestCase):
         # Create items stuck in learning >60 days
         past = (datetime.now(timezone.utc) - timedelta(days=90)).strftime("%Y-%m-%d %H:%M:%S")
         for i in range(1, 16):
-            conn.execute("INSERT INTO content_item (id, hanzi, english) VALUES (?, ?, ?)", (i, f"字{i}", f"word{i}"))
-            conn.execute("INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?, 'learning', ?)", (i, past))
+            conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (?, ?, ?, ?)", (i, f"字{i}", f"zi{i}", f"word{i}"))
+            conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?, 'reading', 'learning', ?)", (i, past))
         conn.commit()
 
         findings = analyze_learning_waste(conn)
@@ -485,13 +488,13 @@ class TestSessionQueue(unittest.TestCase):
 
         # Create high arrival rate with low service rate
         for i in range(1, 101):
-            conn.execute("INSERT INTO content_item (id, hanzi, english) VALUES (?, ?, ?)", (i, f"字{i}", f"w{i}"))
-            conn.execute("INSERT INTO progress (content_item_id, mastery_stage, created_at, next_review_at) VALUES (?, 'learning', datetime('now', '-7 days'), datetime('now', '-1 days'))", (i,))
+            conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (?, ?, ?, ?)", (i, f"字{i}", f"zi{i}", f"w{i}"))
+            conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, next_review_date) VALUES (?, 'reading', 'learning', datetime('now', '-7 days'), datetime('now', '-1 days'))", (i,))
         # Only 10 reviews (service rate too low)
-        conn.execute("INSERT INTO user (id) VALUES (1)")
+        conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash) VALUES (1, 'test1@test.com', 'hash')")
         for i in range(1, 11):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (1, datetime('now', '-7 days'))")
-            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, created_at) VALUES (1, ?, 1, datetime('now', '-7 days'))", (i,))
+            conn.execute("INSERT INTO review_event (user_id, content_item_id, correct, modality, created_at) VALUES (1, ?, 1, 'read', datetime('now', '-7 days'))", (i,))
         conn.commit()
 
         findings = analyze_session_queue(conn)
@@ -508,7 +511,7 @@ class TestValueStreamMapping(unittest.TestCase):
         past = (datetime.now(timezone.utc) - timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S")
         # Create 20 users, only 5 have sessions (big drop-off)
         for i in range(1, 21):
-            conn.execute("INSERT INTO user (id, created_at) VALUES (?, ?)", (i, past))
+            conn.execute("INSERT OR IGNORE INTO user (id, email, password_hash, created_at) VALUES (?, 'test' || ? || '@test.com', 'hash', ?)", (i, i, past))
         for i in range(1, 6):
             conn.execute("INSERT INTO session_log (user_id, started_at) VALUES (?, ?)", (i, past))
         conn.commit()

@@ -1,0 +1,775 @@
+{
+  "version": 1,
+  "description": "Tone drill content for Aelu: tone pairs, tone sandhi, and minimal pairs",
+  "sections": {
+    "tone_pairs": "All 20 combinations of tones 1-4 plus neutral tone",
+    "tone_sandhi": "Tone sandhi rules and common examples",
+    "minimal_pairs": "Words distinguished only by tone"
+  },
+  "entries": [
+    {
+      "word": "今天",
+      "pinyin": "jīntiān",
+      "tone_pair": "1+1",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "today"
+    },
+    {
+      "word": "飞机",
+      "pinyin": "fēijī",
+      "tone_pair": "1+1",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "airplane"
+    },
+    {
+      "word": "工人",
+      "pinyin": "gōngrén",
+      "tone_pair": "1+1",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "worker"
+    },
+    {
+      "word": "中国",
+      "pinyin": "Zhōngguó",
+      "tone_pair": "1+2",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "China"
+    },
+    {
+      "word": "公园",
+      "pinyin": "gōngyuán",
+      "tone_pair": "1+2",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "park"
+    },
+    {
+      "word": "安静",
+      "pinyin": "ānjìng",
+      "tone_pair": "1+3",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "quiet"
+    },
+    {
+      "word": "冬雪",
+      "pinyin": "dōngxuě",
+      "tone_pair": "1+3",
+      "category": "tone_pair",
+      "hsk_level": 4,
+      "english": "winter snow"
+    },
+    {
+      "word": "工作",
+      "pinyin": "gōngzuò",
+      "tone_pair": "1+4",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "work"
+    },
+    {
+      "word": "天气",
+      "pinyin": "tiānqì",
+      "tone_pair": "1+4",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "weather"
+    },
+    {
+      "word": "他们",
+      "pinyin": "tāmen",
+      "tone_pair": "1+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "they"
+    },
+    {
+      "word": "桌子",
+      "pinyin": "zhuōzi",
+      "tone_pair": "1+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "table"
+    },
+    {
+      "word": "学生",
+      "pinyin": "xuéshēng",
+      "tone_pair": "2+1",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "student"
+    },
+    {
+      "word": "图书",
+      "pinyin": "túshū",
+      "tone_pair": "2+1",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "books"
+    },
+    {
+      "word": "人民",
+      "pinyin": "rénmín",
+      "tone_pair": "2+2",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "the people"
+    },
+    {
+      "word": "平时",
+      "pinyin": "píngshí",
+      "tone_pair": "2+2",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "usually"
+    },
+    {
+      "word": "牛奶",
+      "pinyin": "niúnǎi",
+      "tone_pair": "2+3",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "milk"
+    },
+    {
+      "word": "银行",
+      "pinyin": "yínháng",
+      "tone_pair": "2+3",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "bank"
+    },
+    {
+      "word": "学校",
+      "pinyin": "xuéxiào",
+      "tone_pair": "2+4",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "school"
+    },
+    {
+      "word": "服务",
+      "pinyin": "fúwù",
+      "tone_pair": "2+4",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "service"
+    },
+    {
+      "word": "朋友",
+      "pinyin": "péngyou",
+      "tone_pair": "2+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "friend"
+    },
+    {
+      "word": "什么",
+      "pinyin": "shénme",
+      "tone_pair": "2+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "what"
+    },
+    {
+      "word": "北京",
+      "pinyin": "Běijīng",
+      "tone_pair": "3+1",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "Beijing"
+    },
+    {
+      "word": "火车",
+      "pinyin": "huǒchē",
+      "tone_pair": "3+1",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "train"
+    },
+    {
+      "word": "旅行",
+      "pinyin": "lǚxíng",
+      "tone_pair": "3+2",
+      "category": "tone_pair",
+      "hsk_level": 3,
+      "english": "travel"
+    },
+    {
+      "word": "口红",
+      "pinyin": "kǒuhóng",
+      "tone_pair": "3+2",
+      "category": "tone_pair",
+      "hsk_level": 5,
+      "english": "lipstick"
+    },
+    {
+      "word": "你好",
+      "pinyin": "nǐhǎo",
+      "pinyin_spoken": "níhǎo",
+      "tone_pair": "3+3",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "hello",
+      "note": "First 3rd tone becomes 2nd before another 3rd"
+    },
+    {
+      "word": "很好",
+      "pinyin": "hěnhǎo",
+      "pinyin_spoken": "hénhǎo",
+      "tone_pair": "3+3",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "very good",
+      "note": "First 3rd tone becomes 2nd before another 3rd"
+    },
+    {
+      "word": "请问",
+      "pinyin": "qǐngwèn",
+      "tone_pair": "3+4",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "excuse me (may I ask)"
+    },
+    {
+      "word": "老师",
+      "pinyin": "lǎoshī",
+      "tone_pair": "3+1",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "teacher"
+    },
+    {
+      "word": "我们",
+      "pinyin": "wǒmen",
+      "tone_pair": "3+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "we"
+    },
+    {
+      "word": "喜欢",
+      "pinyin": "xǐhuan",
+      "tone_pair": "3+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "to like"
+    },
+    {
+      "word": "大家",
+      "pinyin": "dàjiā",
+      "tone_pair": "4+1",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "everyone"
+    },
+    {
+      "word": "汽车",
+      "pinyin": "qìchē",
+      "tone_pair": "4+1",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "car"
+    },
+    {
+      "word": "现在",
+      "pinyin": "xiànzài",
+      "tone_pair": "4+2",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "now"
+    },
+    {
+      "word": "报名",
+      "pinyin": "bàomíng",
+      "tone_pair": "4+2",
+      "category": "tone_pair",
+      "hsk_level": 4,
+      "english": "to register, sign up"
+    },
+    {
+      "word": "电脑",
+      "pinyin": "diànnǎo",
+      "tone_pair": "4+3",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "computer"
+    },
+    {
+      "word": "日本",
+      "pinyin": "Rìběn",
+      "tone_pair": "4+3",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "Japan"
+    },
+    {
+      "word": "再见",
+      "pinyin": "zàijiàn",
+      "tone_pair": "4+4",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "goodbye"
+    },
+    {
+      "word": "运动",
+      "pinyin": "yùndòng",
+      "tone_pair": "4+4",
+      "category": "tone_pair",
+      "hsk_level": 2,
+      "english": "exercise, sports"
+    },
+    {
+      "word": "爸爸",
+      "pinyin": "bàba",
+      "tone_pair": "4+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "dad"
+    },
+    {
+      "word": "谢谢",
+      "pinyin": "xièxie",
+      "tone_pair": "4+0",
+      "category": "tone_pair",
+      "hsk_level": 1,
+      "english": "thank you"
+    },
+    {
+      "word": "打扫",
+      "pinyin_base": "dǎsǎo",
+      "pinyin_sandhi": "dásǎo",
+      "rule": "third_tone",
+      "category": "tone_sandhi",
+      "hsk_level": 3,
+      "english": "to clean",
+      "explanation": "Third tone before third tone becomes second tone"
+    },
+    {
+      "word": "展览",
+      "pinyin_base": "zhǎnlǎn",
+      "pinyin_sandhi": "zhánlǎn",
+      "rule": "third_tone",
+      "category": "tone_sandhi",
+      "hsk_level": 4,
+      "english": "exhibition",
+      "explanation": "Third tone before third tone becomes second tone"
+    },
+    {
+      "word": "保险",
+      "pinyin_base": "bǎoxiǎn",
+      "pinyin_sandhi": "báoxiǎn",
+      "rule": "third_tone",
+      "category": "tone_sandhi",
+      "hsk_level": 4,
+      "english": "insurance",
+      "explanation": "Third tone before third tone becomes second tone"
+    },
+    {
+      "word": "领导",
+      "pinyin_base": "lǐngdǎo",
+      "pinyin_sandhi": "língdǎo",
+      "rule": "third_tone",
+      "category": "tone_sandhi",
+      "hsk_level": 4,
+      "english": "leader",
+      "explanation": "Third tone before third tone becomes second tone"
+    },
+    {
+      "word": "理想",
+      "pinyin_base": "lǐxiǎng",
+      "pinyin_sandhi": "líxiǎng",
+      "rule": "third_tone",
+      "category": "tone_sandhi",
+      "hsk_level": 4,
+      "english": "ideal",
+      "explanation": "Third tone before third tone becomes second tone"
+    },
+    {
+      "word": "你好吗",
+      "pinyin_base": "nǐ hǎo ma",
+      "pinyin_sandhi": "ní hǎo ma",
+      "rule": "triple_third",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "how are you?",
+      "explanation": "In 你好吗, only 你 changes because 吗 is neutral tone"
+    },
+    {
+      "word": "我很好",
+      "pinyin_base": "wǒ hěn hǎo",
+      "pinyin_sandhi": "wǒ hén hǎo",
+      "rule": "triple_third",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "I'm fine",
+      "explanation": "In a sequence of three 3rd tones grouped as A + BC, the middle one changes: wǒ hén hǎo"
+    },
+    {
+      "word": "也许有",
+      "pinyin_base": "yě xǔ yǒu",
+      "pinyin_sandhi": "yé xǔ yǒu",
+      "rule": "triple_third",
+      "category": "tone_sandhi",
+      "hsk_level": 4,
+      "english": "maybe have",
+      "explanation": "Grouping determines which tones change: AB + C -> both A and B can change"
+    },
+    {
+      "word": "不去",
+      "pinyin_base": "bù qù",
+      "pinyin_sandhi": "bú qù",
+      "rule": "bu_before_4th",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "not go",
+      "explanation": "不 becomes 2nd tone before 4th tone syllables"
+    },
+    {
+      "word": "不贵",
+      "pinyin_base": "bù guì",
+      "pinyin_sandhi": "bú guì",
+      "rule": "bu_before_4th",
+      "category": "tone_sandhi",
+      "hsk_level": 2,
+      "english": "not expensive",
+      "explanation": "不 becomes 2nd tone before 4th tone syllables"
+    },
+    {
+      "word": "不大",
+      "pinyin_base": "bù dà",
+      "pinyin_sandhi": "bú dà",
+      "rule": "bu_before_4th",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "not big",
+      "explanation": "不 becomes 2nd tone before 4th tone syllables"
+    },
+    {
+      "word": "不高",
+      "pinyin_base": "bù gāo",
+      "pinyin_sandhi": "bù gāo",
+      "rule": "bu_no_change",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "not tall",
+      "explanation": "不 stays 4th tone before 1st, 2nd, or 3rd tones"
+    },
+    {
+      "word": "不行",
+      "pinyin_base": "bù xíng",
+      "pinyin_sandhi": "bù xíng",
+      "rule": "bu_no_change",
+      "category": "tone_sandhi",
+      "hsk_level": 2,
+      "english": "won't do, not okay",
+      "explanation": "不 stays 4th tone before 2nd tone"
+    },
+    {
+      "word": "一定",
+      "pinyin_base": "yī dìng",
+      "pinyin_sandhi": "yí dìng",
+      "rule": "yi_before_4th",
+      "category": "tone_sandhi",
+      "hsk_level": 2,
+      "english": "definitely",
+      "explanation": "一 becomes 2nd tone before 4th tone"
+    },
+    {
+      "word": "一路",
+      "pinyin_base": "yī lù",
+      "pinyin_sandhi": "yí lù",
+      "rule": "yi_before_4th",
+      "category": "tone_sandhi",
+      "hsk_level": 3,
+      "english": "the whole way",
+      "explanation": "一 becomes 2nd tone before 4th tone"
+    },
+    {
+      "word": "一边",
+      "pinyin_base": "yī biān",
+      "pinyin_sandhi": "yì biān",
+      "rule": "yi_before_1st",
+      "category": "tone_sandhi",
+      "hsk_level": 2,
+      "english": "one side; at the same time",
+      "explanation": "一 becomes 4th tone before 1st tone"
+    },
+    {
+      "word": "一般",
+      "pinyin_base": "yī bān",
+      "pinyin_sandhi": "yì bān",
+      "rule": "yi_before_1st",
+      "category": "tone_sandhi",
+      "hsk_level": 3,
+      "english": "ordinary, generally",
+      "explanation": "一 becomes 4th tone before 1st tone"
+    },
+    {
+      "word": "一年",
+      "pinyin_base": "yī nián",
+      "pinyin_sandhi": "yì nián",
+      "rule": "yi_before_2nd",
+      "category": "tone_sandhi",
+      "hsk_level": 1,
+      "english": "one year",
+      "explanation": "一 becomes 4th tone before 2nd tone"
+    },
+    {
+      "word_a": "妈",
+      "pinyin_a": "mā",
+      "english_a": "mother",
+      "word_b": "麻",
+      "pinyin_b": "má",
+      "english_b": "hemp; numb",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "1 vs 2",
+      "syllable": "ma"
+    },
+    {
+      "word_a": "妈",
+      "pinyin_a": "mā",
+      "english_a": "mother",
+      "word_b": "马",
+      "pinyin_b": "mǎ",
+      "english_b": "horse",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "1 vs 3",
+      "syllable": "ma"
+    },
+    {
+      "word_a": "妈",
+      "pinyin_a": "mā",
+      "english_a": "mother",
+      "word_b": "骂",
+      "pinyin_b": "mà",
+      "english_b": "to scold",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 4",
+      "syllable": "ma"
+    },
+    {
+      "word_a": "诗",
+      "pinyin_a": "shī",
+      "english_a": "poem",
+      "word_b": "十",
+      "pinyin_b": "shí",
+      "english_b": "ten",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "1 vs 2",
+      "syllable": "shi"
+    },
+    {
+      "word_a": "十",
+      "pinyin_a": "shí",
+      "english_a": "ten",
+      "word_b": "是",
+      "pinyin_b": "shì",
+      "english_b": "to be",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "2 vs 4",
+      "syllable": "shi"
+    },
+    {
+      "word_a": "使",
+      "pinyin_a": "shǐ",
+      "english_a": "to make; to cause",
+      "word_b": "事",
+      "pinyin_b": "shì",
+      "english_b": "matter, affair",
+      "category": "minimal_pair",
+      "hsk_level": 3,
+      "tones_compared": "3 vs 4",
+      "syllable": "shi"
+    },
+    {
+      "word_a": "买",
+      "pinyin_a": "mǎi",
+      "english_a": "to buy",
+      "word_b": "卖",
+      "pinyin_b": "mài",
+      "english_b": "to sell",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "3 vs 4",
+      "syllable": "mai"
+    },
+    {
+      "word_a": "汤",
+      "pinyin_a": "tāng",
+      "english_a": "soup",
+      "word_b": "糖",
+      "pinyin_b": "táng",
+      "english_b": "sugar, candy",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 2",
+      "syllable": "tang"
+    },
+    {
+      "word_a": "糖",
+      "pinyin_a": "táng",
+      "english_a": "sugar",
+      "word_b": "躺",
+      "pinyin_b": "tǎng",
+      "english_b": "to lie down",
+      "category": "minimal_pair",
+      "hsk_level": 3,
+      "tones_compared": "2 vs 3",
+      "syllable": "tang"
+    },
+    {
+      "word_a": "纸",
+      "pinyin_a": "zhǐ",
+      "english_a": "paper",
+      "word_b": "只",
+      "pinyin_b": "zhī",
+      "english_b": "measure word (animals)",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "3 vs 1",
+      "syllable": "zhi"
+    },
+    {
+      "word_a": "知",
+      "pinyin_a": "zhī",
+      "english_a": "to know",
+      "word_b": "直",
+      "pinyin_b": "zhí",
+      "english_b": "straight",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 2",
+      "syllable": "zhi"
+    },
+    {
+      "word_a": "家",
+      "pinyin_a": "jiā",
+      "english_a": "home, family",
+      "word_b": "假",
+      "pinyin_b": "jiǎ",
+      "english_b": "fake, false",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 3",
+      "syllable": "jia"
+    },
+    {
+      "word_a": "假",
+      "pinyin_a": "jiǎ",
+      "english_a": "fake, false",
+      "word_b": "价",
+      "pinyin_b": "jià",
+      "english_b": "price",
+      "category": "minimal_pair",
+      "hsk_level": 3,
+      "tones_compared": "3 vs 4",
+      "syllable": "jia"
+    },
+    {
+      "word_a": "杯子",
+      "pinyin_a": "bēizi",
+      "english_a": "cup",
+      "word_b": "被子",
+      "pinyin_b": "bèizi",
+      "english_b": "quilt",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 4",
+      "syllable": "beizi"
+    },
+    {
+      "word_a": "大夫",
+      "pinyin_a": "dàifu",
+      "english_a": "doctor",
+      "word_b": "大副",
+      "pinyin_b": "dàfù",
+      "english_b": "first mate",
+      "category": "minimal_pair",
+      "hsk_level": 3,
+      "tones_compared": "neutral vs 4",
+      "syllable": "dafu"
+    },
+    {
+      "word_a": "花",
+      "pinyin_a": "huā",
+      "english_a": "flower",
+      "word_b": "滑",
+      "pinyin_b": "huá",
+      "english_b": "slippery",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 2",
+      "syllable": "hua"
+    },
+    {
+      "word_a": "花",
+      "pinyin_a": "huā",
+      "english_a": "flower",
+      "word_b": "画",
+      "pinyin_b": "huà",
+      "english_b": "to draw; painting",
+      "category": "minimal_pair",
+      "hsk_level": 1,
+      "tones_compared": "1 vs 4",
+      "syllable": "hua"
+    },
+    {
+      "word_a": "读",
+      "pinyin_a": "dú",
+      "english_a": "to read",
+      "word_b": "度",
+      "pinyin_b": "dù",
+      "english_b": "degree; to spend (time)",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "2 vs 4",
+      "syllable": "du"
+    },
+    {
+      "word_a": "肚",
+      "pinyin_a": "dù",
+      "english_a": "belly",
+      "word_b": "赌",
+      "pinyin_b": "dǔ",
+      "english_b": "to gamble",
+      "category": "minimal_pair",
+      "hsk_level": 3,
+      "tones_compared": "4 vs 3",
+      "syllable": "du"
+    },
+    {
+      "word_a": "吃",
+      "pinyin_a": "chī",
+      "english_a": "to eat",
+      "word_b": "迟",
+      "pinyin_b": "chí",
+      "english_b": "late",
+      "category": "minimal_pair",
+      "hsk_level": 2,
+      "tones_compared": "1 vs 2",
+      "syllable": "chi"
+    },
+    {
+      "word_a": "尺",
+      "pinyin_a": "chǐ",
+      "english_a": "ruler; Chinese foot",
+      "word_b": "翅",
+      "pinyin_b": "chì",
+      "english_b": "wing",
+      "category": "minimal_pair",
+      "hsk_level": 4,
+      "tones_compared": "3 vs 4",
+      "syllable": "chi"
+    }
+  ]
+}

@@ -165,7 +165,7 @@ class TestFocusedLearnerContext(unittest.TestCase):
         ).lastrowid
         for _ in range(3):
             self.conn.execute(
-                "INSERT INTO review_event (user_id, content_item_id, correct) VALUES (1, ?, 0)",
+                "INSERT INTO review_event (user_id, content_item_id, modality, correct) VALUES (1, ?, 'reading', 0)",
                 (ci_id,),
             )
 
@@ -230,8 +230,12 @@ class TestPrescriptionExecution(unittest.TestCase):
 
     def test_execute_human_required(self):
         self.conn.execute("""
-            INSERT INTO pi_work_order (instruction, status)
-            VALUES ('Review and decide manually', 'pending')
+            INSERT INTO pi_work_order
+            (audit_cycle_id, finding_id, constraint_dimension, constraint_score,
+             marginal_improvement, instruction, success_metric, success_baseline,
+             success_threshold, verification_window_days, status)
+            VALUES (1, 1, 'content', 0.5, 0.1, 'Review and decide manually',
+                    'review_count', 0.0, 1.0, 7, 'pending')
         """)
         wo_id = self.conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         result = execute_prescription(self.conn, wo_id)
@@ -242,8 +246,12 @@ class TestPrescriptionExecution(unittest.TestCase):
             "INSERT INTO grammar_point (name, hsk_level) VALUES ('test_pattern', 2)"
         )
         self.conn.execute("""
-            INSERT INTO pi_work_order (instruction, status)
-            VALUES ('Generate content for uncovered patterns', 'pending')
+            INSERT INTO pi_work_order
+            (audit_cycle_id, finding_id, constraint_dimension, constraint_score,
+             marginal_improvement, instruction, success_metric, success_baseline,
+             success_threshold, verification_window_days, status)
+            VALUES (1, 1, 'content', 0.5, 0.1, 'Generate content for uncovered patterns',
+                    'pattern_coverage', 0.0, 1.0, 7, 'pending')
         """)
         wo_id = self.conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         result = execute_prescription(self.conn, wo_id)

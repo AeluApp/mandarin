@@ -62,6 +62,8 @@ def api_conversation_start():
         return jsonify({"error": "No scenarios available"}), 404
 
     return jsonify({
+        "scenario_id": scenario["id"],
+        "hsk_level": scenario.get("hsk_level", hsk_level),
         "scenario": {
             "id": scenario["id"],
             "title": scenario["title"],
@@ -72,7 +74,12 @@ def api_conversation_start():
             "prompt_en": scenario["prompt_en"],
             "expected_patterns": scenario.get("expected_patterns", []),
             "grammar_points": scenario.get("grammar_points", []),
+            "hsk_level": scenario.get("hsk_level", hsk_level),
         },
+        "situation": scenario["situation"],
+        "prompt_zh": scenario["prompt_zh"],
+        "prompt_pinyin": scenario["prompt_pinyin"],
+        "prompt_en": scenario["prompt_en"],
     })
 
 
@@ -161,6 +168,88 @@ def api_conversation_continue():
         )
 
     return jsonify({"follow_up": follow_up})
+
+
+# ── Scaffolding endpoints (FMEA #4: difficulty anxiety) ──────────────
+
+@conversation_bp.route("/api/conversation/hint", methods=["POST"])
+@api_error_handler("ConversationHint")
+def api_conversation_hint():
+    """Get a structural hint for the current conversation turn.
+
+    Returns a suggested response structure (not the answer) to reduce
+    difficulty anxiety and help learners get started.
+
+    Body (JSON):
+        scenario_id (str): The scenario being practiced.
+    """
+    data = request.get_json(silent=True) or {}
+    scenario_id = data.get("scenario_id")
+
+    from ..ai.conversation_drill import SCENARIOS
+    scenario = None
+    if scenario_id:
+        for level_scenarios in SCENARIOS.values():
+            for s in level_scenarios:
+                if s["id"] == scenario_id:
+                    scenario = s
+                    break
+            if scenario:
+                break
+
+    # Build a structural hint from the scenario's expected patterns
+    hint_parts = []
+    if scenario:
+        patterns = scenario.get("expected_patterns", [])
+        grammar = scenario.get("grammar_points", [])
+        if patterns:
+            hint_parts.append("Try using: " + ", ".join(patterns[:3]))
+        if grammar:
+            hint_parts.append("Grammar pattern: " + ", ".join(grammar[:2]))
+        if not hint_parts:
+            hint_parts.append("Start with the subject, then add the verb and object.")
+    else:
+        hint_parts.append("Use a simple sentence: subject + verb + object.")
+
+    hint_parts.append("It is fine to keep it short.")
+
+    return jsonify({"hint": " ".join(hint_parts)})
+
+
+@conversation_bp.route("/api/conversation/simplify", methods=["POST"])
+@api_error_handler("ConversationSimplify")
+def api_conversation_simplify():
+    """Simplify the tutor's last message to a lower level.
+
+    Returns a simplified version with full pinyin and translation
+    to reduce comprehension anxiety.
+
+    Body (JSON):
+        scenario_id (str): The scenario being practiced.
+        text (str): The text to simplify.
+    """
+    data = request.get_json(silent=True) or {}
+    text = (data.get("text") or "").strip()
+
+    if not text:
+        return jsonify({"simplified": "", "pinyin": "", "english": ""})
+
+    # Try to generate a simplified version using pypinyin for pinyin
+    pinyin_text = ""
+    try:
+        from pypinyin import pinyin, Style
+        syllables = pinyin(text, style=Style.TONE)
+        pinyin_text = " ".join(s[0] for s in syllables)
+    except (ImportError, Exception):
+        pinyin_text = ""
+
+    # For simplification, we return the same text with pinyin annotation
+    # A more advanced version could use an LLM to rephrase at a lower level
+    return jsonify({
+        "simplified": text,
+        "pinyin": pinyin_text,
+        "english": "",  # Would need LLM for translation; omit for now
+    })
 
 
 # ── Whisper transcription endpoint ──────────────────

@@ -5,10 +5,19 @@ require the X-Requested-With header (or a Bearer JWT token).
 This is a deploy-gate test — CSRF bugs must never ship.
 """
 
+import re as _re
+
 import pytest
 from unittest.mock import patch
 
 from mandarin.web import create_app
+
+
+def _get_csrf_token(client, url="/auth/login"):
+    """Extract CSRF token from a form page."""
+    resp = client.get(url)
+    match = _re.search(r'name="csrf_token"[^>]*value="([^"]+)"', resp.data.decode())
+    return match.group(1) if match else None
 
 
 class _FakeConn:
@@ -43,11 +52,13 @@ class TestCSRFEnforcement:
         from werkzeug.security import generate_password_hash
         with patch("mandarin.auth.generate_password_hash",
                    lambda p, **kw: generate_password_hash(p, method="pbkdf2:sha256")):
-            create_user(conn, "csrf@test.com", "password123", "CSRFTest")
+            create_user(conn, "csrf@test.com", "password123!Ab", "CSRFTest")
             conn.commit()
+        csrf_token = _get_csrf_token(client)
         client.post("/auth/login", data={
             "email": "csrf@test.com",
-            "password": "password123",
+            "password": "password123!Ab",
+            "csrf_token": csrf_token,
         })
 
         # POST to an API endpoint WITHOUT X-Requested-With
@@ -63,11 +74,13 @@ class TestCSRFEnforcement:
         from werkzeug.security import generate_password_hash
         with patch("mandarin.auth.generate_password_hash",
                    lambda p, **kw: generate_password_hash(p, method="pbkdf2:sha256")):
-            create_user(conn, "csrf2@test.com", "password123", "CSRFTest2")
+            create_user(conn, "csrf2@test.com", "password123!Ab", "CSRFTest2")
             conn.commit()
+        csrf_token = _get_csrf_token(client)
         client.post("/auth/login", data={
             "email": "csrf2@test.com",
-            "password": "password123",
+            "password": "password123!Ab",
+            "csrf_token": csrf_token,
         })
 
         # POST WITH the X-Requested-With header should not get 403

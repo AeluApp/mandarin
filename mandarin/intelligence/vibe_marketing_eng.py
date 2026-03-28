@@ -480,7 +480,7 @@ def analyze_feature_usage(conn):
 
     total_active_users = _safe_scalar(conn, """
         SELECT COUNT(DISTINCT user_id) FROM session_log
-        WHERE created_at >= datetime('now', '-30 days')
+        WHERE started_at >= datetime('now', '-30 days')
     """, default=0)
 
     if total_active_users == 0:

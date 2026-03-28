@@ -12,6 +12,9 @@ from pathlib import Path
 
 import pytest
 
+pw = pytest.importorskip("playwright")
+from playwright.sync_api import sync_playwright
+
 
 @pytest.fixture(scope="session")
 def e2e_server():
@@ -74,6 +77,23 @@ def e2e_server():
     # Cleanup
     import shutil
     shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+@pytest.fixture(scope="session")
+def browser():
+    """Launch a headless Chromium browser for the test session."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        yield browser
+        browser.close()
+
+
+@pytest.fixture
+def page(browser):
+    """Provide a fresh browser page for each test."""
+    page = browser.new_page()
+    yield page
+    page.close()
 
 
 @pytest.fixture

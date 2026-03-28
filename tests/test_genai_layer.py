@@ -24,12 +24,12 @@ def _seed_reviews(conn, session_id=1, correct=5, incorrect=5):
     """Seed review events."""
     conn.execute("INSERT INTO session_log (id) VALUES (?)", (session_id,))
     for i in range(1, correct + incorrect + 1):
-        score = 1 if i <= correct else 0
+        is_correct = 1 if i <= correct else 0
         conn.execute(
             """INSERT INTO review_event
-               (content_item_id, session_id, score, given_answer, correct_answer, response_ms, drill_type)
+               (content_item_id, session_id, correct, modality, error_type, response_ms, drill_type)
                VALUES (?,?,?,?,?,?,?)""",
-            (min(i, 10), session_id, score, f"ans{i}", f"correct{i}", 800 + i * 100, "hanzi_to_english"),
+            (min(i, 10), session_id, is_correct, "read", None if is_correct else "semantic_gap", 800 + i * 100, "hanzi_to_english"),
         )
     conn.commit()
 
@@ -299,8 +299,8 @@ class TestWhisperPronunciation(unittest.TestCase):
         conn = _make_db()
         conn.execute("""
             INSERT INTO speaking_practice_sessions
-            (id, session_id, prompt_type, target_zh, overall_score, tone_accuracy, character_accuracy)
-            VALUES (1, 1, 'read_aloud', '你好', 0.95, 0.9, 1.0)
+            (id, session_id, prompt_type, target_zh, expected_zh, overall_score, tone_accuracy, character_accuracy)
+            VALUES (1, 1, 'read_aloud', '你好', '你好', 0.95, 0.9, 1.0)
         """)
         conn.commit()
         result = generate_pronunciation_feedback(conn, session_id=1, practice_session_id=1)
@@ -331,8 +331,8 @@ class TestGenAIAudit(unittest.TestCase):
         import uuid
         for i in range(10):
             conn.execute(
-                "INSERT INTO pi_ai_generation_log (id, task_type, json_parse_failure) VALUES (?, ?, ?)",
-                (str(uuid.uuid4()), "test", 1 if i < 5 else 0),
+                "INSERT INTO pi_ai_generation_log (id, task_type, model_used, from_cache, success, json_parse_failure) VALUES (?, ?, ?, ?, ?, ?)",
+                (str(uuid.uuid4()), "test", "qwen2.5", 0, 1, 1 if i < 5 else 0),
             )
         conn.commit()
         findings = analyze_prompt_performance(conn)

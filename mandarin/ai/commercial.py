@@ -149,12 +149,12 @@ def get_pricing_recommendation(conn: sqlite3.Connection) -> dict:
     pending = []
     try:
         readiness = conn.execute("""
-            SELECT condition_name, status
+            SELECT condition_name, current_status
             FROM pi_commercial_readiness
             ORDER BY condition_name
         """).fetchall()
-        confirmed = [r['condition_name'] for r in readiness if r['status'] == 'confirmed']
-        pending = [r['condition_name'] for r in readiness if r['status'] == 'pending']
+        confirmed = [r['condition_name'] for r in readiness if r['current_status'] == 'met']
+        pending = [r['condition_name'] for r in readiness if r['current_status'] in ('not_met', 'not_assessed', 'partial')]
     except sqlite3.OperationalError:
         pass
 
@@ -193,7 +193,7 @@ def analyze_commercial_intelligence(conn: sqlite3.Connection) -> list[dict]:
             AND NOT EXISTS (
                 SELECT 1 FROM pi_commercial_readiness pcr
                 WHERE pcr.condition_name='institutional_outcome_data'
-                AND pcr.status='confirmed'
+                AND pcr.current_status='met'
             )
         """).fetchone()
         cnt = (row['cnt'] or 0) if row else 0

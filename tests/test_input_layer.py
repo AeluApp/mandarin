@@ -98,6 +98,8 @@ class TestRecommendReadingTexts(unittest.TestCase):
 class TestInlineLookup(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        # Create a reading_text row so reading_events FK on text_id=1 is satisfied
+        _seed_reading_text(self.conn, "Lookup Test Text", hsk_ceiling=2)
 
     def test_queues_unknown_word_for_srs(self):
         ci_id = self.conn.execute(

@@ -142,6 +142,28 @@ def detect_near_miss(
                           f"'{expected_lower[diff_pos]}'")
                 return (NearMissType.PINYIN_CLOSE, detail)
 
+    # --- Character answer: Levenshtein distance of 1 (one character off) ---
+    # Applies to hanzi typing drills (chinese_to_english, english_to_chinese, etc.)
+    if drill_type in ("english_to_chinese", "hanzi_recall", "ime_type",
+                       "sentence_build", "cloze", "translation"):
+        user_stripped = user_answer.strip()
+        expected_stripped = expected_answer.strip()
+        if user_stripped and expected_stripped:
+            dist = _levenshtein_distance(user_stripped, expected_stripped)
+            if dist == 1 and len(expected_stripped) >= 2:
+                # Find what differs
+                if len(user_stripped) == len(expected_stripped):
+                    for ci in range(len(user_stripped)):
+                        if ci < len(expected_stripped) and user_stripped[ci] != expected_stripped[ci]:
+                            detail = f"you wrote {user_stripped[ci]} but it should be {expected_stripped[ci]}"
+                            return (NearMissType.PINYIN_CLOSE, detail)
+                elif len(user_stripped) < len(expected_stripped):
+                    detail = f"missing a character — expected {expected_stripped}"
+                    return (NearMissType.PINYIN_CLOSE, detail)
+                else:
+                    detail = f"one extra character — expected {expected_stripped}"
+                    return (NearMissType.PINYIN_CLOSE, detail)
+
     # --- Measure word error ---
     if error_type == "measure_word" or drill_type in ("measure_word", "measure_word_cloze"):
         if user_lower != expected_lower:
@@ -149,6 +171,24 @@ def detect_near_miss(
             return (NearMissType.MEASURE_WORD, detail)
 
     return None
+
+
+def _levenshtein_distance(s: str, t: str) -> int:
+    """Compute Levenshtein distance between two strings."""
+    if len(s) < len(t):
+        return _levenshtein_distance(t, s)
+    if len(t) == 0:
+        return len(s)
+    prev_row = list(range(len(t) + 1))
+    for i, c1 in enumerate(s):
+        curr_row = [i + 1]
+        for j, c2 in enumerate(t):
+            insertions = prev_row[j + 1] + 1
+            deletions = curr_row[j] + 1
+            substitutions = prev_row[j] + (0 if c1 == c2 else 1)
+            curr_row.append(min(insertions, deletions, substitutions))
+        prev_row = curr_row
+    return prev_row[-1]
 
 
 def format_near_miss_feedback(near_miss: tuple[NearMissType, str]) -> str:

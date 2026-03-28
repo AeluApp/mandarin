@@ -129,8 +129,8 @@ class TestConstraintFinder(unittest.TestCase):
         # Inject accuracy rejections
         for i in range(3):
             conn.execute("""
-                INSERT INTO pi_ai_review_queue (category, review_decision, created_at)
-                VALUES ('accuracy', 'rejected', datetime('now'))
+                INSERT INTO pi_ai_review_queue (id, content_type, content_json, review_decision, queued_at)
+                VALUES (hex(randomblob(16)), 'accuracy', '{}', 'rejected', datetime('now'))
             """)
         conn.commit()
         result = identify_cross_domain_constraint(conn)
@@ -142,8 +142,8 @@ class TestConstraintFinder(unittest.TestCase):
         conn = _make_db()
         # Inject a rejection to trigger persistence
         conn.execute("""
-            INSERT INTO pi_ai_review_queue (category, review_decision, created_at)
-            VALUES ('accuracy', 'rejected', datetime('now'))
+            INSERT INTO pi_ai_review_queue (id, content_type, content_json, review_decision, queued_at)
+            VALUES (hex(randomblob(16)), 'accuracy', '{}', 'rejected', datetime('now'))
         """)
         conn.commit()
         identify_cross_domain_constraint(conn)
@@ -167,8 +167,8 @@ class TestConstraintFinder(unittest.TestCase):
         conn = _make_db()
         conn.execute("""
             INSERT INTO pi_ai_portfolio_assessments
-                (id, overall_verdict, component_count, healthy_count, degraded_count, critical_count)
-            VALUES ('test', 'degraded', 5, 2, 2, 1)
+                (id, net_verdict, component_verdicts_json, dimension_scores_json, recommendation)
+            VALUES ('test', 'net_negative', '{}', '{}', 'Investigate degraded components')
         """)
         conn.commit()
         result = _get_ai_portfolio_verdict(conn)
@@ -187,8 +187,8 @@ class TestConstraintFinder(unittest.TestCase):
         conn = _make_db()
         # Add both a safety issue and low engagement
         conn.execute("""
-            INSERT INTO pi_ai_review_queue (category, review_decision, created_at)
-            VALUES ('accuracy', 'rejected', datetime('now'))
+            INSERT INTO pi_ai_review_queue (id, content_type, content_json, review_decision, queued_at)
+            VALUES (hex(randomblob(16)), 'accuracy', '{}', 'rejected', datetime('now'))
         """)
         conn.execute("""
             INSERT INTO session_log (user_id, started_at)

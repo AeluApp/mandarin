@@ -45,7 +45,10 @@ CREATE TABLE IF NOT EXISTS user (
     anonymous_mode INTEGER NOT NULL DEFAULT 0,
     role TEXT NOT NULL DEFAULT 'student',
     push_token TEXT,
-    streak_freezes_available INTEGER DEFAULT 0
+    streak_freezes_available INTEGER DEFAULT 0,
+    trial_ends_at TEXT,
+    referral_code TEXT UNIQUE,
+    referred_by INTEGER REFERENCES user(id)
 );
 
 -- ────────────────────────────────
@@ -261,6 +264,10 @@ CREATE TABLE IF NOT EXISTS progress (
     -- Suspend/bury (V97+)
     suspended_until TEXT,  -- ISO date; NULL = not suspended, '9999-12-31' = indefinite
 
+    -- Cross-modal transfer tracking (V126+)
+    -- JSON mapping drill_type -> ISO date of last practice
+    modality_history TEXT DEFAULT '{}',
+
     UNIQUE(user_id, content_item_id, modality),
     FOREIGN KEY (content_item_id) REFERENCES content_item(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
@@ -453,6 +460,39 @@ CREATE TABLE IF NOT EXISTS content_skill (
     FOREIGN KEY (content_item_id) REFERENCES content_item(id),
     FOREIGN KEY (skill_id) REFERENCES skill(id)
 );
+
+-- ────────────────────────────────
+-- CONTENT ↔ GRAMMAR LINK (Focus on Form, V123+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS content_grammar_link (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content_item_id INTEGER NOT NULL REFERENCES content_item(id),
+    grammar_point TEXT NOT NULL,
+    grammar_level INTEGER DEFAULT 1,
+    example_sentence TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_cgl_content ON content_grammar_link(content_item_id);
+CREATE INDEX IF NOT EXISTS idx_cgl_grammar ON content_grammar_link(grammar_point);
+
+-- ────────────────────────────────
+-- MEDIA SHELF (Authentic Input, V124+)
+-- ────────────────────────────────
+CREATE TABLE IF NOT EXISTS media_shelf (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    source_url TEXT,
+    content_type TEXT NOT NULL CHECK (content_type IN ('article', 'audio', 'video', 'podcast')),
+    hsk_level INTEGER NOT NULL DEFAULT 3,
+    topic TEXT,
+    summary TEXT,
+    full_text TEXT,
+    duration_seconds INTEGER,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    curated_by TEXT DEFAULT 'system'
+);
+CREATE INDEX IF NOT EXISTS idx_media_shelf_hsk ON media_shelf(hsk_level);
+CREATE INDEX IF NOT EXISTS idx_media_shelf_type ON media_shelf(content_type);
 
 -- ────────────────────────────────
 -- CONSTRUCTIONS (shared, V4+)

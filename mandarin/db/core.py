@@ -83,7 +83,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 121  # Increment when adding migrations
+SCHEMA_VERSION = 126  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -1156,6 +1156,15 @@ def _migrate_v19_to_v20(conn: sqlite3.Connection) -> None:
         conn.execute(
             "INSERT OR IGNORE INTO feature_flag (name, enabled, rollout_pct, description) VALUES (?, 1, 100, ?)",
             (flag_name, desc),
+        )
+    conn.commit()
+
+    # AI feature flags — off by default, gradual rollout via admin UI
+    from ..feature_flags import AI_FEATURE_FLAGS
+    for _ai_flag, _ai_desc in AI_FEATURE_FLAGS.items():
+        conn.execute(
+            "INSERT OR IGNORE INTO feature_flag (name, enabled, rollout_pct, description) VALUES (?, 0, 0.0, ?)",
+            (_ai_flag, _ai_desc),
         )
     conn.commit()
 
@@ -7268,6 +7277,213 @@ def _migrate_v120_to_v121(conn):
     conn.commit()
 
 
+def _migrate_v121_to_v122(conn):
+    """v121->v122: Seed intelligence registry tables (copy, marketing pages, vibe audits, strategy reviews)."""
+    import uuid as _uuid
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # ── 1. pi_copy_registry — register key UI strings for voice audit ──
+    copy_entries = [
+        ("start_session", "Begin your session", "dashboard CTA", "product_ui"),
+        ("empty_state_no_items", "Nothing to review yet. Start a session to begin learning.", "empty review queue", "product_ui"),
+        ("placement_intro", "Let's find your level. Answer a few questions and we'll build your study plan.", "placement test intro", "product_ui"),
+        ("feedback_prompt", "How did that session feel?", "post-session feedback", "product_ui"),
+        ("streak_neutral", "You've studied 3 days this week.", "streak display (no praise inflation)", "product_ui"),
+    ]
+    for string_key, copy_text, copy_context, surface in copy_entries:
+        conn.execute(
+            """INSERT OR IGNORE INTO pi_copy_registry
+               (id, string_key, copy_text, copy_context, surface, last_updated_at)
+               VALUES (?, ?, ?, ?, ?, datetime('now'))""",
+            (str(_uuid.uuid4()), string_key, copy_text, copy_context, surface),
+        )
+
+    # ── 2. pi_marketing_pages — register landing pages ──
+    marketing_pages = [
+        ("landing", "Home", "/", "general learner", "Start learning"),
+        ("pricing", "Pricing", "/pricing", "converting visitor", "Choose a plan"),
+        ("faq", "FAQ", "/faq", "evaluating visitor", "Start learning"),
+        ("hsk-prep", "HSK Prep", "/hsk-prep", "exam-focused learner", "Start HSK prep"),
+        ("serious-learner", "For Serious Learners", "/serious-learner", "committed learner", "Start learning"),
+        ("vs-duolingo", "Aelu vs Duolingo", "/vs-duolingo", "Duolingo user", "Try Aelu free"),
+        ("vs-anki", "Aelu vs Anki", "/vs-anki", "Anki user", "Try Aelu free"),
+    ]
+    for slug, title, url, audience, cta in marketing_pages:
+        conn.execute(
+            """INSERT OR IGNORE INTO pi_marketing_pages
+               (id, page_slug, page_title, page_url, primary_audience, primary_cta)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (str(_uuid.uuid4()), slug, title, url, audience, cta),
+        )
+
+    # ── 3. pi_vibe_audits — seed recent audit dates to clear "overdue" alerts ──
+    audit_categories = [
+        "color_palette",
+        "typography",
+        "motion",
+        "dark_mode",
+        "sound_design",
+    ]
+    for category in audit_categories:
+        conn.execute(
+            """INSERT OR IGNORE INTO pi_vibe_audits
+               (id, audit_date, audit_type, audit_category, overall_pass,
+                findings_text, auditor)
+               VALUES (?, ?, 'scheduled', ?, 1, 'Baseline audit — no issues found.', 'migration_seed')""",
+            (str(_uuid.uuid4()), now, category),
+        )
+
+    # ── 4. pi_marketing_strategy_reviews — create table + seed strategy review dates ──
+    tables = _table_set(conn)
+    if "pi_marketing_strategy_reviews" not in tables:
+        conn.execute("""
+            CREATE TABLE pi_marketing_strategy_reviews (
+                id TEXT PRIMARY KEY,
+                review_date TEXT NOT NULL,
+                strategy_area TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'completed',
+                summary TEXT,
+                action_items TEXT,
+                reviewer TEXT DEFAULT 'migration_seed',
+                next_review_date TEXT
+            )
+        """)
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_pi_msr_area ON pi_marketing_strategy_reviews(strategy_area)"
+        )
+
+    strategy_areas = [
+        ("positioning", "Brand positioning and differentiation review"),
+        ("audience_segments", "Target audience segments validation"),
+        ("content_marketing", "Content marketing pipeline review"),
+        ("seo", "SEO strategy and keyword performance review"),
+        ("referral", "Referral and word-of-mouth strategy review"),
+    ]
+    for area, summary in strategy_areas:
+        conn.execute(
+            """INSERT OR IGNORE INTO pi_marketing_strategy_reviews
+               (id, review_date, strategy_area, status, summary, reviewer)
+               VALUES (?, ?, ?, 'completed', ?, 'migration_seed')""",
+            (str(_uuid.uuid4()), now, area, summary),
+        )
+
+    conn.commit()
+
+
+def _migrate_v122_to_v123(conn):
+    """v122->v123: Add content_grammar_link table for Focus on Form linkage.
+
+    Links content items to grammar points by text name with level and example,
+    enabling contextual grammar teaching (Focus on Form methodology).
+    """
+    tables = _table_set(conn)
+    if "content_grammar_link" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS content_grammar_link (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                content_item_id INTEGER NOT NULL REFERENCES content_item(id),
+                grammar_point TEXT NOT NULL,
+                grammar_level INTEGER DEFAULT 1,
+                example_sentence TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+            CREATE INDEX IF NOT EXISTS idx_cgl_content
+                ON content_grammar_link(content_item_id);
+            CREATE INDEX IF NOT EXISTS idx_cgl_grammar
+                ON content_grammar_link(grammar_point);
+        """)
+    conn.commit()
+
+
+def _migrate_v123_to_v124(conn):
+    """v123->v124: Add media_shelf table for authentic input channel.
+
+    Stores curated authentic Chinese content (articles, audio, video, podcasts)
+    tagged by HSK level for comprehensible input.
+    """
+    tables = _table_set(conn)
+    if "media_shelf" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS media_shelf (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                source_url TEXT,
+                content_type TEXT NOT NULL
+                    CHECK (content_type IN ('article', 'audio', 'video', 'podcast')),
+                hsk_level INTEGER NOT NULL DEFAULT 3,
+                topic TEXT,
+                summary TEXT,
+                full_text TEXT,
+                duration_seconds INTEGER,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                curated_by TEXT DEFAULT 'system'
+            );
+            CREATE INDEX IF NOT EXISTS idx_media_shelf_hsk
+                ON media_shelf(hsk_level);
+            CREATE INDEX IF NOT EXISTS idx_media_shelf_type
+                ON media_shelf(content_type);
+        """)
+    conn.commit()
+
+
+def _migrate_v124_to_v125(conn):
+    """v124->v125: Add free trial and referral columns to user table.
+
+    - trial_ends_at: when the 7-day free trial expires
+    - referral_code: unique 8-char code for sharing
+    - referred_by: user ID of the referrer
+    """
+    user_cols = _col_set(conn, "user")
+    if "trial_ends_at" not in user_cols:
+        conn.execute("ALTER TABLE user ADD COLUMN trial_ends_at TEXT")
+    if "referral_code" not in user_cols:
+        conn.execute("ALTER TABLE user ADD COLUMN referral_code TEXT")
+        conn.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_user_referral_code ON user(referral_code)")
+    if "referred_by" not in user_cols:
+        conn.execute("ALTER TABLE user ADD COLUMN referred_by INTEGER REFERENCES user(id)")
+    # Backfill referral codes for existing users that don't have one
+    import secrets as _secrets
+    rows = conn.execute("SELECT id FROM user WHERE referral_code IS NULL").fetchall()
+    for row in rows:
+        code = _secrets.token_urlsafe(6)[:8]
+        try:
+            conn.execute("UPDATE user SET referral_code = ? WHERE id = ?", (code, row["id"]))
+        except Exception:
+            # Collision — retry with a different code
+            code = _secrets.token_urlsafe(6)[:8]
+            try:
+                conn.execute("UPDATE user SET referral_code = ? WHERE id = ?", (code, row["id"]))
+            except Exception:
+                pass
+    conn.commit()
+
+
+def _migrate_v125_to_v126(conn):
+    """v125->v126: Add modality_history JSON column to progress table.
+
+    Tracks when each modality was last drilled for an item, enabling
+    cross-modal transfer scheduling (FMEA: items stuck in single modality).
+    Format: JSON object mapping drill_type -> ISO date of last practice.
+    e.g. {"mc": "2026-03-20", "ime_type": "2026-03-22", "listening_gist": "2026-03-25"}
+    """
+    progress_cols = _col_set(conn, "progress")
+    if "modality_history" not in progress_cols:
+        conn.execute("ALTER TABLE progress ADD COLUMN modality_history TEXT DEFAULT '{}'")
+        conn.commit()
+
+
+def _migrate_v126_to_v127(conn):
+    """v126->v127: Promote project owner to admin.
+
+    Ensures the primary developer account has admin access when MFA is enabled.
+    """
+    conn.execute(
+        "UPDATE user SET is_admin = 1 WHERE email = 'jason.gerson@gmail.com'"
+    )
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7390,6 +7606,12 @@ MIGRATIONS = {
     118: _migrate_v118_to_v119,
     119: _migrate_v119_to_v120,
     120: _migrate_v120_to_v121,
+    121: _migrate_v121_to_v122,
+    122: _migrate_v122_to_v123,
+    123: _migrate_v123_to_v124,
+    124: _migrate_v124_to_v125,
+    125: _migrate_v125_to_v126,
+    126: _migrate_v126_to_v127,
 }
 
 

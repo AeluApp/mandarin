@@ -68,11 +68,27 @@ def normalize_pinyin(s: str) -> str:
 
 # ── Pinyin matching ──────────────────────────────
 
+def _has_tone_info(pinyin: str) -> bool:
+    """Check whether a pinyin string carries any tone information (marks or numbers)."""
+    for ch in pinyin:
+        if ch in TONE_MARK_TO_NUM:
+            return True
+    if re.search(r'[a-zü][1-4]', pinyin.lower()):
+        return True
+    return False
+
+
 def _pinyin_match(user: str, expected: str):
     """Check if user pinyin matches expected. Returns (correct, match_type).
 
-    match_type: 'exact', 'numbered', 'no_tone', or None (wrong).
-    Accepts tone numbers (ma1 = ma) and plain pinyin (mama = mama, counted correct).
+    match_type:
+      'exact'      — full match with tone marks
+      'numbered'   — match after converting marks to numbers
+      'no_tone'    — user provided no tones, base syllables match
+      'tone_error' — user provided tones but they are wrong (base syllables match)
+      None         — base syllables don't match (wrong answer)
+
+    Accepts tone numbers (ma1 = mā) and plain pinyin (mama = māma, counted correct).
     """
     user_norm = normalize_pinyin(user)
     expected_norm = normalize_pinyin(expected)
@@ -95,10 +111,14 @@ def _pinyin_match(user: str, expected: str):
     if user_alnum == expected_alnum:
         return True, "numbered"
 
-    # Plain pinyin (no tones at all) -- accept as correct but note it
+    # Base syllables match — check whether user omitted tones or got them wrong
     user_stripped = normalize_pinyin(strip_tones(user))
     expected_stripped = normalize_pinyin(strip_tones(expected))
     if user_stripped == expected_stripped and user_stripped:
+        if _has_tone_info(user):
+            # User supplied tones but they differ from expected
+            return False, "tone_error"
+        # No tone information at all — accept as correct but note it
         return True, "no_tone"
 
     return False, None
@@ -161,7 +181,15 @@ def run_ime_drill(item: dict, conn, show_fn, input_fn, prominent: bool = True) -
         error_type = None
         cause = None
         feedback = ""
-        if not correct:
+        if match_type == "tone_error":
+            # Base syllable correct, but tones are wrong — flag specifically
+            error_type = "tone"
+            feedback = f"  Correct syllable, wrong tone \u2014 it should be {expected}"
+            cause = classify_error_cause(answer, expected, "ime_type", item)
+            elaboration = elaborate_error(cause, answer, expected, item, "ime_type")
+            if elaboration:
+                feedback += f"\n{elaboration}"
+        elif not correct:
             error_type = _classify_ime_error(answer, expected)
             feedback = f"  \u2192 {format_hanzi_inline(item['hanzi'])} = {expected}"
             if error_type == "tone":

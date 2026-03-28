@@ -222,7 +222,7 @@ def _has_cloud_api_key() -> bool:
     _CLOUD_KEY_NAMES = (
         "GROQ_API_KEY", "TOGETHER_API_KEY", "FIREWORKS_API_KEY",
         "SILICONFLOW_API_KEY", "DEEPSEEK_API_KEY", "MISTRAL_API_KEY",
-        "OPENAI_API_KEY", "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
     )
     return any(os.environ.get(k) for k in _CLOUD_KEY_NAMES)
 

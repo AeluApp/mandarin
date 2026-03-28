@@ -62,8 +62,8 @@ def _wrap_html(heading: str, body_html: str) -> str:
 <body style="margin:0;padding:0;background-color:{s['bg']};font-family:{s['body_font']};color:{s['text']};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="email-bg" style="background-color:{s['bg']};">
 <tr><td align="center" style="padding:40px 20px;">
-<table role="presentation" width="560" cellpadding="0" cellspacing="0" class="email-card"
-       style="background-color:{s['bg']};overflow:hidden;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="email-card"
+       style="max-width:600px;background-color:{s['bg']};overflow:hidden;">
   <tr><td class="email-header" style="background-color:{s['accent']};padding:28px 32px;">
     <p style="margin:0 0 8px 0;font-family:'Noto Serif SC',serif;font-size:32px;color:rgba(255,255,255,0.7);line-height:1;">漫</p>
     <h1 style="margin:0;font-family:{s['heading_font']};font-size:24px;font-weight:600;color:#FFFFFF;">
@@ -75,8 +75,8 @@ def _wrap_html(heading: str, body_html: str) -> str:
     {body_html}
   </td></tr>
   <tr><td class="email-footer" style="padding:20px 32px;border-top:1px solid {s['divider']};text-align:center;">
-    <p style="margin:0;font-size:13px;color:{s['text_dim']};">Aelu</p>
-    <p style="margin:4px 0 0;font-size:11px;color:{s['text_dim']};">{MAILING_ADDRESS}</p>
+    <p style="margin:0;font-size:13px;color:{s['text_dim']};"><a href="{BASE_URL}" style="color:{s['text_dim']};text-decoration:none;">Aelu</a></p>
+    <p style="margin:4px 0 0;font-size:11px;color:{s['text_dim']};">Adaptive Mandarin study</p>
   </td></tr>
 </table>
 </td></tr>
@@ -182,14 +182,25 @@ def send_alert(to_email: str, subject: str, details: str) -> bool:
 def send_welcome(to_email: str, display_name: str) -> bool:
     """Send welcome email after registration."""
     name = display_name or "there"
+    s = _STYLE
     body = (
         f'<p style="font-size:16px;line-height:1.6;">Hi {name},</p>'
         f'<p style="font-size:16px;line-height:1.6;">'
         f"Welcome to Aelu. Your account is ready.</p>"
         f'<p style="font-size:16px;line-height:1.6;">'
-        f"Start your first session whenever you like. "
-        f"Everything adapts to your pace.</p>"
-        f'<p style="font-size:16px;line-height:1.6;color:{_STYLE["accent"]};">'
+        f"<strong>Your first session</strong> takes about 10 minutes. "
+        f"The system assesses your starting level across vocabulary, listening, and tone recognition, "
+        f"then adapts from there.</p>"
+        f'<p style="font-size:16px;line-height:1.6;">'
+        f"<strong>After that,</strong> every session targets what you are weakest at. "
+        f"You just answer the question in front of you.</p>"
+        f'<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:24px 0;">'
+        f'<tr><td style="background-color:{s["accent"]};text-align:center;">'
+        f'<a href="{BASE_URL}" target="_blank" style="display:inline-block;background-color:{s["accent"]};'
+        f'color:#F2EBE0;font-family:Georgia,serif;font-size:16px;font-weight:bold;'
+        f'text-decoration:none;padding:14px 32px;">Start your first session</a>'
+        f'</td></tr></table>'
+        f'<p style="font-size:16px;line-height:1.6;color:{s["accent"]};">'
         f"Good studying.</p>"
     )
     html = _wrap_html("Welcome to Aelu", body)

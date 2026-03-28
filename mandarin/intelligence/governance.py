@@ -252,9 +252,9 @@ def _get_component_monitoring_status(conn, component_name: str) -> str:
     if not dimension:
         return 'unknown'
 
-    # Check pi_findings if it exists
+    # Check pi_finding if it exists
     recent = _safe_query(conn, """
-        SELECT severity FROM pi_findings
+        SELECT severity FROM pi_finding
         WHERE dimension = ? AND created_at >= datetime('now', '-7 days')
         ORDER BY created_at DESC LIMIT 1
     """, (dimension,))
@@ -489,7 +489,7 @@ def get_transparency_report(conn, user_id: str) -> dict:
 def explain_item_scheduling(conn, item_id: str, user_id: str) -> dict:
     """Plain language explanation of why a specific item is being shown."""
     history = _safe_query_all(conn, """
-        SELECT is_correct, created_at FROM review_event
+        SELECT correct, created_at FROM review_event
         WHERE content_item_id = ? AND user_id = ?
         ORDER BY created_at DESC LIMIT 5
     """, (item_id, user_id))
@@ -509,7 +509,7 @@ def explain_item_scheduling(conn, item_id: str, user_id: str) -> dict:
         else:
             reason = "This item is scheduled for review based on your recent history."
 
-        recent_correct = sum(1 for r in history if r['is_correct'])
+        recent_correct = sum(1 for r in history if r['correct'])
         accuracy_note = f"Recent accuracy: {recent_correct}/{len(history)} correct."
 
     return {
@@ -528,7 +528,7 @@ def check_data_quality(conn) -> list[dict]:
     # Completed sessions with no review events
     orphaned = _safe_scalar(conn, """
         SELECT COUNT(*) FROM session_log s
-        WHERE s.created_at >= datetime('now', '-30 days')
+        WHERE s.started_at >= datetime('now', '-30 days')
         AND NOT EXISTS (
             SELECT 1 FROM review_event r WHERE r.session_id = s.id
         )

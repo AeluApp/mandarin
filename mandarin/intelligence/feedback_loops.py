@@ -296,11 +296,13 @@ def analyze_spc_closure(conn) -> list[dict]:
     """Check SPC violations via spc_observation table and cross-reference with work_items."""
     findings = []
 
-    # Direct SPC observation queries: group by chart_type, find OOC points
+    # Fetch SPC observations grouped by chart_type and compute control limits
+    # from the data (mean +/- 3*sigma) since the table stores raw values only.
+    import math as _math
     spc_charts = _safe_query_all(conn, """
         SELECT chart_type,
                COUNT(*) as total_obs,
-               SUM(CASE WHEN rule_violated IS NOT NULL THEN 1 ELSE 0 END) as ooc_count,
+               AVG(value) as mean_val,
                MAX(observed_at) as latest
         FROM spc_observation
         WHERE observed_at >= datetime('now', '-30 days')
@@ -308,7 +310,22 @@ def analyze_spc_closure(conn) -> list[dict]:
     """)
 
     for chart in (spc_charts or []):
-        if (chart["ooc_count"] or 0) == 0:
+        # Compute control limits from data: mean +/- 3*sigma
+        obs = _safe_query_all(conn, """
+            SELECT value FROM spc_observation
+            WHERE chart_type = ? AND observed_at >= datetime('now', '-30 days')
+        """, (chart["chart_type"],))
+        values = [o["value"] for o in (obs or []) if o["value"] is not None]
+        if len(values) < 2:
+            continue
+        mean_val = sum(values) / len(values)
+        variance = sum((v - mean_val) ** 2 for v in values) / (len(values) - 1)
+        sigma = _math.sqrt(variance) if variance > 0 else 0
+        ucl = mean_val + 3 * sigma
+        lcl = mean_val - 3 * sigma
+
+        ooc_count = sum(1 for v in values if v > ucl or v < lcl)
+        if ooc_count == 0:
             continue
 
         # Check if there's a work_item addressing this chart
@@ -319,13 +336,12 @@ def analyze_spc_closure(conn) -> list[dict]:
             ORDER BY created_at DESC LIMIT 1
         """, (chart["chart_type"],))
 
-        # Check if recent observations returned to control
-        recent_in_control = _safe_scalar(conn, """
-            SELECT COUNT(*) FROM spc_observation
-            WHERE chart_type = ?
-              AND rule_violated IS NULL
-              AND observed_at = (SELECT MAX(observed_at) FROM spc_observation WHERE chart_type = ?)
-        """, (chart["chart_type"], chart["chart_type"]))
+        # Check if the most recent observation is in control
+        latest_value = values[-1] if values else None
+        recent_in_control = (
+            latest_value is not None
+            and lcl <= latest_value <= ucl
+        )
 
         status = "returned to control" if recent_in_control else "still out of control"
         has_work = f"work_item #{work_item['id']} ({work_item['status']})" if work_item else "no work_item"
@@ -333,11 +349,11 @@ def analyze_spc_closure(conn) -> list[dict]:
         if not recent_in_control:
             findings.append(_finding(
                 "pm", "medium",
-                f"SPC chart '{chart['chart_type']}': {chart['ooc_count']} OOC points, {status}",
-                f"Chart '{chart['chart_type']}' has {chart['ooc_count']}/{chart['total_obs']} "
+                f"SPC chart '{chart['chart_type']}': {ooc_count} OOC points, {status}",
+                f"Chart '{chart['chart_type']}' has {ooc_count}/{chart['total_obs']} "
                 f"out-of-control observations. Status: {status}. Tracked by: {has_work}.",
                 "Investigate root cause and verify corrective action effectiveness.",
-                f"SPC: {chart['chart_type']} — {chart['ooc_count']} violations. {has_work}.",
+                f"SPC: {chart['chart_type']} — {ooc_count} violations. {has_work}.",
                 "SPC: unresolved violations indicate process instability",
                 [],
             ))

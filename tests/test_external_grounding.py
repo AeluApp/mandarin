@@ -100,7 +100,8 @@ class TestKnowledgeConflictDetection(unittest.TestCase):
 
     def test_superseded_entry_excluded(self):
         conn = _make_db()
-        new_id = str(uuid4())
+        # Insert the "new" entry first so the FK on superseded_by is satisfied
+        new_id = _insert_knowledge(conn, applicable_dimension="other_dim")
         _insert_knowledge(conn, applicable_dimension="srs_funnel",
                           superseded_by=new_id)
         _insert_threshold(conn, "srs_funnel", 5.0)
@@ -208,17 +209,30 @@ class TestBenchmarkComparison(unittest.TestCase):
         conn.commit()
         return bm_id
 
+    def _seed_content_items(self, conn, n=10):
+        """Create n content items and return their ids."""
+        ids = []
+        for i in range(n):
+            cid = conn.execute("""
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level)
+                VALUES (?, ?, ?, 1)
+            """, (f"测{i}", f"ce{i}", f"test{i}")).lastrowid
+            ids.append(cid)
+        conn.commit()
+        return ids
+
     def test_below_p25_low_percentile(self):
         conn = _make_db()
         self._seed_benchmark(conn, median=0.775, p25=0.70, p75=0.85)
+        cids = self._seed_content_items(conn)
         # Insert review events to get a measurable session accuracy
         # _measure_current_metric for drill_quality: AVG(correct) * 100
         # To get ~50% accuracy (below p25 of 0.70)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', ?)
-            """, (i + 1, 1 if i < 5 else 0))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', ?)
+            """, (cids[i], 1 if i < 5 else 0))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -229,12 +243,13 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_gap_under_15pct_no_finding(self):
         conn = _make_db()
         self._seed_benchmark(conn, median=0.775, p25=0.70, p75=0.85)
+        cids = self._seed_content_items(conn)
         # Get 70% accuracy (near p25, gap from median < 15%)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', ?)
-            """, (i + 1, 1 if i < 7 else 0))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', ?)
+            """, (cids[i], 1 if i < 7 else 0))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -245,11 +260,12 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_unknown_population_n_shows_note(self):
         conn = _make_db()
         self._seed_benchmark(conn, pop_n=None)
+        cids = self._seed_content_items(conn)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', 1)
-            """, (i + 1,))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', 1)
+            """, (cids[i],))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -260,11 +276,12 @@ class TestBenchmarkComparison(unittest.TestCase):
     def test_evidence_quality_in_result(self):
         conn = _make_db()
         self._seed_benchmark(conn)
+        cids = self._seed_content_items(conn)
         for i in range(10):
             conn.execute("""
-                INSERT INTO review_event (user_id, content_item_id, drill_type, correct)
-                VALUES (1, ?, 'recall', 1)
-            """, (i + 1,))
+                INSERT INTO review_event (user_id, content_item_id, modality, drill_type, correct)
+                VALUES (1, ?, 'reading', 'recall', 1)
+            """, (cids[i],))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import compare_against_benchmarks
@@ -281,8 +298,8 @@ class TestGoalCoherence(unittest.TestCase):
         # Add content to establish HSK level
         for i in range(10):
             conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"字{i}", f"word{i}"))
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"字{i}", f"zi{i}", f"word{i}"))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import check_goal_coherence
@@ -298,17 +315,17 @@ class TestGoalCoherence(unittest.TestCase):
         for level in (1, 2, 3):
             for i in range(10):
                 cid = conn.execute("""
-                    INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, ?)
-                """, (f"字{level}{i}", f"word{level}{i}", level)).lastrowid
+                    INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, ?)
+                """, (f"字{level}{i}", f"zi{level}{i}", f"word{level}{i}", level)).lastrowid
                 conn.execute("""
-                    INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'stable')
+                    INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'stable')
                 """, (cid,))
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 4)
-            """, (f"四{i}", f"four{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 4)
+            """, (f"四{i}", f"si{i}", f"four{i}")).lastrowid
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'learning')
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'learning')
             """, (cid,))
         conn.commit()
 
@@ -330,8 +347,8 @@ class TestGoalCoherence(unittest.TestCase):
         conn = _make_db()
         for i in range(5):
             conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"字{i}", f"w{i}"))
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"字{i}", f"zi{i}", f"w{i}"))
         conn.commit()
 
         from mandarin.intelligence.external_grounding import check_goal_coherence
@@ -447,18 +464,18 @@ class TestHSKEstimation(unittest.TestCase):
         # HSK1: all mastered, HSK2: half mastered
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 1)
-            """, (f"一{i}", f"one{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 1)
+            """, (f"一{i}", f"yi{i}", f"one{i}")).lastrowid
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, 'stable')
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', 'stable')
             """, (cid,))
         for i in range(10):
             cid = conn.execute("""
-                INSERT INTO content_item (hanzi, english, hsk_level) VALUES (?, ?, 2)
-            """, (f"二{i}", f"two{i}")).lastrowid
+                INSERT INTO content_item (hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, 2)
+            """, (f"二{i}", f"er{i}", f"two{i}")).lastrowid
             stage = "stable" if i < 3 else "learning"
             conn.execute("""
-                INSERT INTO progress (content_item_id, mastery_stage) VALUES (?, ?)
+                INSERT INTO progress (content_item_id, modality, mastery_stage) VALUES (?, 'reading', ?)
             """, (cid, stage))
         conn.commit()
 

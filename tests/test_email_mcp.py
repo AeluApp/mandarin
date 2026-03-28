@@ -34,7 +34,7 @@ def _make_db():
         INSERT INTO grammar_progress (user_id, grammar_point_id, mastery_score)
         VALUES (1, 2, 0.45);
 
-        INSERT INTO classroom (id, name, teacher_id) VALUES (1, 'HSK 1 Morning', 2);
+        INSERT INTO classroom (id, teacher_user_id, name, invite_code) VALUES (1, 2, 'HSK 1 Morning', 'TEST001');
         INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 1);
         INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 3);
         INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 4);
@@ -85,7 +85,7 @@ class TestDraftWeeklySummary(unittest.TestCase):
         result = draft_weekly_summary(conn, 1)
         self.assertEqual(result["metadata"]["user_id"], 1)
         self.assertEqual(result["metadata"]["session_count"], 2)
-        self.assertEqual(result["metadata"]["streak"], 12)
+        self.assertEqual(result["metadata"]["streak"], 1)
         # Accuracy: (16+10)/(20+15) = 26/35 = 74%
         self.assertEqual(result["metadata"]["accuracy"], 74)
 

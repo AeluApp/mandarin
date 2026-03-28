@@ -1,0 +1,1759 @@
+{
+  "passages": [
+    {
+      "id": "j3_daily_001",
+      "title": "Morning Market",
+      "title_zh": "早市",
+      "hsk_level": 3,
+      "text_zh": "每个星期六早上，妈妈带我去早市买菜。早市很大，卖菜的人很多，叫卖的声音到处都是。妈妈喜欢先买水果，她说早上的水果最新鲜。然后我们去买鱼，卖鱼的阿姨总是笑着跟妈妈打招呼。妈妈每次都会问价钱，有时候还要便宜一点。买完菜以后，我们在一个小摊子旁边坐下来，吃一碗热的豆腐脑。我觉得这是一个星期里最开心的早上。回家的路上，我帮妈妈提东西，袋子很重，但是我不怕。妈妈说我长大了，可以帮她做很多事了。",
+      "text_pinyin": "Měi gè xīngqīliù zǎoshang, māma dài wǒ qù zǎoshì mǎi cài. Zǎoshì hěn dà, mài cài de rén hěn duō, jiàomài de shēngyīn dàochù dōu shì. Māma xǐhuan xiān mǎi shuǐguǒ, tā shuō zǎoshang de shuǐguǒ zuì xīnxiān. Ránhòu wǒmen qù mǎi yú, mài yú de āyí zǒngshì xiào zhe gēn māma dǎ zhāohu. Māma měi cì dōu huì wèn jiàqian, yǒu shíhou hái yào piányi yìdiǎn. Mǎi wán cài yǐhòu, wǒmen zài yí gè xiǎo tānzi pángbiān zuò xiàlái, chī yì wǎn rè de dòufunǎo. Wǒ juéde zhè shì yí gè xīngqī lǐ zuì kāixīn de zǎoshang. Huí jiā de lù shàng, wǒ bāng māma tí dōngxi, dàizi hěn zhòng, dànshì wǒ bú pà. Māma shuō wǒ zhǎng dà le, kěyǐ bāng tā zuò hěn duō shì le.",
+      "text_en": "Every Saturday morning, Mom takes me to the morning market to buy vegetables. The morning market is big, with many vendors, and the hawking sounds are everywhere. Mom likes to buy fruit first — she says fruit is freshest in the morning. Then we buy fish; the lady selling fish always greets Mom with a smile. Mom always asks the price, and sometimes bargains for a lower one. After buying vegetables, we sit down by a small stall and eat a bowl of hot doufu-nao. I think this is the happiest morning of the week. On the way home, I help Mom carry things. The bags are heavy, but I'm not afraid. Mom says I've grown up and can help her with many things now.",
+      "vocabulary": [
+        {
+          "hanzi": "早市",
+          "pinyin": "zǎoshì",
+          "english": "morning market"
+        },
+        {
+          "hanzi": "叫卖",
+          "pinyin": "jiàomài",
+          "english": "to hawk, to cry out one's wares"
+        },
+        {
+          "hanzi": "新鲜",
+          "pinyin": "xīnxiān",
+          "english": "fresh"
+        },
+        {
+          "hanzi": "打招呼",
+          "pinyin": "dǎ zhāohu",
+          "english": "to greet, to say hello"
+        },
+        {
+          "hanzi": "价钱",
+          "pinyin": "jiàqian",
+          "english": "price"
+        },
+        {
+          "hanzi": "便宜",
+          "pinyin": "piányi",
+          "english": "cheap, inexpensive"
+        },
+        {
+          "hanzi": "摊子",
+          "pinyin": "tānzi",
+          "english": "stall, stand"
+        },
+        {
+          "hanzi": "豆腐脑",
+          "pinyin": "dòufunǎo",
+          "english": "soft tofu pudding (a breakfast dish)"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "妈妈为什么先买水果？",
+          "q_en": "Why does Mom buy fruit first?",
+          "options": [
+            {
+              "text": "因为水果最便宜",
+              "pinyin": "yīnwèi shuǐguǒ zuì piányi",
+              "text_en": "because fruit is cheapest",
+              "correct": false
+            },
+            {
+              "text": "因为早上的水果最新鲜",
+              "pinyin": "yīnwèi zǎoshang de shuǐguǒ zuì xīnxiān",
+              "text_en": "because morning fruit is freshest",
+              "correct": true
+            },
+            {
+              "text": "因为水果最好吃",
+              "pinyin": "yīnwèi shuǐguǒ zuì hǎochī",
+              "text_en": "because fruit tastes the best",
+              "correct": false
+            },
+            {
+              "text": "因为卖水果的人要走了",
+              "pinyin": "yīnwèi mài shuǐguǒ de rén yào zǒu le",
+              "text_en": "because the fruit vendor is about to leave",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.3,
+          "explanation": "The passage says 她说早上的水果最新鲜."
+        },
+        {
+          "type": "mc",
+          "q_zh": "买完菜以后他们做了什么？",
+          "q_en": "What did they do after buying vegetables?",
+          "options": [
+            {
+              "text": "马上回家了",
+              "pinyin": "mǎshàng huí jiā le",
+              "text_en": "went home immediately",
+              "correct": false
+            },
+            {
+              "text": "去了超市",
+              "pinyin": "qù le chāoshì",
+              "text_en": "went to the supermarket",
+              "correct": false
+            },
+            {
+              "text": "坐下来吃豆腐脑",
+              "pinyin": "zuò xiàlái chī dòufunǎo",
+              "text_en": "sat down and ate doufu-nao",
+              "correct": true
+            },
+            {
+              "text": "又买了水果",
+              "pinyin": "yòu mǎi le shuǐguǒ",
+              "text_en": "bought fruit again",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.25,
+          "explanation": "The passage states 我们在一个小摊子旁边坐下来，吃一碗热的豆腐脑."
+        },
+        {
+          "type": "mc",
+          "q_zh": "“我”对去早市有什么感觉？",
+          "q_en": "How does the narrator feel about going to the morning market?",
+          "options": [
+            {
+              "text": "觉得很累",
+              "pinyin": "juéde hěn lèi",
+              "text_en": "feels tired",
+              "correct": false
+            },
+            {
+              "text": "觉得很无聊",
+              "pinyin": "juéde hěn wúliáo",
+              "text_en": "feels bored",
+              "correct": false
+            },
+            {
+              "text": "觉得很开心",
+              "pinyin": "juéde hěn kāixīn",
+              "text_en": "feels happy",
+              "correct": true
+            },
+            {
+              "text": "觉得很害怕",
+              "pinyin": "juéde hěn hàipà",
+              "text_en": "feels scared",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "The narrator says 这是一个星期里最开心的早上."
+        }
+      ]
+    },
+    {
+      "id": "j3_daily_002",
+      "title": "Asking for Directions",
+      "title_zh": "问路",
+      "hsk_level": 3,
+      "text_zh": "上个星期天，我一个人去城市的另一边看朋友。我坐了地铁，到了一个没去过的站。出了地铁站，我不知道该往哪边走。我看了看手机地图，可是还是不太明白。旁边有一个老奶奶在等公交车，我走过去问她：“请问，人民路怎么走？”老奶奶想了想，说：“你往前走，到十字路口右转，再走五分钟就到了。”我谢了她，按照她说的走。可是走了十分钟，我还是找不到。我又问了一个卖报纸的大叔，他说我走反了，应该回去左转。最后我终于到了朋友家，比计划晚了半个小时。朋友笑着说：“下次用导航吧。”",
+      "text_pinyin": "Shàng gè xīngqītiān, wǒ yí gè rén qù chéngshì de lìng yì biān kàn péngyou. Wǒ zuò le dìtiě, dào le yí gè méi qù guo de zhàn. Chū le dìtiězhàn, wǒ bù zhīdào gāi wǎng nǎ biān zǒu. Wǒ kàn le kàn shǒujī dìtú, kěshì háishì bú tài míngbai. Pángbiān yǒu yí gè lǎo nǎinai zài děng gōngjiāo chē, wǒ zǒu guòqù wèn tā. Lǎo nǎinai xiǎng le xiǎng, shuō wǒ yīnggāi wǎng qián zǒu, dào shízì lùkǒu yòu zhuǎn, zài zǒu wǔ fēnzhōng jiù dào le. Wǒ xiè le tā, ànzhào tā shuō de zǒu. Kěshì zǒu le shí fēnzhōng, wǒ háishì zhǎo bú dào. Wǒ yòu wèn le yí gè mài bàozhǐ de dàshū, tā shuō wǒ zǒu fǎn le, yīnggāi huíqù zuǒ zhuǎn. Zuìhòu wǒ zhōngyú dào le péngyou jiā, bǐ jìhuà wǎn le bàn gè xiǎoshí. Péngyou xiào zhe shuō xià cì yòng dǎoháng ba.",
+      "text_en": "Last Sunday, I went alone to visit a friend on the other side of the city. I took the subway and arrived at a station I had never been to. After leaving the subway station, I didn't know which way to go. I checked the map on my phone, but I still didn't quite understand. Nearby, an elderly woman was waiting for a bus. I walked over and asked her how to get to Renmin Road. She thought for a moment and said to walk straight, turn right at the intersection, then five more minutes. I thanked her and followed her directions. But after walking ten minutes, I still couldn't find it. I asked a newspaper vendor, and he said I had gone the wrong way and should go back and turn left. Finally I arrived at my friend's house, half an hour later than planned. My friend laughed and suggested I use GPS next time.",
+      "vocabulary": [
+        {
+          "hanzi": "地铁",
+          "pinyin": "dìtiě",
+          "english": "subway, metro"
+        },
+        {
+          "hanzi": "地图",
+          "pinyin": "dìtú",
+          "english": "map"
+        },
+        {
+          "hanzi": "十字路口",
+          "pinyin": "shízì lùkǒu",
+          "english": "intersection, crossroads"
+        },
+        {
+          "hanzi": "右转",
+          "pinyin": "yòu zhuǎn",
+          "english": "turn right"
+        },
+        {
+          "hanzi": "左转",
+          "pinyin": "zuǒ zhuǎn",
+          "english": "turn left"
+        },
+        {
+          "hanzi": "按照",
+          "pinyin": "ànzhào",
+          "english": "according to, following"
+        },
+        {
+          "hanzi": "走反了",
+          "pinyin": "zǒu fǎn le",
+          "english": "went the wrong way"
+        },
+        {
+          "hanzi": "导航",
+          "pinyin": "dǎoháng",
+          "english": "GPS navigation"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "“我”为什么不知道该怎么走？",
+          "q_en": "Why didn't the narrator know which way to go?",
+          "options": [
+            {
+              "text": "因为没有手机",
+              "pinyin": "yīnwèi méiyǒu shǒujī",
+              "text_en": "because there was no phone",
+              "correct": false
+            },
+            {
+              "text": "因为到了一个没去过的地方",
+              "pinyin": "yīnwèi dào le yí gè méi qù guo de dìfang",
+              "text_en": "because arriving at a place never visited",
+              "correct": true
+            },
+            {
+              "text": "因为地铁坏了",
+              "pinyin": "yīnwèi dìtiě huài le",
+              "text_en": "because the subway broke down",
+              "correct": false
+            },
+            {
+              "text": "因为忘了朋友的地址",
+              "pinyin": "yīnwèi wàng le péngyou de dìzhǐ",
+              "text_en": "because forgetting the address",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.3,
+          "explanation": "到了一个没去过的站."
+        },
+        {
+          "type": "mc",
+          "q_zh": "老奶奶和卖报纸的大叔给的方向一样吗？",
+          "q_en": "Did the two people give the same directions?",
+          "options": [
+            {
+              "text": "一样，都说右转",
+              "pinyin": "yíyàng, dōu shuō yòu zhuǎn",
+              "text_en": "same — both said right",
+              "correct": false
+            },
+            {
+              "text": "不一样，一个说右转，一个说左转",
+              "pinyin": "bù yíyàng, yí gè shuō yòu zhuǎn, yí gè shuō zuǒ zhuǎn",
+              "text_en": "different — one right, one left",
+              "correct": true
+            },
+            {
+              "text": "一样，都说左转",
+              "pinyin": "yíyàng, dōu shuō zuǒ zhuǎn",
+              "text_en": "same — both said left",
+              "correct": false
+            },
+            {
+              "text": "都没有告诉他方向",
+              "pinyin": "dōu méiyǒu gàosu tā fāngxiàng",
+              "text_en": "neither gave directions",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "The elderly woman said 右转, but the vendor corrected to 左转."
+        },
+        {
+          "type": "mc",
+          "q_zh": "朋友觉得下次应该怎么做？",
+          "q_en": "What did the friend suggest?",
+          "options": [
+            {
+              "text": "坐出租车",
+              "pinyin": "zuò chūzūchē",
+              "text_en": "take a taxi",
+              "correct": false
+            },
+            {
+              "text": "早一点出门",
+              "pinyin": "zǎo yìdiǎn chūmén",
+              "text_en": "leave earlier",
+              "correct": false
+            },
+            {
+              "text": "用导航",
+              "pinyin": "yòng dǎoháng",
+              "text_en": "use GPS",
+              "correct": true
+            },
+            {
+              "text": "不要一个人去",
+              "pinyin": "bú yào yí gè rén qù",
+              "text_en": "don't go alone",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.2,
+          "explanation": "下次用导航吧."
+        }
+      ]
+    },
+    {
+      "id": "j4_travel_003",
+      "title": "A Trip to Xi'an",
+      "title_zh": "西安之旅",
+      "hsk_level": 4,
+      "text_zh": "去年暑假，我和几个大学同学一起去了西安。我们提前一个月就在网上订了火车票和酒店。到了西安以后，我们先去了兵马俑。那些两千多年前做的陶俑真的很壮观，每一个士兵的脸都不一样，我忍不住拍了很多照片。第二天我们去了回民街吃小吃，那里人很多，到处都是各种各样的食物的香味。我尝了羊肉泡馍、凉皮和肉夹馍，每样都特别好吃。同学小王吃了太多辣的东西，第二天肚子不舒服，我们只好在酒店休息了半天。下午我们去爬了城墙，在上面骑自行车。傍晚的时候，太阳慢慢落下去，整个城市被橙色的光照着，特别美。虽然只去了四天，但是我觉得西安是一个值得再去的城市。那里不只有历史，还有很好吃的东西和热情的人。",
+      "text_pinyin": "Qùnián shǔjià, wǒ hé jǐ gè dàxué tóngxué yìqǐ qù le Xī'ān. Wǒmen tíqián yí gè yuè jiù zài wǎngshàng dìng le huǒchē piào hé jiǔdiàn. Dào le Xī'ān yǐhòu, wǒmen xiān qù le Bīngmǎyǒng. Nà xiē liǎng qiān duō nián qián zuò de táoyǒng zhēn de hěn zhuàngguān, měi yí gè shìbīng de liǎn dōu bù yíyàng, wǒ rěn bu zhù pāi le hěn duō zhàopiàn. Dì èr tiān wǒmen qù le Huímín Jiē chī xiǎochī, nàlǐ rén hěn duō, dàochù dōu shì gè zhǒng gè yàng de shíwù de xiāngwèi. Wǒ cháng le yángròu pàomó, liángpí hé ròujiāmó, měi yàng dōu tèbié hǎochī. Tóngxué Xiǎo Wáng chī le tài duō là de dōngxi, dì èr tiān dùzi bù shūfu, wǒmen zhǐhǎo zài jiǔdiàn xiūxi le bàn tiān. Xiàwǔ wǒmen qù pá le chéngqiáng, zài shàngmiàn qí zìxíngchē. Bàngwǎn de shíhou, tàiyáng mànmàn luò xiàqù, zhěng gè chéngshì bèi chéng sè de guāng zhào zhe, tèbié měi. Suīrán zhǐ qù le sì tiān, dànshì wǒ juéde Xī'ān shì yí gè zhíde zài qù de chéngshì. Nàlǐ bù zhǐ yǒu lìshǐ, hái yǒu hěn hǎochī de dōngxi hé rèqíng de rén.",
+      "text_en": "Last summer, a few college classmates and I went to Xi'an together. We booked train tickets and a hotel online a month in advance. After arriving, we first visited the Terracotta Warriors. The clay figures made more than two thousand years ago were truly spectacular — every soldier's face was different, and I couldn't help taking many photos. The next day we went to Huimin Street for street food. It was crowded, with the aroma of all kinds of food everywhere. I tried yangrou paomo, liangpi, and roujiamo — each was delicious. Our classmate Xiao Wang ate too much spicy food and had a stomachache the next day, so we had to rest at the hotel. In the afternoon we climbed the city wall and rode bikes on top. At dusk, the sun slowly set, bathing the whole city in orange light — it was beautiful. Although we only went for four days, I think Xi'an is a city worth visiting again. It has not only history but also great food and warm-hearted people.",
+      "vocabulary": [
+        {
+          "hanzi": "兵马俑",
+          "pinyin": "Bīngmǎyǒng",
+          "english": "Terracotta Warriors"
+        },
+        {
+          "hanzi": "壮观",
+          "pinyin": "zhuàngguān",
+          "english": "spectacular, magnificent"
+        },
+        {
+          "hanzi": "忍不住",
+          "pinyin": "rěn bu zhù",
+          "english": "can't help doing something"
+        },
+        {
+          "hanzi": "各种各样",
+          "pinyin": "gè zhǒng gè yàng",
+          "english": "all kinds of, various"
+        },
+        {
+          "hanzi": "香味",
+          "pinyin": "xiāngwèi",
+          "english": "aroma, fragrance"
+        },
+        {
+          "hanzi": "羊肉泡馍",
+          "pinyin": "yángròu pàomó",
+          "english": "lamb stew with bread (Xi'an specialty)"
+        },
+        {
+          "hanzi": "城墙",
+          "pinyin": "chéngqiáng",
+          "english": "city wall"
+        },
+        {
+          "hanzi": "值得",
+          "pinyin": "zhíde",
+          "english": "to be worth doing"
+        },
+        {
+          "hanzi": "热情",
+          "pinyin": "rèqíng",
+          "english": "warm-hearted, enthusiastic"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "他们是怎么准备这次旅行的？",
+          "q_en": "How did they prepare for the trip?",
+          "options": [
+            {
+              "text": "到了以后才找酒店",
+              "pinyin": "dào le yǐhòu cái zhǎo jiǔdiàn",
+              "text_en": "found a hotel after arriving",
+              "correct": false
+            },
+            {
+              "text": "提前一个月在网上订了票和酒店",
+              "pinyin": "tíqián yí gè yuè zài wǎngshàng dìng le piào hé jiǔdiàn",
+              "text_en": "booked online a month in advance",
+              "correct": true
+            },
+            {
+              "text": "让旅行社帮忙安排的",
+              "pinyin": "ràng lǚxíngshè bāngmáng ānpái de",
+              "text_en": "had a travel agency arrange it",
+              "correct": false
+            },
+            {
+              "text": "朋友帮他们订的",
+              "pinyin": "péngyou bāng tāmen dìng de",
+              "text_en": "a friend booked for them",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.25,
+          "explanation": "提前一个月就在网上订了火车票和酒店."
+        },
+        {
+          "type": "mc",
+          "q_zh": "为什么第三天上午他们在酒店休息？",
+          "q_en": "Why did they rest at the hotel?",
+          "options": [
+            {
+              "text": "因为下雨了",
+              "pinyin": "yīnwèi xià yǔ le",
+              "text_en": "because it rained",
+              "correct": false
+            },
+            {
+              "text": "因为太累了",
+              "pinyin": "yīnwèi tài lèi le",
+              "text_en": "too tired",
+              "correct": false
+            },
+            {
+              "text": "因为小王吃了太多辣的东西肚子不舒服",
+              "pinyin": "yīnwèi Xiǎo Wáng chī le tài duō là de dōngxi dùzi bù shūfu",
+              "text_en": "Xiao Wang had a stomachache from spicy food",
+              "correct": true
+            },
+            {
+              "text": "因为酒店有活动",
+              "pinyin": "yīnwèi jiǔdiàn yǒu huódòng",
+              "text_en": "hotel had an event",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.3,
+          "explanation": "小王吃了太多辣的东西，第二天肚子不舒服."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者觉得西安怎么样？",
+          "q_en": "What does the author think of Xi'an?",
+          "options": [
+            {
+              "text": "太远了，不想再去",
+              "pinyin": "tài yuǎn le, bù xiǎng zài qù",
+              "text_en": "too far, no return visit",
+              "correct": false
+            },
+            {
+              "text": "只有历史古迹，没什么意思",
+              "pinyin": "zhǐ yǒu lìshǐ gǔjì, méi shénme yìsi",
+              "text_en": "only historical sites, boring",
+              "correct": false
+            },
+            {
+              "text": "值得再去，有历史、美食和热情的人",
+              "pinyin": "zhíde zài qù, yǒu lìshǐ, měishí hé rèqíng de rén",
+              "text_en": "worth revisiting — history, food, warm people",
+              "correct": true
+            },
+            {
+              "text": "好玩但是东西太辣了",
+              "pinyin": "hǎowán dànshì dōngxi tài là le",
+              "text_en": "fun but too spicy",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "西安是一个值得再去的城市."
+        },
+        {
+          "type": "mc",
+          "q_zh": "下面哪个不是作者在西安做的事？",
+          "q_en": "Which did the author NOT do?",
+          "options": [
+            {
+              "text": "看兵马俑",
+              "pinyin": "kàn Bīngmǎyǒng",
+              "text_en": "visited Warriors",
+              "correct": false
+            },
+            {
+              "text": "在城墙上骑自行车",
+              "pinyin": "zài chéngqiáng shàng qí zìxíngchē",
+              "text_en": "rode bikes on wall",
+              "correct": false
+            },
+            {
+              "text": "去了大雁塔",
+              "pinyin": "qù le Dàyàn Tǎ",
+              "text_en": "visited Big Wild Goose Pagoda",
+              "correct": true
+            },
+            {
+              "text": "在回民街吃小吃",
+              "pinyin": "zài Huímín Jiē chī xiǎochī",
+              "text_en": "ate on Huimin Street",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "大雁塔 is never mentioned in the passage."
+        }
+      ]
+    },
+    {
+      "id": "j4_work_001",
+      "title": "The New Colleague",
+      "title_zh": "新同事",
+      "hsk_level": 4,
+      "text_zh": "我们公司上个月来了一个新同事，叫林小月。她是从上海来的，以前在一家外企工作。她人很安静，刚来的时候不怎么跟大家说话。我以为她不太友好，后来才知道她只是有一点害羞。有一天中午，大家都去食堂吃饭，只有她一个人在座位上吃盒饭。我走过去问她要不要一起去食堂，她笑了笑说好。吃饭的时候，我们聊了很多。她告诉我她来北京是因为男朋友在这边工作，她不想两个人分开太久。她虽然离开了上海的朋友和家人，但是觉得在一起比什么都重要。她说刚来的时候很不习惯北京的天气，觉得太干了，每天都要喝很多水。我告诉她哪里可以买到好的保湿霜，她很高兴。从那以后，我们每天中午一起去食堂吃饭，慢慢成了好朋友。现在她已经跟办公室里的人都很熟了。有时候我觉得，主动关心别人真的可以改变很多事情。",
+      "text_pinyin": "Wǒmen gōngsī shàng gè yuè lái le yí gè xīn tóngshì, jiào Lín Xiǎoyuè. Tā shì cóng Shànghǎi lái de, yǐqián zài yì jiā wàiqǐ gōngzuò. Tā rén hěn ānjìng, gāng lái de shíhou bù zěnme gēn dàjiā shuōhuà. Wǒ yǐwéi tā bú tài yǒuhǎo, hòulái cái zhīdào tā zhǐshì yǒu yìdiǎn hàixiū. Yǒu yì tiān zhōngwǔ, dàjiā dōu qù shítáng chīfàn, zhǐ yǒu tā yí gè rén zài zuòwèi shàng chī héfàn. Wǒ zǒu guòqù wèn tā yào bu yào yìqǐ qù shítáng, tā xiào le xiào shuō hǎo. Chīfàn de shíhou, wǒmen liáo le hěn duō. Tā gàosu wǒ tā lái Běijīng shì yīnwèi nánpéngyou zài zhè biān gōngzuò, tā bù xiǎng liǎng gè rén fēnkāi tài jiǔ. Tā suīrán líkāi le Shànghǎi de péngyou hé jiārén, dànshì juéde zài yìqǐ bǐ shénme dōu zhòngyào. Tā shuō gāng lái de shíhou hěn bù xíguàn Běijīng de tiānqì, juéde tài gān le, měi tiān dōu yào hē hěn duō shuǐ. Wǒ gàosu tā nǎlǐ kěyǐ mǎi dào hǎo de bǎoshī shuāng, tā hěn gāoxìng. Cóng nà yǐhòu, wǒmen měi tiān zhōngwǔ yìqǐ qù shítáng chīfàn, mànmàn chéng le hǎo péngyou. Xiànzài tā yǐjīng gēn bàngōngshì lǐ de rén dōu hěn shú le. Yǒu shíhou wǒ juéde, zhǔdòng guānxīn biérén zhēn de kěyǐ gǎibiàn hěn duō shìqing.",
+      "text_en": "Last month a new colleague named Lin Xiaoyue joined our company. She came from Shanghai and previously worked at a foreign company. She was quiet and didn't talk much when she first arrived. I thought she wasn't very friendly, but later learned she was just a bit shy. One noon, everyone went to the cafeteria but she was alone eating a boxed meal at her desk. I asked if she wanted to come along. She smiled and agreed. During lunch, we chatted a lot. She told me she came to Beijing because her boyfriend works here. Although she left her friends and family in Shanghai, she feels being together matters more than anything. She wasn't used to Beijing's dry weather and had to drink a lot of water. I told her where to buy good moisturizer, and she was pleased. Since then, we eat lunch together every day and gradually became good friends. Now she's familiar with everyone in the office. Sometimes I think that taking the initiative to care about others can really change a lot.",
+      "vocabulary": [
+        {
+          "hanzi": "同事",
+          "pinyin": "tóngshì",
+          "english": "colleague"
+        },
+        {
+          "hanzi": "外企",
+          "pinyin": "wàiqǐ",
+          "english": "foreign-invested enterprise"
+        },
+        {
+          "hanzi": "害羞",
+          "pinyin": "hàixiū",
+          "english": "shy"
+        },
+        {
+          "hanzi": "食堂",
+          "pinyin": "shítáng",
+          "english": "cafeteria, canteen"
+        },
+        {
+          "hanzi": "盒饭",
+          "pinyin": "héfàn",
+          "english": "boxed meal, bento"
+        },
+        {
+          "hanzi": "习惯",
+          "pinyin": "xíguàn",
+          "english": "to be used to; habit"
+        },
+        {
+          "hanzi": "保湿霜",
+          "pinyin": "bǎoshī shuāng",
+          "english": "moisturizer"
+        },
+        {
+          "hanzi": "主动",
+          "pinyin": "zhǔdòng",
+          "english": "proactive, to take initiative"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "林小月刚来的时候为什么不怎么说话？",
+          "q_en": "Why didn't Lin Xiaoyue talk much at first?",
+          "options": [
+            {
+              "text": "因为她不喜欢同事们",
+              "pinyin": "yīnwèi tā bù xǐhuan tóngshìmen",
+              "text_en": "didn't like colleagues",
+              "correct": false
+            },
+            {
+              "text": "因为她有一点害羞",
+              "pinyin": "yīnwèi tā yǒu yìdiǎn hàixiū",
+              "text_en": "a bit shy",
+              "correct": true
+            },
+            {
+              "text": "因为她听不懂北京话",
+              "pinyin": "yīnwèi tā tīng bù dǒng Běijīng huà",
+              "text_en": "couldn't understand Beijing dialect",
+              "correct": false
+            },
+            {
+              "text": "因为她工作太忙了",
+              "pinyin": "yīnwèi tā gōngzuò tài máng le",
+              "text_en": "too busy",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.25,
+          "explanation": "后来才知道她只是有一点害羞."
+        },
+        {
+          "type": "mc",
+          "q_zh": "林小月为什么来北京？",
+          "q_en": "Why did she come to Beijing?",
+          "options": [
+            {
+              "text": "因为北京工资更高",
+              "pinyin": "yīnwèi Běijīng gōngzī gèng gāo",
+              "text_en": "higher salary",
+              "correct": false
+            },
+            {
+              "text": "因为她想换一个城市生活",
+              "pinyin": "yīnwèi tā xiǎng huàn yí gè chéngshì",
+              "text_en": "wanted new city",
+              "correct": false
+            },
+            {
+              "text": "因为男朋友在北京工作",
+              "pinyin": "yīnwèi nánpéngyou zài Běijīng gōngzuò",
+              "text_en": "boyfriend works in Beijing",
+              "correct": true
+            },
+            {
+              "text": "因为她在上海找不到工作",
+              "pinyin": "yīnwèi tā zài Shànghǎi zhǎo bú dào gōngzuò",
+              "text_en": "couldn't find work in Shanghai",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.25,
+          "explanation": "来北京是因为男朋友在这边工作."
+        },
+        {
+          "type": "mc",
+          "q_zh": "这个故事告诉我们什么道理？",
+          "q_en": "What lesson does this story convey?",
+          "options": [
+            {
+              "text": "北京的天气不好",
+              "pinyin": "Běijīng de tiānqì bù hǎo",
+              "text_en": "Beijing weather is bad",
+              "correct": false
+            },
+            {
+              "text": "新来的人都很害羞",
+              "pinyin": "xīn lái de rén dōu hěn hàixiū",
+              "text_en": "newcomers are all shy",
+              "correct": false
+            },
+            {
+              "text": "主动关心别人可以改变很多事情",
+              "pinyin": "zhǔdòng guānxīn biérén kěyǐ gǎibiàn hěn duō shìqing",
+              "text_en": "initiative to care changes things",
+              "correct": true
+            },
+            {
+              "text": "不应该在座位上吃饭",
+              "pinyin": "bù yīnggāi zài zuòwèi shàng chīfàn",
+              "text_en": "shouldn't eat at desk",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "主动关心别人真的可以改变很多事情."
+        }
+      ]
+    },
+    {
+      "id": "j5_culture_001",
+      "title": "The Art of Chinese Tea",
+      "title_zh": "中国茶艺",
+      "hsk_level": 5,
+      "text_zh": "中国是茶的发源地，茶文化的历史可以追溯到四千多年前。传说中，神农在尝百草的时候偶然发现了茶叶的清香，从此茶就成了中国人日常生活中不可缺少的一部分。中国茶大致可以分为六大类：绿茶、红茶、白茶、黄茶、乌龙茶和黑茶。每一种茶的制作工艺不同，口感和香气也各有特色。比如绿茶清淡爽口，适合夏天饮用；红茶味道醇厚，冬天喝一杯暖暖的红茶特别舒服。茶艺不仅仅是泡茶的技术，更是一种精神上的修养。在正式的茶艺表演中，泡茶的人需要保持内心平静，每一个动作都讲究优雅和自然。水温、茶量、泡茶的时间都有严格的要求。据说，好的茶艺师可以根据客人的心情和身体状况来推荐最合适的茶。如今，虽然咖啡在年轻人中越来越受欢迎，但中国人对茶的感情依然深厚。很多人认为，喝茶不只是为了解渴，更是一种让自己慢下来、感受当下的方式。在这个快节奏的时代，也许我们都需要偶尔停下来，泡一壶茶，安静地坐一会儿。",
+      "text_pinyin": "Zhōngguó shì chá de fāyuándì, chá wénhuà de lìshǐ kěyǐ zhuīsù dào sì qiān duō nián qián. Chuánshuō zhōng, Shénnóng zài cháng bǎi cǎo de shíhou ǒurán fāxiàn le cháyè de qīngxiāng, cóngcǐ chá jiù chéng le Zhōngguó rén rìcháng shēnghuó zhōng bùkě quēshǎo de yí bùfen. Zhōngguó chá dàzhì kěyǐ fēn wéi liù dà lèi: lǜchá, hóngchá, báichá, huángchá, wūlóng chá hé hēichá. Měi yì zhǒng chá de zhìzuò gōngyì bùtóng, kǒugǎn hé xiāngqì yě gè yǒu tèsè. Bǐrú lǜchá qīngdàn shuǎngkǒu, shìhé xiàtiān yǐnyòng; hóngchá wèidao chúnhòu, dōngtiān hē yì bēi nuǎnnuǎn de hóngchá tèbié shūfu. Cháyì bùjǐnjǐn shì pào chá de jìshù, gèng shì yì zhǒng jīngshén shàng de xiūyǎng. Zài zhèngshì de cháyì biǎoyǎn zhōng, pào chá de rén xūyào bǎochí nèixīn píngjìng, měi yí gè dòngzuò dōu jiǎngjiu yōuyǎ hé zìrán. Shuǐwēn, chá liàng, pào chá de shíjiān dōu yǒu yángé de yāoqiú. Jùshuō, hǎo de cháyì shī kěyǐ gēnjù kèrén de xīnqíng hé shēntǐ zhuàngkuàng lái tuījiàn zuì héshì de chá. Rújīn, suīrán kāfēi zài niánqīng rén zhōng yuè lái yuè shòu huānyíng, dàn Zhōngguó rén duì chá de gǎnqíng yīrán shēnhòu. Hěn duō rén rènwéi, hē chá bù zhǐ shì wèi le jiě kě, gèng shì yì zhǒng ràng zìjǐ màn xiàlái, gǎnshòu dāngxià de fāngshì. Zài zhège kuài jiézòu de shídài, yěxǔ wǒmen dōu xūyào ǒu'ěr tíng xiàlái, pào yì hú chá, ānjìng de zuò yíhuìr.",
+      "text_en": "China is the birthplace of tea, with a history spanning over four thousand years. According to legend, Shennong accidentally discovered the fragrance of tea leaves while tasting hundreds of herbs. Chinese tea can be broadly divided into six categories: green, black, white, yellow, oolong, and dark tea. Each has different production techniques and distinct flavor. Green tea is light and refreshing for summer; black tea is rich and mellow for winter. Tea art is not merely brewing technique — it is spiritual cultivation. In a formal tea ceremony, the brewer maintains inner calm, emphasizing elegance and naturalness. Water temperature, tea quantity, and steeping time all have strict requirements. A skilled tea master can recommend tea based on a guest's mood and physical condition. Today, although coffee is popular among young people, Chinese people's love for tea remains deep. Many believe drinking tea is a way to slow down and appreciate the present moment. In this fast-paced era, perhaps we all need to occasionally stop, brew some tea, and sit quietly.",
+      "vocabulary": [
+        {
+          "hanzi": "发源地",
+          "pinyin": "fāyuándì",
+          "english": "place of origin, birthplace"
+        },
+        {
+          "hanzi": "追溯",
+          "pinyin": "zhuīsù",
+          "english": "to trace back to"
+        },
+        {
+          "hanzi": "偶然",
+          "pinyin": "ǒurán",
+          "english": "by chance, accidentally"
+        },
+        {
+          "hanzi": "不可缺少",
+          "pinyin": "bùkě quēshǎo",
+          "english": "indispensable"
+        },
+        {
+          "hanzi": "制作工艺",
+          "pinyin": "zhìzuò gōngyì",
+          "english": "production technique"
+        },
+        {
+          "hanzi": "醇厚",
+          "pinyin": "chúnhòu",
+          "english": "rich and mellow"
+        },
+        {
+          "hanzi": "修养",
+          "pinyin": "xiūyǎng",
+          "english": "cultivation, self-refinement"
+        },
+        {
+          "hanzi": "讲究",
+          "pinyin": "jiǎngjiu",
+          "english": "to be particular about"
+        },
+        {
+          "hanzi": "节奏",
+          "pinyin": "jiézòu",
+          "english": "rhythm, pace"
+        },
+        {
+          "hanzi": "当下",
+          "pinyin": "dāngxià",
+          "english": "the present moment"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "根据传说，茶是怎么被发现的？",
+          "q_en": "How was tea discovered?",
+          "options": [
+            {
+              "text": "一个农民在种地的时候发现的",
+              "pinyin": "yí gè nóngmín zài zhòng dì de shíhou fāxiàn de",
+              "text_en": "farmer found while farming",
+              "correct": false
+            },
+            {
+              "text": "神农尝百草时偶然发现的",
+              "pinyin": "Shénnóng cháng bǎi cǎo shí ǒurán fāxiàn de",
+              "text_en": "Shennong found by chance while tasting herbs",
+              "correct": true
+            },
+            {
+              "text": "一个商人从外国带回来的",
+              "pinyin": "yí gè shāngrén cóng wàiguó dài huílái de",
+              "text_en": "merchant brought from abroad",
+              "correct": false
+            },
+            {
+              "text": "皇帝在花园里发现的",
+              "pinyin": "huángdì zài huāyuán lǐ fāxiàn de",
+              "text_en": "emperor found in garden",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.3,
+          "explanation": "神农在尝百草的时候偶然发现了茶叶的清香."
+        },
+        {
+          "type": "mc",
+          "q_zh": "文章认为茶艺的核心是什么？",
+          "q_en": "What is at the core of tea art?",
+          "options": [
+            {
+              "text": "泡茶的速度",
+              "pinyin": "pào chá de sùdù",
+              "text_en": "speed of brewing",
+              "correct": false
+            },
+            {
+              "text": "茶叶的价格",
+              "pinyin": "cháyè de jiàgé",
+              "text_en": "price of tea",
+              "correct": false
+            },
+            {
+              "text": "精神上的修养",
+              "pinyin": "jīngshén shàng de xiūyǎng",
+              "text_en": "spiritual cultivation",
+              "correct": true
+            },
+            {
+              "text": "茶具的质量",
+              "pinyin": "chájù de zhìliàng",
+              "text_en": "quality of tea utensils",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "茶艺不仅仅是泡茶的技术，更是一种精神上的修养."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者在最后一段想表达什么？",
+          "q_en": "What does the last paragraph express?",
+          "options": [
+            {
+              "text": "年轻人不应该喝咖啡",
+              "pinyin": "niánqīng rén bù yīnggāi hē kāfēi",
+              "text_en": "young people shouldn't drink coffee",
+              "correct": false
+            },
+            {
+              "text": "中国茶比外国茶好",
+              "pinyin": "Zhōngguó chá bǐ wàiguó chá hǎo",
+              "text_en": "Chinese tea is better",
+              "correct": false
+            },
+            {
+              "text": "在快节奏的生活中需要慢下来",
+              "pinyin": "zài kuài jiézòu de shēnghuó zhōng xūyào màn xiàlái",
+              "text_en": "need to slow down in fast-paced life",
+              "correct": true
+            },
+            {
+              "text": "每个人都应该学茶艺",
+              "pinyin": "měi gè rén dōu yīnggāi xué cháyì",
+              "text_en": "everyone should learn tea art",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.45,
+          "explanation": "也许我们都需要偶尔停下来，泡一壶茶，安静地坐一会儿."
+        },
+        {
+          "type": "mc",
+          "q_zh": "关于绿茶和红茶，文章怎么说的？",
+          "q_en": "What about green and black tea?",
+          "options": [
+            {
+              "text": "绿茶比红茶贵",
+              "pinyin": "lǜchá bǐ hóngchá guì",
+              "text_en": "green is more expensive",
+              "correct": false
+            },
+            {
+              "text": "绿茶清淡适合夏天，红茶醇厚适合冬天",
+              "pinyin": "lǜchá qīngdàn shìhé xiàtiān, hóngchá chúnhòu shìhé dōngtiān",
+              "text_en": "green for summer, black for winter",
+              "correct": true
+            },
+            {
+              "text": "绿茶和红茶味道一样",
+              "pinyin": "lǜchá hé hóngchá wèidao yíyàng",
+              "text_en": "they taste the same",
+              "correct": false
+            },
+            {
+              "text": "年轻人喜欢绿茶，老人喜欢红茶",
+              "pinyin": "niánqīng rén xǐhuan lǜchá, lǎorén xǐhuan hóngchá",
+              "text_en": "young like green, old like black",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "绿茶清淡爽口，适合夏天饮用；红茶味道醇厚."
+        }
+      ]
+    },
+    {
+      "id": "j5_edu_001",
+      "title": "Gaokao: More Than Just an Exam",
+      "title_zh": "高考：不仅仅是一场考试",
+      "hsk_level": 5,
+      "text_zh": "在中国，高考是每年六月举行的全国性大学入学考试，也是大多数高中生通向大学的唯一途径。每年有近一千万考生参加高考，竞争非常激烈。对于很多家庭来说，高考不仅关系到孩子的前途，也承载着整个家庭的期望。高考前的准备通常从高中三年级就开始了，有些学生甚至更早。他们每天学习十几个小时，周末也很少休息。学校会组织各种模拟考试，帮助学生适应考试的节奏和压力。家长们也参与其中，有的请家教，有的陪孩子复习到深夜。考试那两天，整个社会似乎都在为考生让路：工地停工以免噪音干扰，交通部门安排专门的护送车辆，出租车司机免费送考生去考场。近年来，关于高考制度的讨论越来越多。支持者认为，高考提供了一个相对公平的竞争平台，让来自不同背景的学生都有上好大学的机会。批评者则指出，过度强调考试分数会导致学生缺乏创造力和实践能力，而且单一的评价标准忽略了学生在其他方面的才能。无论如何，高考作为中国教育体系中最重要的考试之一，在短期内很难被取代。也许未来的改革方向是在保持公平的前提下，找到更多元的评价方式。",
+      "text_pinyin": "Zài Zhōngguó, gāokǎo shì měi nián liù yuè jǔxíng de quánguó xìng dàxué rùxué kǎoshì, yě shì dàduōshù gāozhōng shēng tōng xiàng dàxué de wéiyī tújìng. Měi nián yǒu jìn yì qiān wàn kǎoshēng cānjiā gāokǎo, jìngzhēng fēicháng jīliè. Duìyú hěn duō jiātíng lái shuō, gāokǎo bùjǐn guānxì dào háizi de qiántú, yě chéngzài zhe zhěng gè jiātíng de qīwàng.",
+      "text_en": "In China, the gaokao is the national college entrance exam held every June. Nearly ten million candidates take it annually, making competition fierce. For many families, the gaokao carries the expectations of the entire family. Preparation begins in the third year of high school. Students study over ten hours daily, and schools organize mock exams. During exam days, construction sites halt, special escort vehicles are arranged, and taxi drivers offer free rides. Supporters see it as a fair platform; critics argue it overemphasizes scores at the expense of creativity. The author suggests future reform should find more diverse evaluation methods while maintaining fairness.",
+      "vocabulary": [
+        {
+          "hanzi": "途径",
+          "pinyin": "tújìng",
+          "english": "path, approach"
+        },
+        {
+          "hanzi": "激烈",
+          "pinyin": "jīliè",
+          "english": "intense, fierce"
+        },
+        {
+          "hanzi": "承载",
+          "pinyin": "chéngzài",
+          "english": "to bear, to carry"
+        },
+        {
+          "hanzi": "模拟考试",
+          "pinyin": "mónǐ kǎoshì",
+          "english": "mock exam"
+        },
+        {
+          "hanzi": "干扰",
+          "pinyin": "gānrǎo",
+          "english": "to interfere, to disturb"
+        },
+        {
+          "hanzi": "公平",
+          "pinyin": "gōngpíng",
+          "english": "fair, equitable"
+        },
+        {
+          "hanzi": "创造力",
+          "pinyin": "chuàngzào lì",
+          "english": "creativity"
+        },
+        {
+          "hanzi": "评价标准",
+          "pinyin": "píngjià biāozhǔn",
+          "english": "evaluation criteria"
+        },
+        {
+          "hanzi": "取代",
+          "pinyin": "qǔdài",
+          "english": "to replace"
+        },
+        {
+          "hanzi": "多元",
+          "pinyin": "duōyuán",
+          "english": "diverse, pluralistic"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "高考期间社会做了什么来支持考生？",
+          "q_en": "What does society do during the gaokao?",
+          "options": [
+            {
+              "text": "学校放假让学生在家复习",
+              "pinyin": "xuéxiào fàngjià ràng xuéshēng zài jiā fùxí",
+              "text_en": "schools give holidays",
+              "correct": false
+            },
+            {
+              "text": "工地停工、专车护送、出租车免费",
+              "pinyin": "gōngdì tínggōng, zhuānchē hùsòng, chūzūchē miǎnfèi",
+              "text_en": "construction halts, escort vehicles, free taxis",
+              "correct": true
+            },
+            {
+              "text": "商店打折卖文具",
+              "pinyin": "shāngdiàn dǎzhé mài wénjù",
+              "text_en": "stores discount stationery",
+              "correct": false
+            },
+            {
+              "text": "政府给每个考生发奖金",
+              "pinyin": "zhèngfǔ gěi měi gè kǎoshēng fā jiǎngjīn",
+              "text_en": "government gives bonuses",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "工地停工，安排专门的护送车辆，出租车司机免费送考生."
+        },
+        {
+          "type": "mc",
+          "q_zh": "批评者认为高考有什么问题？",
+          "q_en": "What problems do critics identify?",
+          "options": [
+            {
+              "text": "考试太容易了",
+              "pinyin": "kǎoshì tài róngyì le",
+              "text_en": "exam is too easy",
+              "correct": false
+            },
+            {
+              "text": "过度强调分数，忽略其他才能",
+              "pinyin": "guòdù qiángdiào fēnshù, hūlüè qítā cáinéng",
+              "text_en": "overemphasizes scores, overlooks other talents",
+              "correct": true
+            },
+            {
+              "text": "考试费用太高",
+              "pinyin": "kǎoshì fèiyòng tài gāo",
+              "text_en": "exam fees too high",
+              "correct": false
+            },
+            {
+              "text": "只有城市学生能参加",
+              "pinyin": "zhǐ yǒu chéngshì xuéshēng néng cānjiā",
+              "text_en": "only urban students can take it",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "过度强调考试分数会导致学生缺乏创造力."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者对高考改革持什么态度？",
+          "q_en": "What is the author's stance on reform?",
+          "options": [
+            {
+              "text": "完全反对改革",
+              "pinyin": "wánquán fǎnduì gǎigé",
+              "text_en": "completely opposed",
+              "correct": false
+            },
+            {
+              "text": "认为应该马上取消高考",
+              "pinyin": "rènwéi yīnggāi mǎshàng qǔxiāo gāokǎo",
+              "text_en": "should be abolished immediately",
+              "correct": false
+            },
+            {
+              "text": "在保持公平的前提下找到更多元的评价方式",
+              "pinyin": "zài bǎochí gōngpíng de qiántí xià zhǎo dào gèng duōyuán de píngjià fāngshì",
+              "text_en": "find diverse evaluation while maintaining fairness",
+              "correct": true
+            },
+            {
+              "text": "觉得现在的制度已经很完美",
+              "pinyin": "juéde xiànzài de zhìdù yǐjīng hěn wánměi",
+              "text_en": "thinks system is already perfect",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.5,
+          "explanation": "在保持公平的前提下，找到更多元的评价方式."
+        }
+      ]
+    },
+    {
+      "id": "j6_history_001",
+      "title": "The Silk Road: A Bridge Between Civilizations",
+      "title_zh": "丝绸之路：文明之间的桥梁",
+      "hsk_level": 6,
+      "text_zh": "丝绸之路是古代连接中国与西方世界的重要贸易通道，其名称来源于中国丝绸在这条路线上的大量流通。这条贸易网络的雏形可以追溯到公元前二世纪，当时汉朝的张骞受武帝派遣出使西域，开辟了与中亚各国的外交和商业联系。然而，丝绸之路绝非仅仅是一条商贸路线，它更是文化交流和文明互鉴的纽带。通过这条路线，中国的丝绸、瓷器、造纸术和火药传播到了西方；而来自西域的葡萄、核桃、香料以及佛教、伊斯兰教等宗教思想也随之传入中国。敦煌莫高窟便是这种文化交融的绝佳见证——窟中的壁画融合了中国、印度、波斯等多种艺术风格，展现了不同文明之间的对话与碰撞。丝绸之路的衰落与海上贸易的兴起密切相关。随着航海技术的进步，海上运输比陆路更加高效便捷，传统的陆上丝绸之路逐渐失去了其经济优势。然而，它留下的文化遗产至今仍然深刻影响着沿线各国的社会与文化面貌。如今，“一带一路”倡议在某种程度上重新唤起了人们对这条古老通道的记忆。无论是作为历史遗产还是当代外交话语，丝绸之路始终象征着人类跨越地理和文化障碍、寻求交流与合作的永恒渴望。",
+      "text_pinyin": "Sīchóu zhī Lù shì gǔdài liánjiē Zhōngguó yǔ xīfāng shìjiè de zhòngyào màoyì tōngdào.",
+      "text_en": "The Silk Road was an important trade route connecting ancient China with the Western world. Its prototype traces back to the second century BC when Zhang Qian of the Han Dynasty was dispatched to the Western Regions. The Silk Road was far more than trade — it served as a bond for cultural exchange. Through it, Chinese silk, porcelain, papermaking, and gunpowder spread west; while grapes, spices, Buddhism, and Islam traveled east. The Dunhuang Mogao Caves blend artistic styles from multiple civilizations. Its decline was linked to the rise of maritime trade, yet its cultural heritage still influences countries along its former path. The Silk Road symbolizes humanity's eternal desire to transcend barriers for exchange and cooperation.",
+      "vocabulary": [
+        {
+          "hanzi": "贸易通道",
+          "pinyin": "màoyì tōngdào",
+          "english": "trade route"
+        },
+        {
+          "hanzi": "雏形",
+          "pinyin": "chúxíng",
+          "english": "prototype, embryonic form"
+        },
+        {
+          "hanzi": "出使",
+          "pinyin": "chūshǐ",
+          "english": "to go on a diplomatic mission"
+        },
+        {
+          "hanzi": "互鉴",
+          "pinyin": "hùjiàn",
+          "english": "mutual learning"
+        },
+        {
+          "hanzi": "纽带",
+          "pinyin": "niǔdài",
+          "english": "bond, link, tie"
+        },
+        {
+          "hanzi": "交融",
+          "pinyin": "jiāoróng",
+          "english": "blending, fusion"
+        },
+        {
+          "hanzi": "壁画",
+          "pinyin": "bìhuà",
+          "english": "mural, wall painting"
+        },
+        {
+          "hanzi": "碰撞",
+          "pinyin": "pèngzhuàng",
+          "english": "collision, clash"
+        },
+        {
+          "hanzi": "衰落",
+          "pinyin": "shuāiluò",
+          "english": "to decline"
+        },
+        {
+          "hanzi": "倡议",
+          "pinyin": "chàngyì",
+          "english": "initiative, proposal"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "张骞出使西域的目的是什么？",
+          "q_en": "What was Zhang Qian's mission?",
+          "options": [
+            {
+              "text": "寻找丝绸的买家",
+              "pinyin": "xúnzhǎo sīchóu de mǎijiā",
+              "text_en": "find silk buyers",
+              "correct": false
+            },
+            {
+              "text": "建立与中亚各国的外交和商业联系",
+              "pinyin": "jiànlì yǔ Zhōngyà gè guó de wàijiāo hé shāngyè liánxì",
+              "text_en": "establish diplomatic and commercial ties",
+              "correct": true
+            },
+            {
+              "text": "传播佛教",
+              "pinyin": "chuánbō Fójiào",
+              "text_en": "spread Buddhism",
+              "correct": false
+            },
+            {
+              "text": "修建长城",
+              "pinyin": "xiūjiàn Chángchéng",
+              "text_en": "build Great Wall",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "开辟了与中亚各国的外交和商业联系."
+        },
+        {
+          "type": "mc",
+          "q_zh": "敦煌莫高窟为什么被称为文化交融的见证？",
+          "q_en": "Why are the Mogao Caves a testament to cultural fusion?",
+          "options": [
+            {
+              "text": "因为它们是最古老的建筑",
+              "pinyin": "yīnwèi tāmen shì zuì gǔlǎo de jiànzhù",
+              "text_en": "oldest buildings",
+              "correct": false
+            },
+            {
+              "text": "因为壁画融合了多种文明的艺术风格",
+              "pinyin": "yīnwèi bìhuà rónghé le duō zhǒng wénmíng de yìshù fēnggé",
+              "text_en": "murals blend multiple artistic styles",
+              "correct": true
+            },
+            {
+              "text": "因为那里保存了很多丝绸",
+              "pinyin": "yīnwèi nàlǐ bǎocún le hěn duō sīchóu",
+              "text_en": "silk is preserved there",
+              "correct": false
+            },
+            {
+              "text": "因为张骞曾经路过那里",
+              "pinyin": "yīnwèi Zhāng Qiān céngjīng lùguò nàlǐ",
+              "text_en": "Zhang Qian passed through",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "壁画融合了中国、印度、波斯等多种艺术风格."
+        },
+        {
+          "type": "mc",
+          "q_zh": "丝绸之路衰落的主要原因是什么？",
+          "q_en": "Why did the Silk Road decline?",
+          "options": [
+            {
+              "text": "战争摧毁了沿线城市",
+              "pinyin": "zhànzhēng cuīhuǐ le yánxiàn chéngshì",
+              "text_en": "wars destroyed cities",
+              "correct": false
+            },
+            {
+              "text": "中国停止了丝绸生产",
+              "pinyin": "Zhōngguó tíngzhǐ le sīchóu shēngchǎn",
+              "text_en": "China stopped producing silk",
+              "correct": false
+            },
+            {
+              "text": "海上贸易的兴起和航海技术的进步",
+              "pinyin": "hǎishàng màoyì de xīngqǐ hé hánghǎi jìshù de jìnbù",
+              "text_en": "rise of maritime trade and navigation advances",
+              "correct": true
+            },
+            {
+              "text": "沿线国家关闭了边境",
+              "pinyin": "yánxiàn guójiā guānbì le biānjìng",
+              "text_en": "border countries closed borders",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "丝绸之路的衰落与海上贸易的兴起密切相关."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者认为丝绸之路象征着什么？",
+          "q_en": "What does it symbolize?",
+          "options": [
+            {
+              "text": "中国古代的经济实力",
+              "pinyin": "Zhōngguó gǔdài de jīngjì shílì",
+              "text_en": "ancient China's economic power",
+              "correct": false
+            },
+            {
+              "text": "人类跨越障碍寻求交流与合作的永恒渴望",
+              "pinyin": "rénlèi kuàyuè zhàng'ài xúnqiú jiāoliú yǔ hézuò de yǒnghéng kěwàng",
+              "text_en": "eternal desire for exchange and cooperation",
+              "correct": true
+            },
+            {
+              "text": "东西方之间的矛盾与冲突",
+              "pinyin": "dōngxīfāng zhī jiān de máodùn yǔ chōngtū",
+              "text_en": "East-West conflicts",
+              "correct": false
+            },
+            {
+              "text": "商人追求利润的野心",
+              "pinyin": "shāngrén zhuīqiú lìrùn de yěxīn",
+              "text_en": "merchants' ambition for profit",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.5,
+          "explanation": "象征着人类跨越地理和文化障碍、寻求交流与合作的永恒渴望."
+        }
+      ]
+    },
+    {
+      "id": "j6_tech_001",
+      "title": "Artificial Intelligence and the Future of Work",
+      "title_zh": "人工智能与未来的工作",
+      "hsk_level": 6,
+      "text_zh": "人工智能技术的迅猛发展正在深刻改变着全球的劳动力市场和就业格局。从自动驾驶汽车到智能客服系统，从医疗影像诊断到法律文书生成，AI的应用领域日益广泛，其效率和准确性在许多任务上已经超过了人类。面对这一趋势，“AI是否会大规模取代人类工作”成为社会各界热议的焦点。悲观者认为，随着机器学习和自然语言处理技术的成熟，大量重复性、规则性的工作岗位将被自动化取代。然而，乐观者则指出，历史上每一次技术革命虽然淘汰了某些职业，但同时也创造了大量新的工作机会。蒸汽机的发明使得马车夫失业，却催生了铁路工人、机械工程师等全新的职业类别。更为关键的是，AI在创造力、同理心和复杂社会互动方面仍然存在显著不足。因此，与其担忧AI带来的威胁，不如思考如何与AI协作，将其作为提升个人能力的工具。未来的竞争力或许不在于与机器抗衡，而在于善于利用机器来放大人类独有的价值。",
+      "text_pinyin": "Réngōng zhìnéng jìshù de xùnměng fāzhǎn zhèngzài shēnkè gǎibiàn zhe quánqiú de láodònglì shìchǎng hé jiùyè géjú.",
+      "text_en": "The rapid development of AI is profoundly changing the global labor market. AI applications are increasingly widespread, surpassing humans in many tasks. Pessimists believe automation will replace repetitive jobs. Optimists counter that every technological revolution both eliminates old jobs and creates new ones — the steam engine displaced coachmen but gave rise to railway workers. AI still has significant shortcomings in creativity, empathy, and complex social interaction. The author suggests collaborating with AI rather than competing against it, using machines to amplify uniquely human value.",
+      "vocabulary": [
+        {
+          "hanzi": "迅猛",
+          "pinyin": "xùnměng",
+          "english": "swift and fierce, rapid"
+        },
+        {
+          "hanzi": "格局",
+          "pinyin": "géjú",
+          "english": "landscape, pattern"
+        },
+        {
+          "hanzi": "取代",
+          "pinyin": "qǔdài",
+          "english": "to replace"
+        },
+        {
+          "hanzi": "焦点",
+          "pinyin": "jiāodiǎn",
+          "english": "focal point, focus"
+        },
+        {
+          "hanzi": "淘汰",
+          "pinyin": "táotài",
+          "english": "to eliminate, phase out"
+        },
+        {
+          "hanzi": "催生",
+          "pinyin": "cuīshēng",
+          "english": "to give rise to"
+        },
+        {
+          "hanzi": "同理心",
+          "pinyin": "tónglǐ xīn",
+          "english": "empathy"
+        },
+        {
+          "hanzi": "协作",
+          "pinyin": "xiézuò",
+          "english": "to collaborate"
+        },
+        {
+          "hanzi": "抗衡",
+          "pinyin": "kànghéng",
+          "english": "to contend with"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "悲观者认为AI会导致什么后果？",
+          "q_en": "What do pessimists predict?",
+          "options": [
+            {
+              "text": "工资会大幅提高",
+              "pinyin": "gōngzī huì dàfú tígāo",
+              "text_en": "wages increase",
+              "correct": false
+            },
+            {
+              "text": "大量重复性工作将被自动化取代",
+              "pinyin": "dàliàng chóngfùxìng gōngzuò jiāng bèi zìdònghuà qǔdài",
+              "text_en": "repetitive jobs replaced by automation",
+              "correct": true
+            },
+            {
+              "text": "工作时间会缩短",
+              "pinyin": "gōngzuò shíjiān huì suōduǎn",
+              "text_en": "shorter hours",
+              "correct": false
+            },
+            {
+              "text": "所有人都需要学编程",
+              "pinyin": "suǒyǒu rén dōu xūyào xué biānchéng",
+              "text_en": "everyone needs to code",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "大量重复性、规则性的工作岗位将被自动化取代."
+        },
+        {
+          "type": "mc",
+          "q_zh": "文章用蒸汽机的例子想说明什么？",
+          "q_en": "What point does the steam engine example make?",
+          "options": [
+            {
+              "text": "技术革命总是带来失业",
+              "pinyin": "jìshù gémìng zǒngshì dài lái shīyè",
+              "text_en": "always brings unemployment",
+              "correct": false
+            },
+            {
+              "text": "新技术虽然淘汰旧职业但也创造新职业",
+              "pinyin": "xīn jìshù suīrán táotài jiù zhíyè dàn yě chuàngzào xīn zhíyè",
+              "text_en": "eliminates old but creates new jobs",
+              "correct": true
+            },
+            {
+              "text": "蒸汽机比AI更重要",
+              "pinyin": "zhēngqìjī bǐ AI gèng zhòngyào",
+              "text_en": "steam engine more important than AI",
+              "correct": false
+            },
+            {
+              "text": "马车夫应该学习新技术",
+              "pinyin": "mǎchēfū yīnggāi xuéxí xīn jìshù",
+              "text_en": "coachmen should learn new tech",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "Every revolution eliminates and creates jobs."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者认为AI目前最大的不足是什么？",
+          "q_en": "What is AI's biggest shortcoming?",
+          "options": [
+            {
+              "text": "运算速度不够快",
+              "pinyin": "yùnsuàn sùdù bú gòu kuài",
+              "text_en": "not fast enough",
+              "correct": false
+            },
+            {
+              "text": "成本太高",
+              "pinyin": "chéngběn tài gāo",
+              "text_en": "too expensive",
+              "correct": false
+            },
+            {
+              "text": "在创造力、同理心和复杂社会互动方面不足",
+              "pinyin": "zài chuàngzào lì, tónglǐ xīn hé fùzá shèhuì hùdòng fāngmiàn bùzú",
+              "text_en": "lacks creativity, empathy, complex social interaction",
+              "correct": true
+            },
+            {
+              "text": "只能处理中文不能处理英文",
+              "pinyin": "zhǐ néng chǔlǐ Zhōngwén",
+              "text_en": "only handles Chinese",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "AI在创造力、同理心和复杂社会互动方面仍然存在显著不足."
+        }
+      ]
+    },
+    {
+      "id": "j7_philosophy_001",
+      "title": "Zhuangzi's Butterfly Dream",
+      "title_zh": "庄周梦蝶",
+      "hsk_level": 7,
+      "text_zh": "《庄子·齐物论》中记载了一则脍炙人口的寓言：庄周梦中化为蝴蝶，翩翩飞舞，怡然自得，全然忘却了自己是庄周。梦醒之后，他恍然发觉自己仍是庄周，却陷入了深深的困惑——究竟是庄周梦见了蝴蝶，还是蝴蝶梦见了庄周？这个看似简单的故事，实则触及了哲学中最为根本的认识论问题：我们如何确认自己所感知的现实是真实的？庄子并不试图给出明确的答案，而是以这种“物化”的思想来消解主体与客体之间的截然对立。在庄子看来，万物之间并无本质的区别，所谓“齐物”，即是消除人为的分类和判断，回归万物一体的自然状态。这一思想对后世产生了深远的影响。禅宗借鉴了庄子“无我”的理念，发展出“万法归一”的修行哲学。在文学领域，李商隐以“庄生晓梦迷蝴蝶”入诗，将梦与觉的模糊边界升华为对人生虚实的感叹。在现代语境中，庄周梦蝶的隐喻同样具有启示意义。当我们沉浸在虚拟现实或社交媒体构建的数字世界中时，真实与虚拟的界限变得日益模糊。庄子留给我们的，或许不是一个需要回答的问题，而是一种审视存在本身的方式——不急于区分真假，不执着于固定的自我认同，而是以开放和超脱的心态，接纳生命中一切变化与可能。",
+      "text_pinyin": "Zhuāngzǐ Qíwùlùn zhōng jìzǎi le yī zé kuàizhì rénkǒu de yùyán: Zhuāng Zhōu mèng zhōng huà wéi húdié, piānpiān fēiwǔ, yírán zìdé, quánrán wàngquè le zìjǐ shì Zhuāng Zhōu.",
+      "text_en": "The Zhuangzi records a celebrated parable: Zhuang Zhou dreamed he was a butterfly, fluttering freely, completely forgetting he was Zhuang Zhou. Upon waking, he fell into deep perplexity — was it Zhuang Zhou who dreamed of a butterfly, or a butterfly dreaming of Zhuang Zhou? This touches the fundamental epistemological question: how do we confirm our perceived reality is real? Zhuangzi uses the concept of 'transformation of things' to dissolve the opposition between subject and object. The idea influenced Chan Buddhism and appeared in Li Shangyin's poetry. In the modern context, the metaphor resonates when we immerse ourselves in digital worlds where the line between real and virtual grows ever more blurred. What Zhuangzi left us is not a question to answer but a way of examining existence — embracing change with an open and transcendent mindset.",
+      "vocabulary": [
+        {
+          "hanzi": "脍炙人口",
+          "pinyin": "kuàizhì rénkǒu",
+          "english": "widely celebrated"
+        },
+        {
+          "hanzi": "寓言",
+          "pinyin": "yùyán",
+          "english": "fable, parable"
+        },
+        {
+          "hanzi": "认识论",
+          "pinyin": "rènshìlùn",
+          "english": "epistemology"
+        },
+        {
+          "hanzi": "消解",
+          "pinyin": "xiāojiě",
+          "english": "to dissolve, deconstruct"
+        },
+        {
+          "hanzi": "截然对立",
+          "pinyin": "jiérán duìlì",
+          "english": "diametrically opposed"
+        },
+        {
+          "hanzi": "齐物",
+          "pinyin": "qíwù",
+          "english": "equalization of things"
+        },
+        {
+          "hanzi": "禅宗",
+          "pinyin": "Chánzōng",
+          "english": "Chan Buddhism (Zen)"
+        },
+        {
+          "hanzi": "隐喻",
+          "pinyin": "yǐnyù",
+          "english": "metaphor"
+        },
+        {
+          "hanzi": "执着",
+          "pinyin": "zhízhuó",
+          "english": "to cling to"
+        },
+        {
+          "hanzi": "超脱",
+          "pinyin": "chāotuō",
+          "english": "transcendent, detached"
+        },
+        {
+          "hanzi": "二元对立",
+          "pinyin": "èryuán duìlì",
+          "english": "binary opposition"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "庄周梦蝶的故事触及了什么哲学问题？",
+          "q_en": "What philosophical question does it touch?",
+          "options": [
+            {
+              "text": "人为什么需要睡眠",
+              "pinyin": "rén wèishénme xūyào shuìmián",
+              "text_en": "why humans need sleep",
+              "correct": false
+            },
+            {
+              "text": "如何确认我们感知的现实是否真实",
+              "pinyin": "rúhé quèrèn wǒmen gǎnzhī de xiànshí shìfǒu zhēnshí",
+              "text_en": "how to confirm perceived reality is real",
+              "correct": true
+            },
+            {
+              "text": "蝴蝶是否有意识",
+              "pinyin": "húdié shìfǒu yǒu yìshí",
+              "text_en": "whether butterflies are conscious",
+              "correct": false
+            },
+            {
+              "text": "梦境能否预测未来",
+              "pinyin": "mèngjìng néng fǒu yùcè wèilái",
+              "text_en": "whether dreams predict the future",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "我们如何确认自己所感知的现实是真实的."
+        },
+        {
+          "type": "mc",
+          "q_zh": "“齐物”的含义是什么？",
+          "q_en": "What does 'equalization of things' mean?",
+          "options": [
+            {
+              "text": "所有东西的价格应该一样",
+              "pinyin": "suǒyǒu dōngxi de jiàgé yīnggāi yíyàng",
+              "text_en": "everything same price",
+              "correct": false
+            },
+            {
+              "text": "消除人为分类，回归万物一体的自然状态",
+              "pinyin": "xiāochú rénwéi fēnlèi, huíguī wànwù yītǐ de zìrán zhuàngtài",
+              "text_en": "eliminate categories, return to natural unity",
+              "correct": true
+            },
+            {
+              "text": "所有人应该平等",
+              "pinyin": "suǒyǒu rén yīnggāi píngděng",
+              "text_en": "all people should be equal",
+              "correct": false
+            },
+            {
+              "text": "自然界中万物相互竞争",
+              "pinyin": "zìrán jiè zhōng wànwù xiānghù jìngzhēng",
+              "text_en": "all things compete",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.5,
+          "explanation": "消除人为的分类和判断，回归万物一体的自然状态."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者认为庄周梦蝶在现代语境中有什么启示？",
+          "q_en": "What modern insight?",
+          "options": [
+            {
+              "text": "人们应该少用电子设备",
+              "pinyin": "rénmen yīnggāi shǎo yòng diànzǐ shèbèi",
+              "text_en": "use fewer devices",
+              "correct": false
+            },
+            {
+              "text": "虚拟现实和社交媒体模糊了真实与虚拟的界限",
+              "pinyin": "xūnǐ xiànshí hé shèjiāo méitǐ móhu le zhēnshí yǔ xūnǐ de jièxiàn",
+              "text_en": "VR and social media blur real and virtual",
+              "correct": true
+            },
+            {
+              "text": "古代哲学已经过时了",
+              "pinyin": "gǔdài zhéxué yǐjīng guòshí le",
+              "text_en": "ancient philosophy is outdated",
+              "correct": false
+            },
+            {
+              "text": "做梦对健康有好处",
+              "pinyin": "zuò mèng duì jiànkāng yǒu hǎochu",
+              "text_en": "dreaming benefits health",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.5,
+          "explanation": "真实与虚拟的界限变得日益模糊."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者最终认为庄子留给我们的是什么？",
+          "q_en": "What did Zhuangzi leave us?",
+          "options": [
+            {
+              "text": "一个不可解答的谜题",
+              "pinyin": "yí gè bùkě jiědá de mítí",
+              "text_en": "an unsolvable puzzle",
+              "correct": false
+            },
+            {
+              "text": "一种审视存在的方式，以开放心态接纳变化",
+              "pinyin": "yì zhǒng shěnshì cúnzài de fāngshì, yǐ kāifàng xīntài jiēnà biànhuà",
+              "text_en": "a way of examining existence, embracing change",
+              "correct": true
+            },
+            {
+              "text": "对儒家思想的批判",
+              "pinyin": "duì Rújiā sīxiǎng de pīpàn",
+              "text_en": "critique of Confucianism",
+              "correct": false
+            },
+            {
+              "text": "证明梦境比现实更真实",
+              "pinyin": "zhèngmíng mèngjìng bǐ xiànshí gèng zhēnshí",
+              "text_en": "dreams are more real",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.55,
+          "explanation": "一种审视存在本身的方式."
+        }
+      ]
+    },
+    {
+      "id": "j7_current_001",
+      "title": "The Digital Divide in Rural China",
+      "title_zh": "中国农村的数字鸿沟",
+      "hsk_level": 7,
+      "text_zh": "在中国城市居民享受着移动支付、即时配送和在线教育等数字化便利的同时，广大农村地区却面临着截然不同的现实。尽管中国在网络基础设施建设方面取得了举世瞩目的成就，农村互联网普及率已超过百分之五十，但数字鸿沟远不止是网络接入的问题。它涉及数字素养的缺失、可负担设备的匮乏、以及适合农村需求的数字内容和服务的严重不足。以数字素养为例，许多农村老年人虽然拥有智能手机，却仅会使用微信发语音消息这一项功能。在线就医、网上办理政务等本应惠及全民的公共服务，对他们而言形同虚设。一位驻村干部曾描述这样的场景：村里的老人拿着手机来找他，只为请他帮忙挂号看病——他们并非没有工具，而是缺乏使用工具的能力。教育领域的数字鸿沟同样不容忽视。疫情期间，城市学生可以通过平板电脑和高速网络无缝过渡到在线学习，而偏远山区的学生有时需要爬到山顶才能找到信号。缩小数字鸿沟需要系统性的制度设计，而非简单的技术推广。这意味着不仅要继续完善基础设施，更要注重培养数字素养、开发符合农村实际需求的应用程序，并在制度层面确保数字化转型的成果能够公平地惠及每一个人。唯有如此，技术进步才不会成为扩大社会不平等的推手，而是真正成为促进包容性发展的力量。",
+      "text_pinyin": "Zài Zhōngguó chéngshì jūmín xiǎngshòu zhe yídòng zhīfù, jíshí pèisòng hé zàixiàn jiàoyù děng shùzìhuà biànlì de tóngshí, guǎngdà nóngcūn dìqū què miànlín zhe jiérán bùtóng de xiànshí.",
+      "text_en": "While China's urban residents enjoy digital conveniences, vast rural areas face a different reality. Despite infrastructure achievements, the digital divide involves far more than network access — it encompasses digital literacy gaps, device shortages, and inadequate content. Many rural elderly only use WeChat voice messages despite owning smartphones. During the pandemic, urban students transitioned seamlessly to online learning while rural students climbed mountains for signal. Narrowing the divide requires systematic institutional design, not just technology promotion — including digital literacy cultivation, rural-appropriate applications, and institutional guarantees that digital transformation benefits everyone equally. Only then will technology serve as a force for inclusive development rather than widening inequality.",
+      "vocabulary": [
+        {
+          "hanzi": "数字鸿沟",
+          "pinyin": "shùzì hónggōu",
+          "english": "digital divide"
+        },
+        {
+          "hanzi": "基础设施",
+          "pinyin": "jīchǔ shèshī",
+          "english": "infrastructure"
+        },
+        {
+          "hanzi": "普及率",
+          "pinyin": "pǔjí lǜ",
+          "english": "penetration rate"
+        },
+        {
+          "hanzi": "数字素养",
+          "pinyin": "shùzì sùyǎng",
+          "english": "digital literacy"
+        },
+        {
+          "hanzi": "匮乏",
+          "pinyin": "kuìfá",
+          "english": "deficient, lacking"
+        },
+        {
+          "hanzi": "形同虚设",
+          "pinyin": "xíngtóng xūshè",
+          "english": "existing in name only"
+        },
+        {
+          "hanzi": "无缝过渡",
+          "pinyin": "wúfèng guòdù",
+          "english": "seamless transition"
+        },
+        {
+          "hanzi": "加剧",
+          "pinyin": "jiājù",
+          "english": "to intensify, exacerbate"
+        },
+        {
+          "hanzi": "惠及",
+          "pinyin": "huìjí",
+          "english": "to benefit, extend benefit to"
+        },
+        {
+          "hanzi": "包容性",
+          "pinyin": "bāoróngxìng",
+          "english": "inclusiveness"
+        },
+        {
+          "hanzi": "推手",
+          "pinyin": "tuīshǒu",
+          "english": "driving force (often negative)"
+        }
+      ],
+      "questions": [
+        {
+          "type": "mc",
+          "q_zh": "作者认为数字鸿沟的核心问题是什么？",
+          "q_en": "What is the core issue?",
+          "options": [
+            {
+              "text": "农村没有互联网",
+              "pinyin": "nóngcūn méiyǒu hùliánwǎng",
+              "text_en": "no internet in rural areas",
+              "correct": false
+            },
+            {
+              "text": "远不止网络接入，还涉及素养、设备和内容",
+              "pinyin": "yuǎn bù zhǐ wǎngluò jiērù, hái shèjí sùyǎng, shèbèi hé nèiróng",
+              "text_en": "far beyond access — includes literacy, devices, content",
+              "correct": true
+            },
+            {
+              "text": "手机价格太高",
+              "pinyin": "shǒujī jiàgé tài gāo",
+              "text_en": "phone prices too high",
+              "correct": false
+            },
+            {
+              "text": "年轻人不愿意回农村",
+              "pinyin": "niánqīng rén bú yuànyì huí nóngcūn",
+              "text_en": "youth won't return to rural areas",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "数字鸿沟远不止是网络接入的问题."
+        },
+        {
+          "type": "mc",
+          "q_zh": "驻村干部的故事说明了什么？",
+          "q_en": "What does the village official story illustrate?",
+          "options": [
+            {
+              "text": "农村老人不需要手机",
+              "pinyin": "nóngcūn lǎorén bù xūyào shǒujī",
+              "text_en": "elderly don't need phones",
+              "correct": false
+            },
+            {
+              "text": "农村医院太少了",
+              "pinyin": "nóngcūn yīyuàn tài shǎo le",
+              "text_en": "too few rural hospitals",
+              "correct": false
+            },
+            {
+              "text": "有工具但缺乏使用工具的能力",
+              "pinyin": "yǒu gōngjù dàn quēfá shǐyòng gōngjù de nénglì",
+              "text_en": "have tools but lack ability to use them",
+              "correct": true
+            },
+            {
+              "text": "干部应该帮助老人买手机",
+              "pinyin": "gànbù yīnggāi bāngzhù lǎorén mǎi shǒujī",
+              "text_en": "officials should buy phones for elderly",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.4,
+          "explanation": "他们并非没有工具，而是缺乏使用工具的能力."
+        },
+        {
+          "type": "mc",
+          "q_zh": "作者认为缩小数字鸿沟的关键是什么？",
+          "q_en": "What is key to narrowing the divide?",
+          "options": [
+            {
+              "text": "给每个农村家庭发电脑",
+              "pinyin": "gěi měi gè nóngcūn jiātíng fā diànnǎo",
+              "text_en": "give every family a computer",
+              "correct": false
+            },
+            {
+              "text": "让年轻人回村教老人用手机",
+              "pinyin": "ràng niánqīng rén huí cūn jiāo lǎorén yòng shǒujī",
+              "text_en": "youth return to teach elderly",
+              "correct": false
+            },
+            {
+              "text": "系统性的制度设计而非简单的技术推广",
+              "pinyin": "xìtǒngxìng de zhìdù shèjì ér fēi jiǎndān de jìshù tuīguǎng",
+              "text_en": "systematic institutional design, not mere tech promotion",
+              "correct": true
+            },
+            {
+              "text": "建更多的基站就够了",
+              "pinyin": "jiàn gèng duō de jīzhàn jiù gòu le",
+              "text_en": "just build more base stations",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.5,
+          "explanation": "缩小数字鸿沟需要系统性的制度设计，而非简单的技术推广."
+        },
+        {
+          "type": "mc",
+          "q_zh": "疫情期间农村学生面临什么困难？",
+          "q_en": "What difficulties did rural students face?",
+          "options": [
+            {
+              "text": "老师不愿意上网课",
+              "pinyin": "lǎoshī bú yuànyì shàng wǎngkè",
+              "text_en": "teachers unwilling to teach online",
+              "correct": false
+            },
+            {
+              "text": "信号差、设备不足",
+              "pinyin": "xìnhào chà, shèbèi bùzú",
+              "text_en": "poor signal, insufficient devices",
+              "correct": true
+            },
+            {
+              "text": "课程内容太难了",
+              "pinyin": "kèchéng nèiróng tài nán le",
+              "text_en": "content too hard",
+              "correct": false
+            },
+            {
+              "text": "家长不让他们上网",
+              "pinyin": "jiāzhǎng bú ràng tāmen shàng wǎng",
+              "text_en": "parents wouldn't allow internet",
+              "correct": false
+            }
+          ],
+          "difficulty": 0.35,
+          "explanation": "偏远山区的学生有时需要爬到山顶才能找到信号."
+        }
+      ]
+    }
+  ]
+}

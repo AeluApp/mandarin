@@ -134,6 +134,7 @@ def light_db():
             avg_response_ms REAL,
             drill_types_seen TEXT DEFAULT '',
             distinct_review_days INTEGER DEFAULT 0,
+            modality_history TEXT DEFAULT '{}',
             UNIQUE(user_id, content_item_id, modality)
         );
         CREATE TABLE session_log (

@@ -526,6 +526,11 @@ def create_app(testing=False):
     csrf.exempt(gap_bp)
     app.register_blueprint(gap_bp)
 
+    # ── Self-healing webhook routes (Sentry, UptimeRobot) ──────────
+    from .webhook_routes import webhook_bp
+    csrf.exempt(webhook_bp)
+    app.register_blueprint(webhook_bp)
+
     # CSRF protection for JSON API routes: require X-Requested-With header
     # instead of CSRF tokens. This header triggers CORS preflight, preventing
     # cross-origin POST attacks from simple forms. (Zero Trust: verify every request)

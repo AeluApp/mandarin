@@ -8,6 +8,17 @@ from datetime import datetime, timezone, UTC
 logger = logging.getLogger(__name__)
 
 
+# ── AI feature flags for gradual rollout ─────────────────────────────────
+# Each key is the flag_name stored in the feature_flag table; value is its
+# human-readable description used when seeding the flag.
+AI_FEATURE_FLAGS = {
+    "ai_conversation_mode": "AI-powered conversation practice",
+    "ai_content_generation": "AI-generated drill content",
+    "ai_pronunciation_feedback": "AI pronunciation analysis",
+    "ai_grammar_explanation": "AI grammar explanations",
+    "ai_adaptive_difficulty": "AI-driven difficulty adjustment",
+}
+
 # Drill types that require feature flag checks
 FLAGGED_DRILLS = {
     "radical_decomposition": "drill_radical_decomposition",
@@ -86,3 +97,15 @@ def get_all_flags(conn: sqlite3.Connection) -> list:
         return [dict(r) for r in rows]
     except sqlite3.OperationalError:
         return []
+
+
+# ── Convenience alias requested by the AI feature-flag spec ──────────────
+
+def is_flag_enabled(conn: sqlite3.Connection, flag_name: str, user_id: int = None) -> bool:
+    """Check if a feature flag is enabled, with optional percentage rollout.
+
+    This is a thin alias for :func:`is_enabled` — it exists so callers that
+    deal specifically with AI feature flags can use a name that reads well in
+    that context (``is_flag_enabled(conn, "ai_conversation_mode", user_id)``).
+    """
+    return is_enabled(conn, flag_name, user_id)

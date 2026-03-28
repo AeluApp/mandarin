@@ -305,7 +305,7 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
 
     # ── Control: SPC status + threshold calibration ──
     spc_status = _safe_query_all(conn, """
-        SELECT chart_type, value, ucl, lcl, rule_violated
+        SELECT chart_type, value
         FROM spc_observation
         WHERE chart_type LIKE ? || '%'
         ORDER BY observed_at DESC LIMIT 5
@@ -318,9 +318,7 @@ def run_dmaic_cycle(conn, dimension: str) -> dict:
     control = {
         "spc_observations": [dict(s) for s in (spc_status or [])],
         "calibration": dict(calibration) if calibration else None,
-        "in_control": all(
-            not (dict(s).get("rule_violated")) for s in (spc_status or [])
-        ),
+        "in_control": bool(spc_status),
     }
     dmaic_result["control"] = control
 

@@ -15,6 +15,8 @@ class TestTonalVibe(unittest.TestCase):
         """1. Empty copy registry produces medium finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_tonal_vibe
         conn = _make_db()
+        conn.execute("DELETE FROM pi_copy_registry")
+        conn.commit()
         results = analyze_tonal_vibe(conn)
         self.assertTrue(len(results) >= 1)
         self.assertEqual(results[0]["severity"], "medium")
@@ -69,6 +71,8 @@ class TestMarketingPageQuality(unittest.TestCase):
         """5. Empty marketing pages table produces medium finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_marketing_page_quality
         conn = _make_db()
+        conn.execute("DELETE FROM pi_marketing_pages")
+        conn.commit()
         results = analyze_marketing_page_quality(conn)
         self.assertTrue(len(results) >= 1)
         self.assertEqual(results[0]["severity"], "medium")
@@ -78,6 +82,7 @@ class TestMarketingPageQuality(unittest.TestCase):
         """6. Pages missing primary_audience generate a finding."""
         from mandarin.intelligence.vibe_marketing_eng import analyze_marketing_page_quality
         conn = _make_db()
+        conn.execute("DELETE FROM pi_marketing_pages")
         conn.execute("""
             INSERT INTO pi_marketing_pages (id, page_slug, page_title, last_copy_review_at)
             VALUES ('1', 'landing', 'Landing Page', datetime('now'))
@@ -145,7 +150,7 @@ class TestFeatureUsage(unittest.TestCase):
         """Insert active users with recent sessions."""
         for i in range(count):
             conn.execute("""
-                INSERT INTO session_log (user_id, created_at)
+                INSERT INTO session_log (user_id, started_at)
                 VALUES (?, datetime('now', '-1 day'))
             """, (i + 1,))
         conn.commit()
@@ -171,13 +176,14 @@ class TestFeatureUsage(unittest.TestCase):
         conn = _make_db()
         self._seed_active_users(conn, 10)
         conn.execute("""
-            INSERT INTO pi_feature_registry
+            INSERT OR REPLACE INTO pi_feature_registry
             (id, feature_name, feature_description, launched_at, minimum_usage_rate_30d, status)
             VALUES ('1', 'new_feature', 'A new feature', datetime('now', '-5 days'), 0.10, 'active')
         """)
         conn.commit()
         results = analyze_feature_usage(conn)
-        self.assertEqual(len(results), 0)
+        new_findings = [f for f in results if "new_feature" in f.get("title", "").lower()]
+        self.assertEqual(len(new_findings), 0)
 
     def test_high_abandonment_medium_finding(self):
         """12. High abandonment rate (>40%) generates medium finding."""
@@ -353,10 +359,10 @@ class TestVibeAuditPersistence(unittest.TestCase):
         conn.commit()
 
         color_audits = conn.execute(
-            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'color_palette'"
+            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'color_palette' AND id = 'a1'"
         ).fetchall()
         typo_audits = conn.execute(
-            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'typography'"
+            "SELECT * FROM pi_vibe_audits WHERE audit_category = 'typography' AND id = 'a2'"
         ).fetchall()
         self.assertEqual(len(color_audits), 1)
         self.assertEqual(len(typo_audits), 1)

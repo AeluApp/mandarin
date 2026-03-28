@@ -13,7 +13,7 @@ from .base import (
 )
 from .hints import get_hanzi_hint
 from .mc import run_mc_drill
-from .pinyin import strip_tones, normalize_pinyin
+from .pinyin import strip_tones, normalize_pinyin, _pinyin_match
 
 logger = logging.getLogger(__name__)
 
@@ -242,11 +242,23 @@ def run_translation_drill(item: dict, conn, show_fn, input_fn,
                 confidence="full",
             )
 
-        # Check pinyin match (stripped of tones)
+        # Check pinyin match with tone validation
         if expected_pinyin:
-            user_stripped = strip_tones(normalize_pinyin(answer))
-            expected_stripped = strip_tones(normalize_pinyin(expected_pinyin))
-            if user_stripped and user_stripped == expected_stripped:
+            _correct, match_type = _pinyin_match(answer, expected_pinyin)
+
+            if match_type == "tone_error":
+                # Base syllable correct but tones wrong — specific feedback
+                return DrillResult(
+                    content_item_id=item["id"], modality="reading", drill_type="translation",
+                    correct=False, user_answer=answer, expected_answer=expected_hanzi,
+                    feedback=f"  Correct syllable, wrong tone \u2014 it should be {expected_pinyin}"
+                            f"  (the hanzi is {format_hanzi_inline(expected_hanzi)})",
+                    error_type="tone", error_cause="tone_error",
+                    confidence="full", score=0.3,
+                )
+
+            if _correct and match_type in ("exact", "numbered"):
+                # Full pinyin match including tones
                 if hints_used:
                     return DrillResult(
                         content_item_id=item["id"], modality="reading", drill_type="translation",
@@ -259,6 +271,22 @@ def run_translation_drill(item: dict, conn, show_fn, input_fn,
                     correct=True, user_answer=answer, expected_answer=expected_hanzi,
                     feedback=f"  (pinyin accepted \u2014 the hanzi is {format_hanzi_inline(expected_hanzi)})",
                     confidence="full",
+                )
+
+            if _correct and match_type == "no_tone":
+                # Correct base syllables but no tones provided — accept but note it
+                if hints_used:
+                    return DrillResult(
+                        content_item_id=item["id"], modality="reading", drill_type="translation",
+                        correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                        feedback=f"  (pinyin accepted, with hints \u2014 practice the tones: {expected_pinyin})",
+                        confidence="half", score=0.4,
+                    )
+                return DrillResult(
+                    content_item_id=item["id"], modality="reading", drill_type="translation",
+                    correct=True, user_answer=answer, expected_answer=expected_hanzi,
+                    feedback=f"  (correct syllables \u2014 practice the tones: {expected_pinyin})",
+                    confidence="full", score=0.7,
                 )
 
         # Character overlap scoring
