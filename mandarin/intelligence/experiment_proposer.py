@@ -656,6 +656,76 @@ _TEMPLATES: list[dict[str, Any]] = [
         "scope": "parameter",
         "duration_days": 30,
     },
+    # Marketing SEO templates
+    {
+        "match": {"dimension": "marketing_seo", "keywords": ["seo", "search", "organic", "structured", "schema"]},
+        "name": "auto_faq_schema_seo",
+        "description": "Test whether adding structured data (FAQ schema) to landing pages increases organic search traffic",
+        "hypothesis": "FAQ schema markup on landing pages improves search visibility and increases organic traffic",
+        "variants": ["control", "faq_schema"],
+        "scope": "marketing",
+        "duration_days": 30,
+    },
+    # Marketing social proof templates
+    {
+        "match": {"dimension": "marketing_social_proof", "keywords": ["social_proof", "learners", "active", "count"]},
+        "name": "auto_active_learner_count",
+        "description": "Test whether showing 'X learners active today' on the landing page increases signups",
+        "hypothesis": "Displaying real-time active learner count on landing page increases signup conversion",
+        "variants": ["control", "active_learner_count"],
+        "scope": "marketing",
+        "duration_days": 14,
+    },
+    # Marketing pricing templates
+    {
+        "match": {"dimension": "marketing_pricing", "keywords": ["pricing", "popular", "highlight", "plan"]},
+        "name": "auto_most_popular_plan",
+        "description": "Test whether a highlighted 'most popular' plan increases conversion",
+        "hypothesis": "Highlighting the most popular pricing plan with a visual badge increases plan selection rate",
+        "variants": ["control", "highlighted_popular"],
+        "scope": "business",
+        "duration_days": 21,
+    },
+    # Admin dashboard templates
+    {
+        "match": {"dimension": "admin_dashboard", "keywords": ["admin", "dashboard", "intelligence", "simplified"]},
+        "name": "auto_simplified_admin_view",
+        "description": "Test whether a simplified admin intelligence view increases owner engagement with findings",
+        "hypothesis": "A simplified admin dashboard with fewer metrics increases finding review rate",
+        "variants": ["control", "simplified_admin"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
+    # Non-core conversation templates
+    {
+        "match": {"dimension": "non_core_conversation", "keywords": ["conversation", "unlock", "session", "earlier"]},
+        "name": "auto_earlier_conversation_unlock",
+        "description": "Test whether conversation mode unlocks earlier (after 3 sessions vs 5) increases engagement",
+        "hypothesis": "Unlocking conversation mode after 3 sessions instead of 5 increases overall engagement",
+        "variants": ["control_5_sessions", "early_unlock_3_sessions"],
+        "scope": "parameter",
+        "duration_days": 21,
+    },
+    # Non-core reading templates
+    {
+        "match": {"dimension": "non_core_reading", "keywords": ["reading", "adaptive", "difficulty", "completion"]},
+        "name": "auto_adaptive_reading_difficulty",
+        "description": "Test whether adaptive reading difficulty increases reading drill completion rate",
+        "hypothesis": "Dynamically adjusting reading passage difficulty to learner level improves completion rate",
+        "variants": ["control_fixed", "adaptive_difficulty"],
+        "scope": "parameter",
+        "duration_days": 21,
+    },
+    # Non-core pronunciation templates
+    {
+        "match": {"dimension": "non_core_pronunciation", "keywords": ["pronunciation", "tone", "visualization", "speaking"]},
+        "name": "auto_tone_visualization",
+        "description": "Test whether real-time tone visualization during speaking drills improves tone accuracy",
+        "hypothesis": "Real-time pitch contour visualization during speaking drills improves tone accuracy scores",
+        "variants": ["control", "realtime_tone_viz"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
 ]
 
 
@@ -989,6 +1059,83 @@ def propose_experiments_for_findings(
         except sqlite3.OperationalError:
             # Table may not exist yet
             pass
+
+        proposals.append(proposal)
+
+    return proposals
+
+
+def propose_improvement_batch(
+    conn: sqlite3.Connection,
+    dimension_scores: dict[str, float],
+) -> list[dict[str, Any]]:
+    """Propose experiments for all dimensions scoring below 80 (B grade).
+
+    Scans *dimension_scores* (mapping dimension name -> numeric score 0-100),
+    identifies any that fall below the 80-point threshold, and calls
+    :func:`propose_experiment` for each with a synthetic finding.
+
+    Each successful proposal is logged to the ``experiment_proposal`` table
+    (if it exists) and collected into the return list.
+
+    Args:
+        conn: Open SQLite connection.
+        dimension_scores: ``{"retention": 72, "onboarding": 85, ...}``.
+
+    Returns:
+        List of proposal dicts (same shape as :func:`propose_experiment` output).
+    """
+    threshold = 80
+    proposals: list[dict[str, Any]] = []
+
+    # Sort for deterministic ordering — lowest scores first
+    weak_dims = sorted(
+        ((dim, score) for dim, score in dimension_scores.items() if score < threshold),
+        key=lambda pair: pair[1],
+    )
+
+    for dimension, score in weak_dims:
+        # Build a synthetic finding that the template matcher can work with
+        finding = {
+            "dimension": dimension,
+            "title": f"{dimension} score below threshold ({score}/100)",
+            "analysis": (
+                f"The {dimension} dimension scored {score}/100 which is below "
+                f"the B-grade threshold of {threshold}. An experiment may help "
+                f"identify improvements."
+            ),
+            "recommendation": f"Run an A/B test targeting the {dimension} dimension",
+            "severity": "high" if score < 60 else "medium",
+        }
+
+        proposal = propose_experiment(conn, finding, source="improvement_batch")
+        if proposal is None:
+            continue
+
+        # Attempt to log to experiment_proposal table
+        try:
+            conn.execute("""
+                INSERT INTO experiment_proposal
+                    (name, description, hypothesis, scope, status, source, source_detail, created_at)
+                VALUES (?, ?, ?, ?, 'pending', ?, ?, datetime('now'))
+            """, (
+                proposal["name"],
+                proposal["description"],
+                proposal["hypothesis"],
+                proposal.get("scope", "parameter"),
+                proposal.get("source", "improvement_batch"),
+                proposal.get("source_detail", ""),
+            ))
+            conn.commit()
+        except sqlite3.OperationalError:
+            # Table may not exist yet — that's fine
+            pass
+        except Exception:
+            logger.debug(
+                "Failed to log proposal %s to experiment_proposal",
+                proposal.get("name"),
+                exc_info=True,
+            )
 
         proposals.append(proposal)
 

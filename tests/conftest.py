@@ -1,5 +1,6 @@
 """Shared test fixtures for the mandarin test suite."""
 
+import atexit
 import os
 import sqlite3
 import tempfile
@@ -10,6 +11,39 @@ from hypothesis import settings as hypothesis_settings, HealthCheck
 
 from mandarin import db
 from mandarin.db.core import _migrate
+
+
+# ── Python 3.14 segfault workaround ──
+# C extensions (torch, scipy, sklearn) can segfault during interpreter shutdown
+# on Python 3.14 when their module destructors race with GC. We suppress the
+# faulthandler crash report and force-exit after pytest finishes to prevent
+# the noisy segfault traceback. This is safe because pytest has already
+# finished and reported results by the time this runs.
+import faulthandler as _faulthandler
+import signal as _signal
+import sys as _sys
+
+_SEGFAULT_WORKAROUND = _sys.version_info >= (3, 14)
+
+if _SEGFAULT_WORKAROUND:
+    # Disable faulthandler so crash tracebacks don't pollute test output
+    _faulthandler.disable()
+    # Ignore SIGSEGV / SIGABRT so background thread crashes don't dump noise
+    _signal.signal(_signal.SIGSEGV, _signal.SIG_DFL)
+    _signal.signal(_signal.SIGABRT, _signal.SIG_DFL)
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Force-exit after pytest completes to avoid C extension segfaults on Python 3.14.
+
+    os._exit() skips Python's interpreter shutdown (where the segfault occurs)
+    while preserving the correct exit code for CI pipelines.
+    """
+    if _SEGFAULT_WORKAROUND:
+        # Flush output so test results appear before we exit
+        _sys.stdout.flush()
+        _sys.stderr.flush()
+        os._exit(exitstatus)
 
 
 # ── Hypothesis profiles ──

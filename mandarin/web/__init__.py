@@ -66,7 +66,13 @@ class V1PrefixMiddleware:
         path = environ.get("PATH_INFO", "")
         if path.startswith("/api/v1/"):
             environ["PATH_INFO"] = "/api/" + path[8:]
-        return self.app(environ, start_response)
+        try:
+            return self.app(environ, start_response)
+        except StopIteration:
+            # Guard against StopIteration leaking from generators in the app —
+            # a bare next() without a default somewhere in the call chain.
+            start_response("500 Internal Server Error", [("Content-Type", "text/plain")])
+            return [b"Internal Server Error"]
 
 
 def _build_static_hashes(static_folder):
@@ -636,6 +642,7 @@ def create_app(testing=False):
             openclaw_scheduler,
             counter_metrics_scheduler,
             marketing_scheduler,
+            nightly_intelligence_scheduler,
         )
 
         _scheduler_modules = [
@@ -651,6 +658,7 @@ def create_app(testing=False):
             ("openclaw-scheduler", openclaw_scheduler),
             ("counter-metrics", counter_metrics_scheduler),
             ("marketing-scheduler", marketing_scheduler),
+            ("nightly-intelligence", nightly_intelligence_scheduler),
         ]
 
         for _name, _module in _scheduler_modules:

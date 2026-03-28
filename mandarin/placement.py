@@ -414,8 +414,8 @@ def score_placement(answers: list) -> dict:
     total_questions = len(answers)
 
     for ans in answers:
-        if isinstance(ans, str):
-            # Legacy flat string format — cannot score, skip
+        if not isinstance(ans, dict):
+            # Legacy flat string format or malformed entry — cannot score, skip
             continue
         level = ans.get("hsk_level", 1)
         selected = ans.get("selected", "").strip()

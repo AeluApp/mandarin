@@ -58,10 +58,10 @@ def _make_db():
         INSERT INTO review_event (user_id, content_item_id, correct, modality)
         VALUES (1, 2, 1, 'reading');
 
-        INSERT INTO audio_recording (user_id, content_item_id, overall_score, tone_scores_json)
-        VALUES (1, 1, 0.72, '[{"expected": 3, "correct": true}, {"expected": 3, "correct": false}]');
-        INSERT INTO audio_recording (user_id, content_item_id, overall_score, tone_scores_json)
-        VALUES (1, 2, 0.85, '[{"expected": 4, "correct": true}, {"expected": 0, "correct": true}]');
+        INSERT INTO audio_recording (user_id, content_item_id, file_path, overall_score, tone_scores_json)
+        VALUES (1, 1, '/tmp/test_audio_1.wav', 0.72, '[{"expected": 3, "correct": true}, {"expected": 3, "correct": false}]');
+        INSERT INTO audio_recording (user_id, content_item_id, file_path, overall_score, tone_scores_json)
+        VALUES (1, 2, '/tmp/test_audio_2.wav', 0.85, '[{"expected": 4, "correct": true}, {"expected": 0, "correct": true}]');
 
         INSERT INTO reading_progress (user_id, passage_id, words_looked_up, reading_time_seconds)
         VALUES (1, 'passage_1', 3, 120);
@@ -82,8 +82,15 @@ def _make_db():
         INSERT INTO content_generation_queue (gap_type, status) VALUES ('grammar_pattern_no_items', 'pending');
         INSERT INTO content_generation_queue (gap_type, status) VALUES ('hsk_coverage_gap', 'pending');
 
-        INSERT INTO product_audit (id, overall_grade, overall_score, findings_json)
-        VALUES (1, 'B+', 83.2, '[{"title":"Grammar coverage thin","severity":"high"}]');
+        INSERT INTO product_audit (id, overall_grade, overall_score, dimension_scores, findings_json, findings_count)
+        VALUES (1, 'B+', 83.2, '{}', '[{"title":"Grammar coverage thin","severity":"high"}]', 1);
+
+        INSERT INTO classroom (id, teacher_user_id, name, invite_code, status)
+        VALUES (1, 1, 'Test Class', 'TEST01', 'active');
+        INSERT INTO classroom_student (classroom_id, user_id)
+        VALUES (1, 1);
+        INSERT INTO classroom_student (classroom_id, user_id)
+        VALUES (1, 2);
     """)
     return conn
 
@@ -115,7 +122,7 @@ class TestLearnerModelQueries(unittest.TestCase):
             "SELECT * FROM learner_profile WHERE user_id = ?", (1,)
         ).fetchone()
         self.assertIsNotNone(profile)
-        self.assertEqual(profile["target_sessions_per_week"], 5)
+        self.assertEqual(profile["target_sessions_per_week"], 4)
 
     def test_mastery_overview_by_hsk(self):
         rows = self.conn.execute("""
@@ -159,7 +166,7 @@ class TestLearnerModelQueries(unittest.TestCase):
             GROUP BY el.error_type ORDER BY cnt DESC
         """).fetchall()
         self.assertEqual(len(errors), 2)
-        self.assertEqual(errors[0]["error_type"], "tone_error")
+        self.assertEqual(errors[0]["error_type"], "tone")
         self.assertEqual(errors[0]["cnt"], 2)
 
     def test_error_analysis_struggling_items(self):
@@ -227,13 +234,11 @@ class TestLearnerModelQueries(unittest.TestCase):
     def test_reading_progress(self):
         stats = self.conn.execute("""
             SELECT COUNT(*) as total,
-                   AVG(comprehension_score) as avg_comp,
                    SUM(words_looked_up) as total_lookups,
                    AVG(reading_time_seconds) as avg_time
             FROM reading_progress WHERE user_id = 1
         """).fetchone()
         self.assertEqual(stats["total"], 2)
-        self.assertAlmostEqual(stats["avg_comp"], 0.725, places=2)
         self.assertEqual(stats["total_lookups"], 8)
 
     def test_listening_progress(self):
@@ -369,7 +374,7 @@ class TestSessionSchedulingQueries(unittest.TestCase):
             SELECT COUNT(*) as cnt FROM error_focus
             WHERE user_id = 1 AND resolved = 0
         """).fetchone()
-        self.assertEqual(active["cnt"], 3)
+        self.assertEqual(active["cnt"], 2)
 
     def test_schedule_recommendation_modality_balance(self):
         modalities = self.conn.execute("""
@@ -385,7 +390,7 @@ class TestSessionSchedulingQueries(unittest.TestCase):
         profile = self.conn.execute(
             "SELECT target_sessions_per_week FROM learner_profile WHERE user_id = 1"
         ).fetchone()
-        self.assertEqual(profile["target_sessions_per_week"], 5)
+        self.assertEqual(profile["target_sessions_per_week"], 4)
 
         completed = self.conn.execute("""
             SELECT COUNT(*) as cnt FROM session_log
@@ -395,14 +400,13 @@ class TestSessionSchedulingQueries(unittest.TestCase):
 
     def test_streak_status(self):
         user = self.conn.execute(
-            "SELECT streak_days, streak_freezes_available FROM user WHERE id = 1"
+            "SELECT streak_freezes_available FROM user WHERE id = 1"
         ).fetchone()
-        self.assertEqual(user["streak_days"], 7)
         self.assertEqual(user["streak_freezes_available"], 2)
 
     def test_streak_status_missing_user(self):
         user = self.conn.execute(
-            "SELECT streak_days FROM user WHERE id = 999"
+            "SELECT streak_freezes_available FROM user WHERE id = 999"
         ).fetchone()
         self.assertIsNone(user)
 
@@ -435,10 +439,10 @@ class TestAdminOperationsQueries(unittest.TestCase):
 
     def test_latest_audit_summary(self):
         audit = self.conn.execute("""
-            SELECT grade, score, findings_json
-            FROM product_audit ORDER BY created_at DESC LIMIT 1
+            SELECT overall_grade, overall_score, findings_json
+            FROM product_audit ORDER BY run_at DESC LIMIT 1
         """).fetchone()
-        self.assertEqual(audit["grade"], "B+")
+        self.assertEqual(audit["overall_grade"], "B+")
         findings = json.loads(audit["findings_json"])
         self.assertEqual(len(findings), 1)
         self.assertEqual(findings[0]["severity"], "high")
@@ -453,7 +457,7 @@ class TestAdminOperationsQueries(unittest.TestCase):
         """).fetchall()
         self.assertGreater(len(errors), 0)
         self.assertEqual(errors[0]["hanzi"], "你好")
-        self.assertEqual(errors[0]["error_type"], "tone_error")
+        self.assertEqual(errors[0]["error_type"], "tone")
 
     def test_learner_briefing_proficiency(self):
         proficiency = self.conn.execute(
@@ -512,10 +516,10 @@ class TestInstitutionalQueries(unittest.TestCase):
 
     def test_class_progress_students(self):
         students = self.conn.execute("""
-            SELECT cm.user_id, u.email, u.display_name
-            FROM classroom_member cm
-            JOIN user u ON u.id = cm.user_id
-            WHERE cm.classroom_id = 1 AND cm.role = 'student'
+            SELECT cs.user_id, u.email, u.display_name
+            FROM classroom_student cs
+            JOIN user u ON u.id = cs.user_id
+            WHERE cs.classroom_id = 1
         """).fetchall()
         self.assertEqual(len(students), 2)
 

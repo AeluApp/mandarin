@@ -42,7 +42,7 @@ def _compute_tone_transfer(conn, days=30):
     isolated_correct = _safe_scalar(conn, """
         SELECT COUNT(*) FROM review_event
         WHERE drill_type IN ('tone', 'minimal_pair')
-          AND is_correct = 1
+          AND correct = 1
           AND created_at >= datetime('now', ?)
     """, (f"-{days} days",))
     isolated_total = _safe_scalar(conn, """
@@ -54,7 +54,7 @@ def _compute_tone_transfer(conn, days=30):
     contextual_correct = _safe_scalar(conn, """
         SELECT COUNT(*) FROM review_event
         WHERE drill_type IN ('tone_sandhi', 'listening_tone')
-          AND is_correct = 1
+          AND correct = 1
           AND created_at >= datetime('now', ?)
     """, (f"-{days} days",))
     contextual_total = _safe_scalar(conn, """
@@ -265,7 +265,7 @@ def analyze_output_production(conn):
     prod_correct = _safe_scalar(conn, """
         SELECT COUNT(*) FROM review_event
         WHERE drill_type IN ('translation', 'sentence_build', 'word_order', 'ime_type')
-          AND is_correct = 1
+          AND correct = 1
           AND created_at >= datetime('now', '-30 days')
     """)
     prod_total = _safe_scalar(conn, """
@@ -278,7 +278,7 @@ def analyze_output_production(conn):
     rec_correct = _safe_scalar(conn, """
         SELECT COUNT(*) FROM review_event
         WHERE drill_type IN ('mc', 'reverse_mc')
-          AND is_correct = 1
+          AND correct = 1
           AND created_at >= datetime('now', '-30 days')
     """)
     rec_total = _safe_scalar(conn, """
@@ -449,7 +449,7 @@ def analyze_tutor_integration(conn):
 
     # Corrected items performing < 60% accuracy
     corrected_acc = _safe_scalar(conn, """
-        SELECT AVG(CASE WHEN re.is_correct = 1 THEN 100.0 ELSE 0.0 END)
+        SELECT AVG(CASE WHEN re.correct = 1 THEN 100.0 ELSE 0.0 END)
         FROM review_event re
         JOIN content_item ci ON re.content_item_id = ci.id
         WHERE ci.tutor_corrected = 1

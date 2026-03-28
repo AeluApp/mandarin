@@ -20,6 +20,11 @@ from tests.shared_db import make_test_db as _make_db
 class TestDraftTeacherOutreach(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        self.conn.execute("""
+            INSERT OR IGNORE INTO teacher_lead (id, name, platform, language_pair, status)
+            VALUES (1, 'Test Teacher', 'iTalki', 'en-zh', 'qualified')
+        """)
+        self.conn.commit()
 
     @patch("mandarin.ai.ollama_client.is_ollama_available", return_value=False)
     def test_template_draft_without_llm(self, mock_avail):
@@ -41,6 +46,11 @@ class TestDraftTeacherOutreach(unittest.TestCase):
 class TestDraftPilotInvitation(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        self.conn.execute("""
+            INSERT OR IGNORE INTO teacher_lead (id, name, platform, language_pair, status)
+            VALUES (1, 'Test Teacher', 'iTalki', 'en-zh', 'qualified')
+        """)
+        self.conn.commit()
 
     @patch("mandarin.ai.ollama_client.is_ollama_available", return_value=False)
     def test_creates_invitation(self, mock_avail):
@@ -51,6 +61,11 @@ class TestDraftPilotInvitation(unittest.TestCase):
 class TestGetPendingDrafts(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        self.conn.execute("""
+            INSERT OR IGNORE INTO teacher_lead (id, name, platform, language_pair, status)
+            VALUES (1, 'Test Teacher', 'iTalki', 'en-zh', 'qualified')
+        """)
+        self.conn.commit()
 
     def test_empty_queue(self):
         drafts = get_pending_drafts(self.conn)

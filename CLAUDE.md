@@ -131,6 +131,34 @@ Prefer WebP with JPG fallback.
 
 ---
 
+## Known Issues
+
+### Python 3.14 Segfault During/After Tests
+
+C extensions (torch, scipy, sklearn) can segfault during Python 3.14 test runs. This is a CPython/extension compatibility issue, NOT a test failure. The `tests/conftest.py` has a workaround (`os._exit()` in `pytest_sessionfinish`), and `scripts/run_tests.sh` filters the noise.
+
+**How to run tests without segfault noise:**
+```bash
+./scripts/run_tests.sh                     # unit tests (default)
+./scripts/run_tests.sh tests/e2e/          # e2e tests
+./scripts/run_tests.sh tests/ -k "auth"    # filtered
+```
+
+**If the segfault kills the process before results print**, run in smaller batches:
+```bash
+pytest tests/test_foo.py tests/test_bar.py -x -q
+```
+
+**Evaluating results**: The segfault does NOT affect test outcomes. If you see `N passed` before the segfault, all N tests truly passed. If the segfault kills the process before printing results, re-run — the crash is non-deterministic and usually resolves on retry.
+
+**Long-term fix**: Upgrade torch, scipy, sklearn to versions with Python 3.14 support when available. Track at: https://github.com/pytorch/pytorch/issues (Python 3.14 compat).
+
+### Scheduled Task Self-Healing
+
+The daily scheduled task (`aelu-self-healing`) is designed to diagnose and fix its own failures from previous runs. If a session terminates early, times out, or segfaults, the next run's Step 0 checks for previous failures and fixes them. Do not worry about individual session failures — the system self-corrects.
+
+---
+
 ## What NOT to Do
 
 - **No sans-serif fonts** in body text.

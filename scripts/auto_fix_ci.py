@@ -302,8 +302,8 @@ def main():
         return 1
 
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr)
-        return 1
+        print("SKIP: ANTHROPIC_API_KEY not set — auto-fix disabled")
+        return 0
 
     print(f"Diagnosing CI failure for run {run_id}...")
 

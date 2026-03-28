@@ -390,7 +390,7 @@ def _check_border_radius_compliance(conn):
 # ── Check 6: Platform drift (Flutter vs. design tokens) ─────────────────
 
 def _check_platform_drift(conn):
-    """Compare design-tokens.json colors with Flutter AeluColors constants."""
+    """Compare design-tokens.json colors, spacing, and motion with Flutter theme constants."""
     findings = []
     try:
         tokens_raw = _read_file("mandarin/web/static/design-tokens.json")
@@ -456,6 +456,231 @@ def _check_platform_drift(conn):
                 ["mandarin/web/static/design-tokens.json",
                  "flutter_app/lib/theme/aelu_colors.dart"],
             ))
+
+        # ── 6b. Dark mode drift: full dark palette comparison ──
+        # Compare all dark tokens against Flutter dark color constants.
+        # The comparisons list above only covers a subset; check the full dark palette.
+        try:
+            _DARK_TOKEN_TO_FLUTTER = {
+                "base": "baseDark",
+                "surface": "surfaceDark",
+                "surfaceAlt": "surfaceAltDark",
+                "text": "textDark",
+                "textDim": "textDimDark",
+                "textFaint": "textFaintDark",
+                "accent": "accentDark",
+                "accentDim": "accentDimDark",
+                "onAccent": "onAccentDark",
+                "secondary": "secondaryDark",
+                "correct": "correctDark",
+                "incorrect": "incorrectDark",
+                "divider": "dividerDark",
+            }
+            dark_drifts = []
+            for token_key, flutter_field in _DARK_TOKEN_TO_FLUTTER.items():
+                token_hex = dark_tokens.get(token_key, "")
+                if not token_hex.startswith("#"):
+                    continue
+                flutter_hex = flutter_colors.get(flutter_field, "")
+                if not flutter_hex:
+                    continue
+                if _normalize_hex(token_hex) != _normalize_hex(flutter_hex):
+                    dark_drifts.append((token_key, token_hex, flutter_field, flutter_hex))
+
+            if dark_drifts:
+                detail_lines = [
+                    f"  {tk} (dark): JSON={tv}  Flutter {ff}={fv}"
+                    for tk, tv, ff, fv in dark_drifts[:8]
+                ]
+                findings.append(_finding(
+                    "design_quality", "medium",
+                    f"{len(dark_drifts)} dark mode color(s) differ between design-tokens.json and Flutter AeluColors",
+                    f"Dark mode platform drift detected — the Flutter dark theme colors "
+                    f"no longer match the canonical dark palette in design-tokens.json:\n"
+                    + "\n".join(detail_lines),
+                    "Update Flutter AeluColors dark constants to match design-tokens.json dark values.",
+                    "Update the dark-mode Color constants in flutter_app/lib/theme/aelu_colors.dart "
+                    "to match the 'dark' palette in mandarin/web/static/design-tokens.json. "
+                    "The design-tokens.json file is the single source of truth.",
+                    "Cross-platform dark mode consistency (web vs. Flutter)",
+                    ["mandarin/web/static/design-tokens.json",
+                     "flutter_app/lib/theme/aelu_colors.dart"],
+                ))
+        except Exception:
+            pass
+
+        # ── 6c. Spacing drift: compare design-tokens.json spacing with Flutter aelu_spacing.dart ──
+        try:
+            spacing_src = _read_file("flutter_app/lib/theme/aelu_spacing.dart")
+            if spacing_src:
+                token_spacing = tokens.get("spacing", {})
+                # Parse Flutter spacing constants: static const double spaceN = <value>;
+                flutter_spacing = {}
+                for m in re.finditer(
+                    r'static\s+const\s+double\s+space(\w+)\s*=\s*([\d.]+)',
+                    spacing_src,
+                ):
+                    key = m.group(1)  # e.g. "1", "2", "Sm", "Base"
+                    val = float(m.group(2))
+                    flutter_spacing[key] = val
+
+                spacing_drifts = []
+                for token_key, token_val_str in token_spacing.items():
+                    # Convert rem to px for comparison (1rem = 16px)
+                    rem_match = re.match(r'^([\d.]+)rem$', token_val_str.strip())
+                    if not rem_match:
+                        continue
+                    token_px = float(rem_match.group(1)) * 16.0
+
+                    # Try matching by numeric key or capitalized name
+                    flutter_val = flutter_spacing.get(token_key)
+                    if flutter_val is None:
+                        # Try capitalized: "4" → "4", "base" → "Base"
+                        flutter_val = flutter_spacing.get(token_key.capitalize())
+                    if flutter_val is None:
+                        continue
+
+                    # Allow 0.5px tolerance for rounding
+                    if abs(token_px - flutter_val) > 0.5:
+                        spacing_drifts.append((
+                            token_key, token_val_str, token_px,
+                            flutter_val,
+                        ))
+
+                if spacing_drifts:
+                    detail_lines = [
+                        f"  space-{tk}: JSON={tv} ({tpx:.0f}px)  Flutter={fv:.0f}px"
+                        for tk, tv, tpx, fv in spacing_drifts[:8]
+                    ]
+                    findings.append(_finding(
+                        "design_quality", "medium",
+                        f"{len(spacing_drifts)} spacing value(s) differ between design-tokens.json and Flutter aelu_spacing.dart",
+                        f"Spacing platform drift detected — the Flutter spacing constants "
+                        f"no longer match the canonical spacing tokens (converted rem→px at 16px/rem):\n"
+                        + "\n".join(detail_lines),
+                        "Update Flutter aelu_spacing.dart constants to match design-tokens.json spacing values.",
+                        "Update flutter_app/lib/theme/aelu_spacing.dart spacing constants to match "
+                        "the 'spacing' values in mandarin/web/static/design-tokens.json. "
+                        "Convert rem to px using 1rem = 16px.",
+                        "Cross-platform spacing consistency (web vs. Flutter)",
+                        ["mandarin/web/static/design-tokens.json",
+                         "flutter_app/lib/theme/aelu_spacing.dart"],
+                    ))
+        except Exception:
+            pass
+
+        # ── 6d. Motion/easing drift: compare design-tokens.json motion with Flutter theme ──
+        try:
+            flutter_theme_src = _read_file("flutter_app/lib/theme/aelu_theme.dart")
+            if flutter_theme_src:
+                token_motion = tokens.get("motion", {})
+                token_durations = token_motion.get("duration", {})
+                token_easings = token_motion.get("easing", {})
+
+                motion_drifts = []
+
+                # Check durations: parse Flutter Duration(milliseconds: N)
+                flutter_durations = {}
+                for m in re.finditer(
+                    r'(\w+)\s*[:=]\s*(?:const\s+)?Duration\(milliseconds:\s*(\d+)\)',
+                    flutter_theme_src,
+                ):
+                    flutter_durations[m.group(1).lower()] = int(m.group(2))
+
+                for token_name, token_val_str in token_durations.items():
+                    # Parse CSS duration: "0.3s" → 300ms, "150ms" → 150ms
+                    ms_match = re.match(r'^([\d.]+)ms$', token_val_str.strip())
+                    s_match = re.match(r'^([\d.]+)s$', token_val_str.strip())
+                    if ms_match:
+                        token_ms = float(ms_match.group(1))
+                    elif s_match:
+                        token_ms = float(s_match.group(1)) * 1000.0
+                    else:
+                        continue
+
+                    # Try matching Flutter duration by name (e.g. "fast", "base", "slow")
+                    flutter_ms = flutter_durations.get(token_name.lower())
+                    if flutter_ms is None:
+                        # Try common Flutter naming patterns
+                        for alias in [f"duration{token_name.capitalize()}", f"anim{token_name.capitalize()}"]:
+                            flutter_ms = flutter_durations.get(alias.lower())
+                            if flutter_ms is not None:
+                                break
+                    if flutter_ms is None:
+                        continue
+
+                    # Allow 10ms tolerance
+                    if abs(token_ms - flutter_ms) > 10:
+                        motion_drifts.append((
+                            f"duration.{token_name}", token_val_str,
+                            f"{token_ms:.0f}ms", f"{flutter_ms}ms",
+                        ))
+
+                # Check easing curves: parse Flutter Cubic(a, b, c, d)
+                flutter_cubics = {}
+                for m in re.finditer(
+                    r'(\w+)\s*[:=]\s*(?:const\s+)?Cubic\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)',
+                    flutter_theme_src,
+                ):
+                    name = m.group(1).lower()
+                    vals = (float(m.group(2)), float(m.group(3)),
+                            float(m.group(4)), float(m.group(5)))
+                    flutter_cubics[name] = vals
+
+                for token_name, token_val_str in token_easings.items():
+                    # Parse CSS cubic-bezier(a, b, c, d)
+                    cb_match = re.match(
+                        r'cubic-bezier\(\s*([\d.]+)\s*,\s*([-\d.]+)\s*,\s*([\d.]+)\s*,\s*([-\d.]+)\s*\)',
+                        token_val_str.strip(),
+                    )
+                    if not cb_match:
+                        continue
+                    token_vals = (
+                        float(cb_match.group(1)), float(cb_match.group(2)),
+                        float(cb_match.group(3)), float(cb_match.group(4)),
+                    )
+
+                    # Try matching Flutter cubic by name
+                    flutter_vals = flutter_cubics.get(token_name.lower())
+                    if flutter_vals is None:
+                        for alias in [f"ease{token_name.capitalize()}", f"curve{token_name.capitalize()}"]:
+                            flutter_vals = flutter_cubics.get(alias.lower())
+                            if flutter_vals is not None:
+                                break
+                    if flutter_vals is None:
+                        continue
+
+                    # Compare with 0.01 tolerance per control point
+                    if any(abs(a - b) > 0.01 for a, b in zip(token_vals, flutter_vals, strict=False)):
+                        motion_drifts.append((
+                            f"easing.{token_name}", token_val_str,
+                            f"({', '.join(f'{v:.2f}' for v in token_vals)})",
+                            f"({', '.join(f'{v:.2f}' for v in flutter_vals)})",
+                        ))
+
+                if motion_drifts:
+                    detail_lines = [
+                        f"  {name}: JSON={tv} ({token_repr})  Flutter={flutter_repr}"
+                        for name, tv, token_repr, flutter_repr in motion_drifts[:8]
+                    ]
+                    findings.append(_finding(
+                        "design_quality", "medium",
+                        f"{len(motion_drifts)} motion/easing value(s) differ between design-tokens.json and Flutter theme",
+                        f"Motion platform drift detected — Flutter animation durations or easing "
+                        f"curves no longer match the canonical motion tokens:\n"
+                        + "\n".join(detail_lines),
+                        "Update Flutter theme animation durations and Cubic curves to match design-tokens.json motion values.",
+                        "Update flutter_app/lib/theme/aelu_theme.dart Duration and Cubic constants "
+                        "to match the 'motion' values in mandarin/web/static/design-tokens.json. "
+                        "CSS seconds convert to milliseconds (0.3s → 300ms). CSS cubic-bezier(a,b,c,d) "
+                        "maps to Flutter Cubic(a,b,c,d).",
+                        "Cross-platform motion consistency (web vs. Flutter)",
+                        ["mandarin/web/static/design-tokens.json",
+                         "flutter_app/lib/theme/aelu_theme.dart"],
+                    ))
+        except Exception:
+            pass
+
     except Exception:
         pass
     return findings
