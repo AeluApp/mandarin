@@ -275,3 +275,22 @@ def get_capability_summary(conn) -> dict[str, Any]:
         "drill_accuracy": assess_drill_accuracy(conn),
         "accuracy_performance": assess_accuracy_performance(conn),
     }
+
+
+def calculate(conn) -> dict[str, Any]:
+    """Calculate capability metrics for the quality scheduler.
+
+    Returns a flat dict of metric_name → value suitable for storage in
+    the quality_metric table.
+    """
+    summary = get_capability_summary(conn)
+    metrics: dict[str, Any] = {}
+    for area, data in summary.items():
+        if isinstance(data, dict):
+            cpk = data.get("cpk")
+            if cpk is not None:
+                metrics[f"{area}_cpk"] = round(cpk, 4)
+            n = data.get("n")
+            if n is not None:
+                metrics[f"{area}_n"] = n
+    return metrics

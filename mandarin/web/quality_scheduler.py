@@ -740,15 +740,9 @@ def _run_intelligence_loop():
             # 2c. Send proactive notification via OpenClaw
             try:
                 from ..openclaw import notify_owner
-                summary = (
-                    f"Audit: {len(audit_result.get('findings', []))} findings, "
-                    f"{len(all_work_orders)} work orders"
-                )
-                for wo in all_work_orders[:5]:
-                    dim = wo.get("constraint_dimension", "?")
-                    instr = (wo.get("instruction") or "")[:80]
-                    summary += f"\n• [{dim}] {instr}"
-                notify_owner(summary)
+                from ..openclaw.commands import cmd_daily_digest
+                digest = cmd_daily_digest()
+                notify_owner(digest)
             except (ImportError, Exception):
                 pass
 
@@ -779,6 +773,23 @@ def _run_intelligence_loop():
                 pass
             except Exception:
                 logger.debug("Intelligence loop: auto-executor failed", exc_info=True)
+
+            # 4b. Propose experiments for high-priority findings
+            try:
+                from ..intelligence.experiment_proposer import propose_improvement_batch
+                # Get dimension scores from the audit result
+                dim_scores = audit_result.get("dimension_scores", {})
+                if dim_scores:
+                    proposals = propose_improvement_batch(conn, dim_scores)
+                    if proposals:
+                        logger.info(
+                            "Intelligence loop: proposed %d experiments for underperforming dimensions",
+                            len(proposals),
+                        )
+            except ImportError:
+                pass
+            except Exception:
+                logger.debug("Intelligence loop: experiment proposer failed", exc_info=True)
 
             # 5. Send daily intelligence digest email
             try:

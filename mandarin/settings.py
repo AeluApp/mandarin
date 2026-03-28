@@ -136,7 +136,7 @@ VAPID_PRIVATE_KEY = os.environ.get("VAPID_PRIVATE_KEY", "")
 VAPID_CLAIMS_EMAIL = os.environ.get("VAPID_CLAIMS_EMAIL", f"mailto:admin@{CANONICAL_DOMAIN}")
 
 ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "")
-ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "jason.gerson@gmail.com")
 
 # ── Sentry (error monitoring) ────────────────────────
 SENTRY_AUTH_TOKEN = os.environ.get("SENTRY_AUTH_TOKEN", "")
@@ -155,6 +155,7 @@ SW_KILL = os.environ.get("SW_KILL", "0") == "1"
 # ── Intelligence auto-fixers ─────────────────────────
 AUTO_FIX_ENABLED = os.environ.get("AUTO_FIX_ENABLED", "").lower() in ("true", "1", "yes")
 ANALYTICS_EXECUTOR_ENABLED = os.environ.get("ANALYTICS_EXECUTOR_ENABLED", "").lower() in ("true", "1", "yes")
+AGENTIC_IMPROVEMENT_ENABLED = os.environ.get("AGENTIC_IMPROVEMENT_ENABLED", "").lower() in ("true", "1", "yes")
 
 # ── Marketing scheduler ─────────────────────────────
 MARKETING_SCHEDULER_ENABLED = os.environ.get("MARKETING_SCHEDULER_ENABLED", "").lower() in ("true", "1", "yes")

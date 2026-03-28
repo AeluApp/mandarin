@@ -291,26 +291,39 @@ class TestPlacementStartEndpoint:
     def test_placement_start_returns_questions(self, app_client):
         client, conn = app_client
         _create_and_login(client, conn)
-        fake_questions = [
-            {"question_number": 1, "hanzi": "\u4f60\u597d", "pinyin": "n\u01d0 h\u01ceo",
-             "hsk_level": 1, "options": ["hello", "goodbye", "thanks", "sorry"],
-             "correct": "hello"},
-        ]
-        with patch("mandarin.web.onboarding_routes.generate_placement_quiz",
-                    return_value=fake_questions):
+        fake_state = {
+            "quiz_pool": {1: []},
+            "max_level": 1,
+            "current_level": 1,
+            "question_number": 1,
+            "used_per_level": {1: 0},
+            "answers": [],
+            "complete": False,
+        }
+        fake_question = {
+            "question_number": 1, "hanzi": "\u4f60\u597d", "pinyin": "n\u01d0 h\u01ceo",
+            "hsk_level": 1, "options": ["hello", "goodbye", "thanks", "sorry"],
+            "correct": "hello",
+        }
+        with patch("mandarin.web.onboarding_routes.init_adaptive_state",
+                    return_value=fake_state), \
+             patch("mandarin.web.onboarding_routes.generate_next_question",
+                    return_value=fake_question):
             resp = client.get("/api/onboarding/placement/start", headers=XHR)
         assert resp.status_code == 200
         data = resp.get_json()
-        assert "questions" in data
-        assert len(data["questions"]) == 1
+        assert data["adaptive"] is True
+        assert "total_questions" in data
+        assert "question" in data
         # Correct answer should be stripped from client response
-        assert "correct" not in data["questions"][0]
+        assert "correct" not in data["question"]
+        assert data["question"]["hanzi"] == "\u4f60\u597d"
 
     def test_placement_start_empty_quiz_returns_500(self, app_client):
         client, conn = app_client
         _create_and_login(client, conn)
-        with patch("mandarin.web.onboarding_routes.generate_placement_quiz",
-                    return_value=[]):
+        with patch("mandarin.web.onboarding_routes.init_adaptive_state",
+                    return_value={"error": "no_questions", "complete": True}):
             resp = client.get("/api/onboarding/placement/start", headers=XHR)
         assert resp.status_code == 500
         data = resp.get_json()

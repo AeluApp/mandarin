@@ -317,6 +317,112 @@ def cmd_findings(user_id: int = 1) -> str:
         return "\n".join(lines)
 
 
+def cmd_daily_digest() -> str:
+    """Produce a compact daily digest suitable for iMessage/Telegram/Discord.
+
+    Pulls data from several tables (all optional — gracefully handles missing
+    tables).  Returns plain text with no HTML.
+    """
+    today = datetime.now(UTC).strftime("%b %d")
+    lines = [f"Daily Digest — {today}", ""]
+
+    with _get_conn() as conn:
+        # ── 1. Overall health from latest product_audit ──────────────
+        health_line = "Health: All systems operational"
+        try:
+            audit = conn.execute("""
+                SELECT grade, score FROM product_audit
+                ORDER BY created_at DESC LIMIT 1
+            """).fetchone()
+            if audit:
+                health_line = f"Health: {audit['grade']} ({audit['score']})"
+        except Exception:
+            pass
+        lines.append(health_line)
+
+        # ── 2. Self-healing summary from today's self_healing_log ────
+        sh_checked, sh_acted = 0, 0
+        try:
+            sh_row = conn.execute("""
+                SELECT COUNT(*) as total,
+                       SUM(CASE WHEN action_taken = 1 THEN 1 ELSE 0 END) as acted
+                FROM self_healing_log
+                WHERE created_at >= date('now')
+            """).fetchone()
+            if sh_row:
+                sh_checked = sh_row["total"] or 0
+                sh_acted = sh_row["acted"] or 0
+        except Exception:
+            pass
+        lines.append(
+            f"Self-healing: {sh_checked} issues checked, {sh_acted} actions needed"
+        )
+        lines.append("")
+
+        # ── 3. Open findings count by severity ───────────────────────
+        severity_counts = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+        try:
+            rows = conn.execute("""
+                SELECT severity, COUNT(*) as cnt
+                FROM pi_finding
+                WHERE status NOT IN ('resolved', 'rejected')
+                GROUP BY severity
+            """).fetchall()
+            for r in rows:
+                sev = r["severity"]
+                if sev in severity_counts:
+                    severity_counts[sev] = r["cnt"]
+        except Exception:
+            pass
+        findings_parts = [
+            f"{severity_counts['critical']} critical",
+            f"{severity_counts['high']} high",
+            f"{severity_counts['medium']} medium",
+            f"{severity_counts['low']} low",
+        ]
+        lines.append(f"Findings: {', '.join(findings_parts)}")
+
+        # ── 4. Active experiments ─────────────────────────────────────
+        active_experiments = 0
+        try:
+            exp_row = conn.execute("""
+                SELECT COUNT(*) as cnt FROM experiment_proposal
+                WHERE status IN ('pending', 'started')
+            """).fetchone()
+            if exp_row:
+                active_experiments = exp_row["cnt"] or 0
+        except Exception:
+            pass
+        lines.append(f"Experiments: {active_experiments} active")
+
+        # ── 5. Today's task summaries from daily_task_log ─────────────
+        tasks: list[dict] = []
+        try:
+            task_rows = conn.execute("""
+                SELECT step_name, result_summary, success
+                FROM daily_task_log
+                WHERE created_at >= date('now')
+                ORDER BY created_at ASC
+            """).fetchall()
+            tasks = [dict(r) for r in task_rows]
+        except Exception:
+            pass
+
+        if tasks:
+            lines.append("")
+            lines.append("Today's tasks:")
+            for t in tasks:
+                icon = "\u2713" if t.get("success") else "\u2717"
+                summary = t.get("result_summary", "") or t.get("step_name", "")
+                step = t.get("step_name", "Task")
+                lines.append(f"{icon} {step} — {summary}")
+
+        lines.append("")
+        lines.append("Reply 'findings' for details or 'approve N' to act.")
+
+    return "\n".join(lines)
+
+
 def cmd_approve_finding(finding_number: int, notes: str = "", user_id: int = 1) -> str:
     """Approve a finding fix (mark as resolved)."""
     return _transition_finding(finding_number, "resolved", notes)

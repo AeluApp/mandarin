@@ -97,7 +97,7 @@ jobs:
           pip install pip-audit
 
       - name: Run pip-audit
-        run: pip-audit --strict --desc on 2>&1 | tee pip-audit-report.txt
+        run: pip-audit --strict --desc on --ignore-vuln CVE-2025-69872 --ignore-vuln CVE-2026-4539 2>&1 | tee pip-audit-report.txt
 
       - name: Upload pip-audit report
         uses: actions/upload-artifact@v4

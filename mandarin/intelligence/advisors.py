@@ -366,7 +366,9 @@ class Mediator:
                 avg_scores[op["advisor"]] = op["priority_score"] * weight
 
             winner = max(avg_scores, key=avg_scores.get)
-            winning_opinion = next(op for op in opinions if op["advisor"] == winner)
+            winning_opinion = next(
+                (op for op in opinions if op["advisor"] == winner), opinions[0]
+            )
 
             return {
                 "winning_advisor": winner,
@@ -383,7 +385,9 @@ class Mediator:
 
             winner = max(weighted_votes, key=weighted_votes.get)
             losing = [a for a in weighted_votes if a != winner]
-            winning_opinion = next(op for op in opinions if op["advisor"] == winner)
+            winning_opinion = next(
+                (op for op in opinions if op["advisor"] == winner), opinions[0]
+            )
 
             tradeoffs = [op["tradeoff_notes"] for op in opinions
                          if op["advisor"] != winner and op.get("tradeoff_notes")]

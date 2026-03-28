@@ -307,3 +307,28 @@ def churn_risk_factors(conn) -> dict[str, Any]:
         "n_users": len(timelines),
         "factors": factors,
     }
+
+
+def calculate(conn) -> dict[str, Any]:
+    """Calculate retention metrics for the quality scheduler.
+
+    Returns a flat dict of metric_name → value suitable for storage in
+    the quality_metric table.
+    """
+    metrics: dict[str, Any] = {}
+
+    km = kaplan_meier(conn, days=90)
+    if km.get("median_survival") is not None:
+        metrics["median_survival_days"] = km["median_survival"]
+    metrics["km_n_users"] = km.get("n_users", 0)
+
+    cohorts = retention_by_cohort(conn)
+    for cohort in cohorts.get("cohorts", []):
+        label = cohort.get("label", "").replace(" ", "_").lower()
+        if label and cohort.get("retained_pct") is not None:
+            metrics[f"cohort_{label}_retained_pct"] = cohort["retained_pct"]
+
+    risk = churn_risk_factors(conn)
+    metrics["churn_analysis_n_users"] = risk.get("n_users", 0)
+
+    return metrics

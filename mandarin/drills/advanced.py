@@ -1032,7 +1032,9 @@ def run_homophone_drill(item: dict, conn, show_fn, input_fn,
     options = [c["hanzi"] for c in matched_set["chars"]]
     random.shuffle(options)
     for i, opt in enumerate(options, 1):
-        role = next(c["role"] for c in matched_set["chars"] if c["hanzi"] == opt)
+        role = next(
+            (c["role"] for c in matched_set["chars"] if c["hanzi"] == opt), ""
+        )
         show_fn(f"  {i}. {format_hanzi_option(opt)} \u2014 {role}")
 
     result = _run_mc_input(item, options, target, "reading", "homophone", show_fn, input_fn)

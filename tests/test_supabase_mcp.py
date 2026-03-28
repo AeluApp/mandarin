@@ -192,7 +192,7 @@ class TestDataIntegrity(unittest.TestCase):
         # Insert orphaned progress record (FK not enforced in this context but
         # the PRAGMA foreign_key_check will find it)
         conn.execute("PRAGMA foreign_keys = OFF")
-        conn.execute("INSERT INTO progress (user_id, content_item_id) VALUES (1, 9999)")
+        conn.execute("INSERT INTO progress (user_id, content_item_id, modality) VALUES (1, 9999, 'reading')")
         result = verify_data_integrity(conn)
         # May or may not detect based on FK enforcement
         self.assertIn(result["status"], ("clean", "issues_found"))

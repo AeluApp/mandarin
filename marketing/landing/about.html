@@ -669,6 +669,19 @@
 
   <script src="/static/webgl/three.min.js" async></script>
   <script src="/static/webgl/ink-atmosphere.js" defer></script>
+  <script>
+  (function() {
+    var toggle = document.querySelector('.nav-toggle');
+    var links = document.querySelector('.nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function() {
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        links.classList.toggle('nav-open');
+      });
+    }
+  })();
+  </script>
 
 </body>
 </html>

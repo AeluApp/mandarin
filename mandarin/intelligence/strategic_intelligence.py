@@ -557,7 +557,7 @@ def _run_editorial_critic(conn, content_text: str, content_context: str, content
 def assess_editorial_quality(conn, content_item_id: str) -> dict:
     """Assess content quality on editorial dimensions."""
     item = _safe_query(conn, """
-        SELECT id, hanzi, english, content_type FROM content_item WHERE id = ?
+        SELECT id, hanzi, english, item_type AS content_type FROM content_item WHERE id = ?
     """, (content_item_id,))
 
     if not item:
@@ -707,11 +707,6 @@ def revise_thesis(conn, old_thesis_id: str, revision_trigger: str) -> str:
     new_version = (old['version'] + 1) if old else 1
 
     conn.execute("""
-        UPDATE pi_strategic_theses SET status = 'superseded', superseded_by = ?
-        WHERE id = ?
-    """, (new_id, old_thesis_id))
-
-    conn.execute("""
         INSERT INTO pi_strategic_theses
         (id, version, status, target_user, value_proposition,
          revenue_model, price_point_rationale, primary_moat,
@@ -730,6 +725,11 @@ def revise_thesis(conn, old_thesis_id: str, revision_trigger: str) -> str:
         thesis_data['confidence_score'], thesis_data['confidence_rationale'],
         revision_trigger,
     ))
+
+    conn.execute("""
+        UPDATE pi_strategic_theses SET status = 'superseded', superseded_by = ?
+        WHERE id = ?
+    """, (new_id, old_thesis_id))
 
     _seed_commercial_readiness(conn, new_id, thesis_data['revenue_model'])
     conn.commit()

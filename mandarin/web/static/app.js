@@ -514,9 +514,15 @@ function getCachedTier() {
     })
     .catch(function() {
       _tierFetchPromise = null;
-      return "free";
+      // On API error, return "unknown" instead of "free" so we don't
+      // incorrectly show upgrade prompts to paid/admin users.
+      return "unknown";
     });
   return _tierFetchPromise;
+}
+
+function isFreeOrUnknownTier() {
+  return getCachedTier().then(function(tier) { return tier === "free"; });
 }
 
 function isFreeTier() {
@@ -1631,11 +1637,18 @@ function handleMessage(data) {
       if (ws) { try { ws.close(1000); } catch (e) {} ws = null; }
       hideDisconnectBanner();
       hideInput();
-      // Detect session limit / tier gate errors → show upgrade prompt instead of raw error
+      // Detect session limit / tier gate errors → show upgrade prompt only for free tier
       var errMsg = (data.message || "").toLowerCase();
-      if (errMsg.indexOf("session limit") !== -1 || errMsg.indexOf("upgrade") !== -1 || errMsg.indexOf("daily limit") !== -1) {
-        transitionTo("session", "dashboard", function() { loadDashboardPanels(); });
-        showUpgradePrompt("unlimited_sessions");
+      var looksLikeLimit = errMsg.indexOf("session limit") !== -1 || errMsg.indexOf("daily limit") !== -1;
+      if (looksLikeLimit) {
+        isFreeTier().then(function(free) {
+          if (free) {
+            transitionTo("session", "dashboard", function() { loadDashboardPanels(); });
+            showUpgradePrompt("unlimited_sessions");
+          } else {
+            transitionTo("session", "dashboard", function() { loadDashboardPanels(); });
+          }
+        });
       } else {
         showSessionError(data.message || getUserFriendlyError("server"));
       }

@@ -1027,7 +1027,7 @@ def run_self_healing_loop(conn: sqlite3.Connection, include_tests: bool = False)
     except (sqlite3.OperationalError, sqlite3.Error) as exc:
         logger.debug("Self-healing loop: failed to log execution: %s", exc)
 
-    # Send notification if actions were taken
+    # Always send notification — even when healthy (0 actions)
     if results["total_actions"] > 0:
         _engine._notify_admin(
             "self_healing_loop",
@@ -1035,6 +1035,14 @@ def run_self_healing_loop(conn: sqlite3.Connection, include_tests: bool = False)
             f"{results['total_actions']} actions taken",
             results["phases"],
             success=not results["errors"],
+        )
+    else:
+        _engine._notify_admin(
+            "self_healing_loop",
+            f"All healthy — {results['total_issues']} issues checked, 0 actions needed",
+            "No auto-fixes required this cycle",
+            results.get("phases", {}),
+            success=True,
         )
 
     return results

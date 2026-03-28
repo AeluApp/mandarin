@@ -633,17 +633,116 @@ def send_weekly_progress(to: str, name: str, stats: dict, user_id: int = None) -
 # Daily intelligence digest (admin)
 # ---------------------------------------------------------------------------
 
+def _build_daily_task_summary(conn) -> str:
+    """Build HTML for the daily task summary from daily_task_log, if available."""
+    s = _STYLE
+    try:
+        rows = conn.execute("""
+            SELECT step_name, status, summary FROM daily_task_log
+            WHERE run_date = date('now') ORDER BY id
+        """).fetchall()
+    except Exception:
+        return ""
+    if not rows:
+        return ""
+
+    status_color = {
+        "success": "#5A7A5A",
+        "partial": s["accent"],
+        "failed": "#806058",
+        "skipped": s["text_dim"],
+    }
+    parts = [
+        f'<div style="margin:0 0 8px 0;">'
+        f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+        f'color:{s["text"]};margin:0 0 12px 0;">Daily Task Summary</h2></div>'
+    ]
+    for row in rows:
+        name = _esc(row["step_name"] or "")
+        status = row["status"] or "skipped"
+        summary = _esc(row["summary"] or "")
+        color = status_color.get(status, s["text_dim"])
+        parts.append(
+            f'<p style="font-size:14px;line-height:1.5;margin:4px 0;">'
+            f'<span style="color:{color};font-weight:600;">{_esc(status)}</span>'
+            f' &mdash; {name}'
+            f'{" &mdash; " + summary if summary else ""}</p>'
+        )
+    parts.append(
+        f'<div style="border-top:1px solid {s["divider"]};margin:16px 0 0 0;"></div>'
+    )
+    return "\n".join(parts)
+
+
+def _build_health_summary(conn) -> str:
+    """Build HTML health overview: open findings, active experiments, last self-heal."""
+    s = _STYLE
+
+    # Count open findings (status NOT IN resolved, rejected)
+    open_findings = 0
+    try:
+        row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM pi_finding
+            WHERE status NOT IN ('resolved', 'rejected')
+        """).fetchone()
+        open_findings = row["cnt"] if row else 0
+    except Exception:
+        pass
+
+    # Count active experiments
+    active_experiments = 0
+    try:
+        row = conn.execute("""
+            SELECT COUNT(*) AS cnt FROM experiment_proposal
+            WHERE status = 'active'
+        """).fetchone()
+        active_experiments = row["cnt"] if row else 0
+    except Exception:
+        pass
+
+    # Latest self-healing run
+    last_heal = "N/A"
+    try:
+        row = conn.execute("""
+            SELECT created_at FROM self_healing_log
+            ORDER BY created_at DESC LIMIT 1
+        """).fetchone()
+        if row:
+            last_heal = _esc(row["created_at"])
+    except Exception:
+        pass
+
+    return (
+        f'<div style="margin:24px 0 8px 0;border-top:1px solid {s["divider"]};padding-top:16px;">'
+        f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+        f'color:{s["text"]};margin:0 0 12px 0;">System Health</h2></div>'
+        f'<table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;">'
+        f'<tr style="border-bottom:1px solid {s["divider"]};">'
+        f'<td style="padding:6px 12px;color:{s["text_dim"]};">Open findings</td>'
+        f'<td style="padding:6px 12px;font-weight:600;">{open_findings}</td></tr>'
+        f'<tr style="border-bottom:1px solid {s["divider"]};">'
+        f'<td style="padding:6px 12px;color:{s["text_dim"]};">Active experiments</td>'
+        f'<td style="padding:6px 12px;font-weight:600;">{active_experiments}</td></tr>'
+        f'<tr style="border-bottom:1px solid {s["divider"]};">'
+        f'<td style="padding:6px 12px;color:{s["text_dim"]};">Last self-healing run</td>'
+        f'<td style="padding:6px 12px;font-weight:600;">{last_heal}</td></tr>'
+        f'</table>'
+    )
+
+
 def send_daily_intelligence_digest(conn) -> bool:
     """Send a daily digest of intelligence findings to the admin.
 
     Sections:
+      0. Daily task summary (from daily_task_log, if available)
       1. Auto-fixed today (resolved today, green)
       2. Needs your approval (investigating/diagnosed/recommended with
          decision_class in informed_fix/judgment_call/values_decision)
       3. New findings from today
+      4. System health summary (always present)
 
-    Skips sending if all three sections are empty. Sends to FROM_EMAIL
-    (forwarded to admin inbox).
+    Always sends — when all action sections are empty, sends a healthy-status
+    digest instead of skipping. Sends to FROM_EMAIL (forwarded to admin inbox).
     """
     s = _STYLE
 
@@ -709,10 +808,7 @@ def send_daily_intelligence_digest(conn) -> bool:
     except Exception:
         pass
 
-    # Skip if nothing to report
-    if not auto_fixed and not needs_approval and not new_findings:
-        logger.debug("Intelligence digest: nothing to report, skipping email")
-        return True
+    has_items = bool(auto_fixed or needs_approval or new_findings)
 
     # Build email body
     body_parts = []
@@ -721,6 +817,21 @@ def send_daily_intelligence_digest(conn) -> bool:
         f'<p style="font-size:16px;line-height:1.6;color:{s["text"]};">'
         f"Daily intelligence summary for your product.</p>"
     )
+
+    # ── Daily task summary (top of email) ──
+    task_summary_html = _build_daily_task_summary(conn)
+    if task_summary_html:
+        body_parts.append(task_summary_html)
+
+    # ── Healthy status when nothing actionable ──
+    if not has_items:
+        body_parts.append(
+            f'<div style="margin:24px 0 8px 0;border-top:1px solid {s["divider"]};padding-top:16px;">'
+            f'<h2 style="font-family:{s["heading_font"]};font-size:18px;'
+            f'color:#5A7A5A;margin:0 0 12px 0;">All Systems Healthy</h2></div>'
+            f'<p style="font-size:14px;line-height:1.5;color:{s["text_dim"]};">'
+            f'No auto-fixes, no pending approvals, and no new findings today.</p>'
+        )
 
     # ── Auto-fixed section (green) ──
     if auto_fixed:
@@ -781,17 +892,23 @@ def send_daily_intelligence_digest(conn) -> bool:
                 f'{_esc(title)}</span></p>'
             )
 
+    # ── System health summary (always present) ──
+    body_parts.append(_build_health_summary(conn))
+
     body_html = "\n".join(body_parts)
 
-    # Subject line with counts
-    parts = []
-    if needs_approval:
-        parts.append(f"{len(needs_approval)} awaiting approval")
-    if auto_fixed:
-        parts.append(f"{len(auto_fixed)} auto-fixed")
-    if new_findings:
-        parts.append(f"{len(new_findings)} new")
-    subject = f"Intelligence digest: {', '.join(parts)}"
+    # Subject line with counts (or healthy status)
+    if has_items:
+        parts = []
+        if needs_approval:
+            parts.append(f"{len(needs_approval)} awaiting approval")
+        if auto_fixed:
+            parts.append(f"{len(auto_fixed)} auto-fixed")
+        if new_findings:
+            parts.append(f"{len(new_findings)} new")
+        subject = f"Intelligence digest: {', '.join(parts)}"
+    else:
+        subject = "Intelligence digest: all systems healthy"
 
     html = _wrap_html("Intelligence Digest", body_html)
     return _send(ADMIN_EMAIL or FROM_EMAIL, subject, html)

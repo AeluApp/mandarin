@@ -26,6 +26,7 @@ import re
 import shutil
 import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 from datetime import datetime, UTC
@@ -689,7 +690,7 @@ def _validate_syntax(file_path: Path) -> tuple[bool, str]:
 
     try:
         result = subprocess.run(
-            ["python", "-c", f"import py_compile; py_compile.compile('{file_path}', doraise=True)"],
+            [sys.executable, "-c", f"import py_compile; py_compile.compile('{file_path}', doraise=True)"],
             capture_output=True,
             text=True,
             timeout=10,
