@@ -311,7 +311,7 @@ def cmd_findings(user_id: int = 1) -> str:
                 aline = aline.strip()
                 if aline and aline.startswith(("WHAT", "URGENCY", "DETAILS")):
                     lines.append(f"    {aline}")
-            lines.append(f"    → Reply 'approve {i}' or 'dismiss {i}'")
+            lines.append(f"    → 'approve {i}' / 'dismiss {i}' / 'modify {i} do this instead...'")
             lines.append("")
 
         return "\n".join(lines)
@@ -325,6 +325,48 @@ def cmd_approve_finding(finding_number: int, notes: str = "", user_id: int = 1) 
 def cmd_dismiss_finding(finding_number: int, notes: str = "", user_id: int = 1) -> str:
     """Dismiss a finding (mark as rejected)."""
     return _transition_finding(finding_number, "rejected", notes)
+
+
+def cmd_modify_finding(finding_number: int, instruction: str, user_id: int = 1) -> str:
+    """Modify a finding — add your own instruction for what should be done instead.
+
+    The finding stays open with your instruction attached, so the next
+    self-healing cycle (or Claude Code session) picks it up and acts on it.
+    """
+    with _get_conn() as conn:
+        findings = conn.execute("""
+            SELECT id, title FROM pi_finding
+            WHERE status NOT IN ('resolved', 'rejected')
+            ORDER BY
+                CASE severity
+                    WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2 WHEN 'low' THEN 3
+                END,
+                updated_at DESC
+            LIMIT 10
+        """).fetchall()
+
+        if finding_number < 1 or finding_number > len(findings):
+            return f"No finding #{finding_number}. Use 'findings' to see the list."
+
+        finding = findings[finding_number - 1]
+
+        try:
+            conn.execute("""
+                UPDATE pi_finding
+                SET status = 'owner_modified',
+                    analysis = analysis || ?,
+                    updated_at = datetime('now')
+                WHERE id = ?
+            """, (f"\n\nOWNER INSTRUCTION: {instruction}", finding["id"]))
+            conn.commit()
+            return (
+                f"Got it. Updated: {finding['title']}\n"
+                f"Your instruction: {instruction}\n"
+                f"This will be picked up on the next self-healing run."
+            )
+        except Exception as e:
+            return f"Failed to update: {e}"
 
 
 def _transition_finding(finding_number: int, status: str, notes: str = "") -> str:
