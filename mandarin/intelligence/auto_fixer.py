@@ -712,7 +712,52 @@ def run_auto_fixes(conn, alerts: list[dict]) -> dict:
         results["failed"], results["human_review_queued"],
     )
 
+    # Send summary email to admin
+    _send_summary_email(conn, results)
+
     return results
+
+
+def _send_summary_email(conn, results: dict) -> None:
+    """Email the admin a plain-English summary of what was auto-fixed and what needs review."""
+    if results["fixed"] == 0 and results["human_review_queued"] == 0:
+        return  # Nothing to report
+
+    try:
+        from ..email import send_alert
+        from ..settings import ADMIN_EMAIL
+    except ImportError:
+        return
+
+    if not ADMIN_EMAIL:
+        return
+
+    lines = []
+    if results["fixed"] > 0:
+        lines.append(f"AUTO-FIXED ({results['fixed']} issues):")
+        for d in results["details"]:
+            if d.get("fix_result", {}).get("success"):
+                lines.append(f"  - {d['alert']}")
+        lines.append("")
+
+    if results["human_review_queued"] > 0:
+        lines.append(f"NEEDS YOUR REVIEW ({results['human_review_queued']} issues):")
+        for d in results["details"]:
+            cls = d.get("classification", {})
+            if not cls.get("auto_fixable") or not d.get("fix_result", {}).get("success"):
+                lines.append(f"  - {d['alert']}")
+        lines.append("")
+        lines.append("Review at: https://aeluapp.com/admin/ (Findings Review section)")
+
+    if results["failed"] > 0:
+        lines.append(f"FAILED TO FIX ({results['failed']} issues):")
+        for d in results["details"]:
+            fr = d.get("fix_result", {})
+            if fr and not fr.get("success") and fr.get("error"):
+                lines.append(f"  - {d['alert']}: {fr['error'][:100]}")
+
+    subject = f"Aelu self-healing: {results['fixed']} fixed, {results['human_review_queued']} need review"
+    send_alert(ADMIN_EMAIL, subject, "\n".join(lines))
 
 
 def _delegate_to_auto_executor(conn, alert: dict, classification: dict) -> None:

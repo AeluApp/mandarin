@@ -394,8 +394,16 @@ def _execute_intent(intent_result: llm_handler.IntentResult, conn) -> str:
             f"Ready to study? Open the app or visit {__import__('mandarin.settings', fromlist=['BASE_URL']).BASE_URL} "
             "to start a session."
         ),
+        "findings": lambda: commands.cmd_findings(),
+        "approve_finding": lambda: commands.cmd_approve_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
+        "dismiss_finding": lambda: commands.cmd_dismiss_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
         "help": lambda: (
-            "Commands: /status, /review, /audit, /briefing, /errors\n"
+            "Commands: /status, /review, /audit, /briefing, /errors, /findings\n"
+            "Reply 'approve 1' or 'dismiss 1' after /findings.\n"
             "Or just type naturally."
         ),
     }
