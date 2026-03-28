@@ -402,6 +402,10 @@ def _execute_intent(intent_result: llm_handler.IntentResult, conn) -> str:
         "dismiss_finding": lambda: commands.cmd_dismiss_finding(
             finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
         ),
+        "modify_finding": lambda: commands.cmd_modify_finding(
+            finding_number=int(args.get("number", 0)),
+            instruction=args.get("instruction", args.get("notes", "")),
+        ),
         "help": lambda: (
             "Commands: /status, /review, /audit, /briefing, /errors, /findings\n"
             "Reply 'approve 1' or 'dismiss 1' after /findings.\n"

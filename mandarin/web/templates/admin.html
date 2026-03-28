@@ -1136,9 +1136,10 @@
         if (f.dimension) html += '<span class="finding-card-dim">' + esc(f.dimension) + '</span>';
         html += '</div>';
         html += '<div class="finding-analysis">' + esc(f.analysis || "") + '</div>';
-        html += '<textarea class="finding-notes" id="finding-notes-' + esc(f.id) + '" placeholder="Optional notes..."></textarea>';
+        html += '<textarea class="finding-notes" id="finding-notes-' + esc(f.id) + '" placeholder="Notes, or type what should be done instead..."></textarea>';
         html += '<div class="finding-actions">';
         html += '<button class="finding-btn finding-btn-approve" onclick="transitionFinding(\'' + esc(f.id) + '\', \'resolved\')">Approve Fix</button>';
+        html += '<button class="finding-btn finding-btn-modify" onclick="transitionFinding(\'' + esc(f.id) + '\', \'owner_modified\')" style="background:var(--color-mastery-stabilizing);color:var(--color-text);">Modify</button>';
         html += '<button class="finding-btn finding-btn-dismiss" onclick="transitionFinding(\'' + esc(f.id) + '\', \'rejected\')">Dismiss</button>';
         html += '</div>';
         html += '</div>';

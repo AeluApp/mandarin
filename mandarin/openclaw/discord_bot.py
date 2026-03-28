@@ -85,6 +85,10 @@ def _execute_intent(intent_result, conn) -> str:
         "dismiss_finding": lambda: commands.cmd_dismiss_finding(
             finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
         ),
+        "modify_finding": lambda: commands.cmd_modify_finding(
+            finding_number=int(args.get("number", 0)),
+            instruction=args.get("instruction", args.get("notes", "")),
+        ),
         "session": lambda: "Open the Aelu app or web interface to start a session.",
         "help": lambda: (
             "Commands: `!status`, `!review`, `!audit`, `!briefing`, `!errors`, `!findings`\n"
@@ -126,6 +130,9 @@ async def _handle_command(message, cmd_name: str, arg_text: str = "") -> None:
                 finding_number=int(arg_text)) if arg_text.isdigit() else "Usage: !approve_finding <number>",
             "dismiss_finding": lambda: commands.cmd_dismiss_finding(
                 finding_number=int(arg_text)) if arg_text.isdigit() else "Usage: !dismiss_finding <number>",
+            "modify_finding": lambda: commands.cmd_modify_finding(
+                finding_number=int(arg_text.split()[0]),
+                instruction=" ".join(arg_text.split()[1:])) if arg_text else "Usage: !modify_finding <number> <instruction>",
             "help": lambda: (
                 "**Aelu OpenClaw**\n"
                 "`!status` — learning status + due items\n"
