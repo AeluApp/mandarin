@@ -38,6 +38,7 @@ import logging
 import os
 import re
 import subprocess
+import sys
 from datetime import datetime, timezone, UTC
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -493,7 +494,7 @@ def ingest_test_results() -> list[dict]:
     # 1. Check for collection errors (import failures, syntax errors)
     try:
         result = subprocess.run(
-            ["python", "-m", "pytest", "--collect-only", "-q", "--tb=short"],
+            [sys.executable, "-m", "pytest", "--collect-only", "-q", "--tb=short"],
             capture_output=True, text=True, timeout=60,
             cwd=str(_PROJECT_ROOT),
         )
@@ -517,7 +518,7 @@ def ingest_test_results() -> list[dict]:
     # 2. Run quick smoke tests (tests marked as @pytest.mark.smoke or fast tests)
     try:
         result = subprocess.run(
-            ["python", "-m", "pytest", "tests/", "-x", "--tb=short", "-q",
+            [sys.executable, "-m", "pytest", "tests/", "-x", "--tb=short", "-q",
              "--timeout=30", "-k", "test_smoke or test_import or test_health"],
             capture_output=True, text=True, timeout=120,
             cwd=str(_PROJECT_ROOT),

@@ -16,6 +16,9 @@ def _insert_tone_drills(conn, tone=0, tone_sandhi=0, minimal_pair=0, listening_t
                         tone_correct_pct=1.0, sandhi_correct_pct=1.0,
                         mp_correct_pct=1.0, lt_correct_pct=1.0):
     """Insert tone drill review_events with specified counts and accuracy."""
+    # Ensure content_item and user exist for FK constraints
+    conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (1, '你好', 'nǐ hǎo', 'hello', 1)")
+    conn.commit()
     for dtype, count, pct in [
         ("tone", tone, tone_correct_pct),
         ("tone_sandhi", tone_sandhi, sandhi_correct_pct),
@@ -25,7 +28,7 @@ def _insert_tone_drills(conn, tone=0, tone_sandhi=0, minimal_pair=0, listening_t
         correct_count = int(count * pct)
         for i in range(count):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, ?, ?)",
+                "INSERT INTO review_event (content_item_id, drill_type, correct, modality) VALUES (1, ?, ?, 'speaking')",
                 (dtype, 1 if i < correct_count else 0),
             )
     conn.commit()
@@ -107,7 +110,7 @@ class TestGradeOutputResponse(unittest.TestCase):
     def test_exact_match(self):
         from mandarin.intelligence.output_tone_tutor import grade_output_response
         result = grade_output_response("你好", "你好")
-        self.assertTrue(result["is_correct"])
+        self.assertTrue(result["correct"])
         self.assertEqual(result["score"], 1.0)
         self.assertEqual(result["method"], "exact_match")
 
@@ -122,13 +125,13 @@ class TestGradeOutputResponse(unittest.TestCase):
     def test_variant_accepted(self):
         from mandarin.intelligence.output_tone_tutor import grade_output_response
         result = grade_output_response("没问题", "没有问题", acceptable_variants=["没问题"])
-        self.assertTrue(result["is_correct"])
+        self.assertTrue(result["correct"])
         self.assertEqual(result["method"], "variant_match")
 
     def test_wrong_answer(self):
         from mandarin.intelligence.output_tone_tutor import grade_output_response
         result = grade_output_response("苹果", "你好吗")
-        self.assertFalse(result["is_correct"])
+        self.assertFalse(result["correct"])
 
 
 class TestOutputProduction(unittest.TestCase):
@@ -139,13 +142,13 @@ class TestOutputProduction(unittest.TestCase):
         # Recognition: 90% accuracy (45/50)
         for i in range(50):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, 'mc', ?)",
+                "INSERT INTO review_event (content_item_id, drill_type, correct, modality) VALUES (1, 'mc', ?, 'reading')",
                 (1 if i < 45 else 0,),
             )
         # Production: 50% accuracy (25/50)
         for i in range(50):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, 'translation', ?)",
+                "INSERT INTO review_event (content_item_id, drill_type, correct, modality) VALUES (1, 'translation', ?, 'reading')",
                 (1 if i < 25 else 0,),
             )
         conn.commit()

@@ -26,13 +26,13 @@ def _seed_content_item(conn, hanzi="你好", hsk_level=1):
     return conn.execute("SELECT last_insert_rowid()").fetchone()[0]
 
 
-def _seed_user(conn, email="test@aelu.app"):
+def _seed_user(conn, email="validator@aelu.app"):
     """Insert a minimal user and return its id."""
     conn.execute(
-        "INSERT INTO user (email, password_hash) VALUES (?, 'hash')",
+        "INSERT OR IGNORE INTO user (email, password_hash) VALUES (?, 'hash')",
         (email,),
     )
-    return conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+    return conn.execute("SELECT id FROM user WHERE email = ?", (email,)).fetchone()[0]
 
 
 class TestQueueManagement(unittest.TestCase):
@@ -78,7 +78,7 @@ class TestQueueManagement(unittest.TestCase):
         qid = queue_for_native_speaker_review(
             self.conn,
             content_hanzi="测试",
-            content_type="vocab",
+            content_type="drill_sentence",
             queue_reason="systematic_review",
         )
         row = self.conn.execute(
