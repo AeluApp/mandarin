@@ -3070,6 +3070,7 @@ def admin_intelligence_findings():
     with db.connection() as conn:
         findings = conn.execute("""
             SELECT pf.id, pf.dimension, pf.severity, pf.title, pf.analysis,
+                   pf.recommendation,
                    pf.status, pf.hypothesis, pf.root_cause_tag,
                    pf.linked_finding_id, pf.times_seen,
                    pf.created_at, pf.updated_at,

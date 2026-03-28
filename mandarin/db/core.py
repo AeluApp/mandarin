@@ -88,7 +88,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 126  # Increment when adding migrations
+SCHEMA_VERSION = 128  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7489,6 +7489,18 @@ def _migrate_v126_to_v127(conn):
     conn.commit()
 
 
+def _migrate_v127_to_v128(conn):
+    """v127->v128: Add recommendation column to pi_finding.
+
+    Stores plain-English fix description so the admin dashboard can show
+    what will happen if you approve a finding, not just what's wrong.
+    """
+    cols = _col_set(conn, "pi_finding")
+    if "recommendation" not in cols:
+        conn.execute("ALTER TABLE pi_finding ADD COLUMN recommendation TEXT")
+        conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7617,6 +7629,7 @@ MIGRATIONS = {
     124: _migrate_v124_to_v125,
     125: _migrate_v125_to_v126,
     126: _migrate_v126_to_v127,
+    127: _migrate_v127_to_v128,
 }
 
 

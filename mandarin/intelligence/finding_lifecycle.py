@@ -122,11 +122,12 @@ def deduplicate_findings(conn, new_findings: list[dict]) -> list[dict]:
                 conn.execute("""
                     INSERT INTO pi_finding
                         (audit_id, dimension, severity, title, analysis,
-                         status, metric_name, last_seen_audit_id)
-                    VALUES (?, ?, ?, ?, ?, 'investigating', ?, ?)
+                         recommendation, status, metric_name, last_seen_audit_id)
+                    VALUES (?, ?, ?, ?, ?, ?, 'investigating', ?, ?)
                 """, (
                     audit_id, dim, severity, title,
                     finding.get("analysis", ""),
+                    finding.get("recommendation", ""),
                     finding.get("dimension", ""),  # metric_name defaults to dimension
                     audit_id,
                 ))

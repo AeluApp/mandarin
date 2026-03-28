@@ -20,8 +20,9 @@
     .admin-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 
     /* Tab content — fade/slide transition */
-    .admin-tab-content { display: none; opacity: 0; transform: translateY(8px); }
-    .admin-tab-content.active { display: block; animation: adminTabReveal 0.35s var(--ease-upward) forwards; }
+    .admin-tab-content { display: none; opacity: 1; }
+    .admin-tab-content.active { display: block; }
+    .admin-tab-content.animating { animation: adminTabReveal 0.35s var(--ease-upward) forwards; opacity: 0; transform: translateY(8px); }
     @keyframes adminTabReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Shared styles */
@@ -186,11 +187,23 @@
       color: var(--color-text);
       line-height: 1.6;
       white-space: pre-line;
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
       padding: var(--space-3);
       background: color-mix(in srgb, var(--color-surface-alt) 50%, transparent);
       border-radius: var(--radius);
     }
+    .finding-recommendation {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.6;
+      margin-bottom: var(--space-3);
+      padding: var(--space-3);
+      border-left: 3px solid var(--color-correct);
+      background: color-mix(in srgb, var(--color-correct) 5%, transparent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .finding-recommendation strong { color: var(--color-correct); }
     .finding-notes {
       width: 100%;
       min-height: 48px;
@@ -1127,20 +1140,26 @@
       }
 
       countEl.textContent = "(" + pending.length + ")";
+      var severityLabels = { critical: "Urgent", high: "Important", medium: "Worth fixing", low: "Minor" };
       var html = "";
       pending.forEach(function(f, idx) {
+        var sevLabel = severityLabels[f.severity] || f.severity || "Info";
         html += '<div class="finding-card" style="animation-delay:' + (idx * 0.05) + 's" id="finding-card-' + esc(f.id) + '">';
         html += '<div class="finding-card-header">';
-        html += '<span class="finding-severity ' + findingSeverityClass(f.severity) + '">' + esc(f.severity || "info") + '</span>';
+        html += '<span class="finding-severity ' + findingSeverityClass(f.severity) + '">' + esc(sevLabel) + '</span>';
         html += '<span class="finding-card-title">' + esc(f.title) + '</span>';
-        if (f.dimension) html += '<span class="finding-card-dim">' + esc(f.dimension) + '</span>';
         html += '</div>';
-        html += '<div class="finding-analysis">' + esc(f.analysis || "") + '</div>';
-        html += '<textarea class="finding-notes" id="finding-notes-' + esc(f.id) + '" placeholder="Notes, or type what should be done instead..."></textarea>';
+        /* "What's wrong" section */
+        html += '<div class="finding-analysis"><strong>The problem:</strong> ' + esc(f.analysis || "") + '</div>';
+        /* "What the fix does" section — only if recommendation exists */
+        if (f.recommendation) {
+          html += '<div class="finding-recommendation"><strong>If you approve:</strong> ' + esc(f.recommendation) + '</div>';
+        }
+        html += '<textarea class="finding-notes" id="finding-notes-' + esc(f.id) + '" placeholder="Or tell us what to do instead\u2026"></textarea>';
         html += '<div class="finding-actions">';
-        html += '<button class="finding-btn finding-btn-approve" onclick="transitionFinding(\'' + esc(f.id) + '\', \'resolved\')">Approve Fix</button>';
-        html += '<button class="finding-btn finding-btn-modify" onclick="transitionFinding(\'' + esc(f.id) + '\', \'owner_modified\')" style="background:var(--color-mastery-stabilizing);color:var(--color-text);">Modify</button>';
-        html += '<button class="finding-btn finding-btn-dismiss" onclick="transitionFinding(\'' + esc(f.id) + '\', \'rejected\')">Dismiss</button>';
+        html += '<button class="finding-btn finding-btn-approve" onclick="transitionFinding(\'' + esc(f.id) + '\', \'resolved\')">' + (f.recommendation ? 'Approve This Fix' : 'Mark Resolved') + '</button>';
+        html += '<button class="finding-btn finding-btn-modify" onclick="transitionFinding(\'' + esc(f.id) + '\', \'owner_modified\')" style="background:var(--color-mastery-stabilizing);color:var(--color-text);">Do Something Else</button>';
+        html += '<button class="finding-btn finding-btn-dismiss" onclick="transitionFinding(\'' + esc(f.id) + '\', \'rejected\')">Not a Problem</button>';
         html += '</div>';
         html += '</div>';
       });
