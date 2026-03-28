@@ -42,6 +42,11 @@ def get_connection(db_path: Path | None = None) -> sqlite3.Connection:
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=5000")
+    # Production PRAGMAs — safe with WAL mode, meaningful performance gain
+    conn.execute("PRAGMA synchronous=NORMAL")   # safe with WAL; 2-10x faster writes
+    conn.execute("PRAGMA cache_size=-64000")     # 64 MB page cache (negative = KiB)
+    conn.execute("PRAGMA mmap_size=268435456")   # 256 MB memory-mapped I/O
+    conn.execute("PRAGMA temp_store=MEMORY")     # temp tables in RAM
     return conn
 
 
@@ -83,7 +88,7 @@ class connection:
         return False
 
 
-SCHEMA_VERSION = 126  # Increment when adding migrations
+SCHEMA_VERSION = 128  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7484,6 +7489,18 @@ def _migrate_v126_to_v127(conn):
     conn.commit()
 
 
+def _migrate_v127_to_v128(conn):
+    """v127->v128: Add recommendation column to pi_finding.
+
+    Stores plain-English fix description so the admin dashboard can show
+    what will happen if you approve a finding, not just what's wrong.
+    """
+    cols = _col_set(conn, "pi_finding")
+    if "recommendation" not in cols:
+        conn.execute("ALTER TABLE pi_finding ADD COLUMN recommendation TEXT")
+        conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7612,6 +7629,7 @@ MIGRATIONS = {
     124: _migrate_v124_to_v125,
     125: _migrate_v125_to_v126,
     126: _migrate_v126_to_v127,
+    127: _migrate_v127_to_v128,
 }
 
 

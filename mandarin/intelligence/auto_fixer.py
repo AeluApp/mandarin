@@ -33,6 +33,7 @@ import logging
 import re
 import sqlite3
 import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -438,7 +439,7 @@ def _fix_lint_violation(alert: dict) -> dict:
 
         try:
             result = subprocess.run(
-                ["python", "-m", "ruff", "check", "--fix", str(abs_path)],
+                [sys.executable, "-m", "ruff", "check", "--fix", str(abs_path)],
                 capture_output=True, text=True, timeout=30,
                 cwd=str(_PROJECT_ROOT),
             )
@@ -476,7 +477,7 @@ def _smoke_test() -> tuple[bool, str]:
     """Run import smoke test for mandarin package."""
     try:
         result = subprocess.run(
-            ["python", "-c", "import mandarin"],
+            [sys.executable, "-c", "import mandarin"],
             capture_output=True, text=True, timeout=30,
             cwd=str(_PROJECT_ROOT),
         )

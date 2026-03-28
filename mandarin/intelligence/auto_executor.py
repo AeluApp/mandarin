@@ -26,6 +26,7 @@ import re
 import shutil
 import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 from datetime import datetime, UTC
@@ -689,7 +690,7 @@ def _validate_syntax(file_path: Path) -> tuple[bool, str]:
 
     try:
         result = subprocess.run(
-            ["python", "-c", f"import py_compile; py_compile.compile('{file_path}', doraise=True)"],
+            [sys.executable, "-c", f"import py_compile; py_compile.compile('{file_path}', doraise=True)"],
             capture_output=True,
             text=True,
             timeout=10,
@@ -713,7 +714,7 @@ def _smoke_test(target_file: str = "") -> tuple[bool, str]:
     # 1. Basic import test
     try:
         result = subprocess.run(
-            ["python", "-c", "import mandarin"],
+            [sys.executable, "-c", "import mandarin"],
             capture_output=True,
             text=True,
             timeout=_SMOKE_TEST_TIMEOUT,
@@ -736,7 +737,7 @@ def _smoke_test(target_file: str = "") -> tuple[bool, str]:
         if test_file.exists():
             try:
                 result = subprocess.run(
-                    ["python", "-m", "pytest", str(test_file), "-x", "--tb=short", "-q"],
+                    [sys.executable, "-m", "pytest", str(test_file), "-x", "--tb=short", "-q"],
                     capture_output=True, text=True,
                     timeout=60, cwd=str(_PROJECT_ROOT),
                 )

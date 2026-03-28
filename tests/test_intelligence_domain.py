@@ -61,6 +61,7 @@ def srs_conn():
             modality TEXT DEFAULT 'reading',
             mastery_stage TEXT DEFAULT 'seen',
             updated_at TEXT,
+            last_review_date TEXT,
             weak_cycle_count INTEGER DEFAULT 0,
             historically_weak INTEGER DEFAULT 0,
             repetitions INTEGER DEFAULT 0,
@@ -83,13 +84,13 @@ def test_srs_funnel_stuck_stabilizing_triggers_high(srs_conn):
     # Insert 8 items stuck at stabilizing for 20 days, 2 at other stages
     for i in range(8):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
-            (i + 1, "stabilizing", _ago(20)),
+            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, last_review_date) VALUES (?,?,?,?)",
+            (i + 1, "stabilizing", _ago(20), _ago(20)),
         )
     for i in range(2):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
-            (100 + i, "stable", _ago(1)),
+            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, last_review_date) VALUES (?,?,?,?)",
+            (100 + i, "stable", _ago(1), _ago(1)),
         )
     srs_conn.commit()
 
@@ -109,13 +110,13 @@ def test_srs_funnel_stuck_stabilizing_below_threshold_no_finding(srs_conn):
     # 3 stuck, 7 at stable — 30% < 50% threshold
     for i in range(3):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
-            (i + 1, "stabilizing", _ago(20)),
+            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, last_review_date) VALUES (?,?,?,?)",
+            (i + 1, "stabilizing", _ago(20), _ago(20)),
         )
     for i in range(7):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
-            (100 + i, "stable", _ago(1)),
+            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, last_review_date) VALUES (?,?,?,?)",
+            (100 + i, "stable", _ago(1), _ago(1)),
         )
     srs_conn.commit()
 
