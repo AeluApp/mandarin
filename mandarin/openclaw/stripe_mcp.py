@@ -46,7 +46,7 @@ def get_subscription_status(user_id: int) -> dict:
     with db.connection() as conn:
         user = conn.execute("""
             SELECT email, subscription_tier, stripe_customer_id,
-                   subscription_status, subscription_end_date
+                   subscription_status, subscription_expires_at
             FROM user WHERE id = ?
         """, (user_id,)).fetchone()
 
