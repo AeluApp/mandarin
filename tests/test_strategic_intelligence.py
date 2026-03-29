@@ -27,7 +27,7 @@ def _seed_dimensions(conn):
     ]
     for name, weight, cur, target, bic, bic_score, gap, cost, critical in dims:
         conn.execute("""
-            INSERT INTO pi_evaluation_dimensions
+            INSERT OR REPLACE INTO pi_evaluation_dimensions
             (id, dimension_name, dimension_description, weight,
              aelu_current_score, aelu_target_score, best_in_class_competitor,
              best_in_class_score, gap, gap_closeable, closing_cost, on_critical_path)
@@ -46,7 +46,7 @@ def _seed_competitors(conn):
         ('HelloChinese', 'gamified_mass_market', 'partial'),
     ]:
         conn.execute("""
-            INSERT INTO pi_competitors
+            INSERT OR REPLACE INTO pi_competitors
             (id, name, category, strategic_position, primary_strength,
              primary_weakness, ceiling, aelu_overlap_degree, last_assessed_at)
             VALUES (?, ?, ?, 'position', 'strength', 'weakness', 'ceiling', ?, date('now'))
@@ -213,8 +213,8 @@ class TestEditorialCritic(unittest.TestCase):
         from mandarin.intelligence.strategic_intelligence import assess_editorial_quality
         conn = _make_db()
         conn.execute("""
-            INSERT INTO content_item (id, hanzi, english, status)
-            VALUES (1, '你好', 'hello', 'drill_ready')
+            INSERT OR REPLACE INTO content_item (id, hanzi, pinyin, english, status)
+            VALUES (1, '你好', 'nǐ hǎo', 'hello', 'drill_ready')
         """)
         conn.commit()
 
@@ -241,9 +241,9 @@ class TestEditorialCritic(unittest.TestCase):
         # Insert 15 short vocabulary items
         for i in range(15):
             conn.execute("""
-                INSERT INTO content_item (hanzi, english, status)
-                VALUES (?, ?, 'drill_ready')
-            """, (f'字{i}', f'word{i}'))
+                INSERT INTO content_item (hanzi, pinyin, english, status)
+                VALUES (?, ?, ?, 'drill_ready')
+            """, (f'字{i}', f'zi{i}', f'word{i}'))
         conn.commit()
 
         findings = analyze_editorial_corpus(conn)
@@ -349,6 +349,7 @@ class TestThesisRevision(unittest.TestCase):
             run_strategist, revise_thesis,
         )
         conn = _make_db()
+        conn.execute("PRAGMA foreign_keys=OFF")
         _seed_dimensions(conn)
 
         # Create initial thesis

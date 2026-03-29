@@ -17,9 +17,19 @@ from mandarin.ai.teacher_comms import (
 from tests.shared_db import make_test_db as _make_db
 
 
+def _seed_teacher_lead(conn):
+    """Insert a teacher lead for tests that need one."""
+    conn.execute(
+        "INSERT OR IGNORE INTO teacher_lead (id, name, platform, status) "
+        "VALUES (1, 'Test Teacher', 'italki', 'qualified')"
+    )
+    conn.commit()
+
+
 class TestDraftTeacherOutreach(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        _seed_teacher_lead(self.conn)
 
     @patch("mandarin.ai.ollama_client.is_ollama_available", return_value=False)
     def test_template_draft_without_llm(self, mock_avail):
@@ -41,6 +51,7 @@ class TestDraftTeacherOutreach(unittest.TestCase):
 class TestDraftPilotInvitation(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        _seed_teacher_lead(self.conn)
 
     @patch("mandarin.ai.ollama_client.is_ollama_available", return_value=False)
     def test_creates_invitation(self, mock_avail):
@@ -51,6 +62,7 @@ class TestDraftPilotInvitation(unittest.TestCase):
 class TestGetPendingDrafts(unittest.TestCase):
     def setUp(self):
         self.conn = _make_db()
+        _seed_teacher_lead(self.conn)
 
     def test_empty_queue(self):
         drafts = get_pending_drafts(self.conn)
