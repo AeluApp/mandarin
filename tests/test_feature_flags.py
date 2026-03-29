@@ -13,24 +13,13 @@ from mandarin.feature_flags import (
     is_flag_enabled,
     set_flag,
 )
+from tests.shared_db import make_test_db
 
 
 @pytest.fixture
 def conn():
-    """In-memory SQLite with the feature_flag table."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-    c.execute("""
-        CREATE TABLE feature_flag (
-            name TEXT PRIMARY KEY,
-            enabled INTEGER NOT NULL DEFAULT 1,
-            rollout_pct INTEGER NOT NULL DEFAULT 100,
-            description TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    c.commit()
+    """In-memory SQLite with the full production schema."""
+    c = make_test_db()
     yield c
     c.close()
 
@@ -212,11 +201,15 @@ class TestSetFlag:
 class TestGetAllFlags:
     def test_empty_table_returns_empty_list(self, conn):
         """No flags in the table returns an empty list."""
+        conn.execute("DELETE FROM feature_flag")
+        conn.commit()
         result = get_all_flags(conn)
         assert result == []
 
     def test_returns_all_flags_sorted_by_name(self, conn):
         """All flags are returned as dicts, sorted alphabetically by name."""
+        conn.execute("DELETE FROM feature_flag")
+        conn.commit()
         set_flag(conn, "zebra", enabled=True)
         set_flag(conn, "alpha", enabled=False)
         set_flag(conn, "middle", enabled=True, rollout_pct=50)

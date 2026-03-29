@@ -19,91 +19,7 @@ from mandarin.intelligence.finding_lifecycle import (
     tag_root_cause,
     transition_finding,
 )
-
-
-# ---------------------------------------------------------------------------
-# Schema DDL
-# ---------------------------------------------------------------------------
-
-_DDL = """
-CREATE TABLE product_audit (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    run_at TEXT DEFAULT (datetime('now')),
-    overall_grade TEXT,
-    overall_score REAL,
-    dimension_scores TEXT,
-    findings_json TEXT,
-    findings_count INTEGER,
-    critical_count INTEGER DEFAULT 0,
-    high_count INTEGER DEFAULT 0
-);
-
-CREATE TABLE pi_finding (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    audit_id INTEGER,
-    created_at TEXT DEFAULT (datetime('now')),
-    updated_at TEXT DEFAULT (datetime('now')),
-    dimension TEXT,
-    severity TEXT,
-    title TEXT,
-    analysis TEXT,
-    status TEXT DEFAULT 'investigating',
-    hypothesis TEXT,
-    falsification TEXT,
-    root_cause_tag TEXT,
-    linked_finding_id INTEGER,
-    metric_name TEXT,
-    metric_value_at_detection REAL,
-    times_seen INTEGER DEFAULT 1,
-    last_seen_audit_id INTEGER,
-    resolved_at TEXT,
-    resolution_notes TEXT
-);
-
-CREATE TABLE pi_prediction_ledger (
-    id TEXT PRIMARY KEY,
-    finding_id INTEGER NOT NULL,
-    model_id TEXT NOT NULL,
-    dimension TEXT NOT NULL,
-    claim_type TEXT NOT NULL DEFAULT 'metric_will_improve',
-    metric_name TEXT NOT NULL,
-    metric_baseline REAL,
-    predicted_delta REAL NOT NULL,
-    predicted_delta_confidence REAL NOT NULL,
-    verification_window_days INTEGER NOT NULL,
-    verification_due_at TEXT NOT NULL,
-    status TEXT DEFAULT 'pending',
-    outcome_id TEXT,
-    created_at TEXT DEFAULT (datetime('now'))
-);
-
-CREATE TABLE pi_model_confidence (
-    model_id TEXT PRIMARY KEY,
-    dimension TEXT,
-    correct_count INTEGER DEFAULT 0,
-    directionally_correct_count INTEGER DEFAULT 0,
-    wrong_count INTEGER DEFAULT 0,
-    insufficient_data_count INTEGER DEFAULT 0,
-    measurement_failure_count INTEGER DEFAULT 0,
-    current_confidence REAL DEFAULT 0.5,
-    last_updated TEXT DEFAULT (datetime('now'))
-);
-
-CREATE TABLE pi_recommendation_outcome (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    finding_id INTEGER,
-    created_at TEXT DEFAULT (datetime('now')),
-    action_type TEXT,
-    action_description TEXT,
-    files_changed TEXT,
-    commit_hash TEXT,
-    metric_before TEXT,
-    metric_after TEXT,
-    verified_at TEXT,
-    delta_pct REAL,
-    effective INTEGER
-);
-"""
+from tests.shared_db import make_test_db
 
 
 # ---------------------------------------------------------------------------
@@ -112,11 +28,8 @@ CREATE TABLE pi_recommendation_outcome (
 
 @pytest.fixture
 def conn():
-    """In-memory SQLite connection with the three PI tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-    c.executescript(_DDL)
-    c.commit()
+    """In-memory SQLite connection with the full production schema."""
+    c = make_test_db()
     yield c
     c.close()
 
@@ -125,8 +38,8 @@ def conn():
 def conn_with_audit(conn):
     """Connection that already has one product_audit row (id=1)."""
     conn.execute(
-        "INSERT INTO product_audit (overall_grade, overall_score, findings_count) "
-        "VALUES ('B', 82.0, 0)"
+        "INSERT INTO product_audit (overall_grade, overall_score, dimension_scores, findings_json, findings_count) "
+        "VALUES ('B', 82.0, '{}', '[]', 0)"
     )
     conn.commit()
     return conn
@@ -538,8 +451,9 @@ class TestTagRootCause:
 
     def test_overwrite_tag(self, conn):
         fid = _insert_finding(conn)
+        root_fid = _insert_finding(conn, title="Root cause finding")
         tag_root_cause(conn, fid, is_root=True)
-        tag_root_cause(conn, fid, is_root=False, linked_finding_id=99)
+        tag_root_cause(conn, fid, is_root=False, linked_finding_id=root_fid)
 
         row = conn.execute("SELECT root_cause_tag FROM pi_finding WHERE id=?", (fid,)).fetchone()
         assert row["root_cause_tag"] == "symptom"

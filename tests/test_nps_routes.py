@@ -12,6 +12,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 from mandarin.web.auth_routes import User
+from tests.shared_db import make_test_db  # noqa: F401
 
 
 # ---------------------------------------------------------------------------

@@ -328,48 +328,31 @@ def test_stop_words_set_contents():
 # ---- TestProbePersistence ----
 
 def _make_probe_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE probe_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER,
-            scenario_id INTEGER,
-            probe_type TEXT NOT NULL DEFAULT 'comprehension',
-            correct INTEGER NOT NULL DEFAULT 0,
-            user_answer TEXT,
-            expected_answer TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE dialogue_scenario (
-            id INTEGER PRIMARY KEY,
-            hsk_level INTEGER NOT NULL DEFAULT 1
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY,
-            hsk_level INTEGER NOT NULL DEFAULT 1
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER,
-            modality TEXT,
-            difficulty REAL DEFAULT 0.5,
-            total_attempts INTEGER DEFAULT 0
-        )
-    """)
+    from tests.shared_db import make_test_db
+    return make_test_db()
+
+
+def _seed_probe_content(conn):
+    """Seed a content_item and dialogue_scenarios for probe tests (FK requirements)."""
+    conn.execute(
+        "INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) "
+        "VALUES (1, '你', 'nǐ', 'you')"
+    )
+    conn.execute(
+        "INSERT OR IGNORE INTO dialogue_scenario (id, title, hsk_level, tree_json) "
+        "VALUES (1, 'Probe Test 1', 1, '{}')"
+    )
+    conn.execute(
+        "INSERT OR IGNORE INTO dialogue_scenario (id, title, hsk_level, tree_json) "
+        "VALUES (2, 'Probe Test 2', 1, '{}')"
+    )
     conn.commit()
-    return conn
 
 
 def test_record_probe_correct():
     conn = _make_probe_db()
-    record_probe_result(conn, content_item_id=0, scenario_id=1,
+    _seed_probe_content(conn)
+    record_probe_result(conn, content_item_id=1, scenario_id=1,
                        probe_type="comprehension", correct=True)
     row = conn.execute("SELECT * FROM probe_log").fetchone()
     assert row is not None
@@ -380,7 +363,8 @@ def test_record_probe_correct():
 
 def test_record_probe_incorrect():
     conn = _make_probe_db()
-    record_probe_result(conn, content_item_id=0, scenario_id=2,
+    _seed_probe_content(conn)
+    record_probe_result(conn, content_item_id=1, scenario_id=2,
                        probe_type="comprehension", correct=False,
                        user_answer="wrong", expected_answer="right")
     row = conn.execute("SELECT * FROM probe_log").fetchone()
@@ -392,8 +376,14 @@ def test_record_probe_incorrect():
 def test_apply_probe_penalty():
     """Probe failure should increase difficulty by 0.02 for reading items at same HSK level."""
     conn = _make_probe_db()
-    conn.execute("INSERT INTO dialogue_scenario (id, hsk_level) VALUES (1, 2)")
-    conn.execute("INSERT INTO content_item (id, hsk_level) VALUES (10, 2)")
+    conn.execute(
+        "INSERT INTO dialogue_scenario (id, title, hsk_level, tree_json) "
+        "VALUES (1, 'Test', 2, '{}')"
+    )
+    conn.execute(
+        "INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) "
+        "VALUES (10, '吃', 'chī', 'eat', 2)"
+    )
     conn.execute(
         "INSERT INTO progress (content_item_id, modality, difficulty, total_attempts) "
         "VALUES (10, 'reading', 0.50, 5)"
@@ -412,8 +402,14 @@ def test_apply_probe_penalty():
 def test_penalty_caps_at_095():
     """Difficulty should not exceed 0.95."""
     conn = _make_probe_db()
-    conn.execute("INSERT INTO dialogue_scenario (id, hsk_level) VALUES (1, 1)")
-    conn.execute("INSERT INTO content_item (id, hsk_level) VALUES (5, 1)")
+    conn.execute(
+        "INSERT INTO dialogue_scenario (id, title, hsk_level, tree_json) "
+        "VALUES (1, 'Test', 1, '{}')"
+    )
+    conn.execute(
+        "INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) "
+        "VALUES (5, '好', 'hǎo', 'good', 1)"
+    )
     conn.execute(
         "INSERT INTO progress (content_item_id, modality, difficulty, total_attempts) "
         "VALUES (5, 'reading', 0.94, 10)"

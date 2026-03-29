@@ -9,6 +9,7 @@ import sqlite3
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.intelligence.feedback_loops import (
     analyze_experiments,
     analyze_improvement_log,
@@ -24,101 +25,11 @@ from mandarin.intelligence.feedback_loops import (
 # Schema helpers
 # ---------------------------------------------------------------------------
 
-DDL = """
-CREATE TABLE IF NOT EXISTS pi_finding (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    audit_id INTEGER,
-    created_at TEXT DEFAULT (datetime('now')),
-    updated_at TEXT DEFAULT (datetime('now')),
-    dimension TEXT,
-    severity TEXT,
-    title TEXT,
-    analysis TEXT,
-    status TEXT DEFAULT 'investigating',
-    hypothesis TEXT,
-    falsification TEXT,
-    root_cause_tag TEXT,
-    linked_finding_id INTEGER,
-    metric_name TEXT,
-    metric_value_at_detection REAL,
-    times_seen INTEGER DEFAULT 1,
-    last_seen_audit_id INTEGER,
-    resolved_at TEXT,
-    resolution_notes TEXT
-);
-
-CREATE TABLE IF NOT EXISTS pi_recommendation_outcome (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    finding_id INTEGER,
-    created_at TEXT DEFAULT (datetime('now')),
-    action_type TEXT CHECK(action_type IN ('code_change','config_change','content_change','experiment')),
-    action_description TEXT,
-    files_changed TEXT,
-    commit_hash TEXT,
-    metric_before TEXT,
-    metric_after TEXT,
-    verified_at TEXT,
-    delta_pct REAL,
-    effective INTEGER CHECK(effective IN (-1,0,1))
-);
-
-CREATE TABLE IF NOT EXISTS pi_threshold_calibration (
-    metric_name TEXT PRIMARY KEY,
-    threshold_value REAL,
-    calibrated_at TEXT DEFAULT (datetime('now')),
-    sample_size INTEGER,
-    false_positive_rate REAL,
-    false_negative_rate REAL,
-    prior_threshold REAL,
-    notes TEXT
-);
-
-CREATE TABLE IF NOT EXISTS experiment (
-    id INTEGER PRIMARY KEY,
-    name TEXT,
-    status TEXT,
-    created_at TEXT DEFAULT (datetime('now')),
-    min_sample_size INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS experiment_assignment (
-    id INTEGER PRIMARY KEY,
-    experiment_id INTEGER,
-    user_id INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS improvement_log (
-    id INTEGER PRIMARY KEY,
-    status TEXT,
-    created_at TEXT DEFAULT (datetime('now'))
-);
-
-CREATE TABLE IF NOT EXISTS vocab_encounter (
-    id INTEGER PRIMARY KEY,
-    content_item_id INTEGER,
-    looked_up INTEGER,
-    created_at TEXT DEFAULT (datetime('now')),
-    hanzi TEXT,
-    source_type TEXT,
-    source_id INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS progress (
-    content_item_id INTEGER,
-    user_id INTEGER,
-    mastery_stage TEXT,
-    repetitions INTEGER,
-    ease_factor REAL
-);
-"""
-
-
 @pytest.fixture
 def conn():
     """In-memory SQLite connection with row_factory and all required tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-    c.executescript(DDL)
+    c = make_test_db()
+    c.execute("PRAGMA foreign_keys=OFF")
     c.commit()
     yield c
     c.close()
@@ -439,13 +350,13 @@ class TestAnalyzeExperiments:
 
     def test_no_finding_when_running_experiment_has_insufficient_sample(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'btn_color', 'running', 100)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'btn_color', 'running', 100, '[{"name":"control"},{"name":"treatment"}]')
         """)
         # Only 50 assignments
         for i in range(50):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -455,12 +366,12 @@ class TestAnalyzeExperiments:
 
     def test_finding_when_experiment_reaches_min_sample(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'btn_color', 'running', 50)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'btn_color', 'running', 50, '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(50):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -470,12 +381,12 @@ class TestAnalyzeExperiments:
 
     def test_sample_size_finding_includes_experiment_name(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'onboarding_v2', 'running', 10)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'onboarding_v2', 'running', 10, '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(10):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -485,8 +396,8 @@ class TestAnalyzeExperiments:
 
     def test_finding_when_experiment_running_over_30_days(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, created_at, min_sample_size)
-            VALUES (1, 'old_exp', 'running', datetime('now', '-31 days'), 200)
+            INSERT INTO experiment (id, name, status, created_at, min_sample_size, variants)
+            VALUES (1, 'old_exp', 'running', datetime('now', '-31 days'), 200, '[{"name":"control"},{"name":"treatment"}]')
         """)
         conn.commit()
         findings = analyze_experiments(conn)
@@ -495,8 +406,8 @@ class TestAnalyzeExperiments:
 
     def test_stale_finding_includes_experiment_name(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, created_at, min_sample_size)
-            VALUES (1, 'stale_v3', 'running', datetime('now', '-45 days'), 500)
+            INSERT INTO experiment (id, name, status, created_at, min_sample_size, variants)
+            VALUES (1, 'stale_v3', 'running', datetime('now', '-45 days'), 500, '[{"name":"control"},{"name":"treatment"}]')
         """)
         conn.commit()
         findings = analyze_experiments(conn)
@@ -505,12 +416,12 @@ class TestAnalyzeExperiments:
 
     def test_completed_experiment_does_not_appear(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'done_exp', 'completed', 10)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'done_exp', 'completed', 10, '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(20):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -519,8 +430,8 @@ class TestAnalyzeExperiments:
 
     def test_new_running_experiment_within_30_days_no_stale(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, created_at, min_sample_size)
-            VALUES (1, 'fresh_exp', 'running', datetime('now', '-5 days'), 200)
+            INSERT INTO experiment (id, name, status, created_at, min_sample_size, variants)
+            VALUES (1, 'fresh_exp', 'running', datetime('now', '-5 days'), 200, '[{"name":"control"},{"name":"treatment"}]')
         """)
         conn.commit()
         findings = analyze_experiments(conn)
@@ -529,12 +440,12 @@ class TestAnalyzeExperiments:
 
     def test_finding_severity_is_medium(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'x', 'running', 5)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'x', 'running', 5, '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(5):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -544,8 +455,8 @@ class TestAnalyzeExperiments:
 
     def test_finding_dimension_is_pm(self, conn):
         conn.execute("""
-            INSERT INTO experiment (id, name, status, created_at, min_sample_size)
-            VALUES (1, 'pm_test', 'running', datetime('now', '-31 days'), 999)
+            INSERT INTO experiment (id, name, status, created_at, min_sample_size, variants)
+            VALUES (1, 'pm_test', 'running', datetime('now', '-31 days'), 999, '[{"name":"control"},{"name":"treatment"}]')
         """)
         conn.commit()
         findings = analyze_experiments(conn)
@@ -555,12 +466,12 @@ class TestAnalyzeExperiments:
     def test_default_min_sample_size_of_100_applied(self, conn):
         # Experiment with NULL min_sample_size → default 100
         conn.execute("""
-            INSERT INTO experiment (id, name, status)
-            VALUES (1, 'no_min', 'running')
+            INSERT INTO experiment (id, name, status, variants)
+            VALUES (1, 'no_min', 'running', '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(100):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()
@@ -582,8 +493,8 @@ class TestAnalyzeImprovementLog:
     def test_no_finding_when_no_stale_proposals(self, conn):
         # Recent proposed entry — should not trigger
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-10 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-10 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -591,8 +502,8 @@ class TestAnalyzeImprovementLog:
 
     def test_finding_when_proposal_older_than_30_days(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-31 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-31 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -601,8 +512,8 @@ class TestAnalyzeImprovementLog:
     def test_finding_title_contains_count(self, conn):
         for _ in range(3):
             conn.execute("""
-                INSERT INTO improvement_log (status, created_at)
-                VALUES ('proposed', datetime('now', '-35 days'))
+                INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+                VALUES ('proposed', 'test', 'test observation', datetime('now', '-35 days'))
             """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -611,8 +522,8 @@ class TestAnalyzeImprovementLog:
 
     def test_applied_status_not_counted(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('applied', datetime('now', '-45 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('applied', 'test', 'test observation', datetime('now', '-45 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -620,8 +531,8 @@ class TestAnalyzeImprovementLog:
 
     def test_archived_status_not_counted(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('archived', datetime('now', '-45 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('rejected', 'test', 'test observation', datetime('now', '-45 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -629,12 +540,12 @@ class TestAnalyzeImprovementLog:
 
     def test_mixed_statuses_only_proposed_counted(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-40 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-40 days'))
         """)
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('applied', datetime('now', '-40 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('applied', 'test', 'test observation', datetime('now', '-40 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -643,8 +554,8 @@ class TestAnalyzeImprovementLog:
 
     def test_finding_severity_is_medium(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-32 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-32 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -652,8 +563,8 @@ class TestAnalyzeImprovementLog:
 
     def test_finding_dimension_is_pm(self, conn):
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-32 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-32 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -662,8 +573,8 @@ class TestAnalyzeImprovementLog:
     def test_exactly_30_days_old_not_triggered(self, conn):
         # The query uses <=, so exactly 30 days should be included.
         conn.execute("""
-            INSERT INTO improvement_log (status, created_at)
-            VALUES ('proposed', datetime('now', '-30 days'))
+            INSERT INTO improvement_log (status, trigger_reason, observation, created_at)
+            VALUES ('proposed', 'test', 'test observation', datetime('now', '-30 days'))
         """)
         conn.commit()
         result = analyze_improvement_log(conn)
@@ -798,19 +709,19 @@ class TestMeasureEncounterEffectiveness:
     def _seed_encounter_items(self, conn, item_ids, reps, looked_up=1):
         for item_id, rep in zip(item_ids, reps, strict=False):
             conn.execute("""
-                INSERT INTO vocab_encounter (content_item_id, looked_up) VALUES (?, ?)
+                INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up) VALUES (?, '字', 'reading', ?)
             """, (item_id, looked_up))
             conn.execute("""
-                INSERT INTO progress (content_item_id, user_id, mastery_stage, repetitions, ease_factor)
-                VALUES (?, 1, 'stable', ?, 2.5)
+                INSERT INTO progress (content_item_id, user_id, modality, mastery_stage, repetitions, ease_factor)
+                VALUES (?, 1, 'reading', 'stable', ?, 2.5)
             """, (item_id, rep))
         conn.commit()
 
     def _seed_control_items(self, conn, item_ids, reps):
         for item_id, rep in zip(item_ids, reps, strict=False):
             conn.execute("""
-                INSERT INTO progress (content_item_id, user_id, mastery_stage, repetitions, ease_factor)
-                VALUES (?, 1, 'stable', ?, 2.5)
+                INSERT INTO progress (content_item_id, user_id, modality, mastery_stage, repetitions, ease_factor)
+                VALUES (?, 1, 'reading', 'stable', ?, 2.5)
             """, (item_id, rep))
         conn.commit()
 
@@ -849,11 +760,11 @@ class TestMeasureEncounterEffectiveness:
     def test_item_not_at_stable_excluded(self, conn):
         # Item with encounter but mastery_stage != 'stable'
         conn.execute("""
-            INSERT INTO vocab_encounter (content_item_id, looked_up) VALUES (1, 1)
+            INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up) VALUES (1, '字', 'reading', 1)
         """)
         conn.execute("""
-            INSERT INTO progress (content_item_id, user_id, mastery_stage, repetitions, ease_factor)
-            VALUES (1, 1, 'learning', 3, 2.5)
+            INSERT INTO progress (content_item_id, user_id, modality, mastery_stage, repetitions, ease_factor)
+            VALUES (1, 1, 'reading', 'learning', 3, 2.5)
         """)
         conn.commit()
         result = measure_encounter_effectiveness(conn)
@@ -928,12 +839,12 @@ class TestIntegration:
     def test_full_flow_experiment_to_outcome(self, conn):
         """Simulate: running experiment reaches sample → finding → outcome recorded."""
         conn.execute("""
-            INSERT INTO experiment (id, name, status, min_sample_size)
-            VALUES (1, 'full_flow', 'running', 5)
+            INSERT INTO experiment (id, name, status, min_sample_size, variants)
+            VALUES (1, 'full_flow', 'running', 5, '[{"name":"control"},{"name":"treatment"}]')
         """)
         for i in range(5):
             conn.execute(
-                "INSERT INTO experiment_assignment (experiment_id, user_id) VALUES (1, ?)",
+                "INSERT INTO experiment_assignment (experiment_id, user_id, variant) VALUES (1, ?, 'control')",
                 (i + 1,)
             )
         conn.commit()

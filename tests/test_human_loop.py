@@ -18,6 +18,7 @@ import sqlite3
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.intelligence.human_loop import (
     apply_overrides,
     build_context_frame,
@@ -90,8 +91,7 @@ CREATE TABLE IF NOT EXISTS pi_decision_log (
 
 @pytest.fixture
 def conn():
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
+    c = make_test_db()
     c.executescript(DDL)
     yield c
     c.close()
@@ -185,27 +185,27 @@ class TestComputeEscalation:
 
     def test_alert_seen_twice(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 2, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 2, "investigating"),
         )
         assert compute_escalation(conn, _f(severity="medium")) == "alert"
 
     def test_escalate_seen_three_times_high_severity(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 3, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 3, "investigating"),
         )
         assert compute_escalation(conn, _f(severity="high")) == "escalate"
 
     def test_escalate_prior_fix_ineffective(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 3, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 3, "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute(
-            "INSERT INTO pi_recommendation_outcome (finding_id, effective) VALUES (?,?)",
-            (fid, -1),
+            "INSERT INTO pi_recommendation_outcome (finding_id, action_type, effective) VALUES (?,?,?)",
+            (fid, "code_change", -1),
         )
         assert compute_escalation(conn, _f(severity="low")) == "escalate"
 
@@ -215,8 +215,8 @@ class TestComputeEscalation:
     def test_resolved_findings_ignored(self, conn):
         """Resolved findings should not affect escalation."""
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 5, "resolved"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 5, "resolved"),
         )
         assert compute_escalation(conn, _f(severity="low")) == "quiet"
 
@@ -237,8 +237,8 @@ class TestBuildContextFrame:
     def test_historical_scores(self, conn):
         scores = json.dumps({"retention": {"score": 72}})
         conn.execute(
-            "INSERT INTO product_audit (overall_score, dimension_scores, run_at) VALUES (?,?,?)",
-            (75.0, scores, "2026-01-01"),
+            "INSERT INTO product_audit (overall_score, overall_grade, dimension_scores, findings_json, findings_count, run_at) VALUES (?,?,?,?,?,?)",
+            (75.0, "C", scores, "[]", 0, "2026-01-01"),
         )
         frame = build_context_frame(conn, _f(dimension="retention"))
         hist = [b for b in frame["benchmarks"] if b["source"] == "product_audit"]
@@ -257,24 +257,24 @@ class TestBuildContextFrame:
 
     def test_why_now_first_time(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 1, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 1, "investigating"),
         )
         frame = build_context_frame(conn, _f())
         assert frame["why_now"] == "First time detected"
 
     def test_why_now_persistent(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 3, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 3, "investigating"),
         )
         frame = build_context_frame(conn, _f())
         assert "3 times" in frame["why_now"]
 
     def test_why_now_chronic(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 5, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 5, "investigating"),
         )
         frame = build_context_frame(conn, _f())
         assert "chronic" in frame["why_now"]
@@ -285,24 +285,28 @@ class TestBuildContextFrame:
 
     def test_why_now_regression(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding", 1, "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding", 1, "investigating"),
         )
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, times_seen, status) VALUES (?,?,?,?)",
-            ("retention", "Test finding old", 1, "resolved"),
+            "INSERT INTO pi_finding (dimension, severity, title, times_seen, status) VALUES (?,?,?,?,?)",
+            ("retention", "medium", "Test finding old", 1, "resolved"),
         )
         frame = build_context_frame(conn, _f())
         assert "Regression" in frame["why_now"]
 
     def test_correlations_co_occurring(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (audit_id, dimension, title, status) VALUES (?,?,?,?)",
-            (1, "retention", "Test finding", "open"),
+            "INSERT INTO product_audit (id, overall_score, overall_grade, dimension_scores, findings_json, findings_count) "
+            "VALUES (1, 75.0, 'C', '{}', '[]', 0)"
         )
         conn.execute(
-            "INSERT INTO pi_finding (audit_id, dimension, title, status) VALUES (?,?,?,?)",
-            (1, "ux", "UX issue", "open"),
+            "INSERT INTO pi_finding (audit_id, dimension, severity, title, status) VALUES (?,?,?,?,?)",
+            (1, "retention", "medium", "Test finding", "investigating"),
+        )
+        conn.execute(
+            "INSERT INTO pi_finding (audit_id, dimension, severity, title, status) VALUES (?,?,?,?,?)",
+            (1, "ux", "medium", "UX issue", "investigating"),
         )
         frame = build_context_frame(conn, _f())
         assert any("UX issue" in c for c in frame["correlations"])
@@ -372,8 +376,8 @@ class TestSurfaceForRole:
 class TestRecordOverride:
     def test_success_creates_log_and_calibration(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("retention", "noisy", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("retention", "low", "noisy", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
 
@@ -402,8 +406,8 @@ class TestRecordOverride:
     def test_upsert_threshold(self, conn):
         """Second override on same metric updates rather than duplicates."""
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("retention", "noisy", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("retention", "low", "noisy", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         record_override(conn, fid, "retention", 0.25, "first")
@@ -424,14 +428,14 @@ class TestRecordOverride:
 class TestCheckOverrideSunsets:
     def test_expired_override_generates_finding(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("ux", "stale alert", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("ux", "low", "stale alert", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute("""
             INSERT INTO pi_decision_log
-                (finding_id, decision, decision_reason, override_expires_at)
-            VALUES (?, 'Override: suppress ux', 'too noisy', datetime('now', '-1 day'))
+                (finding_id, decision_class, escalation_level, decision, decision_reason, override_expires_at)
+            VALUES (?, 'auto_fix', 'quiet', 'Override: suppress ux', 'too noisy', datetime('now', '-1 day'))
         """, (fid,))
         conn.commit()
 
@@ -448,28 +452,28 @@ class TestCheckOverrideSunsets:
 
     def test_no_expired_returns_empty(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("ux", "alert", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("ux", "low", "alert", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute("""
             INSERT INTO pi_decision_log
-                (finding_id, decision, decision_reason, override_expires_at)
-            VALUES (?, 'Override: suppress ux', 'reason', datetime('now', '+30 days'))
+                (finding_id, decision_class, escalation_level, decision, decision_reason, override_expires_at)
+            VALUES (?, 'auto_fix', 'quiet', 'Override: suppress ux', 'reason', datetime('now', '+30 days'))
         """, (fid,))
         conn.commit()
         assert check_override_sunsets(conn) == []
 
     def test_already_handled_not_regenerated(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("ux", "stale alert", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("ux", "low", "stale alert", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute("""
             INSERT INTO pi_decision_log
-                (finding_id, decision, decision_reason, override_expires_at, outcome_notes)
-            VALUES (?, 'Override: suppress ux', 'reason',
+                (finding_id, decision_class, escalation_level, decision, decision_reason, override_expires_at, outcome_notes)
+            VALUES (?, 'auto_fix', 'quiet', 'Override: suppress ux', 'reason',
                     datetime('now', '-1 day'), 'Already handled')
         """, (fid,))
         conn.commit()
@@ -482,14 +486,14 @@ class TestCheckOverrideSunsets:
 class TestApplyOverrides:
     def test_active_override_filters_matching_finding(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("retention", "noisy metric", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("retention", "low", "noisy metric", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute("""
             INSERT INTO pi_decision_log
-                (finding_id, decision, decision_reason, override_expires_at)
-            VALUES (?, 'Override: suppress retention', 'noisy', datetime('now', '+30 days'))
+                (finding_id, decision_class, escalation_level, decision, decision_reason, override_expires_at)
+            VALUES (?, 'auto_fix', 'quiet', 'Override: suppress retention', 'noisy', datetime('now', '+30 days'))
         """, (fid,))
         conn.commit()
 
@@ -507,14 +511,14 @@ class TestApplyOverrides:
 
     def test_expired_override_does_not_filter(self, conn):
         conn.execute(
-            "INSERT INTO pi_finding (dimension, title, status) VALUES (?,?,?)",
-            ("retention", "noisy metric", "open"),
+            "INSERT INTO pi_finding (dimension, severity, title, status) VALUES (?,?,?,?)",
+            ("retention", "low", "noisy metric", "investigating"),
         )
         fid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
         conn.execute("""
             INSERT INTO pi_decision_log
-                (finding_id, decision, decision_reason, override_expires_at)
-            VALUES (?, 'Override: suppress retention', 'noisy', datetime('now', '-1 day'))
+                (finding_id, decision_class, escalation_level, decision, decision_reason, override_expires_at)
+            VALUES (?, 'auto_fix', 'quiet', 'Override: suppress retention', 'noisy', datetime('now', '-1 day'))
         """, (fid,))
         conn.commit()
 

@@ -7,6 +7,7 @@ from unittest.mock import patch
 import pytest
 
 from mandarin.data_retention import _trim_crash_log, get_policies, purge_expired
+from tests.shared_db import make_test_db
 
 
 # ---------------------------------------------------------------------------
@@ -15,43 +16,10 @@ from mandarin.data_retention import _trim_crash_log, get_policies, purge_expired
 
 @pytest.fixture
 def conn():
-    """In-memory SQLite DB with retention_policy and target tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-
-    # Retention policy table
-    c.execute("""CREATE TABLE retention_policy (
-        table_name TEXT PRIMARY KEY,
-        retention_days INTEGER NOT NULL,
-        last_purged TEXT,
-        description TEXT
-    )""")
-
-    # Target tables that retention can purge
-    c.execute("""CREATE TABLE error_log (
-        id INTEGER PRIMARY KEY,
-        created_at TEXT,
-        user_id INTEGER,
-        drill_type TEXT,
-        error_type TEXT
-    )""")
-    c.execute("""CREATE TABLE security_audit_log (
-        id INTEGER PRIMARY KEY,
-        timestamp TEXT,
-        event_type TEXT,
-        user_id INTEGER,
-        ip_address TEXT,
-        user_agent TEXT,
-        details TEXT,
-        severity TEXT
-    )""")
-    c.execute("""CREATE TABLE rate_limit (
-        id INTEGER PRIMARY KEY,
-        key TEXT,
-        hits INTEGER,
-        window_start TEXT,
-        expires_at TEXT
-    )""")
+    """In-memory SQLite DB with the full production schema, retention policies cleared."""
+    c = make_test_db()
+    c.execute("PRAGMA foreign_keys=OFF")
+    c.execute("DELETE FROM retention_policy")
     c.commit()
     yield c
     c.close()
@@ -76,7 +44,7 @@ def _seed_policy(conn, table_name, retention_days, desc="test"):
 
 class TestGetPolicies:
     def test_empty_table_returns_empty_list(self, conn):
-        """Empty retention_policy table returns []."""
+        """Cleared retention_policy table returns []."""
         assert get_policies(conn) == []
 
     def test_with_policies_returns_sorted_dicts(self, conn):
@@ -116,7 +84,7 @@ class TestPurgeExpired:
         _seed_policy(conn, "error_log", -1, "Keep forever")
         # Insert an old row that would be purged if the policy were active
         conn.execute(
-            "INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(999),)
+            "INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(999),)
         )
         conn.commit()
 
@@ -130,8 +98,8 @@ class TestPurgeExpired:
         """Old rows past retention_days are deleted."""
         _seed_policy(conn, "error_log", 30)
         # Insert one old row (60 days ago) and one recent row (5 days ago)
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(60),))
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(5),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(60),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(5),))
         conn.commit()
 
         result = purge_expired(conn)
@@ -142,8 +110,8 @@ class TestPurgeExpired:
     def test_dry_run_counts_but_does_not_delete(self, conn):
         """dry_run=True returns counts but leaves rows in place."""
         _seed_policy(conn, "error_log", 30)
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(60),))
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(5),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(60),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(5),))
         conn.commit()
 
         result = purge_expired(conn, dry_run=True)
@@ -154,7 +122,7 @@ class TestPurgeExpired:
     def test_purge_updates_last_purged(self, conn):
         """After purge, last_purged is set on the policy row."""
         _seed_policy(conn, "error_log", 30)
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(60),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(60),))
         conn.commit()
 
         purge_expired(conn)
@@ -258,7 +226,7 @@ class TestPurgeExpired:
         _seed_policy(conn, "error_log", 30)
         _seed_policy(conn, "rate_limit", 1)
 
-        conn.execute("INSERT INTO error_log (created_at) VALUES (?)", (_days_ago(60),))
+        conn.execute("INSERT INTO error_log (content_item_id, modality, error_type, created_at) VALUES (1, 'reading', 'tone', ?)", (_days_ago(60),))
         conn.execute(
             "INSERT INTO rate_limit (key, hits, window_start, expires_at) VALUES ('k', 1, ?, ?)",
             (_days_ago(5), _days_ago(5)),

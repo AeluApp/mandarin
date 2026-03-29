@@ -19,6 +19,7 @@ import sqlite3
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.intelligence.finding_lifecycle import (
     transition_finding,
     deduplicate_findings,
@@ -176,8 +177,7 @@ CREATE TABLE IF NOT EXISTS pi_model_confidence (
 @pytest.fixture
 def conn():
     """In-memory SQLite connection with all intelligence tables created."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
+    c = make_test_db()
     c.executescript(_DDL)
     c.commit()
     yield c
@@ -201,8 +201,8 @@ def _insert_audit(conn, overall_score=75.0, dimension_scores=None):
     """Helper: insert a product_audit row and return its id."""
     ds = json.dumps(dimension_scores or {})
     cursor = conn.execute("""
-        INSERT INTO product_audit (overall_score, dimension_scores)
-        VALUES (?, ?)
+        INSERT INTO product_audit (overall_score, overall_grade, dimension_scores, findings_json, findings_count)
+        VALUES (?, 'C', ?, '[]', 0)
     """, (overall_score, ds))
     conn.commit()
     return cursor.lastrowid
@@ -452,7 +452,7 @@ class TestRecommendationOutcomes:
         fid = _insert_finding(conn)
         outcome_id = record_recommendation_outcome(
             conn, fid,
-            action_type="route_change",
+            action_type="code_change",
             description="Reduced first session difficulty",
             files_changed=["mandarin/scheduler.py"],
             metric_before={"value": 22.5, "label": "D7 retention %"},
@@ -463,7 +463,7 @@ class TestRecommendationOutcomes:
         fid = _insert_finding(conn)
         outcome_id = record_recommendation_outcome(
             conn, fid,
-            action_type="css_change",
+            action_type="code_change",
             description="Improved button contrast",
             files_changed=["mandarin/web/static/style.css"],
             metric_before={"value": 3, "label": "rage_clicks/day"},
@@ -472,7 +472,7 @@ class TestRecommendationOutcomes:
             "SELECT * FROM pi_recommendation_outcome WHERE id = ?", (outcome_id,)
         ).fetchone()
         assert row["finding_id"] == fid
-        assert row["action_type"] == "css_change"
+        assert row["action_type"] == "code_change"
         assert row["action_description"] == "Improved button contrast"
 
         files = json.loads(row["files_changed"])
@@ -485,7 +485,7 @@ class TestRecommendationOutcomes:
         fid = _insert_finding(conn)
         outcome_id = record_recommendation_outcome(
             conn, fid,
-            action_type="investigation",
+            action_type="experiment",
             description="Investigated but no action taken",
         )
         assert outcome_id > 0
@@ -519,8 +519,8 @@ class TestLoopClosureSummary:
 
     def test_counts_unverified_outcomes(self, conn):
         fid = _insert_finding(conn)
-        record_recommendation_outcome(conn, fid, action_type="route_change", description="Fix A")
-        record_recommendation_outcome(conn, fid, action_type="route_change", description="Fix B")
+        record_recommendation_outcome(conn, fid, action_type="code_change", description="Fix A")
+        record_recommendation_outcome(conn, fid, action_type="code_change", description="Fix B")
 
         summary = get_loop_closure_summary(conn)
         assert summary["total_outcomes"] == 2
@@ -530,10 +530,10 @@ class TestLoopClosureSummary:
     def test_counts_verified_outcomes(self, conn):
         fid = _insert_finding(conn)
         # One unverified
-        record_recommendation_outcome(conn, fid, action_type="route_change", description="Unverified fix")
+        record_recommendation_outcome(conn, fid, action_type="code_change", description="Unverified fix")
         # One verified + effective
         outcome_id = record_recommendation_outcome(
-            conn, fid, action_type="scheduler_change", description="Verified fix"
+            conn, fid, action_type="config_change", description="Verified fix"
         )
         conn.execute("""
             UPDATE pi_recommendation_outcome
@@ -1153,7 +1153,7 @@ class TestEndToEndIntelligenceFlow:
         # Step 3: Record outcome for the retention fix
         outcome_id = record_recommendation_outcome(
             conn, ret_fid,
-            action_type="scheduler_change",
+            action_type="config_change",
             description="Reduced difficulty curve after week 2",
             files_changed=["mandarin/scheduler.py"],
             metric_before={"value": 22.0, "label": "D7 retention %"},

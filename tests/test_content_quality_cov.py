@@ -21,121 +21,15 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
+from tests.shared_db import make_test_db
+
 
 # ── Fixtures ──────────────────────────────────────────────────────────
 
 @pytest.fixture
 def mem_db():
     """In-memory DB with tables needed by content_quality."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            password_hash TEXT NOT NULL DEFAULT '',
-            display_name TEXT NOT NULL DEFAULT '',
-            subscription_tier TEXT NOT NULL DEFAULT 'free',
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE learner_profile (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL REFERENCES user(id),
-            current_level REAL NOT NULL DEFAULT 1.0,
-            level_listening REAL DEFAULT 1.0
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL DEFAULT '',
-            english TEXT NOT NULL DEFAULT '',
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            difficulty REAL DEFAULT 0.5,
-            content_type TEXT DEFAULT 'vocabulary',
-            item_type TEXT DEFAULT 'vocab',
-            content_lens TEXT,
-            status TEXT DEFAULT 'drill_ready',
-            audio_available INTEGER DEFAULT 0,
-            audio_file_path TEXT,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER NOT NULL,
-            modality TEXT NOT NULL DEFAULT 'reading',
-            mastery_stage TEXT NOT NULL DEFAULT 'seen',
-            total_attempts INTEGER NOT NULL DEFAULT 0,
-            total_correct INTEGER NOT NULL DEFAULT 0,
-            UNIQUE(user_id, content_item_id, modality)
-        );
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name_zh TEXT,
-            description TEXT,
-            examples_json TEXT DEFAULT '[]',
-            category TEXT DEFAULT 'other',
-            hsk_level INTEGER DEFAULT 1
-        );
-        CREATE TABLE content_grammar (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grammar_point_id INTEGER,
-            content_item_id INTEGER
-        );
-        CREATE TABLE grammar_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            grammar_point_id INTEGER,
-            user_id INTEGER DEFAULT 1
-        );
-        CREATE TABLE reading_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            passage_id TEXT,
-            user_id INTEGER DEFAULT 1,
-            words_looked_up INTEGER DEFAULT 0,
-            questions_correct INTEGER DEFAULT 0,
-            questions_total INTEGER DEFAULT 0
-        );
-        CREATE TABLE audio_recording (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content_item_id INTEGER,
-            user_id INTEGER DEFAULT 1,
-            overall_score REAL
-        );
-        CREATE TABLE dialogue_scenario (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title_zh TEXT,
-            register TEXT DEFAULT 'neutral',
-            hsk_level INTEGER DEFAULT 1,
-            tree_json TEXT DEFAULT '{}'
-        );
-        CREATE TABLE listening_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            passage_id TEXT,
-            user_id INTEGER DEFAULT 1,
-            hsk_level INTEGER DEFAULT 1,
-            questions_correct INTEGER DEFAULT 0,
-            questions_total INTEGER DEFAULT 0
-        );
-        CREATE TABLE vocab_encounter (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            source_type TEXT,
-            source_id TEXT,
-            hanzi TEXT
-        );
-        CREATE TABLE media_watch (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            media_type TEXT DEFAULT 'video',
-            times_watched INTEGER DEFAULT 0,
-            last_watched_at TEXT
-        );
-
-        INSERT INTO user (id, email, password_hash, display_name)
-        VALUES (1, 'test@test.com', 'hash', 'Test');
-        INSERT INTO learner_profile (id, user_id) VALUES (1, 1);
-    """)
+    conn = make_test_db()
     yield conn
     conn.close()
 
@@ -329,8 +223,8 @@ class TestAssessGrammarQuality:
     def test_basic_grammar_point(self, mem_db):
         from mandarin.ai.content_quality import assess_grammar_quality
         mem_db.execute("""
-            INSERT INTO grammar_point (id, name_zh, description, examples_json, category, hsk_level)
-            VALUES (1, '把字句', 'Ba construction', ?, 'syntax', 3)
+            INSERT INTO grammar_point (id, name, name_zh, description, examples_json, category, hsk_level)
+            VALUES (1, 'ba_construction', '把字句', 'Ba construction', ?, 'structure', 3)
         """, (json.dumps([
             {"hanzi": "我把书放在桌子上", "english": "I put the book on the table"},
             {"hanzi": "他把门关上了", "english": "He closed the door"},
@@ -347,11 +241,15 @@ class TestAssessGrammarQuality:
     def test_grammar_with_links(self, mem_db):
         from mandarin.ai.content_quality import assess_grammar_quality
         mem_db.execute("""
-            INSERT INTO grammar_point (id, name_zh, description, examples_json, category, hsk_level)
-            VALUES (2, '了', 'Le particle', '[]', 'particle', 1)
+            INSERT INTO grammar_point (id, name, name_zh, description, examples_json, category, hsk_level)
+            VALUES (2, 'le_particle', '了', 'Le particle', '[]', 'particle', 1)
         """)
-        # Add content links
+        # Add content items and links
         for i in range(5):
+            mem_db.execute(
+                "INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (?, ?, ?, ?, 1)",
+                (i+1, f"字{i}", f"zi{i}", f"word{i}"),
+            )
             mem_db.execute("INSERT INTO content_grammar (grammar_point_id, content_item_id) VALUES (2, ?)", (i+1,))
         mem_db.commit()
 
@@ -404,16 +302,16 @@ class TestAssessMediaShelfHealth:
     def test_with_media(self, mem_db):
         from mandarin.ai.content_quality import assess_media_shelf_health
         mem_db.execute("""
-            INSERT INTO media_watch (user_id, media_type, times_watched, last_watched_at)
-            VALUES (1, 'video', 3, datetime('now'))
+            INSERT INTO media_watch (user_id, media_id, title, media_type, times_watched, last_watched_at)
+            VALUES (1, 'v1', 'Video 1', 'video', 3, datetime('now'))
         """)
         mem_db.execute("""
-            INSERT INTO media_watch (user_id, media_type, times_watched, last_watched_at)
-            VALUES (1, 'podcast', 1, datetime('now', '-5 days'))
+            INSERT INTO media_watch (user_id, media_id, title, media_type, times_watched, last_watched_at)
+            VALUES (1, 'p1', 'Podcast 1', 'podcast', 1, datetime('now', '-5 days'))
         """)
         mem_db.execute("""
-            INSERT INTO media_watch (user_id, media_type, times_watched, last_watched_at)
-            VALUES (1, 'social_media', 2, datetime('now', '-1 day'))
+            INSERT INTO media_watch (user_id, media_id, title, media_type, times_watched, last_watched_at)
+            VALUES (1, 's1', 'Social 1', 'social_media', 2, datetime('now', '-1 day'))
         """)
         mem_db.commit()
         result = assess_media_shelf_health(mem_db)
@@ -440,8 +338,8 @@ class TestAssessDialogueQuality:
             ]
         }
         mem_db.execute("""
-            INSERT INTO dialogue_scenario (id, title_zh, register, hsk_level, tree_json)
-            VALUES (1, '买水果', 'casual', 2, ?)
+            INSERT INTO dialogue_scenario (id, title, title_zh, register, hsk_level, tree_json)
+            VALUES (1, 'Buying fruit', '买水果', 'casual', 2, ?)
         """, (json.dumps(tree),))
         mem_db.commit()
 

@@ -27,6 +27,7 @@ import pytest
 
 from mandarin import db
 from mandarin.db.core import _migrate
+from tests.shared_db import make_test_db  # noqa: F401
 
 
 # ── Fixtures ────────────────────────────────────────────────────────────

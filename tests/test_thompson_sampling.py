@@ -11,26 +11,12 @@ from mandarin.scheduler import (
     _thompson_sample_drill_type,
     _update_drill_type_posterior,
 )
+from tests.shared_db import make_test_db
 
 
 def _make_thompson_db():
-    """Create in-memory DB with the drill_type_posterior table."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.executescript("""
-        CREATE TABLE drill_type_posterior (
-            user_id INTEGER NOT NULL,
-            content_item_id INTEGER NOT NULL,
-            drill_type TEXT NOT NULL,
-            alpha REAL NOT NULL DEFAULT 1.0,
-            beta REAL NOT NULL DEFAULT 1.0,
-            updated_at TEXT NOT NULL DEFAULT (datetime('now')),
-            PRIMARY KEY (user_id, content_item_id, drill_type)
-        );
-    """)
-    return conn
+    """Create in-memory DB with the full production schema."""
+    return make_test_db()
 
 
 class TestThompsonSampleDrillType(unittest.TestCase):

@@ -9,6 +9,8 @@ import uuid
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
 
+from tests.shared_db import make_test_db
+
 # Ensure ai package is importable
 from mandarin.ai.ollama_client import (
     is_ollama_available, generate, OllamaResponse, _prompt_hash,
@@ -25,97 +27,7 @@ from mandarin.ai.health import check_ollama_health
 @pytest.fixture
 def conn():
     """In-memory SQLite with the AI tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-    c.execute("PRAGMA foreign_keys=ON")
-
-    c.executescript("""
-        CREATE TABLE pi_ai_generation_cache (
-            id TEXT PRIMARY KEY,
-            prompt_hash TEXT NOT NULL UNIQUE,
-            prompt_text TEXT NOT NULL,
-            system_text TEXT,
-            model_used TEXT NOT NULL,
-            response_text TEXT NOT NULL,
-            generated_at TEXT NOT NULL DEFAULT (datetime('now')),
-            hit_count INTEGER NOT NULL DEFAULT 0,
-            last_hit_at TEXT
-        );
-
-        CREATE TABLE pi_ai_generation_log (
-            id TEXT PRIMARY KEY,
-            occurred_at TEXT NOT NULL DEFAULT (datetime('now')),
-            task_type TEXT NOT NULL,
-            model_used TEXT NOT NULL,
-            prompt_tokens INTEGER,
-            completion_tokens INTEGER,
-            generation_time_ms INTEGER,
-            from_cache INTEGER NOT NULL,
-            success INTEGER NOT NULL,
-            error TEXT,
-            finding_id TEXT,
-            item_id TEXT
-        );
-
-        CREATE TABLE pi_ai_review_queue (
-            id TEXT PRIMARY KEY,
-            queued_at TEXT NOT NULL DEFAULT (datetime('now')),
-            content_type TEXT NOT NULL,
-            content_json TEXT NOT NULL,
-            validation_issues TEXT,
-            encounter_id TEXT,
-            reviewed_at TEXT,
-            reviewed_by TEXT DEFAULT 'human',
-            review_decision TEXT CHECK (
-                review_decision IN ('approved', 'rejected', 'edited')
-            ),
-            edited_content_json TEXT,
-            review_notes TEXT,
-            provenance_checked INTEGER DEFAULT 0
-        );
-
-        CREATE TABLE vocab_encounter (
-            id TEXT PRIMARY KEY,
-            content_item_id INTEGER,
-            hanzi TEXT,
-            source_type TEXT,
-            source_id TEXT,
-            looked_up INTEGER,
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            drill_generation_status TEXT DEFAULT 'pending',
-            generated_item_id TEXT,
-            generation_attempted_at TEXT,
-            generation_error TEXT
-        );
-
-        CREATE TABLE content_item (
-            id TEXT PRIMARY KEY,
-            hanzi TEXT,
-            pinyin TEXT,
-            english TEXT,
-            hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready',
-            review_status TEXT DEFAULT 'approved',
-            is_ai_generated INTEGER DEFAULT 0,
-            generated_by_prompt TEXT,
-            source TEXT,
-            example_sentence_hanzi TEXT,
-            example_sentence_pinyin TEXT,
-            example_sentence_english TEXT
-        );
-
-        CREATE TABLE learner_profile (
-            id INTEGER PRIMARY KEY,
-            level_reading INTEGER DEFAULT 1
-        );
-
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER
-        );
-    """)
-    c.execute("INSERT INTO learner_profile (id, level_reading) VALUES (1, 2)")
-    c.commit()
+    c = make_test_db()
     return c
 
 
@@ -268,11 +180,10 @@ def test_process_pending_ollama_unavailable(mock_avail, conn):
 @patch("mandarin.ai.drill_generator.is_ollama_available", return_value=True)
 def test_review_queue_on_validation_failure(mock_avail, mock_gen, conn):
     # Insert a pending encounter
-    enc_id = str(uuid.uuid4())
     conn.execute(
-        "INSERT INTO vocab_encounter (id, hanzi, drill_generation_status) VALUES (?, '你好', 'pending')",
-        (enc_id,),
+        "INSERT INTO vocab_encounter (hanzi, source_type, drill_generation_status) VALUES ('你好', 'manual', 'pending')",
     )
+    enc_id = str(conn.execute("SELECT last_insert_rowid()").fetchone()[0])
     conn.commit()
 
     # LLM returns item with low confidence → validation fails → goes to review queue
