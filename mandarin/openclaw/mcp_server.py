@@ -320,15 +320,21 @@ def create_mcp_server():
         with db.connection() as conn:
             stats = conn.execute("""
                 SELECT COUNT(*) as total,
-                       AVG(comprehension_score) as avg_comp,
+                       AVG(CASE WHEN questions_total > 0
+                           THEN CAST(questions_correct AS REAL) / questions_total
+                           ELSE NULL END) as avg_comp,
                        SUM(words_looked_up) as total_lookups,
                        AVG(reading_time_seconds) as avg_time
                 FROM reading_progress WHERE user_id = ?
             """, (user_id,)).fetchone()
 
             recent = conn.execute("""
-                SELECT passage_id, comprehension_score, words_looked_up,
-                       reading_time_seconds, completed_at, hsk_level
+                SELECT passage_id,
+                       CASE WHEN questions_total > 0
+                           THEN CAST(questions_correct AS REAL) / questions_total
+                           ELSE NULL END as comprehension_score,
+                       words_looked_up,
+                       reading_time_seconds, completed_at
                 FROM reading_progress
                 WHERE user_id = ?
                 ORDER BY completed_at DESC
@@ -344,8 +350,7 @@ def create_mcp_server():
                 "recent_passages": [
                     {"passage_id": r["passage_id"],
                      "comprehension": round((r["comprehension_score"] or 0), 3),
-                     "lookups": r["words_looked_up"] or 0,
-                     "hsk_level": r["hsk_level"]}
+                     "lookups": r["words_looked_up"] or 0}
                     for r in recent
                 ],
             })
@@ -710,9 +715,9 @@ def create_mcp_server():
         from .. import db
         with db.connection() as conn:
             audit = conn.execute("""
-                SELECT grade, score, findings_json, created_at
+                SELECT overall_grade, overall_score, findings_json, run_at
                 FROM product_audit
-                ORDER BY created_at DESC LIMIT 1
+                ORDER BY run_at DESC LIMIT 1
             """).fetchone()
 
             if not audit:
@@ -722,15 +727,15 @@ def create_mcp_server():
             human_action = [f for f in findings if f.get("severity") in ("high", "critical")]
 
             return json.dumps({
-                "grade": audit["grade"],
-                "score": audit["score"],
+                "grade": audit["overall_grade"],
+                "score": audit["overall_score"],
                 "total_findings": len(findings),
                 "human_action_required": len(human_action),
                 "top_findings": [
                     {"title": f["title"], "severity": f["severity"]}
                     for f in human_action[:5]
                 ],
-                "audit_date": audit["created_at"],
+                "audit_date": audit["run_at"],
             })
 
     @mcp.tool()
@@ -838,10 +843,10 @@ def create_mcp_server():
         with db.connection() as conn:
             # Get class members
             students = conn.execute("""
-                SELECT cm.user_id, u.email, u.display_name
-                FROM classroom_member cm
-                JOIN user u ON u.id = cm.user_id
-                WHERE cm.classroom_id = ? AND cm.role = 'student'
+                SELECT cs.user_id, u.email, u.display_name
+                FROM classroom_student cs
+                JOIN user u ON u.id = cs.user_id
+                WHERE cs.classroom_id = ?
             """, (class_id,)).fetchall()
 
             summaries = []

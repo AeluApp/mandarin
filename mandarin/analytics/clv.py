@@ -130,7 +130,7 @@ def predict_ltv_segment(conn, user_id: int) -> str:
     try:
         stats = conn.execute("""
             SELECT COUNT(*) as sessions,
-                   SUM(CASE WHEN completed = 1 THEN 1 ELSE 0 END) as completed,
+                   SUM(CASE WHEN early_exit = 0 OR early_exit IS NULL THEN 1 ELSE 0 END) as completed,
                    AVG(duration_seconds) as avg_duration
             FROM session_log
             WHERE user_id = ?

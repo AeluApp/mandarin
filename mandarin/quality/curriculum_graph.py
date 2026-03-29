@@ -23,7 +23,7 @@ def build_curriculum_graph(conn, user_id: int = None) -> dict:
         # Get all items with HSK levels
         items = conn.execute("""
             SELECT id, hsk_level, hanzi FROM content_item
-            WHERE drill_ready = 1
+            WHERE status = 'drill_ready'
             ORDER BY hsk_level, id
         """).fetchall()
     except Exception:
@@ -115,7 +115,7 @@ def shortest_path_to_goal(conn, user_id: int, goal: str) -> list[int]:
         # No mastery yet: start from first HSK 1 items
         try:
             first_items = conn.execute("""
-                SELECT id FROM content_item WHERE hsk_level = 1 AND drill_ready = 1
+                SELECT id FROM content_item WHERE hsk_level = 1 AND status = 'drill_ready'
                 ORDER BY id LIMIT 5
             """).fetchall()
             start_ids = {r["id"] for r in first_items}
@@ -190,7 +190,7 @@ def _goal_to_item_ids(conn, goal: str) -> list[int]:
             level = int(goal.split("_")[1])
             rows = conn.execute("""
                 SELECT id FROM content_item
-                WHERE hsk_level = ? AND drill_ready = 1
+                WHERE hsk_level = ? AND status = 'drill_ready'
                 ORDER BY id
             """, (level,)).fetchall()
             return [r["id"] for r in rows]
@@ -198,7 +198,7 @@ def _goal_to_item_ids(conn, goal: str) -> list[int]:
         # Topic-based goals: search content_item by tags/categories
         rows = conn.execute("""
             SELECT id FROM content_item
-            WHERE (english LIKE ? OR hanzi LIKE ?) AND drill_ready = 1
+            WHERE (english LIKE ? OR hanzi LIKE ?) AND status = 'drill_ready'
             ORDER BY hsk_level, id LIMIT 50
         """, (f"%{goal}%", f"%{goal}%")).fetchall()
         return [r["id"] for r in rows]
