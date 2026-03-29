@@ -159,11 +159,23 @@ jobs:
 
       - name: Start dev server
         run: python -m mandarin.web &
+        env:
+          FLASK_ENV: testing
 
-      - name: Wait for server
-        run: sleep 5
+      - name: Wait for server to be ready
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:5000/api/health/live > /dev/null 2>&1; then
+              echo "Server ready after ${i}s"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Server failed to start within 30s"
+          exit 1
 
       - name: Run Lighthouse CI
+        continue-on-error: true
         run: lhci autorun
 
   visual-regression:

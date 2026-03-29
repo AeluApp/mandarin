@@ -4,6 +4,8 @@ import logging
 import sqlite3
 from flask import Blueprint, request, jsonify, g
 
+from .api_errors import api_error_handler
+
 logger = logging.getLogger(__name__)
 
 nps_bp = Blueprint("nps", __name__)
@@ -14,6 +16,7 @@ def _get_db():
 
 
 @nps_bp.route("/api/feedback/nps", methods=["POST"])
+@api_error_handler("NPS")
 def submit_nps():
     """Save an NPS response (score 0-10 + optional feedback)."""
     db = _get_db()
@@ -38,6 +41,7 @@ def submit_nps():
 
 
 @nps_bp.route("/api/admin/quality/nps")
+@api_error_handler("NPS Admin")
 def admin_nps():
     """Return NPS score, trend, and recent feedback for the admin dashboard."""
     db = _get_db()

@@ -21,32 +21,35 @@ import hashlib
 import hmac
 import json
 import logging
-import os
 import threading
 
 from flask import Blueprint, jsonify, request
 
 from .. import db
+from ..settings import SENTRY_AUTH_TOKEN, SENTRY_WEBHOOK_SECRET, UPTIMEROBOT_API_KEY
+from .api_errors import api_error_handler
 
 logger = logging.getLogger(__name__)
 
 webhook_bp = Blueprint("webhooks", __name__, url_prefix="/api/webhooks")
 
 # Optional: HMAC secret for Sentry webhook signature verification
-_SENTRY_WEBHOOK_SECRET = os.environ.get("SENTRY_WEBHOOK_SECRET", "")
+_SENTRY_WEBHOOK_SECRET = SENTRY_WEBHOOK_SECRET
 
 
 @webhook_bp.route("/health", methods=["GET"])
+@api_error_handler("WebhookHealth")
 def webhook_health():
     """Health check for the webhook system."""
     return jsonify({
         "status": "ok",
-        "sentry_configured": bool(os.environ.get("SENTRY_AUTH_TOKEN")),
+        "sentry_configured": bool(SENTRY_AUTH_TOKEN),
         "uptime_configured": bool(_get_uptime_key()),
     })
 
 
 @webhook_bp.route("/sentry", methods=["POST"])
+@api_error_handler("SentryWebhook")
 def sentry_webhook():
     """Receive Sentry webhook alerts and trigger self-healing analysis.
 
@@ -96,6 +99,7 @@ def sentry_webhook():
 
 
 @webhook_bp.route("/uptime", methods=["POST"])
+@api_error_handler("UptimeWebhook")
 def uptime_webhook():
     """Receive UptimeRobot webhook alerts.
 
@@ -191,8 +195,4 @@ def _process_webhook_sync(source: str, payload: dict) -> None:
 
 def _get_uptime_key() -> str:
     """Check if UptimeRobot API key is configured."""
-    try:
-        from ..settings import UPTIMEROBOT_API_KEY
-        return UPTIMEROBOT_API_KEY or ""
-    except (ImportError, AttributeError):
-        return os.environ.get("UPTIMEROBOT_API_KEY", "")
+    return UPTIMEROBOT_API_KEY or ""
