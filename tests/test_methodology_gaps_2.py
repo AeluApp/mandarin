@@ -23,7 +23,7 @@ pytestmark = pytest.mark.t2
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from conftest import make_test_db
+from tests.shared_db import make_test_db
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -34,11 +34,11 @@ class TestSchemaMigration:
     """Verify that migration v95->v96 creates the expected tables and columns."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def _col_set(self, table):
         return {r[1] for r in self.conn.execute(f"PRAGMA table_info({table})").fetchall()}
@@ -80,11 +80,11 @@ class TestSprintCRUD:
     """Test sprint creation, listing, completion, and retrospective storage."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_create_sprint(self):
         self.conn.execute("""
@@ -153,11 +153,11 @@ class TestRetrospective:
     """Test standalone retrospective storage."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_create_standalone_retro(self):
         self.conn.execute("""
@@ -199,11 +199,11 @@ class TestWSJFPrioritization:
     """Test WSJF scoring on work_item table."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_wsjf_default_values(self):
         self.conn.execute("INSERT INTO work_item (title, status) VALUES ('Test item', 'backlog')")
@@ -270,11 +270,11 @@ class TestRootCauseAnalysis:
     """Test root_cause_analysis table and Ishikawa categories."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_create_five_why(self):
         self.conn.execute("""
@@ -360,11 +360,11 @@ class TestRiskReview:
     """Test risk_review table and burndown aggregation."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_create_risk_review(self):
         # Create a risk item first
@@ -439,7 +439,7 @@ class TestDataDrivenRiskIdentification:
     """Test _auto_identify_risks function."""
 
     def setup_method(self):
-        self.conn, self.path = make_test_db()
+        self.conn = make_test_db()
         # Ensure a content_item exists for FK references
         self.conn.execute("""
             INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level)
@@ -449,7 +449,7 @@ class TestDataDrivenRiskIdentification:
 
     def teardown_method(self):
         self.conn.close()
-        self.path.unlink(missing_ok=True)
+        pass  # in-memory DB, no file to clean up
 
     def test_no_risks_when_data_empty(self):
         """With no data, no auto-risks should be created."""
